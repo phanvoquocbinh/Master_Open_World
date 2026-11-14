@@ -218,3 +218,25 @@ assets/           Model (glTF) + texture PBR
 
 - **v4**: vào được bên trong toà nhà (thang máy, nhiều tầng): công ty có bot đang làm việc, phòng giám đốc, nhà ăn; toà Giáo trình nhiều tầng, mỗi phòng một khoá (Playwright, Appium, JMeter, API, DB…) có bot giảng bài; toà trung tâm có “bộ não” phát sáng (đồ họa – phần xử lý gắn từ dự án khác).
 - **v5**: nhiều người chơi thật qua mạng LAN (server riêng, không chứa token/DB).
+
+## S9 → S19 (14–15/11/2026)
+| Sprint | Nội dung chính | File |
+|---|---|---|
+| S9 | Đèn giao thông 8 ngã tư, vạch kẻ rõ, xe bot tuân luật, người đi bộ chờ đèn, vỉa hè trên cầu | `js/traffic.js` |
+| S10 | Showroom kính lớn trên đồi, xe sang thiết kế riêng (limo, Maestro, mui trần), đại gia lái xe đi làm/về biệt thự | `js/luxury.js`, `js/vehicles.js`, `js/showroom.js` |
+| S11 | Phố ẩm thực, 2 nhà hàng sang đi bộ vào được, 2 toà căn hộ 20 tầng có hồ bơi tràn trên nóc | `js/foodstreet.js` |
+| S12 | 4 biệt thự ven đầm (cầu thang, tầng 2, hồ bơi, bến thuyền), cổng gác, hướng dẫn viên lái xe đưa đi tham quan | `js/riverside.js` |
+| S13 | Du thuyền đi vòng vịnh, người lướt ván, mô tô nước, dù bay | `js/sealife.js` |
+| S14 | Đảo QC Wonderland: cáp treo dài, tàu lượn, tháp rơi, thuyền lắc, nhà ma | `js/funisland.js` |
+| S15 | Đảo chính như đảo thật: sóng vỗ bờ, rặng dừa, chòi lá, chòi cứu hộ, cua, hải âu, âm thanh; rung dừa, nhặt vỏ sò, đắp lâu đài cát | `js/island.js` |
+| S16 | Văn phòng mỗi công ty một kiểu: 5 kiểu bố trí bàn, sàn chung 2 phòng ban, góc vui chơi | `js/interior.js` |
+| S17 | Người trên phố: đeo tai nghe nhún nhảy, cosplay, ban nhạc rock dạo, ảo thuật gia, cho tiền ủng hộ | `js/streetlife.js` |
+| S18 | Tháp Trung tâm Việc làm: 10 quầy nghề, làm được mọi việc bot làm | `js/jobcenter.js` |
+| Đồi | Đồi Brand QC: đường xoắn ốc, cầu thang lớn, tháp Brand QC đi bộ vào được (cầu thang xoắn, trưng bày, phòng bí ẩn) | `js/hills.js`, `js/monument.js` |
+| S19 | Phố Núi: nhà sàn bám vách có quán trên sân thượng, tháp cầu trời có bar sân thượng, tháp chung cư trên sườn đồi; xe nhiều màu | `js/mountaintown.js` |
+| S19 (phiên song song) | Công viên trung tâm + cây xanh; laptop/máy nghe nhạc/điện thoại; Trung tâm Ngoại ngữ; bộ dựng đồ hoạ | `js/park.js`, `js/gadgets.js`, `js/langcenter.js`, `js/langui.js`, `js/gfxkit.js` |
+
+**Phím mới:** `M` bản đồ (biết mình đang đứng đâu). Các phím laptop/nhạc/điện thoại xem trong bảng phím của game.
+**Va chạm:** `W.addSeg(ax,az,bx,bz,r,y0,y1,msg)` là vật cản dạng đoạn thẳng xoay tự do, có giới hạn độ cao (lan can, tường xiên). Bị chặn thì nhân vật đứng yên tại chỗ và hiện lý do, không bị đẩy đi chỗ khác.
+**Mở rộng đất:** được phép mở rộng tự do. Đăng ký vùng trong `LAND_CLAIMS.md` trước khi xây, thêm đất bằng `W.EXTL`.
+

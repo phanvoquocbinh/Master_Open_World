@@ -211,7 +211,18 @@ Máy đang bận (nhiều phiên) nên đo **xen kẽ A/B 4 vòng, lấy min**. 
 | Campus (sau) | – | 95 / 99k / 18,1 / 8,4 |
 | Văn phòng trong (sau) | – | 71 / 46k / 21,9 / 13,7 |
 
-Nhận xét: toà văn phòng ít lượt vẽ hơn bản cũ, chậm thêm ~1–2 ms. Quán cà phê/biệt thự tốn thêm 3–6 ms → **đã tối ưu thêm sau đợt đo này** (gộp vữa/cửa chớp/vải mọi màu về 1 vật liệu tô màu theo đỉnh, gộp màu sơn trơn, đèn/biển hiệu không đổ bóng, mức Thấp bỏ normal map mặt đất + tắt alpha-to-coverage lá) nhưng **CHƯA đo lại** – việc đầu tiên khi áp vào game là đo lại bằng `__gfx.ab('cafe',4)`.
+**Sau tối ưu** (gộp vữa/cửa chớp/vải mọi màu về 1 vật liệu tô màu theo đỉnh, gộp màu sơn trơn, đèn/biển hiệu không đổ bóng, mức Thấp bỏ normal map mặt đất + tắt alpha-to-coverage của lá), đo lại cùng cách:
+
+| Cảnh | TRƯỚC: lượt vẽ / ms / GPU | SAU: lượt vẽ / tam giác / ms / GPU | Chênh |
+|---|---|---|---|
+| Toà văn phòng | 94 / 8,9 / 5,2 | **38** / 20k / 10,5 / 6,5 | +1,6 ms |
+| Dãy quán cà phê | 43 / 12,1 / 7,3 | 77 / 21k / 17,1 / 11,0 | +5,0 ms (GPU +3,6) |
+| Siêu biệt thự | 29 / 9,9 / 6,6 | 51 / 27k / 12,7 / 8,4 | +2,8 ms |
+| 4 kiểu toà | – | 135 / 72k / 14,4 / 9,0 | |
+| Campus | – | 92 / 99k / 14,2 / 8,9 | |
+| Văn phòng trong | – | 45 / 44k / 17,2 / 12,3 | |
+
+Còn nặng nhất: **quán cà phê nhìn gần** (GPU +3,6 ms do nhiều thẻ lá hoa giấy + vật liệu PBR phủ kín màn hình). Hướng giảm tiếp: bớt thẻ hoa giấy ở mức Thấp, gộp biển hiệu/menu vào 1 atlas (như `buildAtlas` của perf.js), ẩn nội thất quán khi người chơi ở xa > 40 m.
 Ảnh so sánh: `gfx_shots/*_split_*` (trái TRƯỚC, phải SAU), `*_after_*` cho cảnh chỉ có bản mới; hậu tố `ngay/hoanghon/dem`.
 
 ---

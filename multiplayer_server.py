@@ -118,7 +118,7 @@ async def handle(reader, writer):
         players[pid] = {'id': pid, 'name': 'Khách %d' % pid, 'x': 0.0, 'y': 0.0, 'z': 0.0, 'f': 0.0, 'a': 'idle', 'm': 'soldier', 'c': '#46d39a', 'v': '', 'in': ''}
         clients[pid] = writer
         send(pid, {'t': 'hello', 'id': pid, 'players': len(players)})
-        last_chat = last_sms = 0.0
+        last_chat = 0.0; sms_times = []
         while True:
             op, data = await asyncio.wait_for(read_frame(reader), 40)
             if op == 8: break                                   # đóng
@@ -159,9 +159,10 @@ async def handle(reader, writer):
                     if now - sm['ts'] < 86400: send(pid, dict(sm, t='sms'))
             elif t == 'sms':
                 now = time.time(); frm = p.get('ph'); to = clean(m.get('to'), 16); txt = clean(m.get('text'), 300); cid = clean(m.get('cid'), 24)
-                if not frm or not txt or not PHONE_RE.match(to) or now - last_sms < 0.4:
+                sms_times[:] = [x for x in sms_times if now - x < 3.0]   # chống spam: tối đa 5 tin / 3 giây
+                if not frm or not txt or not PHONE_RE.match(to) or len(sms_times) >= 5:
                     send(pid, {'t': 'sms_ack', 'cid': cid, 'ok': False}); continue
-                last_sms = now
+                sms_times.append(now)
                 sm = {'from': frm, 'name': p['name'], 'text': txt, 'ts': round(now, 3)}
                 dst = phones.get(to)
                 if dst in clients:

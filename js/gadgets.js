@@ -407,8 +407,8 @@ export async function make(W, ctx){
     else if(v==='msgs'){ const nums=Object.keys(PH.threads).filter(n=>PH.threads[n].length).sort((a,b)=>PH.threads[b].at(-1).ts-PH.threads[a].at(-1).ts);
       h=`<div class="phHead">💬 Tin nhắn<button class="btn pri" data-go="compose">✏️ Soạn</button></div>${offBar}<div class="phList">${nums.length?nums.map(n=>{ const L=PH.threads[n].at(-1), u=PH.unread[n]|0;
         return `<button class="phRow" data-th="${esc(n)}"><b>${esc(nameOf(n)||L.name||n)}${u?` <i class="gdBadge">${u}</i>`:''}</b><small>${L.me?'Bạn: ':''}${esc(L.text)}</small></button>`; }).join(''):'<div class="phEmpty">Chưa có tin nhắn nào.</div>'}</div>`; }
-    else if(v==='thread'){ const n=PHN.arg, th=PH.threads[n]||[], nm=nameOf(n);
-      h=`<div class="phHead">${esc(nm||(th.find(m=>!m.me)||{}).name||n)}<small>${esc(n)}</small>${nm?'':`<button class="btn" data-save="${esc(n)}">＋ Lưu</button>`}</div>${offBar}
+    else if(v==='thread'){ const n=PHN.arg, th=PH.threads[n]||[], nm=nameOf(n), title=nm||(th.find(m=>!m.me)||{}).name||n;
+      h=`<div class="phHead">${esc(title)}${title!==n?`<small>${esc(n)}</small>`:''}${nm?'':`<button class="btn" data-save="${esc(n)}">＋ Lưu</button>`}</div>${offBar}
         <div class="phChat">${th.map(m=>`<div class="bub ${m.me?'me':'them'}">${esc(m.text)}<small>${new Date(m.ts).toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})}${m.me?' · '+({sending:'đang gửi…',sent:'✓ đã gửi',queued:'🕓 chờ người nhận online',fail:'⚠️ lỗi'}[m.st]||''):''}</small></div>`).join('')||'<div class="phEmpty">Hãy gửi lời chào 👋</div>'}</div>
         <form class="phSend"><input placeholder="${ol?'Nhập tin nhắn…':'Cần vào chế độ nhiều người để nhắn'}" maxlength="300" ${ol?'':'disabled'}><button class="btn pri" ${ol?'':'disabled'}>➤</button></form>`; }
     else if(v==='compose'){ h=`<div class="phHead">✏️ Tin nhắn mới</div>${offBar}<form class="phForm"><label>Gửi tới số</label><input name="to" list="gdPhList" placeholder="555-123-4567" value="${esc(PHN.arg||'')}">

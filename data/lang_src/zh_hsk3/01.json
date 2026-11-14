@@ -73,9 +73,9 @@
       {"s": "张伟", "g": "m", "t": "吃完饭，我们把房间打扫干净，再把旧盘子都洗一洗。", "py": "Chīwán fàn, wǒmen bǎ fángjiān dǎsǎo gānjìng, zài bǎ jiù pánzi dōu xǐ yi xǐ.", "vi": "Ăn xong, mình dọn sạch phòng, rồi rửa hết mấy cái đĩa cũ."},
       {"s": "小明", "g": "m", "t": "好！今天真是太谢谢你们了！", "py": "Hǎo! Jīntiān zhēn shì tài xièxie nǐmen le!", "vi": "Ừ! Hôm nay thật cảm ơn mọi người quá!"}
     ], "qs": [
-      {"q": "Nhà mới của 小明 ở tầng mấy?", "o": ["十层 (tầng 10)", "十二层 (tầng 12)", "二十层 (tầng 20)"], "a": 1, "e": "小明 nói: 十二层。到了！"},
-      {"q": "小明 nhờ đặt tủ lạnh ở đâu?", "o": ["Cạnh cửa", "Trong thang máy", "Cạnh cửa sổ"], "a": 0, "e": "请把冰箱放在门旁边 – đặt tủ lạnh cạnh cửa."},
-      {"q": "刘阿姨 mang sang cái gì?", "o": ["饺子 – sủi cảo", "米饭 – cơm", "面包 – bánh mì"], "a": 0, "e": "我刚才包了一些饺子，给你们拿过来了。"},
+      {"q": "Nhà mới của 小明 ở tầng mấy?", "o": ["十层 (tầng 10)", "二十层 (tầng 20)", "十二层 (tầng 12)"], "a": 2, "e": "小明 nói: 十二层。到了！"},
+      {"q": "小明 nhờ đặt tủ lạnh ở đâu?", "o": ["Trong thang máy", "Cạnh cửa sổ", "Cạnh cửa"], "a": 2, "e": "请把冰箱放在门旁边 – đặt tủ lạnh cạnh cửa."},
+      {"q": "刘阿姨 mang sang cái gì?", "o": ["米饭 – cơm", "饺子 – sủi cảo", "面包 – bánh mì"], "a": 1, "e": "我刚才包了一些饺子，给你们拿过来了。"},
       {"q": "小明 để quên cái gì ở nhà cũ? (gõ chữ Hán hoặc pinyin)", "a": "筷子", "alt": ["kuaizi", "kuàizi"], "e": "我把筷子忘在旧家了 – quên đũa ở nhà cũ."},
       {"q": "Ăn xong họ định làm gì?", "o": ["Dọn sạch phòng và rửa đĩa cũ", "Đi siêu thị mua đồ", "Sang nhà 刘阿姨 chơi"], "a": 0, "e": "我们把房间打扫干净，再把旧盘子都洗一洗。"}
     ]},
@@ -90,8 +90,8 @@
       {"w": "终于", "py": "zhōngyú", "vi": "cuối cùng (thì)"}
     ], "qs": [
       {"q": "Nhà mới của “tôi” ở tầng mấy?", "o": ["八层 – tầng 8", "四层 – tầng 4", "十二层 – tầng 12"], "a": 0, "e": "我住在八层。"},
-      {"q": "Ai đến giúp chuyển nhà?", "o": ["小张", "王阿姨", "妈妈"], "a": 0, "e": "好朋友小张来帮忙。王阿姨 chỉ mang mì sang."},
-      {"q": "Buổi trưa 王阿姨 làm gì?", "o": ["Mang mì sợi sang", "Giúp khiêng tủ lạnh", "Dọn phòng giúp"], "a": 0, "e": "王阿姨把她做的面条送了过来。"},
+      {"q": "Ai đến giúp chuyển nhà?", "o": ["王阿姨", "妈妈", "小张"], "a": 2, "e": "好朋友小张来帮忙。王阿姨 chỉ mang mì sang."},
+      {"q": "Buổi trưa 王阿姨 làm gì?", "o": ["Giúp khiêng tủ lạnh", "Mang mì sợi sang", "Dọn phòng giúp"], "a": 1, "e": "王阿姨把她做的面条送了过来。"},
       {"q": "Buổi tối “tôi” làm gì?", "o": ["Thay bát đĩa cũ, mua đèn bàn mới", "Đi ngủ sớm", "Mời hàng xóm ăn cơm"], "a": 0, "e": "我把旧盘子和旧碗都换了，还买了一个新台灯。"},
       {"q": "Điền theo bài: 我们把每个房间都打扫得______。", "a": "干干净净", "alt": ["gangan jingjing", "gānganjìngjìng", "gāngānjìngjìng"], "e": "打扫得干干净净 – dọn sạch bong (把 + V + 得 + bổ ngữ trạng thái)."}
     ]},
@@ -112,13 +112,13 @@
     {"k": "write", "h": "Viết: Một ngày dọn dẹp", "task": "Viết đoạn 60–100 chữ kể một ngày bạn dọn dẹp phòng (hoặc giúp gia đình chuyển nhà). Dùng ít nhất 4 câu 把 khác nhau: 把…放在…, 把…V干净, 把…送给…, 没把….", "min": 60, "model": "周末我在家打扫房间。早上，我先把衣服洗了，然后把书都放在书架上。中午，我把冰箱里的旧东西都拿了出来，把冰箱里面也打扫干净了。下午，我把不穿的衣服送给了邻居的孩子。可是我还没把窗户打扫干净，明天再做吧。现在我的房间干净多了！", "modelVi": "Cuối tuần tôi ở nhà dọn phòng. Buổi sáng, tôi giặt quần áo trước, sau đó xếp hết sách lên giá sách. Buổi trưa, tôi lấy hết đồ cũ trong tủ lạnh ra, lau dọn sạch cả bên trong tủ. Buổi chiều, tôi đem quần áo không mặc tặng con của hàng xóm. Nhưng tôi vẫn chưa lau sạch cửa sổ, mai làm tiếp vậy. Bây giờ phòng tôi sạch hơn nhiều rồi!", "tips": ["Mỗi câu 把 phải có thành phần sau động từ: 了, 干净, 在…, 给…, 出来…", "Dùng từ chỉ thời gian (早上, 中午, 下午) và 先…然后… để đoạn văn có trình tự.", "Viết tay: đầu đoạn lùi 2 ô; mỗi dấu câu chiếm 1 ô."], "checklist": ["Có ≥ 4 câu 把, mỗi câu có thành phần sau động từ", "Có ít nhất 1 câu 没把… (không có 了 cuối)", "Có 放在 / 送给 dùng đúng với 把", "Tân ngữ của 把 là vật xác định", "Độ dài 60–100 chữ"]}
   ],
   "exercises": [
-    {"t": "listen", "say": "请把空调打开，太热了。", "lang": "zh-CN", "q": "Người nói muốn làm gì?", "o": ["Bật điều hoà", "Tắt đèn", "Mở tủ lạnh"], "a": 0, "e": "把空调打开 = bật điều hoà; 太热了 = nóng quá."},
+    {"t": "listen", "say": "请把空调打开，太热了。", "lang": "zh-CN", "q": "Người nói muốn làm gì?", "o": ["Tắt đèn", "Mở tủ lạnh", "Bật điều hoà"], "a": 2, "e": "把空调打开 = bật điều hoà; 太热了 = nóng quá."},
     {"t": "listen", "say": "我把你的书放在桌子上了。", "lang": "zh-CN", "q": "Quyển sách đang ở đâu?", "o": ["Trên bàn", "Trong tủ lạnh", "Trong ba lô"], "a": 0, "e": "放在桌子上 = để trên bàn."},
-    {"t": "listen", "say": "我还没把房间打扫干净呢。", "lang": "zh-CN", "q": "Phòng đã sạch chưa?", "o": ["Chưa – người nói chưa dọn xong", "Rồi – đã dọn sạch", "Người nói không dọn phòng"], "a": 0, "e": "还没把…呢 = vẫn chưa…; người nói đang dọn dở."},
-    {"t": "mc", "q": "Chọn câu ĐÚNG: “Tôi đặt sách lên bàn.”", "o": ["我放书在桌子上。", "我把书放在桌子上。", "我把书放桌子。"], "a": 1, "e": "Có 在 + nơi chốn sau động từ → phải dùng 把: 把书放在桌子上."},
-    {"t": "mc", "q": "Chọn câu ĐÚNG: “Tôi chưa làm xong bài tập.”", "o": ["我把作业没做完。", "我没把作业做完。", "我没把作业做完了。"], "a": 1, "e": "没 đứng trước 把; phủ định bằng 没 thì không có 了 cuối câu."},
+    {"t": "listen", "say": "我还没把房间打扫干净呢。", "lang": "zh-CN", "q": "Phòng đã sạch chưa?", "o": ["Rồi – đã dọn sạch", "Người nói không dọn phòng", "Chưa – người nói chưa dọn xong"], "a": 2, "e": "还没把…呢 = vẫn chưa…; người nói đang dọn dở."},
+    {"t": "mc", "q": "Chọn câu ĐÚNG: “Tôi đặt sách lên bàn.”", "o": ["我放书在桌子上。", "我把书放桌子。", "我把书放在桌子上。"], "a": 2, "e": "Có 在 + nơi chốn sau động từ → phải dùng 把: 把书放在桌子上."},
+    {"t": "mc", "q": "Chọn câu ĐÚNG: “Tôi chưa làm xong bài tập.”", "o": ["我没把作业做完。", "我把作业没做完。", "我没把作业做完了。"], "a": 0, "e": "没 đứng trước 把; phủ định bằng 没 thì không có 了 cuối câu."},
     {"t": "mc", "q": "Câu nào SAI vì động từ không thể dùng với 把?", "o": ["我把门关上了。", "我把这个人认识了。", "他把冰箱搬走了。"], "a": 1, "e": "认识 (quen biết) không phải hành động xử lý vật → không dùng 把. Nói: 我认识这个人。"},
-    {"t": "mc", "q": "我把一本书看完了 (Wǒ bǎ yì běn shū kànwán le) chưa đúng vì:", "o": ["Tân ngữ của 把 phải xác định – nên nói 那本书", "Thiếu 了", "Phải dùng 被"], "a": 0, "e": "Tân ngữ sau 把 phải là vật cụ thể người nghe biết: 我把那本书看完了。"},
+    {"t": "mc", "q": "我把一本书看完了 (Wǒ bǎ yì běn shū kànwán le) chưa đúng vì:", "o": ["Thiếu 了", "Tân ngữ của 把 phải xác định – nên nói 那本书", "Phải dùng 被"], "a": 1, "e": "Tân ngữ sau 把 phải là vật cụ thể người nghe biết: 我把那本书看完了。"},
     {"t": "fill", "q": "请___门关上。(Qǐng ___ mén guānshang. – Làm ơn đóng cửa lại.)", "a": "把", "alt": ["ba", "bǎ"], "e": "请 + 把 + 门 + 关上: đưa 门 lên trước động từ."},
     {"t": "fill", "q": "我把书放___桌子上了。(Wǒ bǎ shū fàng ___ zhuōzi shang le.)", "a": "在", "alt": ["zai", "zài"], "e": "放在 + nơi chốn = đặt ở đâu."},
     {"t": "fill", "q": "他把旧衣服送___邻居了。(Tā bǎ jiù yīfu sòng ___ línjū le. – Anh ấy đem quần áo cũ tặng hàng xóm.)", "a": "给", "alt": ["gei", "gěi"], "e": "送给 + người nhận."},
