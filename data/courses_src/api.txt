@@ -1,0 +1,713 @@
+=== COURSE api
+name: Kiểm thử API với Postman
+icon: 📮
+floor: 2
+room: 201
+level: Cơ bản → Trung bình
+hours: 6
+summary: Hiểu HTTP từ con số 0, gửi request bằng Postman, viết test tự động và chạy cả bộ test bằng Newman trên dòng lệnh.
+
+## LESSON api-01 | API và HTTP là gì?
+
+### API giống người phục vụ ở nhà hàng
+Hãy tưởng tượng bạn đi ăn nhà hàng:
+• Bạn (khách) = client: ứng dụng web, app điện thoại, hoặc Postman.
+• Nhà bếp = server: nơi giữ dữ liệu và xử lý.
+• Người phục vụ = API: nhận yêu cầu của bạn, mang vào bếp, rồi mang món ra.
+Bạn không cần biết bếp nấu thế nào. Bạn chỉ cần gọi món đúng cách (request) và nhận món (response).
+Việc của tester API: gọi đúng thì có ra đúng món không? Gọi sai thì người phục vụ có báo lỗi rõ ràng không?
+
+### Một request và response trông như thế nào?
+~~~text
+GET /posts/1 HTTP/1.1
+Host: jsonplaceholder.typicode.com
+Accept: application/json
+
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{ "userId": 1, "id": 1, "title": "..." }
+~~~
+Giải thích từng dòng:
+• Dòng 1: method GET (lấy dữ liệu), đường dẫn /posts/1, phiên bản HTTP.
+• Dòng 2: Host là tên máy chủ cần gọi.
+• Dòng 3: header Accept nói "tôi muốn nhận JSON".
+• Dòng trống: ngăn cách phần header và phần body.
+• HTTP/1.1 200 OK: response bắt đầu bằng status code, 200 nghĩa là thành công.
+• Content-Type: server báo dữ liệu trả về là JSON.
+• Dòng cuối: body, chính là "món ăn" bạn nhận được.
+
+### URL gồm những phần nào?
+~~~text
+https://jsonplaceholder.typicode.com/comments?postId=1&_limit=2
+~~~
+Tách URL ra từng phần:
+• https:// — giao thức, có mã hóa đường truyền.
+• jsonplaceholder.typicode.com — tên miền, giống địa chỉ nhà hàng.
+• /comments — path, tài nguyên muốn lấy (gọi món nào).
+• ?postId=1&_limit=2 — query params, bộ lọc thêm. Bắt đầu bằng dấu ?, các cặp nối nhau bằng dấu &.
+Ý nghĩa: lấy comment của bài viết số 1, tối đa 2 kết quả.
+
+### 5 method hay dùng nhất
+~~~text
+GET     /posts        -> lấy danh sách bài viết
+GET     /posts/1      -> lấy bài viết số 1
+POST    /posts        -> tạo bài viết mới
+PUT     /posts/1      -> thay thế toàn bộ bài viết số 1
+PATCH   /posts/1      -> sửa một phần bài viết số 1
+DELETE  /posts/1      -> xóa bài viết số 1
+~~~
+Mẹo nhớ bằng nhà hàng:
+• GET = xem thực đơn.
+• POST = gọi món mới.
+• PUT = đổi hẳn sang món khác.
+• PATCH = "bớt cay giùm em".
+• DELETE = hủy món.
+Quy tắc: GET không được làm thay đổi dữ liệu. Nếu gọi GET mà dữ liệu bị xóa hay sửa, đó là bug.
+
+### Status code: đèn tín hiệu của server
+~~~text
+200 OK                     Thành công
+201 Created                Tạo mới thành công (thường sau POST)
+204 No Content             Thành công nhưng không có body
+301 / 302                  Chuyển hướng sang địa chỉ khác
+400 Bad Request            Dữ liệu gửi lên sai
+401 Unauthorized           Chưa đăng nhập hoặc token sai
+403 Forbidden              Đã đăng nhập nhưng không có quyền
+404 Not Found              Không tìm thấy tài nguyên
+500 Internal Server Error  Server gặp lỗi
+~~~
+Nhớ nhanh theo chữ số đầu:
+• 2xx: mọi thứ ổn.
+• 3xx: đi chỗ khác.
+• 4xx: lỗi phía người gọi (client gửi sai).
+• 5xx: lỗi phía server — gần như luôn là bug cần báo cáo.
+
+### Thử ngay bằng curl trên Windows
+Mở PowerShell (bấm phím Windows, gõ PowerShell, Enter) rồi gõ:
+~~~bash
+curl.exe -i https://jsonplaceholder.typicode.com/posts/1
+~~~
+Giải thích:
+• curl.exe: công cụ gửi request có sẵn trên Windows 10/11.
+• -i: in cả status code và header, không chỉ body.
+Kết quả mong đợi: dòng đầu có "HTTP/1.1 200 OK" (hoặc "HTTP/2 200"), tiếp theo là các header, cuối cùng là body JSON.
+Lỗi thường gặp: gõ curl (thiếu .exe) trong Windows PowerShell sẽ gọi lệnh Invoke-WebRequest và báo lỗi "parameter name 'i' is ambiguous". Hãy gõ đúng curl.exe.
+
+PRACTICE: Dùng curl.exe -i gọi https://jsonplaceholder.typicode.com/users/3 rồi gọi https://jsonplaceholder.typicode.com/users/999. Ghi lại status code của từng lần và giải thích vì sao khác nhau.
+Q: Server trả về 401. Ý nghĩa đúng nhất là gì?
+- Server bị sập
++ Bạn chưa xác thực hoặc token không hợp lệ
+- Tài nguyên đã bị xóa
+Q: Method nào dùng để tạo mới một tài nguyên?
+- GET
+- DELETE
++ POST
+Q: Trong URL .../comments?postId=1, phần postId=1 gọi là gì?
++ Query parameter
+- Header
+- Status code
+
+## LESSON api-02 | JSON và request GET đầu tiên với Postman
+
+### JSON: ngôn ngữ chung giữa client và server
+~~~json
+{
+  "id": 1,
+  "name": "Lan",
+  "isActive": true,
+  "tags": ["tester", "qa"],
+  "address": { "city": "Hà Nội" },
+  "manager": null
+}
+~~~
+JSON giống một tờ phiếu thông tin: mỗi dòng có nhãn và giá trị.
+• { } là một object (một tờ phiếu); bên trong là các cặp "tên": giá trị.
+• "id": 1 — số (number), không có ngoặc kép.
+• "name": "Lan" — chuỗi (string), luôn dùng ngoặc kép.
+• true / false — boolean (đúng/sai).
+• [ ] — array (danh sách).
+• "address" là object lồng trong object.
+• null — không có giá trị.
+
+### Cài Postman trên Windows
+Cách 1: vào postman.com/downloads, tải bản Windows, chạy file .exe.
+Cách 2: dùng winget trong PowerShell:
+~~~bash
+winget install --id Postman.Postman -e
+~~~
+Giải thích:
+• winget: trình cài phần mềm có sẵn trên Windows 10/11.
+• --id Postman.Postman: mã định danh của Postman trong kho winget.
+• -e: khớp chính xác mã, tránh cài nhầm phần mềm khác.
+Sau khi cài, mở Postman từ Start menu. Có thể tạo tài khoản miễn phí để lưu collection.
+Lưu ý an toàn: không lưu token, mật khẩu thật vào workspace dạng Public.
+
+### Gửi request GET đầu tiên
+~~~text
+Method : GET
+URL    : https://jsonplaceholder.typicode.com/posts/1
+~~~
+Các bước:
+• Bấm New → HTTP (hoặc dấu + để mở tab mới).
+• Chọn GET ở ô method bên trái thanh URL.
+• Dán URL vào rồi bấm Send.
+• Nhìn khung Response phía dưới: Status 200 OK, thời gian (ms), dung lượng (B hoặc KB).
+• Tab Body hiển thị JSON; chọn chế độ Pretty để dễ đọc.
+
+### Đọc kết quả trả về
+~~~json
+{
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae ..."
+}
+~~~
+Giải thích từng trường:
+• userId: bài viết thuộc người dùng số 1.
+• id: mã bài viết, khớp với số 1 trên URL.
+• title, body: nội dung mẫu (chữ Latin giả).
+Một tester sẽ kiểm tra:
+• Status có đúng 200 không?
+• id có đúng là 1 không?
+• Có đủ 4 trường không? Kiểu dữ liệu đúng không (id là số, title là chuỗi)?
+• Tab Headers của response có Content-Type: application/json không?
+
+### Query Params trong Postman
+~~~text
+GET https://jsonplaceholder.typicode.com/comments?postId=1
+
+Tab Params:
+KEY      VALUE
+postId   1
+~~~
+• Bạn có thể gõ thẳng ?postId=1 vào URL, hoặc nhập vào tab Params. Postman tự đồng bộ hai nơi.
+• Kết quả mong đợi: một array gồm 5 comment, comment nào cũng có "postId": 1.
+• Bỏ tick ô vuông cạnh postId để tạm tắt param mà không phải xóa.
+Thử đổi postId thành 2 và so sánh kết quả.
+
+### Lỗi thường gặp
+~~~text
+Error: getaddrinfo ENOTFOUND jsonplaceholder.typicode.coom
+Error: connect ECONNREFUSED 127.0.0.1:3000
+404 Not Found   (body: {})
+~~~
+• ENOTFOUND: tên miền gõ sai hoặc mất mạng → kiểm tra URL, thử mở trên trình duyệt.
+• ECONNREFUSED: không có server nào đang chạy ở địa chỉ/cổng đó (hay gặp với localhost) → bật server lên hoặc sửa cổng.
+• 404: path sai (ví dụ /post/1 thay vì /posts/1) hoặc id không tồn tại.
+• Mạng công ty dùng proxy: vào Settings → Proxy và cấu hình theo hướng dẫn của IT.
+
+PRACTICE: Trong Postman, gửi GET https://jsonplaceholder.typicode.com/users/1. Ghi lại: status code, thời gian phản hồi, giá trị trường email và giá trị address.city.
+Q: Trong JSON, giá trị nào là một array?
+- {"a": 1}
++ ["qa", "dev"]
+- "qa"
+Q: Bạn gặp lỗi "getaddrinfo ENOTFOUND". Nguyên nhân hay gặp nhất là gì?
+- Token hết hạn
+- Body JSON sai cú pháp
++ Tên miền gõ sai hoặc mất kết nối mạng
+
+## LESSON api-03 | POST, PUT, PATCH, DELETE với body JSON
+
+### POST: gửi dữ liệu để tạo mới
+~~~json
+{
+  "title": "Bài viết của tester",
+  "body": "Nội dung thử nghiệm",
+  "userId": 1
+}
+~~~
+Các bước trong Postman:
+• Method: POST, URL: https://jsonplaceholder.typicode.com/posts
+• Tab Body → chọn raw → menu bên phải chọn JSON.
+• Dán đoạn JSON trên vào rồi bấm Send.
+Giải thích body:
+• title, body: nội dung bài viết mới.
+• userId: tác giả là người dùng số 1.
+
+### Kết quả mong đợi: 201 Created
+~~~json
+{
+  "title": "Bài viết của tester",
+  "body": "Nội dung thử nghiệm",
+  "userId": 1,
+  "id": 101
+}
+~~~
+• Status 201 Created — đúng chuẩn cho việc tạo mới.
+• Server trả lại dữ liệu bạn gửi, kèm id mới là 101.
+• Lưu ý: jsonplaceholder là API giả lập, không lưu thật. Gọi GET /posts/101 sẽ nhận 404.
+• Trên hệ thống thật, sau POST bạn nên GET lại hoặc kiểm tra database để chắc dữ liệu đã được lưu.
+
+### Header Content-Type quan trọng thế nào?
+~~~text
+Content-Type: application/json
+~~~
+• Header này nói với server: "body tôi gửi là JSON".
+• Khi chọn raw + JSON, Postman tự thêm header này (xem tab Headers, mục hidden headers).
+• Nếu chọn raw + Text, server có thể không hiểu body. Với jsonplaceholder, response chỉ còn {"id": 101} — dấu hiệu body đã bị bỏ qua.
+• Tester nên thử cố tình gửi sai Content-Type xem server có báo lỗi rõ ràng không (thường là 400 hoặc 415 Unsupported Media Type).
+
+### PUT và PATCH khác nhau thế nào?
+~~~text
+PUT https://jsonplaceholder.typicode.com/posts/1
+{ "id": 1, "title": "Tiêu đề mới", "body": "Nội dung mới", "userId": 1 }
+
+PATCH https://jsonplaceholder.typicode.com/posts/1
+{ "title": "Chỉ đổi tiêu đề" }
+~~~
+• PUT: gửi toàn bộ đối tượng để thay thế bản cũ (như thay cả cái áo).
+• PATCH: chỉ gửi phần cần sửa (như khâu lại một chiếc cúc).
+• Cả hai thường trả 200 OK kèm dữ liệu sau khi sửa.
+Ý tưởng test: PUT thiếu trường bắt buộc thì sao? PATCH một trường không tồn tại thì sao? Sửa id trong body khác id trên URL thì sao?
+
+### DELETE và status 204
+~~~text
+DELETE https://jsonplaceholder.typicode.com/posts/1
+
+Kết quả: 200 OK
+Body: {}
+~~~
+• DELETE thường không cần body.
+• Nhiều API trả 204 No Content (không có body); một số trả 200 kèm {} như jsonplaceholder.
+• Hãy đọc tài liệu API (API spec, Swagger) để biết status nào là đúng, rồi test theo tài liệu.
+Ý tưởng test: xóa 2 lần cùng một id (lần 2 nên là 404), xóa id không tồn tại, xóa khi không có quyền (nên là 403).
+
+### Lỗi thường gặp
+~~~text
+400 Bad Request
+SyntaxError: Unexpected token } in JSON at position 52
+~~~
+• Thừa dấu phẩy cuối: { "a": 1, } → JSON không hợp lệ.
+• Dùng nháy đơn 'abc' thay vì nháy kép "abc".
+• Quên chọn JSON trong Body raw → server nhận text thường.
+• Gửi POST tới /posts/1 thay vì /posts → thường bị 404.
+Mẹo: Postman gạch chân đỏ chỗ sai cú pháp trong khung Body, hãy để ý trước khi bấm Send.
+
+PRACTICE: Gửi POST https://jsonplaceholder.typicode.com/posts với body JSON có title là tên của bạn. Xác nhận status 201 và id = 101. Sau đó thêm một dấu phẩy thừa ở cuối body, gửi lại và ghi lại phản hồi nhận được.
+Q: Method nào phù hợp để chỉ sửa một trường của tài nguyên?
+- PUT
++ PATCH
+- GET
+Q: Header nào báo cho server biết body là JSON?
+- Accept: text/html
+- Authorization: Bearer
++ Content-Type: application/json
+Q: Sau khi POST tạo mới thành công, status code chuẩn thường là gì?
++ 201 Created
+- 204 No Content
+- 404 Not Found
+
+## LESSON api-04 | Headers, xác thực và Bearer token
+
+### Header: phần ghi chú đi kèm request
+~~~text
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOi...
+User-Agent: PostmanRuntime/7.x
+~~~
+Header giống dòng ghi chú bên ngoài phong bì thư: không phải nội dung chính nhưng rất quan trọng.
+• Accept: tôi muốn nhận định dạng gì.
+• Content-Type: tôi đang gửi định dạng gì.
+• Authorization: giấy tờ chứng minh tôi là ai.
+• User-Agent: tôi đang dùng công cụ gì để gọi.
+Trong Postman, xem tab Headers của request (phía trên) và tab Headers của response (phía dưới).
+
+### Xác thực: thẻ ra vào tòa nhà
+• Authentication (xác thực): bạn là ai? Đăng nhập bằng username/password để nhận "thẻ" gọi là token.
+• Authorization (phân quyền): bạn được vào phòng nào?
+• Token giống thẻ nhân viên: quẹt thẻ ở mỗi cửa thay vì đưa giấy tờ tùy thân mỗi lần.
+• Bearer token nghĩa là "ai cầm thẻ này thì được vào" — vì vậy phải giữ token cẩn thận.
+Khi test, phân biệt rõ:
+• 401 Unauthorized: không có thẻ, thẻ giả hoặc thẻ hết hạn.
+• 403 Forbidden: thẻ thật nhưng không được vào phòng này.
+
+### Đăng nhập để lấy token (DummyJSON)
+~~~text
+POST https://dummyjson.com/auth/login
+Content-Type: application/json
+
+{
+  "username": "emilys",
+  "password": "emilyspass",
+  "expiresInMins": 30
+}
+~~~
+Giải thích:
+• Dòng 1: gọi API đăng nhập của DummyJSON, một API demo công khai.
+• emilys / emilyspass là tài khoản mẫu được công bố trong tài liệu của DummyJSON, không phải tài khoản thật của ai.
+• expiresInMins: token có hiệu lực bao nhiêu phút.
+Kết quả mong đợi: 200 OK, body có id, username, email... và hai trường accessToken, refreshToken.
+accessToken là một chuỗi dài bắt đầu bằng eyJ (định dạng JWT).
+
+### Dùng token để gọi API cần đăng nhập
+~~~text
+GET https://dummyjson.com/auth/me
+Authorization: Bearer <dán accessToken vào đây>
+~~~
+Cách làm trong Postman:
+• Tạo request GET https://dummyjson.com/auth/me
+• Tab Authorization → Auth Type: Bearer Token → dán accessToken vào ô Token.
+• Postman tự tạo header Authorization: Bearer <token>.
+• Bấm Send → mong đợi 200 OK và thông tin của user emilys.
+Thử xóa token rồi Send lại → mong đợi 401 kèm thông báo thiếu hoặc sai token.
+
+### Một API demo khác: reqres.in
+~~~text
+POST https://reqres.in/api/login
+Content-Type: application/json
+x-api-key: <key miễn phí, nếu trang reqres.in yêu cầu>
+
+{ "email": "eve.holt@reqres.in", "password": "cityslicka" }
+~~~
+• reqres.in cũng là API demo; email/password trên là dữ liệu mẫu trong tài liệu của họ.
+• Kết quả mong đợi: 200 OK với body dạng {"token": "..."}.
+• Thử bỏ trường password → mong đợi 400 với {"error": "Missing password"}.
+• reqres.in có thể yêu cầu header x-api-key miễn phí. Nếu bị 401/403 khi chưa có key, xem hướng dẫn trên trang chủ reqres.in.
+
+### Lỗi thường gặp
+~~~text
+401 Unauthorized
+{ "message": "Invalid/Expired Token!" }
+~~~
+• Thiếu chữ "Bearer " hoặc thiếu dấu cách: "Bearer<token>" là sai.
+• Copy thiếu ký tự, hoặc dính cả dấu ngoặc kép "eyJ..." vào token.
+• Token hết hạn (quá expiresInMins) → đăng nhập lại để lấy token mới.
+• Đặt token ở cả tab Headers và tab Authorization với giá trị khác nhau → dễ nhầm, chỉ dùng một chỗ.
+• Không bao giờ dán token thật của môi trường PROD vào ảnh chụp màn hình hay nhóm chat.
+
+PRACTICE: Đăng nhập DummyJSON để lấy accessToken, rồi gọi GET https://dummyjson.com/auth/me bằng Bearer Token. Sau đó xóa 3 ký tự cuối của token, gửi lại và ghi lại status code nhận được.
+Q: Bạn đã đăng nhập đúng nhưng gọi API chỉ dành cho admin và bị từ chối. Status code hợp lý nhất là gì?
+- 401
++ 403
+- 500
+Q: Header Authorization nào đúng định dạng Bearer?
+- Authorization: Token=abc123
++ Authorization: Bearer abc123
+- Bearer: Authorization abc123
+
+## LESSON api-05 | Collections, Environments và Variables
+
+### Collection: tủ hồ sơ chứa request
+~~~text
+Blog API                (Collection)
+ |-- Auth               (Folder)
+ |    `-- POST Login
+ |-- Posts
+ |    |-- GET  List posts
+ |    |-- GET  Get post by id
+ |    `-- POST Create post
+ `-- Users
+      `-- GET  Get user
+~~~
+• Tạo collection: thanh bên trái → Collections → dấu + → đặt tên "Blog API".
+• Chuột phải vào collection → Add folder để chia nhóm.
+• Với request đang mở, bấm Save (Ctrl+S) → chọn collection/folder để lưu.
+• Đặt tên request rõ ràng theo kiểu hành động + đối tượng, ví dụ "Create post".
+
+### Environment: bộ cấu hình cho từng môi trường
+~~~text
+Environment: dev
+VARIABLE   INITIAL VALUE                          CURRENT VALUE
+baseUrl    https://jsonplaceholder.typicode.com   https://jsonplaceholder.typicode.com
+postId     1                                      1
+~~~
+• Environment giống chùm chìa khóa cho từng tòa nhà: dev, staging dùng chung request nhưng khác địa chỉ.
+• Tạo: thanh bên trái → Environments → dấu + → đặt tên "dev" → thêm biến baseUrl và postId.
+• Chọn "dev" ở ô chọn environment góc trên bên phải.
+• Initial value có thể được chia sẻ cho đồng đội; Current value chỉ nằm trên máy bạn.
+• Token, mật khẩu nên đặt kiểu secret và không ghi vào Initial value.
+
+### Dùng biến bằng cặp ngoặc {{ }}
+~~~text
+GET {{baseUrl}}/posts/{{postId}}
+~~~
+• Khi gửi, {{baseUrl}} được thay bằng https://jsonplaceholder.typicode.com và {{postId}} được thay bằng 1.
+• Rê chuột lên biến để xem giá trị và nơi biến được định nghĩa.
+• Biến hiện màu xanh: đã tìm thấy. Màu đỏ: chưa được định nghĩa ở environment đang chọn.
+Lợi ích: muốn chuyển sang môi trường khác chỉ cần đổi environment, không phải sửa từng request.
+
+### Phạm vi biến (scope)
+~~~text
+Global  >  Collection  >  Environment  >  Data (CSV/JSON)  >  Local
+(rộng nhất)                                                (hẹp nhất)
+~~~
+• Nếu cùng một tên biến có ở nhiều nơi, biến ở phạm vi hẹp hơn sẽ thắng.
+• Global: dùng ở mọi nơi — hạn chế dùng vì dễ rối.
+• Collection: dùng chung trong một collection, ví dụ token của collection đó.
+• Environment: thay đổi theo môi trường (dev, staging).
+• Data: giá trị đọc từ file dữ liệu khi chạy Collection Runner hoặc Newman.
+• Local: chỉ tồn tại trong một lần chạy script.
+
+### Tự động lưu token sau khi login (chaining)
+~~~js
+// Đặt ở tab Scripts > Post-response của request "POST Login"
+const json = pm.response.json();
+pm.environment.set("token", json.accessToken);
+console.log("Đã lưu token:", json.accessToken.substring(0, 10) + "...");
+~~~
+Giải thích từng dòng:
+• Dòng 1: comment (ghi chú), máy bỏ qua dòng này.
+• Dòng 2: đọc body response và biến thành object JavaScript tên json.
+• Dòng 3: lưu accessToken vào biến môi trường tên "token".
+• Dòng 4: in 10 ký tự đầu ra Console (mở bằng nút Console ở thanh dưới cùng) để kiểm tra, không in cả token.
+Ở các request khác: tab Authorization → Bearer Token → ô Token gõ {{token}}.
+Muốn lưu ở mức collection thì dùng pm.collectionVariables.set("token", json.accessToken).
+(Postman bản cũ gọi tab này là Tests.)
+
+### Lỗi thường gặp
+~~~text
+Error: getaddrinfo ENOTFOUND {{baseurl}}
+Error: Invalid URI "%7B%7BbaseUrl%7D%7D/posts"
+TypeError: Cannot read properties of undefined (reading 'substring')
+~~~
+• Biến không được thay: chưa chọn environment (ô góc phải đang là "No environment").
+• Sai chữ hoa/thường: {{baseurl}} khác {{baseUrl}}.
+• Biến có Current value rỗng.
+• Thừa dấu /: baseUrl kết thúc bằng / rồi lại viết {{baseUrl}}/posts → thành //posts.
+• Cannot read properties of undefined: response không có accessToken vì login thất bại → kiểm tra status trước khi đọc token.
+
+PRACTICE: Tạo collection "Blog API" với 3 request dùng {{baseUrl}}: GET danh sách posts, GET post theo {{postId}}, POST tạo post. Tạo environment "dev" chứa baseUrl và postId = 5, chọn "dev" rồi chạy cả 3 request.
+Q: Biến {{baseUrl}} hiển thị màu đỏ trong Postman nghĩa là gì?
+- Biến chứa giá trị bí mật
++ Biến chưa được định nghĩa ở phạm vi đang dùng
+- Server đang bị lỗi
+Q: Lệnh nào lưu một giá trị vào biến environment trong script?
+- pm.response.set("token", x)
+- pm.test("token", x)
++ pm.environment.set("token", x)
+Q: Cùng tên biến tồn tại ở Global và Environment. Postman dùng giá trị nào?
+- Global, vì rộng hơn
++ Environment, vì phạm vi hẹp hơn
+- Báo lỗi trùng tên
+
+## LESSON api-06 | Viết test tự động trong Postman
+
+### Test là gì trong Postman?
+~~~js
+pm.test("Status code là 200", function () {
+  pm.response.to.have.status(200);
+});
+~~~
+Test giống một ô trong checklist: Postman tự kiểm tra và đánh dấu PASS hoặc FAIL.
+Viết ở tab Scripts → Post-response (bản cũ: tab Tests).
+Giải thích từng dòng:
+• Dòng 1: pm.test("tên", function () { ... }) tạo một test có tên dễ đọc.
+• Dòng 2: khẳng định status phải là 200.
+• Dòng 3: đóng hàm và đóng test.
+Bấm Send → xem tab Test Results ở khung response: PASS màu xanh, FAIL màu đỏ.
+
+### Kiểm tra nội dung body
+~~~js
+const json = pm.response.json();
+
+pm.test("Trả đúng bài viết số 1", function () {
+  pm.expect(json.id).to.eql(1);
+  pm.expect(json.userId).to.eql(1);
+});
+
+pm.test("title là chuỗi và không rỗng", function () {
+  pm.expect(json.title).to.be.a("string");
+  pm.expect(json.title.length).to.be.above(0);
+});
+~~~
+Dùng với request GET {{baseUrl}}/posts/1.
+• pm.response.json(): chuyển body thành object.
+• pm.expect(a).to.eql(b): a phải bằng b.
+• to.be.a("string"): kiểm tra kiểu dữ liệu là chuỗi.
+• to.be.above(0): phải lớn hơn 0.
+Mỗi pm.test độc lập: một test fail không làm dừng các test khác.
+
+### Kiểm tra thời gian phản hồi và header
+~~~js
+pm.test("Phản hồi dưới 1000 ms", function () {
+  pm.expect(pm.response.responseTime).to.be.below(1000);
+});
+
+pm.test("Content-Type là JSON", function () {
+  pm.expect(pm.response.headers.get("Content-Type")).to.include("application/json");
+});
+~~~
+Giải thích:
+• responseTime: số mili-giây server cần để trả lời.
+• to.be.below(1000): phải nhỏ hơn 1 giây (ngưỡng ví dụ, hãy theo yêu cầu dự án).
+• headers.get("Content-Type"): đọc giá trị một header.
+• to.include(...): chuỗi phải chứa đoạn văn bản này.
+Lưu ý: thời gian phụ thuộc mạng, đặt ngưỡng quá sát sẽ khiến test lúc pass lúc fail (flaky).
+
+### Kiểm tra cấu trúc dữ liệu (JSON schema)
+~~~js
+const schema = {
+  type: "object",
+  required: ["userId", "id", "title", "body"],
+  properties: {
+    userId: { type: "number" },
+    id: { type: "number" },
+    title: { type: "string" },
+    body: { type: "string" }
+  }
+};
+
+pm.test("Đúng cấu trúc post", function () {
+  pm.response.to.have.jsonSchema(schema);
+});
+~~~
+• schema là "khuôn mẫu" mô tả một response hợp lệ.
+• required: danh sách trường bắt buộc phải có.
+• properties: kiểu dữ liệu của từng trường.
+• pm.response.to.have.jsonSchema(schema): Postman so response với khuôn.
+Nếu một ngày server trả id dạng chuỗi "1" thay vì số 1, test này sẽ bắt được ngay.
+
+### Kiểm tra danh sách và chạy cả collection
+~~~js
+const posts = pm.response.json();
+
+pm.test("Có đúng 100 bài viết", function () {
+  pm.expect(posts).to.be.an("array").that.has.lengthOf(100);
+});
+
+pm.test("Bài nào cũng có id", function () {
+  posts.forEach(function (p) {
+    pm.expect(p).to.have.property("id");
+  });
+});
+~~~
+Dùng với GET {{baseUrl}}/posts.
+• to.be.an("array"): phải là danh sách.
+• lengthOf(100): đúng 100 phần tử (dữ liệu mẫu của jsonplaceholder).
+• forEach: lặp qua từng bài viết, kiểm tra có trường id.
+Chạy cả collection: chuột phải collection → Run → bấm Run Blog API. Kết quả hiển thị tổng số test pass/fail cho từng request.
+
+### Lỗi thường gặp
+~~~text
+AssertionError: expected response to have status code 200 but got 404
+JSONError: Unexpected token '<' at 1:1
+ReferenceError: jsonData is not defined
+~~~
+• AssertionError: test đã chạy và phát hiện khác biệt → đọc kỹ: là bug thật hay request gửi sai?
+• Unexpected token '<': response là trang HTML (thường là trang lỗi), không phải JSON → kiểm tra URL và status trước khi gọi pm.response.json().
+• ReferenceError: dùng biến chưa khai báo, ví dụ khai báo json nhưng lại viết jsonData.
+• Test luôn PASS dù dữ liệu sai: quên viết pm.expect bên trong pm.test.
+
+PRACTICE: Thêm vào request GET {{baseUrl}}/users/1 ba test: status là 200, email có chứa ký tự "@", và address.city là chuỗi. Chạy cả collection bằng Collection Runner và ghi lại số test pass/fail.
+Q: Trong Postman bản mới, nên viết test ở đâu?
+- Tab Params
++ Tab Scripts → Post-response
+- Tab Headers
+Q: Lỗi "JSONError: Unexpected token '<'" thường có nghĩa là gì?
+- Test viết đúng và đã tìm ra bug
++ Response là HTML chứ không phải JSON
+- Token đã hết hạn
+Q: pm.expect(json.id).to.eql(1) kiểm tra điều gì?
++ Giá trị id trong body bằng 1
+- Status code bằng 1
+- Response có đúng 1 phần tử
+
+## LESSON api-07 | Newman: chạy collection bằng dòng lệnh
+
+### Vì sao cần Newman?
+~~~bash
+node -v
+npm -v
+~~~
+• Newman là "Postman không có giao diện": chạy collection bằng dòng lệnh.
+• Dùng để chạy tự động trong CI/CD (GitHub Actions, Jenkins) mỗi khi có code mới.
+• Newman chạy trên Node.js, nên trước tiên kiểm tra Node bằng 2 lệnh trên trong PowerShell.
+Kết quả mong đợi: in ra phiên bản, ví dụ v22.11.0 và 10.9.0.
+Nếu báo "not recognized": cài Node.js LTS (winget install OpenJS.NodeJS.LTS), đóng và mở lại PowerShell.
+
+### Cài Newman
+~~~bash
+npm install -g newman
+newman -v
+~~~
+Giải thích từng dòng:
+• npm install: tải gói phần mềm từ kho npm.
+• -g: cài toàn cục (global), dùng được ở mọi thư mục.
+• newman -v: kiểm tra đã cài thành công; mong đợi in ra phiên bản, ví dụ 6.x.x.
+
+### Xuất collection và environment
+~~~text
+Collection : bấm (...) cạnh "Blog API" → Export → Collection v2.1 → Export
+             → lưu thành blog.postman_collection.json
+Environment: Environments → bấm (...) cạnh "dev" → Export
+             → lưu thành dev.postman_environment.json
+~~~
+• Đặt 2 file vào cùng một thư mục, ví dụ C:\qa\api-tests.
+• Mẹo: đặt tên file không dấu cách để gõ lệnh dễ hơn.
+• Mở file kiểm tra không chứa token, mật khẩu thật trước khi đưa lên Git.
+
+### Chạy collection
+~~~bash
+cd C:\qa\api-tests
+newman run blog.postman_collection.json -e dev.postman_environment.json
+~~~
+Giải thích từng dòng:
+• cd: di chuyển vào thư mục chứa 2 file.
+• newman run <collection>: chạy tất cả request theo đúng thứ tự trong collection.
+• -e <environment>: dùng environment dev để thay các biến như {{baseUrl}}.
+Kết quả mong đợi: Newman in từng request kèm status, thời gian, dấu ✓ cho test pass, cuối cùng là bảng tổng kết.
+
+### Đọc kết quả Newman
+~~~text
+→ Get post by id
+  GET https://jsonplaceholder.typicode.com/posts/1 [200 OK, 1.2kB, 85ms]
+  ✓  Status code là 200
+  ✓  Trả đúng bài viết số 1
+
+┌─────────────────────────┬──────────┬──────────┐
+│                         │ executed │   failed │
+├─────────────────────────┼──────────┼──────────┤
+│                requests │        3 │        0 │
+│            test-scripts │        3 │        0 │
+│              assertions │        7 │        1 │
+└─────────────────────────┴──────────┴──────────┘
+  #  failure         detail
+ 1.  AssertionError  Phản hồi dưới 1000 ms
+~~~
+• Mũi tên →: tên request đang chạy.
+• [200 OK, 1.2kB, 85ms]: status, dung lượng, thời gian.
+• Dấu ✓ là pass; test fail được đánh số và giải thích ở phần cuối.
+• Có test fail thì Newman kết thúc với exit code 1 → CI báo đỏ. Đây là hành vi mong muốn.
+
+### Báo cáo và tùy chọn hữu ích
+~~~bash
+newman run blog.postman_collection.json -e dev.postman_environment.json -r cli,junit --reporter-junit-export results/junit.xml
+
+npm install -g newman-reporter-htmlextra
+newman run blog.postman_collection.json -e dev.postman_environment.json -r cli,htmlextra --reporter-htmlextra-export results/report.html
+
+newman run blog.postman_collection.json -e dev.postman_environment.json -d data.csv -n 3 --delay-request 200
+~~~
+Giải thích:
+• -r cli,junit: vừa in ra màn hình vừa xuất file JUnit XML mà Jenkins/GitHub Actions đọc được.
+• newman-reporter-htmlextra: reporter bên ngoài, phải cài thêm; tạo file HTML đẹp để gửi cả nhóm.
+• -d data.csv: chạy với dữ liệu lấy từ file (data-driven testing).
+• -n 3: lặp 3 vòng (iterations).
+• --delay-request 200: nghỉ 200 ms giữa các request, tránh dồn tải lên server demo.
+
+### Lỗi thường gặp
+~~~text
+newman : The term 'newman' is not recognized as the name of a cmdlet...
+newman : File C:\Users\...\npm\newman.ps1 cannot be loaded because running scripts is disabled on this system.
+error: collection could not be loaded ... ENOENT: no such file or directory
+~~~
+• Not recognized: chưa cài, hoặc chưa mở lại PowerShell sau khi cài → đóng và mở lại terminal.
+• Scripts disabled: PowerShell chặn file .ps1 → gõ newman.cmd thay cho newman, hoặc dùng Command Prompt (cmd). Trên máy công ty, hỏi IT trước khi đổi ExecutionPolicy.
+• ENOENT: sai tên hoặc đường dẫn file. Tên có dấu cách thì đặt trong ngoặc kép, ví dụ "Blog API.postman_collection.json".
+
+PRACTICE: Export collection "Blog API" và environment "dev", chạy bằng Newman với reporter htmlextra, mở file report.html bằng trình duyệt và tìm xem test nào pass, test nào fail.
+Q: Lệnh nào chạy một collection kèm environment?
+- newman start collection.json --env dev.json
++ newman run collection.json -e dev.postman_environment.json
+- npm run collection.json
+Q: Khi có ít nhất một test fail, Newman kết thúc với exit code nào?
+- 0
++ 1
+- 404
+Q: Muốn xuất báo cáo HTML bằng htmlextra, bạn cần làm gì trước?
+- Không cần gì, Newman có sẵn
++ Cài thêm gói newman-reporter-htmlextra
+- Cài Postman bản trả phí

@@ -1,0 +1,842 @@
+=== COURSE selenium
+name: Selenium WebDriver căn bản (Python)
+icon: 🚗
+floor: 3
+room: 302
+level: Cơ bản
+hours: 6
+summary: Tự động hóa trình duyệt bằng Selenium và Python từ con số 0: cài môi trường, tìm phần tử, chờ đúng cách, viết test với pytest và tổ chức theo Page Object.
+
+## LESSON selenium-01 | Selenium là gì và chuẩn bị môi trường Python
+
+### Selenium là gì?
+Hãy tưởng tượng trình duyệt là một chiếc xe hơi, còn bạn ngồi ghế sau đọc chỉ dẫn: "rẽ trái, dừng ở cổng số 3".
+• Selenium WebDriver là "người tài xế": nhận lệnh từ code của bạn và điều khiển trình duyệt thật (Chrome, Edge, Firefox).
+• Code Python của bạn gửi lệnh → WebDriver (ví dụ chromedriver) → trình duyệt làm theo.
+• Selenium ra đời từ lâu, được dùng ở rất nhiều công ty, hỗ trợ nhiều ngôn ngữ (Java, Python, C#, JavaScript).
+• Khóa này dùng Python vì cú pháp gần với tiếng Anh, dễ đọc cho người mới.
+Bạn sẽ học: mở trang, tìm phần tử, bấm, gõ, chờ, kiểm tra kết quả và tổ chức test gọn gàng.
+
+### Bước 0: Kiểm tra Python và pip
+Mở PowerShell và gõ:
+~~~bash
+python --version
+pip --version
+~~~
+Giải thích từng dòng:
+• python --version: hỏi phiên bản Python. Kết quả mong đợi dạng Python 3.12.x (3.9 trở lên đều được).
+• pip --version: hỏi phiên bản pip, công cụ cài thư viện Python. Kết quả dạng pip 24.x from ...
+Nếu gõ python mà Microsoft Store bật lên: Python chưa được cài đúng. Cài lại từ python.org và nhớ tick "Add python.exe to PATH" (xem phòng 101).
+
+### Bước 1: Tạo thư mục và môi trường ảo (venv)
+Môi trường ảo giống như một "hộp đồ nghề riêng" cho từng dự án: thư viện cài trong hộp này không lẫn sang dự án khác.
+~~~bash
+mkdir selenium-hoc
+cd selenium-hoc
+python -m venv .venv
+.venv\Scripts\activate
+~~~
+Giải thích từng dòng:
+• mkdir selenium-hoc: tạo thư mục dự án.
+• cd selenium-hoc: đi vào thư mục đó.
+• python -m venv .venv: tạo môi trường ảo trong thư mục con tên .venv.
+• .venv\Scripts\activate: bật môi trường ảo. Thành công khi đầu dòng lệnh có chữ (.venv).
+Mỗi lần mở terminal mới, bạn phải chạy lại lệnh activate.
+
+### Bước 2: Cài Selenium và pytest
+~~~bash
+pip install selenium pytest
+pip list
+~~~
+Giải thích từng dòng:
+• pip install selenium pytest: tải và cài 2 thư viện. selenium để điều khiển trình duyệt, pytest để chạy và báo cáo test.
+• pip list: liệt kê thư viện đã cài. Bạn sẽ thấy selenium 4.x và pytest 8.x trong danh sách.
+Mẹo: lưu danh sách thư viện để người khác cài giống bạn:
+pip freeze > requirements.txt (sau này cài lại bằng pip install -r requirements.txt).
+
+### Selenium Manager: không cần tự tải driver nữa
+Trước đây, người mới hay "khóc" vì phải tự tải chromedriver.exe đúng phiên bản Chrome.
+Từ Selenium 4.6, có sẵn Selenium Manager:
+• Khi bạn tạo webdriver.Chrome(), Selenium tự kiểm tra Chrome trên máy và tự tải driver phù hợp.
+• Driver được lưu trong thư mục cache của người dùng (thường là C:\Users\<tên bạn>\.cache\selenium).
+• Lần chạy đầu có thể chậm vài giây vì phải tải, các lần sau nhanh hơn.
+Điều kiện: máy cần có trình duyệt (Chrome hoặc Edge) và có mạng ở lần chạy đầu. Nếu công ty chặn mạng, hỏi IT về proxy.
+
+### Lỗi thường gặp
+~~~text
+'pip' is not recognized as an internal or external command
+.venv\Scripts\activate : File ...\Activate.ps1 cannot be loaded because running scripts is disabled on this system.
+ModuleNotFoundError: No module named 'selenium'
+~~~
+• Lỗi 1: pip chưa có trong PATH. Dùng python -m pip install selenium pytest, hoặc cài lại Python có tick "Add python.exe to PATH".
+• Lỗi 2: PowerShell chặn script. Dùng Command Prompt và chạy .venv\Scripts\activate.bat, hoặc nếu được phép: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned (máy công ty thì hỏi IT).
+• Lỗi 3: chưa bật venv hoặc cài thư viện vào chỗ khác. Bật venv rồi cài lại. Trong VS Code, chọn đúng trình thông dịch: Ctrl+Shift+P → Python: Select Interpreter → chọn .venv.
+
+PRACTICE: Tạo thư mục selenium-hoc, tạo và bật venv, cài selenium và pytest, chạy pip list rồi chụp màn hình dòng selenium và pytest kèm phiên bản.
+Q: Môi trường ảo (venv) giúp ích gì?
+- Làm Python chạy nhanh hơn
++ Tách riêng thư viện của từng dự án để không lẫn vào nhau
+- Tự động viết test thay bạn
+Q: Từ Selenium 4.6, ai lo việc tải chromedriver phù hợp?
+- Bạn phải tự tải bằng tay
++ Selenium Manager tự tải
+- Windows Update
+Q: Gõ pip báo "'pip' is not recognized", cách vượt qua nhanh là gì?
+- Khởi động lại máy 3 lần
+- Đổi tên thư mục dự án
++ Dùng python -m pip install ... thay cho pip install ...
+
+## LESSON selenium-02 | Script Selenium đầu tiên
+
+### Viết file first_script.py
+Trong VS Code tạo file first_script.py (không đặt tên là selenium.py!) và gõ:
+~~~python
+from selenium import webdriver
+
+driver = webdriver.Chrome()
+driver.get("https://the-internet.herokuapp.com/login")
+print("Tiêu đề trang:", driver.title)
+print("Địa chỉ hiện tại:", driver.current_url)
+driver.quit()
+~~~
+Trang https://the-internet.herokuapp.com là trang luyện tập công khai, dành riêng cho người học kiểm thử tự động.
+
+### Giải thích từng dòng
+• from selenium import webdriver: lấy module webdriver từ thư viện selenium.
+• driver = webdriver.Chrome(): mở một cửa sổ Chrome mới do code điều khiển. Biến driver là "tài xế" của ta.
+• driver.get(...): đi tới địa chỉ web và chờ trang tải xong phần chính.
+• driver.title: đọc tiêu đề trang (chữ trên tab trình duyệt).
+• driver.current_url: đọc địa chỉ hiện tại.
+• print(...): in ra màn hình terminal.
+• driver.quit(): đóng trình duyệt và tắt driver. Luôn nhớ quit, nếu không máy sẽ còn nhiều tiến trình chrome chạy ngầm.
+
+### Chạy script và kết quả mong đợi
+~~~bash
+python first_script.py
+~~~
+Giải thích:
+• python <tên file>: bảo Python chạy file đó từ trên xuống dưới.
+• Nhớ đã bật venv (đầu dòng có (.venv)).
+Kết quả mong đợi:
+• Một cửa sổ Chrome bật lên, có dòng thông báo "Chrome is being controlled by automated test software", rồi tự đóng.
+• Terminal in ra:
+Tiêu đề trang: The Internet
+Địa chỉ hiện tại: https://the-internet.herokuapp.com/login
+Lần đầu chạy có thể mất 10–30 giây vì Selenium Manager đang tải driver.
+
+### Dùng trình duyệt khác và giữ cửa sổ để quan sát
+~~~python
+import time
+from selenium import webdriver
+
+driver = webdriver.Edge()
+driver.maximize_window()
+driver.get("https://the-internet.herokuapp.com/")
+time.sleep(3)
+driver.quit()
+~~~
+Giải thích từng dòng:
+• import time: lấy module thời gian của Python.
+• webdriver.Edge(): mở Microsoft Edge (có sẵn trên Windows). Tương tự có webdriver.Firefox() nếu máy cài Firefox.
+• maximize_window(): phóng to cửa sổ hết màn hình.
+• time.sleep(3): dừng 3 giây để bạn kịp nhìn. CHỈ dùng khi học; trong test thật sẽ dùng cách chờ thông minh (bài 5).
+• driver.quit(): đóng trình duyệt.
+
+### Lỗi thường gặp
+~~~text
+ImportError: cannot import name 'webdriver' from partially initialized module 'selenium'
+selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 114
+selenium.common.exceptions.NoSuchDriverException: Message: Unable to obtain driver for chrome
+~~~
+• Lỗi 1: bạn đặt tên file là selenium.py, Python nhầm file của bạn với thư viện. Đổi tên file (ví dụ first_script.py) và xóa thư mục __pycache__ nếu có.
+• Lỗi 2: phiên bản driver và trình duyệt lệch nhau, thường do có chromedriver.exe cũ nằm trong PATH. Xóa file driver cũ khỏi PATH, rồi nâng Selenium: pip install -U selenium.
+• Lỗi 3: Selenium Manager không tải được driver (mất mạng, bị proxy chặn) hoặc máy chưa cài trình duyệt. Kiểm tra mạng, cài Chrome hoặc dùng webdriver.Edge().
+
+PRACTICE: Viết script mở https://the-internet.herokuapp.com/checkboxes, in ra tiêu đề trang và địa chỉ hiện tại, rồi đóng trình duyệt. Chạy thử với cả Chrome và Edge.
+Q: Lệnh nào đóng trình duyệt và giải phóng driver?
+- driver.close_all()
++ driver.quit()
+- driver.stop()
+Q: Vì sao không nên đặt tên file của bạn là selenium.py?
++ Python sẽ nhầm file đó với thư viện selenium và báo lỗi import
+- Vì Windows cấm tên file có chữ selenium
+- Vì pytest sẽ xóa file đó
+Q: driver.title trả về gì?
+- Địa chỉ URL của trang
+- Toàn bộ mã HTML của trang
++ Tiêu đề của trang (chữ trên tab)
+
+## LESSON selenium-03 | Tìm phần tử: ID, NAME, CSS và XPath
+
+### Xem "giấy khai sinh" của phần tử bằng DevTools
+Mỗi phần tử trên trang (ô nhập, nút) được viết bằng HTML. Muốn Selenium tìm đúng, ta phải đọc HTML của nó.
+Cách làm: mở https://the-internet.herokuapp.com/login → chuột phải vào ô Username → Inspect (hoặc nhấn F12).
+~~~xml
+<input type="text" name="username" id="username">
+<input type="password" name="password" id="password">
+<button class="radius" type="submit"><i class="fa fa-2x fa-sign-in"> Login</i></button>
+~~~
+Giải thích từng dòng:
+• Dòng 1: ô nhập chữ, có id="username" và name="username".
+• Dòng 2: ô mật khẩu, id="password".
+• Dòng 3: nút Login, có class="radius" và type="submit".
+id giống số căn cước: thường là duy nhất trên trang, nên được ưu tiên dùng.
+
+### Các cách tìm với By
+~~~python
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+driver = webdriver.Chrome()
+driver.get("https://the-internet.herokuapp.com/login")
+user = driver.find_element(By.ID, "username")
+pwd = driver.find_element(By.NAME, "password")
+btn = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
+title = driver.find_element(By.XPATH, "//h2")
+print(title.text)
+driver.quit()
+~~~
+Giải thích từng dòng:
+• from selenium.webdriver.common.by import By: lấy "danh sách cách tìm" By.
+• By.ID, "username": tìm theo id.
+• By.NAME, "password": tìm theo thuộc tính name.
+• By.CSS_SELECTOR, "button[type='submit']": tìm thẻ button có type là submit.
+• By.XPATH, "//h2": tìm thẻ h2 ở bất kỳ đâu trên trang.
+• title.text: lấy chữ hiển thị. Kết quả in ra: Login Page
+Ngoài ra còn By.LINK_TEXT, By.PARTIAL_LINK_TEXT, By.CLASS_NAME, By.TAG_NAME.
+
+### Bảng tóm tắt CSS selector
+~~~text
+#username                 phần tử có id="username"
+.radius                   phần tử có class="radius"
+input[name='password']    thẻ input có name="password"
+button[type='submit']     thẻ button có type="submit"
+#checkboxes input         thẻ input nằm BÊN TRONG phần tử id="checkboxes"
+ul > li                   thẻ li là con trực tiếp của ul
+li:nth-child(2)           thẻ li đứng thứ 2 trong cha của nó
+~~~
+Giải thích:
+• Dấu # nghĩa là id, dấu chấm nghĩa là class.
+• [thuộc tính='giá trị'] lọc theo thuộc tính bất kỳ.
+• Khoảng trắng nghĩa là "nằm bên trong (ở mọi cấp)", dấu > là "con trực tiếp".
+Thử nhanh: trong DevTools nhấn Ctrl+F ở tab Elements, gõ selector, DevTools sẽ cho biết khớp mấy phần tử (ví dụ 1 of 1).
+
+### Bảng tóm tắt XPath
+~~~text
+//input[@id='username']               thẻ input có id="username"
+//button[@type='submit']              nút có type="submit"
+//a[text()='Elemental Selenium']      thẻ a có chữ đúng bằng "Elemental Selenium"
+//button[contains(., 'Login')]        nút có chứa chữ "Login" (kể cả trong thẻ con)
+//form[@id='login']//input            mọi input nằm trong form id="login"
+(//input)[2]                          thẻ input thứ 2 trên trang
+~~~
+Giải thích:
+• // là "tìm ở bất kỳ đâu", @ là thuộc tính, text() là chữ của chính thẻ đó.
+• contains(., 'Login'): dấu chấm nghĩa là toàn bộ chữ bên trong phần tử, khớp một phần.
+• XPath mạnh khi phải tìm theo chữ hoặc đi ngược lên cha, nhưng dài và dễ gãy. Ưu tiên: ID → NAME → CSS → XPath.
+• Tránh XPath tuyệt đối kiểu /html/body/div[2]/div/div/form: chỉ cần trang thêm một thẻ div là hỏng.
+
+### find_element và find_elements khác nhau thế nào?
+~~~python
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+driver = webdriver.Chrome()
+driver.get("https://the-internet.herokuapp.com/checkboxes")
+boxes = driver.find_elements(By.CSS_SELECTOR, "#checkboxes input")
+print("Số checkbox:", len(boxes))
+for box in boxes:
+    print(box.is_selected())
+none = driver.find_elements(By.ID, "khong-ton-tai")
+print("Không tìm thấy thì danh sách dài:", len(none))
+driver.quit()
+~~~
+Giải thích từng dòng:
+• find_elements (có chữ s): trả về DANH SÁCH mọi phần tử khớp.
+• len(boxes): đếm số phần tử. Kết quả: Số checkbox: 2
+• for box in boxes: lặp qua từng checkbox, is_selected() cho biết đã tick chưa. Kết quả: False rồi True.
+• Tìm phần tử không tồn tại bằng find_elements: KHÔNG lỗi, chỉ trả danh sách rỗng, len = 0.
+• Còn find_element (không có s): trả MỘT phần tử đầu tiên khớp, nếu không có sẽ báo lỗi ngay.
+
+### Lỗi thường gặp
+~~~text
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#user"}
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: Unable to locate an element with the xpath expression //input[@id='username'
+~~~
+• Lỗi 1: không tìm thấy phần tử. Nguyên nhân hay gặp: gõ sai (id là username chứ không phải user), phần tử chưa xuất hiện (cần chờ, bài 5), hoặc phần tử nằm trong iframe (bài 8).
+• Lỗi 2: viết sai cú pháp selector, ở đây thiếu dấu ] đóng. Kiểm tra lại dấu ngoặc và dấu nháy.
+• Mẹo: luôn thử selector trong DevTools (Ctrl+F) trước khi đưa vào code.
+
+PRACTICE: Mở https://the-internet.herokuapp.com/login. Viết script tìm ô Username bằng 4 cách khác nhau (ID, NAME, CSS_SELECTOR, XPATH) và in ra get_attribute("name") của từng kết quả để chứng minh cả 4 cùng trỏ một phần tử.
+Q: Trong CSS selector, ký hiệu # dùng để chỉ điều gì?
++ id của phần tử
+- class của phần tử
+- thứ tự của phần tử
+Q: find_elements không tìm thấy phần tử nào thì sẽ thế nào?
+- Báo NoSuchElementException
++ Trả về danh sách rỗng
+- Trả về None và đóng trình duyệt
+Q: Vì sao nên tránh XPath tuyệt đối như /html/body/div[2]/div/form?
+- Vì XPath tuyệt đối chạy chậm hơn 10 lần
+- Vì Selenium không hỗ trợ XPath tuyệt đối
++ Vì chỉ cần cấu trúc trang đổi một chút là locator hỏng
+
+## LESSON selenium-04 | Tương tác: gõ, bấm, đọc chữ và thuộc tính
+
+### Kịch bản đăng nhập trên trang luyện tập
+Trang https://the-internet.herokuapp.com/login công khai sẵn tài khoản demo ngay trên trang: tomsmith / SuperSecretPassword!
+Đây là dữ liệu giả dành cho người học, không phải tài khoản thật.
+Test case bằng lời:
+• Bước 1: Mở trang login.
+• Bước 2: Nhập username và password demo.
+• Bước 3: Bấm Login.
+• Mong đợi: chuyển sang trang /secure và hiện thông báo "You logged into a secure area!".
+
+### Code đăng nhập
+~~~python
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+driver = webdriver.Chrome()
+driver.get("https://the-internet.herokuapp.com/login")
+driver.find_element(By.ID, "username").send_keys("tomsmith")
+driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
+driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+flash = driver.find_element(By.ID, "flash").text
+print(flash)
+assert "You logged into a secure area!" in flash
+assert driver.current_url.endswith("/secure")
+print("ĐĂNG NHẬP THÀNH CÔNG")
+driver.quit()
+~~~
+Giải thích từng dòng:
+• send_keys("tomsmith"): gõ chữ vào ô, như người dùng gõ phím.
+• click(): bấm vào nút Login.
+• find_element(By.ID, "flash").text: đọc chữ trong khung thông báo.
+• assert điều_kiện: nếu điều kiện sai, Python dừng lại và báo AssertionError. Đây là phần "kiểm tra".
+• current_url.endswith("/secure"): địa chỉ kết thúc bằng /secure.
+Chạy: python login_test.py. Kết quả: in thông báo (có thêm ký tự × ở cuối) và dòng ĐĂNG NHẬP THÀNH CÔNG.
+
+### Xóa chữ, phím đặc biệt và đọc thuộc tính
+~~~python
+from selenium.webdriver.common.keys import Keys
+
+box = driver.find_element(By.ID, "username")
+box.send_keys("sai-ten")
+box.clear()
+box.send_keys("tomsmith")
+print(box.get_attribute("value"))
+print(box.get_attribute("type"))
+driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!", Keys.ENTER)
+~~~
+Giải thích từng dòng:
+• from selenium.webdriver.common.keys import Keys: lấy danh sách phím đặc biệt (ENTER, TAB, ESCAPE...).
+• box.clear(): xóa hết chữ trong ô.
+• get_attribute("value"): đọc giá trị đang có trong ô nhập. In ra: tomsmith
+• get_attribute("type"): đọc thuộc tính type. In ra: text
+• send_keys(..., Keys.ENTER): gõ mật khẩu rồi nhấn Enter, form được gửi mà không cần bấm nút.
+Lưu ý: với ô nhập, .text thường rỗng; muốn đọc nội dung đã gõ phải dùng get_attribute("value").
+
+### Kiểm tra trạng thái phần tử
+~~~python
+btn = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
+print(btn.is_displayed())
+print(btn.is_enabled())
+driver.get("https://the-internet.herokuapp.com/checkboxes")
+first = driver.find_element(By.CSS_SELECTOR, "#checkboxes input")
+if not first.is_selected():
+    first.click()
+assert first.is_selected()
+~~~
+Giải thích từng dòng:
+• is_displayed(): phần tử có đang hiện trên màn hình không (True/False).
+• is_enabled(): phần tử có đang bật, bấm được không.
+• is_selected(): checkbox hoặc radio có đang được chọn không.
+• if not first.is_selected(): first.click(): nếu chưa tick thì bấm để tick. Dòng click thụt vào 4 dấu cách vì thuộc về câu if.
+• assert first.is_selected(): khẳng định giờ đã được tick.
+
+### Lỗi thường gặp
+~~~text
+selenium.common.exceptions.ElementNotInteractableException: Message: element not interactable
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element is not clickable at point (500, 300). Other element would receive the click
+AssertionError
+~~~
+• Lỗi 1: phần tử có trong HTML nhưng đang bị ẩn hoặc chưa sẵn sàng. Chờ nó hiển thị (bài 5) hoặc kiểm tra bạn có tìm nhầm phần tử ẩn cùng tên.
+• Lỗi 2: có thứ khác đang che (popup, banner cookie, menu). Đóng thứ che trước, hoặc cuộn tới phần tử rồi bấm.
+• Lỗi 3: assert sai mà không có thông báo. Viết thêm lời nhắn: assert "secure" in url, f"URL thực tế: {url}" để biết vì sao sai.
+
+PRACTICE: Viết script đăng nhập với mật khẩu SAI trên trang login luyện tập, rồi assert thông báo trong #flash chứa "Your password is invalid!". In ra get_attribute("class") của khung #flash và cho biết class nào thể hiện lỗi.
+Q: Muốn đọc chữ người dùng đã gõ trong ô input, nên dùng gì?
+- element.text
++ element.get_attribute("value")
+- element.is_displayed()
+Q: Lệnh nào xóa nội dung đang có trong ô nhập?
+- element.delete()
+- element.send_keys("")
++ element.clear()
+Q: Câu lệnh assert dùng để làm gì?
++ Dừng và báo lỗi nếu điều kiện kiểm tra là sai
+- In chữ ra màn hình
+- Bấm vào phần tử
+
+## LESSON selenium-05 | Chờ đợi đúng cách: implicit và explicit wait
+
+### Vì sao phải chờ?
+Trang web hiện đại tải từng phần: khung trang hiện trước, dữ liệu tới sau.
+Code Selenium chạy rất nhanh, nhanh hơn trang web. Nếu tìm phần tử khi nó chưa xuất hiện sẽ bị NoSuchElementException.
+Ví dụ đời thường: gọi món ở quán ăn, bạn không thể ăn ngay giây tiếp theo, phải chờ món được bưng ra.
+Ba cách chờ:
+• time.sleep(n): chờ cứng n giây. Dễ nhưng tệ.
+• Implicit wait: đặt một lần, mọi lệnh find_element đều kiên nhẫn chờ tối đa n giây.
+• Explicit wait: chờ một điều kiện cụ thể (hiện ra, bấm được, có chữ...). Cách được khuyến nghị.
+
+### Cách tệ: time.sleep
+~~~python
+import time
+driver.get("https://the-internet.herokuapp.com/dynamic_loading/1")
+driver.find_element(By.CSS_SELECTOR, "#start button").click()
+time.sleep(10)
+print(driver.find_element(By.ID, "finish").text)
+~~~
+Giải thích từng dòng:
+• Trang dynamic_loading/1: bấm nút Start, thanh loading chạy khoảng 5 giây rồi hiện "Hello World!".
+• #start button: nút nằm trong phần tử id="start".
+• time.sleep(10): luôn đứng chờ đủ 10 giây, dù chữ đã hiện sau 5 giây. 100 test như vậy lãng phí gần 10 phút.
+• Nếu server chậm hơn 10 giây, test vẫn hỏng.
+Kết luận: sleep vừa chậm vừa không chắc chắn.
+
+### Implicit wait: chờ ngầm cho mọi lần tìm
+~~~python
+driver = webdriver.Chrome()
+driver.implicitly_wait(10)
+driver.get("https://the-internet.herokuapp.com/dynamic_loading/2")
+driver.find_element(By.CSS_SELECTOR, "#start button").click()
+print(driver.find_element(By.ID, "finish").text)
+~~~
+Giải thích từng dòng:
+• implicitly_wait(10): từ giờ, mỗi lần find_element không thấy phần tử, Selenium thử lại liên tục tối đa 10 giây.
+• dynamic_loading/2: phần tử #finish chỉ được thêm vào trang sau khi tải xong.
+• find_element(By.ID, "finish"): chờ đến khi phần tử xuất hiện rồi đọc chữ. In ra: Hello World!
+Hạn chế: implicit wait chỉ chờ phần tử "có mặt", không chờ nó "hiện ra" hay "bấm được". Không nên trộn implicit và explicit wait trong cùng dự án vì thời gian chờ có thể cộng dồn khó đoán.
+
+### Explicit wait: chờ đúng điều kiện cần
+~~~python
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver.get("https://the-internet.herokuapp.com/dynamic_loading/1")
+wait = WebDriverWait(driver, 10)
+wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#start button"))).click()
+finish = wait.until(EC.visibility_of_element_located((By.ID, "finish")))
+assert finish.text == "Hello World!"
+print("OK:", finish.text)
+~~~
+Giải thích từng dòng:
+• WebDriverWait: "đồng hồ chờ" của Selenium.
+• expected_conditions as EC: bộ điều kiện có sẵn, đặt tên ngắn là EC.
+• WebDriverWait(driver, 10): chờ tối đa 10 giây.
+• element_to_be_clickable((By..., "...")): chờ nút bấm được rồi trả phần tử, ta click luôn. Chú ý có HAI cặp ngoặc vì locator là một bộ (By, giá trị).
+• visibility_of_element_located: chờ phần tử hiện ra trên màn hình (ở trang 1, #finish có sẵn nhưng bị ẩn).
+• Xong sớm thì đi tiếp ngay, không lãng phí. Kết quả: OK: Hello World!
+
+### Các điều kiện EC hay dùng
+~~~python
+wait.until(EC.presence_of_element_located((By.ID, "content")))
+wait.until(EC.visibility_of_element_located((By.ID, "flash")))
+wait.until(EC.invisibility_of_element_located((By.ID, "loading")))
+wait.until(EC.text_to_be_present_in_element((By.ID, "finish"), "Hello"))
+wait.until(EC.url_contains("/secure"))
+wait.until(EC.title_is("The Internet"))
+wait.until(EC.alert_is_present())
+~~~
+Giải thích từng dòng:
+• presence_of_element_located: phần tử có trong HTML (có thể đang ẩn).
+• visibility_of_element_located: phần tử có và đang hiện.
+• invisibility_of_element_located: chờ phần tử biến mất, ví dụ biểu tượng loading.
+• text_to_be_present_in_element: phần tử chứa chữ mong muốn.
+• url_contains: địa chỉ trang chứa đoạn chữ.
+• title_is: tiêu đề trang bằng đúng chữ.
+• alert_is_present: có hộp thoại alert hiện lên (bài 8).
+
+### Lỗi thường gặp
+~~~text
+selenium.common.exceptions.TimeoutException: Message:
+selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found
+TypeError: __init__() takes 2 positional arguments but 3 were given
+~~~
+• Lỗi 1: điều kiện không thành sự thật trong thời gian chờ. Thông báo thường trống. Kiểm tra locator, kiểm tra điều kiện có hợp lý không, sau đó mới cân nhắc tăng thời gian chờ.
+• Lỗi 2: phần tử bạn giữ trong biến đã bị trang vẽ lại (refresh, chuyển trang, danh sách tải lại). Cách sửa: tìm lại phần tử ngay trước khi dùng, đừng giữ biến quá lâu.
+• Lỗi 3: quên cặp ngoặc thứ hai: EC.visibility_of_element_located(By.ID, "x") sai, phải là EC.visibility_of_element_located((By.ID, "x")).
+
+PRACTICE: Viết script cho trang https://the-internet.herokuapp.com/dynamic_controls: bấm nút "Remove", dùng explicit wait chờ dòng chữ "It's gone!" xuất hiện trong phần tử id="message", rồi in ra. Không dùng time.sleep.
+Q: Cách chờ nào được khuyến nghị nhất trong test Selenium?
+- time.sleep với số giây lớn
++ Explicit wait với WebDriverWait và điều kiện cụ thể
+- Không chờ gì cả
+Q: Lỗi StaleElementReferenceException thường do đâu?
+- Sai cú pháp CSS selector
++ Phần tử đã bị trang vẽ lại sau khi bạn tìm thấy nó
+- Mất kết nối mạng
+Q: Điểm khác chính giữa presence_of_element_located và visibility_of_element_located là gì?
++ presence chỉ cần phần tử có trong HTML, visibility đòi hỏi phần tử đang hiện ra
+- Hai điều kiện giống hệt nhau
+- visibility chỉ dùng cho hình ảnh
+
+## LESSON selenium-06 | Viết test với pytest: fixture, headless và chụp ảnh khi lỗi
+
+### pytest là gì?
+Script ở các bài trước chạy được nhưng chưa phải "bộ test": không có báo cáo pass/fail, không tự dọn dẹp.
+pytest là "giám thị phòng thi": tìm các bài test, chạy từng bài, chấm điểm và báo cáo.
+Quy tắc đặt tên để pytest tự tìm thấy:
+• Tên file bắt đầu bằng test_ (ví dụ test_login.py).
+• Tên hàm test bắt đầu bằng test_ (ví dụ def test_login_ok():).
+~~~python
+def test_cong():
+    assert 1 + 1 == 2
+
+def test_chuoi():
+    assert "secure" in "https://the-internet.herokuapp.com/secure"
+~~~
+Giải thích: hai hàm test đơn giản, mỗi hàm có một assert. Lưu vào test_vidu.py rồi chạy pytest -v, kết quả: 2 passed.
+
+### Bước 1: Tạo fixture driver trong conftest.py
+Fixture là phần "chuẩn bị và dọn dẹp" dùng chung, giống người trực phòng mở cửa trước giờ học và khóa cửa sau giờ học.
+~~~python
+import pytest
+from selenium import webdriver
+
+@pytest.fixture
+def driver():
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless=new")
+    options.add_argument("--window-size=1280,800")
+    drv = webdriver.Chrome(options=options)
+    yield drv
+    drv.quit()
+~~~
+Giải thích từng dòng:
+• conftest.py: file đặc biệt, pytest tự đọc, fixture trong đó dùng được cho mọi file test cùng thư mục.
+• @pytest.fixture: đánh dấu hàm driver là một fixture.
+• ChromeOptions(): bộ tùy chọn cho Chrome.
+• --headless=new: chạy Chrome ẩn, không hiện cửa sổ (nhanh, dùng được trên server CI). Xóa dòng này nếu muốn nhìn thấy.
+• --window-size=1280,800: đặt kích thước cửa sổ để giao diện ổn định khi chạy ẩn.
+• yield drv: đưa driver cho test dùng. Code sau yield chạy SAU khi test xong, dù pass hay fail.
+• drv.quit(): luôn đóng trình duyệt.
+
+### Bước 2: Viết test dùng fixture
+File test_login.py:
+~~~python
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+URL = "https://the-internet.herokuapp.com/login"
+
+def test_login_thanh_cong(driver):
+    driver.get(URL)
+    driver.find_element(By.ID, "username").send_keys("tomsmith")
+    driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
+    driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+    flash = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "flash")))
+    assert "You logged into a secure area!" in flash.text
+
+def test_login_sai_mat_khau(driver):
+    driver.get(URL)
+    driver.find_element(By.ID, "username").send_keys("tomsmith")
+    driver.find_element(By.ID, "password").send_keys("sai")
+    driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+    flash = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "flash")))
+    assert "Your password is invalid!" in flash.text
+~~~
+Giải thích từng dòng:
+• def test_login_thanh_cong(driver): chỉ cần ghi tên driver trong ngoặc, pytest tự gọi fixture và đưa driver vào.
+• URL viết hoa: hằng số dùng chung cho cả 2 test.
+• Mỗi test có trình duyệt riêng (fixture chạy lại cho từng test), nên test này không ảnh hưởng test kia.
+
+### Bước 3: Chạy pytest và đọc kết quả
+~~~bash
+pytest -v
+pytest -v test_login.py::test_login_thanh_cong
+pytest -v -k "sai"
+~~~
+Giải thích từng dòng:
+• pytest -v: chạy mọi test, -v (verbose) in tên từng test kèm PASSED/FAILED.
+• file::tên_hàm: chỉ chạy một test cụ thể.
+• -k "sai": chỉ chạy test có tên chứa chữ "sai".
+Kết quả mong đợi:
+test_login.py::test_login_thanh_cong PASSED
+test_login.py::test_login_sai_mat_khau PASSED
+2 passed in 6.21s
+Khi fail, pytest in đoạn code lỗi và giá trị thực tế ngay bên dưới, đọc từ dưới lên để thấy dòng gây lỗi.
+
+### Bước 4: Tự chụp màn hình khi test fail
+Thêm vào cuối conftest.py:
+~~~python
+import os
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+    if report.when == "call" and report.failed:
+        drv = item.funcargs.get("driver")
+        if drv is not None:
+            os.makedirs("screenshots", exist_ok=True)
+            drv.save_screenshot(f"screenshots/{item.name}.png")
+~~~
+Giải thích từng dòng:
+• pytest_runtest_makereport: "móc" (hook) mà pytest gọi sau mỗi giai đoạn của test.
+• outcome = yield ... get_result(): lấy kết quả của giai đoạn vừa chạy.
+• report.when == "call" and report.failed: chỉ xử lý khi phần thân test bị fail.
+• item.funcargs.get("driver"): lấy driver mà test đó đang dùng.
+• os.makedirs("screenshots", exist_ok=True): tạo thư mục screenshots nếu chưa có.
+• save_screenshot(...): lưu ảnh tên theo tên test, ví dụ screenshots/test_login_sai_mat_khau.png.
+Ảnh được chụp trước khi fixture quit trình duyệt, nên vẫn còn trang để chụp.
+
+### Lỗi thường gặp
+~~~text
+collected 0 items
+fixture 'driver' not found
+'pytest' is not recognized as an internal or external command
+~~~
+• Lỗi 1: pytest không tìm thấy test. Kiểm tra tên file bắt đầu bằng test_ và tên hàm bắt đầu bằng test_, và bạn đang đứng đúng thư mục.
+• Lỗi 2: conftest.py đặt sai chỗ hoặc sai tên (phải đúng conftest.py, cùng thư mục hoặc thư mục cha của file test).
+• Lỗi 3: chưa bật venv hoặc chưa cài pytest. Bật venv, hoặc chạy python -m pytest -v.
+
+PRACTICE: Tạo conftest.py với fixture driver (headless) và hook chụp ảnh khi fail. Viết 3 test cho trang login luyện tập: đúng tài khoản, sai mật khẩu, sai username ("Your username is invalid!"). Cố ý làm 1 test fail và kiểm tra ảnh trong thư mục screenshots.
+Q: pytest tự nhận diện hàm nào là test?
+- Mọi hàm trong mọi file .py
++ Hàm có tên bắt đầu bằng test_ trong file có tên bắt đầu bằng test_
+- Hàm có chữ assert ở dòng đầu
+Q: Trong fixture, code nằm sau yield chạy khi nào?
+- Trước khi test bắt đầu
++ Sau khi test kết thúc, dù pass hay fail
+- Chỉ khi test pass
+Q: Tùy chọn --headless=new dùng để làm gì?
+- Mở Chrome ở chế độ ẩn danh để xóa cookie
+- Bật chế độ toàn màn hình
++ Chạy Chrome không hiện cửa sổ
+
+## LESSON selenium-07 | Page Object Model với Selenium
+
+### Vì sao cần Page Object?
+Khi có 50 test cùng đăng nhập, mỗi test lặp lại 3 dòng find_element giống nhau.
+Một ngày lập trình viên đổi id="username" thành id="user-name": bạn phải sửa 50 chỗ.
+Page Object Model (POM): mỗi trang web có một class riêng chứa locator và thao tác của trang đó.
+• Giống tờ "hướng dẫn sử dụng" cho từng trang: test chỉ cần nói "đăng nhập với A, B".
+• Đổi giao diện: sửa một chỗ trong class, 50 test vẫn chạy.
+• Test đọc như kịch bản nghiệp vụ, dễ cho người khác review.
+
+### Cấu trúc thư mục
+~~~text
+selenium-hoc/
+├── pages/
+│   ├── __init__.py
+│   ├── login_page.py
+│   └── secure_page.py
+├── tests/
+│   ├── conftest.py
+│   └── test_login_pom.py
+└── requirements.txt
+~~~
+Giải thích từng dòng:
+• pages/: chứa các Page Object.
+• __init__.py: file rỗng, đánh dấu pages là một "gói" Python để import được.
+• login_page.py, secure_page.py: mỗi trang một file.
+• tests/: chứa conftest.py (fixture driver) và các file test.
+• requirements.txt: danh sách thư viện (pip freeze > requirements.txt).
+Chạy pytest từ thư mục gốc selenium-hoc để Python tìm thấy gói pages (nếu báo lỗi import, chạy python -m pytest -v).
+
+### Viết class LoginPage
+~~~python
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+class LoginPage:
+    URL = "https://the-internet.herokuapp.com/login"
+    USERNAME = (By.ID, "username")
+    PASSWORD = (By.ID, "password")
+    SUBMIT = (By.CSS_SELECTOR, "button[type='submit']")
+    FLASH = (By.ID, "flash")
+
+    def __init__(self, driver):
+        self.driver = driver
+        self.wait = WebDriverWait(driver, 10)
+
+    def open(self):
+        self.driver.get(self.URL)
+        return self
+
+    def login(self, username, password):
+        self.driver.find_element(*self.USERNAME).send_keys(username)
+        self.driver.find_element(*self.PASSWORD).send_keys(password)
+        self.driver.find_element(*self.SUBMIT).click()
+
+    def flash_text(self):
+        return self.wait.until(EC.visibility_of_element_located(self.FLASH)).text
+~~~
+Giải thích từng dòng:
+• class LoginPage: khuôn mẫu cho trang đăng nhập.
+• USERNAME = (By.ID, "username"): locator lưu thành một bộ, đặt tên viết hoa cho dễ nhận ra.
+• __init__(self, driver): chạy khi tạo đối tượng, giữ driver và tạo đồng hồ chờ 10 giây.
+• open(): mở trang, return self để có thể viết liền LoginPage(driver).open().
+• login(...): gõ username, password, bấm nút. Dấu * trong find_element(*self.USERNAME) "mở bộ" thành 2 tham số By.ID, "username".
+• flash_text(): chờ thông báo hiện rồi trả về chữ.
+
+### Test dùng LoginPage
+~~~python
+from pages.login_page import LoginPage
+
+def test_login_dung(driver):
+    page = LoginPage(driver).open()
+    page.login("tomsmith", "SuperSecretPassword!")
+    assert "You logged into a secure area!" in page.flash_text()
+
+def test_login_sai_username(driver):
+    page = LoginPage(driver).open()
+    page.login("khongtontai", "abc")
+    assert "Your username is invalid!" in page.flash_text()
+~~~
+Giải thích từng dòng:
+• from pages.login_page import LoginPage: lấy class từ file pages/login_page.py.
+• LoginPage(driver).open(): tạo Page Object và mở trang.
+• page.login(...): một dòng thay cho 3 dòng tìm và gõ.
+• assert ... in page.flash_text(): phần kiểm tra vẫn nằm trong test, Page Object chỉ lo "làm".
+Chạy: python -m pytest -v. Kết quả mong đợi: 2 passed.
+
+### Lỗi thường gặp
+~~~text
+ModuleNotFoundError: No module named 'pages'
+TypeError: LoginPage.login() missing 1 required positional argument: 'password'
+AttributeError: 'LoginPage' object has no attribute 'driver'
+~~~
+• Lỗi 1: Python không thấy gói pages. Chạy lệnh từ thư mục gốc dự án bằng python -m pytest, và kiểm tra có file pages/__init__.py.
+• Lỗi 2: gọi hàm thiếu tham số. Truyền đủ username và password.
+• Lỗi 3: quên self. trong __init__ (viết driver = driver thay vì self.driver = driver).
+• Lời khuyên: đừng để Page Object chứa assert; giữ cho class "ngây thơ", để test quyết định đúng sai.
+
+PRACTICE: Viết class SecurePage (trang /secure) có hàm heading_text() trả về chữ thẻ h2 và hàm logout() bấm link Logout (CSS a[href='/logout']). Viết test: đăng nhập đúng, kiểm tra heading chứa "Secure Area", logout rồi kiểm tra flash chứa "You logged out of the secure area!".
+Q: Trong POM, nên đặt câu lệnh assert ở đâu?
+- Trong class Page Object
++ Trong hàm test
+- Trong file requirements.txt
+Q: Dấu * trong find_element(*self.USERNAME) có tác dụng gì?
++ Mở bộ (By.ID, "username") thành 2 tham số riêng
+- Nhân giá trị locator lên 2 lần
+- Tìm tất cả phần tử khớp
+Q: Báo lỗi "No module named 'pages'", việc đầu tiên nên kiểm tra là gì?
+- Cài lại Chrome
+- Đổi tên tests thành test
++ Có chạy từ thư mục gốc dự án và có file pages/__init__.py chưa
+
+## LESSON selenium-08 | Dropdown, alert, iframe và nhiều cửa sổ
+
+### Dropdown với Select
+~~~python
+from selenium.webdriver.support.ui import Select
+
+driver.get("https://the-internet.herokuapp.com/dropdown")
+dropdown = Select(driver.find_element(By.ID, "dropdown"))
+dropdown.select_by_visible_text("Option 1")
+print(dropdown.first_selected_option.text)
+dropdown.select_by_value("2")
+print(dropdown.first_selected_option.text)
+print([o.text for o in dropdown.options])
+~~~
+Giải thích từng dòng:
+• Select: lớp hỗ trợ riêng cho thẻ select (danh sách thả xuống).
+• Select(driver.find_element(...)): bọc phần tử select để dùng các hàm chọn.
+• select_by_visible_text("Option 1"): chọn theo chữ người dùng nhìn thấy.
+• first_selected_option.text: đọc lựa chọn hiện tại. In ra: Option 1
+• select_by_value("2"): chọn theo thuộc tính value trong HTML. In ra: Option 2
+• dropdown.options: danh sách mọi lựa chọn. In ra: ['Please select an option', 'Option 1', 'Option 2']
+Lưu ý: Select chỉ dùng cho thẻ select thật. Dropdown "tự chế" bằng div thì bấm mở rồi bấm vào mục như phần tử thường.
+
+### Hộp thoại alert, confirm, prompt
+~~~python
+driver.get("https://the-internet.herokuapp.com/javascript_alerts")
+driver.find_element(By.XPATH, "//button[text()='Click for JS Alert']").click()
+alert = WebDriverWait(driver, 5).until(EC.alert_is_present())
+print(alert.text)
+alert.accept()
+print(driver.find_element(By.ID, "result").text)
+driver.find_element(By.XPATH, "//button[text()='Click for JS Prompt']").click()
+prompt = WebDriverWait(driver, 5).until(EC.alert_is_present())
+prompt.send_keys("Xin chao")
+prompt.accept()
+print(driver.find_element(By.ID, "result").text)
+~~~
+Giải thích từng dòng:
+• Bấm nút "Click for JS Alert" để bật hộp thoại của trình duyệt (không phải HTML, nên không find_element được).
+• EC.alert_is_present(): chờ hộp thoại xuất hiện và trả về đối tượng alert.
+• alert.text: đọc chữ trong hộp thoại. In ra: I am a JS Alert
+• alert.accept(): bấm OK. Muốn bấm Cancel thì dùng alert.dismiss().
+• #result: dòng kết quả trên trang. In ra: You successfully clicked an alert
+• Với prompt: send_keys gõ chữ vào hộp thoại rồi accept. In ra: You entered: Xin chao
+
+### Làm việc với iframe
+iframe là "trang con nằm trong trang mẹ", giống một chiếc TV nhỏ đặt trong phòng khách. Muốn bấm kênh trên TV nhỏ, phải bước tới TV đó trước.
+~~~python
+driver.get("https://the-internet.herokuapp.com/iframe")
+driver.switch_to.frame("mce_0_ifr")
+print(driver.find_element(By.ID, "tinymce").text)
+driver.switch_to.default_content()
+print(driver.find_element(By.TAG_NAME, "h3").text)
+~~~
+Giải thích từng dòng:
+• Trang này có một khung soạn thảo (TinyMCE) nằm trong iframe id="mce_0_ifr".
+• switch_to.frame("mce_0_ifr"): chuyển "tầm nhìn" của driver vào trong iframe (truyền id, name hoặc phần tử iframe đều được).
+• find_element(By.ID, "tinymce").text: đọc nội dung trong khung. In ra: Your content goes here.
+• switch_to.default_content(): quay ra trang mẹ.
+• Đọc tiêu đề h3 của trang mẹ. In ra: An iFrame containing the TinyMCE WYSIWYG Editor
+Nếu không switch, tìm phần tử trong iframe sẽ luôn bị NoSuchElementException.
+
+### Nhiều tab và cửa sổ
+~~~python
+driver.get("https://the-internet.herokuapp.com/windows")
+goc = driver.current_window_handle
+driver.find_element(By.LINK_TEXT, "Click Here").click()
+WebDriverWait(driver, 5).until(EC.number_of_windows_to_be(2))
+for handle in driver.window_handles:
+    if handle != goc:
+        driver.switch_to.window(handle)
+print(driver.find_element(By.TAG_NAME, "h3").text)
+driver.close()
+driver.switch_to.window(goc)
+print(driver.title)
+~~~
+Giải thích từng dòng:
+• current_window_handle: "mã số" của cửa sổ hiện tại, lưu lại để quay về.
+• Bấm link "Click Here" mở tab mới.
+• number_of_windows_to_be(2): chờ đến khi có 2 cửa sổ.
+• window_handles: danh sách mã số mọi cửa sổ. Vòng lặp tìm cái khác cửa sổ gốc rồi switch_to.window sang đó.
+• Đọc h3 của tab mới. In ra: New Window
+• driver.close(): đóng tab hiện tại (khác quit là đóng tất cả).
+• switch_to.window(goc): quay về tab gốc. In ra: The Internet
+
+### Lỗi thường gặp
+~~~text
+selenium.common.exceptions.UnexpectedAlertPresentException: Alert Text: I am a JS Alert
+selenium.common.exceptions.NoAlertPresentException: Message: no such alert
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+selenium.common.exceptions.UnexpectedTagNameException: Select only works on <select> elements, not on div
+~~~
+• Lỗi 1: alert đang mở mà bạn làm việc khác. Xử lý alert (accept hoặc dismiss) trước.
+• Lỗi 2: gọi switch_to.alert khi alert chưa hiện. Dùng EC.alert_is_present() để chờ.
+• Lỗi 3: đã close() tab nhưng chưa switch về tab khác. Luôn switch_to.window(goc) sau khi close.
+• Lỗi 4: dùng Select cho dropdown không phải thẻ select. Bấm mở dropdown và chọn mục như phần tử thường.
+
+PRACTICE: Viết một file pytest gồm 3 test trên trang luyện tập: (1) chọn "Option 2" ở /dropdown và assert lựa chọn hiện tại, (2) bấm "Click for JS Confirm", bấm Cancel và assert #result là "You clicked: Cancel", (3) mở tab mới ở /windows và assert h3 là "New Window".
+Q: Muốn tìm phần tử nằm trong iframe, bạn phải làm gì trước?
++ Gọi driver.switch_to.frame(...) để chuyển vào iframe
+- Phóng to cửa sổ trình duyệt
+- Dùng XPath tuyệt đối
+Q: Lệnh nào bấm nút Cancel trên hộp thoại confirm?
+- alert.accept()
++ alert.dismiss()
+- alert.close()
+Q: driver.close() khác driver.quit() thế nào?
+- Hai lệnh giống hệt nhau
+- close() đóng tất cả, quit() chỉ đóng tab hiện tại
++ close() chỉ đóng tab hiện tại, quit() đóng toàn bộ trình duyệt và driver

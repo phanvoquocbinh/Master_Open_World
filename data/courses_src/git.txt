@@ -1,0 +1,747 @@
+=== COURSE git
+name: Git & GitHub cơ bản
+icon: 🌿
+floor: 1
+room: 103
+level: Nhập môn → Cơ bản
+hours: 6
+summary: Dùng Git để lưu lịch sử thay đổi của test code như các điểm lưu game, làm việc với nhánh, xử lý conflict và cộng tác qua GitHub bằng Pull Request.
+
+## LESSON git-01 | Git là gì và cài đặt Git
+
+### Git giống tính năng "lưu game"
+Khi chơi game, trước trận đánh boss bạn thường lưu game. Thua thì tải lại điểm lưu, không phải chơi lại từ đầu.
+Git làm điều tương tự cho thư mục code của bạn:
+• Mỗi lần "lưu" gọi là một commit: một ảnh chụp toàn bộ file tại thời điểm đó, kèm lời ghi chú.
+• Bạn có thể xem lại lịch sử, so sánh, quay về phiên bản cũ bất cứ lúc nào.
+• Nhiều người cùng sửa một dự án mà không ghi đè công sức của nhau.
+Với tester: test automation là code. Không có Git, bạn sẽ có các file kiểu login_test_final_v3_THAT_SU_FINAL.js. Có Git, chỉ cần một file và lịch sử rõ ràng.
+
+### Ba khu vực trong Git: đóng gói hàng gửi đi
+~~~text
+[Working directory]  --git add-->  [Staging area]  --git commit-->  [Repository]
+  Bàn làm việc                       Thùng hàng                       Kho lưu trữ
+  (file bạn đang sửa)                (chọn file sẽ lưu)               (lịch sử commit)
+~~~
+Giải thích:
+• Working directory: thư mục bạn đang làm việc, sửa file thoải mái.
+• Staging area: "thùng hàng" chờ niêm phong. git add bỏ file vào thùng. Bạn chọn được file nào lưu, file nào chưa.
+• Repository (repo): kho lưu trữ. git commit niêm phong thùng hàng thành một điểm lưu vĩnh viễn, nằm trong thư mục ẩn .git.
+Nhớ hình ảnh này, mọi lệnh Git cơ bản đều xoay quanh ba khu vực đó.
+
+### Cài Git for Windows
+Cách 1: tải tại git-scm.com > Download for Windows, chạy bộ cài, giữ các lựa chọn mặc định.
+Cách 2: dùng winget trong PowerShell:
+~~~bash
+winget install Git.Git
+git --version
+~~~
+Giải thích từng dòng:
+• dòng 1: cài Git for Windows. Gói này kèm Git Bash và Git Credential Manager (dùng để đăng nhập GitHub an toàn ở bài 7).
+• dòng 2: kiểm tra cài đặt. Nhớ mở terminal MỚI sau khi cài.
+Kết quả mong đợi: git version 2.x.x.windows.1 (số có thể khác).
+Ở màn hình "default editor" của bộ cài, nên chọn Visual Studio Code thay vì Vim cho dễ dùng.
+
+### Git khác GitHub thế nào?
+~~~text
+Git     = phần mềm chạy trên máy bạn, quản lý lịch sử thay đổi (offline được)
+GitHub  = website lưu repo trên mạng, để chia sẻ, review và chạy CI
+Tương tự: GitLab, Bitbucket, Azure Repos cũng là "GitHub" của các công ty khác
+~~~
+Giải thích:
+• Git giống cuốn sổ nhật ký bạn giữ ở nhà.
+• GitHub giống thư viện chung nơi bạn gửi bản sao cuốn sổ để cả nhóm cùng đọc và góp ý.
+• Bạn có thể dùng Git mà không cần GitHub, nhưng làm việc nhóm thì cần một nơi chung như GitHub.
+
+### Lỗi thường gặp
+~~~text
+git : The term 'git' is not recognized as the name of a cmdlet, function, script file, or operable program.
+
+'git' is not recognized as an internal or external command, operable program or batch file.
+~~~
+Nguyên nhân:
+• Chưa cài Git, hoặc cài rồi nhưng terminal đang mở từ trước khi cài nên chưa nhận PATH mới.
+Cách sửa:
+• Đóng mọi cửa sổ terminal và VS Code, mở lại rồi chạy git --version.
+• Vẫn lỗi: chạy where.exe git. Nếu không thấy gì, cài lại Git và giữ tùy chọn "Git from the command line and also from 3rd-party software".
+
+PRACTICE: Cài Git for Windows, mở terminal mới và chạy git --version. Viết vào notes\git.txt định nghĩa bằng lời của bạn cho: commit, staging area, repository.
+Q: Trong Git, một commit giống với điều gì nhất?
+- Một file nén gửi qua email
++ Một điểm lưu game kèm ghi chú
+- Một tài khoản GitHub
+Q: Lệnh git add đưa file vào khu vực nào?
+- Repository
++ Staging area
+- GitHub
+Q: Phát biểu nào đúng về Git và GitHub?
+- Git và GitHub là cùng một phần mềm
+- Phải có GitHub thì mới dùng được Git
++ Git chạy trên máy bạn, GitHub là dịch vụ lưu repo trên mạng để cộng tác
+
+## LESSON git-02 | Cấu hình lần đầu và tạo repository
+
+### Cho Git biết bạn là ai
+Mỗi commit đều ghi tên tác giả, giống chữ ký trên biên bản. Chỉ cần làm một lần trên mỗi máy.
+~~~bash
+git config --global user.name "Nguyen Van An"
+git config --global user.email "an.tester@example.com"
+git config --global init.defaultBranch main
+git config --global core.editor "code --wait"
+git config --global --list
+~~~
+Giải thích từng dòng:
+• dòng 1: đặt tên hiển thị trong mọi commit. --global nghĩa là áp dụng cho mọi repo trên máy này.
+• dòng 2: đặt email. Nên dùng email tài khoản GitHub (hoặc email noreply mà GitHub cung cấp nếu muốn giấu email thật).
+• dòng 3: nhánh mặc định của repo mới tên là main.
+• dòng 4: dùng VS Code để soạn message khi cần, thay vì Vim.
+• dòng 5: xem lại toàn bộ cấu hình đã đặt.
+Kết quả mong đợi: các dòng như user.name=Nguyen Van An, user.email=an.tester@example.com, init.defaultbranch=main.
+
+### Tạo repository đầu tiên: git init
+~~~bash
+cd ~\qa-lab\projects
+mkdir git-demo
+cd git-demo
+git init
+~~~
+Giải thích từng dòng:
+• dòng 1–3: tạo và đi vào thư mục dự án git-demo.
+• dòng 4: git init biến thư mục thường thành một repo Git, giống "bật chế độ lưu game" cho thư mục này.
+Kết quả mong đợi:
+Initialized empty Git repository in C:/Users/an/qa-lab/projects/git-demo/.git/
+Chỉ chạy git init MỘT lần cho mỗi dự án. Với dự án có sẵn trên GitHub, bạn sẽ dùng git clone (bài 7) thay vì init.
+
+### git status: lệnh bạn dùng nhiều nhất
+~~~bash
+git status
+~~~
+Giải thích:
+• git status cho biết: đang ở nhánh nào, file nào thay đổi, file nào đã vào staging, file nào Git chưa theo dõi.
+Kết quả mong đợi với repo mới:
+On branch main
+No commits yet
+nothing to commit (create/copy files and use "git add" to track)
+Thói quen tốt: chạy git status trước và sau mỗi lệnh Git khác. Giống liếc nhìn bản đồ trước khi đi tiếp.
+
+### Thư mục ẩn .git
+~~~bash
+ls -Force
+ls .git
+~~~
+Giải thích từng dòng:
+• dòng 1: ls bình thường không hiện file ẩn. -Force hiện cả mục ẩn, bạn sẽ thấy thư mục .git.
+• dòng 2: xem bên trong .git: HEAD, config, objects, refs... Đây là "kho lưu trữ" chứa toàn bộ lịch sử.
+Cảnh báo:
+• Không tự sửa hay xóa gì trong .git. Xóa .git là mất toàn bộ lịch sử, thư mục trở lại thành thư mục thường.
+• Không tạo repo lồng trong repo (chạy git init bên trong thư mục con của một repo khác).
+
+### Lỗi thường gặp
+~~~text
+fatal: not a git repository (or any of the parent directories): .git
+
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+~~~
+• not a git repository: bạn đang đứng ở thư mục chưa được git init (hoặc chưa cd vào đúng thư mục dự án). Chạy pwd, cd vào đúng thư mục có .git.
+• Author identity unknown: chưa cấu hình tên và email. Chạy hai lệnh git config ở slide đầu rồi commit lại.
+• Lỡ chạy git init nhầm ở thư mục người dùng (C:\Users\an): mọi thư mục con bỗng thành một phần của repo. Xóa thư mục C:\Users\an\.git để hủy (chỉ thư mục .git đó, kiểm tra kỹ đường dẫn).
+
+PRACTICE: Cấu hình user.name, user.email, init.defaultBranch cho máy của bạn. Tạo thư mục projects\git-demo, chạy git init, git status, rồi ls -Force để thấy thư mục .git.
+Q: Lệnh nào biến một thư mục thường thành Git repository?
+- git start
++ git init
+- git create
+- git new
+Q: Tùy chọn --global trong git config có ý nghĩa gì?
+- Cấu hình được đẩy lên GitHub
++ Cấu hình áp dụng cho mọi repo trên máy của bạn
+- Cấu hình chỉ áp dụng cho repo hiện tại
+Q: Bạn gặp lỗi fatal: not a git repository. Nguyên nhân hay gặp nhất là gì?
+- Mất kết nối internet
+- Chưa có tài khoản GitHub
++ Terminal đang đứng ở thư mục chưa phải repo Git
+
+## LESSON git-03 | add, commit, log: tạo điểm lưu đầu tiên
+
+### Quy trình 3 bước: sửa, gom, lưu
+Tạo file test-cases.txt trong git-demo với nội dung:
+~~~text
+TC01 - Đăng nhập với tài khoản hợp lệ -> vào trang chủ
+TC02 - Đăng nhập sai mật khẩu -> báo lỗi
+TC03 - Để trống username -> báo bắt buộc nhập
+~~~
+Rồi chạy git status, bạn sẽ thấy:
+• Untracked files: test-cases.txt (màu đỏ). Git thấy file nhưng chưa theo dõi.
+• nothing added to commit but untracked files present (use "git add" to track)
+Quy trình mỗi lần lưu: sửa file → git add (gom vào thùng) → git commit (niêm phong).
+
+### git add: bỏ file vào thùng hàng
+~~~bash
+git add test-cases.txt
+git status
+git add .
+~~~
+Giải thích từng dòng:
+• dòng 1: đưa đúng một file vào staging area.
+• dòng 2: kiểm tra lại. Kết quả: Changes to be committed: new file: test-cases.txt (màu xanh).
+• dòng 3: dấu chấm nghĩa là thêm TẤT CẢ thay đổi trong thư mục hiện tại. Tiện nhưng phải xem git status trước để không vô tình thêm file rác hoặc file bí mật.
+Muốn bỏ file ra khỏi thùng (chưa commit): git restore --staged test-cases.txt.
+
+### git commit: tạo điểm lưu
+~~~bash
+git commit -m "Add login test cases"
+~~~
+Giải thích:
+• commit niêm phong mọi thứ trong staging area thành một điểm lưu.
+• -m "..." là message mô tả thay đổi, bắt buộc phải có.
+Kết quả mong đợi:
+[main (root-commit) 3f2a1bc] Add login test cases
+ 1 file changed, 3 insertions(+)
+ create mode 100644 test-cases.txt
+• 3f2a1bc là mã commit rút gọn (hash), mỗi commit một mã duy nhất.
+• root-commit nghĩa là commit đầu tiên của repo.
+Sau đó git status sẽ báo: nothing to commit, working tree clean.
+
+### Xem thay đổi và lịch sử: git diff, git log
+Thêm dòng TC04 vào test-cases.txt rồi chạy:
+~~~bash
+git diff
+git add test-cases.txt
+git commit -m "Add TC04 for locked account"
+git log --oneline
+~~~
+Giải thích từng dòng:
+• dòng 1: git diff hiện những gì đã sửa nhưng chưa add. Dòng bắt đầu bằng + (xanh) là thêm, - (đỏ) là xóa. Nhấn q để thoát nếu màn hình dừng lại.
+• dòng 2–3: gom và lưu thay đổi.
+• dòng 4: xem lịch sử, mỗi commit một dòng, mới nhất ở trên.
+Kết quả mong đợi:
+8d9e0f1 (HEAD -> main) Add TC04 for locked account
+3f2a1bc Add login test cases
+HEAD -> main cho biết bạn đang đứng ở commit mới nhất của nhánh main.
+
+### Viết commit message tốt
+~~~text
+Tốt:
+  Add negative tests for login form
+  Fix flaky checkout test by waiting for payment iframe
+  Update base URL for staging environment
+
+Chưa tốt:
+  update
+  fix bug
+  asdfgh
+~~~
+Giải thích:
+• Message tốt trả lời câu hỏi "commit này làm gì?" trong một câu ngắn, bắt đầu bằng động từ.
+• Sáu tháng sau đọc git log --oneline, bạn (và đồng nghiệp) phải hiểu ngay.
+• Mỗi commit nên là một thay đổi có ý nghĩa, không gom 10 việc khác nhau vào một commit.
+
+### Lỗi thường gặp
+~~~text
+nothing added to commit but untracked files present (use "git add" to track)
+
+no changes added to commit (use "git add" and/or "git commit -a")
+~~~
+• Hai lỗi trên: bạn commit mà quên git add. Chạy git add trước, rồi commit lại.
+• Gõ git commit (thiếu -m) và cửa sổ lạ hiện ra:
+  Nếu là VS Code: viết message ở dòng đầu, lưu (Ctrl+S) và đóng tab đó.
+  Nếu là Vim (màn hình đen có dấu ~): nhấn Esc, gõ :q! rồi Enter để thoát không commit, sau đó dùng git commit -m "...".
+• Lỡ viết sai message ở commit mới nhất (chưa push): git commit --amend -m "Message đúng".
+
+PRACTICE: Trong git-demo, tạo 3 commit riêng: (1) thêm test-cases.txt, (2) thêm 2 test case cho chức năng tìm kiếm, (3) sửa chính tả một dòng. Mỗi lần dùng git status và git diff trước khi commit. Cuối cùng chụp màn hình git log --oneline.
+Q: Thứ tự đúng để lưu một thay đổi vào lịch sử Git là gì?
+- git commit rồi git add
++ Sửa file, git add, rồi git commit
+- git log rồi git commit
+Q: Lệnh nào hiển thị lịch sử commit gọn, mỗi commit một dòng?
+- git status
+- git diff
++ git log --oneline
+Q: Git báo nothing added to commit but untracked files present. Bạn cần làm gì?
++ Chạy git add cho file cần lưu rồi commit lại
+- Cài lại Git
+- Xóa thư mục .git
+
+## LESSON git-04 | .gitignore: những thứ không được commit
+
+### Không phải file nào cũng nên lưu vào Git
+Hãy coi repo như hồ sơ dự án nộp cho cả nhóm: chỉ nộp tài liệu gốc, không nộp rác hay chìa khóa két sắt.
+Không nên commit:
+• node_modules: thư viện tải về, rất nặng, ai cũng tự cài lại được bằng npm install.
+• test-results, playwright-report, allure-results: kết quả chạy test, sinh ra mỗi lần chạy.
+• .env: chứa mật khẩu, API key, token. Lộ ra là sự cố bảo mật.
+• File log, file tạm, file cấu hình riêng của máy.
+Giải pháp: file .gitignore liệt kê những gì Git phải "làm ngơ".
+
+### Tạo file .gitignore
+Tạo file tên đúng là .gitignore (có dấu chấm đầu, không có đuôi) ở thư mục gốc repo:
+~~~text
+# Thư viện
+node_modules/
+
+# Kết quả chạy test
+test-results/
+playwright-report/
+blob-report/
+allure-results/
+*.log
+
+# Bí mật và cấu hình cục bộ
+.env
+.env.*
+!.env.example
+
+# File hệ thống
+.DS_Store
+Thumbs.db
+~~~
+Giải thích từng phần:
+• Dòng bắt đầu bằng # là ghi chú.
+• Tên kết thúc bằng / là bỏ qua cả thư mục.
+• *.log: dấu * là "bất kỳ", bỏ qua mọi file đuôi .log.
+• .env.* bỏ qua .env.staging, .env.local...
+• !.env.example: dấu ! là ngoại lệ, VẪN commit file mẫu này.
+
+### Kiểm tra .gitignore hoạt động
+~~~bash
+New-Item -ItemType File .env
+mkdir test-results
+New-Item -ItemType File test-results\run.log
+git status
+git check-ignore -v .env
+~~~
+Giải thích từng dòng:
+• dòng 1–3: tạo thử file .env và một file kết quả test.
+• dòng 4: git status KHÔNG được liệt kê .env hay test-results. Chỉ thấy .gitignore là file mới.
+• dòng 5: hỏi Git vì sao .env bị bỏ qua.
+Kết quả mong đợi của dòng 5:
+.gitignore:12:.env	.env
+Nghĩa là: dòng 12 trong .gitignore có mẫu .env khớp với file .env.
+Cuối cùng commit chính file .gitignore: git add .gitignore rồi git commit -m "Add gitignore".
+
+### .env và .env.example: chia sẻ cấu trúc, giữ bí mật
+~~~text
+# .env.example  (được commit, giá trị giả)
+BASE_URL=https://jsonplaceholder.typicode.com
+API_TOKEN=replace-me
+TEST_USER=demo_user
+
+# .env  (KHÔNG commit, giá trị thật chỉ nằm trên máy bạn)
+BASE_URL=https://jsonplaceholder.typicode.com
+API_TOKEN=<token thật của bạn>
+TEST_USER=demo_user
+~~~
+Giải thích:
+• .env.example cho đồng nghiệp biết cần những biến gì, nhưng không chứa bí mật.
+• Mỗi người copy .env.example thành .env rồi điền giá trị thật: Copy-Item .env.example .env
+• Trên CI (GitHub Actions), bí mật được lưu trong Secrets của repo, không nằm trong code.
+Quy tắc vàng: không bao giờ viết mật khẩu hay token trực tiếp trong file test.
+
+### Lỗi thường gặp
+~~~bash
+git rm -r --cached node_modules
+git rm --cached .env
+git commit -m "Stop tracking node_modules and .env"
+~~~
+Tình huống: đã lỡ commit node_modules hoặc .env TRƯỚC khi có .gitignore. Thêm vào .gitignore rồi mà git status vẫn báo thay đổi, vì Git đã theo dõi chúng từ trước.
+Giải thích từng dòng:
+• dòng 1: --cached xóa thư mục khỏi sự theo dõi của Git nhưng GIỮ file trên máy. -r là cả thư mục.
+• dòng 2: tương tự cho file .env.
+• dòng 3: commit việc ngừng theo dõi.
+Cực kỳ quan trọng: nếu .env chứa bí mật thật đã bị push lên GitHub, xóa file là CHƯA đủ vì lịch sử vẫn còn. Coi như bí mật đã lộ: báo trưởng nhóm và đổi (rotate) mật khẩu/token đó ngay.
+
+PRACTICE: Tạo .gitignore cho git-demo theo mẫu trong bài. Tạo .env.example (giá trị giả) và .env, tạo thư mục test-results có một file log. Chạy git status xác nhận chỉ thấy .gitignore và .env.example, rồi commit hai file đó.
+Q: Vì sao không commit thư mục node_modules?
+- Vì Git không đọc được file JavaScript
++ Vì nó rất nặng và có thể cài lại từ package.json bằng npm install
+- Vì GitHub cấm thư mục tên node_modules
+Q: Dòng !.env.example trong .gitignore có tác dụng gì?
+- Xóa file .env.example
++ Tạo ngoại lệ để .env.example vẫn được commit
+- Mã hóa file .env.example
+Q: Bạn phát hiện file .env có token thật đã được push lên GitHub. Việc quan trọng nhất là gì?
+- Chỉ cần xóa file và commit lại
+- Đổi tên file thành .env.old
++ Báo trưởng nhóm và đổi (rotate) token đó ngay vì nó coi như đã lộ
+
+## LESSON git-05 | Branch: làm việc trên bản nháp an toàn
+
+### Branch là bản nháp song song
+Tưởng tượng main là bản hợp đồng chính thức. Bạn không sửa thẳng lên đó mà photocopy ra bản nháp, sửa thoải mái, khi ổn mới đưa vào bản chính.
+Branch (nhánh) chính là bản nháp đó:
+• main: nhánh chính, code luôn ổn định, chạy được.
+• feature/login-tests: nhánh bạn tạo để viết thêm test đăng nhập.
+• Sai thì bỏ nhánh, main không hề hấn gì.
+~~~bash
+git branch
+~~~
+Giải thích: liệt kê các nhánh. Dấu * đánh dấu nhánh bạn đang đứng.
+Kết quả mong đợi: * main
+
+### Tạo và chuyển nhánh: git switch
+~~~bash
+git switch -c feature/search-tests
+git branch
+git switch main
+git switch feature/search-tests
+~~~
+Giải thích từng dòng:
+• dòng 1: -c (create) tạo nhánh mới từ vị trí hiện tại và chuyển sang luôn. Kết quả: Switched to a new branch 'feature/search-tests'.
+• dòng 2: thấy hai nhánh, dấu * ở feature/search-tests.
+• dòng 3: quay về main.
+• dòng 4: chuyển lại nhánh tính năng.
+Đặt tên nhánh: chữ thường, gạch ngang, có tiền tố như feature/, fix/, test/.
+Lệnh cũ git checkout -b vẫn chạy được và hay gặp trên mạng, nhưng git switch dễ hiểu hơn cho người mới.
+
+### Commit trên nhánh
+~~~bash
+Add-Content test-cases.txt "TC05 - Search by keyword -> results are shown"
+git add test-cases.txt
+git commit -m "Add search test case TC05"
+git log --oneline
+git switch main
+Get-Content test-cases.txt
+~~~
+Giải thích từng dòng:
+• dòng 1: thêm một test case vào file (đang ở nhánh feature/search-tests).
+• dòng 2–3: lưu thành commit trên nhánh này.
+• dòng 4: commit mới nằm trên cùng, đánh dấu HEAD -> feature/search-tests.
+• dòng 5–6: quay về main và xem file: KHÔNG có TC05. Thay đổi chỉ tồn tại trên nhánh của bạn.
+Đây là điều kỳ diệu của branch: các bản nháp không ảnh hưởng nhau.
+
+### Gộp nhánh: git merge
+~~~bash
+git switch main
+git merge feature/search-tests
+git log --oneline
+git branch -d feature/search-tests
+~~~
+Giải thích từng dòng:
+• dòng 1: đứng ở nhánh NHẬN thay đổi (main).
+• dòng 2: gộp các commit của nhánh feature vào main.
+• dòng 3: kiểm tra, commit TC05 đã xuất hiện trên main.
+• dòng 4: xóa nhánh đã gộp xong cho gọn (-d chỉ xóa khi đã merge, an toàn).
+Kết quả mong đợi của dòng 2:
+Updating 8d9e0f1..a7c3e22
+Fast-forward
+ test-cases.txt | 1 +
+ 1 file changed, 1 insertion(+)
+Fast-forward: main chưa có gì mới nên Git chỉ việc "tua nhanh" main tới commit mới nhất.
+
+### Lỗi thường gặp
+~~~text
+error: Your local changes to the following files would be overwritten by checkout:
+	test-cases.txt
+Please commit your changes or stash them before you switch branches.
+Aborting
+~~~
+Nguyên nhân: bạn đang sửa dở file mà chưa commit, rồi chuyển nhánh. Git không dám ghi đè công sức của bạn.
+Cách sửa, chọn một trong hai:
+• Commit thay đổi đó trên nhánh hiện tại rồi mới switch.
+• Cất tạm: git stash (cất vào ngăn kéo), switch nhánh làm việc khác, quay lại rồi git stash pop (lấy ra).
+Lỗi khác: error: The branch 'feature/x' is not fully merged. Git cảnh báo nhánh còn commit chưa gộp. Kiểm tra kỹ; chỉ dùng git branch -D nếu chắc chắn muốn bỏ.
+
+PRACTICE: Tạo nhánh feature/cart-tests, thêm 2 test case giỏ hàng vào test-cases.txt và commit. Chuyển về main để xác nhận chưa có thay đổi, rồi merge nhánh vào main, kiểm tra git log --oneline và xóa nhánh.
+Q: Lệnh nào tạo nhánh mới và chuyển sang nhánh đó ngay?
+- git branch new feature/x
++ git switch -c feature/x
+- git merge feature/x
+Q: Muốn gộp nhánh feature/x vào main, bạn đứng ở nhánh nào để chạy git merge feature/x?
+- feature/x
++ main
+- Nhánh nào cũng được
+Q: Git từ chối chuyển nhánh vì có thay đổi chưa commit. Cách xử lý phù hợp là gì?
+- Xóa thư mục .git
+- Tắt VS Code
++ Commit thay đổi hoặc dùng git stash để cất tạm
+
+## LESSON git-06 | Merge conflict: xử lý từng bước, không hoảng sợ
+
+### Conflict là gì?
+Hai người cùng sửa CÙNG MỘT DÒNG trong cùng một file theo hai cách khác nhau. Khi gộp, Git không biết giữ bản nào nên dừng lại hỏi bạn.
+Giống hai biên tập viên cùng sửa câu mở đầu của một bài báo: tổng biên tập phải chọn.
+• Conflict không phải lỗi hỏng dữ liệu, chỉ là Git cần bạn quyết định.
+• Sửa ở các dòng khác nhau thì Git tự gộp được, không có conflict.
+
+### Tạo conflict có chủ đích để luyện tập
+~~~bash
+git switch -c feature/update-tc01
+# Bước tay: mở test-cases.txt trong VS Code, sửa dòng TC01 "vào trang chủ" thành "vào Dashboard", Ctrl+S
+git commit -am "Update TC01 expected page to Dashboard"
+git switch main
+# Bước tay: sửa CÙNG dòng TC01 trên main thành "hiện lời chào", Ctrl+S
+git commit -am "Update TC01 expected greeting"
+git merge feature/update-tc01
+~~~
+Giải thích từng dòng:
+• dòng 1: tạo nhánh mới.
+• dòng 2: dòng bắt đầu bằng # là ghi chú, không phải lệnh. Bạn tự sửa file trong VS Code (sửa tay giữ đúng tiếng Việt có dấu).
+• dòng 3: -am vừa add mọi file đã theo dõi vừa commit.
+• dòng 4–6: quay về main, sửa tay CÙNG dòng đó theo cách khác, rồi commit.
+• dòng 7: gộp, conflict xuất hiện:
+Auto-merging test-cases.txt
+CONFLICT (content): Merge conflict in test-cases.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+### Đọc dấu hiệu conflict trong file
+~~~text
+<<<<<<< HEAD
+TC01 - Đăng nhập với tài khoản hợp lệ -> hiện lời chào
+=======
+TC01 - Đăng nhập với tài khoản hợp lệ -> vào Dashboard
+>>>>>>> feature/update-tc01
+TC02 - Đăng nhập sai mật khẩu -> báo lỗi
+~~~
+Giải thích từng dòng:
+• <<<<<<< HEAD: bắt đầu phần của nhánh bạn đang đứng (main).
+• Dòng tiếp theo: phiên bản trên main.
+• =======: vạch ngăn giữa hai phiên bản.
+• Dòng tiếp theo: phiên bản của nhánh đang được gộp vào.
+• >>>>>>> feature/update-tc01: kết thúc vùng conflict.
+• TC02 không bị ảnh hưởng.
+Việc của bạn: sửa vùng này thành nội dung cuối cùng mong muốn và XÓA hết ba dòng đánh dấu.
+
+### Giải quyết conflict và hoàn tất merge
+Trong VS Code, phía trên vùng conflict có các nút: Accept Current Change, Accept Incoming Change, Accept Both Changes, Compare Changes. Hoặc sửa tay thành:
+~~~text
+TC01 - Đăng nhập với tài khoản hợp lệ -> vào Dashboard và hiện lời chào
+~~~
+Sau đó chạy:
+• git status: file đang ở trạng thái both modified.
+• git add test-cases.txt: báo cho Git biết "tôi đã giải quyết xong file này".
+• git commit -m "Merge feature/update-tc01 and resolve TC01 conflict"
+• git log --oneline --graph: xem hình cây, thấy hai nhánh nhập lại.
+Nếu rối quá, git merge --abort đưa mọi thứ về trạng thái trước khi merge để làm lại.
+
+### Lỗi thường gặp
+~~~text
+error: Committing is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+~~~
+• Nguyên nhân: commit khi còn file conflict chưa được git add. Sửa xong file, chạy git add rồi commit lại.
+• Lỗi âm thầm nguy hiểm: quên xóa các dòng <<<<<<<, =======, >>>>>>> mà vẫn add và commit. Test code sẽ báo SyntaxError khi chạy. Trước khi add, tìm trong dự án bằng Ctrl+Shift+F với từ khóa <<<<<<<.
+• Mẹo phòng tránh conflict: pull code mới thường xuyên, chia nhỏ thay đổi, không cùng lúc sửa một file lớn với đồng nghiệp mà không báo trước.
+
+PRACTICE: Làm theo bài để tự tạo một conflict trên test-cases.txt, giải quyết bằng nút Accept Both Changes trong VS Code rồi chỉnh lại cho gọn, hoàn tất merge và chụp màn hình git log --oneline --graph.
+Q: Khi nào xảy ra merge conflict?
+- Khi hai nhánh có tên giống nhau
++ Khi hai nhánh sửa cùng một dòng của cùng một file theo cách khác nhau
+- Khi repo có quá nhiều commit
+Q: Sau khi sửa xong vùng conflict trong file, bước tiếp theo là gì?
+- git merge --abort
++ git add file đó rồi git commit
+- git init lại repo
+Q: Lệnh nào hủy quá trình merge đang dở để quay về trạng thái trước đó?
+- git reset --everything
++ git merge --abort
+- git stash drop
+
+## LESSON git-07 | GitHub: push, clone và pull
+
+### Tạo repository trên GitHub
+• Đăng ký tài khoản tại github.com (dùng email của bạn, mật khẩu mạnh, bật xác thực hai lớp 2FA).
+• Nhấn dấu + góc trên phải > New repository.
+• Repository name: qa-lab-tests. Chọn Private nếu chứa nội dung công việc.
+• Vì repo trên máy đã có sẵn commit: KHÔNG tích Add a README, .gitignore hay license (tránh lịch sử hai bên khác nhau).
+• Nhấn Create repository, GitHub hiện trang hướng dẫn kèm URL dạng https://github.com/<tên-bạn>/qa-lab-tests.git
+Quy tắc an toàn: repo công khai (Public) thì ai cũng đọc được. Không đưa dữ liệu khách hàng, URL nội bộ, mật khẩu lên đó.
+
+### Kết nối và đẩy code lên: remote, push
+~~~bash
+git remote add origin https://github.com/<ten-ban>/qa-lab-tests.git
+git remote -v
+git branch -M main
+git push -u origin main
+~~~
+Giải thích từng dòng:
+• dòng 1: thêm "địa chỉ kho trên mạng" tên origin (tên quy ước) cho repo của bạn. Thay <ten-ban> bằng username GitHub.
+• dòng 2: kiểm tra địa chỉ đã thêm (hiện hai dòng fetch và push).
+• dòng 3: đảm bảo nhánh hiện tại tên main.
+• dòng 4: đẩy nhánh main lên origin. -u ghi nhớ liên kết, lần sau chỉ cần gõ git push.
+Lần đầu push, Git Credential Manager mở cửa sổ đăng nhập GitHub: chọn Sign in with your browser và đăng nhập TRÊN TRANG CỦA GITHUB. Thông tin được lưu an toàn trong Windows Credential Manager, không cần gõ lại.
+Kết quả: dòng cuối dạng branch 'main' set up to track 'origin/main'. Làm mới trang GitHub sẽ thấy file của bạn.
+
+### Lấy dự án về máy: git clone
+~~~bash
+cd ~\qa-lab\projects
+git clone https://github.com/<ten-ban>/qa-lab-tests.git qa-lab-tests-copy
+cd qa-lab-tests-copy
+git log --oneline
+~~~
+Giải thích từng dòng:
+• dòng 1: đi tới nơi muốn đặt dự án.
+• dòng 2: clone tải toàn bộ repo kèm lịch sử về thư mục mới qa-lab-tests-copy (tham số cuối không bắt buộc, mặc định dùng tên repo).
+• dòng 3–4: vào thư mục và xem lịch sử, giống hệt trên máy gốc.
+Ngày đầu đi làm, việc đầu tiên của tester automation thường là git clone dự án test của team, rồi npm install.
+Clone đã tự cấu hình origin, không cần git remote add nữa.
+
+### Cập nhật code mới: git pull
+~~~bash
+git switch main
+git pull
+git log --oneline -5
+~~~
+Giải thích từng dòng:
+• dòng 1: về nhánh main.
+• dòng 2: pull = tải commit mới từ GitHub VỀ và gộp vào nhánh hiện tại.
+• dòng 3: xem 5 commit mới nhất.
+Kết quả khi không có gì mới: Already up to date.
+Nhịp làm việc hằng ngày:
+• Sáng: git pull trên main để có code mới nhất.
+• Làm việc trên nhánh riêng, commit thường xuyên.
+• Xong việc: git push và mở Pull Request (bài sau).
+
+### Lỗi thường gặp
+~~~text
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/<ten-ban>/qa-lab-tests.git'
+hint: Updates were rejected because the remote contains work that you do not have locally.
+
+remote: Support for password authentication was removed on August 13, 2021.
+fatal: Authentication failed for 'https://github.com/<ten-ban>/qa-lab-tests.git/'
+
+error: remote origin already exists.
+~~~
+• rejected (fetch first): trên GitHub có commit mà máy bạn chưa có. Chạy git pull, xử lý conflict nếu có, rồi git push lại.
+• password authentication was removed: GitHub không nhận mật khẩu tài khoản khi push. Hãy để Git Credential Manager đăng nhập qua trình duyệt. Tuyệt đối không dán mật khẩu hay token vào URL hoặc vào file code.
+• remote origin already exists: đã thêm origin trước đó. Sửa địa chỉ bằng git remote set-url origin <url-đúng>.
+• Nếu git pull hỏi cách gộp (You have divergent branches...): chạy một lần git config --global pull.rebase false để mặc định dùng merge.
+
+PRACTICE: Tạo repo private qa-lab-tests trên GitHub, kết nối git-demo với remote origin và push nhánh main. Sửa file README trực tiếp trên web GitHub, rồi trên máy chạy git pull để lấy thay đổi đó về. Clone repo sang một thư mục khác và so sánh git log.
+Q: Lệnh git push -u origin main có tác dụng gì?
+- Tải code từ GitHub về máy
++ Đẩy nhánh main lên remote origin và ghi nhớ liên kết cho lần sau
+- Xóa nhánh main trên GitHub
+Q: Push bị từ chối với thông báo rejected (fetch first). Bạn nên làm gì?
+- Xóa repo trên GitHub và tạo lại
++ Chạy git pull để lấy commit mới, xử lý conflict nếu có, rồi push lại
+- Thêm mật khẩu GitHub vào URL remote
+Q: Cách đăng nhập GitHub an toàn khi push từ Git for Windows là gì?
+- Ghi mật khẩu vào file config.js trong dự án
+- Dán token vào URL remote
++ Đăng nhập qua trình duyệt bằng Git Credential Manager
+
+## LESSON git-08 | Pull Request và code review cho test code
+
+### Pull Request là gì?
+Pull Request (PR) là lời đề nghị: "Tôi đã làm xong trên nhánh này, mời mọi người xem và gộp vào main."
+Giống nộp bài cho giáo viên chấm trước khi đưa vào tập san của lớp.
+~~~text
+main ─────●─────────────────────●────  (sau khi merge PR)
+           \                   /
+feature/    ●──────●──────●───   (commit của bạn)
+checkout-tests      ↑
+                  Mở PR → Review → Sửa theo góp ý → CI xanh → Merge
+~~~
+Giải thích:
+• Bạn làm việc trên nhánh riêng, push lên GitHub.
+• Mở PR để đồng nghiệp đọc code, góp ý, và CI tự chạy test.
+• Đạt yêu cầu thì merge vào main. Không ai push thẳng lên main.
+
+### Đẩy nhánh và mở PR
+~~~bash
+git switch main
+git pull
+git switch -c feature/checkout-tests
+git add .
+git commit -m "Add checkout happy path test cases"
+git push -u origin feature/checkout-tests
+~~~
+Giải thích từng dòng:
+• dòng 1–2: luôn bắt đầu từ main mới nhất.
+• dòng 3: tạo nhánh cho công việc mới.
+• dòng 4–5: làm việc, kiểm tra git status rồi commit.
+• dòng 6: đẩy nhánh mới lên GitHub.
+Trong kết quả push, Git in sẵn đường link Create a pull request. Hoặc mở repo trên GitHub, nhấn nút Compare & pull request màu xanh.
+Chọn base: main, compare: feature/checkout-tests, viết tiêu đề, mô tả, chọn Reviewers rồi Create pull request.
+
+### Viết mô tả PR rõ ràng
+~~~text
+Tiêu đề: Add checkout happy path test cases
+
+Mục đích:
+- Bổ sung test cho luồng thanh toán thành công (ticket QA-123)
+
+Thay đổi:
+- Thêm 4 test case vào test-cases.txt
+- Thêm dữ liệu mẫu data/checkout.csv
+
+Cách kiểm tra:
+- npm install
+- npx playwright test tests/checkout.spec.ts
+
+Ghi chú:
+- Chưa cover thanh toán thất bại, sẽ làm ở PR sau
+~~~
+Giải thích:
+• Mục đích: vì sao có PR này, gắn mã ticket.
+• Thay đổi: liệt kê ngắn gọn để reviewer biết cần xem gì.
+• Cách kiểm tra: lệnh cụ thể để người khác tự chạy lại.
+• Ghi chú: phạm vi chưa làm, rủi ro đã biết.
+PR nhỏ (dưới khoảng 300 dòng thay đổi) được review nhanh và kỹ hơn PR khổng lồ.
+
+### Checklist review test code
+Khi review PR của đồng nghiệp (hoặc tự review trước khi nhờ người khác):
+• Tên test mô tả rõ hành vi mong đợi, đọc là hiểu test kiểm tra gì.
+• Mỗi test có assertion thật sự. Không có expect thì test luôn "xanh" vô nghĩa.
+• Không có mật khẩu, token, dữ liệu thật của khách hàng trong code.
+• Không dùng chờ cứng kiểu sleep 5 giây khi có thể chờ theo điều kiện.
+• Test độc lập: chạy riêng lẻ hay chạy theo thứ tự nào cũng được.
+• Locator ổn định (role, label, test id) thay vì đường dẫn CSS dài dễ gãy.
+• Không commit file rác: test-results, playwright-report, node_modules.
+• CI chạy xanh trước khi merge.
+Góp ý lịch sự, cụ thể và kèm gợi ý: "Có thể dùng getByRole('button', { name: 'Đặt hàng' }) để ổn định hơn" thay vì "Code này tệ".
+
+### Sau khi PR được merge
+~~~bash
+git switch main
+git pull
+git branch -d feature/checkout-tests
+git fetch --prune
+git branch -a
+~~~
+Giải thích từng dòng:
+• dòng 1–2: về main và kéo code mới nhất, đã bao gồm commit từ PR của bạn.
+• dòng 3: xóa nhánh cục bộ đã xong việc.
+• dòng 4: dọn các tham chiếu tới nhánh đã bị xóa trên GitHub (GitHub có nút Delete branch sau khi merge).
+• dòng 5: liệt kê mọi nhánh, cả cục bộ và trên remote, để chắc mọi thứ gọn gàng.
+Rồi lặp lại vòng mới: tạo nhánh mới từ main cho công việc tiếp theo.
+
+### Lỗi thường gặp
+~~~bash
+git switch feature/checkout-tests
+git pull origin main
+git add .
+git commit -m "Merge main into feature/checkout-tests and resolve conflicts"
+git push
+~~~
+Tình huống: GitHub báo PR This branch has conflicts that must be resolved, do main đã thay đổi kể từ khi bạn tạo nhánh.
+Giải thích từng dòng:
+• dòng 1: đứng ở nhánh của PR.
+• dòng 2: kéo main mới nhất từ GitHub và gộp vào nhánh của bạn. Conflict sẽ hiện ra ở đây.
+• dòng 3–4: giải quyết conflict như bài 6, add và commit.
+• dòng 5: push, PR tự cập nhật, cảnh báo conflict biến mất.
+Lỗi khác: lỡ commit thẳng lên main thay vì nhánh. Nếu CHƯA push: git switch -c feature/ten-moi (mang commit sang nhánh mới), rồi nhờ người hướng dẫn đưa main về đúng vị trí.
+
+PRACTICE: Tạo nhánh feature/my-first-pr, thêm file notes/review-checklist.txt chứa checklist review của riêng bạn, push và mở Pull Request với mô tả theo mẫu. Tự review PR (thêm một comment vào một dòng), merge PR trên GitHub, rồi trên máy pull main và xóa nhánh.
+Q: Mục đích chính của Pull Request là gì?
+- Tải code từ GitHub về máy
++ Đề nghị gộp thay đổi, để đồng nghiệp review và CI kiểm tra trước khi vào main
+- Sao lưu thư mục .git
+Q: Điều nào là dấu hiệu xấu khi review test code?
+- Tên test mô tả rõ hành vi mong đợi
+- Locator dùng getByRole
++ Test không có assertion nào và chứa token thật trong code
+Q: GitHub báo PR có conflict với main. Cách xử lý đúng là gì?
+- Đóng PR và xóa repo
++ Gộp main mới nhất vào nhánh của bạn, giải quyết conflict, commit và push
+- Push thẳng lên main để bỏ qua PR

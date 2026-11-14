@@ -1,0 +1,649 @@
+=== COURSE k6
+name: k6 load test cơ bản
+icon: 🚀
+floor: 5
+room: 502
+level: Cơ bản → Trung bình
+hours: 6
+summary: Viết kịch bản load test bằng JavaScript với k6: chạy từ dòng lệnh, đặt checks và thresholds, dùng dữ liệu, token và đọc báo cáo. Mọi bài tập chạy vào server local của bạn.
+
+## LESSON k6-01 | k6 là gì và cài đặt trên Windows
+
+### k6 là gì?
+Nếu JMeter giống "bảng điều khiển có nhiều nút bấm", thì k6 giống "viết công thức nấu ăn": bạn viết kịch bản bằng JavaScript, rồi một lệnh duy nhất cho hàng chục người dùng ảo cùng làm theo công thức đó.
+• k6 là công cụ load test mã nguồn mở của Grafana Labs, chạy bằng dòng lệnh (CLI).
+• Kịch bản là file .js, dễ lưu trong Git và chạy trong CI/CD.
+• k6 nhẹ: một máy laptop có thể giả lập hàng trăm người dùng ảo (VU, virtual user).
+Lưu ý quan trọng: k6 dùng cú pháp JavaScript nhưng KHÔNG phải Node.js. Không dùng được npm install hay các thư viện Node như fs, axios.
+
+### Cài k6 bằng winget hoặc Chocolatey
+Mở PowerShell và chọn MỘT trong hai cách:
+~~~bash
+winget install k6 --source winget
+choco install k6
+k6 version
+~~~
+Giải thích từng dòng:
+• winget install k6 --source winget: cài k6 từ kho winget có sẵn trong Windows 10/11. Có thể được hỏi đồng ý điều khoản, gõ Y.
+• choco install k6: cách thay thế nếu máy bạn dùng Chocolatey (cần mở PowerShell bằng quyền Administrator).
+• k6 version: chạy SAU KHI đóng và mở lại PowerShell để kiểm tra.
+Kết quả mong đợi: một dòng dạng k6.exe v1.x.x (commit/..., go1.xx.x, windows/amd64). Số phiên bản có thể khác.
+
+### Quy tắc an toàn và server mục tiêu
+Load test là gửi rất nhiều request. Làm vậy vào hệ thống của người khác có thể gây sập, thậm chí phạm pháp.
+• Chỉ test server do chính bạn dựng, hoặc hệ thống có văn bản cho phép.
+• Grafana có trang demo chính thức https://quickpizza.grafana.com để thử k6, nhưng chỉ dùng 1 đến 2 VU trong vài giây.
+• Trong khóa này ta dùng json-server chạy trên máy (cần Node.js để chạy json-server, không phải để chạy k6).
+~~~bash
+mkdir C:\k6-lab
+cd C:\k6-lab
+notepad db.json
+npx json-server db.json
+~~~
+Giải thích từng dòng:
+• mkdir, cd: tạo và vào thư mục làm việc.
+• notepad db.json: dán nội dung {"posts": [{"id": "1", "title": "Xin chao", "author": "tester1"}], "sessions": [{"id": "1", "username": "tester1", "token": "demo-token-111"}]} rồi lưu.
+• npx json-server db.json: chạy server. Kết quả mong đợi: JSON Server started on PORT :3000.
+Giữ cửa sổ này mở, làm bài tập ở một cửa sổ PowerShell khác.
+
+### Công cụ soạn script: VS Code
+Mở thư mục C:\k6-lab bằng VS Code để viết script cho dễ:
+~~~bash
+code C:\k6-lab
+~~~
+Giải thích: lệnh code mở VS Code tại thư mục đó (cần cài VS Code và tích chọn "Add to PATH" khi cài).
+Trong VS Code:
+• Tạo file mới tên script.js (File > New File).
+• Mở terminal ngay trong VS Code bằng menu Terminal > New Terminal để gõ lệnh k6.
+• Mỗi lần sửa script nhớ Ctrl+S trước khi chạy.
+
+### Lỗi thường gặp
+~~~text
+k6 : The term 'k6' is not recognized as the name of a cmdlet, function, script file, or operable program.
+winget : The term 'winget' is not recognized ...
+Error: listen EADDRINUSE: address already in use :::3000
+~~~
+• Lỗi 1: vừa cài xong nhưng chưa mở lại PowerShell, nên PATH chưa cập nhật. Cách sửa: đóng hết cửa sổ, mở mới, chạy lại k6 version.
+• Lỗi 2: Windows cũ chưa có winget. Cách sửa: cài "App Installer" từ Microsoft Store, hoặc tải bộ cài .msi k6 từ trang chính thức của Grafana k6.
+• Lỗi 3: cổng 3000 bận. Cách sửa: chạy npx json-server --port 3001 db.json và đổi URL trong script thành localhost:3001.
+
+PRACTICE: Cài k6, chạy k6 version và ghi lại số phiên bản. Dựng json-server với db.json trong C:\k6-lab và mở http://localhost:3000/posts bằng trình duyệt để xác nhận server chạy.
+Q: Câu nào ĐÚNG về k6?
+- k6 là thư viện Node.js, cài bằng npm install k6 vào dự án
++ k6 là công cụ CLI, kịch bản viết bằng JavaScript nhưng không chạy trên Node.js
+- k6 chỉ chạy được trên Linux
+Q: Bạn vừa cài k6 nhưng gõ k6 version báo "not recognized". Việc đầu tiên nên làm?
+- Cài lại Windows
++ Đóng và mở lại PowerShell để PATH được cập nhật
+- Cài thêm Java
+Q: Mục tiêu nào phù hợp để luyện load test?
++ json-server chạy trên chính máy bạn
+- Website thương mại điện tử đang hoạt động
+- Hệ thống nội bộ của công ty khi chưa xin phép
+
+## LESSON k6-02 | Script đầu tiên và cách đọc kết quả
+
+### Viết script.js đầu tiên
+Tạo file C:\k6-lab\script.js với nội dung:
+~~~js
+import http from 'k6/http';
+import { sleep, check } from 'k6';
+
+export default function () {
+  const res = http.get('http://localhost:3000/posts');
+  check(res, { 'status là 200': (r) => r.status === 200 });
+  sleep(1);
+}
+~~~
+Giải thích từng dòng:
+• import http from 'k6/http': lấy "bộ công cụ" gửi request HTTP của k6.
+• import { sleep, check } from 'k6': lấy hàm sleep (nghỉ) và check (kiểm tra).
+• export default function () { ... }: phần việc mỗi người dùng ảo làm lặp đi lặp lại, gọi là một iteration.
+• http.get(...): gửi GET tới danh sách bài viết, kết quả lưu vào biến res.
+• check(...): kiểm tra res.status (mã phản hồi) có bằng 200 không, đặt tên kiểm tra là "status là 200".
+• sleep(1): nghỉ 1 giây, giống người thật đọc trang trước khi bấm tiếp.
+
+### Chạy script
+Trong terminal, đứng ở thư mục C:\k6-lab:
+~~~bash
+k6 run script.js
+~~~
+Giải thích: k6 run đọc file script.js và chạy. Không có cấu hình gì thêm thì mặc định là 1 VU chạy 1 iteration.
+Kết quả mong đợi ở phần đầu:
+• Logo k6 và dòng execution: local, script: script.js.
+• Dòng scenarios: ... 1 max VUs ... default: 1 iterations for each of 1 VUs.
+• Sau khoảng 1 giây là bảng tổng kết (summary) như slide tiếp theo.
+
+### Đọc bảng tổng kết
+Phần cuối màn hình trông tương tự như sau (bố cục có thể khác chút tùy phiên bản k6):
+~~~text
+✓ status là 200
+
+checks.........................: 100.00% 1 out of 1
+http_req_duration..............: avg=8.1ms min=8.1ms med=8.1ms max=8.1ms p(90)=8.1ms p(95)=8.1ms
+http_req_failed................: 0.00%   0 out of 1
+http_reqs......................: 1       0.98/s
+iteration_duration.............: avg=1.01s min=1.01s med=1.01s max=1.01s
+iterations.....................: 1       0.98/s
+vus............................: 1       min=1 max=1
+~~~
+Giải thích từng dòng:
+• ✓ status là 200: check đã đạt. Nếu sai sẽ hiện ✗ kèm số lần đạt và trượt.
+• checks: tỉ lệ check đạt.
+• http_req_duration: thời gian phản hồi: trung bình (avg), nhỏ nhất, trung vị (med), lớn nhất, p(90), p(95).
+• http_req_failed: tỉ lệ request lỗi (mã 4xx, 5xx hoặc lỗi kết nối).
+• http_reqs: tổng request và số request mỗi giây (throughput).
+• iteration_duration: thời gian một vòng, gồm cả sleep(1) nên khoảng 1 giây.
+• iterations, vus: số vòng đã chạy và số người dùng ảo.
+
+### p(90), p(95) nói gì với bạn?
+Giả sử 100 request, xếp thời gian từ nhanh đến chậm:
+~~~text
+p(90)=120ms  -> 90 request đầu nhanh hơn hoặc bằng 120 ms
+p(95)=200ms  -> 95 request nhanh hơn hoặc bằng 200 ms
+max=3000ms   -> request chậm nhất mất 3 giây
+~~~
+Giải thích từng dòng:
+• p(90): 90% người dùng thấy phản hồi trong 120 ms trở xuống.
+• p(95): 95% người dùng thấy trong 200 ms trở xuống; 5% còn lại chậm hơn.
+• max: trường hợp tệ nhất, cần xem nhưng đừng chỉ dựa vào nó.
+Ví dụ đời thường: "95% đơn giao trong 30 phút" có ý nghĩa hơn "trung bình 25 phút", vì trung bình có thể che giấu vài đơn trễ 2 tiếng.
+
+### Tạo nhanh script mẫu bằng k6 new
+k6 có sẵn lệnh tạo file mẫu, tiện khi bạn quên cú pháp:
+~~~bash
+k6 new demo.js
+code demo.js
+~~~
+Giải thích từng dòng:
+• k6 new demo.js: tạo file demo.js chứa một script mẫu có chú thích.
+• code demo.js: mở file bằng VS Code để đọc.
+Script mẫu có thể trỏ tới trang demo của Grafana. Trước khi chạy, hãy đổi URL thành http://localhost:3000/posts để tuân thủ quy tắc an toàn.
+
+### Lỗi thường gặp
+~~~text
+WARN[0001] Request Failed  error="Get \"http://localhost:3000/posts\": dial tcp 127.0.0.1:3000: connectex: No connection could be made because the target machine actively refused it."
+✗ status là 200
+ ↳  0% — ✓ 0 / ✗ 1
+SyntaxError: file:///C:/k6-lab/script.js: Unexpected token (6:2)
+~~~
+• Request Failed ... actively refused: json-server chưa chạy hoặc sai port. Cách sửa: kiểm tra cửa sổ json-server.
+• ✗ status là 200 với 0% đạt: request đi được nhưng mã khác 200, ví dụ sai đường dẫn nên nhận 404.
+• SyntaxError ... (6:2): sai cú pháp ở dòng 6, cột 2, thường do thiếu dấu ngoặc ) hoặc }. VS Code tô đỏ chỗ sai, hãy nhìn kỹ dòng đó và dòng ngay trên.
+• Chạy k6 run script.js mà báo không tìm thấy file: đang đứng sai thư mục, gõ cd C:\k6-lab.
+
+PRACTICE: Viết script.js gọi GET http://localhost:3000/posts với check "status là 200" và sleep(1). Chạy k6 run script.js, chụp bảng tổng kết và ghi lại giá trị avg, p(95) của http_req_duration.
+Q: Trong k6, phần code bên trong export default function chạy như thế nào?
+- Chạy một lần duy nhất khi bắt đầu test
++ Mỗi người dùng ảo chạy lặp đi lặp lại, mỗi lần là một iteration
+- Chỉ chạy khi có lỗi
+Q: http_req_failed: 0.00% nghĩa là gì?
++ Không có request nào thất bại
+- Không có request nào được gửi
+- Mọi check đều trượt
+Q: Lỗi "connectex: No connection could be made because the target machine actively refused it" thường do đâu?
+- Script thiếu dấu chấm phẩy
+- k6 chưa được cài
++ Server mục tiêu chưa chạy hoặc sai cổng
+
+## LESSON k6-03 | Options: vus, duration và stages
+
+### Cho nhiều người dùng ảo chạy cùng lúc
+Thêm khối options ở đầu script (sau các dòng import):
+~~~js
+export const options = {
+  vus: 10,
+  duration: '30s',
+};
+~~~
+Giải thích từng dòng:
+• export const options = { ... }: khai báo cấu hình cho cả bài test.
+• vus: 10: có 10 người dùng ảo chạy song song.
+• duration: '30s': chạy liên tục trong 30 giây (có thể viết '2m' là 2 phút).
+Với sleep(1) và server nhanh, mỗi VU chạy khoảng 1 vòng mỗi giây. 10 VU × 30 giây ≈ 300 iterations. Chạy bằng k6 run script.js rồi so con số iterations với ước tính này.
+
+### Ghi đè cấu hình ngay trên dòng lệnh
+Muốn thử nhanh mà không sửa file:
+~~~bash
+k6 run --vus 5 --duration 20s script.js
+k6 run --iterations 10 script.js
+~~~
+Giải thích từng dòng:
+• --vus 5 --duration 20s: chạy 5 VU trong 20 giây, ghi đè giá trị trong options.
+• --iterations 10: chạy tổng cộng đúng 10 vòng rồi dừng, tiện khi muốn thử nhanh kịch bản.
+Thứ tự ưu tiên: tham số dòng lệnh thắng giá trị trong file. Nhờ vậy cùng một script có thể chạy nhẹ trên máy cá nhân và nặng hơn trên máy test chuyên dụng.
+
+### Stages: tăng giảm tải như thật
+Người dùng không ùa vào cùng một giây. stages cho phép tăng dần, giữ, rồi giảm dần:
+~~~js
+export const options = {
+  stages: [
+    { duration: '30s', target: 10 },
+    { duration: '1m', target: 10 },
+    { duration: '20s', target: 0 },
+  ],
+};
+~~~
+Giải thích từng dòng:
+• stages: danh sách các giai đoạn, chạy lần lượt từ trên xuống.
+• { duration: '30s', target: 10 }: trong 30 giây tăng dần từ 0 lên 10 VU (ramp-up).
+• { duration: '1m', target: 10 }: giữ 10 VU trong 1 phút, đây là giai đoạn đo chính.
+• { duration: '20s', target: 0 }: trong 20 giây giảm dần về 0 (ramp-down).
+Khi đang chạy, dòng tiến trình hiện số VU hiện tại, ví dụ default [ 45% ] 07/10 VUs 0m50.0s/1m50s.
+
+### Mẫu stages cho từng kiểu test
+~~~text
+Load:   30s -> 10 VU | 5m giữ 10 VU | 30s -> 0
+Stress: 1m -> 10 | 1m -> 20 | 1m -> 40 | 1m -> 80 | 1m -> 0
+Spike:  10s -> 2 | 10s -> 50 (vọt) | 1m giữ 50 | 10s -> 2
+Soak:   1m -> 10 | 2h giữ 10 VU | 1m -> 0
+~~~
+Giải thích từng dòng:
+• Load: tải bình thường như dự kiến, giữ ổn định để đo.
+• Stress: tăng bậc thang để tìm điểm hệ thống bắt đầu chậm hoặc lỗi.
+• Spike: tăng vọt đột ngột, như lúc mở bán vé.
+• Soak: tải vừa nhưng rất lâu, để phát hiện chậm dần, rò bộ nhớ.
+Trên laptop với server local, hãy giữ số VU nhỏ (dưới 50) để máy không bị quá tải.
+
+### Lỗi thường gặp
+~~~text
+ERRO[0000] there were problems with the specified script configuration:
+	- executor default: function 'default' not found in exports
+WARN[0000] ... insufficient VUs, reached 10 active VUs and cannot initialize more
+~~~
+• function 'default' not found in exports: quên chữ export default trước function. Cách sửa: viết đúng export default function () { ... }.
+• Ghi duration: 30 (thiếu đơn vị): k6 báo lỗi kiểu dữ liệu. Luôn ghi chuỗi có đơn vị như '30s', '2m'.
+• Khai báo cả vus/duration lẫn stages: dễ gây nhầm hoặc lỗi cấu hình. Chọn một cách thôi.
+• Laptop chạy 1000 VU, quạt kêu to, kết quả sai: máy test quá tải. Giảm VU hoặc thêm sleep.
+• Cảnh báo insufficient VUs xuất hiện ở kiểu cấu hình nâng cao (scenarios với arrival-rate): cần tăng preAllocatedVUs; người mới chưa cần dùng kiểu này.
+
+PRACTICE: Sửa script.js dùng stages: 20 giây tăng lên 5 VU, 40 giây giữ 5 VU, 10 giây giảm về 0. Chạy và ghi lại số iterations, http_reqs và p(95). Sau đó chạy lại với --vus 2 --duration 10s để so sánh.
+Q: Stage { duration: '30s', target: 10 } có nghĩa là gì?
+- Chạy 10 lần, mỗi lần 30 giây
++ Trong 30 giây thay đổi dần số VU tới 10
+- Nghỉ 30 giây rồi chạy 10 VU
+Q: Lệnh nào chạy 5 VU trong 20 giây mà không sửa file?
+- k6 run script.js 5 20
+- k6 start --users 5 --time 20
++ k6 run --vus 5 --duration 20s script.js
+Q: Kiểu test nào phù hợp để phát hiện rò bộ nhớ sau nhiều giờ chạy?
+- Spike
++ Soak
+- Smoke
+
+## LESSON k6-04 | Checks và Thresholds: tiêu chí đạt hay không
+
+### Check: kiểm từng response
+check giống người kiểm hàng đứng ở cửa: mỗi response đi qua đều được kiểm vài điều.
+~~~js
+const res = http.get('http://localhost:3000/posts');
+check(res, {
+  'status là 200': (r) => r.status === 200,
+  'có dữ liệu': (r) => r.json().length > 0,
+  'nhanh hơn 300ms': (r) => r.timings.duration < 300,
+});
+~~~
+Giải thích từng dòng:
+• check(res, { ... }): kiểm res theo danh sách điều kiện, mỗi điều kiện có một tên.
+• r.status === 200: mã phản hồi là 200.
+• r.json().length > 0: đọc body thành JSON (một danh sách) và kiểm có ít nhất 1 phần tử.
+• r.timings.duration < 300: thời gian phản hồi dưới 300 ms.
+Quan trọng: check trượt KHÔNG làm test dừng hay thất bại. Nó chỉ được đếm và báo cáo. Muốn test "trượt", cần thresholds.
+
+### Thresholds: luật đạt hoặc trượt của cả bài test
+~~~js
+export const options = {
+  vus: 5,
+  duration: '30s',
+  thresholds: {
+    http_req_duration: ['p(95)<500'],
+    http_req_failed: ['rate<0.01'],
+    checks: ['rate>0.99'],
+  },
+};
+~~~
+Giải thích từng dòng:
+• thresholds: các ngưỡng bắt buộc cho toàn bài test.
+• http_req_duration: ['p(95)<500']: 95% request phải nhanh hơn 500 ms.
+• http_req_failed: ['rate<0.01']: tỉ lệ request lỗi phải dưới 1%.
+• checks: ['rate>0.99']: hơn 99% check phải đạt.
+Nếu một ngưỡng không đạt, k6 đánh dấu ✗ cho ngưỡng đó và kết thúc với mã thoát (exit code) khác 0.
+
+### Exit code: cầu nối với CI/CD
+Mỗi chương trình khi kết thúc trả về một con số: 0 là thành công, khác 0 là có vấn đề. Hệ thống CI (như GitHub Actions) dựa vào số này để báo xanh hay đỏ.
+~~~bash
+k6 run script.js
+echo $LASTEXITCODE
+~~~
+Giải thích từng dòng:
+• k6 run script.js: chạy test có thresholds.
+• echo $LASTEXITCODE: trong PowerShell, in mã thoát của lệnh vừa chạy.
+Kết quả mong đợi:
+• Mọi threshold đạt: in ra 0.
+• Có threshold trượt: k6 in dòng ERRO[...] thresholds on metrics 'http_req_duration' have been crossed và $LASTEXITCODE là 99.
+Thử nghiệm: đổi ngưỡng thành 'p(95)<1' để cố ý trượt và xem mã 99.
+
+### Check khác threshold thế nào?
+~~~text
+check      : kiểm TỪNG response, chỉ ghi nhận đạt/trượt, test vẫn chạy tiếp
+threshold  : luật cho TOÀN BÀI dựa trên số liệu tổng hợp, quyết định exit code
+kết hợp    : checks: ['rate>0.99'] biến kết quả check thành tiêu chí đạt/trượt
+abortOnFail: { threshold: 'p(95)<500', abortOnFail: true } dừng sớm khi trượt
+~~~
+Giải thích từng dòng:
+• check giống chấm từng bài kiểm tra nhỏ; threshold giống điều kiện "lên lớp" của cả năm.
+• Ngưỡng checks rate>0.99 nối hai thứ lại: check trượt nhiều thì cả test trượt.
+• abortOnFail: dạng viết chi tiết của threshold, ví dụ http_req_duration: [{ threshold: 'p(95)<500', abortOnFail: true }], dừng test ngay khi ngưỡng bị vượt, tiết kiệm thời gian khi hệ thống đã rõ là quá tải.
+
+### Lỗi thường gặp
+~~~text
+ERRO[0000] GoError: invalid threshold defined on http_req_duration; reason: ...
+ERRO[0031] thresholds on metrics 'http_req_duration' have been crossed
+TypeError: Cannot read property 'length' of undefined
+~~~
+• invalid threshold: viết sai cú pháp, ví dụ 'p95<500' hoặc 'p(95) < 500ms'. Cách sửa: viết đúng 'p(95)<500' (đơn vị mặc định là ms).
+• have been crossed: không phải lỗi của script mà là kết quả: hệ thống không đạt ngưỡng. Đọc bảng tổng kết để biết vượt bao nhiêu.
+• Cannot read property 'length' of undefined (hoặc lỗi khi gọi r.json()): response không phải JSON, thường vì request lỗi. Hãy kiểm r.status trước, hoặc in r.body bằng console.log(r.body) để xem.
+
+PRACTICE: Thêm thresholds p(95)<500, http_req_failed rate<0.01 và checks rate>0.99 vào script. Chạy, ghi lại $LASTEXITCODE. Sau đó đổi ngưỡng thành p(95)<1 để cố ý trượt và ghi lại mã thoát mới.
+Q: Check trượt 50% nhưng không có thresholds. Kết quả cuối của k6 run thế nào?
++ Test vẫn chạy hết và mã thoát vẫn là 0
+- Test dừng ngay lập tức
+- k6 báo lỗi cú pháp
+Q: Cách viết threshold nào ĐÚNG?
+- http_req_duration: ['p95 < 500ms']
++ http_req_duration: ['p(95)<500']
+- http_req_duration: 'p(95)=500'
+Q: Khi threshold bị vượt, mã thoát của k6 thường là bao nhiêu?
+- 0
+- 1
++ 99
+
+## LESSON k6-05 | POST JSON, token và correlation
+
+### Gửi POST với dữ liệu JSON
+~~~js
+import http from 'k6/http';
+import { check } from 'k6';
+
+export default function () {
+  const payload = JSON.stringify({ title: 'Bai tu k6', author: 'k6' });
+  const params = { headers: { 'Content-Type': 'application/json' } };
+  const res = http.post('http://localhost:3000/posts', payload, params);
+  check(res, { 'tạo thành công 201': (r) => r.status === 201 });
+}
+~~~
+Giải thích từng dòng:
+• JSON.stringify({...}): đổi đối tượng JavaScript thành chuỗi JSON để gửi đi.
+• params với headers Content-Type: application/json: báo server dữ liệu gửi lên là JSON.
+• http.post(url, payload, params): gửi POST, ba tham số là địa chỉ, dữ liệu, tùy chọn.
+• check ... 201: mã 201 Created nghĩa là tạo mới thành công.
+Chạy k6 run --iterations 3 post.js rồi mở http://localhost:3000/posts để thấy 3 bài mới.
+
+### Correlation: dùng id vừa tạo cho request sau
+Giống vé gửi xe: lấy số vé từ response trước để dùng ở request sau.
+~~~js
+const res = http.post('http://localhost:3000/posts', payload, params);
+const postId = res.json('id');
+const detail = http.get(`http://localhost:3000/posts/${postId}`);
+check(detail, { 'đọc lại đúng bài': (r) => r.json('id') === postId });
+http.del(`http://localhost:3000/posts/${postId}`);
+~~~
+Giải thích từng dòng:
+• res.json('id'): đọc trường id trong JSON trả về, ví dụ "a1b2".
+• Dấu backtick và ${postId}: chèn giá trị biến vào chuỗi, tạo URL /posts/a1b2.
+• http.get(...): đọc lại chi tiết bài vừa tạo.
+• check ... === postId: kiểm id trả về đúng bài của mình.
+• http.del(...): xóa bài để dọn dữ liệu, giữ server sạch sau mỗi vòng.
+
+### Lấy token một lần với setup()
+Hệ thống thật thường đăng nhập bằng POST /login và nhận token. Server luyện tập giả lập bằng bảng sessions.
+~~~js
+export function setup() {
+  const res = http.get('http://localhost:3000/sessions?username=tester1');
+  return { token: res.json()[0].token };
+}
+
+export default function (data) {
+  const params = { headers: { Authorization: `Bearer ${data.token}` } };
+  const res = http.get('http://localhost:3000/posts', params);
+  check(res, { 'status là 200': (r) => r.status === 200 });
+}
+~~~
+Giải thích từng dòng:
+• export function setup(): chạy MỘT lần trước khi các VU bắt đầu, hợp để đăng nhập hoặc chuẩn bị dữ liệu.
+• res.json()[0].token: response là danh sách, lấy phần tử đầu, trường token.
+• return { token: ... }: giá trị trả về được truyền vào hàm default qua tham số data.
+• Authorization: Bearer ${data.token}: gửi token theo chuẩn Bearer.
+json-server không kiểm token, nên đây là bài luyện cơ chế. Hệ thống thật sẽ trả 401 nếu token sai.
+
+### Xem chi tiết khi gỡ lỗi
+Khi viết script, chạy 1 vòng và in ra để hiểu dữ liệu:
+~~~bash
+k6 run --iterations 1 --http-debug=full post.js
+~~~
+Giải thích từng phần:
+• --iterations 1: chỉ chạy một vòng cho dễ đọc.
+• --http-debug=full: in toàn bộ request và response (header và body) ra màn hình.
+Trong script, có thể thêm console.log(res.status, res.body) để in giá trị. Kết quả hiện với tiền tố INFO[...].
+Nhớ tắt các lệnh in này khi chạy tải thật, vì in hàng nghìn dòng làm chậm máy và rối kết quả.
+
+### Lỗi thường gặp
+~~~text
+✗ tạo thành công 201
+GoError: cannot parse json due to an error at line 1, character 1 , error: invalid character '<' looking for beginning of value
+GET http://localhost:3000/posts/undefined -> 404
+~~~
+• POST không ra 201: thường do quên JSON.stringify hoặc quên header Content-Type.
+• cannot parse json ... invalid character '<': response là HTML hoặc trang lỗi chứ không phải JSON. In res.status, res.body để xem thật sự nhận được gì.
+• URL có chữ undefined: biến chưa có giá trị, ví dụ gõ sai res.json('Id') (phân biệt hoa thường) hoặc request trước đã lỗi.
+• Quên dùng backtick: viết 'http://.../${postId}' bằng dấu nháy đơn thì ${postId} không được thay. Phải dùng dấu backtick.
+
+PRACTICE: Viết script tạo một bài viết bằng POST, lấy id bằng res.json('id'), GET lại bài đó và kiểm id khớp, cuối cùng DELETE bài đó. Chạy với --iterations 5 và xác nhận /posts không còn bài thừa.
+Q: Vì sao phải dùng JSON.stringify khi gửi POST?
+- Để mã hóa mật khẩu
++ Để đổi đối tượng JavaScript thành chuỗi JSON gửi qua mạng
+- Để k6 chạy nhanh hơn
+Q: Hàm setup() trong k6 chạy bao nhiêu lần?
++ Một lần trước khi các VU bắt đầu
+- Mỗi VU một lần
+- Mỗi iteration một lần
+Q: URL gửi đi là /posts/undefined. Nguyên nhân hợp lý nhất?
+- Server bị quá tải
+- Thiếu sleep trong script
++ Biến id không lấy được giá trị từ response trước
+
+## LESSON k6-06 | Dữ liệu từ file và biến môi trường
+
+### Dữ liệu người dùng từ file JSON
+Mỗi VU nên dùng dữ liệu khác nhau cho giống thật. Tạo file users.json trong C:\k6-lab:
+~~~json
+[
+  { "username": "tester01", "email": "tester01@example.com" },
+  { "username": "tester02", "email": "tester02@example.com" },
+  { "username": "tester03", "email": "tester03@example.com" }
+]
+~~~
+Giải thích:
+• Dấu [ ] là một danh sách, mỗi { } là một người dùng.
+• example.com là tên miền dành riêng cho ví dụ, không thuộc về ai thật.
+• Có thể thêm bao nhiêu dòng tùy ý, nhớ dấu phẩy giữa các phần tử nhưng không có dấu phẩy sau phần tử cuối.
+
+### Đọc file bằng SharedArray và open()
+~~~js
+import http from 'k6/http';
+import { SharedArray } from 'k6/data';
+
+const users = new SharedArray('users', function () {
+  return JSON.parse(open('./users.json'));
+});
+
+export default function () {
+  const user = users[(__VU - 1) % users.length];
+  const payload = JSON.stringify({ username: user.username, email: user.email });
+  http.post('http://localhost:3000/users', payload, {
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+~~~
+Giải thích từng dòng:
+• import { SharedArray } from 'k6/data': công cụ chia sẻ một bản dữ liệu cho mọi VU, tiết kiệm bộ nhớ.
+• open('./users.json'): đọc file thành chuỗi. Chỉ dùng được ở NGOÀI hàm default (vùng init).
+• JSON.parse(...): đổi chuỗi thành danh sách.
+• __VU: số thứ tự VU hiện tại, bắt đầu từ 1. (__VU - 1) % users.length chọn người dùng theo vòng: VU1 lấy tester01, VU2 lấy tester02...
+• http.post(...): tạo user mới với dữ liệu đó. Nếu db.json chưa có "users": [], hãy thêm vào trước.
+
+### Biến môi trường: một script, nhiều môi trường
+Không nên viết cứng địa chỉ server trong script. Dùng biến môi trường:
+~~~js
+const BASE_URL = __ENV.BASE_URL || 'http://localhost:3000';
+
+export default function () {
+  http.get(`${BASE_URL}/posts`);
+}
+~~~
+Giải thích từng dòng:
+• __ENV.BASE_URL: đọc biến môi trường tên BASE_URL.
+• || 'http://localhost:3000': nếu không truyền biến thì dùng giá trị mặc định.
+• http.get(...): ghép địa chỉ gốc BASE_URL với đường dẫn /posts bằng chuỗi template.
+Cách chạy với địa chỉ khác (cờ -e truyền biến): k6 run -e BASE_URL=http://localhost:3001 script.js
+Trong CI có thể truyền địa chỉ môi trường test đã được phép mà không phải sửa script.
+
+### Không đưa bí mật vào script
+Script k6 thường được lưu trong Git và chia sẻ cho cả nhóm. Vì vậy:
+~~~bash
+k6 run -e API_TOKEN=$env:DEMO_TOKEN script.js
+~~~
+Giải thích từng phần:
+• $env:DEMO_TOKEN: biến môi trường trong PowerShell, bạn đặt trước bằng $env:DEMO_TOKEN="demo-token-111".
+• -e API_TOKEN=...: chuyển giá trị đó vào script, đọc bằng __ENV.API_TOKEN.
+Quy tắc:
+• Không viết token, mật khẩu thật vào file .js hay users.json.
+• Dữ liệu test dùng tài khoản test, email example.com, không dùng dữ liệu khách hàng thật.
+• Trong CI, token lấy từ secrets (xem khóa CI/CD).
+
+### Lỗi thường gặp
+~~~text
+ERRO[0000] The "open()" function is only available in the init stage (i.e. the global scope) ...
+ERRO[0000] GoError: The moduleSpecifier "axios" couldn't be found on local disk.
+SyntaxError: ... invalid character ... (khi JSON.parse file users.json)
+~~~
+• open() gọi trong hàm default: chuyển lời gọi open lên đầu file, ngoài mọi hàm.
+• moduleSpecifier "axios" ... couldn't be found: k6 không phải Node.js, không dùng được thư viện npm như axios, fs. Dùng các module có sẵn như k6/http, k6/data.
+• JSON.parse báo lỗi: file users.json sai cú pháp, hay gặp là dấu phẩy thừa sau phần tử cuối hoặc dùng nháy đơn. Dán file vào một công cụ kiểm tra JSON để tìm lỗi.
+• Không tìm thấy users.json: đường dẫn ./users.json tính theo vị trí file script, hãy để hai file cùng thư mục.
+
+PRACTICE: Tạo users.json có 5 người dùng, đọc bằng SharedArray, mỗi VU tạo user của mình qua POST /users. Thêm BASE_URL qua __ENV và chạy k6 run -e BASE_URL=http://localhost:3000 --vus 5 --iterations 5 users.js.
+Q: Vì sao open() phải đặt ngoài hàm default?
++ Vì open() chỉ được dùng ở vùng init (phạm vi toàn cục) của script
+- Vì open() chạy chậm hơn trong hàm
+- Vì hàm default không được phép đọc biến
+Q: Lệnh nào truyền BASE_URL vào script k6?
+- k6 run script.js BASE_URL=http://localhost:3000
+- k6 run --base http://localhost:3000 script.js
++ k6 run -e BASE_URL=http://localhost:3000 script.js
+Q: Script cần gọi API, có thể dùng thư viện axios trong k6 không?
+- Có, chỉ cần npm install axios
++ Không, k6 không phải Node.js; dùng module k6/http có sẵn
+- Có, nhưng phải chạy bằng node script.js
+
+## LESSON k6-07 | Group, tag, báo cáo và web dashboard
+
+### Group: chia kịch bản thành từng bước
+Một hành trình người dùng gồm nhiều bước. group giúp kết quả được nhóm theo bước cho dễ đọc:
+~~~js
+import http from 'k6/http';
+import { group, sleep } from 'k6';
+
+export default function () {
+  group('Xem danh sách', function () {
+    http.get('http://localhost:3000/posts');
+  });
+  group('Xem chi tiết', function () {
+    http.get('http://localhost:3000/posts/1');
+  });
+  sleep(1);
+}
+~~~
+Giải thích từng dòng:
+• import { group }: lấy hàm group.
+• group('Xem danh sách', function () {...}): mọi request bên trong được gắn nhãn nhóm "Xem danh sách".
+• Nhóm thứ hai tương tự cho bước xem chi tiết.
+Bảng tổng kết sẽ hiện checks theo từng nhóm, và metric group_duration cho biết mỗi bước mất bao lâu.
+
+### Tag: đặt ngưỡng riêng cho từng loại request
+~~~js
+export const options = {
+  thresholds: {
+    'http_req_duration{name:ListPosts}': ['p(95)<300'],
+    'http_req_duration{name:PostDetail}': ['p(95)<200'],
+  },
+};
+
+export default function () {
+  http.get('http://localhost:3000/posts', { tags: { name: 'ListPosts' } });
+  http.get('http://localhost:3000/posts/1', { tags: { name: 'PostDetail' } });
+}
+~~~
+Giải thích từng dòng:
+• { tags: { name: 'ListPosts' } }: gắn nhãn name cho request.
+• 'http_req_duration{name:ListPosts}': ngưỡng chỉ áp dụng cho request có nhãn đó.
+• Mỗi loại request có yêu cầu riêng: trang danh sách cho phép chậm hơn trang chi tiết.
+Bảng tổng kết sẽ có dòng riêng cho từng ngưỡng kèm ✓ hoặc ✗.
+
+### Xuất kết quả ra file JSON
+~~~bash
+k6 run --summary-export=summary.json script.js
+Get-Content summary.json | Select-Object -First 20
+~~~
+Giải thích từng dòng:
+• --summary-export=summary.json: ngoài màn hình, ghi số liệu tổng kết vào file summary.json.
+• Get-Content ... -First 20: xem nhanh 20 dòng đầu của file trong PowerShell.
+Trong file sẽ thấy các khối như "http_req_duration" với các giá trị avg, p(90), p(95). File này dùng để lưu lịch sử, so sánh các lần chạy, hoặc đính kèm vào báo cáo CI.
+
+### Web dashboard: xem biểu đồ trực tiếp
+k6 có sẵn dashboard trên trình duyệt. Trong PowerShell:
+~~~bash
+$env:K6_WEB_DASHBOARD="true"
+$env:K6_WEB_DASHBOARD_EXPORT="k6-report.html"
+k6 run script.js
+~~~
+Giải thích từng dòng:
+• $env:K6_WEB_DASHBOARD="true": bật dashboard cho các lần chạy trong cửa sổ PowerShell này.
+• $env:K6_WEB_DASHBOARD_EXPORT="k6-report.html": khi chạy xong, lưu dashboard thành file HTML để gửi cho đồng đội.
+• k6 run script.js: chạy như bình thường.
+Trong lúc chạy, mở http://127.0.0.1:5665 để xem biểu đồ VU, request/giây, thời gian phản hồi theo thời gian thực. Chạy xong mở k6-report.html.
+Muốn tắt: Remove-Item Env:K6_WEB_DASHBOARD.
+
+### Quy trình làm một bài load test nhỏ
+• Bước 1: Thống nhất mục tiêu và tiêu chí, ví dụ 10 VU, p(95) dưới 500 ms, lỗi dưới 1%.
+• Bước 2: Viết script, chạy thử --iterations 1 với --http-debug để chắc kịch bản đúng.
+• Bước 3: Smoke test: 1 đến 2 VU trong 30 giây, mọi check phải đạt.
+• Bước 4: Chạy load test thật với stages và thresholds, bật dashboard.
+• Bước 5: Lưu summary.json, k6-report.html; ghi lại số VU, thời gian, môi trường, phiên bản build.
+• Bước 6: Báo cáo: đạt hay trượt từng tiêu chí, kèm biểu đồ và nhận xét (ví dụ thời gian phản hồi tăng khi vượt 8 VU).
+
+### Lỗi thường gặp
+~~~text
+WARN[0000] Web dashboard: failed to start ... address already in use (port 5665)
+WARN[0035] No script iterations fully finished, consider making the test duration longer
+level=error msg="... threshold ... has no data"
+~~~
+• Cổng 5665 đang bận: một lần chạy cũ chưa tắt hẳn. Đóng cửa sổ PowerShell cũ hoặc đặt $env:K6_WEB_DASHBOARD_PORT="5666".
+• No script iterations fully finished: test quá ngắn so với một vòng kịch bản. Tăng duration hoặc giảm sleep.
+• Threshold không có dữ liệu: tên tag trong threshold khác tên tag trong request (ví dụ ListPost và ListPosts). Kiểm tra chính tả, phân biệt hoa thường.
+• Dashboard vẫn bật ở các lần chạy sau: biến môi trường còn trong cửa sổ đó, xóa bằng Remove-Item Env:K6_WEB_DASHBOARD.
+
+PRACTICE: Viết script có 2 group (Xem danh sách, Xem chi tiết), gắn tag name cho từng request, đặt threshold riêng cho mỗi tag. Chạy 5 VU trong 30 giây với web dashboard và xuất k6-report.html cùng summary.json.
+Q: Lợi ích chính của tag name trên request là gì?
+- Làm request chạy nhanh hơn
++ Cho phép đặt threshold và xem số liệu riêng cho từng loại request
+- Tự động tạo dữ liệu test
+Q: Biến môi trường nào bật web dashboard của k6?
+- K6_DASHBOARD_ON
+- K6_REPORT_HTML
++ K6_WEB_DASHBOARD
+Q: Trước khi chạy load test thật, bước nào nên làm?
++ Chạy thử 1 iteration hoặc smoke test 1 đến 2 VU để chắc kịch bản đúng
+- Bỏ hết check để test chạy nhanh hơn
+- Chạy ngay 1000 VU để tiết kiệm thời gian

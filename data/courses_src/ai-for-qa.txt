@@ -1,0 +1,726 @@
+=== COURSE ai-for-qa
+name: Dùng AI hỗ trợ QA
+icon: 🤖
+floor: 6
+room: 603
+level: Cơ bản
+hours: 5
+summary: Học cách viết prompt để AI gợi ý test idea, test data, bản nháp automation và bug report, đồng thời biết soát lỗi kết quả AI và giữ an toàn dữ liệu. AI là trợ lý; người chịu trách nhiệm cuối cùng vẫn là bạn.
+
+## LESSON ai-for-qa-01 | AI (LLM) là gì, giỏi và dở ở đâu?
+
+### Một "thực tập sinh" siêu nhanh nhưng chưa biết gì về dự án của bạn
+Các công cụ chat AI (ChatGPT, Claude, Gemini, Copilot…) được xây dựng trên mô hình ngôn ngữ lớn (LLM - Large Language Model).
+Hãy hình dung LLM là một thực tập sinh:
+• Đã đọc rất nhiều sách, tài liệu, code trên mạng nên viết nhanh và trôi chảy.
+• Nhưng CHƯA từng thấy hệ thống, requirement, database của công ty bạn.
+• Khi không biết, đôi khi vẫn trả lời rất tự tin, giống người mới ngại nói "em không biết".
+Vì vậy: giao việc rõ ràng, cung cấp bối cảnh đủ, và LUÔN kiểm tra lại kết quả.
+LLM tạo ra câu trả lời bằng cách đoán từ tiếp theo hợp lý nhất, chứ không tra cứu sự thật trong hệ thống của bạn.
+
+### AI giỏi gì và dở gì trong công việc QA?
+~~~text
+AI thường GIỎI                         | AI thường DỞ / RỦI RO
+---------------------------------------+---------------------------------------
+Brainstorm test idea, edge case        | Biết hành vi thật của hệ thống bạn
+Viết nháp test case, bug report        | Nhớ requirement mới nhất của dự án
+Đổi định dạng: bảng -> CSV -> JSON     | Tính toán dài, đếm chính xác
+Giải thích đoạn code, câu SQL, regex   | Biết tên selector, API nội bộ
+Tóm tắt log dài (đã che dữ liệu)       | Thông tin mới sau thời điểm huấn luyện
+Viết nháp script Playwright/Postman    | Tự chịu trách nhiệm khi sai
+~~~
+Cách dùng bảng: việc ở cột trái giao cho AI làm NHÁP; việc ở cột phải bạn phải tự xác minh bằng requirement, app thật, hoặc hỏi đồng nghiệp.
+
+### "Ảo giác" (hallucination): AI bịa nhưng nghe rất thật
+Ví dụ một đoạn hội thoại có thể xảy ra:
+~~~text
+Bạn:  Viết lệnh Playwright để chờ tất cả request mạng xong.
+AI:   Dùng: await page.waitForAllRequests();
+
+Thực tế: Playwright KHÔNG có hàm waitForAllRequests().
+Cách có thật (ví dụ): await page.waitForLoadState('networkidle');
+hoặc tốt hơn: dùng expect(...) để chờ đúng phần tử cần thấy.
+~~~
+Giải thích:
+• AI tạo ra một tên hàm "nghe hợp lý" nhưng không tồn tại.
+• Nếu chạy, bạn sẽ gặp lỗi kiểu "page.waitForAllRequests is not a function".
+• Cách phòng: chạy thử code, tra tài liệu chính thức (playwright.dev, learning.postman.com), hỏi AI "hãy dẫn link tài liệu chính thức cho hàm này" rồi tự mở link kiểm tra.
+
+### Quy tắc vàng khi dùng AI cho QA
+• AI đề xuất, con người quyết định. Bạn ký tên dưới kết quả, không phải AI.
+• Không dán bí mật hay dữ liệu thật: mật khẩu, token, dữ liệu khách hàng, log production (bài 6 học kỹ).
+• Chỉ dùng công cụ AI được công ty cho phép.
+• Kiểm tra mọi thứ: đối chiếu requirement, chạy code, xem lại số liệu.
+• Ghi rõ khi một phần tài liệu do AI hỗ trợ soạn, nếu quy định team yêu cầu.
+• Dùng AI để tăng tốc phần "nháp", dành thời gian tiết kiệm được để test kỹ hơn.
+
+### Sai lầm thường gặp
+• Triệu chứng: copy nguyên test case AI sinh vào bộ test, sau đó phát hiện có test cho chức năng không tồn tại.
+Nguyên nhân: không đối chiếu requirement. Cách sửa: đọc từng test, gạch bỏ test không có căn cứ.
+• Triệu chứng: code AI viết báo lỗi "is not a function" hoặc "Cannot find module".
+Nguyên nhân: AI bịa tên hàm hoặc thư viện. Cách sửa: tra tài liệu chính thức, chạy thử từng bước nhỏ.
+• Triệu chứng: hỏi AI "app của tôi có bug không?" và nhận câu trả lời chung chung.
+Nguyên nhân: AI không nhìn thấy app của bạn. Cách sửa: cung cấp mô tả cụ thể (đã che dữ liệu) và câu hỏi rõ ràng.
+
+PRACTICE: Hỏi một công cụ AI được phép dùng: "Liệt kê 10 test idea cho ô tìm kiếm sản phẩm". Đánh dấu idea nào hữu ích, idea nào trùng, idea nào không áp dụng cho trang demo bạn đang xem, và ghi lại ít nhất 1 điều AI nói chưa chính xác.
+Q: Vì sao AI có thể trả lời sai một cách rất tự tin?
+- Vì AI cố tình lừa người dùng
++ Vì AI sinh câu trả lời theo xác suất từ ngữ, không tra cứu sự thật trong hệ thống của bạn
+- Vì máy tính của bạn quá chậm
+Q: Việc nào phù hợp để giao cho AI làm bản nháp?
++ Gợi ý danh sách edge case cho một form đăng ký
+- Xác nhận selector thật của app nội bộ mà AI chưa từng thấy
+- Quyết định phát hành bản build lên production
+Q: AI gợi ý hàm page.waitForAllRequests(). Bạn nên làm gì?
+- Dùng ngay vì AI đã gợi ý
++ Tra tài liệu chính thức và chạy thử; nếu hàm không tồn tại thì không dùng
+- Đổi sang trình duyệt khác
+
+## LESSON ai-for-qa-02 | Cấu trúc một prompt tốt
+
+### Prompt là "phiếu giao việc"
+Prompt là đoạn văn bạn gửi cho AI. Giao việc càng rõ, kết quả càng tốt, giống giao việc cho đồng nghiệp mới.
+Một prompt tốt thường có 6 phần:
+• Role (vai trò): "Bạn là QA engineer có kinh nghiệm kiểm thử web thương mại điện tử."
+• Context (bối cảnh): chức năng gì, người dùng là ai, quy tắc nghiệp vụ.
+• Task (nhiệm vụ): cần làm gì cụ thể.
+• Constraints (ràng buộc): giới hạn số lượng, kỹ thuật phải dùng, điều không được làm.
+• Output format (định dạng): bảng, CSV, JSON, cột nào.
+• Examples (ví dụ): 1–2 mẫu để AI bắt chước.
+Không phải lúc nào cũng cần đủ 6 phần, nhưng Context, Task và Output format gần như luôn cần.
+
+### Prompt tệ và prompt tốt
+~~~text
+PROMPT TỆ:
+  Viết test case cho login.
+
+PROMPT TỐT:
+  Vai trò: Bạn là QA engineer kiểm thử web.
+  Bối cảnh: Trang đăng nhập dùng email + mật khẩu. Mật khẩu 8-20 ký tự.
+  Sai 5 lần liên tiếp thì khóa tài khoản 15 phút.
+  Nhiệm vụ: Viết test case cho chức năng đăng nhập.
+  Ràng buộc: Tối đa 12 test case. Có cả trường hợp hợp lệ và không hợp lệ.
+  Dùng kỹ thuật Boundary Value Analysis cho độ dài mật khẩu.
+  Không bịa thêm chức năng không có trong mô tả.
+  Định dạng: Bảng Markdown với các cột ID | Tiêu đề | Bước | Dữ liệu | Kết quả mong đợi | Priority.
+~~~
+Phân tích:
+• Prompt tệ khiến AI tự đoán quy tắc, kết quả chung chung.
+• Prompt tốt cung cấp quy tắc nghiệp vụ (8-20 ký tự, khóa sau 5 lần), nên AI sinh được test biên 7/8/20/21 và test khóa tài khoản.
+• Câu "Không bịa thêm chức năng" giảm ảo giác.
+
+### Mẫu prompt dùng lại được
+Lưu mẫu này vào một file ghi chú, mỗi lần chỉ cần điền vào chỗ trống:
+~~~text
+[VAI TRÒ]      Bạn là {QA engineer / chuyên gia API testing / ...}.
+[BỐI CẢNH]     Ứng dụng: {mô tả ngắn, KHÔNG có dữ liệu thật}.
+               Requirement: {dán requirement đã được phép chia sẻ}.
+[NHIỆM VỤ]     Hãy {liệt kê test idea / viết test case / tạo test data / ...}.
+[RÀNG BUỘC]    - Chỉ dựa trên requirement ở trên; chỗ nào chưa rõ thì liệt kê
+                 thành câu hỏi thay vì tự đoán.
+               - Áp dụng kỹ thuật: {EP, BVA, decision table, ...}.
+               - Số lượng tối đa: {N}.
+[ĐỊNH DẠNG]    {Bảng có các cột ... / CSV có header ... / JSON theo mẫu ...}.
+[VÍ DỤ]        {1 dòng mẫu đúng định dạng mong muốn}.
+~~~
+Giải thích từng phần:
+• Dấu ngoặc nhọn { } là chỗ bạn thay bằng nội dung thật.
+• Dòng "chỗ nào chưa rõ thì liệt kê thành câu hỏi" rất quan trọng: biến AI thành công cụ tìm lỗ hổng requirement.
+• Phần VÍ DỤ giúp AI trả về đúng định dạng để bạn dán thẳng vào Excel hoặc công cụ quản lý test.
+
+### Cho AI ví dụ mẫu (few-shot)
+Khi bạn muốn AI viết đúng "giọng" của team, hãy đưa 1–2 ví dụ:
+~~~text
+Viết test case cho chức năng "Thêm vào giỏ hàng" theo đúng phong cách ví dụ sau.
+
+Ví dụ:
+ID: TC-CART-001
+Tiêu đề: Thêm 1 sản phẩm còn hàng vào giỏ trống
+Bước: 1. Mở trang sản phẩm "Áo thun" 2. Bấm "Thêm vào giỏ"
+Kết quả mong đợi: Biểu tượng giỏ hiện số 1; thông báo "Đã thêm vào giỏ" màu xanh.
+Priority: P1
+
+Hãy viết thêm 5 test case tiếp theo, ID từ TC-CART-002.
+~~~
+Kết quả mong đợi: AI giữ đúng cấu trúc ID, cách đánh số bước, kiểu viết kết quả cụ thể. Không có ví dụ, mỗi lần AI có thể trả về một kiểu khác nhau.
+
+### Hỏi tiếp để tinh chỉnh kết quả
+Hiếm khi lần hỏi đầu tiên là hoàn hảo. Hãy "trò chuyện" để sửa:
+~~~text
+Lượt 2: Test case TC-LOGIN-007 và TC-LOGIN-009 bị trùng ý, hãy gộp lại.
+Lượt 3: Thêm 3 test case cho trường hợp mất mạng khi đang bấm Đăng nhập.
+Lượt 4: Với mỗi test case, ghi rõ nó dùng kỹ thuật nào (EP/BVA/Error guessing).
+Lượt 5: Liệt kê các câu hỏi bạn cần hỏi BA để làm rõ requirement.
+~~~
+Giải thích:
+• Mỗi lượt yêu cầu MỘT thay đổi rõ ràng, dễ kiểm tra.
+• Lượt 5 thường mang lại giá trị lớn: AI chỉ ra chỗ requirement còn mơ hồ.
+• Khi cuộc trò chuyện quá dài và AI bắt đầu "quên" bối cảnh, hãy mở cuộc trò chuyện mới và dán lại prompt đã hoàn thiện.
+
+### Sai lầm thường gặp
+• Triệu chứng: AI trả về 50 test case chung chung kiểu "kiểm tra giao diện đẹp".
+Nguyên nhân: thiếu bối cảnh và ràng buộc. Cách sửa: thêm quy tắc nghiệp vụ, giới hạn số lượng, yêu cầu kết quả mong đợi đo được.
+• Triệu chứng: mỗi lần hỏi AI trả về một định dạng khác.
+Cách sửa: ghi rõ cột/định dạng và đưa ví dụ mẫu.
+• Triệu chứng: AI tự thêm quy tắc không có trong requirement ("mật khẩu phải có chữ hoa").
+Cách sửa: thêm ràng buộc "chỉ dựa trên requirement, chỗ chưa rõ thì hỏi lại".
+• Triệu chứng: dán cả tài liệu dài 50 trang và hỏi một câu.
+Cách sửa: chỉ dán phần liên quan (đã được phép chia sẻ), chia nhỏ câu hỏi.
+
+PRACTICE: Viết một prompt đủ 6 phần (vai trò, bối cảnh, nhiệm vụ, ràng buộc, định dạng, ví dụ) để sinh test case cho chức năng "Áp mã giảm giá" với quy tắc: mã có hạn dùng, mỗi tài khoản dùng 1 lần, đơn tối thiểu 200.000đ. Gửi cho AI, rồi hỏi thêm ít nhất 2 lượt để tinh chỉnh.
+Q: Phần nào của prompt giúp AI trả về đúng cột để dán vào Excel?
+- Role
++ Output format (và ví dụ mẫu)
+- Constraints về số lượng
+Q: Câu "Chỗ nào chưa rõ thì liệt kê thành câu hỏi thay vì tự đoán" có tác dụng gì?
++ Giảm việc AI bịa quy tắc và giúp tìm chỗ mơ hồ của requirement
+- Làm AI trả lời nhanh hơn
+- Giúp AI truy cập được hệ thống của công ty
+Q: Few-shot prompting là gì?
+- Hỏi AI thật ít lần
+- Chỉ cho AI viết ngắn
++ Đưa 1–2 ví dụ mẫu để AI bắt chước cấu trúc và phong cách
+
+## LESSON ai-for-qa-03 | Sinh test idea và test case từ requirement
+
+### Requirement mẫu: chức năng đổi mật khẩu
+Chúng ta dùng một requirement giả lập (không phải của dự án thật):
+~~~text
+REQ-PW-01  Người dùng đã đăng nhập có thể đổi mật khẩu tại trang Tài khoản.
+REQ-PW-02  Phải nhập: Mật khẩu hiện tại, Mật khẩu mới, Nhập lại mật khẩu mới.
+REQ-PW-03  Mật khẩu mới dài 8-20 ký tự, có ít nhất 1 chữ số và 1 ký tự đặc biệt.
+REQ-PW-04  Mật khẩu mới không được trùng 3 mật khẩu gần nhất.
+REQ-PW-05  Đổi thành công: đăng xuất khỏi mọi thiết bị khác, gửi email thông báo.
+REQ-PW-06  Nhập sai mật khẩu hiện tại 5 lần: khóa chức năng đổi mật khẩu 30 phút.
+~~~
+Cách đọc: mỗi dòng có mã REQ để sau này nối với test case (truy vết). Tester đánh dấu các con số (8, 20, 3, 5, 30) vì đó là nơi cần test biên.
+
+### Prompt sinh test idea
+~~~text
+Bạn là QA engineer. Dưới đây là requirement chức năng đổi mật khẩu:
+<dán REQ-PW-01 đến REQ-PW-06>
+
+Nhiệm vụ: Liệt kê test idea, nhóm theo mã requirement.
+Ràng buộc:
+- Mỗi requirement ít nhất 1 idea hợp lệ (positive) và 1 idea không hợp lệ (negative).
+- Áp dụng BVA cho mọi con số trong requirement.
+- Thêm nhóm "Bảo mật" và "Khả năng sử dụng".
+- Không thêm quy tắc không có trong requirement. Điểm chưa rõ: ghi vào mục "Câu hỏi cho BA".
+Định dạng: danh sách gạch đầu dòng, mỗi dòng bắt đầu bằng mã REQ.
+~~~
+Giải thích:
+• Yêu cầu cả positive và negative để AI không chỉ viết "đường suôn sẻ".
+• "Áp dụng BVA cho mọi con số" hướng AI tới 7/8/20/21 ký tự, lần sai thứ 4/5, phút 29/30/31.
+• Mục "Câu hỏi cho BA" là phần thưởng: AI giúp bạn soi requirement.
+
+### Kết quả mẫu (rút gọn) và cách đọc
+~~~text
+REQ-PW-03  [+] Mật khẩu mới 8 ký tự, có số và ký tự đặc biệt: đổi thành công
+REQ-PW-03  [-] Mật khẩu mới 7 ký tự: báo lỗi độ dài
+REQ-PW-03  [+] Mật khẩu mới 20 ký tự: đổi thành công
+REQ-PW-03  [-] Mật khẩu mới 21 ký tự: báo lỗi độ dài
+REQ-PW-03  [-] Không có chữ số: báo lỗi
+REQ-PW-04  [-] Trùng mật khẩu gần nhất thứ 3: bị từ chối
+REQ-PW-04  [+] Trùng mật khẩu thứ 4 trước đó: được chấp nhận
+REQ-PW-06  [-] Sai lần thứ 5: khóa 30 phút; thử lại ở phút 29 vẫn bị khóa
+Bảo mật    [-] Mật khẩu không xuất hiện trong URL hay response API
+Câu hỏi cho BA:
+  - "Ký tự đặc biệt" gồm những ký tự nào? Có tính khoảng trắng không?
+  - Mật khẩu mới trùng mật khẩu hiện tại có bị từ chối không?
+~~~
+Cách đọc: [+] là test hợp lệ, [-] là test không hợp lệ. Hãy kiểm tra từng dòng có căn cứ trong requirement không; câu hỏi cho BA cần được gửi đi thật, không tự trả lời.
+
+### Hỏi thêm edge case theo EP/BVA
+~~~text
+Với REQ-PW-03, hãy lập bảng phân vùng tương đương (EP) và giá trị biên (BVA)
+cho trường "Mật khẩu mới".
+Cột: Nhóm | Mô tả | Valid/Invalid | Giá trị ví dụ | Kết quả mong đợi.
+Sau đó liệt kê thêm 5 edge case dạng error guessing
+(ví dụ: dán mật khẩu có khoảng trắng đầu/cuối, ký tự tiếng Việt có dấu, emoji).
+~~~
+Kết quả mong đợi: một bảng gồm các nhóm như "dưới 8 ký tự", "8-20 ký tự đủ điều kiện", "trên 20 ký tự", "thiếu chữ số", "thiếu ký tự đặc biệt", và giá trị biên 7, 8, 20, 21.
+Mẹo kiểm tra nhanh: tự đếm độ dài các chuỗi ví dụ AI đưa ra. AI rất hay đếm sai ký tự, ví dụ ghi "8 ký tự" nhưng chuỗi thật có 9.
+
+### Soát kết quả với requirement: 4 câu hỏi
+Trước khi đưa test case do AI viết vào bộ test chính thức, hỏi 4 câu:
+1. Có căn cứ không? Mỗi test phải chỉ ra được dòng REQ tương ứng.
+2. Có thiếu không? Đối chiếu từng REQ: đã có cả positive và negative chưa?
+3. Có trùng không? Hai test khác chữ nhưng cùng mục tiêu thì gộp.
+4. Kết quả mong đợi có đo được không? Loại bỏ các câu như "hệ thống xử lý đúng".
+Sau đó gán priority theo rủi ro và nhờ một đồng nghiệp review như với test case tự viết.
+
+### Sai lầm thường gặp
+• Triệu chứng: test case AI ghi "Mật khẩu phải có chữ in hoa" dù requirement không yêu cầu.
+Nguyên nhân: AI dùng "kiến thức phổ biến" thay cho requirement. Cách sửa: xóa hoặc chuyển thành câu hỏi cho BA.
+• Triệu chứng: test biên ghi "7 ký tự: Abc@123x" (thực tế 8 ký tự).
+Nguyên nhân: AI đếm sai. Cách sửa: tự đếm hoặc dùng công cụ đếm ký tự.
+• Triệu chứng: bộ test thiếu REQ-PW-05 (đăng xuất các thiết bị khác).
+Nguyên nhân: requirement dài, AI bỏ sót. Cách sửa: hỏi "Requirement nào chưa có test case?" và tự kiểm bằng ma trận truy vết.
+
+PRACTICE: Dùng prompt mẫu trong bài cho requirement đổi mật khẩu (giả lập). Nhận kết quả, sau đó đánh dấu từng test idea: Giữ / Sửa / Bỏ, kèm lý do. Đếm xem AI đã bỏ sót requirement nào và tự bổ sung.
+Q: Vì sao nên yêu cầu AI ghi mã REQ cho mỗi test idea?
+- Để kết quả trông chuyên nghiệp
++ Để kiểm tra căn cứ của từng test và phát hiện requirement bị bỏ sót
+- Vì AI không thể viết test nếu không có mã
+Q: AI viết "Giá trị biên: 7 ký tự - Abc@123x". Bạn nên làm gì?
+- Tin vì AI đã ghi rõ 7 ký tự
++ Tự đếm lại; chuỗi này thực tế có 8 ký tự nên phải sửa
+- Xóa toàn bộ test biên
+Q: AI đưa ra câu hỏi cho BA: "Ký tự đặc biệt gồm những ký tự nào?". Bạn nên làm gì?
+- Tự chọn một đáp án hợp lý và ghi vào test case
++ Gửi câu hỏi cho BA/PO và cập nhật test case theo câu trả lời
+- Bỏ qua vì đó là câu hỏi của AI
+
+## LESSON ai-for-qa-04 | Sinh test data an toàn
+
+### Vì sao dùng dữ liệu giả?
+Test cần nhiều dữ liệu: tên, email, ngày sinh, địa chỉ, số tiền…
+Dùng dữ liệu khách hàng thật để test giống như mượn sổ khám bệnh của người khác để tập điền form: sai về đạo đức và vi phạm quy định bảo vệ dữ liệu cá nhân.
+Dữ liệu giả (synthetic data) tốt cần:
+• Trông giống thật (tên tiếng Việt có dấu, định dạng đúng).
+• An toàn: email dùng domain dành riêng cho ví dụ như example.com, không trùng người thật.
+• Có chủ đích: có cả giá trị hợp lệ, giá trị biên và giá trị không hợp lệ.
+AI rất hợp cho việc sinh lượng nhỏ dữ liệu có chủ đích; dữ liệu lớn nên dùng thư viện như Faker.
+
+### Prompt sinh dữ liệu CSV
+~~~text
+Tạo 5 dòng dữ liệu người dùng giả dạng CSV, có header:
+full_name,email,age,city
+Yêu cầu:
+- Tên người Việt có dấu.
+- Email dạng <tên><số>@example.com, không trùng nhau.
+- Tuổi là số nguyên từ 18 đến 60, trong đó có đúng 1 dòng 18 và 1 dòng 60.
+- Chỉ trả về nội dung CSV, không giải thích.
+
+Kết quả AI trả về (ví dụ, có 2 lỗi cố ý để luyện soát):
+full_name,email,age,city
+Nguyễn Văn An,an.nguyen01@example.com,18,Hà Nội
+Trần Thị Bình,binh.tran02@example.com,60,Đà Nẵng
+Lê Minh Châu,chau.le03@example.com,35,Cần Thơ
+Phạm Quốc Dũng,dung.pham04@example.com,17,Huế
+Hoàng Gia Hân,han.hoang@gmail.com,29,Hải Phòng
+~~~
+Bạn có thấy 2 lỗi không? Dòng Phạm Quốc Dũng tuổi 17 (ngoài khoảng) và dòng Hoàng Gia Hân dùng gmail.com (có thể là email thật của ai đó). Slide sau sẽ kiểm tra tự động.
+Lưu phần CSV vào file users.csv bằng VS Code, chọn encoding UTF-8.
+
+### Kiểm tra dữ liệu AI sinh bằng Python
+Tạo file check_users.py cùng thư mục với users.csv:
+~~~python
+import csv
+
+with open("users.csv", encoding="utf-8") as f:
+    rows = list(csv.DictReader(f))
+
+print("Số dòng:", len(rows))
+emails = [r["email"] for r in rows]
+print("Email trùng:", len(emails) - len(set(emails)))
+
+for r in rows:
+    age = int(r["age"])
+    if not 18 <= age <= 60:
+        print("Tuổi ngoài khoảng 18-60:", r["full_name"], age)
+    if not r["email"].endswith("@example.com"):
+        print("Email không an toàn:", r["email"])
+~~~
+Giải thích từng dòng:
+• import csv: thư viện đọc file CSV có sẵn trong Python.
+• open(…, encoding="utf-8"): mở file, đọc đúng tiếng Việt có dấu.
+• csv.DictReader: biến mỗi dòng thành một "từ điển", truy cập bằng tên cột như r["email"].
+• len(emails) - len(set(emails)): set loại bỏ trùng lặp, hiệu số chính là số email bị trùng.
+• Vòng for: kiểm từng dòng, in ra dòng vi phạm.
+Chạy: python check_users.py
+Kết quả mong đợi:
+Số dòng: 5
+Email trùng: 0
+Tuổi ngoài khoảng 18-60: Phạm Quốc Dũng 17
+Email không an toàn: han.hoang@gmail.com
+
+### Dữ liệu JSON cho test API
+Prompt: "Tạo 3 object JSON cho API tạo bài viết (POST /posts của jsonplaceholder.typicode.com) gồm: 1 hợp lệ, 1 thiếu title, 1 có title rất dài. Chỉ trả về một mảng JSON hợp lệ."
+Kết quả mẫu:
+~~~json
+[
+  { "case": "valid", "title": "Bài viết thử nghiệm", "body": "Nội dung mẫu", "userId": 1 },
+  { "case": "missing_title", "body": "Không có tiêu đề", "userId": 1 },
+  { "case": "long_title", "title": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "body": "Tiêu đề 50 ký tự A", "userId": 1 }
+]
+~~~
+Giải thích:
+• Dấu [ ] là mảng, mỗi { } là một bộ dữ liệu test.
+• Trường "case" giúp bạn biết dòng đó dùng cho mục đích gì (có thể bỏ trước khi gửi API).
+• Kiểm tra: dán vào trình kiểm tra JSON (ví dụ mở file .json trong VS Code, lỗi cú pháp sẽ bị gạch đỏ) và tự đếm lại độ dài "rất dài" đúng như mong muốn.
+Lưu ý: jsonplaceholder là API giả, nó có thể trả 201 cho cả dữ liệu thiếu title. Mục tiêu ở đây là luyện chuẩn bị dữ liệu.
+
+### Dữ liệu số lượng lớn: dùng Faker thay vì hỏi AI
+Cài thư viện: mở PowerShell, chạy pip install Faker. Tạo file gen_users.py:
+~~~python
+from faker import Faker
+
+fake = Faker("vi_VN")
+Faker.seed(42)
+
+for i in range(1, 4):
+    name = fake.name()
+    dob = fake.date_of_birth(minimum_age=18, maximum_age=60)
+    email = f"user{i:03d}@example.com"
+    print(name, "|", dob, "|", email)
+~~~
+Giải thích từng dòng:
+• Faker("vi_VN"): tạo bộ sinh dữ liệu theo phong cách Việt Nam (tên tiếng Việt).
+• Faker.seed(42): cố định "hạt giống", mỗi lần chạy ra cùng một bộ dữ liệu, giúp tái hiện bug.
+• date_of_birth(minimum_age=18, maximum_age=60): ngày sinh của người từ 18 đến 60 tuổi.
+• f"user{i:03d}@example.com": email an toàn user001, user002… do ta tự đặt.
+Chạy: python gen_users.py. Kết quả mong đợi: 3 dòng dạng "Tên tiếng Việt | 1985-03-12 | user001@example.com" (tên và ngày cụ thể sẽ khác).
+Đổi range(1, 4) thành range(1, 1001) là có 1000 người dùng trong vài giây, không tốn công hỏi AI.
+
+### Sai lầm thường gặp
+• Triệu chứng: Python báo "UnicodeDecodeError" khi đọc users.csv.
+Nguyên nhân: file lưu bằng encoding khác (ví dụ Excel lưu ANSI). Cách sửa: mở bằng VS Code, chọn Save with Encoding > UTF-8.
+• Triệu chứng: "ModuleNotFoundError: No module named 'faker'".
+Nguyên nhân: chưa cài thư viện. Cách sửa: chạy pip install Faker (hoặc python -m pip install Faker).
+• Triệu chứng: dữ liệu AI sinh có email domain thật (gmail.com) hoặc số điện thoại có thể là của người thật.
+Cách sửa: yêu cầu rõ domain example.com, kiểm tra bằng script trước khi dùng; không gửi email/SMS thật tới dữ liệu giả.
+• Triệu chứng: nhờ AI "lấy 100 khách hàng từ file export này và đổi tên đi".
+Đây là đưa dữ liệu thật cho AI. Cách sửa: chỉ mô tả cấu trúc cột, để AI hoặc Faker sinh dữ liệu mới hoàn toàn.
+
+PRACTICE: Viết prompt sinh 10 dòng CSV đơn hàng giả (order_id, email, total_vnd, status) với ràng buộc: email @example.com, total_vnd từ 10.000 đến 50.000.000 có ít nhất 2 giá trị biên, status thuộc {NEW, PAID, CANCELLED}. Sau đó viết (hoặc sửa từ check_users.py) một script Python kiểm tra các ràng buộc này.
+Q: Domain email nào an toàn nhất để dùng trong dữ liệu test?
+- gmail.com
++ example.com
+- tên miền của công ty khách hàng
+Q: Faker.seed(42) dùng để làm gì?
+- Sinh đúng 42 dòng dữ liệu
++ Cố định kết quả sinh ngẫu nhiên để lần sau chạy ra cùng dữ liệu
+- Mã hóa dữ liệu
+Q: Muốn tạo 10.000 người dùng giả, cách nào hợp lý hơn?
+- Hỏi AI 100 lần, mỗi lần 100 dòng
++ Dùng thư viện như Faker trong một script
+- Copy dữ liệu khách hàng thật rồi đổi tên
+
+## LESSON ai-for-qa-05 | Nhờ AI viết nháp automation và review kỹ
+
+### Prompt sinh bản nháp test Playwright
+~~~text
+Bạn là automation tester dùng Playwright Test với TypeScript.
+Trang cần test: https://demo.playwright.dev/todomvc (trang demo công khai).
+Viết 1 test: thêm việc "Mua sữa" vào danh sách và kiểm tra nó xuất hiện.
+Ràng buộc:
+- Dùng locator theo vai trò/placeholder/test id (getByRole, getByPlaceholder, getByTestId).
+- Không dùng page.waitForTimeout.
+- Dùng expect của @playwright/test để kiểm tra.
+- Nếu không chắc selector nào tồn tại, hãy ghi chú rõ để tôi tự kiểm tra.
+Chỉ trả về code của file tests/todo.spec.ts.
+~~~
+Giải thích: các ràng buộc này dạy AI theo "best practice" của Playwright. Câu cuối giúp AI thừa nhận chỗ không chắc thay vì bịa selector.
+
+### Bản nháp AI có thể trả về (có lỗi)
+Đây là ví dụ một bản nháp KHÔNG tốt mà AI hay sinh ra khi prompt sơ sài:
+~~~ts
+import { test, expect } from '@playwright/test';
+
+test('add todo', async ({ page }) => {
+  await page.goto('https://demo.playwright.dev/todomvc');
+  await page.fill('#new-todo-input', 'Mua sữa');
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(3000);
+  const count = await page.locator('.todo-list li').count();
+  expect(count).toBeGreaterThan(0);
+});
+~~~
+Soát từng dòng:
+• Dòng 4 (page.fill): selector #new-todo-input là BỊA, trang demo không có id này. Test sẽ chờ rồi báo lỗi timeout.
+• Dòng 6 (waitForTimeout 3000): chờ cứng 3 giây, làm test chậm và vẫn có thể chập chờn.
+• Dòng 7–8: chỉ kiểm tra "có ít nhất 1 dòng", không kiểm tra nội dung là "Mua sữa". Test có thể pass dù thêm sai chữ.
+
+### Bản đã sửa sau khi review
+~~~ts
+import { test, expect } from '@playwright/test';
+
+test('thêm việc mới vào danh sách', async ({ page }) => {
+  await page.goto('https://demo.playwright.dev/todomvc');
+  const input = page.getByPlaceholder('What needs to be done?');
+  await input.fill('Mua sữa');
+  await input.press('Enter');
+  await expect(page.getByTestId('todo-title')).toHaveText(['Mua sữa']);
+});
+~~~
+Giải thích từng dòng:
+• Dòng 1: nạp test và expect từ thư viện Playwright Test.
+• Dòng 3: khai báo một test, Playwright tự đưa vào đối tượng page (tab trình duyệt).
+• Dòng 4: mở trang demo.
+• Dòng 5: tìm ô nhập bằng chữ gợi ý (placeholder) mà người dùng nhìn thấy.
+• Dòng 6–7: gõ "Mua sữa" và nhấn Enter.
+• Dòng 8: kiểm tra danh sách việc có đúng một mục với nội dung "Mua sữa"; expect tự chờ đến khi đúng hoặc hết thời gian, không cần chờ cứng.
+Bạn tự xác minh selector bằng cách mở trang, bấm F12 và xem phần tử, hoặc dùng npx playwright codegen https://demo.playwright.dev/todomvc.
+
+### Nhờ AI viết test script cho Postman
+Prompt: "Viết Postman test script cho request GET https://jsonplaceholder.typicode.com/posts/1: kiểm tra status 200, id bằng 1, có trường title, thời gian phản hồi dưới 1000ms."
+Kết quả (đã kiểm tra với tài liệu Postman):
+~~~js
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Trả về đúng bài viết id 1", function () {
+    const body = pm.response.json();
+    pm.expect(body.id).to.eql(1);
+    pm.expect(body).to.have.property("title");
+});
+
+pm.test("Thời gian phản hồi dưới 1000ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(1000);
+});
+~~~
+Giải thích:
+• pm.test("tên", function…): tạo một kiểm tra có tên, hiện trong tab Test Results.
+• pm.response.to.have.status(200): kiểm tra mã trạng thái.
+• pm.response.json(): đọc body thành object; pm.expect(…).to.eql(1) so sánh bằng.
+• pm.response.responseTime: thời gian phản hồi tính bằng mili giây.
+Cách chạy: dán vào tab Scripts > Post-response (bản Postman cũ là tab Tests), bấm Send. Kết quả mong đợi: 3 dòng PASS.
+Cảnh giác: AI đôi khi bịa cú pháp như pm.response.toHaveStatus(200), cú pháp này không có trong Postman.
+
+### Chạy thử trước khi tin
+Code do AI viết chỉ được coi là "xong" khi đã CHẠY và bạn hiểu từng dòng:
+~~~bash
+npx playwright test tests/todo.spec.ts --headed
+npx playwright test tests/todo.spec.ts --repeat-each=5
+newman run todo-api.postman_collection.json
+~~~
+Giải thích từng lệnh:
+• Lệnh 1: chạy riêng file test và mở trình duyệt để bạn quan sát (headed).
+• Lệnh 2: chạy lặp lại 5 lần để phát hiện test chập chờn (flaky).
+• Lệnh 3: chạy collection Postman đã export bằng Newman (cần cài trước: npm install -g newman).
+Kết quả mong đợi: lệnh Playwright in "1 passed" (lệnh lặp in "5 passed"); Newman in bảng tổng kết với số assertions failed bằng 0.
+Thêm một bước: cố tình làm test fail (sửa "Mua sữa" thành "Mua bánh" trong expect). Nếu test vẫn pass, nghĩa là test không kiểm tra gì thật sự.
+
+### Sai lầm thường gặp
+• Triệu chứng: "TimeoutError: locator.fill: Timeout 30000ms exceeded" khi chạy code AI viết.
+Nguyên nhân: selector bịa hoặc sai. Cách sửa: dùng codegen hoặc DevTools để lấy locator thật.
+• Triệu chứng: test pass trên máy bạn, fail trên CI.
+Nguyên nhân thường gặp: chờ cứng bằng waitForTimeout, phụ thuộc thứ tự dữ liệu. Cách sửa: dùng expect tự chờ, dữ liệu độc lập.
+• Triệu chứng: "pm.response.toHaveStatus is not a function" trong Postman.
+Nguyên nhân: cú pháp bịa. Cách sửa: dùng pm.response.to.have.status(200).
+• Triệu chứng: dán toàn bộ source code dự án công ty vào AI để "viết test cho nhanh".
+Cách sửa: chỉ dùng công cụ AI được công ty cho phép với mã nguồn; nếu không chắc, hỏi trưởng nhóm trước.
+
+PRACTICE: Dùng AI viết test Playwright cho thao tác "đánh dấu hoàn thành một việc" trên https://demo.playwright.dev/todomvc. Review theo 3 tiêu chí (selector thật, không chờ cứng, assertion kiểm tra đúng nội dung/trạng thái), sửa lại, chạy bằng npx playwright test --headed, rồi cố tình làm test fail để chắc assertion có tác dụng.
+Q: Bản nháp AI dùng page.waitForTimeout(3000). Vấn đề là gì?
+- Không có vấn đề gì
++ Chờ cứng làm test chậm và vẫn có thể chập chờn; nên dùng expect tự chờ
+- Lệnh này chỉ chạy trên Firefox
+Q: Vì sao nên cố tình làm test fail sau khi viết xong?
++ Để chắc assertion thật sự kiểm tra điều mong muốn
+- Để làm báo cáo có nhiều lỗi hơn
+- Vì Playwright yêu cầu mỗi test phải fail một lần
+Q: Cú pháp Postman nào đúng để kiểm tra status 200?
+- pm.response.toHaveStatus(200)
+- pm.status.equals(200)
++ pm.response.to.have.status(200)
+
+## LESSON ai-for-qa-06 | An toàn dữ liệu khi dùng AI
+
+### Những thứ KHÔNG BAO GIỜ dán vào công cụ AI
+Hãy coi ô chat AI như một tờ giấy có thể bị người khác đọc. Nhiều dịch vụ lưu lại nội dung để xử lý; nếu dùng tài khoản cá nhân hoặc công cụ chưa được phép, dữ liệu có thể rời khỏi kiểm soát của công ty.
+Không dán:
+• Mật khẩu, API key, token (Bearer …), private key, chuỗi kết nối database.
+• Dữ liệu khách hàng: tên, email, số điện thoại, địa chỉ, CMND/CCCD, số thẻ, số tài khoản.
+• Log production, file export database, ảnh chụp màn hình có dữ liệu thật.
+• URL nội bộ, địa chỉ IP server, tên máy chủ, cấu hình hạ tầng.
+• Tài liệu mật, mã nguồn không được phép chia sẻ theo hợp đồng/chính sách.
+Nguyên tắc: nếu bạn ngại dán đoạn đó vào nhóm chat có người lạ, thì cũng đừng dán vào AI.
+
+### Che dữ liệu (masking): trước và sau
+~~~text
+TRƯỚC (KHÔNG được dán):
+2026-11-14 09:12:03 ERROR PaymentService user=nguyen.van.a@khachhang.vn
+  phone=0912345678 card=1234 5678 9012 3456 ip=10.12.3.45
+  Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.abc.def
+  host=pay-db-01.internal.congty.vn timeout after 30000ms
+
+SAU (có thể dùng với công cụ được phép):
+2026-11-14 09:12:03 ERROR PaymentService user=<EMAIL>
+  phone=<PHONE> card=<CARD> ip=<IP>
+  Authorization: Bearer <TOKEN>
+  host=<DB_HOST> timeout after 30000ms
+~~~
+Giải thích:
+• Giữ lại thứ cần để phân tích: thời gian, mức lỗi, tên service, thông điệp lỗi, con số timeout.
+• Thay mọi thứ định danh người hoặc hệ thống bằng nhãn trong ngoặc nhọn như <EMAIL>, <TOKEN>.
+• Dùng nhãn nhất quán (cùng một người luôn là <USER_1>) để AI vẫn hiểu quan hệ giữa các dòng.
+
+### Script Python che dữ liệu tự động
+Tạo file mask.py:
+~~~python
+import re
+
+text = """User nguyen.van.a@company.vn login failed from 10.12.3.45
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.abc.def
+Phone: 0912345678, card 1234 5678 9012 3456"""
+
+rules = [
+    (r"[\w.+-]+@[\w-]+\.[\w.]+", "<EMAIL>"),
+    (r"Bearer\s+[\w.-]+", "Bearer <TOKEN>"),
+    (r"\b\d{1,3}(\.\d{1,3}){3}\b", "<IP>"),
+    (r"\b(?:\d[ -]?){13,16}\b", "<CARD>"),
+    (r"\b0\d{9}\b", "<PHONE>"),
+]
+
+for pattern, replacement in rules:
+    text = re.sub(pattern, replacement, text)
+
+print(text)
+~~~
+Giải thích từng phần:
+• import re: thư viện biểu thức chính quy (regex) để tìm mẫu chữ.
+• text: đoạn log mẫu (dữ liệu giả).
+• rules: danh sách cặp (mẫu cần tìm, nhãn thay thế): email, Bearer token, địa chỉ IP, số thẻ 13–16 chữ số, số điện thoại 10 số bắt đầu bằng 0.
+• Thứ tự quan trọng: che số thẻ trước số điện thoại để không che nhầm một phần số thẻ.
+• re.sub(mẫu, nhãn, text): thay mọi chỗ khớp mẫu bằng nhãn.
+Chạy: python mask.py
+Kết quả mong đợi:
+User <EMAIL> login failed from <IP>
+Authorization: Bearer <TOKEN>
+Phone: <PHONE>, card <CARD>
+Script chỉ là lưới lọc đầu tiên: luôn đọc lại bằng mắt trước khi dán, vì regex có thể bỏ sót định dạng lạ.
+
+### Mô tả thay vì dán
+Nhiều khi bạn không cần dán dữ liệu, chỉ cần mô tả cấu trúc:
+~~~text
+KHÔNG: <dán 200 dòng export bảng customers>
+
+NÊN:
+Tôi có bảng customers với các cột:
+  id (int), full_name (text), email (text), status (ACTIVE/LOCKED), created_at (datetime).
+Hãy viết câu SQL đếm số khách hàng LOCKED theo từng tháng tạo tài khoản,
+dùng cú pháp PostgreSQL.
+~~~
+Giải thích: AI chỉ cần tên cột và kiểu dữ liệu để viết câu SQL; không cần một dòng dữ liệu thật nào. Sau đó bạn chạy câu SQL trên môi trường test được phép (không chạy thử nghiệm trên PROD).
+
+### Chính sách công ty và công cụ được phép
+• Hỏi rõ: công ty cho phép dùng công cụ AI nào, với loại dữ liệu nào? Thường có danh sách công cụ đã được duyệt (bản doanh nghiệp, có cam kết không dùng dữ liệu để huấn luyện).
+• Không dùng tài khoản AI cá nhân cho dữ liệu công việc nếu chính sách không cho phép.
+• Không cài tiện ích (extension) AI đọc toàn bộ trang web/email công ty khi chưa được duyệt.
+• Lỡ dán nhầm bí mật (token, mật khẩu): báo ngay cho trưởng nhóm/đội bảo mật để thu hồi và đổi khóa (rotate). Xóa đoạn chat không đủ.
+• Khi không chắc: hỏi trước, dán sau.
+
+### Sai lầm thường gặp
+• Triệu chứng: dán cả request cURL copy từ DevTools vào AI để hỏi lỗi.
+Nguyên nhân: request copy từ DevTools thường kèm cookie và header Authorization. Cách sửa: xóa hoặc thay bằng <TOKEN>, <COOKIE> trước khi dán.
+• Triệu chứng: ảnh chụp màn hình gửi AI có tên và số điện thoại khách hàng.
+Cách sửa: dùng dữ liệu test, hoặc làm mờ vùng nhạy cảm trước khi gửi.
+• Triệu chứng: che email nhưng quên che mã khách hàng nội bộ, đường dẫn server.
+Cách sửa: dùng checklist che dữ liệu (email, điện thoại, thẻ, token, IP, host, mã định danh) và đọc lại toàn bộ.
+• Triệu chứng: nghĩ "chỉ là môi trường test nên dán gì cũng được".
+Nguyên nhân: môi trường test đôi khi chứa bản sao dữ liệu thật hoặc khóa dùng chung. Cách sửa: áp dụng cùng quy tắc che dữ liệu.
+
+PRACTICE: Tự viết một đoạn log giả 6 dòng có email, số điện thoại, token, IP, host nội bộ (tự bịa). Chạy mask.py với đoạn log đó, bổ sung thêm 1 rule để che host có dạng *.internal.* thành <HOST>, và kiểm tra bằng mắt không còn thông tin nhạy cảm.
+Q: Thông tin nào được phép giữ lại khi gửi log cho AI phân tích (sau khi che)?
+- Bearer token để AI thử gọi API
++ Thời gian, mức lỗi, tên service và thông điệp lỗi
+- Email khách hàng để AI tìm ra người bị lỗi
+Q: Bạn lỡ dán một API key thật vào công cụ AI. Việc quan trọng nhất cần làm là gì?
+- Xóa đoạn chat là đủ
++ Báo ngay để thu hồi và đổi key (rotate)
+- Không cần làm gì vì AI không dùng key
+Q: Muốn AI viết câu SQL cho bảng customers, cách nào an toàn nhất?
++ Mô tả tên cột và kiểu dữ liệu, không dán dữ liệu thật
+- Dán 200 dòng dữ liệu thật để AI hiểu rõ
+- Gửi chuỗi kết nối database để AI tự xem
+
+## LESSON ai-for-qa-07 | AI viết bug report, tóm tắt log và trách nhiệm của con người
+
+### Nhờ AI viết bug report từ ghi chú nháp
+Khi test, bạn thường ghi chú vội. AI giúp biến ghi chú thành bug report gọn gàng:
+~~~text
+Bạn là QA engineer. Viết bug report từ ghi chú sau theo mẫu:
+Tiêu đề | Môi trường | Các bước tái hiện | Kết quả thực tế | Kết quả mong đợi |
+Mức độ (Severity) | Ghi chú.
+Không thêm thông tin không có trong ghi chú; chỗ nào thiếu thì ghi "[CẦN BỔ SUNG]".
+
+Ghi chú (đã che dữ liệu):
+- staging, Chrome 13x, tài khoản <USER_1>
+- giỏ có 2 sp, áp mã SALE10 -> tổng tiền giảm 2 lần (giảm 20% thay vì 10%)
+- reload trang thì đúng lại 10%
+- bấm Áp dụng 2 lần nhanh thì bị, bấm 1 lần thì không
+~~~
+Giải thích: mẫu cột giúp bug report đồng nhất; câu "[CẦN BỔ SUNG]" ngăn AI bịa phiên bản build hay mức độ.
+
+### Kết quả mẫu và việc bạn phải sửa
+~~~text
+Tiêu đề:   Mã giảm giá bị áp dụng 2 lần khi bấm "Áp dụng" liên tiếp nhanh
+Môi trường: Staging, Chrome 13x, build [CẦN BỔ SUNG]
+Các bước:
+  1. Đăng nhập bằng tài khoản test <USER_1>
+  2. Thêm 2 sản phẩm vào giỏ
+  3. Nhập mã SALE10, bấm "Áp dụng" 2 lần thật nhanh
+Kết quả thực tế: Tổng tiền giảm 20%
+Kết quả mong đợi: Tổng tiền chỉ giảm 10%; lần bấm thứ 2 bị bỏ qua
+Mức độ: [CẦN BỔ SUNG]
+Ghi chú: Tải lại trang thì tổng tiền hiển thị lại đúng 10%.
+~~~
+Việc của bạn sau khi nhận kết quả:
+• Điền build, số tiền cụ thể (trước/sau giảm), tần suất tái hiện (ví dụ 4/5 lần).
+• Tự quyết định Severity theo quy định team: AI không biết mức ảnh hưởng kinh doanh thật.
+• Kiểm tra lại: sau khi reload, đơn hàng đặt ra bị trừ 10% hay 20%? Đây là câu hỏi then chốt AI không trả lời được.
+• Đính kèm video/ảnh (đã che dữ liệu nhạy cảm).
+
+### Tóm tắt log dài (đã che dữ liệu)
+~~~text
+Dưới đây là log (đã che dữ liệu) của service đặt hàng trong 2 phút khi test bị lỗi.
+Hãy:
+1. Tóm tắt chuỗi sự kiện theo thời gian (tối đa 6 dòng).
+2. Chỉ ra dòng ERROR/WARN đầu tiên và khả năng liên quan đến lỗi.
+3. Gợi ý 3 hướng kiểm tra tiếp theo cho tester (không phải cách sửa code).
+Nếu log không đủ thông tin để kết luận, hãy nói rõ.
+
+<dán log đã chạy qua mask.py và đã đọc lại bằng mắt>
+~~~
+Giải thích:
+• Bước 1 giúp bạn nhìn nhanh "chuyện gì đã xảy ra".
+• Bước 2 tập trung vào lỗi ĐẦU TIÊN, vì các lỗi sau thường chỉ là hệ quả.
+• Bước 3 hướng AI đến việc của tester: cần thu thập thêm gì, tái hiện thế nào.
+• Câu cuối khuyến khích AI thừa nhận khi không chắc, thay vì đoán nguyên nhân.
+
+### Checklist soát kết quả AI trước khi dùng
+~~~text
+[ ] ĐÚNG requirement? Mỗi ý có căn cứ trong tài liệu/hệ thống thật.
+[ ] KHÔNG BỊA? Tên hàm, API, selector, phiên bản, con số đã được kiểm chứng.
+[ ] ĐỦ? Có cả trường hợp negative, biên, lỗi; không bỏ sót requirement.
+[ ] KHÔNG TRÙNG? Gộp các ý giống nhau viết khác chữ.
+[ ] ĐÃ CHẠY? Code/lệnh đã chạy thử và hiểu từng dòng; đã thử cho fail.
+[ ] AN TOÀN? Không còn dữ liệu nhạy cảm trong prompt, kết quả, bằng chứng.
+[ ] RÕ RÀNG? Người khác đọc hiểu mà không cần hỏi lại.
+~~~
+Cách dùng: dán checklist này vào cuối mỗi tài liệu có AI hỗ trợ, đánh dấu [x] từng mục trước khi gửi review hoặc đưa vào bộ test chính thức.
+
+### Trách nhiệm thuộc về con người
+• AI là công cụ, giống máy tính bỏ túi: dùng sai thì kết quả sai, và người dùng chịu trách nhiệm.
+• Bug lọt ra production vì "AI bảo test case đủ rồi" vẫn là trách nhiệm của team QA.
+• Không để AI quyết định: phát hành hay không, mức độ nghiêm trọng, đóng bug.
+• Minh bạch: khi được hỏi, nói rõ phần nào AI hỗ trợ và bạn đã kiểm chứng ra sao.
+• Đo hiệu quả thật: thời gian tiết kiệm được, số bug tìm thêm được, số lỗi do AI gây ra. Nếu AI làm chậm hơn ở một việc, đừng dùng cho việc đó.
+• Tiếp tục học kỹ năng nền (test design, API, SQL, automation): AI chỉ khuếch đại năng lực bạn đang có.
+
+### Sai lầm thường gặp
+• Triệu chứng: bug report do AI viết có Severity "Critical" cho lỗi chính tả.
+Nguyên nhân: AI đoán mức độ. Cách sửa: để trống phần Severity trong prompt, tự đánh giá theo quy định.
+• Triệu chứng: AI tóm tắt log kết luận "lỗi do database" nhưng thực tế do cấu hình mạng.
+Nguyên nhân: AI suy diễn từ thông tin thiếu. Cách sửa: coi kết luận của AI là giả thuyết, kiểm chứng bằng tái hiện và hỏi dev.
+• Triệu chứng: dev phàn nàn bug report dài, lan man.
+Cách sửa: yêu cầu AI viết ngắn gọn, tối đa N dòng, và tự cắt bớt phần thừa.
+• Triệu chứng: gửi kết quả AI đi mà chưa đọc hết.
+Cách sửa: luôn chạy checklist soát kết quả trước khi gửi.
+
+PRACTICE: Ghi chú nhanh (đã che dữ liệu) về một lỗi bạn từng gặp trên một trang demo. Dùng prompt trong bài để AI viết bug report, sau đó sửa bản AI viết theo checklist soát kết quả và ghi lại ít nhất 3 chỗ bạn đã sửa hoặc bổ sung.
+Q: Trong prompt viết bug report, vì sao nên yêu cầu ghi "[CẦN BỔ SUNG]" cho chỗ thiếu?
+- Để bug report dài hơn
++ Để AI không tự bịa thông tin như số build hay mức độ
+- Vì Jira yêu cầu cú pháp này
+Q: AI tóm tắt log và kết luận nguyên nhân lỗi. Bạn nên xem kết luận đó là gì?
+- Sự thật chắc chắn, đóng bug luôn
++ Giả thuyết cần kiểm chứng bằng tái hiện và trao đổi với dev
+- Thông tin không có giá trị
+Q: Ai chịu trách nhiệm cuối cùng về bộ test case có phần do AI hỗ trợ viết?
+- Nhà cung cấp công cụ AI
+- Không ai cả
++ Tester/team QA đã dùng và phê duyệt bộ test đó

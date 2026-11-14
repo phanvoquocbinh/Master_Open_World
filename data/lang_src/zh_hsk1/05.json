@@ -1,0 +1,157 @@
+{
+  "no": 5,
+  "title": "今天几月几号？– Ngày tháng, thứ, giờ giấc",
+  "sub": "Jīntiān jǐ yuè jǐ hào? 今天几月几号？",
+  "goals": [
+    "Nói và hỏi ngày tháng năm, thứ trong tuần theo thứ tự tiếng Trung (lớn → nhỏ)",
+    "Hỏi và nói giờ: 现在几点？– 八点半 / 三点十分; buổi đứng trước giờ (上午八点)",
+    "Dùng câu vị ngữ danh từ 今天星期六 (phủ định bắt buộc 不是)",
+    "Đặt từ chỉ thời gian TRƯỚC động từ; hỏi 什么时候",
+    "Phân biệt x – q – j (星期, 今天), đọc đúng ian (点, 天) và 日 rì"
+  ],
+  "parts": [
+    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
+      {"w": "年", "py": "nián", "hv": "niên", "pos": "n", "vi": "năm", "ex": "二〇二六年", "exPy": "èr líng èr liù nián", "exVi": "năm 2026"},
+      {"w": "月", "py": "yuè", "hv": "nguyệt", "pos": "n", "vi": "tháng; mặt trăng", "ex": "一月是我的生日。", "exPy": "Yī yuè shì wǒ de shēngrì.", "exVi": "Tháng Một có sinh nhật tôi."},
+      {"w": "日", "py": "rì", "hv": "nhật", "pos": "n", "vi": "ngày (văn viết); mặt trời", "ex": "十一月十四日", "exPy": "shíyī yuè shísì rì", "exVi": "ngày 14 tháng 11"},
+      {"w": "号", "py": "hào", "hv": "hiệu", "pos": "n", "vi": "ngày (khẩu ngữ); số", "ex": "今天几号？", "exPy": "Jīntiān jǐ hào?", "exVi": "Hôm nay ngày mấy?"},
+      {"w": "星期", "py": "xīngqī", "hv": "tinh kỳ", "pos": "n", "vi": "tuần; thứ (星期一 = thứ Hai)", "ex": "今天星期几？", "exPy": "Jīntiān xīngqī jǐ?", "exVi": "Hôm nay thứ mấy?"},
+      {"w": "天", "py": "tiān", "hv": "thiên", "pos": "n", "vi": "ngày; trời", "ex": "一个星期有七天。", "exPy": "Yí ge xīngqī yǒu qī tiān.", "exVi": "Một tuần có bảy ngày."},
+      {"w": "今天", "py": "jīntiān", "hv": "kim thiên", "pos": "n", "vi": "hôm nay", "ex": "今天星期六。", "exPy": "Jīntiān xīngqīliù.", "exVi": "Hôm nay thứ Bảy."},
+      {"w": "明天", "py": "míngtiān", "hv": "minh thiên", "pos": "n", "vi": "ngày mai", "ex": "明天是我的生日。", "exPy": "Míngtiān shì wǒ de shēngrì.", "exVi": "Ngày mai là sinh nhật tôi."},
+      {"w": "昨天", "py": "zuótiān", "hv": "tạc thiên", "pos": "n", "vi": "hôm qua", "ex": "昨天星期五。", "exPy": "Zuótiān xīngqīwǔ.", "exVi": "Hôm qua thứ Sáu."},
+      {"w": "现在", "py": "xiànzài", "hv": "hiện tại", "pos": "n", "vi": "bây giờ", "ex": "现在几点？", "exPy": "Xiànzài jǐ diǎn?", "exVi": "Bây giờ mấy giờ?"},
+      {"w": "点", "py": "diǎn", "hv": "điểm", "pos": "mw", "vi": "giờ (mốc giờ)", "ex": "现在八点。", "exPy": "Xiànzài bā diǎn.", "exVi": "Bây giờ là 8 giờ."},
+      {"w": "分", "py": "fēn", "hv": "phân", "pos": "mw", "vi": "phút (khi nói giờ)", "ex": "三点十分", "exPy": "sān diǎn shí fēn", "exVi": "3 giờ 10 phút"},
+      {"w": "分钟", "py": "fēnzhōng", "hv": "phân chung", "pos": "n", "vi": "phút (khoảng thời gian)", "ex": "还有十分钟。", "exPy": "Hái yǒu shí fēnzhōng.", "exVi": "Còn mười phút nữa."},
+      {"w": "半", "py": "bàn", "hv": "bán", "pos": "num", "vi": "rưỡi, một nửa", "ex": "七点半", "exPy": "qī diǎn bàn", "exVi": "7 giờ rưỡi"},
+      {"w": "上午", "py": "shàngwǔ", "hv": "thượng ngọ", "pos": "n", "vi": "buổi sáng (trước trưa)", "ex": "上午九点", "exPy": "shàngwǔ jiǔ diǎn", "exVi": "9 giờ sáng"},
+      {"w": "中午", "py": "zhōngwǔ", "hv": "trung ngọ", "pos": "n", "vi": "buổi trưa", "ex": "中午十二点", "exPy": "zhōngwǔ shí'èr diǎn", "exVi": "12 giờ trưa"},
+      {"w": "下午", "py": "xiàwǔ", "hv": "hạ ngọ", "pos": "n", "vi": "buổi chiều", "ex": "下午三点", "exPy": "xiàwǔ sān diǎn", "exVi": "3 giờ chiều"},
+      {"w": "晚上", "py": "wǎnshang", "hv": "vãn thượng", "pos": "n", "vi": "buổi tối", "ex": "晚上七点半", "exPy": "wǎnshang qī diǎn bàn", "exVi": "7 giờ rưỡi tối"},
+      {"w": "时候", "py": "shíhou", "hv": "thời hậu", "pos": "n", "vi": "lúc, khi (什么时候 = khi nào)", "ex": "你什么时候有汉语课？", "exPy": "Nǐ shénme shíhou yǒu Hànyǔ kè?", "exVi": "Khi nào bạn có tiết tiếng Trung?"},
+      {"w": "生日", "py": "shēngrì", "hv": "sinh nhật", "pos": "n", "vi": "sinh nhật", "ex": "你的生日是几月几号？", "exPy": "Nǐ de shēngrì shì jǐ yuè jǐ hào?", "exVi": "Sinh nhật bạn là ngày mấy tháng mấy?"}
+    ]},
+    {"k": "sounds", "h": "Phát âm: x – q – j, ian, 日 rì, z – zh và 3+3 khi nói giờ", "items": [
+      {"sym": "x – q – j", "ex": ["星期", "今天", "现在"], "vi": "星 <b>xīng</b> (x: mặt lưỡi xì nhẹ), 期 <b>qī</b> (q: như j nhưng BẬT HƠI), 今 <b>jīn</b> (j: không bật hơi). 星期 xīngqī – đừng đọc thành “xinh chi”.", "pairs": [["期", "鸡"], ["星", "京"]]},
+      {"sym": "ian = “iên”", "ex": ["点", "天", "现在", "明天"], "vi": "ian đọc gần “iên”, KHÔNG đọc “i-an”: 天 tiān ≈ “thiên” (đúng âm Hán Việt!), 点 diǎn ≈ “tiển”, 现 xiàn ≈ “xiền”."},
+      {"sym": "r trong 日", "ex": ["日", "生日"], "vi": "日 rì: uốn lưỡi, rung dây thanh, nguyên âm như “ư” kéo dài → gần “rư”. KHÔNG đọc “rì” như tiếng Việt hay “zi”."},
+      {"sym": "z – zh", "ex": ["现在", "中午"], "vi": "在 <b>zài</b>: lưỡi phẳng, gần “ch” nhẹ không bật hơi. 中 <b>zhōng</b>: uốn lưỡi, gần “tr”. 现在 xiànzài ≈ “xiền chai”, 中午 zhōngwǔ ≈ “trung ủ”.", "pairs": [["在", "寨"]]},
+      {"sym": "3 + 3 khi nói giờ", "ex": ["几点", "五点", "九点", "很晚"], "vi": "几点 jǐ diǎn → đọc <b>jí diǎn</b>; 五点 → wú diǎn; 九点 → jiú diǎn. Pinyin vẫn viết thanh gốc."}
+    ]},
+    {"k": "grammar", "h": "Ngữ pháp 1: Ngày – tháng – năm – thứ (lớn trước, nhỏ sau)", "html": "<p>Tiếng Trung sắp xếp thời gian <b>từ lớn đến nhỏ</b>: năm → tháng → ngày → thứ (ngược tiếng Việt).</p><p>Tiếng Việt: <i>Thứ Bảy, ngày 14 tháng 11 năm 2026</i><br>Tiếng Trung: <b>2026年11月14日，星期六</b> (èr líng èr liù nián shíyī yuè shísì rì, xīngqīliù)</p><ul><li><b>Năm</b>: đọc từng chữ số – 2026 → 二〇二六年.</li><li><b>Tháng</b>: số + 月 – 一月 (tháng Một) … 十二月 (tháng Mười hai). Số đứng TRƯỚC.</li><li><b>Ngày</b>: số + 号 (khi nói) / 日 (khi viết).</li><li><b>Thứ</b>: 星期 + 一…六 = thứ Hai … thứ Bảy; Chủ nhật = 星期天 / 星期日.</li></ul>", "table": [["Tiếng Việt", "Tiếng Trung", "Pinyin"], ["Thứ Hai", "星期一", "xīngqīyī"], ["Thứ Ba", "星期二", "xīngqī'èr"], ["Thứ Tư", "星期三", "xīngqīsān"], ["Thứ Năm", "星期四", "xīngqīsì"], ["Thứ Sáu", "星期五", "xīngqīwǔ"], ["Thứ Bảy", "星期六", "xīngqīliù"], ["Chủ nhật", "星期天 / 星期日", "xīngqītiān / xīngqīrì"]], "ex": [
+      {"t": "今天几月几号？— 今天十一月十四号。", "py": "Jīntiān jǐ yuè jǐ hào? — Jīntiān shíyī yuè shísì hào.", "vi": "Hôm nay ngày mấy tháng mấy? — Hôm nay ngày 14 tháng 11."},
+      {"t": "今天星期几？— 今天星期六。", "py": "Jīntiān xīngqī jǐ? — Jīntiān xīngqīliù.", "vi": "Hôm nay thứ mấy? — Hôm nay thứ Bảy."},
+      {"t": "我的生日是五月二十号。", "py": "Wǒ de shēngrì shì wǔ yuè èrshí hào.", "vi": "Sinh nhật tôi là ngày 20 tháng 5."},
+      {"t": "明天不是星期天。", "py": "Míngtiān bú shì xīngqītiān.", "vi": "Ngày mai không phải Chủ nhật."}
+    ], "tips": ["Bẫy số 1 của người Việt: 星期一 = thứ <b>Hai</b>. Mẹo: 星期 + n = thứ (n + 1); Chủ nhật là 星期天.", "Hỏi thứ: 星期<b>几</b>？; hỏi ngày: 几月几号？ – thay số bằng 几, không thêm 吗.", "一月 = tháng Một, 一个月 = một tháng (khoảng thời gian). Tương tự 星期一 (thứ Hai) ≠ 一个星期 (một tuần)."]},
+    {"k": "grammar", "h": "Ngữ pháp 2: Nói giờ – 点, 分, 半", "html": "<p><b>Số + 点 (giờ) + số + 分 (phút)</b>. Buổi trong ngày đứng TRƯỚC giờ: <b>上午八点</b> = 8 giờ sáng (tiếng Việt nói ngược: “8 giờ sáng”).</p>", "table": [["Giờ", "Tiếng Trung", "Pinyin"], ["8:00", "八点", "bā diǎn"], ["8:05", "八点零五分", "bā diǎn líng wǔ fēn"], ["8:15", "八点十五分 / 八点一刻", "bā diǎn shíwǔ fēn / bā diǎn yí kè"], ["8:30", "八点半 / 八点三十分", "bā diǎn bàn / bā diǎn sānshí fēn"], ["8:45", "八点四十五分 / 差一刻九点", "bā diǎn sìshíwǔ fēn / chà yí kè jiǔ diǎn"], ["2:00", "两点", "liǎng diǎn"], ["12:00", "十二点", "shí'èr diǎn"]], "ex": [
+      {"t": "现在几点？— 现在下午三点十分。", "py": "Xiànzài jǐ diǎn? — Xiànzài xiàwǔ sān diǎn shí fēn.", "vi": "Bây giờ mấy giờ? — Bây giờ là 3 giờ 10 chiều."},
+      {"t": "我们上午九点有汉语课。", "py": "Wǒmen shàngwǔ jiǔ diǎn yǒu Hànyǔ kè.", "vi": "Chúng tôi có tiết tiếng Trung lúc 9 giờ sáng."},
+      {"t": "现在两点，不是十二点。", "py": "Xiànzài liǎng diǎn, bú shì shí'èr diǎn.", "vi": "Bây giờ là 2 giờ, không phải 12 giờ."}
+    ], "tips": ["2 giờ = <b>两点</b> (❌ 二点). Nhưng 12 giờ = 十二点; 2 phút khi nói giờ = 零二分 (八点零二分).", "点 là mốc giờ (8 giờ), 分钟 là khoảng thời gian (8 phút): 十分钟 = mười phút.", "刻 kè (15 phút) và 差 chà (kém) thuộc HSK 2–3 – hiện chỉ cần nghe hiểu."]},
+    {"k": "grammar", "h": "Ngữ pháp 3: Câu vị ngữ danh từ; vị trí từ chỉ thời gian; 什么时候", "html": "<p>Với ngày, thứ, giờ, tuổi… có thể bỏ 是: <b>今天星期六。现在八点。</b> Nhưng phủ định phải có <b>不是</b>: 今天不是星期天。</p><p><b>Từ chỉ thời gian đứng TRƯỚC động từ</b> (sau hoặc trước chủ ngữ) – KHÔNG đặt cuối câu như tiếng Việt.</p><p>“Tôi có tiết tiếng Trung lúc 9 giờ sáng mai” → <b>我明天上午九点有汉语课。</b> hoặc <b>明天上午九点我有汉语课。</b></p><p>Hỏi “khi nào”: <b>什么时候</b> đặt đúng chỗ của thời gian: 你什么时候有汉语课？</p>", "table": [["Chủ ngữ", "Thời gian", "Động từ + tân ngữ"], ["我", "明天上午九点", "有汉语课。"], ["小明", "星期六", "很忙。"], ["你", "什么时候", "有汉语课？"]], "ex": [
+      {"t": "今天十一月十九号，星期四。", "py": "Jīntiān shíyī yuè shíjiǔ hào, xīngqīsì.", "vi": "Hôm nay ngày 19 tháng 11, thứ Năm."},
+      {"t": "我们星期五下午有汉语课。", "py": "Wǒmen xīngqīwǔ xiàwǔ yǒu Hànyǔ kè.", "vi": "Chúng tôi có tiết tiếng Trung vào chiều thứ Sáu."},
+      {"t": "你什么时候有汉语课？— 星期一和星期三。", "py": "Nǐ shénme shíhou yǒu Hànyǔ kè? — Xīngqīyī hé xīngqīsān.", "vi": "Khi nào bạn có tiết tiếng Trung? — Thứ Hai và thứ Tư."}
+    ], "tips": ["❌ <i>我有汉语课明天</i> (theo trật tự tiếng Việt) → ✅ 我明天有汉语课。", "Nhiều từ thời gian: lớn trước nhỏ sau – 明天上午九点 (ngày mai → buổi sáng → 9 giờ).", "Câu hỏi có/không: 今天星期六吗？ hoặc 今天是星期六吗？ đều được; trả lời phủ định bắt buộc 不是: 不是，今天星期五。"]},
+    {"k": "text", "h": "Văn hoá: Lễ tết & lời chúc sinh nhật", "html": "<p>Nhiều ngày lễ của Trung Quốc có tên Hán Việt rất quen:</p><table><tr><th>Ngày lễ</th><th>Chữ Hán</th><th>Pinyin</th><th>Hán Việt</th></tr><tr><td>Tết Nguyên đán (âm lịch)</td><td>春节</td><td>Chūnjié</td><td>Xuân tiết</td></tr><tr><td>Tết Trung thu</td><td>中秋节</td><td>Zhōngqiū Jié</td><td>Trung thu tiết</td></tr><tr><td>Tết Dương lịch 1/1</td><td>元旦</td><td>Yuándàn</td><td>Nguyên đán</td></tr><tr><td>Quốc khánh</td><td>国庆节</td><td>Guóqìng Jié</td><td>Quốc khánh tiết</td></tr></table><p>⚠️ Bẫy: “Tết Nguyên đán” của ta trong tiếng Trung là <b>春节</b>; còn <b>元旦</b> (đọc Hán Việt là “Nguyên đán”) lại là Tết <b>Dương lịch</b> ngày 1/1!</p><p>Âm lịch: <b>农历</b> nónglì. Chúc mừng sinh nhật: <b>祝你生日快乐！</b> Zhù nǐ shēngrì kuàilè!</p>"},
+    {"k": "dialog", "h": "Nghe: Mai là sinh nhật ai?", "lang": "zh-CN", "note": "Chiều thứ Năm, Anna và Tiểu Lan nói chuyện ở trường. Nghe lần 1 không nhìn chữ: sinh nhật Tiểu Minh là ngày nào?", "lines": [
+      {"s": "安娜", "g": "f", "t": "小兰，今天几号？", "py": "Xiǎo Lán, jīntiān jǐ hào?", "vi": "Lan ơi, hôm nay ngày mấy?"},
+      {"s": "小兰", "g": "f", "t": "今天十一月十九号。", "py": "Jīntiān shíyī yuè shíjiǔ hào.", "vi": "Hôm nay ngày 19 tháng 11."},
+      {"s": "安娜", "g": "f", "t": "今天星期几？", "py": "Jīntiān xīngqī jǐ?", "vi": "Hôm nay thứ mấy?"},
+      {"s": "小兰", "g": "f", "t": "今天星期四。明天是小明的生日！", "py": "Jīntiān xīngqīsì. Míngtiān shì Xiǎo Míng de shēngrì!", "vi": "Hôm nay thứ Năm. Ngày mai là sinh nhật Tiểu Minh đấy!"},
+      {"s": "安娜", "g": "f", "t": "是吗？他的生日是十一月二十号？", "py": "Shì ma? Tā de shēngrì shì shíyī yuè èrshí hào?", "vi": "Thật à? Sinh nhật cậu ấy là ngày 20 tháng 11?"},
+      {"s": "小兰", "g": "f", "t": "对。明天晚上七点半，我们在小明家。", "py": "Duì. Míngtiān wǎnshang qī diǎn bàn, wǒmen zài Xiǎo Míng jiā.", "vi": "Đúng rồi. Bảy rưỡi tối mai, chúng mình tập trung ở nhà Tiểu Minh."},
+      {"s": "安娜", "g": "f", "t": "好！现在几点？", "py": "Hǎo! Xiànzài jǐ diǎn?", "vi": "Được! Bây giờ mấy giờ rồi?"},
+      {"s": "小兰", "g": "f", "t": "现在下午四点十分。", "py": "Xiànzài xiàwǔ sì diǎn shí fēn.", "vi": "Bây giờ là 4 giờ 10 chiều."},
+      {"s": "安娜", "g": "f", "t": "我五点有汉语课，还有五十分钟。", "py": "Wǒ wǔ diǎn yǒu Hànyǔ kè, hái yǒu wǔshí fēnzhōng.", "vi": "5 giờ mình có tiết tiếng Trung, còn 50 phút nữa."},
+      {"s": "小兰", "g": "f", "t": "安娜，你的生日是几月几号？", "py": "Ānnà, nǐ de shēngrì shì jǐ yuè jǐ hào?", "vi": "Anna, sinh nhật bạn là ngày mấy tháng mấy?"},
+      {"s": "安娜", "g": "f", "t": "我的生日是一月一号。", "py": "Wǒ de shēngrì shì yī yuè yī hào.", "vi": "Sinh nhật mình là ngày 1 tháng 1."},
+      {"s": "小兰", "g": "f", "t": "一月一号？那天是元旦！", "py": "Yī yuè yī hào? Nà tiān shì Yuándàn!", "vi": "Ngày 1 tháng 1? Hôm đó là Tết Dương lịch!"},
+      {"s": "安娜", "g": "f", "t": "对！我的生日，大家都不上课！", "py": "Duì! Wǒ de shēngrì, dàjiā dōu bú shàng kè!", "vi": "Đúng thế! Vào sinh nhật mình, mọi người đều được nghỉ học!"}
+    ], "qs": [
+      {"q": "Hôm nay là ngày mấy?", "o": ["19/11", "20/11", "14/11"], "a": 0, "e": "今天十一月十九号 = ngày 19 tháng 11."},
+      {"q": "Hôm nay thứ mấy?", "o": ["Thứ Tư", "Thứ Năm", "Thứ Sáu"], "a": 1, "e": "今天星期四 = thứ Năm (星期 + 4 → thứ 5)."},
+      {"q": "Sinh nhật Tiểu Minh là ngày nào?", "o": ["19/11", "20/11", "1/1"], "a": 1, "e": "明天是小明的生日 → 十一月二十号."},
+      {"q": "Bây giờ là mấy giờ?", "o": ["4 giờ 10 chiều", "10 giờ 4 phút sáng", "5 giờ chiều"], "a": 0, "e": "现在下午四点十分。"},
+      {"q": "Sinh nhật Anna: 一月___号 (gõ chữ Hán, số hoặc pinyin)", "a": "一", "alt": ["1", "yi"], "e": "我的生日是一月一号 – ngày 1 tháng 1."}
+    ]},
+    {"k": "read", "h": "Đọc: Sinh nhật Tiểu Minh", "title": "小明的生日", "text": "十一月二十号，星期五，是小明的生日。小明今年二十岁。\n\n上午八点到十一点半，小明有汉语课。中午，他和妈妈在家吃饭。\n\n晚上七点半，小兰和安娜都在小明家。小明很高兴！", "py": "Shíyī yuè èrshí hào, xīngqīwǔ, shì Xiǎo Míng de shēngrì. Xiǎo Míng jīnnián èrshí suì.\n\nShàngwǔ bā diǎn dào shíyī diǎn bàn, Xiǎo Míng yǒu Hànyǔ kè. Zhōngwǔ, tā hé māma zài jiā chī fàn.\n\nWǎnshang qī diǎn bàn, Xiǎo Lán hé Ānnà dōu zài Xiǎo Míng jiā. Xiǎo Míng hěn gāoxìng!", "vi": "Ngày 20 tháng 11, thứ Sáu, là sinh nhật Tiểu Minh. Năm nay Tiểu Minh 20 tuổi.\n\nTừ 8 giờ đến 11 rưỡi sáng, Tiểu Minh có tiết tiếng Trung. Buổi trưa, cậu ấy ăn cơm ở nhà với mẹ.\n\n7 rưỡi tối, Tiểu Lan và Anna đều có mặt ở nhà Tiểu Minh. Tiểu Minh rất vui!", "gloss": [
+      {"w": "到", "py": "dào", "vi": "đến (từ… đến…)"},
+      {"w": "汉语课", "py": "Hànyǔ kè", "vi": "tiết/lớp tiếng Trung"},
+      {"w": "吃饭", "py": "chī fàn", "vi": "ăn cơm (bài 7)"},
+      {"w": "在…家", "py": "zài … jiā", "vi": "ở nhà … (bài 8)"}
+    ], "qs": [
+      {"q": "Sinh nhật Tiểu Minh rơi vào thứ mấy?", "o": ["Thứ Năm", "Thứ Sáu", "Thứ Bảy"], "a": 1, "e": "星期五 = thứ Sáu."},
+      {"q": "Tiểu Minh học tiếng Trung từ mấy giờ đến mấy giờ?", "o": ["8:00 – 11:30", "8:30 – 11:00", "7:30 – 11:30"], "a": 0, "e": "上午八点到十一点半。"},
+      {"q": "Buổi trưa Tiểu Minh ăn cơm với ai?", "o": ["Mẹ", "Tiểu Lan", "Anna"], "a": 0, "e": "中午，他和妈妈在家吃饭。"},
+      {"q": "Mấy giờ các bạn có mặt ở nhà Tiểu Minh? (gõ chữ Hán hoặc pinyin)", "a": "七点半", "alt": ["7:30", "qidianban", "晚上七点半", "七点三十分"], "e": "晚上七点半 – 7 giờ rưỡi tối."}
+    ]},
+    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
+      {"c": "年", "py": "nián", "hv": "niên", "parts": "chữ gốc vẽ người vác bó lúa (禾), nay viết gọn", "strokes": 6, "vi": "năm – mỗi năm một mùa gặt", "words": "今年, 二〇二六年"},
+      {"c": "月", "py": "yuè", "hv": "nguyệt", "parts": "tượng hình mặt trăng khuyết", "strokes": 4, "vi": "tháng, mặt trăng – trăng tròn khuyết một lần là một tháng", "words": "一月, 几月"},
+      {"c": "日", "py": "rì", "hv": "nhật", "parts": "tượng hình mặt trời (vòng tròn có chấm giữa, viết vuông)", "strokes": 4, "vi": "ngày, mặt trời", "words": "生日, 星期日"},
+      {"c": "天", "py": "tiān", "hv": "thiên", "parts": "一 (bầu trời) + 大 (người dang tay)", "strokes": 4, "vi": "trời, ngày – khoảng trời trên đầu người", "words": "今天, 明天, 昨天"},
+      {"c": "星", "py": "xīng", "hv": "tinh", "parts": "日 (ánh sáng) + 生 (sinh – gợi âm)", "strokes": 9, "vi": "ngôi sao – ánh sáng sinh ra trên trời đêm", "words": "星期"},
+      {"c": "期", "py": "qī", "hv": "kỳ", "parts": "其 (kỳ – gợi âm) + 月 (trăng)", "strokes": 12, "vi": "kỳ hạn – xưa tính ngày theo trăng", "words": "星期"},
+      {"c": "点", "py": "diǎn", "hv": "điểm", "parts": "占 (chiêm) + 灬 (bốn chấm lửa)", "strokes": 9, "vi": "chấm, điểm; giờ", "words": "几点, 八点半"}
+    ]},
+    {"k": "speak", "h": "Nói: Ngày giờ của tôi", "tasks": [
+      {"p": "Nói hôm nay là ngày mấy, thứ mấy, bây giờ mấy giờ.", "model": "今天十一月十四号，星期六。现在上午十点。", "py": "Jīntiān shíyī yuè shísì hào, xīngqīliù. Xiànzài shàngwǔ shí diǎn.", "vi": "Hôm nay ngày 14 tháng 11, thứ Bảy. Bây giờ là 10 giờ sáng.", "tips": "Không cần 是 trong câu ngày giờ; buổi (上午) đứng trước giờ."},
+      {"p": "Hỏi sinh nhật bạn bên cạnh, rồi nói sinh nhật của mình.", "model": "你的生日是几月几号？— 我的生日是五月二十号。", "py": "Nǐ de shēngrì shì jǐ yuè jǐ hào? — Wǒ de shēngrì shì wǔ yuè èrshí hào.", "vi": "Sinh nhật bạn là ngày nào? — Sinh nhật mình là ngày 20 tháng 5.", "tips": "Nếu hôm nay đúng sinh nhật bạn ấy: 祝你生日快乐！"},
+      {"p": "Kể lịch học tiếng Trung của bạn trong tuần.", "model": "我星期一和星期三晚上七点有汉语课。", "py": "Wǒ xīngqīyī hé xīngqīsān wǎnshang qī diǎn yǒu Hànyǔ kè.", "vi": "Tôi có tiết tiếng Trung lúc 7 giờ tối thứ Hai và thứ Tư.", "tips": "Thời gian đặt trước 有 – không đặt cuối câu."}
+    ]},
+    {"k": "write", "h": "Viết: Một ngày đặc biệt", "task": "Viết 5–7 câu về một ngày đặc biệt của bạn (sinh nhật, ngày thi…): ngày tháng, thứ, và 3–4 mốc giờ trong ngày.", "min": 40, "model": "五月二十号，星期三，是我的生日。我今年二十岁。上午九点，我有汉语课。中午十二点，我和妈妈在家。晚上七点，我的朋友都在我家。我很高兴！", "modelVi": "Ngày 20 tháng 5, thứ Tư, là sinh nhật tôi. Năm nay tôi 20 tuổi. 9 giờ sáng tôi có tiết tiếng Trung. 12 giờ trưa tôi ở nhà với mẹ. 7 giờ tối các bạn tôi đều đến nhà tôi. Tôi rất vui!", "tips": ["Ngày tháng: tháng trước, ngày sau, thứ cuối cùng.", "Mỗi câu bắt đầu bằng mốc thời gian giúp đoạn văn rõ ràng.", "Câu “ở nhà ai” dùng 在…家 (học kỹ ở bài 8)."], "checklist": ["Thứ tự năm → tháng → ngày → thứ", "Buổi đứng trước giờ (上午九点)", "Thời gian đứng trước động từ", "Có 半 hoặc 分", "Dùng đúng 星期 (星期一 = thứ Hai)"]}
+  ],
+  "exercises": [
+    {"t": "listen", "say": "今天星期三。", "lang": "zh-CN", "q": "Hôm nay thứ mấy?", "o": ["Thứ Ba", "Thứ Tư", "Thứ Năm"], "a": 1, "e": "星期三 = thứ Tư (星期 + n = thứ n+1)."},
+    {"t": "listen", "say": "现在八点半。", "lang": "zh-CN", "q": "Bây giờ mấy giờ?", "o": ["8:00", "8:30", "9:30"], "a": 1, "e": "八点半 = 8 giờ rưỡi."},
+    {"t": "listen", "say": "我的生日是十月十号。", "lang": "zh-CN", "q": "Sinh nhật người nói là ngày nào?", "o": ["4/10", "10/10", "10/4"], "a": 1, "e": "十月十号 = ngày 10 tháng 10."},
+    {"t": "listen", "say": "明天下午两点，我有汉语课。", "lang": "zh-CN", "q": "Khi nào người nói có tiết tiếng Trung?", "o": ["2 giờ chiều mai", "2 giờ sáng mai", "2 giờ chiều nay"], "a": 0, "e": "明天 (ngày mai) 下午 (chiều) 两点 (2 giờ)."},
+    {"t": "mc", "q": "“Thứ Hai, ngày 3 tháng 5” viết là:", "o": ["星期二，五月三号", "五月三号，星期一", "三号五月，星期一"], "a": 1, "e": "Tháng → ngày → thứ; thứ Hai = 星期一."},
+    {"t": "mc", "q": "星期天 (xīngqītiān) là:", "o": ["Thứ Bảy", "Chủ nhật", "Thứ Hai"], "a": 1, "e": "星期天 / 星期日 = Chủ nhật."},
+    {"t": "mc", "q": "Câu nào ĐÚNG? (Hôm nay không phải thứ Bảy.)", "o": ["今天不星期六。", "今天不是星期六。", "今天没星期六。"], "a": 1, "e": "Phủ định câu vị ngữ danh từ phải dùng 不是."},
+    {"t": "mc", "q": "“Tôi có tiết tiếng Trung lúc 9 giờ sáng mai” – câu đúng:", "o": ["我有汉语课明天上午九点。", "我明天上午九点有汉语课。", "我九点上午明天有汉语课。"], "a": 1, "e": "Thời gian xếp lớn → nhỏ và đứng trước động từ."},
+    {"t": "fill", "q": "今天星期___？(Hôm nay thứ mấy?)", "a": "几", "alt": ["ji"], "e": "星期几 hỏi thứ."},
+    {"t": "fill", "q": "现在三点___。(Bây giờ là ba giờ rưỡi.)", "a": "半", "alt": ["ban"], "e": "半 = rưỡi."},
+    {"t": "fill", "q": "你的___是几月几号？(Sinh nhật bạn là ngày nào?)", "a": "生日", "alt": ["shengri"], "e": "生日 shēngrì = sinh nhật."},
+    {"t": "order", "q": "Sắp xếp thành câu: “Bây giờ là 10 giờ 15 phút sáng.”", "w": ["上午", "十点", "现在", "十五分"], "a": "现在上午十点十五分", "e": "现在 + buổi + giờ + phút."},
+    {"t": "order", "q": "Sắp xếp thành câu: “Khi nào bạn có tiết tiếng Trung?”", "w": ["有", "你什么时候", "汉语课"], "a": "你什么时候有汉语课", "e": "Chủ ngữ + 什么时候 (thời gian) + động từ + tân ngữ."},
+    {"t": "dict", "say": "星期六", "lang": "zh-CN", "a": "星期六", "py": "xīngqīliù", "e": "星期六 = thứ Bảy."},
+    {"t": "dict", "say": "现在几点？", "lang": "zh-CN", "a": "现在几点", "py": "xiànzài jǐ diǎn", "e": "几点 đọc jí diǎn (3+3)."},
+    {"t": "match", "q": "Nối từ chỉ thời gian với nghĩa:", "pairs": [["昨天", "hôm qua"], ["今天", "hôm nay"], ["明天", "ngày mai"], ["上午", "buổi sáng"], ["下午", "buổi chiều"], ["晚上", "buổi tối"]]}
+  ],
+  "teacher": {
+    "time": "2 buổi × 90 phút",
+    "prep": "Tờ lịch tháng (treo tường hoặc in); đồng hồ bìa có kim quay được; thẻ 星期一 … 星期天; thẻ chữ 年 月 日 天 星 期 点.",
+    "steps": [
+      {"t": "Buổi 1 · 10'", "do": "Khởi động: ôn số – GV viết phép tính lên bảng, lớp đọc kết quả bằng tiếng Trung; hỏi tuổi nhau."},
+      {"t": "15'", "do": "Từ vựng ngày – tháng – năm – thứ: chỉ trên tờ lịch, lớp đọc. Nhấn bẫy 星期一 = thứ Hai, 元旦 ≠ Tết Nguyên đán."},
+      {"t": "20'", "do": "Ngữ pháp 1: thứ tự năm → tháng → ngày → thứ. Học viên viết ngày hôm nay và ngày sinh của mình kiểu Trung Quốc lên bảng con."},
+      {"t": "15'", "do": "Phát âm: x – q – j (星期, 今天), ian (点, 天, 现), 日 rì, 3+3 (几点, 五点)."},
+      {"t": "20'", "do": "Ngữ pháp 2: giờ – GV quay kim đồng hồ bìa, học viên nói giờ; sau đó luyện theo cặp. Nhấn 两点 và buổi đứng trước giờ."},
+      {"t": "10'", "do": "Bài tập 1–8 trong game."},
+      {"t": "Buổi 2 · 10'", "do": "Ôn nhanh: GV nói 昨天星期五, học viên nối tiếp 今天星期六，明天星期天."},
+      {"t": "15'", "do": "Ngữ pháp 3: câu vị ngữ danh từ; vị trí từ thời gian; 什么时候. Học viên sửa câu kiểu tiếng Việt (❌ 我有汉语课明天)."},
+      {"t": "15'", "do": "Nghe hội thoại: lần 1 – sinh nhật Tiểu Minh ngày nào? lần 2 – ghi lại mọi con số nghe được; lần 3 đọc phân vai."},
+      {"t": "15'", "do": "Đọc ‘小明的生日’ + mục văn hoá (春节, 中秋节, 元旦; 祝你生日快乐 – cả lớp hát/đọc lời chúc)."},
+      {"t": "20'", "do": "Chữ Hán 7 chữ (日, 月 tượng hình – liên hệ “nhật, nguyệt”) + nhiệm vụ nói 1–3."},
+      {"t": "15'", "do": "Viết đoạn ‘một ngày đặc biệt’; bài tập 9–16; giao bài về nhà."}
+    ],
+    "games": [
+      "Xếp hàng theo sinh nhật: cả lớp hỏi nhau 你的生日是几月几号？ rồi tự xếp hàng từ tháng 1 đến tháng 12 – không được dùng tiếng Việt.",
+      "Đồng hồ nói: một học viên quay kim đồng hồ bìa, ai nói đúng giờ đầu tiên được lên quay tiếp.",
+      "Hôm qua – hôm nay: GV hô 昨天星期二！– lớp đồng thanh 今天星期三！明天星期四！"
+    ],
+    "errors": [
+      "Hiểu 星期一 là “thứ Một/Chủ nhật” → nhớ 星期 + n = thứ (n+1), Chủ nhật = 星期天.",
+      "Nói ngày theo thứ tự tiếng Việt: ❌ 十四号十一月 → ✅ 十一月十四号.",
+      "Đặt thời gian cuối câu: ❌ 我有汉语课明天 → ✅ 我明天有汉语课.",
+      "Đặt buổi sau giờ: ❌ 八点上午 → ✅ 上午八点.",
+      "Phủ định thiếu 是: ❌ 今天不星期六 → ✅ 今天不是星期六.",
+      "Nói 二点 thay vì 两点; đọc 点 diǎn thành “đi-an”."
+    ],
+    "homework": "Bài tập trong game ≥ 80%; viết mỗi chữ Hán 1 dòng; viết ngày sinh của 5 người thân theo kiểu Trung Quốc; mỗi tối trong 1 tuần nói to: 今天…月…号，星期…，现在…点。"
+  }
+}

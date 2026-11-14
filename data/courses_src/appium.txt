@@ -1,0 +1,810 @@
+=== COURSE appium
+name: Appium cho người mới
+icon: 📱
+floor: 4
+room: 401
+level: Cơ bản → Trung bình
+hours: 7
+summary: Tự động hóa ứng dụng Android từ con số 0: cài JDK, Android SDK, adb, emulator, Appium server, soi phần tử bằng Inspector và viết test Python đầu tiên với app Settings có sẵn.
+
+## LESSON appium-01 | Appium là gì và hoạt động thế nào?
+
+### Appium giống một phiên dịch viên
+Hãy tưởng tượng bạn cần nhờ một người Nhật làm việc, nhưng bạn chỉ nói tiếng Việt. Bạn cần một phiên dịch viên.
+Appium chính là phiên dịch viên giữa code test của bạn và chiếc điện thoại.
+• Bạn viết lệnh như "bấm vào chữ Battery" bằng Python hoặc JavaScript.
+• Appium dịch lệnh đó sang "ngôn ngữ" mà Android (hoặc iOS) hiểu.
+• Điện thoại làm theo, rồi Appium báo kết quả lại cho bạn.
+Appium miễn phí, mã nguồn mở và dùng chuẩn WebDriver giống Selenium. Học Appium xong, sang Selenium bạn sẽ thấy rất quen.
+
+### Bốn mảnh ghép của Appium
+~~~text
+[Code test]  --HTTP-->  [Appium server]  -->  [Driver UiAutomator2]  -->  [Điện thoại / Emulator]
+ Python, JS              cổng 4723              "nói tiếng Android"         app Settings
+~~~
+Giải thích từng mảnh:
+• Client: thư viện trong code test (ví dụ Appium-Python-Client). Nó gửi lệnh đi.
+• Appium server: chương trình chạy trên máy tính, lắng nghe ở địa chỉ http://127.0.0.1:4723.
+• Driver: "phiên dịch viên chuyên ngành". UiAutomator2 cho Android, XCUITest cho iOS.
+• Device: emulator (điện thoại ảo) hoặc điện thoại thật cắm cáp USB.
+Một mảnh hỏng là cả dây chuyền dừng. Khi gặp lỗi, hãy kiểm tra lần lượt từ trái sang phải.
+
+### Một lệnh đi qua hệ thống thế nào?
+~~~text
+POST http://127.0.0.1:4723/session/abc123/element
+{
+  "using": "-android uiautomator",
+  "value": "new UiSelector().text(\"Battery\")"
+}
+~~~
+Khi code Python gọi find_element, thư viện client thực chất gửi một yêu cầu HTTP giống như trên.
+Giải thích từng dòng:
+• POST .../session/abc123/element: "Trong phiên làm việc abc123, hãy tìm giúp tôi một phần tử".
+• "using": cách tìm (chiến lược locator).
+• "value": giá trị cần tìm, ở đây là chữ Battery.
+Server chuyển yêu cầu cho driver, driver hỏi Android, rồi trả về mã của phần tử. Bạn không phải tự viết HTTP, nhưng hiểu điều này giúp bạn đọc log server dễ hơn.
+
+### Từ Appium 2: server và driver tách riêng
+~~~bash
+appium driver list
+appium driver install uiautomator2
+appium driver list --installed
+~~~
+Từ Appium 2 (và Appium 3 hiện nay), cài Appium chỉ có "tổng đài", chưa có driver nào. Bạn tự cài driver, giống cài thêm app cho điện thoại.
+Giải thích từng dòng:
+• appium driver list: xem các driver chính thức có thể cài.
+• appium driver install uiautomator2: cài driver cho Android.
+• appium driver list --installed: chỉ liệt kê driver đã cài.
+Chúng ta sẽ chạy các lệnh này ở bài 4, sau khi cài Node.js và Appium.
+
+### Danh sách đồ nghề cần chuẩn bị
+~~~text
+[ ] Node.js LTS            -> để cài và chạy Appium
+[ ] JDK 17 + JAVA_HOME     -> công cụ Android cần Java
+[ ] Android Studio + SDK   -> có adb, emulator, platform-tools
+[ ] ANDROID_HOME + PATH    -> để Appium và bạn tìm thấy adb
+[ ] Appium + uiautomator2  -> server và driver
+[ ] Appium Inspector       -> "kính lúp" soi phần tử trên màn hình
+[ ] Python 3 + pip         -> viết test
+~~~
+Đây là "danh sách đi chợ" cho cả khóa học. Đừng lo vì thấy nhiều: mỗi bài cài một phần và kiểm tra ngay.
+Mẹo: tạo một thư mục làm việc riêng, ví dụ C:\qa\appium-demo, để mọi file của khóa học nằm một chỗ.
+
+### Hiểu lầm thường gặp
+• "Appium là app cài trên điện thoại": sai. Appium server chạy trên máy tính; driver tự cài một app hỗ trợ nhỏ lên thiết bị khi cần.
+• "Phải có source code của app mới test được": sai. Appium test bản app đã build (file .apk), giống người dùng thật.
+• "Appium chỉ dùng được với Java": sai. Có thư viện client cho Python, JavaScript, Java, C#, Ruby.
+• "Cài Appium xong là test được Android": thiếu. Phải cài thêm driver uiautomator2.
+
+PRACTICE: Vẽ sơ đồ 4 mảnh ghép (Client, Appium server, Driver, Device) ra giấy, dưới mỗi mảnh ghi một câu mô tả bằng lời của bạn, rồi đánh dấu trong checklist những công cụ máy bạn đã có.
+Q: Trong Appium, driver UiAutomator2 đóng vai trò gì?
+- Là thư viện Python để viết test
++ Là "phiên dịch viên" giúp Appium điều khiển thiết bị Android
+- Là điện thoại ảo chạy trên máy tính
+Q: Appium server mặc định lắng nghe ở cổng nào?
+- 8080
+- 3000
++ 4723
+- 5554
+Q: Từ Appium 2 trở đi, sau khi cài Appium bạn cần làm gì để test Android?
++ Cài thêm driver bằng lệnh appium driver install uiautomator2
+- Không cần làm gì, driver có sẵn
+- Cài lại Windows
+
+## LESSON appium-02 | Chuẩn bị máy Windows: Java, Android SDK và biến môi trường
+
+### Cài JDK 17
+~~~bash
+winget install EclipseAdoptium.Temurin.17.JDK
+java -version
+~~~
+Công cụ Android cần Java (JDK = Java Development Kit). Ví von: JDK là "động cơ", nhiều công cụ khác chạy nhờ nó.
+Mở PowerShell: bấm Start, gõ PowerShell, Enter.
+Giải thích từng dòng:
+• winget install ...: dùng trình cài đặt có sẵn của Windows để tải và cài JDK 17 bản Temurin (miễn phí). Nếu máy không có winget, tải file .msi tại trang adoptium.net.
+• java -version: kiểm tra Java đã cài chưa.
+Kết quả mong đợi (đóng PowerShell, mở lại rồi chạy): dòng đầu có chữ openjdk version "17.0.x".
+
+### Đặt biến JAVA_HOME
+~~~bash
+# 1) Xem tên thư mục JDK thật trên máy bạn
+Get-ChildItem "C:\Program Files\Eclipse Adoptium"
+# 2) Lưu đường dẫn đó vào JAVA_HOME (thay đúng tên thư mục bạn thấy)
+setx JAVA_HOME "C:\Program Files\Eclipse Adoptium\jdk-17.0.12.7-hotspot"
+# 3) Mở PowerShell MỚI rồi kiểm tra
+echo $env:JAVA_HOME
+~~~
+Biến môi trường giống "tờ giấy ghi chú dán trên tủ lạnh" mà mọi chương trình đều đọc được. JAVA_HOME ghi: "Java nằm ở đây".
+Giải thích từng lệnh (dòng bắt đầu bằng # là ghi chú, không chạy):
+• Get-ChildItem: liệt kê thư mục để biết tên chính xác; số phiên bản trên máy bạn có thể khác.
+• setx JAVA_HOME "...": lưu biến vĩnh viễn cho tài khoản của bạn. Kết quả: SUCCESS: Specified value was saved.
+• echo $env:JAVA_HOME: in giá trị biến. Chỉ cửa sổ mở SAU khi chạy setx mới thấy giá trị mới.
+
+### Cài Android Studio và SDK
+~~~text
+Android Studio > More Actions > SDK Manager
+  Tab "SDK Platforms": tick Android 14 (API 34)
+  Tab "SDK Tools": tick
+    [x] Android SDK Platform-Tools        (có adb)
+    [x] Android Emulator                  (điện thoại ảo)
+    [x] Android SDK Command-line Tools (latest)
+  Android SDK Location: C:\Users\<tên bạn>\AppData\Local\Android\Sdk
+~~~
+Android Studio là "xưởng" của lập trình viên Android. Tester chủ yếu cần bộ SDK đi kèm: adb, emulator và các bản hệ điều hành ảo.
+Các bước:
+• Cài bằng lệnh winget install Google.AndroidStudio (hoặc tải tại developer.android.com/studio).
+• Mở Android Studio, chọn Standard setup, chờ tải xong (có thể 10–20 phút).
+• Vào SDK Manager như sơ đồ trên và tick các mục.
+• Ghi lại dòng Android SDK Location, bài sau cần dùng.
+
+### Đặt ANDROID_HOME và thêm vào PATH
+~~~bash
+setx ANDROID_HOME "$env:LOCALAPPDATA\Android\Sdk"
+~~~
+ANDROID_HOME cho Appium biết SDK nằm ở đâu. PATH là "danh bạ" giúp Windows tìm lệnh adb và emulator khi bạn chỉ gõ tên ngắn.
+Giải thích dòng lệnh:
+• setx ANDROID_HOME "...": lưu đường dẫn SDK. $env:LOCALAPPDATA tự đổi thành C:\Users\<tên bạn>\AppData\Local.
+Thêm vào PATH bằng giao diện (an toàn hơn sửa PATH bằng lệnh):
+• Bấm Start, gõ "environment", chọn Edit environment variables for your account.
+• Chọn biến Path > Edit > New, thêm 2 dòng: %ANDROID_HOME%\platform-tools và %ANDROID_HOME%\emulator.
+• Bấm OK ở mọi cửa sổ, rồi đóng hết các cửa sổ PowerShell đang mở.
+
+### Kiểm tra toàn bộ
+~~~bash
+java -version
+echo $env:JAVA_HOME
+echo $env:ANDROID_HOME
+adb version
+~~~
+Mở một cửa sổ PowerShell MỚI và chạy lần lượt từng dòng.
+Kết quả mong đợi:
+• java -version: openjdk version "17...".
+• Hai lệnh echo: in ra đường dẫn, không để trống.
+• adb version: Android Debug Bridge version 1.0.41, kèm dòng Installed as ...\platform-tools\adb.exe.
+Cả 4 dòng đều ổn nghĩa là máy bạn đã sẵn sàng cho Android automation.
+
+### Lỗi thường gặp
+~~~text
+adb : The term 'adb' is not recognized as the name of a cmdlet,
+function, script file, or operable program.
+~~~
+• Lỗi trên: PATH chưa có platform-tools, hoặc bạn đang dùng cửa sổ PowerShell cũ. Cách sửa: kiểm tra lại PATH, đóng và mở lại cửa sổ (đôi khi phải đăng xuất Windows).
+• echo $env:JAVA_HOME in ra trống: chưa chạy setx, hoặc đang ở cửa sổ cũ.
+• "ERROR: JAVA_HOME is set to an invalid directory": sai tên thư mục. Dùng Get-ChildItem để copy đúng tên. JAVA_HOME trỏ tới thư mục gốc JDK, KHÔNG thêm \bin.
+• "WARNING: The data being saved is truncated to 1024 characters": bạn đã dùng setx cho PATH, có thể làm hỏng PATH. Đừng làm vậy; hãy sửa PATH bằng giao diện.
+
+PRACTICE: Cài JDK 17 và Android Studio, đặt JAVA_HOME và ANDROID_HOME, thêm platform-tools và emulator vào PATH, rồi chụp màn hình kết quả 4 lệnh kiểm tra trong một cửa sổ PowerShell mới.
+Q: Sau khi chạy setx JAVA_HOME, vì sao echo $env:JAVA_HOME trong cùng cửa sổ vẫn trống?
+- Vì setx bị lỗi
++ Vì setx chỉ có hiệu lực ở các cửa sổ PowerShell mở sau đó
+- Vì phải khởi động lại điện thoại
+Q: Thư mục nào cần thêm vào PATH để gõ được lệnh adb?
+- %ANDROID_HOME%\build-tools
+- %JAVA_HOME%\bin
++ %ANDROID_HOME%\platform-tools
+Q: JAVA_HOME nên trỏ tới đâu?
++ Thư mục gốc của JDK, ví dụ ...\jdk-17.0.12.7-hotspot
+- Thư mục bin bên trong JDK
+- File java.exe
+
+## LESSON appium-03 | Thiết bị để test: emulator và điện thoại thật
+
+### Emulator hay điện thoại thật?
+Emulator giống xe tập lái trong sân: an toàn, miễn phí, tạo bao nhiêu cũng được. Điện thoại thật giống lái ngoài đường: sát thực tế hơn.
+Emulator:
+• Miễn phí, tạo nhanh nhiều phiên bản Android.
+• Dễ reset, dễ giả lập vị trí, pin, mạng.
+• Không có camera, cảm biến thật; hiệu năng không giống máy thật.
+Điện thoại thật:
+• Phản ánh đúng hiệu năng, phần cứng, giao diện riêng của từng hãng.
+• Cần cáp USB tốt và bật chế độ nhà phát triển.
+Lời khuyên: học và viết test trên emulator, chạy kiểm tra cuối trên vài máy thật.
+
+### Tạo emulator trong Device Manager
+~~~text
+Android Studio > More Actions > Virtual Device Manager
+  > Create Virtual Device (dấu +)
+  > Phone: Pixel 7 > Next
+  > System Image: API 34 (Google APIs) > Download > Next
+  > AVD Name: Pixel_7_API_34 > Finish
+  > Bấm nút Play để khởi động
+~~~
+AVD (Android Virtual Device) là một chiếc điện thoại ảo.
+Giải thích từng bước:
+• Chọn mẫu Pixel 7: kích thước màn hình phổ biến.
+• Chọn System Image API 34 (Android 14). Bản "Google APIs" có sẵn dịch vụ Google cơ bản.
+• Đặt tên không có dấu cách, ví dụ Pixel_7_API_34, để gõ lệnh dễ.
+Lần đầu khởi động mất 1–3 phút. Nếu Android Studio báo cần bật ảo hóa (Windows Hypervisor Platform), làm theo hướng dẫn hiện ra; máy công ty có thể cần IT hỗ trợ.
+
+### Khởi động emulator bằng dòng lệnh
+~~~bash
+emulator -list-avds
+emulator -avd Pixel_7_API_34
+~~~
+Khi đã quen, bạn có thể bật emulator mà không cần mở Android Studio.
+Giải thích từng dòng:
+• emulator -list-avds: liệt kê tên các AVD đã tạo. Kết quả ví dụ: Pixel_7_API_34.
+• emulator -avd Pixel_7_API_34: khởi động AVD có tên đó. Cửa sổ PowerShell sẽ "bận" trong lúc emulator chạy, hãy mở cửa sổ khác để gõ lệnh tiếp.
+Mẹo: thêm -no-snapshot-load để khởi động "sạch" như máy vừa bật nguồn.
+
+### adb devices: ai đang kết nối?
+~~~bash
+adb devices
+~~~
+adb (Android Debug Bridge) là "sợi dây liên lạc" giữa máy tính và điện thoại.
+Kết quả ví dụ:
+List of devices attached
+emulator-5554   device
+R58N12ABCDE     unauthorized
+Cột đầu là serial (udid) của máy, cột sau là trạng thái:
+• device: kết nối tốt, sẵn sàng test.
+• unauthorized: điện thoại chưa bấm "Allow" cho máy tính này.
+• offline: thấy máy nhưng không nói chuyện được (thường do cáp hoặc adb bị treo).
+• Danh sách trống: chưa có thiết bị nào, hoặc chưa bật USB debugging.
+
+### Dùng điện thoại Android thật
+~~~bash
+adb kill-server
+adb start-server
+adb devices
+adb -s R58N12ABCDE shell getprop ro.build.version.release
+~~~
+Bật chế độ nhà phát triển (tên menu có thể khác theo hãng):
+• Settings > About phone > bấm 7 lần vào Build number đến khi thấy "You are now a developer".
+• Settings > System > Developer options > bật USB debugging.
+• Cắm cáp USB loại truyền dữ liệu. Điện thoại hiện "Allow USB debugging?" kèm mã RSA: tick Always allow from this computer rồi bấm Allow.
+Giải thích lệnh:
+• adb kill-server / start-server: khởi động lại "tổng đài" adb, cách chữa nhanh khi bị offline.
+• adb devices: phải thấy trạng thái device.
+• adb -s <serial> shell getprop ...: hỏi riêng máy có serial đó đang chạy Android mấy. Kết quả ví dụ: 14.
+
+### Lỗi thường gặp
+~~~text
+adb: device unauthorized.
+This adb server's $ADB_VENDOR_KEYS is not set
+Try 'adb kill-server' if that seems wrong.
+Otherwise check for a confirmation dialog on your device.
+~~~
+• Lỗi trên: chưa chấp nhận khóa RSA. Mở khóa màn hình điện thoại, bấm Allow. Không thấy hộp thoại: Developer options > Revoke USB debugging authorizations, rút cáp, cắm lại.
+• "adb: more than one device/emulator": đang kết nối nhiều máy. Thêm -s <serial> vào lệnh.
+• "adb: no devices/emulators found": emulator chưa khởi động xong, hoặc chưa bật USB debugging.
+• Emulator màn hình đen hoặc rất chậm: kiểm tra đã bật ảo hóa (Virtualization) trong BIOS, đóng bớt ứng dụng nặng.
+
+PRACTICE: Tạo AVD Pixel_7_API_34, khởi động bằng lệnh emulator -avd, chạy adb devices và ghi lại serial cùng trạng thái. Nếu có điện thoại Android, bật USB debugging và làm cho nó hiện trạng thái device.
+Q: adb devices hiển thị "unauthorized" nghĩa là gì?
+- Cáp USB bị hỏng hoàn toàn
++ Điện thoại chưa cho phép máy tính này gỡ lỗi qua USB
+- Điện thoại chưa cài Appium
+Q: Muốn chạy lệnh adb cho đúng một thiết bị khi đang cắm nhiều máy, bạn thêm gì?
+- --all
+- -d emulator
++ -s <serial>
+Q: Lệnh nào liệt kê tên các emulator đã tạo?
++ emulator -list-avds
+- adb list
+- appium devices
+
+## LESSON appium-04 | Cài Appium server và driver UiAutomator2
+
+### Cài Node.js
+~~~bash
+winget install OpenJS.NodeJS.LTS
+node -v
+npm -v
+~~~
+Appium được viết bằng JavaScript nên cần Node.js để chạy, và npm (đi kèm Node.js) để cài.
+Giải thích từng dòng:
+• winget install OpenJS.NodeJS.LTS: cài Node.js bản LTS (ổn định, hỗ trợ lâu dài).
+• node -v: in phiên bản Node, ví dụ v22.20.0. Appium 3 cần Node 20.19+ hoặc 22.12+.
+• npm -v: in phiên bản npm, ví dụ 10.9.3.
+Nhớ mở PowerShell mới sau khi cài.
+
+### Cài Appium
+~~~bash
+npm install -g appium
+appium --version
+~~~
+Giải thích từng dòng:
+• npm install -g appium: tải Appium từ kho npm và cài "toàn cục" (-g = global) để dùng ở mọi thư mục.
+• appium --version: kiểm tra, kết quả ví dụ 3.1.0. Nếu công ty bạn dùng Appium 2 thì sẽ thấy 2.x; cách dùng trong khóa này giống nhau.
+Lần cài đầu mất 1–2 phút. Vài dòng "npm warn" là bình thường; chỉ lo khi có chữ "npm error".
+
+### Cài driver UiAutomator2
+~~~bash
+appium driver install uiautomator2
+appium driver list --installed
+~~~
+Giải thích từng dòng:
+• appium driver install uiautomator2: tải driver Android vào thư mục của Appium (mặc định C:\Users\<tên>\.appium).
+• appium driver list --installed: kiểm tra. Kết quả mong đợi có dòng tương tự: - uiautomator2@x.y.z [installed (npm)].
+Nâng cấp driver sau này: appium driver update uiautomator2.
+
+### Khám sức khỏe: appium driver doctor
+~~~bash
+appium driver doctor uiautomator2
+~~~
+Lệnh này kiểm tra máy bạn đã đủ điều kiện chạy UiAutomator2 chưa, giống đi khám sức khỏe tổng quát.
+Kết quả mong đợi gồm các dòng có dấu ✔, ví dụ:
+• ANDROID_HOME environment variable is set to: C:\Users\...\Sdk
+• JAVA_HOME environment variable is set to: C:\Program Files\Eclipse Adoptium\...
+• adb, emulator exist ở đúng chỗ.
+Dòng có dấu ✖ trong phần bắt buộc là vấn đề PHẢI sửa. Các mục "optional" (như ffmpeg, bundletool) có thể bỏ qua khi mới học.
+Sửa xong một lỗi, mở PowerShell mới và chạy lại doctor.
+
+### Khởi động Appium server
+~~~bash
+appium
+~~~
+Gõ appium rồi Enter. Cửa sổ này sẽ "bận" vì server đang chạy; đừng đóng nó trong lúc test.
+Log mong đợi (rút gọn):
+[Appium] Welcome to Appium v3.x.x
+[Appium] Available drivers:
+[Appium]   - uiautomator2@x.y.z (automationName 'UiAutomator2')
+[Appium] Appium REST http interface listener started on http://0.0.0.0:4723
+Từ Appium 2, đường dẫn gốc (base path) là "/", nên địa chỉ dùng trong code là http://127.0.0.1:4723 (không còn /wd/hub như Appium 1).
+Dừng server: bấm Ctrl + C.
+
+### Lỗi thường gặp
+~~~text
+Error: listen EADDRINUSE: address already in use 0.0.0.0:4723
+~~~
+• Lỗi trên: đã có một Appium server khác đang chạy (thường ở cửa sổ khác). Đóng cửa sổ cũ, hoặc chạy cổng khác: appium --port 4724.
+• "appium : File ...\npm\appium.ps1 cannot be loaded because running scripts is disabled on this system": PowerShell chặn script. Cách đơn giản: gõ appium.cmd thay cho appium. Máy công ty: hỏi IT trước khi đổi ExecutionPolicy.
+• "The term 'appium' is not recognized": npm chưa có trong PATH hoặc chưa mở cửa sổ mới sau khi cài Node.js.
+• "Could not find a driver for automationName 'UiAutomator2'...": chưa cài driver; chạy lại appium driver install uiautomator2.
+
+PRACTICE: Cài Node.js LTS, Appium và driver uiautomator2; chạy appium driver doctor uiautomator2 tới khi phần bắt buộc không còn dấu ✖, rồi khởi động server và chụp lại dòng "listener started on ...:4723".
+Q: Lệnh nào khởi động Appium server?
+- npm start appium
++ appium
+- adb start-server
+Q: Từ Appium 2, địa chỉ server đúng để dùng trong code là gì?
+- http://127.0.0.1:4723/wd/hub
++ http://127.0.0.1:4723
+- http://127.0.0.1:5037
+Q: appium driver doctor uiautomator2 dùng để làm gì?
+- Cài app vào điện thoại
+- Xóa driver cũ
++ Kiểm tra máy đã đủ điều kiện (ANDROID_HOME, JAVA_HOME, adb...) để chạy driver
+
+## LESSON appium-05 | Capabilities và Appium Inspector
+
+### Capabilities là "phiếu yêu cầu"
+~~~json
+{
+  "platformName": "Android",
+  "appium:automationName": "UiAutomator2",
+  "appium:deviceName": "emulator-5554",
+  "appium:appPackage": "com.android.settings",
+  "appium:appActivity": ".Settings"
+}
+~~~
+Khi gọi xe công nghệ, bạn điền điểm đón, điểm đến, loại xe. Capabilities là phiếu như vậy gửi cho Appium: test nền tảng nào, máy nào, app nào.
+Giải thích từng dòng:
+• platformName: hệ điều hành, Android.
+• appium:automationName: driver sử dụng, UiAutomator2.
+• appium:deviceName: tên thiết bị (với Android có thể ghi tùy ý; muốn chọn đúng máy thì thêm appium:udid bằng serial trong adb devices).
+• appium:appPackage: mã định danh của app, ở đây là app Settings có sẵn trên mọi máy Android.
+• appium:appActivity: màn hình mở đầu tiên.
+Tiền tố appium: là bắt buộc với các khóa không thuộc chuẩn W3C chung.
+
+### Tìm appPackage và appActivity
+~~~bash
+adb shell dumpsys window | findstr mCurrentFocus
+adb shell cmd package resolve-activity --brief com.android.settings
+~~~
+Mở app cần test trên emulator (ví dụ Settings) rồi chạy hai lệnh.
+Giải thích:
+• Dòng 1: hỏi Android cửa sổ nào đang hiện. findstr là lệnh lọc chữ của Windows, chỉ giữ dòng chứa mCurrentFocus. Kết quả ví dụ: mCurrentFocus=Window{1a2b u0 com.android.settings/com.android.settings.homepage.SettingsHomepageActivity}. Phần trước dấu / là appPackage.
+• Dòng 2: hỏi "bấm icon app thì mở activity nào". Dòng cuối kết quả ví dụ: com.android.settings/.Settings, vậy appActivity = .Settings.
+Vì sao hai kết quả khác nhau? Nhiều app mở một activity "cửa ngõ" rồi chuyển sang màn hình khác. Với appActivity, hãy dùng activity cửa ngõ ở dòng 2.
+
+### Cài và mở Appium Inspector
+~~~text
+Remote Host:   127.0.0.1
+Remote Port:   4723
+Remote Path:   /
+Capabilities:  dán JSON ở slide trước vào ô JSON Representation
+> Start Session
+~~~
+Appium Inspector là "kính lúp" giúp bạn nhìn cấu trúc màn hình app và thuộc tính của từng nút.
+Cài đặt:
+• Tải bộ cài Windows (.exe) ở trang Releases của dự án appium/appium-inspector trên GitHub.
+• Hoặc với Appium bản mới: appium plugin install inspector, khởi động bằng appium --use-plugins=inspector, rồi mở http://127.0.0.1:4723/inspector trên trình duyệt.
+Thứ tự: bật emulator → chạy appium → mở Inspector → điền như khung trên → Start Session. Vài giây sau, ảnh màn hình điện thoại hiện bên trái.
+
+### Soi phần tử bằng Inspector
+~~~text
+Selected Element: android.widget.TextView
+  text:          Battery
+  resource-id:   android:id/title
+  content-desc:  (trống)
+  clickable:     false
+  bounds:        [189,1250][420,1310]
+Selector gợi ý:
+  -android uiautomator: new UiSelector().text("Battery")
+  xpath: //android.widget.TextView[@text="Battery"]
+~~~
+Bấm vào một phần tử trên ảnh màn hình, khung bên phải hiện thuộc tính của nó (giá trị trên là ví dụ, máy bạn có thể khác).
+Giải thích:
+• text: chữ hiển thị.
+• resource-id: "số căn cước" do lập trình viên đặt; tốt nhất khi là duy nhất.
+• content-desc: nhãn cho người khiếm thị, Appium gọi là accessibility id.
+• bounds: tọa độ trên màn hình, không nên dùng làm locator.
+Nút Tap trong Inspector cho phép bấm thử phần tử; nút Refresh chụp lại màn hình sau khi app thay đổi.
+
+### Test app riêng từ file APK
+~~~json
+{
+  "platformName": "Android",
+  "appium:automationName": "UiAutomator2",
+  "appium:deviceName": "Android Emulator",
+  "appium:app": "C:\\qa\\apps\\demo-app.apk",
+  "appium:noReset": true
+}
+~~~
+Khi team đưa bạn file .apk (bản build để test), có hai cách:
+• Cài tay: adb install C:\qa\apps\demo-app.apk, kết quả mong đợi: Success.
+• Để Appium tự cài: dùng capability appium:app như trên.
+Giải thích các dòng mới:
+• appium:app: đường dẫn tới file APK. Trong JSON, dấu \ phải viết thành \\.
+• appium:noReset: true = giữ nguyên dữ liệu app giữa các lần chạy (không xóa đăng nhập, cache).
+Chỉ dùng APK do team bạn cung cấp hoặc app demo mã nguồn mở, không tải APK lạ trên mạng.
+
+### Lỗi thường gặp
+~~~text
+Error: Activity class {com.android.settings/com.android.settings.Setting} does not exist.
+~~~
+• Lỗi trên: gõ sai appActivity (.Setting thiếu chữ s). Kiểm tra lại bằng lệnh resolve-activity.
+• Inspector báo "Could not find a driver for automationName 'UiAutomator2'": server chưa cài driver, hoặc gõ sai tên.
+• Inspector không kết nối được: quên chạy appium, hoặc Remote Path không phải "/" (Appium 2+ không dùng /wd/hub).
+• "Neither ANDROID_HOME nor ANDROID_SDK_ROOT environment variable was exported": server được mở từ cửa sổ cũ, trước khi đặt biến. Tắt appium, mở PowerShell mới, chạy lại.
+
+PRACTICE: Dùng lệnh resolve-activity để tìm appActivity của app Settings, mở một phiên Inspector bằng capabilities JSON, bấm chọn mục Battery và ghi lại text, resource-id, content-desc của nó.
+Q: Capability nào cho Appium biết mở màn hình nào của app?
+- appium:deviceName
++ appium:appActivity
+- platformName
+Q: Trong Appium Inspector với Appium 2 trở lên, Remote Path nên là gì?
++ /
+- /wd/hub
+- /appium/v1
+Q: Trong file JSON, đường dẫn Windows C:\qa\app.apk cần viết thế nào?
+- Giữ nguyên C:\qa\app.apk
++ C:\\qa\\app.apk
+- C::qa::app.apk
+
+## LESSON appium-06 | Locator: chỉ cho Appium tìm đúng phần tử
+
+### Locator là địa chỉ nhà
+~~~text
+Thứ tự ưu tiên (tốt -> kém):
+1. accessibility id        (content-desc)
+2. id                      (resource-id)
+3. -android uiautomator    (UiSelector)
+4. xpath                   (dùng khi hết cách)
+~~~
+Muốn shipper giao đúng nhà, bạn cần địa chỉ rõ ràng và ít thay đổi. Locator là "địa chỉ" của nút, ô nhập, dòng chữ trên màn hình.
+Locator tốt là locator:
+• Duy nhất: chỉ khớp đúng một phần tử.
+• Ổn định: không đổi khi đổi ngôn ngữ hay chỉnh giao diện nhẹ.
+• Nhanh: Appium tìm thấy ngay.
+Nếu app thiếu content-desc hoặc resource-id, hãy đề nghị dev bổ sung: đây là đóng góp rất giá trị của tester.
+
+### Accessibility id
+~~~python
+from appium.webdriver.common.appiumby import AppiumBy
+
+back = driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Navigate up")
+back.click()
+~~~
+Accessibility id đọc từ thuộc tính content-desc, vốn dành cho người khiếm thị. Nó thường ổn định, nhanh, dùng được cả Android lẫn iOS.
+Giải thích từng dòng:
+• Dòng 1: nhập AppiumBy, "hộp" chứa các kiểu locator.
+• Dòng 3: tìm phần tử có content-desc là "Navigate up" (nút mũi tên quay lại trên thanh tiêu đề của nhiều app Android) và đặt tên là back.
+• Dòng 4: bấm vào phần tử đó.
+Biến driver sẽ được tạo ở bài 7; bài này tập trung vào cách viết locator.
+
+### Id (resource-id)
+~~~python
+title = driver.find_element(AppiumBy.ID, "android:id/title")
+print(title.text)
+
+items = driver.find_elements(AppiumBy.ID, "android:id/title")
+print(len(items))
+~~~
+resource-id có dạng <package>:id/<tên>. Trong app Settings, nhiều dòng tiêu đề dùng chung id android:id/title nên id này KHÔNG duy nhất.
+Giải thích từng dòng:
+• find_element(AppiumBy.ID, ...): trả về phần tử ĐẦU TIÊN khớp id.
+• title.text: lấy chữ hiển thị; print in ra, ví dụ Network & internet.
+• find_elements (có chữ s): trả về DANH SÁCH mọi phần tử khớp, có thể rỗng.
+• len(items): đếm số phần tử, ví dụ 9.
+Bài học: id chỉ tốt khi duy nhất. Trong app của team bạn, id thường có dạng com.example.demo:id/login_button.
+
+### UiAutomator UiSelector
+~~~python
+battery = driver.find_element(
+    AppiumBy.ANDROID_UIAUTOMATOR,
+    'new UiSelector().text("Battery")'
+)
+battery.click()
+
+network = driver.find_element(
+    AppiumBy.ANDROID_UIAUTOMATOR,
+    'new UiSelector().textContains("Network")'
+)
+~~~
+UiSelector là "ngôn ngữ tìm kiếm" của chính Android, chạy rất nhanh trên thiết bị.
+Giải thích:
+• AppiumBy.ANDROID_UIAUTOMATOR: báo rằng locator viết bằng cú pháp UiAutomator.
+• 'new UiSelector().text("Battery")': tìm phần tử có chữ đúng bằng Battery. Chú ý: nháy đơn bọc ngoài, nháy kép bên trong.
+• textContains("Network"): chữ CHỨA "Network".
+Hàm hay dùng khác: resourceId("..."), description("..."), className("android.widget.Button"), instance(0) để lấy phần tử thứ nhất.
+Lưu ý: tìm theo chữ sẽ hỏng nếu máy đặt ngôn ngữ khác (Battery thành Pin). Hãy để emulator ở tiếng Anh khi học.
+
+### XPath: phương án cuối cùng
+~~~python
+battery = driver.find_element(
+    AppiumBy.XPATH,
+    '//android.widget.TextView[@text="Battery"]'
+)
+~~~
+XPath mô tả đường đi trong "cây" giao diện, giống chỉ đường: vào phố A, rẽ ngõ 3, nhà thứ 2.
+Giải thích:
+• //: tìm ở bất kỳ đâu trong cây.
+• android.widget.TextView: loại phần tử (một ô chữ).
+• [@text="Battery"]: điều kiện, thuộc tính text bằng Battery.
+Vì sao là phương án cuối?
+• Chậm: Appium phải dựng lại toàn bộ cây XML của màn hình để tìm.
+• Dễ vỡ: XPath dài kiểu .../LinearLayout[2]/TextView[1] sẽ hỏng khi dev thêm một ô.
+Nếu buộc dùng, hãy viết XPath ngắn, dựa trên thuộc tính, không dựa vào vị trí.
+
+### Lỗi thường gặp
+~~~text
+selenium.common.exceptions.NoSuchElementException: Message: An element
+could not be located on the page using the given search parameters.
+~~~
+• Nguyên nhân 1: màn hình chưa tải xong. Cách sửa: dùng explicit wait (bài 7).
+• Nguyên nhân 2: phần tử nằm ngoài màn hình, cần cuộn (bài 8).
+• Nguyên nhân 3: sai chữ hoa/thường, thừa dấu cách, hoặc thiết bị đặt ngôn ngữ khác.
+• Nguyên nhân 4: locator đúng nhưng đang ở màn hình khác, hoặc có popup che lên.
+Mẹo: dùng nút Search for element trong Inspector để thử locator trước khi đưa vào code.
+
+PRACTICE: Trong app Settings, dùng Appium Inspector viết 3 locator cho mục Battery (UiSelector theo text, XPath, id), dùng Search for element kiểm tra mỗi locator khớp bao nhiêu phần tử, rồi giải thích nên chọn locator nào.
+Q: Locator nào nên ưu tiên đầu tiên nếu dev đã gắn đầy đủ?
++ accessibility id (content-desc)
+- xpath theo vị trí
+- tọa độ x, y trên màn hình
+Q: find_elements (có chữ s) trả về gì?
+- Phần tử đầu tiên
++ Danh sách mọi phần tử khớp (có thể rỗng)
+- Luôn báo lỗi nếu có nhiều hơn một phần tử
+Q: Vì sao locator theo text có thể hỏng?
+- Vì Appium không đọc được chữ
+- Vì text luôn thay đổi mỗi giây
++ Vì thiết bị đổi ngôn ngữ hoặc nội dung chữ được sửa
+
+## LESSON appium-07 | Viết test Python đầu tiên
+
+### Chuẩn bị dự án Python
+~~~bash
+mkdir C:\qa\appium-demo
+cd C:\qa\appium-demo
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install Appium-Python-Client pytest
+~~~
+Giải thích từng dòng:
+• mkdir, cd: tạo và đi vào thư mục dự án.
+• python -m venv .venv: tạo "môi trường ảo", một chiếc hộp riêng chứa thư viện của dự án, không ảnh hưởng dự án khác.
+• Activate.ps1: bật môi trường ảo; đầu dòng lệnh hiện (.venv).
+• pip install ...: cài thư viện Appium cho Python và pytest (công cụ chạy test).
+Kiểm tra: pip show Appium-Python-Client hiện dòng Version (4.x trở lên).
+Nếu Activate.ps1 bị chặn vì "running scripts is disabled", dùng cmd và chạy .venv\Scripts\activate.bat, hoặc tạm bỏ qua venv khi mới học.
+
+### Script đầu tiên: mở Settings và bấm Battery
+~~~python
+from appium import webdriver
+from appium.options.android import UiAutomator2Options
+from appium.webdriver.common.appiumby import AppiumBy
+
+options = UiAutomator2Options()
+options.device_name = "emulator-5554"
+options.app_package = "com.android.settings"
+options.app_activity = ".Settings"
+
+driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
+try:
+    driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Battery")').click()
+    print("Đã bấm Battery")
+finally:
+    driver.quit()
+~~~
+Lưu thành file first_test.py.
+Giải thích từng dòng:
+• 3 dòng import: lấy công cụ tạo phiên (webdriver), "phiếu yêu cầu" cho Android (UiAutomator2Options), các kiểu locator (AppiumBy).
+• options = UiAutomator2Options(): tạo phiếu; nó tự điền platformName Android và automationName UiAutomator2.
+• device_name, app_package, app_activity: giống capabilities JSON ở bài 5.
+• webdriver.Remote(...): kết nối server và mở app; lần đầu mất 10–30 giây.
+• find_element(...).click(): tìm chữ Battery rồi bấm.
+• try/finally + driver.quit(): dù lỗi hay không vẫn đóng phiên, tránh để phiên "treo" trên server.
+
+### Chạy script
+~~~bash
+# Cửa sổ PowerShell 1: chạy server, để nguyên
+appium
+
+# Cửa sổ PowerShell 2: chạy test
+cd C:\qa\appium-demo
+python first_test.py
+~~~
+Thứ tự: bật emulator → chạy appium ở cửa sổ 1 → chạy test ở cửa sổ 2.
+Kết quả mong đợi:
+• Trên emulator: app Settings tự mở, mục Battery được bấm.
+• Cửa sổ 2 in ra: Đã bấm Battery.
+• Cửa sổ 1: log báo tạo phiên mới (session created), rồi xóa phiên khi quit.
+Lần đầu, driver cài 2 app hỗ trợ (io.appium.uiautomator2.server...) lên emulator; đó là bình thường.
+
+### Explicit wait: chờ thông minh
+~~~python
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+wait = WebDriverWait(driver, 10)
+battery = wait.until(EC.element_to_be_clickable(
+    (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Battery")')
+))
+battery.click()
+~~~
+App cần thời gian để tải. Dùng time.sleep(5) giống đứng chờ xe buýt đúng 5 phút dù xe đã tới: vừa chậm vừa không chắc. Explicit wait giống nhìn đường: xe tới là lên ngay, chờ tối đa 10 giây.
+Giải thích từng dòng:
+• 2 dòng import: công cụ chờ lấy từ thư viện selenium (được cài kèm Appium-Python-Client).
+• WebDriverWait(driver, 10): chờ tối đa 10 giây.
+• wait.until(EC.element_to_be_clickable(...)): cứ khoảng 0,5 giây kiểm tra một lần, tới khi phần tử bấm được thì trả về phần tử.
+• Hết 10 giây vẫn không thấy: báo TimeoutException.
+
+### Biến script thành test pytest
+~~~python
+# ===== conftest.py =====
+import pytest
+from appium import webdriver
+from appium.options.android import UiAutomator2Options
+
+@pytest.fixture
+def driver():
+    options = UiAutomator2Options()
+    options.app_package = "com.android.settings"
+    options.app_activity = ".Settings"
+    drv = webdriver.Remote("http://127.0.0.1:4723", options=options)
+    yield drv
+    drv.quit()
+
+# ===== test_settings.py =====
+from appium.webdriver.common.appiumby import AppiumBy
+
+def test_open_battery(driver):
+    driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Battery")').click()
+    found = driver.find_elements(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("Battery")')
+    assert len(found) > 0
+~~~
+pytest giúp chạy nhiều test và báo đạt/không đạt rõ ràng. Đây là 2 file riêng.
+Giải thích:
+• conftest.py: file pytest tự đọc. @pytest.fixture driver là "người phục vụ": mở phiên trước mỗi test (trước yield), đóng phiên sau test (sau yield).
+• def test_open_battery(driver): hàm có tên bắt đầu bằng test_ là một test; pytest tự đưa driver vào.
+• assert len(found) > 0: kiểm tra màn hình Battery đã hiện; sai thì test FAILED.
+Chạy: pytest -v. Kết quả mong đợi: test_settings.py::test_open_battery PASSED và dòng 1 passed.
+
+### Lỗi thường gặp
+~~~text
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=4723):
+Max retries exceeded with url: /session (Caused by NewConnectionError(...
+[WinError 10061] No connection could be made because the target machine actively refused it))
+~~~
+• Lỗi trên (trong JavaScript là connect ECONNREFUSED 127.0.0.1:4723): Appium server chưa chạy hoặc chạy cổng khác. Mở cửa sổ khác và chạy appium.
+• "ModuleNotFoundError: No module named 'appium'": chưa pip install, hoặc cài vào môi trường khác (quên bật .venv).
+• "Could not find a connected Android device in 20000ms": emulator chưa bật, hoặc adb devices không thấy máy.
+• Test lúc chạy lúc không: thiếu explicit wait; đừng "chữa" bằng sleep thật dài.
+
+PRACTICE: Tạo conftest.py và test_settings.py như bài, thêm test thứ hai mở mục "Display" bằng explicit wait, chạy pytest -v và đảm bảo cả 2 test PASSED.
+Q: Vì sao nên đặt driver.quit() trong khối finally hoặc sau yield của fixture?
+- Để test chạy nhanh gấp đôi
++ Để phiên Appium luôn được đóng kể cả khi test lỗi
+- Vì Python bắt buộc mọi file phải có finally
+Q: WebDriverWait(driver, 10) nghĩa là gì?
+- Luôn đợi đúng 10 giây rồi mới làm tiếp
++ Đợi tối đa 10 giây, điều kiện thỏa sớm thì đi tiếp ngay
+- Chạy lại test 10 lần
+Q: Lỗi "WinError 10061 ... actively refused it" khi chạy test thường do đâu?
++ Appium server chưa chạy ở cổng 4723
+- Locator sai
+- Emulator hết pin
+
+## LESSON appium-08 | Cuộn, cử chỉ, chụp màn hình và đọc log
+
+### Cuộn tới phần tử với UiScrollable
+~~~python
+system = driver.find_element(
+    AppiumBy.ANDROID_UIAUTOMATOR,
+    'new UiScrollable(new UiSelector().scrollable(true))'
+    '.scrollIntoView(new UiSelector().text("System"))'
+)
+system.click()
+~~~
+Mục System nằm cuối danh sách Settings, phải cuộn mới thấy. Thay vì tự vuốt nhiều lần, ta nhờ Android "cuộn cho tới khi thấy".
+Giải thích:
+• new UiScrollable(new UiSelector().scrollable(true)): chọn vùng có thể cuộn trên màn hình.
+• .scrollIntoView(new UiSelector().text("System")): cuộn vùng đó tới khi thấy chữ System.
+• Hai chuỗi đặt liền nhau trong Python tự nối thành một chuỗi, giúp dòng code ngắn dễ đọc.
+• Kết quả trả về phần tử System, rồi click() để mở.
+
+### Vuốt và nhấn giữ bằng lệnh "mobile:"
+~~~python
+driver.execute_script("mobile: swipeGesture", {
+    "left": 100, "top": 500, "width": 600, "height": 800,
+    "direction": "up",
+    "percent": 0.75
+})
+
+driver.execute_script("mobile: longClickGesture", {"x": 300, "y": 900, "duration": 1000})
+~~~
+UiAutomator2 có sẵn các cử chỉ (gesture), gọi qua execute_script với tên bắt đầu bằng mobile:.
+Giải thích:
+• mobile: swipeGesture: vuốt trong một vùng chữ nhật (left, top, width, height tính bằng pixel).
+• direction "up": ngón tay vuốt lên, nội dung cuộn xuống.
+• percent 0.75: vuốt 75% chiều cao vùng.
+• mobile: longClickGesture: nhấn giữ tại tọa độ x, y trong 1000 ms (1 giây).
+Ưu tiên UiScrollable hoặc truyền elementId của phần tử thay vì tọa độ, vì tọa độ thay đổi theo kích thước màn hình.
+
+### Chụp màn hình làm bằng chứng
+~~~python
+import os
+
+os.makedirs("screenshots", exist_ok=True)
+driver.save_screenshot("screenshots/battery.png")
+print("Activity hiện tại:", driver.current_activity)
+~~~
+Ảnh chụp giúp bạn và dev thấy chính xác màn hình lúc test.
+Giải thích từng dòng:
+• import os: thư viện làm việc với thư mục và file.
+• os.makedirs(..., exist_ok=True): tạo thư mục screenshots nếu chưa có, có rồi thì thôi.
+• save_screenshot(...): lưu ảnh PNG màn hình thiết bị.
+• driver.current_activity: tên activity đang mở, hữu ích khi viết bug report.
+Kết quả: file screenshots\battery.png xuất hiện trong thư mục dự án.
+
+### Cài app và đọc log bằng adb
+~~~bash
+adb install C:\qa\apps\demo-app.apk
+adb logcat -c
+adb logcat -d > log.txt
+adb logcat *:E
+~~~
+Giải thích từng dòng:
+• adb install ...: cài APK vào thiết bị. Kết quả mong đợi: Performing Streamed Install, rồi Success. Cài đè bản mới mà giữ dữ liệu: thêm -r.
+• adb logcat -c: xóa log cũ, để log sau chỉ chứa phần bạn sắp tái hiện.
+• adb logcat -d > log.txt: lấy toàn bộ log hiện có (-d = in ra rồi dừng) và lưu thành file.
+• adb logcat *:E: chỉ xem log mức Error, chạy liên tục; bấm Ctrl + C để dừng.
+Khi app crash, tìm dòng FATAL EXCEPTION trong log.txt và đính kèm vào bug.
+
+### Lỗi thường gặp
+~~~text
+adb: failed to install demo-app.apk: Failure [INSTALL_FAILED_UPDATE_INCOMPATIBLE:
+Package com.example.demo signatures do not match previously installed version; ignoring!]
+~~~
+• Lỗi trên: máy đã có app cùng package nhưng ký bằng chữ ký khác (ví dụ bản cài từ store). Gỡ bản cũ bằng adb uninstall com.example.demo rồi cài lại.
+• INSTALL_FAILED_VERSION_DOWNGRADE: đang cài bản cũ hơn bản trên máy. Gỡ bản trên máy trước, hoặc hỏi dev bản đúng.
+• UiScrollable cuộn mãi không thấy: sai chữ, hoặc màn hình có nhiều vùng cuộn; thử thêm .instance(0) cho vùng cuộn.
+• Ảnh chụp toàn màu đen: một số màn hình (như thanh toán) chặn chụp màn hình để bảo mật; đó không phải lỗi của test.
+
+PRACTICE: Viết test cuộn tới mục "System" trong Settings bằng UiScrollable, bấm vào và chụp màn hình lưu vào thư mục screenshots; trước khi chạy hãy xóa log bằng adb logcat -c, sau khi chạy lưu log ra file log.txt.
+Q: UiScrollable(...).scrollIntoView(...) dùng để làm gì?
+- Phóng to màn hình
++ Cuộn vùng có thể cuộn tới khi thấy phần tử cần tìm
+- Xoay ngang màn hình
+Q: Lệnh nào lưu log hiện có ra file rồi dừng?
+- adb logcat -c
++ adb logcat -d > log.txt
+- adb install log.txt
+Q: Khi app crash, bạn nên tìm cụm từ nào trong logcat?
+- SUCCESS
+- Welcome to Appium
++ FATAL EXCEPTION

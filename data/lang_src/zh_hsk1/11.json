@@ -1,0 +1,155 @@
+{
+  "no": 11,
+  "title": "昨天你做什么了？– Việc đã xảy ra: 了, 是…的, 怎么",
+  "sub": "Zuótiān nǐ zuò shénme le? 昨天你做什么了？",
+  "goals": [
+    "Kể việc đã làm với 了 (我看电影了 / 我买了两本书); phủ định bằng 没 (bỏ 了)",
+    "Hỏi và nói chi tiết việc đã xảy ra bằng 是…的: khi nào, ở đâu, bằng cách nào, với ai",
+    "Hỏi cách thức với 怎么 + động từ; nói phương tiện 坐 / 开 / 骑 + 去 / 来",
+    "Hỏi thăm khi ai đó có chuyện: 你怎么了？– 我生病了。",
+    "Đọc đúng chuỗi ch – z – ch (出租车), sh – s (睡 / 岁), eng – ing (生病)"
+  ],
+  "parts": [
+    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
+      {"w": "了", "py": "le", "hv": "liễu", "pos": "part", "vi": "trợ từ: (đã) … rồi – việc đã xảy ra, đã hoàn thành", "ex": "我吃饭了。", "exPy": "Wǒ chī fàn le.", "exVi": "Tôi ăn cơm rồi."},
+      {"w": "是…的", "py": "shì … de", "hv": "thị … đích", "pos": "phr", "vi": "cấu trúc nhấn mạnh thời gian / nơi chốn / cách thức của việc đã xảy ra", "ex": "你是怎么来的？— 我是坐飞机来的。", "exPy": "Nǐ shì zěnme lái de? — Wǒ shì zuò fēijī lái de.", "exVi": "Bạn đến bằng gì? — Tôi đến bằng máy bay."},
+      {"w": "做", "py": "zuò", "hv": "tố", "pos": "v", "vi": "làm", "ex": "昨天你做什么了？", "exPy": "Zuótiān nǐ zuò shénme le?", "exVi": "Hôm qua bạn đã làm gì?"},
+      {"w": "看见", "py": "kànjiàn", "hv": "khán kiến", "pos": "v", "vi": "nhìn thấy, trông thấy", "ex": "我看见小明了。", "exPy": "Wǒ kànjiàn Xiǎo Míng le.", "exVi": "Tôi nhìn thấy Tiểu Minh rồi."},
+      {"w": "怎么", "py": "zěnme", "hv": "chẩm ma", "pos": "pron", "vi": "thế nào, bằng cách nào; sao (怎么了 = sao thế)", "ex": "你怎么去学校？", "exPy": "Nǐ zěnme qù xuéxiào?", "exVi": "Bạn đi học bằng gì?"},
+      {"w": "飞机", "py": "fēijī", "hv": "phi cơ", "pos": "n", "vi": "máy bay", "ex": "我坐飞机去北京。", "exPy": "Wǒ zuò fēijī qù Běijīng.", "exVi": "Tôi đi Bắc Kinh bằng máy bay."},
+      {"w": "出租车", "py": "chūzūchē", "hv": "xuất tô xa", "pos": "n", "vi": "xe taxi", "ex": "我们坐出租车吧！", "exPy": "Wǒmen zuò chūzūchē ba!", "exVi": "Chúng mình đi taxi nhé!"},
+      {"w": "火车", "py": "huǒchē", "hv": "hoả xa", "pos": "n", "vi": "tàu hoả", "ex": "他是坐火车来的。", "exPy": "Tā shì zuò huǒchē lái de.", "exVi": "Anh ấy đến bằng tàu hoả."},
+      {"w": "地铁", "py": "dìtiě", "hv": "địa thiết", "pos": "n", "vi": "tàu điện ngầm / tàu điện đô thị", "ex": "河内也有地铁。", "exPy": "Hénèi yě yǒu dìtiě.", "exVi": "Hà Nội cũng có tàu điện."},
+      {"w": "一起", "py": "yìqǐ", "hv": "nhất khởi", "pos": "adv", "vi": "cùng nhau", "ex": "我们一起去吧！", "exPy": "Wǒmen yìqǐ qù ba!", "exVi": "Chúng mình cùng đi nhé!"},
+      {"w": "睡觉", "py": "shuìjiào", "hv": "thuỵ giác", "pos": "v", "vi": "ngủ, đi ngủ", "ex": "我晚上十一点睡觉。", "exPy": "Wǒ wǎnshang shíyī diǎn shuìjiào.", "exVi": "Tôi đi ngủ lúc 11 giờ tối."},
+      {"w": "医生", "py": "yīshēng", "hv": "y sinh", "pos": "n", "vi": "bác sĩ", "ex": "我姐姐是医生。", "exPy": "Wǒ jiějie shì yīshēng.", "exVi": "Chị tôi là bác sĩ."},
+      {"w": "生病", "py": "shēngbìng", "hv": "sinh bệnh", "pos": "v", "vi": "bị ốm, bị bệnh", "ex": "小明生病了。", "exPy": "Xiǎo Míng shēngbìng le.", "exVi": "Tiểu Minh bị ốm rồi."},
+      {"w": "去年", "py": "qùnián", "hv": "khứ niên", "pos": "n", "vi": "năm ngoái", "ex": "我是去年来河内的。", "exPy": "Wǒ shì qùnián lái Hénèi de.", "exVi": "Tôi đến Hà Nội từ năm ngoái."},
+      {"w": "上个星期", "py": "shàng ge xīngqī", "hv": "thượng cá tinh kỳ", "pos": "phr", "vi": "tuần trước (下个星期 = tuần sau)", "ex": "上个星期我很忙。", "exPy": "Shàng ge xīngqī wǒ hěn máng.", "exVi": "Tuần trước tôi rất bận."},
+      {"w": "回来", "py": "huílai", "hv": "hồi lai", "pos": "v", "vi": "trở về, quay về (về phía người nói)", "ex": "哥哥回来了！", "exPy": "Gēge huílai le!", "exVi": "Anh trai về rồi!"},
+      {"w": "已经", "py": "yǐjīng", "hv": "dĩ kinh", "pos": "adv", "vi": "đã, rồi (thường đi với 了)", "ex": "我已经吃饭了。", "exPy": "Wǒ yǐjīng chī fàn le.", "exVi": "Tôi đã ăn cơm rồi."},
+      {"w": "没", "py": "méi", "hv": "một", "pos": "adv", "vi": "không, chưa (phủ định việc đã xảy ra)", "ex": "我昨天没去学校。", "exPy": "Wǒ zuótiān méi qù xuéxiào.", "exVi": "Hôm qua tôi không đi học."}
+    ]},
+    {"k": "sounds", "h": "Phát âm: 了 nhẹ, ch – z – ch, sh – s, eng – ing, 一起", "items": [
+      {"sym": "了 le – thanh nhẹ", "ex": ["吃了", "好了", "回来了"], "vi": "Trợ từ 了 đọc nhẹ, ngắn: <b>le</b>. (Chữ này đọc liǎo trong 了解 liǎojiě – hiểu rõ.)"},
+      {"sym": "ch – z – ch (出租车)", "ex": ["出租车", "出", "租"], "vi": "出 <b>chū</b>: uốn lưỡi + bật hơi; 租 <b>zū</b>: lưỡi phẳng, không bật hơi; 车 <b>chē</b>: uốn lưỡi + bật hơi. Đọc chậm từng âm rồi nối nhanh.", "pairs": [["出", "粗"], ["租", "猪"]]},
+      {"sym": "sh – s (睡 / 岁)", "ex": ["睡觉", "睡"], "vi": "睡 <b>shuì</b> uốn lưỡi (≈ “suây” uốn lưỡi); 岁 <b>suì</b> lưỡi phẳng. 觉 trong 睡觉 đọc jiào (khác 觉得 juéde).", "pairs": [["睡", "岁"]]},
+      {"sym": "eng – ing (生病)", "ex": ["生病", "医生"], "vi": "生 <b>shēng</b>: eng ≈ “âng”; 病 <b>bìng</b>: ing ≈ “inh”. 医生 yīshēng ≈ “i sâng”, không đọc “i sinh”."},
+      {"sym": "f + ei (飞机)", "ex": ["飞机", "飞"], "vi": "飞 <b>fēi</b>: f giống “ph” tiếng Việt, ei ≈ “ây” → “phây”. 机 jī không bật hơi."},
+      {"sym": "一 + thanh 3; 已经", "ex": ["一起", "已经"], "vi": "一起 → <b>yìqǐ</b> (一 trước thanh 3 đọc thanh 4). 已经 yǐjīng: 已 thanh 3 thấp."}
+    ]},
+    {"k": "grammar", "h": "Ngữ pháp 1: 了 – việc đã xảy ra, đã hoàn thành", "html": "<p><b>了 (le)</b> cho biết sự việc <b>đã xảy ra / đã hoàn thành</b> – gần với “rồi, đã” của tiếng Việt. Hai vị trí cơ bản:</p><ul><li><b>Cuối câu</b>: S + V + O + 了 – thông báo việc đã xảy ra: 我吃饭了。我去商店了。</li><li><b>Ngay sau động từ</b> khi tân ngữ có số lượng: S + V + 了 + số + lượng từ + O: 我买了两个苹果。</li></ul><p><b>Phủ định</b>: 没(有) + V và <b>BỎ 了</b>: 我没吃饭。 <b>Câu hỏi</b>: …了吗？ hoặc …了没有？</p>", "table": [["Khẳng định", "Phủ định", "Câu hỏi"], ["我去学校了。", "我没去学校。", "你去学校了吗？/ 你去学校了没有？"], ["他买了一个电脑。", "他没买电脑。", "他买电脑了吗？"], ["我已经吃饭了。", "我还没吃饭。", "你吃饭了吗？"]], "ex": [
+      {"t": "昨天你做什么了？— 我看电影了。", "py": "Zuótiān nǐ zuò shénme le? — Wǒ kàn diànyǐng le.", "vi": "Hôm qua bạn làm gì? — Mình đi xem phim."},
+      {"t": "我买了三本书。", "py": "Wǒ mǎile sān běn shū.", "vi": "Tôi đã mua ba cuốn sách."},
+      {"t": "我昨天没去学校，我生病了。", "py": "Wǒ zuótiān méi qù xuéxiào, wǒ shēngbìng le.", "vi": "Hôm qua tôi không đi học, tôi bị ốm."},
+      {"t": "你吃饭了吗？— 吃了。/ 还没吃。", "py": "Nǐ chī fàn le ma? — Chī le. / Hái méi chī.", "vi": "Bạn ăn cơm chưa? — Ăn rồi. / Chưa ăn. (还 hái = vẫn)"}
+    ], "tips": ["❌ <i>我没去了</i> → ✅ 我没去 (phủ định bỏ 了).", "Việc đã qua phủ định bằng 没, KHÔNG dùng 不: ❌ <i>昨天我不去学校</i> → ✅ 昨天我没去学校。", "了 KHÔNG phải “thì quá khứ”: tính từ mô tả, thói quen trong quá khứ không cần 了 – 昨天很冷; 以前我常常喝咖啡.", "你吃饭了吗？ ở Trung Quốc thường là lời chào thân mật – giống “Ăn cơm chưa?” của người Việt!"]},
+    {"k": "grammar", "h": "Ngữ pháp 2: 是…的 – nhấn mạnh chi tiết của việc đã xảy ra", "html": "<p>Khi <b>đã biết</b> một việc đã xảy ra, muốn hỏi / nói rõ <b>khi nào, ở đâu, bằng cách nào, với ai</b> → dùng <b>是 + [thông tin nhấn mạnh] + động từ + 的</b>.</p><p>Ví dụ: biết Anna đã sang Việt Nam, hỏi chi tiết: 你是什么时候来的？你是怎么来的？</p><p>Phủ định: <b>不是…的</b>. Khẩu ngữ khẳng định có thể bỏ 是, nhưng <b>không bỏ 的</b>.</p>", "table": [["Nhấn mạnh", "Câu hỏi", "Trả lời"], ["Thời gian", "你是什么时候来的？", "我是去年来的。"], ["Nơi chốn", "你是在哪儿买的？", "我是在北京买的。"], ["Cách thức", "你是怎么来的？", "我是坐飞机来的。"], ["Đi cùng ai", "你是和谁一起来的？", "我是和妈妈一起来的。"]], "ex": [
+      {"t": "安娜是去年九月来河内的。", "py": "Ānnà shì qùnián jiǔ yuè lái Hénèi de.", "vi": "Anna đến Hà Nội vào tháng 9 năm ngoái."},
+      {"t": "这个电脑是在北京买的。", "py": "Zhège diànnǎo shì zài Běijīng mǎi de.", "vi": "Cái máy tính này mua ở Bắc Kinh."},
+      {"t": "我不是坐出租车来的，我是坐地铁来的。", "py": "Wǒ bú shì zuò chūzūchē lái de, wǒ shì zuò dìtiě lái de.", "vi": "Tôi không đến bằng taxi, tôi đến bằng tàu điện."}
+    ], "tips": ["了 thông báo việc vừa xảy ra (我来了！); 是…的 hỏi/nói CHI TIẾT của việc đã biết (我是昨天来的).", "❌ <i>我是坐飞机来了</i> → ✅ 我是坐飞机来的。", "是…的 chỉ dùng cho việc ĐÃ xảy ra, không dùng cho tương lai."]},
+    {"k": "grammar", "h": "Ngữ pháp 3: 怎么 + động từ; phương tiện 坐 / 开 / 骑; 怎么了", "html": "<p><b>怎么 + động từ</b> = làm bằng cách nào: 你怎么去学校？这个字怎么写？ (Chữ này viết thế nào?). Khác 怎么样 (bài 9).</p><p>Phương tiện: <b>坐</b> (ngồi) + máy bay / tàu / taxi / tàu điện: 坐飞机, 坐火车, 坐出租车, 坐地铁. Tự lái ô tô: <b>开车</b>. Xe máy, xe đạp (ngồi “cưỡi”): <b>骑</b> qí – 骑摩托车 qí mótuōchē (đi xe máy), 骑自行车 qí zìxíngchē (đi xe đạp). Đi bộ: 走路 zǒulù.</p><p>Trật tự: <b>Chủ ngữ + phương tiện + 去 / 来 + nơi chốn</b>: 我坐地铁去学校。</p><p><b>你怎么了？</b> = Bạn làm sao thế? Có chuyện gì vậy?</p>", "table": [["Câu hỏi", "Trả lời"], ["你怎么去学校？", "我骑摩托车去学校。"], ["你怎么来河内？", "我坐飞机来河内。"], ["这个字怎么写？", "这样写。(Viết thế này.)"], ["你怎么了？", "我生病了。"]], "ex": [
+      {"t": "你怎么去学校？— 我骑摩托车去。", "py": "Nǐ zěnme qù xuéxiào? — Wǒ qí mótuōchē qù.", "vi": "Bạn đi học bằng gì? — Mình đi xe máy."},
+      {"t": "我坐火车去胡志明市。", "py": "Wǒ zuò huǒchē qù Húzhìmíng Shì.", "vi": "Tôi đi TP. Hồ Chí Minh bằng tàu hoả."},
+      {"t": "你怎么了？— 我生病了。", "py": "Nǐ zěnme le? — Wǒ shēngbìng le.", "vi": "Bạn sao thế? — Mình bị ốm."}
+    ], "tips": ["❌ <i>我去学校坐地铁</i> (theo tiếng Việt “đi học bằng tàu điện”) → ✅ 我坐地铁去学校。", "Xe máy, xe đạp chuẩn nhất dùng 骑 (cưỡi); ô tô tự lái dùng 开.", "怎么 + V hỏi cách làm; 怎么样 hỏi tính chất: 这个字怎么写？ ≠ 这个字怎么样？"]},
+    {"k": "dialog", "h": "Nghe: Cuối tuần của bạn thế nào?", "lang": "zh-CN", "note": "Sáng thứ Hai ở trường, Tiểu Minh hỏi Anna cuối tuần làm gì. Nghe lần 1 không nhìn chữ: mẹ Anna đến Việt Nam bằng gì?", "lines": [
+      {"s": "小明", "g": "m", "t": "安娜，昨天你做什么了？", "py": "Ānnà, zuótiān nǐ zuò shénme le?", "vi": "Anna, hôm qua bạn làm gì thế?"},
+      {"s": "安娜", "g": "f", "t": "昨天我和妈妈一起看了一个电影。", "py": "Zuótiān wǒ hé māma yìqǐ kànle yí ge diànyǐng.", "vi": "Hôm qua mình với mẹ cùng đi xem một bộ phim."},
+      {"s": "小明", "g": "m", "t": "你妈妈来越南了？", "py": "Nǐ māma lái Yuènán le?", "vi": "Mẹ bạn sang Việt Nam rồi à?"},
+      {"s": "安娜", "g": "f", "t": "对，她是上个星期来的。", "py": "Duì, tā shì shàng ge xīngqī lái de.", "vi": "Ừ, mẹ mình sang từ tuần trước."},
+      {"s": "小明", "g": "m", "t": "她是怎么来的？", "py": "Tā shì zěnme lái de?", "vi": "Bác ấy sang bằng gì?"},
+      {"s": "安娜", "g": "f", "t": "她是坐飞机来的。", "py": "Tā shì zuò fēijī lái de.", "vi": "Mẹ mình đi máy bay sang."},
+      {"s": "小明", "g": "m", "t": "你们是在哪儿看的电影？", "py": "Nǐmen shì zài nǎr kàn de diànyǐng?", "vi": "Hai mẹ con xem phim ở đâu?"},
+      {"s": "安娜", "g": "f", "t": "在我家前面的电影院看的。电影很好看！你呢？昨天你做什么了？", "py": "Zài wǒ jiā qiánmiàn de diànyǐngyuàn kàn de. Diànyǐng hěn hǎokàn! Nǐ ne? Zuótiān nǐ zuò shénme le?", "vi": "Ở rạp chiếu phim trước nhà mình. Phim hay lắm! Còn bạn? Hôm qua bạn làm gì?"},
+      {"s": "小明", "g": "m", "t": "我生病了，没出去。", "py": "Wǒ shēngbìng le, méi chūqu.", "vi": "Mình bị ốm, không ra ngoài."},
+      {"s": "安娜", "g": "f", "t": "你怎么了？去医院了吗？", "py": "Nǐ zěnme le? Qù yīyuàn le ma?", "vi": "Bạn làm sao thế? Đi viện chưa?"},
+      {"s": "小明", "g": "m", "t": "去了。医生说没关系。", "py": "Qù le. Yīshēng shuō méi guānxi.", "vi": "Đi rồi. Bác sĩ bảo không sao."},
+      {"s": "安娜", "g": "f", "t": "现在好了吗？", "py": "Xiànzài hǎo le ma?", "vi": "Giờ khỏi chưa?"},
+      {"s": "小明", "g": "m", "t": "好了！我已经吃药了。", "py": "Hǎo le! Wǒ yǐjīng chī yào le.", "vi": "Khỏi rồi! Mình uống thuốc rồi."},
+      {"s": "安娜", "g": "f", "t": "太好了！", "py": "Tài hǎo le!", "vi": "Tốt quá!"}
+    ], "qs": [
+      {"q": "Hôm qua Anna làm gì?", "o": ["Đi mua sắm với mẹ", "Xem phim với mẹ", "Ở nhà ngủ"], "a": 1, "e": "昨天我和妈妈一起看了一个电影。"},
+      {"q": "Mẹ Anna sang Việt Nam khi nào?", "o": ["Hôm qua", "Tuần trước", "Năm ngoái"], "a": 1, "e": "她是上个星期来的。"},
+      {"q": "Mẹ Anna sang bằng gì?", "o": ["Máy bay", "Tàu hoả", "Taxi"], "a": 0, "e": "她是坐飞机来的。"},
+      {"q": "Vì sao hôm qua Tiểu Minh không ra ngoài?", "o": ["Vì bận học", "Vì bị ốm", "Vì trời mưa"], "a": 1, "e": "我生病了，没出去。"},
+      {"q": "Bác sĩ nói gì? 医生说___。(gõ chữ Hán hoặc pinyin)", "a": "没关系", "alt": ["meiguanxi"], "e": "医生说没关系 – bác sĩ bảo không sao."}
+    ]},
+    {"k": "read", "h": "Đọc: Anh trai về rồi!", "title": "哥哥回来了", "text": "上个星期六，我哥哥从北京回来了。他是坐飞机回来的。\n\n我和爸爸开车去机场。哥哥买了很多东西：一个新电脑、两本汉语书，还有中国茶。\n\n晚上，我们一起吃饭了。妈妈很高兴。", "py": "Shàng ge xīngqīliù, wǒ gēge cóng Běijīng huílai le. Tā shì zuò fēijī huílai de.\n\nWǒ hé bàba kāi chē qù jīchǎng. Gēge mǎile hěn duō dōngxi: yí ge xīn diànnǎo, liǎng běn Hànyǔ shū, hái yǒu Zhōngguó chá.\n\nWǎnshang, wǒmen yìqǐ chī fàn le. Māma hěn gāoxìng.", "vi": "Thứ Bảy tuần trước, anh trai tôi từ Bắc Kinh về. Anh ấy về bằng máy bay.\n\nTôi và bố lái xe ra sân bay. Anh trai mua rất nhiều đồ: một cái máy tính mới, hai cuốn sách tiếng Trung, còn có cả trà Trung Quốc.\n\nBuổi tối, cả nhà cùng ăn cơm. Mẹ rất vui.", "gloss": [
+      {"w": "从", "py": "cóng", "vi": "từ (从北京 – từ Bắc Kinh)"},
+      {"w": "机场", "py": "jīchǎng", "vi": "sân bay"},
+      {"w": "新", "py": "xīn", "vi": "mới"},
+      {"w": "还有", "py": "hái yǒu", "vi": "còn có, và cả"}
+    ], "qs": [
+      {"q": "Anh Hải về từ đâu?", "o": ["Bắc Kinh", "TP. Hồ Chí Minh", "Mỹ"], "a": 0, "e": "我哥哥从北京回来了。"},
+      {"q": "Anh Hải về bằng gì?", "o": ["Máy bay", "Tàu hoả", "Ô tô"], "a": 0, "e": "他是坐飞机回来的。"},
+      {"q": "Ai ra sân bay đón anh Hải?", "o": ["Tiểu Lan và bố", "Tiểu Lan và mẹ", "Mẹ và em gái"], "a": 0, "e": "我和爸爸开车去机场。"},
+      {"q": "Anh Hải mua mấy cuốn sách tiếng Trung? (gõ số hoặc chữ Hán)", "a": "两", "alt": ["2", "两本", "liang", "二"], "e": "两本汉语书 – hai cuốn."}
+    ]},
+    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
+      {"c": "了", "py": "le", "hv": "liễu", "parts": "tượng hình đứa trẻ quấn tã (không thấy tay)", "strokes": 2, "vi": "xong, rồi (trợ từ); đọc liǎo khi là động từ", "words": "好了, 吃了"},
+      {"c": "做", "py": "zuò", "hv": "tố", "parts": "亻(người) + 故 (cố)", "strokes": 11, "vi": "làm – con người làm việc", "words": "做饭, 做什么"},
+      {"c": "见", "py": "jiàn", "hv": "kiến", "parts": "giản thể của 見 (目 mắt + 儿 người)", "strokes": 4, "vi": "thấy, gặp – người mở to mắt", "words": "看见, 再见"},
+      {"c": "飞", "py": "fēi", "hv": "phi", "parts": "tượng hình cánh chim đang vỗ", "strokes": 3, "vi": "bay", "words": "飞机"},
+      {"c": "机", "py": "jī", "hv": "cơ", "parts": "木 (mộc – gỗ) + 几 (kỉ – gợi âm)", "strokes": 6, "vi": "máy móc – máy xưa làm bằng gỗ", "words": "飞机, 手机"},
+      {"c": "车", "py": "chē", "hv": "xa", "parts": "tượng hình cỗ xe nhìn từ trên (bánh – trục)", "strokes": 4, "vi": "xe", "words": "火车, 开车, 出租车"},
+      {"c": "坐", "py": "zuò", "hv": "toạ", "parts": "hai chữ 人 ngồi trên 土 (đất)", "strokes": 7, "vi": "ngồi; đi (phương tiện)", "words": "请坐, 坐飞机"}
+    ]},
+    {"k": "speak", "h": "Nói: Hôm qua & chuyến đi", "tasks": [
+      {"p": "Kể 3 việc bạn đã làm hôm qua (dùng 了) và 1 việc bạn không làm (dùng 没).", "model": "昨天上午我去学校了，下午我买了两本书，晚上我看电视了。我没做饭。", "py": "Zuótiān shàngwǔ wǒ qù xuéxiào le, xiàwǔ wǒ mǎile liǎng běn shū, wǎnshang wǒ kàn diànshì le. Wǒ méi zuò fàn.", "vi": "Sáng qua tôi đến trường, chiều tôi mua hai cuốn sách, tối tôi xem tivi. Tôi không nấu cơm.", "tips": "Câu phủ định 没 không có 了."},
+      {"p": "Phỏng vấn một người mới đến Hà Nội: đến khi nào, bằng gì, với ai.", "model": "你是什么时候来河内的？— 我是上个月来的。— 你是怎么来的？— 我是坐飞机来的。— 你是和谁一起来的？— 我是和朋友一起来的。", "py": "Nǐ shì shénme shíhou lái Hénèi de? — Wǒ shì shàng ge yuè lái de. — Nǐ shì zěnme lái de? — Wǒ shì zuò fēijī lái de. — Nǐ shì hé shéi yìqǐ lái de? — Wǒ shì hé péngyou yìqǐ lái de.", "vi": "Bạn đến Hà Nội khi nào? — Tháng trước. — Bạn đến bằng gì? — Bằng máy bay. — Bạn đến cùng ai? — Cùng bạn bè.", "tips": "Đừng quên 的 ở cuối mỗi câu 是…的."},
+      {"p": "Nói bạn đi học / đi làm hằng ngày bằng phương tiện gì.", "model": "我每天骑摩托车去学校。下雨的时候，我坐出租车去。", "py": "Wǒ měi tiān qí mótuōchē qù xuéxiào. Xià yǔ de shíhou, wǒ zuò chūzūchē qù.", "vi": "Hằng ngày tôi đi xe máy đến trường. Lúc trời mưa, tôi đi taxi.", "tips": "…的时候 = lúc…; phương tiện đứng trước 去."}
+    ]},
+    {"k": "write", "h": "Viết: Nhật ký cuối tuần", "task": "Viết nhật ký cuối tuần 6–8 câu: hôm nào, đi đâu, bằng gì, với ai, đã làm gì (了), một việc không làm (没), và ít nhất 1 câu 是…的.", "min": 60, "model": "上个星期天，我和朋友一起去了西湖。我们是骑摩托车去的。我们在那儿喝了两杯咖啡，吃了很多水果。下午我们去商店买东西了。安娜买了一件衣服，我没买东西。晚上八点我们回家了。我很高兴！", "modelVi": "Chủ nhật tuần trước, tôi cùng bạn đi Hồ Tây. Chúng tôi đi bằng xe máy. Ở đó chúng tôi uống hai cốc cà phê, ăn rất nhiều hoa quả. Buổi chiều chúng tôi đi cửa hàng mua đồ. Anna mua một chiếc áo, tôi không mua gì. 8 giờ tối chúng tôi về nhà. Tôi rất vui!", "tips": ["Tân ngữ có số lượng: V + 了 + số + lượng từ + danh từ (喝了两杯咖啡).", "Không có số lượng: đặt 了 cuối câu (去商店买东西了).", "Phủ định: 没 + V, không có 了."], "checklist": ["Có mốc thời gian quá khứ (上个星期天, 昨天…)", "Có ít nhất 3 câu với 了", "Có 1 câu 没 (không có 了)", "Có 1 câu 是…的", "Phương tiện đứng trước 去 / 来"]}
+  ],
+  "exercises": [
+    {"t": "listen", "say": "我昨天没去学校。", "lang": "zh-CN", "q": "Hôm qua người nói thế nào?", "o": ["Đã đi học", "Không đi học", "Sẽ đi học"], "a": 1, "e": "没去 = đã không đi."},
+    {"t": "listen", "say": "我是坐火车来的。", "lang": "zh-CN", "q": "Người nói đến bằng gì?", "o": ["Máy bay", "Tàu hoả", "Taxi"], "a": 1, "e": "坐火车 = đi tàu hoả."},
+    {"t": "listen", "say": "我买了三本书。", "lang": "zh-CN", "q": "Người nói đã mua gì?", "o": ["3 cuốn sách", "3 cái máy tính", "2 cuốn sách"], "a": 0, "e": "三本书 = ba cuốn sách."},
+    {"t": "mc", "q": "Phủ định đúng của 我吃饭了 (Tôi ăn cơm rồi) là:", "o": ["我不吃饭了。", "我没吃饭。", "我没吃饭了。"], "a": 1, "e": "Phủ định việc đã xảy ra: 没 + V, bỏ 了. (我不吃饭了 = tôi không ăn nữa.)"},
+    {"t": "mc", "q": "Biết bạn đã đến, hỏi chi tiết “Bạn đến bằng gì?”:", "o": ["你怎么来了？", "你是怎么来的？", "你来怎么的？"], "a": 1, "e": "是 + 怎么 + 来 + 的. (你怎么来了？ thường nghĩa “Sao bạn lại đến đây?”)"},
+    {"t": "mc", "q": "“Tôi đi học bằng tàu điện” – câu đúng:", "o": ["我去学校坐地铁。", "我坐地铁去学校。", "我坐学校去地铁。"], "a": 1, "e": "Phương tiện đứng trước 去 + nơi chốn."},
+    {"t": "mc", "q": "Đi xe máy, động từ chuẩn nhất là:", "o": ["坐", "骑", "开"], "a": 1, "e": "骑 qí = cưỡi: 骑摩托车. 开 dùng cho ô tô."},
+    {"t": "mc", "q": "你怎么了？ nghĩa là:", "o": ["Bạn làm sao thế?", "Bạn đi bằng gì?", "Bạn thấy thế nào?"], "a": 0, "e": "怎么了 = sao thế, có chuyện gì."},
+    {"t": "fill", "q": "昨天你做什么___？(Hôm qua bạn đã làm gì?)", "a": "了", "alt": ["le"], "e": "了 cuối câu hỏi về việc đã xảy ra."},
+    {"t": "fill", "q": "我昨天___去学校。(Hôm qua tôi không đi học.)", "a": "没", "alt": ["mei", "没有", "meiyou"], "e": "Việc đã qua phủ định bằng 没."},
+    {"t": "fill", "q": "我是去年来河内___。(Tôi đến Hà Nội năm ngoái.)", "a": "的", "alt": ["de"], "e": "是…的 nhấn mạnh thời gian; không bỏ 的."},
+    {"t": "order", "q": "Sắp xếp thành câu: “Cô ấy đến bằng máy bay.”", "w": ["坐飞机", "她", "来的", "是"], "a": "她是坐飞机来的", "e": "Chủ ngữ + 是 + cách thức + 来 + 的."},
+    {"t": "order", "q": "Sắp xếp thành câu: “Chúng mình cùng đi nhé!”", "w": ["去", "我们", "吧", "一起"], "a": "我们一起去吧", "e": "一起 đứng trước động từ; 吧 cuối câu rủ rê."},
+    {"t": "dict", "say": "出租车", "lang": "zh-CN", "a": "出租车", "py": "chūzūchē", "e": "出租车 = taxi; chú ý ch – z – ch."},
+    {"t": "dict", "say": "你吃饭了吗？", "lang": "zh-CN", "a": "你吃饭了吗", "py": "nǐ chī fàn le ma", "e": "Câu hỏi việc đã xảy ra: …了吗？"},
+    {"t": "match", "q": "Nối phương tiện với nghĩa:", "pairs": [["飞机", "máy bay"], ["火车", "tàu hoả"], ["出租车", "taxi"], ["地铁", "tàu điện"], ["摩托车", "xe máy"]]}
+  ],
+  "teacher": {
+    "time": "2 buổi × 90 phút",
+    "prep": "Tranh phương tiện (máy bay, tàu hoả, taxi, tàu điện, xe máy, xe đạp); lịch tuần trước in sẵn; thẻ ‘việc đã làm’ (看电影, 买东西, 去医院…); thẻ chữ 了 做 见 飞 机 车 坐.",
+    "steps": [
+      {"t": "Buổi 1 · 10'", "do": "Khởi động: ôn bài 10 – GV ‘gọi điện’: 喂，你在做什么呢？ học viên trả lời."},
+      {"t": "15'", "do": "Từ vựng phương tiện + 坐 / 开 / 骑; liên hệ thực tế: Hà Nội, TP. Hồ Chí Minh đã có tàu điện (地铁), người Việt đi xe máy (骑摩托车)."},
+      {"t": "25'", "do": "Ngữ pháp 1: 了 – GV kể ‘hôm qua của thầy/cô’ bằng 了, học viên đặt câu về mình; phủ định 没 (bỏ 了); so sánh 不 / 没."},
+      {"t": "15'", "do": "Phát âm: 出租车 (ch – z – ch), 睡/岁, 生病 (eng – ing), 了 đọc nhẹ."},
+      {"t": "15'", "do": "Ngữ pháp 3: 怎么 + V, 怎么了 – học viên phỏng vấn nhau 你怎么去学校？你怎么来这儿？"},
+      {"t": "10'", "do": "Bài tập 1–8 trong game."},
+      {"t": "Buổi 2 · 10'", "do": "Ôn: mỗi học viên nói 2 việc đã làm cuối tuần và 1 việc không làm."},
+      {"t": "20'", "do": "Ngữ pháp 2: 是…的 – đóng vai ‘phỏng vấn người mới đến’: thời gian, cách thức, đi cùng ai, mua ở đâu. So sánh 了 và 是…的 qua cặp câu."},
+      {"t": "15'", "do": "Nghe hội thoại: lần 1 – mẹ Anna đến bằng gì? lần 2 – Tiểu Minh bị sao? lần 3 đóng vai."},
+      {"t": "15'", "do": "Đọc ‘哥哥回来了’ – gạch chân tất cả câu có 了 và 是…的, giải thích vì sao dùng."},
+      {"t": "15'", "do": "Chữ Hán 7 chữ (飞, 车 tượng hình; 亻, 木) + nhiệm vụ nói 1–3."},
+      {"t": "15'", "do": "Viết nhật ký cuối tuần; bài tập 9–16; giao bài về nhà."}
+    ],
+    "games": [
+      "Thám tử: GV ‘làm mất’ chiếc điện thoại hôm qua; học viên hỏi 你昨天去哪儿了？你是几点回家的？你是怎么回家的？… để đoán nơi để quên.",
+      "Chuỗi hôm qua: A nói 昨天我吃了饭; B lặp lại và thêm một việc (昨天我吃了饭，看了电影…); ai quên hoặc nói sai thì ngồi xuống."
+    ],
+    "errors": [
+      "❌ 我没去了 → ✅ 我没去 (phủ định bỏ 了).",
+      "Dùng 不 cho việc đã qua: ❌ 昨天我不去学校 → ✅ 昨天我没去学校.",
+      "Thêm 了 cho mọi câu quá khứ: ❌ 以前我常常喝了咖啡 → ✅ 以前我常常喝咖啡.",
+      "Bỏ 的 trong 是…的: ❌ 我是坐飞机来 → ✅ 我是坐飞机来的.",
+      "Trật tự phương tiện theo tiếng Việt: ❌ 我去学校坐地铁 → ✅ 我坐地铁去学校.",
+      "Đọc 出租车 lẫn ch/z; đọc 睡觉 shuìjiào thành suìjiào."
+    ],
+    "homework": "Bài tập trong game ≥ 80%; viết mỗi chữ Hán 1 dòng; viết nhật ký 3 ngày liên tiếp (mỗi ngày 3 câu có 了 / 没); hỏi một người thân về chuyến đi gần nhất rồi viết 3 câu 是…的."
+  }
+}

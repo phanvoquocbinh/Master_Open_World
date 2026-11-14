@@ -1,0 +1,815 @@
+=== COURSE cicd
+name: CI/CD cho tester
+icon: 🔁
+floor: 5
+room: 503
+level: Cơ bản → Trung bình
+hours: 6
+summary: Tự động chạy Playwright và Newman trên GitHub Actions mỗi khi có code mới: viết workflow YAML, lưu báo cáo dạng artifact, dùng secrets, matrix, lịch chạy đêm và xử lý test flaky.
+
+## LESSON cicd-01 | CI/CD là gì? Bắt đầu với GitHub Actions
+
+### Dây chuyền của tiệm bánh
+Một tiệm bánh lớn không để thợ tự mang từng chiếc bánh ra quầy. Họ có dây chuyền: nhào bột → nướng → kiểm tra chất lượng → đóng hộp → giao hàng. Chiếc bánh nào hỏng ở khâu kiểm tra sẽ bị loại ngay, không tới tay khách.
+Phần mềm cũng có dây chuyền như vậy:
+• CI (Continuous Integration, tích hợp liên tục): mỗi lần lập trình viên đẩy code lên, máy tự build và chạy test.
+• CD (Continuous Delivery/Deployment, giao hàng liên tục): code qua hết các khâu kiểm tra thì tự động được đưa lên môi trường test, staging hoặc production.
+Tester chính là người thiết kế "khâu kiểm tra chất lượng" trên dây chuyền đó.
+
+### Tester đứng ở đâu trong pipeline?
+Pipeline (đường ống) là chuỗi các bước tự động. Một pipeline điển hình:
+~~~text
+Dev đẩy code -> Build -> Unit test -> API test (Newman) -> UI test (Playwright) -> Báo cáo
+                                 Đỏ ở bất kỳ bước nào: dừng lại, báo cho dev
+                                 Xanh toàn bộ: triển khai lên môi trường test/staging
+~~~
+Giải thích từng dòng:
+• Dòng 1: các bước chạy lần lượt từ trái sang phải.
+• Dòng 2: chỉ cần một bước đỏ là pipeline dừng, lỗi được phát hiện sớm, sửa rẻ hơn.
+• Dòng 3: mọi bước xanh thì code được "giao" tiếp.
+Lợi ích cho tester: không phải chạy tay bộ regression mỗi ngày, có lịch sử kết quả rõ ràng, bug bị chặn ngay khi vừa xuất hiện.
+
+### Từ vựng GitHub Actions
+GitHub Actions là dịch vụ CI/CD có sẵn trong GitHub, miễn phí ở mức cơ bản cho kho công khai.
+• Workflow: một file YAML mô tả cả dây chuyền.
+• Event (on): sự kiện kích hoạt, ví dụ push, pull request, hẹn giờ.
+• Job: một nhóm việc chạy trên cùng một máy.
+• Step: từng bước trong job, chạy lệnh (run) hoặc dùng action có sẵn (uses).
+• Runner: máy ảo GitHub cấp để chạy job, ví dụ ubuntu-latest.
+Workflow phải đặt đúng thư mục trong kho mã:
+~~~text
+my-tests/
+├── .github/
+│   └── workflows/
+│       ├── hello.yml
+│       └── playwright.yml
+├── tests/
+├── package.json
+└── playwright.config.ts
+~~~
+Giải thích: thư mục .github (có dấu chấm ở đầu) chứa workflows; mỗi file .yml trong đó là một workflow riêng.
+
+### Workflow đầu tiên: hello.yml
+Tạo file .github/workflows/hello.yml với nội dung:
+~~~text
+name: Hello CI
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: In lời chào
+        run: echo "Xin chào từ GitHub Actions!"
+      - name: Xem phiên bản Node
+        run: node --version
+~~~
+Giải thích từng dòng:
+• name: tên workflow hiện trên tab Actions.
+• on: push ... branches: [ main ]: chạy khi có code đẩy lên nhánh main.
+• workflow_dispatch: thêm nút "Run workflow" để chạy bằng tay.
+• jobs: danh sách job; say-hello là tên job do bạn đặt.
+• runs-on: ubuntu-latest: chạy trên máy ảo Ubuntu mới nhất.
+• steps: các bước; mỗi bước bắt đầu bằng dấu gạch ngang, có name (tên) và run (lệnh).
+
+### Đẩy lên GitHub và xem kết quả
+Trong thư mục dự án (đã có Git và đã nối với kho GitHub, xem khóa Git & GitHub):
+~~~bash
+git add .github/workflows/hello.yml
+git commit -m "Thêm workflow Hello CI"
+git push
+~~~
+Giải thích từng dòng:
+• git add: đưa file workflow vào danh sách sẽ lưu.
+• git commit -m: lưu một "điểm lưu" kèm lời nhắn.
+• git push: đẩy lên GitHub, sự kiện push kích hoạt workflow.
+Kết quả mong đợi: vào kho trên GitHub > tab Actions, thấy "Hello CI" đang chạy (vòng vàng), sau vài giây chuyển dấu tích xanh. Bấm vào job say-hello, mở bước "In lời chào" sẽ thấy dòng Xin chào từ GitHub Actions!
+
+### Lỗi thường gặp
+• Tab Actions không có gì: file đặt sai thư mục, ví dụ .github/workflow (thiếu chữ s) hoặc github/workflows (thiếu dấu chấm). Đường dẫn đúng: .github/workflows/ten-file.yml.
+• Workflow không chạy khi push: bạn push lên nhánh khác main trong khi on.push chỉ khai báo main.
+• Không thấy nút Run workflow: workflow_dispatch chỉ hiện khi file đã nằm trên nhánh mặc định (thường là main).
+• Dấu X đỏ ở bước run: lệnh trả về lỗi. Mở log bước đó, đọc dòng cuối có chữ Error hoặc exit code.
+• Kho của công ty: Actions có thể bị quản trị viên tắt. Hãy hỏi quản trị kho thay vì tự đổi cài đặt.
+
+PRACTICE: Tạo một kho GitHub thử nghiệm, thêm .github/workflows/hello.yml như bài học, push lên main, sau đó vào tab Actions bấm Run workflow để chạy thêm một lần bằng tay và chụp màn hình log.
+Q: File workflow của GitHub Actions phải đặt ở đâu?
+- github/actions/
++ .github/workflows/
+- workflows/.github/
+Q: Trong workflow, runs-on: ubuntu-latest có nghĩa là gì?
+- Chỉ chạy được khi máy bạn dùng Ubuntu
++ Job chạy trên máy ảo Ubuntu do GitHub cung cấp
+- Cài Ubuntu lên kho mã
+Q: Vì sao CI giúp sửa bug rẻ hơn?
+- Vì CI tự sửa bug thay lập trình viên
+- Vì CI không cần viết test
++ Vì lỗi được phát hiện ngay sau khi code được đẩy lên, khi dev còn nhớ thay đổi
+
+## LESSON cicd-02 | YAML căn bản cho người mới
+
+### YAML: cặp tên và giá trị, thụt lề bằng dấu cách
+YAML là định dạng ghi cấu hình, đọc gần như văn bản thường. Quy tắc quan trọng nhất: thụt lề bằng DẤU CÁCH, không dùng phím Tab.
+~~~text
+name: Hello CI
+on: push
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+~~~
+Giải thích từng dòng:
+• name: Hello CI: tên (key) là name, giá trị (value) là Hello CI. Sau dấu hai chấm phải có một dấu cách.
+• on: push: sự kiện kích hoạt là push.
+• jobs: không có giá trị ngay sau, vì nội dung nằm ở các dòng thụt vào bên dưới.
+• say-hello: thụt 2 dấu cách, nghĩa là "nằm trong" jobs.
+• runs-on: thụt 4 dấu cách, nằm trong say-hello.
+Giống mục lục sách: mục con thụt vào trong mục cha.
+
+### Danh sách và cấu trúc lồng nhau
+~~~text
+steps:
+  - name: Bước 1
+    run: echo "Một"
+  - name: Bước 2
+    run: echo "Hai"
+browsers: [chromium, firefox, webkit]
+~~~
+Giải thích từng dòng:
+• steps: là một danh sách.
+• - name: Bước 1: dấu gạch ngang mở đầu một phần tử mới của danh sách.
+• run: echo "Một": thẳng cột với chữ name ở dòng trên, cùng thuộc phần tử thứ nhất.
+• Phần tử thứ hai bắt đầu bằng dấu gạch ngang tiếp theo.
+• browsers: [chromium, firefox, webkit]: cách viết danh sách gọn trên một dòng, dùng ngoặc vuông.
+
+### Lệnh nhiều dòng và dấu nháy
+~~~text
+- name: Chạy nhiều lệnh
+  run: |
+    echo "Bắt đầu"
+    node --version
+    npm --version
+- name: Chuỗi có dấu hai chấm
+  run: echo "Thời gian: 10:30"
+~~~
+Giải thích từng dòng:
+• run: | : dấu gạch đứng nghĩa là "các dòng thụt vào bên dưới là một khối lệnh", mỗi dòng chạy lần lượt.
+• Ba dòng echo, node --version, npm --version: thụt vào sâu hơn chữ run.
+• Chuỗi có dấu hai chấm như Thời gian: 10:30 nên bọc trong dấu nháy để YAML không hiểu nhầm thành cặp key/value.
+Mẹo: các giá trị có ký tự đặc biệt như *, :, # nên đặt trong nháy đơn, ví dụ cron: '0 1 * * *'.
+
+### Các sự kiện kích hoạt hay dùng
+~~~text
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1 * * *'
+~~~
+Giải thích từng dòng:
+• push ... main: chạy khi có commit mới trên main.
+• pull_request ... main: chạy khi có pull request muốn gộp vào main. Đây là lúc tester muốn test chạy nhất, để chặn lỗi trước khi gộp.
+• workflow_dispatch: cho phép bấm nút chạy tay.
+• schedule với cron: hẹn giờ chạy định kỳ (bài 7 học kỹ).
+Một workflow có thể có nhiều sự kiện cùng lúc như trên.
+
+### Lỗi thường gặp
+~~~text
+Invalid workflow file: .github/workflows/hello.yml#L8
+You have an error in your yaml syntax on line 8
+The workflow is not valid. .github/workflows/hello.yml (Line: 6, Col: 5): Unexpected value 'step'
+The workflow is not valid. .github/workflows/hello.yml (Line: 5, Col: 3): Required property is missing: runs-on
+~~~
+• error in your yaml syntax on line 8: thụt lề sai hoặc lẫn phím Tab ở dòng 8 (hoặc ngay trên). Cách sửa: xóa khoảng trắng đầu dòng, gõ lại bằng dấu cách.
+• Unexpected value 'step': gõ sai từ khóa, đúng là steps (có s).
+• Required property is missing: runs-on: job thiếu runs-on hoặc runs-on bị thụt sai nên không nằm trong job.
+Mẹo: trong VS Code cài tiện ích "GitHub Actions" hoặc "YAML" để được gạch đỏ lỗi trước khi push; bật hiển thị khoảng trắng bằng View > Render Whitespace.
+
+PRACTICE: Sửa hello.yml thêm một bước dùng run: | chạy 3 lệnh (echo, node --version, npm --version) và thêm sự kiện pull_request vào main. Cố ý thụt sai một dòng, push để xem thông báo lỗi, rồi sửa lại cho xanh.
+Q: Trong YAML, nên thụt lề bằng gì?
++ Dấu cách (space)
+- Phím Tab
+- Dấu gạch ngang
+Q: Ký hiệu run: | dùng để làm gì?
+- Chạy lệnh song song
++ Viết nhiều lệnh trên nhiều dòng trong một bước
+- Bỏ qua bước nếu lỗi
+Q: Lỗi "Unexpected value 'step'" thường do đâu?
+- Thiếu dấu cách sau dấu hai chấm
+- Máy ảo không có Node
++ Gõ sai từ khóa, đúng phải là steps
+
+## LESSON cicd-03 | Chạy Playwright trên GitHub Actions
+
+### Chuẩn bị dự án Playwright
+Nếu chưa có dự án, tạo mới (xem khóa Playwright cho người mới):
+~~~bash
+npm init playwright@latest
+npx playwright test
+git add .
+git commit -m "Dự án Playwright đầu tiên"
+git push
+~~~
+Giải thích từng dòng:
+• npm init playwright@latest: tạo dự án. Khi được hỏi "Add a GitHub Actions workflow?", chọn Yes để Playwright tự tạo .github/workflows/playwright.yml.
+• npx playwright test: chạy thử trên máy mình trước. Luôn chắc test xanh ở máy rồi mới đưa lên CI.
+• git add . / git commit / git push: đưa toàn bộ dự án, gồm cả package-lock.json, lên GitHub.
+Lưu ý: không đưa thư mục node_modules lên Git. File .gitignore do Playwright tạo đã loại trừ sẵn.
+
+### File workflow Playwright đầy đủ
+~~~text
+name: Playwright Tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+~~~
+Giải thích từng dòng:
+• timeout-minutes: 60: job chạy quá 60 phút thì bị dừng, tránh treo vô hạn.
+• uses: actions/checkout@v4: tải mã nguồn của kho về máy ảo.
+• uses: actions/setup-node@v4 với node-version: lts/*: cài Node.js bản LTS mới nhất; cache: 'npm' giữ lại gói npm cho lần sau chạy nhanh hơn.
+• npm ci: cài thư viện đúng theo package-lock.json.
+• npx playwright install --with-deps: tải trình duyệt và các thư viện hệ thống Linux cần thiết.
+• npx playwright test: chạy test. Có test đỏ thì bước này đỏ.
+• upload-artifact: lưu thư mục báo cáo playwright-report thành file tải về được (bài 4).
+
+### npm ci khác npm install thế nào?
+~~~bash
+npm install
+git add package.json package-lock.json
+git commit -m "Cập nhật lock file"
+~~~
+Giải thích từng dòng:
+• npm install: dùng trên máy bạn khi thêm hoặc nâng cấp thư viện; nó có thể cập nhật package-lock.json.
+• git add ... package-lock.json: luôn commit file khóa phiên bản này cùng package.json.
+• git commit: lưu thay đổi.
+Trên CI dùng npm ci vì:
+• Cài CHÍNH XÁC phiên bản ghi trong package-lock.json, máy ai cũng giống nhau.
+• Báo lỗi ngay nếu package.json và package-lock.json không khớp, tránh "máy tôi chạy được mà CI thì không".
+Ví dụ đời thường: package-lock.json giống công thức có ghi rõ "bột mì hãng X, 500 gram", ai làm theo cũng ra cùng một chiếc bánh.
+
+### Cấu hình riêng cho CI trong playwright.config.ts
+Biến môi trường CI luôn có giá trị true trên GitHub Actions. Playwright dùng nó để cư xử khác đi:
+~~~ts
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
+  reporter: 'html',
+  use: { trace: 'on-first-retry' },
+});
+~~~
+Giải thích từng dòng:
+• forbidOnly: !!process.env.CI: trên CI, nếu ai quên để test.only trong code thì báo lỗi, tránh việc chỉ chạy một test rồi tưởng là xanh hết.
+• retries: process.env.CI ? 2 : 0: trên CI test lỗi được chạy lại tối đa 2 lần; trên máy bạn không chạy lại để thấy lỗi ngay.
+• workers: CI chạy 1 luồng cho ổn định; máy bạn để Playwright tự chọn.
+• reporter: 'html': tạo báo cáo HTML trong thư mục playwright-report.
+• trace: 'on-first-retry': ghi trace (đoạn "băng ghi hình" chi tiết) khi test chạy lại lần đầu, giúp điều tra lỗi.
+
+### Đọc log của bước test
+Vào tab Actions > chọn lần chạy > job test > mở bước Run Playwright tests:
+~~~text
+Running 6 tests using 1 worker
+  ✓  1 [chromium] › tests/example.spec.ts:3:5 › has title (1.2s)
+  ✘  2 [chromium] › tests/todo.spec.ts:10:5 › thêm việc mới (5.1s)
+  1 failed
+    [chromium] › tests/todo.spec.ts:10:5 › thêm việc mới
+  5 passed (25.3s)
+Error: Process completed with exit code 1.
+~~~
+Giải thích từng dòng:
+• Running 6 tests using 1 worker: có 6 test, chạy 1 luồng.
+• ✓: test đạt. ✘: test lỗi, kèm tên file, số dòng và tên test.
+• 1 failed / 5 passed: tổng kết.
+• exit code 1: có test lỗi nên bước bị đánh đỏ, cả workflow đỏ. Đây là hành vi đúng, không phải lỗi của CI.
+Kéo lên trên trong log để thấy thông báo lỗi chi tiết như Expected và Received của assertion.
+
+### Lỗi thường gặp
+~~~text
+npm ERR! `npm ci` can only install packages when your package.json and package-lock.json or npm-shrinkwrap.json are in sync.
+browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium-xxxx/chrome-linux/chrome
+Error: No tests found
+~~~
+• npm ci ... in sync: package-lock.json cũ hoặc chưa commit. Cách sửa: chạy npm install trên máy, commit cả package-lock.json rồi push.
+• Executable doesn't exist: thiếu bước npx playwright install --with-deps, hoặc bước đó đặt sau bước chạy test.
+• No tests found: thư mục test khác với testDir trong config, hoặc tên file không có đuôi .spec.ts / .test.ts.
+• Chạy ở máy xanh, CI đỏ: hay do test phụ thuộc dữ liệu trên máy bạn, múi giờ, kích thước màn hình hoặc tốc độ. Xem trace và báo cáo để tìm nguyên nhân.
+
+PRACTICE: Đưa dự án Playwright có ít nhất 2 test (dùng trang https://demo.playwright.dev/todomvc) lên GitHub với workflow playwright.yml như bài học. Cố ý sửa một assertion cho sai, push, đọc log để tìm dòng ✘, rồi sửa lại cho xanh.
+Q: Vì sao CI dùng npm ci thay vì npm install?
+- Vì npm ci tải nhanh hơn do bỏ qua package.json
++ Vì npm ci cài đúng phiên bản trong package-lock.json và báo lỗi nếu không khớp
+- Vì npm install không chạy được trên Linux
+Q: Lỗi "Executable doesn't exist at /home/runner/.cache/ms-playwright/..." thường do đâu?
++ Thiếu bước npx playwright install --with-deps
+- Sai mật khẩu GitHub
+- Test bị viết sai assertion
+Q: Cấu hình retries: process.env.CI ? 2 : 0 có nghĩa là gì?
+- Luôn chạy lại test 2 lần ở mọi nơi
+- Chỉ chạy test trên CI, không chạy trên máy
++ Trên CI chạy lại test lỗi tối đa 2 lần, trên máy cá nhân không chạy lại
+
+## LESSON cicd-04 | Báo cáo và artifacts
+
+### Artifact: biên bản bàn giao sau ca làm
+Máy ảo của GitHub bị xóa sạch ngay sau khi job kết thúc. Nếu không lưu lại, báo cáo HTML, ảnh chụp, trace đều mất.
+Artifact giống biên bản bàn giao sau ca trực: được cất vào tủ hồ sơ của lần chạy đó để ai cần thì tải về xem.
+~~~text
+- uses: actions/upload-artifact@v4
+  if: ${{ !cancelled() }}
+  with:
+    name: playwright-report
+    path: playwright-report/
+    retention-days: 30
+~~~
+Giải thích từng dòng:
+• uses: actions/upload-artifact@v4: dùng action chính thức để tải file lên.
+• if: ${{ !cancelled() }}: chạy bước này kể cả khi test đỏ, chỉ bỏ qua nếu ai đó bấm hủy.
+• name: tên artifact hiển thị trên trang kết quả.
+• path: thư mục hoặc file cần lưu.
+• retention-days: 30: tự xóa sau 30 ngày để tiết kiệm dung lượng.
+
+### Tải artifact về và mở báo cáo
+Cách 1, giao diện web: tab Actions > chọn lần chạy > kéo xuống mục Artifacts > bấm playwright-report để tải file zip. Giải nén vào thư mục dự án trên máy, thành thư mục playwright-report.
+Cách 2, dòng lệnh (cần cài GitHub CLI và đăng nhập bằng gh auth login):
+~~~bash
+gh run list --limit 5
+gh run download <run-id> -n playwright-report -D playwright-report
+npx playwright show-report playwright-report
+~~~
+Giải thích từng dòng:
+• gh run list --limit 5: liệt kê 5 lần chạy gần nhất kèm mã số (run-id).
+• gh run download <run-id> -n playwright-report -D playwright-report: tải artifact tên playwright-report của lần chạy đó vào thư mục playwright-report. Thay <run-id> bằng số thật.
+• npx playwright show-report playwright-report: mở báo cáo trong trình duyệt.
+Kết quả mong đợi: trình duyệt mở trang báo cáo với danh sách test, lọc được theo Passed, Failed, Flaky.
+
+### Khi nào bước upload được chạy?
+~~~text
+if: ${{ !cancelled() }}   chạy khi thành công hoặc thất bại, bỏ qua khi bị hủy
+if: always()              chạy trong mọi trường hợp, kể cả bị hủy
+if: failure()             chỉ chạy khi có bước trước đó thất bại
+if: success()             chỉ chạy khi mọi bước trước đều thành công (mặc định)
+~~~
+Giải thích từng dòng:
+• !cancelled(): lựa chọn được khuyên dùng cho báo cáo test, vì báo cáo cần nhất đúng lúc test đỏ.
+• always(): tương tự nhưng chạy cả khi hủy, đôi khi làm job hủy lâu hơn.
+• failure(): hợp để lưu thứ chỉ cần khi lỗi, như trace và video.
+• success(): hành vi mặc định khi không ghi if. Đây là lý do nhiều người thắc mắc "test đỏ thì không thấy báo cáo đâu".
+
+### Lưu trace khi test lỗi
+Thêm một bước nữa để lưu thư mục test-results (chứa trace, ảnh chụp) khi có lỗi:
+~~~text
+- uses: actions/upload-artifact@v4
+  if: failure()
+  with:
+    name: test-results
+    path: test-results/
+    retention-days: 7
+~~~
+Giải thích từng dòng:
+• if: failure(): chỉ lưu khi có bước thất bại, tiết kiệm dung lượng.
+• path: test-results/: thư mục Playwright ghi trace.zip, ảnh chụp lỗi.
+• retention-days: 7: trace nặng, chỉ giữ 7 ngày.
+Tải về, giải nén rồi mở trace bằng lệnh npx playwright show-trace kèm đường dẫn tới file trace.zip, ví dụ npx playwright show-trace test-results/todo-them-viec-moi-chromium-retry1/trace.zip. Bạn sẽ xem lại từng bước, ảnh chụp DOM, request mạng như tua lại video.
+
+### Lỗi thường gặp
+~~~text
+Warning: No files were found with the provided path: playwright-report/. No artifacts will be uploaded.
+Error: Failed to CreateArtifact: ... (409) Conflict: an artifact with this name already exists on the workflow run
+~~~
+• No files were found: thư mục báo cáo không được tạo, ví dụ test không chạy tới (bước cài đặt đã lỗi), hoặc reporter trong config không phải 'html', hoặc path gõ sai.
+• 409 Conflict ... already exists: từ phiên bản v4, mỗi artifact trong một lần chạy phải có tên khác nhau. Khi dùng matrix (bài 6), thêm tên trình duyệt vào name, ví dụ playwright-report-chromium.
+• Mục Artifacts trống dù đã từng có: artifact đã quá retention-days và bị xóa tự động.
+• Bước upload bị bỏ qua khi test đỏ: thiếu dòng if: ${{ !cancelled() }}.
+
+PRACTICE: Thêm vào workflow hai bước upload: playwright-report với if: ${{ !cancelled() }} và test-results với if: failure(). Cho một test đỏ, tải cả hai artifact về, mở báo cáo bằng npx playwright show-report và mở trace bằng npx playwright show-trace.
+Q: Vì sao bước upload báo cáo nên có if: ${{ !cancelled() }}?
+- Để bước upload chạy nhanh hơn
++ Để báo cáo vẫn được lưu khi test thất bại
+- Để chỉ lưu khi test thành công
+Q: Artifact là gì trong GitHub Actions?
++ File hoặc thư mục được lưu lại từ lần chạy để tải về sau
+- Máy ảo chạy job
+- Một loại test tự động
+Q: Lỗi "(409) Conflict: an artifact with this name already exists" khi chạy matrix, cách sửa?
+- Xóa kho mã và tạo lại
+- Đổi runs-on sang windows-latest
++ Đặt tên artifact khác nhau cho mỗi job, ví dụ thêm tên trình duyệt vào name
+
+## LESSON cicd-05 | Chạy Newman (Postman) trong CI
+
+### Chuẩn bị collection cho CI
+Newman là "Postman chạy bằng dòng lệnh". Trên CI không có giao diện Postman, nên ta xuất collection ra file và để Newman chạy.
+1. Trong Postman: chuột phải collection > Export > chọn Collection v2.1 > lưu thành collection.json.
+2. Environment: bấm vào environment > nút ba chấm > Export > lưu env.ci.json.
+3. Đặt vào kho mã như sau:
+~~~text
+my-tests/
+├── .github/workflows/api.yml
+└── postman/
+    ├── collection.json
+    └── env.ci.json      (chỉ chứa baseUrl, KHÔNG chứa token hay mật khẩu)
+~~~
+Giải thích:
+• postman/: thư mục riêng cho file API test.
+• env.ci.json: ví dụ baseUrl = https://jsonplaceholder.typicode.com (trang API demo công khai, chỉ gửi vài request chức năng, không load test).
+• Mọi bí mật sẽ truyền qua secrets (bài 6), không bao giờ nằm trong file commit lên Git.
+
+### Chạy thử ở máy trước
+~~~bash
+npm install -g newman
+newman --version
+newman run postman/collection.json -e postman/env.ci.json
+~~~
+Giải thích từng dòng:
+• npm install -g newman: cài Newman toàn cục (cần Node.js).
+• newman --version: kiểm tra đã cài, in số phiên bản, ví dụ 6.x.x.
+• newman run ... -e ...: chạy collection với environment.
+Kết quả mong đợi: từng request với dấu ✓ cho test đạt, cuối cùng là bảng tổng kết có các dòng iterations, requests, test-scripts, assertions với cột executed và failed. Cột failed toàn số 0 nghĩa là mọi assertion đạt.
+
+### Workflow chạy Newman
+~~~text
+name: API Tests
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  api-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install Newman
+        run: npm install -g newman
+      - name: Run collection
+        run: newman run postman/collection.json -e postman/env.ci.json -r cli,junit --reporter-junit-export results/newman.xml
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: newman-results
+          path: results/
+~~~
+Giải thích từng dòng:
+• checkout, setup-node: lấy mã nguồn và cài Node như bài 3.
+• npm install -g newman: cài Newman lên máy ảo (máy ảo mới tinh mỗi lần chạy).
+• -r cli,junit: dùng hai reporter: cli in ra log, junit xuất file XML.
+• --reporter-junit-export results/newman.xml: nơi lưu file XML; nhiều công cụ CI đọc được định dạng JUnit này.
+• upload-artifact: lưu thư mục results để tải về.
+
+### Báo cáo HTML đẹp với htmlextra
+File XML khó đọc với người. Reporter htmlextra (do cộng đồng phát triển) tạo trang HTML dễ xem:
+~~~bash
+npm install -g newman newman-reporter-htmlextra
+newman run postman/collection.json -e postman/env.ci.json -r cli,htmlextra --reporter-htmlextra-export results/report.html
+~~~
+Giải thích từng dòng:
+• npm install -g newman newman-reporter-htmlextra: cài Newman và reporter htmlextra.
+• -r cli,htmlextra: vẫn in log, đồng thời tạo báo cáo HTML.
+• --reporter-htmlextra-export results/report.html: đường dẫn file báo cáo.
+Trong workflow, chỉ cần sửa hai dòng run tương ứng; bước upload-artifact giữ nguyên vì report.html cũng nằm trong thư mục results. Tải về, mở report.html bằng trình duyệt để xem từng request, response và kết quả test.
+
+### Lỗi thường gặp
+~~~text
+error: collection could not be loaded
+  unable to read data from file "postman/collection.json"
+  ENOENT: no such file or directory, open 'postman/collection.json'
+newman: command not found
+Error: Invalid URI "http:///%7B%7BbaseUrl%7D%7D/posts"
+~~~
+• ENOENT: sai đường dẫn hoặc tên file (Linux phân biệt chữ hoa, chữ thường: Collection.json khác collection.json). Kiểm tra file đã được commit chưa.
+• newman: command not found: thiếu bước npm install -g newman, hoặc bước đó nằm sau bước chạy.
+• Invalid URI có chữ %7B%7BbaseUrl%7D%7D: biến {{baseUrl}} không có giá trị, thường do quên -e env.ci.json hoặc trong environment chưa điền giá trị khi export.
+• Workflow đỏ với exit code 1: có assertion trượt. Đây là CI đang làm đúng việc; xem log hoặc báo cáo để biết test nào trượt.
+
+PRACTICE: Export một collection có 3 request tới https://jsonplaceholder.typicode.com (mỗi request có ít nhất một pm.test), chạy thử bằng newman ở máy, rồi tạo workflow api.yml chạy Newman với reporter cli và htmlextra, tải report.html từ artifact về xem.
+Q: Cờ -r cli,junit trong lệnh newman run có nghĩa là gì?
+- Chạy collection 2 lần
++ Dùng đồng thời reporter cli và junit
+- Chỉ chạy các request có tên cli hoặc junit
+Q: Báo lỗi Invalid URI có chữ %7B%7BbaseUrl%7D%7D. Nguyên nhân hợp lý nhất?
++ Biến baseUrl không được định nghĩa, thường do thiếu environment khi chạy
+- Server trả mã 500
+- Newman phiên bản quá mới
+Q: Nên lưu token đăng nhập ở đâu khi chạy Newman trên CI?
+- Trong env.ci.json commit lên Git
+- Trong phần mô tả collection
++ Trong GitHub secrets, truyền vào lúc chạy
+
+## LESSON cicd-06 | Secrets, biến môi trường và matrix
+
+### Secrets: két sắt của kho mã
+Token, mật khẩu, API key không bao giờ được ghi trong code hay file commit. Ai đọc được kho mã sẽ lấy được chúng.
+Tạo secret: vào kho trên GitHub > Settings > Secrets and variables > Actions > New repository secret, đặt Name là API_TOKEN, dán giá trị, bấm Add secret.
+Dùng trong workflow:
+~~~text
+- name: Run API tests
+  env:
+    API_TOKEN: ${{ secrets.API_TOKEN }}
+  run: newman run postman/collection.json -e postman/env.ci.json --env-var "token=$API_TOKEN"
+~~~
+Giải thích từng dòng:
+• env: API_TOKEN: ${{ secrets.API_TOKEN }}: lấy secret từ két, đặt thành biến môi trường API_TOKEN cho bước này.
+• --env-var "token=$API_TOKEN": truyền giá trị vào biến token của Postman, dùng trong request như {{token}}.
+Nếu lỡ in ra log, GitHub tự che giá trị thành ***. Dù vậy, đừng cố ý in secret.
+
+### Biến môi trường cho Playwright
+Cùng một bộ test có thể chạy vào nhiều môi trường test khác nhau nhờ biến BASE_URL:
+~~~ts
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  use: {
+    baseURL: process.env.BASE_URL ?? 'https://demo.playwright.dev',
+  },
+});
+~~~
+Giải thích từng dòng:
+• process.env.BASE_URL: đọc biến môi trường BASE_URL.
+• ?? 'https://demo.playwright.dev': nếu không có biến thì dùng trang demo công khai.
+• Trong test chỉ cần viết page.goto('/todomvc'), Playwright tự ghép với baseURL.
+Trong workflow, đặt biến ở cấp job: env: BASE_URL: ${{ vars.TEST_BASE_URL }}. Mục vars dùng cho cấu hình không bí mật (tạo ở tab Variables, ngay cạnh tab Secrets).
+
+### Matrix: chạy song song trên nhiều trình duyệt
+~~~text
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+      - run: npm ci
+      - run: npx playwright install --with-deps ${{ matrix.project }}
+      - run: npx playwright test --project=${{ matrix.project }}
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-${{ matrix.project }}
+          path: playwright-report/
+~~~
+Giải thích từng dòng:
+• strategy.matrix.project: danh sách 3 giá trị, GitHub tạo 3 job chạy song song, mỗi job một trình duyệt.
+• fail-fast: false: một job đỏ thì các job khác vẫn chạy tiếp, để thấy đầy đủ kết quả.
+• ${{ matrix.project }}: được thay bằng chromium, firefox hoặc webkit ở từng job.
+• install --with-deps ${{ matrix.project }}: chỉ tải trình duyệt cần cho job đó, nhanh hơn.
+• --project=...: chạy đúng project khai báo trong playwright.config.ts.
+• name có thêm ${{ matrix.project }}: mỗi artifact một tên riêng, tránh lỗi 409.
+
+### Cache: chạy nhanh hơn ở lần sau
+Mỗi lần chạy, máy ảo mới tinh phải tải lại hàng trăm MB thư viện. Cache giữ lại những gì không đổi.
+~~~text
+- uses: actions/setup-node@v4
+  with:
+    node-version: lts/*
+    cache: 'npm'
+~~~
+Giải thích từng dòng:
+• node-version: lts/*: cài Node bản LTS.
+• cache: 'npm': lưu bộ nhớ đệm của npm, khóa theo nội dung package-lock.json. Lần sau nếu lock file không đổi thì npm ci nhanh hơn rõ rệt.
+Kiểm tra: trong log bước setup-node thấy dòng kiểu Cache restored from key ... là cache đã được dùng. Lần chạy đầu tiên sẽ thấy cache not found, điều này bình thường.
+
+### Lỗi thường gặp
+~~~text
+Error: Resource not accessible by integration
+(biến API_TOKEN rỗng, request trả 401 Unauthorized)
+Error: Project(s) "Chromium" not found. Available projects: "chromium", "firefox", "webkit"
+~~~
+• Resource not accessible by integration: workflow cần quyền mà GITHUB_TOKEN mặc định không có, ví dụ ghi bình luận vào pull request. Cách sửa: khai báo khối permissions trong workflow (ví dụ permissions: pull-requests: write) cho đúng việc cần làm, không cấp thừa.
+• Secret rỗng, request 401: tên secret trong workflow khác tên đã tạo (API_TOKEN khác API_Token), hoặc workflow chạy từ pull request của kho fork, trường hợp này GitHub không truyền secrets vì lý do an toàn.
+• Project not found: tên trong matrix phải trùng chính xác (phân biệt hoa thường) với name của project trong playwright.config.ts.
+
+PRACTICE: Tạo secret DEMO_TOKEN với giá trị giả "demo-token-111", dùng nó trong bước Newman qua --env-var. Sau đó chuyển workflow Playwright sang matrix 3 trình duyệt với fail-fast: false và artifact có tên riêng cho từng trình duyệt.
+Q: Cách nào ĐÚNG để dùng token trong GitHub Actions?
+- Ghi thẳng token vào file YAML vì kho là riêng tư
++ Tạo repository secret và dùng ${{ secrets.TEN_SECRET }}
+- Gửi token cho đồng đội qua chat để họ dán vào mỗi lần chạy
+Q: fail-fast: false trong matrix có tác dụng gì?
++ Một job thất bại thì các job còn lại vẫn chạy tiếp
+- Không bao giờ cho phép job thất bại
+- Chạy các job lần lượt thay vì song song
+Q: Dòng cache: 'npm' trong setup-node giúp gì?
+- Tăng số test được chạy
+- Bỏ qua bước npm ci
++ Giữ lại bộ nhớ đệm npm để lần chạy sau cài thư viện nhanh hơn
+
+## LESSON cicd-07 | Lịch chạy đêm, chạy tay, re-run và badge
+
+### Hẹn giờ chạy regression mỗi đêm
+Như cài báo thức, schedule cho workflow tự chạy theo giờ:
+~~~text
+on:
+  schedule:
+    - cron: '0 1 * * 1-5'
+  workflow_dispatch:
+~~~
+Giải thích từng dòng:
+• schedule: kích hoạt theo lịch.
+• cron gồm 5 ô: phút, giờ, ngày trong tháng, tháng, thứ trong tuần.
+• '0 1 * * 1-5': phút 0, giờ 1, mọi ngày, mọi tháng, từ thứ Hai (1) đến thứ Sáu (5).
+• Giờ cron trên GitHub là giờ UTC. Việt Nam là UTC+7, nên 01:00 UTC là 08:00 sáng giờ Việt Nam.
+• workflow_dispatch: giữ thêm nút chạy tay để chạy lại khi cần.
+Ví dụ khác: '30 18 * * *' là 18:30 UTC mỗi ngày, tức 01:30 sáng giờ Việt Nam.
+
+### Chạy tay với tham số chọn trình duyệt
+workflow_dispatch có thể kèm ô nhập liệu để chọn khi bấm Run workflow:
+~~~text
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: 'Trình duyệt cần chạy'
+        type: choice
+        options: [chromium, firefox, webkit]
+        default: chromium
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: npx playwright test --project=${{ inputs.project }}
+~~~
+Giải thích từng dòng:
+• inputs.project: khai báo một ô nhập tên project.
+• type: choice và options: hiện danh sách thả xuống với 3 lựa chọn.
+• default: chromium: giá trị chọn sẵn.
+• ${{ inputs.project }}: giá trị người bấm đã chọn, đưa vào lệnh chạy test.
+Đoạn trên rút gọn, thực tế vẫn cần các bước checkout, setup-node, npm ci, install như bài 3.
+
+### Đọc log và chạy lại job lỗi
+Trên web: mở lần chạy đỏ > nút Re-run jobs > Re-run failed jobs để chỉ chạy lại các job lỗi. Hoặc dùng GitHub CLI:
+~~~bash
+gh run list --workflow=playwright.yml --limit 5
+gh run view <run-id> --log-failed
+gh run rerun <run-id> --failed
+~~~
+Giải thích từng dòng:
+• gh run list --workflow=playwright.yml --limit 5: 5 lần chạy gần nhất của workflow này, kèm trạng thái và run-id.
+• gh run view <run-id> --log-failed: chỉ in log của các bước bị lỗi, đỡ phải cuộn tìm.
+• gh run rerun <run-id> --failed: chạy lại riêng các job lỗi.
+Lưu ý: chạy lại mà xanh không có nghĩa là hết lỗi. Nếu test lúc xanh lúc đỏ, đó là test flaky cần điều tra (bài 8).
+
+### Gắn badge trạng thái vào README
+Badge là "đèn báo" hiển thị trạng thái workflow ngay trên trang chủ kho. Thêm dòng sau vào README.md (thay OWNER, REPO bằng tên tài khoản và tên kho của bạn):
+~~~text
+![Playwright Tests](https://github.com/OWNER/REPO/actions/workflows/playwright.yml/badge.svg)
+~~~
+Giải thích từng phần:
+• Chữ trong ngoặc vuông: văn bản thay thế cho hình.
+• OWNER/REPO: tên tài khoản hoặc tổ chức, và tên kho.
+• playwright.yml: tên file workflow trong .github/workflows.
+• badge.svg: GitHub tự sinh hình xanh "passing" hoặc đỏ "failing".
+Cách nhanh hơn: tab Actions > chọn workflow > nút ba chấm > Create status badge > Copy status badge Markdown.
+
+### Lỗi thường gặp
+• Lịch không chạy: workflow có schedule phải nằm trên nhánh mặc định. Ngoài ra lịch có thể trễ vài phút đến vài chục phút vào giờ cao điểm.
+• Chạy sai giờ: quên rằng cron dùng UTC. Trừ 7 tiếng so với giờ Việt Nam khi viết cron.
+• Kho công khai không có hoạt động trong 60 ngày: GitHub tự tắt các workflow chạy theo lịch, phải bật lại trong tab Actions.
+• Không thấy nút Run workflow: file chưa có workflow_dispatch hoặc chưa được gộp vào nhánh mặc định.
+• Badge luôn báo lỗi hoặc không hiện: sai tên file workflow hoặc sai OWNER/REPO trong đường dẫn.
+
+PRACTICE: Thêm vào workflow Playwright lịch chạy 08:00 sáng giờ Việt Nam từ thứ Hai đến thứ Sáu, thêm workflow_dispatch có ô chọn trình duyệt, và gắn badge trạng thái vào README.md. Chạy tay một lần với firefox.
+Q: Muốn workflow chạy lúc 08:00 sáng giờ Việt Nam (UTC+7) mỗi ngày, cron nào đúng?
+- '0 8 * * *'
++ '0 1 * * *'
+- '8 0 * * *'
+Q: Lệnh gh nào chỉ chạy lại các job bị lỗi?
+- gh run list --failed
+- gh run view <run-id> --log-failed
++ gh run rerun <run-id> --failed
+Q: Test đỏ, bấm Re-run thì xanh. Kết luận đúng nhất?
++ Có thể là test flaky, cần điều tra nguyên nhân thay vì bỏ qua
+- Test đã hoàn toàn ổn, không cần làm gì
+- CI bị hỏng, nên tắt test đó vĩnh viễn
+
+## LESSON cicd-08 | Test flaky, sharding và branch protection
+
+### Test flaky: chuông cửa lúc kêu lúc không
+Test flaky là test cùng code, cùng dữ liệu nhưng lúc đạt lúc trượt, giống chuông cửa bấm 10 lần thì 2 lần không kêu. Nó làm mọi người mất niềm tin vào CI.
+Tái hiện trên máy bằng cách chạy lặp:
+~~~bash
+npx playwright test tests/todo.spec.ts --repeat-each=10
+npx playwright test --retries=2
+~~~
+Giải thích từng dòng:
+• --repeat-each=10: chạy mỗi test trong file 10 lần. Có lần đỏ là dấu hiệu flaky.
+• --retries=2: cho phép chạy lại tối đa 2 lần; test đỏ rồi xanh sẽ được báo cáo đánh dấu Flaky.
+Trong báo cáo HTML, lọc mục Flaky để xem danh sách. Retries chỉ là "băng cá nhân" tạm thời, nguyên nhân gốc vẫn phải sửa.
+
+### Nguyên nhân hay gặp và cách sửa
+Nguyên nhân số một: chờ cứng theo thời gian thay vì chờ điều kiện.
+~~~ts
+// Không nên: chờ cứng 3 giây, máy CI chậm hơn là trượt
+await page.waitForTimeout(3000);
+await expect(page.locator('.todo-list li')).toHaveCount(1);
+
+// Nên: assertion tự chờ tới khi điều kiện đúng (mặc định tối đa 5 giây)
+await expect(page.getByTestId('todo-item')).toHaveCount(1);
+~~~
+Giải thích từng dòng:
+• Dòng chú thích bắt đầu bằng // chỉ để người đọc, máy bỏ qua.
+• waitForTimeout(3000): đoán rằng 3 giây là đủ. Máy CI chậm hơn máy bạn thì đoán sai.
+• expect(...).toHaveCount(1): assertion của Playwright tự thử lại liên tục cho tới khi đúng hoặc hết thời gian chờ, nên ổn định hơn.
+• getByTestId('todo-item'): locator dựa trên thuộc tính dành riêng cho test, ít bị ảnh hưởng khi giao diện đổi.
+Nguyên nhân khác: các test dùng chung dữ liệu, phụ thuộc thứ tự chạy, phụ thuộc giờ hệ thống hoặc mạng ngoài.
+
+### Sharding: chia bộ test cho nhiều máy
+Bộ test 400 test chạy 40 phút? Chia làm 4 phần, 4 máy chạy song song, còn khoảng 10 phút.
+~~~text
+strategy:
+  fail-fast: false
+  matrix:
+    shardIndex: [1, 2, 3, 4]
+    shardTotal: [4]
+steps:
+  - run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+~~~
+Giải thích từng dòng:
+• shardIndex: [1, 2, 3, 4]: tạo 4 job, mỗi job một phần.
+• shardTotal: [4]: tổng số phần.
+• --shard=1/4, 2/4...: job thứ nhất chạy phần 1 trên 4, và tương tự.
+Mỗi shard tạo báo cáo riêng. Muốn gộp thành một báo cáo, Playwright có reporter blob và lệnh npx playwright merge-reports, đây là phần nâng cao, hãy học sau khi đã quen sharding.
+
+### Branch protection: không cho gộp code khi test đỏ
+Đây là bước biến CI thành "cổng kiểm soát" thật sự.
+1. Vào kho > Settings > Branches (hoặc Rules > Rulesets ở giao diện mới).
+2. Thêm luật cho nhánh main.
+3. Bật Require a pull request before merging.
+4. Bật Require status checks to pass, tìm và chọn job test của workflow Playwright (và api-test của Newman).
+5. Lưu lại.
+Kết quả: pull request có test đỏ sẽ không có nút Merge (hoặc nút bị khóa) cho tới khi sửa xong.
+Lưu ý: cần quyền quản trị kho. Trên kho của công ty, hãy đề xuất với trưởng nhóm thay vì tự đổi cài đặt.
+
+### Checklist pipeline tốt cho tester
+~~~text
+[ ] Test chạy trên mỗi pull request vào main
+[ ] npm ci + package-lock.json được commit
+[ ] Báo cáo upload với if: ${{ !cancelled() }}, trace upload khi failure()
+[ ] Secrets nằm trong GitHub secrets, không nằm trong code
+[ ] retries chỉ bật trên CI, test flaky có ticket theo dõi
+[ ] Lịch chạy regression hằng đêm, có người xem kết quả mỗi sáng
+[ ] Branch protection yêu cầu check test phải xanh
+~~~
+Giải thích:
+• Mỗi dòng là một tiêu chí; đánh dấu x vào ngoặc vuông khi đã làm.
+• Dùng checklist này để rà soát pipeline hiện tại của dự án bạn và đề xuất cải tiến từng bước nhỏ.
+
+### Lỗi thường gặp
+~~~text
+Expected — Waiting for status to be reported
+Error: item focused with '.only' is not allowed due to the 'forbidOnly' option ...
+~~~
+• Pull request treo ở trạng thái Expected — Waiting for status: tên check bắt buộc trong branch protection không khớp tên job hiện tại (ví dụ đã đổi tên job từ test thành e2e). Cách sửa: cập nhật lại tên check trong luật bảo vệ nhánh.
+• Lỗi có cụm từ forbidOnly: có người quên test.only trong code. Xóa .only rồi push lại.
+• Bật retries rồi "quên" luôn test flaky: báo cáo vẫn xanh nhưng chất lượng giảm. Ghi ticket cho mỗi test flaky và theo dõi đến khi sửa xong.
+• Shard chạy không đều (một máy 2 phút, một máy 15 phút): chia nhỏ các file test quá dài, hoặc bật fullyParallel trong config để Playwright chia theo từng test.
+
+PRACTICE: Chạy npx playwright test --repeat-each=10 cho bộ test của bạn, tìm một test có waitForTimeout và thay bằng assertion tự chờ. Sau đó cấu hình sharding 2 phần trên GitHub Actions và so sánh tổng thời gian chạy với khi chưa chia.
+Q: Test flaky là gì?
+- Test luôn luôn trượt
++ Test lúc đạt lúc trượt dù code và dữ liệu không đổi
+- Test chạy quá chậm
+Q: Cách nào giảm test flaky hiệu quả nhất trong Playwright?
+- Thêm waitForTimeout(10000) trước mỗi bước
+- Tăng retries lên 10 và không cần điều tra
++ Dùng assertion và locator tự chờ thay cho chờ cứng theo thời gian
+Q: Branch protection với "Require status checks to pass" giúp gì?
++ Chặn gộp pull request khi các check bắt buộc chưa xanh
+- Tự động sửa test đỏ
+- Ẩn kết quả test với người ngoài

@@ -1,0 +1,683 @@
+=== COURSE computer-basics
+name: Máy tính & dòng lệnh cho tester
+icon: 💻
+floor: 1
+room: 101
+level: Nhập môn
+hours: 5
+summary: Làm quen thư mục, file, PowerShell, biến PATH và cài Node.js, Python, Java, VS Code trên Windows. Đây là bước chuẩn bị bắt buộc trước mọi khóa automation.
+
+## LESSON computer-basics-01 | Thư mục, file và đường dẫn
+
+### Máy tính giống một tủ hồ sơ
+Hãy tưởng tượng ổ đĩa C: là một tủ hồ sơ lớn.
+• Ổ đĩa (C:, D:) = cái tủ.
+• Thư mục (folder) = ngăn kéo, trong ngăn kéo có thể có ngăn nhỏ hơn.
+• File (tệp) = tờ giấy nằm trong ngăn kéo, chứa nội dung thật: chữ, ảnh, code.
+Tester làm việc với file mỗi ngày: file test, file dữ liệu, file báo cáo, ảnh chụp lỗi.
+Học cách sắp xếp gọn gàng ngay từ đầu sẽ giúp bạn không bao giờ hỏi "file của mình đâu rồi?".
+
+### Đường dẫn (path) là địa chỉ nhà
+Mỗi file có một địa chỉ duy nhất gọi là đường dẫn.
+~~~text
+C:\Users\an\qa-lab\tests\login.spec.ts
+~~~
+Giải thích từng phần:
+• C:\ là ổ đĩa (cái tủ).
+• Users\an là thư mục cá nhân của người dùng tên "an".
+• qa-lab\tests là thư mục dự án và thư mục con chứa test.
+• login.spec.ts là tên file, phần sau dấu chấm cuối (.ts) là đuôi file.
+Windows dùng dấu gạch ngược \ để ngăn cách. Trên macOS/Linux và trong URL dùng dấu gạch xuôi /.
+Đường dẫn tuyệt đối bắt đầu từ ổ đĩa. Đường dẫn tương đối tính từ thư mục hiện tại, ví dụ tests\login.spec.ts.
+
+### Đuôi file (extension) cho biết loại file
+Đuôi file giống nhãn trên hộp: nhìn là biết bên trong chứa gì và chương trình nào mở nó.
+~~~text
+.txt   ghi chú văn bản thuần
+.js    code JavaScript (Node.js chạy được)
+.ts    code TypeScript (Playwright hay dùng)
+.py    code Python (Selenium, script)
+.json  dữ liệu dạng JSON (API, cấu hình)
+.csv   bảng dữ liệu cách nhau bởi dấu phẩy (dữ liệu test)
+.jmx   kịch bản JMeter
+.png   ảnh chụp màn hình lỗi
+~~~
+Mặc định Windows ẩn đuôi file. Hãy bật lên:
+• Mở File Explorer (phím Windows + E).
+• Windows 11: View > Show > File name extensions.
+• Windows 10: tab View > tích ô File name extensions.
+
+### Tạo khu làm việc chuẩn cho tester
+Nên có một thư mục riêng cho mọi bài thực hành, tên không dấu, không khoảng trắng.
+~~~text
+C:\Users\an\qa-lab\
+├── notes\          ghi chú, checklist
+├── data\           file dữ liệu test (.csv, .json)
+├── evidence\       ảnh chụp, video lỗi
+└── projects\       các dự án automation
+~~~
+Giải thích:
+• qa-lab là thư mục gốc cho toàn bộ khóa học.
+• Mỗi thư mục con có một mục đích rõ ràng, giống ngăn kéo có dán nhãn.
+• Tên không dấu, không khoảng trắng giúp gõ lệnh dễ hơn và tránh lỗi đường dẫn về sau.
+
+### Lỗi thường gặp
+Lỗi 1: tạo file test.js nhưng thực tế file tên là test.js.txt.
+• Nguyên nhân: Windows ẩn đuôi file, Notepad tự thêm .txt.
+• Cách sửa: bật hiển thị đuôi file, đổi tên lại cho đúng.
+Lỗi 2: đặt tên thư mục có dấu hoặc khoảng trắng như "Dự án Test".
+• Hậu quả: nhiều công cụ dòng lệnh báo lỗi không tìm thấy đường dẫn.
+• Cách sửa: dùng tên kiểu qa-lab, du-an-test, my_tests.
+Lỗi 3: lưu dự án trong OneDrive hoặc Desktop đang đồng bộ.
+• Hậu quả: thư mục node_modules hàng chục nghìn file làm đồng bộ chậm, đôi khi khóa file.
+• Cách sửa: đặt dự án ở C:\Users\<tên>\qa-lab hoặc D:\qa-lab.
+
+PRACTICE: Bật hiển thị đuôi file trong File Explorer. Tạo thư mục qa-lab trong thư mục người dùng với 4 thư mục con notes, data, evidence, projects. Trong notes tạo file ghi-chu.txt và kiểm tra đuôi file hiển thị đúng .txt.
+Q: Trong đường dẫn C:\Users\an\qa-lab\data\users.csv, phần nào là đuôi file?
+- data
+- users
++ .csv
+- C:
+Q: Vì sao nên đặt tên thư mục dự án không dấu, không khoảng trắng?
+- Vì Windows không cho phép tên có dấu
++ Vì nhiều công cụ dòng lệnh dễ lỗi với khoảng trắng và ký tự đặc biệt
+- Vì tên có dấu làm máy chạy chậm hơn
+Q: Bạn tạo file hello.js trong Notepad nhưng Node.js báo không tìm thấy file. Nguyên nhân hay gặp nhất là gì?
+- Node.js chưa hỗ trợ file .js
+- Máy tính hết bộ nhớ
++ File thực tế tên là hello.js.txt do Windows ẩn đuôi file
+
+## LESSON computer-basics-02 | Làm quen PowerShell
+
+### Terminal là gì?
+Bình thường bạn điều khiển máy bằng chuột: click, kéo, thả.
+Terminal là cách điều khiển máy bằng chữ: bạn gõ một câu lệnh, máy làm theo và trả lời bằng chữ.
+Giống như gọi món ở quầy: bạn nói rõ món, nhân viên làm đúng món đó.
+Trên Windows, terminal mặc định là PowerShell (chạy trong ứng dụng Windows Terminal).
+Cách mở:
+• Nhấn phím Windows, gõ PowerShell, Enter.
+• Hoặc nhấn Windows + X rồi chọn Terminal.
+Hầu hết công cụ automation (Playwright, Newman, JMeter non-GUI, Appium) đều chạy bằng dòng lệnh, nên đây là kỹ năng nền tảng.
+
+### Câu lệnh đầu tiên: mình đang ở đâu?
+~~~bash
+pwd
+~~~
+Giải thích:
+• pwd = print working directory, in ra thư mục hiện tại bạn đang đứng.
+Cách chạy: gõ pwd rồi nhấn Enter.
+Kết quả mong đợi (tên người dùng của bạn sẽ khác):
+Path
+----
+C:\Users\an
+Dòng chữ trước con trỏ, ví dụ PS C:\Users\an>, cũng cho biết vị trí hiện tại. Phần đó gọi là prompt.
+
+### Xem có gì trong thư mục: ls / dir
+~~~bash
+ls
+dir
+ls qa-lab
+~~~
+Giải thích từng dòng:
+• dòng 1: ls liệt kê file và thư mục con trong thư mục hiện tại.
+• dòng 2: dir làm y hệt ls (trong PowerShell cả hai đều là tên tắt của Get-ChildItem).
+• dòng 3: liệt kê nội dung của thư mục qa-lab mà không cần đi vào nó.
+Kết quả mong đợi:
+Mode    LastWriteTime      Length Name
+d----   14/11/2026 09:00          notes
+-a---   14/11/2026 09:05       42 ghi-chu.txt
+Cột Mode bắt đầu bằng d là thư mục (directory), bắt đầu bằng dấu - là file.
+
+### Di chuyển giữa các thư mục: cd
+~~~bash
+cd qa-lab
+cd notes
+cd ..
+cd ~
+cd C:\Users\an\qa-lab\data
+~~~
+Giải thích từng dòng:
+• dòng 1: cd = change directory, đi vào thư mục qa-lab.
+• dòng 2: đi tiếp vào thư mục con notes.
+• dòng 3: hai dấu chấm nghĩa là thư mục cha, tức lùi ra một cấp.
+• dòng 4: dấu ~ là thư mục người dùng (nhà của bạn).
+• dòng 5: nhảy thẳng tới một đường dẫn tuyệt đối.
+Sau mỗi lệnh, nhìn prompt để biết bạn đang ở đâu, ví dụ PS C:\Users\an\qa-lab\notes>.
+
+### Mẹo gõ nhanh như người chuyên nghiệp
+~~~bash
+cd qa<Tab>
+<Mũi tên lên>
+cls
+<Ctrl + C>
+~~~
+Giải thích:
+• Phím Tab: gõ vài chữ đầu rồi nhấn Tab, PowerShell tự điền nốt tên thư mục/file. Nhấn Tab nhiều lần để xoay vòng các lựa chọn.
+• Mũi tên lên/xuống: gọi lại các lệnh đã gõ trước đó, không cần gõ lại.
+• cls: xóa sạch màn hình cho dễ nhìn (lệnh cũ vẫn còn trong lịch sử).
+• Ctrl + C: dừng lệnh đang chạy, ví dụ khi một bài test chạy mãi không dừng.
+Tab giúp tránh gõ sai chính tả, nên dùng nó thường xuyên.
+
+### Lỗi thường gặp
+~~~text
+cd : Cannot find path 'C:\Users\an\qa-lap' because it does not exist.
+
+Set-Location : A positional parameter cannot be found that accepts argument 'Tests'.
+~~~
+Lỗi 1: Cannot find path.
+• Nguyên nhân: gõ sai tên (qa-lap thay vì qa-lab) hoặc đang đứng sai thư mục.
+• Cách sửa: chạy ls để xem tên đúng, dùng Tab để tự điền.
+Lỗi 2: A positional parameter cannot be found khi chạy cd My Tests.
+• Nguyên nhân: tên có khoảng trắng, PowerShell hiểu thành hai tham số.
+• Cách sửa: đặt đường dẫn trong ngoặc kép: cd "My Tests".
+
+PRACTICE: Mở PowerShell, dùng pwd để xem vị trí, cd vào qa-lab, dùng ls liệt kê, cd vào notes rồi cd .. để quay lại. Thử dùng phím Tab để điền tên thư mục và mũi tên lên để chạy lại lệnh cũ. Cuối cùng gõ cls.
+Q: Lệnh nào dùng để lùi ra thư mục cha?
+- cd ~
++ cd ..
+- cd /
+- pwd
+Q: Khi một lệnh chạy mãi không dừng, bạn nhấn tổ hợp phím nào để dừng?
+- Ctrl + Z
+- Alt + F4
++ Ctrl + C
+Q: Muốn vào thư mục tên "My Tests" (có khoảng trắng), bạn gõ thế nào?
+- cd My Tests
++ cd "My Tests"
+- cd My_Tests
+
+## LESSON computer-basics-03 | Tạo, đọc, sao chép và xóa file bằng lệnh
+
+### Tạo thư mục: mkdir
+~~~bash
+cd ~\qa-lab
+mkdir projects
+mkdir data\json, data\csv
+ls data
+~~~
+Giải thích từng dòng:
+• dòng 1: đi tới thư mục qa-lab trong thư mục người dùng.
+• dòng 2: mkdir = make directory, tạo thư mục projects.
+• dòng 3: tạo cùng lúc hai thư mục con json và csv bên trong data (cách nhau bởi dấu phẩy).
+• dòng 4: kiểm tra lại, phải thấy json và csv.
+Nếu thư mục đã tồn tại, mkdir báo lỗi An item with the specified name ... already exists. Không sao, chỉ là nó đã có rồi.
+
+### Tạo file rỗng: New-Item
+~~~bash
+New-Item -ItemType File notes\bug-list.txt
+ni notes\test-ideas.txt
+ls notes
+~~~
+Giải thích từng dòng:
+• dòng 1: New-Item tạo mục mới, -ItemType File nói rõ đây là file (không phải thư mục).
+• dòng 2: ni là tên tắt của New-Item, tạo nhanh file test-ideas.txt.
+• dòng 3: liệt kê để kiểm tra hai file mới, cột Length bằng 0 vì file đang rỗng.
+Giống như lấy một tờ giấy trắng bỏ vào ngăn kéo notes.
+
+### Ghi và đọc nội dung file
+~~~bash
+Set-Content notes\bug-list.txt "BUG-1: Nut Login khong phan hoi" -Encoding utf8
+Add-Content notes\bug-list.txt "BUG-2: Sai dinh dang ngay"
+Get-Content notes\bug-list.txt
+~~~
+Giải thích từng dòng:
+• dòng 1: Set-Content ghi đè toàn bộ nội dung file bằng dòng chữ mới. -Encoding utf8 giúp lưu đúng tiếng Việt có dấu.
+• dòng 2: Add-Content viết thêm một dòng vào cuối file, không xóa nội dung cũ.
+• dòng 3: Get-Content (tên tắt cat) in nội dung file ra màn hình.
+Kết quả mong đợi:
+BUG-1: Nut Login khong phan hoi
+BUG-2: Sai dinh dang ngay
+Cẩn thận: Set-Content xóa sạch nội dung cũ, giống viết lại tờ giấy mới.
+
+### Sao chép, di chuyển, đổi tên
+~~~bash
+Copy-Item notes\bug-list.txt evidence\bug-list-backup.txt
+Move-Item notes\test-ideas.txt data\test-ideas.txt
+Rename-Item data\test-ideas.txt ideas.txt
+ls evidence, data
+~~~
+Giải thích từng dòng:
+• dòng 1: Copy-Item (tên tắt cp, copy) tạo bản sao, file gốc vẫn còn.
+• dòng 2: Move-Item (tên tắt mv, move) chuyển file sang thư mục khác, chỗ cũ không còn file.
+• dòng 3: Rename-Item đổi tên file, chỉ cần đưa tên mới.
+• dòng 4: liệt kê cùng lúc hai thư mục để kiểm tra kết quả.
+Thứ tự tham số luôn là: nguồn trước, đích sau.
+
+### Xóa an toàn: Remove-Item
+~~~bash
+Remove-Item evidence\bug-list-backup.txt
+Remove-Item data\csv
+Remove-Item data\json -Recurse
+~~~
+Giải thích từng dòng:
+• dòng 1: xóa một file (tên tắt rm, del).
+• dòng 2: xóa thư mục rỗng csv.
+• dòng 3: -Recurse xóa thư mục json và mọi thứ bên trong.
+Cảnh báo quan trọng:
+• Xóa bằng lệnh KHÔNG vào Recycle Bin, mất là mất luôn.
+• Luôn chạy pwd và ls trước khi xóa để chắc mình đang đứng đúng chỗ.
+• Không bao giờ chạy lệnh xóa mà bạn copy từ internet khi chưa hiểu nó làm gì.
+
+### Lỗi thường gặp
+~~~text
+Remove-Item : The item at C:\Users\an\qa-lab\data has children and the Recurse parameter was not specified.
+
+Remove-Item : Cannot remove item C:\...\report.xlsx: The process cannot access the file because it is being used by another process.
+
+Get-Content : Cannot find path 'C:\Users\an\qa-lab\bug-list.txt' because it does not exist.
+~~~
+• Lỗi 1: thư mục còn chứa file. PowerShell hỏi xác nhận hoặc báo lỗi. Kiểm tra kỹ rồi mới thêm -Recurse.
+• Lỗi 2: file đang mở trong Excel/Notepad. Đóng chương trình đó rồi chạy lại.
+• Lỗi 3: sai vị trí. File nằm trong notes nhưng bạn đứng ở qa-lab mà gõ thiếu notes\. Dùng Tab để tự điền đường dẫn.
+
+PRACTICE: Trong qa-lab, dùng lệnh (không dùng chuột) để: tạo file notes\checklist.txt, ghi 3 dòng kiểm thử bằng Set-Content và Add-Content, in nội dung ra màn hình, sao chép sang evidence, đổi tên bản sao thành checklist-v1.txt rồi xóa bản sao đó.
+Q: Lệnh nào ghi thêm một dòng vào cuối file mà không xóa nội dung cũ?
+- Set-Content
++ Add-Content
+- New-Item
+Q: File bị xóa bằng Remove-Item sẽ đi đâu?
+- Vào Recycle Bin, có thể khôi phục
+- Vào thư mục Temp
++ Bị xóa hẳn, không vào Recycle Bin
+Q: Trong lệnh Copy-Item a.txt b.txt, file nào là file gốc?
++ a.txt
+- b.txt
+- Cả hai đều là bản sao
+
+## LESSON computer-basics-04 | Cài Node.js, Python và Java
+
+### Vì sao tester cần cài những thứ này?
+Mỗi công cụ test cần một "động cơ" để chạy, giống ô tô cần xăng hoặc điện:
+• Node.js: chạy JavaScript/TypeScript. Cần cho Playwright, Newman, Appium server, k6 extensions.
+• npm: đi kèm Node.js, là "cửa hàng" để tải thư viện.
+• Python: dùng cho Selenium, script xử lý dữ liệu test, Appium client Python.
+• Java JDK: cần cho JMeter, một số dự án Selenium/Appium viết bằng Java, Android tooling.
+• VS Code: nơi viết và chạy code (học ở bài sau).
+Có hai cách cài: tải bộ cài từ trang chính thức (click Next) hoặc dùng winget (một dòng lệnh). Bài này hướng dẫn cả hai.
+
+### Cài Node.js bản LTS
+Cách 1: trình cài đặt
+• Vào trang nodejs.org, tải bản LTS (Long Term Support, bản ổn định) cho Windows (.msi).
+• Chạy file .msi, Next liên tục, giữ nguyên tùy chọn Add to PATH.
+Cách 2: winget
+~~~bash
+winget install OpenJS.NodeJS.LTS
+~~~
+Giải thích:
+• winget là trình quản lý ứng dụng có sẵn trên Windows 10/11 mới.
+• install = cài đặt, OpenJS.NodeJS.LTS là mã định danh gói Node.js bản LTS.
+• Lần đầu dùng winget có thể hỏi đồng ý điều khoản nguồn, gõ Y rồi Enter.
+Sau khi cài xong: ĐÓNG terminal và MỞ LẠI terminal mới thì lệnh node mới được nhận.
+
+### Cài Python
+Cách 1: trình cài đặt
+• Vào python.org > Downloads, tải bản Python 3 mới nhất cho Windows.
+• Màn hình đầu tiên: TÍCH ô "Add python.exe to PATH" (rất quan trọng), rồi Install Now.
+Cách 2: winget
+~~~bash
+winget install Python.Python.3.12
+py --version
+python --version
+~~~
+Giải thích từng dòng:
+• dòng 1: cài Python 3.12 (có thể đổi thành 3.13 nếu muốn bản mới hơn).
+• dòng 2: py là trình khởi chạy Python trên Windows, in ra phiên bản.
+• dòng 3: kiểm tra lệnh python có chạy được không.
+Kết quả mong đợi: Python 3.12.x (số cuối có thể khác).
+
+### Cài Java JDK
+Tester thường dùng bản OpenJDK miễn phí như Eclipse Temurin.
+~~~bash
+winget install EclipseAdoptium.Temurin.21.JDK
+java -version
+~~~
+Giải thích từng dòng:
+• dòng 1: cài JDK 21 (bản LTS) của Eclipse Temurin.
+• dòng 2: kiểm tra Java. Lưu ý: chỉ có MỘT dấu gạch và chữ version viết liền: -version.
+Kết quả mong đợi (số có thể khác):
+openjdk version "21.0.5" 2024-10-15 LTS
+OpenJDK Runtime Environment Temurin-21.0.5+11 (build 21.0.5+11-LTS)
+Nếu cài bằng file .msi từ trang adoptium.net: ở màn hình chọn tính năng, bật "Set JAVA_HOME variable" để tự tạo biến JAVA_HOME.
+
+### Kiểm tra toàn bộ môi trường một lần
+Mở terminal MỚI rồi chạy:
+~~~bash
+node -v
+npm -v
+python --version
+java -version
+winget --version
+~~~
+Giải thích từng dòng:
+• node -v: phiên bản Node.js, ví dụ v24.11.0.
+• npm -v: phiên bản npm đi kèm, ví dụ 11.6.1.
+• python --version: ví dụ Python 3.12.7.
+• java -version: thông tin JDK như slide trước.
+• winget --version: phiên bản winget, nếu lỗi thì máy chưa có winget, hãy dùng bộ cài .msi.
+Mẹo: chụp màn hình kết quả này lưu vào evidence, khi nhờ người khác hỗ trợ họ sẽ biết ngay môi trường của bạn.
+
+### Lỗi thường gặp
+~~~text
+Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases.
+
+'java' is not recognized as an internal or external command, operable program or batch file.
+
+winget : The term 'winget' is not recognized as the name of a cmdlet...
+~~~
+• Lỗi 1: gõ python lại mở Microsoft Store. Cách sửa: Settings > Apps > Advanced app settings > App execution aliases, TẮT hai mục python.exe và python3.exe. Sau đó mở lại terminal. Nếu vẫn lỗi, cài lại Python và nhớ tích Add python.exe to PATH.
+• Lỗi 2: chưa cài JDK hoặc chưa mở lại terminal sau khi cài. Mở terminal mới, nếu vẫn lỗi xem bài PATH.
+• Lỗi 3: Windows cũ chưa có winget. Cập nhật App Installer từ Microsoft Store hoặc dùng bộ cài .msi.
+
+PRACTICE: Cài Node.js LTS, Python 3 và JDK 21 bằng một trong hai cách. Mở terminal mới, chạy node -v, npm -v, python --version, java -version. Chụp màn hình kết quả, lưu vào qa-lab\evidence\moi-truong.png.
+Q: Sau khi cài Node.js xong, gõ node -v vẫn báo không nhận lệnh. Việc đầu tiên nên làm là gì?
+- Cài lại Windows
++ Đóng terminal và mở terminal mới
+- Xóa thư mục qa-lab
+- Cài thêm Python
+Q: Lệnh kiểm tra phiên bản Java đúng là gì?
+- java --ver
+- java version
++ java -version
+Q: Khi cài Python bằng file từ python.org, tùy chọn nào bắt buộc phải tích?
+- Install for all users
++ Add python.exe to PATH
+- Disable path length limit
+
+## LESSON computer-basics-05 | PATH và biến môi trường
+
+### PATH là gì? Danh sách chỗ để tìm
+Khi bạn gõ node, Windows không lục khắp ổ đĩa. Nó chỉ tìm trong một danh sách thư mục có sẵn tên là PATH.
+Giống như bạn tìm chìa khóa: bạn chỉ nhìn ở vài chỗ quen thuộc (bàn, túi áo, móc treo). Nếu chìa nằm chỗ khác, bạn sẽ nói "không thấy".
+~~~bash
+$env:Path -split ';'
+~~~
+Giải thích:
+• $env:Path đọc giá trị biến môi trường Path của phiên terminal hiện tại.
+• -split ';' tách chuỗi dài thành từng dòng, vì các thư mục được ngăn bởi dấu chấm phẩy.
+Kết quả mong đợi (một phần):
+C:\Program Files\nodejs\
+C:\Users\an\AppData\Local\Programs\Python\Python312\
+C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot\bin
+
+### Biến môi trường là gì?
+Biến môi trường là những "tờ giấy nhớ" dán trên máy, chương trình nào cũng đọc được.
+~~~bash
+$env:USERPROFILE
+$env:JAVA_HOME
+Get-ChildItem Env:
+~~~
+Giải thích từng dòng:
+• dòng 1: in đường dẫn thư mục người dùng, ví dụ C:\Users\an.
+• dòng 2: in đường dẫn JDK nếu đã đặt JAVA_HOME, nếu trống tức là chưa đặt.
+• dòng 3: liệt kê tất cả biến môi trường hiện có.
+Tester sẽ gặp các biến như JAVA_HOME (JMeter, Maven), ANDROID_HOME (Appium), BASE_URL, CI (khi chạy trên GitHub Actions).
+
+### Lệnh này nằm ở đâu?
+~~~bash
+Get-Command node
+where.exe node
+where.exe python
+~~~
+Giải thích từng dòng:
+• dòng 1: Get-Command cho biết PowerShell tìm thấy node ở đâu và loại lệnh gì.
+• dòng 2: where.exe liệt kê mọi bản node tìm thấy trong PATH. Trong PowerShell phải gõ đủ where.exe vì where là tên tắt của lệnh khác.
+• dòng 3: tương tự cho python.
+Kết quả mong đợi:
+C:\Program Files\nodejs\node.exe
+Nếu where.exe python trả về WindowsApps\python.exe trước tiên, đó là lối tắt Microsoft Store gây lỗi đã nói ở bài trước.
+
+### Đặt JAVA_HOME và thêm vào Path
+Cách bằng giao diện (an toàn, dễ hiểu):
+• Nhấn Windows, gõ "environment", chọn Edit environment variables for your account.
+• Phần User variables: New > Variable name JAVA_HOME, Variable value là thư mục JDK (ví dụ C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot), OK.
+• Chọn biến Path > Edit > New > gõ %JAVA_HOME%\bin > OK.
+Cách bằng lệnh (chỉ cho tài khoản của bạn):
+~~~bash
+[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot", "User")
+~~~
+Giải thích:
+• SetEnvironmentVariable lưu vĩnh viễn biến JAVA_HOME với giá trị là thư mục JDK.
+• "User" nghĩa là chỉ áp dụng cho tài khoản của bạn, không cần quyền admin.
+• Thay đường dẫn bằng thư mục JDK thật trên máy bạn (mở C:\Program Files\Eclipse Adoptium để xem tên).
+Không dùng lệnh setx để sửa Path: nó có thể cắt cụt Path dài và làm mất cấu hình cũ.
+
+### Vì sao phải mở lại terminal?
+Mỗi terminal khi mở ra sẽ "chụp ảnh" các biến môi trường lúc đó. Sửa biến xong, terminal cũ vẫn giữ ảnh cũ.
+~~~bash
+$env:BASE_URL = "https://jsonplaceholder.typicode.com"
+echo $env:BASE_URL
+~~~
+Giải thích từng dòng:
+• dòng 1: tạo biến tạm BASE_URL chỉ tồn tại trong cửa sổ terminal này. Đóng cửa sổ là mất.
+• dòng 2: in giá trị ra để kiểm tra.
+Kết quả mong đợi: https://jsonplaceholder.typicode.com
+Quy tắc vàng: sửa PATH hay biến môi trường vĩnh viễn xong thì đóng TẤT CẢ terminal (cả VS Code) và mở lại.
+
+### Lỗi thường gặp
+~~~text
+node : The term 'node' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+'node' is not recognized as an internal or external command, operable program or batch file.
+
+ERROR: JAVA_HOME is set to an invalid directory
+~~~
+• Hai lỗi đầu là cùng một vấn đề (bản PowerShell và bản Command Prompt): Windows không tìm thấy node trong PATH.
+  Cách sửa: mở terminal mới; nếu vẫn lỗi, kiểm tra C:\Program Files\nodejs có trong $env:Path -split ';' không; nếu không có thì thêm vào Path hoặc cài lại Node.js.
+• Lỗi JAVA_HOME: giá trị trỏ sai, thường do thừa \bin ở cuối hoặc JDK đã gỡ. JAVA_HOME phải trỏ tới thư mục gốc JDK (không có \bin).
+
+PRACTICE: Chạy $env:Path -split ';' và tìm dòng chứa nodejs. Dùng where.exe để xem node, python, java nằm ở đâu. Đặt JAVA_HOME cho tài khoản của bạn, mở terminal mới và chạy echo $env:JAVA_HOME để kiểm tra.
+Q: PATH dùng để làm gì?
+- Lưu mật khẩu của người dùng
++ Danh sách thư mục Windows tìm khi bạn gõ tên một lệnh
+- Danh sách website được phép truy cập
+Q: JAVA_HOME nên trỏ tới đâu?
+- C:\Program Files\Eclipse Adoptium\jdk-21\bin\java.exe
+- C:\Program Files\Eclipse Adoptium\jdk-21\bin
++ C:\Program Files\Eclipse Adoptium\jdk-21 (thư mục gốc của JDK)
+Q: Bạn vừa thêm thư mục mới vào Path nhưng terminal đang mở vẫn không nhận lệnh. Vì sao?
+- Vì Path chỉ có tác dụng sau khi khởi động lại máy
++ Vì terminal đang mở vẫn giữ giá trị biến môi trường cũ lúc nó được mở
+- Vì PowerShell không đọc biến Path
+
+## LESSON computer-basics-06 | VS Code: bàn làm việc của tester
+
+### Cài VS Code và mở thư mục dự án
+~~~bash
+winget install Microsoft.VisualStudioCode
+cd ~\qa-lab
+code .
+~~~
+Giải thích từng dòng:
+• dòng 1: cài Visual Studio Code (hoặc tải bộ cài tại code.visualstudio.com, giữ tích Add to PATH).
+• dòng 2: đi tới thư mục qa-lab.
+• dòng 3: code mở VS Code, dấu chấm nghĩa là mở chính thư mục hiện tại.
+Lần đầu mở thư mục, VS Code hỏi "Do you trust the authors of the files in this folder?". Với thư mục do chính bạn tạo, chọn Yes, I trust the authors.
+Cách bằng chuột: File > Open Folder... > chọn qa-lab.
+
+### Các vùng chính trên màn hình
+Hãy coi VS Code như một văn phòng nhỏ:
+• Explorer (cột trái, Ctrl+Shift+E): tủ hồ sơ, xem cây thư mục và file.
+• Editor (giữa): bàn viết, nơi mở và sửa file. Mỗi file là một tab.
+• Terminal (dưới, Ctrl+` là phím nằm dưới Esc): cửa sổ dòng lệnh ngay trong VS Code, tự đứng sẵn ở thư mục dự án.
+• Extensions (Ctrl+Shift+X): cửa hàng tiện ích cài thêm.
+• Status bar (thanh dưới cùng): ngôn ngữ của file, lỗi, nhánh Git.
+• Command Palette (Ctrl+Shift+P): ô tìm mọi chức năng, gõ tên việc muốn làm.
+Chấm tròn trên tab file nghĩa là chưa lưu. Nhấn Ctrl+S để lưu hoặc bật File > Auto Save.
+
+### Chạy file đầu tiên trong terminal tích hợp
+Tạo file hello.js trong qa-lab (Explorer > New File) với nội dung:
+~~~js
+console.log("Xin chào, tester!");
+console.log("Hôm nay tôi chạy file đầu tiên trong VS Code.");
+~~~
+Giải thích từng dòng:
+• dòng 1: console.log in một dòng chữ ra terminal.
+• dòng 2: in dòng thứ hai.
+Cách chạy: lưu file (Ctrl+S), mở terminal (Ctrl+`), gõ node hello.js rồi Enter.
+Kết quả mong đợi:
+Xin chào, tester!
+Hôm nay tôi chạy file đầu tiên trong VS Code.
+
+### Extension nên cài cho tester
+~~~bash
+code --install-extension ms-playwright.playwright
+code --install-extension ms-python.python
+code --install-extension esbenp.prettier-vscode
+code --install-extension dbaeumer.vscode-eslint
+code --list-extensions
+~~~
+Giải thích từng dòng:
+• dòng 1: Playwright Test for VS Code, chạy và debug test Playwright bằng nút bấm.
+• dòng 2: hỗ trợ Python (gợi ý code, chạy, debug).
+• dòng 3: Prettier, tự định dạng code cho đẹp và thống nhất.
+• dòng 4: ESLint, cảnh báo lỗi code JavaScript/TypeScript.
+• dòng 5: liệt kê các extension đã cài để kiểm tra.
+Cũng có thể cài bằng chuột: Ctrl+Shift+X, gõ tên, nhấn Install. Chỉ cài extension từ nhà phát hành uy tín.
+
+### Phím tắt tiết kiệm thời gian
+~~~text
+Ctrl+S            Lưu file
+Ctrl+P            Mở nhanh file theo tên
+Ctrl+Shift+P      Command Palette
+Ctrl+`            Bật/tắt terminal
+Ctrl+/            Comment / bỏ comment dòng đang chọn
+Ctrl+F            Tìm trong file
+Ctrl+Shift+F      Tìm trong toàn bộ dự án
+Alt+Up / Alt+Down Di chuyển dòng lên/xuống
+Shift+Alt+F       Định dạng lại file (format)
+~~~
+Giải thích: mỗi dòng là một phím tắt và tác dụng của nó.
+Mẹo: Ctrl+Shift+F rất hữu ích khi bạn cần tìm xem một locator hoặc một URL được dùng ở những file nào.
+
+### Lỗi thường gặp
+~~~text
+code : The term 'code' is not recognized as the name of a cmdlet, function, script file, or operable program.
+
+node:internal/modules/cjs/loader
+Error: Cannot find module 'C:\Users\an\hello.js'
+~~~
+• Lỗi 1: lệnh code chưa có trong PATH. Mở terminal mới. Nếu vẫn lỗi, cài lại VS Code và giữ tích Add to PATH, hoặc mở VS Code bằng Start menu rồi File > Open Folder.
+• Lỗi 2: terminal đang đứng sai thư mục (C:\Users\an thay vì C:\Users\an\qa-lab), hoặc file chưa được lưu. Kiểm tra bằng pwd và ls, lưu file rồi chạy lại.
+• Mẹo: nếu terminal VS Code không nhận Node.js mới cài, đóng hẳn VS Code rồi mở lại (terminal tích hợp cũng "chụp ảnh" biến môi trường như terminal thường).
+
+PRACTICE: Mở qa-lab bằng lệnh code ., tạo hello.js in ra tên của bạn và ngày học hôm nay, chạy bằng node hello.js trong terminal tích hợp. Cài extension Playwright Test for VS Code và kiểm tra bằng code --list-extensions.
+Q: Lệnh code . có tác dụng gì?
+- Biên dịch toàn bộ code trong thư mục
++ Mở VS Code với thư mục hiện tại
+- Xóa thư mục hiện tại
+Q: Dấu chấm tròn trên tab file trong VS Code có nghĩa là gì?
+- File có lỗi cú pháp
+- File đang chạy
++ File có thay đổi chưa được lưu
+Q: Node báo Cannot find module 'C:\Users\an\hello.js' trong khi file nằm ở qa-lab. Nguyên nhân là gì?
++ Terminal đang đứng sai thư mục
+- Node.js không đọc được file tiếng Việt
+- Thiếu extension Prettier
+
+## LESSON computer-basics-07 | npm, npx và dự án Node.js đầu tiên
+
+### npm là gì? Cửa hàng thư viện
+npm (Node Package Manager) giống một cửa hàng khổng lồ chứa các "món đồ" code người khác viết sẵn, gọi là package.
+Playwright, Newman, Appium đều được tải về qua npm.
+~~~bash
+cd ~\qa-lab\projects
+mkdir first-node
+cd first-node
+npm init -y
+~~~
+Giải thích từng dòng:
+• dòng 1–3: tạo và đi vào thư mục dự án first-node.
+• dòng 4: npm init tạo file package.json, -y nghĩa là đồng ý mọi giá trị mặc định.
+Kết quả mong đợi: dòng Wrote to C:\...\first-node\package.json kèm nội dung JSON.
+package.json giống "hồ sơ dự án": tên, phiên bản, danh sách thư viện, các lệnh tắt (scripts).
+
+### Cài một package và dùng nó
+Bước 1: trong terminal, chạy lệnh npm install dayjs
+• Lệnh này tải thư viện xử lý ngày giờ vào thư mục node_modules và ghi tên nó vào package.json.
+• Kết quả cài: added 1 package, and audited 2 packages in 1s ... found 0 vulnerabilities.
+Bước 2: tạo file date.js với nội dung:
+~~~js
+const dayjs = require("dayjs");
+const today = dayjs().format("DD/MM/YYYY");
+console.log("Ngày chạy test: " + today);
+~~~
+Giải thích từng dòng:
+• Code dòng 1: require nạp thư viện dayjs vào biến dayjs.
+• Code dòng 2: lấy ngày hôm nay và định dạng ngày/tháng/năm.
+• Code dòng 3: in ra màn hình.
+Lưu code vào file date.js, chạy node date.js. Kết quả: Ngày chạy test: 14/11/2026 (ngày của bạn).
+
+### Hiểu package.json và node_modules
+~~~json
+{
+  "name": "first-node",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node date.js"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13"
+  }
+}
+~~~
+Giải thích từng phần:
+• name, version: tên và phiên bản dự án.
+• scripts: lệnh tắt. Sau khi thêm "start", bạn chạy npm start thay vì gõ node date.js.
+• dependencies: danh sách thư viện dự án cần. Dấu ^ cho phép cập nhật bản vá nhỏ.
+• node_modules: thư mục chứa code thư viện thật, có thể rất nặng. KHÔNG gửi thư mục này cho người khác, họ chỉ cần chạy npm install là có lại.
+• package-lock.json: ghi chính xác phiên bản đã cài, nên giữ lại để mọi máy cài giống nhau.
+
+### npx: dùng thử công cụ không cần cài vĩnh viễn
+~~~bash
+npx cowsay "Xin chao tester"
+~~~
+Giải thích:
+• npx tải tạm package cowsay rồi chạy nó ngay.
+• Lần đầu npx hỏi Need to install the following packages ... Ok to proceed? (y). Gõ y rồi Enter.
+Kết quả mong đợi: một chú bò vẽ bằng ký tự đang "nói" câu Xin chao tester.
+Sau này bạn sẽ dùng npx rất nhiều: npx playwright test, npx playwright codegen, npx newman run...
+
+### Lỗi thường gặp: running scripts is disabled
+Thông báo lỗi bạn thấy khi gõ npm trong PowerShell:
+npm : File C:\Program Files\nodejs\npm.ps1 cannot be loaded because running scripts is disabled on this system.
+Nguyên nhân: PowerShell mặc định chặn chạy file script .ps1 (npm.ps1, npx.ps1) để bảo vệ máy.
+Cách xử lý:
+~~~bash
+Get-ExecutionPolicy -List
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+npm.cmd -v
+~~~
+• dòng 1: xem chính sách hiện tại ở từng cấp.
+• dòng 2: cho phép tài khoản của bạn chạy script tạo trên máy, script tải từ internet phải có chữ ký. Chỉ ảnh hưởng tài khoản của bạn.
+• dòng 3: cách thay thế không cần đổi chính sách: gọi npm.cmd (và npx.cmd) thay vì npm, hoặc dùng Command Prompt.
+Máy công ty: thường bị khóa bởi chính sách IT. Đừng cố vượt qua, hãy nhờ IT hỗ trợ hoặc dùng npm.cmd.
+
+### Lỗi thường gặp: chạy npm sai thư mục
+~~~text
+npm error code ENOENT
+npm error syscall open
+npm error path C:\Users\an\qa-lab\package.json
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory
+~~~
+Nguyên nhân: bạn chạy npm install hoặc npm start ở thư mục không có package.json.
+Cách sửa:
+• Chạy pwd để xem vị trí, ls để xem có package.json không.
+• cd vào đúng thư mục dự án (nơi có package.json) rồi chạy lại.
+Cách kiểm tra nhanh môi trường trước khi bắt đầu mọi khóa học:
+• node -v; npm -v; python --version; java -version; git --version; code --version
+• Gõ cả dòng trên vào PowerShell, dấu chấm phẩy cho phép chạy nhiều lệnh liên tiếp.
+
+PRACTICE: Tạo dự án projects\first-node bằng npm init -y, cài dayjs, viết date.js in ra ngày giờ hiện tại theo định dạng DD/MM/YYYY HH:mm, thêm script "start" vào package.json và chạy bằng npm start. Thử npx cowsay với câu của bạn.
+Q: Lệnh npm init -y tạo ra file nào?
+- node_modules
++ package.json
+- index.js
+- .gitignore
+Q: Bạn gửi dự án cho đồng nghiệp. Nên làm gì với thư mục node_modules?
+- Nén và gửi kèm để họ khỏi phải cài
++ Không gửi, đồng nghiệp chạy npm install để cài lại từ package.json
+- Xóa luôn package.json cho nhẹ
+Q: PowerShell báo npm.ps1 cannot be loaded because running scripts is disabled trên máy công ty. Cách xử lý phù hợp nhất là gì?
+- Tắt phần mềm diệt virus
+- Chạy PowerShell với quyền admin và tắt mọi chính sách bảo mật
++ Dùng npm.cmd hoặc nhờ IT cấu hình, chỉ tự đổi RemoteSigned cho CurrentUser nếu được phép

@@ -1,0 +1,777 @@
+=== COURSE security-basics
+name: Bảo mật cơ bản cho tester
+icon: 🛡️
+floor: 6
+room: 602
+level: Cơ bản → Trung bình
+hours: 7
+summary: Làm quen với tư duy bảo mật, OWASP Top 10 và các lỗi phổ biến như SQL Injection, XSS, phân quyền sai. Mọi bài thực hành chỉ làm trên ứng dụng cố tình có lỗi chạy trên máy của chính bạn (localhost).
+
+## LESSON security-basics-01 | Đạo đức, pháp lý và dựng phòng lab an toàn
+
+### Tester bảo mật giống thợ khóa được thuê
+Một thợ khóa được chủ nhà THUÊ để thử xem cửa có dễ phá không: việc tốt, có giấy tờ.
+Cùng kỹ năng đó, tự ý mở cửa nhà hàng xóm: là phạm pháp.
+Kiểm thử bảo mật cũng vậy. Kỹ năng không xấu, việc dùng sai chỗ mới xấu.
+• Tester bảo mật tìm lỗ hổng TRƯỚC kẻ xấu, rồi báo để đội phát triển sửa.
+• Mục tiêu là bảo vệ người dùng, không phải "phá cho vui".
+• Khóa học này chỉ dạy mức cơ bản để tester nhận diện và báo cáo lỗi, không phải để tấn công.
+
+### Luật chơi bắt buộc (đọc kỹ trước khi làm gì)
+• CHỈ thử nghiệm trên hệ thống của chính bạn, hoặc khi có văn bản cho phép rõ ràng (phạm vi, thời gian, người chịu trách nhiệm).
+• Trong khóa này: chỉ dùng app cố tình có lỗi chạy trên localhost như OWASP Juice Shop, DVWA.
+• KHÔNG BAO GIỜ thử payload trên website thật, app của công ty khác, hay môi trường PROD của chính công ty khi chưa được phép.
+• Pháp luật nhiều nước, trong đó có Việt Nam, xử lý nghiêm hành vi truy cập trái phép vào hệ thống máy tính, kể cả khi bạn "chỉ thử cho biết".
+• Ở công ty: luôn hỏi trưởng nhóm/đội bảo mật trước khi chạy công cụ quét. Một lần quét có thể làm chậm hoặc làm sập môi trường test chung.
+• Tìm thấy dữ liệu thật của người khác: dừng lại, không tải về, báo ngay theo kênh nội bộ.
+
+### Bước 1: cài Docker Desktop trên Windows
+Docker giống một "hộp cơm" đóng gói sẵn cả ứng dụng và mọi thứ nó cần. Bạn chỉ cần mở hộp là chạy, không phải cài từng món.
+Mở PowerShell rồi chạy:
+~~~bash
+winget install -e --id Docker.DockerDesktop
+docker --version
+docker run hello-world
+~~~
+Giải thích từng dòng:
+• Dòng 1: winget là trình cài phần mềm có sẵn trên Windows 10/11; -e --id nghĩa là tìm đúng gói có mã Docker.DockerDesktop.
+• Sau khi cài: khởi động lại máy, mở ứng dụng Docker Desktop, chờ biểu tượng cá voi báo "Engine running". Nếu Docker yêu cầu WSL 2, làm theo hướng dẫn trên màn hình (thường là chạy wsl --install trong PowerShell mở bằng quyền Administrator, rồi khởi động lại).
+• Dòng 2: kiểm tra đã cài thành công. Kết quả mong đợi: Docker version 2x.x.x, build ...
+• Dòng 3: chạy thử một container mẫu. Kết quả mong đợi có dòng "Hello from Docker!".
+
+### Bước 2: chạy OWASP Juice Shop trên máy bạn
+Juice Shop là một cửa hàng nước ép giả, CỐ TÌNH chứa hàng chục lỗ hổng để luyện tập hợp pháp.
+~~~bash
+docker run --rm -p 3000:3000 bkimminich/juice-shop
+~~~
+Giải thích từng phần:
+• docker run: tạo và chạy một container.
+• --rm: tự xóa container khi bạn tắt, mỗi lần chạy lại là một shop "sạch".
+• -p 3000:3000: nối cổng 3000 của máy bạn vào cổng 3000 trong container.
+• bkimminich/juice-shop: tên image chính thức của Juice Shop; lần đầu chạy sẽ tải về vài trăm MB.
+Kết quả mong đợi: cửa sổ in ra nhiều dòng log, cuối cùng có dòng chứa "Server listening on port 3000". Mở trình duyệt vào http://localhost:3000 sẽ thấy cửa hàng.
+Muốn dừng: bấm Ctrl + C trong cửa sổ PowerShell đó.
+Mẹo an toàn: dùng -p 127.0.0.1:3000:3000 để chỉ máy bạn mở được shop, các máy khác trong mạng không truy cập được.
+
+### Cách khác: chạy Juice Shop bằng Node.js (không cần Docker)
+Nếu máy không cài được Docker, có thể chạy từ mã nguồn (cần Git và Node.js bản LTS đã cài sẵn):
+~~~bash
+git clone https://github.com/juice-shop/juice-shop.git --depth 1
+cd juice-shop
+npm install
+npm start
+~~~
+Giải thích từng dòng:
+• git clone … --depth 1: tải mã nguồn, chỉ lấy phiên bản mới nhất cho nhẹ.
+• cd juice-shop: đi vào thư mục vừa tải.
+• npm install: tải mọi thư viện cần thiết; bước này có thể mất 5–15 phút.
+• npm start: khởi động server. Khi thấy "Server listening on port 3000", mở http://localhost:3000.
+Lưu ý: Juice Shop chỉ hỗ trợ một số phiên bản Node nhất định; nếu npm install báo lỗi engine, hãy xem mục Node.js được hỗ trợ trong README của dự án và cài đúng bản LTS phù hợp.
+
+### Thêm một phòng lab: DVWA
+DVWA (Damn Vulnerable Web Application) là app PHP cố tình có lỗi, có các mức độ Low/Medium/High để luyện dần.
+~~~bash
+docker run --rm -it -p 127.0.0.1:8080:80 vulnerables/web-dvwa
+~~~
+Giải thích:
+• -it: giữ cửa sổ tương tác để xem log.
+• -p 127.0.0.1:8080:80: app chạy cổng 80 trong container, bạn mở ở cổng 8080, chỉ máy bạn truy cập được.
+Các bước tiếp theo:
+1. Mở http://localhost:8080 và đăng nhập bằng tài khoản mặc định được ghi trong tài liệu DVWA (admin / password).
+2. Bấm "Create / Reset Database".
+3. Vào DVWA Security, chọn Low để bắt đầu.
+Image này khá cũ, chỉ dùng để học trên máy cá nhân, không bao giờ đưa lên server công khai.
+
+### Lỗi thường gặp
+• Triệu chứng: "docker: error during connect … The system cannot find the file specified".
+Nguyên nhân: Docker Desktop chưa chạy. Cách sửa: mở Docker Desktop, chờ "Engine running" rồi chạy lại lệnh.
+• Triệu chứng: "Bind for 0.0.0.0:3000 failed: port is already allocated".
+Nguyên nhân: cổng 3000 đang bị chương trình khác dùng. Cách sửa: tắt chương trình đó hoặc đổi cổng, ví dụ -p 3001:3000 rồi mở http://localhost:3001.
+• Triệu chứng: "docker is not recognized as the name of a cmdlet".
+Nguyên nhân: chưa cài xong hoặc chưa mở lại PowerShell. Cách sửa: đóng PowerShell, mở lại; nếu vẫn lỗi, khởi động lại máy.
+• Triệu chứng: trình duyệt báo "This site can't be reached" ở localhost:3000.
+Nguyên nhân: container chưa khởi động xong hoặc đã bị tắt. Cách sửa: xem cửa sổ log, chờ dòng "Server listening".
+
+PRACTICE: Cài Docker Desktop, chạy Juice Shop bằng lệnh docker run, mở http://localhost:3000, tạo một tài khoản thử với email dạng tenban@lab.local. Chụp màn hình trang chủ và cửa sổ log có dòng "Server listening on port 3000".
+Q: Bạn được phép thử payload SQL Injection ở đâu trong khóa học này?
+- Trên website bán hàng bất kỳ để xem có lỗi không
++ Trên Juice Shop hoặc DVWA chạy trên máy của chính bạn
+- Trên môi trường PROD của công ty vào buổi tối khi ít người dùng
+Q: Tham số --rm trong lệnh docker run có tác dụng gì?
+- Xóa image khỏi máy
++ Tự xóa container khi tắt, lần sau chạy lại là bản sạch
+- Chạy container ở chế độ ẩn
+Q: Lỗi "port is already allocated" nghĩa là gì?
+- Docker chưa được cài
+- Image bị hỏng
++ Cổng bạn chọn đang bị chương trình khác sử dụng
+
+## LESSON security-basics-02 | OWASP Top 10 và tư duy kẻ tấn công
+
+### OWASP là gì?
+OWASP (Open Worldwide Application Security Project) là cộng đồng phi lợi nhuận chia sẻ miễn phí kiến thức về bảo mật ứng dụng.
+Sản phẩm nổi tiếng nhất là OWASP Top 10: danh sách 10 nhóm rủi ro phổ biến và nguy hiểm nhất của ứng dụng web.
+Hãy coi nó như "10 cách trộm hay dùng nhất" mà mọi chủ nhà nên biết để kiểm tra cửa nhà mình.
+• Danh sách được cập nhật định kỳ theo dữ liệu thực tế. Bản 2021 được dùng rộng rãi; đã có bản 2025 với một số thay đổi về thứ tự và tên mục.
+• Ý tưởng cốt lõi giữa các phiên bản gần giống nhau, nên học bản 2021 vẫn rất hữu ích.
+• OWASP còn có Juice Shop, ZAP, Cheat Sheet Series: đều miễn phí.
+
+### Danh sách OWASP Top 10 (bản 2021)
+~~~text
+A01 Broken Access Control              Phân quyền sai: xem/sửa dữ liệu của người khác
+A02 Cryptographic Failures             Mã hóa yếu: lộ mật khẩu, thẻ, dữ liệu nhạy cảm
+A03 Injection                          Chèn mã: SQL Injection, XSS, command injection
+A04 Insecure Design                    Thiết kế thiếu an toàn ngay từ đầu
+A05 Security Misconfiguration          Cấu hình sai: để trang debug, mật khẩu mặc định
+A06 Vulnerable and Outdated Components Dùng thư viện cũ có lỗ hổng đã biết
+A07 Identification and Authentication  Lỗi đăng nhập, phiên, mật khẩu yếu
+    Failures
+A08 Software and Data Integrity        Cập nhật/dữ liệu không được kiểm tra tính toàn vẹn
+    Failures
+A09 Security Logging and Monitoring    Không ghi log, không phát hiện bị tấn công
+    Failures
+A10 Server-Side Request Forgery (SSRF) Lừa server gửi request đến nơi không được phép
+~~~
+Cách đọc: cột trái là mã và tên chính thức (tiếng Anh), cột phải là giải thích dễ hiểu. Khi viết bug report, ghi kèm mã (ví dụ A01) để đội phát triển tra cứu nhanh.
+
+### Tester có thể kiểm gì cho từng nhóm?
+~~~text
+Nhóm | Câu hỏi tester tự đặt ra
+-----+------------------------------------------------------------------
+A01  | Đổi id trong URL/API có xem được đơn hàng của người khác không?
+A02  | Trang có chạy HTTPS? Mật khẩu có hiện rõ trong response/log không?
+A03  | Nhập ' hoặc <b>x</b> vào ô tìm kiếm thì app phản ứng thế nào?
+A04  | Có giới hạn số lần dùng mã giảm giá / gửi OTP không?
+A05  | Có trang lỗi lộ stack trace, thư mục /admin không cần đăng nhập?
+A06  | Thư viện trong dự án có cảnh báo lỗ hổng (npm audit) không?
+A07  | Có khóa tài khoản sau nhiều lần sai? Đăng xuất có hủy phiên?
+A08  | File tải về/cập nhật có được kiểm tra chữ ký không?
+A09  | Đăng nhập sai 50 lần có được ghi log và cảnh báo không?
+A10  | Ô "nhập URL ảnh" có cho server gọi tới địa chỉ nội bộ không?
+~~~
+Không cần làm hết ngay. Người mới nên bắt đầu với A01, A03, A05, A07 vì dễ kiểm bằng trình duyệt.
+
+### Thử ngay: kiểm thư viện cũ (A06) bằng npm audit
+Nếu bạn đã tải mã nguồn Juice Shop ở bài trước (hoặc có bất kỳ dự án Node.js nào), chạy trong thư mục dự án:
+~~~bash
+cd juice-shop
+npm audit
+npm audit --omit=dev
+~~~
+Giải thích từng dòng:
+• cd juice-shop: đi vào thư mục có file package.json.
+• npm audit: so sánh các thư viện đang dùng với cơ sở dữ liệu lỗ hổng công khai, in ra danh sách theo mức độ low/moderate/high/critical.
+• npm audit --omit=dev: bỏ qua thư viện chỉ dùng lúc phát triển, tập trung vào thứ chạy thật.
+Kết quả mong đợi: cuối danh sách có dòng tổng kết dạng "N vulnerabilities (x low, y moderate, z high)". Juice Shop cố tình dùng một số thư viện cũ nên có thể thấy cảnh báo.
+Tester không tự sửa, mà ghi lại tên thư viện, mức độ và báo cho đội phát triển.
+
+### Bộ ba CIA: ba thứ cần bảo vệ
+• Confidentiality (Bí mật): chỉ người được phép mới xem được. Ví dụ: không ai xem được lịch sử đơn hàng của bạn.
+• Integrity (Toàn vẹn): dữ liệu không bị sửa trái phép. Ví dụ: không ai sửa được giá sản phẩm từ phía trình duyệt.
+• Availability (Sẵn sàng): hệ thống luôn dùng được khi cần. Ví dụ: không thể làm sập trang bằng cách gửi một file khổng lồ.
+Mỗi khi thấy một lỗi, hãy hỏi: lỗi này phá vỡ chữ nào trong C, I, A? Câu trả lời giúp bạn đánh giá mức độ nghiêm trọng.
+
+### Từ user story ra "abuse case"
+User story mô tả người dùng TỐT muốn gì. Abuse case mô tả kẻ xấu sẽ lợi dụng ra sao.
+~~~text
+User story:
+  Là khách hàng, tôi muốn xem chi tiết đơn hàng tại /orders/{id}
+  để theo dõi tình trạng giao hàng.
+
+Abuse case (tester nghĩ thêm):
+  1. Đổi {id} thành số khác để xem đơn của người khác.        (A01)
+  2. Chưa đăng nhập mà vẫn mở được /orders/123.               (A01, A07)
+  3. Nhập id = abc' để xem server có trả lỗi chi tiết không.  (A03, A05)
+  4. Gọi API 1000 lần/phút để dò hết các id.                  (A04)
+~~~
+• Viết abuse case ngay khi đọc requirement, trước cả khi có code.
+• Mỗi abuse case thành một test case bảo mật, thực hiện trên môi trường được phép.
+
+### Sai lầm thường gặp
+• Triệu chứng: nghĩ "bảo mật là việc của đội security, tester không cần quan tâm".
+Cách sửa: tester là người dùng app nhiều nhất, rất nhiều lỗi phân quyền được tester phát hiện chỉ bằng trình duyệt.
+• Triệu chứng: học thuộc tên 10 mục nhưng không biết kiểm thế nào.
+Cách sửa: với mỗi chức năng, đặt câu hỏi như bảng ở slide trước.
+• Triệu chứng: thấy cảnh báo npm audit là kết luận app "không an toàn".
+Cách sửa: ghi nhận và để đội phát triển đánh giá; có cảnh báo không áp dụng cho cách app sử dụng thư viện.
+
+PRACTICE: Chọn chức năng "Đổi địa chỉ giao hàng" của Juice Shop trên localhost. Viết 1 user story và ít nhất 4 abuse case, gắn mỗi abuse case với một mã OWASP (A01…A10) và một chữ trong bộ ba CIA.
+Q: Mục A01 Broken Access Control nói về điều gì?
++ Người dùng truy cập hoặc thao tác được dữ liệu, chức năng không thuộc quyền của mình
+- Website tải chậm
+- Mật khẩu quá ngắn
+Q: Lệnh npm audit giúp tester phát hiện nhóm rủi ro nào?
+- A10 Server-Side Request Forgery
+- A09 Security Logging and Monitoring Failures
++ A06 Vulnerable and Outdated Components
+Q: Không ai được sửa giá sản phẩm từ phía trình duyệt. Đây là chữ nào trong CIA?
+- Confidentiality
++ Integrity
+- Availability
+
+## LESSON security-basics-03 | DevTools và HTTP security headers
+
+### Nhìn "bên dưới" trang web bằng DevTools
+Trình duyệt là một chiếc xe; DevTools là nắp capo để nhìn vào động cơ.
+Mở Juice Shop (http://localhost:3000), bấm F12, chọn tab Network, rồi gõ "apple" vào ô tìm kiếm của shop.
+Bạn sẽ thấy một request tương tự:
+~~~text
+Request URL:     http://localhost:3000/rest/products/search?q=apple
+Request Method:  GET
+Status Code:     200 OK
+
+Response (tab Preview):
+{ "status": "success", "data": [ { "id": 1, "name": "Apple Juice (1000ml)", ... } ] }
+~~~
+Giải thích:
+• Request URL: địa chỉ API mà trang gọi; phần sau dấu ? là dữ liệu bạn gõ.
+• Method GET: lấy dữ liệu. Status 200: thành công.
+• Response: dữ liệu server trả về. Tester bảo mật hỏi: có trường nào thừa, nhạy cảm (mật khẩu, email người khác) không?
+Mẹo: tick "Preserve log" để không mất request khi trang chuyển.
+
+### Cookie, Local Storage và Session Storage
+Đây là các "ngăn kéo" trình duyệt dùng để nhớ thông tin, thường chứa token đăng nhập.
+Đăng nhập Juice Shop bằng tài khoản bạn tự tạo, mở F12, chọn tab Console, gõ từng dòng:
+~~~js
+document.cookie
+localStorage.getItem('token')
+Object.keys(sessionStorage)
+~~~
+Giải thích từng dòng:
+• document.cookie: in các cookie mà JavaScript đọc được. Cookie có cờ HttpOnly sẽ KHÔNG hiện ở đây (đó là điều tốt).
+• localStorage.getItem('token'): đọc giá trị khóa token trong Local Storage; nếu app lưu token ở đây, bạn sẽ thấy một chuỗi dài bắt đầu bằng eyJ (dạng JWT).
+• Object.keys(sessionStorage): liệt kê tên các khóa trong Session Storage.
+Cũng có thể xem trực quan ở tab Application > Storage. Token là "chìa khóa phiên": không gửi cho ai, kể cả trong lab.
+
+### Xem HTTP headers bằng curl
+Headers là phần "phong bì" đi kèm mỗi response, chứa các chỉ dẫn bảo mật cho trình duyệt.
+~~~bash
+curl.exe -I http://localhost:3000
+~~~
+Giải thích:
+• curl.exe: công cụ gửi request có sẵn trên Windows 10/11. Gõ curl.exe (có .exe) vì trong Windows PowerShell, chữ curl là bí danh của lệnh khác (Invoke-WebRequest).
+• -I: chỉ lấy headers, không lấy nội dung trang.
+Kết quả mong đợi (ví dụ, có thể khác theo phiên bản):
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+Content-Type: text/html; charset=UTF-8
+Tester ghi lại header nào CÓ, header nào THIẾU để so với yêu cầu bảo mật của dự án.
+
+### Ý nghĩa các security header quan trọng
+~~~text
+Header                      | Giá trị ví dụ               | Chống lại điều gì
+----------------------------+-----------------------------+---------------------------------
+Content-Security-Policy     | default-src 'self'          | Hạn chế XSS: chỉ cho chạy script
+                            |                             | từ nguồn được phép
+X-Frame-Options             | DENY hoặc SAMEORIGIN        | Clickjacking: nhúng trang vào
+                            |                             | iframe của web lạ
+Strict-Transport-Security   | max-age=31536000            | Ép trình duyệt luôn dùng HTTPS
+X-Content-Type-Options      | nosniff                     | Trình duyệt đoán sai loại file
+Referrer-Policy             | strict-origin-when-cross-   | Lộ URL (có thể chứa token) cho
+                            | origin                      | trang khác
+~~~
+Lưu ý: Strict-Transport-Security chỉ có ý nghĩa trên HTTPS. Trên http://localhost thiếu header này là bình thường; nhưng trên môi trường staging/production chạy HTTPS thì nên có.
+Access-Control-Allow-Origin: * cho mọi website gọi API: cần hỏi đội phát triển xem có cố ý không.
+
+### Tự động kiểm header bằng Python (không cần cài thêm thư viện)
+Tạo file check_headers.py bằng VS Code:
+~~~python
+import urllib.request
+
+URL = "http://localhost:3000"   # chỉ dùng với app lab trên máy bạn
+REQUIRED = ["Content-Security-Policy", "X-Frame-Options",
+            "X-Content-Type-Options", "Strict-Transport-Security",
+            "Referrer-Policy"]
+
+with urllib.request.urlopen(URL) as resp:
+    print("Status:", resp.status)
+    for name in REQUIRED:
+        value = resp.headers.get(name)
+        if value:
+            print(f"[OK]    {name}: {value}")
+        else:
+            print(f"[THIEU] {name}")
+~~~
+Giải thích từng dòng:
+• import urllib.request: dùng thư viện có sẵn của Python để gửi request.
+• URL, REQUIRED: địa chỉ cần kiểm và danh sách header mong muốn.
+• urlopen(URL): gửi request GET; with … as resp giúp tự đóng kết nối.
+• Vòng for: duyệt từng tên header, resp.headers.get(name) trả về giá trị hoặc None nếu thiếu.
+Chạy: python check_headers.py
+Kết quả mong đợi: dòng "Status: 200", sau đó các dòng [OK] hoặc [THIEU]. Với Juice Shop thường thấy X-Frame-Options và X-Content-Type-Options là [OK].
+
+### Lỗi thường gặp
+• Triệu chứng: gõ curl -I http://localhost:3000 trong Windows PowerShell 5.1 và bị hỏi "Uri:" hoặc báo lỗi tham số.
+Nguyên nhân: curl là bí danh của Invoke-WebRequest. Cách sửa: gõ curl.exe.
+• Triệu chứng: "curl: (7) Failed to connect to localhost port 3000".
+Nguyên nhân: Juice Shop chưa chạy. Cách sửa: chạy lại lệnh docker run ở bài 1.
+• Triệu chứng: Python báo "urllib.error.URLError: … actively refused it".
+Nguyên nhân giống trên: server chưa chạy hoặc sai cổng.
+• Triệu chứng: tab Network trống trơn.
+Nguyên nhân: mở DevTools sau khi trang đã tải xong. Cách sửa: mở DevTools trước, rồi F5 tải lại trang.
+
+PRACTICE: Chạy check_headers.py với Juice Shop (cổng 3000) và DVWA (cổng 8080). Lập bảng so sánh header có/thiếu ở hai app, và viết 1 câu giải thích rủi ro cho mỗi header bị thiếu.
+Q: Vì sao trên Windows PowerShell nên gõ curl.exe thay vì curl?
+- Vì curl không có trên Windows
++ Vì curl trong Windows PowerShell là bí danh của Invoke-WebRequest
+- Vì curl.exe chạy nhanh hơn
+Q: Header X-Frame-Options giúp chống lại kiểu tấn công nào?
+- SQL Injection
++ Clickjacking (nhúng trang vào iframe của web lạ)
+- Đoán mật khẩu
+Q: Cookie có cờ HttpOnly sẽ như thế nào khi gõ document.cookie trong Console?
+- Hiện ra bình thường
++ Không hiện ra vì JavaScript không đọc được
+- Bị xóa ngay lập tức
+
+## LESSON security-basics-04 | SQL Injection: khi dữ liệu biến thành lệnh
+
+### SQL Injection là gì?
+Tưởng tượng bạn điền phiếu gửi thủ kho: "Lấy hồ sơ của: Nguyễn Văn A".
+Nếu thủ kho làm theo NGUYÊN VĂN mọi chữ trên phiếu, kẻ gian có thể viết: "Lấy hồ sơ của: Nguyễn Văn A, và đưa luôn hồ sơ của tất cả mọi người".
+SQL Injection (SQLi) xảy ra khi ứng dụng ghép thẳng dữ liệu người dùng nhập vào câu lệnh SQL. Khi đó dữ liệu có thể "biến thành" một phần của lệnh.
+Hậu quả: đăng nhập không cần mật khẩu, đọc trộm toàn bộ database, thậm chí xóa dữ liệu.
+Thuộc nhóm OWASP A03 Injection.
+
+### Code bị lỗi trông như thế nào?
+Ví dụ (chỉ để hiểu, KHÔNG dùng) về một API đăng nhập viết sai bằng JavaScript:
+~~~js
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  const sql = "SELECT * FROM Users WHERE email = '" + email +
+              "' AND password = '" + password + "'";
+  const user = await db.get(sql);
+  if (user) res.send('Đăng nhập thành công');
+  else res.status(401).send('Sai thông tin');
+});
+~~~
+Giải thích từng dòng:
+• Dòng 1: khai báo API nhận POST tại /login.
+• Dòng 2: lấy email và password người dùng gửi lên.
+• Dòng 3–4: GHÉP CHUỖI để tạo câu SQL. Đây chính là lỗi: dấu nháy đơn ' do người dùng gõ sẽ làm vỡ câu lệnh.
+• Dòng 5: chạy câu SQL và lấy người dùng đầu tiên tìm được.
+• Dòng 6–7: có user thì báo thành công, không có thì trả 401.
+(Ngoài ra lưu mật khẩu dạng chữ thường cũng là lỗi A02; mật khẩu phải được băm bằng thuật toán chuyên dụng.)
+
+### Payload thay đổi câu SQL ra sao?
+Kẻ tấn công nhập vào ô Email: ' OR 1=1--  và mật khẩu bất kỳ. Câu SQL sau khi ghép:
+~~~sql
+SELECT * FROM Users WHERE email = '' OR 1=1--' AND password = 'abc'
+~~~
+Đọc từng phần:
+• email = '' : dấu ' đầu tiên trong payload đóng chuỗi email lại, email bằng rỗng.
+• OR 1=1 : điều kiện luôn đúng, nên WHERE đúng với MỌI dòng.
+• -- : bắt đầu chú thích (comment) trong SQL, mọi thứ phía sau bị bỏ qua, kể cả phần kiểm tra password.
+Kết quả: database trả về tất cả user, app lấy người đầu tiên, thường là admin. Kẻ tấn công vào được tài khoản admin mà không cần mật khẩu.
+
+### Thực hành trên Juice Shop (chỉ trên localhost)
+Đảm bảo Juice Shop đang chạy trên máy bạn, sau đó:
+1. Mở http://localhost:3000, bấm Account > Login.
+2. Ô Email nhập payload dưới đây, ô Password nhập bất kỳ, ví dụ 123.
+~~~text
+' OR 1=1--
+~~~
+3. Bấm Log in.
+Kết quả mong đợi: đăng nhập thành công với tài khoản admin của shop, góc trên hiện thông báo đã giải được thử thách (challenge solved).
+Giải thích: form đăng nhập của Juice Shop CỐ TÌNH ghép chuỗi giống ví dụ ở slide trước.
+NHẮC LẠI: tuyệt đối không thử payload này trên website thật. Trên môi trường test của công ty chỉ làm khi có cho phép bằng văn bản.
+
+### Tự tay chứng minh bằng Python + SQLite (phần 1)
+Tạo file sqli_demo.py, dán phần 1 dưới đây. Database nằm hoàn toàn trong bộ nhớ, không ảnh hưởng gì bên ngoài.
+~~~python
+import sqlite3
+
+conn = sqlite3.connect(":memory:")
+cur = conn.cursor()
+cur.execute("CREATE TABLE users (email TEXT, password TEXT, role TEXT)")
+cur.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+    ("admin@lab.local", "S3cret!", "admin"),
+    ("an@lab.local", "an123456", "customer"),
+])
+
+def login_unsafe(email, password):
+    sql = ("SELECT email, role FROM users WHERE email = '" + email +
+           "' AND password = '" + password + "'")
+    print("SQL chạy:", sql)
+    return cur.execute(sql).fetchone()
+~~~
+Giải thích từng dòng:
+• import sqlite3: thư viện database nhỏ có sẵn trong Python.
+• connect(":memory:"): tạo database tạm trong RAM, tắt chương trình là mất.
+• CREATE TABLE: tạo bảng users có 3 cột.
+• executemany: thêm 2 người dùng mẫu (dùng dấu ? nên an toàn).
+• login_unsafe: hàm đăng nhập VIẾT SAI, ghép chuỗi giống ví dụ JavaScript, và in ra câu SQL thực sự được chạy.
+• fetchone(): lấy dòng đầu tiên tìm được, hoặc None nếu không có.
+
+### Cách sửa: parameterized query (phần 2)
+Dán tiếp phần 2 vào CUỐI cùng file sqli_demo.py:
+~~~python
+def login_safe(email, password):
+    sql = "SELECT email, role FROM users WHERE email = ? AND password = ?"
+    return cur.execute(sql, (email, password)).fetchone()
+
+payload = "' OR 1=1--"
+print("UNSAFE:", login_unsafe(payload, "bat-ky"))
+print("SAFE:  ", login_safe(payload, "bat-ky"))
+~~~
+Giải thích:
+• Dấu ? là chỗ giữ chỗ (placeholder). Dữ liệu được gửi RIÊNG, database luôn coi nó là dữ liệu, không bao giờ là lệnh.
+• payload: chuỗi tấn công giống trên Juice Shop.
+Chạy: python sqli_demo.py
+Kết quả mong đợi:
+SQL chạy: SELECT email, role FROM users WHERE email = '' OR 1=1--' AND password = 'bat-ky'
+UNSAFE: ('admin@lab.local', 'admin')
+SAFE:   None
+Bản unsafe trả về admin; bản safe trả về None vì không có ai có email đúng bằng chuỗi lạ đó.
+
+### Lỗi thường gặp
+• Triệu chứng: nhập ' OR 1=1-- trên Juice Shop nhưng không vào được.
+Nguyên nhân: gõ thiếu dấu cách, dùng dấu nháy cong ’ (do bộ gõ hoặc copy từ Word). Cách sửa: gõ tay bằng bàn phím tiếng Anh, dùng dấu nháy thẳng '.
+• Triệu chứng: Python báo "sqlite3.OperationalError: near ...: syntax error" khi tự thử payload khác.
+Nguyên nhân: payload làm câu SQL sai cú pháp. Đó cũng là một DẤU HIỆU của SQLi: dữ liệu nhập làm vỡ câu lệnh.
+• Dấu hiệu khi test (trên môi trường được phép): nhập một dấu ' vào ô tìm kiếm mà app trả lỗi 500 hoặc hiện chữ "SQL", "syntax", "SQLITE_ERROR" thì nên báo bug để đội phát triển kiểm tra.
+• Sai lầm: nghĩ chặn dấu ' ở giao diện là đủ. Kẻ xấu gọi API trực tiếp được; cách sửa đúng là parameterized query ở phía server.
+
+PRACTICE: Chạy sqli_demo.py. Sau đó thử thêm 2 payload vào biến payload: "an@lab.local'--" và "' OR role='admin'--". Ghi lại kết quả của bản UNSAFE và SAFE cho mỗi payload, và giải thích bằng lời vì sao bản SAFE không bị ảnh hưởng.
+Q: Trong payload ' OR 1=1-- , phần -- có tác dụng gì?
+- Trừ hai đơn vị khỏi kết quả
++ Biến phần còn lại của câu SQL thành chú thích, bỏ qua kiểm tra password
+- Xóa bảng Users
+Q: Cách sửa SQL Injection đúng nhất là gì?
+- Ẩn ô nhập liệu khi người dùng gõ dấu nháy
++ Dùng parameterized query (placeholder như ?) ở phía server
+- Đổi tên bảng Users thành tên khó đoán
+Q: Khi nhập một dấu ' vào ô tìm kiếm, app trả về lỗi có chữ SQLITE_ERROR. Điều đó gợi ý gì?
++ Dữ liệu nhập có thể đang được ghép thẳng vào câu SQL, nên báo bug
+- App hoạt động hoàn toàn bình thường
+- Trình duyệt bị lỗi
+
+## LESSON security-basics-05 | Cross-Site Scripting (XSS)
+
+### XSS là gì?
+Hãy tưởng tượng bảng tin của khu chung cư: ai cũng dán được giấy lên. Nếu bảng tin là "bảng tin thần kỳ", tờ giấy ghi "mở cửa mọi căn hộ" sẽ được THỰC HIỆN chứ không chỉ để đọc.
+XSS (Cross-Site Scripting) xảy ra khi website hiển thị dữ liệu người dùng nhập mà không mã hóa, khiến trình duyệt hiểu nó là CODE JavaScript và chạy.
+Hậu quả: đánh cắp phiên đăng nhập, giả mạo nội dung, thực hiện hành động thay nạn nhân.
+XSS cũng thuộc nhóm A03 Injection trong OWASP Top 10 bản 2021.
+
+### Ba loại XSS
+~~~text
+Loại       | Dữ liệu độc nằm ở đâu?               | Ví dụ
+-----------+--------------------------------------+--------------------------------
+Reflected  | Trong request (URL, form), server    | Link tìm kiếm chứa payload,
+           | "phản chiếu" lại ngay trong trang    | nạn nhân bấm vào là dính
+Stored     | Được LƯU trong database rồi hiển thị | Bình luận chứa payload, ai mở
+           | cho người khác                       | trang bình luận cũng dính
+DOM-based  | JavaScript phía trình duyệt tự lấy   | Code đọc location.hash rồi gán
+           | dữ liệu (URL, hash) đưa vào trang    | vào innerHTML
+~~~
+• Stored nguy hiểm nhất vì ảnh hưởng nhiều người mà không cần bấm link.
+• Tester cần thử ở mọi nơi dữ liệu người dùng được HIỂN THỊ lại: tìm kiếm, tên hồ sơ, bình luận, tên file upload, thông báo lỗi.
+
+### Thực hành DOM XSS trên Juice Shop (localhost)
+1. Mở http://localhost:3000.
+2. Bấm biểu tượng kính lúp, dán payload dưới đây vào ô tìm kiếm, bấm Enter.
+~~~text
+<iframe src="javascript:alert(`xss`)">
+~~~
+Giải thích payload:
+• <iframe …>: thẻ HTML nhúng một khung.
+• src="javascript:…": thay vì địa chỉ trang web, khung chạy một đoạn JavaScript.
+• alert(`xss`): hiện hộp thoại chữ "xss". Đây là cách "chứng minh vô hại" rằng code của ta đã chạy được.
+Kết quả mong đợi: một hộp thoại nhỏ có chữ xss hiện lên, và Juice Shop báo đã giải thử thách DOM XSS.
+Một payload kinh điển khác để tìm hiểu: <script>alert(1)</script>. Nhiều trang hiện đại không chạy thẻ script chèn qua innerHTML, nên payload iframe/img hay được dùng hơn.
+
+### Vì sao bị: innerHTML và textContent
+~~~js
+const params = new URLSearchParams(window.location.search);
+const keyword = params.get('q');
+
+// NGUY HIỂM: trình duyệt hiểu keyword là HTML
+document.getElementById('result').innerHTML = 'Bạn tìm: ' + keyword;
+
+// AN TOÀN: trình duyệt hiển thị keyword như chữ thường
+document.getElementById('result').textContent = 'Bạn tìm: ' + keyword;
+~~~
+Giải thích từng dòng:
+• Dòng 1–2: lấy giá trị tham số q trên URL, ví dụ ?q=apple thì keyword là "apple".
+• innerHTML: đưa chuỗi vào trang dưới dạng HTML. Nếu keyword chứa thẻ <iframe> hay <img onerror=…>, thẻ đó được tạo thật và code chạy.
+• textContent: đưa chuỗi vào dưới dạng chữ thuần. Dấu < > hiện ra y nguyên, không thành thẻ.
+Tester không cần sửa code, nhưng hiểu điều này giúp viết bug report rõ ràng: "dữ liệu tại ô X được render như HTML".
+
+### Cách phòng thủ: mã hóa đầu ra (output encoding)
+Ví dụ bằng Python, tạo file escape_demo.py:
+~~~python
+import html
+
+user_input = '<script>alert("xss")</script>'
+safe = html.escape(user_input)
+
+print("Gốc:      ", user_input)
+print("Đã mã hóa:", safe)
+print("<p>Bạn tìm: " + safe + "</p>")
+~~~
+Giải thích từng dòng:
+• import html: thư viện có sẵn để xử lý ký tự HTML.
+• user_input: giả lập dữ liệu độc người dùng gõ.
+• html.escape(): đổi < thành &lt;, > thành &gt;, " thành &quot;. Trình duyệt sẽ HIỂN THỊ các ký tự này chứ không coi là thẻ.
+Chạy: python escape_demo.py
+Kết quả mong đợi:
+Gốc:       <script>alert("xss")</script>
+Đã mã hóa: &lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;
+<p>Bạn tìm: &lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</p>
+Các lớp phòng thủ khác: dùng framework tự escape (React, Angular), header Content-Security-Policy, cookie HttpOnly.
+
+### Payload "hiền" để kiểm tra hằng ngày
+Trên môi trường test của công ty (khi được phép), bạn không cần alert. Dùng payload đánh dấu vô hại để xem dữ liệu có bị render thành HTML không:
+~~~text
+<b>xss-test-01</b>
+"><i>xss-test-02</i>
+<img src=x alt="xss-test-03">
+Nguyễn Văn A <u>gạch chân</u>
+~~~
+Cách đọc kết quả:
+• Thấy chữ in đậm/in nghiêng/gạch chân thật sự: dữ liệu đang được render như HTML, có nguy cơ XSS, ghi bug.
+• Thấy nguyên văn các ký tự < > trên màn hình: dữ liệu đã được mã hóa đúng.
+• Mã xss-test-01, 02… giúp tìm lại chỗ đã thử trong database/log và dễ dọn dẹp sau khi test.
+
+### Lỗi thường gặp
+• Triệu chứng: dán payload mà không thấy hộp thoại.
+Nguyên nhân: copy từ tài liệu bị đổi dấu nháy/dấu backtick thành ký tự khác, hoặc trình duyệt đã chặn popup. Cách sửa: gõ lại bằng bàn phím, kiểm tra Console (F12) có lỗi gì.
+• Triệu chứng: thấy dấu < > hiển thị trên màn hình và kết luận "có XSS".
+Nguyên nhân: hiểu ngược. Hiện nguyên văn là ĐÃ AN TOÀN.
+• Triệu chứng: payload stored XSS còn nằm lại trong môi trường test làm phiền người khác.
+Cách sửa: luôn dùng payload vô hại, ghi lại chỗ đã nhập và dọn dẹp sau khi test.
+• Triệu chứng: dùng payload lấy cookie gửi ra ngoài "cho giống thật".
+Đây là hành vi nguy hiểm, không bao giờ làm. alert hoặc thẻ đánh dấu là đủ để chứng minh lỗi.
+
+PRACTICE: Trên Juice Shop localhost: (1) thực hiện DOM XSS bằng payload iframe ở ô tìm kiếm; (2) đăng nhập bằng tài khoản bạn tạo, thử các payload "hiền" ở ô tên người dùng (Profile) và ghi lại chỗ nào render HTML; (3) chạy escape_demo.py và giải thích kết quả.
+Q: Loại XSS nào lưu payload trong database và ảnh hưởng mọi người mở trang?
+- Reflected XSS
++ Stored XSS
+- DOM-based XSS
+Q: Nhập <b>test</b> vào ô Tên, trang hiển thị chữ test in đậm. Kết luận nào hợp lý nhất?
+- Trang đã mã hóa đầu ra đúng
++ Dữ liệu đang được render như HTML, cần báo nguy cơ XSS
+- Trình duyệt tự in đậm chữ test
+Q: Hàm html.escape() trong Python làm gì?
++ Đổi các ký tự đặc biệt như < > " thành dạng mã HTML để hiển thị như chữ
+- Xóa toàn bộ dữ liệu người dùng nhập
+- Mã hóa mật khẩu trước khi lưu
+
+## LESSON security-basics-06 | Phân quyền, xác thực và phiên đăng nhập
+
+### Phân quyền sai (Broken Access Control) và IDOR
+Bạn ở phòng 101 của khách sạn. Thẻ từ của bạn lẽ ra chỉ mở phòng 101. Nếu bạn đổi số trên thẻ thành 102 mà vẫn mở được: đó là lỗi phân quyền.
+IDOR (Insecure Direct Object Reference) là dạng phổ biến nhất:
+• URL hoặc API dùng id dễ đoán: /orders/1001, /rest/basket/2.
+• Server chỉ kiểm tra "đã đăng nhập chưa", quên kiểm tra "đơn này có phải của BẠN không".
+Cách test cơ bản: dùng 2 tài khoản A và B (đều là tài khoản thử của bạn). Đăng nhập A, thử truy cập dữ liệu của B. Mong đợi: bị từ chối (403 hoặc 404).
+Nhóm OWASP A01, đứng đầu danh sách 2021.
+
+### Thử IDOR với giỏ hàng Juice Shop bằng curl
+1. Đăng nhập Juice Shop (localhost) bằng tài khoản bạn tạo, thêm 1 sản phẩm vào giỏ.
+2. F12 > Application > Local Storage > http://localhost:3000, copy giá trị khóa token (hoặc xem request /rest/basket/… trong tab Network, mục Authorization).
+3. Trong PowerShell, lưu token vào biến rồi gọi API:
+~~~bash
+$TOKEN = "dán_token_của_bạn_vào_đây"
+curl.exe -s -H "Authorization: Bearer $TOKEN" http://localhost:3000/rest/basket/1
+curl.exe -s -H "Authorization: Bearer $TOKEN" http://localhost:3000/rest/basket/2
+~~~
+Giải thích:
+• Dòng 1: tạo biến $TOKEN trong PowerShell để không phải dán chuỗi dài nhiều lần.
+• -s: chế độ im lặng, chỉ in kết quả. -H: thêm header Authorization dạng Bearer token.
+• Dòng 2 và 3: lấy giỏ hàng có id 1 và id 2.
+Kết quả mong đợi: một trong hai là giỏ của bạn; nếu giỏ còn lại (của người khác) cũng trả về dữ liệu với "UserId" khác của bạn, đó chính là lỗi IDOR mà Juice Shop cố tình cài.
+
+### Script Python thử nhiều id (chỉ cho localhost)
+Tạo file idor_check.py:
+~~~python
+import json
+import urllib.request
+import urllib.error
+
+BASE = "http://localhost:3000"      # CHỈ app lab trên máy bạn
+TOKEN = "dán_token_của_bạn_vào_đây"
+
+for basket_id in range(1, 6):
+    req = urllib.request.Request(
+        f"{BASE}/rest/basket/{basket_id}",
+        headers={"Authorization": f"Bearer {TOKEN}"})
+    try:
+        with urllib.request.urlopen(req) as resp:
+            data = json.load(resp)
+            owner = data.get("data", {}).get("UserId")
+            print(basket_id, resp.status, "UserId =", owner)
+    except urllib.error.HTTPError as e:
+        print(basket_id, e.code, "bị từ chối")
+~~~
+Giải thích từng phần:
+• range(1, 6): thử lần lượt id 1, 2, 3, 4, 5. Chỉ thử vài id, không quét hàng loạt.
+• Request(…, headers=…): tạo request kèm token của bạn.
+• json.load(resp): đọc dữ liệu JSON; lấy trường UserId để biết giỏ của ai.
+• except HTTPError: server từ chối (401/403/404) thì in mã lỗi.
+Chạy: python idor_check.py. Kết quả mong đợi: nhiều dòng "200 UserId = …" với UserId khác nhau, chứng tỏ API không kiểm tra quyền sở hữu.
+
+### Kiểm thử xác thực (đăng nhập, mật khẩu)
+~~~text
+CHECKLIST XÁC THỰC (dùng tài khoản thử, môi trường được phép)
+[ ] Đăng ký được với mật khẩu yếu như 123456 hoặc password không?
+[ ] Sai mật khẩu nhiều lần có bị khóa / có CAPTCHA / bị làm chậm không?
+[ ] Thông báo lỗi có tiết lộ email tồn tại không?
+      Tốt: "Email hoặc mật khẩu không đúng"
+      Xấu: "Email này chưa đăng ký" / "Sai mật khẩu"
+[ ] Link quên mật khẩu có hết hạn? Dùng lại lần 2 được không?
+[ ] Đổi mật khẩu có yêu cầu nhập mật khẩu cũ không?
+[ ] Mật khẩu có xuất hiện trong URL, log, response API không?
+~~~
+Giải thích: mỗi dòng là một câu hỏi Có/Không. Kết quả "có" ở dòng nguy hiểm (ví dụ thông báo tiết lộ email tồn tại) cần ghi thành bug kèm bước tái hiện.
+Thông báo lỗi khác nhau giúp kẻ xấu dò ra danh sách email thật của hệ thống.
+
+### Phiên đăng nhập và cờ của cookie
+Sau khi đăng nhập, server cấp "vé" phiên (session id hoặc token). Vé thường nằm trong cookie, ví dụ header trả về:
+~~~text
+Set-Cookie: session=8f3a...; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=1800
+~~~
+Giải thích từng cờ:
+• HttpOnly: JavaScript không đọc được cookie, giảm thiệt hại nếu có XSS.
+• Secure: chỉ gửi cookie qua HTTPS, không bị lộ trên mạng không mã hóa.
+• SameSite=Lax hoặc Strict: hạn chế web lạ gửi request kèm cookie của bạn (chống CSRF).
+• Max-Age=1800: phiên hết hạn sau 1800 giây (30 phút).
+Xem ở F12 > Application > Cookies: các cột HttpOnly, Secure, SameSite. Cookie phiên thiếu HttpOnly hoặc Secure (trên HTTPS) là phát hiện đáng báo.
+
+### Đăng xuất có thật sự hủy phiên?
+Kịch bản test:
+1. Đăng nhập, copy token như slide trước.
+2. Gọi một API cần đăng nhập, xác nhận trả 200.
+3. Bấm Logout trên giao diện.
+4. Gọi lại đúng API đó với token cũ:
+~~~bash
+curl.exe -s -o NUL -w "%{http_code}" -H "Authorization: Bearer $TOKEN" http://localhost:3000/rest/basket/1
+~~~
+Giải thích:
+• -o NUL: bỏ phần nội dung (NUL là "thùng rác" của Windows).
+• -w "%{http_code}": chỉ in ra mã trạng thái HTTP.
+Mong đợi ở hệ thống an toàn: 401 sau khi logout. Nếu vẫn 200, token cũ vẫn dùng được: ghi nhận "Logout không vô hiệu hóa phiên phía server". Với Juice Shop (cố tình có lỗi) bạn có thể thấy kết quả này.
+
+### Lỗi thường gặp
+• Triệu chứng: mọi request đều trả 401.
+Nguyên nhân: token copy thiếu ký tự, còn dấu ngoặc kép, hoặc token đã hết hạn. Cách sửa: đăng nhập lại và copy lại token, kiểm tra không có dấu " ở đầu/cuối.
+• Triệu chứng: PowerShell báo lỗi với ký tự $ hoặc % trong lệnh.
+Cách sửa: đặt giá trị trong dấu ngoặc kép như ví dụ; chạy đúng trong PowerShell (không phải cmd).
+• Triệu chứng: test IDOR bằng một tài khoản duy nhất và kết luận "không có lỗi".
+Cách sửa: luôn dùng 2 tài khoản thử để có dữ liệu "của người khác" hợp lệ.
+• Sai lầm nghiêm trọng: thử IDOR trên tài khoản khách hàng thật. Chỉ dùng tài khoản test do bạn tạo trong môi trường được phép.
+
+PRACTICE: Trên Juice Shop localhost, tạo 2 tài khoản (A và B), mỗi tài khoản thêm sản phẩm vào giỏ. Dùng token của A để thử đọc giỏ của B bằng curl.exe hoặc idor_check.py. Sau đó làm kịch bản "Logout có hủy phiên" và ghi kết quả (mã HTTP trước và sau logout).
+Q: IDOR là lỗi gì?
+- Mật khẩu được lưu không mã hóa
++ Đổi id trong URL/API là truy cập được dữ liệu không thuộc về mình
+- Website không có HTTPS
+Q: Cờ HttpOnly trên cookie có tác dụng gì?
+- Cookie chỉ gửi qua HTTPS
++ JavaScript trên trang không đọc được cookie
+- Cookie tự hết hạn sau 1 giờ
+Q: Sau khi logout, gọi API bằng token cũ vẫn trả về 200. Đây là gì?
+- Hành vi đúng
++ Lỗi: phiên chưa bị vô hiệu hóa phía server
+- Lỗi của curl
+
+## LESSON security-basics-07 | Dữ liệu nhạy cảm, quét ZAP và báo cáo lỗi bảo mật
+
+### Dữ liệu nhạy cảm hay bị lộ ở đâu?
+Giống để quên chìa khóa dưới tấm thảm chùi chân: không ai "phá" gì, nhưng ai cũng lấy được.
+Những chỗ tester nên soi:
+• File JavaScript tải về trình duyệt: có chứa API key, mật khẩu, đường dẫn nội bộ không?
+• Thông báo lỗi: có hiện stack trace, tên bảng, câu SQL, phiên bản server không?
+• Response API: trả THỪA trường như passwordHash, số điện thoại của người khác?
+• URL: token hoặc mật khẩu nằm trong URL sẽ bị lưu vào lịch sử, log.
+• Log, file sao lưu, thư mục /backup, /ftp để mở công khai.
+Thuộc các nhóm A02 Cryptographic Failures, A05 Security Misconfiguration trong OWASP 2021.
+
+### Thử gây lỗi và tìm bí mật trên Juice Shop
+~~~bash
+curl.exe -s -i "http://localhost:3000/rest/products/search?q='"
+curl.exe -s http://localhost:3000/ftp/
+~~~
+Giải thích:
+• Lệnh 1: gửi một dấu ' vào API tìm kiếm; -i in cả headers để thấy mã trạng thái. Thường trả về lỗi 500 kèm chi tiết lỗi database (ví dụ chữ SQLITE_ERROR): vừa là dấu hiệu SQLi, vừa là lộ thông tin lỗi.
+• Lệnh 2: thư mục /ftp của Juice Shop để mở công khai, liệt kê nhiều file lẽ ra không ai được thấy.
+Thêm một cách tìm bí mật trong JavaScript: F12 > Sources, bấm Ctrl + Shift + F, tìm các từ apiKey, secret, password, token, admin.
+Kết quả mong đợi: tìm thấy các đoạn đáng ngờ để báo lại. Không dùng thông tin tìm được để truy cập thêm.
+
+### Quét tự động với OWASP ZAP (baseline scan)
+ZAP là công cụ quét bảo mật miễn phí. Baseline scan chỉ "đi dạo và quan sát" (thụ động), không tấn công, phù hợp cho người mới.
+Juice Shop đang chạy ở cổng 3000 (lệnh docker run -p 3000:3000). Mở PowerShell ở một thư mục trống, chạy:
+~~~bash
+docker run --rm -v "${PWD}:/zap/wrk/:rw" -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://host.docker.internal:3000 -r zap-report.html
+~~~
+Giải thích từng phần:
+• -v "${PWD}:/zap/wrk/:rw": nối thư mục hiện tại vào container để ZAP ghi được file báo cáo ra máy bạn.
+• ghcr.io/zaproxy/zaproxy:stable: image chính thức của ZAP.
+• zap-baseline.py: kịch bản quét baseline có sẵn trong image.
+• -t http://host.docker.internal:3000: mục tiêu. host.docker.internal là tên đặc biệt để container gọi về máy của bạn. TUYỆT ĐỐI không đổi thành website của người khác.
+• -r zap-report.html: xuất báo cáo HTML.
+Thời gian chạy: vài phút. Lệnh có thể kết thúc với mã thoát khác 0 khi tìm thấy cảnh báo, đó không phải lỗi lệnh.
+
+### Đọc kết quả ZAP
+Cuối log, ZAP in danh sách và dòng tổng kết tương tự (ví dụ minh họa, số liệu sẽ khác):
+~~~text
+WARN-NEW: Content Security Policy (CSP) Header Not Set [10038] x 4
+WARN-NEW: Cross-Domain Misconfiguration [10098] x 6
+WARN-NEW: Timestamp Disclosure - Unix [10096] x 2
+FAIL-NEW: 0  FAIL-INPROG: 0  WARN-NEW: 9  WARN-INPROG: 0  INFO: 0  IGNORE: 0  PASS: 56
+~~~
+Cách đọc:
+• PASS: kiểm tra đạt. WARN: cảnh báo cần xem xét. FAIL: vi phạm quy tắc được cấu hình là nghiêm trọng.
+• Số trong ngoặc vuông (ví dụ 10038) là mã quy tắc, tra trên trang của ZAP để đọc giải thích và cách sửa.
+• "x 4": số URL bị ảnh hưởng.
+Mở file zap-report.html bằng trình duyệt để xem chi tiết từng URL. Công cụ có thể báo nhầm (false positive): tester phải tự kiểm tra lại trước khi báo bug.
+
+### Viết bug report bảo mật có trách nhiệm
+~~~text
+Tiêu đề:     [Security][A01] Người dùng xem được giỏ hàng của người khác qua /rest/basket/{id}
+Môi trường:  Juice Shop local (http://localhost:3000), build ngày 14/11
+Mức độ:      High (lộ dữ liệu cá nhân, khai thác dễ)
+Điều kiện:   Hai tài khoản test: userA@lab.local, userB@lab.local
+Các bước:
+  1. Đăng nhập userA, lấy token từ Local Storage
+  2. Gọi GET /rest/basket/2 (giỏ của userB) với token của userA
+Kết quả thực tế: 200 OK, trả về sản phẩm và UserId của userB
+Kết quả mong đợi: 403 Forbidden hoặc 404 Not Found
+Ảnh hưởng:   Lộ dữ liệu mua hàng của mọi người dùng (Confidentiality)
+Gợi ý sửa:   Server kiểm tra basket.UserId == user đang đăng nhập
+Bằng chứng:  Ảnh chụp, request/response (ĐÃ CHE token)
+~~~
+Giải thích: tiêu đề có mã OWASP; bước tái hiện ngắn và chính xác; ghi rõ ảnh hưởng; che toàn bộ token, mật khẩu, dữ liệu cá nhân trong bằng chứng.
+
+### Quy tắc báo cáo có trách nhiệm
+• Báo qua kênh nội bộ được chỉ định (Jira dự án bảo mật, email đội security), đặt chế độ hạn chế người xem nếu có.
+• KHÔNG đăng lên nhóm chat chung, mạng xã hội, hay kể cho người ngoài trước khi lỗi được sửa.
+• Dừng lại ở mức chứng minh được lỗi; không khai thác sâu thêm, không tải dữ liệu về máy.
+• Nếu vô tình phát hiện lỗ hổng ở hệ thống của tổ chức khác, không thử thêm; tìm kênh báo cáo chính thức của họ (ví dụ trang security.txt hoặc chương trình bug bounty) và làm theo quy định của chương trình.
+• Sau khi đội phát triển sửa, chạy lại test để xác nhận (retest) và ghi kết quả vào ticket.
+
+### Lỗi thường gặp
+• Triệu chứng: ZAP báo không kết nối được tới host.docker.internal:3000.
+Nguyên nhân: Juice Shop chạy với -p 127.0.0.1:3000:3000 hoặc chưa chạy. Cách sửa: chạy lại Juice Shop với -p 3000:3000; hoặc đặt hai container chung mạng: docker network create seclab, chạy Juice Shop với --network seclab --name juice, rồi chạy ZAP với --network seclab và -t http://juice:3000.
+• Triệu chứng: quét xong nhưng không thấy file zap-report.html.
+Nguyên nhân: thiếu tham số -v hoặc thư mục không cho ghi. Cách sửa: chạy ở một thư mục trong ổ của bạn (ví dụ C:\lab\zap), kiểm tra lại phần -v.
+• Triệu chứng: trên Linux, host.docker.internal không tồn tại.
+Cách sửa: thêm --add-host=host.docker.internal:host-gateway vào lệnh docker run của ZAP.
+• Sai lầm nghiêm trọng: đổi -t sang website thật "để thử cho biết". Đây là quét trái phép. Chỉ quét localhost hoặc môi trường có cho phép bằng văn bản.
+
+PRACTICE: Chạy ZAP baseline scan vào Juice Shop trên máy bạn, mở zap-report.html, chọn 2 cảnh báo, tự kiểm tra lại bằng DevTools hoặc curl.exe, rồi viết 1 bug report bảo mật hoàn chỉnh theo mẫu (nhớ che token và dữ liệu nhạy cảm).
+Q: ZAP baseline scan khác quét chủ động (active scan) ở điểm nào?
+- Baseline scan tấn công mạnh hơn
++ Baseline scan chủ yếu quan sát thụ động, không gửi payload tấn công
+- Baseline scan chỉ chạy được trên Linux
+Q: Khi đính kèm request/response làm bằng chứng trong bug report, bạn cần làm gì?
+- Giữ nguyên token để dev thử lại nhanh hơn
++ Che token, mật khẩu và dữ liệu cá nhân trước khi đính kèm
+- Đăng lên nhóm chat chung để mọi người cùng xem
+Q: ZAP báo một cảnh báo WARN. Tester nên làm gì trước khi tạo bug?
+- Tạo bug ngay với mức Critical
+- Bỏ qua vì WARN không quan trọng
++ Tự kiểm tra lại để loại trừ báo nhầm (false positive), rồi mới báo
