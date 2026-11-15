@@ -49,8 +49,14 @@ export function makeFunIsland(W, ctx){
     for(const [S,face] of [[SA,Math.atan2(ux,uz)],[SB,Math.atan2(-ux,-uz)]]){ k.add(new THREE.BoxGeometry(12,.4,10), M.white, S.x,1.0,S.z, 0,face,0); k.add(new THREE.BoxGeometry(13,.4,11), M.teal, S.x,7.2,S.z, 0,face,0); addPlat(S.x,S.z,face,6,5,1.2);
       for(const sx of [-1,1]) for(const sz of [-1,1]){ const c=Math.cos(face), s=Math.sin(face), lx=sx*5.5, lz=sz*4.5, x=S.x+lx*c+lz*s, z=S.z-lx*s+lz*c; k.add(new THREE.CylinderGeometry(.25,.3,7.2,10), M.steel, x,3.6,z); circles.push({x,z,r:.3}); }
       k.add(new THREE.CylinderGeometry(2.2,2.2,.6,24), M.dark, S.x+ux*(S===SA?3:-3),6.4,S.z+uz*(S===SA?3:-3)); }
-    const p0={x:Math.cos(aA)*(eA-7), z:Math.sin(aA)*(eA-7)}, L=Math.hypot(SA.x-p0.x, SA.z-p0.z), mx=(SA.x+p0.x)/2, mz=(SA.z+p0.z)/2, rot=Math.atan2(SA.x-p0.x, SA.z-p0.z);
+    // S-GFX (15/11): đầu cầu phía đảo phải nằm NGOÀI chân toà tháp Brand QA – trước bắt đầu ở mép đảo −7 m, lọt vào trong khối toà (hộp va chạm z tới 67,3)
+    // → đi thẳng ra cầu bị toà chặn, không lên được ga cáp treo. Lùi đầu cầu ra tới chỗ trống đầu tiên (thường là bệ đá cao .6 m trước toà → bước lên cầu 1,1 m được)
+    let r0=eA-7; const hitB=(x,z)=>boxes.some(b=>b.y0===undefined && x>b.x0-.7 && x<b.x1+.7 && z>b.z0-.7 && z<b.z1+.7); while(r0<eA-1.5 && hitB(Math.cos(aA)*r0, Math.sin(aA)*r0)) r0+=.25;
+    const p0={x:Math.cos(aA)*r0, z:Math.sin(aA)*r0}, L=Math.hypot(SA.x-p0.x, SA.z-p0.z), mx=(SA.x+p0.x)/2, mz=(SA.z+p0.z)/2, rot=Math.atan2(SA.x-p0.x, SA.z-p0.z);
     k.add(new THREE.BoxGeometry(3,.25,L), M.wood, mx,.95,mz, 0,rot,0); addPlat(mx,mz,rot,1.5,L/2,1.1);
+    // bậc gỗ nếu mặt đứng ngay trước đầu cầu thấp hơn sàn cầu quá .6 m (mỗi bậc ≤ .3 m)
+    { const ux0=(SA.x-p0.x)/L, uz0=(SA.z-p0.z)/L, gb=W.groundAt?W.groundAt(p0.x-ux0*.8,p0.z-uz0*.8):1.1;
+      if(1.1-gb>.6){ const n=Math.ceil((1.1-gb)/.3)-1; for(let j=0;j<n;j++){ const h=1.1-(1.1-gb)*(j+1)/(n+1), d=.3+j*.6, x=p0.x-ux0*d, z=p0.z-uz0*d; k.add(new THREE.BoxGeometry(3,h-gb+.3,.6), M.wood, x,(h+gb-.3)/2,z, 0,rot,0); addPlat(x,z,rot,1.5,.31,h); } } }
     for(let t=0;t<L;t+=3){ const x=p0.x+(SA.x-p0.x)*t/L, z=p0.z+(SA.z-p0.z)*t/L; k.add(new THREE.CylinderGeometry(.12,.12,3,6), M.dark, x-lat[0]*1.4,-.5,z-lat[1]*1.4); k.add(new THREE.CylinderGeometry(.12,.12,3,6), M.dark, x+lat[0]*1.4,-.5,z+lat[1]*1.4); }
     // trụ giữa (trong biển)
     k.add(new THREE.CylinderGeometry(1.6,2.4,TWR.h+6,12), M.steel, TWR.x, TWR.h/2-3, TWR.z); k.add(new THREE.BoxGeometry(10,1.2,1.2), M.steel, TWR.x, TWR.h-1, TWR.z, 0,Math.atan2(lat[0],lat[1]),0);
@@ -93,7 +99,10 @@ export function makeFunIsland(W, ctx){
     for(let i=0;i<CN;i+=1){ const p=cPts[i], t=cTan[i]; const yaw=Math.atan2(t.x,t.z); k.add(new THREE.BoxGeometry(1.3,.08,.18), M.dark, p.x,p.y-.08,p.z, 0,yaw,0); }
     for(let i=0;i<CN;i+=5){ const p=cPts[i]; if(p.y-Y<1.6) continue; k.add(new THREE.CylinderGeometry(.18,.24,p.y-Y,8), M.steel, p.x,(p.y+Y)/2-.1,p.z); circles.push({x:p.x, z:p.z, r:.28}); }
     // ga tàu lượn
-    k.add(new THREE.BoxGeometry(18,.5,4), M.white, 33,Y+.9,258.5); addPlat(33,258.5,0,9,2,Y+1.15); k.add(new THREE.BoxGeometry(19,.3,9), M.purple, 33,Y+5.2,262); for(const x of [24.5,41.5]) for(const z of [258,266]){ k.add(new THREE.CylinderGeometry(.18,.18,4.2,8), M.steel, x,Y+3,z); circles.push({x,z,r:.25}); }
+    k.add(new THREE.BoxGeometry(18,.5,4), M.white, 33,Y+.9,258.5); addPlat(33,258.5,0,9,2,Y+1.15);
+    // S-GFX (15/11): 3 bậc lên sân ga (cao 1,15 m) ở đầu Tây + chặn gầm sân ga (trước đi lọt vào trong khối sân ga)
+    for(let j=0;j<3;j++){ const h=Y+.29*(j+1), x=22.5+j*.6; k.add(new THREE.BoxGeometry(.6,h-Y+.65,3), M.white, x,(h+Y-.65)/2,258.5); addPlat(x,258.5,0,.31,1.5,h); }
+    boxes.push({x0:24, x1:42, z0:256.5, z1:260.5, y0:Y-2, y1:Y+.75, msg:'🎢 Sân ga tàu lượn – lên bằng bậc ở đầu phía Tây'}); k.add(new THREE.BoxGeometry(19,.3,9), M.purple, 33,Y+5.2,262); for(const x of [24.5,41.5]) for(const z of [258,266]){ k.add(new THREE.CylinderGeometry(.18,.18,4.2,8), M.steel, x,Y+3,z); circles.push({x,z,r:.25}); }
     makeLabel('🎢 Tàu lượn Siêu Bug', 'Vé 25 💰 · dốc 24 m · xoắn ốc', {h:.6, x:33, y:Y+8, z:262, fade:80}); }
   const train=[0,1,2].map(i=>{ const g=new THREE.Group(); g.userData.dynamic=true; scene.add(g); const b=new THREE.Mesh(new THREE.BoxGeometry(1.4,.55,2.1), [M.yellow,M.blue,M.green][i]); b.position.y=.35; g.add(b); const s=new THREE.Mesh(new THREE.BoxGeometry(1.2,.6,.25), M.dark); s.position.set(0,.8,-.7); g.add(s); const nose=new THREE.Mesh(new THREE.BoxGeometry(1.42,.3,.3), M.red); nose.position.set(0,.5,1.05); g.add(nose); return g; });
   const CO={s:ST0+6, v:0, state:'dwell', t:8, riding:false};

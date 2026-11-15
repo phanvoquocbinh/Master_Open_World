@@ -3,6 +3,7 @@
 //  🌲 Rừng ~2.000 cây (2 InstancedMesh) · 🏮 PHỐ CỔ RIVERSIDE: nhà nhiều màu kiểu Hội An hai bên sông, đèn lồng giăng phố
 //     (quầng sáng ban đêm), 2 cầu gỗ qua sông, chợ đêm, người dạo phố · 🛕 Chòi ngắm cảnh trên đỉnh núi
 // Địa hình: hàm độ cao (nhiễu cố định) lấy mẫu sẵn thành lưới 2 m → lưới vẽ và mặt đất va chạm khớp nhau tuyệt đối.
+import { createGFX, Kit as GKit } from './gfxkit.js';
 export function makeHighland(W, ctx){
   const {S, save, transit} = ctx;
   const {THREE, scene, MAT, P, HOOK, INTER, PLACES, toast, clamp, lerp, circles, boxes, CITY, mergeGeometries, addPlat, lampPost, WATER_Y, EXTL, GLOW} = W;
@@ -30,6 +31,9 @@ export function makeHighland(W, ctx){
     h+=ridged(x*.0115+3.1, z*.0115-1.7, 5)*84*mt + fbm(x*.05,z*.05,3)*7*mt;
     const tw=ss(0,10,Math.min(x-TOWN.x0, TOWN.x1-x, z-TOWN.z0, TOWN.z1-z)); h=lerp(h, 1.3, tw*.97);
     const r=riverAt(x,z); if(r){ const k=ss(r.w*.5, r.w*.5+7, r.d); h=lerp(r.h-1.15, Math.max(h, r.h+.35), k); }
+    // S-GFX (15/11): phố cổ phẳng đúng cao độ mặt đá lát (1,3 m) từ dãy nhà tới tận bờ kè 2 bên sông – trước lòng sông khoét lan qua bờ
+    // làm đầu cầu gỗ trũng xuống mặt nước (rơi xuống sông, không lên được cầu) và mặt phố chỗ cao chỗ thấp so với lớp đá lát
+    if(z>TOWN.z0+1 && z<TOWN.z1-1 && ((x>172.8 && x<184.05) || (x>195.95 && x<207.2))) h=1.3;
     if(m<0) h=Math.min(h, lerp(-.5,-6.5,clamp(-m/16,0,1))); else if(m<7) h=lerp(.25, h, ss(0,7,m));
     return h; }
   const RES=2, NX=Math.round((NL.x1-NL.x0)/RES)+1, NZ=Math.round((NL.z1-NL.z0)/RES)+1, H=new Float32Array(NX*NZ);
@@ -103,24 +107,23 @@ export function makeHighland(W, ctx){
   const winMat=new THREE.MeshStandardMaterial({map:winTex, transparent:true, alphaTest:.5, emissive:0xffb35c, emissiveMap:winTex, emissiveIntensity:0, roughness:.6});
   const lanternMat=new THREE.MeshBasicMaterial({color:0xff4a2e, toneMapped:false}), lanternMat2=new THREE.MeshBasicMaterial({color:0xffc23d, toneMapped:false});
   const houses=[];
-  function house(x, z, face, w, d, floors, col){   // face: +1 mặt tiền nhìn +x, -1 nhìn -x
-    const fh=3.1, h=floors*fh, gy=Math.max(1.3, hAt(x,z)??1.3)-.05, g=new THREE.Group(); g.position.set(x,gy,z); town.add(g);
-    put(new THREE.BoxGeometry(d,h,w), sm(col,.85), 0,h/2,0, 0,0,0,g);
-    put(new THREE.BoxGeometry(d+.3,.25,w+.3), sm(0xf3eee2,.7), 0,fh,0, 0,0,0,g);
-    // mái ngói (lăng trụ)
-    const roofG=new THREE.CylinderGeometry(.01, (d+1.2)/Math.SQRT2, w+1.2, 4, 1); roofG.rotateY(Math.PI/4); roofG.rotateX(Math.PI/2); roofG.scale(1,.55,1);
-    put(roofG, sm(0xa8452c,.8), 0,h+(d+1.2)*.27,0, 0,0,0,g);
-    for(let f=0;f<floors;f++) for(let k=0;k<Math.max(1,Math.floor(w/2.6));k++){ const zz=-w/2+1.3+k*2.6+(w-Math.floor(w/2.6)*2.6)/2; const pw=new THREE.Mesh(new THREE.PlaneGeometry(1.5,1.6), winMat); pw.position.set(face*(d/2+.02), f*fh+1.7, zz); pw.rotation.y=face>0?Math.PI/2:-Math.PI/2; g.add(pw); }
-    if(floors>1){ put(new THREE.BoxGeometry(1.1,.12,w-.6), sm(0x6b4a2e,.7), face*(d/2+.55),fh+.1,0, 0,0,0,g); put(new THREE.BoxGeometry(.06,.8,w-.6), sm(0x3b2a1c,.6), face*(d/2+1.05),fh+.55,0, 0,0,0,g); }
-    put(new THREE.BoxGeometry(.12,2.2,1.4), sm(0x5a3a22,.6), face*(d/2+.03),1.1,0, 0,0,0,g);
-    for(const s of [-1,1]){ const lx=face*(d/2+.45), lz=s*(w/2-.8); put(new THREE.SphereGeometry(.24,10,8), s>0?lanternMat:lanternMat2, lx,2.55,lz, 0,0,0,g).castShadow=false; GLOW && GLOW.add(x+lx, gy+2.55, z+lz, 2.2, s>0?0xff5a3a:0xffc23d, 1); }
-    boxes.push({x0:x-d/2, x1:x+d/2, z0:z-w/2, z1:z+w/2}); houses.push(g); }
+  // S-GFX (15/11): nhà phố cổ dựng bằng gfxkit.townHouse – tường vữa có vân, cửa gỗ, mái hiên ngói trên cột gỗ, cửa sổ kính thấy phòng (đêm sáng đèn),
+  // cửa chớp, ban công gỗ, mái ngói âm dương 2 dốc. Cả 2 dãy nhà gộp chung 1 Kit → vài lượt vẽ cho cả phố (trước: ~15 mesh/nhà).
+  const GF=W.GFX||(W.GFX=createGFX({quality:W.QUAL||'low', msaa:!W.CINE})), hk=GKit();
+  function house(x, z, face, w, d, floors, col){   // face: +1 mặt tiền nhìn +x, -1 nhìn -x · (x,z) = tâm khối nhà
+    const gy=Math.max(1.3, hAt(x,z)??1.3)-.05, fl=floors>=3?[3.4,3.1,3.1]:[3.4,3.1];
+    const r=GF.build.townHouse(hk, {x:x+face*d/2, y:gy, z, ry:face>0?Math.PI/2:-Math.PI/2, w, d, floors:fl, wall:col, seed:houses.length*7+3, shutter:[0x2f6b4f,0x3f5f7a,0x6b3a2a][houses.length%3]});
+    for(const [cx,cz] of r.cols) circles.push({x:cx, z:cz, r:.2});
+    for(const s of [-1,1]){ const lx=face*(d/2+.75), lz=s*(w/2-.8); put(new THREE.SphereGeometry(.24,10,8), s>0?lanternMat:lanternMat2, x+lx,gy+2.95,z+lz).castShadow=false; GLOW && GLOW.add(x+lx, gy+2.95, z+lz, 2.2, s>0?0xff5a3a:0xffc23d, 1); }
+    boxes.push({x0:x-d/2, x1:x+d/2, z0:z-w/2, z1:z+w/2}); houses.push({x, z, w, d, face}); }
   // 2 dãy nhà dọc 2 phố (Tây sông: phố x=178 · Đông sông: phố x=202)
-  { let ci=0; for(const [sx, face, xs] of [[BX-4.8-5,1,BX-4.8],[202+4.8+5,-1,202+4.8]]){ for(let z=TOWN.z1-6; z>TOWN.z0+6; ){ const w=6+Math.floor(R()*3), d=9, fl=2+(R()<.45?1:0); house(sx, z-w/2, face, w, d, fl, COLS[(ci++)%COLS.length]); z-=w+.4; } } }
+  { let ci=0; for(const [sx, face, xs] of [[BX-4.8-5,1,BX-4.8],[202+4.8+5,-1,202+4.8]]){ for(let z=TOWN.z1-6; z>TOWN.z0+6; ){ const w=6+Math.floor(R()*3), d=9, fl=2+(R()<.45?1:0); house(sx, z-w/2, face, w, d, fl, COLS[(ci++)%COLS.length]); z-=w+.4; } }
+    hk.build(town); }
   // phố lát đá 2 bên sông + kè sông
   { const stone=(()=>{ const cv=document.createElement('canvas'); cv.width=cv.height=256; const x=cv.getContext('2d'); x.fillStyle='#a79d8b'; x.fillRect(0,0,256,256); for(let r=0;r<16;r++) for(let c=0;c<8;c++){ const v=140+R()*50|0; x.fillStyle=`rgb(${v},${v-8},${v-20})`; x.fillRect(c*32+(r%2)*16+1, r*16+1, 30, 14); } const t=new THREE.CanvasTexture(cv); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.colorSpace=THREE.SRGBColorSpace; t.repeat.set(2,(TOWN.z1-TOWN.z0)/8); return t; })();
     const stM=new THREE.MeshStandardMaterial({map:stone, roughness:.9});
-    for(const x of [BX, 202]){ const p=new THREE.Mesh(new THREE.PlaneGeometry(9.4, TOWN.z1-TOWN.z0-2), stM); p.rotation.x=-Math.PI/2; p.position.set(x,1.32,(TOWN.z0+TOWN.z1)/2); p.receiveShadow=true; town.add(p); }
+    for(const x of [BX, 202]){ const p=new THREE.Mesh(new THREE.PlaneGeometry(9.4, TOWN.z1-TOWN.z0-2), stM); p.rotation.x=-Math.PI/2; p.position.set(x,1.32,(TOWN.z0+TOWN.z1)/2); p.receiveShadow=true; town.add(p);
+      addPlat(x,(TOWN.z0+TOWN.z1)/2,0,4.7,(TOWN.z1-TOWN.z0-2)/2,1.32); }   // S-GFX: chân đứng đúng mặt đá lát (trước: theo địa hình → có chỗ lún chân xuống dưới mặt phố)
     const segs=[[TOWN.z0+1,-158-1.9],[-158+1.9,-131-1.9],[-131+1.9,TOWN.z1-1]];   // kè sông, chừa lối lên 2 cầu gỗ
     for(const x of [184.2, 195.8]) for(const [a,b] of segs){ put(new THREE.BoxGeometry(.5,.9,b-a), sm(0x8d8577,.9), x,1.0,(a+b)/2); boxes.push({x0:x-.3, x1:x+.3, z0:a, z1:b}); } }
   // 2 cầu gỗ cong qua sông (có đèn lồng)
@@ -130,13 +133,17 @@ export function makeHighland(W, ctx){
     for(const s of [-1,1]) for(let i=0;i<=8;i++){ const t=i/8, x=-6+t*12, y=1.35+Math.sin(t*Math.PI)*1.1; put(new THREE.BoxGeometry(.12,1,.12), red, x,y+.5,s*1.55, 0,0,0,g); }
     for(const s of [-1,1]){ const pts=[]; for(let i=0;i<=16;i++){ const t=i/16; pts.push(new THREE.Vector3(-6+t*12, 1.35+Math.sin(t*Math.PI)*1.1+1, s*1.55)); } put(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),24,.06,5), red, 0,0,0, 0,0,0,g); }
     for(const s of [-1,1]){ put(new THREE.SphereGeometry(.3,10,8), lanternMat, 0,3.2,s*1.55, 0,0,0,g).castShadow=false; GLOW && GLOW.add(190, 3.2, bz+s*1.55, 2.6, 0xff5a3a, 1); }
-    addPlat(185.2,bz,0,1.4,1.6,1.65); addPlat(190,bz,0,3.6,1.6,2.35); addPlat(194.8,bz,0,1.4,1.6,1.65); }
+    // S-GFX: sàn đứng bám đúng cung cầu (16 đoạn, mỗi bậc ≤ 0,25 m) – trước chỉ 3 tấm, bậc giữa cao 0,7 m > 0,65 m nên đi lọt xuống dưới mặt cầu
+    const NS=16; for(let i=0;i<NS;i++){ const t=(i+.5)/NS; addPlat(184+t*12, bz, 0, 12/NS/2+.03, 1.6, 1.35+Math.sin(t*Math.PI)*1.1+.09); }
+    for(const s of [-1,1]) boxes.push({x0:184.2, x1:195.8, z0:bz+s*1.55-.06, z1:bz+s*1.55+.06, msg:'🏮 Lan can cầu gỗ'});
+    boxes.push({x0:185, x1:195, z0:bz-1.7, z1:bz+1.7, y0:-9, y1:1.0, msg:'🌉 Gầm cầu thấp – lên cầu mà qua sông'}); }   // lội sông không chui xuyên mặt cầu
   // dây đèn lồng giăng ngang 2 phố
   { const lk=[]; for(const x of [BX, 202]) for(let z=TOWN.z1-8; z>TOWN.z0+8; z-=7){ const pts=[]; for(let i=0;i<=10;i++){ const t=i/10; pts.push(new THREE.Vector3(x-4.6+t*9.2, 5.6-Math.sin(t*Math.PI)*.8, z)); }
       put(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),12,.025,4), sm(0x222222,.6), 0,0,0);
       for(let i=1;i<10;i+=2){ const p=pts[i]; put(new THREE.SphereGeometry(.2,8,6), (i>>1)%2?lanternMat:lanternMat2, p.x,p.y-.3,p.z).castShadow=false; GLOW && GLOW.add(p.x,p.y-.3,p.z,1.6,(i>>1)%2?0xff5a3a:0xffc23d,.9); } } }
   // chợ đêm ven sông (bờ Đông)
-  { const cols=[0xb3322a,0xe8b33f,0x2f9e9a,0x7a4fd8,0xe8735a]; for(let i=0;i<5;i++){ const z=-138-i*6.5, x=198.6; put(new THREE.BoxGeometry(2.2,1,3.4), sm(0xf3eee2,.6), x,1.8,z); put(new THREE.BoxGeometry(2.8,.1,4), sm(cols[i],.6), x,3.6,z, 0,0,.12);
+  { const cols=[0xb3322a,0xe8b33f,0x2f9e9a,0x7a4fd8,0xe8735a], SZ=[-137,-143.5,-150,-164.5,-171];   // S-GFX: chừa đầu 2 cầu (z=-131, -158) – trước sạp thứ 4 đặt ngay đầu cầu chắn lối
+    for(let i=0;i<5;i++){ const z=SZ[i], x=198.6; put(new THREE.BoxGeometry(2.2,1,3.4), sm(0xf3eee2,.6), x,1.8,z); put(new THREE.BoxGeometry(2.8,.1,4), sm(cols[i],.6), x,3.6,z, 0,0,.12);
       for(const s of [-1,1]) put(new THREE.CylinderGeometry(.05,.05,2.4,6), sm(0x3a3f45,.4), x+s*1.2,2.5,z+1.8); GLOW && GLOW.add(x,3.2,z,2.2,0xffe7b0,.8); boxes.push({x0:x-1.1, x1:x+1.1, z0:z-1.7, z1:z+1.7}); } }
   // người dạo phố
   const strollers=[];
@@ -178,7 +185,7 @@ export function makeHighland(W, ctx){
   let night=-1, acc=0;
   HOOK.onFrame.push((dt, T)=>{
     if(W.inside) return;
-    if(W.night!==night){ night=W.night; winMat.emissiveIntensity=night*1.4; lanternMat.color.setRGB(1,.29+night*.1,.18).multiplyScalar(.75+night*.9); lanternMat2.color.setRGB(1,.76,.24).multiplyScalar(.75+night*.9); }
+    if(W.night!==night){ night=W.night; winMat.emissiveIntensity=night*1.4; GF.setTime(1-(night||0)*.95, night||0); lanternMat.color.setRGB(1,.29+night*.1,.18).multiplyScalar(.75+night*.9); lanternMat2.color.setRGB(1,.76,.24).multiplyScalar(.75+night*.9); }
     const near=P.x>NL.x0-80 && P.x<NL.x1+80 && P.z>NL.z0-80 && P.z<NL.z1+120;
     flowTex.offset.y-=dt*.55; fallTex.offset.y+=dt*1.6;
     if(!near) return;

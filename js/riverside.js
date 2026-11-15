@@ -50,7 +50,7 @@ export function makeRiverside(W, ctx){
     for(let i=1;i<=n;i++){ const z=sz0+(i-.5)*run, y=Y+i*rise; kin.add(new THREE.BoxGeometry(sw,.12,run+.02), M.concrete, sx, y-.06, z); kin.add(new THREE.BoxGeometry(sw,y-Y-.1,run+.02), M.floor, sx, Y+(y-Y-.1)/2, z); addPlat(sx, z, 0, sw/2, run/2+.01, y);
       if(i>3) circles.push({x:sx-sw/2-.12, z, r:.14, y0:y-.3, y1:y+1.1}); }
     kin.add(new THREE.BoxGeometry(.05,.05,n*run), M.gold, sx-sw/2-.1, Y+FH/2+1.0, sz0+n*run/2);
-    boxes.push({x0:sx-sw/2, x1:sx+sw/2, z0:sz0+3*run, z1:sz0+n*run, y0:Y-1, y1:Y+.3});   // gầm cầu thang: không đi xuyên từ bên hông
+    boxes.push({x0:sx-sw/2, x1:sx+sw/2, z0:sz0+2*run, z1:sz0+n*run, y0:Y-1, y1:Y+.3});   // gầm cầu thang: không đi xuyên từ bên hông
     // sàn tầng 2 (chừa lỗ cầu thang) = 2 tấm
     const holeZ0=sz0, holeZ1=sz0+n*run;
     addPlat((x0+sx-sw/2)/2, (z0+z1b)/2, 0, (sx-sw/2-x0)/2, (z1b-z0)/2, upY+.12);

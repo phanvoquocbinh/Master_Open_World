@@ -223,6 +223,10 @@ export function createGFX(opt={}){
     fabric:c=>genSet('fb'+c,256,.4,.0008,(u,v,o)=>{ const [r,g,b]=rgbOf(c), wv=Math.sin(u*TAU*64)*Math.sin(v*TAU*64)*.5+.5, nz=fbm(u*8,v*8,8,8,3,111), t=.9+.08*wv+.06*(nz-.5); o[0]=r*t;o[1]=g*t;o[2]=b*t;o[3]=wv;o[4]=.93;o[5]=.9+.1*wv; }),
     louver:c=>genSet('lv'+c,256,.6,.006,(u,v,o)=>{ const [r,g,b]=rgbOf(c), f=v*12%1, gap=f<.1?0:1, nz=fbm(u*6,v*6,6,6,2,121), t=(.72+.38*f)*(.92+.1*nz)*(.35+.65*gap); o[0]=r*t;o[1]=g*t;o[2]=b*t;o[3]=f*gap;o[4]=.55; }),
     shutter:()=>genSet('sh',256,1,.004,(u,v,o)=>{ const s=Math.sin(v*TAU*12)*.5+.5, nz=fbm(u*4,v*4,4,4,3,131), t=.75+.25*s+.1*(nz-.5); o[0]=150*t;o[1]=155*t;o[2]=160*t;o[3]=s;o[4]=.45+.2*nz; }),
+    // ngói âm dương: hàng ngói tròn rộng .2 m, mỗi lớp .24 m, mép chồng tối, rêu loang
+    rooftile:()=>genSet('rtile',N0,1.2,.035,(u,v,o)=>{ const cols=6, rows=5, tu=u*cols, ci=Math.floor(tu), fu=tu-ci, tv=v*rows, rj=Math.floor(tv), fv=tv-rj;
+      const prof=Math.sin(Math.PI*fu), lap=ss(.82,1,fv), h=prof*(.75+.25*fv)*(1-lap*.6), tn=(hash2(ci,rj,301)-.5)*.25, nz=fbm(u*12,v*12,12,12,3,302), moss=fbm(u*3,v*3,3,3,3,303);
+      const k=(.62+.38*prof)*(1-lap*.35)*(.9+tn+.12*(nz-.5)), mo=ss(.55,.8,moss)*.5; o[0]=mix(168*k,70,mo); o[1]=mix(86*k,74,mo); o[2]=mix(56*k,48,mo); o[3]=h; o[4]=.78+.15*nz; o[5]=.55+.45*prof*(1-lap*.5); }),
     water:()=>genSet('wa',256,2,.025,(u,v,o)=>{ o[0]=o[1]=o[2]=255; o[3]=fbm(u*4,v*4,4,4,4,141); o[4]=.05; }),
     asphalt:()=>genSet('as',N0,4,.002,(u,v,o)=>{ const n=fbm(u*12,v*12,12,12,3,151), m=fbm(u*2,v*2,2,2,3,153), sp=hash2(Math.floor(u*N0),Math.floor(v*N0),152), t=64+16*n+14*(m-.5)+(sp>.92?34:0)-(sp<.05?12:0); o[0]=t;o[1]=t;o[2]=t+2;o[3]=sp*.4+n*.6;o[4]=.86;o[5]=.88+.12*n; }),
     rattan:(c=0xb48a5a)=>genSet('rt'+c,256,.3,.002,(u,v,o)=>{ const [r,g,b]=rgbOf(c), wv=Math.max(Math.sin((u+v)*TAU*20),Math.sin((u-v)*TAU*20))*.5+.5, t=.72+.36*wv; o[0]=r*t;o[1]=g*t;o[2]=b*t;o[3]=wv;o[4]=.7;o[5]=.75+.25*wv; }),
@@ -285,7 +289,7 @@ export function createGFX(opt={}){
   lazy('brick',()=>pbr(T.brick())); lazy('asphalt',()=>pbr(T.asphalt(),flat)); lazy('lawn',()=>pbr(T.lawn(),flat));
   lazy('poolTile',()=>pbr(T.tile(0x1f4b4c,.3,1.2,.25,.55))); lazy('solar',()=>pbr(T.solar(),{metalness:.4})); lazy('scales',()=>pbr(T.scales(),{metalness:.65}));
   lazy('moss',()=>pbr(T.moss())); lazy('shutter',()=>pbr(T.shutter(),{metalness:.5})); lazy('bark',()=>pbr(T.bark())); lazy('palmBark',()=>pbr(T.palmBark())); lazy('rattan',()=>pbr(T.rattan()));
-  lazy('terracotta',()=>pbr(T.plaster(0xb5653f))); lazy('felt',()=>pbr(T.fabric(0x5e7d6a)));
+  lazy('terracotta',()=>pbr(T.plaster(0xb5653f))); lazy('rooftile',()=>pbr(T.rooftile(),{side:THREE.DoubleSide})); lazy('felt',()=>pbr(T.fabric(0x5e7d6a)));
   lazy('water',()=>{ const s=T.water(), n=s.normalMap.clone(); n.needsUpdate=true; n.repeat.set(.5,.5); const m=new THREE.MeshStandardMaterial({color:0x0f8c9e, roughness:.05, metalness:0, normalMap:n, normalScale:new THREE.Vector2(.3,.3), transparent:true, opacity:.72, envMapIntensity:.55, depthWrite:false});
     m.userData.noCast=true; ANIM.push(dt=>{ n.offset.x+=dt*.02; n.offset.y+=dt*.013; }); return m; });
   lazy('rail',()=>new THREE.MeshStandardMaterial({map:railTex(), alphaTest:.5, side:THREE.DoubleSide, roughness:.5, metalness:.4}));
@@ -455,6 +459,35 @@ export function createGFX(opt={}){
     else { P(planeM(ow-.1,2.9,R()*30,0,1,3.7/2.9),M.glassHome,0,1.55,-.15); for(const lx of [-ow/2+.05,-.55,.55,ow/2-.05]) P(cbox(.07,2.9,.12,.01),paintM,lx,1.55,-.1);
       P(cbox(ow,.08,.14,.01),paintM,0,3.05,-.1); P(cbox(ow,.6,.14,.02),paintM,0,g0-.42,.02); P(planeU(ow-.4,.42),signMat(o.sign||'TIỆM HOA',{bg:'#7a3b2e', fg:'#fff1dc', key:'shop2', w:1024, h:96, font:'"Times New Roman",serif', weight:700, night:1.0}),0,g0-.42,.1); }
   }
+  // 5.2b NHÀ PHỐ CỔ (kiểu Hội An) – hệ cục bộ: mặt tiền ở z=0 nhìn +z, rộng w theo x, sâu d về -z, gốc (o.x,o.y,o.z), xoay o.ry
+  //  tường vữa màu · tầng trệt lùi 0,9 m: vách gỗ + cửa lớn mở (thấy trong nhà) · mái hiên ngói đua 1,1 m trên 2 cột gỗ
+  //  tầng trên: cửa sổ kính có phòng + khung + cửa chớp mở · ban công gỗ lan can con tiện · mái ngói âm dương 2 dốc + bờ nóc + đầu hồi
+  //  trả về: chân cột hiên (toạ độ thế giới) để đặt va chạm
+  function townHouse(k,o){ const R=rng(o.seed||1), w=o.w, d=o.d||9, fl=o.floors||[3.4,3.1], H=fl.reduce((a,b)=>a+b,0), g0=fl[0], P=local(k,o.x||0,o.y||0,o.z||0,o.ry||0);
+    const wallM=plasterC(o.wall), trimM=plasterC(0xf3ead7), woodM=M.woodDark, shutM=louverC(o.shutter||0x2f6b4f);
+    P(boxM(w-.04,H-g0,d),wallM,0,g0+(H-g0)/2,-d/2); P(boxM(w-.04,g0,d-.9),wallM,0,g0/2,-.9-(d-.9)/2);
+    P(planeM(w-.3,g0-.3),woodM,0,(g0-.3)/2,-.88); P(planeM(1.9,2.45,R()*30,0,1,3.7/2.45),M.glassHome,0,1.25,-.86);
+    for(const s of [-1,1]) P(cbox(.12,2.6,.14,.02),woodM,s*1.01,1.3,-.82); P(cbox(2.2,.14,.16,.02),woodM,0,2.58,-.82);
+    P(cbox(w+.06,.22,.45,.03),trimM,0,g0-.02,.08);
+    // mái hiên ngói + cột gỗ + xà
+    const ad=1.15, ad2=.5, aa=Math.atan2(ad2,ad), aL=Math.hypot(ad,ad2);
+    P(planeM(w+.2,aL),M.rooftile,0,g0+.32-ad2/2,ad/2,aa-Math.PI/2); P(cbox(w+.2,.1,.12,.02),woodM,0,g0+.32-ad2-.04,ad);
+    const cols=[]; for(const s of [-1,1]){ P(cylM(.09,.11,g0-.2+.05,10),woodM,s*(w/2-.35),(g0-.2)/2,ad-.12); P(cbox(.3,.08,.3,.02),M.stoneLight,s*(w/2-.35),.04,ad-.12); cols.push(P.at(s*(w/2-.35),ad-.12)); }
+    // các tầng trên: cửa sổ + chớp, phào, ban công gỗ ở tầng 2
+    let y=g0; for(let i=1;i<fl.length;i++){ const fh=fl[i], nw=Math.max(1,Math.floor((w-.6)/2.3)), sp=(w-.6)/nw;
+      for(let j=0;j<nw;j++){ const x=-w/2+.3+sp*(j+.5), wy=y+.75+.8;
+        P(planeM(1.05,1.6,R()*40,0,1,3.7/1.6),M.glassHome,x,wy,.02); P(cbox(1.25,.1,.16,.02),trimM,x,wy+.85,.06); P(cbox(1.3,.1,.22,.02),trimM,x,wy-.85,.08);
+        for(const s of [-1,1]) P(cbox(.55,1.6,.04,.01),shutM,x+s*(1.05/2+.3),wy,.06,0,0,s*.12); }
+      if(i===1 && w>=4.5){ const bw=w-.8; P(cbox(bw,.12,.85,.02),M.wood,0,y+.06,.42); P(cbox(bw,.07,.07,.01),woodM,0,y+1.0,.82);
+        for(let x=-bw/2+.1;x<=bw/2-.05;x+=.28) P(new THREE.BoxGeometry(.05,.9,.05),woodM,x,y+.55,.82); for(const s of [-1,1]) P(cbox(.07,.95,.85,.01),woodM,s*bw/2,y+.5,.42); }
+      y+=fh; if(i<fl.length-1) P(cbox(w+.06,.2,.3,.03),trimM,0,y-.05,.06); }
+    // mái ngói 2 dốc, bờ nóc song song mặt tiền
+    const ov=.65, rise=Math.min(2.4,d*.3), run=d/2+ov, ra=Math.atan2(rise,run), rL=Math.hypot(rise,run), rw=w+.5;
+    P(planeM(rw,rL,R()*9,0),M.rooftile,0,H+rise/2-.02,ov-run/2,ra-Math.PI/2); P(planeM(rw,rL,R()*9,0),M.rooftile,0,H+rise/2-.02,-d-ov+run/2,ra-Math.PI/2,0,Math.PI);
+    P(cbox(rw+.25,.24,.36,.04),M.terracotta,0,H+rise+.05,-d/2); for(const s of [-1,1]) P(cbox(.3,.42,.42,.04),M.terracotta,s*(rw/2+.08),H+rise+.15,-d/2);
+    for(const s of [-1,1]){ const xg=s*(w/2-.02), pos=[xg,H,0, xg,H,-d, xg,H+rise,-d/2], uv=[0,0, d,0, d/2,rise]; if(s<0){ pos.splice(0,9, xg,H,0, xg,H+rise,-d/2, xg,H,-d); uv.splice(0,6, 0,0, d/2,rise, d,0); }
+      const tg=new THREE.BufferGeometry(); tg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); tg.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2)); tg.computeVertexNormals(); P(tg,wallM); }
+    return {cols}; }
   function cafeStreet(o={}){ const g=new THREE.Group(), k=Kit(), glow=o.glow;
     const H=[{x:-5.4,w:4.6,wall:0xa9c7cf,trim:0xf2ede2,paint:0x4b5d6a,kind:'shutter',floors:[3.9,3.3,3.3,3.3],seed:11,ac:true,sign:'TẠP HOÁ BÀ TƯ'},
              {x:0,w:6.2,wall:0xe0b04f,trim:0xf3ead7,paint:0x2f5d4a,kind:'cafe',floors:[4.1,3.4,3.4],seed:12,sign:'Cà Phê Góc Phố',ac:true},
@@ -645,7 +678,7 @@ void main(){ vUv=uv;
     return {mesh:im, add}; }
 
   return { M, U, T, Kit, cbox, boxM, planeM, cylM, local, addTree, forest, streetLight, aoDecal, stringLights, facade, ring4, signMat, makeGlow, skyline,
-    build:{tower, cafeStreet, shophouse, villa, ringHQ, canopyHall, dome, office},
+    build:{tower, cafeStreet, shophouse, townHouse, villa, ringHQ, canopyHall, dome, office},
     setTime(day,night){ U.uDay.value=day; U.uNight.value=night; for(const [m,a,b] of EMIS) m.emissiveIntensity=a+(b-a)*night; },
     update(dt){ U.uTime.value+=dt; for(const f of ANIM) f(dt); } };
 }

@@ -93,8 +93,17 @@ export function makeArena(W, ctx){
     // khán đài: 7 bậc mỗi phía (Bắc dài + 2 đầu), phía Nam 3 bậc + cổng
     const tierCol=[0x12a594,0xf3f6f8,0xff5a6e,0xf3f6f8,0x12a594,0xffc44d,0x12a594];
     const stand=(axis, side, len, start, rows, off=0)=>{ for(let i=0;i<rows;i++){ const h=.45*(i+1), d=start+i*.85+.425;
-        if(axis==='z'){ const z=SC.z+side*d; k.add(new THREE.BoxGeometry(len,h,.85), sm(0x8d949b,.9), SC.x+off,h/2,z); k.add(new THREE.BoxGeometry(len,.06,.42), sm(tierCol[i%7],.5), SC.x+off,h+.03,z+side*.15); }
-        else { const x=SC.x+side*d; k.add(new THREE.BoxGeometry(.85,h,len), sm(0x8d949b,.9), x,h/2,SC.z); k.add(new THREE.BoxGeometry(.42,.06,len), sm(tierCol[i%7],.5), x+side*.15,h+.03,SC.z); } } };
+        if(axis==='z'){ const z=SC.z+side*d; k.add(new THREE.BoxGeometry(len,h,.85), sm(0x8d949b,.9), SC.x+off,h/2,z); k.add(new THREE.BoxGeometry(len,.06,.42), sm(tierCol[i%7],.5), SC.x+off,h+.03,z+side*.15); addPlat(SC.x+off,z,0,len/2,.43,h); }
+        else { const x=SC.x+side*d; k.add(new THREE.BoxGeometry(.85,h,len), sm(0x8d949b,.9), x,h/2,SC.z); k.add(new THREE.BoxGeometry(.42,.06,len), sm(tierCol[i%7],.5), x+side*.15,h+.03,SC.z); addPlat(x,SC.z,0,.43,len/2,h); } }
+      // S-GFX (15/11): sàn đứng từng bậc (cao .45 m/bậc → leo được từ phía sân) – trước khán đài chỉ là khối hình, đi xuyên qua.
+      // Lưng + 2 đầu khán đài chặn người đứng thấp hơn mặt bậc (không chui vào khối bậc từ phía sau / bên hông)
+      const d0=start, d1=start+rows*.85, top=.45*rows-.35;
+      if(axis==='z'){ const xa=SC.x+off-len/2, xb=SC.x+off+len/2, za=SC.z+side*d0, zb=SC.z+side*d1;
+        boxes.push({x0:xa, x1:xb, z0:Math.min(zb,zb+side*.12), z1:Math.max(zb,zb+side*.12), y0:-1, y1:top+1.6});
+        for(const xe of [xa,xb]) boxes.push({x0:xe-.06, x1:xe+.06, z0:Math.min(za,zb), z1:Math.max(za,zb), y0:.2, y1:top}); }
+      else { const za=SC.z-len/2, zb=SC.z+len/2, xa=SC.x+side*d0, xb=SC.x+side*d1;
+        boxes.push({x0:Math.min(xb,xb+side*.12), x1:Math.max(xb,xb+side*.12), z0:za, z1:zb, y0:-1, y1:top+1.6});
+        for(const ze of [za,zb]) boxes.push({x0:Math.min(xa,xb), x1:Math.max(xa,xb), z0:ze-.06, z1:ze+.06, y0:.2, y1:top}); } };
     stand('z',-1,PL+10,PW/2+4,7); stand('x',-1,PW+6,PL/2+4,7); stand('x',1,PW+6,PL/2+4,7);
     { const half=(PL+10)/2-4; stand('z',1,half,PW/2+4,3,-(4+half/2)); stand('z',1,half,PW/2+4,3,4+half/2); }   // phía Nam: 2 nửa, giữa là lối vào từ cổng
     // mái che khán đài Bắc
@@ -335,7 +344,10 @@ transformed.y += abs(sin(uT*2.2 + ph))*0.05 + uCheer*abs(sin(uT*9.0 + ph))*0.42 
       const pm=new THREE.Mesh(new THREE.PlaneGeometry(2,3), new THREE.MeshStandardMaterial({map:pt, emissive:0xffffff, emissiveMap:pt, emissiveIntensity:.25})); pm.position.set(CI.x0+4+i*3+(i>0?14:0)+(i>1?-2:0), 1.9, CI.z0-.25); pm.rotation.y=Math.PI; scene.add(pm); });
     // bên trong: màn chiếu + 5 hàng ghế bậc thang (ẩn khi ở ngoài)
     const ik=Kit(); ik.add(new THREE.BoxGeometry(CI.x1-CI.x0-1,.05,CI.z1-CI.z0-1), sm(0x3a1d24,.9), CX,.04,(CI.z0+CI.z1)/2);
-    for(let r=0;r<5;r++){ const z=CI.z0+4+r*2.2, h=.35*(4-r); if(h>0){ ik.add(new THREE.BoxGeometry(CI.x1-CI.x0-6,h,2.2), sm(0x2a1a20,.9), CX,h/2,z); addPlat(CX,z,0,(CI.x1-CI.x0-6)/2,1.1,h+.02); }
+    for(let r=0;r<5;r++){ const z=CI.z0+4+r*2.2, h=.35*(4-r); if(h>0){ ik.add(new THREE.BoxGeometry(CI.x1-CI.x0-6,h,2.2), sm(0x2a1a20,.9), CX,h/2,z); addPlat(CX,z,0,(CI.x1-CI.x0-6)/2,1.1,h+.02);
+        // S-GFX (15/11): hông bậc ghế + lưng bậc cao nhất chặn người đứng thấp hơn mặt bậc (trước đi từ lối bên / phía sau chui vào khối bậc)
+        const hw=(CI.x1-CI.x0-6)/2; if(h>.6) for(const sx of [-1,1]) boxes.push({x0:CX+sx*hw-.06, x1:CX+sx*hw+.06, z0:z-1.1, z1:z+1.1, y0:-1, y1:h-.4});
+        if(r===0) boxes.push({x0:CX-hw, x1:CX+hw, z0:z-1.16, z1:z-1.04, y0:-1, y1:h+1.2}); }
       for(let i=0;i<10;i++){ const x=CX-11.25+i*2.5; ik.add(new THREE.BoxGeometry(.9,.45,.8), sm(0xb3122e,.6), x,h+.23,z+.3); ik.add(new THREE.BoxGeometry(.9,.8,.15), sm(0xb3122e,.6), x,h+.6,z-.1); } }
     ik.add(new THREE.BoxGeometry(CI.x1-CI.x0-4,.3,1.4), sm(0x8d949b,.6), CX,.15,CI.z1-2.2);
     { const lin=sm(0x1a1216,.9), CZ=(CI.z0+CI.z1)/2, IW=CI.x1-CI.x0-.9, ID=CI.z1-CI.z0-.9;   // lót tường + trần tối bên trong

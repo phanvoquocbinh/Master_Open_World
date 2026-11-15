@@ -73,7 +73,7 @@ export function makeLuxury(W, ctx){
     {model:'roadster', color:0xc4161c, c2:0x111111, name:'Đại gia Long', male:true, partner:'Mai', villa:2, tower:2, wait:35},
   ];
   const cars=[];
-  const seatY={limo:.62, lux:.6, roadster:.5};
+  const seatY={limo:.62, lux:.6, roadster:.66};   // S-GFX (15/11): mui trần – hông đặt đúng mặt đệm ghế (.69), trước .5 → chìm dưới ghế, chân xuyên thân xe
   function person(seed, outfit, name, dot){ const kk=people.kit(seed,{outfit}); const a=makeActor(kk.gl,{name, height:kk.h, face:0, clips:kk.clips, compact:false, dot}); a.play('idle',0); a.mixer.update(0); const po=makePoser(THREE,a); const hh=po.hipsHeight(); return {a, po, hh}; }
   if(people && G && V && V.buildCar) TYC.forEach((t,i)=>{
     const g=V.buildCar(t.color, t.model, {color2:t.c2, seat:0x3a1a10}); g.userData.dynamic=true; for(const w of (g.userData.wheels||[])) w.userData.keep=true; try{ compactGroup(W, g); }catch(e){}
@@ -109,7 +109,7 @@ export function makeLuxury(W, ctx){
   HOOK.onFrame.push((dt, T)=>{ if(W.inside) return;
     for(const c of cars){ const d=Math.hypot(P.x-c.g.position.x, P.z-c.g.position.z), vis=d<220; if(c.g.visible!==vis) c.g.visible=vis;
       upd(c, Math.min(dt,.1));
-      if(vis && d<70) for(const r of c.ride){ r.a.mixer.update(dt); r.po.apply('sit', T); } } });
+      if(vis && d<70) for(const r of c.ride){ r.a.mixer.update(dt); r.po.apply('car', T); } } });   // S-GFX: tư thế ngồi xe hơi (chân không lòi ra gầm)
 
   PLACES.push({icon:'💎', name:'Xe đại gia (đang chạy)', sub:'Limousine · siêu sang · mui trần – theo dõi đại gia đi làm', go:()=>{ const c=cars[Math.floor(Math.random()*cars.length)]; if(!c) return; const p=c.g.position; teleport(p.x+4, p.z+4, p.x, p.z); }});
   return {cars, door, X0, X1, Z0, Z1};

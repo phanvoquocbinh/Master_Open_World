@@ -123,8 +123,8 @@ export function makeMountainTown(W, ctx){
       k.add(new THREE.BoxGeometry(.08,.06,b1-e-.3), M.deckD, mx, s.lv+1.0, mz, 0, ry, 0); k.add(new THREE.BoxGeometry(.03,.9,b1-e-.3), M.glass, mx, s.lv+.52, mz, 0, ry, 0);
       addSeg(x0,z0,x1,z1,.14, s.lv-.5, s.lv+1.6);
       const [fx,fz]=at(a+(a<0?-.02:.02), (e+b1)/2); facade(pal, D, s.lv-.3-yb, fx, (s.lv-.3+yb)/2, fz, a<0?ryU+Math.PI:ryU);
-      const [y0x,y0z]=at(a,e), [y1x,y1z]=at(a,b1); addSeg(y0x,y0z,y1x,y1z,.12, yb-2, topBody-.05); }
-    { const [x0,z0]=at(-Wd/2,b1), [x1,z1]=at(Wd/2,b1); addSeg(x0,z0,x1,z1,.12, yb-2, topBody-.05); }
+      const [y0x,y0z]=at(a,e), [y1x,y1z]=at(a,b1); addSeg(y0x,y0z,y1x,y1z,.12, yb-2, s.lv-.3); }
+    for(const s of secs){ const [x0,z0]=at(s.a0,b1), [x1,z1]=at(s.a1,b1); addSeg(x0,z0,x1,z1,.12, yb-2, s.lv-.3); }
     // mái hiên từng tầng + đèn lồng đỏ + ban công (mặt ngoài)
     for(let y=topBody-3.2; y>t.gmin+.4; y-=3.2){ const [ex,ez]=at(0,b1+.45); k.add(new THREE.BoxGeometry(Wd+1.2,.12,1.0), M.eave, ex, y, ez, 0, ry, 0);
       const [tx,tz]=at(0,b1+.95); k.add(new THREE.BoxGeometry(Wd+1.3,.1,.08), M.trim, tx, y+.06, tz, 0, ry, 0);

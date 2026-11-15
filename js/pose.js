@@ -14,11 +14,15 @@ export function makePoser(THREE, actor){
     hipsHeight(){ if(hipsH!=null) return hipsH; if(!bones.Hips) return hipsH=.95; actor.g.updateMatrixWorld(true); bones.Hips.getWorldPosition(a); return hipsH=a.y-actor.g.position.y; },
     apply(kind, t=0, w=1){
       if(!bones.Hips) return;
-      const h=actor.g.rotation.y; F.set(Math.sin(h),0,Math.cos(h)); R.set(-Math.cos(h),0,Math.sin(h));
-      actor.g.updateMatrixWorld(true);
+      // S-GFX (15/11): hướng TRƯỚC lấy theo thế giới (gồm cả xe/cabin đang chở nhân vật) – trước dùng rotation.y riêng (=0 khi ngồi trong xe)
+      // nên khi xe quay, chân bị duỗi theo hướng cố định của thế giới → đâm xuyên hông/gầm xe
+      actor.g.updateMatrixWorld(true); actor.g.getWorldDirection(F); F.y=0; if(F.lengthSq()<1e-6) F.set(0,0,1); F.normalize(); R.set(-F.z,0,F.x);
       const sit=()=>{ for(const s of ['Left','Right']){ aim(s+'UpLeg', s+'Leg', V(1,-.12)); aim(s+'Leg', s+'Foot', V(.15,-1)); } };
       switch(kind){
         case 'sit': sit(); for(const [s,k] of [['Left',-1],['Right',1]]){ aim(s+'Arm',s+'ForeArm',V(.45,-1,k*.1)); aim(s+'ForeArm',s+'Hand',V(1,-.35)); } break;
+        // S-GFX (15/11): ngồi trong XE HƠI – ghế thấp, chân duỗi chéo ra trước, bàn chân đặt trên sàn xe (≈ hông − 0,3 m) thay vì cẳng chân thẳng đứng
+        // (tư thế 'sit' làm bàn chân thòi xuống dưới sàn → lòi ra gầm xe / xuyên thân xe)
+        case 'car': for(const [s,k] of [['Left',-1],['Right',1]]){ aim(s+'UpLeg', s+'Leg', V(1,.04,k*.06)); aim(s+'Leg', s+'Foot', V(.8,-.6)); aim(s+'Arm',s+'ForeArm',V(.35,-1,k*.12)); aim(s+'ForeArm',s+'Hand',V(1,-.15,-k*.15)); } break;
         case 'type': sit(); for(const [s,k] of [['Left',-1],['Right',1]]){ aim(s+'Arm',s+'ForeArm',V(.55,-1,k*.12)); aim(s+'ForeArm',s+'Hand',V(1,.05+Math.sin(t*14+k)*.06,-k*.25)); } break;
         case 'eat': sit(); { const e=Math.max(0,Math.sin(t*1.6)); aim('LeftArm','LeftForeArm',V(.45,-1,-.1)); aim('LeftForeArm','LeftHand',V(1,-.2,.2));
           aim('RightArm','RightForeArm',V(.6,-1+e*.6,.15)); aim('RightForeArm','RightHand',V(.6,.2+e*1.1,-.2)); } break;
