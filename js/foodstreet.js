@@ -106,7 +106,7 @@ export function makeFoodStreet(W, ctx){
     // tường trong (va chạm): 2 bên + lưng
     boxes.push({x0:x0-.3, x1:x0, z0:zi0, z1:zi1}); boxes.push({x0:x1, x1:x1+.3, z0:zi0, z1:zi1}); boxes.push({x0:x0, x1:x1, z0:Math.min(zb,zb+fz*-.3)-.15, z1:Math.max(zb,zb+fz*-.3)+.15});
     // sàn + trần sáng + đèn
-    kin.add(new THREE.BoxGeometry(x1-x0,.06,zi1-zi0), theme.floor, cx, Y+.13, (zi0+zi1)/2);
+    kin.add(new THREE.BoxGeometry(x1-x0,.06,zi1-zi0), theme.floor, cx, Y+.13, (zi0+zi1)/2); addPlat(cx, (zi0+zi1)/2, 0, (x1-x0)/2, (zi1-zi0)/2, Y+.16);   // sàn nhà hàng: đứng trên mặt sàn
     kin.add(new THREE.BoxGeometry(x1-x0,.1,zi1-zi0), theme.ceil, cx, Y+3.6, (zi0+zi1)/2);
     // quầy + bếp phía trong
     const qz=zb+fz*1.6; kin.add(new THREE.BoxGeometry(6,1.1,.8), theme.counter, cx, Y+.55, qz); kin.add(new THREE.BoxGeometry(6.2,.06,.95), M.gold, cx, Y+1.12, qz); boxes.push({x0:cx-3.1, x1:cx+3.1, z0:qz-.45, z1:qz+.45});
