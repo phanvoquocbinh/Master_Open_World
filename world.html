@@ -278,7 +278,8 @@ CITY.arena = {x0:274, x1:394, z0:-60, z1:60, bridgeW:10};
 // S6: vùng đất mở rộng (cao nguyên…) do module đăng ký: {x0,x1,z0,z1, h(x,z) → độ cao hoặc null}
 const EXTL=[];
 const inRect=(R,x,z,pad)=>x>R.x0-pad && x<R.x1+pad && z>R.z0-pad && z<R.z1+pad;
-const inDT=(x,z,pad=0)=>inRect(CITY.downtown,x,z,pad) || inRect(CITY.ward,x,z,pad) || inRect(CITY.arena,x,z,pad);
+const INDT={off:false};   // V2: tắt vùng phố phẳng cũ
+const inDT=(x,z,pad=0)=>!INDT.off && (inRect(CITY.downtown,x,z,pad) || inRect(CITY.ward,x,z,pad) || inRect(CITY.arena,x,z,pad));
 // vùng: 'island' (Đảo Master Dashboard – miễn phí) | 'open' (thế giới mở: Downtown, Phường Khởi Nghiệp, cầu sau cổng)
 const regionAt=(x,z)=>(inDT(x,z) || (x>CITY.gateX && Math.abs(z)<CITY.downtown.bridgeW/2+1.5) || (EXTL.some(L=>x>L.x0 && x<L.x1 && z>L.z0 && z<L.z1))) ? 'open' : 'island';
 const PROFILE = (()=>{ try{ return Object.assign({name:'Bình', model:'soldier'}, JSON.parse(localStorage.getItem('qcworld-profile')||'{}')); }catch(e){ return {name:'Bình', model:'soldier'}; } })();
@@ -1560,7 +1561,7 @@ const W={THREE, scene, overlay, camera, renderer, canvas, $, clamp, lerp, lerpAn
   mesh, box, MAT, colorMat, pbr, TX, MODELS, SkeletonUtils, mergeGeometries, makeActor, makeLabel, removeLabel, clipOf, borrow, AVATARS,
   groundH, groundAt, groundAtY, addPlat, plats, circles, boxes, INTER, PLACES, P, me, cam, HOOK, resolve, edgeR, onRoad, inSector, CITY, ROAD, WATER_Y,
   PROFILE, music, burst, fireworks, lamps, lampPost, stripeTex, woodSign, buildHouse, boardwalk, openTool, DASH, ZONES, teleport, PR,
-  yieldUI, QUAL, QUAL_SET, QP, GPU, labels, CINE, CINEFX, GLOW, EXTL, onExt, DYN, SEGS, addSeg, PALMS, PALM_MAT, ROCKS, ROCK_MAT, dAng, isletR,
+  yieldUI, QUAL, QUAL_SET, QP, GPU, labels, CINE, CINEFX, GLOW, EXTL, onExt, DYN, SEGS, addSeg, INDT, PALMS, PALM_MAT, ROCKS, ROCK_MAT, dAng, isletR,
   uiBlocking, clearKeys, palm, setTime, NPCS, platH, segDist, water, terrain, GRASS, stage, portal, bottle, floaters, composer, bloom,
   renderPass, hemi, sun, inDT, regionAt, sky, ISLET, onIslet, RESORT_A, FRUS, ACTORS, PICNICS, FPSCAP, BLOBSRC, SHPROXY, markFar, markShadow:()=>{ shadowDirty=true; },
   get dragging(){ return !!drag; }, set PIXEL(v){ PIXEL=v; renderer.setPixelRatio(v); composer.setPixelRatio(v); resize(); },

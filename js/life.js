@@ -31,6 +31,7 @@ import { makeFoodStreet } from './foodstreet.js';
 import { makeLuxury } from './luxury.js';
 import { makeRiverside } from './riverside.js';
 import { makeMountainTown } from './mountaintown.js';
+import * as V2mod from './v2core.js';
 import { makeStreetLife } from './streetlife.js';
 import { makeSeaLife } from './sealife.js';
 import { makeFunIsland } from './funisland.js';
@@ -745,28 +746,32 @@ export async function initLife(W){
   W.bottle.userData.dynamic=true; for(const f of W.floaters) f.o.userData.dynamic=true;
   for(const o of Object.values(V.garage)) o.userData.dynamic=true;
   await W.yieldUI('Đang tối ưu đồ hoạ…');
-  try{ W.resort=makeResort(W, {S, save, ui, askPay, fmt, spend}); }catch(e){ console.warn('resort', e); }   // S2.3: khu nghỉ dưỡng
-  try{ W.campus=makeCampus(W, {S, save, ui, addCoins, fmt, openQuiz, city}); }catch(e){ console.warn('campus', e); }   // S3: Toà Giáo trình · Học viện · bộ não
-  try{ W.transit=makeTransit(W, {S, save, ui, askPay, fmt, spend, V, downtown, ward, campus:W.campus, resort:W.resort}); }catch(e){ console.warn('transit', e); }   // S4: xe buýt · cáp treo · taxi
-  try{ W.arena=makeArena(W, {S, save, ui, askPay, fmt, spend, transit:W.transit}); }catch(e){ console.warn('arena', e); }   // S5: Khu Giải trí (sân bóng · concert · rạp · ẩm thực · vòng quay)
-  try{ W.highland=makeHighland(W, {S, save, transit:W.transit}); }catch(e){ console.warn('highland', e); }   // S6: Cao nguyên – núi, sông, thác, rừng, phố cổ
-  try{ W.island=makeIsland(W); }catch(e){ console.warn('island', e); }
-  try{ W.hills=makeHills(W, {transit:W.transit}); }catch(e){ console.warn('hills', e); }   // Đồi Brand QC: địa hình đồi, đường xoắn ốc, cầu thang lớn
-  try{ W.monument=makeMonument(W); }catch(e){ console.warn('monument', e); }
-  try{ W.mountainTown=makeMountainTown(W, {S, save, ui, askPay, fmt, spend}); }catch(e){ console.warn('mountaintown', e); }   // Phố Núi: nhà sàn bám vách, tháp cầu trời, tháp sườn đồi
-  try{ W.foodStreet=makeFoodStreet(W, {S, save, ui, askPay, fmt, spend}); }catch(e){ console.warn('foodstreet', e); }
-  try{ W.luxury=makeLuxury(W, {city, transit:W.transit, V, ui, towers:downtown.towers}); }catch(e){ console.warn('luxury', e); }   // S10: showroom kính lớn + đại gia lái xe sang
-  try{ W.jobCenter=makeJobCenter(W, {S, save, ui, addCoins, fmt, jobs, ward, towers:downtown.towers}); }catch(e){ console.warn('jobcenter', e); }   // S18: tháp Trung tâm Việc làm + 10 quầy nghề
-  try{ W.funIsland=makeFunIsland(W, {askPay, spend, ui}); }catch(e){ console.warn('funisland', e); }   // S14: đảo QC Wonderland + cáp treo dài
-  try{ W.themePark=makeThemePark(W, {askPay, spend, ui}); }catch(e){ console.warn('themepark', e); }   // S-GFX A23: Công viên Kỳ Quan (đảo mới phía Nam Wonderland)
-  try{ W.seaLife=makeSeaLife(W, {askPay, spend, ui}); }catch(e){ console.warn('sealife', e); }   // S13: du thuyền, lướt ván, mô tô nước, dù bay
-  try{ W.streetLife=makeStreetLife(W, {S, save, askPay, spend, fmt}); }catch(e){ console.warn('streetlife', e); }   // S17: người đeo tai nghe, cosplay, ban nhạc rock dạo, ảo thuật gia
-  try{ W.riverside=makeRiverside(W, {S, save, ui, askPay, fmt, spend, transit:W.transit, V}); }catch(e){ console.warn('riverside', e); }   // S12: biệt thự ven đầm + cổng gác + tham quan có hướng dẫn viên   // S11: phố ẩm thực + nhà hàng sang + căn hộ Sky QC   // Tháp Brand QC trên đỉnh đồi (đi bộ vào, cầu thang xoắn, trưng bày, phòng bí ẩn)
-  try{ W.traffic=makeTraffic(W, {V, transit:W.transit, highland:W.highland, bots}); }catch(e){ console.warn('traffic', e); }   // S9: đèn giao thông, vạch kẻ, xe bot, lối đi bộ trên cầu   // S15: đảo chính như đảo thật (sóng vỗ bờ, rặng dừa, chòi lá, cứu hộ, thuyền thúng, cua, hải âu, âm thanh)
+  if(!V2mod.V2) try{ W.resort=makeResort(W, {S, save, ui, askPay, fmt, spend}); }catch(e){ console.warn('resort', e); }   // S2.3: khu nghỉ dưỡng
+  if(!V2mod.V2) try{ W.campus=makeCampus(W, {S, save, ui, addCoins, fmt, openQuiz, city}); }catch(e){ console.warn('campus', e); }   // S3: Toà Giáo trình · Học viện · bộ não
+  if(!V2mod.V2) try{ W.transit=makeTransit(W, {S, save, ui, askPay, fmt, spend, V, downtown, ward, campus:W.campus, resort:W.resort}); }catch(e){ console.warn('transit', e); }   // S4: xe buýt · cáp treo · taxi
+  if(!V2mod.V2) try{ W.arena=makeArena(W, {S, save, ui, askPay, fmt, spend, transit:W.transit}); }catch(e){ console.warn('arena', e); }   // S5: Khu Giải trí (sân bóng · concert · rạp · ẩm thực · vòng quay)
+  if(!V2mod.V2) try{ W.highland=makeHighland(W, {S, save, transit:W.transit}); }catch(e){ console.warn('highland', e); }   // S6: Cao nguyên – núi, sông, thác, rừng, phố cổ
+  if(!V2mod.V2) try{ W.island=makeIsland(W); }catch(e){ console.warn('island', e); }
+  if(!V2mod.V2) try{ W.hills=makeHills(W, {transit:W.transit}); }catch(e){ console.warn('hills', e); }   // Đồi Brand QC: địa hình đồi, đường xoắn ốc, cầu thang lớn
+  if(!V2mod.V2) try{ W.monument=makeMonument(W); }catch(e){ console.warn('monument', e); }
+  if(!V2mod.V2) try{ W.mountainTown=makeMountainTown(W, {S, save, ui, askPay, fmt, spend}); }catch(e){ console.warn('mountaintown', e); }   // Phố Núi: nhà sàn bám vách, tháp cầu trời, tháp sườn đồi
+  if(!V2mod.V2) try{ W.foodStreet=makeFoodStreet(W, {S, save, ui, askPay, fmt, spend}); }catch(e){ console.warn('foodstreet', e); }
+  if(!V2mod.V2) try{ W.luxury=makeLuxury(W, {city, transit:W.transit, V, ui, towers:downtown.towers}); }catch(e){ console.warn('luxury', e); }   // S10: showroom kính lớn + đại gia lái xe sang
+  if(!V2mod.V2) try{ W.jobCenter=makeJobCenter(W, {S, save, ui, addCoins, fmt, jobs, ward, towers:downtown.towers}); }catch(e){ console.warn('jobcenter', e); }   // S18: tháp Trung tâm Việc làm + 10 quầy nghề
+  if(!V2mod.V2) try{ W.funIsland=makeFunIsland(W, {askPay, spend, ui}); }catch(e){ console.warn('funisland', e); }   // S14: đảo QC Wonderland + cáp treo dài
+  if(!V2mod.V2) try{ W.themePark=makeThemePark(W, {askPay, spend, ui}); }catch(e){ console.warn('themepark', e); }   // S-GFX A23: Công viên Kỳ Quan (đảo mới phía Nam Wonderland)
+  if(!V2mod.V2) try{ W.seaLife=makeSeaLife(W, {askPay, spend, ui}); }catch(e){ console.warn('sealife', e); }   // S13: du thuyền, lướt ván, mô tô nước, dù bay
+  if(!V2mod.V2) try{ W.streetLife=makeStreetLife(W, {S, save, askPay, spend, fmt}); }catch(e){ console.warn('streetlife', e); }   // S17: người đeo tai nghe, cosplay, ban nhạc rock dạo, ảo thuật gia
+  if(!V2mod.V2) try{ W.riverside=makeRiverside(W, {S, save, ui, askPay, fmt, spend, transit:W.transit, V}); }catch(e){ console.warn('riverside', e); }   // S12: biệt thự ven đầm + cổng gác + tham quan có hướng dẫn viên   // S11: phố ẩm thực + nhà hàng sang + căn hộ Sky QC   // Tháp Brand QC trên đỉnh đồi (đi bộ vào, cầu thang xoắn, trưng bày, phòng bí ẩn)
+  if(!V2mod.V2) try{ W.traffic=makeTraffic(W, {V, transit:W.transit, highland:W.highland, bots}); }catch(e){ console.warn('traffic', e); }   // S9: đèn giao thông, vạch kẻ, xe bot, lối đi bộ trên cầu   // S15: đảo chính như đảo thật (sóng vỗ bờ, rặng dừa, chòi lá, cứu hộ, thuyền thúng, cua, hải âu, âm thanh)
   try{ W.skyfx=makeSkyFX(W); }catch(e){ console.warn('skyfx', e); }
   try{ W.cafeLife=makeCafeLife(W); }catch(e){ console.warn('cafe', e); }   // S8: khách bot gọi nước, ngồi chill, nói chuyện / hỏi thăm bạn   // S6: mây trôi · núi xa chân trời · trăng
   // S19+: module mở rộng (mỗi file export make(W, ctx)) – làm song song ở các phiên khác nhau, nạp trước khi gộp mesh & dựng bản đồ bot
-  for(const [key,file] of [['park','./park.js'],['gadgets','./gadgets.js'],['lang','./langcenter.js'],['pedestrians','./pedestrians.js']]){ try{ const m=await import(file); if(m && m.make) W[key]=await m.make(W, {S, save, ui, askPay, fmt, spend, addCoins, V, transit:W.transit, city, downtown, ward, bots, jobs}); }catch(e){ console.warn(key, e); } }
+  W.V2=V2mod.V2; W.V2ZONES=V2mod.ZONES;
+  for(const [key,file] of [['park','./park.js'],['gadgets','./gadgets.js'],['lang','./langcenter.js'],['pedestrians','./pedestrians.js']].filter(([k])=>!V2mod.V2 || k==='gadgets')){ try{ const m=await import(file); if(m && m.make) W[key]=await m.make(W, {S, save, ui, askPay, fmt, spend, addCoins, V, transit:W.transit, city, downtown, ward, bots, jobs}); }catch(e){ console.warn(key, e); } }
+  // V2: gỡ thế giới cũ rồi nạp các module V2 (mỗi module dựng đúng vùng của mình theo V2_PLAN.md)
+  if(V2mod.V2){ await W.yieldUI('Đang dựng thế giới V2…'); if(W.INDT) W.INDT.off=true; V2mod.clearLegacy(W); for(const b of (bots.bots||[])){ try{ b.a && b.a.g && b.a.g.parent && b.a.g.parent.remove(b.a.g); }catch(e){} } if(bots.bots) bots.bots.length=0;
+    await V2mod.loadModules(W, {S, save, ui, askPay, fmt, spend, addCoins, V, city, bots, jobs}); }
   const st=batchStatic(W); console.info(`[QC World] gộp ${st.before} mesh tĩnh → ${st.after} khối`); W.markShadow && W.markShadow();
   for(const o of Object.values(V.garage)) if(W.BLOBSRC && o.userData.type!=='boat' && !W.BLOBSRC.some(b=>b.o===o)) W.BLOBSRC.push({o, s:o.userData.type==='car'?3.2:1.5});
   await W.yieldUI('Đang vẽ bản đồ đường đi cho bot…');
@@ -780,6 +785,7 @@ export async function initLife(W){
   if(!S.s2seen){ S.s2seen=1; save(); setTimeout(()=>toast('🛏️ Bạn được cấp PHÒNG TRỌ MIỄN PHÍ ở Phường Khởi Nghiệp (qua cầu phía Đông). Đảo này miễn phí; kiếm tiền ở 🧑‍💼 Trung tâm Việc làm.', 7000), 8500); }
   if(!localStorage.getItem('qcworld-profile')) setTimeout(openProfile, 900);
   renderBuffs();
+  if(V2mod.V2){ const sp=W.V2SPAWN||{x:0,z:0,lx:0,lz:-10}; teleport(sp.x, sp.z, sp.lx, sp.lz); setTimeout(()=>toast('🧪 Đang ở chế độ THẾ GIỚI V2 (đang xây). Bỏ ?v2 khỏi địa chỉ để về thế giới cũ.', 5000), 1200); }
   if(firstBike) setTimeout(()=>toast('🎁 Người mới được tặng 🚲 xe đạp! Bấm V để đạp xe đi học, đi làm.', 5500), 2500);
   try{ W.multi=makeMulti(W, {S, save, ui, V}); }catch(e){ console.warn('multi', e); }   // S7: nhiều người chơi
   W.life={S, save, interior, downtown, ITEMS, buy, openQuiz, openShop, openLandOffice, openInventory, openProfile, brain, V, bots, city, lots, pets, emote, addCoins, askPay, sitOn, standUp};
