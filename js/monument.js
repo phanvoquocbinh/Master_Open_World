@@ -267,7 +267,8 @@ export function makeMonument(W){
   { const k=Kit(), y=FY[3];
     for(const a of [ENT, ENT+TAU/3, ENT-TAU/3]){ const p=at(a,RB-1.2); k.add(new THREE.CylinderGeometry(.06,.1,1.1,8), M.steel, p.x,y+.55,p.z); k.add(new THREE.CylinderGeometry(.12,.16,.6,12), M.dark, p.x,y+1.2,p.z, Math.PI/2.3,yawOut(a),0);
       circles.push({x:p.x, z:p.z, r:.35, y0:y-.2, y1:y+1.6});
-      INTER.push({x:p.x, z:p.z, r:1.6, prio:.8, when:()=>Math.abs(P.y-y)<1.5, label:'🔭 Ống nhòm ngắm thành phố (E)', action:()=>{ const look=at(a,200, y-10), pos=at(a,RB+1, y+1.6); HOOK.camOverride={pos, look, k:4}; toast('🔭 Đang ngắm thành phố… (6 giây)', 2200); setTimeout(()=>{ HOOK.camOverride=null; }, 6000); }}); }
+      INTER.push({x:p.x, z:p.z, r:1.6, prio:.8, when:()=>Math.abs(P.y-y)<1.5, label:'🔭 Ống nhòm ngắm thành phố (E)', action:()=>{ const look=at(a,200, y-10), pos=at(a,RB+1, y+1.6); if(HOOK.scope){ HOOK.scope=null; return; } const eye=at(a,RB+.3, y+1.75); HOOK.scope={pos:eye, fov:22}; cam.yaw=Math.atan2(-(look.x-eye.x), -(look.z-eye.z)); cam.pitch=.12;
+        toast('🔭 Ống nhòm: kéo chuột nhìn quanh 360° · lăn chuột để phóng to/thu nhỏ · bấm E hoặc phím di chuyển để thôi', 4200); }}); }   // S-QA (15/11): trước chỉ nhìn cố định 6 giây
     // S-GFX (15/11): ghế cẩm thạch XẾP NGANG (chiều dài vuông góc hướng nhìn ra cảnh) – trước bị xoay lệch 90° (+π/2): người ngồi dọc thân ghế,
     // chân đâm xuyên ghế. Chân đế lùi về sau 0,12 m chừa chỗ để chân; 2 m → 3 chỗ, tự xếp chỗ, hết chỗ báo.
     for(const a of [ENT+TAU/6, ENT-TAU/6, ENT+Math.PI]){ const p=at(a,RB-1.6), ry=yawOut(a), bx=p.x-Math.sin(ry)*.12, bz=p.z-Math.cos(ry)*.12;

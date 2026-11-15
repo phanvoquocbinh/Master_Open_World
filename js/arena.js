@@ -468,7 +468,7 @@ transformed.y += abs(sin(uT*2.2 + ph))*0.05 + uCheer*abs(sin(uT*9.0 + ph))*0.42 
     wheelA+=dt*.1; wheel.rotation.z=wheelA; rimLight.color.setHSL((T*.05)%1, .8, .35+(W.night||0)*.35);
     for(let i=0;i<FW.n;i++){ const p=gpos(i); _m.makeRotationZ(Math.sin(T*.8+i)*.03); _m.setPosition(p.x,p.y,p.z); gondolas.setMatrixAt(i,_m); } gondolas.instanceMatrix.needsUpdate=true;
     if(fwRide){ if(fwRide.state==='wait'){ for(let i=0;i<FW.n;i++){ const p=gpos(i), a=((p.a%TAU)+TAU)%TAU; if(Math.abs(a-Math.PI*1.5)<.05){ fwRide={state:'ride', i, a0:wheelA}; me.g.visible=false; HOOK.camDist=11;
-            HOOK.vehicle={drive:(d)=>{ const q=gpos(fwRide.i); P.x=q.x; P.z=q.z+.01; P.y=q.y-2.6; me.g.position.set(q.x,q.y-2.4,q.z); if(!W.dragging) cam.yaw+=d*.15; }}; toast('🎡 Lên cabin! Kéo chuột để ngắm thành phố.', 2600); break; } } }
+            HOOK.vehicle={drive:(d)=>{ const q=gpos(fwRide.i); P.x=q.x; P.z=q.z+.01; P.y=q.y-2.6; me.g.position.set(q.x,q.y-2.4,q.z); if(!W.dragging && !cam.fpv) cam.yaw+=d*.15; }}; toast('🎡 Lên cabin! Kéo chuột để ngắm thành phố.', 2600); break; } } }
       else if(wheelA-fwRide.a0>TAU-.02){ fwRide=null; HOOK.vehicle=null; HOOK.camDist=null; me.g.visible=true; P.x=FW.x; P.z=FW.z+4; P.y=groundAt(P.x,P.z); toast('🎡 Hết 1 vòng – cảm ơn bạn!', 2200); } }
     if(fwRide && fwRide.state==='wait' && Math.hypot(P.x-FW.x,P.z-FW.z)>12){ fwRide=null; S.coins+=15; save(); toast('🎡 Bạn rời khỏi sàn – đã hoàn vé 15 💰.'); }
   }

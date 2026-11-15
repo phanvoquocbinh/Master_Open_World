@@ -123,7 +123,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#0d1320;font-family:"S
 <div id="hint">
   <span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span> đi &nbsp;·&nbsp;
   <span class="key">Shift</span> chạy &nbsp;·&nbsp; <span class="key">Space</span> nhảy &nbsp;·&nbsp;
-  <span class="key">F</span> nhảy múa &nbsp;·&nbsp; kéo chuột: xoay &nbsp;·&nbsp; lăn chuột: zoom
+  <span class="key">F</span> nhảy múa &nbsp;·&nbsp; kéo chuột: xoay &nbsp;·&nbsp; lăn chuột: zoom &nbsp;·&nbsp; <span class="key">Q</span> <span id="viewHint" style="cursor:pointer;text-decoration:underline dotted" onclick="window.__qcView&&window.__qcView()">góc nhìn thứ 3</span>
 </div>
 <div id="fps"></div>
 
@@ -1156,6 +1156,7 @@ addEventListener('keydown', e=>{
   K[e.code]=true;
   if(e.code==='Space'||e.code.startsWith('Arrow')) e.preventDefault();
   if(e.repeat) return;
+  if(e.code==='KeyQ') setView(!cam.fpv);   // S-QA: đổi góc nhìn thứ nhất / thứ ba
   if(e.code==='KeyE' && current) current.action();
   if(e.code==='KeyM') openMap();
   if(e.code==='KeyH') $('helpWrap').hidden=false;
@@ -1167,10 +1168,10 @@ addEventListener('keyup', e=>{ K[e.code]=false; });
 addEventListener('blur', ()=>{ for(const k in K) K[k]=false; });
 let drag=null;
 canvas.addEventListener('pointerdown', e=>{ canvas.focus(); drag={x:e.clientX, y:e.clientY}; canvas.setPointerCapture(e.pointerId); });
-canvas.addEventListener('pointermove', e=>{ if(!drag) return; cam.yaw-=(e.clientX-drag.x)*.006; cam.pitch=clamp(cam.pitch+(e.clientY-drag.y)*.004, -.05, 1.25); drag={x:e.clientX, y:e.clientY}; });
+canvas.addEventListener('pointermove', e=>{ if(!drag) return; cam.yaw-=(e.clientX-drag.x)*.006; cam.pitch=clamp(cam.pitch+(e.clientY-drag.y)*.004, (cam.fpv||HOOK.scope)?-1.25:-.05, 1.25); drag={x:e.clientX, y:e.clientY}; });
 canvas.addEventListener('pointerup', ()=>drag=null);
 canvas.addEventListener('contextmenu', e=>e.preventDefault());
-canvas.addEventListener('wheel', e=>{ cam.dist=clamp(cam.dist*(1+Math.sign(e.deltaY)*.1), 2.2, 22); e.preventDefault(); }, {passive:false});
+canvas.addEventListener('wheel', e=>{ if(HOOK.scope){ HOOK.scope.fov=clamp((HOOK.scope.fov||24)*(1+Math.sign(e.deltaY)*.12), 5, 55); e.preventDefault(); return; } cam.dist=clamp(cam.dist*(1+Math.sign(e.deltaY)*.1), 2.2, 22); e.preventDefault(); }, {passive:false});
 
 function updatePlayer(dt){
   const free=!uiBlocking(); let ix=0, iz=0;
@@ -1199,7 +1200,28 @@ function updatePlayer(dt){
   if(dance && onFloor && music.playing){ P.danceT+=dt; if(P.danceT>15 && !found.dancer){ egg('dancer','💃 Nhảy 15 giây trên sân khấu, đúng là vũ công QC!'); burst(new THREE.Vector3(P.x,2.5,P.z), [0xff4f6d,0xffd23f,0x4fc3ff,0x46d39a], 160, 5, 1.8, -5, .2); } }
 }
 const _look=new THREE.Vector3(), _want=new THREE.Vector3();
+// S-QA (15/11): GÓC NHÌN THỨ NHẤT (phím Q hoặc bấm chữ "góc nhìn" ở thanh gợi ý) – mắt đặt đúng đầu nhân vật (đi bộ, ngồi ghế, cáp treo, vòng quay, tàu lượn…),
+// kéo chuột nhìn quanh 360°, ngước lên/cúi xuống; đang ngồi trên phương tiện thì tầm nhìn quay theo phương tiện.
+// HOOK.scope={pos, fov}: ỐNG NHÒM – đứng yên tại pos, nhìn quanh 360°, lăn chuột phóng to; bấm E hoặc phím di chuyển để thôi.
+const _eye=new THREE.Vector3(), _fd=new THREE.Vector3(); let _headB=null, _pf=null, _fovNow=55, _bodyHid=false;
+function setView(on){ cam.fpv=!!on; const h=$('viewHint'); if(h) h.textContent=cam.fpv?'góc nhìn thứ 1':'góc nhìn thứ 3';
+  toast(cam.fpv ? '👁 Góc nhìn THỨ NHẤT – kéo chuột để nhìn quanh 360° (bấm Q để về góc nhìn thứ ba)' : '🎥 Góc nhìn THỨ BA (bấm Q để đổi sang góc nhìn thứ nhất)', 3000); }
+function firstPerson(dt){ const sc=HOOK.scope;
+  if(sc && (K.KeyW||K.KeyA||K.KeyS||K.KeyD||K.ArrowUp||K.ArrowDown||K.ArrowLeft||K.ArrowRight)){ HOOK.scope=null; return false; }
+  if(sc) _eye.copy(sc.pos);
+  else { if(!_headB) me.g.traverse(o=>{ if(!_headB && o.isBone && /Head$/.test(o.name)) _headB=o; });
+    if(_headB){ me.g.updateWorldMatrix(true,true); _headB.getWorldPosition(_eye); _eye.y+=.1; } else _eye.set(me.g.position.x, me.g.position.y+(me.h||1.75)*.92, me.g.position.z);
+    if(HOOK.vehicle){ if(_pf!==null){ let d=(P.face-_pf)%(Math.PI*2); if(d>Math.PI) d-=Math.PI*2; if(d<-Math.PI) d+=Math.PI*2; cam.yaw+=d; } _pf=P.face; } else _pf=null; }
+  const cp=Math.cos(cam.pitch); _fd.set(-Math.sin(cam.yaw)*cp, -Math.sin(cam.pitch), -Math.cos(cam.yaw)*cp);
+  if(!sc) _eye.addScaledVector(_fd, .12);
+  camera.position.copy(_eye); _look.copy(_eye).addScaledVector(_fd, 10); camera.lookAt(_look);
+  const fov=sc ? (sc.fov||24) : 64; if(Math.abs(fov-_fovNow)>.01){ _fovNow+=(fov-_fovNow)*Math.min(1,dt*10); camera.fov=_fovNow; camera.updateProjectionMatrix(); }
+  if(me.root.visible){ me.root.visible=false; _bodyHid=true; }
+  cam.tx=P.x; cam.ty=P.y+1.45; cam.tz=P.z; cam.occ=undefined;
+  if(!QP.staticShadow) placeSun(P.x,P.z); return true; }
 function updateCamera(dt){
+  if((HOOK.scope || (cam.fpv && (!HOOK.camOverride || HOOK.vehicle))) && firstPerson(dt)) return;
+  if(_bodyHid){ me.root.visible=true; _bodyHid=false; _pf=null; } if(_fovNow!==55){ _fovNow=55; camera.fov=55; camera.updateProjectionMatrix(); }
   if(HOOK.camOverride){ const o=HOOK.camOverride, kk=1-Math.exp(-dt*(o.k||5)); camera.position.lerp(o.pos, kk); _look.lerp(o.look, kk); camera.lookAt(_look);
     o.near = camera.position.distanceTo(o.pos)<.03; return; }
   const k=1-Math.exp(-dt*9); cam.tx=lerp(cam.tx,P.x,k); cam.ty=lerp(cam.ty,P.y+1.45,k); cam.tz=lerp(cam.tz,P.z,k);
@@ -1555,7 +1577,8 @@ try{ await renderer.compileAsync(scene, camera); }catch(e){ console.warn('compil
 tick();
 $('loading').style.opacity='0'; setTimeout(()=>{ $('loading').hidden=true; if(!store.get('qcworld-helped',0)) $('helpWrap').hidden=false; canvas.focus(); }, 650);
 // hỗ trợ kiểm thử (gọi từ console): __qc.snap() chụp khung hình hiện tại ra ảnh tĩnh
-window.__qc={P, teleport, setTime, music, renderer, composer, scene, camera, bloom, K, frame, closeHelp, cam, W, get life(){ return W.life; },
+window.__qcView=()=>setView(!cam.fpv);
+window.__qc={setView, P, teleport, setTime, music, renderer, composer, scene, camera, bloom, K, frame, closeHelp, cam, W, get life(){ return W.life; },
   snap(on=true){ let im=$('snapImg'); if(!on){ if(im) im.remove(); return; } frame(1/60); const url=canvas.toDataURL('image/jpeg',.85);
     if(!im){ im=document.createElement('img'); im.id='snapImg'; im.style.cssText='position:fixed;inset:0;width:100%;height:100%;z-index:3;pointer-events:none'; document.body.appendChild(im); } im.src=url; }};
 </script>

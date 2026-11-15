@@ -10,14 +10,14 @@
 | # | Hạng mục | File | Cỡ | Trạng thái |
 |---|---|---|---|---|
 | A1 | **Điểm nhảy (bản đồ)**: nhảy "Căn hộ Sky QC" rơi ra chỗ lạ; nhảy thác thì đứng sát vách bị che. Mọi điểm nhảy phải: đứng chỗ trống, thấy toàn cảnh, hướng nhìn không bị che | world.html `teleport` + các `PLACES.push` | vừa | ✅ 73 điểm nhảy đã rà: Sky QC hết rơi đáy biển; camera tự chọn góc trống (còn: chòi đỉnh núi dưới mái) |
-| A2 | **Thác nước**: rộng bề ngang hơn nhiều (kiểu Niagara), có đường đi bộ + đài ngắm sát thác, tiếng nước lớn dần khi lại gần | highland.js | lớn | ⬜ |
+| A2 | **Thác nước**: rộng bề ngang hơn nhiều (kiểu Niagara), có đường đi bộ + đài ngắm sát thác, tiếng nước lớn dần khi lại gần | highland.js | lớn | ✅ Thác Móng Ngựa rộng 52 m cao 24 m, hồ trên/dưới, đài ngắm chân thác (sàn gỗ), 100 bậc đá, đài ngắm đỉnh thác, lối dạo từ phố cổ, tiếng thác theo khoảng cách (âm thanh chưa nghe thử được trong máy test) |
 | A3 | **Rạp phim**: ngồi được, ngồi xong xem ở góc nhìn thứ 1; có sảnh + nhân viên soát vé + cửa + hành lang tối (đèn dịu / vạch dạ quang) rẽ trái/phải vào phòng chiếu | arena.js | lớn | ⬜ |
 | A4 | **Nhấp nháy (z-fighting)**: sân bóng, băng rôn, vài cửa toà Ngoại ngữ – rà toàn bộ | arena.js, langcenter.js, … | vừa | ✅ sửa gốc toàn game (tấm dán ưu tiên chiều sâu + near .3) + sân bóng, cổng sân; còn vài chỗ nhỏ – xem mục B |
 | A5 | **Chợ/cửa hàng**: bỏ kiểu quầy bấm E; xây CHỢ LỚN đi bộ vào được, mỗi gian trưng bày thật nhiều hàng (giày nhiều màu/kiểu…), xây to | ward.js, city.js, life.js (shop UI) | lớn | ⬜ |
 | A6 | **Bố cục phố**: nhà nằm đủ trên phố, không chen chúc; đất dư thì dùng, thiếu thì nới đất; nhà to hơn | roads.js/ward.js/downtown.js (phiên công viên đang quy hoạch) | lớn | 🟡 phiên công viên 15/11: đã quy hoạch lại theo khối (CITY.roads, đường 20 m, phường tới z 480, công viên giữa, khối bệnh viện/cứu hoả/trường/lô đất/cao ốc); Trung tâm Việc làm dời khỏi vỉa hè. Còn: phóng to các toà cao ốc (downtown.js DEFS) |
 | A7 | **Nhân viên tư vấn** (Trung tâm Việc làm) đứng dang tay chữ T → ngồi, hai tay đặt trước đùi; nội thất thêm cây/vật trang trí, bớt trắng | jobcenter.js | nhỏ–vừa | ✅ ngồi ghế quầy, hết dang tay (nội thất/cây: ⬜) |
 | A8 | **Showroom xe**: bỏ quầy bé; showroom rộng gấp đôi, 2 tầng, ≥ 20 xe nhiều kiểu/hãng (hãng tự đặt, không dùng thương hiệu thật) | showroom.js, ward.js | lớn | ⬜ |
-| A9 | **Góc nhìn thứ 1 / thứ 3** chọn được ở khu vui chơi, cáp treo, ống nhòm; ngồi tại chỗ xoay 360° | world.html (camera), transit.js, funisland.js, arena.js, monument.js | vừa | ⬜ |
+| A9 | **Góc nhìn thứ 1 / thứ 3** chọn được ở khu vui chơi, cáp treo, ống nhòm; ngồi tại chỗ xoay 360° | world.html (camera), transit.js, funisland.js, arena.js, monument.js | vừa | ✅ phím Q (hoặc bấm chữ ở thanh gợi ý): góc nhìn thứ 1/3 ở mọi nơi – đi bộ, ngồi ghế, phương tiện; ống nhòm tháp QC xoay 360° + phóng to. Chưa thử riêng: cáp treo, vòng quay, tàu lượn |
 | A10 | **Tháp QC**: nền trắng; mỗi tầng cao rộng hơn (camera bị thu gần); vạch/lan can vẽ chắn ngang lối cầu thang; đi vào tự té xuống cầu thang; ghế bấm được từ tầng khác rồi rớt lên rớt xuống; kiến trúc phải lớn + đẹp như biểu tượng thế giới | monument.js, life.js (ghế) | lớn | 🔧 phiên chính (ghế: xem A19) |
 | A11 | **Quán ven núi**: biển tên bị ngược chữ khi nhìn từ ngoài (mặt ngoài = tên quán, mặt trong = "Cảm ơn quý khách"); mỗi quán kiến trúc khác nhau; có đầu bếp, phục vụ bưng món, món trên bàn; rộng hơn, gác lửng/2 tầng; tầng dưới bị vùi trong đất (đèn lồng sát mặt đất) | mountaintown.js | lớn | 🔧 biển tên: ✅ (mặt ngoài tên quán, mặt trong "Cảm ơn quý khách"); phần kiến trúc/nhân viên: ⬜ |
 | A12 | **Đường đèo** uốn vòng vèo; cỏ mọc xuyên mép đường → nắn thẳng/nới đất, dọn cỏ khỏi mặt đường | hills.js | vừa | ⬜ |
@@ -31,6 +31,7 @@
 | A20 | **Cột đèn đứng giữa đường** ở cổng "Thế giới mở" (đầu cầu phía đảo) – rà mọi vật thể lệch sau khi quy hoạch lại | city.js + công cụ rà | nhỏ | ✅ (cột đèn vành đai đầu cầu) |
 | A21 | **Giao diện (UI)** trống trải, nhàm → làm lại đồ hoạ các bảng (chợ, hồ sơ, bản đồ…) | world.html CSS, life.js | vừa | ⬜ |
 | A22 | Chất lượng chung: nội thất, hành vi nhân vật, cử động… chưa đạt – được phép dùng thư viện/tài sản miễn phí (CC0) | nhiều | – | liên tục |
+| A23 | **Khu vui chơi**: thiết kế lại theo tài liệu Bình gửi (`Downloads\Thiet Ke Cong Vien Qc World Disneyland.md`) – công viên chủ đề nguyên bản của QC World, KHÔNG dùng tên/nhân vật/hình ảnh có bản quyền | funisland.js, arena.js | lớn | ⬜ (làm sau A2 + A9) |
 
 ## B. Còn lại từ đợt rà sáng 15/11
 - Bờ Tây đảo chính (x −71…−46, |z|<14) và quanh bệ tháp Brand QA (x 11…18, z 66…74): mặt nhìn thấy cao hơn chỗ đứng ~0,6 m. ⬜
@@ -51,6 +52,7 @@
 ## NHẬT KÝ THAY ĐỔI (mỗi phiên tự ghi – mới nhất ở trên)
 | Giờ | Phiên | File | Vùng (x0–x1, z0–z1) | Việc |
 |---|---|---|---|---|
+| 15/11 15:10 | đồ hoạ/QA | highland.js (thác + đài ngắm + bậc đá + lối dạo + tiếng thác), world.html (góc nhìn thứ nhất: setView/firstPerson, HOOK.scope, phím Q, thanh gợi ý), monument.js (ống nhòm → HOOK.scope), transit.js + arena.js (không tự xoay khi góc nhìn 1) | Cao nguyên x 190–290, z −320…−170 | A2, A9 |
 | 15/11 14:40 | qc-park (công viên) | traffic.js | cầu đảo x 105–136, z 10–14 · ngã ba (146,0) | Lối bộ hành Nam cầu đảo khớp vạch qua đường nhánh Nam đại lộ x=146 (z 11,4–14,2); thêm cột đèn tín hiệu + đèn người đi bộ đứng trên lối bộ hành cầu (góc ngã ba ngoài đất trước đây bị bỏ) → người từ cầu chờ đèn rồi qua vạch sang vỉa hè công viên |
 | 15/11 14:10 | qc-park (công viên) | traffic.js, ward.js, downtown.js | toàn thành phố 136–262, −62…480 | A13: vạch kẻ đường + vạch qua đường Downtown hiện lại (noFar cho lưới phủ cả thành phố) |
 | 15/11 13:40 | qc-park (công viên) | park.js (viết lại), civic.js (mới), jobcenter.js, downtown.js, LAND_CLAIMS.md | công viên 156–242, 10–190 · bệnh viện/cứu hoả 215–261, 215–275 · trường 214–262, 305–365 · TT Việc làm 166–186, 256–273 | Đại công viên Hồ Ngọc + khu công cộng; TT Việc làm lùi 6 m khỏi đường z=290; thanh chặn lan can cầu đảo không còn lấn làn xe máy x=146 |

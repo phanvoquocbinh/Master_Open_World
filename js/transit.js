@@ -362,7 +362,7 @@ export function makeTransit(W, ctx){
     if(cabRide){ const r=cabRide;
       if(r.state==='wait'){ const i0 = r.from==='A' ? iA_dep : iB_dep; const c=cabins.find(c=>{ const i=idxAt(c.u); return i>=i0 && i<=i0+3; });
         if(c){ r.cab=c; r.state='ride'; me.g.visible=false; HOOK.camDist=14; toast('🚡 Cabin đã tới – lên! Kéo chuột để ngắm cảnh, tới ga bên kia sẽ tự xuống.', 3600);
-          HOOK.vehicle={drive:(dt2)=>{ const p=c.p; P.x=p.x; P.z=p.z; P.y=p.y-3.4; P.face=p.h; me.g.position.set(p.x,p.y-3.9,p.z); if(!W.dragging) cam.yaw+=dt2*.12; }}; } }
+          HOOK.vehicle={drive:(dt2)=>{ const p=c.p; P.x=p.x; P.z=p.z; P.y=p.y-3.4; P.face=p.h; me.g.position.set(p.x,p.y-3.9,p.z); if(!W.dragging && !cam.fpv) cam.yaw+=dt2*.12; }}; } }
       else if(r.state==='ride'){ const i=idxAt(r.cab.u), ia = r.from==='A' ? iB_arr : iA_arr; if(i>=ia+3 && i<=ia+7) alightCable(r.from==='A' ? stB : stA); } }
   }
   const exitOf=stn=>stn.wl(0, stn===stB ? LS+.4 : -LS-.4);
