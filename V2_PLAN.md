@@ -5,7 +5,7 @@ Tài liệu gốc:
 - `KIEN_TRUC_HIEN_TRANG.md`: hiện trạng V1, các API lõi phải giữ nguyên.
 
 ## 1. Chế độ V2 (không làm vỡ thế giới cũ)
-- Mở game với **`world.html?v2`** (hoặc `localStorage.setItem('qcworld-v2','1')`) để vào thế giới V2. Mở bình thường vẫn là V1. Khi mọi pha xong, phiên chính sẽ chuyển mặc định sang V2.
+- **Từ 16/11/2026 mặc định là V2** (Pha 1–8 đã xong). Muốn xem thế giới cũ: mở **`world.html?v1`** (hoặc `localStorage.setItem('qcworld-v2','0')`). `?v2` vẫn ép bật V2.
 - Ở chế độ V2, `js/v2core.js` gỡ toàn bộ nội dung khu vực V1: nhà, đường, cây, va chạm, điểm E, ghế, PLACES, EXTL, vùng phố phẳng `inDT`. Phần lõi được giữ: biển, trời, nhân vật, xe, kinh tế, điện thoại/laptop/nhạc, nhiều người chơi.
 - Sau đó các module V2 được nạp theo bảng `ZONES` trong `js/v2core.js`. Mỗi file đã có sẵn stub `export function make(W, ctx){ return null; }`; phiên được giao thay nội dung stub đó.
 - `ctx` = {S, save, ui, askPay, fmt, spend, addCoins, V, city, bots, jobs, zone, ZONES}. Kết quả trả về được gán vào `W.<key>V2`.

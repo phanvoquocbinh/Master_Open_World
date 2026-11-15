@@ -1,10 +1,10 @@
 // QC World V2 – PHA 2: KHUNG THẾ GIỚI V2 (theo QC_WORLD_V2_MASTER_BIBLE_AND_CODE_SPECS.md – Phần 0)
-//  • Chế độ V2 bật khi mở game với ?v2 (hoặc localStorage 'qcworld-v2' = '1'). Mặc định vẫn là thế giới cũ (V1) cho tới khi V2 xây xong.
+//  • Từ 16/11/2026 MẶC ĐỊNH là V2. Muốn xem thế giới cũ (V1): mở world.html?v1 (hoặc localStorage 'qcworld-v2' = '0'). ?v2 vẫn ép bật V2.
 //  • ZONES: bảng phân vùng toạ độ V2 (không chồng lấn) – mọi module V2 chỉ dựng trong đúng vùng của mình.
 //  • clearLegacy(W): ở chế độ V2, gỡ toàn bộ nội dung khu vực cũ (nhà, đường, cây, va chạm, điểm E, ghế, điểm nhảy bản đồ, đất EXTL)
 //    – giữ lại hệ thống lõi: biển, trời, ánh sáng, nhân vật, xe, kinh tế, điện thoại/laptop, nhiều người chơi.
 //  • MODULES: danh sách module V2 (nạp động; file chưa có thì bỏ qua). Mỗi file export make(W, ctx) và tự đăng ký EXTL/PLACES của mình.
-export const V2 = (()=>{ try{ return new URLSearchParams(location.search).has('v2') || localStorage.getItem('qcworld-v2')==='1'; }catch(e){ return false; } })();
+export const V2 = (()=>{ try{ const q=new URLSearchParams(location.search); if(q.has('v1')) return false; if(q.has('v2')) return true; return localStorage.getItem('qcworld-v2')!=='0'; }catch(e){ return true; } })();
 
 // Bảng phân vùng V2 (x0..x1, z0..z1 theo mét; y = cao độ dự kiến). Skyport thu x1 về 175 để không chạm CBD (x ≥ 180).
 export const ZONES = {

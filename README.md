@@ -2,6 +2,11 @@
 
 > Cập nhật: 14/11/2026 – **S15 (phần 1): Đảo Master Dashboard như đảo thật** · **S8: Sửa lỗi, bản đồ, va chạm, quán xá** · Sprint 7: Nhiều người chơi · Sprint 6: Cao nguyên · Sprint 5: Giải trí · Sprint 4: Giao thông công cộng. Kế hoạch các sprint (S9–S18 đang chờ): [SPRINTS.md](SPRINTS.md)
 
+### QC World V2 – thế giới mới là mặc định (16/11/2026)
+- Mở `world.html` là vào **V2**. Muốn xem thế giới cũ: `world.html?v1`. Kế hoạch, bảng vùng và 9 cổng nối: `V2_PLAN.md`.
+- 8 vùng nối thông bằng đường/cầu (không tuyến cụt): **Đảo Vực Thẳm Abyssal** (trung tâm, ±180 m, đáy vực −29 m, ốc đảo Master Dashboard) · **River Tech CBD** (Đông) · **Sân bay Skyport** (Nam) · **Dev City Trùng Khánh** (Bắc) · **Đỉnh Brain Citadel** (Đông, tháp Hoa Sen 150 m) · **Đảo Ngoại ngữ Thụy Sĩ** (Tây) · **Ốc đảo Palm Dubai** (Đông Nam) · **Wonderland + Công viên Kỳ Quan** (dời về Nam).
+- Bộ dựng kiến trúc chung `js/archKit.js` (xem `archkit_demo.html`).
+
 ### S15 (phần 1) – Đảo Master Dashboard như đảo thật (14/11)
 - **🌊 Sóng vỗ bờ** quanh đảo chính + đảo nghỉ dưỡng: viền bọt trắng tràn lên bãi rồi rút, vệt cát ướt, các lớp sóng bạc đầu từ ngoài khơi vào (1 lượt vẽ mỗi đảo).
 - **🌴 Rặng dừa dày** (~77 cây mới, vẽ theo lô nên chỉ ~15 lượt vẽ), tàu lá **đung đưa theo gió**.
