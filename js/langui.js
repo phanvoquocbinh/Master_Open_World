@@ -30,6 +30,8 @@ export function createApp(W, ctx = {}){
   const TR = {
     en: {name:'Tiếng Anh', short:'EN', lang:'en-GB', goal:'Từ con số 0 → IELTS 8.0+', unit:'từ'},
     zh: {name:'Tiếng Trung', short:'中', lang:'zh-CN', goal:'Từ con số 0 → HSK 7–9 (cao cấp)', unit:'chữ'},
+    ja: {name:'Tiếng Nhật', short:'日', lang:'ja-JP', goal:'Hiragana → JLPT N1 + IT (đang soạn)', unit:'chữ'},
+    ko: {name:'Tiếng Hàn', short:'한', lang:'ko-KR', goal:'Hangul → TOPIK II (đang soạn)', unit:'chữ'},
   };
   const flag = t => `<span class="lcx-flag ${t}">${TR[t].short}</span>`;
   const langOf = (t, x) => (x && x.lang) || TR[t].lang;
@@ -50,7 +52,7 @@ export function createApp(W, ctx = {}){
   const EXTRA = (t, k) => J(`lang_${t}_${k}.json`);   // talk | mock | guide
   async function levelMeta(t, c){ const I = await IDX(); return (I.tracks[t]?.levels || []).find(l => l.code === c); }
   const lid = (t, c, n) => `${t}-${c}-${String(n).padStart(2,'0')}`;
-  const parseId = id => { const m = /^(en|zh)-([a-z0-9]+)-(\d+)$/.exec(id); return m ? {t:m[1], c:m[2], n:+m[3]} : null; };
+  const parseId = id => { const m = /^(en|zh|ja|ko)-([a-z0-9]+)-(\d+)$/.exec(id); return m ? {t:m[1], c:m[2], n:+m[3]} : null; };
   function wordsOf(L){ const out = []; for(const p of L.parts || []) if(p.k === 'words') for(const w of p.items || []) out.push(w); return out; }
   function linesOf(L){ const out = []; for(const p of L.parts || []) if(p.k === 'dialog') for(const l of p.lines || []) out.push({...l, lang:p.lang}); return out; }
 
@@ -137,7 +139,7 @@ export function createApp(W, ctx = {}){
 .lcx .hl{background:rgba(255,210,63,.24);border-radius:4px;padding:0 3px}.lcx .ipa{color:#9fd2ff}.lcx .py{color:#ffd27a}
 .lcx .zh{font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC","SimSun",sans-serif}.lcx .zhb{font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif;font-size:1.3em}
 .lcx-flag{display:inline-grid;place-items:center;min-width:30px;height:24px;padding:0 6px;border-radius:7px;font:800 13px "Segoe UI","Microsoft YaHei",sans-serif;vertical-align:middle;margin-right:6px}
-.lcx-flag.en{background:#1f4fa8;color:#fff}.lcx-flag.zh{background:#c62f2f;color:#ffe08a}
+.lcx-flag.en{background:#1f4fa8;color:#fff}.lcx-flag.zh{background:#c62f2f;color:#ffe08a}.lcx-flag.ja{background:#f4f1e8;color:#b3261e}.lcx-flag.ko{background:#0f5b4f;color:#ffd36b}
 .lcx-badge{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;background:rgba(255,255,255,.12);margin-left:6px;white-space:nowrap}
 .lcx-badge.red{background:#e5484d}.lcx-badge.green{background:#2f9e6e}.lcx-badge.gold{background:#b8860b}.lcx-badge.blue{background:#3b6fd8}
 .lcx-bar{height:8px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden;margin:6px 0}.lcx-bar i{display:block;height:100%;background:linear-gradient(90deg,#46d39a,#7fb2ff)}
@@ -607,7 +609,7 @@ export function createApp(W, ctx = {}){
     el.innerHTML = `<h1>🗣️ Trung tâm Ngoại ngữ QC</h1>
       <p class="mut">Học <b>miễn phí</b>. ${flag('en')}Tiếng Anh từ con số 0 → IELTS 8.0+ · ${flag('zh')}Tiếng Trung từ con số 0 → HSK 7–9. Bài học đánh số theo từng cấp: phát âm → từ vựng → ngữ pháp → nghe → đọc → nói → viết → bài tập tự chấm; cuối cấp có bài thi; cuối lộ trình có đề thi thử. Hệ thống tự <b>bắt kiểm tra lại</b> bài cũ đúng lúc bạn sắp quên (sau 1 · 3 · 7 · 14 · 30 · 60 ngày).</p>
       ${due.length ? `<div class="lcx-card hot"><h3>📌 Đến hạn kiểm tra lại: ${due.length} bài</h3><p class="mut">Mỗi bài ~3 phút. Đạt ≥ 80% → lịch ôn giãn ra; chưa đạt → mai kiểm tra lại.${P.set.force ? ' <b>Phải làm xong mới được học bài mới.</b>' : ''}</p>${due.slice(0, 8).map(d => { const p = parseId(d.id); return `<button class="lcx-btn sm" data-go="${go({v:'review', id:d.id})}">${flag(p.t)} ${esc(p.c.toUpperCase())} · Bài ${p.n}</button>`; }).join('')}${due.length > 8 ? ` <small>… và ${due.length - 8} bài</small>` : ''}</div>` : ''}
-      <div class="lcx-grid" style="grid-template-columns:repeat(auto-fill,minmax(330px,1fr))">${card('en')}${card('zh')}</div>
+      <div class="lcx-grid" style="grid-template-columns:repeat(auto-fill,minmax(330px,1fr))">${['en', 'zh', 'ja', 'ko'].filter(t => !I || I.tracks[t]).map(card).join('')}</div>
       <div class="lcx-card"><div class="lcx-row">🔥 Chuỗi ngày học: <b>${st}</b> · Hôm nay: <b>${P.stats.days[dkey()] || 0}</b> phút · Bài đã xong: <b>${Object.keys(P.done).length}</b> · Thẻ từ đang ôn: <b>${Object.keys(P.srs).length}</b> · Chứng chỉ: <b>${Object.keys(P.certs).length}</b></div></div>
       <div class="lcx-grid">
         <div class="lcx-tile" data-go="${go({v:'help'})}"><div class="big">🧭</div><b>Hướng dẫn & lộ trình</b><div class="mut">Cách học hiệu quả, bảng cấp độ CEFR/IELTS/HSK, cách dạy lại cho người khác</div></div>

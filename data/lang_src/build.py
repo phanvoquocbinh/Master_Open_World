@@ -31,6 +31,25 @@ LEVELS = {
     ('hsk6', 'HSK 6', 'Cao cấp · 5.000/5.456 từ', 'Văn báo chí – học thuật, thành ngữ, 书面语, tìm câu sai, tóm tắt 400 chữ.', 1600),
     ('hsk79','HSK 7–9', 'Cao cấp HSK 3.0 · 11.092 từ', 'Nghị luận, dịch Việt⇄Trung, văn ngôn cơ bản, thuyết trình học thuật.', 2500),
   ],
+  # Khung khoá học chưa có dữ liệu (V2: học viện Kyoto & Hanok đã xây – nội dung soạn sau)
+  'ja': [
+    ('kana', 'Cấp 0 · Hiragana & Katakana', '–', 'Bảng chữ Hiragana, Katakana, phát âm, trường âm, âm ngắt; viết chữ đúng nét.', 30),
+    ('n5', 'JLPT N5', 'Sơ cấp 1 · ~800 từ', 'Chào hỏi, giới thiệu, số đếm, thời gian; です/ます, trợ từ は・が・を・に.', 150),
+    ('n4', 'JLPT N4', 'Sơ cấp 2 · ~1.500 từ', 'Thể て, thể ない, thể khả năng, so sánh; ~300 Kanji.', 300),
+    ('n3', 'JLPT N3', 'Trung cấp · ~3.750 từ', 'Kính ngữ cơ bản, bị động – sai khiến; đọc báo đơn giản.', 600),
+    ('n2', 'JLPT N2', 'Trung cao · ~6.000 từ', 'Văn viết, ngữ pháp N2, đọc hiểu dài, nghe tin tức.', 1000),
+    ('n1', 'JLPT N1', 'Cao cấp · ~10.000 từ', 'Văn học thuật, kính ngữ nâng cao, thành ngữ.', 1600),
+    ('it', 'Tiếng Nhật IT', 'Chuyên ngành', 'Từ vựng & hội thoại IT: họp, báo cáo bug, đặc tả, email công việc.', 200),
+  ],
+  'ko': [
+    ('hangul', 'Cấp 0 · Hangul', '–', 'Bảng chữ Hangul: nguyên âm, phụ âm, patchim, quy tắc nối âm.', 20),
+    ('t1', 'TOPIK 1', 'Sơ cấp 1 · ~800 từ', 'Chào hỏi, giới thiệu, mua sắm; đuôi câu 입니다/요.', 150),
+    ('t2', 'TOPIK 2', 'Sơ cấp 2 · ~1.500 từ', 'Quá khứ – tương lai, nối câu, kính ngữ cơ bản.', 300),
+    ('t3', 'TOPIK 3', 'Trung cấp 1', 'Hội thoại công sở, đọc văn bản ngắn, viết đoạn.', 500),
+    ('t4', 'TOPIK 4', 'Trung cấp 2', 'Đọc báo, nghe tin tức, viết bài 300 chữ.', 700),
+    ('t5', 'TOPIK 5', 'Cao cấp 1', 'Văn bản học thuật, thuyết trình, nghị luận.', 1000),
+    ('t6', 'TOPIK 6', 'Cao cấp 2', 'Thành ngữ, văn viết chuyên ngành, viết luận 600–700 chữ.', 1300),
+  ],
 }
 PY_REQUIRED = {'l0', 'hsk1', 'hsk2', 'hsk3', 'hsk4'}
 
