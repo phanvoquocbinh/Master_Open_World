@@ -18,9 +18,9 @@ Tài liệu gốc:
 | cbd | River Tech CBD | 180 → 580 | −120 → 460 | 0 → 140 | `js/river_cbd.js` (+ `bigtech_interiors.js`) | 4 | qc-park |
 | skyport | Sân bay Quốc tế | −180 → 175 | 220 → 380 | 4 → 68 | `js/skyport.js` | 5 | qc-park (sau Pha 4) |
 | devcity | Dev City Trùng Khánh 8D | 100 → 850 | −950 → −120 | 2 → 135 | `js/devcity_chongqing.js` | 6 | qc-world-laptop |
-| brain | Đỉnh QA/QC Brain Citadel | 620 → 1150 | −100 → 450 | 0 → 168 | `js/brain_citadel.js` | 7 | phiên chính |
+| brain | Đỉnh QA/QC Brain Citadel | 620 → 1150 | −100 → 450 | 0 → 168 | `js/brain_citadel.js` | 7 | phiên chính – ✅ đã lên GitHub |
 | swiss | Đảo Ngoại ngữ Thụy Sĩ | −850 → −250 | −500 → 250 | 0 → 95 | `js/swiss_lang_island.js` | 8A | qc-lang-center |
-| palm | Ốc đảo Palm Dubai | 250 → 1050 | 520 → 1320 | −8 → 65 | `js/palm_dubai.js` | 8B | phiên xong sớm nhận |
+| palm | Ốc đảo Palm Dubai | 250 → 1050 | 520 → 1320 | −8 → 65 | `js/palm_dubai.js` | 8B | qc-lang-center (sau 8A) |
 | wonder | Wonderland + Kỳ Quan (dời về Nam) | −320 → 220 | 520 → 1350 | 0 → 98 | `js/wonder_v2.js` | 2 (dời) | qc-world-do-hoa (sau Pha 3) |
 | bots | 55 loại bot | toàn thế giới | | | `bots.js`, `pedestrians.js`, `streetlife.js` | 9 | sau cùng |
 
