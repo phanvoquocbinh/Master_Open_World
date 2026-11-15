@@ -785,7 +785,7 @@ export async function initLife(W){
   if(!S.s2seen){ S.s2seen=1; save(); setTimeout(()=>toast('🛏️ Bạn được cấp PHÒNG TRỌ MIỄN PHÍ ở Phường Khởi Nghiệp (qua cầu phía Đông). Đảo này miễn phí; kiếm tiền ở 🧑‍💼 Trung tâm Việc làm.', 7000), 8500); }
   if(!localStorage.getItem('qcworld-profile')) setTimeout(openProfile, 900);
   renderBuffs();
-  if(V2mod.V2){ const sp=W.V2SPAWN||{x:0,z:0,lx:0,lz:-10}; teleport(sp.x, sp.z, sp.lx, sp.lz); setTimeout(()=>toast('🧪 Đang ở chế độ THẾ GIỚI V2 (đang xây). Bỏ ?v2 khỏi địa chỉ để về thế giới cũ.', 5000), 1200); }
+  if(V2mod.V2){ const home=(S.condos||[]).length && W.PLACES.find(p=>/^Căn hộ của bạn/.test(p.name)); if(home) home.go(); else { const sp=W.V2SPAWN||{x:0,z:0,lx:0,lz:-10}; teleport(sp.x, sp.z, sp.lx, sp.lz); } setTimeout(()=>toast('🧪 Đang ở chế độ THẾ GIỚI V2 (đang xây). Bỏ ?v2 khỏi địa chỉ để về thế giới cũ.', 5000), 1200); }
   if(firstBike) setTimeout(()=>toast('🎁 Người mới được tặng 🚲 xe đạp! Bấm V để đạp xe đi học, đi làm.', 5500), 2500);
   try{ W.multi=makeMulti(W, {S, save, ui, V}); }catch(e){ console.warn('multi', e); }   // S7: nhiều người chơi
   W.life={S, save, interior, downtown, ITEMS, buy, openQuiz, openShop, openLandOffice, openInventory, openProfile, brain, V, bots, city, lots, pets, emote, addCoins, askPay, sitOn, standUp};
