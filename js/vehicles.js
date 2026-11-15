@@ -159,7 +159,7 @@ export function makeVehicles(W, S, save){
   function drive(dt, inp){
     const r=ride, o=r.obj, ud=o.userData, boat=r.type==='boat';
     const road=!boat && onRoad(P.x,P.z,.5);
-    const vmax=(r.type==='car'?19*(V.carSpeed[S.carModel]||1):r.type==='bike'?14:r.type==='bicycle'?9.5:11)*(boat||road||r.type==='bicycle'?1:.55)*(inp.boost?1.18:1);
+    const vmax=(r.type==='car'?19*(V.carSpeed[S.carModel]||1):r.type==='bike'?14:r.type==='bicycle'?5:11)*(boat||road||r.type==='bicycle'?1:.55)*(inp.boost?1.18:1);
     const acc=r.type==='car'?6.5:r.type==='bike'?7:r.type==='bicycle'?5:4;
     if(!inp.free){ inp.iz=0; inp.ix=0; }
     if(inp.iz>0) r.v+=acc*dt; else if(inp.iz<0) r.v-= (r.v>0?13:acc*.6)*dt; else r.v-=Math.sign(r.v)*Math.min(Math.abs(r.v), (boat?1.5:3)*dt);

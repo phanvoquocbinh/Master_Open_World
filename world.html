@@ -813,6 +813,10 @@ const stage={tiles:[], beams:[], spots:[]};
     const c=mesh(new THREE.CylinderGeometry(.6,.6,.06,24), MAT.metal, s*11.4,.8,-29.18); c.rotation.x=Math.PI/2; (stage.subs||=[]).push(c);
   }
   boxes.push({x0:-12.6, x1:12.6, z0:-37.8, z1:-28});
+  // S-GFX (15/11): 2 bậc lên sân khấu giữa mép trước – sàn sân khấu cao 1,2 m > 0,65 m bước được, trước đây VIP mở lối cũng không lên được (đi lọt vào khối sân khấu)
+  mesh(box(4.4,.85,.5), MAT.stage, 0,.425,-27.75); mesh(box(4.4,.5,.5), MAT.stage, 0,.25,-27.25);
+  addPlat(0,-27.75,0,2.2,.25,.85); addPlat(0,-27.25,0,2.2,.25,.5);
+  for(const s of [-1,1]) boxes.push({x0:s*2.2-.06, x1:s*2.2+.06, z0:-28, z1:-27, y0:-1, y1:.3});   // hông bậc: không đi xuyên từ bên cạnh
   // sàn LED
   // 28 ô gộp thành 1 mesh (1 lượt vẽ thay vì 28); mỗi ô tự nháy theo nhạc trong shader (màu + pha theo đỉnh)
   const tc=[0x8e5bd1,0x2bb3a6,0x47b25b,0xf2c230,0xe5484d], ledU={uT:{value:0}, uOn:{value:0}, uNight:{value:0}}, tparts=[], _tcol=new THREE.Color();
@@ -1474,6 +1478,11 @@ function frame(dt){
   updatePlayer(dt); updateCamera(dt); updateFrustum(); updateWorld(dt); for(const f of HOOK.onFrame) f(dt, T); updateParts(dt); updateInteract(); updateLabels(); perf(dt); cullActors();
   if(QP.staticShadow && !W.inside){ if(shadowDirty){ shadowDirty=false; prepStaticShadow(); renderer.shadowMap.needsUpdate=true; } updateBlobs(); }
   else if(++shadowTick>=QP.shadowEvery){ shadowTick=0; renderer.shadowMap.needsUpdate=true; }
+  // SỬA GIẬT NGƯỜI CHƠI (15/11/2026): three r160 chỉ cập nhật xương nhân vật "1 lần mỗi khung" theo info.render.frame, nhưng bộ đếm này tăng
+  // GIỮA lượt vẽ cảnh và lượt vẽ bóng. Bóng vẽ cách khung (shadowEvery=2) → khung không vẽ bóng thì người chơi (có đổ bóng) bị vẽ bằng xương
+  // của khung TRƯỚC: thân tụt lại v·dt rồi bật lên (chạy 3,4 m/s ≈ 0,1–0,17 m; xe đạp ≈ 0,4 m). Bot không đổ bóng nên không bị.
+  // Tăng bộ đếm trước lượt vẽ chính → xương luôn của khung hiện tại (chỉ tốn 1 lần nhân ma trận xương cho nhân vật đổ bóng).
+  renderer.info.render.frame++;
   if(DIRECT) renderer.render(renderPass.scene, camera); else composer.render();
   if(HOOK.afterRender) HOOK.afterRender();
 }
