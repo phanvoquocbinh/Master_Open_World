@@ -26,6 +26,24 @@ Tài liệu gốc:
 
 Mỗi vùng có một kênh biển ngăn cách. Đất mới đăng ký bằng `W.EXTL.push({x0,x1,z0,z1,h:(x,z)=>độ cao|null, name})`. Hàm độ cao trả `null` ở ngoài đất; EXTL được ưu tiên hơn đảo cũ.
 
+
+## 2b. Cổng nối giữa các vùng – mọi tuyến đường phải thông nhau, KHÔNG tuyến nào cụt (Bình yêu cầu 15/11)
+Mỗi vùng phải đưa đường chính ra đúng các cổng của mình (cao độ mặt đường ghi ở cột y). Bên trong vùng, mọi con đường phải khép thành vòng hoặc dẫn ra một cổng; không có đường cụt.
+Cầu nối qua kênh biển giữa 2 vùng do vùng ở xa trung tâm hơn dựng: từ cổng của mình tới cổng của vùng kia, có lan can và mặt đứng (plat) suốt cầu.
+Nhớ thêm nút vào `W.transit.G` (nếu có) để taxi và xe bot đi xuyên vùng được.
+
+| Cổng | Vùng A → điểm (x, z, y) | Vùng B → điểm (x, z, y) | Ai dựng đoạn nối |
+|---|---|---|---|
+| G1 | Abyssal Đông (180, 0, +2) | CBD Tây (180, 0, +2) | 2 vùng liền nhau: mỗi bên đưa đường tới đúng x = 180 |
+| G2 | Abyssal Nam (0, 180, +4) | Skyport Bắc (0, 220, +4) | Skyport dựng cầu z 180 → 220 |
+| G3 | Abyssal Tây (−180, −16, +2) | Swiss Đông (−250, −16, +2) | Swiss dựng cầu x −250 → −180 |
+| G4 | CBD Đông (580, 86, +2) | Brain – đầu đường đèo (580, 86, +2) | ĐÃ CÓ (Brain dựng cầu 580 → 620) |
+| G5 | CBD Bắc (380, −120, +2) | Dev City Nam (380, −120, +2) | 2 vùng liền nhau |
+| G6 | Brain Bắc (700, −100, +4) | Dev City Đông Nam (700, −120, +2) | Dev City dựng đoạn nối |
+| G7 | CBD Nam (450, 460, +2) | Palm Bắc (450, 520, +2) | Palm dựng cầu z 460 → 520 |
+| G8 | Skyport Nam (0, 380, +4) | Wonder Bắc (0, 520, +2) | Wonder dựng cầu z 380 → 520 |
+| G9 | Wonder Đông (220, 900, +2) | Palm Tây (250, 900, +2) | Palm dựng cầu x 220 → 250 |
+
 ## 3. Hợp đồng kỹ thuật cho mọi module V2
 - **Đồ hoạ:** dùng `js/archKit.js` (Pha 1, xem `archkit_demo.html`):
   - `makePBRFacade` + `facadeUV`, `makeStoneMaterial`, `makeWoodMaterial`;
