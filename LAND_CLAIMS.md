@@ -28,4 +28,5 @@ Bình (14/11/2026): "tôi cho phép bạn mở đất rộng thêm tự do cho t
 | Phiên | Vùng x0–x1 | z0–z1 | Dùng cho | File |
 |---|---|---|---|---|
 | phiên chính | 476–640 | 66–274 | mở rộng Phố Núi (đồi thứ 2, đường đèo) | `js/hills.js`, `js/mountaintown.js` |
+| phiên công viên (qc-park) | 140–256 | 138–200 | Công viên Hồ Thiên Nga (đất mới phía Nam Phường Khởi Nghiệp: hồ lớn, đảo thủy đình, thuyền thiên nga, vườn hoa, bãi cỏ picnic) + lối đi giữa lô R6/R7 (x 198–200, z 91–118) và cầu bộ hành x 197–201, z 118–138 | `js/park.js` |
 | phiên Trung tâm Ngoại ngữ | −360…−160 | −120…100 | Đảo Ngoại ngữ (campus Trung tâm Ngoại ngữ QC) + cầu vòm từ bãi biển bờ Tây đảo chính (x −62…−180, z −22…−10, trục z = −16) | `js/langcenter.js` |
