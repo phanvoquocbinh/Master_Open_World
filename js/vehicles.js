@@ -134,7 +134,7 @@ export function makeVehicles(W, S, save){
     const o=ensure(type);
     if(at){ o.position.set(at.x, type==='boat'?WATER_Y:groundAt(at.x,at.z), at.z); o.rotation.y=at.h??P.face; }
     else if(type!=='boat' && Math.hypot(o.position.x-P.x, o.position.z-P.z)>8){   // xe ở xa → gọi xe tới
-      o.position.set(P.x, groundAt(P.x,P.z), P.z); o.rotation.y=P.face; burst(new THREE.Vector3(P.x,1,P.z), [0xffffff,0x8fe3ff], 50, 3, .8, 0, .15); }
+      o.position.set(P.x, W.groundAtY ? W.groundAtY(P.x,P.z,P.y+.3) : groundAt(P.x,P.z), P.z); o.rotation.y=P.face; burst(new THREE.Vector3(P.x,1,P.z), [0xffffff,0x8fe3ff], 50, 3, .8, 0, .15); }
     ride={obj:o, type, v:0, h:o.rotation.y, lean:0};
     P.x=o.position.x; P.z=o.position.z; P.face=ride.h;
     if(type==='car') me.g.visible=false;
@@ -147,7 +147,7 @@ export function makeVehicles(W, S, save){
     me.g.visible=true; HOOK.vehicle=null; HOOK.camDist=null; me.g.rotation.set(0, ride.h, 0, 'YXZ');
     if(to){ P.x=to.x; P.z=to.z; }
     else { const side=t==='car'?1.6:.9, rx=Math.cos(ride.h), rz=-Math.sin(ride.h); P.x=o.position.x+rx*side; P.z=o.position.z+rz*side; resolve(P); }
-    P.y=groundAt(P.x,P.z); P.vx=P.vz=0; ride=null;
+    P.y=W.groundAtY ? W.groundAtY(P.x,P.z,P.y+.3) : groundAt(P.x,P.z); P.vx=P.vz=0; ride=null;
     if(t==='boat'){ const pk=V.boatPark; if(pk){ o.position.set(pk.x, WATER_Y, pk.z); o.rotation.y=pk.h; } }
   };
   // té xe: nhân vật ngã ngửa ra đường ~1,5 s rồi tự đứng dậy (không đưa đi chỗ khác)
@@ -180,7 +180,7 @@ export function makeVehicles(W, S, save){
         if(sp>3){ r.v*=-.25; toast(`💥 Va chạm với ${what}!`, 1600); } else r.v*=.3; }
       const moved=Math.hypot(P.x-ox,P.z-oz), want=Math.abs(r.v*dt); if(want>.001 && moved<want*.5) r.v*=.4;
     }
-    const y = boat ? WATER_Y-.05+Math.sin(W.T*1.6)*.06 : groundAt(P.x,P.z);
+    const y = boat ? WATER_Y-.05+Math.sin(W.T*1.6)*.06 : (W.groundAtY ? W.groundAtY(P.x,P.z,P.y+.3) : groundAt(P.x,P.z));   /* bám đúng tầng (nút xoắn ốc, hầm, cầu 2 tầng) */
     P.y=y; P.face=r.h;
     o.position.set(P.x, y, P.z); o.rotation.y=r.h;
     r.lean=lerpAngle(r.lean, (r.type==='bike'||r.type==='bicycle') ? clamp(inp.ix*r.v*.035,-.35,.35) : boat ? Math.sin(W.T*1.3)*.04 : 0, 1-Math.exp(-dt*6));
