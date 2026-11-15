@@ -92,7 +92,7 @@ export async function make(W, ctx = {}){
     deep:new THREE.MeshStandardMaterial({color:0x0b5d7d, emissive:0x05324a, emissiveIntensity:.5, roughness:.3, transparent:true, opacity:.93, depthWrite:false, side:THREE.BackSide}),
     green:sm(0x2f8f4f, .7), awning:sm(0xff7b54, .6), navy:sm(0x18304f, .5), sand:sm(0xd9c49a, .8) };
   MAT.teak.userData.tileM = 2.4; MAT.stone.userData.tileM = 3;
-  const KX = Kit();
+  const KX = Kit(), CLUBS = [], FOODP = [];   // CLUBS/FOODP: vị trí cho bot Pha 9
 
   /* ============================== 3. ĐƯỜNG & CẦU (không đường cụt) ============================== */
   const RP = [], RC = [], RI = [], pc = new THREE.Color(), ROADL = [], VSEG = [], r1 = v => Math.round(v * 10) / 10;   // VSEG → W.V2ROADS (sổ đường chung V2)
@@ -289,7 +289,7 @@ export async function make(W, ctx = {}){
     for(const st of MST){ if(st === from) continue; const b = document.createElement('button'); b.className = 'btn'; b.textContent = `🚉 ${st.name}`; b.onclick = () => { m.close(); pay(8, `vé Monorail tới ${st.name}`, () => { teleport(656, st.gz, 656, st.gz + (st.z > 1000 ? 30 : 20)); toast(`🚝 Đã tới ${st.name}!`, 2500); }); }; g.appendChild(b); } }
   // phố ẩm thực dưới đường ray (z 600–840)
   { const FOOD = ['🦞 Hải sản Bình Phan', '🍣 Sushi Marina', '🌮 Taco Bay', '🍕 Pizza Palm', '🥙 Shawarma Dubai', '🍦 Gelato Beach', '🍜 Phở Ốc Đảo', '🧋 Trà sữa Coral'];
-    FOOD.forEach((n, i) => { const z = 610 + i * 32, x = i % 2 ? 660 : 640; KX.add(B(6, 2.8, 4), MAT.cream, x, Y + 1.4, z); KX.add(B(7, .2, 5.4), MAT.awning, x, Y + 3.3, z + .4); KX.add(B(5.6, 1, .5), MAT.teak, x, Y + .5, z + 2.3);
+    FOOD.forEach((n, i) => { const z = 610 + i * 32, x = i % 2 ? 660 : 640; FOODP.push({x, z, n}); KX.add(B(6, 2.8, 4), MAT.cream, x, Y + 1.4, z); KX.add(B(7, .2, 5.4), MAT.awning, x, Y + 3.3, z + .4); KX.add(B(5.6, 1, .5), MAT.teak, x, Y + .5, z + 2.3);
       boxes.push({x0:x - 3, x1:x + 3, z0:z - 2, z1:z + 2.6, y0:Y - 1, y1:Y + 3.5});
       for(let t = 0; t < 2; t++){ const tz = z + 6 + t * 3.2; KX.add(new THREE.CylinderGeometry(.6, .6, .08, 16), MAT.white, x, Y + .75, tz); KX.add(new THREE.CylinderGeometry(.08, .1, .72, 8), MAT.dark, x, Y + .37, tz); for(const s of [-1, 1]) KX.add(B(.45, .45, .45), MAT.navy, x + s * 1, Y + .22, tz); addSeg(x, tz, x, tz, .65, Y - 1, Y + 1); }
       sign(signTex(512, 128, '#ff7b54', [[n, `800 44px ${FONT}`, '#fff', .52]]), 5, 1.25, x, Y + 3.95, z + 3.1, 0, .5);
@@ -297,7 +297,7 @@ export async function make(W, ctx = {}){
   // 6 Beach Club ở mép thân cọ (giữa các nhánh lá): nhà club + hồ bơi + ghế tắm nắng + dù sát biển
   const UMB = [];
   { let n = 0;
-    for(const z of [700, 780, 860]) for(const s of [-1, 1]){ const x = 650 + s * 41; n++;
+    for(const z of [700, 780, 860]) for(const s of [-1, 1]){ const x = 650 + s * 41; n++; CLUBS.push({x, z, s, n});
       KX.add(B(10, 3.4, 12), MAT.white, x, Y + 1.7, z); KX.add(B(12, .25, 14), MAT.teak, x, Y + 3.5, z); boxes.push({x0:x - 5, x1:x + 5, z0:z - 6, z1:z + 6, y0:Y - 1, y1:Y + 3.6});
       KX.add(B(6, .1, 10), MAT.pool, x + s * 11, Y + .07, z); KX.add(B(7, .06, 11), MAT.stone, x + s * 11, Y + .03, z);
       for(let i = 0; i < 4; i++){ KX.add(B(1.9, .35, .8), MAT.white, x + s * 18, Y + .18, z - 4.5 + i * 3); if(i < 3) UMB.push([x + s * 18.4, z - 3 + i * 3]); }
@@ -369,5 +369,8 @@ export async function make(W, ctx = {}){
     {icon:'🏨', name:'Khách sạn Vòm Vương Miện', sub:'Cuối tuyến Monorail · đài ngắm cảnh tầng 50', go:tp(650, 1272, 650, 1300)},
     {icon:'🔑', name:'Nhà của tôi (Palm)', sub:'Căn bạn đã mua trên Palm Dubai', go:() => { const H = myHome(); if(H) teleport(H.door.x, H.door.z, H.x, H.z); else toast('🔑 Bạn chưa có nhà trên Palm Dubai – tới các nhánh lá, bấm E ở biển "ĐANG BÁN".', 4000); }});
   for(const o of scene.children.slice(N0)) o.userData.zone = 'palm';
-  return {houses:HOUSES, fronds:FRONDS, aquariums:AQ, cls:CLS, crescent:CR, center:C, owned:() => S.ownedEstates, myHome, buyMenu, zone:'palm'};
+  const OUT = {houses:HOUSES, fronds:FRONDS, aquariums:AQ, cls:CLS, crescent:CR, center:C, layout:{Y, clubs:CLUBS, food:FOODP}, owned:() => S.ownedEstates, myHome, buyMenu, zone:'palm'};
+  // Pha 9: bot sống động Đảo Thụy Sĩ + Palm (file riêng, nạp sau khi cả 2 vùng đã dựng)
+  try{ const bm = await import('./bots_swiss_palm.js'); OUT.bots = await bm.make(W, ctx, {swiss:W.swissV2, palm:OUT}); }catch(e){ console.warn('[Palm] bots_swiss_palm:', e); }
+  return OUT;
 }

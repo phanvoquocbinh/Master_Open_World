@@ -133,7 +133,7 @@ export async function make(W, ctx = {}){
 
   /* ============================== 5. KHUNG HỌC VIỆN (nội thất mở thông) ============================== */
   // Mặt bằng chung (cửa chính phía Nam): Đại sảnh giữa (bàn dài, kệ sách, bảng lộ trình) · Tây-Bắc: Lớp học A · Đông-Bắc: Phòng kiểm tra · Tây-Nam: phòng chuyên đề · Đông-Nam: quán trà
-  const ACADS = [];
+  const ACADS = [], BOTD = {};   // BOTD: dữ liệu cho bot Pha 9 (bots_swiss_palm.js)
   function academy(key, o){
     const A = ACAD[key], cx = A.x, cz = A.z, w = A.w, d = A.d, y0 = o.floorY ?? A.h + .15, WH = o.wallH ?? 7, T = .6, door = 4.4;
     const zs = cz + d / 2, zn = cz - d / 2, xw = cx - w / 2, xe = cx + w / 2;
@@ -381,7 +381,7 @@ export async function make(W, ctx = {}){
     const spot = new THREE.BoxGeometry(1.02, .5, .8).translate(0, .15, -.3);
     const cowG = mergeGeometries([paint(body, 0xf4f2ee), paint(spot, 0x222222), paint(head, 0xe8e2da), ...legs.map(l => paint(l, 0x2b2b2b)), paint(new THREE.BoxGeometry(.18, .18, .18).translate(0, -.15, 1.55), 0xd9a63a)], false).translate(0, 1.1, 0);
     const cows = []; for(let i = 0; i < 400 && cows.length < 18; i++){ const cx0 = i % 2 ? -470 : -650, x = cx0 + (R() - .5) * 70, z = 150 + (R() - .5) * 60, h = hAt(x, z); if(h == null || h < 2 || inBuilding(x, z) || Math.hypot(x + 555, z - 80) < 66) continue; cows.push([x, h, z, R() * 6.28]); }
-    const cm = new THREE.InstancedMesh(cowG, new THREE.MeshStandardMaterial({vertexColors:true, roughness:.8}), cows.length);
+    BOTD.cows = cows; const cm = new THREE.InstancedMesh(cowG, new THREE.MeshStandardMaterial({vertexColors:true, roughness:.8}), cows.length);
     cows.forEach(([x, y, z, r], i) => { _m4.compose(_p.set(x, y, z), _q.setFromEuler(_e.set(0, r, 0)), _s1); cm.setMatrixAt(i, _m4); circles.push({x, z, r:1.1}); }); cm.castShadow = true; cm.userData.dynamic = true; scene.add(cm);
     INTER.push({x:-470, z:150, r:30, prio:.2, label:'🐄 Đàn bò sữa đeo chuông – nghe “leng keng” (E)', action:() => toast('🐄🔔 Leng keng… Bò Thụy Sĩ đeo chuông để chủ tìm trên đồng cỏ. Từ mới: cow /kaʊ/ · 奶牛 nǎiniú · 牛 (うし) · 소 (so)', 5000)}); }
   const MILLS = [];
@@ -546,5 +546,7 @@ export async function make(W, ctx = {}){
     {icon:'⛷️', name:'Làng Tuyết & Ga Tiếng Hàn', sub:'Chalet tuyết · dốc trượt tuyết', go:tp(-760, -330, -770, -390)},
     {icon:'✈️', name:'Bến thuỷ phi cơ', sub:'Bay về Đảo trung tâm', go:tp(-312, 152, -280, 160)});
 
-  return {lang:W.lang || {open:openApp}, open:openApp, stations:STATIONS, academies:ACADS, zone:'swiss'};
+  // Pha 9: bot do palm_dubai.js nạp chung; vùng Palm không tải được thì đảo Thụy Sĩ tự nạp phần của mình
+  setTimeout(() => { if(!W.__botsSP) import('./bots_swiss_palm.js').then(m => m.make(W, ctx, {swiss:W.swissV2})).catch(e => console.warn('[Swiss] bots_swiss_palm:', e)); }, 10000);
+  return {lang:W.lang || {open:openApp}, open:openApp, stations:STATIONS, academies:ACADS, cars:CARS, cows:BOTD.cows || [], gy, zone:'swiss'};
 }
