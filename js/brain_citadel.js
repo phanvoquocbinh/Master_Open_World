@@ -235,6 +235,7 @@ export function make(W, ctx){
     const term=new THREE.Mesh(AK.roundedBox(36,7,14,.6,3), M.glassB); term.position.set(x0+30,y+3.5,z1-12); grp.add(term); kk.add(AK.roundedBox(37,.5,15,.2,2), M.gold, x0+30, y+7.2, z1-12); addSeg(x0+12,z1-19,x0+48,z1-19,.2,y-.5,y+7); addSeg(x0+12,z1-5,x0+48,z1-5,.2,y-.5,y+7);
     for(const [ax,az,bx,bz] of [[x0,z0,x1,z0],[x1,z0,x1,z1-30],[x0,z0,x0,z1]]) addSeg(ax,az,bx,bz,.2,y-.5,y+1.6);
     INTER.push({x:x0+30, z:z1-21, r:3, prio:.7, when:()=>Math.abs(P.y-y)<2, label:'✈️ Sân bay Đỉnh Mây – quầy làm thủ tục (E)', action:()=>toast('✈️ Sân bay Đỉnh Mây: đường băng STOL 160 m + 2 bãi trực thăng. Chuyến bay nối Sân bay Quốc tế sẽ mở khi Pha Sân bay hoàn tất.', 5200)});
+    (W.AIRPORTS||(W.AIRPORTS=[])).push({key:'brain', name:'Sân bay Đỉnh Mây', x:cx, z:cz, y, rwy:{x0:cx-80, x1:cx+80, z:z0+16, y}, spawn:{x:x0+30, z:z1-23, lx:x0+30, lz:z0}});   /* sổ sân bay chung (skyport.js) – chuyến bay hạ cánh thật ở đây */
     makeLabel('🛩️ Sân bay Đỉnh Mây', 'Đường băng STOL 160 m · 2 bãi trực thăng', {h:.7, x:x0+30, y:y+10, z:z1-12, fade:240}); kk.build(); }
 
   /* ============================== 6. CẢM GIÁC MẠNH TRÊN ĐỈNH VỰC ============================== */

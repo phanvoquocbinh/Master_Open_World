@@ -126,8 +126,10 @@ export async function make(W, ctx = {}){
   let welcomed = false;
   HOOK.onFrame.push(() => { if(welcomed) return; const p = W.P; if(p.x > Z.x0 && p.x < Z.x1 && p.z > Z.z0 && p.z < Z.z1 && mask(p.x, p.z) > 0){ welcomed = true; const d = dueNow(), n = Object.values(d).reduce((a, b) => a + b, 0);
     toast(`🏔️ Chào mừng tới Đảo Ngoại ngữ Thụy Sĩ! 4 học viện Anh – Trung – Nhật – Hàn, đi bộ vào trong và bấm E để học (miễn phí).${n ? ` 📌 Có ${n} bài đến hạn kiểm tra lại.` : ''}`, 6500); } });
+  // askPay chỉ hỏi xác nhận – trừ tiền bằng spend (như life.js)
+  const pay = (cost, what, go) => { if(!ctx.askPay) return go(); ctx.askPay(cost, what, () => { if(ctx.spend && !ctx.spend(cost)) return; go(); }); };
   const buff = (key, min, cost, what) => { const go = () => { try{ const S = ctx.S; if(S){ S.buffs = S.buffs || {}; S.buffs[key] = Date.now() + min * 60000; ctx.save && ctx.save(); } }catch(e){} toast(`${what} – ${key === 'energy' ? '⚡ đi nhanh hơn' : '☕ thưởng quiz +20%'} trong ${min} phút!`, 3800); };
-    if(ctx.askPay) ctx.askPay(cost, what, go); else go(); };
+    pay(cost, what, go); };
 
   /* ============================== 5. KHUNG HỌC VIỆN (nội thất mở thông) ============================== */
   // Mặt bằng chung (cửa chính phía Nam): Đại sảnh giữa (bàn dài, kệ sách, bảng lộ trình) · Tây-Bắc: Lớp học A · Đông-Bắc: Phòng kiểm tra · Tây-Nam: phòng chuyên đề · Đông-Nam: quán trà
@@ -339,13 +341,17 @@ export async function make(W, ctx = {}){
   /* ============================== 6. CÂY: thông núi · anh đào · ngân hạnh · lá xanh ============================== */
   const inBuilding = (x, z, pad = 6) => Object.values(ACAD).some(A => Math.abs(x - A.x) < A.w / 2 + pad && Math.abs(z - A.z) < A.d / 2 + pad + 8) || LAKES.some(L => ((x - L.x) / (L.rx + 3)) ** 2 + ((z - L.z) / (L.rz + 3)) ** 2 < 1) || riverD(x, z) < 7;
   const RAIL = {x0:-740, x1:-360, z0:-360, z1:20, r:40};
-  const nearRail = (x, z) => { const dx = Math.max(RAIL.x0 - x, 0, x - RAIL.x1), dz = Math.max(RAIL.z0 - z, 0, z - RAIL.z1); const inside = dx === 0 && dz === 0; const de = inside ? Math.min(x - RAIL.x0, RAIL.x1 - x, z - RAIL.z0, RAIL.z1 - z) : Math.hypot(dx, dz); return de < 7; };
+  const nearRail = (x, z) => { const dx = Math.max(RAIL.x0 - x, 0, x - RAIL.x1), dz = Math.max(RAIL.z0 - z, 0, z - RAIL.z1); const inside = dx === 0 && dz === 0; const de = inside ? Math.min(x - RAIL.x0, RAIL.x1 - x, z - RAIL.z0, RAIL.z1 - z) : Math.hypot(dx, dz); return de < (inside ? 7 : 13.5); };   // ngoài ray 13,5 m: chừa đường dạo vòng đảo
+  // dải đường nội đảo (mục 9) – không trồng cây/hoa lên lối đi
+  const PATHBOX = [[-360, -255, -22, -10], [-430, -345, -54, -42], [-430, -345, -218, -206], [-426, -414, -238, -206], [-756, -672, -246, -234], [-686, -674, -30, 32],
+    [-636, -624, 20, 86], [-486, -474, 20, 92], [-636, -474, 74, 86], [-395, -305, 20, 160], [-485, -305, 80, 160], [-780, -745, -355, -325]];
+  const onPath = (x, z) => PATHBOX.some(([a, b, c, d]) => x > a && x < b && z > c && z < d);
   { const pines = [], trees = [];
     for(let i = 0; i < 6000 && pines.length < 520; i++){ const x = lerp(Z.x0 + 10, Z.x1 - 10, R()), z = lerp(Z.z0 + 10, -300, R()), h = hAt(x, z); if(h == null || h < 12 || h > 66 || nearRail(x, z) || riverD(x, z) < 8) continue; pines.push([x, h, z, .8 + R() * .7]); }
     const sak = [], gin = [], grn = [];
-    for(let i = 0; i < 2000 && sak.length < 40; i++){ const a = R() * 6.283, r = 33 + R() * 30, x = PET.x + Math.cos(a) * r, z = PET.z + Math.sin(a) * r * .85; if(inBuilding(x, z, 3) || nearRail(x, z) || Math.abs(x - PET.x) < 4 && z > PET.z) continue; sak.push([x, gy(x, z), z, 1 + R() * .4]); }
-    for(let i = 0; i < 2000 && gin.length < 32; i++){ const a = R() * 6.283, r = 34 + R() * 26, x = ACAD.ko.x + Math.cos(a) * r, z = ACAD.ko.z + Math.sin(a) * r * .8; if(inBuilding(x, z, 3) || nearRail(x, z) || Math.abs(x - ACAD.ko.x) < 4 && z > ACAD.ko.z) continue; gin.push([x, gy(x, z), z, 1 + R() * .3]); }
-    for(let i = 0; i < 4000 && grn.length < 120; i++){ const x = lerp(-820, -280, R()), z = lerp(-300, 220, R()), h = hAt(x, z); if(h == null || h < 1.5 || h > 20 || inBuilding(x, z, 8) || nearRail(x, z) || Math.hypot(x + 555, z - 80) < 62 || Math.hypot(x + 420, z + 140) < 26) continue; grn.push([x, h, z, .9 + R() * .6]); }
+    for(let i = 0; i < 2000 && sak.length < 40; i++){ const a = R() * 6.283, r = 33 + R() * 30, x = PET.x + Math.cos(a) * r, z = PET.z + Math.sin(a) * r * .85; if(inBuilding(x, z, 3) || nearRail(x, z) || onPath(x, z) || Math.abs(x - PET.x) < 4 && z > PET.z) continue; sak.push([x, gy(x, z), z, 1 + R() * .4]); }
+    for(let i = 0; i < 2000 && gin.length < 32; i++){ const a = R() * 6.283, r = 34 + R() * 26, x = ACAD.ko.x + Math.cos(a) * r, z = ACAD.ko.z + Math.sin(a) * r * .8; if(inBuilding(x, z, 3) || nearRail(x, z) || onPath(x, z) || Math.abs(x - ACAD.ko.x) < 4 && z > ACAD.ko.z) continue; gin.push([x, gy(x, z), z, 1 + R() * .3]); }
+    for(let i = 0; i < 4000 && grn.length < 120; i++){ const x = lerp(-820, -280, R()), z = lerp(-300, 220, R()), h = hAt(x, z); if(h == null || h < 1.5 || h > 20 || inBuilding(x, z, 8) || nearRail(x, z) || onPath(x, z) || Math.hypot(x + 555, z - 80) < 62 || Math.hypot(x + 420, z + 140) < 26) continue; grn.push([x, h, z, .9 + R() * .6]); }
     trees.push(...sak.map(t => [...t, 0xf6b6cc]), ...gin.map(t => [...t, 0xe8b923]), ...grn.map(t => [...t, null]));
     const pc = new THREE.ConeGeometry(2.4, 7, 7).translate(0, 5.5, 0), pt = new THREE.CylinderGeometry(.25, .35, 2.2, 6).translate(0, 1.1, 0);
     const pin = new THREE.InstancedMesh(pc, sm(0x2f5a33, .9), pines.length), pinT = new THREE.InstancedMesh(pt, sm(0x5a3e2a, .9), pines.length);
@@ -366,7 +372,7 @@ export async function make(W, ctx = {}){
       g.attributes.position.needsUpdate = true; }); }
   // hoa đồng cỏ (1 lượt vẽ) + bò sữa + cối xay gió
   { const N = 2600, fl = new THREE.InstancedMesh((() => { const a = new THREE.PlaneGeometry(.35, .35).translate(0, .18, 0), b = a.clone().rotateY(Math.PI / 2); return mergeGeometries([a, b], false); })(), sm(0xffffff, .8, 0, {side:THREE.DoubleSide, alphaTest:.5, map:canvasTex(64, 64, g2 => { g2.fillStyle = '#fff'; for(let k = 0; k < 5; k++){ const a = k / 5 * 6.283; g2.beginPath(); g2.ellipse(32 + Math.cos(a) * 14, 32 + Math.sin(a) * 14, 11, 7, a, 0, 6.283); g2.fill(); } g2.fillStyle = '#e8b923'; g2.beginPath(); g2.arc(32, 32, 7, 0, 6.283); g2.fill(); })}), N), c = new THREE.Color(); let n = 0;
-    for(let i = 0; i < 12000 && n < N; i++){ const x = lerp(-830, -270, R()), z = lerp(-330, 230, R()), h = hAt(x, z); if(h == null || h < 2 || h > 18 || inBuilding(x, z, 2) || nearRail(x, z)) continue;
+    for(let i = 0; i < 12000 && n < N; i++){ const x = lerp(-830, -270, R()), z = lerp(-330, 230, R()), h = hAt(x, z); if(h == null || h < 2 || h > 18 || inBuilding(x, z, 2) || nearRail(x, z) || onPath(x, z)) continue;
       _m4.compose(_p.set(x, h, z), _q.setFromEuler(_e.set(0, R() * 3, 0)), _s1.set(.8 + R() * .7, .8 + R() * .9, .8 + R() * .7)); fl.setMatrixAt(n, _m4); fl.setColorAt(n++, c.set([0xf5d63d, 0xb084e8, 0xffffff, 0xf5d63d, 0xe95b8f][i % 5])); }
     _s1.set(1, 1, 1); fl.count = n; fl.userData.dynamic = true; fl.castShadow = false; scene.add(fl); }
   { const body = new THREE.BoxGeometry(1, .9, 2.1), head = new THREE.BoxGeometry(.6, .6, .7).translate(0, .25, 1.3), legs = [];
@@ -428,7 +434,7 @@ export async function make(W, ctx = {}){
   function trainMenu(from){ if(!ui || !ui.modal){ return; } const m = ui.modal(`🚂 ${from.name} · Tàu bánh răng đỏ`);
     let learner = false; try{ learner = Object.keys(JSON.parse(localStorage.getItem('qcworld-lang') || '{}').done || {}).length > 0; }catch(e){}
     m.body.innerHTML = `<p class="muted">Tàu chạy vòng khép kín qua cầu cạn đá vòm. Vé <b>5 💰</b> – <b>miễn phí cho học viên</b> (đã học xong ≥ 1 bài).${learner ? ' ✅ Bạn là học viên – đi miễn phí!' : ''}</p><div class="grid"></div>`;
-    const g = m.body.querySelector('.grid'); for(const S of STATIONS){ if(S === from) continue; const b = document.createElement('button'); b.className = 'btn'; b.textContent = `🚉 ${S.name}`; b.onclick = () => { m.close(); const go = () => { teleport(S.px, S.pz, S.px + (S.x > -550 ? 8 : -8), S.pz); toast(`🚂 Tu tu… Tàu bánh răng đã đưa bạn tới ${S.name}.`, 3200); }; if(learner || !ctx.askPay) go(); else ctx.askPay(5, `vé tàu tới ${S.name}`, go); }; g.appendChild(b); } }
+    const g = m.body.querySelector('.grid'); for(const S of STATIONS){ if(S === from) continue; const b = document.createElement('button'); b.className = 'btn'; b.textContent = `🚉 ${S.name}`; b.onclick = () => { m.close(); const go = () => { teleport(S.px, S.pz, S.px + (S.x > -550 ? 8 : -8), S.pz); toast(`🚂 Tu tu… Tàu bánh răng đã đưa bạn tới ${S.name}.`, 3200); }; if(learner) go(); else pay(5, `vé tàu tới ${S.name}`, go); }; g.appendChild(b); } }
   // đoàn tàu: đầu máy + 2 toa (khối đặc – không đi xuyên)
   const CARS = [];
   { const red = sm(0xc0201a, .4, .2), win = sm(0x2a3a4a, .2, .4), roofW = sm(0xf4f4f0, .5);
@@ -473,11 +479,63 @@ export async function make(W, ctx = {}){
       k.build(g); g.position.set(DX + ox, 0, DZ + oz); g.rotation.y = Math.PI / 2; g.userData.dynamic = true; scene.add(g); boxes.push({x0:DX + ox - 5, x1:DX + ox + 5, z0:DZ + oz - 6.5, z1:DZ + oz + 6.5}); }
     sign(signTex(1024, 180, '#0b4a6f', [['✈️ BẾN THUỶ PHI CƠ · SEAPLANE DOCK', `800 56px ${FONT}`, '#fff', .45], ['Bay về Đảo trung tâm', `600 40px ${FONT}`, '#ffd23f', .82]]), 7, 1.25, DX - 3, y + 3, DZ - 2.6, 0, .5);
     KX.add(new THREE.BoxGeometry(.2, 3.4, .2), MAT.dark, DX - 6, y + 1.5, DZ - 2.6); KX.add(new THREE.BoxGeometry(.2, 3.4, .2), MAT.dark, DX, y + 1.5, DZ - 2.6);
-    INTER.push({x:DX + 26, z:DZ, r:3, prio:.85, label:'✈️ Thuỷ phi cơ – bay về Đảo trung tâm (10 💰)', action:() => { const go = () => { const s = W.V2SPAWN || {x:0, z:5, lx:0, lz:0}; teleport(s.x, s.z, s.lx, s.lz); toast('✈️ Vù… Thuỷ phi cơ đã hạ cánh ở Đảo trung tâm!', 3500); }; ctx.askPay ? ctx.askPay(10, 'chuyến thuỷ phi cơ', go) : go(); }}); }
+    INTER.push({x:DX + 26, z:DZ, r:3, prio:.85, label:'✈️ Thuỷ phi cơ – bay về Đảo trung tâm (10 💰)', action:() => { const go = () => { const s = W.V2SPAWN || {x:0, z:5, lx:0, lz:0}; teleport(s.x, s.z, s.lx, s.lz); toast('✈️ Vù… Thuỷ phi cơ đã hạ cánh ở Đảo trung tâm!', 3500); }; pay(10, 'chuyến thuỷ phi cơ', go); }}); }
+
+  /* ============================== 9. ĐƯỜNG NỘI ĐẢO (không đường cụt) + CẦU G3 SANG ĐẢO TRUNG TÂM ============================== */
+  //  • Đường dạo vòng đảo (khép kín, chạy ngoài đường ray 9 m, đi ngang sau 5 ga) · đại lộ Cổng Đông → cầu G3
+  //  • Vòng làng Chalet ↔ bến thuỷ phi cơ (khép kín, nối vào đường vòng) · lối vào 4 học viện + Làng Tuyết kết thúc bằng quảng trường trước cửa
+  const pathPos = [], pathCol = [], pathIdx = [], pc = new THREE.Color();
+  const ribbon = (pts, w, col, skipRiver = true) => { const S = []; for(let i = 0; i < pts.length - 1; i++){ const [x0, z0] = pts[i], [x1, z1] = pts[i + 1], L = Math.hypot(x1 - x0, z1 - z0); for(let t = 0; t < L; t += 2) S.push([x0 + (x1 - x0) * t / L, z0 + (z1 - z0) * t / L]); } S.push(pts[pts.length - 1]);
+    pc.set(col); let prev = -1;
+    for(let i = 0; i < S.length; i++){ const [x, z] = S[i], a = S[Math.max(0, i - 1)], b = S[Math.min(S.length - 1, i + 1)], dx = b[0] - a[0], dz = b[1] - a[1], l = Math.hypot(dx, dz) || 1, nx = -dz / l, nz = dx / l;
+      if(skipRiver && riverD(x, z) < 6.5){ prev = -1; continue; } const y = gy(x, z) + .06, base = pathPos.length / 3;
+      pathPos.push(x + nx * w / 2, gy(x + nx * w / 2, z + nz * w / 2) + .06, z + nz * w / 2, x - nx * w / 2, gy(x - nx * w / 2, z - nz * w / 2) + .06, z - nz * w / 2); for(let k = 0; k < 2; k++) pathCol.push(pc.r, pc.g, pc.b);
+      if(prev >= 0) pathIdx.push(prev, base, prev + 1, prev + 1, base, base + 1); prev = base; } };
+  const plaza = (x, z, r, col) => { pc.set(col); const c = pathPos.length / 3; pathPos.push(x, gy(x, z) + .07, z); pathCol.push(pc.r, pc.g, pc.b); const n = 20;
+    for(let i = 0; i <= n; i++){ const a = i / n * 6.283, px = x + Math.cos(a) * r, pz = z + Math.sin(a) * r; pathPos.push(px, gy(px, pz) + .07, pz); pathCol.push(pc.r, pc.g, pc.b); if(i > 0) pathIdx.push(c, c + i + 1, c + i); } };
+  const roundRect = (x0, x1, z0, z1, r) => { const P = [], arc = (cx, cz, a0, a1) => { for(let k = 0; k <= 8; k++){ const a = a0 + (a1 - a0) * k / 8; P.push([cx + Math.cos(a) * r, cz + Math.sin(a) * r]); } };
+    arc(x1 - r, z0 + r, -Math.PI / 2, 0); arc(x1 - r, z1 - r, 0, Math.PI / 2); arc(x0 + r, z1 - r, Math.PI / 2, Math.PI); arc(x0 + r, z0 + r, Math.PI, Math.PI * 1.5); P.push(P[0]); return P; };
+  const STONE = 0xc9bb9b, PAVE = 0xb4ada2;
+  const PR = {x0:RAIL.x0 - 9, x1:RAIL.x1 + 9, z0:RAIL.z0 - 9, z1:RAIL.z1 + 9};
+  ribbon(roundRect(PR.x0, PR.x1, PR.z0, PR.z1, RAIL.r + 9), 4, STONE);   // đường dạo vòng đảo
+  // cầu gỗ nhỏ ở 2 chỗ đường vòng cắt suối băng
+  const footbridge = (x, z, alongX, len = 14) => { const y = Math.max(gy(x - (alongX ? len / 2 : 0), z - (alongX ? 0 : len / 2)), gy(x + (alongX ? len / 2 : 0), z + (alongX ? 0 : len / 2))) + .25;
+    KX.add(new THREE.BoxGeometry(alongX ? len : 4.4, .35, alongX ? 4.4 : len), MAT.woodL, x, y - .15, z); addPlat(x, z, 0, alongX ? len / 2 : 2.2, alongX ? 2.2 : len / 2, y);
+    for(const s of [-1, 1]){ if(alongX){ KX.add(new THREE.BoxGeometry(len, .9, .1), MAT.wood, x, y + .45, z + s * 2.15); addSeg(x - len / 2, z + s * 2.2, x + len / 2, z + s * 2.2, .1, y - 3, y + 2, '🌉 Lan can cầu gỗ'); }
+      else { KX.add(new THREE.BoxGeometry(.1, .9, len), MAT.wood, x + s * 2.15, y + .45, z); addSeg(x + s * 2.2, z - len / 2, x + s * 2.2, z + len / 2, .1, y - 3, y + 2, '🌉 Lan can cầu gỗ'); } } };
+  { let best = null; for(let x = -620; x < -480; x += .5){ const d = riverD(x, PR.z1); if(!best || d < best.d) best = {x, d}; } footbridge(best.x, PR.z1, true); }
+  { let best = null; for(let x = -620; x < -500; x += .5){ const d = riverD(x, PR.z0); if(!best || d < best.d) best = {x, d}; } if(best && best.d < 6) footbridge(best.x, PR.z0, true); }
+  // làng Chalet + bến thuỷ phi cơ: 1 vòng khép kín nối vào cạnh Nam đường vòng
+  ribbon([[-630, PR.z1], [-630, 80], [-480, 80], [-480, PR.z1]], 4.5, PAVE, true);
+  ribbon([[PR.x1 - 40, PR.z1], [-330, 90], [-314, 148]], 3.6, STONE); ribbon([[-314, 150], [-400, 124], [-480, 86]], 3.6, STONE); plaza(-312, 154, 6, STONE);
+  // lối vào học viện + Làng Tuyết (quảng trường trước cửa)
+  ribbon([[PR.x1, -48], [-420, -48]], 3.4, STONE); plaza(-420, -51, 7, PAVE);
+  ribbon([[ACAD.zh.x, PR.z1], [ACAD.zh.x, -24]], 3.4, STONE); plaza(ACAD.zh.x, -26, 6, PAVE);
+  ribbon([[PR.x1, -212], [-420, -212], [-420, -236]], 3.4, STONE); plaza(-420, -236, 5.5, PAVE);
+  ribbon([[PR.x0, -240], [ACAD.ko.x, -240]], 3.4, STONE); plaza(ACAD.ko.x, -246, 7, PAVE);
+  ribbon([[PR.x0, -330], [-772, -348]], 3.2, STONE); plaza(-776, -350, 9, STONE);
+  // đại lộ Cổng Đông → cầu G3 (cổng Abyssal Tây −180, −16, cao +2)
+  const GZ = -16; let coastX = -262; for(let x = -330; x < -240; x += .5){ const h = hAt(x, GZ); if(h == null || h < .35){ coastX = x - .5; break; } }
+  const landX = coastX - 10, landY = gy(landX, GZ) + .1;
+  ribbon([[PR.x1, GZ], [landX, GZ]], 7, PAVE);
+  { const x0 = landX, x1 = -180, L = x1 - x0, N = Math.ceil(L / 2.5), BW = 8;
+    const yAt = t => { const ramp = ss(0, .18, t); return lerp(landY, 2, ramp) + Math.sin(Math.PI * t) * .9 * ramp; };
+    for(let i = 0; i < N; i++){ const t0 = i / N, t1 = (i + 1) / N, xm = x0 + L * (t0 + t1) / 2, y = yAt((t0 + t1) / 2), sl = L / N;
+      KX.add(new THREE.BoxGeometry(sl + .05, .5, BW), MAT.stone, xm, y - .25, GZ); KX.add(new THREE.BoxGeometry(sl + .05, .04, BW - 1.4), sm(0x3a3c40, .9), xm, y + .01, GZ); addPlat(xm, GZ, 0, sl / 2 + .03, BW / 2 - .1, y); }
+    for(const s of [-1, 1]){ const z = GZ + s * (BW / 2 - .1);
+      for(let i = 0; i <= N; i++){ const t = i / N, x = x0 + L * t, y = yAt(t); KX.add(new THREE.BoxGeometry(.1, 1.1, .1), MAT.dark, x, y + .55, z); if(i < N){ const t2 = (i + 1) / N, y2 = yAt(t2), len = Math.hypot(L / N, y2 - y); KX.add(new THREE.BoxGeometry(len, .1, .12), MAT.steel, x + L / N / 2, (y + y2) / 2 + 1.1, z, 0, 0, Math.atan2(y2 - y, L / N)); } }
+      addSeg(x0, z, x1, z, .15, -10, 6, '🌊 Lan can cầu G3 – đi thẳng sang đảo trung tâm'); }
+    for(let x = x0 + 14; x < x1 - 4; x += 12){ const y = yAt((x - x0) / L); KX.add(new THREE.CylinderGeometry(.8, 1, Math.max(1, y + 6), 10), MAT.stoneD, x, (y - 6) / 2, GZ); }
+    if(W.lampPost) for(let x = x0 + 8; x < x1 - 2; x += 16){ const y = yAt((x - x0) / L); for(const s of [-1, 1]){ try{ const before = W.scene.children.length; W.lampPost(x, GZ + s * (BW / 2 + .3)); for(let k = before; k < W.scene.children.length; k++) W.scene.children[k].position.y += y; }catch(e){} } }
+    const gate = (x, y, txt, sub) => { for(const s of [-1, 1]) KX.add(new THREE.BoxGeometry(.9, 6.5, .9), MAT.stoneD, x, y + 3.25, GZ + s * (BW / 2 + .6)); KX.add(new THREE.BoxGeometry(1, 1.2, BW + 2.2), MAT.stoneD, x, y + 6.8, GZ);
+      const t = signTex(1024, 180, '#1b2d4f', [[txt, `800 58px ${FONT}`, '#fff', .42], [sub, `600 36px ${FONT}`, '#ffd23f', .82]]); for(const f of [1, -1]) sign(t, BW, 1.3, x + f * .52, y + 6.8, GZ, f > 0 ? Math.PI / 2 : -Math.PI / 2, .5); };
+    gate(x0 + 1.5, landY, '🏔️ ĐẢO NGOẠI NGỮ THỤY SĨ', 'Cổng Đông G3 · ← 4 học viện Anh–Trung–Nhật–Hàn'); gate(x1 - 1.5, 2, '→ ĐẢO TRUNG TÂM · ABYSSAL', 'Cầu G3 · Đảo Ngoại ngữ Thụy Sĩ ở phía sau'); }
+  { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pathPos, 3)); g.setAttribute('color', new THREE.Float32BufferAttribute(pathCol, 3)); g.setIndex(pathIdx); g.computeVertexNormals();
+    const pm = new THREE.Mesh(g, new THREE.MeshStandardMaterial({vertexColors:true, roughness:.92, polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-2})); pm.receiveShadow = true; pm.userData.dynamic = true; pm.userData.noFar = true; scene.add(pm); }
 
   KX.build();
 
-  /* ============================== 9. BẢN ĐỒ & ĐIỂM NHẢY ============================== */
+  /* ============================== 10. BẢN ĐỒ & ĐIỂM NHẢY ============================== */
   const tp = (x, z, lx, lz) => () => teleport(x, z, lx, lz);
   PLACES.push({icon:'🏔️', name:'Đảo Ngoại ngữ Thụy Sĩ', sub:'Thảo nguyên núi tuyết · 4 học viện Anh–Trung–Nhật–Hàn · tàu bánh răng', go:tp(-330, -180, -560, -230)},
     {icon:'🇬🇧', name:'Học viện Tiếng Anh · Oxford', sub:'Lâu đài đá + Big Ben + nhà kính Kew · 0 → IELTS 8.0+', go:tp(-420, -50, -420, -80)},

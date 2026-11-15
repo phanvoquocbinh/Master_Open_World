@@ -11,7 +11,7 @@ import { makeInteriors } from './bigtech_interiors.js';
 export async function make(W, ctx){
   const {THREE, scene, circles, boxes, plats, INTER, PLACES, HOOK, P, toast, makeLabel, teleport, mergeGeometries, addSeg, addPlat, GLOW, EXTL} = W;
   const {S, save, ui, askPay, spend, fmt} = ctx;
-  const Z=ctx.zone||{x0:180, x1:580, z0:-120, z1:460}, Y=.6, LOW=W.QUAL==='low', TAU=Math.PI*2, R=Math.random;
+  const Z=ctx.zone||{x0:180, x1:580, z0:-120, z1:460}, Y=2,   /* cao độ mặt đất +2 = cao độ cổng nối vùng (V2_PLAN 2b) */ LOW=W.QUAL==='low', TAU=Math.PI*2, R=Math.random;
   const rng=AK.rng(4115), pick=a=>a[Math.floor(R()*a.length)], clamp=(v,a,b)=>v<a?a:v>b?b:v;
   AK.bindNight(W);
   const out={towers:[], hq:{}};
@@ -23,7 +23,10 @@ export async function make(W, ctx){
   const onLand=(x,z,pad=0)=>PARC.some(p=>x>p.x0+pad && x<p.x1-pad && z>p.z0+pad && z<p.z1-pad);
   // đường (lòng đường; vỉa hè 5 m mỗi bên): E–W & N–S
   const SW=5, ROADS=[{ew:true, c:-100, w:20, a:188, b:572, name:'Đường Bắc CBD'}, {ew:true, c:66, w:24, a:188, b:572, name:'Đại lộ Ven Sông'}, {ew:true, c:236, w:24, a:188, b:572, name:'Đại lộ Quốc Mậu'}, {ew:true, c:440, w:20, a:188, b:572, name:'Đường Nam CBD'},
-    {ew:false, c:198, w:20, a:-110, b:450, name:'Đường Tây CBD'}, {ew:false, c:562, w:20, a:-110, b:450, name:'Đường Đông CBD'}];
+    {ew:false, c:198, w:20, a:-110, b:450, name:'Đường Tây CBD'}, {ew:false, c:562, w:20, a:-110, b:450, name:'Đường Đông CBD'},
+    // đoạn ra 4 cổng nối vùng (V2_PLAN 2b): G1 Tây (180,0) → Abyssal · G4 Đông (580,86) → đèo Brain · G5 Bắc (380,−120) → Dev City · G7 Nam (450,460) → Palm
+    {ew:true, c:0, w:20, a:180, b:188, name:'Cổng Tây · đi Abyssal', gate:'G1'}, {ew:true, c:80, w:20, a:572, b:580, name:'Cổng Đông · đèo Brain Citadel', gate:'G4'},
+    {ew:false, c:388, w:20, a:-120, b:-110, name:'Cổng Bắc · đi Dev City', gate:'G5'}, {ew:false, c:450, w:20, a:450, b:460, name:'Cổng Nam · đi Palm Dubai', gate:'G7'}];
   const rr=r=>r.ew ? {x0:r.a, x1:r.b, z0:r.c-r.w/2, z1:r.c+r.w/2} : {x0:r.c-r.w/2, x1:r.c+r.w/2, z0:r.a, z1:r.b};
   const onRoad=(x,z,pad=0)=>ROADS.some(r=>{ const q=rr(r); return x>q.x0-pad && x<q.x1+pad && z>q.z0-pad && z<q.z1+pad; });
   const inWaterBand=(x,z)=>(z>RIV.z0 && z<RIV.z1) || CAN.some(c=>x>c.x0 && x<c.x1);
@@ -34,7 +37,8 @@ export async function make(W, ctx){
   BR.push({x0:276, x1:284, z0:RIV.z0-1, z1:RIV.z1+1, ew:false, kind:'glass', name:'Cầu Kính Hai Tầng'});
   BR.push({x0:437, x1:443, z0:RIV.z0-1, z1:RIV.z1+1, ew:false, kind:'glow', name:'Cầu Ánh Sáng'});
   const onBridge=(x,z,pad=0)=>BR.some(b=>x>b.x0-pad && x<b.x1+pad && z>b.z0-pad && z<b.z1+pad);
-  const CUTS=[{x0:247.5, x1:332.5, z0:122, z1:129}, {x0:179, x1:181, z0:250, z1:262}];   // sàn Silicon Forest lấn mép sông Nam · đầu cầu sang Sân bay (skyport.js)   // sàn Silicon Forest lấn ra mép sông Nam: không dựng lan can kè đoạn này
+  const CUTS=[{x0:247.5, x1:332.5, z0:122, z1:129}, {x0:179, x1:181, z0:250, z1:262},
+    {x0:179, x1:181, z0:-15, z1:15}, {x0:579, x1:581, z0:65, z1:95}, {x0:377, x1:399, z0:-121, z1:-119}, {x0:439, x1:461, z0:459, z1:461}];   // khe lan can kè ở 4 cổng nối vùng   // sàn Silicon Forest lấn mép sông Nam · đầu cầu sang Sân bay (skyport.js)   // sàn Silicon Forest lấn ra mép sông Nam: không dựng lan can kè đoạn này
   out.layout={PARC, ROADS, BR, RIV, CAN, Y};
 
   /* ============================== 1. TIỆN ÍCH DỰNG HÌNH (gộp theo vật liệu) ============================== */
@@ -100,7 +104,7 @@ export async function make(W, ctx){
       for(const sd of [-1,1]){ const v=sd*(hw+.12); r.ew ? KL.add(B(r.b-r.a,.15,.24), M.curb, (r.a+r.b)/2,Y+.075,r.c+v) : KL.add(B(.24,.15,r.b-r.a), M.curb, r.c+v,Y+.075,(r.a+r.b)/2); } }
     // vạch qua đường ở mỗi giao lộ (4 nhánh)
     for(const a of ROADS.filter(r=>r.ew)) for(const b of ROADS.filter(r=>!r.ew)){ const x=b.c, z=a.c;
-      for(const sd of [-1,1]){ const zz=z+sd*(a.w/2+2.4); for(let k=-b.w/2+.6;k<b.w/2-.4;k+=1.1) quad(WH, x+k, zz-1.4, x+k+.55, zz+1.4); const xx=x+sd*(b.w/2+2.4); for(let k=-a.w/2+.6;k<a.w/2-.4;k+=1.1) quad(WH, xx-1.4, z+k, xx+1.4, z+k+.55); } }
+      for(const sd of [-1,1]){ const zz=z+sd*(a.w/2+2.4); if(onRoad(x,zz)) for(let k=-b.w/2+.6;k<b.w/2-.4;k+=1.1) quad(WH, x+k, zz-1.4, x+k+.55, zz+1.4); const xx=x+sd*(b.w/2+2.4); if(onRoad(xx,z)) for(let k=-a.w/2+.6;k<a.w/2-.4;k+=1.1) quad(WH, xx-1.4, z+k, xx+1.4, z+k+.55); } }   /* chỉ sơn vạch ở nhánh có đường */
     const qg=arr=>{ const pos=[], idx=[]; arr.forEach(([x0,z0,x1,z1],i)=>{ pos.push(x0,0,z0, x1,0,z0, x1,0,z1, x0,0,z1); const o=i*4; idx.push(o,o+2,o+1, o,o+3,o+2); }); const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setIndex(idx); g.computeVertexNormals(); return g; };
     for(const [arr,m] of [[WH,M.line],[YE,M.yellow]]){ const ms=new THREE.Mesh(qg(arr), m); ms.position.y=Y+.035; ms.receiveShadow=true; ms.userData.dynamic=true; ms.userData.noFar=true; scene.add(ms); } }
   out.onRoad=onRoad;
@@ -331,6 +335,21 @@ export async function make(W, ctx){
   for(const t of TW){ makeLabel(`${t.locked?'🔒':'🏢'} ${t.name}`, t.locked?'Bảo vệ canh thang máy · chỉ nhân viên lên Cổng Trời':'Đi bộ vào thẳng · lễ tân phỏng vấn / quẹt thẻ (E)', {h:.55, x:t.door.x, y:Y+5.4, z:t.door.z, fade:60});
     const ring=new THREE.Mesh(new THREE.RingGeometry(1,1.25,32), new THREE.MeshBasicMaterial({color:0xffd23f, transparent:true, opacity:.75, side:THREE.DoubleSide})); ring.rotation.x=-Math.PI/2; ring.position.set(t.door.x,Y+.04,t.door.z); ring.userData.dynamic=true; scene.add(ring); t.doorRing=ring; }
   try{ out.interiors=makeInteriors(W, {Y, HQ:H5, towers:TW, Kit, M, std}); }catch(e){ console.warn('[CBD] bigtech_interiors:', e); }
+
+  /* ============================== 10b. CỔNG NỐI VÙNG (biển cổng + nhãn) ============================== */
+  for(const r of ROADS.filter(q=>q.gate)){ const gx=r.ew?(r.a===Z.x0?Z.x0:Z.x1):r.c, gz=r.ew?r.c:(r.a===Z.z0?Z.z0:Z.z1);
+    for(const sd of [-1,1]){ const px=r.ew?gx+(gx<300?3:-3):gx+sd*(r.w/2+1.5), pz=r.ew?gz+sd*(r.w/2+1.5):gz+(gz<0?3:-3); KS.add(RB(1.2,6,1.2,.15,2), M.granite, px,Y+3,pz); KL.add(B(.5,.5,.5), M.gold, px,Y+6.3,pz); circles.push({x:px, z:pz, r:.7}); }
+    makeLabel(`🚦 ${r.gate} · ${r.name}`, 'Đường nối sang vùng bên cạnh (V2)', {h:.5, x:gx, y:Y+7.5, z:gz, fade:90}); }
+  out.gates=ROADS.filter(q=>q.gate).map(r=>({gate:r.gate, name:r.name}));
+
+  /* ============================== 10c. ĐỒ THỊ ĐƯỜNG (cho taxi / xe bot xuyên vùng) ============================== */
+  { const EW=ROADS.filter(r=>r.ew), NS=ROADS.filter(r=>!r.ew), segs=[];
+    const snap=(r,v)=>{ for(const q of (r.ew?NS:EW)) if(Math.abs(v-q.c)<=q.w/2+.1 && r.c>=q.a-q.w && r.c<=q.b+q.w) return q.c; return v; };   // đầu đường nằm trong lòng đường cắt ngang → nối vào tâm giao lộ
+    for(const r of ROADS){ const cuts=[snap(r,r.a), snap(r,r.b)]; for(const q of (r.ew?NS:EW)) if(q.c>=r.a-q.w/2-.1 && q.c<=r.b+q.w/2+.1 && r.c>=q.a-r.w/2-.1 && r.c<=q.b+r.w/2+.1) cuts.push(q.c); const u=[...new Set(cuts.map(v=>Math.round(v*10)/10))].sort((x,y)=>x-y);
+      for(let i=0;i<u.length-1;i++) segs.push(r.ew?[u[i],r.c,u[i+1],r.c]:[r.c,u[i],r.c,u[i+1]]); }
+    W.V2ROADS=W.V2ROADS||[]; W.V2ROADS.push({zone:'cbd', y:Y, segs, gates:{G1:[180,0], G4:[580,80], G5:[388,-120], G7:[450,460]}}); out.roadSegs=segs;
+    const G=W.transit && W.transit.G; if(G && G.nodes){ const key=new Map(), nd=(x,z)=>{ const k=x.toFixed(1)+','+z.toFixed(1); if(!key.has(k)){ G.nodes.push({x,z,adj:[]}); key.set(k,G.nodes.length-1); } return key.get(k); };
+      for(const [x0,z0,x1,z1] of segs){ const a=nd(x0,z0), b2=nd(x1,z1), d=Math.hypot(x1-x0,z1-z0); G.nodes[a].adj.push([b2,d]); G.nodes[b2].adj.push([a,d]); G.edges.push([a,b2]); } } }
 
   /* ============================== 11. BẢN ĐỒ (M) · ĐIỂM NHẢY ============================== */
   PLACES.push({icon:'🌃', name:'River Tech CBD · Nhạc nước', sub:'Đô thị lấn sông 3 kênh, 12 cầu, 5 trụ sở Big Tech – đứng trên Cầu Kính Hai Tầng', go:()=>teleport(280, 86, 300, 110)});
