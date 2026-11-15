@@ -128,7 +128,20 @@ export function makeHills(W, ctx){
       for(const side of [-1,1]){ const x=q.x+nx*w/2*side, z=q.z+nz*w/2*side, y=(hAt(x,z)??q.h)+.05; pos.push(x,y,z); uv.push(side<0?0:1, s/vScale); }
       if(i){ const k=i*2; idx.push(k-2,k-1,k, k-1,k+1,k); } }
     const g=new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos,3)); g.setAttribute('uv', new THREE.Float32BufferAttribute(uv,2)); g.setIndex(idx); g.computeVertexNormals();
-    const m=new THREE.Mesh(g, mat); m.receiveShadow=true; m.userData.dynamic=true; scene.add(m); return m; }
+    const m=new THREE.Mesh(g, mat); m.receiveShadow=true; m.userData.dynamic=true; scene.add(m);
+    // S-GFX (15/11): khung hình đầu tiên (mọi module đã dựng xong) → dựng lại mặt đường BÁM ĐÚNG cao độ người/xe đứng (W.groundAt), 5 điểm mỗi mặt cắt ngang.
+    // Trước: 2 mép lấy theo lưới địa hình 2 m (chạm taluy dốc → mặt đường nổi 1,4 m) hoặc cao độ thiết kế khi ra khỏi lưới (lối vào từ Phường: mặt đường 1,65 m
+    // trong khi dốc sàn thật đi từ 0,26 m) → xe/người lún nửa người dưới mặt nhựa.
+    const refit=()=>{ HOOK.onFrame.splice(HOOK.onFrame.indexOf(refit),1); if(!W.groundAt) return;
+      const P2=[], U2=[], I2=[], AC=[-.5,-.375,-.25,-.125,0,.125,.25,.375,.5], NA=AC.length; let s2=0;
+      for(let i=0;i<pts.length;i++){ const a=pts[Math.max(0,i-1)], b=pts[Math.min(pts.length-1,i+1)], dx=b.x-a.x, dz=b.z-a.z, l=Math.hypot(dx,dz)||1, nx=-dz/l, nz=dx/l, q=pts[i]; if(i) s2+=Math.hypot(q.x-pts[i-1].x, q.z-pts[i-1].z);
+        for(const f of AC){ const x=q.x+nx*w*f, z=q.z+nz*w*f, gy=W.groundAt(x,z); P2.push(x, (gy>-3?gy:(hAt(x,z)??q.h))+.05, z); U2.push(f+.5, s2/vScale); }
+        if(i){ const k=i*NA, k0=k-NA; for(let c=0;c<NA-1;c++) I2.push(k0+c,k0+c+1,k+c, k0+c+1,k+c+1,k+c); } }
+      const g2=new THREE.BufferGeometry(); g2.setAttribute('position', new THREE.Float32BufferAttribute(P2,3)); g2.setAttribute('uv', new THREE.Float32BufferAttribute(U2,2)); g2.setIndex(I2); g2.computeVertexNormals();
+      if(g2.attributes.normal.getY(0)<0){ I2.reverse(); g2.setIndex(I2); g2.computeVertexNormals(); }
+      m.geometry.dispose(); m.geometry=g2; };
+    HOOK.onFrame.push(refit);
+    return m; }
   ribbon(MAIN.pts.filter(p=>p.x>=262), 8, roadMat, 16);
   ribbon(COAST.pts, 7, laneMat, 6);
   // cầu thang lớn: bậc đá + lan can + đèn (cao độ theo đúng dốc thang → chân không lún quá nửa bậc)

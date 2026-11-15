@@ -344,10 +344,28 @@ export async function initLife(W){
   /* ---------- CHỖ NGỒI: ghế đá, bàn picnic, ghế/sofa/ghế đẩu trong toà nhà ----------
      seat = {x,z: chỗ đặt mông · rot: hướng mặt khi ngồi · y: độ cao mặt ghế (tuyệt đối) · floor: độ cao sàn · back: lại gần từ phía sau (bàn picnic) · scope} */
   let sitting=null; const seats=[], _hp=new THREE.Vector3();
-  function addSeat(s){ s.taken=s.taken||null; s.scope=s.scope||'world'; const f=[Math.sin(s.rot), Math.cos(s.rot)], k=s.back?-.5:.55;
-    s.inter={x:s.x+f[0]*k, z:s.z+f[1]*k, r:s.r||1.35, prio:.7, when:()=>!sitting && !s.taken && !V.riding(), label:s.label||'🪑 Ngồi xuống (E · hoặc phím C)', action:()=>sitOn(s)};
-    INTER.push(s.inter); seats.push(s); return s; }
-  function dropSeats(test){ for(let i=seats.length-1;i>=0;i--){ const s=seats[i]; if(!test(s)) continue; if(s===sitting?.seat) standUp(); const j=INTER.indexOf(s.inter); if(j>=0) INTER.splice(j,1); seats.splice(i,1); } }
+  // S-GFX (15/11): GHẾ NHIỀU CHỖ – các chỗ ngồi kề nhau (cùng hướng, cùng độ cao, cách ≤ 1,5 m) tự gộp thành 1 BĂNG GHẾ: 1 nút E chung,
+  // tự xếp vào chỗ trống gần nhất, nhãn "còn x/y chỗ", hết chỗ thì báo (trước: mỗi chỗ 1 nút riêng, có người ngồi thì nút biến mất, không báo gì).
+  // W.addBench({x,z,rot,len,y,floor,label,…}) chia chỗ theo chiều dài ghế (~0,6 m/người, ghế 1,6–2 m → 3 người).
+  const benches=[], dA=(a,b)=>{ let d=(a-b)%(Math.PI*2); if(d>Math.PI) d-=Math.PI*2; if(d<-Math.PI) d+=Math.PI*2; return d; };
+  function benchInter(g){ const f=[Math.sin(g.rot), Math.cos(g.rot)], k=g.back?-.5:.55; let cx=0, cz=0, ext=0; for(const o of g.seats){ cx+=o.x; cz+=o.z; } cx/=g.seats.length; cz/=g.seats.length;
+    for(const o of g.seats) ext=Math.max(ext, Math.hypot(o.x-cx, o.z-cz)); g.inter.x=cx+f[0]*k; g.inter.z=cz+f[1]*k; g.inter.r=Math.max(g.r0, ext+1.1); }
+  function addSeat(s){ s.taken=s.taken||null; s.scope=s.scope||'world'; seats.push(s);
+    let g=(s.lie||s.solo) ? null : benches.find(b=>b.scope===s.scope && !b.lie && !!b.back===!!s.back && Math.abs(dA(b.rot,s.rot))<.06 && Math.abs(b.y-s.y)<.06 && b.seats.some(o=>Math.hypot(o.x-s.x,o.z-s.z)<1.5));
+    if(g){ g.seats.push(s); s.group=g; s.inter=g.inter; benchInter(g); return s; }
+    g={seats:[s], rot:s.rot, y:s.y, scope:s.scope, back:s.back, lie:s.lie, r0:s.r||1.35, label:s.label||'🪑 Ngồi xuống (E · hoặc phím C)'}; s.group=g; benches.push(g);
+    g.inter={x:s.x, z:s.z, r:g.r0, prio:.7, when:()=>!sitting && !V.riding(),
+      get label(){ const n=g.seats.length, fr=g.seats.filter(o=>!o.taken).length; return fr ? (n>1 ? `${g.label} · còn ${fr}/${n} chỗ` : g.label) : (n>1 ? `🪑 Ghế đã kín chỗ (${n}/${n})` : '🪑 Ghế đã có người ngồi'); },
+      action:()=>sitGroup(g)};
+    benchInter(g); s.inter=g.inter; INTER.push(g.inter); return s; }
+  function sitGroup(g){ const fr=g.seats.filter(o=>!o.taken); if(!fr.length) return toast(g.seats.length>1 ? '🪑 Ghế này đã kín chỗ – tìm ghế khác nhé!' : '🪑 Ghế này đã có người ngồi – tìm ghế khác nhé!', 2600);
+    fr.sort((a,b)=>Math.hypot(P.x-a.x,P.z-a.z)-Math.hypot(P.x-b.x,P.z-b.z)); sitOn(fr[0]); }
+  function addBench(o){ const L=o.len||1.6, n=Math.max(1, Math.round(L/.6)), sp=L/n, r=[Math.cos(o.rot), -Math.sin(o.rot)], out=[];
+    for(let i=0;i<n;i++){ const t=(i-(n-1)/2)*sp; out.push(addSeat({...o, x:o.x+r[0]*t, z:o.z+r[1]*t})); } return out; }
+  function dropSeats(test){ for(let i=seats.length-1;i>=0;i--){ const s=seats[i]; if(!test(s)) continue; if(s===sitting?.seat) standUp(); const g=s.group;
+      if(g){ g.seats.splice(g.seats.indexOf(s),1); if(!g.seats.length){ const j=INTER.indexOf(g.inter); if(j>=0) INTER.splice(j,1); benches.splice(benches.indexOf(g),1); } else benchInter(g); }
+      else { const j=INTER.indexOf(s.inter); if(j>=0) INTER.splice(j,1); }
+      seats.splice(i,1); } }
   const sitCtrl={ drive(dt, inp){ if(inp.ix||inp.iz){ standUp(); return; } const st=sitting; P.x=st.x; P.z=st.z; P.face=st.face;
       if(st.seat.lie){ const f=[Math.sin(st.face), Math.cos(st.face)], L=(me.h||1.75)*.53;   // nằm (võng, ghế tắm nắng): ngửa mặt, chân hướng về phía trước
         me.g.position.set(st.x+f[0]*L, st.y+.1, st.z+f[1]*L); me.g.rotation.set(-Math.PI/2+.08, st.face, 0, 'YXZ'); me.play('idle'); return; }
@@ -363,13 +381,13 @@ export async function initLife(W){
   HOOK.keys.KeyC=()=>{ if(sitting) return standUp(); if(V.riding()) return; const s=nearestSeat(); if(s) sitOn(s); else toast('Không có ghế trống ở gần – lại gần ghế đá, bàn picnic hoặc ghế trong toà nhà rồi bấm C.', 2600); };
   // ghế đá: 2 chỗ mỗi ghế
   for(const b of city.benches){ const f=[Math.sin(b.rot), Math.cos(b.rot)], rx=Math.cos(b.rot), rz=-Math.sin(b.rot), cx=b.x-f[0]*.9, cz=b.z-f[1]*.9, gy=groundH(cx,cz);
-    for(const k of [-.42,.42]) addSeat({x:cx+f[0]*.1+rx*k, z:cz+f[1]*.1+rz*k, rot:b.rot, y:gy+.49, floor:gy, label:'🪑 Ngồi ghế đá (E · C)'}); }
+    addBench({x:cx+f[0]*.1, z:cz+f[1]*.1, rot:b.rot, len:1.5, y:gy+.49, floor:gy, label:'🪑 Ngồi ghế đá (E · C)'}); }   // S-GFX: ghế 1,6 m → 3 chỗ
   // bàn picnic: 4 chỗ (2 băng ghế), lại gần từ phía ngoài
   function picnicSeats(o, tag){ o.updateMatrixWorld(true); const q=new THREE.Quaternion(); o.getWorldQuaternion(q); const fw=new THREE.Vector3(0,0,1).applyQuaternion(q), base=Math.atan2(fw.x, fw.z), ws=new THREE.Vector3(); o.getWorldScale(ws);
     for(const lx of [-.9,.9]) for(const lz of [-.72,.72]){ const p=o.localToWorld(new THREE.Vector3(lx,0,lz)), gy=groundH(p.x,p.z);
       addSeat({x:p.x, z:p.z, rot:base+(lx>0?-Math.PI/2:Math.PI/2), y:gy+.46*ws.y, floor:gy, back:true, tag, label:'🪑 Ngồi bàn picnic (E · C)'}); } }
   for(const t of (W.PICNICS||[])) picnicSeats(t, 'picnic');
-  W.addSeat=addSeat; W.dropSeats=dropSeats; W.seats=seats;
+  W.addSeat=addSeat; W.addBench=addBench; W.dropSeats=dropSeats; W.seats=seats;
 
   /* ============================== SPRINT 2: PHƯỜNG KHỞI NGHIỆP + VIỆC LÀM ============================== */
   const ward=buildWard(W);

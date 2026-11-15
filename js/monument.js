@@ -252,7 +252,8 @@ export function makeMonument(W){
     for(let i=0;i<12;i++){ const a=ENT+Math.PI/12+i*TAU/12; if(!free(f,a)) continue; const p=at(a,10.3), ry=yawOut(a);
       way.add(new THREE.BoxGeometry(1.9,.1,.52), M.walnutL, p.x,y+.46,p.z, 0,ry,0); for(const s of [-.8,.8]){ const q=new THREE.Vector3(p.x+Math.cos(ry)*s, 0, p.z-Math.sin(ry)*s); way.add(new THREE.BoxGeometry(.08,.44,.46), M.bronze, q.x,y+.22,q.z, 0,ry,0); }
       circles.push({x:p.x, z:p.z, r:.62, y0:y-.3, y1:y+1.2});
-      for(const s of [-.45,.45]){ const q={x:p.x+Math.cos(ry)*s, z:p.z-Math.sin(ry)*s}; W.addSeat && W.addSeat({x:q.x, z:q.z, rot:ry, y:y+.51, floor:y, label:'🪑 Ngồi xem trưng bày (E · C)'}); } }
+      W.addBench ? W.addBench({x:p.x, z:p.z, rot:ry, len:1.8, y:y+.51, floor:y, label:'🪑 Ngồi xem trưng bày (E · C)'})   // S-GFX: băng ghế 1,9 m → 3 chỗ, tự xếp chỗ
+        : W.addSeat && W.addSeat({x:p.x, z:p.z, rot:ry, y:y+.51, floor:y, label:'🪑 Ngồi xem trưng bày (E · C)'}); }
     for(let i=0;i<6;i++){ const a=ENT+i*TAU/6+.18; if(!free(f,a)) continue; const p=at(a,7.1); way.add(new THREE.CylinderGeometry(.42,.34,.7,16), M.pot, p.x,y+.35,p.z); way.add(new THREE.IcosahedronGeometry(.62,1), M.green, p.x,y+1.2,p.z); way.add(new THREE.CylinderGeometry(.43,.43,.04,16), M.gold, p.x,y+.71,p.z); circles.push({x:p.x, z:p.z, r:.5, y0:y-.3, y1:y+2}); } }
   way.build(inner);
   if(chevGeos.length){ const cmesh=new THREE.Mesh(mergeGeometries(chevGeos), chevM); cmesh.renderOrder=2; inner.add(cmesh); }
@@ -262,8 +263,13 @@ export function makeMonument(W){
     for(const a of [ENT, ENT+TAU/3, ENT-TAU/3]){ const p=at(a,RB-1.2); k.add(new THREE.CylinderGeometry(.06,.1,1.1,8), M.steel, p.x,y+.55,p.z); k.add(new THREE.CylinderGeometry(.12,.16,.6,12), M.dark, p.x,y+1.2,p.z, Math.PI/2.3,yawOut(a),0);
       circles.push({x:p.x, z:p.z, r:.35, y0:y-.2, y1:y+1.6});
       INTER.push({x:p.x, z:p.z, r:1.6, prio:.8, when:()=>Math.abs(P.y-y)<1.5, label:'🔭 Ống nhòm ngắm thành phố (E)', action:()=>{ const look=at(a,200, y-10), pos=at(a,RB+1, y+1.6); HOOK.camOverride={pos, look, k:4}; toast('🔭 Đang ngắm thành phố… (6 giây)', 2200); setTimeout(()=>{ HOOK.camOverride=null; }, 6000); }}); }
-    for(const a of [ENT+TAU/6, ENT-TAU/6, ENT+Math.PI]){ const p=at(a,RB-1.6); k.add(new THREE.BoxGeometry(2.0,.12,.6), M.marble, p.x,y+.45,p.z, 0,yawOut(a)+Math.PI/2,0); k.add(new THREE.BoxGeometry(2.0,.42,.2), M.marbleD, p.x,y+.21,p.z, 0,yawOut(a)+Math.PI/2,0);
-      W.addSeat && W.addSeat({x:p.x, z:p.z, rot:yawOut(a), y:y+.5, floor:y, label:'🪑 Ngồi ngắm toàn cảnh (E · C)'}); }
+    // S-GFX (15/11): ghế cẩm thạch XẾP NGANG (chiều dài vuông góc hướng nhìn ra cảnh) – trước bị xoay lệch 90° (+π/2): người ngồi dọc thân ghế,
+    // chân đâm xuyên ghế. Chân đế lùi về sau 0,12 m chừa chỗ để chân; 2 m → 3 chỗ, tự xếp chỗ, hết chỗ báo.
+    for(const a of [ENT+TAU/6, ENT-TAU/6, ENT+Math.PI]){ const p=at(a,RB-1.6), ry=yawOut(a), bx=p.x-Math.sin(ry)*.12, bz=p.z-Math.cos(ry)*.12;
+      k.add(new THREE.BoxGeometry(2.0,.12,.6), M.marble, p.x,y+.45,p.z, 0,ry,0); k.add(new THREE.BoxGeometry(1.9,.39,.22), M.marbleD, bx,y+.195,bz, 0,ry,0);
+      circles.push({x:p.x-Math.cos(ry)*.55, z:p.z+Math.sin(ry)*.55, r:.42, y0:y-.3, y1:y+.9}); circles.push({x:p.x+Math.cos(ry)*.55, z:p.z-Math.sin(ry)*.55, r:.42, y0:y-.3, y1:y+.9});
+      W.addBench ? W.addBench({x:p.x+Math.sin(ry)*.06, z:p.z+Math.cos(ry)*.06, rot:ry, len:1.9, y:y+.5, floor:y, label:'🪑 Ngồi ngắm toàn cảnh (E · C)'})
+        : W.addSeat && W.addSeat({x:p.x, z:p.z, rot:ry, y:y+.5, floor:y, label:'🪑 Ngồi ngắm toàn cảnh (E · C)'}); }
     k.build(inner); }
 
   /* ============================== 👑 CHỮ QC VÀNG KHỔNG LỒ + LẤP LÁNH + CỘT SÁNG ============================== */
