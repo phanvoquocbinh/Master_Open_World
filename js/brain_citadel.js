@@ -57,7 +57,7 @@ export function make(W, ctx){
     const idx=new Uint32Array((NX-1)*(NZ-1)*6); let q=0; for(let j=0;j<NZ-1;j++) for(let i=0;i<NX-1;i++){ const a=j*NX+i, b=a+1, cc=a+NX, d=cc+1; idx[q++]=a; idx[q++]=cc; idx[q++]=b; idx[q++]=b; idx[q++]=cc; idx[q++]=d; }
     const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(pos,3)); g.setAttribute('color',new THREE.BufferAttribute(col,3)); g.setAttribute('uv',new THREE.BufferAttribute(uv,2)); g.setIndex(new THREE.BufferAttribute(idx,1)); g.computeVertexNormals();
     const det=(()=>{ const cv=document.createElement('canvas'); cv.width=cv.height=256; const x=cv.getContext('2d'); x.fillStyle='#c4c4c4'; x.fillRect(0,0,256,256); for(let i=0;i<9000;i++){ const v=150+Math.random()*105|0; x.fillStyle=`rgba(${v},${v},${v},.5)`; x.fillRect(Math.random()*256,Math.random()*256,1+Math.random()*3,1+Math.random()*2); } const t=new THREE.CanvasTexture(cv); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.colorSpace=THREE.SRGBColorSpace; return new THREE.MeshStandardMaterial({map:t, vertexColors:true, roughness:.95}); })();
-    const t=new THREE.Mesh(g, det); t.receiveShadow=true; t.userData.dynamic=true; t.name='brainTerrain'; grp.add(t); }
+    const t=new THREE.Mesh(g, det); t.receiveShadow=true; t.userData.dynamic=true; t.userData.noFar=true; t.name='brainTerrain'; grp.add(t); }
 
   /* ============================== 2. MẶT ĐƯỜNG ĐÈO + CẦU CẠN + CẦU KÍNH ============================== */
   const asphalt=(()=>{ const c=document.createElement('canvas'); c.width=128; c.height=256; const g=c.getContext('2d'); g.fillStyle='#35373b'; g.fillRect(0,0,128,256); for(let i=0;i<3000;i++){ const v=30+Math.random()*40|0; g.fillStyle=`rgba(${v},${v},${v+4},.6)`; g.fillRect(Math.random()*128,Math.random()*256,1.5,1.5); }
@@ -66,7 +66,7 @@ export function make(W, ctx){
   { const pts=ROAD.filter(q=>q.kind!=='glass'), pos=[], uv=[], idx=[]; let s=0;
     for(let i=0;i<pts.length;i++){ const q=pts[i]; if(i) s+=Math.hypot(q.x-pts[i-1].x,q.z-pts[i-1].z); const nx=-q.uz, nz=q.ux; for(const side of [-1,1]){ const x=q.x+nx*ROADW/2*side, z=q.z+nz*ROADW/2*side, y=onDeck(q)?q.h+.05:Math.max(q.h,(hAt(x,z)??q.h))+.05; pos.push(x,y,z); uv.push(side<0?0:1, s/14); }
       if(i){ const k=i*2; idx.push(k-2,k-1,k, k-1,k+1,k); } }
-    const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2)); g.setIndex(idx); g.computeVertexNormals(); const m=new THREE.Mesh(g, roadMat); m.receiveShadow=true; m.userData.dynamic=true; grp.add(m); }
+    const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2)); g.setIndex(idx); g.computeVertexNormals(); const m=new THREE.Mesh(g, roadMat); m.receiveShadow=true; m.userData.dynamic=true; m.userData.noFar=true; grp.add(m); }
   const k1=Kit(), lampPts=[], railMask=new Set();
   for(let i=0;i<ROAD.length-1;i+=2){ const q=ROAD[i], nx=-q.uz, nz=q.ux, deck=onDeck(q), yaw=Math.atan2(q.ux,q.uz);
     if(q.kind!=='glass') addPlat(q.x, q.z, yaw, ROADW/2+.2, 1.08, q.h);   /* mặt đứng bám đúng mặt đường suốt tuyến (không hụt ở chỗ nối đường cắt núi ↔ cầu cạn) */

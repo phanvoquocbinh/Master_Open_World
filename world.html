@@ -406,7 +406,7 @@ function mesh(geo, mat, x=0, y=0, z=0, parent=scene){ const m=new THREE.Mesh(geo
 const box=(w,h,d)=>new THREE.BoxGeometry(w,h,d);
 
 /* ============================== BẦU TRỜI + ÁNH SÁNG ============================== */
-const sky=new Sky(); sky.scale.setScalar(2000); scene.add(sky);
+const sky=new Sky(); sky.scale.setScalar(2000); scene.add(sky); sky.onBeforeRender=(r,s,c)=>{ sky.position.copy(c.position); sky.updateMatrixWorld(); };   // hộp trời đi theo camera: thế giới V2 rộng > ±1000 m vẫn có trời
 // đĩa mặt trời gốc quá sáng → tràn bộ đệm HalfFloat → bloom ra NaN (màn hình đen). Giảm + chặn trần.
 sky.material.fragmentShader=sky.material.fragmentShader.replace('19000.0','900.0').replace('gl_FragColor = vec4( retColor, 1.0 );','gl_FragColor = vec4( min( retColor, vec3( 2000.0 ) ), 1.0 );');
 const SU=sky.material.uniforms; SU.turbidity.value=5; SU.rayleigh.value=1.4; SU.mieCoefficient.value=.004; SU.mieDirectionalG.value=.8;
