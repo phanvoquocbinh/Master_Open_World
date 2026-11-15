@@ -65,11 +65,11 @@ export function makeMountainTown(W, ctx){
     m.body.querySelectorAll('[data-i]').forEach(bt=>bt.onclick=()=>{ const [n,p,b,mn]=items[+bt.dataset.i]; m.close(); askPay(p, `${n} – ${title.replace(/^[^ ]+ /,'')}`, ()=>{ if(!spend(p)) return; if(b) buff(b,mn); toast(`${n} ngon tuyệt! ${b==='energy'?`⚡ chạy nhanh hơn ${mn} phút`:b==='coffee'?`☕ thưởng quiz +20% trong ${mn} phút`:''}`, 3200); }); }); }
   // bảng hiệu: 1 atlas cho mọi quán (1 draw call)
   const ALL=[...SHOPS, ...BARS], ROWH=96;
-  const signTex=canvasTex(1024, ROWH*ALL.length, (g,w,h)=>{ ALL.forEach((s,i)=>{ const y=i*ROWH; const gr=g.createLinearGradient(0,y,0,y+ROWH); gr.addColorStop(0,'#8e1f18'); gr.addColorStop(1,'#5e140f'); g.fillStyle=gr; g.fillRect(0,y,w,ROWH);
+  const signTex=canvasTex(1024, ROWH*(ALL.length+1), (g,w,h)=>{ [...ALL, {icon:'🙏', name:'Cảm ơn quý khách · Hẹn gặp lại'}].forEach((s,i)=>{ const y=i*ROWH; const gr=g.createLinearGradient(0,y,0,y+ROWH); gr.addColorStop(0,'#8e1f18'); gr.addColorStop(1,'#5e140f'); g.fillStyle=gr; g.fillRect(0,y,w,ROWH);
     g.strokeStyle='#e6b04a'; g.lineWidth=6; g.strokeRect(6,y+6,w-12,ROWH-12); g.fillStyle='#ffe2a0'; g.font='800 54px "Segoe UI","Segoe UI Emoji",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText(`${s.icon} ${s.name}`, w/2, y+ROWH/2+3); }); });
-  const signMat=new THREE.MeshStandardMaterial({map:signTex, emissive:0xffffff, emissiveMap:signTex, emissiveIntensity:.35, side:THREE.DoubleSide});
+  const signMat=new THREE.MeshStandardMaterial({map:signTex, emissive:0xffffff, emissiveMap:signTex, emissiveIntensity:.35});   // S-QA: 1 mặt – mặt sau có tấm riêng (trước 2 tấm 2 mặt trùng nhau → chữ ngược + nhấp nháy)
   HOOK.onFrame.push(()=>{ signMat.emissiveIntensity=.3+(W.night||0)*1.1; });
-  function sign(i, w, hgt, x, y, z, ry){ const g=new THREE.PlaneGeometry(w,hgt), uv=g.attributes.uv; for(let j=0;j<uv.count;j++) uv.setY(j, 1-(i+1-uv.getY(j))/ALL.length); k.add(g, signMat, x, y, z, 0, ry, 0); }
+  function sign(i, w, hgt, x, y, z, ry){ const g=new THREE.PlaneGeometry(w,hgt), uv=g.attributes.uv; for(let j=0;j<uv.count;j++) uv.setY(j, 1-(i+1-uv.getY(j))/(ALL.length+1)); k.add(g, signMat, x+Math.sin(ry)*.04, y, z+Math.cos(ry)*.04, 0, ry, 0); }
 
   /* ---------- đèn lồng + bóng đèn dây (InstancedMesh) ---------- */
   const lanterns=[], bulbs=[];
@@ -126,14 +126,15 @@ export function makeMountainTown(W, ctx){
       const [y0x,y0z]=at(a,e), [y1x,y1z]=at(a,b1); addSeg(y0x,y0z,y1x,y1z,.12, yb-2, s.lv-.3); }
     for(const s of secs){ const [x0,z0]=at(s.a0,b1), [x1,z1]=at(s.a1,b1); addSeg(x0,z0,x1,z1,.12, yb-2, s.lv-.3); }
     // mái hiên từng tầng + đèn lồng đỏ + ban công (mặt ngoài)
-    for(let y=topBody-3.2; y>t.gmin+.4; y-=3.2){ const [ex,ez]=at(0,b1+.45); k.add(new THREE.BoxGeometry(Wd+1.2,.12,1.0), M.eave, ex, y, ez, 0, ry, 0);
+    const gFront=(()=>{ let m=-1e9; for(let a=-Wd/2-.6;a<=Wd/2+.61;a+=.5){ const [x,z]=at(a,b1+1.0); m=Math.max(m, hAt(x,z)??-9); } return m; })();   // A11: mặt đất ngay trước mặt nhà (không phải điểm thấp nhất) → mái hiên/đèn lồng không bị vùi
+    for(let y=topBody-3.2; y>gFront+1.1; y-=3.2){ const [ex,ez]=at(0,b1+.45); k.add(new THREE.BoxGeometry(Wd+1.2,.12,1.0), M.eave, ex, y, ez, 0, ry, 0);
       const [tx,tz]=at(0,b1+.95); k.add(new THREE.BoxGeometry(Wd+1.3,.1,.08), M.trim, tx, y+.06, tz, 0, ry, 0);
       for(let a=-Wd/2+.4;a<=Wd/2-.39;a+=1.45){ const [lx,lz]=at(a,b1+.8); lanterns.push([lx,y-.38,lz]); if(((a*10)|0)%3===0) glow(lx,y-.38,lz,1.6,0xff5a2a,.9); }
       const [bx,bz]=at(0,b1+.55); k.add(new THREE.BoxGeometry(Wd*.7,.05,.05), M.deckD, bx, y+1.05, bz, 0, ry, 0); }
     // bảng hiệu (cổng gỗ) quay ra đường + quầy gọi món + bàn ghế
     const mid=secs[1];
     { const [g0x,g0z]=at(-1.7,e+.15), [g1x,g1z]=at(1.7,e+.15), [gx,gz]=at(0,e+.12); for(const [x,z] of [[g0x,g0z],[g1x,g1z]]){ k.add(new THREE.BoxGeometry(.18,3.2,.18), M.trim, x, mid.lv+1.6, z); circles.push({x, z, r:.14, y0:mid.lv-.5, y1:mid.lv+3}); }
-      k.add(new THREE.BoxGeometry(3.9,.16,.3), M.eave, gx, mid.lv+3.25, gz, 0, ry, 0); sign(si, 3.4, .5, gx, mid.lv+2.9, gz-.0, ryIn); sign(si, 3.4, .5, gx, mid.lv+2.9, gz+.0, ryOut); }
+      k.add(new THREE.BoxGeometry(3.9,.16,.3), M.eave, gx, mid.lv+3.25, gz, 0, ry, 0); sign(si, 3.7, .62, gx, mid.lv+2.86, gz, ryIn); sign(ALL.length, 3.7, .62, gx, mid.lv+2.86, gz, ryOut); }
     const [qx,qz]=at(0,b1-1.3); k.add(new THREE.BoxGeometry(2.6,1.0,.7), M.deckD, qx, mid.lv+.5, qz, 0, ry, 0); k.add(new THREE.BoxGeometry(2.8,.06,.85), M.gold, qx, mid.lv+1.03, qz, 0, ry, 0);
     for(const a of [-1.2,0,1.2]){ const [cx,cz]=at(a,b1-1.15); k.add(new THREE.CylinderGeometry(.05,.05,.12,8), M.white, cx, mid.lv+1.12, cz); }
     { const [x0,z0]=at(-1.35,b1-1.3), [x1,z1]=at(1.35,b1-1.3); addSeg(x0,z0,x1,z1,.4, mid.lv-.5, mid.lv+1.4); }

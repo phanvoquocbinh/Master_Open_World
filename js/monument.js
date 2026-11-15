@@ -83,7 +83,11 @@ export function makeMonument(W){
     // lan can sân thượng (kính thấp + tay vịn vàng)
     k.add(new THREE.CylinderGeometry(RB+.2,RB+.2,1.1,72,1,true), M.glass, C.x,FY[3]+.55,C.z); k.add(new THREE.TorusGeometry(RB+.2,.06,8,96), M.gold, C.x,FY[3]+1.12,C.z, Math.PI/2,0,0);
     // lan can giếng trời tầng 1, 2, sân thượng
-    for(let i=1;i<=3;i++){ k.add(new THREE.CylinderGeometry(RA+.15,RA+.15,1.05,48,1,true), M.glass, C.x,FY[i]+.52,C.z); k.add(new THREE.TorusGeometry(RA+.15,.05,8,64), M.gold, C.x,FY[i]+1.06,C.z, Math.PI/2,0,0); }
+    for(let i=1;i<=3;i++){ // A10: chừa khe đúng chỗ cầu thang ghé vào (trước vẽ kín vòng → trông như lan can chắn ngang lối)
+      const la=ENT+Math.PI*.55+(i*FH/.25)*(TAU/30), gh=.36, a0=la+gh, a1=la+TAU-gh;
+      k.add(new THREE.CylinderGeometry(RA+.15,RA+.15,1.05,48,1,true,Math.PI/2-a1,a1-a0), M.glass, C.x,FY[i]+.52,C.z);
+      const pts=[]; for(let a=a0;a<=a1+1e-6;a+=.06) pts.push(at(a,RA+.15,FY[i]+1.06)); k.add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), pts.length, .05, 6, false), M.gold);
+      for(const a of [a0,a1]){ const q=at(a,RA+.15); k.add(new THREE.CylinderGeometry(.05,.05,1.06,8), M.gold, q.x,FY[i]+.53,q.z); } }
     k.build(shell); }
   // va chạm vỏ: tường kính từng tầng, lan can (chỉ trong khoảng cao tương ứng)
   const ring=(r,y0,y1,skip)=>{ const n=Math.ceil(TAU*r/.9); for(let i=0;i<n;i++){ const a=i/n*TAU; if(skip && skip(a)) continue; const p=at(a,r); circles.push({x:p.x, z:p.z, r:.32, y0, y1}); } };
@@ -101,13 +105,14 @@ export function makeMonument(W){
       k.add(new THREE.BoxGeometry(R1-R0, .16, (R1)*DA+.18), M.bronze, p.x,y-.2,p.z, 0,yawOut(a)+Math.PI/2,0);
       { const an=a-DA*.5+.012, pn=at(an,rm); k.add(new THREE.BoxGeometry(R1-R0-.12,.03,.06), M.nosing, pn.x,y+.012,pn.z, 0,yawOut(an)+Math.PI/2,0); }   // nẹp đèn mép bậc: thấy rõ từng bậc
       addPlat(p.x, p.z, yawOut(a), R1*Math.sin(DA/2)+.12, (R1-R0)/2, y);
-      const nearLand=landA.some(la=>dAng(a,la)<DA*1.6);
+      const nearLand=landA.some(la=>dAng(a,la)<.19);
       if(i>3 && !nearLand){ const q=at(a,R1+.12); circles.push({x:q.x, z:q.z, r:.17, y0:y-.3, y1:y+1.15}); }   // tay vịn ngoài
       if(y-Y0>.8 && y-Y0<2.2){ circles.push({x:p.x, z:p.z, r:.7, y0:Y0-1, y1:y-.5}); }                            // không chui gầm bậc thấp
       // tay vịn: cột nhỏ + thanh vàng
       if(i%2===0){ const q=at(a,R1+.05); k.add(new THREE.CylinderGeometry(.025,.025,1.0,6), M.gold, q.x,y+.5,q.z); } }
     // tay vịn xoắn (ống vàng chạy theo đường xoắn)
-    { const pts=[]; for(let i=4;i<=NSTEP;i++){ const a=A0+i*DA; const q=at(a,R1+.05, Y0+i*STEP+1.0); pts.push(q); } const curve=new THREE.CatmullRomCurve3(pts); k.add(new THREE.TubeGeometry(curve, NSTEP*2, .045, 6, false), M.gold); }
+    { let pts=[]; const flush=()=>{ if(pts.length>2) k.add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), pts.length*2, .045, 6, false), M.gold); pts=[]; };
+      for(let i=4;i<=NSTEP;i++){ const a=A0+i*DA; if(landA.some(la=>dAng(a,la)<.2)){ flush(); continue; } pts.push(at(a,R1+.05, Y0+i*STEP+1.0)); } flush(); }
     // chiếu nghỉ nối thang vào sàn từng tầng (bắc qua khe giếng trời)
     for(let f=0;f<3;f++){ const a=landA[f], y=FY[f+1], p=at(a,(R1+RA+.6)/2); k.add(new THREE.BoxGeometry(2.0,.2,RA+.6-R1+.4), M.walnut, p.x,y-.1,p.z, 0,yawOut(a),0); addPlat(p.x,p.z,yawOut(a),1.0,(RA+.6-R1)/2+.25,y); }
     k.build(inner); }
@@ -308,7 +313,7 @@ export function makeMonument(W){
     myst.door.position.set(myst.dp.x+tv[0]*sl, myst.y+1.3, myst.dp.z+tv[1]*sl); for(const b of myst.blockers) b.y1=myst.k>.6 ? myst.y-10 : myst.y+2.6; myst.q.rotation.y+=dt*1.2;
     // vào trong toà: camera thu gọn + không xuyên trần
     const inside=d<RB-.4 && P.y>Y0-1 && P.y<FY[3]-.6 && !W.inside;   // sân thượng là ngoài trời: không giới hạn trần
-    if(inside){ const f=Math.min(2, Math.max(0, Math.floor((P.y-Y0+.3)/FH))); if(!wasIn){ savedDist=cam.dist; cam.dist=Math.min(cam.dist,4.2); } HOOK.camBox={x0:C.x-9, x1:C.x+9, z0:C.z-9, z1:C.z+9, y1:FY[f]+FH-.8}; wasIn=true; }
+    if(inside){ const f=Math.min(2, Math.max(0, Math.floor((P.y-Y0+.3)/FH))); if(!wasIn){ savedDist=cam.dist; cam.dist=Math.min(cam.dist,6.2); } HOOK.camBox={x0:C.x-11.5, x1:C.x+11.5, z0:C.z-11.5, z1:C.z+11.5, y1:FY[f]+FH-.8}; wasIn=true; }
     else if(wasIn){ wasIn=false; HOOK.camBox=null; if(savedDist) cam.dist=savedDist; }
   });
   return {C, FY, ENT, RB, RA, landA, myst};
