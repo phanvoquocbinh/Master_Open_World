@@ -140,9 +140,9 @@ export function makeJobCenter(W, ctx){
   const advisers=[];
   if(W.people) booths.forEach((b,i)=>{ const sd=W.people.pickSeed(L=>i%2?L.female:!L.female, 800+i), kk=W.people.kit(sd,{outfit:{shirt:0x16324f, pants:0x1d1f24, long:true}}); const a=makeActor(kk.gl,{name:`${W.people.nameOf(sd)} · tư vấn nghề`, height:kk.h, face:0, clips:kk.clips, compact:false, dot:'#46d39a'}); const f=[Math.sin(b.face),Math.cos(b.face)]; const cx=b.x-f[0]*.95, cz=b.z-f[1]*.95;
     // S-QA (15/11): ghế xoay + ngồi ngay ngắn, hai tay đặt trên đùi, thỉnh thoảng khẽ nghiêng đầu
-    k.add(new THREE.BoxGeometry(.5,.08,.48), M.navy, cx,Y+.5,cz, 0,b.face,0); k.add(new THREE.BoxGeometry(.48,.55,.07), M.navy, cx-f[0]*.24,Y+.82,cz-f[1]*.24, 0,b.face,0);
-    k.add(new THREE.CylinderGeometry(.03,.03,.46,8), M.steel, cx,Y+.25,cz); k.add(new THREE.CylinderGeometry(.26,.26,.03,14), M.steel, cx,Y+.02,cz);
-    a.g.rotation.y=b.face; a.play('idle',0); a.mixer.update(0); const po=makePoser(THREE,a), hh=po.hipsHeight(); a.g.position.set(cx, Y+.56-hh, cz); advisers.push({a, po, ph:i*1.7}); });
+    k.add(new THREE.BoxGeometry(.5,.08,.48), M.navy, cx,Y+.8,cz, 0,b.face,0); k.add(new THREE.BoxGeometry(.48,.5,.07), M.navy, cx-f[0]*.24,Y+1.1,cz-f[1]*.24, 0,b.face,0);
+    k.add(new THREE.CylinderGeometry(.03,.03,.76,8), M.steel, cx,Y+.4,cz); k.add(new THREE.TorusGeometry(.2,.015,6,16), M.steel, cx,Y+.32,cz, Math.PI/2,0,0); k.add(new THREE.CylinderGeometry(.26,.26,.03,14), M.steel, cx,Y+.02,cz);
+    a.g.rotation.y=b.face; a.play('idle',0); a.mixer.update(0); const po=makePoser(THREE,a), hh=po.hipsHeight(); a.g.position.set(cx, Y+.86-hh, cz); advisers.push({a, po, ph:i*1.7}); });
   HOOK.onFrame.push((dt,T)=>{ if(W.inside || Math.hypot(P.x-(X0+X1)/2, P.z-(Z0+Z1)/2)>45) return; for(const v of advisers){ v.a.mixer.update(dt); v.po.apply('lap', T+v.ph); } });
   k.build(scene);
   // camera trong sảnh

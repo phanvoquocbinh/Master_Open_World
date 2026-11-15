@@ -14,14 +14,14 @@ export function buildWard(W){
   { const slab=mesh(new THREE.BoxGeometry(X1-X0+4, 8, Z1+2-SZ0), MAT.stone, (X0+X1)/2, -4+.02, (SZ0+Z1+2)/2); slab.castShadow=false;
     const paveT=canvasTex(256,256,(g,w,h)=>{ g.fillStyle='#a49d90'; g.fillRect(0,0,w,h); const t=32; for(let y=0;y<h;y+=t) for(let x=(Math.floor(y/t)%2)*t/2-t;x<w;x+=t){ const v=150+R()*22|0; g.fillStyle=`rgb(${v},${v-7},${v-18})`; g.fillRect(x+1,y+1,t-2,t-2); } for(let i=0;i<1500;i++){ g.fillStyle=`rgba(0,0,0,${R()*.06})`; g.fillRect(R()*w,R()*h,2,2); } });
     paveT.wrapS=paveT.wrapT=THREE.RepeatWrapping; paveT.repeat.set((X1-X0)/4,(Z1-GZ0)/4); paveT.userData.live=true;
-    const ground=new THREE.Mesh(new THREE.PlaneGeometry(X1-X0,Z1-GZ0), new THREE.MeshStandardMaterial({map:paveT, roughness:.88})); ground.rotation.x=-Math.PI/2; ground.position.set((X0+X1)/2,.03,(GZ0+Z1)/2); ground.receiveShadow=true; scene.add(ground);
+    const ground=new THREE.Mesh(new THREE.PlaneGeometry(X1-X0,Z1-GZ0), new THREE.MeshStandardMaterial({map:paveT, roughness:.88})); ground.rotation.x=-Math.PI/2; ground.position.set((X0+X1)/2,.03,(GZ0+Z1)/2); ground.receiveShadow=true; ground.userData.noFar=true; scene.add(ground);
     const asT=canvasTex(256,256,(g,w,h)=>{ g.fillStyle='#35373c'; g.fillRect(0,0,w,h); for(let i=0;i<6000;i++){ const v=36+R()*44|0; g.fillStyle=`rgba(${v},${v},${v+4},.55)`; g.fillRect(R()*w,R()*h,1.6,1.6); } });
     asT.wrapS=asT.wrapT=THREE.RepeatWrapping; asT.repeat.set(1/8,1/8); asT.userData.live=true;
     const asM=new THREE.MeshStandardMaterial({map:asT, roughness:.92, polygonOffset:true, polygonOffsetFactor:-1, polygonOffsetUnits:-1});
     const NET=roadNet(CITY);
     for(const r of (NET?NET.rects:[])){ const z0=Math.max(r.z0, GZ0), z1=Math.min(r.z1, Z1); if(z1-z0<.2) continue; const w=r.x1-r.x0, d=z1-z0;
       const g=new THREE.PlaneGeometry(w,d); const uv=g.attributes.uv; for(let i=0;i<uv.count;i++){ uv.setXY(i, (r.x0+uv.getX(i)*w), -(z0+(1-uv.getY(i))*d)); }
-      const m=new THREE.Mesh(g, asM); m.rotation.x=-Math.PI/2; m.position.set((r.x0+r.x1)/2,.036,(z0+z1)/2); m.receiveShadow=true; m.castShadow=false; scene.add(m); }
+      const m=new THREE.Mesh(g, asM); m.rotation.x=-Math.PI/2; m.position.set((r.x0+r.x1)/2,.036,(z0+z1)/2); m.receiveShadow=true; m.castShadow=false; m.userData.noFar=true; scene.add(m); }
     // lan can mép bờ (trang trí) – cạnh Tây/Đông/Nam (cạnh Đông liền 1 đoạn: hills.js tự cắt khe cầu sang Đồi Brand QC ở z = street)
     for(const [x0,z0,x1,z1] of [[X0-1,SZ0,X0-1,Z1+1],[X1+1,SZ0,X1+1,Z1+1],[X0-1,Z1+1,X1+1,Z1+1]]){ const len=Math.hypot(x1-x0,z1-z0), r=mesh(box(.08,.08,len), MAT.metal, (x0+x1)/2,1,(z0+z1)/2); r.rotation.y=Math.atan2(x1-x0,z1-z0); }
     makeLabel('🌱 Phường Khởi Nghiệp', 'Thế giới mở · chợ, đất, việc làm, nhà trọ · bệnh viện, trạm cứu hoả, trường học', {h:1, x:160, y:9, z:MAINZ+14, fade:120});

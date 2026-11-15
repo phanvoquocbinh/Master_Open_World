@@ -58,7 +58,7 @@ export function buildDowntown(W, interior){
     });
     tex.wrapS=tex.wrapT=THREE.ClampToEdgeWrapping; tex.anisotropy=16;
     const gm=new THREE.MeshStandardMaterial({map:tex, roughness:.88});
-    const ground=new THREE.Mesh(new THREE.PlaneGeometry(DW,DH), gm); ground.rotation.x=-Math.PI/2; ground.position.set(cx,.03,cz); ground.receiveShadow=true; scene.add(ground);
+    const ground=new THREE.Mesh(new THREE.PlaneGeometry(DW,DH), gm); ground.rotation.x=-Math.PI/2; ground.position.set(cx,.03,cz); ground.receiveShadow=true; ground.userData.noFar=true; scene.add(ground);
   }
   // bó vỉa nổi dọc mép đường (mọi đoạn trong Downtown + Phường – ward.js không vẽ lại)
   { const curbM=colorMat(0xd7d3ca,{roughness:.8});

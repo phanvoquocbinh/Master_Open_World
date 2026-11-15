@@ -68,7 +68,7 @@ export function makeTraffic(W, L){
     const g=new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos,3)); g.setAttribute('normal', new THREE.BufferAttribute(nor,3)); g.setIndex(idx); g.computeBoundingSphere(); return g; }
   const paint=(c,e)=>new THREE.MeshStandardMaterial({color:c, roughness:.5, emissive:e, emissiveIntensity:.03, side:THREE.DoubleSide, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-3});
   const whiteM=paint(0xf6f6f0, 0xffffff), yellowM=paint(0xf4c22b, 0xffc400);
-  for(const [arr,mat] of [[WH,whiteM],[YE,yellowM]]){ const m=new THREE.Mesh(quadsGeo(arr), mat); m.receiveShadow=true; m.castShadow=false; m.userData.dynamic=true; m.renderOrder=1; scene.add(m); }
+  for(const [arr,mat] of [[WH,whiteM],[YE,yellowM]]){ const m=new THREE.Mesh(quadsGeo(arr), mat); m.receiveShadow=true; m.castShadow=false; m.userData.dynamic=true; m.userData.noFar=true; m.renderOrder=1; scene.add(m); }   // noFar: 1 lưới phủ cả thành phố, tâm ở xa → không để world.html markFar bỏ vẽ
   const studM=new THREE.MeshStandardMaterial({color:0xffcf4a, emissive:0xffb000, emissiveIntensity:.15, roughness:.3, metalness:.4});
   const studs=new THREE.InstancedMesh(new THREE.BoxGeometry(.13,.035,.1), studM, STUD.length); STUD.forEach(([x,z],i)=>{ _m.makeTranslation(x,.06,z); studs.setMatrixAt(i,_m); }); studs.userData.dynamic=true; studs.castShadow=false; scene.add(studs);
   // ký hiệu làn xe máy (chữ "XE MÁY" sơn trắng trên làn)
@@ -79,7 +79,10 @@ export function makeTraffic(W, L){
   /* ---------- cột đèn tín hiệu (góc ngã trên vỉa hè) ---------- */
   const poleM=sm(0x2d3238,.45,.6), headM=sm(0x14171b,.6,.2), backM=sm(0xf2c230,.6);
   const kit=Kit(), VL=[], PL=[];   // đèn xe: {pos, face, ix, axis, col} · đèn đi bộ: {pos, face, ix, axis}
-  const dirOf=h=>[Math.sin(h), Math.cos(h)], CC=HW+1.1, landC=(x,z)=>W.inDT(x,z) && !NET.onRoad(x,z,.3);
+  const dirOf=h=>[Math.sin(h), Math.cos(h)], CC=HW+1.1;
+  // góc ngã ba (146,0) phía cầu đảo nằm ngoài đất → cột đèn đứng trên lối bộ hành của cầu (|z| HW…bridgeW/2), người từ cầu qua vạch sang vỉa hè công viên có đèn riêng
+  const DTc=W.CITY.downtown, onBridgeWalk=(x,z)=>x>DTc.x0-30 && x<DTc.x0 && Math.abs(z)>HW+.4 && Math.abs(z)<(DTc.bridgeW||0)/2-.4;
+  const landC=(x,z)=>(W.inDT(x,z) || onBridgeWalk(x,z)) && !NET.onRoad(x,z,.3);
   function pole(x,z){ kit.add(new THREE.CylinderGeometry(.09,.12,5.9,10), poleM, x,2.95,z); kit.add(new THREE.CylinderGeometry(.2,.24,.25,10), poleM, x,.12,z); circles.push({x, z, r:.18}); }
   for(const ix of IX){ const {x,z,arms}=ix;
     for(const [sx,sz] of [[-1,-1],[1,-1],[1,1],[-1,1]]){ const px=x+sx*CC, pz=z+sz*CC; if(!landC(px,pz)) continue; pole(px,pz);
