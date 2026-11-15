@@ -4,7 +4,8 @@
 //    (CSS3D: DOM thật trong không gian 3D) – lăn chuột để đọc / xem tiếp. Mất mạng → "No internet".
 //  • 📘 Kiến thức QA · 🗄️ Database · 🔌 API · ✅ QC thực chiến · 🤖 Automation: câu hỏi (đã đánh sẵn đáp án + giải thích) xen bài giảng,
 //    tự lướt mỗi 30 giây (lấy từ data/questions.json + data/courses.json). Bấm E để xem gần: lăn chuột / bấm vào màn hình để lướt.
-//  • 🚁 Flycam (quảng trường): camera bay vòng quanh thành phố, vẽ ra texture độ phân giải thấp – chỉ khi người chơi ở gần & đang nhìn, 1 lần/3 khung.
+//  • 🚁 Flycam (quảng trường): camera bay vòng quanh thành phố, vẽ ra texture 320×180 – chỉ khi người chơi ở gần & đang nhìn;
+//    vẽ chia lát (mỗi khung 1 phần cảnh, đủ lát mới đổi hình) và chỉ dùng thời gian dư của khung hình → không kéo tụt FPS.
 import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
 
 export function makeScreens(W, ui){
@@ -168,7 +169,7 @@ export function makeScreens(W, ui){
      để mỗi khung chỉ tốn ~2 ms). Không cập nhật lại ma trận toàn cảnh (dùng ma trận của khung trước) – tiết kiệm ~15 ms/lần. */
   const L_OP=20, L_TR=28;   // layer 20..27: nhóm vật đục · 28: vật trong suốt (vẽ ở lát cuối)
   const FLY={rt:null, rts:null, front:0, cam:null, curve:null, center:new THREE.Vector3(), follow:false, pos:new THREE.Vector3(), look:new THREE.Vector3(),
-    NB:8, S:4, slice:0, cost:0, dtE:1/60, odd:false, tagAt:-1e9, shown:false};
+    NB:8, S:4, slice:0, cost:0, dtE:1/60, wait:0, tagAt:-1e9, shown:false};
   function flyInit(){ if(FLY.rt) return;
     FLY.rts=[0,1].map(()=>new THREE.WebGLRenderTarget(320, 180, {type:THREE.HalfFloatType})); FLY.rt=FLY.rts[0];
     FLY.cam=new THREE.PerspectiveCamera(55, 320/180, 1, 950);
@@ -242,8 +243,10 @@ export function makeScreens(W, ui){
     if(wantWeb && !NET.busy && performance.now()-NET.at>60000) checkNet();
     FLY.dtE=FLY.dtE*.95+dt*.05;
     if(FLY.follow){ flyInit(); flyPose(T); HOOK.camOverride={pos:FLY.pos.clone(), look:FLY.look.clone(), k:7}; }
-    else if(wantFly && !W.inside){ flyInit(); if(FLY.slice===0) flyPose(T);
-      FLY.odd=!FLY.odd; if(FLY.dtE<1/24 || FLY.odd) flySlice(); }   // game đang dưới ~24 FPS → chỉ vẽ lát cách 1 khung
+    else if(wantFly && !W.inside && !FLY.off){ flyInit(); if(FLY.slice===0) flyPose(T);
+      // chỉ dùng thời gian dư: game dưới ~28 FPS → tạm dừng flycam (giữ hình cũ); lát tốn nhiều → giãn nhịp để trung bình ≤ 2,5 ms/khung
+      const every=Math.min(8, Math.max(1, Math.ceil(FLY.cost/2.5)));
+      if(FLY.dtE<1/28 && ++FLY.wait>=every){ FLY.wait=0; flySlice(); } }
   });
   // vẽ thẻ hiện tại (đang lướt: thẻ cũ trượt lên, thẻ mới trượt vào) – thường + bản nét cao khi đang xem gần
   const HD=1.5, hdCv=document.createElement('canvas'); hdCv.width=CW*HD; hdCv.height=CHH*HD; const hdCtx=hdCv.getContext('2d');
@@ -316,5 +319,6 @@ export function makeScreens(W, ui){
   HOOK.afterRender=()=>{ if(!active || !active.obj) return;
     if(HOOK.camOverride && HOOK.camOverride.near && active.el && active.el.style.opacity!=='1') active.el.style.opacity='1';
     css.render(cssScene, camera); };
-  return {open, focus, close, monitors, get active(){ return active; }, net:NET, fly:FLY};
+  const api={open, focus, close, monitors, get active(){ return active; }, net:NET, fly:FLY};   // FLY.off=true: tắt flycam (gỡ lỗi / đo FPS)
+  W.screens=api; return api;
 }

@@ -84,6 +84,15 @@ export function createApp(W, ctx = {}){
         try{ synth.speak(u); }catch(e){ fin(); } };
       next(); }); }
   function hush(){ speakId++; try{ synth && synth.cancel(); }catch(e){} }
+  // câu nghe dạng hội thoại “男：…女：…” / “Man: … Woman: …” / “A: … B: …” → tách lượt, đọc bằng giọng nam/nữ, KHÔNG đọc nhãn
+  const LBL = /(?:^|(?<=[\s。！？.!?”"]))(男|女|Man|Woman|A|B)\s*[:：]\s*/g;
+  async function sayScript(text, lang, g0){
+    const s = String(text || ''); LBL.lastIndex = 0; const parts = []; let m, last = 0, g = g0 || null;
+    while((m = LBL.exec(s))){ const seg = s.slice(last, m.index).trim(); if(seg) parts.push([seg, g]); g = /男|Man|^A$/.test(m[1]) ? 'm' : 'f'; last = LBL.lastIndex; }
+    const tail = s.slice(last).trim(); if(tail) parts.push([tail, g]);
+    if(parts.length <= 1) return say(parts.length ? parts[0][0] : s, lang, {g:parts.length ? parts[0][1] : g0});
+    for(const [seg, gg] of parts){ const ok = await say(seg, lang, {g:gg}); if(!ok) return false; await new Promise(r => setTimeout(r, 280)); }
+    return true; }
   const sayBtn = (text, lang, g, label = '🔊') => `<button class="lcx-say" data-act="say" data-t="${esc(text)}" data-l="${esc(lang)}"${g ? ` data-g="${g}"` : ''} title="Nghe">${label}</button>`;
 
   /* ============================== GHI ÂM (chỉ trong máy) ============================== */
@@ -260,7 +269,7 @@ export function createApp(W, ctx = {}){
     el.addEventListener('click', e => {
       const pb = e.target.closest('[data-play]'); if(pb){ const i = +pb.dataset.play, x = items[i];
         if(plays && !done){ if(playsLeft[i] <= 0) return; playsLeft[i]--; pb.innerHTML = `▶ Nghe <small>(còn ${playsLeft[i]} lượt)</small>`; if(playsLeft[i] <= 0) pb.disabled = true; }
-        hush(); say(x.say, x.lang || lang, {g:x.g || null}); return; }
+        hush(); sayScript(x.say, x.lang || lang, x.g || null); return; }
       if(done) return;
       const ob = e.target.closest('[data-o]'); if(ob){ const [i, j] = ob.dataset.o.split(':').map(Number); st[i].sel = j; el.querySelectorAll(`[data-o^="${i}:"]`).forEach(b => b.classList.toggle('sel', b === ob)); return; }
       const pk = e.target.closest('[data-pk]'); if(pk){ const [i, k] = pk.dataset.pk.split(':').map(Number); st[i].ans.push(st[i].pool.splice(k, 1)[0]); paintOrder(i); return; }
@@ -274,7 +283,8 @@ export function createApp(W, ctx = {}){
       if(x.t === 'order'){ const g = st[i].ans.map(o => o.w).join(zh ? '' : ' '); return {ok: N(g, zh) === N(x.a, zh) || (x.alt || []).some(a => N(a, zh) === N(g, zh)), given: g || '(bỏ trống)'}; }
       if(x.t === 'match'){ let ok = true; (x.pairs || []).forEach((p, k) => { const s = el.querySelector(`[data-m="${i}:${k}"]`); const v = s && s.value !== '' ? st[i].R[+s.value] : null; if(v !== p[1]){ ok = false; if(s) s.style.borderColor = '#ff6b6b'; } else if(s) s.style.borderColor = '#46d39a'; }); return {ok, given:''}; }
       const inp = el.querySelector(`.lcx-in[data-i="${i}"]`), g = inp ? inp.value.trim() : '';
-      const cands = [x.a, ...(x.alt || []), x.py].filter(Boolean).map(a => N(a, zh)), gn = N(g, zh);
+      const pyOk = x.py && !(x.t !== 'dict' && N(x.q || '', true).includes(N(x.py, true)));   // đề đã cho sẵn pinyin (viết chữ theo pinyin) → bắt buộc gõ chữ Hán
+      const cands = [x.a, ...(x.alt || []).filter(a => pyOk || x.t === 'dict' || !x.py || N(a, true) !== N(x.py, true)), pyOk ? x.py : null].filter(Boolean).map(a => N(a, zh)), gn = N(g, zh);
       let ok = !!gn && cands.includes(gn);
       if(!ok && x.t === 'dict' && gn && cands.some(c => c.length > 18 && similar(c, gn) >= .92)) ok = true;   // câu dài: cho phép sai 1–2 ký tự
       return {ok, given: g || '(bỏ trống)'}; }
@@ -372,7 +382,7 @@ export function createApp(W, ctx = {}){
       <div>${clean(s.vi)}</div>${(s.pairs || []).length ? `<div class="lcx-sub">🎧 Nghe phân biệt: ${s.pairs.map(pr => `${chip(pr[0])} ↔ ${chip(pr[1])}`).join(' &nbsp;·&nbsp; ')}</div>` : ''}</div>`).join('')}`); }
   function grammarEl(p, t){
     const zh = t === 'zh', lang = TR[t].lang; const tb = p.table || [];
-    return mk(`${H(p)}<div>${clean(p.html)}</div>${tb.length ? `<table>${tb.map((r, i) => `<tr>${r.map(c => i ? `<td class="${zh ? 'zh' : ''}">${clean(c)}</td>` : `<th>${clean(c)}</th>`).join('')}</tr>`).join('')}</table>` : ''}
+    return mk(`${H(p)}${p.html ? `<div>${clean(p.html)}</div>` : ''}${tb.length ? `<table>${tb.map((r, i) => `<tr>${r.map(c => i ? `<td class="${zh ? 'zh' : ''}">${clean(c)}</td>` : `<th>${clean(c)}</th>`).join('')}</tr>`).join('')}</table>` : ''}
       ${(p.ex || []).length ? `<h4>Ví dụ</h4>${p.ex.map(e => `<div style="margin:5px 0"><span class="${zh ? 'zhb' : ''}">${esc(e.t)}</span> ${sayBtn(e.t, lang)}${e.py && P.set.showPy ? `<div class="lcx-sub py">${esc(e.py)}</div>` : ''}${e.vi ? `<div class="lcx-sub">${esc(e.vi)}</div>` : ''}</div>`).join('')}` : ''}
       ${(p.tips || []).map(x => `<div class="lcx-tip">${clean(x)}</div>`).join('')}`); }
   function textEl(p){ return mk(`${H(p)}<div>${clean(p.html)}</div>`); }

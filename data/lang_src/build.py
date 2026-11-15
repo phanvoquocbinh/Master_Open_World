@@ -128,7 +128,7 @@ def check_part(rep, where, p, track, level, stats):
         if not p.get('items'): rep.E(where, 'sounds thiếu items')
     elif k == 'words': stats['words'] += check_words(rep, where, p.get('items'), track)
     elif k == 'grammar':
-        if not p.get('html'): rep.E(where, 'grammar thiếu html')
+        if not p.get('html') and not p.get('table'): rep.E(where, 'grammar cần html hoặc table')
         for i, e in enumerate(p.get('ex') or []):
             if not e.get('t'): rep.E(f'{where}.ex[{i}]', 'ví dụ thiếu "t"')
             if is_zh(track) and level in PY_REQUIRED and not e.get('py'): rep.W(f'{where}.ex[{i}]', 'ví dụ tiếng Trung nên có "py"')
