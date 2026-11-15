@@ -142,10 +142,10 @@ export async function make(W, ctx, D){
     o.upd=(dt,T)=>{ put(o); pose(o,'crouch',T); if(R()<dt*.004) say(o, pick(['Thả hoa đăng cầu bình an 🌸','Ước gì release tới không có bug 🙏','Đèn sen trôi đẹp quá…']), 2.8); }; }
   for(let i=0;i<2;i++){ const o=person(i?sF(6511):sM(6512), {shirt:[0x46d39a,0x2f6fd0][i], pants:0x1b1d22, shoe:0xffffff}, '🏃 Người chạy bộ quanh hồ', '#46d39a', 'lake'); walker(o, ring(lx,lz,LK.rx+8,LK.rz+8,24,i*Math.PI).reverse(), 2.6+R()*.3); }
   // nghệ sĩ đàn Cổ tranh trong đình giữa hồ
-  { const o=person(sF(6521), {shirt:0xf3e6c8, pants:0x8a1d2a, shoe:0x1b1d21, long:true}, '🎼 Nghệ sĩ đàn Cổ tranh', '#ffcf7a', 'lake'); stand(o, lx, lz+1.2, Math.PI, 52.75+.48-o.hips);
+  { const o=person(sF(6521), {shirt:0xf3e6c8, pants:0x8a1d2a, shoe:0x1b1d21, long:true}, '🎼 Nghệ sĩ đàn Cổ tranh', '#ffcf7a', 'lake'); stand(o, lx, lz+1.2, Math.PI, 53.56-o.hips);   /* S19g rà soát: mặt bệ đình = 52,95 · đôn cao .45 → hông 53,48 (trước tính từ TÂM bệ → đùi lún vào đôn) */
     const zg=new THREE.Group(); const body=new THREE.Mesh(AK.roundedBox(1.6,.12,.36,.04,1).clone(), std(0x6b3d1f,{roughness:.45})); zg.add(body); for(let k=0;k<12;k++){ const s=new THREE.Mesh(new THREE.BoxGeometry(1.5,.005,.006), std(0xe8e0c8,{metalness:.6})); s.position.set(0,.065,-.15+k*.027); zg.add(s); }
-    const table=new THREE.Mesh(AK.roundedBox(1.8,.5,.5,.05,1).clone(), std(0x3f2614)); table.position.y=-.31; zg.add(table); zg.position.set(lx, 52.75+.62, lz+.45); zg.rotation.y=Math.PI/2; dyn(zg);
-    const stool=new THREE.Mesh(new THREE.CylinderGeometry(.22,.24,.45,12), std(0x6b3d1f)); stool.position.set(lx, 52.75+.23, lz+1.2); dyn(stool);
+    const table=new THREE.Mesh(AK.roundedBox(1.8,.5,.5,.05,1).clone(), std(0x3f2614)); table.position.y=-.31; zg.add(table); zg.position.set(lx, 53.69, lz+.25); dyn(zg);   /* đàn nằm NGANG trước mặt (trước xoay 90° → bàn đàn chạy dọc xuyên qua người ngồi) */
+    const stool=new THREE.Mesh(new THREE.CylinderGeometry(.22,.24,.45,12), std(0x6b3d1f)); stool.position.set(lx, 52.95+.225, lz+1.2); dyn(stool);
     o.upd=(dt,T)=>{ put(o,false); pose(o,'sit',T); pose(o,'pluck',T); if(R()<dt*.004) say(o, pick(['🎶 "Cao sơn lưu thuỷ" tặng hồ Thiên Cảnh','🎼 Tiếng đàn hoà tiếng nước…','🎶 Ngồi nghe một khúc rồi hẵng đi nhé']), 3); }; }
 
   /* ============================== 🛕 LINH SƠN VÂN TỰ ============================== */

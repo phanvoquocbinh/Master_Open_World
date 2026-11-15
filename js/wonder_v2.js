@@ -55,7 +55,7 @@ export function make(W, ctx){
       put(CY(.07,.09,5.6,x,y+2.8,z,8), MT.lamp); put(BX(.12,.1,1.4,(x+hx)/2,y+5.55,(z+hz)/2, Math.atan2(hx-x,hz-z)), MT.lamp); put(CY(.22,.16,.22,hx,y+5.4,hz,10), MT.bulb);
       if(W.GLOW && W.GLOW.add) W.GLOW.add(hx,y+5.2,hz,3.2,0xffe2a8,1); }
     // va chạm: mặt đứng từng đoạn (xoay theo hướng đoạn) + lan can 2 bên (đoạn chặn ~6 m, có lời nhắn)
-    for(let i=0;i<n-1;i++){ const a=S[i], b=S[i+1], L=Math.hypot(b.x-a.x,b.z-a.z); addPlat((a.x+b.x)/2, (a.z+b.z)/2, Math.atan2(b.x-a.x,b.z-a.z), h, L/2+.25, (a.y+b.y)/2); }
+    for(let i=0;i<n-1;i++){ const a=S[i], b=S[i+1], L=Math.hypot(b.x-a.x,b.z-a.z); addPlat((a.x+b.x)/2, (a.z+b.z)/2, Math.atan2(b.x-a.x,b.z-a.z), h, L/2+.25, (a.y+b.y)/2+.045); }   // +0,045: đứng đúng mặt nhựa/vỉa hè (rà soát 16/11 – trước chân lún 3–6 cm)
     const e0=o.railFrom??0, e1=LEN-(o.railTo??0);
     for(const sd of [-1,1]){ const pts=[]; for(let i=0;i<n;i++) if(acc[i]>=e0 && acc[i]<=e1) pts.push({p:[S[i].x+NV[i][0]*sd*(h-.15), S[i].z+NV[i][1]*sd*(h-.15)], s:acc[i]});
       let a=pts[0]; for(let j=1;j<pts.length;j++){ const b=pts[j]; if(b.s-a.s>=6 || j===pts.length-1){ addSeg(a.p[0],a.p[1],b.p[0],b.p[1],.2,undefined,undefined,msg); a=b; } } }
@@ -78,7 +78,7 @@ export function make(W, ctx){
 
   /* ============================== G9: đường lát z 634,5 (cục bộ) ra bờ Đông + mố cầu nối cầu Palm (x 218 → 256) ============================== */
   { const V=shiftView(W, DX, DZ), G0=2.0, YP=G0+.05, gr=GM.granite || MT.walk;   // dựng theo toạ độ cục bộ của công viên (giống lối lát 171…220 có sẵn)
-    const slab=new THREE.Mesh(planeM(341-220, 7, 220, 631).rotateX(-Math.PI/2), gr); slab.position.set((220+341)/2, YP+.012, 634.5); slab.receiveShadow=true; slab.userData.noFar=true; V.scene.add(slab);
+    const slab=new THREE.Mesh(planeM(341-220, 7, 220, 631).rotateX(-Math.PI/2), gr); slab.position.set((220+341)/2, YP+.012, 634.5); slab.receiveShadow=true; slab.userData.noFar=true; V.scene.add(slab); V.addPlat((220+341)/2, 634.5, Math.PI/2, 3.5, 60.5, YP+.012);   // mặt lối lát đi được (không lún 6 cm)
     for(const [lx,sd] of [[236,-1],[268,1],[300,-1],[330,1]]){ const z=634.5+sd*4.1, g=new THREE.Group(); g.position.set(lx,G0,z);
       const pole=new THREE.Mesh(new THREE.CylinderGeometry(.07,.09,5,8), MT.lamp); pole.position.y=2.5; g.add(pole); const bulb=new THREE.Mesh(new THREE.SphereGeometry(.24,10,8), MT.bulb); bulb.position.y=5.15; g.add(bulb);
       V.scene.add(g); if(V.GLOW && V.GLOW.add) V.GLOW.add(lx, G0+5.15, z, 3, 0xffe2a8, 1); V.circles.push({x:lx, z, r:.18}); }

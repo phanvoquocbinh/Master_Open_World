@@ -86,6 +86,21 @@ export function make(W, ctx){
         const cab=new THREE.CylinderGeometry(.05,.05,d.length(),5); cab.translate(0,d.length()/2,0); cab.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0), d.clone().normalize())); cab.translate(x,y,z); k1.add(cab, M.steel); } }
     k1.add(new THREE.BoxGeometry(ROADW+1.6,1.2,1.2), M.gold, A.x, A.h+24, A.z, 0, yaw, 0); k1.add(new THREE.BoxGeometry(ROADW+1.6,1.2,1.2), M.gold, B.x, B.h+24, B.z, 0, yaw, 0);
     makeLabel('🌉 Cầu Kính Cổng Trời', 'Cầu đáy kính dài '+L.toFixed(0)+' m bắc qua khe vực vào Đỉnh Mây', {h:.6, x:mid.x, y:mid.y+6, z:mid.z, fade:90}); }
+  /* ---- Cầu cổng G6 (16/11): Dev City Đông Nam (700, −100, +4) → nhập đường dẫn Brain ở mép Bắc. Trước đây phía Brain không có gì đón → cầu Dev City cụt giữa biển ---- */
+  const G6={}; { let J=ROAD[0], bd=1e9; for(const q of ROAD){ if(q.kind!=='approach') continue; const d=Math.hypot(q.x-628,q.z-97); if(d<bd){ bd=d; J=q; } }
+    const P0=[700,-100.5], P1=[700,-30], P2=[640,20], P3=[J.x,J.z], bz=(t,k)=>{ const u=1-t; return u*u*u*P0[k]+3*u*u*t*P1[k]+3*u*t*t*P2[k]+t*t*t*P3[k]; };
+    const raw=[]; let acc=0, px=P0[0], pz=P0[1]; for(let i=0;i<=600;i++){ const t=i/600, x=bz(t,0), z=bz(t,1); acc+=Math.hypot(x-px,z-pz); px=x; pz=z; raw.push([x,z,acc]); }
+    const L=acc, pts=[]; let ri=0; for(let d=0; d<=L; d+=1){ while(ri<raw.length-1 && raw[ri][2]<d) ri++; const t=d/L, h=lerp(4.13,J.h,ss(0,1,t))+2.2*Math.sin(Math.PI*t)*(1-ss(.85,1,t)); pts.push({x:raw[ri][0], z:raw[ri][1], h}); }
+    pts.forEach((q,i)=>{ const a=pts[Math.max(0,i-2)], b=pts[Math.min(pts.length-1,i+2)], l=Math.hypot(b.x-a.x,b.z-a.z)||1; q.ux=(b.x-a.x)/l; q.uz=(b.z-a.z)/l; });
+    const BW=9, rails=AK.glassRails(), last=pts.length-1;
+    pts.forEach((q,i)=>{ const yaw=Math.atan2(q.ux,q.uz); addPlat(q.x,q.z,yaw,BW/2+.2,.62,q.h); if(i%2) return; k1.add(new THREE.BoxGeometry(BW+.6,.6,2.06), M.concrete, q.x, q.h-.33, q.z, 0, yaw, 0);
+      if(i%16===8 && i<last-8){ const hh=q.h-.6-SEA+2; k1.add(new THREE.CylinderGeometry(.8,1,hh,14), M.concrete, q.x, q.h-.6-hh/2, q.z); circles.push({x:q.x, z:q.z, r:1, y0:-20, y1:q.h-1}); }
+      if(i<last-6 && i<pts.length-2) for(const side of [-1,1]){ const q2=pts[i+2], o=(BW/2+.15)*side, ax=q.x-q.uz*o, az=q.z+q.ux*o, bx=q2.x-q2.uz*o, bz2=q2.z+q2.ux*o; addSeg(ax,az,bx,bz2,.15,q.h-.6,q.h+1.6,'🌉 Lan can cầu G6 · Brain ↔ Dev City'); rails.add((ax+bx)/2, q.h, (az+bz2)/2, Math.atan2(bx-ax,bz2-az)+Math.PI/2); }
+      if(i%30===15){ const side=(i/30|0)%2?1:-1; lampPts.push([q.x-q.uz*(BW/2+.7)*side, q.h, q.z+q.ux*(BW/2+.7)*side]); } });
+    rails.build(grp);
+    /* mở lan can đường dẫn đúng miệng cầu */ const E=pts[last-4]; for(let i=0;i<ROAD.length-3;i+=2) for(const side of [-1,1]){ const q=ROAD[i], o=(ROADW/2+.15)*side; if(Math.hypot(q.x-q.uz*o-E.x, q.z+q.ux*o-E.z)<BW/2+3.5) railMask.delete(i+':'+side); }
+    { const m=pts[Math.round(last*.4)]; makeLabel('🌉 Cầu G6 · Brain ↔ Dev City', 'Đi bộ / lái xe sang Dev City Trùng Khánh', {h:.5, x:m.x, y:m.h+5, z:m.z, fade:110}); }
+    Object.assign(G6,{pts,L,J}); }
   { const rails=AK.glassRails(); for(let i=0;i<ROAD.length-3;i+=2) for(const side of [-1,1]){ if(!railMask.has(i+':'+side)) continue; const q=ROAD[i], q2=ROAD[i+2], nx=-q.uz, nz=q.ux, o=(ROADW/2+.15)*side;
       const ax=q.x+nx*o, az=q.z+nz*o, bx=q2.x+(-q2.uz)*o, bz=q2.z+q2.ux*o; addSeg(ax,az,bx,bz,.15, q.h-.6, q.h+1.6); rails.add((ax+bx)/2, q.h, (az+bz)/2, Math.atan2(bx-ax,bz-az)+Math.PI/2); }
     rails.build(grp); }
@@ -276,7 +291,14 @@ export function make(W, ctx){
   PLACES.push({icon:'🛩️', name:'Sân bay Đỉnh Mây', sub:'Đường băng STOL · trực thăng', go:()=>teleport(860, 110, 900, 60)});
   PLACES.push({icon:'🎈', name:'Xích đu vực & Khinh khí cầu', sub:'Cảm giác mạnh trên đỉnh vực biển', go:()=>teleport(880, 250, 880, 290)});
   console.info(`[QC World V2] Brain Citadel: đường đèo ${ROAD.length} m · ${cafes.length} quán · tháp 6 tầng`);
-  const API={C, FY, ROAD, cafes, GB, hAt, ride};
+  /* ---- Rà soát 16/11: mép sàn cao hơn đất bên cạnh 0,45–2,6 m (không leo lên được, không chui dưới được) → vách chặn chỉ có tác dụng với người đứng DƯỚI (y1 thấp hơn mặt sàn), để khỏi đi lọt vào khối nền đường / sàn sân bay ---- */
+  { let nEdge=0; const MSG='⛰️ Mép nền cao – đi theo lối lên';
+    const edgeRun=(list)=>{ let run=null; const flush=()=>{ if(run && run.n){ const [a,b]=run.n===1?[[run.x0-run.ux,run.z0-run.uz],[run.x0+run.ux,run.z0+run.uz]]:[[run.x0,run.z0],[run.x1,run.z1]]; addSeg(a[0],a[1],b[0],b[1],.2,run.lo-.5,run.hmin-.35,MSG); nEdge++; } run=null; };
+      for(const e of list){ if(!e){ flush(); continue; } const g=W.groundAtY(e.gx,e.gz,e.h-.3), d=e.h-g; if(g>-50 && d>.45 && d<2.6){ if(!run) run={n:0,x0:e.x,z0:e.z,ux:e.ux,uz:e.uz,lo:g,hmin:e.h}; run.n++; run.x1=e.x; run.z1=e.z; run.lo=Math.min(run.lo,g); run.hmin=Math.min(run.hmin,e.h); if(run.n>=5){ const k={...e}; flush(); run={n:1,x0:k.x,z0:k.z,ux:k.ux,uz:k.uz,lo:g,hmin:e.h,x1:k.x,z1:k.z}; } } else flush(); } flush(); };
+    for(const side of [-1,1]){ const L=[]; for(let i=0;i<ROAD.length-2;i+=2){ const q=ROAD[i]; if(q.kind==='glass'){ L.push(null); continue; } const o=ROADW/2+.2; L.push({x:q.x-q.uz*o*side, z:q.z+q.ux*o*side, gx:q.x-q.uz*(o+.8)*side, gz:q.z+q.ux*(o+.8)*side, h:q.h, ux:q.ux, uz:q.uz}); } edgeRun(L); }
+    { const x0=820, x1=980, z0=50, z1=125, y=YT, L1=[], L2=[]; for(let x=x0;x<=x1;x+=2) L1.push({x, z:z1, gx:x, gz:z1+.8, h:y, ux:1, uz:0}); for(let z=z1-30;z<=z1;z+=2) L2.push({x:x1, z, gx:x1+.8, gz:z, h:y, ux:0, uz:1}); edgeRun(L1); edgeRun(L2); }
+    if(nEdge) console.info('[Brain] vách chặn mép nền:', nEdge); }
+  const API={C, FY, ROAD, cafes, GB, hAt, ride, G6};
   import('./bots_brain.js').then(m=>{ if(m && m.make) m.make(W, API); }).catch(()=>{});   /* Pha 9: bot sống động của vùng (file do phiên khác làm; chưa có thì bỏ qua) */
   return API;
 }

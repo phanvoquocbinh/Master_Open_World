@@ -165,7 +165,8 @@ export async function make(W, ctx){
     if(d<sd-.5) return lerp(-1.4,-6,clamp((sd-.5-d)/16,0,1));         // lòng sông
     let h=baseH(x,d);
     for(const p of PADS){ const k=Math.min(x-p.x0, p.x1-x, z-p.z0, p.z1-z); if(k>-p.b) h=lerp(h, p.y, ss(-p.b, 0, k)); }
-    const [rv, rp]=nearRoad2(x,z); h=carve(h, phys ? rp : rv);
+    const [rv, rp]=nearRoad2(x,z); h=carve(h, phys ? (rp && rp.q.tun && Math.abs(x-(TUN.x0+TUN.x1)/2)>9.8 ? rv : rp) : rv);   // S19g rà soát: chỉ khoét mặt vật lý theo sàn hầm TRONG lòng hầm (trước khoét cả dải 2 bên → người trên cao nguyên tụt sâu 3–10 m)
+    if(phys && rp && rp.d<rp.q.w/2-.15) h+=.055;   // S19g rà soát 16/11: mặt nhựa vẽ cao +6 cm → nâng mặt đi/xe lên đúng mặt đường (trước chân lún 6 cm)
     if(!phys && rp && rp.q.tun && rp.d<rp.q.w/2+.8){ /* trên nóc hầm: giữ hình mặt núi */ }
     const s=stairAt(x,z); if(s){ const half=STAIR.w/2+.6; if(s.d<half) h=s.y; else if(s.d<half+5) h=lerp(s.y, h, ss(half, half+5, s.d)); }
     if(d<sd+.6) h=Math.min(h, lerp(-1.4, Y1, ss(sd-.5, sd+.5, d)));    // kè bờ sông thẳng đứng
@@ -231,14 +232,22 @@ export async function make(W, ctx){
   lampPole.build(); const lampIM=lampHead.build(); if(lampIM){ lampIM.material.userData.night=1; NIGHTL.push(lampIM.material); }
 
   /* ============================== KÈ BỜ SÔNG (đá xếp) + lan can ============================== */
-  const QGAP=[[210,230],[376,392],[692,708]], inGap=(a,b)=>QGAP.some(([g0,g1])=>b>g0 && a<g1);
+  const QGAP=[[212.4,227.6],[377.9,390.1],[693.9,706.1]],   /* S19g rà soát: khe lan can kè = đúng bề rộng cầu (trước rộng hơn 2,5 m mỗi bên → bước hụt xuống mái kè, lún vào tường kè) */ inGap=(a,b)=>QGAP.some(([g0,g1])=>b>g0 && a<g1) || DOCKX.some(x=>b>x-1.6 && a<x+1.6);
+  const DOCKX=[652,742,778], railPieces=(a,b)=>{ let L=[[a,b]]; for(const [g0,g1] of [...QGAP, ...DOCKX.map(x=>[x-1.6,x+1.6])]) L=L.flatMap(([p,q])=> q<=g0 || p>=g1 ? [[p,q]] : [p<g0?[p,g0]:null, q>g1?[g1,q]:null].filter(Boolean)); return L; };   // đoạn lan can còn lại sau khi trừ khe cầu / bến
   { const pts=[]; for(let x=206;x<=848;x+=4) pts.push([x, -shoreD(x)]); for(let k=1;k<pts.length;k++){ const [ax,az]=pts[k-1], [bx,bz]=pts[k];
       const L=Math.hypot(bx-ax,bz-az), g=rb(L+.1, 3.6, 1.2, .1, 1); xf(g, (ax+bx)/2, Y1-1.8+.02, (az+bz)/2-.25, -Math.atan2(bz-az,bx-ax)); put(MAT.stone, g, 'river');
-      if(!inGap(ax,bx)) addSeg(ax,az+.4,bx,bz+.4,.25, Y1-1, Y1+2, 'Kè bờ sông – lan can'); }
+      for(const [p,q] of railPieces(ax,bx)) if(q-p>.05) addSeg(p,-shoreD(p)+.4,q,-shoreD(q)+.4,.25, Y1-1, Y1+2, 'Kè bờ sông – lan can');
+      for(const [p,q] of [[ax,bx]].flatMap(([p,q])=>{ let L2=[[p,q]]; for(const x of DOCKX) L2=L2.flatMap(([u,v])=> v<=x-1.7 || u>=x+1.7 ? [[u,v]] : [u<x-1.7?[u,x-1.7]:null, v>x+1.7?[x+1.7,v]:null].filter(Boolean)); return L2; })) if(q-p>.2){ const za=-shoreD(p), zb=-shoreD(q); addPlat((p+q)/2, (za+zb)/2-1.18, Math.atan2(q-p,zb-za), 1.48, Math.hypot(q-p,zb-za)/2+.05, Y1); } }   // S19g rà soát: mặt kè phẳng +2 tới sát lan can (lưới vật lý 2,5 m làm tường kè thành dốc → đi sát lan can bị tụt 0,6–0,75 m)
+    for(const x of [206, 848]){ const zq=-shoreD(x); addSeg(x, zq+.4, x, zq-3.2, .25, Y1-1, Y1+2, 'Kè bờ sông – lan can'); }
+    for(let x=148; x<206; x+=4){ const x2=Math.min(206,x+4); addSeg(x, -shoreD(x)+.4, x2, -shoreD(x2)+.4, .25, -3, Y1+2, 'Bờ sông dốc đứng – không xuống được'); }   // S19g rà soát: bờ sông dưới Hồng Nhai Động   // chặn 2 đầu kè (trước đi vòng đầu lan can xuống mái kè)
     const posts=inst(cyl(.06,.06,1.05,8), MAT.steel); for(let x=208;x<=846;x+=2) if(!inGap(x-.5,x+.5)) posts.add(x, Y1+.52, -shoreD(x)-.6);
-    posts.build(); for(let k=1;k<pts.length;k++){ const [ax,az]=pts[k-1], [bx,bz]=pts[k]; if(inGap(ax,bx)) continue; put(MAT.steel, beam(cyl(.05,.05,1,6), new V3(ax,Y1+1.05,az-.6), new V3(bx,Y1+1.05,bz-.6)), 'river'); } }
+    posts.build(); for(let k=1;k<pts.length;k++){ const [ax]=pts[k-1], [bx]=pts[k]; for(const [p,q] of railPieces(ax,bx)) if(q-p>.3) put(MAT.steel, beam(cyl(.05,.05,1,6), new V3(p,Y1+1.05,-shoreD(p)-.6), new V3(q,Y1+1.05,-shoreD(q)-.6)), 'river'); } }
 
   /* ============================== HỒ THIÊN CẢNH (mặt nước +51,6) ============================== */
+  // S19g rà soát: bờ hồ Thiên Cảnh + bờ đảo có tường chắn vô hình (trước đi bộ xuống đáy hồ, đi dưới gầm cầu) – chừa khe 2 đầu cầu (x = 560)
+  { const ring=(rx,rz,n,msg)=>{ for(let i=0;i<n;i++){ const a0=i/n*Math.PI*2, a1=(i+1)/n*Math.PI*2, x0=LAKE.x+Math.cos(a0)*rx, z0=-LAKE.d+Math.sin(a0)*rz, x1=LAKE.x+Math.cos(a1)*rx, z1=-LAKE.d+Math.sin(a1)*rz;
+        if(Math.abs((x0+x1)/2-LAKE.x)<1.55) continue; addSeg(x0,z0,x1,z1,.2, LAKE.y-4, LAKE.y+2.5, msg); } };
+    ring(LAKE.rx*1.025, LAKE.rz*1.025, 240, '🏞️ Mép hồ Thiên Cảnh – không lội xuống hồ được'); ring(13.9, 13.9, 60, '🏝️ Bờ đảo – không lội xuống hồ được'); }
   { const g=new THREE.CircleGeometry(1, 64); g.rotateX(-Math.PI/2); g.scale(LAKE.rx*1.02, 1, LAKE.rz*1.02); g.translate(LAKE.x, LAKE.y, -LAKE.d); const m=new THREE.Mesh(g, MAT.water); m.receiveShadow=true; m.userData.dynamic=true; root.add(m); }
 
   const kit={W, ctx, root, MAT, FAC, put, flush, xf, rb, cyl, beam, inst, canvas, std, ss, fbm, hash, R, hAt, hVis, ROADS, RS, TUN, tunY, VAL, LAKE, PA, PB, abu, STAIR, PADS, shoreD, c12, c23, c34, Y1, Y2, Y3, Y4, YW, NIGHTL};
@@ -258,9 +267,9 @@ export async function make(W, ctx){
     const g=new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos,3)); g.setAttribute('uv', new THREE.Float32BufferAttribute(uv,2)); g.setIndex(idx); g.computeVertexNormals(); put(o.mat || (w>11 ? MAT.road4 : MAT.road2), g, dist);
     const sg=new THREE.BufferGeometry(); sg.setAttribute('position', new THREE.Float32BufferAttribute(slabP,3)); sg.setIndex(slabI); put(MAT.concrete, sg, dist);   // pháp tuyến phẳng tính sau khi tách đỉnh
     // va chạm: sàn mỗi ~3 m (bậc ≤ 0,3 m) + tường 2 bên   (addPlat: rot = hướng đoạn → nửa dài hd nằm dọc tuyến)
-    if(o.collide!==false){ for(let i=0;i<N-1;i+=3){ const a=path[i], b=path[Math.min(N-1,i+3)], mx=(a.x+b.x)/2, mz=(a.z+b.z)/2, L=Math.hypot(b.x-a.x,b.z-a.z)+.4, ang=Math.atan2(b.x-a.x,b.z-a.z);
-        addPlat(mx, mz, ang, w/2+.1, L/2, Math.max(a.y,b.y)); }
-      for(let i=0;i<N-1;i+=2){ const a=path[i], b=path[Math.min(N-1,i+2)], [nx,nz]=nrm(i), [mx2,mz2]=nrm(Math.min(N-1,i+2)); for(const s of [1,-1]){ if(gapAt(i,s) || gapAt(i+2,s)) continue; addSeg(a.x+nx*s*(w/2+.2), a.z+nz*s*(w/2+.2), b.x+mx2*s*(w/2+.2), b.z+mz2*s*(w/2+.2), .25, Math.min(a.y,b.y)-.3, Math.max(a.y,b.y)+1.6, o.msg||'Tường chắn cầu cạn'); } } }
+    if(o.collide!==false){ for(let i=0;i<N-1;i+=2){ const a=path[i], b=path[Math.min(N-1,i+2)], mx=(a.x+b.x)/2, mz=(a.z+b.z)/2, L=Math.hypot(b.x-a.x,b.z-a.z)+.6, ang=Math.atan2(b.x-a.x,b.z-a.z);   /* S19g rà soát: ô sàn dày hơn (2 mẫu) + rộng hơn → không hở ở đoạn cong */
+        addPlat(mx, mz, ang, w/2+.3, L/2, Math.max(a.y,b.y)+.085); }   // +0,085: đúng mặt nhựa cầu (vẽ ở +0,09) – trước chân lún 9 cm
+      for(let i=0;i<N-1;i+=2){ const a=path[i], b=path[Math.min(N-1,i+2)], [nx,nz]=nrm(i), [mx2,mz2]=nrm(Math.min(N-1,i+2)); for(const s of [1,-1]){ if(gapAt(i,s) || gapAt(i+2,s)) continue; const sx0=a.x+nx*s*(w/2+.2), sz0=a.z+nz*s*(w/2+.2), sx1=b.x+mx2*s*(w/2+.2), sz1=b.z+mz2*s*(w/2+.2), gy=hf((sx0+sx1)/2,(sz0+sz1)/2,true), lowY=Math.min(a.y,b.y); addSeg(sx0, sz0, sx1, sz1, .25, (gy!==null && lowY-th-gy<2.3) ? gy-.5 : lowY-.3, Math.max(a.y,b.y)+1.6, o.msg||'Tường chắn cầu cạn'); }   /* S19g rà soát: gầm thấp → chắn từ mặt đất */ } }
     // trụ đỡ
     if(o.piers!==false){ const every=o.every||14; let last=-1e9, s=0; for(let i=0;i<N;i++){ if(i) s+=Math.hypot(path[i].x-path[i-1].x, path[i].z-path[i-1].z); if(s-last<every) continue; last=s;
         const p=path[i], gy=hAt(p.x,p.z); if(gy===null || p.y-th-gy<1.2) continue; const H=p.y-th-gy, [nx,nz]=nrm(i);
@@ -375,7 +384,8 @@ export async function make(W, ctx){
     for(const x of [439.2,460.8]){ for(let d=TUN.dOpen; d<TUN.d1; d+=4){ const y=tunY(d), top=Y3+1; if(top-y<.6) continue; put(MAT.concrete, xf(rb(.8,top-y+.4,4.1,.1,1), x, (top+y)/2-.2, -(d+2)), 'tunnel'); }
       for(let d=TUN.dOpen; d<TUN.d1-3; d+=4) addSeg(x+(x<450?-1:1)*.6,-d,x+(x<450?-1:1)*.6,-(d+4),.25, Y3-1, Y3+2, 'Lan can hào đường hầm – vực sâu'); }
     // mặt cao nguyên phía trên hầm vẫn đi bộ được (sàn +52; người trong hầm thấp hơn nên không bị nhấc lên)
-    addPlat(450, -(447+TUN.dOpen)/2, 0, 12, (TUN.dOpen-447)/2, Y3);
+    // S19g rà soát: lát sàn theo đúng mặt núi nhìn thấy (ô 5 × 4 m) thay 1 sàn phẳng +52 (trước lơ lửng ~2 m gần cửa hầm Bắc, hở 2 mép)
+    for(let d=457; d<TUN.dOpen-6; d+=4) for(let x=440; x<460; x+=5){ let hm=-1e9; for(const [ax,ad] of [[0,0],[5,0],[0,4],[5,4],[2.5,2]]){ const hv=hf(x+ax, -(d+ad), false); if(hv!==null) hm=Math.max(hm, hv); } if(hm>tunY(d+4)+6) addPlat(x+2.5, -(d+2), 0, 2.55, 2.05, hm); }
     for(const x of [438.6,461.4]) addSeg(x,-436,x,-470,.3, 30, 60, 'Vách núi phía trên cửa hầm – không đi được'); }
   // camera trong hầm: giới hạn trong lòng hầm, không xuyên lên mặt núi
   let camMine=false;

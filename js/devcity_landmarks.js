@@ -8,7 +8,7 @@
 import * as AK from './archKit.js';
 
 export async function build(K){
-  const {W, ctx, root, MAT, FAC, put, xf, rb, cyl, beam, inst, canvas, std, ss, R, hAt, Y1, Y2, Y3, Y4, YW, LAKE, PA, PB, abu, STAIR, ST, NIGHTL, deck} = K;
+  const {W, ctx, root, MAT, FAC, put, xf, rb, cyl, beam, inst, canvas, std, ss, R, hAt, Y1, Y2, Y3, Y4, YW, LAKE, PA, PB, abu, STAIR, ST, NIGHTL, deck, shoreD} = K;
   const {THREE, INTER, PLACES, addPlat, addSeg, makeLabel, toast, teleport, boxes, circles, P, HOOK, clamp, lerp} = W;
   const V3=THREE.Vector3, TAU=Math.PI*2;
   const out={};
@@ -70,8 +70,7 @@ export async function build(K){
     put(MAT.pool, xf(rb(28, .5, 13, .1, 1), 541, FY+.15, Z+2), dist); put(MAT.glass, xf(rb(28, 1, .12, .03, 1), 541, FY+.5, Z+8.6), dist);
     // vườn nhiệt đới + 5 lớp học kính
     const palmT=inst(cyl(.18,.28,5,7), MAT.bark), palmL=inst(new THREE.IcosahedronGeometry(1.6,1), MAT.leaf);
-    for(let x=452; x<=520; x+=6) for(const s of [-1,1]){ if(s<0 && x<518) continue; palmT.add(x, FY+2.5, Z+s*7.5); palmL.add(x, FY+5.4, Z+s*7.5, R()*3, 1, .75); put(MAT.paving, xf(rb(2.6,.6,2.6,.15,1), x, FY+.3, Z+s*7.5), dist); }
-    for(let x=452; x<=520; x+=6){ palmT.add(x, FY+2.5, Z+7.5); palmL.add(x, FY+5.4, Z+7.5, R()*3, 1, .75); }
+    for(let x=452; x<=520; x+=6) for(const s of [-1,1]){ if(s<0 && x<518) continue; palmT.add(x, FY+2.5, Z+s*7.5); palmL.add(x, FY+5.4, Z+s*7.5, R()*3, 1, .75); put(MAT.paving, xf(rb(2.6,.6,2.6,.15,1), x, FY+.3, Z+s*7.5), dist); boxes.push({x0:x-1.35, x1:x+1.35, z0:Z+s*7.5-1.35, z1:Z+s*7.5+1.35, y0:FY-.5, y1:FY+3, msg:'🌴 Bồn cây'}); }   /* S19g rà soát: bồn cây có va chạm (trước đi xuyên); bỏ hàng cọ trùng lặp ở Z+7,5 */
     palmT.build(); palmL.build();
     ['Backend','Frontend','System Design','DevOps','AI'].forEach((nm,i)=>{ const x=448+i*15, z=Z-6.5; put(MAT.glass, xf(rb(11, 3.4, 7, .3, 2), x, FY+1.7, z), dist); put(MAT.white, xf(rb(11.2, .25, 7.2, .1, 1), x, FY+3.45, z), dist);
       sign('LỚP '+nm.toUpperCase(), 7, .9, x, FY+2.9, z+3.55, 0, {bg:'#0e3b5c', fg:'#d8f1ff', edge:'#7fd3ff'});
@@ -165,7 +164,7 @@ export async function build(K){
     for(const [x,c] of [[505,0xe94f37],[519,0xf6c343],[533,0x3fa7d6]]) put(std({color:c, roughness:.5}), xf(rb(12,1.2,.4,.2,1), x, Y2+12, -275.6), dist);
     sign('TRƯỜNG LIÊN CẤP DEV SƠN THÀNH', 26, 2.2, 519, Y2+14.4, -275.7, 0, {bg:'#1b4f8a', fg:'#fff', edge:'#f6c343'});
     const field=canvas(512,512,(g,w,h)=>{ g.fillStyle='#b8452e'; g.fillRect(0,0,w,h); g.fillStyle='#3f8f3a'; g.beginPath(); g.ellipse(w/2,h/2,w*.36,h*.4,0,0,TAU); g.fill(); g.strokeStyle='#fff'; g.lineWidth=3; for(const k of [.4,.44,.48]){ g.beginPath(); g.ellipse(w/2,h/2,w*k*.9,h*k,0,0,TAU); g.stroke(); } g.strokeRect(w*.22,h*.18,w*.56,h*.64); g.beginPath(); g.moveTo(w*.22,h/2); g.lineTo(w*.78,h/2); g.stroke(); g.beginPath(); g.arc(w/2,h/2,w*.08,0,TAU); g.stroke(); });
-    const fg=new THREE.PlaneGeometry(40,34); fg.rotateX(-Math.PI/2); fg.translate(578, Y2+.05, -266); const fm=std({map:field, roughness:.9}); fm.userData.LU=1; put(fm, fg, dist);
+    const fg=new THREE.PlaneGeometry(40,34); fg.rotateX(-Math.PI/2); fg.translate(578, Y2+.012, -266); const fm=std({map:field, roughness:.9, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-3}); fm.userData.LU=1; put(fm, fg, dist);
     // 🏨 khách sạn 5 sao: bệ + thân cong + vương miện vàng
     prism(rrect(721,-263,58,36,3), Y2, Y2+8, FAC.office, dist, {roof:MAT.paving}); prism(lens(721,-266,42,17), Y2+8, Y2+62, FAC.warm, dist); prism(lens(721,-266,36,14), Y2+62, Y2+67, FAC.glass, dist);
     put(MAT.gold, xf(new THREE.TorusGeometry(10,.35,8,40), 721, Y2+67.6, -266, 0, Math.PI/2, 0, 1.75, 1, .72), dist);
@@ -209,8 +208,8 @@ export async function build(K){
     // đường dạo quanh hồ
     const pts=[]; for(let i=0;i<=128;i++){ const a=i/128*TAU; pts.push([cx+Math.cos(a)*(LAKE.rx+8), cz+Math.sin(a)*(LAKE.rz+8)]); }
     { const pos=[], uv=[], idx=[]; let acc=0; pts.forEach(([x,z],i)=>{ const a=i/128*TAU, nx=Math.cos(a)*LAKE.rz, nz=Math.sin(a)*LAKE.rx, nl=Math.hypot(nx,nz), ox=nx/nl*2.2, oz=nz/nl*2.2; if(i) acc+=Math.hypot(x-pts[i-1][0], z-pts[i-1][1]);
-        const y=(hAt(x,z)??Y3)+.06; pos.push(x-ox,y,z-oz, x+ox,y,z+oz); uv.push(0,acc/4.4, 1,acc/4.4); if(i<128){ const q=i*2; idx.push(q,q+1,q+2, q+1,q+3,q+2); } });
-      const g=new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos,3)); g.setAttribute('uv', new THREE.Float32BufferAttribute(uv,2)); g.setIndex(idx); put(MAT.paving, g, dist); }
+        const y=(hAt(x,z)??Y3)+.02; pos.push(x-ox,y,z-oz, x+ox,y,z+oz);   /* S19g rà soát: +0,06 → +0,02 (chân không lún vào lối dạo); lệch sâu bằng polygonOffset */ uv.push(0,acc/4.4, 1,acc/4.4); if(i<128){ const q=i*2; idx.push(q,q+1,q+2, q+1,q+3,q+2); } });
+      const g=new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos,3)); g.setAttribute('uv', new THREE.Float32BufferAttribute(uv,2)); g.setIndex(idx); MAT.paving.polygonOffset=true; MAT.paving.polygonOffsetFactor=-3; MAT.paving.polygonOffsetUnits=-3; put(MAT.paving, g, dist); }
     // cầu chữ chi (Nam) + cầu vòm (Bắc) ra đảo
     const zig=[]; { const P0=[[cx,cz+LAKE.rz+3],[cx-6,cz+33],[cx+6,cz+26],[cx-6,cz+19],[cx,cz+13]]; for(let i=0;i<P0.length-1;i++){ const [x0,z0]=P0[i], [x1,z1]=P0[i+1], L=Math.hypot(x1-x0,z1-z0); for(let t=0;t<L;t+=1.5) zig.push({x:x0+(x1-x0)*t/L, z:z0+(z1-z0)*t/L, y:52.4}); } zig.push({x:cx, z:cz+13, y:52.7}); }
     deck(zig, 2.8, dist, {mat:MAT.wood, th:.35, parapet:.95, piers:false, msg:'Lan can cầu chữ chi', name:'foot: cầu chữ chi'});
@@ -218,7 +217,7 @@ export async function build(K){
     // đình giữa đảo
     const rf=AK.buildAsianCurvedRoof(8, 8, 2.4, 1.4, 0x2f3238, 2); rf.position.set(cx, 52.7+3.6, cz); root.add(rf);
     for(const [ox,oz] of [[-3,-3],[3,-3],[-3,3],[3,3]]){ put(MAT.red, xf(cyl(.24,.26,3.6,10), cx+ox, 52.7+1.8, cz+oz), dist); circles.push({x:cx+ox, z:cz+oz, r:.35}); }
-    put(MAT.stone, xf(rb(8.4,.4,8.4,.1,1), cx, 52.75, cz), dist);
+    put(MAT.stone, xf(rb(8.4,.4,8.4,.1,1), cx, 52.75, cz), dist); addPlat(cx, cz, 0, 4.15, 4.15, 52.95);   // S19g rà soát: sàn đình đi được (trước chân lún 25 cm vào bệ đá)
     // ghế đá + đèn công viên
     const bench=(x,z,rot)=>{ put(MAT.stone, xf(rb(1.7,.12,.5,.04,1), x, yP+.45, z, rot), dist); for(const s of [-.65,.65]) put(MAT.stone, xf(rb(.16,.42,.4,.04,1), x+Math.cos(rot)*s, yP+.21, z-Math.sin(rot)*s, rot), dist);
       W.addBench && W.addBench({x, z, rot, len:1.6, y:yP+.5, floor:yP, label:'🪑 Ngồi ghế ven hồ (E · C)'}); };
@@ -235,10 +234,10 @@ export async function build(K){
     const ts=new THREE.Shape(); ts.moveTo(0,0); ts.lineTo(5.6,0); ts.lineTo(7.6,7.2); ts.lineTo(5.4,7.2); ts.closePath(); const tg=new THREE.ExtrudeGeometry(ts,{depth:.3, bevelEnabled:false}); tg.rotateY(-Math.PI/2); const fin=new THREE.Mesh(tg, tail); fin.position.set(.15,1.4,-11); g.add(fin);
     for(const s of [-1,1]){ const hs=new THREE.Shape(); hs.moveTo(0,0); hs.lineTo(6,-2.4); hs.lineTo(6,-3.6); hs.lineTo(0,-3); hs.closePath(); const hg=new THREE.ExtrudeGeometry(hs,{depth:.25, bevelEnabled:false}); hg.rotateX(Math.PI/2); if(s<0) hg.scale(-1,1,1); const h=new THREE.Mesh(hg, white); h.position.set(s*.8,.7,-12.4); g.add(h); }
     g.traverse(m=>{ if(m.isMesh){ m.castShadow=true; m.receiveShadow=true; } }); return g; };
-  { const dist='air', y=Y4+.05;
+  { const dist='air', y=Y4+.012;   /* S19g rà soát: +0,05 → +0,012 (chân/bánh xe không lún vào đường băng) */
     const rwT=canvas(256,1024,(g,w,h)=>{ g.fillStyle='#3a3c40'; g.fillRect(0,0,w,h); for(let i=0;i<8000;i++){ const v=40+R()*40|0; g.fillStyle=`rgba(${v},${v},${v},.5)`; g.fillRect(R()*w,R()*h,2,2); }
       g.fillStyle='#f2f2ee'; g.fillRect(6,0,6,h); g.fillRect(w-12,0,6,h); for(let yy=20;yy<h;yy+=60) g.fillRect(w/2-3,yy,6,34); for(let k=0;k<8;k++){ g.fillRect(22+k*28,4,14,60); g.fillRect(22+k*28,h-64,14,60); } });
-    const rwM=std({map:rwT, roughness:.85}); rwM.userData.LU=1;
+    const rwM=std({map:rwT, roughness:.85, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-3}); rwM.userData.LU=1;
     const rw=new THREE.PlaneGeometry(40, 470); rw.rotateX(-Math.PI/2); rw.rotateY(Math.PI/2); rw.translate(375, y, -885); put(rwM, rw, dist);
     const tw=new THREE.PlaneGeometry(14, 440); tw.rotateX(-Math.PI/2); tw.rotateY(Math.PI/2); tw.translate(380, y-.01, -840); put(MAT.road2, tw, dist);
     put(MAT.concrete, xf(rb(190, .12, 32, .05, 1), 375, y-.04, -818), dist);
@@ -351,6 +350,9 @@ export async function build(K){
   /* ============================== ⛵ BẾN DU THUYỀN (T1, x 640–770) ============================== */
   { const dist='river', yD=.75;
     for(const x of [652, 742, 778]){ put(MAT.wood, xf(rb(3.2, .35, 26, .06, 1), x, yD, -146), dist); addPlat(x, -146, 0, 1.6, 13, yD+.18);
+      { const zq=-shoreD(x), z0=zq-2.6, z1=-158.6, n=6; for(let k=0;k<n;k++){ const t=(k+.5)/n, z=z0+(z1-z0)*t, y=Y1+(yD+.18-Y1)*t; addPlat(x, z, 0, 1.6, Math.abs(z1-z0)/n/2+.05, y); }   // S19g rà soát: dốc xuống bến (trước không có lối xuống – bước hụt xuống mái kè)
+        const L0=Math.hypot(z1-z0, Y1-(yD+.18)), rg=rb(3.2,.25,L0,.05,1); xf(rg, x, (Y1+yD+.18)/2-.12, (z0+z1)/2, 0, Math.atan2(Y1-(yD+.18), z1-z0)); put(MAT.wood, rg, dist);
+        for(const s of [-1,1]) addSeg(x+s*1.7, z0, x+s*1.7, -133, .15, -2, Y1+2, '⛵ Lan can cầu tàu'); addSeg(x-1.7, -133, x+1.7, -133, .15, -2, Y1+2, '⛵ Cuối cầu tàu'); }
       for(let z=-158; z<=-134; z+=4) for(const s of [-1,1]) put(MAT.woodDark, xf(cyl(.16,.16,3,8), x+s*1.5, yD-1, z), dist);
       for(const s of [-1,1]){ const yacht=new THREE.Group(); const hull=new THREE.Mesh(rb(3.4,1.6,12,.7,3), std({color:0xf7f7f5, roughness:.3})); hull.position.y=.3; yacht.add(hull);
         const cab=new THREE.Mesh(rb(2.6,1.4,5.5,.5,2), std({color:0x1d2b38, roughness:.15, metalness:.3})); cab.position.set(0,1.6,-.8); yacht.add(cab); yacht.position.set(x+s*4.6, -.2, -144); yacht.rotation.y=(s>0?.06:-.05); yacht.userData.dynamic=true; yacht.userData.bob=R()*6; root.add(yacht); (out.yachts=out.yachts||[]).push(yacht); } }
