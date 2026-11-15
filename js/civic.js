@@ -93,8 +93,8 @@ export async function make(W, ctx, opt={}){
     const hp=new THREE.Mesh(new THREE.CircleGeometry(6,40), new THREE.MeshStandardMaterial({map:hT, roughness:.8})); hp.rotation.x=-Math.PI/2; hp.position.set(cx-6,h+.52,cz); root.add(hp);
     for(let i=0;i<8;i++){ const a=i/8*TAU; glow(cx-6+Math.cos(a)*6.3,h+.6,cz+Math.sin(a)*6.3,.8,0x6fd3ff,.7); }
     // sân trước: làn đón bệnh nhân + bồn cây
-    K.add(B(w,.06,7.2), M.conc, cx,.03,z0-3.7);
-    for(const x of [x0+3,x1-3]){ K.add(B(3.2,.5,1.2), M.conc, x,.25,z0-6.2); tree('shade', x, z0-6.2, .9); }
+    K.add(B(w,.015,7.2), M.conc, cx,.008,z0-3.7);   /* sát mặt đi: không lún chân */
+    for(const x of [x0+3,x1-3]){ K.add(B(3.2,.5,1.2), M.conc, x,.25,z0-6.2); tree('shade', x, z0-6.2, .9); bpush({x0:x-1.6, x1:x+1.6, z0:z0-6.8, z1:z0-5.6}); }   /* bồn cây có va chạm */
     wallRect(x0,z0,x1,z1,'🏥 Tường bệnh viện – vào sảnh chính (cửa giữa phía Bắc) hoặc lối Cấp cứu phía Tây nhé!');
     K.build();
     label('🏥 Bệnh viện Đa khoa QC City', 'Khám bệnh · cấp cứu 24/7 · bãi đáp trực thăng', {x:cx, y:h+4.6, z:z0, fade:140, h:.7});

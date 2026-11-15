@@ -101,7 +101,7 @@ export async function make(W, ctx){
       const seg=(u0,u1,v0,v1,arr)=>r.ew?quad(arr,u0,r.c+v0,u1,r.c+v1):quad(arr,r.c+v0,u0,r.c+v1,u1);
       const L0=r.a+1, L1=r.b-1; seg(L0,L1,-.27,-.11,YE); seg(L0,L1,.11,.27,YE); seg(L0,L1,-hw+.25,-hw+.42,WH); seg(L0,L1,hw-.42,hw-.25,WH);
       for(const sd of [-1,1]){ seg(L0,L1,sd*CM-.08,sd*CM+.08,WH); for(let u=L0;u<L1-3;u+=4.5) seg(u,u+2.4,sd*(lanes[0]+1.65)-.07,sd*(lanes[0]+1.65)+.07,WH); }
-      for(const sd of [-1,1]){ const v=sd*(hw+.12); r.ew ? KL.add(B(r.b-r.a,.15,.24), M.curb, (r.a+r.b)/2,Y+.075,r.c+v) : KL.add(B(.24,.15,r.b-r.a), M.curb, r.c+v,Y+.075,(r.a+r.b)/2); } }
+      for(const sd of [-1,1]){ const v=sd*(hw+.12); r.ew ? KL.add(B(r.b-r.a,.03,.24), M.curb, (r.a+r.b)/2,Y+.015,r.c+v) : KL.add(B(.24,.03,r.b-r.a), M.curb, r.c+v,Y+.015,(r.a+r.b)/2);   /* bó vỉa sát mặt: chân không lún khi bước qua */ } }
     // vạch qua đường ở mỗi giao lộ (4 nhánh)
     for(const a of ROADS.filter(r=>r.ew)) for(const b of ROADS.filter(r=>!r.ew)){ const x=b.c, z=a.c;
       for(const sd of [-1,1]){ const zz=z+sd*(a.w/2+2.4); if(onRoad(x,zz)) for(let k=-b.w/2+.6;k<b.w/2-.4;k+=1.1) quad(WH, x+k, zz-1.4, x+k+.55, zz+1.4); const xx=x+sd*(b.w/2+2.4); if(onRoad(xx,z)) for(let k=-a.w/2+.6;k<a.w/2-.4;k+=1.1) quad(WH, xx-1.4, z+k, xx+1.4, z+k+.55); } }   /* chỉ sơn vạch ở nhánh có đường */
@@ -136,7 +136,7 @@ export async function make(W, ctx){
       for(const sx of [-1,1]) addSeg(cx+sx*(w/2-.15), b.z0-7.6, cx+sx*(w/2-.15), b.z0, .12, Y+.6, UY+2, '🪜 Lan can cầu thang lên tầng ngắm sông');
       addSeg(b.x0, b.z1-1.3, b.x1, b.z1-1.3, .1, UY-.5, UY+2, '🌉 Mép sàn kính tầng trên – quay lại cầu thang phía Bắc');
       INTER.push({x:cx, z:b.z0-.6, r:2, prio:.3, when:()=>P.y<Y+1.5, label:'🌉 Cầu Kính Hai Tầng – lên sàn kính tầng trên bằng cầu thang phía Bắc', action:()=>toast('🪜 Đi lên bậc thang ngay phía Bắc đầu cầu để lên sàn kính ngắm nhạc nước 🎶', 2600)}); }
-    if(b.kind==='glow'){ for(let u=0;u<=L;u+=3){ const [x,,z]=along(u,Wd/2,0), h=3.2*Math.sin(Math.PI*u/L); KB.add(B(Wd+.6,.14,.14), M.white, x,Y+1.2+h,z); } const pts=[]; for(let i=0;i<=16;i++){ const u=i/16*L; const [x,,z]=along(u,Wd/2,0); pts.push(V3(x,Y-.72,z)); } KL.add(tube(pts,.12,6), M.ledC, 0,0,0); }
+    if(b.kind==='glow'){ for(let u=0;u<=L;u+=3){ const [x,,z]=along(u,Wd/2,0), h=3.2*Math.sin(Math.PI*u/L); KB.add(B(Wd+.6,.14,.14), M.white, x,Y+2.7+h,z);   /* thanh vòm trên đầu người (trước 1,2 m chắn ngang lối đi ở đầu cầu) */ } const pts=[]; for(let i=0;i<=16;i++){ const u=i/16*L; const [x,,z]=along(u,Wd/2,0); pts.push(V3(x,Y-.72,z)); } KL.add(tube(pts,.12,6), M.ledC, 0,0,0); }
     makeLabel(`🌉 ${b.name}`, null, {h:.4, x:cx, y:Y+(b.kind==='arch'?15.5:3.2), z:cz, fade:60}); }
   out.bridges=BR.length;
 

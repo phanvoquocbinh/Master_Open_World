@@ -28,11 +28,12 @@ export async function make(W, ctx){
         if(!parts.has(mat)) parts.set(mat,[]); parts.get(mat).push(g); return g; },
       build(parent=scene){ for(const [m,list] of parts){ const geo=list.length===1?list[0]:mergeGeometries(list,false); if(!geo) continue; const ms=new THREE.Mesh(geo,m); ms.position.set(ox,0,oz); ms.castShadow=cast; ms.receiveShadow=true; parent.add(ms); } parts.clear(); } }; }
   const NIGHT=[]; const night=(m,base,k)=>{ NIGHT.push({m,base,k}); m.emissiveIntensity=base; return m; };
-  const M={ conc:AK.makeStoneMaterial({col:'#c9c6bf', joint:'#a9a59c', blockW:192, blockH:192, seed:71, rough:.85}), tile:AK.makeStoneMaterial({col:'#e9e6df', joint:'#cfcac0', blockW:128, blockH:128, seed:72, rough:.35}),
+  const M={ tileF:null, conc:AK.makeStoneMaterial({col:'#c9c6bf', joint:'#a9a59c', blockW:192, blockH:192, seed:71, rough:.85}), tile:AK.makeStoneMaterial({col:'#e9e6df', joint:'#cfcac0', blockW:128, blockH:128, seed:72, rough:.35}),
     asph:std(0x2f3136,{roughness:.9}), white:std(0xf2f4f5,{roughness:.5}), line:std(0xf4f2ec,{roughness:.5, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-3}), yel:std(0xf2c230,{roughness:.5, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-3}),
     steel:std(0xd5dbe2,{roughness:.2, metalness:1}), dark:std(0x262a31,{roughness:.5, metalness:.4}),
     glass:new THREE.MeshPhysicalMaterial({color:0x9fc6dd, roughness:.05, metalness:.15, transparent:true, opacity:.32, depthWrite:false, side:THREE.DoubleSide}), plant:std(0x4f8a37,{roughness:.85}),
     pier:std(0x8d8a84,{roughness:.9}), ledB:night(std(0x6fb6ff,{emissive:0x3f9bff, roughness:.4}),.3,2.4) };
+  M.tileF=M.tile.clone(); M.tileF.polygonOffset=true; M.tileF.polygonOffsetFactor=-2; M.tileF.polygonOffsetUnits=-2;
   const KL=Kit(0,300,false), KS=Kit(0,300,true);
 
   /* ============================== 0. MẶT BẰNG ============================== */
@@ -113,7 +114,7 @@ export async function make(W, ctx){
       if(mx>TERM.x1-6) continue; addSeg(ax,az,bx,bz,.25,undefined,undefined,'✈️ Vách kính nhà ga Manta Ray – cửa vào ở mũi cánh Đông (dốc từ River Tech)'); }
     for(const [u,t] of [[-.55,-.4],[-.55,.4],[-.2,-.5],[-.2,.5],[.2,-.5],[.2,.5],[.55,-.4],[.55,.4]]){ const x=cx+u*hw, z=cz+t*wHalf(u)*hd, h=roofY(u,t)-GY;
       KS.add(CY(.5,.8,h*.7,12), M.white, x,GY+h*.35,z); for(let k=0;k<4;k++){ const a=k/4*TAU+.4; KS.add(CY(.15,.3,h*.45,8), M.white, x+Math.cos(a)*1.8,GY+h*.85,z+Math.sin(a)*1.8, 0, Math.sin(a)*.5, -Math.cos(a)*.5); } circles.push({x,z,r:.9}); }
-    const fl=new THREE.PlaneGeometry(TERM.x1-TERM.x0-2, TERM.z1-TERM.z0-2); fl.rotateX(-Math.PI/2); const uv=fl.attributes.uv, p=fl.attributes.position; for(let i=0;i<p.count;i++) uv.setXY(i,p.getX(i)/6,p.getZ(i)/6); KL.add(fl, M.tile, cx,GY+.025,cz); }
+    const fl=new THREE.PlaneGeometry(TERM.x1-TERM.x0-2, TERM.z1-TERM.z0-2); fl.rotateX(-Math.PI/2); const uv=fl.attributes.uv, p=fl.attributes.position; for(let i=0;i<p.count;i++) uv.setXY(i,p.getX(i)/6,p.getZ(i)/6); KL.add(fl, M.tileF, cx,GY+.012,cz); }
 
   /* ---------- 3a. THÁC NƯỚC TRONG NHÀ ---------- */
   const FALL={x:85, z:258};
@@ -132,7 +133,7 @@ export async function make(W, ctx){
 
   /* ---------- 3b. CHECK-IN · SOI CHIẾU AN NINH · 6 CỔNG BOARDING · PHÒNG CHỜ THƯƠNG GIA ---------- */
   const scr=std(0x0e1a24,{emissive:0x3fb8ff, emissiveIntensity:.6, roughness:.2});
-  for(let i=0;i<8;i++){ const x=138+(i%4)*5.4, z=i<4?251:265; KS.add(RB(3.8,1.1,1.0,.12,2), M.white, x,GY+.55,z); KS.add(B(.9,.6,.08), scr, x,GY+1.5,z+.4); KS.add(B(3.8,.25,1.2), M.dark, x,GY+.25,z-1.1); boxes.push({x0:x-1.95, x1:x+1.95, z0:z-.55, z1:z+.55}); }
+  for(let i=0;i<8;i++){ const x=138+(i%4)*5.4, z=i<4?251:265; KS.add(RB(3.8,1.1,1.0,.12,2), M.white, x,GY+.55,z); KS.add(B(.9,.6,.08), scr, x,GY+1.5,z+.4); KS.add(B(3.8,.25,1.2), M.dark, x,GY+.25,z-1.1); boxes.push({x0:x-1.9, x1:x+1.9, z0:z-1.7, z1:z-.5, y0:GY-.5, y1:GY+.4}); boxes.push({x0:x-1.95, x1:x+1.95, z0:z-.55, z1:z+.55}); }
   INTER.push({x:146, z:258, r:3, prio:.5, label:'🧳 Quầy check-in QC Airlines (E)', action:()=>toast(`🧳 Chào ${(W.PROFILE&&W.PROFILE.name)||'bạn'}! Qua cổng soi chiếu rồi tới 6 cổng Boarding phía Nam để mua vé (Phổ thông 25 💰 · Thương gia 80 💰).`, 4000)});
   makeLabel('🧳 Check-in · QC Airlines', null, {h:.5, x:146, y:GY+4, z:258, fade:40});
   { const x=127, zA=cz-halfZ(x)+1, zB=cz+halfZ(x)-1, gates=[cz-8,cz,cz+8];
@@ -147,7 +148,7 @@ export async function make(W, ctx){
   const VIP={x0:101, x1:123, z0:cz-halfZ(112)+1.5, z1:cz-halfZ(112)+15};
   { const {x0,x1,z0,z1}=VIP, mx=(x0+x1)/2, mz=(z0+z1)/2;
     for(const [ax,az,bx,bz] of [[x0,z0,x1,z0],[x1,z0,x1,z1-4],[x0,z1,x1,z1],[x0,z0,x0,z1]]){ KS.add(B(Math.abs(bx-ax)||.1,3.2,Math.abs(bz-az)||.1), M.glass, (ax+bx)/2,GY+1.6,(az+bz)/2); addSeg(ax,az,bx,bz,.12,undefined,GY+3.4,'🥂 Vách kính phòng chờ thương gia – cửa ở góc Đông Nam'); }
-    KS.add(B(x1-x0,.08,z1-z0), AK.makeWoodMaterial({col:'#5a3518', plank:30, seed:74}), mx,GY+.05,mz);
+    KS.add(B(x1-x0,.08,z1-z0), AK.makeWoodMaterial({col:'#5a3518', plank:30, seed:74}), mx,GY+.05,mz); plats.push({t:'r', x:mx, z:mz, c:1, s:0, hw:(x1-x0)/2+.3, hd:(z1-z0)/2+.3, h:GY+.09});   /* mặt đứng = mặt sàn gỗ */
     AK.buildBilliardTable(W, x0+5.5, GY+.09, mz, Math.PI/2, 0x0d5a3c, 'world');
     KS.add(RB(7,1,1.2,.12,2), M.white, x1-6,GY+.5,z0+2.2); for(let k=0;k<5;k++) KS.add(CY(.35,.35,.12,16), std([0xffb547,0xff6b6b,0x46d39a,0xfff1c8,0x4fc3ff][k]), x1-8.8+k*1.4,GY+1.08,z0+2.2); boxes.push({x0:x1-9.5, x1:x1-2.5, z0:z0+1.6, z1:z0+2.8});
     for(const sx of [x1-6, x1-12]){ const sz=z1-3; KS.add(RB(3,.5,1.1,.2,3), std(0x3d4a5c,{roughness:.9}), sx,GY+.3,sz); KS.add(RB(3,.8,.3,.15,3), std(0x3d4a5c,{roughness:.9}), sx,GY+.6,sz+.5); W.addBench && W.addBench({x:sx, z:sz, rot:Math.PI, len:2.8, y:GY+.55, floor:GY, label:'🛋️ Ngồi sofa phòng chờ thương gia (E · C)'}); boxes.push({x0:sx-1.5, x1:sx+1.5, z0:sz-.6, z1:sz+.6}); }
