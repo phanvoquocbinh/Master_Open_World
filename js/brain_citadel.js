@@ -276,5 +276,7 @@ export function make(W, ctx){
   PLACES.push({icon:'🛩️', name:'Sân bay Đỉnh Mây', sub:'Đường băng STOL · trực thăng', go:()=>teleport(860, 110, 900, 60)});
   PLACES.push({icon:'🎈', name:'Xích đu vực & Khinh khí cầu', sub:'Cảm giác mạnh trên đỉnh vực biển', go:()=>teleport(880, 250, 880, 290)});
   console.info(`[QC World V2] Brain Citadel: đường đèo ${ROAD.length} m · ${cafes.length} quán · tháp 6 tầng`);
-  return {C, FY, ROAD, cafes, GB, hAt, ride};
+  const API={C, FY, ROAD, cafes, GB, hAt, ride};
+  import('./bots_brain.js').then(m=>{ if(m && m.make) m.make(W, API); }).catch(()=>{});   /* Pha 9: bot sống động của vùng (file do phiên khác làm; chưa có thì bỏ qua) */
+  return API;
 }
