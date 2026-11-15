@@ -96,7 +96,8 @@ export function makeHighland(W, ctx){
   const WF={x:215, z:-261.5, top:FTOP, bot:FBOT};
   const fallTex=(()=>{ const cv=document.createElement('canvas'); cv.width=128; cv.height=256; const x=cv.getContext('2d'); const g=x.createLinearGradient(0,0,0,256); g.addColorStop(0,'#cfeff6'); g.addColorStop(1,'#ffffff'); x.fillStyle=g; x.fillRect(0,0,128,256);
     for(let i=0;i<180;i++){ x.fillStyle=`rgba(60,140,170,${.05+R()*.18})`; x.fillRect(R()*128,R()*256,1+R()*2,20+R()*60); } const t=new THREE.CanvasTexture(cv); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.colorSpace=THREE.SRGBColorSpace; return t; })();
-  const fallMat=new THREE.MeshStandardMaterial({map:fallTex, transparent:true, opacity:.9, roughness:.2, emissive:0x9fd8e8, emissiveIntensity:.15, side:THREE.DoubleSide, depthWrite:false});
+  const fallMat=new THREE.MeshStandardMaterial({map:fallTex, transparent:true, opacity:.9, roughness:.2, emissive:0x9fd8e8, emissiveIntensity:.15, side:THREE.DoubleSide, depthWrite:false});
+
   const GF=W.GFX||(W.GFX=createGFX({quality:W.QUAL||'low', msaa:!W.CINE})), M2=GF.M;
   const fallsKeep=(x,z)=>{ const [a,b]=fAB(x,z), ab=Math.abs(b); if(a<-50 || a>94 || ab>70) return false;
     if(a<38 && ab<fHalf(a)+7) return true; if(a<2 && ab<52) return true;
@@ -184,7 +185,7 @@ export function makeHighland(W, ctx){
     mist.pts.geometry.attributes.position.needsUpdate=true; foamTex.offset.y-=dt*.22;
     const [pa,pb]=fAB(P.x,P.z), cb=Math.max(-FHW,Math.min(FHW,pb)), d=Math.hypot(pa-(fCrest(cb)+2), pb-cb, (P.y-(FBOT+10))*.5), near=clamp(1-(d-10)/170,0,1);
     let worn=false; try{ const g=W.gadgets; worn=!!(g && g.music && g.music.headphones); }catch(e){} let off=false; try{ off=localStorage.getItem('qcworld-sfx')==='0'; }catch(e){}
-    WF.near=near; if(near>0) sndInit(); if(SND.g){ const v=(worn||off||W.inside) ? 0 : near*near*.95; SND.vol+=(v-SND.vol)*Math.min(1,dt*3); SND.g.gain.value=SND.vol; SND.lp.frequency.value=500+near*near*3400; } };
+    WF.near=near; if(near>0) sndInit(); if(SND.g){ const v=(worn||off||W.inside||d>220) ? 0 : .95*Math.min(1, Math.pow(15/Math.max(d,15),1.6)); /* nhỏ dần theo khoảng cách thật: 30 m ≈ 33 %, 50 m ≈ 15 %, 100 m ≈ 5 % */ SND.vol+=(v-SND.vol)*Math.min(1,dt*3); SND.g.gain.value=SND.vol; SND.lp.frequency.value=500+near*near*3400; } };
 
   /* ============================== CẦU TỪ DOWNTOWN ============================== */
   const D=CITY.downtown, BX=178; let landZ=-130; for(let z=D.z0-4; z>-200; z-=1){ const h=hAt(BX,z); if(h!==null && h>.6){ landZ=z; break; } }
