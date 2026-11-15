@@ -34,6 +34,7 @@ import { makeMountainTown } from './mountaintown.js';
 import { makeStreetLife } from './streetlife.js';
 import { makeSeaLife } from './sealife.js';
 import { makeFunIsland } from './funisland.js';
+import { makeThemePark } from './themepark.js';
 import { makeJobCenter } from './jobcenter.js';
 
 export async function initLife(W){
@@ -757,6 +758,7 @@ export async function initLife(W){
   try{ W.luxury=makeLuxury(W, {city, transit:W.transit, V, ui, towers:downtown.towers}); }catch(e){ console.warn('luxury', e); }   // S10: showroom kính lớn + đại gia lái xe sang
   try{ W.jobCenter=makeJobCenter(W, {S, save, ui, addCoins, fmt, jobs, ward, towers:downtown.towers}); }catch(e){ console.warn('jobcenter', e); }   // S18: tháp Trung tâm Việc làm + 10 quầy nghề
   try{ W.funIsland=makeFunIsland(W, {askPay, spend, ui}); }catch(e){ console.warn('funisland', e); }   // S14: đảo QC Wonderland + cáp treo dài
+  try{ W.themePark=makeThemePark(W, {askPay, spend, ui}); }catch(e){ console.warn('themepark', e); }   // S-GFX A23: Công viên Kỳ Quan (đảo mới phía Nam Wonderland)
   try{ W.seaLife=makeSeaLife(W, {askPay, spend, ui}); }catch(e){ console.warn('sealife', e); }   // S13: du thuyền, lướt ván, mô tô nước, dù bay
   try{ W.streetLife=makeStreetLife(W, {S, save, askPay, spend, fmt}); }catch(e){ console.warn('streetlife', e); }   // S17: người đeo tai nghe, cosplay, ban nhạc rock dạo, ảo thuật gia
   try{ W.riverside=makeRiverside(W, {S, save, ui, askPay, fmt, spend, transit:W.transit, V}); }catch(e){ console.warn('riverside', e); }   // S12: biệt thự ven đầm + cổng gác + tham quan có hướng dẫn viên   // S11: phố ẩm thực + nhà hàng sang + căn hộ Sky QC   // Tháp Brand QC trên đỉnh đồi (đi bộ vào, cầu thang xoắn, trưng bày, phòng bí ẩn)

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>QC World – trình phát nhạc tai nghe</title>
+<style>html,body{margin:0;background:#000;overflow:hidden}#p{width:200px;height:200px}</style></head>
+<body><div id="p"></div>
+<script>
+// QC World – S19g: trình phát YouTube của máy nghe nhạc (js/gadgets.js) chạy ở địa chỉ "localhost".
+// Lý do: YouTube chặn phát nhiều bài nhạc chính thức khi trang nhúng là địa chỉ IP (127.0.0.1), còn "localhost" thì phát bình thường.
+// Trang game vẫn ở 127.0.0.1 (giữ nguyên dữ liệu lưu) và điều khiển trình phát này qua postMessage.
+// An toàn: chỉ nhận lệnh từ trang cha là game trên chính máy này (127.0.0.1 / localhost), chỉ gửi trạng thái về đúng trang đó.
+const OK=/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/;
+let parentOrigin=null, P=null, ready=false; const queue=[];
+function send(m){ if(parentOrigin) parent.postMessage(Object.assign({qcyt:1}, m), parentOrigin); }
+addEventListener('message', e=>{
+  if(e.source!==parent || !OK.test(e.origin)) return; const m=e.data; if(!m || m.qcyt!==1) return;
+  parentOrigin=e.origin;
+  if(m.cmd==='hello'){ send({ev:'hello', ready}); return; }
+  if(!ready){ queue.push(m); return; } run(m); });
+function run(m){ try{ switch(m.cmd){
+  case 'load': P.loadVideoById(String(m.id).slice(0,20)); break;
+  case 'play': P.playVideo(); break;
+  case 'pause': P.pauseVideo(); break;
+  case 'stop': P.stopVideo(); break;
+  case 'vol': P.setVolume(Math.max(0, Math.min(100, +m.v||0))); break; } }catch(err){} }
+window.onYouTubeIframeAPIReady=()=>{
+  P=new YT.Player('p', {width:200, height:200, playerVars:{autoplay:1, playsinline:1, rel:0, controls:0, fs:0, origin:location.origin},
+    events:{ onReady:()=>{ ready=true; P.setVolume(0); send({ev:'ready'}); queue.splice(0).forEach(run); },
+      onStateChange:e=>{ let title=''; try{ const d=P.getVideoData(); title=(d && d.title) || ''; }catch(_){} send({ev:'state', s:e.data, title}); },
+      onError:e=>send({ev:'error', code:e.data}) }}); };
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
+</body></html>

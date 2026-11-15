@@ -364,6 +364,7 @@ export async function make(W, ctx){
   /* ============================== 🎧 MÁY NGHE NHẠC ============================== */
   const POD={open:false};
   const MU={player:null, list:[], cur:-1, sel:-1, on:false, playing:false, vol:+LS.get('qcworld-pod-vol',70)||70, title:''};
+  const BAD=new Set(LS.get('qcworld-pod-bad2',[])||[]), saveBad=()=>LS.set('qcworld-pod-bad2', [...BAD].slice(-400));   // video chủ sở hữu tắt hẳn quyền phát ngoài YouTube (đo khi đã phát qua localhost)
   const podEl=document.createElement('div'); podEl.id='gdPod'; podEl.className='gdDev'; podEl.hidden=true;
   podEl.innerHTML=`<div class="devTop"><b>🎧 QC Pod</b><span class="osSp"></span><button class="devX" title="Cất máy (Y / Esc)">✕</button></div>
     <form class="podSearch"><input placeholder="Tìm bài hát trên YouTube…" spellcheck="false" maxlength="100"><button class="btn pri" title="Tìm">🔎</button></form>
@@ -381,7 +382,8 @@ export async function make(W, ctx){
     try{ const u=new URL(s); if(u.hostname.includes('youtu.be')) return u.pathname.slice(1,12)||null; if(u.searchParams.get('v')) return u.searchParams.get('v').slice(0,11);
       const m=u.pathname.match(/\/(shorts|embed|live)\/([\w-]{11})/); if(m) return m[2]; }catch(e){} return null; }
   function renderList(){ podList.innerHTML=''; MU.list.forEach((it,i)=>{ const d=document.createElement('div'); d.className='podItem'+(i===MU.sel?' sel':'')+(i===MU.cur&&MU.on?' now':'')+(it.bad?' bad':'');
-      d.innerHTML=`<img alt="" loading="lazy" referrerpolicy="no-referrer" src="https://i.ytimg.com/vi/${encodeURIComponent(it.id)}/mqdefault.jpg"><div><b>${esc(it.title||'Video YouTube')}</b><small>${esc([it.channel,it.len,it.bad?'⛔ không cho phát nhúng':''].filter(Boolean).join(' · '))}</small></div>`;
+      d.innerHTML=`<img alt="" loading="lazy" referrerpolicy="no-referrer" src="https://i.ytimg.com/vi/${encodeURIComponent(it.id)}/mqdefault.jpg"><div><b>${esc(it.title||'Video YouTube')}</b><small>${esc([it.channel,it.len,it.bad?'⛔ chặn phát ngoài YouTube':''].filter(Boolean).join(' · '))}</small>${it.bad?'<button class="podYT" title="Chủ sở hữu không cho phát bài này ngoài YouTube – mở bản gốc bằng trình duyệt">↗ Mở trên YouTube</button>':''}</div>`;
+      const yb=d.querySelector('.podYT'); if(yb) yb.onclick=ev=>{ ev.stopPropagation(); window.open('https://www.youtube.com/watch?v='+encodeURIComponent(it.id), '_blank', 'noopener'); };
       d.onclick=()=>{ MU.sel=i; renderList(); }; d.ondblclick=()=>play(i, true); podList.appendChild(d); });
     const s=MU.list[MU.sel]; $p('.podSel').textContent=s?`Đã chọn: ${s.title||s.id}`:'Chưa chọn bài'; }
   const pmsg=t=>{ podMsg.textContent=t; };
@@ -390,8 +392,9 @@ export async function make(W, ctx){
       const r=await fetch('/api/yt/search?q='+encodeURIComponent(q), {cache:'no-store', signal:c.signal}); clearTimeout(to);
       let j=null; try{ j=await r.json(); }catch(e){ throw new Error('server-cu'); }
       if(!j.ok) throw new Error(j.offline?'offline':'loi');
-      MU.list=j.items||[]; MU.sel=MU.list.length?0:-1; MU.cur=-1; renderList();
-      pmsg(MU.list.length?`${MU.list.length} kết quả – chọn bài rồi bấm ▶ Phát (bấm đúp để phát ngay).`:'Không tìm thấy bài nào – thử từ khoá khác.'); }
+      MU.list=(j.items||[]).map(x=>BAD.has(x.id) ? {...x, bad:true} : x); const firstOk=MU.list.findIndex(x=>!x.bad);
+      MU.sel=MU.list.length ? (firstOk>=0?firstOk:0) : -1; MU.cur=-1; renderList();
+      pmsg(MU.list.length?`${MU.list.length} kết quả – chọn bài rồi bấm ▶ Phát (bấm đúp để phát ngay). Phát đúng bản gốc ngay trong game.`:'Không tìm thấy bài nào – thử từ khoá khác.'); }
     catch(e){ pmsg(e.message==='offline'||e.name==='AbortError'||navigator.onLine===false ? 'No internet – không tìm được. Có mạng lại thì thử lại nhé.'
       : e.message==='server-cu' ? 'Máy chủ game là bản cũ – tắt rồi mở lại QC World (QCWorld.vbs) để bật tìm kiếm. Vẫn có thể dán link YouTube.' : 'Chưa tìm được – thử lại hoặc dán link YouTube.'); } }
   $p('.podSearch').onsubmit=ev=>{ ev.preventDefault(); search($p('.podSearch input').value); };
@@ -405,40 +408,53 @@ export async function make(W, ctx){
   $p('[data-stop]').onclick=()=>stopMusic(); nowEl.querySelector('[data-st]').onclick=()=>stopMusic(); nowEl.querySelector('[data-op]').onclick=()=>podOpen(); nowEl.querySelector('[data-hp]').onclick=()=>togglePhones();
   $p('.devX').onclick=()=>podClose();
   function setVol(v){ MU.vol=v; LS.set('qcworld-pod-vol',v); for(const el of [podEl, nowEl]){ const s=el.querySelector('[data-vol]'); if(+s.value!==v) s.value=v; } MU.lastV=-1; }   // updMusicVol áp vào player ở khung sau
-  function loadYT(){ const M=W.music; if(window.YT && YT.Player) return Promise.resolve();
-    if(M && M.api) return M.api;
-    const p=new Promise((res,rej)=>{ const prev=window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady=()=>{ try{ prev && prev(); }catch(e){} res(); };
-      const s=document.createElement('script'); s.src='https://www.youtube.com/iframe_api'; s.onerror=()=>{ if(M && M.api===p) M.api=null; rej(new Error('offline')); }; document.head.appendChild(s);
-      setTimeout(()=>rej(new Error('timeout')), 15000); });
-    if(M) M.api=p; return p; }
-  async function play(i, anim){ const it=MU.list[i]; if(!it) return;
-    const wasWearing=wearing(); MU.cur=i; MU.sel=i; MU.on=true; MU.title=it.title||'Video YouTube'; renderList(); renderNow();
+  /* Trình phát YouTube chạy trong trang nhỏ js/ytframe.html ở địa chỉ "localhost": YouTube chặn nhiều bài nhạc chính thức khi trang nhúng
+     là địa chỉ IP (127.0.0.1) – đã thử: cùng bài "Official Video" bị chặn ở 127.0.0.1 nhưng phát được ở localhost.
+     Game vẫn ở 127.0.0.1 (giữ nguyên dữ liệu lưu); điều khiển trình phát qua postMessage, chỉ nói chuyện với đúng trang localhost đó. */
+  const PS={UNSTARTED:-1, ENDED:0, PLAYING:1, PAUSED:2, BUFFERING:3, CUED:5};
+  function makeRemotePlayer(){
+    const H=location.protocol+'//localhost'+(location.port?':'+location.port:''), host=document.createElement('div'), f=document.createElement('iframe');
+    host.id='gdYTHost'; f.src=H+'/js/ytframe.html'; f.allow='autoplay; encrypted-media'; f.title='Trình phát nhạc tai nghe'; host.appendChild(f); document.body.appendChild(host);
+    const st={s:PS.UNSTARTED, title:'', ready:false, q:[]};
+    const raw=m=>{ try{ f.contentWindow.postMessage(Object.assign({qcyt:1}, m), H); }catch(e){} };
+    const post=m=>{ if(st.ready) raw(m); else st.q.push(m); };
+    addEventListener('message', e=>{ if(e.origin!==H || e.source!==f.contentWindow) return; const m=e.data; if(!m || m.qcyt!==1) return;
+      if(m.ev==='ready' || (m.ev==='hello' && m.ready)){ if(!st.ready){ st.ready=true; st.q.splice(0).forEach(raw); } }
+      else if(m.ev==='state'){ st.s=m.s; if(m.title) st.title=m.title; onYT({data:m.s}); }
+      else if(m.ev==='error') onYTErr({data:m.code}); });
+    const hello=()=>{ if(st.ready) return; raw({cmd:'hello'}); setTimeout(hello, 400); };
+    f.addEventListener('load', hello);
+    return {setVolume:v=>post({cmd:'vol', v}), playVideo:()=>post({cmd:'play'}), pauseVideo:()=>post({cmd:'pause'}), stopVideo:()=>post({cmd:'stop'}),
+      loadVideoById:id=>{ st.s=PS.UNSTARTED; st.title=''; post({cmd:'load', id}); }, getPlayerState:()=>st.s, getVideoData:()=>({title:st.title}), get ready(){ return st.ready; }}; }
+  function play(i, anim){ const it=MU.list[i]; if(!it) return;
+    const wasWearing=wearing(); MU.cur=i; MU.sel=i; MU.on=true; MU.playing=false; MU.title=it.title||'Video YouTube'; it.bad=false; renderList(); renderNow();
     if(POD.open) podClose();
     if(!wasWearing){ phonesOn(); if(!MU.hinted){ MU.hinted=true; toast('🎧 Đeo tai nghe: âm thanh thành phố tắt hẳn – bấm 🎧 Tháo để nghe lại xung quanh.', 3800); } }
-    try{ await loadYT(); }catch(e){ MU.on=false; phonesOff(); renderNow(); toast('📡 No internet – không tải được YouTube.', 3200); return; }
-    if(!MU.on || MU.cur!==i) return;
     MU.lastV=-1;   // âm lượng thật do updMusicVol điều khiển (0 khi chưa đeo xong → nhạc vào dần khi tai nghe áp tai)
-    if(!MU.player){ const host=document.createElement('div'); host.id='gdYTHost'; const d=document.createElement('div'); d.id='gdYT'; host.appendChild(d); document.body.appendChild(host);
-      MU.player=new YT.Player('gdYT', {width:200, height:200, videoId:it.id, playerVars:{autoplay:1, playsinline:1, rel:0, controls:0, fs:0},
-        events:{ onReady:e=>{ MU.lastV=-1; e.target.setVolume(0); if(MU.on) e.target.playVideo(); }, onStateChange:onYT, onError:onYTErr }}); }
-    else { MU.player.loadVideoById(it.id); } }
+    if(!MU.player) MU.player=makeRemotePlayer();
+    const p=MU.player; p.loadVideoById(it.id);
+    setTimeout(()=>{ if(MU.on && MU.cur===i && !p.ready){ toast('📡 No internet – không tải được YouTube.', 3200); stopMusic(); } }, 20000); }
   function togglePhones(){ if(wearing()){ phonesOff(); return; }
     if(!MU.on){ toast('🎧 Chưa có bài nào – mở máy nghe nhạc (Y) chọn bài nhé.', 2600); return; }
     phonesOn(); try{ MU.player && MU.player.playVideo(); }catch(e){} }
-  function onYT(e){ const S=window.YT && YT.PlayerState; if(!S) return;
-    MU.playing=e.data===S.PLAYING;
-    if(MU.playing){ try{ const d=MU.player.getVideoData(); if(d && d.title){ MU.title=d.title; const it=MU.list[MU.cur]; if(it && /^Video YouTube/.test(it.title)) it.title=d.title; } }catch(_){} }
-    if(e.data===S.ENDED) next(true); renderNow(); }
-  function onYTErr(e){ const it=MU.list[MU.cur]; if(it) it.bad=true; MU.playing=false;
-    const blocked=e && (e.data===101 || e.data===150), msg=blocked?`⛔ “${it?it.title:'Bài này'}” không cho phát ngoài YouTube – chọn bài khác nhé.`:'⚠️ Bài này không phát được (video lỗi / đã bị xoá) – chọn bài khác nhé.';
-    toast(msg, 4200); MU.on=false; phonesOff(); renderNow(); podOpen(); pmsg(msg); renderList(); }
-  function togglePause(){ const p=MU.player; if(!MU.on || !p || !p.getPlayerState) return; const S=YT.PlayerState;
+  function onYT(e){ MU.playing=e.data===PS.PLAYING;
+    if(MU.playing){ const d=MU.player.getVideoData(); if(d && d.title){ MU.title=d.title; const it=MU.list[MU.cur]; if(it && /^Video YouTube/.test(it.title)) it.title=d.title; } }
+    if(e.data===PS.ENDED) next(true); renderNow(); }
+  // Bài mà chủ sở hữu tắt hẳn quyền phát ngoài YouTube (mã 101/150/153 cả khi chạy ở localhost): không tự đổi sang bản khác –
+  // báo rõ + nút "↗ Mở trên YouTube" để nghe đúng bản gốc bằng trình duyệt.
+  function onYTErr(e){ const code=e && e.data, it=MU.list[MU.cur]; MU.playing=false;
+    const blocked=code===101 || code===150 || code===153;
+    if(it){ it.bad=true; if(blocked){ BAD.add(it.id); saveBad(); } }
+    renderList(); if(!MU.on || !it) return;
+    const msg=blocked?`⛔ Chủ sở hữu “${it.title}” không cho phát bài này ngoài trang YouTube – bấm “↗ Mở trên YouTube” ở bài đó để nghe bản gốc bằng trình duyệt.`:'⚠️ Bài này không phát được (video lỗi / đã bị xoá) – chọn bài khác nhé.';
+    toast(msg, 5000); MU.on=false; phonesOff(); renderNow(); podOpen(); pmsg(msg); renderList(); }
+  function togglePause(){ const p=MU.player; if(!MU.on || !p) return;
     if(!wearing()){ togglePhones(); return; }   // đang tháo tai nghe → đeo lại rồi phát
-    if(p.getPlayerState()===S.PLAYING) p.pauseVideo(); else p.playVideo(); }
-  function next(auto){ if(!MU.list.length) return; let i=MU.cur+1; while(i<MU.list.length && MU.list[i].bad) i++;
+    if(p.getPlayerState()===PS.PLAYING) p.pauseVideo(); else p.playVideo(); }
+  function next(auto){ if(!MU.list.length) return; const i=MU.cur+1;
     if(i>=MU.list.length){ if(auto){ MU.playing=false; renderNow(); } toast('🎧 Hết danh sách – mở máy (Y) tìm thêm bài nhé.', 2600); return; }
     play(i, false); }
-  function stopMusic(){ const was=wearing(); MU.on=false; MU.playing=false; if(was) phonesOff(); else if(MU.player && MU.player.stopVideo){ try{ MU.player.stopVideo(); }catch(e){} } renderNow(); renderList(); }   // đang đeo: tháo xong mới dừng hẳn (afterTakeoff)
+  function stopMusic(){ const was=wearing(); MU.on=false; MU.playing=false; if(was) phonesOff(); else if(MU.player){ try{ MU.player.stopVideo(); }catch(e){} } renderNow(); renderList(); }   // đang đeo: tháo xong mới dừng hẳn (afterTakeoff)
   function renderNow(){ if(!nowEl) return; nowEl.hidden=!MU.on; if(!MU.on) return; nowEl.querySelector('.nT b').textContent=MU.title||'—';
     const w=wearing(); nowEl.querySelector('.nT small').textContent=!w?'🎧 Đã tháo tai nghe – đang nghe âm thanh thành phố':MU.playing?'🔇 Đang đeo tai nghe – âm thanh xung quanh đã tắt':'Đang tải / tạm dừng';
     nowEl.querySelector('[data-pp]').textContent=MU.playing&&w?'⏸':'▶'; const hb=nowEl.querySelector('[data-hp]'); hb.textContent=w?'🎧 Tháo':'🎧 Đeo'; hb.title=w?'Tháo tai nghe – nghe lại âm thanh thành phố (nhạc tạm dừng)':'Đeo tai nghe – nghe tiếp nhạc'; }
@@ -553,12 +569,17 @@ export async function make(W, ctx){
   // âm thanh môi trường 3D (sóng biển, xe cộ theo khoảng cách) – thay cho nhạc nền
   try{ const m=await import('./ambience.js'); W.ambience=m.makeAmbience(W); }catch(e){ console.warn('ambience', e); }
 
-  return {
+  const api={
     laptop:{open:lapOpen, close:lapClose, openMD:(url)=>lapOpen('md', url||'/'), launch, get isOpen(){ return LAP.open; }},
     music:{open:podOpen, close:podClose, search, play:(i)=>play(i,true), stop:stopMusic, next, state:MU, togglePhones, get headphones(){ return wearing(); }, get hp(){ return HP.state; }, get hpT(){ return HP.t; }, get muted(){ return AUDQ.on; }, audq:AUDQ, get hpObj(){ return hpRoot; }, bones},
     phone:{open:phOpen, close:phClose, send:sendSms, go:phGo, state:PH, get number(){ return myNum(); }, get online(){ return online(); }},
     hold,
   };
+  // 💰 nút "+" nạp tiền cạnh ví + 2 đoạn cắt cảnh (js/topup.js) – dùng chung điện thoại & tư thế cầm đồ của module này
+  try{ const m=await import('./topup.js');
+    api.topup=m.makeTopup(W, ctx, {hold, phone:{open:phOpen, close:phClose, go:phGo, render:phRender, addMsg, el:phEl, body:phBody, state:PH, save:savePH, get isOpen(){ return PHN.open; }, get view(){ return PHN.view; }}});
+  }catch(e){ console.warn('topup', e); }
+  return api;
 
   function injectCSS(){ const s=document.createElement('style'); s.textContent=`
 body.gadget-mode #top, body.gadget-mode #hint, body.gadget-mode #music, body.gadget-mode #buffs, body.gadget-mode #fps, body.gadget-mode #prompt, body.gadget-mode #chatLog, body.gadget-mode #gdDock, body.gadget-mode #gdNow{display:none!important}
@@ -574,6 +595,7 @@ body.gadget-mode #top, body.gadget-mode #hint, body.gadget-mode #music, body.gad
 #gdNow input[type=range]{flex:1;min-width:60px}
 #gdNow button.wide{width:auto;padding:0 8px;font:600 12px "Segoe UI",sans-serif}
 #gdYTHost{position:fixed;left:0;bottom:0;width:200px;height:200px;opacity:0;pointer-events:none;z-index:-1;overflow:hidden}
+#gdYTHost iframe{width:200px;height:200px;border:0}
 /* laptop */
 #gdLap{position:fixed;inset:0;z-index:30;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 52%,rgba(0,0,0,0) 52%,rgba(0,0,0,.6) 100%);opacity:0;transition:opacity .35s;pointer-events:none}
 #gdLap.on{opacity:1;pointer-events:auto}
@@ -645,7 +667,9 @@ body.gadget-mode #top, body.gadget-mode #hint, body.gadget-mode #music, body.gad
 .podItem{display:flex;gap:8px;align-items:center;padding:6px;border-radius:10px;cursor:pointer;color:#e9edf4}.podItem:hover{background:rgba(255,255,255,.08)}
 .podItem.sel{background:rgba(79,195,255,.22);box-shadow:inset 0 0 0 1px #4fc3ff}.podItem.now b::before{content:'🔊 '}.podItem.bad{opacity:.45}
 .podItem img{width:72px;height:40px;object-fit:cover;border-radius:6px;background:#26324a;flex:none}.podItem div{min-width:0;display:flex;flex-direction:column}
-.podItem b{font-size:12.5px;line-height:1.3;max-height:2.6em;overflow:hidden}.podItem small{font-size:11px;color:#9aa6bd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.podItem b{font-size:12.5px;line-height:1.3;max-height:2.6em;overflow:hidden}
+.podYT{align-self:flex-start;margin-top:3px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;border-radius:7px;padding:2px 8px;font:600 11px "Segoe UI",sans-serif;cursor:pointer}.podYT:hover{background:#e5484d}
+.podItem.bad{opacity:.7}.podItem small{font-size:11px;color:#9aa6bd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .podCtl{display:flex;flex-direction:column;gap:6px}.podSel{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .podRow{display:flex;align-items:center;gap:5px}.podRow .btn{padding:7px 10px;color:#1e2636;background:#fff;border-color:#cdd4df}.podRow .btn.pri{color:#fff;background:var(--acc)}.podRow input{flex:1;min-width:40px}
 #gdPhone{width:330px;height:min(640px,82vh);padding:10px 12px;border-radius:40px;background:#0b0d12;box-shadow:0 0 0 3px #2b303a,0 22px 55px rgba(0,0,0,.6);color:#eef2f8}

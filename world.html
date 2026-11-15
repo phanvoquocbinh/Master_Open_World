@@ -1220,6 +1220,8 @@ function firstPerson(dt){ const sc=HOOK.scope;
   cam.tx=P.x; cam.ty=P.y+1.45; cam.tz=P.z; cam.occ=undefined;
   if(!QP.staticShadow) placeSun(P.x,P.z); return true; }
 function updateCamera(dt){
+  /* S-GFX A23: trò chơi công viên tự đặt camera góc nhìn thứ nhất theo khung toa tàu (lộn vòng thật) */
+  if(cam.fpv && !HOOK.scope && HOOK.fpvCam && HOOK.fpvCam(dt, camera)){ if(!QP.staticShadow) placeSun(P.x,P.z); return; }
   if((HOOK.scope || (cam.fpv && (!HOOK.camOverride || HOOK.vehicle))) && firstPerson(dt)) return;
   if(_bodyHid){ me.root.visible=true; _bodyHid=false; _pf=null; } if(_fovNow!==55){ _fovNow=55; camera.fov=55; camera.updateProjectionMatrix(); }
   if(HOOK.camOverride){ const o=HOOK.camOverride, kk=1-Math.exp(-dt*(o.k||5)); camera.position.lerp(o.pos, kk); _look.lerp(o.look, kk); camera.lookAt(_look);
