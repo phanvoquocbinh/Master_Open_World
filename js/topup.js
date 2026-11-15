@@ -165,7 +165,7 @@ export function makeTopup(W, ctx, G){
       add(new THREE.CylinderGeometry(.06,.06,.18,16), new THREE.MeshStandardMaterial({color:0x9e0b18, metalness:.6, roughness:.3}), 0,0,0, wg).rotation.z=Math.PI/2; }
     // nội thất: sàn thảm, 4 ghế da kem viền đỏ, táp-lô gỗ + đồng hồ, vô lăng gỗ, bệ tì tay
     add(new THREE.BoxGeometry(1.7,.02,2.15), carpet, 0,.51,-.3);
-    const seats={FL:new V3(.45,.68,.05), FR:new V3(-.45,.68,.05), RL:new V3(.45,.68,-.95), RR:new V3(-.45,.68,-.95)};
+    const seats={FL:new V3(.45,.68,.05), FR:new V3(-.45,.68,.05), RL:new V3(.45,.68,-1.1), RR:new V3(-.45,.68,-1.1)};
     for(const k in seats){ const p=seats[k]; add(new THREE.BoxGeometry(.52,.13,.5), leather, p.x,p.y-.06,p.z); const bk=add(new THREE.BoxGeometry(.52,.56,.11), leather, p.x,p.y+.26,p.z-.27); bk.rotation.x=-.16;
       add(new THREE.BoxGeometry(.54,.03,.13), piping, p.x,p.y+.55,p.z-.31); add(new THREE.BoxGeometry(.04,.5,.12), piping, p.x,p.y+.26,p.z-.28).position.x+=.0; }
     add(new THREE.BoxGeometry(1.7,.26,.2), wood, 0,.84,.74);
@@ -532,21 +532,53 @@ export function makeTopup(W, ctx, G){
       const p=hp.clone().lerp(tp,.42).addScaledVector(bs.F, hh*.5); const q=new THREE.Quaternion(); o.a.g.getWorldQuaternion(q); attach(H, gl, p, q, 1); }
     return o; }
 
+  // S19g (16/11): CHỖ ĐỖ XE không vướng vật – trước xe luôn đỗ đúng 4,3 m trước mặt người chơi → vệ sĩ bước xuống đứng lọt vào ghế bàn picnic,
+  // xe chạy tới xuyên qua ghế/chậu cây. Nay dò bằng tia chiếu thẳng xuống: thân xe + vùng mở cửa + lối vệ sĩ đi vòng đầu xe (dọc −3,4…+4, ngang ±2,7 m)
+  // và đường chạy tới (42 m) không có vật cao hơn mặt đất > 15 cm; thử nhiều hướng / khoảng cách quanh người chơi. Đường chạy vướng → xe bay từ trời xuống.
+  function findParking(){ const f0=me.g.rotation.y, roots=new Set([...(W.ACTORS||[])].map(A=>A.g)), list=[], v=new V3(), down=new V3(0,-1,0), rc=new THREE.Raycaster(); scene.updateMatrixWorld(true);
+    scene.traverseVisible(o=>{ if(!o.isMesh || o.isSkinnedMesh || (o.isInstancedMesh && o.count>250)) return; const m=Array.isArray(o.material)?o.material[0]:o.material;
+      if(!m || m.isShaderMaterial || (m.transparent && (m.opacity??1)<.4) || o===W.water || /water|ocean|sky|cloud|glow|shadowProx/i.test(o.name||'')) return;
+      for(let p=o;p;p=p.parent) if(roots.has(p)) return; const g=o.geometry; if(!g || !g.attributes || !g.attributes.position) return; if(!g.boundingSphere) g.computeBoundingSphere();
+      const s=g.boundingSphere.clone().applyMatrix4(o.matrixWorld); if(Math.hypot(s.center.x-P.x, s.center.z-P.z)<s.radius+60) list.push({o,s}); });
+    const free=(x,z)=>{ const gy=W.groundAt(x,z); v.set(x, gy+3, z); rc.set(v, down); rc.far=3.4; const c=list.filter(e=>Math.hypot(e.s.center.x-x, e.s.center.z-z)<e.s.radius+.15).map(e=>e.o);
+      const h=c.length ? rc.intersectObjects(c,false)[0] : null; return !h || h.point.y<gy+.15; };
+    const zoneOK=(S,D,Rr)=>{ const g0=W.groundAt(S.x,S.z); for(let a=-3.4; a<=4.01; a+=.6) for(let b=-2.7; b<=2.71; b+=.6){ const x=S.x+D.x*a+Rr.x*b, z=S.z+D.z*a+Rr.z*b; if(Math.abs(W.groundAt(x,z)-g0)>.25 || !free(x,z)) return false; } return true; };
+    const pathOK=(S,D,Rr)=>{ for(let a=-42; a<=-3; a+=1.5) for(const b of [-1.1,0,1.1]){ const x=S.x+D.x*a+Rr.x*b, z=S.z+D.z*a+Rr.z*b; if(!free(x,z)) return false; } return true; };
+    for(const dist of [4.3, 5.4, 3.7, 6.8]) for(const da of [0,.45,-.45,.9,-.9,1.5,-1.5,2.2,-2.2,Math.PI]) for(const sg of [1,-1]){
+      const f=f0+da, F=new V3(Math.sin(f),0,Math.cos(f)), yaw=f-sg*Math.PI/2, D=new V3(Math.sin(yaw),0,Math.cos(yaw)), Rr=new V3(-D.z,0,D.x), S=new V3(P.x+F.x*dist, 0, P.z+F.z*dist);
+      if(zoneOK(S,D,Rr)) return {f, yaw, dist, drive:pathOK(S,D,Rr)}; }
+    return {f:f0, yaw:f0-Math.PI/2, dist:4.3, drive:true}; }   // chật quá → như cũ
+
   async function pack2(){ if(SC.on) return;
     if(W.inside || HOOK.vehicle || HOOK.blockInput){ toast('🚗 Ra ngoài trời (và xuống xe) để anh Bình Phan tới tận nơi trao quà nhé!', 3200); return; }
     if(!W.people || !W.people.kit){ toast('Chưa tải xong nhân vật – thử lại sau ít giây.', 2400); return; }
     begin(2000, `💸 ${BP_NAME} tặng 2.000 tiền – mãi bên nhau nhé!`); HOOK.blockInput=true; P.dancing=false;
-    const f=me.g.rotation.y, F=new V3(Math.sin(f),0,Math.cos(f)), yaw=f-Math.PI/2, D=new V3(Math.sin(yaw),0,Math.cos(yaw)), R=new V3(-F.z,0,F.x);
-    const S=new V3(P.x+F.x*4.3, 0, P.z+F.z*4.3), from=S.clone().addScaledVector(D,-42);
-    const car=buildCar(); car.g.rotation.y=yaw; car.g.position.set(from.x, W.groundAt(from.x,from.z)+.02, from.z); scene.add(car.g);
+    const pk=findParking(), f=pk.f, F=new V3(Math.sin(f),0,Math.cos(f)), yaw=pk.yaw, D=new V3(Math.sin(yaw),0,Math.cos(yaw)), R=new V3(-F.z,0,F.x);
+    const S=new V3(P.x+F.x*pk.dist, 0, P.z+F.z*pk.dist), AIR=!pk.drive, from=S.clone().addScaledVector(D, AIR ? -26 : -42);   // đường chạy tới bị vướng → xe bay từ trên trời đáp xuống
+    const car=buildCar(); car.g.rotation.y=yaw; car.g.position.set(from.x, W.groundAt(from.x,from.z)+.02+(AIR?22:0), from.z); scene.add(car.g);
     const guard=makeGuard(), bp=makeBP(); const people=[guard, bp];
-    const seatIn=(o,k)=>{ const s=car.seats[k]; car.g.add(o.a.g); o.a.g.rotation.set(0,0,0); o.a.g.position.set(s.x, s.y+.04-o.po.hipsHeight(), s.z); o.pose=k==='FL'?'type':'sit'; };
+    // S19g (16/11): NGỒI TRONG XE theo đúng hình học xe – trước dùng 'sit'/'type' (cẳng chân thẳng đứng) trong khi đệm ghế chỉ cao hơn sàn 17 cm
+    // → bàn chân tọt xuống dưới sàn xe, đùi lún vào đệm (Bình báo 16/11). Nay mỗi khung: khớp háng đặt cao hơn mặt đệm ~7,5 cm, đùi gần ngang,
+    // cẳng chân chéo ra trước đúng độ dài để gót chạm sàn thảm; ghế sau giới hạn tầm duỗi để chân không đâm vào lưng ghế trước (chui dưới đệm ghế trước).
+    const CAR_FLOOR=.52, CUSHION=.685, _h=new V3(), _k=new V3(), _qc=new THREE.Quaternion(), _qa=new THREE.Quaternion(), _qp=new THREE.Quaternion(), _qw=new THREE.Quaternion();
+    const aimTo=(B,C,dirW)=>{ B.getWorldPosition(_h); C.getWorldPosition(_k); _k.sub(_h).normalize(); _qa.setFromUnitVectors(_k, dirW); B.getWorldQuaternion(_qw); B.parent.getWorldQuaternion(_qp); _qw.premultiply(_qa); B.quaternion.copy(_qp.invert().multiply(_qw)); B.updateMatrixWorld(true); };
+    const seatLegs=o=>{ const B=o.po.bones; if(!B.LeftUpLeg || !B.RightUpLeg || !B.LeftLeg || !B.LeftFoot) return; const rear=o.seatK[0]==='R', sc=(o.h||1.75)/1.75;
+      car.g.updateMatrixWorld(true); car.g.getWorldQuaternion(_qc); const toW=v=>v.applyQuaternion(_qc), wpos=b=>b.getWorldPosition(new V3()), loc=b=>car.g.worldToLocal(wpos(b));
+      o.a.g.updateMatrixWorld(true); const dy=CUSHION+.075*sc-(loc(B.LeftUpLeg).y+loc(B.RightUpLeg).y)/2; if(Math.abs(dy)>.002){ o.a.g.position.y+=dy; o.a.g.updateMatrixWorld(true); }
+      for(const [s,side] of [['Left',1],['Right',-1]]){ const UL=B[s+'UpLeg'], LG=B[s+'Leg'], FT=B[s+'Foot'], TO=B[s+'ToeBase']; if(!UL || !LG || !FT) continue;
+        const H=loc(UL), L1=wpos(UL).distanceTo(wpos(LG)), L2=wpos(LG).distanceTo(wpos(FT)), ank=CAR_FLOOR+.095*sc, maxZ=rear ? -.37 : 1.0; let best=null;
+        for(let a=-.05; a<=.62; a+=.025){ const kz=H.z+L1*Math.cos(a), ky=H.y+L1*Math.sin(a), d=ank-ky; if(Math.abs(d)>=L2) continue; const rz=Math.sqrt(L2*L2-d*d); if(kz+rz<=maxZ){ best={a, d, rz}; break; } }
+        if(!best) best={a:.62, d:-L2*.92, rz:L2*Math.sqrt(1-.92*.92)};
+        aimTo(UL, LG, toW(new V3(side*.07*Math.cos(best.a), Math.sin(best.a), Math.cos(best.a)).normalize()));
+        aimTo(LG, FT, toW(new V3(0, best.d, best.rz).normalize()));
+        if(TO) aimTo(FT, TO, toW(new V3(0,-.5,1).normalize())); } };
+    const seatIn=(o,k)=>{ const s=car.seats[k]; car.g.add(o.a.g); o.a.g.rotation.set(0,0,0); o.a.g.position.set(s.x, s.y+.04-o.po.hipsHeight(), s.z-.1); o.pose='car'; o.seatK=k; };
     seatIn(guard,'FL'); seatIn(bp,'RR');
     const L2W=(x,z)=>car.g.localToWorld(new V3(x,0,z));
     let tAll=0, lastSpark=0, flying=null, meShoulder=null; me.root.traverse(b=>{ if(!meShoulder && b.isBone && /LeftArm$/.test(b.name)) meShoulder=b; });
     SC.frame=(dt,T)=>{ tAll+=dt;
       for(const o of people){ o.a.mixer.update(dt); const B=o.po.bones;
-        if(o.pose) o.po.apply(o.pose, T);
+        if(o.pose) o.po.apply(o.pose, T); if(o.pose==='car') seatLegs(o);
         // đang nói: gật đầu nhẹ + tay đưa lên xuống (tay đang cầm điện thoại / giơ ngón cái / vỗ vai thì để yên)
         o.talkW=(o.talkW||0)+((o.talkT||0)-(o.talkW||0))*Math.min(1,dt*4);
         if(o.talkW>.01){ const bs=basis(o), g=o.talkW;
@@ -571,7 +603,7 @@ export function makeTopup(W, ctx, G){
     // 1) xe chạy tới
     shot(new V3(P.x,0,P.z).addScaledVector(F,-2.4).addScaledVector(R,-2.2).add(up(P.y+2.0)), S.clone().add(up(P.y+.6)).addScaledVector(D,-6), 1.8);
     await (()=>{ let t=0; const dur=6; return run(dt=>{ t+=dt; const k=Math.min(1,t/dur), e=1-Math.pow(1-k,3), x=from.x+(S.x-from.x)*e, z=from.z+(S.z-from.z)*e;
-      const dd=Math.hypot(x-car.g.position.x, z-car.g.position.z); car.g.position.set(x, W.groundAt(x,z)+.02, z); for(const w of car.wheels) w.rotation.x+=dd/.4; return k>=1; }); })();
+      const dd=Math.hypot(x-car.g.position.x, z-car.g.position.z); car.g.position.set(x, W.groundAt(x,z)+.02+(AIR ? 22*Math.pow(1-e,2) : 0), z); for(const w of car.wheels) w.rotation.x+=dd/.4; return k>=1; }); })();
     if(!SC.alive) return;
     const doorAnim=(pv, to, dur)=>{ const fr=pv.rotation.y; let t=0; return run(dt=>{ t+=dt; pv.rotation.y=fr+(to-fr)*sm(t/dur); return t>=dur; }); };
     const exitSeat=async(o, sd, z)=>{ const wp=new V3(); o.a.g.getWorldPosition(wp); scene.attach(o.a.g); o.a.g.rotation.x=0; o.a.g.rotation.z=0; o.pose=null; o.a.play('walk',.3);
@@ -580,7 +612,7 @@ export function makeTopup(W, ctx, G){
       const s=Math.min(d, sp*dt); g.position.x+=dx/d*s; g.position.z+=dz/d*s; g.position.y=W.groundAt(g.position.x, g.position.z); g.rotation.y=lerpAngle(g.rotation.y, Math.atan2(dx,dz), Math.min(1,dt*7)); return false; }); };
     const walkPath=async(o, pts)=>{ for(const [x,z] of pts){ const w=L2W(x,z); await walkTo(o, w.x, w.z); if(!SC.alive) return; } };
     const faceTo=(o, x, z)=>{ const g=o.a.g; const to=Math.atan2(x-g.position.x, z-g.position.z); return run(dt=>{ g.rotation.y=lerpAngle(g.rotation.y, to, Math.min(1,dt*6)); return Math.abs(((g.rotation.y-to+Math.PI)%(Math.PI*2)+Math.PI*2)%(Math.PI*2)-Math.PI)<.05; }); };
-    const enterSeat=async(o, sd, z, k)=>{ const w=L2W(sd*1.6, z); await walkTo(o, w.x, w.z); if(!SC.alive) return; const s=car.seats[k], tgt=car.g.localToWorld(new V3(s.x, s.y+.04-o.po.hipsHeight(), s.z)); const st=o.a.g.position.clone(); let t=0;
+    const enterSeat=async(o, sd, z, k)=>{ const w=L2W(sd*1.6, z); await walkTo(o, w.x, w.z); if(!SC.alive) return; const s=car.seats[k], tgt=car.g.localToWorld(new V3(s.x, s.y+.04-o.po.hipsHeight(), s.z-.1)); const st=o.a.g.position.clone(); let t=0;
       await run(dt=>{ t+=dt; o.a.g.position.lerpVectors(st, tgt, sm(t/1.0)); o.a.g.rotation.y=lerpAngle(o.a.g.rotation.y, car.g.rotation.y, Math.min(1,dt*6)); return t>=1.0; }); if(!SC.alive) return; seatIn(o, k); };
     await wait(.5); if(!SC.alive) return;
     // 2) vệ sĩ xuống xe, vòng đầu xe sang mở cửa cho anh Bình Phan
@@ -592,7 +624,7 @@ export function makeTopup(W, ctx, G){
     await doorAnim(car.doors.R, 1.05, .9); if(!SC.alive) return;
     const gs=L2W(-1.9,1.3); await walkTo(guard, gs.x, gs.z, 1); if(!SC.alive) return; await faceTo(guard, P.x, P.z);
     // 3) anh Bình Phan bước ra, tới trước mặt người chơi
-    await exitSeat(bp, -1, -.85); if(!SC.alive) return;
+    await exitSeat(bp, -1, -1.0); if(!SC.alive) return;
     const meet=new V3(P.x,0,P.z).addScaledVector(F,1.05); await walkTo(bp, meet.x, meet.z, 1.2); if(!SC.alive) return;
     await faceTo(bp, P.x, P.z); P.face=Math.atan2(bp.a.g.position.x-P.x, bp.a.g.position.z-P.z); me.g.rotation.y=P.face;
     const mid=new V3((P.x+bp.a.g.position.x)/2, P.y, (P.z+bp.a.g.position.z)/2), side2=new V3(-(bp.a.g.position.z-P.z),0,bp.a.g.position.x-P.x).normalize();
@@ -631,7 +663,7 @@ export function makeTopup(W, ctx, G){
       bp.pat=0; bp.talkT=0; bp.flap=0; } if(!SC.alive) return;
     // 6) lên xe, vệ sĩ đóng cửa, về ghế lái
     shot(side, S.clone().add(up(P.y+.8)), 1.6);
-    await enterSeat(bp, -1, -.85, 'RR'); if(!SC.alive) return;
+    await enterSeat(bp, -1, -1.0, 'RR'); if(!SC.alive) return;
     await doorAnim(car.doors.R, 0, .8); if(!SC.alive) return;
     await walkPath(guard, [[-1.6,3.6],[1.6,3.6]]); if(!SC.alive) return;
     await doorAnim(car.doors.L, -1.05, .7); if(!SC.alive) return;

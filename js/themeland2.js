@@ -281,7 +281,7 @@ export function makeLand2(T, K){
   /* ---------- 🌀 #18 CON LẮC THẦN SẤM – đĩa bay 360° ---------- */
   { const X=-199.6, Z=1014.6, R={id:'frisbee', name:'Con Lắc Thần Sấm', icon:'🌀', price:25, wait:'5', col:0x6a3fb0, fg:'#f0e0ff', sub:'Đĩa 24 ghế vừa xoay 15 vòng/phút vừa bị cánh tay đòn 20 m quăng lắc lên góc 120°', x:X, z:Z, R:14, ain:Math.atan2(hub[1]-Z,hub[0]-X)}; R.aout=R.ain+.5;
     const st=site(R), AY=G0+24, yB=G0+.5, ARM=20.3, dk=M.paint(0x2b2440,.5,.4), phi=Math.atan2(-st.sa,st.ca);
-    for(const e of [-1,1]) for(const f of [-1,1]){ const top=[X+st.ca*e*4.6,AY,Z+st.sa*e*4.6], ft=[X+st.ca*e*6.2-st.sa*f*10,G0-.2,Z+st.sa*e*6.2+st.ca*f*10]; beam(kL,dk,ft,top,.6,.42,8); circles.push({x:ft[0],z:ft[2],r:.85}); } beam(kL,dk,[X-st.ca*5,AY,Z-st.sa*5],[X+st.ca*5,AY,Z+st.sa*5],.65,.65,10);
+    for(const e of [-1,1]) for(const f of [-1,1]){ const top=[X+st.ca*e*7,AY,Z+st.sa*e*7], ft=[X+st.ca*e*8.6-st.sa*f*9.6,G0-.2,Z+st.sa*e*8.6+st.ca*f*9.6]; beam(kL,dk,ft,top,.6,.42,8); circles.push({x:ft[0],z:ft[2],r:.85}); (R.legs||(R.legs=[])).push([ft,top]); } beam(kL,dk,[X-st.ca*7.4,AY,Z-st.sa*7.4],[X+st.ca*7.4,AY,Z+st.sa*7.4],.65,.65,10);
     kF.add(uvXZ(new THREE.RingGeometry(3.2,8.6,40).rotateX(-Math.PI/2)),M.terrazzo,X,yB+.006,Z); kF.add(cylM(8.6,8.6,.5,40,true),M.stoneLight,X,G0+.25,Z); W.plats.push({t:'ring', x:X, z:Z, r0:3.2, r1:8.6, h:yB});
     const ag=VG(); ag.limb([0,0,0],[0,-ARM+.4,0],.55,.42,0x6a3fb0,10).add(Cy(1.1,1.1,2.4,12),0x2b2440,0,0,0,0,0,Math.PI/2).add(B(1.6,2.2,1.6),0x2b2440,0,2.2,0);
     const arm=new THREE.Group(); arm.rotation.order='YXZ'; arm.rotation.y=phi; arm.position.set(X,AY,Z); arm.userData.dynamic=true; const am=new THREE.Mesh(ag.geo(),vcMat); am.castShadow=true; arm.add(am); gMid.add(arm);

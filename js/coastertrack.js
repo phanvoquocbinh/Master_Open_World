@@ -11,13 +11,16 @@ const weights=(kind,n)=>{ const w=[]; let s=0; for(let i=0;i<n;i++){ const t=(i+
 
 export function trackBuilder(x,y,z,yawDeg){
   let p=[x,y,z], d=[Math.sin(yawDeg*RAD),0,Math.cos(yawDeg*RAD)], u=[0,1,0], tw=0, zone='station', auto=false;
-  const P=[], U=[], Z=[], A=[], marks={}, DS=1;
+  const P=[], U=[], Z=[], A=[], marks={}, cusps=[], DS=1;
   const outU=()=>{ if(!tw) return u.slice(); const L=cross(u,d); return nrm(lin(u,L,Math.cos(tw),Math.sin(tw))); };
   const put=()=>{ P.push(p.slice()); U.push(outU()); Z.push(zone); A.push(auto); };
   const fix=()=>{ d=nrm(d); u=nrm(lin(u,d,1,-dot(u,d))); };
   put();
   const B={
     zone(n){ zone=n; return B; }, mark(n){ marks[n]=P.length-1; return B; },
+    // ĐƯỜNG CỤT: tàu dừng ở đây rồi chạy NGƯỢC lại. retrace(len) = đi lùi lại đúng len mét ray vừa đặt (vùng 'dup' – không vẽ lại), sau đó rẽ nhánh ray mới
+    cusp(n){ marks[n]=P.length-1; cusps.push(P.length-1); return B; },
+    retrace(len){ const n=Math.min(P.length-2,Math.round(len/DS)), k0=P.length-1, z0=zone; zone='dup'; for(let k=1;k<=n;k++){ p=P[k0-k].slice(); u=U[k0-k].slice(); put(); } d=nrm(lin(P[k0-n],P[k0-n+1],1,-1)); u=U[k0-n].slice(); zone=z0; return B; },
     get pos(){ return p.slice(); }, get dir(){ return d.slice(); }, get up(){ return u.slice(); },
     // đoạn tổng quát: p = ngóc lên (độ), y = rẽ trái quanh trục thẳng đứng, ly = rẽ quanh đỉnh đầu, r = lăn nghiêng trái, tw = xoắn (chỉ xoay "đỉnh đầu" hiển thị),
     // bank = nghiêng vào rồi trả lại trong đoạn, shift = trượt ngang sang trái (m) – tránh ray đè nhau ở chân vòng lộn
@@ -53,15 +56,16 @@ export function trackBuilder(x,y,z,yawDeg){
       for(let i=0;i<N;i++){ const s=i*ds; while(j<n0-1 && cum[j+1]<s) j++; const t=(s-cum[j])/Math.max(1e-6,cum[j+1]-cum[j]);
         RP.push(lin(P[j],P[j+1],1-t,t)); RU.push(nrm(lin(U[j],U[j+1],1-t,t))); RZ.push(Z[t<.5?j:j+1]); RA.push(A[j]&&A[j+1]); }
       const mk={}; for(const k in marks) mk[k]=cum[Math.min(n0,marks[k])];
-      const w=i=>((i%N)+N)%N, T=RP.map((_,i)=>nrm(lin(RP[w(i+1)],RP[w(i-1)],1,-1)));
+      const w=i=>((i%N)+N)%N, cs=cusps.map(k=>cum[k]), np=cs.length, pid=RP.map((_,i)=>{ let n=0; for(const c of cs) if(i*ds>c) n++; return n; }), same=(a,b)=>pid[a]===pid[b] || (pid[a]===0 && pid[b]===np) || (pid[a]===np && pid[b]===0);
+      const T=RP.map((_,i)=>{ const a=w(i-1), b=w(i+1); return same(a,b)?nrm(lin(RP[b],RP[a],1,-1)) : same(i,b)?nrm(lin(RP[b],RP[i],1,-1)) : nrm(lin(RP[i],RP[a],1,-1)); });
       let hmax=-1e9; for(const q of RP) hmax=Math.max(hmax,q[1]);
       const bank=new Float32Array(N); for(let i=0;i<N;i++){ if(!RA[i]) continue; const kv=lin(T[w(i+2)],T[w(i-2)],1/(4*ds),-1/(4*ds)), Lh=nrm(cross(Y,T[i])), v2=Math.min(1100,Math.max(80,2*G*(hmax+2-RP[i][1])));
-        bank[i]=Math.max(-1.1,Math.min(1.1,Math.atan(v2*dot(kv,Lh)/G))); }
+        bank[i]=Math.max(-1.1,Math.min(1.1,Math.atan(v2*dot(kv,Lh)/G)))*(RZ[i]==='station'?.12:RZ[i]==='brake'?.6:RZ[i].startsWith('cruise')?.35:1); }
       for(let pass=0;pass<4;pass++){ const b2=bank.slice(); for(let i=0;i<N;i++) if(RA[i]) bank[i]=(b2[w(i-3)]+b2[w(i-2)]+b2[w(i-1)]+b2[i]+b2[w(i+1)]+b2[w(i+2)]+b2[w(i+3)])/7; }
       for(let i=0;i<N;i++) if(RA[i]){ const Lh=nrm(cross(Y,T[i])), up=nrm(lin(Y,T[i],1,-T[i][1])); RU[i]=nrm(lin(up,Lh,Math.cos(bank[i]),Math.sin(bank[i]))); }
       for(let pass=0;pass<2;pass++){ const u2=RU.map(v=>v.slice()); for(let i=0;i<N;i++) RU[i]=nrm([0,1,2].map(c=>u2[w(i-1)][c]+2*u2[i][c]+u2[w(i+1)][c])); }
       for(let i=0;i<N;i++) RU[i]=nrm(lin(RU[i],T[i],1,-dot(RU[i],T[i])));
-      return {N, L:Ltot, ds, P:RP, T, U:RU, Z:RZ, marks:mk, hmax}; } };
+      return {N, L:Ltot, ds, P:RP, T, U:RU, Z:RZ, marks:mk, hmax, cusps:cs}; } };
   return B;
 }
 // soi gương qua mặt phẳng z = zp (đường đua đôi)
@@ -75,9 +79,14 @@ export function physStep(tr,st,dt,cfg={}){ const N=tr.N, i=Math.floor((((st.s/tr
   if(z==='lift') v=v<(cfg.lift||5.5)?Math.min(cfg.lift||5.5, v+7*dt):Math.max(cfg.lift||5.5, v-9*dt);
   else if(z==='launch') v=Math.min(cfg.launchV||36, v+(cfg.launchA||14)*dt);
   else if(z==='brake') v=Math.max(cfg.brakeV||5, v-(cfg.brakeA||7.5)*dt);
+  else if(z.charCodeAt(0)===99 && z.startsWith('cruise')){ const cv=+z.slice(7)||5; v=v<cv?Math.min(cv, v+4*dt):Math.max(cv, v-9*dt); }   /* cruise:N – bánh lốp đẩy tàu đi đều N m/s qua các cảnh diễn */
   else if(z==='station'){ const sv=cfg.stV||3; v=v<sv?Math.min(sv, v+3*dt):Math.max(sv, v-6*dt); }
   else { v+=(-G*ty-.12-.00038*v*v)*dt; if(v<(cfg.vmin||4)) v=cfg.vmin||4; }
   st.v=v; st.s+=v*dt; st.zone=z; return st; }
+
+// GÒ ĐÁ / NÚI (đợt 2): elip tâm (x,z), bán trục rx/rz, cao h. e = độ "bằng đỉnh"; cone = núi lửa hình nón (số mũ), crater = bán kính miệng (tỉ lệ), depth = sâu miệng
+export const MOUNDS={ jura1:{x:272,z:992,rx:66,rz:60,h:66,e:3.5}, jura2:{x:160,z:1064,rx:24,rz:20,h:15,e:2.5}, volc:{x:24,z:1010,rx:72,rz:72,h:55,cone:.8,crater:.14,depth:7}, volcN:{x:8,z:950,rx:30,rz:16,h:9,e:2.5}, crys:{x:98.7,z:999,rx:8,rz:36,h:13,e:2.5} };
+export function moundH(m,x,z){ const r=Math.hypot((x-m.x)/m.rx,(z-m.z)/m.rz); if(r>=1) return 0; if(m.cone){ const rr=Math.max(r,m.crater||0), hh=m.h*Math.pow(1-rr,m.cone); return r<(m.crater||0)?hh-m.depth*(1-Math.pow(r/m.crater,2)):hh; } return m.h*(1-Math.pow(r,m.e||2.5)); }
 
 /* ====================== 3 ĐƯỜNG TÀU LƯỢN ĐỢT 1 (toạ độ thế giới; g = cao độ mặt đất công viên) ====================== */
 export const TRACKS={
@@ -105,5 +114,74 @@ export const TRACKS={
     b.turn(-180,12,{bank:35}); b.pitchTo(16,-70).fwd(9).seg(40,{p:70, ease:'pull'}); b.fwd(3).loop(13.5,4.8).fwd(2);
     b.turn(180,18,{bank:66}); b.fwd(2).pitchTo(16,22).seg(34,{p:-44, tw:-360, ease:'lin'}).pitchTo(16,0);
     b.turn(-220,16,{bank:66}); b.level(3).cork(52,1).fwd(2).turn(40,24,{bank:25}).level(3).seg(34,{tw:360, ease:'lin'}).fwd(2);
-    b.zone('brake').to(-84,g+5.5,582,0,.9).to(-84,g+3.4,598,0,.5).zone('station').to(-104,g+2.95,615.5,-90,.75).to(-122,g+2.95,615.5,-90,.5); return b.finish(); }
+    b.zone('brake').to(-84,g+5.5,582,0,.9).to(-84,g+3.4,598,0,.5).zone('station').to(-104,g+2.95,615.5,-90,.75).to(-122,g+2.95,615.5,-90,.5); return b.finish(); },
+  // ---------------- ĐỢT 2: 3 tàu lượn phiêu lưu (đi đều qua cảnh diễn 'cruise:N', chui núi, đoạn chạy giật lùi) ----------------
+  // #4 KỶ JURA TUYỆT DIỆT – ga (158, 975→937) chạy về Bắc; thung lũng ăn cỏ → hầm báo động → hang raptor → dốc xích trong núi → T-Rex → lao 75° → xoắn trên hồ → thác → hầm 2
+  jura(g){ const b=trackBuilder(158,g+.8,975,180);
+    b.fwd(38).mark('stop'); b.zone('cruise:5').fwd(6).turn(-90,18,{bank:8}); b.fwd(20).turn(-20,50,{bank:5}).fwd(14).turn(20,50,{bank:5}).fwd(55);
+    b.turn(-90,18,{bank:8}).mark('tun1'); b.zone('cruise:7').fwd(30); b.turn(-90,16,{bank:6}).mark('cave'); b.zone('cruise:4').fwd(14);
+    b.zone('lift').pitchTo(10,35).fwd(42).pitchTo(12,0).mark('trex'); b.zone('cruise:3').fwd(4); b.zone('free').pitchTo(12,-75).fwd(10).seg(30,{p:75,ease:'pull'}).mark('out');
+    b.turn(90,22,{bank:62}); b.fwd(2).seg(36,{tw:360,ease:'lin'}); b.zone('cruise:11').fwd(6).mark('fall'); b.turn(-180,12,{bank:40}).mark('tun2end');
+    b.zone('brake').to(158,g+.8,992,180,.6).zone('station').to(158,g+.8,975,180,.5); return b.finish(); },
+  // #5 LỜI NGUYỀN HẦM MỎ DUNG NHAM – ga (−20…18, 916) chạy về Đông; núi lửa tâm (24,1010). Vào lòng núi → leo đường cụt (quái đá) → TRƯỢT LÙI 1,5 vòng xoáy → đáy lõi dung nham → phóng vọt qua miệng núi lửa
+  volcano(g){ const b=trackBuilder(-20,g+.8,916,90);
+    b.fwd(38).mark('stop'); b.zone('cruise:7').fwd(62).turn(-90,20,{bank:10}); b.pitchTo(10,10).fwd(14).pitchTo(10,0).mark('crys'); b.zone('cruise:6').fwd(60).mark('crysEnd'); b.zone('cruise:7').fwd(40).turn(-90,20,{bank:10});
+    b.zone('lift').pitchTo(10,14).fwd(40).pitchTo(10,0); b.zone('cruise:7').fwd(57).turn(-90,20,{bank:10}).fwd(39).turn(-90,16,{bank:8}).mark('enter'); b.zone('cruise:5').fwd(34).mark('s1');
+    b.zone('lift').pitchTo(8,38).fwd(20).pitchTo(8,0).cusp('golem'); b.retrace(36);
+    b.zone('free').pitchTo(6,-8.1).seg(2*Math.PI*12*1.5,{y:-540,bank:-50,fb:.1,ease:'lin'}).pitchTo(6,0); b.zone('brake').fwd(20).cusp('core'); b.retrace(18);
+    b.zone('cruise:6').turn(-90,10,{bank:5}).fwd(22).turn(-90,10,{bank:5}).fwd(13).turn(-90,10,{bank:5}).mark('throat');
+    b.zone('launch').seg(26,{p:50,ease:'up'}).fwd(30); b.zone('free').fwd(18).seg(30,{p:-88}).mark('crater');
+    b.turn(-90,30,{bank:35}).pitchTo(16,-6).fwd(6).turn(-90,24,{bank:40}); b.zone('brake').pitchTo(8,0).fwd(40).to(-20,g+.8,916,90,.8); return b.finish(); },
+  // #6 ĐỀN THỜ ATLANTIS – ga (118…156, 1108) chạy về Đông; phế tích → cổng xoáy nước → đại điện đáy biển (Kraken) → leo đỉnh đền 35 m → lao xuống hồ (sóng 2 bên) → lướt mặt nước về ga
+  atlantis(g){ const b=trackBuilder(118,g+.8,1108,90);
+    b.fwd(38).mark('stop'); b.zone('cruise:6').fwd(7).mark('ruins').fwd(22).mark('vortex').fwd(18).mark('hall').fwd(34).mark('hallEnd');
+    b.zone('lift').pitchTo(10,36).fwd(46).pitchTo(12,0); b.zone('cruise:5').fwd(3).turn(-180,21,{bank:15}); b.zone('free').pitchTo(12,-62).fwd(19).seg(30,{p:62,ease:'pull'}).mark('splash');
+    b.zone('brake').fwd(60); b.zone('cruise:8').to(118,g+.8,1150,-90,.5); b.zone('station').to(97,g+.8,1129,180,.75).to(118,g+.8,1108,90,.75); return b.finish(); }
+};
+
+/* ====================== ĐỢT 2B: ĐƯỜNG XE TRONG NHÀ (nhà ma, lâu đài) – mặt bằng ghép đoạn thẳng + cung tròn, KHÔNG nghiêng ====================== */
+// planTrack(x,y,z,yaw, segs, prof): segs = [{l:m} | {a:độ (+ = rẽ trái), r:m}]; prof tính theo QUÃNG ĐƯỜNG NGANG hd: ramps [{a,b,dy}] (đổi cao mượt), zones [[hd,'vùng']], marks {tên:hd}
+export function planTrack(x,y,z,yawDeg,segs,prof={}){ const P=[[x,y,z]], HD=[0]; let px=x, pz=z, yaw=yawDeg*RAD, hd=0; const H=.25, ramps=prof.ramps||[], yAt=h=>{ let v=y; for(const r of ramps){ const t=Math.max(0,Math.min(1,(h-r.a)/(r.b-r.a))); v+=r.dy*t*t*(3-2*t); } return v; };
+  for(const s of segs){ const len=s.l!==undefined?s.l:Math.abs(s.a)*RAD*s.r, n=Math.max(1,Math.round(len/H)), da=s.l!==undefined?0:s.a*RAD/n, st=s.l!==undefined?len/n:2*s.r*Math.sin(Math.abs(da)/2);
+    for(let i=1;i<=n;i++){ yaw+=da/2; px+=Math.sin(yaw)*st; pz+=Math.cos(yaw)*st; yaw+=da/2; hd+=len/n; P.push([px,yAt(hd),pz]); HD.push(hd); } }
+  const n0=P.length-1, cum=[0]; for(let i=1;i<=n0;i++) cum.push(cum[i-1]+Math.hypot(P[i][0]-P[i-1][0],P[i][1]-P[i-1][1],P[i][2]-P[i-1][2]));
+  const sOf=h=>{ let a=0, b=n0; while(b-a>1){ const m=(a+b)>>1; if(HD[m]<=h) a=m; else b=m; } return cum[a]+(cum[b]-cum[a])*(h-HD[a])/Math.max(1e-6,HD[b]-HD[a]); };
+  const Ltot=cum[n0], N=Math.round(Ltot), ds=Ltot/N, RP=[], RZ=[], zs=(prof.zones||[]).map(([h,zn])=>[sOf(h),zn]).sort((a,b)=>a[0]-b[0]); let j=0;
+  for(let i=0;i<N;i++){ const s=i*ds; while(j<n0-1 && cum[j+1]<s) j++; const t=(s-cum[j])/Math.max(1e-6,cum[j+1]-cum[j]); RP.push(lin(P[j],P[j+1],1-t,t)); let zn='station'; for(const q of zs) if(s>=q[0]) zn=q[1]; RZ.push(zn); }
+  const w=i=>((i%N)+N)%N, T=RP.map((_,i)=>nrm(lin(RP[w(i+1)],RP[w(i-1)],1,-1))), U=T.map(t=>nrm(lin(Y,t,1,-t[1]))), mk={}; for(const k in (prof.marks||{})) mk[k]=sOf(prof.marks[k]); let hmax=-1e9; for(const q of RP) hmax=Math.max(hmax,q[1]);
+  return {N, L:Ltot, ds, P:RP, T, U, Z:RZ, marks:mk, hmax, cusps:[], gap:Math.hypot(P[n0][0]-x,P[n0][1]-y,P[n0][2]-z)}; }
+
+// BỐ CỤC NHÀ 3 DÃY PHÒNG KÍN (toạ độ cục bộ: lx dọc nhà, lz theo chiều sâu; dãy A lz 0–16 · B 18–34 · C 36–52 · mặt tiền lz 52 · ga lz 60):
+//  ga (chạy về −lx) → cửa vào mặt tiền (lx 0) → hành lang dốc (lx 0, lz 52→14) → dãy A (+lx) → quay đầu → dãy B (−lx) → quay đầu → dãy C (+lx) → cửa ra mặt tiền (lx 62) → về ga.
+//  o: {ox, oz, flip (xoay 180°: ga chạy về +x, nhà nằm phía Nam ga), A/B/C: chiều dài từng phòng theo thứ tự xe đi (ΣA−ΣB+ΣC = 57, ΣA−ΣB ≥ −3),
+//      ramps:[[mốc, lùi, dài, dy]], zones:[[mốc, lùi, 'vùng']], marks:{tên:[mốc, lùi]}}. Mốc có sẵn: start, stop, in, r1…rN (cửa vào phòng), gA, gB, out, end.
+export function darkLayout(g,o){ const sum=a=>a.reduce((s,v)=>s+v,0), sA=sum(o.A), sB=sum(o.B), sC=sum(o.C), XEA=8+sA, XWB=XEA-sB, XEC=65, ev={start:0}, segs=[]; let hd=0, c=0;
+  const L=l=>{ segs.push({l}); hd+=l; }, Arc=(a,r)=>{ segs.push({a,r}); hd+=Math.abs(a)*RAD*r; }, nA=o.A.length, nB=o.B.length;
+  if(Math.abs(XWB+sC-XEC)>1e-6 || XWB<5) throw new Error('darkLayout: cần ΣA−ΣB+ΣC = 57 và ΣA−ΣB ≥ −3');
+  L(38); ev.stop=hd; L(12); Arc(-90,6); L(2); ev.in=hd; L(38); Arc(-90,6); L(2); ev.r1=hd; o.A.forEach((l,i)=>{ if(i) ev['r'+(i+1)]=ev.r1+c; c+=l; });
+  L(sA-8); Arc(-90,5); L(3); ev.gA=hd; L(2); ev['r'+(nA+1)]=hd; L(3); Arc(-90,5); { const h0=hd; c=0; o.B.forEach((l,i)=>{ if(i) ev['r'+(nA+1+i)]=h0+c-8; c+=l; }); }
+  L(sB-16); Arc(90,5); L(3); ev.gB=hd; L(2); ev['r'+(nA+nB+1)]=hd; L(3); Arc(90,5); { const h0=hd; c=0; o.C.forEach((l,i)=>{ if(i) ev['r'+(nA+nB+1+i)]=h0+c-8; c+=l; }); }
+  L(sC-16); Arc(-90,5); L(3); ev.out=hd; L(2); Arc(-90,6); ev.end=hd;
+  const W=(lx,lz)=>o.flip?[o.ox-lx,o.oz-lz]:[o.ox+lx,o.oz+lz], rooms=[], box=(a,b,z0,z1,dir,zc)=>{ const p=W(a,z0), q=W(b,z1); rooms.push({i:rooms.length+1, x0:Math.min(p[0],q[0]), x1:Math.max(p[0],q[0]), z0:Math.min(p[1],q[1]), z1:Math.max(p[1],q[1]), dir:o.flip?-dir:dir, zc:W(0,zc)[1], L:b-a}); };
+  c=8; for(const l of o.A){ box(c,c+l,0,16,1,8); c+=l; } c=XEA; for(const l of o.B){ box(c-l,c,18,34,-1,26); c-=l; } c=XWB; for(const l of o.C){ box(c,c+l,36,52,1,44); c+=l; }
+  const marks={...ev}; for(const k in (o.marks||{})) marks[k]=ev[o.marks[k][0]]+o.marks[k][1];
+  const st=W(56,60), tr=planTrack(st[0],g+1.15,st[1],o.flip?90:-90,segs,{ramps:(o.ramps||[]).map(([m,d,len,dy])=>({a:ev[m]+d, b:ev[m]+d+len, dy})), zones:(o.zones||[]).map(([m,d,z])=>[ev[m]+d,z]), marks});
+  const s0=W(-6,-3), s1=W(Math.max(XEA,XEC)+3,52); return {tr, rooms, flip:!!o.flip, W, shell:{x0:Math.min(s0[0],s1[0]), x1:Math.max(s0[0],s1[0]), z0:Math.min(s0[1],s1[1]), z1:Math.max(s0[1],s1[1])}, front:W(0,52)[1], sgn:o.flip?-1:1}; }
+
+export const DARK={
+  // 🩸 #7 DINH THỰ HUYẾT NGUYỆT – 9 phòng: lên 6,8 m ở hành lang cầu thang, phòng 5 xuống hầm 3 m, phòng 8 sập sàn rơi 3,8 m
+  mansion:g=>darkLayout(g,{ox:-236, oz:808, A:[22,26,22], B:[24,26,20], C:[20,15,22], ramps:[['in',4,30,6.8],['r5',3,12,-3],['r8',8.7,1.5,-3.8]],
+    zones:[['stop',.5,'cruise:2.4'],['in',2,'lift'],['in',35,'cruise:1.8'],['r3',3,'cruise:1.4'],['r3',16,'cruise:1.8'],['r5',1,'cruise:1.7'],['r5',19.3,'launch'],['r5',25,'cruise:2.5'],['r7',2,'cruise:1.5'],['r8',1,'cruise:1.3'],['r8',8.6,'free'],['r9',1.5,'brake'],['r9',5,'cruise:1.4'],['r9',10,'cruise:3'],['out',1,'station']],
+    marks:{s1:['r5',19], s2:['r8',8.5], s3:['r9',9.5]}}),
+  // 🧪 #8 PHÒNG THÍ NGHIỆM TỬ THẦN KHU 13 – 9 phòng (8 cảnh + hành lang bảng điểm): lên 5 m, phòng 8 xuống hố trùm sâu 5 m
+  asylum:g=>darkLayout(g,{ox:-124, oz:808, A:[22,24,24], B:[22,24,24], C:[19,24,14], ramps:[['in',6,26,5],['r8',2,12,-5]],
+    zones:[['stop',.5,'cruise:2.4'],['in',2,'lift'],['in',34,'cruise:2'],['r1',2,'cruise:1.3'],['r2',1,'cruise:2'],['r5',1,'cruise:1.6'],['r5',16,'cruise:2.2'],['r8',1,'cruise:1.6'],['r9',1,'cruise:2.4'],['out',1,'station']],
+    marks:{s1:['r1',15], s2:['r5',11], s3:['r8',16]}}),
+  // 🏺 #9 LỜI NGUYỀN XÁC ƯỚP HOÀNG ĐẾ – 9 phòng: lên 6 m, phòng 6 sập sàn rơi 4 m, phòng 8 lao dốc 2 m qua khe cửa đá
+  tomb:g=>darkLayout(g,{ox:-12, oz:808, A:[24,26,20], B:[22,24,24], C:[21,18,18], ramps:[['in',6,28,6],['r6',11.2,1.5,-4],['r8',4,10,-2]],
+    zones:[['stop',.5,'cruise:2.4'],['in',2,'lift'],['in',35,'cruise:1.8'],['r2',1,'cruise:1.5'],['r3',1,'cruise:1.8'],['r4',1,'cruise:1.4'],['r5',1,'cruise:2.4'],['r6',1,'cruise:1.5'],['r6',11.1,'free'],['r6',15,'brake'],['r7',1,'cruise:1.5'],['r8',3,'launch'],['r9',2,'brake'],['r9',8,'cruise:2.2'],['out',1,'station']],
+    marks:{s1:['r4',12], s2:['r6',11], s3:['r7',12]}}),
+  // 🏰 #13 HUYỀN THOẠI XỨ SỞ THẦN TIÊN – thuyền bay trong lâu đài (ga quay mặt Bắc, lâu đài phía Nam): bay cao 9 m rồi hạ dần qua 5 cảnh lớn
+  castle:g=>darkLayout(g,{ox:60, oz:1180, flip:true, A:[70], B:[36,34], C:[30,27], ramps:[['in',4,32,9],['r2',6,14,-2.5],['r4',6,14,-3],['r5',4,14,-3.5]],
+    zones:[['stop',.5,'cruise:2.4'],['in',2,'lift'],['in',37,'cruise:2.6'],['r5',18,'cruise:2.2'],['out',1,'station']], marks:{}})
 };

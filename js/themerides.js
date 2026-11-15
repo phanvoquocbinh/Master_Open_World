@@ -33,9 +33,11 @@ export function makeRides(T){
     look.y+=cam.yaw-look.cy; look.p=clamp(look.p+cam.pitch-look.cp,-1.25,1.25); look.cy=cam.yaw; look.cp=cam.pitch;
     _f.copy(o.t).normalize(); _r.crossVectors(_f,o.u).normalize(); _u.crossVectors(_r,_f); _mx.makeBasis(_r,_u,_c.copy(_f).negate());
     camera.quaternion.setFromRotationMatrix(_mx).multiply(_qb.setFromEuler(_eu.set(-look.p,look.y,0,'YXZ'))); camera.position.copy(o.pos);
+    if(ride.shake>0){ camera.position.x+=(Math.random()-.5)*ride.shake*.16; camera.position.y+=(Math.random()-.5)*ride.shake*.16; camera.position.z+=(Math.random()-.5)*ride.shake*.16; }
     const fv=66+Math.min(16,(o.v||0)*.42); camera.fov+=(fv-camera.fov)*Math.min(1,dt*4); camera.updateProjectionMatrix();
     if(me.root.visible) me.root.visible=false; cam.tx=P.x; cam.ty=P.y+1.45; cam.tz=P.z; return true; };
-  function start(kind){ ride.kind=kind; look.cy=null; HOOK.vehicle={drive:()=>{}}; HOOK.vehicleInter=()=>ride.inter?ride.inter():null; }
+  const VINT=()=>ride.inter?ride.inter():null;
+  function start(kind){ ride.kind=kind; look.cy=null; HOOK.vehicle={drive:()=>{}}; HOOK.vehicleInter=VINT; }
   function end(x,z,y,face){ ride.kind=null; ride.eye=null; ride.inter=null; HOOK.vehicle=null; HOOK.vehicleInter=null; HOOK.camOverride=null; HOOK.camDist=null; me.g.visible=true; me.root.visible=true;
     if(camRef && fov0!==null){ camRef.fov=fov0; camRef.updateProjectionMatrix(); } fov0=null; wind(0);
     P.x=x; P.z=z; P.y=y??W.groundAt(x,z); P.vx=P.vz=0; if(P.vy!==undefined) P.vy=0; if(face!==undefined) P.face=face; me.g.rotation.set(0,P.face,0); me.g.position.set(P.x,P.y,P.z); me.play('idle'); }
@@ -98,14 +100,14 @@ export function makeRides(T){
   function trackMesh(tr,o){ const N=tr.N, RS=5, SS=6, pos=[], nor=[], col=[], idx=[], cR=new THREE.Color(o.rail), cS=new THREE.Color(o.spine), cT=new THREE.Color(o.tie??o.spine), so=o.inv?.55:-.55;
     const ring=(c,L,U,r,n,cc)=>{ for(let k=0;k<n;k++){ const a=k/n*TAU, ca=Math.cos(a), sa=Math.sin(a), nx=L[0]*ca+U[0]*sa, ny=L[1]*ca+U[1]*sa, nz=L[2]*ca+U[2]*sa; pos.push(c[0]+nx*r,c[1]+ny*r,c[2]+nz*r); nor.push(nx,ny,nz); col.push(cc.r,cc.g,cc.b); } };
     // lấy mẫu thưa ở đoạn thẳng / cong nhẹ (2 m), dày ở đoạn cong gắt (1 m) → bớt ~1/3 số tam giác mà vòng lộn vẫn tròn
-    const ix=[]; for(let i=0;i<N;){ ix.push(i); const j=(i+2)%N, t=tr.T[i], t2=tr.T[j], u=tr.U[i], u2=tr.U[j]; i+=(i+2<N && t[0]*t2[0]+t[1]*t2[1]+t[2]*t2[2]>.9976 && u[0]*u2[0]+u[1]*u2[1]+u[2]*u2[2]>.995)?2:1; }
+    const skp=o.railSkip||(()=>false), ix=[]; for(let i=0;i<N;){ if(tr.Z[i]==='dup' || skp(i)){ i++; continue; } ix.push(i); const j=(i+2)%N, t=tr.T[i], t2=tr.T[j], u=tr.U[i], u2=tr.U[j]; i+=(i+2<N && tr.Z[i+1]!=='dup' && tr.Z[j]!=='dup' && t[0]*t2[0]+t[1]*t2[1]+t[2]*t2[2]>.9976 && u[0]*u2[0]+u[1]*u2[1]+u[2]*u2[2]>.995)?2:1; }
     for(const i of ix){ const p=tr.P[i], u=tr.U[i], L=cr(u,tr.T[i]); for(const sg of [-1,1]) ring([p[0]+L[0]*sg*.55,p[1]+L[1]*sg*.55,p[2]+L[2]*sg*.55],L,u,.075,RS,cR); ring([p[0]+u[0]*so,p[1]+u[1]*so,p[2]+u[2]*so],L,u,.24,SS,cS); }
-    const per=RS*2+SS, NI=ix.length; for(let i=0;i<NI;i++){ const a=i*per, b=((i+1)%NI)*per, tube=(off,n)=>{ for(let k=0;k<n;k++){ const k2=(k+1)%n; idx.push(a+off+k,a+off+k2,b+off+k, a+off+k2,b+off+k2,b+off+k); } }; tube(0,RS); tube(RS,RS); tube(RS*2,SS); }
+    const per=RS*2+SS, NI=ix.length; for(let i=0;i<NI;i++){ if(((ix[(i+1)%NI]-ix[i]+N)%N)>3) continue; const a=i*per, b=((i+1)%NI)*per, tube=(off,n)=>{ for(let k=0;k<n;k++){ const k2=(k+1)%n; idx.push(a+off+k,a+off+k2,b+off+k, a+off+k2,b+off+k2,b+off+k); } }; tube(0,RS); tube(RS,RS); tube(RS*2,SS); }
     // tà vẹt: hộp nối 2 ray + bản nối xuống xương sống (mỗi 2 m)
     const obox=(c,ax,ay,az,hx,hy,hz,cc)=>{ const b=pos.length/3, A=[ax,ay,az], Hh=[hx,hy,hz]; for(let f=0;f<6;f++){ const n=f>>1, sg=f&1?1:-1, u2=(n+1)%3, v2=(n+2)%3;
         for(const [su,sv] of [[-1,-1],[1,-1],[1,1],[-1,1]]){ pos.push(c[0]+A[n][0]*sg*Hh[n]+A[u2][0]*su*Hh[u2]+A[v2][0]*sv*Hh[v2], c[1]+A[n][1]*sg*Hh[n]+A[u2][1]*su*Hh[u2]+A[v2][1]*sv*Hh[v2], c[2]+A[n][2]*sg*Hh[n]+A[u2][2]*su*Hh[u2]+A[v2][2]*sv*Hh[v2]); nor.push(A[n][0]*sg,A[n][1]*sg,A[n][2]*sg); col.push(cc.r,cc.g,cc.b); }
         const q=b+f*4; if(sg>0) idx.push(q,q+1,q+2,q,q+2,q+3); else idx.push(q,q+2,q+1,q,q+3,q+2); } };
-    for(let i=0;i<N;i+=3){ const p=tr.P[i], u=tr.U[i], t=tr.T[i], L=cr(u,t); obox([p[0]-u[0]*.06*Math.sign(-so),p[1]-u[1]*.06*Math.sign(-so),p[2]-u[2]*.06*Math.sign(-so)],L,u,t,.6,.035,.07,cT); if(i%6===0) obox([p[0]+u[0]*so*.5,p[1]+u[1]*so*.5,p[2]+u[2]*so*.5],L,u,t,.06,.2,.06,cT);
+    for(let i=0;i<N;i+=3){ if(tr.Z[i]==='dup' || skp(i)) continue; const p=tr.P[i], u=tr.U[i], t=tr.T[i], L=cr(u,t); obox([p[0]-u[0]*.06*Math.sign(-so),p[1]-u[1]*.06*Math.sign(-so),p[2]-u[2]*.06*Math.sign(-so)],L,u,t,.6,.035,.07,cT); if(i%6===0) obox([p[0]+u[0]*so*.5,p[1]+u[1]*so*.5,p[2]+u[2]*so*.5],L,u,t,.06,.2,.06,cT);
       const z=tr.Z[i]; if(z==='lift'||z==='launch'||z==='brake') obox([p[0]+u[0]*.02,p[1]+u[1]*.02,p[2]+u[2]*.02],L,u,t,.14,.05,.5,z==='lift'?cT:new THREE.Color(z==='launch'?0x29d3ff:0xc0862a)); }
     const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setAttribute('normal',new THREE.Float32BufferAttribute(nor,3)); g.setAttribute('color',new THREE.Float32BufferAttribute(col,3)); g.setIndex(idx); g.computeBoundingSphere();
     const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({vertexColors:true, roughness:.42, metalness:.45})); m.castShadow=true; m.userData.noFar=true; gLand.add(m);
@@ -116,24 +118,29 @@ export function makeRides(T){
   // trụ đỡ: cột đơn (thấp) hoặc chữ A (cao) dưới ray; tàu treo: cột bên hông + tay đỡ phía trên ray. Bỏ trụ nào đâm vào đoạn ray khác / lối đi / sân ga.
   function supports(tr,o,others=[]){ const N=tr.N, mat=paint(o.sup,.5,.35), step=LOW?12:9, all=[tr,...others];
     const clearCol=(x,z,y0,y1,i,self)=>{ for(const t2 of all){ for(let j=0;j<t2.N;j+=2){ if(t2===self){ const d=Math.abs(j-i); if(Math.min(d,N-d)<14) continue; } const q=t2.P[j]; if(q[1]>y0+.5 && q[1]<y1+1.2 && Math.hypot(q[0]-x,q[2]-z)<(o.inv?2.6:1.9)) return false; } } return true; };
-    for(let i=4;i<N;i+=step){ const p=tr.P[i], u=tr.U[i], t=tr.T[i], L=cr(u,t), lh=Math.hypot(L[0],L[2])||1, Lh=[L[0]/lh,0,L[2]/lh];
+    const legClear=(a,b,i,self)=>{ const ns=Math.max(8,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1],b[2]-a[2])/1.1)); for(let k=1;k<=ns;k++){ const f=k/(ns+1), x=a[0]+(b[0]-a[0])*f, y=a[1]+(b[1]-a[1])*f, z=a[2]+(b[2]-a[2])*f; for(const t2 of all){ for(let j=0;j<t2.N;j+=2){ if(t2===self){ const d=Math.abs(j-i); if(Math.min(d,N-d)<10) continue; } const q=t2.P[j], dx=q[0]-x, dz=q[2]-z, dy=q[1]-y; if(dx*dx+dz*dz<(o.inv?9:5.3) && dy>(o.inv?-4:-1.6) && dy<(o.inv?1.6:3.2)) return false; } } } return true; };
+    for(let i=4;i<N;i+=step){ const p=tr.P[i], u=tr.U[i], t=tr.T[i], L=cr(u,t), lh=Math.hypot(L[0],L[2])||1, Lh=[L[0]/lh,0,L[2]/lh]; if(tr.Z[i]==='dup' || (o.noSup && o.noSup(p,i))) continue;
       if(o.inv){ if(u[1]<.55) continue; const sg=o.side(L), bx=p[0]+Lh[0]*sg*2.4, bz=p[2]+Lh[2]*sg*2.4, gy=hf(bx,bz), top=p[1]+1.35; if(gy<.3 || top-gy<1 || inBLK(bx,bz) || paved(bx,bz,-.6) || !clearCol(bx,bz,gy,top,i,tr)) continue;
         beam(kL,mat,[bx,gy-.2,bz],[bx,top,bz],top-gy>20?.4:.3,.24); beam(kL,mat,[bx,top-.15,bz],[p[0]+u[0]*.6,p[1]+u[1]*.6,p[2]+u[2]*.6],.2,.16); kF.add(boxM(1.1,.3,1.1),M.conc,bx,gy+.1,bz); circles.push({x:bx,z:bz,r:.5}); continue; }
       if(u[1]<.3) continue; const ax=p[0]-u[0]*.78, ay=p[1]-u[1]*.78, az=p[2]-u[2]*.78, gy=hf(ax,az), h=ay-gy; if(gy<.3 || h<.9 || inBLK(ax,az) || paved(ax,az,-.6)) continue;
-      if(h>15){ const sp=Math.min(9,h*.17), f1=[ax+Lh[0]*sp,0,az+Lh[2]*sp], f2=[ax-Lh[0]*sp,0,az-Lh[2]*sp]; f1[1]=hf(f1[0],f1[2]); f2[1]=hf(f2[0],f2[2]); if(f1[1]<.3 || f2[1]<.3 || !clearCol(ax,az,gy+h*.3,ay-2,i,tr) || paved(f1[0],f1[2],-.5) || paved(f2[0],f2[2],-.5)) continue;
+      if(h>15){ const sp=Math.min(9,h*.17), f1=[ax+Lh[0]*sp,0,az+Lh[2]*sp], f2=[ax-Lh[0]*sp,0,az-Lh[2]*sp]; f1[1]=hf(f1[0],f1[2]); f2[1]=hf(f2[0],f2[2]); if(f1[1]<.3 || f2[1]<.3 || !legClear(f1,[ax,ay,az],i,tr) || !legClear(f2,[ax,ay,az],i,tr) || paved(f1[0],f1[2],-.5) || paved(f2[0],f2[2],-.5)) continue;
         const r=h>40?.42:.32; for(const f of [f1,f2]){ beam(kL,mat,[f[0],f[1]-.2,f[2]],[ax,ay,az],r,r*.75); kF.add(boxM(1.2,.3,1.2),M.conc,f[0],f[1]+.1,f[2]); circles.push({x:f[0],z:f[2],r:.55}); }
         for(const k of h>34?[.3,.55,.78]:[.45,.75]){ const a=[lerp(f1[0],ax,k),lerp(f1[1],ay,k),lerp(f1[2],az,k)], b=[lerp(f2[0],ax,k),lerp(f2[1],ay,k),lerp(f2[2],az,k)]; beam(kL,mat,a,b,.13,.13,5); } continue; }
       if(!clearCol(ax,az,gy,ay-1.5,i,tr)) continue; beam(kL,mat,[ax,gy-.2,az],[ax,ay,az],h>8?.3:.22,h>8?.24:.2); kF.add(boxM(.9,.3,.9),M.conc,ax,gy+.1,az); circles.push({x:ax,z:az,r:.42}); } }
   // rào dọc các đoạn ray sát đất (người không bao giờ đi vào đường tàu)
-  function lowFence(tr,lim,skip){ const N=tr.N; let run=null; const flush=()=>{ if(run && run.length>1) for(const sg of [-1,1]){ const pts=[]; for(const i of run){ const p=tr.P[i], L=cr(tr.U[i],tr.T[i]), lh=Math.hypot(L[0],L[2])||1; pts.push([p[0]+L[0]/lh*sg*1.75,p[2]+L[2]/lh*sg*1.75]); }
+  function lowFence(tr,lim,skip){ const N=tr.N; let run=null; const flush=()=>{ if(run && run.length>1) for(const sg of [-1,1]){ const pts=[]; for(const i of run){ const p=tr.P[i], L=cr(tr.U[i],tr.T[i]), lh=Math.hypot(L[0],L[2])||1; const off=1.75+1.9*Math.hypot(tr.U[i][0],tr.U[i][2]); pts.push([p[0]+L[0]/lh*sg*off,p[2]+L[2]/lh*sg*off]); }
         fence(pts,{h:1.3, msg:'⚠️ Khu vực đường ray – không vào. Lên tàu ở sân ga'}); } run=null; };
-    for(let i=0;i<=N;i+=3){ const j=i%N; if(tr.P[j][1]<lim && !skip(j,tr.P[j])){ (run=run||[]).push(j); } else flush(); } flush(); }
+    for(let i=0;i<=N;i+=3){ const j=i%N; if(tr.P[j][1]<lim && tr.Z[j]!=='dup' && !skip(j,tr.P[j])){ (run=run||[]).push(j); } else flush(); } flush(); }
   // hình toa tàu (tô màu theo đỉnh). inv: tàu treo (ghế treo dưới ray); riders: có hình khách ngồi sẵn
   function carGeo(o,riders,ps=1){ const parts=[], cc=new THREE.Color(), add=(g,c,x=0,y=0,z=0,rx=0,ry=0,rz=0)=>{ _mx.compose(_a.set(x,y,z),_qa.setFromEuler(_eu.set(rx,ry,rz,'YXZ')),_one); g.applyMatrix4(_mx); cc.set(c); const n=g.attributes.position.count, a=new Float32Array(n*3); for(let i=0;i<n;i++){ a[i*3]=cc.r; a[i*3+1]=cc.g; a[i*3+2]=cc.b; } g.setAttribute('color',new THREE.BufferAttribute(a,3)); parts.push(g); };
     const B=(w,h,d)=>new THREE.BoxGeometry(w,h,d), sy=o.inv?-1.9:.5, SH=[0xd94f4f,0x3f8fd9,0x4fb86a,0xe0b23a];
     if(o.inv){ add(B(1.25,.34,2.35),0x23272e,0,-.3,0); add(B(.5,.5,.9),o.body,0,-.3,1.3,.5); for(const z of [.5,-.6]){ add(B(.14,1.2,.14),0x23272e,0,-1.05,z-.28); add(B(1.5,.12,.12),0x23272e,0,-1.0,z-.28); }
       for(const sx of [-1,1]) add(B(.06,.5,1.7),o.body2,sx*.86,-1.35,-.1,0,0,sx*.5); }
-    else { add(B(1.3,.26,2.4),0x23272e,0,.2,0); add(B(1.46,.1,2.4),o.body,0,.36,0); for(const sx of [-1,1]) add(B(.09,.52,2.4),o.body,sx*.73,.62,0); add(B(1.46,.5,.22),o.body,0,.56,1.2,-.25); add(B(1.3,.1,.5),o.body2,0,.78,1.02,.3); add(B(1.46,.5,.12),o.body2,0,.6,-1.2); }
+    else { add(B(1.3,.26,2.4),0x23272e,0,.2,0); add(B(1.46,.1,2.4),o.body,0,.36,0); for(const sx of [-1,1]) add(B(.09,.52,2.4),o.body,sx*.73,.62,0); add(B(1.46,.5,.22),o.body,0,.56,1.2,-.25); add(B(1.3,.1,.5),o.body2,0,.78,1.02,.3); add(B(1.46,.5,.12),o.body2,0,.6,-1.2);
+      if(o.style==='jeep'){ for(const sx of [-1,1]) for(const z of [1.05,-1.05]) add(B(.07,1.5,.07),0x23272e,sx*.84,1.62,z); for(const sx of [-1,1]) add(B(.07,.07,2.2),0x23272e,sx*.84,2.36,0); for(const z of [1.05,0,-1.05]) add(B(1.74,.07,.07),0x23272e,0,2.36,z); add(B(1.5,.12,.12),0x23272e,0,.5,1.38); }
+      if(o.style==='buggy'){ add(B(1.6,1.5,.14),o.body2,0,1.25,-1.24,.12); for(const sx of [-1,1]) add(B(.12,1.05,.9),o.body2,sx*.79,1.05,-.82); add(B(1.5,.1,.46),o.body2,0,.93,1.24,.55); for(const sx of [-1,1]) add(new THREE.SphereGeometry(.11,8,6),0xfff2a0,sx*.5,.62,1.36); }
+      if(o.style==='boat'){ add(B(1.8,.4,3.1),o.body,0,.34,0); { const g=new THREE.ConeGeometry(.9,1.5,4); g.rotateY(Math.PI/4); g.scale(1,1,.45); add(g,o.body,0,.34,2.25,Math.PI/2); } add(B(1.9,.06,3.2),o.body2,0,.56,0); add(B(.1,2.5,.1),0x6a4a30,0,2.1,-1.3); add(B(1.5,1.4,.04),0xf3ead7,0,2.55,-1.36); add(new THREE.SphereGeometry(.09,8,6),0xfff2a0,0,.68,2.6); }   /* mũi thuyền thấp dưới tầm mắt */
+      if(o.style==='mine'){ for(const z of [-.8,0,.8]) for(const sx of [-1,1]) add(B(.11,.56,.1),0x2b2b2b,sx*.74,.62,z); add(B(1.5,.08,.1),0x2b2b2b,0,.9,1.22); } }
     [.42,-.72].forEach((z,r)=>{ for(const sx of [-1,1]){ const x=sx*.36; add(B(.56,.12,.5),0x2a2e36,x,sy,z); add(B(.56,.86,.12),0x2a2e36,x,sy+.47,z-.3,-.12); add(B(.34,.2,.1),0x2a2e36,x,sy+1.0,z-.36);
         const has=!!riders; if(riders || r>0 || sx!==ps){ for(const e of [-1,1]) add(B(.055,.62,.055),0x30343c,x+e*.2,sy+.62,z-.02,.25); add(B(.44,.13,.11),0xf2c230,x,sy+.36,z+.14); }
         if(has){ const s=SH[(r*2+(sx>0?1:0)+(o.seed||0))%4]; add(B(.4,.52,.24),s,x,sy+.42,z-.1); add(new THREE.SphereGeometry(.125,8,6),0xe8b894,x,sy+.84,z-.1); add(B(.36,.14,.4),0x30343c,x,sy+.12,z+.12); for(const e of [-1,1]) add(B(.075,.42,.075),s,x+e*.25,sy+.8,z-.04,-.25,0,e*-.3); } } });
@@ -144,48 +151,56 @@ export function makeRides(T){
 
   /* ============================== TÀU LƯỢN (dùng chung cho 3 đường) ============================== */
   const COASTERS=[];
-  function coaster(o){ const tr=o.tr, L=tr.L, NC=LOW?5:6, co={o, tr, s:tr.marks.stop, v:0, phase:'dock', t:8+COASTERS.length*7, lap:0, riding:false, seq:null, sel:0, vmax:0, time:0, gate:0};
+  function coaster(o){ const tr=o.tr, L=tr.L, NC=o.nc||(LOW?5:6), co={o, tr, dir:1, ci:0, s:tr.marks.stop, v:0, phase:'dock', t:8+COASTERS.length*7, lap:0, riding:false, seq:null, sel:0, vmax:0, time:0, gate:0};
     const tracks=o.trB?[tr,o.trB]:[tr]; tracks.forEach((t2,k)=>{ trackMesh(t2,k?{...o,...o.B}:o); });
     tracks.forEach((t2,k)=>supports(t2,{...o, ...(k?o.B:{}), side:k?o.sideB:o.side}, o.near||[]));
-    co.trains=tracks.map((t2,k)=>{ const oo=k?{...o,...o.B,seed:2}:o, a=new THREE.InstancedMesh(carGeo(oo,0,o.seatSide(k)),carMat,1), b=new THREE.InstancedMesh(carGeo(oo,1),carMat,NC-1); for(const im of [a,b]){ im.frustumCulled=false; im.castShadow=true; im.userData.dynamic=true; gMid.add(im); } return {a,b,tr:t2}; });
+    co.trains=tracks.map((t2,k)=>{ const oo=k?{...o,...o.B,seed:2}:o, a=new THREE.InstancedMesh(carGeo(oo,0,o.seatSide(k)),carMat,1), b=new THREE.InstancedMesh(carGeo(oo,1),carMat,Math.max(1,NC-1)); b.count=NC-1; for(const im of [a,b]){ im.frustumCulled=false; im.castShadow=true; im.userData.dynamic=true; gMid.add(im); } return {a,b,tr:t2}; });
     if(o.head){ co.head=new THREE.Mesh(o.head(),carMat); co.head.userData.dynamic=true; co.head.matrixAutoUpdate=false; co.head.castShadow=true; gMid.add(co.head); }
     const fr={p:[0,0,0],t:[0,0,0],u:[0,0,0]}, hip=V3(), eye=V3(), tv=V3(), uv=V3(), lv=V3();
-    const place=()=>{ for(const tn of co.trains){ for(let i=0;i<NC;i++){ frameAt(tn.tr,co.s-1.25-i*2.6,fr); const Lx=cr(fr.u,fr.t); _mx.set(Lx[0],fr.u[0],fr.t[0],fr.p[0], Lx[1],fr.u[1],fr.t[1],fr.p[1], Lx[2],fr.u[2],fr.t[2],fr.p[2], 0,0,0,1);
+    const cus=tr.cusps||[], TLN=2.6*(NC-1);
+    const place=()=>{ const k=co.dir; for(const tn of co.trains){ for(let i=0;i<NC;i++){ frameAt(tn.tr,co.s-1.25-(k>0?i:NC-1-i)*2.6,fr); const Lx=cr(fr.u,fr.t); let cg=k, sg=0; if(i===0 && co.gz){ cg=Math.cos(co.gz)*k; sg=Math.sin(co.gz)*k; }
+          _mx.set(Lx[0]*cg-fr.t[0]*sg,fr.u[0],fr.t[0]*cg+Lx[0]*sg,fr.p[0], Lx[1]*cg-fr.t[1]*sg,fr.u[1],fr.t[1]*cg+Lx[1]*sg,fr.p[1], Lx[2]*cg-fr.t[2]*sg,fr.u[2],fr.t[2]*cg+Lx[2]*sg,fr.p[2], 0,0,0,1);
           if(i===0){ tn.a.setMatrixAt(0,_mx); if(co.head && tn===co.trains[0]) co.head.matrix.copy(_mx); } else tn.b.setMatrixAt(i-1,_mx); } tn.a.instanceMatrix.needsUpdate=true; tn.b.instanceMatrix.needsUpdate=true; } };
     // khung ghế của người chơi (toa đầu, hàng đầu, ghế sát sân ga)
-    const seatFrame=()=>{ const t2=co.trains[co.sel].tr; frameAt(t2,co.s-1.25+.42,fr); const Lx=cr(fr.u,fr.t), sx=o.seatSide(co.sel)*.36, so=o.inv?-1.78:.62; tv.fromArray(fr.t).normalize(); uv.fromArray(fr.u).normalize(); lv.fromArray(Lx);
+    const seatFrame=()=>{ const t2=co.trains[co.sel].tr, k=co.dir; if(o.gaze){ frameAt(t2,co.s-1.25-(k>0?0:TLN),fr); const Lx=cr(fr.u,fr.t), cg=Math.cos(co.gz||0)*k, sg=Math.sin(co.gz||0)*k, sx=o.seatSide(co.sel)*.36, so=.62; uv.fromArray(fr.u).normalize();
+        lv.set(Lx[0]*cg-fr.t[0]*sg,Lx[1]*cg-fr.t[1]*sg,Lx[2]*cg-fr.t[2]*sg); tv.set(fr.t[0]*cg+Lx[0]*sg,fr.t[1]*cg+Lx[1]*sg,fr.t[2]*cg+Lx[2]*sg); hip.fromArray(fr.p).addScaledVector(lv,sx).addScaledVector(tv,.42).addScaledVector(uv,so); eye.copy(hip).addScaledVector(uv,.74).addScaledVector(tv,.12); return; }
+      frameAt(t2,co.s-1.25-(k>0?0:TLN)+.42*k,fr); const Lx=cr(fr.u,fr.t).map(v=>v*k), sx=o.seatSide(co.sel)*.36, so=o.inv?-1.78:.62; tv.fromArray(fr.t).multiplyScalar(k).normalize(); uv.fromArray(fr.u).normalize(); lv.fromArray(Lx);
       hip.set(fr.p[0]+Lx[0]*sx+fr.u[0]*so, fr.p[1]+Lx[1]*sx+fr.u[1]*so, fr.p[2]+Lx[2]*sx+fr.u[2]*so); eye.copy(hip).addScaledVector(uv,.74).addScaledVector(tv,.12); };
     const setHarness=k=>{ harness.visible=!(cam.fpv && k>=1); _mx.makeBasis(lv,uv,tv); _qa.setFromRotationMatrix(_mx).multiply(_qb.setFromEuler(_eu.set(-2.3+k*1.7,0,0))); _mx.compose(_a.copy(hip).addScaledVector(uv,.98).addScaledVector(tv,-.2),_qa,_one); harness.matrix.copy(_mx); };
     const eyeFn=()=>({pos:eye, t:tv, u:uv, v:co.v});
     function beginBoard(sel){ co.sel=sel; co.t=Math.max(co.t,9); start(o.id); co.seq={k:'walk', t:0}; toast(`${o.icon} Tàu đang đợi – nhân vật tự bước lên hàng ghế đầu…`, 2600); }
     co.board=(sel=0)=>{ if(co.phase!=='dock' || co.seq) return toast(`${o.icon} Tàu đang chạy – chuyến kế tiếp vào ga sau ~${Math.ceil(Math.max(3,(L-co.lap)/14))} giây.`, 2400);
       if(!tix[o.id]) return pay(o.price, `🎟 Vé <b>${o.name}</b>`, ()=>{ tix[o.id]=true; beginBoard(sel); }); beginBoard(sel); };
-    co.update=(dt)=>{ const me_on=ride.kind===o.id;
+    co.update=(dt)=>{ const me_on=ride.kind===o.id; if(o.gaze){ const want=co.phase!=='dock'?o.gaze(co):0; co.gz=(co.gz||0)+(want-(co.gz||0))*Math.min(1,dt*(o.gazeK||2.4)); if(Math.abs(co.gz)<.002 && !want) co.gz=0; }
       if(co.phase==='dock'){ co.t-=dt; co.gate=Math.min(1,co.gate+dt*2); const waiting=!ride.kind && tix[o.id] && o.inZone(P.x,P.z);
         if(co.seq){ const q=co.seq, bp=o.boardPt(co.sel); q.t+=dt; seatFrame();
           if(q.k==='walk'){ if(walkTo(bp[0],bp[1],o.yP,dt)){ q.k='in'; q.t=0; q.from=V3(bp[0],o.yP+(me.h||1.75)*.53,bp[1]); } }
           else if(q.k==='in'){ const k=Math.min(1,q.t/.6), e=k*k*(3-2*k); _a.copy(q.from).lerp(hip,e); _a.y+=Math.sin(k*Math.PI)*.22; sit(_a,tv,uv); setHarness(0); if(k>=1){ q.k='lock'; q.t=0; tone(520,300,.25,.1,'square'); toast('🔒 Đai an toàn đang hạ xuống… giữ chặt nhé!', 2200); } }
-          else if(q.k==='lock'){ sit(hip,tv,uv); setHarness(Math.min(1,q.t/1.1)); if(q.t>1.5){ co.seq=null; co.riding=true; co.t=Math.min(co.t,o.launch?3.2:1.2); co.vmax=0; co.time=0; if(co.op) co.op.play('agree'); ride.eye=eyeFn;
+          else if(q.k==='lock'){ sit(hip,tv,uv); setHarness(Math.min(1,q.t/1.1)); if(q.t>1.5){ co.seq=null; co.riding=true; co.t=Math.min(co.t,o.launch?3.2:1.2); co.vmax=0; co.time=0; if(co.op) co.op.play('agree'); ride.eye=eyeFn; if(o.fpv && !cam.fpv && window.__qcView){ co.fpvSet=true; window.__qcView(); }
                 toast(o.launch?'🚀 Hệ thống phóng từ trường sẵn sàng… 3 · 2 · 1…':'👍 Nhân viên ra hiệu an toàn – XUẤT PHÁT!', 2600); if(o.launch){ for(let i=0;i<3;i++) setTimeout(()=>tone(660,660,.12,.12,'square'),i*900+300); } } }
           else if(q.k==='out'){ if(q.t<.8){ sit(hip,tv,uv); setHarness(1-q.t/.8); } else { harness.visible=false; const k=Math.min(1,(q.t-.8)/.6), e=k*k*(3-2*k); _a.copy(hip).lerp(q.to,e); _a.y+=Math.sin(k*Math.PI)*.2; sit(_a,tv,uv);
-              if(k>=1){ co.seq=null; end(bp[0],bp[1],o.yP,P.face); toast(`${o.icon} ${o.name}: ${Math.round(co.time)} giây · tốc độ cao nhất ${Math.round(co.vmax*3.6)} km/h. Ra theo biển "LỐI RA" ở cuối sân ga nhé!`, 5200); } } }
+              if(k>=1){ co.seq=null; end(bp[0],bp[1],o.yP,P.face); if(co.fpvSet){ co.fpvSet=false; if(cam.fpv && window.__qcView) window.__qcView(); } if(o.onEnd) o.onEnd(co); toast(o.endMsg?o.endMsg(co):`${o.icon} ${o.name}: ${Math.round(co.time)} giây · tốc độ cao nhất ${Math.round(co.vmax*3.6)} km/h. Ra theo biển "LỐI RA" ở cuối sân ga nhé!`, 5200); } } }
           if(me_on && co.seq && co.seq.k!=='walk'){ chase.pos.copy(hip).addScaledVector(tv,-5).addScaledVector(lv,o.seatSide(co.sel)*3.2).add(_b.set(0,2.2,0)); chase.look.copy(hip); HOOK.camOverride=chase; } }
         else if(co.riding){ seatFrame(); sit(hip,tv,uv); setHarness(1); }
-        if(!co.seq && co.t<=0 && !(waiting && co.t>-40)){ co.phase='run'; co.lap=0; co.held=false; co.v=.6; if(Math.hypot(P.x-tr.P[0][0],P.z-tr.P[0][2])<120) noise(.07,1.4,200,700); } }
+        if(!co.seq && co.t<=0 && !(waiting && co.t>-40) && !(o.idle && !co.riding)){ co.phase='run'; co.lap=0; co.held=false; co.dir=1; co.ci=0; co.si=0; co.v=.6; if(o.onGo) o.onGo(co); if(Math.hypot(P.x-tr.P[0][0],P.z-tr.P[0][2])<120) noise(.07,1.4,200,700); } }
       else { co.gate=Math.max(0,co.gate-dt*2);
-        if(co.phase==='hold'){ co.t-=dt; if(co.t<=0){ co.phase='run'; co.v=2; if(co.riding) noise(.25,1.2,300,2600); } }
+        if(co.phase==='hold'){ co.t-=dt; if(co.t<=0){ co.phase='run'; co.v=co.hv||2; co.hv=0; if(co.riding && !o.stops) noise(.25,1.2,300,2600); } }
+        else if(co.phase==='cusp'){ co.t-=dt; if(co.t<=0){ co.s+=TLN; co.lap+=TLN; co.dir=-co.dir; co.ci++; co.phase='run'; co.v=.5; } }   /* đường cụt: đổi chiều chạy */
         else { const rem=L-co.lap; if(rem<16){ co.v=Math.max(.45,Math.min(co.v,rem*.6+.25)); const d=Math.min(rem,co.v*dt); co.s+=d; co.lap+=d;
             if(L-co.lap<.04){ co.s=tr.marks.stop; co.v=0; co.phase='dock'; co.t=o.dwell||16; if(co.riding){ co.riding=false; tix[o.id]=false; seatFrame(); const bp=o.boardPt(co.sel); co.seq={k:'out', t:0, to:V3(bp[0],o.yP+(me.h||1.75)*.53,bp[1])}; wind(0); tone(300,520,.25,.1,'square'); } } }
-          else { const st={s:co.s,v:co.v}; physStep(tr,st,dt,o.cfg); co.lap+=st.s-co.s; co.s=st.s; co.v=st.v;
+          else { const st={s:co.s,v:co.v}; physStep(tr,st,dt,o.cfg); co.lap+=st.s-co.s; co.s=st.s; co.v=st.v; co.zone=st.zone;
+            if(co.ci<cus.length){ const r2=cus[co.ci]-co.s; if(r2<8){ const v2=Math.min(co.v,Math.max(.4,r2*.7+.3)), d=(co.v-v2)*dt; co.s-=d; co.lap-=d; co.v=v2; } if(cus[co.ci]-co.s<.05){ co.phase='cusp'; co.t=(o.cuspHold||[])[co.ci]||3; co.v=0; if(o.onCusp) o.onCusp(co,co.ci); } }
+            if(o.stops && co.si<o.stops.length && co.s>=o.stops[co.si].s){ const sp=o.stops[co.si++]; co.phase='hold'; co.t=sp.t; co.hv=sp.v||1.2; co.v=0; if(sp.on) sp.on(co); }
             if(o.hold && !co.held && co.lap>=o.hold-tr.marks.stop){ co.held=true; co.phase='hold'; co.t=3.5; co.v=0; if(co.riding) toast('😱 Treo lơ lửng trên đỉnh 60 m… nhìn thẳng xuống đất!', 3000); }
             if(co.riding && st.zone==='lift' && Math.floor(co.lap/1.4)!==Math.floor((co.lap-co.v*dt)/1.4)) tone(180,120,.05,.07,'square'); } }
         if(co.riding){ seatFrame(); sit(hip,tv,uv); setHarness(1); co.time+=dt; co.vmax=Math.max(co.vmax,co.v); wind(co.v/34);
-          if(o.inv) chase.pos.copy(hip).addScaledVector(tv,-7).addScaledVector(lv,o.seatSide(co.sel)*3.4).addScaledVector(uv,-.5).add(_b.set(0,.9,0)); else chase.pos.copy(hip).addScaledVector(tv,-7.5).addScaledVector(uv,2.4).add(_b.set(0,1.4,0));
-          chase.look.copy(hip).addScaledVector(tv,6); chase.k=8; HOOK.camOverride=chase;
+          if(o.inv) chase.pos.copy(hip).addScaledVector(tv,-7).addScaledVector(lv,o.seatSide(co.sel)*3.4).addScaledVector(uv,-.5).add(_b.set(0,.9,0)); else { const cm=o.cam||[7.5,2.4,1.4]; chase.pos.copy(hip).addScaledVector(tv,-cm[0]).addScaledVector(uv,cm[1]).add(_b.set(0,cm[2],0)); }
+          chase.look.copy(hip).addScaledVector(tv,o.cam?3:6); chase.k=8; HOOK.camOverride=chase;
           if(co.v>24 && !co.scr){ co.scr=true; noise(.22,1.5,500,2800); } if(co.v<12) co.scr=false; } }
       if(co.riding && me_on && !cam.fpv && !me.root.visible) me.root.visible=true;
       if(co.phase!=='dock' || !co.placed || co.riding || co.seq){ place(); co.placed=true; }
-      if(co.gates && co.gate!==co.gateShown){ co.gateShown=co.gate; co.gates(co.gate); } };
+      if(co.gates && co.gate!==co.gateShown){ co.gateShown=co.gate; co.gates(co.gate); }
+      if(o.tick) o.tick(co,dt,me_on && co.riding); if(me_on && co.riding && o.dark && o.dark(co)){ darkWant=o.darkCol||0x050608; darkFar=o.darkFar||55; } };
     place(); COASTERS.push(co); return co; }
 
   // GA BÊN (tàu ngồi): sân ga bên trái hướng chạy, cầu thang sau (vào) + trước (ra), mái che, khu xếp hàng + cổng soát vé, lối ra một chiều
@@ -207,7 +222,7 @@ export function makeRides(T){
     { const [x,z]=at(5.0,9.7); circles.push({x,z,r:1.1, y0:yP-.3, y1:yP+3}); const [ox,oz]=at(4.2,7.6), d=at(0,7.6); o.op=npc(ox,yP,oz,Math.atan2(d[0]-ox,d[1]-oz),'nhân viên vận hành '+o.name,20+COASTERS.length); }
     // cửa chắn sân ga (mở khi tàu đỗ)
     const NG=10, gg=new THREE.BoxGeometry(.05,.75,.95); gg.translate(0,.45,.475); const gim=new THREE.InstancedMesh(gg,paint(o.gateCol||0xf2c230,.4,.5),NG); gim.frustumCulled=false; gim.userData.dynamic=true; gNear.add(gim);
-    const gates=k=>{ for(let i=0;i<NG;i++){ const lz=-9.5+i*2.05, [x,z]=at(1.18,lz); _qa.setFromEuler(_eu.set(0,ry-k*1.45,0)); _mx.compose(_a.set(x,yP,z),_qa,_one); gim.setMatrixAt(i,_mx); } gim.instanceMatrix.needsUpdate=true; }; gates(0);
+    const gates=k=>{ for(let i=0;i<NG;i++){ const lz=-9.5+i*2.05, [x,z]=at(1.18,lz); _qa.setFromEuler(_eu.set(0,ry+k*1.45,0)); _mx.compose(_a.set(x,yP,z),_qa,_one); gim.setMatrixAt(i,_mx); } gim.instanceMatrix.needsUpdate=true; }; gates(0);
     for(let i=0;i<=NG;i++){ put(kN,boxM(.08,1.0,.08),railM2,1.18,yP+.5,-9.5+i*2.05-.05); }
     const [ex,ez]=at(7,-12.5), en=entry({...o, x:ex, z:ez, ry}); BLK.push((()=>{ const xs=[at(-4,-20),at(16,-20),at(-4,zf+4),at(16,zf+4)]; return [Math.min(...xs.map(p=>p[0])), Math.max(...xs.map(p=>p[0])), Math.min(...xs.map(p=>p[1])), Math.max(...xs.map(p=>p[1]))]; })());
     const bp=at(1.75,6.97), ip=at(2.6,6.97);
@@ -244,7 +259,7 @@ export function makeRides(T){
     for(let j=0;j<3;j++){ const h=yP-(j+1)*.15, x=-134+(j+.5)*.4; kF.add(boxM(.4,h-G0+.3,6.4),M.conc,x,(h+G0-.3)/2,620); addPlat(x,620,0,.21,3.2,h); }
     for(const e of [-1,1]){ kF.add(flat(planeM(20,.22)),paint(0xf2c230,.5),-144,yP+.012,620+e*3.05); fence([[-154,620+e*3.4],[-134,620+e*3.4]],{vis:false, y0:yP-.4, y1:yP+3, msg:'⚠️ Mép sân ga – đợi tàu vào ga rồi bấm E để lên tàu'});
       fence([[-134.2,620+e*3.3],[-83.5,620+e*3.3]],{h:2.1, msg:'⚠️ Tàu treo chạy sát hành lang – không trèo qua rào'}); fence([[-158,620+e*6.1],[-104,620+e*6.1]],{h:1.4, msg:'⚠️ Khu vực đường ray – không vào'});
-      fence([[-85.7,620+e*22],[-86.5,620+e*16],[-92,620+e*8.6],[-104,620+e*6.1]],{h:1.6, msg:'⚠️ Khu vực đường ray – không vào'}); fence([[-82.2,620+e*22],[-82.2,620+e*8],[-83.5,620+e*3.3]],{h:1.6, msg:'⚠️ Khu vực đường ray – không vào'}); }
+      { const pts=[[-85.7,620+e*22]]; for(let i=0;i<TRE.N;i+=3){ const p=TRE.P[i], t=TRE.T[i], lh=Math.hypot(t[0],t[2])||1; if((TRE.Z[i]==='brake'||TRE.Z[i]==='station') && p[2]>598.5 && p[2]<615.3 && p[0]>-103 && p[0]<-83) pts.push([p[0]-t[2]/lh*2.7,620+e*(620-(p[2]+t[0]/lh*2.7))]); } pts.push([-104,620+e*6.1]); fence(pts,{h:1.3, msg:'⚠️ Khu vực đường ray – không vào'}); }   /* rào bám theo đúng đường cong ray, cách 2,7 m (trước đây cắt góc → sát chân người ngồi tàu treo) */ fence([[-82.2,620+e*22],[-82.2,620+e*8],[-83.5,620+e*3.3]],{h:1.6, msg:'⚠️ Khu vực đường ray – không vào'}); }
     fence([[-154,616.6],[-154,623.4]],{y:yP}); fence([[-132.6,620],[-87,620]],{h:1.1});
     gateLine({...o, x:-83.6, z:620, ry:Math.PI/2, n:2, mz:6.5, mcx:0, bx:6.8, bz:6}); exitGate([-83.6,620.1],[-83.6,623.3],(x,z)=>x<-83.5 && x>-134 && z>620 && z<623.4,o.name);
     for(const x of [-152,-144,-136]){ kF.add(cylM(.2,.24,6.4,10),paint(0xe9eef5,.4,.3),x,G0+3.5,620); circles.push({x,z:620,r:.3}); } kF.add(boxM(23,.34,17),paint(o.roof,.55,.1),-144,G0+6.85,620); for(const x of [-150,-144,-138]) kN.add(boxM(.3,.06,1.2),M.lampCool,x,G0+6.64,620);
@@ -354,9 +369,19 @@ export function makeRides(T){
     placeW(0); }
 
   /* ============================== CẬP NHẬT ============================== */
-  function update(dt,tt,near){ if(!near && !ride.kind) return; updGates(dt); for(const e of EXITS) e.sg.y0=e.inside(P.x,P.z)?1e9:undefined;
-    for(const co of COASTERS) co.update(dt); TW.update(dt); WH.update(dt,tt);
-    if(ride.kind && ride.seated && W.applyPose) W.applyPose('sit'); if(!ride.kind && harness.visible) harness.visible=false; }
+  // BÓNG TỐI trong hầm/hang (chỉ khi người chơi đang ngồi trên tàu ở trong đó): kéo sương mù của cảnh về gần + tối, ra khỏi hầm thì trả lại như cũ
+  let darkWant=0, darkK=0, darkFar=55, fogSave=null; const DC=new THREE.Color();
+  function updDark(dt){ const f=W.scene && W.scene.fog; if(!f) return; darkK+=((darkWant?1:0)-darkK)*Math.min(1,dt*3.5); if(darkWant) DC.set(darkWant);
+    if(darkK<.01){ if(fogSave){ f.color.copy(fogSave.c); f.near=fogSave.n; f.far=fogSave.f; fogSave=null; } darkK=0; return; }
+    if(!fogSave) fogSave={c:f.color.clone(), n:f.near, f:f.far}; f.color.copy(fogSave.c).lerp(DC,darkK); f.near=lerp(fogSave.n,darkFar*.14,darkK); f.far=lerp(fogSave.f,darkFar,darkK); }
+  const EXTRA=[];
+  function update(dt,tt,near){ if(!near && !ride.kind){ if(darkK>0){ darkWant=0; updDark(1); } return; } updGates(dt); for(const e of EXITS) e.sg.y0=e.inside(P.x,P.z)?1e9:undefined; darkWant=0; if(ride.shake>0) ride.shake=Math.max(0,ride.shake-dt*1.2);
+    for(const co of COASTERS) co.update(dt); TW.update(dt); WH.update(dt,tt); for(const f of EXTRA) f(dt,tt); updDark(dt);
+    if(ride.kind && ride.seated && W.applyPose) W.applyPose('sit'); if(!ride.kind && harness.visible) harness.visible=false;
+    /* GỐC LỖI "mắt tụt lại sau xe": vòng khung hình của game đặt camera TRƯỚC khi trò chơi di chuyển (updateCamera → HOOK.onFrame) → ở góc nhìn thứ nhất mắt luôn trễ 1 khung (v·dt ≈ 0,5–1,2 m lúc 100 km/h) và lọt vào lưng ghế. Đặt lại camera ngay sau khi mọi trò đã cập nhật. */
+    if(cam.fpv && ride.eye && !HOOK.scope && W.camera) HOOK.fpvCam(0,W.camera);
+    if(ride.kind && HOOK.vehicle) HOOK.vehicleInter=VINT; }   /* life.js xoá HOOK.vehicleInter mỗi khung khi không cưỡi xe → đặt lại để nút E (bắn súng, quay nhanh, bỏ cuộc…) luôn hiện */
   const blocked=(x,z)=>inBLK(x,z) || CELL.has(cellKey(x,z)) || CELL.has(cellKey(x+4,z)) || CELL.has(cellKey(x-4,z)) || CELL.has(cellKey(x,z+4)) || CELL.has(cellKey(x,z-4));
-  return {update, blocked, ride, tix, COASTERS, TW, WH, tracks:{dragon:TRD, space:TRS, eagle:TRE, eagleB:TREB}};
+  const kit={coaster, sideStation, entry, gateLine, exitGate, lowFence, beam, beamG, npc, sit, walkTo, start, end, tone, noise, wind, chime, chase, ride, tix, BLK, CELL, cellKey, paint, cr, carMat, EXTRA, ALL, V3, railM2, inBLK, setDark:(c,far)=>{ darkWant=c; darkFar=far||55; }, carGeo, COASTERS, updDarkNow:()=>updDark(1)};
+  return {update, blocked, ride, tix, COASTERS, TW, WH, kit, tracks:{dragon:TRD, space:TRS, eagle:TRE, eagleB:TREB}};
 }

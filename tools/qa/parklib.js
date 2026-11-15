@@ -1,8 +1,10 @@
-// thư viện thử công viên: window.__pt
-(()=>{ const q=__qc, W=q.W, P=q.P, K=q.K;
+// thư viện thử Công viên Kỳ Quan (nạp qua CDP): window.__pt
+//  go/path: đi bộ thật bằng phím W · act: bấm tương tác theo nhãn · payOk: bấm nút "Trả …"
+//  probe: RÀ "ĐẦU NGƯỜI CHƠI CHẠM VẬT THỂ" – đặt 2 camera tí hon ở vị trí mắt (nhìn tới + nhìn lên, góc 150°, chỉ vẽ trong tầm 0,45 m);
+//         (4 hướng: trước, trên, trái, phải – góc 90°, tầm 0,42 m) có điểm ảnh nào được vẽ = có vật thể nằm trong khối ~0,4 m quanh đầu (trần hầm, xà, vách đá, cột, mái…). Chạy ở góc nhìn thứ nhất khi đang ngồi trên trò chơi.
+(()=>{ const q=__qc, W=q.W, P=q.P, K=q.K, T=W.THREE;
   const unblock=()=>{ W.HOOK.blockInput=false; for(const id of ['panelWrap','helpWrap']){ const e=document.getElementById(id); if(e) e.hidden=true; } };
   const fr=(n,dt=1/30)=>{ for(let i=0;i<n;i++) q.frame(dt); };
-  // đi bộ thật (phím W) tới (x,z); trả {ok, at}
   const go=(x,z,o={})=>{ unblock(); let n=0, stuck=0, lx=P.x, lz=P.z; K.KeyW=true; if(o.run!==false) K.ShiftLeft=true;
     while(n++<(o.max||900)){ const dx=x-P.x, dz=z-P.z, d=Math.hypot(dx,dz); if(d<(o.tol||.45)) break; q.cam.yaw=Math.atan2(-dx,-dz); q.frame(1/30);
       if(n%20===0){ if(Math.hypot(P.x-lx,P.z-lz)<.15){ if(++stuck>=2) break; } else stuck=0; lx=P.x; lz=P.z; } }
@@ -13,4 +15,17 @@
   const payOk=()=>{ const b=[...document.querySelectorAll('button')].find(b=>/^Trả /.test(b.textContent.trim()) && b.offsetParent!==null); if(b){ b.click(); return true; } return false; };
   const toastTxt=()=>{ const t=document.getElementById('toast'); return t && !t.hidden ? t.textContent.slice(0,90) : ''; };
   const st=()=>({p:[+P.x.toFixed(1),+P.y.toFixed(1),+P.z.toFixed(1)], ride:W.themePark.rides.ride.kind, veh:!!W.HOOK.vehicle, fpv:!!q.cam.fpv, vis:W.me.root.visible, coins:W.life&&W.life.S?W.life.S.coins:undefined});
-  window.__pt={fr, go, path, inter, act, payOk, toastTxt, st, unblock, R:W.themePark.rides}; return 'lib ok'; })()
+  const probe=(()=>{ const SZ=12, LY=7, rt=new T.WebGLRenderTarget(SZ,SZ), cam2=new T.PerspectiveCamera(90,1,.04,.42), buf=new Uint8Array(SZ*SZ*4), QD=[[0,0],[Math.PI/2,0],[0,Math.PI/2],[0,-Math.PI/2]].map(d=>new T.Quaternion().setFromEuler(new T.Euler(d[0],d[1],0,'YXZ'))), DN=['trước','trên','trái','phải'], cc=new T.Color(), hits=new Map(), waters=[], _c=new T.Vector3(), _s=new T.Vector3(), ovr=new T.MeshBasicMaterial({color:0x00ff00, side:T.DoubleSide, fog:false});   /* vẽ đè mọi vật bằng 1 màu: vòm trời (shader ghim ở mặt xa) cũng bị cắt đúng theo tầm 0,42 m */
+    const P0={ignore:new Set()};   /* ignore: các vật là CHÍNH CHIẾC XE / GHẾ người chơi đang ngồi (tựa đầu sau gáy là đúng thiết kế) */
+    q.scene.traverse(o=>{ if(o.isMesh && o.material && o.material.uniforms && o.material.uniforms.mirrorSampler) waters.push(o); });
+    const label=m=>{ const mt=Array.isArray(m.material)?m.material[0]:m.material; let g=''; for(let p=m.parent;p;p=p.parent){ const S=W.themePark.SETS; for(let si=0;si<S.length;si++) for(const n of ['gNear','gMid','gFar','gLand']) if(S[si][n]===p) g=(si?'Nam.':'Bắc.')+n; } return (g||'ngoàiCV')+':'+(m.name?m.name+':':'')+(m.isInstancedMesh?'IM':m.isPoints?'PTS':m.isSkinnedMesh?'SK':'M')+m.geometry.attributes.position.count+'#'+(mt&&mt.color?mt.color.getHexString():'')+(mt&&mt.map?'+map':'')+(mt&&mt.vertexColors?'+vc':''); };
+    const count=(k)=>{ const R=q.renderer; cam2.quaternion.copy(q.camera.quaternion).multiply(QD[k]); cam2.updateMatrixWorld(true); R.setRenderTarget(rt); R.setClearColor(0xff00ff,1); R.clear(); R.render(q.scene,cam2); R.readRenderTargetPixels(rt,0,0,SZ,SZ,buf); let n=0; for(let i=0;i<buf.length;i+=4) if(buf[i]<60 && buf[i+1]>180 && buf[i+2]<60) n++; return n; };
+    /* ứng viên = vật đang hiện, có hình cầu bao chạm tới đầu người chơi */
+    const cands=()=>{ const out=[], rec=o=>{ if(!o.visible) return; if((o.isMesh||o.isPoints) && o.geometry && o.geometry.attributes.position){ let ok=true; if(!o.isInstancedMesh && !o.isSkinnedMesh){ const g=o.geometry; if(!g.boundingSphere) g.computeBoundingSphere(); const bs=g.boundingSphere; _c.copy(bs.center).applyMatrix4(o.matrixWorld); o.matrixWorld.decompose(_s,new T.Quaternion(),_s); if(_c.distanceTo(cam2.position)>bs.radius*Math.max(Math.abs(_s.x),Math.abs(_s.y),Math.abs(_s.z))+.6) ok=false; } if(ok) out.push(o); } for(const ch of o.children) rec(ch); }; rec(q.scene); return out; };
+    /* vẽ RIÊNG từng ứng viên (lớp 7) → biết chính xác vật nào nằm sát đầu, kể cả khi nhiều vật chồng nhau */
+    const who=(k,list)=>{ const r=[]; cam2.layers.set(LY); for(const m of list){ m.layers.enable(LY); const n=count(k); m.layers.disable(LY); if(n>2) r.push(label(m)+'('+Math.round(n/(SZ*SZ)*100)+'%)'); if(r.length>=3) break; } cam2.layers.enableAll(); return r.join(' + ')||'?'; };
+    const run=(tag)=>{ const R=q.renderer, old=R.getRenderTarget(), oa=R.getClearAlpha(); R.getClearColor(cc); const wv=waters.map(w=>w.visible); waters.forEach(w=>w.visible=false); const ig=[...P0.ignore].filter(m=>m.visible); ig.forEach(m=>m.visible=false); const ov0=q.scene.overrideMaterial, mg=W.me.g.visible; W.me.g.visible=false; q.scene.overrideMaterial=ovr; cam2.position.copy(q.camera.position); cam2.layers.enableAll(); let list=null;
+      for(let k=0;k<4;k++){ const n=count(k); if(n>3){ if(!list) list=cands(); const w=who(k,list).replace(/\(\d+%\)/g,''); if(P0.skip && w.split(' + ').every(x=>P0.skip.test(x))) continue; const key=tag+'|'+w+'|'+DN[k], h=hits.get(key), pc=Math.round(n/(SZ*SZ)*100), at=[Math.round(cam2.position.x),Math.round(cam2.position.y),Math.round(cam2.position.z)]; if(h){ h.lan++; h.max=Math.max(h.max,pc); h.cuoi=at; } else hits.set(key,{lan:1,max:pc,dau:at}); } }
+      q.scene.overrideMaterial=ov0; W.me.g.visible=mg; ig.forEach(m=>m.visible=true); waters.forEach((w,i)=>w.visible=wv[i]); R.setRenderTarget(old); R.setClearColor(cc,oa); };
+    P0.run=run; P0.hits=hits; P0.list=(tag)=>[...hits].filter(([k])=>k.startsWith(tag+'|')).map(([k,v])=>k.split('|')[1]+' ['+k.split('|')[2]+'] ×'+v.lan+' max'+v.max+'% @'+v.dau.join('/')+(v.cuoi?'…'+v.cuoi.join('/'):'')); return P0; })();
+  window.__pt={fr, go, path, inter, act, payOk, toastTxt, st, unblock, probe, R:W.themePark.rides, L2:W.themePark.land2}; return 'lib ok'; })()
