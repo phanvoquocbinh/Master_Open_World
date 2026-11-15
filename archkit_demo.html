@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QC World V2 – Pha 1 archKit</title>
+<style>
+  :root{ --bg:#0f141b; --fg:#eef2f6; --mut:#9fb0c2; --card:rgba(16,22,30,.82); }
+  html,body{ margin:0; height:100%; overflow:hidden; background:var(--bg); color:var(--fg); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
+  canvas{ display:block; }
+  #ui{ position:fixed; left:12px; top:12px; display:flex; flex-wrap:wrap; gap:4px; background:var(--card); padding:6px; border-radius:10px; }
+  #ui button{ border:0; background:transparent; color:var(--mut); padding:6px 10px; border-radius:7px; cursor:pointer; font:inherit; }
+  #ui button.on{ background:#24344a; color:var(--fg); }
+  #info{ position:fixed; left:12px; bottom:12px; background:var(--card); padding:8px 12px; border-radius:10px; font:12px/1.5 Consolas,monospace; color:var(--mut); white-space:pre; }
+  body.shot #ui, body.shot #info{ display:none; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui"></div><div id="info"></div>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/addons/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import * as AK from './js/archKit.js';
+const qs=new URLSearchParams(location.search); if(qs.get('shot')) document.body.classList.add('shot');
+const cvs=document.getElementById('c'), R=new THREE.WebGLRenderer({canvas:cvs, antialias:true, preserveDrawingBuffer:true}); R.setPixelRatio(Math.min(devicePixelRatio,2)); R.setSize(innerWidth,innerHeight);
+R.toneMapping=THREE.ACESFilmicToneMapping; R.shadowMap.enabled=true; R.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene(), cam=new THREE.PerspectiveCamera(50, innerWidth/innerHeight, .1, 2000);
+// bầu trời gradient → môi trường phản chiếu (PMREM)
+const skyScene=new THREE.Scene(), skyMat=new THREE.ShaderMaterial({side:THREE.BackSide, uniforms:{top:{value:new THREE.Color(0x7fb2e6)}, bot:{value:new THREE.Color(0xf3e6cf)}}, vertexShader:'varying vec3 p; void main(){ p=normalize(position); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.); }', fragmentShader:'uniform vec3 top,bot; varying vec3 p; void main(){ gl_FragColor=vec4(mix(bot,top,clamp(p.y*1.4+.25,0.,1.)),1.); }'});
+skyScene.add(new THREE.Mesh(new THREE.SphereGeometry(500,32,16), skyMat)); const pm=new THREE.PMREMGenerator(R);
+const hemi=new THREE.HemisphereLight(0xdfefff, 0x5a5040, .7), sun=new THREE.DirectionalLight(0xfff1dc, 2.6); sun.position.set(60,90,40); sun.castShadow=true; sun.shadow.mapSize.set(2048,2048); Object.assign(sun.shadow.camera,{left:-90,right:90,top:90,bottom:-90,far:300}); scene.add(hemi, sun);
+const W={scene, HOOK:{onFrame:[]}, night:0, INTER:[], plats:[], segs:[], addPlat:(...a)=>W.plats.push(a), addSeg:(...a)=>W.segs.push(a), toast:t=>console.log(t), P:{y:0}};
+AK.bindNight(W);
+function setNight(n){ W.night=n; skyMat.uniforms.top.value.set(n?0x0b1630:0x7fb2e6); skyMat.uniforms.bot.value.set(n?0x3a2a4a:0xf3e6cf); scene.environment=pm.fromScene(skyScene,.02).texture; scene.background=new THREE.Color(n?0x0d1730:0xa9cdea); hemi.intensity=n?.15:.7; sun.intensity=n?.12:2.6; R.toneMappingExposure=n?.9:1; }
+// mặt đất + hồ (đáy mỏ đá)
+const stone=AK.makeStoneMaterial({col:'#8f8676', joint:'#5e574c', blockW:64, blockH:64, repeat:14});
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(400,400), stone); ground.rotation.x=-Math.PI/2; ground.receiveShadow=true; scene.add(ground);
+const lake=new THREE.Mesh(new THREE.CircleGeometry(26,64), new THREE.MeshStandardMaterial({color:0x1f5a5c, roughness:.05, metalness:.3})); lake.rotation.x=-Math.PI/2; lake.position.set(0,.05,8); scene.add(lake);
+// 1) 2 cánh nhà cung giật cấp bám vách quay vào hồ (xanh: học viện · đỏ: chung cư) + tháp thang máy kính ở giữa
+AK.buildCurvedTerraceWing(W, {cx:0, cz:8, rIn:44, depth:6.5, a0:Math.PI*.98, a1:Math.PI*1.43, floors:9, floorH:3.6, setback:.7, led:0x10b981, seed:3, name:'canh-xanh'});
+AK.buildCurvedTerraceWing(W, {cx:0, cz:8, rIn:44, depth:6.5, a0:Math.PI*1.57, a1:Math.PI*2.02, floors:10, floorH:3.6, setback:.7, led:0xf43f5e, seed:9, name:'canh-do'});
+{ const fac=AK.makePBRFacade({cols:3, rows:6, frameCol:'#cfd6dd', glassCol:'#3c6d8f', wall:'#cfd6dd', litProb:.75, mullionW:4, seed:21, tileW:9, tileH:19.2});
+  const g=AK.roundedBox(9,38,7,.6,4).clone(); const m=new THREE.Mesh(g, new THREE.MeshPhysicalMaterial({color:0xbfe2f5, roughness:.05, metalness:.2, transparent:true, opacity:.55, envMapIntensity:2}));
+  m.position.set(0,19,-36); scene.add(m); const core=new THREE.Mesh(new THREE.BoxGeometry(6,37,4.5), fac); AK.facadeUV(core.geometry,6,37,fac); core.position.set(0,18.5,-36); scene.add(core); }
+// 2) mặt tiền PBR (ngày: kính phản trời · đêm: đèn cửa ngẫu nhiên)
+{ const fac=AK.makePBRFacade({cols:4, rows:4, balcony:true, seed:5}); const g=new THREE.BoxGeometry(12,25.6,12); for(const k of ['uv']) AK.facadeUV(g,12,25.6,fac); const t=new THREE.Mesh(g,fac); t.position.set(44,12.8,40); t.castShadow=true; scene.add(t); }
+// 3) đình mái đao 3 tầng mái + cột đỏ
+{ const g=new THREE.Group(); g.position.set(-40,0,44); scene.add(g); const col=new THREE.MeshStandardMaterial({color:0x9b2a22, roughness:.5}), wood=AK.makeWoodMaterial({col:'#6b3a1f'});
+  for(const [x,z] of [[-4,-3],[4,-3],[-4,3],[4,3]]){ const c=new THREE.Mesh(new THREE.CylinderGeometry(.28,.32,5,16), col); c.position.set(x,2.5,z); c.castShadow=true; g.add(c); }
+  const fl=new THREE.Mesh(AK.roundedBox(11,.5,9,.15,2), wood); fl.position.y=.25; g.add(fl);
+  const roof=AK.buildAsianCurvedRoof(9,7,2.6,1.6,0x2f3a48,3); roof.position.y=5; g.add(roof); }
+// 4) bàn bida chi tiết + đèn chụp
+{ const fl=new THREE.Mesh(new THREE.PlaneGeometry(10,8), AK.makeWoodMaterial({col:'#8a5a32', repeat:3})); fl.rotation.x=-Math.PI/2; fl.position.set(30,.02,-6); scene.add(fl); AK.buildBilliardTable(W, 30, 0, -6, .3); }
+// 5) bộ InstancedMesh: khung cửa chữ H, lan can kính kẹp inox, bồn cây rủ, đèn lồng (1 lượt vẽ mỗi loại)
+{ const wf=AK.windowFrames(), gr=AK.glassRails(), pl=AK.hangingPlanters(), ln=AK.lanterns();
+  for(let i=0;i<12;i++){ wf.add(22+i*1.6, 1.2, 20, 0); gr.add(22+i*1.22, 0, 24, 0); pl.add(22+i*1.1, 0, 27, 0); ln.add(22+i*1.2, 3.2, 30); }
+  for(const k of [wf,gr,pl,ln]) k.build(scene); }
+// 6) mẫu vật liệu: đá · gỗ · hộp bo góc
+{ const s=new THREE.Mesh(AK.roundedBox(4,4,4,.35,4), AK.makeStoneMaterial({col:'#d9cfbf'})); s.position.set(-20,2,-10); s.castShadow=true; scene.add(s);
+  const w=new THREE.Mesh(AK.roundedBox(4,4,4,.35,4), AK.makeWoodMaterial({col:'#7a4a28'})); w.position.set(-14,2,-10); w.castShadow=true; scene.add(w); }
+const VIEWS={ quarry:[[0,34,64],[0,14,-10]], wing:[[-28,14,22],[-30,10,-10]], facade:[[30,14,62],[44,12,40]], roof:[[-30,9,58],[-40,5,44]], billiard:[[33,3.2,-1.5],[30,.8,-6]], kits:[[28,6,44],[28,1.5,25]], materials:[[-17,4,-1],[-17,2,-10]] };
+// xoay quanh điểm nhìn bằng chuột (kéo) · lăn chuột để lại gần/xa
+const ctl={target:new THREE.Vector3(), update(){ cam.lookAt(this.target); }}; let drag=null;
+cvs.addEventListener('pointerdown',e=>{ drag={x:e.clientX,y:e.clientY}; }); addEventListener('pointerup',()=>drag=null);
+cvs.addEventListener('pointermove',e=>{ if(!drag) return; const o=cam.position.clone().sub(ctl.target), s=new THREE.Spherical().setFromVector3(o); s.theta-=(e.clientX-drag.x)*.006; s.phi=Math.min(1.5,Math.max(.1,s.phi-(e.clientY-drag.y)*.005)); cam.position.copy(ctl.target).add(new THREE.Vector3().setFromSpherical(s)); ctl.update(); drag={x:e.clientX,y:e.clientY}; });
+cvs.addEventListener('wheel',e=>{ const o=cam.position.clone().sub(ctl.target).multiplyScalar(e.deltaY>0?1.1:.9); cam.position.copy(ctl.target).add(o); ctl.update(); });
+function view(k){ const [p,t]=VIEWS[k]; cam.position.set(...p); ctl.target.set(...t); ctl.update(); document.querySelectorAll('#ui button[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===k)); }
+const ui=document.getElementById('ui'); for(const k of Object.keys(VIEWS)){ const b=document.createElement('button'); b.textContent=k; b.dataset.v=k; b.onclick=()=>view(k); ui.appendChild(b); }
+const nb=document.createElement('button'); nb.textContent='🌙 Ngày/Đêm'; nb.onclick=()=>setNight(W.night?0:1); ui.appendChild(nb);
+const hit=document.createElement('button'); hit.textContent='🎱 Đánh bida'; hit.onclick=()=>W.INTER.find(i=>i.label.includes('Bida'))?.action(); ui.appendChild(hit);
+setNight(+qs.get('night')||0); view(qs.get('view')||'quarry');
+let last=performance.now(), T=0, fr=0, acc=0; const info=document.getElementById('info');
+function frame(){ const now=performance.now(), dt=Math.min(.05,(now-last)/1000); last=now; T+=dt; for(const f of W.HOOK.onFrame) f(dt,T); R.render(scene,cam); fr++; acc+=dt; if(acc>1){ info.textContent=`${(fr/acc).toFixed(0)} FPS · ${R.info.render.calls} lượt vẽ · ${(R.info.render.triangles/1000).toFixed(0)}k tam giác · sàn ${W.plats.length} · lan can ${W.segs.length}`; fr=0; acc=0; } requestAnimationFrame(frame); }
+window.__demo={R, scene, cam, W, view, setNight, step:(n=1)=>{ for(let i=0;i<n;i++){ for(const f of W.HOOK.onFrame) f(1/30,T+=1/30); } R.render(scene,cam); }, info:()=>({calls:R.info.render.calls, tris:R.info.render.triangles, plats:W.plats.length, segs:W.segs.length, inter:W.INTER.length})};
+addEventListener('resize',()=>{ R.setSize(innerWidth,innerHeight); cam.aspect=innerWidth/innerHeight; cam.updateProjectionMatrix(); });
+frame();
+</script>
+</body>
+</html>
