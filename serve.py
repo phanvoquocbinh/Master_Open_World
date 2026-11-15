@@ -104,9 +104,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if self.path.startswith('/api/'):
             return self._api()
         super().do_GET()
+    def send_response(self, code, message=None):
+        self._qc_code = code
+        super().send_response(code, message)
     def end_headers(self):
         path = self.path.split('?', 1)[0].lower()
-        if path.endswith(NO_CACHE) or path == '/__qcworld' or path.startswith('/api/'):
+        # lỗi (404…) không bao giờ được cache – nếu không, file thêm vào sau (vd ảnh mặt nhân vật) vẫn "không thấy" suốt 1 ngày
+        if getattr(self, '_qc_code', 200) >= 400 or path.endswith(NO_CACHE) or path == '/__qcworld' or path.startswith('/api/'):
             self.send_header('Cache-Control', 'no-store, must-revalidate')
         else:
             self.send_header('Cache-Control', 'public, max-age=86400')
