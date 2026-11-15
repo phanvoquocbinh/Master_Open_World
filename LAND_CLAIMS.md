@@ -16,7 +16,7 @@ Bình (14/11/2026): "tôi cho phép bạn mở đất rộng thêm tự do cho t
 |---|---|---|---|
 | Đảo chính Master Dashboard | khoảng −115…115 | khoảng −115…115 | tâm (0,0), mép theo `W.edgeR(a)` |
 | Đảo nhỏ khu nghỉ dưỡng | quanh ISLET (bán kính 122 theo góc RESORT_A) | | r = 24 |
-| Downtown | 136–262 | −62…62 | phiên `qc-park` đang làm công viên + cây xanh |
+| Downtown | 136–262 | −62…62 | quy hoạch lại 15/11/2026 (phiên `qc-park`): đường 20 m (2 làn ô tô + 1 làn xe máy mỗi chiều), dữ liệu đường duy nhất `CITY.roads` + js/roads.js |
 | Phường Khởi Nghiệp | 136–262 | 56–118 | |
 | Khu Giải trí (arena) | 274–394 | −60…60 | |
 | Đồi Brand QC + Phố Núi | 276–476 | 66–274 | phiên chính (`hills.js`, `mountaintown.js`, `foodstreet.js`, `riverside.js`…) |
@@ -28,5 +28,5 @@ Bình (14/11/2026): "tôi cho phép bạn mở đất rộng thêm tự do cho t
 | Phiên | Vùng x0–x1 | z0–z1 | Dùng cho | File |
 |---|---|---|---|---|
 | phiên chính | 476–640 | 66–274 | mở rộng Phố Núi (đồi thứ 2, đường đèo) | `js/hills.js`, `js/mountaintown.js` |
-| phiên công viên (qc-park) | 150–258 | 138–352 | Đại Công viên Hồ Ngọc – QC City Central Park (đất mới phía Nam Phường Khởi Nghiệp: hồ uốn lượn, đảo thủy đình, cầu vòm, sàn gỗ ven hồ, đường chạy gạch đỏ, khu gym/yoga/cầu lông, cosplay, sân khấu, café, thuyền thiên nga) + lối đi giữa lô R6/R7 (x 198–200, z 91–118) và cầu bộ hành x 197–201, z 118–138 | `js/park.js` |
+| phiên công viên (qc-park) | 136–262 | 56–480 | Phường Khởi Nghiệp mở rộng tới z 480 (CITY.ward) – Đại công viên Hồ Ngọc ở giữa thành phố x 156–242 · z 10–190; khối A dịch vụ phường, B bệnh viện + trạm cứu hoả, C 12 lô đất, D trường học, E/F 6 cao ốc (js/civic.js, js/park.js). Bỏ đất EXTL Hồ Thiên Nga cũ |
 | phiên Trung tâm Ngoại ngữ | −360…−160 | −120…100 | Đảo Ngoại ngữ (campus Trung tâm Ngoại ngữ QC) + cầu vòm từ bãi biển bờ Tây đảo chính (x −62…−180, z −22…−10, trục z = −16) | `js/langcenter.js` |

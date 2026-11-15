@@ -1,7 +1,7 @@
 // QC World – bản đồ đường đi cho bot: lưới 1m (đất liền + cầu/sàn gỗ, trừ vật cản), A* 8 hướng + làm mượt đường (line-of-sight)
 export function makeNav(W, opt={}){
   const {groundH, plats, circles, boxes, inDT} = W;
-  const X0=opt.x0??-100, Z0=opt.z0??-118, NX=opt.nx??370, NZ=opt.nz??236, CS=1, INF=opt.inflate??.45;
+  const X0=opt.x0??-100, Z0=opt.z0??-118, NX=opt.nx??370, NZ=opt.nz??600, CS=1, INF=opt.inflate??.45;
   const N=NX*NZ, walk=new Uint8Array(N);
   const idx=(i,j)=>j*NX+i, ci=x=>Math.floor((x-X0)/CS), cj=z=>Math.floor((z-Z0)/CS), cx=i=>X0+(i+.5)*CS, cz=j=>Z0+(j+.5)*CS;
   function build(){

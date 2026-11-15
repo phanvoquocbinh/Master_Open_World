@@ -2,84 +2,41 @@
 // Đảo Master Dashboard = vùng MIỄN PHÍ (tool, học, quiz, concert). Qua cổng ở đầu cầu = THẾ GIỚI MỞ (dịch vụ tính phí, đi làm kiếm tiền).
 // Phường có: phố chính, Chợ QC, Showroom xe, Văn phòng địa chính (city.js dựng theo CITY.places), 12 lô đất (life.js),
 // Trung tâm Việc làm, Nhà trọ khởi nghiệp (phòng miễn phí cho người mới), quầy Bếp Cơm (việc phụ bếp).
+import { roadNet } from './roads.js';
 export function buildWard(W){
   const {THREE, scene, mesh, box, MAT, colorMat, CITY, circles, boxes, lampPost, makeLabel, INTER, PLACES, teleport, toast, palm, HOOK, P, regionAt, $} = W;   // bench() bên dưới dùng chung cho phố & đảo
-  const Z=CITY.ward, X0=Z.x0, X1=Z.x1, GZ0=62, SZ0=64, Z1=Z.z1, ST=Z.street, SWD=10, LX=Z.links;
+  const Z=CITY.ward, X0=Z.x0, X1=Z.x1, GZ0=62, SZ0=64, Z1=Z.z1, ST=Z.street, SWD=10, LX=Z.links, MAINZ=Z.main??Z.street;
   const R=Math.random, out={spots:{}};
   const canvasTex=(w,h,draw)=>{ const c=document.createElement('canvas'); c.width=w; c.height=h; draw(c.getContext('2d'),w,h); const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=8; return t; };
 
-  /* ---------- 1. Nền phường + mặt đất vẽ 1 texture (vỉa hè, phố chính, 2 nhánh nối Downtown, vạch kẻ) ---------- */
+  /* ---------- 1. Nền phường (quy hoạch 15/11/2026: dải đất x 136–262 từ bờ Nam Downtown tới z=480) ---------- */
+  // Mặt đất: gạch vỉa hè lặp (1 texture) + mặt nhựa từng đoạn đường lấy từ CITY.roads (js/roads.js). Bó vỉa + đèn đường do downtown.js dựng cho cả thành phố.
   { const slab=mesh(new THREE.BoxGeometry(X1-X0+4, 8, Z1+2-SZ0), MAT.stone, (X0+X1)/2, -4+.02, (SZ0+Z1+2)/2); slab.castShadow=false;
-    const GW=X1-X0, GD=Z1-GZ0, ppm=W.QUAL==='low'?10:14, TW=Math.round(GW*ppm), TH=Math.round(GD*ppm);
-    const X=x=>(x-X0)*ppm, Y=z=>(z-GZ0)*ppm;
-    const tex=canvasTex(TW,TH,(g)=>{
-      g.fillStyle='#a49d90'; g.fillRect(0,0,TW,TH);
-      const t=.5*ppm; for(let y=0;y<TH;y+=t) for(let x=(Math.floor(y/t)%2)*t/2;x<TW;x+=t){ const v=150+R()*22|0; g.fillStyle=`rgb(${v},${v-7},${v-18})`; g.fillRect(x+1,y+1,t-2,t-2); }
-      const road=(x0,z0,x1,z1)=>{ g.fillStyle='#35373c'; g.fillRect(X(x0),Y(z0),X(x1)-X(x0),Y(z1)-Y(z0)); };
-      road(X0, ST-SWD/2, X1, ST+SWD/2); for(const x of LX) road(x-SWD/2, GZ0, x+SWD/2, ST-SWD/2);
-      g.globalAlpha=.3; for(let i=0;i<26000;i++){ const x=X0+R()*GW, z=GZ0+R()*GD; const inR=Math.abs(z-ST)<SWD/2 || (z<ST && LX.some(l=>Math.abs(x-l)<SWD/2)); if(!inR) continue; const v=40+R()*40|0; g.fillStyle=`rgb(${v},${v},${v+4})`; g.fillRect(X(x),Y(z),2,2); } g.globalAlpha=1;
-      const lw=.15*ppm, white='#ecebe4', yellow='#e8b923';
-      // phố chính: vạch mép trắng, vạch giữa vàng đứt
-      const cuts=[X0, ...LX.flatMap(x=>[x-SWD/2, x+SWD/2]), X1];
-      for(let i=0;i<cuts.length;i+=2){ const a=cuts[i]+(i?4:0), b=cuts[i+1]-(i+2<cuts.length?4:0);
-        g.fillStyle=white; g.fillRect(X(a),Y(ST-SWD/2+.35),X(b)-X(a),lw); g.fillRect(X(a),Y(ST+SWD/2-.35)-lw,X(b)-X(a),lw);
-        g.fillStyle=yellow; for(let x=a;x<b-1.5;x+=4.5) g.fillRect(X(x),Y(ST)-lw/2,2.6*ppm,lw); }
-      // nhánh nối Downtown
-      for(const x of LX){ const a=GZ0, b=ST-SWD/2-4; g.fillStyle=white; g.fillRect(X(x-SWD/2+.35),Y(a),lw,Y(b)-Y(a)); g.fillRect(X(x+SWD/2-.35)-lw,Y(a),lw,Y(b)-Y(a));
-        g.fillStyle=yellow; for(let z=a;z<b-1.5;z+=4.5) g.fillRect(X(x)-lw/2,Y(z),lw,2.6*ppm);
-        g.fillStyle=white; g.fillRect(X(x),Y(b),(SWD/2-.4)*ppm,.4*ppm);
-        for(let k=-SWD/2+.6;k<SWD/2-.6;k+=.9) g.fillRect(X(x+k),Y(b+.2-1.3),.5*ppm,2.6*ppm);   // vạch qua đường
-        for(const s of [-1,1]){ const xx=x+s*(SWD/2+2); for(let k=-SWD/2+.6;k<SWD/2-.6;k+=.9) g.fillRect(X(xx-1.3),Y(ST+k),2.6*ppm,.5*ppm); } }
-    });
-    tex.wrapS=tex.wrapT=THREE.ClampToEdgeWrapping;
-    const ground=new THREE.Mesh(new THREE.PlaneGeometry(GW,GD), new THREE.MeshStandardMaterial({map:tex, roughness:.88})); ground.rotation.x=-Math.PI/2; ground.position.set((X0+X1)/2,.03,(GZ0+Z1)/2); ground.receiveShadow=true; scene.add(ground);
-    // bó vỉa
-    const curbM=colorMat(0xd7d3ca,{roughness:.8});
-    for(const s of [-1,1]){ const zz=ST+s*(SWD/2+.12); let a=X0; for(const x of (s<0?[...LX, X1+SWD/2]:[X1+SWD/2])){ const b=x-SWD/2; if(b-a>1){ const c=mesh(box(b-a,.14,.24), curbM, (a+b)/2,.07,zz); c.castShadow=false; } a=x+SWD/2; } }
-    for(const x of LX) for(const s of [-1,1]){ const c=mesh(box(.24,.14,ST-SWD/2-GZ0), curbM, x+s*(SWD/2+.12),.07,(GZ0+ST-SWD/2)/2); c.castShadow=false; }
-    // lan can mép bờ (trang trí) – cạnh Tây/Đông/Nam
+    const paveT=canvasTex(256,256,(g,w,h)=>{ g.fillStyle='#a49d90'; g.fillRect(0,0,w,h); const t=32; for(let y=0;y<h;y+=t) for(let x=(Math.floor(y/t)%2)*t/2-t;x<w;x+=t){ const v=150+R()*22|0; g.fillStyle=`rgb(${v},${v-7},${v-18})`; g.fillRect(x+1,y+1,t-2,t-2); } for(let i=0;i<1500;i++){ g.fillStyle=`rgba(0,0,0,${R()*.06})`; g.fillRect(R()*w,R()*h,2,2); } });
+    paveT.wrapS=paveT.wrapT=THREE.RepeatWrapping; paveT.repeat.set((X1-X0)/4,(Z1-GZ0)/4); paveT.userData.live=true;
+    const ground=new THREE.Mesh(new THREE.PlaneGeometry(X1-X0,Z1-GZ0), new THREE.MeshStandardMaterial({map:paveT, roughness:.88})); ground.rotation.x=-Math.PI/2; ground.position.set((X0+X1)/2,.03,(GZ0+Z1)/2); ground.receiveShadow=true; scene.add(ground);
+    const asT=canvasTex(256,256,(g,w,h)=>{ g.fillStyle='#35373c'; g.fillRect(0,0,w,h); for(let i=0;i<6000;i++){ const v=36+R()*44|0; g.fillStyle=`rgba(${v},${v},${v+4},.55)`; g.fillRect(R()*w,R()*h,1.6,1.6); } });
+    asT.wrapS=asT.wrapT=THREE.RepeatWrapping; asT.repeat.set(1/8,1/8); asT.userData.live=true;
+    const asM=new THREE.MeshStandardMaterial({map:asT, roughness:.92, polygonOffset:true, polygonOffsetFactor:-1, polygonOffsetUnits:-1});
+    const NET=roadNet(CITY);
+    for(const r of (NET?NET.rects:[])){ const z0=Math.max(r.z0, GZ0), z1=Math.min(r.z1, Z1); if(z1-z0<.2) continue; const w=r.x1-r.x0, d=z1-z0;
+      const g=new THREE.PlaneGeometry(w,d); const uv=g.attributes.uv; for(let i=0;i<uv.count;i++){ uv.setXY(i, (r.x0+uv.getX(i)*w), -(z0+(1-uv.getY(i))*d)); }
+      const m=new THREE.Mesh(g, asM); m.rotation.x=-Math.PI/2; m.position.set((r.x0+r.x1)/2,.036,(z0+z1)/2); m.receiveShadow=true; m.castShadow=false; scene.add(m); }
+    // lan can mép bờ (trang trí) – cạnh Tây/Đông/Nam (cạnh Đông liền 1 đoạn: hills.js tự cắt khe cầu sang Đồi Brand QC ở z = street)
     for(const [x0,z0,x1,z1] of [[X0-1,SZ0,X0-1,Z1+1],[X1+1,SZ0,X1+1,Z1+1],[X0-1,Z1+1,X1+1,Z1+1]]){ const len=Math.hypot(x1-x0,z1-z0), r=mesh(box(.08,.08,len), MAT.metal, (x0+x1)/2,1,(z0+z1)/2); r.rotation.y=Math.atan2(x1-x0,z1-z0); }
-    // đèn + cây hai bên phố
-    for(let x=X0+6;x<X1-2;x+=16){ if(LX.some(l=>Math.abs(l-x)<7)) continue; lampPost(x, ST-SWD/2-1.1); lampPost(x+8, ST+SWD/2+1.1); }
-    for(let x=X0+3;x<X1;x+=22){ if(LX.some(l=>Math.abs(l-x)<8)) continue; palm(x, Z1-1.5, .8+R()*.2); }
-    makeLabel('🌱 Phường Khởi Nghiệp', 'Thế giới mở · chợ, đất, việc làm, nhà trọ', {h:1, x:LX[0], y:8, z:ST-8, fade:120});
+    makeLabel('🌱 Phường Khởi Nghiệp', 'Thế giới mở · chợ, đất, việc làm, nhà trọ · bệnh viện, trạm cứu hoả, trường học', {h:1, x:160, y:9, z:MAINZ+14, fade:120});
   }
 
-  /* ---------- 2. Ghế đá dọc phố (ngồi được) ---------- */
+  /* ---------- 2. Ghế đá (dùng chung cho đảo, xem 6b) ---------- */
   function bench(x, z, rot){ const gy=W.groundH(x,z), g=new THREE.Group(); g.position.set(x,gy,z); g.rotation.y=rot; scene.add(g);
     mesh(box(1.6,.08,.45), MAT.wood, 0,.45,0, g); mesh(box(1.6,.4,.06), MAT.wood, 0,.72,-.2, g); for(const s of [-1,1]) mesh(box(.08,.45,.45), MAT.black, s*.7,.22,0, g);
     circles.push({x, z, r:.7}); const f=[Math.sin(rot),Math.cos(rot)], rx=Math.cos(rot), rz=-Math.sin(rot);
     if(W.addSeat) for(const k of [-.42,.42]) W.addSeat({x:x+f[0]*.1+rx*k, z:z+f[1]*.1+rz*k, rot, y:gy+.49, floor:gy, label:'🪑 Ngồi ghế đá (E · C)'}); }
-  for(const x of [171, 186, 214, 229]) bench(x, ST-SWD/2-2.2, Math.PI);
 
-  /* ---------- 3. Trung tâm Việc làm ---------- */
-  { const x=193, z=70.5, g=new THREE.Group(); g.position.set(x,0,z); scene.add(g);
-    const gtex=canvasTex(512,256,(c,w,h)=>{ const gr=c.createLinearGradient(0,0,w,h); gr.addColorStop(0,'#2d5d86'); gr.addColorStop(.5,'#1d3f63'); gr.addColorStop(1,'#13304d'); c.fillStyle=gr; c.fillRect(0,0,w,h);
-      c.fillStyle='rgba(255,255,255,.09)'; for(let i=0;i<6;i++){ c.beginPath(); c.moveTo(i*110-60,0); c.lineTo(i*110+20,0); c.lineTo(i*110-80,h); c.lineTo(i*110-160,h); c.fill(); }
-      c.fillStyle='rgba(255,236,190,.35)'; for(const [x,y] of [[60,150],[180,160],[300,140],[420,155]]) c.fillRect(x,y,60,40);   // bóng người/đèn bên trong
-      c.fillStyle='#c9d1d9'; for(let i=0;i<=5;i++) c.fillRect(i*w/5-3,0,6,h); c.fillRect(0,h/2-3,w,6); c.fillRect(0,0,w,6); c.fillRect(0,h-6,w,6); });
-    const glass=new THREE.MeshStandardMaterial({map:gtex, metalness:.55, roughness:.12, envMapIntensity:1.5, emissive:0xffffff, emissiveMap:gtex, emissiveIntensity:.08});
-    const white=colorMat(0xf1f3f5,{roughness:.5}), dark=colorMat(0x2b3138,{roughness:.5});
-    mesh(box(13,.3,8.4), MAT.stone, 0,.15,0, g);
-    mesh(box(12.4,7,7.6), white, 0,3.8,-.2, g);
-    mesh(box(11.6,5.2,.08), glass, 0,3.6,3.62, g); for(const xx of [-5.9,5.9]) mesh(box(.3,7,.3), dark, xx,3.8,3.6, g); mesh(box(12.6,.3,7.8), dark, 0,7.4,-.2, g); mesh(box(12.4,.18,.3), dark, 0,6.2,3.7, g);
-    mesh(box(2.4,2.7,.1), dark, 0,1.6,3.68, g); mesh(box(2.0,2.4,.06), new THREE.MeshStandardMaterial({color:0x0e2035, metalness:.6, roughness:.1}), 0,1.5,3.73, g); mesh(box(4,.12,1.4), dark, 0,3.05,4.3, g);
-    const sg=canvasTex(1024,180,(c,w,h)=>{ c.fillStyle='#0f2747'; c.fillRect(0,0,w,h); c.fillStyle='#ffd23f'; c.fillRect(0,h-12,w,12); c.fillStyle='#fff'; c.font='800 74px "Segoe UI","Segoe UI Emoji",sans-serif'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('💼 TRUNG TÂM VIỆC LÀM', w/2, h/2-4); });
-    mesh(box(9,1.4,.12), new THREE.MeshStandardMaterial({map:sg, emissive:0xffffff, emissiveMap:sg, emissiveIntensity:.35}), 0,6.9,3.75, g);
-    // bảng tin việc làm ngoài cửa
-    const bt=canvasTex(1024,640,(c,w,h)=>{ c.fillStyle='#16324f'; c.fillRect(0,0,w,h); c.fillStyle='#fff'; c.font='800 60px "Segoe UI",sans-serif'; c.fillText('BẢNG VIỆC LÀM HÔM NAY',40,80);
-      c.font='500 38px "Segoe UI","Segoe UI Emoji",sans-serif'; const L=['🧹 Dọn rác phố ..... 30–110 💰','📦 Giao hàng ........ 40–140 💰','🍳 Phụ bếp ........... 30–100 💰','🧠 SQL · API · Bug · Test · Code','      Dễ 40 · Vừa 90 · Khó 180 💰','🏢 Xin việc công ty → vào toà nhân viên'];
-      L.forEach((t,i)=>{ c.fillStyle=i===3||i===4?'#ffd23f':'#dfe8f5'; c.fillText(t,40,170+i*72); }); });
-    const bg=new THREE.Group(); bg.position.set(-5.2,0,5.6); bg.rotation.y=.35; g.add(bg);
-    for(const s of [-1,1]) mesh(new THREE.CylinderGeometry(.06,.06,2.6,8), MAT.black, s*1.3,1.3,0, bg);
-    mesh(box(2.9,1.85,.08), MAT.black, 0,2.0,-.05, bg); const bm=new THREE.Mesh(new THREE.PlaneGeometry(2.8,1.75), new THREE.MeshStandardMaterial({map:bt, emissive:0xffffff, emissiveMap:bt, emissiveIntensity:.4})); bm.position.set(0,2,.0); bg.add(bm);
-    boxes.push({x0:x-6.3, x1:x+6.3, z0:z-4, z1:z+3.7});
-    out.spots.jobCenter={x, z:z+5.6};
-    makeLabel('🧑‍💼 Trung tâm Việc làm', 'Việc chân tay · việc trí tuệ · xin việc công ty', {h:.9, x, y:9.2, z, fade:110});
-  }
-
+  /* ---------- 3. Trung tâm Việc làm: tháp mới do jobcenter.js dựng ở khối A (cửa ra đường z=290) ---------- */
+  out.spots.jobCenter={x:176, z:277.4};
   /* ---------- 4. Nhà trọ khởi nghiệp (4 phòng, phòng 1 cấp miễn phí cho người mới) ---------- */
-  { const x0=228.5, z=70, RW=7.2, n=4, g=new THREE.Group(); scene.add(g);
+  { const x0=139, z=235.5, RW=7.2, n=4, g=new THREE.Group(); scene.add(g);
     const wall=colorMat(0xe2d6bf,{roughness:.95}), stain=colorMat(0xbfae8e,{roughness:1}), roof=new THREE.MeshStandardMaterial({color:0x8d9399, metalness:.6, roughness:.45});
     mesh(box(RW*n+.6,.25,6.6), MAT.stone, x0+RW*n/2,.12,z, g);
     mesh(box(RW*n,3.1,5.2), wall, x0+RW*n/2,1.8,z-.4, g);
@@ -99,7 +56,7 @@ export function buildWard(W){
   }
 
   /* ---------- 5. Quầy Bếp Cơm (việc phụ bếp) ---------- */
-  { const x=153.5, z=71, g=new THREE.Group(); g.position.set(x,0,z); scene.add(g);
+  { const x=180.5, z=238, g=new THREE.Group(); g.position.set(x,0,z); scene.add(g);
     mesh(box(4.4,1.05,1.6), colorMat(0xb5452b,{roughness:.6}), 0,.53,.6, g); mesh(box(4.6,.08,1.8), colorMat(0xe9e5dc), 0,1.09,.6, g);
     mesh(box(4.4,2.6,.15), colorMat(0xf1e7d0,{roughness:.9}), 0,1.3,-.9, g);
     const aw=mesh(box(4.8,.06,2.2), new THREE.MeshStandardMaterial({map:W.stripeTex(0xd05f28), roughness:.8, side:THREE.DoubleSide}), 0,2.7,.4, g); aw.rotation.x=.15;

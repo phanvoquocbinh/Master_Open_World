@@ -1,4 +1,5 @@
 // QC World – Downtown: đảo trung tâm thương mại, cầu dây văng, lưới phố, toà công ty cao tầng (8 kiểu), công viên
+import { roadNet } from './roads.js';
 export function buildDowntown(W, interior){
   const {THREE, scene, mesh, box, MAT, colorMat, CITY, circles, boxes, addPlat, lampPost, makeLabel, makeActor, INTER, PLACES, teleport, MODELS, clipOf, toast, rnd} = W;
   const D=CITY.downtown, DW=D.x1-D.x0, DH=D.z1-D.z0, cx=(D.x0+D.x1)/2, cz=(D.z0+D.z1)/2;
@@ -37,69 +38,52 @@ export function buildDowntown(W, interior){
   const pave=canvasTex(512,512,(g)=>{ g.fillStyle='#b9b4aa'; g.fillRect(0,0,512,512); for(let y=0;y<512;y+=64) for(let x=0;x<512;x+=64){ const v=170+R()*25|0; g.fillStyle=`rgb(${v},${v-4},${v-12})`; g.fillRect(x+2,y+2,60,60); } for(let i=0;i<3000;i++){ g.fillStyle=`rgba(0,0,0,${R()*.06})`; g.fillRect(R()*512,R()*512,2,2); } });
   pave.repeat.set(DW/8, DH/8);
   const slab=mesh(new THREE.BoxGeometry(DW+4, 8, DH+4), [MAT.stone,MAT.stone,new THREE.MeshStandardMaterial({map:pave, roughness:.85}),MAT.stone,MAT.stone,MAT.stone], cx, -4+.02, cz); slab.castShadow=false;
-  for(const [x0,z0,x1,z1] of [[D.x0-1,D.z0-1,D.x1+1,D.z0-1],[D.x1+1,D.z0-1,D.x1+1,D.z1+1],[D.x0-1,D.z0-1,D.x0-1,-6],[D.x0-1,6,D.x0-1,D.z1+1]]){   // bờ Nam để trống: nối liền Phường Khởi Nghiệp
+  for(const [x0,z0,x1,z1] of [[D.x0-1,D.z0-1,D.x1+1,D.z0-1],[D.x1+1,D.z0-1,D.x1+1,D.z1+1],[D.x0-1,D.z0-1,D.x0-1,-D.bridgeW/2-.5],[D.x0-1,D.bridgeW/2+.5,D.x0-1,D.z1+1]]){   // bờ Nam để trống: nối liền Phường Khởi Nghiệp
     const len=Math.hypot(x1-x0,z1-z0), r=mesh(box(.08,.08,len), MAT.metal, (x0+x1)/2, 1.0, (z0+z1)/2); r.rotation.y=Math.atan2(x1-x0,z1-z0); }
 
   /* ---------- 2. Đường phố ---------- */
   const asphalt=(dashed)=>canvasTex(256,512,(g,w,h)=>{ g.fillStyle='#34363a'; g.fillRect(0,0,w,h); for(let i=0;i<5000;i++){ const v=30+R()*40|0; g.fillStyle=`rgba(${v},${v},${v+4},.6)`; g.fillRect(R()*w,R()*h,1.5,1.5); }
     g.fillStyle='#e9e6dc'; g.fillRect(10,0,6,h); g.fillRect(w-16,0,6,h); if(dashed){ g.fillStyle='#e8b923'; for(let y=0;y<h;y+=128) g.fillRect(w/2-4,y,8,70); } });
   const AS=asphalt(true);
-  const SX=[178,220], SZ=[-36,0,36], SWD=10;
-  // Toàn bộ mặt đất Downtown vẽ trên MỘT texture: vỉa hè lát gạch, đường nhựa, ngã tư sạch, vạch giữa/mép/dừng, vạch qua đường đúng chỗ
+  // Quy hoạch 15/11/2026: mặt đất Downtown vẽ từ CITY.roads (js/roads.js) – vỉa hè lát gạch + mặt nhựa 20 m; vạch kẻ / vạch qua đường do traffic.js sơn 3D
+  const NET=roadNet(CITY), HWR=NET.hw;
   {
     const PX=W.QUAL==='low'?2048:3072, ppm=PX/Math.max(DW,DH), TW=Math.round(DW*ppm), TH=Math.round(DH*ppm);
     const X=x=>(x-D.x0)*ppm, Y=z=>(z-D.z0)*ppm;
     const tex=canvasTex(TW,TH,(g)=>{
-      // vỉa hè: gạch 0.5m
       g.fillStyle='#bdb8ad'; g.fillRect(0,0,TW,TH);
       const t=.5*ppm; for(let y=0;y<TH;y+=t) for(let x=(Math.floor(y/t)%2)*t/2;x<TW;x+=t){ const v=178+R()*20|0; g.fillStyle=`rgb(${v},${v-4},${v-12})`; g.fillRect(x+1,y+1,t-2,t-2); }
-      // mặt đường
-      const road=(x0,z0,x1,z1)=>{ g.fillStyle='#34363b'; g.fillRect(X(x0),Y(z0),X(x1)-X(x0),Y(z1)-Y(z0)); };
-      for(const z of SZ) road(D.x0, z-SWD/2, D.x1, z+SWD/2);
-      for(const x of SX) road(x-SWD/2, D.z0, x+SWD/2, D.z1);
-      const inRoad=(x,z)=>SZ.some(s=>Math.abs(z-s)<SWD/2)||SX.some(s=>Math.abs(x-s)<SWD/2);
-      g.globalAlpha=.35; for(let i=0;i<50000;i++){ const x=D.x0+R()*DW, z=D.z0+R()*DH; if(!inRoad(x,z)) continue; const v=40+R()*40|0; g.fillStyle=`rgb(${v},${v},${v+4})`; g.fillRect(X(x),Y(z),2,2); } g.globalAlpha=1;
-      // đoạn đường giữa 2 ngã tư (theo trục x và z)
-      const lineW=.15*ppm, yellow='#e8b923', white='#ecebe4';
-      const segX=(z)=>{ const cuts=[D.x0, ...SX.flatMap(x=>[x-SWD/2, x+SWD/2]), D.x1]; const out=[]; for(let i=0;i<cuts.length;i+=2) out.push([cuts[i],cuts[i+1]]); return out; };
-      const segZ=(x)=>{ const cuts=[D.z0, ...SZ.flatMap(z=>[z-SWD/2, z+SWD/2]), D.z1]; const out=[]; for(let i=0;i<cuts.length;i+=2) out.push([cuts[i],cuts[i+1]]); return out; };
-      for(const z of SZ) for(const [a,b] of segX(z)){ const a2=a+(a===D.x0?0:4), b2=b-(b===D.x1?0:4);
-        g.fillStyle=white; g.fillRect(X(a2),Y(z-SWD/2+.35),X(b2)-X(a2),lineW); g.fillRect(X(a2),Y(z+SWD/2-.35)-lineW,X(b2)-X(a2),lineW);
-        g.fillStyle=yellow; if(z===0){ g.fillRect(X(a2),Y(z)-lineW*1.6,X(b2)-X(a2),lineW); g.fillRect(X(a2),Y(z)+lineW*.6,X(b2)-X(a2),lineW); } else for(let x=a2;x<b2-1.5;x+=4.5) g.fillRect(X(x),Y(z)-lineW/2,2.6*ppm,lineW);
-        g.fillStyle=white; if(a!==D.x0) g.fillRect(X(a2-.4),Y(z-SWD/2+.4),.4*ppm,(SWD/2-.4)*ppm); if(b!==D.x1) g.fillRect(X(b2),Y(z),.4*ppm,(SWD/2-.4)*ppm); }   // vạch dừng đúng làn xe tới (đi bên phải)
-      for(const x of SX) for(const [a,b] of segZ(x)){ const a2=a+(a===D.z0?0:4), b2=b-(b===D.z1?0:4);
-        g.fillStyle=white; g.fillRect(X(x-SWD/2+.35),Y(a2),lineW,Y(b2)-Y(a2)); g.fillRect(X(x+SWD/2-.35)-lineW,Y(a2),lineW,Y(b2)-Y(a2));
-        g.fillStyle=yellow; for(let z=a2;z<b2-1.5;z+=4.5) g.fillRect(X(x)-lineW/2,Y(z),lineW,2.6*ppm);
-        g.fillStyle=white; if(a!==D.z0) g.fillRect(X(x),Y(a2-.4),(SWD/2-.4)*ppm,.4*ppm); if(b!==D.z1) g.fillRect(X(x-SWD/2+.4),Y(b2),(SWD/2-.4)*ppm,.4*ppm); }
-      // vạch qua đường (zebra) ở 4 phía mỗi ngã tư, nằm giữa vạch dừng và ngã tư
-      g.fillStyle=white;
-      for(const x of SX) for(const z of SZ){
-        for(const s of [-1,1]){ const zz=z+s*(SWD/2+2); for(let k=-SWD/2+.6;k<SWD/2-.6;k+=.9) g.fillRect(X(x+k),Y(zz-1.3),.5*ppm,2.6*ppm);
-          const xx=x+s*(SWD/2+2); for(let k=-SWD/2+.6;k<SWD/2-.6;k+=.9) g.fillRect(X(xx-1.3),Y(z+k),2.6*ppm,.5*ppm); } }
-      // vạch qua đường ở cuối đại lộ (đầu cầu)
-      for(let k=-SWD/2+.6;k<SWD/2-.6;k+=.9) g.fillRect(X(D.x0+3-1.3),Y(k),2.6*ppm,.5*ppm);
+      g.fillStyle='#34363b'; for(const r of NET.rects) g.fillRect(X(r.x0),Y(r.z0),X(r.x1)-X(r.x0),Y(r.z1)-Y(r.z0));
+      g.globalAlpha=.35; for(let i=0;i<60000;i++){ const x=D.x0+R()*DW, z=D.z0+R()*DH; if(!NET.onRoad(x,z)) continue; const v=40+R()*40|0; g.fillStyle=`rgb(${v},${v},${v+4})`; g.fillRect(X(x),Y(z),2,2); } g.globalAlpha=1;
     });
     tex.wrapS=tex.wrapT=THREE.ClampToEdgeWrapping; tex.anisotropy=16;
     const gm=new THREE.MeshStandardMaterial({map:tex, roughness:.88});
     const ground=new THREE.Mesh(new THREE.PlaneGeometry(DW,DH), gm); ground.rotation.x=-Math.PI/2; ground.position.set(cx,.03,cz); ground.receiveShadow=true; scene.add(ground);
-    // bó vỉa nổi dọc mép đường (để phố có chiều sâu thật)
-    const curbM=colorMat(0xd7d3ca,{roughness:.8});
-    for(const z of SZ) for(const s of [-1,1]){ const zz=z+s*(SWD/2+.12); let a=D.x0; for(const x of [...SX, D.x1+SWD/2]){ const b=x-SWD/2; if(b-a>1){ const c=mesh(box(b-a,.14,.24), curbM, (a+b)/2,.07,zz); c.castShadow=false; } a=x+SWD/2; } }
-    for(const x of SX) for(const s of [-1,1]){ const xx=x+s*(SWD/2+.12); let a=D.z0; for(const z of [...SZ, D.z1+SWD/2]){ const b=z-SWD/2; if(b-a>1){ const c=mesh(box(.24,.14,b-a), curbM, xx,.07,(a+b)/2); c.castShadow=false; } a=z+SWD/2; } }
   }
-
+  // bó vỉa nổi dọc mép đường (mọi đoạn trong Downtown + Phường – ward.js không vẽ lại)
+  { const curbM=colorMat(0xd7d3ca,{roughness:.8});
+    for(const sg of NET.segs) for(const pc of NET.pieces(sg)) for(const sd of [-1,1]){ const off=sd*(HWR+.12), a=pc.a+(pc.ja?0:.0), b=pc.b; if(b-a<1) continue;
+      const c = sg.ns ? mesh(box(.24,.14,b-a), curbM, sg.x+off,.07,(a+b)/2) : mesh(box(b-a,.14,.24), curbM, (a+b)/2,.07,sg.z+off); c.castShadow=false; } }
   /* ---------- 3. Cầu dây văng nối đảo chính ---------- */
   {
     const X0=46.5, X1=D.x0+1, len=X1-X0, mid=(X0+X1)/2, BW=D.bridgeW;
     const deckTex=AS.clone(); deckTex.repeat.set(1,len/20); deckTex.needsUpdate=true;
     const deck=mesh(box(BW,.3,len), [MAT.stone,MAT.stone,new THREE.MeshStandardMaterial({map:deckTex, roughness:.9}),MAT.stone,MAT.stone,MAT.stone], mid, 0, 0); deck.rotation.y=Math.PI/2;
     addPlat(mid, 0, Math.PI/2, BW/2, len/2, .15);
+    // mặt cầu 28 m: đường 20 m (2 làn ô tô + 1 làn xe máy mỗi chiều) + lối bộ hành nổi 2 bên (đèn đặt trên lối bộ hành, không chắn làn xe)
+    { const lw=(BW/2-HWR), bt=canvasTex(512,256,(g,w,h)=>{ const k=w/BW, Xz=z=>(z+BW/2)*k; g.fillStyle='#34363a'; g.fillRect(0,0,w,h); for(let i=0;i<5000;i++){ const v=30+R()*40|0; g.fillStyle=`rgba(${v},${v},${v+4},.6)`; g.fillRect(R()*w,R()*h,1.5,1.5); }
+        g.fillStyle='#e8b923'; for(const z of [-.19,.19]) g.fillRect(Xz(z)-1.5,0,3,h);
+        g.fillStyle='#ecebe4'; for(const z of [-6.8,6.8,-9.7,9.7]) g.fillRect(Xz(z)-1.5,0,3,h); for(const z of [-3.5,3.5]) g.fillRect(Xz(z)-1.2,0,2.4,h*.55); });
+      bt.repeat.set(1, len/9); bt.needsUpdate=true; deck.material[2]=new THREE.MeshStandardMaterial({map:bt, roughness:.9});
+      const wkM=colorMat(0xc9c3b6,{roughness:.85}), cbM=colorMat(0xe4e1da,{roughness:.7});
+      for(const s of [-1,1]){ const zc=s*(HWR+lw/2); const wk=mesh(box(len,.18,lw), wkM, mid,.24,zc); wk.castShadow=false; mesh(box(len,.22,.14), cbM, mid,.26,s*(HWR+.07)).castShadow=false;
+        addPlat(mid, zc, 0, len/2, lw/2, .33); } }
     // lan can thật: trụ đứng mỗi 2m + 2 thanh ngang (nhìn xuyên qua được)
     const rail=new THREE.MeshStandardMaterial({color:0xcfd5db, metalness:.85, roughness:.3});
     for(const s of [-1,1]){ const z=s*(BW/2-.1); mesh(box(len,.07,.07), rail, mid,1.05,z).castShadow=false; mesh(box(len,.04,.04), rail, mid,.6,z).castShadow=false;
       for(let x=X0+1;x<X1;x+=2){ const p=mesh(new THREE.CylinderGeometry(.03,.03,.95,6), rail, x,.6,z); p.castShadow=false; } }
-    boxes.push({x0:X0+2, x1:X1, z0:BW/2-.35, z1:BW/2+.3}); boxes.push({x0:X0+2, x1:X1, z0:-BW/2-.3, z1:-BW/2+.35});
-    for(let x=74;x<X1;x+=8) for(const s of [-1,1]) mesh(new THREE.CylinderGeometry(.5,.6,6,12), MAT.stone, x,-3,s*3);
+    boxes.push({x0:X0+2, x1:D.x0-.05, z0:BW/2-.35, z1:BW/2+.3}); boxes.push({x0:X0+2, x1:D.x0-.05, z0:-BW/2-.3, z1:-BW/2+.35});
+    for(let x=74;x<X1;x+=8) for(const s of [-1,1]) for(const zz of [3.5,10]) mesh(new THREE.CylinderGeometry(.55,.65,6,12), MAT.stone, x,-3,s*zz);
     // trụ tháp + dây văng
     const PX=104, PH=26;
     for(const s of [-1,1]) mesh(box(1.4,PH,1.4), new THREE.MeshStandardMaterial({color:0xe7e9ec, roughness:.4, metalness:.2}), PX, PH/2-1, s*(BW/2+.9));
@@ -114,20 +98,21 @@ export function buildDowntown(W, interior){
 
   /* ---------- 4. Toà nhà ---------- */
   const TEAMS={qa:['Phòng QA Manual','Phòng QA Automation'], dev:['Phòng Dev Backend','Phòng Dev Frontend'], perf:['Phòng Performance','Phòng SRE'], sec:['Phòng Pentest','Phòng SOC'], data:['Phòng Data QA','Phòng BI'], mobile:['Phòng Mobile QA','Lab thiết bị']};
+  // Quy hoạch 15/11/2026: 7 toà ở Downtown phía Bắc (2 hàng: hàng Bắc cửa ra bờ biển, hàng Nam cửa ra Đại lộ Hồ Ngọc z=0); 6 toà chuyển xuống khối cao ốc Nam (z 390–460)
   const DEFS=[
-    {name:'Bình Phan Tech Hub', short:'BP Tech', style:'hq',       x:154.5, z:-18,  w:22, d:18, h:96,  face:1,  teams:['qa','dev'], color:0x46d39a},
-    {name:'AutoQA Labs',         short:'AutoQA',   style:'twist',    x:199,   z:-18,  w:16, d:16, h:84,  face:1,  teams:['qa','dev'], color:0x4fc3ff},
-    {name:'PerfMax Performance', short:'PerfMax',  style:'cylinder', x:243.5, z:-18,  w:18, d:18, h:70,  face:1,  teams:['perf'],     color:0xc77dff},
-    {name:'BugBusters Inc.',     short:'BugBusters',style:'setback', x:154.5, z:18,   w:24, d:18, h:72,  face:-1, teams:['qa'],       color:0xff5a6e},
-    {name:'API Hub Tower',       short:'API Hub',  style:'spire',    x:199,   z:18,   w:17, d:17, h:108, face:-1, teams:['dev','qa'], color:0xffd23f},
-    {name:'DataCheck Corp',      short:'DataCheck',style:'glass',    x:243.5, z:18,   w:20, d:16, h:60,  face:-1, teams:['data'],     color:0x4fc3ff},
-    {name:'Manual Test Studio',  short:'MTS',      style:'brick',    x:146,   z:-51.5,w:16, d:14, h:28,  face:1,  teams:['qa'],       color:0xffb547},
-    {name:'SecureQA',            short:'SecureQA', style:'dark',     x:165,   z:-51.5,w:12, d:12, h:46,  face:1,  teams:['sec'],      color:0xff3b30, locked:true},
-    {name:'QA Federation',       short:'QA Fed',   style:'artdeco',  x:199,   z:-51.5,w:18, d:14, h:88,  face:1,  teams:['qa','data'],color:0xffc44d},
-    {name:'Mobile First QA',     short:'MobileFirst',style:'brick',  x:243.5, z:-51.5,w:22, d:14, h:34,  face:1,  teams:['mobile'],   color:0x46d39a},
-    {name:'Cloud Test Co.',      short:'CloudTest',style:'setback', x:154.5, z:51.5, w:20, d:14, h:50,  face:-1, teams:['perf','dev'],color:0x7aa2ff},
-    {name:'DevOps Center',       short:'DevOps',   style:'dark',     x:235,   z:51.5, w:13, d:12, h:40,  face:-1, teams:['dev'],      color:0x46d39a, locked:true},
-    {name:'Contract Testing Ltd',short:'Contract', style:'cylinder', x:254,   z:51.5, w:10, d:10, h:44,  face:-1, teams:['qa'],       color:0xff8fc2},
+    {name:'Bình Phan Tech Hub', short:'BP Tech', style:'hq',       x:203, z:-24,  w:22, d:18, h:96,  face:1,  teams:['qa','dev'], color:0x46d39a},
+    {name:'AutoQA Labs',         short:'AutoQA',   style:'twist',    x:226.5, z:-24,  w:16, d:16, h:84,  face:1,  teams:['qa','dev'], color:0x4fc3ff},
+    {name:'PerfMax Performance', short:'PerfMax',  style:'cylinder', x:250, z:-24,  w:18, d:18, h:70,  face:1,  teams:['perf'],     color:0xc77dff},
+    {name:'BugBusters Inc.',     short:'BugBusters',style:'setback', x:152, z:404,   w:24, d:18, h:72,  face:-1, teams:['qa'],       color:0xff5a6e},
+    {name:'API Hub Tower',       short:'API Hub',  style:'spire',    x:224, z:403,   w:17, d:17, h:108, face:-1, teams:['dev','qa'], color:0xffd23f},
+    {name:'DataCheck Corp',      short:'DataCheck',style:'glass',    x:250, z:402,   w:20, d:16, h:60,  face:-1, teams:['data'],     color:0x4fc3ff},
+    {name:'Manual Test Studio',  short:'MTS',      style:'brick',    x:152, z:-25,w:16, d:14, h:28,  face:1,  teams:['qa'],       color:0xffb547},
+    {name:'SecureQA',            short:'SecureQA', style:'dark',     x:152, z:-48,w:12, d:12, h:46,  face:-1,  teams:['sec'],      color:0xff3b30, locked:true},
+    {name:'QA Federation',       short:'QA Fed',   style:'artdeco',  x:205, z:-48,w:18, d:14, h:88,  face:-1,  teams:['qa','data'],color:0xffc44d},
+    {name:'Mobile First QA',     short:'MobileFirst',style:'brick',  x:240, z:-48,w:22, d:14, h:34,  face:-1,  teams:['mobile'],   color:0x46d39a},
+    {name:'Cloud Test Co.',      short:'CloudTest',style:'setback', x:158, z:446, w:20, d:14, h:50,  face:1, teams:['perf','dev'],color:0x7aa2ff},
+    {name:'DevOps Center',       short:'DevOps',   style:'dark',     x:176, z:401, w:13, d:12, h:40,  face:-1, teams:['dev'],      color:0x46d39a, locked:true},
+    {name:'Contract Testing Ltd',short:'Contract', style:'cylinder', x:232, z:448, w:10, d:10, h:44,  face:1, teams:['qa'],       color:0xff8fc2},
   ];
   function sign(text, color){ return canvasTex(1024,192,(g,w,h)=>{ g.fillStyle='#0e131b'; g.fillRect(0,0,w,h); g.fillStyle='#'+color.toString(16).padStart(6,'0'); g.fillRect(0,h-14,w,14);
     g.fillStyle='#fff'; g.font='800 88px "Segoe UI",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; let fs=88; while(g.measureText(text).width>w-60){ fs-=6; g.font=`800 ${fs}px "Segoe UI",sans-serif`; } g.fillText(text,w/2,h/2-4); }); }
@@ -189,17 +174,13 @@ export function buildDowntown(W, interior){
   }
   DEFS.forEach(build);
 
-  /* ---------- 5. Công viên trung tâm + cây xanh + đèn đường ---------- */
-  // S19: Công viên Trung tâm (hồ nước, cầu gỗ, sân chơi, thể dục, máy bán nước…) và cây xanh / chậu hoa vỉa hè (InstancedMesh, có va chạm)
-  // dựng trong js/park.js (life.js nạp trước khi gộp mesh tĩnh). Ở đây chỉ còn đèn đường; chừa nguyên lô công viên x 183–215 · z 41–63.
-  const PARKLOT={x0:182, x1:216, z0:40.5, z1:63};
-  const inParkLot=(x,z)=>x>PARKLOT.x0 && x<PARKLOT.x1 && z>PARKLOT.z0 && z<PARKLOT.z1;
+  /* ---------- 5. Đèn đường (vỉa hè mọi đoạn đường của thành phố) ---------- */
+  // Công viên Hồ Ngọc, cây xanh + chậu hoa vỉa hè: js/park.js. Khu công cộng (cứu hoả, bệnh viện, trường): js/civic.js.
   const nearDoor=(x,z)=>towers.some(t=>t.door && Math.abs(x-t.door.x)<4.6 && Math.abs(z-t.door.z)<5);   // không dựng đèn chắn lối vào toà
-  for(let x=D.x0+6;x<D.x1;x+=18) for(const z of SZ) for(const s of [-1,1]){ if(SX.some(sx=>Math.abs(sx-x)<7) || nearDoor(x+3, z+s*5.8) || inParkLot(x+3, z+s*5.8)) continue; lampPost(x+3, z+s*5.8); }
-  for(const x of SX) for(let z=D.z0+8;z<D.z1;z+=18) for(const s of [-1,1]){ if(SZ.some(sz=>Math.abs(sz-z)<7) || nearDoor(x+s*5.8, z)) continue; lampPost(x+s*5.8, z); }
-
+  const PLC=CITY.places||{}, nearPlace=(x,z)=>Object.values(PLC).some(p=>p && Math.hypot(x-p.x,z-p.z)<6);
+  for(const p of NET.curbPoints(.9, 22, HWR+NET.walk+3)){ if(nearDoor(p.x,p.z) || nearPlace(p.x,p.z)) continue; if(!W.inDT(p.x,p.z,-.3)) continue; lampPost(p.x, p.z); }
   /* ---------- 6. Bản đồ + đêm ---------- */
-  PLACES.push({icon:'🏙️', name:'Downtown · QC City', sub:'Khu công ty cao tầng (đi qua cầu phía Đông)', go:()=>teleport(D.x0+6, 0, D.x0+30, 0)});
+  PLACES.push({icon:'🏙️', name:'Downtown · QC City', sub:'Khu công ty cao tầng (đi qua cầu phía Đông)', go:()=>teleport(D.x0+8, -12.5, D.x0+40, -12.5)});
   for(const t of towers.filter(t=>!t.locked)) PLACES.push({icon:'🏢', name:t.name, sub:`Toà ${Math.round(t.h/3.6)} tầng · Downtown`, go:()=>teleport(t.door.x, t.door.z+(t.face>0?1.5:-1.5), t.x, t.z)});
   let lastN=-1;
   W.HOOK.onFrame.push(()=>{ if(W.night===lastN) return; lastN=W.night; const k=.1+W.night*.95; for(const m of winMats) m.emissiveIntensity=k; for(const [m,b] of ledMats) m.emissiveIntensity=b*(.35+W.night*.8); });

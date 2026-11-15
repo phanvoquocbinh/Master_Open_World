@@ -7,6 +7,7 @@
 //  🚕 Taxi: phím X gọi xe tới con đường gần nhất, chọn điểm đến, giá theo quãng đường thật; X lần nữa khi đang đi = đi nhanh.
 // Hình khối dựng thủ tục, gộp theo vật liệu (mỗi xe buýt ~10 lượt vẽ, 8 cabin dùng chung 3 lượt vẽ nhờ InstancedMesh).
 import { compactGroup } from './perf.js';
+import { roadNet } from './roads.js';
 export function makeTransit(W, ctx){
   const {S, save, ui, askPay, fmt, spend, V, downtown, ward, campus, resort} = ctx;
   const {THREE, scene, groundAt, groundH, P, me, cam, HOOK, INTER, PLACES, toast, clamp, lerpAngle, circles, boxes, CITY, ROAD, makeLabel, mergeGeometries, resolve, edgeR, WATER_Y} = W;
@@ -95,20 +96,20 @@ export function makeTransit(W, ctx){
   const RL=ROAD.r+ROAD.w/4;                       // làn ngoài đường vòng đảo
   const pol=(a,r=RL)=>[Math.cos(a)*r, Math.sin(a)*r], tCW=a=>[Math.sin(a), -Math.cos(a)];
   const A0=-.35, A1=-TAU+.35, BX=58, WD=CITY.ward, SXr=WD.links||[178,220];
-  const xa=SXr[0]-2.5, xb=SXr[1]+2.5, zw=WD.street+2.5;
-  const cityPart=roundCorners([[BX,2.5],[xa,2.5],[xa,zw],[xb,zw],[xb,-2.5],[BX,-2.5]], 8);
+  // quy hoạch 15/11/2026: xe buýt chạy làn ô tô ngoài (B, tim làn cách tim đường 5,35 m), vòng quanh Đại công viên Hồ Ngọc: đại lộ z=0 → ven Tây → phố chính Phường → ven Đông
+  const LB=(CITY.roads&&CITY.roads.lane&&CITY.roads.lane.b)||2.5, xa=SXr[0]-LB, xb=SXr[1]+LB, zw=(WD.main??WD.street)+LB;
+  const cityPart=roundCorners([[BX,LB],[xa,LB],[xa,zw],[xb,zw],[xb,-LB],[BX,-LB]], 9);
   const e0=pol(A0), te0=tCW(A0), e1=pol(A1), te1=tCW(A1);
-  const intoRing=bez3([BX,-2.5],[BX-11,-2.5],[e0[0]-te0[0]*11, e0[1]-te0[1]*11], e0);
+  const intoRing=bez3([BX,-LB],[BX-11,-LB],[e0[0]-te0[0]*11, e0[1]-te0[1]*11], e0);
   const ring=[]; for(let a=A0-.02; a>A1; a-=.02) ring.push(pol(a));
-  const outRing=bez3(e1,[e1[0]+te1[0]*11, e1[1]+te1[1]*11],[BX-11,2.5],[BX,2.5]);
+  const outRing=bez3(e1,[e1[0]+te1[0]*11, e1[1]+te1[1]*11],[BX-11,LB],[BX,LB]);
   const ROUTE=makePath([...cityPart, ...intoRing, ...ring, ...outRing.slice(0,-1)], true);
 
   const STOP_DEF=[
-    {name:'Downtown · Trung tâm', at:[xa,22]},
-    {name:'Chợ QC · Showroom', at:[xa,70]},
-    {name:'Phường Khởi Nghiệp', at:[200,zw]},
-    {name:'Downtown · Đông', at:[xb,24]},
-    {name:'Đầu cầu Downtown', at:[169,-2.5]},
+    {name:'Phường Khởi Nghiệp · Chợ QC', at:[166,zw]},
+    {name:'Bệnh viện · Trạm cứu hoả', at:[226,zw]},
+    {name:'Downtown · Cổng công viên', at:[222,-LB]},
+    {name:'Đầu cầu Downtown', at:[163,-LB]},
     {name:'Bến cảng', at:pol(-Math.PI/2)},
     {name:'Toà Giáo trình', at:pol(2.95)},
     {name:'Khu nghỉ dưỡng', at:pol(2.3)},
@@ -119,7 +120,7 @@ export function makeTransit(W, ctx){
 
   // mái chờ xe buýt (tĩnh → được gộp chung ở batchStatic)
   function buildShelter(stop){
-    const island=Math.hypot(stop.at[0], stop.at[1])<60, off=island ? 3.75 : 4.5;
+    const island=Math.hypot(stop.at[0], stop.at[1])<60, off=island ? 3.75 : ((CITY.roads?CITY.roads.hw:5)-LB+1.6);   // mái chờ trên vỉa hè (đường 20 m)
     let best=null;
     for(const ds of [0,2,-2,4,-4,6,-6,9,-9,12,-12,16,-16]){ const s=stop.s+ds, p=ROUTE.at(s), h=ROUTE.heading(s,3), r=rightOf(h), cx=p.x+r[0]*off, cz=p.z+r[1]*off;
       if(free(cx,cz,2.4) && free(cx-r[0]*1.2+Math.sin(h)*2.2, cz-r[1]*1.2+Math.cos(h)*2.2, 1) ){ best={s, p, h, r, cx, cz}; break; } }
@@ -377,12 +378,12 @@ export function makeTransit(W, ctx){
   const node=(x,z)=>{ G.nodes.push({x,z,adj:[]}); return G.nodes.length-1; };
   const link=(a,b)=>{ const d=Math.hypot(G.nodes[a].x-G.nodes[b].x, G.nodes[a].z-G.nodes[b].z); G.nodes[a].adj.push([b,d]); G.nodes[b].adj.push([a,d]); G.edges.push([a,b]); };
   const NR=64, ringN=[]; for(let i=0;i<NR;i++){ const a=i/NR*TAU; ringN.push(node(Math.cos(a)*ROAD.r, Math.sin(a)*ROAD.r)); } for(let i=0;i<NR;i++) link(ringN[i], ringN[(i+1)%NR]);
-  const D=CITY.downtown, GX=[D.x0, SXr[0], SXr[1], D.x1], GZ=[-36,0,36], gid={};
+  const D=CITY.downtown, gid={};
   const gn=(x,z)=>{ const k=x+','+z; return gid[k]??(gid[k]=node(x,z)); };
   link(ringN[0], gn(D.x0,0));
-  for(const z of GZ) for(let i=0;i<GX.length-1;i++) link(gn(GX[i],z), gn(GX[i+1],z));
-  for(const x of SXr){ link(gn(x,D.z0), gn(x,-36)); link(gn(x,36), gn(x,D.z1)); link(gn(x,-36), gn(x,0)); link(gn(x,0), gn(x,36)); link(gn(x,D.z1), gn(x,WD.street)); }
-  for(let i=0;i<GX.length-1;i++) link(gn(GX[i],WD.street), gn(GX[i+1],WD.street));
+  // đồ thị đường thành phố dựng từ CITY.roads: nút ở mọi ngã giao + 2 đầu mỗi đoạn (hills.js cần nút đúng (262, 86); arena nối nút gần (262, 0); highland nối nút gần (178, −62))
+  { const NET=roadNet(CITY); for(const sg of NET.segs){ const pts=new Set([sg.a, sg.b]); for(const j of NET.J){ if(sg.ns ? j.x===sg.x : j.z===sg.z) pts.add(sg.ns?j.z:j.x); }
+      const arr=[...pts].sort((a,b)=>a-b); for(let i=0;i<arr.length-1;i++) link(sg.ns?gn(sg.x,arr[i]):gn(arr[i],sg.z), sg.ns?gn(sg.x,arr[i+1]):gn(arr[i+1],sg.z)); } }
   function project(x,z){ let best=null; for(const [a,b] of G.edges){ const A=G.nodes[a], B=G.nodes[b], dx=B.x-A.x, dz=B.z-A.z, L2=dx*dx+dz*dz, t=clamp(((x-A.x)*dx+(z-A.z)*dz)/L2,0,1), px=A.x+dx*t, pz=A.z+dz*t, d=Math.hypot(px-x,pz-z);
       if(!best || d<best.d) best={a,b,t,x:px,z:pz,d}; } return best; }
   function dijkstra(src){ const n=G.nodes.length, dist=new Float64Array(n).fill(Infinity), prev=new Int32Array(n).fill(-1), done=new Uint8Array(n);
@@ -410,7 +411,7 @@ export function makeTransit(W, ctx){
     try{ add('📚','Toà Giáo trình', -50, 0); }catch(e){}
     try{ const h=resort && resort.houses && resort.houses[0]; if(h) add('🏝️','Khu nghỉ dưỡng', h.x, h.z); }catch(e){}
     add('🚡','Ga cáp treo · Đảo', CA.x, CA.z); add('🌉','Cổng Rời đảo (đầu cầu)', CITY.gateX||52, 0);
-    add('🌆','Downtown · Trung tâm', SXr[0], 0); add('🚡','Ga cáp treo · Downtown', CB.x, CB.z);
+    add('🌆','Downtown · Đại lộ Hồ Ngọc', 199, 0); add('🌳','Đại công viên Hồ Ngọc · Cổng Bắc', 199, 0); add('🚡','Ga cáp treo · Downtown', CB.x, CB.z);
     try{ for(const t of (downtown && downtown.towers || []).filter(t=>!t.locked)) add('🏢', t.name, t.door.x, t.door.z); }catch(e){}
     const pl=CITY.places||{}; if(pl.shop) add('🛒','Chợ QC', pl.shop.x, pl.shop.z); if(pl.showroom) add('🚗','Showroom xe', pl.showroom.x, pl.showroom.z); if(pl.landOffice) add('📜','Văn phòng địa chính', pl.landOffice.x, pl.landOffice.z);
     try{ const sp=ward && ward.spots; if(sp && sp.jobCenter) add('🧑‍💼','Trung tâm Việc làm', sp.jobCenter.x, sp.jobCenter.z); if(sp && sp.tro) add('🛏️','Nhà trọ khởi nghiệp', sp.tro.x, sp.tro.z); }catch(e){}

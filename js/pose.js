@@ -23,6 +23,7 @@ export function makePoser(THREE, actor){
         // S-GFX (15/11): ngồi trong XE HƠI – ghế thấp, chân duỗi chéo ra trước, bàn chân đặt trên sàn xe (≈ hông − 0,3 m) thay vì cẳng chân thẳng đứng
         // (tư thế 'sit' làm bàn chân thòi xuống dưới sàn → lòi ra gầm xe / xuyên thân xe)
         case 'car': for(const [s,k] of [['Left',-1],['Right',1]]){ aim(s+'UpLeg', s+'Leg', V(1,.04,k*.06)); aim(s+'Leg', s+'Foot', V(.8,-.6)); aim(s+'Arm',s+'ForeArm',V(.35,-1,k*.12)); aim(s+'ForeArm',s+'Hand',V(1,-.15,-k*.15)); } break;
+        case 'lap': sit(); for(const [s,k] of [['Left',-1],['Right',1]]){ aim(s+'Arm',s+'ForeArm',V(.22,-1,k*.1)); aim(s+'ForeArm',s+'Hand',V(.8,-.42,-k*.55)); } aim('Neck','Head',V(.06+Math.sin(t*.7)*.03,1,Math.sin(t*.45)*.08)); break;   // S-QA: nhân viên tư vấn
         case 'type': sit(); for(const [s,k] of [['Left',-1],['Right',1]]){ aim(s+'Arm',s+'ForeArm',V(.55,-1,k*.12)); aim(s+'ForeArm',s+'Hand',V(1,.05+Math.sin(t*14+k)*.06,-k*.25)); } break;
         case 'eat': sit(); { const e=Math.max(0,Math.sin(t*1.6)); aim('LeftArm','LeftForeArm',V(.45,-1,-.1)); aim('LeftForeArm','LeftHand',V(1,-.2,.2));
           aim('RightArm','RightForeArm',V(.6,-1+e*.6,.15)); aim('RightForeArm','RightHand',V(.6,.2+e*1.1,-.2)); } break;

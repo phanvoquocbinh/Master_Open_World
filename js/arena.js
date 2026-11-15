@@ -85,7 +85,7 @@ export function makeArena(W, ctx){
     for(const s of [0,1]){ const x0=s?w-m-150:m; c.strokeRect(x0,h/2-170,150,340); const x1=s?w-m-60:m; c.strokeRect(x1,h/2-90,60,180); c.beginPath(); c.arc(s?w-m-110:m+110,h/2,6,0,TAU); c.fill(); } });
   const pitchMat=new THREE.MeshStandardMaterial({map:pitchTex, roughness:.95, emissive:0xffffff, emissiveMap:pitchTex, emissiveIntensity:0});
   { const p=new THREE.Mesh(new THREE.PlaneGeometry(PL,PW), pitchMat); p.rotation.x=-Math.PI/2; p.position.set(SC.x,.05,SC.z); p.receiveShadow=true; stad.add(p);
-    const k=Kit(); k.add(new THREE.BoxGeometry(PL+12,.04,PW+10), sm(0x2f6e35,.95), SC.x,.03,SC.z);
+    const k=Kit(); k.add(new THREE.BoxGeometry(PL+12,.04,PW+10), sm(0x2f6e35,.95), SC.x,.015,SC.z);   // S-QA: hạ nền cỏ 1,5 cm – trước mặt trên trùng đúng mặt sân (y=.05) → nhấp nháy cả sân
     // khung thành
     for(const s of [-1,1]){ const gx=SC.x+s*PL/2; for(const z of [-GW/2,GW/2]) k.add(new THREE.CylinderGeometry(.07,.07,2.0,10), sm(0xffffff,.3), gx,1.0,SC.z+z);
       k.add(new THREE.CylinderGeometry(.07,.07,GW,10), sm(0xffffff,.3), gx,2.0,SC.z, Math.PI/2,0,0); k.add(new THREE.BoxGeometry(.05,.05,GW), sm(0xdddddd,.5), gx+s*1.6,.03,SC.z);
@@ -116,7 +116,7 @@ export function makeArena(W, ctx){
     k.add(new THREE.BoxGeometry(.4,wh,SB.z1-SB.z0), wallM, SB.x0,wh/2,(SB.z0+SB.z1)/2); k.add(new THREE.BoxGeometry(.4,wh,SB.z1-SB.z0), wallM, SB.x1,wh/2,(SB.z0+SB.z1)/2);
     const gL=SC.x-2.6, gR=SC.x+2.6;
     k.add(new THREE.BoxGeometry(gL-SB.x0,wh,.4), wallM, (SB.x0+gL)/2,wh/2,SB.z1); k.add(new THREE.BoxGeometry(SB.x1-gR,wh,.4), wallM, (gR+SB.x1)/2,wh/2,SB.z1);
-    k.add(new THREE.BoxGeometry(6.4,1.2,.6), sm(0xffc44d,.4), SC.x,wh+1.2,SB.z1); for(const s of [-1,1]) k.add(new THREE.BoxGeometry(.6,wh+1.8,.6), sm(0xffc44d,.4), SC.x+s*2.9,(wh+1.8)/2,SB.z1);
+    k.add(new THREE.BoxGeometry(6.4,1.2,.6), sm(0xffc44d,.4), SC.x,wh+1.2,SB.z1); for(const s of [-1,1]) k.add(new THREE.BoxGeometry(.6,wh+1.8,.6), sm(0xffc44d,.4), SC.x+s*2.84,(wh+1.8)/2,SB.z1);   // S-QA: trụ ôm kín đầu tường (trước 2 mặt trùng nhau → nhấp nháy)
     // cột đèn pha 4 góc
     for(const sx of [-1,1]) for(const sz of [-1,1]){ const x=SC.x+sx*(PL/2+9), z=SC.z+sz*(PW/2+8.5); k.add(new THREE.CylinderGeometry(.28,.4,22,10), sm(0xb8c0c8,.35,.7), x,11,z); circles.push({x,z,r:.5}); }
     k.build(stad);
@@ -275,7 +275,8 @@ transformed.y += abs(sin(uT*2.2 + ph))*0.05 + uCheer*abs(sin(uT*9.0 + ph))*0.42 
   const pitGate={x0:PIT.x0-.15, x1:PIT.x0+.15, z0:CS.z-2, z1:CS.z+2, msg:'🎟️ Khu sát sân khấu cần vé concert (30 💰) – bấm E ở quầy vé cạnh lối vào.'}; boxes.push(pitGate);
   // nhạc tự tạo (WebAudio): trống + bass + hợp âm + giai điệu, 124 BPM
   const AU={ctx:null, master:null, next:0, step:0, timer:null};
-  function audioStart(){ if(AU.ctx) return true; try{ const C=window.AudioContext||window.webkitAudioContext; if(!C) return false; AU.ctx=new C(); AU.master=AU.ctx.createGain(); AU.master.gain.value=0; const comp=AU.ctx.createDynamicsCompressor(); AU.master.connect(comp); comp.connect(AU.ctx.destination);
+  function audioStart(){ if(AU.ctx) return true; try{ const C=window.AudioContext||window.webkitAudioContext; if(!C) return false; AU.ctx=new C(); AU.master=AU.ctx.createGain(); AU.master.gain.value=0; const comp=AU.ctx.createDynamicsCompressor();
+      AU.lp=AU.ctx.createBiquadFilter(); AU.lp.type='lowpass'; AU.lp.frequency.value=12000; AU.master.connect(AU.lp); AU.lp.connect(comp); comp.connect(AU.ctx.destination);   // S19g: xa sân khấu → tiếng đục (chỉ còn bass)
       AU.noise=AU.ctx.createBuffer(1, AU.ctx.sampleRate*.5, AU.ctx.sampleRate); const d=AU.noise.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=R()*2-1;
       AU.timer=setInterval(schedule, 25); return true; }catch(e){ return false; } }
   const BPM=124, SPB=60/BPM/4, CH=[[57,60,64],[53,57,60],[48,52,55],[55,59,62]], LEAD=[69,72,76,72, 74,72,69,67, 65,69,72,69, 67,71,74,71];
@@ -311,7 +312,9 @@ transformed.y += abs(sin(uT*2.2 + ph))*0.05 + uCheer*abs(sin(uT*9.0 + ph))*0.42 
     if(singer){ singer.a.play(SHOW.on?'walk':'idle',.3); singer.a.g.position.z=CS.z+(SHOW.on?Math.sin(T*.6)*4:0); singer.a.g.rotation.y=-Math.PI/2+(SHOW.on?Math.cos(T*.6)*.4:0); if(singer.a.root.visible) singer.a.mixer.update(dt*(SHOW.on?.6:1)); }
     if(dj && dj.a.root.visible){ dj.a.play('idle',.3); dj.a.g.position.y=1.42+(SHOW.on?beat*.05:0); dj.a.mixer.update(dt); }
     // âm lượng theo khoảng cách (không phát nếu đang mở nhạc YouTube)
-    if(AU.ctx){ const d=Math.hypot(P.x-CS.x,P.z-CS.z), yt=W.music && W.music.playing, v = SHOW.on && !yt && !W.inside ? clamp(1-(d-12)/80,0,1)*.55 : 0; AU.master.gain.setTargetAtTime(v, AU.ctx.currentTime, .3); }
+    // S19g: nhỏ dần theo bình phương khoảng cách (10 m ~0,5 · 25 m ~0,25 · 50 m ~0,06 · 90 m gần như im) + càng xa càng đục
+    if(AU.ctx){ const d=Math.hypot(P.x-CS.x,P.z-CS.z), yt=W.music && W.music.playing, k=Math.max(0,d-10)/15, v = SHOW.on && !yt && !W.inside && d<100 ? .5/(1+k*k)*Math.min(1,(100-d)/15) : 0; AU.master.gain.setTargetAtTime(v, AU.ctx.currentTime, .3);
+      if(AU.lp) AU.lp.frequency.setTargetAtTime(Math.max(450, 14000/(1+d/9)), AU.ctx.currentTime, .4); }
   }
   addEventListener('keydown', ()=>{ if(!AU.ctx && near(CS.x,CS.z,95)) audioStart(); if(AU.ctx && AU.ctx.state==='suspended') AU.ctx.resume(); });
   addEventListener('pointerdown', ()=>{ if(!AU.ctx && near(CS.x,CS.z,95)) audioStart(); if(AU.ctx && AU.ctx.state==='suspended') AU.ctx.resume(); });

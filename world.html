@@ -25,7 +25,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#0d1320;font-family:"S
 #eggs{font-size:13px;color:var(--mut);padding:0 8px}
 #prompt{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);padding:10px 16px;display:flex;gap:10px;align-items:center;font-weight:700;font-size:17px;z-index:5;pointer-events:none}
 #prompt .key{background:#ffd23f;min-width:28px;height:28px;font-size:14px;border-radius:8px}
-#hint{position:fixed;left:16px;bottom:16px;font-size:13px;color:#fff;z-index:4;line-height:1.7;padding:6px 12px;border-radius:12px;background:rgba(18,24,36,.6)}
+#hint{position:fixed;left:16px;bottom:16px;font-size:13px;color:#fff;z-index:4;line-height:1.7;padding:6px 12px;border-radius:12px;background:rgba(18,24,36,.6);max-width:calc(100vw - 230px);box-sizing:border-box}  /* S-GFX 15/11: không chạy dài vào dưới nhãn FPS / dock (trước bể UI) */
 #hint .key{margin-right:3px}
 #fps{position:fixed;right:16px;bottom:16px;font-size:12px;color:var(--mut);z-index:4;padding:4px 10px;border-radius:10px;background:rgba(18,24,36,.5)}
 /* loading */
@@ -245,17 +245,33 @@ const CITY = {
     {name:'Bến cảng',      a0:4.45, a1:4.98, r0:47, r1:110},
   ],
   // Sprint 2: đất ở / quán / chợ / showroom / địa chính đã chuyển sang Phường Khởi Nghiệp (thế giới mở, qua cầu) – đảo MD là vùng miễn phí
+  // 15/11/2026 – quy hoạch mới: 12 lô đất ở khối C (3 hàng × 4, quay mặt Bắc ra đường z=290 / lối đi trong khối)
   lots: [
-    ...[0,1,2,3,4,5,6,7].map(i=>({id:'R'+(i+1), kind:'home', price:1500+i%3*300, x:141.5+i*10.45, z:103, rot:Math.PI})),
-    ...[0,1,2,3].map(i=>({id:'B'+(i+1), kind:'biz', price:3000+i*400, x:141.5+(8+i)*10.45, z:103, rot:Math.PI})),
+    ...[0,1,2,3,4,5,6,7].map(i=>({id:'R'+(i+1), kind:'home', price:1500+i%3*300, x:143+(i%4)*10.45, z:[307,329,351][Math.floor(i/4)], rot:Math.PI})),
+    ...[0,1,2,3].map(i=>({id:'B'+(i+1), kind:'biz', price:3000+i*400, x:143+i*10.45, z:351, rot:Math.PI})),
   ],
-  places: { shop:{x:144, z:70.5, rot:0}, showroom:{x:163, z:70.5, rot:0}, landOffice:{x:208, z:70.5, rot:0},
+  places: { shop:{x:146, z:217.5, rot:Math.PI}, showroom:{x:163, z:217.5, rot:Math.PI}, landOffice:{x:180, z:217.5, rot:Math.PI},
             tower:atPolar(Math.PI/2,61), academy:atPolar(Math.PI/2-.3,55), boathouse:atPolar(-Math.PI/2-.13,62) },
 };
-// Downtown: đảo trung tâm thương mại phía Đông, nối bằng cầu theo trục z=0
-CITY.downtown = {x0:136, x1:262, z0:-62, z1:62, bridgeW:10};
-// Phường Khởi Nghiệp: nối liền bờ Nam Downtown (z0 chồng lên Downtown vài mét để đi qua mép không bị chặn); phố chính z=86
-CITY.ward = {x0:136, x1:262, z0:56, z1:118, slabZ0:62, street:86, links:[178,220]};
+// Downtown: đảo trung tâm thương mại phía Đông, nối bằng cầu theo trục z=0 (cầu đảo 28 m: đường 20 m + 2 lối bộ hành)
+CITY.downtown = {x0:136, x1:262, z0:-62, z1:62, bridgeW:28};
+// Phường Khởi Nghiệp (quy hoạch 15/11/2026): đất liền từ Downtown xuống Nam tới z=480 – ĐẠI CÔNG VIÊN HỒ NGỌC ở giữa (x 156–242, z 10–190),
+// phố chính Phường mới z=200 (main). street=86 giữ cho cầu sang Đồi Brand QC (hills.js) – nhánh đường z=86 từ đại lộ ven Đông ra x=262.
+CITY.ward = {x0:136, x1:262, z0:56, z1:480, slabZ0:62, street:86, links:[146,252], main:200};
+// Mạng đường thành phố – nguồn dữ liệu duy nhất cho mặt đường, vạch, đèn tín hiệu, xe bot, xe buýt, taxi, cây/đèn vỉa hè.
+// Mỗi đường rộng 20 m: mỗi chiều 2 làn ô tô 3,3 m + 1 làn xe máy 2,6 m (tim làn ô tô cách tim đường 2,05 · 5,35; xe máy 8,3); vỉa hè 5 m.
+CITY.roads = { hw:10, walk:5, lane:{median:.4, car:3.3, moto:2.6, a:2.05, b:5.35, m:8.3}, segs:[
+  {z:0,   x0:136, x1:262, name:'Đại lộ Hồ Ngọc'},        // cầu đảo (Tây) ⇄ cầu Khu Giải trí (Đông)
+  {x:178, z0:-62, z1:0,   name:'Trục Bắc'},             // cầu Cao nguyên (highland.js BX=178)
+  {x:146, z0:0,   z1:200, name:'Đại lộ ven Tây'},
+  {x:252, z0:0,   z1:200, name:'Đại lộ ven Đông'},
+  {z:86,  x0:252, x1:262, name:'Nhánh cầu Đồi Brand QC'},  // hills.js nối taxi tại nút (262, 86)
+  {z:200, x0:136, x1:262, name:'Phố chính Phường Khởi Nghiệp'},
+  {x:199, z0:200, z1:470, name:'Đường Trường Học'},
+  {z:290, x0:136, x1:262, name:'Đường Bệnh Viện'},
+  {z:380, x0:136, x1:262, name:'Đường Cao Ốc Nam'},
+  {z:470, x0:136, x1:262, name:'Đường Ven Biển Nam'},
+]};
 CITY.gateX = 52;   // cổng "Rời đảo" ở đầu cầu phía đảo
 // S5: Khu Giải trí – nền đất phía Đông Downtown, nối bằng cầu ngắn theo trục z=0 (sân bóng · concert · rạp chiếu · ẩm thực · vòng quay)
 CITY.arena = {x0:274, x1:394, z0:-60, z1:60, bridgeW:10};
@@ -281,7 +297,10 @@ const store = {
   set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 };
 let toastTimer=0;
-function toast(msg, ms=3200){ const t=$('toast'); t.textContent=msg; t.hidden=false; t.style.opacity=1; clearTimeout(toastTimer); toastTimer=setTimeout(()=>{ t.style.opacity=0; setTimeout(()=>t.hidden=true,300); }, ms); }
+function toast(msg, ms=3200){ const t=$('toast'); t.textContent=msg; t.hidden=false; t.style.opacity=1;
+  /* S-GFX 15/11: toast luôn nằm DƯỚI khung nút trên cùng (khung xuống 2 hàng thì trước bị che/chồng chữ) */
+  { const tp=$('top'); if(tp){ const b=tp.getBoundingClientRect().bottom; t.style.top=Math.max(84, Math.round(b+10))+'px'; } }
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>{ t.style.opacity=0; setTimeout(()=>t.hidden=true,300); }, ms); }
 
 /* ============================== RENDERER ============================== */
 const canvas=$('c');
@@ -313,7 +332,7 @@ renderer.shadowMap.type=QP.soft?THREE.PCFSoftShadowMap:THREE.PCFShadowMap;
 const scene=new THREE.Scene();
 const overlay=new THREE.Scene();       // (cũ) – nhãn giờ là HTML cho chữ sắc nét
 scene.fog=new THREE.Fog(0xcfe3ef, 160, 1100);
-const camera=new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 3000);
+const camera=new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.3, 3000);   // S-QA (15/11): near .1 → .3 – bớt nhấp nháy ở xa (độ chính xác chiều sâu ×3)
 
 let composer, renderPass, bloom, CINEFX=null;
 if(CINE){
@@ -500,6 +519,14 @@ if(QP.water==='reflect'){
   water=new THREE.Mesh(new THREE.PlaneGeometry(4000,4000), QUAL==='low' ? new THREE.MeshStandardMaterial(wo)
     : new THREE.MeshPhysicalMaterial({...wo, clearcoat:.5, clearcoatRoughness:.25, clearcoatNormalMap:n2, clearcoatNormalScale:new THREE.Vector2(.3,.3)}));
   water.rotation.x=-Math.PI/2; water.position.y=WATER_Y; water.receiveShadow=true; water.userData.dynamic=true; water.userData.n=[n1,n2]; scene.add(water);
+  // S-QA (15/11): biển không còn trắng xoá ở xa – sương của mặt nước nhẹ và xa hơn mặt đất (vẫn hoà dần vào chân trời), phản chiếu trời giảm
+  water.material.envMapIntensity=.3;
+  water.material.onBeforeCompile=sh=>{ sh.fragmentShader=sh.fragmentShader.replace('#include <fog_fragment>', `
+#ifdef USE_FOG
+  float wfog=smoothstep(fogNear*3.0, fogFar*2.6, vFogDepth)*.8;
+  gl_FragColor.rgb=mix(gl_FragColor.rgb, fogColor, wfog);
+#endif
+`); };
 }
 
 // bọt sóng sát bờ
@@ -761,7 +788,7 @@ const portal={};
   const pm=pbr(TX.wood, 5, 5); const p=mesh(new THREE.CylinderGeometry(7.4,7.6,.16,64), pm, 0,.08,0); p.castShadow=false;
   mesh(new THREE.TorusGeometry(7.45,.09,8,96), MAT.dark, 0,.16,0).rotation.x=Math.PI/2;
   plats.push({t:'c', x:0, z:0, r:7.5, h:.16});
-  mesh(new THREE.CylinderGeometry(2.4,2.6,.3,48), MAT.stone, 0,.3,0);
+  mesh(new THREE.CylinderGeometry(2.4,2.6,.3,48), MAT.stone, 0,.3,0); plats.push({t:'c', x:0, z:0, r:2.45, h:.45});   // bệ đá cổng: đứng trên mặt bệ, không lún
   portal.ring=mesh(new THREE.TorusGeometry(2.1,.17,20,96), new THREE.MeshStandardMaterial({color:0xdfe6ee, metalness:1, roughness:.18}), 0,2.75,0);
   portal.glow=mesh(new THREE.TorusGeometry(2.1,.05,8,96), new THREE.MeshBasicMaterial({color:new THREE.Color(0x7fd8ff).multiplyScalar(3)}), 0,2.75,.18);
   portal.disc=new THREE.Mesh(new THREE.CircleGeometry(1.95,64), new THREE.ShaderMaterial({transparent:true, depthWrite:false, side:THREE.DoubleSide, blending:THREE.AdditiveBlending,
@@ -1010,7 +1037,8 @@ function makeActor(gl, o){
   const tagLabel=makeLabel(o.name, null, {fs:46, h:.3, follow:tagAnchor, dot:o.dot||'#46d39a', fade:40, group:o.group});
   if(o.parent){ scene.remove(g); o.parent.add(g); }
   const A={g, mixer, acts, cur:null, label:tagLabel, root, h:o.height,
-    play(k, f=.3){ if(this.cur===k || !acts[k]) return; const n=acts[k]; n.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(f).play(); if(this.cur && acts[this.cur]) acts[this.cur].fadeOut(f); this.cur=k; }};
+    play(k, f=.3){ if(this.cur===k || !acts[k]) return; const n=acts[k], first=!this.cur; n.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(first?0:f).play(); if(this.cur && acts[this.cur]) acts[this.cur].fadeOut(f); this.cur=k;
+      if(first){ try{ mixer.update(1e-3); }catch(e){} } }};   // S-QA (15/11): lần đầu áp ngay tư thế của clip → nhân vật đứng yên (bảo vệ, nhân viên quầy…) không còn dang tay chữ T
   ACTORS.add(A);
   return A;
 }
@@ -1216,12 +1244,26 @@ $('pClose').onclick=closePanel;
 $('panelWrap').addEventListener('pointerdown', e=>{ if(e.target.id==='panelWrap') closePanel(); });
 
 /* ============================== BẢN ĐỒ ============================== */
+// S-QA (15/11): sau khi nhảy, camera tự chọn góc KHÔNG bị che (tường, mái, cây, vách núi): thử lệch dần quanh hướng mong muốn, rồi gần hơn / cao hơn
+const _cvR=new THREE.Raycaster(), _cvH=new THREE.Vector3(), _cvD=new THREE.Vector3();
+function clearView(){ const solid=[]; scene.traverse(m=>{ if(!m.isMesh||!m.visible||m.isSkinnedMesh||m.isInstancedMesh||m===terrain) return; const mt=m.material; if(!mt||mt.transparent||mt.isShaderMaterial||(m.userData&&m.userData.shadowProxy)) return;
+    for(let p=m.parent;p;p=p.parent) if(p===me.g||p.visible===false||(p.userData&&p.userData.shadowProxy)) return; solid.push(m); });
+  _cvH.set(P.x,P.y+1.45,P.z); const base=cam.yaw; if(cam.dist<7.5) cam.dist=7.5; if(cam.pitch<.22) cam.pitch=.26; let tries=0;
+  const free=(yaw,d,pt)=>{ const cp=Math.cos(pt); _cvD.set(Math.sin(yaw)*cp, Math.sin(pt), Math.cos(yaw)*cp);
+    for(const t of [.3,.55,.8,1]){ const ex=_cvH.x+_cvD.x*d*t, ey=_cvH.y+_cvD.y*d*t, ez=_cvH.z+_cvD.z*d*t; if(ey<Math.max(groundH(ex,ez),WATER_Y)+.45) return false; }
+    _cvR.set(_cvH,_cvD); _cvR.far=d+.4; return !_cvR.intersectObjects(solid,false).length; };
+  for(const [d,pt] of [[cam.dist,cam.pitch],[cam.dist,.55],[5,cam.pitch],[5,.6],[3.2,.5]]) for(const dy of [0,.4,-.4,.8,-.8,1.3,-1.3,2,-2,Math.PI]){ if(++tries>44) return false; if(free(base+dy,d,pt)){ cam.yaw=base+dy; cam.dist=d; cam.pitch=pt; return true; } }
+  return false; }
 function teleport(x,z,lx,lz){
   if(HOOK.tpProbe){ HOOK.tpProbe.push([x,z]); return; }   // bản đồ đang dò vị trí địa điểm (không dịch chuyển thật)
+  // S-QA (15/11): đang ở TRONG toà nhà/showroom/học viện → ra ngoài trước rồi mới bay (trước: bấm "Bay tới" không có tác dụng)
+  if(W.inside && !HOOK.tpLeaving){ const ex=(W.life&&W.life.interior&&W.life.interior.inside&&W.life.interior.exit) || (W.showroom&&W.showroom.on&&W.showroom.exit) || (W.campus&&W.campus.on&&W.campus.exit);
+    if(ex){ HOOK.tpLeaving=true; try{ ex(); }catch(e){} let n=0; const iv=setInterval(()=>{ if(!W.inside || ++n>40){ clearInterval(iv); HOOK.tpLeaving=false; if(!W.inside) teleport(x,z,lx,lz); } }, 100); return; } }
   P.px=x; P.pz=z;
   burst(new THREE.Vector3(P.x,1,P.z), [0xffffff,0x8fe3ff], 70, 3, .9, 0, .15);
   P.x=x; P.z=z; P.vx=P.vz=P.vy=0; resolve(P); P.y=groundAt(P.x,P.z); P.ground=true;
   if(lx!=null){ P.face=Math.atan2(lx-x, lz-z); me.g.rotation.y=P.face; cam.yaw=P.face+Math.PI; }
+  if(!W.inside){ try{ clearView(); cam.occ=cam.dist; }catch(e){ console.warn('clearView', e); } }
   cam.tx=P.x; cam.tz=P.z; camera.position.set(P.x+Math.sin(cam.yaw)*cam.dist, P.y+3, P.z+Math.cos(cam.yaw)*cam.dist);
   setTimeout(()=>burst(new THREE.Vector3(P.x,1,P.z), [0xffffff,0xffd23f], 70, 3, .9, 0, .15), 30);
 }
@@ -1501,6 +1543,12 @@ const W={THREE, scene, overlay, camera, renderer, canvas, $, clamp, lerp, lerpAn
   get T(){ return T; }, get night(){ return nightK; }, get timeIdx(){ return timeIdx; }};
 try{ await yieldUI('Đang dựng thành phố…'); const life=await import('./js/life.js'); await life.initLife(W); }
 catch(e){ console.error(e); toast('⚠️ Lỗi tải hệ thống cuộc sống: '+e.message, 8000); }
+// S-QA (15/11): CHỐNG NHẤP NHÁY (z-fighting) toàn thế giới – mọi "tấm dán" (biển hiệu, mặt tiền cửa sổ, kính, vạch sân, logo) được ưu tiên chiều sâu
+// so với mặt tường/nền nằm trùng hoặc sát phía sau. Chỉ đổi trạng thái vẽ (không biên dịch lại shader, không tốn hiệu năng).
+try{ let nz=0; scene.traverse(m=>{ if(!m.isMesh || m.isSkinnedMesh || m===water || m===terrain || (m.userData&&m.userData.shadowProxy)) return; const pc=m.geometry&&m.geometry.attributes.position?m.geometry.attributes.position.count:1e9;
+    for(const mt of (Array.isArray(m.material)?m.material:[m.material])){ if(!mt || mt.polygonOffset || mt.isShaderMaterial) continue;
+      if((mt.map && (mt.emissiveMap || mt.transparent || mt.alphaTest>0 || pc<=8)) || (mt.transparent && mt.depthWrite===false) || (mt.userData&&mt.userData.LU)){ mt.polygonOffset=true; mt.polygonOffsetFactor=-1; mt.polygonOffsetUnits=-4; nz++; } } });
+  console.info(`[QC World] chống nhấp nháy: ${nz} vật liệu tấm dán`); }catch(e){ console.warn('zfix', e); }
 try{ const nf=markFar(scene); console.info(`[QC World] ${nf} vật nhỏ được bỏ vẽ khi ở xa`); }catch(e){ console.warn('markFar', e); }
 await yieldUI('Đang chuẩn bị đồ hoạ…');
 try{ await renderer.compileAsync(scene, camera); }catch(e){ console.warn('compileAsync', e); }

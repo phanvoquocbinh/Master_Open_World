@@ -22,14 +22,15 @@ export async function make(W, ctx){
   const _a=new V3(), _b=new V3(), _d=new V3(), _q=new THREE.Quaternion(), _pq=new THREE.Quaternion(), _wq=new THREE.Quaternion(), _I=new THREE.Quaternion(), _gq=new THREE.Quaternion();
   function aim(name, child, dir, w){ const B=bones[name], C=bones[child]; if(!B||!C||w<=.001) return;
     B.getWorldPosition(_a); C.getWorldPosition(_b); _b.sub(_a).normalize(); _d.copy(dir).normalize();
-    _q.setFromUnitVectors(_b,_d); if(w<1) _q.slerpQuaternions(_I,_q,w);
+    _q.setFromUnitVectors(_b,_d); if(w<1) _q.slerp(_I, 1-w);   // (slerpQuaternions(_I,_q,w) sẽ ghi đè _q trước khi nội suy → luôn ra 0)
     B.getWorldQuaternion(_wq); B.parent.getWorldQuaternion(_pq); _wq.premultiply(_q); B.quaternion.copy(_pq.invert().multiply(_wq)); B.updateMatrixWorld(true); }
   const U=new V3(0,1,0), F=new V3(), R=new V3();
   const D=(f,u,r)=>new V3().addScaledVector(F,f).addScaledVector(U,u).addScaledVector(R,r);
   const POSE={
     laptop(w){ for(const [s,k] of [['Left',-1],['Right',1]]){ aim(s+'Arm',s+'ForeArm',D(.42,-1,k*.12),w); aim(s+'ForeArm',s+'Hand',D(1,.1,-k*.24),w); } aim('Neck','Head',D(.45,1,0),w*.8); },
     hand(w){ for(const [s,k] of [['Left',-1],['Right',1]]){ aim(s+'Arm',s+'ForeArm',D(.25,-1,k*.14),w); aim(s+'ForeArm',s+'Hand',D(.8,.78,-k*.42),w); } aim('Neck','Head',D(.5,1,0),w*.8); },
-    ears(w){ for(const [s,k] of [['Left',-1],['Right',1]]){ aim(s+'Arm',s+'ForeArm',D(.12,.2,k),w); aim(s+'ForeArm',s+'Hand',D(-.08,1,-k*.6),w); } },
+    ears(w){ for(const [s,k] of [['Left',-1],['Right',1]]){ aim(s+'Arm',s+'ForeArm',D(.15,-.3,k),w); aim(s+'ForeArm',s+'Hand',D(.05,.8,-k*1.1),w); } },   // hai bàn tay áp ngang tai
+    reach(w){ aim('RightArm','RightForeArm',D(.05,-1,.32),w); aim('RightForeArm','RightHand',D(.3,-1,.12),w); },   // thò tay xuống túi quần phải
   };
   const mat=(c,o={})=>new THREE.MeshStandardMaterial({color:c, roughness:.4, metalness:.3, ...o});
   function addTo(parent, geo, m, x=0,y=0,z=0){ const o=new THREE.Mesh(geo,m); o.position.set(x,y,z); o.castShadow=false; o.receiveShadow=false; parent.add(o); return o; }
@@ -56,8 +57,16 @@ export async function make(W, ctx){
   const phTex=canvasTex(64,128,(g,w,h)=>{ const gr=g.createLinearGradient(0,0,0,h); gr.addColorStop(0,'#2b7de9'); gr.addColorStop(1,'#7a3fe0'); g.fillStyle=gr; g.fillRect(0,0,w,h);
     g.fillStyle='rgba(255,255,255,.85)'; for(let i=0;i<3;i++) for(let j=0;j<4;j++){ g.beginPath(); g.arc(14+i*18, 34+j*20, 6, 0, 7); g.fill(); } });
   addTo(phn, new THREE.PlaneGeometry(.066,.138), new THREE.MeshBasicMaterial({map:phTex}), 0,0,.0047);
-  // tai nghe (dựng 1 lần, gắn vào xương đầu khi phát nhạc)
-  let hpRoot=null, hpInner=null, hpOn=false, hpS=0, hpV=0;
+  // tai nghe (dựng 1 lần, gắn vào xương đầu khi phát nhạc). Hoạt cảnh ĐEO: tay phải thò xuống túi lấy tai nghe → hai tay đưa lên
+  // → tai nghe theo hai bàn tay lên đầu, áp vào tai → hạ tay. THÁO: hai tay lên tai → nhấc tai nghe ra → tay phải cất xuống túi.
+  let hpRoot=null, hpInner=null, hpCal=false;
+  const HP={state:'off', t:0}, PUT=1.7, TAKE=1.6;
+  const isRiding=()=>!!HOOK.vehicle || !!(W.V && W.V.riding && W.V.riding());
+  const canAnim=()=>!!(bones.Head && bones.LeftHand && bones.RightHand);
+  const wearing=()=>HP.state==='on' || HP.state==='puton';
+  function phonesOn(){ if(wearing()) return; if(!hpRoot) [hpRoot, hpInner]=buildPhones(); hpRoot.userData.dynamic=true; hpCal=true;   // gắn vào đầu ở đầu khung sau (lúc đầu đang đúng tư thế gốc)
+    HP.state='puton'; HP.t=(canAnim() && !isRiding()) ? 0 : PUT; }
+  function phonesOff(){ if(HP.state==='off' || HP.state==='takeoff') return; HP.state='takeoff'; HP.t=(canAnim() && !isRiding() && HP.t>=PUT*.6) ? 0 : TAKE; }
   function buildPhones(){ const g=new THREE.Group(), inner=new THREE.Group(); g.add(inner);
     const band=mat(0x1d2027,{roughness:.35, metalness:.5}), cup=mat(0x2a2f3a,{roughness:.3, metalness:.4}), padM=mat(0x0f1115,{roughness:.9, metalness:0}), glow=new THREE.MeshBasicMaterial({color:0x4fc3ff});
     addTo(inner, new THREE.TorusGeometry(1.08,.085,8,32,Math.PI), band);
@@ -66,7 +75,7 @@ export async function make(W, ctx){
       addTo(inner, new THREE.TorusGeometry(.3,.045,6,24), glow, s*1.22,-.05,0).rotation.y=Math.PI/2;
       addTo(inner, new THREE.BoxGeometry(.1,.42,.12), band, s*1.07,.22,0); }
     return [g, inner]; }
-  function attachPhones(){ if(!hpRoot){ [hpRoot, hpInner]=buildPhones(); hpRoot.userData.dynamic=true; }
+  function attachPhones(){ if(hpRoot.parent) hpRoot.parent.remove(hpRoot);
     const H=bones.Head; me.g.updateMatrixWorld(true); me.g.getWorldQuaternion(_gq);
     let C=new V3(), r;
     if(H){ const hp=new V3(), tp=new V3(); H.getWorldPosition(hp); const T=bones.HeadTop_End;
@@ -75,11 +84,62 @@ export async function make(W, ctx){
       const M=new THREE.Matrix4().compose(C, _gq, new V3(r,r,r)), L=H.matrixWorld.clone().invert().multiply(M);
       L.decompose(hpRoot.position, hpRoot.quaternion, hpRoot.scale); H.add(hpRoot); }
     else { hpRoot.position.set(0,HH*.93,0); hpRoot.quaternion.identity(); hpRoot.scale.setScalar(HH*.062); me.g.add(hpRoot); } }
-  function putPhones(on){ if(on && (!hpRoot || !hpRoot.parent)) attachPhones(); hpOn=on; }
+  // đặt tai nghe theo thời gian hoạt cảnh (gọi SAU khi đã áp tư thế tay trong khung)
+  const _h1=new V3(), _h2=new V3(), _hm=new V3(), _ho=new V3(), _QI=new THREE.Quaternion(), _QC=new THREE.Quaternion().setFromEuler(new THREE.Euler(-1.15,0,.4));
+  const seg=(t,a,b)=>sm((t-a)/(b-a));
+  function placePhones(){ const st=HP.state, t=HP.t; if(!hpRoot || !hpRoot.parent) return;
+    let b=1, mid=1, sc=1;   // b: 0 = trong tay → 1 = trên đầu · mid: 0 = tay phải → 1 = giữa hai tay
+    if(st==='puton'){ sc=seg(t,.18,.38); mid=seg(t,.35,.85); b=seg(t,.85,1.25); }
+    else if(st==='takeoff'){ b=1-seg(t,.4,.7); mid=1-seg(t,.7,1.0); sc=1-seg(t,1.25,1.5); }
+    else if(st==='off'){ sc=0; }
+    hpRoot.visible=sc>.02;
+    if(!hpRoot.visible) return;
+    if(b>=.999 || !canAnim()){ hpInner.position.set(0,0,0); hpInner.quaternion.identity(); hpInner.scale.setScalar(Math.max(.001,sc)); return; }
+    hpRoot.updateWorldMatrix(true,false);
+    bones.RightHand.getWorldPosition(_h1); bones.LeftHand.getWorldPosition(_h2); _hm.copy(_h1).lerp(_h2,.5);
+    _h1.addScaledVector(U, .05); _ho.copy(_h1).lerp(_hm, mid);           // cầm ở quai, cao hơn cổ tay chút
+    hpRoot.getWorldPosition(_hm); _ho.lerp(_hm, b);
+    hpInner.position.copy(hpRoot.worldToLocal(_ho)); hpInner.quaternion.slerpQuaternions(_QC, _QI, b); hpInner.scale.setScalar(Math.max(.001,sc)); }
 
   const hold={kind:null, w:0, want:0};
-  let earT=-1;
   const _e=new V3(), _l=new V3();
+
+  /* ============================== ĐEO TAI NGHE = KHÔNG NGHE ÂM THANH THÀNH PHỐ ==============================
+     Mọi module (sóng/gió/bước chân của đảo, sân vận động, phố đi bộ, công viên, đảo vui chơi…) tự tạo AudioContext riêng khi người chơi
+     tương tác. Ở đây vá nhẹ Web Audio: mọi nhánh nối ra loa (destination) đi qua 1 nút "giảm âm" của tai nghe → đeo vào thì hạ về 0.
+     Context tạo TRƯỚC khi vá (ví dụ bấm chuột lúc đang tải) không chèn được nút → tạm dừng (suspend) context đó trong lúc đeo.
+     Nhạc sân khấu (YouTube player của world.html) → mute()/unMute(). Tiếng chuông điện thoại & nhạc tai nghe vẫn nghe (đi qua tai nghe). */
+  const AUDQ={on:false, ctxs:new Set(), duck:new Map(), held:new Set(), stage:false, chk:0};
+  (function patchAudio(){
+    const AN=window.AudioNode, AC0=window.AudioContext, BAC=window.BaseAudioContext||AC0; if(!AN || !AC0 || AN.prototype.__gdPatched) return; AN.prototype.__gdPatched=true;
+    const oc=AN.prototype.connect;
+    AN.prototype.connect=function(dst, ...rest){
+      const ctx=dst && dst.context;
+      if(ctx && window.AudioDestinationNode && dst instanceof AudioDestinationNode && !this.__gdDuck && !ctx.__gdKeep){
+        let g=AUDQ.duck.get(ctx); if(!g){ g=ctx.createGain(); g.__gdDuck=true; g.gain.value=AUDQ.on?0:1; oc.call(g, dst); AUDQ.duck.set(ctx, g); }
+        oc.call(this, g, ...rest); return dst; }
+      return oc.call(this, dst, ...rest); };
+    try{ const Sub=class extends AC0 { constructor(...a){ super(...a); this.__gdNew=true; } }; window.AudioContext=Sub; if(window.webkitAudioContext===AC0) window.webkitAudioContext=Sub; }catch(e){}
+    for(const fn of ['createGain','createOscillator','createBufferSource','createBiquadFilter']){ const of=BAC.prototype[fn]; if(!of) continue;
+      BAC.prototype[fn]=function(...a){ if(!this.__gdKeep && !AUDQ.ctxs.has(this)){ AUDQ.ctxs.add(this); if(AUDQ.on) duckCtx(this, true); } return of.apply(this, a); }; }
+    const ores=AC0.prototype.resume; if(ores){ AC0.prototype.resume=function(){ return this.__gdHold ? Promise.resolve() : ores.call(this); }; }   // module khác tự resume() → giữ im khi đang đeo
+    AUDQ.resume=(c)=>ores ? ores.call(c) : c.resume();
+  })();
+  function duckCtx(c, on){ if(c.__gdKeep || c.state==='closed') return;
+    const g=AUDQ.duck.get(c);
+    if(g) g.gain.setTargetAtTime(on?0:1, c.currentTime, .12);
+    if(!c.__gdNew){ if(on && !c.__gdHold){ c.__gdHold=true; AUDQ.held.add(c); try{ c.suspend(); }catch(e){} }   // context cũ (tạo trước khi vá) → tạm dừng
+      else if(!on && c.__gdHold){ c.__gdHold=false; AUDQ.held.delete(c); try{ AUDQ.resume(c); }catch(e){} } } }
+  function muteStage(on){ const p=W.music && W.music.player; if(!p || !p.isMuted) return;
+    try{ if(on && !AUDQ.stage && !p.isMuted()){ p.mute(); AUDQ.stage=true; } else if(!on && AUDQ.stage){ p.unMute(); AUDQ.stage=false; } }catch(e){} }
+  function setDuck(on){ AUDQ.on=on; for(const c of AUDQ.ctxs) duckCtx(c, on); muteStage(on); renderNow(); }
+  function updDuck(dt){ const want=HP.state==='on' || (HP.state==='puton' && HP.t>=1.0) || (HP.state==='takeoff' && HP.t<.45);
+    if(want!==AUDQ.on) setDuck(want);
+    if(AUDQ.on){ AUDQ.chk-=dt; if(AUDQ.chk<=0){ AUDQ.chk=1; muteStage(true); } } }   // nhạc sân khấu bật lên trong lúc đang đeo
+  function updMusicVol(){ const p=MU.player; if(!p || !p.setVolume) return; const t=HP.t;
+    const k=HP.state==='on'?1 : HP.state==='puton'?seg(t,1.1,1.6) : HP.state==='takeoff'?1-seg(t,0,.4) : 0;
+    const v=Math.round(MU.vol*k); if(v!==MU.lastV){ MU.lastV=v; try{ p.setVolume(v); }catch(e){} } }
+  function afterTakeoff(){ const p=MU.player; if(p){ try{ if(MU.on) p.pauseVideo(); else p.stopVideo(); }catch(e){} } renderNow(); }
   HOOK.onFrame.push((dt)=>{
     hookMP(dt);
     hold.w+=Math.sign(hold.want-hold.w)*Math.min(Math.abs(hold.want-hold.w), dt/.35);
@@ -90,14 +150,20 @@ export async function make(W, ctx){
     if(lap.visible){ lap.scale.setScalar(.45+.55*e); lap.position.set(0, HH*(.46+.095*e), .1+.23*e); lap.rotation.x=-.12*e; lidPivot.rotation.x=1.92*clamp((hold.w-.3)/.7,0,1); }
     dev.visible=(hold.kind==='player'||hold.kind==='phone') && hold.w>.02 && !riding;   // đang lái xe: cất vào túi (chỉ hiện giao diện)
     if(dev.visible){ pod.visible=hold.kind==='player'; phn.visible=hold.kind==='phone'; dev.position.set(-.16*(1-e), HH*(.5+.2*e), .04+.23*e); dev.scale.setScalar(.35+.65*e); }
-    const earW=earT>=0 ? Math.sin(clamp(earT/1.15,0,1)*Math.PI) : 0;
-    if(earT>=0){ earT+=dt; if(earT>=.55 && !hpOn && MU.on) putPhones(true); if(earT>1.15) earT=-1; }
+    // tai nghe: gắn vào đầu lúc đầu còn đúng tư thế gốc (trước khi áp tư thế tay của khung này), rồi chạy hoạt cảnh đeo / tháo
+    if(hpCal && hpRoot){ hpCal=false; attachPhones(); }
+    let earW=0, reachW=0;
+    if(HP.state==='puton' || HP.state==='takeoff'){ HP.t+=dt; const t=HP.t;
+      if(HP.state==='puton'){ reachW=Math.sin(clamp(t/.45,0,1)*Math.PI); earW=seg(t,.35,.8)*(1-seg(t,1.3,PUT)); if(t>=PUT) HP.state='on'; }
+      else { earW=seg(t,0,.4)*(1-seg(t,1.0,1.35)); reachW=t>1.0 ? Math.sin(clamp((t-1.0)/.6,0,1)*Math.PI) : 0; if(t>=TAKE){ HP.state='off'; afterTakeoff(); } } }
+    if(riding){ earW=0; reachW=0; }
     const pw=(hold.kind && !riding) ? e : 0;
-    if(pw>.001 || earW>.001){ me.g.updateMatrixWorld(true); me.g.getWorldQuaternion(_gq); F.set(0,0,1).applyQuaternion(_gq); F.y=0; if(F.lengthSq()<1e-6) F.set(0,0,1); F.normalize(); R.set(-F.z,0,F.x);
+    if(pw>.001 || earW>.001 || reachW>.001){ me.g.updateMatrixWorld(true); me.g.getWorldQuaternion(_gq); F.set(0,0,1).applyQuaternion(_gq); F.y=0; if(F.lengthSq()<1e-6) F.set(0,0,1); F.normalize(); R.set(-F.z,0,F.x);
       if(pw>.001) (hold.kind==='laptop'?POSE.laptop:POSE.hand)(pw);
+      if(reachW>.001) POSE.reach(reachW*.9);
       if(earW>.001) POSE.ears(earW*.95); }
-    if(hpRoot){ const tgt=hpOn?1:0; hpV+=(tgt-hpS)*dt*160; hpV*=Math.exp(-dt*13); hpS=clamp(hpS+hpV*dt, 0, 1.25); if(!hpOn && hpS<.02){ hpS=0; hpV=0; }
-      hpRoot.visible=hpS>.01; hpInner.scale.setScalar(Math.max(.001,hpS)); }
+    if(hpRoot) placePhones();
+    updDuck(dt); updMusicVol();
     if(LAP.open){ me.g.localToWorld(_e.set(0, HH*.93, .17)); me.g.localToWorld(_l.set(0, HH*.555+.1, .42));
       const o=HOOK.camOverride; if(o && o.lap){ o.pos.copy(_e); o.look.copy(_l); } else HOOK.camOverride={pos:_e.clone(), look:_l.clone(), k:5, lap:true}; }
   });
@@ -308,7 +374,7 @@ export async function make(W, ctx){
   const $p=s=>podEl.querySelector(s), podList=$p('.podList'), podMsg=$p('.podMsg');
   $p('[data-vol]').value=MU.vol;
   const nowEl=document.createElement('div'); nowEl.id='gdNow'; nowEl.hidden=true;
-  nowEl.innerHTML=`<span class="nIco">🎧</span><div class="nT"><b>—</b><small>Tai nghe</small></div><button data-pp title="Tạm dừng / tiếp tục">⏸</button><button data-nx title="Bài tiếp">⏭</button><input type="range" min="0" max="100" data-vol title="Âm lượng"><button data-op title="Mở máy nghe nhạc (Y)">☰</button><button data-st title="Tắt nhạc, tháo tai nghe">⏹</button>`;
+  nowEl.innerHTML=`<span class="nIco">🎧</span><div class="nT"><b>—</b><small>Tai nghe</small></div><button data-pp title="Tạm dừng / tiếp tục">⏸</button><button data-nx title="Bài tiếp">⏭</button><input type="range" min="0" max="100" data-vol title="Âm lượng"><button data-hp class="wide">🎧 Tháo</button><button data-op title="Mở máy nghe nhạc (Y)">☰</button><button data-st title="Tắt nhạc, tháo tai nghe">⏹</button>`;
   document.body.appendChild(nowEl);
   nowEl.querySelector('[data-vol]').value=MU.vol;
   function ytId(s){ s=(s||'').trim(); if(/^[\w-]{11}$/.test(s)) return s;
@@ -336,39 +402,46 @@ export async function make(W, ctx){
   for(const el of [podEl, nowEl]){
     el.querySelector('[data-pp]').onclick=()=>togglePause(); el.querySelector('[data-nx]').onclick=()=>next();
     el.querySelector('[data-vol]').oninput=e=>setVol(+e.target.value); }
-  $p('[data-stop]').onclick=()=>stopMusic(); nowEl.querySelector('[data-st]').onclick=()=>stopMusic(); nowEl.querySelector('[data-op]').onclick=()=>podOpen();
+  $p('[data-stop]').onclick=()=>stopMusic(); nowEl.querySelector('[data-st]').onclick=()=>stopMusic(); nowEl.querySelector('[data-op]').onclick=()=>podOpen(); nowEl.querySelector('[data-hp]').onclick=()=>togglePhones();
   $p('.devX').onclick=()=>podClose();
-  function setVol(v){ MU.vol=v; LS.set('qcworld-pod-vol',v); for(const el of [podEl, nowEl]){ const s=el.querySelector('[data-vol]'); if(+s.value!==v) s.value=v; } if(MU.player && MU.player.setVolume) MU.player.setVolume(v); }
+  function setVol(v){ MU.vol=v; LS.set('qcworld-pod-vol',v); for(const el of [podEl, nowEl]){ const s=el.querySelector('[data-vol]'); if(+s.value!==v) s.value=v; } MU.lastV=-1; }   // updMusicVol áp vào player ở khung sau
   function loadYT(){ const M=W.music; if(window.YT && YT.Player) return Promise.resolve();
     if(M && M.api) return M.api;
     const p=new Promise((res,rej)=>{ const prev=window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady=()=>{ try{ prev && prev(); }catch(e){} res(); };
       const s=document.createElement('script'); s.src='https://www.youtube.com/iframe_api'; s.onerror=()=>{ if(M && M.api===p) M.api=null; rej(new Error('offline')); }; document.head.appendChild(s);
       setTimeout(()=>rej(new Error('timeout')), 15000); });
     if(M) M.api=p; return p; }
-  function pauseStage(){ const M=W.music; try{ if(M && M.playing && M.player && M.player.pauseVideo){ M.player.pauseVideo(); toast('🎤 Đã tạm dừng nhạc sân khấu – bạn đang nghe bằng tai nghe.', 2600); } }catch(e){} }
   async function play(i, anim){ const it=MU.list[i]; if(!it) return;
-    const wasOn=MU.on; MU.cur=i; MU.sel=i; MU.on=true; MU.title=it.title||'Video YouTube'; renderList(); renderNow();
-    if(POD.open) podClose(); if(!wasOn || !hpOn){ earT=0; } pauseStage();
-    try{ await loadYT(); }catch(e){ MU.on=false; putPhones(false); renderNow(); toast('📡 No internet – không tải được YouTube.', 3200); return; }
+    const wasWearing=wearing(); MU.cur=i; MU.sel=i; MU.on=true; MU.title=it.title||'Video YouTube'; renderList(); renderNow();
+    if(POD.open) podClose();
+    if(!wasWearing){ phonesOn(); if(!MU.hinted){ MU.hinted=true; toast('🎧 Đeo tai nghe: âm thanh thành phố tắt hẳn – bấm 🎧 Tháo để nghe lại xung quanh.', 3800); } }
+    try{ await loadYT(); }catch(e){ MU.on=false; phonesOff(); renderNow(); toast('📡 No internet – không tải được YouTube.', 3200); return; }
     if(!MU.on || MU.cur!==i) return;
+    MU.lastV=-1;   // âm lượng thật do updMusicVol điều khiển (0 khi chưa đeo xong → nhạc vào dần khi tai nghe áp tai)
     if(!MU.player){ const host=document.createElement('div'); host.id='gdYTHost'; const d=document.createElement('div'); d.id='gdYT'; host.appendChild(d); document.body.appendChild(host);
       MU.player=new YT.Player('gdYT', {width:200, height:200, videoId:it.id, playerVars:{autoplay:1, playsinline:1, rel:0, controls:0, fs:0},
-        events:{ onReady:e=>{ e.target.setVolume(MU.vol); if(MU.on) e.target.playVideo(); }, onStateChange:onYT, onError:onYTErr }}); }
-    else { MU.player.loadVideoById(it.id); MU.player.setVolume(MU.vol); } }
+        events:{ onReady:e=>{ MU.lastV=-1; e.target.setVolume(0); if(MU.on) e.target.playVideo(); }, onStateChange:onYT, onError:onYTErr }}); }
+    else { MU.player.loadVideoById(it.id); } }
+  function togglePhones(){ if(wearing()){ phonesOff(); return; }
+    if(!MU.on){ toast('🎧 Chưa có bài nào – mở máy nghe nhạc (Y) chọn bài nhé.', 2600); return; }
+    phonesOn(); try{ MU.player && MU.player.playVideo(); }catch(e){} }
   function onYT(e){ const S=window.YT && YT.PlayerState; if(!S) return;
     MU.playing=e.data===S.PLAYING;
     if(MU.playing){ try{ const d=MU.player.getVideoData(); if(d && d.title){ MU.title=d.title; const it=MU.list[MU.cur]; if(it && /^Video YouTube/.test(it.title)) it.title=d.title; } }catch(_){} }
     if(e.data===S.ENDED) next(true); renderNow(); }
   function onYTErr(e){ const it=MU.list[MU.cur]; if(it) it.bad=true; MU.playing=false;
     const blocked=e && (e.data===101 || e.data===150), msg=blocked?`⛔ “${it?it.title:'Bài này'}” không cho phát ngoài YouTube – chọn bài khác nhé.`:'⚠️ Bài này không phát được (video lỗi / đã bị xoá) – chọn bài khác nhé.';
-    toast(msg, 4200); MU.on=false; putPhones(false); renderNow(); podOpen(); pmsg(msg); renderList(); }
-  function togglePause(){ const p=MU.player; if(!MU.on || !p || !p.getPlayerState) return; const S=YT.PlayerState; if(p.getPlayerState()===S.PLAYING) p.pauseVideo(); else p.playVideo(); }
+    toast(msg, 4200); MU.on=false; phonesOff(); renderNow(); podOpen(); pmsg(msg); renderList(); }
+  function togglePause(){ const p=MU.player; if(!MU.on || !p || !p.getPlayerState) return; const S=YT.PlayerState;
+    if(!wearing()){ togglePhones(); return; }   // đang tháo tai nghe → đeo lại rồi phát
+    if(p.getPlayerState()===S.PLAYING) p.pauseVideo(); else p.playVideo(); }
   function next(auto){ if(!MU.list.length) return; let i=MU.cur+1; while(i<MU.list.length && MU.list[i].bad) i++;
     if(i>=MU.list.length){ if(auto){ MU.playing=false; renderNow(); } toast('🎧 Hết danh sách – mở máy (Y) tìm thêm bài nhé.', 2600); return; }
     play(i, false); }
-  function stopMusic(){ if(MU.player && MU.player.stopVideo){ try{ MU.player.stopVideo(); }catch(e){} } MU.on=false; MU.playing=false; putPhones(false); renderNow(); renderList(); }
-  function renderNow(){ nowEl.hidden=!MU.on; if(!MU.on) return; nowEl.querySelector('.nT b').textContent=MU.title||'—';
-    nowEl.querySelector('.nT small').textContent=MU.playing?'Đang phát qua tai nghe':'Đang tải / tạm dừng'; nowEl.querySelector('[data-pp]').textContent=MU.playing?'⏸':'▶'; }
+  function stopMusic(){ const was=wearing(); MU.on=false; MU.playing=false; if(was) phonesOff(); else if(MU.player && MU.player.stopVideo){ try{ MU.player.stopVideo(); }catch(e){} } renderNow(); renderList(); }   // đang đeo: tháo xong mới dừng hẳn (afterTakeoff)
+  function renderNow(){ if(!nowEl) return; nowEl.hidden=!MU.on; if(!MU.on) return; nowEl.querySelector('.nT b').textContent=MU.title||'—';
+    const w=wearing(); nowEl.querySelector('.nT small').textContent=!w?'🎧 Đã tháo tai nghe – đang nghe âm thanh thành phố':MU.playing?'🔇 Đang đeo tai nghe – âm thanh xung quanh đã tắt':'Đang tải / tạm dừng';
+    nowEl.querySelector('[data-pp]').textContent=MU.playing&&w?'⏸':'▶'; const hb=nowEl.querySelector('[data-hp]'); hb.textContent=w?'🎧 Tháo':'🎧 Đeo'; hb.title=w?'Tháo tai nghe – nghe lại âm thanh thành phố (nhạc tạm dừng)':'Đeo tai nghe – nghe tiếp nhạc'; }
   function podOpen(){ if(LAP.open || HOOK.blockInput) return; if(PHN.open) phClose(); if(POD.open) return;
     POD.open=true; hold.kind='player'; hold.want=1; podEl.hidden=false; requestAnimationFrame(()=>requestAnimationFrame(()=>podEl.classList.add('on'))); setEsc(podClose); renderList(); }
   function podClose(){ if(!POD.open) return; POD.open=false; if(hold.kind==='player') hold.want=0; podEl.classList.remove('on'); setTimeout(()=>{ if(!POD.open) podEl.hidden=true; }, 320);
@@ -438,7 +511,8 @@ export async function make(W, ctx){
     const cid=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
     addMsg(to, {me:true, text, ts:Date.now(), st:'sending', cid}); W.multi.send({t:'sms', to, text, cid}); return true; }
   function askWho(force){ if(!online()) return; if(!force && performance.now()-PHN.whoAt<3000) return; PHN.whoAt=performance.now(); W.multi.send({t:'who'}); }
-  let AC=null; function ring(){ try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==='suspended') AC.resume(); const t=AC.currentTime;
+  let AC=null; function ring(){ try{ if(!AC){ AC=new (window.AudioContext||window.webkitAudioContext)(); AC.__gdKeep=true; }   // chuông điện thoại vẫn nghe khi đeo tai nghe
+      if(AC.state==='suspended') AC.resume(); const t=AC.currentTime;
       for(const [f,d] of [[988,0],[1319,.13]]){ const o=AC.createOscillator(), g=AC.createGain(); o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0,t+d); g.gain.linearRampToValueAtTime(.09,t+d+.012); g.gain.exponentialRampToValueAtTime(.0005,t+d+.22); o.connect(g).connect(AC.destination); o.start(t+d); o.stop(t+d+.25); } }catch(e){} }
   function onMP(m){
     if(m.t==='phone_ok'){ PHN.cur=m.num; PHN.temp=!!m.temp; if(m.temp) toast(`📱 Số ${PH.num} đang dùng ở cửa sổ khác – cửa sổ này dùng số tạm ${m.num}.`, 4200); phRender(); }
@@ -476,9 +550,12 @@ export async function make(W, ctx){
     for(const [k,t] of [['L','💻 Laptop: Master Dashboard (nếu máy có), trình duyệt, game QA – L/Esc để cất'],['Y','🎧 Máy nghe nhạc: tìm YouTube, đeo tai nghe nghe nhạc'],['O','📱 Điện thoại: số riêng, danh bạ, nhắn tin khi chơi nhiều người']]){
       const a=document.createElement('div'); a.className='ks'; a.innerHTML=`<span class="key">${k}</span>`; const b=document.createElement('div'); b.textContent=t; c.append(a,b); } }catch(e){}
 
+  // âm thanh môi trường 3D (sóng biển, xe cộ theo khoảng cách) – thay cho nhạc nền
+  try{ const m=await import('./ambience.js'); W.ambience=m.makeAmbience(W); }catch(e){ console.warn('ambience', e); }
+
   return {
     laptop:{open:lapOpen, close:lapClose, openMD:(url)=>lapOpen('md', url||'/'), launch, get isOpen(){ return LAP.open; }},
-    music:{open:podOpen, close:podClose, search, play:(i)=>play(i,true), stop:stopMusic, next, state:MU, get headphones(){ return hpOn; }},
+    music:{open:podOpen, close:podClose, search, play:(i)=>play(i,true), stop:stopMusic, next, state:MU, togglePhones, get headphones(){ return wearing(); }, get hp(){ return HP.state; }, get hpT(){ return HP.t; }, get muted(){ return AUDQ.on; }, audq:AUDQ, get hpObj(){ return hpRoot; }, bones},
     phone:{open:phOpen, close:phClose, send:sendSms, go:phGo, state:PH, get number(){ return myNum(); }, get online(){ return online(); }},
     hold,
   };
@@ -495,6 +572,7 @@ body.gadget-mode #top, body.gadget-mode #hint, body.gadget-mode #music, body.gad
 #gdNow .nIco{font-size:22px}#gdNow .nT{flex:1 1 calc(100% - 40px);min-width:0;display:flex;flex-direction:column}#gdNow .nT b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#gdNow .nT small{font-size:11px;color:var(--mut)}
 #gdNow button{background:rgba(255,255,255,.1);border:1px solid var(--line);color:#fff;border-radius:8px;width:30px;height:28px;cursor:pointer;padding:0}
 #gdNow input[type=range]{flex:1;min-width:60px}
+#gdNow button.wide{width:auto;padding:0 8px;font:600 12px "Segoe UI",sans-serif}
 #gdYTHost{position:fixed;left:0;bottom:0;width:200px;height:200px;opacity:0;pointer-events:none;z-index:-1;overflow:hidden}
 /* laptop */
 #gdLap{position:fixed;inset:0;z-index:30;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 52%,rgba(0,0,0,0) 52%,rgba(0,0,0,.6) 100%);opacity:0;transition:opacity .35s;pointer-events:none}

@@ -466,7 +466,7 @@ export function createGFX(opt={}){
   function townHouse(k,o){ const R=rng(o.seed||1), w=o.w, d=o.d||9, fl=o.floors||[3.4,3.1], H=fl.reduce((a,b)=>a+b,0), g0=fl[0], P=local(k,o.x||0,o.y||0,o.z||0,o.ry||0);
     const wallM=plasterC(o.wall), trimM=plasterC(0xf3ead7), woodM=M.woodDark, shutM=louverC(o.shutter||0x2f6b4f);
     P(boxM(w-.04,H-g0,d),wallM,0,g0+(H-g0)/2,-d/2); P(boxM(w-.04,g0,d-.9),wallM,0,g0/2,-.9-(d-.9)/2);
-    P(planeM(w-.3,g0-.3),woodM,0,(g0-.3)/2,-.88); P(planeM(1.9,2.45,R()*30,0,1,3.7/2.45),M.glassHome,0,1.25,-.86);
+    P(planeM(w-.3,g0-.3),woodM,0,(g0-.3)/2,-.84); P(planeM(1.9,2.45,R()*30,0,1,3.7/2.45),M.glassHome,0,1.25,-.8);
     for(const s of [-1,1]) P(cbox(.12,2.6,.14,.02),woodM,s*1.01,1.3,-.82); P(cbox(2.2,.14,.16,.02),woodM,0,2.58,-.82);
     P(cbox(w+.06,.22,.45,.03),trimM,0,g0-.02,.08);
     // mái hiên ngói + cột gỗ + xà
@@ -476,7 +476,7 @@ export function createGFX(opt={}){
     // các tầng trên: cửa sổ + chớp, phào, ban công gỗ ở tầng 2
     let y=g0; for(let i=1;i<fl.length;i++){ const fh=fl[i], nw=Math.max(1,Math.floor((w-.6)/2.3)), sp=(w-.6)/nw;
       for(let j=0;j<nw;j++){ const x=-w/2+.3+sp*(j+.5), wy=y+.75+.8;
-        P(planeM(1.05,1.6,R()*40,0,1,3.7/1.6),M.glassHome,x,wy,.02); P(cbox(1.25,.1,.16,.02),trimM,x,wy+.85,.06); P(cbox(1.3,.1,.22,.02),trimM,x,wy-.85,.08);
+        P(planeM(1.05,1.6,R()*40,0,1,3.7/1.6),M.glassHome,x,wy,.05); P(cbox(1.25,.1,.16,.02),trimM,x,wy+.85,.06); P(cbox(1.3,.1,.22,.02),trimM,x,wy-.85,.08);
         for(const s of [-1,1]) P(cbox(.55,1.6,.04,.01),shutM,x+s*(1.05/2+.3),wy,.06,0,0,s*.12); }
       if(i===1 && w>=4.5){ const bw=w-.8; P(cbox(bw,.12,.85,.02),M.wood,0,y+.06,.42); P(cbox(bw,.07,.07,.01),woodM,0,y+1.0,.82);
         for(let x=-bw/2+.1;x<=bw/2-.05;x+=.28) P(new THREE.BoxGeometry(.05,.9,.05),woodM,x,y+.55,.82); for(const s of [-1,1]) P(cbox(.07,.95,.85,.01),woodM,s*bw/2,y+.5,.42); }

@@ -182,6 +182,6 @@ export function makeFoodStreet(W, ctx){
     const r=!W.inside && P.y<Y+3 ? [...rooms, ...towers.map(t=>({x0:t.x-7.6, x1:t.x+7.6, z0:t.z-7.6, z1:t.z+7.6}))].find(q=>P.x>q.x0 && P.x<q.x1 && P.z>q.z0 && P.z<q.z1) : null;
     if(r){ HOOK.camBox={x0:r.x0+.4, x1:r.x1-.4, z0:r.z0+.4, z1:r.z1-.4, y1:Y+3.3}; camSet=true; } else if(camSet){ camSet=false; HOOK.camBox=null; } });
   PLACES.push({icon:'🍜', name:'Phố ẩm thực Đồi QC', sub:'Nhà hàng sang · quán nước · đi tiếp lên cầu thang lớn tới tháp Brand QC', go:()=>teleport(F.x0+3, (NZ+SZ)/2, F.x0+20, (NZ+SZ)/2)},
-              {icon:'🏙️', name:'Căn hộ Sky QC', sub:'2 toà 20 tầng · sảnh · hồ bơi sân thượng', go:()=>teleport(towers[0].x, A.z0-4, towers[0].x, towers[0].z)});
+              {icon:'🏙️', name:'Căn hộ Sky QC', sub:'2 toà 20 tầng · sảnh · hồ bơi sân thượng', go:()=>teleport(towers[0].x, towers[0].z-TW/2-3.5, towers[0].x, towers[0].z)});   // S-QA: trước nhảy ra z=A.z0-4 = ngoài mép đất → rơi xuống đáy biển
   return {SHOPS, towers};
 }

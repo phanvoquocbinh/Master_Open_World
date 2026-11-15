@@ -116,6 +116,7 @@ export async function make(W, ctx = {}){
   boxes.push({x0:MB.x0, x1:MB.x1 + .2, z0:MB.z0, z1:MB.z1}); boxes.push({x0:MB.x1, x1:MB.ax1, z0:MB.z0, z1:MB.az0 + .2}); boxes.push({x0:MB.x1, x1:MB.ax1, z0:MB.az1 - .2, z1:MB.z1});
   { const Y = G0, ax = (MB.x1 + MB.ax1) / 2;
     k.add(new THREE.BoxGeometry(MB.ax1 - MB.x1, .12, MB.az1 - MB.az0), sm(0xe8e4dc, .2, .05), ax, Y + .06, ZB);
+    addPlat(ax, ZB, 0, (MB.ax1 - MB.x1) / 2, (MB.az1 - MB.az0) / 2, Y + .12);   // mặt sàn sảnh – đứng trên sàn, không lún
     const door = 4.4; for(const [a, b] of [[MB.az0, ZB - door / 2], [ZB + door / 2, MB.az1]]){ k.add(new THREE.BoxGeometry(.08, MB.HH, b - a), M.glass, MB.ax1, Y + MB.HH / 2, (a + b) / 2); boxes.push({x0:MB.ax1 - .15, x1:MB.ax1 + .15, z0:a, z1:b}); }
     k.add(new THREE.BoxGeometry(.08, MB.HH - 3.4, door), M.glass, MB.ax1, Y + 3.4 + (MB.HH - 3.4) / 2, ZB);
     for(let z = MB.az0; z <= MB.az1 + .01; z += 4) k.add(new THREE.BoxGeometry(.24, MB.HH, .2), M.steel, MB.ax1, Y + MB.HH / 2, z);
@@ -130,7 +131,8 @@ export async function make(W, ctx = {}){
       const cz = ZB + s * 12.2;
       k.add(new THREE.BoxGeometry(.06, 3, 6.6), M.glass, -282, Y + 1.5, cz); k.add(new THREE.BoxGeometry(7.6, 3, .06), M.glass, -285.8, Y + 1.5, cz - s * 3.3);
       boxes.push({x0:-282.2, x1:-281.8, z0:cz - 3.3, z1:cz + 3.3}); boxes.push({x0:-289.6, x1:-282, z0:cz - s * 3.3 - .15, z1:cz - s * 3.3 + .15});
-      for(let r = 0; r < 2; r++) for(let c = 0; c < 3; c++){ const dx = -288.6 + r * 2.6, dz = cz - 2 + c * 2; k.add(new THREE.BoxGeometry(1, .06, 1.4), M.white, dx, Y + .75, dz); k.add(new THREE.BoxGeometry(.06, .72, 1.3), M.steel, dx, Y + .37, dz); k.add(new THREE.BoxGeometry(.45, .45, .45), M.seat, dx + .7, Y + .23, dz); } }
+      for(let r = 0; r < 2; r++) for(let c = 0; c < 3; c++){ const dx = -288.6 + r * 2.6, dz = cz - 2 + c * 2; k.add(new THREE.BoxGeometry(1, .06, 1.4), M.white, dx, Y + .75, dz); k.add(new THREE.BoxGeometry(.06, .72, 1.3), M.steel, dx, Y + .37, dz); k.add(new THREE.BoxGeometry(.45, .45, .45), M.seat, dx + .7, Y + .23, dz); }
+      boxes.push({x0:-289.3, x1:-284.8, z0:cz - 2.9, z1:cz + 2.9}); }   // cụm bàn ghế phòng học
     for(const z of [ZB - 7.6, ZB + 7.6]){ k.add(new THREE.BoxGeometry(.5, 2.4, 3.2), M.wood, -289.5, Y + 1.2, z); for(let i = 0; i < 4; i++) k.add(new THREE.BoxGeometry(.42, .04, 3.1), M.cream, -289.4, Y + .4 + i * .55, z); }
     // bảng chữ trong 2 phòng học + màn hình lộ trình sau quầy
     const wb1 = signTex(512, 256, '#f7f7f2', [['Lesson 1: Hello!', '700 46px Segoe UI', '#1f4fa8', .3], ["I'm Lan. I'm from Hanoi.", '36px Segoe UI', '#222', .6], ['/aɪm/  /ʃiːz/  /ɪts/', '32px Segoe UI', '#b3261e', .85]]);
@@ -165,7 +167,7 @@ export async function make(W, ctx = {}){
   // ---- 3c. Hán Học Đường 汉学堂 (bệ đá, cột đỏ, mái cong hai tầng) ----
   const HH = {x:-257, z:ZB + 44, w:24, d:15};
   { const Y = G0, top = Y + 1.1;
-    k.add(new THREE.BoxGeometry(HH.w + 4, 1.1, HH.d + 4), M.stone, HH.x, Y + .55, HH.z); boxes.push({x0:HH.x - HH.w / 2 - 2, x1:HH.x + HH.w / 2 + 2, z0:HH.z - HH.d / 2 - 2, z1:HH.z + HH.d / 2 + 2});
+    k.add(new THREE.BoxGeometry(HH.w + 4, 1.1, HH.d + 4), M.stone, HH.x, Y + .55, HH.z); boxes.push({x0:HH.x - HH.w / 2 - 2, x1:HH.x + HH.w / 2 + 2, z0:HH.z - HH.d / 2 - 3.05, z1:HH.z + HH.d / 2 + 2});   // gồm cả bậc đá trước bệ
     for(let i = 0; i < 3; i++) k.add(new THREE.BoxGeometry(6, .37, 1), M.stone, HH.x, Y + .18 + i * .37 - .37 * 0, HH.z - HH.d / 2 - 2.5 + i * .01 - (2 - i) * .0);
     const wallT = canvasTex(512, 256, (g, w, h) => { g.fillStyle = '#efe4c8'; g.fillRect(0, 0, w, h); g.strokeStyle = '#8a1f17'; g.lineWidth = 6; for(let i = 0; i < 4; i++){ const x = 40 + i * 120; g.strokeRect(x, 50, 80, 150); for(let j = 1; j < 5; j++){ g.beginPath(); g.moveTo(x, 50 + j * 30); g.lineTo(x + 80, 50 + j * 30); g.stroke(); } g.beginPath(); g.moveTo(x + 40, 50); g.lineTo(x + 40, 200); g.stroke(); } }, [3, 1]);
     const wall = new THREE.Mesh(new THREE.BoxGeometry(HH.w - 2, 6, HH.d - 2), new THREE.MeshStandardMaterial({map:wallT, roughness:.8})); wall.position.set(HH.x, top + 3, HH.z); wall.castShadow = wall.receiveShadow = true; scene.add(wall);
@@ -185,7 +187,10 @@ export async function make(W, ctx = {}){
   { const Y = G0; k.add(new THREE.CylinderGeometry(4.2, 4.4, .6, 32), M.wood, AM.x, Y + .3, AM.z); circles.push({x:AM.x, z:AM.z, r:4.3});
     for(let i = 0; i < 4; i++){ const r0 = 6.5 + i * 1.6, r1 = r0 + 1.6, sh = new THREE.Shape(); sh.absarc(0, 0, r1, Math.PI, 0, true); sh.lineTo(r0, 0); sh.absarc(0, 0, r0, 0, Math.PI, false); sh.lineTo(-r1, 0);
       const g = new THREE.ExtrudeGeometry(sh, {depth:.45 * (i + 1), bevelEnabled:false, curveSegments:20}); g.rotateX(Math.PI / 2); g.translate(0, .45 * (i + 1), 0); k.add(g, i % 2 ? M.stone : M.cream, AM.x, Y, AM.z); }
-    for(let a = 0; a <= 12; a++){ const t = Math.PI + a / 12 * Math.PI, rr = 13.6; circles.push({x:AM.x + Math.cos(t) * rr, z:AM.z + Math.sin(t) * rr, r:.9}); }
+    // khán đài nằm phía Nam sân khấu (z > AM.z): rào kín vành ngoài, vành trong và 2 đầu – không đi lọt vào khối bậc
+    const ring = (rr, n) => { for(let a = 0; a <= n; a++){ const t = a / n * Math.PI; circles.push({x:AM.x + Math.cos(t) * rr, z:AM.z + Math.sin(t) * rr, r:.75}); } };
+    ring(13.3, 36); ring(6.2, 16);
+    for(const sx of [-1, 1]) for(let r = 6.2; r <= 13.3; r += 1.1) circles.push({x:AM.x + sx * r, z:AM.z + .3, r:.75});
     k.add(new THREE.BoxGeometry(9, 5, .3), M.navy, AM.x, Y + 3, AM.z - 4.6);
     plane(signTex(1024, 512, '#1b3557', [['🎭 SPEAKING CLUB', '900 92px "Segoe UI","Segoe UI Emoji",sans-serif', '#ffd23f', .3], ['CLB GIAO TIẾP · 口语俱乐部', '700 56px "Segoe UI","Microsoft YaHei",sans-serif', '#ffffff', .58], ['Nghe – trả lời – nhập vai – nói theo', '40px "Segoe UI",sans-serif', '#9fd2ff', .82]]), 8.6, 4.3, AM.x, Y + 3, AM.z - 4.42, 0, .55); }
 
@@ -199,7 +204,7 @@ export async function make(W, ctx = {}){
   const LB = {x:-300, z:ZB - 58, w:22, d:12};
   { const Y = G0; k.add(new THREE.BoxGeometry(LB.w, 7, LB.d), M.cream, LB.x, Y + 3.5, LB.z); boxes.push({x0:LB.x - LB.w / 2, x1:LB.x + LB.w / 2, z0:LB.z - LB.d / 2, z1:LB.z + LB.d / 2 + 2.6});
     k.add(new THREE.BoxGeometry(LB.w + 1, .8, LB.d + 4), M.white, LB.x, Y + 7.4, LB.z + 1); const ped = new THREE.CylinderGeometry(.01, LB.w / 2 + .5, 2.6, 3, 1); ped.rotateZ(Math.PI / 2); ped.rotateY(Math.PI / 2); ped.scale(1, 1, .18);
-    k.add(new THREE.BoxGeometry(LB.w + 1, .5, 4.2), M.stone, LB.x, Y + .25, LB.z + LB.d / 2 + 2);
+    k.add(new THREE.BoxGeometry(LB.w + 1, .5, 4.2), M.stone, LB.x, Y + .25, LB.z + LB.d / 2 + 2); addPlat(LB.x, LB.z + LB.d / 2 + 2, 0, (LB.w + 1) / 2, 2.1, Y + .5);   // bậc thềm thư viện
     for(let i = 0; i < 6; i++) k.add(new THREE.CylinderGeometry(.35, .4, 6.6, 14), M.white, LB.x - LB.w / 2 + 1.8 + i * (LB.w - 3.6) / 5, Y + 3.8, LB.z + LB.d / 2 + 2.6);
     plane(signTex(1024, 180, '#3b2a14', [['📖 THƯ VIỆN · LIBRARY · 图书馆', '800 66px "Segoe UI","Segoe UI Emoji","Microsoft YaHei",sans-serif', '#ffe6a8', .45], ['Sổ tay chuyên đề · tra cứu chuyên sâu', '40px "Segoe UI",sans-serif', '#fff', .84]]), 9, 1.6, LB.x, Y + 6.2, LB.z + LB.d / 2 + .06, 0, .5); }
 
@@ -275,7 +280,7 @@ export async function make(W, ctx = {}){
   INTER.push({x:-272.5, z:ZB, r:1.7, prio:.9, label:'🗣️ Trung tâm Ngoại ngữ – vào học (E)', action:() => openApp(home)});
   INTER.push({x:EH.x, z:EH.z + EH.d / 2 + 1.6, r:2.2, prio:.9, label:'🇬🇧 English House – lộ trình Tiếng Anh (E)', action:() => openApp({v:'track', t:'en'})});
   INTER.push({x:HH.x, z:HH.z - HH.d / 2 - 3.4, r:2.4, prio:.9, label:'🀄 Hán Học Đường – lộ trình Tiếng Trung (E)', action:() => openApp({v:'track', t:'zh'})});
-  INTER.push({x:AM.x, z:AM.z + 5.4, r:2.4, prio:.9, label:'🎭 CLB Giao tiếp – hội thoại nhập vai, kiểm tra nghe (E)', action:() => pickTrack('🎭 CLB Giao tiếp', t => ({v:'talks', t}))});
+  INTER.push({x:AM.x, z:AM.z + 14.8, r:2.4, prio:.9, label:'🎭 CLB Giao tiếp – hội thoại nhập vai, kiểm tra nghe (E)', action:() => pickTrack('🎭 CLB Giao tiếp', t => ({v:'talks', t}))});
   INTER.push({x:EX.x, z:EX.z - EX.d / 2 - 1.8, r:2.2, prio:.9, label:'📝 Phòng thi – thi thử IELTS / HSK (E)', action:() => pickTrack('📝 Phòng thi', t => ({v:'mocks', t}))});
   INTER.push({x:LB.x, z:LB.z + LB.d / 2 + 4.6, r:2.4, prio:.9, label:'📖 Thư viện – sổ tay chuyên đề (E)', action:() => pickTrack('📖 Thư viện', t => ({v:'guide', t}))});
   INTER.push({x:XS - 2, z:ZB + 3, r:2, prio:.6, label:'🗣️ Đảo Ngoại ngữ – xem lộ trình học (E)', action:() => openApp(home)});

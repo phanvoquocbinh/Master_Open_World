@@ -1,3 +1,4 @@
+import { makePoser } from './pose.js';
 // QC World – S18: TRUNG TÂM VIỆC LÀM KHỔNG LỒ (Phường Khởi Nghiệp – thay toà nhỏ cũ)
 //  🏢 Tháp 11 tầng (~46 m), sảnh kính 20 × 17 m ĐI BỘ VÀO ĐƯỢC: quầy thông tin ở giữa (bảng việc cũ: chân tay · trí tuệ · xin việc công ty),
 //     10 QUẦY NGHỀ dọc tường – bot làm nghề gì thì bạn làm được nghề đó, mỗi nghề 3 mức (dễ / vừa / khó), có giờ hạn, có lương:
@@ -16,7 +17,7 @@ export function makeJobCenter(W, ctx){
   const mmss=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
 
   /* ============================== 🏢 TOÀ NHÀ ============================== */
-  const X0=183.6, X1=203.6, Z0=63.2, Z1=80.2, CX=(X0+X1)/2, CZ=(Z0+Z1)/2, HH=8, Y=.02;
+  const X0=166, X1=186, Z0=256, Z1=273, CX=(X0+X1)/2, CZ=(Z0+Z1)/2, HH=8, Y=.02;   // quy hoạch 15/11/2026: khối A Phường mới, cửa chính quay ra đường z=290
   // gỡ toà nhỏ cũ (cùng chỗ) – giữ nguyên chức năng bảng việc
   for(const o of scene.children.slice()) if(o.isGroup && Math.abs(o.position.x-193)<.01 && Math.abs(o.position.z-70.5)<.01) scene.remove(o);
   for(let i=boxes.length-1;i>=0;i--){ const b=boxes[i]; if(Math.abs(b.x0-(193-6.3))<.01 && Math.abs(b.z0-(70.5-4))<.01) boxes.splice(i,1); }
@@ -86,16 +87,16 @@ export function makeJobCenter(W, ctx){
     garden:{icon:'🌻', name:'Làm vườn', desc:'Tưới cây, cắt tỉa bồn hoa quanh quảng trường đảo Master Dashboard.', pay:{easy:40, medium:75, hard:120},
       steps:(n)=>Array.from({length:n},()=>{ const a=R()*Math.PI*2, r=14+R()*22, p=randIn(Math.cos(a)*r-2,Math.cos(a)*r+2,Math.sin(a)*r-2,Math.sin(a)*r+2,freeAt); return {x:p.x, z:p.z, label:'🌻 Tưới cây · tỉa lá (E)', hint:'bồn cây cần chăm', ok:'🌻 Cây tươi tốt hẳn!'}; })},
     guard:{icon:'👮', name:'Bảo vệ tuần tra', desc:'Đi tuần các góc ngã tư Downtown, ký sổ tuần tra ở mỗi chốt.', pay:{easy:45, medium:85, hard:130},
-      steps:(n)=>{ const IX=(W.traffic && W.traffic.IX)||[{x:178,z:0}]; return Array.from({length:n},()=>{ const ix=pick(IX), sx=R()<.5?-1:1, sz=R()<.5?-1:1; return {x:ix.x+sx*7.4, z:ix.z+sz*7.4, label:'👮 Ký sổ tuần tra (E)', hint:'chốt tuần tra ở góc ngã tư', ok:'👮 Chốt an toàn ✅'}; }); }},
+      steps:(n)=>{ const IX=(W.traffic && W.traffic.IX)||[{x:178,z:0}]; return Array.from({length:n},()=>{ const ix=pick(IX), sx=R()<.5?-1:1, sz=R()<.5?-1:1; const c=((W.CITY.roads&&W.CITY.roads.hw)||5)+2.4; return {x:ix.x+sx*c, z:ix.z+sz*c, label:'👮 Ký sổ tuần tra (E)', hint:'chốt tuần tra ở góc ngã tư', ok:'👮 Chốt an toàn ✅'}; }); }},
     lamp:{icon:'🔧', name:'Sửa đèn đường', desc:'Kiểm tra và thay bóng đèn đường hỏng ở Downtown & Phường.', pay:{easy:45, medium:90, hard:140},
-      steps:(n)=>{ const L=(W.lamps||[]).filter(l=>l.position && l.position.x>136 && l.position.z<118); return Array.from({length:n},()=>{ const l=pick(L.length?L:[{position:{x:190,z:6}}]); return {x:l.position.x-.4, z:l.position.z+.6, label:'🔧 Thay bóng đèn (E)', hint:'đèn đường chập chờn', ok:'💡 Đèn sáng lại rồi!'}; }); }},
+      steps:(n)=>{ const L=(W.lamps||[]).filter(l=>l.position && l.position.x>136 && l.position.z<480); return Array.from({length:n},()=>{ const l=pick(L.length?L:[{position:{x:190,z:6}}]); return {x:l.position.x-.4, z:l.position.z+.6, label:'🔧 Thay bóng đèn (E)', hint:'đèn đường chập chờn', ok:'💡 Đèn sáng lại rồi!'}; }); }},
     food:{icon:'🛵', name:'Giao đồ ăn', desc:'Nhận món ở nhà hàng Phố ẩm thực rồi giao tới căn hộ, biệt thự hoặc toà công ty (đi xe máy cho nhanh!).', pay:{easy:60, medium:110, hard:170},
       steps:(n)=>{ const out=[], dst=[]; const fsT=(W.foodStreet && W.foodStreet.towers)||[]; for(const t of fsT) dst.push({x:t.x, z:t.z-10, name:'Sky QC Residence'}); for(const t of (towers||[]).filter(t=>t.door&&!t.locked)) dst.push({x:t.door.x, z:t.door.z+(t.face>0?2:-2), name:t.name}); if(W.riverside) dst.push({x:info?info.COAST_X:286, z:(W.riverside.gateZ||205)-6, name:'Cổng khu biệt thự'});
         const k=Math.max(1,Math.round(n/2)); for(let i=0;i<k;i++){ const d=pick(dst.length?dst:[{x:200,z:86,name:'Phường'}]); out.push({x:321, z:104, label:'🍱 Nhận món ở Phố ẩm thực (E)', hint:'lấy món ở giữa phố ẩm thực', ok:'🍱 Đã lấy món – giao ngay!'}); out.push({x:d.x, z:d.z, label:`🛵 Giao món cho khách ở ${d.name} (E)`, hint:`giao tới ${d.name}`, ok:'🛵 Giao xong – được 5 sao ⭐'}); } return out; }},
     taxi:{icon:'🚕', name:'Chở khách', desc:'Đón khách ở điểm hẹn rồi chở tới nơi (lái ô tô / xe máy của bạn – bấm V).', pay:{easy:70, medium:120, hard:180},
       steps:(n)=>{ const G=W.transit && W.transit.G; const nodes=G?G.nodes.filter(q=>q.x>130):[{x:178,z:0}]; const out=[]; const k=Math.max(1,Math.round(n/2)); for(let i=0;i<k;i++){ const a=pick(nodes), b=pick(nodes); out.push({x:a.x, z:a.z, r:4, label:'🚕 Đón khách (E)', hint:'tới điểm đón khách', ok:'🚕 Khách đã lên xe!'}); out.push({x:b.x, z:b.z, r:4, label:'🚕 Trả khách (E)', hint:'chở khách tới nơi', ok:'🚕 Khách trả tiền + tip!'}); } return out; }},
     guide:{icon:'🧭', name:'Hướng dẫn viên', desc:'Dẫn một khách du lịch đi tham quan các điểm nổi tiếng (khách đi theo sau bạn).', pay:{easy:60, medium:105, hard:160}, follower:true,
-      steps:(n)=>{ const spots=[{x:-2,z:30,n:'Quảng trường đảo Master Dashboard'},{x:199,z:44,n:'Công viên Trung tâm Downtown'},{x:292,z:104,n:'Cổng Phố ẩm thực Đồi QC'}]; if(W.monument){ const M=W.monument; spots.push({x:M.C.x+Math.cos(M.ENT)*20, z:M.C.z+Math.sin(M.ENT)*20, n:'Tháp Brand QC'}); } if(W.luxury) spots.push({x:W.luxury.door.x-3, z:W.luxury.door.z, n:'QC Auto Luxury Showroom'});
+      steps:(n)=>{ const spots=[{x:-2,z:30,n:'Quảng trường đảo Master Dashboard'},{x:199,z:13,n:'Cổng Bắc Đại công viên Hồ Ngọc'},{x:292,z:104,n:'Cổng Phố ẩm thực Đồi QC'}]; if(W.monument){ const M=W.monument; spots.push({x:M.C.x+Math.cos(M.ENT)*20, z:M.C.z+Math.sin(M.ENT)*20, n:'Tháp Brand QC'}); } if(W.luxury) spots.push({x:W.luxury.door.x-3, z:W.luxury.door.z, n:'QC Auto Luxury Showroom'});
         const k=Math.min(spots.length, n<=3?2:n<=5?3:4), list=spots.sort(()=>R()-.5).slice(0,k); return list.map(s=>({x:s.x, z:s.z, r:3.4, label:`🧭 Giới thiệu ${s.n} cho khách (E)`, hint:`dẫn khách tới ${s.n}`, ok:`🧭 Khách thích ${s.n} lắm!`, when:()=>!shift.follower || Math.hypot(shift.follower.x-s.x, shift.follower.z-s.z)<6})); }},
     fish:{icon:'🎣', name:'Ngư dân', desc:'Ra cuối cầu tàu Bến cảng, thả câu và bấm E đúng lúc cá cắn câu (phao chìm).', pay:{easy:40, medium:85, hard:130}, fish:true,
       steps:(n)=>Array.from({length:n},()=>({x:0, z:-98, label:'🎣 Giật cần (E)', hint:'canh phao – cá cắn thì bấm E', ok:'🐟 Câu được 1 con!', act:()=>fishTry()}))},
@@ -136,7 +137,13 @@ export function makeJobCenter(W, ctx){
       <p class="muted" style="font-size:12px">Đã làm nghề này: ${(S.work && S.work.types && S.work.types[id])||0} ca. Đang là nhân viên công ty → lương +10%.</p>`;
     m.body.querySelectorAll('[data-lv]').forEach(b=>b.onclick=()=>{ m.close(); startShift(id, b.dataset.lv); }); }
   // nhân viên quầy (bot)
-  if(W.people) booths.forEach((b,i)=>{ const sd=W.people.pickSeed(L=>i%2?L.female:!L.female, 800+i), kk=W.people.kit(sd,{outfit:{shirt:0x16324f, pants:0x1d1f24, long:true}}); const a=makeActor(kk.gl,{name:`${W.people.nameOf(sd)} · tư vấn nghề`, height:kk.h, face:0, clips:kk.clips, compact:false, dot:'#46d39a'}); const f=[Math.sin(b.face),Math.cos(b.face)]; a.g.position.set(b.x-f[0]*.9, Y, b.z-f[1]*.9); a.g.rotation.y=b.face; a.play('idle',0); });
+  const advisers=[];
+  if(W.people) booths.forEach((b,i)=>{ const sd=W.people.pickSeed(L=>i%2?L.female:!L.female, 800+i), kk=W.people.kit(sd,{outfit:{shirt:0x16324f, pants:0x1d1f24, long:true}}); const a=makeActor(kk.gl,{name:`${W.people.nameOf(sd)} · tư vấn nghề`, height:kk.h, face:0, clips:kk.clips, compact:false, dot:'#46d39a'}); const f=[Math.sin(b.face),Math.cos(b.face)]; const cx=b.x-f[0]*.95, cz=b.z-f[1]*.95;
+    // S-QA (15/11): ghế xoay + ngồi ngay ngắn, hai tay đặt trên đùi, thỉnh thoảng khẽ nghiêng đầu
+    k.add(new THREE.BoxGeometry(.5,.08,.48), M.navy, cx,Y+.5,cz, 0,b.face,0); k.add(new THREE.BoxGeometry(.48,.55,.07), M.navy, cx-f[0]*.24,Y+.82,cz-f[1]*.24, 0,b.face,0);
+    k.add(new THREE.CylinderGeometry(.03,.03,.46,8), M.steel, cx,Y+.25,cz); k.add(new THREE.CylinderGeometry(.26,.26,.03,14), M.steel, cx,Y+.02,cz);
+    a.g.rotation.y=b.face; a.play('idle',0); a.mixer.update(0); const po=makePoser(THREE,a), hh=po.hipsHeight(); a.g.position.set(cx, Y+.56-hh, cz); advisers.push({a, po, ph:i*1.7}); });
+  HOOK.onFrame.push((dt,T)=>{ if(W.inside || Math.hypot(P.x-(X0+X1)/2, P.z-(Z0+Z1)/2)>45) return; for(const v of advisers){ v.a.mixer.update(dt); v.po.apply('lap', T+v.ph); } });
   k.build(scene);
   // camera trong sảnh
   let camSet=false; HOOK.onFrame.push(()=>{ const inside=!W.inside && P.x>X0 && P.x<X1 && P.z>Z0 && P.z<Z1 && P.y<HH; if(inside){ HOOK.camBox={x0:X0+.5, x1:X1-.5, z0:Z0+.5, z1:Z1-.5, y1:HH-.6}; camSet=true; } else if(camSet){ camSet=false; HOOK.camBox=null; } });

@@ -48,6 +48,7 @@
 ## NHẬT KÝ THAY ĐỔI (mỗi phiên tự ghi – mới nhất ở trên)
 | Giờ | Phiên | File | Vùng (x0–x1, z0–z1) | Việc |
 |---|---|---|---|---|
+| 15/11 14:00 | phiên chính (tích hợp) | toàn bộ quy hoạch thành phố + bot đi bộ + ghế nhiều chỗ | Downtown, Phường, Hồ Ngọc x 156–242 z 10–190 | Test tích hợp: 0 lỗi tải, cầu Phường→đồi đi được, xoắn ốc không kẹt, taxi có tuyến lên đồi, bot đi bộ chạy → đẩy GitHub. Còn: lối đi bộ cầu đảo (|z| 10–14) đổ thẳng vào làn xe máy đại lộ x=146 (thiếu vỉa hè Tây) |
 | 15/11 13:30 | phiên chính | monument.js, mountaintown.js | tháp QC (380–404, 158–182, y 32–52); nhà sàn Phố Núi dọc đường xoắn ốc | A10: lan can giếng trời + tay vịn xoắn chừa khe đúng lối cầu thang (không còn vạch chắn ngang), hết khe rơi 2 bên chiếu nghỉ, camera trong tháp lùi 6,2 m. A11: mái hiên/đèn lồng nhà sàn tính theo mặt đất trước nhà (hết vùi trong đất) |
 | 15/11 13:00 | phiên chính | world.html, traffic.js, foodstreet.js | (−3…3, −3…3); cầu x 174–182 z −109…−62; cầu x 262–274 z ±4; phố ẩm thực x 301–331 z 92–117 | Hết lún: bệ cổng quảng trường (plat .45), bó vỉa 2 cầu (plat), sàn 2 nhà hàng (plat Y+.16) |
 | 15/11 12:30 | đồ hoạ/QA | QA_BACKLOG.md | – | Lập sổ việc chung |

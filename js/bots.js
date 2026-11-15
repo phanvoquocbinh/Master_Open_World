@@ -170,7 +170,7 @@ export function makeBots(W, city, life){
   spawn('Minh · chạy bộ', 'person', 'jogger', 47, 4, {dot:'#ff7b29', seed:W.people&&W.people.pickSeed(L=>!L.female,10), outfit:{shirt:0xff7b29, shorts:true, long:false, shoe:0xffffff}});
   spawn('Thảo · Automation', 'robot', 'walker', -12, -10, {dot:'#7aa2ff'});
   spawn('Long · API tester', 'person', 'walker', 14, 4, {prop:'clipboard', dot:'#7aa2ff'});
-  if(W.people) for(const [i,x,z] of [[0,150,20],[1,175,-20],[2,205,30],[3,232,-10],[4,160,86],[5,200,86],[6,240,86],[7,190,52]]){ const sd=W.people.seedFor(i%2?'f':'m', 40+i);
+  if(W.people) for(const [i,x,z] of [[0,160,-13.5],[1,196,-13.5],[2,238,-13.5],[3,150,214],[4,215,214],[5,192,296],[6,215,386],[7,170,386]]){ const sd=W.people.seedFor(i%2?'f':'m', 40+i);
     spawn(`${W.people.nameOf(sd)} · dân phố`, 'person', 'citizen', x, z, {seed:sd, dot:'#c7d2e0'}); }
   const fanSpots=[[-5.5,-21],[5.5,-20.5],[-1,-25.6]];
   spawn('Vy · fan cứng', 'robot', 'fan', -14, -12, {danceSpot:{x:fanSpots[0][0], z:fanSpots[0][1]}, dot:'#ff4f6d'});

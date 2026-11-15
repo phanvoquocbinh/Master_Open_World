@@ -36,7 +36,10 @@ export function buildCity(W){
     });
     tex.wrapS=THREE.RepeatWrapping;
     const N=420, r0=ROAD.r-ROAD.w/2, r1=ROAD.r+ROAD.w/2, pos=[], uv=[], idx=[], rep=Math.round(2*Math.PI*ROAD.r/12);
-    for(let i=0;i<=N;i++){ const a=i/N*Math.PI*2; for(const [k,r] of [[0,r0],[1,r1]]){ const x=Math.cos(a)*r, z=Math.sin(a)*r; pos.push(x, Math.max(groundH(x,z),0)+.07, z); uv.push(i/N*rep, k); } }
+    // S-GFX (15/11): mặt đường PHẲNG ở .12 m (cao hơn đỉnh gợn cát ~.075) + sàn đứng vòng cùng cao độ → bánh xe/chân người đặt đúng mặt nhựa.
+    // Trước: mặt đường vẽ = địa hình + .07 nhưng xe/người đứng theo địa hình → bánh xe lún 7–15 cm dưới mặt đường.
+    const RY=.12; W.plats.push({t:'ring', x:0, z:0, r0, r1, h:RY});
+    for(let i=0;i<=N;i++){ const a=i/N*Math.PI*2; for(const [k,r] of [[0,r0],[1,r1]]){ const x=Math.cos(a)*r, z=Math.sin(a)*r; pos.push(x, RY, z); uv.push(i/N*rep, k); } }
     for(let i=0;i<N;i++){ const a=i*2; idx.push(a,a+1,a+2, a+1,a+3,a+2); }
     const geo=new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(pos,3)); geo.setAttribute('uv', new THREE.Float32BufferAttribute(uv,2)); geo.setIndex(idx); geo.computeVertexNormals();
     if(geo.attributes.normal.getY(0)<0){ idx.reverse(); geo.setIndex(idx); geo.computeVertexNormals(); }
@@ -44,7 +47,7 @@ export function buildCity(W){
     road.receiveShadow=true; scene.add(road); C.road=road;
     // vỉa hè + đèn đường
     for(const r of [r0-.25, r1+.25]){ const g=new THREE.TorusGeometry(r,.16,6,240); g.rotateX(Math.PI/2); const m=new THREE.Mesh(g, MAT.stone); m.position.y=.08; m.receiveShadow=true; scene.add(m); }
-    for(let i=0;i<30;i++){ const a=i/30*Math.PI*2+.05; if(Math.abs(((a+Math.PI/2)%(Math.PI*2)))<.08) continue; lampPost(Math.cos(a)*(r1+1.1), Math.sin(a)*(r1+1.1)); }
+    for(let i=0;i<30;i++){ const a=i/30*Math.PI*2+.05; if(Math.abs(((a+Math.PI/2)%(Math.PI*2)))<.08) continue; if(Math.cos(a)>0 && Math.abs(Math.sin(a)*(r1+1.1))<7.5) continue;   /* S-QA: không dựng đèn giữa đường đầu cầu sang Downtown */ lampPost(Math.cos(a)*(r1+1.1), Math.sin(a)*(r1+1.1)); }
   }
 
   /* ---------- 2. Tháp Brand QA·QC·QE ---------- */
@@ -139,7 +142,8 @@ export function buildCity(W){
     const b={x, z, g, plants, water:.35+rnd()*.4, growth:.4+rnd()*.3, claimed:null}; C.beds.push(b); return b;
   }
   for(let i=0;i<10;i++){ const a=i/10*Math.PI*2+.31, r=10.5; const x=Math.cos(a)*r, z=Math.sin(a)*r; if(nearPath(x,z) || z<-8) continue; bed(x,z,-a+Math.PI/2); }
-  const tw=CITY.places.tower; for(const s of [-1,1]){ const f=fwdOf(tw.rot), rx=Math.cos(tw.rot), rz=-Math.sin(tw.rot); bed(tw.x+f[0]*16+rx*s*7, tw.z+f[1]*16+rz*s*7, tw.rot); }
+  // S-GFX (15/11): bồn hoa + ghế trước tháp Brand QA cách tháp 12–12,5 m (trước 16–18 m → nằm giữa đường vành đai r=43, chắn xe)
+  const tw=CITY.places.tower; for(const s of [-1,1]){ const f=fwdOf(tw.rot), rx=Math.cos(tw.rot), rz=-Math.sin(tw.rot); bed(tw.x+f[0]*12.5+rx*s*7, tw.z+f[1]*12.5+rz*s*7, tw.rot); }
   for(const l of CITY.lots.filter(l=>l.kind==='home').slice(0,3)){ const f=fwdOf(l.rot), rx=Math.cos(l.rot), rz=-Math.sin(l.rot); bed(l.x+f[0]*6.2+rx*4.2, l.z+f[1]*6.2+rz*4.2, l.rot); }
   function bench(x, z, rot){
     const g=new THREE.Group(); g.position.set(x, groundH(x,z), z); g.rotation.y=rot; scene.add(g);
@@ -148,7 +152,7 @@ export function buildCity(W){
     circles.push({x, z, r:.7}); const f=fwdOf(rot); C.benches.push({x:x+f[0]*.9, z:z+f[1]*.9, rot, taken:null});
   }
   for(let i=0;i<8;i++){ const a=i/8*Math.PI*2+.12, r=12.8; const x=Math.cos(a)*r, z=Math.sin(a)*r; if(nearPath(x,z) || (z<-10 && Math.abs(x)<8)) continue; bench(x,z,Math.atan2(-x,-z)); }
-  { const f=fwdOf(tw.rot); bench(tw.x+f[0]*18, tw.z+f[1]*18, tw.rot+Math.PI); }
+  { const f=fwdOf(tw.rot); bench(tw.x+f[0]*12, tw.z+f[1]*12, tw.rot+Math.PI); }
 
   /* ---------- 7. Điểm rác có thể xuất hiện ---------- */
   C.trashArea=(r)=>{ for(let k=0;k<30;k++){ const a=r()*Math.PI*2, rr = r()<.5 ? 8+r()*8 : ROAD.r-2+r()*4; const x=Math.cos(a)*rr, z=Math.sin(a)*rr;

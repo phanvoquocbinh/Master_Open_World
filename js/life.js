@@ -354,7 +354,7 @@ export async function initLife(W){
     let g=(s.lie||s.solo) ? null : benches.find(b=>b.scope===s.scope && !b.lie && !!b.back===!!s.back && Math.abs(dA(b.rot,s.rot))<.06 && Math.abs(b.y-s.y)<.06 && b.seats.some(o=>Math.hypot(o.x-s.x,o.z-s.z)<1.5));
     if(g){ g.seats.push(s); s.group=g; s.inter=g.inter; benchInter(g); return s; }
     g={seats:[s], rot:s.rot, y:s.y, scope:s.scope, back:s.back, lie:s.lie, r0:s.r||1.35, label:s.label||'🪑 Ngồi xuống (E · hoặc phím C)'}; s.group=g; benches.push(g);
-    g.inter={x:s.x, z:s.z, r:g.r0, prio:.7, when:()=>!sitting && !V.riding(),
+    g.inter={x:s.x, z:s.z, r:g.r0, prio:.7, when:()=>!sitting && !V.riding() && g.seats.some(o=>o.floor===undefined || Math.abs(P.y-o.floor)<1.2),   // S-QA: cùng tầng mới ngồi được (trước bấm từ tầng trên/dưới rồi rớt xuyên tầng)
       get label(){ const n=g.seats.length, fr=g.seats.filter(o=>!o.taken).length; return fr ? (n>1 ? `${g.label} · còn ${fr}/${n} chỗ` : g.label) : (n>1 ? `🪑 Ghế đã kín chỗ (${n}/${n})` : '🪑 Ghế đã có người ngồi'); },
       action:()=>sitGroup(g)};
     benchInter(g); s.inter=g.inter; INTER.push(g.inter); return s; }
@@ -377,7 +377,7 @@ export async function initLife(W){
   // độ cao hông thực tế lúc ngồi (Robot có clip "Sitting" riêng) → đặt mông đúng mặt ghế
   HOOK.onFrame.push(()=>{ if(sitting && hips && !sitting.seat.lie){ hips.getWorldPosition(_hp); sitting.off=_hp.y-me.g.position.y; } });
   function nearestSeat(maxD=3.2){ let best=null, bd=maxD; const scope=W.inside?'interior':'world';
-    for(const s of seats){ if(s.taken || s.scope!==scope) continue; const d=Math.hypot(P.x-s.x, P.z-s.z); if(d<bd){ bd=d; best=s; } } return best; }
+    for(const s of seats){ if(s.taken || s.scope!==scope || (s.floor!==undefined && Math.abs(P.y-s.floor)>1.2)) continue; const d=Math.hypot(P.x-s.x, P.z-s.z); if(d<bd){ bd=d; best=s; } } return best; }
   HOOK.keys.KeyC=()=>{ if(sitting) return standUp(); if(V.riding()) return; const s=nearestSeat(); if(s) sitOn(s); else toast('Không có ghế trống ở gần – lại gần ghế đá, bàn picnic hoặc ghế trong toà nhà rồi bấm C.', 2600); };
   // ghế đá: 2 chỗ mỗi ghế
   for(const b of city.benches){ const f=[Math.sin(b.rot), Math.cos(b.rot)], rx=Math.cos(b.rot), rz=-Math.sin(b.rot), cx=b.x-f[0]*.9, cz=b.z-f[1]*.9, gy=groundH(cx,cz);
@@ -764,7 +764,7 @@ export async function initLife(W){
   try{ W.skyfx=makeSkyFX(W); }catch(e){ console.warn('skyfx', e); }
   try{ W.cafeLife=makeCafeLife(W); }catch(e){ console.warn('cafe', e); }   // S8: khách bot gọi nước, ngồi chill, nói chuyện / hỏi thăm bạn   // S6: mây trôi · núi xa chân trời · trăng
   // S19+: module mở rộng (mỗi file export make(W, ctx)) – làm song song ở các phiên khác nhau, nạp trước khi gộp mesh & dựng bản đồ bot
-  for(const [key,file] of [['park','./park.js'],['gadgets','./gadgets.js'],['lang','./langcenter.js']]){ try{ const m=await import(file); if(m && m.make) W[key]=await m.make(W, {S, save, ui, askPay, fmt, spend, addCoins, V, transit:W.transit, city, downtown, ward, bots, jobs}); }catch(e){ console.warn(key, e); } }
+  for(const [key,file] of [['park','./park.js'],['gadgets','./gadgets.js'],['lang','./langcenter.js'],['pedestrians','./pedestrians.js']]){ try{ const m=await import(file); if(m && m.make) W[key]=await m.make(W, {S, save, ui, askPay, fmt, spend, addCoins, V, transit:W.transit, city, downtown, ward, bots, jobs}); }catch(e){ console.warn(key, e); } }
   const st=batchStatic(W); console.info(`[QC World] gộp ${st.before} mesh tĩnh → ${st.after} khối`); W.markShadow && W.markShadow();
   for(const o of Object.values(V.garage)) if(W.BLOBSRC && o.userData.type!=='boat' && !W.BLOBSRC.some(b=>b.o===o)) W.BLOBSRC.push({o, s:o.userData.type==='car'?3.2:1.5});
   await W.yieldUI('Đang vẽ bản đồ đường đi cho bot…');

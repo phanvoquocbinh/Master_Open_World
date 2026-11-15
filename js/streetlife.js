@@ -22,7 +22,7 @@ export function makeStreetLife(W, ctx){
   const all=[];
 
   /* ============================== 🎧 NGƯỜI ĐEO TAI NGHE ============================== */
-  const walkers=[{x0:186, x1:212, z:7.6, seed:seedF(501)}, {x0:144, x1:170, z:-7.6, seed:seedM(502)}].map((w,i)=>{ const o=person(w.seed, {shirt:[0xff4f9a,0x2f6fd0][i], pants:0x1d1f24, shoe:0xffffff}, `🎧 ${W.people.nameOf(w.seed)} · nghe nhạc`, '#c77dff');
+  const walkers=[{x0:192, x1:240, z:-13.4, seed:seedF(501)}, {x0:148, x1:165, z:-13.4, seed:seedM(502)}].map((w,i)=>{ const o=person(w.seed, {shirt:[0xff4f9a,0x2f6fd0][i], pants:0x1d1f24, shoe:0xffffff}, `🎧 ${W.people.nameOf(w.seed)} · nghe nhạc`, '#c77dff');
     const hp=new THREE.Mesh(new THREE.TorusGeometry(.13,.025,6,16,Math.PI), sm(0x111111,.4)); hp.position.set(0,o.h-.06,0); o.a.g.add(hp); for(const s of [-1,1]){ const cup=new THREE.Mesh(new THREE.CylinderGeometry(.055,.055,.05,10), sm(0x15161a,.4)); cup.rotation.z=Math.PI/2; cup.position.set(s*.13,o.h-.16,0); o.a.g.add(cup); }
     Object.assign(o, {kind:'walker', ...w, dir:1, x:w.x0+R()*(w.x1-w.x0), z:w.z, t:4+R()*6, dance:0}); place(o); all.push(o); return o; });
   function updWalker(o, dt, T){ if(o.dance>0){ o.dance-=dt; o.a.play('idle'); o.po.apply('dance', T); if(o.dance<=0) o.t=8+R()*8; return; }
@@ -32,21 +32,21 @@ export function makeStreetLife(W, ctx){
   /* ============================== 🦸 COSPLAY (công viên trung tâm) ============================== */
   const COS=[
     // S19: đứng 2 bên cổng vòm Công viên Trung tâm mới (js/park.js), chừa lối cổng x 196.5–201.5 và sân chơi / khu thể dục
-    {n:'Siêu anh hùng Áo Choàng Đỏ', suit:{shirt:0x1f4fd6, pants:0x1f4fd6, long:true, shoe:0xd61f2f}, cape:0xd61f2f, x:193.7, z:43.45},
-    {n:'Phi hành gia Bug Hunter', suit:{shirt:0xf2f2f2, pants:0xf2f2f2, long:true, shoe:0x9aa3ad}, helmet:true, x:195.3, z:43.25},
-    {n:'Hiệp sĩ Test Case', suit:{shirt:0xb8c0c8, pants:0x8a929a, long:true, shoe:0x5a6068}, shield:true, x:202.7, z:43.25},
-    {n:'Ninja Regression', suit:{shirt:0x15161a, pants:0x15161a, long:true, shoe:0x15161a}, scarf:true, x:204.3, z:43.45}];
+    {n:'Siêu anh hùng Áo Choàng Đỏ', suit:{shirt:0x1f4fd6, pants:0x1f4fd6, long:true, shoe:0xd61f2f}, cape:0xd61f2f, x:162.6, z:24.2},
+    {n:'Phi hành gia Bug Hunter', suit:{shirt:0xf2f2f2, pants:0xf2f2f2, long:true, shoe:0x9aa3ad}, helmet:true, x:166.2, z:23.0},
+    {n:'Hiệp sĩ Test Case', suit:{shirt:0xb8c0c8, pants:0x8a929a, long:true, shoe:0x5a6068}, shield:true, x:170.2, z:23.0},
+    {n:'Ninja Regression', suit:{shirt:0x15161a, pants:0x15161a, long:true, shoe:0x15161a}, scarf:true, x:173.8, z:24.2}];
   const cosplayers=COS.map((c,i)=>{ const o=person(i%2?seedF(510+i):seedM(510+i), c.suit, `🦸 ${c.n} (cosplay)`, '#ff4f6d'); o.x=c.x; o.z=c.z; o.hd=Math.PI; o.kind='cos'; o.c=c; o.t=R()*4; place(o); circles.push({x:c.x, z:c.z, r:.4});
     if(c.cape){ const cape=new THREE.Mesh(new THREE.PlaneGeometry(.62,1.05), sm(c.cape,.8,0,{side:THREE.DoubleSide})); cape.position.set(0,o.h*.58,-.17); cape.rotation.x=.12; o.a.g.add(cape); const st=new THREE.Mesh(new THREE.CircleGeometry(.08,5), sm(0xffd23f,.4,0,{emissive:0xffb000, emissiveIntensity:.5})); st.position.set(0,o.h*.72,.16); o.a.g.add(st); o.cape=cape; }
     if(c.helmet){ const hm=new THREE.Mesh(new THREE.SphereGeometry(.21,16,12), new THREE.MeshStandardMaterial({color:0xcfe8ff, roughness:.05, metalness:.3, transparent:true, opacity:.45})); hm.position.set(0,o.h-.12,0); o.a.g.add(hm); const pack=new THREE.Mesh(new THREE.BoxGeometry(.38,.45,.18), sm(0xe8e8e8,.5)); pack.position.set(0,o.h*.66,-.2); o.a.g.add(pack); }
     if(c.shield){ const sh=new THREE.Mesh(new THREE.CylinderGeometry(.32,.32,.05,20), sm(0xc8ced6,.25,.9)); sh.rotation.x=Math.PI/2; sh.position.set(-.32,o.h*.55,.12); o.a.g.add(sh); const cr=new THREE.Mesh(new THREE.BoxGeometry(.06,.4,.06), sm(0xd61f2f,.5)); cr.position.set(-.32,o.h*.55,.16); o.a.g.add(cr); }
     if(c.scarf){ const sc=new THREE.Mesh(new THREE.PlaneGeometry(.12,.7), sm(0xd61f2f,.8,0,{side:THREE.DoubleSide})); sc.position.set(.08,o.h*.68,-.16); sc.rotation.z=-.4; o.a.g.add(sc); o.scarf=sc; }
     all.push(o); return o; });
-  INTER.push({x:199, z:43.4, r:4.6, prio:.5, label:'📸 Chụp ảnh cùng nhóm cosplay (E)', action:()=>{ const o=pick(cosplayers); say(o, pick(['📸 Cười lên nào!','✌️ Chụp đẹp nha!','🦸 Sẵn sàng cứu thế giới khỏi bug!']), 3); burst(new THREE.Vector3(P.x, P.y+1.6, P.z), [0xffffff,0xfff2a0], 60, 4, .5, 0, .2); toast(`📸 Tách! Ảnh chụp cùng ${o.c.n} đã lưu vào kỷ niệm 😄`, 2600); }});
-  makeLabel('🦸 Góc cosplay', 'Bấm E để chụp ảnh cùng', {h:.5, x:199, y:2.6, z:42.8, fade:40});
+  INTER.push({x:168.2, z:27.2, r:4.6, prio:.5, label:'📸 Chụp ảnh cùng nhóm cosplay (E)', action:()=>{ const o=pick(cosplayers); say(o, pick(['📸 Cười lên nào!','✌️ Chụp đẹp nha!','🦸 Sẵn sàng cứu thế giới khỏi bug!']), 3); burst(new THREE.Vector3(P.x, P.y+1.6, P.z), [0xffffff,0xfff2a0], 60, 4, .5, 0, .2); toast(`📸 Tách! Ảnh chụp cùng ${o.c.n} đã lưu vào kỷ niệm 😄`, 2600); }});
+  makeLabel('🦸 Góc cosplay', 'Bấm E để chụp ảnh cùng', {h:.5, x:168.2, y:2.9, z:23.4, fade:28});
 
   /* ============================== 🎸 BAN NHẠC ROCK DẠO ============================== */
-  const SPOTS=[{x:152, z:7.4}, {x:166, z:-7.4}, {x:240, z:7.4}];
+  const SPOTS=[{x:150, z:-13.2}, {x:196, z:-13.2}, {x:236, z:-13.2}];   // vỉa hè Bắc Đại lộ Hồ Ngọc (đường 20 m)
   const band={members:[], spot:0, state:'walk', t:0, x:SPOTS[0].x-14, z:SPOTS[0].z, drums:null, tipped:0};
   [['🎸 Khánh · guitar', seedM(520), 0x15161a],['🎸 Tú · bass', seedF(521), 0x7a1f2a],['🥁 Nam · trống', seedM(522), 0x1f2a44]].forEach(([n,s,c],i)=>{ const o=person(s, {shirt:c, pants:0x0f1012, long:true, shoe:0x111111}, `${n} (ban nhạc QC Rock)`, '#ff7b29'); o.role=i; all.push(o); band.members.push(o);
     o.x=band.x-i*1.3; o.z=band.z; o.hd=Math.PI/2; place(o);
@@ -55,9 +55,12 @@ export function makeStreetLife(W, ctx){
   INTER.push({get x(){ return band.x; }, get z(){ return band.z+(band.z>0?1.6:-1.6); }, r:4, prio:.6, when:()=>band.state==='play', label:'🤘 Ủng hộ ban nhạc QC Rock (E)', action:()=>askPay(10, '🤘 Ủng hộ ban nhạc dạo <b>QC Rock</b>', ()=>{ if(!spend(10)) return; band.tipped++; say(band.members[0], 'Cảm ơn bạn! 🤘 Bài sau tặng bạn!', 3); toast('🤘 Ban nhạc cúi chào cảm ơn bạn!', 2200); })});
   // nhạc rock tự tạo (WebAudio)
   const AU={ctx:null, out:null, next:0, step:0};
-  function audioOK(){ if(AU.ctx) return true; if(!(navigator.userActivation && navigator.userActivation.hasBeenActive)) return false; const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false; AU.ctx=new AC(); AU.out=AU.ctx.createGain(); AU.out.gain.value=0; AU.out.connect(AU.ctx.destination);
+  function audioOK(){ if(AU.ctx) return true; if(!(navigator.userActivation && navigator.userActivation.hasBeenActive)) return false; const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false; AU.ctx=new AC(); AU.out=AU.ctx.createGain(); AU.out.gain.value=0;
+    // S19g: tiếng ban nhạc có hướng (trái/phải) + càng xa càng đục (lọc bớt tiếng cao) như nghe ngoài phố thật
+    AU.lp=AU.ctx.createBiquadFilter(); AU.lp.type='lowpass'; AU.lp.frequency.value=2600; AU.pan=AU.ctx.createStereoPanner ? AU.ctx.createStereoPanner() : null;
+    AU.out.connect(AU.lp); if(AU.pan){ AU.lp.connect(AU.pan); AU.pan.connect(AU.ctx.destination); } else AU.lp.connect(AU.ctx.destination);
     const n=AU.ctx.createBuffer(1, AU.ctx.sampleRate, AU.ctx.sampleRate), d=n.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1; AU.noise=n;
-    AU.dist=AU.ctx.createWaveShaper(); const cv=new Float32Array(1024); for(let i=0;i<1024;i++){ const x=i/512-1; cv[i]=Math.tanh(x*6); } AU.dist.curve=cv; AU.dist.connect(AU.out); return true; }
+    AU.dist=AU.ctx.createWaveShaper(); const cv=new Float32Array(1024); for(let i=0;i<1024;i++){ const x=i/512-1; cv[i]=Math.tanh(x*2.6); } AU.dist.curve=cv; AU.dist.connect(AU.out); return true; }   // S19g: méo nhẹ hơn (bớt chói tai)
   const BPM=132, SPB=60/BPM/2;   // nốt móc đơn
   const RIFF=[40,40,43,45, 40,40,47,45, 40,40,43,45, 38,38,43,43];   // E5 power chord riff (MIDI)
   function hz(m){ return 440*Math.pow(2,(m-69)/12); }
@@ -81,8 +84,11 @@ export function makeStreetLife(W, ctx){
       if(band.t>48){ band.state='walk'; band.t=0; band.drums.visible=false; band.spot=(band.spot+1)%SPOTS.length; say(band.members[0], 'Cảm ơn mọi người! Hẹn gặp ở góc phố sau 🤘', 3); } }
     for(const o of band.members) place(o);
     // âm thanh: nghe to dần khi lại gần
-    const d=Math.hypot(P.x-band.x, P.z-band.z), vol=band.state==='play' && !W.inside ? Math.max(0, 1-d/48)*.5 : 0;
-    if(vol>0 && audioOK()){ const c=AU.ctx; if(c.state==='suspended') c.resume(); AU.out.gain.setTargetAtTime(vol, c.currentTime, .2); if(AU.next<c.currentTime) AU.next=c.currentTime+.05; while(AU.next<c.currentTime+.25){ sched(AU.next, AU.step++); AU.next+=SPB; } }
+    // S19g: nhỏ dần theo bình phương khoảng cách (đứng cạnh ~0,35 · 15 m ~0,07 · ngoài ~40 m gần như im) thay vì nghe khắp phố
+    const d=Math.hypot(P.x-band.x, P.z-band.z), vol=band.state==='play' && !W.inside && d<45 ? .4/(1+(d/7)*(d/7))*Math.min(1,(45-d)/10) : 0;
+    if(vol>0 && audioOK()){ const c=AU.ctx; if(c.state==='suspended') c.resume(); AU.out.gain.setTargetAtTime(vol, c.currentTime, .2);
+      if(AU.lp) AU.lp.frequency.setTargetAtTime(Math.max(650, 2600-d*55), c.currentTime, .3);
+      if(AU.pan && W.ambience) AU.pan.pan.setTargetAtTime(W.ambience.panFor(band.x, band.z), c.currentTime, .15); if(AU.next<c.currentTime) AU.next=c.currentTime+.05; while(AU.next<c.currentTime+.25){ sched(AU.next, AU.step++); AU.next+=SPB; } }
     else if(AU.ctx){ AU.out.gain.setTargetAtTime(0, AU.ctx.currentTime, .3); } }
   // khán giả đứng xem ban nhạc
   const fans=[0,1,2,3].map(i=>{ const s=i%2?seedF(530+i):seedM(530+i), o=person(s, null, `${W.people.nameOf(s)} · người đi đường`, '#c7d2e0'); o.kind='fan'; o.i=i; o.x=band.x+3+i*2.4; o.z=band.z+(band.z>0?1.6:-1.6); place(o); all.push(o); return o; });
@@ -108,7 +114,7 @@ export function makeStreetLife(W, ctx){
 
   /* ============================== khung hình ============================== */
   HOOK.onFrame.push((dt, T)=>{ if(W.inside) return; dt=Math.min(dt,.1);
-    const nearDT=P.x>120 && P.x<280 && Math.abs(P.z)<90, nearFood=magic && Math.hypot(P.x-magic.x, P.z-magic.z)<70;
+    const nearDT=P.x>120 && P.x<280 && P.z>-90 && P.z<500, nearFood=magic && Math.hypot(P.x-magic.x, P.z-magic.z)<70;
     if(nearDT){ walkers.forEach(o=>{ updWalker(o,dt,T); place(o); }); cosplayers.forEach((o,i)=>{ o.a.play('idle'); if(o.cape) o.cape.rotation.x=.12+Math.sin(T*2.2+i)*.08; if(o.scarf) o.scarf.rotation.z=-.4+Math.sin(T*3+i)*.15; if(((T*.25+i)%6)<1.2) o.po.apply('present', T, 1); }); updBand(dt, T); updFans(dt, T); }
     else if(AU.ctx) AU.out.gain.setTargetAtTime(0, AU.ctx.currentTime, .3);
     if(nearFood) updMagic(dt, T);

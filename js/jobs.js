@@ -58,7 +58,7 @@ export function makeJobs(W, L){
   function renderHud(){ if(!job){ hud.hidden=true; return; } hud.hidden=false;
     hud.innerHTML=`<span>${job.def.icon} <b>${job.def.name}</b> · ${LV[job.lv]}</span><span>${job.prog()}</span><span>⏱ ${mmss(job.left)}</span><span>💰 ${fmt(job.pay)}</span><button class="btn" style="padding:4px 10px">Huỷ</button>`;
     hud.querySelector('button').onclick=()=>ui.confirm('Huỷ việc?', 'Huỷ thì không được trả công.', 'Huỷ việc', ()=>{ clearJob(); toast('Đã huỷ việc.'); }); }
-  function freeSpot(){ for(let k=0;k<80;k++){ const x=138+Math.random()*122, z=-58+Math.random()*172; if(!W.inDT(x,z,-1)) continue; if(W.botNav && W.botNav.built && !W.botNav.ok(x,z)) continue; if(W.boxes.some(b=>x>b.x0-1&&x<b.x1+1&&z>b.z0-1&&z<b.z1+1)) continue; return {x,z}; } return {x:199, z:86}; }
+  function freeSpot(){ for(let k=0;k<80;k++){ const x=138+Math.random()*122, z=-58+Math.random()*530; if(!W.inDT(x,z,-1)) continue; if(W.botNav && W.botNav.built && !W.botNav.ok(x,z)) continue; if(W.boxes.some(b=>x>b.x0-1&&x<b.x1+1&&z>b.z0-1&&z<b.z1+1)) continue; return {x,z}; } return {x:199, z:-13}; }
   const TRASHM=[colorMat(0xf2efe6,{roughness:.9}), colorMat(0xc8352a,{roughness:.4,metalness:.5}), colorMat(0x2e8f47,{roughness:.3})];
   function startManual(kind, lv){
     if(job) return toast('Bạn đang làm một việc rồi – xong hoặc huỷ việc đó trước nhé.');
