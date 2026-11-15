@@ -32,7 +32,7 @@ export function make(W, ctx){
   const TH0=Math.PI+.30, TURN=-2.5*Math.PI, YEND=100, ROADW=10, ROAD=[];
   const pushPts=(pts,kind)=>{ for(let i=0;i<pts.length-1;i++){ const a=pts[i], b=pts[i+1], L=Math.hypot(b.x-a.x,b.z-a.z); for(let t=0;t<L;t+=1){ const k=t/L; ROAD.push({x:a.x+(b.x-a.x)*k, z:a.z+(b.z-a.z)*k, h:a.h+(b.h-a.h)*k, kind}); } } };
   const spiral=[]; { const N=900; for(let i=0;i<=N;i++){ const u=i/N, y=4+(YEND-4)*u, a=TH0+TURN*u, w=cliffW(a); let r=rInv(y,a); if(y<38) r+=18*ss(.35,.7,w)*(1-ss(30,38,y)); spiral.push({x:C.x+Math.cos(a)*r, z:C.z+Math.sin(a)*r, h:y, a}); } }
-  const S0=spiral[0], approach=[{x:580,z:86,h:2},{x:600,z:90,h:2.5},{x:lerp(600,S0.x,.5),z:lerp(90,S0.z,.5),h:3.2},{x:S0.x,z:S0.z,h:4}];
+  const S0=spiral[0], approach=[{x:570,z:86,h:2},{x:580,z:86,h:2},{x:600,z:90,h:2.5},{x:lerp(600,S0.x,.5),z:lerp(90,S0.z,.5),h:3.2},{x:S0.x,z:S0.z,h:4}];
   pushPts(approach,'approach'); pushPts(spiral,'corniche');
   const SE=spiral[spiral.length-1], aE=Math.atan2(SE.z-C.z, SE.x-C.x), bridgeEnd={x:C.x+Math.cos(aE)*(RPAD-1), z:C.z+Math.sin(aE)*(RPAD-1), h:YT};
   const GB={a:{x:SE.x,z:SE.z,h:YEND}, b:bridgeEnd}; pushPts([GB.a,GB.b],'glass');

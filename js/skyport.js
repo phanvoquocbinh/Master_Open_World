@@ -36,11 +36,11 @@ export async function make(W, ctx){
   const KL=Kit(0,300,false), KS=Kit(0,300,true);
 
   /* ============================== 0. MẶT BẰNG ============================== */
-  const TERM={x0:15, x1:165, z0:222, z1:294, H:28, wallH:12}, APRON={z0:294, z1:328}, RW=[{z:345, w:30, name:'Đường băng 09L/27R'}, {z:370, w:18, name:'Đường băng 09R/27L'}], RX0=-176, RX1=172;
+  const TERM={x0:15, x1:165, z0:222, z1:294, H:28, wallH:12}, APRON={z0:294, z1:328}, RW=[{z:345, w:30, name:'Đường băng 09L/27R'}, {z:370, w:18, name:'Đường băng 09R/27L'}], RX0=-248, RX1=172, XW=-251;   // đường băng ~420 m: chìa ra biển phía Tây ngoài vùng tới x ≈ −250 (phiên chính cho phép 15/11) trên trụ, có plat + lan can
   const RAMP={x0:165, x1:174.5, z0:250, z1:262}, BRG={x0:174.5, x1:180.5, z0:250, z1:262}, CBDY=2, ROADX=0, RDW=20;   // bậc thang xuống cầu sang CBD (+2) · đường xuyên cổng Bắc (0,220) ↔ cổng Nam (0,380)
   const inZone=(x,z)=>x>Z.x0+.5 && x<Z.x1-.5 && z>Z.z0+.5 && z<Z.z1-.5;
   const hAt=(x,z)=>GY;
-  EXTL.push({x0:Z.x0, x1:BRG.x1, z0:Z.z0, z1:Z.z1, name:'QA/QC International Skyport', h:(x,z)=>{ if(inZone(x,z)) return hAt(x,z); if(x>=BRG.x0 && x<=BRG.x1 && z>BRG.z0 && z<BRG.z1) return CBDY; return null; }});
+  EXTL.push({x0:XW, x1:BRG.x1, z0:Z.z0, z1:Z.z1, name:'QA/QC International Skyport', h:(x,z)=>{ if(inZone(x,z)) return hAt(x,z); if(x>XW+.5 && x<=Z.x0+.6 && z>APRON.z1+.5 && z<Z.z1-.5) return GY; if(x>=BRG.x0 && x<=BRG.x1 && z>BRG.z0 && z<BRG.z1) return CBDY; return null; }});
   out.layout={TERM, APRON, RW, RAMP, BRG, GY};
   const cx=(TERM.x0+TERM.x1)/2, cz=(TERM.z0+TERM.z1)/2, hw=(TERM.x1-TERM.x0)/2, hd=(TERM.z1-TERM.z0)/2;
   const wHalf=u=>Math.pow(Math.max(0,1-Math.pow(Math.abs(u),1.7)),.75);
@@ -50,15 +50,16 @@ export async function make(W, ctx){
   /* ============================== 1. NỀN + TRỤ NỔI TRÊN BIỂN + DỐC/CẦU SANG CBD + LAN CAN RÌA ============================== */
   { const top=new THREE.PlaneGeometry(Z.x1-Z.x0, APRON.z1-Z.z0); top.rotateX(-Math.PI/2); const uv=top.attributes.uv, p=top.attributes.position; for(let i=0;i<p.count;i++) uv.setXY(i, p.getX(i)/12, p.getZ(i)/12);
     KL.add(top, M.conc, (Z.x0+Z.x1)/2,GY+.01,(Z.z0+APRON.z1)/2); KS.add(B(Z.x1-Z.x0,GY+6,APRON.z1-Z.z0), M.conc, (Z.x0+Z.x1)/2,(GY-6)/2,(Z.z0+APRON.z1)/2);
-    KS.add(B(Z.x1-Z.x0, 1.2, Z.z1-APRON.z1), M.conc, (Z.x0+Z.x1)/2,GY-.6,(APRON.z1+Z.z1)/2);
-    for(let x=Z.x0+8;x<Z.x1;x+=16) for(let z=APRON.z1+6;z<Z.z1;z+=14) KS.add(CY(1.1,1.4,GY+6,10), M.pier, x,(GY-1.2-6)/2,z);
+    KS.add(B(Z.x1-XW, 1.2, Z.z1-APRON.z1), M.conc, (XW+Z.x1)/2,GY-.6,(APRON.z1+Z.z1)/2);
+    { const ext=new THREE.PlaneGeometry(Z.x0-XW, Z.z1-APRON.z1); ext.rotateX(-Math.PI/2); KL.add(ext, M.conc, (XW+Z.x0)/2,GY+.01,(APRON.z1+Z.z1)/2); }
+    for(let x=XW+8;x<Z.x1;x+=16) for(let z=APRON.z1+6;z<Z.z1;z+=14) KS.add(CY(1.1,1.4,GY+6,10), M.pier, x,(GY-1.2-6)/2,z);
     const NST=10, sw=(RAMP.x1-RAMP.x0)/NST; for(let i=0;i<NST;i++){ const x=RAMP.x0+(i+.5)*sw, h=GY-(i+1)*(GY-CBDY)/NST; plats.push({t:'r', x, z:(RAMP.z0+RAMP.z1)/2, c:1, s:0, hw:sw/2+.02, hd:(RAMP.z1-RAMP.z0)/2, h}); KS.add(B(sw,h,RAMP.z1-RAMP.z0), M.tile, x,h/2,(RAMP.z0+RAMP.z1)/2); }
     KS.add(B(BRG.x1-BRG.x0+1,.6,BRG.z1-BRG.z0), M.white, (BRG.x0+BRG.x1)/2,CBDY-.3,(BRG.z0+BRG.z1)/2);
     for(const z of [BRG.z0+.2, BRG.z1-.2]){ KS.add(B(BRG.x1-BRG.x0+1,1.1,.12), M.glass, (BRG.x0+BRG.x1)/2,CBDY+.55,z); addSeg(BRG.x0-.5,z,BRG.x1+.5,z,.12,undefined,undefined,'🌉 Lan can cầu sang River Tech'); }
     for(const z of [RAMP.z0, RAMP.z1]){ for(let x=RAMP.x0;x<RAMP.x1;x+=1.5) KS.add(B(.08,1,.08), M.steel, x,GY-(x-RAMP.x0)/(RAMP.x1-RAMP.x0)*(GY-CBDY)+.5,z); addSeg(RAMP.x0,z,RAMP.x1,z,.12,undefined,undefined,'🛬 Lan can bậc thang nhà ga'); }
     const MSG='🌊 Rìa sân bay – không nhảy xuống biển được. Sang River Tech bằng cầu phía Đông.';
     const GX0=ROADX-RDW/2-5, GX1=ROADX+RDW/2+5;
-    for(const [ax,az,bx,bz] of [[Z.x0+.5,Z.z0+.5,GX0,Z.z0+.5],[GX1,Z.z0+.5,Z.x1-.5,Z.z0+.5],[Z.x0+.5,Z.z1-.5,GX0,Z.z1-.5],[GX1,Z.z1-.5,Z.x1-.5,Z.z1-.5],[Z.x0+.5,Z.z0+.5,Z.x0+.5,Z.z1-.5],[Z.x1-.5,Z.z0+.5,Z.x1-.5,BRG.z0],[Z.x1-.5,BRG.z1,Z.x1-.5,Z.z1-.5]]){
+    for(const [ax,az,bx,bz] of [[Z.x0+.5,Z.z0+.5,GX0,Z.z0+.5],[GX1,Z.z0+.5,Z.x1-.5,Z.z0+.5],[Z.x0+.5,Z.z1-.5,GX0,Z.z1-.5],[GX1,Z.z1-.5,Z.x1-.5,Z.z1-.5],[Z.x0+.5,Z.z0+.5,Z.x0+.5,APRON.z1+.5],[XW+.5,APRON.z1+.5,Z.x0+.5,APRON.z1+.5],[XW+.5,Z.z1-.5,Z.x0+.5,Z.z1-.5],[XW+.5,APRON.z1+.5,XW+.5,Z.z1-.5],[Z.x1-.5,Z.z0+.5,Z.x1-.5,BRG.z0],[Z.x1-.5,BRG.z1,Z.x1-.5,Z.z1-.5]]){
       const L=Math.hypot(bx-ax,bz-az), mx=(ax+bx)/2, mz=(az+bz)/2; KS.add(B(.3,1.0,L), M.steel, mx,hAt(mx,mz)+.5,mz, Math.atan2(bx-ax,bz-az)); addSeg(ax,az,bx,bz,.25,undefined,undefined,MSG); } }
 
   /* ============================== 2. ĐƯỜNG BĂNG + ĐÈN DẪN ĐƯỜNG ============================== */
@@ -260,6 +261,9 @@ export async function make(W, ctx){
       const busy=[AI.mode!=='idle'?AI.p.position:null, flight&&plane?plane.position:null].some(p=>p && Math.abs(p.x-ROADX)<120 && p.y<GY+40 && p.z>RW[0].z-30);
       for(const b of BAR){ const tgt=busy?0:-b.side*1.45; b.arm.rotation.z+=(tgt-b.arm.rotation.z)*Math.min(1,dt*3); } out.barLamp.color.setHex(busy && ((T*2)%1)<.5 ? 0xff2020 : 0x330000); }
     if(flight) HOOK.vehicleInter=()=>({label:`✈️ QC Airlines → ${flight?flight.d.name:''} · X: hạ cánh nhanh`}); });
+  Object.assign(out, {GATES, PARK, ATC, VIP, FALL, cx, cz, halfZ, AI, RX0, RX1});
+  // bot sống động CBD + sân bay (Pha 9 – phần của phiên qc-park): nạp sau khi cả CBD và sân bay đã dựng
+  try{ const bm=await import('./bots_cbd_sky.js'); out.bots=await bm.make(W, ctx, {cbd:W.cbdV2, sky:out}); }catch(e){ console.warn('[Skyport] bots_cbd_sky:', e); }
   out.audit=()=>({gates:GATES.length, parked:PARK.length, runways:RW.length, airports:W.AIRPORTS.map(a=>a.key)});
   console.info('[Skyport] dựng xong:', out.audit());
   return out;
