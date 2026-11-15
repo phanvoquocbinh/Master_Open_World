@@ -62,20 +62,26 @@ export async function make(W, ctx = {}){
   const local = (H, lx, lz) => [H.x + Math.cos(H.rot) * lx + Math.sin(H.rot) * lz, H.z - Math.sin(H.rot) * lx + Math.cos(H.rot) * lz];
   const toLocal = (H, x, z) => { const dx = x - H.x, dz = z - H.z, c = Math.cos(H.rot), s = Math.sin(H.rot); return [dx * c - dz * s, dx * s + dz * c]; };
   const PAL = [-.74, -.28, .28, .74].map((f, i) => { const a = f * Math.PI, [x, z] = atPolar(374, a); return {id:`P-${i + 1}`, cls:'p', a, x, z, rot:Math.atan2(C.x - x, C.z - z)}; });
-  const AQ = PAL.map(H => { const [x, z] = local(H, -14, -34); return {x, z, rot:H.rot, hw:8, hd:6, H}; });
+  const AQZ = -44;   // tâm thuỷ cung theo trục sâu của dinh thự (ra biển)
+  const AQ = PAL.map(H => { const [x, z] = local(H, -14, AQZ); return {x, z, rot:H.rot, hw:8, hd:6, sw:15, sd:12, H}; });
   const inRot = (A, x, z, pad = 0) => { const [lx, lz] = toLocal(A, x, z); return Math.abs(lx) < A.hw + pad && Math.abs(lz) < A.hd + pad; };
+  const inShell = (A, x, z, pad = 0) => { const [lx, lz] = toLocal(A, x, z); return Math.abs(lx) < A.sw + pad && Math.abs(lz) < A.sd + pad; };
   // lưới khoảng cách 2,5 m → độ cao mặt đất (tra nhanh mỗi khung hình)
   const GR = 2.5, GX0 = ZN.x0 - 8, GZ0 = ZN.z0 - 6, NX = Math.ceil((ZN.x1 - GX0) / GR) + 1, NZ = Math.ceil((ZN.z1 - GZ0) / GR) + 1, D = new Float32Array(NX * NZ);
   for(let j = 0; j < NZ; j++) for(let i = 0; i < NX; i++) D[j * NX + i] = sdLand(GX0 + i * GR, GZ0 + j * GR);
   const DL = 16, YD = -6;
   const dAt = (x, z) => { const fx = (x - GX0) / GR, fz = (z - GZ0) / GR, i = Math.floor(fx), j = Math.floor(fz); if(i < 0 || j < 0 || i >= NX - 1 || j >= NZ - 1) return 99; const u = fx - i, v = fz - j, k = j * NX + i; return (D[k] * (1 - u) + D[k + 1] * u) * (1 - v) + (D[k + NX] * (1 - u) + D[k + NX + 1] * u) * v; };
   const hOf = d => d <= 0 ? Y : lerp(Y, YD, Math.min(1, d / DL));
-  const hLand = (x, z) => { const d = dAt(x, z); if(d > DL) return null; for(const A of AQ) if(inRot(A, x, z, .5)) return -7; return hOf(d); };
+  // độ cao mặt đi nội suy theo ĐÚNG tam giác của lưới đất vẽ ra (trước nội suy khoảng cách → ven bờ chân lơ lửng 15–30 cm)
+  const HG = new Float32Array(NX * NZ); for(let j = 0; j < NZ; j++) for(let i = 0; i < NX; i++){ const k = j * NX + i, x = GX0 + i * GR, z = GZ0 + j * GR; HG[k] = AQ.some(A => inShell(A, x, z, 1.5)) ? -7 : hOf(D[k]); }
+  const hLand = (x, z) => { const fx = (x - GX0) / GR, fz = (z - GZ0) / GR, i = Math.floor(fx), j = Math.floor(fz); if(i < 0 || j < 0 || i >= NX - 1 || j >= NZ - 1) return null; const k = j * NX + i;
+    if(Math.min(D[k], D[k + 1], D[k + NX], D[k + NX + 1]) > DL) return null; const u = fx - i, v = fz - j, a = HG[k], b = HG[k + 1], c = HG[k + NX], d = HG[k + NX + 1];
+    return u + v <= 1 ? a + (b - a) * u + (c - a) * v : d + (c - d) * (1 - u) + (b - d) * (1 - v); };
   EXTL.push({x0:GX0, x1:ZN.x1, z0:GZ0, z1:ZN.z1, h:hLand, name:'Ốc đảo Palm Dubai'});
   { const pos = [], col = [], idx = [], map = new Int32Array(NX * NZ).fill(-1), c = new THREE.Color(), SAND = new THREE.Color(0xf1e3c0), WET = new THREE.Color(0xc4ae84), G1 = new THREE.Color(0x7fbf55), G2 = new THREE.Color(0x9ccf68);
-    const vid = (i, j) => { const k = j * NX + i; if(map[k] >= 0) return map[k]; const x = GX0 + i * GR, z = GZ0 + j * GR, d = D[k]; let y = hOf(d); if(AQ.some(A => inRot(A, x, z, 1.5))) y = -7;
+    const vid = (i, j) => { const k = j * NX + i; if(map[k] >= 0) return map[k]; const x = GX0 + i * GR, z = GZ0 + j * GR, d = D[k];
       if(d > 0) c.copy(SAND).lerp(WET, Math.min(1, d / 4)); else if(d > -4) c.copy(SAND); else c.copy(G1).lerp(G2, Math.sin(x * .07) * Math.cos(z * .05) * .5 + .5);
-      map[k] = pos.length / 3; pos.push(x, y, z); col.push(c.r, c.g, c.b); return map[k]; };
+      map[k] = pos.length / 3; pos.push(x, HG[k], z); col.push(c.r, c.g, c.b); return map[k]; };
     for(let j = 0; j < NZ - 1; j++) for(let i = 0; i < NX - 1; i++){ const k = j * NX + i; if(Math.min(D[k], D[k + 1], D[k + NX], D[k + NX + 1]) > DL) continue;
       const a = vid(i, j), b = vid(i + 1, j), cc = vid(i, j + 1), d = vid(i + 1, j + 1); idx.push(a, cc, b, b, cc, d); }
     const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3)); g.setIndex(idx); g.computeVertexNormals(); g.computeBoundingSphere();
@@ -96,7 +102,7 @@ export async function make(W, ctx = {}){
 
   /* ============================== 3. ĐƯỜNG & CẦU (không đường cụt) ============================== */
   const RP = [], RC = [], RI = [], pc = new THREE.Color(), ROADL = [], VSEG = [], r1 = v => Math.round(v * 10) / 10;   // VSEG → W.V2ROADS (sổ đường chung V2)
-  const ribbon = (pts, w, col, y = Y + .04) => { const S2 = []; for(let i = 0; i < pts.length - 1; i++){ const [x0, z0] = pts[i], [x1, z1] = pts[i + 1], L = Math.hypot(x1 - x0, z1 - z0); for(let t = 0; t < L; t += 2.5) S2.push([x0 + (x1 - x0) * t / L, z0 + (z1 - z0) * t / L]); } S2.push(pts[pts.length - 1]);
+  const ribbon = (pts, w, col, y = Y + .02) => { const S2 = []; for(let i = 0; i < pts.length - 1; i++){ const [x0, z0] = pts[i], [x1, z1] = pts[i + 1], L = Math.hypot(x1 - x0, z1 - z0); for(let t = 0; t < L; t += 2.5) S2.push([x0 + (x1 - x0) * t / L, z0 + (z1 - z0) * t / L]); } S2.push(pts[pts.length - 1]);
     pc.set(col); let prev = -1; for(let i = 0; i < S2.length; i++){ const [x, z] = S2[i], a = S2[Math.max(0, i - 1)], b = S2[Math.min(S2.length - 1, i + 1)], dx = b[0] - a[0], dz = b[1] - a[1], l = Math.hypot(dx, dz) || 1, nx = -dz / l, nz = dx / l, base = RP.length / 3;
       RP.push(x + nx * w / 2, y, z + nz * w / 2, x - nx * w / 2, y, z - nz * w / 2); RC.push(pc.r, pc.g, pc.b, pc.r, pc.g, pc.b); if(prev >= 0) RI.push(prev, base, prev + 1, prev + 1, base, base + 1); prev = base; }
     for(let i = 0; i < pts.length - 1; i++) VSEG.push([r1(pts[i][0]), r1(pts[i][1]), r1(pts[i + 1][0]), r1(pts[i + 1][1])]);
@@ -173,13 +179,13 @@ export async function make(W, ctx = {}){
     { const [x, z] = local(H, 0, 0); addPlat(x, z, H.rot, w / 2, d / 2, Y + .12); KX.add(B(w, .12, d), H.cls === 'd' || H.cls === 'm' ? MAT.teak : MAT.marble, x, Y + .06, z, 0, H.rot, 0); }
     // cửa khoá với người chưa sở hữu (đoạn chắn ở ô cửa – bật/tắt bằng y0)
     H.lock = SG(-door / 2, d / 2, door / 2, d / 2, Y - 1, Y + 3, `🔒 ${K.name} ${H.id} đang rao bán – bấm E ở biển bán trước cửa để xem / mua`); H.lockY0 = Y - 1; if(owns(H.id)) H.lock.y0 = 1e9;
-    if(H.cls === 't'){ for(const s of [-1, 1]) L(s * 2.3, d / 2 + .05, 1.2, 1.3, .1, MAT.cobalt, Y + 3.8); L(0, d / 2 + .05, door + .3, .2, .1, MAT.cobalt, Y + 2.6); L(-w / 2 + 1.2, d / 2 + .5, 1.6, .3, .6, MAT.green); L(0, -d / 2 - 1.5, w - 1, .1, 2.6, MAT.teak, Y); }
-    if(H.cls === 'd'){ L(0, d / 2 + .05, w - 1, 2.4, .08, MAT.glass, Y + 4.4); L(0, -d / 2 - 2.2, 4, .1, 3, MAT.pool, Y + .02); L(0, -d / 2 - 2.2, 5, .06, 4, MAT.stone, Y); L(-w / 2 - 2.5, 2, 4.6, 2.6, 6, MAT.cream); SOLID(-w / 2 - 2.5, 2, 4.6, 6); }
-    if(H.cls === 'v'){ FG(Y + 1, 3); L(0, -d / 2 - 2.6, 10, .1, 3.6, MAT.pool, Y + .02); L(0, -d / 2 - 2.6, 11, .06, 4.6, MAT.stone, Y); for(let i = 0; i < 3; i++) L(7.5, -d / 2 - 1.2 - i * 1.2, 1.9, .35, .8, MAT.white); }
-    if(H.cls === 'm'){ FG(Y + .5, h - 1); for(const f of [K.slab, 8]) L(0, 0, w + 1, .3, d + 2, MAT.white, Y + f); L(0, -d / 2 - 2, w - 8, .1, 3.2, MAT.pool, Y + .02); L(0, -d / 2 - 2, w - 7, .06, 4, MAT.stone, Y);
+    if(H.cls === 't'){ for(const s of [-1, 1]) L(s * 2.3, d / 2 + .05, 1.2, 1.3, .1, MAT.cobalt, Y + 3.8); L(0, d / 2 + .05, door + .3, .2, .1, MAT.cobalt, Y + 2.6); L(-w / 2 + 1.2, d / 2 + .5, 1.6, .3, .6, MAT.green); SOLID(-w / 2 + 1.2, d / 2 + .5, 1.6, .6, Y - 1, Y + .3); L(0, -d / 2 - 1.5, w - 1, .1, 2.6, MAT.teak, Y); { const [tx, tz] = local(H, 0, -d / 2 - 1.5); addPlat(tx, tz, H.rot, (w - 1) / 2 + .05, 1.35, Y + .1); } }
+    if(H.cls === 'd'){ L(0, d / 2 + .05, w - 1, 2.4, .08, MAT.glass, Y + 4.4); L(0, -d / 2 - 2.2, 4, .1, 3, MAT.pool, Y + .02); L(0, -d / 2 - 2.2, 5, .06, 4, MAT.stone, Y); SOLID(0, -d / 2 - 2.2, 4, 3, Y - 1, Y + .9); L(-w / 2 - 2.5, 2, 4.6, 2.6, 6, MAT.cream); SOLID(-w / 2 - 2.5, 2, 4.6, 6); }
+    if(H.cls === 'v'){ FG(Y + 1, 3); L(0, -d / 2 - 2.6, 10, .1, 3.6, MAT.pool, Y + .02); L(0, -d / 2 - 2.6, 11, .06, 4.6, MAT.stone, Y); for(let i = 0; i < 3; i++) L(7.5, -d / 2 - 1.2 - i * 1.2, 1.9, .35, .8, MAT.white); SOLID(0, -d / 2 - 2.6, 10, 3.6, Y - 1, Y + .9); SOLID(7.5, -d / 2 - 2.4, 1.9, 3.2, Y - 1, Y + .4); }
+    if(H.cls === 'm'){ FG(Y + .5, h - 1); for(const f of [K.slab, 8]) L(0, 0, w + 1, .3, d + 2, MAT.white, Y + f); L(0, -d / 2 - 2, w - 8, .1, 3.2, MAT.pool, Y + .02); L(0, -d / 2 - 2, w - 7, .06, 4, MAT.stone, Y); SOLID(0, -d / 2 - 2, w - 8, 3.2, Y - 1, Y + .9);
       L(-w / 2 - 3, 3, 5, 3, 8, MAT.glass); SOLID(-w / 2 - 3, 3, 5, 8);
       const [px, pz] = local(H, w / 2 - 3, -d / 2 - 9); L(w / 2 - 3, -d / 2 - 9, 3, .4, 10, MAT.teak, Y - .3); addPlat(px, pz, H.rot, 1.5, 5, Y + .1); PIERS.push({H, lx:w / 2 - 3, lz:-d / 2 - 9, hw:1.5, hd:5, yacht:[w / 2 - 3 - 8.7, -d / 2 - 10.5, Math.PI / 2, .6]}); }
-    if(H.cls === 'p'){ FG(Y + .6, h - 1.2); for(const f of [K.slab, 9.6]) L(0, 0, w + 2, .35, d + 2, MAT.marble, Y + f); L(0, -d / 2 - 2.75, w - 16, .1, 4.5, MAT.pool, Y + .02); L(0, -d / 2 - 2.75, w - 14, .06, 5.5, MAT.stone, Y);
+    if(H.cls === 'p'){ FG(Y + .6, h - 1.2); for(const f of [K.slab, 9.6]) L(0, 0, w + 2, .35, d + 2, MAT.marble, Y + f); L(0, -d / 2 - 2.75, w - 16, .1, 4.5, MAT.pool, Y + .02); L(0, -d / 2 - 2.75, w - 14, .06, 5.5, MAT.stone, Y); SOLID(0, -d / 2 - 2.75, w - 16, 4.5, Y - 1, Y + .9);
       for(const lx of [-18, -12, -6, 6, 12, 18]){ const [x, z] = local(H, lx, d / 2 + 1.2); KX.add(new THREE.CylinderGeometry(.45, .5, K.slab, 14), MAT.marble, x, Y + K.slab / 2, z); addSeg(x, z, x, z, .5, Y - 1, Y + K.slab); }
       // sân trực thăng trên mái
       const [hx, hz] = local(H, 0, 0), top = Y + h + .8; addPlat(hx, hz, H.rot, w / 2 + .5, d / 2 + .5, top);
@@ -189,10 +195,10 @@ export async function make(W, ctx = {}){
       for(const s of [-1, 1]) L(0, s * (d / 2 + .5), w + 1, 1.1, .08, MAT.glass, top); for(const s of [-1, 1]) L(s * (w / 2 + .5), 0, .08, 1.1, d + 1, MAT.glass, top);
       // bến siêu du thuyền + thuỷ cung ngầm phía biển
       const [px, pz] = local(H, 14, -d / 2 - 16); L(14, -d / 2 - 16, 4, .4, 22, MAT.teak, Y - .3); addPlat(px, pz, H.rot, 2, 11, Y + .1); PIERS.push({H, lx:14, lz:-d / 2 - 16, hw:2, hd:11, yacht:[20, -d / 2 - 20, 0, 1]});
-      const A = AQ.find(q => q.H === H), al = (lx, lz, sx, sy, sz, m, y) => L(-14 + lx, -34 + lz, sx, sy, sz, m, y);
+      const A = AQ.find(q => q.H === H), al = (lx, lz, sx, sy, sz, m, y) => L(-14 + lx, AQZ + lz, sx, sy, sz, m, y);
       al(0, 0, 16, .3, 12, MAT.marble, -3.7); al(0, 0, 16, .1, 12, MAT.seaC, -.4); for(const s of [-1, 1]){ al(0, s * 6, 16, 3.3, .1, MAT.aqua, -3.6); al(s * 8, 0, .1, 3.3, 12, MAT.aqua, -3.6); }
       al(0, 0, 6, .45, 1, MAT.navy, -3.4); KX.add(B(30, 5.8, 24), MAT.deep, A.x, -3.3, A.z, 0, H.rot, 0); KX.add(B(29.6, .1, 23.6), MAT.sand, A.x, -6.15, A.z, 0, H.rot, 0);   // khối nước biển bao quanh + đáy cát
-      addPlat(A.x, A.z, H.rot, 7.8, 5.8, -3.4); const c4 = [[-8, -6], [8, -6], [8, 6], [-8, 6]].map(([a, b]) => local(H, -14 + a, -34 + b));
+      addPlat(A.x, A.z, H.rot, 7.8, 5.8, -3.4); const c4 = [[-8, -6], [8, -6], [8, 6], [-8, 6]].map(([a, b]) => local(H, -14 + a, AQZ + b));
       for(let i = 0; i < 4; i++){ const a = c4[i], b = c4[(i + 1) % 4]; addSeg(a[0], a[1], b[0], b[1], .15, -6, 0, '🐠 Vách kính thuỷ cung'); }
       const xs = c4.map(p => p[0]), zs = c4.map(p => p[1]); A.box = {x0:Math.min(...xs) + 1.2, x1:Math.max(...xs) - 1.2, z0:Math.min(...zs) + 1.2, z1:Math.max(...zs) - 1.2, y1:-.8};
       A.exit = local(H, -21, -21);
@@ -202,7 +208,7 @@ export async function make(W, ctx = {}){
     H.signPos = local(H, w / 2 - 1, d / 2 + 1); }
   for(const Q of PIERS){ const {H, lx, lz, hw, hd} = Q, sg = (a, b, c, d2, msg) => { const p = local(H, a, b), q = local(H, c, d2); addSeg(p[0], p[1], q[0], q[1], .12, Y - 1, Y + 3, msg); };
     sg(lx - hw, lz - hd, lx - hw, lz + hd, '🛥️ Mép cầu cảng'); sg(lx + hw, lz - hd, lx + hw, lz + hd, '🛥️ Mép cầu cảng'); sg(lx - hw, lz - hd, lx + hw, lz - hd, '🛥️ Cuối cầu cảng'); }
-  function goAqua(H){ const A = AQ.find(q => q.H === H); if(!A) return; const [x, z] = local(H, -14, -34 + 3); teleport(x, z, A.x, A.z); toast('🐠 Thuỷ cung ngầm dưới biển – cá san hô bơi quanh vách kính! Bấm E để lên lại dinh thự.', 4200); }
+  function goAqua(H){ const A = AQ.find(q => q.H === H); if(!A) return; const [x, z] = local(H, -14, AQZ + 3); teleport(x, z, A.x, A.z); toast('🐠 Thuỷ cung ngầm dưới biển – cá san hô bơi quanh vách kính! Bấm E để lên lại dinh thự.', 4200); }
   // biển bán: InstancedMesh theo hạng (ẩn khi đã sở hữu)
   const SIGNS = {};
   for(const k of Object.keys(CLS)){ const K = CLS[k], L = HOUSES.filter(h => h.cls === k); if(!L.length) continue;
@@ -259,7 +265,7 @@ export async function make(W, ctx = {}){
     const fishAt = (A, f, i) => { const lx = Math.cos(f.th) * f.r * 1.1, lz = Math.sin(f.th) * f.r * .85, [x, z] = local(A, lx, lz), tx = -Math.sin(f.th) * 1.1 * f.dir, tz = Math.cos(f.th) * .85 * f.dir, wx = Math.cos(A.rot) * tx + Math.sin(A.rot) * tz, wz = -Math.sin(A.rot) * tx + Math.cos(A.rot) * tz;
       fish.setMatrixAt(i, mtx(x, f.y + Math.sin(f.th * 3) * .25, z, Math.atan2(wx, wz))); };
     AQ.forEach((A, k) => { A.fish = []; for(let j = 0; j < NF; j++){ const f = {r:10 + R() * 3, th:R() * 6.28, dir:R() < .5 ? -1 : 1, w:.08 + R() * .12, y:-1.3 - R() * 4.2, i:k * NF + j}; A.fish.push(f); fishAt(A, f, f.i); fish.setColorAt(f.i, c.setHSL(R(), .85, .55)); } });
-    fish.userData.dynamic = true; fish.computeBoundingSphere(); fish.frustumCulled = false; scene.add(fish);
+    fish.name = 'fish'; fish.userData.swimming = true; fish.userData.dynamic = true; fish.computeBoundingSphere(); fish.frustumCulled = false; scene.add(fish);
     HOOK.onFrame.push(dt => { const p = W.P; if(!p || p.y > -1 || p.x < ZN.x0 - 40 || p.x > ZN.x1) return; const A = AQ.find(q => inRot(q, p.x, p.z, 4)); if(!A) return; dt = Math.min(dt || 1 / 60, .1);
       for(const f of A.fish){ f.th += f.w * f.dir * dt; fishAt(A, f, f.i); } fish.instanceMatrix.needsUpdate = true; });
     // san hô: trong thuỷ cung (dọc vách kính) + ngoài đáy biển
@@ -291,7 +297,7 @@ export async function make(W, ctx = {}){
   { const FOOD = ['🦞 Hải sản Bình Phan', '🍣 Sushi Marina', '🌮 Taco Bay', '🍕 Pizza Palm', '🥙 Shawarma Dubai', '🍦 Gelato Beach', '🍜 Phở Ốc Đảo', '🧋 Trà sữa Coral'];
     FOOD.forEach((n, i) => { const z = 610 + i * 32, x = i % 2 ? 660 : 640; FOODP.push({x, z, n}); KX.add(B(6, 2.8, 4), MAT.cream, x, Y + 1.4, z); KX.add(B(7, .2, 5.4), MAT.awning, x, Y + 3.3, z + .4); KX.add(B(5.6, 1, .5), MAT.teak, x, Y + .5, z + 2.3);
       boxes.push({x0:x - 3, x1:x + 3, z0:z - 2, z1:z + 2.6, y0:Y - 1, y1:Y + 3.5});
-      for(let t = 0; t < 2; t++){ const tz = z + 6 + t * 3.2; KX.add(new THREE.CylinderGeometry(.6, .6, .08, 16), MAT.white, x, Y + .75, tz); KX.add(new THREE.CylinderGeometry(.08, .1, .72, 8), MAT.dark, x, Y + .37, tz); for(const s of [-1, 1]) KX.add(B(.45, .45, .45), MAT.navy, x + s * 1, Y + .22, tz); addSeg(x, tz, x, tz, .65, Y - 1, Y + 1); }
+      for(let t = 0; t < 2; t++){ const tz = z + 6 + t * 3.2; KX.add(new THREE.CylinderGeometry(.6, .6, .08, 16), MAT.white, x, Y + .75, tz); KX.add(new THREE.CylinderGeometry(.08, .1, .72, 8), MAT.dark, x, Y + .37, tz); for(const s of [-1, 1]){ KX.add(B(.45, .45, .45), MAT.navy, x + s * 1, Y + .22, tz); addSeg(x + s, tz, x + s, tz, .26, Y - 1, Y + .45); } addSeg(x, tz, x, tz, .65, Y - 1, Y + 1); }
       sign(signTex(512, 128, '#ff7b54', [[n, `800 44px ${FONT}`, '#fff', .52]]), 5, 1.25, x, Y + 3.95, z + 3.1, 0, .5);
       INTER.push({x, z:z + 3.6, r:2.2, prio:.85, label:`${n} – gọi món (15 💰, ⚡ đi nhanh 12 phút)`, action:() => pay(15, n, () => { buffGo('energy', 12); toast(`${n}: ngon tuyệt! ⚡ Đi nhanh hơn trong 12 phút.`, 3500); })}); }); }
   // 6 Beach Club ở mép thân cọ (giữa các nhánh lá): nhà club + hồ bơi + ghế tắm nắng + dù sát biển
@@ -299,7 +305,7 @@ export async function make(W, ctx = {}){
   { let n = 0;
     for(const z of [700, 780, 860]) for(const s of [-1, 1]){ const x = 650 + s * 41; n++; CLUBS.push({x, z, s, n});
       KX.add(B(10, 3.4, 12), MAT.white, x, Y + 1.7, z); KX.add(B(12, .25, 14), MAT.teak, x, Y + 3.5, z); boxes.push({x0:x - 5, x1:x + 5, z0:z - 6, z1:z + 6, y0:Y - 1, y1:Y + 3.6});
-      KX.add(B(6, .1, 10), MAT.pool, x + s * 11, Y + .07, z); KX.add(B(7, .06, 11), MAT.stone, x + s * 11, Y + .03, z);
+      KX.add(B(6, .1, 10), MAT.pool, x + s * 11, Y + .07, z); KX.add(B(7, .06, 11), MAT.stone, x + s * 11, Y + .03, z); boxes.push({x0:x + s * 11 - 3, x1:x + s * 11 + 3, z0:z - 5, z1:z + 5, y0:Y - 1, y1:Y + .9}, {x0:x + s * 18 - .95, x1:x + s * 18 + .95, z0:z - 4.9, z1:z + 4.9, y0:Y - 1, y1:Y + .4});
       for(let i = 0; i < 4; i++){ KX.add(B(1.9, .35, .8), MAT.white, x + s * 18, Y + .18, z - 4.5 + i * 3); if(i < 3) UMB.push([x + s * 18.4, z - 3 + i * 3]); }
       sign(signTex(512, 128, '#00a8a8', [[`🏝️ BEACH CLUB ${n}`, `900 50px ${FONT}`, '#fff', .52]]), 5, 1.25, x - s * 5.06, Y + 2.7, z, s < 0 ? Math.PI / 2 : -Math.PI / 2, .5);
       INTER.push({x:x - s * 6.6, z, r:2.6, prio:.8, label:`🍹 Beach Club ${n} – mocktail & hồ bơi (20 💰, ☕ thưởng quiz 15 phút)`, action:() => pay(20, `Beach Club ${n}`, () => { buffGo('coffee', 15); toast('🍹 Mocktail dừa mát lạnh – ☕ thưởng quiz +20% trong 15 phút!', 3500); })}); } }
@@ -312,7 +318,7 @@ export async function make(W, ctx = {}){
     const TH = 60, TOW = [[608, 595], [692, 595], [608, 935], [692, 935]];
     TOW.forEach(([x, z], i) => { const g = B(22, TH, 22); if(fac){ try{ AK.facadeUV(g, 22, TH, fac); }catch(e){} } const tm = new THREE.Mesh(g, fac || MAT.white); tm.position.set(x, Y + TH / 2, z); tm.castShadow = tm.receiveShadow = true; scene.add(tm);
       KX.add(B(24, 1.2, 24), MAT.white, x, Y + TH + .6, z); boxes.push({x0:x - 11, x1:x + 11, z0:z - 11, z1:z + 11, y0:Y - 1, y1:Y + TH}); const top = Y + TH + 1.2; addPlat(x, z, 0, 12, 12, top);
-      KX.add(B(10, .1, 6), MAT.pool, x, top + .02, z + 3); for(const s of [-1, 1]){ addSeg(x - 12, z + s * 12, x + 12, z + s * 12, .12, top - .5, top + 3, '🏙️ Lan can sân thượng'); addSeg(x + s * 12, z - 12, x + s * 12, z + 12, .12, top - .5, top + 3, '🏙️ Lan can sân thượng'); KX.add(B(24, 1.1, .08), MAT.glass, x, top + .55, z + s * 12); KX.add(B(.08, 1.1, 24), MAT.glass, x + s * 12, top + .55, z); }
+      KX.add(B(10, .1, 6), MAT.pool, x, top + .02, z + 3); boxes.push({x0:x - 5, x1:x + 5, z0:z, z1:z + 6, y0:top - .5, y1:top + .9}); for(const s of [-1, 1]){ addSeg(x - 12, z + s * 12, x + 12, z + s * 12, .12, top - .5, top + 3, '🏙️ Lan can sân thượng'); addSeg(x + s * 12, z - 12, x + s * 12, z + 12, .12, top - .5, top + 3, '🏙️ Lan can sân thượng'); KX.add(B(24, 1.1, .08), MAT.glass, x, top + .55, z + s * 12); KX.add(B(.08, 1.1, 24), MAT.glass, x + s * 12, top + .55, z); }
       const dz = z < 800 ? 11.5 : -11.5; sign(signTex(1024, 160, '#0b3d5c', [[`🏙️ PALM SKY-TOWER ${i + 1}`, `900 64px ${FONT}`, '#fff', .5]]), 12, 1.9, x, Y + 5, z + dz, dz > 0 ? 0 : Math.PI, .5);
       INTER.push({x, z:z + dz * 1.25, r:3, prio:.85, label:`🏙️ Palm Sky-Tower ${i + 1} – căn hộ biển 8.000–18.000 💰 (E)`, action:() => aptMenu(i + 1, x, z)}); });
     function aptMenu(n, x, z){ if(!ui || !ui.modal) return; const m = ui.modal(`🏙️ Palm Sky-Tower ${n} · căn hộ biển 18 tầng`), L = [[3, 8000], [9, 12000], [18, 18000]];
@@ -326,7 +332,7 @@ export async function make(W, ctx = {}){
     const part = (x0, x1, z0, z1, y0, y1) => { const w = x1 - x0, h = y1 - y0, d = z1 - z0, g = B(w, h, d); if(fac2){ try{ AK.facadeUV(g, Math.max(w, d), h, fac2); }catch(e){} } const ms = new THREE.Mesh(g, fac2 || MAT.white); ms.position.set((x0 + x1) / 2, Y + (y0 + y1) / 2, (z0 + z1) / 2); ms.castShadow = ms.receiveShadow = true; scene.add(ms); };
     part(613, 633, 1286, 1314, 0, 50); part(667, 687, 1286, 1314, 0, 50); part(633, 667, 1290, 1312, 40, 50); part(633, 667, 1298, 1314, 0, 9);
     boxes.push({x0:613, x1:633, z0:1286, z1:1314, y0:Y - 1, y1:Y + 50}, {x0:667, x1:687, z0:1286, z1:1314, y0:Y - 1, y1:Y + 50}, {x0:633, x1:667, z0:1298, z1:1314, y0:Y - 1, y1:Y + 9, msg:'🏨 Sảnh khách sạn – bấm E ở cổng vòm để nhận phòng'});
-    KX.add(B(76, .8, 30), MAT.white, 650, Y + 50.4, 1300); const top = Y + 50.8; addPlat(650, 1300, 0, 37, 14, top); KX.add(B(20, .1, 8), MAT.pool, 650, top + .02, 1300);
+    KX.add(B(76, .8, 30), MAT.white, 650, Y + 50.4, 1300); const top = Y + 50.8; addPlat(650, 1300, 0, 37, 14, top); KX.add(B(20, .1, 8), MAT.pool, 650, top + .02, 1300); boxes.push({x0:640, x1:660, z0:1296, z1:1304, y0:top - .5, y1:top + .9});
     for(const s of [-1, 1]){ addSeg(612, 1300 + s * 14.6, 688, 1300 + s * 14.6, .12, top - .5, top + 3, '🏨 Lan can đài ngắm cảnh'); addSeg(650 + s * 37.6, 1286, 650 + s * 37.6, 1314, .12, top - .5, top + 3, '🏨 Lan can đài ngắm cảnh'); KX.add(B(76, 1.1, .08), MAT.glass, 650, top + .55, 1300 + s * 14.6); KX.add(B(.08, 1.1, 30), MAT.glass, 650 + s * 37.6, top + .55, 1300); }
     KX.add(B(70, .25, 1.4), MAT.gold, 650, Y + 39.9, 1289.4); KX.add(new THREE.CylinderGeometry(5.5, 6, .6, 36), MAT.stone, 650, Y + .3, 1292); KX.add(new THREE.CylinderGeometry(5, 5, .1, 36), MAT.pool, 650, Y + .62, 1292); addSeg(650, 1292, 650, 1292, 6, Y - 1, Y + 2, '⛲ Đài phun nước sân khách sạn');
     sign(signTex(1024, 180, '#0b3d5c', [['🏨 KHÁCH SẠN VÒM VƯƠNG MIỆN', `900 52px ${FONT}`, '#ffd23f', .45], ['Đài ngắm cảnh tầng 50 · hồ bơi trên không', `600 36px ${FONT}`, '#fff', .82]]), 18, 3.2, 650, Y + 44.5, 1289.9, Math.PI, .6);
@@ -348,7 +354,7 @@ export async function make(W, ctx = {}){
     for(let a = -CR.amax + .05; a < CR.amax - .05; a += .03){ if(Math.abs(a) < .08 || FRONDS.some(F => Math.abs(F.tipA - a) < .04)) continue; UMB.push(atPolar(CR.r0 + 3.2, a)); }
     const pole = new THREE.CylinderGeometry(.05, .05, 2.4, 6).translate(0, 1.2, 0), can = new THREE.ConeGeometry(1.5, .7, 10, 1, true).translate(0, 2.55, 0), lounge = B(.75, .3, 1.9).translate(.9, .15, 0);
     const U1 = new THREE.InstancedMesh(pole, MAT.steel, UMB.length), U2 = new THREE.InstancedMesh(can, new THREE.MeshStandardMaterial({color:0xffffff, roughness:.7, side:THREE.DoubleSide}), UMB.length), U3 = new THREE.InstancedMesh(lounge, MAT.white, UMB.length), cc = new THREE.Color();
-    UMB.forEach(([x, z], i) => { const y = hLand(x, z) ?? Y, ry = R() * 6.28; U1.setMatrixAt(i, mtx(x, y, z)); U2.setMatrixAt(i, mtx(x, y, z, ry)); U2.setColorAt(i, cc.set([0xff6f61, 0x1f9bd1, 0xffd23f, 0x2ec4b6, 0xffffff][i % 5])); U3.setMatrixAt(i, mtx(x, y, z, ry)); });
+    UMB.forEach(([x, z], i) => { const y = hLand(x, z) ?? Y, ry = R() * 6.28, c = Math.cos(ry), s = Math.sin(ry); addSeg(x + c * .9 - s * .95, z - s * .9 - c * .95, x + c * .9 + s * .95, z - s * .9 + c * .95, .38, y - 1, y + .3); U1.setMatrixAt(i, mtx(x, y, z)); U2.setMatrixAt(i, mtx(x, y, z, ry)); U2.setColorAt(i, cc.set([0xff6f61, 0x1f9bd1, 0xffd23f, 0x2ec4b6, 0xffffff][i % 5])); U3.setMatrixAt(i, mtx(x, y, z, ry)); });
     for(const im of [U1, U2, U3]){ im.userData.dynamic = true; im.computeBoundingSphere(); scene.add(im); } }
 
   for(const ms of KX.build()) ms.userData.noFar = true;   // lưới gộp trải cả đảo → không ẩn theo khoảng cách

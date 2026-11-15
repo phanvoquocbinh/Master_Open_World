@@ -68,7 +68,10 @@ export async function make(W, ctx = {}){
   for(let j = 0; j < NZ; j++) for(let i = 0; i < NX; i++) H[j * NX + i] = hf(X0 + i * RES, Z0 + j * RES);
   const hAt = (x, z) => { const fx = (x - X0) / RES, fz = (z - Z0) / RES; if(fx < 0 || fz < 0 || fx >= NX - 1 || fz >= NZ - 1) return null; const i = Math.floor(fx), j = Math.floor(fz), tx = fx - i, tz = fz - j, a = H[j * NX + i], b = H[j * NX + i + 1], c = H[(j + 1) * NX + i], d = H[(j + 1) * NX + i + 1];
     return tx + tz <= 1 ? a + (b - a) * tx + (c - a) * tz : d + (c - d) * (1 - tx) + (b - d) * (1 - tz); };
-  EXTL.push({x0:X0, x1:X0 + (NX - 1) * RES, z0:Z0, z1:Z0 + (NZ - 1) * RES, h:hAt, name:'Đảo Ngoại ngữ Thụy Sĩ'});
+  // RA SOÁT 16/11: dải nền đường ray (ballast + tà vẹt cao 0,35–1,6 m so với cỏ) là MẶT ĐI – trước đây người đi xuyên tà vẹt
+  const BED = new Map(), bedK = (x, z) => Math.floor(x * 2) * 100003 + Math.floor(z * 2);
+  const hExt = (x, z) => { const h = hAt(x, z); if(h == null || !BED.size) return h; const b = BED.get(bedK(x, z)); return b !== undefined && b > h ? b : h; };
+  EXTL.push({x0:X0, x1:X0 + (NX - 1) * RES, z0:Z0, z1:Z0 + (NZ - 1) * RES, h:hExt, name:'Đảo Ngoại ngữ Thụy Sĩ'});
   const gy = (x, z) => hAt(x, z) ?? 0;
   { const pos = new Float32Array(NX * NZ * 3), col = new Float32Array(NX * NZ * 3), c = new THREE.Color();
     const SAND = new THREE.Color(0xd8c79a), G1 = new THREE.Color(0x6aa846), G2 = new THREE.Color(0x8fbe4f), G3 = new THREE.Color(0x4f8a3c), ROCK = new THREE.Color(0x8b8780), ROCK2 = new THREE.Color(0x6f6b66), SNOW = new THREE.Color(0xf4f7fb), YEL = new THREE.Color(0xe8d24a), PUR = new THREE.Color(0xa77ad8);
@@ -155,6 +158,7 @@ export async function make(W, ctx = {}){
     for(const sx of [-1, 1]){ const tx = cx + sx * 4.2;
       ki.add(new THREE.BoxGeometry(1.6, .1, d - 12), o.tableM || MAT.wood, tx, y0 + .78, cz - 1); for(const zz of [cz - d / 2 + 6.5, cz + d / 2 - 8.5]) ki.add(new THREE.BoxGeometry(1.2, .74, .12), MAT.dark, tx, y0 + .37, zz);
       boxes.push({x0:tx - .85, x1:tx + .85, z0:cz - 1 - (d - 12) / 2, z1:cz - 1 + (d - 12) / 2, y0:y0 - .3, y1:y0 + 1});
+      for(const bs of [-1, 1]) boxes.push({x0:tx + bs * 1.25 - .24, x1:tx + bs * 1.25 + .24, z0:cz - 1 - (d - 12) / 2, z1:cz - 1 + (d - 12) / 2, y0:y0 - .3, y1:y0 + .45});   /* ghế băng: chặn người đi, người ngồi (y = sàn + .47) không bị đẩy */
       for(const bs of [-1, 1]){ const bx = tx + bs * 1.25; ki.add(new THREE.BoxGeometry(.42, .45, d - 12), MAT.wood, bx, y0 + .22, cz - 1);
         if(W.addBench) try{ W.addBench({x:bx, z:cz - 1, rot:Math.PI / 2, len:d - 13, y:y0 + .47, floor:y0, label:`🪑 Ngồi bàn học · ${A.name} (E · C)`}); }catch(e){} } }
     for(const sx of [-1, 1]){ const sxp = cx + sx * 6.5; ki.add(new THREE.BoxGeometry(5, 3.6, .5), MAT.wood, sxp, y0 + 1.8, zn + .55); for(let r = 0; r < 3; r++) for(let b = 0; b < 9; b++) ki.add(new THREE.BoxGeometry(.18 + R() * .1, .9, .32), [MAT.red, MAT.green, MAT.slate, MAT.gold][(r + b) % 4], sxp - 2.2 + b * .52, y0 + .55 + r * 1.15, zn + .45); boxes.push({x0:sxp - 2.6, x1:sxp + 2.6, z0:zn, z1:zn + .9}); }
@@ -163,8 +167,8 @@ export async function make(W, ctx = {}){
     // phòng học (bàn 3×4, bảng) – Tây-Bắc và Đông-Bắc
     const classroom = (sx, tex) => { const rx = cx + sx * (10 + (w / 2 - 10) / 2), rz = cz - d / 4;
       for(let r = 0; r < 3; r++) for(let c = 0; c < 4; c++){ const dx = rx - 4.2 + c * 2.8, dz = rz - 3 + r * 2.6; ki.add(new THREE.BoxGeometry(1.4, .06, .7), o.deskM || MAT.woodL, dx, y0 + .74, dz); ki.add(new THREE.BoxGeometry(.06, .72, .6), MAT.dark, dx, y0 + .37, dz); ki.add(new THREE.BoxGeometry(.5, .45, .45), o.chairM || MAT.slate, dx, y0 + .23, dz + .6); }
-      boxes.push({x0:rx - 5, x1:rx + 5, z0:rz - 3.5, z1:rz + 2.5, y0:y0 - .3, y1:y0 + 1});
-      ki.add(new THREE.BoxGeometry(2, .9, .8), MAT.wood, rx, y0 + .45, zn + 3.2); sign(tex, 6, 2.6, rx, y0 + 2.4, zn + .4, 0, .4, inner); return {x:rx, z:rz + 4.6}; };
+      boxes.push({x0:rx - 5, x1:rx + 5, z0:rz - 3.5, z1:rz + 3.1, y0:y0 - .3, y1:y0 + 1});
+      ki.add(new THREE.BoxGeometry(2, .9, .8), MAT.wood, rx, y0 + .45, zn + 3.2); boxes.push({x0:rx - 1.05, x1:rx + 1.05, z0:zn + 2.75, z1:zn + 3.65, y0:y0 - .3, y1:y0 + 1}); sign(tex, 6, 2.6, rx, y0 + 2.4, zn + .4, 0, .4, inner); return {x:rx, z:rz + 4.6}; };
     const cA = classroom(-1, o.boardA), cB = classroom(1, o.boardB);
     // phòng chuyên đề (Tây-Nam) + quán (Đông-Nam): bàn tròn + quầy
     const sp = {x:cx - (10 + (w / 2 - 10) / 2), z:cz + d / 4}, cf = {x:cx + (10 + (w / 2 - 10) / 2), z:cz + d / 4};
@@ -230,13 +234,13 @@ export async function make(W, ctx = {}){
       for(let i = 0; i <= 10; i++){ const t = new THREE.TorusGeometry(KG.r, .07, 6, 24, Math.PI); t.rotateY(Math.PI / 2); KX.add(t, MAT.white, KG.x - KG.L / 2 + i * KG.L / 10, A.h + .2, KG.z); }
       KX.add(new THREE.BoxGeometry(KG.L + 1, .5, 2 * KG.r + 1), MAT.stone, KG.x, A.h, KG.z); boxes.push({x0:KG.x - KG.L / 2 - .5, x1:KG.x + KG.L / 2 + .5, z0:KG.z - KG.r - .5, z1:KG.z + KG.r + .5});
       const rose = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(.28, 0), sm(0xffffff, .7), 160), c = new THREE.Color(); let n = 0;
-      for(let i = 0; i < 160; i++){ const x = KG.x - 14 + (i % 20) * 1.45, z = KG.z + (i < 80 ? -9.5 - (i / 20 | 0) * .7 : 9.5 + ((i - 80) / 20 | 0) * .7); _m4.compose(_p.set(x, gy(x, z) + .5, z), _q.identity(), _s1); rose.setMatrixAt(n, _m4); rose.setColorAt(n++, c.setHSL([.98, .0, .92, .1][i % 4], .75, .55)); }
+      for(let i = 0; i < 160; i++){ const x = KG.x - 14 + (i % 20) * 1.45, z = KG.z + (i < 80 ? -9.5 - (i / 20 | 0) * .7 : 9.5 + ((i - 80) / 20 | 0) * .7); _m4.compose(_p.set(x, gy(x, z) + .26, z), _q.identity(), _s1); rose.setMatrixAt(n, _m4); rose.setColorAt(n++, c.setHSL([.98, .0, .92, .1][i % 4], .75, .55)); }
       rose.userData.dynamic = true; scene.add(rose);
       INTER.push({x:KG.x, z:KG.z + KG.r + 2, r:2.5, prio:.7, label:'🌹 Nhà kính Hoàng gia Kew & vườn hồng (E)', action:() => toast('🌹 Nhà kính Hoàng gia: hồng Anh, dương xỉ, cây nhiệt đới – nơi học viên ôn từ vựng chủ đề Thiên nhiên. Mẹo: học từ theo chủ đề + hình ảnh nhớ lâu gấp đôi!', 5000)}); } }
 
   /* ---------- 5b. 🀄 HÁN HỌC ĐIỆN & CÔ TÔ THUỶ CÁC (trên hồ sen) ---------- */
   { const A = ACAD.zh, L = LAKES[0], y0 = L.wl + 1.3;
-    KX.add(new THREE.BoxGeometry(A.w + 6, y0 - L.bed, A.d + 6), MAT.stone, A.x, (y0 + L.bed) / 2 - .15, A.z); addPlat(A.x, A.z, 0, A.w / 2 + 3, A.d / 2 + 3, y0);
+    KX.add(new THREE.BoxGeometry(A.w + 6, y0 - L.bed - .02, A.d + 6), MAT.stone, A.x, (y0 - .02 + L.bed) / 2, A.z); addPlat(A.x, A.z, 0, A.w / 2 + 3.1, A.d / 2 + 3.1, y0);
     const lat = canvasTex(512, 256, (g, w, h) => { g.fillStyle = '#f1e8d2'; g.fillRect(0, 0, w, h); g.strokeStyle = '#8a1f17'; g.lineWidth = 6; for(let i = 0; i < 4; i++){ const x = 30 + i * 122; g.strokeRect(x, 40, 90, 170); for(let j = 1; j < 6; j++){ g.beginPath(); g.moveTo(x, 40 + j * 28); g.lineTo(x + 90, 40 + j * 28); g.stroke(); } g.beginPath(); g.moveTo(x + 45, 40); g.lineTo(x + 45, 210); g.stroke(); } });
     lat.wrapS = lat.wrapT = THREE.RepeatWrapping; const latM = new THREE.MeshStandardMaterial({map:lat, roughness:.8}); latM.userData.tileM = 8;
     const zh = academy('zh', {wallM:latM, partM:MAT.plaster, wallH:7, floorY:y0, floorM:MAT.woodL, tableM:MAT.redL, chairM:MAT.red,
@@ -255,11 +259,11 @@ export async function make(W, ctx = {}){
     const zStart = L.z + L.rz * 1.26, zEnd = zh.zs + 3, stepZ = (zStart - zEnd) / 9; let px = A.x, pz = zStart; const yb = y0;
     for(let i = 0; i < 9; i++){ const nx = i === 8 ? A.x : A.x + (i % 2 ? 0 : -1), nz = pz - stepZ;
       const mx = (px + nx) / 2, mz = (pz + nz) / 2, ry = Math.atan2(nx - px, nz - pz), seg = Math.hypot(nx - px, nz - pz);
-      KX.add(new THREE.BoxGeometry(2.8, .35, seg + 1.2), MAT.stone, mx, yb - .18, mz, 0, ry, 0);
-      for(const s of [-1, 1]){ const ox = Math.cos(ry) * s * 1.35, oz = -Math.sin(ry) * s * 1.35; KX.add(new THREE.BoxGeometry(.1, .9, seg + 1.2), MAT.redL, mx + ox, yb + .45, mz + oz, 0, ry, 0); }
+      KX.add(new THREE.BoxGeometry(2.8, .35, seg + 1.2), MAT.stone, mx, yb - .18, mz, 0, ry, 0); addPlat(mx, mz, ry, 1.42, (seg + 1.2) / 2, yb);
+      const fx = Math.sin(ry), fz = Math.cos(ry);
+      for(const s of [-1, 1]){ const ox = Math.cos(ry) * s * 1.35, oz = -Math.sin(ry) * s * 1.35; KX.add(new THREE.BoxGeometry(.1, .9, seg + .2), MAT.redL, mx + ox, yb + .45, mz + oz, 0, ry, 0);
+        addSeg(mx + ox - fx * (seg + .2) / 2, mz + oz - fz * (seg + .2) / 2, mx + ox + fx * (seg + .2) / 2, mz + oz + fz * (seg + .2) / 2, .1, yb - 4, yb + 1.5, '🌸 Lan can Cầu Cửu Khúc'); }
       px = nx; pz = nz; }
-    addPlat(A.x - .5, (zStart + zEnd) / 2, 0, 1.9, (zStart - zEnd) / 2 + .6, yb);
-    for(const x of [A.x - 2.4, A.x + 1.4]) addSeg(x, zStart + .5, x, zEnd, .12, yb - 4, yb + 1.5, '🌸 Lan can Cầu Cửu Khúc');
     // sen + rừng trúc
     const pad = new THREE.InstancedMesh(new THREE.CircleGeometry(.75, 10).rotateX(-Math.PI / 2), sm(0x3f8a3a, .7, 0, {side:THREE.DoubleSide}), 140), lotus = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(.25, 0), sm(0xf7a6c4, .6), 60); let pi = 0, li = 0;
     for(let i = 0; i < 260 && pi < 140; i++){ const a = R() * 6.283, e = .6 + R() * .38, x = L.x + Math.cos(a) * L.rx * e, z = L.z + Math.sin(a) * L.rz * e; if(Math.abs(x - A.x) < A.w / 2 + 5 && Math.abs(z - A.z) < A.d / 2 + 5) continue; if(Math.abs(x - A.x) < 6 && z > A.z) continue;
@@ -277,7 +281,7 @@ export async function make(W, ctx = {}){
       const bz = A.z + A.d / 2, by0 = A.h - 5, by1 = y0 - .3;   // bệ đá: chặn người đi dưới đất, người đứng trên bệ đi tự do; chừa lối bậc thang giữa
       boxes.push({x0:A.x - A.w / 2 - 3, x1:A.x + A.w / 2 + 3, z0:A.z - A.d / 2 - 3, z1:bz, y0:by0, y1:by1}, {x0:A.x - A.w / 2 - 3, x1:A.x - 3, z0:bz, z1:bz + 3, y0:by0, y1:by1}, {x0:A.x + 3, x1:A.x + A.w / 2 + 3, z0:bz, z1:bz + 3, y0:by0, y1:by1}); }
     for(let i = 0; i < 4; i++){ const zz = A.z + A.d / 2 + 3 - i * .9 + 2.6, yy = A.h + (i + 1) * base / 4; KX.add(new THREE.BoxGeometry(6, yy - A.h, .9), MAT.stoneD, A.x, A.h + (yy - A.h) / 2, zz); addPlat(A.x, zz, 0, 3, .45, yy); }
-    addPlat(A.x, A.z + A.d / 2 + 1.5, 0, 3, 1.55, y0);
+    addPlat(A.x, A.z + A.d / 2 + 1.5, 0, 3, 1.6, y0); KX.add(new THREE.BoxGeometry(6, .3, 3.2), MAT.stoneD, A.x, y0 - .15, A.z + A.d / 2 + 1.5);
     const plast = canvasTex(256, 256, (g, w, h) => { g.fillStyle = '#f4f1e8'; g.fillRect(0, 0, w, h); g.fillStyle = '#2d241e'; g.fillRect(0, 0, w, 14); g.fillRect(0, h - 14, w, 14); for(let x = 0; x < w; x += 64) g.fillRect(x, 0, 10, h); });
     plast.wrapS = plast.wrapT = THREE.RepeatWrapping; const plM = new THREE.MeshStandardMaterial({map:plast, roughness:.85}); plM.userData.tileM = 4;
     const ja = academy('ja', {wallM:plM, partM:MAT.shoji, wallH:6.5, floorY:y0, floorM:MAT.tatami, tableM:MAT.cedar, deskM:MAT.cedar, chairM:MAT.tatami,
@@ -308,7 +312,7 @@ export async function make(W, ctx = {}){
   /* ---------- 5d. 🇰🇷 HANOK DANCHEONG + K-CUBE + LẦU KHÁNH HỘI ---------- */
   let ledT = null, ledC = null; const DANCH = sm(0x2f8f6f, .45);
   { const A = ACAD.ko, y0 = A.h + .6;
-    KX.add(new THREE.BoxGeometry(A.w + 4, .6, A.d + 4), MAT.stone, A.x, A.h + .3, A.z); addPlat(A.x, A.z, 0, A.w / 2 + 2, A.d / 2 + 2, y0);
+    KX.add(new THREE.BoxGeometry(A.w + 4, .6, A.d + 4), MAT.stone, A.x, A.h + .3, A.z); addPlat(A.x, A.z, 0, A.w / 2 + 2.12, A.d / 2 + 2.12, y0);
     const hw = canvasTex(256, 256, (g, w, h) => { g.fillStyle = '#efe8d8'; g.fillRect(0, 0, w, h); g.fillStyle = '#5b3a24'; for(let x = 0; x < w; x += 64) g.fillRect(x, 0, 10, h); g.fillRect(0, 0, w, 12); g.fillStyle = '#2f8f6f'; g.fillRect(0, 12, w, 10); g.fillStyle = '#c0392b'; g.fillRect(0, 22, w, 6); });
     hw.wrapS = hw.wrapT = THREE.RepeatWrapping; const hwM = new THREE.MeshStandardMaterial({map:hw, roughness:.8}); hwM.userData.tileM = 4;
     const ko = academy('ko', {wallM:hwM, partM:MAT.plaster, wallH:7, floorY:y0, floorM:MAT.woodL, tableM:MAT.wood,
@@ -400,15 +404,18 @@ export async function make(W, ctx = {}){
   const NP = PATH.length, GY = PATH.map(([x, z]) => gy(x, z)), RY = new Float32Array(NP);
   for(let i = 0; i < NP; i++){ let s = 0, n = 0; for(let k = -28; k <= 28; k += 2){ s += GY[(i + k + NP) % NP]; n++; } RY[i] = Math.max(s / n, GY[i] + .35); }
   for(let pass = 0; pass < 3; pass++) for(let i = 0; i < NP; i++){ const a = RY[(i - 1 + NP) % NP], b = RY[(i + 1) % NP]; RY[i] = Math.max((a + RY[i] + b) / 3, GY[i] + .35); }
-  { const pos = [], idx = [], rp = [], ridx = [], sl = new THREE.InstancedMesh(new THREE.BoxGeometry(2.2, .14, .26), MAT.cedar, Math.ceil(NP / 1.0)); let ns = 0;
+  { const pos = [], idx = [], rp = [], ridx = [], skP = [], skI = [], sl = new THREE.InstancedMesh(new THREE.BoxGeometry(2.2, .14, .26), MAT.cedar, Math.ceil(NP / 1.0)); let ns = 0;
     const piers = [], arches = [];
     for(let i = 0; i <= NP; i++){ const k = i % NP, [x, z] = PATH[k], [xa, za] = PATH[(k + 1) % NP], dx = xa - x, dz = za - z, l = Math.hypot(dx, dz) || 1, nx = -dz / l, nz = dx / l, y = RY[k];
       pos.push(x + nx * 1.6, y - .05, z + nz * 1.6, x - nx * 1.6, y - .05, z - nz * 1.6); if(i > 0){ const q = i * 2; idx.push(q - 2, q, q - 1, q - 1, q, q + 1); }
+      { const g0 = GY[k] - .3; skP.push(x + nx * 1.6, y - .05, z + nz * 1.6, x + nx * 2.3, g0, z + nz * 2.3, x - nx * 1.6, y - .05, z - nz * 1.6, x - nx * 2.3, g0, z - nz * 2.3); if(i > 0){ const q = i * 4; skI.push(q - 4, q - 3, q, q, q - 3, q + 1, q - 2, q + 2, q - 1, q - 1, q + 2, q + 3); } }
+      if(i < NP && y - GY[k] <= 1.7) for(let o = -2.3; o <= 2.31; o += .25) for(const a of [-.5, 0, .5]){ const ao = Math.abs(o), kk = bedK(x + nx * o + dx / l * a, z + nz * o + dz / l * a), top = ao <= 1.6 ? y + .09 : y - .05 + (GY[k] - .3 - y + .05) * (ao - 1.6) / .7 + .02; if(!(BED.get(kk) >= top)) BED.set(kk, top); }   /* mặt tà vẹt · trên taluy */
       for(const s of [-.72, .72]) rp.push(x + nx * (s - .04), y + .2, z + nz * (s - .04), x + nx * (s + .04), y + .2, z + nz * (s + .04)); if(i > 0){ const q = i * 4; ridx.push(q - 4, q, q - 3, q - 3, q, q + 1, q - 2, q + 2, q - 1, q - 1, q + 2, q + 3); }
       if(i < NP){ _m4.compose(_p.set(x, y + .02, z), _q.setFromEuler(_e.set(0, Math.atan2(dx, dz), 0)), _s1); sl.setMatrixAt(ns++, _m4);
         if(y - GY[k] > 1.0 && k % 10 === 0) piers.push([x, GY[k] - .5, z, y - GY[k], Math.atan2(dx, dz)]); } }
     const bal = new THREE.BufferGeometry(); bal.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); bal.setIndex(idx); bal.computeVertexNormals();
     const bm = new THREE.Mesh(bal, sm(0x8a8478, .95)); bm.receiveShadow = true; bm.userData.dynamic = true; bm.userData.noFar = true; scene.add(bm);
+    { const sg = new THREE.BufferGeometry(); sg.setAttribute('position', new THREE.Float32BufferAttribute(skP, 3)); sg.setIndex(skI); sg.computeVertexNormals(); const sk = new THREE.Mesh(sg, sm(0x7d776b, .95, 0, {side:THREE.DoubleSide})); sk.receiveShadow = true; sk.userData.dynamic = true; sk.userData.noFar = true; scene.add(sk); }   // taluy nền ray
     const rg = new THREE.BufferGeometry(); rg.setAttribute('position', new THREE.Float32BufferAttribute(rp, 3)); rg.setIndex(ridx); rg.computeVertexNormals();
     const rm = new THREE.Mesh(rg, MAT.steel); rm.userData.dynamic = true; rm.userData.noFar = true; scene.add(rm);
     sl.count = ns; sl.userData.dynamic = true; sl.receiveShadow = true; scene.add(sl);
@@ -470,7 +477,7 @@ export async function make(W, ctx = {}){
     for(let i = 0; i < 8; i++){ const x = -770 + (i % 2 ? 5 : -5), z = -380 - i * 9, y = gy(x, z); KX.add(new THREE.CylinderGeometry(.06, .06, 2, 6), i % 2 ? MAT.red : sm(0x1f4fa8), x, y + 1, z); }
     INTER.push({x:-770, z:-372, r:4, prio:.7, label:'⛷️ Khu trượt tuyết Làng Tuyết (E)', action:() => toast('⛷️ Dốc trượt tuyết mở mùa đông! Từ vựng: ski /skiː/ · 滑雪 huáxuě · スキー · 스키 – bấm M để bay về học viện.', 5000)}); }
   { const DX = -306, DZ = 158, y = .7;   // bến thuỷ phi cơ: cầu tàu gỗ ra biển + 2 thuỷ phi cơ
-    KX.add(new THREE.BoxGeometry(34, .3, 4), MAT.woodL, DX + 12, y, DZ); addPlat(DX + 12, DZ, 0, 17, 2, y + .15);
+    KX.add(new THREE.BoxGeometry(34, .3, 4), MAT.woodL, DX + 12, y, DZ); addPlat(DX + 12, DZ, 0, 17.1, 2.1, y + .15);
     for(let i = 0; i < 9; i++) for(const s of [-1, 1]) KX.add(new THREE.CylinderGeometry(.18, .18, 4, 8), MAT.wood, DX - 4 + i * 4, y - 1.8, DZ + s * 1.9);
     for(const s of [-1, 1]) addSeg(DX - 5, DZ + s * 2.05, DX + 29, DZ + s * 2.05, .1, y - 1, y + 2, '🌊 Mép cầu tàu');
     addSeg(DX + 29, DZ - 2, DX + 29, DZ + 2, .1, y - 1, y + 2, '🌊 Cuối cầu tàu – lên thuỷ phi cơ bằng E');
@@ -488,11 +495,11 @@ export async function make(W, ctx = {}){
   const ribbon = (pts, w, col, skipRiver = true) => { const S = []; for(let i = 0; i < pts.length - 1; i++){ const [x0, z0] = pts[i], [x1, z1] = pts[i + 1], L = Math.hypot(x1 - x0, z1 - z0); for(let t = 0; t < L; t += 2) S.push([x0 + (x1 - x0) * t / L, z0 + (z1 - z0) * t / L]); } S.push(pts[pts.length - 1]);
     pc.set(col); let prev = -1;
     for(let i = 0; i < S.length; i++){ const [x, z] = S[i], a = S[Math.max(0, i - 1)], b = S[Math.min(S.length - 1, i + 1)], dx = b[0] - a[0], dz = b[1] - a[1], l = Math.hypot(dx, dz) || 1, nx = -dz / l, nz = dx / l;
-      if(skipRiver && riverD(x, z) < 6.5){ prev = -1; continue; } const y = gy(x, z) + .06, base = pathPos.length / 3;
-      pathPos.push(x + nx * w / 2, gy(x + nx * w / 2, z + nz * w / 2) + .06, z + nz * w / 2, x - nx * w / 2, gy(x - nx * w / 2, z - nz * w / 2) + .06, z - nz * w / 2); for(let k = 0; k < 2; k++) pathCol.push(pc.r, pc.g, pc.b);
+      if(skipRiver && riverD(x, z) < 6.5){ prev = -1; continue; } const base = pathPos.length / 3;
+      pathPos.push(x + nx * w / 2, gy(x + nx * w / 2, z + nz * w / 2) + .025, z + nz * w / 2, x - nx * w / 2, gy(x - nx * w / 2, z - nz * w / 2) + .025, z - nz * w / 2); for(let k = 0; k < 2; k++) pathCol.push(pc.r, pc.g, pc.b);
       if(prev >= 0) pathIdx.push(prev, base, prev + 1, prev + 1, base, base + 1); prev = base; } };
-  const plaza = (x, z, r, col) => { pc.set(col); const c = pathPos.length / 3; pathPos.push(x, gy(x, z) + .07, z); pathCol.push(pc.r, pc.g, pc.b); const n = 20;
-    for(let i = 0; i <= n; i++){ const a = i / n * 6.283, px = x + Math.cos(a) * r, pz = z + Math.sin(a) * r; pathPos.push(px, gy(px, pz) + .07, pz); pathCol.push(pc.r, pc.g, pc.b); if(i > 0) pathIdx.push(c, c + i + 1, c + i); } };
+  const plaza = (x, z, r, col) => { pc.set(col); const c = pathPos.length / 3; pathPos.push(x, gy(x, z) + .025, z); pathCol.push(pc.r, pc.g, pc.b); const n = 20;
+    for(let i = 0; i <= n; i++){ const a = i / n * 6.283, px = x + Math.cos(a) * r, pz = z + Math.sin(a) * r; pathPos.push(px, gy(px, pz) + .025, pz); pathCol.push(pc.r, pc.g, pc.b); if(i > 0) pathIdx.push(c, c + i + 1, c + i); } };
   const roundRect = (x0, x1, z0, z1, r) => { const P = [], arc = (cx, cz, a0, a1) => { for(let k = 0; k <= 8; k++){ const a = a0 + (a1 - a0) * k / 8; P.push([cx + Math.cos(a) * r, cz + Math.sin(a) * r]); } };
     arc(x1 - r, z0 + r, -Math.PI / 2, 0); arc(x1 - r, z1 - r, 0, Math.PI / 2); arc(x0 + r, z1 - r, Math.PI / 2, Math.PI); arc(x0 + r, z0 + r, Math.PI, Math.PI * 1.5); P.push(P[0]); return P; };
   const STONE = 0xc9bb9b, PAVE = 0xb4ada2;
@@ -500,7 +507,7 @@ export async function make(W, ctx = {}){
   ribbon(roundRect(PR.x0, PR.x1, PR.z0, PR.z1, RAIL.r + 9), 4, STONE);   // đường dạo vòng đảo
   // cầu gỗ nhỏ ở 2 chỗ đường vòng cắt suối băng
   const footbridge = (x, z, alongX, len = 14) => { const y = Math.max(gy(x - (alongX ? len / 2 : 0), z - (alongX ? 0 : len / 2)), gy(x + (alongX ? len / 2 : 0), z + (alongX ? 0 : len / 2))) + .25;
-    KX.add(new THREE.BoxGeometry(alongX ? len : 4.4, .35, alongX ? 4.4 : len), MAT.woodL, x, y - .15, z); addPlat(x, z, 0, alongX ? len / 2 : 2.2, alongX ? 2.2 : len / 2, y);
+    KX.add(new THREE.BoxGeometry(alongX ? len : 4.4, .35, alongX ? 4.4 : len), MAT.woodL, x, y - .15, z); addPlat(x, z, 0, alongX ? len / 2 + .1 : 2.3, alongX ? 2.3 : len / 2 + .1, y);
     for(const s of [-1, 1]){ if(alongX){ KX.add(new THREE.BoxGeometry(len, .9, .1), MAT.wood, x, y + .45, z + s * 2.15); addSeg(x - len / 2, z + s * 2.2, x + len / 2, z + s * 2.2, .1, y - 3, y + 2, '🌉 Lan can cầu gỗ'); }
       else { KX.add(new THREE.BoxGeometry(.1, .9, len), MAT.wood, x + s * 2.15, y + .45, z); addSeg(x + s * 2.2, z - len / 2, x + s * 2.2, z + len / 2, .1, y - 3, y + 2, '🌉 Lan can cầu gỗ'); } } };
   { let best = null; for(let x = -620; x < -480; x += .5){ const d = riverD(x, PR.z1); if(!best || d < best.d) best = {x, d}; } footbridge(best.x, PR.z1, true); }
