@@ -21,7 +21,7 @@ Tài liệu gốc:
 | brain | Đỉnh QA/QC Brain Citadel | 620 → 1150 | −100 → 450 | 0 → 168 | `js/brain_citadel.js` | 7 | phiên chính – ✅ đã lên GitHub |
 | swiss | Đảo Ngoại ngữ Thụy Sĩ | −850 → −250 | −500 → 250 | 0 → 95 | `js/swiss_lang_island.js` | 8A | qc-lang-center |
 | palm | Ốc đảo Palm Dubai | 250 → 1050 | 520 → 1320 | −8 → 65 | `js/palm_dubai.js` | 8B | qc-lang-center (sau 8A) |
-| wonder | Wonderland + Kỳ Quan (dời về Nam) | −320 → 220 | 520 → 1350 | 0 → 98 | `js/wonder_v2.js` | 2 (dời) | qc-world-do-hoa (sau Pha 3) |
+| wonder | Wonderland + Kỳ Quan (dời về Nam) | −400 → 230 | 485 → 1510 | 0 → 98 | `js/wonder_v2.js` | 2 (dời) | qc-world-do-hoa (sau Pha 3) |
 | bots | 55 loại bot | toàn thế giới | | | `bots.js`, `pedestrians.js`, `streetlife.js` | 9 | sau cùng |
 
 Mỗi vùng có một kênh biển ngăn cách. Đất mới đăng ký bằng `W.EXTL.push({x0,x1,z0,z1,h:(x,z)=>độ cao|null, name})`. Hàm độ cao trả `null` ở ngoài đất; EXTL được ưu tiên hơn đảo cũ.

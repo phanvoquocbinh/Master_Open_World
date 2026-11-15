@@ -15,7 +15,7 @@ export const ZONES = {
   brain:     {name:'QA/QC Brain Sovereign Peak',  x0:620,  x1:1150, z0:-100, z1:450,  y:[0,168],   file:'./brain_citadel.js',      phase:7},
   swiss:     {name:'Swiss Language Island',       x0:-850, x1:-250, z0:-500, z1:250,  y:[0,95],    file:'./swiss_lang_island.js',  phase:8},
   palm:      {name:'The QC Palm Archipelago',     x0:250,  x1:1050, z0:520,  z1:1320, y:[-8,65],   file:'./palm_dubai.js',         phase:8},
-  wonder:    {name:'Wonderland & Kỳ Quan (dời về Nam)', x0:-320, x1:220, z0:520, z1:1350, y:[0,98], file:'./wonder_v2.js',        phase:2},
+  wonder:    {name:'Wonderland & Kỳ Quan (dời về Nam)', x0:-400, x1:230, z0:485, z1:1510, y:[0,98], file:'./wonder_v2.js',        phase:2},
 };
 export const inZone=(z,x,zz,pad=0)=>x>=z.x0-pad && x<=z.x1+pad && zz>=z.z0-pad && zz<=z.z1+pad;
 export const zoneAt=(x,z)=>Object.entries(ZONES).find(([k,Z])=>inZone(Z,x,z))?.[0]||null;

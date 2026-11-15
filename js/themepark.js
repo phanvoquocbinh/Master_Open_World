@@ -4,8 +4,13 @@
 // Mặt đất công viên phẳng ở cao độ G0; lối lát đá là lưới riêng nằm trên mặt đất (đất bên dưới được hạ thấp trong LƯỚI VẼ, không đổi độ cao đi bộ → không nhấp nháy).
 import { createGFX, Kit as GKit, boxM, planeM, cylM, cbox, local, rng } from './gfxkit.js';
 import { makeRides } from './themerides.js';
+import { makeLand2 } from './themeland2.js';
+import { makeDark } from './themedark.js';
+import { makePlay } from './themeplay.js';
+import { shiftView } from './worldshift.js';
 
-export function makeThemePark(W, ctx){
+export function makeThemePark(W, ctx, opt={}){
+  W=shiftView(W, opt.dx||0, opt.dz||0);   // V2 (wonder_v2.js): dời cả công viên theo (dx, dz); các file con nhận W này qua T.W – V1 không truyền opt → W giữ nguyên
   const {THREE, scene, P, HOOK, INTER, PLACES, toast, circles, boxes, addPlat, addSeg, makeLabel, makeActor, EXTL, clamp, lerp, teleport} = W;
   const GF=W.GFX||(W.GFX=createGFX({quality:W.QUAL||'low', msaa:!W.CINE})), M=GF.M, TAU=Math.PI*2, G0=2.0, LOW=W.QUAL==='low';
   const ss=(a,b,x)=>{ const t=clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
@@ -14,24 +19,29 @@ export function makeThemePark(W, ctx){
 
   /* ============================== 1. ĐẤT ============================== */
   const LG={x:40, z:620, a:100, b:58}, ISR=22, HUB={x:40, z:526, r:21}, TOWER={x:-52, z:538}, WHEEL={x:172, z:620};
+  const LAKES=[{x:236,z:1152,a:68,b:26,f:.7,wy:1.6,name:'Hồ Atlantis'},{x:170.7,z:1031,a:14,b:14,f:-.8,wy:.3,name:'Hồ khủng long'}];
   const sdB=(x,z,cx,cz,hx,hz,r)=>{ const qx=Math.abs(x-cx)-(hx-r), qz=Math.abs(z-cz)-(hz-r); return Math.hypot(Math.max(qx,0),Math.max(qz,0))+Math.min(Math.max(qx,qz),0)-r; };
-  const sdf=(x,z)=>{ const a=sdB(x,z,38,452,78,68,26), b=sdB(x,z,46,670,302,170,48), k=24, h=clamp(.5+.5*(b-a)/k,0,1);
+  const sdf=(x,z)=>{ const a=sdB(x,z,38,452,78,68,26), b=sdB(x,z,46,865,302,365,48), k=24, h=clamp(.5+.5*(b-a)/k,0,1);
     return lerp(b,a,h)-k*h*(1-h)+2.2*Math.sin(x*.045+1.3)*Math.cos(z*.05+.4)+1.2*Math.sin(x*.11+z*.09); };
   // khoảng cách (m) ra ngoài mép Hồ Pha Lê (âm = trong hồ)
   const dLG=(x,z)=>{ const ux=(x-LG.x)/LG.a, uz=(z-LG.z)/LG.b, e=Math.hypot(ux,uz); if(e<1e-4) return -LG.b; return (e-1)/Math.hypot(ux/LG.a,uz/LG.b)*e; };
   const hf=(x,z)=>{ const d=sdf(x,z); if(d>10) return -6; if(d>0) return lerp(.2,-6,ss(0,10,d)); let h=d>-8?lerp(G0,.25,ss(-8,0,d)):G0;
     if(z<500 && d<-8){ const bx=Math.abs(x-38); h+=7*ss(38,49,bx)*(1-ss(57,69,bx))*ss(398,414,z)*(1-ss(476,496,z)); }      // gò cây 2 bên Đại lộ – che thành phố
     const dl=dLG(x,z); if(dl<2.6){ const ri=Math.hypot(x-LG.x,z-LG.z); h=ri<ISR+3?lerp(G0,.45,ss(ISR-.6,ISR+2.6,ri)):lerp(G0,.45,ss(2.6,-1.5,dl)); }
+    for(const L of LAKES){ const e=Math.hypot((x-L.x)/L.a,(z-L.z)/L.b); if(e<1.1) h=Math.min(h,lerp(G0,L.f,ss(1.1,.88,e))); }   /* hồ của đợt 2 */
     return h; };
-  const BX={x0:-270, x1:363, z0:372, z1:852}, RES=3, NX=Math.round((BX.x1-BX.x0)/RES)+1, NZ=Math.round((BX.z1-BX.z0)/RES)+1, H=new Float32Array(NX*NZ);
+  const BX={x0:-270, x1:363, z0:372, z1:1242}, RES=3, NX=Math.round((BX.x1-BX.x0)/RES)+1, NZ=Math.round((BX.z1-BX.z0)/RES)+1, H=new Float32Array(NX*NZ);
   for(let j=0;j<NZ;j++) for(let i=0;i<NX;i++) H[j*NX+i]=hf(BX.x0+i*RES, BX.z0+j*RES);
   const hAt=(x,z)=>{ const fx=(x-BX.x0)/RES, fz=(z-BX.z0)/RES; if(fx<0||fz<0||fx>=NX-1||fz>=NZ-1) return null; const i=Math.floor(fx), j=Math.floor(fz), tx=fx-i, tz=fz-j, a=H[j*NX+i], b=H[j*NX+i+1], c=H[(j+1)*NX+i], d=H[(j+1)*NX+i+1];
     const h=tx+tz<=1 ? a+(b-a)*tx+(c-a)*tz : d+(c-d)*(1-tx)+(b-d)*(1-tz); return h<-5.9?null:h; };
   EXTL.push({x0:BX.x0, x1:BX.x1-RES, z0:BX.z0, z1:BX.z1-RES, h:hAt, name:'CÔNG VIÊN KỲ QUAN QC WORLD'});
 
   // lối lát đá: [x0,x1,z0,z1] và đĩa tròn [x,z,r]; viền hồ = dải 3,2…12,2 m quanh mép hồ
-  const PR=[[27,53,394,508],[20,60,394,414],[34,46,540,552],[58,132,514,522],[130,148,512,533],[-40,22,534,542],[-132,-70,616.8,623.2],[58,76,686,710.6],[150,165,614,626]];
-  const PD=[[HUB.x,HUB.z,HUB.r],[TOWER.x,TOWER.z,14]];
+  const PR=[[27,53,394,508],[20,60,394,414],[34,46,540,552],[58,132,514,522],[130,148,512,533],[-40,22,534,542],[-132,-70,616.8,623.2],[58,76,686,710.6],[150,165,614,626],
+    [171,220,631,638],[208,220,634,884],[-210,330,884,896],[108,120,896,1100],[108,186,1086,1104],[136,157,896,936],[14,44,896,912],[-166,-154,896,962],
+    /* đợt 2B */ [-236,-212,871,884],[-124,-100,871,884],[-12,12,871,884],[-166,-154,991,1096],[-244,108,1096,1104]];
+  const PD=[[HUB.x,HUB.z,HUB.r],[TOWER.x,TOWER.z,14],[-160,975,16]];
+  if(opt.paths) PR.push(...opt.paths);   // V2: lối lát thêm do wonder_v2.js vẽ (đường ra cổng G9) – cây ngẫu nhiên tránh ra
   const paved=(x,z,m=0)=>{ for(const r of PR) if(x>r[0]+m && x<r[1]-m && z>r[2]+m && z<r[3]-m) return true; for(const c of PD) if(Math.hypot(x-c[0],z-c[1])<c[2]-m) return true;
     const dl=dLG(x,z); return dl>3.2+m && dl<12.2-m; };
   { // lưới địa hình: cỏ (có vân) + cát/đáy hồ; đỉnh nằm hẳn dưới lối lát được hạ 0,35 m (chỉ trong lưới vẽ)
@@ -42,7 +52,10 @@ export function makeThemePark(W, ctx){
       const n=.86+.2*Math.sin(x*.13+z*.07)*Math.cos(z*.11-x*.05)+.06*Math.sin(x*1.7+z*2.3); c.setRGB(n,n*1.02,n);
       if(H[k]<G0-.12){ sand[k]=1; c.copy(dLG(x,z)<3?BED:SAND).multiplyScalar(.92+.1*Math.sin(x*.9+z*1.3)); }
       col[k*3]=c.r; col[k*3+1]=c.g; col[k*3+2]=c.b; }
-    const ig=[], is=[]; for(let j=0;j<NZ-1;j++) for(let i=0;i<NX-1;i++){ const a=j*NX+i, b=a+1, cc=a+NX, d=cc+1; if(Math.max(H[a],H[b],H[cc],H[d])<-5.9) continue;
+    const ig=[], is=[], done=new Uint8Array(NX*NZ), flatV=k=>pos[k*3+1]===G0 && !sand[k];
+    for(let j=0;j<NZ-1;j++) for(let i=0;i<NX-1;i++){ const a=j*NX+i, b=a+1, cc=a+NX, d=cc+1; if(done[a] || Math.max(H[a],H[b],H[cc],H[d])<-5.9) continue;
+      if(i%2===0 && j%2===0 && i<NX-2 && j<NZ-2){ let ok=true; for(let dj=0;dj<=2 && ok;dj++) for(let di=0;di<=2;di++) if(!flatV(a+dj*NX+di)){ ok=false; break; }
+        if(ok){ const b2=a+2, c2=a+2*NX, d2=c2+2; ig.push(a,c2,b2,b2,c2,d2); done[a]=done[a+1]=done[a+NX]=done[a+NX+1]=1; continue; } }
       (sand[a]+sand[b]+sand[cc]+sand[d]>=3?is:ig).push(a,cc,b,b,cc,d); }
     const g=new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos,3)); g.setAttribute('color', new THREE.BufferAttribute(col,3)); g.setAttribute('uv', new THREE.BufferAttribute(uv,2));
     g.setIndex(ig.concat(is)); g.addGroup(0,ig.length,0); g.addGroup(ig.length,is.length,1); g.computeVertexNormals(); g.computeBoundingSphere();
@@ -52,8 +65,11 @@ export function makeThemePark(W, ctx){
   /* ============================== 2. BỘ DỰNG ============================== */
   // 4 mức chi tiết theo khoảng cách người chơi tới công viên (giữ nhẹ máy khi đứng ở thành phố nhìn sang):
   //  gLand < 1050 m: ray, trụ, vòng quay, tháp, cổng, lõi tán cây · gFar < 560 m: lối lát, nhà, cầu, ga · gMid < 520 m: tán lá, đoàn tàu, kính cabin · gNear < 430 m: rào, ghế, đèn, quầy
-  const gLand=new THREE.Group(), gFar=new THREE.Group(), gMid=new THREE.Group(), gNear=new THREE.Group(); for(const g of [gLand,gFar,gMid,gNear]){ g.userData.dynamic=true; g.userData.staticShadow=true; scene.add(g); }
-  const kL=GKit(), kF=GKit(), kN=GKit(), lift=(k,dy)=>({add:(geo,mat,x=0,y=0,z=0,...r)=>k.add(geo,mat,x,y+dy,z,...r)});
+  const mkSet=(cx,cz)=>{ const S={cx, cz, d:0, kL:GKit(), kF:GKit(), kN:GKit(), gLand:new THREE.Group(), gFar:new THREE.Group(), gMid:new THREE.Group(), gNear:new THREE.Group()}; for(const g of [S.gLand,S.gFar,S.gMid,S.gNear]){ g.userData.dynamic=true; g.userData.staticShadow=true; scene.add(g); } return S; };
+  const SETS=[mkSet(46,640), mkSet(46,1040)]; let cur=SETS[0];   /* cur: bộ đang nhận hình (đổi bằng T.useSet) */
+  const pk=n=>({add:(...a)=>cur[n].add(...a), addMat:(...a)=>cur[n].addMat(...a)}), pg=n=>({add:o=>cur[n].add(o)});
+  const gLand=pg('gLand'), gFar=pg('gFar'), gMid=pg('gMid'), gNear=pg('gNear');
+  const kL=pk('kL'), kF=pk('kF'), kN=pk('kN'), lift=(k,dy)=>({add:(geo,mat,x=0,y=0,z=0,...r)=>k.add(geo,mat,x,y+dy,z,...r)});
   const flat=g=>{ g.rotateX(-Math.PI/2); return g; };
   const slab=(k,mat,x0,x1,z0,z1,y)=>k.add(flat(planeM(x1-x0,z1-z0,x0,z0)),mat,(x0+x1)/2,y,(z0+z1)/2);
   // dải nối 2 dãy điểm 3D (A[i] → B[i]); nrm = hướng pháp tuyến mong muốn (để chọn chiều quấn tam giác); UV theo mét
@@ -82,6 +98,7 @@ export function makeThemePark(W, ctx){
   const YP=G0+.05;
   slab(kF,M.pave,27,53,394,508,YP+.005); slab(kF,M.granite,20,60,394,414,YP+.012); slab(kF,M.pave,34,46,540,552,YP+.004); slab(kF,M.pave,58,132,514,522,YP+.004);
   slab(kF,M.granite,130,148,512,533,YP+.012); slab(kF,M.pave,-40,22,534,542,YP+.004); slab(kF,M.pave,-132,-70,616.8,623.2,YP+.008); slab(kF,M.granite,58,76,686,710.6,YP+.012); slab(kF,M.granite,150,165,614,626,YP+.012);
+  slab(kF,M.granite,171,220,631,638,YP+.012); slab(kF,M.pave,208,220,634,884,YP+.004);   /* Đại lộ Phiêu Lưu xuống khu Nam (đợt 2) */
   { const d=flat(new THREE.CircleGeometry(HUB.r,64)), u=d.attributes.uv, p=d.attributes.position; for(let i=0;i<u.count;i++) u.setXY(i,p.getX(i)+HUB.x,p.getZ(i)+HUB.z); kF.add(d,M.terrazzo,HUB.x,YP+.02,HUB.z);
     const t=flat(new THREE.CircleGeometry(14,48)), u2=t.attributes.uv, p2=t.attributes.position; for(let i=0;i<u2.count;i++) u2.setXY(i,p2.getX(i)+TOWER.x,p2.getZ(i)+TOWER.z); kF.add(t,M.granite,TOWER.x,YP+.016,TOWER.z); }
   for(const x of [27.15,52.85]) kF.add(boxM(.3,.16,94),M.stoneLight,x,G0+.06,461);       // bó vỉa Đại lộ
@@ -190,31 +207,36 @@ export function makeThemePark(W, ctx){
   updJets(0);
 
   /* ============================== 6. TRÒ CHƠI (themerides.js) ============================== */
-  const T={W, ctx, GF, M, G0, WY, LG, TOWER, WHEEL, HUB, kL, kF, kN, gLand, gFar, gMid, gNear, hf, paved, dLG, pay, glow, fence, bench, lamp, bin, tree, sign, pln, slab, strip, lift, flat, ss, railM};
-  let rides=null; try{ rides=makeRides(T); }catch(e){ console.warn('themerides', e); }
+  const T={W, ctx, GF, M, G0, WY, LG, TOWER, WHEEL, HUB, kL, kF, kN, gLand, gFar, gMid, gNear, hf, sdf, paved, dLG, LAKES, pay, glow, fence, bench, lamp, bin, tree, sign, pln, slab, strip, lift, flat, ss, railM, useSet:i=>{ cur=SETS[i]; }};
+  const MS={}, tm0=performance.now(); let rides=null; try{ rides=makeRides(T); }catch(e){ console.warn('themerides', e); } MS.rides=Math.round(performance.now()-tm0);
+  let land2=null, dark=null, play=null; if(rides){ cur=SETS[1]; { const t1=performance.now(); try{ land2=makeLand2(T, rides.kit); }catch(e){ console.warn('themeland2', e); } MS.land2=Math.round(performance.now()-t1); }
+    { const t1=performance.now(); try{ dark=makeDark(T, rides.kit); }catch(e){ console.warn('themedark', e); } MS.dark=Math.round(performance.now()-t1); } { const t1=performance.now(); try{ play=makePlay(T, rides.kit); }catch(e){ console.warn('themeplay', e); } MS.play=Math.round(performance.now()-t1); } cur=SETS[0]; }
 
   /* ============================== 7. CÂY · ĐÈN VEN HỒ ============================== */
-  { const R=rng(77), clear=(x,z)=>!paved(x,z,-2.5) && dLG(x,z)>13 && sdf(x,z)<-10 && !(rides && rides.blocked(x,z)) && !(Math.abs(x-40)<30 && z<414);
+  { const R=rng(77), clear=(x,z)=>!paved(x,z,-2.5) && dLG(x,z)>13 && sdf(x,z)<-10 && !(rides && rides.blocked(x,z)) && !(land2 && land2.blocked(x,z)) && !LAKES.some(L=>Math.hypot((x-L.x)/L.a,(z-L.z)/L.b)<1.2) && !(Math.abs(x-40)<30 && z<414);
     // cây mọc thành cụm 3–6 cây (trông có chủ ý hơn rải đều)
-    for(let i=0, n=0; i<2600 && n<(LOW?260:420); i++){ const x=BX.x0+R()*(BX.x1-BX.x0), z=BX.z0+R()*(BX.z1-BX.z0); if(!clear(x,z)) continue; const berm=hf(x,z)>G0+1.5, kind=berm?(R()<.6?'shade':'tier'):R()<.45?'shade':R()<.75?'round':'tier';
+    for(let i=0, n=0; i<4200 && n<(LOW?400:680); i++){ const x=BX.x0+R()*(BX.x1-BX.x0), z=BX.z0+R()*(BX.z1-BX.z0); if(!clear(x,z)) continue; const berm=hf(x,z)>G0+1.5, kind=berm?(R()<.6?'shade':'tier'):R()<.45?'shade':R()<.75?'round':'tier';
       tree(kind,x,z,.9+R()*.45); n++; for(let j=0, m=2+Math.floor(R()*4); j<m; j++){ const a=R()*TAU, r=4+R()*7, x2=x+Math.cos(a)*r, z2=z+Math.sin(a)*r; if(!clear(x2,z2)) continue; tree(R()<.7?kind:'round',x2,z2,.8+R()*.5); n++; } }
     for(let i=0;i<EN;i+=3){ const q=ell(i/EN*TAU,13.6,0); if(paved(q[0],q[2],-1.5) || (rides && rides.blocked(q[0],q[2]))) continue; tree('palm',q[0],q[2],.95+R()*.25,G0); }
     for(let i=1;i<EN;i+=5){ const th=i/EN*TAU, q=ell(th,11.4,0); if(Math.abs(q[0]-LG.x)<6) continue; lamp(q[0],q[2],Math.atan2(LG.x-q[0],LG.z-q[2])); if(i%10===1){ const b=ell(th+.045,10.6,0); bench(b[0],b[2],Math.atan2(LG.x-b[0],LG.z-b[2])); } }
-    for(const kind of Object.keys(trees)) if(trees[kind].length){ const f=GF.forest(kind,trees[kind],kind.length); f.userData.dynamic=true; f.traverse(o=>{ if(o.isMesh) o.userData.noFar=true; }); gMid.add(f); }
-    // lõi tán đặc bên trong tán lá: nhìn từ xa / từ trên cao (tháp 80 m, vòng quay 90 m) lá thẻ mỏng biến mất, lõi này giữ cho cây vẫn là cây
+    // rừng cây chia theo 2 bộ (Bắc / Nam) để ẩn hiện theo khoảng cách riêng; lõi tán đặc bên trong tán lá: nhìn từ xa / từ trên cao lá thẻ mỏng biến mất, lõi giữ cho cây vẫn là cây
     const BL={shade:[6.0,2.3,1.8], round:[3.1,1.3,1.0], tier:[4.0,1.5,2.0]}, bg=new THREE.IcosahedronGeometry(1,1), bm=new THREE.MeshStandardMaterial({color:0xffffff, roughness:.95, flatShading:true}), cq=new THREE.Quaternion(), cs=new THREE.Vector3(), cp=new THREE.Vector3(), cm=new THREE.Matrix4(), cc=new THREE.Color(), upY=new THREE.Vector3(0,1,0);
-    for(const kind of ['shade','round','tier']){ const L=trees[kind]; if(!L.length) continue; const [cy,rx,ry]=BL[kind], im=new THREE.InstancedMesh(bg,bm,L.length);
-      L.forEach((o,i)=>{ cq.setFromAxisAngle(upY,o.r); cm.compose(cp.set(o.x,o.y+cy*o.s,o.z),cq,cs.set(rx*o.s,ry*o.s,rx*o.s)); im.setMatrixAt(i,cm); im.setColorAt(i,cc.setHSL(.29+((i*37)%10)/150,.5,.09+((i*13)%7)/110)); });
-      im.castShadow=false; im.receiveShadow=true; im.userData.dynamic=true; im.computeBoundingSphere(); gLand.add(im); } }
+    SETS.forEach((S,si)=>{ for(const kind of Object.keys(trees)){ const L=trees[kind].filter(o=>(o.z<862)===(si===0)); if(!L.length) continue;
+        const f=GF.forest(kind,L,kind.length+si); f.userData.dynamic=true; f.traverse(o=>{ if(o.isMesh) o.userData.noFar=true; }); S.gMid.add(f); if(!BL[kind]) continue;
+        const [cy,rx,ry]=BL[kind], im=new THREE.InstancedMesh(bg,bm,L.length); L.forEach((o,i)=>{ cq.setFromAxisAngle(upY,o.r); cm.compose(cp.set(o.x,o.y+cy*o.s,o.z),cq,cs.set(rx*o.s,ry*o.s,rx*o.s)); im.setMatrixAt(i,cm); im.setColorAt(i,cc.setHSL(.29+((i*37)%10)/150,.5,.09+((i*13)%7)/110)); });
+        im.castShadow=false; im.receiveShadow=true; im.userData.dynamic=true; im.computeBoundingSphere(); S.gLand.add(im); } }); }
 
-  for(const m of kL.build(gLand)) m.userData.noFar=true; for(const m of kF.build(gFar)) m.userData.noFar=true; kN.build(gNear,{cast:false});
+  for(const S of SETS){ for(const m of S.kL.build(S.gLand)) m.userData.noFar=true; for(const m of S.kF.build(S.gFar)) m.userData.noFar=true; S.kN.build(S.gNear,{cast:false}); }
   PLACES.push({icon:'🎢', name:'Công viên Kỳ Quan · Cổng chính', sub:'Công viên chủ đề mới: Đại lộ Ánh Sao, phố ẩm thực, Hồ Pha Lê + 5 siêu trò chơi', go:()=>teleport(40,410,40,440)},
     {icon:'⛲', name:'Công viên Kỳ Quan · Quảng trường & Hồ Pha Lê', sub:'Đài phun nước nhạc, cầu đá, vọng lâu giữa hồ', go:()=>teleport(40,549,40,620)});
 
   /* ============================== khung hình ============================== */
-  const API={G0, hf, sdf, dLG, paved, rides, gFar, gMid, gNear, hide:false};
-  let tt=0; HOOK.onFrame.push((dt)=>{ dt=Math.min(dt,.1); tt+=dt; const d=Math.hypot(P.x-46,P.z-640), near=d<430 && !API.hide, mid=d<520 && !API.hide, far=d<560 && !API.hide, land=d<1050 && !API.hide;   /* API.hide: chỉ dùng khi đo hiệu năng */
-    if(gMid.visible!==mid) gMid.visible=mid; if(gLand.visible!==land) gLand.visible=land; if(gNear.visible!==near) gNear.visible=near; if(gFar.visible!==far) gFar.visible=far;
-    if(near && d<330) updJets(tt); if(rides) rides.update(dt,tt,near); });
+  MS.all=Math.round(performance.now()-tm0); const API={G0, hf, sdf, dLG, paved, rides, land2, dark, play, SETS, hide:false, ms:MS};
+  let tt=0; HOOK.onFrame.push((dt)=>{ dt=Math.min(dt,.1); tt+=dt; let anyNear=false;
+    for(const S of SETS){ const d=S.d=Math.hypot(P.x-S.cx,P.z-clamp(P.z,S.cz-60,S.cz+60)), near=d<430 && !API.hide, mid=d<520 && !API.hide, far=d<560 && !API.hide, land=d<1050 && !API.hide;   /* API.hide: chỉ dùng khi đo hiệu năng */
+      if(S.gMid.visible!==mid) S.gMid.visible=mid; if(S.gLand.visible!==land) S.gLand.visible=land; if(S.gNear.visible!==near) S.gNear.visible=near; if(S.gFar.visible!==far) S.gFar.visible=far; anyNear=anyNear||near; }
+    if(SETS[0].gNear.visible && SETS[0].d<330) updJets(tt); if(rides) rides.update(dt,tt,anyNear);
+    /* hộp trời của game chỉ rộng ±1000 m quanh gốc – khu Nam (z tới 1230) nằm ngoài nên trời bị đen → cho hộp trời đi theo người chơi */
+    if(W.sky){ W.sky.position.x=P.x; W.sky.position.z=P.z; } });
   return API;
 }

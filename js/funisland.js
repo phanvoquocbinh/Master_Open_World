@@ -2,7 +2,10 @@
 //  🚡 CÁP TREO DÀI ~170 m từ bờ Nam đảo Master Dashboard bay qua biển (trụ giữa cao 48 m) – ngắm biển, đảo, thành phố
 //  🎢 Tàu lượn siêu tốc "Siêu Bug" (dốc 24 m, xoắn ốc) · 🗼 Tháp rơi tự do 60 m · 🏴‍☠️ Thuyền hải tặc đu 75° · 👻 Nhà ma đi xe xuyên đường hầm tối
 //  🎠 Đu quay ngựa gỗ, cổng lâu đài, cờ, đèn, quầy kem, khách bot xếp hàng. Mọi trò: E để lên (vé), camera bám theo cảm giác mạnh.
-export function makeFunIsland(W, ctx){
+import { shiftView } from './worldshift.js';
+export function makeFunIsland(W, ctx, opt={}){
+  W=shiftView(W, opt.dx||0, opt.dz||0);   // V2 (wonder_v2.js): dời cả đảo theo (dx, dz) – V1 không truyền opt → W giữ nguyên
+  const CABLE=opt.cable!==false, SH=W.SHIFT, toW=SH ? SH.toW : (v=>v), toL=SH ? SH.toL : (v=>v);   // V2: bỏ cáp treo dài (đảo chính V1 không còn)
   const {askPay, spend, ui} = ctx;
   const {THREE, scene, P, me, HOOK, INTER, PLACES, toast, circles, boxes, addPlat, mergeGeometries, GLOW, teleport, makeLabel, makeActor, cam, EXTL, WATER_Y, edgeR, clamp, lerp} = W;
   const TAU=Math.PI*2, R=Math.random;
@@ -45,7 +48,7 @@ export function makeFunIsland(W, ctx){
   const TWR={x:(SA.x+SB.x)/2, z:(SA.z+SB.z)/2, h:48}, CAB=[];
   const lineDir=[SB.x-SA.x, SB.z-SA.z], LL=Math.hypot(...lineDir), ux=lineDir[0]/LL, uz=lineDir[1]/LL, lat=[-uz, ux];
   const cabY=u=>{ const a=2.6, top=TWR.h-4; return a+(top-a)*Math.pow(Math.sin(Math.PI*u),.85); };
-  { // ga 2 đầu: sàn + mái + cột, cầu tàu nối bờ đảo chính
+  if(CABLE){ // ga 2 đầu: sàn + mái + cột, cầu tàu nối bờ đảo chính
     for(const [S,face] of [[SA,Math.atan2(ux,uz)],[SB,Math.atan2(-ux,-uz)]]){ k.add(new THREE.BoxGeometry(12,.4,10), M.white, S.x,1.0,S.z, 0,face,0); k.add(new THREE.BoxGeometry(13,.4,11), M.teal, S.x,7.2,S.z, 0,face,0); addPlat(S.x,S.z,face,6,5,1.2);
       for(const sx of [-1,1]) for(const sz of [-1,1]){ const c=Math.cos(face), s=Math.sin(face), lx=sx*5.5, lz=sz*4.5, x=S.x+lx*c+lz*s, z=S.z-lx*s+lz*c; k.add(new THREE.CylinderGeometry(.25,.3,7.2,10), M.steel, x,3.6,z); circles.push({x,z,r:.3}); }
       k.add(new THREE.CylinderGeometry(2.2,2.2,.6,24), M.dark, S.x+ux*(S===SA?3:-3),6.4,S.z+uz*(S===SA?3:-3)); }
@@ -64,7 +67,7 @@ export function makeFunIsland(W, ctx){
     for(const s of [-3,3]){ const pts=[]; for(let i=0;i<=60;i++){ const u=i/60; pts.push(V3(SA.x+ux*LL*u+lat[0]*s, cabY(u)+2.2, SA.z+uz*LL*u+lat[1]*s)); } k.addG(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),120,.05,4,false), M.dark); }
     makeLabel('🚡 Cáp treo ra Đảo QC Wonderland', 'Vé 15 💰 · bay ~170 m qua biển', {h:.6, x:SA.x, y:9.5, z:SA.z, fade:80}); }
   const cabMat=sm(0xffcf3a,.4), glassM=new THREE.MeshStandardMaterial({color:0x9fd6ff, roughness:.05, metalness:.6, transparent:true, opacity:.35, side:THREE.DoubleSide, depthWrite:false});
-  for(let i=0;i<2;i++){ const g=new THREE.Group(); g.userData.dynamic=true; scene.add(g); const body=new THREE.Mesh(new THREE.BoxGeometry(2.6,2.2,2.6), glassM); body.position.y=-1.4; g.add(body); const roof=new THREE.Mesh(new THREE.BoxGeometry(2.8,.25,2.8), i?M.red:cabMat); roof.position.y=-.2; g.add(roof); const fl=new THREE.Mesh(new THREE.BoxGeometry(2.8,.2,2.8), i?M.red:cabMat); fl.position.y=-2.55; g.add(fl);
+  for(let i=0;i<(CABLE?2:0);i++){ const g=new THREE.Group(); g.userData.dynamic=true; scene.add(g); const body=new THREE.Mesh(new THREE.BoxGeometry(2.6,2.2,2.6), glassM); body.position.y=-1.4; g.add(body); const roof=new THREE.Mesh(new THREE.BoxGeometry(2.8,.25,2.8), i?M.red:cabMat); roof.position.y=-.2; g.add(roof); const fl=new THREE.Mesh(new THREE.BoxGeometry(2.8,.2,2.8), i?M.red:cabMat); fl.position.y=-2.55; g.add(fl);
     const arm=new THREE.Mesh(new THREE.BoxGeometry(.12,2.2,.12), M.steel); arm.position.y=.9; g.add(arm); CAB.push({g, u:i, side:i?3:-3}); }
   const CC={u:0, dir:1, dwell:8, riding:null};   // cabin 0 đi u: 0→1, cabin 1 ngược lại
   function cabPos(c){ const u=c===CAB[0]?CC.u:1-CC.u; return {x:SA.x+ux*LL*u+lat[0]*c.side, y:cabY(u), z:SA.z+uz*LL*u+lat[1]*c.side}; }
@@ -75,8 +78,8 @@ export function makeFunIsland(W, ctx){
     pay(15, '🚡 Vé cáp treo ra <b>Đảo QC Wonderland</b>', ()=>{ CC.riding={c, toB:atA}; toast('🚡 Ngồi vững nhé – cabin bay qua biển, kéo chuột để ngắm cảnh!', 3200);
       startRide('cable', ()=>{ const p=cabPos(c); seatPlayer({x:p.x, y:p.y+.2, z:p.z}, Math.atan2(lat[0],lat[1])); if(!W.dragging) cam.yaw+=.004; }, {camDist:10}); }); }
   function arriveCab(){ const r=CC.riding; if(!r) return; const u=r.c===CAB[0]?CC.u:1-CC.u, S=u>.5?SB:SA; CC.riding=null; endRide({x:S.x-ux*(u>.5?-2:2), z:S.z-uz*(u>.5?-2:2)}); toast(u>.5?'🎡 Chào mừng tới Đảo QC Wonderland!':'🏝️ Đã về đảo Master Dashboard.', 2600); }
-  INTER.push({x:SA.x, z:SA.z, r:4, prio:.9, when:()=>!ride.kind, label:'🚡 Cáp treo ra Đảo QC Wonderland – 15 💰 (E)', action:()=>boardCab(true)});
-  INTER.push({x:SB.x, z:SB.z, r:4, prio:.9, when:()=>!ride.kind, label:'🚡 Cáp treo về đảo Master Dashboard – 15 💰 (E)', action:()=>boardCab(false)});
+  if(CABLE) INTER.push({x:SA.x, z:SA.z, r:4, prio:.9, when:()=>!ride.kind, label:'🚡 Cáp treo ra Đảo QC Wonderland – 15 💰 (E)', action:()=>boardCab(true)});
+  if(CABLE) INTER.push({x:SB.x, z:SB.z, r:4, prio:.9, when:()=>!ride.kind, label:'🚡 Cáp treo về đảo Master Dashboard – 15 💰 (E)', action:()=>boardCab(false)});
 
   /* ============================== 🏰 CỔNG + QUẢNG TRƯỜNG + ĐU QUAY NGỰA ============================== */
   { const gx=SB.x+3, gz=SB.z+12; for(const s of [-1,1]){ k.add(new THREE.CylinderGeometry(1.4,1.6,9,12), M.pink, gx+s*5,4.5,gz); k.add(new THREE.ConeGeometry(1.9,3.4,12), M.purple, gx+s*5,10.7,gz); circles.push({x:gx+s*5, z:gz, r:1.7}); }
@@ -106,7 +109,7 @@ export function makeFunIsland(W, ctx){
     makeLabel('🎢 Tàu lượn Siêu Bug', 'Vé 25 💰 · dốc 24 m · xoắn ốc', {h:.6, x:33, y:Y+8, z:262, fade:80}); }
   const train=[0,1,2].map(i=>{ const g=new THREE.Group(); g.userData.dynamic=true; scene.add(g); const b=new THREE.Mesh(new THREE.BoxGeometry(1.4,.55,2.1), [M.yellow,M.blue,M.green][i]); b.position.y=.35; g.add(b); const s=new THREE.Mesh(new THREE.BoxGeometry(1.2,.6,.25), M.dark); s.position.set(0,.8,-.7); g.add(s); const nose=new THREE.Mesh(new THREE.BoxGeometry(1.42,.3,.3), M.red); nose.position.set(0,.5,1.05); g.add(nose); return g; });
   const CO={s:ST0+6, v:0, state:'dwell', t:8, riding:false};
-  function placeTrain(){ train.forEach((g,i)=>{ const q=cAt(CO.s-i*2.3); g.position.copy(q.p); g.lookAt(q.p.clone().add(q.t)); }); }
+  function placeTrain(){ train.forEach((g,i)=>{ const q=cAt(CO.s-i*2.3); g.position.copy(q.p); g.lookAt(toW(q.p.clone().add(q.t))); }); }
   function updCoaster(dt){ const sNorm=((CO.s%CL)+CL)%CL;
     if(CO.state==='dwell'){ CO.t-=dt; CO.v=0; if(CO.t<=0){ CO.state='run'; whoosh(.08,2,200,600); } }
     else { const p=cAt(CO.s), h=p.p.y-Y; let v=CO.v;
@@ -151,7 +154,7 @@ export function makeFunIsland(W, ctx){
     SHIP.a=SHIP.amp*Math.sin(SHIP.t*TAU/T); shipPivot.rotation.z=SHIP.a; }
   INTER.push({x:SHIP.x, z:SHIP.z-6, r:3, prio:.9, when:()=>!ride.kind, label:'🏴‍☠️ Lên thuyền hải tặc – 20 💰 (E)', action:()=>{ if(SHIP.st!=='idle') return toast('🏴‍☠️ Thuyền đang đu – đợi lượt sau!', 1800);
     pay(20, '🏴‍☠️ Vé <b>thuyền hải tặc</b>', ()=>{ SHIP.riding=true; SHIP.st='run'; SHIP.t=0; SHIP.amp=.05;
-      startRide('ship', ()=>{ const loc=V3(5,-8.4,1), w=loc.clone(); shipPivot.localToWorld(w); seatPlayer(w, Math.PI); HOOK.camOverride={pos:shipPivot.localToWorld(V3(7.5,-6.4,3.5)), look:shipPivot.localToWorld(V3(-8,-8,0)), k:12}; }, {}); }); }});
+      startRide('ship', ()=>{ const loc=V3(5,-8.4,1), w=loc.clone(); toL(shipPivot.localToWorld(w)); seatPlayer(w, Math.PI); HOOK.camOverride={pos:toL(shipPivot.localToWorld(V3(7.5,-6.4,3.5))), look:toL(shipPivot.localToWorld(V3(-8,-8,0))), k:12}; }, {}); }); }});
 
   /* ============================== 👻 NHÀ MA ĐI XE ============================== */
   const HH={x0:73, x1:97, z0:322, z1:338};
@@ -182,7 +185,7 @@ export function makeFunIsland(W, ctx){
   function updHaunt(dt, T){ if(!HC.riding){ for(const s of scares) if(s.g) s.g.visible=false; return; }
     HC.s+=dt*1.6; const {p,t}=placeHC();
     for(const s of scares){ if(s.light){ s.light.visible=Math.sin(T*9+s.light.position.x)>.2; continue; } const d=Math.hypot(p.x-s.x,p.z-s.z); if(d<3.2 && !s.done){ s.done=true; s.g.visible=true; s.t=0; boo(); toast(['👻 BOOO!','💀 Áaaa!','🐛 Bug khổng lồ!!'][s.kind], 1200); }
-      if(s.g.visible){ s.t+=dt; s.g.scale.setScalar(Math.min(1.4, .3+s.t*2.5)); s.g.lookAt(p.x, Y+1.3, p.z); if(s.t>1.6) s.g.visible=false; } }
+      if(s.g.visible){ s.t+=dt; s.g.scale.setScalar(Math.min(1.4, .3+s.t*2.5)); s.g.lookAt(toW(V3(p.x, Y+1.3, p.z))); if(s.t>1.6) s.g.visible=false; } }
     if(HC.s>=HP.L-.2){ HC.riding=false; HC.s=0; placeHC(); for(const s of scares) s.done=false; endRide({x:85, z:315}); toast('👻 Thoát khỏi Nhà Ma Bug! Can đảm ghê 😄', 2600); } }
   INTER.push({x:85, z:316.5, r:3, prio:.9, when:()=>!ride.kind, label:'👻 Đi xe vào Nhà Ma Bug – 20 💰 (E)', action:()=>pay(20, '👻 Vé <b>Nhà Ma Bug</b>', ()=>{ HC.riding=true; HC.s=0; toast('👻 Xe từ từ tiến vào bóng tối…', 2600);
     startRide('haunt', ()=>{ const {p,t}=placeHC(), seat=p.clone().add(V3(0,.65,0)); seatPlayer(seat, Math.atan2(t.x,t.z)); HOOK.camOverride={pos:seat.clone().addScaledVector(t,-1.6).add(V3(0,1.3,0)), look:seat.clone().addScaledVector(t,6).add(V3(0,.6,0)), k:10}; }, {}); })});
@@ -197,11 +200,11 @@ export function makeFunIsland(W, ctx){
   makeLabel('🎡 Đảo QC Wonderland', 'Tàu lượn · tháp rơi · thuyền hải tặc · nhà ma', {h:1.0, x:IC.x, y:Y+22, z:IC.z, fade:300});
   /* ============================== khung hình ============================== */
   HOOK.onFrame.push((dt, T)=>{ dt=Math.min(dt,.1);
-    updCable(dt);
+    if(CABLE) updCable(dt);
     const near=!W.inside && Math.hypot(P.x-IC.x,P.z-IC.z)<170;
     if(near || ride.kind){ updCoaster(dt); updDrop(dt); updShip(dt); updHaunt(dt, T); carousel.rotation.y+=dt*.35; for(const a of bots) if(a.root.visible) a.mixer.update(dt); }
     if(ride.kind && W.applyPose) W.applyPose('sit'); });
-  PLACES.push({icon:'🎡', name:'Đảo QC Wonderland', sub:'Công viên giải trí: tàu lượn, tháp rơi 60 m, thuyền hải tặc, nhà ma · đi cáp treo từ bờ Nam đảo', go:()=>teleport(SB.x+3, SB.z+6, IC.x, IC.z)},
-              {icon:'🚡', name:'Ga cáp treo ra Đảo Wonderland', sub:'Bờ Nam đảo Master Dashboard · bay ~170 m qua biển', go:()=>teleport(SA.x-ux*6, SA.z-uz*6, SA.x, SA.z)});
+  PLACES.push({icon:'🎡', name:'Đảo QC Wonderland', sub:'Công viên giải trí: tàu lượn, tháp rơi 60 m, thuyền hải tặc, nhà ma · '+(CABLE?'đi cáp treo từ bờ Nam đảo':'đi cầu G8 từ cổng Nam Sân bay'), go:()=>teleport(SB.x+3, SB.z+6, IC.x, IC.z)});
+  if(CABLE) PLACES.push({icon:'🚡', name:'Ga cáp treo ra Đảo Wonderland', sub:'Bờ Nam đảo Master Dashboard · bay ~170 m qua biển', go:()=>teleport(SA.x-ux*6, SA.z-uz*6, SA.x, SA.z)});
   return {IC, SA, SB, CO, DT, SHIP, HC, CC};
 }
