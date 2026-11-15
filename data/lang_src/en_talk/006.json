@@ -1,58 +1,294 @@
 {
-  "no": 6,
-  "lv": "a1",
-  "title": "Đi taxi / xe công nghệ",
-  "sub": "To the Riverside Hotel, please",
-  "situation": "Anna (khách du lịch) vừa đến TP. Hồ Chí Minh và đặt xe qua ứng dụng gọi xe. Tài xế Tuấn đến đón ở sân bay. Hai người xác nhận tên, cất hành lý, nói chuyện về thời gian đi, điều hoà, chỗ dừng và cách trả tiền. Bạn có thể tập vai tài xế nói tiếng Anh với khách nước ngoài.",
-  "lang": "en-GB",
-  "lines": [
-    {"s": "Tuan", "g": "m", "t": "Hi, are you Anna?", "vi": "Chào chị, chị là Anna phải không?"},
-    {"s": "Anna", "g": "f", "t": "Yes, that's me. You're Tuan, right?", "vi": "Vâng, là tôi. Anh là Tuấn đúng không?"},
-    {"s": "Tuan", "g": "m", "t": "That's right. To the Riverside Hotel in District One?", "vi": "Đúng rồi. Đến khách sạn Riverside ở Quận 1 phải không chị?"},
-    {"s": "Anna", "g": "f", "t": "Yes, please. Could you open the boot? I've got a big suitcase.", "vi": "Vâng. Anh mở cốp xe giúp tôi được không? Tôi có một va li to."},
-    {"s": "Tuan", "g": "m", "t": "Sure, I'll put it in for you.", "vi": "Được, để tôi cất vào cho chị."},
-    {"s": "Anna", "g": "f", "t": "Thanks. How long does it take to get there?", "vi": "Cảm ơn anh. Đi đến đó mất bao lâu?"},
-    {"s": "Tuan", "g": "m", "t": "About thirty minutes. There's a lot of traffic now.", "vi": "Khoảng ba mươi phút. Giờ này đường đông xe lắm."},
-    {"s": "Anna", "g": "f", "t": "OK. Can you turn on the air conditioning, please? It's so hot today.", "vi": "Vâng. Anh bật điều hoà giúp tôi được không? Hôm nay nóng quá."},
-    {"s": "Tuan", "g": "m", "t": "No problem. Is that OK?", "vi": "Không vấn đề gì. Vậy được chưa chị?"},
-    {"s": "Anna", "g": "f", "t": "That's great, thanks.", "vi": "Tốt rồi, cảm ơn anh."},
-    {"s": "Tuan", "g": "m", "t": "Here we are. The Riverside Hotel.", "vi": "Đến rồi. Khách sạn Riverside."},
-    {"s": "Anna", "g": "f", "t": "Can you stop just here, by the entrance?", "vi": "Anh dừng ngay đây, cạnh lối vào được không?"},
-    {"s": "Tuan", "g": "m", "t": "Sure. It's one hundred and twenty thousand dong. You can pay cash or in the app.", "vi": "Được. Một trăm hai mươi nghìn đồng. Chị trả tiền mặt hoặc trên ứng dụng đều được."},
-    {"s": "Anna", "g": "f", "t": "I'll pay cash. Here you are.", "vi": "Tôi trả tiền mặt. Gửi anh."},
-    {"s": "Tuan", "g": "m", "t": "Thank you. Oh, don't forget your phone!", "vi": "Cảm ơn chị. Ồ, chị đừng quên điện thoại!"},
-    {"s": "Anna", "g": "f", "t": "Oh, thank you! Have a good day.", "vi": "Ôi, cảm ơn anh! Chúc anh một ngày tốt lành."}
-  ],
-  "phrases": [
-    {"t": "Are you Anna? / You're Tuan, right?", "vi": "Chị là Anna phải không? / Anh là Tuấn đúng không?", "note": "Xác nhận đúng người trước khi lên xe – quan trọng cho an toàn. Khách có thể hỏi thêm: “What's your number plate?” (biển số xe của anh là gì?). “…, right?” cuối câu = …, đúng không?"},
-    {"t": "To the Riverside Hotel, please. / Can you take me to…?", "vi": "Cho tôi đến khách sạn Riverside. / Anh chở tôi đến… được không?", "note": "Tài xế taxi hỏi: “Where to?” (đi đâu?). Lỗi: “Go to hotel” (cộc, thiếu the) – nói “To the hotel, please.”"},
-    {"t": "Could you open the boot?", "vi": "Anh mở cốp xe giúp tôi được không?", "note": "Anh-Anh: boot; Anh-Mỹ: trunk. Hành lý: suitcase (va li), luggage/bags (hành lý nói chung)."},
-    {"t": "How long does it take to get there?", "vi": "Đi đến đó mất bao lâu?", "note": "Cấu trúc: How long does it take (to + động từ)? Trả lời: “About thirty minutes.” Lỗi: “How long it takes?” / “How long time?”"},
-    {"t": "Can you turn on the air conditioning, please?", "vi": "Anh bật điều hoà giúp tôi được không?", "note": "turn on / turn off (bật / tắt), turn up / turn down (tăng / giảm). Ví dụ: “Could you turn the music down a bit?” (vặn nhỏ nhạc một chút). Nói ngắn: “the AC” hoặc “the air con” (Anh)."},
-    {"t": "Can you stop just here, please?", "vi": "Anh dừng ngay đây giúp tôi.", "note": "Biến thể: “Just here is fine, thanks.”, “Can you drop me off at the corner?” (thả tôi ở góc đường). drop off = thả khách; pick up = đón khách."},
-    {"t": "You can pay cash or in the app.", "vi": "Có thể trả tiền mặt hoặc trên ứng dụng.", "note": "Khách hỏi: “Can I pay by card?” / “How much is it?” Đi taxi truyền thống nên hỏi trước: “Do you use the meter?” (anh có bật đồng hồ tính tiền không?)."},
-    {"t": "Don't forget your phone!", "vi": "Đừng quên điện thoại nhé!", "note": "Câu nhắc nhở thân thiện. Biến thể: “Have you got everything?” (Chị lấy đủ đồ chưa?)."},
-    {"t": "Here we are.", "vi": "Đến nơi rồi.", "note": "Câu tài xế/người dẫn đường hay nói khi tới nơi. Khác với “Here you are.” = Gửi bạn (khi đưa đồ, đưa tiền)."}
-  ],
-  "qs": [
-    {"q": "Where is Anna going?", "o": ["To the airport", "To the Riverside Hotel", "To the market"], "a": 1, "e": "Tuấn hỏi: “To the Riverside Hotel in District One?” và Anna đáp “Yes, please.”"},
-    {"q": "What does Anna have?", "o": ["A big suitcase", "A small bag", "Two boxes"], "a": 0, "e": "Anna nói: “I've got a big suitcase.” – nên cô nhờ mở cốp xe (boot)."},
-    {"q": "How long is the journey?", "a": "about thirty minutes", "alt": ["thirty minutes", "30 minutes", "about 30 minutes", "30"], "e": "Tuấn nói: “About thirty minutes.”"},
-    {"q": "Why is the journey slow?", "o": ["It's raining.", "The road is closed.", "There's a lot of traffic."], "a": 2, "e": "Tuấn nói: “There's a lot of traffic now.” – traffic = xe cộ trên đường."},
-    {"q": "What does Anna ask the driver to turn on?", "o": ["The radio", "The air conditioning", "The lights"], "a": 1, "e": "Anna nói: “Can you turn on the air conditioning, please? It's so hot today.”"},
-    {"q": "How does Anna pay?", "o": ["In cash", "In the app", "By card"], "a": 0, "e": "Anna nói: “I'll pay cash.”"},
-    {"q": "What does Anna almost forget?", "o": ["Her suitcase", "Her money", "Her phone"], "a": 2, "e": "Tuấn nhắc: “Oh, don't forget your phone!”"}
-  ],
-  "exercises": [
-    {"t": "fill", "q": "How long does it ___ to get there?", "a": "take", "e": "Hỏi thời gian di chuyển: How long does it take to get there?"},
-    {"t": "fill", "q": "Can you turn ___ the air conditioning, please? It's so hot.", "a": "on", "e": "turn on = bật; turn off = tắt."},
-    {"t": "order", "q": "Sắp xếp thành câu nhờ tài xế dừng xe:", "w": ["just", "stop", "here,", "you", "please?", "Can"], "a": "Can you stop just here, please?", "e": "Can you + động từ + …, please? – câu nhờ vả lịch sự."},
-    {"t": "dict", "say": "Could you open the boot, please?", "a": "Could you open the boot, please?", "e": "boot = cốp xe (Anh-Anh). Could you…? lịch sự hơn Can you…?"},
-    {"t": "listen", "say": "Hi! Where to?", "q": "Tài xế taxi hỏi bạn. Chọn câu đáp phù hợp nhất:", "o": ["Yes, that's me.", "To the airport, please.", "It's thirty minutes."], "a": 1, "e": "“Where to?” = Đi đâu ạ? → trả lời điểm đến: “To the airport, please.”"}
-  ],
-  "practice": [
-    {"p": "Bạn bắt taxi ở sân bay về khách sạn, hỏi giá ước tính trước khi đi và nhờ tài xế bật đồng hồ.", "model": "Hi. To the Grand Lotus Hotel, please. How much is it, more or less? … Do you use the meter? … OK, great. Thanks.", "vi": "Chào anh. Cho tôi đến khách sạn Grand Lotus. Khoảng bao nhiêu tiền vậy? … Anh có bật đồng hồ không? … Vâng, tốt quá. Cảm ơn anh."},
-    {"p": "Bạn đặt xe công nghệ, tài xế gọi điện vì không tìm thấy bạn. Hãy mô tả bạn đang đứng ở đâu và mặc gì.", "model": "Hi, I'm in front of the pharmacy, next to the bus stop. I'm wearing a red T-shirt and I have a black backpack.", "vi": "Chào anh, tôi đang đứng trước nhà thuốc, cạnh trạm xe buýt. Tôi mặc áo thun đỏ và đeo ba lô đen."},
-    {"p": "Đổi vai: bạn là tài xế Tuấn – xác nhận tên khách, điểm đến, cất hành lý, báo thời gian và giá.", "model": "Hi, are you Anna? … To the Riverside Hotel? … Sure, I'll put your suitcase in the boot. … It takes about thirty minutes. … Here we are. It's one hundred and twenty thousand dong.", "vi": "Chào chị, chị là Anna phải không? … Đến khách sạn Riverside ạ? … Để tôi cất va li vào cốp. … Mất khoảng ba mươi phút. … Đến rồi. Một trăm hai mươi nghìn đồng ạ."}
-  ]
+ "no": 6,
+ "lv": "a1",
+ "title": "Đi taxi / xe công nghệ",
+ "sub": "To the Riverside Hotel, please",
+ "situation": "Anna (khách du lịch) vừa đến TP. Hồ Chí Minh và đặt xe qua ứng dụng gọi xe. Tài xế Tuấn đến đón ở sân bay. Hai người xác nhận tên, cất hành lý, nói chuyện về thời gian đi, điều hoà, chỗ dừng và cách trả tiền. Bạn có thể tập vai tài xế nói tiếng Anh với khách nước ngoài.",
+ "lang": "en-GB",
+ "lines": [
+  {
+   "s": "Tuan",
+   "g": "m",
+   "t": "Hi, are you Anna?",
+   "vi": "Chào chị, chị là Anna phải không?"
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Yes, that's me. You're Tuan, right?",
+   "vi": "Vâng, là tôi. Anh là Tuấn đúng không?"
+  },
+  {
+   "s": "Tuan",
+   "g": "m",
+   "t": "That's right. To the Riverside Hotel in District One?",
+   "vi": "Đúng rồi. Đến khách sạn Riverside ở Quận 1 phải không chị?"
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Yes, please. Could you open the boot? I've got a big suitcase.",
+   "vi": "Vâng. Anh mở cốp xe giúp tôi được không? Tôi có một va li to."
+  },
+  {
+   "s": "Tuan",
+   "g": "m",
+   "t": "Sure, I'll put it in for you.",
+   "vi": "Được, để tôi cất vào cho chị."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Thanks. How long does it take to get there?",
+   "vi": "Cảm ơn anh. Đi đến đó mất bao lâu?"
+  },
+  {
+   "s": "Tuan",
+   "g": "m",
+   "t": "About thirty minutes. There's a lot of traffic now.",
+   "vi": "Khoảng ba mươi phút. Giờ này đường đông xe lắm."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "OK. Can you turn on the air conditioning, please? It's so hot today.",
+   "vi": "Vâng. Anh bật điều hoà giúp tôi được không? Hôm nay nóng quá."
+  },
+  {
+   "s": "Tuan",
+   "g": "m",
+   "t": "No problem. Is that OK?",
+   "vi": "Không vấn đề gì. Vậy được chưa chị?"
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "That's great, thanks.",
+   "vi": "Tốt rồi, cảm ơn anh."
+  },
+  {
+   "s": "Tuan",
+   "g": "m",
+   "t": "Here we are. The Riverside Hotel.",
+   "vi": "Đến rồi. Khách sạn Riverside."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Can you stop just here, by the entrance?",
+   "vi": "Anh dừng ngay đây, cạnh lối vào được không?"
+  },
+  {
+   "s": "Tuan",
+   "g": "m",
+   "t": "Sure. It's one hundred and twenty thousand dong. You can pay cash or in the app.",
+   "vi": "Được. Một trăm hai mươi nghìn đồng. Chị trả tiền mặt hoặc trên ứng dụng đều được."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "I'll pay cash. Here you are.",
+   "vi": "Tôi trả tiền mặt. Gửi anh."
+  },
+  {
+   "s": "Tuan",
+   "g": "m",
+   "t": "Thank you. Oh, don't forget your phone!",
+   "vi": "Cảm ơn chị. Ồ, chị đừng quên điện thoại!"
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Oh, thank you! Have a good day.",
+   "vi": "Ôi, cảm ơn anh! Chúc anh một ngày tốt lành."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "Are you Anna? / You're Tuan, right?",
+   "vi": "Chị là Anna phải không? / Anh là Tuấn đúng không?",
+   "note": "Xác nhận đúng người trước khi lên xe – quan trọng cho an toàn. Khách có thể hỏi thêm: “What's your number plate?” (biển số xe của anh là gì?). “…, right?” cuối câu = …, đúng không?"
+  },
+  {
+   "t": "To the Riverside Hotel, please. / Can you take me to…?",
+   "vi": "Cho tôi đến khách sạn Riverside. / Anh chở tôi đến… được không?",
+   "note": "Tài xế taxi hỏi: “Where to?” (đi đâu?). Lỗi: “Go to hotel” (cộc, thiếu the) – nói “To the hotel, please.”"
+  },
+  {
+   "t": "Could you open the boot?",
+   "vi": "Anh mở cốp xe giúp tôi được không?",
+   "note": "Anh-Anh: boot; Anh-Mỹ: trunk. Hành lý: suitcase (va li), luggage/bags (hành lý nói chung)."
+  },
+  {
+   "t": "How long does it take to get there?",
+   "vi": "Đi đến đó mất bao lâu?",
+   "note": "Cấu trúc: How long does it take (to + động từ)? Trả lời: “About thirty minutes.” Lỗi: “How long it takes?” / “How long time?”"
+  },
+  {
+   "t": "Can you turn on the air conditioning, please?",
+   "vi": "Anh bật điều hoà giúp tôi được không?",
+   "note": "turn on / turn off (bật / tắt), turn up / turn down (tăng / giảm). Ví dụ: “Could you turn the music down a bit?” (vặn nhỏ nhạc một chút). Nói ngắn: “the AC” hoặc “the air con” (Anh)."
+  },
+  {
+   "t": "Can you stop just here, please?",
+   "vi": "Anh dừng ngay đây giúp tôi.",
+   "note": "Biến thể: “Just here is fine, thanks.”, “Can you drop me off at the corner?” (thả tôi ở góc đường). drop off = thả khách; pick up = đón khách."
+  },
+  {
+   "t": "You can pay cash or in the app.",
+   "vi": "Có thể trả tiền mặt hoặc trên ứng dụng.",
+   "note": "Khách hỏi: “Can I pay by card?” / “How much is it?” Đi taxi truyền thống nên hỏi trước: “Do you use the meter?” (anh có bật đồng hồ tính tiền không?)."
+  },
+  {
+   "t": "Don't forget your phone!",
+   "vi": "Đừng quên điện thoại nhé!",
+   "note": "Câu nhắc nhở thân thiện. Biến thể: “Have you got everything?” (Chị lấy đủ đồ chưa?)."
+  },
+  {
+   "t": "Here we are.",
+   "vi": "Đến nơi rồi.",
+   "note": "Câu tài xế/người dẫn đường hay nói khi tới nơi. Khác với “Here you are.” = Gửi bạn (khi đưa đồ, đưa tiền)."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Where is Anna going?",
+   "o": [
+    "To the airport",
+    "To the Riverside Hotel",
+    "To the market"
+   ],
+   "a": 1,
+   "e": "Tuấn hỏi: “To the Riverside Hotel in District One?” và Anna đáp “Yes, please.”"
+  },
+  {
+   "q": "What does Anna have?",
+   "o": [
+    "A big suitcase",
+    "A small bag",
+    "Two boxes"
+   ],
+   "a": 0,
+   "e": "Anna nói: “I've got a big suitcase.” – nên cô nhờ mở cốp xe (boot)."
+  },
+  {
+   "q": "How long is the journey?",
+   "a": "about thirty minutes",
+   "alt": [
+    "thirty minutes",
+    "30 minutes",
+    "about 30 minutes",
+    "30",
+    "half an hour",
+    "about half an hour"
+   ],
+   "e": "Tuấn nói: “About thirty minutes.”"
+  },
+  {
+   "q": "Why is the journey slow?",
+   "o": [
+    "It's raining.",
+    "The road is closed.",
+    "There's a lot of traffic."
+   ],
+   "a": 2,
+   "e": "Tuấn nói: “There's a lot of traffic now.” – traffic = xe cộ trên đường."
+  },
+  {
+   "q": "What does Anna ask the driver to turn on?",
+   "o": [
+    "The radio",
+    "The air conditioning",
+    "The lights"
+   ],
+   "a": 1,
+   "e": "Anna nói: “Can you turn on the air conditioning, please? It's so hot today.”"
+  },
+  {
+   "q": "How does Anna pay?",
+   "o": [
+    "In cash",
+    "In the app",
+    "By card"
+   ],
+   "a": 0,
+   "e": "Anna nói: “I'll pay cash.”"
+  },
+  {
+   "q": "What does Anna almost forget?",
+   "o": [
+    "Her suitcase",
+    "Her money",
+    "Her phone"
+   ],
+   "a": 2,
+   "e": "Tuấn nhắc: “Oh, don't forget your phone!”"
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "How long does it ___ to get there?",
+   "a": "take",
+   "e": "Hỏi thời gian di chuyển: How long does it take to get there?"
+  },
+  {
+   "t": "fill",
+   "q": "Can you turn ___ the air conditioning, please? It's so hot.",
+   "a": "on",
+   "e": "turn on = bật; turn off = tắt."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu nhờ tài xế dừng xe:",
+   "w": [
+    "just",
+    "stop",
+    "here,",
+    "you",
+    "please?",
+    "Can"
+   ],
+   "a": "Can you stop just here, please?",
+   "e": "Can you + động từ + …, please? – câu nhờ vả lịch sự.",
+   "alt": [
+    "Can you just stop here, please?"
+   ]
+  },
+  {
+   "t": "dict",
+   "say": "Could you open the boot, please?",
+   "a": "Could you open the boot, please?",
+   "e": "boot = cốp xe (Anh-Anh). Could you…? lịch sự hơn Can you…?"
+  },
+  {
+   "t": "listen",
+   "say": "Hi! Where to?",
+   "q": "Tài xế taxi hỏi bạn. Chọn câu đáp phù hợp nhất:",
+   "o": [
+    "Yes, that's me.",
+    "To the airport, please.",
+    "It's thirty minutes."
+   ],
+   "a": 1,
+   "e": "“Where to?” = Đi đâu ạ? → trả lời điểm đến: “To the airport, please.”"
+  }
+ ],
+ "practice": [
+  {
+   "p": "Bạn bắt taxi ở sân bay về khách sạn, hỏi giá ước tính trước khi đi và nhờ tài xế bật đồng hồ.",
+   "model": "Hi. To the Grand Lotus Hotel, please. How much is it, more or less? … Do you use the meter? … OK, great. Thanks.",
+   "vi": "Chào anh. Cho tôi đến khách sạn Grand Lotus. Khoảng bao nhiêu tiền vậy? … Anh có bật đồng hồ không? … Vâng, tốt quá. Cảm ơn anh."
+  },
+  {
+   "p": "Bạn đặt xe công nghệ, tài xế gọi điện vì không tìm thấy bạn. Hãy mô tả bạn đang đứng ở đâu và mặc gì.",
+   "model": "Hi, I'm in front of the pharmacy, next to the bus stop. I'm wearing a red T-shirt and I have a black backpack.",
+   "vi": "Chào anh, tôi đang đứng trước nhà thuốc, cạnh trạm xe buýt. Tôi mặc áo thun đỏ và đeo ba lô đen."
+  },
+  {
+   "p": "Đổi vai: bạn là tài xế Tuấn – xác nhận tên khách, điểm đến, cất hành lý, báo thời gian và giá.",
+   "model": "Hi, are you Anna? … To the Riverside Hotel? … Sure, I'll put your suitcase in the boot. … It takes about thirty minutes. … Here we are. It's one hundred and twenty thousand dong.",
+   "vi": "Chào chị, chị là Anna phải không? … Đến khách sạn Riverside ạ? … Để tôi cất va li vào cốp. … Mất khoảng ba mươi phút. … Đến rồi. Một trăm hai mươi nghìn đồng ạ."
+  }
+ ]
 }

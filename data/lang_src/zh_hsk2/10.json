@@ -1,159 +1,993 @@
 {
-  "no": 10,
-  "title": "他七点就到了，我九点才到 – 就 & 才",
-  "sub": "Tā qī diǎn jiù dào le, wǒ jiǔ diǎn cái dào. 他七点就到了，我九点才到。",
-  "goals": [
-    "Nói việc xảy ra sớm/nhanh hơn dự kiến: thời gian + 就 + V + 了",
-    "Nói việc xảy ra muộn/chậm hơn dự kiến: thời gian + 才 + V (không có 了)",
-    "Dùng 才 + số lượng (mới, chỉ), V了…就… (xong là… ngay) và 再 (rồi mới, lại)",
-    "Kể thói quen sinh hoạt hằng ngày: 起床, 早饭, 出门, 下班; đọc giờ có 零, 半",
-    "Phân biệt j q x với zh ch sh và c – z (才 / 在)"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
-      {"w": "就", "py": "jiù", "hv": "tựu", "pos": "adv", "vi": "(sớm, nhanh) đã… rồi; liền, thì; chính là", "ex": "他七点就来了。", "exPy": "Tā qī diǎn jiù lái le.", "exVi": "7 giờ anh ấy đã đến rồi."},
-      {"w": "才", "py": "cái", "hv": "tài", "pos": "adv", "vi": "mới (muộn, chậm hơn dự kiến); chỉ mới", "ex": "我九点才起床。", "exPy": "Wǒ jiǔ diǎn cái qǐchuáng.", "exVi": "9 giờ tôi mới dậy."},
-      {"w": "起床", "py": "qǐchuáng", "hv": "khởi sàng", "pos": "v", "vi": "thức dậy, rời giường", "ex": "你每天几点起床？", "exPy": "Nǐ měi tiān jǐ diǎn qǐchuáng?", "exVi": "Hằng ngày bạn dậy lúc mấy giờ?"},
-      {"w": "时间", "py": "shíjiān", "hv": "thời gian", "pos": "n", "vi": "thời gian", "ex": "你明天有时间吗？", "exPy": "Nǐ míngtiān yǒu shíjiān ma?", "exVi": "Mai bạn có thời gian không?"},
-      {"w": "早饭", "py": "zǎofàn", "hv": "tảo phạn", "pos": "n", "vi": "bữa sáng", "ex": "我早饭吃了一个面包。", "exPy": "Wǒ zǎofàn chīle yí ge miànbāo.", "exVi": "Bữa sáng tôi ăn một cái bánh mì."},
-      {"w": "鸡蛋", "py": "jīdàn", "hv": "kê đản", "pos": "n", "vi": "trứng gà", "ex": "我每天早上吃两个鸡蛋。", "exPy": "Wǒ měi tiān zǎoshang chī liǎng ge jīdàn.", "exVi": "Sáng nào tôi cũng ăn hai quả trứng."},
-      {"w": "牛奶", "py": "niúnǎi", "hv": "ngưu nãi", "pos": "n", "vi": "sữa bò", "ex": "我要一杯牛奶。", "exPy": "Wǒ yào yì bēi niúnǎi.", "exVi": "Cho tôi một cốc sữa."},
-      {"w": "出", "py": "chū", "hv": "xuất", "pos": "v", "vi": "ra (出门: ra khỏi nhà; 出去: đi ra ngoài)", "ex": "他七点半就出门了。", "exPy": "Tā qī diǎn bàn jiù chūmén le.", "exVi": "7 giờ rưỡi anh ấy đã ra khỏi nhà."},
-      {"w": "进", "py": "jìn", "hv": "tiến", "pos": "v", "vi": "vào (进来: vào đây)", "ex": "请进！", "exPy": "Qǐng jìn!", "exVi": "Mời vào!"},
-      {"w": "晚", "py": "wǎn", "hv": "vãn", "pos": "adj", "vi": "muộn, trễ", "ex": "太晚了，我们回家吧。", "exPy": "Tài wǎn le, wǒmen huí jiā ba.", "exVi": "Muộn quá rồi, chúng ta về nhà thôi."},
-      {"w": "再", "py": "zài", "hv": "tái", "pos": "adv", "vi": "lại, nữa; rồi mới (việc chưa xảy ra)", "ex": "我们吃了饭再走吧。", "exPy": "Wǒmen chīle fàn zài zǒu ba.", "exVi": "Chúng ta ăn cơm xong rồi hẵng đi."},
-      {"w": "零", "py": "líng", "hv": "linh", "pos": "num", "vi": "số không (8:05 = 八点零五分)", "ex": "现在八点零五分。", "exPy": "Xiànzài bā diǎn líng wǔ fēn.", "exVi": "Bây giờ là 8 giờ 5 phút."},
-      {"w": "下班", "py": "xiàbān", "hv": "hạ ban", "pos": "v", "vi": "tan làm", "ex": "我五点半下班。", "exPy": "Wǒ wǔ diǎn bàn xiàbān.", "exVi": "Tôi tan làm lúc 5 giờ rưỡi."}
-    ]},
-    {"k": "text", "h": "就 & 才 – “cảm xúc” của người nói · bữa sáng Việt – Trung", "html": "<p>Cùng một sự việc “anh ấy đến lúc 8 giờ”, người Trung có thể nói:</p><ul><li><b>他八点就来了。</b> – nếu người nói thấy <b>sớm</b> (họp 9 giờ mà 8 giờ đã đến!).</li><li><b>他八点才来。</b> – nếu người nói thấy <b>muộn</b> (họp 7 giờ mà 8 giờ mới đến!).</li></ul><p>Tiếng Việt có cặp tương ứng rất khớp: “<b>đã</b> … <b>rồi</b>” ↔ 就…了, “<b>mới</b>” ↔ 才.</p><p><b>Đọc giờ:</b> 8:05 = 八点<b>零</b>五(分), 8:15 = 八点十五 / 八点一刻 (yí kè), 8:30 = 八点<b>半</b>.</p><p>🍳 <b>Bữa sáng:</b> 包子 bāozi (bánh bao), 油条 yóutiáo (quẩy – chính là “giò cháo quẩy” của người Việt!), 豆浆 dòujiāng (sữa đậu nành), 粥 zhōu (cháo), 鸡蛋, 牛奶. Người Trung rất ngạc nhiên khi thấy người Việt ăn phở buổi sáng.</p>"},
-    {"k": "sounds", "h": "Phát âm: j – zh, q – ch, c – z, n – l", "html": "<p>就 jiù / 才 cái là hai chữ ngắn nhưng mang cả ý nghĩa câu – đọc nhầm 才 thành 在 là sai nghĩa hoàn toàn.</p>", "items": [
-      {"sym": "j – zh (鸡 / 知)", "ex": ["就", "鸡蛋", "进"], "vi": "<b>j</b>: mặt lưỡi áp vòm, môi dẹt (就 jiù, 鸡 jī). <b>zh</b>: cong lưỡi (知 zhī). j gần “ch” tiếng Việt nhưng giữ lưỡi phẳng, khoé miệng kéo ra.", "pairs": [["鸡", "知"], ["就", "皱"]]},
-      {"sym": "q – ch (起 / 尺)", "ex": ["起床", "七", "去"], "vi": "起 qǐ: mặt lưỡi, bật hơi. 尺 chǐ: cong lưỡi, bật hơi. 起床 qǐchuáng có cả hai trong một từ!", "pairs": [["起", "尺"]]},
-      {"sym": "c – z (才 / 在)", "ex": ["才", "在", "早饭"], "vi": "才 cái bật hơi “ts”, 在 zài không bật hơi. Đọc nhầm thì “mới” thành “đang / ở”!", "pairs": [["才", "在"], ["菜", "再"]]},
-      {"sym": "n – l (牛奶 / 零)", "ex": ["牛奶", "零", "女"], "vi": "牛奶 niúnǎi: hai âm n – bịt mũi sẽ nghẹt. 零 líng: l. Người miền Bắc chú ý không đọc 牛奶 thành “liú lǎi”.", "pairs": [["牛", "刘"], ["女", "旅"]]},
-      {"sym": "Ngữ điệu câu 就 / 才", "ex": ["他七点就来了", "他九点才来"], "vi": "Câu 才: nhấn vào thời gian (九点) và hơi kéo dài giọng – “muộn thế!”. Câu 就: nhấn thời gian sớm (七点), giọng nhẹ nhõm, 了 đọc nhẹ."}
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 1: Thời gian + 就 + V + 了 (sớm) ↔ thời gian + 才 + V (muộn)", "html": "<p>就 và 才 thể hiện <b>đánh giá của người nói</b> so với dự kiến:</p><ul><li><b>就</b>: sớm hơn, nhanh hơn, dễ hơn mong đợi → “đã … rồi”. Câu kể việc đã xảy ra thường có <b>了</b> cuối câu.</li><li><b>才</b>: muộn hơn, chậm hơn, khó hơn mong đợi → “mới”. Cuối câu <b>không có 了</b>.</li></ul><p>Cả hai đứng <b>sau</b> từ chỉ thời gian, <b>trước</b> động từ.</p>", "table": [["Câu", "Pinyin", "Nghĩa", "Đánh giá"], ["他七点就来了。", "Tā qī diǎn jiù lái le.", "7 giờ anh ấy đã đến rồi.", "sớm"], ["他十点才来。", "Tā shí diǎn cái lái.", "10 giờ anh ấy mới đến.", "muộn"], ["我十分钟就做完了。", "Wǒ shí fēnzhōng jiù zuòwán le.", "Tôi 10 phút đã làm xong.", "nhanh"], ["我两个小时才做完。", "Wǒ liǎng ge xiǎoshí cái zuòwán.", "Tôi 2 tiếng mới làm xong.", "chậm"], ["明天就考试了。", "Míngtiān jiù kǎoshì le.", "Mai là thi rồi.", "sớm"], ["下个月才考试。", "Xià ge yuè cái kǎoshì.", "Tháng sau mới thi.", "muộn"]], "ex": [
-      {"t": "会议九点开始，他八点半就到了。", "py": "Huìyì jiǔ diǎn kāishǐ, tā bā diǎn bàn jiù dào le.", "vi": "Cuộc họp 9 giờ bắt đầu, 8 giờ rưỡi anh ấy đã đến rồi."},
-      {"t": "昨天我十二点才睡觉。", "py": "Zuótiān wǒ shí'èr diǎn cái shuìjiào.", "vi": "Hôm qua 12 giờ tôi mới đi ngủ."},
-      {"t": "坐地铁二十分钟就到了。", "py": "Zuò dìtiě èrshí fēnzhōng jiù dào le.", "vi": "Đi tàu điện 20 phút là đến."},
-      {"t": "他等了一个小时，公共汽车才来。", "py": "Tā děngle yí ge xiǎoshí, gōnggòng qìchē cái lái.", "vi": "Anh ấy đợi một tiếng, xe buýt mới đến."}
-    ], "tips": [
-      "❌ <i>他十点才来<b>了</b></i> → 他十点才来. Câu 才 <b>không</b> có 了 cuối câu.",
-      "就 / 才 đứng sau thời gian, trước động từ: ❌ <i>就他七点来了</i> → 他七点就来了.",
-      "Tiếng Việt: “7 giờ đã đến rồi” = 七点就来了; “10 giờ mới đến” = 十点才来. Chữ “mới” ↔ 才 rất khớp!"
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 2: 才 + số lượng (mới, chỉ) · V了…就… (xong là… ngay) · 就是", "html": "<p><b>才 + số lượng</b> (đứng trước số): “mới / chỉ có” – người nói thấy <b>ít</b>: 他才二十岁, 才五十块.</p><p><b>V1 + 了 + (O) + 就 + V2</b>: làm xong việc 1 là <b>liền</b> làm việc 2: 下了班就回家. <b>就是</b> = chính là: 那就是我们公司.</p>", "table": [["Câu", "Pinyin", "Nghĩa"], ["他才二十岁，就当经理了。", "Tā cái èrshí suì, jiù dāng jīnglǐ le.", "Anh ấy mới 20 tuổi đã làm giám đốc rồi."], ["这件衣服才五十块。", "Zhè jiàn yīfu cái wǔshí kuài.", "Cái áo này chỉ có 50 tệ."], ["我下了班就回家。", "Wǒ xiàle bān jiù huí jiā.", "Tan làm là tôi về nhà ngay."], ["那就是我们公司。", "Nà jiù shì wǒmen gōngsī.", "Kia chính là công ty chúng tôi."]], "ex": [
-      {"t": "我吃了早饭就去上班。", "py": "Wǒ chīle zǎofàn jiù qù shàngbān.", "vi": "Tôi ăn sáng xong là đi làm."},
-      {"t": "现在才七点，你再睡一会儿吧。", "py": "Xiànzài cái qī diǎn, nǐ zài shuì yíhuìr ba.", "vi": "Mới 7 giờ thôi, bạn ngủ thêm chút nữa đi."}
-    ], "tips": [
-      "才 + số nhấn ý “ít”: 才五十块 – rẻ thế! (so với 只 zhǐ – chỉ).",
-      "Câu thói quen 下了班就回家: 了 đứng sau động từ thứ nhất, không cần 了 cuối câu."
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 3: 再 – lại, nữa, rồi mới", "html": "<p><b>再 + V</b>: (1) làm lại / làm thêm trong <b>tương lai</b>: 再说一遍, 明天再来; (2) “<b>rồi mới / rồi hẵng</b>”: làm việc này xong rồi mới làm việc kia: 吃了饭再走. Phân biệt với <b>又</b> yòu – “lại” cho việc <b>đã xảy ra</b>: 他又迟到了.</p>", "ex": [
-      {"t": "请再说一遍。", "py": "Qǐng zài shuō yí biàn.", "vi": "Xin nói lại một lần nữa."},
-      {"t": "今天太晚了，明天再做吧。", "py": "Jīntiān tài wǎn le, míngtiān zài zuò ba.", "vi": "Hôm nay muộn quá rồi, mai hẵng làm."},
-      {"t": "我们先开始吧，他来了再告诉他。", "py": "Wǒmen xiān kāishǐ ba, tā láile zài gàosu tā.", "vi": "Chúng ta bắt đầu trước đi, anh ấy đến rồi hẵng nói lại với anh ấy."}
-    ], "tips": [
-      "Tiếng Việt “rồi hẵng / rồi mới” ↔ 再: 吃了饭再走 = ăn cơm rồi hẵng đi.",
-      "Việc lặp lại <b>đã xảy ra</b> dùng 又 (HSK 3): 他昨天迟到了，今天又迟到了."
-    ]},
-    {"k": "dialog", "h": "Nghe: Ai dậy sớm nhất?", "lang": "zh-CN", "note": "7 giờ 40 sáng thứ Hai ở văn phòng. 张丽 và 小兰 nói chuyện về giờ giấc sinh hoạt; A Minh vẫn chưa đến. Nghe lần 1: ai dậy sớm? A Minh mấy giờ mới đến được?", "lines": [
-      {"s": "张丽", "g": "f", "t": "小兰，早！你今天来得真早！", "py": "Xiǎo Lán, zǎo! Nǐ jīntiān lái de zhēn zǎo!", "vi": "Tiểu Lan, chào buổi sáng! Hôm nay bạn đến sớm thật!"},
-      {"s": "小兰", "g": "f", "t": "早！我七点半就到公司了。九点要开会。", "py": "Zǎo! Wǒ qī diǎn bàn jiù dào gōngsī le. Jiǔ diǎn yào kāi huì.", "vi": "Chào! 7 rưỡi mình đã đến công ty rồi. 9 giờ phải họp."},
-      {"s": "张丽", "g": "f", "t": "你几点起床的？", "py": "Nǐ jǐ diǎn qǐchuáng de?", "vi": "Bạn dậy lúc mấy giờ?"},
-      {"s": "小兰", "g": "f", "t": "五点半就起床了。我先跑步，再吃早饭。", "py": "Wǔ diǎn bàn jiù qǐchuáng le. Wǒ xiān pǎobù, zài chī zǎofàn.", "vi": "5 rưỡi đã dậy rồi. Mình chạy bộ trước, rồi mới ăn sáng."},
-      {"s": "张丽", "g": "f", "t": "你早饭吃什么？", "py": "Nǐ zǎofàn chī shénme?", "vi": "Bữa sáng bạn ăn gì?"},
-      {"s": "小兰", "g": "f", "t": "一个鸡蛋，一杯牛奶。你呢？", "py": "Yí ge jīdàn, yì bēi niúnǎi. Nǐ ne?", "vi": "Một quả trứng, một cốc sữa. Còn bạn?"},
-      {"s": "张丽", "g": "f", "t": "我常常不吃早饭。我七点才起床，起床以后就出门了。", "py": "Wǒ chángcháng bù chī zǎofàn. Wǒ qī diǎn cái qǐchuáng, qǐchuáng yǐhòu jiù chūmén le.", "vi": "Mình hay không ăn sáng. 7 giờ mình mới dậy, dậy xong là ra khỏi nhà luôn."},
-      {"s": "小兰", "g": "f", "t": "不吃早饭对身体不好啊！", "py": "Bù chī zǎofàn duì shēntǐ bù hǎo a!", "vi": "Không ăn sáng không tốt cho sức khoẻ đâu!"},
-      {"s": "张丽", "g": "f", "t": "我知道。可是我晚上十二点才睡觉……", "py": "Wǒ zhīdào. Kěshì wǒ wǎnshang shí'èr diǎn cái shuìjiào……", "vi": "Mình biết. Nhưng tối 12 giờ mình mới đi ngủ…"},
-      {"s": "小兰", "g": "f", "t": "太晚了！阿明呢？他还没来吗？", "py": "Tài wǎn le! Ā Míng ne? Tā hái méi lái ma?", "vi": "Muộn quá! Còn A Minh? Cậu ấy vẫn chưa đến à?"},
-      {"s": "张丽", "g": "f", "t": "他刚才打电话说，路上车太多，九点半才能到。", "py": "Tā gāngcái dǎ diànhuà shuō, lùshang chē tài duō, jiǔ diǎn bàn cái néng dào.", "vi": "Vừa nãy cậu ấy gọi điện nói đường đông xe quá, 9 rưỡi mới đến được."},
-      {"s": "小兰", "g": "f", "t": "会九点开始。我们先开始吧，他来了再告诉他。", "py": "Huì jiǔ diǎn kāishǐ. Wǒmen xiān kāishǐ ba, tā láile zài gàosu tā.", "vi": "Họp 9 giờ bắt đầu. Mình cứ bắt đầu trước, cậu ấy đến rồi nói lại sau."},
-      {"s": "张丽", "g": "f", "t": "好。下了班我们一起去吃饭吧！", "py": "Hǎo. Xiàle bān wǒmen yìqǐ qù chī fàn ba!", "vi": "Được. Tan làm chúng mình cùng đi ăn nhé!"}
-    ], "qs": [
-      {"q": "小兰 đến công ty lúc mấy giờ?", "o": ["7:00", "7:30", "9:00"], "a": 1, "e": "我七点半就到公司了."},
-      {"q": "小兰 ăn sáng gì?", "o": ["Bánh bao và sữa đậu nành", "Một quả trứng, một cốc sữa", "Không ăn sáng"], "a": 1, "e": "一个鸡蛋，一杯牛奶."},
-      {"q": "张丽 mấy giờ đi ngủ?", "o": ["10 giờ", "11 giờ", "12 giờ"], "a": 2, "e": "我晚上十二点才睡觉 – 才 = muộn."},
-      {"q": "A Minh mấy giờ mới đến được? Vì sao?", "o": ["9:30, vì đường đông xe", "9:00, vì dậy muộn", "10:00, vì xe hỏng"], "a": 0, "e": "路上车太多，九点半才能到."},
-      {"q": "张丽说：我七点___起床。(Wǒ qī diǎn ___ qǐchuáng – điền 1 chữ: mới)", "a": "才", "alt": ["cai", "cái"], "e": "7 giờ mới dậy (muộn so với Tiểu Lan) → 才."}
-    ]},
-    {"k": "read", "h": "Đọc: Hai người ở chung", "title": "两个室友", "text": "李华和阿明住在一起，可是他们的时间很不一样。\n\n李华每天早上六点就起床了。起床以后，他先跑步，再吃早饭，七点半就出门了。\n\n阿明每天七点半才起床。他不吃早饭，喝一杯咖啡就去上班。晚上，李华十点就睡觉了，阿明十二点才睡。李华说：“你睡得太晚了！”阿明笑着说：“没关系，我是夜猫子！”", "py": "Lǐ Huá hé Ā Míng zhù zài yìqǐ, kěshì tāmen de shíjiān hěn bù yíyàng.\n\nLǐ Huá měi tiān zǎoshang liù diǎn jiù qǐchuáng le. Qǐchuáng yǐhòu, tā xiān pǎobù, zài chī zǎofàn, qī diǎn bàn jiù chūmén le.\n\nĀ Míng měi tiān qī diǎn bàn cái qǐchuáng. Tā bù chī zǎofàn, hē yì bēi kāfēi jiù qù shàngbān. Wǎnshang, Lǐ Huá shí diǎn jiù shuìjiào le, Ā Míng shí'èr diǎn cái shuì. Lǐ Huá shuō: “Nǐ shuì de tài wǎn le!” Ā Míng xiàozhe shuō: “Méi guānxi, wǒ shì yèmāozi!”", "vi": "Lý Hoa và A Minh ở cùng nhau, nhưng giờ giấc của họ rất khác nhau.\n\nSáng nào Lý Hoa cũng 6 giờ đã dậy. Dậy xong, anh ấy chạy bộ trước, rồi ăn sáng, 7 giờ rưỡi đã ra khỏi nhà.\n\nA Minh ngày nào cũng 7 giờ rưỡi mới dậy. Anh ấy không ăn sáng, uống một cốc cà phê là đi làm. Buổi tối, Lý Hoa 10 giờ đã đi ngủ, A Minh 12 giờ mới ngủ. Lý Hoa nói: “Cậu ngủ muộn quá!” A Minh cười nói: “Không sao, tôi là cú đêm mà!”", "gloss": [
-      {"w": "室友", "py": "shìyǒu", "vi": "bạn cùng phòng"},
-      {"w": "住在一起", "py": "zhù zài yìqǐ", "vi": "ở cùng nhau"},
-      {"w": "一样", "py": "yíyàng", "vi": "giống nhau"},
-      {"w": "先…再…", "py": "xiān… zài…", "vi": "trước… rồi mới…"},
-      {"w": "出门", "py": "chūmén", "vi": "ra khỏi nhà"},
-      {"w": "笑着说", "py": "xiàozhe shuō", "vi": "cười nói"},
-      {"w": "夜猫子", "py": "yèmāozi", "vi": "cú đêm (người hay thức khuya)"}
-    ], "qs": [
-      {"q": "李华每天几点起床？(Lǐ Huá měi tiān jǐ diǎn qǐchuáng?)", "o": ["六点", "七点半", "十点"], "a": 0, "e": "李华每天早上六点就起床了."},
-      {"q": "阿明早上吃什么？(Ā Míng zǎoshang chī shénme?)", "o": ["鸡蛋和牛奶", "不吃早饭，只喝咖啡", "面包"], "a": 1, "e": "他不吃早饭，喝一杯咖啡就去上班."},
-      {"q": "Câu 阿明十二点才睡 cho thấy người viết nghĩ gì?", "o": ["A Minh ngủ sớm", "A Minh ngủ muộn", "A Minh ngủ đúng giờ"], "a": 1, "e": "才 = muộn hơn bình thường."},
-      {"q": "Ai ra khỏi nhà sớm hơn?", "o": ["李华", "阿明"], "a": 0, "e": "李华七点半就出门了; lúc đó A Minh mới dậy."}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "就", "py": "jiù", "hv": "tựu", "parts": "京 (kinh – kinh đô) + 尤 (vưu)", "strokes": 12, "vi": "liền, thì; đến (tựu trường, thành tựu)", "words": "就是, 就要"},
-      {"c": "才", "py": "cái", "hv": "tài", "parts": "Chữ tượng hình – mầm cây vừa nhú khỏi mặt đất", "strokes": 3, "vi": "mới (vừa mới nhú); tài năng (人才)", "words": "刚才, 人才"},
-      {"c": "起", "py": "qǐ", "hv": "khởi", "parts": "走 (tẩu – đi) + 己 (kỷ – mình)", "strokes": 10, "vi": "dậy, bắt đầu (khởi đầu, khởi hành)", "words": "起床, 一起"},
-      {"c": "床", "py": "chuáng", "hv": "sàng", "parts": "广 (nghiễm – mái nhà) + 木 (mộc – gỗ)", "strokes": 7, "vi": "giường – đồ gỗ trong nhà", "words": "起床"},
-      {"c": "晚", "py": "wǎn", "hv": "vãn", "parts": "日 (nhật – mặt trời) + 免 (miễn)", "strokes": 11, "vi": "muộn, tối – mặt trời đã lặn", "words": "晚上, 晚饭"},
-      {"c": "再", "py": "zài", "hv": "tái", "parts": "一 + 冉 (nhiễm)", "strokes": 6, "vi": "lại, nữa (tái bản, tái phát)", "words": "再见, 再说"}
-    ]},
-    {"k": "speak", "h": "Nói: Giờ giấc của tôi", "tasks": [
-      {"p": "Kể buổi sáng của bạn: mấy giờ dậy, ăn gì, mấy giờ ra khỏi nhà – dùng 就 hoặc 才.", "model": "我每天六点就起床了。我先吃早饭：一个鸡蛋、一杯牛奶，七点就出门了。", "py": "Wǒ měi tiān liù diǎn jiù qǐchuáng le. Wǒ xiān chī zǎofàn: yí ge jīdàn, yì bēi niúnǎi, qī diǎn jiù chūmén le.", "vi": "Ngày nào tôi cũng 6 giờ đã dậy. Tôi ăn sáng trước: một quả trứng, một cốc sữa, 7 giờ đã ra khỏi nhà.", "tips": "Câu 就 có 了 cuối câu; 先…再… / 先…然后…"},
-      {"p": "So sánh bạn với một người trong gia đình: dậy, ngủ sớm hay muộn.", "model": "我妈妈五点就起床了，我七点才起床。晚上她十点就睡了，我十二点才睡。", "py": "Wǒ māma wǔ diǎn jiù qǐchuáng le, wǒ qī diǎn cái qǐchuáng. Wǎnshang tā shí diǎn jiù shuì le, wǒ shí'èr diǎn cái shuì.", "vi": "Mẹ tôi 5 giờ đã dậy, tôi 7 giờ mới dậy. Buổi tối mẹ 10 giờ đã ngủ, tôi 12 giờ mới ngủ."},
-      {"p": "Đồng nghiệp đến muộn: hỏi sao giờ này mới đến; bạn ấy giải thích.", "model": "你怎么九点才来？— 对不起，路上车太多，我七点半就出门了。", "py": "Nǐ zěnme jiǔ diǎn cái lái? — Duìbuqǐ, lùshang chē tài duō, wǒ qī diǎn bàn jiù chūmén le.", "vi": "Sao 9 giờ bạn mới đến? — Xin lỗi, đường đông xe quá, 7 rưỡi tôi đã ra khỏi nhà rồi."}
-    ]},
-    {"k": "write", "h": "Viết: Một ngày của tôi", "task": "Viết 60–90 chữ về thói quen hằng ngày: mấy giờ dậy, ăn sáng gì, đi làm, tan làm, đi ngủ. Dùng ít nhất 2 câu 就, 2 câu 才 và 1 câu 先…再… hoặc V了…就….", "min": 60, "model": "我每天早上六点就起床了。起床以后我先洗澡，再吃早饭。我的早饭很简单：两个鸡蛋，一杯牛奶。七点我就出门了，因为公司离我家很远。我五点半下班，可是路上车太多，常常七点才到家。晚上我学一个小时汉语，十一点才睡觉。周末我九点才起床！", "modelVi": "Sáng nào tôi cũng 6 giờ đã dậy. Dậy xong tôi tắm trước, rồi mới ăn sáng. Bữa sáng của tôi rất đơn giản: hai quả trứng, một cốc sữa. 7 giờ tôi đã ra khỏi nhà, vì công ty cách nhà tôi rất xa. Tôi tan làm lúc 5 rưỡi, nhưng đường đông xe quá, thường 7 giờ mới về đến nhà. Buổi tối tôi học tiếng Trung một tiếng, 11 giờ mới đi ngủ. Cuối tuần thì 9 giờ tôi mới dậy!", "tips": ["Câu 才 không có 了.", "Thời điểm đặt trước động từ; thời lượng (一个小时) sau động từ – ôn Bài 9."], "checklist": ["Có ≥ 2 câu thời gian + 就 + V + 了", "Có ≥ 2 câu thời gian + 才 + V (không có 了)", "Có 1 câu 先…再… hoặc V了…就…", "Thời điểm đặt trước động từ", "Đọc/viết giờ đúng (零, 半)"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "他七点就来了。", "lang": "zh-CN", "q": "Người nói thấy anh ấy đến thế nào?", "o": ["Sớm", "Muộn", "Bình thường"], "a": 0, "e": "就…了 = sớm hơn dự kiến."},
-    {"t": "listen", "say": "我十二点才睡觉。", "lang": "zh-CN", "q": "Người nói đi ngủ thế nào?", "o": ["Sớm", "Muộn – 12 giờ mới ngủ", "Không ngủ"], "a": 1, "e": "才 = muộn hơn bình thường."},
-    {"t": "listen", "say": "这件衣服才五十块。", "lang": "zh-CN", "q": "Người nói thấy giá cái áo thế nào?", "o": ["Rẻ – chỉ 50 tệ", "Đắt", "Bình thường"], "a": 0, "e": "才 + số = chỉ, mới (ít)."},
-    {"t": "mc", "q": "“10 giờ anh ấy mới đến” – câu đúng:", "o": ["他十点才来了。", "他十点才来。", "才他十点来。"], "a": 1, "e": "Thời gian + 才 + V, không có 了 cuối câu."},
-    {"t": "mc", "q": "Điền 就 hay 才: 会议九点开始，他八点___到了。(Huìyì jiǔ diǎn kāishǐ, tā bā diǎn ___ dào le.)", "o": ["就", "才"], "a": 0, "e": "Đến trước giờ họp → sớm → 就…了."},
-    {"t": "mc", "q": "Điền 就 hay 才: 我等了一个小时，他___来。(Wǒ děngle yí ge xiǎoshí, tā ___ lái.)", "o": ["就", "才"], "a": 1, "e": "Đợi 1 tiếng → muộn → 才 (không có 了)."},
-    {"t": "mc", "q": "我下了班就回家 (Wǒ xiàle bān jiù huí jiā) nghĩa là:", "o": ["Tôi tan làm rồi lâu sau mới về nhà.", "Tan làm là tôi về nhà ngay.", "Tôi về nhà rồi mới tan làm."], "a": 1, "e": "V了…就… = xong việc 1 là làm việc 2 ngay."},
-    {"t": "mc", "q": "“Ăn cơm xong rồi hẵng đi” – câu đúng:", "o": ["吃了饭再走吧。", "吃了饭又走吧。", "再吃了饭走吧。"], "a": 0, "e": "再 = rồi mới (việc chưa xảy ra); 又 dùng cho việc đã xảy ra."},
-    {"t": "fill", "q": "你每天几点___床？ (Nǐ měi tiān jǐ diǎn ___chuáng?) (dậy – 1 chữ)", "py": "qǐ", "a": "起", "alt": ["qi", "qǐ"], "e": "起床 = thức dậy."},
-    {"t": "fill", "q": "现在八点___五分。 (Xiànzài bā diǎn ___ wǔ fēn.) (8:05 – số không)", "py": "líng", "a": "零", "alt": ["ling", "líng"], "e": "8:05 = 八点零五分."},
-    {"t": "fill", "q": "我早上喝一杯___。 (Wǒ zǎoshang hē yì bēi ___.) (sữa – 2 chữ)", "py": "niúnǎi", "a": "牛奶", "alt": ["niunai"], "e": "牛奶 niúnǎi = sữa bò."},
-    {"t": "order", "q": "Sắp xếp: “Anh ấy 6 giờ đã dậy rồi.”", "w": ["起床了", "他", "就", "六点"], "a": "他六点就起床了", "e": "S + thời gian + 就 + V + 了."},
-    {"t": "order", "q": "Sắp xếp: “Tôi 2 tiếng mới làm xong.”", "w": ["才", "我", "做完", "两个小时"], "a": "我两个小时才做完", "e": "S + thời lượng + 才 + V (không có 了)."},
-    {"t": "dict", "say": "我九点才起床。", "lang": "zh-CN", "a": "我九点才起床。", "py": "Wǒ jiǔ diǎn cái qǐchuáng.", "e": "Gõ chữ Hán hoặc pinyin."},
-    {"t": "match", "q": "Nối:", "pairs": [["起床", "thức dậy"], ["早饭", "bữa sáng"], ["鸡蛋", "trứng gà"], ["下班", "tan làm"], ["出门", "ra khỏi nhà"], ["时间", "thời gian"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Đồng hồ giấy; bảng thời gian biểu hai nhân vật (một người dậy sớm, một người dậy muộn); ảnh đồ ăn sáng (鸡蛋, 牛奶, 包子, 油条, 牛肉粉); thẻ 就 / 才; thẻ chữ 就 才 起 床 晚 再.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: hỏi học viên mấy giờ dậy; GV phản ứng cường điệu: 五点？你五点就起床了！/ 九点？你九点才起床！ Học viên đoán sắc thái."},
-      {"t": "20'", "do": "Từ vựng 13 từ: sinh hoạt (起床 早饭 鸡蛋 牛奶 出 进 下班), thời gian (时间 晚 零), phó từ (就 才 再). Văn hoá bữa sáng: 油条 = quẩy."},
-      {"t": "10'", "do": "Phát âm: j–zh (鸡/知), q–ch (起/尺), c–z (才/在), n–l (牛奶)."},
-      {"t": "30'", "do": "Ngữ pháp 1: bảng sớm/muộn; luyện với thời gian biểu 2 nhân vật: 李华六点就起床了，阿明七点半才起床. Nhấn mạnh “才 không có 了”."},
-      {"t": "15'", "do": "Nghe hội thoại 3 lần; trả lời câu hỏi; đọc phân vai."},
-      {"t": "5'", "do": "Giao bài tập 1–8."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: trò “Sớm hay muộn?” (xem trò chơi)."},
-      {"t": "15'", "do": "Ngữ pháp 2–3: 才 + số (才五十块); V了…就…; 就是; 再 (rồi mới) vs 又."},
-      {"t": "15'", "do": "Đọc ‘两个室友’; vẽ bảng so sánh giờ giấc 2 người."},
-      {"t": "15'", "do": "Chữ Hán 就 才 起 床 晚 再 (才 tượng hình mầm cây; 床 = 广 + 木)."},
-      {"t": "20'", "do": "Nói 3 nhiệm vụ: kể buổi sáng; so sánh với người nhà; hỏi đồng nghiệp đến muộn."},
-      {"t": "15'", "do": "Viết “Một ngày của tôi”; bài tập 9–15; chữa lỗi chung."}
+ "no": 10,
+ "title": "他七点就到了，我九点才到 – 就 & 才",
+ "sub": "Tā qī diǎn jiù dào le, wǒ jiǔ diǎn cái dào. 他七点就到了，我九点才到。",
+ "goals": [
+  "Nói việc xảy ra sớm/nhanh hơn dự kiến: thời gian + 就 + V + 了",
+  "Nói việc xảy ra muộn/chậm hơn dự kiến: thời gian + 才 + V (không có 了)",
+  "Dùng 才 + số lượng (mới, chỉ), V了…就… (xong là… ngay) và 再 (rồi mới, lại)",
+  "Kể thói quen sinh hoạt hằng ngày: 起床, 早饭, 出门, 下班; đọc giờ có 零, 半",
+  "Phân biệt j q x với zh ch sh và c – z (才 / 在)"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词 shēngcí)",
+   "items": [
+    {
+     "w": "就",
+     "py": "jiù",
+     "hv": "tựu",
+     "pos": "adv",
+     "vi": "(sớm, nhanh) đã… rồi; liền, thì; chính là",
+     "ex": "他七点就来了。",
+     "exPy": "Tā qī diǎn jiù lái le.",
+     "exVi": "7 giờ anh ấy đã đến rồi."
+    },
+    {
+     "w": "才",
+     "py": "cái",
+     "hv": "tài",
+     "pos": "adv",
+     "vi": "mới (muộn, chậm hơn dự kiến); chỉ mới",
+     "ex": "我九点才起床。",
+     "exPy": "Wǒ jiǔ diǎn cái qǐchuáng.",
+     "exVi": "9 giờ tôi mới dậy."
+    },
+    {
+     "w": "起床",
+     "py": "qǐchuáng",
+     "hv": "khởi sàng",
+     "pos": "v",
+     "vi": "thức dậy, rời giường",
+     "ex": "你每天几点起床？",
+     "exPy": "Nǐ měi tiān jǐ diǎn qǐchuáng?",
+     "exVi": "Hằng ngày bạn dậy lúc mấy giờ?"
+    },
+    {
+     "w": "时间",
+     "py": "shíjiān",
+     "hv": "thời gian",
+     "pos": "n",
+     "vi": "thời gian",
+     "ex": "你明天有时间吗？",
+     "exPy": "Nǐ míngtiān yǒu shíjiān ma?",
+     "exVi": "Mai bạn có thời gian không?"
+    },
+    {
+     "w": "早饭",
+     "py": "zǎofàn",
+     "hv": "tảo phạn",
+     "pos": "n",
+     "vi": "bữa sáng",
+     "ex": "我早饭吃了一个面包。",
+     "exPy": "Wǒ zǎofàn chīle yí ge miànbāo.",
+     "exVi": "Bữa sáng tôi ăn một cái bánh mì."
+    },
+    {
+     "w": "鸡蛋",
+     "py": "jīdàn",
+     "hv": "kê đản",
+     "pos": "n",
+     "vi": "trứng gà",
+     "ex": "我每天早上吃两个鸡蛋。",
+     "exPy": "Wǒ měi tiān zǎoshang chī liǎng ge jīdàn.",
+     "exVi": "Sáng nào tôi cũng ăn hai quả trứng."
+    },
+    {
+     "w": "牛奶",
+     "py": "niúnǎi",
+     "hv": "ngưu nãi",
+     "pos": "n",
+     "vi": "sữa bò",
+     "ex": "我要一杯牛奶。",
+     "exPy": "Wǒ yào yì bēi niúnǎi.",
+     "exVi": "Cho tôi một cốc sữa."
+    },
+    {
+     "w": "出",
+     "py": "chū",
+     "hv": "xuất",
+     "pos": "v",
+     "vi": "ra (出门: ra khỏi nhà; 出去: đi ra ngoài)",
+     "ex": "他七点半就出门了。",
+     "exPy": "Tā qī diǎn bàn jiù chūmén le.",
+     "exVi": "7 giờ rưỡi anh ấy đã ra khỏi nhà."
+    },
+    {
+     "w": "进",
+     "py": "jìn",
+     "hv": "tiến",
+     "pos": "v",
+     "vi": "vào (进来: vào đây)",
+     "ex": "请进！",
+     "exPy": "Qǐng jìn!",
+     "exVi": "Mời vào!"
+    },
+    {
+     "w": "晚",
+     "py": "wǎn",
+     "hv": "vãn",
+     "pos": "adj",
+     "vi": "muộn, trễ",
+     "ex": "太晚了，我们回家吧。",
+     "exPy": "Tài wǎn le, wǒmen huí jiā ba.",
+     "exVi": "Muộn quá rồi, chúng ta về nhà thôi."
+    },
+    {
+     "w": "再",
+     "py": "zài",
+     "hv": "tái",
+     "pos": "adv",
+     "vi": "lại, nữa; rồi mới (việc chưa xảy ra)",
+     "ex": "我们吃了饭再走吧。",
+     "exPy": "Wǒmen chīle fàn zài zǒu ba.",
+     "exVi": "Chúng ta ăn cơm xong rồi hẵng đi."
+    },
+    {
+     "w": "零",
+     "py": "líng",
+     "hv": "linh",
+     "pos": "num",
+     "vi": "số không (8:05 = 八点零五分)",
+     "ex": "现在八点零五分。",
+     "exPy": "Xiànzài bā diǎn líng wǔ fēn.",
+     "exVi": "Bây giờ là 8 giờ 5 phút."
+    },
+    {
+     "w": "下班",
+     "py": "xiàbān",
+     "hv": "hạ ban",
+     "pos": "v",
+     "vi": "tan làm",
+     "ex": "我五点半下班。",
+     "exPy": "Wǒ wǔ diǎn bàn xiàbān.",
+     "exVi": "Tôi tan làm lúc 5 giờ rưỡi."
+    }
+   ]
+  },
+  {
+   "k": "text",
+   "h": "就 & 才 – “cảm xúc” của người nói · bữa sáng Việt – Trung",
+   "html": "<p>Cùng một sự việc “anh ấy đến lúc 8 giờ”, người Trung có thể nói:</p><ul><li><b>他八点就来了。</b> – nếu người nói thấy <b>sớm</b> (họp 9 giờ mà 8 giờ đã đến!).</li><li><b>他八点才来。</b> – nếu người nói thấy <b>muộn</b> (họp 7 giờ mà 8 giờ mới đến!).</li></ul><p>Tiếng Việt có cặp tương ứng rất khớp: “<b>đã</b> … <b>rồi</b>” ↔ 就…了, “<b>mới</b>” ↔ 才.</p><p><b>Đọc giờ:</b> 8:05 = 八点<b>零</b>五(分), 8:15 = 八点十五 / 八点一刻 (yí kè), 8:30 = 八点<b>半</b>.</p><p>🍳 <b>Bữa sáng:</b> 包子 bāozi (bánh bao), 油条 yóutiáo (quẩy – chính là “giò cháo quẩy” của người Việt!), 豆浆 dòujiāng (sữa đậu nành), 粥 zhōu (cháo), 鸡蛋, 牛奶. Người Trung rất ngạc nhiên khi thấy người Việt ăn phở buổi sáng.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: j – zh, q – ch, c – z, n – l",
+   "html": "<p>就 jiù / 才 cái là hai chữ ngắn nhưng mang cả ý nghĩa câu – đọc nhầm 才 thành 在 là sai nghĩa hoàn toàn.</p>",
+   "items": [
+    {
+     "sym": "j – zh (鸡 / 知)",
+     "ex": [
+      "就",
+      "鸡蛋",
+      "进"
+     ],
+     "vi": "<b>j</b>: mặt lưỡi áp vòm, môi dẹt (就 jiù, 鸡 jī). <b>zh</b>: cong lưỡi (知 zhī). j gần “ch” tiếng Việt nhưng giữ lưỡi phẳng, khoé miệng kéo ra.",
+     "pairs": [
+      [
+       "鸡",
+       "知"
+      ],
+      [
+       "就",
+       "皱"
+      ]
+     ]
+    },
+    {
+     "sym": "q – ch (起 / 尺)",
+     "ex": [
+      "起床",
+      "七",
+      "去"
+     ],
+     "vi": "起 qǐ: mặt lưỡi, bật hơi. 尺 chǐ: cong lưỡi, bật hơi. 起床 qǐchuáng có cả hai trong một từ!",
+     "pairs": [
+      [
+       "起",
+       "尺"
+      ]
+     ]
+    },
+    {
+     "sym": "c – z (才 / 在)",
+     "ex": [
+      "才",
+      "在",
+      "早饭"
+     ],
+     "vi": "才 cái bật hơi “ts”, 在 zài không bật hơi. Đọc nhầm thì “mới” thành “đang / ở”!",
+     "pairs": [
+      [
+       "才",
+       "在"
+      ],
+      [
+       "菜",
+       "再"
+      ]
+     ]
+    },
+    {
+     "sym": "n – l (牛奶 / 零)",
+     "ex": [
+      "牛奶",
+      "零",
+      "女"
+     ],
+     "vi": "牛奶 niúnǎi: hai âm n – bịt mũi sẽ nghẹt. 零 líng: l. Người miền Bắc chú ý không đọc 牛奶 thành “liú lǎi”.",
+     "pairs": [
+      [
+       "牛",
+       "刘"
+      ],
+      [
+       "女",
+       "旅"
+      ]
+     ]
+    },
+    {
+     "sym": "Ngữ điệu câu 就 / 才",
+     "ex": [
+      "他七点就来了",
+      "他九点才来"
+     ],
+     "vi": "Câu 才: nhấn vào thời gian (九点) và hơi kéo dài giọng – “muộn thế!”. Câu 就: nhấn thời gian sớm (七点), giọng nhẹ nhõm, 了 đọc nhẹ."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: Thời gian + 就 + V + 了 (sớm) ↔ thời gian + 才 + V (muộn)",
+   "html": "<p>就 và 才 thể hiện <b>đánh giá của người nói</b> so với dự kiến:</p><ul><li><b>就</b>: sớm hơn, nhanh hơn, dễ hơn mong đợi → “đã … rồi”. Câu kể việc đã xảy ra thường có <b>了</b> cuối câu.</li><li><b>才</b>: muộn hơn, chậm hơn, khó hơn mong đợi → “mới”. Cuối câu <b>không có 了</b>.</li></ul><p>Cả hai đứng <b>sau</b> từ chỉ thời gian, <b>trước</b> động từ.</p>",
+   "table": [
+    [
+     "Câu",
+     "Pinyin",
+     "Nghĩa",
+     "Đánh giá"
     ],
-    "games": [
-      "Sớm hay muộn?: GV nêu tình huống (“Họp 9h, Minh đến 8h”; “Phim chiếu 7h, Lan đến 7h30”), cả lớp giơ thẻ 就 hoặc 才, rồi một bạn nói trọn câu. Đội sai bị trừ điểm.",
-      "Chuỗi buổi sáng: mỗi học viên nói một hành động nối tiếp bằng V了…就… (我起了床就洗脸 → 我洗了脸就吃早饭 → …). Ai bí quá 5 giây hoặc lặp động từ thì ra ngoài."
+    [
+     "他七点就来了。",
+     "Tā qī diǎn jiù lái le.",
+     "7 giờ anh ấy đã đến rồi.",
+     "sớm"
     ],
-    "errors": [
-      "Thêm 了 vào câu 才: ❌ 他十点才来了 → 他十点才来.",
-      "Quên 了 trong câu 就 kể việc đã xảy ra: ❌ 他七点就来 → 他七点就来了.",
-      "Đặt 就/才 trước thời gian hoặc chủ ngữ: ❌ 就他七点来了 → 他七点就来了.",
-      "Dùng ngược nghĩa vì không cảm nhận sớm/muộn: luyện bằng tiếng Việt “đã… rồi” ↔ 就, “mới” ↔ 才.",
-      "Nhầm 再 (lại – tương lai) với 又 (lại – đã xảy ra).",
-      "Đọc 才 cái thành zài (在) – mất bật hơi."
+    [
+     "他十点才来。",
+     "Tā shí diǎn cái lái.",
+     "10 giờ anh ấy mới đến.",
+     "muộn"
     ],
-    "homework": "Bài tập game ≥ 80%; viết “Một ngày của tôi” 60–90 chữ; ghi giờ dậy/ngủ của bạn và một người thân trong 3 ngày, nói thành câu 就/才 (ghi âm); ôn thẻ từ 15 phút/ngày."
+    [
+     "我十分钟就做完了。",
+     "Wǒ shí fēnzhōng jiù zuòwán le.",
+     "Tôi 10 phút đã làm xong.",
+     "nhanh"
+    ],
+    [
+     "我两个小时才做完。",
+     "Wǒ liǎng ge xiǎoshí cái zuòwán.",
+     "Tôi 2 tiếng mới làm xong.",
+     "chậm"
+    ],
+    [
+     "明天就考试了。",
+     "Míngtiān jiù kǎoshì le.",
+     "Mai là thi rồi.",
+     "sớm"
+    ],
+    [
+     "下个月才考试。",
+     "Xià ge yuè cái kǎoshì.",
+     "Tháng sau mới thi.",
+     "muộn"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "会议九点开始，他八点半就到了。",
+     "py": "Huìyì jiǔ diǎn kāishǐ, tā bā diǎn bàn jiù dào le.",
+     "vi": "Cuộc họp 9 giờ bắt đầu, 8 giờ rưỡi anh ấy đã đến rồi."
+    },
+    {
+     "t": "昨天我十二点才睡觉。",
+     "py": "Zuótiān wǒ shí'èr diǎn cái shuìjiào.",
+     "vi": "Hôm qua 12 giờ tôi mới đi ngủ."
+    },
+    {
+     "t": "坐地铁二十分钟就到了。",
+     "py": "Zuò dìtiě èrshí fēnzhōng jiù dào le.",
+     "vi": "Đi tàu điện 20 phút là đến."
+    },
+    {
+     "t": "他等了一个小时，公共汽车才来。",
+     "py": "Tā děngle yí ge xiǎoshí, gōnggòng qìchē cái lái.",
+     "vi": "Anh ấy đợi một tiếng, xe buýt mới đến."
+    }
+   ],
+   "tips": [
+    "❌ <i>他十点才来<b>了</b></i> → 他十点才来. Câu 才 <b>không</b> có 了 cuối câu.",
+    "就 / 才 đứng sau thời gian, trước động từ: ❌ <i>就他七点来了</i> → 他七点就来了.",
+    "Tiếng Việt: “7 giờ đã đến rồi” = 七点就来了; “10 giờ mới đến” = 十点才来. Chữ “mới” ↔ 才 rất khớp!"
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: 才 + số lượng (mới, chỉ) · V了…就… (xong là… ngay) · 就是",
+   "html": "<p><b>才 + số lượng</b> (đứng trước số): “mới / chỉ có” – người nói thấy <b>ít</b>: 他才二十岁, 才五十块.</p><p><b>V1 + 了 + (O) + 就 + V2</b>: làm xong việc 1 là <b>liền</b> làm việc 2: 下了班就回家. <b>就是</b> = chính là: 那就是我们公司.</p>",
+   "table": [
+    [
+     "Câu",
+     "Pinyin",
+     "Nghĩa"
+    ],
+    [
+     "他才二十岁，就当经理了。",
+     "Tā cái èrshí suì, jiù dāng jīnglǐ le.",
+     "Anh ấy mới 20 tuổi đã làm giám đốc rồi."
+    ],
+    [
+     "这件衣服才五十块。",
+     "Zhè jiàn yīfu cái wǔshí kuài.",
+     "Cái áo này chỉ có 50 tệ."
+    ],
+    [
+     "我下了班就回家。",
+     "Wǒ xiàle bān jiù huí jiā.",
+     "Tan làm là tôi về nhà ngay."
+    ],
+    [
+     "那就是我们公司。",
+     "Nà jiù shì wǒmen gōngsī.",
+     "Kia chính là công ty chúng tôi."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我吃了早饭就去上班。",
+     "py": "Wǒ chīle zǎofàn jiù qù shàngbān.",
+     "vi": "Tôi ăn sáng xong là đi làm."
+    },
+    {
+     "t": "现在才七点，你再睡一会儿吧。",
+     "py": "Xiànzài cái qī diǎn, nǐ zài shuì yíhuìr ba.",
+     "vi": "Mới 7 giờ thôi, bạn ngủ thêm chút nữa đi."
+    }
+   ],
+   "tips": [
+    "才 + số nhấn ý “ít”: 才五十块 – rẻ thế! (so với 只 zhǐ – chỉ).",
+    "Câu thói quen 下了班就回家: 了 đứng sau động từ thứ nhất, không cần 了 cuối câu."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: 再 – lại, nữa, rồi mới",
+   "html": "<p><b>再 + V</b>: (1) làm lại / làm thêm trong <b>tương lai</b>: 再说一遍, 明天再来; (2) “<b>rồi mới / rồi hẵng</b>”: làm việc này xong rồi mới làm việc kia: 吃了饭再走. Phân biệt với <b>又</b> yòu – “lại” cho việc <b>đã xảy ra</b>: 他又迟到了.</p>",
+   "ex": [
+    {
+     "t": "请再说一遍。",
+     "py": "Qǐng zài shuō yí biàn.",
+     "vi": "Xin nói lại một lần nữa."
+    },
+    {
+     "t": "今天太晚了，明天再做吧。",
+     "py": "Jīntiān tài wǎn le, míngtiān zài zuò ba.",
+     "vi": "Hôm nay muộn quá rồi, mai hẵng làm."
+    },
+    {
+     "t": "我们先开始吧，他来了再告诉他。",
+     "py": "Wǒmen xiān kāishǐ ba, tā láile zài gàosu tā.",
+     "vi": "Chúng ta bắt đầu trước đi, anh ấy đến rồi hẵng nói lại với anh ấy."
+    }
+   ],
+   "tips": [
+    "Tiếng Việt “rồi hẵng / rồi mới” ↔ 再: 吃了饭再走 = ăn cơm rồi hẵng đi.",
+    "Việc lặp lại <b>đã xảy ra</b> dùng 又 (HSK 3): 他昨天迟到了，今天又迟到了."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Ai dậy sớm nhất?",
+   "lang": "zh-CN",
+   "note": "7 giờ 40 sáng thứ Hai ở văn phòng. 张丽 và 小兰 nói chuyện về giờ giấc sinh hoạt; A Minh vẫn chưa đến. Nghe lần 1: ai dậy sớm? A Minh mấy giờ mới đến được?",
+   "lines": [
+    {
+     "s": "张丽",
+     "g": "f",
+     "t": "小兰，早！你今天来得真早！",
+     "py": "Xiǎo Lán, zǎo! Nǐ jīntiān lái de zhēn zǎo!",
+     "vi": "Tiểu Lan, chào buổi sáng! Hôm nay bạn đến sớm thật!"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "早！我七点半就到公司了。九点要开会。",
+     "py": "Zǎo! Wǒ qī diǎn bàn jiù dào gōngsī le. Jiǔ diǎn yào kāi huì.",
+     "vi": "Chào! 7 rưỡi mình đã đến công ty rồi. 9 giờ phải họp."
+    },
+    {
+     "s": "张丽",
+     "g": "f",
+     "t": "你几点起床的？",
+     "py": "Nǐ jǐ diǎn qǐchuáng de?",
+     "vi": "Bạn dậy lúc mấy giờ?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "五点半就起床了。我先跑步，再吃早饭。",
+     "py": "Wǔ diǎn bàn jiù qǐchuáng le. Wǒ xiān pǎobù, zài chī zǎofàn.",
+     "vi": "5 rưỡi đã dậy rồi. Mình chạy bộ trước, rồi mới ăn sáng."
+    },
+    {
+     "s": "张丽",
+     "g": "f",
+     "t": "你早饭吃什么？",
+     "py": "Nǐ zǎofàn chī shénme?",
+     "vi": "Bữa sáng bạn ăn gì?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "一个鸡蛋，一杯牛奶。你呢？",
+     "py": "Yí ge jīdàn, yì bēi niúnǎi. Nǐ ne?",
+     "vi": "Một quả trứng, một cốc sữa. Còn bạn?"
+    },
+    {
+     "s": "张丽",
+     "g": "f",
+     "t": "我常常不吃早饭。我七点才起床，起床以后就出门了。",
+     "py": "Wǒ chángcháng bù chī zǎofàn. Wǒ qī diǎn cái qǐchuáng, qǐchuáng yǐhòu jiù chūmén le.",
+     "vi": "Mình hay không ăn sáng. 7 giờ mình mới dậy, dậy xong là ra khỏi nhà luôn."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "不吃早饭对身体不好啊！",
+     "py": "Bù chī zǎofàn duì shēntǐ bù hǎo a!",
+     "vi": "Không ăn sáng không tốt cho sức khoẻ đâu!"
+    },
+    {
+     "s": "张丽",
+     "g": "f",
+     "t": "我知道。可是我晚上十二点才睡觉……",
+     "py": "Wǒ zhīdào. Kěshì wǒ wǎnshang shí'èr diǎn cái shuìjiào……",
+     "vi": "Mình biết. Nhưng tối 12 giờ mình mới đi ngủ…"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "太晚了！阿明呢？他还没来吗？",
+     "py": "Tài wǎn le! Ā Míng ne? Tā hái méi lái ma?",
+     "vi": "Muộn quá! Còn A Minh? Cậu ấy vẫn chưa đến à?"
+    },
+    {
+     "s": "张丽",
+     "g": "f",
+     "t": "他刚才打电话说，路上车太多，九点半才能到。",
+     "py": "Tā gāngcái dǎ diànhuà shuō, lùshang chē tài duō, jiǔ diǎn bàn cái néng dào.",
+     "vi": "Vừa nãy cậu ấy gọi điện nói đường đông xe quá, 9 rưỡi mới đến được."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "会九点开始。我们先开始吧，他来了再告诉他。",
+     "py": "Huì jiǔ diǎn kāishǐ. Wǒmen xiān kāishǐ ba, tā láile zài gàosu tā.",
+     "vi": "Họp 9 giờ bắt đầu. Mình cứ bắt đầu trước, cậu ấy đến rồi nói lại sau."
+    },
+    {
+     "s": "张丽",
+     "g": "f",
+     "t": "好。下了班我们一起去吃饭吧！",
+     "py": "Hǎo. Xiàle bān wǒmen yìqǐ qù chī fàn ba!",
+     "vi": "Được. Tan làm chúng mình cùng đi ăn nhé!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "小兰 đến công ty lúc mấy giờ?",
+     "o": [
+      "7:00",
+      "7:30",
+      "9:00"
+     ],
+     "a": 1,
+     "e": "我七点半就到公司了."
+    },
+    {
+     "q": "小兰 ăn sáng gì?",
+     "o": [
+      "Bánh bao và sữa đậu nành",
+      "Một quả trứng, một cốc sữa",
+      "Không ăn sáng"
+     ],
+     "a": 1,
+     "e": "一个鸡蛋，一杯牛奶."
+    },
+    {
+     "q": "张丽 mấy giờ đi ngủ?",
+     "o": [
+      "10 giờ",
+      "11 giờ",
+      "12 giờ"
+     ],
+     "a": 2,
+     "e": "我晚上十二点才睡觉 – 才 = muộn."
+    },
+    {
+     "q": "A Minh mấy giờ mới đến được? Vì sao?",
+     "o": [
+      "9:30, vì đường đông xe",
+      "9:00, vì dậy muộn",
+      "10:00, vì xe hỏng"
+     ],
+     "a": 0,
+     "e": "路上车太多，九点半才能到."
+    },
+    {
+     "q": "张丽说：我七点___起床。(Wǒ qī diǎn ___ qǐchuáng – điền 1 chữ: mới)",
+     "a": "才",
+     "alt": [
+      "cai",
+      "cái"
+     ],
+     "e": "7 giờ mới dậy (muộn so với Tiểu Lan) → 才."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Hai người ở chung",
+   "title": "两个室友",
+   "text": "李华和阿明住在一起，可是他们的时间很不一样。\n\n李华每天早上六点就起床了。起床以后，他先跑步，再吃早饭，七点半就出门了。\n\n阿明每天七点半才起床。他不吃早饭，喝一杯咖啡就去上班。晚上，李华十点就睡觉了，阿明十二点才睡。李华说：“你睡得太晚了！”阿明笑着说：“没关系，我是夜猫子！”",
+   "py": "Lǐ Huá hé Ā Míng zhù zài yìqǐ, kěshì tāmen de shíjiān hěn bù yíyàng.\n\nLǐ Huá měi tiān zǎoshang liù diǎn jiù qǐchuáng le. Qǐchuáng yǐhòu, tā xiān pǎobù, zài chī zǎofàn, qī diǎn bàn jiù chūmén le.\n\nĀ Míng měi tiān qī diǎn bàn cái qǐchuáng. Tā bù chī zǎofàn, hē yì bēi kāfēi jiù qù shàngbān. Wǎnshang, Lǐ Huá shí diǎn jiù shuìjiào le, Ā Míng shí'èr diǎn cái shuì. Lǐ Huá shuō: “Nǐ shuì de tài wǎn le!” Ā Míng xiàozhe shuō: “Méi guānxi, wǒ shì yèmāozi!”",
+   "vi": "Lý Hoa và A Minh ở cùng nhau, nhưng giờ giấc của họ rất khác nhau.\n\nSáng nào Lý Hoa cũng 6 giờ đã dậy. Dậy xong, anh ấy chạy bộ trước, rồi ăn sáng, 7 giờ rưỡi đã ra khỏi nhà.\n\nA Minh ngày nào cũng 7 giờ rưỡi mới dậy. Anh ấy không ăn sáng, uống một cốc cà phê là đi làm. Buổi tối, Lý Hoa 10 giờ đã đi ngủ, A Minh 12 giờ mới ngủ. Lý Hoa nói: “Cậu ngủ muộn quá!” A Minh cười nói: “Không sao, tôi là cú đêm mà!”",
+   "gloss": [
+    {
+     "w": "室友",
+     "py": "shìyǒu",
+     "vi": "bạn cùng phòng"
+    },
+    {
+     "w": "住在一起",
+     "py": "zhù zài yìqǐ",
+     "vi": "ở cùng nhau"
+    },
+    {
+     "w": "一样",
+     "py": "yíyàng",
+     "vi": "giống nhau"
+    },
+    {
+     "w": "先…再…",
+     "py": "xiān… zài…",
+     "vi": "trước… rồi mới…"
+    },
+    {
+     "w": "出门",
+     "py": "chūmén",
+     "vi": "ra khỏi nhà"
+    },
+    {
+     "w": "笑着说",
+     "py": "xiàozhe shuō",
+     "vi": "cười nói"
+    },
+    {
+     "w": "夜猫子",
+     "py": "yèmāozi",
+     "vi": "cú đêm (người hay thức khuya)"
+    }
+   ],
+   "qs": [
+    {
+     "q": "李华每天几点起床？(Lǐ Huá měi tiān jǐ diǎn qǐchuáng?)",
+     "o": [
+      "六点",
+      "七点半",
+      "十点"
+     ],
+     "a": 0,
+     "e": "李华每天早上六点就起床了."
+    },
+    {
+     "q": "阿明早上吃什么？(Ā Míng zǎoshang chī shénme?)",
+     "o": [
+      "鸡蛋和牛奶",
+      "不吃早饭，只喝咖啡",
+      "面包"
+     ],
+     "a": 1,
+     "e": "他不吃早饭，喝一杯咖啡就去上班."
+    },
+    {
+     "q": "Câu 阿明十二点才睡 cho thấy người viết nghĩ gì?",
+     "o": [
+      "A Minh ngủ sớm",
+      "A Minh ngủ muộn",
+      "A Minh ngủ đúng giờ"
+     ],
+     "a": 1,
+     "e": "才 = muộn hơn bình thường."
+    },
+    {
+     "q": "Ai ra khỏi nhà sớm hơn?",
+     "o": [
+      "李华",
+      "阿明"
+     ],
+     "a": 0,
+     "e": "李华七点半就出门了; lúc đó A Minh mới dậy."
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "就",
+     "py": "jiù",
+     "hv": "tựu",
+     "parts": "京 (kinh – kinh đô) + 尤 (vưu)",
+     "strokes": 12,
+     "vi": "liền, thì; đến (tựu trường, thành tựu)",
+     "words": "就是, 就要"
+    },
+    {
+     "c": "才",
+     "py": "cái",
+     "hv": "tài",
+     "parts": "Chữ tượng hình – mầm cây vừa nhú khỏi mặt đất",
+     "strokes": 3,
+     "vi": "mới (vừa mới nhú); tài năng (人才)",
+     "words": "刚才, 人才"
+    },
+    {
+     "c": "起",
+     "py": "qǐ",
+     "hv": "khởi",
+     "parts": "走 (tẩu – đi) + 己 (kỷ – mình)",
+     "strokes": 10,
+     "vi": "dậy, bắt đầu (khởi đầu, khởi hành)",
+     "words": "起床, 一起"
+    },
+    {
+     "c": "床",
+     "py": "chuáng",
+     "hv": "sàng",
+     "parts": "广 (nghiễm – mái nhà) + 木 (mộc – gỗ)",
+     "strokes": 7,
+     "vi": "giường – đồ gỗ trong nhà",
+     "words": "起床"
+    },
+    {
+     "c": "晚",
+     "py": "wǎn",
+     "hv": "vãn",
+     "parts": "日 (nhật – mặt trời) + 免 (miễn)",
+     "strokes": 11,
+     "vi": "muộn, tối – mặt trời đã lặn",
+     "words": "晚上, 晚饭"
+    },
+    {
+     "c": "再",
+     "py": "zài",
+     "hv": "tái",
+     "parts": "一 + 冉 (nhiễm)",
+     "strokes": 6,
+     "vi": "lại, nữa (tái bản, tái phát)",
+     "words": "再见, 再说"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Giờ giấc của tôi",
+   "tasks": [
+    {
+     "p": "Kể buổi sáng của bạn: mấy giờ dậy, ăn gì, mấy giờ ra khỏi nhà – dùng 就 hoặc 才.",
+     "model": "我每天六点就起床了。我先吃早饭：一个鸡蛋、一杯牛奶，七点就出门了。",
+     "py": "Wǒ měi tiān liù diǎn jiù qǐchuáng le. Wǒ xiān chī zǎofàn: yí ge jīdàn, yì bēi niúnǎi, qī diǎn jiù chūmén le.",
+     "vi": "Ngày nào tôi cũng 6 giờ đã dậy. Tôi ăn sáng trước: một quả trứng, một cốc sữa, 7 giờ đã ra khỏi nhà.",
+     "tips": "Câu 就 có 了 cuối câu; 先…再… / 先…然后…"
+    },
+    {
+     "p": "So sánh bạn với một người trong gia đình: dậy, ngủ sớm hay muộn.",
+     "model": "我妈妈五点就起床了，我七点才起床。晚上她十点就睡了，我十二点才睡。",
+     "py": "Wǒ māma wǔ diǎn jiù qǐchuáng le, wǒ qī diǎn cái qǐchuáng. Wǎnshang tā shí diǎn jiù shuì le, wǒ shí'èr diǎn cái shuì.",
+     "vi": "Mẹ tôi 5 giờ đã dậy, tôi 7 giờ mới dậy. Buổi tối mẹ 10 giờ đã ngủ, tôi 12 giờ mới ngủ."
+    },
+    {
+     "p": "Đồng nghiệp đến muộn: hỏi sao giờ này mới đến; bạn ấy giải thích.",
+     "model": "你怎么九点才来？— 对不起，路上车太多，我七点半就出门了。",
+     "py": "Nǐ zěnme jiǔ diǎn cái lái? — Duìbuqǐ, lùshang chē tài duō, wǒ qī diǎn bàn jiù chūmén le.",
+     "vi": "Sao 9 giờ bạn mới đến? — Xin lỗi, đường đông xe quá, 7 rưỡi tôi đã ra khỏi nhà rồi."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Một ngày của tôi",
+   "task": "Viết 60–90 chữ về thói quen hằng ngày: mấy giờ dậy, ăn sáng gì, đi làm, tan làm, đi ngủ. Dùng ít nhất 2 câu 就, 2 câu 才 và 1 câu 先…再… hoặc V了…就….",
+   "min": 60,
+   "model": "我每天早上六点就起床了。起床以后我先洗澡，再吃早饭。我的早饭很简单：两个鸡蛋，一杯牛奶。七点我就出门了，因为公司离我家很远。我五点半下班，可是路上车太多，常常七点才到家。晚上我学一个小时汉语，十一点才睡觉。周末我九点才起床！",
+   "modelVi": "Sáng nào tôi cũng 6 giờ đã dậy. Dậy xong tôi tắm trước, rồi mới ăn sáng. Bữa sáng của tôi rất đơn giản: hai quả trứng, một cốc sữa. 7 giờ tôi đã ra khỏi nhà, vì công ty cách nhà tôi rất xa. Tôi tan làm lúc 5 rưỡi, nhưng đường đông xe quá, thường 7 giờ mới về đến nhà. Buổi tối tôi học tiếng Trung một tiếng, 11 giờ mới đi ngủ. Cuối tuần thì 9 giờ tôi mới dậy!",
+   "tips": [
+    "Câu 才 không có 了.",
+    "Thời điểm đặt trước động từ; thời lượng (一个小时) sau động từ – ôn Bài 9."
+   ],
+   "checklist": [
+    "Có ≥ 2 câu thời gian + 就 + V + 了",
+    "Có ≥ 2 câu thời gian + 才 + V (không có 了)",
+    "Có 1 câu 先…再… hoặc V了…就…",
+    "Thời điểm đặt trước động từ",
+    "Đọc/viết giờ đúng (零, 半)"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "他七点就来了。",
+   "lang": "zh-CN",
+   "q": "Người nói thấy anh ấy đến thế nào?",
+   "o": [
+    "Sớm",
+    "Muộn",
+    "Bình thường"
+   ],
+   "a": 0,
+   "e": "就…了 = sớm hơn dự kiến."
+  },
+  {
+   "t": "listen",
+   "say": "我十二点才睡觉。",
+   "lang": "zh-CN",
+   "q": "Người nói đi ngủ thế nào?",
+   "o": [
+    "Sớm",
+    "Muộn – 12 giờ mới ngủ",
+    "Không ngủ"
+   ],
+   "a": 1,
+   "e": "才 = muộn hơn bình thường."
+  },
+  {
+   "t": "listen",
+   "say": "这件衣服才五十块。",
+   "lang": "zh-CN",
+   "q": "Người nói thấy giá cái áo thế nào?",
+   "o": [
+    "Rẻ – chỉ 50 tệ",
+    "Đắt",
+    "Bình thường"
+   ],
+   "a": 0,
+   "e": "才 + số = chỉ, mới (ít)."
+  },
+  {
+   "t": "mc",
+   "q": "“10 giờ anh ấy mới đến” – câu đúng:",
+   "o": [
+    "他十点才来了。",
+    "他十点才来。",
+    "才他十点来。"
+   ],
+   "a": 1,
+   "e": "Thời gian + 才 + V, không có 了 cuối câu."
+  },
+  {
+   "t": "mc",
+   "q": "Điền 就 hay 才: 会议九点开始，他八点___到了。(Huìyì jiǔ diǎn kāishǐ, tā bā diǎn ___ dào le.)",
+   "o": [
+    "就",
+    "才"
+   ],
+   "a": 0,
+   "e": "Đến trước giờ họp → sớm → 就…了."
+  },
+  {
+   "t": "mc",
+   "q": "Điền 就 hay 才: 我等了一个小时，他___来。(Wǒ děngle yí ge xiǎoshí, tā ___ lái.)",
+   "o": [
+    "就",
+    "才"
+   ],
+   "a": 1,
+   "e": "Đợi 1 tiếng → muộn → 才 (không có 了)."
+  },
+  {
+   "t": "mc",
+   "q": "我下了班就回家 (Wǒ xiàle bān jiù huí jiā) nghĩa là:",
+   "o": [
+    "Tôi tan làm rồi lâu sau mới về nhà.",
+    "Tan làm là tôi về nhà ngay.",
+    "Tôi về nhà rồi mới tan làm."
+   ],
+   "a": 1,
+   "e": "V了…就… = xong việc 1 là làm việc 2 ngay."
+  },
+  {
+   "t": "mc",
+   "q": "“Ăn cơm xong rồi hẵng đi” – câu đúng:",
+   "o": [
+    "吃了饭再走吧。",
+    "吃了饭又走吧。",
+    "再吃了饭走吧。"
+   ],
+   "a": 0,
+   "e": "再 = rồi mới (việc chưa xảy ra); 又 dùng cho việc đã xảy ra."
+  },
+  {
+   "t": "fill",
+   "q": "你每天几点___床？ (Nǐ měi tiān jǐ diǎn ___chuáng?) (dậy – 1 chữ)",
+   "py": "qǐ",
+   "a": "起",
+   "alt": [
+    "qi",
+    "qǐ"
+   ],
+   "e": "起床 = thức dậy."
+  },
+  {
+   "t": "fill",
+   "q": "现在八点___五分。 (Xiànzài bā diǎn ___ wǔ fēn.) (8:05 – số không)",
+   "py": "líng",
+   "a": "零",
+   "alt": [
+    "ling",
+    "líng"
+   ],
+   "e": "8:05 = 八点零五分."
+  },
+  {
+   "t": "fill",
+   "q": "我早上喝一杯___。 (Wǒ zǎoshang hē yì bēi ___.) (sữa – 2 chữ)",
+   "py": "niúnǎi",
+   "a": "牛奶",
+   "alt": [
+    "niunai"
+   ],
+   "e": "牛奶 niúnǎi = sữa bò."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp: “Anh ấy 6 giờ đã dậy rồi.”",
+   "w": [
+    "起床了",
+    "他",
+    "就",
+    "六点"
+   ],
+   "a": "他六点就起床了",
+   "e": "S + thời gian + 就 + V + 了.",
+   "alt": [
+    "六点他就起床了"
+   ]
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp: “Tôi 2 tiếng mới làm xong.”",
+   "w": [
+    "才",
+    "我",
+    "做完",
+    "两个小时"
+   ],
+   "a": "我两个小时才做完",
+   "e": "S + thời lượng + 才 + V (không có 了).",
+   "alt": [
+    "两个小时我才做完"
+   ]
+  },
+  {
+   "t": "dict",
+   "say": "我九点才起床。",
+   "lang": "zh-CN",
+   "a": "我九点才起床。",
+   "py": "Wǒ jiǔ diǎn cái qǐchuáng.",
+   "e": "Gõ chữ Hán hoặc pinyin."
+  },
+  {
+   "t": "match",
+   "q": "Nối:",
+   "pairs": [
+    [
+     "起床",
+     "thức dậy"
+    ],
+    [
+     "早饭",
+     "bữa sáng"
+    ],
+    [
+     "鸡蛋",
+     "trứng gà"
+    ],
+    [
+     "下班",
+     "tan làm"
+    ],
+    [
+     "出门",
+     "ra khỏi nhà"
+    ],
+    [
+     "时间",
+     "thời gian"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Đồng hồ giấy; bảng thời gian biểu hai nhân vật (một người dậy sớm, một người dậy muộn); ảnh đồ ăn sáng (鸡蛋, 牛奶, 包子, 油条, 牛肉粉); thẻ 就 / 才; thẻ chữ 就 才 起 床 晚 再.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: hỏi học viên mấy giờ dậy; GV phản ứng cường điệu: 五点？你五点就起床了！/ 九点？你九点才起床！ Học viên đoán sắc thái."
+   },
+   {
+    "t": "20'",
+    "do": "Từ vựng 13 từ: sinh hoạt (起床 早饭 鸡蛋 牛奶 出 进 下班), thời gian (时间 晚 零), phó từ (就 才 再). Văn hoá bữa sáng: 油条 = quẩy."
+   },
+   {
+    "t": "10'",
+    "do": "Phát âm: j–zh (鸡/知), q–ch (起/尺), c–z (才/在), n–l (牛奶)."
+   },
+   {
+    "t": "30'",
+    "do": "Ngữ pháp 1: bảng sớm/muộn; luyện với thời gian biểu 2 nhân vật: 李华六点就起床了，阿明七点半才起床. Nhấn mạnh “才 không có 了”."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe hội thoại 3 lần; trả lời câu hỏi; đọc phân vai."
+   },
+   {
+    "t": "5'",
+    "do": "Giao bài tập 1–8."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: trò “Sớm hay muộn?” (xem trò chơi)."
+   },
+   {
+    "t": "15'",
+    "do": "Ngữ pháp 2–3: 才 + số (才五十块); V了…就…; 就是; 再 (rồi mới) vs 又."
+   },
+   {
+    "t": "15'",
+    "do": "Đọc ‘两个室友’; vẽ bảng so sánh giờ giấc 2 người."
+   },
+   {
+    "t": "15'",
+    "do": "Chữ Hán 就 才 起 床 晚 再 (才 tượng hình mầm cây; 床 = 广 + 木)."
+   },
+   {
+    "t": "20'",
+    "do": "Nói 3 nhiệm vụ: kể buổi sáng; so sánh với người nhà; hỏi đồng nghiệp đến muộn."
+   },
+   {
+    "t": "15'",
+    "do": "Viết “Một ngày của tôi”; bài tập 9–15; chữa lỗi chung."
+   }
+  ],
+  "games": [
+   "Sớm hay muộn?: GV nêu tình huống (“Họp 9h, Minh đến 8h”; “Phim chiếu 7h, Lan đến 7h30”), cả lớp giơ thẻ 就 hoặc 才, rồi một bạn nói trọn câu. Đội sai bị trừ điểm.",
+   "Chuỗi buổi sáng: mỗi học viên nói một hành động nối tiếp bằng V了…就… (我起了床就洗脸 → 我洗了脸就吃早饭 → …). Ai bí quá 5 giây hoặc lặp động từ thì ra ngoài."
+  ],
+  "errors": [
+   "Thêm 了 vào câu 才: ❌ 他十点才来了 → 他十点才来.",
+   "Quên 了 trong câu 就 kể việc đã xảy ra: ❌ 他七点就来 → 他七点就来了.",
+   "Đặt 就/才 trước thời gian hoặc chủ ngữ: ❌ 就他七点来了 → 他七点就来了.",
+   "Dùng ngược nghĩa vì không cảm nhận sớm/muộn: luyện bằng tiếng Việt “đã… rồi” ↔ 就, “mới” ↔ 才.",
+   "Nhầm 再 (lại – tương lai) với 又 (lại – đã xảy ra).",
+   "Đọc 才 cái thành zài (在) – mất bật hơi."
+  ],
+  "homework": "Bài tập game ≥ 80%; viết “Một ngày của tôi” 60–90 chữ; ghi giờ dậy/ngủ của bạn và một người thân trong 3 ngày, nói thành câu 就/才 (ghi âm); ôn thẻ từ 15 phút/ngày."
+ }
 }

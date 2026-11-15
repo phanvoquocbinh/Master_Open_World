@@ -1,62 +1,331 @@
 {
-  "no": 27,
-  "lv": "b1",
-  "title": "Họp daily stand-up",
-  "sub": "Yesterday, today, blockers",
-  "situation": "Buổi họp đứng 15 phút mỗi sáng của một nhóm Scrum. Anna (Scrum Master) điều phối; Chloe (lập trình front-end), Raj (lập trình back-end) và Minh (tester) lần lượt báo cáo theo 3 ý: hôm qua làm gì – hôm nay làm gì – có vướng mắc (blocker) gì không. Minh bị chặn vì môi trường test bị sập; Raj nhận lỗi; Anna khéo léo dừng một cuộc thảo luận chi tiết để giữ buổi họp ngắn gọn.",
-  "lang": "en-GB",
-  "lines": [
-    {"s": "Anna", "g": "f", "t": "Morning, everyone. Let's get started. We've got fifteen minutes. Chloe, do you want to kick off?", "vi": "Chào buổi sáng mọi người. Mình bắt đầu nhé. Chúng ta có mười lăm phút. Chloe, em mở đầu nhé?"},
-    {"s": "Chloe", "g": "f", "t": "Sure. Yesterday I finished the new login page and deployed it to the test environment. Today I'm going to work on the password reset screen. No blockers for me.", "vi": "Vâng. Hôm qua em làm xong trang đăng nhập mới và đưa lên môi trường test. Hôm nay em sẽ làm màn hình đặt lại mật khẩu. Em không có vướng mắc gì."},
-    {"s": "Anna", "g": "f", "t": "Great, thanks. Raj?", "vi": "Tốt, cảm ơn em. Raj?"},
-    {"s": "Raj", "g": "m", "t": "Yesterday I was mostly fixing the payment timeout issue. I think it's fixed, but I still need to write some unit tests. Today I'll finish those and then start on the report export.", "vi": "Hôm qua anh chủ yếu sửa lỗi hết thời gian chờ ở phần thanh toán. Anh nghĩ là sửa xong rồi, nhưng vẫn phải viết thêm vài unit test. Hôm nay anh sẽ viết xong rồi bắt đầu phần xuất báo cáo."},
-    {"s": "Anna", "g": "f", "t": "Any blockers?", "vi": "Có vướng mắc gì không?"},
-    {"s": "Raj", "g": "m", "t": "Not really. I might need Minh's help to check the payment flow later.", "vi": "Không hẳn. Lát nữa có thể anh cần Minh giúp kiểm tra luồng thanh toán."},
-    {"s": "Minh", "g": "m", "t": "Sure, no problem. So, yesterday I tested Chloe's login page. I found two minor issues and one major one: if you enter the wrong password five times, the account isn't locked.", "vi": "Vâng, không vấn đề gì. Vậy, hôm qua em kiểm thử trang đăng nhập của Chloe. Em tìm thấy hai lỗi nhỏ và một lỗi lớn: nếu nhập sai mật khẩu năm lần thì tài khoản không bị khoá."},
-    {"s": "Chloe", "g": "f", "t": "Oh, really? I thought I'd handled that. I'll take a look right after this.", "vi": "Ồ, thật à? Em tưởng em xử lý phần đó rồi. Em sẽ xem ngay sau buổi này."},
-    {"s": "Minh", "g": "m", "t": "Thanks. Today I'm planning to retest the payment fix, but I'm actually blocked at the moment, because the test environment has been down since last night.", "vi": "Cảm ơn chị. Hôm nay em định kiểm thử lại bản sửa lỗi thanh toán, nhưng thực ra hiện giờ em đang bị chặn, vì môi trường test bị sập từ tối qua."},
-    {"s": "Anna", "g": "f", "t": "Ah, that's not good. Does anyone know what's going on?", "vi": "À, thế thì không ổn rồi. Có ai biết chuyện gì đang xảy ra không?"},
-    {"s": "Raj", "g": "m", "t": "I think it might be the database migration I ran yesterday. Sorry, that's probably my fault. I'll look into it straight after stand-up.", "vi": "Anh nghĩ có thể do đợt chuyển đổi cơ sở dữ liệu anh chạy hôm qua. Xin lỗi, chắc là lỗi của anh. Anh sẽ kiểm tra ngay sau buổi stand-up."},
-    {"s": "Anna", "g": "f", "t": "OK, thanks, Raj. Minh, while you're waiting, could you work on the test cases for the export feature?", "vi": "Được, cảm ơn Raj. Minh, trong lúc chờ, em viết test case cho tính năng xuất báo cáo được không?"},
-    {"s": "Minh", "g": "m", "t": "Yes, I can do that. Raj, could you ping me when it's back up?", "vi": "Vâng, em làm được. Anh Raj, khi nào môi trường chạy lại thì nhắn em nhé?"},
-    {"s": "Raj", "g": "m", "t": "Will do.", "vi": "Ừ, anh sẽ nhắn."},
-    {"s": "Chloe", "g": "f", "t": "Quick question about the lockout rule, actually. Is it five attempts or three? Because the design says...", "vi": "Mà em hỏi nhanh về quy tắc khoá tài khoản. Là năm lần hay ba lần ạ? Vì bản thiết kế ghi là..."},
-    {"s": "Anna", "g": "f", "t": "Let's take that offline, Chloe. You and Minh can check the user story together after this. Anything else?", "vi": "Mình bàn riêng chuyện đó sau nhé, Chloe. Em và Minh xem lại user story cùng nhau sau buổi này. Còn gì nữa không?"},
-    {"s": "Raj", "g": "m", "t": "Just a reminder that the sprint review is on Thursday at two.", "vi": "Chỉ nhắc mọi người là buổi sprint review vào thứ Năm lúc hai giờ."},
-    {"s": "Anna", "g": "f", "t": "Thanks, Raj. OK, that's everyone. Have a good day, all!", "vi": "Cảm ơn Raj. Được rồi, mọi người đã báo cáo xong. Chúc cả nhà một ngày tốt lành!"}
-  ],
-  "phrases": [
-    {"t": "Do you want to kick off?", "vi": "Bạn mở đầu nhé?", "note": "kick off = bắt đầu (cuộc họp, dự án). Thân mật, rất phổ biến ở công sở. Trang trọng hơn: “Would you like to start?” Danh từ: a kick-off meeting = buổi họp khởi động dự án."},
-    {"t": "Yesterday I… Today I'm going to… No blockers.", "vi": "Hôm qua tôi… Hôm nay tôi sẽ… Không có vướng mắc.", "note": "Khung 3 ý chuẩn của stand-up, mỗi người 1–2 phút. Hôm qua dùng quá khứ đơn (finished, tested); hôm nay dùng be going to / will / be planning to. Lỗi người Việt: kể quá chi tiết kỹ thuật, hoặc chỉ nói “Same as yesterday” – thiếu thông tin cho nhóm."},
-    {"t": "I'm blocked. / a blocker", "vi": "Tôi đang bị chặn (không làm tiếp được). / vướng mắc", "note": "blocked = không thể tiếp tục vì phụ thuộc người/việc khác. Nói rõ ai/cái gì đang chặn bạn: “I'm blocked because the test environment is down.” Đừng giấu blocker – nêu sớm để nhóm giúp."},
-    {"t": "The test environment has been down since last night.", "vi": "Môi trường test bị sập từ tối qua.", "note": "be down = (hệ thống) ngừng hoạt động; be back up = hoạt động lại. Hiện tại hoàn thành + since cho trạng thái kéo dài đến giờ. Lỗi người Việt: “The server is die / is dead since yesterday.” Đúng: “The server has been down since yesterday.”"},
-    {"t": "a minor issue / a major issue", "vi": "lỗi nhỏ / lỗi lớn", "note": "Cách nói mức độ trong cuộc trò chuyện. Thuật ngữ trong công cụ quản lý lỗi: trivial – minor – major – critical – blocker. Có thể nói “a showstopper” = lỗi nghiêm trọng đến mức không thể phát hành."},
-    {"t": "I'll take a look right after this.", "vi": "Tôi sẽ xem ngay sau buổi này.", "note": "Phản hồi chuyên nghiệp khi được báo lỗi: không tranh cãi trong stand-up, hứa xem ngay. take a look (at something) = xem xét. Biến thể: “I'll check it this morning.”"},
-    {"t": "That's probably my fault. I'll look into it.", "vi": "Chắc là lỗi của tôi. Tôi sẽ điều tra.", "note": "Nhận trách nhiệm nhanh gọn rồi chuyển sang hành động – được đánh giá cao trong môi trường làm việc phương Tây. look into something = điều tra, tìm hiểu nguyên nhân."},
-    {"t": "Could you ping me when it's back up?", "vi": "Khi nào hệ thống chạy lại thì nhắn tôi nhé?", "note": "ping somebody = nhắn tin nhanh (qua ứng dụng chat công ty). Thân mật, phổ biến trong ngành IT. Trang trọng hơn: “Could you let me know when it's working again?”"},
-    {"t": "Will do.", "vi": "Sẽ làm. / Được thôi.", "note": "Cách đồng ý ngắn gọn khi ai nhờ việc, nghĩa là “I will do that”. Thân mật nhưng dùng được với sếp. Không dùng để trả lời câu hỏi có/không."},
-    {"t": "Let's take that offline.", "vi": "Mình bàn riêng chuyện đó sau nhé.", "note": "Câu lịch sự để dừng một cuộc thảo luận chi tiết, chỉ liên quan vài người, để họp không bị kéo dài. “offline” ở đây không liên quan đến mạng. Biến thể: “Let's park that for now.” / “Can we discuss that after the meeting?”"},
-    {"t": "Just a reminder that…", "vi": "Chỉ nhắc mọi người là…", "note": "Mở đầu lời nhắc nhẹ nhàng. Trang trọng (email): “This is a gentle reminder that…”. Tránh “I remind you that…” – nghe như ra lệnh."}
-  ],
-  "qs": [
-    {"q": "What did Chloe finish yesterday?", "o": ["The password reset screen", "The new login page", "The report export"], "a": 1, "e": "Chloe: “Yesterday I finished the new login page…” – password reset là việc HÔM NAY của cô ấy."},
-    {"q": "What major issue did Minh find?", "o": ["The login page is too slow.", "The account isn't locked after five wrong passwords.", "Users can't reset their password."], "a": 1, "e": "Minh: “if you enter the wrong password five times, the account isn't locked.”"},
-    {"q": "Why is Minh blocked?", "o": ["Raj hasn't finished the export feature.", "The test environment has been down since last night.", "He doesn't have the user story."], "a": 1, "e": "Minh: “I'm actually blocked at the moment, because the test environment has been down since last night.”"},
-    {"q": "Raj thinks the problem was caused by the database ______ he ran yesterday.", "a": "migration", "e": "Raj: “I think it might be the database migration I ran yesterday.” – migration = chuyển đổi/nâng cấp cấu trúc dữ liệu."},
-    {"q": "What does Anna ask Minh to do while he is waiting?", "o": ["Write test cases for the export feature", "Fix the test environment", "Test the password reset screen"], "a": 0, "e": "Anna: “while you're waiting, could you work on the test cases for the export feature?” – người Scrum Master giỏi luôn tìm việc khác cho người bị chặn."},
-    {"q": "Why does Anna say “Let's take that offline”?", "o": ["Because the internet is not working", "Because the detailed question should be discussed after the meeting", "Because Chloe's question is wrong"], "a": 1, "e": "Câu hỏi về số lần khoá tài khoản là chi tiết, chỉ liên quan Chloe và Minh → bàn riêng sau để stand-up giữ đúng 15 phút."},
-    {"q": "What is Raj's attitude when the test environment problem is mentioned?", "o": ["He blames Minh.", "He admits it may be his fault and offers to fix it.", "He says it is not important."], "a": 1, "e": "Raj: “Sorry, that's probably my fault. I'll look into it straight after stand-up.” → nhận trách nhiệm và hành động ngay."},
-    {"q": "When is the sprint review?", "o": ["Thursday at two", "Tuesday at ten", "Thursday at twelve"], "a": 0, "e": "Raj nhắc: “the sprint review is on Thursday at two.”"}
-  ],
-  "exercises": [
-    {"t": "fill", "q": "I can't continue testing. I'm ___ because the test server is down.", "a": "blocked", "e": "be blocked = không thể tiếp tục vì phụ thuộc vào việc khác. Đây là từ khoá của stand-up."},
-    {"t": "listen", "say": "Could you ping me when it's back up?", "q": "Người nói muốn gì?", "o": ["Được nhắn tin khi hệ thống chạy lại", "Được gọi điện ngay bây giờ", "Muốn người kia đứng dậy"], "a": 0, "e": "ping = nhắn tin nhanh; back up = hoạt động trở lại (không phải “sao lưu” hay “đứng dậy”)."},
-    {"t": "order", "q": "Sắp xếp thành câu nhận trách nhiệm:", "w": ["look into it", "after stand-up.", "I'll", "straight"], "a": "I'll look into it straight after stand-up.", "e": "I'll + look into it (điều tra) + straight after (ngay sau) + sự kiện."},
-    {"t": "dict", "say": "The test environment has been down since last night.", "a": "The test environment has been down since last night.", "e": "Chú ý âm cuối: environment /t/, last /st/, night /t/. Cấu trúc has been + tính từ + since."},
-    {"t": "match", "q": "Nối thuật ngữ stand-up với nghĩa:", "pairs": [["kick off", "bắt đầu"], ["a blocker", "vướng mắc khiến không làm tiếp được"], ["take it offline", "bàn riêng sau buổi họp"], ["be down", "ngừng hoạt động"], ["Will do.", "Được, tôi sẽ làm."]]}
-  ],
-  "practice": [
-    {"p": "Báo cáo stand-up của bạn (khoảng 30–40 giây): hôm qua bạn test xong chức năng tìm kiếm và tìm được 3 lỗi; hôm nay bạn sẽ kiểm thử lại 2 lỗi đã sửa; bạn đang chờ lập trình viên cấp tài khoản test.", "model": "Yesterday I finished testing the search feature and logged three bugs – one of them is major: searching with Vietnamese accents returns no results. Today I'm going to retest the two bugs that were fixed last night. I do have one blocker: I still don't have a test account for the admin panel. Huy, could you set one up for me after this?", "vi": "Hôm qua tôi kiểm thử xong chức năng tìm kiếm và ghi nhận ba lỗi – một lỗi lớn: tìm kiếm có dấu tiếng Việt không ra kết quả. Hôm nay tôi sẽ kiểm thử lại hai lỗi đã được sửa tối qua. Tôi có một vướng mắc: tôi vẫn chưa có tài khoản test cho trang quản trị. Huy, sau buổi này cậu tạo giúp tôi một tài khoản được không?"},
-    {"p": "Bạn là Scrum Master. Hai thành viên bắt đầu tranh luận chi tiết về cách đặt tên biến trong stand-up. Hãy dừng lại lịch sự và chuyển sang người tiếp theo.", "model": "Sorry to interrupt – this is a really useful discussion, but let's take it offline so we can finish on time. Could you two catch up straight after this? Great. Linh, do you want to go next?", "vi": "Xin lỗi cắt ngang – đây là cuộc thảo luận rất hữu ích, nhưng mình bàn riêng sau để kết thúc đúng giờ nhé. Hai bạn trao đổi ngay sau buổi này được không? Tốt. Linh, em báo cáo tiếp nhé?"}
-  ]
+ "no": 27,
+ "lv": "b1",
+ "title": "Họp daily stand-up",
+ "sub": "Yesterday, today, blockers",
+ "situation": "Buổi họp đứng 15 phút mỗi sáng của một nhóm Scrum. Anna (Scrum Master) điều phối; Chloe (lập trình front-end), Raj (lập trình back-end) và Minh (tester) lần lượt báo cáo theo 3 ý: hôm qua làm gì – hôm nay làm gì – có vướng mắc (blocker) gì không. Minh bị chặn vì môi trường test bị sập; Raj nhận lỗi; Anna khéo léo dừng một cuộc thảo luận chi tiết để giữ buổi họp ngắn gọn.",
+ "lang": "en-GB",
+ "lines": [
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Morning, everyone. Let's get started. We've got fifteen minutes. Chloe, do you want to kick off?",
+   "vi": "Chào buổi sáng mọi người. Mình bắt đầu nhé. Chúng ta có mười lăm phút. Chloe, em mở đầu nhé?"
+  },
+  {
+   "s": "Chloe",
+   "g": "f",
+   "t": "Sure. Yesterday I finished the new login page and deployed it to the test environment. Today I'm going to work on the password reset screen. No blockers for me.",
+   "vi": "Vâng. Hôm qua em làm xong trang đăng nhập mới và đưa lên môi trường test. Hôm nay em sẽ làm màn hình đặt lại mật khẩu. Em không có vướng mắc gì."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Great, thanks. Raj?",
+   "vi": "Tốt, cảm ơn em. Raj?"
+  },
+  {
+   "s": "Raj",
+   "g": "m",
+   "t": "Yesterday I was mostly fixing the payment timeout issue. I think it's fixed, but I still need to write some unit tests. Today I'll finish those and then start on the report export.",
+   "vi": "Hôm qua anh chủ yếu sửa lỗi hết thời gian chờ ở phần thanh toán. Anh nghĩ là sửa xong rồi, nhưng vẫn phải viết thêm vài unit test. Hôm nay anh sẽ viết xong rồi bắt đầu phần xuất báo cáo."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Any blockers?",
+   "vi": "Có vướng mắc gì không?"
+  },
+  {
+   "s": "Raj",
+   "g": "m",
+   "t": "Not really. I might need Minh's help to check the payment flow later.",
+   "vi": "Không hẳn. Lát nữa có thể anh cần Minh giúp kiểm tra luồng thanh toán."
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "Sure, no problem. So, yesterday I tested Chloe's login page. I found two minor issues and one major one: if you enter the wrong password five times, the account isn't locked.",
+   "vi": "Vâng, không vấn đề gì. Vậy, hôm qua em kiểm thử trang đăng nhập của Chloe. Em tìm thấy hai lỗi nhỏ và một lỗi lớn: nếu nhập sai mật khẩu năm lần thì tài khoản không bị khoá."
+  },
+  {
+   "s": "Chloe",
+   "g": "f",
+   "t": "Oh, really? I thought I'd handled that. I'll take a look right after this.",
+   "vi": "Ồ, thật à? Em tưởng em xử lý phần đó rồi. Em sẽ xem ngay sau buổi này."
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "Thanks. Today I'm planning to retest the payment fix, but I'm actually blocked at the moment, because the test environment has been down since last night.",
+   "vi": "Cảm ơn chị. Hôm nay em định kiểm thử lại bản sửa lỗi thanh toán, nhưng thực ra hiện giờ em đang bị chặn, vì môi trường test bị sập từ tối qua."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Ah, that's not good. Does anyone know what's going on?",
+   "vi": "À, thế thì không ổn rồi. Có ai biết chuyện gì đang xảy ra không?"
+  },
+  {
+   "s": "Raj",
+   "g": "m",
+   "t": "I think it might be the database migration I ran yesterday. Sorry, that's probably my fault. I'll look into it straight after stand-up.",
+   "vi": "Anh nghĩ có thể do đợt chuyển đổi cơ sở dữ liệu anh chạy hôm qua. Xin lỗi, chắc là lỗi của anh. Anh sẽ kiểm tra ngay sau buổi stand-up."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "OK, thanks, Raj. Minh, while you're waiting, could you work on the test cases for the export feature?",
+   "vi": "Được, cảm ơn Raj. Minh, trong lúc chờ, em viết test case cho tính năng xuất báo cáo được không?"
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "Yes, I can do that. Raj, could you ping me when it's back up?",
+   "vi": "Vâng, em làm được. Anh Raj, khi nào môi trường chạy lại thì nhắn em nhé?"
+  },
+  {
+   "s": "Raj",
+   "g": "m",
+   "t": "Will do.",
+   "vi": "Ừ, anh sẽ nhắn."
+  },
+  {
+   "s": "Chloe",
+   "g": "f",
+   "t": "Quick question about the lockout rule, actually. Is it five attempts or three? Because the design says...",
+   "vi": "Mà em hỏi nhanh về quy tắc khoá tài khoản. Là năm lần hay ba lần ạ? Vì bản thiết kế ghi là..."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Let's take that offline, Chloe. You and Minh can check the user story together after this. Anything else?",
+   "vi": "Mình bàn riêng chuyện đó sau nhé, Chloe. Em và Minh xem lại user story cùng nhau sau buổi này. Còn gì nữa không?"
+  },
+  {
+   "s": "Raj",
+   "g": "m",
+   "t": "Just a reminder that the sprint review is on Thursday at two.",
+   "vi": "Chỉ nhắc mọi người là buổi sprint review vào thứ Năm lúc hai giờ."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Thanks, Raj. OK, that's everyone. Have a good day, all!",
+   "vi": "Cảm ơn Raj. Được rồi, mọi người đã báo cáo xong. Chúc cả nhà một ngày tốt lành!"
+  }
+ ],
+ "phrases": [
+  {
+   "t": "Do you want to kick off?",
+   "vi": "Bạn mở đầu nhé?",
+   "note": "kick off = bắt đầu (cuộc họp, dự án). Thân mật, rất phổ biến ở công sở. Trang trọng hơn: “Would you like to start?” Danh từ: a kick-off meeting = buổi họp khởi động dự án."
+  },
+  {
+   "t": "Yesterday I… Today I'm going to… No blockers.",
+   "vi": "Hôm qua tôi… Hôm nay tôi sẽ… Không có vướng mắc.",
+   "note": "Khung 3 ý chuẩn của stand-up, mỗi người 1–2 phút. Hôm qua dùng quá khứ đơn (finished, tested); hôm nay dùng be going to / will / be planning to. Lỗi người Việt: kể quá chi tiết kỹ thuật, hoặc chỉ nói “Same as yesterday” – thiếu thông tin cho nhóm."
+  },
+  {
+   "t": "I'm blocked. / a blocker",
+   "vi": "Tôi đang bị chặn (không làm tiếp được). / vướng mắc",
+   "note": "blocked = không thể tiếp tục vì phụ thuộc người/việc khác. Nói rõ ai/cái gì đang chặn bạn: “I'm blocked because the test environment is down.” Đừng giấu blocker – nêu sớm để nhóm giúp."
+  },
+  {
+   "t": "The test environment has been down since last night.",
+   "vi": "Môi trường test bị sập từ tối qua.",
+   "note": "be down = (hệ thống) ngừng hoạt động; be back up = hoạt động lại. Hiện tại hoàn thành + since cho trạng thái kéo dài đến giờ. Lỗi người Việt: “The server is die / is dead since yesterday.” Đúng: “The server has been down since yesterday.”"
+  },
+  {
+   "t": "a minor issue / a major issue",
+   "vi": "lỗi nhỏ / lỗi lớn",
+   "note": "Cách nói mức độ trong cuộc trò chuyện. Thuật ngữ trong công cụ quản lý lỗi: trivial – minor – major – critical – blocker. Có thể nói “a showstopper” = lỗi nghiêm trọng đến mức không thể phát hành."
+  },
+  {
+   "t": "I'll take a look right after this.",
+   "vi": "Tôi sẽ xem ngay sau buổi này.",
+   "note": "Phản hồi chuyên nghiệp khi được báo lỗi: không tranh cãi trong stand-up, hứa xem ngay. take a look (at something) = xem xét. Biến thể: “I'll check it this morning.”"
+  },
+  {
+   "t": "That's probably my fault. I'll look into it.",
+   "vi": "Chắc là lỗi của tôi. Tôi sẽ điều tra.",
+   "note": "Nhận trách nhiệm nhanh gọn rồi chuyển sang hành động – được đánh giá cao trong môi trường làm việc phương Tây. look into something = điều tra, tìm hiểu nguyên nhân."
+  },
+  {
+   "t": "Could you ping me when it's back up?",
+   "vi": "Khi nào hệ thống chạy lại thì nhắn tôi nhé?",
+   "note": "ping somebody = nhắn tin nhanh (qua ứng dụng chat công ty). Thân mật, phổ biến trong ngành IT. Trang trọng hơn: “Could you let me know when it's working again?”"
+  },
+  {
+   "t": "Will do.",
+   "vi": "Sẽ làm. / Được thôi.",
+   "note": "Cách đồng ý ngắn gọn khi ai nhờ việc, nghĩa là “I will do that”. Thân mật nhưng dùng được với sếp. Không dùng để trả lời câu hỏi có/không."
+  },
+  {
+   "t": "Let's take that offline.",
+   "vi": "Mình bàn riêng chuyện đó sau nhé.",
+   "note": "Câu lịch sự để dừng một cuộc thảo luận chi tiết, chỉ liên quan vài người, để họp không bị kéo dài. “offline” ở đây không liên quan đến mạng. Biến thể: “Let's park that for now.” / “Can we discuss that after the meeting?”"
+  },
+  {
+   "t": "Just a reminder that…",
+   "vi": "Chỉ nhắc mọi người là…",
+   "note": "Mở đầu lời nhắc nhẹ nhàng. Trang trọng (email): “This is a gentle reminder that…”. Tránh “I remind you that…” – nghe như ra lệnh."
+  }
+ ],
+ "qs": [
+  {
+   "q": "What did Chloe finish yesterday?",
+   "o": [
+    "The password reset screen",
+    "The new login page",
+    "The report export"
+   ],
+   "a": 1,
+   "e": "Chloe: “Yesterday I finished the new login page…” – password reset là việc HÔM NAY của cô ấy."
+  },
+  {
+   "q": "What major issue did Minh find?",
+   "o": [
+    "The login page is too slow.",
+    "The account isn't locked after five wrong passwords.",
+    "Users can't reset their password."
+   ],
+   "a": 1,
+   "e": "Minh: “if you enter the wrong password five times, the account isn't locked.”"
+  },
+  {
+   "q": "Why is Minh blocked?",
+   "o": [
+    "Raj hasn't finished the export feature.",
+    "The test environment has been down since last night.",
+    "He doesn't have the user story."
+   ],
+   "a": 1,
+   "e": "Minh: “I'm actually blocked at the moment, because the test environment has been down since last night.”"
+  },
+  {
+   "q": "Raj thinks the problem was caused by the database ______ he ran yesterday.",
+   "a": "migration",
+   "e": "Raj: “I think it might be the database migration I ran yesterday.” – migration = chuyển đổi/nâng cấp cấu trúc dữ liệu."
+  },
+  {
+   "q": "What does Anna ask Minh to do while he is waiting?",
+   "o": [
+    "Write test cases for the export feature",
+    "Fix the test environment",
+    "Test the password reset screen"
+   ],
+   "a": 0,
+   "e": "Anna: “while you're waiting, could you work on the test cases for the export feature?” – người Scrum Master giỏi luôn tìm việc khác cho người bị chặn."
+  },
+  {
+   "q": "Why does Anna say “Let's take that offline”?",
+   "o": [
+    "Because the internet is not working",
+    "Because the detailed question should be discussed after the meeting",
+    "Because Chloe's question is wrong"
+   ],
+   "a": 1,
+   "e": "Câu hỏi về số lần khoá tài khoản là chi tiết, chỉ liên quan Chloe và Minh → bàn riêng sau để stand-up giữ đúng 15 phút."
+  },
+  {
+   "q": "What is Raj's attitude when the test environment problem is mentioned?",
+   "o": [
+    "He blames Minh.",
+    "He admits it may be his fault and offers to fix it.",
+    "He says it is not important."
+   ],
+   "a": 1,
+   "e": "Raj: “Sorry, that's probably my fault. I'll look into it straight after stand-up.” → nhận trách nhiệm và hành động ngay."
+  },
+  {
+   "q": "When is the sprint review?",
+   "o": [
+    "Thursday at two",
+    "Tuesday at ten",
+    "Thursday at twelve"
+   ],
+   "a": 0,
+   "e": "Raj nhắc: “the sprint review is on Thursday at two.”"
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "I can't continue testing. I'm ___ because the test server is down.",
+   "a": "blocked",
+   "e": "be blocked = không thể tiếp tục vì phụ thuộc vào việc khác. Đây là từ khoá của stand-up.",
+   "alt": [
+    "stuck"
+   ]
+  },
+  {
+   "t": "listen",
+   "say": "Could you ping me when it's back up?",
+   "q": "Người nói muốn gì?",
+   "o": [
+    "Được nhắn tin khi hệ thống chạy lại",
+    "Được gọi điện ngay bây giờ",
+    "Muốn người kia đứng dậy"
+   ],
+   "a": 0,
+   "e": "ping = nhắn tin nhanh; back up = hoạt động trở lại (không phải “sao lưu” hay “đứng dậy”)."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu nhận trách nhiệm:",
+   "w": [
+    "look into it",
+    "after stand-up.",
+    "I'll",
+    "straight"
+   ],
+   "a": "I'll look into it straight after stand-up.",
+   "e": "I'll + look into it (điều tra) + straight after (ngay sau) + sự kiện."
+  },
+  {
+   "t": "dict",
+   "say": "The test environment has been down since last night.",
+   "a": "The test environment has been down since last night.",
+   "e": "Chú ý âm cuối: environment /t/, last /st/, night /t/. Cấu trúc has been + tính từ + since."
+  },
+  {
+   "t": "match",
+   "q": "Nối thuật ngữ stand-up với nghĩa:",
+   "pairs": [
+    [
+     "kick off",
+     "bắt đầu"
+    ],
+    [
+     "a blocker",
+     "vướng mắc khiến không làm tiếp được"
+    ],
+    [
+     "take it offline",
+     "bàn riêng sau buổi họp"
+    ],
+    [
+     "be down",
+     "ngừng hoạt động"
+    ],
+    [
+     "Will do.",
+     "Được, tôi sẽ làm."
+    ]
+   ]
+  }
+ ],
+ "practice": [
+  {
+   "p": "Báo cáo stand-up của bạn (khoảng 30–40 giây): hôm qua bạn test xong chức năng tìm kiếm và tìm được 3 lỗi; hôm nay bạn sẽ kiểm thử lại 2 lỗi đã sửa; bạn đang chờ lập trình viên cấp tài khoản test.",
+   "model": "Yesterday I finished testing the search feature and logged three bugs – one of them is major: searching with Vietnamese accents returns no results. Today I'm going to retest the two bugs that were fixed last night. I do have one blocker: I still don't have a test account for the admin panel. Huy, could you set one up for me after this?",
+   "vi": "Hôm qua tôi kiểm thử xong chức năng tìm kiếm và ghi nhận ba lỗi – một lỗi lớn: tìm kiếm có dấu tiếng Việt không ra kết quả. Hôm nay tôi sẽ kiểm thử lại hai lỗi đã được sửa tối qua. Tôi có một vướng mắc: tôi vẫn chưa có tài khoản test cho trang quản trị. Huy, sau buổi này cậu tạo giúp tôi một tài khoản được không?"
+  },
+  {
+   "p": "Bạn là Scrum Master. Hai thành viên bắt đầu tranh luận chi tiết về cách đặt tên biến trong stand-up. Hãy dừng lại lịch sự và chuyển sang người tiếp theo.",
+   "model": "Sorry to interrupt – this is a really useful discussion, but let's take it offline so we can finish on time. Could you two catch up straight after this? Great. Linh, do you want to go next?",
+   "vi": "Xin lỗi cắt ngang – đây là cuộc thảo luận rất hữu ích, nhưng mình bàn riêng sau để kết thúc đúng giờ nhé. Hai bạn trao đổi ngay sau buổi này được không? Tốt. Linh, em báo cáo tiếp nhé?"
+  }
+ ]
 }

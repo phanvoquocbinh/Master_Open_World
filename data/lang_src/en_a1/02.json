@@ -1,171 +1,925 @@
 {
-  "no": 2,
-  "title": "Quốc tịch & nghề nghiệp – TO BE phủ định, câu hỏi; a / an",
-  "sub": "Are you a doctor? – No, I'm not.",
-  "goals": [
-    "Nói được tên 7 nước và quốc tịch tương ứng (Vietnam – Vietnamese, Japan – Japanese…)",
-    "Hỏi – đáp nghề nghiệp: What's your job? – I'm an engineer.",
-    "Dùng đúng câu phủ định I'm not / isn't / aren't và câu hỏi Is he…? Are you…? kèm câu trả lời ngắn",
-    "Chọn đúng a / an theo ÂM đầu của từ (không theo chữ cái)",
-    "Lên giọng ở câu hỏi Yes/No, xuống giọng ở câu hỏi Wh-"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng 1: đất nước & quốc tịch", "items": [
-      {"w": "Vietnam – Vietnamese", "ipa": "/ˌvjetˈnæm/ – /ˌvjetnəˈmiːz/", "pos": "n", "vi": "Việt Nam – người / thuộc Việt Nam; tiếng Việt", "ex": "I'm from Vietnam. I'm Vietnamese.", "exVi": "Tôi đến từ Việt Nam. Tôi là người Việt."},
-      {"w": "England – English", "ipa": "/ˈɪŋɡlənd/ – /ˈɪŋɡlɪʃ/", "pos": "n", "vi": "nước Anh – người / thuộc Anh; tiếng Anh", "ex": "Tom is from England. He's English.", "exVi": "Tom đến từ nước Anh. Thầy ấy là người Anh."},
-      {"w": "America – American", "ipa": "/əˈmerɪkə/ – /əˈmerɪkən/", "pos": "n", "vi": "nước Mỹ – người / thuộc Mỹ", "ex": "Sarah is American. She's from Boston.", "exVi": "Sarah là người Mỹ. Cô ấy đến từ Boston."},
-      {"w": "Japan – Japanese", "ipa": "/dʒəˈpæn/ – /ˌdʒæpəˈniːz/", "pos": "n", "vi": "Nhật Bản – người / thuộc Nhật; tiếng Nhật", "ex": "Yuki is from Japan. She's Japanese.", "exVi": "Yuki đến từ Nhật. Cô ấy là người Nhật."},
-      {"w": "Korea – Korean", "ipa": "/kəˈriːə/ – /kəˈriːən/", "pos": "n", "vi": "Hàn Quốc – người / thuộc Hàn; tiếng Hàn", "ex": "Mr Park is Korean.", "exVi": "Ông Park là người Hàn Quốc."},
-      {"w": "China – Chinese", "ipa": "/ˈtʃaɪnə/ – /ˌtʃaɪˈniːz/", "pos": "n", "vi": "Trung Quốc – người / thuộc Trung Quốc; tiếng Trung", "ex": "Li is from China. He's Chinese.", "exVi": "Li đến từ Trung Quốc. Anh ấy là người Trung Quốc."},
-      {"w": "Australia – Australian", "ipa": "/ɒˈstreɪliə/ – /ɒˈstreɪliən/", "pos": "n", "vi": "nước Úc – người / thuộc Úc", "ex": "Ben is Australian. He's from Melbourne.", "exVi": "Ben là người Úc. Anh ấy đến từ Melbourne."},
-      {"w": "country", "ipa": "/ˈkʌntri/", "pos": "n", "vi": "đất nước, quốc gia", "ex": "Vietnam is a beautiful country.", "exVi": "Việt Nam là một đất nước đẹp."}
-    ]},
-    {"k": "words", "h": "Từ vựng 2: nghề nghiệp", "items": [
-      {"w": "job", "ipa": "/dʒɒb/", "pos": "n", "vi": "công việc, nghề", "ex": "What's your job?", "exVi": "Bạn làm nghề gì?"},
-      {"w": "doctor", "ipa": "/ˈdɒktə(r)/", "pos": "n", "vi": "bác sĩ", "ex": "My mum is a doctor.", "exVi": "Mẹ tôi là bác sĩ."},
-      {"w": "engineer", "ipa": "/ˌendʒɪˈnɪə(r)/", "pos": "n", "vi": "kỹ sư", "ex": "Ben is an engineer.", "exVi": "Ben là kỹ sư."},
-      {"w": "driver", "ipa": "/ˈdraɪvə(r)/", "pos": "n", "vi": "tài xế, người lái xe", "ex": "He's a taxi driver.", "exVi": "Anh ấy là tài xế taxi."},
-      {"w": "cook", "ipa": "/kʊk/", "pos": "n", "vi": "đầu bếp (cũng là động từ: nấu ăn)", "ex": "Mr Park is a cook.", "exVi": "Ông Park là đầu bếp."},
-      {"w": "farmer", "ipa": "/ˈfɑːmə(r)/", "pos": "n", "vi": "nông dân", "ex": "My grandpa is a farmer.", "exVi": "Ông tôi là nông dân."},
-      {"w": "accountant", "ipa": "/əˈkaʊntənt/", "pos": "n", "vi": "kế toán", "ex": "Lan is an accountant.", "exVi": "Lan là kế toán."},
-      {"w": "police officer", "ipa": "/pəˈliːs ɒfɪsə(r)/", "pos": "n", "vi": "cảnh sát, công an", "ex": "Is he a police officer?", "exVi": "Anh ấy có phải là cảnh sát không?"},
-      {"w": "office worker", "ipa": "/ˈɒfɪs wɜːkə(r)/", "pos": "n", "vi": "nhân viên văn phòng", "ex": "We're office workers.", "exVi": "Chúng tôi là nhân viên văn phòng."},
-      {"w": "architect", "ipa": "/ˈɑːkɪtekt/", "pos": "n", "vi": "kiến trúc sư", "ex": "She isn't an engineer. She's an architect.", "exVi": "Cô ấy không phải kỹ sư. Cô ấy là kiến trúc sư."}
-    ]},
-    {"k": "text", "h": "Nước ≠ quốc tịch – và luôn VIẾT HOA", "html": "<p>Tiếng Việt dùng một chữ: “Việt Nam”, “người Việt Nam”, “tiếng Việt”. Tiếng Anh tách thành <b>tên nước</b> (danh từ) và <b>quốc tịch</b> (tính từ – cũng là tên ngôn ngữ):</p><table><tr><th>Đuôi quốc tịch</th><th>Nước → Quốc tịch</th><th>Trọng âm</th></tr><tr><td><b>-ese</b></td><td>Vietnam → Vietnamese · Japan → Japanese · China → Chinese</td><td>Luôn rơi vào <b>-ese</b></td></tr><tr><td><b>-an / -ian</b></td><td>America → American · Korea → Korean · Australia → Australian</td><td>Giữ trọng âm của tên nước</td></tr><tr><td><b>-ish</b></td><td>England → English · Spain → Spanish</td><td>Âm tiết đầu</td></tr><tr><td>Đặc biệt</td><td>France → French · Thailand → Thai</td><td>–</td></tr></table><p>✅ <b>I'm from Vietnam.</b> (from + tên NƯỚC) · ✅ <b>I'm Vietnamese.</b> (TO BE + QUỐC TỊCH)<br>❌ <i>I'm from Vietnamese.</i> ❌ <i>I'm Vietnam.</i></p><p>⚠️ Tên nước, quốc tịch, ngôn ngữ <b>luôn viết hoa</b> chữ cái đầu, kể cả giữa câu: <i>She speaks <b>E</b>nglish.</i> Tiếng Việt viết thường “tiếng anh” được, tiếng Anh thì không.</p><p>Nước Anh: <b>England</b> (một phần của Vương quốc Anh – <b>the UK</b>). Người Anh: <b>English</b> hoặc <b>British</b>.</p>"},
-    {"k": "grammar", "h": "TO BE – câu phủ định", "html": "<p>Muốn nói “không phải là / không …”, thêm <b>not</b> <u>ngay sau</u> am / is / are. Khi nói, gần như luôn dùng dạng viết tắt:</p>", "table": [["Đầy đủ", "Viết tắt kiểu 1", "Viết tắt kiểu 2"], ["I am not", "I'm not", "(không có dạng “amn't”)"], ["he / she / it is not", "he's not / she's not / it's not", "he isn't / she isn't / it isn't"], ["you / we / they are not", "you're not / we're not / they're not", "you aren't / we aren't / they aren't"]], "ex": [
-      {"t": "I'm not a teacher. I'm a student.", "vi": "Tôi không phải giáo viên. Tôi là học viên."},
-      {"t": "Minh isn't from Hanoi. He's from Da Nang.", "vi": "Minh không đến từ Hà Nội. Cậu ấy đến từ Đà Nẵng."},
-      {"t": "Tom isn't Australian. He's English.", "vi": "Tom không phải người Úc. Thầy ấy là người Anh."},
-      {"t": "We aren't doctors. We're nurses.", "vi": "Chúng tôi không phải bác sĩ. Chúng tôi là y tá."},
-      {"t": "It isn't expensive.", "vi": "Nó không đắt."}
-    ], "tips": [
-      "Tiếng Việt: “Tôi <u>không phải là</u> bác sĩ”. Tiếng Anh: chữ <b>not</b> đứng <b>SAU</b> TO BE: ✅ I'm not a doctor. ❌ <i>I not am a doctor.</i> ❌ <i>I don't a doctor.</i>",
-      "Không có “I amn't”. Chỉ nói <b>I'm not</b>.",
-      "isn't /ˈɪznt/ và aren't /ɑːnt/ – phải nghe được âm /nt/ cuối; nếu nuốt mất, người nghe tưởng bạn nói câu khẳng định!"
-    ]},
-    {"k": "grammar", "h": "TO BE – câu hỏi Yes/No, câu trả lời ngắn & câu hỏi Wh-", "html": "<p>Tiếng Việt thêm “… <i>không? / phải không? / à?</i>” vào <b>cuối</b> câu. Tiếng Anh <b>đảo TO BE lên trước chủ ngữ</b>:</p><p><b>She is</b> Japanese. → <b>Is she</b> Japanese?</p><p>Trả lời ngắn: <b>Yes, + chủ ngữ + am/is/are.</b> · <b>No, + chủ ngữ + ’m not / isn't / aren't.</b></p><p>Câu hỏi có từ để hỏi (Wh-): <b>Từ hỏi + TO BE + chủ ngữ?</b> – Where <b>are you</b> from? What <b>is your</b> job? What nationality <b>is she</b>?</p>", "table": [["Câu hỏi", "Có", "Không"], ["Am I late?", "Yes, you are.", "No, you aren't."], ["Are you a doctor?", "Yes, I am.", "No, I'm not."], ["Is she Japanese?", "Yes, she is.", "No, she isn't."], ["Is it expensive?", "Yes, it is.", "No, it isn't."], ["Are they engineers?", "Yes, they are.", "No, they aren't."]], "ex": [
-      {"t": "Are you Vietnamese? – Yes, I am.", "vi": "Bạn là người Việt à? – Đúng vậy."},
-      {"t": "Is Tom American? – No, he isn't. He's English.", "vi": "Tom là người Mỹ à? – Không. Thầy ấy là người Anh."},
-      {"t": "Where is Yuki from? – She's from Japan.", "vi": "Yuki đến từ đâu? – Cô ấy đến từ Nhật."},
-      {"t": "What's your job? – I'm an accountant.", "vi": "Bạn làm nghề gì? – Tôi là kế toán."},
-      {"t": "What nationality are they? – They're Korean.", "vi": "Họ quốc tịch gì? – Họ là người Hàn."}
-    ], "tips": [
-      "Câu trả lời ngắn KHẲNG ĐỊNH <b>không viết tắt</b>: ✅ Yes, I am. ✅ Yes, she is. ❌ <i>Yes, I'm.</i> ❌ <i>Yes, she's.</i> (phủ định thì viết tắt bình thường: No, I'm not.)",
-      "Người Việt hay giữ nguyên trật tự rồi lên giọng: <i>You are a doctor?</i> – chỉ dùng khi <b>ngạc nhiên</b>. Câu hỏi bình thường phải đảo: <b>Are you</b> a doctor?",
-      "Trả lời chỉ “Yes.” / “No.” nghe cộc lốc. Thêm “Yes, I am.” / “No, I'm not. I'm a …” – vừa lịch sự vừa luyện nói.",
-      "Hỏi nghề nghiệp: <b>What's your job?</b> hoặc <b>What do you do?</b> (cấu trúc với do sẽ học ở Bài 6)."
-    ]},
-    {"k": "grammar", "h": "a / an – mạo từ “một”", "html": "<p>Danh từ <b>số ít, đếm được</b> trong tiếng Anh <b>không được đứng trơ trọi</b> – phải có a / an (hoặc my, your, the…). Đặc biệt với <b>nghề nghiệp</b>: tiếng Việt nói “Tôi là kỹ sư” (không có “một”), nhưng tiếng Anh bắt buộc: <b>I'm an engineer.</b></p><p>Chọn a hay an theo <b>ÂM ĐẦU khi đọc</b>, không theo chữ cái viết:</p>", "table": [["Mạo từ", "Dùng trước", "Ví dụ"], ["a", "từ bắt đầu bằng PHỤ ÂM (khi đọc)", "a doctor, a nurse, a cook, a farmer · a university /ˌjuː…/ (âm /j/)"], ["an", "từ bắt đầu bằng NGUYÊN ÂM (khi đọc)", "an engineer, an accountant, an architect, an office worker · an hour /ˈaʊə/ (h câm)"], ["(không có)", "danh từ SỐ NHIỀU", "They're doctors. We're engineers."]], "ex": [
-      {"t": "Lan is an accountant.", "vi": "Lan là kế toán. (accountant bắt đầu bằng âm /ə/ → an)"},
-      {"t": "Is he a driver? – No, he isn't. He's a police officer.", "vi": "Anh ấy là tài xế à? – Không. Anh ấy là cảnh sát."},
-      {"t": "Ben is an Australian engineer.", "vi": "Ben là một kỹ sư người Úc. (a/an theo từ ĐỨNG NGAY SAU: Australian /ɒ…/ → an)"},
-      {"t": "Sarah is a good architect.", "vi": "Sarah là một kiến trúc sư giỏi. (good /ɡ/ → a, dù architect bắt đầu bằng nguyên âm)"}
-    ], "tips": [
-      "Lỗi phổ biến nhất của bài: bỏ a/an trước nghề. ❌ <i>She is nurse.</i> → ✅ She is <b>a</b> nurse.",
-      "Số nhiều không có a/an: ❌ <i>They're an engineers.</i> → ✅ They're engineers.",
-      "Quốc tịch là tính từ, dùng trơn: ✅ She's Japanese. (không nói <i>She's a Japanese</i>)."
-    ]},
-    {"k": "sounds", "h": "Phát âm: trọng âm quốc tịch, nối âm “an”, ngữ điệu câu hỏi", "html": "<p>Ba thói quen giúp bạn nghe “Tây” hơn ngay hôm nay: đặt đúng trọng âm của quốc tịch, nối âm /n/ của <b>an</b> sang từ sau, và lên/xuống giọng đúng loại câu hỏi. Bấm từng ví dụ để nghe rồi nhại lại.</p>", "items": [
-      {"sym": "-ese /ˈiːz/", "ex": ["Vietnamese", "Japanese", "Chinese"], "vi": "Đuôi -ese luôn có trọng âm, kéo dài /iː/ và kết thúc bằng /z/ rung: viet-na-MESE, ja-pa-NESE, chi-NESE. Đừng đọc thành “ni” cụt."},
-      {"sym": "-an /ən/", "ex": ["American", "Korean", "Australian"], "vi": "Đuôi -an đọc rất nhẹ /ən/. Trọng âm: a-ME-ri-can, ko-RE-an, aus-TRA-li-an."},
-      {"sym": "an + nguyên âm", "ex": ["an engineer", "an accountant", "an office worker"], "vi": "Âm /n/ của an dính sang từ sau: “a-nen-gi-neer”, “a-nac-coun-tant”. Không ngắt hơi giữa an và từ sau."},
-      {"sym": "/ˈɪznt/ · /ɑːnt/", "ex": ["isn't", "aren't", "No, she isn't."], "vi": "isn't: rung /z/ rồi đặt lưỡi lên chân răng cho /nt/. aren't (giọng Anh) đọc giống aunt, không có âm r."},
-      {"sym": "↗ / ↘", "ex": ["Are you a doctor?", "Is she Japanese?", "Where are you from?", "What's your job?"], "vi": "Câu hỏi Yes/No: LÊN giọng ở cuối ↗. Câu hỏi Wh- (Where, What, Who…): XUỐNG giọng ở cuối ↘ – giống câu kể."}
-    ]},
-    {"k": "dialog", "h": "Nghe: Câu lạc bộ tiếng Anh", "lang": "en-GB", "note": "Tối thứ Bảy, câu lạc bộ tiếng Anh của trung tâm. Lan và Minh làm quen với hai người nước ngoài. Nghe lần 1 (che lời thoại): có mấy người nước ngoài? Nghe lần 2: họ là người nước nào, làm nghề gì?", "lines": [
-      {"s": "Lan", "g": "f", "t": "Hi! Are you a new member?", "vi": "Chào anh! Anh là thành viên mới ạ?"},
-      {"s": "Ben", "g": "m", "t": "Yes, I am. I'm Ben. Nice to meet you.", "vi": "Đúng rồi. Tôi là Ben. Rất vui được gặp bạn."},
-      {"s": "Lan", "g": "f", "t": "Nice to meet you too. I'm Lan, and this is Minh. Are you American?", "vi": "Em cũng rất vui được gặp anh. Em là Lan, còn đây là Minh. Anh là người Mỹ ạ?"},
-      {"s": "Ben", "g": "m", "t": "No, I'm not. I'm Australian. I'm from Melbourne.", "vi": "Không. Tôi là người Úc. Tôi đến từ Melbourne."},
-      {"s": "Minh", "g": "m", "t": "Are you a teacher here?", "vi": "Anh là giáo viên ở đây ạ?"},
-      {"s": "Ben", "g": "m", "t": "No, I'm not a teacher. I'm an engineer. And you? Are you students?", "vi": "Không, tôi không phải giáo viên. Tôi là kỹ sư. Còn các bạn? Các bạn là sinh viên à?"},
-      {"s": "Minh", "g": "m", "t": "Yes, we are. We're students in the evening class.", "vi": "Vâng ạ. Chúng em là học viên lớp buổi tối."},
-      {"s": "Lan", "g": "f", "t": "But I'm also an accountant. Minh is a university student.", "vi": "Nhưng em còn là kế toán nữa. Minh là sinh viên đại học."},
-      {"s": "Ben", "g": "m", "t": "Great! Oh, this is my friend Yuki. She's from Japan.", "vi": "Hay quá! À, đây là bạn tôi, Yuki. Cô ấy đến từ Nhật."},
-      {"s": "Yuki", "g": "f", "t": "Hello, everyone. Nice to meet you.", "vi": "Xin chào mọi người. Rất vui được gặp các bạn."},
-      {"s": "Minh", "g": "m", "t": "Hi, Yuki. Are you a teacher?", "vi": "Chào chị Yuki. Chị là giáo viên ạ?"},
-      {"s": "Yuki", "g": "f", "t": "No, I'm not. I'm a nurse at an international hospital in Hanoi.", "vi": "Không. Chị là y tá ở một bệnh viện quốc tế tại Hà Nội."},
-      {"s": "Lan", "g": "f", "t": "Wow! Welcome to the club, Ben and Yuki!", "vi": "Ồ! Chào mừng anh Ben và chị Yuki đến với câu lạc bộ!"}
-    ], "qs": [
-      {"q": "Is Ben American?", "o": ["Yes, he is.", "No, he isn't. He's Australian.", "No, he isn't. He's English."], "a": 1, "e": "Ben nói: “No, I'm not. I'm Australian. I'm from Melbourne.”"},
-      {"q": "Ben is ______.", "a": "an engineer", "alt": ["engineer"], "e": "“I'm not a teacher. I'm an engineer.” – nhớ dùng an vì engineer bắt đầu bằng nguyên âm /e/."},
-      {"q": "Where is Yuki from?", "o": ["China", "Japan", "Korea"], "a": 1, "e": "Ben giới thiệu: “She's from Japan.”"},
-      {"q": "Lan is a student and ______.", "o": ["a nurse", "an engineer", "an accountant"], "a": 2, "e": "Lan nói: “But I'm also an accountant.” – also = cũng, còn."},
-      {"q": "Yuki is a ______.", "a": "nurse", "alt": ["a nurse"], "e": "“I'm a nurse at an international hospital.” – international bắt đầu bằng /ɪ/ → an."}
-    ]},
-    {"k": "read", "h": "Đọc: Câu lạc bộ của chúng mình", "title": "Our English Club", "text": "Hi! I'm Lan. This is our English club. It's small, but it's very friendly.\n\nBen is a new member. He isn't American. He's Australian, from Melbourne. He's an engineer. He's tall and very funny.\n\nYuki is from Japan. She isn't a teacher. She's a nurse at an international hospital. She's quiet but kind.\n\nMr Park is Korean. He's a cook at a Korean restaurant in Hanoi. His food is great!\n\nMinh and I are Vietnamese. We aren't teachers. Minh is a university student, and I'm an accountant. The club isn't expensive – it's free! Are you free on Saturday evening? Come and say hello!", "vi": "Xin chào! Mình là Lan. Đây là câu lạc bộ tiếng Anh của chúng mình. Câu lạc bộ nhỏ nhưng rất thân thiện.\n\nBen là thành viên mới. Anh ấy không phải người Mỹ. Anh ấy là người Úc, đến từ Melbourne. Anh ấy là kỹ sư. Anh ấy cao và rất vui tính.\n\nYuki đến từ Nhật. Chị ấy không phải giáo viên. Chị ấy là y tá ở một bệnh viện quốc tế. Chị ấy ít nói nhưng tốt bụng.\n\nÔng Park là người Hàn. Ông ấy là đầu bếp ở một nhà hàng Hàn Quốc tại Hà Nội. Món ăn của ông ấy rất tuyệt!\n\nMinh và mình là người Việt. Chúng mình không phải giáo viên. Minh là sinh viên đại học, còn mình là kế toán. Câu lạc bộ không đắt – nó miễn phí! Tối thứ Bảy bạn có rảnh không? Hãy đến chào chúng mình nhé!", "gloss": [
-      {"w": "club", "vi": "câu lạc bộ"},
-      {"w": "friendly", "vi": "thân thiện"},
-      {"w": "member", "vi": "thành viên"},
-      {"w": "tall", "vi": "cao (người)"},
-      {"w": "quiet", "vi": "ít nói, yên tĩnh"},
-      {"w": "international", "vi": "quốc tế"},
-      {"w": "restaurant", "vi": "nhà hàng"},
-      {"w": "expensive", "vi": "đắt"},
-      {"w": "free", "vi": "miễn phí; rảnh rỗi"}
-    ], "qs": [
-      {"q": "Ben is American.", "o": ["Đúng", "Sai"], "a": 1, "e": "“He isn't American. He's Australian.”"},
-      {"q": "What is Yuki's job?", "o": ["teacher", "nurse", "cook"], "a": 1, "e": "“She isn't a teacher. She's a nurse.”"},
-      {"q": "Mr Park is from ______.", "a": "Korea", "alt": ["south korea"], "e": "“Mr Park is Korean” → Korean là quốc tịch, tên nước là Korea."},
-      {"q": "Lan is ______.", "o": ["a student", "an accountant", "a cook"], "a": 1, "e": "“Minh is a university student, and I'm an accountant.”"},
-      {"q": "Trong bài, từ “free” được dùng với mấy nghĩa?", "o": ["1 nghĩa: miễn phí", "2 nghĩa: miễn phí và rảnh rỗi", "1 nghĩa: rảnh rỗi"], "a": 1, "e": "“it's free” = miễn phí; “Are you free on Saturday evening?” = bạn có rảnh không."}
-    ]},
-    {"k": "speak", "h": "Nói: Hỏi – đáp quốc tịch & nghề", "tasks": [
-      {"p": "Trả lời 3 câu hỏi bằng câu trả lời ngắn + 1 câu thật về bạn: Are you a teacher? Are you from Hue? Is your mum a doctor?", "model": "No, I'm not. I'm an office worker. — No, I'm not. I'm from Thanh Hoa. — No, she isn't. She's a farmer.", "vi": "Không. Tôi là nhân viên văn phòng. — Không. Tôi đến từ Thanh Hoá. — Không. Mẹ tôi là nông dân.", "tips": "Nói No, I'm not rồi dừng nửa giây, sau đó nói câu đúng – nghe rất tự nhiên."},
-      {"p": "Giới thiệu một người nước ngoài (có thật hoặc tưởng tượng): tên, nước, quốc tịch, nghề. Phải có 1 câu phủ định.", "model": "This is Kenji. He isn't Chinese. He's Japanese, from Osaka. He's a cook at a Japanese restaurant in Da Nang.", "vi": "Đây là Kenji. Anh ấy không phải người Trung Quốc. Anh ấy là người Nhật, đến từ Osaka. Anh ấy là đầu bếp ở một nhà hàng Nhật tại Đà Nẵng.", "tips": "Kiểm tra a/an trước nghề và trọng âm ja-pa-NESE."},
-      {"p": "Trò chơi “Đoán nghề”: bạn cùng lớp nghĩ một nghề; bạn hỏi tối đa 5 câu Yes/No để đoán.", "model": "Are you a doctor? – No, I'm not. – Are you an engineer? – No, I'm not. – Are you an accountant? – Yes, I am!", "tips": "Lên giọng ↗ ở cuối mỗi câu hỏi. Người trả lời phải dùng câu trả lời ngắn đầy đủ."}
-    ]},
-    {"k": "write", "h": "Viết: Hồ sơ hai người bạn", "task": "Viết đoạn 6–8 câu về bạn và một người bạn nước ngoài (có thể tưởng tượng): tên, quê / nước, quốc tịch, nghề. Có ít nhất 2 câu phủ định và 1 câu hỏi + trả lời ngắn.", "min": 50, "model": "Hi! I'm Thao. I'm Vietnamese, and I'm from Ninh Binh. I'm not a student. I'm an office worker in Hanoi. This is my friend Sarah. She isn't English. She's American, from Boston. She's an architect. Is she a good cook? Yes, she is!", "modelVi": "Xin chào! Mình là Thảo. Mình là người Việt và đến từ Ninh Bình. Mình không phải sinh viên. Mình là nhân viên văn phòng ở Hà Nội. Đây là bạn mình, Sarah. Cô ấy không phải người Anh. Cô ấy là người Mỹ, đến từ Boston. Cô ấy là kiến trúc sư. Cô ấy nấu ăn có giỏi không? Có chứ!", "tips": ["Mỗi danh từ nghề số ít phải có a hoặc an.", "Câu phủ định: not đứng sau TO BE (isn't, aren't, I'm not).", "Tên nước, quốc tịch viết hoa."], "checklist": ["Có tên nước VÀ quốc tịch", "Ít nhất 2 câu phủ định", "1 câu hỏi Yes/No + câu trả lời ngắn", "a/an đúng trước mọi nghề", "Viết hoa I, tên người, nước, quốc tịch"]}
-  ],
-  "exercises": [
-    {"t": "mc", "q": "She ___ a doctor. She's a nurse.", "o": ["is", "isn't", "aren't"], "a": 1, "e": "Câu sau nói cô ấy là y tá → câu trước phải phủ định. she đi với is → isn't."},
-    {"t": "mc", "q": "___ you from Japan? – Yes, I am.", "o": ["Is", "Am", "Are"], "a": 2, "e": "Câu hỏi đảo TO BE lên đầu; you đi với are → Are you…?"},
-    {"t": "mc", "q": "Are you a teacher? – Yes, ___", "o": ["I'm.", "I am.", "I is."], "a": 1, "e": "Câu trả lời ngắn khẳng định không được viết tắt: Yes, I am. (❌ Yes, I'm.)"},
-    {"t": "mc", "q": "Is Tom Australian? – No, he ___. He's English.", "o": ["is", "isn't", "aren't"], "a": 1, "e": "Trả lời phủ định với he: No, he isn't."},
-    {"t": "fill", "q": "Ben is ___ engineer.", "a": "an", "e": "engineer bắt đầu bằng âm nguyên âm /e/ → an."},
-    {"t": "fill", "q": "My dad is ___ farmer.", "a": "a", "e": "farmer bắt đầu bằng phụ âm /f/ → a."},
-    {"t": "mc", "q": "Chọn câu ĐÚNG:", "o": ["She is accountant.", "She is an accountant.", "She is a accountant."], "a": 1, "e": "Nghề số ít bắt buộc có mạo từ; accountant bắt đầu bằng âm /ə/ → an."},
-    {"t": "mc", "q": "a hay an? “It's ___ hour.”", "o": ["a", "an"], "a": 1, "e": "hour có h câm, âm đầu là /aʊ/ (nguyên âm) → an hour."},
-    {"t": "mc", "q": "a hay an? “He's ___ university student.”", "o": ["a", "an"], "a": 0, "e": "university đọc /ˌjuːnɪ…/ – bắt đầu bằng âm /j/ (phụ âm) → a university, dù chữ đầu là u."},
-    {"t": "fill", "q": "I'm from Korea. I'm ___.", "a": "Korean", "e": "Nước Korea → quốc tịch Korean (viết hoa)."},
-    {"t": "order", "q": "Sắp xếp thành câu hỏi:", "w": ["from?", "Where", "you", "are"], "a": "Where are you from?", "e": "Câu hỏi Wh-: Từ hỏi + TO BE + chủ ngữ + from?"},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["teacher.", "not", "I'm", "a"], "a": "I'm not a teacher.", "e": "Chủ ngữ + TO BE + not + a/an + nghề."},
-    {"t": "listen", "say": "Hi, I'm Kenji. I'm not Chinese. I'm Japanese. I'm a cook in Hanoi.", "lang": "en-GB", "q": "Kenji is ______.", "o": ["Chinese", "Japanese", "Korean"], "a": 1, "e": "“I'm not Chinese. I'm Japanese.” – cẩn thận bẫy: Chinese có xuất hiện nhưng ở câu phủ định."},
-    {"t": "listen", "say": "Is Maria a doctor? No, she isn't. She's an engineer.", "lang": "en-GB", "q": "What is Maria's job?", "o": ["doctor", "nurse", "engineer"], "a": 2, "e": "“No, she isn't. She's an engineer.”"},
-    {"t": "listen", "say": "We aren't English. We're American. We're police officers.", "lang": "en-GB", "q": "They are ______.", "o": ["English police officers", "American police officers", "American doctors"], "a": 1, "e": "“We aren't English. We're American. We're police officers.”"},
-    {"t": "dict", "say": "She isn't a teacher. She's an accountant.", "lang": "en-GB", "a": "She isn't a teacher. She's an accountant.", "e": "Chú ý dấu nháy trong isn't và She's, và an trước accountant."},
-    {"t": "match", "q": "Nối nước với quốc tịch:", "pairs": [["Vietnam", "Vietnamese"], ["Japan", "Japanese"], ["Korea", "Korean"], ["England", "English"], ["Australia", "Australian"], ["China", "Chinese"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Bản đồ thế giới hoặc 7 lá cờ (Việt Nam, Anh, Mỹ, Nhật, Hàn, Trung Quốc, Úc); 10 thẻ tranh nghề nghiệp; mỗi học viên 2 thẻ giấy ghi “a” và “an”; bảng phụ kẻ bảng phủ định & câu hỏi TO BE.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Ôn Bài 1: GV hỏi nhanh từng em What's your name? Where are you from? – trả lời bằng câu đầy đủ. Ghi lên bảng 2–3 câu học viên nói sai TO BE để sửa chung."},
-      {"t": "15'", "do": "Từ vựng nước – quốc tịch: chỉ cờ, học viên nói tên nước; GV đưa quốc tịch, cả lớp nhại theo, vỗ tay đúng âm tiết có trọng âm (viet-na-MESE). Viết bảng 3 nhóm đuôi -ese / -an / -ish."},
-      {"t": "15'", "do": "Từ vựng nghề: giơ thẻ tranh, học viên đoán nghề bằng tiếng Việt → GV dạy từ tiếng Anh. Sau đó dạy a/an: GV đọc từ, học viên giơ thẻ “a” hoặc “an”. Nhấn mạnh an hour / a university (theo ÂM)."},
-      {"t": "20'", "do": "Ngữ pháp phủ định & câu hỏi: GV nói câu SAI về một học viên (Nam is Japanese!) – lớp sửa: No! He isn't Japanese. He's Vietnamese. Sau đó chuyển câu kể → câu hỏi bằng thẻ chữ di chuyển được (She | is | Japanese → Is | she | Japanese?). Drill câu trả lời ngắn, cấm “Yes, I'm”."},
-      {"t": "20'", "do": "Nghe hội thoại “Câu lạc bộ tiếng Anh”: lần 1 đếm số người nước ngoài (2); lần 2 điền bảng Ben/Yuki – nước – nghề; lần 3 đọc phân vai 4 người. Luyện ngữ điệu ↗ ↘ qua câu Are you American? / Where are you from?"},
-      {"t": "10'", "do": "Tổng kết, giao bài tập 1–10 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Khởi động “Đoán nghề” (phần Nói 3): 1 học viên chọn thẻ nghề, cả lớp hỏi Yes/No tối đa 5 câu."},
-      {"t": "20'", "do": "Đọc “Our English Club”: đọc thầm 4 phút, trả lời câu hỏi; tô màu khác nhau cho câu khẳng định và câu phủ định; thảo luận 2 nghĩa của free."},
-      {"t": "25'", "do": "Nói theo cặp: mỗi em nhận 1 “thẻ nhân vật” (tên, nước, nghề nước ngoài), đi quanh lớp hỏi – đáp để tìm “đồng hương” (người cùng quốc tịch). Sau đó 3–4 em giới thiệu nhân vật vừa gặp trước lớp."},
-      {"t": "20'", "do": "Viết hồ sơ 6–8 câu theo mẫu; đổi bài, bạn chấm bằng checklist (đặc biệt a/an và viết hoa quốc tịch)."},
-      {"t": "15'", "do": "Làm bài tập 11–17 (sắp xếp, nghe, chính tả, nối). Chữa lỗi chung; giao bài về nhà."}
+ "no": 2,
+ "title": "Quốc tịch & nghề nghiệp – TO BE phủ định, câu hỏi; a / an",
+ "sub": "Are you a doctor? – No, I'm not.",
+ "goals": [
+  "Nói được tên 7 nước và quốc tịch tương ứng (Vietnam – Vietnamese, Japan – Japanese…)",
+  "Hỏi – đáp nghề nghiệp: What's your job? – I'm an engineer.",
+  "Dùng đúng câu phủ định I'm not / isn't / aren't và câu hỏi Is he…? Are you…? kèm câu trả lời ngắn",
+  "Chọn đúng a / an theo ÂM đầu của từ (không theo chữ cái)",
+  "Lên giọng ở câu hỏi Yes/No, xuống giọng ở câu hỏi Wh-"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng 1: đất nước & quốc tịch",
+   "items": [
+    {
+     "w": "Vietnam – Vietnamese",
+     "ipa": "/ˌvjetˈnæm/ – /ˌvjetnəˈmiːz/",
+     "pos": "n",
+     "vi": "Việt Nam – người / thuộc Việt Nam; tiếng Việt",
+     "ex": "I'm from Vietnam. I'm Vietnamese.",
+     "exVi": "Tôi đến từ Việt Nam. Tôi là người Việt."
+    },
+    {
+     "w": "England – English",
+     "ipa": "/ˈɪŋɡlənd/ – /ˈɪŋɡlɪʃ/",
+     "pos": "n",
+     "vi": "nước Anh – người / thuộc Anh; tiếng Anh",
+     "ex": "Tom is from England. He's English.",
+     "exVi": "Tom đến từ nước Anh. Thầy ấy là người Anh."
+    },
+    {
+     "w": "America – American",
+     "ipa": "/əˈmerɪkə/ – /əˈmerɪkən/",
+     "pos": "n",
+     "vi": "nước Mỹ – người / thuộc Mỹ",
+     "ex": "Sarah is American. She's from Boston.",
+     "exVi": "Sarah là người Mỹ. Cô ấy đến từ Boston."
+    },
+    {
+     "w": "Japan – Japanese",
+     "ipa": "/dʒəˈpæn/ – /ˌdʒæpəˈniːz/",
+     "pos": "n",
+     "vi": "Nhật Bản – người / thuộc Nhật; tiếng Nhật",
+     "ex": "Yuki is from Japan. She's Japanese.",
+     "exVi": "Yuki đến từ Nhật. Cô ấy là người Nhật."
+    },
+    {
+     "w": "Korea – Korean",
+     "ipa": "/kəˈriːə/ – /kəˈriːən/",
+     "pos": "n",
+     "vi": "Hàn Quốc – người / thuộc Hàn; tiếng Hàn",
+     "ex": "Mr Park is Korean.",
+     "exVi": "Ông Park là người Hàn Quốc."
+    },
+    {
+     "w": "China – Chinese",
+     "ipa": "/ˈtʃaɪnə/ – /ˌtʃaɪˈniːz/",
+     "pos": "n",
+     "vi": "Trung Quốc – người / thuộc Trung Quốc; tiếng Trung",
+     "ex": "Li is from China. He's Chinese.",
+     "exVi": "Li đến từ Trung Quốc. Anh ấy là người Trung Quốc."
+    },
+    {
+     "w": "Australia – Australian",
+     "ipa": "/ɒˈstreɪliə/ – /ɒˈstreɪliən/",
+     "pos": "n",
+     "vi": "nước Úc – người / thuộc Úc",
+     "ex": "Ben is Australian. He's from Melbourne.",
+     "exVi": "Ben là người Úc. Anh ấy đến từ Melbourne."
+    },
+    {
+     "w": "country",
+     "ipa": "/ˈkʌntri/",
+     "pos": "n",
+     "vi": "đất nước, quốc gia",
+     "ex": "Vietnam is a beautiful country.",
+     "exVi": "Việt Nam là một đất nước đẹp."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ vựng 2: nghề nghiệp",
+   "items": [
+    {
+     "w": "job",
+     "ipa": "/dʒɒb/",
+     "pos": "n",
+     "vi": "công việc, nghề",
+     "ex": "What's your job?",
+     "exVi": "Bạn làm nghề gì?"
+    },
+    {
+     "w": "doctor",
+     "ipa": "/ˈdɒktə(r)/",
+     "pos": "n",
+     "vi": "bác sĩ",
+     "ex": "My mum is a doctor.",
+     "exVi": "Mẹ tôi là bác sĩ."
+    },
+    {
+     "w": "engineer",
+     "ipa": "/ˌendʒɪˈnɪə(r)/",
+     "pos": "n",
+     "vi": "kỹ sư",
+     "ex": "Ben is an engineer.",
+     "exVi": "Ben là kỹ sư."
+    },
+    {
+     "w": "driver",
+     "ipa": "/ˈdraɪvə(r)/",
+     "pos": "n",
+     "vi": "tài xế, người lái xe",
+     "ex": "He's a taxi driver.",
+     "exVi": "Anh ấy là tài xế taxi."
+    },
+    {
+     "w": "cook",
+     "ipa": "/kʊk/",
+     "pos": "n",
+     "vi": "đầu bếp (cũng là động từ: nấu ăn)",
+     "ex": "Mr Park is a cook.",
+     "exVi": "Ông Park là đầu bếp."
+    },
+    {
+     "w": "farmer",
+     "ipa": "/ˈfɑːmə(r)/",
+     "pos": "n",
+     "vi": "nông dân",
+     "ex": "My grandpa is a farmer.",
+     "exVi": "Ông tôi là nông dân."
+    },
+    {
+     "w": "accountant",
+     "ipa": "/əˈkaʊntənt/",
+     "pos": "n",
+     "vi": "kế toán",
+     "ex": "Lan is an accountant.",
+     "exVi": "Lan là kế toán."
+    },
+    {
+     "w": "police officer",
+     "ipa": "/pəˈliːs ɒfɪsə(r)/",
+     "pos": "n",
+     "vi": "cảnh sát, công an",
+     "ex": "Is he a police officer?",
+     "exVi": "Anh ấy có phải là cảnh sát không?"
+    },
+    {
+     "w": "office worker",
+     "ipa": "/ˈɒfɪs wɜːkə(r)/",
+     "pos": "n",
+     "vi": "nhân viên văn phòng",
+     "ex": "We're office workers.",
+     "exVi": "Chúng tôi là nhân viên văn phòng."
+    },
+    {
+     "w": "architect",
+     "ipa": "/ˈɑːkɪtekt/",
+     "pos": "n",
+     "vi": "kiến trúc sư",
+     "ex": "She isn't an engineer. She's an architect.",
+     "exVi": "Cô ấy không phải kỹ sư. Cô ấy là kiến trúc sư."
+    }
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Nước ≠ quốc tịch – và luôn VIẾT HOA",
+   "html": "<p>Tiếng Việt dùng một chữ: “Việt Nam”, “người Việt Nam”, “tiếng Việt”. Tiếng Anh tách thành <b>tên nước</b> (danh từ) và <b>quốc tịch</b> (tính từ – cũng là tên ngôn ngữ):</p><table><tr><th>Đuôi quốc tịch</th><th>Nước → Quốc tịch</th><th>Trọng âm</th></tr><tr><td><b>-ese</b></td><td>Vietnam → Vietnamese · Japan → Japanese · China → Chinese</td><td>Luôn rơi vào <b>-ese</b></td></tr><tr><td><b>-an / -ian</b></td><td>America → American · Korea → Korean · Australia → Australian</td><td>Giữ trọng âm của tên nước</td></tr><tr><td><b>-ish</b></td><td>England → English · Spain → Spanish</td><td>Âm tiết đầu</td></tr><tr><td>Đặc biệt</td><td>France → French · Thailand → Thai</td><td>–</td></tr></table><p>✅ <b>I'm from Vietnam.</b> (from + tên NƯỚC) · ✅ <b>I'm Vietnamese.</b> (TO BE + QUỐC TỊCH)<br>❌ <i>I'm from Vietnamese.</i> ❌ <i>I'm Vietnam.</i></p><p>⚠️ Tên nước, quốc tịch, ngôn ngữ <b>luôn viết hoa</b> chữ cái đầu, kể cả giữa câu: <i>She speaks <b>E</b>nglish.</i> Tiếng Việt viết thường “tiếng anh” được, tiếng Anh thì không.</p><p>Nước Anh: <b>England</b> (một phần của Vương quốc Anh – <b>the UK</b>). Người Anh: <b>English</b> hoặc <b>British</b>.</p>"
+  },
+  {
+   "k": "grammar",
+   "h": "TO BE – câu phủ định",
+   "html": "<p>Muốn nói “không phải là / không …”, thêm <b>not</b> <u>ngay sau</u> am / is / are. Khi nói, gần như luôn dùng dạng viết tắt:</p>",
+   "table": [
+    [
+     "Đầy đủ",
+     "Viết tắt kiểu 1",
+     "Viết tắt kiểu 2"
     ],
-    "games": [
-      "Tìm đồng hương: phát thẻ nhân vật có 3–4 quốc tịch; học viên chỉ được hỏi câu Yes/No (Are you Japanese? Are you a cook?) để tìm nhóm của mình. Nhóm nào đủ người trước thắng.",
-      "Sửa sai siêu tốc: GV nói một câu sai sự thật về lớp (Lan is a doctor!), học viên giơ tay sửa bằng câu phủ định + khẳng định (No, she isn't. She's an accountant.).",
-      "Thẻ a/an: GV đọc nhanh 15 danh từ (egg, house, hour, uniform, office, idea…), học viên giơ thẻ; ai sai ngồi xuống, ai trụ lại cuối cùng thắng."
+    [
+     "I am not",
+     "I'm not",
+     "(không có dạng “amn't”)"
     ],
-    "errors": [
-      "Bỏ mạo từ trước nghề: *She is nurse → She is a nurse. Cách sửa: mỗi lần nói nghề, GV gõ bàn 1 cái nhắc “a/an”.",
-      "Trả lời ngắn viết tắt: *Yes, I'm → Yes, I am. Giải thích: dạng viết tắt không đứng cuối câu.",
-      "Không đảo khi hỏi: *You are a doctor? → Are you a doctor? Dùng thẻ chữ di chuyển cho học viên tự đảo.",
-      "Nhầm nước và quốc tịch: *I'm from Vietnamese / *I'm Vietnam → I'm from Vietnam. I'm Vietnamese.",
-      "Chọn a/an theo chữ viết: *an university, *a hour → a university, an hour (theo ÂM).",
-      "Viết thường quốc tịch, ngôn ngữ: *english, *vietnamese → English, Vietnamese."
+    [
+     "he / she / it is not",
+     "he's not / she's not / it's not",
+     "he isn't / she isn't / it isn't"
     ],
-    "homework": "Làm hết bài tập trong game (mục tiêu ≥ 80%); viết 5 câu về 5 người quen (nghề + quê) có a/an đúng; ghi âm phần Nói 2 và tự kiểm tra ngữ điệu câu hỏi; ôn 18 từ mới bằng Thẻ từ vựng mỗi ngày 10 phút."
+    [
+     "you / we / they are not",
+     "you're not / we're not / they're not",
+     "you aren't / we aren't / they aren't"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "I'm not a teacher. I'm a student.",
+     "vi": "Tôi không phải giáo viên. Tôi là học viên."
+    },
+    {
+     "t": "Minh isn't from Hanoi. He's from Da Nang.",
+     "vi": "Minh không đến từ Hà Nội. Cậu ấy đến từ Đà Nẵng."
+    },
+    {
+     "t": "Tom isn't Australian. He's English.",
+     "vi": "Tom không phải người Úc. Thầy ấy là người Anh."
+    },
+    {
+     "t": "We aren't doctors. We're nurses.",
+     "vi": "Chúng tôi không phải bác sĩ. Chúng tôi là y tá."
+    },
+    {
+     "t": "It isn't expensive.",
+     "vi": "Nó không đắt."
+    }
+   ],
+   "tips": [
+    "Tiếng Việt: “Tôi <u>không phải là</u> bác sĩ”. Tiếng Anh: chữ <b>not</b> đứng <b>SAU</b> TO BE: ✅ I'm not a doctor. ❌ <i>I not am a doctor.</i> ❌ <i>I don't a doctor.</i>",
+    "Không có “I amn't”. Chỉ nói <b>I'm not</b>.",
+    "isn't /ˈɪznt/ và aren't /ɑːnt/ – phải nghe được âm /nt/ cuối; nếu nuốt mất, người nghe tưởng bạn nói câu khẳng định!"
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "TO BE – câu hỏi Yes/No, câu trả lời ngắn & câu hỏi Wh-",
+   "html": "<p>Tiếng Việt thêm “… <i>không? / phải không? / à?</i>” vào <b>cuối</b> câu. Tiếng Anh <b>đảo TO BE lên trước chủ ngữ</b>:</p><p><b>She is</b> Japanese. → <b>Is she</b> Japanese?</p><p>Trả lời ngắn: <b>Yes, + chủ ngữ + am/is/are.</b> · <b>No, + chủ ngữ + ’m not / isn't / aren't.</b></p><p>Câu hỏi có từ để hỏi (Wh-): <b>Từ hỏi + TO BE + chủ ngữ?</b> – Where <b>are you</b> from? What <b>is your</b> job? What nationality <b>is she</b>?</p>",
+   "table": [
+    [
+     "Câu hỏi",
+     "Có",
+     "Không"
+    ],
+    [
+     "Am I late?",
+     "Yes, you are.",
+     "No, you aren't."
+    ],
+    [
+     "Are you a doctor?",
+     "Yes, I am.",
+     "No, I'm not."
+    ],
+    [
+     "Is she Japanese?",
+     "Yes, she is.",
+     "No, she isn't."
+    ],
+    [
+     "Is it expensive?",
+     "Yes, it is.",
+     "No, it isn't."
+    ],
+    [
+     "Are they engineers?",
+     "Yes, they are.",
+     "No, they aren't."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Are you Vietnamese? – Yes, I am.",
+     "vi": "Bạn là người Việt à? – Đúng vậy."
+    },
+    {
+     "t": "Is Tom American? – No, he isn't. He's English.",
+     "vi": "Tom là người Mỹ à? – Không. Thầy ấy là người Anh."
+    },
+    {
+     "t": "Where is Yuki from? – She's from Japan.",
+     "vi": "Yuki đến từ đâu? – Cô ấy đến từ Nhật."
+    },
+    {
+     "t": "What's your job? – I'm an accountant.",
+     "vi": "Bạn làm nghề gì? – Tôi là kế toán."
+    },
+    {
+     "t": "What nationality are they? – They're Korean.",
+     "vi": "Họ quốc tịch gì? – Họ là người Hàn."
+    }
+   ],
+   "tips": [
+    "Câu trả lời ngắn KHẲNG ĐỊNH <b>không viết tắt</b>: ✅ Yes, I am. ✅ Yes, she is. ❌ <i>Yes, I'm.</i> ❌ <i>Yes, she's.</i> (phủ định thì viết tắt bình thường: No, I'm not.)",
+    "Người Việt hay giữ nguyên trật tự rồi lên giọng: <i>You are a doctor?</i> – chỉ dùng khi <b>ngạc nhiên</b>. Câu hỏi bình thường phải đảo: <b>Are you</b> a doctor?",
+    "Trả lời chỉ “Yes.” / “No.” nghe cộc lốc. Thêm “Yes, I am.” / “No, I'm not. I'm a …” – vừa lịch sự vừa luyện nói.",
+    "Hỏi nghề nghiệp: <b>What's your job?</b> hoặc <b>What do you do?</b> (cấu trúc với do sẽ học ở Bài 6)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "a / an – mạo từ “một”",
+   "html": "<p>Danh từ <b>số ít, đếm được</b> trong tiếng Anh <b>không được đứng trơ trọi</b> – phải có a / an (hoặc my, your, the…). Đặc biệt với <b>nghề nghiệp</b>: tiếng Việt nói “Tôi là kỹ sư” (không có “một”), nhưng tiếng Anh bắt buộc: <b>I'm an engineer.</b></p><p>Chọn a hay an theo <b>ÂM ĐẦU khi đọc</b>, không theo chữ cái viết:</p>",
+   "table": [
+    [
+     "Mạo từ",
+     "Dùng trước",
+     "Ví dụ"
+    ],
+    [
+     "a",
+     "từ bắt đầu bằng PHỤ ÂM (khi đọc)",
+     "a doctor, a nurse, a cook, a farmer · a university /ˌjuː…/ (âm /j/)"
+    ],
+    [
+     "an",
+     "từ bắt đầu bằng NGUYÊN ÂM (khi đọc)",
+     "an engineer, an accountant, an architect, an office worker · an hour /ˈaʊə/ (h câm)"
+    ],
+    [
+     "(không có)",
+     "danh từ SỐ NHIỀU",
+     "They're doctors. We're engineers."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Lan is an accountant.",
+     "vi": "Lan là kế toán. (accountant bắt đầu bằng âm /ə/ → an)"
+    },
+    {
+     "t": "Is he a driver? – No, he isn't. He's a police officer.",
+     "vi": "Anh ấy là tài xế à? – Không. Anh ấy là cảnh sát."
+    },
+    {
+     "t": "Ben is an Australian engineer.",
+     "vi": "Ben là một kỹ sư người Úc. (a/an theo từ ĐỨNG NGAY SAU: Australian /ɒ…/ → an)"
+    },
+    {
+     "t": "Sarah is a good architect.",
+     "vi": "Sarah là một kiến trúc sư giỏi. (good /ɡ/ → a, dù architect bắt đầu bằng nguyên âm)"
+    }
+   ],
+   "tips": [
+    "Lỗi phổ biến nhất của bài: bỏ a/an trước nghề. ❌ <i>She is nurse.</i> → ✅ She is <b>a</b> nurse.",
+    "Số nhiều không có a/an: ❌ <i>They're an engineers.</i> → ✅ They're engineers.",
+    "Quốc tịch là tính từ, dùng trơn: ✅ She's Japanese. (không nói <i>She's a Japanese</i>)."
+   ]
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: trọng âm quốc tịch, nối âm “an”, ngữ điệu câu hỏi",
+   "html": "<p>Ba thói quen giúp bạn nghe “Tây” hơn ngay hôm nay: đặt đúng trọng âm của quốc tịch, nối âm /n/ của <b>an</b> sang từ sau, và lên/xuống giọng đúng loại câu hỏi. Bấm từng ví dụ để nghe rồi nhại lại.</p>",
+   "items": [
+    {
+     "sym": "-ese /ˈiːz/",
+     "ex": [
+      "Vietnamese",
+      "Japanese",
+      "Chinese"
+     ],
+     "vi": "Đuôi -ese luôn có trọng âm, kéo dài /iː/ và kết thúc bằng /z/ rung: viet-na-MESE, ja-pa-NESE, chi-NESE. Đừng đọc thành “ni” cụt."
+    },
+    {
+     "sym": "-an /ən/",
+     "ex": [
+      "American",
+      "Korean",
+      "Australian"
+     ],
+     "vi": "Đuôi -an đọc rất nhẹ /ən/. Trọng âm: a-ME-ri-can, ko-RE-an, aus-TRA-li-an."
+    },
+    {
+     "sym": "an + nguyên âm",
+     "ex": [
+      "an engineer",
+      "an accountant",
+      "an office worker"
+     ],
+     "vi": "Âm /n/ của an dính sang từ sau: “a-nen-gi-neer”, “a-nac-coun-tant”. Không ngắt hơi giữa an và từ sau."
+    },
+    {
+     "sym": "/ˈɪznt/ · /ɑːnt/",
+     "ex": [
+      "isn't",
+      "aren't",
+      "No, she isn't."
+     ],
+     "vi": "isn't: rung /z/ rồi đặt lưỡi lên chân răng cho /nt/. aren't (giọng Anh) đọc giống aunt, không có âm r."
+    },
+    {
+     "sym": "↗ / ↘",
+     "ex": [
+      "Are you a doctor?",
+      "Is she Japanese?",
+      "Where are you from?",
+      "What's your job?"
+     ],
+     "vi": "Câu hỏi Yes/No: LÊN giọng ở cuối ↗. Câu hỏi Wh- (Where, What, Who…): XUỐNG giọng ở cuối ↘ – giống câu kể."
+    }
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Câu lạc bộ tiếng Anh",
+   "lang": "en-GB",
+   "note": "Tối thứ Bảy, câu lạc bộ tiếng Anh của trung tâm. Lan và Minh làm quen với hai người nước ngoài. Nghe lần 1 (che lời thoại): có mấy người nước ngoài? Nghe lần 2: họ là người nước nào, làm nghề gì?",
+   "lines": [
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "Hi! Are you a new member?",
+     "vi": "Chào anh! Anh là thành viên mới ạ?"
+    },
+    {
+     "s": "Ben",
+     "g": "m",
+     "t": "Yes, I am. I'm Ben. Nice to meet you.",
+     "vi": "Đúng rồi. Tôi là Ben. Rất vui được gặp bạn."
+    },
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "Nice to meet you too. I'm Lan, and this is Minh. Are you American?",
+     "vi": "Em cũng rất vui được gặp anh. Em là Lan, còn đây là Minh. Anh là người Mỹ ạ?"
+    },
+    {
+     "s": "Ben",
+     "g": "m",
+     "t": "No, I'm not. I'm Australian. I'm from Melbourne.",
+     "vi": "Không. Tôi là người Úc. Tôi đến từ Melbourne."
+    },
+    {
+     "s": "Minh",
+     "g": "m",
+     "t": "Are you a teacher here?",
+     "vi": "Anh là giáo viên ở đây ạ?"
+    },
+    {
+     "s": "Ben",
+     "g": "m",
+     "t": "No, I'm not a teacher. I'm an engineer. And you? Are you students?",
+     "vi": "Không, tôi không phải giáo viên. Tôi là kỹ sư. Còn các bạn? Các bạn là sinh viên à?"
+    },
+    {
+     "s": "Minh",
+     "g": "m",
+     "t": "Yes, we are. We're students in the evening class.",
+     "vi": "Vâng ạ. Chúng em là học viên lớp buổi tối."
+    },
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "But I'm also an accountant. Minh is a university student.",
+     "vi": "Nhưng em còn là kế toán nữa. Minh là sinh viên đại học."
+    },
+    {
+     "s": "Ben",
+     "g": "m",
+     "t": "Great! Oh, this is my friend Yuki. She's from Japan.",
+     "vi": "Hay quá! À, đây là bạn tôi, Yuki. Cô ấy đến từ Nhật."
+    },
+    {
+     "s": "Yuki",
+     "g": "f",
+     "t": "Hello, everyone. Nice to meet you.",
+     "vi": "Xin chào mọi người. Rất vui được gặp các bạn."
+    },
+    {
+     "s": "Minh",
+     "g": "m",
+     "t": "Hi, Yuki. Are you a teacher?",
+     "vi": "Chào chị Yuki. Chị là giáo viên ạ?"
+    },
+    {
+     "s": "Yuki",
+     "g": "f",
+     "t": "No, I'm not. I'm a nurse at an international hospital in Hanoi.",
+     "vi": "Không. Chị là y tá ở một bệnh viện quốc tế tại Hà Nội."
+    },
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "Wow! Welcome to the club, Ben and Yuki!",
+     "vi": "Ồ! Chào mừng anh Ben và chị Yuki đến với câu lạc bộ!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Is Ben American?",
+     "o": [
+      "Yes, he is.",
+      "No, he isn't. He's Australian.",
+      "No, he isn't. He's English."
+     ],
+     "a": 1,
+     "e": "Ben nói: “No, I'm not. I'm Australian. I'm from Melbourne.”"
+    },
+    {
+     "q": "Ben is ______.",
+     "a": "an engineer",
+     "alt": [],
+     "e": "“I'm not a teacher. I'm an engineer.” – nhớ dùng an vì engineer bắt đầu bằng nguyên âm /e/."
+    },
+    {
+     "q": "Where is Yuki from?",
+     "o": [
+      "China",
+      "Japan",
+      "Korea"
+     ],
+     "a": 1,
+     "e": "Ben giới thiệu: “She's from Japan.”"
+    },
+    {
+     "q": "Lan is a student and ______.",
+     "o": [
+      "a nurse",
+      "an engineer",
+      "an accountant"
+     ],
+     "a": 2,
+     "e": "Lan nói: “But I'm also an accountant.” – also = cũng, còn."
+    },
+    {
+     "q": "Yuki is a ______.",
+     "a": "nurse",
+     "alt": [
+      "a nurse"
+     ],
+     "e": "“I'm a nurse at an international hospital.” – international bắt đầu bằng /ɪ/ → an."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Câu lạc bộ của chúng mình",
+   "title": "Our English Club",
+   "text": "Hi! I'm Lan. This is our English club. It's small, but it's very friendly.\n\nBen is a new member. He isn't American. He's Australian, from Melbourne. He's an engineer. He's tall and very funny.\n\nYuki is from Japan. She isn't a teacher. She's a nurse at an international hospital. She's quiet but kind.\n\nMr Park is Korean. He's a cook at a Korean restaurant in Hanoi. His food is great!\n\nMinh and I are Vietnamese. We aren't teachers. Minh is a university student, and I'm an accountant. The club isn't expensive – it's free! Are you free on Saturday evening? Come and say hello!",
+   "vi": "Xin chào! Mình là Lan. Đây là câu lạc bộ tiếng Anh của chúng mình. Câu lạc bộ nhỏ nhưng rất thân thiện.\n\nBen là thành viên mới. Anh ấy không phải người Mỹ. Anh ấy là người Úc, đến từ Melbourne. Anh ấy là kỹ sư. Anh ấy cao và rất vui tính.\n\nYuki đến từ Nhật. Chị ấy không phải giáo viên. Chị ấy là y tá ở một bệnh viện quốc tế. Chị ấy ít nói nhưng tốt bụng.\n\nÔng Park là người Hàn. Ông ấy là đầu bếp ở một nhà hàng Hàn Quốc tại Hà Nội. Món ăn của ông ấy rất tuyệt!\n\nMinh và mình là người Việt. Chúng mình không phải giáo viên. Minh là sinh viên đại học, còn mình là kế toán. Câu lạc bộ không đắt – nó miễn phí! Tối thứ Bảy bạn có rảnh không? Hãy đến chào chúng mình nhé!",
+   "gloss": [
+    {
+     "w": "club",
+     "vi": "câu lạc bộ"
+    },
+    {
+     "w": "friendly",
+     "vi": "thân thiện"
+    },
+    {
+     "w": "member",
+     "vi": "thành viên"
+    },
+    {
+     "w": "tall",
+     "vi": "cao (người)"
+    },
+    {
+     "w": "quiet",
+     "vi": "ít nói, yên tĩnh"
+    },
+    {
+     "w": "international",
+     "vi": "quốc tế"
+    },
+    {
+     "w": "restaurant",
+     "vi": "nhà hàng"
+    },
+    {
+     "w": "expensive",
+     "vi": "đắt"
+    },
+    {
+     "w": "free",
+     "vi": "miễn phí; rảnh rỗi"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Ben is American.",
+     "o": [
+      "Đúng",
+      "Sai"
+     ],
+     "a": 1,
+     "e": "“He isn't American. He's Australian.”"
+    },
+    {
+     "q": "What is Yuki's job?",
+     "o": [
+      "teacher",
+      "nurse",
+      "cook"
+     ],
+     "a": 1,
+     "e": "“She isn't a teacher. She's a nurse.”"
+    },
+    {
+     "q": "Mr Park is from ______.",
+     "a": "Korea",
+     "alt": [
+      "south korea"
+     ],
+     "e": "“Mr Park is Korean” → Korean là quốc tịch, tên nước là Korea."
+    },
+    {
+     "q": "Lan is ______.",
+     "o": [
+      "a student",
+      "an accountant",
+      "a cook"
+     ],
+     "a": 1,
+     "e": "“Minh is a university student, and I'm an accountant.”"
+    },
+    {
+     "q": "Trong bài, từ “free” được dùng với mấy nghĩa?",
+     "o": [
+      "1 nghĩa: miễn phí",
+      "2 nghĩa: miễn phí và rảnh rỗi",
+      "1 nghĩa: rảnh rỗi"
+     ],
+     "a": 1,
+     "e": "“it's free” = miễn phí; “Are you free on Saturday evening?” = bạn có rảnh không."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Hỏi – đáp quốc tịch & nghề",
+   "tasks": [
+    {
+     "p": "Trả lời 3 câu hỏi bằng câu trả lời ngắn + 1 câu thật về bạn: Are you a teacher? Are you from Hue? Is your mum a doctor?",
+     "model": "No, I'm not. I'm an office worker. — No, I'm not. I'm from Thanh Hoa. — No, she isn't. She's a farmer.",
+     "vi": "Không. Tôi là nhân viên văn phòng. — Không. Tôi đến từ Thanh Hoá. — Không. Mẹ tôi là nông dân.",
+     "tips": "Nói No, I'm not rồi dừng nửa giây, sau đó nói câu đúng – nghe rất tự nhiên."
+    },
+    {
+     "p": "Giới thiệu một người nước ngoài (có thật hoặc tưởng tượng): tên, nước, quốc tịch, nghề. Phải có 1 câu phủ định.",
+     "model": "This is Kenji. He isn't Chinese. He's Japanese, from Osaka. He's a cook at a Japanese restaurant in Da Nang.",
+     "vi": "Đây là Kenji. Anh ấy không phải người Trung Quốc. Anh ấy là người Nhật, đến từ Osaka. Anh ấy là đầu bếp ở một nhà hàng Nhật tại Đà Nẵng.",
+     "tips": "Kiểm tra a/an trước nghề và trọng âm ja-pa-NESE."
+    },
+    {
+     "p": "Trò chơi “Đoán nghề”: bạn cùng lớp nghĩ một nghề; bạn hỏi tối đa 5 câu Yes/No để đoán.",
+     "model": "Are you a doctor? – No, I'm not. – Are you an engineer? – No, I'm not. – Are you an accountant? – Yes, I am!",
+     "tips": "Lên giọng ↗ ở cuối mỗi câu hỏi. Người trả lời phải dùng câu trả lời ngắn đầy đủ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Hồ sơ hai người bạn",
+   "task": "Viết đoạn 6–8 câu về bạn và một người bạn nước ngoài (có thể tưởng tượng): tên, quê / nước, quốc tịch, nghề. Có ít nhất 2 câu phủ định và 1 câu hỏi + trả lời ngắn.",
+   "min": 50,
+   "model": "Hi! I'm Thao. I'm Vietnamese, and I'm from Ninh Binh. I'm not a student. I'm an office worker in Hanoi. This is my friend Sarah. She isn't English. She's American, from Boston. She's an architect. Is she a good cook? Yes, she is!",
+   "modelVi": "Xin chào! Mình là Thảo. Mình là người Việt và đến từ Ninh Bình. Mình không phải sinh viên. Mình là nhân viên văn phòng ở Hà Nội. Đây là bạn mình, Sarah. Cô ấy không phải người Anh. Cô ấy là người Mỹ, đến từ Boston. Cô ấy là kiến trúc sư. Cô ấy nấu ăn có giỏi không? Có chứ!",
+   "tips": [
+    "Mỗi danh từ nghề số ít phải có a hoặc an.",
+    "Câu phủ định: not đứng sau TO BE (isn't, aren't, I'm not).",
+    "Tên nước, quốc tịch viết hoa."
+   ],
+   "checklist": [
+    "Có tên nước VÀ quốc tịch",
+    "Ít nhất 2 câu phủ định",
+    "1 câu hỏi Yes/No + câu trả lời ngắn",
+    "a/an đúng trước mọi nghề",
+    "Viết hoa I, tên người, nước, quốc tịch"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "She ___ a doctor. She's a nurse.",
+   "o": [
+    "is",
+    "isn't",
+    "aren't"
+   ],
+   "a": 1,
+   "e": "Câu sau nói cô ấy là y tá → câu trước phải phủ định. she đi với is → isn't."
+  },
+  {
+   "t": "mc",
+   "q": "___ you from Japan? – Yes, I am.",
+   "o": [
+    "Is",
+    "Am",
+    "Are"
+   ],
+   "a": 2,
+   "e": "Câu hỏi đảo TO BE lên đầu; you đi với are → Are you…?"
+  },
+  {
+   "t": "mc",
+   "q": "Are you a teacher? – Yes, ___",
+   "o": [
+    "I'm.",
+    "I am.",
+    "I is."
+   ],
+   "a": 1,
+   "e": "Câu trả lời ngắn khẳng định không được viết tắt: Yes, I am. (❌ Yes, I'm.)"
+  },
+  {
+   "t": "mc",
+   "q": "Is Tom Australian? – No, he ___. He's English.",
+   "o": [
+    "is",
+    "isn't",
+    "aren't"
+   ],
+   "a": 1,
+   "e": "Trả lời phủ định với he: No, he isn't."
+  },
+  {
+   "t": "fill",
+   "q": "Ben is ___ engineer.",
+   "a": "an",
+   "e": "engineer bắt đầu bằng âm nguyên âm /e/ → an."
+  },
+  {
+   "t": "fill",
+   "q": "My dad is ___ farmer.",
+   "a": "a",
+   "e": "farmer bắt đầu bằng phụ âm /f/ → a."
+  },
+  {
+   "t": "mc",
+   "q": "Chọn câu ĐÚNG:",
+   "o": [
+    "She is accountant.",
+    "She is an accountant.",
+    "She is a accountant."
+   ],
+   "a": 1,
+   "e": "Nghề số ít bắt buộc có mạo từ; accountant bắt đầu bằng âm /ə/ → an."
+  },
+  {
+   "t": "mc",
+   "q": "a hay an? “It's ___ hour.”",
+   "o": [
+    "a",
+    "an"
+   ],
+   "a": 1,
+   "e": "hour có h câm, âm đầu là /aʊ/ (nguyên âm) → an hour."
+  },
+  {
+   "t": "mc",
+   "q": "a hay an? “He's ___ university student.”",
+   "o": [
+    "a",
+    "an"
+   ],
+   "a": 0,
+   "e": "university đọc /ˌjuːnɪ…/ – bắt đầu bằng âm /j/ (phụ âm) → a university, dù chữ đầu là u."
+  },
+  {
+   "t": "fill",
+   "q": "I'm from Korea. I'm ___.",
+   "a": "Korean",
+   "e": "Nước Korea → quốc tịch Korean (viết hoa)."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu hỏi:",
+   "w": [
+    "from?",
+    "Where",
+    "you",
+    "are"
+   ],
+   "a": "Where are you from?",
+   "e": "Câu hỏi Wh-: Từ hỏi + TO BE + chủ ngữ + from?"
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "teacher.",
+    "not",
+    "I'm",
+    "a"
+   ],
+   "a": "I'm not a teacher.",
+   "e": "Chủ ngữ + TO BE + not + a/an + nghề."
+  },
+  {
+   "t": "listen",
+   "say": "Hi, I'm Kenji. I'm not Chinese. I'm Japanese. I'm a cook in Hanoi.",
+   "lang": "en-GB",
+   "q": "Kenji is ______.",
+   "o": [
+    "Chinese",
+    "Japanese",
+    "Korean"
+   ],
+   "a": 1,
+   "e": "“I'm not Chinese. I'm Japanese.” – cẩn thận bẫy: Chinese có xuất hiện nhưng ở câu phủ định."
+  },
+  {
+   "t": "listen",
+   "say": "Is Maria a doctor? No, she isn't. She's an engineer.",
+   "lang": "en-GB",
+   "q": "What is Maria's job?",
+   "o": [
+    "doctor",
+    "nurse",
+    "engineer"
+   ],
+   "a": 2,
+   "e": "“No, she isn't. She's an engineer.”"
+  },
+  {
+   "t": "listen",
+   "say": "We aren't English. We're American. We're police officers.",
+   "lang": "en-GB",
+   "q": "They are ______.",
+   "o": [
+    "English police officers",
+    "American police officers",
+    "American doctors"
+   ],
+   "a": 1,
+   "e": "“We aren't English. We're American. We're police officers.”"
+  },
+  {
+   "t": "dict",
+   "say": "She isn't a teacher. She's an accountant.",
+   "lang": "en-GB",
+   "a": "She isn't a teacher. She's an accountant.",
+   "e": "Chú ý dấu nháy trong isn't và She's, và an trước accountant."
+  },
+  {
+   "t": "match",
+   "q": "Nối nước với quốc tịch:",
+   "pairs": [
+    [
+     "Vietnam",
+     "Vietnamese"
+    ],
+    [
+     "Japan",
+     "Japanese"
+    ],
+    [
+     "Korea",
+     "Korean"
+    ],
+    [
+     "England",
+     "English"
+    ],
+    [
+     "Australia",
+     "Australian"
+    ],
+    [
+     "China",
+     "Chinese"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Bản đồ thế giới hoặc 7 lá cờ (Việt Nam, Anh, Mỹ, Nhật, Hàn, Trung Quốc, Úc); 10 thẻ tranh nghề nghiệp; mỗi học viên 2 thẻ giấy ghi “a” và “an”; bảng phụ kẻ bảng phủ định & câu hỏi TO BE.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Ôn Bài 1: GV hỏi nhanh từng em What's your name? Where are you from? – trả lời bằng câu đầy đủ. Ghi lên bảng 2–3 câu học viên nói sai TO BE để sửa chung."
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng nước – quốc tịch: chỉ cờ, học viên nói tên nước; GV đưa quốc tịch, cả lớp nhại theo, vỗ tay đúng âm tiết có trọng âm (viet-na-MESE). Viết bảng 3 nhóm đuôi -ese / -an / -ish."
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng nghề: giơ thẻ tranh, học viên đoán nghề bằng tiếng Việt → GV dạy từ tiếng Anh. Sau đó dạy a/an: GV đọc từ, học viên giơ thẻ “a” hoặc “an”. Nhấn mạnh an hour / a university (theo ÂM)."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp phủ định & câu hỏi: GV nói câu SAI về một học viên (Nam is Japanese!) – lớp sửa: No! He isn't Japanese. He's Vietnamese. Sau đó chuyển câu kể → câu hỏi bằng thẻ chữ di chuyển được (She | is | Japanese → Is | she | Japanese?). Drill câu trả lời ngắn, cấm “Yes, I'm”."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe hội thoại “Câu lạc bộ tiếng Anh”: lần 1 đếm số người nước ngoài (2); lần 2 điền bảng Ben/Yuki – nước – nghề; lần 3 đọc phân vai 4 người. Luyện ngữ điệu ↗ ↘ qua câu Are you American? / Where are you from?"
+   },
+   {
+    "t": "10'",
+    "do": "Tổng kết, giao bài tập 1–10 trong game."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Khởi động “Đoán nghề” (phần Nói 3): 1 học viên chọn thẻ nghề, cả lớp hỏi Yes/No tối đa 5 câu."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc “Our English Club”: đọc thầm 4 phút, trả lời câu hỏi; tô màu khác nhau cho câu khẳng định và câu phủ định; thảo luận 2 nghĩa của free."
+   },
+   {
+    "t": "25'",
+    "do": "Nói theo cặp: mỗi em nhận 1 “thẻ nhân vật” (tên, nước, nghề nước ngoài), đi quanh lớp hỏi – đáp để tìm “đồng hương” (người cùng quốc tịch). Sau đó 3–4 em giới thiệu nhân vật vừa gặp trước lớp."
+   },
+   {
+    "t": "20'",
+    "do": "Viết hồ sơ 6–8 câu theo mẫu; đổi bài, bạn chấm bằng checklist (đặc biệt a/an và viết hoa quốc tịch)."
+   },
+   {
+    "t": "15'",
+    "do": "Làm bài tập 11–17 (sắp xếp, nghe, chính tả, nối). Chữa lỗi chung; giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Tìm đồng hương: phát thẻ nhân vật có 3–4 quốc tịch; học viên chỉ được hỏi câu Yes/No (Are you Japanese? Are you a cook?) để tìm nhóm của mình. Nhóm nào đủ người trước thắng.",
+   "Sửa sai siêu tốc: GV nói một câu sai sự thật về lớp (Lan is a doctor!), học viên giơ tay sửa bằng câu phủ định + khẳng định (No, she isn't. She's an accountant.).",
+   "Thẻ a/an: GV đọc nhanh 15 danh từ (egg, house, hour, uniform, office, idea…), học viên giơ thẻ; ai sai ngồi xuống, ai trụ lại cuối cùng thắng."
+  ],
+  "errors": [
+   "Bỏ mạo từ trước nghề: *She is nurse → She is a nurse. Cách sửa: mỗi lần nói nghề, GV gõ bàn 1 cái nhắc “a/an”.",
+   "Trả lời ngắn viết tắt: *Yes, I'm → Yes, I am. Giải thích: dạng viết tắt không đứng cuối câu.",
+   "Không đảo khi hỏi: *You are a doctor? → Are you a doctor? Dùng thẻ chữ di chuyển cho học viên tự đảo.",
+   "Nhầm nước và quốc tịch: *I'm from Vietnamese / *I'm Vietnam → I'm from Vietnam. I'm Vietnamese.",
+   "Chọn a/an theo chữ viết: *an university, *a hour → a university, an hour (theo ÂM).",
+   "Viết thường quốc tịch, ngôn ngữ: *english, *vietnamese → English, Vietnamese."
+  ],
+  "homework": "Làm hết bài tập trong game (mục tiêu ≥ 80%); viết 5 câu về 5 người quen (nghề + quê) có a/an đúng; ghi âm phần Nói 2 và tự kiểm tra ngữ điệu câu hỏi; ôn 18 từ mới bằng Thẻ từ vựng mỗi ngày 10 phút."
+ }
 }

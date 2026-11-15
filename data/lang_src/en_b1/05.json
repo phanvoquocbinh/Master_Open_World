@@ -1,165 +1,866 @@
 {
-  "no": 5,
-  "title": "Giáo dục & học tập – Mệnh đề quan hệ xác định và không xác định",
-  "sub": "The teacher who changed my life",
-  "goals": [
-    "Dùng đúng who / which / that / whose / where / when để nối câu và định nghĩa sự vật",
-    "Phân biệt mệnh đề quan hệ xác định (không phẩy) và không xác định (có phẩy, không dùng that)",
-    "Biết khi nào được lược bỏ đại từ quan hệ và tránh lỗi lặp đại từ (*the book which I bought it)",
-    "Nói và viết về trường lớp, thi cử, học bổng bằng 20 từ/cụm chủ đề giáo dục",
-    "Viết đoạn văn 120–150 từ tả một người ảnh hưởng đến việc học của bạn"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng: giáo dục & học tập", "items": [
-      {"w": "tuition fee", "ipa": "/tjuˈɪʃn fiː/", "pos": "n", "vi": "học phí (thường dùng số nhiều: tuition fees)", "ex": "Tuition fees at private universities are quite high.", "exVi": "Học phí ở các trường đại học tư khá cao."},
-      {"w": "scholarship", "ipa": "/ˈskɒləʃɪp/", "pos": "n", "vi": "học bổng (win / get a scholarship)", "ex": "She won a scholarship to study in Australia.", "exVi": "Cô ấy giành học bổng du học Úc."},
-      {"w": "pass an exam", "ipa": "/ˌpɑːs ən ɪɡˈzæm/", "pos": "phr", "vi": "thi đỗ (≠ fail an exam: thi trượt; take an exam: dự thi)", "ex": "He passed all his exams with high marks.", "exVi": "Cậu ấy đỗ mọi kỳ thi với điểm cao."},
-      {"w": "revise for", "ipa": "/rɪˈvaɪz fə(r)/", "pos": "phr", "vi": "ôn thi (Anh-Anh)", "ex": "I'm revising for my final exams.", "exVi": "Tôi đang ôn thi cuối kỳ."},
-      {"w": "graduate from", "ipa": "/ˈɡrædʒueɪt frəm/", "pos": "phr", "vi": "tốt nghiệp (trường) – danh từ graduate /ˈɡrædʒuət/: người đã tốt nghiệp", "ex": "She graduated from Hue University in 2020.", "exVi": "Cô ấy tốt nghiệp Đại học Huế năm 2020."},
-      {"w": "degree", "ipa": "/dɪˈɡriː/", "pos": "n", "vi": "bằng đại học (do a degree in…: học ngành…)", "ex": "He has a degree in economics.", "exVi": "Anh ấy có bằng kinh tế."},
-      {"w": "lecture", "ipa": "/ˈlektʃə(r)/", "pos": "n", "vi": "bài giảng (đại học)", "ex": "The lecture starts at eight.", "exVi": "Bài giảng bắt đầu lúc tám giờ."},
-      {"w": "lecturer", "ipa": "/ˈlektʃərə(r)/", "pos": "n", "vi": "giảng viên đại học", "ex": "Our lecturer explains everything clearly.", "exVi": "Giảng viên của chúng tôi giải thích mọi thứ rõ ràng."},
-      {"w": "attend", "ipa": "/əˈtend/", "pos": "v", "vi": "tham dự (attend a class – KHÔNG có to)", "ex": "Students must attend at least 80% of the lessons.", "exVi": "Sinh viên phải tham dự ít nhất 80% số buổi học."},
-      {"w": "assignment", "ipa": "/əˈsaɪnmənt/", "pos": "n", "vi": "bài tập lớn, bài luận được giao", "ex": "I have to finish two assignments this week.", "exVi": "Tuần này tôi phải làm xong hai bài tập lớn."},
-      {"w": "hand in", "ipa": "/ˌhænd ˈɪn/", "pos": "phr", "vi": "nộp (bài)", "ex": "Please hand in your essays by Friday.", "exVi": "Hãy nộp bài luận trước thứ Sáu."},
-      {"w": "take notes", "ipa": "/ˌteɪk ˈnəʊts/", "pos": "phr", "vi": "ghi chép", "ex": "Take notes while you listen.", "exVi": "Hãy ghi chép khi nghe."},
-      {"w": "memorise", "ipa": "/ˈmeməraɪz/", "pos": "v", "vi": "học thuộc lòng", "ex": "Memorising word lists is not enough.", "exVi": "Học thuộc danh sách từ là chưa đủ."},
-      {"w": "online course", "ipa": "/ˌɒnlaɪn ˈkɔːs/", "pos": "n", "vi": "khoá học trực tuyến (take / do an online course)", "ex": "I'm taking an online course in graphic design.", "exVi": "Tôi đang học một khoá thiết kế đồ hoạ trực tuyến."},
-      {"w": "private tutor", "ipa": "/ˌpraɪvət ˈtjuːtə(r)/", "pos": "n", "vi": "gia sư", "ex": "Many parents hire private tutors for their children.", "exVi": "Nhiều phụ huynh thuê gia sư cho con."},
-      {"w": "extra classes", "ipa": "/ˌekstrə ˈklɑːsɪz/", "pos": "n", "vi": "lớp học thêm", "ex": "He goes to extra classes every evening.", "exVi": "Tối nào cậu ấy cũng đi học thêm."},
-      {"w": "curriculum", "ipa": "/kəˈrɪkjələm/", "pos": "n", "vi": "chương trình học", "ex": "Coding is now part of the school curriculum.", "exVi": "Lập trình giờ là một phần chương trình học ở trường."},
-      {"w": "knowledge", "ipa": "/ˈnɒlɪdʒ/", "pos": "n", "vi": "kiến thức (không đếm được: KHÔNG nói a knowledge / knowledges)", "ex": "Reading improves your general knowledge.", "exVi": "Đọc sách nâng cao kiến thức chung."},
-      {"w": "lifelong learning", "ipa": "/ˌlaɪflɒŋ ˈlɜːnɪŋ/", "pos": "n", "vi": "học tập suốt đời", "ex": "Lifelong learning is important in a changing world.", "exVi": "Học tập suốt đời rất quan trọng trong một thế giới thay đổi."},
-      {"w": "make progress", "ipa": "/ˌmeɪk ˈprəʊɡres/", "pos": "phr", "vi": "tiến bộ (progress không đếm được)", "ex": "You've made a lot of progress this term.", "exVi": "Em đã tiến bộ nhiều trong học kỳ này."}
-    ]},
-    {"k": "grammar", "h": "Mệnh đề quan hệ xác định (defining relative clauses)", "html": "<p>Mệnh đề quan hệ đứng <b>ngay sau danh từ</b> để cho biết <b>người / vật nào</b>. Nếu bỏ đi, ta không biết đang nói về ai/cái gì. Tiếng Việt dùng “<b>mà</b>, <b>người mà</b>, <b>nơi mà</b>” – và rất hay bỏ luôn: “Cô giáo <u>dạy tôi năm lớp 10</u> rất hiền.” Tiếng Anh thì phải có đại từ quan hệ (trừ trường hợp được lược – xem mẹo).</p>", "table": [["Đại từ", "Thay cho", "Ví dụ"], ["who", "người (chủ ngữ hoặc tân ngữ)", "The teacher who taught me in Year 10 was very kind."], ["which", "vật, con vật", "The course which I'm taking is free."], ["that", "người hoặc vật (chỉ trong mệnh đề xác định)", "The book that you lent me is great."], ["whose", "của người/vật đó (sở hữu) + danh từ", "I have a friend whose father is a lecturer."], ["where", "nơi chốn (= in/at which)", "This is the school where my mother teaches."], ["when", "thời gian (= in/on which)", "2020 was the year when I graduated."]], "ex": [
-      {"t": "Students who revise regularly usually do well.", "vi": "Những học sinh ôn bài đều đặn thường làm bài tốt."},
-      {"t": "I lost the notebook which had all my notes in it.", "vi": "Tôi làm mất cuốn vở có toàn bộ ghi chép của tôi."},
-      {"t": "The girl whose essay won the prize is in my class.", "vi": "Cô bạn có bài luận đoạt giải học cùng lớp tôi."},
-      {"t": "Do you know a café where I can study quietly?", "vi": "Bạn có biết quán cà phê nào mà tôi có thể học yên tĩnh không?"},
-      {"t": "The lecturer (who/that) we met yesterday is from Canada.", "vi": "Giảng viên mà chúng ta gặp hôm qua đến từ Canada. (who là tân ngữ → có thể lược)"}
-    ], "tips": [
-      "<b>Lược đại từ quan hệ</b> khi nó là <b>tân ngữ</b> (sau nó có chủ ngữ mới): <i>The film (that) <u>we</u> watched…</i> ✅. KHÔNG lược khi nó là chủ ngữ: ❌ <i>The man lives next door is a doctor</i> → ✅ <i>The man <b>who</b> lives next door…</i>",
-      "<b>Lỗi lặp đại từ</b> – rất phổ biến: ❌ <i>The book which I bought <u>it</u> was boring.</i> Đại từ quan hệ đã thay cho <i>it</i> rồi → ✅ <i>The book which I bought was boring.</i>",
-      "<b>where</b> chỉ dùng khi sau nó là một mệnh đề đầy đủ (đã có tân ngữ): <i>the city <b>where</b> I was born</i>. Nếu động từ cần tân ngữ thì dùng which/that: ❌ <i>the city where I visited</i> → ✅ <i>the city <b>(that)</b> I visited</i>.",
-      "<b>whose</b> (của ai) khác <b>who's</b> (= who is / who has). Sau whose luôn có danh từ: <i>whose <u>car</u>, whose <u>father</u></i>."
-    ]},
-    {"k": "grammar", "h": "Mệnh đề quan hệ không xác định (non-defining): có dấu phẩy", "html": "<p>Mệnh đề không xác định chỉ <b>thêm thông tin phụ</b> về người/vật đã rõ (tên riêng, người duy nhất, vật đã xác định). Bỏ đi câu vẫn đủ nghĩa. Nó luôn nằm giữa <b>dấu phẩy</b> (khi nói thì ngắt hơi).</p>", "table": [["", "Xác định", "Không xác định"], ["Chức năng", "Cho biết người/vật NÀO – bắt buộc", "Thêm thông tin – có thể bỏ"], ["Dấu phẩy", "Không", "Có (2 đầu, hoặc 1 đầu nếu ở cuối câu)"], ["Dùng that?", "Được", "KHÔNG"], ["Lược đại từ?", "Được (nếu là tân ngữ)", "KHÔNG"], ["Ví dụ", "My brother who lives in Hue is a doctor. (tôi có nhiều anh trai)", "My brother, who lives in Hue, is a doctor. (tôi chỉ có 1 anh trai)"]], "ex": [
-      {"t": "Hue, which was the capital of Vietnam, has many old palaces.", "vi": "Huế, nơi từng là kinh đô của Việt Nam, có nhiều cung điện cổ."},
-      {"t": "My English teacher, whose name is Mr Hai, comes from Nghe An.", "vi": "Thầy dạy tiếng Anh của tôi, tên là thầy Hải, quê ở Nghệ An."},
-      {"t": "We visited the Temple of Literature, where Vietnam's first university was founded.", "vi": "Chúng tôi thăm Văn Miếu, nơi trường đại học đầu tiên của Việt Nam được thành lập."},
-      {"t": "He passed the exam with full marks, which surprised everyone.", "vi": "Cậu ấy đỗ với điểm tuyệt đối, điều này làm mọi người bất ngờ. (which thay cho cả mệnh đề trước)"}
-    ], "tips": [
-      "❌ <i>Hanoi, that is the capital, is…</i> → ✅ <i>Hanoi, <b>which</b> is the capital, is…</i> – không dùng that sau dấu phẩy.",
-      "<b>…, which…</b> ở cuối câu có thể bình luận cả ý trước: <i>It rained all day, which was annoying.</i> – tương đương tiếng Việt “…, điều đó…”.",
-      "Khi nói, mệnh đề không xác định được ngắt bằng hai quãng nghỉ ngắn và giọng hơi thấp xuống: <i>My mother | who is sixty | still goes jogging.</i>"
-    ]},
-    {"k": "dialog", "h": "Nghe: Ngày hội tư vấn tuyển sinh", "lang": "en-GB", "note": "Nam đến ngày hội tư vấn của một trường đại học và hỏi cô Hạnh, cán bộ tư vấn, về ngành Công nghệ thông tin. Nghe lần 1 (che lời thoại): khoá học kéo dài mấy năm? Nghe lần 2: ghi lại thông tin về thực tập, học phí, học bổng, thư viện.", "lines": [
-      {"s": "Nam", "g": "m", "t": "Excuse me. I'm interested in the IT course. Could you tell me a bit about it?", "vi": "Xin lỗi cô. Em quan tâm đến ngành Công nghệ thông tin. Cô có thể cho em biết một chút được không ạ?"},
-      {"s": "Ms Hanh", "g": "f", "t": "Of course. It's a four-year degree which focuses on software development. Students who complete the course get a lot of practical experience.", "vi": "Tất nhiên. Đây là chương trình đại học bốn năm, tập trung vào phát triển phần mềm. Sinh viên hoàn thành khoá học có rất nhiều kinh nghiệm thực tế."},
-      {"s": "Nam", "g": "m", "t": "What kind of experience?", "vi": "Kinh nghiệm kiểu gì ạ?"},
-      {"s": "Ms Hanh", "g": "f", "t": "In the third year, every student does an internship at a company that works with our university. Last year, most students who did internships were offered jobs.", "vi": "Năm thứ ba, mọi sinh viên đều thực tập ở một công ty có hợp tác với trường. Năm ngoái, phần lớn sinh viên đi thực tập đã được mời làm việc."},
-      {"s": "Nam", "g": "m", "t": "That sounds great. How much are the tuition fees?", "vi": "Nghe tuyệt quá. Học phí bao nhiêu ạ?"},
-      {"s": "Ms Hanh", "g": "f", "t": "They're about thirty million dong a year. But there are scholarships for students whose exam results are excellent.", "vi": "Khoảng ba mươi triệu đồng một năm. Nhưng có học bổng cho sinh viên có kết quả thi xuất sắc."},
-      {"s": "Nam", "g": "m", "t": "And what about the lecturers?", "vi": "Còn giảng viên thì sao ạ?"},
-      {"s": "Ms Hanh", "g": "f", "t": "Many of our lecturers have worked in the industry. Doctor Lam, who teaches the first-year programming course, used to be a software engineer in Singapore.", "vi": "Nhiều giảng viên của trường từng làm việc trong ngành. Tiến sĩ Lâm, người dạy môn lập trình năm nhất, từng là kỹ sư phần mềm ở Singapore."},
-      {"s": "Nam", "g": "m", "t": "Is there somewhere students can study in the evenings?", "vi": "Có chỗ nào sinh viên học buổi tối không ạ?"},
-      {"s": "Ms Hanh", "g": "f", "t": "Yes, there's a library on the fifth floor where you can study until ten p.m. It's the place where most students spend their evenings.", "vi": "Có, thư viện ở tầng năm, nơi em có thể học đến mười giờ tối. Đó là nơi phần lớn sinh viên dành buổi tối."},
-      {"s": "Nam", "g": "m", "t": "Is there a day when I can visit a class?", "vi": "Có ngày nào em có thể đến dự thử một lớp không ạ?"},
-      {"s": "Ms Hanh", "g": "f", "t": "Yes. Next Saturday is the day when we open our classrooms to visitors. Here's a leaflet which explains everything.", "vi": "Có. Thứ Bảy tới là ngày trường mở cửa lớp học cho khách tham quan. Đây là tờ rơi giải thích mọi thứ."},
-      {"s": "Nam", "g": "m", "t": "Thank you so much. You've been really helpful.", "vi": "Em cảm ơn cô nhiều. Cô đã giúp em rất nhiều."}
-    ], "qs": [
-      {"q": "How long is the IT course?", "o": ["Three years", "Four years", "Five years"], "a": 1, "e": "“It's a four-year degree which focuses on software development.”"},
-      {"q": "When do students do an internship?", "o": ["In the first year", "In the third year", "After they graduate"], "a": 1, "e": "“In the third year, every student does an internship…”"},
-      {"q": "Who can get a scholarship?", "o": ["Students whose exam results are excellent", "Students who live far away", "All first-year students"], "a": 0, "e": "“…scholarships for students whose exam results are excellent.” – whose + danh từ."},
-      {"q": "Doctor Lam, ______ teaches the first-year programming course, used to be a software engineer.", "a": "who", "e": "Mệnh đề không xác định về một người (đã có tên) → who, không dùng that."},
-      {"q": "Where can students study until 10 p.m.? In the ______.", "a": "library", "alt": ["the library"], "e": "“…a library on the fifth floor where you can study until ten p.m.”"}
-    ]},
-    {"k": "read", "h": "Đọc: Lớp học trên sông", "title": "The Boat That Became a School", "text": "Mr Sau is a retired teacher who lives in a small village in the Mekong Delta. For thirty years, he taught maths at the secondary school which stands next to the market. When he retired, he noticed something that worried him. Many children whose parents worked on fishing boats could not go to school regularly, because their families moved from place to place.\n\nSo Mr Sau had an idea. He bought an old wooden boat, which he painted blue and yellow, and turned it into a floating classroom. Every morning, he sails along the river to the places where the fishing families stop. Children who have finished their chores climb on board and sit at small desks. The lessons, which last about two hours, include reading, writing and basic maths.\n\nThe project was not easy at first. Some parents, who needed their children's help with work, did not want them to study. Mr Sau visited each family and explained why education was important. Slowly, they changed their minds.\n\nToday, more than forty children attend his classes. Several former students have passed the exam that allows them to go to high school, and one girl, whose dream is to become a doctor, has recently won a scholarship.\n\nLocal people have started to help too. A bookshop owner, whose shop is in the town centre, donates books every month, and some university students who study education volunteer at weekends.\n\n“Knowledge is the only thing which nobody can take away from you,” Mr Sau says. “That's why I keep going.”", "vi": "Thầy Sáu là một giáo viên về hưu sống ở một ngôi làng nhỏ ở đồng bằng sông Cửu Long. Suốt ba mươi năm, thầy dạy toán ở trường cấp hai nằm cạnh chợ. Khi về hưu, thầy nhận ra một điều khiến thầy lo lắng. Nhiều đứa trẻ có bố mẹ làm trên thuyền đánh cá không thể đi học đều đặn, vì gia đình chúng di chuyển hết nơi này đến nơi khác.\n\nThế là thầy Sáu nảy ra một ý tưởng. Thầy mua một chiếc thuyền gỗ cũ, sơn màu xanh và vàng, rồi biến nó thành lớp học nổi. Mỗi sáng, thầy chèo dọc sông đến những nơi các gia đình đánh cá dừng chân. Những đứa trẻ đã làm xong việc nhà leo lên thuyền và ngồi vào những chiếc bàn nhỏ. Các buổi học kéo dài khoảng hai tiếng, gồm đọc, viết và toán cơ bản.\n\nLúc đầu dự án không dễ dàng. Một số phụ huynh, những người cần con giúp việc, không muốn con đi học. Thầy Sáu đến từng nhà giải thích vì sao học hành quan trọng. Dần dần, họ thay đổi suy nghĩ.\n\nNgày nay, hơn bốn mươi em theo học lớp của thầy. Một số học trò cũ đã đỗ kỳ thi để vào cấp ba, và một em gái có ước mơ trở thành bác sĩ gần đây đã giành được học bổng.\n\nNgười dân địa phương cũng bắt đầu giúp đỡ. Một chủ hiệu sách, có cửa hàng ở trung tâm thị trấn, tặng sách mỗi tháng, và một số sinh viên ngành sư phạm làm tình nguyện viên vào cuối tuần.\n\n“Kiến thức là thứ duy nhất không ai có thể lấy đi của bạn,” thầy Sáu nói. “Đó là lý do tôi tiếp tục.”", "gloss": [
-      {"w": "retired", "vi": "đã nghỉ hưu"},
-      {"w": "regularly", "vi": "đều đặn"},
-      {"w": "floating", "vi": "nổi (trên mặt nước)"},
-      {"w": "chores", "vi": "việc nhà, việc vặt"},
-      {"w": "climb on board", "vi": "leo lên thuyền / tàu"},
-      {"w": "change one's mind", "vi": "thay đổi ý kiến"},
-      {"w": "former student", "vi": "học trò cũ"},
-      {"w": "donate", "vi": "quyên góp, tặng"},
-      {"w": "volunteer", "vi": "làm tình nguyện"}
-    ], "qs": [
-      {"q": "What did Mr Sau do before he retired?", "o": ["He was a fisherman.", "He taught maths at a secondary school.", "He owned a bookshop."], "a": 1, "e": "“For thirty years, he taught maths at the secondary school which stands next to the market.”"},
-      {"q": "Why couldn't some children go to school regularly?", "o": ["Their families moved from place to place.", "The school was too expensive.", "They didn't like maths."], "a": 0, "e": "“…because their families moved from place to place.”"},
-      {"q": "“The lessons, which last about two hours, include reading, writing and basic maths.” Mệnh đề which… là loại nào?", "o": ["Xác định – bỏ đi câu thiếu nghĩa", "Không xác định – chỉ thêm thông tin, bỏ đi câu vẫn đủ nghĩa"], "a": 1, "e": "Có dấu phẩy hai đầu và chỉ thêm thông tin về ‘the lessons’ đã rõ → không xác định."},
-      {"q": "Why did some parents not want their children to study at first?", "o": ["They needed the children's help with work.", "They thought Mr Sau was a bad teacher.", "The boat was dangerous."], "a": 0, "e": "“Some parents, who needed their children's help with work, did not want them to study.”"},
-      {"q": "One girl, ______ dream is to become a doctor, has recently won a scholarship.", "a": "whose", "e": "whose + danh từ (dream) = ước mơ CỦA cô bé."},
-      {"q": "Who volunteers at weekends? Some university ______ who study education.", "a": "students", "e": "“…some university students who study education volunteer at weekends.”"}
-    ]},
-    {"k": "speak", "h": "Nói: Thầy cô, trường lớp & định nghĩa", "tasks": [
-      {"p": "Tả một thầy/cô giáo đã ảnh hưởng đến bạn (60–90 giây): người đó là ai, dạy môn gì, điều gì đặc biệt, bạn học được gì. Dùng ít nhất 4 mệnh đề quan hệ.", "model": "The teacher who influenced me most was Ms Thu, who taught me literature in high school. She was a small, quiet woman whose voice was very soft, but every student listened to her. What made her special was the way she taught. Instead of making us memorise model essays, she gave us books which made us think, and she asked questions that had no single right answer. The classroom where she taught always felt like a safe place. Thanks to her, I started reading every day, which is a habit I still have.", "vi": "Người thầy ảnh hưởng đến tôi nhiều nhất là cô Thu, cô dạy văn tôi ở cấp ba. Cô nhỏ nhắn, ít nói, giọng rất nhẹ, nhưng học sinh nào cũng lắng nghe. Điều đặc biệt là cách cô dạy. Thay vì bắt chúng tôi học thuộc văn mẫu, cô đưa những cuốn sách khiến chúng tôi phải suy nghĩ và đặt những câu hỏi không có một đáp án đúng duy nhất. Lớp học của cô lúc nào cũng như một nơi an toàn. Nhờ cô, tôi bắt đầu đọc sách mỗi ngày – thói quen tôi vẫn giữ đến giờ.", "tips": "Ngắt hơi ở dấu phẩy của mệnh đề không xác định: Ms Thu | who taught me literature | …"},
-      {"p": "Trò ‘Đoán từ’: định nghĩa 4 từ về trường học mà không nói từ đó (scholarship, library, tutor, exam), dùng It's a person who… / a place where… / a thing which… / a time when…", "model": "It's money which a student gets because their results are very good. (scholarship) — It's a place where you can borrow books and study quietly. (library) — It's a person who teaches one student or a small group, usually at home. (private tutor) — It's a time when students feel nervous and stay up late. (exam season)", "vi": "Đó là khoản tiền sinh viên nhận được vì kết quả rất tốt. (học bổng) — Đó là nơi bạn có thể mượn sách và học yên tĩnh. (thư viện) — Đó là người dạy một học sinh hoặc nhóm nhỏ, thường ở nhà. (gia sư) — Đó là khoảng thời gian học sinh lo lắng và thức khuya. (mùa thi)", "tips": "Kỹ năng ‘diễn giải khi quên từ’ (paraphrase) rất quan trọng trong IELTS Speaking: không nhớ từ thì định nghĩa nó bằng mệnh đề quan hệ."},
-      {"p": "Nêu ý kiến: “Should children take extra classes after school?” (4–6 câu).", "model": "In my opinion, extra classes can be useful, but only for students who really need help with a subject. Many children who go to extra classes every evening have no time to play or rest, which is bad for their health. I think a better idea is to give more support at school, where teachers already know the students well.", "vi": "Theo tôi, học thêm có thể hữu ích nhưng chỉ cho những học sinh thật sự cần giúp đỡ một môn. Nhiều trẻ tối nào cũng đi học thêm không có thời gian chơi hay nghỉ ngơi, điều đó có hại cho sức khoẻ. Tôi nghĩ tốt hơn là tăng hỗ trợ ngay tại trường, nơi giáo viên đã hiểu rõ học sinh.", "tips": "Dùng …, which is… để bình luận cả ý vừa nói – nghe rất tự nhiên."}
-    ]},
-    {"k": "write", "h": "Viết: Người ảnh hưởng đến việc học của tôi", "task": "Viết đoạn văn 120–150 từ tả một người (thầy cô, người thân, bạn bè) đã ảnh hưởng đến việc học của bạn: người đó là ai, đã giúp bạn thế nào, kết quả ra sao. Dùng ít nhất 5 mệnh đề quan hệ, trong đó có ít nhất 2 mệnh đề không xác định.", "min": 120, "model": "The person who has influenced my education most is my aunt Hien, who is a primary school teacher in Nam Dinh.\n\nWhen I was in Year 9, I was a student who hated English. I couldn't remember new words, and I often failed tests. My aunt, who had studied English at university, offered to help me. Every weekend, she taught me in the small room where she kept all her books. Instead of making me memorise long lists, she gave me short stories which were fun and easy to understand. She also taught me a method that I still use today: write every new word in a sentence about my own life.\n\nThanks to her, I passed my university entrance exam with a high English score. Now I am studying to become a teacher myself, and I hope I can help students whose situation is like mine.", "modelVi": "Người ảnh hưởng nhiều nhất đến việc học của tôi là dì Hiền, một giáo viên tiểu học ở Nam Định.\n\nHồi lớp 9, tôi là một học sinh ghét tiếng Anh. Tôi không nhớ được từ mới và thường trượt các bài kiểm tra. Dì tôi, người từng học tiếng Anh ở đại học, đã đề nghị giúp tôi. Mỗi cuối tuần, dì dạy tôi trong căn phòng nhỏ nơi dì để tất cả sách của mình. Thay vì bắt tôi học thuộc những danh sách dài, dì đưa tôi những truyện ngắn vui và dễ hiểu. Dì còn dạy tôi một phương pháp mà đến giờ tôi vẫn dùng: viết mỗi từ mới vào một câu về chính cuộc sống của mình.\n\nNhờ dì, tôi đỗ kỳ thi đại học với điểm tiếng Anh cao. Giờ tôi đang học để trở thành giáo viên, và tôi hy vọng có thể giúp những học sinh có hoàn cảnh giống tôi.", "tips": [
-      "Câu đầu giới thiệu thẳng người đó: The person who has influenced… most is…",
-      "Đoạn giữa kể bối cảnh (quá khứ) và cách người đó giúp bạn – dùng mệnh đề quan hệ để thêm chi tiết.",
-      "Câu kết nói về kết quả hiện tại / bài học.",
-      "Kiểm tra: mệnh đề có dấu phẩy thì không dùng that; không lặp đại từ (which I use it)."
-    ], "checklist": [
-      "Có ít nhất 5 mệnh đề quan hệ",
-      "Có ít nhất 2 mệnh đề không xác định, đặt dấu phẩy đúng",
-      "Có dùng whose hoặc where ít nhất 1 lần",
-      "Không có lỗi lặp đại từ (*which I bought it)",
-      "Có ít nhất 5 từ vựng giáo dục của bài",
-      "120–150 từ, có mở – thân – kết"
-    ]}
-  ],
-  "exercises": [
-    {"t": "mc", "q": "The woman ___ lives next door is a nurse.", "o": ["who", "which", "whose"], "a": 0, "e": "Thay cho người, làm chủ ngữ → who."},
-    {"t": "mc", "q": "This is the laptop ___ I bought last week.", "o": ["who", "which", "where"], "a": 1, "e": "Thay cho vật (laptop) → which (hoặc that)."},
-    {"t": "mc", "q": "That's the café ___ we first met.", "o": ["which", "where", "when"], "a": 1, "e": "Nơi chốn, sau đó là mệnh đề đầy đủ (we first met) → where."},
-    {"t": "fill", "q": "I have a friend ___ father is a famous chef.", "a": "whose", "e": "Bố CỦA người bạn → whose + danh từ."},
-    {"t": "mc", "q": "Câu nào SAI?", "o": ["The book which I borrowed it was boring.", "The book which I borrowed was boring.", "The book I borrowed was boring."], "a": 0, "e": "Lỗi lặp đại từ: which đã thay cho ‘it’, không thêm it nữa."},
-    {"t": "mc", "q": "My mother, ___ is sixty, still goes jogging every morning.", "o": ["that", "who", "which"], "a": 1, "e": "Mệnh đề không xác định (có dấu phẩy) về người → who; không dùng that sau dấu phẩy."},
-    {"t": "mc", "q": "Trong câu nào có thể BỎ đại từ quan hệ?", "o": ["The man who called you is my boss.", "The film that we watched was amazing.", "The girl who won the prize is my cousin."], "a": 1, "e": "that là tân ngữ của watched (sau nó có chủ ngữ we) → có thể bỏ: The film we watched… Hai câu kia who là chủ ngữ, không bỏ được."},
-    {"t": "fill", "q": "2020 was the year ___ I graduated from university.", "a": "when", "alt": ["that", "in which"], "e": "Thời gian → when (văn nói cũng dùng that)."},
-    {"t": "mc", "q": "He passed the exam with full marks, ___ surprised everyone.", "o": ["that", "which", "what"], "a": 1, "e": "…, which… bình luận cả mệnh đề trước (việc anh ấy đỗ điểm tuyệt đối)."},
-    {"t": "mc", "q": "Câu nào ĐÚNG?", "o": ["Hanoi, that is the capital, has many lakes.", "Hanoi, which is the capital, has many lakes.", "Hanoi which is the capital has many lakes."], "a": 1, "e": "Hanoi là tên riêng → mệnh đề không xác định: có dấu phẩy và dùng which."},
-    {"t": "match", "q": "Nối từ với nghĩa:", "pairs": [["tuition fees", "học phí"], ["scholarship", "học bổng"], ["assignment", "bài tập lớn"], ["lecturer", "giảng viên"], ["private tutor", "gia sư"], ["degree", "bằng đại học"]], "e": "Từ vựng chủ đề giáo dục của bài."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["pass.", "who", "students", "usually", "The", "regularly", "revise"], "a": "The students who revise regularly usually pass.", "e": "Danh từ + who + V… + động từ chính (usually pass)."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["teach.", "the", "my", "used", "This", "where", "is", "school", "to", "mother"], "a": "This is the school where my mother used to teach.", "e": "where + mệnh đề đầy đủ (my mother used to teach)."},
-    {"t": "listen", "say": "The teacher who helped me most was Mr Binh, who taught me physics in Year 11.", "lang": "en-GB", "q": "What subject did Mr Binh teach?", "o": ["Maths", "Physics", "English"], "a": 1, "e": "“…Mr Binh, who taught me physics in Year 11.”"},
-    {"t": "listen", "say": "Students whose assignments are handed in late will lose ten percent of their marks.", "lang": "en-GB", "q": "Who will lose marks?", "o": ["Students who miss lectures", "Students who hand in assignments late", "Students who fail the exam"], "a": 1, "e": "“Students whose assignments are handed in late…”"},
-    {"t": "listen", "say": "I'm looking for a course which I can take online in the evenings, because I work during the day.", "lang": "en-GB", "q": "What kind of course does the speaker want?", "o": ["A full-time course", "An evening online course", "A weekend course abroad"], "a": 1, "e": "“…a course which I can take online in the evenings.”"},
-    {"t": "dict", "say": "Students who attend every lecture usually do better.", "lang": "en-GB", "a": "Students who attend every lecture usually do better.", "e": "attend + danh từ trực tiếp (không có to)."}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Ảnh 6 người nổi tiếng / nhân vật tự đặt kèm thông tin; thẻ định nghĩa cho trò ‘Đoán từ’ (20 từ về trường học); phiếu nối câu (2 câu đơn → 1 câu có mệnh đề quan hệ); bảng phụ so sánh xác định – không xác định.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: GV mô tả một đồ vật trong lớp bằng mệnh đề quan hệ (It's a thing which we use to write on the board…), học viên đoán. Sau đó học viên tự làm với 3 đồ vật khác."},
-      {"t": "15'", "do": "Từ vựng giáo dục: chia 3 nhóm từ – tiền bạc (tuition fees, scholarship), thi cử (pass, fail, revise), lớp học (lecture, assignment, hand in, take notes). Nhấn mạnh attend không có to, knowledge và progress không đếm được."},
-      {"t": "25'", "do": "Ngữ pháp 1: bảng who/which/that/whose/where/when. Phiếu nối 2 câu đơn thành 1 câu. Dạy lược đại từ tân ngữ và lỗi lặp đại từ (gạch bỏ ‘it’ trong câu mẫu sai)."},
-      {"t": "20'", "do": "Nghe tư vấn tuyển sinh: lần 1 – mấy năm? Lần 2 – điền phiếu thông tin (thực tập năm mấy, học phí, ai được học bổng, thư viện mở đến mấy giờ). Lần 3 – tìm 6 mệnh đề quan hệ trong bài."},
-      {"t": "15'", "do": "Trò ‘Đoán từ’ theo nhóm: rút thẻ, định nghĩa bằng It's a person who / a place where / a thing which…, nhóm đoán đúng trong 30 giây được điểm."},
-      {"t": "5'", "do": "Tổng kết; giao bài tập 1–9 trong game."},
-      {"t": "Buổi 2 · 15'", "do": "Ngữ pháp 2: mệnh đề không xác định. So sánh 2 câu ‘My brother who lives in Hue…’ / ‘My brother, who lives in Hue,…’ – hỏi: người nói có mấy anh trai? Luyện đọc có ngắt hơi đúng chỗ dấu phẩy."},
-      {"t": "20'", "do": "Đọc ‘The Boat That Became a School’: đọc lướt tóm tắt câu chuyện trong 1 câu; đọc kỹ trả lời 6 câu hỏi; phân loại 10 mệnh đề quan hệ trong bài thành xác định / không xác định."},
-      {"t": "20'", "do": "Nói: cặp đôi kể về một thầy/cô đã ảnh hưởng đến mình (task 1); tranh luận ngắn về học thêm (task 3)."},
-      {"t": "20'", "do": "Viết đoạn văn 120–150 từ theo đề; đổi bài, bạn đánh dấu mọi mệnh đề quan hệ và kiểm tra dấu phẩy."},
-      {"t": "15'", "do": "Bài tập 10–17 trong game; chữa lỗi chung; giao bài về nhà."}
+ "no": 5,
+ "title": "Giáo dục & học tập – Mệnh đề quan hệ xác định và không xác định",
+ "sub": "The teacher who changed my life",
+ "goals": [
+  "Dùng đúng who / which / that / whose / where / when để nối câu và định nghĩa sự vật",
+  "Phân biệt mệnh đề quan hệ xác định (không phẩy) và không xác định (có phẩy, không dùng that)",
+  "Biết khi nào được lược bỏ đại từ quan hệ và tránh lỗi lặp đại từ (*the book which I bought it)",
+  "Nói và viết về trường lớp, thi cử, học bổng bằng 20 từ/cụm chủ đề giáo dục",
+  "Viết đoạn văn 120–150 từ tả một người ảnh hưởng đến việc học của bạn"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng: giáo dục & học tập",
+   "items": [
+    {
+     "w": "tuition fee",
+     "ipa": "/tjuˈɪʃn fiː/",
+     "pos": "n",
+     "vi": "học phí (thường dùng số nhiều: tuition fees)",
+     "ex": "Tuition fees at private universities are quite high.",
+     "exVi": "Học phí ở các trường đại học tư khá cao."
+    },
+    {
+     "w": "scholarship",
+     "ipa": "/ˈskɒləʃɪp/",
+     "pos": "n",
+     "vi": "học bổng (win / get a scholarship)",
+     "ex": "She won a scholarship to study in Australia.",
+     "exVi": "Cô ấy giành học bổng du học Úc."
+    },
+    {
+     "w": "pass an exam",
+     "ipa": "/ˌpɑːs ən ɪɡˈzæm/",
+     "pos": "phr",
+     "vi": "thi đỗ (≠ fail an exam: thi trượt; take an exam: dự thi)",
+     "ex": "He passed all his exams with high marks.",
+     "exVi": "Cậu ấy đỗ mọi kỳ thi với điểm cao."
+    },
+    {
+     "w": "revise for",
+     "ipa": "/rɪˈvaɪz fə(r)/",
+     "pos": "phr",
+     "vi": "ôn thi (Anh-Anh)",
+     "ex": "I'm revising for my final exams.",
+     "exVi": "Tôi đang ôn thi cuối kỳ."
+    },
+    {
+     "w": "graduate from",
+     "ipa": "/ˈɡrædʒueɪt frəm/",
+     "pos": "phr",
+     "vi": "tốt nghiệp (trường) – danh từ graduate /ˈɡrædʒuət/: người đã tốt nghiệp",
+     "ex": "She graduated from Hue University in 2020.",
+     "exVi": "Cô ấy tốt nghiệp Đại học Huế năm 2020."
+    },
+    {
+     "w": "degree",
+     "ipa": "/dɪˈɡriː/",
+     "pos": "n",
+     "vi": "bằng đại học (do a degree in…: học ngành…)",
+     "ex": "He has a degree in economics.",
+     "exVi": "Anh ấy có bằng kinh tế."
+    },
+    {
+     "w": "lecture",
+     "ipa": "/ˈlektʃə(r)/",
+     "pos": "n",
+     "vi": "bài giảng (đại học)",
+     "ex": "The lecture starts at eight.",
+     "exVi": "Bài giảng bắt đầu lúc tám giờ."
+    },
+    {
+     "w": "lecturer",
+     "ipa": "/ˈlektʃərə(r)/",
+     "pos": "n",
+     "vi": "giảng viên đại học",
+     "ex": "Our lecturer explains everything clearly.",
+     "exVi": "Giảng viên của chúng tôi giải thích mọi thứ rõ ràng."
+    },
+    {
+     "w": "attend",
+     "ipa": "/əˈtend/",
+     "pos": "v",
+     "vi": "tham dự (attend a class – KHÔNG có to)",
+     "ex": "Students must attend at least 80% of the lessons.",
+     "exVi": "Sinh viên phải tham dự ít nhất 80% số buổi học."
+    },
+    {
+     "w": "assignment",
+     "ipa": "/əˈsaɪnmənt/",
+     "pos": "n",
+     "vi": "bài tập lớn, bài luận được giao",
+     "ex": "I have to finish two assignments this week.",
+     "exVi": "Tuần này tôi phải làm xong hai bài tập lớn."
+    },
+    {
+     "w": "hand in",
+     "ipa": "/ˌhænd ˈɪn/",
+     "pos": "phr",
+     "vi": "nộp (bài)",
+     "ex": "Please hand in your essays by Friday.",
+     "exVi": "Hãy nộp bài luận trước thứ Sáu."
+    },
+    {
+     "w": "take notes",
+     "ipa": "/ˌteɪk ˈnəʊts/",
+     "pos": "phr",
+     "vi": "ghi chép",
+     "ex": "Take notes while you listen.",
+     "exVi": "Hãy ghi chép khi nghe."
+    },
+    {
+     "w": "memorise",
+     "ipa": "/ˈmeməraɪz/",
+     "pos": "v",
+     "vi": "học thuộc lòng",
+     "ex": "Memorising word lists is not enough.",
+     "exVi": "Học thuộc danh sách từ là chưa đủ."
+    },
+    {
+     "w": "online course",
+     "ipa": "/ˌɒnlaɪn ˈkɔːs/",
+     "pos": "n",
+     "vi": "khoá học trực tuyến (take / do an online course)",
+     "ex": "I'm taking an online course in graphic design.",
+     "exVi": "Tôi đang học một khoá thiết kế đồ hoạ trực tuyến."
+    },
+    {
+     "w": "private tutor",
+     "ipa": "/ˌpraɪvət ˈtjuːtə(r)/",
+     "pos": "n",
+     "vi": "gia sư",
+     "ex": "Many parents hire private tutors for their children.",
+     "exVi": "Nhiều phụ huynh thuê gia sư cho con."
+    },
+    {
+     "w": "extra classes",
+     "ipa": "/ˌekstrə ˈklɑːsɪz/",
+     "pos": "n",
+     "vi": "lớp học thêm",
+     "ex": "He goes to extra classes every evening.",
+     "exVi": "Tối nào cậu ấy cũng đi học thêm."
+    },
+    {
+     "w": "curriculum",
+     "ipa": "/kəˈrɪkjələm/",
+     "pos": "n",
+     "vi": "chương trình học",
+     "ex": "Coding is now part of the school curriculum.",
+     "exVi": "Lập trình giờ là một phần chương trình học ở trường."
+    },
+    {
+     "w": "knowledge",
+     "ipa": "/ˈnɒlɪdʒ/",
+     "pos": "n",
+     "vi": "kiến thức (không đếm được: KHÔNG nói a knowledge / knowledges)",
+     "ex": "Reading improves your general knowledge.",
+     "exVi": "Đọc sách nâng cao kiến thức chung."
+    },
+    {
+     "w": "lifelong learning",
+     "ipa": "/ˌlaɪflɒŋ ˈlɜːnɪŋ/",
+     "pos": "n",
+     "vi": "học tập suốt đời",
+     "ex": "Lifelong learning is important in a changing world.",
+     "exVi": "Học tập suốt đời rất quan trọng trong một thế giới thay đổi."
+    },
+    {
+     "w": "make progress",
+     "ipa": "/ˌmeɪk ˈprəʊɡres/",
+     "pos": "phr",
+     "vi": "tiến bộ (progress không đếm được)",
+     "ex": "You've made a lot of progress this term.",
+     "exVi": "Em đã tiến bộ nhiều trong học kỳ này."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Mệnh đề quan hệ xác định (defining relative clauses)",
+   "html": "<p>Mệnh đề quan hệ đứng <b>ngay sau danh từ</b> để cho biết <b>người / vật nào</b>. Nếu bỏ đi, ta không biết đang nói về ai/cái gì. Tiếng Việt dùng “<b>mà</b>, <b>người mà</b>, <b>nơi mà</b>” – và rất hay bỏ luôn: “Cô giáo <u>dạy tôi năm lớp 10</u> rất hiền.” Tiếng Anh thì phải có đại từ quan hệ (trừ trường hợp được lược – xem mẹo).</p>",
+   "table": [
+    [
+     "Đại từ",
+     "Thay cho",
+     "Ví dụ"
     ],
-    "games": [
-      "Đoán từ (Taboo đơn giản): học viên rút thẻ từ, định nghĩa bằng mệnh đề quan hệ, không được nói từ đó; đội đoán nhanh nhất thắng.",
-      "Ai là ai?: dán sau lưng mỗi học viên tên một người nổi tiếng / nghề nghiệp; học viên hỏi ‘Am I a person who works in a hospital?’ để đoán mình là ai.",
-      "Ghép câu dây chuyền: GV nói câu đơn (I met a girl.), học viên lần lượt thêm mệnh đề quan hệ (…who had a dog / which was very small / whose name was…) – câu càng dài càng vui nhưng phải đúng ngữ pháp."
+    [
+     "who",
+     "người (chủ ngữ hoặc tân ngữ)",
+     "The teacher who taught me in Year 10 was very kind."
     ],
-    "errors": [
-      "Lặp đại từ: ‘*The book which I bought it…’. Sửa: bỏ ‘it’.",
-      "Dùng which cho người: ‘*the teacher which…’. Sửa: who/that.",
-      "Dùng that sau dấu phẩy: ‘*Hanoi, that is…’. Sửa: which.",
-      "Lược đại từ chủ ngữ: ‘*The man lives next door is…’. Sửa: The man who lives next door…",
-      "Dùng where khi động từ cần tân ngữ: ‘*the place where I visited’. Sửa: the place (that) I visited.",
-      "Nhầm whose / who's. Sửa: whose + danh từ; who's = who is/has."
+    [
+     "which",
+     "vật, con vật",
+     "The course which I'm taking is free."
     ],
-    "homework": "Làm 17 bài tập trong game (≥ 80%); viết 10 định nghĩa từ vựng bằng mệnh đề quan hệ để chơi ‘Đoán từ’ buổi sau; hoàn thành đoạn văn về người ảnh hưởng; ghi âm phần Nói 1; ôn thẻ từ vựng mỗi ngày."
+    [
+     "that",
+     "người hoặc vật (chỉ trong mệnh đề xác định)",
+     "The book that you lent me is great."
+    ],
+    [
+     "whose",
+     "của người/vật đó (sở hữu) + danh từ",
+     "I have a friend whose father is a lecturer."
+    ],
+    [
+     "where",
+     "nơi chốn (= in/at which)",
+     "This is the school where my mother teaches."
+    ],
+    [
+     "when",
+     "thời gian (= in/on which)",
+     "2020 was the year when I graduated."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Students who revise regularly usually do well.",
+     "vi": "Những học sinh ôn bài đều đặn thường làm bài tốt."
+    },
+    {
+     "t": "I lost the notebook which had all my notes in it.",
+     "vi": "Tôi làm mất cuốn vở có toàn bộ ghi chép của tôi."
+    },
+    {
+     "t": "The girl whose essay won the prize is in my class.",
+     "vi": "Cô bạn có bài luận đoạt giải học cùng lớp tôi."
+    },
+    {
+     "t": "Do you know a café where I can study quietly?",
+     "vi": "Bạn có biết quán cà phê nào mà tôi có thể học yên tĩnh không?"
+    },
+    {
+     "t": "The lecturer (who/that) we met yesterday is from Canada.",
+     "vi": "Giảng viên mà chúng ta gặp hôm qua đến từ Canada. (who là tân ngữ → có thể lược)"
+    }
+   ],
+   "tips": [
+    "<b>Lược đại từ quan hệ</b> khi nó là <b>tân ngữ</b> (sau nó có chủ ngữ mới): <i>The film (that) <u>we</u> watched…</i> ✅. KHÔNG lược khi nó là chủ ngữ: ❌ <i>The man lives next door is a doctor</i> → ✅ <i>The man <b>who</b> lives next door…</i>",
+    "<b>Lỗi lặp đại từ</b> – rất phổ biến: ❌ <i>The book which I bought <u>it</u> was boring.</i> Đại từ quan hệ đã thay cho <i>it</i> rồi → ✅ <i>The book which I bought was boring.</i>",
+    "<b>where</b> chỉ dùng khi sau nó là một mệnh đề đầy đủ (đã có tân ngữ): <i>the city <b>where</b> I was born</i>. Nếu động từ cần tân ngữ thì dùng which/that: ❌ <i>the city where I visited</i> → ✅ <i>the city <b>(that)</b> I visited</i>.",
+    "<b>whose</b> (của ai) khác <b>who's</b> (= who is / who has). Sau whose luôn có danh từ: <i>whose <u>car</u>, whose <u>father</u></i>."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Mệnh đề quan hệ không xác định (non-defining): có dấu phẩy",
+   "html": "<p>Mệnh đề không xác định chỉ <b>thêm thông tin phụ</b> về người/vật đã rõ (tên riêng, người duy nhất, vật đã xác định). Bỏ đi câu vẫn đủ nghĩa. Nó luôn nằm giữa <b>dấu phẩy</b> (khi nói thì ngắt hơi).</p>",
+   "table": [
+    [
+     "",
+     "Xác định",
+     "Không xác định"
+    ],
+    [
+     "Chức năng",
+     "Cho biết người/vật NÀO – bắt buộc",
+     "Thêm thông tin – có thể bỏ"
+    ],
+    [
+     "Dấu phẩy",
+     "Không",
+     "Có (2 đầu, hoặc 1 đầu nếu ở cuối câu)"
+    ],
+    [
+     "Dùng that?",
+     "Được",
+     "KHÔNG"
+    ],
+    [
+     "Lược đại từ?",
+     "Được (nếu là tân ngữ)",
+     "KHÔNG"
+    ],
+    [
+     "Ví dụ",
+     "My brother who lives in Hue is a doctor. (tôi có nhiều anh trai)",
+     "My brother, who lives in Hue, is a doctor. (tôi chỉ có 1 anh trai)"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Hue, which was the capital of Vietnam, has many old palaces.",
+     "vi": "Huế, nơi từng là kinh đô của Việt Nam, có nhiều cung điện cổ."
+    },
+    {
+     "t": "My English teacher, whose name is Mr Hai, comes from Nghe An.",
+     "vi": "Thầy dạy tiếng Anh của tôi, tên là thầy Hải, quê ở Nghệ An."
+    },
+    {
+     "t": "We visited the Temple of Literature, where Vietnam's first university was founded.",
+     "vi": "Chúng tôi thăm Văn Miếu, nơi trường đại học đầu tiên của Việt Nam được thành lập."
+    },
+    {
+     "t": "He passed the exam with full marks, which surprised everyone.",
+     "vi": "Cậu ấy đỗ với điểm tuyệt đối, điều này làm mọi người bất ngờ. (which thay cho cả mệnh đề trước)"
+    }
+   ],
+   "tips": [
+    "❌ <i>Hanoi, that is the capital, is…</i> → ✅ <i>Hanoi, <b>which</b> is the capital, is…</i> – không dùng that sau dấu phẩy.",
+    "<b>…, which…</b> ở cuối câu có thể bình luận cả ý trước: <i>It rained all day, which was annoying.</i> – tương đương tiếng Việt “…, điều đó…”.",
+    "Khi nói, mệnh đề không xác định được ngắt bằng hai quãng nghỉ ngắn và giọng hơi thấp xuống: <i>My mother | who is sixty | still goes jogging.</i>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Ngày hội tư vấn tuyển sinh",
+   "lang": "en-GB",
+   "note": "Nam đến ngày hội tư vấn của một trường đại học và hỏi cô Hạnh, cán bộ tư vấn, về ngành Công nghệ thông tin. Nghe lần 1 (che lời thoại): khoá học kéo dài mấy năm? Nghe lần 2: ghi lại thông tin về thực tập, học phí, học bổng, thư viện.",
+   "lines": [
+    {
+     "s": "Nam",
+     "g": "m",
+     "t": "Excuse me. I'm interested in the IT course. Could you tell me a bit about it?",
+     "vi": "Xin lỗi cô. Em quan tâm đến ngành Công nghệ thông tin. Cô có thể cho em biết một chút được không ạ?"
+    },
+    {
+     "s": "Ms Hanh",
+     "g": "f",
+     "t": "Of course. It's a four-year degree which focuses on software development. Students who complete the course get a lot of practical experience.",
+     "vi": "Tất nhiên. Đây là chương trình đại học bốn năm, tập trung vào phát triển phần mềm. Sinh viên hoàn thành khoá học có rất nhiều kinh nghiệm thực tế."
+    },
+    {
+     "s": "Nam",
+     "g": "m",
+     "t": "What kind of experience?",
+     "vi": "Kinh nghiệm kiểu gì ạ?"
+    },
+    {
+     "s": "Ms Hanh",
+     "g": "f",
+     "t": "In the third year, every student does an internship at a company that works with our university. Last year, most students who did internships were offered jobs.",
+     "vi": "Năm thứ ba, mọi sinh viên đều thực tập ở một công ty có hợp tác với trường. Năm ngoái, phần lớn sinh viên đi thực tập đã được mời làm việc."
+    },
+    {
+     "s": "Nam",
+     "g": "m",
+     "t": "That sounds great. How much are the tuition fees?",
+     "vi": "Nghe tuyệt quá. Học phí bao nhiêu ạ?"
+    },
+    {
+     "s": "Ms Hanh",
+     "g": "f",
+     "t": "They're about thirty million dong a year. But there are scholarships for students whose exam results are excellent.",
+     "vi": "Khoảng ba mươi triệu đồng một năm. Nhưng có học bổng cho sinh viên có kết quả thi xuất sắc."
+    },
+    {
+     "s": "Nam",
+     "g": "m",
+     "t": "And what about the lecturers?",
+     "vi": "Còn giảng viên thì sao ạ?"
+    },
+    {
+     "s": "Ms Hanh",
+     "g": "f",
+     "t": "Many of our lecturers have worked in the industry. Doctor Lam, who teaches the first-year programming course, used to be a software engineer in Singapore.",
+     "vi": "Nhiều giảng viên của trường từng làm việc trong ngành. Tiến sĩ Lâm, người dạy môn lập trình năm nhất, từng là kỹ sư phần mềm ở Singapore."
+    },
+    {
+     "s": "Nam",
+     "g": "m",
+     "t": "Is there somewhere students can study in the evenings?",
+     "vi": "Có chỗ nào sinh viên học buổi tối không ạ?"
+    },
+    {
+     "s": "Ms Hanh",
+     "g": "f",
+     "t": "Yes, there's a library on the fifth floor where you can study until ten p.m. It's the place where most students spend their evenings.",
+     "vi": "Có, thư viện ở tầng năm, nơi em có thể học đến mười giờ tối. Đó là nơi phần lớn sinh viên dành buổi tối."
+    },
+    {
+     "s": "Nam",
+     "g": "m",
+     "t": "Is there a day when I can visit a class?",
+     "vi": "Có ngày nào em có thể đến dự thử một lớp không ạ?"
+    },
+    {
+     "s": "Ms Hanh",
+     "g": "f",
+     "t": "Yes. Next Saturday is the day when we open our classrooms to visitors. Here's a leaflet which explains everything.",
+     "vi": "Có. Thứ Bảy tới là ngày trường mở cửa lớp học cho khách tham quan. Đây là tờ rơi giải thích mọi thứ."
+    },
+    {
+     "s": "Nam",
+     "g": "m",
+     "t": "Thank you so much. You've been really helpful.",
+     "vi": "Em cảm ơn cô nhiều. Cô đã giúp em rất nhiều."
+    }
+   ],
+   "qs": [
+    {
+     "q": "How long is the IT course?",
+     "o": [
+      "Three years",
+      "Four years",
+      "Five years"
+     ],
+     "a": 1,
+     "e": "“It's a four-year degree which focuses on software development.”"
+    },
+    {
+     "q": "When do students do an internship?",
+     "o": [
+      "In the first year",
+      "In the third year",
+      "After they graduate"
+     ],
+     "a": 1,
+     "e": "“In the third year, every student does an internship…”"
+    },
+    {
+     "q": "Who can get a scholarship?",
+     "o": [
+      "Students whose exam results are excellent",
+      "Students who live far away",
+      "All first-year students"
+     ],
+     "a": 0,
+     "e": "“…scholarships for students whose exam results are excellent.” – whose + danh từ."
+    },
+    {
+     "q": "Doctor Lam, ______ teaches the first-year programming course, used to be a software engineer.",
+     "a": "who",
+     "e": "Mệnh đề không xác định về một người (đã có tên) → who, không dùng that."
+    },
+    {
+     "q": "Where can students study until 10 p.m.? In the ______.",
+     "a": "library",
+     "alt": [
+      "the library"
+     ],
+     "e": "“…a library on the fifth floor where you can study until ten p.m.”"
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Lớp học trên sông",
+   "title": "The Boat That Became a School",
+   "text": "Mr Sau is a retired teacher who lives in a small village in the Mekong Delta. For thirty years, he taught maths at the secondary school which stands next to the market. When he retired, he noticed something that worried him. Many children whose parents worked on fishing boats could not go to school regularly, because their families moved from place to place.\n\nSo Mr Sau had an idea. He bought an old wooden boat, which he painted blue and yellow, and turned it into a floating classroom. Every morning, he sails along the river to the places where the fishing families stop. Children who have finished their chores climb on board and sit at small desks. The lessons, which last about two hours, include reading, writing and basic maths.\n\nThe project was not easy at first. Some parents, who needed their children's help with work, did not want them to study. Mr Sau visited each family and explained why education was important. Slowly, they changed their minds.\n\nToday, more than forty children attend his classes. Several former students have passed the exam that allows them to go to high school, and one girl, whose dream is to become a doctor, has recently won a scholarship.\n\nLocal people have started to help too. A bookshop owner, whose shop is in the town centre, donates books every month, and some university students who study education volunteer at weekends.\n\n“Knowledge is the only thing which nobody can take away from you,” Mr Sau says. “That's why I keep going.”",
+   "vi": "Thầy Sáu là một giáo viên về hưu sống ở một ngôi làng nhỏ ở đồng bằng sông Cửu Long. Suốt ba mươi năm, thầy dạy toán ở trường cấp hai nằm cạnh chợ. Khi về hưu, thầy nhận ra một điều khiến thầy lo lắng. Nhiều đứa trẻ có bố mẹ làm trên thuyền đánh cá không thể đi học đều đặn, vì gia đình chúng di chuyển hết nơi này đến nơi khác.\n\nThế là thầy Sáu nảy ra một ý tưởng. Thầy mua một chiếc thuyền gỗ cũ, sơn màu xanh và vàng, rồi biến nó thành lớp học nổi. Mỗi sáng, thầy chèo dọc sông đến những nơi các gia đình đánh cá dừng chân. Những đứa trẻ đã làm xong việc nhà leo lên thuyền và ngồi vào những chiếc bàn nhỏ. Các buổi học kéo dài khoảng hai tiếng, gồm đọc, viết và toán cơ bản.\n\nLúc đầu dự án không dễ dàng. Một số phụ huynh, những người cần con giúp việc, không muốn con đi học. Thầy Sáu đến từng nhà giải thích vì sao học hành quan trọng. Dần dần, họ thay đổi suy nghĩ.\n\nNgày nay, hơn bốn mươi em theo học lớp của thầy. Một số học trò cũ đã đỗ kỳ thi để vào cấp ba, và một em gái có ước mơ trở thành bác sĩ gần đây đã giành được học bổng.\n\nNgười dân địa phương cũng bắt đầu giúp đỡ. Một chủ hiệu sách, có cửa hàng ở trung tâm thị trấn, tặng sách mỗi tháng, và một số sinh viên ngành sư phạm làm tình nguyện viên vào cuối tuần.\n\n“Kiến thức là thứ duy nhất không ai có thể lấy đi của bạn,” thầy Sáu nói. “Đó là lý do tôi tiếp tục.”",
+   "gloss": [
+    {
+     "w": "retired",
+     "vi": "đã nghỉ hưu"
+    },
+    {
+     "w": "regularly",
+     "vi": "đều đặn"
+    },
+    {
+     "w": "floating",
+     "vi": "nổi (trên mặt nước)"
+    },
+    {
+     "w": "chores",
+     "vi": "việc nhà, việc vặt"
+    },
+    {
+     "w": "climb on board",
+     "vi": "leo lên thuyền / tàu"
+    },
+    {
+     "w": "change one's mind",
+     "vi": "thay đổi ý kiến"
+    },
+    {
+     "w": "former student",
+     "vi": "học trò cũ"
+    },
+    {
+     "w": "donate",
+     "vi": "quyên góp, tặng"
+    },
+    {
+     "w": "volunteer",
+     "vi": "làm tình nguyện"
+    }
+   ],
+   "qs": [
+    {
+     "q": "What did Mr Sau do before he retired?",
+     "o": [
+      "He was a fisherman.",
+      "He taught maths at a secondary school.",
+      "He owned a bookshop."
+     ],
+     "a": 1,
+     "e": "“For thirty years, he taught maths at the secondary school which stands next to the market.”"
+    },
+    {
+     "q": "Why couldn't some children go to school regularly?",
+     "o": [
+      "Their families moved from place to place.",
+      "The school was too expensive.",
+      "They didn't like maths."
+     ],
+     "a": 0,
+     "e": "“…because their families moved from place to place.”"
+    },
+    {
+     "q": "“The lessons, which last about two hours, include reading, writing and basic maths.” Mệnh đề which… là loại nào?",
+     "o": [
+      "Xác định – bỏ đi câu thiếu nghĩa",
+      "Không xác định – chỉ thêm thông tin, bỏ đi câu vẫn đủ nghĩa"
+     ],
+     "a": 1,
+     "e": "Có dấu phẩy hai đầu và chỉ thêm thông tin về ‘the lessons’ đã rõ → không xác định."
+    },
+    {
+     "q": "Why did some parents not want their children to study at first?",
+     "o": [
+      "They needed the children's help with work.",
+      "They thought Mr Sau was a bad teacher.",
+      "The boat was dangerous."
+     ],
+     "a": 0,
+     "e": "“Some parents, who needed their children's help with work, did not want them to study.”"
+    },
+    {
+     "q": "One girl, ______ dream is to become a doctor, has recently won a scholarship.",
+     "a": "whose",
+     "e": "whose + danh từ (dream) = ước mơ CỦA cô bé."
+    },
+    {
+     "q": "Who volunteers at weekends? Some university ______ who study education.",
+     "a": "students",
+     "e": "“…some university students who study education volunteer at weekends.”"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Thầy cô, trường lớp & định nghĩa",
+   "tasks": [
+    {
+     "p": "Tả một thầy/cô giáo đã ảnh hưởng đến bạn (60–90 giây): người đó là ai, dạy môn gì, điều gì đặc biệt, bạn học được gì. Dùng ít nhất 4 mệnh đề quan hệ.",
+     "model": "The teacher who influenced me most was Ms Thu, who taught me literature in high school. She was a small, quiet woman whose voice was very soft, but every student listened to her. What made her special was the way she taught. Instead of making us memorise model essays, she gave us books which made us think, and she asked questions that had no single right answer. The classroom where she taught always felt like a safe place. Thanks to her, I started reading every day, which is a habit I still have.",
+     "vi": "Người thầy ảnh hưởng đến tôi nhiều nhất là cô Thu, cô dạy văn tôi ở cấp ba. Cô nhỏ nhắn, ít nói, giọng rất nhẹ, nhưng học sinh nào cũng lắng nghe. Điều đặc biệt là cách cô dạy. Thay vì bắt chúng tôi học thuộc văn mẫu, cô đưa những cuốn sách khiến chúng tôi phải suy nghĩ và đặt những câu hỏi không có một đáp án đúng duy nhất. Lớp học của cô lúc nào cũng như một nơi an toàn. Nhờ cô, tôi bắt đầu đọc sách mỗi ngày – thói quen tôi vẫn giữ đến giờ.",
+     "tips": "Ngắt hơi ở dấu phẩy của mệnh đề không xác định: Ms Thu | who taught me literature | …"
+    },
+    {
+     "p": "Trò ‘Đoán từ’: định nghĩa 4 từ về trường học mà không nói từ đó (scholarship, library, tutor, exam), dùng It's a person who… / a place where… / a thing which… / a time when…",
+     "model": "It's money which a student gets because their results are very good. (scholarship) — It's a place where you can borrow books and study quietly. (library) — It's a person who teaches one student or a small group, usually at home. (private tutor) — It's a time when students feel nervous and stay up late. (exam season)",
+     "vi": "Đó là khoản tiền sinh viên nhận được vì kết quả rất tốt. (học bổng) — Đó là nơi bạn có thể mượn sách và học yên tĩnh. (thư viện) — Đó là người dạy một học sinh hoặc nhóm nhỏ, thường ở nhà. (gia sư) — Đó là khoảng thời gian học sinh lo lắng và thức khuya. (mùa thi)",
+     "tips": "Kỹ năng ‘diễn giải khi quên từ’ (paraphrase) rất quan trọng trong IELTS Speaking: không nhớ từ thì định nghĩa nó bằng mệnh đề quan hệ."
+    },
+    {
+     "p": "Nêu ý kiến: “Should children take extra classes after school?” (4–6 câu).",
+     "model": "In my opinion, extra classes can be useful, but only for students who really need help with a subject. Many children who go to extra classes every evening have no time to play or rest, which is bad for their health. I think a better idea is to give more support at school, where teachers already know the students well.",
+     "vi": "Theo tôi, học thêm có thể hữu ích nhưng chỉ cho những học sinh thật sự cần giúp đỡ một môn. Nhiều trẻ tối nào cũng đi học thêm không có thời gian chơi hay nghỉ ngơi, điều đó có hại cho sức khoẻ. Tôi nghĩ tốt hơn là tăng hỗ trợ ngay tại trường, nơi giáo viên đã hiểu rõ học sinh.",
+     "tips": "Dùng …, which is… để bình luận cả ý vừa nói – nghe rất tự nhiên."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Người ảnh hưởng đến việc học của tôi",
+   "task": "Viết đoạn văn 120–150 từ tả một người (thầy cô, người thân, bạn bè) đã ảnh hưởng đến việc học của bạn: người đó là ai, đã giúp bạn thế nào, kết quả ra sao. Dùng ít nhất 5 mệnh đề quan hệ, trong đó có ít nhất 2 mệnh đề không xác định.",
+   "min": 120,
+   "model": "The person who has influenced my education most is my aunt Hien, who is a primary school teacher in Nam Dinh.\n\nWhen I was in Year 9, I was a student who hated English. I couldn't remember new words, and I often failed tests. My aunt, who had studied English at university, offered to help me. Every weekend, she taught me in the small room where she kept all her books. Instead of making me memorise long lists, she gave me short stories which were fun and easy to understand. She also taught me a method that I still use today: write every new word in a sentence about my own life.\n\nThanks to her, I passed my university entrance exam with a high English score. Now I am studying to become a teacher myself, and I hope I can help students whose situation is like mine.",
+   "modelVi": "Người ảnh hưởng nhiều nhất đến việc học của tôi là dì Hiền, một giáo viên tiểu học ở Nam Định.\n\nHồi lớp 9, tôi là một học sinh ghét tiếng Anh. Tôi không nhớ được từ mới và thường trượt các bài kiểm tra. Dì tôi, người từng học tiếng Anh ở đại học, đã đề nghị giúp tôi. Mỗi cuối tuần, dì dạy tôi trong căn phòng nhỏ nơi dì để tất cả sách của mình. Thay vì bắt tôi học thuộc những danh sách dài, dì đưa tôi những truyện ngắn vui và dễ hiểu. Dì còn dạy tôi một phương pháp mà đến giờ tôi vẫn dùng: viết mỗi từ mới vào một câu về chính cuộc sống của mình.\n\nNhờ dì, tôi đỗ kỳ thi đại học với điểm tiếng Anh cao. Giờ tôi đang học để trở thành giáo viên, và tôi hy vọng có thể giúp những học sinh có hoàn cảnh giống tôi.",
+   "tips": [
+    "Câu đầu giới thiệu thẳng người đó: The person who has influenced… most is…",
+    "Đoạn giữa kể bối cảnh (quá khứ) và cách người đó giúp bạn – dùng mệnh đề quan hệ để thêm chi tiết.",
+    "Câu kết nói về kết quả hiện tại / bài học.",
+    "Kiểm tra: mệnh đề có dấu phẩy thì không dùng that; không lặp đại từ (which I use it)."
+   ],
+   "checklist": [
+    "Có ít nhất 5 mệnh đề quan hệ",
+    "Có ít nhất 2 mệnh đề không xác định, đặt dấu phẩy đúng",
+    "Có dùng whose hoặc where ít nhất 1 lần",
+    "Không có lỗi lặp đại từ (*which I bought it)",
+    "Có ít nhất 5 từ vựng giáo dục của bài",
+    "120–150 từ, có mở – thân – kết"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "The woman ___ lives next door is a nurse.",
+   "o": [
+    "who",
+    "which",
+    "whose"
+   ],
+   "a": 0,
+   "e": "Thay cho người, làm chủ ngữ → who."
+  },
+  {
+   "t": "mc",
+   "q": "This is the laptop ___ I bought last week.",
+   "o": [
+    "who",
+    "which",
+    "where"
+   ],
+   "a": 1,
+   "e": "Thay cho vật (laptop) → which (hoặc that)."
+  },
+  {
+   "t": "mc",
+   "q": "That's the café ___ we first met.",
+   "o": [
+    "which",
+    "where",
+    "when"
+   ],
+   "a": 1,
+   "e": "Nơi chốn, sau đó là mệnh đề đầy đủ (we first met) → where."
+  },
+  {
+   "t": "fill",
+   "q": "I have a friend ___ father is a famous chef.",
+   "a": "whose",
+   "e": "Bố CỦA người bạn → whose + danh từ."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào SAI?",
+   "o": [
+    "The book which I borrowed it was boring.",
+    "The book which I borrowed was boring.",
+    "The book I borrowed was boring."
+   ],
+   "a": 0,
+   "e": "Lỗi lặp đại từ: which đã thay cho ‘it’, không thêm it nữa."
+  },
+  {
+   "t": "mc",
+   "q": "My mother, ___ is sixty, still goes jogging every morning.",
+   "o": [
+    "that",
+    "who",
+    "which"
+   ],
+   "a": 1,
+   "e": "Mệnh đề không xác định (có dấu phẩy) về người → who; không dùng that sau dấu phẩy."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu nào có thể BỎ đại từ quan hệ?",
+   "o": [
+    "The man who called you is my boss.",
+    "The film that we watched was amazing.",
+    "The girl who won the prize is my cousin."
+   ],
+   "a": 1,
+   "e": "that là tân ngữ của watched (sau nó có chủ ngữ we) → có thể bỏ: The film we watched… Hai câu kia who là chủ ngữ, không bỏ được."
+  },
+  {
+   "t": "fill",
+   "q": "2020 was the year ___ I graduated from university.",
+   "a": "when",
+   "alt": [
+    "that",
+    "in which"
+   ],
+   "e": "Thời gian → when (văn nói cũng dùng that)."
+  },
+  {
+   "t": "mc",
+   "q": "He passed the exam with full marks, ___ surprised everyone.",
+   "o": [
+    "that",
+    "which",
+    "what"
+   ],
+   "a": 1,
+   "e": "…, which… bình luận cả mệnh đề trước (việc anh ấy đỗ điểm tuyệt đối)."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào ĐÚNG?",
+   "o": [
+    "Hanoi, that is the capital, has many lakes.",
+    "Hanoi, which is the capital, has many lakes.",
+    "Hanoi which is the capital has many lakes."
+   ],
+   "a": 1,
+   "e": "Hanoi là tên riêng → mệnh đề không xác định: có dấu phẩy và dùng which."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa:",
+   "pairs": [
+    [
+     "tuition fees",
+     "học phí"
+    ],
+    [
+     "scholarship",
+     "học bổng"
+    ],
+    [
+     "assignment",
+     "bài tập lớn"
+    ],
+    [
+     "lecturer",
+     "giảng viên"
+    ],
+    [
+     "private tutor",
+     "gia sư"
+    ],
+    [
+     "degree",
+     "bằng đại học"
+    ]
+   ],
+   "e": "Từ vựng chủ đề giáo dục của bài."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "pass.",
+    "who",
+    "students",
+    "usually",
+    "The",
+    "regularly",
+    "revise"
+   ],
+   "a": "The students who revise regularly usually pass.",
+   "e": "Danh từ + who + V… + động từ chính (usually pass).",
+   "alt": [
+    "The students who regularly revise usually pass."
+   ]
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "teach.",
+    "the",
+    "my",
+    "used",
+    "This",
+    "where",
+    "is",
+    "school",
+    "to",
+    "mother"
+   ],
+   "a": "This is the school where my mother used to teach.",
+   "e": "where + mệnh đề đầy đủ (my mother used to teach)."
+  },
+  {
+   "t": "listen",
+   "say": "The teacher who helped me most was Mr Binh, who taught me physics in Year 11.",
+   "lang": "en-GB",
+   "q": "What subject did Mr Binh teach?",
+   "o": [
+    "Maths",
+    "Physics",
+    "English"
+   ],
+   "a": 1,
+   "e": "“…Mr Binh, who taught me physics in Year 11.”"
+  },
+  {
+   "t": "listen",
+   "say": "Students whose assignments are handed in late will lose ten percent of their marks.",
+   "lang": "en-GB",
+   "q": "Who will lose marks?",
+   "o": [
+    "Students who miss lectures",
+    "Students who hand in assignments late",
+    "Students who fail the exam"
+   ],
+   "a": 1,
+   "e": "“Students whose assignments are handed in late…”"
+  },
+  {
+   "t": "listen",
+   "say": "I'm looking for a course which I can take online in the evenings, because I work during the day.",
+   "lang": "en-GB",
+   "q": "What kind of course does the speaker want?",
+   "o": [
+    "A full-time course",
+    "An evening online course",
+    "A weekend course abroad"
+   ],
+   "a": 1,
+   "e": "“…a course which I can take online in the evenings.”"
+  },
+  {
+   "t": "dict",
+   "say": "Students who attend every lecture usually do better.",
+   "lang": "en-GB",
+   "a": "Students who attend every lecture usually do better.",
+   "e": "attend + danh từ trực tiếp (không có to)."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Ảnh 6 người nổi tiếng / nhân vật tự đặt kèm thông tin; thẻ định nghĩa cho trò ‘Đoán từ’ (20 từ về trường học); phiếu nối câu (2 câu đơn → 1 câu có mệnh đề quan hệ); bảng phụ so sánh xác định – không xác định.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: GV mô tả một đồ vật trong lớp bằng mệnh đề quan hệ (It's a thing which we use to write on the board…), học viên đoán. Sau đó học viên tự làm với 3 đồ vật khác."
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng giáo dục: chia 3 nhóm từ – tiền bạc (tuition fees, scholarship), thi cử (pass, fail, revise), lớp học (lecture, assignment, hand in, take notes). Nhấn mạnh attend không có to, knowledge và progress không đếm được."
+   },
+   {
+    "t": "25'",
+    "do": "Ngữ pháp 1: bảng who/which/that/whose/where/when. Phiếu nối 2 câu đơn thành 1 câu. Dạy lược đại từ tân ngữ và lỗi lặp đại từ (gạch bỏ ‘it’ trong câu mẫu sai)."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe tư vấn tuyển sinh: lần 1 – mấy năm? Lần 2 – điền phiếu thông tin (thực tập năm mấy, học phí, ai được học bổng, thư viện mở đến mấy giờ). Lần 3 – tìm 6 mệnh đề quan hệ trong bài."
+   },
+   {
+    "t": "15'",
+    "do": "Trò ‘Đoán từ’ theo nhóm: rút thẻ, định nghĩa bằng It's a person who / a place where / a thing which…, nhóm đoán đúng trong 30 giây được điểm."
+   },
+   {
+    "t": "5'",
+    "do": "Tổng kết; giao bài tập 1–9 trong game."
+   },
+   {
+    "t": "Buổi 2 · 15'",
+    "do": "Ngữ pháp 2: mệnh đề không xác định. So sánh 2 câu ‘My brother who lives in Hue…’ / ‘My brother, who lives in Hue,…’ – hỏi: người nói có mấy anh trai? Luyện đọc có ngắt hơi đúng chỗ dấu phẩy."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc ‘The Boat That Became a School’: đọc lướt tóm tắt câu chuyện trong 1 câu; đọc kỹ trả lời 6 câu hỏi; phân loại 10 mệnh đề quan hệ trong bài thành xác định / không xác định."
+   },
+   {
+    "t": "20'",
+    "do": "Nói: cặp đôi kể về một thầy/cô đã ảnh hưởng đến mình (task 1); tranh luận ngắn về học thêm (task 3)."
+   },
+   {
+    "t": "20'",
+    "do": "Viết đoạn văn 120–150 từ theo đề; đổi bài, bạn đánh dấu mọi mệnh đề quan hệ và kiểm tra dấu phẩy."
+   },
+   {
+    "t": "15'",
+    "do": "Bài tập 10–17 trong game; chữa lỗi chung; giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Đoán từ (Taboo đơn giản): học viên rút thẻ từ, định nghĩa bằng mệnh đề quan hệ, không được nói từ đó; đội đoán nhanh nhất thắng.",
+   "Ai là ai?: dán sau lưng mỗi học viên tên một người nổi tiếng / nghề nghiệp; học viên hỏi ‘Am I a person who works in a hospital?’ để đoán mình là ai.",
+   "Ghép câu dây chuyền: GV nói câu đơn (I met a girl.), học viên lần lượt thêm mệnh đề quan hệ (…who had a dog / which was very small / whose name was…) – câu càng dài càng vui nhưng phải đúng ngữ pháp."
+  ],
+  "errors": [
+   "Lặp đại từ: ‘*The book which I bought it…’. Sửa: bỏ ‘it’.",
+   "Dùng which cho người: ‘*the teacher which…’. Sửa: who/that.",
+   "Dùng that sau dấu phẩy: ‘*Hanoi, that is…’. Sửa: which.",
+   "Lược đại từ chủ ngữ: ‘*The man lives next door is…’. Sửa: The man who lives next door…",
+   "Dùng where khi động từ cần tân ngữ: ‘*the place where I visited’. Sửa: the place (that) I visited.",
+   "Nhầm whose / who's. Sửa: whose + danh từ; who's = who is/has."
+  ],
+  "homework": "Làm 17 bài tập trong game (≥ 80%); viết 10 định nghĩa từ vựng bằng mệnh đề quan hệ để chơi ‘Đoán từ’ buổi sau; hoàn thành đoạn văn về người ảnh hưởng; ghi âm phần Nói 1; ôn thẻ từ vựng mỗi ngày."
+ }
 }

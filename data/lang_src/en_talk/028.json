@@ -1,67 +1,365 @@
 {
-  "no": 28,
-  "lv": "b1",
-  "title": "Báo lỗi & thảo luận với lập trình viên",
-  "sub": "It works on my machine!",
-  "situation": "Linh (tester) đến bàn của Mark (lập trình viên) để trao đổi về lỗi “đơn hàng bị tạo hai lần” cô ghi nhận sáng nay. Mark không tái hiện được vì mạng của anh nhanh. Linh trình diễn lại với mạng chậm, cung cấp môi trường, bản build, video, log; hai người thống nhất nguyên nhân gốc, mức nghiêm trọng (severity) và độ ưu tiên (priority), thời gian sửa và kế hoạch kiểm thử lại. Bài học: báo lỗi rõ ràng, phản biện lịch sự bằng dữ liệu.",
-  "lang": "en-GB",
-  "lines": [
-    {"s": "Linh", "g": "f", "t": "Hi, Mark. Have you got a minute? It's about the bug I logged this morning, the duplicate orders one.", "vi": "Chào Mark. Anh có rảnh một phút không? Về cái lỗi em ghi nhận sáng nay, lỗi đơn hàng bị trùng ấy."},
-    {"s": "Mark", "g": "m", "t": "Sure, pull up a chair. I had a look, but to be honest, I couldn't reproduce it. It works fine on my machine.", "vi": "Được, kéo ghế ngồi đi. Anh xem rồi, nhưng thật tình anh không tái hiện được. Trên máy anh chạy bình thường."},
-    {"s": "Linh", "g": "f", "t": "Yeah, I thought that might happen. It only happens when the connection is slow. Can I show you?", "vi": "Vâng, em cũng đoán vậy. Lỗi chỉ xảy ra khi mạng chậm. Để em cho anh xem nhé?"},
-    {"s": "Mark", "g": "m", "t": "Go ahead.", "vi": "Em làm đi."},
-    {"s": "Linh", "g": "f", "t": "So, I'm on the checkout page, and I'm going to slow the network down with the developer tools. Now, watch what happens if I click the Place Order button twice, quite quickly.", "vi": "Đây, em đang ở trang thanh toán, và em sẽ giả lập mạng chậm bằng công cụ dành cho nhà phát triển. Giờ anh xem điều gì xảy ra nếu em bấm nút Đặt hàng hai lần, khá nhanh."},
-    {"s": "Mark", "g": "m", "t": "Oh, I see. The button doesn't get disabled after the first click.", "vi": "À, anh hiểu rồi. Nút không bị vô hiệu hoá sau lần bấm đầu tiên."},
-    {"s": "Linh", "g": "f", "t": "Exactly. And look, the system has created two orders, and the customer has been charged twice.", "vi": "Đúng vậy. Và anh nhìn này, hệ thống đã tạo hai đơn hàng, và khách bị trừ tiền hai lần."},
-    {"s": "Mark", "g": "m", "t": "Hmm, that's not great. Which environment were you using?", "vi": "Hừm, thế thì không ổn. Em đang dùng môi trường nào?"},
-    {"s": "Linh", "g": "f", "t": "Staging, build two point four point one. I've attached a screen recording and the server logs to the ticket.", "vi": "Staging, bản build 2.4.1. Em đã đính kèm video quay màn hình và log máy chủ vào ticket rồi."},
-    {"s": "Mark", "g": "m", "t": "That's really helpful, thanks. I'd say the root cause is on both sides, actually. The front end should disable the button, and the back end should reject duplicate requests.", "vi": "Thế thì giúp ích lắm, cảm ơn em. Thật ra anh cho là nguyên nhân gốc nằm ở cả hai phía. Front-end phải vô hiệu hoá nút, còn back-end phải từ chối các yêu cầu trùng lặp."},
-    {"s": "Linh", "g": "f", "t": "Makes sense. What about the severity? I've marked it as critical because it affects payments.", "vi": "Hợp lý ạ. Còn mức nghiêm trọng thì sao? Em đánh dấu là critical vì nó ảnh hưởng đến thanh toán."},
-    {"s": "Mark", "g": "m", "t": "I agree it's critical. But it's quite rare in real life, isn't it? Maybe the priority could be medium?", "vi": "Anh đồng ý là nghiêm trọng. Nhưng ngoài thực tế thì khá hiếm, đúng không? Có lẽ độ ưu tiên để mức trung bình được không?"},
-    {"s": "Linh", "g": "f", "t": "I'm not so sure. A lot of our users shop on mobile data, and their connection is often slow. I think customers will hit this quite often.", "vi": "Em không chắc lắm đâu ạ. Rất nhiều người dùng của mình mua hàng bằng dữ liệu di động, và mạng của họ thường chậm. Em nghĩ khách hàng sẽ gặp lỗi này khá thường xuyên."},
-    {"s": "Mark", "g": "m", "t": "Fair point. Let's keep it as high priority, then. I'll flag it with the product owner.", "vi": "Em nói có lý. Vậy cứ để độ ưu tiên cao. Anh sẽ báo cho product owner."},
-    {"s": "Linh", "g": "f", "t": "Great. When do you think you can have a fix ready?", "vi": "Tốt quá. Anh nghĩ khi nào có bản sửa ạ?"},
-    {"s": "Mark", "g": "m", "t": "I should be able to fix the button today. The back-end part might take until Wednesday.", "vi": "Phần nút thì chắc hôm nay anh sửa được. Phần back-end có thể mất đến thứ Tư."},
-    {"s": "Linh", "g": "f", "t": "OK. Could you let me know when it's on staging? I'll retest it and run some regression tests on the checkout flow.", "vi": "Vâng. Khi nào bản sửa lên staging thì anh báo em nhé? Em sẽ kiểm thử lại và chạy kiểm thử hồi quy cho luồng thanh toán."},
-    {"s": "Mark", "g": "m", "t": "Will do. And thanks for the detailed report. It saved me a lot of time.", "vi": "Được. Và cảm ơn em vì bản báo cáo chi tiết. Nó tiết kiệm cho anh rất nhiều thời gian."},
-    {"s": "Linh", "g": "f", "t": "No worries. Oh, one more thing. Should we also check the Pay Now button in the mobile app? It might have the same problem.", "vi": "Không có gì ạ. À, thêm một điều. Mình có nên kiểm tra cả nút Thanh toán ngay trong ứng dụng di động không? Có thể nó cũng bị lỗi tương tự."},
-    {"s": "Mark", "g": "m", "t": "Good thinking. Can you log a separate ticket for that, so we can track it?", "vi": "Nghĩ hay đấy. Em tạo một ticket riêng cho việc đó được không, để mình theo dõi?"},
-    {"s": "Linh", "g": "f", "t": "Sure, I'll do it now.", "vi": "Vâng, em làm ngay ạ."}
-  ],
-  "phrases": [
-    {"t": "Have you got a minute?", "vi": "Anh/chị có rảnh một phút không?", "note": "Câu mở đầu lịch sự trước khi làm phiền đồng nghiệp. Kiểu Anh: “Have you got…?”; kiểu Mỹ: “Do you have a minute?”. Trang trọng hơn: “Is now a good time to talk about…?”"},
-    {"t": "I couldn't reproduce it. / It works on my machine.", "vi": "Tôi không tái hiện được. / Trên máy tôi chạy bình thường.", "note": "Câu kinh điển của lập trình viên. Tester chuyên nghiệp không cãi mà cung cấp ĐIỀU KIỆN xảy ra lỗi: môi trường, trình duyệt, thiết bị, dữ liệu, tốc độ mạng. reproduce /ˌriːprəˈdjuːs/ – trọng âm ở âm tiết cuối."},
-    {"t": "It only happens when…", "vi": "Lỗi chỉ xảy ra khi…", "note": "Cực quan trọng khi mô tả lỗi không ổn định (intermittent bug). Biến thể: “It happens about one time in five.” (khoảng 1/5 lần), “It doesn't happen if…”. Lỗi người Việt: “It only happen when” – quên -s ở ngôi thứ ba."},
-    {"t": "I've attached a screen recording and the logs to the ticket.", "vi": "Tôi đã đính kèm video quay màn hình và log vào ticket.", "note": "attach A to B = đính kèm A vào B. Bằng chứng tốt nhất cho lập trình viên: video, ảnh chụp, log, request/response, ID đơn hàng. Lỗi hay gặp: “I attached in the ticket” – thiếu tân ngữ và sai giới từ."},
-    {"t": "The root cause is…", "vi": "Nguyên nhân gốc là…", "note": "root cause = nguyên nhân sâu xa, khác với triệu chứng (symptom). Cụm hay dùng: root cause analysis (RCA – phân tích nguyên nhân gốc). “I'd say…” trước đó giúp câu bớt khẳng định tuyệt đối."},
-    {"t": "severity / priority", "vi": "mức nghiêm trọng / độ ưu tiên sửa", "note": "Severity = lỗi ảnh hưởng hệ thống nặng đến đâu (tester đánh giá). Priority = cần sửa gấp đến đâu (thường do product owner quyết). Một lỗi có thể severity cao nhưng priority thấp (ví dụ: sập ở tính năng gần như không ai dùng) và ngược lại (sai chính tả tên công ty ở trang chủ)."},
-    {"t": "I'm not so sure.", "vi": "Tôi không chắc lắm đâu.", "note": "Cách phản đối nhẹ nhàng, lịch sự, rồi đưa ra lý do bằng dữ liệu (A lot of our users…). Tránh “You're wrong” hoặc “No, it's not rare” – nghe gay gắt. Biến thể: “I see your point, but…” / “I'm not sure I agree.”"},
-    {"t": "Fair point.", "vi": "Bạn nói có lý.", "note": "Thừa nhận lập luận của người khác một cách ngắn gọn, thân thiện. Trang trọng hơn: “That's a valid point.” / “You make a good point.”"},
-    {"t": "I'll flag it with the product owner.", "vi": "Tôi sẽ báo vấn đề này cho product owner.", "note": "flag something (with somebody) = nêu ra để người có thẩm quyền chú ý. Tương tự: raise an issue, escalate (đẩy lên cấp cao hơn khi nghiêm trọng)."},
-    {"t": "When do you think you can have a fix ready?", "vi": "Anh nghĩ khi nào có bản sửa?", "note": "Hỏi thời hạn một cách tôn trọng (“do you think” làm câu mềm hơn). Thô hơn và nên tránh: “When will you fix it?”. fix ở đây là danh từ = bản sửa lỗi."},
-    {"t": "Could you let me know when it's on staging?", "vi": "Khi nào bản sửa lên môi trường staging thì báo tôi nhé?", "note": "let somebody know = báo cho ai biết. staging = môi trường thử nghiệm gần giống thật trước khi phát hành. Sau đó tester “retest” lỗi và chạy “regression tests”."},
-    {"t": "Can you log a separate ticket for that?", "vi": "Bạn tạo một ticket riêng cho việc đó được không?", "note": "log/raise/file a ticket (a bug) = tạo phiếu ghi nhận. Nguyên tắc: MỖI lỗi một ticket để theo dõi riêng, không gộp nhiều lỗi vào một phiếu."}
-  ],
-  "qs": [
-    {"q": "What is the bug about?", "o": ["The login page is slow.", "Customers can create duplicate orders and be charged twice.", "The mobile app crashes."], "a": 1, "e": "Linh: “the system has created two orders, and the customer has been charged twice.”"},
-    {"q": "Why couldn't Mark reproduce the bug at first?", "o": ["He used the wrong environment.", "The bug only happens when the connection is slow.", "He didn't read the ticket."], "a": 1, "e": "Mark nói “It works fine on my machine”, còn Linh giải thích: “It only happens when the connection is slow.”"},
-    {"q": "What did Linh attach to the ticket?", "o": ["A screen recording and the server logs", "Only a screenshot", "A test plan"], "a": 0, "e": "Linh: “I've attached a screen recording and the server logs to the ticket.”"},
-    {"q": "Linh marked the bug as ______ because it affects payments.", "a": "critical", "e": "“I've marked it as critical because it affects payments.” – lỗi liên quan tiền luôn có severity rất cao."},
-    {"q": "According to Mark, where is the root cause?", "o": ["Only in the front end", "Only in the database", "In both the front end and the back end"], "a": 2, "e": "Mark: “the root cause is on both sides… The front end should disable the button, and the back end should reject duplicate requests.”"},
-    {"q": "Why does Linh disagree with a medium priority?", "o": ["Because many users shop on slow mobile data", "Because the bug is easy to fix", "Because her manager told her to"], "a": 0, "e": "Linh: “A lot of our users shop on mobile data, and their connection is often slow. I think customers will hit this quite often.” → phản biện bằng dữ liệu người dùng."},
-    {"q": "How does Mark feel about Linh's bug report?", "o": ["Annoyed", "Grateful", "Confused"], "a": 1, "e": "Mark: “thanks for the detailed report. It saved me a lot of time.” → biết ơn, đánh giá cao."},
-    {"q": "What does Mark ask Linh to do about the mobile app?", "o": ["Fix it herself", "Log a separate ticket", "Ignore it"], "a": 1, "e": "Mark: “Can you log a separate ticket for that, so we can track it?”"}
-  ],
-  "exercises": [
-    {"t": "fill", "q": "I tried ten times, but I couldn't ___ the bug on my laptop.", "a": "reproduce", "e": "reproduce a bug = tái hiện lỗi. Đây là động từ quan trọng nhất của tester."},
-    {"t": "listen", "say": "Honestly, it works fine on my machine.", "q": "Người nói (lập trình viên) muốn nói gì?", "o": ["Anh ấy không thấy lỗi trên máy của mình.", "Máy của anh ấy bị hỏng.", "Anh ấy đã sửa xong lỗi."], "a": 0, "e": "“It works on my machine” = trên máy tôi chạy bình thường → ngầm ý chưa tái hiện được lỗi. Tester cần đưa thêm điều kiện để tái hiện."},
-    {"t": "order", "q": "Sắp xếp thành câu nhờ lập trình viên:", "w": ["when the fix", "is on staging?", "Could you", "let me know"], "a": "Could you let me know when the fix is on staging?", "e": "Could you + let me know + when + mệnh đề. Câu nhờ vả lịch sự trong công việc."},
-    {"t": "dict", "say": "I've attached a screen recording and the server logs.", "a": "I've attached a screen recording and the server logs.", "e": "Chú ý: I've (âm /v/ nhẹ), attached /t/ cuối, logs /z/ cuối."},
-    {"t": "mc", "q": "Cách nào lịch sự nhất để phản đối ý kiến của lập trình viên về độ ưu tiên?", "o": ["You're wrong. It's high priority.", "I'm not so sure. A lot of our users are on slow connections.", "No. Change it now."], "a": 1, "e": "“I'm not so sure” + lý do bằng dữ liệu → vừa lịch sự vừa thuyết phục. Hai câu còn lại nghe gay gắt, mang tính ra lệnh."},
-    {"t": "match", "q": "Nối thuật ngữ với nghĩa:", "pairs": [["severity", "mức độ ảnh hưởng của lỗi"], ["priority", "mức độ cần sửa gấp"], ["root cause", "nguyên nhân gốc"], ["staging", "môi trường thử nghiệm trước khi phát hành"], ["regression test", "kiểm thử xem chức năng cũ có bị hỏng không"]]}
-  ],
-  "practice": [
-    {"p": "Trình bày miệng một lỗi cho lập trình viên: ở trang đăng ký, nhập email có chữ in hoa (ví dụ Lan@Mail.com) thì hệ thống báo “email không hợp lệ”. Nêu các bước, kết quả mong đợi, kết quả thực tế, môi trường.", "model": "Hi, have you got a minute? I've found a bug on the sign-up page. If you enter an email address with capital letters, like Lan at Mail dot com, you get an error saying the email is invalid. Expected result: the email should be accepted, because email addresses aren't case-sensitive. I tested it on staging, build three point zero, in two different browsers, and it happens every time. I've attached screenshots to the ticket.", "vi": "Chào anh, anh có rảnh một phút không? Em tìm thấy một lỗi ở trang đăng ký. Nếu nhập địa chỉ email có chữ in hoa, như Lan@Mail.com, hệ thống báo lỗi email không hợp lệ. Kết quả mong đợi: email phải được chấp nhận, vì địa chỉ email không phân biệt chữ hoa thường. Em đã thử trên staging, bản build 3.0, trên hai trình duyệt khác nhau, và lần nào cũng xảy ra. Em đã đính kèm ảnh chụp màn hình vào ticket."},
-    {"p": "Lập trình viên nói: “That's not a bug. It's working as designed.” Bạn không đồng ý vì tài liệu yêu cầu ghi khác. Hãy phản hồi lịch sự.", "model": "I see what you mean, but I'm not so sure. The user story says the user should get a confirmation email within one minute, and at the moment it takes about ten minutes. Could we check the requirement together with the product owner? If the design has changed, I'll update my test case.", "vi": "Em hiểu ý anh, nhưng em không chắc lắm. User story ghi là người dùng phải nhận email xác nhận trong vòng một phút, còn hiện tại mất khoảng mười phút. Mình cùng kiểm tra lại yêu cầu với product owner được không? Nếu thiết kế đã thay đổi, em sẽ cập nhật test case."}
-  ]
+ "no": 28,
+ "lv": "b1",
+ "title": "Báo lỗi & thảo luận với lập trình viên",
+ "sub": "It works on my machine!",
+ "situation": "Linh (tester) đến bàn của Mark (lập trình viên) để trao đổi về lỗi “đơn hàng bị tạo hai lần” cô ghi nhận sáng nay. Mark không tái hiện được vì mạng của anh nhanh. Linh trình diễn lại với mạng chậm, cung cấp môi trường, bản build, video, log; hai người thống nhất nguyên nhân gốc, mức nghiêm trọng (severity) và độ ưu tiên (priority), thời gian sửa và kế hoạch kiểm thử lại. Bài học: báo lỗi rõ ràng, phản biện lịch sự bằng dữ liệu.",
+ "lang": "en-GB",
+ "lines": [
+  {
+   "s": "Linh",
+   "g": "f",
+   "t": "Hi, Mark. Have you got a minute? It's about the bug I logged this morning, the duplicate orders one.",
+   "vi": "Chào Mark. Anh có rảnh một phút không? Về cái lỗi em ghi nhận sáng nay, lỗi đơn hàng bị trùng ấy."
+  },
+  {
+   "s": "Mark",
+   "g": "m",
+   "t": "Sure, pull up a chair. I had a look, but to be honest, I couldn't reproduce it. It works fine on my machine.",
+   "vi": "Được, kéo ghế ngồi đi. Anh xem rồi, nhưng thật tình anh không tái hiện được. Trên máy anh chạy bình thường."
+  },
+  {
+   "s": "Linh",
+   "g": "f",
+   "t": "Yeah, I thought that might happen. It only happens when the connection is slow. Can I show you?",
+   "vi": "Vâng, em cũng đoán vậy. Lỗi chỉ xảy ra khi mạng chậm. Để em cho anh xem nhé?"
+  },
+  {
+   "s": "Mark",
+   "g": "m",
+   "t": "Go ahead.",
+   "vi": "Em làm đi."
+  },
+  {
+   "s": "Linh",
+   "g": "f",
+   "t": "So, I'm on the checkout page, and I'm going to slow the network down with the developer tools. Now, watch what happens if I click the Place Order button twice, quite quickly.",
+   "vi": "Đây, em đang ở trang thanh toán, và em sẽ giả lập mạng chậm bằng công cụ dành cho nhà phát triển. Giờ anh xem điều gì xảy ra nếu em bấm nút Đặt hàng hai lần, khá nhanh."
+  },
+  {
+   "s": "Mark",
+   "g": "m",
+   "t": "Oh, I see. The button doesn't get disabled after the first click.",
+   "vi": "À, anh hiểu rồi. Nút không bị vô hiệu hoá sau lần bấm đầu tiên."
+  },
+  {
+   "s": "Linh",
+   "g": "f",
+   "t": "Exactly. And look, the system has created two orders, and the customer has been charged twice.",
+   "vi": "Đúng vậy. Và anh nhìn này, hệ thống đã tạo hai đơn hàng, và khách bị trừ tiền hai lần."
+  },
+  {
+   "s": "Mark",
+   "g": "m",
+   "t": "Hmm, that's not great. Which environment were you using?",
+   "vi": "Hừm, thế thì không ổn. Em đang dùng môi trường nào?"
+  },
+  {
+   "s": "Linh",
+   "g": "f",
+   "t": "Staging, build two point four point one. I've attached a screen recording and the server logs to the ticket.",
+   "vi": "Staging, bản build 2.4.1. Em đã đính kèm video quay màn hình và log máy chủ vào ticket rồi."
+  },
+  {
+   "s": "Mark",
+   "g": "m",
+   "t": "That's really helpful, thanks. I'd say the root cause is on both sides, actually. The front end should disable the button, and the back end should reject duplicate requests.",
+   "vi": "Thế thì giúp ích lắm, cảm ơn em. Thật ra anh cho là nguyên nhân gốc nằm ở cả hai phía. Front-end phải vô hiệu hoá nút, còn back-end phải từ chối các yêu cầu trùng lặp."
+  },
+  {
+   "s": "Linh",
+   "g": "f",
+   "t": "Makes sense. What about the severity? I've marked it as critical because it affects payments.",
+   "vi": "Hợp lý ạ. Còn mức nghiêm trọng thì sao? Em đánh dấu là critical vì nó ảnh hưởng đến thanh toán."
+  },
+  {
+   "s": "Mark",
+   "g": "m",
+   "t": "I agree it's critical. But it's quite rare in real life, isn't it? Maybe the priority could be medium?",
+   "vi": "Anh đồng ý là nghiêm trọng. Nhưng ngoài thực tế thì khá hiếm, đúng không? Có lẽ độ ưu tiên để mức trung bình được không?"
+  },
+  {
+   "s": "Linh",
+   "g": "f",
+   "t": "I'm not so sure. A lot of our users shop on mobile data, and their connection is often slow. I think customers will hit this quite often.",
+   "vi": "Em không chắc lắm đâu ạ. Rất nhiều người dùng của mình mua hàng bằng dữ liệu di động, và mạng của họ thường chậm. Em nghĩ khách hàng sẽ gặp lỗi này khá thường xuyên."
+  },
+  {
+   "s": "Mark",
+   "g": "m",
+   "t": "Fair point. Let's keep it as high priority, then. I'll flag it with the product owner.",
+   "vi": "Em nói có lý. Vậy cứ để độ ưu tiên cao. Anh sẽ báo cho product owner."
+  },
+  {
+   "s": "Linh",
+   "g": "f",
+   "t": "Great. When do you think you can have a fix ready?",
+   "vi": "Tốt quá. Anh nghĩ khi nào có bản sửa ạ?"
+  },
+  {
+   "s": "Mark",
+   "g": "m",
+   "t": "I should be able to fix the button today. The back-end part might take until Wednesday.",
+   "vi": "Phần nút thì chắc hôm nay anh sửa được. Phần back-end có thể mất đến thứ Tư."
+  },
+  {
+   "s": "Linh",
+   "g": "f",
+   "t": "OK. Could you let me know when it's on staging? I'll retest it and run some regression tests on the checkout flow.",
+   "vi": "Vâng. Khi nào bản sửa lên staging thì anh báo em nhé? Em sẽ kiểm thử lại và chạy kiểm thử hồi quy cho luồng thanh toán."
+  },
+  {
+   "s": "Mark",
+   "g": "m",
+   "t": "Will do. And thanks for the detailed report. It saved me a lot of time.",
+   "vi": "Được. Và cảm ơn em vì bản báo cáo chi tiết. Nó tiết kiệm cho anh rất nhiều thời gian."
+  },
+  {
+   "s": "Linh",
+   "g": "f",
+   "t": "No worries. Oh, one more thing. Should we also check the Pay Now button in the mobile app? It might have the same problem.",
+   "vi": "Không có gì ạ. À, thêm một điều. Mình có nên kiểm tra cả nút Thanh toán ngay trong ứng dụng di động không? Có thể nó cũng bị lỗi tương tự."
+  },
+  {
+   "s": "Mark",
+   "g": "m",
+   "t": "Good thinking. Can you log a separate ticket for that, so we can track it?",
+   "vi": "Nghĩ hay đấy. Em tạo một ticket riêng cho việc đó được không, để mình theo dõi?"
+  },
+  {
+   "s": "Linh",
+   "g": "f",
+   "t": "Sure, I'll do it now.",
+   "vi": "Vâng, em làm ngay ạ."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "Have you got a minute?",
+   "vi": "Anh/chị có rảnh một phút không?",
+   "note": "Câu mở đầu lịch sự trước khi làm phiền đồng nghiệp. Kiểu Anh: “Have you got…?”; kiểu Mỹ: “Do you have a minute?”. Trang trọng hơn: “Is now a good time to talk about…?”"
+  },
+  {
+   "t": "I couldn't reproduce it. / It works on my machine.",
+   "vi": "Tôi không tái hiện được. / Trên máy tôi chạy bình thường.",
+   "note": "Câu kinh điển của lập trình viên. Tester chuyên nghiệp không cãi mà cung cấp ĐIỀU KIỆN xảy ra lỗi: môi trường, trình duyệt, thiết bị, dữ liệu, tốc độ mạng. reproduce /ˌriːprəˈdjuːs/ – trọng âm ở âm tiết cuối."
+  },
+  {
+   "t": "It only happens when…",
+   "vi": "Lỗi chỉ xảy ra khi…",
+   "note": "Cực quan trọng khi mô tả lỗi không ổn định (intermittent bug). Biến thể: “It happens about one time in five.” (khoảng 1/5 lần), “It doesn't happen if…”. Lỗi người Việt: “It only happen when” – quên -s ở ngôi thứ ba."
+  },
+  {
+   "t": "I've attached a screen recording and the logs to the ticket.",
+   "vi": "Tôi đã đính kèm video quay màn hình và log vào ticket.",
+   "note": "attach A to B = đính kèm A vào B. Bằng chứng tốt nhất cho lập trình viên: video, ảnh chụp, log, request/response, ID đơn hàng. Lỗi hay gặp: “I attached in the ticket” – thiếu tân ngữ và sai giới từ."
+  },
+  {
+   "t": "The root cause is…",
+   "vi": "Nguyên nhân gốc là…",
+   "note": "root cause = nguyên nhân sâu xa, khác với triệu chứng (symptom). Cụm hay dùng: root cause analysis (RCA – phân tích nguyên nhân gốc). “I'd say…” trước đó giúp câu bớt khẳng định tuyệt đối."
+  },
+  {
+   "t": "severity / priority",
+   "vi": "mức nghiêm trọng / độ ưu tiên sửa",
+   "note": "Severity = lỗi ảnh hưởng hệ thống nặng đến đâu (tester đánh giá). Priority = cần sửa gấp đến đâu (thường do product owner quyết). Một lỗi có thể severity cao nhưng priority thấp (ví dụ: sập ở tính năng gần như không ai dùng) và ngược lại (sai chính tả tên công ty ở trang chủ)."
+  },
+  {
+   "t": "I'm not so sure.",
+   "vi": "Tôi không chắc lắm đâu.",
+   "note": "Cách phản đối nhẹ nhàng, lịch sự, rồi đưa ra lý do bằng dữ liệu (A lot of our users…). Tránh “You're wrong” hoặc “No, it's not rare” – nghe gay gắt. Biến thể: “I see your point, but…” / “I'm not sure I agree.”"
+  },
+  {
+   "t": "Fair point.",
+   "vi": "Bạn nói có lý.",
+   "note": "Thừa nhận lập luận của người khác một cách ngắn gọn, thân thiện. Trang trọng hơn: “That's a valid point.” / “You make a good point.”"
+  },
+  {
+   "t": "I'll flag it with the product owner.",
+   "vi": "Tôi sẽ báo vấn đề này cho product owner.",
+   "note": "flag something (with somebody) = nêu ra để người có thẩm quyền chú ý. Tương tự: raise an issue, escalate (đẩy lên cấp cao hơn khi nghiêm trọng)."
+  },
+  {
+   "t": "When do you think you can have a fix ready?",
+   "vi": "Anh nghĩ khi nào có bản sửa?",
+   "note": "Hỏi thời hạn một cách tôn trọng (“do you think” làm câu mềm hơn). Thô hơn và nên tránh: “When will you fix it?”. fix ở đây là danh từ = bản sửa lỗi."
+  },
+  {
+   "t": "Could you let me know when it's on staging?",
+   "vi": "Khi nào bản sửa lên môi trường staging thì báo tôi nhé?",
+   "note": "let somebody know = báo cho ai biết. staging = môi trường thử nghiệm gần giống thật trước khi phát hành. Sau đó tester “retest” lỗi và chạy “regression tests”."
+  },
+  {
+   "t": "Can you log a separate ticket for that?",
+   "vi": "Bạn tạo một ticket riêng cho việc đó được không?",
+   "note": "log/raise/file a ticket (a bug) = tạo phiếu ghi nhận. Nguyên tắc: MỖI lỗi một ticket để theo dõi riêng, không gộp nhiều lỗi vào một phiếu."
+  }
+ ],
+ "qs": [
+  {
+   "q": "What is the bug about?",
+   "o": [
+    "The login page is slow.",
+    "Customers can create duplicate orders and be charged twice.",
+    "The mobile app crashes."
+   ],
+   "a": 1,
+   "e": "Linh: “the system has created two orders, and the customer has been charged twice.”"
+  },
+  {
+   "q": "Why couldn't Mark reproduce the bug at first?",
+   "o": [
+    "He used the wrong environment.",
+    "The bug only happens when the connection is slow.",
+    "He didn't read the ticket."
+   ],
+   "a": 1,
+   "e": "Mark nói “It works fine on my machine”, còn Linh giải thích: “It only happens when the connection is slow.”"
+  },
+  {
+   "q": "What did Linh attach to the ticket?",
+   "o": [
+    "A screen recording and the server logs",
+    "Only a screenshot",
+    "A test plan"
+   ],
+   "a": 0,
+   "e": "Linh: “I've attached a screen recording and the server logs to the ticket.”"
+  },
+  {
+   "q": "Linh marked the bug as ______ because it affects payments.",
+   "a": "critical",
+   "e": "“I've marked it as critical because it affects payments.” – lỗi liên quan tiền luôn có severity rất cao."
+  },
+  {
+   "q": "According to Mark, where is the root cause?",
+   "o": [
+    "Only in the front end",
+    "Only in the database",
+    "In both the front end and the back end"
+   ],
+   "a": 2,
+   "e": "Mark: “the root cause is on both sides… The front end should disable the button, and the back end should reject duplicate requests.”"
+  },
+  {
+   "q": "Why does Linh disagree with a medium priority?",
+   "o": [
+    "Because many users shop on slow mobile data",
+    "Because the bug is easy to fix",
+    "Because her manager told her to"
+   ],
+   "a": 0,
+   "e": "Linh: “A lot of our users shop on mobile data, and their connection is often slow. I think customers will hit this quite often.” → phản biện bằng dữ liệu người dùng."
+  },
+  {
+   "q": "How does Mark feel about Linh's bug report?",
+   "o": [
+    "Annoyed",
+    "Grateful",
+    "Confused"
+   ],
+   "a": 1,
+   "e": "Mark: “thanks for the detailed report. It saved me a lot of time.” → biết ơn, đánh giá cao."
+  },
+  {
+   "q": "What does Mark ask Linh to do about the mobile app?",
+   "o": [
+    "Fix it herself",
+    "Log a separate ticket",
+    "Ignore it"
+   ],
+   "a": 1,
+   "e": "Mark: “Can you log a separate ticket for that, so we can track it?”"
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "I tried ten times, but I couldn't ___ the bug on my laptop.",
+   "a": "reproduce",
+   "e": "reproduce a bug = tái hiện lỗi. Đây là động từ quan trọng nhất của tester.",
+   "alt": [
+    "replicate"
+   ]
+  },
+  {
+   "t": "listen",
+   "say": "Honestly, it works fine on my machine.",
+   "q": "Người nói (lập trình viên) muốn nói gì?",
+   "o": [
+    "Anh ấy không thấy lỗi trên máy của mình.",
+    "Máy của anh ấy bị hỏng.",
+    "Anh ấy đã sửa xong lỗi."
+   ],
+   "a": 0,
+   "e": "“It works on my machine” = trên máy tôi chạy bình thường → ngầm ý chưa tái hiện được lỗi. Tester cần đưa thêm điều kiện để tái hiện."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu nhờ lập trình viên:",
+   "w": [
+    "when the fix",
+    "is on staging?",
+    "Could you",
+    "let me know"
+   ],
+   "a": "Could you let me know when the fix is on staging?",
+   "e": "Could you + let me know + when + mệnh đề. Câu nhờ vả lịch sự trong công việc."
+  },
+  {
+   "t": "dict",
+   "say": "I've attached a screen recording and the server logs.",
+   "a": "I've attached a screen recording and the server logs.",
+   "e": "Chú ý: I've (âm /v/ nhẹ), attached /t/ cuối, logs /z/ cuối."
+  },
+  {
+   "t": "mc",
+   "q": "Cách nào lịch sự nhất để phản đối ý kiến của lập trình viên về độ ưu tiên?",
+   "o": [
+    "You're wrong. It's high priority.",
+    "I'm not so sure. A lot of our users are on slow connections.",
+    "No. Change it now."
+   ],
+   "a": 1,
+   "e": "“I'm not so sure” + lý do bằng dữ liệu → vừa lịch sự vừa thuyết phục. Hai câu còn lại nghe gay gắt, mang tính ra lệnh."
+  },
+  {
+   "t": "match",
+   "q": "Nối thuật ngữ với nghĩa:",
+   "pairs": [
+    [
+     "severity",
+     "mức độ ảnh hưởng của lỗi"
+    ],
+    [
+     "priority",
+     "mức độ cần sửa gấp"
+    ],
+    [
+     "root cause",
+     "nguyên nhân gốc"
+    ],
+    [
+     "staging",
+     "môi trường thử nghiệm trước khi phát hành"
+    ],
+    [
+     "regression test",
+     "kiểm thử xem chức năng cũ có bị hỏng không"
+    ]
+   ]
+  }
+ ],
+ "practice": [
+  {
+   "p": "Trình bày miệng một lỗi cho lập trình viên: ở trang đăng ký, nhập email có chữ in hoa (ví dụ Lan@Mail.com) thì hệ thống báo “email không hợp lệ”. Nêu các bước, kết quả mong đợi, kết quả thực tế, môi trường.",
+   "model": "Hi, have you got a minute? I've found a bug on the sign-up page. If you enter an email address with capital letters, like Lan at Mail dot com, you get an error saying the email is invalid. Expected result: the email should be accepted, because email addresses aren't case-sensitive. I tested it on staging, build three point zero, in two different browsers, and it happens every time. I've attached screenshots to the ticket.",
+   "vi": "Chào anh, anh có rảnh một phút không? Em tìm thấy một lỗi ở trang đăng ký. Nếu nhập địa chỉ email có chữ in hoa, như Lan@Mail.com, hệ thống báo lỗi email không hợp lệ. Kết quả mong đợi: email phải được chấp nhận, vì địa chỉ email không phân biệt chữ hoa thường. Em đã thử trên staging, bản build 3.0, trên hai trình duyệt khác nhau, và lần nào cũng xảy ra. Em đã đính kèm ảnh chụp màn hình vào ticket."
+  },
+  {
+   "p": "Lập trình viên nói: “That's not a bug. It's working as designed.” Bạn không đồng ý vì tài liệu yêu cầu ghi khác. Hãy phản hồi lịch sự.",
+   "model": "I see what you mean, but I'm not so sure. The user story says the user should get a confirmation email within one minute, and at the moment it takes about ten minutes. Could we check the requirement together with the product owner? If the design has changed, I'll update my test case.",
+   "vi": "Em hiểu ý anh, nhưng em không chắc lắm. User story ghi là người dùng phải nhận email xác nhận trong vòng một phút, còn hiện tại mất khoảng mười phút. Mình cùng kiểm tra lại yêu cầu với product owner được không? Nếu thiết kế đã thay đổi, em sẽ cập nhật test case."
+  }
+ ]
 }

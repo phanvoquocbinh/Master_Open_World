@@ -1,139 +1,880 @@
 {
-  "no": 1,
-  "title": "你好！– Chào hỏi, cảm ơn, xin lỗi, tạm biệt",
-  "sub": "Nǐ hǎo! 你好！",
-  "goals": [
-    "Chào hỏi một người, nhiều người, người lớn tuổi/giáo viên",
-    "Hỏi thăm sức khoẻ: 你好吗？– 我很好。",
-    "Cảm ơn – đáp lời, xin lỗi – đáp lời, tạm biệt",
-    "Đọc đúng biến điệu 3+3 (nǐ hǎo → ní hǎo) và 不 + thanh 4 (bú kèqi)"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
-      {"w": "你", "py": "nǐ", "hv": "nhĩ", "pos": "pron", "vi": "bạn, anh, chị (ngôi 2 số ít)", "ex": "你好！", "exPy": "Nǐ hǎo!", "exVi": "Chào bạn!"},
-      {"w": "好", "py": "hǎo", "hv": "hảo", "pos": "adj", "vi": "tốt, khoẻ, hay", "ex": "我很好。", "exPy": "Wǒ hěn hǎo.", "exVi": "Tôi rất khoẻ."},
-      {"w": "您", "py": "nín", "hv": "nâm", "pos": "pron", "vi": "ngài, ông, bà (kính trọng của 你)", "ex": "老师，您好！", "exPy": "Lǎoshī, nín hǎo!", "exVi": "Em chào thầy/cô ạ!"},
-      {"w": "我", "py": "wǒ", "hv": "ngã", "pos": "pron", "vi": "tôi, mình", "ex": "我很好。", "exPy": "Wǒ hěn hǎo.", "exVi": "Tôi khoẻ."},
-      {"w": "他", "py": "tā", "hv": "tha", "pos": "pron", "vi": "anh ấy, ông ấy", "ex": "他是老师。", "exPy": "Tā shì lǎoshī.", "exVi": "Anh ấy là giáo viên."},
-      {"w": "她", "py": "tā", "hv": "tha", "pos": "pron", "vi": "cô ấy, chị ấy", "ex": "她很好。", "exPy": "Tā hěn hǎo.", "exVi": "Cô ấy khoẻ."},
-      {"w": "们", "py": "men", "hv": "môn", "pos": "part", "vi": "hậu tố số nhiều cho người (我们, 你们, 他们)", "ex": "你们好！", "exPy": "Nǐmen hǎo!", "exVi": "Chào các bạn!"},
-      {"w": "老师", "py": "lǎoshī", "hv": "lão sư", "pos": "n", "vi": "giáo viên, thầy/cô", "ex": "老师好！", "exPy": "Lǎoshī hǎo!", "exVi": "Chào thầy/cô ạ!"},
-      {"w": "同学", "py": "tóngxué", "hv": "đồng học", "pos": "n", "vi": "bạn học", "ex": "同学们好！", "exPy": "Tóngxuémen hǎo!", "exVi": "Chào các em!"},
-      {"w": "很", "py": "hěn", "hv": "ngận", "pos": "adv", "vi": "rất (thường đứng trước tính từ)", "ex": "我很忙。", "exPy": "Wǒ hěn máng.", "exVi": "Tôi bận."},
-      {"w": "也", "py": "yě", "hv": "dã", "pos": "adv", "vi": "cũng", "ex": "我也很好。", "exPy": "Wǒ yě hěn hǎo.", "exVi": "Tôi cũng khoẻ."},
-      {"w": "吗", "py": "ma", "hv": "ma", "pos": "part", "vi": "trợ từ nghi vấn cuối câu (… không?)", "ex": "你好吗？", "exPy": "Nǐ hǎo ma?", "exVi": "Bạn khoẻ không?"},
-      {"w": "谢谢", "py": "xièxie", "hv": "tạ tạ", "pos": "v", "vi": "cảm ơn", "ex": "谢谢老师！", "exPy": "Xièxie lǎoshī!", "exVi": "Em cảm ơn thầy/cô!"},
-      {"w": "不客气", "py": "bú kèqi", "hv": "bất khách khí", "pos": "phr", "vi": "không có gì (đáp lời cảm ơn)", "ex": "谢谢！— 不客气。", "exPy": "Xièxie! — Bú kèqi.", "exVi": "Cảm ơn! — Không có gì."},
-      {"w": "对不起", "py": "duìbuqǐ", "hv": "đối bất khởi", "pos": "phr", "vi": "xin lỗi", "ex": "对不起，老师！", "exPy": "Duìbuqǐ, lǎoshī!", "exVi": "Em xin lỗi thầy/cô!"},
-      {"w": "没关系", "py": "méi guānxi", "hv": "một quan hệ", "pos": "phr", "vi": "không sao (đáp lời xin lỗi)", "ex": "对不起！— 没关系。", "exPy": "Duìbuqǐ! — Méi guānxi.", "exVi": "Xin lỗi! — Không sao."},
-      {"w": "再见", "py": "zàijiàn", "hv": "tái kiến", "pos": "phr", "vi": "tạm biệt (hẹn gặp lại)", "ex": "明天见！再见！", "exPy": "Míngtiān jiàn! Zàijiàn!", "exVi": "Mai gặp! Tạm biệt!"},
-      {"w": "忙", "py": "máng", "hv": "mang", "pos": "adj", "vi": "bận", "ex": "你忙吗？", "exPy": "Nǐ máng ma?", "exVi": "Bạn bận không?"}
-    ]},
-    {"k": "text", "h": "Mẹo của người Việt: âm Hán Việt", "html": "<p>Khoảng <b>60–70% từ vựng tiếng Việt có gốc Hán</b>. Mỗi chữ Hán có một <b>âm Hán Việt</b>: 老师 <i>lão sư</i>, 同学 <i>đồng học</i>, 再见 <i>tái kiến</i>. Nhớ âm Hán Việt giúp bạn:</p><ul><li>Đoán nghĩa từ mới (同学 = đồng học = bạn học).</li><li>Nhớ mặt chữ lâu hơn (好 = hảo: “hảo hạng”).</li></ul><p>⚠️ Nhưng <b>đừng đọc tiếng Trung theo âm Hán Việt</b> – phải đọc theo pinyin. Và nghĩa có thể lệch: 没关系 “một quan hệ” thực ra nghĩa là “không sao”.</p>"},
-    {"k": "sounds", "h": "Phát âm: biến điệu trong câu chào", "html": "<p>Chữ viết giữ thanh gốc, nhưng khi nói, một số thanh <b>biến đổi</b>. Hai quy tắc gặp ngay bài đầu:</p>", "items": [
-      {"sym": "3 + 3 → 2 + 3", "ex": ["你好", "很好", "我也很好"], "vi": "Hai thanh 3 liền nhau: thanh 3 đầu đọc thành thanh 2. 你好 viết nǐ hǎo nhưng đọc <b>ní hǎo</b>. 很好 hěn hǎo → <b>hén hǎo</b>.", "pairs": [["你好", "您好"]]},
-      {"sym": "不 + thanh 4 → bú", "ex": ["不客气", "不是", "不对"], "vi": "不 (bù) đứng trước thanh 4 đọc thành thanh 2: bù kèqi → <b>bú kèqi</b>."},
-      {"sym": "thanh nhẹ", "ex": ["谢谢", "你们", "吗"], "vi": "Âm tiết thứ 2 của 谢谢 (xièxie), hậu tố 们, trợ từ 吗 đọc <b>nhẹ, ngắn</b>, không mang dấu – như chữ “nhé” nói lướt trong tiếng Việt."},
-      {"sym": "x", "ex": ["谢谢", "再见"], "vi": "x trong xiè: mặt lưỡi áp gần vòm miệng, cười nhẹ – gần âm “x” tiếng Việt nhưng bẹt hơn. zài: z đọc như “ch” không bật hơi (gần “tr” nhẹ)."}
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 1: Cách chào – [người] + 好", "html": "<p>Công thức chào cực đơn giản: <b>đối tượng + 好</b>. Đổi người được chào là đổi lời chào.</p>", "table": [["Câu chào", "Pinyin", "Dùng khi"], ["你好！", "Nǐ hǎo!", "Chào 1 người (bạn bè, người lạ)"], ["您好！", "Nín hǎo!", "Chào người lớn, khách hàng, cấp trên (kính trọng)"], ["你们好！", "Nǐmen hǎo!", "Chào nhiều người"], ["老师好！", "Lǎoshī hǎo!", "Học sinh chào giáo viên"], ["大家好！", "Dàjiā hǎo!", "Chào mọi người (mở đầu phát biểu)"], ["早上好！", "Zǎoshang hǎo!", "Chào buổi sáng"]], "ex": [
-      {"t": "王老师，您好！", "py": "Wáng lǎoshī, nín hǎo!", "vi": "Em chào thầy Vương ạ!"},
-      {"t": "同学们好！", "py": "Tóngxuémen hǎo!", "vi": "Chào các em! (giáo viên chào lớp)"}
-    ], "tips": ["Tiếng Trung đặt <b>họ trước chức danh</b>: 王老师 (thầy Vương), 李经理 (giám đốc Lý) – giống tiếng Việt “thầy Vương” nhưng đảo vị trí."]},
-    {"k": "grammar", "h": "Ngữ pháp 2: Câu vị ngữ tính từ – 我很好 (KHÔNG dùng 是)", "html": "<p>Muốn nói “Tôi khoẻ / Tôi bận”, tiếng Trung dùng <b>Chủ ngữ + 很 + Tính từ</b>. <b>很</b> ở đây gần như chỉ để câu trọn vẹn, nghĩa “rất” rất nhẹ.</p><p>⚠️ Người học hay mang thói quen tiếng Anh (I <i>am</i> fine) sang: ❌ <i>我是好</i>. Tiếng Trung <b>không dùng 是 trước tính từ</b>.</p>", "table": [["Khẳng định", "Phủ định (不 bù)", "Câu hỏi (吗)"], ["我很好。", "我不忙。", "你忙吗？"], ["Wǒ hěn hǎo.", "Wǒ bù máng.", "Nǐ máng ma?"]], "ex": [
-      {"t": "我很忙。", "py": "Wǒ hěn máng.", "vi": "Tôi bận."},
-      {"t": "他也很好。", "py": "Tā yě hěn hǎo.", "vi": "Anh ấy cũng khoẻ. (也 đứng TRƯỚC 很, sau chủ ngữ)"},
-      {"t": "我不忙。", "py": "Wǒ bù máng.", "vi": "Tôi không bận. (phủ định dùng 不, bỏ 很)"}
-    ], "tips": ["Vị trí trạng từ: <b>Chủ ngữ + 也 + 很 + tính từ</b>. ❌ <i>也我很好</i>, ❌ <i>我很也好</i>."]},
-    {"k": "grammar", "h": "Ngữ pháp 3: Câu hỏi có/không với 吗", "html": "<p>Lấy câu trần thuật, thêm <b>吗</b> vào cuối là thành câu hỏi – <b>không đảo trật tự</b> (dễ hơn tiếng Anh nhiều!). Muốn hỏi lại “còn bạn?” dùng <b>你呢？</b></p>", "ex": [
-      {"t": "你好吗？— 我很好，谢谢。你呢？— 我也很好。", "py": "Nǐ hǎo ma? — Wǒ hěn hǎo, xièxie. Nǐ ne? — Wǒ yě hěn hǎo.", "vi": "Bạn khoẻ không? — Tôi khoẻ, cảm ơn. Còn bạn? — Tôi cũng khoẻ."},
-      {"t": "你忙吗？— 我不忙。", "py": "Nǐ máng ma? — Wǒ bù máng.", "vi": "Bạn bận không? — Tôi không bận."}
-    ], "tips": ["你好吗？ là câu hỏi thăm (lâu ngày gặp lại), <b>không phải</b> lời chào thông thường. Gặp hằng ngày chỉ cần 你好！"]},
-    {"k": "dialog", "h": "Nghe: Giờ học đầu tiên", "lang": "zh-CN", "note": "Lớp tiếng Trung buổi sáng. Thầy Vương chào lớp, hai bạn Tiểu Lan và Tiểu Minh. Nghe lần 1 không nhìn chữ: ai đến muộn?", "lines": [
-      {"s": "王老师", "g": "m", "t": "同学们好！", "py": "Tóngxuémen hǎo!", "vi": "Chào các em!"},
-      {"s": "同学们", "g": "f", "t": "老师好！", "py": "Lǎoshī hǎo!", "vi": "Chúng em chào thầy ạ!"},
-      {"s": "小兰", "g": "f", "t": "王老师，您好吗？", "py": "Wáng lǎoshī, nín hǎo ma?", "vi": "Thầy Vương, thầy khoẻ không ạ?"},
-      {"s": "王老师", "g": "m", "t": "我很好，谢谢。你呢？", "py": "Wǒ hěn hǎo, xièxie. Nǐ ne?", "vi": "Thầy khoẻ, cảm ơn em. Còn em?"},
-      {"s": "小兰", "g": "f", "t": "我也很好。", "py": "Wǒ yě hěn hǎo.", "vi": "Em cũng khoẻ ạ."},
-      {"s": "小明", "g": "m", "t": "对不起，老师！", "py": "Duìbuqǐ, lǎoshī!", "vi": "Em xin lỗi thầy! (đến muộn)"},
-      {"s": "王老师", "g": "m", "t": "没关系。你忙吗？", "py": "Méi guānxi. Nǐ máng ma?", "vi": "Không sao. Em bận à?"},
-      {"s": "小明", "g": "m", "t": "我很忙。谢谢老师！", "py": "Wǒ hěn máng. Xièxie lǎoshī!", "vi": "Em bận ạ. Cảm ơn thầy!"},
-      {"s": "王老师", "g": "m", "t": "不客气。", "py": "Bú kèqi.", "vi": "Không có gì."}
-    ], "qs": [
-      {"q": "Ai đến muộn và xin lỗi?", "o": ["小兰 Xiǎo Lán", "小明 Xiǎo Míng", "王老师 Wáng lǎoshī"], "a": 1, "e": "小明 nói 对不起，老师！"},
-      {"q": "王老师 trả lời 小兰 thế nào khi được hỏi thăm?", "o": ["我很好 – thầy khoẻ", "我很忙 – thầy bận", "再见 – tạm biệt"], "a": 0, "e": "我很好，谢谢。你呢？"},
-      {"q": "小兰 nói 我也很好 nghĩa là gì?", "o": ["Em cũng khoẻ", "Em không khoẻ", "Em rất bận"], "a": 0, "e": "也 = cũng, 很好 = khoẻ."},
-      {"q": "Thầy đáp lời 对不起 bằng từ gì? (gõ chữ Hán hoặc pinyin)", "a": "没关系", "alt": ["meiguanxi", "méi guānxi"], "e": "对不起 → 没关系 (không sao)."}
-    ]},
-    {"k": "read", "h": "Đọc: Lời chào trong ngày", "title": "小兰的一天", "text": "早上，小兰对妈妈说：“妈妈，早上好！”\n\n在学校，她对王老师说：“老师好！”王老师说：“你好！”\n\n下课了，小兰对同学们说：“再见！”", "py": "Zǎoshang, Xiǎo Lán duì māma shuō: “Māma, zǎoshang hǎo!”\n\nZài xuéxiào, tā duì Wáng lǎoshī shuō: “Lǎoshī hǎo!” Wáng lǎoshī shuō: “Nǐ hǎo!”\n\nXià kè le, Xiǎo Lán duì tóngxuémen shuō: “Zàijiàn!”", "vi": "Buổi sáng, Tiểu Lan nói với mẹ: “Mẹ ơi, chào buổi sáng!”\n\nỞ trường, cô ấy nói với thầy Vương: “Em chào thầy!” Thầy Vương nói: “Chào em!”\n\nTan học, Tiểu Lan nói với các bạn: “Tạm biệt!”", "gloss": [
-      {"w": "早上", "py": "zǎoshang", "vi": "buổi sáng"},
-      {"w": "对…说", "py": "duì… shuō", "vi": "nói với…"},
-      {"w": "妈妈", "py": "māma", "vi": "mẹ"},
-      {"w": "学校", "py": "xuéxiào", "vi": "trường học"},
-      {"w": "下课", "py": "xià kè", "vi": "tan học, hết giờ"}
-    ], "qs": [
-      {"q": "Buổi sáng Tiểu Lan chào ai trước?", "o": ["妈妈 – mẹ", "老师 – thầy giáo", "同学 – bạn học"], "a": 0, "e": "早上，小兰对妈妈说…"},
-      {"q": "Tan học, Tiểu Lan nói gì với các bạn?", "o": ["你好", "再见", "谢谢"], "a": 1, "e": "下课了…说：“再见！”"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "你", "py": "nǐ", "hv": "nhĩ", "parts": "亻(nhân đứng – người) + 尔 (nhĩ)", "strokes": 7, "vi": "bạn – “người” đứng trước mặt mình", "words": "你好, 你们"},
-      {"c": "好", "py": "hǎo", "hv": "hảo", "parts": "女 (nữ – phụ nữ) + 子 (tử – con)", "strokes": 6, "vi": "tốt – mẹ bế con là điều tốt đẹp", "words": "你好, 很好"},
-      {"c": "我", "py": "wǒ", "hv": "ngã", "parts": "手 (biến thể – tay) + 戈 (qua – ngọn giáo)", "strokes": 7, "vi": "tôi – tay cầm vũ khí bảo vệ bản thân", "words": "我们"},
-      {"c": "们", "py": "men", "hv": "môn", "parts": "亻(người) + 门 (môn – cửa, gợi âm)", "strokes": 5, "vi": "số nhiều – nhiều người trước cửa", "words": "我们, 你们, 他们"},
-      {"c": "谢", "py": "xiè", "hv": "tạ", "parts": "讠(ngôn – lời nói) + 身 (thân) + 寸 (thốn)", "strokes": 12, "vi": "cảm ơn – dùng lời nói để tạ ơn", "words": "谢谢"}
-    ]},
-    {"k": "speak", "h": "Nói: Chào hỏi theo tình huống", "tasks": [
-      {"p": "Bạn gặp giáo viên ở cổng trường buổi sáng. Chào và hỏi thăm.", "model": "老师，早上好！您好吗？", "py": "Lǎoshī, zǎoshang hǎo! Nín hǎo ma?", "vi": "Em chào thầy buổi sáng! Thầy khoẻ không ạ?", "tips": "Nhớ dùng 您 với giáo viên. 早上好 đọc zǎoshang hǎo – shang thanh nhẹ."},
-      {"p": "Bạn trả lời khi được hỏi 你好吗？ và hỏi lại.", "model": "我很好，谢谢。你呢？", "py": "Wǒ hěn hǎo, xièxie. Nǐ ne?", "vi": "Mình khoẻ, cảm ơn. Còn bạn?", "tips": "我很好: wǒ hěn hǎo – ba thanh 3 liền nhau, đọc tự nhiên là wó hén hǎo."},
-      {"p": "Bạn va vào một người lạ, xin lỗi; người đó đáp lời; rồi chào tạm biệt.", "model": "对不起！— 没关系。— 再见！", "py": "Duìbuqǐ! — Méi guānxi. — Zàijiàn!", "vi": "Xin lỗi! — Không sao. — Tạm biệt!"}
-    ]},
-    {"k": "write", "h": "Viết: Chép & hoàn thành hội thoại", "task": "Viết lại hội thoại 4 câu (chữ Hán + pinyin): A chào B, hỏi thăm sức khoẻ; B trả lời và hỏi lại; A trả lời có dùng 也.", "min": 15, "model": "A：你好！你好吗？\nB：我很好，谢谢。你呢？\nA：我也很好。\nB：再见！", "modelVi": "A: Chào bạn! Bạn khoẻ không? B: Mình khoẻ, cảm ơn. Còn bạn? A: Mình cũng khoẻ. B: Tạm biệt!", "tips": ["Dấu câu tiếng Trung: dấu chấm là 。 (vòng tròn), dấu phẩy ， , chấm hỏi ？", "Mỗi chữ Hán chiếm 1 ô vuông như nhau."], "checklist": ["Có 你好 / 您好", "Có câu hỏi với 吗", "也 đứng sau chủ ngữ, trước 很", "Không dùng 是 trước 好"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "你好", "lang": "zh-CN", "q": "Bạn vừa nghe từ nào?", "o": ["nǐ hǎo – chào bạn", "xièxie – cảm ơn", "zàijiàn – tạm biệt"], "a": 0, "e": "你好 nǐ hǎo (khi nói đọc ní hǎo)."},
-    {"t": "listen", "say": "对不起", "lang": "zh-CN", "q": "Từ vừa nghe nghĩa là gì?", "o": ["Cảm ơn", "Xin lỗi", "Không sao"], "a": 1, "e": "对不起 duìbuqǐ = xin lỗi."},
-    {"t": "listen", "say": "老师好！", "lang": "zh-CN", "q": "Người nói đang chào ai?", "o": ["Bạn học", "Giáo viên", "Mẹ"], "a": 1, "e": "老师 lǎoshī = giáo viên."},
-    {"t": "mc", "q": "Có người nói 谢谢 (xièxie). Bạn đáp:", "o": ["不客气 bú kèqi", "对不起 duìbuqǐ", "再见 zàijiàn"], "a": 0, "e": "谢谢 → 不客气 (không có gì)."},
-    {"t": "mc", "q": "Chào giám đốc lớn tuổi, bạn nói:", "o": ["你好！", "您好！", "你们好！"], "a": 1, "e": "您 nín là cách xưng kính trọng."},
-    {"t": "mc", "q": "Câu nào ĐÚNG? (Tôi khoẻ)", "o": ["我是好。", "我很好。", "我好很。"], "a": 1, "e": "Chủ ngữ + 很 + tính từ; không dùng 是 trước tính từ."},
-    {"t": "mc", "q": "你们 (nǐmen) nghĩa là:", "o": ["bạn", "các bạn", "chúng tôi"], "a": 1, "e": "你 + 们 (số nhiều) = các bạn. Chúng tôi = 我们."},
-    {"t": "fill", "q": "我___好。(Tôi khoẻ – điền chữ Hán hoặc pinyin)", "a": "很", "alt": ["hen", "hěn"], "e": "我很好 – 很 đứng trước tính từ."},
-    {"t": "fill", "q": "你好吗？— 我很好，你___？(Còn bạn?)", "a": "呢", "alt": ["ne"], "e": "你呢？ = còn bạn thì sao?"},
-    {"t": "order", "q": "Sắp xếp thành câu hỏi “Bạn khoẻ không?”", "w": ["吗", "你", "好"], "a": "你好吗", "e": "Câu trần thuật 你好 + 吗 ở cuối."},
-    {"t": "order", "q": "Sắp xếp: “Tôi cũng khoẻ.”", "w": ["好", "也", "我", "很"], "a": "我也很好", "e": "Chủ ngữ + 也 + 很 + tính từ."},
-    {"t": "mc", "q": "你好 khi nói thực tế đọc là:", "o": ["nǐ hǎo", "ní hǎo", "nǐ háo"], "a": 1, "e": "Hai thanh 3 liền nhau → thanh 3 đầu đọc thành thanh 2."},
-    {"t": "dict", "say": "谢谢", "lang": "zh-CN", "a": "谢谢", "py": "xièxie", "e": "Gõ chữ Hán hoặc pinyin (dấu thanh không bắt buộc)."},
-    {"t": "dict", "say": "再见", "lang": "zh-CN", "a": "再见", "py": "zàijiàn"},
-    {"t": "match", "q": "Nối câu với nghĩa:", "pairs": [["谢谢", "Cảm ơn"], ["不客气", "Không có gì"], ["对不起", "Xin lỗi"], ["没关系", "Không sao"], ["再见", "Tạm biệt"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Bảng 4 thanh điệu (đã học ở Cấp 0); thẻ chữ 你 好 我 们 谢; tranh tình huống: gặp thầy, va vào người, chia tay.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: GV chào 大家好！ bằng giọng rõ, cả lớp đoán nghĩa. Ôn nhanh 4 thanh bằng tay (vẽ thanh trên không)."},
-      {"t": "20'", "do": "Từ vựng: dạy theo cặp đối đáp (谢谢↔不客气, 对不起↔没关系, 你好↔你好). Đọc mẫu – lớp nhắc lại – từng bàn. Giới thiệu âm Hán Việt để học viên tự đoán nghĩa 老师, 同学, 再见."},
-      {"t": "15'", "do": "Biến điệu: GV đọc nǐ + hǎo tách rời, rồi nối nhanh → ní hǎo. Cho học viên phát hiện quy tắc. Tương tự 不客气."},
-      {"t": "20'", "do": "Ngữ pháp 1–2: công thức [người]+好; câu 我很好. Viết ❌ 我是好 lên bảng, hỏi lớp vì sao sai."},
-      {"t": "15'", "do": "Nghe hội thoại: lần 1 không chữ (ai đến muộn?), lần 2 có pinyin, lần 3 đọc phân vai."},
-      {"t": "10'", "do": "Giao bài tập 1–8 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: GV giơ tranh tình huống, học viên nói câu phù hợp nhanh nhất."},
-      {"t": "15'", "do": "Ngữ pháp 3: câu hỏi 吗 + 你呢. Luyện chuỗi hỏi – đáp theo vòng tròn."},
-      {"t": "15'", "do": "Đọc ‘小兰的一天’: đọc pinyin trước, sau đó che pinyin đọc chữ Hán."},
-      {"t": "20'", "do": "Chữ Hán: viết 你 好 我 们 谢 theo thứ tự nét (dùng ô tập viết trong game hoặc giấy ô li). Giải thích bộ 亻, 女, 讠."},
-      {"t": "20'", "do": "Nói theo tình huống (3 nhiệm vụ) – đóng vai theo cặp, đổi vai. Viết hội thoại 4 câu."},
-      {"t": "10'", "do": "Bài tập 9–15, chữa lỗi, giao bài về nhà."}
+ "no": 1,
+ "title": "你好！– Chào hỏi, cảm ơn, xin lỗi, tạm biệt",
+ "sub": "Nǐ hǎo! 你好！",
+ "goals": [
+  "Chào hỏi một người, nhiều người, người lớn tuổi/giáo viên",
+  "Hỏi thăm sức khoẻ: 你好吗？– 我很好。",
+  "Cảm ơn – đáp lời, xin lỗi – đáp lời, tạm biệt",
+  "Đọc đúng biến điệu 3+3 (nǐ hǎo → ní hǎo) và 不 + thanh 4 (bú kèqi)"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词 shēngcí)",
+   "items": [
+    {
+     "w": "你",
+     "py": "nǐ",
+     "hv": "nhĩ",
+     "pos": "pron",
+     "vi": "bạn, anh, chị (ngôi 2 số ít)",
+     "ex": "你好！",
+     "exPy": "Nǐ hǎo!",
+     "exVi": "Chào bạn!"
+    },
+    {
+     "w": "好",
+     "py": "hǎo",
+     "hv": "hảo",
+     "pos": "adj",
+     "vi": "tốt, khoẻ, hay",
+     "ex": "我很好。",
+     "exPy": "Wǒ hěn hǎo.",
+     "exVi": "Tôi rất khoẻ."
+    },
+    {
+     "w": "您",
+     "py": "nín",
+     "hv": "nâm",
+     "pos": "pron",
+     "vi": "ngài, ông, bà (kính trọng của 你)",
+     "ex": "老师，您好！",
+     "exPy": "Lǎoshī, nín hǎo!",
+     "exVi": "Em chào thầy/cô ạ!"
+    },
+    {
+     "w": "我",
+     "py": "wǒ",
+     "hv": "ngã",
+     "pos": "pron",
+     "vi": "tôi, mình",
+     "ex": "我很好。",
+     "exPy": "Wǒ hěn hǎo.",
+     "exVi": "Tôi khoẻ."
+    },
+    {
+     "w": "他",
+     "py": "tā",
+     "hv": "tha",
+     "pos": "pron",
+     "vi": "anh ấy, ông ấy",
+     "ex": "他是老师。",
+     "exPy": "Tā shì lǎoshī.",
+     "exVi": "Anh ấy là giáo viên."
+    },
+    {
+     "w": "她",
+     "py": "tā",
+     "hv": "tha",
+     "pos": "pron",
+     "vi": "cô ấy, chị ấy",
+     "ex": "她很好。",
+     "exPy": "Tā hěn hǎo.",
+     "exVi": "Cô ấy khoẻ."
+    },
+    {
+     "w": "们",
+     "py": "men",
+     "hv": "môn",
+     "pos": "part",
+     "vi": "hậu tố số nhiều cho người (我们, 你们, 他们)",
+     "ex": "你们好！",
+     "exPy": "Nǐmen hǎo!",
+     "exVi": "Chào các bạn!"
+    },
+    {
+     "w": "老师",
+     "py": "lǎoshī",
+     "hv": "lão sư",
+     "pos": "n",
+     "vi": "giáo viên, thầy/cô",
+     "ex": "老师好！",
+     "exPy": "Lǎoshī hǎo!",
+     "exVi": "Chào thầy/cô ạ!"
+    },
+    {
+     "w": "同学",
+     "py": "tóngxué",
+     "hv": "đồng học",
+     "pos": "n",
+     "vi": "bạn học",
+     "ex": "同学们好！",
+     "exPy": "Tóngxuémen hǎo!",
+     "exVi": "Chào các em!"
+    },
+    {
+     "w": "很",
+     "py": "hěn",
+     "hv": "ngận",
+     "pos": "adv",
+     "vi": "rất (thường đứng trước tính từ)",
+     "ex": "我很忙。",
+     "exPy": "Wǒ hěn máng.",
+     "exVi": "Tôi bận."
+    },
+    {
+     "w": "也",
+     "py": "yě",
+     "hv": "dã",
+     "pos": "adv",
+     "vi": "cũng",
+     "ex": "我也很好。",
+     "exPy": "Wǒ yě hěn hǎo.",
+     "exVi": "Tôi cũng khoẻ."
+    },
+    {
+     "w": "吗",
+     "py": "ma",
+     "hv": "ma",
+     "pos": "part",
+     "vi": "trợ từ nghi vấn cuối câu (… không?)",
+     "ex": "你好吗？",
+     "exPy": "Nǐ hǎo ma?",
+     "exVi": "Bạn khoẻ không?"
+    },
+    {
+     "w": "谢谢",
+     "py": "xièxie",
+     "hv": "tạ tạ",
+     "pos": "v",
+     "vi": "cảm ơn",
+     "ex": "谢谢老师！",
+     "exPy": "Xièxie lǎoshī!",
+     "exVi": "Em cảm ơn thầy/cô!"
+    },
+    {
+     "w": "不客气",
+     "py": "bú kèqi",
+     "hv": "bất khách khí",
+     "pos": "phr",
+     "vi": "không có gì (đáp lời cảm ơn)",
+     "ex": "谢谢！— 不客气。",
+     "exPy": "Xièxie! — Bú kèqi.",
+     "exVi": "Cảm ơn! — Không có gì."
+    },
+    {
+     "w": "对不起",
+     "py": "duìbuqǐ",
+     "hv": "đối bất khởi",
+     "pos": "phr",
+     "vi": "xin lỗi",
+     "ex": "对不起，老师！",
+     "exPy": "Duìbuqǐ, lǎoshī!",
+     "exVi": "Em xin lỗi thầy/cô!"
+    },
+    {
+     "w": "没关系",
+     "py": "méi guānxi",
+     "hv": "một quan hệ",
+     "pos": "phr",
+     "vi": "không sao (đáp lời xin lỗi)",
+     "ex": "对不起！— 没关系。",
+     "exPy": "Duìbuqǐ! — Méi guānxi.",
+     "exVi": "Xin lỗi! — Không sao."
+    },
+    {
+     "w": "再见",
+     "py": "zàijiàn",
+     "hv": "tái kiến",
+     "pos": "phr",
+     "vi": "tạm biệt (hẹn gặp lại)",
+     "ex": "明天见！再见！",
+     "exPy": "Míngtiān jiàn! Zàijiàn!",
+     "exVi": "Mai gặp! Tạm biệt!"
+    },
+    {
+     "w": "忙",
+     "py": "máng",
+     "hv": "mang",
+     "pos": "adj",
+     "vi": "bận",
+     "ex": "你忙吗？",
+     "exPy": "Nǐ máng ma?",
+     "exVi": "Bạn bận không?"
+    }
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Mẹo của người Việt: âm Hán Việt",
+   "html": "<p>Khoảng <b>60–70% từ vựng tiếng Việt có gốc Hán</b>. Mỗi chữ Hán có một <b>âm Hán Việt</b>: 老师 <i>lão sư</i>, 同学 <i>đồng học</i>, 再见 <i>tái kiến</i>. Nhớ âm Hán Việt giúp bạn:</p><ul><li>Đoán nghĩa từ mới (同学 = đồng học = bạn học).</li><li>Nhớ mặt chữ lâu hơn (好 = hảo: “hảo hạng”).</li></ul><p>⚠️ Nhưng <b>đừng đọc tiếng Trung theo âm Hán Việt</b> – phải đọc theo pinyin. Và nghĩa có thể lệch: 没关系 “một quan hệ” thực ra nghĩa là “không sao”.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: biến điệu trong câu chào",
+   "html": "<p>Chữ viết giữ thanh gốc, nhưng khi nói, một số thanh <b>biến đổi</b>. Hai quy tắc gặp ngay bài đầu:</p>",
+   "items": [
+    {
+     "sym": "3 + 3 → 2 + 3",
+     "ex": [
+      "你好",
+      "很好",
+      "我也很好"
+     ],
+     "vi": "Hai thanh 3 liền nhau: thanh 3 đầu đọc thành thanh 2. 你好 viết nǐ hǎo nhưng đọc <b>ní hǎo</b>. 很好 hěn hǎo → <b>hén hǎo</b>.",
+     "pairs": [
+      [
+       "你好",
+       "您好"
+      ]
+     ]
+    },
+    {
+     "sym": "不 + thanh 4 → bú",
+     "ex": [
+      "不客气",
+      "不是",
+      "不对"
+     ],
+     "vi": "不 (bù) đứng trước thanh 4 đọc thành thanh 2: bù kèqi → <b>bú kèqi</b>."
+    },
+    {
+     "sym": "thanh nhẹ",
+     "ex": [
+      "谢谢",
+      "你们",
+      "吗"
+     ],
+     "vi": "Âm tiết thứ 2 của 谢谢 (xièxie), hậu tố 们, trợ từ 吗 đọc <b>nhẹ, ngắn</b>, không mang dấu – như chữ “nhé” nói lướt trong tiếng Việt."
+    },
+    {
+     "sym": "x",
+     "ex": [
+      "谢谢",
+      "再见"
+     ],
+     "vi": "x trong xiè: mặt lưỡi áp gần vòm miệng, cười nhẹ – gần âm “x” tiếng Việt nhưng bẹt hơn. zài: z đọc như “ch” nhẹ / “ts”, không bật hơi, lưỡi phẳng – không uốn lưỡi như zh (“tr”)."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: Cách chào – [người] + 好",
+   "html": "<p>Công thức chào cực đơn giản: <b>đối tượng + 好</b>. Đổi người được chào là đổi lời chào.</p>",
+   "table": [
+    [
+     "Câu chào",
+     "Pinyin",
+     "Dùng khi"
     ],
-    "games": [
-      "Phản xạ đối đáp: GV hô 谢谢! – lớp đáp 不客气! ; 对不起! – 没关系! Tăng tốc dần, ai đáp sai đứng dậy.",
-      "Đoán thanh: GV đọc một âm tiết, học viên giơ 1–4 ngón tay cho thanh điệu."
+    [
+     "你好！",
+     "Nǐ hǎo!",
+     "Chào 1 người (bạn bè, người lạ)"
     ],
-    "errors": [
-      "Dùng 是 trước tính từ: ❌ 我是好 / 我是忙 → 我很好 / 我很忙.",
-      "Đặt 也 sai chỗ: ❌ 也我很好 → 我也很好.",
-      "Dùng 你好吗 làm lời chào hằng ngày (người Trung chỉ hỏi khi lâu ngày gặp).",
-      "Đọc 你好 thành hai thanh 3 nặng nề, hoặc đọc 谢谢 cả hai âm thanh 4 (xiè xiè).",
-      "Đọc 再见 theo âm Hán Việt ‘tái kiến’."
+    [
+     "您好！",
+     "Nín hǎo!",
+     "Chào người lớn, khách hàng, cấp trên (kính trọng)"
     ],
-    "homework": "Hoàn thành bài tập trong game ≥ 80%; viết mỗi chữ Hán của bài 1 dòng; ghi âm hội thoại 4 câu và so với giọng mẫu; ôn thẻ từ vựng 10 phút/ngày."
+    [
+     "你们好！",
+     "Nǐmen hǎo!",
+     "Chào nhiều người"
+    ],
+    [
+     "老师好！",
+     "Lǎoshī hǎo!",
+     "Học sinh chào giáo viên"
+    ],
+    [
+     "大家好！",
+     "Dàjiā hǎo!",
+     "Chào mọi người (mở đầu phát biểu)"
+    ],
+    [
+     "早上好！",
+     "Zǎoshang hǎo!",
+     "Chào buổi sáng"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "王老师，您好！",
+     "py": "Wáng lǎoshī, nín hǎo!",
+     "vi": "Em chào thầy Vương ạ!"
+    },
+    {
+     "t": "同学们好！",
+     "py": "Tóngxuémen hǎo!",
+     "vi": "Chào các em! (giáo viên chào lớp)"
+    }
+   ],
+   "tips": [
+    "Tiếng Trung đặt <b>họ trước chức danh</b>: 王老师 (thầy Vương), 李经理 (giám đốc Lý) – giống tiếng Việt “thầy Vương” nhưng đảo vị trí."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: Câu vị ngữ tính từ – 我很好 (KHÔNG dùng 是)",
+   "html": "<p>Muốn nói “Tôi khoẻ / Tôi bận”, tiếng Trung dùng <b>Chủ ngữ + 很 + Tính từ</b>. <b>很</b> ở đây gần như chỉ để câu trọn vẹn, nghĩa “rất” rất nhẹ.</p><p>⚠️ Người học hay mang thói quen tiếng Anh (I <i>am</i> fine) sang: ❌ <i>我是好</i>. Tiếng Trung <b>không dùng 是 trước tính từ</b>.</p>",
+   "table": [
+    [
+     "Khẳng định",
+     "Phủ định (不 bù)",
+     "Câu hỏi (吗)"
+    ],
+    [
+     "我很好。",
+     "我不忙。",
+     "你忙吗？"
+    ],
+    [
+     "Wǒ hěn hǎo.",
+     "Wǒ bù máng.",
+     "Nǐ máng ma?"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我很忙。",
+     "py": "Wǒ hěn máng.",
+     "vi": "Tôi bận."
+    },
+    {
+     "t": "他也很好。",
+     "py": "Tā yě hěn hǎo.",
+     "vi": "Anh ấy cũng khoẻ. (也 đứng TRƯỚC 很, sau chủ ngữ)"
+    },
+    {
+     "t": "我不忙。",
+     "py": "Wǒ bù máng.",
+     "vi": "Tôi không bận. (phủ định dùng 不, bỏ 很)"
+    }
+   ],
+   "tips": [
+    "Vị trí trạng từ: <b>Chủ ngữ + 也 + 很 + tính từ</b>. ❌ <i>也我很好</i>, ❌ <i>我很也好</i>."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: Câu hỏi có/không với 吗",
+   "html": "<p>Lấy câu trần thuật, thêm <b>吗</b> vào cuối là thành câu hỏi – <b>không đảo trật tự</b> (dễ hơn tiếng Anh nhiều!). Muốn hỏi lại “còn bạn?” dùng <b>你呢？</b></p>",
+   "ex": [
+    {
+     "t": "你好吗？— 我很好，谢谢。你呢？— 我也很好。",
+     "py": "Nǐ hǎo ma? — Wǒ hěn hǎo, xièxie. Nǐ ne? — Wǒ yě hěn hǎo.",
+     "vi": "Bạn khoẻ không? — Tôi khoẻ, cảm ơn. Còn bạn? — Tôi cũng khoẻ."
+    },
+    {
+     "t": "你忙吗？— 我不忙。",
+     "py": "Nǐ máng ma? — Wǒ bù máng.",
+     "vi": "Bạn bận không? — Tôi không bận."
+    }
+   ],
+   "tips": [
+    "你好吗？ là câu hỏi thăm (lâu ngày gặp lại), <b>không phải</b> lời chào thông thường. Gặp hằng ngày chỉ cần 你好！"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Giờ học đầu tiên",
+   "lang": "zh-CN",
+   "note": "Lớp tiếng Trung buổi sáng. Thầy Vương chào lớp, hai bạn Tiểu Lan và Tiểu Minh. Nghe lần 1 không nhìn chữ: ai đến muộn?",
+   "lines": [
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "同学们好！",
+     "py": "Tóngxuémen hǎo!",
+     "vi": "Chào các em!"
+    },
+    {
+     "s": "同学们",
+     "g": "f",
+     "t": "老师好！",
+     "py": "Lǎoshī hǎo!",
+     "vi": "Chúng em chào thầy ạ!"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "王老师，您好吗？",
+     "py": "Wáng lǎoshī, nín hǎo ma?",
+     "vi": "Thầy Vương, thầy khoẻ không ạ?"
+    },
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "我很好，谢谢。你呢？",
+     "py": "Wǒ hěn hǎo, xièxie. Nǐ ne?",
+     "vi": "Thầy khoẻ, cảm ơn em. Còn em?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "我也很好。",
+     "py": "Wǒ yě hěn hǎo.",
+     "vi": "Em cũng khoẻ ạ."
+    },
+    {
+     "s": "小明",
+     "g": "m",
+     "t": "对不起，老师！",
+     "py": "Duìbuqǐ, lǎoshī!",
+     "vi": "Em xin lỗi thầy! (đến muộn)"
+    },
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "没关系。你忙吗？",
+     "py": "Méi guānxi. Nǐ máng ma?",
+     "vi": "Không sao. Em bận à?"
+    },
+    {
+     "s": "小明",
+     "g": "m",
+     "t": "我很忙。谢谢老师！",
+     "py": "Wǒ hěn máng. Xièxie lǎoshī!",
+     "vi": "Em bận ạ. Cảm ơn thầy!"
+    },
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "不客气。",
+     "py": "Bú kèqi.",
+     "vi": "Không có gì."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Ai xin lỗi thầy Vương?",
+     "o": [
+      "小兰 Xiǎo Lán",
+      "小明 Xiǎo Míng",
+      "王老师 Wáng lǎoshī"
+     ],
+     "a": 1,
+     "e": "小明 nói 对不起，老师！"
+    },
+    {
+     "q": "王老师 trả lời 小兰 thế nào khi được hỏi thăm?",
+     "o": [
+      "我很好 – thầy khoẻ",
+      "我很忙 – thầy bận",
+      "再见 – tạm biệt"
+     ],
+     "a": 0,
+     "e": "我很好，谢谢。你呢？"
+    },
+    {
+     "q": "小兰 nói 我也很好 nghĩa là gì?",
+     "o": [
+      "Em cũng khoẻ",
+      "Em không khoẻ",
+      "Em rất bận"
+     ],
+     "a": 0,
+     "e": "也 = cũng, 很好 = khoẻ."
+    },
+    {
+     "q": "Thầy đáp lời 对不起 bằng từ gì? (gõ chữ Hán hoặc pinyin)",
+     "a": "没关系",
+     "alt": [
+      "meiguanxi",
+      "méi guānxi"
+     ],
+     "e": "对不起 → 没关系 (không sao)."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Lời chào trong ngày",
+   "title": "小兰的一天",
+   "text": "早上，小兰对妈妈说：“妈妈，早上好！”\n\n在学校，她对王老师说：“老师好！”王老师说：“你好！”\n\n下课了，小兰对同学们说：“再见！”",
+   "py": "Zǎoshang, Xiǎo Lán duì māma shuō: “Māma, zǎoshang hǎo!”\n\nZài xuéxiào, tā duì Wáng lǎoshī shuō: “Lǎoshī hǎo!” Wáng lǎoshī shuō: “Nǐ hǎo!”\n\nXià kè le, Xiǎo Lán duì tóngxuémen shuō: “Zàijiàn!”",
+   "vi": "Buổi sáng, Tiểu Lan nói với mẹ: “Mẹ ơi, chào buổi sáng!”\n\nỞ trường, cô ấy nói với thầy Vương: “Em chào thầy!” Thầy Vương nói: “Chào em!”\n\nTan học, Tiểu Lan nói với các bạn: “Tạm biệt!”",
+   "gloss": [
+    {
+     "w": "早上",
+     "py": "zǎoshang",
+     "vi": "buổi sáng"
+    },
+    {
+     "w": "对…说",
+     "py": "duì… shuō",
+     "vi": "nói với…"
+    },
+    {
+     "w": "妈妈",
+     "py": "māma",
+     "vi": "mẹ"
+    },
+    {
+     "w": "学校",
+     "py": "xuéxiào",
+     "vi": "trường học"
+    },
+    {
+     "w": "下课",
+     "py": "xià kè",
+     "vi": "tan học, hết giờ"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Buổi sáng Tiểu Lan chào ai trước?",
+     "o": [
+      "妈妈 – mẹ",
+      "老师 – thầy giáo",
+      "同学 – bạn học"
+     ],
+     "a": 0,
+     "e": "早上，小兰对妈妈说…"
+    },
+    {
+     "q": "Tan học, Tiểu Lan nói gì với các bạn?",
+     "o": [
+      "你好",
+      "再见",
+      "谢谢"
+     ],
+     "a": 1,
+     "e": "下课了…说：“再见！”"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "你",
+     "py": "nǐ",
+     "hv": "nhĩ",
+     "parts": "亻(nhân đứng – người) + 尔 (nhĩ)",
+     "strokes": 7,
+     "vi": "bạn – “người” đứng trước mặt mình",
+     "words": "你好, 你们"
+    },
+    {
+     "c": "好",
+     "py": "hǎo",
+     "hv": "hảo",
+     "parts": "女 (nữ – phụ nữ) + 子 (tử – con)",
+     "strokes": 6,
+     "vi": "tốt – mẹ bế con là điều tốt đẹp",
+     "words": "你好, 很好"
+    },
+    {
+     "c": "我",
+     "py": "wǒ",
+     "hv": "ngã",
+     "parts": "手 (biến thể – tay) + 戈 (qua – ngọn giáo)",
+     "strokes": 7,
+     "vi": "tôi – tay cầm vũ khí bảo vệ bản thân",
+     "words": "我们"
+    },
+    {
+     "c": "们",
+     "py": "men",
+     "hv": "môn",
+     "parts": "亻(người) + 门 (môn – cửa, gợi âm)",
+     "strokes": 5,
+     "vi": "số nhiều – nhiều người trước cửa",
+     "words": "我们, 你们, 他们"
+    },
+    {
+     "c": "谢",
+     "py": "xiè",
+     "hv": "tạ",
+     "parts": "讠(ngôn – lời nói) + 身 (thân) + 寸 (thốn)",
+     "strokes": 12,
+     "vi": "cảm ơn – dùng lời nói để tạ ơn",
+     "words": "谢谢"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Chào hỏi theo tình huống",
+   "tasks": [
+    {
+     "p": "Bạn gặp giáo viên ở cổng trường buổi sáng. Chào và hỏi thăm.",
+     "model": "老师，早上好！您好吗？",
+     "py": "Lǎoshī, zǎoshang hǎo! Nín hǎo ma?",
+     "vi": "Em chào thầy buổi sáng! Thầy khoẻ không ạ?",
+     "tips": "Nhớ dùng 您 với giáo viên. 早上好 đọc zǎoshang hǎo – shang thanh nhẹ."
+    },
+    {
+     "p": "Bạn trả lời khi được hỏi 你好吗？ và hỏi lại.",
+     "model": "我很好，谢谢。你呢？",
+     "py": "Wǒ hěn hǎo, xièxie. Nǐ ne?",
+     "vi": "Mình khoẻ, cảm ơn. Còn bạn?",
+     "tips": "我很好: wǒ hěn hǎo – ba thanh 3 liền nhau, đọc tự nhiên là wó hén hǎo."
+    },
+    {
+     "p": "Bạn va vào một người lạ, xin lỗi; người đó đáp lời; rồi chào tạm biệt.",
+     "model": "对不起！— 没关系。— 再见！",
+     "py": "Duìbuqǐ! — Méi guānxi. — Zàijiàn!",
+     "vi": "Xin lỗi! — Không sao. — Tạm biệt!"
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Chép & hoàn thành hội thoại",
+   "task": "Viết lại hội thoại 4 câu (chữ Hán + pinyin): A chào B, hỏi thăm sức khoẻ; B trả lời và hỏi lại; A trả lời có dùng 也.",
+   "min": 15,
+   "model": "A：你好！你好吗？\nB：我很好，谢谢。你呢？\nA：我也很好。\nB：再见！",
+   "modelVi": "A: Chào bạn! Bạn khoẻ không? B: Mình khoẻ, cảm ơn. Còn bạn? A: Mình cũng khoẻ. B: Tạm biệt!",
+   "tips": [
+    "Dấu câu tiếng Trung: dấu chấm là 。 (vòng tròn), dấu phẩy ， , chấm hỏi ？",
+    "Mỗi chữ Hán chiếm 1 ô vuông như nhau."
+   ],
+   "checklist": [
+    "Có 你好 / 您好",
+    "Có câu hỏi với 吗",
+    "也 đứng sau chủ ngữ, trước 很",
+    "Không dùng 是 trước 好"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "你好",
+   "lang": "zh-CN",
+   "q": "Bạn vừa nghe từ nào?",
+   "o": [
+    "nǐ hǎo – chào bạn",
+    "xièxie – cảm ơn",
+    "zàijiàn – tạm biệt"
+   ],
+   "a": 0,
+   "e": "你好 nǐ hǎo (khi nói đọc ní hǎo)."
+  },
+  {
+   "t": "listen",
+   "say": "对不起",
+   "lang": "zh-CN",
+   "q": "Từ vừa nghe nghĩa là gì?",
+   "o": [
+    "Cảm ơn",
+    "Xin lỗi",
+    "Không sao"
+   ],
+   "a": 1,
+   "e": "对不起 duìbuqǐ = xin lỗi."
+  },
+  {
+   "t": "listen",
+   "say": "老师好！",
+   "lang": "zh-CN",
+   "q": "Người nói đang chào ai?",
+   "o": [
+    "Bạn học",
+    "Giáo viên",
+    "Mẹ"
+   ],
+   "a": 1,
+   "e": "老师 lǎoshī = giáo viên."
+  },
+  {
+   "t": "mc",
+   "q": "Có người nói 谢谢 (xièxie). Bạn đáp:",
+   "o": [
+    "不客气 bú kèqi",
+    "对不起 duìbuqǐ",
+    "再见 zàijiàn"
+   ],
+   "a": 0,
+   "e": "谢谢 → 不客气 (không có gì)."
+  },
+  {
+   "t": "mc",
+   "q": "Chào giám đốc lớn tuổi, bạn nói:",
+   "o": [
+    "你好！",
+    "您好！",
+    "你们好！"
+   ],
+   "a": 1,
+   "e": "您 nín là cách xưng kính trọng."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào ĐÚNG? (Tôi khoẻ)",
+   "o": [
+    "我是好。",
+    "我很好。",
+    "我好很。"
+   ],
+   "a": 1,
+   "e": "Chủ ngữ + 很 + tính từ; không dùng 是 trước tính từ."
+  },
+  {
+   "t": "mc",
+   "q": "你们 (nǐmen) nghĩa là:",
+   "o": [
+    "bạn",
+    "các bạn",
+    "chúng tôi"
+   ],
+   "a": 1,
+   "e": "你 + 们 (số nhiều) = các bạn. Chúng tôi = 我们."
+  },
+  {
+   "t": "fill",
+   "q": "我___好。(Tôi khoẻ – điền chữ Hán hoặc pinyin)",
+   "a": "很",
+   "alt": [
+    "hen",
+    "hěn"
+   ],
+   "e": "我很好 – 很 đứng trước tính từ."
+  },
+  {
+   "t": "fill",
+   "q": "你好吗？— 我很好，你___？(Còn bạn?)",
+   "a": "呢",
+   "alt": [
+    "ne"
+   ],
+   "e": "你呢？ = còn bạn thì sao?"
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu hỏi “Bạn khoẻ không?”",
+   "w": [
+    "吗",
+    "你",
+    "好"
+   ],
+   "a": "你好吗",
+   "e": "Câu trần thuật 你好 + 吗 ở cuối."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp: “Tôi cũng khoẻ.”",
+   "w": [
+    "好",
+    "也",
+    "我",
+    "很"
+   ],
+   "a": "我也很好",
+   "e": "Chủ ngữ + 也 + 很 + tính từ."
+  },
+  {
+   "t": "mc",
+   "q": "你好 khi nói thực tế đọc là:",
+   "o": [
+    "nǐ hǎo",
+    "ní hǎo",
+    "nǐ háo"
+   ],
+   "a": 1,
+   "e": "Hai thanh 3 liền nhau → thanh 3 đầu đọc thành thanh 2."
+  },
+  {
+   "t": "dict",
+   "say": "谢谢",
+   "lang": "zh-CN",
+   "a": "谢谢",
+   "py": "xièxie",
+   "e": "Gõ chữ Hán hoặc pinyin (dấu thanh không bắt buộc)."
+  },
+  {
+   "t": "dict",
+   "say": "再见",
+   "lang": "zh-CN",
+   "a": "再见",
+   "py": "zàijiàn"
+  },
+  {
+   "t": "match",
+   "q": "Nối câu với nghĩa:",
+   "pairs": [
+    [
+     "谢谢",
+     "Cảm ơn"
+    ],
+    [
+     "不客气",
+     "Không có gì"
+    ],
+    [
+     "对不起",
+     "Xin lỗi"
+    ],
+    [
+     "没关系",
+     "Không sao"
+    ],
+    [
+     "再见",
+     "Tạm biệt"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Bảng 4 thanh điệu (đã học ở Cấp 0); thẻ chữ 你 好 我 们 谢; tranh tình huống: gặp thầy, va vào người, chia tay.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: GV chào 大家好！ bằng giọng rõ, cả lớp đoán nghĩa. Ôn nhanh 4 thanh bằng tay (vẽ thanh trên không)."
+   },
+   {
+    "t": "20'",
+    "do": "Từ vựng: dạy theo cặp đối đáp (谢谢↔不客气, 对不起↔没关系, 你好↔你好). Đọc mẫu – lớp nhắc lại – từng bàn. Giới thiệu âm Hán Việt để học viên tự đoán nghĩa 老师, 同学, 再见."
+   },
+   {
+    "t": "15'",
+    "do": "Biến điệu: GV đọc nǐ + hǎo tách rời, rồi nối nhanh → ní hǎo. Cho học viên phát hiện quy tắc. Tương tự 不客气."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 1–2: công thức [người]+好; câu 我很好. Viết ❌ 我是好 lên bảng, hỏi lớp vì sao sai."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe hội thoại: lần 1 không chữ (ai đến muộn?), lần 2 có pinyin, lần 3 đọc phân vai."
+   },
+   {
+    "t": "10'",
+    "do": "Giao bài tập 1–8 trong game."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: GV giơ tranh tình huống, học viên nói câu phù hợp nhanh nhất."
+   },
+   {
+    "t": "15'",
+    "do": "Ngữ pháp 3: câu hỏi 吗 + 你呢. Luyện chuỗi hỏi – đáp theo vòng tròn."
+   },
+   {
+    "t": "15'",
+    "do": "Đọc ‘小兰的一天’: đọc pinyin trước, sau đó che pinyin đọc chữ Hán."
+   },
+   {
+    "t": "20'",
+    "do": "Chữ Hán: viết 你 好 我 们 谢 theo thứ tự nét (dùng ô tập viết trong game hoặc giấy ô li). Giải thích bộ 亻, 女, 讠."
+   },
+   {
+    "t": "20'",
+    "do": "Nói theo tình huống (3 nhiệm vụ) – đóng vai theo cặp, đổi vai. Viết hội thoại 4 câu."
+   },
+   {
+    "t": "10'",
+    "do": "Bài tập 9–15, chữa lỗi, giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Phản xạ đối đáp: GV hô 谢谢! – lớp đáp 不客气! ; 对不起! – 没关系! Tăng tốc dần, ai đáp sai đứng dậy.",
+   "Đoán thanh: GV đọc một âm tiết, học viên giơ 1–4 ngón tay cho thanh điệu."
+  ],
+  "errors": [
+   "Dùng 是 trước tính từ: ❌ 我是好 / 我是忙 → 我很好 / 我很忙.",
+   "Đặt 也 sai chỗ: ❌ 也我很好 → 我也很好.",
+   "Dùng 你好吗 làm lời chào hằng ngày (người Trung chỉ hỏi khi lâu ngày gặp).",
+   "Đọc 你好 thành hai thanh 3 nặng nề, hoặc đọc 谢谢 cả hai âm thanh 4 (xiè xiè).",
+   "Đọc 再见 theo âm Hán Việt ‘tái kiến’."
+  ],
+  "homework": "Hoàn thành bài tập trong game ≥ 80%; viết mỗi chữ Hán của bài 1 dòng; ghi âm hội thoại 4 câu và so với giọng mẫu; ôn thẻ từ vựng 10 phút/ngày."
+ }
 }

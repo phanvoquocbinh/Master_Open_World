@@ -1,111 +1,977 @@
 {
-  "title": "Bài thi cuối cấp HSK 4 (mô phỏng)",
-  "time": 100,
-  "pass": 70,
-  "intro": "Đề tự soạn, mô phỏng cấu trúc HSK 4 (rút gọn): 听力 Nghe 27 câu (~30 phút) – 阅读 Đọc 25 câu (~40 phút) – 书写 Viết 10 câu sắp xếp + 5 câu đặt câu với từ cho sẵn (~25 phút) – 口语 Nói (tự chấm). Phần tự chấm có 62 câu; đạt khi đúng ≥ 70% (≥ 44 câu). Phần đặt câu và phần nói: tự chấm theo tiêu chí và so với bài mẫu. Lưu ý phần nghe: giọng máy đọc cả nhãn 男/女 (nam/nữ) trước lời mỗi người – đó là tín hiệu đổi người nói. Mỗi câu nghe tối đa 2 lần, KHÔNG xem lời thoại. (Đề HSK 4 thật có 100 câu, 300 điểm, đạt từ 180 điểm – đề này giúp bạn làm quen dạng bài và tự đánh giá trước khi thi thật.)",
-  "sections": [
-    {"h": "第一部分 · 听力 – Nghe đoạn ngắn, phán đoán đúng/sai (10 câu)", "intro": "Nghe một đoạn ngắn, sau đó xem câu có dấu ★: nội dung câu ★ khớp với đoạn nghe chọn 对 (đúng), không khớp chọn 错 (sai).", "items": [
-      {"t": "listen", "say": "我已经在这家公司工作三年了。虽然工资不算高，但是同事们都很友好，工作也很有意思，所以我一直没有换工作。", "lang": "zh-CN", "q": "★ 说话人对现在的工作比较满意。", "o": ["对 – Đúng", "错 – Sai"], "a": 0, "e": "Đồng nghiệp thân thiện, công việc thú vị, không muốn đổi việc → khá hài lòng."},
-      {"t": "listen", "say": "由于最近订单太多，经理让我们这个周末都来加班。我本来打算周末带孩子去海边玩儿，现在只好推迟到下个月了。", "lang": "zh-CN", "q": "★ 说话人这个周末要去海边。", "o": ["对 – Đúng", "错 – Sai"], "a": 1, "e": "本来打算… 只好推迟到下个月 → cuối tuần này phải tăng ca, KHÔNG đi biển."},
-      {"t": "listen", "say": "即使工作再忙，小王每天晚上也会抽出半个小时学汉语。现在他已经能用汉语跟中国客人简单地交流了。", "lang": "zh-CN", "q": "★ 小王每天都学习汉语。", "o": ["对 – Đúng", "错 – Sai"], "a": 0, "e": "即使工作再忙，…每天晚上也会抽出半个小时学汉语."},
-      {"t": "listen", "say": "很多人以为中药没有西药那么有效，其实只要对症下药，中药的效果也很不错，而且对身体的伤害比较小。", "lang": "zh-CN", "q": "★ 说话人认为中药一点儿用也没有。", "o": ["对 – Đúng", "错 – Sai"], "a": 1, "e": "Người nói cho rằng Đông y dùng đúng bệnh thì hiệu quả khá tốt (以为 là suy nghĩ sai của người khác)."},
-      {"t": "listen", "say": "网上购物虽然方便，但是我们一定要仔细看商品的评价，否则很容易买到质量不好的东西。", "lang": "zh-CN", "q": "★ 网上购物时要注意看评价。", "o": ["对 – Đúng", "错 – Sai"], "a": 0, "e": "一定要仔细看商品的评价，否则…"},
-      {"t": "listen", "say": "为了减少污染，这个城市从明年开始，不允许摩托车进入市中心。市民可以乘坐地铁和公共汽车。", "lang": "zh-CN", "q": "★ 从明年开始，不能骑摩托车进市中心。", "o": ["对 – Đúng", "错 – Sai"], "a": 0, "e": "不允许摩托车进入市中心 = không cho xe máy vào trung tâm."},
-      {"t": "listen", "say": "我原来住在市中心，每天上班只要十分钟。后来因为房租太贵，搬到了郊区，现在路上要花一个多小时。", "lang": "zh-CN", "q": "★ 说话人现在住在市中心。", "o": ["对 – Đúng", "错 – Sai"], "a": 1, "e": "原来 = trước kia ở trung tâm; bây giờ đã chuyển ra ngoại ô (郊区)."},
-      {"t": "listen", "say": "孩子考得不好的时候，父母不应该只是批评，而应该和孩子一起找原因。批评太多，孩子反而会失去信心。", "lang": "zh-CN", "q": "★ 说话人认为父母应该多批评孩子。", "o": ["对 – Đúng", "错 – Sai"], "a": 1, "e": "批评太多，孩子反而会失去信心 → không nên phê bình nhiều."},
-      {"t": "listen", "say": "这家饭馆的菜不仅好吃，而且价格也不贵，所以每天中午都有很多人在门口排队。", "lang": "zh-CN", "q": "★ 这家饭馆的菜很贵。", "o": ["对 – Đúng", "错 – Sai"], "a": 1, "e": "价格也不贵 = giá cũng không đắt."},
-      {"t": "listen", "say": "不管遇到什么困难，他都不会轻易放弃。正是因为这样，他才能在三年里从普通员工成为部门经理。", "lang": "zh-CN", "q": "★ 他是一个很容易放弃的人。", "o": ["对 – Đúng", "错 – Sai"], "a": 1, "e": "不管遇到什么困难，他都不会轻易放弃 → không dễ bỏ cuộc."}
-    ]},
-    {"h": "第二部分 · 听力 – Hội thoại ngắn (10 câu)", "intro": "Mỗi câu là một đoạn hội thoại hai lượt lời giữa nam (男) và nữ (女), cuối cùng có câu hỏi (问). Nghe và chọn đáp án đúng.", "items": [
-      {"t": "listen", "say": "男：小李，你怎么还没下班？女：这个月的报告明天就要交，我还有一半没写完呢。问：女的为什么还没下班？", "lang": "zh-CN", "q": "Nghe hội thoại và trả lời câu hỏi cuối.", "o": ["报告还没写完", "她在等男的", "公司在开会", "她想多挣钱"], "a": 0, "e": "我还有一半没写完 – báo cáo chưa viết xong."},
-      {"t": "listen", "say": "女：你昨天面试怎么样？男：别提了，面试官问的问题我竟然一个都没回答好。问：男的觉得面试怎么样？", "lang": "zh-CN", "q": "Nghe hội thoại và trả lời câu hỏi cuối.", "o": ["很成功", "不太好", "很轻松", "还没开始"], "a": 1, "e": "别提了…竟然一个都没回答好 → phỏng vấn không tốt."},
-      {"t": "listen", "say": "男：大夫，我嗓子疼，还有点儿发烧。女：我看看。估计是感冒了，先给你开点儿药吧。问：他们最可能在哪儿？", "lang": "zh-CN", "q": "Nghe hội thoại và trả lời câu hỏi cuối.", "o": ["医院", "学校", "银行", "超市"], "a": 0, "e": "大夫, 嗓子疼, 发烧, 开药 → bệnh viện / phòng khám."},
-      {"t": "listen", "say": "女：这件衣服打八折以后多少钱？男：原价五百，打八折就是四百。问：这件衣服现在多少钱？", "lang": "zh-CN", "q": "Nghe hội thoại và trả lời câu hỏi cuối.", "o": ["四百", "五百", "八十", "一百"], "a": 0, "e": "500 × 80% = 400."},
-      {"t": "listen", "say": "男：你为什么每天骑自行车上班？女：一是为了锻炼身体，二是为了保护环境。问：女的为什么骑自行车上班？", "lang": "zh-CN", "q": "Nghe hội thoại và trả lời câu hỏi cuối.", "o": ["没有钱买车", "为了健康和环保", "公司离家很近", "她不会开车"], "a": 1, "e": "为了锻炼身体…为了保护环境 → vì sức khoẻ và môi trường."},
-      {"t": "listen", "say": "女：听说你搬到郊区了？男：是啊，房子大，空气也好，就是离公司远了点儿。问：男的觉得郊区有什么缺点？", "lang": "zh-CN", "q": "Nghe hội thoại và trả lời câu hỏi cuối.", "o": ["房子小", "空气不好", "离公司远", "房租贵"], "a": 2, "e": "就是离公司远了点儿 – chỉ có điều hơi xa công ty."},
-      {"t": "listen", "say": "男：这条消息是真的吗？大家都在转。女：我查了一下官方网站，根本没有这回事，你千万别转了。问：女的是什么意思？", "lang": "zh-CN", "q": "Nghe hội thoại và trả lời câu hỏi cuối.", "o": ["消息是假的", "消息是真的", "应该多转发", "网站坏了"], "a": 0, "e": "根本没有这回事 = hoàn toàn không có chuyện đó → tin giả."},
-      {"t": "listen", "say": "女：你儿子最近学习怎么样？男：尽管我们给他报了好几个补习班，成绩却一点儿也没提高。问：男的儿子成绩怎么样？", "lang": "zh-CN", "q": "Nghe hội thoại và trả lời câu hỏi cuối.", "o": ["提高了很多", "没有提高", "是全班第一", "不太清楚"], "a": 1, "e": "尽管…成绩却一点儿也没提高."},
-      {"t": "listen", "say": "男：明天的会你能参加吗？女：真不好意思，我明天要去机场接客户，恐怕参加不了。问：女的明天要做什么？", "lang": "zh-CN", "q": "Nghe hội thoại và trả lời câu hỏi cuối.", "o": ["开会", "去机场接人", "出差", "在家休息"], "a": 1, "e": "我明天要去机场接客户 – ra sân bay đón khách hàng."},
-      {"t": "listen", "say": "女：你学汉语有什么好方法？男：我的方法很简单，就是多听多说，无论多忙，每天都坚持。问：男的学汉语的方法是什么？", "lang": "zh-CN", "q": "Nghe hội thoại và trả lời câu hỏi cuối.", "o": ["只看书", "多听多说，每天坚持", "上补习班", "看电影"], "a": 1, "e": "就是多听多说，无论多忙，每天都坚持."}
-    ]},
-    {"h": "第三部分 · 听力 – Bài phỏng vấn dài (5 câu + 2 câu chép chính tả)", "intro": "Nghe cuộc phỏng vấn trên đài phát thanh giữa phóng viên (记者) và anh Nguyễn – một thanh niên về quê bán trái cây online. Nghe 2 lần, không xem lời thoại, rồi trả lời câu hỏi. Sau đó nghe chép 2 câu.", "dialog": {"lang": "zh-CN", "lines": [
-      {"s": "记者", "g": "f", "t": "阮先生，听说你大学毕业以后放弃了城市的工作，回到家乡开网店，是真的吗？", "py": "Ruǎn xiānsheng, tīngshuō nǐ dàxué bìyè yǐhòu fàngqì le chéngshì de gōngzuò, huídào jiāxiāng kāi wǎngdiàn, shì zhēn de ma?", "vi": "Anh Nguyễn, nghe nói tốt nghiệp đại học anh đã bỏ công việc ở thành phố, về quê mở cửa hàng online, có thật không?"},
-      {"s": "阮先生", "g": "m", "t": "是真的。很多人都以为我疯了，连我父母一开始都不支持。", "py": "Shì zhēn de. Hěn duō rén dōu yǐwéi wǒ fēng le, lián wǒ fùmǔ yì kāishǐ dōu bù zhīchí.", "vi": "Thật đấy. Nhiều người tưởng tôi điên, đến bố mẹ tôi lúc đầu cũng không ủng hộ."},
-      {"s": "记者", "g": "f", "t": "你为什么做这个决定呢？", "py": "Nǐ wèishénme zuò zhège juédìng ne?", "vi": "Vì sao anh đưa ra quyết định này?"},
-      {"s": "阮先生", "g": "m", "t": "我家乡的水果质量特别好，可是由于交通不方便，农民往往只能低价卖给商人。于是我想，为什么不通过网络直接卖给顾客呢？", "py": "Wǒ jiāxiāng de shuǐguǒ zhìliàng tèbié hǎo, kěshì yóuyú jiāotōng bù fāngbiàn, nóngmín wǎngwǎng zhǐ néng dījià mài gěi shāngrén. Yúshì wǒ xiǎng, wèishénme bù tōngguò wǎngluò zhíjiē mài gěi gùkè ne?", "vi": "Trái cây quê tôi chất lượng rất tốt, nhưng do giao thông bất tiện, nông dân thường chỉ bán được giá rẻ cho thương lái. Thế là tôi nghĩ, sao không bán thẳng cho khách qua mạng?"},
-      {"s": "记者", "g": "f", "t": "刚开始顺利吗？", "py": "Gāng kāishǐ shùnlì ma?", "vi": "Lúc đầu có thuận lợi không?"},
-      {"s": "阮先生", "g": "m", "t": "一点儿也不顺利。第一年，因为包装不好，很多水果在路上坏了，顾客要求退货，我们反而亏了不少钱。", "py": "Yìdiǎnr yě bú shùnlì. Dì-yī nián, yīnwèi bāozhuāng bù hǎo, hěn duō shuǐguǒ zài lùshang huài le, gùkè yāoqiú tuìhuò, wǒmen fǎn'ér kuī le bù shǎo qián.", "vi": "Không thuận lợi chút nào. Năm đầu, vì đóng gói không tốt, nhiều trái cây hỏng trên đường, khách đòi trả hàng, chúng tôi ngược lại còn lỗ khá nhiều tiền."},
-      {"s": "记者", "g": "f", "t": "那时候你想过放弃吗？", "py": "Nà shíhou nǐ xiǎngguo fàngqì ma?", "vi": "Khi đó anh có nghĩ đến chuyện bỏ cuộc không?"},
-      {"s": "阮先生", "g": "m", "t": "想过。但是我觉得，事情再难，也不能半途而废。后来我们换了包装，还和快递公司合作，问题慢慢解决了。", "py": "Xiǎngguo. Dànshì wǒ juéde, shìqing zài nán, yě bù néng bàntú'érfèi. Hòulái wǒmen huàn le bāozhuāng, hái hé kuàidì gōngsī hézuò, wèntí mànmàn jiějué le.", "vi": "Có nghĩ. Nhưng tôi thấy việc khó đến mấy cũng không thể bỏ dở. Sau đó chúng tôi đổi cách đóng gói, hợp tác với công ty chuyển phát, vấn đề dần được giải quyết."},
-      {"s": "记者", "g": "f", "t": "现在网店怎么样了？", "py": "Xiànzài wǎngdiàn zěnmeyàng le?", "vi": "Bây giờ cửa hàng online thế nào rồi?"},
-      {"s": "阮先生", "g": "m", "t": "现在我们每个月能卖三十多吨水果，不仅帮助了一百多家农民，还吸引了好几个年轻人回到家乡工作。", "py": "Xiànzài wǒmen měi ge yuè néng mài sānshí duō dūn shuǐguǒ, bùjǐn bāngzhù le yìbǎi duō jiā nóngmín, hái xīyǐn le hǎo jǐ ge niánqīngrén huídào jiāxiāng gōngzuò.", "vi": "Giờ mỗi tháng chúng tôi bán được hơn 30 tấn trái cây, không chỉ giúp hơn một trăm hộ nông dân mà còn thu hút được mấy bạn trẻ về quê làm việc."},
-      {"s": "记者", "g": "f", "t": "对于想回家乡创业的年轻人，你有什么建议？", "py": "Duìyú xiǎng huí jiāxiāng chuàngyè de niánqīngrén, nǐ yǒu shénme jiànyì?", "vi": "Với những bạn trẻ muốn về quê khởi nghiệp, anh có lời khuyên gì?"},
-      {"s": "阮先生", "g": "m", "t": "我认为最重要的不是钱，而是了解顾客需要什么。另外，千万不要害怕失败。", "py": "Wǒ rènwéi zuì zhòngyào de bú shì qián, ér shì liǎojiě gùkè xūyào shénme. Lìngwài, qiānwàn bú yào hàipà shībài.", "vi": "Tôi cho rằng quan trọng nhất không phải là tiền, mà là hiểu khách hàng cần gì. Ngoài ra, tuyệt đối đừng sợ thất bại."}
-    ]}, "items": [
-      {"t": "mc", "q": "阮先生大学毕业以后做了什么？", "o": ["回家乡开网店", "在城市工作", "出国留学", "当了记者"], "a": 0, "e": "放弃了城市的工作，回到家乡开网店。"},
-      {"t": "mc", "q": "开始的时候，他的父母是什么态度？", "o": ["非常支持", "帮他开店", "一开始不支持", "没有意见"], "a": 2, "e": "连我父母一开始都不支持。"},
-      {"t": "mc", "q": "以前农民为什么只能低价卖水果？", "o": ["水果质量差", "交通不方便", "他们不想卖", "顾客太少"], "a": 1, "e": "由于交通不方便，农民往往只能低价卖给商人。"},
-      {"t": "mc", "q": "第一年他们为什么亏钱？", "o": ["水果太贵", "没有顾客", "快递公司太远", "包装不好，水果在路上坏了"], "a": 3, "e": "因为包装不好，很多水果在路上坏了，顾客要求退货。"},
-      {"t": "mc", "q": "阮先生认为创业最重要的是什么？", "o": ["了解顾客需要什么", "有很多钱", "好看的包装", "大的公司"], "a": 0, "e": "最重要的不是钱，而是了解顾客需要什么。"},
-      {"t": "dict", "say": "事情再难，也不能半途而废。", "lang": "zh-CN", "a": "事情再难，也不能半途而废。", "py": "Shìqing zài nán, yě bù néng bàntú'érfèi.", "e": "再…也… + thành ngữ 半途而废."},
-      {"t": "dict", "say": "千万不要害怕失败。", "lang": "zh-CN", "a": "千万不要害怕失败。", "py": "Qiānwàn bú yào hàipà shībài.", "e": "千万不要 = tuyệt đối đừng; 害怕 = sợ."}
-    ]},
-    {"h": "第四部分 · 阅读 – Chọn từ điền vào chỗ trống (10 câu)", "intro": "Chọn từ thích hợp nhất cho mỗi chỗ trống.", "items": [
-      {"t": "mc", "q": "___明天下大雨，比赛也会按时举行。", "o": ["虽然", "即使", "因为", "既然"], "a": 1, "e": "Vế sau có 也 + giả định (mai mưa) → 即使…也…"},
-      {"t": "mc", "q": "这个周末我们___计划去海边捡垃圾。", "o": ["根据", "按照", "对于", "关于"], "a": 1, "e": "Làm theo kế hoạch → 按照计划."},
-      {"t": "mc", "q": "我买了一本___中国历史的书。", "o": ["对于", "关于", "对", "通过"], "a": 1, "e": "Nội dung cuốn sách → 关于…的书."},
-      {"t": "mc", "q": "___大家的共同努力，我们终于按时完成了任务。", "o": ["为了", "否则", "由于", "何况"], "a": 2, "e": "Nguyên nhân (nhờ mọi người cố gắng) → 由于."},
-      {"t": "mc", "q": "你快点儿走吧，___就赶不上最后一班地铁了。", "o": ["于是", "而且", "尽管", "否则"], "a": 3, "e": "Lời khuyên + hậu quả → 否则 (nếu không thì)."},
-      {"t": "mc", "q": "我让他少玩儿手机，没想到他___玩儿得更多了。", "o": ["而且", "反而", "往往", "不如"], "a": 1, "e": "Kết quả trái với mong muốn → 反而."},
-      {"t": "mc", "q": "连专家都很难判断这张照片的真假，___普通人呢？", "o": ["而且", "尽管", "何况", "因此"], "a": 2, "e": "连…都…，何况…呢？ = huống chi."},
-      {"t": "mc", "q": "这次考试他的___非常好，考了全班第一。", "o": ["效果", "质量", "成绩", "水平"], "a": 2, "e": "Điểm thi → 成绩."},
-      {"t": "mc", "q": "在家躺着___出去散散步，对身体更好。", "o": ["没有", "比", "跟", "不如"], "a": 3, "e": "A 不如 B = A không bằng B (đi dạo tốt hơn nằm)."},
-      {"t": "mc", "q": "听到这个消息，大家都大吃一___。", "o": ["急", "惊", "紧", "静"], "a": 1, "e": "Thành ngữ 大吃一惊 = giật mình kinh ngạc."}
-    ]},
-    {"h": "第五部分 · 阅读 – Sắp xếp câu thành đoạn (5 câu)", "intro": "Sắp xếp 3 vế câu thành một đoạn hợp lý. Mẹo: vế có 由于/即使/尽管/虽然 thường đứng trước; vế có 于是/所以/否则/而是/反而 đứng sau.", "items": [
-      {"t": "order", "q": "Sắp xếp 3 vế thành đoạn văn hợp lý:", "w": ["于是他决定每天早上去公园跑步", "上个月体检的时候，医生说他太胖了", "现在他已经瘦了五公斤"], "a": "上个月体检的时候，医生说他太胖了，于是他决定每天早上去公园跑步，现在他已经瘦了五公斤。", "e": "Nguyên nhân (医生说他太胖) → 于是 + hành động → 现在 + kết quả."},
-      {"t": "order", "q": "Sắp xếp 3 vế thành câu hợp lý:", "w": ["而是因为喜欢中国文化", "她学汉语", "不是为了找工作"], "a": "她学汉语不是为了找工作，而是因为喜欢中国文化。", "e": "Chủ ngữ + 不是… + 而是…"},
-      {"t": "order", "q": "Sắp xếp 3 vế thành câu hợp lý:", "w": ["他也每天坚持学习一个小时", "即使工作再忙", "所以进步得非常快"], "a": "即使工作再忙，他也每天坚持学习一个小时，所以进步得非常快。", "e": "即使… đứng đầu → 也… → 所以 + kết quả."},
-      {"t": "order", "q": "Sắp xếp 3 vế thành câu hợp lý:", "w": ["否则很容易买到假货", "网上购物的时候", "一定要仔细看其他顾客的评价"], "a": "网上购物的时候，一定要仔细看其他顾客的评价，否则很容易买到假货。", "e": "Thời gian → lời khuyên → 否则 + hậu quả."},
-      {"t": "order", "q": "Sắp xếp 3 vế thành câu hợp lý:", "w": ["反而会失去学习的兴趣", "很多父母给孩子报了好几个补习班", "可是孩子太累了"], "a": "很多父母给孩子报了好几个补习班，可是孩子太累了，反而会失去学习的兴趣。", "e": "Hiện tượng → 可是 (chuyển ngoặt) → 反而 (kết quả trái mong đợi)."}
-    ]},
-    {"h": "第六部分 · 阅读 – Đọc đoạn ngắn và trả lời (5 câu)", "intro": "Đọc mỗi đoạn văn ngắn, chọn đáp án đúng cho câu có dấu ★.", "items": [
-      {"t": "mc", "q": "“很多人认为，加班越多，完成的工作就越多。其实并不是这样。人累了以后，工作效率会降低，还容易出错。所以，与其每天加班到半夜，不如提高白天的工作效率。” ★ 这段话主要告诉我们：", "o": ["要多加班", "加班不一定能提高效率", "白天不用工作", "晚上效率最高"], "a": 1, "e": "其实并不是这样…人累了以后，工作效率会降低."},
-      {"t": "mc", "q": "“越南人喝咖啡的习惯很特别。很多人喜欢在咖啡里加炼乳（sữa đặc），又甜又香。在河内的老街上，常常能看到人们坐在路边的小椅子上，一边喝咖啡，一边和朋友聊天。” ★ 根据这段话，在河内老街上人们常常：", "o": ["在路边一边喝咖啡一边聊天", "在家里喝茶", "喝不加糖的咖啡", "只在周末喝咖啡"], "a": 0, "e": "坐在路边的小椅子上，一边喝咖啡，一边和朋友聊天."},
-      {"t": "mc", "q": "“学习外语的时候，很多人害怕说错，所以不敢开口。其实，说错是学习的一部分。只有多说、多错、多改，才能真正提高口语水平。” ★ 作者的意思是：", "o": ["说错了很丢脸", "应该少说多写", "口语不重要", "学外语不要怕说错"], "a": 3, "e": "说错是学习的一部分…只有多说、多错、多改，才能…"},
-      {"t": "mc", "q": "“我们小区从这个月开始实行垃圾分类，每家要把垃圾分成可回收垃圾、厨房垃圾和其他垃圾三类。刚开始大家都觉得麻烦，但是一个月以后，小区里的垃圾减少了三分之一。” ★ 实行垃圾分类以后：", "o": ["垃圾增加了", "大家都不同意", "垃圾减少了", "只有两类垃圾"], "a": 2, "e": "一个月以后，小区里的垃圾减少了三分之一."},
-      {"t": "mc", "q": "“现在很多老人也开始用智能手机。他们不仅用手机和孩子视频聊天，还学会了网上购物。不过，由于对网络不太熟悉，老人也更容易相信假消息。” ★ 这段话没有提到老人用手机做什么？", "o": ["视频聊天", "网上购物", "玩游戏", "看消息"], "a": 2, "e": "Đoạn văn nói 视频聊天, 网上购物, (đọc) 假消息; không nhắc đến chơi game."}
-    ]},
-    {"h": "第七部分 · 阅读 – Đọc hiểu bài dài (5 câu)", "intro": "Đọc bài văn và trả lời câu hỏi. Mẹo: đọc câu hỏi trước, sau đó tìm thông tin trong bài.", "read": {"title": "明天再说？", "text": "你有没有这样的经历：本来计划今天写完报告，可是先看了一会儿手机，又去倒了一杯水，不知不觉，一个下午就过去了。最后，你只好对自己说：“明天再说吧。”\n\n心理学家把这种习惯叫做“拖延”。根据一项调查，百分之八十的大学生和上班族都有拖延的问题。很多人以为拖延是因为懒，其实并不完全是这样。研究发现，人们往往不是不想做，而是害怕做不好，或者觉得任务太大，不知道从哪儿开始。\n\n那么，怎样才能改变这个习惯呢？专家给了几个建议。第一，把大任务分成几个小任务，比如“写报告”可以分成“找材料”“写大纲”“写第一段”。每完成一个小任务，就给自己一点儿鼓励。第二，工作的时候把手机放远一点儿，否则你很难集中注意力。第三，不要等到“完美”才开始，先做起来，再慢慢改。\n\n改变习惯并不容易，但只要每天进步一点点，你就会发现，“明天再说”的事情越来越少了。", "gloss": [
-      {"w": "心理学家", "py": "xīnlǐxuéjiā", "vi": "nhà tâm lý học"},
-      {"w": "拖延", "py": "tuōyán", "vi": "trì hoãn, chần chừ"},
-      {"w": "大纲", "py": "dàgāng", "vi": "dàn ý"},
-      {"w": "集中注意力", "py": "jízhōng zhùyìlì", "vi": "tập trung sự chú ý"},
-      {"w": "完美", "py": "wánměi", "vi": "hoàn hảo"}
-    ]}, "items": [
-      {"t": "mc", "q": "第一段中，“你”为什么没有写完报告？", "o": ["报告太难", "时间被看手机等小事浪费了", "老板不让写", "生病了"], "a": 1, "e": "先看了一会儿手机，又去倒了一杯水，不知不觉，一个下午就过去了."},
-      {"t": "mc", "q": "根据调查，有拖延问题的大学生和上班族占多少？", "o": ["百分之二十", "百分之五十", "百分之八十", "百分之百"], "a": 2, "e": "百分之八十的大学生和上班族都有拖延的问题."},
-      {"t": "mc", "q": "研究发现，人们拖延往往是因为什么？", "o": ["害怕做不好，或不知道从哪儿开始", "太懒了", "工作太少", "没有手机"], "a": 0, "e": "往往不是不想做，而是害怕做不好，或者觉得任务太大，不知道从哪儿开始."},
-      {"t": "mc", "q": "下面哪个不是专家的建议？", "o": ["把大任务分成小任务", "工作时把手机放远一点儿", "等到完美再开始", "完成小任务后鼓励自己"], "a": 2, "e": "Bài khuyên 不要等到“完美”才开始 – ngược với lựa chọn này."},
-      {"t": "mc", "q": "这篇文章最合适的题目是：", "o": ["怎样改变拖延的习惯", "手机的好处", "怎样写报告", "大学生的生活"], "a": 0, "e": "Toàn bài nói về thói quen trì hoãn và cách thay đổi."}
-    ]},
-    {"h": "第八部分 · 书写 – Sắp xếp từ thành câu (10 câu) + Đặt câu với từ cho sẵn", "intro": "Phần 1 (tự chấm): sắp xếp các từ/cụm từ thành câu hoàn chỉnh. Phần 2 (tự chấm theo tiêu chí): đặt câu với từ cho sẵn theo tình huống – trong đề HSK 4 thật, mỗi từ đi kèm một bức tranh; ở đây tình huống được mô tả bằng lời.", "items": [
-      {"t": "order", "q": "Sắp xếp thành câu hoàn chỉnh:", "w": ["被", "那本书", "借走了", "弟弟"], "a": "那本书被弟弟借走了。", "e": "Câu bị động: Tân ngữ + 被 + người làm + V + bổ ngữ."},
-      {"t": "order", "q": "Sắp xếp thành câu hoàn chỉnh:", "w": ["这个问题", "大家的", "引起了", "讨论"], "a": "这个问题引起了大家的讨论。", "e": "引起 + 讨论 (sự tranh luận)."},
-      {"t": "order", "q": "Sắp xếp thành câu hoàn chỉnh:", "w": ["没有", "我的汉语", "他的那么流利"], "a": "我的汉语没有他的那么流利。", "e": "A 没有 B 那么 + Adj."},
-      {"t": "order", "q": "Sắp xếp thành câu hoàn chỉnh:", "w": ["把", "请", "发给我", "你的简历"], "a": "请把你的简历发给我。", "e": "请 + 把 + tân ngữ + V + 给 + người."},
-      {"t": "order", "q": "Sắp xếp thành câu hoàn chỉnh:", "w": ["打电话", "无论多忙", "我都会", "给妈妈"], "a": "无论多忙，我都会给妈妈打电话。", "e": "无论 + 多 + Adj，chủ ngữ + 都 + V."},
-      {"t": "order", "q": "Sắp xếp thành câu hoàn chỉnh:", "w": ["竟然", "我的钱包", "被小偷", "偷走了"], "a": "我的钱包竟然被小偷偷走了。", "e": "Chủ ngữ + 竟然 + 被… (phó từ đứng trước 被)."},
-      {"t": "order", "q": "Sắp xếp thành câu hoàn chỉnh:", "w": ["上班", "为了保护环境", "骑自行车", "他每天"], "a": "为了保护环境，他每天骑自行车上班。", "e": "为了 + mục đích đứng đầu câu."},
-      {"t": "order", "q": "Sắp xếp thành câu hoàn chỉnh:", "w": ["不如", "堵车的时候", "坐地铁快", "打车"], "a": "堵车的时候，打车不如坐地铁快。", "e": "A 不如 B + Adj."},
-      {"t": "order", "q": "Sắp xếp thành câu hoàn chỉnh:", "w": ["是否", "请确认", "收到了", "您", "商品"], "a": "请确认您是否收到了商品。", "e": "请确认 + chủ ngữ + 是否 + V."},
-      {"t": "order", "q": "Sắp xếp thành câu hoàn chỉnh:", "w": ["一模一样", "这两件衣服", "看起来"], "a": "这两件衣服看起来一模一样。", "e": "Chủ ngữ + 看起来 + thành ngữ (vị ngữ)."}
-    ], "write": {"task": "Đặt 5 câu, mỗi câu dùng một từ cho sẵn, phù hợp với tình huống: ① 堵车 – đường phố đông nghẹt xe giờ tan tầm; ② 熬夜 – một người ngồi trước máy tính lúc 2 giờ sáng; ③ 打折 – cửa hàng treo biển giảm giá; ④ 垃圾 – một người đang phân loại rác vào ba thùng; ⑤ 鼓励 – người mẹ vỗ vai con sau khi con thi không tốt.", "min": 50, "model": "① 下班的时候这条路堵车堵得很厉害，我们晚到了半个小时。\n② 为了明天的考试，他昨天熬夜熬到了两点。\n③ 这家商店正在打折，所有衣服都打八折。\n④ 我们应该按照规定把垃圾分成三类。\n⑤ 儿子没考好，妈妈一直鼓励他千万别放弃。", "modelVi": "① Giờ tan làm con đường này tắc kinh khủng, chúng tôi đến muộn nửa tiếng. ② Vì kỳ thi ngày mai, hôm qua anh ấy thức đến 2 giờ. ③ Cửa hàng này đang giảm giá, tất cả quần áo giảm 20%. ④ Chúng ta nên phân rác thành ba loại theo quy định. ⑤ Con thi không tốt, mẹ luôn động viên con tuyệt đối đừng bỏ cuộc.", "rubric": ["Mỗi câu dùng đúng từ cho sẵn, đúng nghĩa và đúng tình huống (2 điểm/câu, tổng 10 điểm)", "Câu đủ chủ ngữ – vị ngữ, dài ≥ 8 chữ, có thêm thành phần (thời gian, nguyên nhân, mức độ…)", "Không sai ngữ pháp, không sai chữ Hán, dùng dấu câu tiếng Trung", "Cộng điểm nếu dùng tự nhiên cấu trúc HSK 4 (为了, 按照, 即使, 千万…); câu quá ngắn kiểu “他堵车。” chỉ được 1 điểm"]}},
-    {"h": "第九部分 · 口语 – Nói (tự chấm)", "intro": "Ghi âm từng nhiệm vụ, nghe lại và tự chấm theo tiêu chí; so sánh với câu trả lời mẫu. Nếu học cùng giáo viên, giáo viên chấm trực tiếp.", "speak": {"tasks": [
-      {"p": "Nghe – nhắc lại: đọc to câu sau, đúng thanh điệu và ngắt nghỉ.", "model": "即使工作再忙，我也每天坚持学习汉语。", "py": "Jíshǐ gōngzuò zài máng, wǒ yě měi tiān jiānchí xuéxí Hànyǔ.", "vi": "Dù công việc bận đến mấy, ngày nào tôi cũng kiên trì học tiếng Trung."},
-      {"p": "Mô tả tình huống (thay cho tranh) trong 1 phút: Một gia đình đang ăn tối, nhưng ai cũng cúi đầu nhìn điện thoại. Bạn thấy gì? Bạn nghĩ gì?", "model": "这家人在吃晚饭，可是每个人都低着头看手机，没有人说话。我觉得这种情况现在很普遍。手机虽然方便，但是不应该影响家人之间的交流。我建议吃饭的时候大家把手机放在一边，多聊聊天。", "py": "Zhè jiā rén zài chī wǎnfàn, kěshì měi ge rén dōu dīzhe tóu kàn shǒujī, méiyǒu rén shuōhuà. Wǒ juéde zhè zhǒng qíngkuàng xiànzài hěn pǔbiàn. Shǒujī suīrán fāngbiàn, dànshì bù yīnggāi yǐngxiǎng jiārén zhī jiān de jiāoliú. Wǒ jiànyì chī fàn de shíhou dàjiā bǎ shǒujī fàng zài yìbiān, duō liáoliao tiān.", "vi": "Gia đình này đang ăn tối, nhưng ai cũng cúi đầu nhìn điện thoại, không ai nói chuyện. Tôi thấy tình trạng này giờ rất phổ biến. Điện thoại tuy tiện, nhưng không nên ảnh hưởng đến sự giao tiếp trong gia đình. Tôi đề nghị khi ăn cơm mọi người để điện thoại sang một bên, trò chuyện nhiều hơn."},
-      {"p": "Trả lời câu hỏi (1,5 phút): 你认为年轻人应该留在大城市工作，还是回家乡发展？为什么？", "model": "我认为这要看每个人的情况。大城市机会多，收入也高，适合想积累经验的年轻人。但是大城市的房租和压力都很大。现在随着网络和交通的发展，在家乡也能有很好的发展。所以我觉得，年轻人可以先在大城市工作几年，积累了经验以后，再回家乡发展。", "py": "Wǒ rènwéi zhè yào kàn měi ge rén de qíngkuàng. Dà chéngshì jīhuì duō, shōurù yě gāo, shìhé xiǎng jīlěi jīngyàn de niánqīngrén. Dànshì dà chéngshì de fángzū hé yālì dōu hěn dà. Xiànzài suízhe wǎngluò hé jiāotōng de fāzhǎn, zài jiāxiāng yě néng yǒu hěn hǎo de fāzhǎn. Suǒyǐ wǒ juéde, niánqīngrén kěyǐ xiān zài dà chéngshì gōngzuò jǐ nián, jīlěi le jīngyàn yǐhòu, zài huí jiāxiāng fāzhǎn.", "vi": "Tôi cho rằng còn tuỳ hoàn cảnh mỗi người. Thành phố lớn nhiều cơ hội, thu nhập cao, hợp với người trẻ muốn tích luỹ kinh nghiệm. Nhưng tiền nhà và áp lực ở thành phố lớn đều rất lớn. Hiện nay, cùng với sự phát triển của Internet và giao thông, ở quê cũng có thể phát triển tốt. Vì vậy tôi nghĩ người trẻ có thể làm ở thành phố lớn vài năm, tích luỹ kinh nghiệm rồi về quê phát triển."},
-      {"p": "Trả lời câu hỏi (1,5 phút): 请介绍一种你学习汉语的好方法。", "model": "我学习汉语最好的方法是“用起来”。我不是只背生词，而是把每个新词放在句子里，每天至少用它说三个句子。另外，我常常看中文视频，跟着说。无论多忙，我每天都坚持半个小时。不知不觉，我的口语进步了很多。", "py": "Wǒ xuéxí Hànyǔ zuì hǎo de fāngfǎ shì “yòng qǐlai”. Wǒ bú shì zhǐ bèi shēngcí, ér shì bǎ měi ge xīn cí fàng zài jùzi li, měi tiān zhìshǎo yòng tā shuō sān ge jùzi. Lìngwài, wǒ chángcháng kàn Zhōngwén shìpín, gēnzhe shuō. Wúlùn duō máng, wǒ měi tiān dōu jiānchí bàn ge xiǎoshí. Bùzhī-bùjué, wǒ de kǒuyǔ jìnbù le hěn duō.", "vi": "Cách học tiếng Trung tốt nhất của tôi là “dùng nó”. Tôi không chỉ học thuộc từ mới, mà đặt mỗi từ mới vào câu, mỗi ngày dùng nó nói ít nhất ba câu. Ngoài ra tôi hay xem video tiếng Trung và nói theo. Dù bận đến đâu, ngày nào tôi cũng kiên trì nửa tiếng. Lúc nào không hay, khả năng nói của tôi đã tiến bộ nhiều."}
-    ], "rubric": ["Phát âm rõ, thanh điệu đúng ≥ 80%, biến điệu 不/一 đúng", "Nói liên tục, ít ngập ngừng; đủ thời gian yêu cầu", "Dùng đúng ít nhất 3 cấu trúc HSK 4 (即使, 无论, 不是…而是, 随着…)", "Nội dung đủ ý: có quan điểm, lý do, ví dụ", "Từ vựng phù hợp chủ đề, có thể dùng 1 thành ngữ"]}}
-  ]
+ "title": "Bài thi cuối cấp HSK 4 (mô phỏng)",
+ "time": 100,
+ "pass": 70,
+ "intro": "Đề tự soạn, mô phỏng cấu trúc HSK 4 (rút gọn): 听力 Nghe 27 câu (~30 phút) – 阅读 Đọc 25 câu (~40 phút) – 书写 Viết 10 câu sắp xếp + 5 câu đặt câu với từ cho sẵn (~25 phút) – 口语 Nói (tự chấm). Phần tự chấm có 62 câu; đạt khi đúng ≥ 70% (≥ 44 câu). Phần đặt câu và phần nói: tự chấm theo tiêu chí và so với bài mẫu. Lưu ý phần nghe: giọng máy đọc cả nhãn 男/女 (nam/nữ) trước lời mỗi người – đó là tín hiệu đổi người nói. Mỗi câu nghe tối đa 2 lần, KHÔNG xem lời thoại. (Đề HSK 4 thật có 100 câu, 300 điểm, đạt từ 180 điểm – đề này giúp bạn làm quen dạng bài và tự đánh giá trước khi thi thật.)",
+ "sections": [
+  {
+   "h": "第一部分 · 听力 – Nghe đoạn ngắn, phán đoán đúng/sai (10 câu)",
+   "intro": "Nghe một đoạn ngắn, sau đó xem câu có dấu ★: nội dung câu ★ khớp với đoạn nghe chọn 对 (đúng), không khớp chọn 错 (sai).",
+   "items": [
+    {
+     "t": "listen",
+     "say": "我已经在这家公司工作三年了。虽然工资不算高，但是同事们都很友好，工作也很有意思，所以我一直没有换工作。",
+     "lang": "zh-CN",
+     "q": "★ 说话人对现在的工作比较满意。",
+     "o": [
+      "对 – Đúng",
+      "错 – Sai"
+     ],
+     "a": 0,
+     "e": "Đồng nghiệp thân thiện, công việc thú vị, không muốn đổi việc → khá hài lòng."
+    },
+    {
+     "t": "listen",
+     "say": "由于最近订单太多，经理让我们这个周末都来加班。我本来打算周末带孩子去海边玩儿，现在只好推迟到下个月了。",
+     "lang": "zh-CN",
+     "q": "★ 说话人这个周末要去海边。",
+     "o": [
+      "对 – Đúng",
+      "错 – Sai"
+     ],
+     "a": 1,
+     "e": "本来打算… 只好推迟到下个月 → cuối tuần này phải tăng ca, KHÔNG đi biển."
+    },
+    {
+     "t": "listen",
+     "say": "即使工作再忙，小王每天晚上也会抽出半个小时学汉语。现在他已经能用汉语跟中国客人简单地交流了。",
+     "lang": "zh-CN",
+     "q": "★ 小王每天都学习汉语。",
+     "o": [
+      "对 – Đúng",
+      "错 – Sai"
+     ],
+     "a": 0,
+     "e": "即使工作再忙，…每天晚上也会抽出半个小时学汉语."
+    },
+    {
+     "t": "listen",
+     "say": "很多人以为中药没有西药那么有效，其实只要对症下药，中药的效果也很不错，而且对身体的伤害比较小。",
+     "lang": "zh-CN",
+     "q": "★ 说话人认为中药一点儿用也没有。",
+     "o": [
+      "对 – Đúng",
+      "错 – Sai"
+     ],
+     "a": 1,
+     "e": "Người nói cho rằng Đông y dùng đúng bệnh thì hiệu quả khá tốt (以为 là suy nghĩ sai của người khác)."
+    },
+    {
+     "t": "listen",
+     "say": "网上购物虽然方便，但是我们一定要仔细看商品的评价，否则很容易买到质量不好的东西。",
+     "lang": "zh-CN",
+     "q": "★ 网上购物时要注意看评价。",
+     "o": [
+      "对 – Đúng",
+      "错 – Sai"
+     ],
+     "a": 0,
+     "e": "一定要仔细看商品的评价，否则…"
+    },
+    {
+     "t": "listen",
+     "say": "为了减少污染，这个城市从明年开始，不允许摩托车进入市中心。市民可以乘坐地铁和公共汽车。",
+     "lang": "zh-CN",
+     "q": "★ 从明年开始，不能骑摩托车进市中心。",
+     "o": [
+      "对 – Đúng",
+      "错 – Sai"
+     ],
+     "a": 0,
+     "e": "不允许摩托车进入市中心 = không cho xe máy vào trung tâm."
+    },
+    {
+     "t": "listen",
+     "say": "我原来住在市中心，每天上班只要十分钟。后来因为房租太贵，搬到了郊区，现在路上要花一个多小时。",
+     "lang": "zh-CN",
+     "q": "★ 说话人现在住在市中心。",
+     "o": [
+      "对 – Đúng",
+      "错 – Sai"
+     ],
+     "a": 1,
+     "e": "原来 = trước kia ở trung tâm; bây giờ đã chuyển ra ngoại ô (郊区)."
+    },
+    {
+     "t": "listen",
+     "say": "孩子考得不好的时候，父母不应该只是批评，而应该和孩子一起找原因。批评太多，孩子反而会失去信心。",
+     "lang": "zh-CN",
+     "q": "★ 说话人认为父母应该多批评孩子。",
+     "o": [
+      "对 – Đúng",
+      "错 – Sai"
+     ],
+     "a": 1,
+     "e": "批评太多，孩子反而会失去信心 → không nên phê bình nhiều."
+    },
+    {
+     "t": "listen",
+     "say": "这家饭馆的菜不仅好吃，而且价格也不贵，所以每天中午都有很多人在门口排队。",
+     "lang": "zh-CN",
+     "q": "★ 这家饭馆的菜很贵。",
+     "o": [
+      "对 – Đúng",
+      "错 – Sai"
+     ],
+     "a": 1,
+     "e": "价格也不贵 = giá cũng không đắt."
+    },
+    {
+     "t": "listen",
+     "say": "不管遇到什么困难，他都不会轻易放弃。正是因为这样，他才能在三年里从普通员工成为部门经理。",
+     "lang": "zh-CN",
+     "q": "★ 他是一个很容易放弃的人。",
+     "o": [
+      "对 – Đúng",
+      "错 – Sai"
+     ],
+     "a": 1,
+     "e": "不管遇到什么困难，他都不会轻易放弃 → không dễ bỏ cuộc."
+    }
+   ]
+  },
+  {
+   "h": "第二部分 · 听力 – Hội thoại ngắn (10 câu)",
+   "intro": "Mỗi câu là một đoạn hội thoại hai lượt lời giữa nam (男) và nữ (女), cuối cùng có câu hỏi (问). Nghe và chọn đáp án đúng.",
+   "items": [
+    {
+     "t": "listen",
+     "say": "男：小李，你怎么还没下班？女：这个月的报告明天就要交，我还有一半没写完呢。问：女的为什么还没下班？",
+     "lang": "zh-CN",
+     "q": "Nghe hội thoại và trả lời câu hỏi cuối.",
+     "o": [
+      "报告还没写完",
+      "她在等男的",
+      "公司在开会",
+      "她想多挣钱"
+     ],
+     "a": 0,
+     "e": "我还有一半没写完 – báo cáo chưa viết xong."
+    },
+    {
+     "t": "listen",
+     "say": "女：你昨天面试怎么样？男：别提了，面试官问的问题我竟然一个都没回答好。问：男的觉得面试怎么样？",
+     "lang": "zh-CN",
+     "q": "Nghe hội thoại và trả lời câu hỏi cuối.",
+     "o": [
+      "很成功",
+      "不太好",
+      "很轻松",
+      "还没开始"
+     ],
+     "a": 1,
+     "e": "别提了…竟然一个都没回答好 → phỏng vấn không tốt."
+    },
+    {
+     "t": "listen",
+     "say": "男：大夫，我嗓子疼，还有点儿发烧。女：我看看。估计是感冒了，先给你开点儿药吧。问：他们最可能在哪儿？",
+     "lang": "zh-CN",
+     "q": "Nghe hội thoại và trả lời câu hỏi cuối.",
+     "o": [
+      "医院",
+      "学校",
+      "银行",
+      "超市"
+     ],
+     "a": 0,
+     "e": "大夫, 嗓子疼, 发烧, 开药 → bệnh viện / phòng khám."
+    },
+    {
+     "t": "listen",
+     "say": "女：这件衣服打八折以后多少钱？男：原价五百，打八折就是四百。问：这件衣服现在多少钱？",
+     "lang": "zh-CN",
+     "q": "Nghe hội thoại và trả lời câu hỏi cuối.",
+     "o": [
+      "四百",
+      "五百",
+      "八十",
+      "一百"
+     ],
+     "a": 0,
+     "e": "500 × 80% = 400."
+    },
+    {
+     "t": "listen",
+     "say": "男：你为什么每天骑自行车上班？女：一是为了锻炼身体，二是为了保护环境。问：女的为什么骑自行车上班？",
+     "lang": "zh-CN",
+     "q": "Nghe hội thoại và trả lời câu hỏi cuối.",
+     "o": [
+      "没有钱买车",
+      "为了健康和环保",
+      "公司离家很近",
+      "她不会开车"
+     ],
+     "a": 1,
+     "e": "为了锻炼身体…为了保护环境 → vì sức khoẻ và môi trường."
+    },
+    {
+     "t": "listen",
+     "say": "女：听说你搬到郊区了？男：是啊，房子大，空气也好，就是离公司远了点儿。问：男的觉得郊区有什么缺点？",
+     "lang": "zh-CN",
+     "q": "Nghe hội thoại và trả lời câu hỏi cuối.",
+     "o": [
+      "房子小",
+      "空气不好",
+      "离公司远",
+      "房租贵"
+     ],
+     "a": 2,
+     "e": "就是离公司远了点儿 – chỉ có điều hơi xa công ty."
+    },
+    {
+     "t": "listen",
+     "say": "男：这条消息是真的吗？大家都在转。女：我查了一下官方网站，根本没有这回事，你千万别转了。问：女的是什么意思？",
+     "lang": "zh-CN",
+     "q": "Nghe hội thoại và trả lời câu hỏi cuối.",
+     "o": [
+      "消息是假的",
+      "消息是真的",
+      "应该多转发",
+      "网站坏了"
+     ],
+     "a": 0,
+     "e": "根本没有这回事 = hoàn toàn không có chuyện đó → tin giả."
+    },
+    {
+     "t": "listen",
+     "say": "女：你儿子最近学习怎么样？男：尽管我们给他报了好几个补习班，成绩却一点儿也没提高。问：男的儿子成绩怎么样？",
+     "lang": "zh-CN",
+     "q": "Nghe hội thoại và trả lời câu hỏi cuối.",
+     "o": [
+      "提高了很多",
+      "没有提高",
+      "是全班第一",
+      "不太清楚"
+     ],
+     "a": 1,
+     "e": "尽管…成绩却一点儿也没提高."
+    },
+    {
+     "t": "listen",
+     "say": "男：明天的会你能参加吗？女：真不好意思，我明天要去机场接客户，恐怕参加不了。问：女的明天要做什么？",
+     "lang": "zh-CN",
+     "q": "Nghe hội thoại và trả lời câu hỏi cuối.",
+     "o": [
+      "开会",
+      "去机场接人",
+      "出差",
+      "在家休息"
+     ],
+     "a": 1,
+     "e": "我明天要去机场接客户 – ra sân bay đón khách hàng."
+    },
+    {
+     "t": "listen",
+     "say": "女：你学汉语有什么好方法？男：我的方法很简单，就是多听多说，无论多忙，每天都坚持。问：男的学汉语的方法是什么？",
+     "lang": "zh-CN",
+     "q": "Nghe hội thoại và trả lời câu hỏi cuối.",
+     "o": [
+      "只看书",
+      "多听多说，每天坚持",
+      "上补习班",
+      "看电影"
+     ],
+     "a": 1,
+     "e": "就是多听多说，无论多忙，每天都坚持."
+    }
+   ]
+  },
+  {
+   "h": "第三部分 · 听力 – Bài phỏng vấn dài (5 câu + 2 câu chép chính tả)",
+   "intro": "Nghe cuộc phỏng vấn trên đài phát thanh giữa phóng viên (记者) và anh Nguyễn – một thanh niên về quê bán trái cây online. Nghe 2 lần, không xem lời thoại, rồi trả lời câu hỏi. Sau đó nghe chép 2 câu.",
+   "dialog": {
+    "lang": "zh-CN",
+    "lines": [
+     {
+      "s": "记者",
+      "g": "f",
+      "t": "阮先生，听说你大学毕业以后放弃了城市的工作，回到家乡开网店，是真的吗？",
+      "py": "Ruǎn xiānsheng, tīngshuō nǐ dàxué bìyè yǐhòu fàngqì le chéngshì de gōngzuò, huídào jiāxiāng kāi wǎngdiàn, shì zhēn de ma?",
+      "vi": "Anh Nguyễn, nghe nói tốt nghiệp đại học anh đã bỏ công việc ở thành phố, về quê mở cửa hàng online, có thật không?"
+     },
+     {
+      "s": "阮先生",
+      "g": "m",
+      "t": "是真的。很多人都以为我疯了，连我父母一开始都不支持。",
+      "py": "Shì zhēn de. Hěn duō rén dōu yǐwéi wǒ fēng le, lián wǒ fùmǔ yì kāishǐ dōu bù zhīchí.",
+      "vi": "Thật đấy. Nhiều người tưởng tôi điên, đến bố mẹ tôi lúc đầu cũng không ủng hộ."
+     },
+     {
+      "s": "记者",
+      "g": "f",
+      "t": "你为什么做这个决定呢？",
+      "py": "Nǐ wèishénme zuò zhège juédìng ne?",
+      "vi": "Vì sao anh đưa ra quyết định này?"
+     },
+     {
+      "s": "阮先生",
+      "g": "m",
+      "t": "我家乡的水果质量特别好，可是由于交通不方便，农民往往只能低价卖给商人。于是我想，为什么不通过网络直接卖给顾客呢？",
+      "py": "Wǒ jiāxiāng de shuǐguǒ zhìliàng tèbié hǎo, kěshì yóuyú jiāotōng bù fāngbiàn, nóngmín wǎngwǎng zhǐ néng dījià mài gěi shāngrén. Yúshì wǒ xiǎng, wèishénme bù tōngguò wǎngluò zhíjiē mài gěi gùkè ne?",
+      "vi": "Trái cây quê tôi chất lượng rất tốt, nhưng do giao thông bất tiện, nông dân thường chỉ bán được giá rẻ cho thương lái. Thế là tôi nghĩ, sao không bán thẳng cho khách qua mạng?"
+     },
+     {
+      "s": "记者",
+      "g": "f",
+      "t": "刚开始顺利吗？",
+      "py": "Gāng kāishǐ shùnlì ma?",
+      "vi": "Lúc đầu có thuận lợi không?"
+     },
+     {
+      "s": "阮先生",
+      "g": "m",
+      "t": "一点儿也不顺利。第一年，因为包装不好，很多水果在路上坏了，顾客要求退货，我们反而亏了不少钱。",
+      "py": "Yìdiǎnr yě bú shùnlì. Dì-yī nián, yīnwèi bāozhuāng bù hǎo, hěn duō shuǐguǒ zài lùshang huài le, gùkè yāoqiú tuìhuò, wǒmen fǎn'ér kuī le bù shǎo qián.",
+      "vi": "Không thuận lợi chút nào. Năm đầu, vì đóng gói không tốt, nhiều trái cây hỏng trên đường, khách đòi trả hàng, chúng tôi ngược lại còn lỗ khá nhiều tiền."
+     },
+     {
+      "s": "记者",
+      "g": "f",
+      "t": "那时候你想过放弃吗？",
+      "py": "Nà shíhou nǐ xiǎngguo fàngqì ma?",
+      "vi": "Khi đó anh có nghĩ đến chuyện bỏ cuộc không?"
+     },
+     {
+      "s": "阮先生",
+      "g": "m",
+      "t": "想过。但是我觉得，事情再难，也不能半途而废。后来我们换了包装，还和快递公司合作，问题慢慢解决了。",
+      "py": "Xiǎngguo. Dànshì wǒ juéde, shìqing zài nán, yě bù néng bàntú'érfèi. Hòulái wǒmen huàn le bāozhuāng, hái hé kuàidì gōngsī hézuò, wèntí mànmàn jiějué le.",
+      "vi": "Có nghĩ. Nhưng tôi thấy việc khó đến mấy cũng không thể bỏ dở. Sau đó chúng tôi đổi cách đóng gói, hợp tác với công ty chuyển phát, vấn đề dần được giải quyết."
+     },
+     {
+      "s": "记者",
+      "g": "f",
+      "t": "现在网店怎么样了？",
+      "py": "Xiànzài wǎngdiàn zěnmeyàng le?",
+      "vi": "Bây giờ cửa hàng online thế nào rồi?"
+     },
+     {
+      "s": "阮先生",
+      "g": "m",
+      "t": "现在我们每个月能卖三十多吨水果，不仅帮助了一百多家农民，还吸引了好几个年轻人回到家乡工作。",
+      "py": "Xiànzài wǒmen měi ge yuè néng mài sānshí duō dūn shuǐguǒ, bùjǐn bāngzhù le yìbǎi duō jiā nóngmín, hái xīyǐn le hǎo jǐ ge niánqīngrén huídào jiāxiāng gōngzuò.",
+      "vi": "Giờ mỗi tháng chúng tôi bán được hơn 30 tấn trái cây, không chỉ giúp hơn một trăm hộ nông dân mà còn thu hút được mấy bạn trẻ về quê làm việc."
+     },
+     {
+      "s": "记者",
+      "g": "f",
+      "t": "对于想回家乡创业的年轻人，你有什么建议？",
+      "py": "Duìyú xiǎng huí jiāxiāng chuàngyè de niánqīngrén, nǐ yǒu shénme jiànyì?",
+      "vi": "Với những bạn trẻ muốn về quê khởi nghiệp, anh có lời khuyên gì?"
+     },
+     {
+      "s": "阮先生",
+      "g": "m",
+      "t": "我认为最重要的不是钱，而是了解顾客需要什么。另外，千万不要害怕失败。",
+      "py": "Wǒ rènwéi zuì zhòngyào de bú shì qián, ér shì liǎojiě gùkè xūyào shénme. Lìngwài, qiānwàn bú yào hàipà shībài.",
+      "vi": "Tôi cho rằng quan trọng nhất không phải là tiền, mà là hiểu khách hàng cần gì. Ngoài ra, tuyệt đối đừng sợ thất bại."
+     }
+    ]
+   },
+   "items": [
+    {
+     "t": "mc",
+     "q": "阮先生大学毕业以后做了什么？",
+     "o": [
+      "回家乡开网店",
+      "在城市工作",
+      "出国留学",
+      "当了记者"
+     ],
+     "a": 0,
+     "e": "放弃了城市的工作，回到家乡开网店。"
+    },
+    {
+     "t": "mc",
+     "q": "开始的时候，他的父母是什么态度？",
+     "o": [
+      "非常支持",
+      "帮他开店",
+      "一开始不支持",
+      "没有意见"
+     ],
+     "a": 2,
+     "e": "连我父母一开始都不支持。"
+    },
+    {
+     "t": "mc",
+     "q": "以前农民为什么只能低价卖水果？",
+     "o": [
+      "水果质量差",
+      "交通不方便",
+      "他们不想卖",
+      "顾客太少"
+     ],
+     "a": 1,
+     "e": "由于交通不方便，农民往往只能低价卖给商人。"
+    },
+    {
+     "t": "mc",
+     "q": "第一年他们为什么亏钱？",
+     "o": [
+      "水果太贵",
+      "没有顾客",
+      "快递公司太远",
+      "包装不好，水果在路上坏了"
+     ],
+     "a": 3,
+     "e": "因为包装不好，很多水果在路上坏了，顾客要求退货。"
+    },
+    {
+     "t": "mc",
+     "q": "阮先生认为创业最重要的是什么？",
+     "o": [
+      "了解顾客需要什么",
+      "有很多钱",
+      "好看的包装",
+      "大的公司"
+     ],
+     "a": 0,
+     "e": "最重要的不是钱，而是了解顾客需要什么。"
+    },
+    {
+     "t": "dict",
+     "say": "事情再难，也不能半途而废。",
+     "lang": "zh-CN",
+     "a": "事情再难，也不能半途而废。",
+     "py": "Shìqing zài nán, yě bù néng bàntú'érfèi.",
+     "e": "再…也… + thành ngữ 半途而废."
+    },
+    {
+     "t": "dict",
+     "say": "千万不要害怕失败。",
+     "lang": "zh-CN",
+     "a": "千万不要害怕失败。",
+     "py": "Qiānwàn bú yào hàipà shībài.",
+     "e": "千万不要 = tuyệt đối đừng; 害怕 = sợ."
+    }
+   ]
+  },
+  {
+   "h": "第四部分 · 阅读 – Chọn từ điền vào chỗ trống (10 câu)",
+   "intro": "Chọn từ thích hợp nhất cho mỗi chỗ trống.",
+   "items": [
+    {
+     "t": "mc",
+     "q": "___明天下大雨，比赛也会按时举行。",
+     "o": [
+      "虽然",
+      "即使",
+      "因为",
+      "既然"
+     ],
+     "a": 1,
+     "e": "Vế sau có 也 + giả định (mai mưa) → 即使…也…"
+    },
+    {
+     "t": "mc",
+     "q": "这个周末我们___计划去海边捡垃圾。",
+     "o": [
+      "通过",
+      "按照",
+      "对于",
+      "关于"
+     ],
+     "a": 1,
+     "e": "Làm theo kế hoạch → 按照计划."
+    },
+    {
+     "t": "mc",
+     "q": "我买了一本___中国历史的书。",
+     "o": [
+      "对于",
+      "关于",
+      "对",
+      "通过"
+     ],
+     "a": 1,
+     "e": "Nội dung cuốn sách → 关于…的书."
+    },
+    {
+     "t": "mc",
+     "q": "___大家的共同努力，我们终于按时完成了任务。",
+     "o": [
+      "为了",
+      "否则",
+      "由于",
+      "何况"
+     ],
+     "a": 2,
+     "e": "Nguyên nhân (nhờ mọi người cố gắng) → 由于."
+    },
+    {
+     "t": "mc",
+     "q": "你快点儿走吧，___就赶不上最后一班地铁了。",
+     "o": [
+      "于是",
+      "而且",
+      "尽管",
+      "否则"
+     ],
+     "a": 3,
+     "e": "Lời khuyên + hậu quả → 否则 (nếu không thì)."
+    },
+    {
+     "t": "mc",
+     "q": "我让他少玩儿手机，没想到他___玩儿得更多了。",
+     "o": [
+      "而且",
+      "反而",
+      "往往",
+      "不如"
+     ],
+     "a": 1,
+     "e": "Kết quả trái với mong muốn → 反而."
+    },
+    {
+     "t": "mc",
+     "q": "连专家都很难判断这张照片的真假，___普通人呢？",
+     "o": [
+      "而且",
+      "尽管",
+      "何况",
+      "因此"
+     ],
+     "a": 2,
+     "e": "连…都…，何况…呢？ = huống chi."
+    },
+    {
+     "t": "mc",
+     "q": "这次考试他的___非常好，考了全班第一。",
+     "o": [
+      "效果",
+      "质量",
+      "成绩",
+      "水平"
+     ],
+     "a": 2,
+     "e": "Điểm thi → 成绩."
+    },
+    {
+     "t": "mc",
+     "q": "在家躺着___出去散散步，对身体更好。",
+     "o": [
+      "没有",
+      "比",
+      "跟",
+      "不如"
+     ],
+     "a": 3,
+     "e": "A 不如 B = A không bằng B (đi dạo tốt hơn nằm)."
+    },
+    {
+     "t": "mc",
+     "q": "听到这个消息，大家都大吃一___。",
+     "o": [
+      "急",
+      "惊",
+      "紧",
+      "静"
+     ],
+     "a": 1,
+     "e": "Thành ngữ 大吃一惊 = giật mình kinh ngạc."
+    }
+   ]
+  },
+  {
+   "h": "第五部分 · 阅读 – Sắp xếp câu thành đoạn (5 câu)",
+   "intro": "Sắp xếp 3 vế câu thành một đoạn hợp lý. Mẹo: vế có 由于/即使/尽管/虽然 thường đứng trước; vế có 于是/所以/否则/而是/反而 đứng sau.",
+   "items": [
+    {
+     "t": "order",
+     "q": "Sắp xếp 3 vế thành đoạn văn hợp lý:",
+     "w": [
+      "于是他决定每天早上去公园跑步",
+      "上个月体检的时候，医生说他太胖了",
+      "现在他已经瘦了五公斤"
+     ],
+     "a": "上个月体检的时候，医生说他太胖了，于是他决定每天早上去公园跑步，现在他已经瘦了五公斤。",
+     "e": "Nguyên nhân (医生说他太胖) → 于是 + hành động → 现在 + kết quả."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp 3 vế thành câu hợp lý:",
+     "w": [
+      "而是因为喜欢中国文化",
+      "她学汉语",
+      "不是为了找工作"
+     ],
+     "a": "她学汉语不是为了找工作，而是因为喜欢中国文化。",
+     "e": "Chủ ngữ + 不是… + 而是…"
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp 3 vế thành câu hợp lý:",
+     "w": [
+      "他也每天坚持学习一个小时",
+      "即使工作再忙",
+      "所以进步得非常快"
+     ],
+     "a": "即使工作再忙，他也每天坚持学习一个小时，所以进步得非常快。",
+     "e": "即使… đứng đầu → 也… → 所以 + kết quả."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp 3 vế thành câu hợp lý:",
+     "w": [
+      "否则很容易买到假货",
+      "网上购物的时候",
+      "一定要仔细看其他顾客的评价"
+     ],
+     "a": "网上购物的时候，一定要仔细看其他顾客的评价，否则很容易买到假货。",
+     "e": "Thời gian → lời khuyên → 否则 + hậu quả."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp 3 vế thành câu hợp lý:",
+     "w": [
+      "反而会失去学习的兴趣",
+      "很多父母给孩子报了好几个补习班",
+      "可是孩子太累了"
+     ],
+     "a": "很多父母给孩子报了好几个补习班，可是孩子太累了，反而会失去学习的兴趣。",
+     "e": "Hiện tượng → 可是 (chuyển ngoặt) → 反而 (kết quả trái mong đợi)."
+    }
+   ]
+  },
+  {
+   "h": "第六部分 · 阅读 – Đọc đoạn ngắn và trả lời (5 câu)",
+   "intro": "Đọc mỗi đoạn văn ngắn, chọn đáp án đúng cho câu có dấu ★.",
+   "items": [
+    {
+     "t": "mc",
+     "q": "“很多人认为，加班越多，完成的工作就越多。其实并不是这样。人累了以后，工作效率会降低，还容易出错。所以，与其每天加班到半夜，不如提高白天的工作效率。” ★ 这段话主要告诉我们：",
+     "o": [
+      "要多加班",
+      "加班不一定能提高效率",
+      "白天不用工作",
+      "晚上效率最高"
+     ],
+     "a": 1,
+     "e": "其实并不是这样…人累了以后，工作效率会降低."
+    },
+    {
+     "t": "mc",
+     "q": "“越南人喝咖啡的习惯很特别。很多人喜欢在咖啡里加炼乳（sữa đặc），又甜又香。在河内的老街上，常常能看到人们坐在路边的小椅子上，一边喝咖啡，一边和朋友聊天。” ★ 根据这段话，在河内老街上人们常常：",
+     "o": [
+      "在路边一边喝咖啡一边聊天",
+      "在家里喝茶",
+      "喝不加糖的咖啡",
+      "只在周末喝咖啡"
+     ],
+     "a": 0,
+     "e": "坐在路边的小椅子上，一边喝咖啡，一边和朋友聊天."
+    },
+    {
+     "t": "mc",
+     "q": "“学习外语的时候，很多人害怕说错，所以不敢开口。其实，说错是学习的一部分。只有多说、多错、多改，才能真正提高口语水平。” ★ 作者的意思是：",
+     "o": [
+      "说错了很丢脸",
+      "应该少说多写",
+      "口语不重要",
+      "学外语不要怕说错"
+     ],
+     "a": 3,
+     "e": "说错是学习的一部分…只有多说、多错、多改，才能…"
+    },
+    {
+     "t": "mc",
+     "q": "“我们小区从这个月开始实行垃圾分类，每家要把垃圾分成可回收垃圾、厨房垃圾和其他垃圾三类。刚开始大家都觉得麻烦，但是一个月以后，小区里的垃圾减少了三分之一。” ★ 实行垃圾分类以后：",
+     "o": [
+      "垃圾增加了",
+      "大家都不同意",
+      "垃圾减少了",
+      "只有两类垃圾"
+     ],
+     "a": 2,
+     "e": "一个月以后，小区里的垃圾减少了三分之一."
+    },
+    {
+     "t": "mc",
+     "q": "“现在很多老人也开始用智能手机。他们不仅用手机和孩子视频聊天，还学会了网上购物。不过，由于对网络不太熟悉，老人也更容易相信假消息。” ★ 这段话没有提到老人用手机做什么？",
+     "o": [
+      "视频聊天",
+      "网上购物",
+      "玩游戏",
+      "看消息"
+     ],
+     "a": 2,
+     "e": "Đoạn văn nói 视频聊天, 网上购物, (đọc) 假消息; không nhắc đến chơi game."
+    }
+   ]
+  },
+  {
+   "h": "第七部分 · 阅读 – Đọc hiểu bài dài (5 câu)",
+   "intro": "Đọc bài văn và trả lời câu hỏi. Mẹo: đọc câu hỏi trước, sau đó tìm thông tin trong bài.",
+   "read": {
+    "title": "明天再说？",
+    "text": "你有没有这样的经历：本来计划今天写完报告，可是先看了一会儿手机，又去倒了一杯水，不知不觉，一个下午就过去了。最后，你只好对自己说：“明天再说吧。”\n\n心理学家把这种习惯叫做“拖延”。根据一项调查，百分之八十的大学生和上班族都有拖延的问题。很多人以为拖延是因为懒，其实并不完全是这样。研究发现，人们往往不是不想做，而是害怕做不好，或者觉得任务太大，不知道从哪儿开始。\n\n那么，怎样才能改变这个习惯呢？专家给了几个建议。第一，把大任务分成几个小任务，比如“写报告”可以分成“找材料”“写大纲”“写第一段”。每完成一个小任务，就给自己一点儿鼓励。第二，工作的时候把手机放远一点儿，否则你很难集中注意力。第三，不要等到“完美”才开始，先做起来，再慢慢改。\n\n改变习惯并不容易，但只要每天进步一点点，你就会发现，“明天再说”的事情越来越少了。",
+    "gloss": [
+     {
+      "w": "心理学家",
+      "py": "xīnlǐxuéjiā",
+      "vi": "nhà tâm lý học"
+     },
+     {
+      "w": "拖延",
+      "py": "tuōyán",
+      "vi": "trì hoãn, chần chừ"
+     },
+     {
+      "w": "大纲",
+      "py": "dàgāng",
+      "vi": "dàn ý"
+     },
+     {
+      "w": "集中注意力",
+      "py": "jízhōng zhùyìlì",
+      "vi": "tập trung sự chú ý"
+     },
+     {
+      "w": "完美",
+      "py": "wánměi",
+      "vi": "hoàn hảo"
+     }
+    ]
+   },
+   "items": [
+    {
+     "t": "mc",
+     "q": "第一段中，“你”为什么没有写完报告？",
+     "o": [
+      "报告太难",
+      "时间被看手机等小事浪费了",
+      "老板不让写",
+      "生病了"
+     ],
+     "a": 1,
+     "e": "先看了一会儿手机，又去倒了一杯水，不知不觉，一个下午就过去了."
+    },
+    {
+     "t": "mc",
+     "q": "根据调查，有拖延问题的大学生和上班族占多少？",
+     "o": [
+      "百分之二十",
+      "百分之五十",
+      "百分之八十",
+      "百分之百"
+     ],
+     "a": 2,
+     "e": "百分之八十的大学生和上班族都有拖延的问题."
+    },
+    {
+     "t": "mc",
+     "q": "研究发现，人们拖延往往是因为什么？",
+     "o": [
+      "害怕做不好，或不知道从哪儿开始",
+      "太懒了",
+      "工作太少",
+      "没有手机"
+     ],
+     "a": 0,
+     "e": "往往不是不想做，而是害怕做不好，或者觉得任务太大，不知道从哪儿开始."
+    },
+    {
+     "t": "mc",
+     "q": "下面哪个不是专家的建议？",
+     "o": [
+      "把大任务分成小任务",
+      "工作时把手机放远一点儿",
+      "等到完美再开始",
+      "完成小任务后鼓励自己"
+     ],
+     "a": 2,
+     "e": "Bài khuyên 不要等到“完美”才开始 – ngược với lựa chọn này."
+    },
+    {
+     "t": "mc",
+     "q": "这篇文章最合适的题目是：",
+     "o": [
+      "怎样改变拖延的习惯",
+      "手机的好处",
+      "怎样写报告",
+      "大学生的生活"
+     ],
+     "a": 0,
+     "e": "Toàn bài nói về thói quen trì hoãn và cách thay đổi."
+    }
+   ]
+  },
+  {
+   "h": "第八部分 · 书写 – Sắp xếp từ thành câu (10 câu) + Đặt câu với từ cho sẵn",
+   "intro": "Phần 1 (tự chấm): sắp xếp các từ/cụm từ thành câu hoàn chỉnh. Phần 2 (tự chấm theo tiêu chí): đặt câu với từ cho sẵn theo tình huống – trong đề HSK 4 thật, mỗi từ đi kèm một bức tranh; ở đây tình huống được mô tả bằng lời.",
+   "items": [
+    {
+     "t": "order",
+     "q": "Sắp xếp thành câu hoàn chỉnh:",
+     "w": [
+      "被",
+      "那本书",
+      "借走了",
+      "弟弟"
+     ],
+     "a": "那本书被弟弟借走了。",
+     "e": "Câu bị động: Tân ngữ + 被 + người làm + V + bổ ngữ."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp thành câu hoàn chỉnh:",
+     "w": [
+      "这个问题",
+      "大家的",
+      "引起了",
+      "讨论"
+     ],
+     "a": "这个问题引起了大家的讨论。",
+     "e": "引起 + 讨论 (sự tranh luận)."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp thành câu hoàn chỉnh:",
+     "w": [
+      "没有",
+      "我的汉语",
+      "他的那么流利"
+     ],
+     "a": "我的汉语没有他的那么流利。",
+     "e": "A 没有 B 那么 + Adj."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp thành câu hoàn chỉnh:",
+     "w": [
+      "把",
+      "请",
+      "发给我",
+      "你的简历"
+     ],
+     "a": "请把你的简历发给我。",
+     "e": "请 + 把 + tân ngữ + V + 给 + người."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp thành câu hoàn chỉnh:",
+     "w": [
+      "打电话",
+      "无论多忙",
+      "我都会",
+      "给妈妈"
+     ],
+     "a": "无论多忙，我都会给妈妈打电话。",
+     "e": "无论 + 多 + Adj，chủ ngữ + 都 + V."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp thành câu hoàn chỉnh:",
+     "w": [
+      "竟然",
+      "我的钱包",
+      "被小偷",
+      "偷走了"
+     ],
+     "a": "我的钱包竟然被小偷偷走了。",
+     "e": "Chủ ngữ + 竟然 + 被… (phó từ đứng trước 被)."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp thành câu hoàn chỉnh:",
+     "w": [
+      "上班",
+      "为了保护环境",
+      "骑自行车",
+      "他每天"
+     ],
+     "a": "为了保护环境，他每天骑自行车上班。",
+     "e": "为了 + mục đích đứng đầu câu."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp thành câu hoàn chỉnh:",
+     "w": [
+      "不如",
+      "堵车的时候",
+      "坐地铁快",
+      "打车"
+     ],
+     "a": "堵车的时候，打车不如坐地铁快。",
+     "e": "A 不如 B + Adj."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp thành câu hoàn chỉnh:",
+     "w": [
+      "是否",
+      "请确认",
+      "收到了",
+      "您",
+      "商品"
+     ],
+     "a": "请确认您是否收到了商品。",
+     "e": "请确认 + chủ ngữ + 是否 + V."
+    },
+    {
+     "t": "order",
+     "q": "Sắp xếp thành câu hoàn chỉnh:",
+     "w": [
+      "一模一样",
+      "这两件衣服",
+      "看起来"
+     ],
+     "a": "这两件衣服看起来一模一样。",
+     "e": "Chủ ngữ + 看起来 + thành ngữ (vị ngữ)."
+    }
+   ],
+   "write": {
+    "task": "Đặt 5 câu, mỗi câu dùng một từ cho sẵn, phù hợp với tình huống: ① 堵车 – đường phố đông nghẹt xe giờ tan tầm; ② 熬夜 – một người ngồi trước máy tính lúc 2 giờ sáng; ③ 打折 – cửa hàng treo biển giảm giá; ④ 垃圾 – một người đang phân loại rác vào ba thùng; ⑤ 鼓励 – người mẹ vỗ vai con sau khi con thi không tốt.",
+    "min": 50,
+    "model": "① 下班的时候这条路堵车堵得很厉害，我们晚到了半个小时。\n② 为了明天的考试，他昨天熬夜熬到了两点。\n③ 这家商店正在打折，所有衣服都打八折。\n④ 我们应该按照规定把垃圾分成三类。\n⑤ 儿子没考好，妈妈一直鼓励他千万别放弃。",
+    "modelVi": "① Giờ tan làm con đường này tắc kinh khủng, chúng tôi đến muộn nửa tiếng. ② Vì kỳ thi ngày mai, hôm qua anh ấy thức đến 2 giờ. ③ Cửa hàng này đang giảm giá, tất cả quần áo giảm 20%. ④ Chúng ta nên phân rác thành ba loại theo quy định. ⑤ Con thi không tốt, mẹ luôn động viên con tuyệt đối đừng bỏ cuộc.",
+    "rubric": [
+     "Mỗi câu dùng đúng từ cho sẵn, đúng nghĩa và đúng tình huống (2 điểm/câu, tổng 10 điểm)",
+     "Câu đủ chủ ngữ – vị ngữ, dài ≥ 8 chữ, có thêm thành phần (thời gian, nguyên nhân, mức độ…)",
+     "Không sai ngữ pháp, không sai chữ Hán, dùng dấu câu tiếng Trung",
+     "Cộng điểm nếu dùng tự nhiên cấu trúc HSK 4 (为了, 按照, 即使, 千万…); câu quá ngắn kiểu “他堵车。” chỉ được 1 điểm"
+    ]
+   }
+  },
+  {
+   "h": "第九部分 · 口语 – Nói (tự chấm)",
+   "intro": "Ghi âm từng nhiệm vụ, nghe lại và tự chấm theo tiêu chí; so sánh với câu trả lời mẫu. Nếu học cùng giáo viên, giáo viên chấm trực tiếp.",
+   "speak": {
+    "tasks": [
+     {
+      "p": "Nghe – nhắc lại: đọc to câu sau, đúng thanh điệu và ngắt nghỉ.",
+      "model": "即使工作再忙，我也每天坚持学习汉语。",
+      "py": "Jíshǐ gōngzuò zài máng, wǒ yě měi tiān jiānchí xuéxí Hànyǔ.",
+      "vi": "Dù công việc bận đến mấy, ngày nào tôi cũng kiên trì học tiếng Trung."
+     },
+     {
+      "p": "Mô tả tình huống (thay cho tranh) trong 1 phút: Một gia đình đang ăn tối, nhưng ai cũng cúi đầu nhìn điện thoại. Bạn thấy gì? Bạn nghĩ gì?",
+      "model": "这家人在吃晚饭，可是每个人都低着头看手机，没有人说话。我觉得这种情况现在很普遍。手机虽然方便，但是不应该影响家人之间的交流。我建议吃饭的时候大家把手机放在一边，多聊聊天。",
+      "py": "Zhè jiā rén zài chī wǎnfàn, kěshì měi ge rén dōu dīzhe tóu kàn shǒujī, méiyǒu rén shuōhuà. Wǒ juéde zhè zhǒng qíngkuàng xiànzài hěn pǔbiàn. Shǒujī suīrán fāngbiàn, dànshì bù yīnggāi yǐngxiǎng jiārén zhī jiān de jiāoliú. Wǒ jiànyì chī fàn de shíhou dàjiā bǎ shǒujī fàng zài yìbiān, duō liáoliao tiān.",
+      "vi": "Gia đình này đang ăn tối, nhưng ai cũng cúi đầu nhìn điện thoại, không ai nói chuyện. Tôi thấy tình trạng này giờ rất phổ biến. Điện thoại tuy tiện, nhưng không nên ảnh hưởng đến sự giao tiếp trong gia đình. Tôi đề nghị khi ăn cơm mọi người để điện thoại sang một bên, trò chuyện nhiều hơn."
+     },
+     {
+      "p": "Trả lời câu hỏi (1,5 phút): 你认为年轻人应该留在大城市工作，还是回家乡发展？为什么？",
+      "model": "我认为这要看每个人的情况。大城市机会多，收入也高，适合想积累经验的年轻人。但是大城市的房租和压力都很大。现在随着网络和交通的发展，在家乡也能有很好的发展。所以我觉得，年轻人可以先在大城市工作几年，积累了经验以后，再回家乡发展。",
+      "py": "Wǒ rènwéi zhè yào kàn měi ge rén de qíngkuàng. Dà chéngshì jīhuì duō, shōurù yě gāo, shìhé xiǎng jīlěi jīngyàn de niánqīngrén. Dànshì dà chéngshì de fángzū hé yālì dōu hěn dà. Xiànzài suízhe wǎngluò hé jiāotōng de fāzhǎn, zài jiāxiāng yě néng yǒu hěn hǎo de fāzhǎn. Suǒyǐ wǒ juéde, niánqīngrén kěyǐ xiān zài dà chéngshì gōngzuò jǐ nián, jīlěi le jīngyàn yǐhòu, zài huí jiāxiāng fāzhǎn.",
+      "vi": "Tôi cho rằng còn tuỳ hoàn cảnh mỗi người. Thành phố lớn nhiều cơ hội, thu nhập cao, hợp với người trẻ muốn tích luỹ kinh nghiệm. Nhưng tiền nhà và áp lực ở thành phố lớn đều rất lớn. Hiện nay, cùng với sự phát triển của Internet và giao thông, ở quê cũng có thể phát triển tốt. Vì vậy tôi nghĩ người trẻ có thể làm ở thành phố lớn vài năm, tích luỹ kinh nghiệm rồi về quê phát triển."
+     },
+     {
+      "p": "Trả lời câu hỏi (1,5 phút): 请介绍一种你学习汉语的好方法。",
+      "model": "我学习汉语最好的方法是“用起来”。我不是只背生词，而是把每个新词放在句子里，每天至少用它说三个句子。另外，我常常看中文视频，跟着说。无论多忙，我每天都坚持半个小时。不知不觉，我的口语进步了很多。",
+      "py": "Wǒ xuéxí Hànyǔ zuì hǎo de fāngfǎ shì “yòng qǐlai”. Wǒ bú shì zhǐ bèi shēngcí, ér shì bǎ měi ge xīn cí fàng zài jùzi li, měi tiān zhìshǎo yòng tā shuō sān ge jùzi. Lìngwài, wǒ chángcháng kàn Zhōngwén shìpín, gēnzhe shuō. Wúlùn duō máng, wǒ měi tiān dōu jiānchí bàn ge xiǎoshí. Bùzhī-bùjué, wǒ de kǒuyǔ jìnbù le hěn duō.",
+      "vi": "Cách học tiếng Trung tốt nhất của tôi là “dùng nó”. Tôi không chỉ học thuộc từ mới, mà đặt mỗi từ mới vào câu, mỗi ngày dùng nó nói ít nhất ba câu. Ngoài ra tôi hay xem video tiếng Trung và nói theo. Dù bận đến đâu, ngày nào tôi cũng kiên trì nửa tiếng. Lúc nào không hay, khả năng nói của tôi đã tiến bộ nhiều."
+     }
+    ],
+    "rubric": [
+     "Phát âm rõ, thanh điệu đúng ≥ 80%, biến điệu 不/一 đúng",
+     "Nói liên tục, ít ngập ngừng; đủ thời gian yêu cầu",
+     "Dùng đúng ít nhất 3 cấu trúc HSK 4 (即使, 无论, 不是…而是, 随着…)",
+     "Nội dung đủ ý: có quan điểm, lý do, ví dụ",
+     "Từ vựng phù hợp chủ đề, có thể dùng 1 thành ngữ"
+    ]
+   }
+  }
+ ]
 }

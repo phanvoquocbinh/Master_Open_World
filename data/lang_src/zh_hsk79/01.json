@@ -1,196 +1,1301 @@
 {
-  "no": 1,
-  "title": "议论文（一）– Văn nghị luận: luận điểm, luận cứ, luận chứng & từ nối văn viết",
-  "sub": "论点鲜明，论据充分，论证严密",
-  "goals": [
-    "Nhận diện và dựng được khung bài nghị luận 引论 – 本论 – 结论 với 1 luận điểm trung tâm và 2–3 luận điểm nhánh",
-    "Dùng đúng ≥ 20 từ nối, khuôn câu văn viết theo chức năng: nêu luận điểm, liệt kê, nhượng bộ – chuyển ý, nhân quả, giả thiết, tổng kết",
-    "Phân biệt 5 phép luận chứng (举例 / 道理 / 对比 / 因果 / 类比) và chỉ ra 5 lỗi logic thường gặp (以偏概全, 偷换概念, 因果倒置…)",
-    "Viết đoạn nghị luận ~300 chữ đủ 论点 – 论据 – 论证 – 小结; dịch đoạn nghị luận Việt → Trung đúng văn phong"
-  ],
-  "parts": [
-    {"k": "text", "h": "Khởi động: Từ “kể chuyện” sang “lập luận”", "html": "<p>Ở HSK 7–9, phần viết không còn chấm “câu đúng ngữ pháp” mà chấm <b>tư duy</b>: bạn có quan điểm rõ không, chứng minh có thuyết phục không, bài có mạch lạc như một người viết bản ngữ có học thức không. Thể loại trọng tâm là <b>议论文 (văn nghị luận)</b>.</p><table><tr><th></th><th>记叙文 – văn tự sự</th><th>议论文 – văn nghị luận</th></tr><tr><td>Mục đích</td><td>Kể lại chuyện gì đã xảy ra</td><td>Chứng minh một quan điểm là đúng/sai</td></tr><tr><td>Câu hỏi cốt lõi</td><td>Ai? Ở đâu? Thế nào?</td><td>Tôi chủ trương gì? Vì sao? Căn cứ đâu?</td></tr><tr><td>Ngôn ngữ</td><td>Miêu tả, cảm xúc</td><td>Khái niệm, phán đoán, suy luận; nhiều từ nối văn viết</td></tr><tr><td>Lỗi hay gặp của người Việt</td><td colspan=\"2\">Viết luận mà thành kể chuyện; mở bài vòng vo; luận điểm mơ hồ (“mỗi thứ đều có hai mặt”); lạm dụng 我觉得, 很, 非常; kết bài chép lại mở bài.</td></tr></table><p><b>Ba yếu tố</b> của mọi bài nghị luận: <span class=\"hl\">论点</span> (luận điểm – chủ trương của tác giả) · <span class=\"hl\">论据</span> (luận cứ – sự thật, số liệu, đạo lý dùng làm chứng cứ) · <span class=\"hl\">论证</span> (luận chứng – quá trình suy luận nối luận cứ với luận điểm). Người Việt có lợi thế lớn: ba thuật ngữ này đọc Hán Việt giống hệt tiếng Việt!</p>"},
-    {"k": "words", "h": "Từ vựng A – Thuật ngữ lập luận & động từ văn viết", "items": [
-      {"w": "论点", "py": "lùndiǎn", "hv": "luận điểm", "pos": "n", "vi": "luận điểm (中心论点 luận điểm trung tâm, 分论点 luận điểm nhánh)", "ex": "一篇议论文只能有一个中心论点，各个分论点都要为它服务。", "exVi": "Một bài nghị luận chỉ có một luận điểm trung tâm, các luận điểm nhánh đều phải phục vụ nó."},
-      {"w": "论据", "py": "lùnjù", "hv": "luận cứ", "pos": "n", "vi": "luận cứ: 事实论据 (sự thật, số liệu) và 道理论据 (đạo lý, danh ngôn, định luật)", "ex": "论据必须真实可靠，否则再精彩的论证也站不住脚。", "exVi": "Luận cứ phải chân thực, đáng tin; nếu không, lập luận hay đến mấy cũng không đứng vững."},
-      {"w": "论证", "py": "lùnzhèng", "hv": "luận chứng", "pos": "v/n", "vi": "luận chứng; lập luận chứng minh", "ex": "作者通过对比城乡两种生活方式，论证了自己的观点。", "exVi": "Tác giả lập luận cho quan điểm của mình bằng cách so sánh hai lối sống thành thị và nông thôn."},
-      {"w": "阐述", "py": "chǎnshù", "hv": "xiển thuật", "pos": "v", "vi": "trình bày rõ ràng, giải thích cặn kẽ (một quan điểm, lý luận)", "ex": "他在报告中系统地阐述了自己的研究思路。", "exVi": "Trong báo cáo, anh ấy trình bày có hệ thống hướng nghiên cứu của mình."},
-      {"w": "论述", "py": "lùnshù", "hv": "luận thuật", "pos": "v", "vi": "bàn luận và trình bày (có lập luận)", "ex": "本文从个人、家庭和社会三个层面论述了阅读的意义。", "exVi": "Bài viết bàn về ý nghĩa của việc đọc từ ba bình diện: cá nhân, gia đình và xã hội."},
-      {"w": "佐证", "py": "zuǒzhèng", "hv": "tá chứng", "pos": "n/v", "vi": "chứng cứ bổ trợ; làm chứng cứ cho", "ex": "这组调查结果有力地佐证了他的判断。", "exVi": "Kết quả khảo sát này là chứng cứ đắc lực cho nhận định của anh ấy."},
-      {"w": "驳斥", "py": "bóchì", "hv": "bác xích", "pos": "v", "vi": "bác bỏ thẳng thừng (luận điệu sai trái)", "ex": "文章用大量事实驳斥了“读书无用”的论调。", "exVi": "Bài báo dùng nhiều sự thật để bác bỏ luận điệu “đọc sách vô ích”."},
-      {"w": "反驳", "py": "fǎnbó", "hv": "phản bác", "pos": "v", "vi": "phản bác, cãi lại bằng lý lẽ", "ex": "面对质疑，她冷静地列出数据进行反驳。", "exVi": "Trước những nghi vấn, cô ấy bình tĩnh đưa ra số liệu để phản bác."},
-      {"w": "权衡", "py": "quánhéng", "hv": "quyền hành", "pos": "v", "vi": "cân nhắc, so đo (lợi – hại); 权衡利弊", "ex": "做出决定之前，我们必须反复权衡利弊。", "exVi": "Trước khi quyết định, chúng ta phải cân nhắc lợi hại nhiều lần."},
-      {"w": "弊端", "py": "bìduān", "hv": "tệ đoan", "pos": "n", "vi": "mặt trái, tệ hại (của chế độ, cách làm)", "ex": "过度依赖手机的弊端正日益显现。", "exVi": "Mặt trái của việc lệ thuộc quá mức vào điện thoại ngày càng lộ rõ."},
-      {"w": "裨益", "py": "bìyì", "hv": "tì ích", "pos": "n", "vi": "lợi ích, bổ ích (rất trang trọng; thường 大有裨益)", "ex": "广泛阅读对培养独立思考能力大有裨益。", "exVi": "Đọc rộng rất có ích cho việc rèn luyện năng lực tư duy độc lập."},
-      {"w": "片面", "py": "piànmiàn", "hv": "phiến diện", "pos": "adj", "vi": "phiến diện, một chiều", "ex": "只凭一次经历就下结论，难免失之片面。", "exVi": "Chỉ dựa vào một lần trải nghiệm mà kết luận thì khó tránh phiến diện."},
-      {"w": "偏颇", "py": "piānpō", "hv": "", "pos": "adj", "vi": "thiên lệch, không công bằng (văn viết)", "ex": "这种说法未免有些偏颇。", "exVi": "Cách nói này e là có phần thiên lệch."},
-      {"w": "折射", "py": "zhéshè", "hv": "chiết xạ", "pos": "v", "vi": "(nghĩa bóng) phản ánh, cho thấy", "ex": "这一现象折射出当代年轻人的普遍焦虑。", "exVi": "Hiện tượng này phản ánh nỗi lo âu phổ biến của giới trẻ ngày nay."},
-      {"w": "凸显", "py": "tūxiǎn", "hv": "đột hiển", "pos": "v", "vi": "làm nổi bật, lộ rõ", "ex": "这次事故凸显了安全管理中的漏洞。", "exVi": "Sự cố lần này làm lộ rõ lỗ hổng trong quản lý an toàn."},
-      {"w": "辩证", "py": "biànzhèng", "hv": "biện chứng", "pos": "adj", "vi": "biện chứng; 辩证地看待 nhìn nhận một cách biện chứng", "ex": "我们应当辩证地看待科技进步带来的影响。", "exVi": "Chúng ta nên nhìn nhận một cách biện chứng tác động của tiến bộ khoa học kỹ thuật."},
-      {"w": "理性", "py": "lǐxìng", "hv": "lý tính", "pos": "adj/n", "vi": "lý trí, tỉnh táo (≠ cảm tính 感性)", "ex": "网络讨论需要更多理性的声音。", "exVi": "Thảo luận trên mạng cần nhiều tiếng nói lý trí hơn."},
-      {"w": "碎片化", "py": "suìpiànhuà", "hv": "toái phiến hoá", "pos": "adj/n", "vi": "bị phân mảnh, vụn vặt (碎片化阅读 đọc vụn)", "ex": "碎片化阅读让人获得了信息，却未必获得了知识。", "exVi": "Đọc vụn giúp người ta có thông tin nhưng chưa chắc có tri thức."}
-    ]},
-    {"k": "words", "h": "Từ vựng B – Từ nối văn viết & thành ngữ lập luận", "items": [
-      {"w": "诚然", "py": "chéngrán", "hv": "thành nhiên", "pos": "conj", "vi": "quả thật, đúng là… (nhượng bộ, sau đó PHẢI có 但/然而/可是)", "ex": "诚然，网购十分便捷，但它也冲击了实体小店。", "exVi": "Đúng là mua hàng online rất tiện, nhưng nó cũng giáng đòn vào các cửa hàng nhỏ."},
-      {"w": "固然", "py": "gùrán", "hv": "cố nhiên", "pos": "conj", "vi": "tất nhiên là…, (thừa nhận A rồi chuyển sang B quan trọng hơn: 固然…但/然而…; hoặc thừa nhận cả hai: 固然…也…)", "ex": "天赋固然重要，然而持之以恒的努力更为关键。", "exVi": "Năng khiếu tất nhiên quan trọng, nhưng nỗ lực bền bỉ còn then chốt hơn."},
-      {"w": "鉴于", "py": "jiànyú", "hv": "giám ư", "pos": "prep", "vi": "xét thấy, căn cứ vào (đứng đầu câu, dẫn căn cứ để ra quyết định/kết luận)", "ex": "鉴于样本数量有限，本研究的结论仅供参考。", "exVi": "Xét thấy số lượng mẫu có hạn, kết luận của nghiên cứu này chỉ mang tính tham khảo."},
-      {"w": "倘若", "py": "tǎngruò", "hv": "thảng nhược", "pos": "conj", "vi": "nếu như, giả sử (văn viết của 如果)", "ex": "倘若人人只读标题，理性讨论将无从谈起。", "exVi": "Nếu ai cũng chỉ đọc tiêu đề, thảo luận lý trí sẽ không thể có."},
-      {"w": "进而", "py": "jìn'ér", "hv": "tiến nhi", "pos": "conj", "vi": "từ đó tiến thêm, rồi tiếp đến (bước sau cao hơn bước trước)", "ex": "先了解学生的需求，进而调整教学方法。", "exVi": "Trước hết tìm hiểu nhu cầu học viên, từ đó điều chỉnh phương pháp dạy."},
-      {"w": "乃至", "py": "nǎizhì", "hv": "nãi chí", "pos": "conj", "vi": "thậm chí đến, cho đến cả", "ex": "这一决定将影响个人、企业乃至整个行业。", "exVi": "Quyết định này sẽ ảnh hưởng tới cá nhân, doanh nghiệp, thậm chí cả ngành."},
-      {"w": "由此可见", "py": "yóucǐ kějiàn", "hv": "do thử khả kiến", "pos": "phr", "vi": "từ đó có thể thấy (rút kết luận sau luận cứ)", "ex": "由此可见，环境保护与经济发展并非水火不容。", "exVi": "Từ đó có thể thấy, bảo vệ môi trường và phát triển kinh tế không hề đối chọi nhau."},
-      {"w": "换言之", "py": "huàn yán zhī", "hv": "hoán ngôn chi", "pos": "phr", "vi": "nói cách khác (diễn đạt lại cho rõ hơn)", "ex": "我们读什么，决定了我们怎样思考；换言之，阅读塑造思维。", "exVi": "Ta đọc gì quyết định ta nghĩ thế nào; nói cách khác, đọc định hình tư duy."},
-      {"w": "综上所述", "py": "zōngshàng suǒshù", "hv": "tổng thượng sở thuật", "pos": "phr", "vi": "tổng hợp những điều trên, tóm lại (mở đoạn kết)", "ex": "综上所述，深度阅读在今天依然不可替代。", "exVi": "Tóm lại, đọc sâu ngày nay vẫn không thể thay thế."},
-      {"w": "归根结底", "py": "guīgēn-jiédǐ", "hv": "quy căn kết để", "pos": "idiom", "vi": "suy cho cùng, xét đến tận gốc", "ex": "归根结底，企业的竞争是人才的竞争。", "exVi": "Suy cho cùng, cạnh tranh giữa các doanh nghiệp là cạnh tranh nhân tài."},
-      {"w": "毋庸置疑", "py": "wúyōng-zhìyí", "hv": "vô dung trí nghi", "pos": "idiom", "vi": "không cần phải nghi ngờ, hiển nhiên", "ex": "毋庸置疑，教育是改变命运的重要途径。", "exVi": "Không còn nghi ngờ gì, giáo dục là con đường quan trọng để thay đổi số phận."},
-      {"w": "不容忽视", "py": "bùróng hūshì", "hv": "bất dung hốt thị", "pos": "phr", "vi": "không thể xem nhẹ", "ex": "农村老人的孤独问题不容忽视。", "exVi": "Vấn đề cô đơn của người già nông thôn không thể xem nhẹ."},
-      {"w": "显而易见", "py": "xiǎn'éryìjiàn", "hv": "hiển nhi dị kiến", "pos": "idiom", "vi": "rõ ràng dễ thấy", "ex": "两种方案的优劣显而易见。", "exVi": "Ưu nhược của hai phương án rõ ràng dễ thấy."},
-      {"w": "浅尝辄止", "py": "qiǎncháng-zhézhǐ", "hv": "thiển thường triếp chỉ", "pos": "idiom", "vi": "nếm qua rồi thôi, học hời hợt không đi sâu", "ex": "做学问贵在深入，切忌浅尝辄止。", "exVi": "Làm học vấn quý ở chỗ đi sâu, tối kỵ hời hợt nếm qua rồi bỏ."},
-      {"w": "潜移默化", "py": "qiányí-mòhuà", "hv": "tiềm di mặc hoá", "pos": "idiom", "vi": "ngấm dần, ảnh hưởng một cách âm thầm", "ex": "家庭氛围对孩子的影响是潜移默化的。", "exVi": "Bầu không khí gia đình ảnh hưởng đến trẻ một cách âm thầm, ngấm dần."},
-      {"w": "深思熟虑", "py": "shēnsī-shúlǜ", "hv": "thâm tư thục lự", "pos": "idiom", "vi": "suy nghĩ kỹ càng, chín chắn", "ex": "这是他深思熟虑之后做出的决定。", "exVi": "Đây là quyết định anh ấy đưa ra sau khi suy nghĩ chín chắn."},
-      {"w": "举足轻重", "py": "jǔzú-qīngzhòng", "hv": "cử túc khinh trọng", "pos": "idiom", "vi": "có vai trò then chốt, nhất cử nhất động ảnh hưởng toàn cục", "ex": "中小企业在国民经济中占有举足轻重的地位。", "exVi": "Doanh nghiệp vừa và nhỏ giữ vị trí then chốt trong nền kinh tế quốc dân."},
-      {"w": "相辅相成", "py": "xiāngfǔ-xiāngchéng", "hv": "tương phụ tương thành", "pos": "idiom", "vi": "bổ trợ cho nhau", "ex": "理论与实践相辅相成，缺一不可。", "exVi": "Lý luận và thực tiễn bổ trợ cho nhau, thiếu một không được."},
-      {"w": "截然不同", "py": "jiérán bùtóng", "hv": "tiệt nhiên bất đồng", "pos": "idiom", "vi": "hoàn toàn khác nhau", "ex": "两代人对“成功”的理解截然不同。", "exVi": "Hai thế hệ hiểu về “thành công” hoàn toàn khác nhau."},
-      {"w": "一概而论", "py": "yígài'érlùn", "hv": "nhất khái nhi luận", "pos": "idiom", "vi": "vơ đũa cả nắm (thường dùng phủ định: 不能一概而论)", "ex": "网络游戏的利弊不能一概而论。", "exVi": "Lợi hại của game online không thể vơ đũa cả nắm."},
-      {"w": "本末倒置", "py": "běnmò-dàozhì", "hv": "bản mạt đảo trí", "pos": "idiom", "vi": "đảo lộn gốc ngọn, coi trọng cái phụ hơn cái chính", "ex": "为了考试而放弃真正的学习，未免本末倒置。", "exVi": "Vì thi cử mà bỏ việc học thật sự thì e là đảo lộn gốc ngọn."},
-      {"w": "以偏概全", "py": "yǐpiān-gàiquán", "hv": "dĩ thiên khái toàn", "pos": "idiom", "vi": "lấy một phần khái quát toàn thể (lỗi logic)", "ex": "仅凭几个个案就否定整个群体，是典型的以偏概全。", "exVi": "Chỉ dựa vào vài trường hợp mà phủ định cả nhóm là lỗi lấy một phần suy ra toàn thể điển hình."},
-      {"w": "偷换概念", "py": "tōuhuàn gàiniàn", "hv": "thâu hoán khái niệm", "pos": "phr", "vi": "đánh tráo khái niệm (lỗi logic)", "ex": "把“读书”说成“拿文凭”，这是在偷换概念。", "exVi": "Biến “đọc sách” thành “lấy bằng cấp” là đang đánh tráo khái niệm."},
-      {"w": "因果倒置", "py": "yīnguǒ dàozhì", "hv": "nhân quả đảo trí", "pos": "phr", "vi": "đảo ngược nhân quả (lỗi logic)", "ex": "说“医院越多病人越多”，就犯了因果倒置的错误。", "exVi": "Nói “bệnh viện càng nhiều thì bệnh nhân càng nhiều” là mắc lỗi đảo ngược nhân quả."}
-    ]},
-    {"k": "grammar", "h": "Kỹ thuật 1: Khung bài nghị luận, phép luận chứng & lỗi logic", "html": "<p><b>Khung “ba phần”</b> (三段式) là xương sống của mọi bài luận HSK 7–9:</p><ul><li><b>引论 – mở bài</b>: nêu vấn đề, <u>nói thẳng luận điểm</u> (1–3 câu). Tránh mở bài vòng vo kiểu “Từ xưa đến nay…”.</li><li><b>本论 – thân bài</b>: 2–3 luận điểm nhánh, mỗi đoạn = câu chủ đề + luận cứ + phân tích + câu tiểu kết. Các luận điểm nhánh quan hệ <i>song song</i> (cá nhân – gia đình – xã hội) hoặc <i>tăng tiến</i> (不仅… 而且… 更…).</li><li><b>结论 – kết bài</b>: tổng kết + nâng tầm (升华) hoặc kiến nghị; <u>không chép lại</u> mở bài.</li></ul><p><b>Năm phép luận chứng</b> – mỗi bài nên kết hợp ít nhất hai:</p>", "table": [["Phép luận chứng", "Cách làm", "Câu dẫn tiêu biểu"], ["举例论证 – nêu ví dụ", "Dùng sự việc cụ thể, điển hình", "以……为例；……就是最好的证明"], ["道理论证 – lý lẽ", "Dùng nguyên lý, danh ngôn, quy luật đã được công nhận", "正如……所说；俗话说得好"], ["对比论证 – đối chiếu", "Đặt hai mặt trái ngược cạnh nhau", "与之相反；反观……"], ["因果论证 – nhân quả", "Truy nguyên nhân hoặc suy hệ quả", "之所以……是因为……；其结果必然是……"], ["类比/比喻论证 – so sánh tương tự", "Mượn hình ảnh quen thuộc để làm rõ điều trừu tượng", "这就好比……；如同……一样"]], "ex": [
-      {"t": "以越南的咖啡文化为例，一杯滴漏咖啡往往要等上十分钟，人们却乐在其中。", "vi": "Lấy văn hoá cà phê Việt Nam làm ví dụ: một ly cà phê phin thường phải chờ mười phút, vậy mà người ta vẫn thích thú. (举例论证)"},
-      {"t": "反观那些只追求速度的快餐店，顾客来去匆匆，很少有人停下来交谈。", "vi": "Ngược lại, ở những quán ăn nhanh chỉ chạy theo tốc độ, khách đến đi vội vã, hiếm ai dừng lại trò chuyện. (对比论证)"},
-      {"t": "读书就好比给大脑做运动，偶尔一次收效甚微，持之以恒才能强健。", "vi": "Đọc sách giống như cho bộ não tập thể dục: thỉnh thoảng một lần thì hiệu quả rất nhỏ, kiên trì đều đặn mới khoẻ mạnh. (类比论证)"},
-      {"t": "他只采访了三位大学生，就断定全国的年轻人都不爱读书——这是以偏概全。", "vi": "Anh ta chỉ phỏng vấn ba sinh viên mà khẳng định thanh niên cả nước đều không thích đọc sách – đây là lấy một phần suy ra toàn thể."}
-    ], "tips": [
-      "Năm lỗi logic cần tránh (và cần biết để <b>phản bác</b> người khác): <b>以偏概全</b> lấy một phần suy ra toàn thể · <b>偷换概念</b> đánh tráo khái niệm giữa chừng · <b>因果倒置</b> đảo nhân quả · <b>循环论证</b> dùng kết luận làm luận cứ · <b>非此即彼</b> chỉ đưa ra hai lựa chọn cực đoan.",
-      "Người Việt hay “kể xong ví dụ là thôi”. Sau mỗi ví dụ BẮT BUỘC có câu phân tích: <i>这个例子说明…… / 由此可见……</i>, nếu không đó chỉ là kể chuyện, chưa phải luận chứng.",
-      "Luận điểm phải là một <b>phán đoán</b> có thể tranh luận: ❌ “手机有好处也有坏处” (ai cũng đồng ý → không có gì để chứng minh) → ✅ “手机给学生带来的便利远大于它造成的干扰”."
-    ]},
-    {"k": "grammar", "h": "Kỹ thuật 2: Hệ thống từ nối văn viết theo chức năng", "html": "<p>Giám khảo nhìn <b>từ nối đầu đoạn</b> để nắm khung bài trong vài giây. Hãy dùng từ nối <i>văn viết</i> thay cho từ nối khẩu ngữ (所以, 可是, 还有, 然后…).</p>", "table": [["Chức năng", "Văn viết (nên dùng)", "Khẩu ngữ (tránh trong bài luận)"], ["Nêu luận điểm", "笔者认为；在笔者看来；毋庸置疑", "我觉得；我想"], ["Liệt kê, phân tầng", "首先……其次……再者……此外；一方面……另一方面", "第一……还有……然后"], ["Nhượng bộ → chuyển", "诚然……但；固然……然而；尽管……却；不可否认，……", "虽然……可是"], ["Nhân quả", "之所以……是因为；鉴于；因此；由此可见；进而", "因为……所以"], ["Giả thiết, điều kiện", "倘若；一旦；唯有……才；只要……便", "要是；如果……的话"], ["Tăng tiến", "不仅……更；乃至；甚至；何况", "而且还"], ["Diễn đạt lại", "换言之；也就是说；确切地说", "就是说"], ["Tổng kết", "综上所述；总而言之；归根结底", "总之吧；反正"]], "ex": [
-      {"t": "诚然，短视频降低了获取知识的门槛，但它也让人习惯了被动接受。", "vi": "Đúng là video ngắn hạ thấp ngưỡng tiếp cận tri thức, nhưng nó cũng khiến người ta quen với việc tiếp nhận thụ động."},
-      {"t": "鉴于上述原因，学校决定推迟实施新的考勤制度。", "vi": "Xét thấy những nguyên nhân trên, nhà trường quyết định hoãn áp dụng quy chế điểm danh mới."},
-      {"t": "唯有建立系统的知识框架，我们才能在海量信息中辨别真伪。", "vi": "Chỉ có xây dựng khung tri thức có hệ thống, ta mới phân biệt được thật giả giữa biển thông tin."},
-      {"t": "这项政策不仅关系到每个家庭，更关系到国家的长远发展。", "vi": "Chính sách này không chỉ liên quan tới từng gia đình mà còn liên quan tới sự phát triển lâu dài của quốc gia."}
-    ], "tips": [
-      "<b>诚然 / 固然</b> chỉ là vế nhượng bộ – đằng sau PHẢI có 但/然而/可是. ❌ 诚然网络很方便，所以大家都用 (诚然 không đi với 所以).",
-      "<b>鉴于</b> đứng đầu câu, dẫn căn cứ để đưa ra <i>quyết định / đề xuất / kết luận</i>; không dùng cùng 所以 và không dùng cho nhân quả tự nhiên: ❌ 鉴于下雨，路很滑 → ✅ 鉴于路面湿滑，比赛推迟举行.",
-      "Không “rải” từ nối vào mọi câu – đọc sẽ nặng nề. Quy tắc thực hành: mỗi đoạn 1 từ nối báo chức năng ở đầu + 1–2 từ nối bên trong."
-    ]},
-    {"k": "grammar", "h": "Kỹ thuật 3: Khuôn câu lập luận văn viết", "html": "<p>Các khuôn câu dưới đây giúp câu văn <b>có độ “sắc”</b>: vừa nêu ý, vừa định hướng người đọc.</p>", "table": [["Khuôn câu", "Nghĩa / chức năng", "Ví dụ"], ["与其说A，不如说B", "Nói là A thì đúng hơn nên nói là B (định nghĩa lại vấn đề)", "与其说他缺乏时间，不如说他缺乏计划。"], ["与其A，不如B", "Thay vì A, chi bằng B (đề xuất)", "与其抱怨环境，不如改变自己。"], ["不是A，而是B", "Không phải A mà là B (bác bỏ – xác lập)", "问题不是手机，而是使用方式。"], ["非但不A，反而B", "Chẳng những không A mà trái lại còn B", "刷视频非但不能缓解压力，反而加剧了焦虑。"], ["之所以A，是因为B", "Sở dĩ A là vì B (nhấn nguyên nhân)", "他之所以成功，是因为从不放弃。"], ["就……而言", "Xét về…, đối với… mà nói", "就效率而言，线上会议更胜一筹。"], ["在……的同时", "Đồng thời với việc…", "在发展经济的同时，必须保护环境。"], ["以A为B", "Lấy A làm B", "本文以河内的老街区为例。"]], "ex": [
-      {"t": "与其说这是技术问题，不如说这是管理问题。", "vi": "Nói đây là vấn đề kỹ thuật thì đúng hơn phải nói là vấn đề quản lý."},
-      {"t": "就长远而言，培养阅读习惯比提高考试分数更重要。", "vi": "Xét về lâu dài, nuôi dưỡng thói quen đọc quan trọng hơn nâng điểm thi."},
-      {"t": "在享受科技便利的同时，我们也应警惕它带来的依赖。", "vi": "Đồng thời với việc tận hưởng tiện lợi của công nghệ, ta cũng nên cảnh giác với sự lệ thuộc nó mang lại."}
-    ], "tips": [
-      "Phân biệt <b>与其说A，不如说B</b> (đánh giá lại BẢN CHẤT) với <b>与其A，不如B</b> (lựa chọn HÀNH ĐỘNG). Người Việt hay dịch cả hai là “thà… còn hơn” → sai nghĩa câu thứ nhất.",
-      "<b>非但不…反而…</b>: vế sau phải trái với kỳ vọng ở vế trước. ❌ 他非但不努力，反而很懒 (lặp ý, không “trái kỳ vọng”) → ✅ 他非但不感谢我，反而怪我多管闲事."
-    ]},
-    {"k": "dialog", "h": "Nghe: Bài giảng “议论文的骨架” (Bộ xương của bài nghị luận)", "lang": "zh-CN", "note": "Lớp cao học tiếng Trung ở Hà Nội. Giáo sư Lâm (林教授) giảng về cấu trúc bài nghị luận; học viên Nguyễn Minh (阮明) và Lê Thu (黎秋) đặt câu hỏi. Nghe lần 1 không nhìn chữ: giáo sư ví luận điểm, luận cứ, luận chứng với bộ phận nào của ngôi nhà?", "lines": [
-      {"s": "林教授", "g": "m", "t": "同学们好。今天我们来谈谈议论文的骨架。很多同学写议论文，材料不少，句子也很漂亮，可读完之后，读者却不知道作者到底想证明什么。问题往往出在结构上。", "vi": "Chào các em. Hôm nay ta bàn về bộ xương của bài nghị luận. Nhiều bạn viết nghị luận tư liệu không ít, câu cũng đẹp, nhưng đọc xong người đọc vẫn không biết tác giả rốt cuộc muốn chứng minh điều gì. Vấn đề thường nằm ở cấu trúc."},
-      {"s": "林教授", "g": "m", "t": "一篇规范的议论文离不开三个要素：论点、论据和论证。论点是作者的主张，必须鲜明、集中；论据是支撑论点的材料；论证则是把二者连接起来的推理过程。", "vi": "Một bài nghị luận chuẩn không thể thiếu ba yếu tố: luận điểm, luận cứ và luận chứng. Luận điểm là chủ trương của tác giả, phải rõ ràng, tập trung; luận cứ là tư liệu chống đỡ luận điểm; còn luận chứng là quá trình suy luận nối hai thứ đó lại."},
-      {"s": "林教授", "g": "m", "t": "打个比方，论点好比房子的屋顶，论据是柱子，而论证就是把柱子和屋顶牢牢固定在一起的榫卯。缺了哪一样，房子都立不起来。", "vi": "Ví von thế này: luận điểm như mái nhà, luận cứ là cột, còn luận chứng là mộng gỗ cố định chắc cột với mái. Thiếu thứ nào, ngôi nhà cũng không đứng được."},
-      {"s": "阮明", "g": "m", "t": "老师，我有一个问题。论据是不是越多越好？我写作文的时候总想多举几个例子。", "vi": "Thưa thầy, em có một câu hỏi. Luận cứ có phải càng nhiều càng tốt không ạ? Khi viết bài em luôn muốn nêu thêm vài ví dụ."},
-      {"s": "林教授", "g": "m", "t": "问得好。论据贵精不贵多。三个和论点关系不大的例子，远不如一个典型、可靠的例子有说服力。", "vi": "Hỏi hay lắm. Luận cứ cốt tinh không cốt nhiều. Ba ví dụ ít liên quan đến luận điểm kém xa một ví dụ điển hình, đáng tin về sức thuyết phục."},
-      {"s": "林教授", "g": "m", "t": "而且，举完例子以后一定要分析，说明这个例子为什么能证明你的观点。否则，你只是在讲故事，而不是在论证。", "vi": "Hơn nữa, nêu ví dụ xong nhất định phải phân tích, nói rõ vì sao ví dụ này chứng minh được quan điểm của em. Nếu không, em chỉ đang kể chuyện chứ không phải lập luận."},
-      {"s": "林教授", "g": "m", "t": "下面说说结构。最常见的是引论、本论、结论三段式。引论提出问题，亮出观点；本论从几个层面展开论证；结论归纳全文，适当升华。", "vi": "Tiếp theo nói về cấu trúc. Phổ biến nhất là kiểu ba phần: mở bài, thân bài, kết bài. Mở bài nêu vấn đề, đưa ra quan điểm; thân bài triển khai lập luận từ vài bình diện; kết bài khái quát toàn bài, nâng tầm vừa phải."},
-      {"s": "林教授", "g": "m", "t": "本论的几个分论点之间要有逻辑关系。它们可以是并列的，比如从个人、家庭、社会三个层面来看；也可以是层层递进的，比如不仅如何，而且如何，更如何。", "vi": "Các luận điểm nhánh trong thân bài phải có quan hệ logic. Chúng có thể song song, ví dụ xét từ ba bình diện cá nhân, gia đình, xã hội; cũng có thể tăng tiến từng tầng, kiểu không chỉ thế này, mà còn thế kia, hơn nữa còn thế nọ."},
-      {"s": "黎秋", "g": "f", "t": "老师，考试时间有限，有没有什么办法能让阅卷老师一眼就看出我的结构？", "vi": "Thưa thầy, thời gian thi có hạn, có cách nào để giám khảo nhìn một cái là thấy cấu trúc bài của em không ạ?"},
-      {"s": "林教授", "g": "m", "t": "有。关键在于用好书面语的关联词。比如用首先、其次、再者标明层次；用诚然什么什么，但是什么什么，先承认对方观点的合理之处，再转入自己的论证。这样，文章显得客观、全面。", "vi": "Có. Mấu chốt là dùng tốt từ nối văn viết. Chẳng hạn dùng “trước hết, tiếp theo, thêm nữa” để đánh dấu tầng bậc; dùng “đúng là… nhưng…” để trước thừa nhận chỗ hợp lý trong quan điểm đối phương rồi mới chuyển sang lập luận của mình. Như vậy bài viết trông khách quan, toàn diện."},
-      {"s": "林教授", "g": "m", "t": "需要提醒的是，关联词并不是越多越好。有的同学每句话都用因此、所以，读起来反而啰嗦。一般来说，每段开头用一个关联词标明功能就够了。", "vi": "Cần lưu ý là từ nối không phải càng nhiều càng tốt. Có bạn câu nào cũng dùng “vì vậy, cho nên”, đọc lên lại thấy dài dòng. Nói chung, đầu mỗi đoạn dùng một từ nối báo chức năng là đủ."},
-      {"s": "林教授", "g": "m", "t": "最后，我们还要避免几种常见的逻辑错误。第一是以偏概全，比如只采访了几个人，就下结论说现在的年轻人都怎样怎样。", "vi": "Cuối cùng, ta còn phải tránh mấy lỗi logic thường gặp. Thứ nhất là lấy một phần suy ra toàn thể, ví dụ chỉ phỏng vấn vài người đã kết luận giới trẻ bây giờ đều thế này thế nọ."},
-      {"s": "林教授", "g": "m", "t": "第二是偷换概念。比如前半篇讨论的是阅读，后半篇不知不觉变成了读纸质书，概念的范围已经悄悄改变了。", "vi": "Thứ hai là đánh tráo khái niệm. Ví dụ nửa đầu bài bàn về việc đọc, nửa sau bất giác biến thành đọc sách giấy – phạm vi khái niệm đã lặng lẽ thay đổi."},
-      {"s": "林教授", "g": "m", "t": "第三是因果倒置。有人说，成绩好的学生都爱读书，所以读书使人成绩好。可也许恰恰是成绩好的学生更有时间读书，因果关系未必是这样。", "vi": "Thứ ba là đảo ngược nhân quả. Có người nói học sinh giỏi đều thích đọc sách, nên đọc sách làm người ta học giỏi. Nhưng có khi chính học sinh giỏi mới có nhiều thời gian đọc sách hơn; quan hệ nhân quả chưa chắc như vậy."},
-      {"s": "阮明", "g": "m", "t": "原来如此。那结论部分只要把论点重复一遍就可以了吗？", "vi": "Ra là vậy. Thế phần kết chỉ cần nhắc lại luận điểm một lần là được ạ?"},
-      {"s": "林教授", "g": "m", "t": "不能简单重复。好的结论要么总结升华，把观点提到更高的层面；要么提出建议，回应开头的问题。换言之，结尾要让读者有所思考，而不是原地打转。", "vi": "Không thể lặp lại đơn giản. Kết bài hay hoặc là tổng kết và nâng tầm, đưa quan điểm lên bình diện cao hơn; hoặc là đưa ra kiến nghị, đáp lại câu hỏi ở mở bài. Nói cách khác, phần kết phải khiến người đọc suy ngẫm, chứ không phải giậm chân tại chỗ."},
-      {"s": "林教授", "g": "m", "t": "好，今天的作业是：以碎片化阅读利大于弊还是弊大于利为题，写一份提纲，标出中心论点、三个分论点以及每个分论点的论据。下次课我们一起点评。", "vi": "Được rồi, bài tập hôm nay: với đề “Đọc vụn lợi nhiều hơn hại hay hại nhiều hơn lợi”, viết một dàn ý, ghi rõ luận điểm trung tâm, ba luận điểm nhánh và luận cứ cho mỗi luận điểm nhánh. Buổi sau chúng ta cùng nhận xét."}
-    ], "qs": [
-      {"q": "Theo giáo sư Lâm, ba yếu tố không thể thiếu của bài nghị luận là gì?", "o": ["Mở bài, thân bài, kết bài", "Luận điểm, luận cứ, luận chứng", "Sự thật, số liệu, danh ngôn", "Đề bài, dàn ý, bài viết"], "a": 1, "e": "一篇规范的议论文离不开三个要素：论点、论据和论证。"},
-      {"q": "Về luận cứ, giáo sư khuyên điều gì?", "o": ["Càng nhiều ví dụ càng thuyết phục", "Chỉ dùng số liệu, không dùng ví dụ", "Cốt tinh không cốt nhiều; nêu ví dụ xong phải phân tích", "Ví dụ nổi tiếng thì không cần phân tích"], "a": 2, "e": "论据贵精不贵多 … 举完例子以后一定要分析。"},
-      {"q": "Câu “học sinh giỏi đều thích đọc nên đọc sách làm người ta học giỏi” minh hoạ lỗi nào?", "o": ["以偏概全", "偷换概念", "因果倒置", "循环论证"], "a": 2, "e": "Giáo sư nói 第三是因果倒置 – có thể chính học sinh giỏi mới có thời gian đọc (nhân quả ngược)."},
-      {"q": "Giáo sư lưu ý gì về từ nối?", "o": ["Câu nào cũng nên có từ nối", "Mỗi đoạn mở đầu bằng một từ nối báo chức năng là đủ", "Không nên dùng 诚然 vì quá trang trọng", "Chỉ nên dùng 因此 và 所以"], "a": 1, "e": "每段开头用一个关联词标明功能就够了。"},
-      {"q": "Giáo sư ví LUẬN ĐIỂM như bộ phận nào của ngôi nhà? (gõ chữ Hán hoặc pinyin)", "a": "屋顶", "alt": ["wuding", "wūdǐng"], "e": "论点好比房子的屋顶，论据是柱子，论证是榫卯。"}
-    ]},
-    {"k": "read", "h": "Đọc: Bài nghị luận mẫu", "title": "碎片化时代，我们还需要深度阅读吗？", "text": "清晨醒来，许多人做的第一件事不是洗漱，而是打开手机：新闻推送、短视频、朋友圈动态……一条接一条，仿佛永远也刷不完。有人据此断言：在信息如此丰富的今天，花几天时间啃完一本厚书已经不合时宜，碎片化阅读足以满足我们的需求。笔者却认为，碎片化时代非但没有让深度阅读变得多余，反而使它显得更加珍贵。\n\n诚然，碎片化阅读有其独特的优势。它门槛低、速度快，人们在地铁上、排队时就能了解天下大事，掌握实用技巧。对于工作繁忙的上班族而言，这种随时随地获取信息的方式无疑是一大便利。然而，便利并不等于有益。碎片化信息往往只给结论、不讲过程，读者获得的是一个个孤立的“知识点”，却难以把它们连成一张完整的网。\n\n深度阅读之所以不可替代，首先是因为它训练的是一种持续思考的能力。读一本严肃的著作，读者需要跟随作者的思路，理解概念、检验论据、质疑结论，这个过程本身就是一次思维的锻炼。反观刷短视频，内容每隔十几秒就切换一次，注意力被不断打断，久而久之，人们便习惯了浅尝辄止，一遇到稍长的文章就失去耐心。换言之，我们读什么，在潜移默化中决定了我们怎样思考。\n\n其次，深度阅读能帮助人们抵御片面信息的误导。笔者的一位同事曾在网上看到“某种水果能治百病”的说法，几乎信以为真。后来，他找来两本营养学专著认真研读，才发现那条消息断章取义，把实验室里的初步结果夸大成了定论。由此可见，唯有建立起系统的知识框架，我们才能在纷繁复杂的信息中辨别真伪，而不是人云亦云。\n\n有人或许会反驳：现代人时间有限，哪有工夫读大部头？这种说法看似合理，实则偷换了概念——“没有时间”往往只是“没有安排”的托词。我们每天花在社交软件上的时间，少则一两个小时，多则四五个小时；倘若从中挤出半个小时读书，一年下来便能读完十几本书。可见，问题的关键不在于时间的多少，而在于我们是否真正意识到深度阅读的价值。\n\n当然，提倡深度阅读并不意味着全盘否定碎片化阅读。两者各有所长，理应相辅相成：碎片化阅读帮助我们拓宽视野、捕捉信息，深度阅读则帮助我们沉淀思想、形成判断。综上所述，在信息爆炸的时代，深度阅读不仅没有过时，而且是每个人保持独立思考的压舱石。与其感叹时间被手机偷走，不如从今天起，每天给自己留出一段安静的读书时光。", "vi": "Sáng thức dậy, việc đầu tiên nhiều người làm không phải đánh răng rửa mặt mà là mở điện thoại: tin tức đẩy về, video ngắn, trạng thái của bạn bè… cái này nối cái kia, như thể lướt mãi không hết. Có người dựa vào đó mà khẳng định: trong thời đại thông tin phong phú như hôm nay, bỏ ra mấy ngày “gặm” hết một cuốn sách dày đã lỗi thời, đọc vụn là đủ đáp ứng nhu cầu của chúng ta. Người viết lại cho rằng, thời đại phân mảnh chẳng những không khiến việc đọc sâu trở nên thừa thãi, mà trái lại còn làm nó càng quý giá hơn.\n\nĐúng là đọc vụn có ưu thế riêng. Nó có ngưỡng thấp, tốc độ nhanh; trên tàu điện, lúc xếp hàng, người ta đã có thể nắm việc lớn thiên hạ, học được mẹo hữu ích. Với người đi làm bận rộn, cách tiếp nhận thông tin mọi lúc mọi nơi này hẳn nhiên là một sự tiện lợi lớn. Tuy nhiên, tiện lợi không đồng nghĩa với bổ ích. Thông tin vụn thường chỉ đưa kết luận mà không nói quá trình; người đọc nhận được từng “điểm kiến thức” rời rạc nhưng khó nối chúng thành một tấm lưới hoàn chỉnh.\n\nSở dĩ đọc sâu không thể thay thế, trước hết là vì nó rèn luyện năng lực tư duy liên tục. Đọc một tác phẩm nghiêm túc, người đọc phải đi theo mạch suy nghĩ của tác giả, hiểu khái niệm, kiểm tra luận cứ, chất vấn kết luận – bản thân quá trình ấy đã là một lần luyện tập tư duy. Ngược lại, khi lướt video ngắn, cứ mười mấy giây nội dung lại chuyển một lần, sự chú ý liên tục bị cắt ngang; lâu dần, người ta quen nếm qua rồi thôi, hễ gặp bài hơi dài là mất kiên nhẫn. Nói cách khác, ta đọc gì sẽ âm thầm quyết định ta suy nghĩ ra sao.\n\nThứ hai, đọc sâu giúp con người chống lại sự dẫn dắt sai của thông tin phiến diện. Một đồng nghiệp của người viết từng thấy trên mạng thông tin “một loại trái cây chữa được bách bệnh” và suýt tin là thật. Sau đó anh tìm hai chuyên khảo về dinh dưỡng học để đọc kỹ, mới phát hiện tin kia cắt xén câu chữ, thổi phồng kết quả sơ bộ trong phòng thí nghiệm thành kết luận chắc chắn. Từ đó có thể thấy, chỉ khi xây dựng được khung tri thức có hệ thống, ta mới phân biệt được thật giả giữa rừng thông tin phức tạp, thay vì người ta nói sao mình nói vậy.\n\nCó người có lẽ sẽ phản bác: người hiện đại thời gian có hạn, đâu rảnh mà đọc sách dày cộp? Cách nói này nghe có vẻ hợp lý, thực ra đã đánh tráo khái niệm – “không có thời gian” thường chỉ là cái cớ của “không sắp xếp”. Mỗi ngày ta dành cho mạng xã hội ít thì một hai tiếng, nhiều thì bốn năm tiếng; nếu bớt ra nửa tiếng để đọc sách, một năm có thể đọc xong hơn chục cuốn. Có thể thấy, mấu chốt của vấn đề không nằm ở thời gian nhiều hay ít, mà ở chỗ ta có thực sự nhận ra giá trị của việc đọc sâu hay không.\n\nĐương nhiên, đề cao đọc sâu không có nghĩa là phủ định hoàn toàn việc đọc vụn. Hai cách đọc mỗi bên có sở trường riêng, lẽ ra phải bổ trợ cho nhau: đọc vụn giúp ta mở rộng tầm nhìn, nắm bắt thông tin; đọc sâu giúp ta lắng đọng tư tưởng, hình thành phán đoán. Tóm lại, trong thời đại bùng nổ thông tin, đọc sâu không những không lỗi thời mà còn là “vật dằn khoang” giúp mỗi người giữ vững tư duy độc lập. Thay vì than thở thời gian bị điện thoại đánh cắp, chi bằng từ hôm nay, mỗi ngày hãy dành cho mình một khoảng thời gian đọc sách yên tĩnh.", "gloss": [
-      {"w": "不合时宜", "py": "bù hé shíyí", "vi": "không hợp thời, lỗi thời"},
-      {"w": "门槛", "py": "ménkǎn", "vi": "ngưỡng cửa; (nghĩa bóng) điều kiện tối thiểu"},
-      {"w": "随时随地", "py": "suíshí suídì", "vi": "mọi lúc mọi nơi"},
-      {"w": "反观", "py": "fǎnguān", "vi": "nhìn ngược lại, trái lại (dẫn vế đối chiếu)"},
-      {"w": "断章取义", "py": "duànzhāng-qǔyì", "vi": "cắt xén câu chữ, trích dẫn sai ý gốc"},
-      {"w": "信以为真", "py": "xìn yǐ wéi zhēn", "vi": "tin là thật"},
-      {"w": "纷繁复杂", "py": "fēnfán fùzá", "vi": "rối ren phức tạp"},
-      {"w": "人云亦云", "py": "rén yún yì yún", "vi": "người ta nói sao nói vậy, không có chính kiến"},
-      {"w": "大部头", "py": "dàbùtóu", "vi": "sách dày, bộ sách đồ sộ"},
-      {"w": "托词", "py": "tuōcí", "vi": "cái cớ, lời thoái thác"},
-      {"w": "全盘否定", "py": "quánpán fǒudìng", "vi": "phủ định hoàn toàn"},
-      {"w": "压舱石", "py": "yācāngshí", "vi": "đá dằn khoang (thuyền) – thứ giữ cho vững, ổn định"}
-    ], "qs": [
-      {"q": "Luận điểm trung tâm của bài là gì?", "o": ["Đọc vụn đã đủ đáp ứng nhu cầu của người hiện đại", "Thời đại phân mảnh càng làm đọc sâu trở nên quý giá", "Nên cấm dùng điện thoại vào buổi sáng", "Đọc sách giấy tốt hơn đọc sách điện tử"], "a": 1, "e": "Câu cuối đoạn 1: 碎片化时代非但没有让深度阅读变得多余，反而使它显得更加珍贵。"},
-      {"q": "Đoạn 2 dùng thủ pháp gì?", "o": ["Nêu ví dụ về một đồng nghiệp", "Nhượng bộ: thừa nhận ưu điểm của đọc vụn rồi chuyển ý", "Tổng kết toàn bài", "Đưa ra kiến nghị"], "a": 1, "e": "诚然…然而… – thừa nhận ưu thế rồi chuyển sang “tiện lợi không đồng nghĩa bổ ích”."},
-      {"q": "Câu chuyện về người đồng nghiệp ở đoạn 4 thuộc phép luận chứng nào?", "o": ["举例论证", "类比论证", "道理论证", "对比论证"], "a": 0, "e": "Dùng một sự việc cụ thể (đồng nghiệp suýt tin tin giả) làm luận cứ → 举例论证, sau đó rút kết luận bằng 由此可见."},
-      {"q": "Theo tác giả, lập luận “người hiện đại không có thời gian” mắc lỗi gì?", "o": ["Đảo ngược nhân quả", "Lấy một phần suy ra toàn thể", "Đánh tráo khái niệm: “không có thời gian” thực chất là “không sắp xếp”", "Lập luận vòng tròn"], "a": 2, "e": "这种说法看似合理，实则偷换了概念——“没有时间”往往只是“没有安排”的托词。"},
-      {"q": "Ở đoạn kết, tác giả ví đọc sâu như thứ gì? (gõ chữ Hán)", "a": "压舱石", "alt": ["yacangshi", "yācāngshí"], "e": "深度阅读…是每个人保持独立思考的压舱石。"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán trọng tâm (bấm để tập viết)", "items": [
-      {"c": "论", "py": "lùn", "hv": "luận", "parts": "讠(ngôn – lời nói) + 仑 (luân – có thứ tự, gợi âm)", "strokes": 6, "vi": "bàn luận – lời nói có thứ lớp, mạch lạc", "words": "论点, 论据, 论证, 结论"},
-      {"c": "据", "py": "jù", "hv": "cứ", "parts": "扌(thủ – tay) + 居 (cư – gợi âm)", "strokes": 11, "vi": "căn cứ, dựa vào – tay bám vào chỗ vững", "words": "论据, 根据, 数据, 据此"},
-      {"c": "鉴", "py": "jiàn", "hv": "giám", "parts": "phần trên (biến thể của 监 – soi nhìn) + 金 (kim – kim loại)", "strokes": 13, "vi": "gương soi bằng đồng → soi xét, lấy làm gương", "words": "鉴于, 借鉴, 鉴定"},
-      {"c": "阐", "py": "chǎn", "hv": "xiển", "parts": "门 (môn – cửa) + 单 (đơn – gợi âm)", "strokes": 11, "vi": "mở rộng ra cho rõ – mở cửa cho ánh sáng vào", "words": "阐述, 阐明, 阐释"},
-      {"c": "弊", "py": "bì", "hv": "tệ", "parts": "敝 (tệ – rách nát, gợi âm) + 廾 (củng – hai tay)", "strokes": 14, "vi": "điều hại, tệ đoan", "words": "弊端, 利弊, 作弊"},
-      {"c": "辩", "py": "biàn", "hv": "biện", "parts": "辛 + 讠 + 辛 (lời nói kẹp giữa hai bên tranh chấp)", "strokes": 16, "vi": "tranh biện – lời qua lẽ lại giữa hai phía; phân biệt 辩 (lời nói) / 辨 (phân biệt, có nét 丿丶 ở giữa) / 辫 (bím tóc)", "words": "辩证, 辩论, 争辩"}
-    ]},
-    {"k": "speak", "h": "Nói: Lập luận miệng có cấu trúc", "tasks": [
-      {"p": "Nói 1–1,5 phút về đề 「网络让人更孤独吗？」: luận điểm rõ ngay câu đầu, 2 luận cứ, có nhượng bộ 诚然…但…, kết bằng 综上所述 hoặc 与其…不如….", "model": "我认为，网络本身并不会让人更孤独，关键在于我们如何使用它。诚然，有些人整天沉迷于手机，和家人坐在一起却各看各的屏幕，这种现象确实令人担忧。但是，网络也让远在他乡的游子每天都能和父母视频通话，让兴趣相投的人跨越千里结识彼此。由此可见，孤独的根源不在于网络，而在于人们是否愿意真诚地沟通。倘若我们吃饭时能放下手机，在网上交流时多一份真心，网络完全可以成为连接人与人的桥梁。综上所述，与其指责网络，不如反思我们自己的使用习惯。", "vi": "Tôi cho rằng bản thân mạng internet không làm con người cô đơn hơn; mấu chốt là ta sử dụng nó thế nào. Đúng là có người suốt ngày đắm chìm vào điện thoại, ngồi cùng gia đình mà ai nấy dán mắt vào màn hình của mình – hiện tượng này thật đáng lo. Nhưng mạng cũng giúp người con xa quê ngày nào cũng gọi video được cho cha mẹ, giúp những người cùng sở thích cách xa nghìn dặm vẫn quen biết nhau. Từ đó có thể thấy, gốc rễ của cô đơn không nằm ở mạng mà ở chỗ con người có sẵn lòng giao tiếp chân thành hay không. Nếu lúc ăn cơm ta đặt điện thoại xuống, khi trò chuyện trên mạng thêm một phần chân tình, mạng hoàn toàn có thể trở thành cây cầu nối người với người. Tóm lại, thay vì trách mạng, chi bằng xem lại thói quen sử dụng của chính mình.", "tips": "Ngắt nhịp ngay sau từ nối (诚然｜, 由此可见｜) và nhấn trọng âm logic vào 关键在于, 根源, 不在于…而在于…. Giữ tốc độ khoảng 200 chữ/phút; tránh 嗯, 那个, 然后."},
-      {"p": "Phản bác quan điểm 「读书无用，不如早点工作赚钱」 trong 1 phút: dùng 固然…然而…, 与其说…不如说…, và gọi tên lỗi logic của đối phương.", "model": "早点工作固然能早点积累经验和收入，然而，“读书无用”这个结论显然是以偏概全。持这种观点的人往往只看到个别没读多少书却发家致富的例子，却忽视了更多因为缺乏知识而失去机会的人。况且，这里的“读书”被偷换成了“拿文凭”。读书真正的价值，与其说是一张毕业证书，不如说是一种终身学习、独立判断的能力。在技术更新越来越快的今天，这种能力只会越来越重要。因此，我们不能因为少数例子就否定读书的意义。", "vi": "Đi làm sớm tất nhiên giúp sớm tích lũy kinh nghiệm và thu nhập, nhưng kết luận “đọc sách vô ích” rõ ràng là lấy một phần suy ra toàn thể. Người theo quan điểm này thường chỉ thấy vài ví dụ cá biệt ít học mà vẫn làm giàu, lại bỏ qua rất nhiều người mất cơ hội vì thiếu tri thức. Hơn nữa, “đọc sách” ở đây đã bị đánh tráo thành “lấy bằng”. Giá trị thật của việc đọc sách, nói là một tấm bằng thì đúng hơn phải nói là năng lực học suốt đời và phán đoán độc lập. Trong thời đại công nghệ đổi mới ngày càng nhanh, năng lực ấy chỉ càng quan trọng. Vì vậy, ta không thể vì vài ví dụ mà phủ định ý nghĩa của việc đọc sách.", "tips": "Cấu trúc phản bác 4 bước: thừa nhận phần đúng (固然) → gọi tên lỗi (以偏概全 / 偷换概念) → đưa luận cứ ngược → kết luận lại. Giọng điềm tĩnh, không dùng từ công kích."}
-    ]},
-    {"k": "write", "h": "Viết 1 – Dịch Việt → Trung một đoạn nghị luận", "task": "Dịch sang tiếng Trung văn viết, dùng ít nhất 4 từ nối/khuôn câu của bài:\n«Không thể phủ nhận rằng trí tuệ nhân tạo đã khiến việc dịch thuật trở nên nhanh chóng hơn bao giờ hết. Tuy nhiên, điều đó không có nghĩa là học ngoại ngữ đã trở nên vô ích. Máy móc có thể chuyển đổi từ ngữ, nhưng khó có thể hiểu được những tầng ý nghĩa văn hoá ẩn sau lời nói. Nói cách khác, ngoại ngữ không chỉ là công cụ giao tiếp mà còn là cánh cửa để hiểu một dân tộc khác. Vì vậy, thay vì lo lắng bị máy móc thay thế, chúng ta nên học cách tận dụng nó để học tốt hơn.»", "min": 120, "model": "不可否认，人工智能使翻译变得前所未有地快捷。然而，这并不意味着学习外语已经变得毫无用处。机器能够转换词语，却难以理解话语背后深层的文化内涵。换言之，外语不仅是交流的工具，更是了解另一个民族的窗口。因此，与其担心被机器取代，不如学会利用它来更好地学习。", "modelVi": "Ghi chú kỹ thuật: “Không thể phủ nhận rằng” → 不可否认 (không cần dịch “rằng”) · “hơn bao giờ hết” → 前所未有地 (đặt làm trạng ngữ trước tính từ) · “không có nghĩa là” → 并不意味着 · “những tầng ý nghĩa văn hoá ẩn sau lời nói” → đảo định ngữ lên trước: 话语背后深层的文化内涵 · “Nói cách khác” → 换言之 · “không chỉ… mà còn…” → 不仅…更… (更 mạnh hơn 而且, hợp văn nghị luận) · “thay vì… nên…” → 与其…不如….", "tips": ["Không dịch “việc dịch thuật trở nên” thành 翻译的事情变成… – văn viết Trung dùng câu kiêm ngữ 使 + tân ngữ + 变得 + tính từ.", "“vô ích” trong văn nghị luận: 毫无用处 / 毫无意义 trang trọng hơn 没有用.", "Đọc lại bản dịch mà không nhìn bản Việt: câu có tự nhiên như người Trung viết không?"], "checklist": ["Có 不可否认 / 然而 / 换言之 / 与其…不如…", "Định ngữ dài đặt TRƯỚC danh từ", "Không còn dấu vết trật tự câu tiếng Việt", "Dùng 使…变得… thay cho 让…成为… lủng củng", "Dấu câu toàn khổ 。，；"]},
-    {"k": "write", "h": "Viết 2 – Đoạn nghị luận 300 chữ", "task": "Viết một đoạn nghị luận khoảng 300 chữ với đề 「大学课堂是否应该允许学生使用手机？」. Yêu cầu: câu đầu nêu luận điểm; ít nhất 2 luận cứ (1 ví dụ cụ thể); có nhượng bộ 诚然/固然…但…; có câu tiểu kết; dùng ≥ 5 từ của bài.", "min": 300, "model": "大学课堂是否应该允许学生使用手机？笔者认为，与其一刀切地禁止，不如引导学生合理使用。首先，手机本身是一种强大的学习工具。学生可以随时查阅资料、使用电子词典，甚至参与老师发起的线上投票，课堂互动因此更加活跃。其次，一味禁止往往适得其反。笔者所在的学院曾要求学生上课前上交手机，结果不少学生改用平板电脑，管理成本反而增加了。诚然，有些学生自制力较差，上课时刷视频、玩游戏，这一问题不容忽视。但问题的根源不在于手机，而在于课堂缺乏吸引力和明确的规则。倘若老师能把手机的使用纳入教学设计，规定何时可用、何时必须收起，学生的注意力自然会回到学习上来。由此可见，手机并非课堂的敌人。综上所述，对待课堂上的手机，堵不如疏，关键在于规则清晰、引导得当。", "modelVi": "Lớp học đại học có nên cho phép sinh viên dùng điện thoại? Người viết cho rằng, thay vì cấm “một nhát cắt”, chi bằng hướng dẫn sinh viên dùng hợp lý. Trước hết, bản thân điện thoại là một công cụ học tập mạnh mẽ: sinh viên có thể tra tài liệu bất cứ lúc nào, dùng từ điển điện tử, thậm chí tham gia bỏ phiếu trực tuyến do giảng viên phát động, nhờ vậy tương tác trong lớp sôi nổi hơn. Thứ hai, cấm đoán một chiều thường phản tác dụng. Khoa nơi người viết làm việc từng yêu cầu sinh viên nộp điện thoại trước giờ học, kết quả nhiều em chuyển sang dùng máy tính bảng, chi phí quản lý trái lại còn tăng. Đúng là có sinh viên tự chủ kém, trong giờ xem video, chơi game – vấn đề này không thể xem nhẹ. Nhưng gốc rễ không nằm ở điện thoại mà ở chỗ giờ học thiếu sức hút và thiếu quy tắc rõ ràng. Nếu giảng viên đưa việc dùng điện thoại vào thiết kế bài giảng, quy định khi nào được dùng, khi nào phải cất, sự chú ý của sinh viên tự nhiên sẽ quay về việc học. Từ đó có thể thấy, điện thoại không phải kẻ thù của lớp học. Tóm lại, với điện thoại trong lớp, ngăn chặn không bằng khơi thông; mấu chốt là quy tắc rõ ràng, hướng dẫn thích đáng.", "tips": ["堵不如疏 (ngăn không bằng khơi) là cách kết “nâng tầm” rất hợp văn nghị luận.", "Ví dụ cụ thể (笔者所在的学院…) làm luận cứ đáng tin hơn ví dụ chung chung.", "Đếm chữ: 300 chữ ≈ 15–17 dòng trên giấy ô vuông 20 chữ/dòng."], "checklist": ["Câu 1–2 nêu rõ luận điểm", "Có 首先/其次 phân tầng", "Có 1 ví dụ cụ thể + câu phân tích", "Có nhượng bộ 诚然…但…", "Có câu kết 综上所述 / 由此可见", "Không dùng 我觉得, 挺, 特别 trong văn viết"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "诚然，网络让信息的获取更加便捷，但它也让人更容易浅尝辄止。", "lang": "zh-CN", "q": "Thái độ của người nói đối với mạng internet là gì?", "o": ["Hoàn toàn ủng hộ", "Thừa nhận lợi ích nhưng nhấn mạnh mặt trái", "Phản đối mọi việc dùng mạng", "Không nêu quan điểm"], "a": 1, "e": "诚然…但… = thừa nhận (tiện lợi) rồi chuyển sang ý chính (dễ hời hợt – 浅尝辄止)."},
-    {"t": "listen", "say": "很多人之所以放弃深度阅读，与其说是没有时间，不如说是缺乏耐心。", "lang": "zh-CN", "q": "Theo người nói, nguyên nhân CHÍNH khiến nhiều người bỏ đọc sâu là gì?", "o": ["Không có thời gian", "Không có sách hay", "Thiếu kiên nhẫn", "Giá sách quá đắt"], "a": 2, "e": "与其说A，不如说B → B mới là bản chất: 缺乏耐心 (thiếu kiên nhẫn)."},
-    {"t": "listen", "say": "他只采访了三个大学生，就断定全国的年轻人都不爱读书，这显然是以偏概全。", "lang": "zh-CN", "q": "Người nói chỉ ra lỗi lập luận nào?", "o": ["因果倒置", "偷换概念", "循环论证", "以偏概全"], "a": 3, "e": "Ba người → cả nước: lấy một phần khái quát toàn thể (以偏概全)."},
-    {"t": "dict", "say": "综上所述，深度阅读不可替代。", "lang": "zh-CN", "a": "综上所述，深度阅读不可替代。", "py": "Zōngshàng suǒshù, shēndù yuèdú bùkě tìdài.", "e": "综 zōng (tổng) – đừng nhầm với 总 zǒng; 替代 tìdài = thay thế."},
-    {"t": "mc", "q": "Chọn từ nối phù hợp: ______网络阅读有其便利之处，然而它无法替代纸质书带来的沉浸感。", "o": ["鉴于", "固然", "倘若", "进而"], "a": 1, "e": "固然…然而… = thừa nhận A rồi chuyển sang B. 鉴于 (xét thấy) dẫn căn cứ, 倘若 là giả thiết, 进而 là tiến thêm một bước – đều không ghép với 然而."},
-    {"t": "mc", "q": "Câu nào dùng 鉴于 ĐÚNG?", "o": ["鉴于他很努力，所以他考上了大学。", "鉴于下雨，路很滑。", "鉴于样本数量有限，本研究的结论仅供参考。", "鉴于如果明天下雨，比赛就取消。"], "a": 2, "e": "鉴于 đứng đầu câu, dẫn căn cứ để đưa ra kết luận/quyết định; không đi với 所以, không dùng cho quan hệ nhân quả tự nhiên, không ghép với 如果."},
-    {"t": "mc", "q": "「某村农民十年如一日改良稻种，终于培育出抗旱新品种。可见，成功离不开坚持。」 dùng phép luận chứng nào?", "o": ["道理论证", "举例论证", "对比论证", "类比论证"], "a": 1, "e": "Dẫn một sự việc cụ thể (người nông dân kiên trì 10 năm) rồi rút ra kết luận → 举例论证."},
-    {"t": "mc", "q": "Bản dịch nào ĐÚNG NHẤT cho 「与其说他是在工作，不如说他是在享受生活。」?", "o": ["Anh ấy thà làm việc còn hơn hưởng thụ cuộc sống.", "Anh ấy vừa làm việc vừa hưởng thụ cuộc sống.", "Anh ấy làm việc để hưởng thụ cuộc sống.", "Nói anh ấy đang làm việc thì đúng hơn phải nói anh ấy đang tận hưởng cuộc sống."], "a": 3, "e": "与其说A，不如说B là đánh giá lại bản chất (B đúng hơn A), KHÔNG phải “thà… còn hơn” (đó là 宁可/与其A不如B chỉ lựa chọn hành động)."},
-    {"t": "mc", "q": "Chọn bản dịch đúng cho: “Không thể phủ nhận rằng điện thoại thông minh đã thay đổi cách chúng ta học tập.”", "o": ["不能否认的是智能手机已经变化我们学习的方法。", "无可否认，智能手机已经被改变我们的学习方式。", "不可否认，智能手机改变了我们的学习方式。", "不可否认，我们的学习方式改变智能手机。"], "a": 2, "e": "变化 là nội động từ, không mang tân ngữ (❌ 变化我们…) → dùng 改变. Phương án 2 thừa 被; phương án 4 đảo chủ – tân."},
-    {"t": "fill", "q": "______人人都只看标题而不读全文，理性讨论将无从谈起。(“Nếu như” – văn viết)", "a": "倘若", "alt": ["tangruo", "tǎngruò", "假如", "若"], "e": "倘若 = 如果 văn viết. Vế sau 将无从谈起 cũng là văn viết, nên dùng 倘若 cho đồng bộ văn phong."},
-    {"t": "fill", "q": "网络游戏的利弊不能一概而___，要具体情况具体分析。", "a": "论", "alt": ["lun", "lùn"], "e": "一概而论 = vơ đũa cả nắm; thường dùng phủ định 不能一概而论."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Sở dĩ anh ấy bỏ đọc sâu là vì thiếu kiên nhẫn.”", "w": ["是因为", "放弃深度阅读", "缺乏耐心", "他之所以"], "a": "他之所以放弃深度阅读是因为缺乏耐心", "e": "Khuôn 之所以 + kết quả + 是因为 + nguyên nhân; 之所以 đứng sau chủ ngữ."},
-    {"t": "order", "q": "Sắp xếp: “Lướt video chẳng những không giảm căng thẳng mà trái lại còn làm lo âu tăng thêm.”", "w": ["反而", "缓解压力", "刷短视频", "加剧了焦虑", "非但不能"], "a": "刷短视频非但不能缓解压力反而加剧了焦虑", "e": "非但不 + (kỳ vọng) + 反而 + (kết quả trái kỳ vọng)."},
-    {"t": "match", "q": "Nối lỗi logic với mô tả:", "pairs": [["以偏概全", "Lấy một phần suy ra toàn thể"], ["偷换概念", "Lén đổi nội hàm khái niệm giữa chừng"], ["因果倒置", "Đảo ngược nguyên nhân và kết quả"], ["循环论证", "Dùng chính kết luận làm luận cứ"], ["非此即彼", "Chỉ đưa ra hai lựa chọn cực đoan"]], "e": "Biết gọi tên lỗi logic giúp bạn vừa tránh lỗi, vừa phản bác đối phương sắc bén."},
-    {"t": "match", "q": "Nối từ nối với chức năng:", "pairs": [["鉴于", "Nêu căn cứ để ra quyết định"], ["诚然", "Nhượng bộ trước khi chuyển ý"], ["综上所述", "Mở đoạn tổng kết"], ["进而", "Tiến thêm một bước"], ["换言之", "Diễn đạt lại cho rõ"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "In bài đọc mẫu (bỏ trống các từ nối để học viên tự điền); bảng phụ “ngôi nhà nghị luận” (mái = 论点, cột = 论据, mộng = 论证); 15 thẻ từ nối (mặt trước từ, mặt sau chức năng); 5 đoạn văn ngắn chứa lỗi logic do GV tự viết; đồng hồ bấm giờ cho phần nói.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: chiếu 2 đoạn văn cùng chủ đề (1 đoạn kể chuyện, 1 đoạn nghị luận). Hỏi: đoạn nào “chứng minh” điều gì? Dẫn vào khái niệm 论点 – 论据 – 论证 (cho học viên tự đọc Hán Việt)."},
-      {"t": "20'", "do": "Từ vựng A + B: dạy theo nhóm chức năng (thuật ngữ – động từ văn viết – từ nối – thành ngữ lập luận). Nhấn cặp dễ nhầm: 阐述/论述, 驳斥/反驳, 诚然/固然, 片面/偏颇. Học viên đặt câu nhanh với 5 từ."},
-      {"t": "20'", "do": "Kỹ thuật 1: vẽ “ngôi nhà nghị luận”; phân tích khung 三段式 trên bài đọc mẫu (học viên dùng bút màu tô: luận điểm – luận cứ – câu phân tích). Giới thiệu 5 phép luận chứng."},
-      {"t": "15'", "do": "Lỗi logic: phát 5 đoạn văn có lỗi, nhóm 3 người gọi tên lỗi (以偏概全, 偷换概念…) và sửa lại. Chữa chung."},
-      {"t": "20'", "do": "Nghe bài giảng của 林教授: lần 1 trả lời câu hỏi khởi động (mái – cột – mộng); lần 2 làm 5 câu hỏi; lần 3 dừng ở từng câu để học viên shadowing (nhại theo) các câu có từ nối."},
-      {"t": "5'", "do": "Giao bài tập 1–8 trong game + học thuộc 20 từ nối."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: trò “Bắn từ nối” (xem phần trò chơi)."},
-      {"t": "20'", "do": "Kỹ thuật 2–3: bảng từ nối văn viết vs khẩu ngữ – học viên “nâng cấp” 6 câu khẩu ngữ GV đưa (我觉得… → 笔者认为…; 虽然…可是… → 诚然…但…). Phân biệt 与其说A不如说B / 与其A不如B."},
-      {"t": "20'", "do": "Đọc sâu bài mẫu: đọc lướt 3 phút tìm luận điểm trung tâm; đọc kỹ trả lời câu hỏi; vẽ sơ đồ dàn ý bài trên bảng (6 đoạn – chức năng từng đoạn)."},
-      {"t": "20'", "do": "Nói: chia cặp, một người lập luận đề 「网络让人更孤独吗？」, người kia phản bác (1 phút mỗi người, bấm giờ). Đổi vai. GV ghi lỗi từ nối, chữa cuối hoạt động."},
-      {"t": "15'", "do": "Viết: hướng dẫn dịch đoạn Việt → Trung (chú ý đảo định ngữ), giao đoạn nghị luận 300 chữ làm bài về nhà; làm bài tập 9–15 trong game."},
-      {"t": "5'", "do": "Tổng kết: mỗi học viên nói 1 câu dùng 综上所述 tóm tắt điều học được."}
+ "no": 1,
+ "title": "议论文（一）– Văn nghị luận: luận điểm, luận cứ, luận chứng & từ nối văn viết",
+ "sub": "论点鲜明，论据充分，论证严密",
+ "goals": [
+  "Nhận diện và dựng được khung bài nghị luận 引论 – 本论 – 结论 với 1 luận điểm trung tâm và 2–3 luận điểm nhánh",
+  "Dùng đúng ≥ 20 từ nối, khuôn câu văn viết theo chức năng: nêu luận điểm, liệt kê, nhượng bộ – chuyển ý, nhân quả, giả thiết, tổng kết",
+  "Phân biệt 5 phép luận chứng (举例 / 道理 / 对比 / 因果 / 类比) và chỉ ra 5 lỗi logic thường gặp (以偏概全, 偷换概念, 因果倒置…)",
+  "Viết đoạn nghị luận ~300 chữ đủ 论点 – 论据 – 论证 – 小结; dịch đoạn nghị luận Việt → Trung đúng văn phong"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Khởi động: Từ “kể chuyện” sang “lập luận”",
+   "html": "<p>Ở HSK 7–9, phần viết không còn chấm “câu đúng ngữ pháp” mà chấm <b>tư duy</b>: bạn có quan điểm rõ không, chứng minh có thuyết phục không, bài có mạch lạc như một người viết bản ngữ có học thức không. Thể loại trọng tâm là <b>议论文 (văn nghị luận)</b>.</p><table><tr><th></th><th>记叙文 – văn tự sự</th><th>议论文 – văn nghị luận</th></tr><tr><td>Mục đích</td><td>Kể lại chuyện gì đã xảy ra</td><td>Chứng minh một quan điểm là đúng/sai</td></tr><tr><td>Câu hỏi cốt lõi</td><td>Ai? Ở đâu? Thế nào?</td><td>Tôi chủ trương gì? Vì sao? Căn cứ đâu?</td></tr><tr><td>Ngôn ngữ</td><td>Miêu tả, cảm xúc</td><td>Khái niệm, phán đoán, suy luận; nhiều từ nối văn viết</td></tr><tr><td>Lỗi hay gặp của người Việt</td><td colspan=\"2\">Viết luận mà thành kể chuyện; mở bài vòng vo; luận điểm mơ hồ (“mỗi thứ đều có hai mặt”); lạm dụng 我觉得, 很, 非常; kết bài chép lại mở bài.</td></tr></table><p><b>Ba yếu tố</b> của mọi bài nghị luận: <span class=\"hl\">论点</span> (luận điểm – chủ trương của tác giả) · <span class=\"hl\">论据</span> (luận cứ – sự thật, số liệu, đạo lý dùng làm chứng cứ) · <span class=\"hl\">论证</span> (luận chứng – quá trình suy luận nối luận cứ với luận điểm). Người Việt có lợi thế lớn: ba thuật ngữ này đọc Hán Việt giống hệt tiếng Việt!</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ vựng A – Thuật ngữ lập luận & động từ văn viết",
+   "items": [
+    {
+     "w": "论点",
+     "py": "lùndiǎn",
+     "hv": "luận điểm",
+     "pos": "n",
+     "vi": "luận điểm (中心论点 luận điểm trung tâm, 分论点 luận điểm nhánh)",
+     "ex": "一篇议论文只能有一个中心论点，各个分论点都要为它服务。",
+     "exVi": "Một bài nghị luận chỉ có một luận điểm trung tâm, các luận điểm nhánh đều phải phục vụ nó."
+    },
+    {
+     "w": "论据",
+     "py": "lùnjù",
+     "hv": "luận cứ",
+     "pos": "n",
+     "vi": "luận cứ: 事实论据 (sự thật, số liệu) và 道理论据 (đạo lý, danh ngôn, định luật)",
+     "ex": "论据必须真实可靠，否则再精彩的论证也站不住脚。",
+     "exVi": "Luận cứ phải chân thực, đáng tin; nếu không, lập luận hay đến mấy cũng không đứng vững."
+    },
+    {
+     "w": "论证",
+     "py": "lùnzhèng",
+     "hv": "luận chứng",
+     "pos": "v/n",
+     "vi": "luận chứng; lập luận chứng minh",
+     "ex": "作者通过对比城乡两种生活方式，论证了自己的观点。",
+     "exVi": "Tác giả lập luận cho quan điểm của mình bằng cách so sánh hai lối sống thành thị và nông thôn."
+    },
+    {
+     "w": "阐述",
+     "py": "chǎnshù",
+     "hv": "xiển thuật",
+     "pos": "v",
+     "vi": "trình bày rõ ràng, giải thích cặn kẽ (một quan điểm, lý luận)",
+     "ex": "他在报告中系统地阐述了自己的研究思路。",
+     "exVi": "Trong báo cáo, anh ấy trình bày có hệ thống hướng nghiên cứu của mình."
+    },
+    {
+     "w": "论述",
+     "py": "lùnshù",
+     "hv": "luận thuật",
+     "pos": "v",
+     "vi": "bàn luận và trình bày (có lập luận)",
+     "ex": "本文从个人、家庭和社会三个层面论述了阅读的意义。",
+     "exVi": "Bài viết bàn về ý nghĩa của việc đọc từ ba bình diện: cá nhân, gia đình và xã hội."
+    },
+    {
+     "w": "佐证",
+     "py": "zuǒzhèng",
+     "hv": "tá chứng",
+     "pos": "n/v",
+     "vi": "chứng cứ bổ trợ; làm chứng cứ cho",
+     "ex": "这组调查结果有力地佐证了他的判断。",
+     "exVi": "Kết quả khảo sát này là chứng cứ đắc lực cho nhận định của anh ấy."
+    },
+    {
+     "w": "驳斥",
+     "py": "bóchì",
+     "hv": "bác xích",
+     "pos": "v",
+     "vi": "bác bỏ thẳng thừng (luận điệu sai trái)",
+     "ex": "文章用大量事实驳斥了“读书无用”的论调。",
+     "exVi": "Bài báo dùng nhiều sự thật để bác bỏ luận điệu “đọc sách vô ích”."
+    },
+    {
+     "w": "反驳",
+     "py": "fǎnbó",
+     "hv": "phản bác",
+     "pos": "v",
+     "vi": "phản bác, cãi lại bằng lý lẽ",
+     "ex": "面对质疑，她冷静地列出数据进行反驳。",
+     "exVi": "Trước những nghi vấn, cô ấy bình tĩnh đưa ra số liệu để phản bác."
+    },
+    {
+     "w": "权衡",
+     "py": "quánhéng",
+     "hv": "quyền hành",
+     "pos": "v",
+     "vi": "cân nhắc, so đo (lợi – hại); 权衡利弊",
+     "ex": "做出决定之前，我们必须反复权衡利弊。",
+     "exVi": "Trước khi quyết định, chúng ta phải cân nhắc lợi hại nhiều lần."
+    },
+    {
+     "w": "弊端",
+     "py": "bìduān",
+     "hv": "tệ đoan",
+     "pos": "n",
+     "vi": "mặt trái, tệ hại (của chế độ, cách làm)",
+     "ex": "过度依赖手机的弊端正日益显现。",
+     "exVi": "Mặt trái của việc lệ thuộc quá mức vào điện thoại ngày càng lộ rõ."
+    },
+    {
+     "w": "裨益",
+     "py": "bìyì",
+     "hv": "bì ích",
+     "pos": "n",
+     "vi": "lợi ích, bổ ích (rất trang trọng; thường 大有裨益)",
+     "ex": "广泛阅读对培养独立思考能力大有裨益。",
+     "exVi": "Đọc rộng rất có ích cho việc rèn luyện năng lực tư duy độc lập."
+    },
+    {
+     "w": "片面",
+     "py": "piànmiàn",
+     "hv": "phiến diện",
+     "pos": "adj",
+     "vi": "phiến diện, một chiều",
+     "ex": "只凭一次经历就下结论，难免失之片面。",
+     "exVi": "Chỉ dựa vào một lần trải nghiệm mà kết luận thì khó tránh phiến diện."
+    },
+    {
+     "w": "偏颇",
+     "py": "piānpō",
+     "hv": "thiên phả",
+     "pos": "adj",
+     "vi": "thiên lệch, không công bằng (văn viết)",
+     "ex": "这种说法未免有些偏颇。",
+     "exVi": "Cách nói này e là có phần thiên lệch."
+    },
+    {
+     "w": "折射",
+     "py": "zhéshè",
+     "hv": "chiết xạ",
+     "pos": "v",
+     "vi": "(nghĩa bóng) phản ánh, cho thấy",
+     "ex": "这一现象折射出当代年轻人的普遍焦虑。",
+     "exVi": "Hiện tượng này phản ánh nỗi lo âu phổ biến của giới trẻ ngày nay."
+    },
+    {
+     "w": "凸显",
+     "py": "tūxiǎn",
+     "hv": "đột hiển",
+     "pos": "v",
+     "vi": "làm nổi bật, lộ rõ",
+     "ex": "这次事故凸显了安全管理中的漏洞。",
+     "exVi": "Sự cố lần này làm lộ rõ lỗ hổng trong quản lý an toàn."
+    },
+    {
+     "w": "辩证",
+     "py": "biànzhèng",
+     "hv": "biện chứng",
+     "pos": "adj",
+     "vi": "biện chứng; 辩证地看待 nhìn nhận một cách biện chứng",
+     "ex": "我们应当辩证地看待科技进步带来的影响。",
+     "exVi": "Chúng ta nên nhìn nhận một cách biện chứng tác động của tiến bộ khoa học kỹ thuật."
+    },
+    {
+     "w": "理性",
+     "py": "lǐxìng",
+     "hv": "lý tính",
+     "pos": "adj/n",
+     "vi": "lý trí, tỉnh táo (≠ cảm tính 感性)",
+     "ex": "网络讨论需要更多理性的声音。",
+     "exVi": "Thảo luận trên mạng cần nhiều tiếng nói lý trí hơn."
+    },
+    {
+     "w": "碎片化",
+     "py": "suìpiànhuà",
+     "hv": "toái phiến hoá",
+     "pos": "adj/n",
+     "vi": "bị phân mảnh, vụn vặt (碎片化阅读 đọc vụn)",
+     "ex": "碎片化阅读让人获得了信息，却未必获得了知识。",
+     "exVi": "Đọc vụn giúp người ta có thông tin nhưng chưa chắc có tri thức."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ vựng B – Từ nối văn viết & thành ngữ lập luận",
+   "items": [
+    {
+     "w": "诚然",
+     "py": "chéngrán",
+     "hv": "thành nhiên",
+     "pos": "conj",
+     "vi": "quả thật, đúng là… (nhượng bộ, sau đó PHẢI có 但/然而/可是)",
+     "ex": "诚然，网购十分便捷，但它也冲击了实体小店。",
+     "exVi": "Đúng là mua hàng online rất tiện, nhưng nó cũng giáng đòn vào các cửa hàng nhỏ."
+    },
+    {
+     "w": "固然",
+     "py": "gùrán",
+     "hv": "cố nhiên",
+     "pos": "conj",
+     "vi": "tất nhiên là…, (thừa nhận A rồi chuyển sang B quan trọng hơn: 固然…但/然而…; hoặc thừa nhận cả hai: 固然…也…)",
+     "ex": "天赋固然重要，然而持之以恒的努力更为关键。",
+     "exVi": "Năng khiếu tất nhiên quan trọng, nhưng nỗ lực bền bỉ còn then chốt hơn."
+    },
+    {
+     "w": "鉴于",
+     "py": "jiànyú",
+     "hv": "giám ư",
+     "pos": "prep",
+     "vi": "xét thấy, căn cứ vào (đứng đầu câu, dẫn căn cứ để ra quyết định/kết luận)",
+     "ex": "鉴于样本数量有限，本研究的结论仅供参考。",
+     "exVi": "Xét thấy số lượng mẫu có hạn, kết luận của nghiên cứu này chỉ mang tính tham khảo."
+    },
+    {
+     "w": "倘若",
+     "py": "tǎngruò",
+     "hv": "thảng nhược",
+     "pos": "conj",
+     "vi": "nếu như, giả sử (văn viết của 如果)",
+     "ex": "倘若人人只读标题，理性讨论将无从谈起。",
+     "exVi": "Nếu ai cũng chỉ đọc tiêu đề, thảo luận lý trí sẽ không thể có."
+    },
+    {
+     "w": "进而",
+     "py": "jìn'ér",
+     "hv": "tiến nhi",
+     "pos": "conj",
+     "vi": "từ đó tiến thêm, rồi tiếp đến (bước sau cao hơn bước trước)",
+     "ex": "先了解学生的需求，进而调整教学方法。",
+     "exVi": "Trước hết tìm hiểu nhu cầu học viên, từ đó điều chỉnh phương pháp dạy."
+    },
+    {
+     "w": "乃至",
+     "py": "nǎizhì",
+     "hv": "nãi chí",
+     "pos": "conj",
+     "vi": "thậm chí đến, cho đến cả",
+     "ex": "这一决定将影响个人、企业乃至整个行业。",
+     "exVi": "Quyết định này sẽ ảnh hưởng tới cá nhân, doanh nghiệp, thậm chí cả ngành."
+    },
+    {
+     "w": "由此可见",
+     "py": "yóucǐ kějiàn",
+     "hv": "do thử khả kiến",
+     "pos": "phr",
+     "vi": "từ đó có thể thấy (rút kết luận sau luận cứ)",
+     "ex": "由此可见，环境保护与经济发展并非水火不容。",
+     "exVi": "Từ đó có thể thấy, bảo vệ môi trường và phát triển kinh tế không hề đối chọi nhau."
+    },
+    {
+     "w": "换言之",
+     "py": "huàn yán zhī",
+     "hv": "hoán ngôn chi",
+     "pos": "phr",
+     "vi": "nói cách khác (diễn đạt lại cho rõ hơn)",
+     "ex": "我们读什么，决定了我们怎样思考；换言之，阅读塑造思维。",
+     "exVi": "Ta đọc gì quyết định ta nghĩ thế nào; nói cách khác, đọc định hình tư duy."
+    },
+    {
+     "w": "综上所述",
+     "py": "zōngshàng suǒshù",
+     "hv": "tổng thượng sở thuật",
+     "pos": "phr",
+     "vi": "tổng hợp những điều trên, tóm lại (mở đoạn kết)",
+     "ex": "综上所述，深度阅读在今天依然不可替代。",
+     "exVi": "Tóm lại, đọc sâu ngày nay vẫn không thể thay thế."
+    },
+    {
+     "w": "归根结底",
+     "py": "guīgēn-jiédǐ",
+     "hv": "quy căn kết để",
+     "pos": "idiom",
+     "vi": "suy cho cùng, xét đến tận gốc",
+     "ex": "归根结底，企业的竞争是人才的竞争。",
+     "exVi": "Suy cho cùng, cạnh tranh giữa các doanh nghiệp là cạnh tranh nhân tài."
+    },
+    {
+     "w": "毋庸置疑",
+     "py": "wúyōng-zhìyí",
+     "hv": "vô dung trí nghi",
+     "pos": "idiom",
+     "vi": "không cần phải nghi ngờ, hiển nhiên",
+     "ex": "毋庸置疑，教育是改变命运的重要途径。",
+     "exVi": "Không còn nghi ngờ gì, giáo dục là con đường quan trọng để thay đổi số phận."
+    },
+    {
+     "w": "不容忽视",
+     "py": "bùróng hūshì",
+     "hv": "bất dung hốt thị",
+     "pos": "phr",
+     "vi": "không thể xem nhẹ",
+     "ex": "农村老人的孤独问题不容忽视。",
+     "exVi": "Vấn đề cô đơn của người già nông thôn không thể xem nhẹ."
+    },
+    {
+     "w": "显而易见",
+     "py": "xiǎn'éryìjiàn",
+     "hv": "hiển nhi dị kiến",
+     "pos": "idiom",
+     "vi": "rõ ràng dễ thấy",
+     "ex": "两种方案的优劣显而易见。",
+     "exVi": "Ưu nhược của hai phương án rõ ràng dễ thấy."
+    },
+    {
+     "w": "浅尝辄止",
+     "py": "qiǎncháng-zhézhǐ",
+     "hv": "thiển thường triếp chỉ",
+     "pos": "idiom",
+     "vi": "nếm qua rồi thôi, học hời hợt không đi sâu",
+     "ex": "做学问贵在深入，切忌浅尝辄止。",
+     "exVi": "Làm học vấn quý ở chỗ đi sâu, tối kỵ hời hợt nếm qua rồi bỏ."
+    },
+    {
+     "w": "潜移默化",
+     "py": "qiányí-mòhuà",
+     "hv": "tiềm di mặc hoá",
+     "pos": "idiom",
+     "vi": "ngấm dần, ảnh hưởng một cách âm thầm",
+     "ex": "家庭氛围对孩子的影响是潜移默化的。",
+     "exVi": "Bầu không khí gia đình ảnh hưởng đến trẻ một cách âm thầm, ngấm dần."
+    },
+    {
+     "w": "深思熟虑",
+     "py": "shēnsī-shúlǜ",
+     "hv": "thâm tư thục lự",
+     "pos": "idiom",
+     "vi": "suy nghĩ kỹ càng, chín chắn",
+     "ex": "这是他深思熟虑之后做出的决定。",
+     "exVi": "Đây là quyết định anh ấy đưa ra sau khi suy nghĩ chín chắn."
+    },
+    {
+     "w": "举足轻重",
+     "py": "jǔzú-qīngzhòng",
+     "hv": "cử túc khinh trọng",
+     "pos": "idiom",
+     "vi": "có vai trò then chốt, nhất cử nhất động ảnh hưởng toàn cục",
+     "ex": "中小企业在国民经济中占有举足轻重的地位。",
+     "exVi": "Doanh nghiệp vừa và nhỏ giữ vị trí then chốt trong nền kinh tế quốc dân."
+    },
+    {
+     "w": "相辅相成",
+     "py": "xiāngfǔ-xiāngchéng",
+     "hv": "tương phụ tương thành",
+     "pos": "idiom",
+     "vi": "bổ trợ cho nhau",
+     "ex": "理论与实践相辅相成，缺一不可。",
+     "exVi": "Lý luận và thực tiễn bổ trợ cho nhau, thiếu một không được."
+    },
+    {
+     "w": "截然不同",
+     "py": "jiérán bùtóng",
+     "hv": "tiệt nhiên bất đồng",
+     "pos": "idiom",
+     "vi": "hoàn toàn khác nhau",
+     "ex": "两代人对“成功”的理解截然不同。",
+     "exVi": "Hai thế hệ hiểu về “thành công” hoàn toàn khác nhau."
+    },
+    {
+     "w": "一概而论",
+     "py": "yígài'érlùn",
+     "hv": "nhất khái nhi luận",
+     "pos": "idiom",
+     "vi": "vơ đũa cả nắm (thường dùng phủ định: 不能一概而论)",
+     "ex": "网络游戏的利弊不能一概而论。",
+     "exVi": "Lợi hại của game online không thể vơ đũa cả nắm."
+    },
+    {
+     "w": "本末倒置",
+     "py": "běnmò-dàozhì",
+     "hv": "bản mạt đảo trí",
+     "pos": "idiom",
+     "vi": "đảo lộn gốc ngọn, coi trọng cái phụ hơn cái chính",
+     "ex": "为了考试而放弃真正的学习，未免本末倒置。",
+     "exVi": "Vì thi cử mà bỏ việc học thật sự thì e là đảo lộn gốc ngọn."
+    },
+    {
+     "w": "以偏概全",
+     "py": "yǐpiān-gàiquán",
+     "hv": "dĩ thiên khái toàn",
+     "pos": "idiom",
+     "vi": "lấy một phần khái quát toàn thể (lỗi logic)",
+     "ex": "仅凭几个个案就否定整个群体，是典型的以偏概全。",
+     "exVi": "Chỉ dựa vào vài trường hợp mà phủ định cả nhóm là lỗi lấy một phần suy ra toàn thể điển hình."
+    },
+    {
+     "w": "偷换概念",
+     "py": "tōuhuàn gàiniàn",
+     "hv": "thâu hoán khái niệm",
+     "pos": "phr",
+     "vi": "đánh tráo khái niệm (lỗi logic)",
+     "ex": "把“读书”说成“拿文凭”，这是在偷换概念。",
+     "exVi": "Biến “đọc sách” thành “lấy bằng cấp” là đang đánh tráo khái niệm."
+    },
+    {
+     "w": "因果倒置",
+     "py": "yīnguǒ dàozhì",
+     "hv": "nhân quả đảo trí",
+     "pos": "phr",
+     "vi": "đảo ngược nhân quả (lỗi logic)",
+     "ex": "说“医院越多病人越多”，就犯了因果倒置的错误。",
+     "exVi": "Nói “bệnh viện càng nhiều thì bệnh nhân càng nhiều” là mắc lỗi đảo ngược nhân quả."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Kỹ thuật 1: Khung bài nghị luận, phép luận chứng & lỗi logic",
+   "html": "<p><b>Khung “ba phần”</b> (三段式) là xương sống của mọi bài luận HSK 7–9:</p><ul><li><b>引论 – mở bài</b>: nêu vấn đề, <u>nói thẳng luận điểm</u> (1–3 câu). Tránh mở bài vòng vo kiểu “Từ xưa đến nay…”.</li><li><b>本论 – thân bài</b>: 2–3 luận điểm nhánh, mỗi đoạn = câu chủ đề + luận cứ + phân tích + câu tiểu kết. Các luận điểm nhánh quan hệ <i>song song</i> (cá nhân – gia đình – xã hội) hoặc <i>tăng tiến</i> (不仅… 而且… 更…).</li><li><b>结论 – kết bài</b>: tổng kết + nâng tầm (升华) hoặc kiến nghị; <u>không chép lại</u> mở bài.</li></ul><p><b>Năm phép luận chứng</b> – mỗi bài nên kết hợp ít nhất hai:</p>",
+   "table": [
+    [
+     "Phép luận chứng",
+     "Cách làm",
+     "Câu dẫn tiêu biểu"
     ],
-    "games": [
-      "Bắn từ nối: GV đọc nửa câu (诚然，网购很方便……), học viên giơ thẻ từ nối phù hợp để nối vế sau (但/然而). Ai giơ sai hoặc chậm nhất phải nói một câu hoàn chỉnh.",
-      "Toà án logic: GV đọc một lập luận có lỗi, cả lớp làm “luật sư phản biện” – nhóm nào gọi đúng tên lỗi và đưa phản ví dụ thuyết phục nhất được điểm.",
-      "Xây nhà nghị luận: mỗi nhóm nhận 1 luận điểm, trong 5 phút phải “dựng” đủ 3 cột (3 luận cứ) và 1 câu 由此可见 nối lại; nhóm khác thử “đẩy đổ” bằng phản biện."
+    [
+     "举例论证 – nêu ví dụ",
+     "Dùng sự việc cụ thể, điển hình",
+     "以……为例；……就是最好的证明"
     ],
-    "errors": [
-      "Viết luận thành kể chuyện: kể ví dụ dài mà không có câu phân tích → bắt buộc thêm 这说明…/由此可见… sau mỗi ví dụ.",
-      "Dùng 诚然/固然 rồi nối bằng 所以 → nhượng bộ phải đi với 但/然而/可是.",
-      "Dùng 鉴于 cho nguyên nhân tự nhiên (❌ 鉴于下雨，路很滑) → 鉴于 dẫn căn cứ cho quyết định/kết luận.",
-      "Nhầm 与其说A不如说B (đánh giá lại bản chất) với 与其A不如B (chọn hành động), dịch cả hai là “thà… còn hơn”.",
-      "Lạm dụng khẩu ngữ trong văn viết: 我觉得, 挺, 特别, 然后 → 笔者认为, 颇为, 尤为, 此外/进而.",
-      "Viết 变化 có tân ngữ (❌ 变化我们的生活) → 改变我们的生活; 变化 là nội động từ/danh từ."
+    [
+     "道理论证 – lý lẽ",
+     "Dùng nguyên lý, danh ngôn, quy luật đã được công nhận",
+     "正如……所说；俗话说得好"
     ],
-    "homework": "Làm hết bài tập trong game ≥ 85%; viết đoạn nghị luận 300 chữ (Viết 2) và tự soát theo checklist; lập dàn ý đề 「碎片化阅读利大于弊还是弊大于利」 (luận điểm + 3 luận điểm nhánh + luận cứ); ghi âm phần nói 1 phút và nghe lại đếm số từ đệm (嗯, 那个) để giảm dần."
+    [
+     "对比论证 – đối chiếu",
+     "Đặt hai mặt trái ngược cạnh nhau",
+     "与之相反；反观……"
+    ],
+    [
+     "因果论证 – nhân quả",
+     "Truy nguyên nhân hoặc suy hệ quả",
+     "之所以……是因为……；其结果必然是……"
+    ],
+    [
+     "类比/比喻论证 – so sánh tương tự",
+     "Mượn hình ảnh quen thuộc để làm rõ điều trừu tượng",
+     "这就好比……；如同……一样"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "以越南的咖啡文化为例，一杯滴漏咖啡往往要等上十分钟，人们却乐在其中。",
+     "vi": "Lấy văn hoá cà phê Việt Nam làm ví dụ: một ly cà phê phin thường phải chờ mười phút, vậy mà người ta vẫn thích thú. (举例论证)"
+    },
+    {
+     "t": "反观那些只追求速度的快餐店，顾客来去匆匆，很少有人停下来交谈。",
+     "vi": "Ngược lại, ở những quán ăn nhanh chỉ chạy theo tốc độ, khách đến đi vội vã, hiếm ai dừng lại trò chuyện. (对比论证)"
+    },
+    {
+     "t": "读书就好比给大脑做运动，偶尔一次收效甚微，持之以恒才能强健。",
+     "vi": "Đọc sách giống như cho bộ não tập thể dục: thỉnh thoảng một lần thì hiệu quả rất nhỏ, kiên trì đều đặn mới khoẻ mạnh. (类比论证)"
+    },
+    {
+     "t": "他只采访了三位大学生，就断定全国的年轻人都不爱读书——这是以偏概全。",
+     "vi": "Anh ta chỉ phỏng vấn ba sinh viên mà khẳng định thanh niên cả nước đều không thích đọc sách – đây là lấy một phần suy ra toàn thể."
+    }
+   ],
+   "tips": [
+    "Năm lỗi logic cần tránh (và cần biết để <b>phản bác</b> người khác): <b>以偏概全</b> lấy một phần suy ra toàn thể · <b>偷换概念</b> đánh tráo khái niệm giữa chừng · <b>因果倒置</b> đảo nhân quả · <b>循环论证</b> dùng kết luận làm luận cứ · <b>非此即彼</b> chỉ đưa ra hai lựa chọn cực đoan.",
+    "Người Việt hay “kể xong ví dụ là thôi”. Sau mỗi ví dụ BẮT BUỘC có câu phân tích: <i>这个例子说明…… / 由此可见……</i>, nếu không đó chỉ là kể chuyện, chưa phải luận chứng.",
+    "Luận điểm phải là một <b>phán đoán</b> có thể tranh luận: ❌ “手机有好处也有坏处” (ai cũng đồng ý → không có gì để chứng minh) → ✅ “手机给学生带来的便利远大于它造成的干扰”."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Kỹ thuật 2: Hệ thống từ nối văn viết theo chức năng",
+   "html": "<p>Giám khảo nhìn <b>từ nối đầu đoạn</b> để nắm khung bài trong vài giây. Hãy dùng từ nối <i>văn viết</i> thay cho từ nối khẩu ngữ (所以, 可是, 还有, 然后…).</p>",
+   "table": [
+    [
+     "Chức năng",
+     "Văn viết (nên dùng)",
+     "Khẩu ngữ (tránh trong bài luận)"
+    ],
+    [
+     "Nêu luận điểm",
+     "笔者认为；在笔者看来；毋庸置疑",
+     "我觉得；我想"
+    ],
+    [
+     "Liệt kê, phân tầng",
+     "首先……其次……再者……此外；一方面……另一方面",
+     "第一……还有……然后"
+    ],
+    [
+     "Nhượng bộ → chuyển",
+     "诚然……但；固然……然而；尽管……却；不可否认，……",
+     "虽然……可是"
+    ],
+    [
+     "Nhân quả",
+     "之所以……是因为；鉴于；因此；由此可见；进而",
+     "因为……所以"
+    ],
+    [
+     "Giả thiết, điều kiện",
+     "倘若；一旦；唯有……才；只要……便",
+     "要是；如果……的话"
+    ],
+    [
+     "Tăng tiến",
+     "不仅……更；乃至；甚至；何况",
+     "而且还"
+    ],
+    [
+     "Diễn đạt lại",
+     "换言之；也就是说；确切地说",
+     "就是说"
+    ],
+    [
+     "Tổng kết",
+     "综上所述；总而言之；归根结底",
+     "总之吧；反正"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "诚然，短视频降低了获取知识的门槛，但它也让人习惯了被动接受。",
+     "vi": "Đúng là video ngắn hạ thấp ngưỡng tiếp cận tri thức, nhưng nó cũng khiến người ta quen với việc tiếp nhận thụ động."
+    },
+    {
+     "t": "鉴于上述原因，学校决定推迟实施新的考勤制度。",
+     "vi": "Xét thấy những nguyên nhân trên, nhà trường quyết định hoãn áp dụng quy chế điểm danh mới."
+    },
+    {
+     "t": "唯有建立系统的知识框架，我们才能在海量信息中辨别真伪。",
+     "vi": "Chỉ có xây dựng khung tri thức có hệ thống, ta mới phân biệt được thật giả giữa biển thông tin."
+    },
+    {
+     "t": "这项政策不仅关系到每个家庭，更关系到国家的长远发展。",
+     "vi": "Chính sách này không chỉ liên quan tới từng gia đình mà còn liên quan tới sự phát triển lâu dài của quốc gia."
+    }
+   ],
+   "tips": [
+    "<b>诚然 / 固然</b> chỉ là vế nhượng bộ – đằng sau PHẢI có 但/然而/可是. ❌ 诚然网络很方便，所以大家都用 (诚然 không đi với 所以).",
+    "<b>鉴于</b> đứng đầu câu, dẫn căn cứ để đưa ra <i>quyết định / đề xuất / kết luận</i>; không dùng cùng 所以 và không dùng cho nhân quả tự nhiên: ❌ 鉴于下雨，路很滑 → ✅ 鉴于路面湿滑，比赛推迟举行.",
+    "Không “rải” từ nối vào mọi câu – đọc sẽ nặng nề. Quy tắc thực hành: mỗi đoạn 1 từ nối báo chức năng ở đầu + 1–2 từ nối bên trong."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Kỹ thuật 3: Khuôn câu lập luận văn viết",
+   "html": "<p>Các khuôn câu dưới đây giúp câu văn <b>có độ “sắc”</b>: vừa nêu ý, vừa định hướng người đọc.</p>",
+   "table": [
+    [
+     "Khuôn câu",
+     "Nghĩa / chức năng",
+     "Ví dụ"
+    ],
+    [
+     "与其说A，不如说B",
+     "Nói là A thì đúng hơn nên nói là B (định nghĩa lại vấn đề)",
+     "与其说他缺乏时间，不如说他缺乏计划。"
+    ],
+    [
+     "与其A，不如B",
+     "Thay vì A, chi bằng B (đề xuất)",
+     "与其抱怨环境，不如改变自己。"
+    ],
+    [
+     "不是A，而是B",
+     "Không phải A mà là B (bác bỏ – xác lập)",
+     "问题不是手机，而是使用方式。"
+    ],
+    [
+     "非但不A，反而B",
+     "Chẳng những không A mà trái lại còn B",
+     "刷视频非但不能缓解压力，反而加剧了焦虑。"
+    ],
+    [
+     "之所以A，是因为B",
+     "Sở dĩ A là vì B (nhấn nguyên nhân)",
+     "他之所以成功，是因为从不放弃。"
+    ],
+    [
+     "就……而言",
+     "Xét về…, đối với… mà nói",
+     "就效率而言，线上会议更胜一筹。"
+    ],
+    [
+     "在……的同时",
+     "Đồng thời với việc…",
+     "在发展经济的同时，必须保护环境。"
+    ],
+    [
+     "以A为B",
+     "Lấy A làm B",
+     "本文以河内的老街区为例。"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "与其说这是技术问题，不如说这是管理问题。",
+     "vi": "Nói đây là vấn đề kỹ thuật thì đúng hơn phải nói là vấn đề quản lý."
+    },
+    {
+     "t": "就长远而言，培养阅读习惯比提高考试分数更重要。",
+     "vi": "Xét về lâu dài, nuôi dưỡng thói quen đọc quan trọng hơn nâng điểm thi."
+    },
+    {
+     "t": "在享受科技便利的同时，我们也应警惕它带来的依赖。",
+     "vi": "Đồng thời với việc tận hưởng tiện lợi của công nghệ, ta cũng nên cảnh giác với sự lệ thuộc nó mang lại."
+    }
+   ],
+   "tips": [
+    "Phân biệt <b>与其说A，不如说B</b> (đánh giá lại BẢN CHẤT) với <b>与其A，不如B</b> (lựa chọn HÀNH ĐỘNG). Người Việt hay dịch cả hai là “thà… còn hơn” → sai nghĩa câu thứ nhất.",
+    "<b>非但不…反而…</b>: vế sau phải trái với kỳ vọng ở vế trước. ❌ 他非但不努力，反而很懒 (lặp ý, không “trái kỳ vọng”) → ✅ 他非但不感谢我，反而怪我多管闲事."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Bài giảng “议论文的骨架” (Bộ xương của bài nghị luận)",
+   "lang": "zh-CN",
+   "note": "Lớp cao học tiếng Trung ở Hà Nội. Giáo sư Lâm (林教授) giảng về cấu trúc bài nghị luận; học viên Nguyễn Minh (阮明) và Lê Thu (黎秋) đặt câu hỏi. Nghe lần 1 không nhìn chữ: giáo sư ví luận điểm, luận cứ, luận chứng với bộ phận nào của ngôi nhà?",
+   "lines": [
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "同学们好。今天我们来谈谈议论文的骨架。很多同学写议论文，材料不少，句子也很漂亮，可读完之后，读者却不知道作者到底想证明什么。问题往往出在结构上。",
+     "vi": "Chào các em. Hôm nay ta bàn về bộ xương của bài nghị luận. Nhiều bạn viết nghị luận tư liệu không ít, câu cũng đẹp, nhưng đọc xong người đọc vẫn không biết tác giả rốt cuộc muốn chứng minh điều gì. Vấn đề thường nằm ở cấu trúc."
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "一篇规范的议论文离不开三个要素：论点、论据和论证。论点是作者的主张，必须鲜明、集中；论据是支撑论点的材料；论证则是把二者连接起来的推理过程。",
+     "vi": "Một bài nghị luận chuẩn không thể thiếu ba yếu tố: luận điểm, luận cứ và luận chứng. Luận điểm là chủ trương của tác giả, phải rõ ràng, tập trung; luận cứ là tư liệu chống đỡ luận điểm; còn luận chứng là quá trình suy luận nối hai thứ đó lại."
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "打个比方，论点好比房子的屋顶，论据是柱子，而论证就是把柱子和屋顶牢牢固定在一起的榫卯。缺了哪一样，房子都立不起来。",
+     "vi": "Ví von thế này: luận điểm như mái nhà, luận cứ là cột, còn luận chứng là mộng gỗ cố định chắc cột với mái. Thiếu thứ nào, ngôi nhà cũng không đứng được."
+    },
+    {
+     "s": "阮明",
+     "g": "m",
+     "t": "老师，我有一个问题。论据是不是越多越好？我写作文的时候总想多举几个例子。",
+     "vi": "Thưa thầy, em có một câu hỏi. Luận cứ có phải càng nhiều càng tốt không ạ? Khi viết bài em luôn muốn nêu thêm vài ví dụ."
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "问得好。论据贵精不贵多。三个和论点关系不大的例子，远不如一个典型、可靠的例子有说服力。",
+     "vi": "Hỏi hay lắm. Luận cứ cốt tinh không cốt nhiều. Ba ví dụ ít liên quan đến luận điểm kém xa một ví dụ điển hình, đáng tin về sức thuyết phục."
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "而且，举完例子以后一定要分析，说明这个例子为什么能证明你的观点。否则，你只是在讲故事，而不是在论证。",
+     "vi": "Hơn nữa, nêu ví dụ xong nhất định phải phân tích, nói rõ vì sao ví dụ này chứng minh được quan điểm của em. Nếu không, em chỉ đang kể chuyện chứ không phải lập luận."
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "下面说说结构。最常见的是引论、本论、结论三段式。引论提出问题，亮出观点；本论从几个层面展开论证；结论归纳全文，适当升华。",
+     "vi": "Tiếp theo nói về cấu trúc. Phổ biến nhất là kiểu ba phần: mở bài, thân bài, kết bài. Mở bài nêu vấn đề, đưa ra quan điểm; thân bài triển khai lập luận từ vài bình diện; kết bài khái quát toàn bài, nâng tầm vừa phải."
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "本论的几个分论点之间要有逻辑关系。它们可以是并列的，比如从个人、家庭、社会三个层面来看；也可以是层层递进的，比如不仅如何，而且如何，更如何。",
+     "vi": "Các luận điểm nhánh trong thân bài phải có quan hệ logic. Chúng có thể song song, ví dụ xét từ ba bình diện cá nhân, gia đình, xã hội; cũng có thể tăng tiến từng tầng, kiểu không chỉ thế này, mà còn thế kia, hơn nữa còn thế nọ."
+    },
+    {
+     "s": "黎秋",
+     "g": "f",
+     "t": "老师，考试时间有限，有没有什么办法能让阅卷老师一眼就看出我的结构？",
+     "vi": "Thưa thầy, thời gian thi có hạn, có cách nào để giám khảo nhìn một cái là thấy cấu trúc bài của em không ạ?"
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "有。关键在于用好书面语的关联词。比如用首先、其次、再者标明层次；用诚然什么什么，但是什么什么，先承认对方观点的合理之处，再转入自己的论证。这样，文章显得客观、全面。",
+     "vi": "Có. Mấu chốt là dùng tốt từ nối văn viết. Chẳng hạn dùng “trước hết, tiếp theo, thêm nữa” để đánh dấu tầng bậc; dùng “đúng là… nhưng…” để trước thừa nhận chỗ hợp lý trong quan điểm đối phương rồi mới chuyển sang lập luận của mình. Như vậy bài viết trông khách quan, toàn diện."
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "需要提醒的是，关联词并不是越多越好。有的同学每句话都用因此、所以，读起来反而啰嗦。一般来说，每段开头用一个关联词标明功能就够了。",
+     "vi": "Cần lưu ý là từ nối không phải càng nhiều càng tốt. Có bạn câu nào cũng dùng “vì vậy, cho nên”, đọc lên lại thấy dài dòng. Nói chung, đầu mỗi đoạn dùng một từ nối báo chức năng là đủ."
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "最后，我们还要避免几种常见的逻辑错误。第一是以偏概全，比如只采访了几个人，就下结论说现在的年轻人都怎样怎样。",
+     "vi": "Cuối cùng, ta còn phải tránh mấy lỗi logic thường gặp. Thứ nhất là lấy một phần suy ra toàn thể, ví dụ chỉ phỏng vấn vài người đã kết luận giới trẻ bây giờ đều thế này thế nọ."
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "第二是偷换概念。比如前半篇讨论的是阅读，后半篇不知不觉变成了读纸质书，概念的范围已经悄悄改变了。",
+     "vi": "Thứ hai là đánh tráo khái niệm. Ví dụ nửa đầu bài bàn về việc đọc, nửa sau bất giác biến thành đọc sách giấy – phạm vi khái niệm đã lặng lẽ thay đổi."
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "第三是因果倒置。有人说，成绩好的学生都爱读书，所以读书使人成绩好。可也许恰恰是成绩好的学生更有时间读书，因果关系未必是这样。",
+     "vi": "Thứ ba là đảo ngược nhân quả. Có người nói học sinh giỏi đều thích đọc sách, nên đọc sách làm người ta học giỏi. Nhưng có khi chính học sinh giỏi mới có nhiều thời gian đọc sách hơn; quan hệ nhân quả chưa chắc như vậy."
+    },
+    {
+     "s": "阮明",
+     "g": "m",
+     "t": "原来如此。那结论部分只要把论点重复一遍就可以了吗？",
+     "vi": "Ra là vậy. Thế phần kết chỉ cần nhắc lại luận điểm một lần là được ạ?"
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "不能简单重复。好的结论要么总结升华，把观点提到更高的层面；要么提出建议，回应开头的问题。换言之，结尾要让读者有所思考，而不是原地打转。",
+     "vi": "Không thể lặp lại đơn giản. Kết bài hay hoặc là tổng kết và nâng tầm, đưa quan điểm lên bình diện cao hơn; hoặc là đưa ra kiến nghị, đáp lại câu hỏi ở mở bài. Nói cách khác, phần kết phải khiến người đọc suy ngẫm, chứ không phải giậm chân tại chỗ."
+    },
+    {
+     "s": "林教授",
+     "g": "m",
+     "t": "好，今天的作业是：以碎片化阅读利大于弊还是弊大于利为题，写一份提纲，标出中心论点、三个分论点以及每个分论点的论据。下次课我们一起点评。",
+     "vi": "Được rồi, bài tập hôm nay: với đề “Đọc vụn lợi nhiều hơn hại hay hại nhiều hơn lợi”, viết một dàn ý, ghi rõ luận điểm trung tâm, ba luận điểm nhánh và luận cứ cho mỗi luận điểm nhánh. Buổi sau chúng ta cùng nhận xét."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Theo giáo sư Lâm, ba yếu tố không thể thiếu của bài nghị luận là gì?",
+     "o": [
+      "Mở bài, thân bài, kết bài",
+      "Luận điểm, luận cứ, luận chứng",
+      "Sự thật, số liệu, danh ngôn",
+      "Đề bài, dàn ý, bài viết"
+     ],
+     "a": 1,
+     "e": "一篇规范的议论文离不开三个要素：论点、论据和论证。"
+    },
+    {
+     "q": "Về luận cứ, giáo sư khuyên điều gì?",
+     "o": [
+      "Càng nhiều ví dụ càng thuyết phục",
+      "Chỉ dùng số liệu, không dùng ví dụ",
+      "Cốt tinh không cốt nhiều; nêu ví dụ xong phải phân tích",
+      "Ví dụ nổi tiếng thì không cần phân tích"
+     ],
+     "a": 2,
+     "e": "论据贵精不贵多 … 举完例子以后一定要分析。"
+    },
+    {
+     "q": "Câu “học sinh giỏi đều thích đọc nên đọc sách làm người ta học giỏi” minh hoạ lỗi nào?",
+     "o": [
+      "以偏概全",
+      "偷换概念",
+      "因果倒置",
+      "循环论证"
+     ],
+     "a": 2,
+     "e": "Giáo sư nói 第三是因果倒置 – có thể chính học sinh giỏi mới có thời gian đọc (nhân quả ngược)."
+    },
+    {
+     "q": "Giáo sư lưu ý gì về từ nối?",
+     "o": [
+      "Câu nào cũng nên có từ nối",
+      "Mỗi đoạn mở đầu bằng một từ nối báo chức năng là đủ",
+      "Không nên dùng 诚然 vì quá trang trọng",
+      "Chỉ nên dùng 因此 và 所以"
+     ],
+     "a": 1,
+     "e": "每段开头用一个关联词标明功能就够了。"
+    },
+    {
+     "q": "Giáo sư ví LUẬN ĐIỂM như bộ phận nào của ngôi nhà? (gõ chữ Hán hoặc pinyin)",
+     "a": "屋顶",
+     "alt": [
+      "wuding",
+      "wūdǐng"
+     ],
+     "e": "论点好比房子的屋顶，论据是柱子，论证是榫卯。"
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Bài nghị luận mẫu",
+   "title": "碎片化时代，我们还需要深度阅读吗？",
+   "text": "清晨醒来，许多人做的第一件事不是洗漱，而是打开手机：新闻推送、短视频、朋友圈动态……一条接一条，仿佛永远也刷不完。有人据此断言：在信息如此丰富的今天，花几天时间啃完一本厚书已经不合时宜，碎片化阅读足以满足我们的需求。笔者却认为，碎片化时代非但没有让深度阅读变得多余，反而使它显得更加珍贵。\n\n诚然，碎片化阅读有其独特的优势。它门槛低、速度快，人们在地铁上、排队时就能了解天下大事，掌握实用技巧。对于工作繁忙的上班族而言，这种随时随地获取信息的方式无疑是一大便利。然而，便利并不等于有益。碎片化信息往往只给结论、不讲过程，读者获得的是一个个孤立的“知识点”，却难以把它们连成一张完整的网。\n\n深度阅读之所以不可替代，首先是因为它训练的是一种持续思考的能力。读一本严肃的著作，读者需要跟随作者的思路，理解概念、检验论据、质疑结论，这个过程本身就是一次思维的锻炼。反观刷短视频，内容每隔十几秒就切换一次，注意力被不断打断，久而久之，人们便习惯了浅尝辄止，一遇到稍长的文章就失去耐心。换言之，我们读什么，在潜移默化中决定了我们怎样思考。\n\n其次，深度阅读能帮助人们抵御片面信息的误导。笔者的一位同事曾在网上看到“某种水果能治百病”的说法，几乎信以为真。后来，他找来两本营养学专著认真研读，才发现那条消息断章取义，把实验室里的初步结果夸大成了定论。由此可见，唯有建立起系统的知识框架，我们才能在纷繁复杂的信息中辨别真伪，而不是人云亦云。\n\n有人或许会反驳：现代人时间有限，哪有工夫读大部头？这种说法看似合理，实则偷换了概念——“没有时间”往往只是“没有安排”的托词。我们每天花在社交软件上的时间，少则一两个小时，多则四五个小时；倘若从中挤出半个小时读书，一年下来便能读完十几本书。可见，问题的关键不在于时间的多少，而在于我们是否真正意识到深度阅读的价值。\n\n当然，提倡深度阅读并不意味着全盘否定碎片化阅读。两者各有所长，理应相辅相成：碎片化阅读帮助我们拓宽视野、捕捉信息，深度阅读则帮助我们沉淀思想、形成判断。综上所述，在信息爆炸的时代，深度阅读不仅没有过时，而且是每个人保持独立思考的压舱石。与其感叹时间被手机偷走，不如从今天起，每天给自己留出一段安静的读书时光。",
+   "vi": "Sáng thức dậy, việc đầu tiên nhiều người làm không phải đánh răng rửa mặt mà là mở điện thoại: tin tức đẩy về, video ngắn, trạng thái của bạn bè… cái này nối cái kia, như thể lướt mãi không hết. Có người dựa vào đó mà khẳng định: trong thời đại thông tin phong phú như hôm nay, bỏ ra mấy ngày “gặm” hết một cuốn sách dày đã lỗi thời, đọc vụn là đủ đáp ứng nhu cầu của chúng ta. Người viết lại cho rằng, thời đại phân mảnh chẳng những không khiến việc đọc sâu trở nên thừa thãi, mà trái lại còn làm nó càng quý giá hơn.\n\nĐúng là đọc vụn có ưu thế riêng. Nó có ngưỡng thấp, tốc độ nhanh; trên tàu điện, lúc xếp hàng, người ta đã có thể nắm việc lớn thiên hạ, học được mẹo hữu ích. Với người đi làm bận rộn, cách tiếp nhận thông tin mọi lúc mọi nơi này hẳn nhiên là một sự tiện lợi lớn. Tuy nhiên, tiện lợi không đồng nghĩa với bổ ích. Thông tin vụn thường chỉ đưa kết luận mà không nói quá trình; người đọc nhận được từng “điểm kiến thức” rời rạc nhưng khó nối chúng thành một tấm lưới hoàn chỉnh.\n\nSở dĩ đọc sâu không thể thay thế, trước hết là vì nó rèn luyện năng lực tư duy liên tục. Đọc một tác phẩm nghiêm túc, người đọc phải đi theo mạch suy nghĩ của tác giả, hiểu khái niệm, kiểm tra luận cứ, chất vấn kết luận – bản thân quá trình ấy đã là một lần luyện tập tư duy. Ngược lại, khi lướt video ngắn, cứ mười mấy giây nội dung lại chuyển một lần, sự chú ý liên tục bị cắt ngang; lâu dần, người ta quen nếm qua rồi thôi, hễ gặp bài hơi dài là mất kiên nhẫn. Nói cách khác, ta đọc gì sẽ âm thầm quyết định ta suy nghĩ ra sao.\n\nThứ hai, đọc sâu giúp con người chống lại sự dẫn dắt sai của thông tin phiến diện. Một đồng nghiệp của người viết từng thấy trên mạng thông tin “một loại trái cây chữa được bách bệnh” và suýt tin là thật. Sau đó anh tìm hai chuyên khảo về dinh dưỡng học để đọc kỹ, mới phát hiện tin kia cắt xén câu chữ, thổi phồng kết quả sơ bộ trong phòng thí nghiệm thành kết luận chắc chắn. Từ đó có thể thấy, chỉ khi xây dựng được khung tri thức có hệ thống, ta mới phân biệt được thật giả giữa rừng thông tin phức tạp, thay vì người ta nói sao mình nói vậy.\n\nCó người có lẽ sẽ phản bác: người hiện đại thời gian có hạn, đâu rảnh mà đọc sách dày cộp? Cách nói này nghe có vẻ hợp lý, thực ra đã đánh tráo khái niệm – “không có thời gian” thường chỉ là cái cớ của “không sắp xếp”. Mỗi ngày ta dành cho mạng xã hội ít thì một hai tiếng, nhiều thì bốn năm tiếng; nếu bớt ra nửa tiếng để đọc sách, một năm có thể đọc xong hơn chục cuốn. Có thể thấy, mấu chốt của vấn đề không nằm ở thời gian nhiều hay ít, mà ở chỗ ta có thực sự nhận ra giá trị của việc đọc sâu hay không.\n\nĐương nhiên, đề cao đọc sâu không có nghĩa là phủ định hoàn toàn việc đọc vụn. Hai cách đọc mỗi bên có sở trường riêng, lẽ ra phải bổ trợ cho nhau: đọc vụn giúp ta mở rộng tầm nhìn, nắm bắt thông tin; đọc sâu giúp ta lắng đọng tư tưởng, hình thành phán đoán. Tóm lại, trong thời đại bùng nổ thông tin, đọc sâu không những không lỗi thời mà còn là “vật dằn khoang” giúp mỗi người giữ vững tư duy độc lập. Thay vì than thở thời gian bị điện thoại đánh cắp, chi bằng từ hôm nay, mỗi ngày hãy dành cho mình một khoảng thời gian đọc sách yên tĩnh.",
+   "gloss": [
+    {
+     "w": "不合时宜",
+     "py": "bù hé shíyí",
+     "vi": "không hợp thời, lỗi thời"
+    },
+    {
+     "w": "门槛",
+     "py": "ménkǎn",
+     "vi": "ngưỡng cửa; (nghĩa bóng) điều kiện tối thiểu"
+    },
+    {
+     "w": "随时随地",
+     "py": "suíshí suídì",
+     "vi": "mọi lúc mọi nơi"
+    },
+    {
+     "w": "反观",
+     "py": "fǎnguān",
+     "vi": "nhìn ngược lại, trái lại (dẫn vế đối chiếu)"
+    },
+    {
+     "w": "断章取义",
+     "py": "duànzhāng-qǔyì",
+     "vi": "cắt xén câu chữ, trích dẫn sai ý gốc"
+    },
+    {
+     "w": "信以为真",
+     "py": "xìn yǐ wéi zhēn",
+     "vi": "tin là thật"
+    },
+    {
+     "w": "纷繁复杂",
+     "py": "fēnfán fùzá",
+     "vi": "rối ren phức tạp"
+    },
+    {
+     "w": "人云亦云",
+     "py": "rén yún yì yún",
+     "vi": "người ta nói sao nói vậy, không có chính kiến"
+    },
+    {
+     "w": "大部头",
+     "py": "dàbùtóu",
+     "vi": "sách dày, bộ sách đồ sộ"
+    },
+    {
+     "w": "托词",
+     "py": "tuōcí",
+     "vi": "cái cớ, lời thoái thác"
+    },
+    {
+     "w": "全盘否定",
+     "py": "quánpán fǒudìng",
+     "vi": "phủ định hoàn toàn"
+    },
+    {
+     "w": "压舱石",
+     "py": "yācāngshí",
+     "vi": "đá dằn khoang (thuyền) – thứ giữ cho vững, ổn định"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Luận điểm trung tâm của bài là gì?",
+     "o": [
+      "Đọc vụn đã đủ đáp ứng nhu cầu của người hiện đại",
+      "Thời đại phân mảnh càng làm đọc sâu trở nên quý giá",
+      "Nên cấm dùng điện thoại vào buổi sáng",
+      "Đọc sách giấy tốt hơn đọc sách điện tử"
+     ],
+     "a": 1,
+     "e": "Câu cuối đoạn 1: 碎片化时代非但没有让深度阅读变得多余，反而使它显得更加珍贵。"
+    },
+    {
+     "q": "Đoạn 2 dùng thủ pháp gì?",
+     "o": [
+      "Nêu ví dụ về một đồng nghiệp",
+      "Nhượng bộ: thừa nhận ưu điểm của đọc vụn rồi chuyển ý",
+      "Tổng kết toàn bài",
+      "Đưa ra kiến nghị"
+     ],
+     "a": 1,
+     "e": "诚然…然而… – thừa nhận ưu thế rồi chuyển sang “tiện lợi không đồng nghĩa bổ ích”."
+    },
+    {
+     "q": "Câu chuyện về người đồng nghiệp ở đoạn 4 thuộc phép luận chứng nào?",
+     "o": [
+      "举例论证",
+      "类比论证",
+      "道理论证",
+      "对比论证"
+     ],
+     "a": 0,
+     "e": "Dùng một sự việc cụ thể (đồng nghiệp suýt tin tin giả) làm luận cứ → 举例论证, sau đó rút kết luận bằng 由此可见."
+    },
+    {
+     "q": "Theo tác giả, lập luận “người hiện đại không có thời gian” mắc lỗi gì?",
+     "o": [
+      "Đảo ngược nhân quả",
+      "Lấy một phần suy ra toàn thể",
+      "Đánh tráo khái niệm: “không có thời gian” thực chất là “không sắp xếp”",
+      "Lập luận vòng tròn"
+     ],
+     "a": 2,
+     "e": "这种说法看似合理，实则偷换了概念——“没有时间”往往只是“没有安排”的托词。"
+    },
+    {
+     "q": "Ở đoạn kết, tác giả ví đọc sâu như thứ gì? (gõ chữ Hán)",
+     "a": "压舱石",
+     "alt": [
+      "yacangshi",
+      "yācāngshí"
+     ],
+     "e": "深度阅读…是每个人保持独立思考的压舱石。"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán trọng tâm (bấm để tập viết)",
+   "items": [
+    {
+     "c": "论",
+     "py": "lùn",
+     "hv": "luận",
+     "parts": "讠(ngôn – lời nói) + 仑 (luân – có thứ tự, gợi âm)",
+     "strokes": 6,
+     "vi": "bàn luận – lời nói có thứ lớp, mạch lạc",
+     "words": "论点, 论据, 论证, 结论"
+    },
+    {
+     "c": "据",
+     "py": "jù",
+     "hv": "cứ",
+     "parts": "扌(thủ – tay) + 居 (cư – gợi âm)",
+     "strokes": 11,
+     "vi": "căn cứ, dựa vào – tay bám vào chỗ vững",
+     "words": "论据, 根据, 数据, 据此"
+    },
+    {
+     "c": "鉴",
+     "py": "jiàn",
+     "hv": "giám",
+     "parts": "phần trên (biến thể của 监 – soi nhìn) + 金 (kim – kim loại)",
+     "strokes": 13,
+     "vi": "gương soi bằng đồng → soi xét, lấy làm gương",
+     "words": "鉴于, 借鉴, 鉴定"
+    },
+    {
+     "c": "阐",
+     "py": "chǎn",
+     "hv": "xiển",
+     "parts": "门 (môn – cửa) + 单 (đơn – gợi âm)",
+     "strokes": 11,
+     "vi": "mở rộng ra cho rõ – mở cửa cho ánh sáng vào",
+     "words": "阐述, 阐明, 阐释"
+    },
+    {
+     "c": "弊",
+     "py": "bì",
+     "hv": "tệ",
+     "parts": "敝 (tệ – rách nát, gợi âm) + 廾 (củng – hai tay)",
+     "strokes": 14,
+     "vi": "điều hại, tệ đoan",
+     "words": "弊端, 利弊, 作弊"
+    },
+    {
+     "c": "辩",
+     "py": "biàn",
+     "hv": "biện",
+     "parts": "辛 + 讠 + 辛 (lời nói kẹp giữa hai bên tranh chấp)",
+     "strokes": 16,
+     "vi": "tranh biện – lời qua lẽ lại giữa hai phía; phân biệt 辩 (lời nói) / 辨 (phân biệt, có nét 丿丶 ở giữa) / 辫 (bím tóc)",
+     "words": "辩证, 辩论, 争辩"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Lập luận miệng có cấu trúc",
+   "tasks": [
+    {
+     "p": "Nói 1–1,5 phút về đề 「网络让人更孤独吗？」: luận điểm rõ ngay câu đầu, 2 luận cứ, có nhượng bộ 诚然…但…, kết bằng 综上所述 hoặc 与其…不如….",
+     "model": "我认为，网络本身并不会让人更孤独，关键在于我们如何使用它。诚然，有些人整天沉迷于手机，和家人坐在一起却各看各的屏幕，这种现象确实令人担忧。但是，网络也让远在他乡的游子每天都能和父母视频通话，让兴趣相投的人跨越千里结识彼此。由此可见，孤独的根源不在于网络，而在于人们是否愿意真诚地沟通。倘若我们吃饭时能放下手机，在网上交流时多一份真心，网络完全可以成为连接人与人的桥梁。综上所述，与其指责网络，不如反思我们自己的使用习惯。",
+     "vi": "Tôi cho rằng bản thân mạng internet không làm con người cô đơn hơn; mấu chốt là ta sử dụng nó thế nào. Đúng là có người suốt ngày đắm chìm vào điện thoại, ngồi cùng gia đình mà ai nấy dán mắt vào màn hình của mình – hiện tượng này thật đáng lo. Nhưng mạng cũng giúp người con xa quê ngày nào cũng gọi video được cho cha mẹ, giúp những người cùng sở thích cách xa nghìn dặm vẫn quen biết nhau. Từ đó có thể thấy, gốc rễ của cô đơn không nằm ở mạng mà ở chỗ con người có sẵn lòng giao tiếp chân thành hay không. Nếu lúc ăn cơm ta đặt điện thoại xuống, khi trò chuyện trên mạng thêm một phần chân tình, mạng hoàn toàn có thể trở thành cây cầu nối người với người. Tóm lại, thay vì trách mạng, chi bằng xem lại thói quen sử dụng của chính mình.",
+     "tips": "Ngắt nhịp ngay sau từ nối (诚然｜, 由此可见｜) và nhấn trọng âm logic vào 关键在于, 根源, 不在于…而在于…. Giữ tốc độ khoảng 200 chữ/phút; tránh 嗯, 那个, 然后."
+    },
+    {
+     "p": "Phản bác quan điểm 「读书无用，不如早点工作赚钱」 trong 1 phút: dùng 固然…然而…, 与其说…不如说…, và gọi tên lỗi logic của đối phương.",
+     "model": "早点工作固然能早点积累经验和收入，然而，“读书无用”这个结论显然是以偏概全。持这种观点的人往往只看到个别没读多少书却发家致富的例子，却忽视了更多因为缺乏知识而失去机会的人。况且，这里的“读书”被偷换成了“拿文凭”。读书真正的价值，与其说是一张毕业证书，不如说是一种终身学习、独立判断的能力。在技术更新越来越快的今天，这种能力只会越来越重要。因此，我们不能因为少数例子就否定读书的意义。",
+     "vi": "Đi làm sớm tất nhiên giúp sớm tích lũy kinh nghiệm và thu nhập, nhưng kết luận “đọc sách vô ích” rõ ràng là lấy một phần suy ra toàn thể. Người theo quan điểm này thường chỉ thấy vài ví dụ cá biệt ít học mà vẫn làm giàu, lại bỏ qua rất nhiều người mất cơ hội vì thiếu tri thức. Hơn nữa, “đọc sách” ở đây đã bị đánh tráo thành “lấy bằng”. Giá trị thật của việc đọc sách, nói là một tấm bằng thì đúng hơn phải nói là năng lực học suốt đời và phán đoán độc lập. Trong thời đại công nghệ đổi mới ngày càng nhanh, năng lực ấy chỉ càng quan trọng. Vì vậy, ta không thể vì vài ví dụ mà phủ định ý nghĩa của việc đọc sách.",
+     "tips": "Cấu trúc phản bác 4 bước: thừa nhận phần đúng (固然) → gọi tên lỗi (以偏概全 / 偷换概念) → đưa luận cứ ngược → kết luận lại. Giọng điềm tĩnh, không dùng từ công kích."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết 1 – Dịch Việt → Trung một đoạn nghị luận",
+   "task": "Dịch sang tiếng Trung văn viết, dùng ít nhất 4 từ nối/khuôn câu của bài:\n«Không thể phủ nhận rằng trí tuệ nhân tạo đã khiến việc dịch thuật trở nên nhanh chóng hơn bao giờ hết. Tuy nhiên, điều đó không có nghĩa là học ngoại ngữ đã trở nên vô ích. Máy móc có thể chuyển đổi từ ngữ, nhưng khó có thể hiểu được những tầng ý nghĩa văn hoá ẩn sau lời nói. Nói cách khác, ngoại ngữ không chỉ là công cụ giao tiếp mà còn là cánh cửa để hiểu một dân tộc khác. Vì vậy, thay vì lo lắng bị máy móc thay thế, chúng ta nên học cách tận dụng nó để học tốt hơn.»",
+   "min": 120,
+   "model": "不可否认，人工智能使翻译变得前所未有地快捷。然而，这并不意味着学习外语已经变得毫无用处。机器能够转换词语，却难以理解话语背后深层的文化内涵。换言之，外语不仅是交流的工具，更是了解另一个民族的窗口。因此，与其担心被机器取代，不如学会利用它来更好地学习。",
+   "modelVi": "Ghi chú kỹ thuật: “Không thể phủ nhận rằng” → 不可否认 (không cần dịch “rằng”) · “hơn bao giờ hết” → 前所未有地 (đặt làm trạng ngữ trước tính từ) · “không có nghĩa là” → 并不意味着 · “những tầng ý nghĩa văn hoá ẩn sau lời nói” → đảo định ngữ lên trước: 话语背后深层的文化内涵 · “Nói cách khác” → 换言之 · “không chỉ… mà còn…” → 不仅…更… (更 mạnh hơn 而且, hợp văn nghị luận) · “thay vì… nên…” → 与其…不如….",
+   "tips": [
+    "Không dịch “việc dịch thuật trở nên” thành 翻译的事情变成… – văn viết Trung dùng câu kiêm ngữ 使 + tân ngữ + 变得 + tính từ.",
+    "“vô ích” trong văn nghị luận: 毫无用处 / 毫无意义 trang trọng hơn 没有用.",
+    "Đọc lại bản dịch mà không nhìn bản Việt: câu có tự nhiên như người Trung viết không?"
+   ],
+   "checklist": [
+    "Có 不可否认 / 然而 / 换言之 / 与其…不如…",
+    "Định ngữ dài đặt TRƯỚC danh từ",
+    "Không còn dấu vết trật tự câu tiếng Việt",
+    "Dùng 使…变得… thay cho 让…成为… lủng củng",
+    "Dấu câu toàn khổ 。，；"
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết 2 – Đoạn nghị luận 300 chữ",
+   "task": "Viết một đoạn nghị luận khoảng 300 chữ với đề 「大学课堂是否应该允许学生使用手机？」. Yêu cầu: câu đầu nêu luận điểm; ít nhất 2 luận cứ (1 ví dụ cụ thể); có nhượng bộ 诚然/固然…但…; có câu tiểu kết; dùng ≥ 5 từ của bài.",
+   "min": 300,
+   "model": "大学课堂是否应该允许学生使用手机？笔者认为，与其一刀切地禁止，不如引导学生合理使用。首先，手机本身是一种强大的学习工具。学生可以随时查阅资料、使用电子词典，甚至参与老师发起的线上投票，课堂互动因此更加活跃。其次，一味禁止往往适得其反。笔者所在的学院曾要求学生上课前上交手机，结果不少学生改用平板电脑，管理成本反而增加了。诚然，有些学生自制力较差，上课时刷视频、玩游戏，这一问题不容忽视。但问题的根源不在于手机，而在于课堂缺乏吸引力和明确的规则。倘若老师能把手机的使用纳入教学设计，规定何时可用、何时必须收起，学生的注意力自然会回到学习上来。由此可见，手机并非课堂的敌人。综上所述，对待课堂上的手机，堵不如疏，关键在于规则清晰、引导得当。",
+   "modelVi": "Lớp học đại học có nên cho phép sinh viên dùng điện thoại? Người viết cho rằng, thay vì cấm “một nhát cắt”, chi bằng hướng dẫn sinh viên dùng hợp lý. Trước hết, bản thân điện thoại là một công cụ học tập mạnh mẽ: sinh viên có thể tra tài liệu bất cứ lúc nào, dùng từ điển điện tử, thậm chí tham gia bỏ phiếu trực tuyến do giảng viên phát động, nhờ vậy tương tác trong lớp sôi nổi hơn. Thứ hai, cấm đoán một chiều thường phản tác dụng. Khoa nơi người viết làm việc từng yêu cầu sinh viên nộp điện thoại trước giờ học, kết quả nhiều em chuyển sang dùng máy tính bảng, chi phí quản lý trái lại còn tăng. Đúng là có sinh viên tự chủ kém, trong giờ xem video, chơi game – vấn đề này không thể xem nhẹ. Nhưng gốc rễ không nằm ở điện thoại mà ở chỗ giờ học thiếu sức hút và thiếu quy tắc rõ ràng. Nếu giảng viên đưa việc dùng điện thoại vào thiết kế bài giảng, quy định khi nào được dùng, khi nào phải cất, sự chú ý của sinh viên tự nhiên sẽ quay về việc học. Từ đó có thể thấy, điện thoại không phải kẻ thù của lớp học. Tóm lại, với điện thoại trong lớp, ngăn chặn không bằng khơi thông; mấu chốt là quy tắc rõ ràng, hướng dẫn thích đáng.",
+   "tips": [
+    "堵不如疏 (ngăn không bằng khơi) là cách kết “nâng tầm” rất hợp văn nghị luận.",
+    "Ví dụ cụ thể (笔者所在的学院…) làm luận cứ đáng tin hơn ví dụ chung chung.",
+    "Đếm chữ: 300 chữ ≈ 15–17 dòng trên giấy ô vuông 20 chữ/dòng."
+   ],
+   "checklist": [
+    "Câu 1–2 nêu rõ luận điểm",
+    "Có 首先/其次 phân tầng",
+    "Có 1 ví dụ cụ thể + câu phân tích",
+    "Có nhượng bộ 诚然…但…",
+    "Có câu kết 综上所述 / 由此可见",
+    "Không dùng 我觉得, 挺, 特别 trong văn viết"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "诚然，网络让信息的获取更加便捷，但它也让人更容易浅尝辄止。",
+   "lang": "zh-CN",
+   "q": "Thái độ của người nói đối với mạng internet là gì?",
+   "o": [
+    "Hoàn toàn ủng hộ",
+    "Thừa nhận lợi ích nhưng nhấn mạnh mặt trái",
+    "Phản đối mọi việc dùng mạng",
+    "Không nêu quan điểm"
+   ],
+   "a": 1,
+   "e": "诚然…但… = thừa nhận (tiện lợi) rồi chuyển sang ý chính (dễ hời hợt – 浅尝辄止)."
+  },
+  {
+   "t": "listen",
+   "say": "很多人之所以放弃深度阅读，与其说是没有时间，不如说是缺乏耐心。",
+   "lang": "zh-CN",
+   "q": "Theo người nói, nguyên nhân CHÍNH khiến nhiều người bỏ đọc sâu là gì?",
+   "o": [
+    "Không có thời gian",
+    "Không có sách hay",
+    "Thiếu kiên nhẫn",
+    "Giá sách quá đắt"
+   ],
+   "a": 2,
+   "e": "与其说A，不如说B → B mới là bản chất: 缺乏耐心 (thiếu kiên nhẫn)."
+  },
+  {
+   "t": "listen",
+   "say": "他只采访了三个大学生，就断定全国的年轻人都不爱读书，这显然是以偏概全。",
+   "lang": "zh-CN",
+   "q": "Người nói chỉ ra lỗi lập luận nào?",
+   "o": [
+    "因果倒置",
+    "偷换概念",
+    "循环论证",
+    "以偏概全"
+   ],
+   "a": 3,
+   "e": "Ba người → cả nước: lấy một phần khái quát toàn thể (以偏概全)."
+  },
+  {
+   "t": "dict",
+   "say": "综上所述，深度阅读不可替代。",
+   "lang": "zh-CN",
+   "a": "综上所述，深度阅读不可替代。",
+   "py": "Zōngshàng suǒshù, shēndù yuèdú bùkě tìdài.",
+   "e": "综 zōng (tổng) – đừng nhầm với 总 zǒng; 替代 tìdài = thay thế."
+  },
+  {
+   "t": "mc",
+   "q": "Chọn từ nối phù hợp: ______网络阅读有其便利之处，然而它无法替代纸质书带来的沉浸感。",
+   "o": [
+    "鉴于",
+    "固然",
+    "倘若",
+    "进而"
+   ],
+   "a": 1,
+   "e": "固然…然而… = thừa nhận A rồi chuyển sang B. 鉴于 (xét thấy) dẫn căn cứ, 倘若 là giả thiết, 进而 là tiến thêm một bước – đều không ghép với 然而."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào dùng 鉴于 ĐÚNG?",
+   "o": [
+    "鉴于他很努力，所以他考上了大学。",
+    "鉴于下雨，路很滑。",
+    "鉴于样本数量有限，本研究的结论仅供参考。",
+    "鉴于如果明天下雨，比赛就取消。"
+   ],
+   "a": 2,
+   "e": "鉴于 đứng đầu câu, dẫn căn cứ để đưa ra kết luận/quyết định; không đi với 所以, không dùng cho quan hệ nhân quả tự nhiên, không ghép với 如果."
+  },
+  {
+   "t": "mc",
+   "q": "「某村农民十年如一日改良稻种，终于培育出抗旱新品种。可见，成功离不开坚持。」 dùng phép luận chứng nào?",
+   "o": [
+    "道理论证",
+    "举例论证",
+    "对比论证",
+    "类比论证"
+   ],
+   "a": 1,
+   "e": "Dẫn một sự việc cụ thể (người nông dân kiên trì 10 năm) rồi rút ra kết luận → 举例论证."
+  },
+  {
+   "t": "mc",
+   "q": "Bản dịch nào ĐÚNG NHẤT cho 「与其说他是在工作，不如说他是在享受生活。」?",
+   "o": [
+    "Anh ấy thà làm việc còn hơn hưởng thụ cuộc sống.",
+    "Anh ấy vừa làm việc vừa hưởng thụ cuộc sống.",
+    "Anh ấy làm việc để hưởng thụ cuộc sống.",
+    "Nói anh ấy đang làm việc thì đúng hơn phải nói anh ấy đang tận hưởng cuộc sống."
+   ],
+   "a": 3,
+   "e": "与其说A，不如说B là đánh giá lại bản chất (B đúng hơn A), KHÔNG phải “thà… còn hơn” (đó là 宁可/与其A不如B chỉ lựa chọn hành động)."
+  },
+  {
+   "t": "mc",
+   "q": "Chọn bản dịch đúng cho: “Không thể phủ nhận rằng điện thoại thông minh đã thay đổi cách chúng ta học tập.”",
+   "o": [
+    "不能否认的是智能手机已经变化我们学习的方法。",
+    "无可否认，智能手机已经被改变我们的学习方式。",
+    "不可否认，智能手机改变了我们的学习方式。",
+    "不可否认，我们的学习方式改变智能手机。"
+   ],
+   "a": 2,
+   "e": "变化 là nội động từ, không mang tân ngữ (❌ 变化我们…) → dùng 改变. Phương án 2 thừa 被; phương án 4 đảo chủ – tân."
+  },
+  {
+   "t": "fill",
+   "q": "______人人都只看标题而不读全文，理性讨论将无从谈起。(“Nếu như” – văn viết)",
+   "a": "倘若",
+   "alt": [
+    "tangruo",
+    "tǎngruò",
+    "假如",
+    "若"
+   ],
+   "e": "倘若 = 如果 văn viết. Vế sau 将无从谈起 cũng là văn viết, nên dùng 倘若 cho đồng bộ văn phong."
+  },
+  {
+   "t": "fill",
+   "q": "网络游戏的利弊不能一概而___，要具体情况具体分析。",
+   "a": "论",
+   "alt": [
+    "lun",
+    "lùn"
+   ],
+   "e": "一概而论 = vơ đũa cả nắm; thường dùng phủ định 不能一概而论."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Sở dĩ anh ấy bỏ đọc sâu là vì thiếu kiên nhẫn.”",
+   "w": [
+    "是因为",
+    "放弃深度阅读",
+    "缺乏耐心",
+    "他之所以"
+   ],
+   "a": "他之所以放弃深度阅读是因为缺乏耐心",
+   "e": "Khuôn 之所以 + kết quả + 是因为 + nguyên nhân; 之所以 đứng sau chủ ngữ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp: “Lướt video chẳng những không giảm căng thẳng mà trái lại còn làm lo âu tăng thêm.”",
+   "w": [
+    "反而",
+    "缓解压力",
+    "刷短视频",
+    "加剧了焦虑",
+    "非但不能"
+   ],
+   "a": "刷短视频非但不能缓解压力反而加剧了焦虑",
+   "e": "非但不 + (kỳ vọng) + 反而 + (kết quả trái kỳ vọng)."
+  },
+  {
+   "t": "match",
+   "q": "Nối lỗi logic với mô tả:",
+   "pairs": [
+    [
+     "以偏概全",
+     "Lấy một phần suy ra toàn thể"
+    ],
+    [
+     "偷换概念",
+     "Lén đổi nội hàm khái niệm giữa chừng"
+    ],
+    [
+     "因果倒置",
+     "Đảo ngược nguyên nhân và kết quả"
+    ],
+    [
+     "循环论证",
+     "Dùng chính kết luận làm luận cứ"
+    ],
+    [
+     "非此即彼",
+     "Chỉ đưa ra hai lựa chọn cực đoan"
+    ]
+   ],
+   "e": "Biết gọi tên lỗi logic giúp bạn vừa tránh lỗi, vừa phản bác đối phương sắc bén."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ nối với chức năng:",
+   "pairs": [
+    [
+     "鉴于",
+     "Nêu căn cứ để ra quyết định"
+    ],
+    [
+     "诚然",
+     "Nhượng bộ trước khi chuyển ý"
+    ],
+    [
+     "综上所述",
+     "Mở đoạn tổng kết"
+    ],
+    [
+     "进而",
+     "Tiến thêm một bước"
+    ],
+    [
+     "换言之",
+     "Diễn đạt lại cho rõ"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "In bài đọc mẫu (bỏ trống các từ nối để học viên tự điền); bảng phụ “ngôi nhà nghị luận” (mái = 论点, cột = 论据, mộng = 论证); 15 thẻ từ nối (mặt trước từ, mặt sau chức năng); 5 đoạn văn ngắn chứa lỗi logic do GV tự viết; đồng hồ bấm giờ cho phần nói.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: chiếu 2 đoạn văn cùng chủ đề (1 đoạn kể chuyện, 1 đoạn nghị luận). Hỏi: đoạn nào “chứng minh” điều gì? Dẫn vào khái niệm 论点 – 论据 – 论证 (cho học viên tự đọc Hán Việt)."
+   },
+   {
+    "t": "20'",
+    "do": "Từ vựng A + B: dạy theo nhóm chức năng (thuật ngữ – động từ văn viết – từ nối – thành ngữ lập luận). Nhấn cặp dễ nhầm: 阐述/论述, 驳斥/反驳, 诚然/固然, 片面/偏颇. Học viên đặt câu nhanh với 5 từ."
+   },
+   {
+    "t": "20'",
+    "do": "Kỹ thuật 1: vẽ “ngôi nhà nghị luận”; phân tích khung 三段式 trên bài đọc mẫu (học viên dùng bút màu tô: luận điểm – luận cứ – câu phân tích). Giới thiệu 5 phép luận chứng."
+   },
+   {
+    "t": "15'",
+    "do": "Lỗi logic: phát 5 đoạn văn có lỗi, nhóm 3 người gọi tên lỗi (以偏概全, 偷换概念…) và sửa lại. Chữa chung."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe bài giảng của 林教授: lần 1 trả lời câu hỏi khởi động (mái – cột – mộng); lần 2 làm 5 câu hỏi; lần 3 dừng ở từng câu để học viên shadowing (nhại theo) các câu có từ nối."
+   },
+   {
+    "t": "5'",
+    "do": "Giao bài tập 1–8 trong game + học thuộc 20 từ nối."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: trò “Bắn từ nối” (xem phần trò chơi)."
+   },
+   {
+    "t": "20'",
+    "do": "Kỹ thuật 2–3: bảng từ nối văn viết vs khẩu ngữ – học viên “nâng cấp” 6 câu khẩu ngữ GV đưa (我觉得… → 笔者认为…; 虽然…可是… → 诚然…但…). Phân biệt 与其说A不如说B / 与其A不如B."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc sâu bài mẫu: đọc lướt 3 phút tìm luận điểm trung tâm; đọc kỹ trả lời câu hỏi; vẽ sơ đồ dàn ý bài trên bảng (6 đoạn – chức năng từng đoạn)."
+   },
+   {
+    "t": "20'",
+    "do": "Nói: chia cặp, một người lập luận đề 「网络让人更孤独吗？」, người kia phản bác (1 phút mỗi người, bấm giờ). Đổi vai. GV ghi lỗi từ nối, chữa cuối hoạt động."
+   },
+   {
+    "t": "15'",
+    "do": "Viết: hướng dẫn dịch đoạn Việt → Trung (chú ý đảo định ngữ), giao đoạn nghị luận 300 chữ làm bài về nhà; làm bài tập 9–15 trong game."
+   },
+   {
+    "t": "5'",
+    "do": "Tổng kết: mỗi học viên nói 1 câu dùng 综上所述 tóm tắt điều học được."
+   }
+  ],
+  "games": [
+   "Bắn từ nối: GV đọc nửa câu (诚然，网购很方便……), học viên giơ thẻ từ nối phù hợp để nối vế sau (但/然而). Ai giơ sai hoặc chậm nhất phải nói một câu hoàn chỉnh.",
+   "Toà án logic: GV đọc một lập luận có lỗi, cả lớp làm “luật sư phản biện” – nhóm nào gọi đúng tên lỗi và đưa phản ví dụ thuyết phục nhất được điểm.",
+   "Xây nhà nghị luận: mỗi nhóm nhận 1 luận điểm, trong 5 phút phải “dựng” đủ 3 cột (3 luận cứ) và 1 câu 由此可见 nối lại; nhóm khác thử “đẩy đổ” bằng phản biện."
+  ],
+  "errors": [
+   "Viết luận thành kể chuyện: kể ví dụ dài mà không có câu phân tích → bắt buộc thêm 这说明…/由此可见… sau mỗi ví dụ.",
+   "Dùng 诚然/固然 rồi nối bằng 所以 → nhượng bộ phải đi với 但/然而/可是.",
+   "Dùng 鉴于 cho nguyên nhân tự nhiên (❌ 鉴于下雨，路很滑) → 鉴于 dẫn căn cứ cho quyết định/kết luận.",
+   "Nhầm 与其说A不如说B (đánh giá lại bản chất) với 与其A不如B (chọn hành động), dịch cả hai là “thà… còn hơn”.",
+   "Lạm dụng khẩu ngữ trong văn viết: 我觉得, 挺, 特别, 然后 → 笔者认为, 颇为, 尤为, 此外/进而.",
+   "Viết 变化 có tân ngữ (❌ 变化我们的生活) → 改变我们的生活; 变化 là nội động từ/danh từ."
+  ],
+  "homework": "Làm hết bài tập trong game ≥ 85%; viết đoạn nghị luận 300 chữ (Viết 2) và tự soát theo checklist; lập dàn ý đề 「碎片化阅读利大于弊还是弊大于利」 (luận điểm + 3 luận điểm nhánh + luận cứ); ghi âm phần nói 1 phút và nghe lại đếm số từ đệm (嗯, 那个) để giảm dần."
+ }
 }

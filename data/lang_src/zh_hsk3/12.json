@@ -1,162 +1,1165 @@
 {
-  "no": 12,
-  "title": "我学汉语的故事 – Viết đoạn văn & ôn tập HSK3",
-  "sub": "Wǒ xué Hànyǔ de gùshi. 我学汉语的故事。",
-  "goals": [
-    "Hệ thống lại toàn bộ cấu trúc câu đặc biệt và cặp liên từ của HSK3 (bài 1–11)",
-    "Dùng thêm 如果…就…, 为了…, 关于, 根据, 认为 để diễn đạt ý kiến, mục đích, giả thiết",
-    "Nắm kỹ thuật làm 2 dạng đề viết HSK3: sắp xếp từ thành câu, điền chữ Hán theo pinyin",
-    "Viết đoạn văn 80–100 chữ có bố cục 3 phần (mở – thân – kết) và ≥ 5 cấu trúc HSK3",
-    "Tự giới thiệu và kể chuyện 1 phút bằng tiếng Trung, sẵn sàng cho bài thi cuối cấp"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词) – Ý kiến, mục đích, kể chuyện", "items": [
-      {"w": "故事", "py": "gùshi", "hv": "cố sự", "pos": "n", "vi": "câu chuyện", "ex": "奶奶常常给我讲故事。", "exPy": "Nǎinai chángcháng gěi wǒ jiǎng gùshi.", "exVi": "Bà thường kể chuyện cho tôi nghe."},
-      {"w": "关于", "py": "guānyú", "hv": "quan ư", "pos": "prep", "vi": "về, liên quan đến", "ex": "这是一本关于中国历史的书。", "exPy": "Zhè shì yì běn guānyú Zhōngguó lìshǐ de shū.", "exVi": "Đây là một cuốn sách về lịch sử Trung Quốc."},
-      {"w": "根据", "py": "gēnjù", "hv": "căn cứ", "pos": "prep", "vi": "căn cứ vào, dựa theo", "ex": "根据天气预报，明天会下雨。", "exPy": "Gēnjù tiānqì yùbào, míngtiān huì xià yǔ.", "exVi": "Theo dự báo thời tiết, mai sẽ mưa."},
-      {"w": "表示", "py": "biǎoshì", "hv": "biểu thị", "pos": "v", "vi": "bày tỏ, biểu thị", "ex": "他点点头，表示同意。", "exPy": "Tā diǎndiǎn tóu, biǎoshì tóngyì.", "exVi": "Anh ấy gật đầu, tỏ ý đồng ý."},
-      {"w": "认为", "py": "rènwéi", "hv": "nhận vi", "pos": "v", "vi": "cho rằng, nghĩ rằng (ý kiến)", "ex": "我认为学汉语很有用。", "exPy": "Wǒ rènwéi xué Hànyǔ hěn yǒuyòng.", "exVi": "Tôi cho rằng học tiếng Trung rất có ích."},
-      {"w": "关系", "py": "guānxi", "hv": "quan hệ", "pos": "n", "vi": "quan hệ, mối quan hệ", "ex": "我们俩关系很好。", "exPy": "Wǒmen liǎ guānxi hěn hǎo.", "exVi": "Hai chúng tôi quan hệ rất tốt."},
-      {"w": "关心", "py": "guānxīn", "hv": "quan tâm", "pos": "v", "vi": "quan tâm", "ex": "谢谢你的关心！", "exPy": "Xièxie nǐ de guānxīn!", "exVi": "Cảm ơn sự quan tâm của bạn!"},
-      {"w": "愿意", "py": "yuànyì", "hv": "nguyện ý", "pos": "v", "vi": "bằng lòng, sẵn lòng, muốn", "ex": "你愿意跟我一起去吗？", "exPy": "Nǐ yuànyì gēn wǒ yìqǐ qù ma?", "exVi": "Bạn có muốn đi cùng tôi không?"},
-      {"w": "为了", "py": "wèile", "hv": "vị liễu", "pos": "prep", "vi": "để, vì (mục đích)", "ex": "为了学好汉语，他每天练习两个小时。", "exPy": "Wèile xuéhǎo Hànyǔ, tā měi tiān liànxí liǎng ge xiǎoshí.", "exVi": "Để học giỏi tiếng Trung, ngày nào anh ấy cũng luyện hai tiếng."},
-      {"w": "为", "py": "wèi", "hv": "vị", "pos": "prep", "vi": "vì, cho (ai)", "ex": "我为你高兴！", "exPy": "Wǒ wèi nǐ gāoxìng!", "exVi": "Tôi mừng cho bạn!"},
-      {"w": "祝", "py": "zhù", "hv": "chúc", "pos": "v", "vi": "chúc", "ex": "祝你生日快乐！", "exPy": "Zhù nǐ shēngrì kuàilè!", "exVi": "Chúc bạn sinh nhật vui vẻ!"},
-      {"w": "解决", "py": "jiějué", "hv": "giải quyết", "pos": "v", "vi": "giải quyết", "ex": "这个问题很难解决。", "exPy": "Zhège wèntí hěn nán jiějué.", "exVi": "Vấn đề này rất khó giải quyết."},
-      {"w": "办法", "py": "bànfǎ", "hv": "biện pháp", "pos": "n", "vi": "cách, biện pháp", "ex": "我有一个好办法。", "exPy": "Wǒ yǒu yí ge hǎo bànfǎ.", "exVi": "Tôi có một cách hay."},
-      {"w": "作用", "py": "zuòyòng", "hv": "tác dụng", "pos": "n", "vi": "tác dụng, vai trò", "ex": "这种药没有什么作用。", "exPy": "Zhè zhǒng yào méiyǒu shénme zuòyòng.", "exVi": "Loại thuốc này chẳng có tác dụng gì."},
-      {"w": "如果", "py": "rúguǒ", "hv": "như quả", "pos": "conj", "vi": "nếu (如果…就…)", "ex": "如果明天下雨，我们就不去了。", "exPy": "Rúguǒ míngtiān xià yǔ, wǒmen jiù bú qù le.", "exVi": "Nếu mai mưa thì chúng ta không đi nữa."},
-      {"w": "当然", "py": "dāngrán", "hv": "đương nhiên", "pos": "adv", "vi": "đương nhiên, tất nhiên", "ex": "你会来吗？— 当然会！", "exPy": "Nǐ huì lái ma? — Dāngrán huì!", "exVi": "Bạn sẽ đến chứ? — Tất nhiên rồi!"},
-      {"w": "几乎", "py": "jīhū", "hv": "cơ hồ", "pos": "adv", "vi": "gần như, hầu như", "ex": "他几乎每天都去图书馆。", "exPy": "Tā jīhū měi tiān dōu qù túshūguǎn.", "exVi": "Anh ấy hầu như ngày nào cũng đến thư viện."},
-      {"w": "多么", "py": "duōme", "hv": "đa ma", "pos": "adv", "vi": "biết bao, thật là (cảm thán)", "ex": "这里的风景多么美啊！", "exPy": "Zhèlǐ de fēngjǐng duōme měi a!", "exVi": "Phong cảnh nơi đây đẹp biết bao!"},
-      {"w": "极", "py": "jí", "hv": "cực", "pos": "adv", "vi": "cực kỳ (Adj + 极了)", "ex": "这个菜好吃极了！", "exPy": "Zhège cài hǎochī jí le!", "exVi": "Món này ngon cực kỳ!"},
-      {"w": "最近", "py": "zuìjìn", "hv": "tối cận", "pos": "n", "vi": "gần đây, dạo này", "ex": "你最近忙吗？", "exPy": "Nǐ zuìjìn máng ma?", "exVi": "Dạo này bạn có bận không?"},
-      {"w": "同意", "py": "tóngyì", "hv": "đồng ý", "pos": "v", "vi": "đồng ý", "ex": "我同意你的看法。", "exPy": "Wǒ tóngyì nǐ de kànfǎ.", "exVi": "Tôi đồng ý với quan điểm của bạn."},
-      {"w": "了解", "py": "liǎojiě", "hv": "liễu giải", "pos": "v", "vi": "hiểu rõ, tìm hiểu", "ex": "我想多了解一下中国文化。", "exPy": "Wǒ xiǎng duō liǎojiě yíxià Zhōngguó wénhuà.", "exVi": "Tôi muốn tìm hiểu thêm về văn hoá Trung Quốc."},
-      {"w": "班", "py": "bān", "hv": "ban", "pos": "n", "vi": "lớp (học); ca (làm việc)", "ex": "我们班有二十个学生。", "exPy": "Wǒmen bān yǒu èrshí ge xuésheng.", "exVi": "Lớp chúng tôi có 20 học viên."},
-      {"w": "容易", "py": "róngyì", "hv": "dung dịch", "pos": "adj", "vi": "dễ", "ex": "这个问题很容易。", "exPy": "Zhège wèntí hěn róngyì.", "exVi": "Câu hỏi này rất dễ."}
-    ]},
-    {"k": "text", "h": "Bí quyết viết đoạn văn HSK3 + 10 điều kiểm tra trước khi nộp", "html": "<p>Đoạn văn tốt ở trình độ HSK3 <b>không cần từ khó</b>, chỉ cần: <b>rõ bố cục</b>, <b>câu ngắn đúng ngữ pháp</b>, và <b>dùng được các cấu trúc đã học</b>. Hãy theo khung 5 bước:</p><ol><li><b>Đọc đề</b>, gạch chân yêu cầu (chủ đề, số chữ, cấu trúc bắt buộc).</li><li><b>Liệt kê 3 ý</b> bằng tiếng Trung đơn giản (không dịch từ tiếng Việt dài dòng).</li><li><b>Chọn cấu trúc</b> cho từng ý: 是…的 (mở), 先…然后 / 后来 (thân), 我相信 / 我希望 (kết).</li><li><b>Viết</b> câu 8–15 chữ, nối bằng từ nối.</li><li><b>Kiểm tra</b> theo danh sách dưới.</li></ol><h4>10 điều kiểm tra</h4><ul><li>Không có 是 trước tính từ (我很忙, không phải 我是忙).</li><li>Câu 把 / 被 có thành phần sau động từ.</li><li>没 / 不 / 别 đặt trước 把 / 被.</li><li>了 không thừa, không thiếu.</li><li>的 / 地 / 得 đúng chỗ.</li><li>Lượng từ đúng (一条裤子, 一双鞋, 一张照片).</li><li>Cặp liên từ đủ đôi (只要–就, 只有–才, 不但–而且).</li><li>Từ thời gian đứng trước động từ (我昨天去了…).</li><li>Chữ dễ nhầm: 已/己, 在/再, 做/作, 的/得.</li><li>Dấu câu tiếng Trung: 。，？！“”, mỗi dấu 1 ô.</li></ul><h4>Mẹo phát âm</h4><ul><li>为 có hai thanh: 认为 <span class=\"py\">rènwéi</span> (thanh 2) nhưng 为了 <span class=\"py\">wèile</span>, 为什么 <span class=\"py\">wèi shénme</span> (thanh 4).</li><li>了解 đọc <span class=\"py\">liǎojiě</span> (了 = liǎo), không phải le.</li></ul>"},
-    {"k": "grammar", "h": "Ngữ pháp 1: Ôn tập các câu đặc biệt & kỹ thuật sắp xếp câu", "html": "<p>Phần 书写 (viết) của đề HSK3 có dạng <b>sắp xếp từ thành câu</b>. Hầu hết câu trong đề rơi vào các cấu trúc dưới đây – hãy nhận ra “<b>từ báo hiệu</b>” (把, 被, 得, 着, 是…的) để biết khung câu.</p>", "table": [["Cấu trúc", "Công thức", "Ví dụ", "Bài"], ["Câu 把", "S + 把 + O + V + thành phần khác", "我把作业做完了。", "1"], ["Câu 被", "O + 被 + (tác nhân) + V + thành phần khác", "我的伞被风刮走了。", "2"], ["Bổ ngữ xu hướng", "V + 上/下/进/出/回/过/起 + 来/去", "他从山上跑下来了。", "3"], ["Bổ ngữ khả năng", "V + 得/不 + kết quả/xu hướng", "黑板上的字我看不清楚。", "4"], ["着", "V + 着 (trạng thái); V1着V2", "门开着。她笑着说。", "10"], ["Câu tồn hiện", "Nơi chốn + V着/了 + người/vật", "桌子上放着一本书。", "11"], ["是…的", "是 + thời gian/nơi/cách + V + 的", "我是坐飞机来的。", "11"]], "ex": [
-      {"t": "请把这本书还给图书馆。", "py": "Qǐng bǎ zhè běn shū huán gěi túshūguǎn.", "vi": "Làm ơn trả quyển sách này cho thư viện."},
-      {"t": "那件事已经被他忘了。", "py": "Nà jiàn shì yǐjīng bèi tā wàng le.", "vi": "Chuyện đó đã bị anh ấy quên mất rồi."},
-      {"t": "老师的话你听得懂吗？", "py": "Lǎoshī de huà nǐ tīng de dǒng ma?", "vi": "Lời thầy bạn nghe hiểu không?"},
-      {"t": "门口站着一位老人。", "py": "Ménkǒu zhànzhe yí wèi lǎorén.", "vi": "Trước cửa có một cụ già đang đứng."},
-      {"t": "你是什么时候来越南的？", "py": "Nǐ shì shénme shíhou lái Yuènán de?", "vi": "Bạn sang Việt Nam khi nào?"}
-    ], "tips": ["Kỹ thuật 3 bước sắp xếp câu: ① tìm <b>động từ chính</b>; ② tìm <b>từ báo hiệu</b> (把/被/得/着/是…的/一…就); ③ xếp theo trật tự <b>Chủ ngữ – Thời gian – Phó từ – Năng nguyện – Giới từ – Động từ – Bổ ngữ – Tân ngữ</b>.", "Trật tự trạng ngữ hay gặp: <b>已经 / 也 / 都 / 没 + 要 / 想 / 能 + 把 / 被 / 在 / 跟 / 给 + động từ</b>: 我也想把房间打扫干净."]},
-    {"k": "grammar", "h": "Ngữ pháp 2: Ôn tập cặp liên từ + 如果…就… & 为了", "html": "<p>Cặp liên từ giúp đoạn văn mạch lạc. Bài này bổ sung <b>如果…就…</b> (nếu… thì…) và <b>为了…</b> (để…, chỉ mục đích – đặt đầu câu).</p>", "table": [["Cặp", "Nghĩa", "Ví dụ", "Bài"], ["越来越 / 越…越…", "ngày càng / càng… càng…", "天气越来越冷。", "5"], ["只要…就…", "chỉ cần… là…", "只要努力，就能成功。", "6"], ["只有…才…", "chỉ có… mới…", "只有多练，才能说好。", "6"], ["除了…以外，都 / 还…", "trừ… / ngoài… ra còn…", "除了他，大家都来了。", "7"], ["连…都 / 也…", "ngay cả… cũng…", "他连饭都没吃。", "7"], ["又…又…", "vừa… vừa…", "又便宜又好看。", "8"], ["一…就…", "vừa… là… / hễ… là…", "我一到家就睡觉。", "8"], ["先…然后…", "trước… sau đó…", "先吃饭，然后看电影。", "9"], ["不但…而且…", "không những… mà còn…", "不但快，而且方便。", "9"], ["如果…就…", "nếu… thì…", "如果下雨，我就不去。", "12"], ["为了…，…", "để… (mục đích)", "为了健康，我每天跑步。", "12"]], "ex": [
-      {"t": "如果你有时间，我们就一起去看电影吧。", "py": "Rúguǒ nǐ yǒu shíjiān, wǒmen jiù yìqǐ qù kàn diànyǐng ba.", "vi": "Nếu bạn có thời gian thì chúng ta cùng đi xem phim nhé."},
-      {"t": "为了学好汉语，我每天都听录音。", "py": "Wèile xuéhǎo Hànyǔ, wǒ měi tiān dōu tīng lùyīn.", "vi": "Để học giỏi tiếng Trung, ngày nào tôi cũng nghe ghi âm."},
-      {"t": "根据老师的要求，我们每个人都要写一段话。", "py": "Gēnjù lǎoshī de yāoqiú, wǒmen měi ge rén dōu yào xiě yí duàn huà.", "vi": "Theo yêu cầu của cô giáo, mỗi người chúng tôi đều phải viết một đoạn văn."},
-      {"t": "这件事我已经解决了，你放心吧。", "py": "Zhè jiàn shì wǒ yǐjīng jiějué le, nǐ fàngxīn ba.", "vi": "Việc này tôi giải quyết xong rồi, bạn yên tâm đi."}
-    ], "tips": ["为了 đặt ĐẦU câu: ✅ <b>为了健康，我每天跑步</b>. Muốn đặt sau thì dùng <b>是为了</b>: 我每天跑步是为了健康. ❌ <i>我每天跑步为了健康</i>.", "如果…就…: 就 đứng sau chủ ngữ vế sau (như 只要…就): 如果你去，<b>我就</b>去.", "Adj + 极了 = cực kỳ: 好吃极了, 高兴极了 (không thêm 很 phía trước)."]},
-    {"k": "grammar", "h": "Ngữ pháp 3: Khung viết đoạn văn 3 phần", "html": "<p>Đoạn văn 80–100 chữ nên có 5–8 câu, chia 3 phần. Mỗi câu chứa <b>một điểm ngữ pháp</b> – vừa dễ viết đúng, vừa thể hiện được trình độ.</p>", "table": [["Phần", "Nhiệm vụ", "Mẫu câu gợi ý"], ["Mở đoạn (1–2 câu)", "Giới thiệu chủ đề, thời gian", "我是…的时候开始…的。/ 我想谈谈…"], ["Thân đoạn (3–5 câu)", "Kể theo trình tự, có chi tiết, có thay đổi", "刚开始… 后来… / 先…然后… / 因为…所以… / 越来越…"], ["Kết đoạn (1 câu)", "Cảm nghĩ, quyết tâm, mong muốn", "我觉得… / 我相信，只要…就… / 我希望…"], ["Trình bày", "Lùi đầu đoạn 2 ô; mỗi chữ, mỗi dấu câu 1 ô", "。，？！“”"]], "ex": [
-      {"t": "刚开始的时候，我觉得汉字很难。", "py": "Gāng kāishǐ de shíhou, wǒ juéde Hànzì hěn nán.", "vi": "Lúc mới bắt đầu, tôi thấy chữ Hán rất khó. (mở / thân)"},
-      {"t": "后来，我每天写二十个汉字，慢慢地就记住了。", "py": "Hòulái, wǒ měi tiān xiě èrshí ge Hànzì, mànmàn de jiù jìzhù le.", "vi": "Sau đó, mỗi ngày tôi viết 20 chữ, dần dần nhớ được. (thân)"},
-      {"t": "我相信，只要坚持，就一定能学好。", "py": "Wǒ xiāngxìn, zhǐyào jiānchí, jiù yídìng néng xuéhǎo.", "vi": "Tôi tin rằng chỉ cần kiên trì là nhất định học tốt được. (kết)"}
-    ], "tips": ["Câu ngắn 8–15 chữ dễ đúng hơn câu dài nhiều 的.", "Đừng dịch từng chữ từ tiếng Việt – hãy nghĩ bằng mẫu câu đã học.", "Đọc to đoạn văn sau khi viết: chỗ nào vấp thường là chỗ sai."]},
-    {"k": "dialog", "h": "Nghe: Buổi học cuối của khoá HSK3", "lang": "zh-CN", "note": "Buổi học cuối cùng của lớp HSK3. Cô 陈 hỏi học viên cảm nghĩ và khuyên cách luyện viết. Nghe lần 1: tháng sau lớp sẽ mở khoá gì?", "lines": [
-      {"s": "陈老师", "g": "f", "t": "同学们，这是我们HSK三级的最后一课了。时间过得多么快啊！", "py": "Tóngxuémen, zhè shì wǒmen HSK sān jí de zuìhòu yí kè le. Shíjiān guò de duōme kuài a!", "vi": "Các em, đây là buổi học cuối cùng của khoá HSK 3. Thời gian trôi nhanh biết bao!"},
-      {"s": "小兰", "g": "f", "t": "是啊，老师。我还记得第一天上课的时候，我连“把”字句都不会用。", "py": "Shì a, lǎoshī. Wǒ hái jìde dì-yī tiān shàng kè de shíhou, wǒ lián “bǎ” zì jù dōu bú huì yòng.", "vi": "Vâng ạ. Em vẫn nhớ buổi học đầu tiên, em đến câu chữ 把 cũng không biết dùng."},
-      {"s": "陈老师", "g": "f", "t": "现在呢？", "py": "Xiànzài ne?", "vi": "Thế bây giờ thì sao?"},
-      {"s": "小兰", "g": "f", "t": "现在我不但会用，而且觉得它很有用！我已经把十二课的生词都复习完了。", "py": "Xiànzài wǒ búdàn huì yòng, érqiě juéde tā hěn yǒuyòng! Wǒ yǐjīng bǎ shí'èr kè de shēngcí dōu fùxí wán le.", "vi": "Bây giờ em không những biết dùng mà còn thấy nó rất có ích! Em đã ôn xong từ mới của cả 12 bài rồi."},
-      {"s": "陈老师", "g": "f", "t": "太好了！小明，你呢？你觉得哪部分最难？", "py": "Tài hǎo le! Xiǎo Míng, nǐ ne? Nǐ juéde nǎ bùfen zuì nán?", "vi": "Tốt quá! Tiểu Minh, còn em? Em thấy phần nào khó nhất?"},
-      {"s": "小明", "g": "m", "t": "我认为写作最难。我知道要说什么，可是写不出来。", "py": "Wǒ rènwéi xiězuò zuì nán. Wǒ zhīdao yào shuō shénme, kěshì xiě bu chūlai.", "vi": "Em cho rằng viết là khó nhất. Em biết mình muốn nói gì nhưng viết không ra."},
-      {"s": "陈老师", "g": "f", "t": "我有一个好办法：先用中文列出三个要点，然后用学过的句子写，最后检查一遍。", "py": "Wǒ yǒu yí ge hǎo bànfǎ: xiān yòng Zhōngwén lièchū sān ge yàodiǎn, ránhòu yòng xuéguo de jùzi xiě, zuìhòu jiǎnchá yí biàn.", "vi": "Cô có một cách hay: trước tiên liệt kê ba ý chính bằng tiếng Trung, sau đó dùng những câu đã học để viết, cuối cùng kiểm tra lại một lượt."},
-      {"s": "小明", "g": "m", "t": "听起来不难！如果写错了怎么办？", "py": "Tīng qǐlai bù nán! Rúguǒ xiěcuò le zěnme bàn?", "vi": "Nghe có vẻ không khó! Nếu viết sai thì làm sao ạ?"},
-      {"s": "陈老师", "g": "f", "t": "没关系，错了就改。只要每天写一段，一个月以后你就会写得越来越好。", "py": "Méi guānxi, cuò le jiù gǎi. Zhǐyào měi tiān xiě yí duàn, yí ge yuè yǐhòu nǐ jiù huì xiě de yuè lái yuè hǎo.", "vi": "Không sao, sai thì sửa. Chỉ cần mỗi ngày viết một đoạn, một tháng sau em sẽ viết ngày càng tốt."},
-      {"s": "小兰", "g": "f", "t": "老师，考试以后我们还能见面吗？", "py": "Lǎoshī, kǎoshì yǐhòu wǒmen hái néng jiànmiàn ma?", "vi": "Cô ơi, thi xong chúng em còn được gặp cô không ạ?"},
-      {"s": "陈老师", "g": "f", "t": "当然能！下个月我们要开HSK四级的班，如果你们愿意，就来参加吧。", "py": "Dāngrán néng! Xià ge yuè wǒmen yào kāi HSK sì jí de bān, rúguǒ nǐmen yuànyì, jiù lái cānjiā ba.", "vi": "Tất nhiên rồi! Tháng sau mình mở lớp HSK 4, nếu các em muốn thì đến học nhé."},
-      {"s": "小明", "g": "m", "t": "我愿意！为了去中国留学，我一定要继续学下去。", "py": "Wǒ yuànyì! Wèile qù Zhōngguó liúxué, wǒ yídìng yào jìxù xué xiàqu.", "vi": "Em muốn ạ! Để đi du học Trung Quốc, em nhất định phải học tiếp."},
-      {"s": "小兰", "g": "f", "t": "我也是！老师，谢谢您这么关心我们。", "py": "Wǒ yě shì! Lǎoshī, xièxie nín zhème guānxīn wǒmen.", "vi": "Em cũng vậy! Cô ơi, cảm ơn cô đã quan tâm chúng em như thế."},
-      {"s": "陈老师", "g": "f", "t": "不客气。看到你们进步，我为你们高兴极了！", "py": "Bú kèqi. Kàndào nǐmen jìnbù, wǒ wèi nǐmen gāoxìng jí le!", "vi": "Không có gì. Thấy các em tiến bộ, cô mừng cho các em lắm!"},
-      {"s": "小明", "g": "m", "t": "我们也祝老师身体健康，工作顺利！", "py": "Wǒmen yě zhù lǎoshī shēntǐ jiànkāng, gōngzuò shùnlì!", "vi": "Chúng em cũng chúc cô mạnh khoẻ, công tác thuận lợi!"}
-    ], "qs": [
-      {"q": "Buổi học đầu tiên, 小兰 thế nào?", "o": ["Ngay cả câu chữ 把 cũng không biết dùng", "Không biết chữ Hán nào", "Đã rất giỏi ngữ pháp"], "a": 0, "e": "我连“把”字句都不会用。"},
-      {"q": "小明 thấy phần nào khó nhất?", "o": ["Nghe", "Viết", "Đọc"], "a": 1, "e": "我认为写作最难…可是写不出来。"},
-      {"q": "Cô giáo khuyên viết đoạn văn thế nào?", "o": ["Học thuộc bài mẫu", "Viết bằng tiếng Việt rồi dịch", "Liệt kê 3 ý chính, dùng câu đã học để viết, cuối cùng kiểm tra"], "a": 2, "e": "先…列出三个要点，然后用学过的句子写，最后检查一遍。"},
-      {"q": "Tháng sau sẽ mở lớp gì?", "o": ["HSK 3 lần nữa", "HSK 4", "Lớp luyện nói"], "a": 1, "e": "下个月我们要开HSK四级的班。"},
-      {"q": "Điền lời 小明: 为了去中国______，我一定要继续学下去。(gõ chữ Hán hoặc pinyin)", "a": "留学", "alt": ["liuxue", "liúxué"], "e": "留学 = du học."}
-    ]},
-    {"k": "read", "h": "Đọc (bài văn mẫu): Cô giáo dạy tiếng Trung của tôi", "title": "我的汉语老师", "text": "我的汉语老师姓陈，是一位四十多岁的中国人。她个子不高，头发短短的，总是笑着跟我们说话。\n\n陈老师上课非常认真。她讲语法的时候，先在黑板上写例句，然后让我们一个一个地说。如果我们听不懂，她就用越南语再讲一遍。为了让我们记住生词，她还常常跟我们一起做游戏。\n\n陈老师不但关心我们的学习，而且关心我们的生活。有一次我感冒了，几乎一个星期没来上课。老师不但给我打电话，而且把上课的笔记发给了我。\n\n我认为，陈老师是我遇到过的最好的老师。我希望以后能用流利的汉语跟她聊天。", "py": "Wǒ de Hànyǔ lǎoshī xìng Chén, shì yí wèi sìshí duō suì de Zhōngguó rén. Tā gèzi bù gāo, tóufa duǎnduǎn de, zǒngshì xiàozhe gēn wǒmen shuō huà.\n\nChén lǎoshī shàng kè fēicháng rènzhēn. Tā jiǎng yǔfǎ de shíhou, xiān zài hēibǎn shang xiě lìjù, ránhòu ràng wǒmen yí ge yí ge de shuō. Rúguǒ wǒmen tīng bu dǒng, tā jiù yòng Yuènányǔ zài jiǎng yí biàn. Wèile ràng wǒmen jìzhù shēngcí, tā hái chángcháng gēn wǒmen yìqǐ zuò yóuxì.\n\nChén lǎoshī búdàn guānxīn wǒmen de xuéxí, érqiě guānxīn wǒmen de shēnghuó. Yǒu yí cì wǒ gǎnmào le, jīhū yí ge xīngqī méi lái shàng kè. Lǎoshī búdàn gěi wǒ dǎ diànhuà, érqiě bǎ shàng kè de bǐjì fā gěile wǒ.\n\nWǒ rènwéi, Chén lǎoshī shì wǒ yùdàoguo de zuì hǎo de lǎoshī. Wǒ xīwàng yǐhòu néng yòng liúlì de Hànyǔ gēn tā liáotiān.", "vi": "Cô giáo dạy tiếng Trung của tôi họ Trần, là một người Trung Quốc ngoài bốn mươi tuổi. Cô không cao, tóc ngắn ngắn, lúc nào cũng tươi cười khi nói chuyện với chúng tôi.\n\nCô Trần dạy rất tận tâm. Khi giảng ngữ pháp, cô viết câu ví dụ lên bảng trước, sau đó cho từng người chúng tôi nói. Nếu chúng tôi nghe không hiểu, cô giảng lại bằng tiếng Việt. Để chúng tôi nhớ từ mới, cô còn thường chơi trò chơi cùng chúng tôi.\n\nCô Trần không những quan tâm việc học mà còn quan tâm cuộc sống của chúng tôi. Có lần tôi bị cảm, gần một tuần không đến lớp. Cô không những gọi điện cho tôi mà còn gửi cho tôi vở ghi bài học.\n\nTôi cho rằng cô Trần là cô giáo tốt nhất mà tôi từng gặp. Tôi mong sau này có thể trò chuyện với cô bằng tiếng Trung lưu loát.", "gloss": [
-      {"w": "短短的", "py": "duǎnduǎn de", "vi": "ngắn ngắn (lặp tính từ)"},
-      {"w": "语法", "py": "yǔfǎ", "vi": "ngữ pháp"},
-      {"w": "例句", "py": "lìjù", "vi": "câu ví dụ"},
-      {"w": "一个一个地", "py": "yí ge yí ge de", "vi": "lần lượt từng người"},
-      {"w": "笔记", "py": "bǐjì", "vi": "vở ghi, ghi chép"},
-      {"w": "流利", "py": "liúlì", "vi": "lưu loát"}
-    ], "qs": [
-      {"q": "Cô Trần trông thế nào?", "o": ["Cao, tóc dài", "Đeo kính, ít cười", "Không cao, tóc ngắn, hay cười"], "a": 2, "e": "她个子不高，头发短短的，总是笑着跟我们说话。"},
-      {"q": "Khi học viên nghe không hiểu, cô làm gì?", "o": ["Giảng lại bằng tiếng Việt", "Cho làm thêm bài tập", "Bảo về nhà tự học"], "a": 0, "e": "如果我们听不懂，她就用越南语再讲一遍。"},
-      {"q": "Để học viên nhớ từ mới, cô làm gì?", "o": ["Kiểm tra mỗi ngày", "Cùng chơi trò chơi", "Bắt chép phạt"], "a": 1, "e": "为了让我们记住生词，她还常常跟我们一起做游戏。"},
-      {"q": "Khi “tôi” bị cảm, cô đã làm gì?", "o": ["Gọi điện và gửi vở ghi bài", "Đến nhà thăm", "Cho hoãn thi"], "a": 0, "e": "老师不但给我打电话，而且把上课的笔记发给了我。"},
-      {"q": "Bài văn mẫu kết thúc bằng câu bày tỏ điều gì? (gõ 2 chữ Hán: “mong muốn”)", "a": "希望", "alt": ["xiwang", "xīwàng"], "e": "Kết đoạn: 我希望以后能用流利的汉语跟她聊天。"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "故", "py": "gù", "hv": "cố", "parts": "古 (cổ – xưa, gợi âm) + 攵 (phộc)", "strokes": 9, "vi": "cũ, xưa; cố ý; nguyên do", "words": "故事"},
-      {"c": "事", "py": "shì", "hv": "sự", "parts": "chữ độc thể (tay cầm thẻ ghi việc)", "strokes": 8, "vi": "việc, sự việc", "words": "故事, 事情, 同事"},
-      {"c": "关", "py": "guān", "hv": "quan", "parts": "chữ độc thể (then cài cửa)", "strokes": 6, "vi": "đóng; cửa ải; liên quan", "words": "关门, 关于, 关心"},
-      {"c": "于", "py": "yú", "hv": "vu / ư", "parts": "chữ độc thể", "strokes": 3, "vi": "ở, tại, về (giới từ)", "words": "关于, 终于"},
-      {"c": "根", "py": "gēn", "hv": "căn", "parts": "木 (mộc – cây) + 艮 (cấn – gợi âm)", "strokes": 10, "vi": "rễ cây → gốc, căn cứ", "words": "根据"},
-      {"c": "据", "py": "jù", "hv": "cứ", "parts": "扌 (tay) + 居 (cư – gợi âm)", "strokes": 11, "vi": "dựa vào, nắm lấy", "words": "根据"},
-      {"c": "愿", "py": "yuàn", "hv": "nguyện", "parts": "原 (nguyên – gợi âm) + 心 (tâm)", "strokes": 14, "vi": "mong muốn từ trong lòng", "words": "愿意, 愿望"},
-      {"c": "决", "py": "jué", "hv": "quyết", "parts": "冫 (băng) + 夬 (quyết – gợi âm)", "strokes": 6, "vi": "quyết định, dứt khoát", "words": "决定, 解决"}
-    ]},
-    {"k": "speak", "h": "Nói: Luyện thi nói (tự giới thiệu, nêu ý kiến, kể chuyện)", "tasks": [
-      {"p": "Tự giới thiệu 1 phút: tên, quê, bắt đầu học tiếng Trung khi nào, vì sao học, tiến bộ ra sao (dùng 是…的, 为了, 越来越, 越…越…).", "model": "大家好！我叫阮明，是从河内来的。我是两年前开始学汉语的。为了去中国留学，我每天都学习两个小时。现在我的汉语越来越好了，我觉得汉语越学越有意思。", "py": "Dàjiā hǎo! Wǒ jiào Ruǎn Míng, shì cóng Hénèi lái de. Wǒ shì liǎng nián qián kāishǐ xué Hànyǔ de. Wèile qù Zhōngguó liúxué, wǒ měi tiān dōu xuéxí liǎng ge xiǎoshí. Xiànzài wǒ de Hànyǔ yuè lái yuè hǎo le, wǒ juéde Hànyǔ yuè xué yuè yǒu yìsi.", "vi": "Chào mọi người! Tôi tên Nguyễn Minh, đến từ Hà Nội. Tôi bắt đầu học tiếng Trung từ hai năm trước. Để đi du học Trung Quốc, ngày nào tôi cũng học hai tiếng. Bây giờ tiếng Trung của tôi ngày càng tốt, tôi thấy tiếng Trung càng học càng thú vị.", "tips": "Nói chậm, rõ; ngắt hơi ở dấu phẩy. Thay thông tin bằng của bạn."},
-      {"p": "Trả lời câu hỏi: 你认为学汉语最难的是什么？你有什么好办法？ (dùng 认为, 只要…就…, 如果…就…).", "model": "我认为最难的是声调。我的办法是：每天听录音，跟着读。只要坚持，就一定能进步。如果有不会的，我就问老师。", "py": "Wǒ rènwéi zuì nán de shì shēngdiào. Wǒ de bànfǎ shì: měi tiān tīng lùyīn, gēnzhe dú. Zhǐyào jiānchí, jiù yídìng néng jìnbù. Rúguǒ yǒu bú huì de, wǒ jiù wèn lǎoshī.", "vi": "Tôi cho rằng khó nhất là thanh điệu. Cách của tôi là: mỗi ngày nghe ghi âm, đọc theo. Chỉ cần kiên trì là nhất định tiến bộ. Nếu có chỗ không biết, tôi sẽ hỏi thầy cô.", "tips": "声调 shēngdiào = thanh điệu; 进步 jìnbù = tiến bộ."},
-      {"p": "Kể một chuyện ngắn đã xảy ra với bạn (dùng 把 hoặc 被, 一…就…, 后来).", "model": "上个月，我把钱包忘在出租车上了。我一发现就给出租车公司打电话。后来，司机把钱包送到了我家，我高兴极了。", "py": "Shàng ge yuè, wǒ bǎ qiánbāo wàng zài chūzūchē shang le. Wǒ yì fāxiàn jiù gěi chūzūchē gōngsī dǎ diànhuà. Hòulái, sījī bǎ qiánbāo sòngdàole wǒ jiā, wǒ gāoxìng jí le.", "vi": "Tháng trước, tôi để quên ví trên taxi. Vừa phát hiện là tôi gọi ngay cho hãng taxi. Sau đó, bác tài mang ví đến tận nhà tôi, tôi vui cực kỳ."}
-    ]},
-    {"k": "write", "h": "Viết: Câu chuyện học tiếng Trung của tôi", "task": "Viết đoạn 80–100 chữ với đề “我学汉语的故事”. Bố cục 3 phần (mở – thân – kết) và dùng ít nhất 5 cấu trúc HSK3 khác nhau (把/被, bổ ngữ khả năng, 越来越, 只要…就, 不但…而且, 是…的, 一…就…).", "min": 80, "model": "我是三年前开始学汉语的。刚开始的时候，我听不懂老师说的话，汉字也写不出来。后来，老师让我每天把生词写十遍。我一回家就练习，我的汉语越来越好了。现在我不但能看懂中文电影，而且能跟中国朋友聊天。我相信，只要坚持，就一定能学好汉语！", "modelVi": "Tôi bắt đầu học tiếng Trung từ ba năm trước. Lúc mới bắt đầu, tôi nghe không hiểu lời thầy cô, chữ Hán cũng viết không ra. Sau đó, cô giáo bảo tôi mỗi ngày viết từ mới mười lần. Tôi vừa về nhà là luyện tập, tiếng Trung của tôi ngày càng tốt. Bây giờ tôi không những xem hiểu phim Trung Quốc mà còn trò chuyện được với bạn bè người Trung. Tôi tin rằng chỉ cần kiên trì là nhất định học giỏi tiếng Trung!", "tips": ["Bài mẫu dùng 7 cấu trúc: 是…的, 听不懂 / 写不出来, 把, 一…就, 越来越, 不但…而且, 只要…就.", "Mở bằng 是…的 (khi nào bắt đầu) – thân bằng 刚开始… 后来… 现在… – kết bằng 我相信….", "Từ mở rộng: 坚持 jiānchí kiên trì."], "checklist": ["Bố cục 3 phần rõ ràng", "≥ 5 cấu trúc HSK3 khác nhau", "Mỗi câu 8–15 chữ, không lặp từ nối", "Đã kiểm tra 10 điều (了, 的/地/得, lượng từ, 是 + tính từ…)", "Độ dài 80–100 chữ, đầu đoạn lùi 2 ô"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "我把护照忘在宾馆了。", "lang": "zh-CN", "q": "Người nói để quên gì, ở đâu?", "o": ["Hộ chiếu – ở khách sạn", "Hộ chiếu – ở sân bay", "Va li – ở khách sạn"], "a": 0, "e": "把护照忘在宾馆了 = để quên hộ chiếu ở khách sạn."},
-    {"t": "listen", "say": "如果明天下雨，我们就不去爬山了。", "lang": "zh-CN", "q": "Nếu mai mưa thì sao?", "o": ["Vẫn đi leo núi", "Không đi leo núi nữa", "Đi thư viện"], "a": 1, "e": "如果…就不去了 = nếu… thì không đi nữa."},
-    {"t": "listen", "say": "为了学好汉语，他几乎每天都去图书馆。", "lang": "zh-CN", "q": "Anh ấy đến thư viện để làm gì?", "o": ["Để học giỏi tiếng Trung", "Để gặp bạn bè", "Để đọc báo"], "a": 0, "e": "为了学好汉语 = để học giỏi tiếng Trung; 几乎每天 = hầu như ngày nào."},
-    {"t": "mc", "q": "Chọn câu ĐÚNG:", "o": ["我把作业没做完。", "我没把作业做完。", "我没做完把作业。"], "a": 1, "e": "Bài 1: 没 đứng trước 把."},
-    {"t": "mc", "q": "Chọn câu ĐÚNG:", "o": ["我的自行车被骑走。", "我的自行车被骑走了。", "我的自行车让骑走了。"], "a": 1, "e": "Bài 2: động từ sau 被 cần thành phần khác (了); 让 bắt buộc có tác nhân."},
-    {"t": "mc", "q": "这个菜好吃___了！(Zhège cài hǎochī ___ le! – ngon cực kỳ)", "o": ["很", "多么", "极"], "a": 2, "e": "Adj + 极了 = cực kỳ."},
-    {"t": "mc", "q": "___健康，我每天早上跑步。(___ jiànkāng, wǒ měi tiān zǎoshang pǎobù.)", "o": ["因为", "为了", "如果"], "a": 1, "e": "为了 + mục đích, đặt đầu câu."},
-    {"t": "mc", "q": "Câu nào dùng 的 / 地 / 得 ĐÚNG?", "o": ["她高兴的笑了。", "她笑地很高兴。", "她笑得很高兴。"], "a": 2, "e": "Động từ 笑 + 得 + bổ ngữ (很高兴). Nếu trạng ngữ trước động từ: 高兴地笑了."},
-    {"t": "fill", "q": "___你有时间，我们就一起去吧。(___ nǐ yǒu shíjiān, wǒmen jiù yìqǐ qù ba.)", "a": "如果", "alt": ["ruguo", "rúguǒ", "只要", "zhiyao"], "e": "如果…就… (nếu… thì…) hoặc 只要…就…"},
-    {"t": "fill", "q": "这是一本___中国历史的书。(Zhè shì yì běn ___ Zhōngguó lìshǐ de shū. – sách VỀ lịch sử)", "a": "关于", "alt": ["guanyu", "guānyú"], "e": "关于 + chủ đề + 的 + danh từ."},
-    {"t": "fill", "q": "我___你的看法。(Wǒ ___ nǐ de kànfǎ. – Tôi đồng ý với quan điểm của bạn.)", "a": "同意", "alt": ["tongyi", "tóngyì"], "e": "同意 = đồng ý."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Tôi đã trả sách cho thư viện rồi.”", "w": ["还给", "图书馆了", "我", "把书"], "a": "我把书还给图书馆了", "e": "S + 把 + O + V + 给 + người/nơi nhận."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Chữ trên bảng tôi nhìn không rõ.”", "w": ["看不清楚", "黑板上的字", "我"], "a": "黑板上的字我看不清楚", "e": "Tân ngữ lên đầu câu + chủ ngữ + bổ ngữ khả năng."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Bạn sang Việt Nam khi nào?”", "w": ["是", "来越南的", "什么时候", "你"], "a": "你是什么时候来越南的", "e": "是 + thời gian + V + 的."},
-    {"t": "dict", "say": "我认为这个办法很好。", "lang": "zh-CN", "a": "我认为这个办法很好", "py": "wǒ rènwéi zhège bànfǎ hěn hǎo", "e": "Tôi cho rằng cách này rất hay."},
-    {"t": "match", "q": "Nối cấu trúc HSK3 với nghĩa:", "pairs": [["把", "đem… (xử lý vật)"], ["被", "bị (bị động)"], ["着", "đang (trạng thái)"], ["连…都", "ngay cả… cũng"], ["越来越", "ngày càng"], ["不但…而且", "không những… mà còn"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Bảng tổng hợp cấu trúc HSK3 in A3 (Ngữ pháp 1–2); 20 bộ thẻ câu đã cắt rời (mỗi bài 2 câu) cho trò tiếp sức; thẻ nửa cặp liên từ; giấy ô vuông 10×10 để viết văn; đồng hồ bấm giờ; phiếu tự chấm theo checklist.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động “Ai nhớ nhất?”: GV đọc số bài (1–11), học viên giơ tay nói tên cấu trúc và một câu ví dụ."},
-      {"t": "25'", "do": "Ngữ pháp 1: bảng câu đặc biệt; dạy kỹ thuật 3 bước sắp xếp câu và trật tự trạng ngữ. Luyện với 10 thẻ câu, chữa ngay trên bảng."},
-      {"t": "20'", "do": "Ngữ pháp 2: các cặp liên từ + 如果…就…, 为了. Trò “Ghép đôi liên từ” (mục games)."},
-      {"t": "15'", "do": "Từ vựng bài 12 (关于, 根据, 认为, 表示, 解决, 办法, 作用, 愿意, 了解…) – đặt câu nêu ý kiến 我认为… / 根据…."},
-      {"t": "15'", "do": "Nghe “Buổi học cuối”: lần 1 câu chính, lần 2 qs; học viên đánh dấu các cấu trúc HSK3 nghe được (把, 连…都, 不但…而且, 如果…就, 为了…)."},
-      {"t": "5'", "do": "Giao bài tập 1–8 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Trò “Tiếp sức sắp xếp câu” (mục games) để khởi động."},
-      {"t": "20'", "do": "Ngữ pháp 3: khung viết 3 phần; phân tích bài đọc “我的汉语老师” như bài mẫu: đánh dấu mở – thân – kết, từ nối, cấu trúc; trả lời câu hỏi đọc hiểu."},
-      {"t": "25'", "do": "Viết đoạn “我学汉语的故事” trên giấy ô vuông (15 phút), sau đó đổi bài chấm chéo bằng checklist 10 điều; GV chữa 2 bài tiêu biểu."},
-      {"t": "15'", "do": "Thi thử nói: mỗi học viên trình bày nhiệm vụ 1 (1 phút); lớp góp ý phát âm và ngữ pháp."},
-      {"t": "10'", "do": "Chữ Hán 故 事 关 于 根 据 愿 决 + luyện dạng đề điền chữ theo pinyin (GV đọc pinyin, học viên viết chữ)."},
-      {"t": "10'", "do": "Bài tập 9–16; hướng dẫn làm Bài thi cuối cấp HSK3 trong game (cấu trúc, thời gian, cách tự chấm phần viết – nói)."}
+ "no": 12,
+ "title": "我学汉语的故事 – Viết đoạn văn & ôn tập HSK3",
+ "sub": "Wǒ xué Hànyǔ de gùshi. 我学汉语的故事。",
+ "goals": [
+  "Hệ thống lại toàn bộ cấu trúc câu đặc biệt và cặp liên từ của HSK3 (bài 1–11)",
+  "Dùng thêm 如果…就…, 为了…, 关于, 根据, 认为 để diễn đạt ý kiến, mục đích, giả thiết",
+  "Nắm kỹ thuật làm 2 dạng đề viết HSK3: sắp xếp từ thành câu, điền chữ Hán theo pinyin",
+  "Viết đoạn văn 80–100 chữ có bố cục 3 phần (mở – thân – kết) và ≥ 5 cấu trúc HSK3",
+  "Tự giới thiệu và kể chuyện 1 phút bằng tiếng Trung, sẵn sàng cho bài thi cuối cấp"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词) – Ý kiến, mục đích, kể chuyện",
+   "items": [
+    {
+     "w": "故事",
+     "py": "gùshi",
+     "hv": "cố sự",
+     "pos": "n",
+     "vi": "câu chuyện",
+     "ex": "奶奶常常给我讲故事。",
+     "exPy": "Nǎinai chángcháng gěi wǒ jiǎng gùshi.",
+     "exVi": "Bà thường kể chuyện cho tôi nghe."
+    },
+    {
+     "w": "关于",
+     "py": "guānyú",
+     "hv": "quan ư",
+     "pos": "prep",
+     "vi": "về, liên quan đến",
+     "ex": "这是一本关于中国历史的书。",
+     "exPy": "Zhè shì yì běn guānyú Zhōngguó lìshǐ de shū.",
+     "exVi": "Đây là một cuốn sách về lịch sử Trung Quốc."
+    },
+    {
+     "w": "根据",
+     "py": "gēnjù",
+     "hv": "căn cứ",
+     "pos": "prep",
+     "vi": "căn cứ vào, dựa theo",
+     "ex": "根据天气预报，明天会下雨。",
+     "exPy": "Gēnjù tiānqì yùbào, míngtiān huì xià yǔ.",
+     "exVi": "Theo dự báo thời tiết, mai sẽ mưa."
+    },
+    {
+     "w": "表示",
+     "py": "biǎoshì",
+     "hv": "biểu thị",
+     "pos": "v",
+     "vi": "bày tỏ, biểu thị",
+     "ex": "他点点头，表示同意。",
+     "exPy": "Tā diǎndiǎn tóu, biǎoshì tóngyì.",
+     "exVi": "Anh ấy gật đầu, tỏ ý đồng ý."
+    },
+    {
+     "w": "认为",
+     "py": "rènwéi",
+     "hv": "nhận vi",
+     "pos": "v",
+     "vi": "cho rằng, nghĩ rằng (ý kiến)",
+     "ex": "我认为学汉语很有用。",
+     "exPy": "Wǒ rènwéi xué Hànyǔ hěn yǒuyòng.",
+     "exVi": "Tôi cho rằng học tiếng Trung rất có ích."
+    },
+    {
+     "w": "关系",
+     "py": "guānxi",
+     "hv": "quan hệ",
+     "pos": "n",
+     "vi": "quan hệ, mối quan hệ",
+     "ex": "我们俩关系很好。",
+     "exPy": "Wǒmen liǎ guānxi hěn hǎo.",
+     "exVi": "Hai chúng tôi quan hệ rất tốt."
+    },
+    {
+     "w": "关心",
+     "py": "guānxīn",
+     "hv": "quan tâm",
+     "pos": "v",
+     "vi": "quan tâm",
+     "ex": "谢谢你的关心！",
+     "exPy": "Xièxie nǐ de guānxīn!",
+     "exVi": "Cảm ơn sự quan tâm của bạn!"
+    },
+    {
+     "w": "愿意",
+     "py": "yuànyì",
+     "hv": "nguyện ý",
+     "pos": "v",
+     "vi": "bằng lòng, sẵn lòng, muốn",
+     "ex": "你愿意跟我一起去吗？",
+     "exPy": "Nǐ yuànyì gēn wǒ yìqǐ qù ma?",
+     "exVi": "Bạn có muốn đi cùng tôi không?"
+    },
+    {
+     "w": "为了",
+     "py": "wèile",
+     "hv": "vị liễu",
+     "pos": "prep",
+     "vi": "để, vì (mục đích)",
+     "ex": "为了学好汉语，他每天练习两个小时。",
+     "exPy": "Wèile xuéhǎo Hànyǔ, tā měi tiān liànxí liǎng ge xiǎoshí.",
+     "exVi": "Để học giỏi tiếng Trung, ngày nào anh ấy cũng luyện hai tiếng."
+    },
+    {
+     "w": "为",
+     "py": "wèi",
+     "hv": "vị",
+     "pos": "prep",
+     "vi": "vì, cho (ai)",
+     "ex": "我为你高兴！",
+     "exPy": "Wǒ wèi nǐ gāoxìng!",
+     "exVi": "Tôi mừng cho bạn!"
+    },
+    {
+     "w": "祝",
+     "py": "zhù",
+     "hv": "chúc",
+     "pos": "v",
+     "vi": "chúc",
+     "ex": "祝你生日快乐！",
+     "exPy": "Zhù nǐ shēngrì kuàilè!",
+     "exVi": "Chúc bạn sinh nhật vui vẻ!"
+    },
+    {
+     "w": "解决",
+     "py": "jiějué",
+     "hv": "giải quyết",
+     "pos": "v",
+     "vi": "giải quyết",
+     "ex": "这个问题很难解决。",
+     "exPy": "Zhège wèntí hěn nán jiějué.",
+     "exVi": "Vấn đề này rất khó giải quyết."
+    },
+    {
+     "w": "办法",
+     "py": "bànfǎ",
+     "hv": "biện pháp",
+     "pos": "n",
+     "vi": "cách, biện pháp",
+     "ex": "我有一个好办法。",
+     "exPy": "Wǒ yǒu yí ge hǎo bànfǎ.",
+     "exVi": "Tôi có một cách hay."
+    },
+    {
+     "w": "作用",
+     "py": "zuòyòng",
+     "hv": "tác dụng",
+     "pos": "n",
+     "vi": "tác dụng, vai trò",
+     "ex": "这种药没有什么作用。",
+     "exPy": "Zhè zhǒng yào méiyǒu shénme zuòyòng.",
+     "exVi": "Loại thuốc này chẳng có tác dụng gì."
+    },
+    {
+     "w": "如果",
+     "py": "rúguǒ",
+     "hv": "như quả",
+     "pos": "conj",
+     "vi": "nếu (如果…就…)",
+     "ex": "如果明天下雨，我们就不去了。",
+     "exPy": "Rúguǒ míngtiān xià yǔ, wǒmen jiù bú qù le.",
+     "exVi": "Nếu mai mưa thì chúng ta không đi nữa."
+    },
+    {
+     "w": "当然",
+     "py": "dāngrán",
+     "hv": "đương nhiên",
+     "pos": "adv",
+     "vi": "đương nhiên, tất nhiên",
+     "ex": "你会来吗？— 当然会！",
+     "exPy": "Nǐ huì lái ma? — Dāngrán huì!",
+     "exVi": "Bạn sẽ đến chứ? — Tất nhiên rồi!"
+    },
+    {
+     "w": "几乎",
+     "py": "jīhū",
+     "hv": "cơ hồ",
+     "pos": "adv",
+     "vi": "gần như, hầu như",
+     "ex": "他几乎每天都去图书馆。",
+     "exPy": "Tā jīhū měi tiān dōu qù túshūguǎn.",
+     "exVi": "Anh ấy hầu như ngày nào cũng đến thư viện."
+    },
+    {
+     "w": "多么",
+     "py": "duōme",
+     "hv": "đa ma",
+     "pos": "adv",
+     "vi": "biết bao, thật là (cảm thán)",
+     "ex": "这里的风景多么美啊！",
+     "exPy": "Zhèlǐ de fēngjǐng duōme měi a!",
+     "exVi": "Phong cảnh nơi đây đẹp biết bao!"
+    },
+    {
+     "w": "极",
+     "py": "jí",
+     "hv": "cực",
+     "pos": "adv",
+     "vi": "cực kỳ (Adj + 极了)",
+     "ex": "这个菜好吃极了！",
+     "exPy": "Zhège cài hǎochī jí le!",
+     "exVi": "Món này ngon cực kỳ!"
+    },
+    {
+     "w": "最近",
+     "py": "zuìjìn",
+     "hv": "tối cận",
+     "pos": "n",
+     "vi": "gần đây, dạo này",
+     "ex": "你最近忙吗？",
+     "exPy": "Nǐ zuìjìn máng ma?",
+     "exVi": "Dạo này bạn có bận không?"
+    },
+    {
+     "w": "同意",
+     "py": "tóngyì",
+     "hv": "đồng ý",
+     "pos": "v",
+     "vi": "đồng ý",
+     "ex": "我同意你的看法。",
+     "exPy": "Wǒ tóngyì nǐ de kànfǎ.",
+     "exVi": "Tôi đồng ý với quan điểm của bạn."
+    },
+    {
+     "w": "了解",
+     "py": "liǎojiě",
+     "hv": "liễu giải",
+     "pos": "v",
+     "vi": "hiểu rõ, tìm hiểu",
+     "ex": "我想多了解一下中国文化。",
+     "exPy": "Wǒ xiǎng duō liǎojiě yíxià Zhōngguó wénhuà.",
+     "exVi": "Tôi muốn tìm hiểu thêm về văn hoá Trung Quốc."
+    },
+    {
+     "w": "班",
+     "py": "bān",
+     "hv": "ban",
+     "pos": "n",
+     "vi": "lớp (học); ca (làm việc)",
+     "ex": "我们班有二十个学生。",
+     "exPy": "Wǒmen bān yǒu èrshí ge xuésheng.",
+     "exVi": "Lớp chúng tôi có 20 học viên."
+    },
+    {
+     "w": "容易",
+     "py": "róngyì",
+     "hv": "dung dị",
+     "pos": "adj",
+     "vi": "dễ",
+     "ex": "这个问题很容易。",
+     "exPy": "Zhège wèntí hěn róngyì.",
+     "exVi": "Câu hỏi này rất dễ."
+    }
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Bí quyết viết đoạn văn HSK3 + 10 điều kiểm tra trước khi nộp",
+   "html": "<p>Đoạn văn tốt ở trình độ HSK3 <b>không cần từ khó</b>, chỉ cần: <b>rõ bố cục</b>, <b>câu ngắn đúng ngữ pháp</b>, và <b>dùng được các cấu trúc đã học</b>. Hãy theo khung 5 bước:</p><ol><li><b>Đọc đề</b>, gạch chân yêu cầu (chủ đề, số chữ, cấu trúc bắt buộc).</li><li><b>Liệt kê 3 ý</b> bằng tiếng Trung đơn giản (không dịch từ tiếng Việt dài dòng).</li><li><b>Chọn cấu trúc</b> cho từng ý: 是…的 (mở), 先…然后 / 后来 (thân), 我相信 / 我希望 (kết).</li><li><b>Viết</b> câu 8–15 chữ, nối bằng từ nối.</li><li><b>Kiểm tra</b> theo danh sách dưới.</li></ol><h4>10 điều kiểm tra</h4><ul><li>Không có 是 trước tính từ (我很忙, không phải 我是忙).</li><li>Câu 把 / 被 có thành phần sau động từ.</li><li>没 / 不 / 别 đặt trước 把 / 被.</li><li>了 không thừa, không thiếu.</li><li>的 / 地 / 得 đúng chỗ.</li><li>Lượng từ đúng (一条裤子, 一双鞋, 一张照片).</li><li>Cặp liên từ đủ đôi (只要–就, 只有–才, 不但–而且).</li><li>Từ thời gian đứng trước động từ (我昨天去了…).</li><li>Chữ dễ nhầm: 已/己, 在/再, 做/作, 的/得.</li><li>Dấu câu tiếng Trung: 。，？！“”, mỗi dấu 1 ô.</li></ul><h4>Mẹo phát âm</h4><ul><li>为 có hai thanh: 认为 <span class=\"py\">rènwéi</span> (thanh 2) nhưng 为了 <span class=\"py\">wèile</span>, 为什么 <span class=\"py\">wèi shénme</span> (thanh 4).</li><li>了解 đọc <span class=\"py\">liǎojiě</span> (了 = liǎo), không phải le.</li></ul>"
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: Ôn tập các câu đặc biệt & kỹ thuật sắp xếp câu",
+   "html": "<p>Phần 书写 (viết) của đề HSK3 có dạng <b>sắp xếp từ thành câu</b>. Hầu hết câu trong đề rơi vào các cấu trúc dưới đây – hãy nhận ra “<b>từ báo hiệu</b>” (把, 被, 得, 着, 是…的) để biết khung câu.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Công thức",
+     "Ví dụ",
+     "Bài"
     ],
-    "games": [
-      "Ghép đôi liên từ: mỗi học viên nhận một nửa cặp (只要 / 就, 只有 / 才, 不但 / 而且, 虽然 / 但是, 如果 / 就, 一 / 就, 除了 / 还…). Đi tìm “nửa kia” và cùng đặt một câu; cặp có câu hay và đúng nhất được điểm.",
-      "Tiếp sức sắp xếp câu: chia 2 đội, mỗi lượt một người chạy lên ghép thẻ từ thành câu đúng rồi chạy về; đội ghép đúng nhiều câu nhất trong 5 phút thắng.",
-      "Kể chuyện dây chuyền: cả lớp kể chuyện “一个倒霉的周末”, mỗi người thêm một câu dùng một cấu trúc HSK3 KHÁC người trước (把, 被, 着, 一…就, 连…都…)."
+    [
+     "Câu 把",
+     "S + 把 + O + V + thành phần khác",
+     "我把作业做完了。",
+     "1"
     ],
-    "errors": [
-      "Đặt 为了 cuối câu: ❌ 我每天跑步为了健康 → ✅ 为了健康，我每天跑步 / 我每天跑步是为了健康.",
-      "Viết câu quá dài, nhiều 的 liên tiếp → chia thành câu 8–15 chữ.",
-      "Thừa / sai vị trí 了: ❌ 我昨天去了公园了玩 → ✅ 我昨天去公园玩了.",
-      "Dùng 是 trước tính từ khi viết: ❌ 我的老师是很好 → ✅ 我的老师很好.",
-      "Viết nhầm chữ gần hình / gần âm: 已/己, 在/再, 做/作, 的/得/地.",
-      "Đọc 认为 thành rènwèi (đúng: rènwéi); 了解 thành le jiě (đúng: liǎojiě)."
+    [
+     "Câu 被",
+     "O + 被 + (tác nhân) + V + thành phần khác",
+     "我的伞被风刮走了。",
+     "2"
     ],
-    "homework": "Làm bài tập trong game ≥ 80%; viết lại đoạn “我学汉语的故事” sau khi sửa và ghi âm đọc to; làm BÀI THI CUỐI CẤP HSK3 trong game (khoảng 90 phút) – đạt ≥ 70% là hoàn thành khoá; ôn toàn bộ thẻ từ HSK3 (≈ 300 từ) mỗi ngày 15 phút."
+    [
+     "Bổ ngữ xu hướng",
+     "V + 上/下/进/出/回/过/起 + 来/去",
+     "他从山上跑下来了。",
+     "3"
+    ],
+    [
+     "Bổ ngữ khả năng",
+     "V + 得/不 + kết quả/xu hướng",
+     "黑板上的字我看不清楚。",
+     "4"
+    ],
+    [
+     "着",
+     "V + 着 (trạng thái); V1着V2",
+     "门开着。她笑着说。",
+     "10"
+    ],
+    [
+     "Câu tồn hiện",
+     "Nơi chốn + V着/了 + người/vật",
+     "桌子上放着一本书。",
+     "11"
+    ],
+    [
+     "是…的",
+     "是 + thời gian/nơi/cách + V + 的",
+     "我是坐飞机来的。",
+     "11"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "请把这本书还给图书馆。",
+     "py": "Qǐng bǎ zhè běn shū huán gěi túshūguǎn.",
+     "vi": "Làm ơn trả quyển sách này cho thư viện."
+    },
+    {
+     "t": "那件事已经被他忘了。",
+     "py": "Nà jiàn shì yǐjīng bèi tā wàng le.",
+     "vi": "Chuyện đó đã bị anh ấy quên mất rồi."
+    },
+    {
+     "t": "老师的话你听得懂吗？",
+     "py": "Lǎoshī de huà nǐ tīng de dǒng ma?",
+     "vi": "Lời thầy bạn nghe hiểu không?"
+    },
+    {
+     "t": "门口站着一位老人。",
+     "py": "Ménkǒu zhànzhe yí wèi lǎorén.",
+     "vi": "Trước cửa có một cụ già đang đứng."
+    },
+    {
+     "t": "你是什么时候来越南的？",
+     "py": "Nǐ shì shénme shíhou lái Yuènán de?",
+     "vi": "Bạn sang Việt Nam khi nào?"
+    }
+   ],
+   "tips": [
+    "Kỹ thuật 3 bước sắp xếp câu: ① tìm <b>động từ chính</b>; ② tìm <b>từ báo hiệu</b> (把/被/得/着/是…的/一…就); ③ xếp theo trật tự <b>Chủ ngữ – Thời gian – Phó từ – Năng nguyện – Giới từ – Động từ – Bổ ngữ – Tân ngữ</b>.",
+    "Trật tự trạng ngữ hay gặp: <b>已经 / 也 / 都 / 没 + 要 / 想 / 能 + 把 / 被 / 在 / 跟 / 给 + động từ</b>: 我也想把房间打扫干净."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: Ôn tập cặp liên từ + 如果…就… & 为了",
+   "html": "<p>Cặp liên từ giúp đoạn văn mạch lạc. Bài này bổ sung <b>如果…就…</b> (nếu… thì…) và <b>为了…</b> (để…, chỉ mục đích – đặt đầu câu).</p>",
+   "table": [
+    [
+     "Cặp",
+     "Nghĩa",
+     "Ví dụ",
+     "Bài"
+    ],
+    [
+     "越来越 / 越…越…",
+     "ngày càng / càng… càng…",
+     "天气越来越冷。",
+     "5"
+    ],
+    [
+     "只要…就…",
+     "chỉ cần… là…",
+     "只要努力，就能成功。",
+     "6"
+    ],
+    [
+     "只有…才…",
+     "chỉ có… mới…",
+     "只有多练，才能说好。",
+     "6"
+    ],
+    [
+     "除了…以外，都 / 还…",
+     "trừ… / ngoài… ra còn…",
+     "除了他，大家都来了。",
+     "7"
+    ],
+    [
+     "连…都 / 也…",
+     "ngay cả… cũng…",
+     "他连饭都没吃。",
+     "7"
+    ],
+    [
+     "又…又…",
+     "vừa… vừa…",
+     "又便宜又好看。",
+     "8"
+    ],
+    [
+     "一…就…",
+     "vừa… là… / hễ… là…",
+     "我一到家就睡觉。",
+     "8"
+    ],
+    [
+     "先…然后…",
+     "trước… sau đó…",
+     "先吃饭，然后看电影。",
+     "9"
+    ],
+    [
+     "不但…而且…",
+     "không những… mà còn…",
+     "不但快，而且方便。",
+     "9"
+    ],
+    [
+     "如果…就…",
+     "nếu… thì…",
+     "如果下雨，我就不去。",
+     "12"
+    ],
+    [
+     "为了…，…",
+     "để… (mục đích)",
+     "为了健康，我每天跑步。",
+     "12"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "如果你有时间，我们就一起去看电影吧。",
+     "py": "Rúguǒ nǐ yǒu shíjiān, wǒmen jiù yìqǐ qù kàn diànyǐng ba.",
+     "vi": "Nếu bạn có thời gian thì chúng ta cùng đi xem phim nhé."
+    },
+    {
+     "t": "为了学好汉语，我每天都听录音。",
+     "py": "Wèile xuéhǎo Hànyǔ, wǒ měi tiān dōu tīng lùyīn.",
+     "vi": "Để học giỏi tiếng Trung, ngày nào tôi cũng nghe ghi âm."
+    },
+    {
+     "t": "根据老师的要求，我们每个人都要写一段话。",
+     "py": "Gēnjù lǎoshī de yāoqiú, wǒmen měi ge rén dōu yào xiě yí duàn huà.",
+     "vi": "Theo yêu cầu của cô giáo, mỗi người chúng tôi đều phải viết một đoạn văn."
+    },
+    {
+     "t": "这件事我已经解决了，你放心吧。",
+     "py": "Zhè jiàn shì wǒ yǐjīng jiějué le, nǐ fàngxīn ba.",
+     "vi": "Việc này tôi giải quyết xong rồi, bạn yên tâm đi."
+    }
+   ],
+   "tips": [
+    "为了 đặt ĐẦU câu: ✅ <b>为了健康，我每天跑步</b>. Muốn đặt sau thì dùng <b>是为了</b>: 我每天跑步是为了健康. ❌ <i>我每天跑步为了健康</i>.",
+    "如果…就…: 就 đứng sau chủ ngữ vế sau (như 只要…就): 如果你去，<b>我就</b>去.",
+    "Adj + 极了 = cực kỳ: 好吃极了, 高兴极了 (không thêm 很 phía trước)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: Khung viết đoạn văn 3 phần",
+   "html": "<p>Đoạn văn 80–100 chữ nên có 5–8 câu, chia 3 phần. Mỗi câu chứa <b>một điểm ngữ pháp</b> – vừa dễ viết đúng, vừa thể hiện được trình độ.</p>",
+   "table": [
+    [
+     "Phần",
+     "Nhiệm vụ",
+     "Mẫu câu gợi ý"
+    ],
+    [
+     "Mở đoạn (1–2 câu)",
+     "Giới thiệu chủ đề, thời gian",
+     "我是…的时候开始…的。/ 我想谈谈…"
+    ],
+    [
+     "Thân đoạn (3–5 câu)",
+     "Kể theo trình tự, có chi tiết, có thay đổi",
+     "刚开始… 后来… / 先…然后… / 因为…所以… / 越来越…"
+    ],
+    [
+     "Kết đoạn (1 câu)",
+     "Cảm nghĩ, quyết tâm, mong muốn",
+     "我觉得… / 我相信，只要…就… / 我希望…"
+    ],
+    [
+     "Trình bày",
+     "Lùi đầu đoạn 2 ô; mỗi chữ, mỗi dấu câu 1 ô",
+     "。，？！“”"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "刚开始的时候，我觉得汉字很难。",
+     "py": "Gāng kāishǐ de shíhou, wǒ juéde Hànzì hěn nán.",
+     "vi": "Lúc mới bắt đầu, tôi thấy chữ Hán rất khó. (mở / thân)"
+    },
+    {
+     "t": "后来，我每天写二十个汉字，慢慢地就记住了。",
+     "py": "Hòulái, wǒ měi tiān xiě èrshí ge Hànzì, mànmàn de jiù jìzhù le.",
+     "vi": "Sau đó, mỗi ngày tôi viết 20 chữ, dần dần nhớ được. (thân)"
+    },
+    {
+     "t": "我相信，只要坚持，就一定能学好。",
+     "py": "Wǒ xiāngxìn, zhǐyào jiānchí, jiù yídìng néng xuéhǎo.",
+     "vi": "Tôi tin rằng chỉ cần kiên trì là nhất định học tốt được. (kết)"
+    }
+   ],
+   "tips": [
+    "Câu ngắn 8–15 chữ dễ đúng hơn câu dài nhiều 的.",
+    "Đừng dịch từng chữ từ tiếng Việt – hãy nghĩ bằng mẫu câu đã học.",
+    "Đọc to đoạn văn sau khi viết: chỗ nào vấp thường là chỗ sai."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Buổi học cuối của khoá HSK3",
+   "lang": "zh-CN",
+   "note": "Buổi học cuối cùng của lớp HSK3. Cô 陈 hỏi học viên cảm nghĩ và khuyên cách luyện viết. Nghe lần 1: tháng sau lớp sẽ mở khoá gì?",
+   "lines": [
+    {
+     "s": "陈老师",
+     "g": "f",
+     "t": "同学们，这是我们HSK三级的最后一课了。时间过得多么快啊！",
+     "py": "Tóngxuémen, zhè shì wǒmen HSK sān jí de zuìhòu yí kè le. Shíjiān guò de duōme kuài a!",
+     "vi": "Các em, đây là buổi học cuối cùng của khoá HSK 3. Thời gian trôi nhanh biết bao!"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "是啊，老师。我还记得第一天上课的时候，我连“把”字句都不会用。",
+     "py": "Shì a, lǎoshī. Wǒ hái jìde dì-yī tiān shàng kè de shíhou, wǒ lián “bǎ” zì jù dōu bú huì yòng.",
+     "vi": "Vâng ạ. Em vẫn nhớ buổi học đầu tiên, em đến câu chữ 把 cũng không biết dùng."
+    },
+    {
+     "s": "陈老师",
+     "g": "f",
+     "t": "现在呢？",
+     "py": "Xiànzài ne?",
+     "vi": "Thế bây giờ thì sao?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "现在我不但会用，而且觉得它很有用！我已经把十二课的生词都复习完了。",
+     "py": "Xiànzài wǒ búdàn huì yòng, érqiě juéde tā hěn yǒuyòng! Wǒ yǐjīng bǎ shí'èr kè de shēngcí dōu fùxí wán le.",
+     "vi": "Bây giờ em không những biết dùng mà còn thấy nó rất có ích! Em đã ôn xong từ mới của cả 12 bài rồi."
+    },
+    {
+     "s": "陈老师",
+     "g": "f",
+     "t": "太好了！小明，你呢？你觉得哪部分最难？",
+     "py": "Tài hǎo le! Xiǎo Míng, nǐ ne? Nǐ juéde nǎ bùfen zuì nán?",
+     "vi": "Tốt quá! Tiểu Minh, còn em? Em thấy phần nào khó nhất?"
+    },
+    {
+     "s": "小明",
+     "g": "m",
+     "t": "我认为写作最难。我知道要说什么，可是写不出来。",
+     "py": "Wǒ rènwéi xiězuò zuì nán. Wǒ zhīdao yào shuō shénme, kěshì xiě bu chūlai.",
+     "vi": "Em cho rằng viết là khó nhất. Em biết mình muốn nói gì nhưng viết không ra."
+    },
+    {
+     "s": "陈老师",
+     "g": "f",
+     "t": "我有一个好办法：先用中文列出三个要点，然后用学过的句子写，最后检查一遍。",
+     "py": "Wǒ yǒu yí ge hǎo bànfǎ: xiān yòng Zhōngwén lièchū sān ge yàodiǎn, ránhòu yòng xuéguo de jùzi xiě, zuìhòu jiǎnchá yí biàn.",
+     "vi": "Cô có một cách hay: trước tiên liệt kê ba ý chính bằng tiếng Trung, sau đó dùng những câu đã học để viết, cuối cùng kiểm tra lại một lượt."
+    },
+    {
+     "s": "小明",
+     "g": "m",
+     "t": "听起来不难！如果写错了怎么办？",
+     "py": "Tīng qǐlai bù nán! Rúguǒ xiěcuò le zěnme bàn?",
+     "vi": "Nghe có vẻ không khó! Nếu viết sai thì làm sao ạ?"
+    },
+    {
+     "s": "陈老师",
+     "g": "f",
+     "t": "没关系，错了就改。只要每天写一段，一个月以后你就会写得越来越好。",
+     "py": "Méi guānxi, cuò le jiù gǎi. Zhǐyào měi tiān xiě yí duàn, yí ge yuè yǐhòu nǐ jiù huì xiě de yuè lái yuè hǎo.",
+     "vi": "Không sao, sai thì sửa. Chỉ cần mỗi ngày viết một đoạn, một tháng sau em sẽ viết ngày càng tốt."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "老师，考试以后我们还能见面吗？",
+     "py": "Lǎoshī, kǎoshì yǐhòu wǒmen hái néng jiànmiàn ma?",
+     "vi": "Cô ơi, thi xong chúng em còn được gặp cô không ạ?"
+    },
+    {
+     "s": "陈老师",
+     "g": "f",
+     "t": "当然能！下个月我们要开HSK四级的班，如果你们愿意，就来参加吧。",
+     "py": "Dāngrán néng! Xià ge yuè wǒmen yào kāi HSK sì jí de bān, rúguǒ nǐmen yuànyì, jiù lái cānjiā ba.",
+     "vi": "Tất nhiên rồi! Tháng sau mình mở lớp HSK 4, nếu các em muốn thì đến học nhé."
+    },
+    {
+     "s": "小明",
+     "g": "m",
+     "t": "我愿意！为了去中国留学，我一定要继续学下去。",
+     "py": "Wǒ yuànyì! Wèile qù Zhōngguó liúxué, wǒ yídìng yào jìxù xué xiàqu.",
+     "vi": "Em muốn ạ! Để đi du học Trung Quốc, em nhất định phải học tiếp."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "我也是！老师，谢谢您这么关心我们。",
+     "py": "Wǒ yě shì! Lǎoshī, xièxie nín zhème guānxīn wǒmen.",
+     "vi": "Em cũng vậy! Cô ơi, cảm ơn cô đã quan tâm chúng em như thế."
+    },
+    {
+     "s": "陈老师",
+     "g": "f",
+     "t": "不客气。看到你们进步，我为你们高兴极了！",
+     "py": "Bú kèqi. Kàndào nǐmen jìnbù, wǒ wèi nǐmen gāoxìng jí le!",
+     "vi": "Không có gì. Thấy các em tiến bộ, cô mừng cho các em lắm!"
+    },
+    {
+     "s": "小明",
+     "g": "m",
+     "t": "我们也祝老师身体健康，工作顺利！",
+     "py": "Wǒmen yě zhù lǎoshī shēntǐ jiànkāng, gōngzuò shùnlì!",
+     "vi": "Chúng em cũng chúc cô mạnh khoẻ, công tác thuận lợi!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Buổi học đầu tiên, 小兰 thế nào?",
+     "o": [
+      "Ngay cả câu chữ 把 cũng không biết dùng",
+      "Không biết chữ Hán nào",
+      "Đã rất giỏi ngữ pháp"
+     ],
+     "a": 0,
+     "e": "我连“把”字句都不会用。"
+    },
+    {
+     "q": "小明 thấy phần nào khó nhất?",
+     "o": [
+      "Nghe",
+      "Viết",
+      "Đọc"
+     ],
+     "a": 1,
+     "e": "我认为写作最难…可是写不出来。"
+    },
+    {
+     "q": "Cô giáo khuyên viết đoạn văn thế nào?",
+     "o": [
+      "Học thuộc bài mẫu",
+      "Viết bằng tiếng Việt rồi dịch",
+      "Liệt kê 3 ý chính, dùng câu đã học để viết, cuối cùng kiểm tra"
+     ],
+     "a": 2,
+     "e": "先…列出三个要点，然后用学过的句子写，最后检查一遍。"
+    },
+    {
+     "q": "Tháng sau sẽ mở lớp gì?",
+     "o": [
+      "HSK 3 lần nữa",
+      "HSK 4",
+      "Lớp luyện nói"
+     ],
+     "a": 1,
+     "e": "下个月我们要开HSK四级的班。"
+    },
+    {
+     "q": "Điền lời 小明: 为了去中国______，我一定要继续学下去。(gõ chữ Hán hoặc pinyin)",
+     "a": "留学",
+     "alt": [
+      "liuxue",
+      "liúxué"
+     ],
+     "e": "留学 = du học."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc (bài văn mẫu): Cô giáo dạy tiếng Trung của tôi",
+   "title": "我的汉语老师",
+   "text": "我的汉语老师姓陈，是一位四十多岁的中国人。她个子不高，头发短短的，总是笑着跟我们说话。\n\n陈老师上课非常认真。她讲语法的时候，先在黑板上写例句，然后让我们一个一个地说。如果我们听不懂，她就用越南语再讲一遍。为了让我们记住生词，她还常常跟我们一起做游戏。\n\n陈老师不但关心我们的学习，而且关心我们的生活。有一次我感冒了，几乎一个星期没来上课。老师不但给我打电话，而且把上课的笔记发给了我。\n\n我认为，陈老师是我遇到过的最好的老师。我希望以后能用流利的汉语跟她聊天。",
+   "py": "Wǒ de Hànyǔ lǎoshī xìng Chén, shì yí wèi sìshí duō suì de Zhōngguó rén. Tā gèzi bù gāo, tóufa duǎnduǎn de, zǒngshì xiàozhe gēn wǒmen shuō huà.\n\nChén lǎoshī shàng kè fēicháng rènzhēn. Tā jiǎng yǔfǎ de shíhou, xiān zài hēibǎn shang xiě lìjù, ránhòu ràng wǒmen yí ge yí ge de shuō. Rúguǒ wǒmen tīng bu dǒng, tā jiù yòng Yuènányǔ zài jiǎng yí biàn. Wèile ràng wǒmen jìzhù shēngcí, tā hái chángcháng gēn wǒmen yìqǐ zuò yóuxì.\n\nChén lǎoshī búdàn guānxīn wǒmen de xuéxí, érqiě guānxīn wǒmen de shēnghuó. Yǒu yí cì wǒ gǎnmào le, jīhū yí ge xīngqī méi lái shàng kè. Lǎoshī búdàn gěi wǒ dǎ diànhuà, érqiě bǎ shàng kè de bǐjì fā gěile wǒ.\n\nWǒ rènwéi, Chén lǎoshī shì wǒ yùdàoguo de zuì hǎo de lǎoshī. Wǒ xīwàng yǐhòu néng yòng liúlì de Hànyǔ gēn tā liáotiān.",
+   "vi": "Cô giáo dạy tiếng Trung của tôi họ Trần, là một người Trung Quốc ngoài bốn mươi tuổi. Cô không cao, tóc ngắn ngắn, lúc nào cũng tươi cười khi nói chuyện với chúng tôi.\n\nCô Trần dạy rất tận tâm. Khi giảng ngữ pháp, cô viết câu ví dụ lên bảng trước, sau đó cho từng người chúng tôi nói. Nếu chúng tôi nghe không hiểu, cô giảng lại bằng tiếng Việt. Để chúng tôi nhớ từ mới, cô còn thường chơi trò chơi cùng chúng tôi.\n\nCô Trần không những quan tâm việc học mà còn quan tâm cuộc sống của chúng tôi. Có lần tôi bị cảm, gần một tuần không đến lớp. Cô không những gọi điện cho tôi mà còn gửi cho tôi vở ghi bài học.\n\nTôi cho rằng cô Trần là cô giáo tốt nhất mà tôi từng gặp. Tôi mong sau này có thể trò chuyện với cô bằng tiếng Trung lưu loát.",
+   "gloss": [
+    {
+     "w": "短短的",
+     "py": "duǎnduǎn de",
+     "vi": "ngắn ngắn (lặp tính từ)"
+    },
+    {
+     "w": "语法",
+     "py": "yǔfǎ",
+     "vi": "ngữ pháp"
+    },
+    {
+     "w": "例句",
+     "py": "lìjù",
+     "vi": "câu ví dụ"
+    },
+    {
+     "w": "一个一个地",
+     "py": "yí ge yí ge de",
+     "vi": "lần lượt từng người"
+    },
+    {
+     "w": "笔记",
+     "py": "bǐjì",
+     "vi": "vở ghi, ghi chép"
+    },
+    {
+     "w": "流利",
+     "py": "liúlì",
+     "vi": "lưu loát"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Cô Trần trông thế nào?",
+     "o": [
+      "Cao, tóc dài",
+      "Đeo kính, ít cười",
+      "Không cao, tóc ngắn, hay cười"
+     ],
+     "a": 2,
+     "e": "她个子不高，头发短短的，总是笑着跟我们说话。"
+    },
+    {
+     "q": "Khi học viên nghe không hiểu, cô làm gì?",
+     "o": [
+      "Giảng lại bằng tiếng Việt",
+      "Cho làm thêm bài tập",
+      "Bảo về nhà tự học"
+     ],
+     "a": 0,
+     "e": "如果我们听不懂，她就用越南语再讲一遍。"
+    },
+    {
+     "q": "Để học viên nhớ từ mới, cô làm gì?",
+     "o": [
+      "Kiểm tra mỗi ngày",
+      "Cùng chơi trò chơi",
+      "Bắt chép phạt"
+     ],
+     "a": 1,
+     "e": "为了让我们记住生词，她还常常跟我们一起做游戏。"
+    },
+    {
+     "q": "Khi “tôi” bị cảm, cô đã làm gì?",
+     "o": [
+      "Gọi điện và gửi vở ghi bài",
+      "Đến nhà thăm",
+      "Cho hoãn thi"
+     ],
+     "a": 0,
+     "e": "老师不但给我打电话，而且把上课的笔记发给了我。"
+    },
+    {
+     "q": "Bài văn mẫu kết thúc bằng câu bày tỏ điều gì? (gõ 2 chữ Hán: “mong muốn”)",
+     "a": "希望",
+     "alt": [
+      "xiwang",
+      "xīwàng"
+     ],
+     "e": "Kết đoạn: 我希望以后能用流利的汉语跟她聊天。"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "故",
+     "py": "gù",
+     "hv": "cố",
+     "parts": "古 (cổ – xưa, gợi âm) + 攵 (phộc)",
+     "strokes": 9,
+     "vi": "cũ, xưa; cố ý; nguyên do",
+     "words": "故事"
+    },
+    {
+     "c": "事",
+     "py": "shì",
+     "hv": "sự",
+     "parts": "chữ độc thể (tay cầm thẻ ghi việc)",
+     "strokes": 8,
+     "vi": "việc, sự việc",
+     "words": "故事, 事情, 同事"
+    },
+    {
+     "c": "关",
+     "py": "guān",
+     "hv": "quan",
+     "parts": "chữ độc thể (then cài cửa)",
+     "strokes": 6,
+     "vi": "đóng; cửa ải; liên quan",
+     "words": "关门, 关于, 关心"
+    },
+    {
+     "c": "于",
+     "py": "yú",
+     "hv": "vu / ư",
+     "parts": "chữ độc thể",
+     "strokes": 3,
+     "vi": "ở, tại, về (giới từ)",
+     "words": "关于, 终于"
+    },
+    {
+     "c": "根",
+     "py": "gēn",
+     "hv": "căn",
+     "parts": "木 (mộc – cây) + 艮 (cấn – gợi âm)",
+     "strokes": 10,
+     "vi": "rễ cây → gốc, căn cứ",
+     "words": "根据"
+    },
+    {
+     "c": "据",
+     "py": "jù",
+     "hv": "cứ",
+     "parts": "扌 (tay) + 居 (cư – gợi âm)",
+     "strokes": 11,
+     "vi": "dựa vào, nắm lấy",
+     "words": "根据"
+    },
+    {
+     "c": "愿",
+     "py": "yuàn",
+     "hv": "nguyện",
+     "parts": "原 (nguyên – gợi âm) + 心 (tâm)",
+     "strokes": 14,
+     "vi": "mong muốn từ trong lòng",
+     "words": "愿意, 愿望"
+    },
+    {
+     "c": "决",
+     "py": "jué",
+     "hv": "quyết",
+     "parts": "冫 (băng) + 夬 (quyết – gợi âm)",
+     "strokes": 6,
+     "vi": "quyết định, dứt khoát",
+     "words": "决定, 解决"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Luyện thi nói (tự giới thiệu, nêu ý kiến, kể chuyện)",
+   "tasks": [
+    {
+     "p": "Tự giới thiệu 1 phút: tên, quê, bắt đầu học tiếng Trung khi nào, vì sao học, tiến bộ ra sao (dùng 是…的, 为了, 越来越, 越…越…).",
+     "model": "大家好！我叫阮明，是从河内来的。我是两年前开始学汉语的。为了去中国留学，我每天都学习两个小时。现在我的汉语越来越好了，我觉得汉语越学越有意思。",
+     "py": "Dàjiā hǎo! Wǒ jiào Ruǎn Míng, shì cóng Hénèi lái de. Wǒ shì liǎng nián qián kāishǐ xué Hànyǔ de. Wèile qù Zhōngguó liúxué, wǒ měi tiān dōu xuéxí liǎng ge xiǎoshí. Xiànzài wǒ de Hànyǔ yuè lái yuè hǎo le, wǒ juéde Hànyǔ yuè xué yuè yǒu yìsi.",
+     "vi": "Chào mọi người! Tôi tên Nguyễn Minh, đến từ Hà Nội. Tôi bắt đầu học tiếng Trung từ hai năm trước. Để đi du học Trung Quốc, ngày nào tôi cũng học hai tiếng. Bây giờ tiếng Trung của tôi ngày càng tốt, tôi thấy tiếng Trung càng học càng thú vị.",
+     "tips": "Nói chậm, rõ; ngắt hơi ở dấu phẩy. Thay thông tin bằng của bạn."
+    },
+    {
+     "p": "Trả lời câu hỏi: 你认为学汉语最难的是什么？你有什么好办法？ (dùng 认为, 只要…就…, 如果…就…).",
+     "model": "我认为最难的是声调。我的办法是：每天听录音，跟着读。只要坚持，就一定能进步。如果有不会的，我就问老师。",
+     "py": "Wǒ rènwéi zuì nán de shì shēngdiào. Wǒ de bànfǎ shì: měi tiān tīng lùyīn, gēnzhe dú. Zhǐyào jiānchí, jiù yídìng néng jìnbù. Rúguǒ yǒu bú huì de, wǒ jiù wèn lǎoshī.",
+     "vi": "Tôi cho rằng khó nhất là thanh điệu. Cách của tôi là: mỗi ngày nghe ghi âm, đọc theo. Chỉ cần kiên trì là nhất định tiến bộ. Nếu có chỗ không biết, tôi sẽ hỏi thầy cô.",
+     "tips": "声调 shēngdiào = thanh điệu; 进步 jìnbù = tiến bộ."
+    },
+    {
+     "p": "Kể một chuyện ngắn đã xảy ra với bạn (dùng 把 hoặc 被, 一…就…, 后来).",
+     "model": "上个月，我把钱包忘在出租车上了。我一发现就给出租车公司打电话。后来，司机把钱包送到了我家，我高兴极了。",
+     "py": "Shàng ge yuè, wǒ bǎ qiánbāo wàng zài chūzūchē shang le. Wǒ yì fāxiàn jiù gěi chūzūchē gōngsī dǎ diànhuà. Hòulái, sījī bǎ qiánbāo sòngdàole wǒ jiā, wǒ gāoxìng jí le.",
+     "vi": "Tháng trước, tôi để quên ví trên taxi. Vừa phát hiện là tôi gọi ngay cho hãng taxi. Sau đó, bác tài mang ví đến tận nhà tôi, tôi vui cực kỳ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Câu chuyện học tiếng Trung của tôi",
+   "task": "Viết đoạn 80–100 chữ với đề “我学汉语的故事”. Bố cục 3 phần (mở – thân – kết) và dùng ít nhất 5 cấu trúc HSK3 khác nhau (把/被, bổ ngữ khả năng, 越来越, 只要…就, 不但…而且, 是…的, 一…就…).",
+   "min": 80,
+   "model": "我是三年前开始学汉语的。刚开始的时候，我听不懂老师说的话，汉字也写不出来。后来，老师让我每天把生词写十遍。我一回家就练习，我的汉语越来越好了。现在我不但能看懂中文电影，而且能跟中国朋友聊天。我相信，只要坚持，就一定能学好汉语！",
+   "modelVi": "Tôi bắt đầu học tiếng Trung từ ba năm trước. Lúc mới bắt đầu, tôi nghe không hiểu lời thầy cô, chữ Hán cũng viết không ra. Sau đó, cô giáo bảo tôi mỗi ngày viết từ mới mười lần. Tôi vừa về nhà là luyện tập, tiếng Trung của tôi ngày càng tốt. Bây giờ tôi không những xem hiểu phim Trung Quốc mà còn trò chuyện được với bạn bè người Trung. Tôi tin rằng chỉ cần kiên trì là nhất định học giỏi tiếng Trung!",
+   "tips": [
+    "Bài mẫu dùng 7 cấu trúc: 是…的, 听不懂 / 写不出来, 把, 一…就, 越来越, 不但…而且, 只要…就.",
+    "Mở bằng 是…的 (khi nào bắt đầu) – thân bằng 刚开始… 后来… 现在… – kết bằng 我相信….",
+    "Từ mở rộng: 坚持 jiānchí kiên trì."
+   ],
+   "checklist": [
+    "Bố cục 3 phần rõ ràng",
+    "≥ 5 cấu trúc HSK3 khác nhau",
+    "Mỗi câu 8–15 chữ, không lặp từ nối",
+    "Đã kiểm tra 10 điều (了, 的/地/得, lượng từ, 是 + tính từ…)",
+    "Độ dài 80–100 chữ, đầu đoạn lùi 2 ô"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "我把护照忘在宾馆了。",
+   "lang": "zh-CN",
+   "q": "Người nói để quên gì, ở đâu?",
+   "o": [
+    "Hộ chiếu – ở khách sạn",
+    "Hộ chiếu – ở sân bay",
+    "Va li – ở khách sạn"
+   ],
+   "a": 0,
+   "e": "把护照忘在宾馆了 = để quên hộ chiếu ở khách sạn."
+  },
+  {
+   "t": "listen",
+   "say": "如果明天下雨，我们就不去爬山了。",
+   "lang": "zh-CN",
+   "q": "Nếu mai mưa thì sao?",
+   "o": [
+    "Vẫn đi leo núi",
+    "Không đi leo núi nữa",
+    "Đi thư viện"
+   ],
+   "a": 1,
+   "e": "如果…就不去了 = nếu… thì không đi nữa."
+  },
+  {
+   "t": "listen",
+   "say": "为了学好汉语，他几乎每天都去图书馆。",
+   "lang": "zh-CN",
+   "q": "Anh ấy đến thư viện để làm gì?",
+   "o": [
+    "Để học giỏi tiếng Trung",
+    "Để gặp bạn bè",
+    "Để đọc báo"
+   ],
+   "a": 0,
+   "e": "为了学好汉语 = để học giỏi tiếng Trung; 几乎每天 = hầu như ngày nào."
+  },
+  {
+   "t": "mc",
+   "q": "Chọn câu ĐÚNG:",
+   "o": [
+    "我把作业没做完。",
+    "我没把作业做完。",
+    "我没做完把作业。"
+   ],
+   "a": 1,
+   "e": "Bài 1: 没 đứng trước 把."
+  },
+  {
+   "t": "mc",
+   "q": "Chọn câu ĐÚNG:",
+   "o": [
+    "我的自行车被骑走。",
+    "我的自行车被骑走了。",
+    "我的自行车让骑走了。"
+   ],
+   "a": 1,
+   "e": "Bài 2: động từ sau 被 cần thành phần khác (了); 让 bắt buộc có tác nhân."
+  },
+  {
+   "t": "mc",
+   "q": "这个菜好吃___了！(Zhège cài hǎochī ___ le! – ngon cực kỳ)",
+   "o": [
+    "很",
+    "多么",
+    "极"
+   ],
+   "a": 2,
+   "e": "Adj + 极了 = cực kỳ."
+  },
+  {
+   "t": "mc",
+   "q": "___健康，我每天早上跑步。(___ jiànkāng, wǒ měi tiān zǎoshang pǎobù.)",
+   "o": [
+    "因为",
+    "为了",
+    "如果"
+   ],
+   "a": 1,
+   "e": "为了 + mục đích, đặt đầu câu."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào dùng 的 / 地 / 得 ĐÚNG?",
+   "o": [
+    "她高兴的笑了。",
+    "她笑地很高兴。",
+    "她笑得很高兴。"
+   ],
+   "a": 2,
+   "e": "Động từ 笑 + 得 + bổ ngữ (很高兴). Nếu trạng ngữ trước động từ: 高兴地笑了."
+  },
+  {
+   "t": "fill",
+   "q": "___你有时间，我们就一起去吧。(___ nǐ yǒu shíjiān, wǒmen jiù yìqǐ qù ba.)",
+   "a": "如果",
+   "alt": [
+    "ruguo",
+    "rúguǒ",
+    "只要",
+    "zhiyao",
+    "要是",
+    "yaoshi",
+    "yàoshi"
+   ],
+   "e": "如果…就… (nếu… thì…) hoặc 只要…就…"
+  },
+  {
+   "t": "fill",
+   "q": "这是一本___中国历史的书。(Zhè shì yì běn ___ Zhōngguó lìshǐ de shū. – sách VỀ lịch sử)",
+   "a": "关于",
+   "alt": [
+    "guanyu",
+    "guānyú"
+   ],
+   "e": "关于 + chủ đề + 的 + danh từ."
+  },
+  {
+   "t": "fill",
+   "q": "我___你的看法。(Wǒ ___ nǐ de kànfǎ. – Tôi đồng ý với quan điểm của bạn.)",
+   "a": "同意",
+   "alt": [
+    "tongyi",
+    "tóngyì"
+   ],
+   "e": "同意 = đồng ý."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Tôi đã trả sách cho thư viện rồi.”",
+   "w": [
+    "还给",
+    "图书馆了",
+    "我",
+    "把书"
+   ],
+   "a": "我把书还给图书馆了",
+   "e": "S + 把 + O + V + 给 + người/nơi nhận."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Chữ trên bảng tôi nhìn không rõ.”",
+   "w": [
+    "看不清楚",
+    "黑板上的字",
+    "我"
+   ],
+   "a": "黑板上的字我看不清楚",
+   "e": "Tân ngữ lên đầu câu + chủ ngữ + bổ ngữ khả năng.",
+   "alt": [
+    "我看不清楚黑板上的字"
+   ]
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Bạn sang Việt Nam khi nào?”",
+   "w": [
+    "是",
+    "来越南的",
+    "什么时候",
+    "你"
+   ],
+   "a": "你是什么时候来越南的",
+   "e": "是 + thời gian + V + 的."
+  },
+  {
+   "t": "dict",
+   "say": "我认为这个办法很好。",
+   "lang": "zh-CN",
+   "a": "我认为这个办法很好",
+   "py": "wǒ rènwéi zhège bànfǎ hěn hǎo",
+   "e": "Tôi cho rằng cách này rất hay."
+  },
+  {
+   "t": "match",
+   "q": "Nối cấu trúc HSK3 với nghĩa:",
+   "pairs": [
+    [
+     "把",
+     "đem… (xử lý vật)"
+    ],
+    [
+     "被",
+     "bị (bị động)"
+    ],
+    [
+     "着",
+     "đang (trạng thái)"
+    ],
+    [
+     "连…都",
+     "ngay cả… cũng"
+    ],
+    [
+     "越来越",
+     "ngày càng"
+    ],
+    [
+     "不但…而且",
+     "không những… mà còn"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Bảng tổng hợp cấu trúc HSK3 in A3 (Ngữ pháp 1–2); 20 bộ thẻ câu đã cắt rời (mỗi bài 2 câu) cho trò tiếp sức; thẻ nửa cặp liên từ; giấy ô vuông 10×10 để viết văn; đồng hồ bấm giờ; phiếu tự chấm theo checklist.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động “Ai nhớ nhất?”: GV đọc số bài (1–11), học viên giơ tay nói tên cấu trúc và một câu ví dụ."
+   },
+   {
+    "t": "25'",
+    "do": "Ngữ pháp 1: bảng câu đặc biệt; dạy kỹ thuật 3 bước sắp xếp câu và trật tự trạng ngữ. Luyện với 10 thẻ câu, chữa ngay trên bảng."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 2: các cặp liên từ + 如果…就…, 为了. Trò “Ghép đôi liên từ” (mục games)."
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng bài 12 (关于, 根据, 认为, 表示, 解决, 办法, 作用, 愿意, 了解…) – đặt câu nêu ý kiến 我认为… / 根据…."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe “Buổi học cuối”: lần 1 câu chính, lần 2 qs; học viên đánh dấu các cấu trúc HSK3 nghe được (把, 连…都, 不但…而且, 如果…就, 为了…)."
+   },
+   {
+    "t": "5'",
+    "do": "Giao bài tập 1–8 trong game."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Trò “Tiếp sức sắp xếp câu” (mục games) để khởi động."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 3: khung viết 3 phần; phân tích bài đọc “我的汉语老师” như bài mẫu: đánh dấu mở – thân – kết, từ nối, cấu trúc; trả lời câu hỏi đọc hiểu."
+   },
+   {
+    "t": "25'",
+    "do": "Viết đoạn “我学汉语的故事” trên giấy ô vuông (15 phút), sau đó đổi bài chấm chéo bằng checklist 10 điều; GV chữa 2 bài tiêu biểu."
+   },
+   {
+    "t": "15'",
+    "do": "Thi thử nói: mỗi học viên trình bày nhiệm vụ 1 (1 phút); lớp góp ý phát âm và ngữ pháp."
+   },
+   {
+    "t": "10'",
+    "do": "Chữ Hán 故 事 关 于 根 据 愿 决 + luyện dạng đề điền chữ theo pinyin (GV đọc pinyin, học viên viết chữ)."
+   },
+   {
+    "t": "10'",
+    "do": "Bài tập 9–16; hướng dẫn làm Bài thi cuối cấp HSK3 trong game (cấu trúc, thời gian, cách tự chấm phần viết – nói)."
+   }
+  ],
+  "games": [
+   "Ghép đôi liên từ: mỗi học viên nhận một nửa cặp (只要 / 就, 只有 / 才, 不但 / 而且, 虽然 / 但是, 如果 / 就, 一 / 就, 除了 / 还…). Đi tìm “nửa kia” và cùng đặt một câu; cặp có câu hay và đúng nhất được điểm.",
+   "Tiếp sức sắp xếp câu: chia 2 đội, mỗi lượt một người chạy lên ghép thẻ từ thành câu đúng rồi chạy về; đội ghép đúng nhiều câu nhất trong 5 phút thắng.",
+   "Kể chuyện dây chuyền: cả lớp kể chuyện “一个倒霉的周末”, mỗi người thêm một câu dùng một cấu trúc HSK3 KHÁC người trước (把, 被, 着, 一…就, 连…都…)."
+  ],
+  "errors": [
+   "Đặt 为了 cuối câu: ❌ 我每天跑步为了健康 → ✅ 为了健康，我每天跑步 / 我每天跑步是为了健康.",
+   "Viết câu quá dài, nhiều 的 liên tiếp → chia thành câu 8–15 chữ.",
+   "Thừa / sai vị trí 了: ❌ 我昨天去了公园了玩 → ✅ 我昨天去公园玩了.",
+   "Dùng 是 trước tính từ khi viết: ❌ 我的老师是很好 → ✅ 我的老师很好.",
+   "Viết nhầm chữ gần hình / gần âm: 已/己, 在/再, 做/作, 的/得/地.",
+   "Đọc 认为 thành rènwèi (đúng: rènwéi); 了解 thành le jiě (đúng: liǎojiě)."
+  ],
+  "homework": "Làm bài tập trong game ≥ 80%; viết lại đoạn “我学汉语的故事” sau khi sửa và ghi âm đọc to; làm BÀI THI CUỐI CẤP HSK3 trong game (khoảng 90 phút) – đạt ≥ 70% là hoàn thành khoá; ôn toàn bộ thẻ từ HSK3 (≈ 300 từ) mỗi ngày 15 phút."
+ }
 }

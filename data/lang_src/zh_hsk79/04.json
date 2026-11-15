@@ -1,186 +1,1277 @@
 {
-  "no": 4,
-  "title": "文言文入门 – Văn ngôn cơ bản: 之乎者也 & đọc 《论语》",
-  "sub": "学而时习之，不亦说乎？",
-  "goals": [
-    "Nắm nghĩa và chức năng của 14 hư từ văn ngôn thường gặp: 之 乎 者 也 矣 焉 哉 而 其 以 于 所 为 则",
-    "Nhận diện 5 đặc điểm cú pháp: câu phán đoán 者…也, tân ngữ đảo trước, giới từ đặt sau, tỉnh lược, từ loại hoạt dụng",
-    "Đọc – hiểu – dịch 13 câu kinh điển (Luận Ngữ là chính) sang bạch thoại và tiếng Việt; đọc được bằng cả âm Hán Việt và phổ thông",
-    "Nhận ra ≥ 20 thành ngữ, khuôn câu hiện đại có gốc văn ngôn và dùng chúng đúng chỗ trong văn viết"
-  ],
-  "parts": [
-    {"k": "text", "h": "Khởi động: Văn ngôn là gì và vì sao người Việt có lợi thế?", "html": "<p><b>文言文 (văn ngôn)</b> là văn viết cổ của chữ Hán, dùng chính thức suốt hơn hai nghìn năm, đến đầu thế kỷ XX mới nhường chỗ cho <b>白话文 (bạch thoại)</b> – tiếng Trung hiện đại. HSK 7–9 không yêu cầu đọc cổ văn dài, nhưng văn viết trang trọng, thành ngữ, khẩu hiệu, văn chính luận <b>đầy dấu vết văn ngôn</b>: 之所以, 以…为…, 由此可见, 与其…不如…, 何况, 莫过于…</p><table><tr><th></th><th>文言文</th><th>白话文</th></tr><tr><td>Đơn vị từ</td><td>Chủ yếu từ <b>một âm tiết</b>: 学, 习, 朋, 师</td><td>Chủ yếu từ hai âm tiết: 学习, 朋友, 老师</td></tr><tr><td>Hư từ</td><td>之 乎 者 也 矣 焉 哉…</td><td>的 吗 呢 了 吧…</td></tr><tr><td>Cú pháp</td><td>Hay tỉnh lược; tân ngữ có thể đảo; giới từ 于 đặt sau động từ</td><td>Trật tự cố định hơn</td></tr><tr><td>Ví dụ</td><td>学而时习之，不亦说乎？</td><td>学了并且按时温习，不也很愉快吗？</td></tr></table><p><b>Lợi thế người Việt</b>: âm Hán Việt giữ nhiều đặc điểm âm đọc cổ, và tiếng Việt có kho từ Hán Việt khổng lồ. Đọc 学而时习之 bằng Hán Việt – <i>học nhi thời tập chi</i> – bạn nhận ra ngay “học”, “thời”, “tập”. Nhưng cẩn thận: <b>nhận ra mặt chữ ≠ hiểu đúng</b> (说 ở đây là “duyệt” = vui, không phải “nói”).</p>"},
-    {"k": "words", "h": "Từ vựng A – Hư từ & đại từ văn ngôn", "items": [
-      {"w": "之", "py": "zhī", "hv": "chi", "pos": "part/pron", "vi": "(1) đại từ “nó, điều đó”; (2) trợ từ = 的; (3) động từ “đi đến”; (4) đặt giữa chủ – vị để biến câu thành cụm danh từ", "ex": "学而时习之。（《论语·学而》）", "exVi": "Học rồi thường xuyên ôn luyện điều (đã học) ấy. (之 = đại từ)"},
-      {"w": "乎", "py": "hū", "hv": "hồ", "pos": "part", "vi": "(1) trợ từ nghi vấn = 吗/呢; (2) cảm thán; (3) giới từ = 于", "ex": "有朋自远方来，不亦乐乎？", "exVi": "Có bạn từ phương xa đến, chẳng phải vui sao?"},
-      {"w": "者", "py": "zhě", "hv": "giả", "pos": "part", "vi": "(1) “người/điều mà…” (知者 người trí); (2) trợ từ nêu chủ đề trong câu phán đoán 者…也", "ex": "知者乐水，仁者乐山。（《论语·雍也》）", "exVi": "Người trí ưa nước, người nhân ưa núi."},
-      {"w": "也", "py": "yě", "hv": "dã", "pos": "part", "vi": "trợ từ cuối câu: phán đoán (“là”), khẳng định, giải thích", "ex": "知之为知之，不知为不知，是知也。", "exVi": "Biết thì nói biết, không biết thì nói không biết, thế mới là biết."},
-      {"w": "矣", "py": "yǐ", "hv": "hĩ", "pos": "part", "vi": "trợ từ cuối câu = 了 (đã, rồi; sự thay đổi)", "ex": "温故而知新，可以为师矣。", "exVi": "Ôn cũ mà biết mới, thì có thể làm thầy được rồi."},
-      {"w": "焉", "py": "yān", "hv": "yên", "pos": "part/pron", "vi": "(1) = 于此 “ở đó, trong đó”; (2) nghi vấn “sao, làm sao”", "ex": "三人行，必有我师焉。", "exVi": "Ba người cùng đi, ắt trong đó có thầy ta."},
-      {"w": "哉", "py": "zāi", "hv": "tai", "pos": "part", "vi": "trợ từ cảm thán/nghi vấn (= 啊, 呢)", "ex": "何有于我哉？（《论语·述而》）", "exVi": "Những điều ấy, ta đã làm được gì đâu?"},
-      {"w": "而", "py": "ér", "hv": "nhi", "pos": "conj", "vi": "liên từ: “và, rồi” (thuận) / “mà, nhưng” (nghịch) / nối trạng ngữ với động từ", "ex": "人不知而不愠，不亦君子乎？", "exVi": "Người không biết đến mình mà mình không giận, chẳng phải quân tử sao? (而 = nhưng)"},
-      {"w": "其", "py": "qí", "hv": "kỳ", "pos": "pron", "vi": "đại từ “của nó, của người ấy; nó, họ”", "ex": "工欲善其事，必先利其器。（《论语·卫灵公》）", "exVi": "Người thợ muốn làm tốt việc của mình, trước hết phải mài sắc dụng cụ của mình."},
-      {"w": "以", "py": "yǐ", "hv": "dĩ", "pos": "prep", "vi": "“dùng, bằng; để; vì; lấy… làm…” (以…为…)", "ex": "不积跬步，无以至千里。（《荀子·劝学》）", "exVi": "Không góp từng bước nhỏ thì không có cách gì đi tới nghìn dặm. (无以 = không có cách để)"},
-      {"w": "于", "py": "yú", "hv": "ư", "pos": "prep", "vi": "giới từ “ở, tại; cho, đối với; hơn (so sánh)”, thường đứng SAU động từ", "ex": "己所不欲，勿施于人。（《论语·颜渊》）", "exVi": "Điều mình không muốn, chớ làm cho người khác."},
-      {"w": "所", "py": "suǒ", "hv": "sở", "pos": "part", "vi": "所 + động từ = “điều mà, cái mà…” (biến động từ thành cụm danh từ)", "ex": "己所不欲。", "exVi": "Điều mà bản thân không muốn."},
-      {"w": "为", "py": "wéi / wèi", "hv": "vi / vị", "pos": "v/prep", "vi": "wéi: là, làm, trở thành; wèi: vì, cho", "ex": "知之为知之。/ 为人谋而不忠乎？", "exVi": "Biết thì cho là biết. (wéi) / Lo việc cho người có chưa hết lòng chăng? (wèi)"},
-      {"w": "则", "py": "zé", "hv": "tắc", "pos": "conj", "vi": "“thì” (nối điều kiện – kết quả)", "ex": "学而不思则罔，思而不学则殆。", "exVi": "Học mà không nghĩ thì mờ mịt, nghĩ mà không học thì nguy hiểm."},
-      {"w": "亦", "py": "yì", "hv": "diệc", "pos": "adv", "vi": "cũng; 不亦…乎 = “chẳng phải… sao?”", "ex": "不亦说乎？", "exVi": "Chẳng phải vui sao?"},
-      {"w": "勿", "py": "wù", "hv": "vật", "pos": "adv", "vi": "chớ, đừng (cấm chỉ)", "ex": "勿施于人。", "exVi": "Chớ đem áp đặt cho người."},
-      {"w": "吾", "py": "wú", "hv": "ngô", "pos": "pron", "vi": "tôi, ta", "ex": "吾日三省吾身。（《论语·学而》）", "exVi": "Mỗi ngày ta tự xét mình nhiều lần."},
-      {"w": "汝", "py": "rǔ", "hv": "nhữ", "pos": "pron", "vi": "ngươi, anh (cũng viết 女, 尔)", "ex": "诲女知之乎？（女 = 汝）", "exVi": "Ta dạy ngươi thế nào là biết nhé?"},
-      {"w": "曰", "py": "yuē", "hv": "viết", "pos": "v", "vi": "nói (子曰 = Khổng Tử nói)", "ex": "子曰：“温故而知新。”", "exVi": "Khổng Tử nói: “Ôn cũ mà biết mới.”"},
-      {"w": "何", "py": "hé", "hv": "hà", "pos": "pron", "vi": "gì, sao, nào (何以 = vì sao / lấy gì)", "ex": "何以谓之“文”也？（《论语·公冶长》）", "exVi": "Vì sao gọi ông ấy là “Văn”?"}
-    ]},
-    {"k": "words", "h": "Từ vựng B – Thực từ cổ & thành ngữ gốc 《论语》", "items": [
-      {"w": "说", "py": "yuè", "hv": "duyệt", "pos": "adj", "vi": "(văn ngôn) vui vẻ = 悦 – KHÔNG đọc shuō", "ex": "学而时习之，不亦说乎？", "exVi": "Học rồi thường ôn, chẳng phải vui sao?"},
-      {"w": "愠", "py": "yùn", "hv": "uấn", "pos": "v", "vi": "giận, bực trong lòng", "ex": "人不知而不愠。", "exVi": "Người không biết đến mình mà mình không giận."},
-      {"w": "罔", "py": "wǎng", "hv": "võng", "pos": "adj", "vi": "mờ mịt, mê muội", "ex": "学而不思则罔。", "exVi": "Học mà không nghĩ thì mờ mịt."},
-      {"w": "殆", "py": "dài", "hv": "đãi", "pos": "adj", "vi": "nguy hiểm; (cũng nghĩa) mệt mỏi, nghi hoặc", "ex": "思而不学则殆。", "exVi": "Nghĩ mà không học thì nguy."},
-      {"w": "省", "py": "xǐng", "hv": "tỉnh", "pos": "v", "vi": "tự xét, tự kiểm điểm (đọc xǐng, không phải shěng “tỉnh/tiết kiệm”)", "ex": "见不贤而内自省也。（《论语·里仁》）", "exVi": "Thấy người không hiền thì tự xét lại mình."},
-      {"w": "患", "py": "huàn", "hv": "hoạn", "pos": "v", "vi": "lo, lo lắng", "ex": "不患人之不己知，患不知人也。（《论语·学而》）", "exVi": "Không lo người không biết mình, chỉ lo mình không biết người."},
-      {"w": "君子", "py": "jūnzǐ", "hv": "quân tử", "pos": "n", "vi": "người quân tử (người có đạo đức, học vấn) ↔ 小人", "ex": "君子成人之美。（《论语·颜渊》）", "exVi": "Người quân tử giúp người khác thành điều tốt."},
-      {"w": "仁", "py": "rén", "hv": "nhân", "pos": "n", "vi": "nhân, lòng nhân ái – khái niệm trung tâm của Nho gia", "ex": "樊迟问仁。子曰：“爱人。”（《论语·颜渊》）", "exVi": "Phàn Trì hỏi về nhân. Khổng Tử nói: “Yêu người.” (爱人 ở đây = yêu thương người khác, không phải “vợ/chồng”!)"},
-      {"w": "温故知新", "py": "wēngù-zhīxīn", "hv": "ôn cố tri tân", "pos": "idiom", "vi": "ôn cũ biết mới", "ex": "复习时要温故知新，从旧知识中发现新问题。", "exVi": "Khi ôn tập phải ôn cũ biết mới, từ kiến thức cũ phát hiện vấn đề mới."},
-      {"w": "学而不厌", "py": "xué ér bú yàn", "hv": "học nhi bất yếm", "pos": "idiom", "vi": "học không biết chán", "ex": "老教授学而不厌，八十岁还在学外语。", "exVi": "Vị giáo sư già học không biết chán, tám mươi tuổi vẫn học ngoại ngữ."},
-      {"w": "诲人不倦", "py": "huì rén bú juàn", "hv": "hối nhân bất quyện", "pos": "idiom", "vi": "dạy người không biết mỏi", "ex": "她从教三十年，始终诲人不倦。", "exVi": "Cô dạy học ba mươi năm, trước sau vẫn dạy người không biết mỏi."},
-      {"w": "不耻下问", "py": "bù chǐ xià wèn", "hv": "bất sỉ hạ vấn", "pos": "idiom", "vi": "không thấy xấu hổ khi hỏi người kém mình", "ex": "真正有学问的人往往不耻下问。", "exVi": "Người thật sự có học vấn thường không ngại hỏi người kém mình."},
-      {"w": "欲速则不达", "py": "yù sù zé bù dá", "hv": "dục tốc tắc bất đạt", "pos": "phr", "vi": "muốn nhanh thì không tới (dục tốc bất đạt)", "ex": "学语言欲速则不达，必须循序渐进。", "exVi": "Học ngôn ngữ dục tốc bất đạt, phải tuần tự tiến dần."},
-      {"w": "后生可畏", "py": "hòushēng-kěwèi", "hv": "hậu sinh khả úy", "pos": "idiom", "vi": "lớp trẻ đáng nể (có thể vượt người đi trước)", "ex": "这位年轻译者的水平让人感叹后生可畏。", "exVi": "Trình độ của dịch giả trẻ này khiến người ta phải thốt lên: hậu sinh khả uý."},
-      {"w": "见贤思齐", "py": "jiànxián-sīqí", "hv": "kiến hiền tư tề", "pos": "idiom", "vi": "thấy người giỏi thì nghĩ cách theo kịp", "ex": "见贤思齐，是自我提升的好方法。", "exVi": "Thấy người giỏi thì muốn theo kịp – đó là cách tốt để tự nâng mình."},
-      {"w": "己所不欲，勿施于人", "py": "jǐ suǒ bú yù, wù shī yú rén", "hv": "kỷ sở bất dục, vật thi ư nhân", "pos": "phr", "vi": "điều mình không muốn chớ làm cho người", "ex": "己所不欲，勿施于人，这是人际交往的基本原则。", "exVi": "Điều mình không muốn chớ làm cho người – đó là nguyên tắc cơ bản trong giao tiếp."},
-      {"w": "三人行，必有我师", "py": "sān rén xíng, bì yǒu wǒ shī", "hv": "tam nhân hành, tất hữu ngã sư", "pos": "phr", "vi": "ba người cùng đi ắt có thầy ta", "ex": "三人行，必有我师，同学之间也要互相学习。", "exVi": "Ba người cùng đi ắt có thầy ta, bạn học cũng phải học hỏi lẫn nhau."},
-      {"w": "工欲善其事，必先利其器", "py": "gōng yù shàn qí shì, bì xiān lì qí qì", "hv": "công dục thiện kỳ sự, tất tiên lợi kỳ khí", "pos": "phr", "vi": "muốn làm tốt việc phải mài sắc công cụ trước", "ex": "工欲善其事，必先利其器，学翻译先要有好词典。", "exVi": "Muốn làm tốt việc phải có công cụ tốt – học dịch trước hết cần từ điển tốt."},
-      {"w": "千里之行，始于足下", "py": "qiān lǐ zhī xíng, shǐ yú zú xià", "hv": "thiên lý chi hành, thủy ư túc hạ", "pos": "phr", "vi": "đi nghìn dặm bắt đầu từ một bước chân (《老子》)", "ex": "千里之行，始于足下，今天就背十个生词吧。", "exVi": "Đi nghìn dặm bắt đầu từ một bước – hôm nay hãy thuộc mười từ mới."},
-      {"w": "天时不如地利，地利不如人和", "py": "tiānshí bùrú dìlì, dìlì bùrú rénhé", "hv": "thiên thời bất như địa lợi, địa lợi bất như nhân hòa", "pos": "phr", "vi": "thiên thời không bằng địa lợi, địa lợi không bằng nhân hoà (《孟子》)", "ex": "天时不如地利，地利不如人和，团队合作才是成功的关键。", "exVi": "Thiên thời không bằng địa lợi, địa lợi không bằng nhân hoà; hợp tác đồng đội mới là chìa khoá thành công."}
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 1: Bốn chữ 之 乎 者 也 – “linh hồn” của văn ngôn", "html": "<p>Người Trung hay dùng cụm <b>之乎者也</b> để chỉ văn ngôn (đôi khi chế giễu kiểu nói “sách vở”). Bốn chữ này là <b>hư từ</b>: tự thân không mang nghĩa thực, nhưng quyết định quan hệ và ngữ khí của câu.</p>", "table": [["Hư từ", "Chức năng", "Ví dụ cổ văn", "Bạch thoại tương đương"], ["之 ①", "Đại từ “nó, điều đó”", "学而时习之", "学了并按时温习它"], ["之 ②", "Trợ từ kết cấu = 的", "千里之行", "千里的路程"], ["之 ③", "Đặt giữa chủ – vị, biến câu thành cụm danh từ", "松柏之后彫", "松柏最后凋零（这件事）"], ["之 ④", "Động từ “đi, đến”", "吾欲之南海（彭端淑《为学》）", "我想去南海"], ["乎 ①", "Nghi vấn / phản vấn", "不亦说乎？", "不也很愉快吗？"], ["乎 ②", "Giới từ = 于", "浴乎沂（《论语·先进》）", "在沂水里洗澡"], ["者 ①", "“người/điều mà…”", "知者乐水；择其善者", "聪明的人；好的方面"], ["者…也", "Câu phán đoán “A là B”", "陈胜者，阳城人也。（《史记》）", "陈胜是阳城人。"], ["也", "Kết câu phán đoán, khẳng định", "是知也", "这才是智慧"]], "ex": [
-      {"t": "岁寒，然后知松柏之后彫也。（《论语·子罕》）", "vi": "Đến mùa lạnh giá mới biết tùng bách là cây rụng lá sau cùng. (之 ③ + 也 khẳng định)"},
-      {"t": "知之为知之，不知为不知，是知也。（《论语·为政》）", "vi": "Biết thì cho là biết, không biết thì cho là không biết, thế mới là biết. (之 ① = điều đó; 为 = coi là; 也 = khẳng định; chữ 知 cuối = 智)"}
-    ], "tips": [
-      "Người Việt thấy 之 hay dịch máy móc là “chi” hoặc “của”. Hãy hỏi trước: nó đứng ở đâu? Sau động từ → đại từ; giữa hai danh từ → 的; giữa chủ ngữ và vị ngữ → bỏ qua khi dịch.",
-      "Câu phán đoán văn ngôn KHÔNG cần 是: 陈胜者，阳城人也. Chữ 是 trong văn ngôn thường là đại từ “này” (是知也 = cái này là biết)."
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 2: 而 · 其 · 以 · 于 · 所 · 为 · 则", "html": "<p>Cùng với 之乎者也, bảy hư từ dưới đây chiếm phần lớn câu văn ngôn bạn sẽ gặp. Nhiều chữ vẫn sống trong tiếng Trung hiện đại văn viết.</p>", "table": [["Hư từ", "Nghĩa chính", "Ví dụ", "Còn sống trong tiếng Trung hiện đại"], ["而", "và; mà, nhưng; rồi", "人不知而不愠", "而且, 然而, 进而, 因而"], ["其", "của nó/họ; nó, họ", "择其善者而从之", "其中, 其实, 尤其, 极其"], ["以", "dùng; để; lấy… làm", "无以至千里", "以…为…, 以便, 可以, 所以"], ["于", "ở; cho; hơn", "勿施于人；青于蓝", "位于, 由于, 对于, 建于, 大于"], ["所", "所 + động từ = điều mà…", "己所不欲", "所谓, 所有, 所以, 众所周知"], ["为", "wéi là/làm; wèi vì/cho", "可以为师矣；为人谋", "认为, 成为, 以…为…, 为了"], ["则", "thì", "学而不思则罔", "否则, 规则, 则 (văn viết “thì”)"]], "ex": [
-      {"t": "青，取之于蓝，而青于蓝。（《荀子·劝学》）", "vi": "Màu xanh lấy từ cây chàm mà xanh hơn chàm. (于 ① “từ”; 于 ② “hơn”; 而 = mà) → thành ngữ 青出于蓝 “con hơn cha, trò hơn thầy”."},
-      {"t": "工欲善其事，必先利其器。", "vi": "Thợ muốn làm tốt việc của mình, trước phải mài sắc đồ nghề của mình. (其 = của mình; 善, 利 là tính từ dùng như động từ)"},
-      {"t": "本文以河内的老街区为例。（tiếng Trung hiện đại）", "vi": "Bài viết lấy khu phố cổ Hà Nội làm ví dụ. (以…为… – di sản văn ngôn trong văn viết hiện đại)"}
-    ], "tips": [
-      "Bẫy chữ ghép: trong văn ngôn hai chữ đứng cạnh nhau thường là HAI TỪ. 人不学，不知道 = “không biết đạo lý” (知 + 道), KHÔNG phải 知道 hiện đại; 可以为师 = 可 (có thể) + 以 (lấy đó) + 为 (làm) + 师.",
-      "为 đa âm: wéi (là, làm, trở thành) / wèi (vì, cho). Gặp 为 trước danh từ chỉ người hưởng lợi (为人谋) → wèi."
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 3: Năm đặc điểm cú pháp văn ngôn", "html": "<p>Đọc văn ngôn chậm nhất ở chỗ trật tự từ “lạ”. Thuộc 5 hiện tượng sau, bạn sẽ gỡ được hầu hết các câu khó.</p>", "table": [["Hiện tượng", "Ví dụ", "Phân tích", "Bạch thoại"], ["1. Câu phán đoán", "陈胜者，阳城人也。", "者…也 thay cho 是", "陈胜是阳城人。"], ["2. Tân ngữ đảo trước (câu phủ định có đại từ)", "不患人之不己知", "己 (tân ngữ) đứng trước 知", "不担心别人不了解自己"], ["2’. Tân ngữ đảo trước (câu hỏi)", "吾谁欺？（《论语·子罕》）", "谁 (tân ngữ) trước 欺", "我欺骗谁呢？"], ["3. Giới từ đặt sau động từ", "勿施于人；青于蓝", "于 + danh từ sau động từ/tính từ", "不要强加给别人；比蓝更青"], ["4. Tỉnh lược", "（子）曰：“学而时习之”", "lược chủ ngữ, tân ngữ khi đã rõ", "（孔子）说：……"], ["5. Từ loại hoạt dụng", "吾不能以春风风人（刘向《说苑》）", "风 thứ hai: danh từ → động từ “thổi gió mát cho”", "我不能用春风吹拂别人"]], "ex": [
-      {"t": "吾日三省吾身。（《论语·学而》）", "vi": "Mỗi ngày ta nhiều lần tự xét bản thân. (日 danh từ làm trạng ngữ “mỗi ngày”; 三 = nhiều lần, không nhất thiết đúng ba)"},
-      {"t": "见贤思齐焉，见不贤而内自省也。（《论语·里仁》）", "vi": "Thấy người hiền thì nghĩ cách cho bằng, thấy người không hiền thì tự xét lại mình."}
-    ], "tips": [
-      "Số từ trong văn ngôn hay mang nghĩa “nhiều”: 三省, 三思 (suy nghĩ kỹ), 九死一生 – đừng dịch cứng “ba lần”, “chín lần”.",
-      "Người Việt quen thành ngữ Hán Việt “xuân phong phong nhân, hạ vũ vũ nhân” (lấy gió xuân thổi người, mưa hạ tưới người) – đây chính là ví dụ danh từ dùng như động từ."
-    ]},
-    {"k": "text", "h": "Đọc kinh điển: 13 câu phải thuộc (nguyên văn – Hán Việt – bạch thoại – tiếng Việt)", "html": "<p>Mỗi câu: đọc 3 lần bằng âm Hán Việt, 3 lần bằng phổ thông, che bản dịch tự giải nghĩa rồi mới đối chiếu. Bản bạch thoại và tiếng Việt dưới đây do Trung tâm tự dịch.</p><table><tr><th>Nguyên văn (xuất xứ)</th><th>Âm Hán Việt</th><th>Bạch thoại</th><th>Tiếng Việt</th></tr><tr><td>学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知而不愠，不亦君子乎？<br><small>《论语·学而》</small></td><td>Học nhi thời tập chi, bất diệc duyệt hồ? Hữu bằng tự viễn phương lai, bất diệc lạc hồ? Nhân bất tri nhi bất uấn, bất diệc quân tử hồ?</td><td>学了知识并且按时温习，不也很愉快吗？有志同道合的朋友从远方来，不也很快乐吗？别人不了解我，我却不恼怒，不也是君子吗？</td><td>Học rồi thường xuyên ôn luyện, chẳng phải vui sao? Có bạn từ phương xa đến, chẳng phải mừng sao? Người không biết đến mình mà mình không giận, chẳng phải là người quân tử sao?</td></tr><tr><td>温故而知新，可以为师矣。<br><small>《论语·为政》</small></td><td>Ôn cố nhi tri tân, khả dĩ vi sư hĩ.</td><td>温习学过的知识，能从中得到新的体会，就可以当老师了。</td><td>Ôn điều cũ mà hiểu ra điều mới thì có thể làm thầy được rồi.</td></tr><tr><td>学而不思则罔，思而不学则殆。<br><small>《论语·为政》</small></td><td>Học nhi bất tư tắc võng, tư nhi bất học tắc đãi.</td><td>只学习不思考，就会迷惑；只思考不学习，就会陷入危险。</td><td>Học mà không nghĩ thì mờ mịt; nghĩ mà không học thì nguy hiểm.</td></tr><tr><td>知之为知之，不知为不知，是知也。<br><small>《论语·为政》</small></td><td>Tri chi vi tri chi, bất tri vi bất tri, thị trí dã.</td><td>知道就是知道，不知道就是不知道，这才是真正的智慧。</td><td>Biết thì nói là biết, không biết thì nói là không biết, thế mới là người hiểu biết.</td></tr><tr><td>三人行，必有我师焉。择其善者而从之，其不善者而改之。<br><small>《论语·述而》</small></td><td>Tam nhân hành, tất hữu ngã sư yên. Trạch kỳ thiện giả nhi tòng chi, kỳ bất thiện giả nhi cải chi.</td><td>几个人同行，其中一定有可以做我老师的人。选择他们的优点去学习，看到他们的缺点就反省并改正自己。</td><td>Ba người cùng đi, ắt có người là thầy ta. Chọn điều hay của họ mà theo, thấy điều dở của họ thì tự sửa mình.</td></tr><tr><td>己所不欲，勿施于人。<br><small>《论语·颜渊》</small></td><td>Kỷ sở bất dục, vật thi ư nhân.</td><td>自己不愿意的事，不要强加给别人。</td><td>Điều mình không muốn, chớ làm cho người khác.</td></tr><tr><td>知者乐水，仁者乐山。<br><small>《论语·雍也》</small></td><td>Trí giả nhạo thủy, nhân giả nhạo sơn.</td><td>聪明的人喜爱水，仁德的人喜爱山。</td><td>Người trí ưa nước, người nhân ưa núi.</td></tr><tr><td>岁寒，然后知松柏之后彫也。<br><small>《论语·子罕》</small></td><td>Tuế hàn, nhiên hậu tri tùng bách chi hậu điêu dã.</td><td>到了一年中最寒冷的时候，才知道松柏是最后凋零的。</td><td>Đến lúc giá rét nhất trong năm mới biết tùng bách là cây tàn sau cùng (gian nan mới biết người kiên trinh).</td></tr><tr><td>欲速则不达，见小利则大事不成。<br><small>《论语·子路》</small></td><td>Dục tốc tắc bất đạt, kiến tiểu lợi tắc đại sự bất thành.</td><td>一味求快，反而达不到目的；贪图小利，就办不成大事。</td><td>Muốn nhanh thì không tới, ham lợi nhỏ thì việc lớn không thành.</td></tr><tr><td>天时不如地利，地利不如人和。<br><small>《孟子·公孙丑下》</small></td><td>Thiên thời bất như địa lợi, địa lợi bất như nhân hòa.</td><td>有利的时机不如有利的地势，有利的地势不如人心团结。</td><td>Thời cơ thuận lợi không bằng địa thế thuận lợi, địa thế thuận lợi không bằng lòng người đoàn kết.</td></tr><tr><td>不积跬步，无以至千里；不积小流，无以成江海。<br><small>《荀子·劝学》</small></td><td>Bất tích khuể bộ, vô dĩ chí thiên lý; bất tích tiểu lưu, vô dĩ thành giang hải.</td><td>不积累一步一步的路程，就无法走到千里之外；不汇集细小的水流，就无法形成江河大海。</td><td>Không góp từng bước nhỏ thì chẳng thể tới nghìn dặm; không gom từng dòng nhỏ thì chẳng thể thành sông biển.</td></tr><tr><td>玉不琢，不成器；人不学，不知道。<br><small>《礼记·学记》</small></td><td>Ngọc bất trác, bất thành khí; nhân bất học, bất tri đạo.</td><td>玉石不经过雕琢，就成不了有用的器物；人不学习，就不会懂得道理。</td><td>Ngọc không mài giũa thì không thành đồ quý; người không học thì không biết đạo lý.</td></tr><tr><td>千里之行，始于足下。<br><small>《老子·第六十四章》</small></td><td>Thiên lý chi hành, thủy ư túc hạ.</td><td>千里的远行，是从脚下的第一步开始的。</td><td>Hành trình nghìn dặm bắt đầu từ bước chân đầu tiên.</td></tr></table><p><small>Lưu ý đọc: 说 (duyệt) = yuè; 乐 trong 知者乐水 = yào (ưa thích, HV “nhạo”); 知 cuối câu “是知也” và trong “知者” = 智 (trí); 省 = xǐng.</small></p>"},
-    {"k": "dialog", "h": "Nghe: Bài giảng “文言文并不遥远”", "lang": "zh-CN", "note": "Giáo sư Chu (周教授, nam) giảng nhập môn văn ngôn cho lớp tiếng Trung cao cấp; học viên Trần Thị Lan (陈氏兰, nữ, người Việt) đặt câu hỏi. Nghe lần 1: giáo sư đưa ra mấy lời khuyên để học văn ngôn?", "lines": [
-      {"s": "周教授", "g": "m", "t": "各位同学，提到文言文，很多人的第一反应是：太难了，离我们的生活太远了。今天我想告诉大家，文言文其实并不遥远，它就藏在我们每天说的话里。", "vi": "Các em, nhắc đến văn ngôn, phản ứng đầu tiên của nhiều người là: khó quá, xa cuộc sống quá. Hôm nay tôi muốn nói với các em rằng văn ngôn thực ra không hề xa xôi, nó nằm ngay trong lời ta nói mỗi ngày."},
-      {"s": "周教授", "g": "m", "t": "比如，我们常说温故知新、欲速则不达、三人行必有我师，这些都出自两千五百多年前的《论语》。还有千里之行，始于足下，出自《老子》。我们每天都在使用文言，只是自己没有意识到而已。", "vi": "Ví dụ ta hay nói “ôn cố tri tân”, “dục tốc bất đạt”, “ba người cùng đi ắt có thầy ta” – đều xuất phát từ Luận Ngữ hơn 2.500 năm trước. Còn “đi nghìn dặm bắt đầu từ một bước chân” thì từ sách Lão Tử. Ngày nào ta cũng dùng văn ngôn, chỉ là không nhận ra mà thôi."},
-      {"s": "周教授", "g": "m", "t": "文言文和现代汉语最大的区别是什么呢？第一，文言文以单音节词为主。现代汉语说朋友，文言文常常只说一个朋字；现代汉语说学习，文言文只说学或者习。", "vi": "Khác biệt lớn nhất giữa văn ngôn và tiếng Trung hiện đại là gì? Thứ nhất, văn ngôn chủ yếu là từ đơn âm tiết. Hiện đại nói 朋友, văn ngôn thường chỉ nói một chữ 朋; hiện đại nói 学习, văn ngôn chỉ nói 学 hoặc 习."},
-      {"s": "周教授", "g": "m", "t": "第二，文言文大量使用虚词。人们常用之乎者也来形容文言文，这四个字恰恰都是虚词。虚词本身没有实在的意义，却决定了句子的语气和结构。", "vi": "Thứ hai, văn ngôn dùng rất nhiều hư từ. Người ta hay dùng “chi hồ giả dã” để chỉ văn ngôn, mà bốn chữ đó lại đều là hư từ. Hư từ tự nó không có nghĩa thực, nhưng quyết định ngữ khí và cấu trúc câu."},
-      {"s": "陈氏兰", "g": "f", "t": "老师，我是越南人。我发现用汉越音来读文言文，好像比用普通话读更容易理解，这是为什么呢？", "vi": "Thưa thầy, em là người Việt. Em thấy đọc văn ngôn bằng âm Hán Việt hình như dễ hiểu hơn đọc bằng tiếng phổ thông, vì sao vậy ạ?"},
-      {"s": "周教授", "g": "m", "t": "这个问题很有意思。汉越音保留了许多古代汉语的读音特点，越南语里又有大量汉越词。比如学而时习之，你用汉越音读出来，很多字你都认识，对不对？", "vi": "Câu hỏi rất thú vị. Âm Hán Việt giữ nhiều đặc điểm âm đọc của tiếng Hán cổ, mà tiếng Việt lại có rất nhiều từ Hán Việt. Ví dụ “học nhi thời tập chi”, em đọc bằng âm Hán Việt thì nhiều chữ em đều nhận ra, đúng không?"},
-      {"s": "陈氏兰", "g": "f", "t": "对！学、时、习这几个字，我都能猜出意思。", "vi": "Đúng ạ! Mấy chữ học, thời, tập em đều đoán được nghĩa."},
-      {"s": "周教授", "g": "m", "t": "这就是越南学习者的优势。不过要小心，认识字面不等于真正理解。比如不亦说乎的说，在这里读作悦的音，是高兴的意思，和说话没有关系。", "vi": "Đó chính là lợi thế của người học Việt Nam. Nhưng phải cẩn thận: nhận ra mặt chữ không có nghĩa là hiểu thật. Ví dụ chữ 说 trong “bất diệc duyệt hồ” ở đây đọc như chữ 悦, nghĩa là vui, chẳng liên quan gì đến việc nói."},
-      {"s": "周教授", "g": "m", "t": "再比如知者乐水，这里的知通智，指聪明的人；乐读作要的音，是喜爱的意思。如果按现代汉语去理解，就会闹笑话。", "vi": "Hoặc “trí giả nhạo thủy”: chữ 知 ở đây thông với 智, chỉ người thông minh; chữ 乐 đọc như âm 要, nghĩa là ưa thích. Nếu hiểu theo tiếng Trung hiện đại thì sẽ thành chuyện cười."},
-      {"s": "周教授", "g": "m", "t": "第三，文言文的语序有时和现代汉语不同。比如不患人之不己知，意思是不担心别人不了解自己，宾语己跑到了动词知的前面，这叫宾语前置。", "vi": "Thứ ba, trật tự từ văn ngôn đôi khi khác tiếng hiện đại. Ví dụ “bất hoạn nhân chi bất kỷ tri”, nghĩa là không lo người khác không hiểu mình – tân ngữ 己 chạy lên trước động từ 知, gọi là tân ngữ đảo trước."},
-      {"s": "周教授", "g": "m", "t": "那么，怎样学好文言文呢？我给大家三个建议。第一，熟读成诵。古人说，书读百遍，其义自见。短小的经典段落最好能背下来。", "vi": "Vậy làm sao học tốt văn ngôn? Tôi có ba lời khuyên. Thứ nhất, đọc kỹ đến thuộc lòng. Người xưa nói “sách đọc trăm lần, nghĩa tự hiện ra”. Những đoạn kinh điển ngắn tốt nhất nên học thuộc."},
-      {"s": "周教授", "g": "m", "t": "第二，抓住常用虚词。之、乎、者、也、而、其、以、于，这八个字弄明白了，一大半的句子就能读懂。", "vi": "Thứ hai, nắm chắc các hư từ thường gặp. Hiểu rõ tám chữ chi, hồ, giả, dã, nhi, kỳ, dĩ, ư thì đọc hiểu được quá nửa số câu."},
-      {"s": "周教授", "g": "m", "t": "第三，多和成语对照。很多成语就是一句浓缩的文言文，理解了成语的出处，也就掌握了文言的用法。", "vi": "Thứ ba, đối chiếu nhiều với thành ngữ. Nhiều thành ngữ chính là một câu văn ngôn cô đọng; hiểu xuất xứ thành ngữ là nắm được cách dùng văn ngôn."},
-      {"s": "陈氏兰", "g": "f", "t": "老师，那我们学文言文，对现代汉语写作有帮助吗？", "vi": "Thưa thầy, vậy học văn ngôn có giúp ích cho việc viết tiếng Trung hiện đại không ạ?"},
-      {"s": "周教授", "g": "m", "t": "当然有。现代书面语里保留了大量文言成分，比如之所以、以什么为什么、由此可见。适当使用这些表达，文章会显得简洁、典雅。当然也不能滥用，否则就成了半文不白的掉书袋。", "vi": "Tất nhiên là có. Văn viết hiện đại giữ lại rất nhiều thành phần văn ngôn, như 之所以, 以…为…, 由此可见. Dùng vừa phải những cách diễn đạt này, bài viết sẽ gọn và trang nhã. Nhưng cũng không được lạm dụng, nếu không sẽ thành văn “nửa cổ nửa kim”, khoe chữ sách vở."},
-      {"s": "周教授", "g": "m", "t": "下节课，我们一起精读《论语》中的十个名句。请大家先用汉越音和普通话各读三遍，看看自己能理解多少。", "vi": "Buổi sau, chúng ta cùng đọc kỹ mười câu nổi tiếng trong Luận Ngữ. Mời các em đọc trước mỗi câu ba lần bằng âm Hán Việt và ba lần bằng tiếng phổ thông, xem mình hiểu được bao nhiêu."}
-    ], "qs": [
-      {"q": "Theo giáo sư, bốn chữ 之乎者也 thuộc loại từ nào?", "o": ["Thực từ", "Hư từ", "Danh từ riêng", "Lượng từ"], "a": 1, "e": "这四个字恰恰都是虚词。"},
-      {"q": "Chữ 说 trong 不亦说乎 có nghĩa là gì?", "o": ["Nói chuyện", "Thuyết phục", "Vui mừng (đọc như 悦)", "Giải thích"], "a": 2, "e": "在这里读作悦的音，是高兴的意思。"},
-      {"q": "Câu 不患人之不己知 minh hoạ hiện tượng nào?", "o": ["Tỉnh lược chủ ngữ", "Giới từ đặt sau động từ", "Tân ngữ đảo lên trước động từ", "Danh từ dùng như động từ"], "a": 2, "e": "宾语己跑到了动词知的前面，这叫宾语前置。"},
-      {"q": "Lời khuyên nào giáo sư KHÔNG đưa ra?", "o": ["Đọc kỹ đến thuộc lòng", "Nắm chắc hư từ thường gặp", "Đối chiếu với thành ngữ", "Dịch từng chữ sang bạch thoại"], "a": 3, "e": "Ba lời khuyên: 熟读成诵, 抓住常用虚词, 多和成语对照."},
-      {"q": "Trong 知者乐水, chữ 知 thông với chữ nào? (gõ chữ Hán)", "a": "智", "alt": ["zhi", "zhì"], "e": "这里的知通智，指聪明的人。"}
-    ]},
-    {"k": "read", "h": "Đọc: Ghi chép Luận Ngữ của một sinh viên Việt Nam", "title": "一位越南学生的《论语》笔记", "text": "第一次读《论语》，是在大学二年级的古代汉语课上。老师让我们用汉越音朗读“学而时习之，不亦说乎”，教室里顿时响起一片熟悉的声音。原来，这些句子在越南早已流传了好几百年，我的曾祖父小时候在私塾里也背过。那一刻，我忽然觉得这本两千多年前的书离我并不遥远。\n\n读得多了，我发现《论语》并不是一本高高在上的“圣人之书”，而更像一本师生之间的谈话录。孔子会生气，会开玩笑，也会坦然承认自己的不足。他说“知之为知之，不知为不知，是知也”，意思是不懂并不丢人，不懂装懂才是真正的无知。作为一名外语学习者，我对这句话感触尤深：课堂上不敢提问、怕丢面子，正是我们进步的最大障碍。\n\n《论语》中关于学习的论述，至今读来仍不过时。“学而不思则罔，思而不学则殆”，讲的是学习与思考的关系：只读书不思考，就会迷惑；只空想不读书，就会陷入危险。这让我想起刚学汉语时死记硬背生词的日子，背了上千个词，一开口却还是说不出完整的句子。后来，我学会了在阅读中思考：这个词为什么用在这里？换一个词行不行？进步反而快了很多。\n\n孔子本人就是“学而不厌”的榜样。他称赞卫国大夫孔文子“敏而好学，不耻下问”，意思是聪明又爱学习，不把向地位、学问不如自己的人请教看作耻辱。我刚到中国时，不好意思向比我年纪小的同学请教，总觉得没面子。读到这句话，我才明白：在学问面前，年龄和身份都不重要，真正可耻的是停止学习。\n\n另一句让我受益匪浅的话是“三人行，必有我师焉。择其善者而从之，其不善者而改之”。在中国留学期间，我的室友来自不同的国家：有人发音标准，有人写字漂亮，也有人总是拖到最后一刻才写论文。从他们身上，我既学到了长处，也看到了自己的影子。孔子提醒我们，老师不只在讲台上，也在身边每一个人身上；别人的缺点，同样是我们反省自己的镜子。\n\n当然，读《论语》也需要辩证的眼光。书中有些观点带着鲜明的时代烙印，不能简单照搬到今天。但“己所不欲，勿施于人”这样的道理，无论在哪个国家、哪个时代，都是人与人相处的基本准则。我想，这正是经典之所以成为经典的原因：它的语言也许古老，它关心的问题却永远年轻。\n\n如今，我在河内的一所中学教汉语。每学期的第一节课，我都会在黑板上写下“温故而知新，可以为师矣”，然后告诉学生：今天我是你们的老师，但明天，你们中的每一个人都可能成为我的老师。", "vi": "Lần đầu đọc Luận Ngữ là trong giờ Hán ngữ cổ đại năm thứ hai đại học. Thầy bảo chúng tôi đọc to bằng âm Hán Việt “học nhi thời tập chi, bất diệc duyệt hồ”, cả lớp lập tức vang lên những âm thanh quen thuộc. Hoá ra những câu này đã lưu truyền ở Việt Nam mấy trăm năm, cụ cố của tôi hồi nhỏ học trường làng cũng từng học thuộc. Khoảnh khắc ấy, tôi chợt thấy cuốn sách hơn hai nghìn năm tuổi này không hề xa cách mình.\n\nĐọc nhiều rồi, tôi nhận ra Luận Ngữ không phải một cuốn “sách thánh hiền” cao vời vợi, mà giống một tập ghi chép những cuộc trò chuyện giữa thầy và trò. Khổng Tử biết giận, biết đùa, và cũng thẳng thắn thừa nhận chỗ chưa đủ của mình. Ông nói “biết thì nói là biết, không biết thì nói là không biết, thế mới là biết”, nghĩa là không hiểu chẳng có gì xấu hổ, không hiểu mà làm như hiểu mới thật là dốt. Là người học ngoại ngữ, tôi đặc biệt thấm câu này: trên lớp không dám hỏi vì sợ mất mặt chính là trở ngại lớn nhất cho sự tiến bộ của chúng ta.\n\nNhững điều Luận Ngữ bàn về việc học đến nay đọc vẫn không lỗi thời. “Học mà không nghĩ thì mờ mịt, nghĩ mà không học thì nguy” nói về quan hệ giữa học và nghĩ: chỉ đọc sách không suy nghĩ thì sẽ mơ hồ; chỉ nghĩ suông không đọc sách thì sẽ sa vào nguy hiểm. Câu này khiến tôi nhớ những ngày mới học tiếng Trung, học vẹt từ mới, thuộc cả nghìn từ mà mở miệng vẫn không nói nổi một câu hoàn chỉnh. Về sau, tôi học cách vừa đọc vừa suy nghĩ: vì sao từ này dùng ở đây? Thay từ khác có được không? Tiến bộ lại nhanh hơn nhiều.\n\nBản thân Khổng Tử là tấm gương “học không biết chán”. Ông khen Khổng Văn Tử, một vị đại phu nước Vệ, là người “sáng dạ mà ham học, không thẹn hỏi người dưới”, tức là thông minh lại thích học, không coi việc thỉnh giáo người có địa vị, học vấn kém mình là điều nhục. Hồi mới sang Trung Quốc, tôi ngại hỏi những bạn học nhỏ tuổi hơn, luôn thấy mất mặt. Đọc câu này tôi mới hiểu: trước học vấn, tuổi tác và địa vị đều không quan trọng; điều thật sự đáng xấu hổ là ngừng học.\n\nMột câu khác khiến tôi được lợi rất nhiều là “Ba người cùng đi, ắt có người là thầy ta. Chọn điều hay của họ mà theo, thấy điều dở của họ thì tự sửa mình.” Thời du học ở Trung Quốc, bạn cùng phòng của tôi đến từ nhiều nước: có người phát âm chuẩn, có người viết chữ đẹp, cũng có người lúc nào cũng để nước đến chân mới viết luận văn. Từ họ, tôi vừa học được điểm mạnh, vừa thấy bóng dáng chính mình. Khổng Tử nhắc chúng ta rằng người thầy không chỉ ở trên bục giảng mà ở nơi mỗi người quanh ta; khuyết điểm của người khác cũng là tấm gương để ta tự xét mình.\n\nĐương nhiên, đọc Luận Ngữ cũng cần cái nhìn biện chứng. Có những quan điểm trong sách mang dấu ấn rõ rệt của thời đại, không thể đem áp dụng nguyên xi cho hôm nay. Nhưng đạo lý như “điều mình không muốn chớ làm cho người” thì ở bất cứ nước nào, thời đại nào cũng là chuẩn mực cơ bản trong quan hệ giữa người với người. Tôi nghĩ, đó chính là lý do kinh điển trở thành kinh điển: ngôn ngữ của nó có thể cổ xưa, nhưng những vấn đề nó quan tâm thì mãi mãi trẻ trung.\n\nGiờ đây, tôi dạy tiếng Trung ở một trường trung học tại Hà Nội. Buổi học đầu tiên mỗi học kỳ, tôi đều viết lên bảng câu “Ôn cũ mà biết mới thì có thể làm thầy”, rồi nói với học trò: hôm nay cô là thầy của các em, nhưng ngày mai, mỗi em đều có thể trở thành thầy của cô.", "gloss": [
-      {"w": "私塾", "py": "sīshú", "vi": "trường tư thục thời xưa, trường làng (thầy đồ)"},
-      {"w": "高高在上", "py": "gāogāo zài shàng", "vi": "cao vời vợi, xa cách"},
-      {"w": "谈话录", "py": "tánhuàlù", "vi": "ghi chép các cuộc trò chuyện (Luận Ngữ = sách ghi lời Khổng Tử và học trò)"},
-      {"w": "坦然", "py": "tǎnrán", "vi": "thản nhiên, thẳng thắn không ngại"},
-      {"w": "感触尤深", "py": "gǎnchù yóu shēn", "vi": "đặc biệt thấm thía"},
-      {"w": "死记硬背", "py": "sǐjì-yìngbèi", "vi": "học vẹt, học thuộc máy móc"},
-      {"w": "受益匪浅", "py": "shòuyì-fěiqiǎn", "vi": "được lợi không ít (匪 = 非, dấu vết văn ngôn)"},
-      {"w": "烙印", "py": "làoyìn", "vi": "dấu ấn (in sâu)"},
-      {"w": "照搬", "py": "zhàobān", "vi": "rập khuôn, bê nguyên xi"},
-      {"w": "准则", "py": "zhǔnzé", "vi": "chuẩn mực, nguyên tắc"}
-    ], "qs": [
-      {"q": "Vì sao lần đầu đọc Luận Ngữ, tác giả thấy cuốn sách “không xa cách”?", "o": ["Vì sách được dịch sẵn sang tiếng Việt", "Vì đọc bằng âm Hán Việt thấy quen, và những câu này đã lưu truyền ở Việt Nam hàng trăm năm", "Vì thầy giáo kể chuyện cười", "Vì sách rất ngắn"], "a": 1, "e": "用汉越音朗读…响起一片熟悉的声音。原来，这些句子在越南早已流传了好几百年。"},
-      {"q": "Theo tác giả, trở ngại lớn nhất cho sự tiến bộ của người học ngoại ngữ là gì?", "o": ["Thiếu sách hay", "Học quá nhiều từ mới", "Không dám hỏi vì sợ mất mặt", "Không có bạn nước ngoài"], "a": 2, "e": "课堂上不敢提问、怕丢面子，正是我们进步的最大障碍。"},
-      {"q": "Câu 学而不思则罔 gợi tác giả nhớ lại điều gì?", "o": ["Thời học vẹt từ mới mà không nói được câu hoàn chỉnh", "Thời đi du học", "Thời dạy học ở Hà Nội", "Thời học trường làng"], "a": 0, "e": "这让我想起刚学汉语时死记硬背生词的日子…说不出完整的句子。"},
-      {"q": "Tác giả đánh giá Luận Ngữ thế nào ở đoạn 5?", "o": ["Mọi quan điểm đều áp dụng nguyên xi cho hôm nay", "Đã lỗi thời hoàn toàn", "Chỉ có giá trị ở Trung Quốc", "Cần nhìn biện chứng: có quan điểm mang dấu ấn thời đại, nhưng có đạo lý mang tính phổ quát"], "a": 3, "e": "读《论语》也需要辩证的眼光…但“己所不欲，勿施于人”这样的道理…都是基本准则。"},
-      {"q": "Mỗi học kỳ, tác giả viết câu nào lên bảng? (gõ 5 chữ Hán đầu)", "a": "温故而知新", "alt": ["wenguerzhixin", "温故知新"], "e": "我都会在黑板上写下“温故而知新，可以为师矣”。"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán trọng tâm (bấm để tập viết)", "items": [
-      {"c": "曰", "py": "yuē", "hv": "viết", "parts": "hình miệng (口) có một nét ngang – hơi thở thoát ra khi nói", "strokes": 4, "vi": "nói; phân biệt với 日 (nhật): 曰 dẹt và rộng hơn", "words": "子曰"},
-      {"c": "罔", "py": "wǎng", "hv": "võng", "parts": "冂 (khung lưới) + 亡 (vong – mất)", "strokes": 8, "vi": "lưới; mờ mịt như bị lưới trùm", "words": "学而不思则罔, 置若罔闻"},
-      {"c": "殆", "py": "dài", "hv": "đãi", "parts": "歹 (ngạt – xương tàn, chết chóc) + 台 (gợi âm)", "strokes": 9, "vi": "nguy hiểm; gần như (殆尽 gần hết)", "words": "思而不学则殆, 危殆, 百战不殆"},
-      {"c": "愠", "py": "yùn", "hv": "uấn", "parts": "忄(tâm – lòng) + 昷 (gợi âm)", "strokes": 12, "vi": "giận âm ỉ trong lòng", "words": "人不知而不愠, 愠怒"},
-      {"c": "诲", "py": "huì", "hv": "hối", "parts": "讠(lời nói) + 每 (mỗi – gợi âm)", "strokes": 9, "vi": "dạy bảo bằng lời", "words": "诲人不倦, 教诲"},
-      {"c": "焉", "py": "yān", "hv": "yên", "parts": "vốn là hình một loài chim; phần dưới có 4 chấm 灬", "strokes": 11, "vi": "ở đó; sao, làm sao (hư từ)", "words": "必有我师焉, 心不在焉"}
-    ]},
-    {"k": "speak", "h": "Nói: Đọc diễn cảm & giảng giải kinh điển", "tasks": [
-      {"p": "Đọc diễn cảm đoạn 学而时习之… (ngắt nhịp đúng), sau đó giảng lại bằng tiếng Trung hiện đại cho bạn học trong khoảng 1 phút.", "model": "这段话出自《论语》的第一篇《学而》。孔子说了三件让人快乐的事：第一，学了知识以后经常温习、实践，自然会感到愉快；第二，有志同道合的朋友从远方来交流，当然很快乐；第三，别人不了解自己，自己也不生气，这才是君子的修养。我觉得这三句话从个人学习，到朋友交往，再到为人处世，层层递进，告诉我们快乐其实很简单，关键在于内心是否平和。", "vi": "Đoạn này xuất phát từ thiên đầu tiên “Học nhi” của Luận Ngữ. Khổng Tử nói về ba điều khiến con người vui: thứ nhất, học rồi thường ôn luyện, thực hành, tự nhiên thấy vui; thứ hai, có bạn cùng chí hướng từ phương xa đến giao lưu, tất nhiên rất vui; thứ ba, người khác không hiểu mình mà mình cũng không giận, đó mới là tu dưỡng của người quân tử. Tôi thấy ba câu này đi từ việc học của cá nhân, đến giao du bạn bè, rồi đến cách đối nhân xử thế, tăng tiến từng bước, cho ta biết niềm vui thực ra rất giản dị, mấu chốt là lòng có bình thản hay không.", "tips": "Ngắt nhịp: 学而｜时习之，不亦｜说乎？ – lên giọng nhẹ ở 乎. Nhớ đọc 说 là yuè. Khi giảng, dùng khung 第一…第二…第三… và một câu tổng kết."},
-      {"p": "Dùng một câu Luận Ngữ để bình luận một tình huống hiện đại (1 phút): một đồng nghiệp trẻ ngại hỏi vì sợ bị chê là kém.", "model": "我想起《论语》里的一句话：知之为知之，不知为不知，是知也。在工作中，遇到不懂的问题就大胆地问，这并不丢人；相反，不懂装懂，最后出了错，损失会更大。孔子还称赞过一个人敏而好学，不耻下问，连向地位比自己低的人请教都不觉得难为情。所以，我想对这位年轻同事说：提问不是能力差的表现，而是认真负责的表现。今天多问一句，明天就少犯一个错。", "vi": "Tôi nhớ một câu trong Luận Ngữ: biết thì nói biết, không biết thì nói không biết, thế mới là biết. Trong công việc, gặp vấn đề không hiểu cứ mạnh dạn hỏi, chẳng có gì mất mặt; trái lại, không hiểu mà làm như hiểu, cuối cùng sai sót thì thiệt hại còn lớn hơn. Khổng Tử còn khen một người “sáng dạ, ham học, không ngại hỏi người dưới mình”, thậm chí hỏi người địa vị thấp hơn cũng không thấy ngượng. Vì vậy, tôi muốn nói với đồng nghiệp trẻ ấy: đặt câu hỏi không phải biểu hiện của năng lực kém, mà là biểu hiện của sự nghiêm túc, có trách nhiệm. Hôm nay hỏi thêm một câu, ngày mai bớt đi một lỗi.", "tips": "Khung trích dẫn: 我想起《论语》里的一句话：…… / 正如孔子所说……. Trích xong phải giải thích và gắn với tình huống – đừng chỉ đọc câu cổ."}
-    ]},
-    {"k": "write", "h": "Viết 1 – Dịch văn ngôn sang bạch thoại và tiếng Việt", "task": "Dịch 4 câu sau sang tiếng Trung hiện đại (bạch thoại); bản tiếng Việt xem ở phần mẫu:\n① 学而不思则罔，思而不学则殆。\n② 三人行，必有我师焉。择其善者而从之，其不善者而改之。\n③ 己所不欲，勿施于人。\n④ 不积跬步，无以至千里；不积小流，无以成江海。", "min": 100, "model": "① 只学习而不思考，就会迷惑不解；只思考而不学习，就会陷入危险。\n② 几个人一起走路，其中一定有可以做我老师的人。我选择他们的优点来学习，看到他们的缺点，就对照自己加以改正。\n③ 自己不愿意承受的事情，不要强加给别人。\n④ 不积累一步一步的路程，就无法到达千里之外；不汇聚细小的水流，就无法形成江河大海。", "modelVi": "BẢN TIẾNG VIỆT:\n① Học mà không nghĩ thì mờ mịt; nghĩ mà không học thì nguy hiểm.\n② Ba người cùng đi, ắt có người là thầy ta. Chọn điều hay của họ mà theo, thấy điều dở của họ thì tự sửa mình.\n③ Điều mình không muốn, chớ làm cho người khác.\n④ Không góp từng bước nhỏ thì chẳng thể tới nghìn dặm; không gom từng dòng nhỏ thì chẳng thể thành sông biển.\n\nGHI CHÚ: 则 → 就; 焉 → 其中 (ở trong đó); 其 → 他们的; 而 → (nối, có thể bỏ); 所 + 不欲 → 不愿意的事; 勿 → 不要; 无以 → 没有办法 / 无法; 至 → 到达.", "tips": ["Từ đơn âm tiết văn ngôn → từ hai âm tiết bạch thoại: 学 → 学习, 思 → 思考, 至 → 到达.", "Bổ sung thành phần bị tỉnh lược (chủ ngữ “我”) để câu bạch thoại trọn vẹn.", "三人 không nhất thiết là “ba người” – bạch thoại nên dịch “几个人”."], "checklist": ["Mỗi hư từ đã được chuyển đúng chức năng", "Câu bạch thoại đủ chủ ngữ", "Không còn chữ văn ngôn sót lại (则, 焉, 勿…)", "Giữ được nhịp đối của câu ④"]},
-    {"k": "write", "h": "Viết 2 – Cảm nhận về một câu Luận Ngữ (250–300 chữ)", "task": "Chọn một câu Luận Ngữ trong bài, viết đoạn cảm nhận 250–300 chữ: trích dẫn – giải thích – liên hệ trải nghiệm bản thân – kết luận. Dùng ít nhất 2 cách nói gốc văn ngôn (之所以, 由此可见, 以…为…, 不耻下问…).", "min": 250, "model": "《论语》中有一句话：“学而不思则罔，思而不学则殆。”意思是只学习不思考就会迷惑，只思考不学习就会陷入危险。这句话我读了很多遍，直到自己当了翻译才真正读懂。刚入行时，我以背词典为荣，记住了几千个词，翻译出来的句子却总是生硬拗口。后来一位前辈告诉我，翻译之所以难，不在于词汇量，而在于对语言的思考。于是，我开始在每次翻译之后反问自己：这个词在原文里究竟是什么意思？越南读者会怎么理解？慢慢地，我的译文变得自然了。可是，我也见过另一种人：他们谈起翻译理论头头是道，却很少动手翻译，一遇到实际问题就束手无策。由此可见，学习与思考如同鸟之两翼，缺一不可。两千多年前的这句话，至今仍是每一个学习者的座右铭。", "modelVi": "Luận Ngữ có câu: “Học mà không nghĩ thì mờ mịt, nghĩ mà không học thì nguy.” Nghĩa là chỉ học không nghĩ sẽ mơ hồ, chỉ nghĩ không học sẽ sa vào nguy hiểm. Tôi đọc câu này nhiều lần, đến khi làm phiên dịch mới thật sự hiểu. Mới vào nghề, tôi lấy việc học thuộc từ điển làm vinh, nhớ mấy nghìn từ mà câu dịch ra vẫn cứng nhắc, trúc trắc. Sau này một bậc đàn anh bảo tôi: dịch sở dĩ khó không nằm ở vốn từ, mà ở sự suy ngẫm về ngôn ngữ. Thế là sau mỗi lần dịch, tôi tự hỏi lại: từ này trong nguyên văn rốt cuộc nghĩa là gì? Độc giả Việt sẽ hiểu thế nào? Dần dần, bản dịch của tôi trở nên tự nhiên. Thế nhưng tôi cũng gặp kiểu người khác: nói lý thuyết dịch thì đâu ra đấy nhưng hiếm khi bắt tay vào dịch, gặp vấn đề thực tế là bó tay. Từ đó có thể thấy, học và nghĩ như hai cánh của chim, thiếu một không được. Câu nói hơn hai nghìn năm trước, đến nay vẫn là phương châm của mỗi người học.", "tips": ["Cấu trúc 4 bước: 引用 (trích) → 释义 (giải nghĩa) → 联系实际 (liên hệ) → 总结 (kết).", "Nên có cả hai mặt (học không nghĩ / nghĩ không học) để đoạn văn cân đối."], "checklist": ["Trích dẫn chính xác, có ngoặc kép", "Giải nghĩa bằng bạch thoại", "Có trải nghiệm cá nhân cụ thể", "Dùng ≥ 2 cách nói gốc văn ngôn", "Đủ 250 chữ"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "学而不思则罔，思而不学则殆。", "lang": "zh-CN", "q": "Câu kinh điển vừa nghe bàn về quan hệ giữa hai điều gì?", "o": ["Học và chơi", "Học và suy nghĩ", "Thầy và trò", "Đọc và viết"], "a": 1, "e": "学 (học) và 思 (nghĩ): học mà không nghĩ thì mờ mịt, nghĩ mà không học thì nguy."},
-    {"t": "listen", "say": "己所不欲，勿施于人。", "lang": "zh-CN", "q": "Câu vừa nghe có nghĩa là gì?", "o": ["Việc mình muốn thì phải làm ngay", "Đừng giúp đỡ người lạ", "Điều mình không muốn, chớ làm cho người khác", "Muốn được tôn trọng thì phải giàu có"], "a": 2, "e": "己所不欲 = điều mình không muốn; 勿 = chớ; 施于人 = đem áp lên người khác."},
-    {"t": "listen", "say": "温故而知新，可以为师矣。", "lang": "zh-CN", "q": "Chữ 矣 ở cuối câu tương đương với chữ nào trong tiếng Trung hiện đại?", "o": ["了", "吗", "的", "呢"], "a": 0, "e": "矣 = 了 (đã, rồi; biểu thị sự thay đổi): 可以为师矣 = 可以当老师了."},
-    {"t": "dict", "say": "三人行，必有我师焉。", "lang": "zh-CN", "a": "三人行，必有我师焉。", "py": "Sān rén xíng, bì yǒu wǒ shī yān.", "e": "焉 yān = 于此 (ở trong đó). Đừng viết nhầm thành 嫣 hay 烟."},
-    {"t": "mc", "q": "Trong 学而时习之, chữ 之 là gì?", "o": ["Động từ “đi đến”", "Trợ từ kết cấu = 的", "Đại từ chỉ điều đã học", "Trợ từ nghi vấn"], "a": 2, "e": "之 đứng sau động từ 习 làm tân ngữ → đại từ “nó, điều (đã học) đó”."},
-    {"t": "mc", "q": "Trong 千里之行，始于足下, chữ 之 là gì?", "o": ["Trợ từ kết cấu = 的", "Đại từ “nó”", "Động từ “đi”", "Trợ từ cảm thán"], "a": 0, "e": "之 đứng giữa hai thành phần danh từ (千里 + 行) → = 的: 千里的路程."},
-    {"t": "mc", "q": "「陈胜者，阳城人也。」 là kiểu câu gì?", "o": ["Câu hỏi", "Câu phán đoán “A là B”", "Câu bị động", "Câu cảm thán"], "a": 1, "e": "者…也 là khuôn câu phán đoán: 陈胜是阳城人 (Trần Thắng là người Dương Thành)."},
-    {"t": "mc", "q": "Trong 知者乐水, chữ 乐 đọc thế nào và nghĩa là gì?", "o": ["lè – vui vẻ", "yuè – âm nhạc", "yào – ưa thích", "luò – rơi xuống"], "a": 2, "e": "乐 đọc yào (HV “nhạo”) = ưa thích: người trí ưa nước."},
-    {"t": "mc", "q": "不耻下问 nghĩa là gì?", "o": ["Không thèm hỏi ai", "Hỏi xuống dưới không ngại tốn thời gian", "Không hỏi những câu đáng xấu hổ", "Không thấy xấu hổ khi hỏi người kém hơn mình"], "a": 3, "e": "耻 = lấy làm xấu hổ; 下问 = hỏi người dưới mình (địa vị, học vấn thấp hơn)."},
-    {"t": "fill", "q": "学而时习之，不亦说______？（Chẳng phải vui sao?）", "a": "乎", "alt": ["hu", "hū"], "e": "不亦…乎 = chẳng phải… sao? (乎 = 吗)."},
-    {"t": "fill", "q": "知之为知之，不知为不知，是知______。", "a": "也", "alt": ["ye", "yě"], "e": "也 kết câu phán đoán: 是知也 = 这才是智慧."},
-    {"t": "order", "q": "Sắp xếp thành câu kinh điển: “Điều mình không muốn chớ làm cho người.”", "w": ["勿施", "己所", "于人", "不欲"], "a": "己所不欲勿施于人", "e": "己所不欲 (điều mình không muốn) + 勿施于人 (chớ làm cho người) – 于人 đứng SAU động từ (giới từ hậu trí)."},
-    {"t": "order", "q": "Sắp xếp: “Ôn cũ mà biết mới thì có thể làm thầy.”", "w": ["可以为师矣", "温故", "而知新"], "a": "温故而知新可以为师矣", "e": "温故 + 而 + 知新, rồi kết quả 可以为师矣."},
-    {"t": "match", "q": "Nối thành ngữ gốc Luận Ngữ với nghĩa:", "pairs": [["温故知新", "Ôn cũ mà biết mới"], ["欲速则不达", "Vội thì hỏng việc"], ["后生可畏", "Lớp trẻ đáng nể"], ["见贤思齐", "Thấy người giỏi thì muốn theo kịp"], ["诲人不倦", "Dạy người không biết mỏi"]], "e": "Tất cả đều xuất phát từ Luận Ngữ và vẫn được dùng nhiều trong tiếng Trung hiện đại."},
-    {"t": "match", "q": "Nối từ văn ngôn với từ bạch thoại tương đương:", "pairs": [["矣", "了"], ["乎（cuối câu hỏi）", "吗"], ["吾", "我"], ["汝", "你"], ["曰", "说"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "In bảng 13 câu kinh điển (che cột dịch); thẻ hư từ 之 乎 者 也 矣 焉 而 其 以 于 所 为 则; bảng “tiến hoá” văn ngôn → bạch thoại (学 → 学习, 朋 → 朋友…); nếu được, một bản chụp sách chữ Hán cổ (Luận Ngữ) để học viên cảm nhận.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: GV viết 学而时习之，不亦说乎 lên bảng, mời học viên đọc bằng Hán Việt rồi đoán nghĩa. Hỏi: chữ 说 có phải “nói” không? → dẫn vào lợi thế và bẫy của người Việt."},
-      {"t": "15'", "do": "Văn ngôn vs bạch thoại: bảng so sánh; trò “tiến hoá từ” – GV đọc từ đơn âm văn ngôn (朋, 习, 师, 至), học viên nói từ bạch thoại hai âm tiết."},
-      {"t": "25'", "do": "Ngữ pháp 1: 之 乎 者 也 – mỗi hư từ 2 ví dụ, học viên xác định chức năng (thẻ màu). Câu phán đoán 者…也."},
-      {"t": "20'", "do": "Nghe bài giảng 周教授: lần 1 đếm số lời khuyên (3); lần 2 làm câu hỏi; lần 3 ghi lại các thành ngữ được nhắc."},
-      {"t": "15'", "do": "Đọc kinh điển: 6 câu đầu – đọc Hán Việt, đọc phổ thông, tự dịch, đối chiếu. Giao học thuộc 6 câu + bài tập 1–8."},
-      {"t": "5'", "do": "Tổng kết."},
-      {"t": "Buổi 2 · 10'", "do": "Kiểm tra thuộc lòng: học viên bốc thăm, đọc thuộc 1 câu và giải nghĩa."},
-      {"t": "20'", "do": "Ngữ pháp 2–3: 而 其 以 于 所 为 则 + 5 đặc điểm cú pháp; nhấn bẫy “hai chữ là hai từ” (不知道 trong 学记). Học viên tìm dấu vết văn ngôn trong 10 câu tiếng Trung hiện đại."},
-      {"t": "20'", "do": "Đọc bài 一位越南学生的《论语》笔记: tìm các câu trích dẫn, mỗi nhóm giải thích một câu và nói cách tác giả liên hệ thực tế."},
-      {"t": "15'", "do": "Nói: đọc diễn cảm + giảng 学而 (cặp đôi); bình luận tình huống bằng một câu Luận Ngữ."},
-      {"t": "20'", "do": "Viết 1 tại lớp (dịch 4 câu sang bạch thoại), chữa chung. Giao Viết 2 về nhà; làm bài tập 9–15."},
-      {"t": "5'", "do": "Tổng kết: mỗi học viên chọn “câu Luận Ngữ của mình” làm phương châm."}
+ "no": 4,
+ "title": "文言文入门 – Văn ngôn cơ bản: 之乎者也 & đọc 《论语》",
+ "sub": "学而时习之，不亦说乎？",
+ "goals": [
+  "Nắm nghĩa và chức năng của 14 hư từ văn ngôn thường gặp: 之 乎 者 也 矣 焉 哉 而 其 以 于 所 为 则",
+  "Nhận diện 5 đặc điểm cú pháp: câu phán đoán 者…也, tân ngữ đảo trước, giới từ đặt sau, tỉnh lược, từ loại hoạt dụng",
+  "Đọc – hiểu – dịch 13 câu kinh điển (Luận Ngữ là chính) sang bạch thoại và tiếng Việt; đọc được bằng cả âm Hán Việt và phổ thông",
+  "Nhận ra ≥ 20 thành ngữ, khuôn câu hiện đại có gốc văn ngôn và dùng chúng đúng chỗ trong văn viết"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Khởi động: Văn ngôn là gì và vì sao người Việt có lợi thế?",
+   "html": "<p><b>文言文 (văn ngôn)</b> là văn viết cổ của chữ Hán, dùng chính thức suốt hơn hai nghìn năm, đến đầu thế kỷ XX mới nhường chỗ cho <b>白话文 (bạch thoại)</b> – tiếng Trung hiện đại. HSK 7–9 không yêu cầu đọc cổ văn dài, nhưng văn viết trang trọng, thành ngữ, khẩu hiệu, văn chính luận <b>đầy dấu vết văn ngôn</b>: 之所以, 以…为…, 由此可见, 与其…不如…, 何况, 莫过于…</p><table><tr><th></th><th>文言文</th><th>白话文</th></tr><tr><td>Đơn vị từ</td><td>Chủ yếu từ <b>một âm tiết</b>: 学, 习, 朋, 师</td><td>Chủ yếu từ hai âm tiết: 学习, 朋友, 老师</td></tr><tr><td>Hư từ</td><td>之 乎 者 也 矣 焉 哉…</td><td>的 吗 呢 了 吧…</td></tr><tr><td>Cú pháp</td><td>Hay tỉnh lược; tân ngữ có thể đảo; giới từ 于 đặt sau động từ</td><td>Trật tự cố định hơn</td></tr><tr><td>Ví dụ</td><td>学而时习之，不亦说乎？</td><td>学了并且按时温习，不也很愉快吗？</td></tr></table><p><b>Lợi thế người Việt</b>: âm Hán Việt giữ nhiều đặc điểm âm đọc cổ, và tiếng Việt có kho từ Hán Việt khổng lồ. Đọc 学而时习之 bằng Hán Việt – <i>học nhi thời tập chi</i> – bạn nhận ra ngay “học”, “thời”, “tập”. Nhưng cẩn thận: <b>nhận ra mặt chữ ≠ hiểu đúng</b> (说 ở đây là “duyệt” = vui, không phải “nói”).</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ vựng A – Hư từ & đại từ văn ngôn",
+   "items": [
+    {
+     "w": "之",
+     "py": "zhī",
+     "hv": "chi",
+     "pos": "part/pron",
+     "vi": "(1) đại từ “nó, điều đó”; (2) trợ từ = 的; (3) động từ “đi đến”; (4) đặt giữa chủ – vị để biến câu thành cụm danh từ",
+     "ex": "学而时习之。（《论语·学而》）",
+     "exVi": "Học rồi thường xuyên ôn luyện điều (đã học) ấy. (之 = đại từ)"
+    },
+    {
+     "w": "乎",
+     "py": "hū",
+     "hv": "hồ",
+     "pos": "part",
+     "vi": "(1) trợ từ nghi vấn = 吗/呢; (2) cảm thán; (3) giới từ = 于",
+     "ex": "有朋自远方来，不亦乐乎？",
+     "exVi": "Có bạn từ phương xa đến, chẳng phải vui sao?"
+    },
+    {
+     "w": "者",
+     "py": "zhě",
+     "hv": "giả",
+     "pos": "part",
+     "vi": "(1) “người/điều mà…” (知者 người trí); (2) trợ từ nêu chủ đề trong câu phán đoán 者…也",
+     "ex": "知者乐水，仁者乐山。（《论语·雍也》）",
+     "exVi": "Người trí ưa nước, người nhân ưa núi."
+    },
+    {
+     "w": "也",
+     "py": "yě",
+     "hv": "dã",
+     "pos": "part",
+     "vi": "trợ từ cuối câu: phán đoán (“là”), khẳng định, giải thích",
+     "ex": "知之为知之，不知为不知，是知也。",
+     "exVi": "Biết thì nói biết, không biết thì nói không biết, thế mới là biết."
+    },
+    {
+     "w": "矣",
+     "py": "yǐ",
+     "hv": "hĩ",
+     "pos": "part",
+     "vi": "trợ từ cuối câu = 了 (đã, rồi; sự thay đổi)",
+     "ex": "温故而知新，可以为师矣。",
+     "exVi": "Ôn cũ mà biết mới, thì có thể làm thầy được rồi."
+    },
+    {
+     "w": "焉",
+     "py": "yān",
+     "hv": "yên",
+     "pos": "part/pron",
+     "vi": "(1) = 于此 “ở đó, trong đó”; (2) nghi vấn “sao, làm sao”",
+     "ex": "三人行，必有我师焉。",
+     "exVi": "Ba người cùng đi, ắt trong đó có thầy ta."
+    },
+    {
+     "w": "哉",
+     "py": "zāi",
+     "hv": "tai",
+     "pos": "part",
+     "vi": "trợ từ cảm thán/nghi vấn (= 啊, 呢)",
+     "ex": "何有于我哉？（《论语·述而》）",
+     "exVi": "Những điều ấy, ta đã làm được gì đâu?"
+    },
+    {
+     "w": "而",
+     "py": "ér",
+     "hv": "nhi",
+     "pos": "conj",
+     "vi": "liên từ: “và, rồi” (thuận) / “mà, nhưng” (nghịch) / nối trạng ngữ với động từ",
+     "ex": "人不知而不愠，不亦君子乎？",
+     "exVi": "Người không biết đến mình mà mình không giận, chẳng phải quân tử sao? (而 = nhưng)"
+    },
+    {
+     "w": "其",
+     "py": "qí",
+     "hv": "kỳ",
+     "pos": "pron",
+     "vi": "đại từ “của nó, của người ấy; nó, họ”",
+     "ex": "工欲善其事，必先利其器。（《论语·卫灵公》）",
+     "exVi": "Người thợ muốn làm tốt việc của mình, trước hết phải mài sắc dụng cụ của mình."
+    },
+    {
+     "w": "以",
+     "py": "yǐ",
+     "hv": "dĩ",
+     "pos": "prep",
+     "vi": "“dùng, bằng; để; vì; lấy… làm…” (以…为…)",
+     "ex": "不积跬步，无以至千里。（《荀子·劝学》）",
+     "exVi": "Không góp từng bước nhỏ thì không có cách gì đi tới nghìn dặm. (无以 = không có cách để)"
+    },
+    {
+     "w": "于",
+     "py": "yú",
+     "hv": "ư",
+     "pos": "prep",
+     "vi": "giới từ “ở, tại; cho, đối với; hơn (so sánh)”, thường đứng SAU động từ",
+     "ex": "己所不欲，勿施于人。（《论语·颜渊》）",
+     "exVi": "Điều mình không muốn, chớ làm cho người khác."
+    },
+    {
+     "w": "所",
+     "py": "suǒ",
+     "hv": "sở",
+     "pos": "part",
+     "vi": "所 + động từ = “điều mà, cái mà…” (biến động từ thành cụm danh từ)",
+     "ex": "己所不欲。",
+     "exVi": "Điều mà bản thân không muốn."
+    },
+    {
+     "w": "为",
+     "py": "wéi / wèi",
+     "hv": "vi / vị",
+     "pos": "v/prep",
+     "vi": "wéi: là, làm, trở thành; wèi: vì, cho",
+     "ex": "知之为知之。/ 为人谋而不忠乎？",
+     "exVi": "Biết thì cho là biết. (wéi) / Lo việc cho người có chưa hết lòng chăng? (wèi)"
+    },
+    {
+     "w": "则",
+     "py": "zé",
+     "hv": "tắc",
+     "pos": "conj",
+     "vi": "“thì” (nối điều kiện – kết quả)",
+     "ex": "学而不思则罔，思而不学则殆。",
+     "exVi": "Học mà không nghĩ thì mờ mịt, nghĩ mà không học thì nguy hiểm."
+    },
+    {
+     "w": "亦",
+     "py": "yì",
+     "hv": "diệc",
+     "pos": "adv",
+     "vi": "cũng; 不亦…乎 = “chẳng phải… sao?”",
+     "ex": "不亦说乎？",
+     "exVi": "Chẳng phải vui sao?"
+    },
+    {
+     "w": "勿",
+     "py": "wù",
+     "hv": "vật",
+     "pos": "adv",
+     "vi": "chớ, đừng (cấm chỉ)",
+     "ex": "勿施于人。",
+     "exVi": "Chớ đem áp đặt cho người."
+    },
+    {
+     "w": "吾",
+     "py": "wú",
+     "hv": "ngô",
+     "pos": "pron",
+     "vi": "tôi, ta",
+     "ex": "吾日三省吾身。（《论语·学而》）",
+     "exVi": "Mỗi ngày ta tự xét mình nhiều lần."
+    },
+    {
+     "w": "汝",
+     "py": "rǔ",
+     "hv": "nhữ",
+     "pos": "pron",
+     "vi": "ngươi, anh (cũng viết 女; đồng nghĩa: 尔)",
+     "ex": "诲女知之乎？（女 = 汝）",
+     "exVi": "Ta dạy ngươi thế nào là biết nhé?"
+    },
+    {
+     "w": "曰",
+     "py": "yuē",
+     "hv": "viết",
+     "pos": "v",
+     "vi": "nói (子曰 = Khổng Tử nói)",
+     "ex": "子曰：“温故而知新。”",
+     "exVi": "Khổng Tử nói: “Ôn cũ mà biết mới.”"
+    },
+    {
+     "w": "何",
+     "py": "hé",
+     "hv": "hà",
+     "pos": "pron",
+     "vi": "gì, sao, nào (何以 = vì sao / lấy gì)",
+     "ex": "何以谓之“文”也？（《论语·公冶长》）",
+     "exVi": "Vì sao gọi ông ấy là “Văn”?"
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ vựng B – Thực từ cổ & thành ngữ gốc 《论语》",
+   "items": [
+    {
+     "w": "说",
+     "py": "yuè",
+     "hv": "duyệt",
+     "pos": "adj",
+     "vi": "(văn ngôn) vui vẻ = 悦 – KHÔNG đọc shuō",
+     "ex": "学而时习之，不亦说乎？",
+     "exVi": "Học rồi thường ôn, chẳng phải vui sao?"
+    },
+    {
+     "w": "愠",
+     "py": "yùn",
+     "hv": "uấn",
+     "pos": "v",
+     "vi": "giận, bực trong lòng",
+     "ex": "人不知而不愠。",
+     "exVi": "Người không biết đến mình mà mình không giận."
+    },
+    {
+     "w": "罔",
+     "py": "wǎng",
+     "hv": "võng",
+     "pos": "adj",
+     "vi": "mờ mịt, mê muội",
+     "ex": "学而不思则罔。",
+     "exVi": "Học mà không nghĩ thì mờ mịt."
+    },
+    {
+     "w": "殆",
+     "py": "dài",
+     "hv": "đãi",
+     "pos": "adj",
+     "vi": "nguy hiểm; (cũng nghĩa) mệt mỏi, nghi hoặc",
+     "ex": "思而不学则殆。",
+     "exVi": "Nghĩ mà không học thì nguy."
+    },
+    {
+     "w": "省",
+     "py": "xǐng",
+     "hv": "tỉnh",
+     "pos": "v",
+     "vi": "tự xét, tự kiểm điểm (đọc xǐng, không phải shěng “tỉnh/tiết kiệm”)",
+     "ex": "见不贤而内自省也。（《论语·里仁》）",
+     "exVi": "Thấy người không hiền thì tự xét lại mình."
+    },
+    {
+     "w": "患",
+     "py": "huàn",
+     "hv": "hoạn",
+     "pos": "v",
+     "vi": "lo, lo lắng",
+     "ex": "不患人之不己知，患不知人也。（《论语·学而》）",
+     "exVi": "Không lo người không biết mình, chỉ lo mình không biết người."
+    },
+    {
+     "w": "君子",
+     "py": "jūnzǐ",
+     "hv": "quân tử",
+     "pos": "n",
+     "vi": "người quân tử (người có đạo đức, học vấn) ↔ 小人",
+     "ex": "君子成人之美。（《论语·颜渊》）",
+     "exVi": "Người quân tử giúp người khác thành điều tốt."
+    },
+    {
+     "w": "仁",
+     "py": "rén",
+     "hv": "nhân",
+     "pos": "n",
+     "vi": "nhân, lòng nhân ái – khái niệm trung tâm của Nho gia",
+     "ex": "樊迟问仁。子曰：“爱人。”（《论语·颜渊》）",
+     "exVi": "Phàn Trì hỏi về nhân. Khổng Tử nói: “Yêu người.” (爱人 ở đây = yêu thương người khác, không phải “vợ/chồng”!)"
+    },
+    {
+     "w": "温故知新",
+     "py": "wēngù-zhīxīn",
+     "hv": "ôn cố tri tân",
+     "pos": "idiom",
+     "vi": "ôn cũ biết mới",
+     "ex": "复习时要温故知新，从旧知识中发现新问题。",
+     "exVi": "Khi ôn tập phải ôn cũ biết mới, từ kiến thức cũ phát hiện vấn đề mới."
+    },
+    {
+     "w": "学而不厌",
+     "py": "xué ér bú yàn",
+     "hv": "học nhi bất yếm",
+     "pos": "idiom",
+     "vi": "học không biết chán",
+     "ex": "老教授学而不厌，八十岁还在学外语。",
+     "exVi": "Vị giáo sư già học không biết chán, tám mươi tuổi vẫn học ngoại ngữ."
+    },
+    {
+     "w": "诲人不倦",
+     "py": "huì rén bú juàn",
+     "hv": "hối nhân bất quyện",
+     "pos": "idiom",
+     "vi": "dạy người không biết mỏi",
+     "ex": "她从教三十年，始终诲人不倦。",
+     "exVi": "Cô dạy học ba mươi năm, trước sau vẫn dạy người không biết mỏi."
+    },
+    {
+     "w": "不耻下问",
+     "py": "bù chǐ xià wèn",
+     "hv": "bất sỉ hạ vấn",
+     "pos": "idiom",
+     "vi": "không thấy xấu hổ khi hỏi người kém mình",
+     "ex": "真正有学问的人往往不耻下问。",
+     "exVi": "Người thật sự có học vấn thường không ngại hỏi người kém mình."
+    },
+    {
+     "w": "欲速则不达",
+     "py": "yù sù zé bù dá",
+     "hv": "dục tốc tắc bất đạt",
+     "pos": "phr",
+     "vi": "muốn nhanh thì không tới (dục tốc bất đạt)",
+     "ex": "学语言欲速则不达，必须循序渐进。",
+     "exVi": "Học ngôn ngữ dục tốc bất đạt, phải tuần tự tiến dần."
+    },
+    {
+     "w": "后生可畏",
+     "py": "hòushēng-kěwèi",
+     "hv": "hậu sinh khả úy",
+     "pos": "idiom",
+     "vi": "lớp trẻ đáng nể (có thể vượt người đi trước)",
+     "ex": "这位年轻译者的水平让人感叹后生可畏。",
+     "exVi": "Trình độ của dịch giả trẻ này khiến người ta phải thốt lên: hậu sinh khả uý."
+    },
+    {
+     "w": "见贤思齐",
+     "py": "jiànxián-sīqí",
+     "hv": "kiến hiền tư tề",
+     "pos": "idiom",
+     "vi": "thấy người giỏi thì nghĩ cách theo kịp",
+     "ex": "见贤思齐，是自我提升的好方法。",
+     "exVi": "Thấy người giỏi thì muốn theo kịp – đó là cách tốt để tự nâng mình."
+    },
+    {
+     "w": "己所不欲，勿施于人",
+     "py": "jǐ suǒ bú yù, wù shī yú rén",
+     "hv": "kỷ sở bất dục, vật thi ư nhân",
+     "pos": "phr",
+     "vi": "điều mình không muốn chớ làm cho người",
+     "ex": "己所不欲，勿施于人，这是人际交往的基本原则。",
+     "exVi": "Điều mình không muốn chớ làm cho người – đó là nguyên tắc cơ bản trong giao tiếp."
+    },
+    {
+     "w": "三人行，必有我师",
+     "py": "sān rén xíng, bì yǒu wǒ shī",
+     "hv": "tam nhân hành, tất hữu ngã sư",
+     "pos": "phr",
+     "vi": "ba người cùng đi ắt có thầy ta",
+     "ex": "三人行，必有我师，同学之间也要互相学习。",
+     "exVi": "Ba người cùng đi ắt có thầy ta, bạn học cũng phải học hỏi lẫn nhau."
+    },
+    {
+     "w": "工欲善其事，必先利其器",
+     "py": "gōng yù shàn qí shì, bì xiān lì qí qì",
+     "hv": "công dục thiện kỳ sự, tất tiên lợi kỳ khí",
+     "pos": "phr",
+     "vi": "muốn làm tốt việc phải mài sắc công cụ trước",
+     "ex": "工欲善其事，必先利其器，学翻译先要有好词典。",
+     "exVi": "Muốn làm tốt việc phải có công cụ tốt – học dịch trước hết cần từ điển tốt."
+    },
+    {
+     "w": "千里之行，始于足下",
+     "py": "qiān lǐ zhī xíng, shǐ yú zú xià",
+     "hv": "thiên lý chi hành, thủy ư túc hạ",
+     "pos": "phr",
+     "vi": "đi nghìn dặm bắt đầu từ một bước chân (《老子》)",
+     "ex": "千里之行，始于足下，今天就背十个生词吧。",
+     "exVi": "Đi nghìn dặm bắt đầu từ một bước – hôm nay hãy thuộc mười từ mới."
+    },
+    {
+     "w": "天时不如地利，地利不如人和",
+     "py": "tiānshí bùrú dìlì, dìlì bùrú rénhé",
+     "hv": "thiên thời bất như địa lợi, địa lợi bất như nhân hòa",
+     "pos": "phr",
+     "vi": "thiên thời không bằng địa lợi, địa lợi không bằng nhân hoà (《孟子》)",
+     "ex": "天时不如地利，地利不如人和，团队合作才是成功的关键。",
+     "exVi": "Thiên thời không bằng địa lợi, địa lợi không bằng nhân hoà; hợp tác đồng đội mới là chìa khoá thành công."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: Bốn chữ 之 乎 者 也 – “linh hồn” của văn ngôn",
+   "html": "<p>Người Trung hay dùng cụm <b>之乎者也</b> để chỉ văn ngôn (đôi khi chế giễu kiểu nói “sách vở”). Bốn chữ này là <b>hư từ</b>: tự thân không mang nghĩa thực, nhưng quyết định quan hệ và ngữ khí của câu.</p>",
+   "table": [
+    [
+     "Hư từ",
+     "Chức năng",
+     "Ví dụ cổ văn",
+     "Bạch thoại tương đương"
     ],
-    "games": [
-      "Truy tìm hư từ: GV chiếu một câu cổ, học viên dùng thẻ hư từ đặt lên đúng vị trí và nói chức năng; đội nhanh và đúng nhất ghi điểm.",
-      "Song ngữ Hán Việt: một người đọc câu bằng âm Hán Việt, người kia phải đọc lại bằng phổ thông và dịch nghĩa (đổi vai liên tục).",
-      "Thành ngữ truy nguồn: GV nói một thành ngữ hiện đại (温故知新, 后生可畏…), học viên đoán xuất xứ (sách nào) và đọc nguyên câu gốc."
+    [
+     "之 ①",
+     "Đại từ “nó, điều đó”",
+     "学而时习之",
+     "学了并按时温习它"
     ],
-    "errors": [
-      "Đọc 说 trong 不亦说乎 là shuō, hiểu là “nói” → đọc yuè, nghĩa “vui” (= 悦).",
-      "Hiểu 知道 trong 人不学，不知道 là “biết” hiện đại → là 知 (biết) + 道 (đạo lý).",
-      "Dịch 之 lúc nào cũng là “của” → xác định vị trí: sau động từ = đại từ; giữa chủ – vị = bỏ qua khi dịch.",
-      "Dịch số từ cứng nhắc (三省 = “ba lần tự xét”) → thường mang nghĩa “nhiều lần”.",
-      "Dùng văn ngôn tràn lan trong bài viết hiện đại (半文不白) → chỉ dùng các khuôn đã thông dụng: 之所以, 以…为…, 由此可见.",
-      "Đọc âm Hán Việt thay cho phổ thông khi nói tiếng Trung → âm Hán Việt chỉ để hiểu nghĩa, nói phải dùng phổ thông."
+    [
+     "之 ②",
+     "Trợ từ kết cấu = 的",
+     "千里之行",
+     "千里的路程"
     ],
-    "homework": "Học thuộc 13 câu kinh điển (đọc được cả Hán Việt và phổ thông); hoàn thành bài tập trong game ≥ 85%; viết đoạn cảm nhận 250–300 chữ (Viết 2); sưu tầm 5 thành ngữ hiện đại có gốc văn ngôn và ghi xuất xứ."
+    [
+     "之 ③",
+     "Đặt giữa chủ – vị, biến câu thành cụm danh từ",
+     "松柏之后彫",
+     "松柏最后凋零（这件事）"
+    ],
+    [
+     "之 ④",
+     "Động từ “đi, đến”",
+     "吾欲之南海（彭端淑《为学》）",
+     "我想去南海"
+    ],
+    [
+     "乎 ①",
+     "Nghi vấn / phản vấn",
+     "不亦说乎？",
+     "不也很愉快吗？"
+    ],
+    [
+     "乎 ②",
+     "Giới từ = 于",
+     "浴乎沂（《论语·先进》）",
+     "在沂水里洗澡"
+    ],
+    [
+     "者 ①",
+     "“người/điều mà…”",
+     "知者乐水；择其善者",
+     "聪明的人；好的方面"
+    ],
+    [
+     "者…也",
+     "Câu phán đoán “A là B”",
+     "陈胜者，阳城人也。（《史记》）",
+     "陈胜是阳城人。"
+    ],
+    [
+     "也",
+     "Kết câu phán đoán, khẳng định",
+     "是知也",
+     "这才是智慧"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "岁寒，然后知松柏之后彫也。（《论语·子罕》）",
+     "vi": "Đến mùa lạnh giá mới biết tùng bách là cây rụng lá sau cùng. (之 ③ + 也 khẳng định)"
+    },
+    {
+     "t": "知之为知之，不知为不知，是知也。（《论语·为政》）",
+     "vi": "Biết thì cho là biết, không biết thì cho là không biết, thế mới là biết. (之 ① = điều đó; 为 = coi là; 也 = khẳng định; chữ 知 cuối = 智)"
+    }
+   ],
+   "tips": [
+    "Người Việt thấy 之 hay dịch máy móc là “chi” hoặc “của”. Hãy hỏi trước: nó đứng ở đâu? Sau động từ → đại từ; giữa hai danh từ → 的; giữa chủ ngữ và vị ngữ → bỏ qua khi dịch.",
+    "Câu phán đoán văn ngôn KHÔNG cần 是: 陈胜者，阳城人也. Chữ 是 trong văn ngôn thường là đại từ “này” (是知也 = cái này là biết)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: 而 · 其 · 以 · 于 · 所 · 为 · 则",
+   "html": "<p>Cùng với 之乎者也, bảy hư từ dưới đây chiếm phần lớn câu văn ngôn bạn sẽ gặp. Nhiều chữ vẫn sống trong tiếng Trung hiện đại văn viết.</p>",
+   "table": [
+    [
+     "Hư từ",
+     "Nghĩa chính",
+     "Ví dụ",
+     "Còn sống trong tiếng Trung hiện đại"
+    ],
+    [
+     "而",
+     "và; mà, nhưng; rồi",
+     "人不知而不愠",
+     "而且, 然而, 进而, 因而"
+    ],
+    [
+     "其",
+     "của nó/họ; nó, họ",
+     "择其善者而从之",
+     "其中, 其实, 尤其, 极其"
+    ],
+    [
+     "以",
+     "dùng; để; lấy… làm",
+     "无以至千里",
+     "以…为…, 以便, 可以, 所以"
+    ],
+    [
+     "于",
+     "ở; cho; hơn",
+     "勿施于人；青于蓝",
+     "位于, 由于, 对于, 建于, 大于"
+    ],
+    [
+     "所",
+     "所 + động từ = điều mà…",
+     "己所不欲",
+     "所谓, 所有, 所以, 众所周知"
+    ],
+    [
+     "为",
+     "wéi là/làm; wèi vì/cho",
+     "可以为师矣；为人谋",
+     "认为, 成为, 以…为…, 为了"
+    ],
+    [
+     "则",
+     "thì",
+     "学而不思则罔",
+     "否则, 规则, 则 (văn viết “thì”)"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "青，取之于蓝，而青于蓝。（《荀子·劝学》）",
+     "vi": "Màu xanh lấy từ cây chàm mà xanh hơn chàm. (于 ① “từ”; 于 ② “hơn”; 而 = mà) → thành ngữ 青出于蓝 “con hơn cha, trò hơn thầy”."
+    },
+    {
+     "t": "工欲善其事，必先利其器。",
+     "vi": "Thợ muốn làm tốt việc của mình, trước phải mài sắc đồ nghề của mình. (其 = của mình; 善, 利 là tính từ dùng như động từ)"
+    },
+    {
+     "t": "本文以河内的老街区为例。（tiếng Trung hiện đại）",
+     "vi": "Bài viết lấy khu phố cổ Hà Nội làm ví dụ. (以…为… – di sản văn ngôn trong văn viết hiện đại)"
+    }
+   ],
+   "tips": [
+    "Bẫy chữ ghép: trong văn ngôn hai chữ đứng cạnh nhau thường là HAI TỪ. 人不学，不知道 = “không biết đạo lý” (知 + 道), KHÔNG phải 知道 hiện đại; 可以为师 = 可 (có thể) + 以 (lấy đó) + 为 (làm) + 师.",
+    "为 đa âm: wéi (là, làm, trở thành) / wèi (vì, cho). Gặp 为 trước danh từ chỉ người hưởng lợi (为人谋) → wèi."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: Năm đặc điểm cú pháp văn ngôn",
+   "html": "<p>Đọc văn ngôn chậm nhất ở chỗ trật tự từ “lạ”. Thuộc 5 hiện tượng sau, bạn sẽ gỡ được hầu hết các câu khó.</p>",
+   "table": [
+    [
+     "Hiện tượng",
+     "Ví dụ",
+     "Phân tích",
+     "Bạch thoại"
+    ],
+    [
+     "1. Câu phán đoán",
+     "陈胜者，阳城人也。",
+     "者…也 thay cho 是",
+     "陈胜是阳城人。"
+    ],
+    [
+     "2. Tân ngữ đảo trước (câu phủ định có đại từ)",
+     "不患人之不己知",
+     "己 (tân ngữ) đứng trước 知",
+     "不担心别人不了解自己"
+    ],
+    [
+     "2’. Tân ngữ đảo trước (câu hỏi)",
+     "吾谁欺？（《论语·子罕》）",
+     "谁 (tân ngữ) trước 欺",
+     "我欺骗谁呢？"
+    ],
+    [
+     "3. Giới từ đặt sau động từ",
+     "勿施于人；青于蓝",
+     "于 + danh từ sau động từ/tính từ",
+     "不要强加给别人；比蓝更青"
+    ],
+    [
+     "4. Tỉnh lược",
+     "（子）曰：“学而时习之”",
+     "lược chủ ngữ, tân ngữ khi đã rõ",
+     "（孔子）说：……"
+    ],
+    [
+     "5. Từ loại hoạt dụng",
+     "吾不能以春风风人（刘向《说苑》）",
+     "风 thứ hai: danh từ → động từ “thổi gió mát cho”",
+     "我不能用春风吹拂别人"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "吾日三省吾身。（《论语·学而》）",
+     "vi": "Mỗi ngày ta nhiều lần tự xét bản thân. (日 danh từ làm trạng ngữ “mỗi ngày”; 三 = nhiều lần, không nhất thiết đúng ba)"
+    },
+    {
+     "t": "见贤思齐焉，见不贤而内自省也。（《论语·里仁》）",
+     "vi": "Thấy người hiền thì nghĩ cách cho bằng, thấy người không hiền thì tự xét lại mình."
+    }
+   ],
+   "tips": [
+    "Số từ trong văn ngôn hay mang nghĩa “nhiều”: 三省, 三思 (suy nghĩ kỹ), 九死一生 – đừng dịch cứng “ba lần”, “chín lần”.",
+    "Người Việt quen thành ngữ Hán Việt “xuân phong phong nhân, hạ vũ vũ nhân” (lấy gió xuân thổi người, mưa hạ tưới người) – đây chính là ví dụ danh từ dùng như động từ."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Đọc kinh điển: 13 câu phải thuộc (nguyên văn – Hán Việt – bạch thoại – tiếng Việt)",
+   "html": "<p>Mỗi câu: đọc 3 lần bằng âm Hán Việt, 3 lần bằng phổ thông, che bản dịch tự giải nghĩa rồi mới đối chiếu. Bản bạch thoại và tiếng Việt dưới đây do Trung tâm tự dịch.</p><table><tr><th>Nguyên văn (xuất xứ)</th><th>Âm Hán Việt</th><th>Bạch thoại</th><th>Tiếng Việt</th></tr><tr><td>学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知而不愠，不亦君子乎？<br><small>《论语·学而》</small></td><td>Học nhi thời tập chi, bất diệc duyệt hồ? Hữu bằng tự viễn phương lai, bất diệc lạc hồ? Nhân bất tri nhi bất uấn, bất diệc quân tử hồ?</td><td>学了知识并且按时温习，不也很愉快吗？有志同道合的朋友从远方来，不也很快乐吗？别人不了解我，我却不恼怒，不也是君子吗？</td><td>Học rồi thường xuyên ôn luyện, chẳng phải vui sao? Có bạn từ phương xa đến, chẳng phải mừng sao? Người không biết đến mình mà mình không giận, chẳng phải là người quân tử sao?</td></tr><tr><td>温故而知新，可以为师矣。<br><small>《论语·为政》</small></td><td>Ôn cố nhi tri tân, khả dĩ vi sư hĩ.</td><td>温习学过的知识，能从中得到新的体会，就可以当老师了。</td><td>Ôn điều cũ mà hiểu ra điều mới thì có thể làm thầy được rồi.</td></tr><tr><td>学而不思则罔，思而不学则殆。<br><small>《论语·为政》</small></td><td>Học nhi bất tư tắc võng, tư nhi bất học tắc đãi.</td><td>只学习不思考，就会迷惑；只思考不学习，就会陷入危险。</td><td>Học mà không nghĩ thì mờ mịt; nghĩ mà không học thì nguy hiểm.</td></tr><tr><td>知之为知之，不知为不知，是知也。<br><small>《论语·为政》</small></td><td>Tri chi vi tri chi, bất tri vi bất tri, thị trí dã.</td><td>知道就是知道，不知道就是不知道，这才是真正的智慧。</td><td>Biết thì nói là biết, không biết thì nói là không biết, thế mới là người hiểu biết.</td></tr><tr><td>三人行，必有我师焉。择其善者而从之，其不善者而改之。<br><small>《论语·述而》</small></td><td>Tam nhân hành, tất hữu ngã sư yên. Trạch kỳ thiện giả nhi tòng chi, kỳ bất thiện giả nhi cải chi.</td><td>几个人同行，其中一定有可以做我老师的人。选择他们的优点去学习，看到他们的缺点就反省并改正自己。</td><td>Ba người cùng đi, ắt có người là thầy ta. Chọn điều hay của họ mà theo, thấy điều dở của họ thì tự sửa mình.</td></tr><tr><td>己所不欲，勿施于人。<br><small>《论语·颜渊》</small></td><td>Kỷ sở bất dục, vật thi ư nhân.</td><td>自己不愿意的事，不要强加给别人。</td><td>Điều mình không muốn, chớ làm cho người khác.</td></tr><tr><td>知者乐水，仁者乐山。<br><small>《论语·雍也》</small></td><td>Trí giả nhạo thủy, nhân giả nhạo sơn.</td><td>聪明的人喜爱水，仁德的人喜爱山。</td><td>Người trí ưa nước, người nhân ưa núi.</td></tr><tr><td>岁寒，然后知松柏之后彫也。<br><small>《论语·子罕》</small></td><td>Tuế hàn, nhiên hậu tri tùng bách chi hậu điêu dã.</td><td>到了一年中最寒冷的时候，才知道松柏是最后凋零的。</td><td>Đến lúc giá rét nhất trong năm mới biết tùng bách là cây tàn sau cùng (gian nan mới biết người kiên trinh).</td></tr><tr><td>欲速则不达，见小利则大事不成。<br><small>《论语·子路》</small></td><td>Dục tốc tắc bất đạt, kiến tiểu lợi tắc đại sự bất thành.</td><td>一味求快，反而达不到目的；贪图小利，就办不成大事。</td><td>Muốn nhanh thì không tới, ham lợi nhỏ thì việc lớn không thành.</td></tr><tr><td>天时不如地利，地利不如人和。<br><small>《孟子·公孙丑下》</small></td><td>Thiên thời bất như địa lợi, địa lợi bất như nhân hòa.</td><td>有利的时机不如有利的地势，有利的地势不如人心团结。</td><td>Thời cơ thuận lợi không bằng địa thế thuận lợi, địa thế thuận lợi không bằng lòng người đoàn kết.</td></tr><tr><td>不积跬步，无以至千里；不积小流，无以成江海。<br><small>《荀子·劝学》</small></td><td>Bất tích khuể bộ, vô dĩ chí thiên lý; bất tích tiểu lưu, vô dĩ thành giang hải.</td><td>不积累一步一步的路程，就无法走到千里之外；不汇集细小的水流，就无法形成江河大海。</td><td>Không góp từng bước nhỏ thì chẳng thể tới nghìn dặm; không gom từng dòng nhỏ thì chẳng thể thành sông biển.</td></tr><tr><td>玉不琢，不成器；人不学，不知道。<br><small>《礼记·学记》</small></td><td>Ngọc bất trác, bất thành khí; nhân bất học, bất tri đạo.</td><td>玉石不经过雕琢，就成不了有用的器物；人不学习，就不会懂得道理。</td><td>Ngọc không mài giũa thì không thành đồ quý; người không học thì không biết đạo lý.</td></tr><tr><td>千里之行，始于足下。<br><small>《老子·第六十四章》</small></td><td>Thiên lý chi hành, thủy ư túc hạ.</td><td>千里的远行，是从脚下的第一步开始的。</td><td>Hành trình nghìn dặm bắt đầu từ bước chân đầu tiên.</td></tr></table><p><small>Lưu ý đọc: 说 (duyệt) = yuè; 乐 trong 知者乐水 = yào (ưa thích, HV “nhạo”); 知 cuối câu “是知也” và trong “知者” = 智 (trí); 省 = xǐng.</small></p>"
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Bài giảng “文言文并不遥远”",
+   "lang": "zh-CN",
+   "note": "Giáo sư Chu (周教授, nam) giảng nhập môn văn ngôn cho lớp tiếng Trung cao cấp; học viên Trần Thị Lan (陈氏兰, nữ, người Việt) đặt câu hỏi. Nghe lần 1: giáo sư đưa ra mấy lời khuyên để học văn ngôn?",
+   "lines": [
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "各位同学，提到文言文，很多人的第一反应是：太难了，离我们的生活太远了。今天我想告诉大家，文言文其实并不遥远，它就藏在我们每天说的话里。",
+     "vi": "Các em, nhắc đến văn ngôn, phản ứng đầu tiên của nhiều người là: khó quá, xa cuộc sống quá. Hôm nay tôi muốn nói với các em rằng văn ngôn thực ra không hề xa xôi, nó nằm ngay trong lời ta nói mỗi ngày."
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "比如，我们常说温故知新、欲速则不达、三人行必有我师，这些都出自两千五百多年前的《论语》。还有千里之行，始于足下，出自《老子》。我们每天都在使用文言，只是自己没有意识到而已。",
+     "vi": "Ví dụ ta hay nói “ôn cố tri tân”, “dục tốc bất đạt”, “ba người cùng đi ắt có thầy ta” – đều xuất phát từ Luận Ngữ hơn 2.500 năm trước. Còn “đi nghìn dặm bắt đầu từ một bước chân” thì từ sách Lão Tử. Ngày nào ta cũng dùng văn ngôn, chỉ là không nhận ra mà thôi."
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "文言文和现代汉语最大的区别是什么呢？第一，文言文以单音节词为主。现代汉语说朋友，文言文常常只说一个朋字；现代汉语说学习，文言文只说学或者习。",
+     "vi": "Khác biệt lớn nhất giữa văn ngôn và tiếng Trung hiện đại là gì? Thứ nhất, văn ngôn chủ yếu là từ đơn âm tiết. Hiện đại nói 朋友, văn ngôn thường chỉ nói một chữ 朋; hiện đại nói 学习, văn ngôn chỉ nói 学 hoặc 习."
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "第二，文言文大量使用虚词。人们常用之乎者也来形容文言文，这四个字恰恰都是虚词。虚词本身没有实在的意义，却决定了句子的语气和结构。",
+     "vi": "Thứ hai, văn ngôn dùng rất nhiều hư từ. Người ta hay dùng “chi hồ giả dã” để chỉ văn ngôn, mà bốn chữ đó lại đều là hư từ. Hư từ tự nó không có nghĩa thực, nhưng quyết định ngữ khí và cấu trúc câu."
+    },
+    {
+     "s": "陈氏兰",
+     "g": "f",
+     "t": "老师，我是越南人。我发现用汉越音来读文言文，好像比用普通话读更容易理解，这是为什么呢？",
+     "vi": "Thưa thầy, em là người Việt. Em thấy đọc văn ngôn bằng âm Hán Việt hình như dễ hiểu hơn đọc bằng tiếng phổ thông, vì sao vậy ạ?"
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "这个问题很有意思。汉越音保留了许多古代汉语的读音特点，越南语里又有大量汉越词。比如学而时习之，你用汉越音读出来，很多字你都认识，对不对？",
+     "vi": "Câu hỏi rất thú vị. Âm Hán Việt giữ nhiều đặc điểm âm đọc của tiếng Hán cổ, mà tiếng Việt lại có rất nhiều từ Hán Việt. Ví dụ “học nhi thời tập chi”, em đọc bằng âm Hán Việt thì nhiều chữ em đều nhận ra, đúng không?"
+    },
+    {
+     "s": "陈氏兰",
+     "g": "f",
+     "t": "对！学、时、习这几个字，我都能猜出意思。",
+     "vi": "Đúng ạ! Mấy chữ học, thời, tập em đều đoán được nghĩa."
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "这就是越南学习者的优势。不过要小心，认识字面不等于真正理解。比如不亦说乎的说，在这里读作悦的音，是高兴的意思，和说话没有关系。",
+     "vi": "Đó chính là lợi thế của người học Việt Nam. Nhưng phải cẩn thận: nhận ra mặt chữ không có nghĩa là hiểu thật. Ví dụ chữ 说 trong “bất diệc duyệt hồ” ở đây đọc như chữ 悦, nghĩa là vui, chẳng liên quan gì đến việc nói."
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "再比如知者乐水，这里的知通智，指聪明的人；乐读作要的音，是喜爱的意思。如果按现代汉语去理解，就会闹笑话。",
+     "vi": "Hoặc “trí giả nhạo thủy”: chữ 知 ở đây thông với 智, chỉ người thông minh; chữ 乐 đọc như âm 要, nghĩa là ưa thích. Nếu hiểu theo tiếng Trung hiện đại thì sẽ thành chuyện cười."
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "第三，文言文的语序有时和现代汉语不同。比如不患人之不己知，意思是不担心别人不了解自己，宾语己跑到了动词知的前面，这叫宾语前置。",
+     "vi": "Thứ ba, trật tự từ văn ngôn đôi khi khác tiếng hiện đại. Ví dụ “bất hoạn nhân chi bất kỷ tri”, nghĩa là không lo người khác không hiểu mình – tân ngữ 己 chạy lên trước động từ 知, gọi là tân ngữ đảo trước."
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "那么，怎样学好文言文呢？我给大家三个建议。第一，熟读成诵。古人说，书读百遍，其义自见。短小的经典段落最好能背下来。",
+     "vi": "Vậy làm sao học tốt văn ngôn? Tôi có ba lời khuyên. Thứ nhất, đọc kỹ đến thuộc lòng. Người xưa nói “sách đọc trăm lần, nghĩa tự hiện ra”. Những đoạn kinh điển ngắn tốt nhất nên học thuộc."
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "第二，抓住常用虚词。之、乎、者、也、而、其、以、于，这八个字弄明白了，一大半的句子就能读懂。",
+     "vi": "Thứ hai, nắm chắc các hư từ thường gặp. Hiểu rõ tám chữ chi, hồ, giả, dã, nhi, kỳ, dĩ, ư thì đọc hiểu được quá nửa số câu."
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "第三，多和成语对照。很多成语就是一句浓缩的文言文，理解了成语的出处，也就掌握了文言的用法。",
+     "vi": "Thứ ba, đối chiếu nhiều với thành ngữ. Nhiều thành ngữ chính là một câu văn ngôn cô đọng; hiểu xuất xứ thành ngữ là nắm được cách dùng văn ngôn."
+    },
+    {
+     "s": "陈氏兰",
+     "g": "f",
+     "t": "老师，那我们学文言文，对现代汉语写作有帮助吗？",
+     "vi": "Thưa thầy, vậy học văn ngôn có giúp ích cho việc viết tiếng Trung hiện đại không ạ?"
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "当然有。现代书面语里保留了大量文言成分，比如之所以、以什么为什么、由此可见。适当使用这些表达，文章会显得简洁、典雅。当然也不能滥用，否则就成了半文不白的掉书袋。",
+     "vi": "Tất nhiên là có. Văn viết hiện đại giữ lại rất nhiều thành phần văn ngôn, như 之所以, 以…为…, 由此可见. Dùng vừa phải những cách diễn đạt này, bài viết sẽ gọn và trang nhã. Nhưng cũng không được lạm dụng, nếu không sẽ thành văn “nửa cổ nửa kim”, khoe chữ sách vở."
+    },
+    {
+     "s": "周教授",
+     "g": "m",
+     "t": "下节课，我们一起精读《论语》中的十个名句。请大家先用汉越音和普通话各读三遍，看看自己能理解多少。",
+     "vi": "Buổi sau, chúng ta cùng đọc kỹ mười câu nổi tiếng trong Luận Ngữ. Mời các em đọc trước mỗi câu ba lần bằng âm Hán Việt và ba lần bằng tiếng phổ thông, xem mình hiểu được bao nhiêu."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Theo giáo sư, bốn chữ 之乎者也 thuộc loại từ nào?",
+     "o": [
+      "Thực từ",
+      "Hư từ",
+      "Danh từ riêng",
+      "Lượng từ"
+     ],
+     "a": 1,
+     "e": "这四个字恰恰都是虚词。"
+    },
+    {
+     "q": "Chữ 说 trong 不亦说乎 có nghĩa là gì?",
+     "o": [
+      "Nói chuyện",
+      "Thuyết phục",
+      "Vui mừng (đọc như 悦)",
+      "Giải thích"
+     ],
+     "a": 2,
+     "e": "在这里读作悦的音，是高兴的意思。"
+    },
+    {
+     "q": "Câu 不患人之不己知 minh hoạ hiện tượng nào?",
+     "o": [
+      "Tỉnh lược chủ ngữ",
+      "Giới từ đặt sau động từ",
+      "Tân ngữ đảo lên trước động từ",
+      "Danh từ dùng như động từ"
+     ],
+     "a": 2,
+     "e": "宾语己跑到了动词知的前面，这叫宾语前置。"
+    },
+    {
+     "q": "Lời khuyên nào giáo sư KHÔNG đưa ra?",
+     "o": [
+      "Đọc kỹ đến thuộc lòng",
+      "Nắm chắc hư từ thường gặp",
+      "Đối chiếu với thành ngữ",
+      "Dịch từng chữ sang bạch thoại"
+     ],
+     "a": 3,
+     "e": "Ba lời khuyên: 熟读成诵, 抓住常用虚词, 多和成语对照."
+    },
+    {
+     "q": "Trong 知者乐水, chữ 知 thông với chữ nào? (gõ chữ Hán)",
+     "a": "智",
+     "alt": [
+      "zhi",
+      "zhì"
+     ],
+     "e": "这里的知通智，指聪明的人。"
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Ghi chép Luận Ngữ của một sinh viên Việt Nam",
+   "title": "一位越南学生的《论语》笔记",
+   "text": "第一次读《论语》，是在大学二年级的古代汉语课上。老师让我们用汉越音朗读“学而时习之，不亦说乎”，教室里顿时响起一片熟悉的声音。原来，这些句子在越南早已流传了好几百年，我的曾祖父小时候在私塾里也背过。那一刻，我忽然觉得这本两千多年前的书离我并不遥远。\n\n读得多了，我发现《论语》并不是一本高高在上的“圣人之书”，而更像一本师生之间的谈话录。孔子会生气，会开玩笑，也会坦然承认自己的不足。他说“知之为知之，不知为不知，是知也”，意思是不懂并不丢人，不懂装懂才是真正的无知。作为一名外语学习者，我对这句话感触尤深：课堂上不敢提问、怕丢面子，正是我们进步的最大障碍。\n\n《论语》中关于学习的论述，至今读来仍不过时。“学而不思则罔，思而不学则殆”，讲的是学习与思考的关系：只读书不思考，就会迷惑；只空想不读书，就会陷入危险。这让我想起刚学汉语时死记硬背生词的日子，背了上千个词，一开口却还是说不出完整的句子。后来，我学会了在阅读中思考：这个词为什么用在这里？换一个词行不行？进步反而快了很多。\n\n孔子本人就是“学而不厌”的榜样。他称赞卫国大夫孔文子“敏而好学，不耻下问”，意思是聪明又爱学习，不把向地位、学问不如自己的人请教看作耻辱。我刚到中国时，不好意思向比我年纪小的同学请教，总觉得没面子。读到这句话，我才明白：在学问面前，年龄和身份都不重要，真正可耻的是停止学习。\n\n另一句让我受益匪浅的话是“三人行，必有我师焉。择其善者而从之，其不善者而改之”。在中国留学期间，我的室友来自不同的国家：有人发音标准，有人写字漂亮，也有人总是拖到最后一刻才写论文。从他们身上，我既学到了长处，也看到了自己的影子。孔子提醒我们，老师不只在讲台上，也在身边每一个人身上；别人的缺点，同样是我们反省自己的镜子。\n\n当然，读《论语》也需要辩证的眼光。书中有些观点带着鲜明的时代烙印，不能简单照搬到今天。但“己所不欲，勿施于人”这样的道理，无论在哪个国家、哪个时代，都是人与人相处的基本准则。我想，这正是经典之所以成为经典的原因：它的语言也许古老，它关心的问题却永远年轻。\n\n如今，我在河内的一所中学教汉语。每学期的第一节课，我都会在黑板上写下“温故而知新，可以为师矣”，然后告诉学生：今天我是你们的老师，但明天，你们中的每一个人都可能成为我的老师。",
+   "vi": "Lần đầu đọc Luận Ngữ là trong giờ Hán ngữ cổ đại năm thứ hai đại học. Thầy bảo chúng tôi đọc to bằng âm Hán Việt “học nhi thời tập chi, bất diệc duyệt hồ”, cả lớp lập tức vang lên những âm thanh quen thuộc. Hoá ra những câu này đã lưu truyền ở Việt Nam mấy trăm năm, cụ cố của tôi hồi nhỏ học trường làng cũng từng học thuộc. Khoảnh khắc ấy, tôi chợt thấy cuốn sách hơn hai nghìn năm tuổi này không hề xa cách mình.\n\nĐọc nhiều rồi, tôi nhận ra Luận Ngữ không phải một cuốn “sách thánh hiền” cao vời vợi, mà giống một tập ghi chép những cuộc trò chuyện giữa thầy và trò. Khổng Tử biết giận, biết đùa, và cũng thẳng thắn thừa nhận chỗ chưa đủ của mình. Ông nói “biết thì nói là biết, không biết thì nói là không biết, thế mới là biết”, nghĩa là không hiểu chẳng có gì xấu hổ, không hiểu mà làm như hiểu mới thật là dốt. Là người học ngoại ngữ, tôi đặc biệt thấm câu này: trên lớp không dám hỏi vì sợ mất mặt chính là trở ngại lớn nhất cho sự tiến bộ của chúng ta.\n\nNhững điều Luận Ngữ bàn về việc học đến nay đọc vẫn không lỗi thời. “Học mà không nghĩ thì mờ mịt, nghĩ mà không học thì nguy” nói về quan hệ giữa học và nghĩ: chỉ đọc sách không suy nghĩ thì sẽ mơ hồ; chỉ nghĩ suông không đọc sách thì sẽ sa vào nguy hiểm. Câu này khiến tôi nhớ những ngày mới học tiếng Trung, học vẹt từ mới, thuộc cả nghìn từ mà mở miệng vẫn không nói nổi một câu hoàn chỉnh. Về sau, tôi học cách vừa đọc vừa suy nghĩ: vì sao từ này dùng ở đây? Thay từ khác có được không? Tiến bộ lại nhanh hơn nhiều.\n\nBản thân Khổng Tử là tấm gương “học không biết chán”. Ông khen Khổng Văn Tử, một vị đại phu nước Vệ, là người “sáng dạ mà ham học, không thẹn hỏi người dưới”, tức là thông minh lại thích học, không coi việc thỉnh giáo người có địa vị, học vấn kém mình là điều nhục. Hồi mới sang Trung Quốc, tôi ngại hỏi những bạn học nhỏ tuổi hơn, luôn thấy mất mặt. Đọc câu này tôi mới hiểu: trước học vấn, tuổi tác và địa vị đều không quan trọng; điều thật sự đáng xấu hổ là ngừng học.\n\nMột câu khác khiến tôi được lợi rất nhiều là “Ba người cùng đi, ắt có người là thầy ta. Chọn điều hay của họ mà theo, thấy điều dở của họ thì tự sửa mình.” Thời du học ở Trung Quốc, bạn cùng phòng của tôi đến từ nhiều nước: có người phát âm chuẩn, có người viết chữ đẹp, cũng có người lúc nào cũng để nước đến chân mới viết luận văn. Từ họ, tôi vừa học được điểm mạnh, vừa thấy bóng dáng chính mình. Khổng Tử nhắc chúng ta rằng người thầy không chỉ ở trên bục giảng mà ở nơi mỗi người quanh ta; khuyết điểm của người khác cũng là tấm gương để ta tự xét mình.\n\nĐương nhiên, đọc Luận Ngữ cũng cần cái nhìn biện chứng. Có những quan điểm trong sách mang dấu ấn rõ rệt của thời đại, không thể đem áp dụng nguyên xi cho hôm nay. Nhưng đạo lý như “điều mình không muốn chớ làm cho người” thì ở bất cứ nước nào, thời đại nào cũng là chuẩn mực cơ bản trong quan hệ giữa người với người. Tôi nghĩ, đó chính là lý do kinh điển trở thành kinh điển: ngôn ngữ của nó có thể cổ xưa, nhưng những vấn đề nó quan tâm thì mãi mãi trẻ trung.\n\nGiờ đây, tôi dạy tiếng Trung ở một trường trung học tại Hà Nội. Buổi học đầu tiên mỗi học kỳ, tôi đều viết lên bảng câu “Ôn cũ mà biết mới thì có thể làm thầy”, rồi nói với học trò: hôm nay cô là thầy của các em, nhưng ngày mai, mỗi em đều có thể trở thành thầy của cô.",
+   "gloss": [
+    {
+     "w": "私塾",
+     "py": "sīshú",
+     "vi": "trường tư thục thời xưa, trường làng (thầy đồ)"
+    },
+    {
+     "w": "高高在上",
+     "py": "gāogāo zài shàng",
+     "vi": "cao vời vợi, xa cách"
+    },
+    {
+     "w": "谈话录",
+     "py": "tánhuàlù",
+     "vi": "ghi chép các cuộc trò chuyện (Luận Ngữ = sách ghi lời Khổng Tử và học trò)"
+    },
+    {
+     "w": "坦然",
+     "py": "tǎnrán",
+     "vi": "thản nhiên, thẳng thắn không ngại"
+    },
+    {
+     "w": "感触尤深",
+     "py": "gǎnchù yóu shēn",
+     "vi": "đặc biệt thấm thía"
+    },
+    {
+     "w": "死记硬背",
+     "py": "sǐjì-yìngbèi",
+     "vi": "học vẹt, học thuộc máy móc"
+    },
+    {
+     "w": "受益匪浅",
+     "py": "shòuyì-fěiqiǎn",
+     "vi": "được lợi không ít (匪 = 非, dấu vết văn ngôn)"
+    },
+    {
+     "w": "烙印",
+     "py": "làoyìn",
+     "vi": "dấu ấn (in sâu)"
+    },
+    {
+     "w": "照搬",
+     "py": "zhàobān",
+     "vi": "rập khuôn, bê nguyên xi"
+    },
+    {
+     "w": "准则",
+     "py": "zhǔnzé",
+     "vi": "chuẩn mực, nguyên tắc"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Vì sao lần đầu đọc Luận Ngữ, tác giả thấy cuốn sách “không xa cách”?",
+     "o": [
+      "Vì sách được dịch sẵn sang tiếng Việt",
+      "Vì đọc bằng âm Hán Việt thấy quen, và những câu này đã lưu truyền ở Việt Nam hàng trăm năm",
+      "Vì thầy giáo kể chuyện cười",
+      "Vì sách rất ngắn"
+     ],
+     "a": 1,
+     "e": "用汉越音朗读…响起一片熟悉的声音。原来，这些句子在越南早已流传了好几百年。"
+    },
+    {
+     "q": "Theo tác giả, trở ngại lớn nhất cho sự tiến bộ của người học ngoại ngữ là gì?",
+     "o": [
+      "Thiếu sách hay",
+      "Học quá nhiều từ mới",
+      "Không dám hỏi vì sợ mất mặt",
+      "Không có bạn nước ngoài"
+     ],
+     "a": 2,
+     "e": "课堂上不敢提问、怕丢面子，正是我们进步的最大障碍。"
+    },
+    {
+     "q": "Câu 学而不思则罔 gợi tác giả nhớ lại điều gì?",
+     "o": [
+      "Thời học vẹt từ mới mà không nói được câu hoàn chỉnh",
+      "Thời đi du học",
+      "Thời dạy học ở Hà Nội",
+      "Thời học trường làng"
+     ],
+     "a": 0,
+     "e": "这让我想起刚学汉语时死记硬背生词的日子…说不出完整的句子。"
+    },
+    {
+     "q": "Tác giả đánh giá Luận Ngữ thế nào ở đoạn 6?",
+     "o": [
+      "Mọi quan điểm đều áp dụng nguyên xi cho hôm nay",
+      "Đã lỗi thời hoàn toàn",
+      "Chỉ có giá trị ở Trung Quốc",
+      "Cần nhìn biện chứng: có quan điểm mang dấu ấn thời đại, nhưng có đạo lý mang tính phổ quát"
+     ],
+     "a": 3,
+     "e": "读《论语》也需要辩证的眼光…但“己所不欲，勿施于人”这样的道理…都是基本准则。"
+    },
+    {
+     "q": "Mỗi học kỳ, tác giả viết câu nào lên bảng? (gõ 5 chữ Hán đầu)",
+     "a": "温故而知新",
+     "alt": [
+      "wenguerzhixin",
+      "温故知新"
+     ],
+     "e": "我都会在黑板上写下“温故而知新，可以为师矣”。"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán trọng tâm (bấm để tập viết)",
+   "items": [
+    {
+     "c": "曰",
+     "py": "yuē",
+     "hv": "viết",
+     "parts": "hình miệng (口) có một nét ngang – hơi thở thoát ra khi nói",
+     "strokes": 4,
+     "vi": "nói; phân biệt với 日 (nhật): 曰 dẹt và rộng hơn",
+     "words": "子曰"
+    },
+    {
+     "c": "罔",
+     "py": "wǎng",
+     "hv": "võng",
+     "parts": "冂 (khung lưới) + 亡 (vong – mất)",
+     "strokes": 8,
+     "vi": "lưới; mờ mịt như bị lưới trùm",
+     "words": "学而不思则罔, 置若罔闻"
+    },
+    {
+     "c": "殆",
+     "py": "dài",
+     "hv": "đãi",
+     "parts": "歹 (ngạt – xương tàn, chết chóc) + 台 (gợi âm)",
+     "strokes": 9,
+     "vi": "nguy hiểm; gần như (殆尽 gần hết)",
+     "words": "思而不学则殆, 危殆, 百战不殆"
+    },
+    {
+     "c": "愠",
+     "py": "yùn",
+     "hv": "uấn",
+     "parts": "忄(tâm – lòng) + 昷 (gợi âm)",
+     "strokes": 12,
+     "vi": "giận âm ỉ trong lòng",
+     "words": "人不知而不愠, 愠怒"
+    },
+    {
+     "c": "诲",
+     "py": "huì",
+     "hv": "hối",
+     "parts": "讠(lời nói) + 每 (mỗi – gợi âm)",
+     "strokes": 9,
+     "vi": "dạy bảo bằng lời",
+     "words": "诲人不倦, 教诲"
+    },
+    {
+     "c": "焉",
+     "py": "yān",
+     "hv": "yên",
+     "parts": "vốn là hình một loài chim; phần dưới có 4 chấm 灬",
+     "strokes": 11,
+     "vi": "ở đó; sao, làm sao (hư từ)",
+     "words": "必有我师焉, 心不在焉"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Đọc diễn cảm & giảng giải kinh điển",
+   "tasks": [
+    {
+     "p": "Đọc diễn cảm đoạn 学而时习之… (ngắt nhịp đúng), sau đó giảng lại bằng tiếng Trung hiện đại cho bạn học trong khoảng 1 phút.",
+     "model": "这段话出自《论语》的第一篇《学而》。孔子说了三件让人快乐的事：第一，学了知识以后经常温习、实践，自然会感到愉快；第二，有志同道合的朋友从远方来交流，当然很快乐；第三，别人不了解自己，自己也不生气，这才是君子的修养。我觉得这三句话从个人学习，到朋友交往，再到为人处世，层层递进，告诉我们快乐其实很简单，关键在于内心是否平和。",
+     "vi": "Đoạn này xuất phát từ thiên đầu tiên “Học nhi” của Luận Ngữ. Khổng Tử nói về ba điều khiến con người vui: thứ nhất, học rồi thường ôn luyện, thực hành, tự nhiên thấy vui; thứ hai, có bạn cùng chí hướng từ phương xa đến giao lưu, tất nhiên rất vui; thứ ba, người khác không hiểu mình mà mình cũng không giận, đó mới là tu dưỡng của người quân tử. Tôi thấy ba câu này đi từ việc học của cá nhân, đến giao du bạn bè, rồi đến cách đối nhân xử thế, tăng tiến từng bước, cho ta biết niềm vui thực ra rất giản dị, mấu chốt là lòng có bình thản hay không.",
+     "tips": "Ngắt nhịp: 学而｜时习之，不亦｜说乎？ – lên giọng nhẹ ở 乎. Nhớ đọc 说 là yuè. Khi giảng, dùng khung 第一…第二…第三… và một câu tổng kết."
+    },
+    {
+     "p": "Dùng một câu Luận Ngữ để bình luận một tình huống hiện đại (1 phút): một đồng nghiệp trẻ ngại hỏi vì sợ bị chê là kém.",
+     "model": "我想起《论语》里的一句话：知之为知之，不知为不知，是知也。在工作中，遇到不懂的问题就大胆地问，这并不丢人；相反，不懂装懂，最后出了错，损失会更大。孔子还称赞过一个人敏而好学，不耻下问，连向地位比自己低的人请教都不觉得难为情。所以，我想对这位年轻同事说：提问不是能力差的表现，而是认真负责的表现。今天多问一句，明天就少犯一个错。",
+     "vi": "Tôi nhớ một câu trong Luận Ngữ: biết thì nói biết, không biết thì nói không biết, thế mới là biết. Trong công việc, gặp vấn đề không hiểu cứ mạnh dạn hỏi, chẳng có gì mất mặt; trái lại, không hiểu mà làm như hiểu, cuối cùng sai sót thì thiệt hại còn lớn hơn. Khổng Tử còn khen một người “sáng dạ, ham học, không ngại hỏi người dưới mình”, thậm chí hỏi người địa vị thấp hơn cũng không thấy ngượng. Vì vậy, tôi muốn nói với đồng nghiệp trẻ ấy: đặt câu hỏi không phải biểu hiện của năng lực kém, mà là biểu hiện của sự nghiêm túc, có trách nhiệm. Hôm nay hỏi thêm một câu, ngày mai bớt đi một lỗi.",
+     "tips": "Khung trích dẫn: 我想起《论语》里的一句话：…… / 正如孔子所说……. Trích xong phải giải thích và gắn với tình huống – đừng chỉ đọc câu cổ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết 1 – Dịch văn ngôn sang bạch thoại và tiếng Việt",
+   "task": "Dịch 4 câu sau sang tiếng Trung hiện đại (bạch thoại); bản tiếng Việt xem ở phần mẫu:\n① 学而不思则罔，思而不学则殆。\n② 三人行，必有我师焉。择其善者而从之，其不善者而改之。\n③ 己所不欲，勿施于人。\n④ 不积跬步，无以至千里；不积小流，无以成江海。",
+   "min": 100,
+   "model": "① 只学习而不思考，就会迷惑不解；只思考而不学习，就会陷入危险。\n② 几个人一起走路，其中一定有可以做我老师的人。我选择他们的优点来学习，看到他们的缺点，就对照自己加以改正。\n③ 自己不愿意承受的事情，不要强加给别人。\n④ 不积累一步一步的路程，就无法到达千里之外；不汇聚细小的水流，就无法形成江河大海。",
+   "modelVi": "BẢN TIẾNG VIỆT:\n① Học mà không nghĩ thì mờ mịt; nghĩ mà không học thì nguy hiểm.\n② Ba người cùng đi, ắt có người là thầy ta. Chọn điều hay của họ mà theo, thấy điều dở của họ thì tự sửa mình.\n③ Điều mình không muốn, chớ làm cho người khác.\n④ Không góp từng bước nhỏ thì chẳng thể tới nghìn dặm; không gom từng dòng nhỏ thì chẳng thể thành sông biển.\n\nGHI CHÚ: 则 → 就; 焉 → 其中 (ở trong đó); 其 → 他们的; 而 → (nối, có thể bỏ); 所 + 不欲 → 不愿意的事; 勿 → 不要; 无以 → 没有办法 / 无法; 至 → 到达.",
+   "tips": [
+    "Từ đơn âm tiết văn ngôn → từ hai âm tiết bạch thoại: 学 → 学习, 思 → 思考, 至 → 到达.",
+    "Bổ sung thành phần bị tỉnh lược (chủ ngữ “我”) để câu bạch thoại trọn vẹn.",
+    "三人 không nhất thiết là “ba người” – bạch thoại nên dịch “几个人”."
+   ],
+   "checklist": [
+    "Mỗi hư từ đã được chuyển đúng chức năng",
+    "Câu bạch thoại đủ chủ ngữ",
+    "Không còn chữ văn ngôn sót lại (则, 焉, 勿…)",
+    "Giữ được nhịp đối của câu ④"
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết 2 – Cảm nhận về một câu Luận Ngữ (250–300 chữ)",
+   "task": "Chọn một câu Luận Ngữ trong bài, viết đoạn cảm nhận 250–300 chữ: trích dẫn – giải thích – liên hệ trải nghiệm bản thân – kết luận. Dùng ít nhất 2 cách nói gốc văn ngôn (之所以, 由此可见, 以…为…, 不耻下问…).",
+   "min": 250,
+   "model": "《论语》中有一句话：“学而不思则罔，思而不学则殆。”意思是只学习不思考就会迷惑，只思考不学习就会陷入危险。这句话我读了很多遍，直到自己当了翻译才真正读懂。刚入行时，我以背词典为荣，记住了几千个词，翻译出来的句子却总是生硬拗口。后来一位前辈告诉我，翻译之所以难，不在于词汇量，而在于对语言的思考。于是，我开始在每次翻译之后反问自己：这个词在原文里究竟是什么意思？越南读者会怎么理解？慢慢地，我的译文变得自然了。可是，我也见过另一种人：他们谈起翻译理论头头是道，却很少动手翻译，一遇到实际问题就束手无策。由此可见，学习与思考如同鸟之两翼，缺一不可。两千多年前的这句话，至今仍是每一个学习者的座右铭。",
+   "modelVi": "Luận Ngữ có câu: “Học mà không nghĩ thì mờ mịt, nghĩ mà không học thì nguy.” Nghĩa là chỉ học không nghĩ sẽ mơ hồ, chỉ nghĩ không học sẽ sa vào nguy hiểm. Tôi đọc câu này nhiều lần, đến khi làm phiên dịch mới thật sự hiểu. Mới vào nghề, tôi lấy việc học thuộc từ điển làm vinh, nhớ mấy nghìn từ mà câu dịch ra vẫn cứng nhắc, trúc trắc. Sau này một bậc đàn anh bảo tôi: dịch sở dĩ khó không nằm ở vốn từ, mà ở sự suy ngẫm về ngôn ngữ. Thế là sau mỗi lần dịch, tôi tự hỏi lại: từ này trong nguyên văn rốt cuộc nghĩa là gì? Độc giả Việt sẽ hiểu thế nào? Dần dần, bản dịch của tôi trở nên tự nhiên. Thế nhưng tôi cũng gặp kiểu người khác: nói lý thuyết dịch thì đâu ra đấy nhưng hiếm khi bắt tay vào dịch, gặp vấn đề thực tế là bó tay. Từ đó có thể thấy, học và nghĩ như hai cánh của chim, thiếu một không được. Câu nói hơn hai nghìn năm trước, đến nay vẫn là phương châm của mỗi người học.",
+   "tips": [
+    "Cấu trúc 4 bước: 引用 (trích) → 释义 (giải nghĩa) → 联系实际 (liên hệ) → 总结 (kết).",
+    "Nên có cả hai mặt (học không nghĩ / nghĩ không học) để đoạn văn cân đối."
+   ],
+   "checklist": [
+    "Trích dẫn chính xác, có ngoặc kép",
+    "Giải nghĩa bằng bạch thoại",
+    "Có trải nghiệm cá nhân cụ thể",
+    "Dùng ≥ 2 cách nói gốc văn ngôn",
+    "Đủ 250 chữ"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "学而不思则罔，思而不学则殆。",
+   "lang": "zh-CN",
+   "q": "Câu kinh điển vừa nghe bàn về quan hệ giữa hai điều gì?",
+   "o": [
+    "Học và chơi",
+    "Học và suy nghĩ",
+    "Thầy và trò",
+    "Đọc và viết"
+   ],
+   "a": 1,
+   "e": "学 (học) và 思 (nghĩ): học mà không nghĩ thì mờ mịt, nghĩ mà không học thì nguy."
+  },
+  {
+   "t": "listen",
+   "say": "己所不欲，勿施于人。",
+   "lang": "zh-CN",
+   "q": "Câu vừa nghe có nghĩa là gì?",
+   "o": [
+    "Việc mình muốn thì phải làm ngay",
+    "Đừng giúp đỡ người lạ",
+    "Điều mình không muốn, chớ làm cho người khác",
+    "Muốn được tôn trọng thì phải giàu có"
+   ],
+   "a": 2,
+   "e": "己所不欲 = điều mình không muốn; 勿 = chớ; 施于人 = đem áp lên người khác."
+  },
+  {
+   "t": "listen",
+   "say": "温故而知新，可以为师矣。",
+   "lang": "zh-CN",
+   "q": "Chữ 矣 ở cuối câu tương đương với chữ nào trong tiếng Trung hiện đại?",
+   "o": [
+    "了",
+    "吗",
+    "的",
+    "呢"
+   ],
+   "a": 0,
+   "e": "矣 = 了 (đã, rồi; biểu thị sự thay đổi): 可以为师矣 = 可以当老师了."
+  },
+  {
+   "t": "dict",
+   "say": "三人行，必有我师焉。",
+   "lang": "zh-CN",
+   "a": "三人行，必有我师焉。",
+   "py": "Sān rén xíng, bì yǒu wǒ shī yān.",
+   "e": "焉 yān = 于此 (ở trong đó). Đừng viết nhầm thành 嫣 hay 烟."
+  },
+  {
+   "t": "mc",
+   "q": "Trong 学而时习之, chữ 之 là gì?",
+   "o": [
+    "Động từ “đi đến”",
+    "Trợ từ kết cấu = 的",
+    "Đại từ chỉ điều đã học",
+    "Trợ từ nghi vấn"
+   ],
+   "a": 2,
+   "e": "之 đứng sau động từ 习 làm tân ngữ → đại từ “nó, điều (đã học) đó”."
+  },
+  {
+   "t": "mc",
+   "q": "Trong 千里之行，始于足下, chữ 之 là gì?",
+   "o": [
+    "Trợ từ kết cấu = 的",
+    "Đại từ “nó”",
+    "Động từ “đi”",
+    "Trợ từ cảm thán"
+   ],
+   "a": 0,
+   "e": "之 đứng giữa hai thành phần danh từ (千里 + 行) → = 的: 千里的路程."
+  },
+  {
+   "t": "mc",
+   "q": "「陈胜者，阳城人也。」 là kiểu câu gì?",
+   "o": [
+    "Câu hỏi",
+    "Câu phán đoán “A là B”",
+    "Câu bị động",
+    "Câu cảm thán"
+   ],
+   "a": 1,
+   "e": "者…也 là khuôn câu phán đoán: 陈胜是阳城人 (Trần Thắng là người Dương Thành)."
+  },
+  {
+   "t": "mc",
+   "q": "Trong 知者乐水, chữ 乐 đọc thế nào và nghĩa là gì?",
+   "o": [
+    "lè – vui vẻ",
+    "yuè – âm nhạc",
+    "yào – ưa thích",
+    "luò – rơi xuống"
+   ],
+   "a": 2,
+   "e": "乐 đọc yào (HV “nhạo”) = ưa thích: người trí ưa nước."
+  },
+  {
+   "t": "mc",
+   "q": "不耻下问 nghĩa là gì?",
+   "o": [
+    "Không thèm hỏi ai",
+    "Hỏi xuống dưới không ngại tốn thời gian",
+    "Không hỏi những câu đáng xấu hổ",
+    "Không thấy xấu hổ khi hỏi người kém hơn mình"
+   ],
+   "a": 3,
+   "e": "耻 = lấy làm xấu hổ; 下问 = hỏi người dưới mình (địa vị, học vấn thấp hơn)."
+  },
+  {
+   "t": "fill",
+   "q": "学而时习之，不亦说______？（Chẳng phải vui sao?）",
+   "a": "乎",
+   "alt": [
+    "hu",
+    "hū"
+   ],
+   "e": "不亦…乎 = chẳng phải… sao? (乎 = 吗)."
+  },
+  {
+   "t": "fill",
+   "q": "知之为知之，不知为不知，是知______。",
+   "a": "也",
+   "alt": [
+    "ye",
+    "yě"
+   ],
+   "e": "也 kết câu phán đoán: 是知也 = 这才是智慧."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu kinh điển: “Điều mình không muốn chớ làm cho người.”",
+   "w": [
+    "勿施",
+    "己所",
+    "于人",
+    "不欲"
+   ],
+   "a": "己所不欲勿施于人",
+   "e": "己所不欲 (điều mình không muốn) + 勿施于人 (chớ làm cho người) – 于人 đứng SAU động từ (giới từ hậu trí)."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp: “Ôn cũ mà biết mới thì có thể làm thầy.”",
+   "w": [
+    "可以为师矣",
+    "温故",
+    "而知新"
+   ],
+   "a": "温故而知新可以为师矣",
+   "e": "温故 + 而 + 知新, rồi kết quả 可以为师矣."
+  },
+  {
+   "t": "match",
+   "q": "Nối thành ngữ gốc Luận Ngữ với nghĩa:",
+   "pairs": [
+    [
+     "温故知新",
+     "Ôn cũ mà biết mới"
+    ],
+    [
+     "欲速则不达",
+     "Vội thì hỏng việc"
+    ],
+    [
+     "后生可畏",
+     "Lớp trẻ đáng nể"
+    ],
+    [
+     "见贤思齐",
+     "Thấy người giỏi thì muốn theo kịp"
+    ],
+    [
+     "诲人不倦",
+     "Dạy người không biết mỏi"
+    ]
+   ],
+   "e": "Tất cả đều xuất phát từ Luận Ngữ và vẫn được dùng nhiều trong tiếng Trung hiện đại."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ văn ngôn với từ bạch thoại tương đương:",
+   "pairs": [
+    [
+     "矣",
+     "了"
+    ],
+    [
+     "乎（cuối câu hỏi）",
+     "吗"
+    ],
+    [
+     "吾",
+     "我"
+    ],
+    [
+     "汝",
+     "你"
+    ],
+    [
+     "曰",
+     "说"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "In bảng 13 câu kinh điển (che cột dịch); thẻ hư từ 之 乎 者 也 矣 焉 而 其 以 于 所 为 则; bảng “tiến hoá” văn ngôn → bạch thoại (学 → 学习, 朋 → 朋友…); nếu được, một bản chụp sách chữ Hán cổ (Luận Ngữ) để học viên cảm nhận.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: GV viết 学而时习之，不亦说乎 lên bảng, mời học viên đọc bằng Hán Việt rồi đoán nghĩa. Hỏi: chữ 说 có phải “nói” không? → dẫn vào lợi thế và bẫy của người Việt."
+   },
+   {
+    "t": "15'",
+    "do": "Văn ngôn vs bạch thoại: bảng so sánh; trò “tiến hoá từ” – GV đọc từ đơn âm văn ngôn (朋, 习, 师, 至), học viên nói từ bạch thoại hai âm tiết."
+   },
+   {
+    "t": "25'",
+    "do": "Ngữ pháp 1: 之 乎 者 也 – mỗi hư từ 2 ví dụ, học viên xác định chức năng (thẻ màu). Câu phán đoán 者…也."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe bài giảng 周教授: lần 1 đếm số lời khuyên (3); lần 2 làm câu hỏi; lần 3 ghi lại các thành ngữ được nhắc."
+   },
+   {
+    "t": "15'",
+    "do": "Đọc kinh điển: 6 câu đầu – đọc Hán Việt, đọc phổ thông, tự dịch, đối chiếu. Giao học thuộc 6 câu + bài tập 1–8."
+   },
+   {
+    "t": "5'",
+    "do": "Tổng kết."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Kiểm tra thuộc lòng: học viên bốc thăm, đọc thuộc 1 câu và giải nghĩa."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 2–3: 而 其 以 于 所 为 则 + 5 đặc điểm cú pháp; nhấn bẫy “hai chữ là hai từ” (不知道 trong 学记). Học viên tìm dấu vết văn ngôn trong 10 câu tiếng Trung hiện đại."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc bài 一位越南学生的《论语》笔记: tìm các câu trích dẫn, mỗi nhóm giải thích một câu và nói cách tác giả liên hệ thực tế."
+   },
+   {
+    "t": "15'",
+    "do": "Nói: đọc diễn cảm + giảng 学而 (cặp đôi); bình luận tình huống bằng một câu Luận Ngữ."
+   },
+   {
+    "t": "20'",
+    "do": "Viết 1 tại lớp (dịch 4 câu sang bạch thoại), chữa chung. Giao Viết 2 về nhà; làm bài tập 9–15."
+   },
+   {
+    "t": "5'",
+    "do": "Tổng kết: mỗi học viên chọn “câu Luận Ngữ của mình” làm phương châm."
+   }
+  ],
+  "games": [
+   "Truy tìm hư từ: GV chiếu một câu cổ, học viên dùng thẻ hư từ đặt lên đúng vị trí và nói chức năng; đội nhanh và đúng nhất ghi điểm.",
+   "Song ngữ Hán Việt: một người đọc câu bằng âm Hán Việt, người kia phải đọc lại bằng phổ thông và dịch nghĩa (đổi vai liên tục).",
+   "Thành ngữ truy nguồn: GV nói một thành ngữ hiện đại (温故知新, 后生可畏…), học viên đoán xuất xứ (sách nào) và đọc nguyên câu gốc."
+  ],
+  "errors": [
+   "Đọc 说 trong 不亦说乎 là shuō, hiểu là “nói” → đọc yuè, nghĩa “vui” (= 悦).",
+   "Hiểu 知道 trong 人不学，不知道 là “biết” hiện đại → là 知 (biết) + 道 (đạo lý).",
+   "Dịch 之 lúc nào cũng là “của” → xác định vị trí: sau động từ = đại từ; giữa chủ – vị = bỏ qua khi dịch.",
+   "Dịch số từ cứng nhắc (三省 = “ba lần tự xét”) → thường mang nghĩa “nhiều lần”.",
+   "Dùng văn ngôn tràn lan trong bài viết hiện đại (半文不白) → chỉ dùng các khuôn đã thông dụng: 之所以, 以…为…, 由此可见.",
+   "Đọc âm Hán Việt thay cho phổ thông khi nói tiếng Trung → âm Hán Việt chỉ để hiểu nghĩa, nói phải dùng phổ thông."
+  ],
+  "homework": "Học thuộc 13 câu kinh điển (đọc được cả Hán Việt và phổ thông); hoàn thành bài tập trong game ≥ 85%; viết đoạn cảm nhận 250–300 chữ (Viết 2); sưu tầm 5 thành ngữ hiện đại có gốc văn ngôn và ghi xuất xứ."
+ }
 }
