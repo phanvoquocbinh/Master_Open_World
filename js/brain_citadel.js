@@ -18,6 +18,13 @@ export function make(W, ctx){
   function Kit(){ const parts=new Map(); return { add(geo,mat,x=0,y=0,z=0,rx=0,ry=0,rz=0){ const g=geo.index?geo.toNonIndexed():geo.clone(); if(!g.attributes.uv) g.setAttribute('uv',new THREE.Float32BufferAttribute(new Float32Array(g.attributes.position.count*2),2)); _e.set(rx,ry,rz,'YXZ'); _q.setFromEuler(_e); _m.compose(_p.set(x,y,z),_q,_s); g.applyMatrix4(_m); if(!parts.has(mat)) parts.set(mat,[]); parts.get(mat).push(g); },
     build(parent=grp){ for(const [m,l] of parts){ const geo=l.length===1?l[0]:mergeGeometries(l,false); if(!geo) continue; const ms=new THREE.Mesh(geo,m); ms.castShadow=!m.transparent; ms.receiveShadow=true; parent.add(ms); } } }; }
   const sm=(c,r=.6,m=0,o={})=>new THREE.MeshStandardMaterial({color:c, roughness:r, metalness:m, ...o});
+  /* 16/11 nâng cấp tháp Liên Hoa (prompt Bình): vật liệu mới */
+  const MX={ champ:sm(0xd4af37,.2,.85,{emissive:0x8a6a10, emissiveIntensity:.15}), obsid:sm(0x111827,.12,.35), neon:new THREE.MeshStandardMaterial({color:0x00f0ff, emissive:0x00f0ff, emissiveIntensity:1.2}), pearl:sm(0xf4f1ea,.32,.08),
+    sapph:new THREE.MeshPhysicalMaterial({color:0x0a2540, roughness:.08, metalness:.4, transparent:true, opacity:.58, depthWrite:false, side:THREE.DoubleSide, envMapIntensity:1.6}),
+    petal:new THREE.MeshPhysicalMaterial({color:0xcfeaff, roughness:.04, metalness:.15, transparent:true, opacity:.34, depthWrite:false, side:THREE.DoubleSide, envMapIntensity:1.8}),
+    pool:new THREE.MeshPhysicalMaterial({color:0x0284c7, roughness:.06, metalness:.25, clearcoat:1, clearcoatRoughness:.08, envMapIntensity:1.6}),
+    jet:new THREE.MeshBasicMaterial({color:0xd8f4ff, transparent:true, opacity:.55, depthWrite:false, blending:THREE.AdditiveBlending}),
+    cable:new THREE.MeshStandardMaterial({color:0xe8f6ff, metalness:.6, roughness:.3, emissive:0x9fe8ff, emissiveIntensity:.1}), marble:AK.makeStoneMaterial({col:'#f3f0ea', joint:'#d9d3c8', blockW:96, blockH:48, repeat:4}) };
   const M={ rock:AK.makeStoneMaterial({col:'#8d8577', joint:'#5f584d', blockW:80, blockH:40, repeat:2}), pave:AK.makeStoneMaterial({col:'#e4ddd0', joint:'#b9b0a1', blockW:128, blockH:64, repeat:10}),
     wood:AK.makeWoodMaterial({col:'#7a4a28', repeat:2}), dark:sm(0x1e232b,.4,.4), steel:sm(0xc9d0d8,.25,.9), gold:sm(0xffcf6a,.25,1,{emissive:0xffa820, emissiveIntensity:.25}),
     glass:new THREE.MeshPhysicalMaterial({color:0x8fe3d8, roughness:.05, metalness:.1, transparent:true, opacity:.35, depthWrite:false, side:THREE.DoubleSide, envMapIntensity:1.8}),
@@ -104,10 +111,16 @@ export function make(W, ctx){
     const mid={x:(A.x+B.x)/2, z:(A.z+B.z)/2, y:(A.h+B.h)/2}, tilt=Math.atan2(B.h-A.h,L);
     const deck=new THREE.Mesh(new THREE.BoxGeometry(ROADW,.12,L), new THREE.MeshPhysicalMaterial({color:0xcfefff, roughness:.03, transparent:true, opacity:.42, depthWrite:false})); deck.position.set(mid.x,mid.y-.04,mid.z); deck.rotation.set(-tilt,yaw,0,'YXZ'); grp.add(deck);
     for(const s of [-1,1]){ const ox=Math.cos(yaw)*(ROADW/2+.2)*s, oz=-Math.sin(yaw)*(ROADW/2+.2)*s; k1.add(new THREE.BoxGeometry(.5,.6,L), M.steel, mid.x+ox, mid.y-.35, mid.z+oz, -tilt, yaw, 0);
-      for(const e of [A,B]){ k1.add(new THREE.BoxGeometry(.9,26,.9), M.gold, e.x+ox, e.h+13, e.z+oz); circles.push({x:e.x+ox, z:e.z+oz, r:.6}); }
-      for(let k=1;k<8;k++){ const t=k/8, x=lerp(A.x,B.x,t)+ox, z=lerp(A.z,B.z,t)+oz, y=lerp(A.h,B.h,t), e=t<.5?A:B, top=new THREE.Vector3(e.x+ox, e.h+25, e.z+oz), bot=new THREE.Vector3(x,y,z), d=top.clone().sub(bot);
-        const cab=new THREE.CylinderGeometry(.05,.05,d.length(),5); cab.translate(0,d.length()/2,0); cab.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0), d.clone().normalize())); cab.translate(x,y,z); k1.add(cab, M.steel); } }
-    k1.add(new THREE.BoxGeometry(ROADW+1.6,1.2,1.2), M.gold, A.x, A.h+24, A.z, 0, yaw, 0); k1.add(new THREE.BoxGeometry(ROADW+1.6,1.2,1.2), M.gold, B.x, B.h+24, B.z, 0, yaw, 0);
+      for(let k=1;k<8;k++){ const t=k/8, x=lerp(A.x,B.x,t)+ox, z=lerp(A.z,B.z,t)+oz, y=lerp(A.h,B.h,t), e=t<.5?A:B, top=new THREE.Vector3(e.x, e.h+27, e.z), bot=new THREE.Vector3(x,y,z), d=top.clone().sub(bot);
+        const cab=new THREE.CylinderGeometry(.06,.06,d.length(),5); cab.translate(0,d.length()/2,0); cab.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0), d.clone().normalize())); cab.translate(x,y,z); k1.add(cab, MX.cable); } }
+    /* trụ tháp chữ A vát cạnh 28 m (bê tông trắng ngọc trai + nẹp vàng), chân đế đá; cáp hội tụ về đỉnh chữ A */
+    const legBetween=(p0,p1,r0,r1,mat)=>{ const d=p1.clone().sub(p0), g=new THREE.CylinderGeometry(r1,r0,d.length(),8); g.translate(0,d.length()/2,0); g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0), d.clone().normalize())); g.translate(p0.x,p0.y,p0.z); k1.add(g, mat); };
+    for(const e of [A,B]){ const lx=Math.cos(yaw), lz=-Math.sin(yaw), ap=new THREE.Vector3(e.x, e.h+28, e.z);
+      for(const s of [-1,1]){ const f=new THREE.Vector3(e.x+lx*(ROADW/2+.95)*s, e.h-.6, e.z+lz*(ROADW/2+.95)*s); legBetween(f, ap, .75, .32, MX.pearl);
+        for(const k of [.22,.5,.78]){ const q=f.clone().lerp(ap,k); k1.add(new THREE.TorusGeometry(.75-.43*k+.04,.07,6,16), MX.champ, q.x, q.y, q.z, Math.PI/2, 0, 0); }
+        k1.add(AK.roundedBox(2.2,1.6,2.2,.15,2), M.rock, f.x, f.y+.2, f.z, 0, yaw, 0); circles.push({x:f.x, z:f.z, r:1.1}); }
+      const tie=new THREE.Vector3(e.x, e.h+11, e.z); k1.add(AK.roundedBox(ROADW*.62,.8,.8,.12,2), MX.pearl, tie.x, tie.y, tie.z, 0, yaw, 0); k1.add(new THREE.BoxGeometry(ROADW*.64,.12,.86), MX.champ, tie.x, tie.y+.34, tie.z, 0, yaw, 0);
+      k1.add(new THREE.ConeGeometry(.7,2.4,8), MX.champ, ap.x, ap.y+1.1, ap.z); }
     makeLabel('🌉 Cầu Kính Cổng Trời', 'Cầu đáy kính dài '+L.toFixed(0)+' m bắc qua khe vực vào Đỉnh Mây', {h:.6, x:mid.x, y:mid.y+6, z:mid.z, fade:90}); }
   /* ---- Cầu cổng G6 (16/11): Dev City Đông Nam (700, −100, +4) → nhập đường dẫn Brain ở mép Bắc. Trước đây phía Brain không có gì đón → cầu Dev City cụt giữa biển ---- */
   const G6={}; { let J=ROAD[0], bd=1e9; for(const q of ROAD){ if(q.kind!=='approach') continue; const d=Math.hypot(q.x-628,q.z-97); if(d<bd){ bd=d; J=q; } }
@@ -184,31 +197,82 @@ export function make(W, ctx){
   for(const c of cafes){ const q=ROAD[c.i], nx=-q.uz, nz=q.ux; for(let s=W.SEGS.length-1;s>=0;s--){ const g=W.SEGS[s], mx=(g.ax+g.bx)/2, mz=(g.az+g.bz)/2; if(Math.hypot(mx-(c.x),mz-(c.z))<9.5 && Math.abs(g.y0-(q.h-.6))<.8 && Math.hypot(mx-q.x,mz-q.z)<7.5 && Math.hypot(mx-q.x,mz-q.z)>4) W.SEGS.splice(s,1); } }
 
   /* ============================== 4. THÁP LIÊN HOA THẦN KINH ============================== */
-  const RB=28, RA=10, FH=8, FY=[110,118,126,134,142,150], ENT=Math.atan2(GB.b.z-C.z, GB.b.x-C.x), DOORS=[ENT, ENT+Math.PI/2, ENT+Math.PI, ENT-Math.PI/2];
+  const RF=[26,23.2,21,23.5,26.2,29], RB=29, RA=10, FH=8, FY=[110,118,126,134,142,150], ENT=Math.atan2(GB.b.z-C.z, GB.b.x-C.x), DOORS=[ENT, ENT+Math.PI/2, ENT+Math.PI, ENT-Math.PI/2];
   const dAng=(a,b)=>Math.abs(Math.atan2(Math.sin(a-b),Math.cos(a-b)));
+  const Rof=y=>{ if(y<=FY[0]) return RF[0]; for(let f=0;f<5;f++) if(y<=FY[f+1]){ const k=(y-FY[f])/FH; return RF[f]+(RF[f+1]-RF[f])*(k*k*(3-2*k)); } return RF[5]; };   /* dáng đồng hồ cát mềm */
+  for(let k=0;k<4;k++) DOORS.push(ENT+Math.PI/4+k*Math.PI/2);   /* 8 cửa ↔ 8 cầu qua hồ */
   const kt=Kit();
-  { const d=new THREE.Mesh(new THREE.CircleGeometry(RPAD+.3,96), M.pave); d.rotation.x=-Math.PI/2; d.position.set(C.x,YT+.04,C.z); d.receiveShadow=true; grp.add(d);
-    for(let i=0;i<16;i++){ const a=i/16*TAU+.1, p=at(a,RPAD-4); if(DOORS.some(b=>dAng(a,b)<.2) || dAng(a,aE)<.25) continue; kt.add(new THREE.CylinderGeometry(1.2,1.3,.6,18), M.white, p.x, YT+.3, p.z); kt.add(new THREE.IcosahedronGeometry(1.1,1), sm(0x4f8a35,.9), p.x, YT+1.1, p.z); circles.push({x:p.x,z:p.z,r:1.3}); } }
+  /* ---- khối đế: sàn trệt trong tháp + Hồ Vô Cực Sen bát giác (26,6 → 38 m) + 8 cầu cẩm thạch + quảng trường + lan can đá viền ---- */
+  const POOL0=26.6, POOLA=38, oct=k=>ENT+Math.PI/8+k*Math.PI/4, octR=POOLA/Math.cos(Math.PI/8);
+  { const d=new THREE.Mesh(new THREE.CircleGeometry(RF[0]+.05,96), M.pave); d.rotation.x=-Math.PI/2; d.position.set(C.x,YT+.04,C.z); d.receiveShadow=true; grp.add(d);
+    const sh=new THREE.Shape(); for(let i=0;i<=96;i++){ const a=i/96*TAU; if(i) sh.lineTo(Math.cos(a)*(RPAD+.3),-Math.sin(a)*(RPAD+.3)); else sh.moveTo(RPAD+.3,0); }
+    const hole=new THREE.Path(); for(let k=0;k<=8;k++){ const a=oct(k%8); if(k) hole.lineTo(Math.cos(a)*octR,-Math.sin(a)*octR); else hole.moveTo(Math.cos(a)*octR,-Math.sin(a)*octR); } sh.holes.push(hole);
+    const pg=new THREE.ShapeGeometry(sh,64); pg.rotateX(-Math.PI/2); const pl=new THREE.Mesh(pg, M.pave); pl.position.set(C.x,YT+.04,C.z); pl.receiveShadow=true; grp.add(pl);
+    const wsh=new THREE.Shape(); for(let k=0;k<=8;k++){ const a=oct(k%8); if(k) wsh.lineTo(Math.cos(a)*octR,-Math.sin(a)*octR); else wsh.moveTo(Math.cos(a)*octR,-Math.sin(a)*octR); } const wh=new THREE.Path(); for(let i=0;i<=96;i++){ const a=i/96*TAU; if(i) wh.lineTo(Math.cos(a)*POOL0,-Math.sin(a)*POOL0); else wh.moveTo(POOL0,0); } wsh.holes.push(wh);
+    const wg=new THREE.ShapeGeometry(wsh,48); wg.rotateX(-Math.PI/2); const water=new THREE.Mesh(wg, MX.pool); water.position.set(C.x,YT+.12,C.z); water.receiveShadow=true; grp.add(water);
+    for(let k=0;k<8;k++){ const p0=at(oct(k),octR+.35), p1=at(oct(k+1),octR+.35), L=p0.distanceTo(p1)+.6, m=p0.clone().add(p1).multiplyScalar(.5); kt.add(AK.roundedBox(L,.46,.7,.08,1), MX.pearl, m.x, YT+.23, m.z, 0, Math.atan2(p1.x-p0.x,p1.z-p0.z)+Math.PI/2, 0); }
+    { const cr=new THREE.RingGeometry(RF[0]+.05,POOL0+.05,96,1); cr.rotateX(-Math.PI/2); kt.add(cr, MX.pearl, C.x, YT+.2, C.z); kt.add(new THREE.CylinderGeometry(POOL0+.05,POOL0+.05,.2,96,1,true), MX.pearl, C.x, YT+.1, C.z); }
+    /* 8 cầu cẩm thạch trắng lan can vàng qua hồ */
+    for(const a of DOORS){ const yo=yawOut(a), r0=RF[0]-.1, r1=POOLA+1.1, mid=at(a,(r0+r1)/2), L=r1-r0; kt.add(AK.roundedBox(3.8,.3,L,.06,1), MX.marble, mid.x, YT+.17, mid.z, 0, yo, 0); addPlat(mid.x,mid.z,yo,1.9,L/2,YT+.32);
+      for(const sd of [-1,1]){ const lx=Math.cos(yo)*1.85*sd, lz=-Math.sin(yo)*1.85*sd, pa=at(a,r0+.6), pb=at(a,r1-.4); kt.add(new THREE.BoxGeometry(.1,.08,L-1), MX.champ, mid.x+lx, YT+1.32, mid.z+lz, 0, yo, 0); for(let t=0;t<=6;t++){ const q=pa.clone().lerp(pb,t/6); kt.add(new THREE.CylinderGeometry(.05,.05,1,6), MX.champ, q.x+lx, YT+.82, q.z+lz); }
+        addSeg(pa.x+lx,pa.z+lz,pb.x+lx,pb.z+lz,.12,YT-.3,YT+1.6,'🌊 Lan can cầu qua Hồ Vô Cực Sen'); } }
+    /* va chạm mép hồ: vòng trong + cạnh bát giác ngoài, hở đúng 8 cầu */
+    { const n=192; for(let i=0;i<n;i++){ const a=i/n*TAU, b=(i+1)/n*TAU; if(DOORS.some(d=>dAng(a,d)<2.2/POOL0 || dAng(b,d)<2.2/POOL0)) continue; const p=at(a,POOL0+.1), q=at(b,POOL0+.1); addSeg(p.x,p.z,q.x,q.z,.12,YT-.5,YT+1.6,'🌊 Hồ Vô Cực Sen – đi qua cầu đá'); } }
+    for(let k=0;k<8;k++){ const v0=at(oct(k),octR+.1), v1=at(oct(k+1),octR+.1), N=12; for(let i=0;i<N;i++){ const p=v0.clone().lerp(v1,i/N), q=v0.clone().lerp(v1,(i+1)/N), am=Math.atan2((p.z+q.z)/2-C.z,(p.x+q.x)/2-C.x);
+        if(DOORS.some(d=>dAng(am,d)<2.3/POOLA)) continue; addSeg(p.x,p.z,q.x,q.z,.15,YT-.5,YT+1.6,'🌊 Hồ Vô Cực Sen – đi qua cầu đá'); } }
+    /* 16 vòi phun cong vào chân cánh sen */
+    { const parts=[]; for(let k=0;k<8;k++) for(const sd of [-1,1]){ const a=oct(k)+sd*.07, p0=at(a,POOLA-1.2,YT+.35), p2=at(oct(k),POOL0+1.6,YT+.6), p1=p0.clone().lerp(p2,.5); p1.y=YT+4.2; parts.push(new THREE.TubeGeometry(new THREE.QuadraticBezierCurve3(p0,p1,p2),20,.09,6,false)); kt.add(new THREE.CylinderGeometry(.14,.2,.4,8), MX.champ, p0.x, YT+.25, p0.z); }
+      const jm=new THREE.Mesh(mergeGeometries(parts,false), MX.jet); jm.userData.dynamic=true; grp.add(jm); }
+    /* lan can đá cẩm thạch viền quảng trường (1,1 m) + 24 trụ đèn pha lê vàng + 16 bồn cây – hở lối: đèo, sân bay, xích đu, khinh khí cầu */
+    const RBL=RPAD-.7, gapA=[aE, Math.atan2(265-C.z,880-C.x), Math.atan2(250-C.z,925-C.x)], isGap=a=>gapA.some(g=>dAng(a,g)<.11) || (Math.sin(a)<-.8);
+    { const n=160; for(let i=0;i<n;i++){ const a=i/n*TAU, b=(i+1)/n*TAU; if(isGap(a) || isGap(b)) continue; const p=at(a,RBL), q=at(b,RBL), L=p.distanceTo(q)+.05, m=p.clone().add(q).multiplyScalar(.5), yo=Math.atan2(q.x-p.x,q.z-p.z)+Math.PI/2;
+        kt.add(new THREE.BoxGeometry(L,.85,.34), MX.marble, m.x, YT+.47, m.z, 0, yo, 0); kt.add(new THREE.BoxGeometry(L,.12,.46), MX.pearl, m.x, YT+.96, m.z, 0, yo, 0); kt.add(new THREE.BoxGeometry(L,.03,.47), MX.champ, m.x, YT+1.035, m.z, 0, yo, 0); addSeg(p.x,p.z,q.x,q.z,.2,YT-1.5,YT+1.6,'🏛️ Lan can quảng trường – lối ra ở 4 phía có đường'); } }
+    { const lampM=new THREE.MeshStandardMaterial({color:0xfff3c4, emissive:0xffd77a, emissiveIntensity:1.1, roughness:.1}); let lamps=0; for(let i=0;i<48 && lamps<24;i+=2){ const a=i/48*TAU+.03; if(isGap(a)) continue; const p=at(a,RBL-.5); kt.add(new THREE.CylinderGeometry(.11,.16,3.4,10), MX.champ, p.x, YT+1.7, p.z); kt.add(new THREE.OctahedronGeometry(.42,0), lampM, p.x, YT+3.75, p.z); circles.push({x:p.x,z:p.z,r:.3}); if(GLOW && lamps%2===0) GLOW.add(p.x,YT+3.8,p.z,2.2,0xffd77a,1); lamps++; } }
+    { const lotusM=sm(0xf3a6c4,.6); let pots=0; for(let i=1;i<48 && pots<16;i+=3){ const a=i/48*TAU+.05; if(isGap(a)) continue; const p=at(a,RBL-1.6); kt.add(new THREE.CylinderGeometry(.85,.6,.8,16), MX.pearl, p.x, YT+.4, p.z); kt.add(new THREE.TorusGeometry(.85,.06,6,24), MX.champ, p.x, YT+.8, p.z, Math.PI/2,0,0);
+        if(pots%2===0){ kt.add(new THREE.ConeGeometry(.7,2.6,10), sm(0x2f5a2c,.9), p.x, YT+2.1, p.z); kt.add(new THREE.ConeGeometry(.5,1.6,10), sm(0x37683a,.9), p.x, YT+3.2, p.z); }
+        else for(let j=0;j<8;j++){ const pa=j/8*TAU; kt.add(new THREE.SphereGeometry(.32,8,6,0,TAU,0,Math.PI/2), lotusM, p.x+Math.cos(pa)*.35, YT+.9, p.z+Math.sin(pa)*.35, -.5*Math.sin(pa), 0, .5*Math.cos(pa)); }
+        circles.push({x:p.x,z:p.z,r:1}); pots++; } } }
   const floorMats=[null,AK.makeWoodMaterial({col:'#6b4329',repeat:6}),AK.makeStoneMaterial({col:'#2a4f55',joint:'#1f3d42',blockW:128,blockH:128,repeat:6}),AK.makeStoneMaterial({col:'#2b2f36',joint:'#1d2026',repeat:6}),AK.makeStoneMaterial({col:'#4a2a26',joint:'#33201c',repeat:6}),M.pave];
   /* 16/11: 2 dãy × 2 thang máy cabin thật (js/liftkit.js) ở ±90° so với trục cầu thang xoắn – sàn các tầng khoét lỗ đúng giếng */
   const LIFTPOS=[ENT+Math.PI, ENT].flatMap(a=>{ const p=at(a,RA+3.2), yo=yawOut(a), tx=Math.cos(yo), tz=-Math.sin(yo); return [-1.65,1.65].map(o=>({a, x:p.x+o*tx, z:p.z+o*tz, yaw:yo})); });
   const holeCut=(geo)=>{ const g=geo.index?geo.toNonIndexed():geo, P0=g.attributes.position, keep=[]; for(let t=0;t<P0.count;t+=3){ const cx=(P0.getX(t)+P0.getX(t+1)+P0.getX(t+2))/3, cz=(P0.getZ(t)+P0.getZ(t+1)+P0.getZ(t+2))/3;
       const hit=LIFTPOS.some(L=>{ const dx=cx+C.x-L.x, dz=cz+C.z-L.z, c=Math.cos(L.yaw), s=Math.sin(L.yaw), lx=dx*c-dz*s, lz=dx*s+dz*c; return Math.abs(lx)<1.32 && Math.abs(lz)<1.32; }); if(!hit) keep.push(t); }
     const out=new THREE.BufferGeometry(); for(const k of Object.keys(g.attributes)){ const A=g.attributes[k], n=A.itemSize, arr=new Float32Array(keep.length*3*n); keep.forEach((t,j)=>{ for(let v=0;v<3;v++) for(let q=0;q<n;q++) arr[(j*3+v)*n+q]=A.array[(t+v)*n+q]; }); out.setAttribute(k,new THREE.BufferAttribute(arr,n)); } return out; };
-  for(let f=1;f<6;f++){ const y=FY[f]; const ring=holeCut((()=>{ const r=new THREE.RingGeometry(RA,RB+.4,192,18); r.rotateX(-Math.PI/2); return r; })()); const fl=new THREE.Mesh(ring, floorMats[f]); fl.position.set(C.x,y,C.z); fl.receiveShadow=true; grp.add(fl);
-    const un=holeCut((()=>{ const r=new THREE.RingGeometry(RA,RB+.4,192,18); r.rotateX(Math.PI/2); return r; })()); kt.add(un, M.dark, C.x, y-.5, C.z); kt.add(new THREE.CylinderGeometry(RB+.4,RB+.4,.5,96,1,true), M.gold, C.x, y-.25, C.z); kt.add(new THREE.CylinderGeometry(RA,RA,.5,64,1,true), M.dark, C.x, y-.25, C.z);
-    kt.add(new THREE.TorusGeometry(RA+.03,.05,6,96), M.led, C.x, y-.52, C.z, Math.PI/2,0,0); plats.push({t:'ring', x:C.x, z:C.z, r0:RA+.05, r1:RB-.05, h:y}); }
+  for(let f=1;f<6;f++){ const y=FY[f], RR=RF[f]; const ring=holeCut((()=>{ const r=new THREE.RingGeometry(RA,RR+.45,192,18); r.rotateX(-Math.PI/2); return r; })()); const fl=new THREE.Mesh(ring, floorMats[f]); fl.position.set(C.x,y,C.z); fl.receiveShadow=true; grp.add(fl);
+    const un=holeCut((()=>{ const r=new THREE.RingGeometry(RA,RR+.45,192,18); r.rotateX(Math.PI/2); return r; })()); kt.add(un, M.dark, C.x, y-.9, C.z); for(const [mat,dy] of [[MX.obsid,-.15],[MX.champ,-.45],[MX.neon,-.75]]) kt.add(new THREE.CylinderGeometry(RR+.46,RR+.46,.3,128,1,true), mat, C.x, y+dy, C.z); kt.add(new THREE.CylinderGeometry(RA,RA,.5,64,1,true), M.dark, C.x, y-.25, C.z);
+    kt.add(new THREE.TorusGeometry(RA+.03,.05,6,96), M.led, C.x, y-.52, C.z, Math.PI/2,0,0); plats.push({t:'ring', x:C.x, z:C.z, r0:RA+.05, r1:RR-.05, h:y});
+    if(f===5) for(const [r,dy] of [[RR-1.2,-1.0],[RR-2.6,-1.1],[RR-4.0,-1.2]]) kt.add(new THREE.TorusGeometry(r,.16,8,128), MX.champ, C.x, y+dy, C.z, Math.PI/2,0,0); }
   const ringC=(r,y0,y1,skip)=>{ const n=Math.ceil(TAU*r/.9); for(let i=0;i<n;i++){ const a=i/n*TAU; if(skip && skip(a)) continue; const p=at(a,r); circles.push({x:p.x,z:p.z,r:.32,y0,y1}); } };
-  for(let f=0;f<5;f++){ const y0=FY[f], h=FH-.5; kt.add(new THREE.CylinderGeometry(RB,RB,h,96,1,true), M.glass, C.x, y0+h/2, C.z); ringC(RB-.15, y0-.3, y0+h, f===0?(a=>DOORS.some(b=>dAng(a,b)<2.2/RB)):null); }
-  for(let i=0;i<48;i++){ const a=i/48*TAU, p=at(a,RB+.05); if(DOORS.some(b=>dAng(a,b)<2.4/RB)) { kt.add(new THREE.BoxGeometry(.18,FH*5-6,.24), M.gold, p.x, YT+6+(FH*5-6)/2, p.z, 0, yawOut(a), 0); continue; } kt.add(new THREE.BoxGeometry(.18,FH*5,.24), M.gold, p.x, YT+FH*2.5, p.z, 0, yawOut(a), 0); }
-  for(const a of DOORS){ const p=at(a,RB+.3); kt.add(AK.roundedBox(5.6,.5,3,.15,2), M.gold, p.x, YT+4.4, p.z, 0, yawOut(a), 0); }
-  kt.add(new THREE.CylinderGeometry(RB+.2,RB+.2,1.1,96,1,true), M.glassB, C.x, FY[5]+.55, C.z); kt.add(new THREE.TorusGeometry(RB+.2,.07,8,128), M.gold, C.x, FY[5]+1.12, C.z, Math.PI/2,0,0); ringC(RB+.05, FY[5]-.3, FY[5]+1.6);
-  { const petG=(()=>{ const nu=10, nv=18, pos=[], idx=[]; for(let j=0;j<=nv;j++){ const v=j/nv, w=16*Math.pow(Math.sin(Math.PI*Math.min(1,v*1.05)),.8)+.4, r=RB+3+12*Math.sin(v*Math.PI*.85)+v*6, y=v*44; for(let i=0;i<=nu;i++){ const u=i/nu-.5, bulge=(1-4*u*u)*1.6; pos.push(u*w, y, r+bulge); } }
-      for(let j=0;j<nv;j++) for(let i=0;i<nu;i++){ const a=j*(nu+1)+i, b=a+1, c=a+nu+1, d=c+1; idx.push(a,c,b,b,c,d); } const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setIndex(idx); g.computeVertexNormals(); return g; })();
-    const edgeAt=(v,s)=>{ const w=16*Math.pow(Math.sin(Math.PI*Math.min(1,v*1.05)),.8)+.4, r=RB+3+12*Math.sin(v*Math.PI*.85)+v*6; return new THREE.Vector3(s*w/2,v*44,r); };
-    for(let k=0;k<8;k++){ const a=k/8*TAU+Math.PI/8; const m=new THREE.Mesh(petG, M.glass); m.position.set(C.x,YT,C.z); m.rotation.y=Math.PI/2-a; grp.add(m);
-      const edge=[]; for(let j=0;j<=18;j++) edge.push(edgeAt(j/18,-1)); for(let j=18;j>=0;j--) edge.push(edgeAt(j/18,1));
-      const tg=new THREE.TubeGeometry(new THREE.CatmullRomCurve3(edge),80,.16,6,false); tg.rotateY(Math.PI/2-a); kt.add(tg, M.gold, C.x, YT, C.z); const b=at(a, RB+3); circles.push({x:b.x,z:b.z,r:1.2,y0:YT-1,y1:YT+6}); } }
+  /* mặt kính Deep Royal Sapphire từng tầng – nón cụt nối bán kính tầng dưới → tầng trên (dáng đồng hồ cát) */
+  for(let f=0;f<5;f++){ const y0=FY[f], ya=f?y0+.05:y0, yb=FY[f+1]-.9; kt.add(new THREE.CylinderGeometry(Rof(yb),Rof(ya),yb-ya,96,4,true), MX.sapph, C.x, (ya+yb)/2, C.z);
+    const rr=Math.min(RF[f], Rof(y0+1.7))-.2; ringC(rr, y0-.3, y0+FH-.3, f===0?(a=>DOORS.some(b=>dAng(a,b)<2.0/RF[0])):null); }
+  /* khung xương Double-Helix Diagrid: 36 thanh xoắn thuận + 36 xoắn nghịch, vàng Champagne */
+  { const Y0=YT+4.8, Y1=FY[5]-.2, TW=Math.PI*.55; for(const dir of [1,-1]) for(let k=0;k<36;k++){ const pts=[]; for(let i=0;i<=36;i++){ const t=i/36, y=Y0+(Y1-Y0)*t, a=k/36*TAU+dir*TW*t; pts.push(at(a,Rof(y)+.14,y)); } kt.add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),48,.11,5,false), MX.champ); }
+    kt.add(new THREE.TorusGeometry(Rof(Y0)+.16,.22,8,128), MX.champ, C.x, Y0, C.z, Math.PI/2,0,0); }
+  for(const a of DOORS){ if(dAng(a,ENT)<.05) continue; const p=at(a,RF[0]+.3); kt.add(AK.roundedBox(4.4,.4,2.4,.15,2), MX.champ, p.x, YT+4.4, p.z, 0, yawOut(a), 0); }
+  /* sân thượng R 29: lan can kính + tay vịn vàng */
+  kt.add(new THREE.CylinderGeometry(RF[5]+.25,RF[5]+.25,1.1,128,1,true), M.glassB, C.x, FY[5]+.55, C.z); kt.add(new THREE.TorusGeometry(RF[5]+.25,.08,8,160), MX.champ, C.x, FY[5]+1.12, C.z, Math.PI/2,0,0); ringC(RF[5]+.1, FY[5]-.3, FY[5]+1.6);
+  /* Mái vòm cổng Hoàng gia vươn 9 m ở cửa chính (hướng cầu kính) */
+  { const a=ENT, yo=yawOut(a), mid=at(a,RF[0]+4.6), lx=Math.cos(yo), lz=-Math.sin(yo); kt.add(AK.roundedBox(11,.55,9.4,.2,2), MX.pearl, mid.x, YT+6.3, mid.z, 0, yo, 0); kt.add(new THREE.BoxGeometry(11.2,.18,9.6), MX.champ, mid.x, YT+6.0, mid.z, 0, yo, 0);
+    for(const rr of [RF[0]+2.6, RF[0]+8.6]) for(const sd of [-1,1]) for(const dd of [-.32,.32]){ const p=at(a,rr); const x=p.x+lx*(4.5*sd+dd), z=p.z+lz*(4.5*sd+dd); kt.add(new THREE.CylinderGeometry(.2,.24,6,14), MX.champ, x, YT+3, z); kt.add(new THREE.CylinderGeometry(.34,.34,.3,14), MX.pearl, x, YT+.15, z); circles.push({x,z,r:.3}); }
+    const c=document.createElement('canvas'); c.width=2048; c.height=192; const g=c.getContext('2d'); g.fillStyle='#0b1a33'; g.fillRect(0,0,2048,192); g.strokeStyle='#d4af37'; g.lineWidth=8; g.strokeRect(6,6,2036,180); g.fillStyle='#ffe9a8'; g.font='900 104px "Segoe UI",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; g.shadowColor='#ffd166'; g.shadowBlur=24; g.fillText('★ QA · QC · QE SOVEREIGN CITADEL ★',1024,100);
+    const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=8; const sign=new THREE.Mesh(new THREE.PlaneGeometry(10.6,1.0), new THREE.MeshStandardMaterial({map:t, emissive:0xffffff, emissiveMap:t, emissiveIntensity:.7})); const fp=at(a,RF[0]+9.32); sign.position.set(fp.x,YT+6.3,fp.z); sign.rotation.y=yo; grp.add(sign); }
+  /* 16 cánh sen 3D có sống lưng + gân lá (hàm mẫu của Bình) – 8 cánh ngoài từ mặt hồ + 8 cánh trong cao vút ôm quả cầu; nướng vào 1 bộ khối (ít lượt vẽ) */
+  function buildVolumetricLotusPetal(THREE, { angle=0, rBase=27, rBelly=43, rTip=31, yBase=0, yBelly=16, yTip=36, widthRad=.34, goldMat, glassMat, pearlMat, pedestal=true }){
+    const petalGroup=new THREE.Group(); petalGroup.rotation.y=angle; const N=28, spinePts=[], leftPts=[], rightPts=[];
+    for(let i=0;i<=N;i++){ const t=i/N, r=rBase*(1-t)+rTip*t+Math.sin(t*Math.PI)*(rBelly-(rBase+rTip)*.5), y=yBase+(yTip-yBase)*Math.pow(t,.92), halfW=widthRad*Math.sin(t*Math.PI)*(1-.15*t), rSpine=r+Math.sin(t*Math.PI)*1.4;
+      spinePts.push(new THREE.Vector3(rSpine,y,0)); leftPts.push(new THREE.Vector3(r*Math.cos(halfW),y,r*Math.sin(halfW))); rightPts.push(new THREE.Vector3(r*Math.cos(-halfW),y,r*Math.sin(-halfW))); }
+    petalGroup.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(spinePts),32,.45,8,false), pearlMat));
+    petalGroup.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(leftPts),32,.36,8,false), goldMat)); petalGroup.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(rightPts),32,.36,8,false), goldMat));
+    const verts=[], indices=[]; for(let i=0;i<=N;i++){ const L=leftPts[i], S=spinePts[i], R=rightPts[i]; verts.push(L.x,L.y,L.z, S.x,S.y,S.z, R.x,R.y,R.z); if(i<N){ const a=i*3, b=(i+1)*3; indices.push(a,a+1,b, a+1,b+1,b); indices.push(a+1,a+2,b+1, a+2,b+2,b+1); } }
+    const surfGeo=new THREE.BufferGeometry(); surfGeo.setAttribute('position',new THREE.Float32BufferAttribute(verts,3)); surfGeo.setIndex(indices); surfGeo.computeVertexNormals(); petalGroup.add(new THREE.Mesh(surfGeo, glassMat));
+    for(let i=4;i<N-2;i+=4){ const S=spinePts[i], L=leftPts[i+2], R=rightPts[i+2]; petalGroup.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([S,L]),8,.14,6,false), goldMat)); petalGroup.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([S,R]),8,.14,6,false), goldMat)); }
+    if(pedestal){ const basePedestal=new THREE.Mesh(new THREE.CylinderGeometry(1.4,2.2,2.4,6), pearlMat); basePedestal.position.set(rBase,yBase+1.2,0); petalGroup.add(basePedestal); }
+    return { group:petalGroup, tip:spinePts[N] }; }
+  const bakePetal=(res, y0, kit=kt)=>{ const g=res.group; g.position.set(C.x,y0,C.z); g.updateMatrixWorld(true); g.traverse(m=>{ if(!m.isMesh) return; const geo=m.geometry.clone(); geo.applyMatrix4(m.matrixWorld); kit.add(geo, m.material); }); return res.tip.clone().applyMatrix4(g.matrixWorld); };
+  const PT={goldMat:MX.champ, glassMat:MX.petal, pearlMat:MX.pearl}, TIPS=[];
+  for(let k=0;k<8;k++){ const a=oct(k); bakePetal(buildVolumetricLotusPetal(THREE,{...PT, angle:-a, rBase:27, rBelly:44, rTip:31, yBase:0, yBelly:16, yTip:35, widthRad:.34}), YT); }
+  for(let k=0;k<8;k++){ const a=oct(k)+Math.PI/8; TIPS.push(bakePetal(buildVolumetricLotusPetal(THREE,{...PT, angle:-a, rBase:24, rBelly:35, rTip:24, yBase:6.5, yBelly:28, yTip:50, widthRad:.28, pedestal:false}), YT)); }
   const STEP=.25, SPT=32, DA=TAU/SPT, R0=2.8, R1=RA-.4, A0=ENT+Math.PI*.5, NST=(FY[5]-FY[0])/STEP;
   kt.add(new THREE.CylinderGeometry(R0-.1,R0,FY[5]-FY[0]+6,32), M.dark, C.x, YT+(FY[5]-YT+6)/2, C.z); circles.push({x:C.x, z:C.z, r:R0});
   for(let hx=0;hx<2;hx++){ const strand=[];
@@ -219,12 +283,15 @@ export function make(W, ctx){
       strand.push(at(a,R1+.05,y+1.0)); }
     kt.add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(strand), NST*2, .08, 6, false), hx?new THREE.MeshStandardMaterial({color:0xff6ad5, emissive:0xff3ab0, emissiveIntensity:1.2}):M.led);
     for(let f=1;f<6;f++){ const a=A0+hx*Math.PI, p=at(a,(R1+RA+.6)/2); kt.add(AK.roundedBox(2.2,.22,RA+.6-R1+.4,.06,1), M.wood, p.x, FY[f]-.11, p.z, 0, yawOut(a), 0); addPlat(p.x,p.z,yawOut(a),1.1,(RA+.6-R1)/2+.25,FY[f]); } }
+  { const mk=(ph,mat)=>{ const pts=[]; for(let i=0;i<=160;i++){ const t=i/160, y=YT+.3+(FY[5]+3-YT)*t; pts.push(at(ph+t*TAU*7,R0+.12,y)); } kt.add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),640,.07,6,false), mat); };
+    mk(0, MX.neon); mk(Math.PI, new THREE.MeshStandardMaterial({color:0xf43f5e, emissive:0xf43f5e, emissiveIntensity:1.3}));
+    const warm=new THREE.MeshStandardMaterial({color:0xffe0a0, emissive:0xffc060, emissiveIntensity:1.4}); for(let hx=0;hx<2;hx++) for(let i=1;i<=NST;i++){ const a=A0+hx*Math.PI+i*DA, y=YT+i*STEP, p=at(a,(R0+R1)/2); kt.add(new THREE.BoxGeometry(R1-R0-.3,.03,.05), warm, p.x, y-.16, p.z, 0, yawOut(a), 0); } }
   for(let f=1;f<6;f++){ ringC(RA+.2, FY[f]-.2, FY[f]+1.15, a=>dAng(a,A0)<.3 || dAng(a,A0+Math.PI)<.3); kt.add(new THREE.CylinderGeometry(RA+.15,RA+.15,1.05,64,1,true), M.glassB, C.x, FY[f]+.52, C.z); }
   const ELEV=[A0+Math.PI/2, A0-Math.PI/2].map(a=>({a, p:at(a,RA+3.2)}));
   const FLOORN=['1 · Bảo tàng Lịch sử & Thảm hoạ','2 · Đấu trường Test Design','3 · Chỉ huy Hiệu năng & Bảo mật','4 · Đại sảnh Danh vọng & Phòng Bí ẩn','5 · Nhà hàng xoay · Bida Hoàng gia','6 · Sân thượng · QA Brain Core'];
   { const fl=FY.map((y,i)=>({y, name:'Tầng '+FLOORN[i], short:String(i+1)})); LIFTPOS.forEach((L,k)=>makeLift(W,{x:L.x, z:L.z, yaw:L.yaw, floors:fl, name:`Thang ${k<2?'Đông':'Tây'} ${k%2?'B':'A'}`, start:k%2?5:0, color:0xe0b040})); }
   const panelTex=(title, lines, bg='#13202f')=>{ const c=document.createElement('canvas'); c.width=1024; c.height=640; const g=c.getContext('2d'); g.fillStyle=bg; g.fillRect(0,0,1024,640); g.strokeStyle='#e0b040'; g.lineWidth=10; g.strokeRect(10,10,1004,620); g.fillStyle='#ffd77a'; g.font='900 64px "Segoe UI",sans-serif'; g.fillText(title,48,110); g.fillStyle='#fff'; g.font='500 38px "Segoe UI",sans-serif'; lines.forEach((l,i)=>g.fillText(l,48,200+i*62)); const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=8; return t; };
-  const panel=(a,y,title,lines,bg)=>{ const p=at(a,RB-.8), t=panelTex(title,lines,bg), m=new THREE.Mesh(new THREE.PlaneGeometry(5.6,3.5), new THREE.MeshStandardMaterial({map:t, emissive:0xffffff, emissiveMap:t, emissiveIntensity:.45})); m.position.set(p.x,y+2.6,p.z); m.rotation.y=yawOut(a)+Math.PI; grp.add(m); };
+  const panel=(a,y,title,lines,bg)=>{ const p=at(a,Rof(y+1)-.8), t=panelTex(title,lines,bg), m=new THREE.Mesh(new THREE.PlaneGeometry(5.6,3.5), new THREE.MeshStandardMaterial({map:t, emissive:0xffffff, emissiveMap:t, emissiveIntensity:.45})); m.position.set(p.x,y+2.6,p.z); m.rotation.y=yawOut(a)+Math.PI; grp.add(m); };
   const busy=(a,f)=>dAng(a,A0)<.45 || dAng(a,A0+Math.PI)<.45 || ELEV.some(e=>dAng(a,e.a)<.35) || (f===0 && DOORS.some(b=>dAng(a,b)<.32));
   { const y=FY[0]; for(const [a,kind] of [[A0+.9,'rocket'],[A0+2.2,'sat'],[A0+3.9,'bug']]){ const p=at(a,18); kt.add(AK.roundedBox(2.4,1.1,2.4,.1,2), M.white, p.x, y+.55, p.z); kt.add(new THREE.BoxGeometry(2.2,2.4,2.2), M.glassB, p.x, y+2.3, p.z); circles.push({x:p.x,z:p.z,r:1.6,y0:y-.5,y1:y+3.6});
       if(kind==='rocket'){ kt.add(new THREE.CylinderGeometry(.25,.25,1.6,16), M.white, p.x, y+2, p.z); kt.add(new THREE.ConeGeometry(.25,.5,16), M.red, p.x, y+3.05, p.z); for(let i=0;i<4;i++) kt.add(new THREE.BoxGeometry(.04,.4,.3), M.red, p.x+Math.cos(i*Math.PI/2)*.27, y+1.4, p.z+Math.sin(i*Math.PI/2)*.27, 0, i*Math.PI/2, 0); }
@@ -238,30 +305,49 @@ export function make(W, ctx){
   let holo=null; { const y=FY[2], p=at(A0+Math.PI*.5+.6,18); holo=new THREE.Mesh(new THREE.IcosahedronGeometry(2.6,3), new THREE.MeshBasicMaterial({color:0x46c8ff, wireframe:true, transparent:true, opacity:.7})); holo.position.set(p.x,y+3,p.z); grp.add(holo); kt.add(new THREE.CylinderGeometry(1.6,1.8,.8,24), M.dark, p.x, y+.4, p.z); circles.push({x:p.x,z:p.z,r:1.9,y0:y-.5,y1:y+5});
     for(const [d,t,l] of [[.9,'Hiệu năng · Real-time',['p95: 182 ms · RPS: 12.4k','Lỗi 5xx: 0,02 %']],[2.4,'Bảo mật · SOC',['Cảnh báo: 0 nghiêm trọng','Quét lỗ hổng: xanh']],[4.2,'CI/CD',['Build #4821 ✓ · 1.284 test pass','Thời gian: 6 phút 40 giây']]]) panel(A0+d, y, t, l, '#0d1726'); }
   { const y=FY[3]; for(const [d,t,l] of [[.9,'Glenford Myers',['"The Art of Software Testing" (1979)']],[1.7,'Lisa Crispin & Janet Gregory',['"Agile Testing" (2009)']],[2.5,'Kent Beck',['Phổ biến TDD – viết test trước']],[3.6,'Đội QC Bình Phan',['Tận tâm · Chính trực · Học hỏi']],[4.4,'Bạn – người QA tiếp theo',['Mỗi bug tìm ra là một người dùng được bảo vệ']]]) panel(A0+d, y, t, l, '#3b1d12');
-    const a=A0+Math.PI+1.2, p=at(a,RB-.9), door=new THREE.Mesh(new THREE.PlaneGeometry(3,3.6), new THREE.MeshStandardMaterial({color:0x2a1450, emissive:0x8a4cff, emissiveIntensity:.9})); door.position.set(p.x,y+1.8,p.z); door.rotation.y=yawOut(a)+Math.PI; grp.add(door);
-    const dp=at(a,RB-2.6); INTER.push({x:dp.x, z:dp.z, r:2, prio:.9, when:()=>Math.abs(P.y-y)<1.5, label:'🔮 Cổng Không gian Bí ẩn (E)', action:()=>toast('🔮 Cổng Không gian Bí ẩn đang được chuẩn bị – Bình sẽ mở một điều đặc biệt ở đây.', 4200)}); }
-  let spinRing=null; { const y=FY[4]; spinRing=new THREE.Mesh(new THREE.RingGeometry(RB-5,RB-.6,96,1), floorMats[1]); spinRing.rotation.x=-Math.PI/2; spinRing.position.set(C.x,y+.02,C.z); grp.add(spinRing);
+    const a=A0+Math.PI+1.2, p=at(a,RF[3]-.9), door=new THREE.Mesh(new THREE.PlaneGeometry(3,3.6), new THREE.MeshStandardMaterial({color:0x2a1450, emissive:0x8a4cff, emissiveIntensity:.9})); door.position.set(p.x,y+1.8,p.z); door.rotation.y=yawOut(a)+Math.PI; grp.add(door);
+    const dp=at(a,RF[3]-2.6); INTER.push({x:dp.x, z:dp.z, r:2, prio:.9, when:()=>Math.abs(P.y-y)<1.5, label:'🔮 Cổng Không gian Bí ẩn (E)', action:()=>toast('🔮 Cổng Không gian Bí ẩn đang được chuẩn bị – Bình sẽ mở một điều đặc biệt ở đây.', 4200)}); }
+  let spinRing=null; { const y=FY[4]; spinRing=new THREE.Mesh(new THREE.RingGeometry(RF[4]-5,RF[4]-.6,96,1), floorMats[1]); spinRing.rotation.x=-Math.PI/2; spinRing.position.set(C.x,y+.02,C.z); grp.add(spinRing);
     const tables=[]; for(let i=0;i<12;i++){ const a=A0+.6+i*TAU/12; if(!busy(a,4)) tables.push(a); }
-    tables.slice(0,7).forEach(a=>{ const p=at(a,RB-2.8); kt.add(new THREE.CylinderGeometry(.6,.6,.05,18), M.white, p.x, y+.76, p.z); kt.add(new THREE.CylinderGeometry(.06,.08,.74,8), M.gold, p.x, y+.38, p.z); circles.push({x:p.x,z:p.z,r:.62,y0:y-.5,y1:y+1.2});
-      const s=at(a,RB-4.1); if(W.addBench) W.addBench({x:s.x, z:s.z, rot:yawOut(a), len:1.3, y:y+.48, floor:y, label:'🍽️ Ngồi nhà hàng xoay (E · C)'}); });
+    tables.slice(0,7).forEach(a=>{ const p=at(a,RF[4]-2.8); kt.add(new THREE.CylinderGeometry(.6,.6,.05,18), M.white, p.x, y+.76, p.z); kt.add(new THREE.CylinderGeometry(.06,.08,.74,8), M.gold, p.x, y+.38, p.z); circles.push({x:p.x,z:p.z,r:.62,y0:y-.5,y1:y+1.2});
+      const s=at(a,RF[4]-4.1); if(W.addBench) W.addBench({x:s.x, z:s.z, rot:yawOut(a), len:1.3, y:y+.48, floor:y, label:'🍽️ Ngồi nhà hàng xoay (E · C)'}); });
     const ba=A0+Math.PI+.2, bar=at(ba,15); kt.add(AK.roundedBox(5,1.1,1,.15,2), M.dark, bar.x, y+.55, bar.z, 0, yawOut(ba)+Math.PI/2, 0); kt.add(AK.roundedBox(5.2,.06,1.15,.04,1), M.gold, bar.x, y+1.12, bar.z, 0, yawOut(ba)+Math.PI/2, 0); circles.push({x:bar.x,z:bar.z,r:1.6,y0:y-.5,y1:y+1.5});
     const bi=at(ba,13.2); INTER.push({x:bi.x, z:bi.z, r:2, prio:.7, when:()=>Math.abs(P.y-y)<1.5, label:'🍸 Sky Bar Liên Hoa – gọi đồ uống (E)', action:()=>menu('🍸 Sky Bar Liên Hoa',[['🍸 Mocktail Liên Hoa',60,'Hương sen'],['🥂 Nước nho sủi',50,'Không cồn'],['🍰 Bánh sen vàng',45,'Ngọt thanh']])});
     for(let k=0;k<4;k++){ const a=A0+Math.PI*.5+.55+k*.42, p=at(a,15.5); AK.buildBilliardTable(W, p.x, y, p.z, yawOut(a), 0x7a0d1c, 'world', {parent:grp}); } }
-  { const y=FY[5], a=A0+Math.PI*.5, p=at(a,16); kt.add(AK.roundedBox(3.2,2.4,1.8,.2,2), M.dark, p.x, y+1.2, p.z, 0, yawOut(a), 0); kt.add(new THREE.BoxGeometry(2.8,1.4,.06), M.led, p.x-Math.cos(a)*.92, y+1.6, p.z-Math.sin(a)*.92, 0, yawOut(a), 0); circles.push({x:p.x,z:p.z,r:1.9,y0:y-.5,y1:y+3});
-    const ip=at(a,13.6); INTER.push({x:ip.x, z:ip.z, r:2.2, prio:.9, when:()=>Math.abs(P.y-y)<1.5, label:'🧠 QA Brain Core – phân tích tài liệu, sinh test case (E)', action:()=>{ const b=W.life && W.life.brain; if(b && b.open) b.open(); else toast('🧠 QA Brain đang khởi động…'); }});
-    for(let i=0;i<6;i++){ const ta=A0+.3+i*TAU/6, tp=at(ta,RB-1.4); kt.add(new THREE.CylinderGeometry(.07,.1,1.1,8), M.steel, tp.x, y+.55, tp.z); kt.add(new THREE.CylinderGeometry(.13,.17,.6,12), M.gold, tp.x, y+1.2, tp.z, Math.PI/2.3, yawOut(ta), 0); circles.push({x:tp.x,z:tp.z,r:.35,y0:y-.5,y1:y+1.6});
-      INTER.push({x:tp.x, z:tp.z, r:1.6, prio:.8, when:()=>Math.abs(P.y-y)<1.5, label:'🔭 Ống nhòm 360° – ngắm toàn thế giới (E)', action:()=>{ HOOK.scope={pos:at(ta,RB+.8,y+1.6), fov:30}; toast('🔭 Kéo chuột nhìn quanh 360°, lăn chuột phóng to · bấm E hoặc phím di chuyển để thôi', 3600); }}); } }
+  { const y=FY[5], a=A0, p=at(a,22.5); kt.add(AK.roundedBox(3.2,2.4,1.8,.2,2), M.dark, p.x, y+1.2, p.z, 0, yawOut(a), 0); kt.add(new THREE.BoxGeometry(2.8,1.4,.06), M.led, p.x-Math.cos(a)*.92, y+1.6, p.z-Math.sin(a)*.92, 0, yawOut(a), 0); circles.push({x:p.x,z:p.z,r:1.9,y0:y-.5,y1:y+3});
+    const ip=at(a,20); INTER.push({x:ip.x, z:ip.z, r:2.2, prio:.9, when:()=>Math.abs(P.y-y)<1.5, label:'🧠 QA Brain Core – phân tích tài liệu, sinh test case (E)', action:()=>{ const b=W.life && W.life.brain; if(b && b.open) b.open(); else toast('🧠 QA Brain đang khởi động…'); }});
+    for(let i=0;i<6;i++){ const ta=A0+.3+i*TAU/6, tp=at(ta,RF[5]-1.6); kt.add(new THREE.CylinderGeometry(.07,.1,1.1,8), M.steel, tp.x, y+.55, tp.z); kt.add(new THREE.CylinderGeometry(.13,.17,.6,12), M.gold, tp.x, y+1.2, tp.z, Math.PI/2.3, yawOut(ta), 0); circles.push({x:tp.x,z:tp.z,r:.35,y0:y-.5,y1:y+1.6});
+      INTER.push({x:tp.x, z:tp.z, r:1.6, prio:.8, when:()=>Math.abs(P.y-y)<1.5, label:'🔭 Ống nhòm 360° – ngắm toàn thế giới (E)', action:()=>{ HOOK.scope={pos:at(ta,RF[5]+.8,y+1.6), fov:30}; toast('🔭 Kéo chuột nhìn quanh 360°, lăn chuột phóng to · bấm E hoặc phím di chuyển để thôi', 3600); }}); } }
   kt.build();
-  const crown=new THREE.Group(); crown.position.set(C.x,161,C.z); grp.add(crown);
-  const gold2=new THREE.MeshStandardMaterial({color:0xffd27a, metalness:1, roughness:.2, emissive:0xffa000, emissiveIntensity:.3}); const gy=[17,15,13].map(r=>{ const m=new THREE.Mesh(new THREE.TorusGeometry(r,.45,12,96), gold2); crown.add(m); return m; });
-  const brainM=new THREE.MeshPhysicalMaterial({color:0xc9b8ff, roughness:.05, metalness:.1, transparent:true, opacity:.82, emissive:0x7a4cff, emissiveIntensity:.6, flatShading:true});
-  const brainG=new THREE.IcosahedronGeometry(1,2); brainG.scale(9,7.5,11); const brainMesh=new THREE.Mesh(brainG, brainM); crown.add(brainMesh);
-  const neur=new THREE.LineSegments(new THREE.EdgesGeometry(brainG), new THREE.LineBasicMaterial({color:0x6ad7ff, transparent:true, opacity:.8})); crown.add(neur);
-  let band=null; { const c=document.createElement('canvas'); c.width=2048; c.height=160; const g=c.getContext('2d'); g.fillStyle='#ffd77a'; g.font='900 120px "Segoe UI",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; for(let i=0;i<3;i++) g.fillText('QA · QC · QE', 341+i*683, 82);
-    const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; band=new THREE.Mesh(new THREE.CylinderGeometry(12.5,12.5,3,96,1,true), new THREE.MeshStandardMaterial({map:t, transparent:true, emissive:0xffc860, emissiveMap:t, emissiveIntensity:.8, side:THREE.DoubleSide, depthWrite:false})); band.position.y=5; crown.add(band); }
+  /* Đài Sen Kính – Vàng 8 cánh (sảnh đón thang máy sân thượng, che kín nóc thang + cột lõi) + bệ nâng quả cầu */
+  const kp=Kit(); MX.frost=new THREE.MeshStandardMaterial({color:0xe6f1f6, roughness:.22, metalness:.25, side:THREE.DoubleSide});
+  { const y=FY[5]; for(let k=0;k<8;k++){ const a=ENT+Math.PI/8+k*Math.PI/4; bakePetal(buildVolumetricLotusPetal(THREE,{...PT, glassMat:MX.frost, angle:-a, rBase:15.6, rBelly:18.6, rTip:13.6, yBase:0, yBelly:2.6, yTip:5.5, widthRad:.22, pedestal:false}), y, kp);
+      for(let i=0;i<8;i++){ const a0=a-.2+.4*i/8, a1=a-.2+.4*(i+1)/8, p=at(a0,16.4), q=at(a1,16.4); addSeg(p.x,p.z,q.x,q.z,.15,y-.3,y+5.2,'🪷 Đài Sen sân thượng – vào sảnh thang máy ở các khe giữa cánh'); } }
+    kp.add(new THREE.TorusGeometry(14.2,.28,10,96), MX.champ, C.x, y+5.5, C.z, Math.PI/2,0,0); { const gd=new THREE.CircleGeometry(14.4,96); gd.rotateX(-Math.PI/2); kp.add(gd, MX.pearl, C.x, y+5.55, C.z); const gu=new THREE.CircleGeometry(14.4,96); gu.rotateX(Math.PI/2); kp.add(gu, MX.pearl, C.x, y+5.5, C.z); }
+    kp.add(new THREE.CylinderGeometry(3.3,3.6,6.2,32), MX.pearl, C.x, y+8.6, C.z); kp.add(new THREE.CylinderGeometry(6.2,3.3,2.6,32), MX.champ, C.x, y+12.9, C.z); kp.add(new THREE.TorusGeometry(6.2,.22,8,64), MX.neon, C.x, y+14.2, C.z, Math.PI/2,0,0); }
+  const CY=FY[5]+15.5, crown=new THREE.Group(); crown.position.set(C.x,CY,C.z); grp.add(crown);
+  const gold2=new THREE.MeshStandardMaterial({color:0xd4af37, metalness:1, roughness:.2, emissive:0xffa000, emissiveIntensity:.3});
+  /* 3 vòng Astrolabe Gimbal tiết diện chữ nhật vát 0,6 × 0,35 – nghiêng lệch 3 trục, mỗi vòng tự quay quanh trục riêng */
+  const gimbal=(R)=>{ const sh=[[R-.15,-.3],[R+.15,-.3],[R+.18,-.25],[R+.18,.25],[R+.15,.3],[R-.15,.3],[R-.18,.25],[R-.18,-.25],[R-.15,-.3]].map(([x,y])=>new THREE.Vector2(x,y)); return new THREE.Mesh(new THREE.LatheGeometry(sh,128), gold2); };
+  const gy=[]; { const g1=new THREE.Group(); g1.rotation.x=.4; const r1=gimbal(15.5); r1.rotation.x=Math.PI/2; g1.add(r1); crown.add(g1);
+    const g2=new THREE.Group(); g2.rotation.z=-.45; const r2=gimbal(14); r2.rotation.x=Math.PI/2; g2.add(r2); crown.add(g2);
+    const g3=new THREE.Group(); g3.add(gimbal(12.6)); crown.add(g3); gy.push(r1,r2,g3); }
+  /* quả cầu 2 lớp: lõi năng lượng tím–hồng (nhịp thở) + vỏ tinh thể mạng nơ-ron xanh băng */
+  const coreM=new THREE.MeshStandardMaterial({color:0xd06bff, emissive:0xff4fd8, emissiveIntensity:1.2, roughness:.3, flatShading:true}), coreMesh=new THREE.Mesh(new THREE.IcosahedronGeometry(4.2,1), coreM); crown.add(coreMesh);
+  const brainM=new THREE.MeshPhysicalMaterial({color:0xbfe9ff, roughness:.03, metalness:.1, transparent:true, opacity:.38, emissive:0x3aa8ff, emissiveIntensity:.35, flatShading:true, depthWrite:false, side:THREE.DoubleSide});
+  const brainG=new THREE.IcosahedronGeometry(1,2); brainG.scale(9,7.5,10); const brainMesh=new THREE.Mesh(brainG, brainM); crown.add(brainMesh);
+  const neur=new THREE.LineSegments(new THREE.EdgesGeometry(brainG), new THREE.LineBasicMaterial({color:0x9fe8ff, transparent:true, opacity:.85})); crown.add(neur);
+  /* vành chữ QA · QC · QE ngoài cùng – chỉ mặt ngoài (FrontSide) nên luôn đọc thuận, không bị ngược chữ */
+  let band=null; { const c=document.createElement('canvas'); c.width=2048; c.height=160; const g=c.getContext('2d'); g.fillStyle='#ffe2a0'; g.font='900 120px "Segoe UI",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; for(let i=0;i<3;i++) g.fillText('QA · QC · QE', 341+i*683, 82);
+    const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; band=new THREE.Mesh(new THREE.CylinderGeometry(18.4,18.4,2.6,128,1,true), new THREE.MeshStandardMaterial({map:t, transparent:true, emissive:0xffc860, emissiveMap:t, emissiveIntensity:.9, side:THREE.FrontSide, depthWrite:false})); crown.add(band); }
+  /* 8 đỉnh tháp ánh sáng vàng ở mũi cánh sen trong + tia sáng hội tụ về tâm quả cầu */
+  const spireBeams=[]; { const sm2=new THREE.MeshBasicMaterial({color:0xfff1b8, transparent:true, opacity:.35, blending:THREE.AdditiveBlending, depthWrite:false}), bulb=new THREE.MeshStandardMaterial({color:0xfff3c4, emissive:0xffd77a, emissiveIntensity:1.4}), ctr=new THREE.Vector3(C.x,CY,C.z);
+    for(const tp of TIPS){ kp.add(new THREE.ConeGeometry(.42,3.4,8), MX.champ, tp.x, tp.y+1.7, tp.z); kp.add(new THREE.SphereGeometry(.38,10,8), bulb, tp.x, tp.y+3.5, tp.z);
+      const top=new THREE.Vector3(tp.x,tp.y+3.5,tp.z), d=ctr.clone().sub(top), g=new THREE.CylinderGeometry(.05,.05,d.length(),5,1,true); g.translate(0,d.length()/2,0); g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0), d.clone().normalize())); g.translate(top.x,top.y,top.z); const b=new THREE.Mesh(g, sm2); b.userData.dynamic=true; grp.add(b); spireBeams.push(b); } }
+  kp.build();
   const beamMat=new THREE.MeshBasicMaterial({color:0xc9b8ff, transparent:true, opacity:0, blending:THREE.AdditiveBlending, depthWrite:false, side:THREE.DoubleSide});
-  const beams=[]; for(let i=0;i<8;i++){ const b=new THREE.Mesh(new THREE.CylinderGeometry(.4,5,180,16,1,true), beamMat); b.geometry.translate(0,90,0); const p=at(i/8*TAU,RB+6); b.position.set(p.x,YT+2,p.z); grp.add(b); beams.push(b); }
-  makeLabel('🧠 QA/QC Brain Citadel', 'Tháp Liên Hoa Thần Kinh · 6 tầng · đi bộ thẳng vào', {h:1.0, x:C.x, y:182, z:C.z, fade:900});
+  const beams=[]; for(let i=0;i<8;i++){ const b=new THREE.Mesh(new THREE.CylinderGeometry(.4,5,180,16,1,true), beamMat); b.geometry.translate(0,90,0); const p=at(i/8*TAU+Math.PI/8,RPAD-12); b.position.set(p.x,YT+2,p.z); grp.add(b); beams.push(b); }
+  makeLabel('🧠 QA/QC Brain Citadel', 'Tháp Liên Hoa Thần Kinh · 6 tầng · đi bộ thẳng vào', {h:1.0, x:C.x, y:CY+22, z:C.z, fade:900});
 
   /* ============================== 5. SÂN BAY ĐỈNH MÂY ============================== */
   { const kk=Kit(), x0=820, x1=980, z0=50, z1=125, y=YT, cx=(x0+x1)/2, cz=(z0+z1)/2;
@@ -303,11 +389,11 @@ export function make(W, ctx){
   /* ============================== khung hình ============================== */
   let wasIn=false, saved=null;
   HOOK.onFrame.push((dt,T)=>{ const d=Math.hypot(P.x-C.x,P.z-C.z);
-    if(d<450){ gy[0].rotation.x+=dt*.35; gy[1].rotation.y+=dt*.45; gy[2].rotation.z+=dt*.55; brainMesh.rotation.y+=dt*.12; neur.rotation.y=brainMesh.rotation.y; const pulse=.5+.5*Math.sin(T*2.2); brainM.emissiveIntensity=.4+pulse*(.6+(W.night||0)*1.4); brainM.emissive.setHSL(.72-pulse*.12,.9,.5);
+    if(d<450){ gy[0].rotation.z+=dt*.35; gy[1].rotation.z-=dt*.45; gy[2].rotation.y+=dt*.25; brainMesh.rotation.y+=dt*.12; neur.rotation.y=brainMesh.rotation.y; coreMesh.rotation.y-=dt*.4; coreMesh.rotation.x+=dt*.15; const pulse=.5+.5*Math.sin(T*2.2); coreM.emissiveIntensity=.8+pulse*(1+(W.night||0)*1.6); coreMesh.scale.setScalar(.92+.12*pulse); brainM.emissiveIntensity=.25+pulse*.3+(W.night||0)*.6; MX.jet.opacity=.4+.2*Math.sin(T*3.1);
       band.rotation.y-=dt*.3; if(holo) holo.rotation.y+=dt*.4; if(spinRing) spinRing.rotation.z+=dt*.02; }
-    const n=W.night||0; gold2.emissiveIntensity=.25+n*.9; beamMat.opacity=n*.14; beams.forEach((b,i)=>{ const a=T*.15+i*TAU/8; b.rotation.set(Math.sin(a)*.3,0,Math.cos(a)*.3); });
-    const inside=d<RB-.4 && P.y>YT-1 && P.y<FY[5]-.6;
-    if(inside){ const f=Math.min(4,Math.max(0,Math.floor((P.y-YT+.3)/FH))); if(!wasIn){ saved=cam.dist; cam.dist=Math.min(cam.dist,6.5); } HOOK.camBox={x0:C.x-RB+1, x1:C.x+RB-1, z0:C.z-RB+1, z1:C.z+RB-1, y1:FY[f]+FH-.8}; wasIn=true; }
+    const n=W.night||0; gold2.emissiveIntensity=.25+n*.9; MX.neon.emissiveIntensity=.9+n*1.8; MX.cable.emissiveIntensity=.08+n*1.1; for(const b of spireBeams) b.material.opacity=.18+n*.5; beamMat.opacity=n*.14; beams.forEach((b,i)=>{ const a=T*.15+i*TAU/8; b.rotation.set(Math.sin(a)*.3,0,Math.cos(a)*.3); });
+    const inside=d<Rof(P.y+.5)-.4 && P.y>YT-1 && P.y<FY[5]-.6;
+    if(inside){ const f=Math.min(4,Math.max(0,Math.floor((P.y-YT+.3)/FH))); if(!wasIn){ saved=cam.dist; cam.dist=Math.min(cam.dist,6.5); } const Rc=Math.min(RF[f],RF[f+1]); HOOK.camBox={x0:C.x-Rc+1, x1:C.x+Rc-1, z0:C.z-Rc+1, z1:C.z+Rc-1, y1:FY[f]+FH-.8}; wasIn=true; }
     else if(wasIn){ wasIn=false; HOOK.camBox=null; if(saved) cam.dist=saved; } });
 
   const pl=at(ENT,RPAD-8); PLACES.push({icon:'🧠', name:'Đỉnh QA/QC Brain Citadel', sub:'Tháp Liên Hoa 6 tầng · cầu thang xoắn đôi ADN · khối não pha lê', go:()=>teleport(pl.x, pl.z, C.x, C.z)});
