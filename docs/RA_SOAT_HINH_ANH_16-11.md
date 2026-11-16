@@ -126,6 +126,11 @@ P1 = thấy rõ khi chơi, P2 = thấy khi để ý, P3 = nhỏ. Toạ độ (x,
 - ✅ Bệ đá Toà Giáo trình (`campus.js`, 22 × 28 m, cao 0,5 m) – đây chính là khối #b7ae9f gây lún 0,6 m ở Toà Giáo trình / Thư viện / Bảng nhiệm vụ / Bưu điện / Cầu Đảo Ngoại ngữ: thêm mặt đi + nâng vòng vàng cửa lên mặt bệ. Lún sâu: Toà Giáo trình 127→7, Bảng nhiệm vụ 104→17, Bưu điện 98→10, khối đá còn 0.
 - ✅ `cafe.js`: 2 khách cùng bàn rời quán cùng lúc → người thứ 2 đi sau 1,2 s (trước đứng chồng ở Phố ẩm thực (297, 38)).
 - ✔️ Báo nhầm, không cần sửa: Rạp QC Cinema (bậc ghế khớp, sàn trong bị ẩn), khán đài QC Arena (đi bộ thử từng 5 cm: từ ngoài bị chặn đúng, từ sân leo bậc bình thường – bước dò 1,5 m nhảy qua vách đầu khán đài dày 12 cm), Căn hộ Sky QC (đo lại: hết).
+- ✅ **Đường đèo ngắm biển** (`brain_citadel.js`, phiên chính giao thêm): đo dày toàn tuyến (19.800 điểm, mỗi 0,5 m × 5 vị trí ngang) – lún >5 cm 786→17, lún >8 cm 399→14, nổi >10 cm 1027→25; công cụ rà ở điểm "Đường đèo ngắm biển" 8→0, Phố săn mây 13→2, Xích đu vực 10→2.
+  - Đoạn nền đất: mặt đi lấy thẳng từ mặt nhựa vẽ (nội suy 2 mép theo dọc + ngang, kể cả mép vểnh/dốc) qua hàm độ cao vùng → bỏ ~320 tấm phẳng (tổng tấm sàn 5935→5632, nhẹ hơn). Cầu cạn: tấm mỗi 1 m + tấm lấp hình nêm ở khúc gấp.
+  - Làm mượt 2 khúc gãy: chỗ nối đường dẫn CBD → đèo (645, 107) gãy ~87° (mặt nhựa gập, lún 20–33 cm) và khúc kẹp tóc (1001, 302) bán kính ~2 m (lan can mép trong vắt chéo mặt đường). Cầu G6 tự nối vào điểm mới (628, 93) – đã đi thử G6 → đường dẫn êm.
+  - Cầu cạn sát vách: cắt đá trong 8 m quanh tim đường xuống dưới mặt cầu (trước đi mép cầu bị nhấc lên vách tới 24 m). Chân cầu kính cuối đèo phẳng bằng mặt đường.
+  - Còn lại: mảng ~4×6 m ở góc quay 90° từ đèo lên cầu kính trên đỉnh (845–850, 276–285), lún tối đa 0,27 m.
 - Tổng V1: lún sâu 2581→1668, tư thế 438→99. Tổng V2: vạch/lối lát 1123→99, lún sâu 1050→143, tư thế 48→33.
 - Còn lại (nhẹ, chưa sửa): nhân viên tư vấn `jobcenter.js` chân khuất trong bàn; nhân viên soát vé mũi giày lọt sàn 3–5 cm (`themepark.js`/`themedark.js`); 2 bé bóng rổ; vài đồ trang trí gộp lưới trắng cao 0,5 m (bồn cây/ghế) và hộp tối 0,8 m cạnh cổng (2,7; 1,8) chưa có va chạm.
 

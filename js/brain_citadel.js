@@ -32,7 +32,10 @@ export function make(W, ctx){
   const TH0=Math.PI+.30, TURN=-2.5*Math.PI, YEND=100, ROADW=10, ROAD=[];
   const pushPts=(pts,kind)=>{ for(let i=0;i<pts.length-1;i++){ const a=pts[i], b=pts[i+1], L=Math.hypot(b.x-a.x,b.z-a.z); for(let t=0;t<L;t+=1){ const k=t/L; ROAD.push({x:a.x+(b.x-a.x)*k, z:a.z+(b.z-a.z)*k, h:a.h+(b.h-a.h)*k, kind}); } } };
   const spiral=[]; { const N=900; for(let i=0;i<=N;i++){ const u=i/N, y=4+(YEND-4)*u, a=TH0+TURN*u, w=cliffW(a); let r=rInv(y,a); if(y<38) r+=18*ss(.35,.7,w)*(1-ss(30,38,y)); spiral.push({x:C.x+Math.cos(a)*r, z:C.z+Math.sin(a)*r, h:y, a}); } }
-  const S0=spiral[0], approach=[{x:570,z:86,h:2},{x:580,z:86,h:2},{x:600,z:90,h:2.5},{x:lerp(600,S0.x,.5),z:lerp(90,S0.z,.5),h:3.2},{x:S0.x,z:S0.z,h:4}];
+  { const K=5, src=spiral.map(p=>[p.x,p.z]); for(let i=6;i<spiral.length-6;i++){ let sx=0, sz=0, n=0; for(let k=-K;k<=K;k++){ const w=K+1-Math.abs(k); sx+=src[i+k][0]*w; sz+=src[i+k][1]*w; n+=w; } spiral[i].x=sx/n; spiral[i].z=sz/n; } }   /* S19g rà soát 16/11: làm mượt tuyến đèo (±10 m) – trước có khúc gãy bán kính ~2 m ở (1001, 302): mặt nhựa gập, lan can mép trong vắt chéo mặt đường */
+  const S0=spiral[0], approach=[{x:570,z:86,h:2},{x:580,z:86,h:2},{x:600,z:90,h:2.5}];
+  { const T=(()=>{ const b=spiral[4], l=Math.hypot(b.x-S0.x,b.z-S0.z)||1; return [(b.x-S0.x)/l, (b.z-S0.z)/l]; })(), D=[.981,.196], P0=[600,90], C1=[P0[0]+D[0]*15, P0[1]+D[1]*15], C2=[S0.x-T[0]*18, S0.z-T[1]*18];
+    for(let k=1;k<=14;k++){ const t=k/14, u=1-t, f=(i)=>u*u*u*P0[i]+3*u*u*t*C1[i]+3*u*t*t*C2[i]+t*t*t*(i?S0.z:S0.x); approach.push({x:f(0), z:f(1), h:lerp(2.5,4,t)}); } }   /* S19g rà soát 16/11: khúc nối đường dẫn → đường đèo trước gãy ~87° bán kính 0 (mặt nhựa gập chồng, chân lún 20–33 cm) → cong mượt, vào đèo đúng tiếp tuyến */
   pushPts(approach,'approach'); pushPts(spiral,'corniche');
   const SE=spiral[spiral.length-1], aE=Math.atan2(SE.z-C.z, SE.x-C.x), bridgeEnd={x:C.x+Math.cos(aE)*(RPAD-1), z:C.z+Math.sin(aE)*(RPAD-1), h:YT};
   const GB={a:{x:SE.x,z:SE.z,h:YEND}, b:bridgeEnd}; pushPts([GB.a,GB.b],'glass');
@@ -42,9 +45,9 @@ export function make(W, ctx){
   const natural=(x,z)=>{ const d=Math.hypot(x-C.x,z-C.z), a=Math.atan2(z-C.z,x-C.x); let h=prof(d,a); if(d>RPAD+4 && h>2) h+=(vn(x*.035,z*.035)-.5)*7*ss(RPAD+4,RPAD+30,d)*Math.min(1,h/20); return h; };
   const onDeck=q=>q.kind==='glass' || natural(q.x,q.z)<q.h-1.5;
   function hf(x,z){ let h=natural(x,z); const n=nearRoad(x,z); if(n){ const q=n.q, half=ROADW/2+.6;
-      if(q.kind==='glass'){ const t=((x-GB.a.x)*(GB.b.x-GB.a.x)+(z-GB.a.z)*(GB.b.z-GB.a.z))/((GB.b.x-GB.a.x)**2+(GB.b.z-GB.a.z)**2); if(t>.08 && t<.9 && n.d<16) h=Math.min(h, q.h-42+n.d*1.2); }
+      if(q.kind==='glass'){ const t=((x-GB.a.x)*(GB.b.x-GB.a.x)+(z-GB.a.z)*(GB.b.z-GB.a.z))/((GB.b.x-GB.a.x)**2+(GB.b.z-GB.a.z)**2); if(t>.08 && t<.9 && n.d<16) h=Math.min(h, q.h-42+n.d*1.2); else if(t<=.08 && n.d<half) h=q.h; }   /* S19g: chân cầu kính (cuối đèo) phẳng bằng mặt đường – trước vách lấn làm mép trái dải nhựa vểnh lên 2–3 m */
       else if(!onDeck(q)){ if(n.d<half) h=q.h; else if(n.d<half+12) h=lerp(q.h, h, ss(half, half+12, n.d)); }
-      else if(n.d<half && h>q.h-.35) h=q.h-.35; }   /* S19g rà soát 16/11: đoạn cầu cạn sát vách – đá không còn lòi lên mặt cầu (trước người đi mép cầu bị nhấc lên vách tới 24 m) */
+      else if(n.d<half+2.5 && h>q.h-.35) h=q.h-.35; }   /* S19g rà soát 16/11: đoạn cầu cạn sát vách – đá không còn lòi lên mặt cầu (trước người đi mép cầu bị nhấc lên vách tới 24 m) */
     if(Math.hypot(x-C.x,z-C.z)<RPAD+.5) h=YT; return h; }
   const X0=620, X1=1150, Z0=-100, Z1=450, RES=2, NX=Math.round((X1-X0)/RES)+1, NZ=Math.round((Z1-Z0)/RES)+1, H=new Float32Array(NX*NZ);
   for(let j=0;j<NZ;j++) for(let i=0;i<NX;i++) H[j*NX+i]=hf(X0+i*RES, Z0+j*RES);
@@ -74,16 +77,19 @@ export function make(W, ctx){
   /* 2 vòng đèo sát nhau trên mặt bằng (lệch cao) → một hàm độ cao không tả nổi cả 2 → đoạn đó dùng tấm sàn (tính theo độ cao chân) */
   const STACK=ROAD.map(q=>q.kind!=='glass' && near7(q.x,q.z,ROADW+1.5).some(r=>Math.abs(r.i-q.i)>25 && Math.abs(r.h-q.h)>1.2));
   /* S19g rà soát 16/11: mặt đi trên đường đèo (đoạn nền đất) = đúng mặt nhựa vẽ: nội suy 2 mép theo dọc + ngang tuyến */
-  const roadWalk=(x,z)=>{ let q=null, bd=1e9; for(const r of near7(x,z,7)){ const d=(r.x-x)**2+(r.z-z)**2; if(d<bd){ bd=d; q=r; } } if(!q || DECK[q.i] || STACK[q.i]) return null; let best=null;   /* gần nhất trong các điểm KHÔNG phải cầu kính (cuối đèo nối cầu kính) */
-    for(const j of [q.i-1, q.i]){ const a=ROAD[j], b=ROAD[j+1]; if(!a || !b || !RY[j] || !RY[j+1]) continue; const ex=b.x-a.x, ez=b.z-a.z, L2=ex*ex+ez*ez||1e-9, t=((x-a.x)*ex+(z-a.z)*ez)/L2; if(t<-.05 || t>1.05) continue;
-      const tc=t<0?0:t>1?1:t, nx=-(a.uz+(b.uz-a.uz)*tc), nz=a.ux+(b.ux-a.ux)*tc, nl=Math.hypot(nx,nz)||1, o=((x-a.x-ex*tc)*nx+(z-a.z-ez*tc)*nz)/nl; if(Math.abs(o)>ROADW/2) continue;
+  const roadWalk=(x,z)=>{ const cand=near7(x,z,7); let q=null, bd=1e9; for(const r of cand){ const d=(r.x-x)**2+(r.z-z)**2; if(d<bd){ bd=d; q=r; } } if(!q || DECK[q.i] || STACK[q.i]) return null; let best=null;   /* gần nhất trong các điểm KHÔNG phải cầu kính (cuối đèo nối cầu kính) */
+    for(const j of [q.i-1, q.i]){ const a=ROAD[j], b=ROAD[j+1]; if(!a || !b || DECK[j] || !RY[j] || !RY[j+1]) continue; const ex=b.x-a.x, ez=b.z-a.z, L2=ex*ex+ez*ez||1e-9, t=((x-a.x)*ex+(z-a.z)*ez)/L2, tc=t<0?0:t>1?1:t; if(Math.abs(t-tc)*Math.sqrt(L2)>1) continue;   /* cuối dải nhựa (nối cầu kính): cho vượt đầu đoạn 1 m */
+      const nx=-(a.uz+(b.uz-a.uz)*tc), nz=a.ux+(b.ux-a.ux)*tc, nl=Math.hypot(nx,nz)||1, o=((x-a.x-ex*tc)*nx+(z-a.z-ez*tc)*nz)/nl; if(Math.abs(o)>ROADW/2) continue;
       const u=o/ROADW+.5, y=lerp(lerp(RY[j][0],RY[j][1],u), lerp(RY[j+1][0],RY[j+1][1],u), tc); best=best==null?y:Math.max(best,y); }
     return best; };
   EXT.h=(x,z)=>{ const h=hAt(x,z), r=roadWalk(x,z); return r==null ? h : h==null ? r : Math.max(h, r); };
   const k1=Kit(), lampPts=[], railMask=new Set();
   for(let i=0;i<ROAD.length-1;i+=2){ const q=ROAD[i], nx=-q.uz, nz=q.ux, deck=onDeck(q), yaw=Math.atan2(q.ux,q.uz);
     for(const j of [i, i+1]){ const r=ROAD[j]; if(!r || r.kind==='glass' || (!DECK[j] && !STACK[j] && inExt(r))) continue;   /* S19g rà soát 16/11: đoạn nền đất → mặt đi lấy từ EXT.h (đúng mặt nhựa vẽ, kể cả mép nâng / dốc); cầu cạn: tấm mỗi 1 m (trước 2 m → chân lún 5–17 cm ở đoạn dốc/cong) */
-      addPlat(r.x, r.z, Math.atan2(r.ux,r.uz), ROADW/2+.2, .62, RY[j] ? (RY[j][0]+RY[j][1])/2-.005 : r.h+.045); }
+      addPlat(r.x, r.z, Math.atan2(r.ux,r.uz), ROADW/2+.2, .62, RY[j] ? (RY[j][0]+RY[j][1])/2-.005 : r.h+.045);
+      const r2=ROAD[j+1]; if(r2 && r2.kind!=='glass' && RY[j] && RY[j+1]) for(const u of [.1,.3,.5,.7,.9]){   /* khúc gấp: mép ngoài quét rộng hơn tấm → lấp hình nêm giữa 2 mặt cắt */
+        const o=(u-.5)*ROADW, ax=r.x-r.uz*o, az=r.z+r.ux*o, bx=r2.x-r2.uz*o, bz=r2.z+r2.ux*o, L=Math.hypot(bx-ax,bz-az); if(L<1.1) continue;
+        addPlat((ax+bx)/2, (az+bz)/2, Math.atan2(bx-ax,bz-az), 1.15, L/2+.15, (lerp(RY[j][0],RY[j][1],u)+lerp(RY[j+1][0],RY[j+1][1],u))/2-.005); } }
     if(deck && q.kind!=='glass'){ k1.add(new THREE.BoxGeometry(ROADW+.8,.7,2.05), M.concrete, q.x, q.h-.38, q.z, 0, yaw, 0);
       if(i%14===0){ const g0=(hAt(q.x,q.z)??SEA); const hh=q.h-.7-Math.min(g0,SEA+1)+2; k1.add(new THREE.CylinderGeometry(.9,1.1,hh,14), M.concrete, q.x, q.h-.7-hh/2, q.z); circles.push({x:q.x, z:q.z, r:1.1, y0:-20, y1:q.h-1}); } }
     for(const side of [-1,1]){ const ox=nx*(ROADW/2+.15)*side, oz=nz*(ROADW/2+.15)*side; const outer=((q.x+ox-C.x)**2+(q.z+oz-C.z)**2)>((q.x-C.x)**2+(q.z-C.z)**2);
