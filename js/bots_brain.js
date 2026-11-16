@@ -47,7 +47,7 @@ export function make(W, B){
   const LINES_OWNER=['Mời bạn ngồi, mây sắp tràn qua đèo rồi ☁️','Cà phê muối view biển đây!','Hôm nay biển lặng, ngắm hoàng hôn đẹp lắm!'], LINES_GUEST=['Mây trôi dưới chân luôn nè ☁️','Chụp tấm này đăng story mới được 📸','Biển xanh quá trời!'];
   cafes.slice(0, LOW?6:9).forEach((c,i)=>{ const rx=c.road?c.road[0]:c.x, rz=c.road?c.road[1]:c.z, ox=c.x-rx, oz=c.z-rz, L=Math.hypot(ox,oz)||1, ux=ox/L, uz=oz/L, out=Math.atan2(ux,uz);
     const chef=i===3, own=person(i%2?sF(5101+i):sM(5101+i), chef?{shirt:0xffffff, pants:0x1b1d22, shoe:0x111111}:{shirt:[0x6b3e26,0x2a9d8f,0xc94f7c][i%3], pants:0x1b1d22, shoe:0x111111}, chef?'🦐 Đầu bếp hải sản':(i%2?'☕ Chủ quán săn mây':'☕ Barista quán săn mây'), '#ffb547');
-    own.x=c.x-ux*2.2; own.z=c.z-uz*2.2; own.y=c.y; own.hd=out;
+    own.x=c.x-ux*1.7; own.z=c.z-uz*1.7; own.y=c.y; own.hd=out+Math.PI;   /* S19g rà soát 16/11: đứng sau quầy, quay ra phía khách (trước đứng lọt trong khối quầy) */
     own.upd=(dt,T)=>{ put(own); if(((T*.35+own.ph)%6)<2.6) pose(own,'bar',T); if(R()<dt*.006) say(own, chef?pick(['Tôm hùm nướng phô mai vừa ra lò! 🦞','Mực một nắng nướng than đây!']):pick(LINES_OWNER), 2.8); };
     if(i%2===0){ const g=person(i%4?sF(5201+i):sM(5201+i), {shirt:[0xff6b6b,0x46d39a,0xffd23f,0x4fc3ff,0xff9fc4][i%5], pants:0x2a3a5a, shoe:0x1b1d21}, '☁️ Khách săn mây', '#ffd23f');
       g.x=c.x+ux*3.2; g.z=c.z+uz*3.2; g.y=c.y; g.hd=out; if(i%4===0) attach(g, cam());

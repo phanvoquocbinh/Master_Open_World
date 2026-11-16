@@ -9,6 +9,15 @@ import { makePoser } from './pose.js';
 
 export function makeCafeLife(W){
   const {THREE, scene, makeActor, makeLabel, removeLabel, groundAt, lerpAngle, HOOK, P, me} = W;
+  // S19g rà soát 16/11: chân người ngồi – đùi gần ngang, cẳng chân chéo ra trước đủ dài để gót chạm đúng sàn
+  // (tư thế 'sit' của pose.js để cẳng chân thẳng đứng → ghế thấp thì bàn chân tọt 10–18 cm xuống sàn, hông đặt thấp thì đùi lún vào đệm)
+  const _la=new THREE.Vector3(), _lb=new THREE.Vector3(), _ld=new THREE.Vector3(), _lF=new THREE.Vector3(), _lR=new THREE.Vector3(), _lq=new THREE.Quaternion(), _lp=new THREE.Quaternion(), _lw=new THREE.Quaternion();
+  const aimL=(B,C,d)=>{ B.getWorldPosition(_la); C.getWorldPosition(_lb); _lb.sub(_la).normalize(); _lq.setFromUnitVectors(_lb, d); B.getWorldQuaternion(_lw); B.parent.getWorldQuaternion(_lp); _lw.premultiply(_lq); B.quaternion.copy(_lp.invert().multiply(_lw)); B.updateMatrixWorld(true); };
+  function legsToFloor(po, g, floorY){ const bn=po && po.bones; if(!bn || !bn.LeftUpLeg) return; g.updateMatrixWorld(true); g.getWorldDirection(_lF); _lF.y=0; if(_lF.lengthSq()<1e-6) return; _lF.normalize(); _lR.set(-_lF.z,0,_lF.x);
+    for(const [s,k] of [['Left',-1],['Right',1]]){ const UL=bn[s+'UpLeg'], LG=bn[s+'Leg'], FT=bn[s+'Foot']; if(!UL || !LG || !FT) continue;
+      aimL(UL, LG, _ld.copy(_lF).addScaledVector(_lR, k*.06).setY(.03).normalize());
+      LG.getWorldPosition(_la); FT.getWorldPosition(_lb); const L2=_la.distanceTo(_lb), drop=Math.min(L2*.98, Math.max(.05, _la.y-(floorY+.09))), fw=Math.sqrt(L2*L2-drop*drop);
+      aimL(LG, FT, _ld.copy(_lF).multiplyScalar(fw).setY(-drop).normalize()); const TO=bn[s+'ToeBase']; if(TO) aimL(FT, TO, _ld.copy(_lF).setY(-.5).normalize()); } }
   const CAFES=W.CAFES||[];
   if(!W.people || !CAFES.length) return null;
   const R=Math.random, pick=a=>a[Math.floor(R()*a.length)], rr=(a,b)=>a+R()*(b-a);
@@ -90,9 +99,9 @@ export function makeCafeLife(W){
     else if(b.state==='walk'){ guestStep(b, dt); a.play(b.path.length?'walk':'idle'); }
     else if(b.state==='order'){ b.t+=dt; a.play('idle'); b.h=lerpAngle(b.h, b.ord.face, 1-Math.exp(-dt*6));
       if(b.t>3.2){ if(b===b.G.guests[0]) say(b, 'Cảm ơn nha! 😊', 1.8); const ap=approachOf(b.seat); b.state='walk'; b.path=[...b.cafe_via(ap), [ap.x, ap.z]]; b.next=()=>sitDown(b); } }
-    if(b.state==='sit'){ a.g.position.set(b.seat.x, b.seat.y+.04-b.hipsH, b.seat.z); a.g.rotation.set(0, b.seat.rot, 0); }
+    if(b.state==='sit'){ a.g.position.set(b.seat.x, b.seat.y+.12-b.hipsH, b.seat.z); a.g.rotation.set(0, b.seat.rot, 0); }   // S19g: +0,12 (trước +0,04 → đùi lún 13–23 cm vào đệm)
     else { a.g.position.set(b.x, groundAt(b.x,b.z), b.z); a.g.rotation.set(0, b.h, 0); }
-    if(a.root.visible){ a.mixer.update(dt); if(b.state==='sit') b.poser.apply(b.G && b.G.cafe.eat ? 'eat' : 'sit', T); } }
+    if(a.root.visible){ a.mixer.update(dt); if(b.state==='sit'){ b.poser.apply(b.G && b.G.cafe.eat ? 'eat' : 'sit', T); legsToFloor(b.poser, a.g, b.seat.floor ?? groundAt(b.seat.x, b.seat.z)); } } }
 
   // nói chuyện trong nhóm
   function updTalk(G, dt){ const C=G.cafe, gs=G.guests, sat=gs.every(b=>b.state==='sit'); if(!sat) return;

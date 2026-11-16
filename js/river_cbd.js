@@ -32,8 +32,9 @@ export async function make(W, ctx){
   const inWaterBand=(x,z)=>(z>RIV.z0 && z<RIV.z1) || CAN.some(c=>x>c.x0 && x<c.x1);
   // cầu: {x0,x1,z0,z1, kind, name} – mặt cầu bằng cao độ đất (đi thẳng qua), lan can 2 mép
   const BR=[];
-  for(const r of ROADS) if(r.ew) for(const c of CAN) BR.push({x0:c.x0-1, x1:c.x1+1, z0:r.c-r.w/2-SW, z1:r.c+r.w/2+SW, ew:true, kind:'stone', name:`Cầu ${r.name} qua kênh ${c.x0<400?'Đông Hoa':'Tây Hoa'}`});
-  for(const r of ROADS) if(!r.ew) BR.push({x0:r.c-r.w/2-SW, x1:r.c+r.w/2+SW, z0:RIV.z0-1, z1:RIV.z1+1, ew:false, kind:'arch', name:`Cầu Vòm Đỏ ${r.c<300?'Tây':'Đông'}`});
+  // đoạn đường nối cổng (gate) không dựng cầu: trước đây sinh 2 cầu vòm đỏ thừa qua sông (x 373–403, 435–465 – đầu vòm chạm đất ở z≈129) + 4 cầu đá thừa qua kênh
+  for(const r of ROADS) if(r.ew && !r.gate) for(const c of CAN) BR.push({x0:c.x0-1, x1:c.x1+1, z0:r.c-r.w/2-SW, z1:r.c+r.w/2+SW, ew:true, kind:'stone', name:`Cầu ${r.name} qua kênh ${c.x0<400?'Đông Hoa':'Tây Hoa'}`});
+  for(const r of ROADS) if(!r.ew && !r.gate) BR.push({x0:r.c-r.w/2-SW, x1:r.c+r.w/2+SW, z0:RIV.z0-1, z1:RIV.z1+1, ew:false, kind:'arch', name:`Cầu Vòm Đỏ ${r.c<300?'Tây':'Đông'}`});
   BR.push({x0:276, x1:284, z0:RIV.z0-1, z1:RIV.z1+1, ew:false, kind:'glass', name:'Cầu Kính Hai Tầng'});
   BR.push({x0:437, x1:443, z0:RIV.z0-1, z1:RIV.z1+1, ew:false, kind:'glow', name:'Cầu Ánh Sáng'});
   const onBridge=(x,z,pad=0)=>BR.some(b=>x>b.x0-pad && x<b.x1+pad && z>b.z0-pad && z<b.z1+pad);

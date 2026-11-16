@@ -63,7 +63,8 @@ export function buildDowntown(W, interior){
   // bó vỉa nổi dọc mép đường (mọi đoạn trong Downtown + Phường – ward.js không vẽ lại)
   { const curbM=colorMat(0xd7d3ca,{roughness:.8});
     for(const sg of NET.segs) for(const pc of NET.pieces(sg)) for(const sd of [-1,1]){ const off=sd*(HWR+.12), a=pc.a+(pc.ja?0:.0), b=pc.b; if(b-a<1) continue;
-      const c = sg.ns ? mesh(box(.24,.14,b-a), curbM, sg.x+off,.07,(a+b)/2) : mesh(box(b-a,.14,.24), curbM, (a+b)/2,.07,sg.z+off); c.castShadow=false; } }
+      const c = sg.ns ? mesh(box(.24,.14,b-a), curbM, sg.x+off,.07,(a+b)/2) : mesh(box(b-a,.14,.24), curbM, (a+b)/2,.07,sg.z+off); c.castShadow=false;
+      if(sg.ns) addPlat(sg.x+off, (a+b)/2, 0, .13, (b-a)/2, .14); else addPlat((a+b)/2, sg.z+off, 0, (b-a)/2, .13, .14); } }   // S19g rà soát 16/11: bước lên bó vỉa (trước chân xuyên dải bó vỉa 14 cm)
   /* ---------- 3. Cầu dây văng nối đảo chính ---------- */
   {
     const X0=46.5, X1=D.x0+1, len=X1-X0, mid=(X0+X1)/2, BW=D.bridgeW;

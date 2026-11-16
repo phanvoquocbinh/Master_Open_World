@@ -116,6 +116,19 @@ P1 = thấy rõ khi chơi, P2 = thấy khi để ý, P3 = nhỏ. Toạ độ (x,
   - Căn hộ Sky QC (sàn hiên quán cao 0,48 m).
 - **[P3] `luxury.js` – xe đại gia:** đầu/cổ hành khách chạm mái kính 3–4 cm. `jobcenter.js` – nhân viên tư vấn ngồi chân lọt trong bàn (khuất, không thấy).
 
+**➡️ KẾT QUẢ B4 (S19g làm thay phiên chính, 16/11 sáng – đã chạy lại 2 công cụ toàn V1 + V2):**
+- ✅ Vỉa hè/sàn sảnh V1: Trung tâm Việc làm 154→0 ô lún sâu (`jobcenter.js` thêm mặt đi sàn sảnh), Phường Khởi Nghiệp 108→0, Nhà trọ 98→1, Downtown 81→33 (`downtown.js` thêm mặt đi bó vỉa).
+- ✅ 19 bot đứng chồng ở (0,0,0): đặt chỗ ngay khi tạo (`arena.js` cầu thủ + trọng tài; `park.js` người + chó giấu ở y −200 tới khi khu chạy; `highland.js` người dạo phố). Còn 0 chỗ chồng ở cổng.
+- ✅ Khách ngồi quán (`cafe.js`, gồm quán ven biển `resort.js`): hông +0,12 m + duỗi cẳng chân xuống sàn (`legsToFloor`) → hết đùi xuyên đệm.
+- ✅ `park.js`: người đánh cờ lùi ghế 0,12 m + duỗi chân; chị Mai quầy nước đứng ra ngoài quầy 1 m.
+- ✅ `transit.js`: 2 người chờ buýt nhận 2 chỗ đứng riêng.
+- ✅ Brain: `brain_citadel.js` mặt đi Phố săn mây theo mặt vẽ (+4,5 cm), `bots_brain.js` chủ quán đứng sau quầy 1,7 m. Lối kính men vách: soi lại thấy mặt đi phủ đủ bề rộng lối → báo nhầm (kính trong bị bỏ qua khi dò).
+- ✅ Bệ đá Toà Giáo trình (`campus.js`, 22 × 28 m, cao 0,5 m) – đây chính là khối #b7ae9f gây lún 0,6 m ở Toà Giáo trình / Thư viện / Bảng nhiệm vụ / Bưu điện / Cầu Đảo Ngoại ngữ: thêm mặt đi + nâng vòng vàng cửa lên mặt bệ. Lún sâu: Toà Giáo trình 127→7, Bảng nhiệm vụ 104→17, Bưu điện 98→10, khối đá còn 0.
+- ✅ `cafe.js`: 2 khách cùng bàn rời quán cùng lúc → người thứ 2 đi sau 1,2 s (trước đứng chồng ở Phố ẩm thực (297, 38)).
+- ✔️ Báo nhầm, không cần sửa: Rạp QC Cinema (bậc ghế khớp, sàn trong bị ẩn), khán đài QC Arena (đi bộ thử từng 5 cm: từ ngoài bị chặn đúng, từ sân leo bậc bình thường – bước dò 1,5 m nhảy qua vách đầu khán đài dày 12 cm), Căn hộ Sky QC (đo lại: hết).
+- Tổng V1: lún sâu 2581→1668, tư thế 438→99. Tổng V2: vạch/lối lát 1123→99, lún sâu 1050→143, tư thế 48→33.
+- Còn lại (nhẹ, chưa sửa): nhân viên tư vấn `jobcenter.js` chân khuất trong bàn; nhân viên soát vé mũi giày lọt sàn 3–5 cm (`themepark.js`/`themedark.js`); 2 bé bóng rổ; vài đồ trang trí gộp lưới trắng cao 0,5 m (bồn cây/ghế) và hộp tối 0,8 m cạnh cổng (2,7; 1,8) chưa có va chạm.
+
 ---
 ## C. Gợi ý chung cho mọi phiên
 1. Mặt đường/lối lát/sàn vẽ lệch cao hơn mặt đi để khỏi nhấp nháy → chân lún.

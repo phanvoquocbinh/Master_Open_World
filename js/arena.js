@@ -166,9 +166,9 @@ transformed.y += abs(sin(uT*2.2 + ph))*0.05 + uCheer*abs(sin(uT*9.0 + ph))*0.42 
   function mkPlayer(team, i){ if(!W.people) return null; const [hx,hz,role]=FORM[i], side=team===0?-1:1, seed=(team*97+i*31+7)>>>0;
     const k=W.people.kit(seed+300,{outfit: role==='gk' ? (team? {...kitGK, shirt:0x7aa2ff} : kitGK) : team? kitB : kitA}); if(!k) return null;
     const a=W.makeActor(k.gl,{name:`${team?'Bug United':'QC FC'} · ${role==='gk'?'Thủ môn':'Số '+(i+5)}`, height:k.h, face:0, clips:k.clips, compact:false, dot:team?'#ff5a6e':'#12a594'});
-    const p={a, team, role, home:{x:SC.x+(team===0? hx : -hx), z:SC.z+(team===0? hz : -hz)}, x:0, z:0, vx:0, vz:0, h:0}; p.x=p.home.x; p.z=p.home.z; a.play('idle',0); players.push(p); return p; }
+    const p={a, team, role, home:{x:SC.x+(team===0? hx : -hx), z:SC.z+(team===0? hz : -hz)}, x:0, z:0, vx:0, vz:0, h:0}; p.x=p.home.x; p.z=p.home.z; a.g.position.set(p.x,.02,p.z); a.play('idle',0); players.push(p); return p; }   // S19g rà soát 16/11: đứng đúng chỗ ngay từ đầu (trước chồng ở gốc 0,0 = cổng xuất hiện)
   for(let t=0;t<2;t++) for(let i=0;i<5;i++) mkPlayer(t,i);
-  const ref=(()=>{ if(!W.people) return null; const k=W.people.kit(9911,{outfit:{shirt:0x111111, pants:0x111111, shorts:true}}); const a=W.makeActor(k.gl,{name:'Trọng tài', height:k.h, face:0, clips:k.clips, compact:false, dot:'#ffd23f'}); a.play('idle',0); return {a, x:SC.x, z:SC.z+6}; })();
+  const ref=(()=>{ if(!W.people) return null; const k=W.people.kit(9911,{outfit:{shirt:0x111111, pants:0x111111, shorts:true}}); const a=W.makeActor(k.gl,{name:'Trọng tài', height:k.h, face:0, clips:k.clips, compact:false, dot:'#ffd23f'}); a.g.position.set(SC.x,.02,SC.z+6); a.play('idle',0); return {a, x:SC.x, z:SC.z+6}; })();
   const ballTex=canvasTex(128,64,(c,w,h)=>{ c.fillStyle='#fafafa'; c.fillRect(0,0,w,h); c.fillStyle='#111'; for(let i=0;i<10;i++){ c.beginPath(); c.arc((i%5)*w/5+(i>4?w/10:0)+8, i>4?h*.72:h*.28, 7, 0, TAU); c.fill(); } });
   const ballM=new THREE.Mesh(new THREE.SphereGeometry(.22,16,12), new THREE.MeshStandardMaterial({map:ballTex, roughness:.45})); ballM.castShadow=true; ballM.userData.dynamic=true; scene.add(ballM);
   const ball={x:SC.x, z:SC.z, y:.22, vx:0, vz:0, vy:0, owner:null, cd:0};

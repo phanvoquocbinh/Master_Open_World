@@ -24,7 +24,7 @@ export function makeJobCenter(W, ctx){
   for(const L of (labels||[]).slice()) if(L.el && L.el.textContent && L.el.textContent.includes('Trung tâm Việc làm') && Math.abs((L.x??L.pos?.x??193)-193)<1) removeLabel(L);
   const k=Kit(), M={ glass:new THREE.MeshStandardMaterial({color:0x9fd2f5, roughness:.03, metalness:.85, transparent:true, opacity:.28, depthWrite:false, side:THREE.DoubleSide}), steel:sm(0xcfd5dc,.25,.9), white:sm(0xf3f3f1,.4), dark:sm(0x1c2028,.5,.3), floor:sm(0xe7e4dc,.18,.05), navy:sm(0x16324f,.5), gold:sm(0xffcf6a,.3,1,{emissive:0xffa820, emissiveIntensity:.2}) };
   // sảnh kính 2 tầng
-  k.add(new THREE.BoxGeometry(X1-X0,.12,Z1-Z0), M.floor, CX,Y+.06,CZ);
+  k.add(new THREE.BoxGeometry(X1-X0,.12,Z1-Z0), M.floor, CX,Y+.06,CZ); W.addPlat && W.addPlat(CX, CZ, 0, (X1-X0)/2, (Z1-Z0)/2, Y+.12);   // S19g rà soát 16/11: sàn sảnh đi được (trước chân lún 12 cm)
   const door=3.2, DZ=Z1;   // cửa chính nhìn ra phố Phường (phía Nam)
   for(const [a,b] of [[X0,CX-door/2],[CX+door/2,X1]]){ k.add(new THREE.BoxGeometry(b-a,HH,.08), M.glass, (a+b)/2,Y+HH/2,DZ); boxes.push({x0:a, x1:b, z0:DZ-.15, z1:DZ+.15}); }
   k.add(new THREE.BoxGeometry(door,HH-3.2,.08), M.glass, CX,Y+3.2+(HH-3.2)/2,DZ);

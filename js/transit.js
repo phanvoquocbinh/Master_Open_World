@@ -158,8 +158,8 @@ export function makeTransit(W, ctx){
   const riders=[];
   function spawnRider(stop){ if(!W.people || stop.waiting.length>=2) return; const seed=(R()*1e6)|0, k=W.people.kit(seed,{}); if(!k) return;
     const a=W.makeActor(k.gl,{name:`${W.people.nameOf(seed)} · chờ xe buýt`, height:k.h, face:0, clips:k.clips, compact:false, dot:'#9fb3c8'});
-    const lx=-1.2+stop.waiting.length*1.3+R()*.3, p=stop.wl(lx, .1+R()*.2); a.g.position.set(p.x, groundH(p.x,p.z), p.z); a.g.rotation.y=Math.atan2(Math.cos(stop.h), -Math.sin(stop.h))+(R()-.5)*.6;
-    a.play('idle',0); a.mixer.update(R()*3); const r={a, stop, t:0}; stop.waiting.push(r); riders.push(r); }
+    const used=new Set(stop.waiting.map(w=>w.slot)), slot=[0,1].find(s=>!used.has(s)) ?? 0, lx=-1.2+slot*1.3+R()*.3, p=stop.wl(lx, .1+R()*.2);   /* S19g rà soát 16/11: chọn ô trống (trước người mới có thể đứng chồng lên người đang chờ) */ a.g.position.set(p.x, groundH(p.x,p.z), p.z); a.g.rotation.y=Math.atan2(Math.cos(stop.h), -Math.sin(stop.h))+(R()-.5)*.6;
+    a.play('idle',0); a.mixer.update(R()*3); const r={a, stop, t:0, slot}; stop.waiting.push(r); riders.push(r); }
   function dropRider(r){ const a=r.a; a.g.parent && a.g.parent.remove(a.g); if(a.label) W.removeLabel ? W.removeLabel(a.label) : 0; W.ACTORS && W.ACTORS.delete(a); r.stop.waiting.splice(r.stop.waiting.indexOf(r),1); riders.splice(riders.indexOf(r),1); }
   STOPS.forEach(s=>{ if(R()<.8) spawnRider(s); if(R()<.35) spawnRider(s); s.respawn=8+R()*20; });
 

@@ -726,11 +726,21 @@ transformed.x+=sin(uT*1.3+aSw.x)*aSw.y; transformed.z+=cos(uT*1.05+aSw.x*1.7)*aS
     if(k.look && k.look.width){ a.root.scale.x*=k.look.width; a.root.scale.z*=k.look.width; }
     if(LOW) a.g.traverse(m=>{ if(m.isMesh) m.castShadow=false; });
     a.play('idle',0); a.mixer.update(0); const po=makePoser(THREE,a); const anchor=new THREE.Object3D(); anchor.position.y=k.h+.75; a.g.add(anchor);
+    a.g.position.set(0,-200,0);   // S19g rà soát 16/11: giấu dưới đất tới khi put()/sitAt() đặt chỗ (trước đứng chồng ở gốc 0,0 = cổng xuất hiện V1)
     const o={a, po, hipsH:po.hipsHeight(), anchor, h:k.h, x:0, z:0, hd:0, bubble:null, bubbleT:0, col:{x:1e9, z:1e9, r:.3, owner:true}}; circles.push(o.col); NPC.push(o); return o; }
   function say(o,t,sec=3.2){ if(!o) return; if(o.bubble){ removeLabel(o.bubble); o.bubble=null; } o.bubble=makeLabel(t, null, {fs:38, h:.26, follow:o.anchor, bg:'rgba(255,255,255,.92)', color:'#1b2233', fade:30}); o.bubbleT=sec; }
   function put(o, y){ o.a.g.position.set(o.x, y===undefined?groundAt(o.x,o.z):y, o.z); o.a.g.rotation.set(0,o.hd,0); o.col.x=o.x; o.col.z=o.z; }
   function sitAt(o, x, y, z, rot){ o.a.g.position.set(x, y+.04-o.hipsH, z); o.a.g.rotation.set(0,rot,0); o.col.x=x; o.col.z=z; o.sitting=true; }
   const vis=o=>o.a.g.visible && o.a.root.visible;
+  // S19g rà soát 16/11: chân người ngồi – đùi gần ngang, cẳng chân chéo ra trước đủ dài để gót chạm đúng sàn
+  // (tư thế 'sit' của pose.js để cẳng chân thẳng đứng → ghế thấp thì bàn chân tọt 10–18 cm xuống sàn, hông đặt thấp thì đùi lún vào đệm)
+  const _la=new THREE.Vector3(), _lb=new THREE.Vector3(), _ld=new THREE.Vector3(), _lF=new THREE.Vector3(), _lR=new THREE.Vector3(), _lq=new THREE.Quaternion(), _lp=new THREE.Quaternion(), _lw=new THREE.Quaternion();
+  const aimL=(B,C,d)=>{ B.getWorldPosition(_la); C.getWorldPosition(_lb); _lb.sub(_la).normalize(); _lq.setFromUnitVectors(_lb, d); B.getWorldQuaternion(_lw); B.parent.getWorldQuaternion(_lp); _lw.premultiply(_lq); B.quaternion.copy(_lp.invert().multiply(_lw)); B.updateMatrixWorld(true); };
+  function legsToFloor(po, g, floorY){ const bn=po && po.bones; if(!bn || !bn.LeftUpLeg) return; g.updateMatrixWorld(true); g.getWorldDirection(_lF); _lF.y=0; if(_lF.lengthSq()<1e-6) return; _lF.normalize(); _lR.set(-_lF.z,0,_lF.x);
+    for(const [s,k] of [['Left',-1],['Right',1]]){ const UL=bn[s+'UpLeg'], LG=bn[s+'Leg'], FT=bn[s+'Foot']; if(!UL || !LG || !FT) continue;
+      aimL(UL, LG, _ld.copy(_lF).addScaledVector(_lR, k*.06).setY(.03).normalize());
+      LG.getWorldPosition(_la); FT.getWorldPosition(_lb); const L2=_la.distanceTo(_lb), drop=Math.min(L2*.98, Math.max(.05, _la.y-(floorY+.09))), fw=Math.sqrt(L2*L2-drop*drop);
+      aimL(LG, FT, _ld.copy(_lF).multiplyScalar(fw).setY(-drop).normalize()); const TO=bn[s+'ToeBase']; if(TO) aimL(FT, TO, _ld.copy(_lF).setY(-.5).normalize()); } }
   // tư thế riêng của công viên (yoga, dưỡng sinh, cầu lông, xà đơn): "ngắm" xương theo hướng thế giới như pose.js (không sửa file dùng chung)
   const _pa=new THREE.Vector3(), _pb=new THREE.Vector3(), _pd=new THREE.Vector3(), _pqa=new THREE.Quaternion(), _ppq=new THREE.Quaternion(), _pwq=new THREE.Quaternion(), _PF=new THREE.Vector3(), _PR=new THREE.Vector3(), _PU=new THREE.Vector3(0,1,0);
   function aimB(bn, name, child, f, u, r){ const Bn=bn[name], Cn=bn[child]; if(!Bn||!Cn) return; Bn.getWorldPosition(_pa); Cn.getWorldPosition(_pb); _pb.sub(_pa).normalize();
@@ -773,7 +783,7 @@ transformed.x+=sin(uT*1.3+aSw.x)*aSw.y; transformed.z+=cos(uT*1.05+aSw.x*1.7)*aS
   walker=person(sF(621), {shirt:0xf3c6d3, pants:0x3b4a6b, shoe:0xffffff}, '🐕 Cô Hạnh · dắt chó', '#ff8fc2'); Object.assign(walker,{s:DECK.len*.08, v:0, stop:0, stopT:14, sayCD:0});
   try{ const gl=await new GLTFLoader().loadAsync('assets/models/Fox.glb'); const root=W.SkeletonUtils.clone(gl.scene); root.traverse(o=>{ if(o.isMesh){ o.castShadow=!LOW; o.frustumCulled=false; } });
     const g=new THREE.Group(); g.add(root); root.updateMatrixWorld(true); let bb=new THREE.Box3().setFromObject(root); root.scale.multiplyScalar(.5/(bb.max.y-bb.min.y||1)); root.updateMatrixWorld(true); bb=new THREE.Box3().setFromObject(root); root.position.y-=bb.min.y;
-    g.userData.dynamic=true; scene.add(g); const mixer=new THREE.AnimationMixer(root), acts={}; for(const c of gl.animations) acts[c.name]=mixer.clipAction(c);
+    g.userData.dynamic=true; g.position.set(0,-200,0); scene.add(g); const mixer=new THREE.AnimationMixer(root), acts={}; for(const c of gl.animations) acts[c.name]=mixer.clipAction(c);
     const anchor=new THREE.Object3D(); anchor.position.y=.8; g.add(anchor); makeLabel('🐕 Bé Vàng', null, {fs:40, h:.22, follow:anchor, dot:'#ff8fc2', fade:24});
     dog={g, mixer, acts, cur:null, x:0, z:0, h:0, col:{x:1e9,z:1e9,r:.28,owner:true}, play(k){ if(this.cur===k || !acts[k]) return; acts[k].reset().fadeIn(.25).play(); if(this.cur && acts[this.cur]) acts[this.cur].fadeOut(.25); this.cur=k; }};
     circles.push(dog.col); if(W.BLOBSRC) W.BLOBSRC.push({o:g, s:.6});
@@ -867,12 +877,12 @@ transformed.x+=sin(uT*1.3+aSw.x)*aSw.y; transformed.z+=cos(uT*1.05+aSw.x*1.7)*aS
   let chessT=6, chessTurn=0;
   const CHESS_L=[['Chiếu tướng! 😤','Khoan, khoan… để tôi tính đã.'],['Ăn xe nè!','Trời ơi, sơ hở rồi!'],['Đi pháo đầu!','Thì tôi lên mã.'],['Ván này ông thua chắc!','Chưa biết đâu nha ông Ba!'],['Hết cờ rồi, ván mới!','Ván này tôi gỡ lại!']];
   function chessWatch(){ const [a,b]=chessBots; say(a, pick(['Ngồi xem đi cháu, ván này căng lắm!','Cháu biết đánh cờ tướng không?','Xem kỹ nước này nè cháu!']), 3); setTimeout(()=>say(b, pick(['Đừng mách nước nha cháu 😄','Ông Ba đánh hay lắm đó!']), 3), 1600); }
-  function updChess(dt, T){ CHESS.stools.slice(0,2).forEach((st,i)=>{ const o=chessBots[i]; sitAt(o, st.x, .45, st.z, st.rot); o.a.play('idle'); if(!vis(o)) return; o.a.mixer.update(dt); o.po.apply('sit', T); if(chessTurn===i && (T*.5+i*2)%7<1.2) o.po.apply('present', T); });
+  function updChess(dt, T){ CHESS.stools.slice(0,2).forEach((st,i)=>{ const o=chessBots[i], ux=(st.x-CHESS.table.x)/.82, uz=(st.z-CHESS.table.z)/.82; sitAt(o, st.x+ux*.12, .53, st.z+uz*.12, st.rot); o.a.play('idle'); if(!vis(o)) return; o.a.mixer.update(dt); o.po.apply('sit', T); legsToFloor(o.po, o.a.g, .02); if(chessTurn===i && (T*.5+i*2)%7<1.2) o.po.apply('present', T); });   /* S19g rà soát: ngồi lùi về mép sau đôn, hông cao hơn mặt đôn, chân duỗi ra trước (trước cẳng chân thòng xuyên trong đôn đá) */
     chessT-=dt; if(chessT<=0){ const l=pick(CHESS_L); say(chessBots[chessTurn], l[0], 3); const other=chessBots[1-chessTurn]; setTimeout(()=>say(other, l[1], 3), 1700); chessTurn=1-chessTurn; chessT=10+R()*10; } }
 
   // 🍦 bán kem · 🧃 quầy nước · ☕ pha chế · 🎤 ca sĩ sân khấu
   CART.o=person(sM(681), {shirt:0xff6b8a, pants:0x2a2a2a, shoe:0x222222, style:'cap'}, '🍦 Anh Phát · bán kem', '#ff6b8a'); CART.o.x=CART.x; CART.o.z=CART.z+.85; CART.o.hd=Math.PI;
-  KIOSK.o=person(sF(682), {shirt:0x2a9d8f, pants:0x222222, shoe:0x222222}, '🧃 Chị Mai · quầy nước', '#2a9d8f'); KIOSK.o.x=KIOSK.x; KIOSK.o.z=KIOSK.z+.45; KIOSK.o.hd=Math.PI;
+  KIOSK.o=person(sF(682), {shirt:0x2a9d8f, pants:0x222222, shoe:0x222222}, '🧃 Chị Mai · quầy nước', '#2a9d8f'); KIOSK.o.x=KIOSK.x; KIOSK.o.z=KIOSK.z+1.0; KIOSK.o.hd=Math.PI;   /* S19g rà soát: đứng sau quầy (trước +0,45 → đứng lọt trong khối quầy) */
   CAFE.staff=person(sF(683), {shirt:0x6b3e26, pants:0x222222, shoe:0x222222}, '☕ Chị Ngân · pha chế', '#ffb547'); CAFE.staff.x=225.85; CAFE.staff.z=115.5; CAFE.staff.hd=-Math.PI/2;
   STAGE.o=person(sM(684), {shirt:0x3a0ca3, pants:0x1d1f24, shoe:0xffffff}, '🎸 Anh Toàn · hát acoustic', '#ffd166'); STAGE.o.x=199; STAGE.o.z=168.9; STAGE.o.hd=Math.PI;
   const VENDORS=[[CART.o,['Kem đây! Kem mát lạnh đây! 🍦','Kem dừa ngon nhất công viên nè!']],[KIOSK.o,['Trà đá, nước mía đây!','Nước dừa tươi mát lạnh nè!']],[CAFE.staff,['Cà phê sữa đá ngon nhất bờ hồ!','Ngồi bàn dù ngắm thuyền nha mọi người!']]];

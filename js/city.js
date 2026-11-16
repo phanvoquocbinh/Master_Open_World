@@ -55,7 +55,7 @@ export function buildCity(W){
     const p=CITY.places.tower, g=new THREE.Group(); g.position.set(p.x, 0, p.z); g.rotation.y=p.rot; scene.add(g);
     const glass=new THREE.MeshPhysicalMaterial({color:0x1d3f63, metalness:.55, roughness:.06, envMapIntensity:1.25, clearcoat:1, clearcoatRoughness:.05});
     const frame=new THREE.MeshStandardMaterial({color:0xe8ecf1, metalness:.6, roughness:.3});
-    mesh(box(24,.6,20), MAT.stone, 0,.3,0, g);
+    mesh(box(24,.6,20), MAT.stone, 0,.3,0, g); addPlat(p.x, p.z, p.rot, 12, 10, .6);   // S19g rà soát 16/11: đứng được trên bệ đá tháp (trước đi xuyên vào bệ, lún 0,58 m)
     mesh(box(16,6,12), glass, 0,3.6,0, g);
     mesh(box(16.4,.4,12.4), frame, 0,6.7,0, g);
     for(const sx of [-1,1]) for(const sz of [-1,1]) mesh(box(.5,6,.5), frame, sx*8,3.6,sz*6, g);

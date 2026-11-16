@@ -23,7 +23,7 @@ export function makeCampus(W, L){
   const TW={x:-58, z:0, w:16, d:22, floors:7};   // mặt tiền hướng +x (vào tâm đảo)
   { const gy=Math.max(.02, groundH(TW.x,TW.z)), g=new THREE.Group(); g.position.set(TW.x,gy,TW.z); scene.add(g); const H=TW.floors*3.6;
     const glass=new THREE.MeshPhysicalMaterial({color:0x2b5f8a, metalness:.5, roughness:.08, envMapIntensity:1.2, clearcoat:1}), frame=colorMat(0xeef1f5,{roughness:.3,metalness:.5});
-    mesh(box(TW.w+6,.5,TW.d+6), MAT.stone, 0,.25,0, g); mesh(box(TW.w,H,TW.d), glass, 0,.5+H/2,0, g);
+    mesh(box(TW.w+6,.5,TW.d+6), MAT.stone, 0,.25,0, g); W.addPlat && W.addPlat(TW.x, TW.z, 0, (TW.w+6)/2, (TW.d+6)/2, gy+.5);   /* S19g rà soát 16/11: đứng trên bệ đá (trước đi xuyên, lún 0,5 m) */ mesh(box(TW.w,H,TW.d), glass, 0,.5+H/2,0, g);
     for(let y=.5+3.6;y<H;y+=3.6) mesh(box(TW.w+.25,.25,TW.d+.25), frame, 0,y,0, g);
     for(const sz of [-1,-.5,0,.5,1]) for(const sx of [-1,1]) mesh(box(.3,H,.3), frame, sx*TW.w/2,.5+H/2,sz*TW.d/2, g);
     mesh(box(TW.w+1,1.2,TW.d+1), frame, 0,H+1.1,0, g);
@@ -34,7 +34,7 @@ export function makeCampus(W, L){
     for(const s of [-1,1]) mesh(new THREE.CylinderGeometry(.1,.1,3.4,10), frame, TW.w/2+2.9,2.2,s*3, g);
     boxes.push({x0:TW.x-TW.w/2-.3, x1:TW.x+TW.w/2+.3, z0:TW.z-TW.d/2-.3, z1:TW.z+TW.d/2+.3});
     const door={x:TW.x+TW.w/2+2.3, z:TW.z}; TW.door=door;
-    const rg=new THREE.Mesh(new THREE.RingGeometry(1,1.25,48), new THREE.MeshBasicMaterial({color:0xffd23f, transparent:true, opacity:.8, depthWrite:false, side:THREE.DoubleSide})); rg.rotation.x=-Math.PI/2; rg.position.set(door.x,gy+.06,door.z); rg.userData.dynamic=true; scene.add(rg); TW.ring=rg;
+    const rg=new THREE.Mesh(new THREE.RingGeometry(1,1.25,48), new THREE.MeshBasicMaterial({color:0xffd23f, transparent:true, opacity:.8, depthWrite:false, side:THREE.DoubleSide})); rg.rotation.x=-Math.PI/2; rg.position.set(door.x,gy+.53,door.z); rg.userData.dynamic=true; scene.add(rg); TW.ring=rg;
     makeLabel('📚 Toà Giáo trình', '17 khoá · 6 tầng lớp học · miễn phí', {h:.9, x:TW.x, y:H+5, z:TW.z, fade:160});
     INTER.push({x:door.x, z:door.z, r:2, label:'📚 Vào Toà Giáo trình (E)', action:()=>enter('tower',0)});
   }
