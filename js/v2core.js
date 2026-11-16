@@ -19,6 +19,8 @@ export const ZONES = {
 };
 // bot theo vùng (Pha 9) – các vùng khác tự nạp bot trong module của mình
 export const BOTS=[['abyssal','./bots_abyssal.js']];
+// module dùng chung toàn thế giới (nạp sau cùng, nhận W + kết quả mọi vùng): giao thông, an ninh, sự kiện… → W[key]
+export const EXTRAS=[['traffic','./v2traffic.js']];
 export const inZone=(z,x,zz,pad=0)=>x>=z.x0-pad && x<=z.x1+pad && zz>=z.z0-pad && zz<=z.z1+pad;
 export const zoneAt=(x,z)=>Object.entries(ZONES).find(([k,Z])=>inZone(Z,x,z))?.[0]||null;
 
@@ -50,4 +52,5 @@ export async function loadModules(W, ctx){ const res={};
     catch(e){ if(!/Failed to fetch|Cannot find module|error loading dynamically imported/i.test(String(e))) console.warn('[V2]', key, e); } }
   /* bot của từng vùng nạp SAU khi mọi vùng dựng xong (file bot nhận W và kết quả module vùng) */
   for(const [key,file] of BOTS){ if(!res[key]) continue; try{ const m=await import(file); if(m && m.make) W[key+'Bots']=await m.make(W, res[key]); }catch(e){ console.warn('[V2 bots]', key, e); } }
+  for(const [key,file] of EXTRAS){ try{ const m=await import(file); if(m && m.make){ const r=await m.make(W, res); if(r) W[key]=r; } }catch(e){ console.warn('[V2 extra]', key, e); } }
   return res; }
