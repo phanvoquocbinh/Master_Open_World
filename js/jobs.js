@@ -92,7 +92,7 @@ export function makeJobs(W, L){
     {name:'Bánh mì ốp la', steps:['🥖 Bánh mì','🍳 Trứng','🥒 Dưa leo','🌶️ Tương ớt']},
     {name:'Bún chả', steps:['🍜 Bún','🍖 Chả nướng','🥬 Rau sống','🥣 Nước mắm']},
     {name:'Cơm tấm sườn', steps:['🍚 Cơm','🍖 Sườn nướng','🍳 Trứng','🥣 Nước mắm']},
-    {name:'Gỏi cuốn', steps:['🫓 Bánh tráng','🍜 Bún','🦐 Tôm','🥬 Rau sống']},
+    {name:'Gỏi cuốn', steps:['🥙 Bánh tráng','🍜 Bún','🦐 Tôm','🥬 Rau sống']},
   ];
   const ING=[...new Set(DISHES.flatMap(d=>d.steps))];
   function openKitchen(){ if(!job||job.kind!=='kitchen') return;

@@ -148,7 +148,7 @@ uniform float uT;`).replace('#include <begin_vertex>', `#include <begin_vertex>
     CK.O.add(B(1.8,.09,.48), M.stoneG, x,y0+.445,z, rot); addSeg(x-r[0]*.88,z-r[1]*.88,x+r[0]*.88,z+r[1]*.88,.25); reserve(x,z,.95,tag);
     const seats=W.addBench ? W.addBench({x:x+f[0]*.02, z:z+f[1]*.02, rot, len:1.75, y:y0+.49, floor:y0+.02, label:'🪑 Ngồi ghế đá (E · C)'}) : [-1,1].map(s=>W.addSeat({x:x+r[0]*s*.45+f[0]*.02, z:z+r[1]*s*.45+f[1]*.02, rot, y:y0+.49, floor:y0+.02, label:'🪑 Ngồi ghế đá (E · C)'})); SEATLIST.push(...seats); return {x,z,rot,f,r,seats}; }
   // ghế gỗ nguyên khối (kiểu thân gỗ xẻ đôi) – dọc sàn gỗ ven hồ
-  function logBench(x,z,rot,tag='ghế gỗ khối', label='🪵 Ngồi ghế gỗ ven hồ (E · C)'){ const f=[Math.sin(rot),Math.cos(rot)], r=[Math.cos(rot),-Math.sin(rot)];
+  function logBench(x,z,rot,tag='ghế gỗ khối', label='🌲 Ngồi ghế gỗ ven hồ (E · C)'){ const f=[Math.sin(rot),Math.cos(rot)], r=[Math.cos(rot),-Math.sin(rot)];
     CK.O.add(B(2.0,.22,.55), M.log, x,.38,z, rot); for(const s of [-1,1]) CK.O.add(B(.42,.27,.5), M.log, x+r[0]*s*.7,.14,z+r[1]*s*.7, rot); CK.O.add(B(2.0,.38,.14), M.log, x-f[0]*.24,.68,z-f[1]*.24, rot, -.12);
     addSeg(x-r[0]*.98,z-r[1]*.98,x+r[0]*.98,z+r[1]*.98,.3); reserve(x,z,1.05,tag);
     const seats=W.addBench ? W.addBench({x, z, rot, len:1.9, y:.5, floor:.06, label}) : [-1,1].map(s=>W.addSeat({x:x+r[0]*s*.48, z:z+r[1]*s*.48, rot, y:.5, floor:.06, label})); SEATLIST.push(...seats); return {x,z,rot,f,r,seats}; }
@@ -312,14 +312,14 @@ uniform float uT;`).replace('#include <begin_vertex>', `#include <begin_vertex>
       g.fillStyle='#bfe0a0'; g.fillRect(X(PK.x0),Y(PK.z0),X(PK.x1)-X(PK.x0),Y(PK.z1)-Y(PK.z0)); fillP(PTO,'#b5533e'); fillP(PTI,'#bfe0a0'); fillP(PBW,'#a77b4f'); fillP(PRIM,'#4f9fc0');
       g.fillStyle='#5aa246'; g.beginPath(); g.arc(X(ISL.x),Y(ISL.z),X(ISL.x+ISL.r)-X(ISL.x),0,7); g.fill(); g.fillStyle='#6b4a2a'; g.fillRect(X(bxa),Y(BZ-1.6),X(bxb)-X(bxa),Y(BZ+1.6)-Y(BZ-1.6)); g.fillRect(X(IBX-1.3),Y(zA),X(IBX+1.3)-X(IBX-1.3),Y(zB)-Y(zA)); g.fillRect(X(DX0),Y(DZ-1.2),X(DXS)-X(DX0),Y(DZ+1.2)-Y(DZ-1.2));
       g.font='20px "Segoe UI Emoji","Segoe UI",sans-serif'; g.textBaseline='middle';
-      for(const [t,x,z] of [['🦸',169,23],['🚲',217,18],['💪',229,24],['🌸',183,45.5],['🌺',214.7,44],['🧘',176.6,74],['🏸',221.5,75.5],['⛲',PW.x,PW.z],['🔎',PE.x,PE.z],['🏯',ISL.x,ISL.z],['🎋',176,125],['☕',222.5,125],['🦢',211,DZ],['🎤',199,168],['🛝',169.5,176],['🧺',228,176],['🥤',207,20],['🍦',189,19.6]]) g.fillText(t,X(x),Y(z));
+      for(const [t,x,z] of [['🦸',169,23],['🚲',217,18],['💪',229,24],['🌸',183,45.5],['🌺',214.7,44],['🧘',176.6,74],['🏸',221.5,75.5],['⛲',PW.x,PW.z],['🔎',PE.x,PE.z],['🏯',ISL.x,ISL.z],['🎋',176,125],['☕',222.5,125],['🦢',211,DZ],['🎤',199,168],['🎢',169.5,176],['🧺',228,176],['🥤',207,20],['🍦',189,19.6]]) g.fillText(t,X(x),Y(z));
       g.fillStyle='#c0392b'; g.font='600 14px "Segoe UI",sans-serif'; g.fillText('📍 Bạn đang ở đây',X(199),Y(20.5)); });
     const bx=192.8, bz=18.6; for(const s of [-1,1]) CK.O.add(B(.08,2.0,.08), M.iron, bx,1.0,bz+s*.62); CK.O.add(B(.06,1.95,1.36), M.iron, bx,1.65,bz);
     const mp=new THREE.Mesh(new THREE.PlaneGeometry(1.22,1.88), new THREE.MeshStandardMaterial({map:mapT, roughness:.6})); mp.position.set(bx+.035,1.65,bz); mp.rotation.y=Math.PI/2; scene.add(mp);
     boxes.push({x0:bx-.1, x1:bx+.1, z0:bz-.72, z1:bz+.72}); reserve(bx,bz,.75,'bảng sơ đồ',false);
     INTER.push({x:bx+.95, z:bz, r:1.3, prio:.4, label:'🗺️ Xem sơ đồ công viên (E)', action:openMapInfo});
     // biển chỉ dẫn nhiều hướng
-    const arrowT=ctex(256,320,(g,w,h)=>{ g.fillStyle='#fff'; g.fillRect(0,0,w,h); const rows=[['#2f7fd8','◀ Cosplay · Sân chơi 🛝'],['#35b26a','Thể dục 💪 · Xe đạp ▶'],['#8a6440','▼ Đảo thủy đình 🏯'],['#1d6b5f','▼ Cầu Vòm · Café ☕'],['#c0392b','▼▼ Sân khấu Cỏ 🎤']];
+    const arrowT=ctex(256,320,(g,w,h)=>{ g.fillStyle='#fff'; g.fillRect(0,0,w,h); const rows=[['#2f7fd8','◀ Cosplay · Sân chơi 🎢'],['#35b26a','Thể dục 💪 · Xe đạp ▶'],['#8a6440','▼ Đảo thủy đình 🏯'],['#1d6b5f','▼ Cầu Vòm · Café ☕'],['#c0392b','▼▼ Sân khấu Cỏ 🎤']];
       rows.forEach(([c,t],i)=>{ g.fillStyle=c; g.fillRect(4,4+i*63,w-8,58); g.fillStyle='#fff'; g.font='700 21px "Segoe UI Emoji","Segoe UI",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText(t,w/2,33+i*63); }); });
     const sx=205.2, sz=17.4; CK.O.add(CY(.05,.05,2.8,8), M.iron, sx,1.4,sz); CK.O.add(B(.9,1.12,.04), new THREE.MeshStandardMaterial({map:arrowT, roughness:.6}), sx,2.05,sz, Math.PI); circles.push({x:sx,z:sz,r:.12}); reserve(sx,sz,.3,'biển chỉ dẫn',false);
     for(const [x0,x1] of [[188.6,191.6],[206.4,209.4]]) flowerBed(rect(x0,16.3,x1,17.1), 'bồn hoa cổng', [0xff4f6d,0xffd23f,0xffffff,0xff9fc4]);
@@ -337,7 +337,7 @@ uniform float uT;`).replace('#include <begin_vertex>', `#include <begin_vertex>
       ['⛲','Đài phun nước ước nguyện','Đầu cầu phía Tây – ném 1 xu ước một điều.'],
       ['☕','Café Bên Hồ + bàn cờ','Bờ Đông thuỳ Nam, cạnh bến thuyền.'],
       ['🎤','Sân khấu Cỏ','Bờ Nam – tối có nhạc acoustic, lên hát được.'],
-      ['🛝','Sân chơi · 🧺 dã ngoại','2 góc phía Nam ngoài đường chạy.'],
+      ['🎢','Sân chơi · 🧺 dã ngoại','2 góc phía Nam ngoài đường chạy.'],
       ['🦸','Góc cosplay','Góc Tây Bắc, sát vỉa hè Đại lộ Hồ Ngọc.'],
     ].map(([i,n,d])=>`<div class="card"><div class="ic">${i}</div><b>${n}</b><small>${d}</small></div>`).join('')}</div>`; }
 
@@ -351,7 +351,7 @@ uniform float uT;`).replace('#include <begin_vertex>', `#include <begin_vertex>
     const KINDS=[
       {name:'Máy nước suối & trà', icon:'💧', col:M.blue, items:[['💧 Nước suối',6,null,0,'Mát lạnh, giải khát tức thì.'],['🍵 Trà xanh không độ',10,null,0,'Thanh mát, ít ngọt.'],['🍋 Trà chanh mật ong',12,'energy',5,'+5 phút chạy nhanh.']]},
       {name:'Máy nước ngọt & tăng lực', icon:'🥤', col:M.red, items:[['🥤 Nước ngọt có ga',10,null,0,'Sảng khoái!'],['⚡ Nước tăng lực',15,'energy',10,'+10 phút chạy nhanh (cộng dồn).'],['🧃 Nước ép cam',12,'energy',4,'Vitamin C + 4 phút chạy nhanh.']]},
-      {name:'Máy cà phê & sữa', icon:'☕', col:M.green, items:[['☕ Cà phê sữa lon',12,'coffee',10,'+20% thưởng quiz trong 10 phút.'],['🥛 Sữa tươi',9,null,0,'Bổ dưỡng.'],['🧋 Trà sữa đóng chai',14,'coffee',6,'+20% thưởng quiz 6 phút.']]}];
+      {name:'Máy cà phê & sữa', icon:'☕', col:M.green, items:[['☕ Cà phê sữa lon',12,'coffee',10,'+20% thưởng quiz trong 10 phút.'],['🥛 Sữa tươi',9,null,0,'Bổ dưỡng.'],['🥤 Trà sữa đóng chai',14,'coffee',6,'+20% thưởng quiz 6 phút.']]}];
     KINDS.forEach((k,i)=>{ const x=203.0+i*1.15, z=21.75;   // mặt máy quay về phía Bắc (quảng trường cổng)
       CK.O.add(B(1.0,1.95,.78), k.col, x,1.0,z); CK.O.add(B(1.04,.12,.82), M.ironB, x,2.02,z); CK.O.add(B(1.0,.08,.78), M.ironB, x,.04,z);
       const fr=new THREE.PlaneGeometry(.9,1.6); const uv=fr.attributes.uv; for(let j=0;j<uv.count;j++) uv.setX(j,(i+uv.getX(j))/3);
@@ -372,7 +372,7 @@ uniform float uT;`).replace('#include <begin_vertex>', `#include <begin_vertex>
     CK.O.add(B(2.4,.45,.05), new THREE.MeshStandardMaterial({map:ksT, roughness:.6}), kx,2.2,kz+.57);
     for(let i=0;i<5;i++) CK.O.add(CY(.06,.05,.16,8), [M.orange,M.green,M.red,M.white,M.yellow][i], kx-.9+i*.45,1.19,kz-.2);
     boxes.push({x0:kx-1.35, x1:kx+1.35, z0:kz-.7, z1:kz+.7}); reserve(kx,kz,1.3,'quầy nước',false);
-    const MENU=[['🧊 Trà đá',4,null,0,'Đặc sản vỉa hè, mát lạnh.'],['🎋 Nước mía tắc',10,'energy',4,'Ngọt mát + 4 phút chạy nhanh.'],['🥥 Nước dừa tươi',15,'energy',8,'+8 phút chạy nhanh.'],['🫘 Sữa đậu nành',8,null,0,'Thơm béo.'],['☕ Cà phê muối',16,'coffee',12,'+20% thưởng quiz 12 phút.']];
+    const MENU=[['🧊 Trà đá',4,null,0,'Đặc sản vỉa hè, mát lạnh.'],['🎋 Nước mía tắc',10,'energy',4,'Ngọt mát + 4 phút chạy nhanh.'],['🥥 Nước dừa tươi',15,'energy',8,'+8 phút chạy nhanh.'],['🥜 Sữa đậu nành',8,null,0,'Thơm béo.'],['☕ Cà phê muối',16,'coffee',12,'+20% thưởng quiz 12 phút.']];
     INTER.push({x:kx, z:kz-1.45, r:1.5, prio:.6, label:'🧃 Quầy nước Cổng Bắc – gọi nước (E)', action:()=>openShop('🧃 Quầy nước Cổng Bắc', MENU, ()=>{ if(KIOSK.o) say(KIOSK.o, pick(['Nước của bạn đây! 😊','Uống ngon nha!','Cảm ơn bạn nhiều!']), 2.4); })});
     zl('🥤 Góc giải khát', 'Máy bán nước tự động · quầy nước · xe kem', {x:206.5, y:3.4, z:20.4}); }
   const CART={x:188.9, z:19.6};
@@ -479,7 +479,7 @@ uniform float uT;`).replace('#include <begin_vertex>', `#include <begin_vertex>
     const jg=[]; for(let i=0;i<7;i++){ const a=i/6*TAU, r=i<6?1.75:0, g=new THREE.ConeGeometry(i<6?.07:.1, 1, 8, 1, true); g.translate(0,.5,0); if(i<6){ g.rotateZ(-.32); g.rotateY(-a); } g.translate(fx+Math.cos(a)*r, 0, fz+Math.sin(a)*r); jg.push(g.toNonIndexed()); }
     const jets=new THREE.Mesh(mergeGeometries(jg,false), new THREE.MeshStandardMaterial({color:0xdff4ff, transparent:true, opacity:.55, roughness:.1, envMapIntensity:1.5, depthWrite:false}));
     jets.position.y=.33; jets.userData.dynamic=true; jets.castShadow=false; scene.add(jets); FOUNT.jets=jets;
-    INTER.push({x:fx+3.7, z:fz+1.9, r:1.6, prio:.5, label:'🪙 Ném đồng xu ước nguyện (E · 1 💰)', action:()=>askPay(1,'🪙 Ném 1 đồng xu xuống đài phun nước và ước một điều',()=>{ if(!spend(1)) return; burst(new THREE.Vector3(fx,1,fz),[0xffd23f,0xffffff,0x8fd3ff],40,2,1.2,-6,.1); toast(pick(['🪙 Tõm! Chúc bạn sprint này không còn bug nào 🍀','🪙 Điều ước đã gửi: lương tăng, deadline giãn 😄','🪙 Ước gì test case nào cũng Pass ✅']),3600); })});
+    INTER.push({x:fx+3.7, z:fz+1.9, r:1.6, prio:.5, label:'💰 Ném đồng xu ước nguyện (E · 1 💰)', action:()=>askPay(1,'💰 Ném 1 đồng xu xuống đài phun nước và ước một điều',()=>{ if(!spend(1)) return; burst(new THREE.Vector3(fx,1,fz),[0xffd23f,0xffffff,0x8fd3ff],40,2,1.2,-6,.1); toast(pick(['💰 Tõm! Chúc bạn sprint này không còn bug nào 🍀','💰 Điều ước đã gửi: lương tăng, deadline giãn 😄','💰 Ước gì test case nào cũng Pass ✅']),3600); })});
     for(const s of [-1,1]) woodBench(fx, fz+s*5.2, s<0?0:Math.PI, 'ghế đài phun nước', '⛲ Ngồi ngắm đài phun nước (E · C)', false);
     zl('⛲ Đài phun nước ước nguyện', 'Đầu cầu phía Tây', {x:fx, y:2.8, z:fz}); }
   { const x=PE.x, z=PE.z, bronze=colorMat(0x8a6a3a,{roughness:.35, metalness:.8});
@@ -518,7 +518,7 @@ uniform float uT;`).replace('#include <begin_vertex>', `#include <begin_vertex>
         for(const s of [-1,1]){ const cx=tx+s*.82; CK.O.add(B(.42,.05,.42), M.wood, cx,.45,tz); CK.O.add(B(.05,.45,.42), M.wood, cx+s*.2,.68,tz); for(const dz of [-.17,.17]) CK.O.add(B(.04,.45,.04), M.ironB, cx,.22,tz+dz);
           grp.seats.push(W.addSeat({x:cx, z:tz, rot:s>0?-Math.PI/2:Math.PI/2, y:.48, floor:0, label:'☕ Ngồi bàn café ven hồ (E · C)'})); circles.push({x:cx+s*.12, z:tz, r:.2}); }
         CAFE.groups.push(grp); }
-    const MENU=[['☕ Cà phê sữa đá',12,'coffee',10,'+20% thưởng quiz 10 phút.'],['🧋 Trà sữa trân châu',16,null,0,'Ngọt ngào ngắm hồ.'],['🥥 Nước dừa',15,'energy',8,'+8 phút chạy nhanh.'],['🍰 Bánh flan',10,null,0,'Mềm mịn mát lạnh.'],['🍵 Trà sen',14,null,0,'Thơm hương sen hồ.']];
+    const MENU=[['☕ Cà phê sữa đá',12,'coffee',10,'+20% thưởng quiz 10 phút.'],['🥤 Trà sữa trân châu',16,null,0,'Ngọt ngào ngắm hồ.'],['🥥 Nước dừa',15,'energy',8,'+8 phút chạy nhanh.'],['🍰 Bánh flan',10,null,0,'Mềm mịn mát lạnh.'],['🍵 Trà sen',14,null,0,'Thơm hương sen hồ.']];
     INTER.push({x:kx-1.75, z:kz, r:1.6, prio:.6, label:'☕ Café Bên Hồ – gọi món (E)', action:()=>openShop('☕ Café Bên Hồ', MENU, ()=>{ if(CAFE.staff) say(CAFE.staff, pick(['Có ngay! ☕','Ngồi bàn dù cho mát nha!','Cảm ơn bạn nhiều 😊']), 2.4); })});
     zl('☕ Café Bên Hồ', 'Ngồi bàn dù ngắm thuyền thiên nga', {x:222.5, y:3.6, z:124}); }
   const CHESS={};
@@ -579,7 +579,7 @@ uniform float uT;`).replace('#include <begin_vertex>', `#include <begin_vertex>
     { const x=174.4, z=179.4; CK.O.add(slab(rect(x-1.6,z-1.6,x+1.6,z+1.6),[rect(x-1.4,z-1.4,x+1.4,z+1.4)],.25), M.log, SO.x,0,SO.z); CK.G.add(flat(rect(x-1.4,z-1.4,x+1.4,z+1.4)), colorMat(0xe9d39a,{roughness:1}), SO.x,.12,SO.z);
       CK.O.add(new THREE.ConeGeometry(.35,.3,10), colorMat(0xd9c084,{roughness:1}), x-.4,.22,z+.3); CK.O.add(CY(.12,.1,.18,10), M.red, x+.5,.2,z-.4); reserve(x,z,1.7,'hố cát',false); }
     woodBench(176.0,173.6,-Math.PI/2,'ghế phụ huynh','🪑 Ngồi trông trẻ (E · C)',false);
-    zl('🛝 Sân chơi trẻ em', 'Xích đu · cầu trượt · thú nhún · bập bênh · hố cát', {x:168.6, y:3.3, z:172.4}); }
+    zl('🎢 Sân chơi trẻ em', 'Xích đu · cầu trượt · thú nhún · bập bênh · hố cát', {x:168.6, y:3.3, z:172.4}); }
 
   /* ============================== 20. BÃI CỎ DÃ NGOẠI + THẢ DIỀU (góc Đông Nam) ============================== */
   const PICNIC=[];
@@ -802,7 +802,7 @@ transformed.x+=sin(uT*1.3+aSw.x)*aSw.y; transformed.z+=cos(uT*1.05+aSw.x*1.7)*aS
       if(leash && leash.visible){ if(walkerHand) walkerHand.getWorldPosition(_hand); else _hand.set(o.x, 1, o.z); const a=leash.geometry.attributes.position; a.setXYZ(0,_hand.x,_hand.y,_hand.z); a.setXYZ(1,dog.x+Math.sin(dog.h)*.18,.42,dog.z+Math.cos(dog.h)*.18); a.needsUpdate=true; } } }
   { const p=DECK.at(walker.s); walker.x=p[0]; walker.z=p[1]; walker.hd=p[2]; if(dog){ const q=DECK.at(walker.s+1.45); dog.x=q[0]; dog.z=q[1]; } }
 
-  // 🛝 trẻ con: bé Na đu xích đu, bé Bin leo cầu trượt → trượt → chơi thú nhún; mẹ đứng trông
+  // 🎢 trẻ con: bé Na đu xích đu, bé Bin leo cầu trượt → trượt → chơi thú nhún; mẹ đứng trông
   const kidA=person(sF(631), {shirt:0xff8fc2, pants:0xffd23f, shoe:0xffffff}, '👧 Bé Na', '#ffd23f', 1.12);
   const kidB=person(sM(632), {shirt:0x4fc3ff, pants:0x2a3a5a, shoe:0xff4f6d}, '👦 Bé Bin', '#ffd23f', 1.2);
   const mom=person(sF(633), {shirt:0xffffff, pants:0x6b8cff, shoe:0x222222}, '👩 Mẹ bé Na · Bin', '#ffd23f'); mom.x=164.05; mom.z=173.7; mom.hd=dg(150);
@@ -821,7 +821,7 @@ transformed.x+=sin(uT*1.3+aSw.x)*aSw.y; transformed.z+=cos(uT*1.05+aSw.x*1.7)*aS
   function updKidB(dt, T){ const b=kidB; b.t+=dt; let pose=null;
     if(b.st==='walk'){ const w=b.way[0]; if(!w || walkTo(b, w[0], w[1], dt, 1.5)){ if(w) b.way.shift(); if(!b.way.length){ b.st=b.then; b.t=0; } } b.a.play(b.way.length?'walk':'idle'); put(b); }
     else if(b.st==='climb'){ const k=Math.min(1,b.t/1.6); b.x=LAD.x+k*.62; b.z=LAD.z; b.hd=Math.PI/2; b.a.play('walk'); put(b, k*S2.top);
-      if(k>=1){ b.st='slide'; b.t=0; if(R()<.6) say(b, pick(['Trượt nè! 🛝','Wheee~','Mẹ nhìn con nè!']), 2); } }
+      if(k>=1){ b.st='slide'; b.t=0; if(R()<.6) say(b, pick(['Trượt nè! 🎢','Wheee~','Mẹ nhìn con nè!']), 2); } }
     else if(b.st==='slide'){ const k=Math.min(1,b.t/1.25); b.x=S2.x0+(S2.x1-S2.x0)*k; b.z=S2.lz; b.hd=Math.PI/2; b.a.play('idle');
       b.a.g.position.set(b.x, S2.top+(.2-S2.top)*k+.05-b.hipsH*.62, b.z); b.a.g.rotation.set(0,b.hd,0); b.col.x=b.x; b.col.z=b.z; pose='sit';
       if(k>=1){ b.x=S2.x1+.1; if(R()<.5){ b.way=ROUTE.toRider.map(p=>p.slice()); b.then='ride'; } else { b.way=ROUTE.toLadderS.map(p=>p.slice()); b.then='climb'; } b.st='walk'; b.t=0; } }

@@ -137,7 +137,7 @@ export function makeBots(W, city, life){
         const o=opts[Math.floor(rnd()*opts.length)]; b.target=o; if(o.be) o.be.taken=b; b.state='go';
       }
       if(b.state==='go'){ const o=b.target; if(goTo(b,o.x,o.z,dt)){ b.state='stay'; b.t=10+rnd()*14;
-          say(b, {eat:'Món này ngon thật! 🍜', bench:'Nghỉ chân chút…', study:'Ôn ISTQB thôi 📘', shop:'Mua ít mồi câu nào 🪱'}[o.kind]); } }
+          say(b, {eat:'Món này ngon thật! 🍜', bench:'Nghỉ chân chút…', study:'Ôn ISTQB thôi 📘', shop:'Mua ít mồi câu nào 🐛'}[o.kind]); } }
       else if(b.state==='stay'){ b.t-=dt; b.a.play(b.target.kind==='study'&&b.a.acts.agree?'agree':'idle'); if(b.t<=0){ if(b.target.be) b.target.be.taken=null; b.state='idle'; } }
     },
     // dân phố: đi dạo giữa cửa các toà công ty, ghế đá, các chỗ ở Phường Khởi Nghiệp

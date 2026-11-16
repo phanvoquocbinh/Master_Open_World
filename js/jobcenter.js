@@ -78,7 +78,7 @@ export function makeJobCenter(W, ctx){
   const cafeSpot=name=>{ const c=cafes.find(c=>c.name.includes(name)); return c ? c.order() : null; };
   const randIn=(x0,x1,z0,z1,ok)=>{ for(let i=0;i<80;i++){ const x=x0+R()*(x1-x0), z=z0+R()*(z1-z0); if(ok(x,z)) return {x,z}; } return {x:(x0+x1)/2, z:(z0+z1)/2}; };
   const freeAt=(x,z)=>!circles.some(c=>(c.y0===undefined) && Math.hypot(x-c.x,z-c.z)<c.r+.6) && !boxes.some(b=>b.y0===undefined && x>b.x0-.6 && x<b.x1+.6 && z>b.z0-.6 && z<b.z1+.6);
-  const DRINKS=['☕ cà phê sữa đá','🥥 nước dừa','🍓 sinh tố dâu','🧋 trà sữa','🍊 nước cam','🍵 trà đào'];
+  const DRINKS=['☕ cà phê sữa đá','🥥 nước dừa','🍓 sinh tố dâu','🥤 trà sữa','🍊 nước cam','🍵 trà đào'];
   const DEFS={
     barista:{icon:'☕', name:'Pha chế', desc:'Đứng quầy quán nước, pha đúng món khách gọi (bấm E ở quầy mỗi khi có đơn).', pay:{easy:50, medium:95, hard:150},
       steps:(n,lv)=>{ const sp=(lv==='easy'?cafeSpot('Ngắm Biển'):cafeSpot('Bug Free'))||cafeSpot('Ngắm Biển')||{x:0,z:0}; return Array.from({length:n},()=>{ const d=pick(DRINKS); return {x:sp.x, z:sp.z, label:`☕ Pha ${d} (E)`, hint:`khách gọi ${d}`, ok:`☕ ${d} xong – khách khen ngon!`}; }); }},

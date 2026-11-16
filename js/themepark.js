@@ -167,7 +167,7 @@ export function makeThemePark(W, ctx, opt={}){
     for(let z=432; z<=496; z+=25){ bench(30.6,z+5,Math.PI/2); bench(49.4,z+5,-Math.PI/2); bin(30.6,z+7.4); bin(49.4,z+7.4); }
     const WALLS=[0xe8c9a0,0xd9a7a0,0xa9c4d6,0xe6dcc0,0xc7d8b0,0xe2b98a], SHUT=[0x2f6b4f,0x7a3b2e,0x1f4e79,0x8a6d1f];
     const FOOD=[['🍜','Phở Bò Kỳ Quan','Phở bò tái chín',18,0xc8312b],['🥖','Bánh Mì Ánh Sao','Bánh mì thập cẩm',12,0xd98e2b],['🍔','Burger Thần Long','Burger bò phô mai 2 tầng',22,0xb5342a],['🍕','Pizza Thiên Hà','Pizza hải sản lát lớn',20,0x4b3fa8],
-      ['🧋','Trà Sữa Mây Bay','Trà sữa trân châu',14,0x9a5fc0],['🍦','Kem Tuyết Pha Lê','Kem ốc quế 3 vị',12,0x2f9fbf],['🍗','Gà Rán Đại Bàng','Gà rán giòn 3 miếng',20,0xd9642b],['🍿','Bắp Rang Sấm Sét','Bắp rang bơ + xúc xích',15,0xe0b020]];
+      ['🥤','Trà Sữa Mây Bay','Trà sữa trân châu',14,0x9a5fc0],['🍦','Kem Tuyết Pha Lê','Kem ốc quế 3 vị',12,0x2f9fbf],['🍗','Gà Rán Đại Bàng','Gà rán giòn 3 miếng',20,0xd9642b],['🍿','Bắp Rang Sấm Sét','Bắp rang bơ + xúc xích',15,0xe0b020]];
     let fi=0; const chefs=[];
     [422,442.5,463,483.5].forEach((z,i)=>{ for(const s of [-1,1]){ const house=(i%2===0)===(s<0), fx=40+s*14, ry=s<0?Math.PI/2:-Math.PI/2;
         if(house){ const r=GF.build.townHouse(kF,{x:fx-s*.5, y:G0, z:z+8, ry, w:16, d:9.5, floors:i===0?[3.8,3.3,3.1]:[3.6,3.2], wall:WALLS[(i*2+(s>0?1:0))%6], seed:31+i*7+(s>0?3:0), shutter:SHUT[(i+(s>0?1:0))%4]});

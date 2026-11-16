@@ -36,7 +36,7 @@ export function makeTopup(W, ctx, G){
     m.body.querySelector('[data-p="2"]').onclick=()=>{ m.close(); askPack2(); }; }
   // gói 2: hỏi lại cho vui – "Có chứ" → diễn tiếp; "Khôngn't" (= Không) → đóng, không làm gì
   function askPack2(){ const m=ui.modal('💛 Ủng hộ nhà phát triển');
-    m.body.innerHTML=`<div class="tuAsk"><div class="tuAskIc">🥹</div><p>Bạn muốn thực sự ủng hộ nhà phát triển sao?</p>
+    m.body.innerHTML=`<div class="tuAsk"><div class="tuAskIc">🥺</div><p>Bạn muốn thực sự ủng hộ nhà phát triển sao?</p>
       <div class="tuAskBtns"><button class="btn" data-a="no">Khôngn't</button><button class="btn pri" data-a="yes">Có chứ</button></div></div>`;
     m.body.querySelector('[data-a="yes"]').onclick=()=>{ m.close(); setTimeout(pack2, 250); };
     m.body.querySelector('[data-a="no"]').onclick=()=>m.close(); }

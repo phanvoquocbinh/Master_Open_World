@@ -125,10 +125,10 @@ export async function make(W, ctx, opt = {}){
       const um = new THREE.Mesh(new THREE.ConeGeometry(1.1, .5, 10, 1, true), std(0xffd23f, {side:THREE.DoubleSide})); um.position.y = 4.2; tw.add(um); const pole = new THREE.Mesh(new THREE.CylinderGeometry(.03, .03, 1.9, 6), wh); pole.position.set(0, 3.1, -.6); tw.add(pole);
       const flag = new THREE.Mesh(new THREE.PlaneGeometry(.6, .4), std(0xd62828, {side:THREE.DoubleSide})); flag.position.set(.3, 3.8, -.6); tw.add(flag);
       tw.position.set(x, gy, z); tw.rotation.y = hd; prop(tw); circles.push({x, z, r:1.1});
-      const o = person(i ? sF(5141) : sM(5141), {shirt:0xd62828, pants:0xd62828, shoe:0xf2c230, style:'cap'}, '🛟 Cứu hộ bãi biển', '#ff6b6b', 'palm');
+      const o = person(i ? sF(5141) : sM(5141), {shirt:0xd62828, pants:0xd62828, shoe:0xf2c230, style:'cap'}, '⚓ Cứu hộ bãi biển', '#ff6b6b', 'palm');
       const bx = x - Math.sin(hd) * .35, bz = z - Math.cos(hd) * .35; o.prop = tw;
       o.upd = (dt, t) => { o.x = bx; o.z = bz; o.y = gy + 2.67 - o.hips; o.hd = hd; put(o, false); tw.visible = o.a.g.visible; pose(o, 'sit', t); if(((t * .2 + o.ph) % 9) < 3) pose(o, 'binoc', t);
-        if(R() < dt * .006) say(o, pick(['🛟 Bơi trong khu cờ đỏ – vàng nhé! 🚩', '📣 Tuýt tuýt! Bạn kia bơi xa quá rồi!', '🌊 Hôm nay sóng êm, nước trong lắm!']), 2.8); }; });
+        if(R() < dt * .006) say(o, pick(['⚓ Bơi trong khu cờ đỏ – vàng nhé! 🚩', '📣 Tuýt tuýt! Bạn kia bơi xa quá rồi!', '🌊 Hôm nay sóng êm, nước trong lắm!']), 2.8); }; });
     // khách Beach Club: club 1 có DJ + 2 người nhảy bên hồ; mỗi club 1 khách tắm nắng trên ghế
     const CL = L.clubs || [];
     if(CL[0]){ const c = CL[0], px = c.x + c.s * 11, bz = c.z + 7.6;

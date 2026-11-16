@@ -307,7 +307,7 @@ export async function make(W, ctx = {}){
     const rake = canvasTex(256, 256, (g, w, h) => { g.fillStyle = '#e4ded0'; g.fillRect(0, 0, w, h); g.strokeStyle = 'rgba(120,110,95,.35)'; g.lineWidth = 2; for(let y = 4; y < h; y += 10){ g.beginPath(); g.moveTo(0, y); for(let x = 0; x <= w; x += 16) g.lineTo(x, y + Math.sin(x / 40) * 2); g.stroke(); } }); rake.wrapS = rake.wrapT = THREE.RepeatWrapping; rake.repeat.set(5, 3);
     const ZG = {x:A.x - 38, z:A.z + 34}; const zg = new THREE.Mesh(new THREE.PlaneGeometry(22, 14).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({map:rake, roughness:.95})); zg.position.set(ZG.x, A.h + .05, ZG.z); zg.receiveShadow = true; scene.add(zg);
     for(const [dx, dz, s] of [[-6, -3, 1.4], [-4, 2, .9], [3, -1, 1.7], [6, 3, 1], [7.5, -4, .7]]){ KX.add(new THREE.DodecahedronGeometry(s, 0), MAT.stoneD, ZG.x + dx, A.h + s * .45, ZG.z + dz); circles.push({x:ZG.x + dx, z:ZG.z + dz, r:s * .9}); }
-    INTER.push({x:ZG.x, z:ZG.z + 8, r:3, prio:.7, label:'🪨 Vườn đá Zen – ngồi thiền 1 phút (E)', action:() => toast('🪨 禅 – Hít sâu… thở ra. Người học ngoại ngữ giỏi nhất là người đều đặn mỗi ngày, không phải người học dồn. 頑張って！', 5000)}); }
+    INTER.push({x:ZG.x, z:ZG.z + 8, r:3, prio:.7, label:'⛰️ Vườn đá Zen – ngồi thiền 1 phút (E)', action:() => toast('⛰️ 禅 – Hít sâu… thở ra. Người học ngoại ngữ giỏi nhất là người đều đặn mỗi ngày, không phải người học dồn. 頑張って！', 5000)}); }
 
   /* ---------- 5d. 🇰🇷 HANOK DANCHEONG + K-CUBE + LẦU KHÁNH HỘI ---------- */
   let ledT = null, ledC = null; const DANCH = sm(0x2f8f6f, .45);

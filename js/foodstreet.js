@@ -34,7 +34,7 @@ export function makeFoodStreet(W, ctx){
     {row:'N', x0:311, x1:331, name:'Sky Bug Fine Dining', icon:'🍷', kind:'fine', menu:[['🥩 Bò Wagyu áp chảo',180,'energy',25,'Đỉnh cao ẩm thực'],['🦞 Tôm hùm nướng bơ tỏi',220,'energy',30,'Sang chảnh'],['🍷 Set tráng miệng',90,'coffee',20,'Kết thúc hoàn hảo']]},
     {row:'N', x0:331, x1:341, name:'Kem Smoke Test', icon:'🍦', kind:'shop', menu:[['🍦 Kem ốc quế',15,'energy',4,'Mát lạnh'],['🍨 Kem ly 3 vị',25,'energy',6,'Đủ 3 môi trường']]},
     {row:'N', x0:341, x1:351, name:'Sushi Unit Test', icon:'🍣', kind:'shop', menu:[['🍣 Sushi set',60,'energy',12,'Từng miếng nhỏ, test kỹ'],['🍜 Ramen',45,'energy',10,'Nóng hổi']]},
-    {row:'S', x0:291, x1:301, name:'Trà sữa Regression', icon:'🧋', kind:'cafe', menu:[['🧋 Trà sữa trân châu',25,'coffee',8,'Uống lại vẫn ngon'],['🍵 Trà đào cam sả',20,'coffee',6,'Thanh mát']]},
+    {row:'S', x0:291, x1:301, name:'Trà sữa Regression', icon:'🥤', kind:'cafe', menu:[['🥤 Trà sữa trân châu',25,'coffee',8,'Uống lại vẫn ngon'],['🍵 Trà đào cam sả',20,'coffee',6,'Thanh mát']]},
     {row:'S', x0:301, x1:321, name:'Lẩu Nướng Hotfix', icon:'🍲', kind:'bbq', menu:[['🍲 Lẩu Thái hải sản',120,'energy',20,'Nóng như hotfix 2h sáng'],['🔥 Set nướng BBQ',140,'energy',22,'Cháy cạnh, mềm trong'],['🍺 Nước mía',15,'energy',4,'Giải nhiệt']]},
     {row:'S', x0:321, x1:331, name:'Tiệm bánh Release Day', icon:'🎂', kind:'shop', menu:[['🎂 Bánh kem mừng release',50,'coffee',10,'Mừng bản phát hành'],['🥐 Croissant',20,'energy',5,'Giòn tan']]},
     {row:'S', x0:331, x1:344, name:'Nước ép Sprint', icon:'🥤', kind:'cafe', menu:[['🥤 Nước ép cam',20,'energy',6,'Vitamin cho sprint'],['🍓 Sinh tố dâu',25,'energy',8,'Ngọt mát']]},

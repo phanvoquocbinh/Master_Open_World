@@ -44,13 +44,13 @@ export function makeInteriors(W, env){
     // buồng họp kính tròn treo lơ lửng (Glass Pods) + 1 buồng ở sàn làm phòng họp Daily
     const podM=new THREE.MeshPhysicalMaterial({color:0xcfe8f5, roughness:.03, transparent:true, opacity:.28, depthWrite:false, side:THREE.DoubleSide});
     for(let i=0;i<7;i++){ const a=-Math.PI/2+.55+i*.7, x=c.x+Math.cos(a)*42, z=c.z+Math.sin(a)*42, y=i===3?Y+1.6:Y+9+(i%3)*2.6; K.add(new THREE.SphereGeometry(2.4,24,16), podM, x,y,z); K.add(new THREE.TorusGeometry(2.42,.06,8,40).rotateX(Math.PI/2), alu, x,y,z); if(i!==3){ K.add(CY(.03,.03,24-(y-Y),6), alu, x,(y+Y+24)/2,z); }
-      if(i===3){ circles.push({x,z,r:2.5}); meeting(t, x+Math.cos(a)*-3.2, z+Math.sin(a)*-3.2, Y, '🫧 Họp Daily trong buồng kính tròn (E)'); } }
+      if(i===3){ circles.push({x,z,r:2.5}); meeting(t, x+Math.cos(a)*-3.2, z+Math.sin(a)*-3.2, Y, '💧 Họp Daily trong buồng kính tròn (E)'); } }
     // quầy cà phê sát cửa, lễ tân
     { const x=c.x+7, z=c.z+h.R1-5; K.add(RB(5,1.05,1.1,.08,2), oak, x,Y+.53,z); K.add(RB(5.2,.06,1.3,.02,1), alu, x,Y+1.08,z); boxes.push({x0:x-2.6, x1:x+2.6, z0:z-.6, z1:z+.6}); canteen(t, x, z-1.6, Y, '☕ Quầy cà phê Ring – nghỉ giải lao (E)');
       const rx=c.x-6, rz=c.z+h.R1-5; K.add(RB(4.2,1.1,1.2,.15,3), std(0xf4f2ec,{roughness:.3}), rx,Y+.55,rz); boxes.push({x0:rx-2.2, x1:rx+2.2, z0:rz-.7, z1:rz+.7}); reception(t, rx, rz-1.7); }
     // lõi thang máy cung Bắc → tầng 5 Phòng Giám đốc (nhìn 180° ra vườn trong và sông)
     const ex=c.x, ez=c.z-h.R1+8, DY=Y+19.2; K.add(RB(3.2,DY-Y+3,3.2,.2,2), alu, ex,(DY+Y+3)/2,ez-3.2); boxes.push({x0:ex-1.7, x1:ex+1.7, z0:ez-4.9, z1:ez-1.5});
-    K.add(B(26,.3,22), oak, ex,DY-.15,ez+3); plats.push({t:'r', x:ex, z:ez+3, c:1, s:0, hw:13, hd:11, h:DY}); for(const [ax,az,bx,bz] of [[ex-13,ez-8,ex+13,ez-8],[ex-13,ez+14,ex+13,ez+14],[ex-13,ez-8,ex-13,ez+14],[ex+13,ez-8,ex+13,ez+14]]) addSeg(ax,az,bx,bz,.15,DY-.4,DY+2.5,'🪟 Kính Phòng Giám đốc');
+    K.add(B(26,.3,22), oak, ex,DY-.15,ez+3); plats.push({t:'r', x:ex, z:ez+3, c:1, s:0, hw:13, hd:11, h:DY}); for(const [ax,az,bx,bz] of [[ex-13,ez-8,ex+13,ez-8],[ex-13,ez+14,ex+13,ez+14],[ex-13,ez-8,ex-13,ez+14],[ex+13,ez-8,ex+13,ez+14]]) addSeg(ax,az,bx,bz,.15,DY-.4,DY+2.5,'🔳 Kính Phòng Giám đốc');
     K.add(RB(4.4,.08,1.8,.04,3), alu, ex,DY+.76,ez+4); K.add(RB(4.0,.7,1.4,.1,3), alu, ex,DY+.38,ez+4); chair(ex,ez+5.3,DY,Math.PI,true,'🪑 Ghế Giám đốc QA Ring (E · C)'); monitor(ex-1,ez+3.6,DY+.8,0,true); monitor(ex+1,ez+3.6,DY+.8,0,true);
     K.add(RB(6,.45,2,.2,3), fabric, ex+8,DY+.23,ez+9); K.add(RB(6,.8,.5,.2,3), fabric, ex+8,DY+.6,ez+9.9);
     lift(ex, ez-.8, Y, DY, 'Thang máy lên tầng 5 – Phòng Giám đốc', null); lift(ex, ez-.4, DY, Y, 'Thang máy xuống tầng 1', null);
@@ -88,9 +88,9 @@ export function makeInteriors(W, env){
     { const sx=MX0+36, sz=MZ1+5, pts=[]; for(let i=0;i<=40;i++){ const k=i/40, a=k*TAU*1.6; pts.push(V3(sx+Math.cos(a)*3, MY+.4-k*(MY-Y), sz+Math.sin(a)*3)); }
       K.add(tube(pts,.75,14), new THREE.MeshPhysicalMaterial({color:0xffc531, transparent:true, opacity:.55, roughness:.15, side:THREE.DoubleSide, depthWrite:false}), 0,0,0); K.add(CY(.25,.25,MY+1,10), alu, sx,Y+(MY+1)/2,sz); circles.push({x:sx,z:sz,r:.3});
       const top=pts[0]; let slide=null;
-      INTER.push({x:top.x, z:MZ1-.8, r:1.6, prio:.8, when:atY(MY), label:'🛝 Trượt cầu trượt xoắn xuống tầng 1 (E)', action:()=>{ if(HOOK.vehicle) return; slide={t:0}; const ctrl={drive(dt){ if(!slide) return; slide.t+=dt/2.6; const k=Math.min(1,slide.t), i=k*40, p=pts[Math.min(40,Math.floor(i))], q=pts[Math.min(40,Math.ceil(i))], f=i-Math.floor(i);
+      INTER.push({x:top.x, z:MZ1-.8, r:1.6, prio:.8, when:atY(MY), label:'🎢 Trượt cầu trượt xoắn xuống tầng 1 (E)', action:()=>{ if(HOOK.vehicle) return; slide={t:0}; const ctrl={drive(dt){ if(!slide) return; slide.t+=dt/2.6; const k=Math.min(1,slide.t), i=k*40, p=pts[Math.min(40,Math.floor(i))], q=pts[Math.min(40,Math.ceil(i))], f=i-Math.floor(i);
           P.x=p.x+(q.x-p.x)*f; P.z=p.z+(q.z-p.z)*f; P.y=p.y+(q.y-p.y)*f-.3; P.px=P.x; P.pz=P.z; P.vx=P.vz=0; P.face=Math.atan2(q.x-p.x,q.z-p.z); W.me.g.position.set(P.x,P.y,P.z); W.me.g.rotation.set(0,P.face,0); W.me.play && W.me.play('idle');
-          if(k>=1){ slide=null; HOOK.vehicle=null; const e=pts[40]; P.x=e.x+1.6; P.z=e.z; P.y=Y; toast('🛝 Wheee~ Xuống tầng 1 nhanh như deploy hotfix!', 2200); } }}; HOOK.vehicle=ctrl; }}); }
+          if(k>=1){ slide=null; HOOK.vehicle=null; const e=pts[40]; P.x=e.x+1.6; P.z=e.z; P.y=Y; toast('🎢 Wheee~ Xuống tầng 1 nhanh như deploy hotfix!', 2200); } }}; HOOK.vehicle=ctrl; }}); }
     K.build(g); NOTE.push('dragon'); }
 
   /* ============================== 🌲 3. SILICON FOREST & TREEHOUSE HUB ============================== */

@@ -117,7 +117,7 @@ export async function initLife(W){
     {id:'energy', icon:'⚡', name:'Nước tăng lực', desc:'Nhanh hơn 40% trong 24 giờ.', price:120, kind:'day', tab:'goods'},
     {id:'coffee', icon:'☕', name:'Cà phê sữa đá', desc:'+20% tiền thưởng quiz trong 24 giờ.', price:90, kind:'day', tab:'goods'},
     {id:'rod', icon:'🎣', name:'Cần câu', desc:'Câu cá ở cuối cầu cảng (phía Bắc). Vĩnh viễn.', price:300, kind:'perm', tab:'goods'},
-    {id:'bait', icon:'🪱', name:'Mồi câu ×10', desc:'Mỗi lần thả câu tốn 1 mồi.', price:40, kind:'stack', qty:10, tab:'goods'},
+    {id:'bait', icon:'🐛', name:'Mồi câu ×10', desc:'Mỗi lần thả câu tốn 1 mồi.', price:40, kind:'stack', qty:10, tab:'goods'},
     {id:'can', icon:'🚿', name:'Bình tưới', desc:'Tưới bồn hoa của đảo (+5 💰/lần) và vườn nhà bạn. Vĩnh viễn.', price:150, kind:'perm', tab:'goods'},
     {id:'boat', icon:'🚤', name:'Vé thuê thuyền', desc:'Lái thuyền quanh đảo trong 24 giờ. Lên thuyền ở bến (cầu cảng phía Bắc).', price:250, kind:'day', tab:'fun'},
     {id:'vip', icon:'🎫', name:'Vé concert VIP', desc:'Lên sân khấu + bắn pháo hoa ở bàn DJ trong 24 giờ.', price:150, kind:'day', tab:'fun'},
@@ -628,8 +628,8 @@ export async function initLife(W){
   let fishing=null, bobber=null, rodProp=null;
   const fs=city.spots.fish;
   INTER.push({x:fs.x, z:fs.z, r:1.8, get label(){ if(!has('rod')) return '🎣 Cần mua Cần câu ở Chợ QC / Nhà thuyền'; if(fishing) return fishing.state==='bite'?'❗ CÁ CẮN CÂU! BẤM E NGAY!':'⏳ Chờ cá cắn câu… (bấm E để thu dây)';
-      if(!(S.inv.bait>0)) return '🪱 Hết mồi – mua ở Chợ QC / Nhà thuyền'; return `🎣 Thả câu (còn ${S.inv.bait} mồi)`; }, action:fishAction});
-  function fishAction(){ if(!has('rod')||(!fishing && !(S.inv.bait>0))) return toast('Cần 🎣 cần câu và 🪱 mồi (Chợ QC / Nhà thuyền).');
+      if(!(S.inv.bait>0)) return '🐛 Hết mồi – mua ở Chợ QC / Nhà thuyền'; return `🎣 Thả câu (còn ${S.inv.bait} mồi)`; }, action:fishAction});
+  function fishAction(){ if(!has('rod')||(!fishing && !(S.inv.bait>0))) return toast('Cần 🎣 cần câu và 🐛 mồi (Chợ QC / Nhà thuyền).');
     if(!fishing){ S.inv.bait--; save(); fishing={state:'wait', t:2.5+Math.random()*5}; P.face=Math.PI; me.g.rotation.y=Math.PI;
       if(!bobber){ bobber=new THREE.Group(); mesh(new THREE.SphereGeometry(.07,10,8), colorMat(0xff3b30), 0,0,0, bobber); mesh(new THREE.SphereGeometry(.06,10,8), MAT.white, 0,-.05,0, bobber); bobber.userData.dynamic=true; scene.add(bobber); }
       bobber.visible=true; bobber.position.set(fs.x+(Math.random()-.5)*2, W.WATER_Y+.03, fs.z-6); toast('🎣 Đã thả câu… chờ phao chìm!', 2000);

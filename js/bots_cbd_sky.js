@@ -59,9 +59,9 @@ export async function make(W, ctx, opt={}){
       for(const sx of [-1,1]){ const rail=new THREE.Mesh(new THREE.BoxGeometry(.06,1,1.2), std(0xc9ced4,{metalness:.8})); rail.position.set(sx*3,.6,0); g.add(rail); } const rr=new THREE.Mesh(new THREE.BoxGeometry(6,.06,.06), std(0xc9ced4,{metalness:.8})); rr.position.set(0,1.1,.6); g.add(rr);
       const cab=new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,1,4), std(0x222222)); g.add(cab); g.userData.dynamic=true; scene.add(g);
       const G={g, cab, t, z:t.z+12+.75, y0:Y+12, y1:Y+t.h-6, ph:i*7, men:[]}; GOND.push(G);
-      for(const sx of [-1.3,1.3]){ const o=person(sM(2201+i*2+(sx>0?1:0)), {shirt:0xff8a2a, pants:0x2a3a5a, shoe:0x1b1d21, style:'cap'}, '🪟 Công nhân lau kính', '#ffb547', 'cbd'); o.gx=sx; o.G=G; o.hd=Math.PI;
+      for(const sx of [-1.3,1.3]){ const o=person(sM(2201+i*2+(sx>0?1:0)), {shirt:0xff8a2a, pants:0x2a3a5a, shoe:0x1b1d21, style:'cap'}, '🔳 Công nhân lau kính', '#ffb547', 'cbd'); o.gx=sx; o.G=G; o.hd=Math.PI;
         const sq=new THREE.Mesh(mergeGeometries([new THREE.CylinderGeometry(.02,.02,.5,6).translate(0,.25,0), new THREE.BoxGeometry(.4,.06,.05).translate(0,.52,0)]), std(0x4fc3ff)); attach(o, sq);
-        o.upd=(dt,T)=>{ o.x=G.t.x+o.gx; o.z=G.z-.2; o.y=G.g.position.y+.13; o.hd=Math.PI; put(o,false); pose(o,'wipe',T+o.ph); if(R()<dt*.004) say(o, pick(['Lau xong tầng này rồi! 🪟','Trên này gió mạnh ghê!','Chào bạn ở dưới nha 👋']), 2.4); }; G.men.push(o); } }
+        o.upd=(dt,T)=>{ o.x=G.t.x+o.gx; o.z=G.z-.2; o.y=G.g.position.y+.13; o.hd=Math.PI; put(o,false); pose(o,'wipe',T+o.ph); if(R()<dt*.004) say(o, pick(['Lau xong tầng này rồi! 🔳','Trên này gió mạnh ghê!','Chào bạn ở dưới nha 👋']), 2.4); }; G.men.push(o); } }
   // B03 cơ thủ Bida ở CLB Cổng Trời (2 bàn)
   { const tw=H.twin, BY=tw.BY0, cz=(tw.z0+tw.z1)/2; [[-7,1],[7,-1]].forEach(([dz,s],i)=>{ const o=person(sM(2301+i), {shirt:i?0x1b1d22:0x7a1020, pants:0x1b1d22, shoe:0x111111, long:true}, '🎱 Cơ thủ Bida Carom', '#c7d2e0', 'cbd'); o.x=tw.bx0+1+34+s*1.9; o.z=cz+dz; o.y=BY; o.hd=s>0?-Math.PI/2:Math.PI/2;
     const cue=new THREE.Mesh(new THREE.CylinderGeometry(.006,.014,1.45,8).rotateX(Math.PI/2).translate(0,0,.5), std(0xd8b27a)); attach(o, cue);

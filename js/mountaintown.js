@@ -46,13 +46,13 @@ export function makeMountainTown(W, ctx){
     {name:'Café Vách Đá', icon:'☕', drinks:['cà phê muối','bạc xỉu','cà phê trứng'], menu:[['☕ Cà phê muối',25,'coffee',10,'Ngắm mây bay dưới chân'],['🍮 Bánh flan',20,'energy',5,'Mềm mịn']]},
     {name:'Mì Cay Sơn Thành', icon:'🍜', drinks:['mì cay cấp 3','trà chanh'], eat:true, menu:[['🍜 Mì cay 7 cấp độ',45,'energy',12,'Cay như bug production'],['🥟 Sủi cảo chiên',35,'energy',8,'Giòn rụm']]},
     {name:'Lẩu Cay Bám Vách', icon:'🍲', drinks:['lẩu cay','nước sâm'], eat:true, menu:[['🍲 Lẩu cay tê cửu cung',150,'energy',24,'Nồi chín ô, ăn cả team'],['🥬 Rau nhúng thập cẩm',30,'energy',6,'Thanh mát']]},
-    {name:'Trà Sữa Mây Bay', icon:'🧋', drinks:['trà sữa khoai môn','trà đào'], menu:[['🧋 Trà sữa khoai môn',28,'coffee',8,'Ngọt như build xanh'],['🍑 Trà đào cam sả',22,'coffee',6,'Mát rượi']]},
+    {name:'Trà Sữa Mây Bay', icon:'🥤', drinks:['trà sữa khoai môn','trà đào'], menu:[['🥤 Trà sữa khoai môn',28,'coffee',8,'Ngọt như build xanh'],['🍑 Trà đào cam sả',22,'coffee',6,'Mát rượi']]},
     {name:'Xiên Nướng Dốc Đêm', icon:'🍢', drinks:['xiên nướng','nước mía'], eat:true, menu:[['🍢 Set xiên nướng',55,'energy',12,'Thơm cả con dốc'],['🌽 Bắp nướng mỡ hành',20,'energy',5,'Ăn vặt đêm']]},
     {name:'Bánh Ngọt Đỉnh Mây', icon:'🍰', drinks:['bánh tiramisu','cacao nóng'], menu:[['🍰 Bánh tiramisu',30,'energy',6,'Ngọt ngào'],['🍫 Cacao nóng',25,'coffee',8,'Ấm bụng']]},
     {name:'Há Cảo Cầu Treo', icon:'🥟', drinks:['há cảo tôm','trà hoa cúc'], eat:true, menu:[['🥟 Há cảo tôm',40,'energy',10,'Hấp nóng hổi'],['🍵 Trà hoa cúc',18,'coffee',6,'Thư thái']]},
     {name:'Kem Gió Núi', icon:'🍨', drinks:['kem dừa','sinh tố bơ'], menu:[['🍨 Kem dừa',22,'energy',5,'Mát lạnh giữa dốc'],['🥑 Sinh tố bơ',28,'energy',7,'Béo ngậy']]},
     {name:'Cơm Niêu Sườn Đồi', icon:'🍚', drinks:['cơm niêu','canh chua'], eat:true, menu:[['🍚 Cơm niêu cá kho',65,'energy',14,'Cháy giòn đáy niêu'],['🥣 Canh chua',30,'energy',6,'Chua thanh']]},
-    {name:'Quán Nước Đèn Lồng', icon:'🏮', drinks:['nước sấu','trà nhài'], menu:[['🍹 Nước sấu đá',18,'energy',5,'Giải nhiệt'],['🫖 Trà nhài ấm',20,'coffee',6,'Thơm dịu']]},
+    {name:'Quán Nước Đèn Lồng', icon:'🏮', drinks:['nước sấu','trà nhài'], menu:[['🍹 Nước sấu đá',18,'energy',5,'Giải nhiệt'],['🍵 Trà nhài ấm',20,'coffee',6,'Thơm dịu']]},
   ];
   const BARS=[
     {name:'Sky Bar Release', icon:'🍸', drinks:['mocktail Release','soda chanh'], menu:[['🍸 Mocktail “Release”',60,'coffee',14,'Mừng bản phát hành'],['🍋 Soda chanh bạc hà',30,'energy',6,'Sảng khoái']]},

@@ -1,8 +1,8 @@
 // QC World – S15: ĐẢO MASTER DASHBOARD NHƯ ĐẢO THẬT
 //  🌊 Sóng vỗ bờ: viền bọt trắng chạy lên bãi rồi rút, vệt cát ướt, các lớp sóng bạc đầu từ ngoài khơi vào (quanh đảo chính + đảo nghỉ dưỡng)
 //  🌴 Rặng dừa dày (vẽ theo lô – thêm ~110 cây chỉ tốn ~15 lượt vẽ), tàu lá đung đưa theo gió
-//  🛖 Nhà chòi lá (bàn + ghế ngồi + võng nằm) · 🛟 chòi cứu hộ leo cầu thang lên ngắm biển · 🛶 thuyền thúng ngồi được
-//  ⛱️ Dù + ghế tắm nắng · 🪨 ghềnh đá · 🦀 cua bò ngang (thấy người là chạy trốn) · 🕊️ hải âu bay lượn vỗ cánh
+//  🏠 Nhà chòi lá (bàn + ghế ngồi + võng nằm) · ⚓ chòi cứu hộ leo cầu thang lên ngắm biển · 🛶 thuyền thúng ngồi được
+//  ⛱️ Dù + ghế tắm nắng · ⛰️ ghềnh đá · 🦀 cua bò ngang (thấy người là chạy trốn) · 🕊️ hải âu bay lượn vỗ cánh
 //  🔊 Âm thanh môi trường tự tạo bằng WebAudio (không tải file, chạy offline): sóng vỗ theo khoảng cách tới bờ, gió, hải âu kêu,
 //     tiếng bước chân theo mặt đất (cát · cỏ · đường nhựa · sàn gỗ). Bật/tắt ở ⚙ Đồ hoạ.
 export function makeIsland(W){
@@ -81,7 +81,7 @@ export function makeIsland(W){
   const addSeat=(o)=>W.addSeat && W.addSeat(o);
   const placed=[];
 
-  /* ============================== 🛖 NHÀ CHÒI LÁ ============================== */
+  /* ============================== 🏠 NHÀ CHÒI LÁ ============================== */
   function hut(x,z,face){ const gy=groundH(x,z), g=new THREE.Group(); g.position.set(x,gy,z); g.rotation.y=face; scene.add(g); const k=Kit(), S=3.6, F=.32;
     k.add(new THREE.BoxGeometry(S+.4,.12,S+.4), M.wood, 0,F,0);                                          // sàn gỗ
     for(const sx of [-1,1]) for(const sz of [-1,1]){ k.add(new THREE.CylinderGeometry(.09,.11,2.75,8), M.bamboo, sx*S/2,1.37,sz*S/2); }   // cột tre
@@ -100,13 +100,13 @@ export function makeIsland(W){
     { const p=W2(0,-.55); circles.push({x:p.x, z:p.z, r:.5}); }
     for(const sx of [-1,1]) for(const lx of [-.3,.3]){ const p=W2(sx*.95+lx,-.55); circles.push({x:p.x, z:p.z, r:.2}); }   // băng ghế
     addPlat(x, z, face, S/2+.2, S/2+.2, gy+F+.06);
-    for(const sx of [-1,1]){ const p=W2(sx*.95,-.55); addSeat({x:p.x, z:p.z, rot:face+(sx<0?Math.PI/2:-Math.PI/2), y:gy+F+.49, floor:gy+F+.06, label:'🛖 Ngồi nghỉ trong chòi lá (E · C)'}); }
-    { const p=W2(0,S/2-.15); addSeat({x:p.x, z:p.z, rot:face+Math.PI/2, y:gy+1.0, floor:gy+F+.06, lie:true, r:1.6, label:'🛖 Nằm võng đung đưa (E · C)'}); }
-    makeLabel('🛖 Chòi lá nghỉ chân', 'Ngồi bàn · nằm võng', {h:.5, x, y:gy+5.4, z, fade:45});
+    for(const sx of [-1,1]){ const p=W2(sx*.95,-.55); addSeat({x:p.x, z:p.z, rot:face+(sx<0?Math.PI/2:-Math.PI/2), y:gy+F+.49, floor:gy+F+.06, label:'🏠 Ngồi nghỉ trong chòi lá (E · C)'}); }
+    { const p=W2(0,S/2-.15); addSeat({x:p.x, z:p.z, rot:face+Math.PI/2, y:gy+1.0, floor:gy+F+.06, lie:true, r:1.6, label:'🏠 Nằm võng đung đưa (E · C)'}); }
+    makeLabel('🏠 Chòi lá nghỉ chân', 'Ngồi bàn · nằm võng', {h:.5, x, y:gy+5.4, z, fade:45});
     busy.push({x,z,r:3.6}); placed.push({kind:'hut', x, z}); }
   for(let i=0;i<6;i++){ const c=findSpot(16,10,3.8,1500); if(!c) continue; hut(c.x, c.z, outward(c.a)); }
 
-  /* ============================== 🛟 CHÒI CỨU HỘ (leo cầu thang lên được) ============================== */
+  /* ============================== ⚓ CHÒI CỨU HỘ (leo cầu thang lên được) ============================== */
   function lifeguard(x,z,face){ const gy=groundH(x,z), g=new THREE.Group(); g.position.set(x,gy,z); g.rotation.y=face; scene.add(g); const k=Kit(), H=2.6;
     for(const sx of [-1,1]) for(const sz of [-1,1]) k.add(new THREE.BoxGeometry(.14,H+1.6,.14), M.white, sx*.95,(H+1.6)/2,sz*.95);
     k.add(new THREE.BoxGeometry(2.3,.12,2.3), M.wood, 0,H,0);
@@ -125,7 +125,7 @@ export function makeIsland(W){
     for(let i=0;i<6;i++){ const p=W2(0, -1.15-((5-i)*.42)-.21); addPlat(p.x, p.z, face, .46, .22, gy+(i+1)*H/6); }
     addPlat(x, z, face, 1.12, 1.12, gy+H+.06);
     for(let t=-1.1;t<=1.11;t+=.36){ for(const [lx,lz] of [[t,1.12],[1.12,t],[-1.12,t]]){ const q=W2(lx,lz); circles.push({x:q.x, z:q.z, r:.12}); } }   // lan can 3 mặt: không đi xuyên
-    makeLabel('🛟 Chòi cứu hộ', 'Leo cầu thang phía sau lên ngắm biển', {h:.5, x, y:gy+H+2.6, z, fade:50});
+    makeLabel('⚓ Chòi cứu hộ', 'Leo cầu thang phía sau lên ngắm biển', {h:.5, x, y:gy+H+2.6, z, fade:50});
     busy.push({x,z,r:4.5}); placed.push({kind:'lifeguard', x, z}); }
   for(let i=0;i<2;i++){ const c=findSpot(11,6.5,3.6,1500); if(!c) continue; lifeguard(c.x, c.z, outward(c.a)); }
 
@@ -151,7 +151,7 @@ export function makeIsland(W){
     busy.push({x,z,r:2.6}); placed.push({kind:'umbrella', x, z}); }
   for(let i=0;i<9;i++){ const c=findSpot(9.5,5.5,2.4,1200); if(!c) continue; umbrellaSet(c.x, c.z, outward(c.a)); }
 
-  /* ============================== 🪨 GHỀNH ĐÁ ============================== */
+  /* ============================== ⛰️ GHỀNH ĐÁ ============================== */
   for(let cl=0; cl<4; cl++){ let c=null; for(let t=0;t<300 && !c;t++){ const a=R()*TAU, e=edgeR(a), p=pol(a,e-3); if(!BRIDGE(p.x,p.z) && Math.abs(dAng(a,W.RESORT_A))>.6 && Math.abs(dAng(a,-Math.PI/2))>.4 && Math.abs(dAng(a,.42))>.25 && freeSpot(p.x,p.z,3)) c={...p,a}; }
     if(!c) continue; const g=new THREE.Group(); scene.add(g); const k=Kit();
     for(let i=0;i<9;i++){ const a=c.a+(R()-.5)*.07, r=edgeR(a)-4+R()*7, p=pol(a,r), s=.7+R()*1.8, y=groundH(p.x,p.z)-.25*s;

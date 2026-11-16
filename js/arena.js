@@ -410,7 +410,7 @@ transformed.y += abs(sin(uT*2.2 + ph))*0.05 + uCheer*abs(sin(uT*9.0 + ph))*0.42 
     {name:'Phở Bình Phan', icon:'🍜', col:0xb3122e, menu:[['🍜','Phở bò tái', 35, 'energy', 10, 'Nhanh hơn 40% trong 10 phút'],['🥢','Phở gà', 30, 'energy', 8, 'Nhanh hơn 40% trong 8 phút']]},
     {name:'Cơm tấm QC', icon:'🍱', col:0xff7b29, menu:[['🍱','Cơm tấm sườn bì chả', 50, 'both', 10, 'Nhanh hơn 40% + thưởng quiz +20% trong 10 phút']]},
     {name:'Bánh mì Test Case', icon:'🥖', col:0xffb21f, menu:[['🥖','Bánh mì thịt', 20, 'energy', 5, 'Nhanh hơn 40% trong 5 phút'],['🍳','Bánh mì ốp la', 22, 'coffee', 10, 'Thưởng quiz +20% trong 10 phút']]},
-    {name:'Trà sữa Regression', icon:'🧋', col:0x7a4fd8, menu:[['🧋','Trà sữa trân châu', 25, 'coffee', 15, 'Thưởng quiz +20% trong 15 phút'],['☕','Cà phê sữa đá', 25, 'coffee', 30, 'Thưởng quiz +20% trong 30 phút']]},
+    {name:'Trà sữa Regression', icon:'🥤', col:0x7a4fd8, menu:[['🥤','Trà sữa trân châu', 25, 'coffee', 15, 'Thưởng quiz +20% trong 15 phút'],['☕','Cà phê sữa đá', 25, 'coffee', 30, 'Thưởng quiz +20% trong 30 phút']]},
   ];
   { const k=Kit(), sk=Kit();
     STALLS.forEach((st,i)=>{ const x=FOOD.x0+5+i*10.5, z=FOOD.z;
