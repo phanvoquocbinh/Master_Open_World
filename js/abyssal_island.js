@@ -15,6 +15,8 @@ import { buildAmenities } from './abyssal_amenities.js';
 import { makeLux } from './lux_textures.js';
 
 export async function make(W, ctx){
+  /* 17/11 (phiên D xong 2 toà mới): nạp được abyssal_towers.js / abyssal_dining_venues.js → KHÔNG dựng vỏ 2 cánh cũ (nhóm abyssal-xanh/do, sàn, lan can, mái + biển 36 m) + 4 thang cánh cũ + nhãn tầng; mở sẵn khe lan can gốc (W.ABY.gapsOpen) */
+  const modOK=async f=>{ try{ const m=await import(f); return !!(m && m.make); }catch(e){ return false; } }, TOWERS_OK=await modOK('./abyssal_towers.js'), DINING_OK=await modOK('./abyssal_dining_venues.js');
   const {THREE, scene, circles, boxes, plats, INTER, PLACES, HOOK, P, me, cam, toast, makeLabel, teleport, addSeg, addPlat, EXTL} = W;
   const TAU=Math.PI*2, clamp=(v,a,b)=>v<a?a:v>b?b:v, lerp=(a,b,t)=>a+(b-a)*t, ss=(a,b,x)=>{ const t=clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
   AK.bindNight(W); if(W.terrain) W.terrain.visible=false;
@@ -96,7 +98,7 @@ export async function make(W, ctx){
   const WING=[{k:'xanh', cx:-8.1, a0:3.38, a1:4.62, near:4.62, far:3.38, led:0x10b981, name:'QA · QC · QE ACADEMY & TECH HUB', seed:11, e:-1, nf:NF}, {k:'do', cx:8.1, a0:4.805, a1:6.045, near:4.805, far:6.045, led:0xff4466, name:'ABYSSAL HORIZON RESIDENCES', seed:23, e:1, nf:NF+2}];
   const brZ=f=>WCZ+Math.sin(4.62)*(RIN+SB*f-WD/2);   /* z của cầu nối cánh ↔ tháp ở tầng f (giữa mép đầu hồi) */
   const inWing=(x,z)=>WING.some(w=>{ const dx=x-w.cx, dz=z-WCZ, r=Math.hypot(dx,dz); let a=Math.atan2(dz,dx); if(a<0) a+=TAU; return r>RIN-WD-1 && r<RTOP+1 && a>w.a0-.01 && a<w.a1+.01; });
-  for(const w of WING){ const fac=AK.makePBRFacade({cols:4, rows:2, balcony:true, seed:w.seed, tileW:12, tileH:FH*2, glassCol:w.k==='do'?'#4a3440':'#2e4a63', litCol:w.k==='do'?'#ffc890':'#bfe8ff'});
+  if(!TOWERS_OK) for(const w of WING){ const fac=AK.makePBRFacade({cols:4, rows:2, balcony:true, seed:w.seed, tileW:12, tileH:FH*2, glassCol:w.k==='do'?'#4a3440':'#2e4a63', litCol:w.k==='do'?'#ffc890':'#bfe8ff'});
     const r=AK.buildCurvedTerraceWing(W,{cx:w.cx, cz:WCZ, rIn:RIN, depth:WD, a0:w.a0, a1:w.a1, floors:w.nf, floorH:FH, baseY:FY, setback:SB, facing:'in', led:w.led, facade:fac, parent:grp, name:'abyssal-'+w.k, seed:w.seed}); w.floors=r.floors;
     r.group.traverse(o=>{ if(o.isInstancedMesh && o.count>300){ const m=new THREE.Matrix4(); let n=0; for(let i=0;i<o.count;i+=4){ o.getMatrixAt(i,m); o.setMatrixAt(n++,m); } o.count=n; o.instanceMatrix.needsUpdate=true; } });
     for(const fl of r.floors){ const y=fl.y, lo=Math.min(fl.rOut,fl.rWall), hi=Math.max(fl.rOut,fl.rWall), P2=(a,rr)=>[w.cx+Math.cos(a)*rr,WCZ+Math.sin(a)*rr];
@@ -120,7 +122,7 @@ export async function make(W, ctx){
   const FNAME={xanh:['Đại sảnh Học viện & Cấp chứng chỉ','Manual Technical & ISTQB Academy','Game QA & Hitbox Profiler Lab','ERP · POS · Payment Gateway Lab','CI/CD · Docker · TestOps Grid','Security & Pentest Vault','Mobile Testing & Real Device Farm','API Testing & Microservices','Playwright & Web Automation','Performance & Load Testing Lab','AI-Driven QA & Chaos Engineering','Sky Billiards Lounge'], do:['Sảnh Abyssal Horizon Residences','Sky-Condo 1','Sky-Condo 2','Sky-Condo 3','Sky-Condo 4','Sky-Condo 5','Sky-Condo 6','Sky-Condo 7','Sky-Condo 8','Sky-Condo 9','Sky-Condo 10','Sky-Condo 11','Duplex Cliff Penthouse (tầng dưới)','Duplex Cliff Penthouse (tầng trên – trên đỉnh núi)']};
   const LIFTK=[];   /* thang máy bộ liftkit (cabin bước vào, cửa trượt, bảng nút) */
   LIFTK.push(...makeLiftBank(W,{x:0, z:-136.78, yaw:0, count:2, name:'Thang Hydro-Pulse', color:0xe8c040, floors:[{y:yF(7), name:'Bãi cát vịnh · tầng 8', short:'B'},{y:9.2, name:'Đĩa kính lounge +9', short:'D1'},{y:16, name:'Đĩa kính lounge +16 · cầu sang đảo', short:'D2'},{y:yF(11), name:'Tầng 12 · cầu kính', short:'12'},{y:24.5, name:'Đĩa kính lounge +24', short:'D3'},{y:RIM, name:'Đỉnh núi +28 · Sky-Shaft Drive-In', short:'★'}]}));
-  for(const w of WING){ /* giếng thang đứng ngoài đầu hồi phía thác (các tầng giật cấp 1,2 m nên không có đường thẳng đứng nào xuyên hết các sân tầng) – mỗi tầng có 1 sảnh thang nối sân tầng ↔ cửa thang */
+  if(!TOWERS_OK) for(const w of WING){ /* giếng thang đứng ngoài đầu hồi phía thác (các tầng giật cấp 1,2 m nên không có đường thẳng đứng nào xuyên hết các sân tầng) – mỗi tầng có 1 sảnh thang nối sân tầng ↔ cửa thang */
     const a=w.far, ca=Math.cos(a), sa=Math.sin(a), Tx=-w.e*sa, Tz=w.e*ca, E=(r,s2=0)=>[w.cx+ca*r+Tx*s2,WCZ+sa*r+Tz*s2], R0=122, S0=2.3, RS=125.2, fls=[], ms='🚧 Lan can sảnh thang';
     for(const fl of w.floors){ const y=fl.y, lo=Math.min(fl.rOut,fl.rWall), hi=Math.max(fl.rOut,fl.rWall), R1=Math.max(128.4,lo+3.5); fls.push({y, name:`Tầng ${fl.f+1} · ${FNAME[w.k][fl.f]}`, short:String(fl.f+1)}); { const lp=E(RS,1.0); makeLabel(`Tầng ${fl.f+1} · ${FNAME[w.k][fl.f]}`, null, {h:.34, x:lp[0], y:y+3.3, z:lp[1], fade:30}); }
       if(fl.f===0) continue; const c=E((R0+R1)/2,S0/2-.1); box(R1-R0,.22,S0+.3,M.white,c[0],y-.12,c[1],-a); addPlat(c[0],c[1],Math.atan2(Tx,Tz),(R1-R0)/2,(S0+.3)/2,y);
@@ -210,7 +212,7 @@ export async function make(W, ctx){
   { const cg=new THREE.CylinderGeometry(.32,.32,1,10), im=new THREE.InstancedMesh(cg,M.parap,COLS.length), m=new THREE.Matrix4(); COLS.forEach(([x,y,z,hh],i)=>{ m.makeScale(1,hh,1).setPosition(x,y,z); im.setMatrixAt(i,m); }); im.castShadow=im.receiveShadow=true; im.userData.dynamic=true; grp.add(im); }
 
   /* ============================== 9. ĐƯỜNG: vành đai +2 nối 3 cổng · đường đỉnh vách · lan can mép vực ============================== */
-  const BAYB=buildBay({THREE, W, grp, dyn, M, LUX:W.LUX, B:BAY, FB, RB, UP, box, cyl, rail, fence, addPlat, addSeg, plats, circles, makeLabel, hAt, hOut, A, BZ, CZ, tunLat}); ROADS.push(...BAYB.roads); RAMPS.push(...BAYB.ramps);
+  const BAYB=buildBay({openPromEnds:TOWERS_OK, venueGaps:DINING_OK, THREE, W, grp, dyn, M, LUX:W.LUX, B:BAY, FB, RB, UP, box, cyl, rail, fence, addPlat, addSeg, plats, circles, makeLabel, hAt, hOut, A, BZ, CZ, tunLat}); ROADS.push(...BAYB.roads); RAMPS.push(...BAYB.ramps);
   const AMN=buildAmenities({buildSouthBridge:true, THREE, W, grp, dyn, M, MT:BAYB.MT, B:BAY, BAYB, box, cyl, fence, rail, addPlat, addSeg, plats, circles, makeLabel, INTER, P, toast, PLACES, teleport, RAMPS, LIFTK, HOOK, FB});
   for(const m of [M.asphalt]){ m.polygonOffset=true; m.polygonOffsetFactor=-2; m.polygonOffsetUnits=-4; } M.roadStone=M.granite.clone(); M.roadStone.polygonOffset=true; M.roadStone.polygonOffsetFactor=-2; M.roadStone.polygonOffsetUnits=-4;
   const strip=(pts,w,mat,dy=.03)=>{ const q=QB(false), N=pts.length, closed=N>2 && Math.hypot(pts[0][0]-pts[N-1][0],pts[0][1]-pts[N-1][1])<.01, sn=(i)=>{ const a=pts[i], b=pts[i+1], L=Math.hypot(b[0]-a[0],b[1]-a[1]); return [(b[1]-a[1])/L,-(b[0]-a[0])/L]; }, H=(x,z)=>(hAt(clamp(x,-ZB+.1,ZB-.1),clamp(z,-ZB+.1,ZB-.1))??GY)+dy, E=[];
@@ -270,7 +272,7 @@ export async function make(W, ctx){
         restaurant:{x:restP[0], z:restP[1], yaw:Math.atan2(-restP[0],-12-restP[1]), w:26, d:9, yBase:2.5, yTop:16},
         stage:{x:-100, z:-212, yaw:0}, marina:{x:-GX, z:126, nx:1, nz:0, deckY:2.0, stem:8},
         beach:{parking:{x:66, z:132, y:3.5}, stairs:BAYB.stairs}, watersports:{x:-215, z:40, rx:18, rz:70}, parasail:{x:-170, z:-262, rx:38, rz:26} },
-      towersReady:!!(W.ABY && W.ABY.towersReady)}); }
+      towersReady:!!(W.ABY && W.ABY.towersReady), gapsOpen:TOWERS_OK && DINING_OK, oldShellRemoved:TOWERS_OK});   /* gapsOpen: phiên D không cần tự mở khe lúc chạy */ }
   for(const f of ['./abyssal_hotel.js','./abyssal_towers.js','./abyssal_dining_venues.js','./abyssal_sea.js','./abyssal_stage.js']){ try{ const m=await import(f); if(m && m.make) await m.make(W, ctx); }
     catch(e){ if(!/Failed to fetch|Cannot find module|error loading dynamically imported/i.test(String(e))) console.warn('[abyssal] module phụ', f, e); } }   /* abyssal_yacht.js là thư viện – abyssal_sea.js tự nạp */
 
