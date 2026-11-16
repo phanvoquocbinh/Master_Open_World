@@ -6,6 +6,7 @@
 // • Nhân viên: quẹt thẻ chấm công, họp Daily, bàn làm việc riêng có máy tính (js/workpc.js).
 import { makePoser } from './pose.js';
 import { batchStatic } from './perf.js';
+import { makeFloorLift } from './floorlift.js';
 
 export function makeInterior(W){
   const {THREE, renderPass, scene, camera, me, P, HOOK, circles, boxes, plats, INTER, mesh, box, MAT, colorMat, makeActor, makeLabel, removeLabel,
@@ -84,6 +85,11 @@ export function makeInterior(W){
     M(box(w,h,.05), whiteM, 0,FY+1.0+h/2,0, g); const p=new THREE.Mesh(new THREE.PlaneGeometry(w-.08,h-.08), texMat(tex)); p.position.set(0,FY+1.0+h/2,.03); g.add(p);
     for(const s of [-1,1]){ M(box(.05,1.05+h,.05), steel, s*(w/2-.05),FY+(1.05+h)/2,-.02, g); M(box(.05,.03,.6), steel, s*(w/2-.05),FY+.03,0, g); }
     const c=Math.abs(Math.cos(rotY)), s=Math.abs(Math.sin(rotY)); boxes.push({x0:x-c*w/2-s*.3, x1:x+c*w/2+s*.3, z0:z-s*w/2-c*.3, z1:z+s*w/2+c*.3}); }
+  // thang máy chọn tầng: cabin bước vào + bảng nút (thay menu chọn tầng cũ) – đổi tầng khi cửa cabin đã đóng hẳn
+  const FL=makeFloorLift(W, {RW, RD, FY, CH, xs:[-2.9,0,2.9], color:0xd8b25a, wallM, get name(){ return st.b ? `Thang máy · ${st.b.short||st.b.name}` : 'Thang máy'; },
+    floors:()=>st.floors.map(f=>({short:String(f.n), name:`Tầng ${f.n} · ${f.name}`})), idx:()=>st.idx, active:()=>!!st.b,
+    canGo:i=>{ const f=st.floors[i]; return (isEmp(st.b)||st.tour||(f&&f.kind==='lobby')) ? true : `🔒 Các tầng làm việc chỉ dành cho nhân viên${st.b&&st.b.locked?'':' hoặc khách đi cùng hướng dẫn viên'} – phỏng vấn ở lễ tân sảnh trước nhé.`; },
+    switchTo:i=>{ clearFloor(); st.idx=i; buildFloor(); }});
   function shell(kind, b, fl, D){
     const fm = kind==='lobby' ? new THREE.MeshStandardMaterial({map:TEX.marble, roughness:.12, metalness:.05, envMapIntensity:.8})
              : kind==='canteen' ? new THREE.MeshStandardMaterial({map:TEX.tile, roughness:.35})
@@ -94,7 +100,7 @@ export function makeInterior(W){
     for(let x=-RW+3;x<RW;x+=4) for(let z=-RD+2.5;z<RD;z+=4){ const p=M(box(1.4,.04,.7), panelM, x,FY+CH-.02,z); p.castShadow=false; }
     const sky=new THREE.MeshBasicMaterial({map:skyline(W.night>.5)}); st.skyMat=sky;
     const wall=(x,z,w,d)=>{ const m=M(box(w,CH,d), wallM, x,FY+CH/2,z); m.castShadow=false; };
-    wall(0,-RD-.1,RW*2,.2);
+    FL.build(root);   // tường Bắc có 3 ô cửa thang + cabin + va chạm
     if(D){ const acc=M(box(RW*2,.12,.06), colorMat(D.accent,{roughness:.5}), 0,FY+CH-.35,-RD+.04); acc.castShadow=false; }   // viền màu phòng ban
     const band=(cx,cz,len,rotY)=>{ const g=new THREE.Group(); g.position.set(cx,0,cz); g.rotation.y=rotY; root.add(g);
       M(box(len,.9,.2), wallM, 0,FY+.45,0, g).castShadow=false; M(box(len,.45,.2), wallM, 0,FY+CH-.22,0, g).castShadow=false;
@@ -109,17 +115,12 @@ export function makeInterior(W){
       M(box(3,2.6,.08), steel, 0,FY+1.3,RD+.05);
       INTER.push({x:0, z:RD-1.4, r:1.6, label:'🚪 Ra ngoài phố', action:()=>exit()});
     }
-    solid(-RW-2,RW+2,-RD-2,-RD+.15); solid(-RW-2,RW+2,RD-.15,RD+2); solid(-RW-2,-RW+.15,-RD-2,RD+2); solid(RW-.15,RW+2,-RD-2,RD+2);
+    solid(-RW-2,RW+2,RD-.15,RD+2); solid(-RW-2,-RW+.15,-RD-2,RD+2); solid(RW-.15,RW+2,-RD-2,RD+2);
     plats.push({t:'r', x:0, z:0, c:1, s:0, hw:RW, hd:RD, h:FY});
-    // thang máy
-    for(const s of [-1,1]){ M(box(1.5,2.5,.12), steel, s*1.65,FY+1.25,-RD+.08); M(box(1.8,2.8,.1), darkM, s*1.65,FY+1.4,-RD+.03); }
-    const ind=ct(256,64,(g,w,h)=>{ g.fillStyle='#0b0f14'; g.fillRect(0,0,w,h); g.fillStyle='#ff9a3c'; g.font='bold 44px monospace'; g.textAlign='center'; g.textBaseline='middle'; g.fillText(`▲ ${fl.n}`,w/2,h/2+2); });
-    M(box(1.2,.3,.05), new THREE.MeshStandardMaterial({map:ind, emissive:0xffffff, emissiveMap:ind, emissiveIntensity:1}), 0,FY+2.75,-RD+.12);
-    M(box(.18,.36,.05), steel, 0,FY+1.2,-RD+.12);
-    INTER.push({x:0, z:-RD+1.7, r:1.7, label:'⇅ Thang máy · chọn tầng', action:()=>elevatorMenu()});
+    // thang máy: dãy 3 cabin thật sau tường Bắc (floorlift.js – dựng cùng FL.build ở trên)
     // biển tên tầng
     const pl=ct(1024,160,(g,w,h)=>{ g.fillStyle='#ffffff'; g.fillRect(0,0,w,h); g.fillStyle=hex(D?D.accent:b.color); g.fillRect(0,0,22,h); g.fillStyle='#1b2233'; g.font='800 64px "Segoe UI",sans-serif'; g.textBaseline='middle'; g.fillText(`${b.short} · Tầng ${fl.n}`,50,h/2-24); g.font='500 44px "Segoe UI",sans-serif'; g.fillStyle='#5b6474'; g.fillText(fl.name,50,h/2+36); });
-    M(box(4.2,.66,.05), new THREE.MeshStandardMaterial({map:pl, roughness:.5}), -5.2,FY+2.2,-RD+.12);
+    M(box(4.2,.66,.05), new THREE.MeshStandardMaterial({map:pl, roughness:.5}), -7.4,FY+2.2,-RD+.12);   // biển tầng dời trái: không đè khung cửa thang
   }
   /* ---------- S16: MỖI CÔNG TY MỘT KIỂU ---------- */
   // phong cách: màu tường, mặt bàn, góc vui chơi · bố cục bàn: hàng / cụm 4 / bàn dài + dải cây / vòng quanh sofa tròn / SÀN CHUNG 2 phòng ban
@@ -352,7 +353,7 @@ export function makeInterior(W){
       rug(-12,9.5,8,4,0x6a5d4d); sofa(-12,11.1,Math.PI,0x34495e,3.2); sofa(-15.8,9.4,Math.PI/2,0x34495e,1.6,true); M(box(1.6,.4,.8),woodM,-12,FY+.2,9.4); solid(-12.8,-11.2,9,9.8);
       for(let i=0;i<3;i++){ M(box(.35,.02,.25), colorMat(pick([0xd94848,0x2f6fd0,0xf2c230])), -12.3+i*.4,FY+.41,9.4); }
       bot(who(D.role), 'person', -12.6, 10.9, Math.PI, 'sit', {lines:['Nghỉ 5 phút rồi làm tiếp 😌']});
-      for(const [x,z] of [[-RW+1,-RD+1.2],[3,RD-1.2],[-RW+1,RD-1.2],[3,-RD+1.2],[-3.6,-1.4]]) plant(x,z,1.1);
+      for(const [x,z] of [[-RW+1,-RD+1.2],[3,RD-1.2],[-RW+1,RD-1.2],[7,-RD+1.2],[-3.6,-1.4]]) plant(x,z,1.1);   /* chậu cây dời khỏi trước cửa thang máy */
       // người làm việc ở bàn + đồng nghiệp ghé hỏi chuyện
       let myIdx = mine ? desks.findIndex(d=>Math.abs(d.x+5)<.2 && Math.abs(d.z-1.85)<.2) : -1; if(mine && myIdx<0){ for(let i=desks.length-1;i>=0;i--) if(desks[i].h===0 && desks[i].z>0){ myIdx=i; break; } if(myIdx<0) myIdx=desks.findIndex(d=>d.h===0); }
       const free=desks.map((d,i)=>i).filter(i=>i!==myIdx).sort(()=>R()-.5);
@@ -513,7 +514,7 @@ export function makeInterior(W){
     W.inside=b; HOOK.labelGroup='interior'; HOOK.camBox={x0:-RW+.5, x1:RW-.5, z0:-RD+.5, z1:RD-.5, y1:FY+CH-.3};
     IS.environment=scene.environment; renderPass.scene=IS; scene.remove(me.g); IS.add(me.g);
     go(0,'door'); }
-  function exit(){ if(!st.b) return; const b=st.b; fade.style.opacity=1; st.tour=false;
+  function exit(){ if(!st.b) return; const b=st.b; fade.style.opacity=1; st.tour=false; FL.reset();
     setTimeout(()=>{ clearFloor(); for(const k of ['circles','boxes','plats','INTER']){ const arr={circles,boxes,plats,INTER}[k]; arr.push(...st.saved[k]); } (W.SEGS||[]).push(...(st.saved.segs||[]));
       renderPass.scene=scene; IS.remove(me.g); scene.add(me.g); HOOK.labelGroup='world'; HOOK.camBox=null; W.inside=null; cam.dist=st.camDist||6.5; st.b=null; W.work && W.work.onFloor(null);
       const d=b.door; P.x=d.x; P.z=d.z; P.y=groundAt(P.x,P.z); P.face=d.face; me.g.position.set(P.x,P.y,P.z); me.g.rotation.y=d.face; cam.yaw=d.face+Math.PI; cam.tx=P.x; cam.tz=P.z;

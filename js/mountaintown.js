@@ -6,6 +6,8 @@
 //    – quán bar/café ngắm cảnh, ống nhòm ngắm toàn thành phố.
 //  • THÁP CHUNG CƯ TRÊN SƯỜN ĐỒI: bệ móng bám dốc, mặt tiền nhiều màu, đèn cửa sổ ban đêm, biển LED trên nóc.
 //  Va chạm: tường xiên/lan can dùng W.addSeg (đoạn thẳng xoay tự do, giới hạn độ cao) → không đi xuyên vật thể, đứng tầng nào chặn tầng đó.
+import { makeLift } from './liftkit.js';
+
 export function makeMountainTown(W, ctx){
   const {S, save, ui, askPay, fmt, spend} = ctx;
   const {THREE, scene, P, HOOK, INTER, PLACES, toast, circles, boxes, addPlat, addSeg, mergeGeometries, GLOW, teleport, makeLabel, cam} = W;
@@ -159,26 +161,32 @@ export function makeMountainTown(W, ctx){
       // trụ đỡ cầu
       const [px,pz]=at(0,e+gap*.55), gp=hAt(px,pz)??t.gmin, ph=BL-.35-gp+1; if(ph>1){ k.add(new THREE.CylinderGeometry(.35,.45,ph,10), M.stone, px, gp-1+ph/2, pz); circles.push({x:px, z:pz, r:.5, y0:gp-2, y1:BL-.4}); } }
     // thân tháp + mặt tiền 4 phía + cửa sảnh trời ở cao độ cầu
-    { const [cx,cz]=at(0,(tb0+tb1)/2), hb=top-yb; k.add(new THREE.BoxGeometry(Wd, hb, D), M.wallS, cx, yb+hb/2, cz, 0, ry, 0);
-      for(const [a,b,w,r] of [[0,tb1+.02,Wd,ry],[0,tb0-.02,Wd,ryIn],[-Wd/2-.02,(tb0+tb1)/2,D,ryU+Math.PI],[Wd/2+.02,(tb0+tb1)/2,D,ryU]]){ const [fx,fz]=at(a,b); facade(pal, w, hb-.6, fx, yb+(hb-.6)/2, fz, r); }
-      const cs=[[-Wd/2,tb0],[Wd/2,tb0],[Wd/2,tb1],[-Wd/2,tb1]].map(([a,b])=>at(a,b)); for(let i=0;i<4;i++){ const [x0,z0]=cs[i], [x1,z1]=cs[(i+1)%4]; addSeg(x0,z0,x1,z1,.1, yb-3, top-.35); }
+    const VA=1.5, VB=2.4, SB=5.3;   /* sảnh trời: |a| < 1,5 · b từ mặt tháp tới +2,4 m · giếng thang máy: b +2,4 … +5,3 (cửa thang quay ra cầu) */
+    const boxL=(a0,a1,b0,b1,y0,y1,m)=>{ const [x,z]=at((a0+a1)/2,(b0+b1)/2); k.add(new THREE.BoxGeometry(a1-a0, y1-y0, b1-b0), m, x, (y0+y1)/2, z, 0, ry, 0); };
+    { const [cx,cz]=at(0,(tb0+tb1)/2), hb=top-yb;
+      boxL(-Wd/2,Wd/2,tb0+SB,tb1,yb,top,M.wallS); boxL(-Wd/2,-VA,tb0,tb0+SB,yb,top,M.wallS); boxL(VA,Wd/2,tb0,tb0+SB,yb,top,M.wallS);
+      boxL(-VA,VA,tb0,tb0+VB,yb,BL,M.wallS); boxL(-VA,VA,tb0+VB,tb0+SB,yb,BL-.45,M.wallS); boxL(-VA,VA,tb0,tb0+VB,BL+2.7,top,M.wallS);
+      boxL(-VA+.02,VA-.02,tb0+.02,tb0+VB,BL-.04,BL,M.stone); { const [vx,vz]=at(0,tb0+VB/2); addPlat(vx, vz, ry, VA, VB/2, BL); k.add(new THREE.BoxGeometry(1.6,.04,1.2), M.led, vx, BL+2.66, vz, 0, ry, 0); }
+      for(const [a,b,w,r] of [[0,tb1+.02,Wd,ry],[-Wd/2-.02,(tb0+tb1)/2,D,ryU+Math.PI],[Wd/2+.02,(tb0+tb1)/2,D,ryU]]){ const [fx,fz]=at(a,b); facade(pal, w, hb-.6, fx, yb+(hb-.6)/2, fz, r); }
+      for(const sd of [-1,1]){ const [fx,fz]=at(sd*(Wd/2+VA)/2,tb0-.02); facade(pal, Wd/2-VA, hb-.6, fx, yb+(hb-.6)/2, fz, ryIn); }   /* mặt cầu đi bộ: chừa ô cửa sảnh trời */
+      { const [fx,fz]=at(0,tb0-.02), y0=BL+2.7, y1=top-.6; if(y1-y0>.3) facade(pal, 2*VA, y1-y0, fx, (y0+y1)/2, fz, ryIn); if(BL-yb>.3) facade(pal, 2*VA, BL-yb, fx, (yb+BL)/2, fz, ryIn); }
+      const cs=[[-Wd/2,tb0],[Wd/2,tb0],[Wd/2,tb1],[-Wd/2,tb1]].map(([a,b])=>at(a,b)); for(let i=1;i<4;i++){ const [x0,z0]=cs[i], [x1,z1]=cs[(i+1)%4]; addSeg(x0,z0,x1,z1,.1, yb-3, top-.35); }
+      { const [ax,az]=at(-VA,tb0), [bx,bz]=at(VA,tb0); addSeg(cs[0][0],cs[0][1],ax,az,.1,yb-3,top-.35); addSeg(bx,bz,cs[1][0],cs[1][1],.1,yb-3,top-.35); addSeg(ax,az,bx,bz,.1,yb-3,BL-.5); addSeg(ax,az,bx,bz,.1,BL+2.6,top-.35);   /* ô cửa sảnh trời */
+        for(const sd of [-1,1]){ const [p0,q0]=at(sd*VA,tb0), [p1,q1]=at(sd*VA,tb0+VB+.1); addSeg(p0,q0,p1,q1,.1,BL-.5,BL+2.7,'🏙️ Vách sảnh thang máy'); } }
       // nóc: lan can kính + viền LED
-      const [rx,rz]=at(0,(tb0+tb1)/2); k.add(new THREE.BoxGeometry(Wd+.3,.3,D+.3), M.dark, rx, top-.2, rz, 0, ry, 0); k.add(new THREE.BoxGeometry(Wd-.1,.06,D-.1), M.deck, rx, top-.02, rz, 0, ry, 0); addPlat(rx, rz, ry, Wd/2-.02, D/2-.02, top);
-      k.add(new THREE.BoxGeometry(Wd+.32,.12,D+.32), M.led, rx, top-.36, rz, 0, ry, 0);
+      const [rx,rz]=at(0,(tb0+tb1)/2); for(const r of rectHoles(-Wd/2-.15,Wd/2+.15,tb0-.15,tb1+.15,[{x0:-VA,x1:VA,z0:tb0+VB,z1:tb0+SB}])){ boxL(r.x0,r.x1,r.z0,r.z1,top-.35,top-.05,M.dark); const a0=Math.max(r.x0,-Wd/2+.05), a1=Math.min(r.x1,Wd/2-.05), b0=Math.max(r.z0,tb0+.05), b1=Math.min(r.z1,tb1-.05); if(a1>a0 && b1>b0){ boxL(a0,a1,b0,b1,top-.05,top+.01,M.deck); const [px,pz]=at((a0+a1)/2,(b0+b1)/2); addPlat(px, pz, ry, (a1-a0)/2, (b1-b0)/2, top); } }   /* mái chừa lỗ giếng thang */
+      for(const sd of [-1,1]){ boxL(-Wd/2-.16,Wd/2+.16,(sd<0?tb0:tb1)-.16,(sd<0?tb0:tb1)+.16,top-.42,top-.3,M.led); boxL(sd*(Wd/2)-.16,sd*(Wd/2)+.16,tb0,tb1,top-.42,top-.3,M.led); }   // viền LED quanh mái
       for(let i=0;i<4;i++){ const [x0,z0]=cs[i], [x1,z1]=cs[(i+1)%4], L=Math.hypot(x1-x0,z1-z0), mx=(x0+x1)/2, mz=(z0+z1)/2, r=Math.atan2(x1-x0,z1-z0); k.add(new THREE.BoxGeometry(.04,1.05,L), M.glass, mx, top+.55, mz, 0, r, 0); k.add(new THREE.BoxGeometry(.1,.07,L), M.steel, mx, top+1.08, mz, 0, r, 0); addSeg(x0,z0,x1,z1,.16, top-.5, top+1.6); }
       // cửa sảnh trời
-      const [dx,dz]=at(0,tb0-.04); k.add(new THREE.BoxGeometry(2.4,2.6,.08), M.dark, dx, BL+1.3, dz, 0, ry, 0); const door=new THREE.Mesh(new THREE.PlaneGeometry(2.1,2.3), new THREE.MeshStandardMaterial({color:0x223344, emissive:0x9fd8ff, emissiveIntensity:.5})); door.position.set(dx, BL+1.25, dz); door.rotation.y=ryIn; door.translateZ(.06); scene.add(door);
+      for(const sd of [-1,1]) boxL(sd*VA-.12,sd*VA+.12,tb0-.1,tb0+.1,BL,BL+2.7,M.dark); boxL(-VA-.12,VA+.12,tb0-.1,tb0+.1,BL+2.6,BL+2.85,M.dark);   /* khung ô cửa sảnh trời (đi thẳng vào – thang máy ngay trước mặt) */
       sign(si, 3.6, .55, ...(()=>{ const [x,z]=at(0,tb0-.1); return [x, BL+3.0, z]; })(), ryIn); }
     // sân thượng: quầy bar, bàn ghế, cây, dây đèn, ống nhòm, cabin thang máy
     const R2=(a,b)=>at(a,(tb0+tb1)/2+b);
-    const [kx,kz]=R2(-Wd/2+1.3,-D/2+1.3); k.add(new THREE.BoxGeometry(2.2,2.6,2.2), M.dark, kx, top+1.3, kz, 0, ry, 0); circles.push({x:kx, z:kz, r:1.45, y0:top-.4, y1:top+3});
-    const [lx,lz]=R2(-Wd/2+1.3,-D/2+2.9), [dx2,dz2]=at(0,tb0-1.1), [ax2,az2]=at(0,tb0-1.8);
-    INTER.push({x:dx2, z:dz2, r:1.8, prio:.8, when:()=>Math.abs(P.y-BL)<1.2, label:`⇅ Thang máy lên sân thượng ${bar.name} (E)`, action:()=>{ teleport(lx,lz, ...R2(0,0)); toast(`⇅ Lên sân thượng tầng ${nUp+2} – ${bar.icon} ${bar.name}. Bấm E ở cabin thang máy để xuống.`, 3200); }});
-    INTER.push({x:lx, z:lz, r:1.6, prio:.8, when:()=>Math.abs(P.y-top)<1.2, label:'⇅ Thang máy xuống cầu đi bộ (E)', action:()=>teleport(ax2,az2, ...at(0,0))});
+    { const [lx,lz]=at(0,tb0+VB+1.45); makeLift(W, {x:lx, z:lz, yaw:Math.atan2(-t.nx,-t.nz), name:`Thang ${bar.name}`, color:0xd9a640, floors:[{y:BL, name:'Cầu đi bộ · sảnh trời', short:'C'}, {y:top, name:`Sân thượng · ${bar.name}`, short:'R'}]}); }   /* thang máy thật: cầu đi bộ ↔ sân thượng */
     const [bx,bz]=R2(Wd/2-1.6,0); k.add(new THREE.BoxGeometry(1.0,1.05,4.2), M.deckD, bx, top+.52, bz, 0, ry, 0); k.add(new THREE.BoxGeometry(1.2,.06,4.4), M.gold, bx, top+1.07, bz, 0, ry, 0);
     { const [x0,z0]=R2(Wd/2-1.6,-2.1), [x1,z1]=R2(Wd/2-1.6,2.1); addSeg(x0,z0,x1,z1,.55, top-.5, top+1.4); }
     const [ox,oz]=R2(Wd/2-3.0,0); INTER.push({x:ox, z:oz, r:1.8, prio:.6, when:()=>Math.abs(P.y-top)<1.2, label:`${bar.icon} ${bar.name} – gọi đồ uống (E)`, action:()=>menuModal(`${bar.icon} ${bar.name}`, bar.menu)});
-    const groups=[]; for(const [a,b] of [[-1.2,-1.4],[-1.2,2.2],[1.6,3.6],[-3.6,3.6]]){ const [x,z]=R2(a,b); groups.push(tableSet(x, top, z, ry, false)); }
+    const groups=[]; for(const [a,b] of [[-3.8,-1.0],[-1.2,2.2],[1.6,3.6],[-3.6,3.6]]){ const [x,z]=R2(a,b); groups.push(tableSet(x, top, z, ry, false)); }
     for(const [a,b] of [[-Wd/2+.6,D/2-.6],[Wd/2-.6,D/2-.6],[Wd/2-.6,-D/2+.6]]){ const [x,z]=R2(a,b); plantPot(x, top, z, 1.2); }
     { const cs=[[-Wd/2+.3,-D/2+.3],[Wd/2-.3,-D/2+.3],[Wd/2-.3,D/2-.3],[-Wd/2+.3,D/2-.3]].map(([a,b])=>R2(a,b)); for(const [x,z] of cs){ k.add(new THREE.CylinderGeometry(.05,.05,3,6), M.dark, x, top+1.5, z); circles.push({x, z, r:.1, y0:top-.4, y1:top+3}); }
       for(let i=0;i<4;i++) stringLights(cs[i][0],cs[i][1],cs[(i+1)%4][0],cs[(i+1)%4][1], top+2.9, .4); stringLights(cs[0][0],cs[0][1],cs[2][0],cs[2][1], top+2.9, .6); }
@@ -225,3 +233,10 @@ export function makeMountainTown(W, ctx){
   console.info(`[QC World] Phố Núi: ${built.stilt} nhà sàn, ${built.tower} tháp cầu trời, ${built.slope} tháp sườn đồi`);
   return {spots, built};
 }
+
+/* Sàn/mái chừa lỗ giếng thang máy: chữ nhật (x0..x1, z0..z1) trừ các lỗ → danh sách chữ nhật đặc */
+function rectHoles(x0,x1,z0,z1,holes){ const H=holes.map(h=>({x0:Math.max(x0,h.x0), x1:Math.min(x1,h.x1), z0:Math.max(z0,h.z0), z1:Math.min(z1,h.z1)})).filter(h=>h.x1>h.x0 && h.z1>h.z0);
+  const zs=[...new Set([z0,z1,...H.flatMap(h=>[h.z0,h.z1])])].sort((a,b)=>a-b), out=[];
+  for(let i=0;i<zs.length-1;i++){ const za=zs[i], zb=zs[i+1], zm=(za+zb)/2, cut=H.filter(h=>zm>h.z0 && zm<h.z1).sort((a,b)=>a.x0-b.x0); let x=x0;
+    for(const h of cut){ if(h.x0>x+1e-3) out.push({x0:x, x1:h.x0, z0:za, z1:zb}); x=Math.max(x,h.x1); } if(x1>x+1e-3) out.push({x0:x, x1, z0:za, z1:zb}); }
+  return out; }

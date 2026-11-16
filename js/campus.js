@@ -6,6 +6,7 @@
 // • THÁP BRAND QA: "bộ não" phát sáng trên đỉnh tháp (đồ hoạ; phần xử lý gắn từ dự án khác).
 import { makePoser } from './pose.js';
 import { batchStatic } from './perf.js';
+import { makeFloorLift } from './floorlift.js';
 
 export function makeCampus(W, L){
   const {THREE, renderPass, scene, camera, me, P, HOOK, circles, boxes, plats, INTER, PLACES, mesh, box, MAT, colorMat, makeActor, makeLabel, removeLabel, toast, cam, groundAt, groundH, teleport, CITY} = W;
@@ -76,15 +77,16 @@ export function makeCampus(W, L){
   const carpet=(col)=>ct(256,256,(g,w,h)=>{ g.fillStyle=hex(col); g.fillRect(0,0,w,h); for(let i=0;i<7000;i++){ g.fillStyle=`rgba(255,255,255,${R()*.06})`; g.fillRect(R()*w,R()*h,1.5,1.5); } },[12,8]);
   const sky=ct(2048,512,(g,w,h)=>{ const gr=g.createLinearGradient(0,0,0,h); gr.addColorStop(0,'#8ec8f2'); gr.addColorStop(1,'#e8f3fb'); g.fillStyle=gr; g.fillRect(0,0,w,h); g.fillStyle='#2f86b5'; g.fillRect(0,h*.7,w,h*.3); for(let i=0;i<30;i++){ g.fillStyle='rgba(255,255,255,.5)'; g.fillRect(R()*w,h*.72+R()*h*.25,40+R()*80,2); }
     for(let i=0;i<14;i++){ const x=R()*w; g.fillStyle='#3b7a3a'; g.beginPath(); g.arc(x,h*.7,30+R()*40,Math.PI,0); g.fill(); } });
+  // thang máy Toà Giáo trình: cabin bước vào + bảng nút (thay menu chọn tầng cũ) – đổi tầng khi cửa cabin đã đóng hẳn
+  const FL=makeFloorLift(W, {RW, RD, FY, CH, xs:[-1.45,1.45], name:'Thang máy · Toà Giáo trình', color:0x46d39a, wallM, active:()=>st.on && st.b==='tower',
+    floors:()=>st.floors.map(f=>({short:f.n?String(f.n):'G', name:f.n?`Tầng ${f.n} · ${f.sub||f.title}`:'Sảnh · Thư viện'})), idx:()=>st.idx, switchTo:i=>{ clear(); st.idx=i; build(); }});
   function shell(fl, col){ const f=M(box(RW*2,.2,RD*2), new THREE.MeshStandardMaterial({map:fl.kind==='lobby'?null:carpet(col), color:fl.kind==='lobby'?0xe9e6df:0xffffff, roughness:fl.kind==='lobby'?.2:1}), 0,FY-.1,0); f.castShadow=false;
     const c=M(box(RW*2,.2,RD*2), white, 0,FY+CH+.1,0); c.castShadow=false; for(let x=-RW+3;x<RW;x+=4) for(let z=-RD+2.5;z<RD;z+=4){ const p=M(box(1.4,.04,.7), glow(0xfff6e6,1.1), x,FY+CH-.02,z); p.castShadow=false; }
-    M(box(RW*2,CH,.2), wallM, 0,FY+CH/2,-RD-.1).castShadow=false;
+    if(st.b==='tower') FL.build(root); else M(box(RW*2,CH,.2), wallM, 0,FY+CH/2,-RD-.1).castShadow=false;   // toà nhiều tầng: tường Bắc có 3 ô cửa thang + cabin
     const band=(cx,cz,len,rotY)=>{ const g=new THREE.Group(); g.position.set(cx,0,cz); g.rotation.y=rotY; root.add(g); M(box(len,.9,.2), wallM, 0,FY+.45,0, g); M(box(len,.45,.2), wallM, 0,FY+CH-.22,0, g);
       const v=new THREE.Mesh(new THREE.PlaneGeometry(len,CH-1.35), new THREE.MeshBasicMaterial({map:sky})); v.position.set(0,FY+.9+(CH-1.35)/2,-.6); g.add(v); for(let x=-len/2;x<=len/2+.01;x+=2.4) M(box(.08,CH-1.35,.1), dark, x,FY+.9+(CH-1.35)/2,.02, g); };
     band(0,RD+.1,RW*2,Math.PI); band(-RW-.1,0,RD*2,Math.PI/2); band(RW+.1,0,RD*2,-Math.PI/2);
-    solid(-RW-2,RW+2,-RD-2,-RD+.15); solid(-RW-2,RW+2,RD-.15,RD+2); solid(-RW-2,-RW+.15,-RD-2,RD+2); solid(RW-.15,RW+2,-RD-2,RD+2); plats.push({t:'r', x:0, z:0, c:1, s:0, hw:RW, hd:RD, h:FY});
-    if(st.b==='tower'){ for(const s of [-1,1]){ M(box(1.5,2.5,.12), steel, s*1.65,FY+1.25,-RD+.08); M(box(1.8,2.8,.1), dark, s*1.65,FY+1.4,-RD+.03); }
-      INTER.push({x:0, z:-RD+1.7, r:1.7, label:'⇅ Thang máy · chọn tầng', action:()=>elevator()}); }
+    if(st.b!=='tower') solid(-RW-2,RW+2,-RD-2,-RD+.15); solid(-RW-2,RW+2,RD-.15,RD+2); solid(-RW-2,-RW+.15,-RD-2,RD+2); solid(RW-.15,RW+2,-RD-2,RD+2); plats.push({t:'r', x:0, z:0, c:1, s:0, hw:RW, hd:RD, h:FY});
     if(fl.kind==='lobby' || fl.kind==='exam'){ M(box(3,2.6,.08), steel, 0,FY+1.3,RD-.05); INTER.push({x:0, z:RD-1.4, r:1.6, label:'🚪 Ra ngoài', action:()=>exit()}); }
     const pl=ct(1024,160,(g,w,h)=>{ g.fillStyle='#fff'; g.fillRect(0,0,w,h); g.fillStyle=hex(col); g.fillRect(0,0,22,h); g.fillStyle='#1b2233'; g.font='800 60px "Segoe UI",sans-serif'; g.textBaseline='middle'; g.fillText(fl.title,50,h/2-22); g.font='500 40px "Segoe UI",sans-serif'; g.fillStyle='#5b6474'; g.fillText(fl.sub||'',50,h/2+38); });
     M(box(4.6,.7,.05), new THREE.MeshStandardMaterial({map:pl}), -6,FY+2.3,-RD+.12); }
@@ -236,7 +238,7 @@ export function makeCampus(W, L){
       st.saved={segs:(W.SEGS||[]).splice(0), circles:circles.splice(0), boxes:boxes.splice(0), plats:plats.splice(0), INTER:INTER.splice(0)}; st.camDist=cam.dist; cam.dist=Math.min(cam.dist,4.8);
       W.inside={name:b==='academy'?'Học viện QA':'Toà Giáo trình', campus:true, locked:false}; HOOK.labelGroup='interior'; HOOK.camBox={x0:-RW+.5, x1:RW-.5, z0:-RD+.5, z1:RD-.5, y1:FY+CH-.3};
       CS.environment=scene.environment; renderPass.scene=CS; scene.remove(me.g); CS.add(me.g); go(idx, true); }).catch(e=>toast('Không tải được data/courses.json: '+e.message, 4000)); }
-  function exit(){ if(!st.on) return; const b=st.b; fade.style.opacity=1;
+  function exit(){ if(!st.on) return; const b=st.b; fade.style.opacity=1; FL.reset();
     setTimeout(()=>{ clear(); for(const k of ['circles','boxes','plats','INTER']){ const arr={circles,boxes,plats,INTER}[k]; arr.push(...st.saved[k]); } (W.SEGS||[]).push(...(st.saved.segs||[]));
       renderPass.scene=scene; CS.remove(me.g); scene.add(me.g); HOOK.labelGroup='world'; HOOK.camBox=null; W.inside=null; cam.dist=st.camDist||6.5; st.on=false;
       const d = b==='academy' ? {x:AC.tx+(AC.f?AC.f[0]:0)*1.4, z:AC.tz+(AC.f?AC.f[1]:1)*1.4, f:AC.f?Math.atan2(AC.f[0],AC.f[1]):0} : {x:TW.door.x+1.6, z:TW.door.z, f:Math.PI/2};

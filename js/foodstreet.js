@@ -5,6 +5,8 @@
 //     • quán nước bàn ngoài phố + khách bot (cafe.js) · mọi quầy gọi món được (có xác nhận trả tiền, được buff)
 //  🏙️ KHU CĂN HỘ SKY QC (góc Đông Bắc): 2 toà 20 tầng ban công kính, đèn cửa sổ ban đêm, sảnh đi bộ vào được (sofa ngồi được),
 //     thang máy (E) lên SÂN THƯỢNG HỒ BƠI TRÀN ngắm toàn thành phố.
+import { makeLiftBank } from './liftkit.js';
+
 export function makeFoodStreet(W, ctx){
   const {S, save, ui, askPay, fmt, spend} = ctx;
   const {THREE, scene, P, HOOK, INTER, PLACES, toast, circles, boxes, addPlat, mergeGeometries, GLOW, teleport, makeLabel, makeActor} = W;
@@ -143,32 +145,29 @@ export function makeFoodStreet(W, ctx){
   const balK=Kit(), balM=sm(0xf8f8f6,.5), railG=M.glass;
   for(const t of towers){ const lobbyH=4.6;
     // thân toà (trên sảnh)
-    const body=new THREE.Mesh(new THREE.BoxGeometry(TW,TH-lobbyH,TW), aptMat); body.position.set(t.x, Y+lobbyH+(TH-lobbyH)/2, t.z); body.castShadow=true; body.receiveShadow=true; scene.add(body);
+    const LH={x0:t.x-7.6, x1:t.x-1.4, z0:t.z-7.05, z1:t.z-4.15};   /* giếng dãy 2 thang máy góc Tây Bắc sảnh → sân thượng (sàn/trần chừa lỗ) */
+    const INV=new THREE.MeshBasicMaterial({visible:false}), body=new THREE.Mesh(new THREE.BoxGeometry(TW,TH-lobbyH,TW), [aptMat,aptMat,INV,INV,aptMat,aptMat]);   // thân toà hở đáy/đỉnh: trần sảnh + sàn thượng là tấm riêng có lỗ giếng body.position.set(t.x, Y+lobbyH+(TH-lobbyH)/2, t.z); body.castShadow=true; body.receiveShadow=true; scene.add(body);
     for(let f=2;f<FLOORS;f++){ const y=Y+f*FLH; for(const [dx,dz,w,d] of [[0,TW/2+.7,TW*.7,1.4],[0,-TW/2-.7,TW*.7,1.4],[TW/2+.7,0,1.4,TW*.5],[-TW/2-.7,0,1.4,TW*.5]]){ balK.add(new THREE.BoxGeometry(w,.18,d), balM, t.x+dx, y, t.z+dz); balK.add(new THREE.BoxGeometry(w>d?w:.05,.9,w>d?.05:d), railG, t.x+dx+(w>d?0:Math.sign(dx)*.68), y+.55, t.z+dz+(w>d?Math.sign(dz)*.68:0)); } }
     // sảnh kính (đi bộ vào được)
     const L0=t.x-TW/2, L1=t.x+TW/2, Z0=t.z-TW/2, Z1=t.z+TW/2, door=2.6;
-    k.add(new THREE.BoxGeometry(TW+.4,.3,TW+.4), M.trim, t.x, Y+lobbyH, t.z);
+    for(const r of rectHoles(t.x-TW/2-.2,t.x+TW/2+.2,t.z-TW/2-.2,t.z+TW/2+.2,[LH])) k.add(new THREE.BoxGeometry(r.x1-r.x0,.3,r.z1-r.z0), M.trim, (r.x0+r.x1)/2, Y+lobbyH, (r.z0+r.z1)/2);
     for(const [a,b] of [[L0, t.x-door/2],[t.x+door/2, L1]]){ k.add(new THREE.BoxGeometry(b-a,lobbyH,.08), M.glass, (a+b)/2, Y+lobbyH/2, Z0); boxes.push({x0:a, x1:b, z0:Z0-.15, z1:Z0+.15}); }   // mặt Bắc có cửa (nhìn ra đường)
     k.add(new THREE.BoxGeometry(TW,lobbyH,.08), M.glass, t.x, Y+lobbyH/2, Z1); boxes.push({x0:L0, x1:L1, z0:Z1-.15, z1:Z1+.15});
     for(const x of [L0, L1]){ k.add(new THREE.BoxGeometry(.08,lobbyH,TW), M.glass, x, Y+lobbyH/2, t.z); boxes.push({x0:x-.15, x1:x+.15, z0:Z0, z1:Z1}); }
     kin.add(new THREE.BoxGeometry(TW-.4,.06,TW-.4), sm(0xe9e3d7,.35), t.x, Y+.08, t.z);
     kin.add(new THREE.BoxGeometry(3.4,1.1,.8), sm(0x1c1f24,.4,.3), t.x, Y+.55, t.z+3); kin.add(new THREE.BoxGeometry(3.5,.06,.9), M.gold, t.x, Y+1.12, t.z+3); boxes.push({x0:t.x-1.7, x1:t.x+1.7, z0:t.z+2.6, z1:t.z+3.4});
-    for(const sx of [-1,1]){ const sx0=t.x+sx*4.5, sz0=t.z-2; kin.add(new THREE.BoxGeometry(2.4,.45,.9), sm(0x6d7f8f,.9), sx0, Y+.3, sz0); kin.add(new THREE.BoxGeometry(2.4,.5,.2), sm(0x6d7f8f,.9), sx0, Y+.7, sz0+.4); circles.push({x:sx0, z:sz0, r:.5});
+    for(const sx of [-1,1]){ const sx0=t.x+sx*4.5, sz0=t.z-.5;   /* sofa lùi Nam: trước cửa thang trống ≥ 2 m */ kin.add(new THREE.BoxGeometry(2.4,.45,.9), sm(0x6d7f8f,.9), sx0, Y+.3, sz0); kin.add(new THREE.BoxGeometry(2.4,.5,.2), sm(0x6d7f8f,.9), sx0, Y+.7, sz0+.4); circles.push({x:sx0, z:sz0, r:.5});
       for(const o of [-.6,.6]) W.addSeat && W.addSeat({x:sx0+o, z:sz0-.05, rot:Math.PI, y:Y+.5, floor:Y+.08, label:'🛋️ Ngồi sofa sảnh căn hộ (E · C)'}); }
-    // thang máy → sân thượng hồ bơi
-    const ex=t.x, ez=t.z+TW/2-1.2; kin.add(new THREE.BoxGeometry(2.4,3,.2), sm(0xb8c0c8,.25,.9), ex, Y+1.5, ez+.6);
     const roofY=Y+TH+.2;
-    INTER.push({x:ex, z:ez-.4, r:1.8, prio:.8, when:()=>P.y<Y+3, label:'⇅ Thang máy lên sân thượng hồ bơi (E)', action:()=>{ teleport(t.x-4, t.z-4, t.x, t.z+6); P.y=roofY; toast('⇅ Tầng thượng · hồ bơi tràn ngắm toàn thành phố 🌇', 2600); }});
     // sân thượng: sàn, hồ bơi tràn, ghế nằm, lan can kính, thang máy xuống
-    k.add(new THREE.BoxGeometry(TW+2.8,.3,TW+2.8), sm(0xd8c7a8,.7), t.x, roofY-.15, t.z); addPlat(t.x, t.z, 0, TW/2+1.3, TW/2+1.3, roofY);
+    for(const r of rectHoles(t.x-TW/2-1.4,t.x+TW/2+1.4,t.z-TW/2-1.4,t.z+TW/2+1.4,[LH])){ k.add(new THREE.BoxGeometry(r.x1-r.x0,.3,r.z1-r.z0), sm(0xd8c7a8,.7), (r.x0+r.x1)/2, roofY-.15, (r.z0+r.z1)/2); addPlat((r.x0+r.x1)/2, (r.z0+r.z1)/2, 0, (r.x1-r.x0)/2, (r.z1-r.z0)/2, roofY); }
     const pool=new THREE.Mesh(new THREE.BoxGeometry(TW-3,.1,6), new THREE.MeshStandardMaterial({color:0x2fb6e6, roughness:.05, metalness:.2, emissive:0x0a6f9a, emissiveIntensity:.3, transparent:true, opacity:.9})); pool.position.set(t.x, roofY+.06, t.z+4); scene.add(pool);
     boxes.push({x0:t.x-(TW-3)/2, x1:t.x+(TW-3)/2, z0:t.z+1, z1:t.z+7, y0:roofY-.5, y1:roofY+1.5});
     k.add(new THREE.BoxGeometry(TW+2.8,1.1,.06), railG, t.x, roofY+.55, t.z-TW/2-1.4); k.add(new THREE.BoxGeometry(TW+2.8,1.1,.06), railG, t.x, roofY+.55, t.z+TW/2+1.4);
     for(const x of [t.x-TW/2-1.4, t.x+TW/2+1.4]) k.add(new THREE.BoxGeometry(.06,1.1,TW+2.8), railG, x, roofY+.55, t.z);
     for(let i=0;i<Math.ceil((TW+2.8)/.8);i++){ const o=-TW/2-1.3+i*.8; circles.push({x:t.x+o, z:t.z-TW/2-1.35, r:.2, y0:roofY-.3, y1:roofY+1.4}, {x:t.x+o, z:t.z+TW/2+1.35, r:.2, y0:roofY-.3, y1:roofY+1.4}, {x:t.x-TW/2-1.35, z:t.z+o, r:.2, y0:roofY-.3, y1:roofY+1.4}, {x:t.x+TW/2+1.35, z:t.z+o, r:.2, y0:roofY-.3, y1:roofY+1.4}); }
     for(const lx of [-5,-2.5,0,2.5,5]){ k.add(new THREE.BoxGeometry(.7,.3,1.8), M.white, t.x+lx, roofY+.25, t.z-1); W.addSeat && W.addSeat({x:t.x+lx, z:t.z-1.4, rot:Math.PI, y:roofY+.4, floor:roofY, lie:true, r:1.3, label:'🏖️ Nằm ghế tắm nắng trên sân thượng (E · C)'}); }
-    INTER.push({x:t.x-6, z:t.z-6, r:1.8, prio:.8, when:()=>P.y>roofY-2, label:'⇅ Thang máy xuống sảnh (E)', action:()=>{ teleport(t.x, t.z-TW/2-3, t.x, t.z); toast('⇅ Đã xuống sảnh', 1500); }});
-    k.add(new THREE.BoxGeometry(2.2,2.8,2.2), sm(0xb8c0c8,.3,.8), t.x-6, roofY+1.4, t.z-6); circles.push({x:t.x-6, z:t.z-6, r:1.2, y0:roofY-.3, y1:roofY+3});
+    makeLiftBank(W, {x:t.x-4.5, z:t.z-5.6, yaw:0, count:2, name:`Thang Sky QC ${t===towers[0]?'Tây':'Đông'}`, color:0xd9b56a, floors:[{y:Y, name:'Sảnh căn hộ', short:'G'}, {y:roofY, name:'Sân thượng · hồ bơi tràn', short:'R'}]});
     makeLabel('🏙️ Sky QC Residence', 'Căn hộ cao cấp · thang máy lên hồ bơi sân thượng', {h:.7, x:t.x, y:roofY+5, z:t.z, fade:160}); }
   balK.build(scene);
   HOOK.onFrame.push(()=>{ aptMat.emissiveIntensity=.06+(W.night||0)*1.0; });
@@ -185,3 +184,10 @@ export function makeFoodStreet(W, ctx){
               {icon:'🏙️', name:'Căn hộ Sky QC', sub:'2 toà 20 tầng · sảnh · hồ bơi sân thượng', go:()=>teleport(towers[0].x, towers[0].z-TW/2-3.5, towers[0].x, towers[0].z)});   // S-QA: trước nhảy ra z=A.z0-4 = ngoài mép đất → rơi xuống đáy biển
   return {SHOPS, towers};
 }
+
+/* Sàn/mái chừa lỗ giếng thang máy: chữ nhật (x0..x1, z0..z1) trừ các lỗ → danh sách chữ nhật đặc */
+function rectHoles(x0,x1,z0,z1,holes){ const H=holes.map(h=>({x0:Math.max(x0,h.x0), x1:Math.min(x1,h.x1), z0:Math.max(z0,h.z0), z1:Math.min(z1,h.z1)})).filter(h=>h.x1>h.x0 && h.z1>h.z0);
+  const zs=[...new Set([z0,z1,...H.flatMap(h=>[h.z0,h.z1])])].sort((a,b)=>a-b), out=[];
+  for(let i=0;i<zs.length-1;i++){ const za=zs[i], zb=zs[i+1], zm=(za+zb)/2, cut=H.filter(h=>zm>h.z0 && zm<h.z1).sort((a,b)=>a.x0-b.x0); let x=x0;
+    for(const h of cut){ if(h.x0>x+1e-3) out.push({x0:x, x1:h.x0, z0:za, z1:zb}); x=Math.max(x,h.x1); } if(x1>x+1e-3) out.push({x0:x, x1, z0:za, z1:zb}); }
+  return out; }
