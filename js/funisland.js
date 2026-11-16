@@ -104,7 +104,7 @@ export function makeFunIsland(W, ctx, opt={}){
     // ga tàu lượn
     k.add(new THREE.BoxGeometry(18,.5,4), M.white, 33,Y+.9,258.5); addPlat(33,258.5,0,9,2,Y+1.15);
     // S-GFX (15/11): 3 bậc lên sân ga (cao 1,15 m) ở đầu Tây + chặn gầm sân ga (trước đi lọt vào trong khối sân ga)
-    for(let j=0;j<3;j++){ const h=Y+.29*(j+1), x=22.5+j*.6; k.add(new THREE.BoxGeometry(.6,h-Y+.65,3), M.white, x,(h+Y-.65)/2,258.5); addPlat(x,258.5,0,.31,1.5,h); }
+    for(let j=0;j<3;j++){ const h=Y+.29*(j+1), x=22.5+j*.6; k.add(new THREE.BoxGeometry(.6,h-Y+.65,3), M.white, x,(h+Y-.65)/2,258.5); addPlat(x,258.5,0,.33,1.58,h); }
     boxes.push({x0:24, x1:42, z0:256.5, z1:260.5, y0:Y-2, y1:Y+.75, msg:'🎢 Sân ga tàu lượn – lên bằng bậc ở đầu phía Tây'}); k.add(new THREE.BoxGeometry(19,.3,9), M.purple, 33,Y+5.2,262); for(const x of [24.5,41.5]) for(const z of [258,266]){ k.add(new THREE.CylinderGeometry(.18,.18,4.2,8), M.steel, x,Y+3,z); circles.push({x,z,r:.25}); }
     makeLabel('🎢 Tàu lượn Siêu Bug', 'Vé 25 💰 · dốc 24 m · xoắn ốc', {h:.6, x:33, y:Y+8, z:262, fade:80}); }
   const train=[0,1,2].map(i=>{ const g=new THREE.Group(); g.userData.dynamic=true; scene.add(g); const b=new THREE.Mesh(new THREE.BoxGeometry(1.4,.55,2.1), [M.yellow,M.blue,M.green][i]); b.position.y=.35; g.add(b); const s=new THREE.Mesh(new THREE.BoxGeometry(1.2,.6,.25), M.dark); s.position.set(0,.8,-.7); g.add(s); const nose=new THREE.Mesh(new THREE.BoxGeometry(1.42,.3,.3), M.red); nose.position.set(0,.5,1.05); g.add(nose); return g; });
@@ -127,7 +127,7 @@ export function makeFunIsland(W, ctx, opt={}){
   /* ============================== 🗼 THÁP RƠI TỰ DO ============================== */
   const DT={x:100, z:300, h:60, y:3, st:'idle', t:0, riding:false};
   const ringG=new THREE.Group(); ringG.userData.dynamic=true; scene.add(ringG);
-  { k.add(new THREE.CylinderGeometry(1.5,1.9,DT.h,16), M.steel, DT.x,Y+DT.h/2,DT.z); k.add(new THREE.CylinderGeometry(2.4,2.4,1.2,16), M.red, DT.x,Y+DT.h+.6,DT.z); circles.push({x:DT.x, z:DT.z, r:4.2});
+  { k.add(new THREE.CylinderGeometry(1.5,1.9,DT.h,16), M.steel, DT.x,Y+DT.h/2,DT.z); k.add(new THREE.CylinderGeometry(2.4,2.4,1.2,16), M.red, DT.x,Y+DT.h+.6,DT.z); circles.push({x:DT.x, z:DT.z, r:5.0});
     for(let i=0;i<5;i++) k.add(new THREE.TorusGeometry(1.75,.06,6,20), M.yellow, DT.x,Y+8+i*10,DT.z, Math.PI/2,0,0);
     const r=new THREE.Mesh(new THREE.TorusGeometry(2.9,.35,10,32), M.purple); r.rotation.x=Math.PI/2; ringG.add(r); for(let i=0;i<12;i++){ const a=i/12*TAU, s=new THREE.Mesh(new THREE.BoxGeometry(.6,.9,.5), M.dark); s.position.set(Math.cos(a)*3.2,.1,Math.sin(a)*3.2); s.rotation.y=-a+Math.PI/2; ringG.add(s); }
     k.add(new THREE.CylinderGeometry(4.6,4.8,.6,24), M.white, DT.x,Y+.3,DT.z); makeLabel('🗼 Tháp rơi tự do 60 m', 'Vé 25 💰', {h:.6, x:DT.x, y:Y+DT.h+4, z:DT.z, fade:150}); GLOW && GLOW.add(DT.x,Y+DT.h+1.4,DT.z,5,0xff4f6d,1); }
@@ -181,7 +181,7 @@ export function makeFunIsland(W, ctx, opt={}){
     dk.build(inside); }
   const hcar=new THREE.Group(); hcar.userData.dynamic=true; scene.add(hcar); { const b=new THREE.Mesh(new THREE.BoxGeometry(1.5,.7,2), sm(0x5a1a6a,.4)); b.position.y=.35; hcar.add(b); const s=new THREE.Mesh(new THREE.BoxGeometry(1.4,.7,.2), M.dark); s.position.set(0,.9,-.8); hcar.add(s); }
   const HC={s:0, riding:false}; const placeHC=()=>{ const p=HP.at(HC.s), t=HP.tan(HC.s); hcar.position.copy(p); hcar.position.y=Y; hcar.rotation.y=Math.atan2(t.x,t.z); return {p,t}; };
-  placeHC();
+  placeHC(); circles.push({x:hcar.position.x, z:hcar.position.z, r:1.05});   /* xe đỗ ở cửa Nhà Ma: không đi xuyên được */
   function updHaunt(dt, T){ if(!HC.riding){ for(const s of scares) if(s.g) s.g.visible=false; return; }
     HC.s+=dt*1.6; const {p,t}=placeHC();
     for(const s of scares){ if(s.light){ s.light.visible=Math.sin(T*9+s.light.position.x)>.2; continue; } const d=Math.hypot(p.x-s.x,p.z-s.z); if(d<3.2 && !s.done){ s.done=true; s.g.visible=true; s.t=0; boo(); toast(['👻 BOOO!','💀 Áaaa!','🐛 Bug khổng lồ!!'][s.kind], 1200); }

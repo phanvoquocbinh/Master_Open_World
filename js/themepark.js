@@ -145,7 +145,7 @@ export function makeThemePark(W, ctx, opt={}){
     for(const s of [-1,1]) addSeg(40+s*4.05,z0,40+s*4.05,z1,.15,undefined,undefined,'🌉 Lan can cầu vào Công viên Kỳ Quan');
     for(const t of [.2,.5,.8]){ const zz=z0+Lb*t, top=yb(t)-.5; kF.add(boxM(8.8,top+3,1.6),M.stoneLight,40,(top-3)/2,zz); for(const s of [-1,1]){ kF.add(cylM(.07,.09,3.4,8),M.blackMetal,40+s*4.2,yb(t)+2.6,zz); kF.add(new THREE.SphereGeometry(.26,12,8),M.lampWarm,40+s*4.2,yb(t)+4.4,zz); glow(40+s*4.2,yb(t)+4.4,zz,2.4,0xffd9a0,.9); } }
     // dải lát trên Đảo Wonderland dẫn tới đầu cầu
-    kF.add(flat(planeM(6,22,0,0)),M.pave,40,1.79,326.5);
+    kF.add(flat(planeM(6,22,0,0)),M.pave,40,1.79,326.5); addPlat(40,326.5,0,3.08,11.08,1.79);   /* mặt đi = mặt lát (trước: chân lún 9–13 cm vì nền đảo thấp hơn dải lát) */
     // CỔNG: 2 tháp + vòm + bảng tên
     const Pg=local(kL,40,G0,402,0), wallC=M.plasterC(0xf2e6cf), trimC=M.plasterC(0xfff7e6), roofC=M.paint(0x1f5f8f,.5,.1), goldM=M.paint(0xd8b25a,.3,.9);
     for(const s of [-1,1]){ Pg(boxM(6,15,6),wallC,s*12,7.5,0); Pg(boxM(6.6,.7,6.6),trimC,s*12,15.2,0); Pg(boxM(6.6,.5,6.6),trimC,s*12,5.2,0); Pg(new THREE.ConeGeometry(4.6,7,4),roofC,s*12,19.0,0,0,0,Math.PI/4); Pg(cylM(.05,.05,3,6),goldM,s*12,23.9,0); Pg(new THREE.SphereGeometry(.3,10,8),goldM,s*12,22.6,0);
