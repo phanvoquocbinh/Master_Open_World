@@ -15,7 +15,7 @@ export async function make(W, ctx={}){
   if(W.abySea) return W.abySea;
   const {THREE, scene, P, me, cam, HOOK, INTER, PLACES, toast, makeLabel, teleport, addSeg, addPlat} = W;
   const TAU=Math.PI*2, clamp=(v,a,b)=>v<a?a:v>b?b:v, lerp=(a,b,t)=>a+(b-a)*t, ss=(a,b,x)=>{ const t=clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
-  const WY=W.WATER_Y ?? -.35, LOW=W.QUAL==='low';
+  const WY=(W.ABY && W.ABY.waterY!=null) ? W.ABY.waterY : (W.WATER_Y ?? -.35), LOW=W.QUAL==='low';
   const pay=(cost, what, go)=>{ if(!ctx.askPay) return go(); ctx.askPay(cost, what, ()=>{ if(ctx.spend && !ctx.spend(cost)) return; go(); }); };
   const root=new THREE.Group(); root.name='abyssal-sea'; scene.add(root); const dyn=new THREE.Group(); dyn.name='abyssal-sea-dyn'; dyn.userData.dynamic=true; scene.add(dyn);
   const std=(c,o={})=>new THREE.MeshStandardMaterial({color:c, roughness:.6, ...o});
@@ -31,8 +31,8 @@ export async function make(W, ctx={}){
   //   → kênh z 180–220 làn Nam z 208 sang Tây → khe giữa Thụy Sĩ và đường băng → vòng quần đảo → về theo làn Bắc/Tây → kênh làn Bắc z 190 → lên eo làn Tây → cập bến.
   const DEF={ plots:{ marina:{x:-38, z:126, nx:1, nz:0, deckY:2.0, stem:8}, stage:{x:-100, z:-212, yaw:0}, watersports:{x:-215, z:40, rx:18, rz:70}, parasail:{x:-170, z:-262, rx:38, rz:26} },
     bayLoop:{x:0, z:-12, r:80}, strait:{x:0, z:140, nx:0, nz:1, w:76},
-    seaOut:[[6,96],[-4,118],[-8,140],[-13,165],[-23,190],[-36,206],[-70,207],[-110,207],[-150,207],[-176,206],[-202,213],[-210,248],[-246,296],[-300,338],[-356,372]],
-    seaBack:[[-450,352],[-380,338],[-320,318],[-262,282],[-240,262],[-232,240],[-228,214],[-216,196],[-195,191],[-160,191],[-120,191],[-85,191],[-62,191],[-41,183],[-30,165]],
+    seaOut:[[6,96],[-4,118],[-8,140],[-14,158],[-21,171],[-24,184],[-36,206],[-70,207],[-110,207],[-150,207],[-176,206],[-202,213],[-210,248],[-246,296],[-300,338],[-356,372]],
+    seaBack:[[-450,352],[-380,338],[-320,318],[-262,282],[-240,262],[-232,240],[-228,214],[-216,196],[-195,191],[-160,191],[-120,191],[-85,191],[-62,191],[-46,186],[-37,170],[-30,156]],
     karst:{ x0:-600, x1:-255, z0:398, z1:660, cut:[{x0:-405, x1:-255, z0:478, z1:660}], keepOut:[{x0:-1800, x1:-250, z0:300, z1:398, hMax:12}], hMax:100,
       islands:[ {x:-520,z:450,r:34,h:100,seed:41,name:'Hòn Mẹ Release', caves:[[.6,12,9],[2.2,8,6],[5.2,10,7]]},
         {x:-470,z:580,r:32,h:58,seed:23,name:'Hòn Cổng Regression', twin:true, caves:[]},
@@ -41,6 +41,7 @@ export async function make(W, ctx={}){
         {x:-300,z:446,r:21,h:68,seed:53,name:'Hòn Ngọc Pipeline', caves:[[1.2,8,6],[3.9,7,5]]} ],
       loop:[[-390,398],[-430,430],[-455,470],[-455,512],[-505,520],[-585,522],[-618,495],[-612,430],[-585,388],[-520,368]] } };
   const WA=W.ABY||{}, PRE=!W.ABY;
+  const LANES=[]; if(Array.isArray(WA.seaOut) && Array.isArray(WA.seaBack)) LANES.push({name:'W.ABY', out:WA.seaOut, back:WA.seaBack}); LANES.push({name:'dự phòng phiên B', out:DEF.seaOut, back:DEF.seaBack}); let LN=LANES[0];
   const ABY={...DEF, ...WA, plots:{...DEF.plots, ...(WA.plots||{})}, karst:{...DEF.karst, ...(WA.karst||{})}};
   if(WA.karst && (WA.karst.islands || WA.karst.loop) && !WA.seaOut){ /* A đổi quần đảo nhưng không đưa tuyến → giữ tuyến tạm, routeCheck sẽ báo nếu chạm */ }
   const PL=ABY.plots, KS=ABY.karst, M0=PL.marina;
@@ -50,16 +51,26 @@ export async function make(W, ctx={}){
   const MW=(a,b)=>[MAR.sx+U2[0]*a+N2[0]*b, MAR.sz+U2[1]*a+N2[1]*b];       /* toạ độ bến: a dọc bờ (theo hướng mũi tàu), b ra nước tính từ điểm bờ */
   const DY=MAR.deckY, PB=MAR.stem, GA=15.6, YB=PB+.6+4.75, COMPACT=PB<14;   /* COMPACT: bến sát vách (1 dải cầu gỗ rộng = stem) thay cho lối gỗ + cầu tàu + phao nổi */
   const DOCK={x:MW(GA,YB)[0], z:MW(GA,YB)[1], yaw:Math.atan2(U2[0],U2[1])};
-  const SPORT=PL.watersports, PARA=PL.parasail;
+  const fitZone=(Z,pad=6)=>{ if(!Z) return Z; const B=[], st=2.5, ex=1.25;   /* lưới 2,5 m quanh vùng → điểm cạn / có cầu-sàn thấp; rồi tìm elip lớn nhất không chứa điểm nào */
+    for(let x=Z.x-(Z.rx*ex+pad); x<=Z.x+Z.rx*ex+pad; x+=st) for(let z=Z.z-(Z.rz*ex+pad); z<=Z.z+Z.rz*ex+pad; z+=st) if(W.groundH(x,z)>WY-1.2 || lowPlat(x,z,6)) B.push([x,z]);
+    const hit=c=>B.some(([x,z])=>Math.pow((x-c.x)/(c.rx+pad),2)+Math.pow((z-c.z)/(c.rz+pad),2)<1);
+    if(!hit(Z)) return Z; let best=null; for(const sc of [1,.85,.7,.6,.5,.4]) for(let dx=-1;dx<=1;dx+=.25) for(let dz=-1;dz<=1;dz+=.0625){ const c={x:Z.x+dx*Z.rx*.6, z:Z.z+dz*Z.rz*.8, rx:Z.rx*Math.min(1,sc*1.3), rz:Z.rz*sc}; if(!hit(c)){ const ar=c.rx*c.rz-.01*Math.hypot(dx,dz); if(!best || ar>best.ar) best={...c, ar}; } }
+    if(best){ delete best.ar; console.info('[abyssal_sea] vùng nước chỉnh để né cầu/cạn:', JSON.stringify(Z), '→', JSON.stringify(best)); return best; } return Z; };
+  let SPORT=PL.watersports, PARA=PL.parasail;   /* fitZone chạy ngay sau khi có lowPlat (dưới) */
   const ISL=KS.islands.map((o,i)=>({seed:11+i*13, caves:[], name:'Hòn đá vôi '+(i+1), ...o}));
+  const lowPlat=(x,z,top)=>{ if(!W.platH) return false; const h=W.platH(x,z); return h>WY-1 && h<WY+top; };   /* sàn/cầu sát hoặc trên mặt nước nhưng thấp hơn đỉnh vật (cầu cao +16 không chặn) */
+  SPORT=fitZone(SPORT,6); PARA=fitZone(PARA,10);
   const inBox=(x,z,b,p=0)=>x>b.x0-p && x<b.x1+p && z>b.z0-p && z<b.z1+p;
   const KB={x0:KS.x0, x1:KS.x1, z0:KS.z0, z1:KS.z1}, karstOK=(x,z,r,h)=>inBox(x,z,{x0:KB.x0+r,x1:KB.x1-r,z0:KB.z0+r,z1:KB.z1-r}) && !(KS.cut||[]).some(c=>inBox(x,z,c,r)) && !(KS.keepOut||[]).some(c=>h>(c.hMax??12) && inBox(x,z,c,r));
   for(const I of ISL){ const rr=I.r*1.3+(I.twin?20:0); if(!karstOK(I.x,I.z,rr,I.h)) console.warn('[abyssal_sea] đảo nằm ngoài vùng karst cho phép / chạm vùng cắt:', I.name, I.x, I.z); }
   function buildRoute(){ const D=[DOCK.x,DOCK.z], u=U2, ah=(k)=>[D[0]+u[0]*k, D[1]+u[1]*k];
     if(Array.isArray(ABY.yachtRoute) && ABY.yachtRoute.length>3) return [D, ah(45), ...ABY.yachtRoute, ah(-80), ah(-40)];
     const pts=[D, ah(45)], BL=ABY.bayLoop;
-    if(BL){ const s=ah(45), a0=Math.atan2(s[1]-BL.z, s[0]-BL.x); for(let i=1;i<=7;i++){ const a=a0+i*TAU*.8/7; pts.push([BL.x+Math.cos(a)*BL.r, BL.z+Math.sin(a)*BL.r]); } }
-    pts.push(...ABY.seaOut, ...KS.loop, ...ABY.seaBack, ah(-40)); return pts; }
+    if(BL){ /* vòng quanh đảo khách sạn: bán kính BL.r, chỗ nào cạn (thềm bãi cát trước 2 cánh nhà phía Bắc) thì co vào – vẫn cách kè đảo ≥ 5 m */
+      const s=ah(45), a0=Math.atan2(s[1]-BL.z, s[0]-BL.x), HR=((PL.hotel||{}).r??58)+10, deep=(x,z)=>W.groundH(x,z)<WY-2.3, P=(a,r)=>[BL.x+Math.cos(a)*r, BL.z+Math.sin(a)*r];
+      const rs=[]; for(let i=1;i<=12;i++){ const a=a0+i*TAU*.8/12; let r=BL.r; while(r>HR && !(deep(...P(a,r)) && deep(...P(a,r+3)))) r-=1; rs.push([a,Math.max(r,HR)]); }
+      for(let i=0;i<rs.length;i++){ const r=Math.min(rs[i][1], rs[Math.max(0,i-1)][1]+6, rs[Math.min(rs.length-1,i+1)][1]+6); pts.push(P(rs[i][0],r)); } }
+    pts.push(...LN.out, ...KS.loop, ...LN.back, ah(-40)); return pts; }
 
   /* ============================== 1. QUẦN ĐẢO ĐÁ VÔI NGỌC BÍCH ============================== */
   const karstTex=(()=>{ const t=cvs(512,512,(g,w,h)=>{ const R=AK.rng(91); g.fillStyle='#c4bfb3'; g.fillRect(0,0,w,h);
@@ -187,11 +198,18 @@ export async function make(W, ctx={}){
       for(let i=0;i<NY;i++) for(let j=i+1;j<NY;j++){ const a=A[i], b=A[j]; if(Math.abs(a.x-b.x)>60 || Math.abs(a.z-b.z)>60) continue;
         for(const oa of [-14,0,14]) for(const ob of [-14,0,14]){ const d=Math.hypot(a.x+Math.sin(a.yaw)*oa-b.x-Math.sin(b.yaw)*ob, a.z+Math.cos(a.yaw)*oa-b.z-Math.cos(b.yaw)*ob)-10.4; if(d<best){ best=d; at=[Math.round(a.x),Math.round(a.z),i,j,T]; } } } }
     return {sep:+best.toFixed(1), at}; };
-  { let pick=null; for(const [dw,gp] of [[32,28],[30,30],[34,26],[28,32],[36,28],[32,34],[38,30],[30,36],[40,32],[34,38]]){ RT=makeRT(dw,gp); const r=sepOf(); RT.sep=r; if(!pick || r.sep>pick.r.sep) pick={dw,gp,r}; if(r.sep>=1.5) break; }
-    if(RT.sep.sep<1.5){ RT=makeRT(pick.dw,pick.gp); RT.sep=pick.r; console.warn('[abyssal_sea] ⚠️ tuyến có cặp tàu sát nhau', pick.r); } }
+  let LANE_LOG=[];
+  function pickRoute(){ let pick=null; LANE_LOG=[];
+    for(const ln of LANES){ LN=ln; RT=makeRT(32,28); const bad=routeCheck(true), nb=bad.length; let best=null;
+      if(!nb) for(const [dw,gp] of [[32,28],[30,30],[34,26],[28,32],[36,28],[32,34],[38,30],[30,36],[40,32],[34,38]]){ RT=makeRT(dw,gp); const r=sepOf(); if(!best || r.sep>best.r.sep) best={dw,gp,r}; if(r.sep>=1.5) break; }
+      LANE_LOG.push({lane:ln.name, bad:nb, firstBad:bad.slice(0,3), sep:best?best.r.sep:null});
+      const cand={ln, nb, best, score:(nb?-1000*nb:0)+(best?Math.min(best.r.sep,1.5)*10:0)}; if(!pick || cand.score>pick.score) pick=cand; if(!nb && best && best.r.sep>=1.5) break; }
+    LN=pick.ln; const b=pick.best||{dw:32,gp:28,r:null}; RT=makeRT(b.dw,b.gp); RT.sep=b.r||sepOf(); RT.lane=LN.name; RT.laneLog=LANE_LOG; }
   // tự kiểm tra tuyến: cách đảo ≥ 12 m, không lên cạn, không vượt vùng (Dev City x ≥ 100, Đảo Ngoại ngữ x ≤ −250)
-  const routeCheck=()=>{ const bad=[]; let fly=0; for(let i=0;i<=RT.n;i+=4){ const x=RT.X[i], z=RT.Z[i]; if(i>60 && i<RT.n-60 && W.groundH(x,z)>WY-2.2) bad.push(['cạn',Math.round(x),Math.round(z)]); if(hitIsland(x,z,12)) bad.push(['đảo',Math.round(x),Math.round(z)]); if(W.abyStage && W.abyStage.hit(x,z,8)) bad.push(['sân khấu',Math.round(x),Math.round(z)]); for(const [k,Z] of Object.entries(ZONES)) if(k!=='abyssal' && x>Z.x0-9.75 && x<Z.x1+9.75 && z>Z.z0-9.75 && z<Z.z1+9.75) bad.push([k,Math.round(x),Math.round(z)]); if(x<-251 && x>-760 && z>318 && z<392) fly++; if(Math.hypot(x-DOCK.x,z-DOCK.z)>70){ let near=false; for(const [ox,oz] of [[0,0],[5,0],[-5,0],[0,5],[0,-5]]) if(W.platH(x+ox,z+oz)>WY-1) near=true; if(near) bad.push(['cầu/sàn',Math.round(x),Math.round(z)]); } } bad.flyCross=Math.round(fly*4); return bad; };
-  { const bad=routeCheck(); console.info(`[abyssal_sea] tuyến du thuyền ${Math.round(RT.L)} m · chu kỳ ${Math.round(RT.PER)} s (đỗ ${RT.DWELL} s) · 2 tàu gần nhất cách ${RT.sep.sep} m · tốc độ tối đa ${RT.vmax.toFixed(1)} m/s · ${PRE?'bố cục TẠM (chưa có W.ABY)':'theo W.ABY'}`+(bad.length?` · ⚠️ ${bad.length} điểm cần xem: `+JSON.stringify(bad.slice(0,8)):' · tuyến sạch')+` · băng qua trục bay Tây Skyport ~${bad.flyCross} m`); }
+  const MO=(ABY.strait && ABY.strait.mouth) || null;   /* cửa eo: tàu cao chỉ đi x0…x1 ở dải z mouth.z −10 … +1 (cầu dẫn G2 thấp phía Đông) */
+  const routeCheck=(quick)=>{ const bad=[]; let fly=0; for(let i=0;i<=RT.n;i+=4){ const x=RT.X[i], z=RT.Z[i]; if(MO && x>-90 && x<45 && z>MO.z-10.5 && z<MO.z+1.5 && (x+4.9>MO.x1 || x-4.9<MO.x0)) bad.push(['cửa eo/G2',Math.round(x),Math.round(z)]); if(i>60 && i<RT.n-60 && W.groundH(x,z)>WY-2.2) bad.push(['cạn',Math.round(x),Math.round(z)]); if(hitIsland(x,z,12)) bad.push(['đảo',Math.round(x),Math.round(z)]); if(W.abyStage && W.abyStage.hit(x,z,8)) bad.push(['sân khấu',Math.round(x),Math.round(z)]); for(const [k,Z] of Object.entries(ZONES)) if(k!=='abyssal' && x>Z.x0-9.75 && x<Z.x1+9.75 && z>Z.z0-9.75 && z<Z.z1+9.75) bad.push([k,Math.round(x),Math.round(z)]); if(x<-251 && x>-760 && z>318 && z<392) fly++; if(Math.hypot(x-DOCK.x,z-DOCK.z)>70){ let near=false; for(const [ox,oz] of [[0,0],[5,0],[-5,0],[0,5],[0,-5]]) if(lowPlat(x+ox,z+oz,13.5)) near=true; if(near) bad.push(['cầu/sàn',Math.round(x),Math.round(z)]); } } bad.flyCross=Math.round(fly*4); return bad; };
+  pickRoute();
+  { const bad=routeCheck(); console.info(`[abyssal_sea] tuyến du thuyền ${Math.round(RT.L)} m · chu kỳ ${Math.round(RT.PER)} s (đỗ ${RT.DWELL} s) · 2 tàu gần nhất cách ${RT.sep.sep} m · tốc độ tối đa ${RT.vmax.toFixed(1)} m/s · ${PRE?'bố cục TẠM (chưa có W.ABY)':'theo W.ABY'}`+(bad.length?` · ⚠️ ${bad.length} điểm cần xem: `+JSON.stringify(bad.slice(0,8)):' · tuyến sạch')+` · băng qua trục bay Tây Skyport ~${bad.flyCross} m · làn: ${RT.lane}`, RT.laneLog); }
   const YS=[...Array(NY)].map(()=>({x:0,z:0,yaw:0,v:0})), _m=new THREE.Matrix4(), _q=new THREE.Quaternion(), _e=new THREE.Euler(), _p=new THREE.Vector3(), _s=new THREE.Vector3(1,1,1);
   let nearK=-1, aboard=-1, frameT=-1, ticket=null;
   const yObj=new THREE.Object3D();   /* khung toạ độ tàu người chơi đang đi */
@@ -262,17 +280,20 @@ export async function make(W, ctx={}){
   const fig8=(c,ph,T,w)=>{ const t=T*w+ph; const x=c.x+Math.sin(t)*c.rx*.85, z=c.z+Math.sin(2*t)*c.rz*.6; const dx=Math.cos(t)*c.rx*.85*w, dz=2*Math.cos(2*t)*c.rz*.6*w; return [x,z,Math.atan2(dx,dz),Math.hypot(dx,dz)]; };
   // người chơi lái / bay
   const CR={on:null, x:0,z:0,y:WY,yaw:0,v:0,alt:2.5, lap:0};
-  const freeWater=(x,z,r=1.5)=>{ if(W.groundH(x,z)>WY-.9) return false; if(W.abyStage && W.abyStage.hit && W.abyStage.hit(x,z,r)) return false; if(W.platH && W.platH(x,z)>WY-1) return false;   /* chỉ sàn sát / trên mặt nước mới chặn (sàn dưới đáy vực cũ thì không) */ if(hitIsland(x,z,r)) return false;
+  const freeWater=(x,z,r=1.5)=>{ if(W.groundH(x,z)>WY-.9) return false; if(W.abyStage && W.abyStage.hit && W.abyStage.hit(x,z,r)) return false; if(lowPlat(x,z,4)) return false;   /* chỉ sàn sát / trên mặt nước mới chặn (sàn dưới đáy vực cũ thì không) */ if(hitIsland(x,z,r)) return false;
     for(const y of YS){ const dx=x-y.x, dz=z-y.z, c=Math.cos(y.yaw), s=Math.sin(y.yaw), lx=dx*c-dz*s, lz=dx*s+dz*c; if(Math.abs(lx)<5.4+r && lz>-23-r && lz<22+r) return false; } return true; };
-  const rentAt=()=>COMPACT?MW(-25,PB-.8):MW(-30,20.4), backAt=()=>COMPACT?MW(-25,PB-2):MW(-30,19.6);
+  const rentAt0=COMPACT?[-25,PB-.8]:[-30,20.4], rentAt=()=>MW(...rentAt0), backAt=()=>COMPACT?MW(-25,PB-2):MW(-30,19.6);
   const RIDES={ jet:{name:'🚤 Mô tô nước', cost:30, vmax:15, acc:6, turn:1.9, seat:.55}, kayak:{name:'🛶 Kayak đôi', cost:10, vmax:2.8, acc:1.4, turn:1.2, seat:.12}, fly:{name:'🌊 Flyboard', cost:40, vmax:5.5, acc:3, turn:1.6, seat:0} };
-  function startRide(kind){ const R=RIDES[kind], [x,z]=rentAt(); CR.on=kind; CR.x=x+N2[0]*4; CR.z=z+N2[1]*4; CR.yaw=Math.atan2(N2[0],N2[1]); CR.v=0; CR.alt=kind==='fly'?3:0; CR.y=WY; P.x=P.px=CR.x; P.z=P.pz=CR.z;   /* đặt người lên xe ngay (bộ dò 'dịch chuyển đi' không huỷ nhầm) */
+  function startRide(kind){ const R=RIDES[kind], [x,z]=rentAt(); CR.on=kind; CR.x=x+N2[0]*4; CR.z=z+N2[1]*4; CR.yaw=Math.atan2(N2[0],N2[1]); CR.v=0; CR.alt=kind==='fly'?3:0; CR.y=WY;
+    { let ok=freeWater(CR.x,CR.z,8); for(let i=0;!ok && i<24;i++){ const a=(i%6-2.5)*6, b=4+Math.floor(i/6)*6; const [x,z]=MW(rentAt0[0]+a, rentAt0[1]+b); if(freeWater(x,z,8)){ CR.x=x; CR.z=z; ok=true; } } }   /* chỗ xuất phát: nước trống, cách du thuyền ≥ 8 m */ P.x=P.px=CR.x; P.z=P.pz=CR.z;   /* đặt người lên xe ngay (bộ dò 'dịch chuyển đi' không huỷ nhầm) */
     HOOK.vehicle={drive:rideDrive}; toast(kind==='fly'?'🌊 Flyboard: W/S tiến–lùi · A/D xoay · giữ Shift để bay cao (tối đa 14 m) · E gọi cứu hộ về bến.':`${R.name}: W/S ga–lùi · A/D bẻ lái${kind==='jet'?' · Shift tăng tốc':''} · về sát cầu thuê rồi bấm E để trả.`,5000); }
   function endRide(back){ CR.on=null; HOOK.vehicle=null; HOOK.vehicleInter=null; const [x,z]=backAt(); P.x=x; P.z=z; P.px=x; P.pz=z; P.y=W.groundAt(x,z); P.vx=P.vz=P.vy=0; P.ground=true; me.g.position.set(P.x,P.y,P.z); me.g.rotation.set(0,P.face,0); toast(back?'🆘 Cứu hộ đã đưa bạn về cầu thuê đồ chơi nước.':'⚓ Đã trả. Cảm ơn quý khách!',2400); }
   function rideDrive(dt,inp){ dt=Math.min(dt,.1); const R=RIDES[CR.on]; if(!R) return; const boost=inp.boost && CR.on==='jet';
     if(Math.hypot(P.x-CR.x,P.z-CR.z)>4){ CR.on=null; HOOK.vehicle=null; HOOK.vehicleInter=null; return; }   /* đã bay đi chỗ khác (bản đồ M) → trả xe tự động */
+    if(CR.on!=='fly') for(const y of YS){ const dx=CR.x-y.x, dz=CR.z-y.z, c=Math.cos(y.yaw), s=Math.sin(y.yaw), lx=dx*c-dz*s, lz=dx*s+dz*c, hw=5.4+1.2; if(Math.abs(lx)<hw && lz>-24 && lz<22.5){ const k=(Math.sign(lx)||1)*hw-lx; CR.x+=c*k; CR.z-=s*k; CR.v*=.5; } }   /* du thuyền lấn vào → đẩy xe nhỏ ra mạn, không kẹt */
+    const stuckNow=CR.on!=='fly' && !freeWater(CR.x,CR.z,CR.on==='kayak'?.8:1.2);
     CR.yaw-=inp.ix*R.turn*dt*(CR.on==='fly'?1:clamp(.35+Math.abs(CR.v)/R.vmax,0,1.2)); const vm=R.vmax*(boost?1.3:1); CR.v=clamp(CR.v+(inp.iz*R.acc-CR.v*(CR.on==='kayak'?.7:.35))*dt,-vm*.35,vm);
-    const nx=CR.x+Math.sin(CR.yaw)*CR.v*dt, nz=CR.z+Math.cos(CR.yaw)*CR.v*dt; if(CR.on==='fly' ? !hitIsland(nx,nz,1) && W.groundH(nx,nz)<CR.alt-2 && !(W.platH && W.platH(nx,nz)>WY+CR.alt-3) : freeWater(nx,nz,CR.on==='kayak'?.8:1.2)){ CR.x=nx; CR.z=nz; } else { CR.v*=-.3; }
+    const nx=CR.x+Math.sin(CR.yaw)*CR.v*dt, nz=CR.z+Math.cos(CR.yaw)*CR.v*dt; if(CR.on==='fly' ? !hitIsland(nx,nz,1) && W.groundH(nx,nz)<CR.alt-2 && !(W.platH && W.platH(nx,nz)>WY+CR.alt-3) : (stuckNow || freeWater(nx,nz,CR.on==='kayak'?.8:1.2))){ CR.x=nx; CR.z=nz; } else { CR.v*=-.3; }
     if(CR.on==='fly'){ CR.alt=clamp(CR.alt+(inp.boost?3.2:-1.4)*dt,2.2,14); }
     const T=W.T||0, bob=CR.on==='fly'?Math.sin(T*2.3)*.12:Math.sin(T*2.1)*.04; CR.y=WY+(CR.on==='fly'?CR.alt:0)+bob;
     P.x=CR.x; P.z=CR.z; P.y=CR.y+R.seat; P.vx=P.vz=P.vy=0; P.face=CR.yaw; me.g.position.set(P.x,P.y-(CR.on==='fly'?0:.42),P.z); me.g.rotation.set(0,CR.yaw,CR.on==='jet'?-inp.ix*.15*Math.min(1,Math.abs(CR.v)/8):0); if(me.play) me.play(CR.on==='fly'?'idle':(me.acts&&me.acts.sit?'sit':'idle'));
@@ -317,8 +338,10 @@ export async function make(W, ctx={}){
 
   /* ============================== 5. ĐIỂM BẢN ĐỒ · KHUNG HÌNH · ÂM THANH ============================== */
   { const [x,z]=COMPACT?MW(-16,PB-2.5):MW(-14,3.2), [lx,lz]=MW(-16,40); PLACES.push({icon:'🛥️', name:'Bến Siêu Du Thuyền', sub:'Tour 3 tầng · Quần đảo Đá Vôi Ngọc Bích · thể thao nước', go:()=>teleport(x,z,lx,lz)}); }
-  let tt=0, wasNear=false;
+  let tt=0, wasNear=false, lateDone=false;
   HOOK.onFrame.push((dt)=>{ dt=Math.min(dt||1/60,.1); tt+=dt; const T=W.T||tt;
+    if(!lateDone && tt>.5){ lateDone=true;   /* các vùng nạp SAU đảo Abyssal (Thụy Sĩ – cầu G3, Skyport…) đã có sàn/cầu → chỉnh lại vùng nước + chọn lại tuyến 1 lần */
+      try{ SPORT=fitZone(PL.watersports,6); PARA=fitZone(PL.parasail,10); api.layout.sport=SPORT; api.layout.para=PARA; if(aboard<0){ const old=RT.lane, os=RT.sep&&RT.sep.sep; pickRoute(); frameT=-1; const b=routeCheck(); console.info(`[abyssal_sea] kiểm lại sau khi mọi vùng đã nạp: làn ${RT.lane} (trước: ${old}) · 2 tàu gần nhất ${RT.sep.sep} m (trước ${os}) · ${b.length} điểm cần xem`, b.slice(0,6)); } }catch(e){ console.warn('[abyssal_sea] kiểm lại', e); } }
     const dxm=P.x-MAR.sx, dzm=P.z-MAR.sz, inArea=Math.hypot(dxm,dzm)<450 || Math.hypot(P.x-(KB.x0+KB.x1)/2,P.z-(KB.z0+KB.z1)/2)<520 || Math.hypot(P.x-SPORT.x,P.z-SPORT.z)<350 || Math.hypot(P.x-PARA.x,P.z-PARA.z)<400 || aboard>=0;
     /* bị phương tiện khác giành quyền điều khiển (phím V lên xe, C ngồi ghế…) → coi như đã rời tàu / trả xe */
     if(aboard>=0 && !(HOOK.vehicle && HOOK.vehicle.yachtRider)){ aboard=-1; ticket=null; rider.on=false; if(HOOK.camBox && HOOK.camBox._ys) HOOK.camBox=null; }
@@ -332,7 +355,7 @@ export async function make(W, ctx={}){
     if(!inArea && wasNear){ /* ra xa: không cần cập nhật thể thao nước */ } wasNear=inArea; });
 
   /* ============================== API ============================== */
-  const api={ layout:{pre:PRE, marina:MAR, dock:DOCK, sport:SPORT, para:PARA, islands:ISL}, route:RT, poseOf, yachts:YS, kit:YK, near, rider, routeCheck,
+  const api={ layout:{pre:PRE, marina:MAR, dock:DOCK, sport:SPORT, para:PARA, islands:ISL}, get route(){ return RT; }, poseOf, yachts:YS, kit:YK, near, rider, routeCheck,
     board:()=>boardYacht(dockedK()), shift(sec){ OFF+=sec; frameT=-1; sync(); }, waitDock(){ let k=dockedK(); if(k>=0) return k; OFF+=nextDockIn()+1; frameT=-1; sync(); return dockedK(); }, leave:leaveYacht, get aboard(){ return aboard; }, get nearK(){ return nearK; }, dockedK, nextDockIn, startRide, endRide, startPara, endPara, CR, PR,
     /* nguồn âm cho ambience_world.js (phiên chính nối 1 dòng): [{kind:'boat', id, x,y,z, v}] */
     soundList(){ const L=[]; let a=null, ad=1e9, b=null, bd=1e9; for(let k=0;k<NY;k++){ const y=YS[k]; if(y.v<.3) continue; const d=Math.hypot(y.x-P.x,y.z-P.z); if(d<ad){ b=a; bd=ad; a=k; ad=d; } else if(d<bd){ b=k; bd=d; } }

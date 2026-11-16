@@ -10,7 +10,7 @@ export async function make(W, ctx={}){
   if(W.abyStage) return W.abyStage;
   const {THREE, scene, P, HOOK, PLACES, makeLabel, teleport} = W;
   const TAU=Math.PI*2, clamp=(v,a,b)=>v<a?a:v>b?b:v, lerp=(a,b,t)=>a+(b-a)*t, ss=(a,b,x)=>{ const t=clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
-  const WY=W.WATER_Y ?? -.35, ABY=W.ABY||{}, PL=(ABY.plots||{}).stage, PRE=!PL;
+  const ABY=W.ABY||{}, WY=ABY.waterY ?? W.WATER_Y ?? -.35, PL=(ABY.plots||{}).stage, PRE=!PL;
   const ST=PL ? {x:PL.x, z:PL.z, yaw:PL.yaw??0} : {x:-100, z:-212, yaw:0};   /* TẠM = lô phiên A chốt 17/11 (ngoài bờ Bắc, khán giả trên đỉnh núi) – W.ABY.plots.stage ghi đè */
   const HW=42, HD=20, CR=8;   /* nửa dài, nửa rộng, bo góc */
   const G=new THREE.Group(); G.name='abyssal-stage'; G.position.set(ST.x,0,ST.z); G.rotation.y=ST.yaw; scene.add(G);
