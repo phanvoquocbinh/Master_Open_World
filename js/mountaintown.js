@@ -173,8 +173,8 @@ export function makeMountainTown(W, ctx){
     const R2=(a,b)=>at(a,(tb0+tb1)/2+b);
     const [kx,kz]=R2(-Wd/2+1.3,-D/2+1.3); k.add(new THREE.BoxGeometry(2.2,2.6,2.2), M.dark, kx, top+1.3, kz, 0, ry, 0); circles.push({x:kx, z:kz, r:1.45, y0:top-.4, y1:top+3});
     const [lx,lz]=R2(-Wd/2+1.3,-D/2+2.9), [dx2,dz2]=at(0,tb0-1.1), [ax2,az2]=at(0,tb0-1.8);
-    INTER.push({x:dx2, z:dz2, r:1.8, prio:.8, when:()=>Math.abs(P.y-BL)<1.2, label:`🛗 Thang máy lên sân thượng ${bar.name} (E)`, action:()=>{ teleport(lx,lz, ...R2(0,0)); toast(`🛗 Lên sân thượng tầng ${nUp+2} – ${bar.icon} ${bar.name}. Bấm E ở cabin thang máy để xuống.`, 3200); }});
-    INTER.push({x:lx, z:lz, r:1.6, prio:.8, when:()=>Math.abs(P.y-top)<1.2, label:'🛗 Thang máy xuống cầu đi bộ (E)', action:()=>teleport(ax2,az2, ...at(0,0))});
+    INTER.push({x:dx2, z:dz2, r:1.8, prio:.8, when:()=>Math.abs(P.y-BL)<1.2, label:`⇅ Thang máy lên sân thượng ${bar.name} (E)`, action:()=>{ teleport(lx,lz, ...R2(0,0)); toast(`⇅ Lên sân thượng tầng ${nUp+2} – ${bar.icon} ${bar.name}. Bấm E ở cabin thang máy để xuống.`, 3200); }});
+    INTER.push({x:lx, z:lz, r:1.6, prio:.8, when:()=>Math.abs(P.y-top)<1.2, label:'⇅ Thang máy xuống cầu đi bộ (E)', action:()=>teleport(ax2,az2, ...at(0,0))});
     const [bx,bz]=R2(Wd/2-1.6,0); k.add(new THREE.BoxGeometry(1.0,1.05,4.2), M.deckD, bx, top+.52, bz, 0, ry, 0); k.add(new THREE.BoxGeometry(1.2,.06,4.4), M.gold, bx, top+1.07, bz, 0, ry, 0);
     { const [x0,z0]=R2(Wd/2-1.6,-2.1), [x1,z1]=R2(Wd/2-1.6,2.1); addSeg(x0,z0,x1,z1,.55, top-.5, top+1.4); }
     const [ox,oz]=R2(Wd/2-3.0,0); INTER.push({x:ox, z:oz, r:1.8, prio:.6, when:()=>Math.abs(P.y-top)<1.2, label:`${bar.icon} ${bar.name} – gọi đồ uống (E)`, action:()=>menuModal(`${bar.icon} ${bar.name}`, bar.menu)});

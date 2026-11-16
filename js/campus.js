@@ -84,7 +84,7 @@ export function makeCampus(W, L){
     band(0,RD+.1,RW*2,Math.PI); band(-RW-.1,0,RD*2,Math.PI/2); band(RW+.1,0,RD*2,-Math.PI/2);
     solid(-RW-2,RW+2,-RD-2,-RD+.15); solid(-RW-2,RW+2,RD-.15,RD+2); solid(-RW-2,-RW+.15,-RD-2,RD+2); solid(RW-.15,RW+2,-RD-2,RD+2); plats.push({t:'r', x:0, z:0, c:1, s:0, hw:RW, hd:RD, h:FY});
     if(st.b==='tower'){ for(const s of [-1,1]){ M(box(1.5,2.5,.12), steel, s*1.65,FY+1.25,-RD+.08); M(box(1.8,2.8,.1), dark, s*1.65,FY+1.4,-RD+.03); }
-      INTER.push({x:0, z:-RD+1.7, r:1.7, label:'🛗 Thang máy · chọn tầng', action:()=>elevator()}); }
+      INTER.push({x:0, z:-RD+1.7, r:1.7, label:'⇅ Thang máy · chọn tầng', action:()=>elevator()}); }
     if(fl.kind==='lobby' || fl.kind==='exam'){ M(box(3,2.6,.08), steel, 0,FY+1.3,RD-.05); INTER.push({x:0, z:RD-1.4, r:1.6, label:'🚪 Ra ngoài', action:()=>exit()}); }
     const pl=ct(1024,160,(g,w,h)=>{ g.fillStyle='#fff'; g.fillRect(0,0,w,h); g.fillStyle=hex(col); g.fillRect(0,0,22,h); g.fillStyle='#1b2233'; g.font='800 60px "Segoe UI",sans-serif'; g.textBaseline='middle'; g.fillText(fl.title,50,h/2-22); g.font='500 40px "Segoe UI",sans-serif'; g.fillStyle='#5b6474'; g.fillText(fl.sub||'',50,h/2+38); });
     M(box(4.6,.7,.05), new THREE.MeshStandardMaterial({map:pl}), -6,FY+2.3,-RD+.12); }
@@ -227,7 +227,7 @@ export function makeCampus(W, L){
       const sp = (fl.kind==='lobby'&&first)||fl.kind==='exam' ? {x:0, z:RD-2.4, f:Math.PI} : {x:0, z:-RD+2.6, f:0};
       P.x=sp.x; P.z=sp.z; P.y=FY; P.vx=P.vz=P.vy=0; P.face=sp.f; me.g.position.set(P.x,P.y,P.z); me.g.rotation.y=sp.f; cam.yaw=sp.f+Math.PI; cam.pitch=.2; cam.tx=P.x; cam.tz=P.z; camera.position.set(P.x+Math.sin(cam.yaw)*4, P.y+2, P.z+Math.cos(cam.yaw)*4);
       toast(`${fl.title}${fl.sub?': '+fl.sub:''}`, 2200); setTimeout(()=>fade.style.opacity=0, 60); }, 300); }
-  function elevator(){ const m=ui.modal('🛗 Thang máy · Toà Giáo trình'); const g=document.createElement('div'); g.className='grid'; m.body.appendChild(g);
+  function elevator(){ const m=ui.modal('⇅ Thang máy · Toà Giáo trình'); const g=document.createElement('div'); g.className='grid'; m.body.appendChild(g);
     [...st.floors].reverse().forEach((fl,ri)=>{ const i=st.floors.indexOf(fl), c=document.createElement('div'); c.className='card'+(i===st.idx?' sel':''); c.style.cursor='pointer';
       const cs=fl.kind==='course'?DATA.courses.filter(x=>x.floor===fl.floor).map(x=>`P.${x.room} ${x.icon}`).join(' · '):'Thư viện · danh mục';
       c.innerHTML=`<div class="row"><div class="ic">${fl.kind==='lobby'?'🛎️':'📖'}</div><div class="sp"></div><b style="font-size:22px">${fl.n||'S'}</b></div><b>${esc(fl.sub||fl.title)}</b><small>${cs}</small>`;

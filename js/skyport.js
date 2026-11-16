@@ -187,8 +187,8 @@ export async function make(W, ctx){
     circles.push({x,z,r:4.4}); const CY0=GY+H-7.2; plats.push({t:'c', x, z, r:7.6, h:CY0});
     for(let i=0;i<32;i++){ const a=i/32*TAU, b=(i+1)/32*TAU; addSeg(x+Math.cos(a)*7.8,z+Math.sin(a)*7.8,x+Math.cos(b)*7.8,z+Math.sin(b)*7.8,.12,CY0-.4,CY0+3,'🗼 Kính cabin không lưu'); }
     for(let k=0;k<6;k++){ const a=k/6*TAU; KS.add(RB(2.2,.9,1,.1,2), M.dark, x+Math.cos(a)*5.6,CY0+.45,z+Math.sin(a)*5.6, -a); }
-    INTER.push({x, z:z+5.6, r:2, prio:.7, when:()=>P.y<GY+2, label:'🛗 Thang máy lên cabin Đài Không lưu 60 m (E)', action:()=>{ P.x=x; P.z=z+5; P.y=CY0+.02; toast('🗼 Cabin không lưu: nhìn toàn cảnh 2 đường băng, River Tech và biển!', 3200); }});
-    INTER.push({x, z:z+5, r:2.2, prio:.7, when:()=>P.y>CY0-1, label:'🛗 Thang máy xuống chân đài (E)', action:()=>{ P.x=x; P.z=z+6.4; P.y=GY+.02; }});
+    INTER.push({x, z:z+5.6, r:2, prio:.7, when:()=>P.y<GY+2, label:'⇅ Thang máy lên cabin Đài Không lưu 60 m (E)', action:()=>{ P.x=x; P.z=z+5; P.y=CY0+.02; toast('🗼 Cabin không lưu: nhìn toàn cảnh 2 đường băng, River Tech và biển!', 3200); }});
+    INTER.push({x, z:z+5, r:2.2, prio:.7, when:()=>P.y>CY0-1, label:'⇅ Thang máy xuống chân đài (E)', action:()=>{ P.x=x; P.z=z+6.4; P.y=GY+.02; }});
     INTER.push({x:x+5.6, z, r:2, prio:.5, when:()=>P.y>CY0-1, label:'🎧 Nghe tần số không lưu (E)', action:()=>toast(pick(['🎧 "QC 102, cleared for takeoff runway 27R, wind 090 at 8."','🎧 "QC 215, descend and maintain 3000, expect ILS 09L."','🎧 "Ground, QC 77 request pushback gate 3."']), 3600)});
     makeLabel('🗼 Đài Không lưu ATC · 68 m', 'Thang máy lên cabin ngắm cảnh (E)', {h:.6, x, y:GY+H+9, z, fade:240}); }
 

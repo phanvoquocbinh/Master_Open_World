@@ -134,9 +134,9 @@ export async function make(W, ctx){
       for(let u=0;u<=L;u+=4){ const [x,,z]=along(u,Wd/2,0); KB.add(B(Wd,.25,.25), M.steel, x,UY-.15,z); }
       plats.push({t:'r', x:cx, z:(b.z0-.3+b.z1-1.2)/2, c:1, s:0, hw:w/2, hd:(b.z1-1.2-(b.z0-.3))/2, h:UY+.06});
       const st=[]; for(let i=0;i<12;i++){ const z=b.z0-1-i*.55, h=Y+(12-i)*(UY+.06-Y)/12; plats.push({t:'r', x:cx, z:z-.27, c:1, s:0, hw:w/2-.3, hd:.3, h}); KB.add(B(w-.6,.18,.55), M.granite, cx,h-.09,z-.27); }
-      for(const sx of [-1,1]) addSeg(cx+sx*(w/2-.15), b.z0-7.6, cx+sx*(w/2-.15), b.z0, .12, Y+.6, UY+2, '🪜 Lan can cầu thang lên tầng ngắm sông');
+      for(const sx of [-1,1]) addSeg(cx+sx*(w/2-.15), b.z0-7.6, cx+sx*(w/2-.15), b.z0, .12, Y+.6, UY+2, '⤴ Lan can cầu thang lên tầng ngắm sông');
       addSeg(b.x0, b.z1-1.3, b.x1, b.z1-1.3, .1, UY-.5, UY+2, '🌉 Mép sàn kính tầng trên – quay lại cầu thang phía Bắc');
-      INTER.push({x:cx, z:b.z0-.6, r:2, prio:.3, when:()=>P.y<Y+1.5, label:'🌉 Cầu Kính Hai Tầng – lên sàn kính tầng trên bằng cầu thang phía Bắc', action:()=>toast('🪜 Đi lên bậc thang ngay phía Bắc đầu cầu để lên sàn kính ngắm nhạc nước 🎶', 2600)}); }
+      INTER.push({x:cx, z:b.z0-.6, r:2, prio:.3, when:()=>P.y<Y+1.5, label:'🌉 Cầu Kính Hai Tầng – lên sàn kính tầng trên bằng cầu thang phía Bắc', action:()=>toast('⤴ Đi lên bậc thang ngay phía Bắc đầu cầu để lên sàn kính ngắm nhạc nước 🎶', 2600)}); }
     if(b.kind==='glow'){ for(let u=0;u<=L;u+=3){ const [x,,z]=along(u,Wd/2,0), h=3.2*Math.sin(Math.PI*u/L); KB.add(B(Wd+.6,.14,.14), M.white, x,Y+2.7+h,z);   /* thanh vòm trên đầu người (trước 1,2 m chắn ngang lối đi ở đầu cầu) */ } const pts=[]; for(let i=0;i<=16;i++){ const u=i/16*L; const [x,,z]=along(u,Wd/2,0); pts.push(V3(x,Y-.72,z)); } KL.add(tube(pts,.12,6), M.ledC, 0,0,0); }
     makeLabel(`🌉 ${b.name}`, null, {h:.4, x:cx, y:Y+(b.kind==='arch'?15.5:3.2), z:cz, fade:60}); }
   out.bridges=BR.length;

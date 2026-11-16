@@ -116,7 +116,7 @@ export function makeInterior(W){
     const ind=ct(256,64,(g,w,h)=>{ g.fillStyle='#0b0f14'; g.fillRect(0,0,w,h); g.fillStyle='#ff9a3c'; g.font='bold 44px monospace'; g.textAlign='center'; g.textBaseline='middle'; g.fillText(`▲ ${fl.n}`,w/2,h/2+2); });
     M(box(1.2,.3,.05), new THREE.MeshStandardMaterial({map:ind, emissive:0xffffff, emissiveMap:ind, emissiveIntensity:1}), 0,FY+2.75,-RD+.12);
     M(box(.18,.36,.05), steel, 0,FY+1.2,-RD+.12);
-    INTER.push({x:0, z:-RD+1.7, r:1.7, label:'🛗 Thang máy · chọn tầng', action:()=>elevatorMenu()});
+    INTER.push({x:0, z:-RD+1.7, r:1.7, label:'⇅ Thang máy · chọn tầng', action:()=>elevatorMenu()});
     // biển tên tầng
     const pl=ct(1024,160,(g,w,h)=>{ g.fillStyle='#ffffff'; g.fillRect(0,0,w,h); g.fillStyle=hex(D?D.accent:b.color); g.fillRect(0,0,22,h); g.fillStyle='#1b2233'; g.font='800 64px "Segoe UI",sans-serif'; g.textBaseline='middle'; g.fillText(`${b.short} · Tầng ${fl.n}`,50,h/2-24); g.font='500 44px "Segoe UI",sans-serif'; g.fillStyle='#5b6474'; g.fillText(fl.name,50,h/2+36); });
     M(box(4.2,.66,.05), new THREE.MeshStandardMaterial({map:pl, roughness:.5}), -5.2,FY+2.2,-RD+.12);
@@ -498,9 +498,9 @@ export function makeInterior(W){
       const sp = at==='door' ? {x:0, z:RD-2.4, f:Math.PI} : {x:0, z:-RD+2.6, f:0};
       P.x=sp.x; P.z=sp.z; P.y=FY; P.vx=P.vz=P.vy=0; P.face=sp.f; me.g.position.set(P.x,P.y,P.z); me.g.rotation.y=sp.f;
       cam.yaw=sp.f+Math.PI; cam.pitch=.18; cam.tx=P.x; cam.tz=P.z; camera.position.set(P.x+Math.sin(cam.yaw)*4, P.y+2, P.z+Math.cos(cam.yaw)*4);
-      const fl=st.floors[idx]; toast(`${fl.kind==='lobby'&&at==='door'?'🏢 '+st.b.name:'🛗 Tầng '+fl.n}: ${fl.name}`, 2200);
+      const fl=st.floors[idx]; toast(`${fl.kind==='lobby'&&at==='door'?'🏢 '+st.b.name:'⇅ Tầng '+fl.n}: ${fl.name}`, 2200);
       setTimeout(()=>fade.style.opacity=0, 60); }, 300); }
-  function elevatorMenu(){ const b=st.b, ok=isEmp(b)||st.tour; const m=W.ui.modal(`🛗 Thang máy · ${b.name}`); const g=document.createElement('div'); g.className='grid'; m.body.appendChild(g);
+  function elevatorMenu(){ const b=st.b, ok=isEmp(b)||st.tour; const m=W.ui.modal(`⇅ Thang máy · ${b.name}`); const g=document.createElement('div'); g.className='grid'; m.body.appendChild(g);
     if(!ok) m.body.insertAdjacentHTML('afterbegin', `<p class="muted">🔒 Các tầng làm việc chỉ dành cho nhân viên${b.locked?'':' hoặc khách đi cùng hướng dẫn viên'}.</p>`);
     const icon={lobby:'🛎️', dept:'💼', canteen:'🍱', director:'👔'};
     [...st.floors].reverse().forEach(fl=>{ const i=st.floors.indexOf(fl), open=ok||fl.kind==='lobby', c=document.createElement('div'); c.className='card'+(i===st.idx?' sel':''); c.style.cursor=open?'pointer':'not-allowed'; c.style.opacity=open?1:.45;

@@ -26,7 +26,7 @@ export function makeInteriors(W, env){
   function deskPC(t, x, z, y=Y, label='💻 Làm ticket trên máy trạm (E)'){ INTER.push({x, z, r:1.5, prio:.55, when:atY(y), label, action:()=>{ if(!emp(t)) return toast(`💻 Máy trạm của nhân viên ${t.short}. Xin việc ở lễ tân (phỏng vấn) trước nhé!`, 3000); work().openPC && work().openPC(t); }}); }
   function meeting(t, x, z, y=Y, label='🗣️ Họp Daily cùng team (E)'){ INTER.push({x, z, r:2, prio:.55, when:atY(y), label, action:()=>{ if(!emp(t)) return toast('🗣️ Phòng họp nội bộ – chỉ nhân viên.', 2400); work().standup && work().standup(t); }}); }
   function canteen(t, x, z, y=Y, label='🍱 Ăn trưa / cà phê (E)'){ INTER.push({x, z, r:2, prio:.5, when:atY(y), label, action:()=>{ work().lunch && work().lunch(); toast('🍱 Ngon! Nạp năng lượng cho buổi chiều debug 💪', 2600); }}); }
-  function lift(x, z, from, to, label, guard){ INTER.push({x, z, r:1.6, prio:.8, when:atY(from,1.2), label:`🛗 ${label} (E)`, action:()=>{ if(guard && !guard()) return; P.y=to+.02; if(P.vy!==undefined) P.vy=0; toast(`🛗 Ting! ${label.replace(/^Thang máy /,'')}`, 1800); }}); }
+  function lift(x, z, from, to, label, guard){ INTER.push({x, z, r:1.6, prio:.8, when:atY(from,1.2), label:`⇅ ${label} (E)`, action:()=>{ if(guard && !guard()) return; P.y=to+.02; if(P.vy!==undefined) P.vy=0; toast(`⇅ Ting! ${label.replace(/^Thang máy /,'')}`, 1800); }}); }
   // ghế văn phòng (InstancedMesh dùng chung) · ghế ngồi được qua W.addSeat
   const CH=[]; const chair=(x,z,y,rot,sit=false,label='🪑 Ngồi ghế làm việc (E · C)')=>{ CH.push([x,y,z,rot]); if(sit && W.addSeat) W.addSeat({x, z, rot, y:y+.5, floor:y, label}); };
   const MON=[]; const monitor=(x,z,y,rot,curved=false)=>MON.push([x,y,z,rot,curved?1:0]);
@@ -80,7 +80,7 @@ export function makeInteriors(W, env){
     for(let x=MX0;x<=MX1;x+=6) K.add(CY(.15,.15,6), alu, x,Y+3,MZ1-.2); K.add(B(MX1-MX0,1.0,.05), new THREE.MeshPhysicalMaterial({color:0xcfe8f5, transparent:true, opacity:.3, depthWrite:false}), (MX0+MX1)/2,MY+.5,MZ1);
     addSeg(MX0,MZ1,MX1-4,MZ1,.12,MY-.4,MY+2,'🐉 Lan can kính gác lửng'); addSeg(MX0,MZ0,MX0,MZ1,.12,MY-.4,MY+2,'🐉 Mép gác lửng');
     for(let i=0;i<14;i++){ const zz=MZ1+8.6-i*.6, hh=Y+(i+1)*(MY-Y)/14; plats.push({t:'r', x:MX1-2, z:zz, c:1, s:0, hw:1.6, hd:.31, h:hh}); K.add(B(3.2,.16,.6), walnut, MX1-2,hh-.08,zz); }   /* bậc thấp ở phía Nam, bậc cao sát mép gác */
-    for(const sx of [-1,1]) addSeg(MX1-2+sx*1.65,MZ1,MX1-2+sx*1.65,MZ1+9,.1,Y+.6,MY+2,'🪜 Lan can cầu thang gác lửng');
+    for(const sx of [-1,1]) addSeg(MX1-2+sx*1.65,MZ1,MX1-2+sx*1.65,MZ1+9,.1,Y+.6,MY+2,'⤴ Lan can cầu thang gác lửng');
     AK.buildBilliardTable(W, MX0+10, MY, (MZ0+MZ1)/2, 0, 0x1f4fbf, 'world');
     K.add(RB(3,.08,1.4,.03,2), walnut, MX0+24,MY+.76,(MZ0+MZ1)/2); K.add(RB(2.8,.7,1.2,.1,2), walnut, MX0+24,MY+.38,(MZ0+MZ1)/2); chair(MX0+24,(MZ0+MZ1)/2+1.1,MY,Math.PI,true,'🪑 Ghế Giám đốc Dragonscale (E · C)'); monitor(MX0+24,(MZ0+MZ1)/2-.3,MY+.79,0,true);
     makeLabel('🐉 Gác lửng Giám đốc · Bida', 'Lên bằng cầu thang gỗ phía Đông gác', {h:.4, x:MX0+16, y:MY+3, z:(MZ0+MZ1)/2, fade:24});
@@ -116,7 +116,7 @@ export function makeInteriors(W, env){
     for(const [a,b] of [[TH[0],TH[1]],[TH[1],TH[2]]]){ const dx=b[0]-a[0], dz=b[1]-a[1], L=Math.hypot(dx,dz), ux=dx/L, uz=dz/L, n=Math.ceil((L-8)/1.2);
       for(let k=0;k<=n;k++){ const s=4+k*(L-8)/n, x=a[0]+ux*s, z=a[1]+uz*s, sag=-.6*Math.sin(Math.PI*k/n); K.add(B(1.6,.08,.5), M.cedar, x,TY+sag-.04,z, Math.atan2(ux,uz)+Math.PI/2); plats.push({t:'r', x, z, c:Math.cos(Math.atan2(ux,uz)), s:Math.sin(Math.atan2(ux,uz)), hw:.8, hd:L/n/2+.1, h:TY+sag}); }
       for(const sd of [-1,1]){ const pts=[]; for(let k=0;k<=12;k++){ const s=4+k*(L-8)/12; pts.push(V3(a[0]+ux*s+uz*sd*.8, TY+1+(-.6*Math.sin(Math.PI*k/12)), a[1]+uz*s-ux*sd*.8)); } K.add(tube(pts,.04,5), std(0xc8b48a), 0,0,0); addSeg(a[0]+ux*4+uz*sd*.85, a[1]+uz*4-ux*sd*.85, b[0]-ux*4+uz*sd*.85, b[1]-uz*4-ux*sd*.85, .1, TY-1.2, TY+2, '🌉 Dây cầu treo'); } }
-    { const [tx,tz]=TH[0], sx=tx+4.6; for(let i=0;i<20;i++){ const hh=Y+(i+1)*(TY-Y)/20, zz=tz+12-i*.6; plats.push({t:'r', x:sx, z:zz, c:1, s:0, hw:.75, hd:.31, h:hh}); K.add(B(1.5,.12,.6), M.cedar, sx,hh-.06,zz); } for(const s of [-1,1]) addSeg(sx+s*.8,tz+.6,sx+s*.8,tz+12.4,.08,Y+.6,TY+2,'🪜 Lan can cầu thang lên Nhà Trên Cây'); }
+    { const [tx,tz]=TH[0], sx=tx+4.6; for(let i=0;i<20;i++){ const hh=Y+(i+1)*(TY-Y)/20, zz=tz+12-i*.6; plats.push({t:'r', x:sx, z:zz, c:1, s:0, hw:.75, hd:.31, h:hh}); K.add(B(1.5,.12,.6), M.cedar, sx,hh-.06,zz); } for(const s of [-1,1]) addSeg(sx+s*.8,tz+.6,sx+s*.8,tz+12.4,.08,Y+.6,TY+2,'⤴ Lan can cầu thang lên Nhà Trên Cây'); }
     makeLabel('🌳 Nhà Trên Cây · phòng họp +8 m', 'Lên bằng cầu thang gỗ cạnh cây cổ thụ', {h:.4, x:TH[1][0], y:TY+5, z:TH[1][1], fade:28});
     // biệt thự kính Giám đốc trên vườn mái khối Đông Bắc
     { const b=h.blocks[1], ry=Y+5+b.f*4+.42, cx=(b.x0+b.x1)/2, cz=(b.z0+b.z1)/2; K.add(B(12,3.4,9), new THREE.MeshPhysicalMaterial({color:0xcfe8f5, transparent:true, opacity:.3, roughness:.03, depthWrite:false, side:THREE.DoubleSide}), cx,ry+1.7,cz); K.add(B(12.6,.25,9.6), M.white, cx,ry+3.5,cz);

@@ -158,7 +158,7 @@ export function makeFoodStreet(W, ctx){
     // thang máy → sân thượng hồ bơi
     const ex=t.x, ez=t.z+TW/2-1.2; kin.add(new THREE.BoxGeometry(2.4,3,.2), sm(0xb8c0c8,.25,.9), ex, Y+1.5, ez+.6);
     const roofY=Y+TH+.2;
-    INTER.push({x:ex, z:ez-.4, r:1.8, prio:.8, when:()=>P.y<Y+3, label:'🛗 Thang máy lên sân thượng hồ bơi (E)', action:()=>{ teleport(t.x-4, t.z-4, t.x, t.z+6); P.y=roofY; toast('🛗 Tầng thượng · hồ bơi tràn ngắm toàn thành phố 🌇', 2600); }});
+    INTER.push({x:ex, z:ez-.4, r:1.8, prio:.8, when:()=>P.y<Y+3, label:'⇅ Thang máy lên sân thượng hồ bơi (E)', action:()=>{ teleport(t.x-4, t.z-4, t.x, t.z+6); P.y=roofY; toast('⇅ Tầng thượng · hồ bơi tràn ngắm toàn thành phố 🌇', 2600); }});
     // sân thượng: sàn, hồ bơi tràn, ghế nằm, lan can kính, thang máy xuống
     k.add(new THREE.BoxGeometry(TW+2.8,.3,TW+2.8), sm(0xd8c7a8,.7), t.x, roofY-.15, t.z); addPlat(t.x, t.z, 0, TW/2+1.3, TW/2+1.3, roofY);
     const pool=new THREE.Mesh(new THREE.BoxGeometry(TW-3,.1,6), new THREE.MeshStandardMaterial({color:0x2fb6e6, roughness:.05, metalness:.2, emissive:0x0a6f9a, emissiveIntensity:.3, transparent:true, opacity:.9})); pool.position.set(t.x, roofY+.06, t.z+4); scene.add(pool);
@@ -167,7 +167,7 @@ export function makeFoodStreet(W, ctx){
     for(const x of [t.x-TW/2-1.4, t.x+TW/2+1.4]) k.add(new THREE.BoxGeometry(.06,1.1,TW+2.8), railG, x, roofY+.55, t.z);
     for(let i=0;i<Math.ceil((TW+2.8)/.8);i++){ const o=-TW/2-1.3+i*.8; circles.push({x:t.x+o, z:t.z-TW/2-1.35, r:.2, y0:roofY-.3, y1:roofY+1.4}, {x:t.x+o, z:t.z+TW/2+1.35, r:.2, y0:roofY-.3, y1:roofY+1.4}, {x:t.x-TW/2-1.35, z:t.z+o, r:.2, y0:roofY-.3, y1:roofY+1.4}, {x:t.x+TW/2+1.35, z:t.z+o, r:.2, y0:roofY-.3, y1:roofY+1.4}); }
     for(const lx of [-5,-2.5,0,2.5,5]){ k.add(new THREE.BoxGeometry(.7,.3,1.8), M.white, t.x+lx, roofY+.25, t.z-1); W.addSeat && W.addSeat({x:t.x+lx, z:t.z-1.4, rot:Math.PI, y:roofY+.4, floor:roofY, lie:true, r:1.3, label:'🏖️ Nằm ghế tắm nắng trên sân thượng (E · C)'}); }
-    INTER.push({x:t.x-6, z:t.z-6, r:1.8, prio:.8, when:()=>P.y>roofY-2, label:'🛗 Thang máy xuống sảnh (E)', action:()=>{ teleport(t.x, t.z-TW/2-3, t.x, t.z); toast('🛗 Đã xuống sảnh', 1500); }});
+    INTER.push({x:t.x-6, z:t.z-6, r:1.8, prio:.8, when:()=>P.y>roofY-2, label:'⇅ Thang máy xuống sảnh (E)', action:()=>{ teleport(t.x, t.z-TW/2-3, t.x, t.z); toast('⇅ Đã xuống sảnh', 1500); }});
     k.add(new THREE.BoxGeometry(2.2,2.8,2.2), sm(0xb8c0c8,.3,.8), t.x-6, roofY+1.4, t.z-6); circles.push({x:t.x-6, z:t.z-6, r:1.2, y0:roofY-.3, y1:roofY+3});
     makeLabel('🏙️ Sky QC Residence', 'Căn hộ cao cấp · thang máy lên hồ bơi sân thượng', {h:.7, x:t.x, y:roofY+5, z:t.z, fade:160}); }
   balK.build(scene);

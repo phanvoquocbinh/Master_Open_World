@@ -6,6 +6,7 @@
 //    2 thang máy kính, 3 vòng gyroscope vàng quay quanh khối não pha lê, chữ QA · QC · QE, 8 cột sáng đêm. Nội dung 6 tầng theo đặc tả.
 //  • Sân bay Đỉnh Mây (phía Bắc) · Xích đu tử thần vượt vực + Khinh khí cầu (phía Nam).
 import * as AK from './archKit.js';
+import { makeLift } from './liftkit.js';
 export function make(W, ctx){
   const {THREE, scene, P, HOOK, INTER, PLACES, toast, circles, addPlat, addSeg, mergeGeometries, GLOW, teleport, makeLabel, me, EXTL, plats, cam} = W;
   const {S, save, ui, askPay, fmt, spend} = ctx; AK.bindNight(W);
@@ -189,8 +190,13 @@ export function make(W, ctx){
   { const d=new THREE.Mesh(new THREE.CircleGeometry(RPAD+.3,96), M.pave); d.rotation.x=-Math.PI/2; d.position.set(C.x,YT+.04,C.z); d.receiveShadow=true; grp.add(d);
     for(let i=0;i<16;i++){ const a=i/16*TAU+.1, p=at(a,RPAD-4); if(DOORS.some(b=>dAng(a,b)<.2) || dAng(a,aE)<.25) continue; kt.add(new THREE.CylinderGeometry(1.2,1.3,.6,18), M.white, p.x, YT+.3, p.z); kt.add(new THREE.IcosahedronGeometry(1.1,1), sm(0x4f8a35,.9), p.x, YT+1.1, p.z); circles.push({x:p.x,z:p.z,r:1.3}); } }
   const floorMats=[null,AK.makeWoodMaterial({col:'#6b4329',repeat:6}),AK.makeStoneMaterial({col:'#2a4f55',joint:'#1f3d42',blockW:128,blockH:128,repeat:6}),AK.makeStoneMaterial({col:'#2b2f36',joint:'#1d2026',repeat:6}),AK.makeStoneMaterial({col:'#4a2a26',joint:'#33201c',repeat:6}),M.pave];
-  for(let f=1;f<6;f++){ const y=FY[f]; const ring=new THREE.RingGeometry(RA,RB+.4,96,1); ring.rotateX(-Math.PI/2); const fl=new THREE.Mesh(ring, floorMats[f]); fl.position.set(C.x,y,C.z); fl.receiveShadow=true; grp.add(fl);
-    const un=new THREE.RingGeometry(RA,RB+.4,96,1); un.rotateX(Math.PI/2); kt.add(un, M.dark, C.x, y-.5, C.z); kt.add(new THREE.CylinderGeometry(RB+.4,RB+.4,.5,96,1,true), M.gold, C.x, y-.25, C.z); kt.add(new THREE.CylinderGeometry(RA,RA,.5,64,1,true), M.dark, C.x, y-.25, C.z);
+  /* 16/11: 2 dãy × 2 thang máy cabin thật (js/liftkit.js) ở ±90° so với trục cầu thang xoắn – sàn các tầng khoét lỗ đúng giếng */
+  const LIFTPOS=[ENT+Math.PI, ENT].flatMap(a=>{ const p=at(a,RA+3.2), yo=yawOut(a), tx=Math.cos(yo), tz=-Math.sin(yo); return [-1.65,1.65].map(o=>({a, x:p.x+o*tx, z:p.z+o*tz, yaw:yo})); });
+  const holeCut=(geo)=>{ const g=geo.index?geo.toNonIndexed():geo, P0=g.attributes.position, keep=[]; for(let t=0;t<P0.count;t+=3){ const cx=(P0.getX(t)+P0.getX(t+1)+P0.getX(t+2))/3, cz=(P0.getZ(t)+P0.getZ(t+1)+P0.getZ(t+2))/3;
+      const hit=LIFTPOS.some(L=>{ const dx=cx+C.x-L.x, dz=cz+C.z-L.z, c=Math.cos(L.yaw), s=Math.sin(L.yaw), lx=dx*c-dz*s, lz=dx*s+dz*c; return Math.abs(lx)<1.32 && Math.abs(lz)<1.32; }); if(!hit) keep.push(t); }
+    const out=new THREE.BufferGeometry(); for(const k of Object.keys(g.attributes)){ const A=g.attributes[k], n=A.itemSize, arr=new Float32Array(keep.length*3*n); keep.forEach((t,j)=>{ for(let v=0;v<3;v++) for(let q=0;q<n;q++) arr[(j*3+v)*n+q]=A.array[(t+v)*n+q]; }); out.setAttribute(k,new THREE.BufferAttribute(arr,n)); } return out; };
+  for(let f=1;f<6;f++){ const y=FY[f]; const ring=holeCut((()=>{ const r=new THREE.RingGeometry(RA,RB+.4,192,18); r.rotateX(-Math.PI/2); return r; })()); const fl=new THREE.Mesh(ring, floorMats[f]); fl.position.set(C.x,y,C.z); fl.receiveShadow=true; grp.add(fl);
+    const un=holeCut((()=>{ const r=new THREE.RingGeometry(RA,RB+.4,192,18); r.rotateX(Math.PI/2); return r; })()); kt.add(un, M.dark, C.x, y-.5, C.z); kt.add(new THREE.CylinderGeometry(RB+.4,RB+.4,.5,96,1,true), M.gold, C.x, y-.25, C.z); kt.add(new THREE.CylinderGeometry(RA,RA,.5,64,1,true), M.dark, C.x, y-.25, C.z);
     kt.add(new THREE.TorusGeometry(RA+.03,.05,6,96), M.led, C.x, y-.52, C.z, Math.PI/2,0,0); plats.push({t:'ring', x:C.x, z:C.z, r0:RA+.05, r1:RB-.05, h:y}); }
   const ringC=(r,y0,y1,skip)=>{ const n=Math.ceil(TAU*r/.9); for(let i=0;i<n;i++){ const a=i/n*TAU; if(skip && skip(a)) continue; const p=at(a,r); circles.push({x:p.x,z:p.z,r:.32,y0,y1}); } };
   for(let f=0;f<5;f++){ const y0=FY[f], h=FH-.5; kt.add(new THREE.CylinderGeometry(RB,RB,h,96,1,true), M.glass, C.x, y0+h/2, C.z); ringC(RB-.15, y0-.3, y0+h, f===0?(a=>DOORS.some(b=>dAng(a,b)<2.2/RB)):null); }
@@ -216,10 +222,7 @@ export function make(W, ctx){
   for(let f=1;f<6;f++){ ringC(RA+.2, FY[f]-.2, FY[f]+1.15, a=>dAng(a,A0)<.3 || dAng(a,A0+Math.PI)<.3); kt.add(new THREE.CylinderGeometry(RA+.15,RA+.15,1.05,64,1,true), M.glassB, C.x, FY[f]+.52, C.z); }
   const ELEV=[A0+Math.PI/2, A0-Math.PI/2].map(a=>({a, p:at(a,RA+3.2)}));
   const FLOORN=['1 · Bảo tàng Lịch sử & Thảm hoạ','2 · Đấu trường Test Design','3 · Chỉ huy Hiệu năng & Bảo mật','4 · Đại sảnh Danh vọng & Phòng Bí ẩn','5 · Nhà hàng xoay · Bida Hoàng gia','6 · Sân thượng · QA Brain Core'];
-  for(const e of ELEV){ kt.add(new THREE.CylinderGeometry(1.4,1.4,FY[5]-YT+3,24,1,true), M.glassB, e.p.x, YT+(FY[5]-YT+3)/2, e.p.z); kt.add(new THREE.CylinderGeometry(1.45,1.45,.3,24), M.gold, e.p.x, FY[5]+3, e.p.z); circles.push({x:e.p.x, z:e.p.z, r:1.55});
-    const front=at(e.a, RA+5.2);
-    INTER.push({x:front.x, z:front.z, r:1.9, prio:.8, when:()=>P.y>YT-1 && P.y<FY[5]+1.5, label:'🛗 Thang máy kính – chọn tầng (E)', action:()=>{ const m=ui.modal('🛗 Thang máy Tháp Liên Hoa');
-      m.body.innerHTML=`<div class="grid">${FLOORN.map((n,i)=>`<div class="card" data-f="${i}" style="cursor:pointer"><b>Tầng ${n}</b><small>y = +${FY[i]} m</small></div>`).join('')}</div>`; m.body.querySelectorAll('[data-f]').forEach(c=>c.onclick=()=>{ m.close(); const y=FY[+c.dataset.f]; teleport(front.x, front.z, C.x, C.z); P.y=y; toast(`🛗 Tầng ${FLOORN[+c.dataset.f]}`, 2200); }); }}); }
+  { const fl=FY.map((y,i)=>({y, name:'Tầng '+FLOORN[i], short:String(i+1)})); LIFTPOS.forEach((L,k)=>makeLift(W,{x:L.x, z:L.z, yaw:L.yaw, floors:fl, name:`Thang ${k<2?'Đông':'Tây'} ${k%2?'B':'A'}`, start:k%2?5:0, color:0xe0b040})); }
   const panelTex=(title, lines, bg='#13202f')=>{ const c=document.createElement('canvas'); c.width=1024; c.height=640; const g=c.getContext('2d'); g.fillStyle=bg; g.fillRect(0,0,1024,640); g.strokeStyle='#e0b040'; g.lineWidth=10; g.strokeRect(10,10,1004,620); g.fillStyle='#ffd77a'; g.font='900 64px "Segoe UI",sans-serif'; g.fillText(title,48,110); g.fillStyle='#fff'; g.font='500 38px "Segoe UI",sans-serif'; lines.forEach((l,i)=>g.fillText(l,48,200+i*62)); const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=8; return t; };
   const panel=(a,y,title,lines,bg)=>{ const p=at(a,RB-.8), t=panelTex(title,lines,bg), m=new THREE.Mesh(new THREE.PlaneGeometry(5.6,3.5), new THREE.MeshStandardMaterial({map:t, emissive:0xffffff, emissiveMap:t, emissiveIntensity:.45})); m.position.set(p.x,y+2.6,p.z); m.rotation.y=yawOut(a)+Math.PI; grp.add(m); };
   const busy=(a,f)=>dAng(a,A0)<.45 || dAng(a,A0+Math.PI)<.45 || ELEV.some(e=>dAng(a,e.a)<.35) || (f===0 && DOORS.some(b=>dAng(a,b)<.32));

@@ -1,5 +1,5 @@
 // QC World – ĐỒI BRAND QC: khu đô thị trên đồi (Đông Nam, đi tiếp phố chính Phường Khởi Nghiệp qua cầu z=86)
-//  ⛰️ Đồi chính cao 32 m, đường xoắn ốc 2 làn bám sườn đồi (dốc ~11%) lên đỉnh · 🪜 cầu thang lớn từ phố ẩm thực thẳng lên đỉnh
+//  ⛰️ Đồi chính cao 32 m, đường xoắn ốc 2 làn bám sườn đồi (dốc ~11%) lên đỉnh · ⤴ cầu thang lớn từ phố ẩm thực thẳng lên đỉnh
 //  🏛️ Đỉnh đồi: THÁP BRAND QC (js/monument.js) · 🏙️ chỗ dành sẵn: phố ẩm thực (chân đồi phía Bắc), chung cư (góc Đông Bắc),
 //     biệt thự ven đầm (góc Tây Nam, đường ven biển x=286) – các module khác dựng trên các "pad" phẳng này
 //  Địa hình = hàm độ cao lấy mẫu lưới 2 m (va chạm khớp hình vẽ), đường/cầu thang/pad được san phẳng theo đúng cao độ.

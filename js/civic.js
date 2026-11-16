@@ -148,7 +148,7 @@ export async function make(W, ctx, opt={}){
   }
   function openFire(){ const m=ui.modal('🚒 Trạm cứu hoả QC City · số khẩn cấp 114');
     m.body.innerHTML=`<p class="muted">Trực 24/7 – 3 xe chữa cháy luôn sẵn sàng xuất phát trong 60 giây.</p><div class="grid">${[
-      ['🚒','Xe bồn số 1','Bồn nước 4.000 lít, vòi rồng áp lực cao.'],['🪜','Xe thang số 2','Thang tự động vươn cao 32 m – cứu hộ nhà cao tầng Downtown.'],['🚒','Xe bồn số 3','Bồn bọt chữa cháy xăng dầu.'],
+      ['🚒','Xe bồn số 1','Bồn nước 4.000 lít, vòi rồng áp lực cao.'],['⤴','Xe thang số 2','Thang tự động vươn cao 32 m – cứu hộ nhà cao tầng Downtown.'],['🚒','Xe bồn số 3','Bồn bọt chữa cháy xăng dầu.'],
       ['🧯','Mẹo an toàn','Thấy cháy: bình tĩnh, ngắt điện, gọi 114, thoát theo lối thoát hiểm – không đi thang máy.']].map(([i,n,d])=>`<div class="card"><div class="ic">${i}</div><b>${n}</b><small>${d}</small></div>`).join('')}</div>`;
     say(out.fireman, pick(['Chào bạn! Muốn ngồi thử ghế lái không? 😄','Xe nào cũng rửa sạch bóng mỗi sáng đó!','Phòng cháy hơn chữa cháy nha bạn! 🧯']), 3.2); }
 

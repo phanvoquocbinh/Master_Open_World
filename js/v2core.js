@@ -17,6 +17,8 @@ export const ZONES = {
   palm:      {name:'The QC Palm Archipelago',     x0:250,  x1:1050, z0:520,  z1:1320, y:[-8,65],   file:'./palm_dubai.js',         phase:8},
   wonder:    {name:'Wonderland & Kỳ Quan (dời về Nam)', x0:-400, x1:230, z0:485, z1:1510, y:[0,98], file:'./wonder_v2.js',        phase:2},
 };
+// bot theo vùng (Pha 9) – các vùng khác tự nạp bot trong module của mình
+export const BOTS=[['abyssal','./bots_abyssal.js']];
 export const inZone=(z,x,zz,pad=0)=>x>=z.x0-pad && x<=z.x1+pad && zz>=z.z0-pad && zz<=z.z1+pad;
 export const zoneAt=(x,z)=>Object.entries(ZONES).find(([k,Z])=>inZone(Z,x,z))?.[0]||null;
 
@@ -46,4 +48,6 @@ export function clearLegacy(W, opt={}){ const {THREE, scene, circles, boxes, pla
 export async function loadModules(W, ctx){ const res={};
   for(const [key,Z] of Object.entries(ZONES)){ try{ const m=await import(Z.file); if(m && m.make){ res[key]=await m.make(W, {...ctx, zone:Z, ZONES}); W[key+'V2']=res[key]; } }
     catch(e){ if(!/Failed to fetch|Cannot find module|error loading dynamically imported/i.test(String(e))) console.warn('[V2]', key, e); } }
+  /* bot của từng vùng nạp SAU khi mọi vùng dựng xong (file bot nhận W và kết quả module vùng) */
+  for(const [key,file] of BOTS){ if(!res[key]) continue; try{ const m=await import(file); if(m && m.make) W[key+'Bots']=await m.make(W, res[key]); }catch(e){ console.warn('[V2 bots]', key, e); } }
   return res; }

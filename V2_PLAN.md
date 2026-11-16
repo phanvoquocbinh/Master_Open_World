@@ -58,6 +58,16 @@ Nhớ thêm nút vào `W.transit.G` (nếu có) để taxi và xe bot đi xuyên
 - **Nhà ở (luật V2):** nội đô (Abyssal, CBD, Dev City) chỉ bán/thuê căn hộ. Nhà mặt đất và biệt thự chỉ có ở Palm Dubai.
 - **Dữ liệu chưa có** (khoá học dev, tiếng Nhật, tiếng Hàn…): tạo khung trống để đó, ưu tiên xây thành phố trước.
 
+## 3b. Luật chất lượng Bình nhắc 16/11 (bắt buộc mọi vùng)
+- **Lối đi không có vật chắn**: mọi lối đi, cầu, miệng cầu, sảnh phải có hành lang trống ≥ 2,5 m. Đồ trang trí (nón, cột, khối) đặt ra mép, không đặt giữa đường đi và quanh điểm E.
+- **Khối phải liền, nhưng mềm theo vật liệu**: tường, nhà được vuông vức. Địa hình, vách đá, mép hồ, bờ, chân núi, hầm đá phải là bề mặt liền, cong mềm: lưới liên tục, mép cong, có vát/bo. Không chồng hộp cho kín khe, không mép răng cưa theo ô lưới, không khe lọt sáng giữa các khối (chồng mép ≥ 5–10 cm). Chỗ khối kiến trúc chạm đất thì đất ôm chân khối.
+- **Không chớp (z-fighting)**: hai mặt phẳng trùng nhau phải lệch ≥ 2 cm hoặc dùng `polygonOffset`. Kính trong suốt đặt `depthWrite:false`.
+- **Gờ / vành chắn ngang lối ra** phải hở đúng chỗ có lối đi (gờ cắt thành cung), mặt đi liền từ cầu vào đảo.
+- **Thang máy**: dùng bộ chung `js/liftkit.js` (`makeLift` / `makeLiftBank`). Cabin bước vào được, bảng nút chọn tầng hiện khi đứng trong cabin, gọi thang (E) ở mỗi tầng, cửa tầng chỉ mở khi cabin đỗ đúng tầng. Toà cao thì đặt nhiều thang (dãy 2–4). Sàn toà nhà phải chừa lỗ đúng giếng thang.
+- **Emoji**: không dùng 🛗 🪜 (Windows 10 không có → hiện ô vuông). Thang máy dùng ⇅.
+- **Điểm bản đồ (PLACES)**: `go()` chỉ được gọi `teleport(x,z,lx,lz)`, không đặt thẳng `P.y`, không lên xe, không toast. Điểm đáp phải là mặt đi thật: không lơ lửng, không dưới gầm vật, đi được 4 hướng.
+- **Mỗi khu có người**: ít nhất vài bot đúng ngữ cảnh (người đi bộ, khách, nhân viên), không đứng chặn lối đi.
+
 ## 4. Quy trình
 1. Chỉ sửa file của mình. Cần đổi `world.html`, `life.js` hay `v2core.js` thì nhắn phiên chính.
 2. Tự test bằng máy chủ no-store (`tools/qa/serve_nocache.py` hoặc script tương tự) trên cổng riêng, mở `world.html?v2`. Kiểm tra 0 lỗi console, đi bộ thử, rồi chụp ảnh.

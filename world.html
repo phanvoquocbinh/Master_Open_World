@@ -298,7 +298,7 @@ const store = {
   set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 };
 let toastTimer=0;
-function toast(msg, ms=3200){ const t=$('toast'); t.textContent=msg; t.hidden=false; t.style.opacity=1;
+function toast(msg, ms=3200){ if(HOOK.tpProbe) return; const t=$('toast'); t.textContent=msg; t.hidden=false; t.style.opacity=1;
   /* S-GFX 15/11: toast luôn nằm DƯỚI khung nút trên cùng (khung xuống 2 hàng thì trước bị che/chồng chữ) */
   { const tp=$('top'); if(tp){ const b=tp.getBoundingClientRect().bottom; t.style.top=Math.max(84, Math.round(b+10))+'px'; } }
   clearTimeout(toastTimer); toastTimer=setTimeout(()=>{ t.style.opacity=0; setTimeout(()=>t.hidden=true,300); }, ms); }
@@ -1342,9 +1342,15 @@ function mapBuild(){ const B=mapBounds(), PX=MAPV.PX, res=2, w=Math.ceil((B.x1-B
   if(CITY.arena) lab('KHU GIẢI TRÍ QC FUN PARK',(CITY.arena.x0+CITY.arena.x1)/2,CITY.arena.z0-10,26);
   for(const L of EXTL) lab(L.name||'CAO NGUYÊN BÌNH PHAN',(L.x0+L.x1)/2,L.z0+(L.z1-L.z0)*.35,30);
   MAPV.base=cv; MAPV.B=B; }
-function mapPlaces(){ const out=[]; for(const p of PLACES){ HOOK.tpProbe=[]; try{ p.go(); }catch(e){} const r=HOOK.tpProbe[0]; HOOK.tpProbe=null; out.push({p, x:r?r[0]:null, z:r?r[1]:null}); } return out; }
+function mapPlaces(){ const out=[];
+  /* 16/11: dò vị trí bằng cách gọi go() ở chế độ dò – vài điểm còn đặt P.y / lên xe / đổi camera ngoài teleport → lưu & trả lại nguyên trạng (trước: mở bản đồ là bị nhấc lên rồi rơi, có khi kẹt trên không) */
+  const sv={x:P.x,y:P.y,z:P.z,vx:P.vx,vy:P.vy,vz:P.vz,face:P.face,ground:P.ground,px:P.px,pz:P.pz}, sh={vehicle:HOOK.vehicle, camOverride:HOOK.camOverride, camBox:HOOK.camBox, scope:HOOK.scope}, sc={yaw:cam.yaw,pitch:cam.pitch,dist:cam.dist,tx:cam.tx,tz:cam.tz}, gp=me.g.position.clone(), gr=me.g.rotation.y, ins=W.inside;
+  for(const p of PLACES){ HOOK.tpProbe=[]; try{ p.go(); }catch(e){} const r=HOOK.tpProbe[0]; HOOK.tpProbe=null; out.push({p, x:r?r[0]:null, z:r?r[1]:null}); }
+  Object.assign(P,sv); Object.assign(HOOK,sh); Object.assign(cam,sc); me.g.position.copy(gp); me.g.rotation.y=gr; W.inside=ins; return out; }
 function mapRegion(){ const x=P.x, z=P.z, R=CITY, inR=(r)=>r && x>r.x0 && x<r.x1 && z>r.z0 && z<r.z1;
   if(W.inside) return '🏢 Trong '+(W.inside.name||'toà nhà'); if(inR(R.downtown)) return '🏙️ Downtown · QC City'; if(inR(R.ward)) return '🏘️ Phường Khởi Nghiệp'; if(inR(R.arena)) return '🎡 Khu Giải trí QC Fun Park';
+  { const L=EXTL.find(L=>x>L.x0&&x<L.x1&&z>L.z0&&z<L.z1 && L.h && L.h(x,z)!=null && L.name); if(L) return '📍 '+L.name; }
+  if(W.V2 && W.V2ZONES){ const Z=Object.values(W.V2ZONES).find(Z=>x>=Z.x0&&x<=Z.x1&&z>=Z.z0&&z<=Z.z1); if(Z) return '📍 '+Z.name; }
   if(EXTL.some(L=>x>L.x0&&x<L.x1&&z>L.z0&&z<L.z1)) return '🏞️ Cao nguyên Bình Phan'; if(onIslet(x,z,0)) return '🏝️ Đảo nghỉ dưỡng'; if(platH(x,z)>-1e8 && !inDT(x,z)) return '🌉 Trên cầu'; return '🌴 Đảo Master Dashboard'; }
 function mapW2S(x,z,cw,ch){ return [(x-MAPV.cx)*MAPV.s+cw/2, (z-MAPV.cz)*MAPV.s+ch/2]; }
 function mapDraw(){ const cvs=$('mapCv'); if(!cvs || $('mapWrap').hidden || !MAPV.base){ MAPV.raf=0; return; } MAPV.raf=requestAnimationFrame(mapDraw);
