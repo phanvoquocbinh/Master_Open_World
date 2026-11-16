@@ -1,0 +1,218 @@
+{
+ "no": 7,
+ "lv": "t1",
+ "title": "Hỏi đường tới thư viện",
+ "sub": "도서관이 어디에 있어요?",
+ "situation": "Hai người đứng gần trạm xe trong khu giả Bờ Mây. Hỏi hướng và dùng điểm mốc đơn giản.",
+ "lang": "ko-KR",
+ "lines": [
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "도서관이 어디에 있어요?",
+   "vi": "Thư viện ở đâu?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "학교 뒤에 있어요.",
+   "vi": "Ở phía sau trường."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "여기에서 멀어요?",
+   "vi": "Có xa đây không?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "아니요. 걸어서 십 분이에요.",
+   "vi": "Không. Đi bộ mất mười phút."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "이 길로 가요?",
+   "vi": "Đi theo đường này à?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "네. 앞으로 가세요.",
+   "vi": "Vâng. Hãy đi thẳng."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "빵집에서 오른쪽으로 가요?",
+   "vi": "Đến tiệm bánh thì rẽ phải à?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "아니요. 왼쪽으로 가세요.",
+   "vi": "Không. Hãy rẽ trái."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "학교 뒤에 도서관이 있지요?",
+   "vi": "Thư viện ở sau trường, đúng chứ?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "네. 입구는 큰 나무 옆에 있어요.",
+   "vi": "Đúng. Lối vào ở cạnh cây lớn."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "도서관이 어디에 있어요?",
+   "vi": "Thư viện ở đâu?",
+   "note": "에 đánh dấu vị trí tồn tại; (으)로 đi với hướng. Nghe câu sửa cuối, không giữ lựa chọn phải được hỏi trước."
+  },
+  {
+   "t": "학교 뒤에 있어요.",
+   "vi": "Ở phía sau trường.",
+   "note": "에 đánh dấu vị trí tồn tại; (으)로 đi với hướng. Nghe câu sửa cuối, không giữ lựa chọn phải được hỏi trước."
+  },
+  {
+   "t": "여기에서 멀어요?",
+   "vi": "Có xa đây không?",
+   "note": "에 đánh dấu vị trí tồn tại; (으)로 đi với hướng. Nghe câu sửa cuối, không giữ lựa chọn phải được hỏi trước."
+  },
+  {
+   "t": "아니요. 걸어서 십 분이에요.",
+   "vi": "Không. Đi bộ mất mười phút.",
+   "note": "에 đánh dấu vị trí tồn tại; (으)로 đi với hướng. Nghe câu sửa cuối, không giữ lựa chọn phải được hỏi trước."
+  },
+  {
+   "t": "이 길로 가요?",
+   "vi": "Đi theo đường này à?",
+   "note": "에 đánh dấu vị trí tồn tại; (으)로 đi với hướng. Nghe câu sửa cuối, không giữ lựa chọn phải được hỏi trước."
+  },
+  {
+   "t": "네. 앞으로 가세요.",
+   "vi": "Vâng. Hãy đi thẳng.",
+   "note": "에 đánh dấu vị trí tồn tại; (으)로 đi với hướng. Nghe câu sửa cuối, không giữ lựa chọn phải được hỏi trước."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Thư viện so với trường ở đâu?",
+   "o": [
+    "Phía trước",
+    "Trên mái",
+    "Phía sau"
+   ],
+   "a": 2,
+   "e": "학교뒤."
+  },
+  {
+   "q": "Đi bộ mất bao lâu?",
+   "o": [
+    "Năm phút",
+    "Mười phút",
+    "Một giờ"
+   ],
+   "a": 1,
+   "e": "십분."
+  },
+  {
+   "q": "Đến tiệm bánh rẽ hướng nào?",
+   "o": [
+    "Trái",
+    "Phải",
+    "Quay lại theo đoạn"
+   ],
+   "a": 0,
+   "e": "왼쪽으로."
+  },
+  {
+   "q": "Lối vào cạnh gì?",
+   "o": [
+    "Ga tàu",
+    "Bệnh viện",
+    "Cây lớn"
+   ],
+   "a": 2,
+   "e": "큰나무옆."
+  },
+  {
+   "q": "Ý rẽ phải có được xác nhận không?",
+   "o": [
+    "Không có câu sửa",
+    "Không, được sửa thành trái",
+    "Có"
+   ],
+   "a": 1,
+   "e": "아니요…왼쪽으로 là sửa hướng."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "아니요. ___으로 가세요.",
+   "a": "왼쪽",
+   "e": "에 đánh dấu vị trí tồn tại; (으)로 đi với hướng. Nghe câu sửa cuối, không giữ lựa chọn phải được hỏi trước. Câu đầy đủ: 아니요. 왼쪽으로 가세요. → Không. Hãy rẽ trái."
+  },
+  {
+   "t": "listen",
+   "say": "빵집에서 오른쪽으로 가요?",
+   "lang": "ko-KR",
+   "q": "Ý nào đúng với câu vừa nghe?",
+   "o": [
+    "Có xa đây không?",
+    "Thư viện ở sau trường, đúng chứ?",
+    "Đến tiệm bánh thì rẽ phải à?"
+   ],
+   "a": 2,
+   "e": "Đối chiếu đúng câu: Đến tiệm bánh thì rẽ phải à?"
+  },
+  {
+   "t": "match",
+   "q": "Nối cụm chức năng với nghĩa trong ngữ cảnh",
+   "pairs": [
+    [
+     "도서관이 어디에 있어요?",
+     "Thư viện ở đâu?"
+    ],
+    [
+     "학교 뒤에 있어요.",
+     "Ở phía sau trường."
+    ],
+    [
+     "여기에서 멀어요?",
+     "Có xa đây không?"
+    ],
+    [
+     "아니요. 걸어서 십 분이에요.",
+     "Không. Đi bộ mất mười phút."
+    ],
+    [
+     "이 길로 가요?",
+     "Đi theo đường này à?"
+    ],
+    [
+     "네. 앞으로 가세요.",
+     "Vâng. Hãy đi thẳng."
+    ]
+   ],
+   "e": "Đọc cả câu theo cụm; chú ý ý định và mức lịch sự."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Chỉ đường giả tới quán trước trường: đi thẳng rồi rẽ phải.",
+   "model": "앞으로 가세요. 오른쪽으로 가세요. 카페는 학교 앞에 있어요.",
+   "vi": "Hãy đi thẳng rồi rẽ phải. Quán ở trước trường."
+  },
+  {
+   "p": "Bạn chưa chắc hướng; hỏi lại xem thư viện có cạnh trường và lối vào có gần trạm xe không.",
+   "model": "도서관은 학교 옆에 있어요? 입구는 버스 정류장 근처에 있어요? 다시 말해 주세요.",
+   "vi": "Thư viện ở cạnh trường à? Lối vào ở gần trạm xe à? Xin nói lại."
+  }
+ ]
+}

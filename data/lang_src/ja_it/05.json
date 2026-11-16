@@ -1,0 +1,604 @@
+{
+ "no": 5,
+ "title": "Ước lượng và thương lượng phạm vi",
+ "sub": "現在の 範囲を 前提に、工数を 見積もりました。",
+ "goals": [
+  "Dùng ít nhất năm cụm nghiệp vụ trong tình huống Ước lượng và thương lượng phạm vi",
+  "Nghe và xác định dữ kiện đã chốt, điều còn chờ và người xử lý",
+  "Đặt câu hỏi làm rõ có thể trả lời bằng hành vi cụ thể",
+  "Viết thông điệp có hành động tiếp và mức lịch sự nhất quán"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bối cảnh và cách học",
+   "html": "<p>Dự án và tổ chức trong bài hoàn toàn giả lập. Mục tiêu là giao tiếp rõ trong nhóm phát triển; tách quan sát, đề xuất và điều chưa xác nhận.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm trọng tâm",
+   "items": [
+    {
+     "w": "見積もり",
+     "kana": "みつもり",
+     "romaji": "mitsumori",
+     "vi": "ước lượng",
+     "ex": "現在の 見積もりと、その 前提を 教えてください。",
+     "exVi": "Xin cho ước lượng hiện tại và giả định."
+    },
+    {
+     "w": "工数",
+     "kana": "こうすう",
+     "romaji": "kōsū",
+     "vi": "lượng công việc",
+     "ex": "現在の 範囲を 前提に、工数を 見積もりました。",
+     "exVi": "Tôi ước lượng lượng công việc theo phạm vi hiện tại."
+    },
+    {
+     "w": "範囲",
+     "kana": "はんい",
+     "romaji": "han'i",
+     "vi": "phạm vi",
+     "ex": "現在の 範囲を 前提に、工数を 見積もりました。",
+     "exVi": "Tôi ước lượng lượng công việc theo phạm vi hiện tại."
+    },
+    {
+     "w": "前提",
+     "kana": "ぜんてい",
+     "romaji": "zentei",
+     "vi": "giả định nền",
+     "ex": "現在の 範囲を 前提に、工数を 見積もりました。",
+     "exVi": "Tôi ước lượng lượng công việc theo phạm vi hiện tại."
+    },
+    {
+     "w": "追加",
+     "kana": "ついか",
+     "romaji": "tsuika",
+     "vi": "bổ sung",
+     "ex": "通知の 追加がある 場合は、依存関係の 調査が 必要です。",
+     "exVi": "Nếu thêm thông báo thì cần tìm hiểu quan hệ phụ thuộc."
+    },
+    {
+     "w": "変更",
+     "kana": "へんこう",
+     "romaji": "henkō",
+     "vi": "thay đổi",
+     "ex": "品質の 基準は 保ちたいです。変更の 影響を 示し、責任者の 承認を 得ましょう。",
+     "exVi": "Tôi muốn giữ chuẩn chất lượng. Hãy nêu ảnh hưởng và xin duyệt người chịu trách nhiệm."
+    },
+    {
+     "w": "延期",
+     "kana": "えんき",
+     "romaji": "enki",
+     "vi": "dời thời hạn",
+     "ex": "優先順位を 決めて 一部を 後にするか、期限の 延期を 検討できます。",
+     "exVi": "Có thể ưu tiên để một phần sau, hoặc cân nhắc dời hạn."
+    },
+    {
+     "w": "優先順位",
+     "kana": "ゆうせんじゅんい",
+     "romaji": "yūsen jun'i",
+     "vi": "thứ tự ưu tiên",
+     "ex": "期限を 変えないなら、優先順位に 沿って 範囲を 調整します。",
+     "exVi": "Nếu không đổi hạn thì điều chỉnh phạm vi theo ưu tiên."
+    },
+    {
+     "w": "依存関係",
+     "kana": "いぞんかんけい",
+     "romaji": "izon kankei",
+     "vi": "quan hệ phụ thuộc",
+     "ex": "通知の 追加がある 場合は、依存関係の 調査が 必要です。",
+     "exVi": "Nếu thêm thông báo thì cần tìm hiểu quan hệ phụ thuộc."
+    },
+    {
+     "w": "調査",
+     "kana": "ちょうさ",
+     "romaji": "chōsa",
+     "vi": "khảo sát/tìm hiểu",
+     "ex": "通知の 追加がある 場合は、依存関係の 調査が 必要です。",
+     "exVi": "Nếu thêm thông báo thì cần tìm hiểu quan hệ phụ thuộc."
+    },
+    {
+     "w": "余裕",
+     "kana": "よゆう",
+     "romaji": "yoyū",
+     "vi": "dư thời gian/nguồn lực",
+     "ex": "テストを 減らして 余裕を 作る 方法はどうですか。",
+     "exVi": "Giảm test để có dư thời gian thì sao?"
+    },
+    {
+     "w": "選択肢",
+     "kana": "せんたくし",
+     "romaji": "sentakushi",
+     "vi": "phương án lựa chọn",
+     "ex": "品質を 落とすのではなく、選択肢を 示して 承認を 得ます。",
+     "exVi": "Tôi đưa phương án xin duyệt thay vì hạ chất lượng."
+    },
+    {
+     "w": "承認",
+     "kana": "しょうにん",
+     "romaji": "shōnin",
+     "vi": "phê duyệt",
+     "ex": "品質を 落とすのではなく、選択肢を 示して 承認を 得ます。",
+     "exVi": "Tôi đưa phương án xin duyệt thay vì hạ chất lượng."
+    },
+    {
+     "w": "期限",
+     "kana": "きげん",
+     "romaji": "kigen",
+     "vi": "hạn hoàn thành",
+     "ex": "期限を 変えないなら、優先順位に 沿って 範囲を 調整します。",
+     "exVi": "Nếu không đổi hạn thì điều chỉnh phạm vi theo ưu tiên."
+    },
+    {
+     "w": "品質",
+     "kana": "ひんしつ",
+     "romaji": "hinshitsu",
+     "vi": "chất lượng",
+     "ex": "品質を 落とすのではなく、選択肢を 示して 承認を 得ます。",
+     "exVi": "Tôi đưa phương án xin duyệt thay vì hạ chất lượng."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Cấu trúc và cách dùng",
+   "html": "<p>～を前提に nêu giả định; ～場合は nêu điều kiện thay đổi; ～を除けば giới hạn phạm vi. 見積もり là ước lượng, khác cam kết vô điều kiện. Đưa lựa chọn có đánh đổi: giảm phạm vi hoặc đổi hạn, không ngầm hạ tiêu chí an toàn/kiểm thử.</p>",
+   "table": [
+    [
+     "Mục đích",
+     "Mẫu"
+    ],
+    [
+     "Giả định",
+     "現在の範囲を前提に"
+    ],
+    [
+     "Bổ sung",
+     "追加がある場合は再見積もりします"
+    ],
+    [
+     "Lựa chọn",
+     "範囲を調整するか、延期します"
+    ],
+    [
+     "Chất lượng",
+     "基準は維持します"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "現在の 範囲を 前提に、工数を 見積もりました。",
+     "vi": "Tôi ước lượng lượng công việc theo phạm vi hiện tại."
+    },
+    {
+     "t": "通知の 追加がある 場合は、依存関係の 調査が 必要です。",
+     "vi": "Nếu thêm thông báo thì cần tìm hiểu quan hệ phụ thuộc."
+    },
+    {
+     "t": "期限を 変えないなら、優先順位に 沿って 範囲を 調整します。",
+     "vi": "Nếu không đổi hạn thì điều chỉnh phạm vi theo ưu tiên."
+    },
+    {
+     "t": "品質を 落とすのではなく、選択肢を 示して 承認を 得ます。",
+     "vi": "Tôi đưa phương án xin duyệt thay vì hạ chất lượng."
+    }
+   ],
+   "tips": [
+    "<p>Dùng 見積もり như 確約: ghi giả định và độ bất định.</p>",
+    "<p>Gộp 追加 vào hạn cũ mà không hỏi lại: tính tác động.</p>",
+    "<p>Nói “không thể” không có lựa chọn: đưa tradeoff cụ thể.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Ước lượng và thương lượng phạm vi",
+   "note": "Hai thành viên của dự án giả Hộp Mây trao đổi trong nhóm phát triển. Nghe để ghi dữ kiện, điều kiện và hành động tiếp; xem bản dịch sau lượt đầu.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "現在の 見積もりと、その 前提を 教えてください。",
+     "vi": "Xin cho ước lượng hiện tại và giả định."
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "入力部分だけなら 二日です。通知の 追加は 範囲に 含めていません。",
+     "vi": "Chỉ đầu vào là hai ngày. Chưa gồm thêm thông báo."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "通知も 同じ 期限に 入れることは 可能ですか。",
+     "vi": "Có thể thêm thông báo cùng hạn không?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "依存関係の 調査が 必要で、工数は まだ 確定できません。",
+     "vi": "Cần tìm hiểu phụ thuộc nên chưa chốt công sức."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "では、どのような 選択肢がありますか。",
+     "vi": "Vậy có những lựa chọn nào?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "優先順位を 決めて 一部を 後にするか、期限の 延期を 検討できます。",
+     "vi": "Có thể ưu tiên để một phần sau, hoặc cân nhắc dời hạn."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "テストを 減らして 余裕を 作る 方法はどうですか。",
+     "vi": "Giảm test để có dư thời gian thì sao?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "品質の 基準は 保ちたいです。変更の 影響を 示し、責任者の 承認を 得ましょう。",
+     "vi": "Tôi muốn giữ chuẩn chất lượng. Hãy nêu ảnh hưởng và xin duyệt người chịu trách nhiệm."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Theo hội thoại: Xin cho ước lượng hiện tại và giả định.",
+     "o": [
+      "Cần tìm hiểu phụ thuộc nên chưa chốt công sức.",
+      "Chỉ đầu vào là hai ngày. Chưa gồm thêm thông báo.",
+      "Có thể ưu tiên để một phần sau, hoặc cân nhắc dời hạn."
+     ],
+     "a": 1,
+     "e": "Câu trả lời là 入力部分だけなら 二日です。通知の 追加は 範囲に 含めていません。 → Chỉ đầu vào là hai ngày. Chưa gồm thêm thông báo."
+    },
+    {
+     "q": "Theo hội thoại: Có thể thêm thông báo cùng hạn không?",
+     "o": [
+      "Tôi muốn giữ chuẩn chất lượng. Hãy nêu ảnh hưởng và xin duyệt người chịu trách nhiệm.",
+      "Có thể ưu tiên để một phần sau, hoặc cân nhắc dời hạn.",
+      "Cần tìm hiểu phụ thuộc nên chưa chốt công sức."
+     ],
+     "a": 2,
+     "e": "Câu trả lời là 依存関係の 調査が 必要で、工数は まだ 確定できません。 → Cần tìm hiểu phụ thuộc nên chưa chốt công sức."
+    },
+    {
+     "q": "Theo hội thoại: Vậy có những lựa chọn nào?",
+     "o": [
+      "Tôi muốn giữ chuẩn chất lượng. Hãy nêu ảnh hưởng và xin duyệt người chịu trách nhiệm.",
+      "Có thể ưu tiên để một phần sau, hoặc cân nhắc dời hạn.",
+      "Chỉ đầu vào là hai ngày. Chưa gồm thêm thông báo."
+     ],
+     "a": 1,
+     "e": "Câu trả lời là 優先順位を 決めて 一部を 後にするか、期限の 延期を 検討できます。 → Có thể ưu tiên để một phần sau, hoặc cân nhắc dời hạn."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: thông tin mới trong cùng chủ đề",
+   "text": "架空の チームは、入力部分の 工数を 二日と 見積もりました。この 数字は 範囲と 前提に 結びついています。\n\n後から 通知の 追加が 提案されました。変更を 受け入れても、以前の 見積もりが そのまま 有効とは 限りません。\n\n依存関係の 調査が 終わるまでは、必要な 工数に 不確実性があります。調査の 時間と 回答の 時期を 示します。\n\n期限に 余裕がない 場合、優先順位に 基づく 範囲の 調整と 延期が 選択肢になります。\n\nただし、品質の 基準を 黙って 下げることはしません。何を 後にするかを 明示し、承認を 得ます。\n\n最終的な 合意には、範囲、期限、残る 調査と 担当を 記録します。数字だけでなく、数字が 成り立つ 条件を 共有するためです。",
+   "vi": "Nhóm giả ước lượng đầu vào hai ngày; con số gắn phạm vi và giả định.\n\nSau đó đề nghị thêm thông báo; nhận đổi không có nghĩa ước lượng cũ vẫn giữ.\n\nTrước xong tìm hiểu phụ thuộc, công sức còn bất định; nêu thời gian khảo sát và lúc trả lời.\n\nNếu hạn không dư, lựa chọn là chỉnh phạm vi theo ưu tiên hoặc dời.\n\nKhông âm thầm hạ chuẩn chất lượng; nói rõ để phần nào sau và xin duyệt.\n\nGhi phạm vi, hạn, khảo sát còn lại, phụ trách trong thống nhất cuối; chia sẻ điều kiện tạo con số chứ không chỉ con số.",
+   "gloss": [
+    {
+     "w": "見積もり",
+     "kana": "みつもり",
+     "romaji": "mitsumori",
+     "vi": "ước lượng"
+    },
+    {
+     "w": "工数",
+     "kana": "こうすう",
+     "romaji": "kōsū",
+     "vi": "lượng công việc"
+    },
+    {
+     "w": "範囲",
+     "kana": "はんい",
+     "romaji": "han'i",
+     "vi": "phạm vi"
+    },
+    {
+     "w": "前提",
+     "kana": "ぜんてい",
+     "romaji": "zentei",
+     "vi": "giả định nền"
+    },
+    {
+     "w": "追加",
+     "kana": "ついか",
+     "romaji": "tsuika",
+     "vi": "bổ sung"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Hai ngày ban đầu bao gồm gì?",
+     "o": [
+      "Chỉ phần đầu vào",
+      "Cả mọi thông báo",
+      "Mọi yêu cầu tương lai"
+     ],
+     "a": 0,
+     "e": "入力部分だけ."
+    },
+    {
+     "q": "Thêm thông báo có mặc định giữ ước lượng không?",
+     "o": [
+      "Có chắc chắn",
+      "Không",
+      "Không có thay đổi nào"
+     ],
+     "a": 1,
+     "e": "Điều kiện/phạm vi đã đổi."
+    },
+    {
+     "q": "Giải pháp nào bị tránh?",
+     "o": [
+      "Xin phê duyệt thay đổi",
+      "Âm thầm hạ chuẩn chất lượng",
+      "Nêu lựa chọn"
+     ],
+     "a": 1,
+     "e": "品質基準を黙って下げない."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và phản hồi",
+   "tasks": [
+    {
+     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "model": "現在の 見積もりと、その 前提を 教えてください。 通知も 同じ 期限に 入れることは 可能ですか。 では、どのような 選択肢がありますか。 テストを 減らして 余裕を 作る 方法はどうですか。",
+     "vi": "Xin cho ước lượng hiện tại và giả định. Có thể thêm thông báo cùng hạn không? Vậy có những lựa chọn nào? Giảm test để có dư thời gian thì sao?",
+     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+    },
+    {
+     "p": "Thương lượng một phần bổ sung, trình bày hai lựa chọn và hỏi ưu tiên người nghe.",
+     "model": "二日は現在の範囲を前提にしています。追加分は調査後に見積もります。入力部分を先に納品する方法と、期限を調整する方法があります。どちらを優先されますか。",
+     "vi": "Hai ngày theo phạm vi hiện tại. Phần thêm ước lượng sau khảo sát. Có giao đầu vào trước hoặc chỉnh hạn. Anh/chị ưu tiên cách nào?",
+     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết có kiểm tra",
+   "task": "Viết phản hồi yêu cầu thêm thông báo:ước lượng 2 ngày chỉ phần đầu vào, cần khảo sát trước ước lượng thêm; đề xuất hai lựa chọn và giữ chuẩn test.120–200 ký tự.",
+   "min": 120,
+   "model": "現在の二日という見積もりは、入力部分だけを前提にしています。通知を追加する場合は、依存関係の調査後に工数を再見積もりする必要があります。入力部分を先に納品するか、全体の期限を調整するかが選択肢です。テストの基準は維持したいと考えています。追加の範囲と優先順位を確認し、承認を得てから予定を更新します。",
+   "modelVi": "Ước lượng hai ngày chỉ đầu vào. Thêm thông báo cần kiểm phụ thuộc rồi ước lượng lại. Chọn giao đầu vào trước hoặc chỉnh hạn toàn bộ, giữ chuẩn test. Xác nhận phạm vi/ưu tiên và duyệt rồi cập nhật.",
+   "tips": [
+    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
+    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+   ],
+   "checklist": [
+    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
+    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
+    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
+    "Câu kết thúc và mức lịch sự nhất quán"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong bài, “見積もり” có nghĩa gì?",
+   "o": [
+    "ước lượng",
+    "bổ sung",
+    "thứ tự ưu tiên"
+   ],
+   "a": 0,
+   "e": "現在の 見積もりと、その 前提を 教えてください。 → Xin cho ước lượng hiện tại và giả định.; “見積もり” ở đây là ước lượng."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “工数” có nghĩa gì?",
+   "o": [
+    "quan hệ phụ thuộc",
+    "lượng công việc",
+    "thay đổi"
+   ],
+   "a": 1,
+   "e": "現在の 範囲を 前提に、工数を 見積もりました。 → Tôi ước lượng lượng công việc theo phạm vi hiện tại.; “工数” ở đây là lượng công việc."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “範囲” có nghĩa gì?",
+   "o": [
+    "dời thời hạn",
+    "phạm vi",
+    "khảo sát/tìm hiểu"
+   ],
+   "a": 1,
+   "e": "現在の 範囲を 前提に、工数を 見積もりました。 → Tôi ước lượng lượng công việc theo phạm vi hiện tại.; “範囲” ở đây là phạm vi."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “前提” có nghĩa gì?",
+   "o": [
+    "giả định nền",
+    "thứ tự ưu tiên",
+    "dư thời gian/nguồn lực"
+   ],
+   "a": 0,
+   "e": "現在の 範囲を 前提に、工数を 見積もりました。 → Tôi ước lượng lượng công việc theo phạm vi hiện tại.; “前提” ở đây là giả định nền."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “lượng công việc” vào đúng đơn vị còn thiếu: 現在の 範囲を 前提に、___を 見積もりました。",
+   "a": "工数",
+   "e": "Đáp án 工数 nghĩa là lượng công việc. Câu hoàn chỉnh: 現在の 範囲を 前提に、工数を 見積もりました。 → Tôi ước lượng lượng công việc theo phạm vi hiện tại."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “quan hệ phụ thuộc” vào đúng đơn vị còn thiếu: 通知の 追加がある 場合は、___の 調査が 必要です。",
+   "a": "依存関係",
+   "e": "Đáp án 依存関係 nghĩa là quan hệ phụ thuộc. Câu hoàn chỉnh: 通知の 追加がある 場合は、依存関係の 調査が 必要です。 → Nếu thêm thông báo thì cần tìm hiểu quan hệ phụ thuộc."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “hạn hoàn thành” vào đúng đơn vị còn thiếu: ___を 変えないなら、優先順位に 沿って 範囲を 調整します。",
+   "a": "期限",
+   "e": "Đáp án 期限 nghĩa là hạn hoàn thành. Câu hoàn chỉnh: 期限を 変えないなら、優先順位に 沿って 範囲を 調整します。 → Nếu không đổi hạn thì điều chỉnh phạm vi theo ưu tiên."
+  },
+  {
+   "t": "order",
+   "q": "Sắp các mảnh thành đúng câu mẫu: Tôi đưa phương án xin duyệt thay vì hạ chất lượng.",
+   "w": [
+    "落とすのではなく、選択肢を",
+    "示して",
+    "承認を",
+    "得ます。",
+    "品質を"
+   ],
+   "a": "品質を 落とすのではなく、選択肢を 示して 承認を 得ます。",
+   "e": "Câu đúng: 品質を 落とすのではなく、選択肢を 示して 承認を 得ます。; chú ý vị trí các cụm và phần kết câu. ～を前提に nêu giả định; ～場合は nêu điều kiện thay đổi; ～を除けば giới hạn phạm vi. 見積もり là ước lượng, khác cam kết vô điều kiện. Đưa lựa chọn có đánh đổi: giảm phạm vi hoặc đổi hạn, không ngầm hạ tiêu chí an toàn/kiểm thử."
+  },
+  {
+   "t": "listen",
+   "q": "Nghe và chọn ý đúng.",
+   "o": [
+    "Có thể ưu tiên để một phần sau, hoặc cân nhắc dời hạn.",
+    "Có thể thêm thông báo cùng hạn không?",
+    "Cần tìm hiểu phụ thuộc nên chưa chốt công sức."
+   ],
+   "a": 1,
+   "e": "Câu đọc là 通知も 同じ 期限に 入れることは 可能ですか。 → Có thể thêm thông báo cùng hạn không?",
+   "say": "通知も 同じ 期限に 入れることは 可能ですか。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "listen",
+   "q": "Nghe và chọn ý đúng.",
+   "o": [
+    "Giảm test để có dư thời gian thì sao?",
+    "Chỉ đầu vào là hai ngày. Chưa gồm thêm thông báo.",
+    "Tôi muốn giữ chuẩn chất lượng. Hãy nêu ảnh hưởng và xin duyệt người chịu trách nhiệm."
+   ],
+   "a": 0,
+   "e": "Câu đọc là テストを 減らして 余裕を 作る 方法はどうですか。 → Giảm test để có dư thời gian thì sao?",
+   "say": "テストを 減らして 余裕を 作る 方法はどうですか。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "現在の 範囲を 前提に、工数を 見積もりました。",
+   "lang": "ja-JP",
+   "a": "現在の 範囲を 前提に、工数を 見積もりました。",
+   "e": "Nghĩa: Tôi ước lượng lượng công việc theo phạm vi hiện tại.; viết đúng chữ, trợ từ và âm dài/âm ngắt. Không viết romaji vào đáp án chữ Nhật."
+  },
+  {
+   "t": "match",
+   "q": "Nối các từ/cụm với nghĩa trong bài.",
+   "pairs": [
+    [
+     "追加",
+     "bổ sung"
+    ],
+    [
+     "変更",
+     "thay đổi"
+    ],
+    [
+     "延期",
+     "dời thời hạn"
+    ],
+    [
+     "優先順位",
+     "thứ tự ưu tiên"
+    ],
+    [
+     "依存関係",
+     "quan hệ phụ thuộc"
+    ]
+   ],
+   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+  },
+  {
+   "t": "mc",
+   "q": "Hai ngày ban đầu bao gồm gì?",
+   "o": [
+    "Chỉ phần đầu vào",
+    "Cả mọi thông báo",
+    "Mọi yêu cầu tương lai"
+   ],
+   "a": 0,
+   "e": "入力部分だけ."
+  },
+  {
+   "t": "mc",
+   "q": "Thêm thông báo có mặc định giữ ước lượng không?",
+   "o": [
+    "Có chắc chắn",
+    "Không",
+    "Không có thay đổi nào"
+   ],
+   "a": 1,
+   "e": "Điều kiện/phạm vi đã đổi."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Phiếu tình huống dự án giả Hộp Mây, dữ liệu giả, bảng vai trò và tiêu chí kiểm thông điệp; chuẩn bị hai phiếu có thông tin khác nhau.",
+  "steps": [
+   {
+    "t": "10'",
+    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+   },
+   {
+    "t": "20'",
+    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+   },
+   {
+    "t": "25'",
+    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+   },
+   {
+    "t": "15'",
+    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+   },
+   {
+    "t": "15'",
+    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+   },
+   {
+    "t": "20'",
+    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+   },
+   {
+    "t": "20'",
+    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+   },
+   {
+    "t": "15'",
+    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+   }
+  ],
+  "games": [
+   "Đổi vai khách hàng–thành viên phát triển: một người giữ yêu cầu, một người giữ giới hạn; chỉ thống nhất khi mỗi bên nhắc lại đúng ý.",
+   "Phân loại thẻ thông tin: dữ kiện đã xác nhận, giả thuyết, đề xuất và cam kết; giải thích dấu hiệu ngôn ngữ."
+  ],
+  "errors": [
+   "Dùng 見積もり như 確約: ghi giả định và độ bất định.",
+   "Gộp 追加 vào hạn cũ mà không hỏi lại: tính tác động.",
+   "Nói “không thể” không có lựa chọn: đưa tradeoff cụ thể.",
+   "Giảm test ngầm để giữ ngày: xác nhận chuẩn chất lượng và phạm vi."
+  ],
+  "homework": "Ôn 15 cụm theo ngữ cảnh bài; viết thông điệp mới 120–200 ký tự, ghi âm một lượt đóng vai và tự phân loại điều đã biết/chưa biết."
+ }
+}

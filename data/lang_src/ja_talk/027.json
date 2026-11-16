@@ -1,0 +1,219 @@
+{
+ "no": 27,
+ "lv": "it",
+ "title": "Làm rõ yêu cầu và thương lượng phạm vi",
+ "sub": "要件に「検索を 速くする」とありますが、受け入れ条件として 何を 測ればよいか、まだ 明確ではありません。",
+ "situation": "Nhóm giả làm rõ yêu cầu “tìm kiếm nhanh”, chuyển thành tiêu chí đo và thương lượng phạm vi. Số mục tiêu là đề xuất giả định, chưa được phê duyệt.",
+ "lang": "ja-JP",
+ "lines": [
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "要件に「検索を 速くする」とありますが、受け入れ条件として 何を 測ればよいか、まだ 明確ではありません。",
+   "vi": "Yêu cầu ghi “làm tìm kiếm nhanh hơn”, nhưng vẫn chưa rõ cần đo gì làm tiêu chí nghiệm thu."
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "利用者が 結果を 見るまでの 時間を 想定しています。データ量と 同時利用の 条件も 決める必要がありそうですね。",
+   "vi": "Tôi hình dung thời gian đến khi người dùng thấy kết quả. Có vẻ cần chốt cả lượng dữ liệu và số người dùng đồng thời."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "仮の 目標として、指定した データで p95が 三百ミリ秒未満という 条件を 提案してもよいでしょうか。",
+   "vi": "Tôi có thể đề xuất mục tiêu giả định là p95 dưới ba trăm mili giây với tập dữ liệu đã chỉ định không?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "提案として 検討しましょう。ただし、その数値は まだ 承認済みではありません。どの 範囲を 含むかも 確認したいです。",
+   "vi": "Chúng ta hãy xem xét như một đề xuất. Con số đó chưa được phê duyệt. Tôi cũng muốn làm rõ phạm vi đo."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "サーバー処理だけでなく、画面に 表示されるまでとすると、ネットワークの 条件も 必要です。",
+   "vi": "Nếu đo đến khi kết quả hiện trên màn hình, thay vì chỉ xử lý máy chủ, cần nêu cả điều kiện mạng."
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "では、測定方法と 失敗時の 扱いを 先にそろえましょう。速くても 結果が 間違っていれば、条件を 満たしたことにはなりません。",
+   "vi": "Vậy trước hết hãy thống nhất cách đo và xử lý trường hợp thất bại. Nhanh nhưng kết quả sai thì chưa đáp ứng tiêu chí."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "今回の 期限では、キャッシュと ページングの 両方を 完成させるのは 難しい見込みです。優先順位を 決められますか。",
+   "vi": "Với thời hạn hiện tại, dự kiến khó hoàn tất cả bộ nhớ đệm và phân trang. Chúng ta quyết định ưu tiên được không?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "まず ページングを 対象にし、キャッシュは 別の 検証へ 分ける案にしましょう。変更の 影響を 確認してから 正式に 決めます。",
+   "vi": "Hãy đề xuất làm phân trang trước và tách bộ nhớ đệm sang đợt kiểm riêng. Chỉ quyết định chính thức sau khi kiểm ảnh hưởng của thay đổi."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "受け入れ条件の 版と、合意した範囲を チケットに 残します。未決の 数値は 仮だと 明記します。",
+   "vi": "Tôi sẽ ghi phiên bản tiêu chí nghiệm thu và phạm vi đã thống nhất trong phiếu công việc. Các số chưa quyết sẽ được ghi rõ là tạm thời."
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "お願いします。見積もりは 約束と 混同せず、条件が 変わったら 再確認できるようにしましょう。",
+   "vi": "Nhờ bạn làm vậy. Hãy phân biệt ước lượng với cam kết và để có thể xác nhận lại khi điều kiện đổi."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "要件に「検索を 速くする」とありますが、受け入れ条件として 何を 測ればよいか、まだ 明確ではありません。",
+   "vi": "Yêu cầu ghi “làm tìm kiếm nhanh hơn”, nhưng vẫn chưa rõ cần đo gì làm tiêu chí nghiệm thu.",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "仮の 目標として、指定した データで p95が 三百ミリ秒未満という 条件を 提案してもよいでしょうか。",
+   "vi": "Tôi có thể đề xuất mục tiêu giả định là p95 dưới ba trăm mili giây với tập dữ liệu đã chỉ định không?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "サーバー処理だけでなく、画面に 表示されるまでとすると、ネットワークの 条件も 必要です。",
+   "vi": "Nếu đo đến khi kết quả hiện trên màn hình, thay vì chỉ xử lý máy chủ, cần nêu cả điều kiện mạng.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  },
+  {
+   "t": "では、測定方法と 失敗時の 扱いを 先にそろえましょう。速くても 結果が 間違っていれば、条件を 満たしたことにはなりません。",
+   "vi": "Vậy trước hết hãy thống nhất cách đo và xử lý trường hợp thất bại. Nhanh nhưng kết quả sai thì chưa đáp ứng tiêu chí.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  },
+  {
+   "t": "今回の 期限では、キャッシュと ページングの 両方を 完成させるのは 難しい見込みです。優先順位を 決められますか。",
+   "vi": "Với thời hạn hiện tại, dự kiến khó hoàn tất cả bộ nhớ đệm và phân trang. Chúng ta quyết định ưu tiên được không?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "受け入れ条件の 版と、合意した範囲を チケットに 残します。未決の 数値は 仮だと 明記します。",
+   "vi": "Tôi sẽ ghi phiên bản tiêu chí nghiệm thu và phạm vi đã thống nhất trong phiếu công việc. Các số chưa quyết sẽ được ghi rõ là tạm thời.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Yêu cầu ban đầu mơ hồ ở điểm nào?",
+   "o": [
+    "Chỉ nói tìm kiếm nhanh hơn",
+    "Không cần chức năng tìm kiếm",
+    "Chỉ tên màn hình"
+   ],
+   "a": 0,
+   "e": "Bằng chứng trong hội thoại: 要件に「検索を 速くする」とありますが、受け入れ条件として 何を 測ればよいか、まだ 明確ではありません。 → Yêu cầu ghi “làm tìm kiếm nhanh hơn”, nhưng vẫn chưa rõ cần đo gì làm tiêu chí nghiệm thu."
+  },
+  {
+   "q": "Mục tiêu ba trăm mili giây đã được duyệt chưa?",
+   "o": [
+    "Đã được duyệt",
+    "Đó là chuẩn của mọi sản phẩm",
+    "Chưa, mới là đề xuất giả định"
+   ],
+   "a": 2,
+   "e": "Bằng chứng trong hội thoại: 提案として 検討しましょう。ただし、その数値は まだ 承認済みではありません。どの 範囲を 含むかも 確認したいです。 → Chúng ta hãy xem xét như một đề xuất. Con số đó chưa được phê duyệt. Tôi cũng muốn làm rõ phạm vi đo."
+  },
+  {
+   "q": "Nếu đo đến khi hiện kết quả, cần xác định thêm gì?",
+   "o": [
+    "Không cần dữ liệu",
+    "Điều kiện mạng",
+    "Chỉ CPU"
+   ],
+   "a": 1,
+   "e": "Bằng chứng trong hội thoại: サーバー処理だけでなく、画面に 表示されるまでとすると、ネットワークの 条件も 必要です。 → Nếu đo đến khi kết quả hiện trên màn hình, thay vì chỉ xử lý máy chủ, cần nêu cả điều kiện mạng."
+  },
+  {
+   "q": "Phương án ưu tiên được đề xuất là gì?",
+   "o": [
+    "Làm phân trang trước, kiểm bộ nhớ đệm riêng",
+    "Cả hai đã hoàn tất",
+    "Bỏ mọi kiểm thử"
+   ],
+   "a": 0,
+   "e": "Bằng chứng trong hội thoại: まず ページングを 対象にし、キャッシュは 別の 検証へ 分ける案にしましょう。変更の 影響を 確認してから 正式に 決めます。 → Hãy đề xuất làm phân trang trước và tách bộ nhớ đệm sang đợt kiểm riêng. Chỉ quyết định chính thức sau khi kiểm ảnh hưởng của thay đổi."
+  },
+  {
+   "q": "Ước lượng có đồng nghĩa cam kết không?",
+   "o": [
+    "Có trong mọi trường hợp",
+    "Không cần ghi ước lượng",
+    "Không, còn phụ thuộc điều kiện"
+   ],
+   "a": 2,
+   "e": "Bằng chứng trong hội thoại: お願いします。見積もりは 約束と 混同せず、条件が 変わったら 再確認できるようにしましょう。 → Nhờ bạn làm vậy. Hãy phân biệt ước lượng với cam kết và để có thể xác nhận lại khi điều kiện đổi."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "今回の 期限では、キャッシュと ページングの 両方を 完成させるのは 難しい見込みです。優先順位を 決められますか。",
+   "lang": "ja-JP",
+   "q": "Nghe và chọn nội dung đúng.",
+   "o": [
+    "Với thời hạn hiện tại, dự kiến khó hoàn tất cả bộ nhớ đệm và phân trang. Chúng ta quyết định ưu tiên được không?",
+    "Tôi có thể đề xuất mục tiêu giả định là p95 dưới ba trăm mili giây với tập dữ liệu đã chỉ định không?",
+    "Nếu đo đến khi kết quả hiện trên màn hình, thay vì chỉ xử lý máy chủ, cần nêu cả điều kiện mạng."
+   ],
+   "a": 0,
+   "e": "Câu được đọc: 今回の 期限では、キャッシュと ページングの 両方を 完成させるのは 難しい見込みです。優先順位を 決められますか。 → Với thời hạn hiện tại, dự kiến khó hoàn tất cả bộ nhớ đệm và phân trang. Chúng ta quyết định ưu tiên được không?"
+  },
+  {
+   "t": "dict",
+   "say": "受け入れ条件の 版と、合意した範囲を チケットに 残します。未決の 数値は 仮だと 明記します。",
+   "lang": "ja-JP",
+   "a": "受け入れ条件の 版と、合意した範囲を チケットに 残します。未決の 数値は 仮だと 明記します。",
+   "e": "Nghĩa của câu: Tôi sẽ ghi phiên bản tiêu chí nghiệm thu và phạm vi đã thống nhất trong phiếu công việc. Các số chưa quyết sẽ được ghi rõ là tạm thời. Viết đúng chữ Nhật và giữ nguyên phần điều kiện hoặc phủ định nếu có."
+  },
+  {
+   "t": "match",
+   "q": "Nối mẫu câu với ý nghĩa trong ngữ cảnh.",
+   "pairs": [
+    [
+     "要件に「検索を 速くする」とありますが、受け入れ条件として 何を 測ればよいか、まだ 明確ではありません。",
+     "Yêu cầu ghi “làm tìm kiếm nhanh hơn”, nhưng vẫn chưa rõ cần đo gì làm tiêu chí nghiệm thu."
+    ],
+    [
+     "仮の 目標として、指定した データで p95が 三百ミリ秒未満という 条件を 提案してもよいでしょうか。",
+     "Tôi có thể đề xuất mục tiêu giả định là p95 dưới ba trăm mili giây với tập dữ liệu đã chỉ định không?"
+    ],
+    [
+     "サーバー処理だけでなく、画面に 表示されるまでとすると、ネットワークの 条件も 必要です。",
+     "Nếu đo đến khi kết quả hiện trên màn hình, thay vì chỉ xử lý máy chủ, cần nêu cả điều kiện mạng."
+    ],
+    [
+     "では、測定方法と 失敗時の 扱いを 先にそろえましょう。速くても 結果が 間違っていれば、条件を 満たしたことにはなりません。",
+     "Vậy trước hết hãy thống nhất cách đo và xử lý trường hợp thất bại. Nhanh nhưng kết quả sai thì chưa đáp ứng tiêu chí."
+    ],
+    [
+     "今回の 期限では、キャッシュと ページングの 両方を 完成させるのは 難しい見込みです。優先順位を 決められますか。",
+     "Với thời hạn hiện tại, dự kiến khó hoàn tất cả bộ nhớ đệm và phân trang. Chúng ta quyết định ưu tiên được không?"
+    ],
+    [
+     "受け入れ条件の 版と、合意した範囲を チケットに 残します。未決の 数値は 仮だと 明記します。",
+     "Tôi sẽ ghi phiên bản tiêu chí nghiệm thu và phạm vi đã thống nhất trong phiếu công việc. Các số chưa quyết sẽ được ghi rõ là tạm thời."
+    ]
+   ],
+   "e": "Nghĩa thuộc đúng tình huống; ghi chú giải thích mức lịch sự và cách luyện."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Làm rõ yêu cầu “đơn giản” bằng đối tượng, thao tác và tiêu chí nghiệm thu.",
+   "model": "簡単にするという 要件について、誰が どの 操作を 何回で 終えられることを 想定していますか。成功条件と エラー時の 動作を 先に 合わせたいです。",
+   "vi": "Với yêu cầu đơn giản hóa, quý vị hình dung ai hoàn tất thao tác nào trong bao nhiêu bước? Tôi muốn thống nhất trước điều kiện thành công và hành vi khi lỗi."
+  },
+  {
+   "p": "Thương lượng phạm vi khi thời hạn chưa đủ cho hai chức năng.",
+   "model": "現在の 条件では 二機能を 同時に 完了する見込みは 低いです。優先する一方を 決め、もう一方は 検証後に 改めて 見積もる案を 提案します。",
+   "vi": "Theo điều kiện hiện tại, khả năng hoàn tất hai chức năng cùng lúc là thấp. Tôi đề xuất chọn một chức năng ưu tiên và ước lượng lại chức năng kia sau khi kiểm chứng."
+  }
+ ]
+}

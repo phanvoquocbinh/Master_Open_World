@@ -4,7 +4,7 @@ Nguồn soạn: `data/lang_src/<track>_<level>/` (mỗi bài 1 file `01.json`, `
 Gộp & kiểm tra: `python data/lang_src/build.py` → sinh `data/lang_<track>_<level>.json` + `data/lang_index.json` (game chỉ đọc các file gộp này).
 Sửa bài: sửa file nguồn → chạy lại `build.py` → F5 trong game.
 
-- `track`: `en` (tiếng Anh) | `zh` (tiếng Trung)
+- `track`: `en` (tiếng Anh) | `zh` (tiếng Trung) | `ja` (tiếng Nhật) | `ko` (tiếng Hàn)
 - `level`: `l0`, `a1`, `a2`, `b1`, `b2`, `c1`, `c2` (Anh) · `l0`, `hsk1` … `hsk6`, `hsk79` (Trung)
 - Mọi giải thích, hướng dẫn, đáp án giải thích: **tiếng Việt có dấu**. Ví dụ/bài đọc/hội thoại bằng ngôn ngữ đang học + bản dịch tiếng Việt.
 - Toàn bộ nội dung **tự soạn**. KHÔNG chép đề/bài đọc/audio/sách đã xuất bản (Cambridge, Oxford, Hán ngữ, giáo trình HSK chuẩn…), không dùng tên thương hiệu/nhân vật có bản quyền. Tên người, địa danh: tự đặt (Lan, Minh, Tom, Anna, 小明, 王老师…).
@@ -124,3 +124,34 @@ Giống `exam.json` + trường `kind`:
 - `"kind":"ielts"` – section có `skill`: `L` (Listening), `R` (Reading), `W` (Writing), `S` (Speaking). Game quy đổi số câu đúng L/R (trên 40) ra band. Writing Task 1 có thể kèm biểu đồ:
   `"chart":{"type":"line|bar|pie|table","title":"…","unit":"%","labels":["2000","2010"],"series":[{"name":"…","data":[12,18]}]}` đặt trong `write`.
 - `"kind":"hsk"`, `"hsk":1..6|7` – section có `skill`: `L` 听力, `R` 阅读, `W` 书写.
+
+
+## 6. Mở rộng tiếng Nhật và tiếng Hàn (16/11/2026)
+
+Giữ nguyên mọi trường và quy tắc của tiếng Anh/Trung. Nguồn Nhật: `ja_kana`, `ja_n5`…`ja_n1`, `ja_it`; nguồn Hàn: `ko_hangul`, `ko_t1`…`ko_t6`. Các thư mục `ja_talk/ko_talk`, `ja_guide/ko_guide`, `ja_mock/ko_mock` dùng cùng cấu trúc hiện có. Mỗi bài và bài thi nội bộ vẫn cần đủ kỹ năng và lời giải thích tiếng Việt theo AUTHORING.md.
+
+### Từ vựng và cách đọc
+
+- **WORD tiếng Nhật**: `w`, `kana`, `romaji`, `vi` bắt buộc; `kanji`, `hv` tùy chọn. Không bắt buộc hoặc cảnh báo thiếu `ipa`. `kana` là cách đọc đầy đủ bằng kana (giữ trường âm, âm ngắt và âm ghép); `romaji` theo Hepburn nhất quán, có thể dùng ā/ī/ū/ē/ō. Không dùng romaji như phiên âm tiếng Việt. `kanji` ghi dạng chữ Hán khi cần; `hv` chỉ ghi khi chắc âm Hán Việt, có thể bỏ hoặc để chuỗi rỗng. Ví dụ tự soạn:
+
+```json
+{"w":"学校","kana":"がっこう","romaji":"gakkō","kanji":"学校","hv":"học hiệu","pos":"n","vi":"trường học","ex":"ここは学校です。","exVi":"Đây là trường học."}
+```
+
+- **WORD tiếng Hàn**: `w`, `rr`, `vi` bắt buộc. `rr` là Revised Romanization (Romaja), không phải IPA và không thêm dấu thanh tiếng Việt. Ví dụ tự soạn:
+
+```json
+{"w":"학교","rr":"hakgyo","pos":"n","vi":"trường học","ex":"학교에 가요.","exVi":"Tôi đi tới trường."}
+```
+
+- `dialog.lines`, `grammar.ex`, `read`, `speak.tasks`, bài tập và cụm hội thoại có thể bổ sung `kana`, `romaji` (Nhật), `rr` (Hàn). Nếu có, giá trị phải là chuỗi. Không nhét phiên âm vào `t`/`say`: giọng máy phải đọc đúng ngôn ngữ gốc.
+- `lang`: `ja-JP` / `ko-KR` ở `dialog` và các bài nghe/chính tả. Đặt rõ thay vì dựa mặc định của giao diện cũ. Cách hiển thị trường mới và nối các lớp vào game do phiên tích hợp xử lý sau; thành công ở bộ build không chứng minh UI đã hỗ trợ toàn bộ phiên âm.
+- `chars.items` của Nhật dùng `c`, `kana`, `romaji` thay `py`; Hàn dùng `c`, `rr`; các trường `parts`, `strokes`, `vi`, `words` giữ nguyên ý nghĩa. Không đoán số nét hoặc âm Hán Việt.
+- `dict.a` luôn là chữ gốc; có thể đặt `alt` cho biến thể chính tả thực sự chấp nhận. Không tự nhận romaji/RR là đáp án đúng nếu giao diện chưa hỗ trợ.
+
+### Đề mô phỏng Nhật/Hàn
+
+- Nhật: `kind: "jlpt"`, `jlpt: "n5"|"n4"|"n3"|"n2"|"n1"`. `sections` gồm kiến thức ngôn ngữ, đọc và nghe; `skill` dùng `K`, `R`, `L`. Không gộp phần nói/viết bổ trợ vào điểm mô phỏng JLPT.
+- Hàn: `kind: "topik"`, `topik: 1|2` (hai loại TOPIK I/II). TOPIK I hướng bậc 1–2 có nghe/đọc; TOPIK II hướng bậc 3–6 có nghe/đọc/viết. `skill` dùng `L`, `R`, `W`. Mã cấp học `t1`…`t6` không phải sáu loại bài thi.
+- Bài mô phỏng vẫn có `title`, `time`, `intro`, `sections`, đáp án và giải thích; mỗi section sử dụng cấu trúc EX hiện có. Ghi rõ nếu là bản rút gọn và cách chấm điểm luyện tập; không suy ra chứng chỉ từ điểm tự chấm, không tự khẳng định tương đương đề chính thức.
+- Công cụ giữ lại `jlpt`/`topik` trong metadata đề. Bài thi cuối cấp `exam.json` là đánh giá nội bộ có nói/viết, khác với đề mô phỏng thi chuẩn hóa.

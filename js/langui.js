@@ -30,8 +30,8 @@ export function createApp(W, ctx = {}){
   const TR = {
     en: {name:'Tiếng Anh', short:'EN', lang:'en-GB', goal:'Từ con số 0 → IELTS 8.0+', unit:'từ'},
     zh: {name:'Tiếng Trung', short:'中', lang:'zh-CN', goal:'Từ con số 0 → HSK 7–9 (cao cấp)', unit:'chữ'},
-    ja: {name:'Tiếng Nhật', short:'日', lang:'ja-JP', goal:'Hiragana → JLPT N1 + IT (đang soạn)', unit:'chữ'},
-    ko: {name:'Tiếng Hàn', short:'한', lang:'ko-KR', goal:'Hangul → TOPIK II (đang soạn)', unit:'chữ'},
+    ja: {name:'Tiếng Nhật', short:'日', lang:'ja-JP', goal:'Hiragana → JLPT N1 + IT', unit:'chữ'},
+    ko: {name:'Tiếng Hàn', short:'한', lang:'ko-KR', goal:'Hangul → TOPIK II', unit:'chữ'},
   };
   const flag = t => `<span class="lcx-flag ${t}">${TR[t].short}</span>`;
   const langOf = (t, x) => (x && x.lang) || TR[t].lang;
@@ -629,7 +629,7 @@ export function createApp(W, ctx = {}){
         ${tile('🃏', 'Thẻ từ vựng', `${srsDue} thẻ đến hạn · lặp lại ngắt quãng`, {v:'cards', t})}
         ${tile('🧪', 'Kiểm tra', 'Từ vựng · ngữ pháp · nghe · tổng hợp (tự sinh đề)', {v:'tests', t})}
         ${tile('🎭', 'Hội thoại giao tiếp', T.talk ? `${T.talk.talks.length} tình huống · nghe – trả lời – nhập vai` : 'đang soạn', {v:'talks', t}, !T.talk)}
-        ${tile('📝', 'Thi thử', T.mock ? `${T.mock.tests.length} đề ${t === 'en' ? 'IELTS' : 'HSK'} tự soạn` : 'đang soạn', {v:'mocks', t}, !T.mock)}
+        ${tile('📝', 'Thi thử', T.mock ? `${T.mock.tests.length} đề ${({en:'IELTS', zh:'HSK', ja:'JLPT', ko:'TOPIK'})[t] || ''} tự soạn` : 'đang soạn', {v:'mocks', t}, !T.mock)}
         ${tile('📖', 'Sổ tay chuyên đề', T.guide ? `${T.guide.articles.length} chuyên đề cho giáo viên & tra cứu` : 'đang soạn', {v:'guide', t}, !T.guide)}
         ${tile('📕', 'Sổ lỗi sai', `${wr} câu từng làm sai – làm lại đến khi đúng`, {v:'wrong', t})}
       </div><h2 style="margin-top:18px">🗺️ Lộ trình theo cấp</h2>
@@ -807,7 +807,7 @@ export function createApp(W, ctx = {}){
     el.innerHTML = `<h1>📝 Đề thi thử ${t === 'en' ? 'IELTS Academic' : 'HSK'} tự soạn</h1><p class="mut">Đề do Trung tâm tự biên soạn, mô phỏng đúng cấu trúc và độ khó – <b>không phải đề thật</b> (đề thật có bản quyền). Muốn làm thêm đề mẫu chính thức: Sảnh › 🔗 Đề mẫu chính thức miễn phí.</p>
       <div class="lcx-grid">${D.tests.map(x => { const m = P.mocks[x.id]; return `<div class="lcx-tile" data-go="${go({v:'mock', t, id:x.id})}"><b>${esc(x.title || x.id)}</b><div class="mut">${x.time ? `⏱ ${x.time} phút · ` : ''}${(x.sections || []).reduce((a, s) => a + (s.items || []).length, 0)} câu tự chấm</div>${m ? `<span class="lcx-badge green">Lần gần nhất: ${m.overall != null ? 'band ' + m.overall : m.pct + '%'} · ${fmtD(m.at)}</span>` : ''}</div>`; }).join('')}</div>`; };
   VIEWS.mock = async (r, el) => {
-    const t = r.t, D = await EXTRA(t, 'mock'), X = D.tests.find(x => x.id === r.id); if(!X) throw new Error('Không thấy đề'); r.label = '📝 ' + (X.kind === 'ielts' ? 'IELTS' : 'HSK');
+    const t = r.t, D = await EXTRA(t, 'mock'), X = D.tests.find(x => x.id === r.id); if(!X) throw new Error('Không thấy đề'); r.label = '📝 ' + (({ielts:'IELTS', jlpt:'JLPT', topik:'TOPIK'})[X.kind] || 'HSK');
     el.appendChild(examRunner(X, t, {kind:X.kind === 'ielts' ? 'ielts' : 'hsk', onResult:res => { P.mocks[X.id] = {at:now(), pct:res.pct, L:res.L, R:res.R, W:res.W, S:res.S, overall:X.kind === 'ielts' ? ieltsAvg([res.L, res.R, res.W, res.S]) : null, scores:res.scores};
       if(!coinDone[X.id] && res.pct >= 40){ coinDone[X.id] = 1; P.mockCoin = P.mockCoin || {}; if(!P.mockCoin[X.id]){ P.mockCoin[X.id] = 1; coins(50, '📝 Hoàn thành đề thi thử (+50 💰)'); } } save(); }})); };
   const coinDone = {};

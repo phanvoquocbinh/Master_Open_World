@@ -1,0 +1,424 @@
+=== COURSE devops
+name: DevOps thực chiến
+icon: 🐳
+floor: 7
+room: 704
+level: Cơ bản → Thực hành
+hours: 16
+summary: Thực hành Linux, Docker/Compose, Kubernetes, pipeline, Terraform, quan sát, secret và phát hành có kế hoạch phục hồi trong môi trường lab.
+
+## LESSON devops-01 | Linux và shell: quan sát trước khi thay đổi
+
+### Mục tiêu và môi trường lab
+Dùng máy ảo Linux hoặc môi trường lớp tách biệt. Thư mục hiện tại giống vị trí đang đứng trong kho: phải xác định trước khi thao tác. Khóa này chỉ cho lệnh quan sát và tạo thử trong thư mục lab; không chạy lệnh quản trị trên máy phục vụ thật.
+
+### Điều hướng và đọc file
+pwd cho vị trí, ls -la hiện file ẩn, head giới hạn đầu ra. Luôn đặt đường dẫn có khoảng trắng trong dấu nháy. Không in file môi trường chứa bí mật để chẩn đoán.
+~~~bash
+pwd
+mkdir -p "$HOME/qc-lab"
+cd "$HOME/qc-lab"
+printf "status=ready\n" > app.log
+ls -la
+head -n 5 app.log
+~~~
+
+### Tiến trình và kết nối
+ps liệt kê tiến trình; ss xem socket lắng nghe nếu có trong hệ thống. Không kết luận dịch vụ khỏe chỉ vì cổng mở. pipe chuyển stdout sang lệnh kế, không bao gồm stderr nếu không cấu hình.
+~~~bash
+ps -eo pid,comm,args
+ss -ltn
+printf "ready\nfailed\n" | grep "failed"
+# Kiểm HTTP chỉ trên lab:
+curl -i http://localhost:8000/health
+~~~
+
+### Script dừng khi lỗi
+Bash set -e có ngoại lệ trong điều kiện/pipe; pipefail hỗ trợ phát hiện lỗi trong pipeline. Trích dẫn biến tránh tách từ và mở rộng wildcard ngoài ý muốn. Không dùng set -x với bí mật.
+~~~bash
+#!/usr/bin/env bash
+set -euo pipefail
+lab_dir="${1:-./lab}"
+mkdir -p "$lab_dir"
+printf "Lab: %s\n" "$lab_dir"
+~~~
+
+### Lỗi hay gặp và tiêu chí kiểm tra
+Không dùng chmod 777 để chữa mọi lỗi quyền. Kiểm người sở hữu, quyền cần thiết và user chạy dịch vụ. Tránh lệnh xóa đệ quy khi chưa kiểm đường dẫn; trong khóa này không cần xóa dữ liệu.
+
+PRACTICE: Tạo thư mục lab có khoảng trắng, chạy script với tham số đúng và ghi lại pwd/ps/cổng. Tiêu chí: giải thích stdout, stderr và vì sao phải đặt biến trong dấu nháy.
+Q: Lệnh xác định vị trí hiện tại?
++ pwd
+- chmod 777
+- kill -9
+Q: Vì sao trích dẫn "$lab_dir"?
++ Giữ đường dẫn có khoảng trắng thành một đối số
+- Tăng quyền root
+- Mã hóa tên thư mục
+
+## LESSON devops-02 | Dockerfile và image tái lập
+
+### Mục tiêu và môi trường lab
+Image là bản đóng gói; container là một phiên chạy. Như công thức nấu ăn so với nồi đang nấu. Dockerfile phải tối thiểu, không chép bí mật và chạy user không đặc quyền nếu có thể. Ví dụ phục vụ file tĩnh cục bộ để học vòng đời, không phải server production.
+
+### Dockerfile cho lab
+Lưu Dockerfile cạnh thư mục public có index.html. Python image là dependency cần có sẵn hoặc tải theo chính sách môi trường; dùng tag rồi tiến tới pin digest sau khi kiểm bản cụ thể. USER 10001 không phải root.
+~~~text
+FROM python:3.13-slim
+WORKDIR /app
+COPY public/ /app/
+USER 10001:10001
+EXPOSE 8000
+CMD ["python", "-m", "http.server", "8000", "--bind", "0.0.0.0"]
+~~~
+
+### Giới hạn build context
+Lưu .dockerignore. Mỗi dòng bỏ file khỏi context, giảm nguy cơ chép bí mật. Không bake secret bằng ARG/ENV vì có thể lưu trong layer hoặc metadata.
+~~~text
+.git
+.env
+*.pem
+_backup
+node_modules
+__pycache__
+~~~
+
+### Build và chạy cục bộ
+Các lệnh chỉ dành lab do bạn tạo. -p bind vào loopback của host để không tự mở cổng toàn mạng. EXPOSE là mô tả, không tự publish cổng. Container dùng mạng riêng; localhost trong container chỉ chính container.
+~~~bash
+docker build -t qc-static:lab .
+docker run --name qc-static-lab -d -p 127.0.0.1:8000:8000 qc-static:lab
+docker logs qc-static-lab
+curl -i http://localhost:8000
+docker stop qc-static-lab
+~~~
+
+### Lỗi hay gặp và tiêu chí kiểm tra
+Không dùng tag latest để khẳng định tái lập. Không nhầm layer cache với dữ liệu bền của ứng dụng. COPY . . dễ mang theo secret hoặc backup; tối thiểu context và kiểm image trước chia sẻ.
+
+PRACTICE: Tạo public/index.html chứa nội dung tự viết, build rồi chạy lab. Tiêu chí: HTTP 200, không có .env trong context và container chạy user 10001.
+Q: EXPOSE tự mở cổng host không?
++ Không, cần cấu hình publish
+- Có với mọi Dockerfile
+- Chỉ khi là số 8000
+Q: Secret có nên đặt trong Dockerfile ENV?
++ Không, cấp lúc chạy theo chính sách secret
+- Có vì image luôn riêng tư
+- Có nếu đặt tên dài
+
+## LESSON devops-03 | Compose: nhiều dịch vụ và readiness
+
+### Mục tiêu và môi trường lab
+Compose mô tả nhóm container cho lab. depends_on chỉ theo thứ tự không đủ chứng minh phụ thuộc sẵn sàng; có thể dùng healthcheck/service_healthy khi cần. Ứng dụng vẫn phải chịu lỗi kết nối lúc runtime, không dựa hoàn toàn vào thứ tự khởi động.
+
+### Một dịch vụ có healthcheck
+Lưu compose.yaml cạnh Dockerfile bài trước. Cú pháp YAML nằm trong code block text vì bộ khóa học chỉ hỗ trợ các nhãn có sẵn. Python urllib kiểm tài nguyên cục bộ, không cần curl trong image.
+~~~text
+services:
+  web:
+    build: .
+    ports: ["127.0.0.1:8000:8000"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000')"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+~~~
+
+### Phụ thuộc theo sức khỏe
+Đây là fragment bổ sung service khác khi lab có image tương ứng; example.com là registry giả, không thể pull thật. Với lab ngoại tuyến, thay bằng image bạn đã build và nạp vào môi trường của mình.
+~~~text
+  worker:
+    image: example.com/qcworld/worker:lab
+    depends_on:
+      web:
+        condition: service_healthy
+    environment:
+      WEB_URL: "http://web:8000"
+~~~
+
+### Kiểm cấu hình và quan sát
+Dùng tên service làm hostname trong mạng Compose; không dùng localhost để gọi container bên cạnh. docker compose config có thể hiện giá trị đã nội suy, nên không chia sẻ đầu ra nếu có secret. Các lệnh chỉ cho file lab.
+~~~bash
+docker compose config --quiet
+docker compose up -d --build
+docker compose ps
+docker compose logs --tail=20 web
+docker compose stop
+~~~
+
+### Lỗi hay gặp và tiêu chí kiểm tra
+Không dùng sleep 10 làm chứng cứ DB sẵn sàng. depends_on không tự chữa mọi đứt kết nối sau khởi động. Volume cần backup và thử phục hồi; container restart không tương đương khôi phục dữ liệu.
+
+PRACTICE: Chạy service web và quan sát healthy. Cố tình đổi healthcheck sang path không tồn tại, xem unhealthy. Giải thích khác nhau giữa container chạy và ứng dụng sẵn sàng.
+Q: Host gọi web từ container cùng mạng nên là gì?
++ Tên service web
+- Luôn localhost
+- Địa chỉ máy người dùng bất kỳ
+Q: depends_on ngắn có bảo đảm sẵn sàng không?
++ Không, cần healthcheck phù hợp và logic phục hồi
+- Có mọi trường hợp
+- Chỉ cần ngủ một giây
+
+## LESSON devops-04 | Kubernetes: Pod, Deployment, Service
+
+### Mục tiêu và môi trường lab
+Pod là nhóm container cùng ngữ cảnh chạy; Deployment quản lý replica và rollout; Service cung cấp điểm truy cập ổn định. Học trên cluster lab đã chọn rõ context, không áp dụng lên production. Image example.com dưới đây là giả và phải thay bằng image lab đã nạp.
+
+### Deployment tối thiểu
+selector phải khớp template labels. readiness loại Pod chưa sẵn sàng khỏi luồng Service; liveness sai có thể gây restart lặp. requests/limits cần đo, ví dụ chỉ minh họa.
+~~~text
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: qc-menu}
+spec:
+  replicas: 2
+  selector: {matchLabels: {app: qc-menu}}
+  template:
+    metadata: {labels: {app: qc-menu}}
+    spec:
+      containers:
+      - name: web
+        image: example.com/qcworld/menu:lab
+        ports: [{containerPort: 8000}]
+        readinessProbe:
+          httpGet: {path: /, port: 8000}
+          initialDelaySeconds: 2
+        resources:
+          requests: {cpu: 100m, memory: 64Mi}
+          limits: {cpu: 500m, memory: 128Mi}
+~~~
+
+### Service chọn đúng nhãn
+ClusterIP mặc định chỉ truy cập nội bộ cluster. targetPort là cổng container, port là cổng Service. Không phải Service tự làm ứng dụng lắng nghe cổng đó.
+~~~text
+apiVersion: v1
+kind: Service
+metadata: {name: qc-menu}
+spec:
+  selector: {app: qc-menu}
+  ports: [{port: 80, targetPort: 8000}]
+~~~
+
+### Quan sát trước khi áp dụng
+Các lệnh đầu giúp xác định cluster/namespace. Chỉ apply khi chắc là lab. describe giúp xem image pull, probe và scheduling. rollout status theo dõi tiến trình, không thay kiểm nghiệp vụ.
+~~~bash
+kubectl config current-context
+kubectl get namespaces
+kubectl apply --dry-run=client -f deployment.yaml
+kubectl get pods -l app=qc-menu
+kubectl describe deployment qc-menu
+kubectl rollout status deployment/qc-menu
+~~~
+
+### Lỗi hay gặp và tiêu chí kiểm tra
+Không sửa Pod được Deployment quản lý rồi mong thay đổi bền. Readiness/liveness/startup có mục đích khác nhau. ImagePullBackOff với example.com là dự kiến nếu chưa thay image giả; không sửa thành host thật trong tài liệu.
+
+PRACTICE: Vẽ quan hệ Deployment→ReplicaSet→Pod và Service→label. Kiểm YAML bằng dry-run trên lab. Mô tả kết quả khi label Service sai và khi một Pod chưa ready.
+Q: Service tìm Pod theo gì?
++ Selector/label
+- Tên file YAML
+- Thứ tự Pod xuất hiện
+Q: Readiness false thường dẫn tới gì?
++ Pod không nhận lưu lượng qua endpoint sẵn sàng
+- Xóa DB
+- Luôn reboot toàn cluster
+
+## LESSON devops-05 | CI/CD: pipeline có cổng chất lượng
+
+### Mục tiêu và môi trường lab
+CI tích hợp và kiểm tra thường xuyên; CD đưa artifact qua môi trường với chính sách rõ. Như bếp chỉ xuất món sau kiểm chất lượng, pipeline cần thất bại khi test lỗi, lưu đúng artifact và tách build khỏi deploy. Ví dụ YAML trung lập nền tảng là thiết kế, không dán trực tiếp vào mọi CI.
+
+### Pipeline YAML giả lập
+Các khóa stages/steps dưới đây là mô tả quy trình, không gắn với runner cụ thể. Khi dùng nền tảng thật phải chuyển sang schema chính thức. Build một artifact rồi chuyển artifact đó, không build lại khác nội dung ở mỗi môi trường.
+~~~text
+stages:
+  - name: verify
+    steps: [install_locked_dependencies, lint, unit_test, integration_test]
+  - name: package
+    steps: [build_image, scan_image, record_digest]
+  - name: staging
+    steps: [deploy_digest, smoke_test]
+  - name: release
+    steps: [check_release_policy, deploy_same_digest, observe]
+~~~
+
+### Lệnh kiểm tra dự án Node lab
+Cần package-lock và các scripts tồn tại trong package.json. npm ci kiểm lockfile thay vì âm thầm cập nhật. Không bỏ test lỗi bằng || true; mã thoát phải truyền tới pipeline.
+~~~bash
+npm ci
+npm run lint
+npm test
+npm run build
+~~~
+
+### Artifact và rollback
+Digest đại diện nội dung image, tag có thể bị đổi. Chuỗi dưới đây là ký hiệu giả, không phải digest dùng được. Lưu ai triển khai, artifact nào, cấu hình nào và kết quả quan sát.
+~~~text
+Commit giả -> build một lần -> artifact A
+Staging dùng A -> kiểm chức năng -> production dùng đúng A
+Nếu lỗi: chuyển traffic về artifact trước đã xác minh
+DB migration: expand/contract để hai phiên bản cùng hoạt động
+~~~
+
+### Lỗi hay gặp và tiêu chí kiểm tra
+Không đưa secret vào log build. Deploy code cũ không tự rollback dữ liệu đã migrate. Pipeline xanh không chứng minh không có lỗi; cần smoke test và theo dõi sau phát hành.
+
+PRACTICE: Vẽ pipeline cho API đơn; nêu điều kiện dừng và artifact chuyển giữa môi trường. Mô tả rollback khi migration mới vẫn phải tương thích code cũ.
+Q: Vì sao build một lần rồi promote?
++ Giữ cùng nội dung đã kiểm thử qua môi trường
+- Để bỏ smoke test
+- Để không cần version
+Q: Test lỗi mà thêm || true có vấn đề gì?
++ Có thể làm pipeline xanh dù chất lượng không đạt
+- Luôn tăng bảo mật
+- Tự sửa test
+
+## LESSON devops-06 | Terraform: hạ tầng dạng code và state
+
+### Mục tiêu và môi trường lab
+IaC mô tả trạng thái mong muốn thay vì thao tác tay khó lặp. Plan cho thấy khác biệt, apply thực hiện và state ghi ánh xạ tài nguyên. Ví dụ chỉ dùng terraform_data tích hợp, không tạo hạ tầng cloud hoặc phát sinh phí. Đây là bài vòng đời, không phải triển khai máy chủ hoàn chỉnh.
+
+### Cấu hình không cần cloud provider
+terraform_data có trong Terraform hỗ trợ tài nguyên tích hợp này. Input là dữ liệu giả. required_version giới hạn tối thiểu; dự án thực cần lock phiên bản và provider theo chính sách.
+~~~text
+terraform {
+  required_version = ">= 1.4.0"
+}
+resource "terraform_data" "classroom" {
+  input = {
+    app = "qc-menu"
+    replicas = 2
+  }
+}
+output "classroom" { value = terraform_data.classroom.output }
+~~~
+
+### Đọc plan trước apply
+Thực hành trong thư mục riêng. Các lệnh chỉ kiểm cấu hình và plan, chưa áp dụng. Plan lưu vào file có thể chứa dữ liệu nhạy cảm nếu dùng hạ tầng thật, nên không chia sẻ tùy tiện.
+~~~bash
+terraform fmt -check
+terraform init
+terraform validate
+terraform plan -out=classroom.plan
+terraform show classroom.plan
+~~~
+
+### State và phối hợp nhóm
+Backend state cần kiểm soát truy cập, khóa phù hợp và backup. sensitive chỉ che một số đầu ra, không bảo đảm secret không nằm trong state. Không sửa state thủ công để “chữa” drift mà chưa hiểu tác động.
+~~~text
+Code mong muốn -> plan -> review -> apply có kiểm soát
+State: ánh xạ tài nguyên + metadata, có thể có dữ liệu nhạy cảm
+Drift: thay đổi ngoài IaC -> phát hiện bằng plan
+Phối hợp: state locking, quyền tối thiểu, lịch sử thay đổi
+~~~
+
+### Lỗi hay gặp và tiêu chí kiểm tra
+Không commit state hoặc plan nhạy cảm vào nơi công khai. Không chạy apply vào môi trường chưa xác định. Thay name có thể gây replace thay vì update; đọc ký hiệu plan và tác động dữ liệu.
+
+PRACTICE: Tạo cấu hình terraform_data, chạy fmt/validate/plan. Đổi replicas 2→3 và giải thích diff. Tiêu chí: nêu vai trò state và vì sao ví dụ không tạo máy chủ.
+Q: Plan dùng để làm gì?
++ Xem thay đổi dự kiến trước áp dụng
+- Mã hóa mọi secret
+- Tạo backup DB tự động
+Q: sensitive có đảm bảo không lưu trong state?
++ Không
+- Có mọi trường hợp
+- Chỉ khi có output
+
+## LESSON devops-07 | Giám sát, cảnh báo và bảo vệ secret
+
+### Mục tiêu và môi trường lab
+Giám sát như bảng nhiệt độ bếp: chọn số đo gắn trải nghiệm người dùng, không chỉ máy còn chạy. Secret phải cấp theo quyền tối thiểu, có xoay và thu hồi; không nằm trong image, source hoặc ảnh chụp log. Kubernetes Secret base64 không đồng nghĩa đã mã hóa an toàn.
+
+### Bảng quan sát cần ngữ cảnh
+Theo dõi bốn nhóm: lưu lượng, lỗi, độ trễ và bão hòa. Ngưỡng dưới đây là giả cho lớp. Cửa sổ và lưu lượng tối thiểu tránh cảnh báo từ một request lẻ.
+~~~text
+Traffic: request/s theo route nhóm
+Error: 5xx / tổng request
+Latency: histogram -> p50/p95/p99
+Saturation: pool DB, CPU, memory, queue age
+Alert giả: error >5% trong 5 phút và >=100 requests
+~~~
+
+### Cấp secret từ môi trường có kiểm tra
+Python đọc secret được môi trường vận hành cấp. Không in giá trị để chứng minh đã đọc. Trong triển khai thực, biến môi trường vẫn có thể bị lộ qua quyền debug; cân nhắc secret manager hoặc file mount có quyền phù hợp.
+~~~python
+import os
+def read_api_key():
+    value = os.environ.get("CLASSROOM_API_KEY")
+    if not value:
+        raise RuntimeError("Thiếu cấu hình CLASSROOM_API_KEY")
+    return value
+# Không print(value), không ghi vào log.
+~~~
+
+### Runbook ngắn
+Runbook phải cho biết ai xử lý, kiểm gì và khi nào leo thang. Nếu nghi lộ secret, ưu tiên thu hồi/xoay theo quy trình; xóa dòng source không làm secret đã lộ trở lại an toàn.
+~~~text
+1. Xác định route, thời gian, bản phát hành bị ảnh hưởng
+2. Xem tỷ lệ lỗi, trace mẫu và phụ thuộc
+3. Kiểm thay đổi gần nhất, tài nguyên bão hòa
+4. Giảm ảnh hưởng theo quy trình; quan sát sau thay đổi
+5. Ghi timeline và hành động phòng ngừa
+~~~
+
+### Lỗi hay gặp và tiêu chí kiểm tra
+Không gắn userId/requestId thành nhãn metric vô hạn. Đừng lưu “secret mẫu” có thể dùng thật. Alert không có chủ sở hữu hoặc hành động cụ thể sẽ bị bỏ qua.
+
+PRACTICE: Viết một cảnh báo cho lỗi API và runbook 5 bước; mô tả quy trình xoay secret bị lộ mà không ghi giá trị secret. Nêu khác biệt giữa metric, log và trace.
+Q: Base64 trong Secret có phải mã hóa bảo mật đầy đủ?
++ Không
+- Có vì không đọc trực tiếp
+- Luôn mạnh hơn TLS
+Q: Log nên chứa gì?
++ Mã sự kiện và ngữ cảnh tối thiểu đã loại dữ liệu nhạy cảm
+- Toàn bộ token
+- Mật khẩu để debug
+
+## LESSON devops-08 | Triển khai blue-green/canary và phục hồi
+
+### Mục tiêu và môi trường lab
+Phát hành như thay quầy bếp: phải biết người dùng đang đi đâu và cách quay lại nếu món lỗi. Blue-green giữ hai môi trường tương đương rồi chuyển traffic; canary đưa phần nhỏ traffic sang phiên bản mới. Hai cách đều cần đo và DB tương thích, không chỉ đổi tag image.
+
+### Blue-green
+Green phải được kiểm trước khi chuyển. Giữ blue một thời gian để quay lại nếu dữ liệu/cấu hình tương thích. Session, job nền và migration cần kế hoạch, không chỉ HTTP.
+~~~text
+Trước: LB -> blue (v1)
+Chuẩn bị: green (v2) + smoke test
+Chuyển: LB -> green
+Quan sát: lỗi, p95, tính đúng đơn hàng
+Rollback có điều kiện: LB -> blue
+~~~
+
+### Canary theo giai đoạn
+Các tỷ lệ là ví dụ giả. Mỗi bước có khoảng quan sát đủ và điều kiện dừng định trước. Không so hai nhóm có tải/khách khác hẳn mà kết luận trực tiếp.
+~~~text
+1% -> quan sát 10 phút
+5% -> quan sát 15 phút
+25% -> quan sát 30 phút
+100% khi đạt tiêu chí
+Dừng nếu lỗi tăng >2 điểm phần trăm hoặc vi phạm bất biến
+~~~
+
+### Migration expand/contract
+Hai phiên bản phải cùng hiểu schema trong giai đoạn chuyển. Thêm cột nullable trước, chuyển đọc/ghi có kiểm soát và chỉ bỏ cột cũ khi hết client cũ. Không mặc định mọi migration có thể rollback.
+~~~text
+Expand: thêm trường mới tương thích code cũ
+Migrate: backfill có giới hạn, kiểm đếm/tính đúng
+Switch: chuyển đọc và ghi sang cấu trúc mới
+Contract: bỏ cấu trúc cũ sau cửa sổ an toàn
+~~~
+
+### Lỗi hay gặp và tiêu chí kiểm tra
+Không dùng metric kỹ thuật duy nhất mà bỏ kiểm nghiệp vụ như trùng đơn. Canary cùng DB vẫn có thể làm hỏng dữ liệu chung nếu code mới sai. Kế hoạch phục hồi cần thử trong lab trước đợt phát hành.
+
+PRACTICE: Lập kế hoạch đưa v2 ra với canary gồm tỷ lệ, thời gian, số đo, điều kiện dừng, người xử lý và giới hạn rollback DB. Diễn tập giả v2 tạo trùng đơn để chọn hành động.
+Q: Canary nghĩa là gì?
++ Đưa một phần lưu lượng sang bản mới và tăng dần có kiểm tra
+- Triển khai tất cả ngay
+- Chỉ đổi tên branch
+Q: Rollback ứng dụng có tự hoàn tác DB không?
++ Không, cần thiết kế tương thích/phục hồi riêng
+- Có mọi trường hợp
+- Có nếu dùng container

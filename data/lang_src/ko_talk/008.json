@@ -1,0 +1,218 @@
+{
+ "no": 8,
+ "lv": "t1",
+ "title": "Mời ăn trưa và thống nhất giờ",
+ "sub": "오늘 같이 점심을 먹을까요?",
+ "situation": "Hai người chọn giờ và món tại quán giả Cỏ Nhỏ; phân biệt giờ đề xuất đầu với giờ cuối.",
+ "lang": "ko-KR",
+ "lines": [
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "오늘 같이 점심을 먹을까요?",
+   "vi": "Hôm nay cùng ăn trưa nhé?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "좋아요. 열두 시는 어때요?",
+   "vi": "Được. Mười hai giờ thì sao?"
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "열두 시에는 수업이 있어요.",
+   "vi": "Mười hai giờ tôi có lớp."
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "그럼 한 시에 만나요.",
+   "vi": "Vậy gặp nhau lúc một giờ."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "어디에서 만날까요?",
+   "vi": "Gặp ở đâu?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "학교 앞 작은 식당에서 만나요.",
+   "vi": "Gặp ở quán ăn nhỏ trước trường."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "저는 김밥을 먹고 싶어요.",
+   "vi": "Tôi muốn ăn gimbap."
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "저는 국수를 먹고 싶어요.",
+   "vi": "Tôi muốn ăn mì."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "한 시에 식당에서 봐요.",
+   "vi": "Gặp nhau ở quán lúc một giờ nhé."
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "네. 수업 후에 갈게요.",
+   "vi": "Vâng. Học xong tôi sẽ tới."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "오늘 같이 점심을 먹을까요?",
+   "vi": "Hôm nay cùng ăn trưa nhé?",
+   "note": "(으)ㄹ까요? đưa đề nghị; 고 싶어요 nêu mong muốn. Hỏi giờ đầu không có nghĩa giờ đó đã được đồng ý."
+  },
+  {
+   "t": "좋아요. 열두 시는 어때요?",
+   "vi": "Được. Mười hai giờ thì sao?",
+   "note": "(으)ㄹ까요? đưa đề nghị; 고 싶어요 nêu mong muốn. Hỏi giờ đầu không có nghĩa giờ đó đã được đồng ý."
+  },
+  {
+   "t": "열두 시에는 수업이 있어요.",
+   "vi": "Mười hai giờ tôi có lớp.",
+   "note": "(으)ㄹ까요? đưa đề nghị; 고 싶어요 nêu mong muốn. Hỏi giờ đầu không có nghĩa giờ đó đã được đồng ý."
+  },
+  {
+   "t": "그럼 한 시에 만나요.",
+   "vi": "Vậy gặp nhau lúc một giờ.",
+   "note": "(으)ㄹ까요? đưa đề nghị; 고 싶어요 nêu mong muốn. Hỏi giờ đầu không có nghĩa giờ đó đã được đồng ý."
+  },
+  {
+   "t": "어디에서 만날까요?",
+   "vi": "Gặp ở đâu?",
+   "note": "(으)ㄹ까요? đưa đề nghị; 고 싶어요 nêu mong muốn. Hỏi giờ đầu không có nghĩa giờ đó đã được đồng ý."
+  },
+  {
+   "t": "학교 앞 작은 식당에서 만나요.",
+   "vi": "Gặp ở quán ăn nhỏ trước trường.",
+   "note": "(으)ㄹ까요? đưa đề nghị; 고 싶어요 nêu mong muốn. Hỏi giờ đầu không có nghĩa giờ đó đã được đồng ý."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Đề nghị ban đầu là gì?",
+   "o": [
+    "Đi mua bàn",
+    "Cùng ăn trưa",
+    "Cùng thi"
+   ],
+   "a": 1,
+   "e": "같이점심."
+  },
+  {
+   "q": "Vì sao không chọn12 giờ?",
+   "o": [
+    "Người nữ có lớp",
+    "Quán đóng theo đoạn",
+    "Người nam đã ăn"
+   ],
+   "a": 0,
+   "e": "수업이있어요."
+  },
+  {
+   "q": "Giờ chốt là gì?",
+   "o": [
+    "12 giờ",
+    "11 giờ",
+    "13 giờ"
+   ],
+   "a": 2,
+   "e": "한시에 lặp xác nhận."
+  },
+  {
+   "q": "Quán ở đâu?",
+   "o": [
+    "Trong nhà riêng",
+    "Trước trường",
+    "Sau thư viện"
+   ],
+   "a": 1,
+   "e": "학교앞작은식당."
+  },
+  {
+   "q": "Người nữ muốn ăn gì?",
+   "o": [
+    "Gimbap",
+    "Mì",
+    "Chỉ bánh"
+   ],
+   "a": 0,
+   "e": "저는김밥을먹고싶어요 ở lượt nữ."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "그럼 ___에 만나요.",
+   "a": "한 시",
+   "e": "(으)ㄹ까요? đưa đề nghị; 고 싶어요 nêu mong muốn. Hỏi giờ đầu không có nghĩa giờ đó đã được đồng ý. Câu đầy đủ: 그럼 한 시에 만나요. → Vậy gặp nhau lúc một giờ."
+  },
+  {
+   "t": "listen",
+   "say": "저는 김밥을 먹고 싶어요.",
+   "lang": "ko-KR",
+   "q": "Ý nào đúng với câu vừa nghe?",
+   "o": [
+    "Gặp nhau ở quán lúc một giờ nhé.",
+    "Tôi muốn ăn gimbap.",
+    "Mười hai giờ tôi có lớp."
+   ],
+   "a": 1,
+   "e": "Đối chiếu đúng câu: Tôi muốn ăn gimbap."
+  },
+  {
+   "t": "match",
+   "q": "Nối cụm chức năng với nghĩa trong ngữ cảnh",
+   "pairs": [
+    [
+     "오늘 같이 점심을 먹을까요?",
+     "Hôm nay cùng ăn trưa nhé?"
+    ],
+    [
+     "좋아요. 열두 시는 어때요?",
+     "Được. Mười hai giờ thì sao?"
+    ],
+    [
+     "열두 시에는 수업이 있어요.",
+     "Mười hai giờ tôi có lớp."
+    ],
+    [
+     "그럼 한 시에 만나요.",
+     "Vậy gặp nhau lúc một giờ."
+    ],
+    [
+     "어디에서 만날까요?",
+     "Gặp ở đâu?"
+    ],
+    [
+     "학교 앞 작은 식당에서 만나요.",
+     "Gặp ở quán ăn nhỏ trước trường."
+    ]
+   ],
+   "e": "Đọc cả câu theo cụm; chú ý ý định và mức lịch sự."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Mời bạn uống trà lúc hai giờ tại thư viện.",
+   "model": "같이 차를 마실까요? 두 시에 도서관에서 만나요. 저는 따뜻한 차를 마시고 싶어요.",
+   "vi": "Cùng uống trà nhé? Gặp ở thư viện lúc hai giờ. Tôi muốn uống trà nóng."
+  },
+  {
+   "p": "Bạn bận lúc một giờ, đề xuất ba giờ và xác nhận quán ở cạnh trường.",
+   "model": "한 시에는 일이 있어요. 세 시는 어때요? 학교 옆 카페에서 만나요.",
+   "vi": "Một giờ tôi có việc. Ba giờ thì sao? Gặp nhau ở quán cạnh trường."
+  }
+ ]
+}

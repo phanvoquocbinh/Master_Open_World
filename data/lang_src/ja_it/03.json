@@ -1,0 +1,603 @@
+{
+ "no": 3,
+ "title": "Báo lỗi có thể tái hiện",
+ "sub": "検証の 環境で 不具合を 再現しました。",
+ "goals": [
+  "Dùng ít nhất năm cụm nghiệp vụ trong tình huống Báo lỗi có thể tái hiện",
+  "Nghe và xác định dữ kiện đã chốt, điều còn chờ và người xử lý",
+  "Đặt câu hỏi làm rõ có thể trả lời bằng hành vi cụ thể",
+  "Viết thông điệp có hành động tiếp và mức lịch sự nhất quán"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bối cảnh và cách học",
+   "html": "<p>Dự án và tổ chức trong bài hoàn toàn giả lập. Mục tiêu là giao tiếp rõ trong nhóm phát triển; tách quan sát, đề xuất và điều chưa xác nhận.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm trọng tâm",
+   "items": [
+    {
+     "w": "不具合",
+     "kana": "ふぐあい",
+     "romaji": "fuguai",
+     "vi": "lỗi vận hành",
+     "ex": "検証の 環境で 不具合を 再現しました。",
+     "exVi": "Tôi tái hiện lỗi trên môi trường kiểm thử."
+    },
+    {
+     "w": "再現",
+     "kana": "さいげん",
+     "romaji": "saigen",
+     "vi": "tái hiện",
+     "ex": "検証の 環境で 不具合を 再現しました。",
+     "exVi": "Tôi tái hiện lỗi trên môi trường kiểm thử."
+    },
+    {
+     "w": "手順",
+     "kana": "てじゅん",
+     "romaji": "tejun",
+     "vi": "trình tự thao tác",
+     "ex": "手順と 実際の 動作を 記録しました。",
+     "exVi": "Tôi ghi bước và hành vi thực tế."
+    },
+    {
+     "w": "期待値",
+     "kana": "きたいち",
+     "romaji": "kitaichi",
+     "vi": "giá trị kỳ vọng",
+     "ex": "期待値は 二件ですが、画面には 一件だけ 表示されます。",
+     "exVi": "Kỳ vọng hai bản ghi nhưng màn chỉ hiển thị một."
+    },
+    {
+     "w": "実際",
+     "kana": "じっさい",
+     "romaji": "jissai",
+     "vi": "thực tế",
+     "ex": "手順と 実際の 動作を 記録しました。",
+     "exVi": "Tôi ghi bước và hành vi thực tế."
+    },
+    {
+     "w": "環境",
+     "kana": "かんきょう",
+     "romaji": "kankyō",
+     "vi": "môi trường",
+     "ex": "検証の 環境で 不具合を 再現しました。",
+     "exVi": "Tôi tái hiện lỗi trên môi trường kiểm thử."
+    },
+    {
+     "w": "発生",
+     "kana": "はっせい",
+     "romaji": "hassei",
+     "vi": "phát sinh",
+     "ex": "発生の 頻度と 影響は 確認できましたか。",
+     "exVi": "Đã xác nhận tần suất và ảnh hưởng chưa?"
+    },
+    {
+     "w": "頻度",
+     "kana": "ひんど",
+     "romaji": "hindo",
+     "vi": "tần suất",
+     "ex": "発生の 頻度と 影響は 確認できましたか。",
+     "exVi": "Đã xác nhận tần suất và ảnh hưởng chưa?"
+    },
+    {
+     "w": "影響",
+     "kana": "えいきょう",
+     "romaji": "eikyō",
+     "vi": "ảnh hưởng",
+     "ex": "発生の 頻度と 影響は 確認できましたか。",
+     "exVi": "Đã xác nhận tần suất và ảnh hưởng chưa?"
+    },
+    {
+     "w": "入力",
+     "kana": "にゅうりょく",
+     "romaji": "nyūryoku",
+     "vi": "dữ liệu nhập",
+     "ex": "この 環境で 入力を 二回 変更してから 保存します。",
+     "exVi": "Ở môi trường này, đổi đầu vào hai lần rồi lưu."
+    },
+    {
+     "w": "保存",
+     "kana": "ほぞん",
+     "romaji": "hozon",
+     "vi": "lưu",
+     "ex": "保存の 不具合について、再現の 手順を 教えてください。",
+     "exVi": "Xin cho bước tái hiện lỗi lưu."
+    },
+    {
+     "w": "画面",
+     "kana": "がめん",
+     "romaji": "gamen",
+     "vi": "màn hình",
+     "ex": "期待値は 二件ですが、画面には 一件だけ 表示されます。",
+     "exVi": "Kỳ vọng hai bản ghi nhưng màn chỉ hiển thị một."
+    },
+    {
+     "w": "記録",
+     "kana": "きろく",
+     "romaji": "kiroku",
+     "vi": "ghi nhận",
+     "ex": "手順と 実際の 動作を 記録しました。",
+     "exVi": "Tôi ghi bước và hành vi thực tế."
+    },
+    {
+     "w": "原因",
+     "kana": "げんいん",
+     "romaji": "gen'in",
+     "vi": "nguyên nhân",
+     "ex": "原因は 未確認です。回避策の 有無も 調べています。",
+     "exVi": "Chưa xác nhận nguyên nhân; cũng đang tìm cách tạm tránh."
+    },
+    {
+     "w": "回避策",
+     "kana": "かいひさく",
+     "romaji": "kaihisaku",
+     "vi": "cách tạm tránh lỗi",
+     "ex": "原因は 未確認です。回避策の 有無も 調べています。",
+     "exVi": "Chưa xác nhận nguyên nhân; cũng đang tìm cách tạm tránh."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Cấu trúc và cách dùng",
+   "html": "<p>不具合 cần môi trường, thao tác và kết quả. 再現する chỉ tái tạo hiện tượng, chưa chứng minh nguyên nhân. 期待される動作 và 実際の動作 phải tách. ～可能性があります nêu giả thuyết; không dùng như kết luận chắc. Không gửi log chứa dữ liệu riêng tư.</p>",
+   "table": [
+    [
+     "Thông tin",
+     "Mẫu"
+    ],
+    [
+     "Tái hiện",
+     "この環境で再現しました"
+    ],
+    [
+     "Tần suất",
+     "三回中二回発生しました"
+    ],
+    [
+     "Kỳ vọng/thực tế",
+     "二件のはずですが、一件だけです"
+    ],
+    [
+     "Chưa rõ nguyên nhân",
+     "原因は未確認です"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "検証の 環境で 不具合を 再現しました。",
+     "vi": "Tôi tái hiện lỗi trên môi trường kiểm thử."
+    },
+    {
+     "t": "手順と 実際の 動作を 記録しました。",
+     "vi": "Tôi ghi bước và hành vi thực tế."
+    },
+    {
+     "t": "期待値は 二件ですが、画面には 一件だけ 表示されます。",
+     "vi": "Kỳ vọng hai bản ghi nhưng màn chỉ hiển thị một."
+    },
+    {
+     "t": "原因は 未確認です。回避策の 有無も 調べています。",
+     "vi": "Chưa xác nhận nguyên nhân; cũng đang tìm cách tạm tránh."
+    }
+   ],
+   "tips": [
+    "<p>Gọi lỗi hiển thị là mất dữ liệu khi chưa kiểm: tách quan sát và nguyên nhân.</p>",
+    "<p>Nói 三回中二回 là luôn: giữ cỡ mẫu.</p>",
+    "<p>Không ghi môi trường/thao tác: người khác không tái hiện.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Báo lỗi có thể tái hiện",
+   "note": "Hai thành viên của dự án giả Hộp Mây trao đổi trong nhóm phát triển. Nghe để ghi dữ kiện, điều kiện và hành động tiếp; xem bản dịch sau lượt đầu.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "保存の 不具合について、再現の 手順を 教えてください。",
+     "vi": "Xin cho bước tái hiện lỗi lưu."
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "この 環境で 入力を 二回 変更してから 保存します。",
+     "vi": "Ở môi trường này, đổi đầu vào hai lần rồi lưu."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "期待値と 実際の 結果は どう 違いますか。",
+     "vi": "Kỳ vọng và kết quả thực khác sao?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "期待値は 二件ですが、画面には 一件だけ 表示されます。",
+     "vi": "Kỳ vọng hai bản ghi nhưng màn hiện một."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "発生の 頻度と 影響は 確認できましたか。",
+     "vi": "Đã xác nhận tần suất và ảnh hưởng chưa?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "三回中 二回です。ほかの 画面への 影響は まだ 記録がありません。",
+     "vi": "Hai trên ba lần. Chưa có ghi nhận ảnh hưởng màn khác."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "原因と 回避策については どうでしょうか。",
+     "vi": "Còn nguyên nhân và cách tránh tạm?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "原因は 未確認です。保存前の 再表示で 避けられるか、調べます。",
+     "vi": "Nguyên nhân chưa xác nhận. Tôi kiểm có tránh được bằng tải lại trước lưu không."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Theo hội thoại: Xin cho bước tái hiện lỗi lưu.",
+     "o": [
+      "Hai trên ba lần. Chưa có ghi nhận ảnh hưởng màn khác.",
+      "Kỳ vọng hai bản ghi nhưng màn hiện một.",
+      "Ở môi trường này, đổi đầu vào hai lần rồi lưu."
+     ],
+     "a": 2,
+     "e": "Câu trả lời là この 環境で 入力を 二回 変更してから 保存します。 → Ở môi trường này, đổi đầu vào hai lần rồi lưu."
+    },
+    {
+     "q": "Theo hội thoại: Kỳ vọng và kết quả thực khác sao?",
+     "o": [
+      "Hai trên ba lần. Chưa có ghi nhận ảnh hưởng màn khác.",
+      "Kỳ vọng hai bản ghi nhưng màn hiện một.",
+      "Nguyên nhân chưa xác nhận. Tôi kiểm có tránh được bằng tải lại trước lưu không."
+     ],
+     "a": 1,
+     "e": "Câu trả lời là 期待値は 二件ですが、画面には 一件だけ 表示されます。 → Kỳ vọng hai bản ghi nhưng màn hiện một."
+    },
+    {
+     "q": "Theo hội thoại: Đã xác nhận tần suất và ảnh hưởng chưa?",
+     "o": [
+      "Ở môi trường này, đổi đầu vào hai lần rồi lưu.",
+      "Nguyên nhân chưa xác nhận. Tôi kiểm có tránh được bằng tải lại trước lưu không.",
+      "Hai trên ba lần. Chưa có ghi nhận ảnh hưởng màn khác."
+     ],
+     "a": 2,
+     "e": "Câu trả lời là 三回中 二回です。ほかの 画面への 影響は まだ 記録がありません。 → Hai trên ba lần. Chưa có ghi nhận ảnh hưởng màn khác."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: thông tin mới trong cùng chủ đề",
+   "text": "架空の テスト環境で、保存の 不具合が 発生しました。入力を 二回 変更する 手順で 再現しました。\n\n期待値は 二件の 保存ですが、実際には 画面に 一件しか 表示されません。表示と 保存そのものは まだ 区別して 調べています。\n\n発生の 頻度は 三回中 二回でした。この 少数の 記録だけで、常に 起きるとは 言えません。\n\n影響は 現時点で 同じ 画面に 限って 確認されています。ほかの 利用者への 影響がないと 保証したわけではありません。\n\n原因は 未確認です。入力の 順序に 関連する 可能性はありますが、追加の 比較が 必要です。\n\n回避策として 再表示が 使えるかを 調べ、確かめた 結果だけを 共有します。記録には 個人情報を 含めません。",
+   "vi": "Lỗi lưu xảy ra ở môi trường test giả, tái hiện khi đổi đầu vào hai lần.\n\nKỳ vọng lưu hai, nhưng thực màn hiện một; đang tách lỗi hiển thị khỏi chính lưu trữ.\n\nTần suất hai trên ba; mẫu ít chưa cho nói luôn xảy ra.\n\nHiện xác nhận trong cùng màn, chưa bảo đảm người khác không bị.\n\nChưa rõ nguyên nhân; có thể liên quan thứ tự nhập nhưng cần so thêm.\n\nKiểm tải lại có làm cách tránh được không, chỉ chia sẻ điều xác minh, không ghi PII.",
+   "gloss": [
+    {
+     "w": "不具合",
+     "kana": "ふぐあい",
+     "romaji": "fuguai",
+     "vi": "lỗi vận hành"
+    },
+    {
+     "w": "再現",
+     "kana": "さいげん",
+     "romaji": "saigen",
+     "vi": "tái hiện"
+    },
+    {
+     "w": "手順",
+     "kana": "てじゅん",
+     "romaji": "tejun",
+     "vi": "trình tự thao tác"
+    },
+    {
+     "w": "期待値",
+     "kana": "きたいち",
+     "romaji": "kitaichi",
+     "vi": "giá trị kỳ vọng"
+    },
+    {
+     "w": "実際",
+     "kana": "じっさい",
+     "romaji": "jissai",
+     "vi": "thực tế"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Màn hiển thị khác kỳ vọng thế nào?",
+     "o": [
+      "Ba thay vì một",
+      "Không có kỳ vọng",
+      "Một thay vì hai bản ghi"
+     ],
+     "a": 2,
+     "e": "一件と二件を対比."
+    },
+    {
+     "q": "Hai trên ba có nghĩa luôn xảy ra không?",
+     "o": [
+      "Không hề có lần nào",
+      "Có",
+      "Không"
+     ],
+     "a": 2,
+     "e": "Mẫu ít chỉ báo tần suất quan sát."
+    },
+    {
+     "q": "Nguyên nhân đã xác nhận chưa?",
+     "o": [
+      "Chưa",
+      "Đã là DB chắc chắn",
+      "Đã là mạng chắc chắn"
+     ],
+     "a": 0,
+     "e": "原因未確認."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và phản hồi",
+   "tasks": [
+    {
+     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "model": "保存の 不具合について、再現の 手順を 教えてください。 期待値と 実際の 結果は どう 違いますか。 発生の 頻度と 影響は 確認できましたか。 原因と 回避策については どうでしょうか。",
+     "vi": "Xin cho bước tái hiện lỗi lưu. Kỳ vọng và kết quả thực khác sao? Đã xác nhận tần suất và ảnh hưởng chưa? Còn nguyên nhân và cách tránh tạm?",
+     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+    },
+    {
+     "p": "Báo lỗi bằng quan sát và nhờ bạn kiểm một lần tái hiện ở cùng môi trường.",
+     "model": "入力を二回変更して保存すると、一件しか表示されません。三回中二回発生しました。同じ環境でこの手順を確認していただけますか。原因はまだ未確認です。",
+     "vi": "Đổi đầu vào hai lần rồi lưu thì chỉ hiện một. Hai trên ba lần. Xin kiểm cùng môi trường/bước. Chưa rõ nguyên nhân.",
+     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết có kiểm tra",
+   "task": "Viết bug report ngắn: đổi đầu vào 2 lần rồi lưu, màn hiển thị 1 thay vì 2; quan sát 2/3 lần, chưa rõ lỗi lưu hay hiển thị.120–200 ký tự.",
+   "min": 120,
+   "model": "検証環境で、入力を二回変更して保存すると、二件のはずが画面には一件しか表示されない不具合を確認しました。発生は三回中二回です。保存そのものに問題があるか、表示だけの問題かは未確認です。手順と結果は記録しました。ほかの画面への影響と回避策は引き続き調べます。原因が確定するまでは、データが失われたとは断定しません。",
+   "modelVi": "Test thấy đổi đầu vào hai lần rồi lưu thì màn chỉ một thay vì hai, xảy ra hai trên ba lần. Chưa rõ lưu hay chỉ hiển thị. Đã ghi bước/kết quả; còn kiểm màn khác và cách tránh, chưa kết luận mất dữ liệu.",
+   "tips": [
+    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
+    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+   ],
+   "checklist": [
+    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
+    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
+    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
+    "Câu kết thúc và mức lịch sự nhất quán"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong bài, “不具合” có nghĩa gì?",
+   "o": [
+    "tần suất",
+    "thực tế",
+    "lỗi vận hành"
+   ],
+   "a": 2,
+   "e": "検証の 環境で 不具合を 再現しました。 → Tôi tái hiện lỗi trên môi trường kiểm thử.; “不具合” ở đây là lỗi vận hành."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “再現” có nghĩa gì?",
+   "o": [
+    "môi trường",
+    "ảnh hưởng",
+    "tái hiện"
+   ],
+   "a": 2,
+   "e": "検証の 環境で 不具合を 再現しました。 → Tôi tái hiện lỗi trên môi trường kiểm thử.; “再現” ở đây là tái hiện."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “手順” có nghĩa gì?",
+   "o": [
+    "dữ liệu nhập",
+    "trình tự thao tác",
+    "phát sinh"
+   ],
+   "a": 1,
+   "e": "手順と 実際の 動作を 記録しました。 → Tôi ghi bước và hành vi thực tế.; “手順” ở đây là trình tự thao tác."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “期待値” có nghĩa gì?",
+   "o": [
+    "giá trị kỳ vọng",
+    "tần suất",
+    "lưu"
+   ],
+   "a": 0,
+   "e": "期待値は 二件ですが、画面には 一件だけ 表示されます。 → Kỳ vọng hai bản ghi nhưng màn chỉ hiển thị một.; “期待値” ở đây là giá trị kỳ vọng."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “lỗi vận hành” vào đúng đơn vị còn thiếu: 検証の 環境で ___を 再現しました。",
+   "a": "不具合",
+   "e": "Đáp án 不具合 nghĩa là lỗi vận hành. Câu hoàn chỉnh: 検証の 環境で 不具合を 再現しました。 → Tôi tái hiện lỗi trên môi trường kiểm thử."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “thực tế” vào đúng đơn vị còn thiếu: 手順と ___の 動作を 記録しました。",
+   "a": "実際",
+   "e": "Đáp án 実際 nghĩa là thực tế. Câu hoàn chỉnh: 手順と 実際の 動作を 記録しました。 → Tôi ghi bước và hành vi thực tế."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “giá trị kỳ vọng” vào đúng đơn vị còn thiếu: ___は 二件ですが、画面には 一件だけ 表示されます。",
+   "a": "期待値",
+   "e": "Đáp án 期待値 nghĩa là giá trị kỳ vọng. Câu hoàn chỉnh: 期待値は 二件ですが、画面には 一件だけ 表示されます。 → Kỳ vọng hai bản ghi nhưng màn chỉ hiển thị một."
+  },
+  {
+   "t": "order",
+   "q": "Sắp các mảnh thành đúng câu mẫu: Chưa xác nhận nguyên nhân; cũng đang tìm cách tạm tránh.",
+   "w": [
+    "未確認です。回避策の",
+    "有無も",
+    "調べています。",
+    "原因は"
+   ],
+   "a": "原因は 未確認です。回避策の 有無も 調べています。",
+   "e": "Câu đúng: 原因は 未確認です。回避策の 有無も 調べています。; chú ý vị trí các cụm và phần kết câu. 不具合 cần môi trường, thao tác và kết quả. 再現する chỉ tái tạo hiện tượng, chưa chứng minh nguyên nhân. 期待される動作 và 実際の動作 phải tách. ～可能性があります nêu giả thuyết; không dùng như kết luận chắc. Không gửi log chứa dữ liệu riêng tư."
+  },
+  {
+   "t": "listen",
+   "q": "Nghe và chọn ý đúng.",
+   "o": [
+    "Kỳ vọng và kết quả thực khác sao?",
+    "Kỳ vọng hai bản ghi nhưng màn hiện một.",
+    "Hai trên ba lần. Chưa có ghi nhận ảnh hưởng màn khác."
+   ],
+   "a": 0,
+   "e": "Câu đọc là 期待値と 実際の 結果は どう 違いますか。 → Kỳ vọng và kết quả thực khác sao?",
+   "say": "期待値と 実際の 結果は どう 違いますか。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "listen",
+   "q": "Nghe và chọn ý đúng.",
+   "o": [
+    "Còn nguyên nhân và cách tránh tạm?",
+    "Ở môi trường này, đổi đầu vào hai lần rồi lưu.",
+    "Nguyên nhân chưa xác nhận. Tôi kiểm có tránh được bằng tải lại trước lưu không."
+   ],
+   "a": 0,
+   "e": "Câu đọc là 原因と 回避策については どうでしょうか。 → Còn nguyên nhân và cách tránh tạm?",
+   "say": "原因と 回避策については どうでしょうか。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "検証の 環境で 不具合を 再現しました。",
+   "lang": "ja-JP",
+   "a": "検証の 環境で 不具合を 再現しました。",
+   "e": "Nghĩa: Tôi tái hiện lỗi trên môi trường kiểm thử.; viết đúng chữ, trợ từ và âm dài/âm ngắt. Không viết romaji vào đáp án chữ Nhật."
+  },
+  {
+   "t": "match",
+   "q": "Nối các từ/cụm với nghĩa trong bài.",
+   "pairs": [
+    [
+     "実際",
+     "thực tế"
+    ],
+    [
+     "環境",
+     "môi trường"
+    ],
+    [
+     "発生",
+     "phát sinh"
+    ],
+    [
+     "頻度",
+     "tần suất"
+    ],
+    [
+     "影響",
+     "ảnh hưởng"
+    ]
+   ],
+   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+  },
+  {
+   "t": "mc",
+   "q": "Màn hiển thị khác kỳ vọng thế nào?",
+   "o": [
+    "Ba thay vì một",
+    "Không có kỳ vọng",
+    "Một thay vì hai bản ghi"
+   ],
+   "a": 2,
+   "e": "一件と二件を対比."
+  },
+  {
+   "t": "mc",
+   "q": "Hai trên ba có nghĩa luôn xảy ra không?",
+   "o": [
+    "Không hề có lần nào",
+    "Có",
+    "Không"
+   ],
+   "a": 2,
+   "e": "Mẫu ít chỉ báo tần suất quan sát."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Phiếu tình huống dự án giả Hộp Mây, dữ liệu giả, bảng vai trò và tiêu chí kiểm thông điệp; chuẩn bị hai phiếu có thông tin khác nhau.",
+  "steps": [
+   {
+    "t": "10'",
+    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+   },
+   {
+    "t": "20'",
+    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+   },
+   {
+    "t": "25'",
+    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+   },
+   {
+    "t": "15'",
+    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+   },
+   {
+    "t": "15'",
+    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+   },
+   {
+    "t": "20'",
+    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+   },
+   {
+    "t": "20'",
+    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+   },
+   {
+    "t": "15'",
+    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+   }
+  ],
+  "games": [
+   "Đổi vai khách hàng–thành viên phát triển: một người giữ yêu cầu, một người giữ giới hạn; chỉ thống nhất khi mỗi bên nhắc lại đúng ý.",
+   "Phân loại thẻ thông tin: dữ kiện đã xác nhận, giả thuyết, đề xuất và cam kết; giải thích dấu hiệu ngôn ngữ."
+  ],
+  "errors": [
+   "Gọi lỗi hiển thị là mất dữ liệu khi chưa kiểm: tách quan sát và nguyên nhân.",
+   "Nói 三回中二回 là luôn: giữ cỡ mẫu.",
+   "Không ghi môi trường/thao tác: người khác không tái hiện.",
+   "Gửi log nguyên dữ liệu thật: dùng giả và làm mờ phù hợp."
+  ],
+  "homework": "Ôn 15 cụm theo ngữ cảnh bài; viết thông điệp mới 120–200 ký tự, ghi âm một lượt đóng vai và tự phân loại điều đã biết/chưa biết."
+ }
+}

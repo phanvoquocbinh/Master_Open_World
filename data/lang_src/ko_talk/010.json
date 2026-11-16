@@ -1,0 +1,218 @@
+{
+ "no": 10,
+ "lv": "t2",
+ "title": "Kể lần tới thư viện và nhờ hỗ trợ",
+ "sub": "어제 도서관에 갔어요?",
+ "situation": "Hai bạn nói về một việc đã xảy ra, phân biệt quá khứ, lý do và hành động tiếp theo.",
+ "lang": "ko-KR",
+ "lines": [
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "어제 도서관에 갔어요?",
+   "vi": "Hôm qua bạn có đến thư viện không?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "네. 책을 빌리려고 갔어요.",
+   "vi": "Có. Tôi đến để mượn sách."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "원하던 책을 찾았어요?",
+   "vi": "Bạn đã tìm được cuốn sách muốn mượn chưa?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "아니요. 다른 사람이 빌려서 없었어요.",
+   "vi": "Chưa. Người khác đã mượn nên không có."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "직원에게 물어봤어요?",
+   "vi": "Bạn đã thử hỏi nhân viên chưa?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "네. 다음 주 화요일에 다시 온다고 했어요.",
+   "vi": "Rồi. Họ nói thứ Ba tuần sau sách sẽ được trả lại."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "그때 다시 갈 거예요?",
+   "vi": "Lúc đó bạn định quay lại à?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "네. 화요일 오후에 갈 거예요.",
+   "vi": "Có. Tôi định đi vào chiều thứ Ba."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "필요하면 제 책을 빌려 드릴까요?",
+   "vi": "Nếu cần, tôi cho bạn mượn sách của tôi nhé?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "고마워요. 이번 주말까지만 빌릴게요.",
+   "vi": "Cảm ơn. Tôi chỉ mượn đến cuối tuần này."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "어제 도서관에 갔어요?",
+   "vi": "Hôm qua bạn có đến thư viện không?",
+   "note": "(으)려고 nêu mục đích; -았/었어요 nêu việc đã xảy ra. Phân biệt sách thư viện với sách người bạn đề nghị cho mượn."
+  },
+  {
+   "t": "네. 책을 빌리려고 갔어요.",
+   "vi": "Có. Tôi đến để mượn sách.",
+   "note": "(으)려고 nêu mục đích; -았/었어요 nêu việc đã xảy ra. Phân biệt sách thư viện với sách người bạn đề nghị cho mượn."
+  },
+  {
+   "t": "원하던 책을 찾았어요?",
+   "vi": "Bạn đã tìm được cuốn sách muốn mượn chưa?",
+   "note": "(으)려고 nêu mục đích; -았/었어요 nêu việc đã xảy ra. Phân biệt sách thư viện với sách người bạn đề nghị cho mượn."
+  },
+  {
+   "t": "아니요. 다른 사람이 빌려서 없었어요.",
+   "vi": "Chưa. Người khác đã mượn nên không có.",
+   "note": "(으)려고 nêu mục đích; -았/었어요 nêu việc đã xảy ra. Phân biệt sách thư viện với sách người bạn đề nghị cho mượn."
+  },
+  {
+   "t": "직원에게 물어봤어요?",
+   "vi": "Bạn đã thử hỏi nhân viên chưa?",
+   "note": "(으)려고 nêu mục đích; -았/었어요 nêu việc đã xảy ra. Phân biệt sách thư viện với sách người bạn đề nghị cho mượn."
+  },
+  {
+   "t": "네. 다음 주 화요일에 다시 온다고 했어요.",
+   "vi": "Rồi. Họ nói thứ Ba tuần sau sách sẽ được trả lại.",
+   "note": "(으)려고 nêu mục đích; -았/었어요 nêu việc đã xảy ra. Phân biệt sách thư viện với sách người bạn đề nghị cho mượn."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Vì sao đến thư viện?",
+   "o": [
+    "Mua ghế",
+    "Đổi vé",
+    "Mượn sách"
+   ],
+   "a": 2,
+   "e": "책을 빌리려고."
+  },
+  {
+   "q": "Vì sao sách không có?",
+   "o": [
+    "Thư viện chưa mở",
+    "Người khác đã mượn",
+    "Sách bị xóa theo đoạn"
+   ],
+   "a": 1,
+   "e": "다른 사람이 빌려서."
+  },
+  {
+   "q": "Khi nào dự kiến sách về?",
+   "o": [
+    "Thứ Ba tuần sau",
+    "Thứ Ba tuần trước",
+    "Tối nay"
+   ],
+   "a": 0,
+   "e": "다음 주 화요일."
+  },
+  {
+   "q": "Bạn định quay lại khi nào trong ngày?",
+   "o": [
+    "Sáng sớm",
+    "Nửa đêm",
+    "Buổi chiều"
+   ],
+   "a": 2,
+   "e": "화요일 오후."
+  },
+  {
+   "q": "Sách bạn cho mượn được nhận tới khi nào?",
+   "o": [
+    "Không bao giờ trả",
+    "Cuối tuần này",
+    "Cuối tháng sau"
+   ],
+   "a": 1,
+   "e": "이번 주말까지만."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "네. 책을 ___ 갔어요.",
+   "a": "빌리려고",
+   "e": "(으)려고 nêu mục đích; -았/었어요 nêu việc đã xảy ra. Phân biệt sách thư viện với sách người bạn đề nghị cho mượn. Câu đầy đủ: 네. 책을 빌리려고 갔어요. → Có. Tôi đến để mượn sách."
+  },
+  {
+   "t": "listen",
+   "say": "그때 다시 갈 거예요?",
+   "lang": "ko-KR",
+   "q": "Ý nào đúng với câu vừa nghe?",
+   "o": [
+    "Bạn đã tìm được cuốn sách muốn mượn chưa?",
+    "Nếu cần, tôi cho bạn mượn sách của tôi nhé?",
+    "Lúc đó bạn định quay lại à?"
+   ],
+   "a": 2,
+   "e": "Đối chiếu đúng câu: Lúc đó bạn định quay lại à?"
+  },
+  {
+   "t": "match",
+   "q": "Nối cụm chức năng với nghĩa trong ngữ cảnh",
+   "pairs": [
+    [
+     "어제 도서관에 갔어요?",
+     "Hôm qua bạn có đến thư viện không?"
+    ],
+    [
+     "네. 책을 빌리려고 갔어요.",
+     "Có. Tôi đến để mượn sách."
+    ],
+    [
+     "원하던 책을 찾았어요?",
+     "Bạn đã tìm được cuốn sách muốn mượn chưa?"
+    ],
+    [
+     "아니요. 다른 사람이 빌려서 없었어요.",
+     "Chưa. Người khác đã mượn nên không có."
+    ],
+    [
+     "직원에게 물어봤어요?",
+     "Bạn đã thử hỏi nhân viên chưa?"
+    ],
+    [
+     "네. 다음 주 화요일에 다시 온다고 했어요.",
+     "Rồi. Họ nói thứ Ba tuần sau sách sẽ được trả lại."
+    ]
+   ],
+   "e": "Đọc cả câu theo cụm; chú ý ý định và mức lịch sự."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Kể rằng hôm qua bạn tới thư viện nhưng nơi đó đóng cửa; bạn dự định quay lại sáng mai.",
+   "model": "어제 도서관에 갔지만 문이 닫혀 있었어요. 책을 빌리지 못했어요. 내일 아침에 다시 갈 거예요.",
+   "vi": "Hôm qua tôi đến thư viện nhưng nơi đó đóng cửa nên chưa mượn được sách. Mai sáng tôi sẽ tới lại."
+  },
+  {
+   "p": "Đề nghị cho bạn mượn sách tới thứ Sáu và hỏi bạn cần cuốn nào.",
+   "model": "제 책을 빌려 드릴까요? 금요일까지 빌릴 수 있어요. 어떤 책이 필요해요?",
+   "vi": "Tôi cho bạn mượn sách nhé? Có thể mượn đến thứ Sáu. Bạn cần cuốn nào?"
+  }
+ ]
+}

@@ -203,6 +203,209 @@ Nguyên tắc sư phạm (áp dụng cho mọi bài):
 
 ---
 
+
+## C. TIẾNG NHẬT – từ kana đến N1 và công sở IT
+
+Lộ trình nội bộ tự soạn; không cam kết đỗ thi hoặc thay thế toàn bộ giáo trình luyện thi. Số giờ/từ ở công cụ là ước lượng định hướng, không phải số từ đã thực sự cung cấp. Mỗi cấp có bài thi nội bộ 30–45 câu và luyện nói/viết bổ trợ. JLPT chính thức đánh giá kiến thức ngôn ngữ, đọc và nghe; nói/viết trong khóa là kỹ năng bổ trợ, không tính như phần thi JLPT.
+
+| Cấp | Mã | Số bài | Trọng tâm |
+|---|---|---|---|
+| Nhập môn | `kana` | 8 | Nhận diện/đọc kana, nhịp mora |
+| N5 | `n5` | 10 | Giao tiếp sơ cấp, câu lịch sự |
+| N4 | `n4` | 10 | Biến thể động từ và giao tiếp hằng ngày |
+| N3 | `n3` | 10 | Liên kết ý, đọc/nghe trung cấp |
+| N2 | `n2` | 10 | Văn viết, công việc và lập luận |
+| N1 | `n1` | 10 | Sắc thái, hàm ý và phản biện |
+| IT | `it` | 8 | Họp nhóm, bug, yêu cầu, bàn giao |
+
+### `ja_kana` – 8 bài
+1. Mora, năm nguyên âm và hàng あ・か
+2. Hiragana hàng さ・た・な và âm し・ち・つ
+3. Hiragana hàng は・ま・や・ら・わ và ん
+4. Dấu đục, bán đục và âm ghép nhỏ ゃ・ゅ・ょ
+5. Trường âm, âm ngắt nhỏ っ và nhịp mora
+6. Katakana: nguyên âm và các hàng cơ bản
+7. Katakana: trường âm ー, âm ghép và từ mượn
+8. Đọc câu ngắn, trợ từ は・へ・を; ôn toàn bộ kana
+
+### `ja_n5` – 10 bài
+1. Chào hỏi, tự giới thiệu; NはNです
+2. Hỏi đồ vật; これ・それ・あれ, の
+3. Số, ngày giờ; に và から・まで
+4. Địa điểm và tồn tại; あります・います
+5. Sinh hoạt hằng ngày; Vます・ません, を
+6. Đi lại và phương tiện; へ・に・で
+7. Mua sắm; tính từ い/な và giá
+8. Mời và đề nghị; ませんか・ましょう
+9. Thói quen, sở thích; 好き và trạng từ tần suất
+10. Ngày cuối tuần; quá khứ lịch sự và ôn N5
+
+### `ja_n4` – 10 bài
+1. Thể て: nối hành động và nhờ vả
+2. Thể ない: cấm và nghĩa vụ
+3. Thể từ điển và danh từ hóa の・こと
+4. Kinh nghiệm và liệt kê; たことがある・たり
+5. Khả năng và ý định; 可能形・つもり
+6. So sánh và lựa chọn; より・ほど
+7. Cho nhận; あげる・くれる・もらう
+8. Điều kiện; たら・と・なら
+9. Lý do và giải thích; ので・んです
+10. Kế hoạch chuyến đi và ôn N4
+
+### `ja_n3` – 10 bài
+1. Tường thuật và suy đoán; そうだ・らしい
+2. Bị động và ảnh hưởng tới người nói
+3. Sai khiến và cho phép
+4. Kính ngữ cơ bản trong dịch vụ
+5. Thay đổi thói quen; ようになる・ようにする
+6. Mục đích và phương tiện; ために・ように
+7. Điều kiện và nhượng bộ; ば・ても
+8. Giới hạn và mức độ; しか・ほど・ばかり
+9. Đọc thông báo, liên kết ý và quy chiếu
+10. Trình bày vấn đề, đề xuất; ôn N3
+
+### `ja_n2` – 10 bài
+1. Danh từ hóa và văn phong báo cáo
+2. Đối lập và nhượng bộ; ものの・にもかかわらず
+3. Nguyên nhân và trách nhiệm; せいで・おかげで
+4. Giới hạn kết luận; わけではない・とは限らない
+5. Biến đổi đồng thời; に伴って・につれて
+6. Bối cảnh và lập trường; において・にとって
+7. Kính ngữ và email công việc
+8. Đọc luận điểm, căn cứ và phản đề
+9. Nghe ghi chú họp, lựa chọn hành động
+10. Tóm tắt lập luận có giới hạn; ôn N2
+
+### `ja_n1` – 10 bài
+1. Sắc thái khẳng định; にほかならない・といっても
+2. Nhượng bộ cao cấp; とはいえ・ながらも
+3. Phạm vi và ngoại lệ; に限らず・を除いて
+4. Quan hệ lập luận; ゆえに・ひいては
+5. Đánh giá và cảnh báo; かねない・おそれがある
+6. Văn viết cô đọng và liên kết tham chiếu
+7. Đọc xã luận và hàm ý thái độ
+8. Nghe tranh luận và ý định ngầm
+9. Tổng hợp nhiều nguồn, phân biệt sự thật/ý kiến
+10. Phản biện học thuật và ôn N1
+
+### `ja_it` – 8 bài
+1. Tự giới thiệu trong nhóm phát triển
+2. Daily: tiến độ, trở ngại và bước tiếp
+3. Báo lỗi: bước tái hiện, kỳ vọng, thực tế
+4. Làm rõ yêu cầu và tiêu chí nghiệm thu
+5. Ước lượng và thương lượng phạm vi
+6. Code review và phản hồi lịch sự
+7. Sự cố: ảnh hưởng, điều đã biết, cập nhật
+8. Email bàn giao và tổng kết dự án
+
+### Đề mô phỏng tự soạn (`ja_mock`)
+Hai đề: N5 và N2, gồm từ vựng/ngữ pháp, đọc và nghe, kèm lời thoại, đáp án và giải thích. Ghi rõ bản luyện tập rút gọn nếu không đủ số câu/thời gian của kỳ thi chính thức; không quy đổi điểm nội bộ thành chứng chỉ. Không thêm nói/viết vào điểm JLPT mô phỏng.
+
+Hội thoại `ja_talk`: mỗi cấp kana/n5/n4/n3/n2/n1/it có 4 chủ đề (cấp thấp: chào hỏi, hỏi lại, chỉ đồ vật, hẹn giờ; cấp cao: làm rõ, đề xuất, phản biện, tóm tắt quyết định). `ja_guide`: cách dạy kana, phát âm/mora, giáo án bốn kỹ năng, phản hồi lỗi, thiết kế kiểm tra và sổ tay công sở.
+
+## D. TIẾNG HÀN – Hangul và TOPIK 1–6
+
+TOPIK I hướng tới bậc 1–2; TOPIK II hướng tới bậc 3–6. Các mã `t1`…`t6` là cấp học nội bộ, không phải sáu loại kỳ thi. Luyện nói có trong bài học để giao tiếp; không tự xem là phần của bài thi TOPIK I/II thông thường. Phân biệt bản giấy và bản máy khi đối chiếu cấu trúc chính thức.
+
+| Cấp | Mã | Số bài | Trọng tâm |
+|---|---|---|---|
+| Nhập môn | `hangul` | 8 | Khối âm tiết, nguyên/phụ âm, batchim |
+| TOPIK 1 | `t1` | 10 | Giao tiếp cơ bản |
+| TOPIK 2 | `t2` | 10 | Quá khứ, dự định, kính ngữ |
+| TOPIK 3 | `t3` | 10 | Đoạn văn và công sở |
+| TOPIK 4 | `t4` | 10 | Tin tức, dữ liệu và giải pháp |
+| TOPIK 5 | `t5` | 10 | Nghị luận và học thuật |
+| TOPIK 6 | `t6` | 10 | Sắc thái và phản biện nâng cao |
+
+### `ko_hangul` – 8 bài
+1. Khối âm tiết và nguyên âm ㅏ・ㅓ・ㅗ・ㅜ・ㅡ・ㅣ
+2. Phụ âm cơ bản ㄱ・ㄴ・ㄷ・ㄹ・ㅁ・ㅂ・ㅅ・ㅇ・ㅈ
+3. Nguyên âm còn lại: ㅑ・ㅕ・ㅛ・ㅠ・ㅐ・ㅔ và ghép
+4. Phụ âm bật hơi ㅋ・ㅌ・ㅍ・ㅊ so với âm thường
+5. Phụ âm căng ㄲ・ㄸ・ㅃ・ㅆ・ㅉ
+6. Batchim: bảy âm cuối và không thêm nguyên âm
+7. Nối âm, mũi hóa và một số biến âm thường gặp
+8. Khoảng cách chữ, 받침 và câu chào; ôn Hangul
+
+### `ko_t1` – 10 bài
+1. Chào hỏi, giới thiệu; 입니다・은/는
+2. Đồ vật và phủ định; 이/가・아닙니다
+3. Vị trí và tồn tại; 에・있다/없다
+4. Hoạt động hằng ngày; 아요/어요, 을/를
+5. Số Hán Hàn, giờ và giá tiền
+6. Gia đình, số thuần Hàn và đơn vị đếm
+7. Địa điểm hành động và đi lại; 에서・에
+8. Ăn uống và yêu cầu; 주세요
+9. Sở thích và mong muốn; 고 싶다
+10. Lịch cuối tuần và ôn TOPIK 1
+
+### `ko_t2` – 10 bài
+1. Quá khứ; 았/었어요
+2. Dự định và tương lai; (으)ㄹ 거예요
+3. Lý do; 아/어서・(으)니까
+4. Nối và đối lập; 고・지만
+5. Kính ngữ cơ bản; (으)시・께서
+6. Khả năng và cấm; (으)ㄹ 수 있다・지 마세요
+7. Kinh nghiệm; 아/어 보다・본 적 있다
+8. So sánh; 보다・더・제일
+9. Nhờ vả và đặt lịch; 아/어 주세요
+10. Du lịch và ôn TOPIK 2
+
+### `ko_t3` – 10 bài
+1. Tường thuật; 다고 하다
+2. Dự định và quyết định; 기로 하다
+3. Mục đích; (으)려고・기 위해서
+4. Trong khi và sau khi; (으)면서・고 나서
+5. Phỏng đoán; 것 같다
+6. Định ngữ và danh từ hóa 기
+7. Công việc và phản hồi lịch sự
+8. Đọc thông báo và hướng dẫn
+9. Viết đoạn nêu lý do và ví dụ
+10. Giải quyết vấn đề đời thường; ôn TOPIK 3
+
+### `ko_t4` – 10 bài
+1. Bị động và sai khiến cơ bản
+2. Nhượng bộ; 아/어도・더라도
+3. Điều kiện và đối chiếu; 다면・반면에
+4. Nguyên nhân trang trọng; 기 때문에・로 인해
+5. Biến đổi và mức độ; 아/어지다・(으)ㄹ수록
+6. Mô tả bảng số liệu giả
+7. Đọc bình luận và phân biệt quan điểm
+8. Nghe tin tức giả và ghi ý chính
+9. Viết 200–300 ký tự theo dữ liệu giả
+10. Thảo luận giải pháp và ôn TOPIK 4
+
+### `ko_t5` – 10 bài
+1. Văn viết học thuật và danh từ hóa
+2. Giới hạn suy luận; 단정할 수 없다
+3. Nhượng bộ nâng cao; (으)ㄹ지라도
+4. Căn cứ và suy đoán; (으)ㄴ/는 셈이다
+5. Từ nối lập luận và liên kết đoạn
+6. Thuyết trình dự án và chất vấn
+7. Đọc bài dài: cấu trúc và hàm ý
+8. Nghe bài giảng và phân loại căn cứ
+9. Nghị luận 600–700 ký tự tự soạn
+10. Tổng hợp nguồn và ôn TOPIK 5
+
+### `ko_t6` – 10 bài
+1. Sắc thái đánh giá và mức chắc chắn
+2. Thành ngữ trong ngữ cảnh công sở
+3. Bác luận lịch sự và điều kiện hóa kết luận
+4. Nguyên nhân nhiều tầng và hệ quả gián tiếp
+5. Đối chiếu dữ liệu, giới hạn và sai lệch
+6. Đọc xã luận: tiền đề và giả định
+7. Nghe tranh luận: hàm ý và thái độ
+8. Biên tập văn phong trang trọng, tránh lặp
+9. Nghị luận hai quan điểm và phản đề
+10. Hội thảo học thuật và ôn TOPIK 6
+
+### Đề mô phỏng tự soạn (`ko_mock`)
+Hai đề: TOPIK I (nghe/đọc) và TOPIK II (nghe/đọc/viết). Kèm lời thoại, đáp án, giải thích và rubric viết tự diễn giải; ghi rõ rút gọn nếu không khớp độ dài chính thức. Không quy đổi điểm luyện tập thành kết quả chứng chỉ.
+
+Hội thoại `ko_talk`: mỗi cấp hangul/t1/t2/t3/t4/t5/t6 có 4 chủ đề tăng dần về độ khó và mức trang trọng. `ko_guide`: dạy Hangul, phụ âm/batchim, giáo án, phản hồi lỗi, kiểm tra và văn phong công sở. Mọi ví dụ/dữ liệu/tên tổ chức trong bài tập đều tự đặt.
+
+---
+
 ## Gợi ý dạy học (cho giáo viên dạy miễn phí)
 - 1 bài = 2 buổi × 90 phút: buổi 1 phát âm/từ vựng/ngữ pháp + nghe; buổi 2 đọc/nói/viết + bài tập; giao bài tập về nhà = phần bài tập tự chấm trong game.
 - Mỗi tuần 2–3 buổi → 1 cấp (10–14 bài) ≈ 2–3 tháng; cuối cấp cho thi bài thi cấp, đạt ≥ 70% mới lên cấp.

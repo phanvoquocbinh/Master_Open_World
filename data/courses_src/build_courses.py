@@ -34,6 +34,7 @@ FLOORS = [
     (4, "Tầng 4 · Mobile"),
     (5, "Tầng 5 · Hiệu năng & DevOps"),
     (6, "Tầng 6 · Chuyên sâu QA"),
+    (7, "Dev City · The Crystal"),
 ]
 ORDER = [
     ("computer-basics", 1, "101"), ("programming-basics", 1, "102"), ("git", 1, "103"),
@@ -42,6 +43,8 @@ ORDER = [
     ("appium", 4, "401"), ("mobile-manual", 4, "402"),
     ("jmeter", 5, "501"), ("k6", 5, "502"), ("cicd", 5, "503"),
     ("test-design", 6, "601"), ("security-basics", 6, "602"), ("ai-for-qa", 6, "603"),
+    ("backend", 7, "701"), ("frontend", 7, "702"), ("system-design", 7, "703"),
+    ("devops", 7, "704"), ("ai-dev", 7, "705"),
 ]
 NON_TECH = {"mobile-manual", "test-design", "ai-for-qa"}
 LANGS = {"ts", "js", "python", "bash", "sql", "xml", "json", "text"}

@@ -1,0 +1,603 @@
+{
+ "no": 1,
+ "title": "Tự giới thiệu và ranh giới trách nhiệm",
+ "sub": "あきと 申します。開発を 担当しています。",
+ "goals": [
+  "Dùng ít nhất năm cụm nghiệp vụ trong tình huống Tự giới thiệu và ranh giới trách nhiệm",
+  "Nghe và xác định dữ kiện đã chốt, điều còn chờ và người xử lý",
+  "Đặt câu hỏi làm rõ có thể trả lời bằng hành vi cụ thể",
+  "Viết thông điệp có hành động tiếp và mức lịch sự nhất quán"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bối cảnh và cách học",
+   "html": "<p>Dự án và tổ chức trong bài hoàn toàn giả lập. Mục tiêu là giao tiếp rõ trong nhóm phát triển; tách quan sát, đề xuất và điều chưa xác nhận.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm trọng tâm",
+   "items": [
+    {
+     "w": "担当",
+     "kana": "たんとう",
+     "romaji": "tantō",
+     "vi": "phụ trách",
+     "ex": "あきと 申します。開発を 担当しています。",
+     "exVi": "Tôi là Aki. Tôi phụ trách phát triển."
+    },
+    {
+     "w": "開発",
+     "kana": "かいはつ",
+     "romaji": "kaihatsu",
+     "vi": "phát triển",
+     "ex": "あきと 申します。開発を 担当しています。",
+     "exVi": "Tôi là Aki. Tôi phụ trách phát triển."
+    },
+    {
+     "w": "要件",
+     "kana": "ようけん",
+     "romaji": "yōken",
+     "vi": "yêu cầu",
+     "ex": "不明な 要件は、窓口に 相談してから 共有します。",
+     "exVi": "Yêu cầu chưa rõ tôi sẽ trao đổi đầu mối rồi chia sẻ."
+    },
+    {
+     "w": "設計",
+     "kana": "せっけい",
+     "romaji": "sekkei",
+     "vi": "thiết kế",
+     "ex": "設計の 経験はありますが、運用は 初めてです。",
+     "exVi": "Tôi có kinh nghiệm thiết kế nhưng lần đầu làm vận hành."
+    },
+    {
+     "w": "実装",
+     "kana": "じっそう",
+     "romaji": "jissō",
+     "vi": "hiện thực bằng mã",
+     "ex": "よろしくお願いします。設計と 実装の 経験はありますか。",
+     "exVi": "Mong phối hợp tốt. Bạn có kinh nghiệm thiết kế và hiện thực không?"
+    },
+    {
+     "w": "テスト",
+     "kana": "てすと",
+     "romaji": "tesuto",
+     "vi": "kiểm thử",
+     "ex": "はい。テストも 経験しましたが、運用は 初めてです。",
+     "exVi": "Có. Tôi cũng từng kiểm thử, nhưng lần đầu vận hành."
+    },
+    {
+     "w": "運用",
+     "kana": "うんよう",
+     "romaji": "un'yō",
+     "vi": "vận hành",
+     "ex": "設計の 経験はありますが、運用は 初めてです。",
+     "exVi": "Tôi có kinh nghiệm thiết kế nhưng lần đầu làm vận hành."
+    },
+    {
+     "w": "経験",
+     "kana": "けいけん",
+     "romaji": "keiken",
+     "vi": "kinh nghiệm",
+     "ex": "設計の 経験はありますが、運用は 初めてです。",
+     "exVi": "Tôi có kinh nghiệm thiết kế nhưng lần đầu làm vận hành."
+    },
+    {
+     "w": "確認",
+     "kana": "かくにん",
+     "romaji": "kakunin",
+     "vi": "xác nhận",
+     "ex": "担当の 範囲を 確認しても よろしいでしょうか。",
+     "exVi": "Tôi xác nhận phạm vi phụ trách được không?"
+    },
+    {
+     "w": "相談",
+     "kana": "そうだん",
+     "romaji": "sōdan",
+     "vi": "trao đổi/xin ý kiến",
+     "ex": "不明な 要件は、窓口に 相談してから 共有します。",
+     "exVi": "Yêu cầu chưa rõ tôi sẽ trao đổi đầu mối rồi chia sẻ."
+    },
+    {
+     "w": "共有",
+     "kana": "きょうゆう",
+     "romaji": "kyōyū",
+     "vi": "chia sẻ",
+     "ex": "不明な 要件は、窓口に 相談してから 共有します。",
+     "exVi": "Yêu cầu chưa rõ tôi sẽ trao đổi đầu mối rồi chia sẻ."
+    },
+    {
+     "w": "連絡",
+     "kana": "れんらく",
+     "romaji": "renraku",
+     "vi": "liên hệ",
+     "ex": "今週は 入力部分です。不明点は 連絡の 窓口に 相談してください。",
+     "exVi": "Tuần này là phần đầu vào. Chưa rõ hãy trao đổi đầu mối liên hệ."
+    },
+    {
+     "w": "窓口",
+     "kana": "まどぐち",
+     "romaji": "madoguchi",
+     "vi": "đầu mối tiếp nhận",
+     "ex": "不明な 要件は、窓口に 相談してから 共有します。",
+     "exVi": "Yêu cầu chưa rõ tôi sẽ trao đổi đầu mối rồi chia sẻ."
+    },
+    {
+     "w": "範囲",
+     "kana": "はんい",
+     "romaji": "han'i",
+     "vi": "phạm vi",
+     "ex": "担当の 範囲を 確認しても よろしいでしょうか。",
+     "exVi": "Tôi xác nhận phạm vi phụ trách được không?"
+    },
+    {
+     "w": "期限",
+     "kana": "きげん",
+     "romaji": "kigen",
+     "vi": "hạn hoàn thành",
+     "ex": "担当の 範囲と 期限を 確認しても よろしいでしょうか。",
+     "exVi": "Tôi xác nhận phạm vi và hạn được không?"
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Cấu trúc và cách dùng",
+   "html": "<p>申します là tự xưng khiêm nhường; 担当しています nêu phạm vi đang phụ trách. よろしくお願いします mở quan hệ phối hợp, không thay việc nói rõ đầu mối. Không tự thêm さん sau tên mình. Phân biệt kinh nghiệm đã có với việc được giao hiện tại; câu chưa rõ dùng 確認してもよろしいでしょうか để xin làm rõ.</p>",
+   "table": [
+    [
+     "Mục đích",
+     "Mẫu"
+    ],
+    [
+     "Tự giới thiệu khiêm nhường",
+     "あきと申します"
+    ],
+    [
+     "Phạm vi đang phụ trách",
+     "入力部分を担当しています"
+    ],
+    [
+     "Kinh nghiệm",
+     "設計の経験があります"
+    ],
+    [
+     "Xin xác nhận",
+     "範囲を確認してもよろしいでしょうか"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "あきと 申します。開発を 担当しています。",
+     "vi": "Tôi là Aki. Tôi phụ trách phát triển."
+    },
+    {
+     "t": "設計の 経験はありますが、運用は 初めてです。",
+     "vi": "Tôi có kinh nghiệm thiết kế nhưng lần đầu làm vận hành."
+    },
+    {
+     "t": "担当の 範囲を 確認しても よろしいでしょうか。",
+     "vi": "Tôi xác nhận phạm vi phụ trách được không?"
+    },
+    {
+     "t": "不明な 要件は、窓口に 相談してから 共有します。",
+     "vi": "Yêu cầu chưa rõ tôi sẽ trao đổi đầu mối rồi chia sẻ."
+    }
+   ],
+   "tips": [
+    "<p>Tự thêm さん vào tên khi giới thiệu: chỉ nói tên と申します.</p>",
+    "<p>Coi 担当 là nhận mọi trách nhiệm: nêu phạm vi cụ thể.</p>",
+    "<p>Gọi việc lần đầu làm là kinh nghiệm lâu năm: tách biết và đang học.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Tự giới thiệu và ranh giới trách nhiệm",
+   "note": "Hai thành viên của dự án giả Hộp Mây trao đổi trong nhóm phát triển. Nghe để ghi dữ kiện, điều kiện và hành động tiếp; xem bản dịch sau lượt đầu.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "本日から 参加する あきと 申します。開発を 担当します。",
+     "vi": "Tôi là Aki, tham gia từ hôm nay. Tôi phụ trách phát triển."
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "よろしくお願いします。設計と 実装の 経験はありますか。",
+     "vi": "Mong phối hợp tốt. Bạn có kinh nghiệm thiết kế và hiện thực không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。テストも 経験しましたが、運用は 初めてです。",
+     "vi": "Có. Tôi cũng từng kiểm thử, nhưng lần đầu vận hành."
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "では、要件の 確認は 私と 一緒に 行いましょう。",
+     "vi": "Vậy xác nhận yêu cầu cùng tôi nhé."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "担当の 範囲と 期限を 確認しても よろしいでしょうか。",
+     "vi": "Tôi xác nhận phạm vi và hạn được không?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "今週は 入力部分です。不明点は 連絡の 窓口に 相談してください。",
+     "vi": "Tuần này là phần đầu vào. Chưa rõ hãy trao đổi đầu mối liên hệ."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "確認した 内容は、どこに 共有すればよいですか。",
+     "vi": "Nội dung đã xác nhận chia sẻ ở đâu?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "チームの 記録に 残し、会議でも 簡単に 伝えてください。",
+     "vi": "Lưu trong ghi chép nhóm và nói ngắn trong họp."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Theo hội thoại: Tôi là Aki, tham gia từ hôm nay. Tôi phụ trách phát triển.",
+     "o": [
+      "Vậy xác nhận yêu cầu cùng tôi nhé.",
+      "Tuần này là phần đầu vào. Chưa rõ hãy trao đổi đầu mối liên hệ.",
+      "Mong phối hợp tốt. Bạn có kinh nghiệm thiết kế và hiện thực không?"
+     ],
+     "a": 2,
+     "e": "Câu trả lời là よろしくお願いします。設計と 実装の 経験はありますか。 → Mong phối hợp tốt. Bạn có kinh nghiệm thiết kế và hiện thực không?"
+    },
+    {
+     "q": "Theo hội thoại: Có. Tôi cũng từng kiểm thử, nhưng lần đầu vận hành.",
+     "o": [
+      "Lưu trong ghi chép nhóm và nói ngắn trong họp.",
+      "Tuần này là phần đầu vào. Chưa rõ hãy trao đổi đầu mối liên hệ.",
+      "Vậy xác nhận yêu cầu cùng tôi nhé."
+     ],
+     "a": 2,
+     "e": "Câu trả lời là では、要件の 確認は 私と 一緒に 行いましょう。 → Vậy xác nhận yêu cầu cùng tôi nhé."
+    },
+    {
+     "q": "Theo hội thoại: Tôi xác nhận phạm vi và hạn được không?",
+     "o": [
+      "Lưu trong ghi chép nhóm và nói ngắn trong họp.",
+      "Tuần này là phần đầu vào. Chưa rõ hãy trao đổi đầu mối liên hệ.",
+      "Mong phối hợp tốt. Bạn có kinh nghiệm thiết kế và hiện thực không?"
+     ],
+     "a": 1,
+     "e": "Câu trả lời là 今週は 入力部分です。不明点は 連絡の 窓口に 相談してください。 → Tuần này là phần đầu vào. Chưa rõ hãy trao đổi đầu mối liên hệ."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: thông tin mới trong cùng chủ đề",
+   "text": "あきは 架空の 開発チームに 参加し、入力部分の 担当になりました。最初に 自分の 経験を 説明しました。\n\n設計と 実装は 経験しましたが、運用の 方法は まだ 習っていません。テストの 手順も 今回の 環境で 確認します。\n\n要件の 不明点は 一人で 決めず、相談の 窓口に 連絡します。回答は チームに 共有します。\n\n仕事の 範囲は 入力部分ですが、画面全体の 責任を 引き受けたわけではありません。\n\n期限は 金曜日です。ただし、未確定の 条件があれば 見直すことを 最初に 確認しました。\n\n自己紹介は 経歴を 並べるだけでなく、誰に 何を 聞き、どこまで 担当するかを 明確にする 機会になりました。",
+   "vi": "Aki gia nhập nhóm phát triển giả, phụ trách đầu vào; đầu tiên nói kinh nghiệm.\n\nĐã làm thiết kế/hiện thực, chưa học cách vận hành; cũng kiểm quy trình test trong môi trường lần này.\n\nYêu cầu chưa rõ không tự quyết, liên hệ đầu mối trao đổi; chia sẻ trả lời với nhóm.\n\nPhạm vi là đầu vào, không có nghĩa đã nhận trách nhiệm toàn màn.\n\nHạn thứ Sáu, nhưng đã xác nhận sẽ rà lại nếu có điều kiện chưa chốt.\n\nTự giới thiệu không chỉ liệt kê lý lịch mà còn làm rõ hỏi ai, hỏi gì và phụ trách tới đâu.",
+   "gloss": [
+    {
+     "w": "担当",
+     "kana": "たんとう",
+     "romaji": "tantō",
+     "vi": "phụ trách"
+    },
+    {
+     "w": "開発",
+     "kana": "かいはつ",
+     "romaji": "kaihatsu",
+     "vi": "phát triển"
+    },
+    {
+     "w": "要件",
+     "kana": "ようけん",
+     "romaji": "yōken",
+     "vi": "yêu cầu"
+    },
+    {
+     "w": "設計",
+     "kana": "せっけい",
+     "romaji": "sekkei",
+     "vi": "thiết kế"
+    },
+    {
+     "w": "実装",
+     "kana": "じっそう",
+     "romaji": "jissō",
+     "vi": "hiện thực bằng mã"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Aki phụ trách phạm vi nào?",
+     "o": [
+      "Toàn bộ vận hành",
+      "Mọi bộ phận",
+      "Phần đầu vào"
+     ],
+     "a": 2,
+     "e": "入力部分の担当."
+    },
+    {
+     "q": "Chưa rõ yêu cầu thì làm gì?",
+     "o": [
+      "Tự đoán và giấu",
+      "Không liên hệ ai",
+      "Hỏi đầu mối rồi chia sẻ trả lời"
+     ],
+     "a": 2,
+     "e": "相談窓口に連絡,共有."
+    },
+    {
+     "q": "Hạn có hoàn toàn vô điều kiện không?",
+     "o": [
+      "Có tuyệt đối",
+      "Không hề có hạn",
+      "Không, có thể rà nếu điều kiện chưa chốt"
+     ],
+     "a": 2,
+     "e": "未確定の条件で見直す."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và phản hồi",
+   "tasks": [
+    {
+     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "model": "本日から 参加する あきと 申します。開発を 担当します。 はい。テストも 経験しましたが、運用は 初めてです。 担当の 範囲と 期限を 確認しても よろしいでしょうか。 確認した 内容は、どこに 共有すればよいですか。",
+     "vi": "Tôi là Aki, tham gia từ hôm nay. Tôi phụ trách phát triển. Có. Tôi cũng từng kiểm thử, nhưng lần đầu vận hành. Tôi xác nhận phạm vi và hạn được không? Nội dung đã xác nhận chia sẻ ở đâu?",
+     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+    },
+    {
+     "p": "Tự giới thiệu trong 30 giây, nói hai điểm đã biết, một điểm cần học và hỏi đầu mối.",
+     "model": "あきと申します。入力部分を担当します。設計と実装は経験しましたが、運用は初めてです。不明点はどなたに相談すればよろしいでしょうか。",
+     "vi": "Tôi là Aki, phụ trách đầu vào. Đã thiết kế/hiện thực nhưng lần đầu vận hành. Chưa rõ thì xin hỏi ai?",
+     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết có kiểm tra",
+   "task": "Viết lời giới thiệu với nhóm mới: bạn là Aki, phụ trách đầu vào, có kinh nghiệm thiết kế, chưa làm vận hành; hỏi đầu mối và hạn. Viết 120–200 ký tự theo quy ước lớp tính cả dấu câu, bỏ xuống dòng.",
+   "min": 120,
+   "model": "本日から参加するあきと申します。入力部分を担当します。設計と実装の経験はありますが、運用は初めてです。今回の環境の手順を確認しながら進めたいと考えています。要件の不明点を相談する窓口と、今週の期限を教えていただけますか。確認した内容はチームの記録に残して共有します。よろしくお願いいたします。",
+   "modelVi": "Tôi là Aki tham gia từ hôm nay, phụ trách đầu vào. Có kinh nghiệm thiết kế/hiện thực nhưng lần đầu vận hành. Tôi muốn làm cùng việc kiểm quy trình môi trường này. Xin cho đầu mối hỏi yêu cầu và hạn tuần này. Tôi sẽ lưu/chia sẻ phần đã xác nhận, mong phối hợp tốt.",
+   "tips": [
+    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
+    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+   ],
+   "checklist": [
+    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
+    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
+    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
+    "Câu kết thúc và mức lịch sự nhất quán"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong bài, “担当” có nghĩa gì?",
+   "o": [
+    "kinh nghiệm",
+    "phụ trách",
+    "hiện thực bằng mã"
+   ],
+   "a": 1,
+   "e": "あきと 申します。開発を 担当しています。 → Tôi là Aki. Tôi phụ trách phát triển.; “担当” ở đây là phụ trách."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “開発” có nghĩa gì?",
+   "o": [
+    "xác nhận",
+    "kiểm thử",
+    "phát triển"
+   ],
+   "a": 2,
+   "e": "あきと 申します。開発を 担当しています。 → Tôi là Aki. Tôi phụ trách phát triển.; “開発” ở đây là phát triển."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “要件” có nghĩa gì?",
+   "o": [
+    "yêu cầu",
+    "trao đổi/xin ý kiến",
+    "vận hành"
+   ],
+   "a": 0,
+   "e": "不明な 要件は、窓口に 相談してから 共有します。 → Yêu cầu chưa rõ tôi sẽ trao đổi đầu mối rồi chia sẻ.; “要件” ở đây là yêu cầu."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “設計” có nghĩa gì?",
+   "o": [
+    "kinh nghiệm",
+    "thiết kế",
+    "chia sẻ"
+   ],
+   "a": 1,
+   "e": "設計の 経験はありますが、運用は 初めてです。 → Tôi có kinh nghiệm thiết kế nhưng lần đầu làm vận hành.; “設計” ở đây là thiết kế."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “phụ trách” vào đúng đơn vị còn thiếu: あきと 申します。開発を ___しています。",
+   "a": "担当",
+   "e": "Đáp án 担当 nghĩa là phụ trách. Câu hoàn chỉnh: あきと 申します。開発を 担当しています。 → Tôi là Aki. Tôi phụ trách phát triển."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “vận hành” vào đúng đơn vị còn thiếu: 設計の 経験はありますが、___は 初めてです。",
+   "a": "運用",
+   "e": "Đáp án 運用 nghĩa là vận hành. Câu hoàn chỉnh: 設計の 経験はありますが、運用は 初めてです。 → Tôi có kinh nghiệm thiết kế nhưng lần đầu làm vận hành."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “phạm vi” vào đúng đơn vị còn thiếu: 担当の ___を 確認しても よろしいでしょうか。",
+   "a": "範囲",
+   "e": "Đáp án 範囲 nghĩa là phạm vi. Câu hoàn chỉnh: 担当の 範囲を 確認しても よろしいでしょうか。 → Tôi xác nhận phạm vi phụ trách được không?"
+  },
+  {
+   "t": "order",
+   "q": "Sắp các mảnh thành đúng câu mẫu: Yêu cầu chưa rõ tôi sẽ trao đổi đầu mối rồi chia sẻ.",
+   "w": [
+    "要件は、窓口に",
+    "相談してから",
+    "共有します。",
+    "不明な"
+   ],
+   "a": "不明な 要件は、窓口に 相談してから 共有します。",
+   "e": "Câu đúng: 不明な 要件は、窓口に 相談してから 共有します。; chú ý vị trí các cụm và phần kết câu. 申します là tự xưng khiêm nhường; 担当しています nêu phạm vi đang phụ trách. よろしくお願いします mở quan hệ phối hợp, không thay việc nói rõ đầu mối. Không tự thêm さん sau tên mình. Phân biệt kinh nghiệm đã có với việc được giao hiện tại; câu chưa rõ dùng 確認してもよろしいでしょうか để xin làm rõ."
+  },
+  {
+   "t": "listen",
+   "q": "Nghe và chọn ý đúng.",
+   "o": [
+    "Vậy xác nhận yêu cầu cùng tôi nhé.",
+    "Tuần này là phần đầu vào. Chưa rõ hãy trao đổi đầu mối liên hệ.",
+    "Có. Tôi cũng từng kiểm thử, nhưng lần đầu vận hành."
+   ],
+   "a": 2,
+   "e": "Câu đọc là はい。テストも 経験しましたが、運用は 初めてです。 → Có. Tôi cũng từng kiểm thử, nhưng lần đầu vận hành.",
+   "say": "はい。テストも 経験しましたが、運用は 初めてです。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "listen",
+   "q": "Nghe và chọn ý đúng.",
+   "o": [
+    "Mong phối hợp tốt. Bạn có kinh nghiệm thiết kế và hiện thực không?",
+    "Nội dung đã xác nhận chia sẻ ở đâu?",
+    "Lưu trong ghi chép nhóm và nói ngắn trong họp."
+   ],
+   "a": 1,
+   "e": "Câu đọc là 確認した 内容は、どこに 共有すればよいですか。 → Nội dung đã xác nhận chia sẻ ở đâu?",
+   "say": "確認した 内容は、どこに 共有すればよいですか。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "あきと 申します。開発を 担当しています。",
+   "lang": "ja-JP",
+   "a": "あきと 申します。開発を 担当しています。",
+   "e": "Nghĩa: Tôi là Aki. Tôi phụ trách phát triển.; viết đúng chữ, trợ từ và âm dài/âm ngắt. Không viết romaji vào đáp án chữ Nhật."
+  },
+  {
+   "t": "match",
+   "q": "Nối các từ/cụm với nghĩa trong bài.",
+   "pairs": [
+    [
+     "実装",
+     "hiện thực bằng mã"
+    ],
+    [
+     "テスト",
+     "kiểm thử"
+    ],
+    [
+     "運用",
+     "vận hành"
+    ],
+    [
+     "経験",
+     "kinh nghiệm"
+    ],
+    [
+     "確認",
+     "xác nhận"
+    ]
+   ],
+   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+  },
+  {
+   "t": "mc",
+   "q": "Aki phụ trách phạm vi nào?",
+   "o": [
+    "Toàn bộ vận hành",
+    "Mọi bộ phận",
+    "Phần đầu vào"
+   ],
+   "a": 2,
+   "e": "入力部分の担当."
+  },
+  {
+   "t": "mc",
+   "q": "Chưa rõ yêu cầu thì làm gì?",
+   "o": [
+    "Tự đoán và giấu",
+    "Không liên hệ ai",
+    "Hỏi đầu mối rồi chia sẻ trả lời"
+   ],
+   "a": 2,
+   "e": "相談窓口に連絡,共有."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Phiếu tình huống dự án giả Hộp Mây, dữ liệu giả, bảng vai trò và tiêu chí kiểm thông điệp; chuẩn bị hai phiếu có thông tin khác nhau.",
+  "steps": [
+   {
+    "t": "10'",
+    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+   },
+   {
+    "t": "20'",
+    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+   },
+   {
+    "t": "25'",
+    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+   },
+   {
+    "t": "15'",
+    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+   },
+   {
+    "t": "15'",
+    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+   },
+   {
+    "t": "20'",
+    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+   },
+   {
+    "t": "20'",
+    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+   },
+   {
+    "t": "15'",
+    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+   }
+  ],
+  "games": [
+   "Đổi vai khách hàng–thành viên phát triển: một người giữ yêu cầu, một người giữ giới hạn; chỉ thống nhất khi mỗi bên nhắc lại đúng ý.",
+   "Phân loại thẻ thông tin: dữ kiện đã xác nhận, giả thuyết, đề xuất và cam kết; giải thích dấu hiệu ngôn ngữ."
+  ],
+  "errors": [
+   "Tự thêm さん vào tên khi giới thiệu: chỉ nói tên と申します.",
+   "Coi 担当 là nhận mọi trách nhiệm: nêu phạm vi cụ thể.",
+   "Gọi việc lần đầu làm là kinh nghiệm lâu năm: tách biết và đang học.",
+   "Nói よろしく rồi bỏ đầu mối/hạn: xác nhận dữ kiện hành động."
+  ],
+  "homework": "Ôn 15 cụm theo ngữ cảnh bài; viết thông điệp mới 120–200 ký tự, ghi âm một lượt đóng vai và tự phân loại điều đã biết/chưa biết."
+ }
+}

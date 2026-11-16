@@ -1,0 +1,604 @@
+{
+ "no": 6,
+ "title": "Code review và phản hồi lịch sự",
+ "sub": "レビューの 指摘には、根拠と 修正の 要否を 書きます。",
+ "goals": [
+  "Dùng ít nhất năm cụm nghiệp vụ trong tình huống Code review và phản hồi lịch sự",
+  "Nghe và xác định dữ kiện đã chốt, điều còn chờ và người xử lý",
+  "Đặt câu hỏi làm rõ có thể trả lời bằng hành vi cụ thể",
+  "Viết thông điệp có hành động tiếp và mức lịch sự nhất quán"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bối cảnh và cách học",
+   "html": "<p>Dự án và tổ chức trong bài hoàn toàn giả lập. Mục tiêu là giao tiếp rõ trong nhóm phát triển; tách quan sát, đề xuất và điều chưa xác nhận.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm trọng tâm",
+   "items": [
+    {
+     "w": "レビュー",
+     "kana": "れびゅー",
+     "romaji": "rebyū",
+     "vi": "rà soát mã",
+     "ex": "レビューの 指摘には、根拠と 修正の 要否を 書きます。",
+     "exVi": "Góp ý review ghi căn cứ và có bắt buộc sửa không."
+    },
+    {
+     "w": "指摘",
+     "kana": "してき",
+     "romaji": "shiteki",
+     "vi": "điểm được chỉ ra",
+     "ex": "レビューの 指摘には、根拠と 修正の 要否を 書きます。",
+     "exVi": "Góp ý review ghi căn cứ và có bắt buộc sửa không."
+    },
+    {
+     "w": "提案",
+     "kana": "ていあん",
+     "romaji": "teian",
+     "vi": "đề xuất",
+     "ex": "可読性の 提案と、必須の 修正を 分けて 合意します。",
+     "exVi": "Tách và thống nhất đề xuất dễ đọc với sửa bắt buộc."
+    },
+    {
+     "w": "必須",
+     "kana": "ひっす",
+     "romaji": "hissu",
+     "vi": "bắt buộc",
+     "ex": "可読性の 提案と、必須の 修正を 分けて 合意します。",
+     "exVi": "Tách và thống nhất đề xuất dễ đọc với sửa bắt buộc."
+    },
+    {
+     "w": "境界値",
+     "kana": "きょうかいち",
+     "romaji": "kyōkaichi",
+     "vi": "giá trị biên",
+     "ex": "境界値の 検証を 追加していただけますか。",
+     "exVi": "Bạn thêm kiểm chứng giá trị biên được không?"
+    },
+    {
+     "w": "空値",
+     "kana": "くうち",
+     "romaji": "kūchi",
+     "vi": "giá trị rỗng",
+     "ex": "この 条件分岐では、空値が 通る 可能性があります。",
+     "exVi": "Nhánh này có thể cho giá trị rỗng qua."
+    },
+    {
+     "w": "条件分岐",
+     "kana": "じょうけんぶんき",
+     "romaji": "jōken bunki",
+     "vi": "rẽ nhánh điều kiện",
+     "ex": "この 条件分岐では、空値が 通る 可能性があります。",
+     "exVi": "Nhánh này có thể cho giá trị rỗng qua."
+    },
+    {
+     "w": "可読性",
+     "kana": "かどくせい",
+     "romaji": "kadokusei",
+     "vi": "độ dễ đọc",
+     "ex": "可読性の 提案と、必須の 修正を 分けて 合意します。",
+     "exVi": "Tách và thống nhất đề xuất dễ đọc với sửa bắt buộc."
+    },
+    {
+     "w": "修正",
+     "kana": "しゅうせい",
+     "romaji": "shūsei",
+     "vi": "chỉnh sửa",
+     "ex": "レビューの 指摘には、根拠と 修正の 要否を 書きます。",
+     "exVi": "Góp ý review ghi căn cứ và có bắt buộc sửa không."
+    },
+    {
+     "w": "根拠",
+     "kana": "こんきょ",
+     "romaji": "konkyo",
+     "vi": "căn cứ",
+     "ex": "レビューの 指摘には、根拠と 修正の 要否を 書きます。",
+     "exVi": "Góp ý review ghi căn cứ và có bắt buộc sửa không."
+    },
+    {
+     "w": "意図",
+     "kana": "いと",
+     "romaji": "ito",
+     "vi": "ý định",
+     "ex": "差分を 確認しました。この 条件分岐の 意図を 教えていただけますか。",
+     "exVi": "Tôi xem thay đổi rồi. Xin cho ý định nhánh này."
+    },
+    {
+     "w": "差分",
+     "kana": "さぶん",
+     "romaji": "sabun",
+     "vi": "phần thay đổi",
+     "ex": "差分を 確認しました。この 条件分岐の 意図を 教えていただけますか。",
+     "exVi": "Tôi xem thay đổi rồi. Xin cho ý định nhánh này."
+    },
+    {
+     "w": "既存",
+     "kana": "きそん",
+     "romaji": "kison",
+     "vi": "hiện có",
+     "ex": "既存の 入力を 受け入れるためです。ただし、空値は 想定していませんでした。",
+     "exVi": "Để nhận đầu vào hiện có. Nhưng chưa xét giá trị rỗng."
+    },
+    {
+     "w": "検証",
+     "kana": "けんしょう",
+     "romaji": "kenshō",
+     "vi": "kiểm chứng",
+     "ex": "境界値の 検証を 追加していただけますか。",
+     "exVi": "Bạn thêm kiểm chứng giá trị biên được không?"
+    },
+    {
+     "w": "合意",
+     "kana": "ごうい",
+     "romaji": "gōi",
+     "vi": "thống nhất",
+     "ex": "可読性の 提案と、必須の 修正を 分けて 合意します。",
+     "exVi": "Tách và thống nhất đề xuất dễ đọc với sửa bắt buộc."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Cấu trúc và cách dùng",
+   "html": "<p>～可能性があります nêu rủi ro cần kiểm, không quy tội tác giả. ～していただけますか là đề nghị lịch sự có hành động. 提案と必須の修正 phải phân biệt. Khi phản hồi, nêu điều kiện, hành vi và căn cứ; không chỉ nói cách viết xấu.</p>",
+   "table": [
+    [
+     "Mục đích",
+     "Mẫu"
+    ],
+    [
+     "Hỏi ý định",
+     "条件分岐の意図を教えてください"
+    ],
+    [
+     "Rủi ro",
+     "空値が通る可能性があります"
+    ],
+    [
+     "Hành động",
+     "境界値のテストを追加していただけますか"
+    ],
+    [
+     "Phân loại",
+     "必須の修正／可読性の提案"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "レビューの 指摘には、根拠と 修正の 要否を 書きます。",
+     "vi": "Góp ý review ghi căn cứ và có bắt buộc sửa không."
+    },
+    {
+     "t": "この 条件分岐では、空値が 通る 可能性があります。",
+     "vi": "Nhánh này có thể cho giá trị rỗng qua."
+    },
+    {
+     "t": "境界値の 検証を 追加していただけますか。",
+     "vi": "Bạn thêm kiểm chứng giá trị biên được không?"
+    },
+    {
+     "t": "可読性の 提案と、必須の 修正を 分けて 合意します。",
+     "vi": "Tách và thống nhất đề xuất dễ đọc với sửa bắt buộc."
+    }
+   ],
+   "tips": [
+    "<p>Góp ý “code xấu” không có căn cứ: chỉ điều kiện/hậu quả.</p>",
+    "<p>Gộp 提案 với 必須: ghi nhãn và lý do.</p>",
+    "<p>Đổi nhiều ngoài 差分 không thống nhất: kiểm phạm vi.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Code review và phản hồi lịch sự",
+   "note": "Hai thành viên của dự án giả Hộp Mây trao đổi trong nhóm phát triển. Nghe để ghi dữ kiện, điều kiện và hành động tiếp; xem bản dịch sau lượt đầu.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "差分を 確認しました。この 条件分岐の 意図を 教えていただけますか。",
+     "vi": "Tôi xem thay đổi rồi. Xin cho ý định nhánh này."
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "既存の 入力を 受け入れるためです。ただし、空値は 想定していませんでした。",
+     "vi": "Để nhận đầu vào hiện có. Nhưng chưa xét giá trị rỗng."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "空値が 通る 可能性があるので、境界値の 検証を 追加していただけますか。",
+     "vi": "Có thể cho rỗng qua, xin thêm kiểm biên."
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "わかりました。その 指摘は 必須の 修正として 対応します。",
+     "vi": "Đã rõ. Tôi xử lý góp ý đó như sửa bắt buộc."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "関数を 分ける 提案もありますが、こちらは 可読性に 関する 相談です。",
+     "vi": "Cũng đề xuất tách hàm, nhưng đây là trao đổi về dễ đọc."
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "根拠を 理解したいので、どこが 読みにくかったか 教えてください。",
+     "vi": "Tôi muốn hiểu căn cứ, xin chỉ chỗ khó đọc."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "二つの 役割が 混在しています。分けると 検証も 独立させやすくなります。",
+     "vi": "Đang lẫn hai vai trò. Tách sẽ dễ kiểm độc lập."
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "では、修正の 範囲を 合意してから 更新します。",
+     "vi": "Vậy thống nhất phạm vi sửa rồi tôi cập nhật."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Theo hội thoại: Tôi xem thay đổi rồi. Xin cho ý định nhánh này.",
+     "o": [
+      "Tôi muốn hiểu căn cứ, xin chỉ chỗ khó đọc.",
+      "Để nhận đầu vào hiện có. Nhưng chưa xét giá trị rỗng.",
+      "Đã rõ. Tôi xử lý góp ý đó như sửa bắt buộc."
+     ],
+     "a": 1,
+     "e": "Câu trả lời là 既存の 入力を 受け入れるためです。ただし、空値は 想定していませんでした。 → Để nhận đầu vào hiện có. Nhưng chưa xét giá trị rỗng."
+    },
+    {
+     "q": "Theo hội thoại: Có thể cho rỗng qua, xin thêm kiểm biên.",
+     "o": [
+      "Đã rõ. Tôi xử lý góp ý đó như sửa bắt buộc.",
+      "Vậy thống nhất phạm vi sửa rồi tôi cập nhật.",
+      "Tôi muốn hiểu căn cứ, xin chỉ chỗ khó đọc."
+     ],
+     "a": 0,
+     "e": "Câu trả lời là わかりました。その 指摘は 必須の 修正として 対応します。 → Đã rõ. Tôi xử lý góp ý đó như sửa bắt buộc."
+    },
+    {
+     "q": "Theo hội thoại: Cũng đề xuất tách hàm, nhưng đây là trao đổi về dễ đọc.",
+     "o": [
+      "Tôi muốn hiểu căn cứ, xin chỉ chỗ khó đọc.",
+      "Để nhận đầu vào hiện có. Nhưng chưa xét giá trị rỗng.",
+      "Vậy thống nhất phạm vi sửa rồi tôi cập nhật."
+     ],
+     "a": 0,
+     "e": "Câu trả lời là 根拠を 理解したいので、どこが 読みにくかったか 教えてください。 → Tôi muốn hiểu căn cứ, xin chỉ chỗ khó đọc."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: thông tin mới trong cùng chủ đề",
+   "text": "レビューでは、差分の 意図を 確認してから 指摘しました。既存の 動作を 保つための 条件分岐かもしれないからです。\n\n空値に 関する 不具合の 可能性は、境界値の 検証で 確認します。推測だけで 原因を 断定しません。\n\n動作の 正しさに 関わる 修正は 必須とし、根拠と 期待する 結果を 示しました。\n\n可読性については、二つの 役割が 混在する 点を 説明しました。作者の 能力を 評価する 表現にはしません。\n\n提案が 全て 必須とは 限りません。今 対応するか、別の 作業にするかを チームで 合意します。\n\n更新後は 必須の 修正と 追加の 検証を 再確認し、解決した 指摘だけを 完了としました。",
+   "vi": "Review hỏi ý định thay đổi trước góp ý vì nhánh có thể giữ hành vi cũ.\n\nRủi ro rỗng kiểm bằng ca biên, không khẳng định nguyên nhân chỉ từ đoán.\n\nSửa ảnh hưởng đúng hành vi là bắt buộc, nêu căn cứ/kỳ vọng.\n\nVề dễ đọc, nói hai vai trò lẫn nhau, không đánh giá năng lực tác giả.\n\nKhông mọi đề xuất bắt buộc; thống nhất làm ngay hay việc riêng.\n\nSau cập nhật, rà sửa bắt buộc/test thêm, chỉ đánh xong điểm đã giải quyết.",
+   "gloss": [
+    {
+     "w": "レビュー",
+     "kana": "れびゅー",
+     "romaji": "rebyū",
+     "vi": "rà soát mã"
+    },
+    {
+     "w": "指摘",
+     "kana": "してき",
+     "romaji": "shiteki",
+     "vi": "điểm được chỉ ra"
+    },
+    {
+     "w": "提案",
+     "kana": "ていあん",
+     "romaji": "teian",
+     "vi": "đề xuất"
+    },
+    {
+     "w": "必須",
+     "kana": "ひっす",
+     "romaji": "hissu",
+     "vi": "bắt buộc"
+    },
+    {
+     "w": "境界値",
+     "kana": "きょうかいち",
+     "romaji": "kyōkaichi",
+     "vi": "giá trị biên"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Trước góp ý nên xác nhận gì?",
+     "o": [
+      "Tên thật mọi người",
+      "Ý định thay đổi",
+      "Mọi lỗi đã do tác giả"
+     ],
+     "a": 1,
+     "e": "差分の意図."
+    },
+    {
+     "q": "Cách kiểm rủi ro rỗng?",
+     "o": [
+      "Bỏ nhánh",
+      "Test giá trị biên",
+      "Chỉ khẳng định bằng giọng mạnh"
+     ],
+     "a": 1,
+     "e": "境界値の検証."
+    },
+    {
+     "q": "Mọi đề xuất dễ đọc đều bắt buộc ngay không?",
+     "o": [
+      "Không được góp ý dễ đọc",
+      "Có tuyệt đối",
+      "Không, cần phân biệt và thống nhất"
+     ],
+     "a": 2,
+     "e": "提案と必須を分ける."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và phản hồi",
+   "tasks": [
+    {
+     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "model": "差分を 確認しました。この 条件分岐の 意図を 教えていただけますか。 空値が 通る 可能性があるので、境界値の 検証を 追加していただけますか。 関数を 分ける 提案もありますが、こちらは 可読性に 関する 相談です。 二つの 役割が 混在しています。分けると 検証も 独立させやすくなります。",
+     "vi": "Tôi xem thay đổi rồi. Xin cho ý định nhánh này. Có thể cho rỗng qua, xin thêm kiểm biên. Cũng đề xuất tách hàm, nhưng đây là trao đổi về dễ đọc. Đang lẫn hai vai trò. Tách sẽ dễ kiểm độc lập.",
+     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+    },
+    {
+     "p": "Đưa một góp ý có căn cứ và một đề xuất tùy chọn, nhờ tác giả xác nhận phạm vi.",
+     "model": "空値が通る可能性があります。境界値のテストを追加していただけますか。これは必須と考えています。関数を分ける案は提案ですので、今回の範囲を相談させてください。",
+     "vi": "Có thể cho rỗng qua. Xin thêm test biên, điểm này bắt buộc. Tách hàm là đề xuất, xin bàn phạm vi lần này.",
+     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết có kiểm tra",
+   "task": "Viết review ngắn:có thể cho rỗng qua, yêu cầu test biên bắt buộc; tách hàm là đề xuất dễ đọc cần bàn phạm vi.120–200 ký tự.",
+   "min": 120,
+   "model": "差分を確認しました。この条件分岐では空値も通る可能性があるため、境界値のテストを追加していただけますか。動作の正しさに関わるので、この点は必須の修正と考えています。一方、関数を分ける案は可読性についての提案です。二つの役割が混在する点を整理できそうですが、今回どこまで対応するかは相談して合意したいです。",
+   "modelVi": "Đã xem thay đổi. Nhánh có thể cho rỗng qua, xin thêm test biên; ảnh hưởng hành vi nên bắt buộc. Tách hàm là đề xuất dễ đọc vì lẫn hai vai trò, cần bàn phạm vi lần này.",
+   "tips": [
+    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
+    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+   ],
+   "checklist": [
+    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
+    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
+    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
+    "Câu kết thúc và mức lịch sự nhất quán"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong bài, “レビュー” có nghĩa gì?",
+   "o": [
+    "giá trị biên",
+    "rà soát mã",
+    "độ dễ đọc"
+   ],
+   "a": 1,
+   "e": "レビューの 指摘には、根拠と 修正の 要否を 書きます。 → Góp ý review ghi căn cứ và có bắt buộc sửa không.; “レビュー” ở đây là rà soát mã."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “指摘” có nghĩa gì?",
+   "o": [
+    "chỉnh sửa",
+    "giá trị rỗng",
+    "điểm được chỉ ra"
+   ],
+   "a": 2,
+   "e": "レビューの 指摘には、根拠と 修正の 要否を 書きます。 → Góp ý review ghi căn cứ và có bắt buộc sửa không.; “指摘” ở đây là điểm được chỉ ra."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “提案” có nghĩa gì?",
+   "o": [
+    "căn cứ",
+    "đề xuất",
+    "rẽ nhánh điều kiện"
+   ],
+   "a": 1,
+   "e": "可読性の 提案と、必須の 修正を 分けて 合意します。 → Tách và thống nhất đề xuất dễ đọc với sửa bắt buộc.; “提案” ở đây là đề xuất."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “必須” có nghĩa gì?",
+   "o": [
+    "bắt buộc",
+    "ý định",
+    "độ dễ đọc"
+   ],
+   "a": 0,
+   "e": "可読性の 提案と、必須の 修正を 分けて 合意します。 → Tách và thống nhất đề xuất dễ đọc với sửa bắt buộc.; “必須” ở đây là bắt buộc."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “rà soát mã” vào đúng đơn vị còn thiếu: ___の 指摘には、根拠と 修正の 要否を 書きます。",
+   "a": "レビュー",
+   "e": "Đáp án レビュー nghĩa là rà soát mã. Câu hoàn chỉnh: レビューの 指摘には、根拠と 修正の 要否を 書きます。 → Góp ý review ghi căn cứ và có bắt buộc sửa không."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “rẽ nhánh điều kiện” vào đúng đơn vị còn thiếu: この ___では、空値が 通る 可能性があります。",
+   "a": "条件分岐",
+   "e": "Đáp án 条件分岐 nghĩa là rẽ nhánh điều kiện. Câu hoàn chỉnh: この 条件分岐では、空値が 通る 可能性があります。 → Nhánh này có thể cho giá trị rỗng qua."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “giá trị biên” vào đúng đơn vị còn thiếu: ___の 検証を 追加していただけますか。",
+   "a": "境界値",
+   "e": "Đáp án 境界値 nghĩa là giá trị biên. Câu hoàn chỉnh: 境界値の 検証を 追加していただけますか。 → Bạn thêm kiểm chứng giá trị biên được không?"
+  },
+  {
+   "t": "order",
+   "q": "Sắp các mảnh thành đúng câu mẫu: Tách và thống nhất đề xuất dễ đọc với sửa bắt buộc.",
+   "w": [
+    "提案と、必須の",
+    "修正を",
+    "分けて",
+    "合意します。",
+    "可読性の"
+   ],
+   "a": "可読性の 提案と、必須の 修正を 分けて 合意します。",
+   "e": "Câu đúng: 可読性の 提案と、必須の 修正を 分けて 合意します。; chú ý vị trí các cụm và phần kết câu. ～可能性があります nêu rủi ro cần kiểm, không quy tội tác giả. ～していただけますか là đề nghị lịch sự có hành động. 提案と必須の修正 phải phân biệt. Khi phản hồi, nêu điều kiện, hành vi và căn cứ; không chỉ nói cách viết xấu."
+  },
+  {
+   "t": "listen",
+   "q": "Nghe và chọn ý đúng.",
+   "o": [
+    "Tôi muốn hiểu căn cứ, xin chỉ chỗ khó đọc.",
+    "Đã rõ. Tôi xử lý góp ý đó như sửa bắt buộc.",
+    "Có thể cho rỗng qua, xin thêm kiểm biên."
+   ],
+   "a": 2,
+   "e": "Câu đọc là 空値が 通る 可能性があるので、境界値の 検証を 追加していただけますか。 → Có thể cho rỗng qua, xin thêm kiểm biên.",
+   "say": "空値が 通る 可能性があるので、境界値の 検証を 追加していただけますか。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "listen",
+   "q": "Nghe và chọn ý đúng.",
+   "o": [
+    "Đang lẫn hai vai trò. Tách sẽ dễ kiểm độc lập.",
+    "Để nhận đầu vào hiện có. Nhưng chưa xét giá trị rỗng.",
+    "Vậy thống nhất phạm vi sửa rồi tôi cập nhật."
+   ],
+   "a": 0,
+   "e": "Câu đọc là 二つの 役割が 混在しています。分けると 検証も 独立させやすくなります。 → Đang lẫn hai vai trò. Tách sẽ dễ kiểm độc lập.",
+   "say": "二つの 役割が 混在しています。分けると 検証も 独立させやすくなります。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "レビューの 指摘には、根拠と 修正の 要否を 書きます。",
+   "lang": "ja-JP",
+   "a": "レビューの 指摘には、根拠と 修正の 要否を 書きます。",
+   "e": "Nghĩa: Góp ý review ghi căn cứ và có bắt buộc sửa không.; viết đúng chữ, trợ từ và âm dài/âm ngắt. Không viết romaji vào đáp án chữ Nhật."
+  },
+  {
+   "t": "match",
+   "q": "Nối các từ/cụm với nghĩa trong bài.",
+   "pairs": [
+    [
+     "境界値",
+     "giá trị biên"
+    ],
+    [
+     "空値",
+     "giá trị rỗng"
+    ],
+    [
+     "条件分岐",
+     "rẽ nhánh điều kiện"
+    ],
+    [
+     "可読性",
+     "độ dễ đọc"
+    ],
+    [
+     "修正",
+     "chỉnh sửa"
+    ]
+   ],
+   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+  },
+  {
+   "t": "mc",
+   "q": "Trước góp ý nên xác nhận gì?",
+   "o": [
+    "Tên thật mọi người",
+    "Ý định thay đổi",
+    "Mọi lỗi đã do tác giả"
+   ],
+   "a": 1,
+   "e": "差分の意図."
+  },
+  {
+   "t": "mc",
+   "q": "Cách kiểm rủi ro rỗng?",
+   "o": [
+    "Bỏ nhánh",
+    "Test giá trị biên",
+    "Chỉ khẳng định bằng giọng mạnh"
+   ],
+   "a": 1,
+   "e": "境界値の検証."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Phiếu tình huống dự án giả Hộp Mây, dữ liệu giả, bảng vai trò và tiêu chí kiểm thông điệp; chuẩn bị hai phiếu có thông tin khác nhau.",
+  "steps": [
+   {
+    "t": "10'",
+    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+   },
+   {
+    "t": "20'",
+    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+   },
+   {
+    "t": "25'",
+    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+   },
+   {
+    "t": "15'",
+    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+   },
+   {
+    "t": "15'",
+    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+   },
+   {
+    "t": "20'",
+    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+   },
+   {
+    "t": "20'",
+    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+   },
+   {
+    "t": "15'",
+    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+   }
+  ],
+  "games": [
+   "Đổi vai khách hàng–thành viên phát triển: một người giữ yêu cầu, một người giữ giới hạn; chỉ thống nhất khi mỗi bên nhắc lại đúng ý.",
+   "Phân loại thẻ thông tin: dữ kiện đã xác nhận, giả thuyết, đề xuất và cam kết; giải thích dấu hiệu ngôn ngữ."
+  ],
+  "errors": [
+   "Góp ý “code xấu” không có căn cứ: chỉ điều kiện/hậu quả.",
+   "Gộp 提案 với 必須: ghi nhãn và lý do.",
+   "Đổi nhiều ngoài 差分 không thống nhất: kiểm phạm vi.",
+   "Đánh xong chỉ vì đã trả lời: xác nhận thay đổi/test."
+  ],
+  "homework": "Ôn 15 cụm theo ngữ cảnh bài; viết thông điệp mới 120–200 ký tự, ghi âm một lượt đóng vai và tự phân loại điều đã biết/chưa biết."
+ }
+}

@@ -1,0 +1,433 @@
+=== COURSE backend
+name: Lập trình Backend
+icon: 🖥️
+floor: 7
+room: 701
+level: Cơ bản → Thực hành
+hours: 16
+summary: Xây dựng API đặt cơm giả lập bằng Express và FastAPI; hiểu routing, validation, SQL/ORM, xác thực, log, kiểm thử và cache với ví dụ chạy cục bộ.
+
+## LESSON backend-01 | HTTP/REST: hợp đồng giữa hai phía
+
+### Bài toán và cách nghĩ
+Quầy đặt cơm của nhóm giả lập Mây Tre nhận yêu cầu, kiểm tra rồi trả biên nhận. API cũng cần hợp đồng: method, đường dẫn, body, mã trạng thái. REST tổ chức theo tài nguyên /orders; GET chỉ đọc, POST tạo mới. 201 biểu thị đã tạo; 204 không có body; 400 dữ liệu sai; 404 không tìm thấy. Khóa này dùng Node.js hỗ trợ ES module, Express 5 và Python với FastAPI/Pydantic 2; các thư viện phải cài trong môi trường thực hành riêng.
+
+### Máy chủ Express tối thiểu
+Lưu app.mjs, cài express trong thư mục bài, chạy node app.mjs. express.json giải mã JSON trước route; export app giúp kiểm thử mà không mở cổng. Khi chạy trực tiếp, dùng file server.mjs riêng import app rồi app.listen(3000). GET này trả một mảng JSON; dữ liệu chỉ ở bộ nhớ.
+~~~js
+import express from "express";
+export const app = express();
+app.use(express.json());
+app.get("/orders", (req, res) => {
+  res.json([{ id: 1, dish: "Cơm nấm" }]);
+});
+~~~
+
+### Cùng hợp đồng với FastAPI
+Lưu main.py, chạy fastapi dev main.py sau khi cài fastapi[standard]. Hàm trả list được chuyển thành JSON. Hai framework là hai lựa chọn thực hiện cùng hợp đồng, không chạy chung cổng cùng lúc.
+~~~python
+from fastapi import FastAPI
+app = FastAPI()
+@app.get("/orders")
+def list_orders():
+    return [{"id": 1, "dish": "Cơm nấm"}]
+~~~
+
+### Quan sát giao thức thay vì đoán
+Chạy trên máy cục bộ ở cổng thực tế của server, ví dụ Express 3000; FastAPI mặc định 8000. -i in header và status. 200 cùng Content-Type JSON chứng minh đường đi thành công; không chứng minh dữ liệu đã lưu bền vững.
+~~~bash
+curl.exe -i http://localhost:3000/orders
+# FastAPI: đổi 3000 thành 8000
+# Kỳ vọng: 200 và [{"id":1,"dish":"Cơm nấm"}]
+~~~
+
+### Lỗi hay gặp và cách kiểm tra
+Không dùng GET để hủy đơn: bộ nhớ đệm hoặc trình xem trước có thể gọi GET ngoài dự kiến. Không trả 200 cho mọi lỗi vì client sẽ hiểu sai. Đổi tên trường dish thành item ở một phía sẽ phá hợp đồng dù server vẫn khởi động.
+
+PRACTICE: Chạy từng server, gọi GET /orders và GET /missing; ghi status, header, body. Vẽ luồng client → route → JSON. Tiêu chí đạt: giải thích 200/404, chỉ ra cổng đang dùng và dừng server bằng Ctrl+C.
+Q: POST tạo đơn thành công nên ưu tiên mã nào?
++ 201 Created
+- 404 Not Found
+- 500 Internal Server Error
+Q: GET /orders nên làm gì?
++ Đọc danh sách, không làm thay đổi dữ liệu
+- Hủy các đơn quá hạn
+- Tạo một đơn mới
+
+## LESSON backend-02 | Routing: path, query và thứ tự xử lý
+
+### Bài toán và cách nghĩ
+Path chỉ một tài nguyên, query lọc hoặc phân trang: /orders/7 khác /orders?status=open. Giống số phiếu gọi món khác điều kiện “chưa giao”. Phân biệt id không hợp lệ với id hợp lệ nhưng chưa có. Dữ liệu truy cập luôn phải kiểm quyền ở máy chủ, không chỉ ẩn nút ở giao diện.
+
+### Tham số đường dẫn Express
+Thêm vào app bài trước. Express cho req.params.id dưới dạng chuỗi; Number và Number.isSafeInteger tránh chấp nhận 7abc. Mảng cục bộ là dữ liệu giả. return ngăn gửi response lần hai.
+~~~js
+const orders = [{ id: 7, dish: "Bún nấm" }];
+app.get("/orders/:id", (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isSafeInteger(id) || id < 1) return res.status(400).json({ error: "invalid_id" });
+  const order = orders.find(x => x.id === id);
+  if (!order) return res.status(404).json({ error: "not_found" });
+  res.json(order);
+});
+~~~
+
+### Giới hạn query trong FastAPI
+Đoạn độc lập, dùng thay route danh sách cũ. Annotated kèm Query giới hạn limit trong 1..50. Giá trị không đúng bị FastAPI từ chối với 422 trước khi vào hàm. Không dùng limit vô hạn làm tràn bộ nhớ.
+~~~python
+from typing import Annotated
+from fastapi import Query
+@app.get("/orders")
+def list_orders(limit: Annotated[int, Query(ge=1, le=50)] = 10):
+    rows = [{"id": 7, "dish": "Bún nấm"}]
+    return rows[:limit]
+~~~
+
+### Ma trận đầu vào
+Đây là hợp đồng kiểm thử đề xuất, không phải lệnh. Express bài này tự chọn 400; FastAPI mặc định 422 cho validation. Client phải theo hợp đồng đã công bố, không gán mọi 4xx thành 401.
+~~~text
+GET /orders/7          => 200 nếu tồn tại
+GET /orders/999        => 404
+GET /orders/abc        => 400 (Express mẫu)
+GET /orders?limit=0    => 422 (FastAPI mẫu)
+~~~
+
+### Lỗi hay gặp và cách kiểm tra
+Lỗi thường gặp: dùng parseInt("7abc") ra 7; khai báo route /orders/:id trước route tĩnh /orders/stats khiến stats bị coi là id; phân trang thiếu thứ tự ổn định làm trùng hoặc bỏ sót bản ghi.
+
+PRACTICE: Thêm /orders/stats trước route :id và kiểm tra id 0, -1, abc, 7, 999. Với query hãy thử 1, 50, 51. Tiêu chí đạt: bảng kết quả rõ ràng và không lộ stack trace.
+Q: req.params.id trong Express thường là kiểu gì?
++ Chuỗi cần kiểm tra trước khi dùng
+- Luôn là số nguyên an toàn
+- Luôn là object JSON
+Q: id hợp lệ nhưng không tồn tại trả gì?
++ 404 theo hợp đồng tài nguyên
+- 201 vì request hợp lệ
+- 401 dù đã đăng nhập
+
+## LESSON backend-03 | Validate body và tạo tài nguyên
+
+### Bài toán và cách nghĩ
+Kiểm dữ liệu ở cửa vào giống người nhận phiếu kiểm tra số suất trước khi chuyển bếp. Kiểm cả kiểu và giới hạn: qty phải là số nguyên 1..20; dish là chuỗi không trắng, tối đa 80 ký tự. Không tin validate phía trình duyệt. Ví dụ chỉ lưu bộ nhớ; khởi động lại sẽ mất dữ liệu.
+
+### Express: kiểm kiểu trước khi trim
+Thêm vào app đã có express.json. Không gọi .trim() trên dữ liệu chưa chắc là chuỗi. Kiểm xong mới tạo đơn; id tăng cục bộ chỉ phù hợp bài học một tiến trình.
+~~~js
+const created = [];
+app.post("/orders", (req, res) => {
+  const { dish, qty } = req.body ?? {};
+  if (typeof dish !== "string" || !dish.trim() || dish.trim().length > 80 || !Number.isInteger(qty) || qty < 1 || qty > 20) {
+    return res.status(400).json({ error: "invalid_order" });
+  }
+  const row = { id: created.length + 1, dish: dish.trim(), qty };
+  created.push(row);
+  res.status(201).json(row);
+});
+~~~
+
+### Pydantic 2: schema rõ ràng
+Dùng StrictInt để không tự đổi chuỗi "2" thành số 2, giúp hợp đồng chặt như Express. str_strip_whitespace chạy trước kiểm độ dài; extra=forbid ngăn trường bất ngờ. Đây là đoạn thay thế route POST tương ứng.
+~~~python
+from pydantic import BaseModel, Field, ConfigDict, StrictInt
+class OrderIn(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    dish: str = Field(min_length=1, max_length=80)
+    qty: StrictInt = Field(ge=1, le=20)
+@app.post("/orders", status_code=201)
+def create_order(data: OrderIn):
+    return {"id": 1, **data.model_dump()}  # chỉ minh họa, chưa lưu DB
+~~~
+
+### Gửi JSON tới localhost
+PowerShell có thể lưu JSON trong file rồi dùng --data-binary để tránh vấn đề dấu nháy. Đây là nội dung request.json và lệnh minh họa; không có thông tin tài khoản.
+~~~text
+request.json: {"dish":"Cơm nấm","qty":2}
+curl.exe -i http://localhost:3000/orders -H "Content-Type: application/json" --data-binary @request.json
+# Kỳ vọng: 201; thử qty: "2" để quan sát từ chối
+~~~
+
+### Lỗi hay gặp và cách kiểm tra
+Không kiểm giá tiền do client gửi rồi tin ngay: giá phải lấy từ dữ liệu phía server. Giới hạn kích thước body cũng cần cấu hình. FastAPI trả 422 theo mặc định; nếu muốn đồng nhất 400 phải thiết kế handler riêng và test, không sửa kỳ vọng tùy tiện.
+
+PRACTICE: Lập bảng 7 trường hợp: dish trắng, thiếu dish, dish là số, qty chuỗi, qty 0, qty 21 và hợp lệ. Ghi phản hồi và chứng minh không tạo đơn lỗi.
+Q: Vì sao vẫn validate ở server?
++ Client có thể bị bỏ qua hoặc gửi request trực tiếp
+- Vì HTML không hiển thị được chữ Việt
+- Để thay cho kiểm quyền
+Q: Thứ tự đúng trước dish.trim() là gì?
++ Kiểm dish là chuỗi
+- Ép mọi giá trị thành chuỗi
+- Lưu vào DB trước
+
+## LESSON backend-04 | SQL, transaction và ORM
+
+### Bài toán và cách nghĩ
+Bảng dữ liệu giống sổ đơn có khóa chính. SQL giúp truy vấn và ràng buộc; ORM ánh xạ bản ghi sang đối tượng nhưng không thay kiến thức transaction. Khi trừ tồn kho và tạo đơn phải cùng thành công hoặc cùng hủy. Ví dụ SQLite dùng file cục bộ; cần migration khi thay schema.
+
+### Schema và tham số truy vấn
+Schema dùng integer cents để tránh sai số tiền dạng float. CHECK bảo vệ ngay cả khi dữ liệu đi từ công cụ khác ngoài API. Không ghép chuỗi SQL từ tên món hoặc id của người dùng.
+~~~sql
+CREATE TABLE orders (
+ id INTEGER PRIMARY KEY,
+ dish TEXT NOT NULL,
+ qty INTEGER NOT NULL CHECK(qty BETWEEN 1 AND 20),
+ cents INTEGER NOT NULL CHECK(cents >= 0)
+);
+CREATE INDEX idx_orders_dish ON orders(dish);
+~~~
+
+### Node: prepared statement với SQLite tích hợp
+Dùng Node có node:sqlite; API này phụ thuộc phiên bản runtime, kiểm trước khi thực hành. DatabaseSync chặn event loop nên hợp bài demo nhỏ. Dấu ? nhận giá trị, không nhận tên bảng. Chuỗi có dấu nháy vẫn là dữ liệu.
+~~~js
+import { DatabaseSync } from "node:sqlite";
+const db = new DatabaseSync(":memory:");
+db.exec("CREATE TABLE orders (id INTEGER PRIMARY KEY, dish TEXT NOT NULL)");
+const insert = db.prepare("INSERT INTO orders(dish) VALUES (?)");
+insert.run("Cơm nấm");
+console.log(db.prepare("SELECT * FROM orders WHERE id = ?").get(1));
+~~~
+
+### Python: ORM SQLAlchemy 2
+Cài SQLAlchemy; đoạn độc lập này tạo bảng trên DB bộ nhớ. Session có phạm vi ngắn; begin tự commit khi không lỗi và rollback khi có exception. Không chia sẻ một Session toàn cục cho nhiều request.
+~~~python
+from sqlalchemy import create_engine, String, select
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
+class Base(DeclarativeBase): pass
+class Order(Base):
+    __tablename__ = "orders"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    dish: Mapped[str] = mapped_column(String(80))
+engine = create_engine("sqlite:///:memory:")
+Base.metadata.create_all(engine)
+with Session(engine) as session, session.begin():
+    session.add(Order(dish="Cơm nấm"))
+with Session(engine) as session:
+    print(session.scalars(select(Order)).all())
+~~~
+
+### Lỗi hay gặp và cách kiểm tra
+N+1 là một query lấy danh sách rồi mỗi dòng lại query chi tiết; dùng join/eager loading có đo đạc. Index làm đọc nhanh hơn cho một số truy vấn nhưng tốn ghi và dung lượng. Cú pháp ORM không tự ngăn SQL injection nếu bạn tự ghép SQL thô.
+
+PRACTICE: Tạo 3 đơn và truy vấn theo id bằng tham số. Thử tên món có dấu nháy; giải thích vì sao không làm hỏng query. Viết mô tả transaction trừ tồn kho + tạo đơn, kể tình huống bước hai thất bại.
+Q: Transaction giúp điều gì?
++ Các thay đổi liên quan cùng commit hoặc rollback
+- Mọi truy vấn luôn nhanh hơn
+- Không cần backup nữa
+Q: Cách truyền dữ liệu người dùng vào SQL đúng?
++ Dùng tham số bind
+- Nối chuỗi trực tiếp
+- Xóa dấu cách là đủ
+
+## LESSON backend-05 | Xác thực session/JWT và phân quyền
+
+### Bài toán và cách nghĩ
+Xác thực trả lời “ai”, phân quyền trả lời “được làm gì”. Session lưu trạng thái ở server và cookie giữ mã tham chiếu; JWT chứa claim có chữ ký, không phải dữ liệu được mã hóa. Không viết thuật toán ký hoặc hàm băm mật khẩu tự chế. Mẫu dùng đối tượng người dùng giả để tập kiểm quyền, không phải hệ thống đăng nhập hoàn chỉnh.
+
+### Express: quyền sở hữu ở server
+Giả sử middleware xác thực tin cậy đã đặt req.user. Mẫu không đọc ownerId từ body. Nếu thiếu principal trả 401; tài nguyên của người khác trả 403 theo hợp đồng mẫu; có hệ thống chọn 404 để hạn chế dò tài nguyên.
+~~~js
+app.get("/private/orders/:id", (req, res) => {
+  if (!req.user) return res.sendStatus(401);
+  const row = { id: 1, ownerId: 42, dish: "Cơm nấm" };
+  if (row.ownerId !== req.user.id) return res.sendStatus(403);
+  res.json(row);
+});
+~~~
+
+### FastAPI: kiểm claim sau xác minh chữ ký
+Đoạn độc lập cần PyJWT. key đến từ biến môi trường cấu hình riêng; không có khóa thật trong bài. algorithms cố định, kiểm issuer/audience/exp/sub. Không lấy thuật toán từ header token. Kết quả sub còn cần tra người dùng và trạng thái tài khoản.
+~~~python
+import os, jwt
+key = os.environ["JWT_VERIFY_KEY"]
+def verify_token(token: str):
+    return jwt.decode(token, key, algorithms=["RS256"],
+        audience="orders-api", issuer="classroom",
+        options={"require": ["exp", "sub", "iss", "aud"]})
+~~~
+
+### Chọn session hay JWT
+Bảng là hướng dẫn thiết kế, không chứa mã đăng nhập. Cookie session cần HttpOnly, Secure khi HTTPS, SameSite phù hợp và phòng CSRF cho hành động thay đổi trạng thái. JWT cần hạn dùng, xoay khóa và chiến lược thu hồi; logout client không tự vô hiệu mọi token.
+~~~text
+Session: cookie mã ngẫu nhiên -> kho session -> user
+JWT: token -> xác minh chữ ký + claims -> user
+401: thiếu/sai/hết hạn bằng chứng xác thực
+403: đã xác thực nhưng không được phép
+~~~
+
+### Lỗi hay gặp và cách kiểm tra
+Lỗi hay gặp: decode JWT mà không verify; lưu mật khẩu thuần; log Authorization; chỉ kiểm role mà quên owner; dùng khóa bí mật mặc định trong source. Cấu hình CORS không thay thế xác thực hoặc CSRF. Dùng thư viện băm mật khẩu phù hợp như Argon2, tham số được kiểm thử.
+
+PRACTICE: Tạo ma trận quyền cho khách, chủ đơn, người khác và quản trị viên. Với mỗi vai ghi status và dữ liệu được xem. Mô tả cách test token hết hạn và logout session mà không ghi token thật vào tài liệu.
+Q: JWT được ký có mặc định giữ kín payload không?
++ Không, payload có thể đọc được
+- Có, mọi claim đều được mã hóa
+- Chỉ kín khi dùng Base64
+Q: Đơn của người khác cần kiểm ở đâu?
++ Phía server trên từng tài nguyên
+- Chỉ trên nút giao diện
+- Trong localStorage do client tự đặt
+
+## LESSON backend-06 | Xử lý lỗi và log có cấu trúc
+
+### Bài toán và cách nghĩ
+Quầy tiếp nhận cần báo lỗi dễ hiểu cho khách, đồng thời giữ thông tin chẩn đoán cho đội vận hành. Client nhận mã lỗi ổn định và request id; log nội bộ ghi ngữ cảnh tối thiểu, không chứa mật khẩu/token/body nhạy cảm. Không trả nguyên exception hoặc stack trace ra mạng.
+
+### Express 5: handler lỗi đặt cuối
+Đặt sau mọi route. Express 5 chuyển Promise bị reject trong async handler tới middleware lỗi; callback bất đồng bộ ngoài chuỗi Promise vẫn cần next(err). res.headersSent tránh ghi response lần hai. Ví dụ cố ý không log err.message vì message có thể chứa dữ liệu đầu vào.
+~~~js
+import { randomUUID } from "node:crypto";
+app.use((err, req, res, next) => {
+  if (res.headersSent) return next(err);
+  const requestId = randomUUID();
+  console.error(JSON.stringify({ requestId, kind: err.name, status: 500 }));
+  res.status(500).json({ error: "internal_error", requestId });
+});
+~~~
+
+### FastAPI: lỗi nghiệp vụ dự đoán được
+HTTPException dùng cho lỗi nghiệp vụ như thiếu tài nguyên. Không bọc toàn bộ ứng dụng bằng except rồi trả 200. Các lỗi không dự đoán cần handler riêng theo chính sách log của hệ thống.
+~~~python
+from fastapi import HTTPException
+@app.get("/catalog/{item_id}")
+def read_item(item_id: int):
+    if item_id != 1:
+        raise HTTPException(status_code=404, detail="item_not_found")
+    return {"id": 1, "name": "Cơm nấm"}
+~~~
+
+### Log an toàn để lần theo yêu cầu
+Đây là bản ghi giả. severity cho mức nghiêm trọng; requestId nối nhiều sự kiện cùng request. Không đưa user id hay request id thành nhãn metric cardinality cao. Không tin request id từ client nếu chưa giới hạn ký tự/độ dài.
+~~~json
+{"event":"order_failed","severity":"error","requestId":"demo-request-07","status":500,"durationMs":83}
+{"event":"order_created","severity":"info","requestId":"demo-request-08","status":201,"durationMs":24}
+~~~
+
+### Lỗi hay gặp và cách kiểm tra
+Log cả req.headers sẽ lộ cookie/token; log nguyên body dễ lộ địa chỉ khách. Catch rồi im lặng làm lỗi mất dấu. Không coi mọi 404 là sự cố khẩn; phân biệt lỗi người dùng, sự cố phụ thuộc và lỗi lập trình để cảnh báo phù hợp.
+
+PRACTICE: Cố ý ném Error trong một route Express async, xác nhận client nhận 500 không có stack trace và có requestId. Kiểm log không chứa header Authorization hay body. Với FastAPI kiểm 404 dự đoán được.
+Q: Handler lỗi Express cần mấy tham số?
++ Bốn: err, req, res, next
+- Hai: req, res
+- Một: err
+Q: Log nào nên tránh?
++ Toàn bộ Authorization và Cookie
+- Mã sự kiện không nhạy cảm
+- Thời gian xử lý
+
+## LESSON backend-07 | Unit test và integration test cho API
+
+### Bài toán và cách nghĩ
+Unit test kiểm một hàm như tính tiền; integration test gửi request qua routing, validate và response. Giống kiểm cân riêng rồi kiểm cả quy trình bán hàng. Test phải độc lập, tạo dữ liệu riêng và kiểm cả đường lỗi, quyền truy cập, tác dụng phụ. Không gọi API bên ngoài thật trong unit test.
+
+### Unit test Node tích hợp
+Lưu pricing.mjs export hàm total như dưới, test ở pricing.test.mjs bằng node:test. Chạy node --test. RangeError biểu thị input không hợp lệ; số tiền nguyên theo đơn vị nhỏ nhất giúp so sánh chính xác.
+~~~js
+// pricing.mjs
+export function total(unit, qty) {
+  if (!Number.isInteger(unit) || unit < 0 || !Number.isInteger(qty) || qty < 1) throw new RangeError("invalid_input");
+  return unit * qty;
+}
+// pricing.test.mjs (file riêng)
+import test from "node:test";
+import assert from "node:assert/strict";
+import { total } from "./pricing.mjs";
+test("3 phần giá 25000", () => assert.equal(total(25000, 3), 75000));
+test("không nhận qty 0", () => assert.throws(() => total(25000, 0), RangeError));
+~~~
+
+### Integration test Express với Supertest
+Cài supertest trong môi trường bài; app.mjs chỉ export app, không listen. Supertest xử lý server test. Đừng chỉ kiểm 200: xác nhận Content-Type, schema và giá trị quan trọng.
+~~~js
+import test from "node:test";
+import assert from "node:assert/strict";
+import request from "supertest";
+import { app } from "./app.mjs";
+test("GET trả đúng hợp đồng", async () => {
+  const r = await request(app).get("/orders").expect(200).expect("Content-Type", /json/);
+  assert.ok(Array.isArray(r.body));
+  assert.equal(r.body[0].id, 1);
+});
+~~~
+
+### FastAPI TestClient và pytest
+Cài pytest và httpx; lưu test_main.py cạnh main.py. Test POST này tương ứng schema OrderIn ở bài 3. Không phụ thuộc dữ liệu từ test chạy trước. Khi thêm DB phải dùng DB test và override dependency, không ghi vào DB làm việc.
+~~~python
+from fastapi.testclient import TestClient
+from main import app
+client = TestClient(app)
+def test_create():
+    r = client.post("/orders", json={"dish": "Cơm nấm", "qty": 2})
+    assert r.status_code == 201
+    assert r.json()["qty"] == 2
+def test_invalid_qty():
+    r = client.post("/orders", json={"dish": "Cơm nấm", "qty": 0})
+    assert r.status_code == 422
+~~~
+
+### Lỗi hay gặp và cách kiểm tra
+Không dùng sleep cố định để đợi xử lý bất đồng bộ; chờ điều kiện hoặc thay phụ thuộc bằng fake có kiểm soát. Test body chính xác toàn bộ có thể dễ vỡ nếu timestamp thay đổi; kiểm trường có ý nghĩa và kiểm định dạng timestamp riêng.
+
+PRACTICE: Viết 2 unit test và 4 integration test: hợp lệ, thiếu trường, sai kiểu, không có quyền. Cố ý đổi mã trả về để chứng minh test thất bại, rồi sửa. Tiêu chí đạt: test chạy lại độc lập cho cùng kết quả.
+Q: Integration test API nên kiểm thêm gì ngoài status?
++ Schema, dữ liệu và tác dụng phụ quan trọng
+- Chỉ tên file test
+- Màu của terminal
+Q: DB cho test nên là gì?
++ DB cô lập có dữ liệu được kiểm soát
+- DB thật đang phục vụ học viên
+- DB dùng chung không dọn trạng thái
+
+## LESSON backend-08 | Hiệu năng, cache và giới hạn tải
+
+### Bài toán và cách nghĩ
+Đo trước khi tối ưu: throughput là số request/giây; p95 là thời gian mà 95% request không vượt quá; tỷ lệ lỗi cần đi cùng độ trễ. Cache như chuẩn bị sẵn món phổ biến nhưng phải biết khi nào món không còn mới. Không cache dữ liệu riêng của nhiều người dưới một khóa chung.
+
+### Cache TTL đơn giản cho dữ liệu công khai
+Đoạn độc lập minh họa nguyên tắc, không phải cache phân tán. performance.now đo thời gian đơn điệu. Hàm readCatalog được tiêm để tránh phụ thuộc DB cụ thể; sau cập nhật dữ liệu, gán entry=null để vô hiệu.
+~~~js
+let entry = null;
+export async function cachedCatalog(readCatalog) {
+  const now = performance.now();
+  if (entry && entry.until > now) return entry.value;
+  const value = await readCatalog();
+  entry = { value, until: performance.now() + 5000 };
+  return value;
+}
+export function invalidateCatalog() { entry = null; }
+~~~
+
+### Python: đo đoạn xử lý
+perf_counter phù hợp đo thời lượng, không dùng làm giờ lịch. Ví dụ lặp 100 lần; muốn đo API thật phải có tải đồng thời và mẫu đại diện. Không suy ra p95 tin cậy từ vài request thủ công.
+~~~python
+from time import perf_counter
+def measure(fn):
+    start = perf_counter()
+    value = fn()
+    return value, (perf_counter() - start) * 1000
+value, ms = measure(lambda: sum(range(10000)))
+print({"durationMs": round(ms, 3), "value": value})
+~~~
+
+### Ngân sách hiệu năng và kiểm tải
+Các số dưới đây là mục tiêu giả cho lớp, không phải chuẩn áp cho mọi sản phẩm. Cache hit ratio cao vẫn có thể trả dữ liệu cũ; kiểm tính đúng và invalidation sau cập nhật. Rate limit thường trả 429 và Retry-After phù hợp.
+~~~text
+Tải mẫu: 20 người dùng đồng thời, 5 phút
+Mục tiêu giả: p95 < 300 ms; lỗi < 1%
+Đo thêm: DB query count, CPU, bộ nhớ, cache hit/miss
+Thử: cold cache, warm cache, cache lỗi, cập nhật giá
+Giới hạn: 100 request/phút/người dùng (mô phỏng)
+~~~
+
+### Lỗi hay gặp và cách kiểm tra
+Lỗi hay gặp: cache không giới hạn số khóa, TTL quá dài, cache dữ liệu từng tài khoản bằng khóa /profile, nhiều request cùng cache miss gây dồn tải. Cân nhắc gộp request đang chờ, timeout và giới hạn tài nguyên; không retry vô hạn khi phụ thuộc đang lỗi.
+
+PRACTICE: Dùng fake readCatalog đếm số lần gọi. Gọi hai lần trong TTL phải đọc nguồn một lần; sau invalidate phải đọc lại. Viết báo cáo nêu tải, p50/p95, lỗi và giới hạn thử nghiệm; không tự bắn tải vào host bên ngoài.
+Q: p95 nghĩa là gì?
++ 95% mẫu có thời gian không vượt ngưỡng đó
+- Mọi request đúng 95 mili giây
+- Tỷ lệ cache hit luôn là 95%
+Q: Khóa cache /profile chung nguy hiểm vì sao?
++ Có thể trả dữ liệu người này cho người khác
+- Vì URL quá ngắn
+- Vì TTL không bao giờ hết

@@ -1,0 +1,219 @@
+{
+ "no": 8,
+ "lv": "n5",
+ "title": "Chọn túi theo giá và kích thước",
+ "sub": "この 小さい かばんは いくらですか。",
+ "situation": "Cửa hàng giả cho so hai túi; không coi rẻ là mọi mặt tốt hơn.",
+ "lang": "ja-JP",
+ "lines": [
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "この 小さい かばんは いくらですか。",
+   "vi": "Túi nhỏ này bao nhiêu tiền?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "五百円です。",
+   "vi": "Năm trăm yên."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "あの 大きい かばんは いくらですか。",
+   "vi": "Túi to kia giá bao nhiêu?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "八百円です。新しい かばんです。",
+   "vi": "Tám trăm yên. Là túi mới."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "小さい かばんも 新しいですか。",
+   "vi": "Túi nhỏ cũng mới không?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "はい、両方とも 新しいです。",
+   "vi": "Có, cả hai đều mới."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "この 青い かばんを 買います。",
+   "vi": "Tôi mua túi xanh này."
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "小さい かばんですね。五百円です。",
+   "vi": "Túi nhỏ nhỉ. Năm trăm yên."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "はい。今日は 大きい かばんは 買いません。",
+   "vi": "Vâng. Hôm nay tôi không mua túi to."
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "ありがとうございます。こちらを どうぞ。",
+   "vi": "Cảm ơn. Mời nhận cái này."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "この 小さい かばんは いくらですか。",
+   "vi": "Túi nhỏ này bao nhiêu tiền?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "あの 大きい かばんは いくらですか。",
+   "vi": "Túi to kia giá bao nhiêu?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "小さい かばんも 新しいですか。",
+   "vi": "Túi nhỏ cũng mới không?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "はい、両方とも 新しいです。",
+   "vi": "Có, cả hai đều mới.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  },
+  {
+   "t": "この 青い かばんを 買います。",
+   "vi": "Tôi mua túi xanh này.",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "はい。今日は 大きい かばんは 買いません。",
+   "vi": "Vâng. Hôm nay tôi không mua túi to.",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Túi nhỏ giá gì?",
+   "o": [
+    "300 yên",
+    "800 yên",
+    "500 yên"
+   ],
+   "a": 2,
+   "e": "Bằng chứng trong hội thoại: 五百円です。 → Năm trăm yên."
+  },
+  {
+   "q": "Túi to thế nào?",
+   "o": [
+    "Mới,800 yên",
+    "Miễn phí",
+    "Cũ,500 yên"
+   ],
+   "a": 0,
+   "e": "Bằng chứng trong hội thoại: 八百円です。新しい かばんです。 → Tám trăm yên. Là túi mới."
+  },
+  {
+   "q": "Chỉ túi to mới phải không?",
+   "o": [
+    "Có",
+    "Không, cả hai mới",
+    "Không túi nào mới"
+   ],
+   "a": 1,
+   "e": "Bằng chứng trong hội thoại: はい、両方とも 新しいです。 → Có, cả hai đều mới."
+  },
+  {
+   "q": "Chọn túi màu gì?",
+   "o": [
+    "Xanh lam",
+    "Trắng",
+    "Đỏ"
+   ],
+   "a": 0,
+   "e": "Bằng chứng trong hội thoại: この 青い かばんを 買います。 → Tôi mua túi xanh này."
+  },
+  {
+   "q": "Cuối cùng có mua túi to không?",
+   "o": [
+    "Không",
+    "Mua cả hai",
+    "Có"
+   ],
+   "a": 0,
+   "e": "Bằng chứng trong hội thoại: はい。今日は 大きい かばんは 買いません。 → Vâng. Hôm nay tôi không mua túi to."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "この 青い かばんを 買います。",
+   "lang": "ja-JP",
+   "q": "Nghe và chọn nội dung đúng.",
+   "o": [
+    "Túi nhỏ cũng mới không?",
+    "Tôi mua túi xanh này.",
+    "Túi to kia giá bao nhiêu?"
+   ],
+   "a": 1,
+   "e": "Câu được đọc: この 青い かばんを 買います。 → Tôi mua túi xanh này."
+  },
+  {
+   "t": "dict",
+   "say": "はい。今日は 大きい かばんは 買いません。",
+   "lang": "ja-JP",
+   "a": "はい。今日は 大きい かばんは 買いません。",
+   "e": "Nghĩa của câu: Vâng. Hôm nay tôi không mua túi to. Viết đúng chữ Nhật và giữ nguyên phần điều kiện hoặc phủ định nếu có."
+  },
+  {
+   "t": "match",
+   "q": "Nối mẫu câu với ý nghĩa trong ngữ cảnh.",
+   "pairs": [
+    [
+     "この 小さい かばんは いくらですか。",
+     "Túi nhỏ này bao nhiêu tiền?"
+    ],
+    [
+     "あの 大きい かばんは いくらですか。",
+     "Túi to kia giá bao nhiêu?"
+    ],
+    [
+     "小さい かばんも 新しいですか。",
+     "Túi nhỏ cũng mới không?"
+    ],
+    [
+     "はい、両方とも 新しいです。",
+     "Có, cả hai đều mới."
+    ],
+    [
+     "この 青い かばんを 買います。",
+     "Tôi mua túi xanh này."
+    ],
+    [
+     "はい。今日は 大きい かばんは 買いません。",
+     "Vâng. Hôm nay tôi không mua túi to."
+    ]
+   ],
+   "e": "Nghĩa thuộc đúng tình huống; ghi chú giải thích mức lịch sự và cách luyện."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Bạn muốn mua túi to. Hỏi lại để xác nhận giá tám trăm yên.",
+   "model": "大きい かばんを お願いします。八百円ですね。",
+   "vi": "Cho tôi chiếc túi to. Giá tám trăm yên, đúng không?"
+  },
+  {
+   "p": "Đóng vai người bán, xác nhận chiếc túi nhỏ màu xanh giá năm trăm yên.",
+   "model": "青い 小さい かばんですね。五百円です。",
+   "vi": "Chiếc túi nhỏ màu xanh, đúng không? Giá năm trăm yên."
+  }
+ ]
+}

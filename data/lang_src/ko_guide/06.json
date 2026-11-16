@@ -1,0 +1,95 @@
+{
+ "no": 6,
+ "title": "Giao tiếp công sở bằng tiếng Hàn: xác nhận và bàn giao",
+ "sub": "Sổ tay tiếng Hàn tự soạn cho người Việt",
+ "for": "ref",
+ "parts": [
+  {
+   "k": "text",
+   "h": "Báo cáo giúp người khác hành động",
+   "html": "<p>Dự án giả Bến Mây thử một cổng đăng ký lớp. Khi báo lỗi, cần môi trường, bước tái hiện, kết quả mong đợi, thực tế và phạm vi ảnh hưởng đã biết. Không dùng nhận định “hệ thống tệ” thay cho bằng chứng. Tách nguyên nhân giả thuyết khỏi điều quan sát; không gửi log có dữ liệu riêng tư vào bài tập.</p><p>Giữ lịch sự nhưng trực tiếp: xác định vấn đề, điều cần người nghe làm, thời gian dự kiến và phần chưa biết. Không tự hứa thay đội khác. Nếu chưa được duyệt, nói đây là đề xuất hoặc đang cần xác nhận, tránh tạo cảm giác đã chốt.</p>"
+  },
+  {
+   "k": "grammar",
+   "h": "Câu báo cáo tự soạn",
+   "html": "<p>Dùng cấu trúc với dữ kiện thật của tình huống giả; không chép câu tiến độ khi công việc chưa được làm.</p>",
+   "table": [
+    [
+     "Mục đích",
+     "Câu mẫu",
+     "Nghĩa"
+    ],
+    [
+     "Tiến độ",
+     "어제 입력 검증을 구현했습니다.",
+     "Hôm qua đã làm kiểm dữ liệu đầu vào."
+    ],
+    [
+     "Bước tiếp",
+     "오늘은 경계값 테스트를 추가할 예정입니다.",
+     "Hôm nay dự định thêm test biên."
+    ],
+    [
+     "Trở ngại",
+     "확인이 필요한 요구 사항이 하나 있습니다.",
+     "Có một yêu cầu cần xác nhận."
+    ],
+    [
+     "Thực tế lỗi",
+     "수량을 바꾸어도 합계가 갱신되지 않습니다.",
+     "Đổi số lượng nhưng tổng không cập nhật."
+    ],
+    [
+     "Giới hạn hiểu biết",
+     "원인은 아직 확인하지 못했습니다.",
+     "Chưa xác nhận nguyên nhân."
+    ]
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Xác nhận yêu cầu và thương lượng phạm vi",
+   "html": "<p>제가 이해한 내용을 확인하고 싶습니다. 저장이 성공한 경우에만 알림을 보내는 것이 맞습니까? Nghĩa: Tôi muốn xác nhận cách hiểu. Chỉ gửi thông báo khi lưu thành công, đúng không? Câu hỏi nêu hành vi cụ thể, dễ được sửa hơn “yêu cầu là gì?”. Ghi riêng điều đã đồng ý và câu hỏi chưa chốt.</p><p>현재 범위라면 이틀로 예상하지만, 알림 기능이 포함되면 다시 산정해야 합니다. Dự kiến hai ngày theo phạm vi hiện tại, nhưng thêm thông báo thì cần tính lại. Đây là ước lượng có điều kiện, không phải từ chối trách nhiệm. Khi trả lời review, có thể nói 이 조건에서는 빈 값도 통과할 수 있습니다. 테스트를 추가해 주시겠습니까? Điều kiện này có thể cho giá trị trống qua, thêm test được không?</p>"
+  },
+  {
+   "k": "text",
+   "h": "Sự cố, email và bàn giao",
+   "html": "<p>일부 화면에서 저장이 되지 않는 현상을 확인했습니다. 영향 범위를 조사하고 있으며 다음 안내는 오후 세 시에 드리겠습니다. Đã thấy một số màn không lưu, đang điều tra phạm vi, sẽ cập nhật15 giờ. Chỉ nêu thời điểm đã thống nhất và có thể thực hiện; không tự bảo đảm dữ liệu không mất khi chưa kiểm.</p><p>Email bàn giao gồm mục đích, phạm vi hoàn tất, phần còn chờ, cách kiểm, người liên hệ và mốc cập nhật. Người nhận nhắc lại hành động tiếp theo để kiểm hiểu. Không đưa mật khẩu, token, host nội bộ thật hoặc thông tin học viên thật vào mẫu. Khi cần minh họa endpoint, dùng localhost hoặc tên miền ví dụ được quy định trong lớp.</p>"
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Điều gì phải tách trong báo lỗi?",
+   "o": [
+    "Quan sát và giả thuyết nguyên nhân",
+    "Chỉ tên người theo vai",
+    "Mọi câu phải dài bằng nhau"
+   ],
+   "a": 0,
+   "e": "Dữ kiện có thể kiểm khác suy đoán chưa xác nhận."
+  },
+  {
+   "t": "mc",
+   "q": "Ước lượng có điều kiện nên nêu gì?",
+   "o": [
+    "Cam kết vô hạn",
+    "Chỉ một con số không bối cảnh",
+    "Phạm vi/giả định và lúc cần tính lại"
+   ],
+   "a": 2,
+   "e": "Ước lượng cần gắn dữ kiện để người nghe ra quyết định."
+  },
+  {
+   "t": "mc",
+   "q": "Email bàn giao nên có gì?",
+   "o": [
+    "Chỉ lời cảm ơn",
+    "Việc xong,việc chờ,cách kiểm,đầu mối",
+    "Mật khẩu thật"
+   ],
+   "a": 1,
+   "e": "Bàn giao phải giúp người nhận tiếp tục công việc an toàn và rõ trách nhiệm."
+  }
+ ]
+}

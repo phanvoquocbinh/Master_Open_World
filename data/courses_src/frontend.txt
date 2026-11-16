@@ -1,0 +1,441 @@
+=== COURSE frontend
+name: Lập trình Frontend
+icon: 🎨
+floor: 7
+room: 702
+level: Cơ bản → Thực hành
+hours: 16
+summary: Tự xây trang thực đơn với HTML/CSS/DOM, dữ liệu bất đồng bộ, React, biểu mẫu dễ tiếp cận và kiểm thử hành vi UI.
+
+## LESSON frontend-01 | HTML ngữ nghĩa: trang thực đơn dễ dùng
+
+### Mục tiêu và tình huống
+Trang thực đơn giả lập Lá Mộc cần cấu trúc rõ như bảng chỉ dẫn ở căn tin: tiêu đề, nội dung chính và điều hướng. HTML mô tả ý nghĩa trước khi CSS trang trí. Dùng button cho hành động, a cho chuyển trang, label liên kết input. Mọi ví dụ chỉ dùng dữ liệu giả và localhost.
+
+### Khung tài liệu
+Lưu index.html UTF-8, mở bằng trình duyệt hoặc máy chủ tĩnh localhost. lang=vi giúp công cụ đọc màn hình; viewport để bố cục phù hợp thiết bị. main chỉ chứa nội dung chính; h1 nêu chủ đề toàn trang.
+~~~text
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thực đơn Lá Mộc</title>
+</head>
+<body><header><h1>Thực đơn hôm nay</h1></header>
+<main><p>Chọn một món cho bữa trưa.</p></main>
+</body></html>
+~~~
+
+### Danh sách và nút có ý nghĩa
+Chèn trong main. article nhóm một món độc lập; ul/li dùng đúng quan hệ danh sách. button có type rõ để không vô tình submit form bao quanh. Giá không nên chỉ được truyền bằng màu.
+~~~text
+<ul>
+ <li><article>
+  <h2>Cơm nấm</h2>
+  <p>Giá: 25.000 đồng</p>
+  <button type="button">Thêm cơm nấm</button>
+ </article></li>
+</ul>
+~~~
+
+### Biểu mẫu có nhãn
+for phải trùng id; placeholder không thay nhãn vì biến mất khi gõ. required hỗ trợ trình duyệt nhưng server vẫn phải validate. aria-describedby liên kết hướng dẫn, không đổi tên trường.
+~~~text
+<label for="note">Ghi chú cho bếp</label>
+<input id="note" name="note" maxlength="120" aria-describedby="note-help">
+<p id="note-help">Tối đa 120 ký tự; ví dụ: ít cay.</p>
+~~~
+
+### Lỗi hay gặp
+Dùng div có onclick làm nút khiến bàn phím và công cụ hỗ trợ khó sử dụng. Bỏ lang làm giọng đọc sai; nhảy h1 xuống h4 để lấy cỡ chữ làm mất cấu trúc. Dùng CSS để đổi cỡ chữ, giữ cấp tiêu đề theo ý nghĩa.
+
+PRACTICE: Tạo trang 3 món có một h1, main, danh sách và ba button mang tên riêng. Duyệt chỉ bằng Tab/Shift+Tab/Enter; kiểm mỗi điều khiển có tên rõ.
+Q: Thẻ nào phù hợp hành động thêm món?
++ button
+- div không tabindex
+- a không href
+Q: Placeholder có thay label được không?
++ Không, nhãn phải luôn nhận diện trường
+- Có trong mọi trường hợp
+- Chỉ cần màu nền là đủ
+
+## LESSON frontend-02 | CSS flex/grid và responsive
+
+### Mục tiêu và tình huống
+CSS giống sắp bàn ghế: Flexbox thuận một hàng/cột; Grid phù hợp hàng và cột cùng lúc. Thiết kế từ màn hình nhỏ rồi tăng cột khi đủ chỗ. Không giả định mọi người dùng cùng một độ phân giải; nội dung tiếng Việt dài có thể xuống dòng.
+
+### Quy tắc nền
+Đặt trong style hoặc file CSS bài tập. box-sizing giúp width tính cả padding/border. max-width giữ dòng không quá dài; margin-inline:auto căn giữa theo chiều viết. Không đặt chiều cao cố định cho đoạn chữ.
+~~~text
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; line-height: 1.5; }
+main { max-width: 70rem; margin-inline: auto; padding: 1rem; }
+button { font: inherit; min-height: 2.75rem; }
+~~~
+
+### Grid thích ứng không cần thiết bị cụ thể
+minmax cho thẻ tối thiểu 16rem nếu đủ không gian; min(100%,16rem) tránh tràn trên màn hẹp. auto-fit tự chia số cột. Kiểm với tên món dài, mức zoom 200% và chiều rộng 320px.
+~~~text
+.menu {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+ gap: 1rem;
+ list-style: none; padding: 0;
+}
+.menu article { border: 1px solid #666; padding: 1rem; }
+~~~
+
+### Flex và breakpoint theo nội dung
+flex-wrap cho các nút xuống hàng. Media query tăng khoảng cách khi vùng hiển thị đủ rộng; 48rem là lựa chọn bài tập, không phải chuẩn mọi thiết bị. Tránh dùng order để đảo thứ tự nhìn khác thứ tự bàn phím.
+~~~text
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+@media (min-width: 48rem) {
+ main { padding: 2rem; }
+}
+:focus-visible { outline: 3px solid #0645ad; outline-offset: 3px; }
+~~~
+
+### Lỗi hay gặp
+width:100vw có thể tạo thanh cuộn ngang khi có scrollbar; ưu tiên width:100% trong nhiều bố cục. Không chữa tràn bằng overflow:hidden rồi cắt nội dung. Đơn vị rem hỗ trợ cỡ chữ người dùng; kiểm độ tương phản bằng công cụ thay vì đoán bằng mắt.
+
+PRACTICE: Gắn class menu vào ul bài trước. Chụp hoặc quan sát ở 320, 768 và 1280px, sau đó zoom 200%. Tiêu chí: không cuộn ngang, chữ không bị cắt, nút có focus rõ.
+Q: Grid phù hợp nhất cho gì?
++ Bố cục cần hàng và cột
+- Gửi HTTP request
+- Lưu mật khẩu
+Q: Tên món dài bị cắt nên làm gì trước?
++ Kiểm ràng buộc kích thước và cho xuống dòng
+- Ẩn overflow toàn trang
+- Giảm chữ xuống không đọc được
+
+## LESSON frontend-03 | JavaScript DOM, sự kiện và trạng thái
+
+### Mục tiêu và tình huống
+DOM là cây đối tượng của trang; sự kiện giống chuông gọi phục vụ. Tách dữ liệu với hiển thị để tránh một phần trang báo 2 món, phần khác báo 3. Dùng module giúp biến không tràn phạm vi toàn cục. Đoạn script chạy sau khi HTML đã có hoặc dùng type=module.
+
+### HTML chuẩn bị điểm cập nhật
+Tên truy cập của nút rõ ràng; output hiển thị số lượng. aria-live=polite thông báo cập nhật khi phù hợp, không ép ngắt lời trình đọc màn hình.
+~~~text
+<button id="add" type="button">Thêm cơm nấm</button>
+<p>Số suất: <output id="qty" aria-live="polite">0</output></p>
+<script type="module" src="app.js"></script>
+~~~
+
+### Một nguồn trạng thái
+Lưu trong app.js bài thực hành. render chỉ cập nhật DOM; handler chỉ thay state rồi gọi render. const không khiến object bất biến, nhưng ví dụ dùng let số để dễ theo dõi. textContent hiển thị dữ liệu như chữ, tránh parse HTML đầu vào.
+~~~js
+const button = document.querySelector("#add");
+const output = document.querySelector("#qty");
+let quantity = 0;
+function render() { output.textContent = String(quantity); }
+button.addEventListener("click", () => {
+  quantity += 1;
+  render();
+});
+render();
+~~~
+
+### Ủy quyền sự kiện cho danh sách
+Đoạn riêng cần ul id=menu và button data-id="rice". closest tìm nút dù click vào phần tử con; contains giới hạn đúng vùng. Trong hệ thống thực tế, dữ liệu từ DOM vẫn phải được server xác minh.
+~~~js
+const menu = document.querySelector("#menu");
+menu.addEventListener("click", event => {
+  const button = event.target.closest("button[data-id]");
+  if (!button || !menu.contains(button)) return;
+  console.log({ selectedId: button.dataset.id });
+});
+~~~
+
+### Lỗi hay gặp
+querySelector có thể trả null khi id sai hoặc script chạy quá sớm. Không đọc innerHTML rồi cộng số vì đó là chuỗi và có nguy cơ chèn HTML. Không gắn lại listener mỗi lần render nếu listener cũ còn tồn tại.
+
+PRACTICE: Thêm nút giảm và reset; không để quantity âm. Tiêu chí: thêm 2, giảm 1, reset cho 0; giải thích vì sao textContent phù hợp hiển thị tên người dùng.
+Q: Cách hiển thị dữ liệu văn bản không cần HTML?
++ textContent
+- innerHTML từ đầu vào bất kỳ
+- eval
+Q: addEventListener làm gì?
++ Đăng ký hàm xử lý một loại sự kiện
+- Gọi API đồng bộ bắt buộc
+- Tạo cơ sở dữ liệu
+
+## LESSON frontend-04 | fetch/async: tải dữ liệu và xử lý lỗi
+
+### Mục tiêu và tình huống
+Gửi yêu cầu giống đặt món có thời gian chờ: cần trạng thái đang tải, thành công, thất bại và hủy. fetch không tự reject chỉ vì HTTP 404/500; phải kiểm response.ok. Ví dụ API localhost là hợp đồng thực hành, cần có server trả JSON.
+
+### Hàm lấy dữ liệu có kiểm HTTP
+Tách hàm để kiểm thử dễ. signal cho phép caller hủy; không nuốt lỗi rồi trả [] vì sẽ biến lỗi mạng thành trạng thái không có món. Kiểm schema tối thiểu trước khi dùng dữ liệu.
+~~~js
+async function loadMenu(signal) {
+ const response = await fetch("http://localhost:3000/orders", { signal });
+ if (!response.ok) throw new Error(`HTTP ${response.status}`);
+ const data = await response.json();
+ if (!Array.isArray(data)) throw new Error("invalid_schema");
+ return data;
+}
+~~~
+
+### Hiển thị trạng thái
+Đoạn riêng cần phần tử id=status. AbortError là hủy chủ động, không phải lỗi cần báo đỏ. finally chạy cả khi thành công và thất bại; nút tải cần được mở lại tại đó trong ứng dụng có nút.
+~~~js
+const status = document.querySelector("#status");
+const controller = new AbortController();
+status.textContent = "Đang tải…";
+try {
+ const rows = await loadMenu(controller.signal);
+ status.textContent = `Có ${rows.length} món`;
+} catch (error) {
+ if (error.name !== "AbortError") status.textContent = "Chưa tải được. Hãy thử lại.";
+}
+// controller.abort() khi người dùng rời màn hình
+~~~
+
+### Bẫy bất đồng bộ cần tái hiện
+Đây là bảng kiểm tình huống. Race condition xảy ra khi tìm kiếm cũ trả sau và ghi đè kết quả mới; dùng hủy hoặc request id để bỏ kết quả lỗi thời. Không tự retry POST tạo đơn nếu chưa có thiết kế idempotency.
+~~~text
+200 + mảng hợp lệ -> hiển thị
+200 + JSON sai schema -> thông báo lỗi dữ liệu
+404/500 -> kiểm response.ok
+Mất mạng -> catch TypeError
+Hủy chủ động -> không báo lỗi hệ thống
+~~~
+
+### Lỗi hay gặp
+Quên await response.json() tạo Promise thay vì dữ liệu. mode:no-cors không sửa CORS mà thường tạo response opaque không đọc được. Cấu hình CORS ở server và dùng đúng origin; không tắt bảo vệ trình duyệt.
+
+PRACTICE: Giả lập server trả 200, 500, JSON hỏng và chậm. Ghi trạng thái UI từng trường hợp. Tiêu chí: không hiển thị thành công khi 500, có cách thử lại và không ghi đè bằng kết quả cũ.
+Q: fetch nhận HTTP 404 thì sao?
++ Promise có thể resolve; cần kiểm response.ok
+- Luôn ném exception ngay
+- Tự chuyển thành 200
+Q: await response.json() trả gì?
++ Giá trị JSON đã phân tích nếu hợp lệ
+- Luôn là chuỗi HTML
+- Mã trạng thái HTTP
+
+## LESSON frontend-05 | React component, props và state
+
+### Mục tiêu và tình huống
+Component giống quầy món có dữ liệu đầu vào và hành vi rõ. Props do cha truyền xuống; state là bộ nhớ của component. Ví dụ JSX cần môi trường React có công cụ build đã thiết lập, không dán trực tiếp vào HTML thường. Các ví dụ là các file bài tập riêng.
+
+### Component nhận props
+Tên component viết hoa. Không sửa props vì cha sở hữu dữ liệu. Nút có nội dung rõ cho cả người nhìn và công cụ trợ năng. JSX cần htmlFor thay for khi dùng label.
+~~~js
+export function Dish({ name, price, onAdd }) {
+ return <article>
+  <h2>{name}</h2>
+  <p>{price.toLocaleString("vi-VN")} đồng</p>
+  <button type="button" onClick={onAdd}>Thêm {name}</button>
+ </article>;
+}
+~~~
+
+### State và cập nhật dựa trên giá trị trước
+Hàm updater q=>q+1 an toàn khi nhiều cập nhật được xếp hàng. Không gọi setter ngay trong render vì tạo vòng lặp. Dữ liệu suy ra như total nên tính từ state thay vì lưu một state thứ hai dễ lệch.
+~~~js
+import { useState } from "react";
+import { Dish } from "./Dish.jsx";
+export function Cart() {
+ const [quantity, setQuantity] = useState(0);
+ const total = quantity * 25000;
+ return <>
+  <Dish name="Cơm nấm" price={25000} onAdd={() => setQuantity(q => q + 1)} />
+  <p>Số suất: {quantity}; tổng: {total} đồng</p>
+ </>;
+}
+~~~
+
+### Danh sách có key ổn định
+Key là định danh giữa các lần render. Dùng id dữ liệu, không dùng chỉ số nếu danh sách có thể thêm/xóa/đổi thứ tự. map phải trả JSX; dấu ngoặc tròn giúp tránh quên return trong block.
+~~~js
+const dishes = [{ id: "rice", name: "Cơm nấm" }, { id: "noodle", name: "Bún rau" }];
+export function Menu() {
+ return <ul>{dishes.map(d => <li key={d.id}>{d.name}</li>)}</ul>;
+}
+~~~
+
+### Lỗi hay gặp
+quantity++ không thông báo React render lại. Gọi onClick={setQuantity(quantity+1)} thực thi ngay lúc render; truyền hàm mới đúng. Không sửa trực tiếp mảng state bằng push; tạo mảng mới để giữ mô hình cập nhật rõ ràng.
+
+PRACTICE: Tạo Cart có tăng, giảm, xóa toàn bộ; giới hạn không âm. Khi giá đổi, total phải tự cập nhật từ quantity và price mà không cần effect. Tiêu chí: hành vi đúng qua 5 lần bấm liên tục.
+Q: Props nên được component con xử lý thế nào?
++ Đọc và gọi callback khi cần thay đổi ở cha
+- Tự sửa trực tiếp object cha truyền
+- Luôn chép thành state dù không cần
+Q: Cách tăng state dựa trên trước đó?
++ setQuantity(q => q + 1)
+- quantity++ rồi mong render
+- setQuantity trong thân render
+
+## LESSON frontend-06 | Effect, hủy request và đồng bộ bên ngoài
+
+### Mục tiêu và tình huống
+Effect đồng bộ với hệ thống ngoài React như subscription hoặc request. Không dùng effect để tính tổng từ quantity nếu tính được trong render. Cleanup chạy trước effect kế tiếp khi dependency đổi và khi unmount; môi trường phát triển có thể chạy thêm chu kỳ để phát hiện cleanup thiếu.
+
+### Effect lấy dữ liệu theo id
+Đoạn độc lập cần React. Hàm effect không async trực tiếp vì React cần nhận cleanup, không phải Promise. Hủy request cũ và kiểm active tránh cập nhật từ phản hồi lỗi thời. Mọi biến phản ứng được dùng phải được xét trong dependencies.
+~~~js
+import { useEffect, useState } from "react";
+export function Order({ id }) {
+ const [state, setState] = useState({ loading: true });
+ useEffect(() => {
+  const c = new AbortController(); let active = true;
+  setState({ loading: true });
+  fetch(`http://localhost:3000/orders/${encodeURIComponent(id)}`, { signal: c.signal })
+   .then(r => { if (!r.ok) throw new Error("http"); return r.json(); })
+   .then(data => { if (active) setState({ data }); })
+   .catch(e => { if (active && e.name !== "AbortError") setState({ error: true }); });
+  return () => { active = false; c.abort(); };
+ }, [id]);
+ if (state.loading) return <p>Đang tải…</p>;
+ if (state.error) return <p>Không tải được đơn.</p>;
+ return <p>{state.data.dish}</p>;
+}
+~~~
+
+### Đăng ký và gỡ sự kiện
+Cùng tham chiếu onResize được dùng khi add/remove. Không bỏ dependency chỉ để im cảnh báo; xác định dữ liệu nào effect thực sự phụ thuộc. Ví dụ subscription không cần đăng ký lại mỗi render.
+~~~js
+useEffect(() => {
+ function onResize() { console.log(window.innerWidth); }
+ window.addEventListener("resize", onResize);
+ return () => window.removeEventListener("resize", onResize);
+}, []);
+~~~
+
+### Kiểm hành vi cleanup
+Bảng là kịch bản kiểm thử. Trong phát triển, đừng dùng ref chặn effect chạy thêm để che lỗi thiếu cleanup. Cần đảm bảo mỗi setup có một cleanup tương ứng.
+~~~text
+Hiển thị id=1 -> request A
+Đổi sang id=2 -> cleanup A, request B
+B trả trước -> hiện đơn 2
+A trả sau -> không ghi đè đơn 2
+Rời màn hình -> hủy B và gỡ subscription
+~~~
+
+### Lỗi hay gặp
+Effect phụ thuộc state mà chính nó cập nhật có thể lặp vô hạn. Không disable lint dependency theo thói quen. Dùng router/data library khi ứng dụng lớn để xử lý cache, tải trước và hủy; hiểu vòng đời vẫn cần thiết.
+
+PRACTICE: Đổi id nhanh 1→2 với server cố tình làm id=1 chậm hơn. Tiêu chí: cuối cùng hiển thị đơn 2, không nháy trở lại đơn 1. Mount/unmount component nhiều lần và xác nhận chỉ một listener còn hiệu lực.
+Q: Effect callback async trực tiếp có vấn đề gì?
++ Nó trả Promise thay vì cleanup mà React mong đợi
+- Nó luôn nhanh hơn
+- Nó tự gỡ mọi listener
+Q: Dependency [id] có nghĩa gì?
++ Đồng bộ lại khi id thay đổi
+- Chỉ chạy một lần vĩnh viễn
+- Chạy khi mọi biến toàn cục đổi
+
+## LESSON frontend-07 | Form, validate và accessibility
+
+### Mục tiêu và tình huống
+Biểu mẫu giống tờ phiếu: nhãn rõ, chỉ dẫn trước khi điền, lỗi ở đúng trường và có hướng sửa. React controlled input lấy value từ state. Validate phía UI hỗ trợ người dùng; server vẫn quyết định dữ liệu hợp lệ. Không chỉ dùng màu đỏ để báo lỗi.
+
+### Form có quản lý lỗi
+Đoạn độc lập; trim khi submit để người dùng vẫn gõ tự nhiên. onSubmit xử lý cả click và Enter. aria-invalid phản ánh lỗi; aria-describedby liên kết thông báo. Ví dụ chỉ minh họa UI, chưa gửi API.
+~~~js
+import { useState } from "react";
+export function NoteForm() {
+ const [note, setNote] = useState("");
+ const [error, setError] = useState("");
+ function submit(event) {
+  event.preventDefault();
+  if (!note.trim()) { setError("Hãy nhập ghi chú."); return; }
+  setError("");
+ }
+ return <form onSubmit={submit} noValidate>
+  <label htmlFor="note">Ghi chú</label>
+  <input id="note" value={note} onChange={e => setNote(e.target.value)} aria-invalid={!!error} aria-describedby="error" />
+  <p id="error" role="alert">{error}</p>
+  <button type="submit">Lưu ghi chú</button>
+ </form>;
+}
+~~~
+
+### Focus phải nhìn thấy
+Không outline:none nếu không có chỉ báo thay thế rõ. Tránh gán tabindex dương để ép thứ tự vì khó bảo trì. Khi submit nhiều trường lỗi, tập trung vào tóm tắt lỗi hoặc trường lỗi đầu theo thiết kế có kiểm tra người dùng.
+~~~text
+:focus-visible { outline: 3px solid #0645ad; outline-offset: 3px; }
+[aria-invalid="true"] { border: 2px solid #a40000; }
+/* Luôn có thông báo bằng chữ đi kèm màu. */
+~~~
+
+### Checklist hành vi form
+disabled khi gửi giúp giảm thao tác trùng nhưng không thay idempotency phía server. Thông báo thành công dùng vùng status hợp lý; đừng chuyển focus bất ngờ ở mọi phím gõ.
+~~~text
+Tab -> đến đúng trường theo thứ tự đọc
+Enter -> submit một lần
+Trống -> thông báo cách sửa
+Hợp lệ -> cho biết đang gửi/thành công/thất bại
+Mạng lỗi -> giữ dữ liệu người dùng đã nhập
+~~~
+
+### Lỗi hay gặp
+Đổi input từ undefined sang chuỗi gây cảnh báo controlled/uncontrolled; khởi tạo state="". Chặn paste không tăng bảo mật mà làm khó sử dụng. Tự động trim trong onChange có thể gây khó gõ dấu cách; chọn thời điểm chuẩn hóa hợp lý.
+
+PRACTICE: Bổ sung giới hạn 120 ký tự và thông báo cụ thể. Kiểm bằng bàn phím và công cụ đọc màn hình nếu có. Tiêu chí: lỗi được đọc, dữ liệu không mất khi API lỗi và không gửi hai lần ngoài ý muốn.
+Q: aria-describedby dùng để làm gì?
++ Liên kết mô tả/hướng dẫn cho điều khiển
+- Thay validate phía server
+- Tự mã hóa dữ liệu
+Q: Validate ở trình duyệt có đủ không?
++ Không, server vẫn phải validate
+- Có nếu dùng React
+- Có nếu ẩn nút submit
+
+## LESSON frontend-08 | Test UI bằng Testing Library và Playwright
+
+### Mục tiêu và tình huống
+Kiểm hành vi người dùng quan sát được: đọc tên món, bấm thêm, thấy số lượng; tránh phụ thuộc class CSS hoặc state nội bộ. Testing Library kiểm component trong môi trường test; Playwright kiểm luồng trình duyệt và tích hợp. Tình huống lỗi quan trọng cần có test riêng.
+
+### Component test có tương tác thật
+Ví dụ Vitest cần cấu hình jsdom và jest-dom/vitest trong setup. Cart là component bài 5; screen tìm theo role và tên gần cách người dùng trợ năng nhận diện. userEvent bất đồng bộ cần await.
+~~~js
+import { test, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import "@testing-library/jest-dom/vitest";
+import { Cart } from "./Cart.jsx";
+test("thêm một suất", async () => {
+ const user = userEvent.setup();
+ render(<Cart />);
+ await user.click(screen.getByRole("button", { name: "Thêm Cơm nấm" }));
+ expect(screen.getByText(/Số suất: 1/)).toBeInTheDocument();
+});
+~~~
+
+### E2E bằng locator có ý nghĩa
+Cần server React chạy ở localhost:3000 theo cấu hình bài. web-first assertion chờ điều kiện tự động; không thêm timeout ngủ tùy tiện. Test cần trạng thái đầu rõ, không phụ thuộc lần chạy trước.
+~~~js
+import { test, expect } from "@playwright/test";
+test("người học thêm món", async ({ page }) => {
+ await page.goto("http://localhost:3000");
+ await page.getByRole("button", { name: "Thêm Cơm nấm", exact: true }).click();
+ await expect(page.getByText(/Số suất: 1/)).toBeVisible();
+});
+~~~
+
+### Test lỗi mà không gọi dịch vụ thật
+Route mock phải khớp request thực tế; ví dụ trang gọi /orders trên cùng server. Gửi 500 để kiểm UI thông báo thử lại, không diễn giải thành giỏ hàng rỗng. Đoạn này là test riêng cho trang tải danh sách.
+~~~js
+test("báo lỗi tải danh sách", async ({ page }) => {
+ await page.route("**/orders", route => route.fulfill({ status: 500, contentType: "application/json", body: "{}" }));
+ await page.goto("http://localhost:3000/menu");
+ await expect(page.getByText("Chưa tải được. Hãy thử lại.")).toBeVisible();
+});
+~~~
+
+### Lỗi hay gặp
+Chọn .card:nth-child(3) dễ vỡ khi bố cục đổi; chọn theo role/name khi phù hợp. Snapshot toàn trang không thay kiểm hành vi. Test bằng bàn phím và zoom phát hiện lớp lỗi mà unit test không thể đảm bảo.
+
+PRACTICE: Viết test tăng/giảm số lượng, submit trống, tải lỗi và thao tác chỉ bằng bàn phím. Cố ý làm sai hành vi để xác nhận test phát hiện được. Ghi cách chạy và điều kiện server.
+Q: Vì sao ưu tiên getByRole với tên?
++ Gần cách người dùng nhận diện điều khiển và bền hơn class trang trí
+- Để test không cần assert
+- Để luôn bỏ qua accessibility
+Q: Thay sleep cố định bằng gì trong Playwright?
++ Assertion tự chờ điều kiện như toBeVisible
+- Chờ 30 giây trong mọi test
+- Bỏ mọi bước chờ

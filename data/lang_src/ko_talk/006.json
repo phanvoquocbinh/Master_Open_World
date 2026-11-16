@@ -1,0 +1,218 @@
+{
+ "no": 6,
+ "lv": "t1",
+ "title": "Gọi đồ uống và hỏi giá",
+ "sub": "무엇을 드릴까요?",
+ "situation": "Tại quán giả Lá Sớm, khách gọi đồ uống, số lượng và xác nhận giá. Không có giao dịch thật.",
+ "lang": "ko-KR",
+ "lines": [
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "무엇을 드릴까요?",
+   "vi": "Anh/chị dùng gì?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "따뜻한 차 한 잔 주세요.",
+   "vi": "Cho tôi một cốc trà nóng."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "빵도 드릴까요?",
+   "vi": "Anh/chị có dùng bánh mì không?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "네. 작은 빵 하나 주세요.",
+   "vi": "Có. Cho tôi một chiếc bánh nhỏ."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "음료는 한 잔 맞아요?",
+   "vi": "Đồ uống là một cốc, đúng không?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "네, 한 잔입니다.",
+   "vi": "Đúng, một cốc."
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "차는 삼천 원이고 빵은 이천 원입니다.",
+   "vi": "Trà giá ba nghìn won, bánh giá hai nghìn won."
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "모두 오천 원이에요?",
+   "vi": "Tổng cộng năm nghìn won phải không?"
+  },
+  {
+   "s": "다온",
+   "g": "f",
+   "t": "네. 여기에서 드세요?",
+   "vi": "Đúng. Anh/chị dùng ở đây à?"
+  },
+  {
+   "s": "서린",
+   "g": "m",
+   "t": "아니요. 가지고 갈게요.",
+   "vi": "Không. Tôi sẽ mang đi."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "무엇을 드릴까요?",
+   "vi": "Anh/chị dùng gì?",
+   "note": "한 잔 đếm một cốc; 하나 đếm một vật trong yêu cầu này. 주세요 là yêu cầu lịch sự, không bỏ nhãn đồ uống."
+  },
+  {
+   "t": "따뜻한 차 한 잔 주세요.",
+   "vi": "Cho tôi một cốc trà nóng.",
+   "note": "한 잔 đếm một cốc; 하나 đếm một vật trong yêu cầu này. 주세요 là yêu cầu lịch sự, không bỏ nhãn đồ uống."
+  },
+  {
+   "t": "빵도 드릴까요?",
+   "vi": "Anh/chị có dùng bánh mì không?",
+   "note": "한 잔 đếm một cốc; 하나 đếm một vật trong yêu cầu này. 주세요 là yêu cầu lịch sự, không bỏ nhãn đồ uống."
+  },
+  {
+   "t": "네. 작은 빵 하나 주세요.",
+   "vi": "Có. Cho tôi một chiếc bánh nhỏ.",
+   "note": "한 잔 đếm một cốc; 하나 đếm một vật trong yêu cầu này. 주세요 là yêu cầu lịch sự, không bỏ nhãn đồ uống."
+  },
+  {
+   "t": "음료는 한 잔 맞아요?",
+   "vi": "Đồ uống là một cốc, đúng không?",
+   "note": "한 잔 đếm một cốc; 하나 đếm một vật trong yêu cầu này. 주세요 là yêu cầu lịch sự, không bỏ nhãn đồ uống."
+  },
+  {
+   "t": "네, 한 잔입니다.",
+   "vi": "Đúng, một cốc.",
+   "note": "한 잔 đếm một cốc; 하나 đếm một vật trong yêu cầu này. 주세요 là yêu cầu lịch sự, không bỏ nhãn đồ uống."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Đồ uống được chọn?",
+   "o": [
+    "Trà nóng",
+    "Cà phê đá",
+    "Nước cam"
+   ],
+   "a": 0,
+   "e": "따뜻한차."
+  },
+  {
+   "q": "Khách lấy mấy cốc?",
+   "o": [
+    "Hai",
+    "Ba",
+    "Một"
+   ],
+   "a": 2,
+   "e": "한잔."
+  },
+  {
+   "q": "Bánh giá bao nhiêu?",
+   "o": [
+    "5.000 won",
+    "2.000 won",
+    "3.000 won"
+   ],
+   "a": 1,
+   "e": "빵은이천원."
+  },
+  {
+   "q": "Tổng bao nhiêu?",
+   "o": [
+    "5.000 won",
+    "2.000 won",
+    "3.000 won"
+   ],
+   "a": 0,
+   "e": "삼천+이천=오천."
+  },
+  {
+   "q": "Khách dùng ở đâu?",
+   "o": [
+    "Ăn tại quán",
+    "Trong lớp theo đoạn",
+    "Mang đi"
+   ],
+   "a": 2,
+   "e": "가지고갈게요."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "따뜻한 차 ___ 주세요.",
+   "a": "한 잔",
+   "e": "한 잔 đếm một cốc; 하나 đếm một vật trong yêu cầu này. 주세요 là yêu cầu lịch sự, không bỏ nhãn đồ uống. Câu đầy đủ: 따뜻한 차 한 잔 주세요. → Cho tôi một cốc trà nóng."
+  },
+  {
+   "t": "listen",
+   "say": "차는 삼천 원이고 빵은 이천 원입니다.",
+   "lang": "ko-KR",
+   "q": "Ý nào đúng với câu vừa nghe?",
+   "o": [
+    "Trà giá ba nghìn won, bánh giá hai nghìn won.",
+    "Anh/chị có dùng bánh mì không?",
+    "Đúng. Anh/chị dùng ở đây à?"
+   ],
+   "a": 0,
+   "e": "Đối chiếu đúng câu: Trà giá ba nghìn won, bánh giá hai nghìn won."
+  },
+  {
+   "t": "match",
+   "q": "Nối cụm chức năng với nghĩa trong ngữ cảnh",
+   "pairs": [
+    [
+     "무엇을 드릴까요?",
+     "Anh/chị dùng gì?"
+    ],
+    [
+     "따뜻한 차 한 잔 주세요.",
+     "Cho tôi một cốc trà nóng."
+    ],
+    [
+     "빵도 드릴까요?",
+     "Anh/chị có dùng bánh mì không?"
+    ],
+    [
+     "네. 작은 빵 하나 주세요.",
+     "Có. Cho tôi một chiếc bánh nhỏ."
+    ],
+    [
+     "음료는 한 잔 맞아요?",
+     "Đồ uống là một cốc, đúng không?"
+    ],
+    [
+     "네, 한 잔입니다.",
+     "Đúng, một cốc."
+    ]
+   ],
+   "e": "Đọc cả câu theo cụm; chú ý ý định và mức lịch sự."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Đổi sang hai cốc nước và một chiếc bánh; yêu cầu rõ số lượng.",
+   "model": "물 두 잔 주세요. 빵도 하나 주세요. 가지고 갈게요.",
+   "vi": "Cho tôi hai cốc nước và một chiếc bánh. Tôi sẽ mang đi."
+  },
+  {
+   "p": "Bạn là người bán: trà giá ba nghìn won, xác nhận khách có dùng tại quán không.",
+   "model": "차는 삼천 원입니다. 한 잔 맞아요? 여기에서 드세요?",
+   "vi": "Trà giá ba nghìn won. Một cốc đúng không? Anh/chị dùng tại đây à?"
+  }
+ ]
+}

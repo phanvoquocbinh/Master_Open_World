@@ -1,0 +1,219 @@
+{
+ "no": 6,
+ "lv": "n5",
+ "title": "Gọi bữa trưa và xác nhận giá",
+ "sub": "すみません。きのこご飯は ありますか。",
+ "situation": "Quầy ăn giả có cơm nấm giá ba trăm yên và trà giá một trăm yên. Các giá chỉ để luyện số, không mô tả thị trường.",
+ "lang": "ja-JP",
+ "lines": [
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "すみません。きのこご飯は ありますか。",
+   "vi": "Xin hỏi, có cơm nấm không?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "はい。三百円です。",
+   "vi": "Có. Ba trăm yên."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "お茶は いくらですか。",
+   "vi": "Trà bao nhiêu tiền?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "百円です。水は 無料です。",
+   "vi": "Một trăm yên. Nước miễn phí."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "ご飯を 一つと お茶を 一つ お願いします。",
+   "vi": "Cho tôi một cơm và một trà."
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "はい。全部で 四百円です。",
+   "vi": "Vâng. Tất cả bốn trăm yên."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "ここで 食べても いいですか。",
+   "vi": "Ăn tại đây được không?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "はい、あの 机で どうぞ。",
+   "vi": "Vâng, mời ở bàn kia."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "水も いただけますか。",
+   "vi": "Tôi xin cả nước được không?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "はい。こちらです。",
+   "vi": "Vâng. Đây ạ."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "すみません。きのこご飯は ありますか。",
+   "vi": "Xin hỏi, có cơm nấm không?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "お茶は いくらですか。",
+   "vi": "Trà bao nhiêu tiền?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "ご飯を 一つと お茶を 一つ お願いします。",
+   "vi": "Cho tôi một cơm và một trà.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  },
+  {
+   "t": "はい。全部で 四百円です。",
+   "vi": "Vâng. Tất cả bốn trăm yên.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  },
+  {
+   "t": "ここで 食べても いいですか。",
+   "vi": "Ăn tại đây được không?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "水も いただけますか。",
+   "vi": "Tôi xin cả nước được không?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Cơm nấm giá bao nhiêu?",
+   "o": [
+    "100 yên",
+    "300 yên",
+    "400 yên"
+   ],
+   "a": 1,
+   "e": "Bằng chứng trong hội thoại: はい。三百円です。 → Có. Ba trăm yên."
+  },
+  {
+   "q": "Trà giá bao nhiêu?",
+   "o": [
+    "300 yên",
+    "100 yên",
+    "Miễn phí"
+   ],
+   "a": 1,
+   "e": "Bằng chứng trong hội thoại: 百円です。水は 無料です。 → Một trăm yên. Nước miễn phí."
+  },
+  {
+   "q": "Tổng cơm và trà?",
+   "o": [
+    "500 yên",
+    "300 yên",
+    "400 yên"
+   ],
+   "a": 2,
+   "e": "Bằng chứng trong hội thoại: はい。全部で 四百円です。 → Vâng. Tất cả bốn trăm yên."
+  },
+  {
+   "q": "Ăn ở đâu?",
+   "o": [
+    "Bàn kia",
+    "Ngoài ga",
+    "Không được ăn tại chỗ"
+   ],
+   "a": 0,
+   "e": "Bằng chứng trong hội thoại: はい、あの 机で どうぞ。 → Vâng, mời ở bàn kia."
+  },
+  {
+   "q": "Nước thế nào?",
+   "o": [
+    "100 yên",
+    "Miễn phí",
+    "Không có"
+   ],
+   "a": 1,
+   "e": "Bằng chứng trong hội thoại: 百円です。水は 無料です。 → Một trăm yên. Nước miễn phí."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "ここで 食べても いいですか。",
+   "lang": "ja-JP",
+   "q": "Nghe và chọn nội dung đúng.",
+   "o": [
+    "Ăn tại đây được không?",
+    "Trà bao nhiêu tiền?",
+    "Cho tôi một cơm và một trà."
+   ],
+   "a": 0,
+   "e": "Câu được đọc: ここで 食べても いいですか。 → Ăn tại đây được không?"
+  },
+  {
+   "t": "dict",
+   "say": "水も いただけますか。",
+   "lang": "ja-JP",
+   "a": "水も いただけますか。",
+   "e": "Nghĩa của câu: Tôi xin cả nước được không? Viết đúng chữ Nhật và giữ nguyên phần điều kiện hoặc phủ định nếu có."
+  },
+  {
+   "t": "match",
+   "q": "Nối mẫu câu với ý nghĩa trong ngữ cảnh.",
+   "pairs": [
+    [
+     "すみません。きのこご飯は ありますか。",
+     "Xin hỏi, có cơm nấm không?"
+    ],
+    [
+     "お茶は いくらですか。",
+     "Trà bao nhiêu tiền?"
+    ],
+    [
+     "ご飯を 一つと お茶を 一つ お願いします。",
+     "Cho tôi một cơm và một trà."
+    ],
+    [
+     "はい。全部で 四百円です。",
+     "Vâng. Tất cả bốn trăm yên."
+    ],
+    [
+     "ここで 食べても いいですか。",
+     "Ăn tại đây được không?"
+    ],
+    [
+     "水も いただけますか。",
+     "Tôi xin cả nước được không?"
+    ]
+   ],
+   "e": "Nghĩa thuộc đúng tình huống; ghi chú giải thích mức lịch sự và cách luyện."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Bạn đổi sang cơm và nước, rồi xác nhận tổng là ba trăm yên.",
+   "model": "きのこご飯と 水を お願いします。全部で 三百円ですね。",
+   "vi": "Cho tôi cơm nấm và nước. Tất cả là ba trăm yên, đúng không?"
+  },
+  {
+   "p": "Đóng vai người bán, báo trà một trăm yên và nước miễn phí.",
+   "model": "お茶は 百円です。水は 無料です。",
+   "vi": "Trà giá một trăm yên. Nước miễn phí."
+  }
+ ]
+}

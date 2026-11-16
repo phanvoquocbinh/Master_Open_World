@@ -1,0 +1,219 @@
+{
+ "no": 26,
+ "lv": "it",
+ "title": "Báo lỗi có bước tái hiện và mức ảnh hưởng",
+ "sub": "検証環境で 登録ボタンを 一回 押したところ、完了の メッセージが 二回 表示されました。再現手順を 共有してもよいですか。",
+ "situation": "Người kiểm thử báo một lần bấm đăng ký nhưng hiện hai thông báo. Họ chưa kết luận dữ liệu lưu trùng khi chưa kiểm tra cơ sở dữ liệu.",
+ "lang": "ja-JP",
+ "lines": [
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "検証環境で 登録ボタンを 一回 押したところ、完了の メッセージが 二回 表示されました。再現手順を 共有してもよいですか。",
+   "vi": "Trong môi trường kiểm thử, khi bấm nút đăng ký một lần, thông báo hoàn tất lại xuất hiện hai lần. Tôi chia sẻ các bước tái hiện được không?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "お願いします。期待した 結果と 実際の 結果、発生した 条件を 分けて 教えてください。",
+   "vi": "Nhờ bạn làm vậy. Xin nêu riêng kết quả mong đợi, kết quả thực tế và điều kiện xảy ra."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "新しい 仮の 利用者で フォームを 入力し、送信を 一回だけ 押します。期待は 一回の 完了表示ですが、実際は 同じ 文が 二回出ます。",
+   "vi": "Tôi điền biểu mẫu bằng một người dùng giả mới rồi chỉ bấm gửi một lần. Mong đợi là một thông báo hoàn tất, nhưng thực tế cùng câu xuất hiện hai lần."
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "通信が 遅い 場合だけですか。それとも 通常の 条件でも 再現していますか。",
+   "vi": "Chỉ xảy ra khi mạng chậm hay cũng tái hiện trong điều kiện thông thường?"
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "通常でも 三回中 二回 起きました。遅い 条件では まだ 確認していません。記録には その範囲を 書きました。",
+   "vi": "Trong điều kiện thường, ba lần thử thì xảy ra hai lần. Tôi chưa kiểm tra mạng chậm và đã ghi rõ phạm vi đó."
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "登録データ自体が 二重になったかは、別に 確認する 必要がありますね。表示だけの 問題かもしれません。",
+   "vi": "Chúng ta cần kiểm riêng xem dữ liệu đăng ký có bị trùng không. Có thể vấn đề chỉ nằm ở hiển thị."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "はい。現時点では 画面上の 重複だけが 確認済みです。実際の 個人情報は使わず、仮の データで 試しています。",
+   "vi": "Đúng. Hiện chỉ xác nhận phần trùng trên màn hình. Tôi dùng dữ liệu giả, không dùng thông tin cá nhân thật."
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "こちらで リクエストの 回数と 応答を 調べます。ログには トークンや 入力内容を そのまま 残さないようにします。",
+   "vi": "Tôi sẽ kiểm số yêu cầu và phản hồi. Tôi sẽ tránh ghi nguyên token hoặc nội dung nhập vào nhật ký."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "修正後は、表示だけでなく 一回の 操作で 一件だけ 登録されることも 確認したいです。",
+   "vi": "Sau khi sửa, tôi muốn kiểm cả việc một thao tác chỉ tạo một bản ghi, ngoài việc thông báo hiển thị đúng."
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "了解です。原因が わかったら、修正内容と 再発を 防ぐ テストを 同じ チケットに まとめます。",
+   "vi": "Tôi hiểu. Khi biết nguyên nhân, tôi sẽ ghi nội dung sửa và kiểm thử ngăn tái diễn trong cùng phiếu công việc."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "検証環境で 登録ボタンを 一回 押したところ、完了の メッセージが 二回 表示されました。再現手順を 共有してもよいですか。",
+   "vi": "Trong môi trường kiểm thử, khi bấm nút đăng ký một lần, thông báo hoàn tất lại xuất hiện hai lần. Tôi chia sẻ các bước tái hiện được không?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "新しい 仮の 利用者で フォームを 入力し、送信を 一回だけ 押します。期待は 一回の 完了表示ですが、実際は 同じ 文が 二回出ます。",
+   "vi": "Tôi điền biểu mẫu bằng một người dùng giả mới rồi chỉ bấm gửi một lần. Mong đợi là một thông báo hoàn tất, nhưng thực tế cùng câu xuất hiện hai lần.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  },
+  {
+   "t": "通常でも 三回中 二回 起きました。遅い 条件では まだ 確認していません。記録には その範囲を 書きました。",
+   "vi": "Trong điều kiện thường, ba lần thử thì xảy ra hai lần. Tôi chưa kiểm tra mạng chậm và đã ghi rõ phạm vi đó.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  },
+  {
+   "t": "登録データ自体が 二重になったかは、別に 確認する 必要がありますね。表示だけの 問題かもしれません。",
+   "vi": "Chúng ta cần kiểm riêng xem dữ liệu đăng ký có bị trùng không. Có thể vấn đề chỉ nằm ở hiển thị.",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "はい。現時点では 画面上の 重複だけが 確認済みです。実際の 個人情報は使わず、仮の データで 試しています。",
+   "vi": "Đúng. Hiện chỉ xác nhận phần trùng trên màn hình. Tôi dùng dữ liệu giả, không dùng thông tin cá nhân thật.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  },
+  {
+   "t": "修正後は、表示だけでなく 一回の 操作で 一件だけ 登録されることも 確認したいです。",
+   "vi": "Sau khi sửa, tôi muốn kiểm cả việc một thao tác chỉ tạo một bản ghi, ngoài việc thông báo hiển thị đúng.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Hiện tượng nào đã được xác nhận?",
+   "o": [
+    "Mất toàn bộ dữ liệu",
+    "Bấm một lần nhưng hiện hai thông báo",
+    "Chắc chắn cơ sở dữ liệu có hai bản ghi"
+   ],
+   "a": 1,
+   "e": "Bằng chứng trong hội thoại: 検証環境で 登録ボタンを 一回 押したところ、完了の メッセージが 二回 表示されました。再現手順を 共有してもよいですか。 → Trong môi trường kiểm thử, khi bấm nút đăng ký một lần, thông báo hoàn tất lại xuất hiện hai lần. Tôi chia sẻ các bước tái hiện được không?"
+  },
+  {
+   "q": "Trong điều kiện thường, lỗi xuất hiện với tần suất nào?",
+   "o": [
+    "Hai trong ba lần thử",
+    "Luôn ba trong ba lần",
+    "Chưa thử lần nào"
+   ],
+   "a": 0,
+   "e": "Bằng chứng trong hội thoại: 通常でも 三回中 二回 起きました。遅い 条件では まだ 確認していません。記録には その範囲を 書きました。 → Trong điều kiện thường, ba lần thử thì xảy ra hai lần. Tôi chưa kiểm tra mạng chậm và đã ghi rõ phạm vi đó."
+  },
+  {
+   "q": "Điều kiện mạng chậm đã được kiểm chưa?",
+   "o": [
+    "Đã chắc chắn",
+    "Không cần kiểm",
+    "Chưa"
+   ],
+   "a": 2,
+   "e": "Bằng chứng trong hội thoại: 通常でも 三回中 二回 起きました。遅い 条件では まだ 確認していません。記録には その範囲を 書きました。 → Trong điều kiện thường, ba lần thử thì xảy ra hai lần. Tôi chưa kiểm tra mạng chậm và đã ghi rõ phạm vi đó."
+  },
+  {
+   "q": "Dữ liệu được dùng để tái hiện là gì?",
+   "o": [
+    "Token thật",
+    "Dữ liệu giả",
+    "Thông tin khách hàng thật"
+   ],
+   "a": 1,
+   "e": "Bằng chứng trong hội thoại: はい。現時点では 画面上の 重複だけが 確認済みです。実際の 個人情報は使わず、仮の データで 試しています。 → Đúng. Hiện chỉ xác nhận phần trùng trên màn hình. Tôi dùng dữ liệu giả, không dùng thông tin cá nhân thật."
+  },
+  {
+   "q": "Sau khi sửa, cần kiểm thêm điều gì?",
+   "o": [
+    "Một thao tác chỉ tạo một bản ghi",
+    "Chỉ đổi màu thông báo",
+    "Chỉ đổi tên tệp"
+   ],
+   "a": 0,
+   "e": "Bằng chứng trong hội thoại: 修正後は、表示だけでなく 一回の 操作で 一件だけ 登録されることも 確認したいです。 → Sau khi sửa, tôi muốn kiểm cả việc một thao tác chỉ tạo một bản ghi, ngoài việc thông báo hiển thị đúng."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "はい。現時点では 画面上の 重複だけが 確認済みです。実際の 個人情報は使わず、仮の データで 試しています。",
+   "lang": "ja-JP",
+   "q": "Nghe và chọn nội dung đúng.",
+   "o": [
+    "Trong điều kiện thường, ba lần thử thì xảy ra hai lần. Tôi chưa kiểm tra mạng chậm và đã ghi rõ phạm vi đó.",
+    "Đúng. Hiện chỉ xác nhận phần trùng trên màn hình. Tôi dùng dữ liệu giả, không dùng thông tin cá nhân thật.",
+    "Tôi điền biểu mẫu bằng một người dùng giả mới rồi chỉ bấm gửi một lần. Mong đợi là một thông báo hoàn tất, nhưng thực tế cùng câu xuất hiện hai lần."
+   ],
+   "a": 1,
+   "e": "Câu được đọc: はい。現時点では 画面上の 重複だけが 確認済みです。実際の 個人情報は使わず、仮の データで 試しています。 → Đúng. Hiện chỉ xác nhận phần trùng trên màn hình. Tôi dùng dữ liệu giả, không dùng thông tin cá nhân thật."
+  },
+  {
+   "t": "dict",
+   "say": "修正後は、表示だけでなく 一回の 操作で 一件だけ 登録されることも 確認したいです。",
+   "lang": "ja-JP",
+   "a": "修正後は、表示だけでなく 一回の 操作で 一件だけ 登録されることも 確認したいです。",
+   "e": "Nghĩa của câu: Sau khi sửa, tôi muốn kiểm cả việc một thao tác chỉ tạo một bản ghi, ngoài việc thông báo hiển thị đúng. Viết đúng chữ Nhật và giữ nguyên phần điều kiện hoặc phủ định nếu có."
+  },
+  {
+   "t": "match",
+   "q": "Nối mẫu câu với ý nghĩa trong ngữ cảnh.",
+   "pairs": [
+    [
+     "検証環境で 登録ボタンを 一回 押したところ、完了の メッセージが 二回 表示されました。再現手順を 共有してもよいですか。",
+     "Trong môi trường kiểm thử, khi bấm nút đăng ký một lần, thông báo hoàn tất lại xuất hiện hai lần. Tôi chia sẻ các bước tái hiện được không?"
+    ],
+    [
+     "新しい 仮の 利用者で フォームを 入力し、送信を 一回だけ 押します。期待は 一回の 完了表示ですが、実際は 同じ 文が 二回出ます。",
+     "Tôi điền biểu mẫu bằng một người dùng giả mới rồi chỉ bấm gửi một lần. Mong đợi là một thông báo hoàn tất, nhưng thực tế cùng câu xuất hiện hai lần."
+    ],
+    [
+     "通常でも 三回中 二回 起きました。遅い 条件では まだ 確認していません。記録には その範囲を 書きました。",
+     "Trong điều kiện thường, ba lần thử thì xảy ra hai lần. Tôi chưa kiểm tra mạng chậm và đã ghi rõ phạm vi đó."
+    ],
+    [
+     "登録データ自体が 二重になったかは、別に 確認する 必要がありますね。表示だけの 問題かもしれません。",
+     "Chúng ta cần kiểm riêng xem dữ liệu đăng ký có bị trùng không. Có thể vấn đề chỉ nằm ở hiển thị."
+    ],
+    [
+     "はい。現時点では 画面上の 重複だけが 確認済みです。実際の 個人情報は使わず、仮の データで 試しています。",
+     "Đúng. Hiện chỉ xác nhận phần trùng trên màn hình. Tôi dùng dữ liệu giả, không dùng thông tin cá nhân thật."
+    ],
+    [
+     "修正後は、表示だけでなく 一回の 操作で 一件だけ 登録されることも 確認したいです。",
+     "Sau khi sửa, tôi muốn kiểm cả việc một thao tác chỉ tạo một bản ghi, ngoài việc thông báo hiển thị đúng."
+    ]
+   ],
+   "e": "Nghĩa thuộc đúng tình huống; ghi chú giải thích mức lịch sự và cách luyện."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Báo lỗi nút lưu không có thông báo, nhưng chưa biết dữ liệu đã được lưu hay chưa.",
+   "model": "保存を 一回 押しても、完了表示が 出ません。データが 保存されたかは 未確認です。再現条件と 操作手順を 記録し、表示と 保存処理を 分けて 確認したいです。",
+   "vi": "Bấm lưu một lần nhưng không thấy thông báo hoàn tất. Tôi chưa xác nhận dữ liệu có được lưu không. Tôi sẽ ghi điều kiện, bước tái hiện và kiểm riêng phần hiển thị với xử lý lưu."
+  },
+  {
+   "p": "Nhận báo lỗi, xin dữ kiện cần thiết và dùng dữ liệu giả.",
+   "model": "手順、期待結果と 実際の結果を 教えてください。再現には 仮のデータを使い、ログに 個人情報や トークンを 残さない形で 調べます。",
+   "vi": "Xin cho biết các bước, kết quả mong đợi và thực tế. Chúng ta sẽ dùng dữ liệu giả để tái hiện, tránh ghi thông tin cá nhân hoặc token vào nhật ký."
+  }
+ ]
+}

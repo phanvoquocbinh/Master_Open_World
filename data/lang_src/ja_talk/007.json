@@ -1,0 +1,219 @@
+{
+ "no": 7,
+ "lv": "n5",
+ "title": "Hỏi lối tới phòng học",
+ "sub": "すみません。日本語の 教室は どこですか。",
+ "situation": "Người học lần đầu tới cơ sở giả; xác nhận tầng và vị trí chứ không đoán theo số cửa.",
+ "lang": "ja-JP",
+ "lines": [
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "すみません。日本語の 教室は どこですか。",
+   "vi": "Xin hỏi phòng tiếng Nhật ở đâu?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "二階です。階段は あそこに あります。",
+   "vi": "Tầng hai. Cầu thang ở kia."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "エレベーターも ありますか。",
+   "vi": "Có thang máy không?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "はい、受付の 隣です。",
+   "vi": "Có, cạnh bàn tiếp nhận."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "二階の 右ですか、左ですか。",
+   "vi": "Tầng hai bên phải hay trái?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "左です。図書室の 前に あります。",
+   "vi": "Bên trái, trước phòng đọc."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "先生は もう 教室に いますか。",
+   "vi": "Giáo viên đã ở lớp chưa?"
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "はい。学生も 三人 います。",
+   "vi": "Rồi. Cũng có ba sinh viên."
+  },
+  {
+   "s": "ゆい",
+   "g": "f",
+   "t": "ありがとうございます。エレベーターで 行きます。",
+   "vi": "Cảm ơn. Tôi đi thang máy."
+  },
+  {
+   "s": "はる",
+   "g": "m",
+   "t": "どうぞ。わからなければ、受付で 聞いてください。",
+   "vi": "Mời. Chưa rõ thì hỏi ở bàn tiếp nhận."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "すみません。日本語の 教室は どこですか。",
+   "vi": "Xin hỏi phòng tiếng Nhật ở đâu?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "エレベーターも ありますか。",
+   "vi": "Có thang máy không?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "二階の 右ですか、左ですか。",
+   "vi": "Tầng hai bên phải hay trái?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "左です。図書室の 前に あります。",
+   "vi": "Bên trái, trước phòng đọc.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  },
+  {
+   "t": "先生は もう 教室に いますか。",
+   "vi": "Giáo viên đã ở lớp chưa?",
+   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+  },
+  {
+   "t": "ありがとうございます。エレベーターで 行きます。",
+   "vi": "Cảm ơn. Tôi đi thang máy.",
+   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Phòng tầng mấy?",
+   "o": [
+    "Ba",
+    "Hai",
+    "Một"
+   ],
+   "a": 1,
+   "e": "Bằng chứng trong hội thoại: 二階です。階段は あそこに あります。 → Tầng hai. Cầu thang ở kia."
+  },
+  {
+   "q": "Thang máy cạnh đâu?",
+   "o": [
+    "Cầu thang theo bài",
+    "Phòng đọc",
+    "Bàn tiếp nhận"
+   ],
+   "a": 2,
+   "e": "Bằng chứng trong hội thoại: はい、受付の 隣です。 → Có, cạnh bàn tiếp nhận."
+  },
+  {
+   "q": "Lên tầng hai rẽ bên nào?",
+   "o": [
+    "Trái",
+    "Không có chỉ dẫn",
+    "Phải"
+   ],
+   "a": 0,
+   "e": "Bằng chứng trong hội thoại: 左です。図書室の 前に あります。 → Bên trái, trước phòng đọc."
+  },
+  {
+   "q": "Phòng ở trước đâu?",
+   "o": [
+    "Ga",
+    "Phòng đọc",
+    "Cửa hàng"
+   ],
+   "a": 1,
+   "e": "Bằng chứng trong hội thoại: 左です。図書室の 前に あります。 → Bên trái, trước phòng đọc."
+  },
+  {
+   "q": "Trong lớp có mấy sinh viên?",
+   "o": [
+    "Ba",
+    "Năm",
+    "Hai"
+   ],
+   "a": 0,
+   "e": "Bằng chứng trong hội thoại: はい。学生も 三人 います。 → Rồi. Cũng có ba sinh viên."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "先生は もう 教室に いますか。",
+   "lang": "ja-JP",
+   "q": "Nghe và chọn nội dung đúng.",
+   "o": [
+    "Có thang máy không?",
+    "Tầng hai bên phải hay trái?",
+    "Giáo viên đã ở lớp chưa?"
+   ],
+   "a": 2,
+   "e": "Câu được đọc: 先生は もう 教室に いますか。 → Giáo viên đã ở lớp chưa?"
+  },
+  {
+   "t": "dict",
+   "say": "ありがとうございます。エレベーターで 行きます。",
+   "lang": "ja-JP",
+   "a": "ありがとうございます。エレベーターで 行きます。",
+   "e": "Nghĩa của câu: Cảm ơn. Tôi đi thang máy. Viết đúng chữ Nhật và giữ nguyên phần điều kiện hoặc phủ định nếu có."
+  },
+  {
+   "t": "match",
+   "q": "Nối mẫu câu với ý nghĩa trong ngữ cảnh.",
+   "pairs": [
+    [
+     "すみません。日本語の 教室は どこですか。",
+     "Xin hỏi phòng tiếng Nhật ở đâu?"
+    ],
+    [
+     "エレベーターも ありますか。",
+     "Có thang máy không?"
+    ],
+    [
+     "二階の 右ですか、左ですか。",
+     "Tầng hai bên phải hay trái?"
+    ],
+    [
+     "左です。図書室の 前に あります。",
+     "Bên trái, trước phòng đọc."
+    ],
+    [
+     "先生は もう 教室に いますか。",
+     "Giáo viên đã ở lớp chưa?"
+    ],
+    [
+     "ありがとうございます。エレベーターで 行きます。",
+     "Cảm ơn. Tôi đi thang máy."
+    ]
+   ],
+   "e": "Nghĩa thuộc đúng tình huống; ghi chú giải thích mức lịch sự và cách luyện."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Hỏi phòng đọc ở đâu và có thang máy không.",
+   "model": "図書室は どこですか。エレベーターも ありますか。",
+   "vi": "Phòng đọc ở đâu? Ở đây cũng có thang máy không?"
+  },
+  {
+   "p": "Chỉ phòng ở tầng ba, bên phải và cạnh bàn tiếp nhận.",
+   "model": "三階の 右です。受付の 隣に あります。",
+   "vi": "Phòng ở tầng ba, bên phải. Phòng nằm cạnh bàn tiếp nhận."
+  }
+ ]
+}

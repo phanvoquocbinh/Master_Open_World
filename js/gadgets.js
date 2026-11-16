@@ -7,15 +7,17 @@
 //     cất máy, nhân vật đeo tai nghe (mesh gắn vào xương đầu), nhạc phát bằng YouTube IFrame Player ẩn; ⏯ ⏭ âm lượng ⏹.
 //  📱 ĐIỆN THOẠI (phím O): mỗi người 1 số 555-xxx-xxxx cố định (lưu máy), danh bạ, nhắn tin qua server nhiều người chơi
 //     (multiplayer_server.py), có thông báo tin mới; chơi một mình → báo cần vào chế độ nhiều người (J).
+import { studyApp, STUDY_CSS } from './studyapp.js';   /* 16/11: 📚 Tài liệu học tập trên laptop */
 export async function make(W, ctx){
   const {THREE, me, P, HOOK, toast} = W;
+  const SCTX=ctx||{};
   const DASH=W.DASH||'http://127.0.0.1:8765';
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const LS={get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } }, set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }};
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)), sm=t=>{ t=clamp(t,0,1); return t*t*(3-2*t); };
   const V3=THREE.Vector3, HH=me.h||1.78;
   const GQ=(q)=>`https://www.google.com/search?igu=1&hl=vi&q=${encodeURIComponent(q)}`;
-  injectCSS();
+  injectCSS(); { const st=document.createElement('style'); st.textContent=STUDY_CSS; document.head.appendChild(st); }
 
   /* ============================== TƯ THẾ CẦM ĐỒ + ĐỒ VẬT 3D ============================== */
   const bones={}; me.g.traverse(o=>{ if(o.isBone) bones[o.name.replace(/^mixamorig:?/,'')]=o; });
@@ -191,6 +193,7 @@ export async function make(W, ctx){
   Q('.osX').onclick=()=>closeApp(); Q('.osStart').onclick=()=>closeApp(); Q('.osOff').onclick=()=>lapClose();
   const APPS=[
     {id:'md', icon:'🖥️', name:'Master Dashboard', run:mdApp, keep:true},
+    {id:'study', icon:'📚', name:'Tài liệu học tập', run:(box, arg)=>studyApp(box, arg, {W, S:SCTX.S||(W.life&&W.life.S)||{}, save:SCTX.save||(()=>{}), addCoins:SCTX.addCoins||(()=>{}), toast, lapClose}), keep:true},   /* 16/11: QA/QC · Dev · Ngoại ngữ – học & thi ngay trên laptop */
     {id:'web', icon:'🌐', name:'Trình duyệt', run:browserApp, keep:true},
     {id:'bug', icon:'🐞', name:'Diệt Bug', run:bugGame},
     {id:'cards', icon:'🃏', name:'Lật thẻ QA', run:cardGame},
@@ -200,6 +203,7 @@ export async function make(W, ctx){
     {id:'debug', icon:'🛠️', name:'Debug', run:debugApp, when:()=>!!(W.events && Array.isArray(W.events.list))},   /* chỉ hiện khi có công cụ debug (V2: W.events) */
   ];
   for(const A of APPS){ const b=document.createElement('button'); b.className='osIcon'; b.innerHTML=`<b>${A.icon}</b><span>${esc(A.name)}</span>`; b.onclick=()=>launch(A.id); desk.appendChild(b); A.btn=b; }
+  if(!W.openCourse) W.openCourse=(id)=>lapOpen('study', {course:id});   /* V2 không có Toà Giáo trình → lớp học (vd. The Crystal ở Dev City) mở khoá trên laptop */
   const syncIcons=()=>{ for(const A of APPS) if(A.when && A.btn) A.btn.hidden=!A.when(); };   /* V2 nạp W.events sau gadgets → kiểm lại mỗi lần mở laptop */
   const appState={}; let curApp=null, clockT=0;
   function launch(id, arg){ const A=APPS.find(a=>a.id===id); if(!A) return; if(A.direct){ A.direct(arg); return; }

@@ -1,0 +1,100 @@
+{
+ "no": 6,
+ "title": "Tiếng Nhật công sở IT: làm rõ, báo lỗi và bàn giao",
+ "sub": "Sổ tay tiếng Nhật tự soạn cho người Việt",
+ "for": "ref",
+ "parts": [
+  {
+   "k": "text",
+   "h": "Nói rõ dữ kiện trước đánh giá",
+   "html": "<p>Mục tiêu giao tiếp công sở là giúp người khác quyết định và hành động. Một báo cáo “không chạy” thiếu môi trường, bước tái hiện, kỳ vọng, thực tế và mức ảnh hưởng. Tách điều quan sát được khỏi giả thuyết nguyên nhân. Ví dụ trong sổ tay dùng dự án giả Hộp Mây và môi trường localhost, không dùng dữ liệu khách thật.</p><p>Giữ mức lịch sự phù hợp nhưng đừng kéo dài đến mức mất thông tin. Hỏi lại yêu cầu không phải thừa nhận yếu: quyết định sai vì đoán có thể tốn nhiều thời gian hơn làm rõ. Khi không chắc một cam kết thuộc quyền mình, phân biệt đề xuất với xác nhận đã được phê duyệt.</p>"
+  },
+  {
+   "k": "grammar",
+   "h": "Khung báo lỗi tự soạn",
+   "html": "<p>Không viết “chắc do server” khi mới thấy lỗi ở UI. Nếu nói giả thuyết, ghi rõ là giả thuyết và nêu cách kiểm.</p>",
+   "table": [
+    [
+     "Mục",
+     "Câu mẫu",
+     "Nghĩa"
+    ],
+    [
+     "Môi trường",
+     "検証環境で確認しました。",
+     "Tôi xác nhận trên môi trường kiểm thử."
+    ],
+    [
+     "Tái hiện",
+     "数量を二回変更すると、合計が更新されません。",
+     "Đổi số lượng hai lần thì tổng không cập nhật."
+    ],
+    [
+     "Kỳ vọng",
+     "期待する動作は、最新の数量で再計算されることです。",
+     "Kỳ vọng tính lại theo lượng mới nhất."
+    ],
+    [
+     "Phạm vi",
+     "現時点では、同じ画面で再現しています。",
+     "Hiện tại tái hiện trên cùng màn hình."
+    ],
+    [
+     "Giả thuyết",
+     "原因はまだ特定できていません。",
+     "Chưa xác định được nguyên nhân."
+    ]
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Làm rõ yêu cầu bằng câu hỏi có lựa chọn",
+   "html": "<p>仕様の理解を確認させてください。保存後に通知するのでしょうか、それとも確認画面で通知するのでしょうか。Nghĩa: Cho tôi xác nhận cách hiểu đặc tả. Thông báo sau lưu hay ở màn hình xác nhận? Câu này đưa hai khả năng cụ thể để đối tác sửa. Sau khi nghe, tóm tắt: では、保存が成功した場合だけ通知する、という理解でよろしいでしょうか。</p><p>Đưa tiêu chí nghiệm thu và ngoại lệ: 入力が空の場合は送信せず、項目の下にエラーを表示する、ということでしょうか。Không gửi nếu trống và hiện lỗi dưới trường, hiểu vậy đúng không? Tránh kết thúc cuộc họp bằng “đã hiểu” khi mỗi người còn hình dung khác. Ghi việc đã chốt, việc còn mở, người chịu trách nhiệm và thời hạn.</p>"
+  },
+  {
+   "k": "text",
+   "h": "Daily, ước lượng và phản hồi review",
+   "html": "<p>Daily theo ba ý: 昨日は入力検証を実装しました。本日はテストを追加します。確認待ちの仕様が一つあります。Hôm qua làm validate, hôm nay thêm test, còn một đặc tả chờ xác nhận. Nếu chặn tiến độ, nêu việc cần từ ai; không chỉ nói “đang cố gắng”.</p><p>Ước lượng có giả định: 現在の範囲であれば二日を見込んでいますが、通知機能を含める場合は再見積もりが必要です。Dự kiến hai ngày theo phạm vi hiện tại; nếu gồm thông báo cần ước lượng lại. Review bám hành vi: この条件では空の値も通る可能性があります。境界値のテストを追加していただけますか。Điều kiện này có thể cho giá trị trống qua; thêm test biên được không? Không đánh giá con người từ một đoạn code.</p>"
+  },
+  {
+   "k": "text",
+   "h": "Sự cố và bàn giao có kiểm",
+   "html": "<p>Thông báo sự cố cần ảnh hưởng đã biết, việc đang làm và giờ cập nhật: 一部の画面で保存できない状態を確認しています。影響範囲を調査中で、次の報告は午後三時の予定です。Đã thấy một số màn không lưu; đang kiểm phạm vi; dự kiến cập nhật15 giờ. Không tự bảo đảm “không mất dữ liệu” nếu chưa xác minh.</p><p>Bàn giao liệt kê phiên bản giả, việc hoàn tất, việc còn chờ, cách kiểm và đầu mối. Người nhận nhắc lại điểm quan trọng để phát hiện thiếu hiểu biết. Không đưa token, mật khẩu, log riêng tư hoặc URL nội bộ thật vào email mẫu hay ảnh chụp. Hồ sơ học tập dùng dữ liệu giả và đường dẫn mô tả tối thiểu.</p>"
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Báo lỗi nên tách gì?",
+   "o": [
+    "Quan sát thực tế và giả thuyết nguyên nhân",
+    "Tên người theo chức vụ",
+    "Chỉ độ dài câu"
+   ],
+   "a": 0,
+   "e": "Điều đã quan sát có bằng chứng, nguyên nhân cần kiểm riêng."
+  },
+  {
+   "t": "mc",
+   "q": "Cách xác nhận đặc tả tốt hơn là gì?",
+   "o": [
+    "Chỉ nói đã hiểu",
+    "Đoán rồi triển khai",
+    "Tóm tắt hành vi cụ thể rồi hỏi lại"
+   ],
+   "a": 2,
+   "e": "Câu hỏi có lựa chọn và bản tóm tắt phát hiện khác biệt cách hiểu."
+  },
+  {
+   "t": "mc",
+   "q": "Khi ước lượng phụ thuộc phạm vi, nên làm gì?",
+   "o": [
+    "Ẩn rủi ro đến ngày giao",
+    "Nêu giả định và điều kiện cần ước lượng lại",
+    "Hứa vô điều kiện"
+   ],
+   "a": 1,
+   "e": "Cam kết cần gắn phạm vi và dữ kiện đã biết."
+  }
+ ]
+}

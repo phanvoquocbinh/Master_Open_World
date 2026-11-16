@@ -1,0 +1,604 @@
+{
+ "no": 4,
+ "title": "Làm rõ yêu cầu và tiêu chí nghiệm thu",
+ "sub": "仕様の 理解を 確認しても よろしいでしょうか。",
+ "goals": [
+  "Dùng ít nhất năm cụm nghiệp vụ trong tình huống Làm rõ yêu cầu và tiêu chí nghiệm thu",
+  "Nghe và xác định dữ kiện đã chốt, điều còn chờ và người xử lý",
+  "Đặt câu hỏi làm rõ có thể trả lời bằng hành vi cụ thể",
+  "Viết thông điệp có hành động tiếp và mức lịch sự nhất quán"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bối cảnh và cách học",
+   "html": "<p>Dự án và tổ chức trong bài hoàn toàn giả lập. Mục tiêu là giao tiếp rõ trong nhóm phát triển; tách quan sát, đề xuất và điều chưa xác nhận.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm trọng tâm",
+   "items": [
+    {
+     "w": "仕様",
+     "kana": "しよう",
+     "romaji": "shiyō",
+     "vi": "đặc tả",
+     "ex": "仕様の 理解を 確認しても よろしいでしょうか。",
+     "exVi": "Tôi xác nhận cách hiểu đặc tả được không?"
+    },
+    {
+     "w": "要件",
+     "kana": "ようけん",
+     "romaji": "yōken",
+     "vi": "yêu cầu",
+     "ex": "要件には 保存後に 通知とありますが、失敗した 場合も 含みますか。",
+     "exVi": "Yêu cầu nói thông báo sau lưu, có gồm lúc thất bại không?"
+    },
+    {
+     "w": "条件",
+     "kana": "じょうけん",
+     "romaji": "jōken",
+     "vi": "điều kiện",
+     "ex": "権限のない 人は 対象から 外す、という 条件ですね。",
+     "exVi": "Điều kiện là loại người không có quyền khỏi đối tượng, đúng chứ?"
+    },
+    {
+     "w": "例外",
+     "kana": "れいがい",
+     "romaji": "reigai",
+     "vi": "ngoại lệ",
+     "ex": "未確定の 例外は、合意した 内容と 分けて 記載します。",
+     "exVi": "Tôi ghi riêng ngoại lệ chưa chốt với nội dung đã thống nhất."
+    },
+    {
+     "w": "権限",
+     "kana": "けんげん",
+     "romaji": "kengen",
+     "vi": "quyền hạn",
+     "ex": "権限のない 人は 対象から 外す、という 条件ですね。",
+     "exVi": "Điều kiện là loại người không có quyền khỏi đối tượng, đúng chứ?"
+    },
+    {
+     "w": "対象",
+     "kana": "たいしょう",
+     "romaji": "taishō",
+     "vi": "đối tượng áp dụng",
+     "ex": "権限のない 人は 対象から 外す、という 条件ですね。",
+     "exVi": "Điều kiện là loại người không có quyền khỏi đối tượng, đúng chứ?"
+    },
+    {
+     "w": "通知",
+     "kana": "つうち",
+     "romaji": "tsūchi",
+     "vi": "thông báo",
+     "ex": "保存が 成功した 場合だけ 通知する、という 理解で よろしいでしょうか。",
+     "exVi": "Hiểu chỉ thông báo khi lưu thành công, đúng không?"
+    },
+    {
+     "w": "失敗",
+     "kana": "しっぱい",
+     "romaji": "shippai",
+     "vi": "thất bại",
+     "ex": "要件には 保存後に 通知とありますが、失敗した 場合も 含みますか。",
+     "exVi": "Yêu cầu nói thông báo sau lưu, có gồm lúc thất bại không?"
+    },
+    {
+     "w": "成功",
+     "kana": "せいこう",
+     "romaji": "seikō",
+     "vi": "thành công",
+     "ex": "保存が 成功した 場合だけ 通知する、という 理解で よろしいでしょうか。",
+     "exVi": "Hiểu chỉ thông báo khi lưu thành công, đúng không?"
+    },
+    {
+     "w": "受け入れ基準",
+     "kana": "うけいれきじゅん",
+     "romaji": "ukeire kijun",
+     "vi": "tiêu chí nghiệm thu",
+     "ex": "受け入れ基準には、成功と 失敗の 両方を 入れますね。",
+     "exVi": "Tiêu chí nghiệm thu gồm cả thành công và thất bại nhé?"
+    },
+    {
+     "w": "承認",
+     "kana": "しょうにん",
+     "romaji": "shōnin",
+     "vi": "phê duyệt",
+     "ex": "その 例外は 誰の 承認が 必要ですか。",
+     "exVi": "Ngoại lệ ấy cần ai duyệt?"
+    },
+    {
+     "w": "未確定",
+     "kana": "みかくてい",
+     "romaji": "mikakutei",
+     "vi": "chưa chốt",
+     "ex": "未確定の 例外は、合意した 内容と 分けて 記載します。",
+     "exVi": "Tôi ghi riêng ngoại lệ chưa chốt với nội dung đã thống nhất."
+    },
+    {
+     "w": "確認",
+     "kana": "かくにん",
+     "romaji": "kakunin",
+     "vi": "xác nhận",
+     "ex": "仕様の 理解を 確認しても よろしいでしょうか。",
+     "exVi": "Tôi xác nhận cách hiểu đặc tả được không?"
+    },
+    {
+     "w": "記載",
+     "kana": "きさい",
+     "romaji": "kisai",
+     "vi": "ghi rõ vào văn bản",
+     "ex": "未確定の 例外は、合意した 内容と 分けて 記載します。",
+     "exVi": "Tôi ghi riêng ngoại lệ chưa chốt với nội dung đã thống nhất."
+    },
+    {
+     "w": "合意",
+     "kana": "ごうい",
+     "romaji": "gōi",
+     "vi": "thống nhất",
+     "ex": "未確定の 例外は、合意した 内容と 分けて 記載します。",
+     "exVi": "Tôi ghi riêng ngoại lệ chưa chốt với nội dung đã thống nhất."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Cấu trúc và cách dùng",
+   "html": "<p>～という理解でよろしいでしょうか tóm tắt cách hiểu để xác nhận. ～場合 nêu điều kiện; ただし nêu ngoại lệ. Một lời đồng ý chung không chốt mọi chi tiết. Phân biệt要件với仕様thực hiện và受け入れ基準quan sát được; ghi phần đang chờ承認.</p>",
+   "table": [
+    [
+     "Chức năng",
+     "Mẫu"
+    ],
+    [
+     "Tóm tắt cách hiểu",
+     "～という理解でよろしいでしょうか"
+    ],
+    [
+     "Điều kiện",
+     "成功した場合だけ"
+    ],
+    [
+     "Ngoại lệ",
+     "ただし、管理者は未確定です"
+    ],
+    [
+     "Ghi riêng",
+     "合意済みと未確定を分けます"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "仕様の 理解を 確認しても よろしいでしょうか。",
+     "vi": "Tôi xác nhận cách hiểu đặc tả được không?"
+    },
+    {
+     "t": "保存が 成功した 場合だけ 通知する、という 理解で よろしいでしょうか。",
+     "vi": "Hiểu chỉ thông báo khi lưu thành công, đúng không?"
+    },
+    {
+     "t": "権限のない 人は 対象から 外す、という 条件ですね。",
+     "vi": "Điều kiện là loại người không có quyền khỏi đối tượng, đúng chứ?"
+    },
+    {
+     "t": "未確定の 例外は、合意した 内容と 分けて 記載します。",
+     "vi": "Tôi ghi riêng ngoại lệ chưa chốt với nội dung đã thống nhất."
+    }
+   ],
+   "tips": [
+    "<p>Hiểu 保存後 là cả khi lưu lỗi: hỏi điều kiện.</p>",
+    "<p>Lấy 同意 về ca thường làm 承認 ngoại lệ: tách phạm vi.</p>",
+    "<p>Tiêu chí chỉ ghi “chạy tốt”: đổi thành hành vi quan sát.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Làm rõ yêu cầu và tiêu chí nghiệm thu",
+   "note": "Hai thành viên của dự án giả Hộp Mây trao đổi trong nhóm phát triển. Nghe để ghi dữ kiện, điều kiện và hành động tiếp; xem bản dịch sau lượt đầu.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "要件には 保存後に 通知とありますが、失敗した 場合も 含みますか。",
+     "vi": "Yêu cầu nói thông báo sau lưu, có gồm lúc thất bại không?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "いいえ。成功した 場合だけが 対象です。",
+     "vi": "Không. Chỉ khi thành công."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "権限のない 人にも 通知しますか。",
+     "vi": "Có thông báo cả người không có quyền không?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "通知しません。その 条件は 仕様に 記載してください。",
+     "vi": "Không. Xin ghi điều kiện đó vào đặc tả."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "受け入れ基準には、成功と 失敗の 両方を 入れますね。",
+     "vi": "Tiêu chí nghiệm thu gồm cả thành công và thất bại nhé?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "はい。ただし、管理者への 例外的な 通知は 未確定です。",
+     "vi": "Đúng. Nhưng ngoại lệ thông báo quản trị chưa chốt."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "その 例外は 誰の 承認が 必要ですか。",
+     "vi": "Ngoại lệ ấy cần ai duyệt?"
+    },
+    {
+     "s": "はる",
+     "g": "m",
+     "t": "責任者です。確認後、合意した 内容を 更新しましょう。",
+     "vi": "Người chịu trách nhiệm. Xác nhận rồi cập nhật phần thống nhất."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Theo hội thoại: Yêu cầu nói thông báo sau lưu, có gồm lúc thất bại không?",
+     "o": [
+      "Không. Chỉ khi thành công.",
+      "Không. Xin ghi điều kiện đó vào đặc tả.",
+      "Đúng. Nhưng ngoại lệ thông báo quản trị chưa chốt."
+     ],
+     "a": 0,
+     "e": "Câu trả lời là いいえ。成功した 場合だけが 対象です。 → Không. Chỉ khi thành công."
+    },
+    {
+     "q": "Theo hội thoại: Có thông báo cả người không có quyền không?",
+     "o": [
+      "Người chịu trách nhiệm. Xác nhận rồi cập nhật phần thống nhất.",
+      "Không. Xin ghi điều kiện đó vào đặc tả.",
+      "Đúng. Nhưng ngoại lệ thông báo quản trị chưa chốt."
+     ],
+     "a": 1,
+     "e": "Câu trả lời là 通知しません。その 条件は 仕様に 記載してください。 → Không. Xin ghi điều kiện đó vào đặc tả."
+    },
+    {
+     "q": "Theo hội thoại: Tiêu chí nghiệm thu gồm cả thành công và thất bại nhé?",
+     "o": [
+      "Đúng. Nhưng ngoại lệ thông báo quản trị chưa chốt.",
+      "Không. Chỉ khi thành công.",
+      "Người chịu trách nhiệm. Xác nhận rồi cập nhật phần thống nhất."
+     ],
+     "a": 0,
+     "e": "Câu trả lời là はい。ただし、管理者への 例外的な 通知は 未確定です。 → Đúng. Nhưng ngoại lệ thông báo quản trị chưa chốt."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: thông tin mới trong cùng chủ đề",
+   "text": "架空の 登録画面の 要件には「保存後に 通知」とだけ 書かれていました。実装前に 条件を 確認しました。\n\n成功した 場合は 通知し、失敗した 場合は 通知しません。この 違いを 仕様に 記載します。\n\n対象には 権限のある 利用者だけを 含めます。権限を 失った 人への 配信は 別に 確認します。\n\n受け入れ基準は 動作で 判断できるようにし、成功、失敗、権限なしの ケースを 用意します。\n\n管理者に 関する 例外は 未確定で、責任者の 承認が 必要です。通常の 条件との 合意を、そのまま 例外への 承認と みなしません。\n\n確認した 日と 担当を 残し、変更があれば 関係者に 共有します。口頭の 合意だけに 依存しないようにしました。",
+   "vi": "Yêu cầu màn đăng ký giả chỉ ghi “thông báo sau lưu”; nhóm hỏi điều kiện trước khi làm.\n\nLưu thành công thì thông báo, thất bại thì không; ghi khác biệt vào đặc tả.\n\nĐối tượng gồm người có quyền, gửi cho người vừa mất quyền cần xác nhận riêng.\n\nTiêu chí nghiệm thu đo bằng hành vi, có ca thành công/thất bại/không quyền.\n\nNgoại lệ quản trị chưa chốt, cần người có trách nhiệm duyệt; thống nhất thường không tự phê ngoại lệ.\n\nGhi ngày/người xác nhận, chia sẻ thay đổi, tránh chỉ dựa thống nhất miệng.",
+   "gloss": [
+    {
+     "w": "仕様",
+     "kana": "しよう",
+     "romaji": "shiyō",
+     "vi": "đặc tả"
+    },
+    {
+     "w": "要件",
+     "kana": "ようけん",
+     "romaji": "yōken",
+     "vi": "yêu cầu"
+    },
+    {
+     "w": "条件",
+     "kana": "じょうけん",
+     "romaji": "jōken",
+     "vi": "điều kiện"
+    },
+    {
+     "w": "例外",
+     "kana": "れいがい",
+     "romaji": "reigai",
+     "vi": "ngoại lệ"
+    },
+    {
+     "w": "権限",
+     "kana": "けんげん",
+     "romaji": "kengen",
+     "vi": "quyền hạn"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Khi lưu thất bại có thông báo theo yêu cầu đã rõ không?",
+     "o": [
+      "Chưa từng hỏi",
+      "Có mọi người",
+      "Không"
+     ],
+     "a": 2,
+     "e": "失敗した場合通知しない."
+    },
+    {
+     "q": "Tiêu chí có những ca nào?",
+     "o": [
+      "Thành công,thất bại,không quyền",
+      "Chỉ một ca thành công",
+      "Chỉ tên trường"
+     ],
+     "a": 0,
+     "e": "三つの動作を準備."
+    },
+    {
+     "q": "Ngoại lệ quản trị được phê chưa?",
+     "o": [
+      "Đã vì ca thường được đồng ý",
+      "Chưa, cần trách nhiệm duyệt",
+      "Không cần duyệt"
+     ],
+     "a": 1,
+     "e": "未確定と承認を区別."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và phản hồi",
+   "tasks": [
+    {
+     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "model": "要件には 保存後に 通知とありますが、失敗した 場合も 含みますか。 権限のない 人にも 通知しますか。 受け入れ基準には、成功と 失敗の 両方を 入れますね。 その 例外は 誰の 承認が 必要ですか。",
+     "vi": "Yêu cầu nói thông báo sau lưu, có gồm lúc thất bại không? Có thông báo cả người không có quyền không? Tiêu chí nghiệm thu gồm cả thành công và thất bại nhé? Ngoại lệ ấy cần ai duyệt?",
+     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+    },
+    {
+     "p": "Hỏi lại điều kiện gửi thông báo và ai duyệt ngoại lệ; cuối cùng tóm tắt phần đã chốt.",
+     "model": "成功した場合だけ通知するという理解でよろしいでしょうか。権限がない場合は送りませんね。管理者の例外は、どなたの承認が必要でしょうか。通常の条件とは分けて記録します。",
+     "vi": "Hiểu chỉ thông báo khi thành công đúng không? Không quyền thì không gửi nhé? Ngoại lệ quản trị ai duyệt? Tôi ghi tách điều thường.",
+     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết có kiểm tra",
+   "task": "Viết xác nhận sau họp: chỉ thông báo khi lưu thành công và người có quyền; ngoại lệ quản trị chờ duyệt, cần tiêu chí 3 ca.120–200 ký tự.",
+   "min": 120,
+   "model": "本日の確認内容を共有します。通常の通知は、保存が成功し、対象者に権限がある場合だけ送るという理解です。失敗時と権限がない場合は送りません。これら三つのケースを受け入れ基準に記載します。一方、管理者への例外的な通知は未確定で、責任者の承認を待っています。合意済みの条件と区別しましたので、相違があればご連絡ください。",
+   "modelVi": "Chia sẻ sau họp: thông báo thường chỉ khi lưu thành công và có quyền, không gửi khi lỗi/không quyền. Ghi ba ca nghiệm thu. Ngoại lệ quản trị còn chờ duyệt, tách khỏi đã thống nhất, xin phản hồi nếu khác.",
+   "tips": [
+    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
+    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+   ],
+   "checklist": [
+    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
+    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
+    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
+    "Câu kết thúc và mức lịch sự nhất quán"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong bài, “仕様” có nghĩa gì?",
+   "o": [
+    "quyền hạn",
+    "thất bại",
+    "đặc tả"
+   ],
+   "a": 2,
+   "e": "仕様の 理解を 確認しても よろしいでしょうか。 → Tôi xác nhận cách hiểu đặc tả được không?; “仕様” ở đây là đặc tả."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “要件” có nghĩa gì?",
+   "o": [
+    "đối tượng áp dụng",
+    "yêu cầu",
+    "thành công"
+   ],
+   "a": 1,
+   "e": "要件には 保存後に 通知とありますが、失敗した 場合も 含みますか。 → Yêu cầu nói thông báo sau lưu, có gồm lúc thất bại không?; “要件” ở đây là yêu cầu."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “条件” có nghĩa gì?",
+   "o": [
+    "điều kiện",
+    "thông báo",
+    "tiêu chí nghiệm thu"
+   ],
+   "a": 0,
+   "e": "権限のない 人は 対象から 外す、という 条件ですね。 → Điều kiện là loại người không có quyền khỏi đối tượng, đúng chứ?; “条件” ở đây là điều kiện."
+  },
+  {
+   "t": "mc",
+   "q": "Trong bài, “例外” có nghĩa gì?",
+   "o": [
+    "phê duyệt",
+    "thất bại",
+    "ngoại lệ"
+   ],
+   "a": 2,
+   "e": "未確定の 例外は、合意した 内容と 分けて 記載します。 → Tôi ghi riêng ngoại lệ chưa chốt với nội dung đã thống nhất.; “例外” ở đây là ngoại lệ."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “đặc tả” vào đúng đơn vị còn thiếu: ___の 理解を 確認しても よろしいでしょうか。",
+   "a": "仕様",
+   "e": "Đáp án 仕様 nghĩa là đặc tả. Câu hoàn chỉnh: 仕様の 理解を 確認しても よろしいでしょうか。 → Tôi xác nhận cách hiểu đặc tả được không?"
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “thành công” vào đúng đơn vị còn thiếu: 保存が ___した 場合だけ 通知する、という 理解で よろしいでしょうか。",
+   "a": "成功",
+   "e": "Đáp án 成功 nghĩa là thành công. Câu hoàn chỉnh: 保存が 成功した 場合だけ 通知する、という 理解で よろしいでしょうか。 → Hiểu chỉ thông báo khi lưu thành công, đúng không?"
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ/cụm có nghĩa “đối tượng áp dụng” vào đúng đơn vị còn thiếu: 権限のない 人は ___から 外す、という 条件ですね。",
+   "a": "対象",
+   "e": "Đáp án 対象 nghĩa là đối tượng áp dụng. Câu hoàn chỉnh: 権限のない 人は 対象から 外す、という 条件ですね。 → Điều kiện là loại người không có quyền khỏi đối tượng, đúng chứ?"
+  },
+  {
+   "t": "order",
+   "q": "Sắp các mảnh thành đúng câu mẫu: Tôi ghi riêng ngoại lệ chưa chốt với nội dung đã thống nhất.",
+   "w": [
+    "例外は、合意した",
+    "内容と",
+    "分けて",
+    "記載します。",
+    "未確定の"
+   ],
+   "a": "未確定の 例外は、合意した 内容と 分けて 記載します。",
+   "e": "Câu đúng: 未確定の 例外は、合意した 内容と 分けて 記載します。; chú ý vị trí các cụm và phần kết câu. ～という理解でよろしいでしょうか tóm tắt cách hiểu để xác nhận. ～場合 nêu điều kiện; ただし nêu ngoại lệ. Một lời đồng ý chung không chốt mọi chi tiết. Phân biệt 要件 với 仕様 thực hiện và 受け入れ基準 quan sát được; ghi phần đang chờ 承認."
+  },
+  {
+   "t": "listen",
+   "q": "Nghe và chọn ý đúng.",
+   "o": [
+    "Không. Xin ghi điều kiện đó vào đặc tả.",
+    "Có thông báo cả người không có quyền không?",
+    "Đúng. Nhưng ngoại lệ thông báo quản trị chưa chốt."
+   ],
+   "a": 1,
+   "e": "Câu đọc là 権限のない 人にも 通知しますか。 → Có thông báo cả người không có quyền không?",
+   "say": "権限のない 人にも 通知しますか。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "listen",
+   "q": "Nghe và chọn ý đúng.",
+   "o": [
+    "Người chịu trách nhiệm. Xác nhận rồi cập nhật phần thống nhất.",
+    "Ngoại lệ ấy cần ai duyệt?",
+    "Không. Chỉ khi thành công."
+   ],
+   "a": 1,
+   "e": "Câu đọc là その 例外は 誰の 承認が 必要ですか。 → Ngoại lệ ấy cần ai duyệt?",
+   "say": "その 例外は 誰の 承認が 必要ですか。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "仕様の 理解を 確認しても よろしいでしょうか。",
+   "lang": "ja-JP",
+   "a": "仕様の 理解を 確認しても よろしいでしょうか。",
+   "e": "Nghĩa: Tôi xác nhận cách hiểu đặc tả được không?; viết đúng chữ, trợ từ và âm dài/âm ngắt. Không viết romaji vào đáp án chữ Nhật."
+  },
+  {
+   "t": "match",
+   "q": "Nối các từ/cụm với nghĩa trong bài.",
+   "pairs": [
+    [
+     "権限",
+     "quyền hạn"
+    ],
+    [
+     "対象",
+     "đối tượng áp dụng"
+    ],
+    [
+     "通知",
+     "thông báo"
+    ],
+    [
+     "失敗",
+     "thất bại"
+    ],
+    [
+     "成功",
+     "thành công"
+    ]
+   ],
+   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+  },
+  {
+   "t": "mc",
+   "q": "Khi lưu thất bại có thông báo theo yêu cầu đã rõ không?",
+   "o": [
+    "Chưa từng hỏi",
+    "Có mọi người",
+    "Không"
+   ],
+   "a": 2,
+   "e": "失敗した場合通知しない."
+  },
+  {
+   "t": "mc",
+   "q": "Tiêu chí có những ca nào?",
+   "o": [
+    "Thành công,thất bại,không quyền",
+    "Chỉ một ca thành công",
+    "Chỉ tên trường"
+   ],
+   "a": 0,
+   "e": "三つの動作を準備."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Phiếu tình huống dự án giả Hộp Mây, dữ liệu giả, bảng vai trò và tiêu chí kiểm thông điệp; chuẩn bị hai phiếu có thông tin khác nhau.",
+  "steps": [
+   {
+    "t": "10'",
+    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+   },
+   {
+    "t": "20'",
+    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+   },
+   {
+    "t": "25'",
+    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+   },
+   {
+    "t": "15'",
+    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+   },
+   {
+    "t": "15'",
+    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+   },
+   {
+    "t": "20'",
+    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+   },
+   {
+    "t": "20'",
+    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+   },
+   {
+    "t": "15'",
+    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+   }
+  ],
+  "games": [
+   "Đổi vai khách hàng–thành viên phát triển: một người giữ yêu cầu, một người giữ giới hạn; chỉ thống nhất khi mỗi bên nhắc lại đúng ý.",
+   "Phân loại thẻ thông tin: dữ kiện đã xác nhận, giả thuyết, đề xuất và cam kết; giải thích dấu hiệu ngôn ngữ."
+  ],
+  "errors": [
+   "Hiểu 保存後 là cả khi lưu lỗi: hỏi điều kiện.",
+   "Lấy 同意 về ca thường làm 承認 ngoại lệ: tách phạm vi.",
+   "Tiêu chí chỉ ghi “chạy tốt”: đổi thành hành vi quan sát.",
+   "Không ghi người/ngày xác nhận: khó kiểm khi đặc tả đổi."
+  ],
+  "homework": "Ôn 15 cụm theo ngữ cảnh bài; viết thông điệp mới 120–200 ký tự, ghi âm một lượt đóng vai và tự phân loại điều đã biết/chưa biết."
+ }
+}

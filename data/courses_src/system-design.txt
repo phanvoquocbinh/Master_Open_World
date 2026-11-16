@@ -1,0 +1,376 @@
+=== COURSE system-design
+name: Thiết kế hệ thống
+icon: 🏗️
+floor: 7
+room: 703
+level: Cơ bản → Thực hành
+hours: 16
+summary: Từ yêu cầu, ước lượng và cache/DB tới queue, rate limit, quan sát; hai case study rút gọn link và nhắn tin tự soạn.
+
+## LESSON system-design-01 | Yêu cầu chức năng và chất lượng đo được
+
+### Bối cảnh và yêu cầu
+Thiết kế hệ thống như mở căn tin: cần biết phục vụ ai, vào giờ nào và bán những gì trước khi mua bếp. Sản phẩm giả Phiếu Trưa cho khách đặt/hủy đơn trước 10:30 và cho bếp tổng hợp số suất. Viết riêng phạm vi, bất biến và yêu cầu phi chức năng. Con số trong khóa là giả định của bài học, không phải cam kết cho sản phẩm thực tế.
+
+### Hợp đồng và dữ liệu
+Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+~~~text
+Chức năng: tạo đơn, sửa số suất, hủy trước giờ chốt
+Ngoài phạm vi: giao hàng và thanh toán trực tuyến
+Mục tiêu giả: p95 đọc menu < 300 ms tại 100 request/giây
+RPO: chấp nhận mất tối đa 5 phút dữ liệu
+RTO: phục hồi dịch vụ trong 30 phút
+~~~
+
+### Luồng xử lý và ranh giới
+Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+~~~text
+Order {id, ownerId, mealDate, qty, status, version}
+Bất biến: qty là số nguyên dương
+Trạng thái: draft -> confirmed -> cancelled
+Cùng idempotency key không tạo hai đơn logic
+~~~
+
+### Kiểm chứng và vận hành
+Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+~~~text
+[Khách] --HTTPS--> [API đơn] --> [DB]
+[Bếp]   --HTTPS-->     |
+                      +--> [Thông báo]
+~~~
+
+### Đánh đổi và lỗi thường gặp
+RPO nói về dữ liệu có thể mất, RTO nói về thời gian phục hồi. Mục tiêu “nhanh” không đủ để nghiệm thu. Yêu cầu xem đơn của mình phải đi cùng kiểm quyền ở server, không chỉ ẩn nút. Không thêm microservice trước khi có nhu cầu rõ.
+
+PRACTICE: Viết sáu câu hỏi làm rõ, bốn chức năng và ba yêu cầu chất lượng đo được; nêu hai việc ngoài phạm vi. Người khác phải có thể viết test chấp nhận từ tài liệu.
+Q: Yêu cầu nào có thể kiểm chứng?
++ p95 dưới 300 ms với tải và cửa sổ đo đã nêu
+- Hệ thống phải thật nhanh
+- Hệ thống phải cực tốt
+Q: RPO mô tả gì?
++ Mức dữ liệu mất tối đa chấp nhận khi phục hồi
+- Số máy chủ
+- Thời gian viết chương trình
+
+## LESSON system-design-02 | Ước lượng tải và dung lượng
+
+### Bối cảnh và yêu cầu
+Ước lượng như tính gạo cho bữa trưa: viết rõ số người và số suất mỗi người. DAU không bằng số người đồng thời. Trung bình ngày che mất đỉnh sát giờ chốt. Ghi đơn vị ở mỗi bước và kiểm bậc độ lớn; không tạo cảm giác chính xác giả từ giả định còn mơ hồ.
+
+### Hợp đồng và dữ liệu
+Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+~~~text
+DAU giả = 20.000
+Mỗi người: 12 đọc + 2 ghi/ngày
+Đọc trung bình = 240.000 / 86.400 ≈ 2,78 request/s
+Ghi trung bình = 40.000 / 86.400 ≈ 0,46 request/s
+Đỉnh x30: đọc ≈83,4; ghi ≈13,9 request/s
+~~~
+
+### Luồng xử lý và ranh giới
+Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+~~~text
+40.000 đơn/ngày * 1 KiB ≈ 39,1 MiB/ngày
+365 ngày ≈ 13,9 GiB dữ liệu thô
+Index giả bằng 50% dữ liệu -> tổng ≈20,9 GiB
+3 bản sao -> ≈62,7 GiB, chưa gồm backup/headroom
+~~~
+
+### Kiểm chứng và vận hành
+Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+~~~text
+Little ở trạng thái ổn định: L ≈ lambda * W
+100 request/s * 0,2 s trung bình ≈20 request đang xử lý
+Latency tăng 2 s -> ≈200 request
+Kiểm thêm: pool DB, CPU, bộ nhớ, tuổi hàng đợi
+~~~
+
+### Đánh đổi và lỗi thường gặp
+Không nhân số tài khoản đăng ký với request/giây một cách tùy tiện. Dùng thời gian trung bình cho Little, không âm thầm thay bằng p95. Dữ liệu ít vẫn có thể chậm vì thiếu index hoặc giữ khóa lâu.
+
+PRACTICE: Tính lại với DAU 50.000, đỉnh x40. Nêu giả định, kết quả có đơn vị và yếu tố nhạy nhất. Đề xuất số đo thực tế để kiểm giả định.
+Q: Vì sao cần xét tải đỉnh?
++ Thao tác thường dồn theo thời điểm
+- Để bỏ phép đo
+- Vì DAU bằng đồng thời
+Q: 100 request/s nhân 0,2 s bằng gì?
++ Khoảng 20 request đang xử lý
+- 500 máy bắt buộc
+- 20 GB
+
+## LESSON system-design-03 | Load balancer, stateless và timeout
+
+### Bối cảnh và yêu cầu
+Load balancer như người điều phối nhiều quầy: phân request tới nơi còn sẵn sàng. API nên đưa trạng thái quan trọng vào kho dùng chung thay vì RAM một replica. Cân bằng tải không tự bảo vệ DB, không tự xử lý request trùng và không đảm bảo dữ liệu bền.
+
+### Hợp đồng và dữ liệu
+Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+~~~text
+[Client] -> [Load balancer]
+               |       |
+            [API A] [API B]
+               |       |
+             [DB / kho session dùng chung]
+~~~
+
+### Luồng xử lý và ranh giới
+Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+~~~text
+Ngân sách request = 1000 ms
+Connect timeout = 100 ms
+Phụ thuộc = 300 ms/lần, tối đa 2 lần nếu còn ngân sách
+Retry có backoff + jitter
+POST chỉ retry khi có cơ chế idempotency phù hợp
+~~~
+
+### Kiểm chứng và vận hành
+Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+~~~text
+Thử dừng API A ở môi trường lớp
+LB bỏ A khỏi luồng nhận mới theo readiness
+Theo dõi: tỷ lệ lỗi, p95, in-flight requests
+Kiểm session còn dùng được và đơn không nhân đôi
+~~~
+
+### Đánh đổi và lỗi thường gặp
+Health check trả 200 cố định không chứng minh API sẵn sàng. Tăng replica có thể tăng tổng kết nối tới DB quá giới hạn. Sticky session không thay kho session bền. Không retry validation lỗi hoặc retry vô hạn.
+
+PRACTICE: Vẽ luồng khi API chết giữa POST. Đánh dấu nơi request có thể đã commit nhưng client chưa biết; đề xuất cách kiểm trùng và timeout.
+Q: Stateless API giúp gì?
++ Chuyển request giữa replica mà không lệ thuộc RAM một máy
+- Không cần DB
+- Không cần phân quyền
+Q: Retry thao tác ghi cần gì?
++ Thiết kế idempotency phía server phù hợp
+- Đổi id mỗi lần
+- Chỉ tăng timeout vô hạn
+
+## LESSON system-design-04 | Cache, SQL/NoSQL, index, replication, sharding
+
+### Bối cảnh và yêu cầu
+Cache giống thực đơn chép sẵn: nhanh nhưng có thể cũ. Chọn DB theo mô hình dữ liệu, ràng buộc và truy vấn. NoSQL gồm nhiều họ với đặc tính khác nhau; không thể kết luận mọi NoSQL đều nhanh hơn hoặc thiếu giao dịch. Giải thích yêu cầu nhất quán trước khi chọn.
+
+### Hợp đồng và dữ liệu
+Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+~~~text
+Cache-aside: cache hit -> trả
+Cache miss -> DB -> ghi cache TTL 30s -> trả
+Đổi giá: DB commit -> invalidate cache
+Tạo đơn: server xác nhận giá hiện tại, không tin giá client
+~~~
+
+### Luồng xử lý và ranh giới
+Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+~~~text
+Index: orders(owner_id, created_at) cho lịch sử theo người
+Replication: primary -> bản sao; có thể có lag
+Sharding: hash(owner_id) -> shard 0..3
+Cần thiết kế query liên shard, rebalance và backup
+~~~
+
+### Kiểm chứng và vận hành
+Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+~~~text
+Đơn hàng: SQL, unique key, transaction
+Cache/session tạm: key-value với TTL
+Tìm văn bản: search index chuyên dụng
+Truy vấn quan hệ sâu: cân nhắc graph theo yêu cầu thực
+~~~
+
+### Đánh đổi và lỗi thường gặp
+Index làm tăng chi phí ghi và dung lượng. Replica trễ có thể chưa thấy dữ liệu vừa ghi. Shard theo thời gian dễ dồn mọi ghi vào shard hiện tại. TTL không bảo đảm dữ liệu mới ngay; cache riêng tư phải có khóa gắn chủ thể.
+
+PRACTICE: Đề xuất index cho lịch sử đơn theo người và tổng đơn theo ngày. Mô tả giá đổi khi cache chưa hết hạn; bảo vệ số tiền lúc đặt ở đâu?
+Q: Replication khác sharding ở đâu?
++ Replication sao chép; sharding chia dữ liệu
+- Luôn đồng nghĩa
+- Sharding thay backup
+Q: Cache miss nên làm gì?
++ Đọc nguồn rồi ghi cache theo chính sách
+- Trả dữ liệu người trước
+- Xóa DB
+
+## LESSON system-design-05 | Hàng đợi, outbox và consumer idempotent
+
+### Bối cảnh và yêu cầu
+Hàng đợi như khay phiếu cho đội giao việc. Nếu worker chết trước ACK, message có thể được giao lại. Thiết kế theo khả năng trùng, chậm và sai thứ tự; broker không tự bảo đảm hiệu ứng nghiệp vụ đúng một lần. Tách thông báo khỏi đường tạo đơn để giảm độ trễ khi phù hợp.
+
+### Hợp đồng và dữ liệu
+Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+~~~text
+[API] -> transaction [orders + outbox]
+[Relay] -> [Queue] -> [Worker] -> [Thông báo]
+                        |
+                        +-> retry giới hạn -> dead-letter
+~~~
+
+### Luồng xử lý và ranh giới
+Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+~~~text
+begin transaction
+  kiểm event_id đã xử lý bằng unique constraint
+  nếu chưa: thay đổi trạng thái nội bộ + lưu processed(event_id)
+commit
+ACK
+Email ngoài DB cần idempotency/outbox phía gửi riêng
+~~~
+
+### Kiểm chứng và vận hành
+Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+~~~text
+Partition key: order_id cho thứ tự trong một đơn
+Retry: 1s, 2s, 4s + jitter, tối đa 3 lần
+Theo dõi: độ dài queue + tuổi message cũ nhất
+Giới hạn concurrency theo khả năng DB
+~~~
+
+### Đánh đổi và lỗi thường gặp
+ACK trước commit có thể mất việc. Commit rồi chết trước ACK dẫn tới nhận lặp. Outbox tránh khoảng trống ghi DB xong nhưng chưa publish. Rollback DB không thu hồi được email đã gửi; cần bảo vệ tác dụng phụ bên ngoài riêng.
+
+PRACTICE: Viết bảng diễn biến worker chết sau commit trước ACK. Chứng minh giao lại không thay đổi nghiệp vụ lần hai. Nêu chiến lược cho message lỗi cấu trúc.
+Q: Giao ít nhất một lần đòi hỏi gì?
++ Consumer xử lý trùng an toàn
+- Tin không có bản trùng
+- ACK trước xử lý
+Q: Outbox giúp gắn điều gì?
++ Ghi trạng thái DB và ghi sự kiện cần phát
+- CSS và HTML
+- Mọi email và rollback tuyệt đối
+
+## LESSON system-design-06 | Monolith/microservice, rate limit và quan sát
+
+### Bối cảnh và yêu cầu
+Bếp chung có thể hiệu quả khi nhóm nhỏ. Modular monolith giữ ranh giới module trong cùng triển khai; microservice tách triển khai nhưng tăng chi phí mạng, hợp đồng và nhất quán. Chọn vì quyền sở hữu, tải hoặc vòng đời độc lập, không theo khẩu hiệu.
+
+### Hợp đồng và dữ liệu
+Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+~~~text
+Monolith: [API | Menu | Orders | Notify] -> DB
+Tách có lý do: [Orders + DB] -> event -> [Notify + store]
+Cần version hợp đồng, timeout, trace, xử lý lỗi từng phần
+~~~
+
+### Luồng xử lý và ranh giới
+Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+~~~text
+Token bucket (pseudo-code nguyên tử):
+tokens=min(capacity, tokens + elapsed*refill)
+if tokens >= 1: tokens -= 1; accept
+else: 429 với Retry-After phù hợp
+Nhiều replica: cần kho/thuật toán phối hợp đúng
+~~~
+
+### Kiểm chứng và vận hành
+Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+~~~text
+Metric: request count, tỷ lệ lỗi, histogram duration
+Trace: lần một request qua API -> DB -> queue
+Log: sự kiện chi tiết, request id, không token/body riêng tư
+Alert giả: lỗi >5%/5 phút khi có đủ lưu lượng
+~~~
+
+### Đánh đổi và lỗi thường gặp
+Không gán user_id làm nhãn metric gây bùng cardinality. Không tính p95 toàn hệ bằng trung bình p95 từng máy. Rate limit theo IP có thể chặn cả văn phòng; chọn chủ thể phù hợp. Cảnh báo phải có người nhận và hướng điều tra.
+
+PRACTICE: Đề xuất kiến trúc cho nhóm ba người, tải 100 request/s; giải thích đánh đổi. Thêm rate limit, ba metric và một cảnh báo có cửa sổ đo.
+Q: Vì sao không mặc định microservice?
++ Chi phí vận hành có thể vượt lợi ích
+- Vì không thể scale
+- Vì không có API
+Q: Công cụ lần request qua nhiều service?
++ Distributed trace
+- Màu dashboard
+- Số file
+
+## LESSON system-design-07 | Case study 1: rút gọn link
+
+### Bối cảnh và yêu cầu
+Dịch vụ giả Lối Ngắn tạo mã trỏ tới https://example.com/lesson. Hỏi rõ mã có hết hạn, sửa đích và thống kê không. Đường đọc nhiều hơn ghi nên cache mapping hữu ích. Chuyển hướng cần chính sách chống lạm dụng; không để máy chủ tải URL tùy ý nếu chưa phòng SSRF.
+
+### Hợp đồng và dữ liệu
+Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+~~~text
+POST /links {target: "https://example.com/lesson", ttlDays: 7}
+-> 201 {code: "m7Qp2"}
+GET /m7Qp2 -> 302 với Location là đích hợp lệ
+links(code UNIQUE, target, owner_id, expires_at)
+~~~
+
+### Luồng xử lý và ranh giới
+Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+~~~text
+[Client] -> [LB] -> [Redirect API] -> [Cache]
+                           | miss
+                           v
+                         [DB link]
+[Click events] -> [Queue] -> [Worker thống kê]
+~~~
+
+### Kiểm chứng và vận hành
+Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+~~~text
+Sinh code ngẫu nhiên bằng nguồn bảo mật
+62 ký tự, dài 7 -> không gian 62^7
+INSERT với unique constraint; va chạm thì retry hữu hạn
+TTL cache <= thời gian còn lại của link
+Thu hồi/sửa đích -> invalidate theo yêu cầu nhất quán
+~~~
+
+### Đánh đổi và lỗi thường gặp
+Không gian lớn không loại bỏ hoàn toàn va chạm. 301 có thể bị cache lâu; 302 linh hoạt hơn cho đích thay đổi nhưng cần chính sách cache rõ. Không chờ ghi thống kê đồng bộ trước redirect nếu không có yêu cầu bắt buộc. Validate scheme và độ dài URL.
+
+PRACTICE: Vẽ luồng tạo/mở mã với đọc:ghi=100:1. Nêu xử lý mã hết hạn, va chạm, cache cũ và thu hồi khẩn. Chỉ rõ nguồn sự thật.
+Q: Unique code constraint giúp gì?
++ Ngăn hai link cùng mã khi có cuộc đua
+- Mã hóa URL
+- Thay backup
+Q: TTL cache với link hết hạn nên thế nào?
++ Không vượt thời gian còn lại
+- Vô hạn
+- Không liên quan
+
+## LESSON system-design-08 | Case study 2: nhắn tin và đồng bộ lại
+
+### Bối cảnh và yêu cầu
+Ứng dụng giả Hộp Thư Mây cho nhóm lớp gửi tin và đọc lịch sử sau khi mất mạng. Phân biệt server đã nhận, thiết bị đã nhận và người dùng đã đọc. Yêu cầu thứ tự trong một cuộc trò chuyện; không cần thứ tự toàn hệ. Kiểm quyền thành viên cả khi kết nối và gửi/đọc.
+
+### Hợp đồng và dữ liệu
+Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+~~~text
+[Client] <-> [WS Gateway] -> [Message service] -> [DB]
+                                      | commit rồi ACK
+                                      +-> [Pub/sub] -> [Gateway nhận]
+Reconnect -> lấy lịch sử sau cursor đã nhận
+~~~
+
+### Luồng xử lý và ranh giới
+Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+~~~text
+messages(conversation_id, seq, sender_id, client_message_id, body)
+UNIQUE(conversation_id, seq)
+UNIQUE(sender_id, client_message_id)
+seq cấp ở server theo conversation với kiểm soát đồng thời
+read receipt = max_read_seq của thành viên
+~~~
+
+### Kiểm chứng và vận hành
+Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+~~~text
+Mất ACK -> gửi lại cùng client_message_id -> một tin logic
+Gateway chết -> reconnect + bù lịch sử theo cursor
+Tin đến sai thứ tự -> sắp theo seq, tải phần thiếu
+Thu hồi thành viên -> kiểm lại quyền với trạng thái mới
+~~~
+
+### Đánh đổi và lỗi thường gặp
+WebSocket không thay lưu trữ bền. ACK server không chứng minh người nhận đã đọc. Đồng hồ client lệch nên không dùng để quyết định thứ tự nghiệp vụ. TLS bảo vệ đường truyền, không đồng nghĩa mã hóa đầu cuối. Không log toàn bộ nội dung tin.
+
+PRACTICE: Viết luồng mất mạng/retry, đánh dấu commit và ACK. Đặt ba test: không nhân đôi, lịch sử không bỏ tin, thu hồi quyền có hiệu lực. So sánh với case link.
+Q: ACK sau commit chứng minh gì?
++ Server đã lưu nhận theo cam kết
+- Người nhận đã đọc
+- Mọi thiết bị đều online
+Q: Retry cùng tin dùng id thế nào?
++ Giữ cùng client_message_id
+- Đổi id mọi lần
+- Bỏ định danh

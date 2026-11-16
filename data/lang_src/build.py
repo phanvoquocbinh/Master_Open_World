@@ -76,6 +76,18 @@ def check_html(rep, where, html):
 
 def is_zh(track): return track == 'zh'
 
+def check_readings(rep, where, item, track, required=False):
+    # Chỉ mở rộng track Nhật/Hàn; không đổi kiểm tra dữ liệu Anh/Trung.
+    keys = ('kana', 'romaji', 'kanji', 'hv') if track == 'ja' else ('rr',) if track == 'ko' else ()
+    for key in keys:
+        if key in item and not isinstance(item[key], str):
+            rep.E(where, f'"{key}" phải là chuỗi')
+    if required:
+        for key in (('kana', 'romaji') if track == 'ja' else ('rr',) if track == 'ko' else ()):
+            if not isinstance(item.get(key), str) or not item[key].strip():
+                rep.E(where, f'thiếu phiên âm "{key}" ({item.get("w", item.get("c", ""))})')
+
+
 def check_q(rep, where, q, track):
     if not isinstance(q, dict) or 'q' not in q: rep.E(where, 'câu hỏi thiếu "q"'); return
     if 'o' in q:
@@ -114,6 +126,7 @@ def check_ex(rep, where, x, track):
         if not isinstance(p, list) or len(p) < 2 or any(not isinstance(i, list) or len(i) != 2 for i in p): rep.E(where, 'match: "pairs" phải là [[trái, phải], …]')
         elif len(set(str(i[1]) for i in p)) != len(p): rep.E(where, 'match: vế phải bị trùng')
     if t in ('mc', 'fill', 'order', 'listen') and not x.get('e'): rep.W(where, 'thiếu giải thích "e"')
+    check_readings(rep, where, x, track)
 
 def check_words(rep, where, items, track):
     if not isinstance(items, list) or not items: rep.E(where, 'words.items rỗng'); return 0
@@ -123,6 +136,8 @@ def check_words(rep, where, items, track):
         if is_zh(track):
             if not w.get('py'): rep.E(wh, f'thiếu pinyin "py" ({w.get("w")})')
             if 'hv' not in w: rep.W(wh, f'thiếu âm Hán Việt "hv" ({w.get("w")})')
+        elif track in ('ja', 'ko'):
+            check_readings(rep, wh, w, track, required=True)
         else:
             if not w.get('ipa'): rep.W(wh, f'thiếu IPA ({w.get("w")})')
     return len(items)
@@ -134,11 +149,13 @@ def check_lines(rep, where, lines, track, level):
         if not l.get('t'): rep.E(wh, 'thiếu "t"')
         if l.get('g') not in ('f', 'm'): rep.W(wh, '"g" nên là "f"/"m"')
         if is_zh(track) and level in PY_REQUIRED and not l.get('py'): rep.E(wh, 'thiếu pinyin "py"')
+        check_readings(rep, wh, l, track)
 
 def check_part(rep, where, p, track, level, stats):
     k = p.get('k') if isinstance(p, dict) else None
     if k not in PART_K: rep.E(where, f'"k" phải thuộc {sorted(PART_K)}'); return
     if not p.get('h'): rep.W(where, 'thiếu tiêu đề "h"')
+    check_readings(rep, where, p, track)
     if 'html' in p: check_html(rep, where, p['html'])
     if k == 'text' and not p.get('html'): rep.E(where, 'text thiếu html')
     elif k == 'sounds':
@@ -150,6 +167,7 @@ def check_part(rep, where, p, track, level, stats):
         if not p.get('html') and not p.get('table'): rep.E(where, 'grammar cần html hoặc table')
         for i, e in enumerate(p.get('ex') or []):
             if not e.get('t'): rep.E(f'{where}.ex[{i}]', 'ví dụ thiếu "t"')
+            check_readings(rep, f'{where}.ex[{i}]', e, track)
             if is_zh(track) and level in PY_REQUIRED and not e.get('py'): rep.W(f'{where}.ex[{i}]', 'ví dụ tiếng Trung nên có "py"')
         for e in p.get('tips') or []: check_html(rep, where + '.tips', e)
     elif k == 'dialog':
@@ -162,11 +180,16 @@ def check_part(rep, where, p, track, level, stats):
         if not p.get('tasks'): rep.E(where, 'speak thiếu tasks')
         for i, t in enumerate(p.get('tasks') or []):
             if not t.get('p'): rep.E(f'{where}.tasks[{i}]', 'thiếu "p"')
+            check_readings(rep, f'{where}.tasks[{i}]', t, track)
     elif k == 'write':
         if not p.get('task') or not p.get('model'): rep.E(where, 'write thiếu task/model')
     elif k == 'chars':
         for i, c in enumerate(p.get('items') or []):
-            if not c.get('c') or not c.get('py'): rep.E(f'{where}.items[{i}]', 'chars thiếu "c"/"py"')
+            wh = f'{where}.items[{i}]'
+            if track in ('ja', 'ko'):
+                if not c.get('c'): rep.E(wh, 'chars thiếu "c"')
+                check_readings(rep, wh, c, track, required=True)
+            elif not c.get('c') or not c.get('py'): rep.E(wh, 'chars thiếu "c"/"py"')
 
 def check_lesson(rep, f, L, track, level, stats):
     for key in ('no', 'title', 'parts', 'exercises'):
@@ -213,6 +236,7 @@ def check_talk(rep, f, T, track, stats):
     if len({l.get('s') for l in T.get('lines') or []}) < 2: rep.E(f, 'hội thoại cần ≥ 2 người nói')
     for i, p in enumerate(T.get('phrases') or []):
         if not p.get('t') or not p.get('vi'): rep.E(f'{f} phrases[{i}]', 'thiếu "t"/"vi"')
+        check_readings(rep, f'{f} phrases[{i}]', p, track)
     qs = T.get('qs') or []
     if len(qs) < 4: rep.W(f, f'chỉ có {len(qs)} câu hỏi nghe (nên 5–8)')
     for i, q in enumerate(qs): check_q(rep, f'{f} qs[{i}]', q, track)
@@ -256,12 +280,21 @@ def build_dir(rep, d, write=True):
             X = load(rep, p)
             if X is None: continue
             f = os.path.relpath(p, DATA)
-            if X.get('kind') not in ('ielts', 'hsk'): rep.E(f, '"kind" phải là ielts/hsk')
+            allowed = ('jlpt',) if track == 'ja' else ('topik',) if track == 'ko' else ('ielts', 'hsk')
+            if X.get('kind') not in allowed: rep.E(f, '"kind" phải thuộc ' + '/'.join(allowed))
+            if track == 'ja' and X.get('jlpt') not in ('n5', 'n4', 'n3', 'n2', 'n1'):
+                rep.E(f, '"jlpt" phải là n5/n4/n3/n2/n1')
+            if track == 'ko' and (type(X.get('topik')) is not int or X.get('topik') not in (1, 2)):
+                rep.E(f, '"topik" phải là 1 (TOPIK I) hoặc 2 (TOPIK II)')
             n, _ = check_exam(rep, f, X, track, 'hsk1' if X.get('kind') == 'hsk' and (X.get('hsk') or 9) <= 4 else 'mock', stats) or (0, 0)
             X['id'] = X.get('id') or f'{track}-mock-{os.path.splitext(os.path.basename(p))[0]}'
             tests.append(X)
         out = {'track': track, 'level': 'mock', 'tests': tests}
         meta = {'tests': [{'id': t['id'], 'title': t.get('title'), 'kind': t.get('kind'), 'hsk': t.get('hsk'), 'time': t.get('time'), 'items': sum(len(s.get('items') or []) for s in t.get('sections', []))} for t in tests]}
+        if track in ('ja', 'ko'):
+            for summary, test in zip(meta['tests'], tests):
+                field = 'jlpt' if track == 'ja' else 'topik'
+                summary[field] = test.get(field)
     else:
         lessons = []
         for p in sorted(glob.glob(os.path.join(d, '[0-9]*.json'))):
