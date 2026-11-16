@@ -265,9 +265,10 @@ export async function build(K){
     put(MAT.steel, xf(cyl(.12,.12,6,6), 482, Y4+40.3, -800), dist); circles.push({x:482, z:-800, r:3.2}); occ(476,488,-806,-794);
     // máy bay đỗ + máy bay cất cánh định kỳ
     for(const [x,c] of [[322,0x1fb5a6],[372,0x7b3fc4],[422,0xf08a24]]){ const p=plane(c); p.position.set(x, Y4+3.3, -822); root.add(p); circles.push({x, z:-816, r:3}, {x, z:-828, r:3}); (out.parked=out.parked||[]).push({x, z:-822}); }   // mũi quay về nhà ga
-    const tk=plane(0x18a999); tk.userData.dynamic=true; root.add(tk); out.takeoff={t:0, p:tk};
+    const tk=plane(0x18a999); tk.userData.dynamic=true; tk.userData.noObs=true; root.add(tk); out.takeoff={t:0, p:tk};   /* noObs: không tính là chướng ngại khi lập quỹ đạo bay */
     label('✈️ Sân bay đỉnh núi Dev City', 'Đường băng 470 m ở độ cao +85 m', 375, Y4+28, -860, 450, .85);
-    place('✈️','Dev City – Sân bay đỉnh núi (+85 m)','Nhà ga · đường băng · đài kiểm soát', 370, -746, 370, -790); }
+    place('✈️','Dev City – Sân bay đỉnh núi (+85 m)','Nhà ga · đường băng · đài kiểm soát', 370, -746, 370, -790);
+    if(!(W.AIRPORTS||(W.AIRPORTS=[])).find(a=>a.key==='devcity')) W.AIRPORTS.push({key:'devcity', name:'Sân bay Đỉnh Núi Dev City', x:375, z:-885, y:Y4, rwy:{x0:140, x1:610, z:-885, y:Y4}, spawn:{x:370, z:-746, lx:370, lz:-790}});   /* S19g 16/11: sổ sân bay chung (skyport.js) – chuyến QC Airlines → Dev City hạ cánh thật */ }
 
   /* ============================== 🛕 LINH SƠN VÂN TỰ ============================== */
   { const dist='temple', A={x:PA.x, z:-PA.d, y:PA.top}, Bc={x:PB.x, z:-PB.d, y:PB.top}, u=[abu[0], -abu[1]];   // u: hướng A → B trong toạ độ thế giới (x, z)

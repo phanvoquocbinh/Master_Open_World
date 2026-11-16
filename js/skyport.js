@@ -252,17 +252,85 @@ export async function make(W, ctx){
     m.body.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{ const d=DEST.find(q=>q.key===b.dataset.k), biz=b.dataset.c==='biz', price=biz?80:25; m.close();
       askPay(price, `✈️ Vé ${biz?'Thương gia':'Phổ thông'} QC Airlines → ${d.name}`, ()=>{ if(!spend(price)) return; S.flights=(S.flights||0)+1; save(); startFlight(d, biz?'biz':'eco'); }); }); }
   for(const g of GATES) INTER.push({x:g.x, z:g.z-1.6, r:1.8, prio:.8, label:`🛫 Boarding cổng ${g.no} – mua vé & lên máy bay (E)`, action:()=>boardingModal(g)});
-  // đường bay: lăn đà trên 09L (Tây → Đông), cất cánh, lên tầng mây, tới đích, hạ cánh (sân đích đã đăng ký) hoặc vòng về hạ cánh 09L
-  function buildPath(d){ const r=RW[0], y0=PLANE_Y, pts=[V3(RX0+10,y0,r.z), V3(RX0+110,y0,r.z), V3(RX0+190,y0+3,r.z), V3(RX1+120,y0+60,r.z), V3(RX1+380,GY+170,r.z-120)];
+  /* ============================== S19g 16/11: QUỸ ĐẠO BAY AN TOÀN (Bình: "sao máy bay lại đâm vào tòa nhà vậy") ==============================
+     • Bản đồ chướng ngại OB: lưới 25 m, độ cao lớn nhất của mọi lưới tĩnh (khối nhỏ: đỉnh hộp bao · lưới lớn: từng đỉnh) + mặt đất – dựng 1 lần, chia nhỏ theo khung.
+     • Cất cánh hướng TÂY (ra biển) thẳng trục đường băng, leo 14 % → vòng xoắn leo trên biển tới độ cao bay Hc = vật cao nhất trên tuyến + 60 m (≥ 180)
+     • Ra khỏi vòng theo tiếp tuyến, bay thẳng · tới gần đích: vòng xoắn hạ độ cao rồi vào thẳng trục đường băng đích, góc lượn ≥ 3° (chọn đầu có góc nhỏ nhất)
+     • Quét va chạm dọc quỹ đạo (mỗi 20 m): cao hơn chướng ngại ≥ 35 m (trừ lúc lăn đà và 400 m cuối trước khi chạm đất) – còn điểm xuyên thì nâng Hc rồi dựng lại. */
+  const OB={cell:25, x0:-1700, z0:-1600, nx:140, nz:136, h:null, ready:false, list:null, i:0, gi:0};
+  function obsStep(budget){ if(OB.ready) return true; const t0=performance.now(); const C=OB.cell;
+    if(!OB.h){ OB.h=new Float32Array(OB.nx*OB.nz).fill(-60); OB.list=[]; scene.updateMatrixWorld(true);
+      scene.traverse(o=>{ if(!o.isMesh || o.isSkinnedMesh || o.isInstancedMesh || !o.geometry || !o.geometry.attributes || !o.geometry.attributes.position) return; if(o===W.water || o===W.ocean || o===W.sky || /sky|cloud|mây|water|ocean|sea/i.test(o.name||'')) return;
+        for(let q=o; q; q=q.parent) if(q.userData && q.userData.noObs) return; OB.list.push(o); }); }
+    const put=(x,z,y)=>{ const i=Math.floor((x-OB.x0)/C), j=Math.floor((z-OB.z0)/C); if(i<0||j<0||i>=OB.nx||j>=OB.nz) return; const k=j*OB.nx+i; if(y>OB.h[k]) OB.h[k]=y; };
+    const bb=new THREE.Box3();
+    while(OB.i<OB.list.length){ const o=OB.list[OB.i++], g=o.geometry; if(!g.boundingBox) g.computeBoundingBox(); bb.copy(g.boundingBox).applyMatrix4(o.matrixWorld);
+      if(!(bb.max.y>-20) || bb.min.y>170 || bb.max.x-bb.min.x>4000) continue;
+      if(Math.max(bb.max.x-bb.min.x, bb.max.z-bb.min.z)<=120){ for(let x=bb.min.x; x<=bb.max.x+C; x+=C) for(let z=bb.min.z; z<=bb.max.z+C; z+=C) put(Math.min(x,bb.max.x), Math.min(z,bb.max.z), bb.max.y); }
+      else { const pa=g.attributes.position, m=o.matrixWorld.elements; for(let v=0; v<pa.count; v++){ const x=pa.getX(v), y=pa.getY(v), z=pa.getZ(v), wx=m[0]*x+m[4]*y+m[8]*z+m[12], wy=m[1]*x+m[5]*y+m[9]*z+m[13], wz=m[2]*x+m[6]*y+m[10]*z+m[14]; put(wx,wz,wy); } }
+      if(budget && performance.now()-t0>budget) return false; }
+    while(OB.gi<OB.nx*OB.nz){ const k=OB.gi++, i=k%OB.nx, j=(k/OB.nx)|0, x=OB.x0+(i+.5)*C, z=OB.z0+(j+.5)*C; let g=-60; try{ g=W.groundAt(x,z); }catch(e){} if(g>OB.h[k]) OB.h[k]=g; if(budget && (k&255)===0 && performance.now()-t0>budget) return false; }
+    OB.ready=true; OB.list=null; return true; }
+  const OH=(x,z)=>{ if(!OB.ready) obsStep(0); const i=Math.floor((x-OB.x0)/OB.cell), j=Math.floor((z-OB.z0)/OB.cell); let m=-60; for(let a=-1;a<=1;a++) for(let b=-1;b<=1;b++){ const ii=i+a, jj=j+b; if(ii<0||jj<0||ii>=OB.nx||jj>=OB.nz) continue; const v=OB.h[jj*OB.nx+ii]; if(v>m) m=v; } return m; };
+  const lineMax=(ax,az,bx,bz)=>{ const L=Math.hypot(bx-ax,bz-az), n=Math.max(1,Math.ceil(L/20)); let m=-60; for(let k=0;k<=n;k++){ const t=k/n; m=Math.max(m, OH(ax+(bx-ax)*t, az+(bz-az)*t)); } return m; };
+  const circMax=(cx,cz,r)=>{ let m=-60; for(let k=0;k<48;k++){ const a=k/48*TAU; m=Math.max(m, OH(cx+Math.cos(a)*r, cz+Math.sin(a)*r)); } return m; };
+  const tAt=(phi,sg)=>[-Math.sin(phi)*sg, Math.cos(phi)*sg];
+  // điểm tiếp tuyến từ điểm ngoài O tới vòng (C,R) quay chiều sg (đi tới O→Q rồi bám vòng) hoặc rời vòng tới N (out=true)
+  function tangentPhi(C, R, sg, O, out){ const dx=O[0]-C[0], dz=O[1]-C[1], d=Math.hypot(dx,dz); if(d<=R*1.02) return null; const a=Math.atan2(dz,dx), b=Math.acos(R/d);
+    for(const phi of [a+b, a-b]){ const q=[C[0]+Math.cos(phi)*R, C[1]+Math.sin(phi)*R], t=tAt(phi,sg), v=out ? [O[0]-q[0], O[1]-q[1]] : [q[0]-O[0], q[1]-O[1]]; if(t[0]*v[0]+t[1]*v[1]>0) return phi; } return null; }
+  const arcLen=(p0,p1,sg,R)=>{ let d=sg*(p1-p0); d=((d%TAU)+TAU)%TAU; return d*R; };
+  function pushArc(pts, C, R, sg, phi0, len, y0, y1){ const n=Math.max(2,Math.ceil(len/45)); for(let k=1;k<=n;k++){ const t=k/n, ph=phi0+sg*(len/R)*t; pts.push(V3(C[0]+Math.cos(ph)*R, y0+(y1-y0)*t, C[1]+Math.sin(ph)*R)); } }
+  function pushLine(pts, a, b, y0, y1, step=90){ const L=Math.hypot(b[0]-a[0],b[1]-a[1]), n=Math.max(1,Math.ceil(L/step)); for(let k=1;k<=n;k++){ const t=k/n; pts.push(V3(a[0]+(b[0]-a[0])*t, y0+(y1-y0)*t, a[1]+(b[1]-a[1])*t)); } }
+  const R1=300, CLIMB=.14, DESC=.11;
+  // chọn đầu hạ cánh + góc lượn cho đường băng rw {x0,x1,z,y} (trục x)
+  function finalFor(rw){ let best=null; for(const d of [1,-1]){ const T=[d>0?rw.x0+12:rw.x1-12, rw.z]; let th=Math.atan(.0524);
+      for(let s2=380; s2<=1700; s2+=40){ const x=T[0]-d*s2, z=T[1], need=OH(x,z)-rw.y+35; if(need>0) th=Math.max(th, Math.atan(need/s2)); }
+      const Lf=1500, H=rw.y+Lf*Math.tan(th), F=[T[0]-d*Lf, T[1]], cand={d, T, F, th, H};
+      let sideBest=null; for(const s2 of [1,-1]){ const C=[F[0], F[1]+s2*R1], m=circMax(C[0],C[1],R1); if(!sideBest || m<sideBest.m) sideBest={s:s2, C, m}; } cand.side=sideBest; cand.score=th*10+(sideBest.m>H-40?1:0);
+      if(!best || cand.score<best.score) best=cand; } return best; }
+  // dựng quỹ đạo: dep = {rw, startX(đầu lăn đà), dir(-1: cất cánh về −x)}, mids = điểm bay ngang qua, arr = {rw} | null
+  function planPath(dep, mids, arr, extraH=0){
+    const rw0=dep.rw, dir=dep.dir, y0=rw0.y+3.55, sx=dep.startX, pts=[V3(sx,y0,rw0.z), V3(sx+dir*100,y0,rw0.z), V3(sx+dir*175,y0+2,rw0.z)];
+    const liftX=sx+dir*175, E=[dir<0 ? rw0.x0-500 : rw0.x1+500, rw0.z];   // vào vòng leo ngoài biển, cách đầu đường băng 500 m (xa công viên Kỳ Quan / đảo Ngoại ngữ)
+    const yE=y0+2+CLIMB*Math.abs(E[0]-liftX); pushLine(pts, [liftX,rw0.z], E, y0+2, yE, 60);
+    const fin=arr ? finalFor(arr.rw) : null;
+    const targets=[...mids.map(m=>[m[0],m[1]])]; if(fin){ const C2=fin.side.C; targets.push(C2); }
+    // độ cao bay: vật cao nhất trên tuyến (vòng leo → các điểm → vòng hạ) + 60
+    let Hc=Math.max(180, yE+20), prev=E; for(const t2 of targets){ Hc=Math.max(Hc, lineMax(prev[0],prev[1],t2[0],t2[1])+60); prev=t2; }
+    Hc+=extraH; const sideE=dep.side??1, C1=[E[0], E[1]+sideE*R1], sg1=(dir<0?-1:1)*sideE; Hc=Math.max(Hc, circMax(C1[0],C1[1],R1)+60);
+    // vòng leo: từ E (đang bay theo dir) quay tới khi đủ cao + đúng hướng tiếp tuyến ra điểm kế
+    const phiE=Math.atan2(E[1]-C1[1], E[0]-C1[0]), first=targets[0] || (fin ? fin.F : [E[0]+dir*800, E[1]]);
+    let phiX=tangentPhi(C1, R1, sg1, first, true); if(phiX==null) phiX=phiE+sg1*Math.PI;
+    let arc=arcLen(phiE, phiX, sg1, R1); while((Hc-yE)/arc>CLIMB) arc+=TAU*R1; pushArc(pts, C1, R1, sg1, phiE, arc, yE, Hc);
+    let cur=[C1[0]+Math.cos(phiE+sg1*arc/R1)*R1, C1[1]+Math.sin(phiE+sg1*arc/R1)*R1];
+    for(const m of mids){ pushLine(pts, cur, m, Hc, Hc); cur=[m[0],m[1]]; }
+    if(!fin) return {pts, landAt:-1, Hc};
+    // vòng hạ: tiếp tuyến từ cur vào vòng C2 (chiều quay để tới F đúng hướng hạ cánh), hạ dần tới độ cao đầu đường lượn
+    const C2=fin.side.C, sg2=fin.d*fin.side.s, phiF=Math.atan2(fin.F[1]-C2[1], fin.F[0]-C2[0]); let phiQ=tangentPhi(C2, R1, sg2, cur, false);
+    if(phiQ==null) phiQ=phiF-sg2*Math.PI; const Q=[C2[0]+Math.cos(phiQ)*R1, C2[1]+Math.sin(phiQ)*R1]; pushLine(pts, cur, Q, Hc, Hc);
+    let arc2=arcLen(phiQ, phiF, sg2, R1); while((Hc-fin.H)/Math.max(arc2,1)>DESC) arc2+=TAU*R1; pushArc(pts, C2, R1, sg2, phiQ, arc2, Hc, fin.H);
+    // đường lượn thẳng trục đường băng → chạm đất → lăn chậm lại trên đường băng
+    const ry=arr.rw.y+3.55, Lr=Math.abs(arr.rw.x1-arr.rw.x0); pushLine(pts, fin.F, [fin.T[0]-fin.d*120, fin.T[1]], fin.H, ry+120*Math.tan(fin.th), 140);
+    pts.push(V3(fin.T[0], ry, fin.T[1])); const landAt=pts.length-1; pts.push(V3(fin.T[0]+fin.d*Lr*.5, ry, fin.T[1])); pts.push(V3(fin.T[0]+fin.d*Lr*.86, ry, fin.T[1]));
+    return {pts, landAt, Hc, fin}; }
+  // quét va chạm: mẫu 20 m dọc đường cong, bỏ đoạn lăn đà và 400 m cuối trước khi chạm đất
+  function auditCurve(curve, sSkip0, sLand){ const L=curve.getLength(), n=Math.ceil(L/20), bad=[]; let minC=1e9;
+    for(let k=0;k<=n;k++){ const sK=k/n*L; if(sK<sSkip0 || (sLand!=null && sK>sLand-400)) continue; const p=curve.getPointAt(k/n), c=p.y-OH(p.x,p.z); minC=Math.min(minC,c); if(c<35) bad.push([+p.x.toFixed(0),+p.y.toFixed(0),+p.z.toFixed(0),+c.toFixed(1)]); }
+    return {bad, minClear:+minC.toFixed(1), L:+L.toFixed(0)}; }
+  function buildSafe(dep, mids, arr){ let r=null, extra=0; for(let tries=0; tries<5; tries++){ r=planPath(dep, mids, arr, extra); const curve=new THREE.CatmullRomCurve3(r.pts, false, 'centripetal');
+      const sL=r.landAt>=0 ? (()=>{ let acc=0; for(let i=1;i<=r.landAt;i++) acc+=r.pts[i].distanceTo(r.pts[i-1]); return acc; })() : null; const au=auditCurve(curve, 420, sL); r.curve=curve; r.audit=au; if(!au.bad.length) break; extra+=60; }
+    return r; }
+  out.planPath=planPath; out.buildSafe=buildSafe; out.auditCurve=auditCurve; out.OB=OB; out.OH=OH;
+  // đường bay người chơi: cất cánh 09L về phía Tây (ra biển) → … → hạ cánh sân đích (đã đăng ký) hoặc bay ngang qua rồi về hạ cánh tại đây
+  function buildPath(d){ const r=RW[0], rw={x0:RX0, x1:RX1, z:r.z, y:GY}, dep={rw, startX:RX1-10, dir:-1, side:1};
     const ap=W.AIRPORTS.find(a=>a.key===d.key && a.key!=='skyport');
-    if(ap){ const rw=ap.rwy||{x0:ap.x-120, x1:ap.x+120, z:ap.z, y:ap.y||0}; pts.push(V3(rw.x0-700, rw.y+240, rw.z+300)); pts.push(V3(rw.x0-420, rw.y+90, rw.z)); pts.push(V3(rw.x0-120, rw.y+20, rw.z)); pts.push(V3(rw.x0+20, rw.y+3.55, rw.z)); pts.push(V3(rw.x0+160, rw.y+3.55, rw.z)); pts.push(V3(rw.x0+230, rw.y+3.55, rw.z)); return {curve:new THREE.CatmullRomCurve3(pts), land:ap, landAt:pts.length-3}; }
-    if(d.key==='tour') for(const [x,z] of [[480,40],[900,180],[700,900],[-60,950],[-560,-60],[-420,330]]) pts.push(V3(x,235+R()*30,z));
-    else { pts.push(V3(d.x-200, 240, d.z-200)); pts.push(V3(d.x+150, 230, d.z)); pts.push(V3(d.x, 250, d.z+200)); }
-    pts.push(V3(RX0-700, GY+200, r.z+300)); pts.push(V3(RX0-420, GY+90, r.z)); pts.push(V3(RX0-120, GY+20, r.z)); pts.push(V3(RX0+20, PLANE_Y, r.z)); pts.push(V3(RX0+170, PLANE_Y, r.z)); pts.push(V3(RX0+260, PLANE_Y, r.z));
-    return {curve:new THREE.CatmullRomCurve3(pts), land:HOME, landAt:pts.length-3}; }
-  function startFlight(d, cls){ if(HOOK.vehicle || flight) return; const {curve, land, landAt}=buildPath(d); const L=curve.getLength(); 
+    let res; if(ap){ const arw=ap.rwy||{x0:ap.x-120, x1:ap.x+120, z:ap.z, y:ap.y||0}; res=buildSafe(dep, [], {rw:arw}); res.land=ap; }
+    else { const mids=d.key==='tour' ? [[480,40],[900,180],[700,900],[-60,950],[-560,-60],[-420,330]] : [[d.x-200, d.z-200],[d.x+150, d.z],[d.x, d.z+200]]; res=buildSafe(dep, mids, {rw}); res.land=HOME; }
+    if(res.audit && res.audit.bad.length) console.warn('[Skyport] quỹ đạo còn điểm sát chướng ngại', res.audit);
+    return {curve:res.curve, land:res.land, landAt:res.landAt, audit:res.audit}; }
+  function startFlight(d, cls){ if(HOOK.vehicle || flight) return; if(!OB.ready) obsStep(0); const {curve, land, landAt}=buildPath(d); const L=curve.getLength(); 
     const uLand=(()=>{ const pts=curve.points; let best=0, bd=1e18; for(let i=100;i<=400;i++){ const u=i/400, p=curve.getPointAt(u), q=p.distanceToSquared(pts[landAt]);   /* nửa sau quãng bay (điểm chạm đất trùng gần điểm cất cánh) */ if(q<bd){ bd=q; best=u; } } return best; })();
-    plane=plane||planeGroup(); scene.add(plane); plane.visible=true; W.me.g.visible=false; savedDist=W.cam && W.cam.dist; if(W.cam) W.cam.dist=46; fastKey=false;
+    plane=plane||planeGroup(); plane.userData.noObs=true; scene.add(plane); plane.visible=true; W.me.g.visible=false; savedDist=W.cam && W.cam.dist; if(W.cam) W.cam.dist=46; fastKey=false;
     flight={d, cls, curve, L, s:0, v:0, uLand, land, bank:0, t:0}; const ctrl={ drive(dt){ if(!flight || HOOK.vehicle!==ctrl) return; stepFlight(dt); } }; flight.ctrl=ctrl; HOOK.vehicle=ctrl;
     toast(`✈️ ${cls==='biz'?'Ghế Thương gia':'Ghế Phổ thông'} cạnh cửa sổ · Cơ trưởng: "Tổ bay chuẩn bị cất cánh – thắt dây an toàn nhé!" (X: hạ cánh nhanh)`, 4200); }
   const _tg=new THREE.Vector3(), _ta=new THREE.Vector3(), _pt=new THREE.Vector3();
@@ -282,9 +350,12 @@ export async function make(W, ctx){
   out.startFlight=startFlight; out.flying=()=>!!flight; out.flightState=()=>flight&&{s:+flight.s.toFixed(0), L:+flight.L.toFixed(0), v:+flight.v.toFixed(1), y:+P.y.toFixed(1), uLand:+flight.uLand.toFixed(3)}; out.fast=()=>{ fastKey=true; };
 
   /* ============================== 7. MÁY BAY AI CẤT / HẠ CÁNH (khi bạn ở gần) ============================== */
-  const AI={p:planeGroup(), mode:'idle', t:8, s:0, v:0, curve:null, L:1}; AI.p.visible=false; scene.add(AI.p);
-  const aiPaths={ land:new THREE.CatmullRomCurve3([V3(RX1+900,GY+220,RW[1].z+300), V3(RX1+420,GY+90,RW[1].z), V3(RX1+120,GY+22,RW[1].z), V3(RX1-20,PLANE_Y,RW[1].z), V3(RX1-180,PLANE_Y,RW[1].z), V3(RX1-250,PLANE_Y,RW[1].z)]),
-    take:new THREE.CatmullRomCurve3([V3(RX1-10,PLANE_Y,RW[1].z), V3(RX1-120,PLANE_Y,RW[1].z), V3(RX1-210,PLANE_Y+4,RW[1].z), V3(RX0-150,GY+70,RW[1].z), V3(RX0-600,GY+220,RW[1].z-200)]) };
+  const AI={p:planeGroup(), mode:'idle', t:8, s:0, v:0, curve:null, L:1}; AI.p.visible=false; AI.p.userData.noObs=true; scene.add(AI.p);
+  /* S19g 16/11: máy bay AI không còn bay qua CBD – hạ cánh từ phía Tây trên biển vào 09R (đường lượn 3°), cất cánh 09R về phía Tây, leo trên biển rồi bay xa về Tây Nam */
+  const aiPaths={ get land(){ return aiPaths._land || (aiPaths._land=(()=>{ const rz=RW[1].z, ry=PLANE_Y, th=Math.atan(.0524), F=[RX0+12-1500, rz], H=GY+1500*Math.tan(th), pts=[V3(F[0]-1300,H+90,rz+700), V3(F[0]-800,H+60,rz+420), V3(F[0]-380,H+25,rz+120), V3(F[0],H,rz)];
+        pushLine(pts, F, [RX0-108, rz], H, ry+120*Math.tan(th), 140); pts.push(V3(RX0+12,ry,rz), V3(RX0+200,ry,rz), V3(RX1-60,ry,rz)); return new THREE.CatmullRomCurve3(pts,false,'centripetal'); })()); },
+    get take(){ return aiPaths._take || (aiPaths._take=(()=>{ const rz=RW[1].z, ry=PLANE_Y, pts=[V3(RX1-10,ry,rz), V3(RX1-110,ry,rz), V3(RX1-185,ry+2,rz)]; pushLine(pts, [RX1-185,rz], [RX0-500,rz], ry+2, ry+2+CLIMB*(RX1-185-RX0+500), 60);
+        const y1=pts[pts.length-1].y; pts.push(V3(RX0-900,y1+60,rz+150), V3(RX0-1300,y1+110,rz+450), V3(RX0-1700,y1+150,rz+800)); return new THREE.CatmullRomCurve3(pts,false,'centripetal'); })()); } };
   function stepAI(dt){ AI.t-=dt; if(AI.mode==='idle'){ AI.p.visible=false; if(AI.t<=0){ AI.mode=R()<.5?'land':'take'; AI.curve=aiPaths[AI.mode]; AI.L=AI.curve.getLength(); AI.s=0; AI.v=AI.mode==='land'?60:4; AI.p.visible=true; } return; }
     if(AI.mode==='take') AI.v=Math.min(70, AI.v+dt*(AI.s<200?5:6)); else AI.v=AI.s>AI.L-260 ? Math.max(6, AI.v-dt*9) : 60; AI.s+=AI.v*dt; const u=Math.min(1,AI.s/AI.L);
     AI.curve.getPointAt(u,_pt); AI.curve.getTangentAt(u,_tg); AI.p.position.copy(_pt); AI.p.rotation.set(0,0,0); AI.p.rotateY(Math.atan2(_tg.x,_tg.z)-Math.PI/2); AI.p.rotateZ(Math.asin(clampN(_tg.y,-1,1)));
@@ -304,12 +375,12 @@ export async function make(W, ctx){
     if(out.fall) out.fall.ft.offset.y=-T*.9;
     const near=Math.hypot(Math.max(Z.x0-P.x,0,P.x-Z.x1), Math.max(Z.z0-P.z,0,P.z-Z.z1))<400 || !!flight;
     if(near){ const k=(T*2.2)%1; out.approach.AL.forEach(([x,z,i],j)=>{ const on=Math.abs(k*6-(6-i))<.8; _m4.compose(_v.set(x,GY+.4,z), _q.identity(), _s.setScalar(on?1.4:.35)); out.approach.al.setMatrixAt(j,_m4); }); out.approach.al.instanceMatrix.needsUpdate=true;
-      if(out.beacon) out.beacon.visible=((T*1.2)%1)<.5; stepAI(Math.min(dt,.1));
+      if(out.beacon) out.beacon.visible=((T*1.2)%1)<.5; stepAI(Math.min(dt,.1)); if(!OB.ready) obsStep(4);   /* dựng dần bản đồ chướng ngại cho quỹ đạo bay (≤ 4 ms/khung) */
       /* (barie giao cắt đã bỏ – đường đi hầm chui) */ }
     { const inT=!flight && Math.abs(P.x-ROADX)<TU.hw && P.z>TU.z1-1 && P.z<TU.z2+.5 && P.y<TU.yc-.6;   /* trong phần có nắp: camera không vượt trần */
       if(inT){ if(!(HOOK.camBox && HOOK.camBox._sky)) HOOK.camBox={x0:ROADX-TU.hw+.4, x1:ROADX+TU.hw-.4, z0:TU.z1-14, z1:TU.z2+10, y1:TU.yc-.25, _sky:true}; } else if(HOOK.camBox && HOOK.camBox._sky) HOOK.camBox=null; }
     if(flight) HOOK.vehicleInter=()=>({label:`✈️ QC Airlines → ${flight?flight.d.name:''} · X: hạ cánh nhanh`}); });
-  Object.assign(out, {GATES, PARK, ATC, VIP, FALL, cx, cz, halfZ, AI, RX0, RX1});
+  Object.assign(out, {GATES, PARK, ATC, VIP, FALL, cx, cz, halfZ, AI, RX0, RX1, buildPath, aiPaths, DEST});
   // bot sống động CBD + sân bay (Pha 9 – phần của phiên qc-park): nạp sau khi cả CBD và sân bay đã dựng
   try{ const bm=await import('./bots_cbd_sky.js'); out.bots=await bm.make(W, ctx, {cbd:W.cbdV2, sky:out}); }catch(e){ console.warn('[Skyport] bots_cbd_sky:', e); }
   out.audit=()=>({gates:GATES.length, parked:PARK.length, runways:RW.length, airports:W.AIRPORTS.map(a=>a.key)});

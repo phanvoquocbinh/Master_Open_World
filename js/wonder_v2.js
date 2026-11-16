@@ -3,7 +3,7 @@
 //    bố cục giữ y như V1 (cầu đá Wonderland → cổng Kỳ Quan vẫn nối liền), chỉ dời cả khối DX = −130, DZ = +265,5.
 //  • DZ chọn để đường lát ngang z 634,5 của Kỳ Quan (từ Vòng quay Mắt Thần ra bờ Đông) trùng đúng cổng G9 (220, 900) – cầu G9 do Palm dựng.
 //  • Đất thực tế: Wonderland x −138…2 · z 487…628; Kỳ Quan x −400…233 · z 637…1508 (lớn hơn bảng ZONES cũ −320…220 · 520…1350 – phía Tây/Nam là biển trống).
-//  • Cổng: G8 = cầu cong 12 m từ cổng Nam Sân bay (0, 380, +4) xuống mũi Bắc Wonderland (−77, 504, +1,75) · G9 = đường lát + mố cầu ra (220, 900, +2).
+//  • Cổng: G8 = cầu cong 12 m từ miệng hầm chui cổng Nam Sân bay (0, 380, +0,15) xuống mũi Bắc Wonderland (−77, 504, +1,75) · G9 = đường lát + mố cầu ra (220, 900, +2).
 //  • V2 bỏ cáp treo dài từ đảo chính cũ (đảo Abyssal cách 340 m, phải bay ngang đường băng sân bay – không hợp lý).
 import { makeFunIsland } from './funisland.js';
 import { makeThemePark } from './themepark.js';
@@ -70,7 +70,7 @@ export function make(W, ctx){
 
   /* ============================== G8: cầu Sân bay (0, 380, +4) → mũi Bắc Wonderland ============================== */
   // điểm đáp: mũi Bắc đảo (cục bộ 53, 238,5 – chỗ ga cáp treo cũ) → thế giới (−77, 504), đất +1,7
-  const G8=bez([[0,379.4],[0,428],[-77,452],[-77,504]], t=>4+(1.75-4)*smooth(t)+2.4*Math.sin(Math.PI*t));
+  const G8=bez([[0,379.4],[0,428],[-77,452],[-77,504]], t=>.15+(1.75-.15)*smooth(t)+2.4*Math.sin(Math.PI*t));   /* S19g 16/11: đầu cầu nối thẳng sàn hầm chui sân bay (+0,15) – trước nối mặt đường băng +4 */
   out.g8=deck(G8, 12, {msg:'🌉 Lan can cầu G8 · Sân bay ↔ Wonderland', piers:{every:16, from:8, to:12}, lamps:{from:10, every:30}, railFrom:.5, railTo:2});
   makeLabel('🌉 Cầu G8 · Sân bay ↔ Đảo QC Wonderland', 'Đi bộ / lái xe xuống công viên', {h:.5, x:-30, y:9.5, z:452, fade:110});
   makeLabel('🚦 G8 · Cổng Bắc Wonderland', '↑ Sân bay Quốc tế · ↓ Đảo QC Wonderland & Kỳ Quan', {h:.5, x:-77, y:8, z:500, fade:80});
@@ -91,8 +91,9 @@ export function make(W, ctx){
   flush();
 
   // sổ đường chung V2 (giống Palm / Skyport): đoạn [x0,z0,x1,z1] + cổng
-  const segs=[]; for(let i=0;i<G8.length-1;i+=5){ const j=Math.min(G8.length-1,i+5); segs.push([G8[i].x,G8[i].z,G8[j].x,G8[j].z]); }
-  segs.push([90,900,219.4,900]);
-  W.V2ROADS=W.V2ROADS||[]; W.V2ROADS.push({zone:'wonder', y:2, segs:segs.map(s=>s.map(v=>Math.round(v*10)/10)), gates:out.gates});
+  const r1=v=>Math.round(v*10)/10; W.V2ROADS=W.V2ROADS||[];
+  /* S19g 16/11: mỗi đoạn cầu G8 khai độ cao gốc riêng = mặt cầu tại đầu đoạn (cầu nay bắt đầu từ sàn hầm chui +0,15) – trước khai chung +2 → đường xe đầu cầu bị giữ ở +2 */
+  for(let i=0;i<G8.length-1;i+=5){ const j=Math.min(G8.length-1,i+5); W.V2ROADS.push({zone:'wonder', y:r1(G8[i].y ?? 2), segs:[[G8[i].x,G8[i].z,G8[j].x,G8[j].z].map(r1)]}); }
+  W.V2ROADS.push({zone:'wonder', y:2, segs:[[90,900,219.4,900]], gates:out.gates});
   return out;
 }
