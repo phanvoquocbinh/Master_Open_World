@@ -1,21 +1,592 @@
-# QC World – Hiện trạng kiến trúc toàn thế giới (15/11/2026)
+# QC World – Hiện trạng kiến trúc toàn thế giới (cập nhật 16/11/2026)
 
-Tài liệu tổng hợp **mọi không gian đang có trong game**, viết theo đúng mã nguồn để làm nền cho bản kiến trúc final. Mỗi không gian ghi:
-- toạ độ và kích thước;
-- số tầng;
-- bố trí nội thất;
-- chức năng;
-- nhân vật (vai trò, vị trí, hành vi, câu thoại);
-- tương tác (phím, giá, phần thưởng);
-- đường nối;
-- file và dòng nguồn.
+Tài liệu mô tả **mọi không gian đang có trong game**, viết theo đúng mã nguồn trên nhánh `main` (commit `0ef971e`), để làm nền cho người thiết kế lại kiến trúc.
+
+- **Phần A – Thế giới V2** (mặc định từ 16/11/2026, mở `world.html`): 8 vùng mới, cổng nối, giao thông, sự kiện, âm thanh, thang máy.
+- **Phần B – Thế giới V1** (bản cũ, mở `world.html?v1`): giữ nguyên nội dung hiện trạng ngày 15/11 ở cuối tài liệu.
 
 **Quy ước:**
-- 1 ô = 1 m = 1 đơn vị toạ độ thế giới. Trục x là Đông–Tây, trục z là Bắc–Nam (z âm ở phía Bắc), y là độ cao (mặt biển ≈ 0).
-- `x0–x1, z0–z1` là hình chữ nhật bao.
-- Nội thất các toà công ty dùng toạ độ phòng riêng (xem phần 3).
-- Số có dấu "≈" là số tính lại từ công thức trong mã.
-- "chưa rõ" nghĩa là mã tính lúc chạy hoặc không ghi rõ.
+- 1 đơn vị = 1 m. Trục x là Đông–Tây (x tăng về phía Đông), trục z là Bắc–Nam (z âm ở phía Bắc), y là độ cao (mặt biển ≈ 0).
+- `x0–x1, z0–z1` là hình chữ nhật bao. Số có "≈" là số tính lại từ công thức trong mã; "chưa rõ" là mã tính lúc chạy hoặc không ghi rõ.
+- Ghi chú `file:dòng` trỏ vào mã nguồn. Giá tiền tính bằng xu 💰 trong game.
+- Mọi tên trong game là tên tự đặt; chỗ nào mã còn sót tên địa danh hoặc thương hiệu có thật thì cần đổi khi thiết kế lại.
+
+## Mục lục
+**Phần A – V2 (mặc định)**
+1. [Tổng quan V2: bản đồ 8 vùng và 9 cổng](#v2-tong-quan)
+2. [V2.1 Đảo chính Abyssal Canyon](#v2-abyssal)
+3. [V2.2 Sân bay Skyport](#v2-skyport)
+4. [V2.3 River Tech CBD](#v2-cbd)
+5. [V2.4 Đỉnh Brain Citadel](#v2-brain)
+6. [V2.5 Dev City 8D](#v2-devcity)
+7. [V2.6 Wonderland & Công viên Kỳ Quan](#v2-wonder)
+8. [V2.7 Đảo Ngoại ngữ](#v2-lang)
+9. [V2.8 Quần đảo cọ Palm](#v2-palm)
+10. [V2.9 Hệ thống chung](#v2-he-thong)
+11. [Việc đang làm và tồn đọng (16/11)](#v2-ton-dong)
+
+**Phần B – V1 (`?v1`, hiện trạng 15/11)**: [đi tới Phần B](#phan-b-v1)
+
+---
+
+<a id="v2-tong-quan"></a>
+
+## PHẦN A · THẾ GIỚI V2
+
+### Tổng quan: 8 vùng (bảng `ZONES` trong `js/v2core.js`)
+Mỗi vùng cách nhau bằng kênh biển, nối với nhau bằng cầu ở các cổng. Ở V2, toàn bộ nhà, đường, cây của V1 bị gỡ; giữ lại phần lõi: biển, trời, nhân vật, xe, kinh tế, điện thoại/laptop/nhạc, nhiều người chơi.
+
+| Khoá | Vùng | x0 → x1 | z0 → z1 | y | File chính |
+|---|---|---|---|---|---|
+| abyssal | Đảo chính QA/QC Abyssal Canyon | −180 → 180 | −180 → 180 | −42 → 28 | `abyssal_island.js` |
+| skyport | Sân bay QA/QC International Skyport | −180 → 175 | 220 → 380 | 4 → 68 | `skyport.js` |
+| cbd | River Tech CBD | 180 → 580 | −120 → 460 | 0 → 140 | `river_cbd.js`, `bigtech_interiors.js`, `police_station.js` |
+| brain | Đỉnh QA/QC Brain Citadel | 620 → 1150 | −100 → 450 | 0 → 168 | `brain_citadel.js` |
+| devcity | Dev City 8D (thành phố núi) | 100 → 850 | −950 → −120 | 2 → 135 | `devcity_chongqing.js`, `devcity_landmarks.js` |
+| swiss | Đảo Ngoại ngữ núi tuyết | −850 → −250 | −500 → 250 | 0 → 95 | `swiss_lang_island.js` |
+| palm | Quần đảo cọ The QC Palm Archipelago | 250 → 1050 | 520 → 1320 | −8 → 65 | `palm_dubai.js` |
+| wonder | Wonderland + Công viên Kỳ Quan (dời về Nam) | −400 → 230 | 485 → 1510 | 0 → 98 | `wonder_v2.js` |
+
+**Sơ đồ vị trí (Bắc ở trên):**
+```
+                     Dev City 8D (x 100–850, z −950…−120)
+                         G5 │            │ G6
+ Đảo Ngoại ngữ ──G3── ABYSSAL ──G1── River Tech CBD ──G4── Brain Citadel
+ (x −850…−250)        (tâm 0,0)       (x 180–580)           (x 620–1150)
+                         G2 │              │ G7
+                       Sân bay           Palm (x 250–1050, z 520–1320)
+                         G8 │              │ G9
+                Wonderland + Kỳ Quan ──────┘
+                 (x −400…230, z 485–1510)
+```
+
+### 9 cổng nối (V2_PLAN.md §2b, đối chiếu mã)
+| Cổng | Nối | Kế hoạch | Thực tế trong mã |
+|---|---|---|---|
+| G1 | Abyssal ↔ CBD | (180, 0, +2) | Abyssal rộng 8 m, CBD rộng 20 m ở z 0 |
+| G2 | Abyssal ↔ Sân bay | (0, 180 → 220, +4) | cầu sân bay: sàn 30 m, lòng nhựa 20 m |
+| G3 | Abyssal ↔ Đảo Ngoại ngữ | (−180 ↔ −250, −16, +2) | cầu rộng 8 m (nhựa 6,6 m) |
+| G4 | CBD ↔ Brain | (580, 86, +2) | CBD ở z 80, Brain ở z 86 |
+| G5 | CBD ↔ Dev City | (380, −120) | mã đặt x 384 (cầu Dev City x 384, CBD x 388) |
+| G6 | Brain ↔ Dev City | (700, −100…−120) | cầu Dev City x 700 rộng 12 m + cầu Brain rộng 9 m |
+| G7 | CBD ↔ Palm | (450, 460 → 520) | cầu Palm rộng 10 m |
+| G8 | Sân bay ↔ Wonder | (0, 380 → 520) | hầm dưới đường băng + cầu cong rộng 12 m tới (−77, 504) |
+| G9 | Wonder ↔ Palm | (220 → 250, 900) | lối lát đá 7 m (chỉ đi bộ) + cầu Palm rộng 9 m |
+| thêm | Sân bay → CBD | – | bậc thang đi bộ x 165 → 180,5, z 250–262 |
+| thêm | Dev City → CBD | – | cầu dây văng x 220 (z −121 → −104) |
+
+### Luật thiết kế V2 đang áp dụng (Bình yêu cầu)
+- Mọi đường phải thông, không đường cụt; mỗi vùng đưa đường chính ra đúng cổng.
+- Lối đi trống ≥ 2,5 m; địa hình, vách đá, mép hồ là bề mặt liền, cong mềm, không khe hở, không chớp mặt.
+- Toà nhiều tầng dùng thang máy bước vào (`liftkit.js`), không dịch chuyển tức thời.
+- Nội đô (Abyssal, CBD, Dev City) chỉ bán/thuê căn hộ; nhà mặt đất, biệt thự chỉ ở Palm.
+- Mỗi khu phải có người (bot) đúng ngữ cảnh. Máy chạy là Intel Iris Xe: mỗi khu thêm ≤ 150 lượt vẽ.
+- Không dùng tên địa danh, thương hiệu, nhân vật có thật.
+
+---
+
+
+<a id="v2-abyssal"></a>
+
+### V2.1 · Đảo chính QA/QC Abyssal Canyon Island (`js/abyssal_island.js`, `js/bots_abyssal.js`)
+
+**Tổng quan và địa hình** (`abyssal_island.js:16-80`)
+- Vùng x −180…180, z −180…180, khai báo bằng `EXTL` + `hAt`. Mép đất thật ở |x|, |z| = 179,4; 3 hành lang cổng (±9 m) kéo đất liền tới đúng 180.
+- Miệng vực: elip bán trục 146 (x) × 130 (z), tâm (0, −15), tức 292 × 260 m.
+
+| Mốc | Cao độ |
+|---|---|
+| Đỉnh vành núi (RIM) | +28 |
+| Thềm vành đai (GY) | +2 |
+| Đường dạo đáy vực (FY) | −29,2 |
+| Mặt hồ ngầm (LY) | −29,5 |
+| Đáy hồ | −42 |
+
+- Lưới địa hình ô 4 m: dưới +3,2 xanh xám, +3,2…24 đá xám, trên 24 xanh cỏ. Tường kè biển +2,2 → −6 (`0x8a8680`).
+- Vách miệng vực 6 bậc giật cấp (ρ/y): 0,995/−31 → 1,0/−13 → 1,022/−11 → 1,03/9 → 1,055/11 → 1,062/RIM. Đá `#6f6a66`, mạch `#3d3a38`.
+- Khe cửa vực phía Nam |x| < 38, z 60 → 162. Đập tràn "Đập Cổng Trời Thủy Đạo" ở z 162 (mặt +4,2), thác biển rộng 74 m cao 30,5 m.
+- Hồ ngầm: viền ρ ≈ 0,836, nước `0x0f8c9e` (opacity 0,9), đáy `0x0a3540`, bờ kè granite `#b9b4aa`. Mặt biển toàn cục khoét lỗ đúng miệng vực.
+- 2 thác đầu nguồn Đông/Tây ở (±147, −19) chảy qua 3 bậc vách, chân thác có bồn đá r 5 m.
+- 170 cây thông instanced trên đỉnh vách (máy yếu 90).
+
+**Cổng và đường** (`:196-233`)
+
+| Cổng | Toạ độ | Nối sang |
+|---|---|---|
+| G1 | (180, 0, +2) | CBD |
+| G2 | (0, 180, +4) | Sân bay (thềm gần đập nâng lên +4) |
+| G3 | (−180, −16, +2) | Đảo Ngoại ngữ |
+
+- Mỗi cổng: 2 trụ granite 1,2 × 7 × 1,2 m + xà ngang 11,8 m ở +7,4.
+- Vành đai xe +2: hình vuông ±174, rộng 8 m, nhựa `0x34363b`, chưa có vạch làn. Đây là đường xe duy nhất của đảo. Lệch bề rộng: phía CBD 20 m, cầu G3 7 m, cầu G2 lòng 20 m.
+- Đường đỉnh vách (đi bộ): granite rộng 4 m theo elip ρ 1,105, nối đỉnh 2 tháp xoắn qua phía Bắc. Lan can kính mép vực ở ρ 1,078.
+- 2 tháp đường xoắn ốc tâm (±112, 112): giếng r 19,5 m, mặt đường r 14 m rộng 9 m, dốc ≈ 8 %. Đáy −29,2 → +2 sau ≈ 4,6 vòng (≈ 407 m), +2 → +28 thêm ≈ 3,5 vòng. Lõi bê tông r 9,2 m cao 59,4 m. 3 lối ra: hầm vòm (rộng 10 m) ra đường dạo đáy, mặt đất +2 hướng Nam, đỉnh +28 hướng Bắc.
+- Đáy vực: đường dạo vòng hồ lát granite ρ 0,832 → 1,0 (rộng ≈ 22–24 m). Cầu đá 2 nhịp ngang khe cửa vực ở z 104 (rộng 6 m).
+- **Đang sửa (phiên đồ hoạ, 16/11):** lỗ hổng sàn đáy, khe hở vách, nước tràn vào công trình, đường nhựa 2 làn nối từ vành đai xuống đáy vực cho xe chạy.
+
+**Công trình**
+
+| Công trình | Vị trí | Hình khối & vật liệu | Tầng / nội thất |
+|---|---|---|---|
+| Cánh Xanh "QA · QC · QE Academy & Tech Hub" (`:94-111`) | cung bám vách phía Tây–Tây Bắc, tâm cung (−8,1; −4,8), góc 3,38 → 4,62 rad | `buildCurvedTerraceWing`, giật cấp mỗi tầng lùi 1,2 m (r 123,8 → 137); kính `#2e4a63`, đèn cửa `#bfe8ff`, LED `0x10b981`; biển chữ 36 × 3,4 m chữ `#6dffb0` nền `#0b1220` | 12 tầng × 4,5 m, sâu 12 m. Tên tầng: Đại sảnh & chứng chỉ · Kiểm thử thủ công · Game QA · ERP/POS/thanh toán · CI/CD–TestOps · Bảo mật/Pentest · Di động · API/Microservices · Tự động hoá web · Hiệu năng · AI-QA/Chaos · Sky Billiards Lounge. **Chưa có nội thất**, chỉ đi được ban công + sảnh thang. 2 thang liftkit ở (−131, −31) |
+| Cánh Đỏ "Abyssal Horizon Residences" | đối xứng phía Đông, tâm (8,1; −4,8), góc 4,805 → 6,045 rad | như Cánh Xanh; kính `#4a3440`, đèn cửa `#ffc890`, LED `0xff4466`, chữ `#ffc0c8` | 14 tầng (mái ≈ +33,8, cao hơn đỉnh núi): Sảnh → Sky-Condo 1…11 → Duplex Penthouse. **Chưa nội thất, chưa bán căn hộ.** 2 thang ở (131, −31) |
+| Tháp thang kính đôi "Hydro-Pulse Core" (`:112-131`) | 2 trục kính 9 × 9 × 76 m ở x ±9, z −140,5 | kính `0x9fd8ee` (0,3), khung vàng `0xe8c040`, chóp kim tự tháp vàng; giữa 2 trục là thác 8,6 × 58 m | `makeLiftBank` 2 cabin, 5 điểm dừng: G đáy −29,2 · 4 (−15,7) · 8 (+2,3) · 12 (+20,3) · ★ đỉnh +28. 3 cầu kính sang đầu hồi 2 cánh ở tầng 4/8/12 |
+| Ốc đảo Master Dashboard (`:141-168`) | đảo granite r 26 m, tâm (0, −10), mặt −29,2 | cổng năng lượng 2 trụ 1,6 × 12 m, xà 13,4 m, màn cyan `0x40e8ff`; hồ vòng r 18,2–22; 8 lối lát sáng 3,4 m | E ở tâm mở Dashboard trong Laptop; màn hình thứ 9 |
+| 8 đảo công cụ | r 9 m, cách tâm 48 m, cầu kính 3,2 m | trắng, bát diện xoay màu theo công cụ, 5 khối nón, 1 màn hình | Thư viện (0, −58) · Bảng nhiệm vụ (34, −44) · Xưởng API (48, −10) · Trạm Automation (34, 24) · Hầm Database (0, 38) · Tiệm đồ nghề QC (−34, 24) · Bưu điện Ghi chú (−48, −10) · Trạm Quick Link (−34, −44). 4 cầu dài 4 m ra bờ Bắc/Đông/Tây/Nam |
+| QC Live Stage (`:170-174`) | bán đảo r 17 m tâm (62, −68) | khán đài 3 bậc vòng cung (ngồi được), sân khấu tròn r 6 m cao 0,8 m; 48 vòi nhạc nước 2 vòng | nhạc nước chạy khi người chơi trong 90 m |
+| Bến kayak (`:175-182`) | sàn gỗ 12 × 7 m ở (−42, 35) | cầu gỗ 3 m từ đảo Hầm Database | E lên kayak, W/S/A/D chèo, tối đa 4,2 m/s |
+| 24 shophouse chân vách (`:184-194`) | 2 dãy cung ở ρ 0,945, Đông và Tây (chừa khoảng 42–60° cho hầm tháp xoắn) | khối bo góc 9,2 × 8 × 6,6 m, tường `#e9e2d6`, mái hiên 4 màu (đỏ/xanh dương/xanh lá/vàng), biển canvas | thời trang, đồng hồ, lẩu, dimsum, phở, bánh mì, cafe, gelato, bia, cơm tấm, bida, cyber cafe, sách, siêu thị 24h, barber, nhà thuốc, trà sữa, pizza, gear, hoa, salad, game. **Không vào được**, E chỉ báo "đang nhập hàng" |
+
+**Điểm E:** mở công cụ (×8) · xem màn hình (×9) · cổng Dashboard · kayak · shophouse (×24, chỉ thông báo) · gọi thang liftkit. Không có điểm thu tiền.
+
+**PLACES (phím M):** Ốc đảo Master Dashboard (0, 3) · Tháp thang Hydro-Pulse (0, −104) · Đài ngắm đỉnh thác +28 (0, −111) · Phố Shophouse & Bến Kayak (≈ 79, 74) · QC Live Stage (62, −77) · Cổng Đông sang CBD (172, 0). Điểm xuất hiện `W.V2SPAWN` = (0, 3).
+
+**Bot (≈ 38, hiện tối đa 16 trong 75 m):** khách chụp ảnh và dạo ốc đảo (3), khách xem màn hình (≤ 8), chủ tiệm (6), khách ngắm tủ kính (2), người dạo ven hồ (5), ca sĩ + 5 khán giả, 2 người chèo kayak, 3 người đi/chạy bộ vành đai, 3 bảo vệ cổng.
+
+**Ánh sáng, âm thanh:** `AK.bindNight` sáng đèn cửa sổ + LED 2 cánh, biển chữ tự phát sáng, không có đèn điểm. Âm thanh: đập tràn, 2 thác, nhạc nước, tiếng chèo kayak. Xuống dưới −1,5 m thì camera mở bằng `camBox`; rơi xuống hồ thì đưa về ốc đảo.
+
+**Còn dở:** nội thất 2 cánh (12 và 14 tầng) chưa làm, `abyssal_interior.js` chưa có; căn hộ và shophouse chưa bán; xe chỉ chạy được vành đai; hàm `lift()`/`PADS` là mã chết; chú thích ghi y tới +34 khác `ZONES` (+28).
+
+---
+
+<a id="v2-skyport"></a>
+
+### V2.2 · Sân bay QA/QC International Skyport (`js/skyport.js`, bot trong `js/bots_cbd_sky.js:102-129`)
+
+**Tổng quan** (`skyport.js:40-57`)
+- Vùng x −180…175, z 220…380, sân GY = +4. `EXTL` kéo sang Tây tới x −251 (đường băng chìa ra biển) và sang Đông tới x 180,5.
+- Nhà ga x 15…165 · z 222…294; sân đỗ z 294…328; đường băng z 328…380. Nền bê tông `#c9c6bf`; phần đường băng trên cọc tròn r 1,1–1,4 m (lưới 16 × 14 m). Lan can thép quanh mép.
+
+**Đường và cổng** (`:95-138`)
+- Cầu G2 (0, 180) → (0, 220,5), cao +4: sàn 30 m, lòng nhựa 20 m, trụ mỗi 10 m.
+- Trục x = 0 rộng 20 m: z 220 → 240 trên mặt đất, rồi **hầm chui dưới đường băng**: dốc z 240 → 300 (≤ 7,5 %) từ +4 xuống +0,15, đoạn có nắp z 300 → 380, trần 3,55 m. Lòng xe 11,6 m = 2 làn mỗi chiều (vạch đôi vàng giữa), vỉa hè 2,5 m mỗi bên. Đèn trần mỗi 8 m + dải LED vách.
+- Ra cổng G8 (0, 380): cầu cong rộng 12 m (do `wonder_v2.js` dựng) hạ xuống mũi Bắc Wonderland ở (−77, 504).
+- Sang CBD: 10 bậc thang đi bộ x 165 → 174,5 (+4 → +2) + cầu trắng tới x 180,5. **Chưa có đường xe vào nhà ga, xe không sang CBD từ đây.**
+- **Đang sửa (phiên laptop, 16/11):** hoàn thiện hầm + nối đường, lộ trình bay leo cao trước khi rẽ để không đâm toà nhà.
+
+**Công trình**
+
+| Công trình | Vị trí / kích thước | Hình khối & vật liệu | Ghi chú |
+|---|---|---|---|
+| Nhà ga "The Manta Ray" (`:140-155`) | x 15…165 × z 222…294 (150 × 72 m) | viền cánh cá đuối, mái cong cao nhất +32, mép mái +16; mái kim loại `#e9edf0` có sọc kính; vách kính `0x9fc6dd` (0,32); sàn đá `#e9e6df`; 8 cột trắng hình cây | 1 tầng. Cửa vào duy nhất ở mũi Đông (x > 159) |
+| Thác trong nhà (`:156-170`) | tâm (85, 258) | phễu giếng trời kính r 9 → 3,5 m, cột nước r 3,2–3,6 m, hồ r 8 m `0x2b7f8f`, 3 vòng gò cây bậc thang (26 cây) | không vào trong gò được |
+| Quầy check-in (`:171-174`) | x 138…154,2, z 251/265 | 8 quầy trắng 3,8 × 1,1 m, màn hình cyan, băng chuyền | E chỉ hướng dẫn |
+| Soi chiếu an ninh (`:175-181`) | x 127, z 250/258/266 | 3 khung cổng đèn `0x40ff80`, vách kính chặn | E: "Bíp xanh!" |
+| 6 cổng Boarding (`:182-184`) | x 39, 54, 69, 84, 99, 114; z ≈ 275–289 | quầy xanh `0x1d6ab8`, màn hình, 2 băng ghế; ống lồng 3 × 3 m ở +8 ra z 308,2 | vé Phổ thông 25 xu / Thương gia 80 xu |
+| Phòng chờ thương gia (`:185-194`) | x 101…123, z 226,6…240,6 (22 × 14 m) | sàn gỗ `#5a3518`, bàn bida nỉ `0x0d5a3c`, buffet 7 m, 2 sofa `0x3d4a5c` | buffet miễn phí, +5 phút chạy nhanh |
+| 4 máy bay đỗ "QC Airlines" (`:215-218`) | x 35/71/107/143, z 310,5 | dài ≈ 42 m, sải cánh ≈ 33 m, 2 động cơ, trắng sọc `#1d6ab8` + `#ffc531` | không lên được |
+| Đường băng (`:79-94`) | 09L/27R tâm z 345 rộng 30 m; 09R/27L tâm z 370 rộng 18 m; dài x −248 → 172 (420 m) | vạch tim/ngưỡng/mép, vạch lăn vàng z 311, đèn biên xanh mỗi 12 m, 6 đèn tiếp cận chạy đuổi mỗi đầu | |
+| Đài Không lưu ATC (`:219-240`) | tâm (−58, 252), cao 68 m | thân bê tông r 4,2 → 3,2 m, vòng thép mỗi 6 m, cabin kính r ≈ 8 m (sàn +64,8, 6 bàn điều khiển), đèn đỏ chớp +79,2 | 1 thang liftkit 2 điểm dừng; E nghe tần số không lưu |
+
+**Chuyến bay** (`:241-292`): điểm đến Dev City (500, −850), Brain (900, 78), Đảo Ngoại ngữ (−305, 175), Palm (650, 920), hoặc bay ngắm cảnh. Lăn đà 09L tối đa 45 m/s, bay bằng 72 m/s ở ≈ 170–250 m, tiếp cận 58 m/s. Đích chưa đăng ký trong `W.AIRPORTS` thì bay ngắm rồi về. Phím X hạ cánh nhanh. Máy bay AI cất/hạ cánh 09R mỗi 50–90 giây khi người chơi trong 400 m.
+
+**PLACES:** Nhà ga Manta Ray (156, 258) · Đài ATC (−56, 261).
+
+**Bot:** tổ bay 3 người kéo vali, 6 hành khách, 2 nhân viên check-in, 1 an ninh, 1 người điều hướng máy bay (gậy LED cam), 1 xe kéo hành lý 3 toa chạy z 324.
+
+**Còn dở:** chưa có làn đón trả khách trước nhà ga; nhà ga 1 tầng, chưa có cửa hàng; 2 hạng vé chỉ khác giá; chưa có rào giữa sân đỗ và đường băng; chú thích ghi nhà ga 160 m và đường băng ~348 m là số cũ.
+
+---
+
+<a id="v2-cbd"></a>
+
+### V2.3 · River Tech CBD (`js/river_cbd.js`, `js/bigtech_interiors.js`, `js/civic.js`, `js/police_station.js`, bot trong `js/bots_cbd_sky.js:48-100`)
+
+**Tổng quan** (`river_cbd.js:20-111`)
+- Vùng x 180…580, z −120…460, cao độ đất **+2**. Đô thị lấn sông gồm 6 ô đất bồi: 3 dải x (180–353, 377–498, 522–580) × 2 dải z (−120…92 và 128…460). Thân đất granite `#b7b3ab` sâu 6 m, mặt lát `#9d968a`.
+- Sông chính z 92–128 (rộng 36 m); 2 kênh rộng 24 m ở x 353–377 ("Đông Hoa") và x 498–522 ("Tây Hoa") – tên đặt ngược hướng. Nước `0x1f6f86`.
+- Kè sông: gờ granite, tay vịn thép, LED vàng kim, chừa khe ở đầu cầu, 4 cổng và sàn Silicon Forest.
+
+**Đường** (vỉa hè 5 m mỗi bên; theo chú thích mỗi chiều 2 làn ô tô + 1 làn xe máy; vạch đôi vàng, mép trắng, vạch qua đường ở mọi giao lộ)
+
+| Tên | Trục | Rộng | Đoạn |
+|---|---|---|---|
+| Đường Bắc CBD | z −100 | 20 | x 188–572 |
+| Đại lộ Ven Sông | z 66 | 24 | x 188–572 |
+| Đại lộ Quốc Mậu | z 236 | 24 | x 188–572 |
+| Đường Nam CBD | z 440 | 20 | x 188–572 |
+| Đường Tây CBD | x 198 | 20 | z −110–450 |
+| Đường Đông CBD | x 562 | 20 | z −110–450 |
+
+- Cổng thực tế trong mã: G1 z 0 (x 180→188); G4 ở **z 80** (Brain dùng z 86); G5 ở **x 388** (kế hoạch 380); G7 x 450 (z 450→460). Thêm đoạn nối Dev City ở x 220 (z −121 → −104, rộng 15) trong `v2traffic.js:38` – chưa rõ kè có chừa khe.
+- **12 cầu:** 8 cầu đá 3 vòm qua 2 kênh; 2 "Cầu Vòm Đỏ" (x 198 và 562) qua sông, 2 vòm thép đỏ `#c8102e` cao 14 m – **chỉ 2 cầu này cho ô tô qua sông**; "Cầu Kính Hai Tầng" (x 276–284, rộng 8 m, sàn kính trên ở y 7,2); "Cầu Ánh Sáng" (x 437–443, rộng 6 m, đi bộ).
+- Đường dạo ven sông: liễu, đèn lồng đỏ, ghế gỗ; đèn đường LED cột đôi mỗi 26 m. Nhạc nước 63 vòi (x 300–346 × 3 hàng ở z 104,5–115,5), cao tới ≈ 8,6 m, đổi màu ban đêm.
+
+**Công trình**
+
+| Công trình | Tâm / kích thước | Hình khối & vật liệu | Nội thất | Thang | Vào được |
+|---|---|---|---|---|---|
+| The Infinite Loop QA Ring (`river_cbd:197`) | (280, −30); vành nhẫn R 54 / 30, cao 24 | kính cong `#24465c` khung `#cfd6dc`, mái pin mặt trời, viền LED cyan, 120 lam bạc; sân trong có hồ koi, nhà vòm kính, ≈ 34 cây ăn quả | sàn sồi, 24 bàn dài 8 m xếp hướng tâm, 7 buồng họp kính tròn (6 treo ở y 11–16), quầy cà phê, lễ tân, phòng Giám đốc tầng 5 (y 21,2) | dãy 2 thang ở (280, −82), tầng 1 và 5 | Có, cửa Nam (280, 25,6) |
+| Dragonscale Auto-Labs (`:220`) | (440, −20); 90 × 70, mái 12 → ≈ 26 m | mái lượn sóng vảy rồng bạc, 4 mặt kính, cột bạc nghiêng | 3 cụm × 7 bàn lục giác, xe cafe cổ, sân bóng rổ mini 14 × 12, 3 lều glamping làm phòng họp, gác lửng y 8 (bida, bàn Giám đốc), cầu trượt xoắn xuống tầng 1 | không (cầu thang 14 bậc) | Có, cửa Nam (440, 16,6) |
+| Silicon Forest & Treehouse Hub (`:240`) | x 247,5–332,5, z 122,5–197,5; sàn gỗ lấn sông 5,5 m | 4 khối gỗ–kính 2–4 tầng (trệt 5 m, tầng trên 4 m), mái vườn, 6 cây cổ thụ 32 m xuyên mái | suối dưới sàn kính dọc z 160, 2 dãy bàn, quầy ăn, 3 nhà trên cây ở y 10 nối cầu treo, biệt thự kính Giám đốc trên mái (y ≈ 23,4) | dãy 2 thang ở (293,5, 131), G và mái | Có, cửa Nam (290, 199) + Bắc (280, 121,7) |
+| The Tri-Matrix Perf Center (`:262`) | (450, 166); kim tự tháp tam giác cạnh 85, cao 38 | ô tam giác phát sáng `#9dff5c`, cạnh LED xanh lá, chóp kính 30–38 m | khán đài Tech Talk 8 bậc + màn 12 × 6,5 (21 chỗ), bàn 3 màn hình cong 2 vòng, quầy năng lượng, phòng Giám đốc trong chóp (y 32) | 1 thang kính (450, 165,2), G và 30 | Có, cửa Bắc (450, 139,7) |
+| Cantilever Cyber Twin-Tower (`:277`) | 2 tháp x 323–352 và 378–407 (nghiêng ±9 m), z 318–362, cao 120; khối "Cổng Trời" nối ở y 97–117 | kính `#1d2f45`, khung `#7f8a95`, cạnh LED cyan | sàn kính nhìn xuống kênh, phòng họp HĐQT (bàn óc chó 12 m), CLB bida 2 bàn + bar, phòng Chủ tịch | mỗi tháp dãy 2 thang tốc hành, G và 95 (chỉ nhân viên) | Sảnh trệt; Cổng Trời khoá |
+| 4 tháp căn hộ Starlight A–D (`:295-311`) | (235, 280), (290, 280), (235, 335), (290, 335); 24 × 24, 28 tầng × 3,4 m + đỉnh 6 m | kính `#2a3d52`, khung kem `#e8e2d6` có ban công, đế kính tối 4,6 m, LED vàng 4 góc | **không có** | **không có** | Chỉ sảnh. E mua căn: 2PN tầng 8–15 = 1.800 💰, 3PN tầng 16–24 = 3.200 💰, Penthouse tầng 28 = 7.500 💰 (chỉ là bản ghi `S.condos`) |
+| Trung tâm Việc làm (`:322`) | (285, 400); 30 × 24 × 18 | kính, mái trắng | không | không | Cửa Bắc, E mở bảng việc |
+| Bệnh viện Đa khoa QC City (`civic.js`) | x 420–465, z 273–299, cao 15,6 (4 tầng) | mái có bãi trực thăng, 2 xe cứu thương | sảnh, lối Cấp cứu | chưa rõ | Có; khám 30 💰 |
+| Trạm cứu hoả QC City | x 424,5–456,5, z 305–324,5 | 3 gara, 3 xe cứu hoả, tháp phơi vòi | gara xem được | không | Có |
+| Trường Tiểu học QC City | x 418,5–466,5, z 355–415 | rào, 2 cổng, sân bóng rổ, cột cờ, dãy lớp 3 tầng | hành lang | chưa rõ | Sân trường |
+| Tàu cứu hoả + cầu tàu (`:317`) | cầu tàu (373,5, 300) trên kênh | tàu đỏ tĩnh | – | – | Lên cầu tàu |
+| Sở Cảnh Sát QC City · 113 (`police_station.js`) | x 214–244, z 354–382, mặt tiền Tây ra x 198; sàn y 2/6/10, mái 14 | tường trắng `#f1f0ea`, chân navy `#14284f`, gờ vàng `#d8b25a`, biển chữ + sao vàng | T1: 3 gara, sảnh trực ban, 3 buồng tạm giữ. T2: phòng chỉ huy, màn bản đồ an ninh 15 × 4,6 m chạy trực tiếp. T3: phòng giao ban 24 ghế. Mái: bãi trực thăng (trực thăng đậu tĩnh) | 1 thang (241, 377), 4 điểm dừng | Có, cửa (212,5, 377) |
+
+**Điểm E khác:** mỗi trụ sở có lễ tân (phỏng vấn/quẹt thẻ), máy trạm (làm ticket), họp Daily, ăn trưa/cà phê; Dragonscale có ném bóng rổ và trượt cầu trượt xoắn; ghế Giám đốc, ghế khán đài; Sở Cảnh Sát có trực ban 113 (xem sự kiện đang diễn ra).
+
+**PLACES:** CBD · Nhạc nước (280, 86) · QA Ring (280, 30,6) · Dragonscale (440, 21,6) · Silicon Forest (290, 204) · Tri-Matrix (450, 134,7) · Cyber Twin (337,5, 311,4) · Starlight Towers (262, 254) · Căn hộ của bạn (sân thượng tháp đang sở hữu) · Trung tâm Việc làm (285, 382,6) · Sở Cảnh Sát (210,6, 377) · Bệnh viện, Trạm cứu hoả, Trường.
+
+**Bot (24 + NPC civic):** 8 nhân viên văn phòng, 4 công nhân lau kính trên gondola tháp Starlight A/B, 2 cơ thủ bida ở Cổng Trời, 2 người chèo kayak trên kênh, 2 barista, 1 nghệ sĩ violin trên Cầu Kính, 1 kiến trúc sư, 2 người bán kẹo hồ lô, 1 bảo vệ đi xe điện cân bằng, 1 bác sĩ trực thăng; y tá, lính cứu hoả, học sinh; 2 cảnh sát trực đồn.
+
+**Ban đêm:** vật liệu phát sáng (vàng kim, LED cyan/đỏ/xanh lá, mặt Tri-Matrix), cửa sổ sáng ngẫu nhiên, đèn đường, nhạc nước đổi màu, vòng vàng nhấp nháy trước cửa mỗi trụ sở.
+
+**Còn dở:** tháp Starlight chưa có nội thất và thang máy, căn hộ chỉ là bản ghi; điểm M "Căn hộ của bạn" đặt thẳng độ cao (trái luật V2); Cyber Twin chỉ vào được sảnh; trực thăng cảnh sát chưa bay; chú thích đầu file còn ghi cao độ +0,6 (thực tế +2); tên một số toà có chữ địa danh/thương hiệu thật cần đổi.
+
+---
+
+<a id="v2-brain"></a>
+
+### V2.4 · Đỉnh QA/QC Brain Citadel (`js/brain_citadel.js`, `js/bots_brain.js`)
+
+**Địa hình** (`:39-79`): núi tâm (880, 180), sân đỉnh phẳng r 60 ở **y 110**, biển xung quanh −6. Vách đứng ở Đông và Nam (chân cách tâm 118 m), sườn Tây và Bắc thoải (250 m). Lưới ô 2 m, cỏ `0x5e9a3c`/`0x86b04c`, đá `0x7d766b`/`0x5a5249`, cát `0xdcc89d`.
+
+**Đường lên đỉnh**
+- Đường dẫn G4: (570, 86) → (580, 86) → (600, 90) rồi cong vào chân đèo ≈ (645, 107, y 4); đoạn qua biển là cầu cạn.
+- Đường đèo "Oceanfront Corniche" (`:45-113`): rộng 10 m, mỗi chiều 1 làn (vạch mép trắng, tim vàng đứt), quấn 1,25 vòng từ y 4 lên y 100 (≈ 1,4 km). Đoạn trên biển là cầu cạn bê tông trụ mỗi 14 m. Lan can kính, đèn cột ≈ 26 m. 3 vòm đá bắc ngang đường ở đoạn y 40–74.
+- Cầu Kính Cổng Trời (`:114-129`): từ cuối đèo (y 100) lên sân đỉnh (y 110), dài ≈ 47 m, rộng 10, đáy kính `0xcfefff`; 2 tháp chữ A 28 m (titan `0x263040`, vòng vàng `0xd4af37`), cáp đồng `0x7a4a2a` phát sáng cam ban đêm.
+- Cầu G6 sang Dev City (`:130-144`): (700, −100,5) → (700, −30) → (640, 20) → nhập đường dẫn gần (628, 97); rộng 9, trụ mỗi 16 m, lan can kính.
+
+**Phố săn mây – 12 quán** (`:157-202`) dọc mép ngoài đèo đoạn y 40–74, mỗi quán sàn gỗ 12 × 8 (trên cột khi dưới là vực), quầy + 2 bàn tròn: Lầu Trà Đạo Lưu Ly, Bistro Hang Đá Ngàn Đèn, Café 3 Vòm Kính, Hải Sản Thuyền Gỗ, CLB Bida & Bia Thủ Công, Café Hải Đăng, Khối Kính Ngắm Mây, Nhà Gỗ Chữ A, Vườn Giàn Hoa, Café Đài Thiên Văn, Container Màu Sắc, Café Xích Đu Mây. Món 20–220 💰, ăn xong chạy nhanh 8 phút.
+
+**Quảng trường đỉnh "Royal Contrast"** (`:210-290`, thiết kế lại 16/11 theo đề bài của Bình)
+- Sân r 60,3: đá bazan `#222b38` lát vòng đồng tâm, viền bát giác terracotta `#8f3f29` + sa thạch `#b8925a` + chỉ vàng `#d4af37`, 16 tia la bàn.
+- Hồ Vô Cực Sen bát giác (cạnh cách tâm 38 m, mép trong r 26,6), nước `0x0284c7`, 16 vòi phun cong.
+- 8 cầu vòm qua hồ (r 25,9 → 39,1): thân sa thạch rộng 3,7, vồng 0,85 m, 18 bậc gỗ lim đỏ `#5c261a`, lan can trụ vàng; mỗi cầu ứng với 1 cửa tháp.
+- Lan can viền r 59,3 cao ≈ 1,1 m (đá kem `#cbb698`, mặt đen–vàng), hở 4 lối: cầu kính, xích đu, khinh khí cầu, sân bay.
+- 24 trụ đèn pha lê vàng 3,4 m; 16 bồn đồng cây lá kim + sen hồng; 8 vườn thiền ở r 48 (bồn cẩm thạch đen 2 bậc 6 × 3,5, sỏi trắng, đá cảnh, đèn lồng đá, xen phong đỏ / ngân hạnh vàng 5,5–7 m); 8 ghế gỗ lim có pergola vàng + hoa giấy hồng ở r ≈ 55.
+- Mái vòm cổng 11 × 9,4 đen–vàng ở y 116,3 trên 8 cột vàng, băng chữ "★ QA · QC · QE SOVEREIGN CITADEL ★" vàng trên nền navy `#0b1a33`.
+
+**Tháp Liên Hoa Thần Kinh** (`:204-430`)
+- 6 tầng ở y 110/118/126/134/142/150 (mỗi tầng 8 m), bán kính sàn 26/23,2/21/23,5/26,2/29 (dáng đồng hồ cát), giếng trời r 10.
+- Vỏ kính `0x0a2540` (0,58), khung xoắn kép 72 thanh vàng, viền sàn obsidian + vàng + neon cyan `0x00f0ff`.
+- 8 cánh sen ngoài cao 35 m mọc từ mặt hồ + 8 cánh trong lên tới y ≈ 160; kính cánh `0x0d7490`, sống cánh đồng đỏ `0x6e351c`.
+- 8 cửa tầng trệt; cầu thang xoắn kép ADN (32 bậc mỗi tầng, viền LED cyan và hồng); **4 thang liftkit** (2 dãy × 2, r 13,2) phục vụ cả 6 tầng.
+
+| Tầng | Nội dung |
+|---|---|
+| 1 · Bảo tàng Lịch sử & Thảm hoạ phần mềm | 3 tủ kính, 6 bảng các sự cố phần mềm nổi tiếng + "Bài học" |
+| 2 · Đấu trường Test Design | 6 kiosk đố vui (E) |
+| 3 · Chỉ huy Hiệu năng & Bảo mật | hologram lưới quay, 3 bảng Hiệu năng / SOC / CI/CD |
+| 4 · Đại sảnh Danh vọng & Phòng Bí ẩn | 5 bảng vinh danh, cổng tím "Không gian Bí ẩn" (chưa có nội dung) |
+| 5 · Nhà hàng xoay · Bida Hoàng gia | vành sàn xoay, 7 bàn, Sky Bar, 4 bàn bida nỉ đỏ `0x7a0d1c` |
+| 6 · Sân thượng · QA Brain Core | sàn óc chó + tâm ngọc lục bảo, bệ đồng pha lê neon (E mở Brain Core: phân tích tài liệu, sinh test case), 3 lầu kupola "Đình Vọng Cảnh" (mái búp sen xanh ngọc `0x0f766e`, 4 cột vàng, kính thiên văn 360°) ở r 24,4, bồn mẫu đơn và bonsai, "Đài Sen" kính mờ r 15,6 che sảnh thang |
+
+- Vương miện tâm y 165,5: 3 vòng gimbal vàng tự quay (R 15,5/14/12,6), lõi hồng `0xbe185d` "thở", vỏ não pha lê 9 × 7,5 × 10 `0xbfe9ff`, băng chữ quay r 18,4 nền navy `#0a1526` chữ vàng "★ QA · QC · QE ★".
+
+**Khác trên đỉnh**
+- Sân bay Đỉnh Mây (`:432-445`): sàn x 820–980, z 50–125, y 110; đường băng ngắn 160 × 26; 2 bãi trực thăng; nhà ga kính 36 × 7 × 14 mái vàng ở (850, 113). Đã đăng ký `W.AIRPORTS`.
+- Xích đu tử thần (880, 265): trục 28 m, cần 24 m, 55°, 26 giây, **40 💰**. Khinh khí cầu (925, 250): lên y 210, 54 giây, **50 💰**.
+
+**PLACES:** Đỉnh Brain Citadel (≈ 865, 230) · Đường đèo ngắm biển · Phố săn mây · Sân bay Đỉnh Mây (860, 110) · Xích đu & Khinh khí cầu (880, 250).
+
+**Bot (≈ 27):** 9 chủ quán/barista/đầu bếp, 5 khách săn mây, 3 khách trên cầu kính, 1 nhiếp ảnh gia, 3 nhân viên tầng 1–3, 1 bartender, 2 cơ thủ bida, 2 nhân viên trò chơi, 1 phi công trực thăng.
+
+**Ban đêm:** đèn đèo sáng dần, trụ pha lê và đèn lồng phát sáng, cáp cầu kính cam, lõi hồng thở mạnh hơn, 8 cột sáng tím `0xc9b8ff` cao 180 m ở r 48, tia sáng từ 8 chóp đèn tới quả cầu.
+
+**Còn dở:** Phòng Bí ẩn chưa có nội dung; chuyến bay Sân bay Đỉnh Mây chưa mở; không có người đi bộ trên đèo; vỏ não vượt trần vùng (≈ y 173 > 168); chú thích đầu file còn ghi "2 thang máy kính" (thực tế 4).
+
+---
+
+<a id="v2-devcity"></a>
+
+### V2.5 · Dev City 8D (`js/devcity_chongqing.js`, `js/devcity_landmarks.js`, `js/bots_devcity.js`)
+
+**Địa hình** (`devcity_chongqing.js:20-252`, trong mã dùng `d = −z`)
+- Vùng x 100…850, z −950…−120, y 2…135; lưới EXTL ô 2,5 m. Góc x < 180, z > −186 để trống cho Abyssal.
+
+| Thềm | Cao độ | Mép vách (d = −z) |
+|---|---|---|
+| T1 bờ sông | +2 | bờ d ≈ 158–192; vách lên T2 từ d ≈ 214–230 |
+| T2 lưng núi | +24 | vách lên T3 ở d ≈ 440 |
+| T3 cao nguyên | +52 | vách lên T4 ở d ≈ 712 |
+| T4 đỉnh mây (sân bay) | +85 | |
+
+- Thêm: cao nguyên Tây +46 (x < 236); thung lũng +2 tâm (280, −310) r 50; đỉnh A (720, −675) sân +72; đỉnh B (785, −790) sân +98; hẻm vực giữa 2 đỉnh đáy +44. Cỏ `0x5d8f3c`/`0x7fa94a`, rừng `0x2f5a2c`, đá `0x857f73`, lát `0xc9c2b4`; ≤ 1.400 mỏm đá instanced.
+- Sông phía Bắc (kè đá 3,6 m, lan can thép). Hồ Thiên Cảnh tâm (560, −600), elip 65 × 42, mặt nước +51,6 (`0x2a7f98`), đảo r ≈ 14.
+
+**Đường xe** (`:132-144`, dốc ≤ 10 %, đèn mỗi 26 m so le, hộ lan phía vực)
+
+| Tuyến | Toạ độ (x, z, y) | Rộng / làn |
+|---|---|---|
+| Đại lộ Bến Sông | (220, −176) → (700, −176), +2 | 14 m / 4 |
+| Đường đèo Vách Đông | (600, −182) → (840, −252), +2 → +24 | 10 / 2 |
+| Đại lộ Lưng Núi | (840, −252) → (840, −300) → (345, −300) | 12 / 2 |
+| Phố Bệnh viện – Xuyên Lầu | vòng x 365…600, z −300…−395, +24 | 9 / 2 |
+| Đường Thung lũng | (300, −176) → (281, −274), +2 | 10 / 2 |
+| Hầm đôi Nam Sơn | x 450, z −300 → −700, +24 → +52 | 20 / 4 |
+| Vành đai Cao nguyên | khung x 330…650, z −490…−700, +52 | 12 / 2 |
+| Đại lộ Giải Phóng | (214, −246, +46) → (176, −428) → (330, −490, +52) | 10 / 2 |
+| Phố Cao nguyên Tây | (214, −246) → (222, −482) | 9 / 2 |
+| Đường đèo Mây Trắng | (650, −700, +52) → (350, −747, +85) | 10 / 2 |
+| Vòng đón khách Sân bay | x 252…462, z −752…−768, +85 | 10 / 2 |
+| Đường lên chùa + vòng xuyến r 9 | (650, −600) → (711, −596) | 8 / 7 |
+
+**Cầu và đường trên cao** (`deck`, `:259-307`; bản bê tông, tường chắn 1,05 m, trụ mỗi 14 m)
+- Nút giao xoắn ốc 5 tầng: tâm (280, −310), r 36, 4,5 vòng, +2 → +52, rộng 9 m, 16 cột chung.
+- Cầu cạn lên cao nguyên (280, −346) → (326, −484) ở +52.
+- Cầu dây văng 2 tầng x 220, z −121…−177: tầng dưới đường xe rộng 15 m; tầng trên (+10, rộng 5,4 m) là dầm tàu điện; tháp chữ H cao 60 m, 16 dây văng. Đầu cầu nối CBD ở (220, −104). (Nhãn trong game ghi ngược tầng.)
+- Cầu cổng G5 → CBD: x 384, z −169 → −119, rộng 12 m. Cầu cổng G6 → Brain: x 700, z −177 → −98, rộng 12 m, +2 → +4,05.
+- Hầm đôi Nam Sơn (`:370-403`): x 440…460, kín d 440…605 + hào hở d 605…663, 2 lòng × 8,4 m có vách giữa, vòm LED xanh `0x2a8cff` mỗi 12 m, cửa Nam ốp đá cao 31 m.
+
+**Công trình** (`devcity_landmarks.js`)
+
+| Công trình | Vị trí / kích thước | Phong cách | Vào được / thang |
+|---|---|---|---|
+| Dev Sky-Crystal (`:56-64`) | 4 tháp tiết diện thấu kính 26 × 15 ở x 437,5/472,5/507,5/542,5, z −198; thân +2 → +92, phần trên +100 → +117; sống cánh buồm trắng cao 115 m | kính PBR (khung `#8fa0b0`, kính `#2f5576`), sống `0xf1efe9` | thân đặc; 2 dãy × 2 thang liftkit ở x 455 và 490 (G ↔ +93) |
+| The Crystal – ống kính ngang (`:65-83`) | 140 × 24 × 8 m, x 420…560, sàn +93,2 | vỏ kính bo tròn, sườn trắng mỗi 7 m, sàn kính 20,5 m đầu Tây, hồ bơi vô cực 28 × 13, vườn cọ | đi lại bên trong được |
+| 5 lớp học Dev (`:78-80`) | hộp kính 11 × 3,4 × 7 ở x 448/463/478/493/508, z −204,5: Backend, Frontend, System Design, DevOps, AI | kính + mái trắng, biển `#0e3b5c` | E chỉ báo "đang biên soạn" (một AI khác đang soạn bài) |
+| Lầu Vách Đèn Lồng – phố cổ treo vách (`:86-136`) | x 148…228, vách sau z −233; 11 sàn × 4 m (+2 → +42); sân thượng +46 rộng 80 × 46 có 3 đình mái cong | gỗ tối `#4a2a16`, cột đỏ `0xa82a1f`, mái ngói, đèn lồng, cửa sổ ấm | đi bộ mọi sàn; cầu thang ngoài trời x 229…237; liftkit vàng (225, −193) G ↔ +46; quán lẩu cay 45 💰, mì kéo sợi 30 💰, trà đạo 25 💰 |
+| Dev Residency Tower (`:139-170`) | (380, −420), 30 × 24; thân +24 → +78 (18 tầng), khoét rỗng tầng 6–8 cho tàu điện chui qua; mái kính + vườn tới +82 | căn hộ ban công `#efe9df`, 4 lõi bê tông | thân đặc; vào sân ga +39,2 (liftkit) và ban công tầng 15 sau khi mua 3.000 💰 / thuê 250 💰 |
+| Trường liên cấp Dev Sơn Thành (`:175-180`) | chữ U: khối chính 58 × 10 ở (519, −281), 2 cánh 10 × 24, cao 16 m; sân thể thao 40 × 34 | mặt tiền `#d9b98c`, đường chạy đỏ `#b8452e` | không |
+| Dev Grand Hotel 5★ (`:182-185`) | bệ 58 × 36 cao 8 m ở (721, −263), thân thấu kính 42 × 17 lên +86, vương miện kính + vòng vàng | | không |
+| Bệnh viện Sơn Thành (`:187-196`) | chữ H: 2 cánh 72 × 14 ở (680, −345)/(680, −391) cao 21 m, thân giữa 18 × 34 cao 24 m, sân trực thăng trên mái | `#d7d2c8`, chữ thập đỏ | không |
+| Trạm cứu hoả Lưng Núi · 114 (`:198-201`) | 46 × 22 ở (800, −345), cao 10 m, tháp tập lên +50, 3 cửa đỏ | | không |
+| Cao ốc T2 (4 toà) + 21 cao ốc T3 (`:42-49, 203-217`) | T2 cao 22–34 m; T3 cao 48–76 m quanh hồ, "Dev Tower – Trung tâm Cao nguyên" (365, −642) cao 62 | 5 loại mặt tiền (kính, văn phòng, căn hộ, ấm, tối `#2b3138`) | không |
+| Công viên hồ Thiên Cảnh (`:220-240`) | lối dạo vòng 4,4 m, cầu chữ chi gỗ, cầu vòm đá, đình 8 × 8 trên đảo, 16 ghế đá | | đi bộ |
+| Sân bay đỉnh núi +85 (`:243-270`) | đường băng 40 × 470 ở (375, −885), sân đỗ 190 × 32, nhà ga 160 × 26 cao 13 mái sóng trắng ở (370, −787), đài kiểm soát ≈ 41 m, 3 máy bay đỗ, 1 máy bay cất cánh mỗi 80 s | | nhà ga không vào được |
+| Chùa trên núi "Linh Sơn Vân Tự" (`:273-361`) | bậc đá 7 m lên đỉnh A, cổng tam quan, bảo tháp bát giác 9 tầng ≈ 54 m, cầu xích gỗ ≈ 80 m qua hẻm, chánh điện treo vách 22 × 14 (sàn +72, nửa trong hang), tượng Phật vàng 32 m trên đỉnh B, 16 mây sprite | đá, đỏ, vàng | đi bộ; lên đỉnh tượng bằng E (dịch chuyển); thắp hương |
+| Bến du thuyền (`:364-373`) | 3 cầu tàu gỗ 3,2 × 26 ở x 652/742/778, z −146; 6 du thuyền | | đi bộ |
+
+**Tàu điện một ray "Xuyên Lầu"** (`chongqing:311-367`): dầm bê tông trên trụ chữ T, từ tầng trên cầu dây văng (222, −121, +11,4) → (346, −300) → xuyên toà Residency (380, −420, +38,6) → (788, −420). 3 ga sân dài 50 m: Bến Sông (≈ 224, −177, +12,6), Xuyên Lầu (380, −420, +39,2), Đông Sơn (780, −420, +39,2). 4 toa × 11 m (xanh ngọc/tím/cam), tối đa 22 m/s, chạy con thoi, miễn phí; đứng sân ga tàu tới tự lên.
+
+**PLACES (14):** Bến Sông (380, −172) · Nút giao xoắn ốc (300, −250) · Hầm đôi (450, −412) · Cao nguyên & hồ (560, −520) · Ga Xuyên Lầu (380, −401,6) · The Crystal +93 (445, −192) · Lầu Vách Đèn Lồng (200, −186) · Lưng Núi +24 (640, −306) · Trung tâm Cao nguyên +52 (470, −496) · Đình giữa hồ (562, −596) · Sân bay +85 (370, −746) · Chánh điện treo vách · Đỉnh tượng Phật +98 · Bến du thuyền (742, −163).
+
+**Bot (42):** phố cổ (nghệ nhân múa mì, nghệ nhân đổi mặt nạ, 2 người bán kẹo hồ lô, 5 khách), lái tàu + 4 khách săn ảnh tàu chui qua nhà, 1 cảnh sát giao thông ở nút giao, kiến trúc sư + 2 khách + 2 gondola lau kính ở The Crystal, lính cứu hoả, bác sĩ, phi công, 4 học sinh, 2 khách thả hoa đăng, 2 người chạy bộ, 1 nghệ sĩ đàn trong đình, 2 sư + 2 khách hành hương ở chùa, nhân viên và tổ bay ở sân bay. Xe bot chạy mọi đường của Dev City (tối đa 11 m/s, trong hầm 13).
+
+**Ban đêm:** đèn đường và tường gỗ phố cổ sáng dần, cửa sổ PBR sáng 45–60 %, LED hầm luôn sáng, biển hiệu và đèn lồng phát sáng, hoa đăng.
+
+**Còn dở:** 5 khoá Dev chưa có bài; hầu hết toà là khối đặc chưa nội thất (khách sạn, bệnh viện, trường, cứu hoả, cao ốc T2/T3, nhà ga, 4 tháp Crystal, thân Residency); vài nhãn/biển và tên NPC còn tên địa danh có thật cần đổi; cổng G5 ở x 384 (kế hoạch 380).
+
+---
+
+<a id="v2-wonder"></a>
+
+### V2.6 · Wonderland & Công viên Kỳ Quan (dời về Nam) (`js/wonder_v2.js` + `js/worldshift.js`)
+
+**Cách dựng:** `wonder_v2.js` gọi lại 2 module V1 (`funisland.js` và `themepark.js` kéo theo `themerides.js`, `themeland2.js`, `themedark.js`, `themeplay.js`, `coastertrack.js`) với độ dời **dx −130, dz +265,5** qua `worldshift.js`. Toạ độ thế giới = toạ độ V1 + (−130, +265,5). Chỗ nào module tự lấy toạ độ thế giới phải đổi qua `W.SHIFT.toW` / `toL` – điểm dễ lỗi khi thiết kế lại.
+
+**Đất và mặt nước**
+- Vùng ZONES x −400…230, z 485…1510. Wonderland x −140…2, z 487,5…627,5, mặt +1,7; Kỳ Quan x −400…233, z 637,5…1507,5, mặt +2,0.
+- Hồ Pha Lê tâm (−90, 885,5), elip 200 × 116 m, mặt nước +1,55, đảo giữa r 22 có vọng lâu bát giác, 2 cầu vòm đá 5,4 m, đài phun nhạc 26 vòi (2 vòi cao 22 m). Hồ Atlantis (106, 1417,5), hồ khủng long (40,7, 1296,5).
+
+**Cổng và lối chính**
+
+| Hạng mục | Thông số |
+|---|---|
+| G8 – cầu cong Sân bay → mũi Bắc Wonderland (`wonder_v2:73-77`) | (0, 379,4, +4) → (−77, 504, +1,75), rộng 12 m: nhựa 8,8 m (2 làn) + vỉa hè 1,3 m mỗi bên, lan can bê tông + tay vịn, trụ đôi mỗi 16 m, đèn mỗi 30 m |
+| Cầu đá Wonderland → Cổng Kỳ Quan | x −90, z 602,5 → 661, rộng 8,4 m |
+| Đại lộ Ánh Sao | x −103…−77, z 679,5…773,5 (rộng 26 m), dải hoa giữa |
+| Đại lộ Phiêu Lưu xuống khu Nam | x 78…90, z 899,5…1149,5 |
+| Đại lộ ngang | z 1149,5…1161,5, x −340…200 |
+| G9 – lối lát sang Palm (`wonder_v2:80-90`) | đá rộng 7 m, x 90 → 211 ở z 900; mố cầu x 208 → 219,4 rộng 9 m; cầu Palm bắt đầu x 218 |
+
+- Bên trong 2 công viên **không có đường xe**; xe từ G8 bị cụt ở mũi đảo, xe từ G9 quay đầu ở x 200.
+
+**Đảo QC Wonderland** (tâm (−69, 556,5), r ≈ 57): cổng lâu đài 2 tháp hồng (−73, 516,5); đu quay ngựa gỗ 10 ngựa (trang trí); tàu lượn Siêu Bug (đỉnh ≈ +28, 25 💰); tháp rơi 60 m (25 💰); thuyền hải tặc đu 75° (20 💰); Nhà Ma Bug 24 × 16 m (20 💰); quầy kem 15 💰; 16 cột cờ + đèn.
+
+**Công viên Kỳ Quan**
+- Cổng chính: 2 tháp 6 × 15 × 6 ở x −102/−78, z 667,5, vòm 18,4 m, biển `#12305a`/`#ffe9a8`, tường vữa `0xf2e6cf`, mái `0x1f5f8f`.
+- Đại lộ Ánh Sao: nhà phố 2–3 tầng (không vào được) xen 8 quầy ăn (12–22 💰). Quảng trường HUB (−90, 791,5) r 21 có đài phun 3 tầng.
+- 20 trò (mua vé E ở quầy, xếp hàng theo rào, lên xe bằng E):
+
+| Trò | Vị trí (thế giới) | Thông số | Giá 💰 |
+|---|---|---|---|
+| Thần Long Cuồng Nộ | ga ≈ (−110, 977,5) | dốc 68 m, lao 84°, vòng lộn 39 m, 126 km/h | 35 |
+| Tia Chớp Không Gian | ≈ (−30, 801,5) | phóng 0 → 133 km/h, mũ chóp 60 m | 35 |
+| Song Dực Đại Bàng | ≈ (−252, 881) | 2 tàu treo đua song song | 35 |
+| Tháp Sấm Sét QC | (−182, 803,5) | cao 82 m, rơi 80 m | 30 |
+| Mắt Thần QC World | (42, 885,5) | vòng quay 90 m, 24 cabin | 25 |
+| Kỷ Jura Tuyệt Diệt | ga ≈ (28, 1240,5), núi 66 m | | 35 |
+| Lời Nguyền Hầm Mỏ Dung Nham | ga ≈ (−150, 1181,5), núi lửa 55 m | có đoạn trượt lùi | 35 |
+| Đền Thờ Atlantis Chìm Đắm | ga ≈ (−12, 1373,5) | | 35 |
+| Con Tàu Ma Ngọc Trai Đen | (−250,4, 1200,9) | xoay 360° | 25 |
+| Khúc Nhạc Cung Đình | (−329,6, 1200,9) | ngựa gỗ 2 tầng | 15 |
+| Vũ Điệu Gió Trời | (−250,4, 1280,1) | đu dây văng 56 m | 25 |
+| Con Lắc Thần Sấm | (−329,6, 1280,1) | | 25 |
+| Dinh Thự Huyết Nguyệt (nhà ma) | (−366, 1073,5) | | 35 |
+| Phòng Thí Nghiệm Khu 13 | (−254, 1073,5) | bắn bằng E | 35 |
+| Lời Nguyền Xác Ướp Hoàng Đế | (−142, 1073,5) | | 35 |
+| Huyền Thoại Xứ Sở Thần Tiên | lâu đài 65 m (−70, 1445,5) | thuyền bay | 30 |
+| Đường Đua F1-QC (go-kart) | (−222, 1390,5) | tự lái 3 vòng | 30 |
+| Bão Điện Từ (xe điện đụng) | (−202, 1415,5) | | 20 |
+| Đôi Cánh Vượt Kỳ Quan (rạp bay 4D) | (−342, 1327,5) | | 30 |
+| Ảo Ảnh Vô Cực (mê cung gương) | (−256, 1311,5) | | 20 |
+
+**PLACES:** Đảo Wonderland (−73, 510,5) · Cổng chính Kỳ Quan (−90, 675,5) · Quảng trường & Hồ Pha Lê (−90, 814,5) · 20 điểm trước cổng từng trò.
+
+**Bot:** 9 khách đứng ở Wonderland, 8 đầu bếp quầy ăn, nhân viên soát vé và vận hành ở mỗi trò. Không có người đi bộ dạo.
+
+**Ban đêm:** quầng sáng ở đèn cầu G8/G9, cầu đá, quầy ăn, cổng; biển hiệu phát sáng; cửa sổ tím nhà ma.
+
+**Còn dở:** chưa có đường xe trong công viên (G8 cụt, G9 chỉ đi bộ); nhà phố, quầy ăn, nhà ga các trò không có nội thất; không có thang máy; đu quay ngựa không chơi được; đất lệch ra ngoài ZONES 3 m; còn 2 điểm cụt đã biết ở (−77, 504) và (200, 900).
+
+---
+
+<a id="v2-lang"></a>
+
+### V2.7 · Đảo Ngoại ngữ núi tuyết (khoá `swiss`, `js/swiss_lang_island.js`)
+
+**Địa hình** (`:39-101`)
+- Vùng x −850…−250, z −500…250, y 0…95. Bờ là siêu-elip tâm (−550, −125), bán trục 287 × 362, thêm nhiễu.
+- Nền cao `4 + fbm·12`; phía Bắc (z < −300…−440) có dãy núi cao thêm tới +100 m, tuyết `0xf4f7fb` từ ≈ 58–72 m. Cát `0xd8c79a`, cỏ `0x6aa846`/`0x8fbe4f`, đá `0x8b8780`, đốm hoa vàng/tím. Lưới đất 3 m, 9 nền công trình san phẳng.
+- 3 hồ (hồ sen 47 × 38 ở mặt nước 4,7; hồ cổng đỏ 24 × 14; hồ đá 17 × 14), suối băng 10 điểm từ (−560, −372) tới (−500, 272) rộng 4,2 → 7,5 m, thác 9 m.
+
+**4 học viện** (khung chung `academy()`, `:137-195`): cửa chính mặt Nam rộng 4,4 m, tường 0,6 m. Đại sảnh giữa (2 bàn dài, ghế băng, 2 kệ sách, bảng lộ trình, quầy học vụ); lớp học A 12 bàn (Tây-Bắc), Phòng kiểm tra (Đông-Bắc), phòng chuyên đề (Tây-Nam), quán (Đông-Nam). **1 tầng, không thang máy**, mái tự ẩn khi vào trong. 6 điểm E mỗi học viện, học miễn phí; phần nghe/thi chạy trong app `langui.js`.
+
+| Học viện | Tâm · kích thước | Sàn · tường | Phong cách | Riêng |
+|---|---|---|---|---|
+| Tiếng Anh (`:203-239`) | (−420, −80) · 50 × 36 | +6,15 · 9 m | lâu đài đá `#d6ccb6`/`#9a907f`, 4 tháp góc r 4,4 cao 14 m có răng cưa, mái slate `0x3c4048`, cửa vòm nhọn | tháp đồng hồ ≈ (−386, −68) cao ≈ 43 m chạy theo giờ thật; nhà kính bán trụ dài 30 m + 160 khóm hồng; quán trà 10 💰 |
+| Tiếng Trung (`:241-275`) | (−680, −80) · 50 × 38, trên hồ sen | +6,0 · 7 m | song cửa đỏ `0x8a1f17` nền kem, 26 cột đỏ `0xb3261e`, mái cong 2 lớp vàng `0xd8a531` | cầu 9 khúc 2,8 m, 140 lá sen, 300 cây trúc, bàn thư pháp |
+| Tiếng Nhật (`:277-310`) | (−420, −280) · 52 × 40 | +9,4 (bệ đá 2,4 m) · 6,5 m | khung gỗ + vách giấy, sàn tatami `0xc9c08a`, mái 3 lớp `0x3b3a40` | cổng đỏ dưới hồ cao 13 m, cầu gỗ cong, vườn đá 22 × 14, 40 cây hoa anh đào. **Khoá học trống** |
+| Tiếng Hàn (`:312-343`) | (−680, −280) · 52 × 40 | +7,6 · 7 m | nửa Tây mái ngói cổ (gỗ/xanh `0x2f8f6f`/đỏ `0xc0392b`), nửa Đông khối kính cao 9 m | màn LED 20 × 10, lầu trên hồ đá, 32 cây ngân hạnh. **Khoá học trống** |
+
+**Cảnh quan, giao thông, làng** (`:345-541`)
+- 520 cây thông, 120 cây lá, 2.600 hoa, 18 con bò (E nghe chuông), 3 cối xay gió quay.
+- Tàu bánh răng: vòng chữ nhật bo góc x −740…−360, z −360…20; 3 toa đỏ `0xc0201a`, 9 m/s, 5 ga (Tiếng Anh, Tiếng Nhật, Tiếng Hàn & Làng Tuyết, Tiếng Trung, Cầu Vòm); vé 5 💰 (miễn phí khi đã học ≥ 1 bài); lên tàu là dịch chuyển.
+- Làng nhà gỗ 8 căn (x −612…−498, z 68/92): lẩu phô mai 20 💰, sô-cô-la 10 💰, tiệm đồng hồ; nhà trọ chỉ có biển. Làng Tuyết 4 nhà + 8 cọc cờ trượt (chỉ toast). Bến thuỷ phi cơ (−306, 158), bay về điểm xuất phát 10 💰.
+- Đường nội đảo chỉ để đi bộ: đường dạo vòng đảo 4 m, vòng làng 4,5 m, 5 lối vào 3,2–3,4 m, Đại lộ Cổng Đông 7 m ở z −16.
+- Cầu G3: từ bờ (x ≈ −272) tới (−180, −16), rộng 8 m (mặt nhựa 6,6 m), cao +2, vồng 0,9 m, lan can 1,1 m, đèn mỗi 16 m, 2 cổng biển hiệu.
+
+**PLACES:** Toàn đảo (−330, −180) · 4 học viện (−420, −50), (−680, −33), (−420, −238), (−680, −250) · Làng (−540, 80) · Làng Tuyết (−760, −330) · Bến (−312, 152).
+
+**Bot (12):** 4 giảng viên, 1 người thổi kèn, 2 người chăn bò, 1 lái tàu, 4 du khách.
+
+**Còn dở:** chưa có bài tiếng Nhật/Hàn (một AI khác đang soạn theo `docs/PROMPT_TAI_LIEU_HOC.md`); học viện 1 tầng; nhà trọ và trượt tuyết chưa tương tác thật; mã còn một số tên địa danh có thật cần đổi sang tên tự đặt.
+
+---
+
+<a id="v2-palm"></a>
+
+### V2.8 · Quần đảo cọ The QC Palm Archipelago (`js/palm_dubai.js`, bot trong `js/bots_swiss_palm.js`)
+
+**Địa hình** (`:42-89`): x 250…1050, z 520…1320, tâm (650, 920), mặt đảo +2,2. Thân cọ x 585–715, z 520–940 + tròn r 65 ở (650, 940); dải Bắc x 425–875, z 520–558; 8 nhánh lá ở z 660/740/820/900 (nửa rộng 20/24/28/32 m); vành trăng khuyết r 336–398 mở về phía Bắc. Bờ dốc xuống −6 trong 16 m. Cát `0xf1e3c0`, cỏ `0x7fbf55`.
+
+**Đường** (`:104-142`, nhựa `0x3a3d42`, mỗi chiều 1 làn, vmax 10 m/s)
+
+| Tuyến | Toạ độ | Rộng |
+|---|---|---|
+| Đại lộ Bắc | z 538, x 436 → 864 | 9 m |
+| Đường vành | r 350 | 8 m |
+| 2 đại lộ thân cọ | x 625 và 675, z 538 → 948 | 8 m |
+| Vòng xuyến | r 16 quanh (650, 968) | 8 m |
+| 8 đường nhánh + 8 cầu vòm ra vành | | 8 m / 7 m |
+| Cầu G7 | (450, 458) → (450, 524) | 10 m |
+| Cầu G9 | (218, 900) → (256, 900) | 9 m |
+
+Cầu mặt đá, lan can thép 1,1 m; cổng vàng cột 8 m ở (450, 527) và (259, 900).
+
+**Nhà ở bán được** (`:144-271`, lưu ở `S.ownedEstates`, mua thêm không mất căn cũ)
+
+| Hạng | Giá 💰 | w × d × h (m) | Vị trí | Số căn |
+|---|---|---|---|---|
+| Nhà phố trắng mái vòm xanh coban | 2.500 | 8 × 10 × 6,6 | nhánh F1, F2 | 24 |
+| Duplex kính, đá kem + gỗ | 12.000 | 12 × 14 × 7,4 | F3, F4 | 20 |
+| Biệt thự hồ bơi, marble | 35.000 | 18 × 18 × 8 | F5, F6 | 16 |
+| Siêu biệt thự bến du thuyền, 3 tầng kính | 85.000 | 26 × 22 × 11,4 | F7, F8 | 12 |
+| Dinh thự lớn nhất | 250.000 | 50 × 36 × 14,6 | vành, r 374 | 4 |
+
+- Cửa khoá với người chưa sở hữu; biển "ĐANG BÁN" (E mua hoặc xem nhà mẫu 60 s).
+- Nội thất: mỗi hạng 1 bộ dùng chung (sofa, bếp, giường, TV, bàn ăn, đèn chùm; bàn bida cho 3 hạng cao), dời tới căn gần nhất trong 60 m.
+- Siêu biệt thự có sàn +4,2 và +8 nhưng **không có lối lên**. Dinh thự: 6 cột marble, sàn +4,8/+9,6 **không lên được**, sân trực thăng trên mái, thuỷ cung ngầm 16 × 12 ở −3,4 (36 cá), bến du thuyền 24 m. **Hồ bơi dinh thự bị lọt trong chú thích nên không dựng** (`:190`).
+
+**Thân cọ** (`:291-365`)
+- Monorail cao +13, x 650, z 548 → 1282, 3 toa 14 m/s, 3 ga (Gateway z 562, Phố Ẩm Thực z 782, Vành z 1268), vé 8 💰.
+- Phố ẩm thực 8 quán (z 610 + 32i), 15 💰 mỗi món. 6 Beach Club ở x 650 ± 41 (nhà 10 × 3,4 × 12 + hồ bơi 6 × 10), 20 💰.
+- Trung tâm thương mại kính 36 × 9 × 38 tại (650, 905): **khối đặc, không vào được**.
+- 4 tháp căn hộ 22 × 22 × 60 m tại (608, 595), (692, 595), (608, 935), (692, 935): sảnh kính vào được, sân thượng hồ bơi 10 × 6; bán căn tầng 3/9/18 giá 8.000/12.000/18.000; **chưa có tầng ở thật** (thang chỉ G ↔ mái).
+- Đài phun nước r 9,4 ở (650, 968).
+- Khách sạn mái vòm: 2 khối 20 × 28 × 50 m (x 613–633 và 667–687, z 1286–1314), vòm nối tầng 40–50, sảnh 34 × 16 × 9 là khối đặc, đài tầng 50 có hồ bơi 20 × 8. Nhận phòng 300 💰.
+
+**22 thang máy:** 4 thang dinh thự (G ↔ sân trực thăng, tự do) · 4 thang kính thuỷ cung (chỉ chủ) · 12 thang trong 4 tháp × 3 (chỉ cư dân) · 2 thang khách sạn G ↔ tầng 50 (chỉ khách; cờ `W.palmHotelGuest` mất khi tải lại trang).
+
+**PLACES:** Đảo (450, 546) · Phố ẩm thực (650, 598) · Tháp (608, 612) · 4 nhánh lá (565, 660/740/820/900) · Dinh thự · Khách sạn (650, 1272) · "Nhà của tôi".
+
+**Bot (23):** 4 quản gia dinh thự + 1 quản gia riêng, 3 đầu bếp, 2 cứu hộ, 1 DJ + 2 người nhảy, 6 khách tắm nắng, 4 thợ lặn quanh thuỷ cung.
+
+**Còn dở:** hồ bơi dinh thự; tầng trên siêu biệt thự và dinh thự; tầng ở thật trong 4 tháp; trung tâm thương mại và sảnh khách sạn chưa vào được; mã còn một số tên địa danh có thật cần đổi.
+
+---
+
+<a id="v2-he-thong"></a>
+
+### V2.9 · Hệ thống chung toàn thế giới V2
+
+**`js/v2core.js`:** V2 mặc định (`?v1` hoặc `localStorage qcworld-v2='0'` xem bản cũ). `ZONES` 8 vùng; `BOTS` (abyssal; Swiss/Palm do `palm_dubai.js` nạp); `EXTRAS` = traffic, police, events. `clearLegacy` gỡ nội dung V1 trong bán kính 3.000 m; nạp theo thứ tự ZONES → BOTS → EXTRAS.
+
+**Giao thông `js/v2traffic.js`**
+- Đồ thị `W.roadNet` gom `W.V2ROADS` + đường/sàn Dev City + đường đèo Brain + G6 + tuyến G3; nối nút cổng trong 5 m. API `route` (Dijkstra), `nearest`, `onRoad`, `lanePoint`.
+- Tốc độ tối đa theo vùng (m/s): abyssal 11 · cbd 12,5 · skyport 11 · palm 10 · wonder 8 · devcity 11 · brain 9 · swiss 6.
+- Làn: mỗi chiều 1 làn; đường ≥ 18 m có 2 làn mỗi chiều và cho vượt.
+- Xe bot: 38/42/46 xe theo chất lượng + 4 xe tuần tra, mô phỏng trong 180–210 m. Sedan 20 %, SUV 15 %, xe nhỏ 11 %, thể thao 6 %, bán tải 8 %, taxi 17 %, van 11 %, buýt 12 %. Nhường ở giao lộ, giữ khoảng cách, bóp còi. Vẽ InstancedMesh (≈ 15 lượt vẽ). Xe đặc biệt qua `spawnVehicle`: cảnh sát, cứu hoả, cứu thương, xe chở tiền.
+- Buýt (≈ 25 m) và taxi (≈ 40 m) tấp lề ngẫu nhiên đón khách; **chưa có trạm buýt cố định**.
+- Người đi bộ 30/36/40 trong 100–120 m: dạo, xách túi, nghe điện thoại, chạy bộ, dắt chó, đi nhóm; qua đường ở vạch kẻ. Không có ở brain, swiss, wonder.
+- **Đang làm (phiên người đi bộ, 16/11):** tăng tốc xe đạp +20 %, xe máy +35 %, ô tô +50 %, buýt +40 %, tàu +70 %; trạm buýt cố định cách nhau ≥ 400–500 m; bớt 25–30 % xe bot.
+
+**Sự kiện `js/world_events.js`** (lần đầu sau 150–210 s, sau đó mỗi 150–240 s, mỗi lúc 1 sự kiện, chỉ ngoài trời; phím thử Shift + 1…9)
+
+| Mã | Sự kiện | Thưởng |
+|---|---|---|
+| A | Trộm móc túi, cảnh sát đuổi bắt | lấy lại tiền; tự hạ trộm +30 💰 |
+| B | Cháy trên phố, xe cứu hoả tới phun 12 s | – |
+| C | Yêu quái + siêu nhân Captain QA, rơi 10 pha lê | +10 💰/viên |
+| D1 | Người ngất, xe cứu thương | – |
+| D2 | Xe chở tiền rơi 15 túi xu | nhặt +10/túi hoặc trả tài xế ×3 |
+| D3 | Va chạm nhẹ, cảnh sát hoà giải | – |
+| D4 | Flashmob (F để nhảy) | +40 💰 |
+| D5 | Robot trà sữa lỗi (E sửa) | +35 💰 |
+| D6 | Lễ hội đèn trời 48 đèn (ban đêm) | – |
+
+**Sở Cảnh Sát QC City · 113** (`js/police_station.js`): trong CBD, x 214–244, z 354–382, 3 tầng + bãi trực thăng (chi tiết ở phần CBD).
+
+**Âm thanh môi trường** (`js/ambience.js`, `js/ambience_world.js`): tổng hợp bằng WebAudio, không dùng file. Bật/tắt + thanh âm lượng (mặc định 60 %), trong nhà lọc trầm. Nguồn: sóng, xe gần, tiếng người, gõ phím; máy bay phản lực (nghe trong 300 m), máy bay cánh quạt, trực thăng, còi khẩn cấp có Doppler (320 m), tàu, cáp treo, thuyền, kayak, khinh khí cầu, lửa, vòi rồng, đám đông, flashmob, robot, đèn trời, pháo hoa, thác/đài phun nước, chuông gió; gió trên cao, mưa, chim ngày/dế đêm; tiếng chuông và cửa thang máy.
+
+**Thang máy bước vào** (`js/liftkit.js`): giếng kính khung thép, cabin có sàn đi theo, gương, tay vịn; cửa tầng 2 cánh chỉ mở khi cabin đỗ đúng tầng, tự đóng sau 2,5 s; E "Gọi/Mở cửa" mỗi tầng, bảng nút `#liftPanel` trong cabin. Thời gian T = max(1,6; min(Δy/2,6; 6 + Δy/9)) giây (91 m ≈ 16 s). Ẩn khi xa hơn 170 m. `makeLiftBank` dựng dãy thang. Dùng ở Abyssal, CBD, Brain, Dev City, Sân bay, Palm (22), Sở Cảnh Sát… Cảnh nội thất 1 tầng dùng `js/floorlift.js` (cabin bước vào, đổi tầng khi cửa đóng hẳn).
+
+---
+
+---
+
+<a id="v2-ton-dong"></a>
+
+### Việc đang làm và tồn đọng (16/11/2026)
+
+**Đang làm (chưa lên GitHub):**
+- Sân bay: hoàn thiện hầm cho xe và người đi qua dưới đường băng; sửa lộ trình bay (leo cao hơn toà nhà cao nhất trước khi rẽ, không đâm toà nhà).
+- Giao thông: tăng tốc xe đạp +20 %, xe máy +35 %, ô tô +50 %, buýt +40 %, tàu +70 %; trạm buýt cố định cách nhau xa; bớt xe bot.
+- Đáy vực Abyssal: vá lỗ sàn, bịt khe vách, nước không tràn vào công trình, đường nhựa 2 làn nối từ vành đai xuống đáy cho xe chạy.
+- Tài liệu học: 5 khoá Dev cho The Crystal, chủ đề hội thoại tiếng Anh C2 / tiếng Trung HSK 7–9, toàn bộ tiếng Nhật và tiếng Hàn (một AI khác soạn theo `docs/PROMPT_TAI_LIEU_HOC.md`).
+
+**Chờ thiết kế lại:** 2 toà lớn của đảo Abyssal – Cánh Xanh "QA · QC · QE Academy & Tech Hub" (phía Tây) và Cánh Đỏ "Abyssal Horizon Residences" (phía Đông).
+
+**Tồn đọng lớn theo vùng:**
+
+| Vùng | Chưa có / còn lỗi |
+|---|---|
+| Abyssal | nội thất 12 + 14 tầng của 2 cánh; 24 shophouse chưa vào được; xe chỉ chạy vành đai |
+| Sân bay | làn đón trả khách trước nhà ga; nhà ga 1 tầng, chưa có cửa hàng |
+| CBD | 4 tháp căn hộ Starlight chưa nội thất và thang máy; Cyber Twin chỉ vào sảnh |
+| Brain | Phòng Bí ẩn tầng 4 trống; chuyến bay Sân bay Đỉnh Mây chưa mở; đèo không có người đi bộ |
+| Dev City | 5 lớp học chưa có bài; hầu hết toà là khối đặc |
+| Đảo Ngoại ngữ | tiếng Nhật, tiếng Hàn chưa có bài; học viện 1 tầng |
+| Palm | hồ bơi dinh thự không dựng; tầng trên siêu biệt thự/dinh thự không lên được; 4 tháp chưa có tầng ở; trung tâm thương mại và sảnh khách sạn là khối đặc |
+| Wonder | không có đường xe trong công viên (G8 cụt ở (−77, 504), G9 chỉ đi bộ ở (200, 900)); nhà phố, quầy ăn không vào được |
+| Toàn thế giới | chưa có trạm buýt cố định; một số tên còn sót tên địa danh/thương hiệu thật |
+
+---
+
+<a id="phan-b-v1"></a>
+
+# PHẦN B · THẾ GIỚI V1 (`world.html?v1`) – hiện trạng 15/11/2026
+
+Nội dung dưới đây giữ nguyên bản ngày 15/11. Thế giới V1 vẫn chạy được bằng `?v1`; nhiều module V1 (Wonderland, Công viên Kỳ Quan, nội thất công ty, kinh tế, xe…) được V2 dùng lại.
+
 
 ## Mục lục
 1. [Đảo chính Master Dashboard + hệ thống chung](#phần-1) – quảng trường, 8 zone, sân khấu, bãi biển, Toà Giáo trình, Học viện QA, tháp Brand QA, khu nghỉ dưỡng và đảo nhỏ, lô đất, phòng trọ. Hệ thống chung: kinh tế, cửa hàng, xe, bot, laptop, nhạc, điện thoại, nạp tiền, âm thanh, phím tắt.
