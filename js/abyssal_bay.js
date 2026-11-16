@@ -19,7 +19,7 @@ export function bayModel(c){
   const inStrait=(x,z,zmax=181)=>z>ZG && z<zmax && x<GX && x>flareX(z);
   // trước 2 cánh nhà: đỉnh bãi = mép trước tầng 8 (+2,3), chân bãi cách 20 m; trước tháp Hydro-Pulse là sân +2,3 tới z −110
   function yN(x,z){ const cx=x<0?-8.1:8.1, d=Math.hypot(x-cx,z+4.8); let y=d>=120.2?2.27:d>100?-.5+2.77*(d-100)/20.2:-.5-11.5*ss(100,75,d);
-    const w=1-ss(18,30,Math.abs(x)); if(w>0){ const yt=z<=-110?2.27:z<=-90?-.5+2.77*(-90-z)/20:-.5-11.5*ss(-90,-65,z); y=Math.max(y,lerp(y,yt,w)); } return y; }
+    const w=1-ss(18,30,Math.abs(x)); if(w>0){ const yt=z<=-112?2.27:z<=-102?-.5+2.77*(-102-z)/10:-.5-11.5*ss(-102,-90,z);   /* nạo vét 17/11: bãi trước tháp lùi về z −102 để tàu chạy đủ vòng r 80 quanh đảo khách sạn */ y=Math.max(y,lerp(y,yt,w)); } return y; }
   function y(x,z){ if(Math.hypot(x,z+12)<58) return 14;   /* đảo khách sạn trung tâm */
     if(Math.abs(x)<GX && z>55) return -12;                   /* lòng eo biển */
     const r=re(x,z), f=phiD(x,z); if(isN(f)) return yN(x,z);
@@ -114,9 +114,13 @@ export function buildBay(K){
   const RC=R.C, yLand=(x,z)=>(Math.abs(x)<GX+.01 && z>ZG) ? 16.03 : (hAt(x,z)??16)+.03;
   const sidePts=e=>{ const p=[el(-5*D,1.105),el(-5*D,1.07),el(-4.7*D,1.035),el(-4*D,1.006)]; for(let f=-3; f<B.PHB-1.2; f+=1) p.push(el(f*D,RC)); p.push([GX,zB]); return p.map(([x,z])=>[x*e,z]); };
   const ringE=sidePts(1), ringW=sidePts(-1).reverse(), ring=[...ringE, [0,zB], ...ringW];   /* nút giữa cầu: ngã ba cầu dẫn đảo khách sạn */
-  const Jp=[el(52*D,RC),el(128*D,RC)], kerbSkip=(x,z)=>{ if(Math.abs(x)<5.6 && z<zB-2.5 && z>zB-5) return true; const r=re(x,z), f=phiD(x,z); if(r>.995 && Jp.some(j=>Math.hypot(x-j[0],z-j[1])<6.5)) return true; return r>.995 && f>58.2 && f<72.4; };   /* hở bó vỉa: ngã ba cầu dẫn đảo, 2 cửa hầm xoắn, lối vào bãi đỗ xe biển */
+  const Jp=[el(52*D,RC),el(128*D,RC)], kerbSkip=(x,z)=>{ if(Math.abs(x)<5.6 && z<zB-2.5 && z>zB-5) return true; const r=re(x,z), f=phiD(x,z); if((f<.5 && f>-10) || f>179.5 || f<-170) return true;   /* đỉnh dốc: vòng quay đầu cắt ngang bó vỉa */ if(r>.995 && Jp.some(j=>Math.hypot(x-j[0],z-j[1])<6.5)) return true; return r>.995 && f>58.2 && f<72.4; };   /* hở bó vỉa: ngã ba cầu dẫn đảo, 2 cửa hầm xoắn, lối vào bãi đỗ xe biển */
   roadDY(ring,7,yLand,{kerb:true, kerbSkip});
-  { const R3=v=>Math.round(v*100)/100; out.ramps.push({name:'Đường vành đai vịnh + Cầu Vòm (dốc Canyon Ramps Đông/Tây ≤ 7,5 %)', w:7, vmax:8, pts:ring.map(([x,z])=>[R3(x),R3(z),R3(yLand(x,z))])}); }
+  { const R3=v=>Math.round(v*100)/100, P3=([x,z])=>[R3(x),R3(z),R3(yLand(x,z))], core=ring.slice(3,ring.length-3).map(P3);   /* xe bot: bỏ nhánh lên đường đỉnh vách (đường đi bộ) – 2 đầu dốc kết thúc bằng vòng quay đầu trên đỉnh */
+    out.ramps.push({name:'Đường vành đai vịnh + Cầu Vòm (dốc Canyon Ramps Đông/Tây ≤ 7,5 %)', w:7, vmax:8, pts:core});
+    for(const e of [1,-1]){ const P0=e>0?core[0]:core[core.length-1], cl0=el(-6.0*D,1.0), Cl=[cl0[0]*e,cl0[1]], rr=Math.hypot(P0[0]-Cl[0],P0[1]-Cl[1]), a0=Math.atan2(P0[1]-Cl[1],P0[0]-Cl[0]), pts=[P0];
+      for(let k=1;k<16;k++){ const a=a0-e*k/16*TAU, x=Cl[0]+Math.cos(a)*rr, z=Cl[1]+Math.sin(a)*rr; pts.push([R3(x),R3(z),R3(yLand(x,z))]); } pts.push(P0.slice());
+      out.ramps.push({name:'Vòng quay đầu đỉnh dốc '+(e>0?'Đông':'Tây')+' (+28)', w:6, vmax:4, pts}); out['topLoop'+(e>0?'E':'W')]={c:Cl, r:rr}; } }
   out.ring=ring; out.junction=f=>el(f*D,RC);
   makeLabel('🛣️ Đường vành đai vịnh','2 làn · dốc ' + (B.grade*100).toFixed(1) + ' % lên đỉnh núi +28 · cầu vòm +16',{h:.45, x:el(30*D,RC)[0], y:roadY(30)+4, z:el(30*D,RC)[1], fade:90});
   /* Cầu Vòm Cửa Vịnh: mặt cầu x −38…38, hè đi bộ phía Bắc 3 m, 2 vòm thép mạ vàng nhịp 62 m cao 15 m, cáp treo, đèn LED ấm dưới mép */

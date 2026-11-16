@@ -65,10 +65,10 @@ export function buildAmenities(K){
     addPlat(0,zI-.45,0,w/2,.6,IY);   /* nối mặt cầu với mép đảo (không hụt xuống biển) */ q.mesh(MAT.trav,'abyssal-south-bridge'); for(const e of [-1,1]){ for(let z=zI; z<zN-2.9; z+=3) fence([[e*(w/2-.15),z],[e*(w/2-.15),Math.min(zN,z+3)]],yAt(z+1.5),'🌉 Lan can cầu dẫn đảo khách sạn'); }
     { const g=K.FB(); for(let z=zI; z<zN-1e-6; z+=1){ const z1=Math.min(zN,z+1); for(const e of [-1,1]) g.f([e*(w/2+.02),yAt(z)-.35,z],[e*(w/2+.02),yAt(z1)-.35,z1],[e*(w/2+.02),yAt(z1)-.2,z1],[e*(w/2+.02),yAt(z)-.2,z],[e,0,0]); } g.mesh(MAT.glow,'abyssal-south-bridge-led'); }
     BAYB.roadDY([[0,B.zB],[0,zN],[0,zI],[0,IC[1]+52.5]],7,(x,z)=>z>zN?16.03:z<=zI?IY+.05:yAt(z)+.03);
-    { const LC=[0,IC[1]+44.5], LR=6.5, lp=[]; for(let k=0;k<=36;k++){ const t=Math.PI/2+k/36*TAU; lp.push([LC[0]+Math.cos(t)*LR, LC[1]+Math.sin(t)*LR]); } BAYB.roadDY(lp,6,()=>IY+.03); cyl(3,3,.35,MAT.obs,LC[0],IY+.17,LC[1],32); cyl(2.6,2.6,.06,MAT.leaf,LC[0],IY+.37,LC[1],32); circles.push({x:LC[0], z:LC[1], r:3.1, y0:IY-.5, y1:IY+2});
-      const R3=v=>Math.round(v*100)/100, pts=[[0,R3(B.zB),16.03]]; for(let z=B.zB-3; z>zI; z-=3) pts.push([0,R3(z),R3(yAt(z)+.03)]); pts.push([0,R3(zI-1),IY+.03],[0,R3(LC[1]+LR),IY+.03]); for(let k=1;k<=24;k++){ const t=Math.PI/2+k/24*TAU; pts.push([R3(LC[0]+Math.cos(t)*LR),R3(LC[1]+Math.sin(t)*LR),IY+.03]); }
+    const LC=[0,IC[1]+44.5], LR=6.5; { const lp=[]; for(let k=0;k<=36;k++){ const t=Math.PI/2+k/36*TAU; lp.push([LC[0]+Math.cos(t)*LR, LC[1]+Math.sin(t)*LR]); } BAYB.roadDY(lp,6,()=>IY+.03); cyl(3,3,.35,MAT.obs,LC[0],IY+.17,LC[1],32); cyl(2.6,2.6,.06,MAT.leaf,LC[0],IY+.37,LC[1],32); circles.push({x:LC[0], z:LC[1], r:3.1, y0:IY-.5, y1:IY+2});
+      const R3=v=>Math.round(v*100)/100, pts=[[0,R3(B.zB),16.03]]; for(let z=B.zB-3; z>zI; z-=3) pts.push([0,R3(z),R3(yAt(z)+.03)]); const L0=[0,R3(LC[1]+LR),IY+.03]; pts.push([0,R3(zI-1),IY+.03],L0); for(let k=1;k<24;k++){ const t=Math.PI/2+k/24*TAU; pts.push([R3(LC[0]+Math.cos(t)*LR)||0,R3(LC[1]+Math.sin(t)*LR),IY+.03]); } pts.push(L0.slice());   /* khép vòng đúng điểm đầu (không lệch −0) */
       RAMPS.push({name:'Cầu dẫn đảo khách sạn + vòng sảnh đón (Nam)', w:7, vmax:6, pts}); makeLabel('🚖 Sảnh đón khách sạn','Cầu dẫn 10 m từ Cầu Vòm · vòng quay đầu xe',{h:.5, x:0, y:IY+4, z:LC[1], fade:80}); }
-    out.southBridge={zI, zN, zF}; }
+    out.southBridge={x:0, z0:zI, z1:zN, w, yIsland:IY, yArch:16, flatFrom:zF}; out.dropoff={c:LC, r:LR, w:6, y:IY+.03, hub:3.1}; }
 
   /* ======================= 3. HYDRO-PULSE CORE: 3 ĐĨA KÍNH + CỘT THÁC + BÃI ĐỖ NGẮM CẢNH +28 ======================= */
   const HC=[0,-124], DISC=[9.2,16,24.5], RO=15.5, RI=5.5; { const rings=[], ribs=[], sofa=[], tbl=[], palmT=[], palmC=[], bar=[], led=[];

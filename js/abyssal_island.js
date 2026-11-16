@@ -201,7 +201,7 @@ export async function make(W, ctx){
       /* lan can miệng giếng (bước 1°, hở ĐÚNG 2 sân nhựa lối ra mặt đất / đỉnh) */ { let run=[]; const flush=()=>{ if(run.length>1) fence(run,(hOut(run[0][0],run[0][1])??GY),'🌀 Lan can miệng giếng đường xoắn – sâu 26 m'); run=[]; }; for(let i=0;i<=360;i++){ const f=i*DEG, x=h.x+Math.cos(f)*(HR+.5), z=h.z+Math.sin(f)*(HR+.5); if(inSec(f,[lo1,hi1]) || inSec(f,[lo3,DE])){ flush(); continue; } run.push([x,z]); if(run.length>=5){ const last=run[run.length-1]; flush(); run=[last]; } } flush(); }
       /* tuyến xe bot (cao độ từng điểm): vành đai +2 → chiếu nghỉ +2 → đường xoắn → chiếu nghỉ hầm → hầm → đường vành đai vịnh */
       const R3=v=>Math.round(v*100)/100, pts=[[R3(h.x),174,Y1],[R3(h.x),R3(h.z+HR+1.4),Y1],[R3(h.x),R3(h.z+HRC),Y1]];
-      for(let d=D1+6; d<dM; d+=6){ const q=P3(d,HRC); pts.push([R3(q[0]),R3(q[2]),R3(yAt(d)*1000)/1000]); }
+      for(let d=D1+11.6; d<dM-3; d+=11.6){ const q=P3(d,HRC);   /* bước 11,6°: điểm các vòng xoắn không trùng toạ độ x-z (lệch ≥ 2,7 m) */ pts.push([R3(q[0]),R3(q[2]),R3(yAt(d)*1000)/1000]); }
       { const q=P3(dM,HRC); pts.push([R3(q[0]),R3(q[2]),R3(YM)]); } pts.push([R3(px),R3(pz),R3(YM)],[R3(h.J[0]),R3(h.J[1]),R3(hAt(h.J[0],h.J[1])??YM)]);
       RAMPS.push({name:'Đường xoắn ô tô '+(dir>0?'Đông':'Tây')+' · vành đai +2 ↔ đường vành đai vịnh', w:9, vmax:7, pts}); }
     /* nhánh 2 làn ra vành đai (+2, hướng Nam) và ra đường đỉnh vách (+28, hướng Bắc) – phẳng, nối liền sân nhựa chiếu nghỉ */
@@ -211,7 +211,7 @@ export async function make(W, ctx){
 
   /* ============================== 9. ĐƯỜNG: vành đai +2 nối 3 cổng · đường đỉnh vách · lan can mép vực ============================== */
   const BAYB=buildBay({THREE, W, grp, dyn, M, LUX:W.LUX, B:BAY, FB, RB, UP, box, cyl, rail, fence, addPlat, addSeg, plats, circles, makeLabel, hAt, hOut, A, BZ, CZ, tunLat}); ROADS.push(...BAYB.roads); RAMPS.push(...BAYB.ramps);
-  const AMN=buildAmenities({THREE, W, grp, dyn, M, MT:BAYB.MT, B:BAY, BAYB, box, cyl, fence, rail, addPlat, addSeg, plats, circles, makeLabel, INTER, P, toast, PLACES, teleport, RAMPS, LIFTK, HOOK, FB});
+  const AMN=buildAmenities({buildSouthBridge:true, THREE, W, grp, dyn, M, MT:BAYB.MT, B:BAY, BAYB, box, cyl, fence, rail, addPlat, addSeg, plats, circles, makeLabel, INTER, P, toast, PLACES, teleport, RAMPS, LIFTK, HOOK, FB});
   for(const m of [M.asphalt]){ m.polygonOffset=true; m.polygonOffsetFactor=-2; m.polygonOffsetUnits=-4; } M.roadStone=M.granite.clone(); M.roadStone.polygonOffset=true; M.roadStone.polygonOffsetFactor=-2; M.roadStone.polygonOffsetUnits=-4;
   const strip=(pts,w,mat,dy=.03)=>{ const q=QB(false), N=pts.length, closed=N>2 && Math.hypot(pts[0][0]-pts[N-1][0],pts[0][1]-pts[N-1][1])<.01, sn=(i)=>{ const a=pts[i], b=pts[i+1], L=Math.hypot(b[0]-a[0],b[1]-a[1]); return [(b[1]-a[1])/L,-(b[0]-a[0])/L]; }, H=(x,z)=>(hAt(clamp(x,-ZB+.1,ZB-.1),clamp(z,-ZB+.1,ZB-.1))??GY)+dy, E=[];
     /* mép trái/phải tại từng đỉnh: vát chéo theo phân giác 2 đoạn kề → 2 đoạn không chồng lên nhau */ for(let i=0;i<N;i++){ const n0=i>0?sn(i-1):(closed?sn(N-2):sn(0)), n1=i<N-1?sn(i):(closed?sn(0):sn(N-2)); let mx=n0[0]+n1[0], mz=n0[1]+n1[1]; const ml=Math.hypot(mx,mz)||1; mx/=ml; mz/=ml; const sc=Math.min(2.2,1/Math.max(.2,mx*n1[0]+mz*n1[1]))*w/2; E.push([[pts[i][0]+mx*sc,pts[i][1]+mz*sc],[pts[i][0]-mx*sc,pts[i][1]-mz*sc]]); }
@@ -264,7 +264,8 @@ export async function make(W, ctx){
       seaOut:[[-8,100],[-10,135],[-28,165],[-42,186],[-80,201],[-170,204],[-212,232],[-232,268],[-270,305],[-340,355],[-405,392]],
       seaBack:[[-420,402],[-350,368],[-280,318],[-240,282],[-220,250],[-180,196],[-90,194],[-55,192],[-24.65,190.4]],
       karst:{x0:-600, x1:-255, z0:398, z1:660, cut:[{x0:-405, x1:-255, z0:478, z1:660}], keepOut:[{x0:-1800, x1:-250, z0:300, z1:398, hMax:12}], hMax:100},
-      plots:{ hotel:{x:0, z:-12, r:58, y:14, core:38, pavR:47, pavA:[22.5,67.5,112.5,157.5,202.5,247.5,292.5,337.5], bridge:{x:0, z0:-12+57.6, z1:102, y:16, w:10, note:'phiên C dựng mặt cầu + lan can; phiên A đã mở khe 10 m ở lan can mép đảo phía Nam và lan can Bắc Cầu Vòm, nút ngã ba (0, z 108,9) có trong đường vành đai'}}, towersW:wing(WING[0]), towersE:wing(WING[1]),
+      plots:{ hotel:{x:0, z:-12, r:58, y:14, core:38, pavR:47, pavA:[22.5,67.5,112.5,157.5,202.5,247.5,292.5,337.5], bridge:Object.assign({note:'cầu ô tô Nam do phiên A dựng: phẳng +16 từ Cầu Vòm tới z = flatFrom rồi dốc 7,4 % xuống mép đảo +14; ngã ba (0, z 108,9) trên Cầu Vòm'}, AMN.southBridge||{}), dropoff:AMN.dropoff||null,
+        walkways:{note:'hành lang đi bộ – phiên C không xây đè', E:{x0:57.5, x1:BAY.el(0,1)[0]*.91, z:-12, w:4, y:16}, W:{x0:-BAY.el(0,1)[0]*.91, x1:-57.5, z:-12, w:4, y:16}, N:{x:0, z0:-108.4, z1:-69.6, w:4, y:16}, headSteps:'bậc Travertine trên đảo r 50,2…57,6 ở góc 0°, 180°, −90° (rộng 4 m)', southRoad:'x −5…5 từ mép đảo tới vòng sảnh đón (tâm 0, 32,5; r 6,5 ± 3)'}}, towersW:wing(WING[0]), towersE:wing(WING[1]),
         cafe:{x:cafeP[0], z:cafeP[1], yaw:Math.atan2(-cafeP[0],-12-cafeP[1]), w:26, d:9, yBase:2.5, yTop:16, note:'tựa tường kè, mặt nhìn ra vịnh; cửa trên ở vỉa hè +16, cửa dưới ở bãi cát'},
         restaurant:{x:restP[0], z:restP[1], yaw:Math.atan2(-restP[0],-12-restP[1]), w:26, d:9, yBase:2.5, yTop:16},
         stage:{x:-100, z:-212, yaw:0}, marina:{x:-GX, z:126, nx:1, nz:0, deckY:2.0, stem:8},
