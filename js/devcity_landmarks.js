@@ -1,7 +1,7 @@
 // QC World V2 – PHA 6: DEV CITY · CÔNG TRÌNH (gọi từ js/devcity_chongqing.js sau khi dựng địa hình + đường)
 //  🏙️ DEV SKY-CRYSTAL: 4 tháp cánh buồm 115 m bên sông + ống kính ngang "The Crystal" 140 × 24 m ở +92…+100 (vườn nhiệt đới, hồ bơi vô cực, sàn kính, 5 lớp học Dev)
 //  🏮 HỒNG NHAI ĐỘNG: phố cổ 11 tầng nhà sàn gỗ bám vách (+2 → +46), đèn lồng, cầu thang bộ ngoài trời đi xuyên 11 tầng lên đại lộ trên núi, quán lẩu / mì / trà
-//  🚝 DEV RESIDENCY TOWER: chung cư 18 tầng, khoét rỗng tầng 6–8 làm ga tàu điện Lý Tử Bá; bán / thuê căn hộ (luật V2: nội đô chỉ có căn hộ)
+//  🚝 DEV RESIDENCY TOWER: chung cư 18 tầng, khoét rỗng tầng 6–8 làm ga tàu điện Xuyên Lầu; bán / thuê căn hộ (luật V2: nội đô chỉ có căn hộ)
 //  🏨 khách sạn 5 sao · 🏥 bệnh viện Sơn Thành (sân đỗ trực thăng) · 🚒 trạm cứu hoả · 🏫 trường liên cấp + sân thể thao · cao ốc thương mại / văn phòng
 //  🏞️ Công viên hồ Thiên Cảnh (+52): đường dạo, cầu chữ chi, cầu vòm, đình giữa đảo · ✈️ Sân bay đỉnh núi (+85): đường băng, nhà ga, đài kiểm soát, máy bay cất cánh
 //  🛕 LINH SƠN VÂN TỰ: cổng Tam Quan đá, bảo tháp bát giác 9 tầng 54 m, cầu xích sắt ~80 m qua hẻm vực, chánh điện treo vách nửa trong hang, tượng Phật 32 m trong mây
@@ -123,19 +123,19 @@ export async function build(K){
     steps.build();
     // biển hiệu dọc + quán ăn
     sign('HỒNG NHAI ĐỘNG', 30, 3.6, 188, YW+1.2, front(N)+.2, 0, {bg:'#7a1410', fg:'#ffd27a', edge:'#e2b24a', glow:.9});
-    const shops=[[1,162,'🍲 Lẩu cay Trùng Khánh','LẨU CAY',45,'Nồi lẩu tê cay đỏ rực, nóng hổi! 🌶️🔥'],[4,190,'🍜 Mì kéo sợi','MÌ KÉO SỢI',30,'Sợi mì kéo tay dai giòn, nước dùng bò thơm lừng 🍜'],[7,214,'🍵 Trà đạo','TRÀ ĐẠO',25,'Chén trà nóng ngắm sông về đêm – thư thái quá 🍵']];
+    const shops=[[1,162,'🍲 Lẩu cay Dev City','LẨU CAY',45,'Nồi lẩu tê cay đỏ rực, nóng hổi! 🌶️🔥'],[4,190,'🍜 Mì kéo sợi','MÌ KÉO SỢI',30,'Sợi mì kéo tay dai giòn, nước dùng bò thơm lừng 🍜'],[7,214,'🍵 Trà đạo','TRÀ ĐẠO',25,'Chén trà nóng ngắm sông về đêm – thư thái quá 🍵']];
     for(const [k,x,name,short,price,msg] of shops){ const y=Y1+k*FL, zf=front(k); sign(short, 5, 1.1, x, y+2.6, zf-1.75, 0, {bg:'#8a1d14', fg:'#ffe08a', edge:'#e2b24a', glow:.8});
-      INTER.push({x, z:zf-1, r:2.6, prio:.4, when:()=>Math.abs(P.y-y)<1.2, label:`${name} – ${fmt(price)} 💰 (E)`, action:()=>{ if(!askPay) return toast(msg, 3000); askPay(price, `${name} – Hồng Nhai Động`, ()=>{ if(spend && !spend(price)) return; toast(msg, 3400); }); }}); }
+      INTER.push({x, z:zf-1, r:2.6, prio:.4, when:()=>Math.abs(P.y-y)<1.2, label:`${name} – ${fmt(price)} 💰 (E)`, action:()=>{ if(!askPay) return toast(msg, 3000); askPay(price, `${name} – Lầu Vách Đèn Lồng`, ()=>{ if(spend && !spend(price)) return; toast(msg, 3400); }); }}); }
     /* S19g 16/11 (V2_PLAN 3b): thang kính bờ sông (liftkit) cửa quay vào phố cổ + cầu kính 10 m ở +46 nối sân thượng (thay thang dịch chuyển cũ) */
-    { const LZ=front(0)+3, gy=hAt(HLX, front(0)+1)??Y1; makeLift(W, {x:HLX, z:LZ, yaw:Math.PI, name:'Thang kính Hồng Nhai Động', color:0xe2b24a,
+    { const LZ=front(0)+3, gy=hAt(HLX, front(0)+1)??Y1; makeLift(W, {x:HLX, z:LZ, yaw:Math.PI, name:'Thang kính Lầu Vách Đèn Lồng', color:0xe2b24a,
         floors:[{y:gy, name:'Bờ sông · tầng trệt phố cổ', short:'G'}, {y:YW, name:'Sân thượng +46 · đại lộ trên núi', short:'46'}]});
       const z0=LZ-1.75, z1=front(N)+.15, L=z0-z1, zc=(z0+z1)/2, pz1=front(N)-.6; addPlat(HLX, (z0+pz1)/2, 0, 1.35, (z0-pz1)/2, YW); put(MAT.paving, xf(rb(2.8, .3, L, .06, 1), HLX, YW-.15, zc), dist);   /* mặt đi chồng 0,6 m vào sân thượng (không hở khe) */
       for(const s of [-1,1]){ put(MAT.glass, xf(rb(.06, 1.05, L, .02, 1), HLX+s*1.38, YW+.55, zc), dist); put(MAT.steel, xf(rb(.1, .08, L, .02, 1), HLX+s*1.38, YW+1.1, zc), dist); addSeg(HLX+s*1.38, z0, HLX+s*1.38, z1-.3, .15, YW-.5, YW+1.7, 'Lan can cầu kính'); } }
     occ(X0, 238, front(0)+1, BACK); boxes.push({x0:X0, x1:X1, z0:BACK-1, z1:front(0), y0:-5, y1:1.2, msg:'Chân phố cổ'});
     label('🏮 HỒNG NHAI ĐỘNG', 'Phố cổ treo vách 11 tầng · lẩu cay · mì kéo · trà đạo', 188, YW+9, front(N), 380, .85);
-    place('🏮','Dev City – Hồng Nhai Động','Phố cổ 11 tầng bên sông', 200, -186, 188, -215); }
+    place('🏮','Dev City – Lầu Vách Đèn Lồng','Phố cổ 11 tầng bên sông', 200, -186, 188, -215); }
 
-  /* ============================== 🚝 DEV RESIDENCY TOWER (380, −420) – ga Lý Tử Bá trong bụng toà nhà ============================== */
+  /* ============================== 🚝 DEV RESIDENCY TOWER (380, −420) – ga Xuyên Lầu trong bụng toà nhà ============================== */
   { const dist='res', x=380, z=-420, w=30, d=24, y0=Y2, yH0=36.8, yH1=48.4, top=78, sy=ST[1].y;
     prism(rrect(x,z,w,d,2.2), y0, yH0, FAC.resi, dist, {cap:false}); prism(rrect(x,z,w,d,2.2), yH1, top, FAC.resi, dist, {u0:3});
     prism(rrect(x,z,w*.8,d*.8,2), top, top+4, FAC.glass, dist); put(MAT.leaf, xf(rb(18,1.2,12,.4,2), x, top+4.6, z), dist);
@@ -146,13 +146,13 @@ export async function build(K){
       if(s>0){ addSeg(x-9, z+s*7.1, x-7, z+s*7.1, .25, sy-.5, sy+6, 'Vách ga'); addSeg(x-1, z+s*7.1, x+9, z+s*7.1, .25, sy-.5, sy+6, 'Vách ga'); }   /* hở x 373–379: lối kính từ thang máy vào sân ga */
       else addSeg(x-9, z+s*7.1, x+9, z+s*7.1, .25, sy-.5, sy+6, 'Vách ga'); }
     for(const [cx,cz] of [[x-12,z-9.5],[x+12,z-9.5],[x-12,z+9.5],[x+12,z+9.5]]) boxes.push({x0:cx-3, x1:cx+3, z0:cz-2.5, z1:cz+2.5, y0:yH0-1, y1:yH1, msg:'Lõi kết cấu toà nhà'});
-    sign('GA LÝ TỬ BÁ · LIZIBA', 16, 1.6, x, sy+5.2, z+d/2+.3, 0, {bg:'#123a5a', fg:'#ffe08a', glow:.9}); sign('GA LÝ TỬ BÁ · LIZIBA', 16, 1.6, x, sy+5.2, z-d/2-.3, Math.PI, {bg:'#123a5a', fg:'#ffe08a', glow:.9});
+    sign('GA XUYÊN LẦU', 16, 1.6, x, sy+5.2, z+d/2+.3, 0, {bg:'#123a5a', fg:'#ffe08a', glow:.9}); sign('GA XUYÊN LẦU', 16, 1.6, x, sy+5.2, z-d/2-.3, Math.PI, {bg:'#123a5a', fg:'#ffe08a', glow:.9});
     sign('DEV RESIDENCY', 18, 2.2, x, top-3, z+d/2+.25, 0, {bg:'#202833', fg:'#ffffff', edge:'#7fd3ff'});
     block(x-w/2, x+w/2, z-d/2, z+d/2, -5, yH0, 'Dev Residency Tower'); boxes.push({x0:x-w/2, x1:x+w/2, z0:z-d/2, z1:z+d/2, y0:yH1-1, y1:top+6, msg:'Dev Residency Tower'});
     put(MAT.white, xf(rb(14,.5,5,.2,1), x, y0+5, z+d/2+3), dist); for(const s of [-1,1]) put(MAT.steel, xf(cyl(.2,.2,5,8), x+s*6, y0+2.5, z+d/2+5), dist);
     /* S19g 16/11 (V2_PLAN 3b): thang kính liftkit trước mặt tiền (x 371) – tầng ga có lối kính vòng vào sân ga qua khoảng hở vách ga x 373–379 */
     { const LX=x-9, LZ=z+d/2+1.4, gy=hAt(LX, z+d/2+3)??y0; makeLift(W, {x:LX, z:LZ, yaw:0, name:'Thang kính Dev Residency', color:0x7fd3ff,
-        floors:[{y:gy, name:'Sảnh Dev Residency', short:'G'}, {y:sy, name:'Sân ga Lý Tử Bá (tầng 6)', short:'6'}]});
+        floors:[{y:gy, name:'Sảnh Dev Residency', short:'G'}, {y:sy, name:'Sân ga Xuyên Lầu (tầng 6)', short:'6'}]});
       const fz0=LZ+1.2, fz1=fz0+1.7, bx0=x-7.2, bx1=x-.8;   /* ban công trước cửa thang (z fz0..fz1) + lối vào trong (x bx0..bx1, z tới vách ga) */
       addPlat((LX-1.3+bx1)/2, (fz0+fz1)/2, 0, (bx1-LX+1.3)/2, (fz1-fz0)/2, sy); put(MAT.paving, xf(rb(bx1-LX+1.3, .3, fz1-fz0, .06, 1), (LX-1.3+bx1)/2, sy-.15, (fz0+fz1)/2), dist);
       const iz0=z+7.0, iz1=fz0, izc=(iz0+iz1)/2; addPlat((bx0+bx1)/2, izc, 0, (bx1-bx0)/2, (iz1-iz0)/2+.05, sy); put(MAT.paving, xf(rb(bx1-bx0, .3, iz1-iz0, .06, 1), (bx0+bx1)/2, sy-.15, izc), dist);
@@ -163,7 +163,7 @@ export async function build(K){
     INTER.push({x:x+9, z:z+d/2+2.4, r:2.6, prio:.3, when:()=>Math.abs(P.y-y0)<2, get label(){ return S.devcityApt ? '🏠 Về căn hộ Dev Residency (tầng 15) (E)' : '🏢 Căn hộ Dev Residency – mua 3.000 💰 / thuê 250 💰 (E)'; },
       action:()=>{ if(S.devcityApt){ teleport(x, BZ, x, BZ+20); toast('🏠 Ban công căn hộ tầng 15 – ngắm tàu điện chạy xuyên toà nhà bên dưới!', 3600); return; }
         const ui=ctx.ui; if(!ui || !ui.modal || !askPay) return; const m=ui.modal('🏢 Căn hộ Dev Residency Tower');
-        m.body.innerHTML=`<p style="line-height:1.6;margin-top:0">Chung cư 18 tầng – ga tàu điện Lý Tử Bá ngay trong toà nhà (tầng 6–8). Theo luật V2, nội đô Dev City chỉ có <b>căn hộ</b>.</p>
+        m.body.innerHTML=`<p style="line-height:1.6;margin-top:0">Chung cư 18 tầng – ga tàu điện Xuyên Lầu ngay trong toà nhà (tầng 6–8). Theo luật V2, nội đô Dev City chỉ có <b>căn hộ</b>.</p>
           <div class="row" style="gap:10px;flex-wrap:wrap"><button class="btn pri" data-k="buy">🔑 Mua căn hộ – 3.000 💰</button><button class="btn" data-k="rent">📅 Thuê – 250 💰</button></div>`;
         m.body.querySelector('[data-k="buy"]').onclick=()=>{ m.close(); askPay(3000, 'Mua căn hộ Dev Residency (tầng 15)', ()=>{ if(spend && !spend(3000)) return; S.devcityApt={type:'own', t:Date.now()}; save(); toast('🎉 Bạn đã sở hữu căn hộ tầng 15 Dev Residency! Bấm E ở sảnh để về nhà.', 4200); }); };
         m.body.querySelector('[data-k="rent"]').onclick=()=>{ m.close(); askPay(250, 'Thuê căn hộ Dev Residency (tầng 15)', ()=>{ if(spend && !spend(250)) return; S.devcityApt={type:'rent', t:Date.now()}; save(); toast('🔑 Đã thuê căn hộ tầng 15 Dev Residency! Bấm E ở sảnh để về nhà.', 4200); }); }; }});

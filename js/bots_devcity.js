@@ -1,6 +1,6 @@
-// QC World V2 – PHA 9 (phần Dev City): BOT SỐNG ĐỘNG CHO DEV CITY TRÙNG KHÁNH 8D (theo bible Phần 7 – "Đội Bot Trùng Khánh" + "Đội Hàng không & Giao thông")
-//  🏮 Hồng Nhai Động: nghệ nhân múa mì (sợi mì dài vung vòng trên đầu) · nghệ nhân Biến diện Tứ Xuyên (đổi mặt nạ) · 2 người bán kẹo hồ lô · khách dạo bờ sông
-//  🚝 Liziba: lái tàu ngồi buồng lái toa đầu · nhóm khách săn ảnh tàu xuyên lầu (giơ máy ảnh, reo khi tàu chui qua toà nhà)
+// QC World V2 – PHA 9 (phần Dev City): BOT SỐNG ĐỘNG CHO DEV CITY 8D (theo bible Phần 7 – "Đội Bot Dev City" + "Đội Hàng không & Giao thông")
+//  🏮 Lầu Vách Đèn Lồng: nghệ nhân múa mì (sợi mì dài vung vòng trên đầu) · nghệ nhân Biến diện Tứ Xuyên (đổi mặt nạ) · 2 người bán kẹo hồ lô · khách dạo bờ sông
+//  🚝 Xuyên Lầu: lái tàu ngồi buồng lái toa đầu · nhóm khách săn ảnh tàu xuyên lầu (giơ máy ảnh, reo khi tàu chui qua toà nhà)
 //  🌀 CSGT điều tiết chân nút giao xoắn ốc · 🏙️ Principal Architect trên sàn kính The Crystal + khách dạo vườn trên mây · công nhân lau kính trên gondola 2 tháp
 //  🚒 lính cứu hoả · 🚁 bác sĩ + phi công trực thăng trên nóc bệnh viện (cánh quạt quay) · 🏫 học sinh sân trường
 //  🏞️ khách thả hoa đăng (đèn sen trôi trên hồ) · người chạy bộ quanh hồ · nghệ sĩ đàn Cổ tranh trong đình giữa hồ
@@ -82,11 +82,11 @@ export async function make(W, ctx, D){
   // khách dạo bờ sông (đi dọc đại lộ + bờ kè)
   for(let i=0;i<(LOW?3:5);i++){ const z=-163-i*.9, pts=i<2 ? [[234+i*5,z],[300,z-.5],[370,z],[330,z+.3]] : [[400+i*6,z],[470,z-.4],[598,z],[520,z+.4]];   // 2 đoạn bờ kè giữa các đầu cầu (không xuyên tường cầu)
     const o=person(i%2?sF(6110+i):sM(6110+i), {shirt:[0xff6b6b,0x46d39a,0xffd23f,0x7a9cc6,0xff9fc4][i], pants:0x2a3a5a, shoe:0x1b1d21}, `🚶 Khách dạo bờ sông ${W.people.nameOf(6110+i)}`, '#9fd36a', i<2?'hyd':'river');
-    walker(o, i%2 ? pts : [...pts].reverse(), 1.1+R()*.3, Y1); const u=o.upd; o.upd=(dt,T)=>{ const s=u(dt,T); if(s==='idle' && ((T*.4+o.ph)%6)<2.5) pose(o,'camera',T); if(R()<dt*.004) say(o, pick(['Phố cổ 11 tầng đẹp quá! 📸','Tối nay lên Hồng Nhai Động ăn lẩu nha!','Gió sông mát ghê 🌬️']), 2.6); }; }
+    walker(o, i%2 ? pts : [...pts].reverse(), 1.1+R()*.3, Y1); const u=o.upd; o.upd=(dt,T)=>{ const s=u(dt,T); if(s==='idle' && ((T*.4+o.ph)%6)<2.5) pose(o,'camera',T); if(R()<dt*.004) say(o, pick(['Phố cổ 11 tầng đẹp quá! 📸','Tối nay lên Lầu Vách Đèn Lồng ăn lẩu nha!','Gió sông mát ghê 🌬️']), 2.6); }; }
 
   /* ============================== 🚝 TÀU XUYÊN LẦU ============================== */
   // lái tàu ngồi buồng lái toa đầu (theo hướng chạy)
-  if(D.cars && D.cars.length){ const o=person(sM(6201), {shirt:0x1d6ab8, pants:0x16324f, shoe:0x111111, long:true, style:'cap'}, '🚝 Lái tàu Liziba', '#4fc3ff', 'res');
+  if(D.cars && D.cars.length){ const o=person(sM(6201), {shirt:0x1d6ab8, pants:0x16324f, shoe:0x111111, long:true, style:'cap'}, '🚝 Lái tàu Xuyên Lầu', '#4fc3ff', 'res');
     o.upd=(dt,T)=>{ const lead=D.TR.dir>0 ? D.cars[0] : D.cars[3]; lead.updateMatrixWorld(); const f=new V3(0,0,1).applyQuaternion(lead.quaternion); o.x=lead.position.x+f.x*3.6; o.z=lead.position.z+f.z*3.6; o.y=lead.position.y+.75-o.hips*.55; o.hd=lead.rotation.y; put(o,false); pose(o,'sit',T); pose(o,'bar',T); };
     o.alwaysAwake=true; }
   // khách săn ảnh tàu xuyên lầu: đứng ở bãi cỏ phía Nam toà nhà, giơ máy ảnh khi tàu tới gần

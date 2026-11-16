@@ -16,6 +16,8 @@ export function makeAmbience(W){
   const {THREE, P, camera, HOOK} = W;
   const A={ctx:null, master:null, outdoor:null, muff:null, sea:null, voices:[], talkers:[], rumble:null, keys:null, tW:0, tV:0, tS:0, tP:0, tPet:6, kNext:0, kBurst:0, water:{d:99, x:0, z:0, f:0}, srcs:{adult:[], kid:[], pet:[]}};
   const sfxOn=()=>{ try{ return localStorage.getItem('qcworld-sfx')!=='0'; }catch(e){ return true; } };
+  let VOL=(()=>{ try{ const v=parseFloat(localStorage.getItem('qcworld-sfx-vol')); return isFinite(v) ? Math.min(1,Math.max(0,v)) : .6; }catch(e){ return .6; } })();   /* S19g 16/11: âm lượng 'Âm thanh môi trường' 0–1 (mặc định 60 %) */
+  W.sfx=(name,x,y,z)=>{ try{ A.world && A.world.sfx(name,x,y,z); }catch(e){} };   /* tiếng một lần cho module khác (vd. thang máy 'lift-ding') */
   const sst=(a,b,x)=>{ const t=Math.min(1,Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); };
   const _v=new THREE.Vector3();
   function panFor(x,z){ camera.getWorldDirection(_v); let fx=_v.x, fz=_v.z; const fl=Math.hypot(fx,fz)||1; fx/=fl; fz/=fl;
@@ -35,9 +37,9 @@ export function makeAmbience(W){
     const filt=(type,f,q)=>{ const n=c.createBiquadFilter(); n.type=type; n.frequency.value=f; if(q) n.Q.value=q; return n; };
     const gain=(v)=>{ const g=c.createGain(); g.gain.value=v; return g; };
     const panner=()=>c.createStereoPanner ? c.createStereoPanner() : gain(1);
-    A.master=gain(0); A.master.connect(c.destination); A.master.gain.setTargetAtTime(1, c.currentTime, 1.5);   // vào êm, không bật cái "bụp"
+    A.master=gain(0); A.master.connect(c.destination); A.master.gain.setTargetAtTime(VOL, c.currentTime, 1.5);   // vào êm, không bật cái "bụp"
     A.outdoor=gain(1); A.muff=filt('lowpass',18000); A.outdoor.connect(A.muff); A.muff.connect(A.master);   // tiếng ngoài trời (trong nhà → đục)
-    A.white=white; A.filt=filt; A.gainN=gain; A.panner=panner;
+    A.white=white; A.brown=brown; A.filt=filt; A.gainN=gain; A.panner=panner;
     // người nói chuyện: 4 giọng người lớn + 2 giọng trẻ em, qua bộ lọc mềm cho ra tiếng lầm rầm (không nghe rõ chữ)
     A.people=gain(1); const plp=filt('lowpass',2400,.5); A.people.connect(plp); plp.connect(A.master);
     for(let i=0;i<6;i++){ const kid=i>=4, osc=c.createOscillator(); osc.type='sawtooth'; osc.frequency.value=kid?290:135;
@@ -61,6 +63,8 @@ export function makeAmbience(W){
       A.voices.push({o, o2, elp, tg, g, pan, veh:null}); }
     // tiếng ồn phố xa (trầm, rất nhỏ)
     const rg=gain(0), rlp=filt('lowpass',150,.5); src(brown).connect(rlp); rlp.connect(rg); rg.connect(A.outdoor); A.rumble=rg;
+    // S19g 16/11: âm thanh thế giới 3D (máy bay, còi xe khẩn cấp, sự kiện, thác nước, gió, chim/dế…) – js/ambience_world.js
+    import('./ambience_world.js').then(m=>{ if(A.ctx===c) A.world=m.attachWorld(W, A, {panFor}); }).catch(e=>console.warn('[ambience] world', e));
   }
   addEventListener('pointerdown', init); addEventListener('keydown', init);
 
@@ -129,8 +133,9 @@ export function makeAmbience(W){
   HOOK.onFrame.push((dt)=>{
     const c=A.ctx; if(!c) return;
     if(!sfxOn()){ if(A.master) A.master.gain.setTargetAtTime(0, c.currentTime, .3); return; }
+    if(A.vol!==VOL){ A.vol=VOL; A.master.gain.setTargetAtTime(VOL, c.currentTime, .25); }
     if(c.state==='suspended' && !c.__gdHold){ c.resume(); return; }
-    const t=c.currentTime, inside=!!W.inside;
+    const t=c.currentTime, inside=!!W.inside || !!(HOOK && HOOK.camBox);   /* S19g 16/11: toà V2 dùng HOOK.camBox thay W.inside */
     A.outdoor.gain.setTargetAtTime(inside ? .35 : 1, t, .4); A.muff.frequency.setTargetAtTime(inside ? 500 : 18000, t, .3);   // trong nhà: tiếng ngoài trời nghe đục
     // người · trẻ em · thú cưng · gõ phím văn phòng
     const office=!!(W.inside && W.inside.h!==undefined && !W.inside.campus && !W.inside.showroom);
@@ -161,6 +166,9 @@ export function makeAmbience(W){
         vo.g.gain.setTargetAtTime(base*(.3+.7*Math.min(1, sp/7))/(1+k*k)*Math.min(1,(45-v.d)/8), t, .2);
         if(vo.pan.pan) vo.pan.pan.setTargetAtTime(panFor(v.x, v.z), t, .12); }
       A.rumble.gain.setTargetAtTime(inside ? 0 : .045*Math.min(1, n120/10), t, 1); }
+    if(A.world) try{ A.world.frame(dt); }catch(e){ if(!A.wErr){ A.wErr=1; console.warn('[ambience] world frame', e); } }
   });
-  return {panFor, start:()=>init(true), get ctx(){ return A.ctx; }, get water(){ return A.water; }, state:A};
+  const setVolume=v=>{ VOL=Math.min(1,Math.max(0,+v||0)); try{ localStorage.setItem('qcworld-sfx-vol', String(VOL)); }catch(e){} };
+  const setOn=on=>{ try{ localStorage.setItem('qcworld-sfx', on?'1':'0'); }catch(e){} if(on) init(true); };
+  return {panFor, start:()=>init(true), get ctx(){ return A.ctx; }, get water(){ return A.water; }, state:A, setVolume, get volume(){ return VOL; }, setOn, get on(){ return sfxOn(); }};
 }

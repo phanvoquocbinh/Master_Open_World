@@ -11,7 +11,7 @@ export const ZONES = {
   abyssal:   {name:'QA/QC Abyssal Canyon Island', x0:-180, x1:180,  z0:-180, z1:180,  y:[-42,28],  file:'./abyssal_island.js',     phase:3},
   cbd:       {name:'River Tech CBD',              x0:180,  x1:580,  z0:-120, z1:460,  y:[0,140],   file:'./river_cbd.js',          phase:4},
   skyport:   {name:'QA/QC International Skyport', x0:-180, x1:175,  z0:220,  z1:380,  y:[4,68],    file:'./skyport.js',            phase:5},
-  devcity:   {name:'Dev City Chongqing 8D',       x0:100,  x1:850,  z0:-950, z1:-120, y:[2,135],   file:'./devcity_chongqing.js',  phase:6},
+  devcity:   {name:'Dev City 8D',       x0:100,  x1:850,  z0:-950, z1:-120, y:[2,135],   file:'./devcity_chongqing.js',  phase:6},
   brain:     {name:'QA/QC Brain Sovereign Peak',  x0:620,  x1:1150, z0:-100, z1:450,  y:[0,168],   file:'./brain_citadel.js',      phase:7},
   swiss:     {name:'Swiss Language Island',       x0:-850, x1:-250, z0:-500, z1:250,  y:[0,95],    file:'./swiss_lang_island.js',  phase:8},
   palm:      {name:'The QC Palm Archipelago',     x0:250,  x1:1050, z0:520,  z1:1320, y:[-8,65],   file:'./palm_dubai.js',         phase:8},

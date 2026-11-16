@@ -90,6 +90,13 @@ export async function initLife(W){
     if(au) for(const [k,n,d] of [[true,'🔊 Bật','Sóng vỗ, gió, hải âu, tiếng bước chân theo mặt đất'],[false,'🔇 Tắt','Yên lặng (nhạc sân khấu / concert vẫn nghe được)']]){
       const c=document.createElement('div'); c.className='card'+(au.on===k?' sel':''); c.style.cursor='pointer'; c.innerHTML=`<b>${n}</b><small>${d}</small>`;
       c.onclick=()=>{ au.set(k); gs.querySelectorAll('.card').forEach(x=>x.classList.remove('sel')); c.classList.add('sel'); toast(k?'🔊 Đã bật âm thanh môi trường':'🔇 Đã tắt âm thanh môi trường', 1800); }; gs.appendChild(c); }
+    /* S19g 16/11: V2 không có W.island → bật/tắt qua W.ambience; mọi chế độ có thêm thanh âm lượng 0–100 % */
+    { const am=W.ambience; if(!au && am) for(const [k,n,d] of [[true,'🔊 Bật','Máy bay, còi xe khẩn cấp, thác nước, gió, chim/dế, xe cộ, người nói chuyện – dịu, nhỏ dần theo khoảng cách'],[false,'🔇 Tắt','Yên lặng (nhạc sân khấu / concert vẫn nghe được)']]){
+        const c=document.createElement('div'); c.className='card'+(am.on===k?' sel':''); c.style.cursor='pointer'; c.innerHTML=`<b>${n}</b><small>${d}</small>`;
+        c.onclick=()=>{ am.setOn(k); gs.querySelectorAll('.card').forEach(x=>x.classList.remove('sel')); c.classList.add('sel'); toast(k?'🔊 Đã bật âm thanh môi trường':'🔇 Đã tắt âm thanh môi trường', 1800); }; gs.appendChild(c); }
+      if(am && am.setVolume){ const r=document.createElement('label'); r.style.cssText='grid-column:1/-1;display:flex;align-items:center;gap:12px;font-weight:600;margin-top:4px'; const v0=Math.round(am.volume*100);
+        r.innerHTML=`Âm lượng <input type="range" min="0" max="100" step="5" value="${v0}" style="flex:1"> <b style="min-width:44px;text-align:right">${v0}%</b>`; const sl=r.querySelector('input'), lb=r.querySelector('b');
+        sl.oninput=()=>{ lb.textContent=sl.value+'%'; am.setVolume(sl.value/100); }; gs.appendChild(r); } }
     for(const [k,n,d] of opts){ const c=document.createElement('div'); c.className='card'+(k===cur?' sel':''); c.style.cursor='pointer'; c.innerHTML=`<b>${n}</b><small>${d}</small>`;
       c.onclick=()=>{ try{ localStorage.setItem('qcworld-quality',k); }catch(e){} store.set(KEY,S); location.reload(); }; g.appendChild(c); }
     for(const [k,n,d] of [['auto','🤖 Tự động','Không giữ nổi 60 FPS thì khoá 30 FPS đều – hết giật khi quay camera'],['30','🎬 Khoá 30 FPS','Luôn đều nhất, nhẹ máy nhất'],['60','⚡ Không khoá','Nhanh nhất có thể (có thể giật nhẹ khi FPS dao động)']]){

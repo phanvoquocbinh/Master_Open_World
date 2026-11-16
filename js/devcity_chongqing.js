@@ -1,4 +1,4 @@
-// QC World V2 – PHA 6: DEV CITY · ĐÔ THỊ NÚI 8D KIỂU TRÙNG KHÁNH (vùng x 100→850, z −950→−120, y 2→135) – theo V2_PLAN.md + Bible Phần 3 / Module 5
+// QC World V2 – PHA 6: DEV CITY · ĐÔ THỊ NÚI 8D (vùng x 100→850, z −950→−120, y 2→135) – theo V2_PLAN.md + Bible Phần 3 / Module 5
 //  ĐỊA HÌNH 4 THỀM: T1 bờ sông +2 · T2 lưng núi +24 · T3 cao nguyên +52 (hồ Thiên Cảnh) · T4 đỉnh mây +85 (sân bay) – vách đá giữa các thềm,
 //    cao nguyên Tây +46 sau phố cổ, thung lũng sâu +2 chứa nút giao xoắn ốc, 2 đỉnh núi chùa Linh Sơn (72 m · 98 m) cách nhau 1 hẻm vực.
 //  GIAO THÔNG 8D (file này): đường đèo bám vách, tàu điện một ray xuyên tầng 6–8 toà chung cư 18 tầng (sân ga trong bụng toà nhà),
@@ -132,7 +132,7 @@ export async function make(W, ctx){
   road([[220,-176,Y1],[700,-176,Y1]], 14, {lanes:4, name:'Đại lộ Bến Sông'});                                   // đầu Tây: cầu dây văng → CBD · đầu Đông: cầu G6 → Brain
   road([[600,-182,Y1],[622,-190,Y1+.4],[832,-240,Y2],[840,-252,Y2]], 10, {name:'Đường đèo Vách Đông', emb:8});
   road([[840,-252,Y2],[840,-300,Y2],[345,-300,Y2],[331,-301.9,22.73]], 12, {name:'Đại lộ Lưng Núi'});                               // đầu Tây: nhánh dốc vào nút giao xoắn ốc (+21,7)
-  road([[600,-300,Y2],[600,-395,Y2],[365,-395,Y2],[365,-300,Y2]], 9, {name:'Phố Bệnh viện – Lý Tử Bá'});         // vòng Lưng Núi Tây (cắt ngang đường hầm)
+  road([[600,-300,Y2],[600,-395,Y2],[365,-395,Y2],[365,-300,Y2]], 9, {name:'Phố Bệnh viện – Xuyên Lầu'});         // vòng Lưng Núi Tây (cắt ngang đường hầm)
   road([[300,-176,Y1],[300,-246,Y1],[293,-266,Y1],[281,-274,Y1]], 10, {name:'Đường Thung lũng'});                 // → chân nút giao xoắn ốc
   road([[450,-300,Y2],[450,-430,Y2],[450,-663,Y3],[450,-700,Y3]], 20, {lanes:4, name:'Hầm đôi Nam Sơn', tunnel:true, emb:2.5});
   road([[330,-490,Y3],[650,-490,Y3],[650,-700,Y3],[330,-700,Y3],[330,-490,Y3]], 12, {name:'Vành đai Cao nguyên'});
@@ -178,7 +178,7 @@ export async function make(W, ctx){
   const sample=(G,x,z)=>{ const fx=(x-X0)/RES, fz=(z-Z0)/RES; if(fx<0||fz<0||fx>=NX-1||fz>=NZ-1) return null; const i=Math.floor(fx), j=Math.floor(fz), tx=fx-i, tz=fz-j, a=G[j*NX+i], b=G[j*NX+i+1], c=G[(j+1)*NX+i], d=G[(j+1)*NX+i+1];
     if(a!==a || b!==b || c!==c || d!==d) return null; return tx+tz<=1 ? a+(b-a)*tx+(c-a)*tz : d+(c-d)*(1-tx)+(b-d)*(1-tz); };
   const hAt=(x,z)=>sample(HP,x,z), hVis=(x,z)=>sample(HV,x,z);
-  EXTL.push({x0:X0, x1:X1-RES, z0:Z0, z1:Z1-RES, h:hAt, name:'DEV CITY · TRÙNG KHÁNH 8D'});
+  EXTL.push({x0:X0, x1:X1-RES, z0:Z0, z1:Z1-RES, h:hAt, name:'DEV CITY 8D'});
 
   // lưới hình địa hình (màu theo độ dốc/độ cao), chừa lỗ ở 2 cửa hầm
   { const pos=new Float32Array(NX*NZ*3), col=new Float32Array(NX*NZ*3), uv=new Float32Array(NX*NZ*2), c=new THREE.Color();
@@ -240,7 +240,7 @@ export async function make(W, ctx){
       for(const [p,q] of railPieces(ax,bx)) if(q-p>.05) addSeg(p,-shoreD(p)+.4,q,-shoreD(q)+.4,.25, Y1-1, Y1+2, 'Kè bờ sông – lan can');
       for(const [p,q] of [[ax,bx]].flatMap(([p,q])=>{ let L2=[[p,q]]; for(const x of DOCKX) L2=L2.flatMap(([u,v])=> v<=x-1.7 || u>=x+1.7 ? [[u,v]] : [u<x-1.7?[u,x-1.7]:null, v>x+1.7?[x+1.7,v]:null].filter(Boolean)); return L2; })) if(q-p>.2){ const za=-shoreD(p), zb=-shoreD(q); addPlat((p+q)/2, (za+zb)/2-1.18, Math.atan2(q-p,zb-za), 1.48, Math.hypot(q-p,zb-za)/2+.05, Y1); } }   // S19g rà soát: mặt kè phẳng +2 tới sát lan can (lưới vật lý 2,5 m làm tường kè thành dốc → đi sát lan can bị tụt 0,6–0,75 m)
     for(const x of [206, 848]){ const zq=-shoreD(x); addSeg(x, zq+.4, x, zq-3.2, .25, Y1-1, Y1+2, 'Kè bờ sông – lan can'); }
-    for(let x=148; x<206; x+=4){ const x2=Math.min(206,x+4); addSeg(x, -shoreD(x)+.4, x2, -shoreD(x2)+.4, .25, -3, Y1+2, 'Bờ sông dốc đứng – không xuống được'); }   // S19g rà soát: bờ sông dưới Hồng Nhai Động   // chặn 2 đầu kè (trước đi vòng đầu lan can xuống mái kè)
+    for(let x=148; x<206; x+=4){ const x2=Math.min(206,x+4); addSeg(x, -shoreD(x)+.4, x2, -shoreD(x2)+.4, .25, -3, Y1+2, 'Bờ sông dốc đứng – không xuống được'); }   // S19g rà soát: bờ sông dưới Lầu Vách Đèn Lồng   // chặn 2 đầu kè (trước đi vòng đầu lan can xuống mái kè)
     const posts=inst(cyl(.06,.06,1.05,8), MAT.steel); for(let x=208;x<=846;x+=2) if(!inGap(x-.5,x+.5)) posts.add(x, Y1+.52, -shoreD(x)-.6);
     posts.build(); for(let k=1;k<pts.length;k++){ const [ax]=pts[k-1], [bx]=pts[k]; for(const [p,q] of railPieces(ax,bx)) if(q-p>.3) put(MAT.steel, beam(cyl(.05,.05,1,6), new V3(p,Y1+1.05,-shoreD(p)-.6), new V3(q,Y1+1.05,-shoreD(q)-.6)), 'river'); } }
 
@@ -307,7 +307,7 @@ export async function make(W, ctx){
     const g6=[]; for(let d=177; d>=98; d-=2) g6.push({x:700, z:-d, y:d>158 ? Y1 : lerp(Y1, 4.05, ss(158,104,d))+1.2*Math.sin(Math.PI*clamp((158-d)/54,0,1))}); deck(g6, 12, 'bridge', {every:14, th:.9, msg:'Lan can cầu cổng Đông Nam (sang Brain Citadel)'}); }
   const GATES=[{key:'G5', x:384, z:-120, y:cbdY, to:'CBD Bắc'}, {key:'G6', x:700, z:-100, y:4, to:'Brain Citadel Bắc'}];
 
-  // ----- TÀU ĐIỆN MỘT RAY "LIZIBA": dầm bê tông + trụ chữ T; tầng trên cầu dây văng → ga Bến Sông bắc ngang đại lộ → xuyên tầng 6–8 Dev Residency Tower (380, −420) ở +38,6 -----
+  // ----- TÀU ĐIỆN MỘT RAY "XUYÊN LẦU": dầm bê tông + trụ chữ T; tầng trên cầu dây văng → ga Bến Sông bắc ngang đại lộ → xuyên tầng 6–8 Dev Residency Tower (380, −420) ở +38,6 -----
   const MR=[[222,-121,11.4],[222,-150,11.4],[223,-168,11.8],[226,-186,12.4],[238,-199,13.2],[262,-212,14.8],[292,-228,17.8],[325,-248,21.6],[343,-276,26],[346,-300,31],[346,-360,34],[349,-398,37],[360,-416,38.6],[380,-420,38.6],[600,-420,38.6],[788,-420,38.6]];
   const mrCurve=new THREE.CatmullRomCurve3(MR.map(([x,z,y])=>new V3(x,y,z)), false, 'centripetal', .2), mrLen=mrCurve.getLength();
   const MRN=Math.ceil(mrLen/2), mrPts=mrCurve.getSpacedPoints(MRN);
@@ -320,7 +320,7 @@ export async function make(W, ctx){
       const H=p.y-1.4-gy; if(H<1.5) continue; const t=mrCurve.getTangentAt(i/MRN); put(MAT.concrete, xf(cyl(.55,.7,H,12), p.x, gy+H/2, p.z), 'monorail'); put(MAT.concrete, xf(rb(3.2,.7,1.4,.15,1), p.x, p.y-1.75, p.z, Math.atan2(t.x,t.z)), 'monorail'); W.circles && W.circles.push({x:p.x, z:p.z, r:.75, y0:gy-1, y1:gy+H}); } }
   // ga: [tên, s trên tuyến, chỗ đứng chờ dưới đất, sàn ga]
   const ST=[{name:'Ga Bến Sông', key:'s1', s:sOf(224,-177), ground:{x:234, z:-163, y:Y1}, y:12.6},
-            {name:'Ga Lý Tử Bá (trong Dev Residency Tower)', key:'s2', s:sOf(380,-420), ground:{x:380, z:-405.6, y:Y2}, y:39.2},
+            {name:'Ga Xuyên Lầu (trong Dev Residency Tower)', key:'s2', s:sOf(380,-420), ground:{x:380, z:-405.6, y:Y2}, y:39.2},
             {name:'Ga Đông Sơn', key:'s3', s:sOf(780,-420), ground:{x:780, z:-404, y:Y2}, y:39.2}];
   ST[1].plat={x:376, z:-414.8};   /* S19g 16/11: lên/xuống tàu ngay trên sân ga (thang liftkit đưa lên/xuống) – S2 nằm trong Dev Residency */
   // sân ga S1 + S3 (S2 dựng cùng toà nhà ở devcity_landmarks.js) : sàn 2 bên dầm + mái + cột + thang máy
@@ -409,7 +409,7 @@ export async function make(W, ctx){
 
   /* ============================== TÊN KHU + ĐIỂM NHẢY BẢN ĐỒ ============================== */
   const L=(t,s,x,y,z,f=420)=>makeLabel && makeLabel(t, s, {x, y, z, h:.9, fade:f});
-  L('🏙️ DEV CITY · TRÙNG KHÁNH 8D', '4 thềm · tàu điện xuyên lầu · nút giao xoắn ốc · hầm xuyên núi', 520, 140, -480, 1200);
+  L('🏙️ DEV CITY 8D', '4 thềm · tàu điện xuyên lầu · nút giao xoắn ốc · hầm xuyên núi', 520, 140, -480, 1200);
   L('🌀 Nút giao xoắn ốc 5 tầng', 'Thung lũng → Cao nguyên +52 m', SP.x, 62, SP.z, 320);
   L('🚇 Hầm đôi Nam Sơn', 'Đèn vòm LED xanh · T2 +24 → T3 +52', 450, 40, -432, 280);
   L('🌉 Cầu dây văng 2 tầng', 'Tầng trên: xe · tầng dưới: đi bộ + tàu điện', 220, 64, -132, 300);
@@ -418,9 +418,9 @@ export async function make(W, ctx){
     add('🌀','Dev City – Nút giao xoắn ốc','Chân nút giao trong thung lũng', 300, -250, SP.x, SP.z);
     add('🚇','Dev City – Hầm đôi Nam Sơn','Cửa hầm thềm 2 (+24 m)', 450, -412, 450, -440);
     add('🏞️','Dev City – Cao nguyên & hồ Thiên Cảnh','Thềm 3 (+52 m)', 560, -520, 560, -600);
-    add('🚝','Dev City – Ga Lý Tử Bá','Tàu điện xuyên toà chung cư', ST[1].ground.x, ST[1].ground.z+4, 380, -420); }
+    add('🚝','Dev City – Ga Xuyên Lầu','Tàu điện xuyên toà chung cư', ST[1].ground.x, ST[1].ground.z+4, 380, -420); }
 
-  /* ============================== CHẠY TÀU (con thoi Bến Sông ⇄ Lý Tử Bá ⇄ Đông Sơn) ============================== */
+  /* ============================== CHẠY TÀU (con thoi Bến Sông ⇄ Xuyên Lầu ⇄ Đông Sơn) ============================== */
   let nightLast=-1;
   HOOK.onFrame.push((dt)=>{ dt=Math.min(dt,.1);
     const nk=W.night||0; if(Math.abs(nk-nightLast)>.01){ nightLast=nk; for(const m of NIGHTL) m.emissiveIntensity=.12+nk*2.4; }

@@ -41,8 +41,14 @@ export async function make(W, ctx){
   const TERM={x0:15, x1:165, z0:222, z1:294, H:28, wallH:12}, APRON={z0:294, z1:328}, RW=[{z:345, w:30, name:'Đường băng 09L/27R'}, {z:370, w:18, name:'Đường băng 09R/27L'}], RX0=-248, RX1=172, XW=-251;   // đường băng ~420 m: chìa ra biển phía Tây ngoài vùng tới x ≈ −250 (phiên chính cho phép 15/11) trên trụ, có plat + lan can
   const RAMP={x0:165, x1:174.5, z0:250, z1:262}, BRG={x0:174.5, x1:180.5, z0:250, z1:262}, CBDY=2, ROADX=0, RDW=20;   // bậc thang xuống cầu sang CBD (+2) · đường xuyên cổng Bắc (0,220) ↔ cổng Nam (0,380)
   const inZone=(x,z)=>x>Z.x0+.5 && x<Z.x1-.5 && z>Z.z0+.5 && z<Z.z1-.5;
-  const hAt=(x,z)=>GY;
-  EXTL.push({x0:XW, x1:BRG.x1, z0:Z.z0, z1:Z.z1, name:'QA/QC International Skyport', h:(x,z)=>{ if(inZone(x,z)) return hAt(x,z); if(x>XW+.5 && x<=Z.x0+.6 && z>APRON.z1+.5 && z<Z.z1-.5) return GY; if(x>=BRG.x0 && x<=BRG.x1 && z>BRG.z0 && z<BRG.z1) return CBDY; return null; }});
+  /* S19g 16/11 (Bình: "đường máy bay bay thì sao mà cho phép đi… xây hầm cho đường xe hơi và người xuyên qua đường băng"):
+     HẦM CHUI dưới đường lăn + 2 đường băng. Dốc Bắc z 240→300 (≤ 7,5 %), phần có nắp z 300→380, sàn +0,15 (trên mặt biển 0,5 m), trần 3,55,
+     lòng xe 11,6 m (2 làn mỗi chiều) + vỉa hè 2,5 m mỗi bên, ra cổng Nam nối thẳng cầu G8 (wonder_v2.js hạ đầu cầu xuống ngang sàn hầm). */
+  const TU={hw:8.3, tw:8.6, z0:240, z1:300, z2:380, yf:.15, yc:3.55, cw:5.8};
+  const tuF=z=>{ if(z<=TU.z0) return GY; if(z>=TU.z1) return TU.yf; const u=(z-TU.z0)/(TU.z1-TU.z0), b=.15, e=u<b ? u*u/(2*b*(1-b)) : u>1-b ? 1-(1-u)*(1-u)/(2*b*(1-b)) : (u-b/2)/(1-b); return GY-(GY-TU.yf)*e; };
+  const inTu=(x,z)=>Math.abs(x-ROADX)<TU.hw && z>TU.z0 && z<TU.z2+.6;
+  const hAt=(x,z)=>inTu(x,z) ? tuF(z) : GY;
+  EXTL.push({x0:XW, x1:BRG.x1, z0:Z.z0, z1:Z.z1+.6, name:'QA/QC International Skyport', h:(x,z)=>{ if(inZone(x,z) || inTu(x,z)) return hAt(x,z); if(x>XW+.5 && x<=Z.x0+.6 && z>APRON.z1+.5 && z<Z.z1-.5) return GY; if(x>=BRG.x0 && x<=BRG.x1 && z>BRG.z0 && z<BRG.z1) return CBDY; return null; }});
   out.layout={TERM, APRON, RW, RAMP, BRG, GY};
   const cx=(TERM.x0+TERM.x1)/2, cz=(TERM.z0+TERM.z1)/2, hw=(TERM.x1-TERM.x0)/2, hd=(TERM.z1-TERM.z0)/2;
   const wHalf=u=>Math.pow(Math.max(0,1-Math.pow(Math.abs(u),1.7)),.75);
@@ -51,10 +57,16 @@ export async function make(W, ctx){
 
   /* ============================== 1. NỀN + TRỤ NỔI TRÊN BIỂN + DỐC/CẦU SANG CBD + LAN CAN RÌA ============================== */
   { const top=new THREE.PlaneGeometry(Z.x1-Z.x0, APRON.z1-Z.z0); top.rotateX(-Math.PI/2); const uv=top.attributes.uv, p=top.attributes.position; for(let i=0;i<p.count;i++) uv.setXY(i, p.getX(i)/12, p.getZ(i)/12);
-    KL.add(top, M.conc, (Z.x0+Z.x1)/2,GY+.01,(Z.z0+APRON.z1)/2); KS.add(B(Z.x1-Z.x0,GY+6,APRON.z1-Z.z0), M.conc, (Z.x0+Z.x1)/2,(GY-6)/2,(Z.z0+APRON.z1)/2);
-    KS.add(B(Z.x1-XW, 1.2, Z.z1-APRON.z1), M.conc, (XW+Z.x1)/2,GY-.6,(APRON.z1+Z.z1)/2);
+    void top;   /* S19g: mặt + khối nền + sàn đường băng tách quanh hầm (x ±TU.tw) – không chồng mặt, không khối nào chắn lòng hầm */
+    const XL=ROADX-TU.tw, XR=ROADX+TU.tw, topR=(x0,x1,z0,z1)=>{ const g=new THREE.PlaneGeometry(x1-x0, z1-z0); g.rotateX(-Math.PI/2); const uv=g.attributes.uv, q=g.attributes.position; for(let i=0;i<q.count;i++) uv.setXY(i, (q.getX(i)+(x0+x1)/2)/12, (q.getZ(i)+(z0+z1)/2)/12); KL.add(g, M.conc, (x0+x1)/2,GY+.01,(z0+z1)/2); };
+    topR(Z.x0,XL,Z.z0,APRON.z1); topR(XR,Z.x1,Z.z0,APRON.z1); topR(XL,XR,Z.z0,TU.z0); topR(XL,XR,TU.z1,APRON.z1);
+    const blk=(x0,x1,z0,z1,y0,y1)=>KS.add(B(x1-x0,y1-y0,z1-z0), M.conc, (x0+x1)/2,(y0+y1)/2,(z0+z1)/2);
+    blk(Z.x0,XL,Z.z0,APRON.z1,-6,GY); blk(XR,Z.x1,Z.z0,APRON.z1,-6,GY); blk(XL,XR,Z.z0,TU.z0,-6,GY);
+    blk(XL,XR,TU.z0,APRON.z1,-6,TU.yf-.02);   /* đáy lòng hầm trong khối nền */ blk(XL,XR,TU.z1,APRON.z1,TU.yc,GY);   /* nắp hầm dưới đường lăn */
+    blk(XW,XL,APRON.z1,Z.z1,GY-1.2,GY); blk(XR,Z.x1,APRON.z1,Z.z1,GY-1.2,GY);   /* sàn đường băng trên cọc (2 bên hầm) */
+    blk(XL,XR,APRON.z1,Z.z1,TU.yc,GY); blk(XL,XR,APRON.z1,Z.z1+.6,-.65,TU.yf-.02);   /* nắp hầm dưới đường băng + sàn hầm trên mặt biển */
     { const ext=new THREE.PlaneGeometry(Z.x0-XW, Z.z1-APRON.z1); ext.rotateX(-Math.PI/2); KL.add(ext, M.conc, (XW+Z.x0)/2,GY+.01,(APRON.z1+Z.z1)/2); }
-    for(let x=XW+8;x<Z.x1;x+=16) for(let z=APRON.z1+6;z<Z.z1;z+=14) KS.add(CY(1.1,1.4,GY+6,10), M.pier, x,(GY-1.2-6)/2,z);
+    for(let x=XW+8;x<Z.x1;x+=16) for(let z=APRON.z1+6;z<Z.z1;z+=14) if(Math.abs(x-ROADX)>TU.tw+1.2) KS.add(CY(1.1,1.4,GY+6,10), M.pier, x,(GY-1.2-6)/2,z);
     const NST=10, sw=(RAMP.x1-RAMP.x0)/NST; for(let i=0;i<NST;i++){ const x=RAMP.x0+(i+.5)*sw, h=GY-(i+1)*(GY-CBDY)/NST; plats.push({t:'r', x, z:(RAMP.z0+RAMP.z1)/2, c:1, s:0, hw:sw/2+.02, hd:(RAMP.z1-RAMP.z0)/2, h}); KS.add(B(sw,h,RAMP.z1-RAMP.z0), M.tile, x,h/2,(RAMP.z0+RAMP.z1)/2); }
     KS.add(B(BRG.x1-BRG.x0+1,.6,BRG.z1-BRG.z0), M.white, (BRG.x0+BRG.x1)/2,CBDY-.3,(BRG.z0+BRG.z1)/2);
     for(const z of [BRG.z0+.2, BRG.z1-.2]){ KS.add(B(BRG.x1-BRG.x0+1,1.1,.12), M.glass, (BRG.x0+BRG.x1)/2,CBDY+.55,z); addSeg(BRG.x0-.5,z,BRG.x1+.5,z,.12,undefined,undefined,'🌉 Lan can cầu sang River Tech'); }
@@ -80,20 +92,44 @@ export async function make(W, ctx){
     const al=new THREE.InstancedMesh(new THREE.SphereGeometry(.35,8,6), new THREE.MeshBasicMaterial({color:0xffffff}), AL.length); al.userData.dynamic=true; al.frustumCulled=false; scene.add(al); out.approach={al, AL};
     for(const r of RW) makeLabel(`🛫 ${r.name}`, null, {h:.5, x:RX0+40, y:GY+3, z:r.z, fade:80}); }
 
-  /* ============================== 2b. ĐƯỜNG XUYÊN SÂN BAY: cổng Bắc G2 (0,220) ↔ cổng Nam G8 (0,380), cắt ngang 2 đường băng có barie (kiểu Gibraltar) ============================== */
-  const BAR=[];
-  { const asph=new THREE.PlaneGeometry(RDW, Z.z1-Z.z0); asph.rotateX(-Math.PI/2); KL.add(asph, M.asph, ROADX,GY+.025,(Z.z0+Z.z1)/2);
-    const WH=[], YE=[]; for(let z=Z.z0+2;z<Z.z1-2;z+=4.5) WH.push([ROADX-3.6,z,ROADX-3.4,z+2.4],[ROADX+3.4,z,ROADX+3.6,z+2.4]); YE.push([ROADX-.27,Z.z0,ROADX-.11,Z.z1],[ROADX+.11,Z.z0,ROADX+.27,Z.z1]); WH.push([ROADX-RDW/2+.25,Z.z0,ROADX-RDW/2+.42,Z.z1],[ROADX+RDW/2-.42,Z.z0,ROADX+RDW/2-.25,Z.z1]);
-    const qg=arr=>{ const pos=[], idx=[]; arr.forEach(([x0,z0,x1,z1],i)=>{ pos.push(x0,0,z0, x1,0,z0, x1,0,z1, x0,0,z1); const o=i*4; idx.push(o,o+2,o+1, o,o+3,o+2); }); const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setIndex(idx); g.computeVertexNormals(); return g; };
-    for(const [arr,m] of [[WH,M.line],[YE,M.yel]]){ const ms=new THREE.Mesh(qg(arr), m); ms.position.y=GY+.04; ms.userData.dynamic=true; ms.userData.noFar=true; scene.add(ms); }
-    for(const sd of [-1,1]) KL.add(B(.24,.15,Z.z1-Z.z0), M.white, ROADX+sd*(RDW/2+.12),GY+.075,(Z.z0+Z.z1)/2);
-    const armM=std(0xff3030,{roughness:.4}), lampM=new THREE.MeshBasicMaterial({color:0x330000});
-    for(const r of RW) for(const sd of [-1,1]){ const z=r.z+sd*(r.w/2+4); if(z>Z.z1-1) continue; const side=sd<0?-1:1, px=ROADX+side*(RDW/2+1.2);
-      KS.add(CY(.15,.18,1.2,10), M.dark, px,GY+.6,z); const ag=B(RDW,.18,.18); ag.translate(-side*RDW/2,0,0); const arm=new THREE.Mesh(ag, armM); arm.position.set(px,GY+1.15,z); arm.userData.dynamic=true; scene.add(arm);
-      const lamp=new THREE.Mesh(new THREE.SphereGeometry(.28,10,8), lampM); lamp.position.set(px,GY+2.2,z); lamp.userData.dynamic=true; scene.add(lamp); KS.add(CY(.08,.08,2,8), M.dark, px,GY+1.2,z); BAR.push({arm, side, z}); circles.push({x:px, z, r:.25}); }
-    out.barLamp=lampM; out.BAR=BAR;
-    makeLabel('🚧 Đường cắt ngang đường băng', 'Barie hạ + đèn đỏ khi máy bay lăn / cất / hạ cánh', {h:.5, x:ROADX+14, y:GY+4, z:RW[0].z, fade:90});
-    for(const [gz,nm,to] of [[Z.z0,'G2 · Cổng Bắc','đi QA/QC Abyssal Island'],[Z.z1,'G8 · Cổng Nam','đi Wonderland & Kỳ Quan']]){ for(const sd of [-1,1]){ const px=ROADX+sd*(RDW/2+3), pz=gz+(gz<300?2:-2); KS.add(RB(1.2,6,1.2,.15,2), M.white, px,GY+3,pz); circles.push({x:px, z:pz, r:.7}); } makeLabel(`🚦 ${nm}`, to, {h:.5, x:ROADX, y:GY+7.5, z:gz, fade:90}); } }
+  /* ============================== 2b. ĐƯỜNG XUYÊN SÂN BAY: cổng Bắc G2 (0,220) → HẦM CHUI dưới đường lăn + 2 đường băng → cổng Nam G8 (0,380) – S19g 16/11 ============================== */
+  const BAR=[];   /* (barie + đèn đỏ giao cắt đồng mức đã bỏ) */
+  { const N0=Z.z0, NS=TU.z0;   // đoạn mặt đất trước miệng hầm
+    const asph=new THREE.PlaneGeometry(RDW, NS-N0); asph.rotateX(-Math.PI/2); KL.add(asph, M.asph, ROADX,GY+.025,(N0+NS)/2);
+    for(const sd of [-1,1]) KL.add(B(.24,.15,NS-N0), M.white, ROADX+sd*(RDW/2+.12),GY+.075,(N0+NS)/2);
+    // dải theo z bám cao độ hầm: x0..x1 (tương đối ROADX), za..zb, cao độ y(z)
+    const stripZ=(x0,x1,za,zb,yf,mat,kit=KL,step=1)=>{ const pos=[], uv=[], idx=[]; const n=Math.max(1,Math.ceil((zb-za)/step));
+      for(let i=0;i<=n;i++){ const z=za+(zb-za)*i/n, y=yf(z); pos.push(ROADX+x0,y,z, ROADX+x1,y,z); uv.push(0,z/6, (x1-x0)/6,z/6); if(i){ const k=i*2; idx.push(k-2,k,k-1, k-1,k,k+1); } }
+      const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2)); g.setIndex(idx); g.computeVertexNormals(); kit.add(g, mat, 0,0,0); };
+    const faceZ=(x,za,zb,y0f,y1f,mat,flip)=>{ const pos=[], uv=[], idx=[]; const n=Math.max(1,Math.ceil(zb-za));
+      for(let i=0;i<=n;i++){ const z=za+(zb-za)*i/n; pos.push(ROADX+x,y0f(z),z, ROADX+x,y1f(z),z); uv.push(z/4,0, z/4,1); if(i){ const k=i*2; if(flip) idx.push(k-2,k-1,k, k-1,k+1,k); else idx.push(k-2,k,k-1, k-1,k,k+1); } }
+      const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2)); g.setIndex(idx); g.computeVertexNormals(); KL.add(g, mat, 0,0,0); };
+    const ZE=TU.z2+.6;
+    stripZ(-TU.cw, TU.cw, TU.z0-.5, ZE, z=>tuF(z)+.015, M.asph);                                   // mặt đường trong hầm
+    for(const sd of [-1,1]){ const xa=sd<0?-TU.hw:TU.cw, xb=sd<0?-TU.cw:TU.hw; stripZ(xa, xb, TU.z0, ZE, z=>tuF(z)+.15, M.tile||M.conc);   // vỉa hè cao 15 cm
+      faceZ(sd*TU.cw, TU.z0, ZE, z=>tuF(z), z=>tuF(z)+.15, M.white, sd>0);                                  // bó vỉa
+      stripZ(sd*(TU.cw-.45)-.08, sd*(TU.cw-.45)+.08, TU.z0, ZE, z=>tuF(z)+.03, M.line);                     // vạch mép
+      stripZ(sd*2.9-.08, sd*2.9+.08, TU.z0, ZE, z=>tuF(z)+.03, M.line, KL, .5); }
+    for(const x of [-.27,.11]) stripZ(x, x+.16, TU.z0, ZE, z=>tuF(z)+.03, M.yel);                           // vạch đôi giữa
+    // tường hầm (đoạn dốc: cao hơn mặt đất 0,9 m làm lan can; đoạn có nắp: tới nắp) + mặt ngoài phần trên biển
+    for(const sd of [-1,1]){ const xc=ROADX+sd*(TU.hw+.15); KS.add(B(.3, GY+.9-(TU.yf-.3), TU.z1-TU.z0+.3), M.conc, xc,(GY+.9+TU.yf-.3)/2,(TU.z0+TU.z1)/2);
+      KS.add(B(.3, GY-(-.65), TU.z2+.6-TU.z1), M.conc, xc,(GY-.65)/2,(TU.z1+TU.z2+.6)/2);
+      addSeg(ROADX+sd*TU.hw, TU.z0-1, ROADX+sd*TU.hw, TU.z2+.6, .22, -1, GY+1.6, sd<0?'🚇 Vách hầm chui – đi theo lòng hầm':'🚇 Vách hầm chui – đi theo lòng hầm'); }
+    KS.add(B(2*TU.tw, .9, .3), M.conc, ROADX,GY+.45,TU.z1+.15); addSeg(ROADX-TU.tw, TU.z1+.15, ROADX+TU.tw, TU.z1+.15, .2, GY-.3, GY+1.6, '🚧 Miệng hầm chui bên dưới – đi vòng');   // lan can trên miệng hầm Bắc
+    { const gx=RDW/2+5; KS.add(B(2*gx, 1.0, .3), M.steel, ROADX,GY+.5,Z.z1-.5); addSeg(ROADX-gx, Z.z1-.5, ROADX+gx, Z.z1-.5, .25, GY-.3, GY+1.6, '🌊 Rìa sân bay – xuống cầu G8 bằng hầm chui'); }   // khép khoảng hở mép Nam (chỉ chặn ở mặt sân, lòng hầm bên dưới vẫn thông)
+    // đèn trần + dải LED vách (phần có nắp) + đèn tường dọc dốc
+    const lampM=std(0xfff1d0,{emissive:0xfff1d0, emissiveIntensity:1.1, roughness:.4}), ledM=std(0x9fe3ff,{emissive:0x7fd3ff, emissiveIntensity:1.2, roughness:.4});
+    for(let z=TU.z1+4; z<TU.z2; z+=8) for(const x of [-3.2,3.2]) KS.add(B(1.6,.07,.36), lampM, ROADX+x,TU.yc-.04,z);
+    for(const sd of [-1,1]){ KS.add(B(.04,.08,TU.z2-TU.z1), ledM, ROADX+sd*(TU.hw-.02),TU.yf+2.2,(TU.z1+TU.z2)/2); for(let z=TU.z0+6; z<TU.z1; z+=8) KS.add(B(.06,.12,.9), ledM, ROADX+sd*(TU.hw-.03),tuF(z)+1.2,z); }
+    // mặt đi: lòng xe theo địa hình (EXTL), vỉa hè +0,15 (dốc: mỗi 1 m · phần có nắp: 1 tấm), mặt sân phía trên nắp hầm
+    for(const sd of [-1,1]){ const xm=ROADX+sd*(TU.cw+TU.hw)/2, hw=(TU.hw-TU.cw)/2; for(let z=TU.z0; z<TU.z1; z+=1) plats.push({t:'r', x:xm, z:z+.5, c:1, s:0, hw, hd:.52, h:tuF(z+.5)+.15});
+      plats.push({t:'r', x:xm, z:(TU.z1+ZE)/2, c:1, s:0, hw, hd:(ZE-TU.z1)/2, h:TU.yf+.15}); }
+    plats.push({t:'r', x:ROADX, z:(TU.z1+TU.z2)/2, c:1, s:0, hw:TU.tw, hd:(TU.z2-TU.z1)/2, h:GY});   // mặt sân / đường lăn / đường băng trên nắp hầm
+    // ra cầu G8 (rộng 12 m): vách xiên khép từ miệng hầm vào lan can cầu
+    for(const sd of [-1,1]){ addSeg(ROADX+sd*TU.hw, TU.z2+.4, ROADX+sd*6.25, TU.z2+7, .2, -1, 3, '🌉 Lan can lối ra cầu G8'); const L=Math.hypot(TU.hw-6.25, 6.6); KS.add(B(.25,1.1,L), M.conc, ROADX+sd*(TU.hw+6.25)/2,TU.yf+.55,TU.z2+3.7, Math.atan2(sd*(6.25-TU.hw),6.6)); }
+    makeLabel('🚇 Hầm chui sân bay', 'Xe và người đi bộ chui dưới đường lăn + 2 đường băng · không giao cắt với máy bay', {h:.5, x:ROADX, y:GY+3.2, z:TU.z0+4, fade:90});
+    for(const [gz,nm,to] of [[Z.z0,'G2 · Cổng Bắc','đi QA/QC Abyssal Island'],[Z.z1,'G8 · Cổng Nam','đi Wonderland & Kỳ Quan (qua hầm chui)']]){ for(const sd of [-1,1]){ const px=ROADX+sd*(RDW/2+3), pz=gz+(gz<300?2:-2); KS.add(RB(1.2,6,1.2,.15,2), M.white, px,GY+3,pz); circles.push({x:px, z:pz, r:.7}); } makeLabel(`🚦 ${nm}`, to, {h:.5, x:ROADX, y:GY+7.5, z:gz, fade:90}); }
+    out.tunnel={...TU, f:tuF}; }
   // cầu G2: cổng Nam đảo Abyssal (0,180,+4) → cổng Bắc sân bay (0,220,+4) – Skyport dựng (V2_PLAN 2b)
   { const z0=180, z1=Z.z0+.5, w=RDW+10; KS.add(B(w,.8,z1-z0), M.conc, ROADX,GY-.4,(z0+z1)/2); const g=new THREE.PlaneGeometry(RDW,z1-z0); g.rotateX(-Math.PI/2); KL.add(g, M.asph, ROADX,GY+.02,(z0+z1)/2);
     for(let z=z0+4;z<z1;z+=10) for(const sd of [-1,1]) KS.add(CY(.9,1.1,GY+5,10), M.pier, ROADX+sd*(RDW/2+2),(GY-5)/2,z);
@@ -206,7 +242,7 @@ export async function make(W, ctx){
   W.AIRPORTS=W.AIRPORTS||[];
   const HOME={key:'skyport', name:'QA/QC International Skyport', x:cx, z:RW[0].z, y:GY, rwy:{x0:RX0, x1:RX1, z:RW[0].z, y:GY}, spawn:{x:GATES[2].x, z:GATES[2].z-8, lx:GATES[2].x, lz:TERM.z0}};
   if(!W.AIRPORTS.find(a=>a.key==='skyport')) W.AIRPORTS.push(HOME);
-  const DEST=[{key:'devcity', name:'Dev City Trùng Khánh (Sân bay Đỉnh Núi)', icon:'🌆', x:500, z:-850}, {key:'brain', name:'Đỉnh QA/QC Brain (Brain Skyport)', icon:'🧠', x:900, z:78},
+  const DEST=[{key:'devcity', name:'Dev City (Sân bay Đỉnh Núi)', icon:'🌆', x:500, z:-850}, {key:'brain', name:'Đỉnh QA/QC Brain (Brain Skyport)', icon:'🧠', x:900, z:78},
     {key:'swiss', name:'Đảo Ngoại ngữ (Sân bay Thảo nguyên & Thủy phi cơ)', icon:'🗻', x:-305, z:175}, {key:'palm', name:'Ốc đảo Palm Dubai', icon:'🌴', x:650, z:920}, {key:'tour', name:'Chuyến bay ngắm cảnh QC World (quay về)', icon:'🌅', x:380, z:100}];
   let flight=null, plane=null, savedDist=null, fastKey=false;
   addEventListener('keydown', e=>{ if(flight && e.code==='KeyX') fastKey=true; });
@@ -269,8 +305,9 @@ export async function make(W, ctx){
     const near=Math.hypot(Math.max(Z.x0-P.x,0,P.x-Z.x1), Math.max(Z.z0-P.z,0,P.z-Z.z1))<400 || !!flight;
     if(near){ const k=(T*2.2)%1; out.approach.AL.forEach(([x,z,i],j)=>{ const on=Math.abs(k*6-(6-i))<.8; _m4.compose(_v.set(x,GY+.4,z), _q.identity(), _s.setScalar(on?1.4:.35)); out.approach.al.setMatrixAt(j,_m4); }); out.approach.al.instanceMatrix.needsUpdate=true;
       if(out.beacon) out.beacon.visible=((T*1.2)%1)<.5; stepAI(Math.min(dt,.1));
-      const busy=[AI.mode!=='idle'?AI.p.position:null, flight&&plane?plane.position:null].some(p=>p && Math.abs(p.x-ROADX)<120 && p.y<GY+40 && p.z>RW[0].z-30);
-      for(const b of BAR){ const tgt=busy?0:-b.side*1.45; b.arm.rotation.z+=(tgt-b.arm.rotation.z)*Math.min(1,dt*3); } out.barLamp.color.setHex(busy && ((T*2)%1)<.5 ? 0xff2020 : 0x330000); }
+      /* (barie giao cắt đã bỏ – đường đi hầm chui) */ }
+    { const inT=!flight && Math.abs(P.x-ROADX)<TU.hw && P.z>TU.z1-1 && P.z<TU.z2+.5 && P.y<TU.yc-.6;   /* trong phần có nắp: camera không vượt trần */
+      if(inT){ if(!(HOOK.camBox && HOOK.camBox._sky)) HOOK.camBox={x0:ROADX-TU.hw+.4, x1:ROADX+TU.hw-.4, z0:TU.z1-14, z1:TU.z2+10, y1:TU.yc-.25, _sky:true}; } else if(HOOK.camBox && HOOK.camBox._sky) HOOK.camBox=null; }
     if(flight) HOOK.vehicleInter=()=>({label:`✈️ QC Airlines → ${flight?flight.d.name:''} · X: hạ cánh nhanh`}); });
   Object.assign(out, {GATES, PARK, ATC, VIP, FALL, cx, cz, halfZ, AI, RX0, RX1});
   // bot sống động CBD + sân bay (Pha 9 – phần của phiên qc-park): nạp sau khi cả CBD và sân bay đã dựng

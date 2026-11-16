@@ -196,6 +196,7 @@ export async function make(W, ctx){
     {id:'cards', icon:'🃏', name:'Lật thẻ QA', run:cardGame},
     {id:'notes', icon:'📝', name:'Ghi chú', run:notesApp, keep:true},
     {id:'music', icon:'🎧', name:'Nghe nhạc', direct:()=>{ lapClose(); setTimeout(()=>podOpen(), 450); }},
+    {id:'sound', icon:'🔊', name:'Âm thanh', run:soundApp},   /* S19g 16/11: âm lượng + bật/tắt 'Âm thanh môi trường' */
     {id:'debug', icon:'🛠️', name:'Debug', run:debugApp, when:()=>!!(W.events && Array.isArray(W.events.list))},   /* chỉ hiện khi có công cụ debug (V2: W.events) */
   ];
   for(const A of APPS){ const b=document.createElement('button'); b.className='osIcon'; b.innerHTML=`<b>${A.icon}</b><span>${esc(A.name)}</span>`; b.onclick=()=>launch(A.id); desk.appendChild(b); A.btn=b; }
@@ -230,6 +231,16 @@ export async function make(W, ctx){
   // L để cất (khi không gõ chữ). Lúc đang mở thì phím game bị chặn nên tự nghe ở đây.
   addEventListener('keydown', e=>{ if(!LAP.open || e.code!=='KeyL' || e.repeat || performance.now()-LAP.at<400) return;
     const t=e.target; if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return; e.preventDefault(); lapClose(); });
+
+  // --- app: 🔊 Âm thanh – 'Âm thanh môi trường' (ambience.js + ambience_world.js): bật/tắt + âm lượng 0–100 % ---
+  function soundApp(box){ const AM=()=>W.ambience;
+    const render=()=>{ const a=AM(), on=a ? a.on : true, vol=Math.round((a ? a.volume : .6)*100);
+      box.innerHTML=`<div class="dbg"><div class="dbgHead">🔊 Âm thanh môi trường</div><section class="dbgSec"><p class="dbgTip">Tiếng sóng, xe cộ, người nói chuyện, máy bay, còi xe khẩn cấp, thác nước, gió, chim/dế… đều nhỏ dần theo khoảng cách, luôn dịu. Đeo tai nghe nghe nhạc thì tự im.</p>
+        <div class="dbgFoot" style="margin:0 0 12px"><button class="sndOn dbgBtn" style="flex:0 0 auto">${on?'🔊 Đang bật – bấm để tắt':'🔇 Đang tắt – bấm để bật'}</button></div>
+        <label style="display:flex;align-items:center;gap:12px;font-weight:600">Âm lượng <input class="sndVol" type="range" min="0" max="100" step="5" value="${vol}" style="flex:1"> <b class="sndV" style="min-width:44px;text-align:right">${vol}%</b></label></section></div>`;
+      box.querySelector('.sndOn').onclick=()=>{ const a2=AM(); const nv=!(a2 ? a2.on : true); if(a2 && a2.setOn) a2.setOn(nv); else try{ localStorage.setItem('qcworld-sfx', nv?'1':'0'); }catch(e){} try{ W.island && W.island.audio && W.island.audio.set(nv); }catch(e){} if(toast) toast(nv?'🔊 Đã bật âm thanh môi trường':'🔇 Đã tắt âm thanh môi trường', 1600); render(); };
+      const sl=box.querySelector('.sndVol'), lb=box.querySelector('.sndV'); sl.oninput=()=>{ lb.textContent=sl.value+'%'; const a2=AM(); if(a2 && a2.setVolume) a2.setVolume(sl.value/100); else try{ localStorage.setItem('qcworld-sfx-vol', String(sl.value/100)); }catch(e){} }; };
+    render(); return {show:render}; }
 
   // --- app: 🛠️ Debug – mục 🧪 Sự kiện thế giới (V2: W.events.list / trigger / active / stop; ẩn khi không có W.events) ---
   function debugApp(box){ let tm=0;

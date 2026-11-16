@@ -140,7 +140,7 @@ export function make(W, ctx){
       if(i%30===15){ const side=(i/30|0)%2?1:-1; lampPts.push([q.x-q.uz*(BW/2+.7)*side, q.h, q.z+q.ux*(BW/2+.7)*side]); } });
     rails.build(grp);
     /* mở lan can đường dẫn đúng miệng cầu */ const E=pts[last-4]; for(let i=0;i<ROAD.length-3;i+=2) for(const side of [-1,1]){ const q=ROAD[i], o=(ROADW/2+.15)*side; if(Math.hypot(q.x-q.uz*o-E.x, q.z+q.ux*o-E.z)<BW/2+3.5) railMask.delete(i+':'+side); }
-    { const m=pts[Math.round(last*.4)]; makeLabel('🌉 Cầu G6 · Brain ↔ Dev City', 'Đi bộ / lái xe sang Dev City Trùng Khánh', {h:.5, x:m.x, y:m.h+5, z:m.z, fade:110}); }
+    { const m=pts[Math.round(last*.4)]; makeLabel('🌉 Cầu G6 · Brain ↔ Dev City', 'Đi bộ / lái xe sang Dev City', {h:.5, x:m.x, y:m.h+5, z:m.z, fade:110}); }
     Object.assign(G6,{pts,L,J}); }
   { const rails=AK.glassRails(); for(let i=0;i<ROAD.length-3;i+=2) for(const side of [-1,1]){ if(!railMask.has(i+':'+side)) continue; const q=ROAD[i], q2=ROAD[i+2], nx=-q.uz, nz=q.ux, o=(ROADW/2+.15)*side;
       const ax=q.x+nx*o, az=q.z+nz*o, bx=q2.x+(-q2.uz)*o, bz=q2.z+q2.ux*o; addSeg(ax,az,bx,bz,.15, q.h-.6, q.h+1.6); rails.add((ax+bx)/2, q.h, (az+bz)/2, Math.atan2(bx-ax,bz-az)+Math.PI/2); }

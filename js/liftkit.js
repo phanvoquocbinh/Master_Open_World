@@ -98,7 +98,7 @@ export function makeLift(W, o){
     const p=pc.getContext('2d'); p.fillStyle='#1b1f26'; p.fillRect(0,0,128,256); p.strokeStyle='#d8b25a'; p.lineWidth=4; p.strokeRect(2,2,124,252); const n=fl.length, cols=n>6?2:1, rows=Math.ceil(n/cols);
       for(let i=0;i<n;i++){ const col=cols===2?(i%2):0, row=cols===2?Math.floor(i/2):i, cx=cols===2?(col?88:40):64, cy=230-row*(200/Math.max(rows,1)); p.beginPath(); p.arc(cx,cy,15,0,7); p.fillStyle=i===L.target?'#ffd166':(i===L.at?'#7fe3ff':'#3a404b'); p.fill(); p.fillStyle='#10131a'; p.font='800 15px Segoe UI'; p.textAlign='center'; p.textBaseline='middle'; p.fillText(fl[i].short,cx,cy+1); }
       pt.needsUpdate=true; };
-  L.go=(i,withRider)=>{ if(i<0 || i>=fl.length) return; if(L.ph!=='idle'){ L.queue=i; return; } if(i===L.at){ L.wantOpen=true; return; } L.target=i; L.rider=!!withRider; L.ph='close'; drawSigns(); if(cur===L) showPanel(L); };
+  L.go=(i,withRider)=>{ if(i<0 || i>=fl.length) return; if(L.ph!=='idle'){ L.queue=i; return; } if(i===L.at){ L.wantOpen=true; return; } L.target=i; L.rider=!!withRider; L.ph='close'; drawSigns(); if(cur===L) showPanel(L); if(W.sfx && L.open>.05) W.sfx('lift-door', o.x, L.y+1.1, o.z); };   /* S19g: tiếng cửa trượt đóng */
   const inside=()=>{ const dx=P.x-o.x, dz=P.z-o.z, lx=dx*c-dz*s, lz=dx*s+dz*c; return Math.abs(lx)<w/2-.15 && Math.abs(lz)<d/2-.05 && Math.abs(P.y-L.y)<.9; };
   L.inside=inside;
   L.update=(dt)=>{ const ins=inside();
@@ -108,7 +108,7 @@ export function makeLift(W, o){
       if(L.queue!=null){ const q=L.queue; L.queue=null; L.go(q, ins); } }
     else if(L.ph==='close'){ L.open=Math.max(0,L.open-dt*1.6); if(L.open<=0){ L.ph='move'; L.t=0; L.y0=L.y; L.rider=L.rider||ins; if(L.rider){ L.lx=P.x; L.lz=P.z; HOOK.vehicle={drive:()=>{ P.x=L.lx; P.z=L.lz; P.y=L.y; P.vx=P.vz=P.vy=0; me.g.position.set(P.x,P.y,P.z); if(me.play) me.play('idle'); }}; } drawSigns(); } }
     else if(L.ph==='move'){ const ty=fl[L.target].y, dist=Math.abs(ty-L.y0), T=Math.max(1.6, Math.min(dist/2.6, 6+dist/9));   /* nhà cao: tăng tốc như thang cao tốc (91 m ≈ 16 s) */ L.t+=dt; const k=Math.min(1,L.t/T); L.y=L.y0+(ty-L.y0)*ease(k);
-      if(k>=1){ L.y=ty; L.at=L.target; L.target=-1; L.ph='idle'; L.wantOpen=true; if(L.rider){ HOOK.vehicle=null; P.y=L.y; P.ground=true; L.rider=false; if(toast) toast(`⇅ Đã tới ${fl[L.at].name}`, 1800); } drawSigns(); if(cur===L) showPanel(L); } }
+      if(k>=1){ L.y=ty; L.at=L.target; L.target=-1; L.ph='idle'; L.wantOpen=true; if(W.sfx){ W.sfx('lift-ding', o.x, L.y+1.2, o.z); W.sfx('lift-door', o.x, L.y+1.1, o.z); }   /* S19g: 'ding' tới tầng + cửa mở */ if(L.rider){ HOOK.vehicle=null; P.y=L.y; P.ground=true; L.rider=false; if(toast) toast(`⇅ Đã tới ${fl[L.at].name}`, 1800); } drawSigns(); if(cur===L) showPanel(L); } }
     cab.position.y=L.y; L.plat.h=L.y;
     let bc=false; L.doors.forEach((lv,i)=>{ const op=(i===L.at && L.ph==='idle')?L.open:0; if(op!==lv.op){ lv.op=op; doorAt(i,op); } lv.seg.y0=op>.85?1e6:lv.y0; const on=L.target===i; if(on!==lv.on){ lv.on=on; BIM.setColorAt(i,_c.set(on?0xffd166:0x3a3d44)); bc=true; } }); if(bc && BIM.instanceColor) BIM.instanceColor.needsUpdate=true;
     g.visible=Math.abs(P.x-o.x)<170 && Math.abs(P.z-o.z)<170;
