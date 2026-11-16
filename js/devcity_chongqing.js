@@ -430,7 +430,7 @@ export async function make(W, ctx){
       if(TR.wait<=0){ if(TR.ride) TR.ride.leaving=true; if(here===ST[ST.length-1] && TR.dir>0) TR.dir=-1; else if(here===ST[0] && TR.dir<0) TR.dir=1; }
       return; }
     const st=nextStop(); if(!st){ TR.dir*=-1; return; }
-    const dist=Math.abs(st.s-TR.s), vmax=22, a=2.2, vStop=Math.sqrt(2*a*Math.max(0,dist-1));
+    const RK=(W.SPEED && W.SPEED.rail)||1, dist=Math.abs(st.s-TR.s), vmax=22*RK, a=2.2*Math.sqrt(RK), vStop=Math.sqrt(2*a*Math.max(0,dist-1));   /* 16/11 tối (phiên bot đi bộ): × hệ số tàu W.SPEED.rail – chỉ đổi hằng tốc độ/gia tốc */
     TR.v=Math.min(vmax, TR.v+a*dt, vStop+.6); TR.s+=TR.dir*TR.v*dt;
     if(dist<.8){ TR.s=st.s; TR.v=0; TR.last=st; TR.wait=st.key==='s2' ? 8 : 10; if(TR.ride && TR.ride.from!==st){ alight(st); } }
     placeTrain(); });

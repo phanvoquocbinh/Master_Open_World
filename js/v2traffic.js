@@ -22,6 +22,12 @@ export async function make(W, zones={}){
   /* ============================== 1. GOM ĐƯỜNG TỪ CÁC VÙNG ============================== */
   const LINES=[];
   const VMAX={abyssal:11, cbd:12.5, skyport:11, palm:10, wonder:8, devcity:11, brain:9, swiss:6};
+  // 16/11 tối (Bình: "xe chạy nhanh hơn → ít xe hơn, đỡ lag mà lúc nào cũng thấy xe"): BẢNG HỆ SỐ TỐC ĐỘ CHUNG – chỉ có ở V2, chỉnh 1 chỗ này.
+  //  bike xe đạp · moto xe máy · car ô tô/taxi/xe tuần tra/xe ưu tiên · bus xe buýt · rail tàu điện/monorail/tàu răng cưa.
+  //  Nơi đọc: v2traffic (xe bot), vehicles.js (xe người chơi lái), palm_dubai (monorail), devcity_chongqing (monorail), swiss_lang_island (tàu răng cưa). ?v1 không có bảng → hệ số 1.
+  //  botCar: ô tô BOT (Bình 16/11 tối: bot cứ giảm cho kiểm soát được, người chơi lái giữ car ×1,5).
+  if(W.V2) W.SPEED=Object.assign({bike:1.2, moto:1.35, car:1.5, bus:1.4, rail:1.7, botCar:1.35}, W.SPEED||{});
+  const SPK=c=>(W.SPEED ? (c.model==='bus' ? W.SPEED.bus : (W.SPEED.botCar ?? W.SPEED.car)) : 1)||1;
   const add=(pts, w, zone, o={})=>{ if(pts.length>=2) LINES.push({pts, w, zone, vmax:o.vmax||VMAX[zone]||10, name:o.name||zone, fixedY:!!o.fixedY, refY:o.refY??2}); };
   const WD={abyssal:8, skyport:10, palm:8, wonder:8};
   for(const R0 of (W.V2ROADS||[])){
@@ -118,6 +124,23 @@ export async function make(W, zones={}){
     const l=Math.hypot(e.x[hi]-e.x[lo], e.z[hi]-e.z[lo])||1; o.ux=(e.x[hi]-e.x[lo])/l; o.uz=(e.z[hi]-e.z[lo])/l; return o; }
   // điểm trên làn bên phải theo chiều đi (dir +1: a→b), cách đầu (theo chiều đi) d mét – bên phải của hướng (ux,uz) là (−uz, ux)
   function lanePoint(e, dir, d, o={}, off=e.off){ edgePt(e, dir>0 ? d : e.len-d, o); const ux=o.ux*dir, uz=o.uz*dir; o.ux=ux; o.uz=uz; o.x+=-uz*off; o.z+=ux*off; return o; }
+  // 16/11 tối: TIM ĐƯỜNG RIÊNG CHO XE – bo tròn góc gấp (≥ 20°) bằng cung ~0,65·w. Trước đây làn xe offset theo từng đoạn thẳng → ở góc vuông
+  //  (vd. vành đai Abyssal) 2 làn ngược chiều xích lại gần, xe chéo nhau chồng lên. Làn vỉa hè người đi bộ vẫn dùng tim gốc (edgePt/lanePoint).
+  function fillet(e){ const N=e.x.length, X=[e.x[0]], Z=[e.z[0]], Y=[e.y[0]], r=clamp(e.w*.65, 6, 16); e.corners=[];
+    for(let i=1;i<N-1;i++){ const ax=e.x[i]-e.x[i-1], az=e.z[i]-e.z[i-1], bx=e.x[i+1]-e.x[i], bz=e.z[i+1]-e.z[i], la=Math.hypot(ax,az), lb=Math.hypot(bx,bz);
+      const th=(la>.05 && lb>.05) ? Math.acos(clamp((ax*bx+az*bz)/(la*lb),-1,1)) : 0;
+      if(th<.35){ X.push(e.x[i]); Z.push(e.z[i]); Y.push(e.y[i]); continue; }
+      const t=Math.min(r*Math.tan(Math.min(th,2.6)/2), la*.45, lb*.45), p0x=e.x[i]-ax/la*t, p0z=e.z[i]-az/la*t, p2x=e.x[i]+bx/lb*t, p2z=e.z[i]+bz/lb*t;
+      const y0=e.y[i]-(e.y[i]-e.y[i-1])*t/la, y2=e.y[i]+(e.y[i+1]-e.y[i])*t/lb, n=Math.max(4, Math.ceil(th*8));
+      if(t*.707<9 && th>.9) e.corners.push({d:e.cum[i], nd:{x:e.x[i], z:e.z[i], y:e.y[i], deg:3, R:t+6, occ:null, occT:0, corner:true}});   /* góc gắt: "ô giao ảo" – mỗi lúc 1 xe ôm cua */
+      for(let k=0;k<=n;k++){ const q=k/n, u=1-q; X.push(u*u*p0x+2*u*q*e.x[i]+q*q*p2x); Z.push(u*u*p0z+2*u*q*e.z[i]+q*q*p2z); Y.push(y0+(y2-y0)*q); } }
+    X.push(e.x[N-1]); Z.push(e.z[N-1]); Y.push(e.y[N-1]); const M=X.length; e.fx=Float32Array.from(X); e.fz=Float32Array.from(Z); e.fy=Float32Array.from(Y); e.fcum=new Float32Array(M);
+    for(let i=1;i<M;i++) e.fcum[i]=e.fcum[i-1]+Math.hypot(X[i]-X[i-1], Z[i]-Z[i-1]); e.flen=e.fcum[M-1]||e.len; }
+  for(const e of edges) fillet(e);
+  function edgePtF(e, d, o){ const c=e.fcum, N=c.length; d=clamp(d*e.flen/e.len,0,e.flen); let lo=0, hi=N-1; while(hi-lo>1){ const m=(lo+hi)>>1; if(c[m]<=d) lo=m; else hi=m; }
+    const t=(d-c[lo])/((c[hi]-c[lo])||1); o.x=e.fx[lo]+(e.fx[hi]-e.fx[lo])*t; o.z=e.fz[lo]+(e.fz[hi]-e.fz[lo])*t; o.y=e.fy[lo]+(e.fy[hi]-e.fy[lo])*t;
+    const l=Math.hypot(e.fx[hi]-e.fx[lo], e.fz[hi]-e.fz[lo])||1; o.ux=(e.fx[hi]-e.fx[lo])/l; o.uz=(e.fz[hi]-e.fz[lo])/l; return o; }
+  function laneF(e, dir, d, o={}, off=e.off){ edgePtF(e, dir>0 ? d : e.len-d, o); const ux=o.ux*dir, uz=o.uz*dir; o.ux=ux; o.uz=uz; o.x+=-uz*off; o.z+=ux*off; return o; }
   // Dijkstra: đường ngắn nhất giữa 2 điểm / nút
   function route(from, to){ const A=from.adj ? null : (nearest(from.x, from.z, 80)||{}).e, B=to.adj ? null : (nearest(to.x, to.z, 80)||{}).e; if((!from.adj && !A) || (!to.adj && !B)) return null;
     const src=from.adj ? [from] : [A.a, A.b], dst=to.adj ? new Set([to]) : new Set([B.a, B.b]); const dist=new Map(), prev=new Map(), Q=[];
@@ -132,7 +155,8 @@ export async function make(W, zones={}){
 
   /* ============================== 3. XE HƠI BOT ============================== */
   // 16/11 (Bình: "đường phố đông vui"): ~35–45 xe trong ~200 m quanh người chơi; xe chỉ là thực thể InstancedMesh nên số xe không thêm lượt vẽ
-  const POOL={low:38, medium:42, high:46}[QUAL] ?? 40, RANGE={low:180, medium:200, high:210}[QUAL] ?? 200;
+  // 16/11 tối: xe nhanh hơn ×1,5 → bớt ~27 % xe (38/42/46 → 28/31/34) nhưng sinh/xoá xa hơn (180–210 → 240–280 m) để không thấy xe "hiện ra" trước mặt
+  const POOL={low:28, medium:31, high:34}[QUAL] ?? 30, RANGE={low:240, medium:260, high:280}[QUAL] ?? 260;
   const MODELS=[['sedan',.2],['suv',.15],['mini',.11],['sport',.06],['pickup',.08],['taxi',.17],['van',.11],['bus',.12]];
   const BUSC=[0x2e8b57,0x1b6fd1,0xe8761a,0xc81d25];
   const ZW={cbd:1, devcity:1, abyssal:1, palm:1, skyport:.7, brain:.5, wonder:.35, swiss:.25};   // ưu tiên rải xe trên đường chính
@@ -199,24 +223,26 @@ export async function make(W, zones={}){
   // bộ đệm đường đi của từng xe (làn phải + cung rẽ ở nút)
   const _o={}, _o2={};
   const newBuf=()=>({x:[], z:[], y:[], cum:[], vc:[], marks:[]});
-  function pushPt(B, x, z, y, vmax){ const n=B.x.length; if(n){ const d=Math.hypot(x-B.x[n-1], z-B.z[n-1]); if(d<.25) return; B.cum.push(B.cum[n-1]+d); } else B.cum.push(0); B.x.push(x); B.z.push(z); B.y.push(y); B.vc.push(vmax); }
+  let curK=1;   /* hệ số tốc độ của xe đang dựng bộ đệm (W.SPEED) – giới hạn cua theo bán kính (capCurv) KHÔNG nhân hệ số */
+  function pushPt(B, x, z, y, vmax){ const n=B.x.length; if(n){ const d=Math.hypot(x-B.x[n-1], z-B.z[n-1]); if(d<.25) return; B.cum.push(B.cum[n-1]+d); } else B.cum.push(0); B.x.push(x); B.z.push(z); B.y.push(y); B.vc.push(vmax*curK); }
   function capCurv(B, from){ for(let i=Math.max(1,from); i<B.x.length-1; i++){ const ax=B.x[i]-B.x[i-1], az=B.z[i]-B.z[i-1], bx=B.x[i+1]-B.x[i], bz=B.z[i+1]-B.z[i], la=Math.hypot(ax,az)||1, lb=Math.hypot(bx,bz)||1;
       const ang=Math.acos(clamp((ax*bx+az*bz)/(la*lb),-1,1)), k=ang/((la+lb)/2); if(k>1e-4) B.vc[i]=Math.min(B.vc[i], Math.sqrt(2.4/k)); } }
   const rOf=e=>Math.min(7, e.len/3);
-  function appendEdge(c, e, dir, dIn){ const B=c.B, n0=B.x.length, end=e.len-rOf(e); for(let d=dIn; d<end; d+=2){ lanePoint(e, dir, d, _o); pushPt(B, _o.x, _o.z, _o.y, e.vmax); } lanePoint(e, dir, Math.max(dIn,end), _o); pushPt(B, _o.x, _o.z, _o.y, e.vmax); capCurv(B, n0-1); c.e=e; c.dir=dir; }
+  function appendEdge(c, e, dir, dIn){ curK=c.sk||1; const B=c.B, n0=B.x.length, end=e.len-rOf(e), s0=n0 ? B.cum[n0-1] : 0;
+    if(e.corners) for(const cn of (dir>0 ? e.corners : e.corners.slice().reverse())){ const dd=dir>0 ? cn.d : e.len-cn.d; if(dd>dIn+1 && dd<end) B.marks.push({s:s0+(dd-dIn)*e.flen/e.len, nd:cn.nd}); } for(let d=dIn; d<end; d+=2){ laneF(e, dir, d, _o); pushPt(B, _o.x, _o.z, _o.y, e.vmax); } laneF(e, dir, Math.max(dIn,end), _o); pushPt(B, _o.x, _o.z, _o.y, e.vmax); capCurv(B, n0-1); c.e=e; c.dir=dir; }
   function chooseNext(c, nd){ const opts=nd.adj.filter(e=>e!==c.e); if(c.plan){ const s=c.plan.shift(); if(s && nd.adj.includes(s.e)) return s; c.plan=c.special?[]:null; if(c.special) return null; }
     if(!opts.length) return null; const e=opts[Math.floor(RND()*opts.length)]; return {e, dir:e.a===nd?1:-1}; }
-  function extend(c){ const e=c.e, dir=c.dir, nd=dir>0?e.b:e.a, B=c.B, n0=B.x.length; const nx=chooseNext(c, nd);
+  function extend(c){ curK=c.sk||1; const e=c.e, dir=c.dir, nd=dir>0?e.b:e.a, B=c.B, n0=B.x.length; const nx=chooseNext(c, nd);
     if(!nx){ if(c.special){ c.done=true; return; }
       // ngõ cụt → quay đầu MƯỢT: dạt dần ra sát lề phải rồi vòng 1 cung tròn bán kính ≈ nửa lòng đường, về đúng làn ngược lại
       const R=Math.max(e.off, Math.min(e.w/2-.9, 6)), back=Math.min(R+1.5, e.len*.4), rIn=Math.min(e.len*.45, 14);
-      const d0=Math.max(0, e.len-rOf(e)), d1=e.len-back; if(d1>d0+.5) for(let k=1;k<=4;k++){ const d=d0+(d1-d0)*k/4; lanePoint(e, dir, d, _o, e.off+(R-e.off)*k/4); pushPt(B, _o.x, _o.z, _o.y, 6); }
-      edgePt(e, dir>0 ? e.len-back : back, _o2); const ux=_o2.ux*dir, uz=_o2.uz*dir, cx=_o2.x, cz=_o2.z, rx=-uz, rz=ux;   // tâm cung = tim đường, lùi khỏi đầu cụt một đoạn
+      const d0=Math.max(0, e.len-rOf(e)), d1=e.len-back; if(d1>d0+.5) for(let k=1;k<=4;k++){ const d=d0+(d1-d0)*k/4; laneF(e, dir, d, _o, e.off+(R-e.off)*k/4); pushPt(B, _o.x, _o.z, _o.y, 6); }
+      edgePtF(e, dir>0 ? e.len-back : back, _o2); const ux=_o2.ux*dir, uz=_o2.uz*dir, cx=_o2.x, cz=_o2.z, rx=-uz, rz=ux;   // tâm cung = tim đường, lùi khỏi đầu cụt một đoạn
       for(let k=1;k<=16;k++){ const th=Math.PI*k/16; pushPt(B, cx+rx*R*Math.cos(th)+ux*R*Math.sin(th), cz+rz*R*Math.cos(th)+uz*R*Math.sin(th), _o2.y, 3.6); }
-      for(let k=1;k<=4;k++){ const d=back+rIn*k/4; lanePoint(e, -dir, d, _o, R+(e.off-R)*k/4); pushPt(B, _o.x, _o.z, _o.y, 6); }
+      for(let k=1;k<=4;k++){ const d=back+rIn*k/4; laneF(e, -dir, d, _o, R+(e.off-R)*k/4); pushPt(B, _o.x, _o.z, _o.y, 6); }
       B.marks.push({s:B.cum[B.cum.length-1], nd, uturn:true}); capCurv(B, n0-1); appendEdge(c, e, -dir, back+rIn+1); return; }
-    lanePoint(e, dir, e.len-rOf(e), _o); const P0x=_o.x, P0z=_o.z, P0y=_o.y, r2=rOf(nx.e); lanePoint(nx.e, nx.dir, r2, _o2);
-    lanePoint(e, dir, e.len, _o); const ax=_o.x, az=_o.z, aux=_o.ux, auz=_o.uz; lanePoint(nx.e, nx.dir, 0, _o); const bx=_o.x, bz=_o.z;
+    laneF(e, dir, e.len-rOf(e), _o); const P0x=_o.x, P0z=_o.z, P0y=_o.y, r2=rOf(nx.e); laneF(nx.e, nx.dir, r2, _o2);
+    laneF(e, dir, e.len, _o); const ax=_o.x, az=_o.z, aux=_o.ux, auz=_o.uz; laneF(nx.e, nx.dir, 0, _o); const bx=_o.x, bz=_o.z;
     const dot=aux*_o.ux+auz*_o.uz; let Cx=(ax+bx)/2, Cz=(az+bz)/2; if(dot>-.6){ const k=1/Math.max(.35, 1+dot); Cx=nd.x+((ax-nd.x)+(bx-nd.x))*k; Cz=nd.z+((az-nd.z)+(bz-nd.z))*k; }   // điểm khống chế = giao 2 làn gần nút
     const sMark=B.cum[B.cum.length-1]+rOf(e), yN=nd.y;
     for(let k=1;k<=8;k++){ const t=k/8, u=1-t, x=u*u*P0x+2*u*t*Cx+t*t*_o2.x, z=u*u*P0z+2*u*t*Cz+t*t*_o2.z, y=t<.5 ? P0y+(yN-P0y)*t*2 : yN+(_o2.y-yN)*(t-.5)*2; pushPt(B, x, z, y, Math.min(e.vmax, nx.e.vmax)); }
@@ -229,17 +255,21 @@ export async function make(W, zones={}){
   const inView=(x,y,z,r=3)=>{ sph.center.set(x,y+1,z); sph.radius=r; return !!W.FRUS && W.FRUS.intersectsSphere(sph); };
   let nearE=[], nearL=0;
   function refreshNear(){ nearE=[]; nearL=0; const r2=(RANGE+40)**2; for(const e of edges){ const m=e.x.length>>1, l=e.x.length-1; if((e.x[0]-P.x)**2+(e.z[0]-P.z)**2<r2 || (e.x[m]-P.x)**2+(e.z[m]-P.z)**2<r2 || (e.x[l]-P.x)**2+(e.z[l]-P.z)**2<r2){ nearE.push(e); nearL+=e.len*(ZW[e.zone]??.6); } } }
+  // 🚌 trạm xe buýt: khoảng cách tối thiểu dọc tuyến BUS_GAP (m); điểm quan trọng = điểm dịch chuyển nhanh (bản đồ M) + cổng vùng → được dừng sớm hơn (≥ BUS_KEY m)
+  const BUS_GAP=450, BUS_KEY=250, busLog=[]; let KEYPTS=null;
+  function keyPts(){ if(KEYPTS) return KEYPTS; KEYPTS=GATEPTS.map(g=>({x:g[0], z:g[1]})); try{ const H=W.HOOK; for(const pl of (W.PLACES||[])){ if(!/(^|\s)ga(\s|$)|nhà ga|sân bay|skyport|cổng|trung tâm|bến|terminal|station|monorail|metro|tàu/i.test((pl.name||'')+' '+(pl.sub||''))) continue; H.tpProbe=[]; try{ pl.go(); }catch(e){} const q=H.tpProbe[0]; if(q) KEYPTS.push({x:q[0], z:q[1]}); } H.tpProbe=null; }catch(e){ if(W.HOOK) W.HOOK.tpProbe=null; } return KEYPTS; }
+  const keyNear=c=>{ const x=c.g.position.x, z=c.g.position.z; for(const k of keyPts()) if((k.x-x)**2+(k.z-z)**2<60*60) return true; return false; };
   function spawnCar(c, initial){ hideCar(c);
     for(let t=0;t<20 && nearE.length;t++){ let r=RND()*nearL, e=nearE[nearE.length-1]; for(const q of nearE){ r-=q.len*(ZW[q.zone]??.6); if(r<=0){ e=q; break; } }
       if(c.patrol && !ZWP[e.zone] && RND()<.85) continue;   // xe tuần tra ưu tiên Abyssal · CBD · Dev City
-      const dir=RND()<.5?1:-1, d=RND()*e.len; lanePoint(e, dir, d, _o); const dist=Math.hypot(_o.x-P.x, _o.z-P.z);
-      if(dist>RANGE || dist<(initial?22:55)) continue; if(!initial && dist<110 && inView(_o.x,_o.y,_o.z)) continue;
+      const dir=RND()<.5?1:-1, d=RND()*e.len; laneF(e, dir, d, _o); const dist=Math.hypot(_o.x-P.x, _o.z-P.z);
+      if(dist>RANGE || dist<(initial?22:70)) continue; if(!initial && dist<170 && inView(_o.x,_o.y,_o.z)) continue;   /* không sinh xe trong tầm mắt gần */
       if(RND()<(dist-60)/(RANGE*1.6)) continue;   // ưu tiên gần người chơi (đường quanh mình đông hơn)
-      if(cars.some(q=>q!==c && q.active && Math.hypot(q.g.position.x-_o.x, q.g.position.z-_o.z)<(c.model==='bus'?20:14))) continue;
-      c.B=newBuf(); appendEdge(c, e, dir, d); c.s=0; c.v=Math.min(e.vmax, 7)*(.5+RND()*.5); c.stuck=0; c.ghost=0; c.hold=null; c.plan=null; c.top=(c.model==='bus'?.72:.85)+RND()*.25; c.active=true; c.lat=c.latT=0; c.pull=null; c.passing=null;
+      if(cars.some(q=>q!==c && q.active && Math.hypot(q.g.position.x-_o.x, q.g.position.z-_o.z)<(c.model==='bus'?26:20))) continue;   /* xe nhanh → cách nhau xa hơn khi sinh */
+      c.sk=SPK(c); c.B=newBuf(); appendEdge(c, e, dir, d); c.s=0; c.v=Math.min(e.vmax, 7)*(.5+RND()*.5)*c.sk; if(c.model==='bus'){ c.odo=RND()*BUS_GAP; c.gapNeed=BUS_GAP*(1+RND()*.2); c.stopIn=0; } c.stuck=0; c.ghost=0; c.rev=0; c.revDone=false; c.hold=null; c.holds=[]; c.plan=null; c.top=(c.model==='bus'?.72:.85)+RND()*.25; c.active=true; c.lat=c.latT=0; c.pull=null; c.passing=null;
       bufAt(c.B, 1.5, _o2); c.h=Math.atan2(_o2.x-c.B.x[0], _o2.z-c.B.z[0]); placeCar(c, 0); return true; }
     return false; }
-  function hideCar(c){ c.active=false; c.near=false; c.g.position.set(1e6,-1e3,1e6); if(c.hold){ if(c.hold.occ===c) c.hold.occ=null; c.hold=null; }
+  function hideCar(c){ c.active=false; c.near=false; c.g.position.set(1e6,-1e3,1e6); if(c.hold){ if(c.hold.occ===c) c.hold.occ=null; c.hold=null; } if(c.holds){ for(const h of c.holds) jLeave(h.nd, c); c.holds=[]; }
     if(!built) return; const M=IM[c.model]; if(M) for(const im of M.ims){ im.setMatrixAt(c.mi, _z); im.instanceMatrix.needsUpdate=true; } for(let k=0;k<4;k++) wheelIM.setMatrixAt(c.i*4+k, _z); wheelIM.instanceMatrix.needsUpdate=true;
     if(c.patrol && lampIM){ lampIM.setMatrixAt(c.pi*2,_z); lampIM.setMatrixAt(c.pi*2+1,_z); lampIM.instanceMatrix.needsUpdate=true; } }
   function placeCar(c, dt){ const B=c.B; bufAt(B, c.s, _o); let x=_o.x, z=_o.z; const y0=_o.y; bufAt(B, c.s+1.6, _o2); const yF=_o2.y, hx=_o2.x-x, hz=_o2.z-z; bufAt(B, Math.max(0,c.s-1.6), _o2); const yB=_o2.y;
@@ -260,31 +290,56 @@ export async function make(W, zones={}){
     for(const s of specials) obs.push({x:s.g.position.x, z:s.g.position.z, y:s.g.position.y, h:s.h, hl:2.6, hw:1.1, self:s, veh:true});
     if(!W.inside){ const V=W.life && W.life.V, r=V && V.riding && V.riding(); obs.push({x:P.x, z:P.z, y:P.y??0, h:P.face||0, hl:r?2.2:.35, hw:r?.95:.35, player:true}); }
     for(const q of PEDS) obs.push({x:q.x, z:q.z, y:q.y, h:q.h||0, hl:q.hl||.3, hw:q.hw||.3, ped:true}); }   /* q.hw/hl: vật cản lớn (vd. yêu quái Pha 10) */
-  function limitFor(c){ let vt=99; const fx=Math.sin(c.h), fz=Math.cos(c.h), x=c.g.position.x, z=c.g.position.z, y=c.g.position.y; c.blk=0;
-    for(const o of obs){ if(o.self===c || Math.abs(o.y-y)>3) continue; if(c.ghost>0 && o.veh) continue; const dx=o.x-x, dz=o.z-z, a=dx*fx+dz*fz; if(a<=0 || a>32) continue;
-      const l=dx*(-fz)+dz*fx; if(Math.abs(l)>1.05+o.hw) continue; if(o.veh && Math.cos(o.h-c.h)<-.5 && a>c.hl+o.hl+3) continue;
-      const gap=a-c.hl-o.hl, vv=Math.sqrt(2*4.5*Math.max(0, gap-(o.ped||o.player?3:2.2))); if(vv<vt){ vt=vv; c.blk=o.player?2:o.ped?1:o.pulled?5:(Math.cos(o.h-c.h)<-.3?4:3); c.blkO=o.self; } }
+  // vật cản DỌC ĐƯỜNG ĐI của xe (lấy mẫu chính bộ đệm làn, kể cả cung rẽ ở giao lộ) – không chỉ theo hướng mũi xe: khi đang ôm cua vẫn thấy xe đứng ở làn ra
+  function limitFor(c){ let vt=99; c.blk=0; const x=c.g.position.x, z=c.g.position.z, y=c.g.position.y, L=Math.max(32, c.v*c.v/9+16), L2=(L+6)**2, B=c.B;
+    const fx=Math.sin(c.h), fz=Math.cos(c.h), rx=-fz, rz=fx, lo=c.lat||0; let i0=-1;
+    for(const o of obs){ if(o.self===c || Math.abs(o.y-y)>3) continue; if(c.ghost>0 && o.veh) continue; const dx=o.x-x, dz=o.z-z; if(dx*dx+dz*dz>L2 || dx*fx+dz*fz<-(o.hl+c.hl+1)) continue;
+      if(i0<0) i0=bufAt(B, c.s, _o).i; const ofx=Math.sin(o.h), ofz=Math.cos(o.h), eL=o.hl+c.hw+.2, eW=o.hw+c.hw+.15;
+      for(let k=i0; k<B.cum.length; k++){ const sk=B.cum[k]-c.s; if(sk>L) break; const px=B.x[k]+rx*lo-o.x, pz=B.z[k]+rz*lo-o.z;
+        if(Math.abs(px*ofx+pz*ofz)<eL && Math.abs(px*ofz-pz*ofx)<eW){ const gap=Math.max(0,sk)-c.hl, vv=Math.sqrt(2*4.5*Math.max(0, gap-(o.ped||o.player?3:2.2)));
+          if(vv<vt){ vt=vv; c.blk=o.player?2:o.ped?1:o.pulled?5:(Math.cos(o.h-c.h)<-.3?4:3); c.blkO=o.self; } break; } } }
     return vt; }
-  function curveLimit(c, vt){ const B=c.B, s0=c.s; for(let i=bufAt(B,s0,_o).i; i<B.cum.length && B.cum[i]<s0+34; i++){ const d=Math.max(0,B.cum[i]-s0); vt=Math.min(vt, Math.sqrt(B.vc[i]*B.vc[i]+2*3*d)); } return vt; }
+  function behindBlocked(c){ const x=c.g.position.x, z=c.g.position.z, fx=Math.sin(c.h), fz=Math.cos(c.h); for(const o of obs){ if(o.self===c) continue; const dx=o.x-x, dz=o.z-z; if(dx*dx+dz*dz>64) continue; const a=dx*fx+dz*fz; if(a<0 && -a<c.hl+o.hl+1.2 && Math.abs(dx*fz-dz*fx)<c.hw+o.hw+.3) return true; } return false; }
+  // đường đi của xe qua ô giao (điểm bộ đệm trong bán kính R+2 quanh mốc nút)
+  function jPath(c, m){ const B=c.B, r=m.nd.R+2+c.hl, pts=[]; for(let i=bufAt(B, Math.max(0, m.s-r), _o).i; i<B.cum.length && B.cum[i]<=m.s+r; i++) pts.push(B.x[i], B.z[i]); return pts; }
+  function jConflict(nd, c, pts){ const occ=nd.occs; if(!occ || !occ.length) return false; const T=W.T??0;
+    for(const q of occ){ if(q.c===c || !q.c.active || T-q.t>14) continue; if(nd.corner) return true;   /* kẹt quá 14 s trong ô giao → bỏ qua (xe sau tự dừng nhờ kiểm tra dọc đường đi) */
+      const a=q.pts; if(a.length<2 || pts.length<2) return true;
+      if(Math.hypot(a[0]-pts[0], a[1]-pts[1])<2.2) continue;   /* cùng làn vào → nối đuôi (khoảng cách do limitFor lo) */
+      if(!(jStraight(pts) && jStraight(a))) return true;   /* có xe RẼ → chờ lượt riêng; chỉ xe ĐI THẲNG (2 chiều / song song) mới cùng qua */
+      const lim=1.6+c.hw+q.c.hw+((c.model==='bus' || q.c.model==='bus') ? 1.6 : 0);   /* thân xe quét khi ôm cua (xe buýt dài 10,5 m quét rộng hơn) */
+      for(let i=0;i<pts.length;i+=2) for(let j=0;j<a.length;j+=2) if((pts[i]-a[j])**2+(pts[i+1]-a[j+1])**2<lim*lim) return true; }
+    return false; }
+  const jStraight=p=>{ const n=p.length; if(n<8) return false; const ax=p[2]-p[0], az=p[3]-p[1], bx=p[n-2]-p[n-4], bz=p[n-1]-p[n-3], la=Math.hypot(ax,az), lb=Math.hypot(bx,bz); return la>.1 && lb>.1 && (ax*bx+az*bz)/(la*lb)>.94; };   /* đổi hướng < 20° */
+  function jEnter(nd, c, pts){ if(!nd.occs) nd.occs=[]; const k=nd.occs.findIndex(q=>q.c===c); const rec={c, pts, t:W.T??0}; if(k>=0) nd.occs[k]=rec; else nd.occs.push(rec); nd.occ=c; nd.occT=rec.t; }
+  function jLeave(nd, c){ if(nd.occs){ const k=nd.occs.findIndex(q=>q.c===c); if(k>=0) nd.occs.splice(k,1); } if(nd.occ===c) nd.occ=null; }
+  function overlapsVeh(c){ const x=c.g.position.x, z=c.g.position.z, fx=Math.sin(c.h), fz=Math.cos(c.h); for(const o of obs){ if(!o.veh || o.self===c) continue; const dx=o.x-x, dz=o.z-z; if(dx*dx+dz*dz>49) continue; if(Math.abs(dx*fx+dz*fz)<c.hl+o.hl && Math.abs(dx*fz-dz*fx)<c.hw+o.hw) return true; } return false; }
+  function curveLimit(c, vt){ const B=c.B, s0=c.s, la=Math.min(120, Math.max(34, c.v*c.v/6+12)); for(let i=bufAt(B,s0,_o).i; i<B.cum.length && B.cum[i]<s0+la; i++){   /* tầm nhìn cua tăng theo v² (phanh 3 m/s²) */ const d=Math.max(0,B.cum[i]-s0); vt=Math.min(vt, Math.sqrt(B.vc[i]*B.vc[i]+2*3*d)); } return vt; }
 
   function updCar(c, dt){ const B=c.B;
     if(B.cum[B.cum.length-1]-c.s<70) extend(c);
-    let vt=curveLimit(c, Math.min(c.e ? c.e.vmax : 10, 13)*c.top);
+    let vt=curveLimit(c, Math.min(c.e ? c.e.vmax : 10, 13)*c.top*(c.sk||1)); c.odo=(c.odo||0)+c.v*dt;
     // nhường nhau ở giao lộ (ô giao có ≥ 3 nhánh: mỗi lúc 1 xe đi qua)
-    for(const m of B.marks){ const nd=m.nd; if(nd.deg<3 || c.siren) continue;   /* xe hú còi: không chờ lượt ở giao lộ */ const d=m.s-c.s; if(d<-nd.R-2){ if(c.hold===nd){ if(nd.occ===c) nd.occ=null; c.hold=null; } continue; }
-      if(c.hold===nd) continue; if(d>nd.R+18) break;
-      const busy=nd.occ && nd.occ!==c && nd.occ.active && (W.T??0)-nd.occT<9;
+    // nhường nhau ở giao lộ (≥ 3 nhánh). 16/11 tối (Bình: "kẹt xe, dòng xe rất chậm"): KHÔNG còn "mỗi lúc 1 xe" – nhiều xe cùng qua nếu đường đi
+    //  qua ô giao KHÔNG cắt nhau (đi thẳng 2 chiều, rẽ phải song song, xe nối đuôi cùng làn vào); đường cắt ngang / nhập cùng làn ra → chờ lượt.
+    //  Các ô giao liền kề dọc đường (cách < R1+R2+8 m) xét & giữ chỗ cùng lúc. Góc cua gắt (ô giao ảo) vẫn mỗi lúc 1 xe.
+    if(!c.holds) c.holds=[];
+    for(let hi=c.holds.length-1; hi>=0; hi--){ const h=c.holds[hi]; if(h.s-c.s < -h.nd.R-2-c.hl || !B.marks.includes(h.m)){   /* nhả chỗ khi cả đuôi xe đã ra khỏi ô giao */ jLeave(h.nd, c); if(c.hold===h.nd) c.hold=null; c.holds.splice(hi,1); } }
+    if(!c.siren) for(let mi=0; mi<B.marks.length; mi++){ const m=B.marks[mi], nd=m.nd; if(nd.deg<3) continue; const d=m.s-c.s; if(d<-nd.R-2) continue;   /* xe hú còi: không chờ lượt ở giao lộ */
+      if(c.holds.some(h=>h.nd===nd)) continue; if(d>nd.R+Math.max(18, c.v*c.v/8+8)) break;   /* xe nhanh thấy giao lộ bận từ xa hơn (phanh 4 m/s²) */
+      const grp=[m]; for(let mj=mi+1; mj<B.marks.length; mj++){ const m2=B.marks[mj], g0=grp[grp.length-1]; if(m2.nd.deg<3) continue; if(m2.s-g0.s < g0.nd.R+m2.nd.R+8) grp.push(m2); else break; }
+      const paths=grp.map(g=>jPath(c, g)), busy=grp.some((g,k)=>jConflict(g.nd, c, paths[k]));
       if(busy){ vt=Math.min(vt, Math.sqrt(2*4*Math.max(0, d-nd.R-1.5))); break; }
-      if(d<nd.R+6){ if(c.hold && c.hold!==nd && c.hold.occ===c) c.hold.occ=null; nd.occ=c; nd.occT=W.T??0; c.hold=nd; } break; }
+      if(d<nd.R+6){ grp.forEach((g,k)=>{ jEnter(g.nd, c, paths[k]); if(!c.holds.some(h=>h.nd===g.nd)) c.holds.push({nd:g.nd, s:g.s, m:g}); }); c.hold=nd; } break; }
     // 🚌🚕 tấp lề đón khách: xe buýt ~ mỗi 15–40 s, taxi ~ 25–60 s – chỉ trên đoạn thẳng đô thị, xa giao lộ
     if(c.pull){ const Q=c.pull;
-      if(Q.st==='in'){ vt=Math.min(vt, Math.sqrt(2*2.2*Math.max(0, Q.s-c.s))); if(Q.s-c.s<14) c.latT=Q.lat; if(Q.s-c.s<.6 && c.v<.35){ Q.st='stop'; Q.t=c.model==='bus'?8:5; if(ped && ped.board) ped.board(c); } }
-      else if(Q.st==='stop'){ vt=0; Q.t-=dt; if(Q.t<=0){ Q.st='out'; c.latT=0; } }
-      else if(Math.abs(c.lat)<.15){ c.pull=null; c.stopIn=(c.model==='bus'?22:40)*(.7+RND()*.8); } }
-    else if(c.stopIn<1e8 && c.e && ZW[c.e.zone]>=.7){ c.stopIn-=dt;
-      if(c.stopIn<=0){ const s1=c.s+30, nm=c.B.marks.find(m=>m.s>c.s), lat=c.e.w>=18 ? 1.5 : Math.min(1.1, c.e.w/2-c.e.off-c.hw-.1);
+      if(Q.st==='in'){ vt=Math.min(vt, Math.sqrt(2*2.2*Math.max(0, Q.s-c.s))); if(Q.s-c.s<14) c.latT=Q.lat; if(Q.s-c.s<.6 && c.v<.35){ Q.st='stop'; Q.t=c.model==='bus'?5:4; if(c.model==='bus'){ busLog.push(Math.round(c.odo)); if(busLog.length>60) busLog.shift(); c.odo=0; } if(ped && ped.board) ped.board(c); } }
+      else if(Q.st==='stop'){ vt=0; Q.t-=dt; if(Q.t<=0){ if(cars.some(o=>o.active && o.passing===c)) Q.t=.4; else { Q.st='out'; c.latT=0; } } }   /* có xe đang vượt bên cạnh → chờ nó qua rồi mới tách lề */
+      else if(Math.abs(c.lat)<.15){ c.pull=null; c.stopIn=c.model==='bus' ? 0 : 40*(.7+RND()*.8); c.gapNeed=BUS_GAP*(1+RND()*.2); } }
+    else if(c.stopIn<1e8 && c.e && ZW[c.e.zone]>=.7){ c.stopIn-=dt; const bus=c.model==='bus';
+      if(c.stopIn<=0 && (!bus || c.odo>=c.gapNeed || (c.odo>=BUS_KEY && keyNear(c)))){   /* 🚌 trạm cách nhau ≥ ~450 m dọc tuyến; gần điểm quan trọng (ga, sân bay, cổng vùng, trung tâm) cho dừng từ 250 m */ const s1=c.s+30, nm=c.B.marks.find(m=>m.s>c.s), lat=c.e.w>=18 ? 1.5 : Math.min(1.1, c.e.w/2-c.e.off-c.hw-.1);
         const curb=c.e.walk && c.e.walk[c.dir];   // chỉ tấp lề phía có vỉa hè (có người đi bộ)
-        if(curb && (!nm || nm.s-s1>16) && lat>.4 && c.B.cum[c.B.cum.length-1]>s1+6) c.pull={st:'in', s:s1, lat}; else c.stopIn=5; } }
+        if(curb && (!nm || nm.s-s1>16) && lat>.4 && c.B.cum[c.B.cum.length-1]>s1+6) c.pull={st:'in', s:s1, lat}; else c.stopIn=bus?1.2:5; } }
     // vượt xe đang tấp lề (đường ≥ 18 m: 2 làn mỗi chiều) – sang làn trong, qua hẳn mới trở về
     if(c.blk===5 && c.blkO && c.e && c.e.w>=18 && !c.pull && !c.passing){ c.passing=c.blkO; c.latT=-1.8; }
     if(c.passing){ const o=c.passing, a=(o.g.position.x-c.g.position.x)*Math.sin(c.h)+(o.g.position.z-c.g.position.z)*Math.cos(c.h); if(!o.active || a<-(c.hl+o.hl+2) || (!o.pull && a<0)){ c.passing=null; c.latT=0; } }
@@ -293,9 +348,15 @@ export async function make(W, zones={}){
       if(!Tg.arrived && d<Tg.stop){ Tg.arrived=true; if(Tg.onArrive) try{ Tg.onArrive(c); }catch(e){ console.warn(e); } }
       if(Tg.arrived){ vt=0; c.latT=c.e ? clamp(c.e.w/2-c.e.off-c.hw-.15, 0, 1.6) : 0; } }
     vt=Math.min(vt, limitFor(c));
-    c.v+=clamp(vt-c.v, -7*dt, 2.6*dt); if(c.v<0) c.v=0; c.s+=c.v*dt;
-    if(c.ghost>0) c.ghost-=dt;
-    if(c.v<.1 && (c.blk===3 || c.blk===4)){ c.stuck+=dt; if(c.stuck>(c.siren?1.5:c.blk===4?4:9)){ c.ghost=2.5; c.stuck=0; } } else if(c.v>.6) c.stuck=0;   // kẹt lâu (mặt đối mặt) → lách qua · xe hú còi lách sớm
+    c.v+=clamp(vt-c.v, -7*dt, 2.6*Math.sqrt(c.sk||1)*dt); if(c.v<0) c.v=0; c.s+=c.v*dt;
+    if(c.ghost>0){ c.ghost-=dt; if(c.ghost<=0 && overlapsVeh(c)) c.ghost=.25; }   /* chỉ thôi "lách" khi đã tách hẳn xe kia */
+    // 2 xe chặn đầu nhau (thân xe này nằm trên đường đi xe kia và ngược lại): xe số hiệu lớn hơn LÙI chậm 2–3 m nhường đường (nếu sau lưng trống)
+    if(c.rev>0){ c.rev-=dt; const back=Math.min(1.3*dt, c.s-(B.cum[0]+1)); if(back>0 && !behindBlocked(c)) c.s-=back; else c.rev=0; c.v=0; placeCar(c, dt); return; }
+    if(!c.siren && c.v<.1 && c.stuck>3 && (c.blk===3 || c.blk===4) && c.blkO && c.blkO.active!==false && !c.blkO.special){ const o=c.blkO; if((o.blkO===c || o.v<.1) && c.i>o.i && !c.revDone){ c.rev=2.2; c.revDone=true; c.stuck=0; } }
+    if(c.v>2) c.revDone=false;
+    if(c.v<.1 && (c.blk===3 || c.blk===4)){ c.stuck+=dt; if(c.stuck>(c.siren?1.5:c.blk===4?5:9)){ c.stuck=0;
+        if(!c.siren && !c.target && !inView(c.g.position.x, c.g.position.y, c.g.position.z, 4)){ spawnCar(c, false); return; }   // kẹt cứng NGOÀI tầm mắt → về bãi, sinh lại chỗ khác (không lách xuyên)
+        c.ghost=2.5; } } else if(c.v>.6) c.stuck=0;   // kẹt lâu (mặt đối mặt) → lách qua · xe hú còi lách sớm
     if(c.blk===2 && c.v<.3){ c.honk+=dt; if(c.honk>2.2 && horn<=0 && Math.hypot(c.g.position.x-P.x, c.g.position.z-P.z)<16){ horn=9; toast('🚗 Bíp bíp! Xe đang chờ – bước lên vỉa hè nhé.', 2200); } } else c.honk=0;
     trimBuf(c); placeCar(c, dt); }
 
@@ -331,7 +392,7 @@ export async function make(W, zones={}){
     try{ compactGroup(W, g); }catch(e){}   // gộp theo vật liệu → ~8 lượt vẽ mỗi xe
     g.userData.dynamic=true; scene.add(g);
     const HL=kind==='fire'?4.3:kind==='ambulance'?3.1:2.6, HW=kind==='fire'?1.3:1.1;
-    const s={kind, g, lamps, special:true, v:0, h:0, s:0, B:newBuf(), plan:r.edges.slice(), active:true, hl:HL, hw:HW, done:false, arrived:false, t:0, ghost:0, blk:0, route:r, stopAt, siren:!civ, hazard:false, top:opt.top??1};
+    const s={kind, g, lamps, special:true, sk:(W.SPEED && (W.SPEED.botCar ?? W.SPEED.car))||1, v:0, h:0, s:0, B:newBuf(), plan:r.edges.slice(), active:true, hl:HL, hw:HW, done:false, arrived:false, t:0, ghost:0, blk:0, route:r, stopAt, siren:!civ, hazard:false, top:opt.top??1};
     const first=s.plan.shift(); appendEdge(s, first.e, first.dir, 0); bufAt(s.B,1.5,_o2); s.h=Math.atan2(_o2.x-s.B.x[0], _o2.z-s.B.z[0]);
     const dyn={obj:g, hl:HL, hw:HW, head:()=>s.h, on:()=>s.active, name:{police:'xe cảnh sát', fire:'xe cứu hoả', ambulance:'xe cứu thương'}[kind]||'xe'}; if(W.DYN) W.DYN.push(dyn);
     // đi tiếp tới điểm khác (vd. về trạm) từ chỗ đang đỗ
@@ -340,7 +401,7 @@ export async function make(W, zones={}){
     s.remove=()=>{ s.active=false; scene.remove(g); const i=specials.indexOf(s); if(i>=0) specials.splice(i,1); if(W.DYN){ const j=W.DYN.indexOf(dyn); if(j>=0) W.DYN.splice(j,1); } };
     specials.push(s); return s; }
   function updSpecial(s, dt){ s.t+=dt; const B=s.B; if(!s.done && B.cum[B.cum.length-1]-s.s<70){ if(s.plan.length) extend(s); else s.done=true; }
-    let vt=curveLimit(s, 15*(s.top||1)); const left=B.cum[B.cum.length-1]-s.s; if(s.done) vt=Math.min(vt, Math.sqrt(2*3*Math.max(0,left-1))); vt=Math.min(vt, limitFor(s));
+    let vt=curveLimit(s, 15*(s.top||1)*(s.sk||1)); const left=B.cum[B.cum.length-1]-s.s; if(s.done) vt=Math.min(vt, Math.sqrt(2*3*Math.max(0,left-1))); vt=Math.min(vt, limitFor(s));
     if(s.stopAt && !s.stopNow && Math.hypot(s.stopAt.x-s.g.position.x, s.stopAt.z-s.g.position.z)<s.stopAt.stop) s.stopNow=true;
     if(s.stopNow){ vt=0; if(s.v<.05) s.arrived=true; }
     if(s.ghost>0) s.ghost-=dt; if(s.v<.2 && (s.blk===3 || s.blk===4)){ s.stuck=(s.stuck||0)+dt; if(s.stuck>1.5){ s.ghost=3; s.stuck=0; } } else s.stuck=0;   // xe ưu tiên kẹt sau xe khác → lách qua
@@ -475,7 +536,7 @@ export async function make(W, zones={}){
     function laneEnd(p){ const end=p.L.ends[p.dir>0?1:0], opts=end.links; const pick=(opts.length && RND()<.8) ? opts[Math.floor(RND()*opts.length)] : null;
       if(!pick){ p.dir=-p.dir; return; } if(pick.cross){ p.cross={zb:pick.zb, from:end, to:pick.to, t:0}; p.state='curb'; p.wait=0; return; } enterLane(p, pick.to); }
     function enterLane(p, to){ p.L=to.L; p.dir=to.at===0?1:-1; p.s=to.at===0?0:p.L.len; p.state='walk'; }
-    function safeToCross(zb){ for(const c of cars){ if(!c.active) continue; const dx=c.g.position.x-zb.mx, dz=c.g.position.z-zb.mz, d=Math.hypot(dx,dz); if(d>30 || Math.abs(c.g.position.y-zb.y)>3) continue; if(d<zb.e.w/2+3) return false;
+    function safeToCross(zb){ for(const c of cars){ if(!c.active) continue; const dx=c.g.position.x-zb.mx, dz=c.g.position.z-zb.mz, d=Math.hypot(dx,dz); if(d>55 ||   /* xe nhanh hơn → nhìn xa hơn trước khi qua đường */ Math.abs(c.g.position.y-zb.y)>3) continue; if(d<zb.e.w/2+3) return false;
         if(-(dx*Math.sin(c.h)+dz*Math.cos(c.h))>0 && c.v>.5) return false; } for(const s of specials) if(Math.hypot(s.g.position.x-zb.mx, s.g.position.z-zb.mz)<40) return false; return true; }
     const ahead=(p,fx,fz)=>{ let lim=99; const test=(x,z,rr,v,same)=>{ const dx=x-p.x, dz=z-p.z; if(dx*dx+dz*dz>3) return; const a=dx*fx+dz*fz, l=dx*(-fz)+dz*fx; if(a<=.05 || a>.9+rr || Math.abs(l)>.3+rr) return; const lv=same?Math.max(0,v*.92):0; if(lv<lim) lim=lv; };
       if(!W.inside) test(P.x,P.z,.34,0,false); for(const q of peds){ if(q===p || q.state==='off' || q.lead===p || (p.lead && (q===p.lead || q.lead===p.lead))) continue; test(q.x,q.z,.3,q.v,(Math.sin(q.hd)*fx+Math.cos(q.hd)*fz)>.5); } return lim; };
@@ -567,7 +628,7 @@ export async function make(W, zones={}){
       peds:pb, lanes:ped?ped.LANES.length:0, zebras:ped?ped.ZEB.length:0, dogs:ped?ped.dogs.length:0, specials:specials.length, msNet:Math.round(tNet), msAll:Math.round(tAll)}; }
   console.info(`[QC World V2] giao thông: ${NODES.length} nút · ${edges.length} cạnh · ${(edges.reduce((s,e)=>s+e.len,0)/1000).toFixed(1)} km đường · ${POOL} xe · ${ped?ped.peds.length:0} người đi bộ – ${Math.round(tAll)} ms`);
   const IX=NODES.filter(n=>n.deg>=3);
-  return {roadNet, cars, specials, spawnVehicle, dispatch, release, nearestPatrol, buildFireTruck, IX, sig:()=>'G', onRoad, route, nearest, stats, ped,
+  return {roadNet, cars, specials, spawnVehicle, dispatch, release, nearestPatrol, buildFireTruck, IX, sig:()=>'G', onRoad, route, nearest, stats, ped, busLog:()=>busLog.slice(), keyPts:()=>keyPts().length,
     mayStep:(x0,z0,x1,z1)=>{ if(!onRoad(x1,z1)) return true; for(const c of cars) if(c.active && Math.hypot(c.g.position.x-x1, c.g.position.z-z1)<10) return false; return true; },
     setEnabled(on){ enabled=!!on; if(!on){ for(const c of cars) hideCar(c); if(ped) ped.onTeleport(); PEDS.length=0; } }, get enabled(){ return enabled; }};
 }

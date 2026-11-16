@@ -298,8 +298,8 @@ export async function make(W, ctx = {}){
     sign(signTex(1024, 160, '#0b3d5c', [[`🚝 ${st.name}`, `800 64px ${FONT}`, '#fff', .5]]), 7, 1.1, 650, MY + 4.4, st.z - 13.6, Math.PI, .5);
     INTER.push({x:650, z:st.gz, r:4, prio:.85, label:`🚝 ${st.name} – đi Palm Monorail (E)`, action:() => monoMenu(st)}); }
   const mono = new THREE.Group(); mono.userData.dynamic = true; { const k = Kit(); for(let c = 0; c < 3; c++){ k.add(AK.roundedBox(2.8, 2.6, 9.2, .6, 2), MAT.white, 0, MY + 2.1, c * 9.6); k.add(B(2.86, .9, 8), MAT.navy, 0, MY + 2.4, c * 9.6); } k.build(mono); } mono.position.x = 650; scene.add(mono);
-  { let z = MZ0 + 20, dir = 1, wait = 0, last = null; HOOK.onFrame.push(dt => { dt = Math.min(dt || 1 / 60, .1); if(wait > 0){ wait -= dt; return; } z += dir * 14 * dt;
-      for(const st of MST) if(st !== last && Math.abs(z - st.z) < 14 * dt){ wait = 6; last = st; }
+  { let z = MZ0 + 20, dir = 1, wait = 0, last = null; HOOK.onFrame.push(dt => { dt = Math.min(dt || 1 / 60, .1); if(wait > 0){ wait -= dt; return; } const mv = 14 * ((W.SPEED && W.SPEED.rail) || 1); z += dir * mv * dt;   /* 16/11 tối: × hệ số tàu chung W.SPEED.rail (V2 ×1,7) */
+      for(const st of MST) if(st !== last && Math.abs(z - st.z) < mv * dt){ wait = 6; last = st; }
       if(z > MZ1 - 26){ z = MZ1 - 26; dir = -1; wait = 6; last = null; } if(z < MZ0 + 6){ z = MZ0 + 6; dir = 1; wait = 6; last = null; } mono.position.z = z - 9.6; }); }
   function monoMenu(from){ if(!ui || !ui.modal) return; const m = ui.modal(`🚝 ${from.name} · Palm Monorail`); m.body.innerHTML = '<p class="muted">Tàu điện một ray trên cao chạy dọc thân cọ ra tận Khách sạn Vòm Vương Miện. Vé 8 💰.</p><div class="grid"></div>'; const g = m.body.querySelector('.grid');
     for(const st of MST){ if(st === from) continue; const b = document.createElement('button'); b.className = 'btn'; b.textContent = `🚉 ${st.name}`; b.onclick = () => { m.close(); pay(8, `vé Monorail tới ${st.name}`, () => { teleport(656, st.gz, 656, st.gz + (st.z > 1000 ? 30 : 20)); toast(`🚝 Đã tới ${st.name}!`, 2500); }); }; g.appendChild(b); } }

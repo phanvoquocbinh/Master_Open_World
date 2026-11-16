@@ -158,23 +158,28 @@ export function makeVehicles(W, S, save){
       if(t>1.9){ HOOK.vehicle=null; me.g.rotation.set(0, face, 0); } }}; }
   function drive(dt, inp){
     const r=ride, o=r.obj, ud=o.userData, boat=r.type==='boat';
-    const road=!boat && onRoad(P.x,P.z,.5);
-    const vmax=(r.type==='car'?19*(V.carSpeed[S.carModel]||1):r.type==='bike'?14:r.type==='bicycle'?5:11)*(boat||road||r.type==='bicycle'?1:.55)*(inp.boost?1.18:1);
-    const acc=r.type==='car'?6.5:r.type==='bike'?7:r.type==='bicycle'?5:4;
+    const road=!boat && (onRoad(P.x,P.z,.5) || !!(W.V2 && W.roadNet && W.roadNet.onRoad(P.x, P.z, P.y??null, 1)));   /* V2: đường mới nằm trong W.roadNet (onRoad cũ chỉ biết phố V1 → trước đây xe V2 luôn bị tính là 'ngoài đường' ×0,55) */
+    /* 16/11 tối: hệ số tốc độ chung W.SPEED (chỉ V2 – ?v1 không có bảng → 1): ô tô ×1,5 · xe máy ×1,35 · xe đạp ×1,2; ga/phanh tăng theo √hệ số để vẫn dễ lái */
+    const SPD=W.SPEED, K=SPD ? ((r.type==='car'?SPD.car:r.type==='bike'?SPD.moto:r.type==='bicycle'?SPD.bike:1)||1) : 1, kA=Math.sqrt(K);
+    const vmax=(r.type==='car'?19*(V.carSpeed[S.carModel]||1):r.type==='bike'?14:r.type==='bicycle'?5:11)*K*(boat||road||r.type==='bicycle'?1:.55)*(inp.boost?1.18:1);
+    const acc=(r.type==='car'?6.5:r.type==='bike'?7:r.type==='bicycle'?5:4)*kA;
     if(!inp.free){ inp.iz=0; inp.ix=0; }
-    if(inp.iz>0) r.v+=acc*dt; else if(inp.iz<0) r.v-= (r.v>0?13:acc*.6)*dt; else r.v-=Math.sign(r.v)*Math.min(Math.abs(r.v), (boat?1.5:3)*dt);
-    if(r.v>vmax) r.v=Math.max(vmax, r.v-8*dt); r.v=Math.max(r.v,-4);
+    if(inp.iz>0) r.v+=acc*dt; else if(inp.iz<0) r.v-= (r.v>0?13*kA:acc*.6)*dt; else r.v-=Math.sign(r.v)*Math.min(Math.abs(r.v), (boat?1.5:3)*dt);
+    if(r.v>vmax) r.v=Math.max(vmax, r.v-Math.max(8, acc+1)*dt); r.v=Math.max(r.v,-4);   /* ga mạnh hơn mức hãm 8 m/s² thì xe từng 'nhích' quá tốc độ tối đa */
     const steerRate=(r.type==='bike'?1.9:r.type==='car'?1.5:1.1)*clamp(Math.abs(r.v)/5,0,1)*Math.sign(r.v||1);
     r.h-=inp.ix*steerRate*dt;
     const ox=P.x, oz=P.z;
-    P.px=P.x; P.pz=P.z; P.x+=Math.sin(r.h)*r.v*dt; P.z+=Math.cos(r.h)*r.v*dt;
+    P.px=P.x; P.pz=P.z;
+    // chạy nhanh: chia nhỏ bước (≤ 0,45 m/bước) để va chạm không "xuyên" cột, tường mỏng, xe khác
+    const nSub=(boat || !SPD) ? 1 : Math.min(6, Math.max(1, Math.ceil(Math.abs(r.v*dt)/.45)));
+    if(boat){ P.x+=Math.sin(r.h)*r.v*dt; P.z+=Math.cos(r.h)*r.v*dt; }
     if(boat){
       const a=Math.atan2(P.z,P.x), rr=Math.hypot(P.x,P.z), minR=edgeR(a)+2;
       if(rr<minR){ P.x*=minR/rr; P.z*=minR/rr; r.v*=.6; }
       if(rr>190){ P.x*=190/rr; P.z*=190/rr; r.v*=.5; }
       const pr=V.pier; if(pr && P.x>pr.x0-1.6 && P.x<pr.x1+1.6 && P.z>pr.z0-1.6 && P.z<pr.z1){ P.x=ox; P.z=oz; r.v*=-.3; }
     } else {
-      HOOK.bumped=null; resolve(P, ud.radius, true);
+      HOOK.bumped=null; for(let k=0;k<nSub;k++){ P.x+=Math.sin(r.h)*r.v*dt/nSub; P.z+=Math.cos(r.h)*r.v*dt/nSub; resolve(P, ud.radius, true); if(HOOK.bumped) break; }
       if(HOOK.bumped){ const sp=Math.abs(r.v), what=HOOK.bumped.name||'xe'; HOOK.bumped=null;   // đâm vào xe khác (xe buýt, taxi…)
         if((r.type==='bike'||r.type==='bicycle') && sp>5.5){ crash(what); return; }
         if(sp>3){ r.v*=-.25; toast(`💥 Va chạm với ${what}!`, 1600); } else r.v*=.3; }

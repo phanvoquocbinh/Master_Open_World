@@ -450,8 +450,8 @@ export async function make(W, ctx = {}){
       for(const z of [-3.2, 3.2]) k.add(new THREE.BoxGeometry(2.2, .5, 1.6), MAT.dark, 0, .5, z);
       if(c === 0){ k.add(new THREE.BoxGeometry(2.4, 1.6, 1.4), red, 0, 1.3, 5.2); k.add(new THREE.CylinderGeometry(.3, .3, .2, 12), sm(0xfff3b0, .3, 0, {emissive:0xfff3b0, emissiveIntensity:.8}), 0, 1.6, 5.95, Math.PI / 2, 0, 0); }
       k.build(g); scene.add(g); CARS.push(g); W.DYN && W.DYN.push({obj:g, hw:1.45, hl:5, head:() => g.userData.h || 0, on:() => true, name:'Tàu bánh răng'}); }
-    let s = STATIONS[0].i, wait = 0, lastSt = null; const speed = 9;
-    HOOK.onFrame.push(dt => { const p = W.P, near = (p.x + 550) ** 2 + (p.z + 125) ** 2 < 520 ** 2; if(!near && R() < .7) return;
+    let s = STATIONS[0].i, wait = 0, lastSt = null; const speed0 = 9;
+    HOOK.onFrame.push(dt => { const speed = speed0 * ((W.SPEED && W.SPEED.rail) || 1);   /* 16/11 tối: × hệ số tàu W.SPEED.rail (V2 ×1,7) */ const p = W.P, near = (p.x + 550) ** 2 + (p.z + 125) ** 2 < 520 ** 2; if(!near && R() < .7) return;
       if(wait > 0) wait -= dt; else { s = (s + speed * dt) % NP; for(const S of STATIONS) if(S !== lastSt && Math.abs(((s - S.i + NP) % NP)) < speed * dt + .1){ wait = 7; lastSt = S; } }
       for(let c = 0; c < CARS.length; c++){ const f = (s - c * 10.6 + NP * 2) % NP, i = Math.floor(f), t = f - i, a = PATH[i], b = PATH[(i + 1) % NP], g = CARS[c];
         const x = a[0] + (b[0] - a[0]) * t, z = a[1] + (b[1] - a[1]) * t, y = RY[i] + (RY[(i + 1) % NP] - RY[i]) * t, h = Math.atan2(b[0] - a[0], b[1] - a[1]);
