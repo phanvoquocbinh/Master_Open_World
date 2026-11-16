@@ -49,10 +49,11 @@ export function makeLift(W, o){
   const steel=new THREE.MeshStandardMaterial({color:0x9aa3ad, metalness:.85, roughness:.3}), accent=new THREE.MeshStandardMaterial({color:o.color??0xd8b25a, metalness:.9, roughness:.25});
   const glass=new THREE.MeshPhysicalMaterial({color:0xcfe9f5, roughness:.05, metalness:.1, transparent:true, opacity:.22, depthWrite:false, side:THREE.DoubleSide});
   const add=(geo,mat,x,y,z,parent=g)=>{ const m=new THREE.Mesh(geo,mat); m.position.set(x,y,z); m.userData.dynamic=true; parent.add(m); return m; };
-  // giếng: 4 trụ góc + kính 3 mặt (sau, trái, phải) + khung cửa từng tầng
-  const SH=yTop-yBot; for(const sx of [-1,1]) for(const sz of [-1,1]) add(new THREE.BoxGeometry(.14,SH,.14), steel, sx*(w/2+.07), yBot+SH/2, sz*(d/2+.07));
-  add(new THREE.PlaneGeometry(w,SH), glass, 0, yBot+SH/2, -d/2-.05); for(const sx of [-1,1]){ const p=add(new THREE.PlaneGeometry(d,SH), glass, sx*(w/2+.05), yBot+SH/2, 0); p.rotation.y=Math.PI/2; }
-  add(new THREE.BoxGeometry(w+.5,.25,d+.5), steel, 0, yTop+.12, 0);
+  // 16/11 tối ưu lượt vẽ: phần tĩnh gộp thành 3 khối (thép / nhấn / kính), cửa + bảng số + nút gọi dùng InstancedMesh → ~13 lượt vẽ mỗi thang dù bao nhiêu tầng
+  const SG=[], AG=[], GG=[], put=(arr,geo,x,y,z,ry=0)=>{ geo=geo.index?geo.toNonIndexed():geo; if(ry) geo.rotateY(ry); geo.translate(x,y,z); arr.push(geo); };
+  const SH=yTop-yBot; for(const sx of [-1,1]) for(const sz of [-1,1]) put(SG,new THREE.BoxGeometry(.14,SH,.14), sx*(w/2+.07), yBot+SH/2, sz*(d/2+.07));
+  put(GG,new THREE.PlaneGeometry(w,SH), 0, yBot+SH/2, -d/2-.05); for(const sx of [-1,1]) put(GG,new THREE.PlaneGeometry(d,SH), sx*(w/2+.05), yBot+SH/2, 0, Math.PI/2);
+  put(SG,new THREE.BoxGeometry(w+.5,.25,d+.5), 0, yTop+.12, 0);
   // cabin
   const cab=new THREE.Group(); g.add(cab);
   add(new THREE.BoxGeometry(w-.08,.12,d-.08), new THREE.MeshStandardMaterial({color:0x2b2f36, roughness:.6}), 0,-.06,0, cab);
@@ -68,20 +69,26 @@ export function makeLift(W, o){
   const doorMat=new THREE.MeshStandardMaterial({color:0xc9ced4, metalness:.9, roughness:.22});
   const L={name:o.name??'Thang máy', floors:fl, at:o.start??0, target:-1, ph:'idle', open:0, t:0, y:fl[o.start??0].y, rider:false, idle:0, hidePanel:false, doors:[], segs:[]};
   const dw=Math.min(1.3,w-.5);
-  fl.forEach((f,i)=>{ const lv={y:f.y, l:add(new THREE.BoxGeometry(dw/2,2.2,.06), doorMat, -dw/4, f.y+1.1, d/2+.08), r:add(new THREE.BoxGeometry(dw/2,2.2,.06), doorMat, dw/4, f.y+1.1, d/2+.08)};
-    add(new THREE.BoxGeometry(dw+.3,.14,.12), accent, 0, f.y+2.27, d/2+.1); for(const sx of [-1,1]) add(new THREE.BoxGeometry(.12,2.3,.12), accent, sx*(dw/2+.09), f.y+1.15, d/2+.1);
-    for(const sx of [-1,1]) add(new THREE.BoxGeometry((w-dw)/2-.02,2.3,.06), steel, sx*((w+dw)/4+.01), f.y+1.15, d/2+.08);   // vách 2 bên cửa
-    const sign=add(new THREE.PlaneGeometry(.9,.22), new THREE.MeshBasicMaterial({map:it, transparent:true}), 0, f.y+2.55, d/2+.12);
+  const NF=fl.length, DIM=new THREE.InstancedMesh(new THREE.BoxGeometry(dw/2,2.2,.06), doorMat, NF*2), SIM=new THREE.InstancedMesh(new THREE.PlaneGeometry(.9,.22), new THREE.MeshBasicMaterial({map:it, transparent:true}), NF);
+  const bg=new THREE.CylinderGeometry(.06,.06,.03,16); bg.rotateX(Math.PI/2); const BIM=new THREE.InstancedMesh(bg, new THREE.MeshBasicMaterial({color:0xffffff}), NF), _m=new THREE.Matrix4(), _c=new THREE.Color();
+  for(const im of [DIM,SIM,BIM]){ im.userData.dynamic=true; im.frustumCulled=false; g.add(im); }
+  const doorAt=(i,op)=>{ const y=fl[i].y+1.1; _m.makeTranslation(-dw/4-op*(dw/2-.04), y, d/2+.08); DIM.setMatrixAt(i*2,_m); _m.makeTranslation(dw/4+op*(dw/2-.04), y, d/2+.08); DIM.setMatrixAt(i*2+1,_m); DIM.instanceMatrix.needsUpdate=true; };
+  fl.forEach((f,i)=>{ const lv={y:f.y, op:-1}; doorAt(i,0);
+    put(AG,new THREE.BoxGeometry(dw+.3,.14,.12), 0, f.y+2.27, d/2+.1); for(const sx of [-1,1]) put(AG,new THREE.BoxGeometry(.12,2.3,.12), sx*(dw/2+.09), f.y+1.15, d/2+.1);
+    for(const sx of [-1,1]) put(SG,new THREE.BoxGeometry((w-dw)/2-.02,2.3,.06), sx*((w+dw)/4+.01), f.y+1.15, d/2+.08);   // vách 2 bên cửa
+    _m.makeTranslation(0, f.y+2.55, d/2+.12); SIM.setMatrixAt(i,_m);
     // nút gọi bên phải cửa
-    const btn=add(new THREE.CylinderGeometry(.06,.06,.03,16), new THREE.MeshStandardMaterial({color:0x333, emissive:0xffd166, emissiveIntensity:.0}), dw/2+.32, f.y+1.15, d/2+.12); btn.rotation.x=Math.PI/2; lv.btn=btn;
+    _m.makeTranslation(dw/2+.32, f.y+1.15, d/2+.12); BIM.setMatrixAt(i,_m); BIM.setColorAt(i,_c.set(0x3a3d44));
     // vách cửa (chặn khi cửa đóng) – bật/tắt bằng y0
     const [ax,az]=toW(-w/2,d/2+.08), [bx,bz]=toW(w/2,d/2+.08); lv.seg=W.addSeg(ax,az,bx,bz,.12,f.y-.3,f.y+2.4,`⇅ Cửa ${L.name} đang đóng – bấm E để gọi thang`); lv.y0=f.y-.3;
-    /* ngưỡng cửa: mặt đi liền từ sàn cabin ra 0,7 m ngoài cửa (sàn toà nhà có hụt chút cũng không rơi) */ { const [sx2,sz2]=toW(0,d/2+.3); W.addPlat(sx2,sz2,yaw,dw/2+.2,.42,f.y); add(new THREE.BoxGeometry(dw+.4,.04,.84), accent, 0, f.y-.015, d/2+.3); }
+    /* ngưỡng cửa: mặt đi liền từ sàn cabin ra 0,7 m ngoài cửa (sàn toà nhà có hụt chút cũng không rơi) */ { const [sx2,sz2]=toW(0,d/2+.3); W.addPlat(sx2,sz2,yaw,dw/2+.2,.42,f.y); put(AG,new THREE.BoxGeometry(dw+.4,.04,.84), 0, f.y-.015, d/2+.3); }
     L.doors.push(lv);
     const [ix,iz]=toW(dw/2+.3, d/2+1.1);
     INTER.push({x:ix, z:iz, r:2.2, prio:.9, when:()=>Math.abs(P.y-f.y)<1.2 && !(L.at===i && L.ph==='idle' && L.open>.95),
       label:'', action:()=>{ if(L.at===i && L.ph==='idle'){ L.wantOpen=true; } else L.go(i,false); }});
     const itx=INTER[INTER.length-1]; Object.defineProperty(itx,'label',{get(){ return L.at===i && L.ph==='idle' ? `⇅ Mở cửa ${L.name} (E)` : `⇅ Gọi ${L.name} – đang ở ${fl[L.at].name} (E)`; }}); });
+  for(const [arr,mat] of [[SG,steel],[AG,accent],[GG,glass]]) if(arr.length){ const mg=W.mergeGeometries?W.mergeGeometries(arr,false):null; if(mg) add(mg,mat,0,0,0); else arr.forEach(gg=>add(gg,mat,0,0,0)); }
+  SIM.instanceMatrix.needsUpdate=true; BIM.instanceMatrix.needsUpdate=true; if(BIM.instanceColor) BIM.instanceColor.needsUpdate=true;
   // vách giếng 3 mặt (toàn chiều cao)
   for(const [p,q] of [[[-w/2-.1,-d/2-.1],[w/2+.1,-d/2-.1]], [[-w/2-.1,-d/2-.1],[-w/2-.1,d/2+.1]], [[w/2+.1,-d/2-.1],[w/2+.1,d/2+.1]]]){ const [ax,az]=toW(...p), [bx,bz]=toW(...q); L.segs.push(W.addSeg(ax,az,bx,bz,.12,yBot,yTop,`⇅ Giếng ${L.name}`)); }
   // sàn cabin = mặt đứng chạy theo cabin
@@ -103,11 +110,12 @@ export function makeLift(W, o){
     else if(L.ph==='move'){ const ty=fl[L.target].y, dist=Math.abs(ty-L.y0), T=Math.max(1.6, dist/2.6); L.t+=dt; const k=Math.min(1,L.t/T); L.y=L.y0+(ty-L.y0)*ease(k);
       if(k>=1){ L.y=ty; L.at=L.target; L.target=-1; L.ph='idle'; L.wantOpen=true; if(L.rider){ HOOK.vehicle=null; P.y=L.y; P.ground=true; L.rider=false; if(toast) toast(`⇅ Đã tới ${fl[L.at].name}`, 1800); } drawSigns(); if(cur===L) showPanel(L); } }
     cab.position.y=L.y; L.plat.h=L.y;
-    L.doors.forEach((lv,i)=>{ const op=(i===L.at && L.ph==='idle')?L.open:0; lv.l.position.x=-dw/4-op*(dw/2-.04); lv.r.position.x=dw/4+op*(dw/2-.04); lv.seg.y0=op>.85?1e6:lv.y0; lv.btn.material.emissiveIntensity=(L.target===i)?2:0; });
+    let bc=false; L.doors.forEach((lv,i)=>{ const op=(i===L.at && L.ph==='idle')?L.open:0; if(op!==lv.op){ lv.op=op; doorAt(i,op); } lv.seg.y0=op>.85?1e6:lv.y0; const on=L.target===i; if(on!==lv.on){ lv.on=on; BIM.setColorAt(i,_c.set(on?0xffd166:0x3a3d44)); bc=true; } }); if(bc && BIM.instanceColor) BIM.instanceColor.needsUpdate=true;
+    g.visible=Math.abs(P.x-o.x)<170 && Math.abs(P.z-o.z)<170;
     lamp.material.emissiveIntensity=.8+(W.night||0)*1.4; };
   drawSigns(); LIFTS.push(L);
-  if(!hooked){ hooked=true; HOOK.onFrame.push((dt)=>{ dt=Math.min(dt||1/60,.1); for(const l of LIFTS){ if(Math.abs(P.x-l.cx)>140 || Math.abs(P.z-l.cz)>140){ if(l.ph==='move' || l.ph==='close') l.update(dt); continue; } l.update(dt); } }); }
-  L.cx=o.x; L.cz=o.z; return L; }
+  if(!hooked){ hooked=true; HOOK.onFrame.push((dt)=>{ dt=Math.min(dt||1/60,.1); for(const l of LIFTS){ if(Math.abs(P.x-l.cx)>170 || Math.abs(P.z-l.cz)>170){ if(l.ph==='move' || l.ph==='close') l.update(dt); else if(l.g.visible) l.g.visible=false; continue; } l.update(dt); } }); }
+  L.cx=o.x; L.cz=o.z; L.g=g; return L; }
 
 export function makeLiftBank(W, o){ const n=o.count??2, w=o.w??2.4, gap=o.gap??.6, c=Math.cos(o.yaw??0), s=Math.sin(o.yaw??0), out=[];
   for(let i=0;i<n;i++){ const lx=(i-(n-1)/2)*(w+gap+.3); out.push(makeLift(W, {...o, x:o.x+lx*c, z:o.z-lx*s, name:`${o.name??'Thang'} ${String.fromCharCode(65+i)}`, start:i%2?o.floors.length-1:(o.start??0)})); }
