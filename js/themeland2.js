@@ -51,7 +51,7 @@ export function makeLand2(T, K){
         /* ô nằm CHÌM trong thân một ngọn núi khác cao hơn → bỏ (nếu không, mặt gò thấp sẽ cắt ngang lòng hang rỗng của núi lớn, đâm qua đầu người ngồi tàu) */ if(MND.some(o2=>o2!==m && moundH(o2,qx,qz)>Math.max(hs[a],hs[b],hs[cc],hs[d])+.4)) continue; idx.push(a,cc,b,b,cc,d); }
     const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setAttribute('color',new THREE.Float32BufferAttribute(col,3)); g.setIndex(idx); g.computeVertexNormals(); g.computeBoundingSphere();
     const ms=new THREE.Mesh(g,rockMat); ms.castShadow=ms.receiveShadow=true; ms.userData.dynamic=true; ms.userData.noFar=true; gLand.add(ms);
-    const ring=[]; for(let i=0;i<=28;i++){ const a=i/28*TAU; ring.push([m.x+Math.cos(a)*m.rx*.99,m.z+Math.sin(a)*m.rz*.99]); } fence(ring,{vis:false, r:.3, msg:'⛰️ Vách núi dựng đứng – không leo được. Vào trong núi bằng tàu lượn nhé!'});
+    const ring=[]; for(let i=0;i<=48;i++){ const a=i/48*TAU; ring.push([m.x+Math.cos(a)*(m.rx+.8),m.z+Math.sin(a)*(m.rz+.8)]); } fence(ring,{vis:false, r:.3, msg:'⛰️ Vách núi dựng đứng – không leo được. Vào trong núi bằng tàu lượn nhé!'});
     BLK.push([m.x-m.rx-3,m.x+m.rx+3,m.z-m.rz-3,m.z+m.rz+3]); return ms; }
   // lòng núi rỗng (vỏ trong, nhìn từ bên trong): cách mặt núi 3,2 m, dưới thấp ngả màu theo ánh dung nham / đuốc
   function cavern(names,lo,hi,holes=[]){ const ms=names.map(n=>MOUNDS[n]), x0=Math.min(...ms.map(m=>m.x-m.rx)), x1=Math.max(...ms.map(m=>m.x+m.rx)), z0=Math.min(...ms.map(m=>m.z-m.rz)), z1=Math.max(...ms.map(m=>m.z+m.rz)), R=4, nx=Math.ceil((x1-x0)/R)+1, nz=Math.ceil((z1-z0)/R)+1, pos=[], col=[], idx=[], hs=[], c=new THREE.Color(), cl=new THREE.Color(lo), ch=new THREE.Color(hi);

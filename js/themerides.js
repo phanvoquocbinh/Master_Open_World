@@ -65,7 +65,7 @@ export function makeRides(T){
     // quầy vé (quầy mở, thấy nhân viên) bên cạnh
     const bx=o.bx??w+2.0, bz=o.bz||0; put(kN,boxM(2.6,1.05,.5),M.plasterC(0xf6efe2),bx,.525,bz+1.5); put(kN,cbox(2.8,.07,.8,.02),M.woodLight,bx,1.09,bz+1.5); put(kN,boxM(2.6,2.6,.2),M.plasterC(0xf6efe2),bx,1.3,bz-1.1); for(const e of [-1,1]) put(kN,boxM(.2,2.6,1.4),M.plasterC(0xf6efe2),bx+e*1.2,1.3,bz-.5);
     put(kN,boxM(3.2,.2,3.4),paint(col,.5),bx,2.72,bz+.3); put(kN,pln(2.4,.6),sign('🎟 QUẦY VÉ · '+price+' 💰',{fg:'#fff7e6', key:'tk', w:512, h:128, night:1.3, day:.3}),bx,2.3,bz+1.78);
-    { const [x0,z0]=at(bx-1.4,bz-1.3), [x1,z1]=at(bx+1.4,bz+1.8); boxes.push({x0:Math.min(x0,x1), x1:Math.max(x0,x1), z0:Math.min(z0,z1), z1:Math.max(z0,z1), msg:'🎟 Quầy vé '+name}); const [nx,nz]=at(bx,bz+.35), d=at(bx,bz+3); npc(nx,G0,nz,Math.atan2(d[0]-nx,d[1]-nz),'nhân viên soát vé '+name,TS.length); }
+    { const cs=[at(bx-1.45,bz-1.3),at(bx+1.45,bz-1.3),at(bx+1.45,bz+1.95),at(bx-1.45,bz+1.95)]; for(let i=0;i<4;i++){ const a=cs[i], b=cs[(i+1)%4]; addSeg(a[0],a[1],b[0],b[1],.14,undefined,undefined,'🎟 Quầy vé '+name); } const [nx,nz]=at(bx,bz+.2), d=at(bx,bz+3); npc(nx,G0,nz,Math.atan2(d[0]-nx,d[1]-nz),'nhân viên soát vé '+name,TS.length); }
     // CỔNG TÊN TRÒ cao 8,5 m ở lz = +4,5: 2 trụ + xà + bảng tên phát sáng + bảng LED thời gian chờ / giá vé
     const mz=o.mz??4.5, cxm=o.mcx??w/2, hw=Math.max(4.2,w/2+1.6); for(const e of [-1,1]){ put(kF,boxM(1,7.6,1),paint(col,.5),cxm+e*hw,3.8,mz); put(kF,boxM(1.3,.5,1.3),paint(0x20242b,.5),cxm+e*hw,.25,mz); const [x,z]=at(cxm+e*hw,mz); circles.push({x,z,r:.75}); }
     put(kF,boxM(hw*2+1.6,1.9,1.1),paint(0x161a22,.5),cxm,7.75,mz); put(kF,boxM(hw*2+2,.3,1.4),paint(col,.4),cxm,8.85,mz);

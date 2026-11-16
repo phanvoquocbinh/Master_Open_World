@@ -34,7 +34,8 @@ export function makeThemePark(W, ctx, opt={}){
   for(let j=0;j<NZ;j++) for(let i=0;i<NX;i++) H[j*NX+i]=hf(BX.x0+i*RES, BX.z0+j*RES);
   const hAt=(x,z)=>{ const fx=(x-BX.x0)/RES, fz=(z-BX.z0)/RES; if(fx<0||fz<0||fx>=NX-1||fz>=NZ-1) return null; const i=Math.floor(fx), j=Math.floor(fz), tx=fx-i, tz=fz-j, a=H[j*NX+i], b=H[j*NX+i+1], c=H[(j+1)*NX+i], d=H[(j+1)*NX+i+1];
     const h=tx+tz<=1 ? a+(b-a)*tx+(c-a)*tz : d+(c-d)*(1-tx)+(b-d)*(1-tz); return h<-5.9?null:h; };
-  EXTL.push({x0:BX.x0, x1:BX.x1-RES, z0:BX.z0, z1:BX.z1-RES, h:hAt, name:'CÔNG VIÊN KỲ QUAN QC WORLD'});
+  let PAVE=null;   /* gán sau khi có paved(): trên lối lát, mặt đi = mặt lát (G0 + 0,055) thay vì mặt cỏ G0 → chân không lún vào đá lát */
+  EXTL.push({x0:BX.x0, x1:BX.x1-RES, z0:BX.z0, z1:BX.z1-RES, h:(x,z)=>{ const h=hAt(x,z); return h!==null && PAVE && Math.abs(h-G0)<.01 && PAVE(x,z) ? h+.055 : h; }, name:'CÔNG VIÊN KỲ QUAN QC WORLD'});
 
   // lối lát đá: [x0,x1,z0,z1] và đĩa tròn [x,z,r]; viền hồ = dải 3,2…12,2 m quanh mép hồ
   const PR=[[27,53,394,508],[20,60,394,414],[34,46,540,552],[58,132,514,522],[130,148,512,533],[-40,22,534,542],[-132,-70,616.8,623.2],[58,76,686,710.6],[150,165,614,626],
@@ -43,7 +44,7 @@ export function makeThemePark(W, ctx, opt={}){
   const PD=[[HUB.x,HUB.z,HUB.r],[TOWER.x,TOWER.z,14],[-160,975,16]];
   if(opt.paths) PR.push(...opt.paths);   // V2: lối lát thêm do wonder_v2.js vẽ (đường ra cổng G9) – cây ngẫu nhiên tránh ra
   const paved=(x,z,m=0)=>{ for(const r of PR) if(x>r[0]+m && x<r[1]-m && z>r[2]+m && z<r[3]-m) return true; for(const c of PD) if(Math.hypot(x-c[0],z-c[1])<c[2]-m) return true;
-    const dl=dLG(x,z); return dl>3.2+m && dl<12.2-m; };
+    const dl=dLG(x,z); return dl>3.2+m && dl<12.2-m; }; PAVE=paved;
   { // lưới địa hình: cỏ (có vân) + cát/đáy hồ; đỉnh nằm hẳn dưới lối lát được hạ 0,35 m (chỉ trong lưới vẽ)
     const pos=new Float32Array(NX*NZ*3), col=new Float32Array(NX*NZ*3), uv=new Float32Array(NX*NZ*2), sand=new Uint8Array(NX*NZ), c=new THREE.Color(), SAND=new THREE.Color(0xe3cf9f), BED=new THREE.Color(0x8fb7b0);
     for(let j=0;j<NZ;j++) for(let i=0;i<NX;i++){ const k=j*NX+i, x=BX.x0+i*RES, z=BX.z0+j*RES; let h=H[k];

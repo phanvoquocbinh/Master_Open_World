@@ -28,6 +28,7 @@ export function makeHighland(W, ctx){
   const FC={x:216, z:-266}, FU=[-.217,.976], FV=[.976,.217], FHW=26, FD=11, FTOP=44, FBOT=20, FRY=Math.atan2(FU[0],FU[1]);
   const fAB=(x,z)=>[(x-FC.x)*FU[0]+(z-FC.z)*FU[1], (x-FC.x)*FV[0]+(z-FC.z)*FV[1]];
   const fXZ=(a,b)=>[FC.x+FU[0]*a+FV[0]*b, FC.z+FU[1]*a+FV[1]*b];
+  const FBE=FHW-2.5;   /* nửa bề rộng rèm nước (hẹp hơn lòng thác 2,5 m mỗi bên – 2 đầu khuất sau trụ đá) */
   const fCrest=b=>Math.abs(b)<FHW ? -FD*(1-(b/FHW)**2) : 0;                       // mép thác: giữa lùi vào 11 m so với 2 đầu
   const fHalf=a=>a<-46?4 : a<-26?lerp(4,FHW,(a+46)/20) : a<=1?FHW : a<24?31 : a<36?lerp(31,6,(a-24)/12) : 6;   // nửa bề rộng mặt nước
   const fTopL=a=>FTOP+Math.max(0,-a-12)*.03;                                       // cao độ mặt hồ trên
@@ -118,14 +119,14 @@ export function makeHighland(W, ctx){
     const t=new THREE.CanvasTexture(cv); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.colorSpace=THREE.SRGBColorSpace; return t; })();
   const foamMat=new THREE.MeshBasicMaterial({map:foamTex, transparent:true, opacity:.85, depthWrite:false, side:THREE.DoubleSide});
   { // hồ trên (trước mép thác)
-    const rows=[]; for(let k=0;k<=3;k++){ const row=[]; for(let b=-34;b<=34.01;b+=2){ const a=lerp(-48, fCrest(b)+.3, k/3), [x,z]=fXZ(a,b); row.push([x, fTopL(a)-.32, z, b/8, a/6]); } rows.push(row); } wStrip(rows, lakeMat, 1);
+    const rows=[], TT=[0,.2,.4,.58,.74,.86,.94,1]; for(const t of TT){ const row=[]; for(let j=-17;j<=17;j++){ const s1=j/17, a=lerp(-48, fCrest(s1*FBE)+.3, t), hwv=Math.min(fHalf(a)+3.3, lerp(fHalf(a)+3.3, FBE, clamp((t-.94)/.06,0,1))), b=s1*hwv, [x,z]=fXZ(a,b); row.push([x, fTopL(a)-.32, z, b/8, a/6]); } rows.push(row); } wStrip(rows, lakeMat, 1);
     // mép nước uốn cong + rèm nước đổ thẳng
     const cr=[[-.4,FTOP-.32,0, .5,.78,.8],[1.4,FTOP-.55,-.12, .56,.84,.84],[2.6,FTOP-1.6,-.24, .7,.92,.92],[3.1,FTOP-4,-.42, .86,.97,.98],[3.3,FTOP-13,-1.1, .97,1,1],[3.4,FBOT-.6,-1.9, 1,1,1]];
-    wStrip(cr.map(([da,y,v,cr1,cg,cb])=>{ const row=[]; for(let b=-FHW;b<=FHW+.01;b+=2){ const [x,z]=fXZ(fCrest(b)+da,b); row.push([x,y,z,b/5,v,cr1,cg,cb]); } return row; }), curtMat, 2);
+    wStrip(cr.map(([da,y,v,cr1,cg,cb])=>{ const row=[]; for(let j=-12;j<=12;j++){ const b=j/12*FBE, [x,z]=fXZ(fCrest(b)+da,b); row.push([x,y,z,b/5,v,cr1,cg,cb]); } return row; }), curtMat, 2);
     // hồ dưới
     const rows3=[]; for(let k=0;k<=4;k++){ const row=[]; for(let b=-40;b<=40.01;b+=4){ const a=lerp(fCrest(Math.max(-FHW,Math.min(FHW,b)))+2.6, 37.5, k/4), [x,z]=fXZ(a,b); row.push([x, FBOT-.32, z, b/8, a/6]); } rows3.push(row); } wStrip(rows3, lakeMat, 1);
     // bọt trắng sôi dưới chân thác
-    wStrip([0,3.5,8.5].map((da,k)=>{ const row=[]; for(let b=-FHW-1;b<=FHW+1.01;b+=2){ const [x,z]=fXZ(fCrest(Math.max(-FHW,Math.min(FHW,b)))+2.7+da,b); row.push([x, FBOT-.27, z, b/6, k/2]); } return row; }), foamMat, 3); }
+    wStrip([0,3.5,8.5].map((da,k)=>{ const row=[]; for(let j=-13;j<=13;j++){ const b=j/13*(FBE+1), [x,z]=fXZ(fCrest(Math.max(-FBE,Math.min(FBE,b)))+2.7+da,b); row.push([x, FBOT-.27, z, b/6, k/2]); } return row; }), foamMat, 3); }
   const mist=(()=>{ const n=170, pos=new Float32Array(n*3), seed=new Float32Array(n*2); for(let i=0;i<n;i++){ seed[i*2]=R(); seed[i*2+1]=R(); pos[i*3]=WF.bx; pos[i*3+1]=WF.by; pos[i*3+2]=WF.bz; }
     const g=new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos,3));
     const sp=(()=>{ const cv=document.createElement('canvas'); cv.width=cv.height=64; const x=cv.getContext('2d'), gr=x.createRadialGradient(32,32,2,32,32,31); gr.addColorStop(0,'rgba(255,255,255,.9)'); gr.addColorStop(1,'rgba(255,255,255,0)'); x.fillStyle=gr; x.fillRect(0,0,64,64); return new THREE.CanvasTexture(cv); })();
@@ -133,6 +134,7 @@ export function makeHighland(W, ctx){
   { const fk=GKit(), addSeg=W.addSeg||(()=>{}), rockM=M2.paint(0x77726a,.95), railM=M2.blackMetal;
     // đá hộc 2 bên bờ hồ và dưới chân thác
     for(let i=0;i<18;i++){ const sg=i%2?1:-1, a=sg>0?3+R()*6:3+R()*20, b=sg*(27+R()*4.5), s=.9+R()*1.9, [x,z]=fXZ(a,b); fk.add(new THREE.DodecahedronGeometry(s,0), rockM, x, FBOT-.6+s*.35, z, R()*6, R()*3, R()*3); }
+    for(const e of [-1,1]){ [[-1.0,25.9,FTOP-.9,3.0],[1.2,27.0,FTOP-4.6,4.1],[2.0,26.6,FTOP-9.6,4.3],[2.6,27.1,FTOP-14.6,4.4],[3.1,26.7,FTOP-19.4,4.6],[3.8,27.3,FBOT+.4,5.0]].forEach(([a,b2,y,s2],i)=>{ const [x,z]=fXZ(a,e*b2); fk.add(new THREE.DodecahedronGeometry(s2,0), rockM, x, y, z, i*1.7+e, i*.9, i*1.3+e*.5); if(i===0) circles.push({x, z, r:2.3}); }); }
     for(let i=0;i<5;i++){ const b=-20+i*10+R()*3, s=1.2+R()*1.4, [x,z]=fXZ(fCrest(b)+5+R()*2,b); fk.add(new THREE.DodecahedronGeometry(s,0), rockM, x, FBOT-.7+s*.3, z, R()*6, R()*3, R()*3); }
     const rail=(a0,b0,a1,b1,y,msg)=>{ const L=Math.hypot(a1-a0,b1-b0), n=Math.max(1,Math.round(L/1.8)), [x0,z0]=fXZ(a0,b0), [x1,z1]=fXZ(a1,b1), ry=Math.atan2(x1-x0,z1-z0);
       for(let i=0;i<=n;i++){ const t=i/n; fk.add(new THREE.CylinderGeometry(.04,.04,1.1,6), railM, x0+(x1-x0)*t, y+.55, z0+(z1-z0)*t); }
@@ -181,7 +183,7 @@ export function makeHighland(W, ctx){
     const sr=c.sampleRate, N=sr*5, X=Math.floor(sr*.3), raw=new Float32Array(N+X); let last=0; for(let i=0;i<N+X;i++){ const r=Math.random()*2-1; last=(last+.03*r)/1.03; raw[i]=last*2.8+r*.2; }
     const buf=c.createBuffer(1,N,sr), d=buf.getChannelData(0); d.set(raw.subarray(0,N)); for(let i=0;i<X;i++){ const k=i/X; d[i]=raw[i]*k+raw[N+i]*(1-k); }
     const s=c.createBufferSource(); s.buffer=buf; s.loop=true; SND.lp=c.createBiquadFilter(); SND.lp.type='lowpass'; SND.lp.frequency.value=700; SND.g=c.createGain(); SND.g.gain.value=0; s.connect(SND.lp); SND.lp.connect(SND.g); SND.g.connect(c.destination); s.start(); }
-  WF.update=(dt,T)=>{ const mp=mist.pos; for(let i=0;i<mist.n;i++){ const s=mist.seed[i*2], s2=mist.seed[i*2+1], t=(T*.2+s)%1, b=(s2*2-1)*(FHW+1), [x,z]=fXZ(fCrest(Math.max(-FHW,Math.min(FHW,b)))+3.2+t*13+Math.sin(s*40)*1.5, b); mp[i*3]=x; mp[i*3+1]=FBOT-.2+Math.pow(t,.6)*17; mp[i*3+2]=z; }
+  WF.update=(dt,T)=>{ const mp=mist.pos; for(let i=0;i<mist.n;i++){ const s=mist.seed[i*2], s2=mist.seed[i*2+1], t=(T*.2+s)%1, b=(s2*2-1)*FBE, [x,z]=fXZ(fCrest(b)+3.2+t*13+Math.sin(s*40)*1.5, b); mp[i*3]=x; mp[i*3+1]=FBOT-.2+Math.pow(t,.6)*17; mp[i*3+2]=z; }
     mist.pts.geometry.attributes.position.needsUpdate=true; foamTex.offset.y-=dt*.22;
     const [pa,pb]=fAB(P.x,P.z), cb=Math.max(-FHW,Math.min(FHW,pb)), d=Math.hypot(pa-(fCrest(cb)+2), pb-cb, (P.y-(FBOT+10))*.5), near=clamp(1-(d-10)/170,0,1);
     let worn=false; try{ const g=W.gadgets; worn=!!(g && g.music && g.music.headphones); }catch(e){} let off=false; try{ off=localStorage.getItem('qcworld-sfx')==='0'; }catch(e){}
@@ -254,7 +256,7 @@ export function makeHighland(W, ctx){
   // người dạo phố
   const strollers=[];
   if(W.people) for(let i=0;i<8;i++){ const k=W.people.kit(8000+i*17,{}); if(!k) continue; const a=W.makeActor(k.gl,{name:`${W.people.nameOf(8000+i*17)} · dạo phố`, height:k.h, face:0, clips:k.clips, compact:false, dot:'#ffb547'});
-    const x=(i%2?202:BX)+(R()-.5)*3, z0=TOWN.z1-10, z1=TOWN.z0+10; const st={a, x, z:lerp(z0,z1,R()), dir:R()<.5?1:-1, z0, z1, sp:.9+R()*.5, wait:0}; a.play('walk',0); strollers.push(st); }
+    const x=(i%2?202:BX)+(R()-.5)*3, z0=TOWN.z1-10, z1=TOWN.z0+10; const st={a, x, z:lerp(z0,z1,R()), dir:R()<.5?1:-1, z0, z1, sp:.9+R()*.5, wait:0}; a.g.position.set(st.x, W.groundAt ? W.groundAt(st.x,st.z) : 0, st.z); a.play('walk',0); strollers.push(st); }   // S19g rà soát 16/11: đặt đúng chỗ ngay (trước chồng ở gốc 0,0)
 
   /* ============================== 🌲 RỪNG (InstancedMesh) ============================== */
   function treeGeo(kind){ const parts=[], add=(g,c,x,y,z)=>{ g=g.toNonIndexed(); g.translate(x,y,z); const n=g.attributes.position.count, a=new Float32Array(n*3), cc=new THREE.Color(c); for(let i=0;i<n;i++){ a[i*3]=cc.r; a[i*3+1]=cc.g; a[i*3+2]=cc.b; } g.setAttribute('color', new THREE.Float32BufferAttribute(a,3)); g.deleteAttribute('uv'); parts.push(g); };
