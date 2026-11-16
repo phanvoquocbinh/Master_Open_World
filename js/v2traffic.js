@@ -259,7 +259,7 @@ export async function make(W, zones={}){
   function gatherObs(){ obs=[]; for(const c of cars) if(c.active) obs.push({x:c.g.position.x, z:c.g.position.z, y:c.g.position.y, h:c.h, hl:c.hl, hw:c.hw, self:c, veh:true, pulled:!!(c.pull && c.lat>.5)});
     for(const s of specials) obs.push({x:s.g.position.x, z:s.g.position.z, y:s.g.position.y, h:s.h, hl:2.6, hw:1.1, self:s, veh:true});
     if(!W.inside){ const V=W.life && W.life.V, r=V && V.riding && V.riding(); obs.push({x:P.x, z:P.z, y:P.y??0, h:P.face||0, hl:r?2.2:.35, hw:r?.95:.35, player:true}); }
-    for(const q of PEDS) obs.push({x:q.x, z:q.z, y:q.y, h:q.h||0, hl:.3, hw:.3, ped:true}); }
+    for(const q of PEDS) obs.push({x:q.x, z:q.z, y:q.y, h:q.h||0, hl:q.hl||.3, hw:q.hw||.3, ped:true}); }   /* q.hw/hl: vật cản lớn (vd. yêu quái Pha 10) */
   function limitFor(c){ let vt=99; const fx=Math.sin(c.h), fz=Math.cos(c.h), x=c.g.position.x, z=c.g.position.z, y=c.g.position.y; c.blk=0;
     for(const o of obs){ if(o.self===c || Math.abs(o.y-y)>3) continue; if(c.ghost>0 && o.veh) continue; const dx=o.x-x, dz=o.z-z, a=dx*fx+dz*fz; if(a<=0 || a>32) continue;
       const l=dx*(-fz)+dz*fx; if(Math.abs(l)>1.05+o.hw) continue; if(o.veh && Math.cos(o.h-c.h)<-.5 && a>c.hl+o.hl+3) continue;
@@ -318,19 +318,20 @@ export async function make(W, zones={}){
   function release(c){ if(!c) return; c.target=null; c.siren=false; c.plan=null; c.top=.9+RND()*.2; c.latT=0; }
   const nearestPatrol=(x,z,free=true)=>{ let b=null, bd=1e9; for(const c of cars){ if(!c.patrol || !c.active || (free && c.target)) continue; const d=Math.hypot(c.g.position.x-x, c.g.position.z-z); if(d<bd){ bd=d; b=c; } } return b; };
   function spawnVehicle(kind='police', rt=null, opt={}){ const V=W.life && W.life.V; if(!V) return null;
-    const SPEC={police:['sedan',0xf4f4f4,0x1546c2], fire:['pickup',0xc8161d,0xffd400], ambulance:['suv',0xffffff,0xd7263d]}[kind]||['sedan',0xf4f4f4,0x1546c2];
+    const SPEC={police:['sedan',0xf4f4f4,0x1546c2], fire:['pickup',0xc8161d,0xffd400], ambulance:['suv',0xffffff,0xd7263d], armored:['suv',0x4b5563,0xd8b25a], civil:['sedan',opt.color??0x3a6ea5,null]}[kind]||['sedan',0xf4f4f4,0x1546c2];
     let r=rt, stopAt=null;
     if(r && !r.edges && r.x!==undefined){ const tg=r, n=nearest(tg.x, tg.z, 80); r=route(opt.from||{x:P.x, z:P.z}, tg); if(r && n){ r.edges=r.edges.concat([{e:n.e, dir:r.end===n.e.a?1:-1}]); stopAt={x:tg.x, z:tg.z, stop:opt.stop??Math.max(12, n.e.w/2+6)}; } }   // đích là 1 điểm → dừng ngay cạnh điểm đó
     if(!r || !r.edges || !r.edges.length) return null;
-    const g=kind==='fire' ? buildFireTruck() : V.buildCar(SPEC[1], SPEC[0], {stripe:SPEC[2]}); let ly=1.6;
+    const g=kind==='fire' ? buildFireTruck() : V.buildCar(SPEC[1], SPEC[0], SPEC[2]!=null ? {stripe:SPEC[2]} : {}); let ly=1.6; const civ=kind==='armored' || kind==='civil';
+    if(kind==='armored') g.scale.set(1.12,1.32,1.38);   /* xe bọc thép chở tiền */
     if(kind==='ambulance'){ g.scale.set(1.08,1.3,1.42); ly=1.62; const crossM=new THREE.MeshStandardMaterial({color:0xd7263d}); for(const s of [-1,1]){ const a=new THREE.Mesh(new THREE.BoxGeometry(.02,.36,.12), crossM), b=new THREE.Mesh(new THREE.BoxGeometry(.02,.12,.36), crossM); a.position.set(s*.92,1.02,-.6); b.position.copy(a.position); g.add(a,b); } }
     if(kind==='fire') ly=3.05;
-    if(kind!=='fire'){ const base=new THREE.Mesh(new THREE.BoxGeometry(1.15,.09,.32), new THREE.MeshStandardMaterial({color:0x1d1f24})); base.position.set(0,ly-.1,-.1); g.add(base); }
-    const lamps=[]; for(const [sx,col] of [[-.3,0xff1a1a],[.3,0x1a4dff]]){ const m=new THREE.Mesh(new THREE.BoxGeometry(.45,.14,.25), new THREE.MeshStandardMaterial({color:col, emissive:col, emissiveIntensity:2})); m.position.set(sx,ly,kind==='fire'?2.9:-.1); m.userData.keep=true; g.add(m); lamps.push(m); }
+    if(kind!=='fire' && !civ){ const base=new THREE.Mesh(new THREE.BoxGeometry(1.15,.09,.32), new THREE.MeshStandardMaterial({color:0x1d1f24})); base.position.set(0,ly-.1,-.1); g.add(base); }
+    const lamps=[]; for(const [sx,col] of civ ? [[-.7,0xff9a10],[.7,0xff9a10]] : [[-.3,0xff1a1a],[.3,0x1a4dff]]){ const m=new THREE.Mesh(new THREE.BoxGeometry(civ?.25:.45,.14,civ?.08:.25), new THREE.MeshStandardMaterial({color:col, emissive:col, emissiveIntensity:2})); m.position.set(sx, civ?.95:ly, kind==='fire'?2.9:civ?2.32:-.1); m.userData.keep=true; g.add(m); lamps.push(m); }   /* xe dân sự / chở tiền: đèn khẩn cấp cam phía trước */
     try{ compactGroup(W, g); }catch(e){}   // gộp theo vật liệu → ~8 lượt vẽ mỗi xe
     g.userData.dynamic=true; scene.add(g);
     const HL=kind==='fire'?4.3:kind==='ambulance'?3.1:2.6, HW=kind==='fire'?1.3:1.1;
-    const s={kind, g, lamps, special:true, v:0, h:0, s:0, B:newBuf(), plan:r.edges.slice(), active:true, hl:HL, hw:HW, done:false, arrived:false, t:0, ghost:0, blk:0, route:r, stopAt, siren:true};
+    const s={kind, g, lamps, special:true, v:0, h:0, s:0, B:newBuf(), plan:r.edges.slice(), active:true, hl:HL, hw:HW, done:false, arrived:false, t:0, ghost:0, blk:0, route:r, stopAt, siren:!civ, hazard:false, top:opt.top??1};
     const first=s.plan.shift(); appendEdge(s, first.e, first.dir, 0); bufAt(s.B,1.5,_o2); s.h=Math.atan2(_o2.x-s.B.x[0], _o2.z-s.B.z[0]);
     const dyn={obj:g, hl:HL, hw:HW, head:()=>s.h, on:()=>s.active, name:{police:'xe cảnh sát', fire:'xe cứu hoả', ambulance:'xe cứu thương'}[kind]||'xe'}; if(W.DYN) W.DYN.push(dyn);
     // đi tiếp tới điểm khác (vd. về trạm) từ chỗ đang đỗ
@@ -339,12 +340,12 @@ export async function make(W, zones={}){
     s.remove=()=>{ s.active=false; scene.remove(g); const i=specials.indexOf(s); if(i>=0) specials.splice(i,1); if(W.DYN){ const j=W.DYN.indexOf(dyn); if(j>=0) W.DYN.splice(j,1); } };
     specials.push(s); return s; }
   function updSpecial(s, dt){ s.t+=dt; const B=s.B; if(!s.done && B.cum[B.cum.length-1]-s.s<70){ if(s.plan.length) extend(s); else s.done=true; }
-    let vt=curveLimit(s, 15); const left=B.cum[B.cum.length-1]-s.s; if(s.done) vt=Math.min(vt, Math.sqrt(2*3*Math.max(0,left-1))); vt=Math.min(vt, limitFor(s));
+    let vt=curveLimit(s, 15*(s.top||1)); const left=B.cum[B.cum.length-1]-s.s; if(s.done) vt=Math.min(vt, Math.sqrt(2*3*Math.max(0,left-1))); vt=Math.min(vt, limitFor(s));
     if(s.stopAt && !s.stopNow && Math.hypot(s.stopAt.x-s.g.position.x, s.stopAt.z-s.g.position.z)<s.stopAt.stop) s.stopNow=true;
     if(s.stopNow){ vt=0; if(s.v<.05) s.arrived=true; }
     if(s.ghost>0) s.ghost-=dt; if(s.v<.2 && (s.blk===3 || s.blk===4)){ s.stuck=(s.stuck||0)+dt; if(s.stuck>1.5){ s.ghost=3; s.stuck=0; } } else s.stuck=0;   // xe ưu tiên kẹt sau xe khác → lách qua
     s.v+=clamp(vt-s.v,-7*dt,3*dt); if(s.v<0) s.v=0; s.s+=s.v*dt; bufAt(B,s.s,_o); bufAt(B,s.s+1.6,_o2); if((_o2.x-_o.x)**2+(_o2.z-_o.z)**2>1e-4) s.h=lerpAngle(s.h, Math.atan2(_o2.x-_o.x,_o2.z-_o.z), 1-Math.exp(-dt*10));
-    s.g.position.set(_o.x, (_o.y+_o2.y)/2, _o.z); s.g.rotation.set(-Math.atan2(_o2.y-_o.y,1.6), s.h, 0, 'YXZ'); const on=Math.floor(s.t*4)%2; s.lamps[0].visible=!s.siren || !!on; s.lamps[1].visible=!s.siren || !on;
+    s.g.position.set(_o.x, (_o.y+_o2.y)/2, _o.z); s.g.rotation.set(-Math.atan2(_o2.y-_o.y,1.6), s.h, 0, 'YXZ'); const on=Math.floor(s.t*4)%2; if(s.kind==='armored' || s.kind==='civil'){ const hz=s.hazard && Math.floor(s.t*2.5)%2; s.lamps[0].visible=s.lamps[1].visible=!!hz; } else { s.lamps[0].visible=!s.siren || !!on; s.lamps[1].visible=!s.siren || !on; }
     if(s.done && left<1.5 && s.v<.05) s.arrived=true; trimBuf(s); }
 
   /* ============================== 4. NGƯỜI ĐI BỘ BỔ SUNG ============================== */
