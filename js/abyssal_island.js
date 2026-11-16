@@ -63,7 +63,7 @@ export async function make(W, ctx){
   const fence=(pts,y,msg,vis=true)=>{ rail(pts,y,msg); if(vis) railVis(pts,y); };
 
   /* ============================== 1. ĐỊA HÌNH: vành đỉnh + đất thấp + thềm vành đai (lưới 4 m, bỏ lòng vực / giếng xoắn) ============================== */
-  { const RS=4, N=Math.round(360/RS)+1, q=QB(true), c=new THREE.Color(), colAt=(x,z,h)=>{ const n=.9+.14*Math.sin(x*.13+z*.07)*Math.cos(z*.11-x*.05); if(h<3.2) return c.setRGB(.56*n,.6*n,.44*n); if(h<24) return c.setRGB(.36*n,.34*n,.33*n); return c.setRGB(.33*n,.5*n,.26*n); };
+  { const RS=2, N=Math.round(360/RS)+1, q=QB(true), c=new THREE.Color(), colAt=(x,z,h)=>{ const n=.9+.14*Math.sin(x*.13+z*.07)*Math.cos(z*.11-x*.05); if(h<3.2) return c.setRGB(.56*n,.6*n,.44*n); if(h<24) return c.setRGB(.36*n,.34*n,.33*n); return c.setRGB(.33*n,.5*n,.26*n); };
     const hole=(x,z)=>re(x,z)<1.062 || (z>95 && BAY.inStrait(x,z,ZB+2)) || HX.some(h=>Math.hypot(x-h.x,z-h.z)<HR);
     const snap=(x,z)=>{ let best=null, bd=1e9; const tryP=(qx,qz)=>{ const d=Math.hypot(qx-x,qz-z); if(d<bd && !hole(qx,qz)){ bd=d; best=[qx,qz]; } }; const r=re(x,z); if(r<1.062){ const k=1.0623/Math.max(r,.01); tryP(x*k,CZ+(z-CZ)*k); }
       if(z>95 && BAY.inStrait(x,z,ZB+2)){ tryP(x>0?GX+.03:BAY.flareX(z)-.03,z); } for(const h of HX){ const d=Math.hypot(x-h.x,z-h.z); if(d<HR){ const k=(HR+.03)/Math.max(d,.01); tryP(h.x+(x-h.x)*k,h.z+(z-h.z)*k); } } return bd<7?best:null; };

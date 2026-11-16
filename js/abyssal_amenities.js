@@ -109,7 +109,7 @@ export function buildAmenities(K){
     addPlat(c[0],c[1],ry,w/2,d/2,base);
     INTER.push({x:c[0]+fx*(d/2+1.3), z:c[1]+fz*(d/2+1.3), r:2.6, prio:.6, when:()=>Math.abs(P.y-y)<2, label:'🚿 Tắm tráng nước ngọt / Thay đồ bơi (E)', action:()=>{ toast('🚿 Mát quá! Đã tắm tráng nước ngọt và thay đồ bơi – sẵn sàng tắm biển.',3200); if(W.life && W.life.S && W.life.S.buffs) W.life.S.buffs.energy=Math.max(Date.now(),W.life.S.buffs.energy||0)+180000; }});
     makeLabel('🚿 Nhà tắm & thay đồ','Vòi sen nước ngọt · bồn rửa chân · tủ đồ',{h:.45, x:c[0], y:base+h+3, z:c[1], fade:70}); }
-  { /* 4 quầy bar cây dừa + string lights + 24 ghế tắm nắng + 12 dù lá cọ */ const BARS=[-3,20,160,183], trunkG=(()=>{ const pts=[]; for(let i=0;i<=8;i++){ const t=i/8; pts.push(new THREE.Vector3(Math.sin(t*1.3)*1.1*t, t*7.2, 0)); } return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),24,.24,8,false); })();
+  { /* 4 quầy bar cây dừa + string lights + 24 ghế tắm nắng + 12 dù lá cọ */ const BARS=[-3,12,168,183], trunkG=(()=>{ const pts=[]; for(let i=0;i<=8;i++){ const t=i/8; pts.push(new THREE.Vector3(Math.sin(t*1.3)*1.1*t, t*7.2, 0)); } return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),24,.24,8,false); })();
     const trunks=[], leaves=[], counters=[], tops=[], stools=[], lights=[], frame=[], cush=[], backs=[], poles=[], canopy=[], fringe=[];
     BARS.forEach((fb,bi)=>{ const c=el(fb,.835), y=BY(c[0],c[1]), n=el(fb,.6), face=Math.atan2(n[0]-c[0],n[1]-c[1]);   /* mặt quầy nhìn ra biển */
       trunks.push([c[0],y,c[1],face-Math.PI/2]); const tipx=c[0]+Math.sin(face)*1.06, tipz=c[1]+Math.cos(face)*1.06;   /* thân dừa uốn ra phía biển */
@@ -132,7 +132,7 @@ export function buildAmenities(K){
   PLACES.push({icon:'🏛️', name:'Abyssal · Đảo khách sạn & 8 pavilion', sub:'Quảng trường +14 · cổng Master Dashboard · màn hình kênh', go:()=>teleport(0,IC[1]-44,0,IC[1])},
     {icon:'💠', name:'Abyssal · Đĩa kính Hydro-Pulse +16', sub:'Lounge 360° ôm cột thác · bar đồng', go:()=>teleport(HC[0],HC[1]+11,HC[0],HC[1])},
     {icon:'🅿️', name:'Abyssal · Sky-Shaft Drive-In (+28)', sub:'Bãi đỗ ngắm cảnh đỉnh tháp', go:()=>teleport(0,-153,0,-120)},
-    {icon:'🥥', name:'Abyssal · Quầy bar dừa & ghế tắm nắng', sub:'Bãi cát vàng · nước dừa · kem dừa · sinh tố', go:()=>{ const p=el(20,.8); teleport(p[0],p[1],0,-12); }});
+    {icon:'🥥', name:'Abyssal · Quầy bar dừa & ghế tắm nắng', sub:'Bãi cát vàng · nước dừa · kem dừa · sinh tố', go:()=>{ const p=el(12,.8); teleport(p[0],p[1],0,-12); }});
   out.tick=(dt)=>{ const b=out.barrier; if(b){ const near=Math.hypot(P.x-b.x,P.z-b.z)<9 && !!K.HOOK.vehicle, t=near?-1.35:0; b.piv.rotation.x+= (t-b.piv.rotation.x)*Math.min(1,dt*3); } if(out.portal) out.portal.opacity=.32+.15*Math.sin(performance.now()/450); };
   return out;
 }

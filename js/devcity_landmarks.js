@@ -1,6 +1,6 @@
 // QC World V2 – PHA 6: DEV CITY · CÔNG TRÌNH (gọi từ js/devcity_chongqing.js sau khi dựng địa hình + đường)
 //  🏙️ DEV SKY-CRYSTAL: 4 tháp cánh buồm 115 m bên sông + ống kính ngang "The Crystal" 140 × 24 m ở +92…+100 (vườn nhiệt đới, hồ bơi vô cực, sàn kính, 5 lớp học Dev)
-//  🏮 HỒNG NHAI ĐỘNG: phố cổ 11 tầng nhà sàn gỗ bám vách (+2 → +46), đèn lồng, cầu thang bộ ngoài trời đi xuyên 11 tầng lên đại lộ trên núi, quán lẩu / mì / trà
+//  🏮 LẦU VÁCH ĐÈN LỒNG: phố cổ 11 tầng nhà sàn gỗ bám vách (+2 → +46), đèn lồng, cầu thang bộ ngoài trời đi xuyên 11 tầng lên đại lộ trên núi, quán lẩu / mì / trà
 //  🚝 DEV RESIDENCY TOWER: chung cư 18 tầng, khoét rỗng tầng 6–8 làm ga tàu điện Xuyên Lầu; bán / thuê căn hộ (luật V2: nội đô chỉ có căn hộ)
 //  🏨 khách sạn 5 sao · 🏥 bệnh viện Sơn Thành (sân đỗ trực thăng) · 🚒 trạm cứu hoả · 🏫 trường liên cấp + sân thể thao · cao ốc thương mại / văn phòng
 //  🏞️ Công viên hồ Thiên Cảnh (+52): đường dạo, cầu chữ chi, cầu vòm, đình giữa đảo · ✈️ Sân bay đỉnh núi (+85): đường băng, nhà ga, đài kiểm soát, máy bay cất cánh
@@ -82,7 +82,7 @@ export async function build(K){
     label('🏙️ DEV SKY-CRYSTAL', '4 tháp 115 m · ống kính ngang 140 m ở +93 m', 490, 124, Z, 420, .9);
     place('🏙️','Dev City – The Crystal (+93 m)','Vườn trên mây · hồ bơi vô cực · sàn kính', 445, Z+6, 430, Z); }
 
-  /* ============================== 🏮 HỒNG NHAI ĐỘNG – phố cổ 11 tầng treo vách (x 148–228) ============================== */
+  /* ============================== 🏮 LẦU VÁCH ĐÈN LỒNG – phố cổ 11 tầng treo vách (x 148–228) ============================== */
   { const dist='hyd', X0=148, X1=228, BACK=-233, FL=4, N=11;
     const front=k=>-(196+k*.8);
     const wallTex=canvas(512,256,(g,w,h)=>{ g.fillStyle='#4a2a16'; g.fillRect(0,0,w,h);
@@ -122,7 +122,7 @@ export async function build(K){
       put(MAT.red, xf(cyl(.2,.2,FL,8), 229.2, y+FL/2, zf-.5), dist); put(MAT.red, xf(cyl(.2,.2,FL,8), 236.7, y+FL/2, zB-1), dist); }
     steps.build();
     // biển hiệu dọc + quán ăn
-    sign('HỒNG NHAI ĐỘNG', 30, 3.6, 188, YW+1.2, front(N)+.2, 0, {bg:'#7a1410', fg:'#ffd27a', edge:'#e2b24a', glow:.9});
+    sign('LẦU VÁCH ĐÈN LỒNG', 30, 3.6, 188, YW+1.2, front(N)+.2, 0, {bg:'#7a1410', fg:'#ffd27a', edge:'#e2b24a', glow:.9});
     const shops=[[1,162,'🍲 Lẩu cay Dev City','LẨU CAY',45,'Nồi lẩu tê cay đỏ rực, nóng hổi! 🌶️🔥'],[4,190,'🍜 Mì kéo sợi','MÌ KÉO SỢI',30,'Sợi mì kéo tay dai giòn, nước dùng bò thơm lừng 🍜'],[7,214,'🍵 Trà đạo','TRÀ ĐẠO',25,'Chén trà nóng ngắm sông về đêm – thư thái quá 🍵']];
     for(const [k,x,name,short,price,msg] of shops){ const y=Y1+k*FL, zf=front(k); sign(short, 5, 1.1, x, y+2.6, zf-1.75, 0, {bg:'#8a1d14', fg:'#ffe08a', edge:'#e2b24a', glow:.8});
       INTER.push({x, z:zf-1, r:2.6, prio:.4, when:()=>Math.abs(P.y-y)<1.2, label:`${name} – ${fmt(price)} 💰 (E)`, action:()=>{ if(!askPay) return toast(msg, 3000); askPay(price, `${name} – Lầu Vách Đèn Lồng`, ()=>{ if(spend && !spend(price)) return; toast(msg, 3400); }); }}); }
@@ -132,7 +132,7 @@ export async function build(K){
       const z0=LZ-1.75, z1=front(N)+.15, L=z0-z1, zc=(z0+z1)/2, pz1=front(N)-.6; addPlat(HLX, (z0+pz1)/2, 0, 1.35, (z0-pz1)/2, YW); put(MAT.paving, xf(rb(2.8, .3, L, .06, 1), HLX, YW-.15, zc), dist);   /* mặt đi chồng 0,6 m vào sân thượng (không hở khe) */
       for(const s of [-1,1]){ put(MAT.glass, xf(rb(.06, 1.05, L, .02, 1), HLX+s*1.38, YW+.55, zc), dist); put(MAT.steel, xf(rb(.1, .08, L, .02, 1), HLX+s*1.38, YW+1.1, zc), dist); addSeg(HLX+s*1.38, z0, HLX+s*1.38, z1-.3, .15, YW-.5, YW+1.7, 'Lan can cầu kính'); } }
     occ(X0, 238, front(0)+1, BACK); boxes.push({x0:X0, x1:X1, z0:BACK-1, z1:front(0), y0:-5, y1:1.2, msg:'Chân phố cổ'});
-    label('🏮 HỒNG NHAI ĐỘNG', 'Phố cổ treo vách 11 tầng · lẩu cay · mì kéo · trà đạo', 188, YW+9, front(N), 380, .85);
+    label('🏮 LẦU VÁCH ĐÈN LỒNG', 'Phố cổ treo vách 11 tầng · lẩu cay · mì kéo · trà đạo', 188, YW+9, front(N), 380, .85);
     place('🏮','Dev City – Lầu Vách Đèn Lồng','Phố cổ 11 tầng bên sông', 200, -186, 188, -215); }
 
   /* ============================== 🚝 DEV RESIDENCY TOWER (380, −420) – ga Xuyên Lầu trong bụng toà nhà ============================== */

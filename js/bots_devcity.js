@@ -55,7 +55,7 @@ export async function make(W, ctx, D){
   const ZONES={hyd:{x0:130,x1:260,z0:-260,z1:-150}, river:{x0:170,x1:620,z0:-215,z1:-150}, res:{x0:330,x1:430,z0:-440,z1:-360}, spiral:{x0:240,x1:340,z0:-300,z1:-230},
     crystal:{x0:410,x1:570,z0:-215,z1:-180}, t2:{x0:480,x1:840,z0:-400,z1:-240}, lake:{x0:480,x1:640,z0:-660,z1:-540}, temple:{x0:690,x1:760,z0:-700,z1:-595}, air:{x0:280,x1:470,z0:-840,z1:-790}};
 
-  /* ============================== 🏮 HỒNG NHAI ĐỘNG ============================== */
+  /* ============================== 🏮 LẦU VÁCH ĐÈN LỒNG ============================== */
   // nghệ nhân múa mì ở quán mì tầng 4: sợi mì dài (chuỗi hạt) vung vòng trên đầu
   { const y=Y1+4*FL, o=person(sM(6101), {shirt:0xf4f2ec, pants:0x2a2a2a, shoe:0x1b1d21, style:'cap'}, '🍜 Nghệ nhân múa mì', '#ffcf7a', 'hyd'); stand(o, 186, front(4)-1.1, 0, y);
     const N=46, seg=new THREE.InstancedMesh(new THREE.SphereGeometry(.035,6,4), std(0xf3e2b0,{roughness:.6}), N); seg.frustumCulled=false; dyn(seg); const m4=new THREE.Matrix4(), L=new V3(), Rh=new V3(), p=new V3();
