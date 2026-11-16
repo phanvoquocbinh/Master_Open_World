@@ -50,7 +50,7 @@ export async function make(W, ctx, opt={}){
     const routes=[[rp(.4),rp(1.2),rp(2.1),[ring.c.x+7,ring.c.z+ring.R1-7]], [rp(-2.6),rp(-1.9),rp(-1.0),rp(-.2)],
       [[H.dragon.x0+18,H.dragon.z0+42],[H.dragon.x0+50,H.dragon.z0+42],[H.dragon.x0+66,H.dragon.z0+48],[H.dragon.x0+30,H.dragon.z0+26]], [[H.dragon.x0+40,H.dragon.z0+60],[H.dragon.x0+70,H.dragon.z0+36],[H.dragon.x0+36,H.dragon.z0+34]],
       [[H.forest.x0+10,152],[H.forest.x1-10,152],[H.forest.x1-10,168],[H.forest.x0+10,168]], [[H.forest.c.x+12,H.forest.z0+8],[H.forest.c.x,H.forest.z1-8],[H.forest.x0+12,160+5]],
-      [[H.tri.c.x-14,H.tri.c.z+16],[H.tri.c.x+14,H.tri.c.z+16],[H.tri.c.x,H.tri.c.z-14]], [[H.tri.door.x,H.tri.door.z+8],[H.tri.c.x+18,H.tri.c.z+10],[H.tri.c.x-18,H.tri.c.z+10]]];
+      [[H.tri.c.x-12,H.tri.c.z-9],[H.tri.c.x+12,H.tri.c.z-9],[H.tri.c.x,H.tri.c.z-15]], [[H.tri.door.x,H.tri.door.z+8],[H.tri.c.x+16,H.tri.c.z-12],[H.tri.c.x-16,H.tri.c.z-12]]];   /* sảnh Bắc Tri-Matrix: giữa màn hình Tech Talk và thang máy kính ở tâm – né bàn, quầy, giếng thang */
     const SH=[0x2f6fd0,0xffffff,0xc94f7c,0x46d39a,0x2a2f3a,0xf2c230,0x7a9cc6,0xff8a5a]; const LINES=['Bug này chỉ lỗi trên Safari…','Chiều nay demo cho khách nha!','Ai review giúp PR #482 với 🙏','Pipeline xanh rồi, deploy thôi!','Cà phê đã, rồi viết test case tiếp ☕'];
     routes.forEach((pts,i)=>{ const o=person(i%2?sF(2101+i):sM(2101+i), {shirt:SH[i], pants:0x2a2f3a, shoe:0x1b1d21}, `💼 ${W.people.nameOf(2101+i)} · nhân viên`, '#7fe7ff', 'cbd'); walker(o, pts, 1.15+R()*.25); const u=o.upd;
       o.upd=(dt,T)=>{ const st=u(dt,T); if(st==='idle' && ((T*.3+o.ph)%6)<2) pose(o,'stick',T); if(R()<dt*.008) say(o, pick(LINES), 2.6); }; }); }

@@ -8,6 +8,7 @@
 //  • W.AIRPORTS: sổ sân bay dùng chung – sân bay vùng khác (Dev City, Brain, Đảo Ngoại ngữ…) tự đăng ký {key,name,x,z,y,rwy:{x0,x1,z,y},spawn};
 //    chưa đăng ký thì chuyến bay là "bay ngắm vùng đó rồi hạ cánh về đây"
 import * as AK from './archKit.js';
+import { makeLift } from './liftkit.js';
 
 export async function make(W, ctx){
   const {THREE, scene, circles, boxes, plats, INTER, PLACES, HOOK, P, toast, makeLabel, teleport, mergeGeometries, addSeg, EXTL} = W;
@@ -181,14 +182,23 @@ export async function make(W, ctx){
 
   /* ============================== 5. ĐÀI KHÔNG LƯU ATC 68 m ============================== */
   const ATC={x:-58, z:252, H:68};
-  { const {x,z,H}=ATC; KS.add(CY(3.2,4.2,H-8,24), M.white, x,GY+(H-8)/2,z); for(let y=8;y<H-10;y+=6) KS.add(new THREE.TorusGeometry(3.4,.12,6,32).rotateX(Math.PI/2), M.steel, x,GY+y,z);
-    KS.add(CY(7.5,4,3,24), M.white, x,GY+H-9,z); KS.add(CY(8.2,7.6,4.2,24,1,true), M.glass, x,GY+H-5.4,z); KS.add(CY(8.6,8.2,.6,24), M.white, x,GY+H-7.5,z); KS.add(CY(8.8,7,1.4,24), M.dark, x,GY+H-2.6,z); KS.add(CY(.15,.15,9,8), M.steel, x,GY+H+2.6,z);
+  { const {x,z,H}=ATC, HC=H-8, r0=4.2, r1=3.2, rAt=y=>r0+(r1-r0)*y/HC, DG=.42, YD=3.4, CY0=GY+H-7.2, LH={x0:x-1.45, x1:x+1.45, z0:z-1.45, z1:z+1.45};
+    /* thân tháp bê tông rỗng: giếng thang máy chạy trong lõi; chân tháp chừa cửa vào phía Nam cao 3,4 m (vách 2 mặt để nhìn được mặt trong khi đi thang) */
+    const colM=M.white.clone(); colM.side=THREE.DoubleSide;
+    KS.add(new THREE.CylinderGeometry(rAt(YD),r0,YD,24,1,true,DG,Math.PI*2-2*DG), colM, x,GY+YD/2,z); KS.add(new THREE.CylinderGeometry(r1,rAt(YD),HC-YD,24,1,true), colM, x,GY+YD+(HC-YD)/2,z);
+    for(const sx of [-1,1]) KS.add(B(.16,YD,2.9), colM, x+sx*1.32,GY+YD/2,z+2.85); KS.add(B(2.8,.16,2.9), colM, x,GY+YD-.08,z+2.85);   // vách + trần lối vào sảnh thang
+    for(let y=8;y<H-10;y+=6) KS.add(new THREE.TorusGeometry(3.4,.12,6,32).rotateX(Math.PI/2), M.steel, x,GY+y,z);
+    KS.add(new THREE.CylinderGeometry(7.5,4,3,24,1,true), M.white, x,GY+H-9,z); { const rg=new THREE.RingGeometry(r1-.1,4,24); rg.rotateX(Math.PI/2); KS.add(rg, M.white, x,GY+H-10.5,z); }
+    KS.add(CY(8.2,7.6,4.2,24,1,true), M.glass, x,GY+H-5.4,z); KS.add(CY(8.8,7,1.4,24), M.dark, x,GY+H-2.6,z); KS.add(CY(.15,.15,9,8), M.steel, x,GY+H+2.6,z);
+    { const sh=new THREE.Shape(); sh.absarc(0,0,8.6,0,Math.PI*2,false); sh.holes.push(new THREE.Path([new THREE.Vector2(-1.45,-1.45), new THREE.Vector2(1.45,-1.45), new THREE.Vector2(1.45,1.45), new THREE.Vector2(-1.45,1.45)]));   /* sàn cabin không lưu chừa lỗ giếng */
+      const fg=new THREE.ExtrudeGeometry(sh,{depth:.6, bevelEnabled:false, curveSegments:24}); fg.rotateX(-Math.PI/2); KS.add(fg, M.white, x,CY0-.6,z); }
     const bcn=new THREE.Mesh(new THREE.SphereGeometry(.45,10,8), new THREE.MeshBasicMaterial({color:0xff2020})); bcn.position.set(x,GY+H+7.2,z); bcn.userData.dynamic=true; scene.add(bcn); out.beacon=bcn;
-    circles.push({x,z,r:4.4}); const CY0=GY+H-7.2; plats.push({t:'c', x, z, r:7.6, h:CY0});
+    for(let i=0;i<32;i++){ const a=i/32*Math.PI*2, b=(i+1)/32*Math.PI*2, m=(a+b)/2; if(Math.cos(m)>Math.cos(DG+.05)) continue; addSeg(x+Math.sin(a)*4.35,z+Math.cos(a)*4.35,x+Math.sin(b)*4.35,z+Math.cos(b)*4.35,.15,GY-.5,GY+HC,'🗼 Thân Đài Không lưu – lối vào thang máy ở phía Nam'); }
+    for(const sx of [-1,1]) addSeg(x+sx*1.32,z+1.4,x+sx*1.32,z+4.4,.12,GY-.5,GY+YD,'🗼 Vách sảnh thang máy');
+    stripPlats(plats, x, zz=>Math.sqrt(Math.max(0,7.6*7.6-(zz-z)*(zz-z))), z-7.6, z+7.6, 30, CY0, [LH]);
+    makeLift(W, {x, z, yaw:0, name:'Thang Đài Không lưu', color:0xd8dde3, floors:[{y:GY, name:'Chân đài · sân đỗ', short:'G'}, {y:CY0, name:'Cabin không lưu 60 m', short:'60'}]});
     for(let i=0;i<32;i++){ const a=i/32*TAU, b=(i+1)/32*TAU; addSeg(x+Math.cos(a)*7.8,z+Math.sin(a)*7.8,x+Math.cos(b)*7.8,z+Math.sin(b)*7.8,.12,CY0-.4,CY0+3,'🗼 Kính cabin không lưu'); }
-    for(let k=0;k<6;k++){ const a=k/6*TAU; KS.add(RB(2.2,.9,1,.1,2), M.dark, x+Math.cos(a)*5.6,CY0+.45,z+Math.sin(a)*5.6, -a); }
-    INTER.push({x, z:z+5.6, r:2, prio:.7, when:()=>P.y<GY+2, label:'⇅ Thang máy lên cabin Đài Không lưu 60 m (E)', action:()=>{ P.x=x; P.z=z+5; P.y=CY0+.02; toast('🗼 Cabin không lưu: nhìn toàn cảnh 2 đường băng, River Tech và biển!', 3200); }});
-    INTER.push({x, z:z+5, r:2.2, prio:.7, when:()=>P.y>CY0-1, label:'⇅ Thang máy xuống chân đài (E)', action:()=>{ P.x=x; P.z=z+6.4; P.y=GY+.02; }});
+    for(let k=0;k<6;k++){ const a=k/6*TAU, cx=x+Math.cos(a)*5.6, cz=z+Math.sin(a)*5.6; KS.add(RB(2.2,.9,1,.1,2), M.dark, cx,CY0+.45,cz, -a); addSeg(cx-Math.cos(a)*.6,cz-Math.sin(a)*.6,cx+Math.cos(a)*.6,cz+Math.sin(a)*.6,.55,CY0-.3,CY0+1.1,'🗼 Bàn điều khiển không lưu'); }
     INTER.push({x:x+5.6, z, r:2, prio:.5, when:()=>P.y>CY0-1, label:'🎧 Nghe tần số không lưu (E)', action:()=>toast(pick(['🎧 "QC 102, cleared for takeoff runway 27R, wind 090 at 8."','🎧 "QC 215, descend and maintain 3000, expect ILS 09L."','🎧 "Ground, QC 77 request pushback gate 3."']), 3600)});
     makeLabel('🗼 Đài Không lưu ATC · 68 m', 'Thang máy lên cabin ngắm cảnh (E)', {h:.6, x, y:GY+H+9, z, fade:240}); }
 
@@ -269,3 +279,8 @@ export async function make(W, ctx){
   console.info('[Skyport] dựng xong:', out.audit());
   return out;
 }
+
+/* Mặt đứng dạng dải theo z cho hình bất kỳ (nửa bề rộng hw(z) quanh tâm cx), trừ các lỗ giếng thang {x0,x1,z0,z1} (toạ độ thế giới) */
+function stripPlats(plats, cx, hwAt, za, zb, n, y, holes=[]){ for(let s=0;s<n;s++){ const z0=za+(zb-za)*s/n, z1=za+(zb-za)*(s+1)/n, zm=(z0+z1)/2, hw=hwAt(zm); if(!(hw>.05)) continue;
+    let xs=[[cx-hw, cx+hw]]; for(const h of holes) if(z1>h.z0 && z0<h.z1) xs=xs.flatMap(([a,b])=>[[a,Math.min(b,h.x0)],[Math.max(a,h.x1),b]]).filter(([a,b])=>b-a>.05);
+    for(const [a,b] of xs) plats.push({t:'r', x:(a+b)/2, z:zm, c:1, s:0, hw:(b-a)/2, hd:(z1-z0)/2+.01, h:y}); } }

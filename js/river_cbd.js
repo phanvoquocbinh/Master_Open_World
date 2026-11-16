@@ -251,11 +251,12 @@ export async function make(W, ctx){
     // vách kính tầng trệt bao quanh khu (cửa Bắc nối Cầu Kính, cửa Nam ra đại lộ)
     const gw=(ax,az,bx,bz)=>{ const L=Math.hypot(bx-ax,bz-az); if(L<.3) return; const g=new THREE.PlaneGeometry(L,5); KH.add(g, M.glass, (ax+bx)/2,Y+2.5,(az+bz)/2, Math.atan2(bx-ax,bz-az)+Math.PI/2); addSeg(ax,az,bx,bz,.2,undefined,Y+5,'🌲 Vách kính Silicon Forest – cửa ở giữa mặt Bắc (Cầu Kính) và mặt Nam'); };
     gw(x0,z0,276,z0); gw(284,z0,x1,z0); gw(x1,z0,x1,z1); gw(x1,z1,293,z1); gw(287,z1,x0,z1); gw(x0,z1,x0,z0);
-    KH.add(B(x1-x0+1,.35,z1-z0+1), M.glass, c.x,Y+5,c.z);   // mái kính tầng trệt giữa các khối
+    const LF={x:293.5, z:131, yaw:Math.PI/2, count:2, hole:{x0:291.9, x1:295.1, z0:127.8, z1:134.2}};   /* dãy 2 thang máy ở khe giữa khối Tây Bắc và Đông Bắc → vườn mái biệt thự Giám đốc (đặt phía Bắc: tránh tán cây cổ thụ (288, 140)) */
+    for(const r of rectHoles(x0-.5,x1+.5,z0-.5,z1+.5,[LF.hole])) KH.add(B(r.x1-r.x0,.35,r.z1-r.z0), M.glass, (r.x0+r.x1)/2,Y+5,(r.z0+r.z1)/2);   // mái kính tầng trệt giữa các khối (chừa lỗ giếng thang)
     const TREES6=[[288,140],[263,161],[312,158],[289,180],[268,133],[316,190]]; HQ.trees6=TREES6;
     const bigT=vcG([[CY(.9,1.5,32,12).translate(0,16,0),0x6b4a32], [CY(.25,.4,8,6).rotateZ(-.7).translate(3,22,0),0x6b4a32], [CY(.25,.4,8,6).rotateZ(.7).translate(-3,23,0),0x6b4a32], ...[[0,30,0,7,0x3f7a35],[4,27,2,5,0x4b8a3c],[-4,27.5,-2,5.2,0x376f30],[2,33,-3,4.5,0x5a9a42],[-3,31,3,4.4,0x447f37]].map(([x,y,z,r,c])=>[new THREE.IcosahedronGeometry(r,1).scale(1,.75,1).translate(x,y,z),c])]);
     const bt=new THREE.InstancedMesh(bigT, vcM, TREES6.length); TREES6.forEach(([x,z],i)=>{ _m4.compose(_v.set(x,Y-2,z), _q.identity(), _s.set(1,1,1)); bt.setMatrixAt(i,_m4); circles.push({x,z,r:1.6}); }); bt.castShadow=true; bt.userData.dynamic=true; scene.add(bt);
-    HQ.forest={c, x0, x1, z0, z1, blocks, door:{x:290, z:z1+1.6}, doorN:{x:280, z:z0-.8}};
+    HQ.forest={c, x0, x1, z0, z1, blocks, door:{x:290, z:z1+1.6}, doorN:{x:280, z:z0-.8}, lift:LF};
     makeLabel('🌲 Silicon Forest & Treehouse Hub', 'Trụ sở QA · 4 khối gỗ–kính · 6 cây cổ thụ xuyên mái · cửa Nam / Cầu Kính (E)', {h:.75, x:c.x, y:Y+26, z:z1, fade:160}); }
 
   // 7.4 THE TRI-MATRIX PERF CENTER – kim tự tháp tam giác cạnh 85, cao 38, ô giếng trời tam giác phát sáng xanh lá
@@ -283,10 +284,12 @@ export async function make(W, ctx){
       addSeg(t.x0,z0,cx-3,z0,.25,undefined,Y+6,MSG); addSeg(cx+3,z0,t.x1,z0,.25,undefined,Y+6,MSG); addSeg(t.x1,z0,t.x1,z1,.25,undefined,Y+6,MSG); addSeg(t.x1,z1,t.x0,z1,.25,undefined,Y+6,MSG); addSeg(t.x0,z1,t.x0,z0,.25,undefined,Y+6,MSG);
       KH.add(B(8,.4,4), M.silver, cx,Y+4.4,z0-2); }
     // khối cầu kính nối 2 tháp (đáy kính trong suốt nhìn xuống kênh)
-    const bx0=323+9*95/H, bx1=407-9*95/H; KH.add(B(bx1-bx0,BY1-BY0,z1-z0), facT, (bx0+bx1)/2,(BY0+BY1)/2,(z0+z1)/2); KH.add(B(bx1-bx0-.4,.15,z1-z0-.4), M.glass, (bx0+bx1)/2,BY0-.1,(z0+z1)/2);
+    const bx0=323+9*95/H, bx1=407-9*95/H; KH.add(B(bx1-bx0,BY1-BY0,z1-z0), facT, (bx0+bx1)/2,(BY0+BY1)/2,(z0+z1)/2);
+    const TL=[{x:343.5, z:330}, {x:386.5, z:330}].map(p=>({...p, hole:{x0:p.x-3.1, x1:p.x+3.1, z0:p.z-1.45, z1:p.z+1.45}}));   /* mỗi tháp 1 dãy 2 thang máy tốc hành sảnh → Cổng Trời (giếng thẳng đứng nằm trọn trong tháp nghiêng) */
+    for(const r of rectHoles(bx0+.2,bx1-.2,z0+.2,z1-.2,TL.map(t=>t.hole))) KH.add(B(r.x1-r.x0,.15,r.z1-r.z0), M.glass, (r.x0+r.x1)/2,BY0-.1,(r.z0+r.z1)/2);   // đáy kính chừa lỗ giếng
     { const inM=new THREE.MeshStandardMaterial({map:facT.map, roughness:.2, metalness:.5, side:THREE.BackSide, emissive:0x223344, emissiveIntensity:.2}); const ig=new THREE.BoxGeometry(bx1-bx0-.3,BY1-BY0-.3,z1-z0-.3); const ua=ig.attributes.uv; for(let i=0;i<ua.count;i++) ua.setXY(i, ua.getX(i)*5, ua.getY(i)*1.4); const im=new THREE.Mesh(ig, [inM,inM,inM,new THREE.MeshBasicMaterial({visible:false}),inM,inM]);   /* đáy để trống: nhìn xuyên sàn kính xuống kênh */ im.position.set((bx0+bx1)/2,(BY0+BY1)/2,(z0+z1)/2); scene.add(im); }
     ledStrip([V3(bx0,BY0,z0), V3(bx1,BY0,z0)], M.ledC, .14); ledStrip([V3(bx0,BY0,z1), V3(bx1,BY0,z1)], M.ledC, .14);
-    HQ.twin={towers:towersT, z0, z1, H, BY0, BY1, bx0, bx1, doors:towersT.map(t=>({x:(t.x0+t.x1)/2, z:z0-1.6}))};
+    HQ.twin={towers:towersT, z0, z1, H, BY0, BY1, bx0, bx1, lifts:TL, doors:towersT.map(t=>({x:(t.x0+t.x1)/2, z:z0-1.6}))};
     makeLabel('🏙️ Cantilever Cyber Twin-Tower', 'Trụ sở Tập đoàn · Cổng Trời nối 2 tháp ở 95 m · sảnh thang máy phía Bắc (E)', {h:.8, x:365, y:Y+H+6, z:(z0+z1)/2, fade:220}); }
 
   /* ============================== 8. 4 THÁP CĂN HỘ BEIJING STARLIGHT (28 tầng) ============================== */
@@ -369,3 +372,10 @@ export async function make(W, ctx){
   console.info('[River Tech CBD] dựng xong:', out.audit());
   return out;
 }
+
+/* Sàn/mái chừa lỗ giếng thang máy: chữ nhật (x0..x1, z0..z1) trừ các lỗ → danh sách chữ nhật đặc */
+function rectHoles(x0,x1,z0,z1,holes){ const H=holes.map(h=>({x0:Math.max(x0,h.x0), x1:Math.min(x1,h.x1), z0:Math.max(z0,h.z0), z1:Math.min(z1,h.z1)})).filter(h=>h.x1>h.x0 && h.z1>h.z0);
+  const zs=[...new Set([z0,z1,...H.flatMap(h=>[h.z0,h.z1])])].sort((a,b)=>a-b), out=[];
+  for(let i=0;i<zs.length-1;i++){ const za=zs[i], zb=zs[i+1], zm=(za+zb)/2, cut=H.filter(h=>zm>h.z0 && zm<h.z1).sort((a,b)=>a.x0-b.x0); let x=x0;
+    for(const h of cut){ if(h.x0>x+1e-3) out.push({x0:x, x1:h.x0, z0:za, z1:zb}); x=Math.max(x,h.x1); } if(x1>x+1e-3) out.push({x0:x, x1, z0:za, z1:zb}); }
+  return out; }

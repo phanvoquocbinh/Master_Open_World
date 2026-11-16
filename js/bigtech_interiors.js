@@ -7,6 +7,7 @@
 //      🏙️ Cyber Twin: sảnh thang máy 2 tháp → Cổng Trời 95 m: sàn kính nhìn xuống kênh, phòng họp HĐQT, CLB Bida thượng lưu, Phòng Chủ tịch
 //  • Luồng việc làm dùng lại W.work (phỏng vấn · quẹt thẻ · máy tính làm ticket · họp Daily · ăn trưa) với danh sách `towers` do river_cbd.js cấp
 import * as AK from './archKit.js';
+import { makeLift, makeLiftBank } from './liftkit.js';
 
 export function makeInteriors(W, env){
   const {THREE, scene, circles, boxes, plats, INTER, HOOK, P, toast, makeLabel, addSeg, GLOW, mergeGeometries} = W;
@@ -26,7 +27,7 @@ export function makeInteriors(W, env){
   function deskPC(t, x, z, y=Y, label='💻 Làm ticket trên máy trạm (E)'){ INTER.push({x, z, r:1.5, prio:.55, when:atY(y), label, action:()=>{ if(!emp(t)) return toast(`💻 Máy trạm của nhân viên ${t.short}. Xin việc ở lễ tân (phỏng vấn) trước nhé!`, 3000); work().openPC && work().openPC(t); }}); }
   function meeting(t, x, z, y=Y, label='🗣️ Họp Daily cùng team (E)'){ INTER.push({x, z, r:2, prio:.55, when:atY(y), label, action:()=>{ if(!emp(t)) return toast('🗣️ Phòng họp nội bộ – chỉ nhân viên.', 2400); work().standup && work().standup(t); }}); }
   function canteen(t, x, z, y=Y, label='🍱 Ăn trưa / cà phê (E)'){ INTER.push({x, z, r:2, prio:.5, when:atY(y), label, action:()=>{ work().lunch && work().lunch(); toast('🍱 Ngon! Nạp năng lượng cho buổi chiều debug 💪', 2600); }}); }
-  function lift(x, z, from, to, label, guard){ INTER.push({x, z, r:1.6, prio:.8, when:atY(from,1.2), label:`⇅ ${label} (E)`, action:()=>{ if(guard && !guard()) return; P.y=to+.02; if(P.vy!==undefined) P.vy=0; toast(`⇅ Ting! ${label.replace(/^Thang máy /,'')}`, 1800); }}); }
+  const LIFTS=[];   // thang máy thật (liftkit.js): ô cabin bước vào, bảng nút chọn tầng – thay cho kiểu dịch chuyển tức thời trước đây
   // ghế văn phòng (InstancedMesh dùng chung) · ghế ngồi được qua W.addSeat
   const CH=[]; const chair=(x,z,y,rot,sit=false,label='🪑 Ngồi ghế làm việc (E · C)')=>{ CH.push([x,y,z,rot]); if(sit && W.addSeat) W.addSeat({x, z, rot, y:y+.5, floor:y, label}); };
   const MON=[]; const monitor=(x,z,y,rot,curved=false)=>MON.push([x,y,z,rot,curved?1:0]);
@@ -49,11 +50,13 @@ export function makeInteriors(W, env){
     { const x=c.x+7, z=c.z+h.R1-5; K.add(RB(5,1.05,1.1,.08,2), oak, x,Y+.53,z); K.add(RB(5.2,.06,1.3,.02,1), alu, x,Y+1.08,z); boxes.push({x0:x-2.6, x1:x+2.6, z0:z-.6, z1:z+.6}); canteen(t, x, z-1.6, Y, '☕ Quầy cà phê Ring – nghỉ giải lao (E)');
       const rx=c.x-6, rz=c.z+h.R1-5; K.add(RB(4.2,1.1,1.2,.15,3), std(0xf4f2ec,{roughness:.3}), rx,Y+.55,rz); boxes.push({x0:rx-2.2, x1:rx+2.2, z0:rz-.7, z1:rz+.7}); reception(t, rx, rz-1.7); }
     // lõi thang máy cung Bắc → tầng 5 Phòng Giám đốc (nhìn 180° ra vườn trong và sông)
-    const ex=c.x, ez=c.z-h.R1+8, DY=Y+19.2; K.add(RB(3.2,DY-Y+3,3.2,.2,2), alu, ex,(DY+Y+3)/2,ez-3.2); boxes.push({x0:ex-1.7, x1:ex+1.7, z0:ez-4.9, z1:ez-1.5});
-    K.add(B(26,.3,22), oak, ex,DY-.15,ez+3); plats.push({t:'r', x:ex, z:ez+3, c:1, s:0, hw:13, hd:11, h:DY}); for(const [ax,az,bx,bz] of [[ex-13,ez-8,ex+13,ez-8],[ex-13,ez+14,ex+13,ez+14],[ex-13,ez-8,ex-13,ez+14],[ex+13,ez-8,ex+13,ez+14]]) addSeg(ax,az,bx,bz,.15,DY-.4,DY+2.5,'🔳 Kính Phòng Giám đốc');
+    const ex=c.x, ez=c.z-h.R1+8, DY=Y+19.2, LZ=c.z-h.R1+2, N=LZ+1.3;   /* dãy 2 thang máy sát tường Bắc, cửa quay vào trong; sàn tầng 5 bắt đầu ngay trước cửa thang */
+    K.add(B(26,.3,ez+14-N), oak, ex,DY-.15,(N+ez+14)/2); plats.push({t:'r', x:ex, z:(N+ez+14)/2, c:1, s:0, hw:13, hd:(ez+14-N)/2, h:DY});
+    for(const [ax,az,bx,bz] of [[ex-13,N,ex-2.9,N],[ex-.5,N,ex+.5,N],[ex+2.9,N,ex+13,N],[ex-13,ez+14,ex+13,ez+14],[ex-13,N,ex-13,ez+14],[ex+13,N,ex+13,ez+14]]) addSeg(ax,az,bx,bz,.15,DY-.4,DY+2.5,'🔳 Kính Phòng Giám đốc');
+    LIFTS.push(...makeLiftBank(W, {x:ex, z:LZ, yaw:0, count:2, name:'Thang QA Ring', color:0xdfe4ea, floors:[{y:Y, name:'Tầng 1 · Sảnh làm việc', short:'1'}, {y:DY, name:'Tầng 5 · Phòng Giám đốc', short:'5'}]}));
     K.add(RB(4.4,.08,1.8,.04,3), alu, ex,DY+.76,ez+4); K.add(RB(4.0,.7,1.4,.1,3), alu, ex,DY+.38,ez+4); chair(ex,ez+5.3,DY,Math.PI,true,'🪑 Ghế Giám đốc QA Ring (E · C)'); monitor(ex-1,ez+3.6,DY+.8,0,true); monitor(ex+1,ez+3.6,DY+.8,0,true);
     K.add(RB(6,.45,2,.2,3), fabric, ex+8,DY+.23,ez+9); K.add(RB(6,.8,.5,.2,3), fabric, ex+8,DY+.6,ez+9.9);
-    lift(ex, ez-.8, Y, DY, 'Thang máy lên tầng 5 – Phòng Giám đốc', null); lift(ex, ez-.4, DY, Y, 'Thang máy xuống tầng 1', null);
+    boxes.push({x0:ex-2.2, x1:ex+2.2, z0:ez+3.1, z1:ez+4.9, y0:DY-.3, y1:DY+1.2}, {x0:ex+5, x1:ex+11, z0:ez+8, z1:ez+10.2, y0:DY-.3, y1:DY+1.2});   // bàn + sofa Giám đốc có va chạm
     makeLabel('🍎 Phòng Giám đốc QA Ring · tầng 5', 'Bàn nhôm nguyên khối CNC · nhìn 180°', {h:.4, x:ex, y:DY+3.2, z:ez+4, fade:22});
     K.build(g); NOTE.push('ring'); }
 
@@ -120,42 +123,49 @@ export function makeInteriors(W, env){
     makeLabel('🌳 Nhà Trên Cây · phòng họp +8 m', 'Lên bằng cầu thang gỗ cạnh cây cổ thụ', {h:.4, x:TH[1][0], y:TY+5, z:TH[1][1], fade:28});
     // biệt thự kính Giám đốc trên vườn mái khối Đông Bắc
     { const b=h.blocks[1], ry=Y+5+b.f*4+.42, cx=(b.x0+b.x1)/2, cz=(b.z0+b.z1)/2; K.add(B(12,3.4,9), new THREE.MeshPhysicalMaterial({color:0xcfe8f5, transparent:true, opacity:.3, roughness:.03, depthWrite:false, side:THREE.DoubleSide}), cx,ry+1.7,cz); K.add(B(12.6,.25,9.6), M.white, cx,ry+3.5,cz);
-      plats.push({t:'r', x:cx, z:cz, c:1, s:0, hw:(b.x1-b.x0)/2, hd:(b.z1-b.z0)/2, h:ry}); for(const [ax,az,bx,bz] of [[b.x0,b.z0,b.x1,b.z0],[b.x1,b.z0,b.x1,b.z1],[b.x1,b.z1,b.x0,b.z1],[b.x0,b.z1,b.x0,b.z0]]) addSeg(ax,az,bx,bz,.12,ry-.4,ry+2,'🌿 Mép vườn mái');
-      K.add(RB(3.4,.08,1.5,.03,2), M.cedar, cx,ry+.76,cz); chair(cx,cz+1.2,ry,Math.PI,true,'🪑 Ghế Giám đốc Silicon Forest (E · C)'); monitor(cx,cz-.3,ry+.79,0,true);
-      lift(b.x0+2, b.z1+1.2, Y, ry, 'Thang máy lên vườn mái – biệt thự Giám đốc', null); lift(b.x0+2, b.z1-1.2, ry, Y, 'Thang máy xuống sảnh', null); }
+      const LF=h.lift, LH=LF.hole;   /* mép Tây vườn mái chừa lối ra 2 thang máy ở khe giữa 2 khối */
+      plats.push({t:'r', x:cx, z:cz, c:1, s:0, hw:(b.x1-b.x0)/2, hd:(b.z1-b.z0)/2, h:ry}); for(const [ax,az,bx,bz] of [[b.x0,b.z0,b.x1,b.z0],[b.x1,b.z0,b.x1,b.z1],[b.x1,b.z1,b.x0,b.z1],[b.x0,b.z1,b.x0,LH.z1],[b.x0,LH.z0,b.x0,b.z0]]) addSeg(ax,az,bx,bz,.12,ry-.4,ry+2,'🌿 Mép vườn mái');
+      K.add(B(b.x0+.5-(LH.x1-.6),.2,LH.z1-LH.z0), M.cedar, (b.x0+.5+LH.x1-.6)/2,ry-.1,(LH.z0+LH.z1)/2); plats.push({t:'r', x:(b.x0+.5+LH.x1-.6)/2, z:(LH.z0+LH.z1)/2, c:1, s:0, hw:(b.x0+.5-(LH.x1-.6))/2, hd:(LH.z1-LH.z0)/2, h:ry});   // sàn chiếu nghỉ trước cửa thang
+      for(const zz of [LH.z0,LH.z1]){ K.add(B(b.x0-LH.x1+.2,1,.06), walnut, (b.x0+LH.x1)/2,ry+.5,zz); addSeg(LH.x1-.2,zz,b.x0+.1,zz,.12,ry-.4,ry+2,'🌿 Lan can chiếu nghỉ thang máy'); } addSeg(LH.x1-.15,LF.z-.45,LH.x1-.15,LF.z+.45,.12,ry-.4,ry+2,'⇅ Vách giữa 2 thang');
+      LIFTS.push(...makeLiftBank(W, {x:LF.x, z:LF.z, yaw:LF.yaw, count:LF.count, name:'Thang Silicon Forest', color:0xb07a45, floors:[{y:Y, name:'Tầng trệt · Sảnh làm việc', short:'G'}, {y:ry, name:'Vườn mái · Biệt thự Giám đốc', short:'R'}]}));
+      K.add(RB(3.4,.08,1.5,.03,2), M.cedar, cx,ry+.76,cz); chair(cx,cz+1.2,ry,Math.PI,true,'🪑 Ghế Giám đốc Silicon Forest (E · C)'); monitor(cx,cz-.3,ry+.79,0,true); }
     K.build(g); NOTE.push('forest'); }
 
   /* ============================== 🔺 4. THE TRI-MATRIX PERF CENTER ============================== */
-  { const h=HQ.tri, t=tOf('tri'), c=h.c, g=new THREE.Group(); scene.add(g); GROUPS.tri={g, c, r:70}; const K=Kit(c.x,c.z,true);
+  { const h=HQ.tri, t=tOf('tri'), c=h.c, g=new THREE.Group(); scene.add(g); GROUPS.tri={g, c, r:70}; const K=Kit(c.x,c.z,true); const TZ=c.z+10;   /* tâm khán đài (dời Nam 7 m: chừa sảnh thang máy kính ở tâm toà) */ h.tz=TZ;
     // Đại cầu thang tam giác 20 m (khán đài Tech Talk) – 8 bậc tam giác đồng tâm, mặt sàn bậc đi lên được
     const tri=(r)=>{ const s=new THREE.Shape(); for(let i=0;i<3;i++){ const a=-Math.PI/2+i*TAU/3; i?s.lineTo(Math.cos(a)*r,Math.sin(a)*r):s.moveTo(Math.cos(a)*r,Math.sin(a)*r); } s.closePath(); return s; };
-    for(let k=0;k<8;k++){ const r=13-k*1.45, hh=.45; const g2=new THREE.ExtrudeGeometry(tri(r),{depth:hh, bevelEnabled:false}); g2.rotateX(-Math.PI/2); K.add(g2, oak, c.x,Y+k*hh,c.z+3, 0); { const zc=c.z+3, za=zc-r/2, zb=zc+r, n=24;   /* cạnh đáy phía Bắc, đỉnh phía Nam (đúng như lưới vẽ – đã đo bằng worldaudit) */ for(let s=0;s<n;s++){ const z0=za+(zb-za)*s/n, z1=za+(zb-za)*(s+1)/n, zm=(z0+z1)/2, w=r*Math.sqrt(3)*(zb-zm)/(zb-za); plats.push({t:'r', x:c.x, z:zm, c:1, s:0, hw:w/2, hd:Math.abs(z1-z0)/2+.01, h:Y+(k+1)*hh}); } } }   /* dải chữ nhật phủ đúng tam giác bậc (trước: hình tròn nội tiếp → 3 góc lún) */
+    for(let k=0;k<8;k++){ const r=13-k*1.45, hh=.45; const g2=new THREE.ExtrudeGeometry(tri(r),{depth:hh, bevelEnabled:false}); g2.rotateX(-Math.PI/2); K.add(g2, oak, c.x,Y+k*hh,TZ, 0); { const zc=TZ, za=zc-r/2, zb=zc+r, n=24;   /* cạnh đáy phía Bắc, đỉnh phía Nam (đúng như lưới vẽ – đã đo bằng worldaudit) */ for(let s=0;s<n;s++){ const z0=za+(zb-za)*s/n, z1=za+(zb-za)*(s+1)/n, zm=(z0+z1)/2, w=r*Math.sqrt(3)*(zb-zm)/(zb-za); plats.push({t:'r', x:c.x, z:zm, c:1, s:0, hw:w/2, hd:Math.abs(z1-z0)/2+.01, h:Y+(k+1)*hh}); } } }   /* dải chữ nhật phủ đúng tam giác bậc (trước: hình tròn nội tiếp → 3 góc lún) */
     K.add(B(12,6.5,.3), screenM, c.x,Y+6,c.z-14); makeLabel('🎤 Tech Talk: "Load test 1 triệu user không sập"', 'Ngồi trên khán đài tam giác (E · C)', {h:.42, x:c.x, y:Y+10, z:c.z-14, fade:30});
-    for(let k=1;k<8;k++) for(const a of [0,TAU/3,2*TAU/3]){ const r=(13-k*1.45)*.42, ang=-Math.PI/2+a+Math.PI/3; if(W.addSeat) W.addSeat({x:c.x+Math.cos(ang)*r, z:c.z+3+Math.sin(ang)*r, rot:Math.atan2(-Math.cos(ang),-Math.sin(ang)), y:Y+k*.45+.45, floor:Y+k*.45, label:'🎤 Ngồi nghe Tech Talk (E · C)'}); }
+    for(let k=1;k<8;k++) for(const a of [0,TAU/3,2*TAU/3]){ const r=(13-k*1.45)*.42, ang=-Math.PI/2+a+Math.PI/3; if(W.addSeat) W.addSeat({x:c.x+Math.cos(ang)*r, z:TZ+Math.sin(ang)*r, rot:Math.atan2(-Math.cos(ang),-Math.sin(ang)), y:Y+k*.45+.45, floor:Y+k*.45, label:'🎤 Ngồi nghe Tech Talk (E · C)'}); }
     // bàn 3 màn hình cong xếp theo tam giác đồng tâm quanh khán đài
     for(const rr of [20,26]) for(let side=0;side<3;side++){ const a0=-Math.PI/2+side*TAU/3+Math.PI/3, nx=Math.cos(a0), nz=Math.sin(a0), tx=-nz, tz=nx;
-      for(let k=-3;k<=3;k++){ const x=c.x+nx*rr*.55+tx*k*3.2, z=c.z+3+nz*rr*.55+tz*k*3.2; if(Math.hypot(x-h.door.x,z-h.door.z)<7) continue; const rot=Math.atan2(-nx,-nz);
+      for(let k=-3;k<=3;k++){ const x=c.x+nx*rr*.55+tx*k*3.2, z=TZ+nz*rr*.55+tz*k*3.2; if(Math.hypot(x-h.door.x,z-h.door.z)<7) continue; const rot=Math.atan2(-nx,-nz);
         K.add(RB(2.6,.06,1.0,.02,2), std(0x2a2f36,{roughness:.35, metalness:.5}), x,Y+.74,z, rot); for(const u of [-.8,0,.8]) monitor(x+tx*u-nx*.25, z+tz*u-nz*.25, Y+.77, rot, true); chair(x+nx*.9,z+nz*.9,Y,rot+Math.PI,k===0); boxes.push({x0:x-1.3, x1:x+1.3, z0:z-1.3, z1:z+1.3}); if(k===0 && rr===20) deskPC(t, x+nx*1.8, z+nz*1.8); } }
     { const rx=h.door.x+7, rz=h.door.z+6; K.add(RB(4.4,1.1,1.2,.2,3), std(0x1d2a24,{roughness:.3, metalness:.4}), rx,Y+.55,rz); boxes.push({x0:rx-2.3, x1:rx+2.3, z0:rz-.7, z1:rz+.7}); reception(t, rx, rz-1.7);
       const kx=h.door.x-9, kz=h.door.z+8; K.add(RB(5,1.05,1.1,.08,2), std(0x1d2a24,{roughness:.3}), kx,Y+.53,kz); boxes.push({x0:kx-2.6, x1:kx+2.6, z0:kz-.6, z1:kz+.6}); canteen(t, kx, kz-1.6, Y, '⚡ Quầy năng lượng Perf – cà phê đen & bánh (E)');
       meeting(t, c.x+16, c.z+18, Y, '📊 Họp Daily – xem dashboard tải (E)'); }
-    // Phòng Giám đốc trong chóp kính 30 m (thang máy kính ở góc Tây Nam khán đài)
-    const DY=Y+30, ex=c.x-16, ez=c.z+12; K.add(CY(1.4,1.4,DY-Y,16,1,true), new THREE.MeshPhysicalMaterial({color:0xcfe8f5, transparent:true, opacity:.25, roughness:.03, depthWrite:false, side:THREE.DoubleSide}), ex,(DY+Y)/2,ez); circles.push({x:ex,z:ez,r:1.5});
-    K.add(CY(6.8,6.8,.3,3).rotateY(Math.PI/6), oak, c.x,DY-.15,c.z); plats.push({t:'c', x:c.x, z:c.z, r:5.6, h:DY}); for(let i=0;i<24;i++){ const a=i/24*TAU, b=(i+1)/24*TAU; addSeg(c.x+Math.cos(a)*5.8,c.z+Math.sin(a)*5.8,c.x+Math.cos(b)*5.8,c.z+Math.sin(b)*5.8,.12,DY-.4,DY+2,'🔺 Kính chóp Tri-Matrix'); }
-    K.add(RB(3,.08,1.3,.03,2), std(0x2a2f36,{roughness:.3, metalness:.6}), c.x,DY+.76,c.z); chair(c.x,c.z+1.1,DY,Math.PI,true,'🪑 Ghế Giám đốc Tri-Matrix (E · C)'); for(const u of [-.8,0,.8]) monitor(c.x+u,c.z-.25,DY+.79,0,true);
-    lift(ex+1.8, ez, Y, DY, 'Thang máy kính lên chóp – Phòng Giám đốc', null); lift(c.x+3.5, c.z, DY, Y, 'Thang máy xuống đại sảnh', null);
+    // Phòng Giám đốc trong chóp kính 30 m – thang máy kính ở tâm toà (giếng thẳng đứng nằm trọn trong kim tự tháp tới đỉnh giếng 33 m)
+    const DY=Y+30, LX=c.x, LZ=c.z-.8, LH={x0:LX-1.45, x1:LX+1.45, z0:LZ-1.45, z1:LZ+1.45};
+    { const ri=5.0, sh=new THREE.Shape([new THREE.Vector2(0,-2*ri), new THREE.Vector2(Math.sqrt(3)*ri,ri), new THREE.Vector2(-Math.sqrt(3)*ri,ri)]);   /* sàn tam giác thẳng hàng với mặt chóp (đỉnh Nam), shape y = −z */
+      sh.holes.push(new THREE.Path([new THREE.Vector2(LH.x0-c.x,-(LH.z0-c.z)), new THREE.Vector2(LH.x1-c.x,-(LH.z0-c.z)), new THREE.Vector2(LH.x1-c.x,-(LH.z1-c.z)), new THREE.Vector2(LH.x0-c.x,-(LH.z1-c.z))]));
+      const fg=new THREE.ExtrudeGeometry(sh,{depth:.3, bevelEnabled:false}); fg.rotateX(-Math.PI/2); K.add(fg, oak, c.x,DY-.3,c.z);
+      const rw=3.8, hT=3*rw, hb=Math.sqrt(3)*rw; stripPlats(plats, c.x, z=>hb*(c.z+2*rw-z)/hT, c.z-rw, c.z+2*rw, 24, DY, [LH]);   /* vùng đi được lùi vào 1,2 m: đứng sát kính đầu không chạm mặt chóp */
+      const V=[[c.x,c.z+2*rw],[c.x+hb,c.z-rw],[c.x-hb,c.z-rw]]; for(let i=0;i<3;i++){ const [ax,az]=V[i], [bx,bz]=V[(i+1)%3]; addSeg(ax,az,bx,bz,.12,DY-.4,DY+2.5,'🔺 Kính chóp Tri-Matrix'); } }
+    K.add(RB(3,.08,1.3,.03,2), std(0x2a2f36,{roughness:.3, metalness:.6}), c.x,DY+.76,c.z+3.6); chair(c.x,c.z+4.7,DY,Math.PI,true,'🪑 Ghế Giám đốc Tri-Matrix (E · C)'); boxes.push({x0:c.x-1.5, x1:c.x+1.5, z0:c.z+2.95, z1:c.z+4.25, y0:DY-.3, y1:DY+1.2}); for(const u of [-.8,0,.8]) monitor(c.x+u,c.z+3.35,DY+.79,0,true);
+    LIFTS.push(makeLift(W, {x:LX, z:LZ, yaw:0, name:'Thang kính Tri-Matrix', color:0x9dff5c, floors:[{y:Y, name:'Đại sảnh · khán đài Tech Talk', short:'G'}, {y:DY, name:'Chóp kính · Phòng Giám đốc', short:'30'}]}));
     K.build(g); NOTE.push('tri'); }
 
   /* ============================== 🏙️ 5. CYBER TWIN-TOWER: SẢNH + CỔNG TRỜI 95 m ============================== */
   { const h=HQ.twin, t=tOf('twin'), g=new THREE.Group(); scene.add(g); const c={x:365, z:(h.z0+h.z1)/2}; GROUPS.twin={g, c, r:90}; const K=Kit(c.x,c.z,true), BY=h.BY0, z0=h.z0+1, z1=h.z1-1, bx0=h.bx0+1, bx1=h.bx1-1;
     const guard=()=>{ if(emp(t)) return true; toast('👮 Bảo vệ: "Cổng Trời chỉ dành cho nhân viên Cyber Twin – mời bạn phỏng vấn ở lễ tân sảnh trước."', 3600); return false; };
     for(const [i,tw] of h.towers.entries()){ const cx=(tw.x0+tw.x1)/2, rz=h.z0+5; K.add(RB(5,1.1,1.2,.2,3), std(0x1b1d22,{roughness:.25, metalness:.6}), cx,Y+.55,rz); boxes.push({x0:cx-2.6, x1:cx+2.6, z0:rz-.7, z1:rz+.7});
-      if(i===0) reception(t, cx-4, rz-1.6); K.add(RB(2.6,4,2.6,.2,2), alu, cx+6,Y+2,h.z0+12); boxes.push({x0:cx+4.6, x1:cx+7.4, z0:h.z0+10.6, z1:h.z0+13.4});
-      lift(cx+6, h.z0+9.8, Y, BY, 'Thang máy tốc hành lên Cổng Trời 95 m', guard); }
+      if(i===0) reception(t, cx-4, rz-1.6);
+      const TL=h.lifts[i]; for(const L of makeLiftBank(W, {x:TL.x, z:TL.z, yaw:Math.PI, count:2, name:`Thang tốc hành tháp ${i?'Đông':'Tây'}`, color:0x4fc3ff, floors:[{y:Y, name:`Sảnh tháp ${i?'Đông':'Tây'}`, short:'G'}, {y:BY, name:'Cổng Trời 95 m', short:'95'}]})){
+        const go0=L.go; L.go=(k,rider)=>{ if(k===L.floors.length-1 && L.at===0 && L.inside() && !guard()) return; go0(k,rider); }; LIFTS.push(L); } }   /* bảo vệ: chỉ nhân viên được lên Cổng Trời */
     // sàn kính trong suốt nhìn xuống kênh
-    K.add(B(bx1-bx0,.06,z1-z0), new THREE.MeshPhysicalMaterial({color:0xe6f6ff, roughness:.02, transparent:true, opacity:.14, depthWrite:false}), (bx0+bx1)/2,BY+.03,c.z); plats.push({t:'r', x:(bx0+bx1)/2, z:c.z, c:1, s:0, hw:(bx1-bx0)/2, hd:(z1-z0)/2, h:BY});
+    { const gm=new THREE.MeshPhysicalMaterial({color:0xe6f6ff, roughness:.02, transparent:true, opacity:.14, depthWrite:false}); for(const r of rectHoles(bx0,bx1,z0,z1,h.lifts.map(l=>l.hole))){ K.add(B(r.x1-r.x0,.06,r.z1-r.z0), gm, (r.x0+r.x1)/2,BY+.03,(r.z0+r.z1)/2); plats.push({t:'r', x:(r.x0+r.x1)/2, z:(r.z0+r.z1)/2, c:1, s:0, hw:(r.x1-r.x0)/2, hd:(r.z1-r.z0)/2, h:BY}); } }   // sàn kính chừa lỗ 2 dãy giếng thang
     for(const [ax,az,bx,bz] of [[bx0,z0,bx1,z0],[bx1,z0,bx1,z1],[bx1,z1,bx0,z1],[bx0,z1,bx0,z0]]) addSeg(ax,az,bx,bz,.2,BY-.5,BY+4,'🏙️ Vách kính Cổng Trời – nhìn xuống kênh Đông Hoa 95 m');
-    const lx=bx0+2.5; lift(lx, c.z-6, BY, Y, 'Thang máy xuống sảnh', null);
     // phòng họp HĐQT (bàn óc chó 12 m + 14 ghế) · CLB Bida thượng lưu · Phòng Chủ tịch
     K.add(RB(12,.1,2.6,.04,2), walnut, bx0+14,BY+.76,c.z); K.add(RB(11,.7,1.6,.1,2), walnut, bx0+14,BY+.38,c.z); boxes.push({x0:bx0+8, x1:bx0+20, z0:c.z-1.3, z1:c.z+1.3}); boxes[boxes.length-1].y0=BY-.5; boxes[boxes.length-1].y1=BY+1.2;
     for(let k=-5;k<=5;k+=2) for(const s of [-1,1]) chair(bx0+14+k*1,c.z+s*1.8,BY,s>0?Math.PI:0,k===1);
@@ -184,5 +194,17 @@ export function makeInteriors(W, env){
       // HUD ca làm khi đang ở trong 1 trụ sở
       let inside=null; for(const t of towers){ const G=GROUPS[t.hq]; if(!G) continue; if(Math.hypot(P.x-G.c.x,P.z-G.c.z)<(t.inR||45)){ inside=t; break; } }
       if(inside!==near){ near=inside; try{ work().onFloor && work().onFloor(inside, inside?{kind:'lobby', n:1, name:'Sảnh'}:null); }catch(e){} } } });
-  return {groups:GROUPS, built:NOTE};
+  return {groups:GROUPS, built:NOTE, lifts:LIFTS};
 }
+
+/* Sàn/mái chừa lỗ giếng thang máy: chữ nhật (x0..x1, z0..z1) trừ các lỗ → danh sách chữ nhật đặc */
+function rectHoles(x0,x1,z0,z1,holes){ const H=holes.map(h=>({x0:Math.max(x0,h.x0), x1:Math.min(x1,h.x1), z0:Math.max(z0,h.z0), z1:Math.min(z1,h.z1)})).filter(h=>h.x1>h.x0 && h.z1>h.z0);
+  const zs=[...new Set([z0,z1,...H.flatMap(h=>[h.z0,h.z1])])].sort((a,b)=>a-b), out=[];
+  for(let i=0;i<zs.length-1;i++){ const za=zs[i], zb=zs[i+1], zm=(za+zb)/2, cut=H.filter(h=>zm>h.z0 && zm<h.z1).sort((a,b)=>a.x0-b.x0); let x=x0;
+    for(const h of cut){ if(h.x0>x+1e-3) out.push({x0:x, x1:h.x0, z0:za, z1:zb}); x=Math.max(x,h.x1); } if(x1>x+1e-3) out.push({x0:x, x1, z0:za, z1:zb}); }
+  return out; }
+
+/* Mặt đứng dạng dải theo z cho hình bất kỳ (nửa bề rộng hw(z) quanh tâm cx), trừ các lỗ giếng thang {x0,x1,z0,z1} (toạ độ thế giới) */
+function stripPlats(plats, cx, hwAt, za, zb, n, y, holes=[]){ for(let s=0;s<n;s++){ const z0=za+(zb-za)*s/n, z1=za+(zb-za)*(s+1)/n, zm=(z0+z1)/2, hw=hwAt(zm); if(!(hw>.05)) continue;
+    let xs=[[cx-hw, cx+hw]]; for(const h of holes) if(z1>h.z0 && z0<h.z1) xs=xs.flatMap(([a,b])=>[[a,Math.min(b,h.x0)],[Math.max(a,h.x1),b]]).filter(([a,b])=>b-a>.05);
+    for(const [a,b] of xs) plats.push({t:'r', x:(a+b)/2, z:zm, c:1, s:0, hw:(b-a)/2, hd:(z1-z0)/2+.01, h:y}); } }
