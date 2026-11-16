@@ -22,9 +22,11 @@ export async function make(W, zones={}){
   const LINES=[];
   const VMAX={abyssal:11, cbd:12.5, skyport:11, palm:10, wonder:8, devcity:11, brain:9, swiss:6};
   const add=(pts, w, zone, o={})=>{ if(pts.length>=2) LINES.push({pts, w, zone, vmax:o.vmax||VMAX[zone]||10, name:o.name||zone, fixedY:!!o.fixedY, refY:o.refY??2}); };
-  const WD={abyssal:9, skyport:10, palm:8, wonder:8};
+  const WD={abyssal:8, skyport:10, palm:8, wonder:8};
   for(const R0 of (W.V2ROADS||[])){
-    for(const s of R0.segs){ let w=WD[R0.zone]||10;
+    for(const s0 of R0.segs){ let w=WD[R0.zone]||10, s=s0;
+      // Wonder G9: phía Wonder chỉ là lối lát trong công viên → xe chỉ chạy tới mố cầu (x ≥ 200) rồi quay đầu
+      if(R0.zone==='wonder' && Math.abs(s[1]-900)<1 && Math.abs(s[3]-900)<1){ s=[Math.max(200,s[0]), s[1], Math.max(200,s[2]), s[3]]; if(Math.abs(s[2]-s[0])<4) continue; }
       // Abyssal: chỉ vành đai +2 (±174) và 3 nhánh ra cổng là đường xe; đường đỉnh vách (+28, lát đá 4 m) + lối vào giếng xoắn ốc là đường đi bộ
       if(R0.zone==='abyssal' && !(Math.max(Math.abs(s[0]),Math.abs(s[1]))>=170 && Math.max(Math.abs(s[2]),Math.abs(s[3]))>=170)) continue;
       if(R0.zone==='cbd'){ const zc=Math.abs(s[1]-s[3])<.5 ? s[1] : null; w=(zc!==null && (Math.abs(zc-66)<1 || Math.abs(zc-236)<1)) ? 24 : 20; }
@@ -128,8 +130,11 @@ export async function make(W, zones={}){
   const tNet=performance.now()-t0;
 
   /* ============================== 3. XE HƠI BOT ============================== */
-  const POOL={low:14, medium:20, high:28}[QUAL] ?? 18, RANGE={low:170, medium:200, high:220}[QUAL] ?? 200;
-  const MODELS=[['sedan',.24],['suv',.17],['mini',.13],['sport',.08],['pickup',.1],['taxi',.16],['van',.12]];
+  // 16/11 (Bình: "đường phố đông vui"): ~35–45 xe trong ~200 m quanh người chơi; xe chỉ là thực thể InstancedMesh nên số xe không thêm lượt vẽ
+  const POOL={low:38, medium:42, high:46}[QUAL] ?? 40, RANGE={low:180, medium:200, high:210}[QUAL] ?? 200;
+  const MODELS=[['sedan',.2],['suv',.15],['mini',.11],['sport',.06],['pickup',.08],['taxi',.17],['van',.11],['bus',.12]];
+  const BUSC=[0x2e8b57,0x1b6fd1,0xe8761a,0xc81d25];
+  const ZW={cbd:1, devcity:1, abyssal:1, palm:1, skyport:.7, brain:.5, wonder:.35, swiss:.25};   // ưu tiên rải xe trên đường chính
   const COLORS=[0xd7263d,0x1b4f9c,0xf2f2f2,0x1d1f24,0x8a9099,0x2e8b57,0xff7b29,0x6b3fa0,0x0fa3b1,0xc9a227,0x7a1f2a,0xe9e3d5,0x3a6ea5,0x9b2226];
   const SENT=0xff00ff;
   const cars=[], specials=[], carGroup=new THREE.Group(); carGroup.name='v2traffic-dummies'; carGroup.userData.dynamic=true; scene.add(carGroup);
@@ -145,17 +150,29 @@ export async function make(W, zones={}){
       const n=geo.attributes.position.count, ca=new Float32Array(n*3); for(let i=0;i<n;i++){ ca[i*3]=col.r; ca[i*3+1]=col.g; ca[i*3+2]=col.b; } geo.setAttribute('color', new THREE.BufferAttribute(ca,3)); trim.push(geo); });
     const wheels=(g.userData.wheels||[]).map(w=>{ const p=new THREE.Vector3(); w.getWorldPosition(p); return p; });
     return {body:body.length?merge(body):null, trim:trim.length?merge(trim):null, wheels, r:(g.userData.r||.36)*(g.userData.wScale||1)}; }
+  // xe buýt thành phố 10,5 m (thân sơn màu theo tuyến + dải kính + cửa + đèn), bánh xe để InstancedMesh chung
+  function buildBus(){ const g=new THREE.Group(), sm=(c,o={})=>new THREE.MeshStandardMaterial({color:c, roughness:.5, ...o}), body=sm(SENT), glass=sm(0x1d2b36,{transparent:true, opacity:.9}), dark=sm(0x22252a), white=sm(0xf4f4f4), lite=sm(0xfff6dc,{emissive:0xfff2c8, emissiveIntensity:.5}), red=sm(0x8a0c0c,{emissive:0xff1a10, emissiveIntensity:.4});
+    const box=(w,h,d,m,x,y,z)=>{ const ms=new THREE.Mesh(new THREE.BoxGeometry(w,h,d), m); ms.position.set(x,y,z); g.add(ms); return ms; };
+    box(2.5,2.3,10.4,body,0,1.65,0); box(2.42,.12,10.2,white,0,2.86,0);                        // thân + mái
+    for(const s of [-1,1]) box(.04,.95,9.1,glass,s*1.26,2.15,-.3);                              // dải kính 2 bên
+    box(2.3,1.25,.05,glass,0,2.05,5.21); box(2.3,.9,.05,glass,0,2.25,-5.21);                    // kính trước / sau
+    for(const z of [3.6,-.4]) box(.05,2.1,1.1,dark,1.27,1.45,z);                                // 2 cửa lên xuống (bên phải)
+    box(2.3,.32,.06,dark,0,3.05,5.15); for(const s of [-1,1]){ box(.36,.16,.06,lite,s*.9,.95,5.22); box(.3,.18,.06,red,s*1.0,1.0,-5.22); }
+    box(2.46,.35,10.3,dark,0,.6,0);                                                             // gầm / ốp dưới
+    const wheels=[]; for(const [x,z] of [[-1.12,3.55],[1.12,3.55],[-1.12,-3.3],[1.12,-3.3]]){ const w=new THREE.Group(); w.position.set(x,.5,z); g.add(w); wheels.push(w); }
+    g.userData={wheels, r:.5, type:'car', model:'bus'}; return g; }
   function buildModels(){ const V=W.life.V, bodyM=new THREE.MeshStandardMaterial({color:0xffffff, roughness:.3, metalness:.55}), trimM=new THREE.MeshStandardMaterial({vertexColors:true, roughness:.45, metalness:.35});
     const shadow=QUAL!=='low', byModel={}; for(const c of cars) (byModel[c.model] ||= []).push(c);
     for(const [model] of MODELS){ const list=byModel[model]; if(!list || !list.length) continue;
       let g; if(model==='taxi'){ g=V.buildCar(SENT,'sedan'); const sign=new THREE.Mesh(new THREE.BoxGeometry(.7,.24,.3), new THREE.MeshStandardMaterial({color:0xffffff, emissive:0xfff3b0, emissiveIntensity:.6})); sign.position.set(0,1.62,-.15); g.add(sign); const t=new THREE.Mesh(new THREE.BoxGeometry(.72,.08,.32), new THREE.MeshStandardMaterial({color:0x1d1f24})); t.position.set(0,1.48,-.15); g.add(t); }
       else if(model==='van'){ g=V.buildCar(SENT,'suv'); g.scale.set(1.06,1.3,1.42); g.userData.wScale=1.08; }
+      else if(model==='bus') g=buildBus();
       else g=V.buildCar(SENT, model);
       const B=bake(g), bb=new THREE.Box3(); for(const geo of [B.body,B.trim]) if(geo){ geo.computeBoundingBox(); bb.union(geo.boundingBox); }
       const hl=Math.max(Math.abs(bb.min.z), bb.max.z), hw=(bb.max.x-bb.min.x)/2;
       const ims=[]; for(const [geo,mat] of [[B.body,bodyM],[B.trim,trimM]]){ if(!geo) continue; const im=new THREE.InstancedMesh(geo, mat, list.length); im.frustumCulled=false; im.castShadow=shadow; im.receiveShadow=true; im.userData.dynamic=true; im.name='v2car-'+model; scene.add(im); ims.push(im); }
       IM[model]={ims, body:B.body?ims[0]:null};
-      list.forEach((c,i)=>{ c.mi=i; c.hl=hl; c.hw=hw; c.dyn.hl=hl; c.dyn.hw=hw; c.wheels=B.wheels; c.wr=B.r; if(IM[model].body) IM[model].body.setColorAt(i, new THREE.Color(model==='taxi' ? 0xf4c20d : c.color)); });
+      list.forEach((c,i)=>{ c.mi=i; c.hl=hl; c.hw=hw; c.dyn.hl=hl; c.dyn.hw=hw; c.wheels=B.wheels; c.wr=B.r; if(IM[model].body) IM[model].body.setColorAt(i, new THREE.Color(model==='taxi' ? 0xf4c20d : model==='bus' ? BUSC[i%BUSC.length] : c.color)); });
       if(IM[model].body && IM[model].body.instanceColor) IM[model].body.instanceColor.needsUpdate=true; }
     // bánh xe: 1 lượt vẽ cho mọi xe (lốp + mâm)
     const paint=(g,c)=>{ const n=g.attributes.position.count, a=new Float32Array(n*3), cc=new THREE.Color(c); for(let i=0;i<n;i++){ a[i*3]=cc.r; a[i*3+1]=cc.g; a[i*3+2]=cc.b; } g.setAttribute('color', new THREE.BufferAttribute(a,3)); for(const k of Object.keys(g.attributes)) if(!['position','normal','color'].includes(k)) g.deleteAttribute(k); return g; };
@@ -166,7 +183,8 @@ export async function make(W, zones={}){
 
   for(let i=0;i<POOL;i++){ let r=RND(), model='sedan'; for(const [m,w] of MODELS){ r-=w; if(r<=0){ model=m; break; } }
     const dummy=new THREE.Object3D(); carGroup.add(dummy);
-    const c={i, model, color:COLORS[(i*5+3)%COLORS.length], g:dummy, mi:0, hl:2.3, hw:.95, v:0, h:0, pitch:0, active:false, near:false, B:null, s:0, spin:0, wr:.36, wheels:[], stuck:0, ghost:0, blk:0, honk:0, hold:null, plan:null, top:1, kind:'car'};
+    const c={i, model, color:COLORS[(i*5+3)%COLORS.length], g:dummy, mi:0, hl:2.3, hw:.95, v:0, h:0, pitch:0, active:false, near:false, B:null, s:0, spin:0, wr:.36, wheels:[], stuck:0, ghost:0, blk:0, honk:0, hold:null, plan:null, top:1, kind:'car',
+      lat:0, latT:0, pull:null, passing:null, stopIn:(model==='bus'?25:model==='taxi'?40:1e9)*(.5+RND())};   // lat: lệch ngang (+ phải: tấp lề · − trái: vượt)
     c.dyn={obj:dummy, hl:2.3, hw:.95, head:()=>c.h, on:()=>c.active && c.near, name:'ô tô'}; if(W.DYN) W.DYN.push(c.dyn); cars.push(c); }
 
   // bộ đệm đường đi của từng xe (làn phải + cung rẽ ở nút)
@@ -181,10 +199,13 @@ export async function make(W, zones={}){
     if(!opts.length) return null; const e=opts[Math.floor(RND()*opts.length)]; return {e, dir:e.a===nd?1:-1}; }
   function extend(c){ const e=c.e, dir=c.dir, nd=dir>0?e.b:e.a, B=c.B, n0=B.x.length; const nx=chooseNext(c, nd);
     if(!nx){ if(c.special){ c.done=true; return; }
-      // ngõ cụt → quay đầu nửa vòng tròn trong lòng đường
-      lanePoint(e, dir, e.len, _o); const R=e.off, ux=_o.ux, uz=_o.uz, cx=_o.x+uz*R-ux*R, cz=_o.z-ux*R-uz*R, rx=-uz, rz=ux;
-      for(let k=1;k<=10;k++){ const th=Math.PI*k/10; pushPt(B, cx+rx*R*Math.cos(th)+ux*R*Math.sin(th), cz+rz*R*Math.cos(th)+uz*R*Math.sin(th), _o.y, 3.5); }
-      B.marks.push({s:B.cum[B.cum.length-1], nd, uturn:true}); capCurv(B, n0-1); appendEdge(c, e, -dir, Math.max(0, R*2-1)); return; }
+      // ngõ cụt → quay đầu MƯỢT: dạt dần ra sát lề phải rồi vòng 1 cung tròn bán kính ≈ nửa lòng đường, về đúng làn ngược lại
+      const R=Math.max(e.off, Math.min(e.w/2-.9, 6)), back=Math.min(R+1.5, e.len*.4), rIn=Math.min(e.len*.45, 14);
+      const d0=Math.max(0, e.len-rOf(e)), d1=e.len-back; if(d1>d0+.5) for(let k=1;k<=4;k++){ const d=d0+(d1-d0)*k/4; lanePoint(e, dir, d, _o, e.off+(R-e.off)*k/4); pushPt(B, _o.x, _o.z, _o.y, 6); }
+      edgePt(e, dir>0 ? e.len-back : back, _o2); const ux=_o2.ux*dir, uz=_o2.uz*dir, cx=_o2.x, cz=_o2.z, rx=-uz, rz=ux;   // tâm cung = tim đường, lùi khỏi đầu cụt một đoạn
+      for(let k=1;k<=16;k++){ const th=Math.PI*k/16; pushPt(B, cx+rx*R*Math.cos(th)+ux*R*Math.sin(th), cz+rz*R*Math.cos(th)+uz*R*Math.sin(th), _o2.y, 3.6); }
+      for(let k=1;k<=4;k++){ const d=back+rIn*k/4; lanePoint(e, -dir, d, _o, R+(e.off-R)*k/4); pushPt(B, _o.x, _o.z, _o.y, 6); }
+      B.marks.push({s:B.cum[B.cum.length-1], nd, uturn:true}); capCurv(B, n0-1); appendEdge(c, e, -dir, back+rIn+1); return; }
     lanePoint(e, dir, e.len-rOf(e), _o); const P0x=_o.x, P0z=_o.z, P0y=_o.y, r2=rOf(nx.e); lanePoint(nx.e, nx.dir, r2, _o2);
     lanePoint(e, dir, e.len, _o); const ax=_o.x, az=_o.z, aux=_o.ux, auz=_o.uz; lanePoint(nx.e, nx.dir, 0, _o); const bx=_o.x, bz=_o.z;
     const dot=aux*_o.ux+auz*_o.uz; let Cx=(ax+bx)/2, Cz=(az+bz)/2; if(dot>-.6){ const k=1/Math.max(.35, 1+dot); Cx=nd.x+((ax-nd.x)+(bx-nd.x))*k; Cz=nd.z+((az-nd.z)+(bz-nd.z))*k; }   // điểm khống chế = giao 2 làn gần nút
@@ -198,20 +219,22 @@ export async function make(W, zones={}){
   const sph=new THREE.Sphere(new THREE.Vector3(), 3);
   const inView=(x,y,z,r=3)=>{ sph.center.set(x,y+1,z); sph.radius=r; return !!W.FRUS && W.FRUS.intersectsSphere(sph); };
   let nearE=[], nearL=0;
-  function refreshNear(){ nearE=[]; nearL=0; const r2=(RANGE+40)**2; for(const e of edges){ const m=e.x.length>>1, l=e.x.length-1; if((e.x[0]-P.x)**2+(e.z[0]-P.z)**2<r2 || (e.x[m]-P.x)**2+(e.z[m]-P.z)**2<r2 || (e.x[l]-P.x)**2+(e.z[l]-P.z)**2<r2){ nearE.push(e); nearL+=e.len; } } }
+  function refreshNear(){ nearE=[]; nearL=0; const r2=(RANGE+40)**2; for(const e of edges){ const m=e.x.length>>1, l=e.x.length-1; if((e.x[0]-P.x)**2+(e.z[0]-P.z)**2<r2 || (e.x[m]-P.x)**2+(e.z[m]-P.z)**2<r2 || (e.x[l]-P.x)**2+(e.z[l]-P.z)**2<r2){ nearE.push(e); nearL+=e.len*(ZW[e.zone]??.6); } } }
   function spawnCar(c, initial){ hideCar(c);
-    for(let t=0;t<16 && nearE.length;t++){ let r=RND()*nearL, e=nearE[nearE.length-1]; for(const q of nearE){ r-=q.len; if(r<=0){ e=q; break; } } if(e.zone==='swiss' && RND()<.6) continue;
+    for(let t=0;t<20 && nearE.length;t++){ let r=RND()*nearL, e=nearE[nearE.length-1]; for(const q of nearE){ r-=q.len*(ZW[q.zone]??.6); if(r<=0){ e=q; break; } }
       const dir=RND()<.5?1:-1, d=RND()*e.len; lanePoint(e, dir, d, _o); const dist=Math.hypot(_o.x-P.x, _o.z-P.z);
-      if(dist>RANGE || dist<(initial?25:60)) continue; if(!initial && dist<110 && inView(_o.x,_o.y,_o.z)) continue;
-      if(cars.some(q=>q!==c && q.active && Math.hypot(q.g.position.x-_o.x, q.g.position.z-_o.z)<14)) continue;
-      c.B=newBuf(); appendEdge(c, e, dir, d); c.s=0; c.v=Math.min(e.vmax, 7)*(.5+RND()*.5); c.stuck=0; c.ghost=0; c.hold=null; c.plan=null; c.top=.85+RND()*.25; c.active=true;
+      if(dist>RANGE || dist<(initial?22:55)) continue; if(!initial && dist<110 && inView(_o.x,_o.y,_o.z)) continue;
+      if(RND()<(dist-60)/(RANGE*1.6)) continue;   // ưu tiên gần người chơi (đường quanh mình đông hơn)
+      if(cars.some(q=>q!==c && q.active && Math.hypot(q.g.position.x-_o.x, q.g.position.z-_o.z)<(c.model==='bus'?20:14))) continue;
+      c.B=newBuf(); appendEdge(c, e, dir, d); c.s=0; c.v=Math.min(e.vmax, 7)*(.5+RND()*.5); c.stuck=0; c.ghost=0; c.hold=null; c.plan=null; c.top=(c.model==='bus'?.72:.85)+RND()*.25; c.active=true; c.lat=c.latT=0; c.pull=null; c.passing=null;
       bufAt(c.B, 1.5, _o2); c.h=Math.atan2(_o2.x-c.B.x[0], _o2.z-c.B.z[0]); placeCar(c, 0); return true; }
     return false; }
   function hideCar(c){ c.active=false; c.near=false; c.g.position.set(1e6,-1e3,1e6); if(c.hold){ if(c.hold.occ===c) c.hold.occ=null; c.hold=null; }
     if(!built) return; const M=IM[c.model]; if(M) for(const im of M.ims){ im.setMatrixAt(c.mi, _z); im.instanceMatrix.needsUpdate=true; } for(let k=0;k<4;k++) wheelIM.setMatrixAt(c.i*4+k, _z); wheelIM.instanceMatrix.needsUpdate=true; }
-  function placeCar(c, dt){ const B=c.B; bufAt(B, c.s, _o); const x=_o.x, z=_o.z, y0=_o.y; bufAt(B, c.s+1.6, _o2); const yF=_o2.y, hx=_o2.x-x, hz=_o2.z-z; bufAt(B, Math.max(0,c.s-1.6), _o2); const yB=_o2.y;
+  function placeCar(c, dt){ const B=c.B; bufAt(B, c.s, _o); let x=_o.x, z=_o.z; const y0=_o.y; bufAt(B, c.s+1.6, _o2); const yF=_o2.y, hx=_o2.x-x, hz=_o2.z-z; bufAt(B, Math.max(0,c.s-1.6), _o2); const yB=_o2.y;
     if(hx*hx+hz*hz>1e-4){ const th=Math.atan2(hx,hz); c.h=dt ? lerpAngle(c.h, th, 1-Math.exp(-dt*10)) : th; }
     c.pitch=-Math.atan2(yF-yB, 3.2); const y=((yF+yB)/2+y0)/2;
+    if(c.lat!==undefined){ if(dt) c.lat+=(c.latT-c.lat)*Math.min(1, dt*.9); x+=-Math.cos(c.h)*c.lat; z+=Math.sin(c.h)*c.lat; }   // lệch ngang (bên phải hướng h = (−cos h, sin h))
     c.g.position.set(x, y, z); c.g.rotation.set(c.pitch, c.h, 0, 'YXZ'); c.spin+=c.v*dt/(c.wr||.36);
     if(!built) return; const M=IM[c.model]; if(!M) return; _e.set(c.pitch, c.h, 0, 'YXZ'); _q.setFromEuler(_e); _m.compose(_p.set(x, y+.02, z), _q, _s1);
     for(const im of M.ims){ im.setMatrixAt(c.mi, _m); im.instanceMatrix.needsUpdate=true; }
@@ -219,14 +242,14 @@ export async function make(W, zones={}){
 
   // vật cản trước mũi xe: xe khác, xe đặc biệt, người chơi, người đi bộ đang qua đường
   let obs=[], horn=0;
-  function gatherObs(){ obs=[]; for(const c of cars) if(c.active) obs.push({x:c.g.position.x, z:c.g.position.z, y:c.g.position.y, h:c.h, hl:c.hl, hw:c.hw, self:c, veh:true});
+  function gatherObs(){ obs=[]; for(const c of cars) if(c.active) obs.push({x:c.g.position.x, z:c.g.position.z, y:c.g.position.y, h:c.h, hl:c.hl, hw:c.hw, self:c, veh:true, pulled:!!(c.pull && c.lat>.5)});
     for(const s of specials) obs.push({x:s.g.position.x, z:s.g.position.z, y:s.g.position.y, h:s.h, hl:2.6, hw:1.1, self:s, veh:true});
     if(!W.inside){ const V=W.life && W.life.V, r=V && V.riding && V.riding(); obs.push({x:P.x, z:P.z, y:P.y??0, h:P.face||0, hl:r?2.2:.35, hw:r?.95:.35, player:true}); }
     for(const q of PEDS) obs.push({x:q.x, z:q.z, y:q.y, h:q.h||0, hl:.3, hw:.3, ped:true}); }
   function limitFor(c){ let vt=99; const fx=Math.sin(c.h), fz=Math.cos(c.h), x=c.g.position.x, z=c.g.position.z, y=c.g.position.y; c.blk=0;
     for(const o of obs){ if(o.self===c || Math.abs(o.y-y)>3) continue; if(c.ghost>0 && o.veh) continue; const dx=o.x-x, dz=o.z-z, a=dx*fx+dz*fz; if(a<=0 || a>32) continue;
       const l=dx*(-fz)+dz*fx; if(Math.abs(l)>1.05+o.hw) continue; if(o.veh && Math.cos(o.h-c.h)<-.5 && a>c.hl+o.hl+3) continue;
-      const gap=a-c.hl-o.hl, vv=Math.sqrt(2*4.5*Math.max(0, gap-(o.ped||o.player?3:2.2))); if(vv<vt){ vt=vv; c.blk=o.player?2:o.ped?1:(Math.cos(o.h-c.h)<-.3?4:3); } }
+      const gap=a-c.hl-o.hl, vv=Math.sqrt(2*4.5*Math.max(0, gap-(o.ped||o.player?3:2.2))); if(vv<vt){ vt=vv; c.blk=o.player?2:o.ped?1:o.pulled?5:(Math.cos(o.h-c.h)<-.3?4:3); c.blkO=o.self; } }
     return vt; }
   function curveLimit(c, vt){ const B=c.B, s0=c.s; for(let i=bufAt(B,s0,_o).i; i<B.cum.length && B.cum[i]<s0+34; i++){ const d=Math.max(0,B.cum[i]-s0); vt=Math.min(vt, Math.sqrt(B.vc[i]*B.vc[i]+2*3*d)); } return vt; }
 
@@ -239,6 +262,18 @@ export async function make(W, zones={}){
       const busy=nd.occ && nd.occ!==c && nd.occ.active && (W.T??0)-nd.occT<9;
       if(busy){ vt=Math.min(vt, Math.sqrt(2*4*Math.max(0, d-nd.R-1.5))); break; }
       if(d<nd.R+6){ if(c.hold && c.hold!==nd && c.hold.occ===c) c.hold.occ=null; nd.occ=c; nd.occT=W.T??0; c.hold=nd; } break; }
+    // 🚌🚕 tấp lề đón khách: xe buýt ~ mỗi 15–40 s, taxi ~ 25–60 s – chỉ trên đoạn thẳng đô thị, xa giao lộ
+    if(c.pull){ const Q=c.pull;
+      if(Q.st==='in'){ vt=Math.min(vt, Math.sqrt(2*2.2*Math.max(0, Q.s-c.s))); if(Q.s-c.s<14) c.latT=Q.lat; if(Q.s-c.s<.6 && c.v<.35){ Q.st='stop'; Q.t=c.model==='bus'?8:5; if(ped && ped.board) ped.board(c); } }
+      else if(Q.st==='stop'){ vt=0; Q.t-=dt; if(Q.t<=0){ Q.st='out'; c.latT=0; } }
+      else if(Math.abs(c.lat)<.15){ c.pull=null; c.stopIn=(c.model==='bus'?22:40)*(.7+RND()*.8); } }
+    else if(c.stopIn<1e8 && c.e && ZW[c.e.zone]>=.7){ c.stopIn-=dt;
+      if(c.stopIn<=0){ const s1=c.s+30, nm=c.B.marks.find(m=>m.s>c.s), lat=c.e.w>=18 ? 1.5 : Math.min(1.1, c.e.w/2-c.e.off-c.hw-.1);
+        const curb=c.e.walk && c.e.walk[c.dir];   // chỉ tấp lề phía có vỉa hè (có người đi bộ)
+        if(curb && (!nm || nm.s-s1>16) && lat>.4 && c.B.cum[c.B.cum.length-1]>s1+6) c.pull={st:'in', s:s1, lat}; else c.stopIn=5; } }
+    // vượt xe đang tấp lề (đường ≥ 18 m: 2 làn mỗi chiều) – sang làn trong, qua hẳn mới trở về
+    if(c.blk===5 && c.blkO && c.e && c.e.w>=18 && !c.pull && !c.passing){ c.passing=c.blkO; c.latT=-1.8; }
+    if(c.passing){ const o=c.passing, a=(o.g.position.x-c.g.position.x)*Math.sin(c.h)+(o.g.position.z-c.g.position.z)*Math.cos(c.h); if(!o.active || a<-(c.hl+o.hl+2) || (!o.pull && a<0)){ c.passing=null; c.latT=0; } }
     vt=Math.min(vt, limitFor(c));
     c.v+=clamp(vt-c.v, -7*dt, 2.6*dt); if(c.v<0) c.v=0; c.s+=c.v*dt;
     if(c.ghost>0) c.ghost-=dt;
@@ -283,8 +318,8 @@ export async function make(W, zones={}){
     const segFree=(x0,z0,x1,z1,y)=>{ const d=Math.hypot(x1-x0,z1-z0), n=Math.ceil(d/.4); for(let k=1;k<n;k++){ const t=k/n; if(blocked(x0+(x1-x0)*t, z0+(z1-z0)*t, y, .28)) return false; } return true; };
     // 4b. làn vỉa hè: 2 bên mọi cạnh đường, cách mép đường 2,2 m, cùng cao độ mặt đường (cầu không có vỉa hè thì không có người)
     const LANES=[];
-    for(const e of edges){ if(e.zone==='brain' || e.zone==='swiss' || e.len<20) continue;
-      for(const side of [-1,1]){ const off=e.w/2+2.2, run=[]; const flush=()=>{ if(run.length>=9){ const N=run.length, L={x:new Float32Array(N), z:new Float32Array(N), y:new Float32Array(N), cum:new Float32Array(N), e, side};
+    for(const e of edges){ if(e.zone==='brain' || e.zone==='swiss' || e.zone==='wonder' || e.len<20) continue;
+      for(const side of [-1,1]){ const off=e.w/2+2.2, run=[]; const flush=()=>{ if(run.length>=9){ const N=run.length, L={x:new Float32Array(N), z:new Float32Array(N), y:new Float32Array(N), cum:new Float32Array(N), e, side}; (e.walk ||= {})[side]=true;
             run.forEach((p,i)=>{ L.x[i]=p[0]; L.z[i]=p[1]; L.y[i]=p[2]; if(i) L.cum[i]=L.cum[i-1]+Math.hypot(p[0]-run[i-1][0], p[1]-run[i-1][1]); }); L.len=L.cum[N-1]; LANES.push(L); } run.length=0; };
         for(let d=1; d<e.len-1; d+=2){ edgePt(e, d, _o); const x=_o.x-_o.uz*off*side, z=_o.z+_o.ux*off*side, yr=_o.y, y=gAtY(x,z,yr+.8);
           if(Math.abs(y-yr)<.7 && !blocked(x,z,y) && !onRoad(x,z,yr,.4)) run.push([x,z,y]); else flush(); } flush(); } }
@@ -321,13 +356,14 @@ export async function make(W, zones={}){
         const g=a.g; g.position.set(0,-300,0); g.rotation.y=0; act.reset().play(); const N=48, dur=clip.duration, ql=new THREE.Vector3(), qr=new THREE.Vector3(), pl=new THREE.Vector3(), pr=new THREE.Vector3(), vs=[];
         for(let i=0;i<=N;i++){ act.time=dur*i/N; a.mixer.update(0); g.updateMatrixWorld(true); L.getWorldPosition(ql); Rt.getWorldPosition(qr); if(i){ const lft=pl.y<pr.y; vs.push(-(lft?ql.z-pl.z:qr.z-pr.z)/(dur/N)); } pl.copy(ql); pr.copy(qr); }
         act.stop(); vs.sort((x,y)=>x-y); const v=vs[vs.length>>1]; return v>.4 && v<8 ? v/a.h : def; }catch(e){ return def; } }
-    const NPOOL={low:12, medium:18, high:24}[QUAL] ?? 16, NV=Math.min(14, NPOOL), VAR=[];
+    // 16/11 (Bình: "phố đông vui"): ~30–40 người trong ~120 m quanh người chơi; mỗi người 1 lượt vẽ khi hiện, ở xa dùng hình rút gọn + xương cập nhật thưa
+    const NPOOL={low:30, medium:36, high:40}[QUAL] ?? 34, NV=Math.min(18, NPOOL), VAR=[];
     for(let i=0;i<NV;i++){ const kk=W.people.kit(W.people.seedFor(i%2?'f':'m', 700+i*23)), sk=skinOf(kk.gl.scene); let lod=sk.geometry, gl=kk.gl;
       try{ lod=decimate(sk.geometry); const tm=W.SkeletonUtils.clone(kk.gl.scene); skinOf(tm).geometry=lod; gl={scene:tm, animations:kk.gl.animations}; }catch(e){}
       VAR.push({kk, gl, full:sk.geometry, lod}); }
     // chó (Fox.glb) – tối đa 3 con, đi cạnh chủ
     let FOX=null; try{ FOX=await new Promise(res=>new GLTFLoader().load('assets/models/Fox.glb', res, undefined, ()=>res(null))); }catch(e){}
-    const dogs=[]; if(FOX) for(let i=0;i<3;i++){ const root=W.SkeletonUtils.clone(FOX.scene); root.traverse(o=>{ if(o.isMesh){ o.castShadow=false; o.frustumCulled=false; } });
+    const dogs=[]; if(FOX) for(let i=0;i<4;i++){ const root=W.SkeletonUtils.clone(FOX.scene); root.traverse(o=>{ if(o.isMesh){ o.castShadow=false; o.frustumCulled=false; } });
       const g=new THREE.Group(); g.add(root); g.updateMatrixWorld(true); const b=new THREE.Box3().setFromObject(root), s=.5/((b.max.y-b.min.y)||1); root.scale.multiplyScalar(s); root.position.y=-b.min.y*s; g.visible=false; g.userData.dynamic=true; scene.add(g);
       const mixer=new THREE.AnimationMixer(root), walk=FOX.animations.find(c=>/walk/i.test(c.name)); const A={walk:walk&&mixer.clipAction(walk)}; if(A.walk) A.walk.play();
       dogs.push({g, mixer, A, owner:null, x:0, z:0, h:0}); }
@@ -340,14 +376,15 @@ export async function make(W, zones={}){
       a.mesh=skinOf(a.root); a.full=V.full; a.lod=V.lod; if(QUAL==='low') a.g.traverse(m=>{ if(m.isMesh) m.castShadow=false; });
       if(i===0){ KW=strideK(a, kk.clips.walk, KW); KR=strideK(a, kk.clips.run, KR); }
       a.g.visible=false; let hand=null; a.g.traverse(o=>{ if(o.isBone && !hand && /RightHand$/.test(o.name)) hand=o; });
-      const p={i, a, h, hand, poser:makePoser(THREE, a), kind:'walk', state:'off', L:null, s:0, dir:1, v:0, v0:1.2, x:1e9, z:1e9, y:0, hd:0, acc:0, bag:false, phone:false, dog:null, partner:null, lead:false, lat:0, seat:null, sitT:0, tgt:null, back:null, cross:null, wait:0, col:{x:1e9, z:1e9, r:.28}};
+      const p={i, a, h, hand, poser:makePoser(THREE, a), kind:'walk', state:'off', L:null, s:0, dir:1, v:0, v0:1.2, x:1e9, z:1e9, y:0, hd:0, acc:0, bag:false, phone:false, dog:null, lead:null, fol:[], slot:0, car:null, lat:0, seat:null, sitT:0, tgt:null, back:null, cross:null, wait:0, col:{x:1e9, z:1e9, r:.28}};
       p.col.owner=p; circles.push(p.col); peds.push(p); }
     const lanePos=(L,s,lat,o)=>{ const c=L.cum, N=c.length; s=clamp(s,0,L.len); let lo=0, hi=N-1; while(hi-lo>1){ const m=(lo+hi)>>1; if(c[m]<=s) lo=m; else hi=m; } const dl=(c[hi]-c[lo])||1, t=(s-c[lo])/dl;
       const ux=(L.x[hi]-L.x[lo])/dl, uz=(L.z[hi]-L.z[lo])/dl; o.x=L.x[lo]+(L.x[hi]-L.x[lo])*t-uz*lat; o.z=L.z[lo]+(L.z[hi]-L.z[lo])*t+ux*lat; o.y=L.y[lo]+(L.y[hi]-L.y[lo])*t; o.ux=ux; o.uz=uz; return o; };
-    let nearLn=[], nearLL=0, want=NPOOL, teleported=true; const PR={low:70, medium:85, high:95}[QUAL] ?? 80;
+    let nearLn=[], nearLL=0, want=NPOOL, teleported=true; const PR={low:100, medium:115, high:120}[QUAL] ?? 110;
     function refresh(){ nearLn=[]; nearLL=0; const r2=(PR+30)**2; for(const L of LANES){ const m=L.x.length>>1, l=L.x.length-1; if((L.x[0]-P.x)**2+(L.z[0]-P.z)**2<r2 || (L.x[m]-P.x)**2+(L.z[m]-P.z)**2<r2 || (L.x[l]-P.x)**2+(L.z[l]-P.z)**2<r2){ nearLn.push(L); nearLL+=L.len; } } }
     function hide(p){ p.state='off'; p.a.g.visible=false; p.col.x=p.col.z=1e9; p.x=p.z=1e9; p.v=0; if(p.seat){ if(p.seat.taken===p) p.seat.taken=null; p.seat=null; } if(p.dog){ p.dog.g.visible=false; p.dog.owner=null; p.dog=null; }
-      if(p.partner){ const q=p.partner; p.partner=null; if(q.partner===p){ q.partner=null; q.lead=false; } } p.lead=false; if(p.bag){ bagIM.setMatrixAt(p.i,_z); bagIM.instanceMatrix.needsUpdate=true; } }
+      if(p.lead){ const L=p.lead; L.fol=L.fol.filter(q=>q!==p); p.lead=null; } if(p.fol.length){ const F=p.fol; p.fol=[]; for(const q of F){ q.lead=null; hide(q); } } p.car=null;
+      if(p.bag){ bagIM.setMatrixAt(p.i,_z); bagIM.instanceMatrix.needsUpdate=true; } }
     function pickKind(p){ const r=RND(); p.kind=r<.14?'jog':r<.27?'dog':'walk'; if(p.kind==='dog'){ const d=dogs.find(d=>!d.owner); if(d){ p.dog=d; d.owner=p; d.g.visible=true; } else p.kind='walk'; }
       p.v0=p.kind==='jog'?2.5+RND()*.6:1.12+RND()*.3; p.bag=p.kind==='walk' && RND()<.3; p.phone=p.kind==='walk' && !p.bag && RND()<.18; p.lat=(RND()-.5)*.5; }
     function spawn(p, initial){ hide(p);
@@ -356,19 +393,24 @@ export async function make(W, zones={}){
         if(peds.some(q=>q!==p && q.state!=='off' && Math.abs(q.x-o.x)+Math.abs(q.z-o.z)<1.6)) continue;
         pickKind(p); p.L=L; p.s=s; p.dir=RND()<.5?1:-1; p.state='walk'; p.v=p.v0*.8; p.x=o.x; p.z=o.z; p.y=o.y; p.hd=Math.atan2(o.ux*p.dir,o.uz*p.dir); p.a.g.visible=true; p.a.play(p.kind==='jog'?'run':'walk',0);
         if(p.dog){ p.dog.x=p.x; p.dog.z=p.z; }
-        // đi theo cặp (2 người song song, cùng tốc độ)
-        if(p.kind==='walk' && RND()<.25){ const q=peds.find(q=>q!==p && q.state==='off' && q.i<want); if(q){ q.kind='walk'; q.v0=p.v0; q.L=L; q.s=s; q.dir=p.dir; q.state='walk'; q.v=p.v; q.bag=RND()<.3; q.phone=false; q.lat=0;
-            q.partner=p; p.partner=q; p.lead=true; q.lead=false; q.a.g.visible=true; q.a.play('walk',0); q.x=p.x; q.z=p.z; q.y=p.y; q.hd=p.hd; } }
+        // đi theo nhóm 2–3 người (song song, cùng tốc độ, cùng qua đường)
+        if(p.kind==='walk' && RND()<.32){ const n=RND()<.35?2:1; p.lat=0; p.phone=false;
+          for(let k=0;k<n;k++){ const q=peds.find(q=>q!==p && q.state==='off' && q.i<want && !q.fol.length); if(!q) break; hide(q); q.kind='walk'; q.v0=p.v0; q.state='follow'; q.v=p.v; q.bag=RND()<.3; q.phone=false; q.lead=p; q.slot=k===0?.78:-.78; p.fol.push(q);
+            q.a.g.visible=true; q.a.play('walk',0); q.x=p.x-Math.cos(p.hd)*q.slot; q.z=p.z+Math.sin(p.hd)*q.slot; q.y=p.y; q.hd=p.hd; } }
         return; } }
-    function laneEnd(p){ const end=p.L.ends[p.dir>0?1:0], opts=end.links.filter(l=>!(l.cross && p.partner)); const pick=(opts.length && RND()<.8) ? opts[Math.floor(RND()*opts.length)] : null;
+    // khách lên xe buýt / taxi đang tấp lề (gọi từ phần xe)
+    function board(c){ const fx=Math.sin(c.h), fz=Math.cos(c.h), rx=-fz, rz=fx, off=c.hw+.55, fwd=c.model==='bus'?c.hl*.55:0, dx=c.g.position.x+rx*off+fx*fwd, dz=c.g.position.z+rz*off+fz*fwd; let n=c.model==='bus'?3:1;
+      for(const p of peds){ if(n<=0) break; if(p.state!=='walk' || p.lead || p.fol.length || p.dog || p.kind!=='walk') continue; if(Math.hypot(p.x-dx,p.z-dz)>30 || Math.abs(p.y-c.g.position.y)>1.2) continue;
+        p.state='board'; p.car=c; p.tgt={x:dx+fx*(n-1)*.6, z:dz+fz*(n-1)*.6}; p.back={L:p.L, s:p.s, dir:p.dir}; n--; } }
+    function laneEnd(p){ const end=p.L.ends[p.dir>0?1:0], opts=end.links; const pick=(opts.length && RND()<.8) ? opts[Math.floor(RND()*opts.length)] : null;
       if(!pick){ p.dir=-p.dir; return; } if(pick.cross){ p.cross={zb:pick.zb, from:end, to:pick.to, t:0}; p.state='curb'; p.wait=0; return; } enterLane(p, pick.to); }
     function enterLane(p, to){ p.L=to.L; p.dir=to.at===0?1:-1; p.s=to.at===0?0:p.L.len; p.state='walk'; }
     function safeToCross(zb){ for(const c of cars){ if(!c.active) continue; const dx=c.g.position.x-zb.mx, dz=c.g.position.z-zb.mz, d=Math.hypot(dx,dz); if(d>30 || Math.abs(c.g.position.y-zb.y)>3) continue; if(d<zb.e.w/2+3) return false;
         if(-(dx*Math.sin(c.h)+dz*Math.cos(c.h))>0 && c.v>.5) return false; } for(const s of specials) if(Math.hypot(s.g.position.x-zb.mx, s.g.position.z-zb.mz)<40) return false; return true; }
     const ahead=(p,fx,fz)=>{ let lim=99; const test=(x,z,rr,v,same)=>{ const dx=x-p.x, dz=z-p.z; if(dx*dx+dz*dz>3) return; const a=dx*fx+dz*fz, l=dx*(-fz)+dz*fx; if(a<=.05 || a>.9+rr || Math.abs(l)>.3+rr) return; const lv=same?Math.max(0,v*.92):0; if(lv<lim) lim=lv; };
-      if(!W.inside) test(P.x,P.z,.34,0,false); for(const q of peds){ if(q===p || q.state==='off' || q===p.partner) continue; test(q.x,q.z,.3,q.v,(Math.sin(q.hd)*fx+Math.cos(q.hd)*fz)>.5); } return lim; };
+      if(!W.inside) test(P.x,P.z,.34,0,false); for(const q of peds){ if(q===p || q.state==='off' || q.lead===p || (p.lead && (q===p.lead || q.lead===p.lead))) continue; test(q.x,q.z,.3,q.v,(Math.sin(q.hd)*fx+Math.cos(q.hd)*fz)>.5); } return lim; };
     const seats=W.seats||[];
-    function trySit(p){ if(p.partner || p.dog || p.kind==='jog') return false; for(const s of seats){ if(s.taken || (s.scope && s.scope!=='world') || s.lie) continue; const dx=s.x-p.x, dz=s.z-p.z; if(dx*dx+dz*dz>64 || Math.abs((s.floor??s.y)-p.y)>.8) continue;
+    function trySit(p){ if(p.lead || p.fol.length || p.dog || p.kind==='jog') return false; for(const s of seats){ if(s.taken || (s.scope && s.scope!=='world') || s.lie) continue; const dx=s.x-p.x, dz=s.z-p.z; if(dx*dx+dz*dz>64 || Math.abs((s.floor??s.y)-p.y)>.8) continue;
         const k=s.back?-.75:.75, ax=s.x+Math.sin(s.rot)*k, az=s.z+Math.cos(s.rot)*k; if(!segFree(p.x,p.z,ax,az,p.y)) continue;
         s.taken=p; p.seat=s; p.state='toSeat'; p.tgt={x:ax, z:az}; p.back={L:p.L, s:p.s, dir:p.dir}; p.sitT=12+RND()*25; return true; } return false; }
     let pAcc=0, frameN=0;
@@ -377,11 +419,17 @@ export async function make(W, zones={}){
       want=Math.round(NPOOL*(W.night>.65?.5:1));
       for(const p of peds){
         if(p.state==='off'){ if(p.i<want && nearLn.length) spawn(p, teleported); if(p.state==='off') continue; }
-        else if(p.i>=want && !p.partner && !p.a.root.visible){ hide(p); continue; }
-        const d2=(p.x-P.x)**2+(p.z-P.z)**2; if(d2>(PR+25)**2 && (!p.a.root.visible || d2>110*110)){ hide(p); continue; }
+        else if(p.i>=want && !p.lead && !p.fol.length && !p.a.root.visible){ hide(p); continue; }
+        const d2=(p.x-P.x)**2+(p.z-P.z)**2; if(!p.lead && d2>(PR+25)**2 && (!p.a.root.visible || d2>(PR+40)**2)){ hide(p); continue; }
         const px=p.x, pz=p.z; let moving=true; const clip=p.kind==='jog'?'run':'walk';
-        const follow=p.partner && !p.lead && p.partner.state==='walk' && p.state==='walk';
-        if(follow){ const q=p.partner; p.L=q.L; p.dir=q.dir; p.s=q.s; p.v=q.v; const o=lanePos(p.L,p.s,(q.lat>0?q.lat-.75:q.lat+.75)*p.dir,_o); const k=Math.min(1,dt*4); p.x+=(o.x-p.x)*k; p.z+=(o.z-p.z)*k; p.y=o.y; moving=q.v>.15; }
+        if(p.state==='follow'){ const q=p.lead; if(!q || q.state==='off'){ hide(p); continue; }
+          // đi cạnh người dẫn (cùng chờ, cùng qua đường)
+          const k=Math.min(1,dt*4), tx=q.x-Math.cos(q.hd)*p.slot-Math.sin(q.hd)*.15, tz=q.z+Math.sin(q.hd)*p.slot-Math.cos(q.hd)*.15; p.x+=(tx-p.x)*k; p.z+=(tz-p.z)*k; p.y=q.y; p.v=q.v; moving=q.v>.15;
+          if(q.state==='cross') PEDS.push({x:p.x, z:p.z, y:p.y, h:p.hd}); if(!moving) p.hd=lerpAngle(p.hd, q.hd, 1-Math.exp(-dt*4)); }
+        else if(p.state==='board'){ const c=p.car, dx=p.tgt.x-p.x, dz=p.tgt.z-p.z, d=Math.hypot(dx,dz); p.v=p.v0*1.15;
+          if(!c || !c.active || !c.pull || c.pull.st==='out'){ p.state='fromSeat'; p.car=null; }   // xe đi mất → quay lại vỉa hè
+          else if(d<.35){ hide(p); continue; }   // đã lên xe
+          else { const st=Math.min(d,p.v*dt); p.x+=dx/d*st; p.z+=dz/d*st; p.y=gAtY(p.x,p.z,p.y+.5); } }
         else if(p.state==='walk'){ lanePos(p.L,p.s,p.lat*p.dir,_o); let v=p.v0; const lim=ahead(p, _o.ux*p.dir, _o.uz*p.dir); if(lim<v) v=lim;
           if(lim<.15){ p.wait+=dt; if(p.wait>2){ p.dir=-p.dir; p.wait=0; } } else p.wait=0;   // bị chặn lâu (người chơi đứng chắn) → quay lại
           p.v+=(v-p.v)*Math.min(1,dt*(v>p.v?3:6)); p.s+=p.dir*p.v*dt;
@@ -412,7 +460,7 @@ export async function make(W, zones={}){
           dg.x+=dx*k; dg.z+=dz*k; if(dd>.05) dg.h=lerpAngle(dg.h, Math.atan2(dx,dz), 1-Math.exp(-dt*6)); dg.g.position.set(dg.x, gAtY(dg.x,dg.z,p.y+.5), dg.z); dg.g.rotation.y=dg.h;
           if(dg.A.walk) dg.A.walk.setEffectiveTimeScale(clamp(dd*3+p.v*.8, .05, 2.2)); if(a.root.visible) dg.mixer.update(dt); } }
       teleported=false; }
-    return {peds, LANES, ZEB, dogs, upd, get KW(){ return KW; }, get KR(){ return KR; }, onTeleport(){ teleported=true; for(const p of peds) hide(p); }};
+    return {peds, LANES, ZEB, dogs, upd, board, get KW(){ return KW; }, get KR(){ return KR; }, onTeleport(){ teleported=true; for(const p of peds) hide(p); }};
   }
 
   /* ============================== 5. KHUNG HÌNH ============================== */
@@ -436,7 +484,8 @@ export async function make(W, zones={}){
     if(ped) ped.upd(dt); });
 
   const tAll=performance.now()-t0;
-  function stats(){ const by={}; for(const c of cars){ const k=c.active?'chạy':'nghỉ'; by[k]=(by[k]||0)+1; } const pb={}; if(ped) for(const p of ped.peds) pb[p.state]=(pb[p.state]||0)+1;
+  function stats(){ const by={}; for(const c of cars){ const k=!c.active?'nghỉ':c.pull?'tấp lề':c.passing?'vượt':'chạy'; by[k]=(by[k]||0)+1; } const pb={}; if(ped) for(const p of ped.peds) pb[p.state]=(pb[p.state]||0)+1;
+    by.trong200m=cars.filter(c=>c.active && Math.hypot(c.g.position.x-P.x, c.g.position.z-P.z)<200).length; if(ped) pb.trong120m=ped.peds.filter(p=>p.state!=='off' && Math.hypot(p.x-P.x,p.z-P.z)<120).length;
     return {nodes:NODES.length, edges:edges.length, km:+(edges.reduce((s,e)=>s+e.len,0)/1000).toFixed(2), junctions:NODES.filter(n=>n.deg>=3).length, deadEnds:NODES.filter(n=>n.deg===1).length, cars:by, pool:POOL, built,
       peds:pb, lanes:ped?ped.LANES.length:0, zebras:ped?ped.ZEB.length:0, dogs:ped?ped.dogs.length:0, specials:specials.length, msNet:Math.round(tNet), msAll:Math.round(tAll)}; }
   console.info(`[QC World V2] giao thông: ${NODES.length} nút · ${edges.length} cạnh · ${(edges.reduce((s,e)=>s+e.len,0)/1000).toFixed(1)} km đường · ${POOL} xe · ${ped?ped.peds.length:0} người đi bộ – ${Math.round(tAll)} ms`);
