@@ -130,7 +130,8 @@ P1 = thấy rõ khi chơi, P2 = thấy khi để ý, P3 = nhỏ. Toạ độ (x,
   - Đoạn nền đất: mặt đi lấy thẳng từ mặt nhựa vẽ (nội suy 2 mép theo dọc + ngang, kể cả mép vểnh/dốc) qua hàm độ cao vùng → bỏ ~320 tấm phẳng (tổng tấm sàn 5935→5632, nhẹ hơn). Cầu cạn: tấm mỗi 1 m + tấm lấp hình nêm ở khúc gấp.
   - Làm mượt 2 khúc gãy: chỗ nối đường dẫn CBD → đèo (645, 107) gãy ~87° (mặt nhựa gập, lún 20–33 cm) và khúc kẹp tóc (1001, 302) bán kính ~2 m (lan can mép trong vắt chéo mặt đường). Cầu G6 tự nối vào điểm mới (628, 93) – đã đi thử G6 → đường dẫn êm.
   - Cầu cạn sát vách: cắt đá trong 8 m quanh tim đường xuống dưới mặt cầu (trước đi mép cầu bị nhấc lên vách tới 24 m). Chân cầu kính cuối đèo phẳng bằng mặt đường.
-  - Còn lại: mảng ~4×6 m ở góc quay 90° từ đèo lên cầu kính trên đỉnh (845–850, 276–285), lún tối đa 0,27 m.
+  - ✅ Góc lên cầu kính trên đỉnh (845–850, 276–285): hướng mặt cắt không còn trộn qua ranh đường ↔ cầu kính (trước mặt cắt cuối xoay 33° → nhựa gập), nền chân cầu bằng cao độ đường đèo gần nhất → lún 0,27 m → 0. Mặt đi cầu kính tấm 0,5 m (trước 2 m = bậc 0,43 m, lệch mặt kính ±0,2 m → nay ±0,06 m; đi dọc cầu bậc lớn nhất 0,11 m, trước 0,42 m và kẹt giữa cầu). Toàn tuyến còn 2 điểm lún 5,6 cm, 0 điểm >8 cm.
+  - Còn lại (bố cục, chưa sửa): cầu kính bắt đầu ngay giữa đầu đường và vuông góc → trụ vàng trái (843,8; 279,2) + lan can kính cắt ngang làn trái 4 m cuối đường (đi làn trái bị chặn ở x 844,3); vai đường trái ~1,6 m rồi vực (không có lan can vì luật lan can chỉ dò 6,6 m) – đi lệch ra mép có thể rơi xuống khe dưới cầu kính.
 - Tổng V1: lún sâu 2581→1668, tư thế 438→99. Tổng V2: vạch/lối lát 1123→99, lún sâu 1050→143, tư thế 48→33.
 - Còn lại (nhẹ, chưa sửa): nhân viên tư vấn `jobcenter.js` chân khuất trong bàn; nhân viên soát vé mũi giày lọt sàn 3–5 cm (`themepark.js`/`themedark.js`); 2 bé bóng rổ; vài đồ trang trí gộp lưới trắng cao 0,5 m (bồn cây/ghế) và hộp tối 0,8 m cạnh cổng (2,7; 1,8) chưa có va chạm.
 
