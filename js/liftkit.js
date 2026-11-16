@@ -107,7 +107,7 @@ export function makeLift(W, o){
       if(ins && !L.hidePanel && cur!==L) showPanel(L); if(!ins){ L.hidePanel=false; if(cur===L) hidePanel(); }
       if(L.queue!=null){ const q=L.queue; L.queue=null; L.go(q, ins); } }
     else if(L.ph==='close'){ L.open=Math.max(0,L.open-dt*1.6); if(L.open<=0){ L.ph='move'; L.t=0; L.y0=L.y; L.rider=L.rider||ins; if(L.rider){ L.lx=P.x; L.lz=P.z; HOOK.vehicle={drive:()=>{ P.x=L.lx; P.z=L.lz; P.y=L.y; P.vx=P.vz=P.vy=0; me.g.position.set(P.x,P.y,P.z); if(me.play) me.play('idle'); }}; } drawSigns(); } }
-    else if(L.ph==='move'){ const ty=fl[L.target].y, dist=Math.abs(ty-L.y0), T=Math.max(1.6, dist/2.6); L.t+=dt; const k=Math.min(1,L.t/T); L.y=L.y0+(ty-L.y0)*ease(k);
+    else if(L.ph==='move'){ const ty=fl[L.target].y, dist=Math.abs(ty-L.y0), T=Math.max(1.6, Math.min(dist/2.6, 6+dist/9));   /* nhà cao: tăng tốc như thang cao tốc (91 m ≈ 16 s) */ L.t+=dt; const k=Math.min(1,L.t/T); L.y=L.y0+(ty-L.y0)*ease(k);
       if(k>=1){ L.y=ty; L.at=L.target; L.target=-1; L.ph='idle'; L.wantOpen=true; if(L.rider){ HOOK.vehicle=null; P.y=L.y; P.ground=true; L.rider=false; if(toast) toast(`⇅ Đã tới ${fl[L.at].name}`, 1800); } drawSigns(); if(cur===L) showPanel(L); } }
     cab.position.y=L.y; L.plat.h=L.y;
     let bc=false; L.doors.forEach((lv,i)=>{ const op=(i===L.at && L.ph==='idle')?L.open:0; if(op!==lv.op){ lv.op=op; doorAt(i,op); } lv.seg.y0=op>.85?1e6:lv.y0; const on=L.target===i; if(on!==lv.on){ lv.on=on; BIM.setColorAt(i,_c.set(on?0xffd166:0x3a3d44)); bc=true; } }); if(bc && BIM.instanceColor) BIM.instanceColor.needsUpdate=true;

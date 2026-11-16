@@ -9,6 +9,7 @@
 //  Va chạm: EXTL (độ cao) · plats (sàn tầng / cầu / đường trên cao) · SEGS (lan can, tường) · boxes.
 //  Hầm: độ cao vật lý = sàn hầm, mặt núi phía trên chỉ là hình + 1 sàn đi bộ ở +52 (người trong hầm thấp hơn → không bị nhấc lên).
 import * as AK from './archKit.js';
+import { makeLift } from './liftkit.js';
 
 export async function make(W, ctx){
   const {THREE, scene, HOOK, EXTL, PLACES, INTER, addPlat, addSeg, mergeGeometries, makeLabel, toast, teleport, clamp, lerp, P} = W;
@@ -137,7 +138,7 @@ export async function make(W, ctx){
   road([[330,-490,Y3],[650,-490,Y3],[650,-700,Y3],[330,-700,Y3],[330,-490,Y3]], 12, {name:'Vành đai Cao nguyên'});
   road([[214,-246,YW],[178,-252,YW],[176,-428,YW],[222,-482,Y3],[330,-490,Y3]], 10, {name:'Đại lộ Giải Phóng'});
   road([[214,-246,YW],[216,-430,YW],[222,-482,Y3]], 9, {name:'Phố Cao nguyên Tây', emb:4});                       // khép vòng cao nguyên Tây
-  road([[650,-700,Y3],[602,-708,Y3+.3],[262,-758,Y4],[252,-760,Y4]], 10, {name:'Đường đèo Mây Trắng', emb:8});
+  road([[650,-700,Y3],[602,-708,Y3],[372,-740,Y4],[358,-744.5,Y4],[350,-747,Y4]], 10, {name:'Đường đèo Mây Trắng', emb:8});   /* S19g 16/11: lên tới +85 rồi nhập cạnh Bắc vòng sân bay ở x 350 (trước leo tới x 262, chồng lên vòng sân bay mà thấp hơn tới 3,5 m → mặt đường lệch, xe nổi/chìm) */
   road([[252,-760,Y4],[262,-768,Y4],[452,-768,Y4],[462,-760,Y4],[452,-752,Y4],[262,-752,Y4],[252,-760,Y4]], 10, {name:'Vòng đón khách Sân bay'});
   road([[650,-600,Y3],[702,-597,Y3]], 8, {name:'Đường lên chùa'});
   { const c=[702+9,-596], pts=[]; for(let i=0;i<=24;i++){ const a=Math.PI+i/24*TAU; pts.push([c[0]+Math.cos(a)*9, c[1]+Math.sin(a)*9, Y3]); } road(pts, 7, {name:'Vòng xuyến chân chùa'}); }
@@ -149,7 +150,7 @@ export async function make(W, ctx){
     return [v ? {d:Math.sqrt(bv), q:v} : null, p ? {d:Math.sqrt(bp), q:p} : null]; }
   const carve=(h, r)=>{ if(!r) return h; const half=r.q.w/2+.8, B=r.q.emb; if(r.d<half) return r.q.y; if(r.d<half+B) return lerp(r.q.y, h, ss(half, half+B, r.d)); return h; };
   // bậc đá lên đồi bảo tháp (va chạm = dốc trơn, hình = bậc thang)
-  const STAIR={x0:716, z0:-604, x1:720, z1:-652, y0:Y3, y1:PA.top, w:7};
+  const STAIR={x0:716.4, z0:-608.6, x1:720, z1:-652, y0:Y3, y1:PA.top, w:7};   /* S19g 16/11: chân thang dời ra ngoài vòng xuyến (cách tâm 13,7 m > mép đường 12,5 m) – trước chân thang nằm trên lòng đường, nâng mặt đường phía Nam vòng xuyến lên tới 0,8 m */
   function stairAt(x,z){ const dx=STAIR.x1-STAIR.x0, dz=STAIR.z1-STAIR.z0, L2=dx*dx+dz*dz, t=((x-STAIR.x0)*dx+(z-STAIR.z0)*dz)/L2; if(t<-.03 || t>1.03) return null; const px=STAIR.x0+dx*t, pz=STAIR.z0+dz*t; return {d:Math.hypot(x-px,z-pz), y:lerp(STAIR.y0,STAIR.y1,clamp(t,0,1)), t}; }
   // nền phẳng cho công trình (x0..x1, z0..z1 theo toạ độ thế giới)
   const PADS=[
@@ -321,15 +322,23 @@ export async function make(W, ctx){
   const ST=[{name:'Ga Bến Sông', key:'s1', s:sOf(224,-177), ground:{x:234, z:-163, y:Y1}, y:12.6},
             {name:'Ga Lý Tử Bá (trong Dev Residency Tower)', key:'s2', s:sOf(380,-420), ground:{x:380, z:-405.6, y:Y2}, y:39.2},
             {name:'Ga Đông Sơn', key:'s3', s:sOf(780,-420), ground:{x:780, z:-404, y:Y2}, y:39.2}];
+  ST[1].plat={x:376, z:-414.8};   /* S19g 16/11: lên/xuống tàu ngay trên sân ga (thang liftkit đưa lên/xuống) – S2 nằm trong Dev Residency */
   // sân ga S1 + S3 (S2 dựng cùng toà nhà ở devcity_landmarks.js) : sàn 2 bên dầm + mái + cột + thang máy
-  for(const st of [ST[0], ST[2]]){ const p=mrCurve.getPointAt(st.s/mrLen), t=mrCurve.getTangentAt(st.s/mrLen), ang=Math.atan2(t.x,t.z), nx=Math.cos(ang), nz=-Math.sin(ang), L=50;
+  for(const st of [ST[0], ST[2]]){ const p=mrCurve.getPointAt(st.s/mrLen), t=mrCurve.getTangentAt(st.s/mrLen), ang=Math.atan2(t.x,t.z), nx=Math.cos(ang), nz=-Math.sin(ang), L=50, ux=Math.sin(ang), uz=Math.cos(ang);
+    /* S19g 16/11 (V2_PLAN 3b): thang liftkit sát mép ngoài sân ga, cửa quay vào đường ray – chọn đầu ga + phía mà cửa tầng trệt không mở ra lòng đường / sông */
+    const LP=(()=>{ for(const a of [16,-16,9,-9,20,-20]) for(const sd of [1,-1]){ const cx=p.x+ux*a+nx*sd*6.65, cz=p.z+uz*a+nz*sd*6.65, fx=p.x+ux*a+nx*sd*4.1, fz=p.z+uz*a+nz*sd*4.1, gy=hAt(fx,fz);
+        if(gy==null || gy>st.y-4) continue; const r1=nearRoad2(fx,fz)[1], r2=nearRoad2(cx,cz)[1]; if((r1 && r1.d<r1.q.w/2+1.2) || (r2 && r2.d<r2.q.w/2+1.6)) continue; if(Math.abs((hAt(cx,cz)??gy)-gy)>.6) continue;
+        return {a, sd, cx, cz, gy, yaw:Math.atan2(-nx*sd,-nz*sd)}; } return null; })();
     for(const sd of [-1,1]){ const cx=p.x+nx*sd*3.4, cz=p.z+nz*sd*3.4; put(MAT.paving, xf(rb(3.6,.5,L,.12,1), cx, st.y-.25, cz, ang), 'monorail'); addPlat(cx, cz, ang, 1.8, L/2, st.y);
-      addSeg(cx+nx*sd*1.75-Math.sin(ang)*L/2, cz+nz*sd*1.75-Math.cos(ang)*L/2, cx+nx*sd*1.75+Math.sin(ang)*L/2, cz+nz*sd*1.75+Math.cos(ang)*L/2, .2, st.y-.5, st.y+2, 'Lan can sân ga');
+      const rx=cx+nx*sd*1.75, rz=cz+nz*sd*1.75, seg=(a0,a1)=>addSeg(rx+ux*a0, rz+uz*a0, rx+ux*a1, rz+uz*a1, .2, st.y-.5, st.y+2, 'Lan can sân ga');
+      if(LP && LP.sd===sd){ seg(-L/2, LP.a-1.6); seg(LP.a+1.6, L/2); } else seg(-L/2, L/2);   /* hở đúng cửa thang máy */
       for(let k=-2;k<=2;k++){ const ox=Math.sin(ang)*k*11, oz=Math.cos(ang)*k*11, px=cx+ox+nx*sd*1.4, pz=cz+oz+nz*sd*1.4, rr=nearRoad2(px,pz)[1]; if(rr && rr.d<rr.q.w/2+1) continue;   // không dựng cột giữa lòng đường
         const gy=hAt(px,pz)??st.y-8; put(MAT.steel, xf(cyl(.25,.25,st.y+4.6-gy,10), px, (st.y+4.6+gy)/2, pz), 'monorail'); W.circles && W.circles.push({x:px, z:pz, r:.35, y0:gy-1, y1:st.y-1}); } }
     put(MAT.white, xf(rb(12,.45,L+4,.2,2), p.x, st.y+4.8, p.z, ang), 'monorail'); put(MAT.glass, xf(rb(11.4,.08,L+3,.03,1), p.x, st.y+4.5, p.z, ang), 'monorail');
-    // tháp thang máy kính từ mặt đất lên sân ga
-    const ex=st.ground.x, ez=st.ground.z, gy=hAt(ex,ez)??st.ground.y; put(MAT.glass, xf(rb(3,st.y-gy+3,3,.2,2), ex, (st.y+gy+3)/2, ez+3.5), 'monorail'); put(MAT.white, xf(rb(3.4,.4,3.4,.12,1), ex, st.y+3.2, ez+3.5), 'monorail'); }
+    // thang máy kính liftkit từ mặt đất lên sân ga (thay tháp kính trang trí + nút dịch chuyển cũ)
+    if(LP){ makeLift(W, {x:LP.cx, z:LP.cz, yaw:LP.yaw, name:'Thang '+st.name, color:0x18a999, floors:[{y:LP.gy, name:'Mặt đất · '+st.name, short:'G'}, {y:st.y, name:'Sân ga '+st.name, short:'S'}]});
+      const ab=LP.a-Math.sign(LP.a)*4; st.plat={x:p.x+ux*ab+nx*LP.sd*3.4, z:p.z+uz*ab+nz*LP.sd*3.4}; st.lift=LP; }
+    else console.warn('[Dev City] không tìm được chỗ đặt thang máy cho', st.name); }
   // đoàn tàu 4 toa xanh – tím – cam – xanh
   const train=new THREE.Group(); train.name='devcity:monorail'; train.userData.dynamic=true; root.add(train);
   const CAR=11, GAP=.6, cars=[];
@@ -353,9 +362,9 @@ export async function make(W, ctx){
     TR.ride={from:st, t:0}; HOOK.camDist=13;
     HOOK.vehicle={drive(dt){ car.updateMatrixWorld(); const p=car.getWorldPosition(new V3()); P.x=p.x; P.z=p.z; P.y=p.y+.5; P.vx=P.vz=0; W.me.g.position.set(P.x,P.y,P.z); W.me.g.rotation.y=car.rotation.y; W.me.play && W.me.play('idle'); }};
     toast(`🚝 Đã lên tàu tại ${st.name} – tàu chạy qua bụng toà chung cư 18 tầng!`, 3600); }
-  function alight(st){ HOOK.vehicle=null; HOOK.camDist=null; TR.ride=null; HOOK.camOverride=null; const g=st.ground, gy=hAt(g.x,g.z)??g.y; P.x=g.x; P.z=g.z; P.y=gy; P.vx=P.vz=P.vy=0; P.ground=true; W.me.g.position.set(P.x,P.y,P.z); toast(`🚉 Đã tới ${st.name}`, 2600); }
-  for(const st of ST) INTER.push({x:st.ground.x, z:st.ground.z, r:3.4, prio:.5, when:()=>Math.abs(P.y-(hAt(st.ground.x,st.ground.z)??st.ground.y))<3,
-    label:`🚝 ${st.name} – đi tàu điện một ray (E)`, action:()=>{ if(TR.ride) return; if(TR.wait>0 && Math.abs(TR.s-st.s)<2){ board(st); return; } TR.pending=st; toast('🚝 Tàu đang tới ga, đứng chờ một chút nhé…', 2600); }});
+  function alight(st){ HOOK.vehicle=null; HOOK.camDist=null; TR.ride=null; HOOK.camOverride=null; const g=st.plat||st.ground, gy=st.plat ? st.y : (hAt(g.x,g.z)??g.y);   /* xuống tàu ngay trên sân ga */ P.x=g.x; P.z=g.z; P.y=gy; P.vx=P.vz=P.vy=0; P.ground=true; W.me.g.position.set(P.x,P.y,P.z); toast(`🚉 Đã tới ${st.name}`, 2600); }
+  for(const st of ST) INTER.push({x:(st.plat||st.ground).x, z:(st.plat||st.ground).z, r:st.plat?5:3.4, prio:.5, when:()=>st.plat ? Math.abs(P.y-st.y)<1.5 : Math.abs(P.y-(hAt(st.ground.x,st.ground.z)??st.ground.y))<3,
+    label:`🚝 ${st.name} – lên tàu điện một ray (E)`, action:()=>{ if(TR.ride) return; if(TR.wait>0 && Math.abs(TR.s-st.s)<2){ board(st); return; } TR.pending=st; toast('🚝 Tàu đang tới ga, đứng chờ một chút nhé…', 2600); }});
 
   /* ============================== HẦM ĐÔI XUYÊN NÚI (x 440–460, T2 +24 → T3 +52, đèn vòm LED xanh) ============================== */
   { const bores=[[441,449.4],[450.6,459]];   // 2 lòng hầm (mỗi lòng 8,4 m) + vách giữa

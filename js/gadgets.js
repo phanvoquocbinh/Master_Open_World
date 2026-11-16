@@ -196,8 +196,10 @@ export async function make(W, ctx){
     {id:'cards', icon:'🃏', name:'Lật thẻ QA', run:cardGame},
     {id:'notes', icon:'📝', name:'Ghi chú', run:notesApp, keep:true},
     {id:'music', icon:'🎧', name:'Nghe nhạc', direct:()=>{ lapClose(); setTimeout(()=>podOpen(), 450); }},
+    {id:'debug', icon:'🛠️', name:'Debug', run:debugApp, when:()=>!!(W.events && Array.isArray(W.events.list))},   /* chỉ hiện khi có công cụ debug (V2: W.events) */
   ];
-  for(const A of APPS){ const b=document.createElement('button'); b.className='osIcon'; b.innerHTML=`<b>${A.icon}</b><span>${esc(A.name)}</span>`; b.onclick=()=>launch(A.id); desk.appendChild(b); }
+  for(const A of APPS){ const b=document.createElement('button'); b.className='osIcon'; b.innerHTML=`<b>${A.icon}</b><span>${esc(A.name)}</span>`; b.onclick=()=>launch(A.id); desk.appendChild(b); A.btn=b; }
+  const syncIcons=()=>{ for(const A of APPS) if(A.when && A.btn) A.btn.hidden=!A.when(); };   /* V2 nạp W.events sau gadgets → kiểm lại mỗi lần mở laptop */
   const appState={}; let curApp=null, clockT=0;
   function launch(id, arg){ const A=APPS.find(a=>a.id===id); if(!A) return; if(A.direct){ A.direct(arg); return; }
     if(curApp && curApp!==id) hideApp(curApp);
@@ -214,7 +216,7 @@ export async function make(W, ctx){
     if(HOOK.vehicle || (W.V && W.V.riding && W.V.riding())){ toast('🚲 Xuống xe trước rồi hãy mở laptop (V).', 2600); return false; }
     if(HOOK.blockInput){ return false; }
     if(POD.open) podClose(); if(PHN.open) phClose();
-    LAP.open=true; LAP.at=performance.now(); W.clearKeys(); HOOK.blockInput=true; HOOK.labelGroup='none'; P.dancing=false; document.body.classList.add('gadget-mode');
+    LAP.open=true; LAP.at=performance.now(); syncIcons(); W.clearKeys(); HOOK.blockInput=true; HOOK.labelGroup='none'; P.dancing=false; document.body.classList.add('gadget-mode');
     hold.kind='laptop'; hold.want=1; setEsc(lapClose);
     tickClock(); clearInterval(clockT); clockT=setInterval(tickClock, 15000);
     setTimeout(()=>{ if(!LAP.open) return; lapEl.hidden=false; requestAnimationFrame(()=>requestAnimationFrame(()=>lapEl.classList.add('on'))); if(app) launch(app, arg); }, 480);
@@ -228,6 +230,20 @@ export async function make(W, ctx){
   // L để cất (khi không gõ chữ). Lúc đang mở thì phím game bị chặn nên tự nghe ở đây.
   addEventListener('keydown', e=>{ if(!LAP.open || e.code!=='KeyL' || e.repeat || performance.now()-LAP.at<400) return;
     const t=e.target; if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return; e.preventDefault(); lapClose(); });
+
+  // --- app: 🛠️ Debug – mục 🧪 Sự kiện thế giới (V2: W.events.list / trigger / active / stop; ẩn khi không có W.events) ---
+  function debugApp(box){ let tm=0;
+    const render=()=>{ const E=W.events, ok=!!(E && Array.isArray(E.list));
+      box.innerHTML=`<div class="dbg"><div class="dbgHead">🛠️ Debug – công cụ thử nhanh</div>${ok ? `<section class="dbgSec"><h4>🧪 Sự kiện thế giới</h4><p class="dbgTip">Bấm để gọi sự kiện ngay (bỏ qua thời gian chờ). Laptop tự cất để bạn xem sự kiện.</p>
+        <div class="dbgGrid">${E.list.map(e=>`<button class="dbgBtn" data-k="${esc(e.key)}"><b>${esc(e.key)}</b><span>${esc(e.name)}</span>${e.hotkey?`<i>${esc(e.hotkey)}</i>`:''}</button>`).join('')}</div>
+        <div class="dbgFoot"><button class="dbgStop">⏹ Dừng tất cả</button><span class="dbgSt"></span></div></section>` : '<p class="dbgTip">Chế độ này chưa có công cụ debug.</p>'}</div>`;
+      box.querySelectorAll('.dbgBtn').forEach(b=>b.onclick=()=>{ try{ W.events.trigger(b.dataset.k,{force:true}); }catch(e){ console.warn('[Debug] sự kiện', e); } lapClose(); });
+      const stp=box.querySelector('.dbgStop'); if(stp) stp.onclick=()=>{ try{ W.events.stop(); }catch(e){} status(); if(toast) toast('⏹ Đã dừng mọi sự kiện thế giới', 2000); };
+      status(); };
+    const status=()=>{ const el=box.querySelector('.dbgSt'); if(!el || !W.events) return; let a=[]; try{ a=(W.events.active && W.events.active())||[]; }catch(e){} const names=(Array.isArray(a)?a:[a]).filter(Boolean).map(x=>typeof x==='string'?x:(x.name||x.key||'?'));
+      el.textContent=names.length ? 'Đang chạy: '+names.join(', ') : 'Không có sự kiện nào đang chạy'; };
+    render(); tm=setInterval(status, 1000);
+    return {show:render, stop:()=>clearInterval(tm)}; }
 
   // --- app: Master Dashboard (chỉ khi máy có thư mục MD) ---
   async function mdAlive(){ try{ const c=new AbortController(); const t=setTimeout(()=>c.abort(),1800); await fetch(DASH+'/',{mode:'no-cors',cache:'no-store',signal:c.signal}); clearTimeout(t); return true; }catch(e){ return false; } }
@@ -622,6 +638,7 @@ body.gadget-mode #top, body.gadget-mode #hint, body.gadget-mode #music, body.gad
 .osBar .osOff{background:#e5484d}.osSp{flex:1}.osClock{color:#cfd6e4}
 .osMsg{height:100%;display:grid;place-content:center;justify-items:center;text-align:center;gap:12px;padding:30px;color:#2b3346;background:#f5f7fb;font-size:15px}
 .osMsg .big{font-size:60px}.osMsg b{font-size:20px;max-width:640px}
+.dbg{height:100%;overflow:auto;padding:16px 18px;background:#f4f6fa;color:#1b2233;font:14px 'Segoe UI',system-ui,sans-serif}.dbgHead{font:700 17px 'Segoe UI',sans-serif;margin-bottom:10px}.dbgSec{background:#fff;border:1px solid #dde2ea;border-radius:12px;padding:12px 14px}.dbgSec h4{margin:0 0 4px;font-size:15px}.dbgTip{margin:0 0 10px;color:#5a6474;font-size:12.5px}.dbgGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}.dbgBtn{display:flex;align-items:center;gap:8px;text-align:left;border:1px solid #d3dae5;background:#f8fafc;border-radius:10px;padding:8px 10px;cursor:pointer;font:600 13px 'Segoe UI',sans-serif;color:#1b2233}.dbgBtn:hover{background:#e9f1ff;border-color:#7aa7f0}.dbgBtn b{flex:0 0 auto;min-width:30px;padding:2px 6px;border-radius:7px;background:#1b2233;color:#ffd166;text-align:center}.dbgBtn span{flex:1}.dbgBtn i{font-style:normal;font-size:11px;color:#6b7686;background:#eef1f6;border-radius:6px;padding:1px 6px}.dbgFoot{display:flex;align-items:center;gap:12px;margin-top:12px}.dbgStop{border:0;border-radius:10px;padding:8px 14px;background:#e0453a;color:#fff;font:700 13px 'Segoe UI',sans-serif;cursor:pointer}.dbgStop:hover{background:#c73a30}.dbgSt{font-size:12.5px;color:#5a6474}
 .mdApp{height:100%;display:flex;flex-direction:column}.mdNav{display:flex;gap:6px;padding:6px 8px;background:#f1f3f7;border-bottom:1px solid #dde2ea;flex-wrap:wrap}
 .mdBtn{border:1px solid #d5dbe5;background:#fff;border-radius:8px;padding:5px 9px;font:600 12.5px "Segoe UI",sans-serif;cursor:pointer}.mdBtn:hover{background:#e9eef7}
 .mdView{flex:1;min-height:0;position:relative}.mdView iframe,.brPane iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
