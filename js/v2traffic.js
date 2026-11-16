@@ -37,7 +37,9 @@ export async function make(W, zones={}){
       // Abyssal: chỉ vành đai +2 (±174) và 3 nhánh ra cổng là đường xe; đường đỉnh vách (+28, lát đá 4 m) + lối vào giếng xoắn ốc là đường đi bộ
       if(R0.zone==='abyssal' && !(Math.max(Math.abs(s[0]),Math.abs(s[1]))>=170 && Math.max(Math.abs(s[2]),Math.abs(s[3]))>=170)) continue;
       if(R0.zone==='cbd'){ const zc=Math.abs(s[1]-s[3])<.5 ? s[1] : null; w=(zc!==null && (Math.abs(zc-66)<1 || Math.abs(zc-236)<1)) ? 24 : 20; }
-      add([[s[0],s[1],null],[s[2],s[3],null]], w, R0.zone, {refY:R0.y}); } }
+      add([[s[0],s[1],null],[s[2],s[3],null]], w, R0.zone, {refY:R0.y}); }
+    // 17/11: tuyến dốc có cao độ sẵn [x,z,y] (Abyssal: 2 đường xoắn xuống đáy vực + vòng quay đầu bãi đỗ)
+    for(const r of (R0.ramps||[])) add(r.pts, r.w||9, R0.zone, {fixedY:true, name:r.name, vmax:r.vmax}); }
   const dc=zones.devcity||W.devcityV2;
   if(dc){ for(const r of (dc.ROADS||[])){ const p=r.pts.filter((q,i)=>i%2===0 || i===r.pts.length-1).map(q=>[q.x,q.z,q.y]); add(p, r.w||10, 'devcity', {fixedY:true, name:r.name, vmax:r.tunnel?13:11}); }
     for(const d of (dc.DECKS||[])){ if(/^(rail|foot)/i.test(d.name||'') || !d.path || d.path.length<2) continue; /* bỏ dầm tàu điện + cầu đi bộ */ add(d.path.map(q=>[q.x,q.z,q.y]), 10, 'devcity', {fixedY:true, name:'cầu '+(d.name||'')}); }
