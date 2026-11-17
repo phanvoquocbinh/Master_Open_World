@@ -653,7 +653,7 @@ export async function make(W, ctx={}){
   HOOK.onFrame.push((dt)=>{ dt=Math.min(dt||1/60,.1); tt+=dt; const dx=P.x-CX, dz=P.z-CZ, dH=D2(dx,dz), far=dH>520;
     mid.visible=dH<460; lobby.visible=dH<62 && P.y<Y0+31; if(far){ if(WIN.length || WINS.length) setWindow([],0); curF=-1; return; }
     /* tầng hiện tại + cửa sổ va chạm ±1 tầng */
-    let f=0; if(dH<39 && P.y>Y0-1.6 && P.y<TOPY+8) f=clamp(Math.round((P.y-Y0)/FH)+1,1,25);
+    let f=0; if(dH<39 && P.y>Y0-1.6 && P.y<TOPY+60) f=clamp(Math.round((P.y-Y0)/FH)+1,1,25);   /* 17/11 (phiên A, Bình báo rơi từ mái): nhảy / đứng trên vật trang trí / trực thăng cao hơn mái > 8 m không còn tắt hết sàn → không rơi xuyên xuống tầng trệt */
     if(FORCE>0){ FORCE-=dt; } else { const ks=f?[f-1,f,f+1].filter(k=>k>=2 && k<=25):[]; if(ks.join()!==WIN.join() || (WINS[0]||0)!==(f>=2?f:0)) setWindow(ks,f); }
     if(f!==curF){ curF=f; refreshFloor(); }
     /* camera: trong phòng/hành lang các cánh → không vượt trần, lùi gần nhân vật */
