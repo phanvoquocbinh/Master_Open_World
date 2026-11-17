@@ -16,6 +16,7 @@ export async function make(W, ctx={}){
   const {THREE, scene, P, me, cam, HOOK, INTER, PLACES, toast, makeLabel, teleport, addSeg, addPlat} = W;
   const TAU=Math.PI*2, clamp=(v,a,b)=>v<a?a:v>b?b:v, lerp=(a,b,t)=>a+(b-a)*t, ss=(a,b,x)=>{ const t=clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
   const WY=(W.ABY && W.ABY.waterY!=null) ? W.ABY.waterY : (W.WATER_Y ?? -.35), LOW=W.QUAL==='low';
+  W.__abyPay={S:ctx.S, save:ctx.save, askPay:ctx.askPay, spend:ctx.spend, ui:ctx.ui, fmt:ctx.fmt};   /* cho dining.js (phục vụ bàn – nạp từ bots_abyssal.js, không nhận ctx) */
   const pay=(cost, what, go)=>{ if(!ctx.askPay) return go(); ctx.askPay(cost, what, ()=>{ if(ctx.spend && !ctx.spend(cost)) return; go(); }); };
   const root=new THREE.Group(); root.name='abyssal-sea'; scene.add(root); const dyn=new THREE.Group(); dyn.name='abyssal-sea-dyn'; dyn.userData.dynamic=true; scene.add(dyn);
   const std=(c,o={})=>new THREE.MeshStandardMaterial({color:c, roughness:.6, ...o});
@@ -225,6 +226,8 @@ export async function make(W, ctx={}){
   const nextDockIn=()=>{ let best=1e9; for(let k=0;k<NY;k++){ const tau=YS[k].tau; best=Math.min(best, RT.PER-tau); } return best; };
   // người chơi lên / xuống tàu
   const rider=YK.makeRider({ sync, obj:()=>yObj, yaw:()=>aboard>=0?YS[aboard].yaw:0, onAbort:()=>{ aboard=-1; ticket=null; },
+    onSit:(s)=>{ if(s.dine && W.dining) W.dining.onSit({venue:'yacht', frame:yObj, x:s.x, y:s.y, z:s.z, yaw:s.face, floor:s.floor, tableY:s.floor+.77, waiterFrom:(s.floor>7?YK.SPOTS.cocktail:YK.SPOTS.bar)}); },   /* bàn ăn trên tàu → phục vụ bàn (dining.js) */
+    onStand:(s)=>{ if(s.dine && W.dining) W.dining.onStand(); },
     onInter:(R)=>{ const SP=YK.SPOTS, y=YS[aboard]; if(!y) return null; const d=(o)=>o && Math.abs(o.y-R.ly)<.7 ? Math.hypot(o.x-R.lx,o.z-R.lz) : 99;
       if(d(SP.gangway)<2.2) return y.docked ? {prio:1, label:'🚶 Xuống bến (E)', action:leaveYacht} : {prio:1, label:`⏳ Tàu đang chạy – về bến sau ~${Math.ceil((RT.PER-y.tau)/60)} phút (hoặc gọi ca-nô ở bệ bơi đuôi tàu)`, action:()=>toast('⚓ Muốn về sớm: xuống bệ bơi đuôi tàu, bấm E gọi ca-nô đưa đón.',3000)};
       if(d(SP.swim)<2.6) return {prio:1, label:y.docked?'🚶 Xuống bến (E)':'🚤 Gọi ca-nô đưa về bến (E)', action:leaveYacht};
@@ -338,7 +341,7 @@ export async function make(W, ctx={}){
 
   /* ============================== 5. ĐIỂM BẢN ĐỒ · KHUNG HÌNH · ÂM THANH ============================== */
   { const [x,z]=COMPACT?MW(-16,PB-2.5):MW(-14,3.2), [lx,lz]=MW(-16,40); PLACES.push({icon:'🛥️', name:'Bến Siêu Du Thuyền', sub:'Tour 3 tầng · Quần đảo Đá Vôi Ngọc Bích · thể thao nước', go:()=>teleport(x,z,lx,lz)}); }
-  let tt=0, wasNear=false, lateDone=false;
+  let tt=0, wasNear=false, lateDone=false, diningReg=false;
   HOOK.onFrame.push((dt)=>{ dt=Math.min(dt||1/60,.1); tt+=dt; const T=W.T||tt;
     if(!lateDone && tt>.5){ lateDone=true;   /* các vùng nạp SAU đảo Abyssal (Thụy Sĩ – cầu G3, Skyport…) đã có sàn/cầu → chỉnh lại vùng nước + chọn lại tuyến 1 lần */
       try{ SPORT=fitZone(PL.watersports,6); PARA=fitZone(PL.parasail,10); api.layout.sport=SPORT; api.layout.para=PARA; if(aboard<0){ const old=RT.lane, os=RT.sep&&RT.sep.sep; pickRoute(); frameT=-1; const b=routeCheck(); console.info(`[abyssal_sea] kiểm lại sau khi mọi vùng đã nạp: làn ${RT.lane} (trước: ${old}) · 2 tàu gần nhất ${RT.sep.sep} m (trước ${os}) · ${b.length} điểm cần xem`, b.slice(0,6)); } }catch(e){ console.warn('[abyssal_sea] kiểm lại', e); } }
@@ -348,7 +351,8 @@ export async function make(W, ctx={}){
     if(CR.on && !(HOOK.vehicle && HOOK.vehicle.drive===rideDrive)) CR.on=null; if(PR.on && !(HOOK.vehicle && HOOK.vehicle.para)) PR.on=false;
     sync(); if(aboard>=0 && rider.on) HOOK.vehicleInter=rider.inter;
     moor.visible=dockedK()>=0;
-    if(near.g.visible) near.update(dt,T,aboard>=0 && YS[aboard] && YS[aboard].v>1 && YS[aboard].s>RT.n*.2 && YS[aboard].s<RT.n*.8);
+    if(near.g.visible){ const y=YS[nearK]; let clap=false; if(y && y.v>.8) for(const I of ISL){ if(Math.hypot(y.x-I.x,y.z-I.z)<I.r*1.3+70){ clap=true; break; } } near.update(dt,T,clap,aboard>=0); }   /* khách vỗ tay khi tàu lượn qua quần đảo */
+    if(!diningReg && W.dining){ diningReg=true; try{ W.dining.register({id:'yacht', name:'Siêu du thuyền', kind:'yacht', free:()=>!!(ticket && ticket.combo)}); }catch(e){} }
     foamTex.offset.x=T*.012; foamTex.offset.y=(Math.sin(T*.8)*.5+.5)*.25; foamMat.opacity=.55+.2*Math.sin(T*1.3);
     YK.M.glassFar.emissive.setRGB(.35*(W.night||0),.24*(W.night||0),.1*(W.night||0)); glowM.emissiveIntensity=.6+(W.night||0)*1.6;
     if(inArea || PR.on || CR.on) sportsUpdate(T,dt);
@@ -356,6 +360,7 @@ export async function make(W, ctx={}){
 
   /* ============================== API ============================== */
   const api={ layout:{pre:PRE, marina:MAR, dock:DOCK, sport:SPORT, para:PARA, islands:ISL}, get route(){ return RT; }, poseOf, yachts:YS, kit:YK, near, rider, routeCheck,
+    quay:{at:(a,b)=>MW(a,b), PB, DY, compact:COMPACT},   /* toạ độ bến cho bot xếp hàng (bots_abyssal.js) */
     board:()=>boardYacht(dockedK()), shift(sec){ OFF+=sec; frameT=-1; sync(); }, waitDock(){ let k=dockedK(); if(k>=0) return k; OFF+=nextDockIn()+1; frameT=-1; sync(); return dockedK(); }, leave:leaveYacht, get aboard(){ return aboard; }, get nearK(){ return nearK; }, dockedK, nextDockIn, startRide, endRide, startPara, endPara, CR, PR,
     /* nguồn âm cho ambience_world.js (phiên chính nối 1 dòng): [{kind:'boat', id, x,y,z, v}] */
     soundList(){ const L=[]; let a=null, ad=1e9, b=null, bd=1e9; for(let k=0;k<NY;k++){ const y=YS[k]; if(y.v<.3) continue; const d=Math.hypot(y.x-P.x,y.z-P.z); if(d<ad){ b=a; bd=ad; a=k; ad=d; } else if(d<bd){ b=k; bd=d; } }

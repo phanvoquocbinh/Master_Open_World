@@ -177,7 +177,7 @@ export function makeYachtKit(W){
   wall(-3.3,1,-.6,1,UP); wall(.6,1,3.3,1,UP); for(const x of [-.6,.6]){ wall(x,1,x,2.6,UP); wall(x,3.6,x,5.5,UP); } wall(-3.3,5.5,-.6,5.5,UP); wall(.6,5.5,3.3,5.5,UP);
   const FLOORS=[[-4.5,4.5,-20.4,9.4,D1],[-4.2,4.2,9.4,14.8,D1],[-3.2,3.2,14.8,18.9,D1],[-1.7,1.7,18.9,20.6,D1],[-4.2,4.2,-22.6,-20.45,.45],[-3.72,3.72,-14.6,-8,D2],[-3.15,3.15,-8,9.3,D2],[-3.5,3.5,-14.6,8.6,D3]];
   const HOLES=[[...STAIR.A.slice(0,4),D2],[...STAIR.C.slice(0,4),D3]], RAMPS=[STAIR.S,STAIR.B,STAIR.A,STAIR.C];
-  const seat=(x,z,y,face,floor,o={})=>SEATS.push({x,z,y,face,floor,label:o.label||'🪑 Ngồi (E)',lie:!!o.lie,soak:!!o.soak,taken:false});   /* face = hướng mặt (nằm: hướng về phía chân) */
+  const seat=(x,z,y,face,floor,o={})=>SEATS.push({x,z,y,face,floor,label:o.label||'🪑 Ngồi (E)',lie:!!o.lie,soak:!!o.soak,dine:!!o.dine,taken:false});   /* face = hướng mặt (nằm: hướng về phía chân) */
 
   function buildInterior(){ const B=bag();
     const sofa=(x,z,len,ry,floor,mat=IM.cream,seats=true)=>{ const c=Math.cos(ry), s=Math.sin(ry), P=(lx,lz)=>[x+lx*c+lz*s, z-lx*s+lz*c];
@@ -190,7 +190,7 @@ export function makeYachtKit(W){
     const ceilGlow=(x0,x1,z0,z1,y)=>B.put(IM.glow, rbox(x1-x0,.03,z1-z0,.01,1), (x0+x1)/2, y, (z0+z1)/2);
     /* ----- TẦNG 1 · BOONG SAU: sofa chữ U ôm bàn ăn teak ngoài trời ----- */
     sofa(.6,-19.2,3.0,0,D1); sofa(2.35,-17.2,2.6,-Math.PI/2,D1);   /* sofa chữ L ôm bàn ăn, chừa lối mạn trái lên cầu thang B */ table(0,-17.3,2.6,1.2,D1,M.teak,M.chrome,.72); boxWall(-1.3,1.3,-17.9,-16.7,MAIN);
-    for(const x of [-.7,.6]){ B.put(M.teak, rbox(.46,.06,.46,.02,1), x, D1+.45, -16.2); B.put(M.teak, rbox(.46,.5,.06,.02,1), x, D1+.72, -15.97); for(const [a,b] of [[-.19,-.19],[.19,-.19],[-.19,.19],[.19,.19]]) B.put(M.chrome, new THREE.CylinderGeometry(.018,.018,.44,6), x+a, D1+.22, -16.2+b); seat(x,-16.2,D1+.5,Math.PI,D1); }
+    for(const x of [-.7,.6]){ B.put(M.teak, rbox(.46,.06,.46,.02,1), x, D1+.45, -16.2); B.put(M.teak, rbox(.46,.5,.06,.02,1), x, D1+.72, -15.97); for(const [a,b] of [[-.19,-.19],[.19,-.19],[-.19,.19],[.19,.19]]) B.put(M.chrome, new THREE.CylinderGeometry(.018,.018,.44,6), x+a, D1+.22, -16.2+b); seat(x,-16.2,D1+.5,Math.PI,D1,{label:'🍽️ Ngồi bàn boong sau – gọi món (E)', dine:true}); }
     /* ----- MAIN SALON: thảm Ba Tư · 2 sofa da kem-nâu · bàn trà cẩm thạch · TV 85" · quầy bar ----- */
     B.put(IM.rug, new THREE.PlaneGeometry(4.2,5.2), 0, D1+.015, -8.6, 0, -Math.PI/2);
     sofa(-2.6,-8.6,3.0,Math.PI/2,D1,IM.cream); sofa(1.0,-11.2,2.4,0,D1,IM.brown);
@@ -203,7 +203,7 @@ export function makeYachtKit(W){
     ceilGlow(-3,3,-12.4,-4.6,D2-.25);
     /* ----- PHÒNG ĂN: bàn gụ 10 ghế + đèn chùm pha lê ----- */
     B.put(IM.mahog, rbox(1.1,.07,3.9,.03,2), .9, D1+.74, .7); for(const z of [-.4,1.8]) B.put(M.gold, lathe([[0,0],[.32,0],[.33,.03],[.07,.1],[.05,.7],[.2,.72],[0,.72]],16), .9, D1, z); boxWall(-.42,2.22,-2.0,3.42,MAIN);
-    const chair=(x,z,ry)=>{ const c=Math.cos(ry), s=Math.sin(ry); B.put(IM.cream, rbox(.48,.09,.48,.03,1), x, D1+.46, z, ry); B.put(IM.cream, rbox(.48,.62,.07,.03,1), x-s*.22, D1+.8, z-c*.22, ry); for(const [a,b] of [[-.2,-.2],[.2,-.2],[-.2,.2],[.2,.2]]) B.put(IM.walnut, new THREE.CylinderGeometry(.02,.018,.44,6), x+a*c+b*s, D1+.22, z-a*s+b*c); seat(x,z,D1+.52,ry,D1,{label:'🍽️ Ngồi bàn ăn (E)'}); };
+    const chair=(x,z,ry)=>{ const c=Math.cos(ry), s=Math.sin(ry); B.put(IM.cream, rbox(.48,.09,.48,.03,1), x, D1+.46, z, ry); B.put(IM.cream, rbox(.48,.62,.07,.03,1), x-s*.22, D1+.8, z-c*.22, ry); for(const [a,b] of [[-.2,-.2],[.2,-.2],[-.2,.2],[.2,.2]]) B.put(IM.walnut, new THREE.CylinderGeometry(.02,.018,.44,6), x+a*c+b*s, D1+.22, z-a*s+b*c); seat(x,z,D1+.52,ry,D1,{label:'🍽️ Ngồi bàn ăn – gọi món (E)', dine:true}); };
     for(const z of [-.6,.3,1.2,2.1]){ chair(-.15,z,Math.PI/2); chair(1.95,z,-Math.PI/2); } chair(.9,-1.75,0); chair(.9,3.15,Math.PI);
     SPOTS.dining={x:.9,z:.7,y:D1};
     B.put(IM.glow, lathe([[0,-.55],[.22,-.45],[.42,-.22],[.5,0],[.38,.12],[0,.16]],20), .9, D2-.95, .7); B.put(M.gold, new THREE.TorusGeometry(.55,.025,6,28), .9, D2-.95, .7, 0, Math.PI/2); B.put(M.gold, new THREE.CylinderGeometry(.015,.015,.6,6), .9, D2-.5, .7);
@@ -252,7 +252,7 @@ export function makeYachtKit(W){
     for(let i=0;i<6;i++) B.put([IM.glow,M.gold,M.navy][i%3], lathe([[0,0],[.04,0],[.045,.2],[.015,.27],[.015,.32],[0,.32]],10), -2.9, D3+1.11, -5.4+i*.35);
     SPOTS.cocktail={x:-1.8,z:-4.5,y:D3,label:'🍹 Gọi cocktail ở quầy Sun Deck'};
     B.put(M.chrome, rbox(.7,.9,1.4,.05,2), 2.8, D3+.45, -4.6); B.put(M.dark, rbox(.6,.04,1.2,.01,1), 2.8, D3+.92, -4.6); for(let i=0;i<7;i++) B.put(M.chrome, rbox(.56,.02,.02,.005,1), 2.8, D3+.95, -5.1+i*.17); boxWall(2.4,3.3,-5.4,-3.8,SUN);
-    table(0,-2.2,1.2,2.0,D3,M.teak,M.chrome,.72); for(const x of [-1.0,1.0]) for(const z of [-2.8,-1.6]){ B.put(IM.cream, rbox(.46,.08,.46,.02,1), x, D3+.45, z); B.put(M.chrome, new THREE.CylinderGeometry(.025,.025,.45,6), x, D3+.22, z); seat(x,z,D3+.5,x<0?Math.PI/2:-Math.PI/2,D3); } boxWall(-.62,.62,-3.25,-1.15,SUN);
+    table(0,-2.2,1.2,2.0,D3,M.teak,M.chrome,.72); for(const x of [-1.0,1.0]) for(const z of [-2.8,-1.6]){ B.put(IM.cream, rbox(.46,.08,.46,.02,1), x, D3+.45, z); B.put(M.chrome, new THREE.CylinderGeometry(.025,.025,.45,6), x, D3+.22, z); seat(x,z,D3+.5,x<0?Math.PI/2:-Math.PI/2,D3,{label:'🍹 Ngồi bàn Sun Deck – gọi món (E)', dine:true}); } boxWall(-.62,.62,-3.25,-1.15,SUN);
     ceilGlow(-2.9,2.9,-7.9,1.2,HT-.04);
     /* ----- BOONG TRÊN PHÍA SAU: 2 ghế lounge + bàn nhỏ ----- */
     sofa(-1.0,-13.9,2.2,0,D2,IM.cream); table(-1.0,-12.6,.9,.6,D2,M.teak,M.chrome,.42); boxWall(-1.5,-.5,-12.95,-12.25,UP);
@@ -281,7 +281,7 @@ export function makeYachtKit(W){
       npc(){ const people=W.people; if(!people || !W.makeActor) return;
         /* pose 'sit': y = mặt ghế (hông đặt đúng mặt ghế) · 'tray'/'look': y = sàn */
         const add=(seed,outfit,name,x,z,y,face,pose)=>{ try{ const kk=people.kit(seed,{outfit}); const a=W.makeActor(kk.gl,{name, height:kk.h, face:0, clips:kk.clips, compact:false, dot:'#4fc3ff'}); a.play('idle',0); a.mixer.update(0); const po=makePoser(THREE,a), hh=po.hipsHeight();
-            a.g.position.set(x, pose==='sit'?y+.06-hh:y, z); a.g.rotation.y=face; g.add(a.g); N.actors.push({a,po,pose,x,z,y,face}); const s=SEATS.find(o=>Math.hypot(o.x-x,o.z-z)<.35 && Math.abs(o.floor-(pose==='sit'?y-.5:y))<1); if(s) s.taken='npc'; else if(pose!=='sit') CIRC.push([x,z,.3,y-.4,y+2]); return a; }catch(e){ console.warn('[abyssal_yacht] npc', e); } };
+            a.g.position.set(x, pose==='sit'?y+.06-hh:y, z); a.g.rotation.y=face; g.add(a.g); N.actors.push({a,po,pose,x,z,y,face,name:/Thuyền trưởng/.test(name)?'cap':'p'}); const s=SEATS.find(o=>Math.hypot(o.x-x,o.z-z)<.35 && Math.abs(o.floor-(pose==='sit'?y-.5:y))<1); if(s) s.taken='npc'; else if(pose!=='sit') CIRC.push([x,z,.3,y-.4,y+2]); return a; }catch(e){ console.warn('[abyssal_yacht] npc', e); } };
         const pick=(f,s)=>people.pickSeed(L=>f?L.female:!L.female,s);
         add(pick(0,701),{shirt:0xf4f1ea, pants:0x14284f, long:true, style:'cap'},'⚓ Thuyền trưởng',.9,6.78,D2+.62,0,'sit');
         add(pick(1,702),{shirt:0xf4f1ea, pants:0x1c2026, long:true},'🍸 Phục vụ boong sau',1.3,-15.4,D1,-Math.PI/2,'tray');
@@ -290,8 +290,15 @@ export function makeYachtKit(W){
         add(pick(0,705),{shirt:0x3f8fd9, shorts:true},'🧳 Khách du thuyền',0,16.6,D1,0,'look');
         add(pick(1,706),{shirt:0xf2c14e, shorts:true},'🧳 Khách du thuyền',2.47,-3.32,D2+.45,-Math.PI/2,'sit');
         N.tray=[]; for(const ac of N.actors) if(ac.pose==='tray'){ const t=new THREE.Group(); const disk=new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,.02,18),M.chrome); t.add(disk); for(const [x,z,c] of [[-.08,.04,0xffb84d],[.08,-.03,0xd94f6a]]){ const gl=new THREE.Mesh(lathe([[0,0],[.03,0],[.008,.02],[.008,.08],[.045,.12],[.05,.18],[0,.16]],10),new THREE.MeshStandardMaterial({color:c, roughness:.1, transparent:true, opacity:.75})); gl.position.set(x,.01,z); t.add(gl); } t.position.set(ac.x+Math.sin(ac.face)*.38, ac.y+1.08, ac.z+Math.cos(ac.face)*.38); g.add(t); N.tray.push(t); } },
-      update(dt,T,near){ if(N.water && N.water.material.normalMap) N.water.material.normalMap.offset.set(T*.05,T*.04);
-        for(const ac of N.actors){ ac.a.mixer.update(dt); const k=ac.pose==='sit'?'sit':ac.pose==='tray'?'present':(near && ac.pose==='look')?'dance':null; if(k) try{ ac.po.apply(k,T); }catch(e){} } } };
+      update(dt,T,clap,aboard){ if(N.water && N.water.material.normalMap) N.water.material.normalMap.offset.set(T*.05,T*.04);
+        if(aboard && W.P){ N.chatT=(N.chatT||0)-dt; if(N.chatT<=0){ N.chatT=1; for(const ac of N.actors){ if((ac.pose!=='sit' && ac.pose!=='look') || ac.name==='cap') continue; ac.a.g.getWorldPosition(_cw); if(Math.hypot(_cw.x-W.P.x,_cw.z-W.P.z)<3.2 && Math.abs(_cw.y-W.P.y)<2.2 && Math.random()<.35){ chat(ac, clap?pick(LINES_CLAP):pick(LINES)); break; } } } }
+        for(const ac of N.actors) if(ac.bub){ ac.bubT-=dt; if(ac.bubT<=0){ W.removeLabel(ac.bub); ac.bub=null; } }
+        for(const ac of N.actors){ ac.a.mixer.update(dt); const k=ac.pose==='sit'?'sit':ac.pose==='tray'?'present':null; if(k) try{ ac.po.apply(k,T); }catch(e){} if(clap && (ac.pose==='look' || (ac.pose==='sit' && ac.name!=='cap'))) clapArms(ac,T); } } };
+    const _cw=new THREE.Vector3(), pick=a=>a[Math.floor(Math.random()*a.length)], LINES=['Chào bạn! Lần đầu đi du thuyền à? 🛥️','Sun Deck có Jacuzzi đấy, lên thử đi!','Combo VIP có cocktail miễn phí nha 🍹','Thuyền trưởng lái êm ghê!'], LINES_CLAP=['Woa, đảo đá vôi kìa! 👏','Đẹp quá trời luôn! 📸','Cổng vòm đá kìa, chụp ngay! 👏'];
+    const chat=(ac,t)=>{ if(ac.bub) W.removeLabel(ac.bub); if(!ac.anchor){ ac.anchor=new THREE.Object3D(); ac.anchor.position.y=2.4; ac.a.g.add(ac.anchor); } ac.bub=W.makeLabel(t,null,{fs:38, h:.26, follow:ac.anchor, bg:'rgba(255,255,255,.92)', color:'#1b2233', fade:20}); ac.bubT=3.2; };
+    const _a=new THREE.Vector3(), _b=new THREE.Vector3(), _d=new THREE.Vector3(), _q=new THREE.Quaternion(), _pq=new THREE.Quaternion(), _wq=new THREE.Quaternion(), _F=new THREE.Vector3(), _R=new THREE.Vector3(), _U=new THREE.Vector3(0,1,0);
+    const aimB=(bn,n,c,f,u,r)=>{ const B0=bn[n], C0=bn[c]; if(!B0||!C0) return; B0.getWorldPosition(_a); C0.getWorldPosition(_b); _b.sub(_a).normalize(); _d.set(0,0,0).addScaledVector(_F,f).addScaledVector(_U,u).addScaledVector(_R,r).normalize(); _q.setFromUnitVectors(_b,_d); B0.getWorldQuaternion(_wq); B0.parent.getWorldQuaternion(_pq); _wq.premultiply(_q); B0.quaternion.copy(_pq.invert().multiply(_wq)); B0.updateMatrixWorld(true); };
+    const clapArms=(ac,t)=>{ const bn=ac.po && ac.po.bones; if(!bn || !bn.Hips) return; ac.a.g.updateMatrixWorld(true); ac.a.g.getWorldDirection(_F); _F.y=0; _F.normalize(); _R.set(-_F.z,0,_F.x); const e=Math.abs(Math.sin(t*7+ac.x)); for(const [s2,k] of [['Left',-1],['Right',1]]){ aimB(bn,s2+'Arm',s2+'ForeArm',.7,-.45,k*.25); aimB(bn,s2+'ForeArm',s2+'Hand',.6,.5,-k*(.55+e*.35)); } };
     return N; }
 
   /* ============================== NGƯỜI CHƠI ĐI BỘ TRÊN TÀU ============================== */
@@ -315,8 +322,8 @@ export function makeYachtKit(W){
       place(); P.x=v.x; P.y=v.y; P.z=v.z; R.wx=P.x; R.wz=P.z; P.vx=P.vz=P.vy=0; P.ground=true; P.face=yaw+R.face; me.g.position.copy(v); me.g.rotation.set(0,P.face,0);
       R.speed=lerp(R.speed||0,aspd,1-Math.exp(-dt*12)); if(R.speed>2.2) me.play('run'); else if(R.speed>.25) me.play('walk'); else me.play('idle');
       const cl=deck.ceilAt(R.lx,R.lz,R.ly); if(cl!==null){ HOOK.camBox={x0:-1e6,x1:1e6,z0:-1e6,z1:1e6,y1:o.position.y+cl, _ys:true}; if(cam.dist>5) cam.dist=5; } else if(HOOK.camBox && HOOK.camBox._ys) HOOK.camBox=null; };
-    function standUp(){ const s=R.sit; if(!s) return; s.taken=false; R.sit=null; const f=[Math.sin(s.face),Math.cos(s.face)]; for(const k of [.75,.5,1.0,-.75]){ const x=s.x+f[0]*k, z=s.z+f[1]*k, h=deck.floorAt(x,z,s.floor+.1); if(h!==null && Math.abs(h-s.floor)<.3){ R.lx=x; R.lz=z; break; } } R.ly=s.floor; me.g.rotation.set(0,P.face,0); }
-    R.sitOn=s=>{ if(s.taken) return toast('Chỗ này có người rồi – chọn chỗ khác nhé!',2200); s.taken=true; R.sit=s; toast(s.lie?'Đang nằm thư giãn – bấm E hoặc phím di chuyển để dậy':s.soak?'♨️ Ngâm mình trong bồn sục – bấm E hoặc phím di chuyển để ra':'Đang ngồi – bấm E hoặc phím di chuyển để đứng dậy',2600); };
+    function standUp(){ const s=R.sit; if(!s) return; s.taken=false; R.sit=null; try{ opts.onStand && opts.onStand(s); }catch(e){} const f=[Math.sin(s.face),Math.cos(s.face)]; for(const k of [.75,.5,1.0,-.75]){ const x=s.x+f[0]*k, z=s.z+f[1]*k, h=deck.floorAt(x,z,s.floor+.1); if(h!==null && Math.abs(h-s.floor)<.3){ R.lx=x; R.lz=z; break; } } R.ly=s.floor; me.g.rotation.set(0,P.face,0); }
+    R.sitOn=s=>{ if(s.taken) return toast('Chỗ này có người rồi – chọn chỗ khác nhé!',2200); s.taken=true; R.sit=s; toast(s.lie?'Đang nằm thư giãn – bấm E hoặc phím di chuyển để dậy':s.soak?'♨️ Ngâm mình trong bồn sục – bấm E hoặc phím di chuyển để ra':'Đang ngồi – bấm E hoặc phím di chuyển để đứng dậy',2600);  try{ opts.onSit && opts.onSit(s); }catch(e){} };
     R.inter=()=>{ if(R.sit) return {label:'🧍 Đứng dậy (E · phím di chuyển)', action:standUp};
       let best=null, bd=1.35; for(const s of SEATS){ if(s.taken || Math.abs(s.floor-R.ly)>.6) continue; const d=Math.hypot(s.x-R.lx,s.z-R.lz); if(d<bd){ bd=d; best={label:s.label, action:()=>R.sitOn(s)}; } }
       const extra=opts.onInter ? opts.onInter(R) : null; if(extra && (!best || extra.prio)) return extra; return best; };
