@@ -71,12 +71,12 @@ export function buildAmenities(K){
     out.southBridge={x:0, z0:zI, z1:zN, w, yIsland:IY, yArch:16, flatFrom:zF}; out.dropoff={c:LC, r:LR, w:6, y:IY+.03, hub:3.1}; }
 
   /* ======================= 3. HYDRO-PULSE CORE: 3 ĐĨA KÍNH + CỘT THÁC + BÃI ĐỖ NGẮM CẢNH +28 ======================= */
-  const HC=[0,-124], DISC=[9.2,16,24.5], RO=15.5, RI=5.5; { const rings=[], ribs=[], sofa=[], tbl=[], palmT=[], palmC=[], bar=[], led=[];
+  const HC=[0,-124], DISC=[9.2,16,24.5], RO=15.5, RI=5.5, SPA=1.15, SPR=18.6, SPC=[HC[0]+Math.cos(SPA)*SPR, HC[1]+Math.sin(SPA)*SPR];   /* cầu thang xoắn: tâm ngoài mép đĩa, phía Nam-Đông (ngoài sàn tháp z ≥ −114) */ { const rings=[], ribs=[], sofa=[], tbl=[], palmT=[], palmC=[], bar=[], led=[];
     for(const y of DISC){ const g=new THREE.Mesh(new THREE.RingGeometry(RI,RO,64,1),MAT.glass); g.rotation.x=-Math.PI/2; g.position.set(HC[0],y-.02,HC[1]); g.userData.dynamic=true; g.renderOrder=6; grp.add(g);
       rings.push([HC[0],y-.05,HC[1],0,RO/RO,1,1,Math.PI/2],[HC[0],y-.05,HC[1],0,RI/RO,1,RI/RO,Math.PI/2]); led.push([HC[0],y-.2,HC[1],0,1,1,1,Math.PI/2]);
       for(let k=0;k<8;k++){ const a=k/8*TAU+TAU/16; ribs.push([HC[0]+Math.cos(a)*(RO+RI)/2,y-.13,HC[1]+Math.sin(a)*(RO+RI)/2,-a,RO-RI,1,1]); }
       for(let k=0;k<24;k++){ const a=k/24*TAU, a1=(k+1)/24*TAU, am=(a+a1)/2, tx=-Math.sin(am), tz=Math.cos(am); for(const [r0,r1] of [[RI,10.5],[10.5,RO]]){ const rm=(r0+r1)/2; addPlat(HC[0]+Math.cos(am)*rm,HC[1]+Math.sin(am)*rm,Math.atan2(tx,tz),(r1-r0)/2+.05,r1*Math.sin((a1-a)/2)+.08,y); } }
-      const openB=y===16; fence(ring(HC[0],HC[1],RO-.2,openB?Math.PI/2+.16:0,openB?Math.PI/2+TAU-.16:TAU,64),y,'💠 Lan can đĩa kính – bên dưới là bãi cát'); fence(ring(HC[0],HC[1],RI+.2,0,TAU,24),y,'💧 Lan can cột thác giữa đĩa kính');
+      const GP=[[SPA,.075]].concat(y===16?[[Math.PI/2,.16]]:[]), inGap=t=>GP.some(([g,w])=>Math.abs(Math.atan2(Math.sin(t-g),Math.cos(t-g)))<w); { let run=[]; const flush=()=>{ if(run.length>1) fence(run,y,'💠 Lan can đĩa kính – bên dưới là bãi cát'); run=[]; }; for(let i=0;i<=128;i++){ const t=i/128*TAU; if(inGap(t)){ flush(); continue; } run.push([HC[0]+Math.cos(t)*(RO-.2), HC[1]+Math.sin(t)*(RO-.2)]); if(run.length>=9){ const l=run[run.length-1]; flush(); run=[l]; } } flush(); }   /* khe: cầu kính Bắc (+16) + cầu nối cầu thang xoắn */ fence(ring(HC[0],HC[1],RI+.2,0,TAU,24),y,'💧 Lan can cột thác giữa đĩa kính');
       for(let k=0;k<5;k++){ const a=Math.PI/2+(k-2)*.24, x=HC[0]+Math.cos(a)*7.6, z=HC[1]+Math.sin(a)*7.6; bar.push([x,y+.55,z,-a+Math.PI/2]); circles.push({x,z,r:.85,y0:y-.5,y1:y+1.5}); }
       for(const a of [.25,.9,2.25,2.9,-.5,-2.65].map(v=>v)){ const x=HC[0]+Math.cos(a)*12.6, z=HC[1]+Math.sin(a)*12.6, x2=HC[0]+Math.cos(a)*10.9, z2=HC[1]+Math.sin(a)*10.9; sofa.push([x,y+.42,z,-a+Math.PI/2]); tbl.push([x2,y+.38,z2]); circles.push({x,z,r:1.0,y0:y-.5,y1:y+1.4},{x:x2,z:z2,r:.5,y0:y-.5,y1:y+1.2}); }
       for(const a of [0,Math.PI,Math.PI*.25,Math.PI*.75]){ const x=HC[0]+Math.cos(a)*14.4, z=HC[1]+Math.sin(a)*14.4; palmT.push([x,y+1.4,z]); palmC.push([x,y+3.1,z,a,1,.45,1]); circles.push({x,z,r:.45,y0:y-.5,y1:y+3.5}); }
@@ -89,6 +89,31 @@ export function buildAmenities(K){
       const pool=new THREE.Mesh(new THREE.CircleGeometry(RI-.2,32),std(0x0f6f7e,{roughness:.1, metalness:.3})); pool.rotation.x=-Math.PI/2; pool.position.set(HC[0],2.33,HC[1]); grp.add(pool); circles.push({x:HC[0], z:HC[1], r:RI+.1, y0:0, y1:30}); }
     /* bãi đỗ ngắm cảnh Sky-Shaft trên đỉnh tháp (+28): 6 ô kẻ vạch vàng, lối xe vào từ đường đỉnh vách phía Bắc */ { const q=K.FB(), Y=28.03+.012; for(const sx of [-1,1]) for(let k=0;k<=3;k++){ const x=sx*(5.5+k*3.6); q.f([x-.06,Y,-156.6],[x+.06,Y,-156.6],[x+.06,Y,-151.4],[x-.06,Y,-151.4],[0,1,0]); } q.f([-16.4,Y,-151.5],[16.4,Y,-151.5],[16.4,Y,-151.38],[-16.4,Y,-151.38],[0,1,0]); q.mesh(MAT.lineY,'abyssal-skyshaft-bays');
       makeLabel('🅿️ Sky-Shaft Drive-In','Bãi đỗ ngắm cảnh đỉnh tháp Hydro-Pulse · 6 chỗ · thang máy xuống 3 đĩa kính',{h:.5, x:0, y:32, z:-154, fade:90}); } }
+  /* ---- CẦU THANG XOẮN KÍNH – ĐỒNG: sân +2,3 → đĩa +9,2 → +16 → +24,5 (mỗi đoạn đúng 1 vòng, ra cầu nối ở cùng hướng nhìn vào lõi tháp) ---- */
+  { const C=SPC, R0=.26, R1=2.3, RM=1.25, PHD=Math.atan2(HC[1]-C[1],HC[0]-C[0]), th0=-Math.PI/2, SEG=[[2.3,9.2,th0,PHD+TAU,32],[9.2,16,PHD,PHD+TAU,36],[16,24.5,PHD,PHD+TAU,42]];
+    const TR=[], ED=[], LDG=[], RL2=[]; let lastY=2.3;
+    for(const [ya,yb,ta,tb,n] of SEG){ const dth=(tb-ta)/n, rise=(yb-ya)/n;
+      for(let k=0;k<n;k++){ const th=ta+(k+.5)*dth, y=ya+(k+1)*rise, ex=k===n-1;   /* bậc cuối mỗi đoạn = chiếu nghỉ ra cầu nối */
+        const cx=C[0]+Math.cos(th)*RM, cz=C[1]+Math.sin(th)*RM, rot=-th; TR.push([cx,y-.03,cz,rot,R1-R0,.06,R1*Math.abs(dth)+.02]); ED.push([C[0]+Math.cos(th)*(R1-.03),y-.03,C[1]+Math.sin(th)*(R1-.03),rot,.06,.1,R1*Math.abs(dth)+.03]);
+        for(const [r0,r1] of [[R0,1.2],[1.2,R1]]){ const rm=(r0+r1)/2; addPlat(C[0]+Math.cos(th)*rm, C[1]+Math.sin(th)*rm, rot, (r1-r0)/2+.02, r1*Math.abs(dth)/2+.03, y); }
+        if(ex){ /* cầu nối 1,6 m sang mép đĩa */ const L=SPR-RO+.3-R1, bx=C[0]+Math.cos(PHD)*(R1+L/2-.1), bz=C[1]+Math.sin(PHD)*(R1+L/2-.1); LDG.push([bx,y-.05,bz,-PHD,L+.2,.1,1.7]); addPlat(bx,bz,Math.atan2(Math.cos(PHD),Math.sin(PHD)),.85,L/2+.15,y);
+          const nx=-Math.sin(PHD), nz=Math.cos(PHD); for(const e of [-1,1]){ const a0=[C[0]+Math.cos(PHD)*(R1-.1)+nx*e*.85, C[1]+Math.sin(PHD)*(R1-.1)+nz*e*.85], a1=[a0[0]+Math.cos(PHD)*(L+.1), a0[1]+Math.sin(PHD)*(L+.1)]; fence([a0,a1],y,'🌀 Lan can cầu nối cầu thang xoắn'); } }
+        RL2.push({th, y, ex}); lastY=y; } }
+    /* lan can ngoài (va chạm) theo từng bậc – hở đúng cầu nối; tay vịn đồng xoắn TubeGeometry + trụ kính */
+    const EXY=[9.2,16,24.5], adist=(t,g)=>Math.abs(Math.atan2(Math.sin(t-g),Math.cos(t-g))); for(let i=0;i<RL2.length-1;i++){ const a=RL2[i], b=RL2[i+1], tm=a.th+Math.atan2(Math.sin(b.th-a.th),Math.cos(b.th-a.th))/2, ym=(a.y+b.y)/2;   /* trung bình góc theo vòng tròn (2 đoạn nối nhau lệch 2π) */ if(i<2) continue;   /* lối vào từ sân */ if(EXY.some(Y=>Math.abs(ym-Y)<.6) && adist(tm,PHD)<.46) continue; const p0=[C[0]+Math.cos(a.th)*(R1-.05), C[1]+Math.sin(a.th)*(R1-.05)], p1=[C[0]+Math.cos(b.th)*(R1-.05), C[1]+Math.sin(b.th)*(R1-.05)]; addSeg(p0[0],p0[1],p1[0],p1[1],.12,Math.min(a.y,b.y)-1.1,Math.max(a.y,b.y)+1.6,'🌀 Tay vịn cầu thang xoắn kính – đồng'); }
+    { const l=RL2[RL2.length-1], p0=[C[0]+Math.cos(l.th+.2)*R0,C[1]+Math.sin(l.th+.2)*R0], p1=[C[0]+Math.cos(l.th+.2)*R1,C[1]+Math.sin(l.th+.2)*R1]; addSeg(p0[0],p0[1],p1[0],p1[1],.12,l.y-1.1,l.y+1.6,'🌀 Đỉnh cầu thang xoắn – ra cầu nối sang đĩa kính'); }
+    { const pts=[]; for(const r of RL2){ if(r.ex){ pts.length && (out.spiralRails=(out.spiralRails||[]).concat([pts.splice(0)])); continue; } pts.push(new THREE.Vector3(C[0]+Math.cos(r.th)*(R1-.05), r.y+.95, C[1]+Math.sin(r.th)*(R1-.05))); } if(pts.length>1) out.spiralRails=(out.spiralRails||[]).concat([pts]);
+      for(const P2 of out.spiralRails||[]){ if(P2.length<2) continue; const tb=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(P2),P2.length*3,.045,6,false),MAT.gold); tb.userData.dynamic=true; grp.add(tb); }
+      const posts=[]; RL2.forEach((r,i)=>{ if(i%2 || r.ex) return; posts.push([C[0]+Math.cos(r.th)*(R1-.05), r.y+.47, C[1]+Math.sin(r.th)*(R1-.05)]); }); inst(new THREE.CylinderGeometry(.02,.02,.95,5),MAT.bronze,posts); }
+    inst(new THREE.BoxGeometry(1,1,1),MAT.turq,TR); inst(new THREE.BoxGeometry(1,1,1),MAT.gold,ED); inst(new THREE.BoxGeometry(1,1,1),MAT.bronze,LDG);
+    { const pole=cyl(.18,.18,lastY+1.6,MAT.gold,C[0],(lastY+1.6)/2+.2,C[1],14); pole.castShadow=true; circles.push({x:C[0], z:C[1], r:R0+.04, y0:-2, y1:lastY+3}); }
+    /* chân thang: sân lát Travertine +2,3 nối sân trước tháp (z ≤ −112) – lan can 2 bên; vòng chặn dưới gầm thang (không chui gầm) */
+    { const ex=C[0]+Math.cos(th0)*RM, zf=C[1]+Math.sin(th0)*R1-.05, z0=C[1]+Math.sin(th0)*1.0, z1=-112.6, w=2.4; box(w,.4,z0-z1,MAT.trav,ex,2.1,(z0+z1)/2); addPlat(ex,(z0+z1)/2,0,w/2,(z0-z1)/2+.05,2.3);   /* sân lấn dưới 2 bậc đầu: hụt chân ở mép ngoài thì rơi xuống sân, không xuống gầm */
+      for(const e of [-1,1]) fence([[ex+e*w/2,z1],[ex+e*w/2,zf]],2.3,'🌀 Lan can lối lên cầu thang xoắn');
+      { const r2=RL2[2], q2=[C[0]+Math.cos(r2.th)*(R1-.05), C[1]+Math.sin(r2.th)*(R1-.05)]; addSeg(ex+w/2,zf,q2[0],q2[1],.12,1.1,r2.y+1.6,'🌀 Tay vịn cầu thang xoắn kính – đồng'); }
+      const ring2=[]; for(let i=0;i<=40;i++){ const t=th0+.46+i/40*(TAU-.92); ring2.push([C[0]+Math.cos(t)*(R1+.12), C[1]+Math.sin(t)*(R1+.12)]); } rail(ring2,0,'🌀 Gầm cầu thang xoắn – lên từ sân trước tháp',{y0:-2,y1:2.2}); }
+    makeLabel('🌀 Cầu thang xoắn kính – đồng','Sân +2,3 → đĩa kính +9,2 · +16 · +24,5',{h:.42, x:C[0], y:lastY+2.6, z:C[1], fade:60});
+    out.spiral={c:C, r:R1, exitAngle:PHD, levels:[2.3,...DISC]}; }
   out.discs={c:HC, y:DISC, rOut:RO, rIn:RI};
 
   /* ======================= 4. BÃI ĐỖ XE BIỂN (12 ô) + CẦU THANG THỨ 5 + 2 NHÀ TẮM + 4 QUẦY DỪA + 24 GHẾ ======================= */
