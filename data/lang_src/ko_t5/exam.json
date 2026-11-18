@@ -1,13 +1,13 @@
 {
- "title": "Kiểm tra cuối cấp T5 nội bộ – tự soạn",
- "time": 70,
+ "title": "Kiểm tra Hàn t5 mở rộng – 15 bài",
+ "time": 90,
  "pass": 70,
- "intro": "40 câu tự chấm bao phủ10bài. Bàiđọc mới và dữ kiện giả. Nói/viết luyện bổ trợ tự chấm riêng; điểm nội bộ không quy đổi chứng chỉ TOPIK.",
+ "intro": "40 câu tự chấm tự soạn, có câu riêng cho từng bài bổ sung và ngữ liệu tích hợp. Nói, viết chấm theo rubric riêng; điểm nội bộ không quy đổi chứng chỉ.",
  "sections": [
   {
-   "h": "Phần1 – Nghe10câu",
+   "h": "Nghe các điểm gốc và tình huống mới",
    "skill": "L",
-   "intro": "Nghe mỗi câu hai lần; chọn thông tin được xác nhận, không suy thêm.",
+   "intro": "Nghe từng tình huống hai lần; chọn theo điều đã được nói, không tự thêm một kết quả chưa xác nhận.",
    "items": [
     {
      "t": "listen",
@@ -55,7 +55,7 @@
      "q": "Câu nghe truyền đạt thông tin nào?",
      "o": [
       "Nhận tài liệu chưa có nghĩa coi như đã học nội dung.",
-      "Đọc khi chuẩn bị và trong lớp,tính ra như đọc hai lần.",
+      "Đọc khi chuẩn bị và trong lớp, tính ra như đọc hai lần.",
       "Thông báo ngắn coi như đã giúp giảm gánh đi lại."
      ],
      "a": 0,
@@ -68,7 +68,7 @@
      "q": "Câu nghe truyền đạt thông tin nào?",
      "o": [
       "Đăng ký tăng trong khi tham dự thực giảm.",
-      "Chờ dài hơn;theo đó tăng quầy tiếp nhận.",
+      "Chờ dài hơn; theo đó tăng quầy tiếp nhận.",
       "Cần làm rõ thay đổi này chỉ điều gì."
      ],
      "a": 2,
@@ -93,12 +93,12 @@
      "lang": "ko-KR",
      "q": "Câu nghe truyền đạt thông tin nào?",
      "o": [
-      "Đánh hàm ý qua quan hệ trong bài,không kiến thức ngoài.",
+      "Đánh hàm ý qua quan hệ trong bài, không kiến thức ngoài.",
       "Tác giả nêu quan niệm phổ biến rồi giới hạn phạm vi.",
       "Điều này không nghĩa phản đối chính việc mở rộng."
      ],
      "a": 0,
-     "e": "Câu nghe: 함의는 외부 지식이 아니라 본문의 관계로 판단한다. → Đánh hàm ý qua quan hệ trong bài,không kiến thức ngoài."
+     "e": "Câu nghe: 함의는 외부 지식이 아니라 본문의 관계로 판단한다. → Đánh hàm ý qua quan hệ trong bài, không kiến thức ngoài."
     },
     {
      "t": "listen",
@@ -138,11 +138,76 @@
      ],
      "a": 0,
      "e": "Câu nghe: 일치하는 부분과 남은 질문을 함께 제시한다. → Nêu cả điểm thống nhất và câu hỏi còn."
+    },
+    {
+     "t": "listen",
+     "say": "조건을 생략하면 허락을 넓혀 읽기 십상입니다. 다만 현재 근거는 시범 독자 네 명의 질문이지 전체 오독률 조사는 아닙니다.",
+     "lang": "ko-KR",
+     "q": "Cảnh báo này có giới hạn gì?",
+     "o": [
+      "Dựa câu hỏi bốn người, chưa có tỷ lệ toàn thể",
+      "Đã đo chính xác90%",
+      "Không có cơ chế gây nhầm"
+     ],
+     "a": 0,
+     "e": "Căn cứ là câu hỏi của bốn người thử, chưa có phép đo tần suất hiểu sai trong toàn bộ người đọc."
+    },
+    {
+     "t": "listen",
+     "say": "출처가 유지되는 한 전시는 계속합니다. 이번 달에는 확인된 사본에 한해 제공하지만 재사용은 별도 동의를 확인해야 합니다.",
+     "lang": "ko-KR",
+     "q": "Có bản sao được cung cấp đồng nghĩa phép tái dùng mọi nơi không?",
+     "o": [
+      "Có, không còn điều kiện",
+      "Chỉ cần đổi tên tác giả",
+      "Không, cần đồng ý riêng"
+     ],
+     "a": 2,
+     "e": "Giữ nguồn là điều kiện duy trì, giới thiệu giới hạn ở phần đã kiểm; dùng lại vẫn cần đồng ý riêng."
+    },
+    {
+     "t": "listen",
+     "say": "설문은 현장 이용자의 만족도를 묻고 면담은 오지 못한 이유를 묻습니다. 두 결과가 다르다고 곧바로 상충한다고 볼 수는 없습니다.",
+     "lang": "ko-KR",
+     "q": "Vì sao chưa gọi mâu thuẫn ngay?",
+     "o": [
+      "Vì số liệu không cần nguồn",
+      "Câu hỏi và nhóm được xem khác nhau",
+      "Vì phỏng vấn luôn sai"
+     ],
+     "a": 1,
+     "e": "Hai nguồn hỏi nhóm và giai đoạn khác, nên phải xét câu hỏi trước khi gọi chúng là chứng cứ mâu thuẫn."
+    },
+    {
+     "t": "listen",
+     "say": "둘째 번역은 짧아졌지만 담당자가 사라졌습니다. 원래 길이로 돌리기보다 주체와 조건을 짧은 두 문장으로 복원하자는 제안입니다.",
+     "lang": "ko-KR",
+     "q": "Đề nghị sửa là gì?",
+     "o": [
+      "Hai câu ngắn giữ chủ thể, điều kiện",
+      "Trả mọi độ dài cũ",
+      "Bỏ mọi điều kiện cho ngắn"
+     ],
+     "a": 0,
+     "e": "Phương án không trả nguyên độ dài, mà phục hồi chủ thể và điều kiện bằng hai câu ngắn."
+    },
+    {
+     "t": "listen",
+     "say": "자료 수의 증가는 성과입니다. 그러나 확대는 맥락 보존과 역할 분담이 유지되는 한 시험하고 다음 검토에서 부담과 이용 경험도 확인해야 합니다.",
+     "lang": "ko-KR",
+     "q": "Mở rộng được kiến nghị thế nào?",
+     "o": [
+      "Tăng mãi chỉ theo số",
+      "Dừng mọi việc bất kể dữ kiện",
+      "Thử có điều kiện và xét cả gánh việc, trải nghiệm"
+     ],
+     "a": 2,
+     "e": "Nhóm nhận thành quả số lượng nhưng chỉ thử tiếp theo điều kiện và xem thêm gánh việc, trải nghiệm dùng."
     }
    ]
   },
   {
-   "h": "Phần2 – Ngôn ngữ20câu",
+   "h": "Từ, cấu trúc và cách hiểu có căn cứ",
    "skill": "R",
    "items": [
     {
@@ -154,18 +219,7 @@
       "Chỉ cần thêm 의"
      ],
      "a": 0,
-     "e": "Cần giữ chủ thể,phạm vi,quan hệ chứ không chỉ đổi hình thức."
-    },
-    {
-     "t": "mc",
-     "q": "Trong câu “가독성을 위해 긴 표현을 나눈다.”, “가독성” có nghĩa gì?",
-     "o": [
-      "lập luận có căn cứ",
-      "tiền đề",
-      "khả năng đọc hiểu"
-     ],
-     "a": 2,
-     "e": "가독성을 위해 긴 표현을 나눈다. → Chia cụm dài để dễ đọc."
+     "e": "Cần giữ chủ thể, phạm vi, quan hệ chứ không chỉ đổi hình thức."
     },
     {
      "t": "mc",
@@ -176,18 +230,7 @@
       "Tính tất yếu/phổ quát"
      ],
      "a": 2,
-     "e": "Không phải luôn tốt,không nghĩa luôn xấu."
-    },
-    {
-     "t": "mc",
-     "q": "Trong câu “선택 편향이 결과에 영향을 줄 수 있다.”, “선택 편향” có nghĩa gì?",
-     "o": [
-      "tiền đề",
-      "thiên lệch chọn mẫu",
-      "lập luận có căn cứ"
-     ],
-     "a": 1,
-     "e": "선택 편향이 결과에 영향을 줄 수 있다. → Thiên lệch chọn mẫu có thể ảnh hưởng kết quả."
+     "e": "Không phải luôn tốt, không nghĩa luôn xấu."
     },
     {
      "t": "mc",
@@ -202,17 +245,6 @@
     },
     {
      "t": "mc",
-     "q": "Trong câu “예외 규정을 사전에 정한다.”, “예외 규정” có nghĩa gì?",
-     "o": [
-      "quy định ngoại lệ",
-      "lập luận có căn cứ",
-      "tiền đề"
-     ],
-     "a": 0,
-     "e": "예외 규정을 사전에 정한다. → Định ngoại lệ trước."
-    },
-    {
-     "t": "mc",
      "q": "셈이다 có tự biến việc chưa làm thành đã làm không?",
      "o": [
       "Không",
@@ -224,17 +256,6 @@
     },
     {
      "t": "mc",
-     "q": "Trong câu “비유적 판단을 실제 횟수와 구별한다.”, “비유적 판단” có nghĩa gì?",
-     "o": [
-      "lập luận có căn cứ",
-      "tiền đề",
-      "nhận định mang tính so sánh"
-     ],
-     "a": 2,
-     "e": "비유적 판단을 실제 횟수와 구별한다. → Tách nhận định so với số lần thật."
-    },
-    {
-     "t": "mc",
      "q": "따라서 có thể tự tạo bằng chứng nhân quả không?",
      "o": [
       "Có",
@@ -242,18 +263,7 @@
       "Không"
      ],
      "a": 2,
-     "e": "Từ nối báo quan hệ,không thay căn cứ."
-    },
-    {
-     "t": "mc",
-     "q": "Trong câu “지시 표현의 대상을 찾는다.”, “지시 표현” có nghĩa gì?",
-     "o": [
-      "tiền đề",
-      "biểu thức chỉ trỏ",
-      "lập luận có căn cứ"
-     ],
-     "a": 1,
-     "e": "지시 표현의 대상을 찾는다. → Tìm đối tượng của biểu thức chỉ trỏ."
+     "e": "Từ nối báo quan hệ, không thay căn cứ."
     },
     {
      "t": "mc",
@@ -264,18 +274,7 @@
       "Đã chắc"
      ],
      "a": 1,
-     "e": "Đó là hướng tới,kết quả cần đo."
-    },
-    {
-     "t": "mc",
-     "q": "Trong câu “확대 조건이 충족되어야 한다.”, “확대 조건” có nghĩa gì?",
-     "o": [
-      "điều kiện mở rộng",
-      "lập luận có căn cứ",
-      "tiền đề"
-     ],
-     "a": 0,
-     "e": "확대 조건이 충족되어야 한다. → Cần đạt điều kiện mở rộng."
+     "e": "Đó là hướng tới, kết quả cần đo."
     },
     {
      "t": "mc",
@@ -290,17 +289,6 @@
     },
     {
      "t": "mc",
-     "q": "Trong câu “함의는 본문의 근거로 판단한다.”, “함의” có nghĩa gì?",
-     "o": [
-      "lập luận có căn cứ",
-      "tiền đề",
-      "hàm ý"
-     ],
-     "a": 2,
-     "e": "함의는 본문의 근거로 판단한다. → Đánh hàm ý theo căn cứ trong bài."
-    },
-    {
-     "t": "mc",
      "q": "예컨대 sau đó thường là gì?",
      "o": [
       "Chắc kết luận phổ quát",
@@ -308,18 +296,7 @@
       "Ví dụ minh họa"
      ],
      "a": 2,
-     "e": "Cần xác định vai phần nói,không nâng ví dụ thành chứng minh toàn."
-    },
-    {
-     "t": "mc",
-     "q": "Trong câu “개념 정의가 달라지면 비교가 어렵다.”, “개념 정의” có nghĩa gì?",
-     "o": [
-      "tiền đề",
-      "định nghĩa khái niệm",
-      "lập luận có căn cứ"
-     ],
-     "a": 1,
-     "e": "개념 정의가 달라지면 비교가 어렵다. → Định nghĩa khác thì khó so."
+     "e": "Cần xác định vai phần nói, không nâng ví dụ thành chứng minh toàn."
     },
     {
      "t": "mc",
@@ -334,17 +311,6 @@
     },
     {
      "t": "mc",
-     "q": "Trong câu “조건부 지지의 기준을 밝힌다.”, “조건부 지지” có nghĩa gì?",
-     "o": [
-      "ủng hộ có điều kiện",
-      "lập luận có căn cứ",
-      "tiền đề"
-     ],
-     "a": 0,
-     "e": "조건부 지지의 기준을 밝힌다. → Nêu tiêu chí ủng hộ có điều kiện."
-    },
-    {
-     "t": "mc",
      "q": "Nguồn khác kết có nhất thiết một nguồn sai không?",
      "o": [
       "Không",
@@ -352,170 +318,213 @@
       "Chỉ nguồn cũ sai"
      ],
      "a": 0,
-     "e": "Có thể đo khác định nghĩa,kỳ,đối tượng."
+     "e": "Có thể đo khác định nghĩa, kỳ, đối tượng."
     },
     {
      "t": "mc",
-     "q": "Trong câu “엇갈린 결과의 이유를 검토한다.”, “엇갈린 결과” có nghĩa gì?",
+     "q": "기 십상이다 có cho phép tự chuyển thành90% không?",
      "o": [
-      "lập luận có căn cứ",
-      "tiền đề",
-      "kết quả không thống nhất"
+      "Không, cần phép đo và nguồn riêng",
+      "Có vì đó là nghĩa từ",
+      "Luôn100%"
+     ],
+     "a": 0,
+     "e": "Cảnh báo định tính không thay xác suất định lượng."
+    },
+    {
+     "t": "mc",
+     "q": "확인된 사본에 한해 đang giới hạn gì?",
+     "o": [
+      "Tự bảo đảm mọi phép tái dùng",
+      "Chỉ số ngày đã trôi qua",
+      "Đối tượng bản sao được cung cấp"
      ],
      "a": 2,
-     "e": "엇갈린 결과의 이유를 검토한다. → Xem lý do kết quả khác."
+     "e": "에 한해 đặt phạm vi danh từ, không xóa điều kiện khác."
+    },
+    {
+     "t": "mc",
+     "q": "Hai nguồn thực sự xung đột khi nào?",
+     "o": [
+      "Chỉ vì một nguồn là phỏng vấn",
+      "Cùng phạm vi, thời điểm, mệnh đề mà kết luận không cùng đúng",
+      "Chỉ vì độ dài khác"
+     ],
+     "a": 1,
+     "e": "Cần đồng bộ câu hỏi và đơn vị trước khi gọi 상충."
+    },
+    {
+     "t": "mc",
+     "q": "Dùng 셈이다 trong phân tích bản dịch cần gì?",
+     "o": [
+      "Giải thích cầu nối giữa thay đổi câu và hệ quả ý nghĩa",
+      "Chỉ thêm đuôi để thành sự thật",
+      "Bỏ mọi phản biện"
+     ],
+     "a": 0,
+     "e": "Đó là diễn giải theo căn cứ, không đo tự động."
+    },
+    {
+     "t": "mc",
+     "q": "Một kiến nghị mở rộng có thể xét lại cần gì?",
+     "o": [
+      "Chỉ một khẩu hiệu tăng số",
+      "Chỉ phản hồi thuận",
+      "Điều kiện, người thực hiện, lượt kiểm và tình huống sửa kết luận"
+     ],
+     "a": 2,
+     "e": "Cơ chế kiểm tiếp làm kiến nghị có trách nhiệm và khả năng sửa."
     }
    ]
   },
   {
-   "h": "Phần3 – Bàiđọc mới10câu",
+   "h": "Giảm số tờ giấy nhưng tăng câu hỏi cần kiểm",
    "skill": "R",
    "read": {
-    "title": "Tình huống tổng hợp mới",
-    "text": "가상의 학습 지원 사업을 검토한 두 보고서가 있다. 첫 보고서는 한 달 동안의 온라인 등록 건수가 이십 퍼센트 늘었다고 밝혔다. 같은 사람이 여러 번 등록한 경우도 포함되었다. 둘째 보고서는 두 차례 모임의 실제 참석 인원을 비교했다. 첫 회는 같은 스무 명 중 열 명,둘째 회는 열다섯 명이었다. 참여율 차이는 이십오 퍼센트포인트였고 상대 증가율은 오십 퍼센트였다. 두 자료의 수치를 바로 더하거나 평균 낼 수는 없었다. 정의와 기간,중복 처리 방식이 달랐기 때문이다. 담당자는 새 안내가 도움이 되었을 가능성을 제시했지만 시작 시간도 바뀌었다는 한계를 명시했다. 검토 모임은 효과가 전혀 없다고 말한 것이 아니라 현재 자료만으로 원인을 분리하기 어렵다고 결론 내렸다. 시간이 걸릴지라도 정의를 맞춘 후속 확인이 필요하다고 보았다. 우선 실제 참석과 정보 이해도를 같은 기간에 기록하고,이용하지 못한 사람의 이유도 물을 계획이다. 결과가 좋더라도 모든 장소로 바로 확대하지 않고 지원 인력과 기기 조건을 함께 확인하기로 했다.",
-    "vi": "Hai báo cáo giả đo khác: lượt đăng ký một tháng có trùng tăng20%,và thực tới hai buổi cùng20người tăng10lên15. Chênh25điểm,tăng tương đối50%. Không gộp vì định nghĩa/kỳ/trùng khác. Hướng dẫn có thể giúp nhưng giờ cũng đổi;chưa tách nguyênnhân không nghĩa vôhiệu. Kế tiếp đo cùng kỳ,hiểu,và hỏi người không dùng được;trước mở nơi khác xét nhân lực/thiết bị."
+    "title": "Giảm số tờ giấy nhưng tăng câu hỏi cần kiểm",
+    "text": "가상의 종이쉼 작업모임은 종이 사용을 줄이는 방식을 시험했다. 모든 수치는 수업을 위해 만든 값이다. 첫 기간에는 사십 명이 모두 백이십 장을 썼고 다음 기간에는 이십 명이 팔십 장을 썼다. 총량은 줄었지만 한 사람당 평균은 세 장에서 네 장으로 늘었다. 운영팀의 첫 안내는 종이가 줄었으니 방식이 모든 면에서 좋아졌다고 썼다. 나린은 총량과 사람당 평균이 서로 다른 질문에 답한다고 지적했다. 종이의 크기와 재사용 여부도 달라 환경 효과까지 그 숫자만으로 단정하기 어려웠다. 한편 현장 설문에서는 새 자료가 읽기 쉽다는 응답이 많았다. 소규모 면담에서는 자료를 함께 보는 시간이 길어져 부담스럽다는 이야기도 나왔다. 두 결과는 이해와 공동 이용의 과정이라는 다른 층위를 다루었으므로 어느 하나를 지울 필요는 없었다. 다만 현장에 오지 못한 사람과 설문에 답하지 않은 사람의 의견은 빠져 있었다. 안내의 축약 과정에서는 누가 자료를 준비하는지와 필요한 사람에게만 사본을 준다는 조건도 사라졌다. 담당자가 누구인지 모르면 추가 자료를 어디에 요청할지 알기 어려웠다. 나린은 조건을 빼면 누구에게나 같은 방식이 충분하다고 읽기 십상이라고 경고했다. 그 말은 오독 경로를 설명한 것이지 확률을 측정한 것은 아니었다. 운영팀은 자료를 짧게 만드는 장점을 인정하면서 주체와 요청 절차를 두 문장으로 복원했다. 시험은 준비 역할이 나뉘고 추가 요청에 응답할 수 있는 한 계속하기로 했다. 제공 범위는 동의가 확인된 연습용 자료에 한했고 다른 곳에서의 재사용은 별도로 물어보기로 했다. 다음 검토에서는 총량과 평균뿐 아니라 실제 이해, 함께 보는 부담, 자료를 받지 못한 이유를 나누어 살펴보기로 했다. 조건을 유지하지 못하면 규모나 방법을 바꿀 수 있다는 점도 안내에 넣었다. 성과를 한 지표로 고정하지 않고 각 자료가 답하는 질문과 남은 공백을 밝히는 것이 최종 보고의 원칙이었다.",
+    "vi": "Nhóm Mái Giấy giả định thử giảm giấy, mọi số tự đặt. Kỳ đầu40 người dùng120 tờ, kỳ sau20 dùng80: tổng giảm nhưng bình quân3→4 tờ/người. Bản đầu gọi mọi mặt tốt hơn, Narin chỉ tổng và bình quân trả lời khác câu hỏi; cỡ giấy, tái dùng khác nên chưa suy tác động môi trường. Khảo sát tại chỗ nhiều người thấy dễ đọc, phỏng vấn nhỏ có người thấy cùng xem lâu gây áp lực: khác tầng nên chưa loại một bên. Người chưa đến, không đáp còn thiếu. Tóm tắt còn bỏ ai chuẩn bị và chỉ người cần mới nhận bản sao, khiến không biết xin thêm ở đâu. Narin cảnh báo cơ chế đọc thành cùng cách đủ cho mọi người, không gán xác suất. Nhóm nhận lợi ngắn nhưng phục hồi chủ thể, yêu cầu trong hai câu. Chừng nào chia vai và đáp ứng yêu cầu thêm thì thử tiếp; chỉ phát tài liệu tập có đồng ý, tái dùng hỏi riêng. Lần sau xem tổng, bình quân, hiểu, áp lực cùng xem và lý do không nhận được; không giữ được điều kiện sẽ đổi cỡ hoặc cách. Báo cáo cuối giữ câu hỏi mỗi chỉ dấu và khoảng trống."
    },
    "items": [
     {
      "t": "mc",
-     "q": "Nguồn đầu đo gì?",
+     "q": "Tổng lượng giấy và bình quân thay đổi thế nào?",
      "o": [
-      "Lượt đăng ký online",
-      "Người thực tới đã khử trùng",
-      "Mức hiểu trực tiếp"
+      "Tổng giảm, bình quân tăng",
+      "Cả hai giảm",
+      "Cả hai giữ nguyên"
      ],
      "a": 0,
-     "e": "온라인 등록 건수."
+     "e": "Số người đổi từ40 xuống20, tổng giấy120 xuống80 nhưng bình quân lần lượt là3 và4 tờ/người."
     },
     {
      "t": "mc",
-     "q": "Nguồn đầu có trùng không?",
+     "q": "Hai chỉ dấu có mâu thuẫn số học không?",
      "o": [
-      "Đã loại hết",
-      "Không có người thật",
-      "Có thể gồm một người nhiều lần"
+      "Có, không thể cùng đúng",
+      "Chỉ khi dùng ít người",
+      "Không, trả lời tổng và bình quân khác nhau"
      ],
      "a": 2,
-     "e": "여러 번 등록...포함."
+     "e": "Tổng lượng và bình quân trả lời hai câu hỏi khác; khi mẫu số người đổi, hai chỉ dấu có thể đi ngược chiều."
     },
     {
      "t": "mc",
-     "q": "Kỳ nguồn đầu?",
+     "q": "Vì sao chưa suy tác động môi trường?",
      "o": [
-      "Một năm",
-      "Một tháng",
-      "Hai buổi"
+      "Vì không có con số nào",
+      "Cỡ giấy, tái dùng và điều kiện khác chưa xét",
+      "Vì tuyệt đối không thể đánh giá"
      ],
      "a": 1,
-     "e": "한 달 동안."
+     "e": "Cỡ giấy và việc dùng lại chưa được đối chiếu, nên số tờ riêng lẻ chưa đủ kết luận tác động môi trường."
     },
     {
      "t": "mc",
-     "q": "Mẫu thực tới nguồn hai?",
+     "q": "Khảo sát và phỏng vấn hỏi mặt nào?",
      "o": [
-      "Cùng hai mươi người",
-      "Mọi người toàn quốc",
-      "Hai nghìn"
+      "Dễ đọc và quá trình cùng sử dụng",
+      "Cùng câu hỏi cùng người hoàn toàn",
+      "Chỉ thời tiết"
      ],
      "a": 0,
-     "e": "같은 스무 명."
+     "e": "Phản hồi dễ đọc và lời kể áp lực cùng dùng mô tả hai mặt khác nhau, có thể đồng thời đúng."
     },
     {
      "t": "mc",
-     "q": "Chênh tỷ lệ thực tới?",
+     "q": "Nhóm nào còn thiếu?",
      "o": [
-      "50 điểm phần trăm",
-      "5 phần trăm",
-      "25 điểm phần trăm"
+      "Tất cả người dùng",
+      "Chỉ ban vận hành",
+      "Người chưa đến và không đáp"
      ],
      "a": 2,
-     "e": "50% lên75% là25điểm."
+     "e": "Người không đến và người không đáp khảo sát chưa được nghe, tạo giới hạn phạm vi kết luận."
     },
     {
      "t": "mc",
-     "q": "Tăng tương đối nguồn hai?",
+     "q": "Bỏ chủ thể gây khó hành động gì?",
      "o": [
-      "20%",
-      "50%",
-      "25%"
+      "Không biết tên giấy thật",
+      "Không biết yêu cầu thêm tài liệu ở đâu",
+      "Không tính được80/20"
      ],
      "a": 1,
-     "e": "(15−10)/10=50%."
+     "e": "Bỏ người phụ trách làm người đọc không biết tìm ai để xin thêm tài liệu khi cần."
     },
     {
      "t": "mc",
-     "q": "Vì sao chưa gộp hai nguồn?",
+     "q": "기 십상이다 ở đây dựa vào gì?",
      "o": [
-      "Khác định nghĩa,kỳ,khử trùng",
-      "Không có số",
-      "Chỉ khác tên tác giả"
+      "Cơ chế bỏ điều kiện dẫn tới đọc rộng",
+      "Xác suất đã đo",
+      "Ý kiến rằng mọi người kém"
      ],
      "a": 0,
-     "e": "정의와 기간,중복 처리 방식."
+     "e": "Cảnh báo giải thích việc mất điều kiện có thể làm cách hiểu rộng hơn, chưa cho một xác suất đã đo."
     },
     {
      "t": "mc",
-     "q": "Có kết hiệu quả bằng không không?",
+     "q": "Sửa ngắn mà giữ ý được làm thế nào?",
      "o": [
-      "Có chắc",
-      "Không nêu giới hạn",
-      "Không"
+      "Trả nguyên mọi độ dài",
+      "Xóa luôn phép xin thêm",
+      "Hai câu khôi phục chủ thể và quy trình"
      ],
      "a": 2,
-     "e": "효과가 전혀 없다고 말한 것이 아니라."
+     "e": "Bản sửa dùng hai câu để khôi phục người chuẩn bị và đường yêu cầu thêm, giữ gọn mà không mất ý."
     },
     {
      "t": "mc",
-     "q": "Cần hỏi thêm ai?",
+     "q": "Điều kiện tiếp tục thử là gì?",
      "o": [
-      "Không ai",
-      "Người không dùng được hỗ trợ",
-      "Chỉ người hài lòng"
+      "Mọi người im lặng",
+      "Chia vai và đáp ứng yêu cầu thêm được giữ",
+      "Chỉ tổng lượng giảm"
      ],
      "a": 1,
-     "e": "이용하지 못한 사람의 이유도."
+     "e": "Nhóm chỉ tiếp tục khi việc chia vai và đáp ứng yêu cầu thêm còn được duy trì; đây là hai điều kiện thực hiện."
     },
     {
      "t": "mc",
-     "q": "Trước mở mọi nơi cần kiểm gì?",
+     "q": "Vai trò ngày kiểm sau là gì?",
      "o": [
-      "Nhân lực và thiết bị",
-      "Chỉ số lượt cao",
-      "Chỉ khẩu hiệu"
+      "Xét nhiều câu hỏi và có thể đổi quy mô, cách",
+      "Chỉ chứng minh điều đã định",
+      "Bỏ dữ kiện không thuận"
      ],
      "a": 0,
-     "e": "지원 인력과 기기 조건."
+     "e": "Lượt sau xét nhiều chỉ dấu và định trước không đáp ứng thì đổi cỡ hoặc cách, giữ khả năng sửa quyết định."
     }
    ]
   },
   {
-   "h": "Phần4 – Viết bổ trợ tự chấm riêng",
+   "h": "Viết sản phẩm hoàn chỉnh",
    "write": {
-    "task": "Viết 8–10 câu tổng hợp hai nguồn giả: chỉ số khác nhau,điểm chung,giới hạn nhân quả và kế hoạch kiểm tiếp.",
-    "min": 80,
-    "model": "첫 보고서는 온라인 등록 건수를 측정했다. 같은 사람의 중복 등록도 포함되었다. 둘째 보고서는 실제 참석 인원을 비교했다. 기간과 정의가 달라 수치를 바로 합칠 수 없다. 실제 참석의 비율 차이는 이십오 퍼센트포인트였다. 이 변화가 안내만의 효과라고 단정할 수는 없다. 시작 시간도 바뀌었기 때문이다. 다음에는 같은 기간에 이해도와 미참여 이유를 함께 확인해야 한다.",
+    "task": "Viết nghị luận600–700 ký tự Hàn đánh giá phép thử. Nêu đúng tổng/bình quân, nhận một thành quả, chỉ giới hạn hai nguồn, phản biện, điều kiện duy trì, người kiểm và khả năng sửa đề nghị.",
+    "min": 590,
+    "model": "종이 사용 방식의 성과를 평가하려면 총량과 사람당 평균을 구별해야 한다. 가상 기록에서 총량은 백이십 장에서 팔십 장으로 줄었지만 참여자가 사십 명에서 이십 명으로 바뀌어 평균은 세 장에서 네 장으로 늘었다. 따라서 총량의 감소를 모든 이용 조건의 개선이라고 단정할 수는 없다. 다만 자료가 읽기 쉬워졌다는 반응은 무시할 수 없는 성과다. 함께 보는 부담을 설명한 면담은 그 반응을 지우는 것이 아니라 다른 과정의 질문을 보완한다. 현장에 오지 못한 사람과 비응답자의 경험은 아직 공백으로 남아 있다. 축약된 안내에서 주체와 요청 조건을 빼면 한 방식이 누구에게나 충분하다고 읽기 십상이라는 위험도 있다. 운영팀은 두 문장으로 담당자와 추가 요청 절차를 복원하고 준비 역할과 응답 시간을 나누어야 한다. 자료 제공은 동의가 확인된 범위에 한하되 재사용은 따로 확인하는 것이 적절하다. 이런 조건이 유지되는 한 작은 시험을 계속하면서 이해와 부담을 후속 조사로 살필 수 있다. 다음 점검에서 요청을 처리하지 못하거나 특정인에게 일이 쏠린다면 규모와 방식을 고쳐야 한다. 성과를 인정하면서 반대 근거가 판단을 바꿀 길을 남기는 것이 책임 있는 제안이다. 비교 기준과 작성 주체도 함께 공개해야 한다.",
+    "modelVi": "Cần tách tổng giấy với bình quân: tổng120→80 nhưng người40→20 nên bình quân3→4. Không suy mọi điều kiện tốt lên, dù phản hồi dễ đọc là thành quả thật. Phỏng vấn về áp lực cùng xem bổ sung câu hỏi khác, còn người không đến và không đáp chưa biết. Bỏ chủ thể, điều kiện xin thêm dễ làm đọc thành một cách đủ cho mọi người. Ban vận hành cần phục hồi hai câu, chia chuẩn bị và giờ đáp, chỉ cung cấp phần có đồng ý, kiểm tái dùng riêng. Có thể thử nhỏ chừng nào giữ điều kiện, hỏi hiểu và áp lực sau; không xử lý yêu cầu hay dồn việc thì sửa cỡ, cách. Kiến nghị có trách nhiệm nhận thành quả và cho bằng chứng ngược đường sửa quyết định. Cũng cần công khai tiêu chí so sánh và người soạn.",
     "rubric": [
-     "Đủ dữ kiện, có tổ chức và đúng mục đích người nhận.",
-     "Dùng đúng các mẫu trọng tâm ít nhất bốn bài khác nhau.",
-     "Không nhầm quá khứ, dự định và trải nghiệm.",
-     "Trợ từ và đuôi câu phù hợp, tự sửa hai điểm có lý do."
+     "Đủ600–700 ký tự, tổng và bình quân đúng.",
+     "Có luận điểm, nhượng bộ, hai nguồn và giới hạn.",
+     "Có điều kiện, trách nhiệm kiểm và cách thay đổi khi không đạt."
     ]
    }
   },
   {
-   "h": "Phần5 – Nói bổ trợ tự chấm riêng",
+   "h": "Nói để hỏi, giải thích và xác nhận",
    "speak": {
     "tasks": [
      {
-      "p": "Hai người rà báo cáo giả. Một người hỏi liệu tăng lượt đăng ký có đủ chứng minh hiệu quả,người kia phân biệt định nghĩa,nêu giới hạn và đề nghị bước kiểm;cuối cùng cả hai xác nhận người phụ trách và hạn.",
-      "model": "다온: 등록이 늘었으니 효과가 입증된 건가요?\n서린: 그렇게 단정하기는 어려워요. 등록과 실제 참석은 다르고 시작 시간도 바뀌었어요.\n다온: 그럼 무엇을 먼저 확인할까요?\n서린: 같은 기간의 참석과 이해도를 비교하면 좋겠어요. 제가 금요일까지 자료를 정리할게요.\n다온: 좋아요. 금요일 자료를 받은 뒤 함께 검토하기로 해요.\n서린: 네. 아직 확인 중인 부분도 따로 표시하겠습니다."
+      "p": "Hai vai thảo luận đề nghị thử tiếp: hỏi phép tính, phân biệt hai nguồn, chất vấn điều kiện và cùng chốt bước kiểm.",
+      "model": "가: 총량이 줄었으니 성공이라고 해도 되겠습니까? 나: 사람당 평균도 확인했습니까? 가: 평균은 세 장에서 네 장으로 늘었습니다. 나: 그렇다면 총량의 성과와 이용의 질을 나누어야 합니다. 가: 면담의 부담 이야기는 설문을 반박합니까? 나: 질문이 달라 보완할 수 있지만 빠진 집단도 확인해야 합니다. 가: 어떤 조건에서 계속할까요? 나: 역할과 추가 요청 절차가 유지되는 한 시험하고 다음 점검에서 이해와 부담을 따로 묻는 데 동의하십니까? 가: 동의합니다. 조건이 깨지면 규모도 고치겠습니다."
      }
     ],
     "rubric": [
-     "Có câu hỏi làm rõ và câu trả lời có căn cứ.",
-     "Không đồng nhất đăng ký với thực tới hoặc thiếu căn cứ với vô hiệu.",
-     "Có đề nghị,người phụ trách,hạn và xác nhận.",
-     "Giữ ngữ điệu lịch sự và mức cam kết phù hợp."
+     "Có hỏi số, phản hồi và chất vấn thật.",
+     "Không lấy một chỉ dấu thay toàn bộ hiệu quả.",
+     "Chốt điều kiện và lượt kiểm có khả năng sửa."
     ]
    }
   }

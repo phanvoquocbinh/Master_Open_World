@@ -4,7 +4,7 @@ icon: 🛡️
 floor: 6
 room: 602
 level: Cơ bản → Trung bình
-hours: 7
+hours: 28
 summary: Làm quen với tư duy bảo mật, OWASP Top 10 và các lỗi phổ biến như SQL Injection, XSS, phân quyền sai. Mọi bài thực hành chỉ làm trên ứng dụng cố tình có lỗi chạy trên máy của chính bạn (localhost).
 
 ## LESSON security-basics-01 | Đạo đức, pháp lý và dựng phòng lab an toàn
@@ -28,22 +28,19 @@ Kiểm thử bảo mật cũng vậy. Kỹ năng không xấu, việc dùng sai 
 ### Bước 1: cài Docker Desktop trên Windows
 Docker giống một "hộp cơm" đóng gói sẵn cả ứng dụng và mọi thứ nó cần. Bạn chỉ cần mở hộp là chạy, không phải cài từng món.
 Mở PowerShell rồi chạy:
-~~~bash
-winget install -e --id Docker.DockerDesktop
-docker --version
-docker run hello-world
-~~~
 Giải thích từng dòng:
 • Dòng 1: winget là trình cài phần mềm có sẵn trên Windows 10/11; -e --id nghĩa là tìm đúng gói có mã Docker.DockerDesktop.
 • Sau khi cài: khởi động lại máy, mở ứng dụng Docker Desktop, chờ biểu tượng cá voi báo "Engine running". Nếu Docker yêu cầu WSL 2, làm theo hướng dẫn trên màn hình (thường là chạy wsl --install trong PowerShell mở bằng quyền Administrator, rồi khởi động lại).
 • Dòng 2: kiểm tra đã cài thành công. Kết quả mong đợi: Docker version 2x.x.x, build ...
 • Dòng 3: chạy thử một container mẫu. Kết quả mong đợi có dòng "Hello from Docker!".
+~~~bash
+winget install -e --id Docker.DockerDesktop
+docker --version
+docker run hello-world
+~~~
 
 ### Bước 2: chạy OWASP Juice Shop trên máy bạn
 Juice Shop là một cửa hàng nước ép giả, CỐ TÌNH chứa hàng chục lỗ hổng để luyện tập hợp pháp.
-~~~bash
-docker run --rm -p 3000:3000 bkimminich/juice-shop
-~~~
 Giải thích từng phần:
 • docker run: tạo và chạy một container.
 • --rm: tự xóa container khi bạn tắt, mỗi lần chạy lại là một shop "sạch".
@@ -52,27 +49,22 @@ Giải thích từng phần:
 Kết quả mong đợi: cửa sổ in ra nhiều dòng log, cuối cùng có dòng chứa "Server listening on port 3000". Mở trình duyệt vào http://localhost:3000 sẽ thấy cửa hàng.
 Muốn dừng: bấm Ctrl + C trong cửa sổ PowerShell đó.
 Mẹo an toàn: dùng -p 127.0.0.1:3000:3000 để chỉ máy bạn mở được shop, các máy khác trong mạng không truy cập được.
-
-### Cách khác: chạy Juice Shop bằng Node.js (không cần Docker)
-Nếu máy không cài được Docker, có thể chạy từ mã nguồn (cần Git và Node.js bản LTS đã cài sẵn):
 ~~~bash
-git clone https://github.com/juice-shop/juice-shop.git --depth 1
-cd juice-shop
-npm install
-npm start
+docker run --rm -p 3000:3000 bkimminich/juice-shop
 ~~~
-Giải thích từng dòng:
-• git clone … --depth 1: tải mã nguồn, chỉ lấy phiên bản mới nhất cho nhẹ.
-• cd juice-shop: đi vào thư mục vừa tải.
-• npm install: tải mọi thư viện cần thiết; bước này có thể mất 5–15 phút.
-• npm start: khởi động server. Khi thấy "Server listening on port 3000", mở http://localhost:3000.
-Lưu ý: Juice Shop chỉ hỗ trợ một số phiên bản Node nhất định; nếu npm install báo lỗi engine, hãy xem mục Node.js được hỗ trợ trong README của dự án và cài đúng bản LTS phù hợp.
+
+### Chuẩn bị mã lab từ gói được cấp riêng
+Juice Shop là công cụ lab mã nguồn mở có thể được nhắc tên. Để tuân thủ bài tập không dùng URL thật,người hướng dẫn cấp archive hoặc image đã review ngoài phần ví dụ này. Ghi nguồn/phiên bản/checksum theo gói được cấp,không tải URL bất kỳ hoặc chạy npm scripts chưa xem. Các endpoint minh họa chỉ áp dụng phiên bản lab khớp hợp đồng,không bảo đảm mọi phiên bản cho cùng lỗi.
+~~~bash
+# Nhận archive mã nguồn lab mã nguồn mở đã review từ người hướng dẫn.
+# Giải nén vào thư mục lab riêng có package.json/lockfile.
+cd juice-shop
+npm ci
+# Kiểm phiên bản và script trước khi khởi chạy theo hướng dẫn lab.
+~~~
 
 ### Thêm một phòng lab: DVWA
 DVWA (Damn Vulnerable Web Application) là app PHP cố tình có lỗi, có các mức độ Low/Medium/High để luyện dần.
-~~~bash
-docker run --rm -it -p 127.0.0.1:8080:80 vulnerables/web-dvwa
-~~~
 Giải thích:
 • -it: giữ cửa sổ tương tác để xem log.
 • -p 127.0.0.1:8080:80: app chạy cổng 80 trong container, bạn mở ở cổng 8080, chỉ máy bạn truy cập được.
@@ -81,6 +73,9 @@ Các bước tiếp theo:
 2. Bấm "Create / Reset Database".
 3. Vào DVWA Security, chọn Low để bắt đầu.
 Image này khá cũ, chỉ dùng để học trên máy cá nhân, không bao giờ đưa lên server công khai.
+~~~bash
+docker run --rm -it -p 127.0.0.1:8080:80 vulnerables/web-dvwa
+~~~
 
 ### Lỗi thường gặp
 • Triệu chứng: "docker: error during connect … The system cannot find the file specified".
@@ -117,6 +112,7 @@ Hãy coi nó như "10 cách trộm hay dùng nhất" mà mọi chủ nhà nên b
 • OWASP còn có Juice Shop, ZAP, Cheat Sheet Series: đều miễn phí.
 
 ### Danh sách OWASP Top 10 (bản 2021)
+Cách đọc: cột trái là mã và tên chính thức (tiếng Anh), cột phải là giải thích dễ hiểu. Khi viết bug report, ghi kèm mã (ví dụ A01) để đội phát triển tra cứu nhanh.
 ~~~text
 A01 Broken Access Control              Phân quyền sai: xem/sửa dữ liệu của người khác
 A02 Cryptographic Failures             Mã hóa yếu: lộ mật khẩu, thẻ, dữ liệu nhạy cảm
@@ -132,9 +128,9 @@ A09 Security Logging and Monitoring    Không ghi log, không phát hiện bị 
     Failures
 A10 Server-Side Request Forgery (SSRF) Lừa server gửi request đến nơi không được phép
 ~~~
-Cách đọc: cột trái là mã và tên chính thức (tiếng Anh), cột phải là giải thích dễ hiểu. Khi viết bug report, ghi kèm mã (ví dụ A01) để đội phát triển tra cứu nhanh.
 
 ### Tester có thể kiểm gì cho từng nhóm?
+Không cần làm hết ngay. Người mới nên bắt đầu với A01, A03, A05, A07 vì dễ kiểm bằng trình duyệt.
 ~~~text
 Nhóm | Câu hỏi tester tự đặt ra
 -----+------------------------------------------------------------------
@@ -149,21 +145,20 @@ A08  | File tải về/cập nhật có được kiểm tra chữ ký không?
 A09  | Đăng nhập sai 50 lần có được ghi log và cảnh báo không?
 A10  | Ô "nhập URL ảnh" có cho server gọi tới địa chỉ nội bộ không?
 ~~~
-Không cần làm hết ngay. Người mới nên bắt đầu với A01, A03, A05, A07 vì dễ kiểm bằng trình duyệt.
 
 ### Thử ngay: kiểm thư viện cũ (A06) bằng npm audit
 Nếu bạn đã tải mã nguồn Juice Shop ở bài trước (hoặc có bất kỳ dự án Node.js nào), chạy trong thư mục dự án:
-~~~bash
-cd juice-shop
-npm audit
-npm audit --omit=dev
-~~~
 Giải thích từng dòng:
 • cd juice-shop: đi vào thư mục có file package.json.
 • npm audit: so sánh các thư viện đang dùng với cơ sở dữ liệu lỗ hổng công khai, in ra danh sách theo mức độ low/moderate/high/critical.
 • npm audit --omit=dev: bỏ qua thư viện chỉ dùng lúc phát triển, tập trung vào thứ chạy thật.
 Kết quả mong đợi: cuối danh sách có dòng tổng kết dạng "N vulnerabilities (x low, y moderate, z high)". Juice Shop cố tình dùng một số thư viện cũ nên có thể thấy cảnh báo.
 Tester không tự sửa, mà ghi lại tên thư viện, mức độ và báo cho đội phát triển.
+~~~bash
+cd juice-shop
+npm audit
+npm audit --omit=dev
+~~~
 
 ### Bộ ba CIA: ba thứ cần bảo vệ
 • Confidentiality (Bí mật): chỉ người được phép mới xem được. Ví dụ: không ai xem được lịch sử đơn hàng của bạn.
@@ -173,6 +168,8 @@ Mỗi khi thấy một lỗi, hãy hỏi: lỗi này phá vỡ chữ nào trong 
 
 ### Từ user story ra "abuse case"
 User story mô tả người dùng TỐT muốn gì. Abuse case mô tả kẻ xấu sẽ lợi dụng ra sao.
+• Viết abuse case ngay khi đọc requirement, trước cả khi có code.
+• Mỗi abuse case thành một test case bảo mật, thực hiện trên môi trường được phép.
 ~~~text
 User story:
   Là khách hàng, tôi muốn xem chi tiết đơn hàng tại /orders/{id}
@@ -184,8 +181,6 @@ Abuse case (tester nghĩ thêm):
   3. Nhập id = abc' để xem server có trả lỗi chi tiết không.  (A03, A05)
   4. Gọi API 1000 lần/phút để dò hết các id.                  (A04)
 ~~~
-• Viết abuse case ngay khi đọc requirement, trước cả khi có code.
-• Mỗi abuse case thành một test case bảo mật, thực hiện trên môi trường được phép.
 
 ### Sai lầm thường gặp
 • Triệu chứng: nghĩ "bảo mật là việc của đội security, tester không cần quan tâm".
@@ -213,41 +208,38 @@ Q: Không ai được sửa giá sản phẩm từ phía trình duyệt. Đây l
 
 ### Nhìn "bên dưới" trang web bằng DevTools
 Trình duyệt là một chiếc xe; DevTools là nắp capo để nhìn vào động cơ.
-Mở Juice Shop (http://localhost:3000), bấm F12, chọn tab Network, rồi gõ "apple" vào ô tìm kiếm của shop.
+Mở bản Juice Shop lab được cấp trên http://localhost:3000, bấm F12, chọn Network rồi tìm một từ đang có trong danh mục. Request/response phụ thuộc version và dữ liệu bản lab; JSON dưới chỉ minh họa cấu trúc bằng tên hàng tự đặt, không là expected cố định.
 Bạn sẽ thấy một request tương tự:
-~~~text
-Request URL:     http://localhost:3000/rest/products/search?q=apple
-Request Method:  GET
-Status Code:     200 OK
-
-Response (tab Preview):
-{ "status": "success", "data": [ { "id": 1, "name": "Apple Juice (1000ml)", ... } ] }
-~~~
 Giải thích:
 • Request URL: địa chỉ API mà trang gọi; phần sau dấu ? là dữ liệu bạn gõ.
 • Method GET: lấy dữ liệu. Status 200: thành công.
 • Response: dữ liệu server trả về. Tester bảo mật hỏi: có trường nào thừa, nhạy cảm (mật khẩu, email người khác) không?
 Mẹo: tick "Preserve log" để không mất request khi trang chuyển.
+~~~text
+Request URL:     http://localhost:3000/rest/products/search?q=<KEYWORD_URLENCODED>
+Request Method:  GET
+Status Code:     200 OK
+
+Response (tab Preview):
+{ "status": "success", "data": [ { "id": 1, "name": "Trà Mầm Nếp", ... } ] }
+~~~
 
 ### Cookie, Local Storage và Session Storage
 Đây là các "ngăn kéo" trình duyệt dùng để nhớ thông tin, thường chứa token đăng nhập.
 Đăng nhập Juice Shop bằng tài khoản bạn tự tạo, mở F12, chọn tab Console, gõ từng dòng:
-~~~js
-document.cookie
-localStorage.getItem('token')
-Object.keys(sessionStorage)
-~~~
 Giải thích từng dòng:
 • document.cookie: in các cookie mà JavaScript đọc được. Cookie có cờ HttpOnly sẽ KHÔNG hiện ở đây (đó là điều tốt).
 • localStorage.getItem('token'): đọc giá trị khóa token trong Local Storage; nếu app lưu token ở đây, bạn sẽ thấy một chuỗi dài bắt đầu bằng eyJ (dạng JWT).
 • Object.keys(sessionStorage): liệt kê tên các khóa trong Session Storage.
 Cũng có thể xem trực quan ở tab Application > Storage. Token là "chìa khóa phiên": không gửi cho ai, kể cả trong lab.
+~~~js
+document.cookie
+localStorage.getItem('token')
+Object.keys(sessionStorage)
+~~~
 
 ### Xem HTTP headers bằng curl
 Headers là phần "phong bì" đi kèm mỗi response, chứa các chỉ dẫn bảo mật cho trình duyệt.
-~~~bash
-curl.exe -I http://localhost:3000
-~~~
 Giải thích:
 • curl.exe: công cụ gửi request có sẵn trên Windows 10/11. Gõ curl.exe (có .exe) vì trong Windows PowerShell, chữ curl là bí danh của lệnh khác (Invoke-WebRequest).
 • -I: chỉ lấy headers, không lấy nội dung trang.
@@ -258,8 +250,13 @@ X-Content-Type-Options: nosniff
 X-Frame-Options: SAMEORIGIN
 Content-Type: text/html; charset=UTF-8
 Tester ghi lại header nào CÓ, header nào THIẾU để so với yêu cầu bảo mật của dự án.
+~~~bash
+curl.exe -I http://localhost:3000
+~~~
 
 ### Ý nghĩa các security header quan trọng
+Lưu ý: Strict-Transport-Security chỉ có ý nghĩa trên HTTPS. Trên http://localhost thiếu header này là bình thường; nhưng trên môi trường staging/production chạy HTTPS thì nên có.
+Access-Control-Allow-Origin: * cho mọi website gọi API: cần hỏi đội phát triển xem có cố ý không.
 ~~~text
 Header                      | Giá trị ví dụ               | Chống lại điều gì
 ----------------------------+-----------------------------+---------------------------------
@@ -272,11 +269,16 @@ X-Content-Type-Options      | nosniff                     | Trình duyệt đoá
 Referrer-Policy             | strict-origin-when-cross-   | Lộ URL (có thể chứa token) cho
                             | origin                      | trang khác
 ~~~
-Lưu ý: Strict-Transport-Security chỉ có ý nghĩa trên HTTPS. Trên http://localhost thiếu header này là bình thường; nhưng trên môi trường staging/production chạy HTTPS thì nên có.
-Access-Control-Allow-Origin: * cho mọi website gọi API: cần hỏi đội phát triển xem có cố ý không.
 
 ### Tự động kiểm header bằng Python (không cần cài thêm thư viện)
 Tạo file check_headers.py bằng VS Code:
+Giải thích từng dòng:
+• import urllib.request: dùng thư viện có sẵn của Python để gửi request.
+• URL, REQUIRED: địa chỉ cần kiểm và danh sách header mong muốn.
+• urlopen(URL): gửi request GET; with … as resp giúp tự đóng kết nối.
+• Vòng for: duyệt từng tên header, resp.headers.get(name) trả về giá trị hoặc None nếu thiếu.
+Chạy: python check_headers.py
+Kết quả mong đợi: dòng "Status: 200", sau đó các dòng [OK] hoặc [THIEU]. Với Juice Shop thường thấy X-Frame-Options và X-Content-Type-Options là [OK].
 ~~~python
 import urllib.request
 
@@ -294,13 +296,6 @@ with urllib.request.urlopen(URL) as resp:
         else:
             print(f"[THIEU] {name}")
 ~~~
-Giải thích từng dòng:
-• import urllib.request: dùng thư viện có sẵn của Python để gửi request.
-• URL, REQUIRED: địa chỉ cần kiểm và danh sách header mong muốn.
-• urlopen(URL): gửi request GET; with … as resp giúp tự đóng kết nối.
-• Vòng for: duyệt từng tên header, resp.headers.get(name) trả về giá trị hoặc None nếu thiếu.
-Chạy: python check_headers.py
-Kết quả mong đợi: dòng "Status: 200", sau đó các dòng [OK] hoặc [THIEU]. Với Juice Shop thường thấy X-Frame-Options và X-Content-Type-Options là [OK].
 
 ### Lỗi thường gặp
 • Triệu chứng: gõ curl -I http://localhost:3000 trong Windows PowerShell 5.1 và bị hỏi "Uri:" hoặc báo lỗi tham số.
@@ -337,6 +332,13 @@ Thuộc nhóm OWASP A03 Injection.
 
 ### Code bị lỗi trông như thế nào?
 Ví dụ (chỉ để hiểu, KHÔNG dùng) về một API đăng nhập viết sai bằng JavaScript:
+Giải thích từng dòng:
+• Dòng 1: khai báo API nhận POST tại /login.
+• Dòng 2: lấy email và password người dùng gửi lên.
+• Dòng 3–4: GHÉP CHUỖI để tạo câu SQL. Đây chính là lỗi: dấu nháy đơn ' do người dùng gõ sẽ làm vỡ câu lệnh.
+• Dòng 5: chạy câu SQL và lấy người dùng đầu tiên tìm được.
+• Dòng 6–7: có user thì báo thành công, không có thì trả 401.
+(Ngoài ra lưu mật khẩu dạng chữ thường cũng là lỗi A02; mật khẩu phải được băm bằng thuật toán chuyên dụng.)
 ~~~js
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -347,39 +349,39 @@ app.post('/login', async (req, res) => {
   else res.status(401).send('Sai thông tin');
 });
 ~~~
-Giải thích từng dòng:
-• Dòng 1: khai báo API nhận POST tại /login.
-• Dòng 2: lấy email và password người dùng gửi lên.
-• Dòng 3–4: GHÉP CHUỖI để tạo câu SQL. Đây chính là lỗi: dấu nháy đơn ' do người dùng gõ sẽ làm vỡ câu lệnh.
-• Dòng 5: chạy câu SQL và lấy người dùng đầu tiên tìm được.
-• Dòng 6–7: có user thì báo thành công, không có thì trả 401.
-(Ngoài ra lưu mật khẩu dạng chữ thường cũng là lỗi A02; mật khẩu phải được băm bằng thuật toán chuyên dụng.)
 
 ### Payload thay đổi câu SQL ra sao?
 Kẻ tấn công nhập vào ô Email: ' OR 1=1--  và mật khẩu bất kỳ. Câu SQL sau khi ghép:
-~~~sql
-SELECT * FROM Users WHERE email = '' OR 1=1--' AND password = 'abc'
-~~~
 Đọc từng phần:
 • email = '' : dấu ' đầu tiên trong payload đóng chuỗi email lại, email bằng rỗng.
 • OR 1=1 : điều kiện luôn đúng, nên WHERE đúng với MỌI dòng.
 • -- : bắt đầu chú thích (comment) trong SQL, mọi thứ phía sau bị bỏ qua, kể cả phần kiểm tra password.
 Kết quả: database trả về tất cả user, app lấy người đầu tiên, thường là admin. Kẻ tấn công vào được tài khoản admin mà không cần mật khẩu.
+~~~sql
+SELECT * FROM Users WHERE email = '' OR 1=1--' AND password = 'abc'
+~~~
 
 ### Thực hành trên Juice Shop (chỉ trên localhost)
 Đảm bảo Juice Shop đang chạy trên máy bạn, sau đó:
 1. Mở http://localhost:3000, bấm Account > Login.
 2. Ô Email nhập payload dưới đây, ô Password nhập bất kỳ, ví dụ 123.
-~~~text
-' OR 1=1--
-~~~
 3. Bấm Log in.
 Kết quả mong đợi: đăng nhập thành công với tài khoản admin của shop, góc trên hiện thông báo đã giải được thử thách (challenge solved).
 Giải thích: form đăng nhập của Juice Shop CỐ TÌNH ghép chuỗi giống ví dụ ở slide trước.
 NHẮC LẠI: tuyệt đối không thử payload này trên website thật. Trên môi trường test của công ty chỉ làm khi có cho phép bằng văn bản.
+~~~text
+' OR 1=1--
+~~~
 
 ### Tự tay chứng minh bằng Python + SQLite (phần 1)
 Tạo file sqli_demo.py, dán phần 1 dưới đây. Database nằm hoàn toàn trong bộ nhớ, không ảnh hưởng gì bên ngoài.
+Giải thích từng dòng:
+• import sqlite3: thư viện database nhỏ có sẵn trong Python.
+• connect(":memory:"): tạo database tạm trong RAM, tắt chương trình là mất.
+• CREATE TABLE: tạo bảng users có 3 cột.
+• executemany: thêm 2 người dùng mẫu (dùng dấu ? nên an toàn).
+• login_unsafe: hàm đăng nhập VIẾT SAI, ghép chuỗi giống ví dụ JavaScript, và in ra câu SQL thực sự được chạy.
+• fetchone(): lấy dòng đầu tiên tìm được, hoặc None nếu không có.
 ~~~python
 import sqlite3
 
@@ -397,25 +399,9 @@ def login_unsafe(email, password):
     print("SQL chạy:", sql)
     return cur.execute(sql).fetchone()
 ~~~
-Giải thích từng dòng:
-• import sqlite3: thư viện database nhỏ có sẵn trong Python.
-• connect(":memory:"): tạo database tạm trong RAM, tắt chương trình là mất.
-• CREATE TABLE: tạo bảng users có 3 cột.
-• executemany: thêm 2 người dùng mẫu (dùng dấu ? nên an toàn).
-• login_unsafe: hàm đăng nhập VIẾT SAI, ghép chuỗi giống ví dụ JavaScript, và in ra câu SQL thực sự được chạy.
-• fetchone(): lấy dòng đầu tiên tìm được, hoặc None nếu không có.
 
 ### Cách sửa: parameterized query (phần 2)
 Dán tiếp phần 2 vào CUỐI cùng file sqli_demo.py:
-~~~python
-def login_safe(email, password):
-    sql = "SELECT email, role FROM users WHERE email = ? AND password = ?"
-    return cur.execute(sql, (email, password)).fetchone()
-
-payload = "' OR 1=1--"
-print("UNSAFE:", login_unsafe(payload, "bat-ky"))
-print("SAFE:  ", login_safe(payload, "bat-ky"))
-~~~
 Giải thích:
 • Dấu ? là chỗ giữ chỗ (placeholder). Dữ liệu được gửi RIÊNG, database luôn coi nó là dữ liệu, không bao giờ là lệnh.
 • payload: chuỗi tấn công giống trên Juice Shop.
@@ -425,6 +411,15 @@ SQL chạy: SELECT email, role FROM users WHERE email = '' OR 1=1--' AND passwor
 UNSAFE: ('admin@lab.local', 'admin')
 SAFE:   None
 Bản unsafe trả về admin; bản safe trả về None vì không có ai có email đúng bằng chuỗi lạ đó.
+~~~python
+def login_safe(email, password):
+    sql = "SELECT email, role FROM users WHERE email = ? AND password = ?"
+    return cur.execute(sql, (email, password)).fetchone()
+
+payload = "' OR 1=1--"
+print("UNSAFE:", login_unsafe(payload, "bat-ky"))
+print("SAFE:  ", login_safe(payload, "bat-ky"))
+~~~
 
 ### Lỗi thường gặp
 • Triệu chứng: nhập ' OR 1=1-- trên Juice Shop nhưng không vào được.
@@ -457,6 +452,8 @@ Hậu quả: đánh cắp phiên đăng nhập, giả mạo nội dung, thực h
 XSS cũng thuộc nhóm A03 Injection trong OWASP Top 10 bản 2021.
 
 ### Ba loại XSS
+• Stored nguy hiểm nhất vì ảnh hưởng nhiều người mà không cần bấm link.
+• Tester cần thử ở mọi nơi dữ liệu người dùng được HIỂN THỊ lại: tìm kiếm, tên hồ sơ, bình luận, tên file upload, thông báo lỗi.
 ~~~text
 Loại       | Dữ liệu độc nằm ở đâu?               | Ví dụ
 -----------+--------------------------------------+--------------------------------
@@ -467,23 +464,26 @@ Stored     | Được LƯU trong database rồi hiển thị | Bình luận ch�
 DOM-based  | JavaScript phía trình duyệt tự lấy   | Code đọc location.hash rồi gán
            | dữ liệu (URL, hash) đưa vào trang    | vào innerHTML
 ~~~
-• Stored nguy hiểm nhất vì ảnh hưởng nhiều người mà không cần bấm link.
-• Tester cần thử ở mọi nơi dữ liệu người dùng được HIỂN THỊ lại: tìm kiếm, tên hồ sơ, bình luận, tên file upload, thông báo lỗi.
 
 ### Thực hành DOM XSS trên Juice Shop (localhost)
 1. Mở http://localhost:3000.
 2. Bấm biểu tượng kính lúp, dán payload dưới đây vào ô tìm kiếm, bấm Enter.
-~~~text
-<iframe src="javascript:alert(`xss`)">
-~~~
 Giải thích payload:
 • <iframe …>: thẻ HTML nhúng một khung.
 • src="javascript:…": thay vì địa chỉ trang web, khung chạy một đoạn JavaScript.
 • alert(`xss`): hiện hộp thoại chữ "xss". Đây là cách "chứng minh vô hại" rằng code của ta đã chạy được.
 Kết quả mong đợi: một hộp thoại nhỏ có chữ xss hiện lên, và Juice Shop báo đã giải thử thách DOM XSS.
 Một payload kinh điển khác để tìm hiểu: <script>alert(1)</script>. Nhiều trang hiện đại không chạy thẻ script chèn qua innerHTML, nên payload iframe/img hay được dùng hơn.
+~~~text
+<iframe src="javascript:alert(`xss`)">
+~~~
 
 ### Vì sao bị: innerHTML và textContent
+Giải thích từng dòng:
+• Dòng 1–2: lấy giá trị tham số q trên URL, ví dụ ?q=apple thì keyword là "apple".
+• innerHTML: đưa chuỗi vào trang dưới dạng HTML. Nếu keyword chứa thẻ <iframe> hay <img onerror=…>, thẻ đó được tạo thật và code chạy.
+• textContent: đưa chuỗi vào dưới dạng chữ thuần. Dấu < > hiện ra y nguyên, không thành thẻ.
+Tester không cần sửa code, nhưng hiểu điều này giúp viết bug report rõ ràng: "dữ liệu tại ô X được render như HTML".
 ~~~js
 const params = new URLSearchParams(window.location.search);
 const keyword = params.get('q');
@@ -494,24 +494,9 @@ document.getElementById('result').innerHTML = 'Bạn tìm: ' + keyword;
 // AN TOÀN: trình duyệt hiển thị keyword như chữ thường
 document.getElementById('result').textContent = 'Bạn tìm: ' + keyword;
 ~~~
-Giải thích từng dòng:
-• Dòng 1–2: lấy giá trị tham số q trên URL, ví dụ ?q=apple thì keyword là "apple".
-• innerHTML: đưa chuỗi vào trang dưới dạng HTML. Nếu keyword chứa thẻ <iframe> hay <img onerror=…>, thẻ đó được tạo thật và code chạy.
-• textContent: đưa chuỗi vào dưới dạng chữ thuần. Dấu < > hiện ra y nguyên, không thành thẻ.
-Tester không cần sửa code, nhưng hiểu điều này giúp viết bug report rõ ràng: "dữ liệu tại ô X được render như HTML".
 
 ### Cách phòng thủ: mã hóa đầu ra (output encoding)
 Ví dụ bằng Python, tạo file escape_demo.py:
-~~~python
-import html
-
-user_input = '<script>alert("xss")</script>'
-safe = html.escape(user_input)
-
-print("Gốc:      ", user_input)
-print("Đã mã hóa:", safe)
-print("<p>Bạn tìm: " + safe + "</p>")
-~~~
 Giải thích từng dòng:
 • import html: thư viện có sẵn để xử lý ký tự HTML.
 • user_input: giả lập dữ liệu độc người dùng gõ.
@@ -522,19 +507,29 @@ Gốc:       <script>alert("xss")</script>
 Đã mã hóa: &lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;
 <p>Bạn tìm: &lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</p>
 Các lớp phòng thủ khác: dùng framework tự escape (React, Angular), header Content-Security-Policy, cookie HttpOnly.
+~~~python
+import html
+
+user_input = '<script>alert("xss")</script>'
+safe = html.escape(user_input)
+
+print("Gốc:      ", user_input)
+print("Đã mã hóa:", safe)
+print("<p>Bạn tìm: " + safe + "</p>")
+~~~
 
 ### Payload "hiền" để kiểm tra hằng ngày
 Trên môi trường test của công ty (khi được phép), bạn không cần alert. Dùng payload đánh dấu vô hại để xem dữ liệu có bị render thành HTML không:
+Cách đọc kết quả:
+• Thấy chữ in đậm/in nghiêng/gạch chân thật sự: dữ liệu đang được render như HTML, có nguy cơ XSS, ghi bug.
+• Thấy nguyên văn các ký tự < > trên màn hình: dữ liệu đã được mã hóa đúng.
+• Mã xss-test-01, 02… giúp tìm lại chỗ đã thử trong database/log và dễ dọn dẹp sau khi test.
 ~~~text
 <b>xss-test-01</b>
 "><i>xss-test-02</i>
 <img src=x alt="xss-test-03">
 Nguyễn Văn A <u>gạch chân</u>
 ~~~
-Cách đọc kết quả:
-• Thấy chữ in đậm/in nghiêng/gạch chân thật sự: dữ liệu đang được render như HTML, có nguy cơ XSS, ghi bug.
-• Thấy nguyên văn các ký tự < > trên màn hình: dữ liệu đã được mã hóa đúng.
-• Mã xss-test-01, 02… giúp tìm lại chỗ đã thử trong database/log và dễ dọn dẹp sau khi test.
 
 ### Lỗi thường gặp
 • Triệu chứng: dán payload mà không thấy hộp thoại.
@@ -574,19 +569,25 @@ Nhóm OWASP A01, đứng đầu danh sách 2021.
 1. Đăng nhập Juice Shop (localhost) bằng tài khoản bạn tạo, thêm 1 sản phẩm vào giỏ.
 2. F12 > Application > Local Storage > http://localhost:3000, copy giá trị khóa token (hoặc xem request /rest/basket/… trong tab Network, mục Authorization).
 3. Trong PowerShell, lưu token vào biến rồi gọi API:
-~~~bash
-$TOKEN = "dán_token_của_bạn_vào_đây"
-curl.exe -s -H "Authorization: Bearer $TOKEN" http://localhost:3000/rest/basket/1
-curl.exe -s -H "Authorization: Bearer $TOKEN" http://localhost:3000/rest/basket/2
-~~~
 Giải thích:
 • Dòng 1: tạo biến $TOKEN trong PowerShell để không phải dán chuỗi dài nhiều lần.
 • -s: chế độ im lặng, chỉ in kết quả. -H: thêm header Authorization dạng Bearer token.
 • Dòng 2 và 3: lấy giỏ hàng có id 1 và id 2.
 Kết quả mong đợi: một trong hai là giỏ của bạn; nếu giỏ còn lại (của người khác) cũng trả về dữ liệu với "UserId" khác của bạn, đó chính là lỗi IDOR mà Juice Shop cố tình cài.
+~~~bash
+$TOKEN = "dán_token_của_bạn_vào_đây"
+curl.exe -s -H "Authorization: Bearer $TOKEN" http://localhost:3000/rest/basket/1
+curl.exe -s -H "Authorization: Bearer $TOKEN" http://localhost:3000/rest/basket/2
+~~~
 
 ### Script Python thử nhiều id (chỉ cho localhost)
 Tạo file idor_check.py:
+Giải thích từng phần:
+• range(1, 6): thử lần lượt id 1, 2, 3, 4, 5. Chỉ thử vài id, không quét hàng loạt.
+• Request(…, headers=…): tạo request kèm token của bạn.
+• json.load(resp): đọc dữ liệu JSON; lấy trường UserId để biết giỏ của ai.
+• except HTTPError: server từ chối (401/403/404) thì in mã lỗi.
+Chạy: python idor_check.py. Kết quả mong đợi: nhiều dòng "200 UserId = …" với UserId khác nhau, chứng tỏ API không kiểm tra quyền sở hữu.
 ~~~python
 import json
 import urllib.request
@@ -607,14 +608,10 @@ for basket_id in range(1, 6):
     except urllib.error.HTTPError as e:
         print(basket_id, e.code, "bị từ chối")
 ~~~
-Giải thích từng phần:
-• range(1, 6): thử lần lượt id 1, 2, 3, 4, 5. Chỉ thử vài id, không quét hàng loạt.
-• Request(…, headers=…): tạo request kèm token của bạn.
-• json.load(resp): đọc dữ liệu JSON; lấy trường UserId để biết giỏ của ai.
-• except HTTPError: server từ chối (401/403/404) thì in mã lỗi.
-Chạy: python idor_check.py. Kết quả mong đợi: nhiều dòng "200 UserId = …" với UserId khác nhau, chứng tỏ API không kiểm tra quyền sở hữu.
 
 ### Kiểm thử xác thực (đăng nhập, mật khẩu)
+Giải thích: mỗi dòng là một câu hỏi Có/Không. Kết quả "có" ở dòng nguy hiểm (ví dụ thông báo tiết lộ email tồn tại) cần ghi thành bug kèm bước tái hiện.
+Thông báo lỗi khác nhau giúp kẻ xấu dò ra danh sách email thật của hệ thống.
 ~~~text
 CHECKLIST XÁC THỰC (dùng tài khoản thử, môi trường được phép)
 [ ] Đăng ký được với mật khẩu yếu như 123456 hoặc password không?
@@ -626,20 +623,18 @@ CHECKLIST XÁC THỰC (dùng tài khoản thử, môi trường được phép)
 [ ] Đổi mật khẩu có yêu cầu nhập mật khẩu cũ không?
 [ ] Mật khẩu có xuất hiện trong URL, log, response API không?
 ~~~
-Giải thích: mỗi dòng là một câu hỏi Có/Không. Kết quả "có" ở dòng nguy hiểm (ví dụ thông báo tiết lộ email tồn tại) cần ghi thành bug kèm bước tái hiện.
-Thông báo lỗi khác nhau giúp kẻ xấu dò ra danh sách email thật của hệ thống.
 
 ### Phiên đăng nhập và cờ của cookie
 Sau khi đăng nhập, server cấp "vé" phiên (session id hoặc token). Vé thường nằm trong cookie, ví dụ header trả về:
-~~~text
-Set-Cookie: session=8f3a...; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=1800
-~~~
 Giải thích từng cờ:
 • HttpOnly: JavaScript không đọc được cookie, giảm thiệt hại nếu có XSS.
 • Secure: chỉ gửi cookie qua HTTPS, không bị lộ trên mạng không mã hóa.
 • SameSite=Lax hoặc Strict: hạn chế web lạ gửi request kèm cookie của bạn (chống CSRF).
 • Max-Age=1800: phiên hết hạn sau 1800 giây (30 phút).
 Xem ở F12 > Application > Cookies: các cột HttpOnly, Secure, SameSite. Cookie phiên thiếu HttpOnly hoặc Secure (trên HTTPS) là phát hiện đáng báo.
+~~~text
+Set-Cookie: session=8f3a...; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=1800
+~~~
 
 ### Đăng xuất có thật sự hủy phiên?
 Kịch bản test:
@@ -647,13 +642,13 @@ Kịch bản test:
 2. Gọi một API cần đăng nhập, xác nhận trả 200.
 3. Bấm Logout trên giao diện.
 4. Gọi lại đúng API đó với token cũ:
-~~~bash
-curl.exe -s -o NUL -w "%{http_code}" -H "Authorization: Bearer $TOKEN" http://localhost:3000/rest/basket/1
-~~~
 Giải thích:
 • -o NUL: bỏ phần nội dung (NUL là "thùng rác" của Windows).
 • -w "%{http_code}": chỉ in ra mã trạng thái HTTP.
 Mong đợi ở hệ thống an toàn: 401 sau khi logout. Nếu vẫn 200, token cũ vẫn dùng được: ghi nhận "Logout không vô hiệu hóa phiên phía server". Với Juice Shop (cố tình có lỗi) bạn có thể thấy kết quả này.
+~~~bash
+curl.exe -s -o NUL -w "%{http_code}" -H "Authorization: Bearer $TOKEN" http://localhost:3000/rest/basket/1
+~~~
 
 ### Lỗi thường gặp
 • Triệu chứng: mọi request đều trả 401.
@@ -691,45 +686,46 @@ Những chỗ tester nên soi:
 Thuộc các nhóm A02 Cryptographic Failures, A05 Security Misconfiguration trong OWASP 2021.
 
 ### Thử gây lỗi và tìm bí mật trên Juice Shop
-~~~bash
-curl.exe -s -i "http://localhost:3000/rest/products/search?q='"
-curl.exe -s http://localhost:3000/ftp/
-~~~
 Giải thích:
 • Lệnh 1: gửi một dấu ' vào API tìm kiếm; -i in cả headers để thấy mã trạng thái. Thường trả về lỗi 500 kèm chi tiết lỗi database (ví dụ chữ SQLITE_ERROR): vừa là dấu hiệu SQLi, vừa là lộ thông tin lỗi.
 • Lệnh 2: thư mục /ftp của Juice Shop để mở công khai, liệt kê nhiều file lẽ ra không ai được thấy.
 Thêm một cách tìm bí mật trong JavaScript: F12 > Sources, bấm Ctrl + Shift + F, tìm các từ apiKey, secret, password, token, admin.
 Kết quả mong đợi: tìm thấy các đoạn đáng ngờ để báo lại. Không dùng thông tin tìm được để truy cập thêm.
+~~~bash
+curl.exe -s -i "http://localhost:3000/rest/products/search?q='"
+curl.exe -s http://localhost:3000/ftp/
+~~~
 
 ### Quét tự động với OWASP ZAP (baseline scan)
 ZAP là công cụ quét bảo mật miễn phí. Baseline scan chỉ "đi dạo và quan sát" (thụ động), không tấn công, phù hợp cho người mới.
 Juice Shop đang chạy ở cổng 3000 (lệnh docker run -p 3000:3000). Mở PowerShell ở một thư mục trống, chạy:
-~~~bash
-docker run --rm -v "${PWD}:/zap/wrk/:rw" -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://host.docker.internal:3000 -r zap-report.html
-~~~
 Giải thích từng phần:
 • -v "${PWD}:/zap/wrk/:rw": nối thư mục hiện tại vào container để ZAP ghi được file báo cáo ra máy bạn.
-• ghcr.io/zaproxy/zaproxy:stable: image chính thức của ZAP.
+• zap-lab:reviewed: tên image ZAP cục bộ do giảng viên cấp sau khi review nguồn gốc, version và digest. Phải có sẵn image này; nếu thiếu, dừng phần chạy và ghi chưa thực hiện, không tự kéo image tùy nguồn.
 • zap-baseline.py: kịch bản quét baseline có sẵn trong image.
 • -t http://host.docker.internal:3000: mục tiêu. host.docker.internal là tên đặc biệt để container gọi về máy của bạn. TUYỆT ĐỐI không đổi thành website của người khác.
 • -r zap-report.html: xuất báo cáo HTML.
 Thời gian chạy: vài phút. Lệnh có thể kết thúc với mã thoát khác 0 khi tìm thấy cảnh báo, đó không phải lỗi lệnh.
+~~~bash
+docker run --rm -v "${PWD}:/zap/wrk/:rw" -t zap-lab:reviewed zap-baseline.py -t http://host.docker.internal:3000 -r zap-report.html
+~~~
 
 ### Đọc kết quả ZAP
 Cuối log, ZAP in danh sách và dòng tổng kết tương tự (ví dụ minh họa, số liệu sẽ khác):
+Cách đọc:
+• PASS: kiểm tra đạt. WARN: cảnh báo cần xem xét. FAIL: vi phạm quy tắc được cấu hình là nghiêm trọng.
+• Số trong ngoặc vuông (ví dụ 10038) là mã quy tắc, tra trên trang của ZAP để đọc giải thích và cách sửa.
+• "x 4": số URL bị ảnh hưởng.
+Mở file zap-report.html bằng trình duyệt để xem chi tiết từng URL. Công cụ có thể báo nhầm (false positive): tester phải tự kiểm tra lại trước khi báo bug.
 ~~~text
 WARN-NEW: Content Security Policy (CSP) Header Not Set [10038] x 4
 WARN-NEW: Cross-Domain Misconfiguration [10098] x 6
 WARN-NEW: Timestamp Disclosure - Unix [10096] x 2
 FAIL-NEW: 0  FAIL-INPROG: 0  WARN-NEW: 9  WARN-INPROG: 0  INFO: 0  IGNORE: 0  PASS: 56
 ~~~
-Cách đọc:
-• PASS: kiểm tra đạt. WARN: cảnh báo cần xem xét. FAIL: vi phạm quy tắc được cấu hình là nghiêm trọng.
-• Số trong ngoặc vuông (ví dụ 10038) là mã quy tắc, tra trên trang của ZAP để đọc giải thích và cách sửa.
-• "x 4": số URL bị ảnh hưởng.
-Mở file zap-report.html bằng trình duyệt để xem chi tiết từng URL. Công cụ có thể báo nhầm (false positive): tester phải tự kiểm tra lại trước khi báo bug.
 
 ### Viết bug report bảo mật có trách nhiệm
+Giải thích: tiêu đề có mã OWASP; bước tái hiện ngắn và chính xác; ghi rõ ảnh hưởng; che toàn bộ token, mật khẩu, dữ liệu cá nhân trong bằng chứng.
 ~~~text
 Tiêu đề:     [Security][A01] Người dùng xem được giỏ hàng của người khác qua /rest/basket/{id}
 Môi trường:  Juice Shop local (http://localhost:3000), build ngày 14/11
@@ -744,7 +740,6 @@ Kết quả mong đợi: 403 Forbidden hoặc 404 Not Found
 Gợi ý sửa:   Server kiểm tra basket.UserId == user đang đăng nhập
 Bằng chứng:  Ảnh chụp, request/response (ĐÃ CHE token)
 ~~~
-Giải thích: tiêu đề có mã OWASP; bước tái hiện ngắn và chính xác; ghi rõ ảnh hưởng; che toàn bộ token, mật khẩu, dữ liệu cá nhân trong bằng chứng.
 
 ### Quy tắc báo cáo có trách nhiệm
 • Báo qua kênh nội bộ được chỉ định (Jira dự án bảo mật, email đội security), đặt chế độ hạn chế người xem nếu có.
@@ -775,3 +770,353 @@ Q: ZAP báo một cảnh báo WARN. Tester nên làm gì trước khi tạo bug?
 - Tạo bug ngay với mức Critical
 - Bỏ qua vì WARN không quan trọng
 + Tự kiểm tra lại để loại trừ báo nhầm (false positive), rồi mới báo
+
+## LESSON security-basics-08 | Mô hình đe dọa và ranh giới tin cậy
+
+### Tài sản và chủ thể trong hệ thống giả
+Trung tâm giả định Rêu Lụa có hồ sơ học viên,điểm và lịch lớp. Lập sơ đồ từ browser qua API đến database/worker; ghi actor nào được xem/sửa từng loại dữ liệu và nguồn input do ai kiểm soát.
+~~~text
+browser học viên -> API -> database
+API -> outbox -> worker thông báo
+nguồn ngoài -> import staging -> kiểm dữ liệu
+Tài sản:điểm,hồ sơ,quyền và tính sẵn sàng
+~~~
+
+### Qua ranh giới tin cậy cần kiểm gì
+Client có thể đổi id,role hoặc payload nên server không tin chỉ vì UI đã validate. Worker nhận sự kiện cũng cần nguồn/quyền/phạm vi; nội bộ không tự đồng nghĩa đáng tin tuyệt đối.
+
+### Biến giả thuyết thành phép kiểm an toàn
+Ví dụ giả thuyết học viên sửa ownerId có thể chuyển đơn. Chỉ dùng hai tài khoản lab và id fixture,kiểm request rồi snapshot trước/sau; không lấy đối tượng thật để xác minh.
+~~~text
+threat:ST4 sửa ownerId thành ST9
+asset:quyền sở hữu enrollment
+control:allowlist trường và quyền server
+test:request fixture lab + đối soát owner không đổi
+evidence:request đã che quyền,response và before/after
+~~~
+
+### Ưu tiên rủi ro theo tác động
+Điểm bị chuyển sai hoặc hồ sơ lộ có tác động khác một thông báo lỗi thiếu nhãn. Ước lượng khả năng và mức thiệt hại theo dữ liệu/actor thật trong phạm vi,ghi giả định thay vì chấm điểm máy móc.
+
+### Mô hình phải theo thay đổi hệ thống
+Khi thêm import hoặc worker,mở thêm luồng dữ liệu và quyền. Cập nhật sơ đồ và câu hỏi kiểm soát,không chỉ dán thêm một dòng Top10 vào checklist cũ.
+
+PRACTICE: Nộp sơ đồ Rêu Lụa,tám tài sản/luồng rủi ro và sáu threat-test mappings. Mỗi phép kiểm chỉ dùng localhost cùng fixture giả,có tiêu chí dừng và dữ liệu cần che.
+Q: Trust boundary chỉ điều gì?
++ Nơi mức tin/quyền hoặc chủ thể kiểm soát thay đổi
+- Chỉ tường mạng
+- Chỉ nơi có HTTPS
+Q: Mô hình đe dọa nên bắt đầu từ gì?
++ Tài sản,actor,luồng và điều có thể sai
+- Payload thật dài
+- Mọi CVE tìm được
+
+## LESSON security-basics-09 | CSRF, CORS và cookie theo tình huống
+
+### CSRF liên quan trình duyệt tự mang quyền
+Cookie phiên có thể được browser gửi theo chính sách mà người dùng không có ý định thực hiện hành động đó. Kiểm đổi điểm/hủy lớp theo cơ chế CSRF lab,phân biệt request được gửi với script có đọc response không.
+
+### CORS và CSRF là hai câu hỏi
+CORS hạn chế đọc response của script cross-origin theo chính sách. Request có thể đã gây tác dụng trước khi response bị chặn đọc,do đó không dùng console lỗi CORS làm bằng chứng thao tác an toàn.
+~~~text
+Câu hỏi CORS:origin nào được script đọc response?
+Câu hỏi CSRF:thao tác có xác nhận ý định hợp lệ không?
+Câu hỏi quyền:actor có được sửa đối tượng không?
+Ba phép kiểm độc lập,cần evidence đúng tầng.
+~~~
+
+### Kiểm token và trạng thái cuối
+Hợp đồng lab yêu cầu token CSRF cho thao tác dùng cookie phiên. Lập ca token đúng,sai,thiếu,hết phiên; mọi ca bị từ chối phải giữ điểm và trạng thái,không chỉ trả403.
+~~~text
+đúng token + đúng chủ ->theo nghiệp vụ
+thiếu token ->chặn,điểm không đổi
+sai token ->chặn,điểm không đổi
+phiên hết hạn ->không dùng token cũ cấp lại quyền
+Dữ liệu token trong evidence luôn là placeholder lab.
+~~~
+
+### Cookie flags có phạm vi tác dụng
+HttpOnly hạn chế script đọc cookie,Secure giới hạn truyền qua HTTPS theo browser,SameSite hỗ trợ kiểm soát cross-site. Chúng không thay kiểm quyền hoặc tự giải mọi XSS/CSRF; lab HTTP localhost và HTTPS có khác biệt cần ghi.
+
+### Kiểm luồng hợp lệ không bị phá
+Bảo vệ phải giữ login,đổi phiên và thao tác người dùng hợp lệ. Cấu hình site/origin/cookie cần được giải thích theo kiến trúc,không chỉnh flag ngẫu nhiên đến khi test xanh.
+
+PRACTICE: Lập ma trận CSRF/CORS/cookie cho lab,kiểm token đúng/sai/thiếu và không có tác dụng phụ. Nộp cấu hình giả và evidence minimal,không tạo trang lừa người dùng thật.
+Q: CORS có thay bảo vệ CSRF không?
++ Không
+- Có nếu origin sai bị chặn đọc
+- Có nếu response rỗng
+Q: SameSite nên được hiểu thế nào?
++ Một lớp giảm rủi ro theo bối cảnh,cần thiết kế CSRF đầy đủ
+- Luôn ngăn mọi CSRF
+- Thay kiểm quyền
+Q: Token CSRF cần gắn với gì?
++ Cơ chế phiên/luồng và kiểm ở server theo thiết kế
+- Chỉ tên nút
+- Một chuỗi cố định công khai
+
+## LESSON security-basics-10 | Kiểm quyền theo đối tượng và chức năng
+
+### Quyền chức năng và quyền đối tượng
+Học viên chỉ sửa ghi chú của mình,điều phối chỉ quản lớp được giao. Ma trận phải gồm actor,resource,action,field; một role admin chung không đủ diễn tả phạm vi tenant/lớp.
+~~~text
+actor | resource | action | field | expected
+ST4 | EN-ST4 | PATCH | note | cho phép
+ST4 | EN-ST9 | PATCH | note | chặn
+ST4 | EN-ST4 | PATCH | ownerId | chặn/bỏ theo hợp đồng
+coordinator-A | class-B | DELETE | toàn bộ | chặn
+~~~
+
+### Thử direct API trong phạm vi lab
+UI ẩn nút không là kiểm soát server. Dùng request lab với actor ít quyền và id fixture,không gửi tới host khác; Authorization lấy từ biến và che trước lưu report.
+~~~text
+PATCH http://localhost:3100/enrollments/EN-ST4
+Authorization:Bearer {{student4Token}}
+Content-Type:application/json
+
+{"note":"ghi chú lab","ownerId":"ST9"}
+~~~
+
+### Mass assignment kiểm trường không được giao
+Không gán toàn payload vào model có role,owner,balance. Ca hợp lệ sửa note vẫn thành công,nhưng thêm ownerId không được làm chuyển quyền; expected bỏ trường hay từ chối theo hợp đồng phải chốt trước.
+
+### Response lỗi không được lộ đối tượng
+403/404 có thể theo chính sách ẩn tồn tại; body không được đính hồ sơ người khác hoặc stack trace. Kiểm endpoint danh sách,tìm kiếm,xuất file,không chỉ GET một đối tượng.
+
+### Oracle gồm trạng thái và audit
+So owner,note,điểm trước/sau và log audit giả cho hành động bị chặn. Request từ chối nhưng đã sửa dữ liệu vẫn fail; audit không được chứa token trong payload thô.
+
+PRACTICE: Nộp mười hai ô ma trận quyền và sáu ca direct API giả,bao gồm field-level/list/export. Có before/after và response đã che,không kiểm tài khoản hay đối tượng ngoài lab.
+Q: Đổi id sang đối tượng người khác kiểm gì?
++ Quyền sở hữu đối tượng
+- Chỉ regex id
+- Chỉ thời gian phản hồi
+Q: UI ẩn nút admin đã đủ kiểm quyền chưa?
++ Chưa
+- Đủ nếu CSS khó tìm
+- Đủ nếu URL dài
+Q: Mass assignment cần xem xét gì?
++ Trường client không được phép tự sửa
+- Chỉ thiếu dấu phẩy
+- Chỉ độ dài id
+
+## LESSON security-basics-11 | Đọc cấu hình bảo mật với quyền chỉ đọc
+
+### Chỉ đọc cấu hình có giới hạn bằng chứng
+Nhóm được cấp file cấu hình giả,không được đổi runtime. Kiểm effective config nếu có bằng quyền chỉ đọc; nếu chỉ có mẫu thì báo đây là review mẫu,chưa xác nhận server thực chạy như vậy.
+~~~json
+{"debug":false,"allowedOrigins":["http://localhost:3100"],"logPayloads":false,"session":{"httpOnly":true,"secure":true}}
+~~~
+
+### Tự động hóa check nhỏ trên file lab
+Script dưới chỉ đọc JSON cục bộ và báo cờ cấu hình theo chính sách bài. Secure=true cần môi trường HTTPS phù hợp để kiểm runtime; không dùng assertion này thay thử cookie thực tế.
+~~~python
+import json
+from pathlib import Path
+cfg=json.loads(Path('lab-config.json').read_text(encoding='utf-8'))
+assert cfg['debug'] is False
+assert cfg['logPayloads'] is False
+assert cfg['session']['httpOnly'] is True
+~~~
+
+### Canary giả kiểm log có vô tình ghi dữ liệu
+Dùng chuỗi đánh dấu vô hại CANARY-LAB-PRIVATE trong trường giả định không nên log. Nếu nó xuất hiện,báo vị trí và điều kiện đọc; không dùng secret thật làm canary.
+
+### Cấu hình phụ thuộc môi trường
+Cờ debug,origin và cookie có thể khác ở dev/test. Ghi môi trường,version và nguồn cấp; không yêu cầu mọi lab localhost dùng cấu hình production giống hệt rồi coi khác biệt là lỗ hổng.
+
+### Báo phát hiện tách thực tế và suy luận
+Thực tế:logPayloads=true trong file được cấp. Suy luận:có nguy cơ ghi trường riêng tư,nếu code dùng cờ đó. Cần runtime evidence được cấp để xác nhận; không thổi mức chắc chắn.
+
+PRACTICE: Review ba cấu hình giả,báo finding có dòng/field,policy và giới hạn. Viết script chỉ đọc,kiểm canary giả trong log lab và che evidence; không sửa môi trường ngoài phạm vi.
+Q: Audit cấu hình chỉ đọc có thể chứng minh gì?
++ Hiện trạng mẫu được cấp và rủi ro suy ra có giới hạn
+- Toàn hệ thống an toàn
+- Không cần runtime test
+Q: Log chứa canary giả ở đâu nên báo gì?
++ Vị trí,điều kiện truy cập và chính sách bị vi phạm
+- Đính kèm toàn log thật
+- Tự công khai file
+
+## LESSON security-basics-12 | Triage rủi ro và kiểm bản sửa trong lab
+
+### Triage theo đường đi và tài sản
+Finding cùng tên có tác động khác tùy quyền cần,tài sản lộ và phạm vi người dùng. Mô tả actor,điều kiện,tác dụng và kiểm soát sẵn có; không lấy severity scanner làm kết luận cuối duy nhất.
+
+### Báo cáo tối thiểu đủ tái hiện
+Một report tốt có build,lab account giả,id fixture,bước,expected/actual và ảnh hưởng. Không nhúng token vào command hoặc đính kèm dữ liệu thật; bằng chứng giữ vừa đủ cho người sửa.
+~~~text
+ID:SEC-LAB-07
+Title:ST4 sửa note của EN-ST9
+Precondition:hai tài khoản fixture,build LAB2
+Actual:note ST9 đổi dù response403
+Impact:sai toàn vẹn dữ liệu khác chủ
+Evidence:request placeholder + before/after theo id giả
+~~~
+
+### Retest phải kiểm đúng cơ chế
+Sau sửa quyền ở service layer,chạy lại ca gốc,đổi phương thức/trường theo phạm vi và ca hợp lệ. Không dùng payload mới để vượt biên phạm vi; mục tiêu là xác nhận kiểm soát server nhất quán.
+
+### Regression cho luồng hợp lệ
+Bản sửa allowlist trường không được làm người dùng mất quyền sửa note hợp lệ. Kiểm permission,lifecycle và error handling; chặn mọi request không phải bản sửa đúng.
+
+### Đóng finding cần evidence và rủi ro còn lại
+Ghi version sửa,ca chạy,kết quả và phần chưa kiểm. Nếu endpoint khác chưa được cấp để thử,giữ câu hỏi hoặc nhiệm vụ tiếp chứ không khẳng định toàn hệ thống an toàn.
+
+PRACTICE: Viết ba report từ finding lab,triage có lý do và retest một bản sửa giả. Nộp ca gốc/biến thể/hợp lệ,evidence minimal và trạng thái rõ còn mở/đã xác nhận.
+Q: Severity khác priority thế nào?
++ Tác động kỹ thuật/nghiệp vụ khác thứ tự sửa
+- Hai từ luôn giống
+- Priority chỉ theo tên tester
+Q: Retest bản sửa cần thêm gì?
++ Kiểm ca gốc,biến thể và regression liên quan
+- Chỉ thấy code đổi
+- Chỉ scanner hết cảnh báo
+
+## LESSON security-basics-13 | Dự án: báo cáo đánh giá hệ thống giả
+
+### Dự án đánh giá hệ thống giả
+Rêu Lụa cung cấp localhost,hai học viên,một điều phối và fixture. Phạm vi đọc hợp đồng,kiểm quyền,review cấu hình,log và retest; không có scanning host công khai hoặc thao tác gây tải lớn.
+
+### Rule of engagement cụ thể
+Chốt endpoint,tài khoản,dữ liệu,kỹ thuật được dùng,thời gian và điều kiện dừng. Báo ngay nếu thấy dữ liệu ngoài fixture hoặc môi trường lạ,giữ bằng chứng tối thiểu và không tiếp tục mở rộng truy cập.
+~~~text
+target:http://localhost:3100
+accounts:ST4,ST9,coordinator-A giả
+data:chỉ id fixture LAB7
+stop:dữ liệu ngoài fixture,app lab không ổn định hoặc vượt quyền được cấp
+Không xóa dữ liệu ngoài danh sách fixture.
+~~~
+
+### Coverage đi từ threat đến phép kiểm
+Có ít nhất mười hai ca về quyền đối tượng/chức năng/trường,CSRF,cấu hình và log. Ghi control,oracle,evidence và khoảng trống; scanner optional chỉ chạy cấu hình lab đã review.
+
+### Báo cáo phân biệt finding và quan sát
+Finding có bằng chứng vi phạm yêu cầu,quan sát cần xác nhận và hạn chế phạm vi phải tách rõ. Chọn mức rủi ro theo bối cảnh,đề nghị sửa cơ chế thay vì chỉ blacklist một mẫu input.
+
+### Nghiệm thu bằng retest và rollback lab
+Nộp báo cáo tổng,report chi tiết,một retest và cleanup đúng id. Không công khai dữ liệu quyền hoặc đẩy nội dung lên dịch vụ; ghi trạng thái lab sau dọn và rủi ro chưa đủ bằng chứng.
+
+PRACTICE: Bàn giao assessment giả có phạm vi,threat model,mười hai ca,ba report và một retest. Có ma trận quyền,review cấu hình chỉ đọc,canary log và giới hạn kết luận; mọi dữ liệu tự đặt.
+Q: Trước đánh giá bảo mật cần gì?
++ Phạm vi,quyền và quy tắc thử rõ
+- Một danh sách host công khai
+- Một công cụ thật mạnh
+Q: OWASP Top10 nên được dùng thế nào?
++ Khung gợi ý rủi ro,kết hợp bối cảnh
+- Checklist đầy đủ cho mọi hệ thống
+- Bằng chứng đã đạt bảo mật
+
+## LESSON security-basics-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Chỉ thử môi trường được cấp; biết tài khoản,dữ liệu,kỹ thuật và điều kiện dừng trước hành động.
+2. Danh sách phổ biến không thay mô hình tài sản,luồng dữ liệu và rủi ro riêng của sản phẩm.
+3. Header là một lớp bảo vệ theo bối cảnh,không thay kiểm quyền,tham số hóa và xử lý dữ liệu đúng.
+4. Tách dữ liệu khỏi cấu trúc lệnh; identifier động cần allowlist riêng,không chỉ lọc vài ký tự.
+
+### Dữ liệu và điều kiện biên
+5. Encoding HTML,attribute,URL và JavaScript khác nhau; ưu tiên textContent và sanitization phù hợp khi thật sự cần HTML.
+6. Server phải kiểm quyền cho từng tài nguyên/chức năng,không tin nút ẩn hoặc id khó đoán.
+7. Scanner có false positive/negative; bằng chứng,tác động và ngữ cảnh mới giúp quyết định sửa.
+8. Luồng qua client,server,worker,kho dữ liệu và nguồn ngoài có các giả định tin khác nhau cần được kiểm.
+
+### Tính đúng và cách điều tra
+9. Mục tiêu là hiểu rủi ro cụ thể và kiểm soát,không liệt kê thuật ngữ thiếu liên hệ hệ thống.
+10. CORS quản việc script đọc response theo chính sách; request có thể vẫn đến server,CSRF cần biện pháp riêng.
+11. Site khác origin; cấu hình cookie và luồng hợp lệ cần được kiểm,không coi một flag giải mọi tình huống.
+12. Token phải được sinh,truyền và kiểm đúng; không có/sai token phải không gây tác dụng phụ ở thao tác cần bảo vệ.
+
+### Rủi ro và lựa chọn phương án
+13. Dùng tài khoản và id giả trong lab; kiểm body và trạng thái cuối,không chỉ status lỗi.
+14. Gọi trực tiếp API lab bằng actor ít quyền phải bị chặn ở server; UI chỉ là trải nghiệm.
+15. Server dùng allowlist trường theo hành động/actor,không gán nguyên payload vào object có role/owner.
+16. Cấu hình effective có thể khác file mẫu; ghi nguồn,phiên bản và điều chưa được kiểm trên runtime.
+
+### Dự án, bằng chứng và bàn giao
+17. Bằng chứng tối thiểu đủ tái hiện,che quyền và kiểm phạm vi; không gây rò thêm khi báo lỗi.
+18. Xét khả năng khai thác,phạm vi,tài sản và bối cảnh sản phẩm; quyết định sửa có người chịu trách nhiệm.
+19. Bản sửa có thể chặn một input nhưng còn sink/endpoint khác; xác nhận kiểm soát đúng cơ chế và không phá luồng hợp lệ.
+20. Không khẳng định không còn lỗ hổng từ một đợt kiểm; nêu phần chưa kiểm và rủi ro còn lại.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Trước đánh giá bảo mật cần gì?
++ Phạm vi,quyền và quy tắc thử rõ
+- Một danh sách host công khai
+- Một công cụ thật mạnh
+Q: OWASP Top10 nên được dùng thế nào?
++ Khung gợi ý rủi ro,kết hợp bối cảnh
+- Checklist đầy đủ cho mọi hệ thống
+- Bằng chứng đã đạt bảo mật
+Q: Header bảo mật có thay sửa lỗ hổng không?
++ Không
+- Có nếu có nhiều header
+- Có khi status200
+Q: Biện pháp chính cho SQL injection ở vị trí giá trị là gì?
++ Truy vấn tham số hóa
+- Nối chuỗi rồi xóa dấu nháy
+- Ẩn ô nhập
+Q: Phòng XSS cần chú ý gì?
++ Xử lý theo ngữ cảnh sink và tránh API nguy hiểm
+- Chỉ xóa chữ script
+- Chỉ giới hạn tên
+Q: Xác thực khác phân quyền ở đâu?
++ Biết actor khác quyết định actor được làm gì
+- Đăng nhập là có mọi quyền
+- Phân quyền chỉ ở UI
+Q: Báo cáo scanner cần làm gì tiếp?
++ Xác minh,tái hiện và triage trong phạm vi
+- Gửi mọi cảnh báo là bug thật
+- Bỏ tất cả false positive
+Q: Trust boundary chỉ điều gì?
++ Nơi mức tin/quyền hoặc chủ thể kiểm soát thay đổi
+- Chỉ tường mạng
+- Chỉ nơi có HTTPS
+Q: Mô hình đe dọa nên bắt đầu từ gì?
++ Tài sản,actor,luồng và điều có thể sai
+- Payload thật dài
+- Mọi CVE tìm được
+Q: CORS có thay bảo vệ CSRF không?
++ Không
+- Có nếu origin sai bị chặn đọc
+- Có nếu response rỗng
+Q: SameSite nên được hiểu thế nào?
++ Một lớp giảm rủi ro theo bối cảnh,cần thiết kế CSRF đầy đủ
+- Luôn ngăn mọi CSRF
+- Thay kiểm quyền
+Q: Token CSRF cần gắn với gì?
++ Cơ chế phiên/luồng và kiểm ở server theo thiết kế
+- Chỉ tên nút
+- Một chuỗi cố định công khai
+Q: Đổi id sang đối tượng người khác kiểm gì?
++ Quyền sở hữu đối tượng
+- Chỉ regex id
+- Chỉ thời gian phản hồi
+Q: UI ẩn nút admin đã đủ kiểm quyền chưa?
++ Chưa
+- Đủ nếu CSS khó tìm
+- Đủ nếu URL dài
+Q: Mass assignment cần xem xét gì?
++ Trường client không được phép tự sửa
+- Chỉ thiếu dấu phẩy
+- Chỉ độ dài id
+Q: Audit cấu hình chỉ đọc có thể chứng minh gì?
++ Hiện trạng mẫu được cấp và rủi ro suy ra có giới hạn
+- Toàn hệ thống an toàn
+- Không cần runtime test
+Q: Log chứa canary giả ở đâu nên báo gì?
++ Vị trí,điều kiện truy cập và chính sách bị vi phạm
+- Đính kèm toàn log thật
+- Tự công khai file
+Q: Severity khác priority thế nào?
++ Tác động kỹ thuật/nghiệp vụ khác thứ tự sửa
+- Hai từ luôn giống
+- Priority chỉ theo tên tester
+Q: Retest bản sửa cần thêm gì?
++ Kiểm ca gốc,biến thể và regression liên quan
+- Chỉ thấy code đổi
+- Chỉ scanner hết cảnh báo
+Q: Bàn giao đánh giá phải nêu gì?
++ Phạm vi,bằng chứng,tác động,khuyến nghị và giới hạn
+- Chỉ điểm tổng
+- Mọi dữ liệu thật

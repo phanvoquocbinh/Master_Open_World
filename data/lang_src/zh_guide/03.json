@@ -1,186 +1,1081 @@
 {
-  "no": 3,
-  "for": "ref",
-  "title": "Quy luật tương ứng âm Hán Việt ↔ pinyin",
-  "sub": "汉越音与普通话的对应规律 · Hàn-Yuè yīn yǔ pǔtōnghuà de duìyìng guīlǜ",
-  "goals": [
-    "Từ âm Hán Việt đoán được phụ âm đầu, vần và thanh điệu pinyin với độ chính xác cao",
-    "Dùng Hán Việt để phân biệt -n/-ng, z c s – zh ch sh – j q x",
-    "Hiểu vì sao âm tắc cuối -p/-t/-c biến mất và thanh của chúng phân bố thế nào",
-    "Biết các ngoại lệ thường gặp và cách đưa quy luật vào bài dạy"
-  ],
-  "parts": [
-    {"k": "text", "h": "Vì sao có quy luật? Dùng thế nào cho đúng?", "html": "<p>Âm Hán Việt hình thành từ cách đọc chữ Hán của tiếng Hán trung cổ (khoảng thời Đường, thế kỷ 8–10) được người Việt tiếp nhận rồi “Việt hoá”. Tiếng phổ thông ngày nay cũng phát triển từ <b>cùng nguồn</b> đó, chỉ là đi theo con đường khác. Vì vậy giữa hai bên có <b>tương ứng hệ thống</b>, giống như anh em họ nhìn mặt là đoán được họ hàng.</p><ul><li><b>Độ tin cậy:</b> quy luật là <i>xu hướng mạnh</i>, không phải tuyệt đối. Thanh điệu, âm cuối mũi (-n/-ng), tr → zh/ch đúng rất cao; vần của chữ có âm tắc cuối và thanh của chữ “sắc + -p/-t/-c” khó đoán.</li><li><b>Cách dùng:</b> <i>đoán</i> pinyin từ Hán Việt → <i>nghe/tra</i> để kiểm tra → <i>ghi lại</i> ngoại lệ. Sau vài trăm từ, học viên sẽ có “cảm giác” rất nhanh.</li><li><b>Không dùng khi đang nói:</b> phản xạ nói phải đến từ tai và miệng; quy luật chỉ là công cụ ghi nhớ và tự kiểm tra.</li></ul><p>Thuật ngữ trong bài: <b>phụ âm vang</b> (HV) = m, n, nh, ng/ngh, l, v, d. <b>Phụ âm không vang</b> = b, đ, t, th, tr, ch, s, x, gi, c/k, kh, qu, h, ph và trường hợp mở đầu bằng nguyên âm.</p>"},
-    {"k": "grammar", "h": "Bảng tổng quát: phụ âm đầu Hán Việt → thanh mẫu pinyin", "html": "<p>Đọc theo hàng: thấy âm đầu Hán Việt ở cột 1 → pinyin thường là cột 2, theo điều kiện ở cột 3.</p>", "table": [
-      ["Hán Việt", "Pinyin thường gặp", "Điều kiện / mẹo", "Ví dụ (chữ – HV – pinyin)"],
-      ["b", "b / p", "Thanh huyền → p (bật hơi); còn lại → b", "北 bắc běi, 本 bản běn; 平 bình píng, 朋 bằng péng"],
-      ["ph", "f / p", "Phần lớn là f; một số chữ gốc bật hơi ra p", "方 phương fāng, 法 pháp fǎ; 破 phá pò, 品 phẩm pǐn"],
-      ["v", "w / y", "w khi vần không có ü; y(u) khi vần là ü", "文 văn wén, 万 vạn wàn; 雨 vũ yǔ, 远 viễn yuǎn"],
-      ["m", "m", "Gần như luôn đúng", "马 mã mǎ, 美 mỹ měi, 明 minh míng"],
-      ["đ", "d / t", "Thanh huyền → t (bật hơi); còn lại → d", "东 đông dōng, 电 điện diàn; 同 đồng tóng, 头 đầu tóu"],
-      ["th", "t / q, c / sh / ch", "Bốn nguồn: t (gốc t bật hơi); q/c (gốc ts bật hơi); sh; ch khi thanh huyền", "天 thiên tiān; 清 thanh qīng, 草 thảo cǎo; 书 thư shū, 是 thị shì; 城 thành chéng"],
-      ["t", "z, c, s / j, q, x", "Vần pinyin có i/ü → j q x; còn lại → z c s. Thanh huyền → c/q", "子 tử zǐ, 四 tứ sì; 酒 tửu jiǔ, 小 tiểu xiǎo; 才 tài cái, 前 tiền qián"],
-      ["n", "n", "Gần như luôn đúng", "南 nam nán, 年 niên nián, 女 nữ nǚ"],
-      ["l", "l", "Gần như luôn đúng", "来 lai lái, 老 lão lǎo, 路 lộ lù"],
-      ["tr", "zh / ch", "Thanh huyền → ch; còn lại → zh", "中 trung zhōng, 知 tri zhī, 住 trú zhù; 茶 trà chá, 陈 trần chén"],
-      ["ch", "zh", "Gần như luôn là zh", "正 chính zhèng, 主 chủ zhǔ, 真 chân zhēn, 纸 chỉ zhǐ"],
-      ["x", "ch / sh", "Đa số ch; một nhóm nhỏ sh", "车 xa chē, 出 xuất chū, 春 xuân chūn; 社 xã shè, 蛇 xà shé"],
-      ["s", "sh / ch / s", "Đa số sh; một số ch, s", "山 sơn shān, 生 sinh shēng, 师 sư shī; 初 sơ chū, 床 sàng chuáng; 色 sắc sè, 所 sở suǒ"],
-      ["gi", "j (hiếm x)", "Gần như luôn j", "家 gia jiā, 江 giang jiāng, 教 giáo jiào, 解 giải jiě; 械 giới xiè"],
-      ["d", "y / m / r", "Đa số y; một nhóm gốc m; vài chữ r", "游 du yóu, 用 dụng yòng, 夜 dạ yè; 民 dân mín, 名 danh míng, 面 diện miàn; 容 dung róng"],
-      ["nh", "r / y / er / n", "Đa số r", "人 nhân rén, 日 nhật rì, 热 nhiệt rè; 牙 nha yá, 眼 nhãn yǎn; 二 nhị èr, 儿 nhi ér; 你 nhĩ nǐ"],
-      ["c / k", "g / j (q khi huyền)", "Vần có i/ü → j; thanh huyền → q", "高 cao gāo, 公 công gōng; 今 kim jīn, 九 cửu jiǔ; 其 kỳ qí, 求 cầu qiú"],
-      ["kh", "k / q (hiếm x)", "Vần có i/ü → q", "开 khai kāi, 口 khẩu kǒu; 去 khứ qù, 气 khí qì; 溪 khê xī"],
-      ["qu", "g(u) / j(u) / q(u)", "Như c/k: vần ü → j, huyền → q", "光 quang guāng, 国 quốc guó; 军 quân jūn, 决 quyết jué; 权 quyền quán, 群 quần qún"],
-      ["h", "h / x (hiếm y, w)", "Vần có i/ü → x", "好 hảo hǎo, 红 hồng hóng; 下 hạ xià, 学 học xué, 香 hương xiāng; 有 hữu yǒu, 完 hoàn wán"],
-      ["ng / ngh", "không thanh mẫu (w-, y-) / n", "Đa số mất phụ âm đầu", "我 ngã wǒ, 五 ngũ wǔ, 外 ngoại wài; 语 ngữ yǔ, 月 nguyệt yuè, 义 nghĩa yì; 牛 ngưu niú"],
-      ["Nguyên âm đầu", "không thanh mẫu", "Viết với y-, w- hoặc a/o/e", "安 an ān, 爱 ái ài, 音 âm yīn, 英 anh yīng, 温 ôn wēn"]
-    ], "tips": ["Ngược lại cũng đúng: thấy pinyin <b>zh/ch</b> thì HV gần như chắc chắn bắt đầu bằng tr, ch, th, x hoặc s; thấy <b>r</b> thì HV thường là nh (hoặc d)."]},
-    {"k": "grammar", "h": "Hai “dòng họ” sinh ra j q x", "html": "<p>Âm j q x của tiếng phổ thông sinh ra từ <b>hai dòng âm cổ</b> bị “mặt lưỡi hoá” trước i/ü: dòng gốc lưỡi (HV: c/k, kh, gi, h, qu) và dòng đầu lưỡi (HV: t, th). Tiếng phổ thông nhập làm một, nhưng <b>Hán Việt vẫn giữ phân biệt</b> → nhờ HV mà nhớ được nhiều chữ đồng âm.</p>", "table": [
-      ["Dòng âm (HV)", "Trước vần không có i/ü", "Trước vần có i/ü"],
-      ["c/k, gi, qu", "g: 高 cao gāo, 公 công gōng", "j: 家 gia jiā, 今 kim jīn, 军 quân jūn"],
-      ["kh", "k: 开 khai kāi, 口 khẩu kǒu", "q: 去 khứ qù, 气 khí qì"],
-      ["h", "h: 好 hảo hǎo, 花 hoa huā", "x: 下 hạ xià, 学 học xué"],
-      ["t", "z / s: 早 tảo zǎo, 四 tứ sì", "j / x: 酒 tửu jiǔ, 小 tiểu xiǎo"],
-      ["th (gốc ts bật hơi)", "c: 草 thảo cǎo, 村 thôn cūn", "q: 清 thanh qīng, 七 thất qī"],
-      ["t + thanh huyền", "c: 才 tài cái, 存 tồn cún", "q: 前 tiền qián, 情 tình qíng"]
-    ], "ex": [
-      {"t": "九 / 酒", "py": "jiǔ / jiǔ", "vi": "cửu (chín) / tửu (rượu): pinyin giống hệt, HV khác"},
-      {"t": "京 / 精", "py": "jīng / jīng", "vi": "kinh (kinh đô) / tinh (tinh thần)"},
-      {"t": "希 / 西", "py": "xī / xī", "vi": "hy (hy vọng) / tây (phía tây)"}
-    ], "tips": ["Từ đây suy ra: chữ có pinyin j q x thì HV bắt đầu bằng c/k, kh, gi, h, qu hoặc t, th – <b>không bao giờ</b> là b, đ, m, n, l."]},
-    {"k": "grammar", "h": "Vần Hán Việt → vần pinyin", "html": "<p>Bảng tra theo vần Hán Việt. Một vần HV có thể ứng với vài vần pinyin; thường phân biệt được nhờ phụ âm đầu (ví dụ sau zh ch sh r thì không có i).</p>", "table": [
-      ["Vần HV", "Vần pinyin thường gặp", "Ví dụ"],
-      ["-a", "-a, -ia, -e, -uo, -ie", "马 mã mǎ, 家 gia jiā, 歌 ca gē, 多 đa duō, 夜 dạ yè, 写 tả xiě"],
-      ["-oa, qua", "-ua, -uo (đôi khi -e)", "花 hoa huā, 化 hóa huà, 火 hỏa huǒ, 过 quá guò, 果 quả guǒ, 课 khóa kè"],
-      ["-ai", "-ai (sau gi, nh: -ie)", "来 lai lái, 太 thái tài, 海 hải hǎi; 解 giải jiě, 街 nhai jiē"],
-      ["-ao", "-ao, -iao", "高 cao gāo, 道 đạo dào, 老 lão lǎo; 交 giao jiāo, 教 giáo jiào"],
-      ["-iêu", "-iao (sau zh ch sh r: -ao)", "小 tiểu xiǎo, 笑 tiếu xiào, 条 điều tiáo, 表 biểu biǎo; 少 thiểu shǎo, 照 chiếu zhào"],
-      ["-âu", "-ou (sau j q x: -iu)", "头 đầu tóu, 楼 lâu lóu, 后 hậu hòu, 走 tẩu zǒu; 求 cầu qiú"],
-      ["-ưu, -u (thu, chu)", "-iu, -ou", "流 lưu liú, 九 cửu jiǔ, 休 hưu xiū, 秋 thu qiū; 收 thu shōu, 周 chu zhōu"],
-      ["-i / -y", "-i, -ei, -ui, -i đặc biệt", "李 lý lǐ, 喜 hỉ xǐ, 记 ký jì; 美 mỹ měi, 飞 phi fēi; 鬼 quỷ guǐ; 之 chi zhī, 诗 thi shī"],
-      ["-ư", "-i đặc biệt, -u, -ü", "思 tư sī, 字 tự zì, 师 sư shī; 书 thư shū, 除 trừ chú; 鱼 ngư yú, 去 khứ qù, 女 nữ nǚ"],
-      ["-ơ, -ơi", "-i, -i đặc biệt", "机 cơ jī, 基 cơ jī; 时 thời shí"],
-      ["-ô / -u (bộ, cổ, phu)", "-u", "古 cổ gǔ, 步 bộ bù, 路 lộ lù, 图 đồ tú, 夫 phu fū"],
-      ["-ê, -ây", "-i (sau zh ch sh: -i đặc biệt)", "题 đề tí, 体 thể tǐ, 鸡 kê jī, 米 mễ mǐ, 西 tây xī; 世 thế shì, 制 chế zhì"],
-      ["-ôi, -ơi, -ui", "-ui, -ei", "对 đối duì, 回 hồi huí, 会 hội huì, 最 tối zuì; 贝 bối bèi, 杯 bôi bēi, 每 mỗi měi"],
-      ["-ương", "-ang, -iang", "长 trường cháng, 上 thượng shàng, 方 phương fāng, 王 vương wáng; 想 tưởng xiǎng, 两 lưỡng liǎng"],
-      ["-ang, -oang", "-ang, -iang, -uang", "帮 bang bāng, 郎 lang láng; 江 giang jiāng, 讲 giảng jiǎng; 光 quang guāng, 黄 hoàng huáng, 装 trang zhuāng"],
-      ["-inh, -anh, -ênh", "-ing (sau b p m d t n l j q x y), -eng (sau zh ch sh r z c s g k h)", "明 minh míng, 京 kinh jīng, 平 bình píng, 命 mệnh mìng; 生 sinh shēng, 城 thành chéng, 正 chính zhèng, 更 canh gèng"],
-      ["-ăng, -âng, -ưng", "-eng, -ing", "能 năng néng, 灯 đăng dēng, 朋 bằng péng, 胜 thắng shèng, 证 chứng zhèng; 兴 hưng xīng, 应 ứng yīng, 冰 băng bīng"],
-      ["-ông, -ung, -ong", "-ong (sau f, m: -eng; sau j q x: -iong)", "东 đông dōng, 中 trung zhōng, 龙 long lóng; 风 phong fēng, 梦 mộng mèng; 穷 cùng qióng, 雄 hùng xióng"],
-      ["-an, -ơn", "-an (đôi khi -en, -ian)", "安 an ān, 山 sơn shān, 万 vạn wàn, 汉 hán hàn; 本 bản běn; 间 gian jiān"],
-      ["-oan", "-uan (sau j q x y: -üan viết -uan)", "关 quan guān, 欢 hoan huān, 断 đoạn duàn, 算 toán suàn; 全 toàn quán"],
-      ["-iên, -yên", "-ian (sau zh ch sh r: -an)", "天 thiên tiān, 年 niên nián, 电 điện diàn, 见 kiến jiàn; 战 chiến zhàn, 然 nhiên rán, 展 triển zhǎn"],
-      ["-uyên", "-üan (viết -uan), -uan", "元 nguyên yuán, 选 tuyển xuǎn, 权 quyền quán; 传 truyền chuán, 专 chuyên zhuān, 川 xuyên chuān"],
-      ["-ân, -ăn, -ôn", "-en, -in, -un", "人 nhân rén, 真 chân zhēn, 根 căn gēn, 门 môn mén; 新 tân xīn, 民 dân mín, 近 cận jìn; 村 thôn cūn, 孙 tôn sūn"],
-      ["-uân", "-un, -ün (viết -un sau j q x y)", "春 xuân chūn, 准 chuẩn zhǔn, 顺 thuận shùn; 军 quân jūn, 群 quần qún, 训 huấn xùn"],
-      ["-am, -âm, -ăm, -iêm, -im", "-an, -en, -in, -ian (không bao giờ -ng)", "三 tam sān, 南 nam nán, 感 cảm gǎn, 深 thâm shēn, 心 tâm xīn, 金 kim jīn, 点 điểm diǎn, 严 nghiêm yán"]
-    ]},
-    {"k": "grammar", "h": "Âm cuối mũi: “phao cứu sinh” để phân biệt -n / -ng", "html": "<p>Tiếng Hán trung cổ có ba âm cuối mũi -m, -n, -ng. Hán Việt giữ đủ cả ba (thêm -nh là biến thể của -ng). Tiếng phổ thông nhập -m vào -n. Kết quả:</p><ul><li>HV kết thúc <b>-m</b> hoặc <b>-n</b> → pinyin <b>-n</b>.</li><li>HV kết thúc <b>-ng</b> hoặc <b>-nh</b> → pinyin <b>-ng</b>.</li></ul><p>Quy luật này đúng với tuyệt đại đa số chữ thông dụng (ngoại lệ hiếm, ví dụ 聘 sính – pìn). Học viên miền Nam hay lẫn -n/-ng nên dùng HV để tự kiểm tra.</p>", "table": [
-      ["Âm cuối HV", "Âm cuối pinyin", "Ví dụ"],
-      ["-m", "-n", "三 tam sān, 心 tâm xīn, 南 nam nán, 金 kim jīn, 感 cảm gǎn, 点 điểm diǎn"],
-      ["-n", "-n", "山 sơn shān, 人 nhân rén, 天 thiên tiān, 文 văn wén, 安 an ān, 本 bản běn"],
-      ["-ng", "-ng", "东 đông dōng, 方 phương fāng, 上 thượng shàng, 能 năng néng, 中 trung zhōng"],
-      ["-nh", "-ng", "明 minh míng, 生 sinh shēng, 京 kinh jīng, 城 thành chéng, 英 anh yīng"]
-    ], "ex": [
-      {"t": "金 / 京", "py": "jīn / jīng", "vi": "kim (vàng) / kinh (kinh đô)"},
-      {"t": "陈 / 城", "py": "chén / chéng", "vi": "trần (họ Trần) / thành (thành phố)"},
-      {"t": "心 / 星", "py": "xīn / xīng", "vi": "tâm (tim) / tinh (ngôi sao)"},
-      {"t": "人 / 仍", "py": "rén / réng", "vi": "nhân (người) / nhưng (vẫn)"}
-    ]},
-    {"k": "grammar", "h": "Âm cuối tắc -p, -t, -c, -ch (nhập thanh) → âm tiết mở", "html": "<p>Tiếng Hán trung cổ có loại âm tiết kết thúc bằng -p, -t, -k gọi là <b>nhập thanh</b>. Hán Việt giữ nguyên (-p, -t, -c/-ch); tiếng phổ thông <b>mất hẳn</b> các âm cuối này và chia các chữ đó vào 4 thanh hiện đại. Vì vậy:</p><ul><li>Chữ có HV tận cùng -p/-t/-c/-ch → pinyin <b>chắc chắn không có -n/-ng</b>.</li><li>Thanh điệu của nhóm này tra ở bảng thanh điệu phía dưới.</li></ul>", "table": [
-      ["HV kết thúc", "Vần pinyin thường gặp", "Ví dụ"],
-      ["-p", "-a, -e, -i, -ie, -u", "法 pháp fǎ, 答 đáp dá, 合 hợp hé, 十 thập shí, 立 lập lì, 接 tiếp jiē, 业 nghiệp yè, 入 nhập rù"],
-      ["-t", "-a, -e, -i, -u, -ie, -üe, -uo", "八 bát bā, 发 phát fā, 渴 khát kě, 一 nhất yī, 七 thất qī, 出 xuất chū, 节 tiết jié, 铁 thiết tiě, 月 nguyệt yuè, 雪 tuyết xuě, 活 hoạt huó"],
-      ["-c (-ac, -ăc, -ươc, -oc, -uc, -ưc…)", "-e, -uo, -ao, -ei, -i, -u, -ü, -üe, -iao", "各 các gè, 落 lạc luò, 薄 bạc báo, 北 bắc běi, 力 lực lì, 读 độc dú, 绿 lục lǜ, 国 quốc guó, 学 học xué, 药 dược yào"],
-      ["-ch (-ach, -ich)", "-ai, -e, -i, -i đặc biệt", "白 bạch bái, 百 bách bǎi, 客 khách kè, 格 cách gé, 历 lịch lì, 益 ích yì, 石 thạch shí, 尺 xích chǐ"]
-    ], "tips": ["Học viên Việt hay “đóng” âm cuối theo thói quen HV (学 thành “xuéc”). Nhắc: tiếng phổ thông không có âm tắc cuối."]},
-    {"k": "grammar", "h": "Thanh điệu Hán Việt → thanh điệu pinyin (quy luật quan trọng nhất)", "html": "<p>Cả 6 thanh Hán Việt và 4 thanh tiếng phổ thông đều bắt nguồn từ 4 thanh cổ (bình – thượng – khứ – nhập) chia theo phụ âm đầu “trong” (vô thanh) hay “đục” (hữu thanh). Nhờ vậy ta suy được:</p>", "table": [
-      ["Thanh HV", "Điều kiện", "Thanh pinyin", "Độ tin cậy", "Ví dụ"],
-      ["Ngang", "Phụ âm đầu không vang (b, đ, t, th, tr, ch, s, x, gi, c/k, kh, qu, h, ph) hoặc mở đầu bằng nguyên âm", "Thanh 1", "Cao", "东 đông dōng, 天 thiên tiān, 书 thư shū, 家 gia jiā, 安 an ān, 花 hoa huā"],
-      ["Ngang", "Phụ âm đầu vang: m, n, nh, ng/ngh, l, v, d", "Thanh 2", "Cao", "人 nhân rén, 来 lai lái, 年 niên nián, 明 minh míng, 文 văn wén, 游 du yóu"],
-      ["Huyền", "Mọi phụ âm; nếu là âm tắc thì pinyin bật hơi (p, t, q, ch, c)", "Thanh 2", "Rất cao", "同 đồng tóng, 平 bình píng, 茶 trà chá, 情 tình qíng, 回 hồi huí, 才 tài cái"],
-      ["Hỏi", "–", "Thanh 3", "Cao", "好 hảo hǎo, 小 tiểu xiǎo, 手 thủ shǒu, 口 khẩu kǒu, 九 cửu jiǔ"],
-      ["Ngã", "Phụ âm đầu vang", "Thanh 3", "Cao", "马 mã mǎ, 五 ngũ wǔ, 老 lão lǎo, 女 nữ nǚ, 雨 vũ yǔ, 也 dã yě"],
-      ["Ngã", "Phụ âm đầu không vang", "Thường thanh 4", "Khá", "静 tĩnh jìng, 士 sĩ shì, 技 kỹ jì, 社 xã shè, 待 đãi dài, 杜 Đỗ dù"],
-      ["Sắc (không có -p/-t/-c/-ch)", "–", "Thanh 4", "Cao", "去 khứ qù, 爱 ái ài, 见 kiến jiàn, 四 tứ sì, 对 đối duì"],
-      ["Nặng (không có -p/-t/-c/-ch)", "–", "Thanh 4", "Rất cao", "大 đại dà, 地 địa dì, 用 dụng yòng, 外 ngoại wài, 是 thị shì"],
-      ["Sắc + -p/-t/-c/-ch", "–", "Rải cả 4 thanh – phải học thuộc", "Không đoán được", "一 nhất yī, 国 quốc guó, 北 bắc běi, 色 sắc sè, 八 bát bā, 百 bách bǎi"],
-      ["Nặng + -p/-t/-c/-ch", "Phụ âm đầu không vang", "Thanh 2", "Cao", "白 bạch bái, 学 học xué, 十 thập shí, 读 độc dú, 实 thực shí, 杂 tạp zá"],
-      ["Nặng + -p/-t/-c/-ch", "Phụ âm đầu vang", "Thanh 4", "Rất cao", "六 lục liù, 力 lực lì, 日 nhật rì, 月 nguyệt yuè, 木 mộc mù, 热 nhiệt rè"]
-    ], "ex": [
-      {"t": "同学", "py": "tóngxué", "vi": "đồng học: đồng (huyền → 2), học (nặng + -c, h không vang → 2)"},
-      {"t": "老师", "py": "lǎoshī", "vi": "lão sư: lão (ngã, l vang → 3), sư (ngang, s không vang → 1)"},
-      {"t": "日月", "py": "rì yuè", "vi": "nhật nguyệt: cả hai nặng + -t, phụ âm vang → 4"}
-    ], "tips": ["Câu thần chú: <b>huyền → 2; hỏi → 3; sắc, nặng → 4; ngang → 1 (phụ âm vang → 2); ngã → 3 (phụ âm không vang → 4)</b>. Có -p/-t/-c: <b>nặng → 2 hoặc 4</b> (theo phụ âm), <b>sắc → phải học</b>.", "Vì sao HV ngã có hai hướng? Nhóm “ngã + phụ âm không vang” gốc là thanh thượng có phụ âm đục; tiếng phổ thông chuyển nhóm này sang thanh 4 (hiện tượng “trọc thượng biến khứ”)."]},
-    {"k": "sounds", "h": "Nghe kiểm chứng quy luật thanh điệu", "html": "<p>Nghe từng nhóm và tự xác nhận: cùng một kiểu thanh HV cho ra cùng một thanh pinyin.</p>", "items": [
-      {"sym": "HV huyền → thanh 2", "ex": ["同", "平", "茶", "回", "情"], "vi": "đồng tóng, bình píng, trà chá, hồi huí, tình qíng."},
-      {"sym": "HV hỏi / ngã → thanh 3", "ex": ["好", "小", "马", "五", "老"], "vi": "hảo hǎo, tiểu xiǎo, mã mǎ, ngũ wǔ, lão lǎo."},
-      {"sym": "HV sắc / nặng → thanh 4", "ex": ["去", "爱", "大", "用", "外"], "vi": "khứ qù, ái ài, đại dà, dụng yòng, ngoại wài."},
-      {"sym": "Nặng + -p/-t/-c, phụ âm không vang → thanh 2", "ex": ["白", "学", "十", "读", "杂"], "vi": "bạch bái, học xué, thập shí, độc dú, tạp zá."},
-      {"sym": "Nặng + -p/-t/-c, phụ âm vang → thanh 4", "ex": ["六", "力", "日", "月", "木"], "vi": "lục liù, lực lì, nhật rì, nguyệt yuè, mộc mù."}
-    ]},
-    {"k": "grammar", "h": "Minh hoạ: một gia đình chữ – Hán Việt đoán đúng cả 4 thanh", "html": "<p>Các chữ hình thanh cùng thanh phù đọc gần giống nhau; điểm khác nhau về thanh điệu được Hán Việt “mã hoá” rất đều. Đây là bài giảng mẫu rất ấn tượng cho học viên HSK 2–3.</p>", "table": [
-      ["Chữ", "Hán Việt", "Thanh HV", "Dự đoán", "Pinyin thực tế"],
-      ["方", "phương", "ngang (ph không vang)", "thanh 1", "fāng ✓"],
-      ["房", "phòng", "huyền", "thanh 2", "fáng ✓"],
-      ["防", "phòng", "huyền", "thanh 2", "fáng ✓"],
-      ["访", "phỏng", "hỏi", "thanh 3", "fǎng ✓"],
-      ["放", "phóng", "sắc", "thanh 4", "fàng ✓"],
-      ["清", "thanh", "ngang", "thanh 1", "qīng ✓"],
-      ["情", "tình", "huyền", "thanh 2", "qíng ✓"],
-      ["请", "thỉnh", "hỏi", "thanh 3", "qǐng ✓"],
-      ["静", "tĩnh", "ngã (t không vang)", "thanh 4", "jìng ✓"],
-      ["工", "công", "ngang", "thanh 1", "gōng ✓"],
-      ["红", "hồng", "huyền", "thanh 2", "hóng ✓"],
-      ["项", "hạng", "nặng", "thanh 4", "xiàng ✓"]
-    ], "tips": ["Dạy theo gia đình chữ giúp học viên vừa nhớ mặt chữ (cùng thanh phù), vừa thấy quy luật thanh – hai việc trong một."]},
-    {"k": "grammar", "h": "Ngoại lệ hay gặp (ghi vào sổ riêng)", "html": "<p>Mọi quy luật đều có ngoại lệ. Dưới đây là những chữ thông dụng hay làm học viên đoán sai.</p>", "table": [
-      ["Chữ", "Hán Việt", "Quy luật dự đoán", "Thực tế", "Ghi chú"],
-      ["妈", "ma", "thanh 2 (ngang + m)", "mā", "Chữ khẩu ngữ, hình thành muộn"],
-      ["猫", "miêu", "thanh 2", "māo", "–"],
-      ["危", "nguy", "thanh 2", "wēi", "危险 wēixiǎn"],
-      ["微", "vi", "thanh 2", "wēi", "微笑 wēixiào"],
-      ["期", "kỳ", "thanh 2", "qī", "日期 rìqī (Đài Loan đọc qí)"],
-      ["听", "thính", "thanh 4", "tīng", "–"],
-      ["拉", "lạp", "thanh 4 (nặng + -p, l vang)", "lā", "–"],
-      ["理, 李, 里", "lý", "thanh 4 (sắc)", "lǐ", "Nhóm “lý” đều thanh 3"],
-      ["桥", "kiều", "thanh 1 (ngang + k)", "qiáo", "Gốc phụ âm đục; HV giữ thanh ngang bất thường"],
-      ["荣", "vinh", "w / y", "róng", "Phụ âm r bất thường"],
-      ["话", "thoại", "t / sh…", "huà", "电话 diànhuà"],
-      ["者", "giả", "j", "zhě", "记者 jìzhě"],
-      ["企, 巧, 确", "xí, xảo, xác", "ch / sh", "qǐ, qiǎo, què", "企业, 技巧, 确定"],
-      ["复, 续, 寂", "phục, tục, tịch", "thanh 2 (nặng + -c, không vang)", "fù, xù, jì", "Đều thanh 4"],
-      ["六", "lục", "vần -u", "liù", "Thanh đúng quy luật, vần bất thường"],
-      ["鸟", "điểu", "d", "niǎo", "–"],
-      ["你", "nhĩ", "r", "nǐ", "–"]
-    ]},
-    {"k": "grammar", "h": "Bài mẫu: đoán pinyin từ Hán Việt từng bước", "html": "<p>Quy trình 3 bước cho mỗi chữ: <b>phụ âm đầu → vần → thanh</b>. Cho học viên làm theo nhóm rồi nghe kiểm tra.</p>", "table": [
-      ["Từ", "Hán Việt", "Suy luận", "Pinyin đúng"],
-      ["城市", "thành thị", "th + huyền → ch, -anh → -eng, huyền → 2 | th → sh, -i, nặng → 4", "chéngshì"],
-      ["经济", "kinh tế", "k + vần i → j, -inh → -ing, ngang → 1 | t + i → j, -ê → -i, sắc → 4", "jīngjì"],
-      ["发展", "phát triển", "ph → f, -at → -a, sắc + -t → không đoán được (thực tế 1) | tr → zh, -iên → -an, hỏi → 3", "fāzhǎn"],
-      ["历史", "lịch sử", "l, -ich → -i, nặng + -ch, l vang → 4 | s → sh, -ư → -i đặc biệt, hỏi → 3", "lìshǐ"],
-      ["文化", "văn hoá", "v → w, -ăn → -en, ngang + v vang → 2 | h, -oa → -ua, sắc → 4", "wénhuà"],
-      ["学习", "học tập", "h + ü → x, -oc → -üe, nặng + -c, không vang → 2 | t → x, -âp → -i, nặng + -p → 2", "xuéxí"],
-      ["电话", "điện thoại", "đ, -iên → -ian, nặng → 4 | “thoại” là ngoại lệ", "diànhuà"],
-      ["朋友", "bằng hữu", "b + huyền → p, -ăng → -eng, → 2 | h → y (nhóm 有), ngã + âm vang → 3", "péngyou (gốc yǒu, khẩu ngữ đọc nhẹ)"]
-    ]},
-    {"k": "text", "h": "Đưa quy luật vào lớp học", "html": "<ol><li><b>HSK 1–2:</b> chỉ giới thiệu 3 quy luật “dễ ăn”: huyền → 2; -m/-n → -n, -ng/-nh → -ng; tr → zh/ch.</li><li><b>HSK 3:</b> bảng thanh điệu đầy đủ; mỗi bài cho học viên tự đoán pinyin 5 từ mới có HV quen thuộc trước khi nghe.</li><li><b>HSK 4 trở lên:</b> bảng phụ âm đầu và vần; học viên tự lập “sổ ngoại lệ”.</li></ol><h4>Trò chơi “Thám tử pinyin”</h4><p>Giáo viên đưa 10 từ (chữ Hán + HV). Các nhóm đoán pinyin; mỗi phần đúng (phụ âm / vần / thanh) được 1 điểm, tối đa 3 điểm mỗi chữ. Sau đó nghe giọng mẫu để chấm. Nhóm nào phát hiện ngoại lệ và giải thích được được thưởng thêm.</p><h4>Lưu ý</h4><ul><li>Quy luật mạnh nhất: thanh huyền/hỏi/sắc/nặng, âm cuối mũi, tr/ch/gi/nh.</li><li>Yếu nhất: vần của chữ có âm tắc cuối; thanh của chữ “sắc + -p/-t/-c”.</li><li>Đừng biến giờ học thành giờ ngữ âm lịch sử: mỗi lần chỉ 5–10 phút, luôn kết thúc bằng nghe – nói thật.</li></ul>"}
-  ],
-  "exercises": [
-    {"t": "mc", "q": "Chữ có âm Hán Việt thanh huyền thường có pinyin thanh mấy?", "o": ["Thanh 1", "Thanh 2", "Thanh 4"], "a": 1, "e": "Huyền → thanh 2: 同 tóng, 情 qíng, 茶 chá."},
-    {"t": "mc", "q": "城 (thành) – đoán pinyin:", "o": ["chéng", "shēng", "zhěng"], "a": 0, "e": "th + huyền → ch (bật hơi), -anh → -eng, huyền → thanh 2: chéng."},
-    {"t": "mc", "q": "心 (tâm) có âm cuối pinyin là:", "o": ["-n: xīn", "-ng: xīng", "-m: xīm"], "a": 0, "e": "HV -m → pinyin -n (tiếng phổ thông không có -m)."},
-    {"t": "mc", "q": "力 (lực: nặng + -c, phụ âm l vang) có thanh pinyin:", "o": ["Thanh 2", "Thanh 3", "Thanh 4"], "a": 2, "e": "Nặng + âm tắc cuối + phụ âm vang → thanh 4: lì."},
-    {"t": "mc", "q": "学 (học: nặng + -c, phụ âm h không vang) có thanh pinyin:", "o": ["Thanh 2", "Thanh 4", "Thanh 1"], "a": 0, "e": "Nặng + âm tắc cuối + phụ âm không vang → thanh 2: xué."},
-    {"t": "mc", "q": "Chữ có âm Hán Việt bắt đầu bằng “tr” thường có thanh mẫu pinyin:", "o": ["j / q", "zh / ch", "z / c"], "a": 1, "e": "tr → zh (thanh huyền → ch): 中 zhōng, 茶 chá."},
-    {"t": "mc", "q": "Chữ nào là NGOẠI LỆ của quy luật thanh điệu?", "o": ["请 thỉnh – qǐng", "猫 miêu – māo", "房 phòng – fáng"], "a": 1, "e": "Ngang + phụ âm vang m → dự đoán thanh 2, nhưng 猫 đọc māo (thanh 1)."},
-    {"t": "mc", "q": "中国 (Trung Quốc) – pinyin đúng là:", "o": ["Zhōngguó", "Chóngguó", "Zhōngguǒ"], "a": 0, "e": "trung: tr + ngang → zh, thanh 1; quốc: sắc + -c → không đoán được, thực tế guó."},
-    {"t": "fill", "q": "Chữ Hán Việt thanh hỏi thường có pinyin thanh ___ (điền số)", "a": "3", "alt": ["ba", "thanh 3"], "e": "Hỏi → thanh 3: 好 hǎo, 小 xiǎo, 口 kǒu."},
-    {"t": "listen", "say": "情", "lang": "zh-CN", "q": "Nghe và chọn chữ (gợi ý: thanh 2 ↔ HV huyền):", "o": ["情 tình", "请 thỉnh", "清 thanh"], "a": 0, "e": "Bạn nghe qíng (thanh 2) → chữ HV thanh huyền: 情 tình."},
-    {"t": "listen", "say": "放", "lang": "zh-CN", "q": "Nghe và chọn chữ:", "o": ["放 phóng", "房 phòng", "访 phỏng"], "a": 0, "e": "fàng thanh 4 ↔ HV sắc: 放 phóng. 房 fáng (huyền → 2), 访 fǎng (hỏi → 3)."},
-    {"t": "match", "q": "Nối âm đầu Hán Việt với thanh mẫu pinyin thường gặp:", "pairs": [["tr", "zh / ch"], ["gi", "j"], ["nh", "r"], ["v", "w"], ["ph", "f"]]}
-  ]
+ "no": 3,
+ "for": "ref",
+ "title": "Quy luật tương ứng âm Hán Việt ↔ pinyin",
+ "sub": "汉越音与普通话的对应规律 · Hàn-Yuè yīn yǔ pǔtōnghuà de duìyìng guīlǜ",
+ "goals": [
+  "Từ âm Hán Việt đoán được phụ âm đầu, vần và thanh điệu pinyin với độ chính xác cao",
+  "Dùng Hán Việt để phân biệt -n/-ng, z c s – zh ch sh – j q x",
+  "Hiểu vì sao âm tắc cuối -p/-t/-c biến mất và thanh của chúng phân bố thế nào",
+  "Biết các ngoại lệ thường gặp và cách đưa quy luật vào bài dạy"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Vì sao có quy luật? Dùng thế nào cho đúng?",
+   "html": "<p>Âm Hán Việt hình thành từ cách đọc chữ Hán của tiếng Hán trung cổ (khoảng thời Đường, thế kỷ 8–10) được người Việt tiếp nhận rồi “Việt hoá”. Tiếng phổ thông ngày nay cũng phát triển từ <b>cùng nguồn</b> đó, chỉ là đi theo con đường khác. Vì vậy giữa hai bên có <b>tương ứng hệ thống</b>, giống như anh em họ nhìn mặt là đoán được họ hàng.</p><ul><li><b>Độ tin cậy:</b> quy luật là <i>xu hướng mạnh</i>, không phải tuyệt đối. Thanh điệu, âm cuối mũi (-n/-ng), tr → zh/ch đúng rất cao; vần của chữ có âm tắc cuối và thanh của chữ “sắc + -p/-t/-c” khó đoán.</li><li><b>Cách dùng:</b> <i>đoán</i> pinyin từ Hán Việt → <i>nghe/tra</i> để kiểm tra → <i>ghi lại</i> ngoại lệ. Sau vài trăm từ, học viên sẽ có “cảm giác” rất nhanh.</li><li><b>Không dùng khi đang nói:</b> phản xạ nói phải đến từ tai và miệng; quy luật chỉ là công cụ ghi nhớ và tự kiểm tra.</li></ul><p>Thuật ngữ trong bài: <b>phụ âm vang</b> (HV) = m, n, nh, ng/ngh, l, v, d. <b>Phụ âm không vang</b> = b, đ, t, th, tr, ch, s, x, gi, c/k, kh, qu, h, ph và trường hợp mở đầu bằng nguyên âm.</p>"
+  },
+  {
+   "k": "grammar",
+   "h": "Bảng tổng quát: phụ âm đầu Hán Việt → thanh mẫu pinyin",
+   "html": "<p>Đọc theo hàng: thấy âm đầu Hán Việt ở cột 1 → pinyin thường là cột 2, theo điều kiện ở cột 3.</p>",
+   "table": [
+    [
+     "Hán Việt",
+     "Pinyin thường gặp",
+     "Điều kiện / mẹo",
+     "Ví dụ (chữ – HV – pinyin)"
+    ],
+    [
+     "b",
+     "b / p",
+     "Thanh huyền → p (bật hơi); còn lại → b",
+     "北 bắc běi, 本 bản běn; 平 bình píng, 朋 bằng péng"
+    ],
+    [
+     "ph",
+     "f / p",
+     "Phần lớn là f; một số chữ gốc bật hơi ra p",
+     "方 phương fāng, 法 pháp fǎ; 破 phá pò, 品 phẩm pǐn"
+    ],
+    [
+     "v",
+     "w / y",
+     "w khi vần không có ü; y(u) khi vần là ü",
+     "文 văn wén, 万 vạn wàn; 雨 vũ yǔ, 远 viễn yuǎn"
+    ],
+    [
+     "m",
+     "m",
+     "Gần như luôn đúng",
+     "马 mã mǎ, 美 mỹ měi, 明 minh míng"
+    ],
+    [
+     "đ",
+     "d / t",
+     "Thanh huyền → t (bật hơi); còn lại → d",
+     "东 đông dōng, 电 điện diàn; 同 đồng tóng, 头 đầu tóu"
+    ],
+    [
+     "th",
+     "t / q, c / sh / ch",
+     "Bốn nguồn: t (gốc t bật hơi); q/c (gốc ts bật hơi); sh; ch khi thanh huyền",
+     "天 thiên tiān; 清 thanh qīng, 草 thảo cǎo; 书 thư shū, 是 thị shì; 城 thành chéng"
+    ],
+    [
+     "t",
+     "z, c, s / j, q, x",
+     "Vần pinyin có i/ü → j q x; còn lại → z c s. Thanh huyền → c/q",
+     "子 tử zǐ, 四 tứ sì; 酒 tửu jiǔ, 小 tiểu xiǎo; 才 tài cái, 前 tiền qián"
+    ],
+    [
+     "n",
+     "n",
+     "Gần như luôn đúng",
+     "南 nam nán, 年 niên nián, 女 nữ nǚ"
+    ],
+    [
+     "l",
+     "l",
+     "Gần như luôn đúng",
+     "来 lai lái, 老 lão lǎo, 路 lộ lù"
+    ],
+    [
+     "tr",
+     "zh / ch",
+     "Thanh huyền → ch; còn lại → zh",
+     "中 trung zhōng, 知 tri zhī, 住 trú zhù; 茶 trà chá, 陈 trần chén"
+    ],
+    [
+     "ch",
+     "zh",
+     "Gần như luôn là zh",
+     "正 chính zhèng, 主 chủ zhǔ, 真 chân zhēn, 纸 chỉ zhǐ"
+    ],
+    [
+     "x",
+     "ch / sh",
+     "Đa số ch; một nhóm nhỏ sh",
+     "车 xa chē, 出 xuất chū, 春 xuân chūn; 社 xã shè, 蛇 xà shé"
+    ],
+    [
+     "s",
+     "sh / ch / s",
+     "Đa số sh; một số ch, s",
+     "山 sơn shān, 生 sinh shēng, 师 sư shī; 初 sơ chū, 床 sàng chuáng; 色 sắc sè, 所 sở suǒ"
+    ],
+    [
+     "gi",
+     "j (hiếm x)",
+     "Gần như luôn j",
+     "家 gia jiā, 江 giang jiāng, 教 giáo jiào, 解 giải jiě; 械 giới xiè"
+    ],
+    [
+     "d",
+     "y / m / r",
+     "Đa số y; một nhóm gốc m; vài chữ r",
+     "游 du yóu, 用 dụng yòng, 夜 dạ yè; 民 dân mín, 名 danh míng, 面 diện miàn; 容 dung róng"
+    ],
+    [
+     "nh",
+     "r / y / er / n",
+     "Đa số r",
+     "人 nhân rén, 日 nhật rì, 热 nhiệt rè; 牙 nha yá, 眼 nhãn yǎn; 二 nhị èr, 儿 nhi ér; 你 nhĩ nǐ"
+    ],
+    [
+     "c / k",
+     "g / j (q khi huyền)",
+     "Vần có i/ü → j; thanh huyền → q",
+     "高 cao gāo, 公 công gōng; 今 kim jīn, 九 cửu jiǔ; 其 kỳ qí, 求 cầu qiú"
+    ],
+    [
+     "kh",
+     "k / q (hiếm x)",
+     "Vần có i/ü → q",
+     "开 khai kāi, 口 khẩu kǒu; 去 khứ qù, 气 khí qì; 溪 khê xī"
+    ],
+    [
+     "qu",
+     "g(u) / j(u) / q(u)",
+     "Như c/k: vần ü → j, huyền → q",
+     "光 quang guāng, 国 quốc guó; 军 quân jūn, 决 quyết jué; 权 quyền quán, 群 quần qún"
+    ],
+    [
+     "h",
+     "h / x (hiếm y, w)",
+     "Vần có i/ü → x",
+     "好 hảo hǎo, 红 hồng hóng; 下 hạ xià, 学 học xué, 香 hương xiāng; 有 hữu yǒu, 完 hoàn wán"
+    ],
+    [
+     "ng / ngh",
+     "không thanh mẫu (w-, y-) / n",
+     "Đa số mất phụ âm đầu",
+     "我 ngã wǒ, 五 ngũ wǔ, 外 ngoại wài; 语 ngữ yǔ, 月 nguyệt yuè, 义 nghĩa yì; 牛 ngưu niú"
+    ],
+    [
+     "Nguyên âm đầu",
+     "không thanh mẫu",
+     "Viết với y-, w- hoặc a/o/e",
+     "安 an ān, 爱 ái ài, 音 âm yīn, 英 anh yīng, 温 ôn wēn"
+    ]
+   ],
+   "tips": [
+    "Ngược lại cũng đúng: thấy pinyin <b>zh/ch</b> thì HV gần như chắc chắn bắt đầu bằng tr, ch, th, x hoặc s; thấy <b>r</b> thì HV thường là nh (hoặc d)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Hai “dòng họ” sinh ra j q x",
+   "html": "<p>Âm j q x của tiếng phổ thông sinh ra từ <b>hai dòng âm cổ</b> bị “mặt lưỡi hoá” trước i/ü: dòng gốc lưỡi (HV: c/k, kh, gi, h, qu) và dòng đầu lưỡi (HV: t, th). Tiếng phổ thông nhập làm một, nhưng <b>Hán Việt vẫn giữ phân biệt</b> → nhờ HV mà nhớ được nhiều chữ đồng âm.</p>",
+   "table": [
+    [
+     "Dòng âm (HV)",
+     "Trước vần không có i/ü",
+     "Trước vần có i/ü"
+    ],
+    [
+     "c/k, gi, qu",
+     "g: 高 cao gāo, 公 công gōng",
+     "j: 家 gia jiā, 今 kim jīn, 军 quân jūn"
+    ],
+    [
+     "kh",
+     "k: 开 khai kāi, 口 khẩu kǒu",
+     "q: 去 khứ qù, 气 khí qì"
+    ],
+    [
+     "h",
+     "h: 好 hảo hǎo, 花 hoa huā",
+     "x: 下 hạ xià, 学 học xué"
+    ],
+    [
+     "t",
+     "z / s: 早 tảo zǎo, 四 tứ sì",
+     "j / x: 酒 tửu jiǔ, 小 tiểu xiǎo"
+    ],
+    [
+     "th (gốc ts bật hơi)",
+     "c: 草 thảo cǎo, 村 thôn cūn",
+     "q: 清 thanh qīng, 七 thất qī"
+    ],
+    [
+     "t + thanh huyền",
+     "c: 才 tài cái, 存 tồn cún",
+     "q: 前 tiền qián, 情 tình qíng"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "九 / 酒",
+     "py": "jiǔ / jiǔ",
+     "vi": "cửu (chín) / tửu (rượu): pinyin giống hệt, HV khác"
+    },
+    {
+     "t": "京 / 精",
+     "py": "jīng / jīng",
+     "vi": "kinh (kinh đô) / tinh (tinh thần)"
+    },
+    {
+     "t": "希 / 西",
+     "py": "xī / xī",
+     "vi": "hy (hy vọng) / tây (phía tây)"
+    }
+   ],
+   "tips": [
+    "Từ đây suy ra: chữ có pinyin j q x thì HV bắt đầu bằng c/k, kh, gi, h, qu hoặc t, th – <b>không bao giờ</b> là b, đ, m, n, l."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Vần Hán Việt → vần pinyin",
+   "html": "<p>Bảng tra theo vần Hán Việt. Một vần HV có thể ứng với vài vần pinyin; thường phân biệt được nhờ phụ âm đầu (ví dụ sau zh ch sh r thì không có i).</p>",
+   "table": [
+    [
+     "Vần HV",
+     "Vần pinyin thường gặp",
+     "Ví dụ"
+    ],
+    [
+     "-a",
+     "-a, -ia, -e, -uo, -ie",
+     "马 mã mǎ, 家 gia jiā, 歌 ca gē, 多 đa duō, 夜 dạ yè, 写 tả xiě"
+    ],
+    [
+     "-oa, qua",
+     "-ua, -uo (đôi khi -e)",
+     "花 hoa huā, 化 hóa huà, 火 hỏa huǒ, 过 quá guò, 果 quả guǒ, 课 khóa kè"
+    ],
+    [
+     "-ai",
+     "-ai (sau gi, nh: -ie)",
+     "来 lai lái, 太 thái tài, 海 hải hǎi; 解 giải jiě, 街 nhai jiē"
+    ],
+    [
+     "-ao",
+     "-ao, -iao",
+     "高 cao gāo, 道 đạo dào, 老 lão lǎo; 交 giao jiāo, 教 giáo jiào"
+    ],
+    [
+     "-iêu",
+     "-iao (sau zh ch sh r: -ao)",
+     "小 tiểu xiǎo, 笑 tiếu xiào, 条 điều tiáo, 表 biểu biǎo; 少 thiểu shǎo, 照 chiếu zhào"
+    ],
+    [
+     "-âu",
+     "-ou (sau j q x: -iu)",
+     "头 đầu tóu, 楼 lâu lóu, 后 hậu hòu, 走 tẩu zǒu; 求 cầu qiú"
+    ],
+    [
+     "-ưu, -u (thu, chu)",
+     "-iu, -ou",
+     "流 lưu liú, 九 cửu jiǔ, 休 hưu xiū, 秋 thu qiū; 收 thu shōu, 周 chu zhōu"
+    ],
+    [
+     "-i / -y",
+     "-i, -ei, -ui, -i đặc biệt",
+     "李 lý lǐ, 喜 hỉ xǐ, 记 ký jì; 美 mỹ měi, 飞 phi fēi; 鬼 quỷ guǐ; 之 chi zhī, 诗 thi shī"
+    ],
+    [
+     "-ư",
+     "-i đặc biệt, -u, -ü",
+     "思 tư sī, 字 tự zì, 师 sư shī; 书 thư shū, 除 trừ chú; 鱼 ngư yú, 去 khứ qù, 女 nữ nǚ"
+    ],
+    [
+     "-ơ, -ơi",
+     "-i, -i đặc biệt",
+     "机 cơ jī, 基 cơ jī; 时 thời shí"
+    ],
+    [
+     "-ô / -u (bộ, cổ, phu)",
+     "-u",
+     "古 cổ gǔ, 步 bộ bù, 路 lộ lù, 图 đồ tú, 夫 phu fū"
+    ],
+    [
+     "-ê, -ây",
+     "-i (sau zh ch sh: -i đặc biệt)",
+     "题 đề tí, 体 thể tǐ, 鸡 kê jī, 米 mễ mǐ, 西 tây xī; 世 thế shì, 制 chế zhì"
+    ],
+    [
+     "-ôi, -ơi, -ui",
+     "-ui, -ei",
+     "对 đối duì, 回 hồi huí, 会 hội huì, 最 tối zuì; 贝 bối bèi, 杯 bôi bēi, 每 mỗi měi"
+    ],
+    [
+     "-ương",
+     "-ang, -iang",
+     "长 trường cháng, 上 thượng shàng, 方 phương fāng, 王 vương wáng; 想 tưởng xiǎng, 两 lưỡng liǎng"
+    ],
+    [
+     "-ang, -oang",
+     "-ang, -iang, -uang",
+     "帮 bang bāng, 郎 lang láng; 江 giang jiāng, 讲 giảng jiǎng; 光 quang guāng, 黄 hoàng huáng, 装 trang zhuāng"
+    ],
+    [
+     "-inh, -anh, -ênh",
+     "-ing (sau b p m d t n l j q x y), -eng (sau zh ch sh r z c s g k h)",
+     "明 minh míng, 京 kinh jīng, 平 bình píng, 命 mệnh mìng; 生 sinh shēng, 城 thành chéng, 正 chính zhèng, 更 canh gèng"
+    ],
+    [
+     "-ăng, -âng, -ưng",
+     "-eng, -ing",
+     "能 năng néng, 灯 đăng dēng, 朋 bằng péng, 胜 thắng shèng, 证 chứng zhèng; 兴 hưng xīng, 应 ứng yīng, 冰 băng bīng"
+    ],
+    [
+     "-ông, -ung, -ong",
+     "-ong (sau f, m: -eng; sau j q x: -iong)",
+     "东 đông dōng, 中 trung zhōng, 龙 long lóng; 风 phong fēng, 梦 mộng mèng; 穷 cùng qióng, 雄 hùng xióng"
+    ],
+    [
+     "-an, -ơn",
+     "-an (đôi khi -en, -ian)",
+     "安 an ān, 山 sơn shān, 万 vạn wàn, 汉 hán hàn; 本 bản běn; 间 gian jiān"
+    ],
+    [
+     "-oan",
+     "-uan (sau j q x y: -üan viết -uan)",
+     "关 quan guān, 欢 hoan huān, 断 đoạn duàn, 算 toán suàn; 全 toàn quán"
+    ],
+    [
+     "-iên, -yên",
+     "-ian (sau zh ch sh r: -an)",
+     "天 thiên tiān, 年 niên nián, 电 điện diàn, 见 kiến jiàn; 战 chiến zhàn, 然 nhiên rán, 展 triển zhǎn"
+    ],
+    [
+     "-uyên",
+     "-üan (viết -uan), -uan",
+     "元 nguyên yuán, 选 tuyển xuǎn, 权 quyền quán; 传 truyền chu án, 专 chuyên zhuān, 川 xuyên chuān"
+    ],
+    [
+     "-ân, -ăn, -ôn",
+     "-en, -in, -un",
+     "人 nhân rén, 真 chân zhēn, 根 căn gēn, 门 môn mén; 新 tân xīn, 民 dân mín, 近 cận jìn; 村 thôn cūn, 孙 tôn sūn"
+    ],
+    [
+     "-uân",
+     "-un, -ün (viết -un sau j q x y)",
+     "春 xuân chūn, 准 chuẩn zhǔn, 顺 thuận shùn; 军 quân jūn, 群 quần qún, 训 huấn xùn"
+    ],
+    [
+     "-am, -âm, -ăm, -iêm, -im",
+     "-an, -en, -in, -ian (không bao giờ -ng)",
+     "三 tam sān, 南 nam nán, 感 cảm gǎn, 深 thâm shēn, 心 tâm xīn, 金 kim jīn, 点 điểm diǎn, 严 nghiêm yán"
+    ]
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Âm cuối mũi: “phao cứu sinh” để phân biệt -n / -ng",
+   "html": "<p>Tiếng Hán trung cổ có ba âm cuối mũi -m, -n, -ng. Hán Việt giữ đủ cả ba (thêm -nh là biến thể của -ng). Tiếng phổ thông nhập -m vào -n. Kết quả:</p><ul><li>HV kết thúc <b>-m</b> hoặc <b>-n</b> → pinyin <b>-n</b>.</li><li>HV kết thúc <b>-ng</b> hoặc <b>-nh</b> → pinyin <b>-ng</b>.</li></ul><p>Quy luật này đúng với tuyệt đại đa số chữ thông dụng (ngoại lệ hiếm, ví dụ 聘 sính – pìn). Học viên miền Nam hay lẫn -n/-ng nên dùng HV để tự kiểm tra.</p>",
+   "table": [
+    [
+     "Âm cuối HV",
+     "Âm cuối pinyin",
+     "Ví dụ"
+    ],
+    [
+     "-m",
+     "-n",
+     "三 tam sān, 心 tâm xīn, 南 nam nán, 金 kim jīn, 感 cảm gǎn, 点 điểm diǎn"
+    ],
+    [
+     "-n",
+     "-n",
+     "山 sơn shān, 人 nhân rén, 天 thiên tiān, 文 văn wén, 安 an ān, 本 bản běn"
+    ],
+    [
+     "-ng",
+     "-ng",
+     "东 đông dōng, 方 phương fāng, 上 thượng shàng, 能 năng néng, 中 trung zhōng"
+    ],
+    [
+     "-nh",
+     "-ng",
+     "明 minh míng, 生 sinh shēng, 京 kinh jīng, 城 thành chéng, 英 anh yīng"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "金 / 京",
+     "py": "jīn / jīng",
+     "vi": "kim (vàng) / kinh (kinh đô)"
+    },
+    {
+     "t": "陈 / 城",
+     "py": "chén / chéng",
+     "vi": "trần (họ Trần) / thành (thành phố)"
+    },
+    {
+     "t": "心 / 星",
+     "py": "xīn / xīng",
+     "vi": "tâm (tim) / tinh (ngôi sao)"
+    },
+    {
+     "t": "人 / 仍",
+     "py": "rén / réng",
+     "vi": "nhân (người) / nhưng (vẫn)"
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Âm cuối tắc -p, -t, -c, -ch (nhập thanh) → âm tiết mở",
+   "html": "<p>Tiếng Hán trung cổ có loại âm tiết kết thúc bằng -p, -t, -k gọi là <b>nhập thanh</b>. Hán Việt giữ nguyên (-p, -t, -c/-ch); tiếng phổ thông <b>mất hẳn</b> các âm cuối này và chia các chữ đó vào 4 thanh hiện đại. Vì vậy:</p><ul><li>Chữ có HV tận cùng -p/-t/-c/-ch → pinyin <b>chắc chắn không có -n/-ng</b>.</li><li>Thanh điệu của nhóm này tra ở bảng thanh điệu phía dưới.</li></ul>",
+   "table": [
+    [
+     "HV kết thúc",
+     "Vần pinyin thường gặp",
+     "Ví dụ"
+    ],
+    [
+     "-p",
+     "-a, -e, -i, -ie, -u",
+     "法 pháp fǎ, 答 đáp dá, 合 hợp hé, 十 thập shí, 立 lập lì, 接 tiếp jiē, 业 nghiệp yè, 入 nhập rù"
+    ],
+    [
+     "-t",
+     "-a, -e, -i, -u, -ie, -üe, -uo",
+     "八 bát bā, 发 phát fā, 渴 khát kě, 一 nhất yī, 七 thất qī, 出 xuất chū, 节 tiết jié, 铁 thiết tiě, 月 nguyệt yuè, 雪 tuyết xuě, 活 hoạt huó"
+    ],
+    [
+     "-c (-ac, -ăc, -ươc, -oc, -uc, -ưc…)",
+     "-e, -uo, -ao, -ei, -i, -u, -ü, -üe, -iao",
+     "各 các gè, 落 lạc luò, 薄 bạc báo, 北 bắc běi, 力 lực lì, 读 độc dú, 绿 lục lǜ, 国 quốc guó, 学 học xué, 药 dược yào"
+    ],
+    [
+     "-ch (-ach, -ich)",
+     "-ai, -e, -i, -i đặc biệt",
+     "白 bạch bái, 百 bách bǎi, 客 khách kè, 格 cách gé, 历 lịch lì, 益 ích yì, 石 thạch shí, 尺 xích chǐ"
+    ]
+   ],
+   "tips": [
+    "Học viên Việt hay “đóng” âm cuối theo thói quen HV (学 thành “xuéc”). Nhắc: tiếng phổ thông không có âm tắc cuối."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Thanh điệu Hán Việt → thanh điệu pinyin (quy luật quan trọng nhất)",
+   "html": "<p>Cả 6 thanh Hán Việt và 4 thanh tiếng phổ thông đều bắt nguồn từ 4 thanh cổ (bình – thượng – khứ – nhập) chia theo phụ âm đầu “trong” (vô thanh) hay “đục” (hữu thanh). Nhờ vậy ta suy được:</p>",
+   "table": [
+    [
+     "Thanh HV",
+     "Điều kiện",
+     "Thanh pinyin",
+     "Độ tin cậy",
+     "Ví dụ"
+    ],
+    [
+     "Ngang",
+     "Phụ âm đầu không vang (b, đ, t, th, tr, ch, s, x, gi, c/k, kh, qu, h, ph) hoặc mở đầu bằng nguyên âm",
+     "Thanh 1",
+     "Cao",
+     "东 đông dōng, 天 thiên tiān, 书 thư shū, 家 gia jiā, 安 an ān, 花 hoa huā"
+    ],
+    [
+     "Ngang",
+     "Phụ âm đầu vang: m, n, nh, ng/ngh, l, v, d",
+     "Thanh 2",
+     "Cao",
+     "人 nhân rén, 来 lai lái, 年 niên nián, 明 minh míng, 文 văn wén, 游 du yóu"
+    ],
+    [
+     "Huyền",
+     "Mọi phụ âm; nếu là âm tắc thì pinyin bật hơi (p, t, q, ch, c)",
+     "Thanh 2",
+     "Rất cao",
+     "同 đồng tóng, 平 bình píng, 茶 trà chá, 情 tình qíng, 回 hồi huí, 才 tài cái"
+    ],
+    [
+     "Hỏi",
+     "–",
+     "Thanh 3",
+     "Cao",
+     "好 hảo hǎo, 小 tiểu xiǎo, 手 thủ shǒu, 口 khẩu kǒu, 九 cửu jiǔ"
+    ],
+    [
+     "Ngã",
+     "Phụ âm đầu vang",
+     "Thanh 3",
+     "Cao",
+     "马 mã mǎ, 五 ngũ wǔ, 老 lão lǎo, 女 nữ nǚ, 雨 vũ yǔ, 也 dã yě"
+    ],
+    [
+     "Ngã",
+     "Phụ âm đầu không vang",
+     "Thường thanh 4",
+     "Khá",
+     "静 tĩnh jìng, 士 sĩ shì, 技 kỹ jì, 社 xã shè, 待 đãi dài, 杜 Đỗ dù"
+    ],
+    [
+     "Sắc (không có -p/-t/-c/-ch)",
+     "–",
+     "Thanh 4",
+     "Cao",
+     "去 khứ qù, 爱 ái ài, 见 kiến jiàn, 四 tứ sì, 对 đối duì"
+    ],
+    [
+     "Nặng (không có -p/-t/-c/-ch)",
+     "–",
+     "Thanh 4",
+     "Rất cao",
+     "大 đại dà, 地 địa dì, 用 dụng yòng, 外 ngoại wài, 是 thị shì"
+    ],
+    [
+     "Sắc + -p/-t/-c/-ch",
+     "–",
+     "Rải cả 4 thanh – phải học thuộc",
+     "Không đoán được",
+     "一 nhất yī, 国 quốc guó, 北 bắc běi, 色 sắc sè, 八 bát bā, 百 bách bǎi"
+    ],
+    [
+     "Nặng + -p/-t/-c/-ch",
+     "Phụ âm đầu không vang",
+     "Thanh 2",
+     "Cao",
+     "白 bạch bái, 学 học xué, 十 thập shí, 读 độc dú, 实 thực shí, 杂 tạp zá"
+    ],
+    [
+     "Nặng + -p/-t/-c/-ch",
+     "Phụ âm đầu vang",
+     "Thanh 4",
+     "Rất cao",
+     "六 lục liù, 力 lực lì, 日 nhật rì, 月 nguyệt yuè, 木 mộc mù, 热 nhiệt rè"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "同学",
+     "py": "tóngxué",
+     "vi": "đồng học: đồng (huyền → 2), học (nặng + -c, h không vang → 2)"
+    },
+    {
+     "t": "老师",
+     "py": "lǎoshī",
+     "vi": "lão sư: lão (ngã, l vang → 3), sư (ngang, s không vang → 1)"
+    },
+    {
+     "t": "日月",
+     "py": "rì yuè",
+     "vi": "nhật nguyệt: cả hai nặng + -t, phụ âm vang → 4"
+    }
+   ],
+   "tips": [
+    "Câu thần chú: <b>huyền → 2; hỏi → 3; sắc, nặng → 4; ngang → 1 (phụ âm vang → 2); ngã → 3 (phụ âm không vang → 4)</b>. Có -p/-t/-c: <b>nặng → 2 hoặc 4</b> (theo phụ âm), <b>sắc → phải học</b>.",
+    "Vì sao HV ngã có hai hướng? Nhóm “ngã + phụ âm không vang” gốc là thanh thượng có phụ âm đục; tiếng phổ thông chuyển nhóm này sang thanh 4 (hiện tượng “trọc thượng biến khứ”)."
+   ]
+  },
+  {
+   "k": "sounds",
+   "h": "Nghe kiểm chứng quy luật thanh điệu",
+   "html": "<p>Nghe từng nhóm và tự xác nhận: cùng một kiểu thanh HV cho ra cùng một thanh pinyin.</p>",
+   "items": [
+    {
+     "sym": "HV huyền → thanh 2",
+     "ex": [
+      "同",
+      "平",
+      "茶",
+      "回",
+      "情"
+     ],
+     "vi": "đồng tóng, bình píng, trà chá, hồi huí, tình qíng."
+    },
+    {
+     "sym": "HV hỏi / ngã → thanh 3",
+     "ex": [
+      "好",
+      "小",
+      "马",
+      "五",
+      "老"
+     ],
+     "vi": "hảo hǎo, tiểu xiǎo, mã mǎ, ngũ wǔ, lão lǎo."
+    },
+    {
+     "sym": "HV sắc / nặng → thanh 4",
+     "ex": [
+      "去",
+      "爱",
+      "大",
+      "用",
+      "外"
+     ],
+     "vi": "khứ qù, ái ài, đại dà, dụng yòng, ngoại wài."
+    },
+    {
+     "sym": "Nặng + -p/-t/-c, phụ âm không vang → thanh 2",
+     "ex": [
+      "白",
+      "学",
+      "十",
+      "读",
+      "杂"
+     ],
+     "vi": "bạch bái, học xué, thập shí, độc dú, tạp zá."
+    },
+    {
+     "sym": "Nặng + -p/-t/-c, phụ âm vang → thanh 4",
+     "ex": [
+      "六",
+      "力",
+      "日",
+      "月",
+      "木"
+     ],
+     "vi": "lục liù, lực lì, nhật rì, nguyệt yuè, mộc mù."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Minh hoạ: một gia đình chữ – Hán Việt đoán đúng cả 4 thanh",
+   "html": "<p>Các chữ hình thanh cùng thanh phù đọc gần giống nhau; điểm khác nhau về thanh điệu được Hán Việt “mã hoá” rất đều. Đây là bài giảng mẫu rất ấn tượng cho học viên HSK 2–3.</p>",
+   "table": [
+    [
+     "Chữ",
+     "Hán Việt",
+     "Thanh HV",
+     "Dự đoán",
+     "Pinyin thực tế"
+    ],
+    [
+     "方",
+     "phương",
+     "ngang (ph không vang)",
+     "thanh 1",
+     "fāng ✓"
+    ],
+    [
+     "房",
+     "phòng",
+     "huyền",
+     "thanh 2",
+     "fáng ✓"
+    ],
+    [
+     "防",
+     "phòng",
+     "huyền",
+     "thanh 2",
+     "fáng ✓"
+    ],
+    [
+     "访",
+     "phỏng",
+     "hỏi",
+     "thanh 3",
+     "fǎng ✓"
+    ],
+    [
+     "放",
+     "phóng",
+     "sắc",
+     "thanh 4",
+     "fàng ✓"
+    ],
+    [
+     "清",
+     "thanh",
+     "ngang",
+     "thanh 1",
+     "qīng ✓"
+    ],
+    [
+     "情",
+     "tình",
+     "huyền",
+     "thanh 2",
+     "qíng ✓"
+    ],
+    [
+     "请",
+     "thỉnh",
+     "hỏi",
+     "thanh 3",
+     "qǐng ✓"
+    ],
+    [
+     "静",
+     "tĩnh",
+     "ngã (t không vang)",
+     "thanh 4",
+     "jìng ✓"
+    ],
+    [
+     "工",
+     "công",
+     "ngang",
+     "thanh 1",
+     "gōng ✓"
+    ],
+    [
+     "红",
+     "hồng",
+     "huyền",
+     "thanh 2",
+     "hóng ✓"
+    ],
+    [
+     "项",
+     "hạng",
+     "nặng",
+     "thanh 4",
+     "xiàng ✓"
+    ]
+   ],
+   "tips": [
+    "Dạy theo gia đình chữ giúp học viên vừa nhớ mặt chữ (cùng thanh phù), vừa thấy quy luật thanh – hai việc trong một."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngoại lệ hay gặp (ghi vào sổ riêng)",
+   "html": "<p>Mọi quy luật đều có ngoại lệ. Dưới đây là những chữ thông dụng hay làm học viên đoán sai.</p>",
+   "table": [
+    [
+     "Chữ",
+     "Hán Việt",
+     "Quy luật dự đoán",
+     "Thực tế",
+     "Ghi chú"
+    ],
+    [
+     "妈",
+     "ma",
+     "thanh 2 (ngang + m)",
+     "mā",
+     "Chữ khẩu ngữ, hình thành muộn"
+    ],
+    [
+     "猫",
+     "miêu",
+     "thanh 2",
+     "māo",
+     "–"
+    ],
+    [
+     "危",
+     "nguy",
+     "thanh 2",
+     "wēi",
+     "危险 wēixiǎn"
+    ],
+    [
+     "微",
+     "vi",
+     "thanh 2",
+     "wēi",
+     "微笑 wēixiào"
+    ],
+    [
+     "期",
+     "kỳ",
+     "thanh 2",
+     "qī",
+     "日期 rìqī (Đài Loan đọc qí)"
+    ],
+    [
+     "听",
+     "thính",
+     "thanh 4",
+     "tīng",
+     "–"
+    ],
+    [
+     "拉",
+     "lạp",
+     "thanh 4 (nặng + -p, l vang)",
+     "lā",
+     "–"
+    ],
+    [
+     "理, 李, 里",
+     "lý",
+     "thanh 4 (sắc)",
+     "lǐ",
+     "Nhóm “lý” đều thanh 3"
+    ],
+    [
+     "桥",
+     "kiều",
+     "thanh 1 (ngang + k)",
+     "qiáo",
+     "Gốc phụ âm đục; HV giữ thanh ngang bất thường"
+    ],
+    [
+     "荣",
+     "vinh",
+     "w / y",
+     "róng",
+     "Phụ âm r bất thường"
+    ],
+    [
+     "话",
+     "thoại",
+     "t / sh…",
+     "huà",
+     "电话 diànhuà"
+    ],
+    [
+     "者",
+     "giả",
+     "j",
+     "zhě",
+     "记者 jìzhě"
+    ],
+    [
+     "企, 巧, 确",
+     "xí, xảo, xác",
+     "ch / sh",
+     "qǐ, qiǎo, què",
+     "企业, 技巧, 确定"
+    ],
+    [
+     "复, 续, 寂",
+     "phục, tục, tịch",
+     "thanh 2 (nặng + -c, không vang)",
+     "fù, xù, jì",
+     "Đều thanh 4"
+    ],
+    [
+     "六",
+     "lục",
+     "vần -u",
+     "liù",
+     "Thanh đúng quy luật, vần bất thường"
+    ],
+    [
+     "鸟",
+     "điểu",
+     "d",
+     "niǎo",
+     "–"
+    ],
+    [
+     "你",
+     "nhĩ",
+     "r",
+     "nǐ",
+     "–"
+    ]
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Bài mẫu: đoán pinyin từ Hán Việt từng bước",
+   "html": "<p>Quy trình 3 bước cho mỗi chữ: <b>phụ âm đầu → vần → thanh</b>. Cho học viên làm theo nhóm rồi nghe kiểm tra.</p>",
+   "table": [
+    [
+     "Từ",
+     "Hán Việt",
+     "Suy luận",
+     "Pinyin đúng"
+    ],
+    [
+     "城市",
+     "thành thị",
+     "th + huyền → ch, -anh → -eng, huyền → 2 | th → sh, -i, nặng → 4",
+     "chéngshì"
+    ],
+    [
+     "经济",
+     "kinh tế",
+     "k + vần i → j, -inh → -ing, ngang → 1 | t + i → j, -ê → -i, sắc → 4",
+     "jīngjì"
+    ],
+    [
+     "发展",
+     "phát triển",
+     "ph → f, -at → -a, sắc + -t → không đoán được (thực tế 1) | tr → zh, -iên → -an, hỏi → 3",
+     "fāzhǎn"
+    ],
+    [
+     "历史",
+     "lịch sử",
+     "l, -ich → -i, nặng + -ch, l vang → 4 | s → sh, -ư → -i đặc biệt, hỏi → 3",
+     "lìshǐ"
+    ],
+    [
+     "文化",
+     "văn hoá",
+     "v → w, -ăn → -en, ngang + v vang → 2 | h, -oa → -ua, sắc → 4",
+     "wénhuà"
+    ],
+    [
+     "学习",
+     "học tập",
+     "h + ü → x, -oc → -üe, nặng + -c, không vang → 2 | t → x, -âp → -i, nặng + -p → 2",
+     "xuéxí"
+    ],
+    [
+     "电话",
+     "điện thoại",
+     "đ, -iên → -ian, nặng → 4 | “thoại” là ngoại lệ",
+     "diànhuà"
+    ],
+    [
+     "朋友",
+     "bằng hữu",
+     "b + huyền → p, -ăng → -eng, → 2 | h → y (nhóm 有), ngã + âm vang → 3",
+     "péngyou (gốc yǒu, khẩu ngữ đọc nhẹ)"
+    ]
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Đưa quy luật vào lớp học",
+   "html": "<ol><li><b>HSK 1–2:</b> chỉ giới thiệu 3 quy luật “dễ ăn”: huyền → 2; -m/-n → -n, -ng/-nh → -ng; tr → zh/ch.</li><li><b>HSK 3:</b> bảng thanh điệu đầy đủ; mỗi bài cho học viên tự đoán pinyin 5 từ mới có HV quen thuộc trước khi nghe.</li><li><b>HSK 4 trở lên:</b> bảng phụ âm đầu và vần; học viên tự lập “sổ ngoại lệ”.</li></ol><h4>Trò chơi “Thám tử pinyin”</h4><p>Giáo viên đưa 10 từ (chữ Hán + HV). Các nhóm đoán pinyin; mỗi phần đúng (phụ âm / vần / thanh) được 1 điểm, tối đa 3 điểm mỗi chữ. Sau đó nghe giọng mẫu để chấm. Nhóm nào phát hiện ngoại lệ và giải thích được được thưởng thêm.</p><h4>Lưu ý</h4><ul><li>Quy luật mạnh nhất: thanh huyền/hỏi/sắc/nặng, âm cuối mũi, tr/ch/gi/nh.</li><li>Yếu nhất: vần của chữ có âm tắc cuối; thanh của chữ “sắc + -p/-t/-c”.</li><li>Đừng biến giờ học thành giờ ngữ âm lịch sử: mỗi lần chỉ 5–10 phút, luôn kết thúc bằng nghe – nói thật.</li></ul>"
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Chữ có âm Hán Việt thanh huyền thường có pinyin thanh mấy?",
+   "o": [
+    "Thanh 1",
+    "Thanh 2",
+    "Thanh 4"
+   ],
+   "a": 1,
+   "e": "Huyền → thanh 2: 同 tóng, 情 qíng, 茶 chá."
+  },
+  {
+   "t": "mc",
+   "q": "城 (thành) – đoán pinyin:",
+   "o": [
+    "chéng",
+    "shēng",
+    "zhěng"
+   ],
+   "a": 0,
+   "e": "th + huyền → ch (bật hơi), -anh → -eng, huyền → thanh 2: chéng."
+  },
+  {
+   "t": "mc",
+   "q": "心 (tâm) có âm cuối pinyin là:",
+   "o": [
+    "-n: xīn",
+    "-ng: xīng",
+    "-m: xīm"
+   ],
+   "a": 0,
+   "e": "HV -m → pinyin -n (tiếng phổ thông không có -m)."
+  },
+  {
+   "t": "mc",
+   "q": "力 (lực: nặng + -c, phụ âm l vang) có thanh pinyin:",
+   "o": [
+    "Thanh 2",
+    "Thanh 3",
+    "Thanh 4"
+   ],
+   "a": 2,
+   "e": "Nặng + âm tắc cuối + phụ âm vang → thanh 4: lì."
+  },
+  {
+   "t": "mc",
+   "q": "学 (học: nặng + -c, phụ âm h không vang) có thanh pinyin:",
+   "o": [
+    "Thanh 1",
+    "Thanh 2",
+    "Thanh 4"
+   ],
+   "a": 1,
+   "e": "Nặng + âm tắc cuối + phụ âm không vang → thanh 2: xué."
+  },
+  {
+   "t": "mc",
+   "q": "Chữ có âm Hán Việt bắt đầu bằng “tr” thường có thanh mẫu pinyin:",
+   "o": [
+    "z / c",
+    "j / q",
+    "zh / ch"
+   ],
+   "a": 2,
+   "e": "tr → zh (thanh huyền → ch): 中 zhōng, 茶 chá."
+  },
+  {
+   "t": "mc",
+   "q": "Chữ nào là NGOẠI LỆ của quy luật thanh điệu?",
+   "o": [
+    "猫 miêu – māo",
+    "房 phòng – fáng",
+    "请 thỉnh – qǐng"
+   ],
+   "a": 0,
+   "e": "Ngang + phụ âm vang m → dự đoán thanh 2, nhưng 猫 đọc māo (thanh 1)."
+  },
+  {
+   "t": "mc",
+   "q": "中国 (Trung Quốc) – pinyin đúng là:",
+   "o": [
+    "Zhōngguó",
+    "Chóngguó",
+    "Zhōngguǒ"
+   ],
+   "a": 0,
+   "e": "trung: tr + ngang → zh, thanh 1; quốc: sắc + -c → không đoán được, thực tế guó."
+  },
+  {
+   "t": "fill",
+   "q": "Chữ Hán Việt thanh hỏi thường có pinyin thanh ___ (điền số)",
+   "a": "3",
+   "alt": [
+    "ba",
+    "thanh 3"
+   ],
+   "e": "Hỏi → thanh 3: 好 hǎo, 小 xiǎo, 口 kǒu."
+  },
+  {
+   "t": "listen",
+   "say": "情",
+   "lang": "zh-CN",
+   "q": "Nghe và chọn chữ (gợi ý: thanh 2 ↔ HV huyền):",
+   "o": [
+    "清 thanh",
+    "情 tình",
+    "请 thỉnh"
+   ],
+   "a": 1,
+   "e": "Bạn nghe qíng (thanh 2) → chữ HV thanh huyền: 情 tình."
+  },
+  {
+   "t": "listen",
+   "say": "放",
+   "lang": "zh-CN",
+   "q": "Nghe và chọn chữ:",
+   "o": [
+    "房 phòng",
+    "访 phỏng",
+    "放 phóng"
+   ],
+   "a": 2,
+   "e": "fàng thanh 4 ↔ HV sắc: 放 phóng. 房 fáng (huyền → 2), 访 fǎng (hỏi → 3)."
+  },
+  {
+   "t": "match",
+   "q": "Nối âm đầu Hán Việt với thanh mẫu pinyin thường gặp:",
+   "pairs": [
+    [
+     "tr",
+     "zh / ch"
+    ],
+    [
+     "gi",
+     "j"
+    ],
+    [
+     "nh",
+     "r"
+    ],
+    [
+     "v",
+     "w"
+    ],
+    [
+     "ph",
+     "f"
+    ]
+   ]
+  }
+ ]
 }

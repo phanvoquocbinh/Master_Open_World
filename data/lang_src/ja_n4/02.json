@@ -3,16 +3,32 @@
  "title": "Thể ない: không làm, cấm và nghĩa vụ",
  "sub": "写真を 撮らないでください。",
  "goals": [
-  "Hiểu và dùng đúng Thể ない: không làm, cấm và nghĩa vụ",
-  "Đọc/nghe phân biệt ít nhất 12 từ/cụm của tình huống",
-  "Hỏi và trả lời ba thông tin cụ thể bằng mức lịch sự phù hợp",
-  "Viết đoạn mới và tự sửa lỗi theo checklist"
+  "Phân tích cách dùng trong câu “写真を 撮らないでください。” và tạo một câu khác giữ đúng quan hệ ý.",
+  "Dùng “写真” (ảnh chụp) và “携帯電話” (điện thoại di động) đúng trong trao đổi của bài.",
+  "Nghe để trả lời câu hỏi “Theo hội thoại: Ở đây dùng điện thoại được không?”, rồi chỉ ra phần lời nói làm căn cứ.",
+  "Tự viết đoạn có ý chính “Tắt âm điện thoại” và kiểm lại sự nhất quán với văn bản đọc."
  ],
  "parts": [
   {
    "k": "text",
    "h": "Bối cảnh và cách học",
-   "html": "<p>Phân biệt cấm, phải làm và không cần làm trong bảng quy định giả của lớp.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+   "html": "<p>Phân biệt cấm, phải làm và không cần làm trong bảng quy định giả của lớp.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>写真 bắt đầu bằng sha, không shi-ya. 携帯電話 có phần けい dài thường nghe như ee và ん trước w vẫn giữ thời lượng; đọc câu cấm với rõ ないで, không nhầm thành yêu cầu khẳng định てください.</p>",
+   "items": [
+    {
+     "sym": "しゃしん・けいたいでんわ",
+     "ex": [
+      "写真",
+      "携帯電話",
+      "約束"
+     ],
+     "vi": "Nghe và đọc đối chiếu 写真 (しゃしん), 携帯電話 (けいたいでんわ), 約束 (やくそく). Dùng câu “写真を 撮らないでください。” để kiểm xem các độ dài âm còn giữ được khi nối vào phát ngôn."
+    }
+   ]
   },
   {
    "k": "words",
@@ -23,8 +39,8 @@
      "kana": "しゃしん",
      "romaji": "shashin",
      "vi": "ảnh chụp",
-     "ex": "写真を 撮らないでください。",
-     "exVi": "Xin đừng chụp ảnh."
+     "ex": "休日に海の写真を撮りました。",
+     "exVi": "Ngày nghỉ tôi đã chụp ảnh biển."
     },
     {
      "w": "携帯電話",
@@ -111,8 +127,8 @@
      "kana": "しずか",
      "romaji": "shizuka",
      "vi": "yên tĩnh",
-     "ex": "いいえ、使わないでください。静かな 場所です。",
-     "exVi": "Không, xin đừng dùng. Đây là nơi yên tĩnh."
+     "ex": "説明は静かな場所で聞きます。",
+     "exVi": "Tôi nghe giải thích ở chỗ yên tĩnh."
     }
    ]
   },
@@ -165,7 +181,7 @@
   {
    "k": "dialog",
    "h": "Nghe: Thể ない: không làm, cấm và nghĩa vụ",
-   "note": "Hai học viên của lớp giả Mây Sớm trao đổi; nghe lần đầu lấy ý, lần sau kiểm chi tiết. Không đọc romaji trong âm thanh.",
+   "note": "Trước khi nghe, dự đoán câu trả lời cho “Theo hội thoại: Ở đây dùng điện thoại được không?”. Sau đó ghi nguyên thông tin làm bạn chọn đáp án; lượt nói “いいえ、使わないでください。静かな 場所です。” là một điểm cần kiểm khi nghe lại.",
    "lang": "ja-JP",
    "lines": [
     {
@@ -219,34 +235,34 @@
    ],
    "qs": [
     {
-     "q": "Theo hội thoại: Ở đây dùng điện thoại được không?",
+     "q": "Trong phòng có được dùng điện thoại không?",
      "o": [
-      "Đúng, xin đừng chụp ảnh.",
-      "Không, ngày mai cũng được.",
-      "Không, xin đừng dùng. Đây là nơi yên tĩnh."
-     ],
-     "a": 2,
-     "e": "Câu trả lời là いいえ、使わないでください。静かな 場所です。 → Không, xin đừng dùng. Đây là nơi yên tĩnh."
-    },
-    {
-     "q": "Theo hội thoại: Cũng không được chụp ảnh phải không?",
-     "o": [
-      "Đúng, xin đừng chụp ảnh.",
-      "Không, ngày mai cũng được.",
-      "Chín giờ. Xin đừng quên giờ."
-     ],
-     "a": 0,
-     "e": "Câu trả lời là はい、写真は 撮らないでください。 → Đúng, xin đừng chụp ảnh."
-    },
-    {
-     "q": "Theo hội thoại: Bài tập có cần nộp hôm nay không?",
-     "o": [
-      "Không, xin đừng dùng. Đây là nơi yên tĩnh.",
-      "Không, ngày mai cũng được.",
-      "Chín giờ. Xin đừng quên giờ."
+      "Chỉ khi chụp ảnh",
+      "Không",
+      "Được mọi lúc"
      ],
      "a": 1,
-     "e": "Câu trả lời là いいえ、明日で 大丈夫です。 → Không, ngày mai cũng được."
+     "e": "Lượt nói “いいえ、使わないでください。静かな 場所です。” nghĩa là: Không, xin đừng dùng. Đây là nơi yên tĩnh. Nội dung này làm rõ đáp án “Không”, không phải hai cách hiểu còn lại."
+    },
+    {
+     "q": "Bài tập phải nộp hôm nay không?",
+     "o": [
+      "Không, ngày mai cũng được",
+      "Có ngay bây giờ",
+      "Không cần nộp"
+     ],
+     "a": 0,
+     "e": "Lượt nói “いいえ、明日で 大丈夫です。” nghĩa là: Không, ngày mai cũng được. Nội dung này làm rõ đáp án “Không, ngày mai cũng được”, không phải hai cách hiểu còn lại."
+    },
+    {
+     "q": "Hẹn ngày mai mấy giờ?",
+     "o": [
+      "Tám giờ rưỡi",
+      "Mười giờ",
+      "Chín giờ"
+     ],
+     "a": 2,
+     "e": "Lượt nói “九時です。時間を 忘れないでください。” nghĩa là: Chín giờ. Xin đừng quên giờ. Nội dung này làm rõ đáp án “Chín giờ”, không phải hai cách hiểu còn lại."
     }
    ]
   },
@@ -331,35 +347,35 @@
    "h": "Nói và phản hồi",
    "tasks": [
     {
-     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "p": "Đóng vai hỏi về ảnh chụp và điện thoại di động. Dùng lượt “ここで 携帯電話を 使っても いいですか。” để mở đầu, rồi yêu cầu bạn trả lời bằng thông tin của vai đối diện.",
      "model": "ここで 携帯電話を 使っても いいですか。 写真も 撮っては いけませんか。 宿題は 今日 出す 必要が ありますか。 明日の 約束は 何時ですか。",
      "vi": "Ở đây dùng điện thoại được không? Cũng không được chụp ảnh phải không? Bài tập có cần nộp hôm nay không? Hẹn ngày mai mấy giờ?",
-     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+     "tips": "Khi bạn nói “写真も 撮っては いけませんか。”, người nghe phải nhận ra Cũng không được chụp ảnh phải không?; ghi âm và kiểm xem từ nào đang quyết định nghĩa đó."
     },
     {
-     "p": "Tóm tắt nội dung bài đọc bằng ba câu, sau đó nêu một câu hỏi còn muốn làm rõ.",
+     "p": "Tóm tắt ba ý trong bài đọc để trả lời “Trước khi vào phải làm gì?”. Kết thúc bằng câu hỏi về yên tĩnh nếu phần này chưa được người nghe xác nhận.",
      "model": "ここは 静かな 自習室です。 中に 入る 前に、携帯電話の 音を 消さなければなりません。 中で 電話を 使わないでください。写真も 撮らないでください。",
      "vi": "Đây là phòng tự học yên tĩnh. Trước khi vào phải tắt âm điện thoại. Xin đừng dùng điện thoại bên trong. Cũng đừng chụp ảnh.",
-     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+     "tips": "So phần tóm tắt của bạn với dữ kiện “Tắt âm điện thoại”; nếu ý này thay đổi, hãy nói rõ đó là tình huống giả định mới."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có kiểm tra",
-   "task": "Viết một đoạn mới theo tình huống bài học; thay ít nhất hai chi tiết, dùng cấu trúc trọng tâm và kiểm thông tin nhất quán.",
+   "task": "Viết một đoạn tình huống có các ý: Xin đừng chụp ảnh. / Xin đừng quên cuộc hẹn. / Hôm nay không cần đến.. Dùng thêm thông tin của bài đọc để nối các ý, không chỉ chép ba câu rời.",
    "min": 80,
    "model": "ここは 静かな 自習室です。 中に 入る 前に、携帯電話の 音を 消さなければなりません。 中で 電話を 使わないでください。写真も 撮らないでください。 宿題は 明日 出します。今日 出す 必要は ありません。 でも、明日の 約束は 忘れないでください。 集合時間は 九時です。八時半ではありません。 遅れる ときは、部屋の 外から 連絡すれば 大丈夫です。 規則が わからない ときは、入る 前に 聞きます。",
    "modelVi": "Đây là phòng tự học yên tĩnh. Trước khi vào phải tắt âm điện thoại. Xin đừng dùng điện thoại bên trong. Cũng đừng chụp ảnh. Ngày mai nộp bài tập. Không cần nộp hôm nay. Nhưng xin đừng quên hẹn ngày mai. Giờ tập trung là chín giờ, không phải tám giờ rưỡi. Khi muộn, liên hệ từ bên ngoài phòng là được. Chưa rõ quy định thì hỏi trước khi vào.",
    "tips": [
-    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
-    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+    "Lập sơ đồ ai làm gì trong câu “写真を 撮らないでください。”, rồi dùng cùng quan hệ chủ thể khi nối sang đoạn của bạn.",
+    "Đối chiếu “約束を 忘れないでください。” với mẫu cuối “今日は 来なくてもいいです。”; chọn phần kết câu phù hợp trước khi sửa chính tả."
    ],
    "checklist": [
-    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
-    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
-    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
-    "Câu kết thúc và mức lịch sự nhất quán"
+    "Người đọc nhận ra đúng nghĩa của “写真”, thay vì chỉ thấy từ được chèn vào câu.",
+    "Quan hệ ý trong “写真を 撮らないでください。” vẫn đúng khi bạn thay dữ kiện.",
+    "Các ý điện thoại di động và yên tĩnh không bị lẫn vai hoặc phạm vi.",
+    "Đoạn kết không trái với dữ kiện trả lời câu hỏi “Trước khi vào phải làm gì?”."
    ]
   }
  ],
@@ -494,7 +510,7 @@
      "nộp/đưa ra"
     ]
    ],
-   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+   "e": "Đối chiếu các cặp “入る → đi vào” và “出す → nộp/đưa ra”; phân biệt nghĩa trong tình huống, không ghép chỉ dựa vào hình chữ."
   },
   {
    "t": "mc",
@@ -521,52 +537,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ, bảng cấu trúc bài này, loa/giọng đọc tiếng Nhật, phiếu thông tin khác nhau cho từng cặp. Không dùng dữ liệu cá nhân thật.",
+  "prep": "Chuẩn bị thẻ “写真”, “携帯電話”, “静か”, bản hội thoại che lượt trả lời và phiếu đọc có câu hỏi “Trước khi vào phải làm gì?”.",
   "steps": [
    {
     "t": "10'",
-    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+    "do": "Gợi tình huống bằng câu “ここで 携帯電話を 使っても いいですか。”. Cho cặp học viên nói mình muốn biết điều gì trước khi mở lời đáp."
    },
    {
     "t": "20'",
-    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+    "do": "Cho so thẻ “写真” với “携帯電話”: học viên diễn đạt nghĩa ảnh chụp và điện thoại di động, rồi đặt mỗi từ vào một lượt trao đổi."
    },
    {
     "t": "25'",
-    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+    "do": "Viết hai câu “写真を 撮らないでください。” và “約束を 忘れないでください。” cạnh nhau. Học viên giải thích khác biệt ý, sau đó thay một thành phần mà vẫn giữ cấu trúc vừa phân tích."
    },
    {
     "t": "20'",
-    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+    "do": "Che lời thoại và giao câu hỏi “Theo hội thoại: Ở đây dùng điện thoại được không?”. Sau hai lượt nghe, yêu cầu nêu bằng chứng thay vì đoán theo từ khóa đơn lẻ."
    },
    {
     "t": "15'",
-    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+    "do": "Cho đổi vai quanh lượt “宿題は 今日 出す 必要が ありますか。”. Người nghe hỏi lại thông tin trước khi chuyển sang lời đáp, giáo viên ghi một chỗ gây hiểu nhầm để chữa cuối hoạt động."
    },
    {
     "t": "15'",
-    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+    "do": "Đầu buổi sau, yêu cầu dựng lại ý “Hôm nay không cần đến.” không nhìn chữ Nhật. So lời nói của học viên với câu đích và chữa phần làm thay đổi quan hệ ý."
    },
    {
     "t": "20'",
-    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+    "do": "Đọc để giải quyết câu hỏi “Trước khi vào phải làm gì?”. Mỗi nhóm đánh dấu đoạn chứng minh và giải thích vì sao hai lựa chọn còn lại không khớp."
    },
    {
     "t": "20'",
-    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+    "do": "Giao nhiệm vụ nói có thông tin ảnh chụp ở một vai và yên tĩnh ở vai kia. Hai bên chỉ hoàn thành phiếu khi đã hỏi để hiểu dữ kiện của nhau."
    },
    {
     "t": "20'",
-    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+    "do": "Viết đoạn nối ý “Xin đừng chụp ảnh.” với “Hôm nay không cần đến.”. Đổi bài và kiểm chủ thể, mốc thời gian cùng từ phủ định trước khi góp ý độ tự nhiên."
    },
    {
     "t": "15'",
-    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+    "do": "Chữa bài tự chấm từ cặp “携帯電話” và “静か”. Mỗi học viên ghi một câu sửa của chính mình và nêu cách sẽ nhận ra lỗi đó trong lần dùng sau."
    }
   ],
   "games": [
-   "Ghép thẻ câu với tình huống: mỗi nhóm phải giải thích một cặp và chỉ ra từ/cấu trúc quyết định.",
-   "Thông tin lệch: mỗi bạn giữ một phần dữ kiện; phải hỏi lại thay vì đoán để hoàn thành phiếu."
+   "Khoảng trống thông tin: một bạn chỉ thấy “ここで 携帯電話を 使っても いいですか。”, bạn kia giữ câu trả lời. Họ hỏi lại để hoàn thành thông tin về ảnh chụp trước khi đổi vai.",
+   "Chọn và bảo vệ đáp án: các nhóm nhận câu hỏi “Trước khi vào phải làm gì?”, chọn một phương án rồi tìm chi tiết đủ bác hai phương án nhiễu."
   ],
   "errors": [
    "Biến 使う thành 使あない: う đổi わ, thành 使わない.",
@@ -574,6 +590,6 @@
    "Dịch なくてもいい thành “không được”: nó là không cần, khác lệnh cấm.",
    "Lược chủ thể quy định làm người nghe hiểu sai: nêu phạm vi nơi/thời điểm trước yêu cầu."
   ],
-  "homework": "Ôn 12–20 thẻ theo lịch 1–3–7 ngày; nghe chép câu đã chọn, ghi âm hai lượt nói và viết đoạn mới thay ít nhất hai chi tiết."
+  "homework": "Ôn “写真”, “携帯電話” và “静か” bằng câu mới có nghĩa. Ghi âm câu “写真を 撮らないでください。”, nghe lại phần kết rồi viết lời giải thích cho câu hỏi “Trước khi vào phải làm gì?” bằng tiếng Việt."
  }
 }

@@ -1,157 +1,1057 @@
 {
-  "no": 3,
-  "title": "我家有五口人 – Gia đình; 有 / 没有, 几, lượng từ 个 / 口",
-  "sub": "Nǐ jiā yǒu jǐ kǒu rén? 你家有几口人？",
-  "goals": [
-    "Giới thiệu gia đình: số người, các thành viên, nghề của bố mẹ",
-    "Dùng đúng 有 / 没有 (KHÔNG nói 不有); hỏi 有…吗 / 有没有…",
-    "Hỏi số lượng bằng 几 + lượng từ (几口人, 几个哥哥); dùng 两 trước lượng từ",
-    "Dùng 的 chỉ sở hữu; 这 / 那 + 是 + 谁 để giới thiệu ảnh gia đình",
-    "Dùng 和 nối danh từ, 都 = đều; đọc đúng g – k (个 / 口), ü trong 女"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
-      {"w": "家", "py": "jiā", "hv": "gia", "pos": "n", "vi": "nhà, gia đình", "ex": "我家有五口人。", "exPy": "Wǒ jiā yǒu wǔ kǒu rén.", "exVi": "Nhà tôi có năm người."},
-      {"w": "有", "py": "yǒu", "hv": "hữu", "pos": "v", "vi": "có", "ex": "我有一个哥哥。", "exPy": "Wǒ yǒu yí ge gēge.", "exVi": "Tôi có một anh trai."},
-      {"w": "没有", "py": "méiyǒu", "hv": "một hữu", "pos": "v", "vi": "không có", "ex": "我没有姐姐。", "exPy": "Wǒ méiyǒu jiějie.", "exVi": "Tôi không có chị gái."},
-      {"w": "几", "py": "jǐ", "hv": "kỉ", "pos": "pron", "vi": "mấy (hỏi số lượng nhỏ)", "ex": "你有几个妹妹？", "exPy": "Nǐ yǒu jǐ ge mèimei?", "exVi": "Bạn có mấy em gái?"},
-      {"w": "口", "py": "kǒu", "hv": "khẩu", "pos": "mw", "vi": "(lượng từ) người – đếm nhân khẩu trong gia đình; nghĩa gốc: miệng", "ex": "你家有几口人？", "exPy": "Nǐ jiā yǒu jǐ kǒu rén?", "exVi": "Nhà bạn có mấy người?"},
-      {"w": "个", "py": "gè", "hv": "cá", "pos": "mw", "vi": "cái, chiếc, người (lượng từ chung)", "ex": "我有两个朋友。", "exPy": "Wǒ yǒu liǎng ge péngyou.", "exVi": "Tôi có hai người bạn."},
-      {"w": "爸爸", "py": "bàba", "hv": "ba ba", "pos": "n", "vi": "bố, ba", "ex": "这是我爸爸。", "exPy": "Zhè shì wǒ bàba.", "exVi": "Đây là bố tôi."},
-      {"w": "妈妈", "py": "māma", "hv": "ma ma", "pos": "n", "vi": "mẹ", "ex": "我妈妈是老师。", "exPy": "Wǒ māma shì lǎoshī.", "exVi": "Mẹ tôi là giáo viên."},
-      {"w": "哥哥", "py": "gēge", "hv": "ca ca", "pos": "n", "vi": "anh trai", "ex": "我哥哥是学生。", "exPy": "Wǒ gēge shì xuésheng.", "exVi": "Anh trai tôi là sinh viên."},
-      {"w": "姐姐", "py": "jiějie", "hv": "thư thư", "pos": "n", "vi": "chị gái", "ex": "小明有一个姐姐。", "exPy": "Xiǎo Míng yǒu yí ge jiějie.", "exVi": "Tiểu Minh có một chị gái."},
-      {"w": "弟弟", "py": "dìdi", "hv": "đệ đệ", "pos": "n", "vi": "em trai", "ex": "你有弟弟吗？", "exPy": "Nǐ yǒu dìdi ma?", "exVi": "Bạn có em trai không?"},
-      {"w": "妹妹", "py": "mèimei", "hv": "muội muội", "pos": "n", "vi": "em gái", "ex": "我妹妹叫小梅。", "exPy": "Wǒ mèimei jiào Xiǎo Méi.", "exVi": "Em gái tôi tên Tiểu Mai."},
-      {"w": "儿子", "py": "érzi", "hv": "nhi tử", "pos": "n", "vi": "con trai", "ex": "他有一个儿子。", "exPy": "Tā yǒu yí ge érzi.", "exVi": "Anh ấy có một con trai."},
-      {"w": "女儿", "py": "nǚ'ér", "hv": "nữ nhi", "pos": "n", "vi": "con gái", "ex": "王老师有两个女儿。", "exPy": "Wáng lǎoshī yǒu liǎng ge nǚ'ér.", "exVi": "Thầy Vương có hai con gái."},
-      {"w": "的", "py": "de", "hv": "đích", "pos": "part", "vi": "của (trợ từ sở hữu)", "ex": "这是我朋友的妈妈。", "exPy": "Zhè shì wǒ péngyou de māma.", "exVi": "Đây là mẹ của bạn tôi."},
-      {"w": "谁", "py": "shéi", "hv": "thuỳ", "pos": "pron", "vi": "ai", "ex": "他是谁？", "exPy": "Tā shì shéi?", "exVi": "Anh ấy là ai?"},
-      {"w": "和", "py": "hé", "hv": "hoà", "pos": "conj", "vi": "và, với (nối danh từ)", "ex": "我和安娜是朋友。", "exPy": "Wǒ hé Ānnà shì péngyou.", "exVi": "Tôi và Anna là bạn."},
-      {"w": "都", "py": "dōu", "hv": "đô", "pos": "adv", "vi": "đều, tất cả", "ex": "我们都是学生。", "exPy": "Wǒmen dōu shì xuésheng.", "exVi": "Chúng tôi đều là sinh viên."},
-      {"w": "这", "py": "zhè", "hv": "giá", "pos": "pron", "vi": "này, đây (gần)", "ex": "这是我妈妈。", "exPy": "Zhè shì wǒ māma.", "exVi": "Đây là mẹ tôi."},
-      {"w": "那", "py": "nà", "hv": "na", "pos": "pron", "vi": "kia, đó (xa)", "ex": "那是谁？", "exPy": "Nà shì shéi?", "exVi": "Kia là ai?"}
-    ]},
-    {"k": "text", "h": "Văn hoá: xưng hô trong gia đình Trung Quốc", "html": "<p>Giống tiếng Việt, tiếng Trung phân biệt <b>anh/chị</b> (lớn hơn) và <b>em</b> (nhỏ hơn) – nhưng “em” phải nói rõ trai hay gái: <b>弟弟</b> em trai, <b>妹妹</b> em gái.</p><table><tr><th>Bên nội</th><th>Pinyin</th><th>Bên ngoại</th><th>Pinyin</th></tr><tr><td>爷爷 – ông nội</td><td>yéye</td><td>外公 / 姥爷 – ông ngoại</td><td>wàigōng / lǎoye</td></tr><tr><td>奶奶 – bà nội</td><td>nǎinai</td><td>外婆 / 姥姥 – bà ngoại</td><td>wàipó / lǎolao</td></tr></table><p>Chữ <b>外</b> (ngoại) có mặt trong 外公, 外婆 – giống hệt “ông ngoại, bà ngoại” Hán Việt!</p><p>Người Trung Quốc cũng gọi người lạ bằng từ gia đình như người Việt: <b>阿姨</b> āyí (cô, dì – phụ nữ trung niên), <b>叔叔</b> shūshu (chú), <b>哥哥 / 姐姐</b> (anh, chị – người trẻ hơn mình một chút).</p>"},
-    {"k": "sounds", "h": "Phát âm: g – k bật hơi, zh – j, ü, er và thanh nhẹ trong từ láy", "items": [
-      {"sym": "g – k (bật hơi)", "ex": ["个", "口", "哥哥"], "vi": "<b>g</b> (个 gè, 哥 gē) KHÔNG bật hơi – gần “c/k” tiếng Việt. <b>k</b> (口 kǒu) BẬT HƠI mạnh: đặt tờ giấy trước miệng, đọc k thì giấy phải rung. Người Việt hay đọc 口 thành “cẩu” không có hơi – nghe thành 狗 gǒu (con chó)!", "pairs": [["哥", "科"], ["狗", "口"]]},
-      {"sym": "zh – j", "ex": ["这", "家", "几", "姐姐"], "vi": "<b>zh</b> (这 zhè): uốn lưỡi, gần “tr” tiếng Việt đọc chuẩn. <b>j</b> (家 jiā, 几 jǐ): mặt lưỡi áp vòm, gần “ch” tiếng Việt nhưng môi dẹt hơn. 这 ≈ “trơ”, 家 ≈ “chia”.", "pairs": [["这", "借"]]},
-      {"sym": "ü sau n (女)", "ex": ["女儿", "女"], "vi": "女 viết <b>nǚ</b> (giữ hai chấm vì đứng sau n). Môi chu tròn như “u” nhưng lưỡi đặt như “i” – gần “uy” đọc liền. 女 nǚ (nữ) khác 努 nǔ.", "pairs": [["女", "努"]]},
-      {"sym": "er (儿)", "ex": ["儿子", "女儿"], "vi": "儿 ér: đọc “ơ” rồi cong đầu lưỡi lên phía vòm – giống “ơ” kèm “r” Anh–Mỹ. 女儿 nǚ'ér có dấu cách âm ' để không đọc nhầm."},
-      {"sym": "thanh nhẹ trong từ láy", "ex": ["爸爸", "妈妈", "哥哥", "姐姐", "弟弟", "妹妹"], "vi": "Âm thứ hai đọc nhẹ, ngắn: bàba, māma, gēge, jiějie, dìdi, mèimei. Với 姐姐: jiě đọc thấp, “jie” sau nhẹ và hơi cao lên."},
-      {"sym": "一个 → yí ge", "ex": ["一个", "两个", "几个"], "vi": "个 gốc thanh 4 (gè) nên 一 đứng trước đọc thanh 2: <b>yí ge</b>; bản thân 个 sau số đọc nhẹ: liǎng ge, jǐ ge."}
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 1: 有 / 没有 – có / không có", "html": "<p><b>有</b> = có (sở hữu). Phủ định DUY NHẤT là <b>没有</b> (méiyǒu) – không bao giờ dùng ❌ 不有. Câu hỏi: <b>…有…吗？</b> hoặc dạng chính phản <b>…有没有…？</b>. Trả lời ngắn: 有 / 没有.</p>", "table": [["Khẳng định", "Phủ định", "Câu hỏi"], ["我有哥哥。", "我没有姐姐。", "你有弟弟吗？ / 你有没有弟弟？"], ["Wǒ yǒu gēge.", "Wǒ méiyǒu jiějie.", "Nǐ yǒu dìdi ma? / Nǐ yǒu méiyǒu dìdi?"], ["Tôi có anh trai.", "Tôi không có chị gái.", "Bạn có em trai không?"]], "ex": [
-      {"t": "小明有一个姐姐。", "py": "Xiǎo Míng yǒu yí ge jiějie.", "vi": "Tiểu Minh có một chị gái."},
-      {"t": "安娜没有哥哥，也没有妹妹。", "py": "Ānnà méiyǒu gēge, yě méiyǒu mèimei.", "vi": "Anna không có anh trai, cũng không có em gái."},
-      {"t": "你有中国朋友吗？— 有。", "py": "Nǐ yǒu Zhōngguó péngyou ma? — Yǒu.", "vi": "Bạn có bạn người Trung Quốc không? — Có."},
-      {"t": "你有没有弟弟？— 没有。", "py": "Nǐ yǒu méiyǒu dìdi? — Méiyǒu.", "vi": "Bạn có em trai không? — Không có."}
-    ], "tips": ["❌ <i>我不有姐姐</i> → ✅ 我没有姐姐。 不 phủ định 是, tính từ và đa số động từ; riêng 有 luôn dùng 没.", "Trả lời câu 有…吗 bằng 有 / 没有, không trả lời ❌ 是 / 不是.", "Câu dạng 有没有 đã là câu hỏi – không thêm 吗: ❌ <i>你有没有弟弟吗？</i>"]},
-    {"k": "grammar", "h": "Ngữ pháp 2: Số + lượng từ + danh từ; hỏi bằng 几", "html": "<p>Tiếng Trung đếm luôn cần <b>lượng từ</b> (giống “con, cái, chiếc” của tiếng Việt): <b>Số + lượng từ + danh từ</b>. Tiếng Việt đôi khi bỏ được (“hai anh trai”), tiếng Trung thì KHÔNG.</p><ul><li><b>个 (ge)</b>: lượng từ chung cho người và nhiều đồ vật – 一个哥哥, 三个朋友.</li><li><b>口 (kǒu)</b>: chỉ dùng đếm số người trong gia đình – 我家有五口人.</li></ul><p><b>几</b> hỏi số lượng nhỏ (thường dưới 10); sau 几 cũng phải có lượng từ: 几个, 几口. Số 2 đứng trước lượng từ đọc <b>两 (liǎng)</b>: 两个妹妹 (❌ 二个).</p>", "table": [["Câu hỏi", "Trả lời"], ["你家有几口人？", "我家有五口人。"], ["你有几个哥哥？", "我有一个哥哥。"], ["他有几个女儿？", "他有两个女儿。"]], "ex": [
-      {"t": "你家有几口人？— 我家有四口人。", "py": "Nǐ jiā yǒu jǐ kǒu rén? — Wǒ jiā yǒu sì kǒu rén.", "vi": "Nhà bạn có mấy người? — Nhà tôi có bốn người."},
-      {"t": "王老师有两个女儿。", "py": "Wáng lǎoshī yǒu liǎng ge nǚ'ér.", "vi": "Thầy Vương có hai con gái."},
-      {"t": "我有三个中国朋友。", "py": "Wǒ yǒu sān ge Zhōngguó péngyou.", "vi": "Tôi có ba người bạn Trung Quốc."}
-    ], "tips": ["❌ <i>我有一哥哥</i> (thiếu lượng từ) → ✅ 我有一个哥哥。", "❌ <i>你有几哥哥？</i> → ✅ 你有几个哥哥？", "口 chỉ dùng với 人 khi nói về gia đình. Đếm bạn bè, học sinh dùng 个: ❌ <i>三口朋友</i>.", "Không chồng hai lượng từ: ❌ <i>四个口人</i> → ✅ 四口人."]},
-    {"k": "grammar", "h": "Ngữ pháp 3: 的 sở hữu; 这 / 那; hỏi người bằng 谁", "html": "<p><b>Người sở hữu + 的 + vật/người được sở hữu</b> – NGƯỢC tiếng Việt: “mẹ CỦA bạn tôi” = 我朋友<b>的</b>妈妈.</p><p>Với <b>người thân, nhóm thân thiết</b> thường bỏ 的: 我妈妈, 我哥哥, 我们家. (Nói 我的妈妈 cũng đúng, nhưng nghe nhấn mạnh hơn.)</p><p><b>这</b> (zhè – này, đây: gần) / <b>那</b> (nà – kia, đó: xa) + 是 + …: 这是我爸爸。 Hỏi người dùng <b>谁</b> (shéi – ai), đặt đúng chỗ cần hỏi: 这是谁？ 那是谁的妹妹？</p>", "table": [["Tiếng Việt", "Tiếng Trung"], ["mẹ (của) tôi", "我妈妈 / 我的妈妈"], ["bạn của anh trai tôi", "我哥哥的朋友"], ["Đây là ai?", "这是谁？"], ["Kia là em gái của ai?", "那是谁的妹妹？"]], "ex": [
-      {"t": "这是谁？— 这是我爸爸。", "py": "Zhè shì shéi? — Zhè shì wǒ bàba.", "vi": "Đây là ai? — Đây là bố tôi."},
-      {"t": "那是我朋友的妈妈。", "py": "Nà shì wǒ péngyou de māma.", "vi": "Kia là mẹ của bạn tôi."},
-      {"t": "那是谁的哥哥？— 是小兰的哥哥。", "py": "Nà shì shéi de gēge? — Shì Xiǎo Lán de gēge.", "vi": "Kia là anh trai của ai? — Là anh trai của Tiểu Lan."}
-    ], "tips": ["Thứ tự ngược tiếng Việt: ❌ <i>妈妈的我</i> → ✅ 我的妈妈 / 我妈妈。", "谁 có hai cách đọc: shéi (khẩu ngữ, phổ biến) và shuí – đều đúng.", "这 / 那 đứng đầu câu làm chủ ngữ: 这是…; không nói ❌ <i>是这我妈妈</i>."]},
-    {"k": "text", "h": "Mẹo nhỏ: 和 và 都 – hai từ hay dùng sai", "html": "<p><b>和 (hé)</b> = và – chỉ nối <b>danh từ / đại từ</b>: 爸爸和妈妈, 我和安娜. KHÔNG nối hai câu hay hai động từ: ❌ <i>我是学生和他是老师</i> → ✅ 我是学生，他是老师。</p><p><b>都 (dōu)</b> = đều – đứng <b>sau chủ ngữ số nhiều, trước động từ</b>: 我们都是学生; 我哥哥和我妹妹都是学生. ❌ <i>都我们是学生</i>.</p><p>Có cả 也 và 都 thì 也 đứng trước: 我们<b>也都</b>是越南人 (Chúng tôi cũng đều là người Việt Nam).</p>"},
-    {"k": "dialog", "h": "Nghe: Ảnh gia đình", "lang": "zh-CN", "note": "Anna đến nhà Tiểu Lan chơi, thấy ảnh gia đình trên tường. Nghe lần 1 không nhìn chữ: nhà Tiểu Lan có mấy người?", "lines": [
-      {"s": "安娜", "g": "f", "t": "小兰，这是谁？", "py": "Xiǎo Lán, zhè shì shéi?", "vi": "Lan ơi, đây là ai thế?"},
-      {"s": "小兰", "g": "f", "t": "这是我爸爸，那是我妈妈。", "py": "Zhè shì wǒ bàba, nà shì wǒ māma.", "vi": "Đây là bố mình, kia là mẹ mình."},
-      {"s": "安娜", "g": "f", "t": "你妈妈是老师吗？", "py": "Nǐ māma shì lǎoshī ma?", "vi": "Mẹ bạn là giáo viên à?"},
-      {"s": "小兰", "g": "f", "t": "是，我妈妈是老师。我爸爸不是老师。", "py": "Shì, wǒ māma shì lǎoshī. Wǒ bàba bú shì lǎoshī.", "vi": "Ừ, mẹ mình là giáo viên. Bố mình không phải giáo viên."},
-      {"s": "安娜", "g": "f", "t": "你家有几口人？", "py": "Nǐ jiā yǒu jǐ kǒu rén?", "vi": "Nhà bạn có mấy người?"},
-      {"s": "小兰", "g": "f", "t": "我家有五口人：爸爸、妈妈、哥哥、妹妹和我。", "py": "Wǒ jiā yǒu wǔ kǒu rén: bàba, māma, gēge, mèimei hé wǒ.", "vi": "Nhà mình có năm người: bố, mẹ, anh trai, em gái và mình."},
-      {"s": "安娜", "g": "f", "t": "这是你哥哥吗？", "py": "Zhè shì nǐ gēge ma?", "vi": "Đây là anh trai bạn à?"},
-      {"s": "小兰", "g": "f", "t": "是，他叫阮海。我哥哥和我妹妹都是学生。", "py": "Shì, tā jiào Ruǎn Hǎi. Wǒ gēge hé wǒ mèimei dōu shì xuésheng.", "vi": "Ừ, anh ấy tên Nguyễn Hải. Anh trai và em gái mình đều là học sinh, sinh viên."},
-      {"s": "安娜", "g": "f", "t": "你有姐姐吗？", "py": "Nǐ yǒu jiějie ma?", "vi": "Bạn có chị gái không?"},
-      {"s": "小兰", "g": "f", "t": "我没有姐姐，也没有弟弟。你呢？你家有几口人？", "py": "Wǒ méiyǒu jiějie, yě méiyǒu dìdi. Nǐ ne? Nǐ jiā yǒu jǐ kǒu rén?", "vi": "Mình không có chị gái, cũng không có em trai. Còn bạn? Nhà bạn có mấy người?"},
-      {"s": "安娜", "g": "f", "t": "我家有三口人：爸爸、妈妈和我。", "py": "Wǒ jiā yǒu sān kǒu rén: bàba, māma hé wǒ.", "vi": "Nhà mình có ba người: bố, mẹ và mình."},
-      {"s": "小兰", "g": "f", "t": "你没有哥哥姐姐吗？", "py": "Nǐ méiyǒu gēge jiějie ma?", "vi": "Bạn không có anh chị à?"},
-      {"s": "安娜", "g": "f", "t": "没有。你家人很多，很好！", "py": "Méiyǒu. Nǐ jiā rén hěn duō, hěn hǎo!", "vi": "Không có. Nhà bạn đông người, thích thật!"}
-    ], "qs": [
-      {"q": "Nhà 小兰 có mấy người?", "o": ["3 người", "4 người", "5 người"], "a": 2, "e": "我家有五口人：爸爸、妈妈、哥哥、妹妹和我。"},
-      {"q": "Ai là giáo viên?", "o": ["Bố của Tiểu Lan", "Mẹ của Tiểu Lan", "Anh trai của Tiểu Lan"], "a": 1, "e": "我妈妈是老师。我爸爸不是老师。"},
-      {"q": "Câu nào ĐÚNG?", "o": ["Tiểu Lan có chị gái", "Tiểu Lan không có em trai", "Anna có anh trai"], "a": 1, "e": "我没有姐姐，也没有弟弟。– Tiểu Lan không có chị gái, cũng không có em trai."},
-      {"q": "Anh trai của 小兰 tên là gì? (gõ chữ Hán hoặc pinyin)", "a": "阮海", "alt": ["ruanhai", "海", "hai"], "e": "他叫阮海 (Ruǎn Hǎi – Nguyễn Hải)."},
-      {"q": "Nhà Anna gồm những ai?", "o": ["Bố, mẹ và Anna", "Bố, mẹ, anh trai và Anna", "Mẹ và Anna"], "a": 0, "e": "我家有三口人：爸爸、妈妈和我。"}
-    ]},
-    {"k": "read", "h": "Đọc: Gia đình Tiểu Minh", "title": "我的家", "text": "我叫陈明，我是河内人。我家有四口人：爸爸、妈妈、姐姐和我。\n\n我爸爸和我妈妈都是老师。我姐姐不是老师，她是医生。我是学生。\n\n我没有哥哥，也没有弟弟妹妹。我很爱我的家！", "py": "Wǒ jiào Chén Míng, wǒ shì Hénèi rén. Wǒ jiā yǒu sì kǒu rén: bàba, māma, jiějie hé wǒ.\n\nWǒ bàba hé wǒ māma dōu shì lǎoshī. Wǒ jiějie bú shì lǎoshī, tā shì yīshēng. Wǒ shì xuésheng.\n\nWǒ méiyǒu gēge, yě méiyǒu dìdi mèimei. Wǒ hěn ài wǒ de jiā!", "vi": "Tôi tên là Trần Minh, tôi là người Hà Nội. Nhà tôi có bốn người: bố, mẹ, chị gái và tôi.\n\nBố và mẹ tôi đều là giáo viên. Chị tôi không phải giáo viên, chị ấy là bác sĩ. Tôi là sinh viên.\n\nTôi không có anh trai, cũng không có em trai, em gái. Tôi rất yêu gia đình mình!", "gloss": [
-      {"w": "医生", "py": "yīshēng", "vi": "bác sĩ (học kỹ ở bài 11)"},
-      {"w": "爱", "py": "ài", "vi": "yêu (bài 6)"},
-      {"w": "四", "py": "sì", "vi": "bốn"}
-    ], "qs": [
-      {"q": "Nhà 陈明 có mấy người?", "o": ["3 người", "4 người", "5 người"], "a": 1, "e": "我家有四口人。"},
-      {"q": "Chị gái của 陈明 làm nghề gì?", "o": ["Giáo viên", "Bác sĩ", "Sinh viên"], "a": 1, "e": "我姐姐不是老师，她是医生。"},
-      {"q": "Ai là giáo viên?", "o": ["Bố và mẹ", "Chị gái", "陈明"], "a": 0, "e": "我爸爸和我妈妈都是老师。– 都 = đều."},
-      {"q": "陈明 có em trai không?", "o": ["Có một em trai", "Không có", "Có hai em trai"], "a": 1, "e": "我没有哥哥，也没有弟弟妹妹。"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "家", "py": "jiā", "hv": "gia", "parts": "宀 (miên – mái nhà) + 豕 (thỉ – con lợn)", "strokes": 10, "vi": "nhà – ngày xưa nhà nào cũng nuôi lợn dưới mái nhà", "words": "家, 我家, 大家"},
-      {"c": "有", "py": "yǒu", "hv": "hữu", "parts": "𠂇 (bàn tay) + 月 (biến thể của 肉 – thịt)", "strokes": 6, "vi": "có – tay cầm miếng thịt là “có” của ăn", "words": "有, 没有"},
-      {"c": "口", "py": "kǒu", "hv": "khẩu", "parts": "tượng hình cái miệng", "strokes": 3, "vi": "miệng; lượng từ đếm người trong nhà (mỗi người một miệng ăn)", "words": "几口人"},
-      {"c": "个", "py": "gè", "hv": "cá", "parts": "人 (người) + 丨 (nét sổ)", "strokes": 3, "vi": "cái, chiếc – lượng từ chung", "words": "一个, 几个, 两个"},
-      {"c": "爸", "py": "bà", "hv": "ba", "parts": "父 (phụ – cha) + 巴 (ba – gợi âm)", "strokes": 8, "vi": "bố – 父 chỉ nghĩa “cha”, 巴 chỉ âm “ba”", "words": "爸爸"},
-      {"c": "妈", "py": "mā", "hv": "ma", "parts": "女 (nữ – phụ nữ) + 马 (mã – gợi âm “ma”)", "strokes": 6, "vi": "mẹ – người phụ nữ, đọc gần như 马", "words": "妈妈"},
-      {"c": "的", "py": "de", "hv": "đích", "parts": "白 (bạch – trắng) + 勺 (thược – cái muôi)", "strokes": 8, "vi": "của – trợ từ sở hữu (nghĩa gốc “đích”, mục tiêu)", "words": "我的, 你的, 谁的"}
-    ]},
-    {"k": "speak", "h": "Nói: Gia đình tôi", "tasks": [
-      {"p": "Giới thiệu gia đình bạn: có mấy người, gồm những ai, bố mẹ làm gì.", "model": "我家有四口人：爸爸、妈妈、弟弟和我。我爸爸是医生，我妈妈是老师。我弟弟是学生。", "py": "Wǒ jiā yǒu sì kǒu rén: bàba, māma, dìdi hé wǒ. Wǒ bàba shì yīshēng, wǒ māma shì lǎoshī. Wǒ dìdi shì xuésheng.", "vi": "Nhà tôi có bốn người: bố, mẹ, em trai và tôi. Bố tôi là bác sĩ, mẹ tôi là giáo viên. Em trai tôi là học sinh.", "tips": "Liệt kê thành viên ngắt nhẹ ở mỗi dấu 、; 和 đứng trước người cuối cùng."},
-      {"p": "Mở một tấm ảnh gia đình (trên điện thoại) và giới thiệu từng người với bạn.", "model": "这是我妈妈，那是我哥哥。他叫阮海，他是学生。", "py": "Zhè shì wǒ māma, nà shì wǒ gēge. Tā jiào Ruǎn Hǎi, tā shì xuésheng.", "vi": "Đây là mẹ tôi, kia là anh trai tôi. Anh ấy tên Nguyễn Hải, anh ấy là sinh viên.", "tips": "这 cho người gần trong ảnh / đang chỉ vào, 那 cho người ở xa hơn."},
-      {"p": "Hỏi bạn bên cạnh về gia đình (ít nhất 3 câu hỏi khác nhau).", "model": "你家有几口人？你有哥哥吗？你妹妹叫什么名字？", "py": "Nǐ jiā yǒu jǐ kǒu rén? Nǐ yǒu gēge ma? Nǐ mèimei jiào shénme míngzi?", "vi": "Nhà bạn có mấy người? Bạn có anh trai không? Em gái bạn tên gì?"}
-    ]},
-    {"k": "write", "h": "Viết: Giới thiệu gia đình", "task": "Viết 6–8 câu giới thiệu gia đình bạn. Bắt buộc dùng: 有, 没有, số + lượng từ, 和, 都.", "min": 40, "model": "我叫阮兰。我家有五口人：爸爸、妈妈、哥哥、妹妹和我。我妈妈是老师，我爸爸不是老师。我哥哥叫阮海，我妹妹叫小梅。他们都是学生。我没有姐姐，也没有弟弟。", "modelVi": "Tôi tên Nguyễn Lan. Nhà tôi có năm người: bố, mẹ, anh trai, em gái và tôi. Mẹ tôi là giáo viên, bố tôi không phải giáo viên. Anh tôi tên Nguyễn Hải, em gái tôi tên Tiểu Mai. Họ đều là học sinh, sinh viên. Tôi không có chị gái, cũng không có em trai.", "tips": ["Liệt kê dùng dấu 、 (dấu phẩy liệt kê) và 和 trước người cuối.", "我妈妈 (bỏ 的) tự nhiên hơn 我的妈妈.", "Số 2 trước lượng từ là 两: 两个哥哥."], "checklist": ["Có câu 我家有…口人", "Có 没有 (không dùng 不有)", "Có số + lượng từ (一个, 两个…)", "Có 和 nối danh từ", "Có 都 đứng sau chủ ngữ, trước động từ"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "我家有五口人。", "lang": "zh-CN", "q": "Nhà người nói có mấy người?", "o": ["3 người", "4 người", "5 người"], "a": 2, "e": "五 wǔ = 5; 五口人 = năm người."},
-    {"t": "listen", "say": "我没有哥哥。", "lang": "zh-CN", "q": "Câu vừa nghe nghĩa là gì?", "o": ["Tôi có anh trai", "Tôi không có anh trai", "Tôi không có em trai"], "a": 1, "e": "没有 = không có; 哥哥 gēge = anh trai (em trai là 弟弟 dìdi)."},
-    {"t": "listen", "say": "这是我妹妹。", "lang": "zh-CN", "q": "Người nói đang giới thiệu ai?", "o": ["Chị gái", "Em gái", "Mẹ"], "a": 1, "e": "妹妹 mèimei = em gái; 姐姐 jiějie = chị gái."},
-    {"t": "mc", "q": "Câu nào ĐÚNG? (Tôi không có chị gái.)", "o": ["我不有姐姐。", "我没有姐姐。", "我没是姐姐。"], "a": 1, "e": "Phủ định của 有 luôn là 没有."},
-    {"t": "mc", "q": "你家有几口人？(Nǐ jiā yǒu jǐ kǒu rén?) – câu trả lời đúng:", "o": ["我家有四口人。", "我家有四个口人。", "我家是四口人。"], "a": 0, "e": "Số + 口 + 人; không chồng hai lượng từ 个口, không dùng 是 thay 有."},
-    {"t": "mc", "q": "Chọn lượng từ đúng: 我有两___朋友。", "o": ["口", "个", "几"], "a": 1, "e": "Đếm bạn bè dùng 个; 口 chỉ đếm người trong gia đình."},
-    {"t": "mc", "q": "“mẹ của bạn tôi” nói là:", "o": ["我朋友的妈妈", "妈妈的我朋友", "我妈妈的朋友"], "a": 0, "e": "Người sở hữu + 的 + người được sở hữu. 我妈妈的朋友 = bạn của mẹ tôi."},
-    {"t": "mc", "q": "这是谁？(Zhè shì shéi?) là câu hỏi về:", "o": ["Đồ vật", "Người", "Số lượng"], "a": 1, "e": "谁 = ai → hỏi về người."},
-    {"t": "fill", "q": "我___有弟弟。(Tôi không có em trai.)", "a": "没", "alt": ["mei"], "e": "没有 = không có."},
-    {"t": "fill", "q": "爸爸___妈妈都是老师。(Bố và mẹ đều là giáo viên.)", "a": "和", "alt": ["he"], "e": "和 nối hai danh từ: 爸爸和妈妈."},
-    {"t": "fill", "q": "你有___个姐姐？(Bạn có mấy chị gái?)", "a": "几", "alt": ["ji"], "e": "几 + lượng từ 个 hỏi số lượng nhỏ."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Chúng tôi đều là học sinh.”", "w": ["学生", "都", "我们", "是"], "a": "我们都是学生", "e": "Chủ ngữ số nhiều + 都 + 是 + danh từ."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Nhà bạn có mấy người?”", "w": ["几", "你家", "人", "有", "口"], "a": "你家有几口人", "e": "你家 + 有 + 几口人 – không thêm 吗 vì đã có 几."},
-    {"t": "dict", "say": "爸爸", "lang": "zh-CN", "a": "爸爸", "py": "bàba", "e": "爸爸 bàba – âm sau thanh nhẹ."},
-    {"t": "dict", "say": "我有一个哥哥。", "lang": "zh-CN", "a": "我有一个哥哥", "py": "wǒ yǒu yí ge gēge", "e": "一个 đọc yí ge."},
-    {"t": "match", "q": "Nối thành viên gia đình với nghĩa:", "pairs": [["哥哥", "anh trai"], ["姐姐", "chị gái"], ["弟弟", "em trai"], ["妹妹", "em gái"], ["女儿", "con gái"], ["儿子", "con trai"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Học viên mang 1 ảnh gia đình (in hoặc trên điện thoại); sơ đồ cây gia phả trống; thẻ chữ 家 有 口 个 爸 妈 的; tranh vẽ gia đình 6–8 thành viên; vài tờ giấy mỏng để luyện âm bật hơi.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: ôn bài 2 – học viên hỏi nhau tên, quốc tịch bằng tên tiếng Trung đã đặt."},
-      {"t": "20'", "do": "Từ vựng gia đình: GV vẽ cây gia phả nhà 小兰 lên bảng, chỉ từng người – lớp đọc theo. Nhấn thanh nhẹ trong 爸爸, 妈妈…; phân biệt 姐姐/妹妹, 哥哥/弟弟 bằng cử chỉ tay (cao/thấp)."},
-      {"t": "15'", "do": "Phát âm: g – k bật hơi (个/口, 狗/口) với tờ giấy trước miệng; ü trong 女; er trong 儿子; 一个 → yí ge."},
-      {"t": "25'", "do": "Ngữ pháp 1–2: 有 / 没有; 几 + lượng từ; 两. Hỏi đáp dây chuyền: 你有哥哥吗？– 有，我有一个哥哥。/ 没有。 Viết ❌ 我不有… và ❌ 二个… cho lớp sửa."},
-      {"t": "10'", "do": "Mẹo 和 & 都: học viên sửa 3 câu sai trên bảng."},
-      {"t": "10'", "do": "Bài tập 1–8 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: GV mô tả gia đình một nhân vật (我家有…口人…), lớp vẽ nhanh cây gia phả rồi so đáp án."},
-      {"t": "15'", "do": "Ngữ pháp 3: 的, 这/那, 谁 – học viên giơ ảnh gia đình, bạn hỏi 这是谁？ – trả lời 这是我妈妈。"},
-      {"t": "15'", "do": "Nghe hội thoại: lần 1 – nhà Tiểu Lan mấy người? lần 2 xem pinyin, trả lời câu hỏi; lần 3 đóng vai, thay thông tin nhà mình."},
-      {"t": "15'", "do": "Đọc ‘我的家’ + câu hỏi; so sánh nhà 陈明 và nhà 小兰 (ai có anh trai? ai là giáo viên?)."},
-      {"t": "20'", "do": "Chữ Hán 7 chữ (bộ 宀, 父, 女, 白) + nhiệm vụ nói 1–3 theo cặp."},
-      {"t": "15'", "do": "Viết đoạn giới thiệu gia đình; bài tập 9–16; giao bài về nhà."}
+ "no": 3,
+ "title": "我家有五口人 – Gia đình; 有 / 没有, 几, lượng từ 个 / 口",
+ "sub": "Nǐ jiā yǒu jǐ kǒu rén? 你家有几口人？",
+ "goals": [
+  "Giới thiệu gia đình: số người, các thành viên, nghề của bố mẹ",
+  "Dùng đúng 有 / 没有 (KHÔNG nói 不有); hỏi 有…吗 / 有没有…",
+  "Hỏi số lượng bằng 几 + lượng từ (几口人, 几个哥哥); dùng 两 trước lượng từ",
+  "Dùng 的 chỉ sở hữu; 这 / 那 + 是 + 谁 để giới thiệu ảnh gia đình",
+  "Dùng 和 nối danh từ, 都 = đều; đọc đúng g – k (个 / 口), ü trong 女"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词 shēngcí)",
+   "items": [
+    {
+     "w": "家",
+     "py": "jiā",
+     "hv": "gia",
+     "pos": "n",
+     "vi": "nhà, gia đình",
+     "ex": "我家有五口人。",
+     "exPy": "Wǒ jiā yǒu wǔ kǒu rén.",
+     "exVi": "Nhà tôi có năm người."
+    },
+    {
+     "w": "有",
+     "py": "yǒu",
+     "hv": "hữu",
+     "pos": "v",
+     "vi": "có",
+     "ex": "我有一个哥哥。",
+     "exPy": "Wǒ yǒu yí ge gēge.",
+     "exVi": "Tôi có một anh trai."
+    },
+    {
+     "w": "没有",
+     "py": "méiyǒu",
+     "hv": "một hữu",
+     "pos": "v",
+     "vi": "không có",
+     "ex": "我没有姐姐。",
+     "exPy": "Wǒ méiyǒu jiějie.",
+     "exVi": "Tôi không có chị gái."
+    },
+    {
+     "w": "几",
+     "py": "jǐ",
+     "hv": "kỉ",
+     "pos": "pron",
+     "vi": "mấy (hỏi số lượng nhỏ)",
+     "ex": "你有几个妹妹？",
+     "exPy": "Nǐ yǒu jǐ ge mèimei?",
+     "exVi": "Bạn có mấy em gái?"
+    },
+    {
+     "w": "口",
+     "py": "kǒu",
+     "hv": "khẩu",
+     "pos": "mw",
+     "vi": "(lượng từ) người – đếm nhân khẩu trong gia đình; nghĩa gốc: miệng",
+     "ex": "你家有几口人？",
+     "exPy": "Nǐ jiā yǒu jǐ kǒu rén?",
+     "exVi": "Nhà bạn có mấy người?"
+    },
+    {
+     "w": "个",
+     "py": "gè",
+     "hv": "cá",
+     "pos": "mw",
+     "vi": "cái, chiếc, người (lượng từ chung)",
+     "ex": "我有两个朋友。",
+     "exPy": "Wǒ yǒu liǎng ge péngyou.",
+     "exVi": "Tôi có hai người bạn."
+    },
+    {
+     "w": "爸爸",
+     "py": "bàba",
+     "hv": "ba ba",
+     "pos": "n",
+     "vi": "bố, ba",
+     "ex": "这是我爸爸。",
+     "exPy": "Zhè shì wǒ bàba.",
+     "exVi": "Đây là bố tôi."
+    },
+    {
+     "w": "妈妈",
+     "py": "māma",
+     "hv": "ma ma",
+     "pos": "n",
+     "vi": "mẹ",
+     "ex": "我妈妈是老师。",
+     "exPy": "Wǒ māma shì lǎoshī.",
+     "exVi": "Mẹ tôi là giáo viên."
+    },
+    {
+     "w": "哥哥",
+     "py": "gēge",
+     "hv": "ca ca",
+     "pos": "n",
+     "vi": "anh trai",
+     "ex": "我哥哥是学生。",
+     "exPy": "Wǒ gēge shì xuésheng.",
+     "exVi": "Anh trai tôi là sinh viên."
+    },
+    {
+     "w": "姐姐",
+     "py": "jiějie",
+     "hv": "thư thư",
+     "pos": "n",
+     "vi": "chị gái",
+     "ex": "小明有一个姐姐。",
+     "exPy": "Xiǎo Míng yǒu yí ge jiějie.",
+     "exVi": "Tiểu Minh có một chị gái."
+    },
+    {
+     "w": "弟弟",
+     "py": "dìdi",
+     "hv": "đệ đệ",
+     "pos": "n",
+     "vi": "em trai",
+     "ex": "你有弟弟吗？",
+     "exPy": "Nǐ yǒu dìdi ma?",
+     "exVi": "Bạn có em trai không?"
+    },
+    {
+     "w": "妹妹",
+     "py": "mèimei",
+     "hv": "muội muội",
+     "pos": "n",
+     "vi": "em gái",
+     "ex": "我妹妹叫小梅。",
+     "exPy": "Wǒ mèimei jiào Xiǎo Méi.",
+     "exVi": "Em gái tôi tên Tiểu Mai."
+    },
+    {
+     "w": "儿子",
+     "py": "érzi",
+     "hv": "nhi tử",
+     "pos": "n",
+     "vi": "con trai",
+     "ex": "他有一个儿子。",
+     "exPy": "Tā yǒu yí ge érzi.",
+     "exVi": "Anh ấy có một con trai."
+    },
+    {
+     "w": "女儿",
+     "py": "nǚ'ér",
+     "hv": "nữ nhi",
+     "pos": "n",
+     "vi": "con gái",
+     "ex": "王老师有两个女儿。",
+     "exPy": "Wáng lǎoshī yǒu liǎng ge nǚ'ér.",
+     "exVi": "Thầy Vương có hai con gái."
+    },
+    {
+     "w": "的",
+     "py": "de",
+     "hv": "đích",
+     "pos": "part",
+     "vi": "của (trợ từ sở hữu)",
+     "ex": "这是我朋友的妈妈。",
+     "exPy": "Zhè shì wǒ péngyou de māma.",
+     "exVi": "Đây là mẹ của bạn tôi."
+    },
+    {
+     "w": "谁",
+     "py": "shéi",
+     "hv": "thuỳ",
+     "pos": "pron",
+     "vi": "ai",
+     "ex": "他是谁？",
+     "exPy": "Tā shì shéi?",
+     "exVi": "Anh ấy là ai?"
+    },
+    {
+     "w": "和",
+     "py": "hé",
+     "hv": "hoà",
+     "pos": "conj",
+     "vi": "và, với (nối danh từ)",
+     "ex": "我和安娜是朋友。",
+     "exPy": "Wǒ hé Ānnà shì péngyou.",
+     "exVi": "Tôi và Anna là bạn."
+    },
+    {
+     "w": "都",
+     "py": "dōu",
+     "hv": "đô",
+     "pos": "adv",
+     "vi": "đều, tất cả",
+     "ex": "我们都是学生。",
+     "exPy": "Wǒmen dōu shì xuésheng.",
+     "exVi": "Chúng tôi đều là sinh viên."
+    },
+    {
+     "w": "这",
+     "py": "zhè",
+     "hv": "giá",
+     "pos": "pron",
+     "vi": "này, đây (gần)",
+     "ex": "这是我妈妈。",
+     "exPy": "Zhè shì wǒ māma.",
+     "exVi": "Đây là mẹ tôi."
+    },
+    {
+     "w": "那",
+     "py": "nà",
+     "hv": "na",
+     "pos": "pron",
+     "vi": "kia, đó (xa)",
+     "ex": "那是谁？",
+     "exPy": "Nà shì shéi?",
+     "exVi": "Kia là ai?"
+    }
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Văn hoá: xưng hô trong gia đình Trung Quốc",
+   "html": "<p>Giống tiếng Việt, tiếng Trung phân biệt <b>anh/chị</b> (lớn hơn) và <b>em</b> (nhỏ hơn) – nhưng “em” phải nói rõ trai hay gái: <b>弟弟</b> em trai, <b>妹妹</b> em gái.</p><table><tr><th>Bên nội</th><th>Pinyin</th><th>Bên ngoại</th><th>Pinyin</th></tr><tr><td>爷爷 – ông nội</td><td>yéye</td><td>外公 / 姥爷 – ông ngoại</td><td>wàigōng / lǎoye</td></tr><tr><td>奶奶 – bà nội</td><td>nǎinai</td><td>外婆 / 姥姥 – bà ngoại</td><td>wàipó / lǎolao</td></tr></table><p>Chữ <b>外</b> (ngoại) có mặt trong 外公, 外婆 – giống hệt “ông ngoại, bà ngoại” Hán Việt!</p><p>Người Trung Quốc cũng gọi người lạ bằng từ gia đình như người Việt: <b>阿姨</b> āyí (cô, dì – phụ nữ trung niên), <b>叔叔</b> shūshu (chú), <b>哥哥 / 姐姐</b> (anh, chị – người trẻ hơn mình một chút).</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: g – k bật hơi, zh – j, ü, er và thanh nhẹ trong từ láy",
+   "items": [
+    {
+     "sym": "g – k (bật hơi)",
+     "ex": [
+      "个",
+      "口",
+      "哥哥"
+     ],
+     "vi": "<b>g</b> (个 gè, 哥 gē) KHÔNG bật hơi – gần “c/k” tiếng Việt. <b>k</b> (口 kǒu) BẬT HƠI mạnh: đặt tờ giấy trước miệng, đọc k thì giấy phải rung. Người Việt hay đọc 口 thành “cẩu” không có hơi – nghe thành 狗 gǒu (con chó)!",
+     "pairs": [
+      [
+       "哥",
+       "科"
+      ],
+      [
+       "狗",
+       "口"
+      ]
+     ]
+    },
+    {
+     "sym": "zh – j",
+     "ex": [
+      "这",
+      "家",
+      "几",
+      "姐姐"
+     ],
+     "vi": "<b>zh</b> (这 zhè): uốn lưỡi, gần “tr” tiếng Việt đọc chuẩn. <b>j</b> (家 jiā, 几 jǐ): mặt lưỡi áp vòm, gần “ch” tiếng Việt nhưng môi dẹt hơn. 这 ≈ “trơ”, 家 ≈ “chia”.",
+     "pairs": [
+      [
+       "这",
+       "借"
+      ]
+     ]
+    },
+    {
+     "sym": "ü sau n (女)",
+     "ex": [
+      "女儿",
+      "女"
+     ],
+     "vi": "女 viết <b>nǚ</b> (giữ hai chấm vì đứng sau n). Môi chu tròn như “u” nhưng lưỡi đặt như “i” – gần “uy” đọc liền. 女 nǚ (nữ) khác 努 nǔ.",
+     "pairs": [
+      [
+       "女",
+       "努"
+      ]
+     ]
+    },
+    {
+     "sym": "er (儿)",
+     "ex": [
+      "儿子",
+      "女儿"
+     ],
+     "vi": "儿 ér: đọc “ơ” rồi cong đầu lưỡi lên phía vòm – giống “ơ” kèm “r” Anh–Mỹ. 女儿 nǚ'ér có dấu cách âm ' để không đọc nhầm."
+    },
+    {
+     "sym": "thanh nhẹ trong từ láy",
+     "ex": [
+      "爸爸",
+      "妈妈",
+      "哥哥",
+      "姐姐",
+      "弟弟",
+      "妹妹"
+     ],
+     "vi": "Âm thứ hai đọc nhẹ, ngắn: bàba, māma, gēge, jiějie, dìdi, mèimei. Với 姐姐: jiě đọc thấp, “jie” sau nhẹ và hơi cao lên."
+    },
+    {
+     "sym": "一个 → yí ge",
+     "ex": [
+      "一个",
+      "两个",
+      "几个"
+     ],
+     "vi": "个 gốc thanh 4 (gè) nên 一 đứng trước đọc thanh 2: <b>yí ge</b>; bản thân 个 sau số đọc nhẹ: liǎng ge, jǐ ge."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: 有 / 没有 – có / không có",
+   "html": "<p><b>有</b> = có (sở hữu). Phủ định DUY NHẤT là <b>没有</b> (méiyǒu) – không bao giờ dùng ❌ 不有. Câu hỏi: <b>…有…吗？</b> hoặc dạng chính phản <b>…有没有…？</b>. Trả lời ngắn: 有 / 没有.</p>",
+   "table": [
+    [
+     "Khẳng định",
+     "Phủ định",
+     "Câu hỏi"
     ],
-    "games": [
-      "Gia phả bí mật: mỗi cặp nhận thẻ mô tả một gia đình bí mật. A hỏi (你家有几口人？你有姐姐吗？你哥哥叫什么名字？…), B trả lời; A vẽ cây gia phả rồi so với thẻ – đúng hết được 1 điểm.",
-      "Tôi cũng có!: GV nói 我有哥哥。– ai có thì giơ tay nói 我也有哥哥！, ai không có nói 我没有哥哥。 Tăng tốc, đổi thành viên liên tục."
+    [
+     "我有哥哥。",
+     "我没有姐姐。",
+     "你有弟弟吗？ / 你有没有弟弟？"
     ],
-    "errors": [
-      "❌ 我不有姐姐 → ✅ 我没有姐姐 (phủ định của 有 luôn là 没有).",
-      "Thiếu lượng từ: ❌ 我有一哥哥 / 你有几哥哥 → ✅ 一个哥哥 / 几个哥哥.",
-      "Dùng 二 trước lượng từ: ❌ 二个妹妹 → ✅ 两个妹妹.",
-      "Đảo thứ tự sở hữu theo tiếng Việt: ❌ 妈妈的我 → ✅ 我妈妈.",
-      "Dùng 和 nối hai câu: ❌ 我是学生和他是老师 → ✅ 我是学生，他是老师.",
-      "Đọc 口 kǒu không bật hơi (nghe thành 狗 gǒu), đọc 女 nǚ thành nǔ."
+    [
+     "Wǒ yǒu gēge.",
+     "Wǒ méiyǒu jiějie.",
+     "Nǐ yǒu dìdi ma? / Nǐ yǒu méiyǒu dìdi?"
     ],
-    "homework": "Bài tập trong game ≥ 80%; viết mỗi chữ Hán 1 dòng; vẽ cây gia phả nhà mình ghi chữ Hán + pinyin; ghi âm đoạn giới thiệu gia đình 40–60 giây."
+    [
+     "Tôi có anh trai.",
+     "Tôi không có chị gái.",
+     "Bạn có em trai không?"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "小明有一个姐姐。",
+     "py": "Xiǎo Míng yǒu yí ge jiějie.",
+     "vi": "Tiểu Minh có một chị gái."
+    },
+    {
+     "t": "安娜没有哥哥，也没有妹妹。",
+     "py": "Ānnà méiyǒu gēge, yě méiyǒu mèimei.",
+     "vi": "Anna không có anh trai, cũng không có em gái."
+    },
+    {
+     "t": "你有中国朋友吗？— 有。",
+     "py": "Nǐ yǒu Zhōngguó péngyou ma? — Yǒu.",
+     "vi": "Bạn có bạn người Trung Quốc không? — Có."
+    },
+    {
+     "t": "你有没有弟弟？— 没有。",
+     "py": "Nǐ yǒu méiyǒu dìdi? — Méiyǒu.",
+     "vi": "Bạn có em trai không? — Không có."
+    }
+   ],
+   "tips": [
+    "❌ <i>我不有姐姐</i> → ✅ 我没有姐姐。 不 phủ định 是, tính từ và đa số động từ; riêng 有 luôn dùng 没.",
+    "Trả lời câu 有…吗 bằng 有 / 没有, không trả lời ❌ 是 / 不是.",
+    "Câu dạng 有没有 đã là câu hỏi – không thêm 吗: ❌ <i>你有没有弟弟吗？</i>"
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: Số + lượng từ + danh từ; hỏi bằng 几",
+   "html": "<p>Tiếng Trung đếm luôn cần <b>lượng từ</b> (giống “con, cái, chiếc” của tiếng Việt): <b>Số + lượng từ + danh từ</b>. Tiếng Việt đôi khi bỏ được (“hai anh trai”), tiếng Trung thì KHÔNG.</p><ul><li><b>个 (ge)</b>: lượng từ chung cho người và nhiều đồ vật – 一个哥哥, 三个朋友.</li><li><b>口 (kǒu)</b>: chỉ dùng đếm số người trong gia đình – 我家有五口人.</li></ul><p><b>几</b> hỏi số lượng nhỏ (thường dưới 10); sau 几 cũng phải có lượng từ: 几个, 几口. Số 2 đứng trước lượng từ đọc <b>两 (liǎng)</b>: 两个妹妹 (❌ 二个).</p>",
+   "table": [
+    [
+     "Câu hỏi",
+     "Trả lời"
+    ],
+    [
+     "你家有几口人？",
+     "我家有五口人。"
+    ],
+    [
+     "你有几个哥哥？",
+     "我有一个哥哥。"
+    ],
+    [
+     "他有几个女儿？",
+     "他有两个女儿。"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "你家有几口人？— 我家有四口人。",
+     "py": "Nǐ jiā yǒu jǐ kǒu rén? — Wǒ jiā yǒu sì kǒu rén.",
+     "vi": "Nhà bạn có mấy người? — Nhà tôi có bốn người."
+    },
+    {
+     "t": "王老师有两个女儿。",
+     "py": "Wáng lǎoshī yǒu liǎng ge nǚ'ér.",
+     "vi": "Thầy Vương có hai con gái."
+    },
+    {
+     "t": "我有三个中国朋友。",
+     "py": "Wǒ yǒu sān ge Zhōngguó péngyou.",
+     "vi": "Tôi có ba người bạn Trung Quốc."
+    }
+   ],
+   "tips": [
+    "❌ <i>我有一哥哥</i> (thiếu lượng từ) → ✅ 我有一个哥哥。",
+    "❌ <i>你有几哥哥？</i> → ✅ 你有几个哥哥？",
+    "口 chỉ dùng với 人 khi nói về gia đình. Đếm bạn bè, học sinh dùng 个: ❌ <i>三口朋友</i>.",
+    "Không chồng hai lượng từ: ❌ <i>四个口人</i> → ✅ 四口人."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: 的 sở hữu; 这 / 那; hỏi người bằng 谁",
+   "html": "<p><b>Người sở hữu + 的 + vật/người được sở hữu</b> – NGƯỢC tiếng Việt: “mẹ CỦA bạn tôi” = 我朋友<b>的</b>妈妈.</p><p>Với <b>người thân, nhóm thân thiết</b> thường bỏ 的: 我妈妈, 我哥哥, 我们家. (Nói 我的妈妈 cũng đúng, nhưng nghe nhấn mạnh hơn.)</p><p><b>这</b> (zhè – này, đây: gần) / <b>那</b> (nà – kia, đó: xa) + 是 + …: 这是我爸爸。 Hỏi người dùng <b>谁</b> (shéi – ai), đặt đúng chỗ cần hỏi: 这是谁？ 那是谁的妹妹？</p>",
+   "table": [
+    [
+     "Tiếng Việt",
+     "Tiếng Trung"
+    ],
+    [
+     "mẹ (của) tôi",
+     "我妈妈 / 我的妈妈"
+    ],
+    [
+     "bạn của anh trai tôi",
+     "我哥哥的朋友"
+    ],
+    [
+     "Đây là ai?",
+     "这是谁？"
+    ],
+    [
+     "Kia là em gái của ai?",
+     "那是谁的妹妹？"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "这是谁？— 这是我爸爸。",
+     "py": "Zhè shì shéi? — Zhè shì wǒ bàba.",
+     "vi": "Đây là ai? — Đây là bố tôi."
+    },
+    {
+     "t": "那是我朋友的妈妈。",
+     "py": "Nà shì wǒ péngyou de māma.",
+     "vi": "Kia là mẹ của bạn tôi."
+    },
+    {
+     "t": "那是谁的哥哥？— 是小兰的哥哥。",
+     "py": "Nà shì shéi de gēge? — Shì Xiǎo Lán de gēge.",
+     "vi": "Kia là anh trai của ai? — Là anh trai của Tiểu Lan."
+    }
+   ],
+   "tips": [
+    "Thứ tự ngược tiếng Việt: ❌ <i>妈妈的我</i> → ✅ 我的妈妈 / 我妈妈。",
+    "谁 có hai cách đọc: shéi (khẩu ngữ, phổ biến) và shuí – đều đúng.",
+    "这 / 那 đứng đầu câu làm chủ ngữ: 这是…; không nói ❌ <i>是这我妈妈</i>."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Mẹo nhỏ: 和 và 都 – hai từ hay dùng sai",
+   "html": "<p><b>和 (hé)</b> = và – chỉ nối <b>danh từ / đại từ</b>: 爸爸和妈妈, 我和安娜. KHÔNG nối hai câu hay hai động từ: ❌ <i>我是学生和他是老师</i> → ✅ 我是学生，他是老师。</p><p><b>都 (dōu)</b> = đều – đứng <b>sau chủ ngữ số nhiều, trước động từ</b>: 我们都是学生; 我哥哥和我妹妹都是学生. ❌ <i>都我们是学生</i>.</p><p>Có cả 也 và 都 thì 也 đứng trước: 我们<b>也都</b>是越南人 (Chúng tôi cũng đều là người Việt Nam).</p>"
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Ảnh gia đình",
+   "lang": "zh-CN",
+   "note": "Anna đến nhà Tiểu Lan chơi, thấy ảnh gia đình trên tường. Nghe lần 1 không nhìn chữ: nhà Tiểu Lan có mấy người?",
+   "lines": [
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "小兰，这是谁？",
+     "py": "Xiǎo Lán, zhè shì shéi?",
+     "vi": "Lan ơi, đây là ai thế?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "这是我爸爸，那是我妈妈。",
+     "py": "Zhè shì wǒ bàba, nà shì wǒ māma.",
+     "vi": "Đây là bố mình, kia là mẹ mình."
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "你妈妈是老师吗？",
+     "py": "Nǐ māma shì lǎoshī ma?",
+     "vi": "Mẹ bạn là giáo viên à?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "是，我妈妈是老师。我爸爸不是老师。",
+     "py": "Shì, wǒ māma shì lǎoshī. Wǒ bàba bú shì lǎoshī.",
+     "vi": "Ừ, mẹ mình là giáo viên. Bố mình không phải giáo viên."
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "你家有几口人？",
+     "py": "Nǐ jiā yǒu jǐ kǒu rén?",
+     "vi": "Nhà bạn có mấy người?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "我家有五口人：爸爸、妈妈、哥哥、妹妹和我。",
+     "py": "Wǒ jiā yǒu wǔ kǒu rén: bàba, māma, gēge, mèimei hé wǒ.",
+     "vi": "Nhà mình có năm người: bố, mẹ, anh trai, em gái và mình."
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "这是你哥哥吗？",
+     "py": "Zhè shì nǐ gēge ma?",
+     "vi": "Đây là anh trai bạn à?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "是，他叫阮海。我哥哥和我妹妹都是学生。",
+     "py": "Shì, tā jiào Ruǎn Hǎi. Wǒ gēge hé wǒ mèimei dōu shì xuésheng.",
+     "vi": "Ừ, anh ấy tên Nguyễn Hải. Anh trai và em gái mình đều là học sinh, sinh viên."
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "你有姐姐吗？",
+     "py": "Nǐ yǒu jiějie ma?",
+     "vi": "Bạn có chị gái không?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "我没有姐姐，也没有弟弟。你呢？你家有几口人？",
+     "py": "Wǒ méiyǒu jiějie, yě méiyǒu dìdi. Nǐ ne? Nǐ jiā yǒu jǐ kǒu rén?",
+     "vi": "Mình không có chị gái, cũng không có em trai. Còn bạn? Nhà bạn có mấy người?"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "我家有三口人：爸爸、妈妈和我。",
+     "py": "Wǒ jiā yǒu sān kǒu rén: bàba, māma hé wǒ.",
+     "vi": "Nhà mình có ba người: bố, mẹ và mình."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "你没有哥哥姐姐吗？",
+     "py": "Nǐ méiyǒu gēge jiějie ma?",
+     "vi": "Bạn không có anh chị à?"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "没有。你家人很多，很好！",
+     "py": "Méiyǒu. Nǐ jiā rén hěn duō, hěn hǎo!",
+     "vi": "Không có. Nhà bạn đông người, thích thật!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Nhà 小兰 có mấy người?",
+     "o": [
+      "3 người",
+      "4 người",
+      "5 người"
+     ],
+     "a": 2,
+     "e": "我家有五口人：爸爸、妈妈、哥哥、妹妹和我。"
+    },
+    {
+     "q": "Ai là giáo viên?",
+     "o": [
+      "Anh trai của Tiểu Lan",
+      "Bố của Tiểu Lan",
+      "Mẹ của Tiểu Lan"
+     ],
+     "a": 2,
+     "e": "我妈妈是老师。我爸爸不是老师。"
+    },
+    {
+     "q": "Câu nào ĐÚNG?",
+     "o": [
+      "Tiểu Lan không có em trai",
+      "Anna có anh trai",
+      "Tiểu Lan có chị gái"
+     ],
+     "a": 0,
+     "e": "我没有姐姐，也没有弟弟。– Tiểu Lan không có chị gái, cũng không có em trai."
+    },
+    {
+     "q": "Anh trai của 小兰 tên là gì? (gõ chữ Hán hoặc pinyin)",
+     "a": "阮海",
+     "alt": [
+      "ruanhai",
+      "海",
+      "hai"
+     ],
+     "e": "他叫阮海 (Ruǎn Hǎi – Nguyễn Hải)."
+    },
+    {
+     "q": "Nhà Anna gồm những ai?",
+     "o": [
+      "Bố, mẹ, anh trai và Anna",
+      "Mẹ và Anna",
+      "Bố, mẹ và Anna"
+     ],
+     "a": 2,
+     "e": "我家有三口人：爸爸、妈妈和我。"
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Gia đình Tiểu Minh",
+   "title": "我的家",
+   "text": "我叫陈明，我是叶纱城人。我家有四口人：爸爸、妈妈、姐姐和我。\n\n我爸爸和我妈妈都是老师。我姐姐不是老师，她是医生。我是学生。\n\n我没有哥哥，也没有弟弟妹妹。我很爱我的家！",
+   "py": "Wǒ jiào Chén Míng, wǒ shì Yèshā Chéng rén. Wǒ jiā yǒu sì kǒu rén: bàba, māma, jiějie hé wǒ.\n\nWǒ bàba hé wǒ māma dōu shì lǎoshī. Wǒ jiějie bú shì lǎoshī, tā shì yīshēng. Wǒ shì xuésheng.\n\nWǒ méiyǒu gēge, yě méiyǒu dìdi mèimei. Wǒ hěn ài wǒ de jiā!",
+   "vi": "Tôi tên là Trần Minh, tôi là người Diệp Sa. Nhà tôi có bốn người: bố, mẹ, chị gái và tôi.\n\nBố và mẹ tôi đều là giáo viên. Chị tôi không phải giáo viên, chị ấy là bác sĩ. Tôi là sinh viên.\n\nTôi không có anh trai, cũng không có em trai, em gái. Tôi rất yêu gia đình mình!",
+   "gloss": [
+    {
+     "w": "医生",
+     "py": "yīshēng",
+     "vi": "bác sĩ (học kỹ ở bài 11)"
+    },
+    {
+     "w": "爱",
+     "py": "ài",
+     "vi": "yêu (bài 6)"
+    },
+    {
+     "w": "四",
+     "py": "sì",
+     "vi": "bốn"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Nhà 陈明 có mấy người?",
+     "o": [
+      "3 người",
+      "4 người",
+      "5 người"
+     ],
+     "a": 1,
+     "e": "我家有四口人。"
+    },
+    {
+     "q": "Chị gái của 陈明 làm nghề gì?",
+     "o": [
+      "Sinh viên",
+      "Giáo viên",
+      "Bác sĩ"
+     ],
+     "a": 2,
+     "e": "我姐姐不是老师，她是医生。"
+    },
+    {
+     "q": "Ai là giáo viên?",
+     "o": [
+      "陈明",
+      "Bố và mẹ",
+      "Chị gái"
+     ],
+     "a": 1,
+     "e": "我爸爸和我妈妈都是老师。– 都 = đều."
+    },
+    {
+     "q": "陈明 có em trai không?",
+     "o": [
+      "Có hai em trai",
+      "Có một em trai",
+      "Không có"
+     ],
+     "a": 2,
+     "e": "我没有哥哥，也没有弟弟妹妹。"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "家",
+     "py": "jiā",
+     "hv": "gia",
+     "parts": "宀 (miên – mái nhà) + 豕 (thỉ – con lợn)",
+     "strokes": 10,
+     "vi": "nhà – ngày xưa nhà nào cũng nuôi lợn dưới mái nhà",
+     "words": "家, 我家, 大家"
+    },
+    {
+     "c": "有",
+     "py": "yǒu",
+     "hv": "hữu",
+     "parts": "𠂇 (bàn tay) + 月 (biến thể của 肉 – thịt)",
+     "strokes": 6,
+     "vi": "có – tay cầm miếng thịt là “có” của ăn",
+     "words": "有, 没有"
+    },
+    {
+     "c": "口",
+     "py": "kǒu",
+     "hv": "khẩu",
+     "parts": "tượng hình cái miệng",
+     "strokes": 3,
+     "vi": "miệng; lượng từ đếm người trong nhà (mỗi người một miệng ăn)",
+     "words": "几口人"
+    },
+    {
+     "c": "个",
+     "py": "gè",
+     "hv": "cá",
+     "parts": "人 (người) + 丨 (nét sổ)",
+     "strokes": 3,
+     "vi": "cái, chiếc – lượng từ chung",
+     "words": "一个, 几个, 两个"
+    },
+    {
+     "c": "爸",
+     "py": "bà",
+     "hv": "ba",
+     "parts": "父 (phụ – cha) + 巴 (ba – gợi âm)",
+     "strokes": 8,
+     "vi": "bố – 父 chỉ nghĩa “cha”, 巴 chỉ âm “ba”",
+     "words": "爸爸"
+    },
+    {
+     "c": "妈",
+     "py": "mā",
+     "hv": "ma",
+     "parts": "女 (nữ – phụ nữ) + 马 (mã – gợi âm “ma”)",
+     "strokes": 6,
+     "vi": "mẹ – người phụ nữ, đọc gần như 马",
+     "words": "妈妈"
+    },
+    {
+     "c": "的",
+     "py": "de",
+     "hv": "đích",
+     "parts": "白 (bạch – trắng) + 勺 (thược – cái muôi)",
+     "strokes": 8,
+     "vi": "của – trợ từ sở hữu (nghĩa gốc “đích”, mục tiêu)",
+     "words": "我的, 你的, 谁的"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Gia đình tôi",
+   "tasks": [
+    {
+     "p": "Giới thiệu gia đình bạn: có mấy người, gồm những ai, bố mẹ làm gì.",
+     "model": "我家有四口人：爸爸、妈妈、弟弟和我。我爸爸是医生，我妈妈是老师。我弟弟是学生。",
+     "py": "Wǒ jiā yǒu sì kǒu rén: bàba, māma, dìdi hé wǒ. Wǒ bàba shì yīshēng, wǒ māma shì lǎoshī. Wǒ dìdi shì xuésheng.",
+     "vi": "Nhà tôi có bốn người: bố, mẹ, em trai và tôi. Bố tôi là bác sĩ, mẹ tôi là giáo viên. Em trai tôi là học sinh.",
+     "tips": "Liệt kê thành viên ngắt nhẹ ở mỗi dấu 、; 和 đứng trước người cuối cùng."
+    },
+    {
+     "p": "Mở một tấm ảnh gia đình (trên điện thoại) và giới thiệu từng người với bạn.",
+     "model": "这是我妈妈，那是我哥哥。他叫阮海，他是学生。",
+     "py": "Zhè shì wǒ māma, nà shì wǒ gēge. Tā jiào Ruǎn Hǎi, tā shì xuésheng.",
+     "vi": "Đây là mẹ tôi, kia là anh trai tôi. Anh ấy tên Nguyễn Hải, anh ấy là sinh viên.",
+     "tips": "这 cho người gần trong ảnh / đang chỉ vào, 那 cho người ở xa hơn."
+    },
+    {
+     "p": "Hỏi bạn bên cạnh về gia đình (ít nhất 3 câu hỏi khác nhau).",
+     "model": "你家有几口人？你有哥哥吗？你妹妹叫什么名字？",
+     "py": "Nǐ jiā yǒu jǐ kǒu rén? Nǐ yǒu gēge ma? Nǐ mèimei jiào shénme míngzi?",
+     "vi": "Nhà bạn có mấy người? Bạn có anh trai không? Em gái bạn tên gì?"
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Giới thiệu gia đình",
+   "task": "Viết 6–8 câu giới thiệu gia đình bạn. Bắt buộc dùng: 有, 没有, số + lượng từ, 和, 都.",
+   "min": 40,
+   "model": "我叫阮兰。我家有五口人：爸爸、妈妈、哥哥、妹妹和我。我妈妈是老师，我爸爸不是老师。我哥哥叫阮海，我妹妹叫小梅。他们都是学生。我没有姐姐，也没有弟弟。",
+   "modelVi": "Tôi tên Nguyễn Lan. Nhà tôi có năm người: bố, mẹ, anh trai, em gái và tôi. Mẹ tôi là giáo viên, bố tôi không phải giáo viên. Anh tôi tên Nguyễn Hải, em gái tôi tên Tiểu Mai. Họ đều là học sinh, sinh viên. Tôi không có chị gái, cũng không có em trai.",
+   "tips": [
+    "Liệt kê dùng dấu 、 (dấu phẩy liệt kê) và 和 trước người cuối.",
+    "我妈妈 (bỏ 的) tự nhiên hơn 我的妈妈.",
+    "Số 2 trước lượng từ là 两: 两个哥哥."
+   ],
+   "checklist": [
+    "Có câu 我家有…口人",
+    "Có 没有 (không dùng 不有)",
+    "Có số + lượng từ (一个, 两个…)",
+    "Có 和 nối danh từ",
+    "Có 都 đứng sau chủ ngữ, trước động từ"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "我家有五口人。",
+   "lang": "zh-CN",
+   "q": "Nhà người nói có mấy người?",
+   "o": [
+    "3 người",
+    "4 người",
+    "5 người"
+   ],
+   "a": 2,
+   "e": "五 wǔ = 5; 五口人 = năm người."
+  },
+  {
+   "t": "listen",
+   "say": "我没有哥哥。",
+   "lang": "zh-CN",
+   "q": "Câu vừa nghe nghĩa là gì?",
+   "o": [
+    "Tôi có anh trai",
+    "Tôi không có anh trai",
+    "Tôi không có em trai"
+   ],
+   "a": 1,
+   "e": "没有 = không có; 哥哥 gēge = anh trai (em trai là 弟弟 dìdi)."
+  },
+  {
+   "t": "listen",
+   "say": "这是我妹妹。",
+   "lang": "zh-CN",
+   "q": "Người nói đang giới thiệu ai?",
+   "o": [
+    "Mẹ",
+    "Chị gái",
+    "Em gái"
+   ],
+   "a": 2,
+   "e": "妹妹 mèimei = em gái; 姐姐 jiějie = chị gái."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào ĐÚNG? (Tôi không có chị gái.)",
+   "o": [
+    "我没有姐姐。",
+    "我没是姐姐。",
+    "我不有姐姐。"
+   ],
+   "a": 0,
+   "e": "Phủ định của 有 luôn là 没有."
+  },
+  {
+   "t": "mc",
+   "q": "你家有几口人？(Nǐ jiā yǒu jǐ kǒu rén?) – câu trả lời đúng:",
+   "o": [
+    "我家是四口人。",
+    "我家有四口人。",
+    "我家有四个口人。"
+   ],
+   "a": 1,
+   "e": "Số + 口 + 人; không chồng hai lượng từ 个口, không dùng 是 thay 有."
+  },
+  {
+   "t": "mc",
+   "q": "Chọn lượng từ đúng: 我有两___朋友。",
+   "o": [
+    "口",
+    "个",
+    "几"
+   ],
+   "a": 1,
+   "e": "Đếm bạn bè dùng 个; 口 chỉ đếm người trong gia đình."
+  },
+  {
+   "t": "mc",
+   "q": "“mẹ của bạn tôi” nói là:",
+   "o": [
+    "我朋友的妈妈",
+    "妈妈的我朋友",
+    "我妈妈的朋友"
+   ],
+   "a": 0,
+   "e": "Người sở hữu + 的 + người được sở hữu. 我妈妈的朋友 = bạn của mẹ tôi."
+  },
+  {
+   "t": "mc",
+   "q": "这是谁？(Zhè shì shéi?) là câu hỏi về:",
+   "o": [
+    "Đồ vật",
+    "Người",
+    "Số lượng"
+   ],
+   "a": 1,
+   "e": "谁 = ai → hỏi về người."
+  },
+  {
+   "t": "fill",
+   "q": "我___有弟弟。(Tôi không có em trai.)",
+   "a": "没",
+   "alt": [
+    "mei"
+   ],
+   "e": "没有 = không có."
+  },
+  {
+   "t": "fill",
+   "q": "爸爸___妈妈都是老师。(Bố và mẹ đều là giáo viên.)",
+   "a": "和",
+   "alt": [
+    "he"
+   ],
+   "e": "和 nối hai danh từ: 爸爸和妈妈."
+  },
+  {
+   "t": "fill",
+   "q": "你有___个姐姐？(Bạn có mấy chị gái?)",
+   "a": "几",
+   "alt": [
+    "ji"
+   ],
+   "e": "几 + lượng từ 个 hỏi số lượng nhỏ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Chúng tôi đều là học sinh.”",
+   "w": [
+    "学生",
+    "都",
+    "我们",
+    "是"
+   ],
+   "a": "我们都是学生",
+   "e": "Chủ ngữ số nhiều + 都 + 是 + danh từ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Nhà bạn có mấy người?”",
+   "w": [
+    "几",
+    "你家",
+    "人",
+    "有",
+    "口"
+   ],
+   "a": "你家有几口人",
+   "e": "你家 + 有 + 几口人 – không thêm 吗 vì đã có 几."
+  },
+  {
+   "t": "dict",
+   "say": "爸爸",
+   "lang": "zh-CN",
+   "a": "爸爸",
+   "py": "bàba",
+   "e": "爸爸 bàba – âm sau thanh nhẹ."
+  },
+  {
+   "t": "dict",
+   "say": "我有一个哥哥。",
+   "lang": "zh-CN",
+   "a": "我有一个哥哥",
+   "py": "wǒ yǒu yí ge gēge",
+   "e": "一个 đọc yí ge."
+  },
+  {
+   "t": "match",
+   "q": "Nối thành viên gia đình với nghĩa:",
+   "pairs": [
+    [
+     "哥哥",
+     "anh trai"
+    ],
+    [
+     "姐姐",
+     "chị gái"
+    ],
+    [
+     "弟弟",
+     "em trai"
+    ],
+    [
+     "妹妹",
+     "em gái"
+    ],
+    [
+     "女儿",
+     "con gái"
+    ],
+    [
+     "儿子",
+     "con trai"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Học viên mang 1 ảnh gia đình (in hoặc trên điện thoại); sơ đồ cây gia phả trống; thẻ chữ 家 有 口 个 爸 妈 的; tranh vẽ gia đình 6–8 thành viên; vài tờ giấy mỏng để luyện âm bật hơi.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: ôn bài 2 – học viên hỏi nhau tên, quốc tịch bằng tên tiếng Trung đã đặt."
+   },
+   {
+    "t": "20'",
+    "do": "Từ vựng gia đình: GV vẽ cây gia phả nhà 小兰 lên bảng, chỉ từng người – lớp đọc theo. Nhấn thanh nhẹ trong 爸爸, 妈妈…; phân biệt 姐姐/妹妹, 哥哥/弟弟 bằng cử chỉ tay (cao/thấp)."
+   },
+   {
+    "t": "15'",
+    "do": "Phát âm: g – k bật hơi (个/口, 狗/口) với tờ giấy trước miệng; ü trong 女; er trong 儿子; 一个 → yí ge."
+   },
+   {
+    "t": "25'",
+    "do": "Ngữ pháp 1–2: 有 / 没有; 几 + lượng từ; 两. Hỏi đáp dây chuyền: 你有哥哥吗？– 有，我有一个哥哥。/ 没有。 Viết ❌ 我不有… và ❌ 二个… cho lớp sửa."
+   },
+   {
+    "t": "10'",
+    "do": "Mẹo 和 & 都: học viên sửa 3 câu sai trên bảng."
+   },
+   {
+    "t": "10'",
+    "do": "Bài tập 1–8 trong game."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: GV mô tả gia đình một nhân vật (我家有…口人…), lớp vẽ nhanh cây gia phả rồi so đáp án."
+   },
+   {
+    "t": "15'",
+    "do": "Ngữ pháp 3: 的, 这/那, 谁 – học viên giơ ảnh gia đình, bạn hỏi 这是谁？ – trả lời 这是我妈妈。"
+   },
+   {
+    "t": "15'",
+    "do": "Nghe hội thoại: lần 1 – nhà Tiểu Lan mấy người? lần 2 xem pinyin, trả lời câu hỏi; lần 3 đóng vai, thay thông tin nhà mình."
+   },
+   {
+    "t": "15'",
+    "do": "Đọc ‘我的家’ + câu hỏi; so sánh nhà 陈明 và nhà 小兰 (ai có anh trai? ai là giáo viên?)."
+   },
+   {
+    "t": "20'",
+    "do": "Chữ Hán 7 chữ (bộ 宀, 父, 女, 白) + nhiệm vụ nói 1–3 theo cặp."
+   },
+   {
+    "t": "15'",
+    "do": "Viết đoạn giới thiệu gia đình; bài tập 9–16; giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Gia phả bí mật: mỗi cặp nhận thẻ mô tả một gia đình bí mật. A hỏi (你家有几口人？你有姐姐吗？你哥哥叫什么名字？…), B trả lời; A vẽ cây gia phả rồi so với thẻ – đúng hết được 1 điểm.",
+   "Tôi cũng có!: GV nói 我有哥哥。– ai có thì giơ tay nói 我也有哥哥！, ai không có nói 我没有哥哥。 Tăng tốc, đổi thành viên liên tục."
+  ],
+  "errors": [
+   "❌ 我不有姐姐 → ✅ 我没有姐姐 (phủ định của 有 luôn là 没有).",
+   "Thiếu lượng từ: ❌ 我有一哥哥 / 你有几哥哥 → ✅ 一个哥哥 / 几个哥哥.",
+   "Dùng 二 trước lượng từ: ❌ 二个妹妹 → ✅ 两个妹妹.",
+   "Đảo thứ tự sở hữu theo tiếng Việt: ❌ 妈妈的我 → ✅ 我妈妈.",
+   "Dùng 和 nối hai câu: ❌ 我是学生和他是老师 → ✅ 我是学生，他是老师.",
+   "Đọc 口 kǒu không bật hơi (nghe thành 狗 gǒu), đọc 女 nǚ thành nǔ."
+  ],
+  "homework": "Bài tập trong game ≥ 80%; viết mỗi chữ Hán 1 dòng; vẽ cây gia phả nhà mình ghi chữ Hán + pinyin; ghi âm đoạn giới thiệu gia đình 40–60 giây."
+ }
 }

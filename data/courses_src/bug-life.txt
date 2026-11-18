@@ -1,0 +1,735 @@
+=== COURSE bug-life
+name: Báo lỗi & vòng đời lỗi
+icon: 🐞
+floor: 8
+room: 804
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Tái hiện, báo cáo có bằng chứng, triage, khoanh vùng, phân tích nguyên nhân, retest và phòng tái diễn qua các tình huống lab tự tạo.
+
+## LESSON bug-life-01 | Lỗi, sự cố và bằng chứng quan sát
+
+### Bắt đầu bằng quan sát khách quan
+App giả định Vạt Mây báo đã đăng ký nhưng danh sách chưa có tên. Ghi chính điều nhìn thấy, trạng thái và thời điểm; chưa kết luận database mất dữ liệu hay Dev sai khi chưa đối chiếu.
+
+### Phân biệt error, defect và failure
+Hiểu sai rule, cài điều kiện sai và kết quả chạy sai là ba khái niệm liên quan. Vấn đề cũng có thể nằm requirement hoặc testware; không phải mọi anomaly đều là defect sản phẩm.
+~~~text
+error:hiểu sai hạn hủy
+defect:điều kiện sai trong sản phẩm công việc
+failure:hoàn điểm trái rule khi thực thi
+anomaly:khác mong đợi, cần phân tích nguồn expected
+~~~
+
+### Một quan sát có cấu trúc
+Build, actor, id và trạng thái trước giúp người khác biết đang xem cùng tình huống. Không ghi token hoặc dữ liệu cá nhân thật; dùng fixture tự đặt để dễ tái hiện.
+~~~text
+build:LAB2; actor:ST-L7-A
+class:CL-L7-A còn 1 chỗ
+action:submit một lần
+UI:Đã đăng ký
+list sau refresh:chưa có record
+time:t0/t1 được ghi trong evidence
+~~~
+
+### Oracle phải có thể đối chiếu
+Nếu đăng ký xử lý async, rule có thể cho pending trước confirmed. Ghi thời hạn và trạng thái được cam kết, không báo bug chỉ vì đọc sớm hơn ngân sách nhưng cũng không chờ vô hạn.
+~~~text
+basis:ENROLL-LAB-02
+expected:pending được hiển thị, trong ngân sách chuyển confirmed hoặc lỗi rõ
+actual:toast confirmed nhưng list rỗng sau hạn
+question:đã có server id hay chưa?
+~~~
+
+### Lỗi hay gặp khi viết nguyên nhân trước evidence
+Tiêu đề database không lưu có thể khiến người sửa đi sai hướng. Dùng hành vi sai làm trọng tâm, đặt nguyên nhân nghi ngờ ở mục giả thuyết và nêu phép kiểm tiếp theo.
+
+PRACTICE: Viết ba anomaly giả và phân loại quan sát/expected/giả thuyết. Với một anomaly, đưa chuỗi error-defect-failure khả dĩ nhưng ghi rõ điều chưa được chứng minh.
+Q: Một hiện tượng khác mong đợi nên được ghi trước hết như gì?
++ Quan sát có điều kiện và bằng chứng
+- Nguyên nhân gốc chắc chắn
+- Lỗi của một cá nhân
+Q: Defect và failure khác nhau ở đâu?
++ Vấn đề trong sản phẩm công việc khác biểu hiện khi chạy
+- Hai từ luôn chỉ cùng một ảnh
+- Failure chỉ là lỗi chính tả
+
+## LESSON bug-life-02 | Tái hiện từ môi trường đến thao tác
+
+### Tái hiện là giữ điều kiện có ý nghĩa
+Cùng click trên build, dữ liệu hoặc quyền khác có thể không gặp lỗi. Thu môi trường tối thiểu trước, lưu chuỗi thao tác và trạng thái ban đầu; không yêu cầu người báo quay toàn bộ hoạt động cá nhân.
+
+### Manifest tái hiện ngắn
+Ghi phiên bản app/API, schema, OS/browser, mạng và actor khi chúng liên quan. Tên máy cá nhân hoặc token đầy đủ hiếm khi cần cho ca giả định; chỉ dùng id lab.
+~~~text
+build:LAB2; schema:S2
+actor:ST-L7-A; class:CL-L7-A
+browser:phiên bản lab ghi nhận
+network:stub mất response sau commit
+pre:không có enrollment của actor/class
+runId:BUG-L7-R1
+~~~
+
+### Giảm bước mà không làm mất trigger
+Thử bỏ một bước mỗi lần trên bản lab để tìm chuỗi tối thiểu. Giữ bản đầy đủ trước khi giản lược; không bỏ bước đổi mạng chỉ vì trông không liên quan nếu lỗi biến mất khi bỏ.
+~~~text
+full:login ->list ->detail ->submit ->mất response ->retry
+reduced:fixture actor ->detail ->submit ->mất response ->retry
+Kiểm hai chuỗi cùng fail trước chốt reduced
+Mọi thay đổi được ghi trong notes.
+~~~
+
+### Tần suất quan sát có mẫu số
+Ghi2/10 lần trong điều kiện nào, chứ không ghi thỉnh thoảng hoặc luôn luôn. Một mẫu nhỏ chưa cho xác suất thật; timeline, seed và barrier lab có thể giúp tái hiện race tốt hơn sleep.
+~~~text
+run1:fail, run2:pass, ...run10:fail
+conditions:buildLAB2, stub profileP2
+observed:2/10, không suy xác suất toàn hệ thống
+next:giữ cửa sổ mất response bằng stub có kiểm soát
+~~~
+
+### Khi chưa tái hiện được
+So build, fixture, clock, quyền và trạng thái trước. Hỏi có mục tiêu, giữ issue theo tác động và evidence hiện có; không đóng ngay chỉ vì máy khác chạy một lần xanh.
+
+PRACTICE: Rút một kịch bản giả từ mười bước xuống chuỗi tối thiểu, ghi thử nghiệm bỏ bước và tần suất. Nộp manifest, fixture và câu hỏi cần thêm nếu chưa tái hiện.
+Q: Tái hiện cần giữ điều gì?
++ Điều kiện liên quan như build, fixture, quyền và chuỗi bước
+- Mọi thông tin cá nhân máy tester
+- Chỉ ngày phát hiện
+Q: Lỗi chỉ xảy ra thỉnh thoảng nên báo thế nào?
++ Ghi tần suất quan sát và điều kiện đã thử
+- Khẳng định luôn xảy ra
+- Bỏ ngay vì không ổn định
+
+## LESSON bug-life-03 | Tiêu đề, kỳ vọng và thực tế
+
+### Tiêu đề nêu hành vi và điều kiện
+Dùng câu một ý như đăng ký lặp sau mất response chiếm hai chỗ. Không cần nhét toàn log vào title, không ghi người bị nghi hoặc nguyên nhân chưa xác minh làm sự thật.
+
+### Expected có nguồn và phạm vi
+Đặt rule/version ngay cạnh expected. Nếu mockup và tài liệu mâu thuẫn, ghi câu hỏi để chốt; issue lúc này có thể cần làm rõ requirement thay vì defect implementation.
+~~~text
+title:Retry cùng ý định tạo2 enrollment sau response mất
+rule:IDEMP-LAB-01
+expected:cùng requestId chỉ có 1 enrollment
+actual:EN7A/EN7B đều confirmed
+impact:chiếm2 chỗ cho1học viên
+~~~
+
+### Bước rõ nhưng không quá tải
+Mỗi bước có hành động, dữ liệu và điểm quan sát liên quan. Đường dẫn phải localhost/example.com, không credential thật; chỉ đính kèm request đã che quyền.
+~~~text
+1 Dựng CL7 còn 2 chỗ và actorST4
+2 Submit requestId LAB7-REQ1
+3 Stub cắt response sau server commit
+4 Bấm thử lại cùng ý định
+5 Đọc list theo id fixture và remaining
+~~~
+
+### Tách actual và hypothesis
+Actual có hai record là quan sát; nghi client đổi key là giả thuyết. Ghi evidence nào hỗ trợ và cần kiểm gì để xác nhận, tránh report khẳng định gốc lỗi từ cảm giác.
+~~~text
+observed:hai id, cùng class/student
+unknown:requestId lần 2 có giữ không?
+hypothesis:client hoặc server chống lặp thiếu
+next:đối chiếu trace hai request và log đã lọc
+~~~
+
+### Kiểm report bằng người chưa xem task
+Đọc lại xem người khác có đủ dữ liệu và biết thành công/thất bại là gì không. Xóa câu cảm tính, giữ tác động cụ thể; ảnh cần chú thích build, id và thời điểm.
+
+PRACTICE: Viết hai report từ anomaly giả, có title, basis, precondition, steps, expected/actual, impact và hypothesis. Review chéo mô phỏng rồi sửa ba chỗ thiếu tái hiện.
+Q: Tiêu đề bug tốt cần diễn tả gì?
++ Hành vi sai, đối tượng và điều kiện nổi bật
+- Chỉ ghi app lỗi
+- Tên người bị nghi
+Q: Expected trong report lấy từ đâu?
++ Quy tắc hoặc oracle có nguồn
+- Sở thích tester mặc định
+- Output của bản lỗi
+
+## LESSON bug-life-04 | Mức độ nghiêm trọng và ưu tiên
+
+### Severity là tác động, priority là thứ tự xử lý
+Lỗi quyền có thể làm lộ hồ sơ, lỗi spacing có thể chỉ ảnh hưởng thẩm mỹ. Tuy vậy thời điểm và phạm vi có thể khiến priority khác severity; định nghĩa mức chung để giảm tranh luận.
+
+### Dùng ví dụ tác động cụ thể
+Báo ai bị ảnh hưởng, tác dụng và điều kiện. Nếu chưa biết quy mô, ghi chưa xác minh; không nhân số người dùng tùy ý để đẩy severity cao.
+~~~text
+finding:ST4 đọc hồ sơST9 trong fixture
+impact đã thấy:vi phạm quyền đối tượng
+chưa biết:mọi tenant có bị không
+severity tạm:theo thang nội bộ và evidence
+next:kiểm phạm vi được cấp, không tự mở rộng
+~~~
+
+### Priority theo bối cảnh release
+Một lỗi hiển thị trên thông báo bắt buộc ngày phát hành có thể cần sửa sớm hơn lỗi hiếm có workaround. Owner quyết định trên tác động, deadline, phụ thuộc và chi phí, rõ người chịu trách nhiệm.
+~~~text
+caseA:lỗi quyền khác chủ ->ưu tiên chặn rủi ro cao
+caseB:lệch icon trang phụ ->thấp hơn nếu không cản thao tác
+caseC:nhãn bắt buộc sai ở luồng chính ->có thể ưu tiên sớm
+Không dùng bảng cố định thay đánh giá bối cảnh.
+~~~
+
+### Workaround giảm gì, còn gì
+Nêu cách tránh có thực sự khả dụng và chi phí người dùng. Tắt nút UI không phải workaround đủ cho lỗi API quyền nếu API vẫn gọi được; kiểm cơ chế chứ không chỉ bề mặt.
+~~~text
+workaround giả:tắt tính năng refund qua cấu hình lab
+verify:mọi entry point và API phù hợp bị chặn theo thiết kế
+residual:ảnh hưởng nghiệp vụ vàca chưa kiểm
+owner:quyết định nhận đánh đổi
+~~~
+
+### Triage không là đấu tranh mức độ
+Mang evidence và nhu cầu quyết định, không gắn critical cho mọi thứ hoặc hạ mức để đẹp report. Ghi lý do đổi severity/priority để người sau hiểu bối cảnh.
+
+PRACTICE: Triage sáu bug giả, đề nghị severity/priority và căn cứ. Viết một trường hợp priority cao hơn mức tác động thường thấy, ghi điều chưa chắc và người chốt.
+Q: Severity thường mô tả gì?
++ Tác động của vấn đề theo bối cảnh
+- Thứ tự sửa duy nhất
+- Số screenshot
+Q: Một bug hiển thị nhỏ có thể có priority cao không?
++ Có nếu bối cảnh kinh doanh làm cần sửa sớm
+- Không bao giờ
+- Chỉ khi severity bị sửa giả
+
+## LESSON bug-life-05 | Trạng thái lỗi và trách nhiệm chuyển bước
+
+### Vòng đời lỗi là hợp đồng trách nhiệm
+Quy trình Vạt Mây dùng new, triaged, in progress, fixed, verified, closed và reopened. Tên có thể khác ở nhóm khác; quan trọng là điều kiện chuyển, owner và đầu ra, không học một sơ đồ như chuẩn bắt buộc.
+
+### Fixed chưa là verified
+Dev báo build có sửa và phạm vi tác động. QA xác nhận điều kiện tái hiện và regression phù hợp; rồi owner đóng theo quy trình, không dùng việc có commit như evidence đủ.
+~~~text
+new ->triaged:đã phân loại và giao owner
+in progress ->fixed:có build và fix summary
+fixed ->verified:retest/regression đạt có evidence
+verified ->closed:đủ điều kiện nhóm
+fail lại ->reopened kèm evidence mới
+~~~
+
+### Need info phải là câu hỏi có mục tiêu
+Nêu trường thiếu giúp kiểm giả thuyết cụ thể, ví dụ build, id, clock hoặc request lần retry. Không yêu cầu quay lại mọi thao tác nếu đã có bằng chứng đủ, cũng không để issue treo không người nhận.
+~~~text
+need:requestId của2 lần submit
+why:phân biệt client đổi key và server dedup sai
+who:người thu trace lab
+next:so cùng key/payload rồi đối soát record
+status có owner và mốc cập nhật
+~~~
+
+### Trạng thái khác quyết định nghiệp vụ
+Deferred/wont-fix/duplicate là quyết định xử lý theo bối cảnh, không tự nói không có tác động. Ghi lý do, liên kết, rủi ro và người quyết định; không dùng để giảm tổng lỗi một cách hình thức.
+~~~text
+deferred:chấp nhận rủi ro theoowner, mốc xem lại
+duplicate:link lỗi gốc và evidence bổ sung
+wont-fix:lý do, bối cảnh và giới hạn
+invalid:oracle sai hoặc không vi phạm, giải thích bằng nguồn
+~~~
+
+### Tuổi và hàng chờ cho thấy bottleneck
+Issue fixed chờ retest lâu cần xem capacity/môi trường. Đổi trạng thái không giải quyết công việc; report phải chỉ ra nơi đợi, nguyên nhân và hành động tiếp theo.
+
+PRACTICE: Vẽ vòng đời lab với owner, entry/exit từng trạng thái. Đi qua ba issue có need-info, deferred, reopen và viết comment bàn giao giả đủ người nhận làm tiếp.
+Q: Fixed có đồng nghĩa đã verified không?
++ Không
+- Có luôn
+- Có nếu Dev ghi xong
+Q: Trạng thái cần thêm thông tin nên kèm gì?
++ Thông tin thiếu, người cung cấp và bước tiếp
+- Chỉ chuyển trạng thái rồi bỏ
+- Một yêu cầu quay video vô hạn
+
+## LESSON bug-life-06 | Log, ảnh, video và dữ liệu tối thiểu
+
+### Chọn evidence theo câu hỏi điều tra
+Ảnh phù hợp lỗi bố cục, video phù hợp chuỗi thao tác, request/log phù hợp trao đổi dữ liệu. Chọn tập nhỏ đủ giải thích, không đính kèm toàn bộ hồ sơ hoặc log chứa quyền thật.
+
+### Timeline nối ảnh, request và log
+Dùng runId giả, id tài nguyên và timestamp nhất quán. Ghi clock lệch hoặc thời gian tương đối nếu chưa đồng bộ; không ép hai log khác timezone thành cùng thời điểm bằng đoán.
+~~~text
+t0 UI submit(run LAB7)
+t1 request POST nhận ở server
+t2 enrollment EN7 commit
+t3 client timeout
+t4 retry cùng ý định
+Artifacts gắn build và id, không token/cookie.
+~~~
+
+### Che dữ liệu mà giữ ý nghĩa
+Thay token bằng placeholder, giữ loại quyền/actor giả cần hiểu. Nếu che mọi id giống nhau sẽ mất quan hệ đối chiếu; dùng id canary khác nhau và đảm bảo không là dữ liệu thật.
+~~~text
+Authorization:Bearer <LAB_TOKEN_DA_CHE>
+studentId:ST-LAB-A
+classId:CL-LAB-7
+requestId:REQ-LAB-1
+Không ghi token thật trong filename hoặc URL.
+~~~
+
+### HAR, DOM và video cũng có quyền
+Tệp trace có thể chứa body/cookie/ảnh hồ sơ. Review đường dẫn thu, thời hạn lưu và người được đọc; masking console không bảo vệ mọi artifact tự động.
+
+### Lỗi evidence làm không tái hiện được
+Một ảnh không có build, dữ liệu và bước thường chỉ cho thấy trạng thái cuối. Bổ sung điều cần cho giả thuyết, không tăng dung lượng cho đủ; nếu thiếu bằng chứng runtime, ghi mức chắc chắn của finding.
+~~~text
+minimum:build, fixture, steps, expected/actual
+plus:ảnh hoặc request/log theo question
+verify:người đọc nối được cùng id/timeline
+privacy:không dữ liệu ngoài phạm vi lab
+~~~
+
+PRACTICE: Thu evidence giả cho lỗi UI, lỗi retry và lỗi quyền, chọn loại tệp có lý do. Nộp timeline và bản đã che, giữ được quan hệ id nhưng không thông tin quyền.
+Q: Evidence tối thiểu cần đạt điều gì?
++ Đủ xác nhận/tái hiện mà tránh dữ liệu không cần
+- Càng nhiều dữ liệu thật càng tốt
+- Chỉ một ảnh không bối cảnh
+Q: Ảnh màn hình không cho biết điều gì một cách chắc chắn?
++ Trình tự và thời điểm đã gây trạng thái đó
+- Nội dung đang hiển thị
+- Một số bố cục
+
+## LESSON bug-life-07 | Khoanh vùng theo lớp hệ thống
+
+### Khoanh vùng không phải kết luận gốc lỗi
+Từ UI đến API, service, database và worker, so đầu vào/ra của cùng ý định. Mục tiêu là thu hẹp lớp đáng kiểm tiếp, không suy ngay từ status500 rằng database là nguyên nhân.
+
+### Ma trận dấu vết theo lớp
+Với đăng ký lặp, UI có một click nhưng có thể phát hai request; server nhận một request cũng có thể xử lý hai lần. Dùng id và timestamp để phân biệt, tránh chỉ đếm thao tác nhìn thấy.
+~~~text
+UI:1 ý định
+network:bao nhiêu POST, requestId/payload thế nào?
+service:nhận và xử lý bao nhiêu lần?
+data:số enrollment/id cuối
+worker:event có trùng hoặcout-of-order không?
+~~~
+
+### Kiểm đọc dữ liệu theo quyền
+Query chỉ đọc trên fixture lab hỗ trợ xác nhận kết quả. Không tự nâng quyền, xóa hoặc sửa record để thử nguyên nhân; dữ liệu thật không được mang vào report.
+~~~sql
+SELECT id,request_id,class_id,student_id,status
+FROM enrollments WHERE request_id='REQ-LAB-1';
+SELECT id,remaining FROM classes WHERE id='CL-LAB-7';
+~~~
+
+### Giả thuyết có phép kiểm bác bỏ
+Nếu nghi client đổi key, so hai request. Nếu key giống mà record trùng, kiểm server dedup bằng integration lab; từng phép kiểm trả lời câu hỏi cụ thể và giữ khả năng giả thuyết sai.
+~~~text
+H1 client gửi2 key ->kiểm trace
+H2 server không nguyên tử ->barrier/concurrency lab
+H3 projection trùng ->so bảng nguồn và read model
+Record evidence, bằng chứng ủng hộ/bác bỏ và việc tiếp
+~~~
+
+### Báo mức chắc chắn theo evidence
+Đã xác nhận hai request khác key khác với đã tìm cơ chế đổi key. Nêu điều biết, chưa biết và phạm vi kiểm; chỉ định owner có quyền xem lớp tiếp theo thay vì bịa nguyên nhân cho report hoàn chỉnh.
+
+PRACTICE: Khoanh vùng ba hiện tượng giả qua UI/API/data, viết hai giả thuyết mỗi lỗi và phép kiểm bác bỏ. Nộp evidence đủ phạm vi với query chỉ đọc và trạng thái điều chưa biết.
+Q: Khoanh vùng theo lớp nhằm gì?
++ Thu hẹp nơi sai có căn cứ
+- Quy lỗi nhóm nhanh nhất
+- Thay mọi retest
+Q: UI báo lỗi nhưng server đã tạo đơn cần ghi gì?
++ Cả hai quan sát và id/timeline liên quan
+- Chỉ phía thuận tiện
+- Chỉ kết luận database hỏng
+
+## LESSON bug-life-08 | Lỗi trùng, không tái hiện và cần thông tin
+
+### Cùng triệu chứng chưa chắc cùng lỗi
+Hai ca toast thành công nhưng danh sách trống có thể do cache cũ hoặc server chưa lưu. So build, điều kiện, id và cơ chế đã biết trước khi gộp; duplicate là quyết định theo bằng chứng, không chỉ giống title.
+
+### Liên kết thay vì làm mất evidence
+Nếu cùng defect gốc, giữ issue chính và bổ sung điều kiện mới có giá trị. Người báo cần biết link, phạm vi và trạng thái; không xóa report có dữ liệu giúp tái hiện.
+~~~text
+issueA:retry tạo trùng ở network profileP2
+issueB:cùng requestId tạo trùng ở profileP3
+compare:build, payload, state, server path
+merge khi có căn cứ; giữ evidence và người theo dõi
+~~~
+
+### Không tái hiện là trạng thái hiểu biết
+Ghi phép thử nào đã làm và điều kiện khác so người báo. Một lần không gặp không bác được lỗi race; chọn bước thêm theo tác động và chi phí, chứ không yêu cầu vô hạn dữ liệu.
+~~~text
+tried:LAB3, fixtureCL7, networkP1, 10 lần
+original:LAB2, networkP2
+gap:chưa có buildLAB2/stubP2
+next:khôi phục fixture lab được cấp
+owner/mốc quyết định được ghi
+~~~
+
+### Need-info hỏi để kiểm giả thuyết
+Nếu thiếu requestId, hỏi hai id lần gửi và timestamp để phân biệt nhân ý định. Nếu đã đủ, sửa bộ kiểm hoặc chuyển người có quyền log server; không dùng need-info để đẩy trách nhiệm.
+~~~text
+need:requestId trước/sau retry
+why:kiểm client có giữ ý định không
+alternative:trace đã che hoặc log lab với id giả
+not needed:password thật, toàn profile cá nhân
+status:có người nhận và đường tiếp tục
+~~~
+
+### Quyết định đóng phải truy được
+Invalid, duplicate hoặc không điều tra tiếp đều có lý do và phạm vi. Nêu rủi ro còn lại, người quyết định và trigger xem lại khi có evidence mới; không ghi không có lỗi chỉ vì chưa tái hiện.
+
+PRACTICE: Phân loại sáu report giả thành duplicate, cần thông tin, chưa tái hiện hoặc issue riêng. Nộp căn cứ, link và câu hỏi có mục tiêu; giữ evidence mới thay vì làm mất nó.
+Q: Bug có cùng triệu chứng có chắc duplicate không?
++ Không
+- Có luôn
+- Có nếu cùng màn
+Q: Không tái hiện được nên làm gì tiếp?
++ So điều kiện và yêu cầu thông tin có mục tiêu
+- Đóng là không có bug ngay
+- Giữ mãi không owner
+
+## LESSON bug-life-09 | Triage trong thời gian giới hạn
+
+### Triage để quyết định bước tiếp
+Một phiên mười lăm phút có thể không đủ tìm root cause. Mục tiêu là xác nhận phạm vi, impact, độ chắc chắn, priority, owner và thông tin cần thêm cho các issue quan trọng.
+
+### Chuẩn bị trước giảm tranh luận
+Mỗi report có build, fixture, expected/actual và evidence ngắn. Chọn thứ tự theo rủi ro/blocking thay vì ai gửi trước; người điều phối giữ cuộc trao đổi theo dữ liệu.
+~~~text
+input:5issue đã có evidence
+agenda:blocker ->quyền/điểm ->các vấn đề khác
+per issue:2 phút phân loại/owner/next
+deep investigation:chuyển phiên riêng có owner
+output:decision log, không chỉ meeting notes
+~~~
+
+### Mức tạm khi thông tin chưa đủ
+Có thể ghi severity provisional và điều kiện xác minh, không cần chắc chắn giả để điền field. Tác động đã quan sát và phạm vi chưa biết được tách rõ, đặt người thu thêm evidence.
+~~~text
+observed:ST4 đọc fixtureST9
+unknown:scope tenant hoặc endpoint khác
+severity:theo impact đã chứng minh và policy
+next:kiểm phạm vi được cấp, không mở rộng tùy ý
+owner:người có quyền điều tra tương ứng
+~~~
+
+### Bất đồng có người chốt và nguồn
+Nếu expected chưa chốt, đưa hai cách hiểu cùng ví dụ đến owner nghiệp vụ. Nếu bất đồng kỹ thuật, chọn phép kiểm bác bỏ; không lấy cấp bậc thay bằng chứng hoặc số đông thay rule.
+~~~text
+decision type:business rule/technical hypothesis/priority
+owner khác theo loại quyết định
+record:nguồn, lý do, version và impact
+follow-up:cập nhật report/testware
+Không đổi actual để hợp quyết định.
+~~~
+
+### Kết phiên bằng hành động kiểm được
+Đọc lại owner, deliverable và thời điểm cần cập nhật. Một issue được thảo luận chưa đồng nghĩa được xử lý; tuổi và hàng chờ cần được theo dõi để không lặp cùng meeting.
+
+PRACTICE: Mô phỏng triage năm issue trong mười lăm phút. Nộp agenda, decision log, mức chắc chắn, owner và bước tiếp; chọn một vấn đề phải tách điều tra sâu có lý do.
+Q: Triage giới hạn thời gian cần ưu tiên gì?
++ Tác động, khả năng tái hiện, owner và bước xử lý
+- Sửa code ngay trong mọi cuộc họp
+- Tranh luận tên gọi
+Q: Khi thiếu căn cứ severity cần gì?
++ Ghi mức tạm và điều kiện cần xác minh
+- Chốt critical cho chắc
+- Giấu độ không chắc
+
+## LESSON bug-life-10 | Phân tích nguyên nhân và điều kiện góp phần
+
+### Trigger khác cơ chế gây lỗi
+Mất mạng có thể làm lộ lỗi đăng ký trùng, nhưng không tự là nguyên nhân gốc đủ để sửa. Cần biết server đã commit lúc nào, client giữ key không và dedup có nguyên tử; timeline giúp phân biệt.
+
+### Phân tích nhiều điều kiện góp phần
+Một failure có thể cần response mất, client đổi key, unique constraint thiếu và monitor không phát hiện. Tránh dừng ở do người dùng bấm hai lần nếu thao tác đó nằm trong rủi ro phải xử lý.
+~~~text
+trigger:response bịcắt
+mechanism:cùng ý định được ghi2 lần
+contributors:key không giữ, kiểm duplicate không nguyên tử
+detection gap:test chỉ đường vui
+prevention:kiểm soát cơ chế +regression +quan sát
+~~~
+
+### Năm lần hỏi vì sao không phải nghi thức
+Hỏi theo evidence và dừng khi có hành động cải tiến hợp lý, không ép đúng năm cấp hoặc tìm một người có lỗi. Mỗi câu trả lời cần nguồn/giả thuyết và phép xác minh.
+~~~text
+why duplicate?hai request được ghi
+why notdedup?cửa sổ check-then-insert
+evidence:barrier lab tái hiện
+fix candidate:ràng buộc và transaction phùhợp
+verify:ca concurrent/retry +luồng hợp lệ
+~~~
+
+### Phản chứng giúp tránh kết luận sớm
+Nếu nghi client đổi key, thử cùng key trực tiếp trong lab; nếu vẫn trùng, cần giả thuyết server. Thay một yếu tố có kiểm soát và lưu kết quả, không sửa nhiều thứ rồi đoán cái nào hiệu quả.
+~~~text
+experimentA:cùng key, payload, tuần tự
+experimentB:cùng key, payload, đồng thời
+experimentC:key khác, cùng nghiệp vụ
+Giữ build, fixture và clock tương đương
+Không thử trên dữ liệu thật.
+~~~
+
+### Root cause report có giới hạn
+Nêu cơ chế đã xác nhận, contributors, bằng chứng, biện pháp và phần chưa biết. Nếu chỉ tìm trigger, ghi đúng mức; cần retest/regression để xác nhận biện pháp hiệu quả, không chỉ một lời giải thích hợp lý.
+
+PRACTICE: Phân tích một lỗi retry giả bằng timeline, cây giả thuyết và ba thử nghiệm lab. Nộp trigger, mechanism, contributors, detection gap và action có owner/cách kiểm hiệu quả.
+Q: Root cause khác trigger thế nào?
++ Cơ chế gây lỗi khác điều kiện làm nó biểu hiện
+- Hai từ luôn giống
+- Trigger luôn là người dùng sai
+Q: Phân tích nguyên nhân nên tránh gì?
++ Dừng ở quy lỗi cá nhân hoặc một nhãn chung
+- Xem timeline
+- Xem điều kiện góp phần
+
+## LESSON bug-life-11 | Kiểm sửa, regression và reopen
+
+### Retest giữ điều kiện gốc
+Build mới không tự làm lỗi được xác nhận đã sửa. Dựng cùng fixture, network profile, clock và actor liên quan; sau đó kiểm expected có nguồn và state cuối, không chỉ chụp nút hết lỗi.
+
+### Regression dựa cơ chế thay đổi
+Sửa chống lặp có thể ảnh hưởng request hợp lệ, key khác, timeout và hủy. Chọn vùng liên quan bằng impact analysis, không rerun mọi case không mục đích hoặc chỉ ca gốc.
+~~~text
+confirmation:caseBUG7 response mất +retry
+regression:cùng key tuần tự/đồng thời, khác payload
+valid:new ý định vẫn được nhận
+data:enrollment, remaining, điểm đúng
+artifact:build/fixture/request đã che
+~~~
+
+### Bản sửa chưa đủ thông tin thì blocked
+Nếu không có build hoặc stub tương ứng, ghi thiếu gì và owner. Không đổi issue thành verified chỉ vì không gặp lại trên điều kiện khác; phân biệt chưa kiểm và kiểm không tái hiện.
+~~~text
+status:retest blocked
+missing:buildLAB4 và profileP2
+owner:Dev-lab cấp đúng gói
+current evidence:chỉ LAB3/profileP1
+Không nhận ca gốc đã đạt.
+~~~
+
+### Reopen bằng bằng chứng mới
+Khi phạm vi gốc còn sai, ghi build và bước, so expected/actual rồi mở lại theo quy trình. Nếu là lỗi khác cùng màn, tạo issue liên kết với lý do để không làm mất ranh giới điều tra.
+~~~text
+reopen:BUG7 vẫn tạo2 record với keyK1 trên LAB4
+newissue:lỗi label mới saufix nhưng khác cơ chế
+record:ảnh hưởng, fixture và evidence
+triage:owner/priority được đánh giá lại
+~~~
+
+### Đóng sau xác nhận có giới hạn
+Nêu ca nào đã chạy, build, regression và gap. Một issue closed không có nghĩa mọi hệ thống không còn lỗi; giữ tài sản regression và bài học cần thiết để giảm tái diễn.
+
+PRACTICE: Lập retest/regression matrix cho hai bản sửa giả. Nộp một kết quả verified, một blocked và một reopen có evidence, phân biệt bug mới cùng màn.
+Q: Retest bản sửa cần giữ gì từ bug gốc?
++ Điều kiện liên quan và oracle đúng
+- Chỉ tên issue
+- Mọi dữ liệu khác không cần ghi
+Q: Khi nào reopen hợp lý?
++ Evidence cho thấy vấn đề trong phạm vi vẫn còn hoặc tái diễn
+- Chỉ vì không thích cách sửa
+- Mọi bug mới cùng màn
+
+## LESSON bug-life-12 | Báo cáo xu hướng và phòng tái diễn
+
+### Xu hướng là tín hiệu để học
+Reopen, escape, age và defect theo vùng có thể gợi khoảng trống nhưng không tự chỉ nguyên nhân. Kiểm scope, định nghĩa và mẫu số trước so tháng hoặc nhóm, không dùng defect count để quy lỗi cá nhân.
+
+### Phân loại có chất lượng mới tạo metric
+Cùng severity nhưng người nhập hiểu khác sẽ làm chart sai. Chốt thang, taxonomy và nguồn, lấy mẫu review issue; không cố ép mọi lỗi thành một root cause label để bảng đẹp.
+~~~text
+fields:component, risk, phase, rootcause status
+unknown là trạng thái hợp lệ khi chưa xác minh
+metric có time window và scope
+review sample:định nghĩa được áp nhất quán?
+Không biến correlation thành causation.
+~~~
+
+### Action phòng tái diễn cụ thể
+Từ lỗi refund lặp, đề xuất unique/idempotency có review, ca concurrency và quan sát trùng. Hành động cần owner, hạn và measure; nhắc cẩn thận hơn không sửa cơ chế hoặc kiểm soát hệ thống.
+~~~text
+A1 review cơ chế dedup ->Dev owner
+A2 testretry/concurrent ->QA owner
+A3 alertduplicate theo id ->ops lab owner
+verify:mutation/case gốc và monitor test
+follow-up:xem hiệu quả saucửa sổ đã định
+~~~
+
+### Escape không chỉ trách người kiểm
+Lỗi lọt có thể do requirement thiếu, scope cắt, môi trường khác hoặc oracle yếu. Review quyết định và điều kiện hệ thống để học, rồi ưu tiên cải tiến theo rủi ro, không hứa mọi lỗi sẽ không lặp.
+
+### Report tổng đi với khoảng trống
+Báo số issue, mức tác động, thời điểm và nơi chưa có evidence. Nếu taxonomy thay, không so trực tiếp như cùng một tập; giữ dữ liệu và cách tính truy được.
+~~~text
+window:releaseLAB3-LAB4
+trend:reopen tăng trongrefund
+possible factors:scope/fixture/fix quality cần kiểm
+action:review5issue, matrixretry và handover
+not conclusion:không tự xếphạng cá nhân
+~~~
+
+PRACTICE: Phân tích bộ mười issue giả, viết ba giả thuyết xu hướng và ba action phòng tái diễn có owner/measure. Nêu giới hạn metric và kế hoạch kiểm hiệu quả.
+Q: Xu hướng reopen cao gợi điều gì?
++ Cần điều tra chất lượng fix, scope và retest
+- Chắc Dev lười
+- Chỉ cần giảm số bug
+Q: Phòng tái diễn nên có đầu ra gì?
++ Hành động cụ thể, owner và cách kiểm hiệu quả
+- Một khẩu hiệu cẩn thận hơn
+- Xóa report cũ
+
+## LESSON bug-life-13 | Dự án: hồ sơ lỗi có thể bàn giao
+
+### Dự án hồ sơ lỗi Vạt Mây
+Nhận gói lab gồm rule, fixture, hai build và log giả. Người học cần đưa anomaly thành report có bằng chứng, triage, khoanh vùng và retest; không bịa kết quả thực thi nếu chỉ đang mô phỏng giấy.
+
+### Ba lỗi có cơ chế và độ chắc chắn khác
+Chọn lỗi validation tái hiện ổn, lỗi retry theo mạng và một câu hỏi requirement. Mỗi issue có oracle, manifest, tần suất và câu hỏi; không ép cả ba thành defect chắc chắn.
+~~~text
+ISS1 qty 0 tạo đơn:rule rõ, tái hiện10/10
+ISS2 retry trùng:profileP2, 2/10quan sát
+ISS3 cutoff18:00:mâu thuẫn nguồn, chờ chốt
+Mỗi finding có id, owner và bước kế tiếp
+Mọi tên và dữ liệu do lab tự đặt.
+~~~
+
+### Hồ sơ nối từ quan sát đến kết quả sửa
+Giữ before/after của cùng id fixture, build và network profile. Report ghi giả thuyết được kiểm/bác bỏ, decision log và regression impact; người khác nhận phải tiếp tụcđược điều tra.
+~~~text
+observation ->report ->triage ->hypothesis/test
+->fix build ->confirmation ->regression ->status
+links:rule, fixture, run, artifact, decision
+privacy:placeholder quyền, không data thật
+cleanup:chỉ id thuộc run được cấp
+~~~
+
+### Nghiệm thu bằng review độc lập
+Đưa report cho người chưa xem lab hoặc tự mô phỏng reviewer theo checklist. Người đó cần biết cách tái hiện, expected ở đâu, evidence đủ không và còn việc gì; chọn một thiếu sót để sửa thực chất.
+
+### Bàn giao và điều chưa kiểm
+Nộp ba report, một timeline, matrix severity/priority, triage log và retest/regression. Phần không có build/scope để kiểm được ghi blocked hoặc giới hạn, không gọi pass; không gửi report thật ra ngoài.
+~~~text
+accept:report đọc và tái hiện được
+accept:observed/hypothesis phân biệt
+accept:retest gắn đúng điều kiện
+accept:action phòng tái diễn có owner/measure
+accept:gap và rủi ro còn lại minh bạch
+~~~
+
+PRACTICE: Bàn giao hồ sơ ba issue giả qua vòng đời, một phân tích nguyên nhân có experiment và một retest/regression. Có evidence tối thiểu đã che, decision log, cleanup và giới hạn kết luận.
+Q: Hồ sơ lỗi bàn giao cần nối được gì?
++ Quan sát, fixture, oracle, version, bản sửa và evidence
+- Chỉ số issue
+- Mọi lịch sử chat
+Q: Report tổng nhiều bug cần công khai gì?
++ Lỗi mở, gap, bản sửa đã kiểm và rủi ro còn lại
+- Chỉ tổng đóng
+- Chỉ dòng xanh
+
+## LESSON bug-life-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Anomaly cần phân tích vì có thể đến từ sản phẩm, expected, testware, dữ liệu hoặc môi trường.
+2. Giữ điều kiện gây lỗi và giản lược phần không liên quan giúp tái hiện và khoanh vùng hiệu quả.
+3. Tiêu đề giúp triage nhanh, chi tiết kỹ thuật và bằng chứng nằm phần mô tả, cần tránh suy nguyên nhân chưa chứng minh.
+4. Cần định nghĩa mức rõ và evidence tác động, không đánh chỉ theo vị trí lỗi hoặc người báo.
+
+### Dữ liệu và điều kiện biên
+5. Fixed báo có bản sửa, verified cần kiểm evidence theo điều kiện và regression thích hợp.
+6. Request, log, ảnh hoặc video cần được chọn theo câu hỏi điều tra và che quyền trước bàn giao.
+7. So input/output qua UI, API, service và dữ liệu giúp chọn giả thuyết, không tự chứng minh gốc lỗi chỉ từ một status.
+8. Cần so nguyên nhân đã biết, điều kiện, phiên bản và phạm vi; same symptom có thể từ nhiều defect.
+
+### Tính đúng và cách điều tra
+9. Mục tiêu triage là phân loại và quyết định, không cần giải mọi nguyên nhân trong một phiên.
+10. Đổi mạng có thể kích hoạt lỗi chống lặp, nhưng cơ chế là xử lý retry/commit không đúng, cần phân tích evidence.
+11. Đổi build nhưng mất điều kiện race/mạng có thể làm lỗi không xuất hiện dù chưa sửa đúng cơ chế.
+12. Metric là tín hiệu cần ngữ cảnh, có thể do yêu cầu mơ hồ, thiếu fixture hoặc hiểu phạm vi khác.
+
+### Rủi ro và lựa chọn phương án
+13. Người nhận phải hiểu điều đã xác nhận, còn giả thuyết và cách thực hiện bước tiếp mà không đoán.
+14. Tần suất mẫu không tự là xác suất chung, nhưng timeline và điều kiện hỗ trợ tìm race hoặc phụ thuộc trạng thái.
+15. Priority cân nhắc thời điểm, phạm vi, phụ thuộc và mục tiêu, không nhất thiết bằng severity.
+16. Ảnh là một lát trạng thái, thường cần bước, fixture và timeline; video cũng không thay đầy đủ expected.
+
+### Dự án, bằng chứng và bàn giao
+17. Cân nhắc tác động, evidence có sẵn và chi phí điều tra, trạng thái quyết định phải minh bạch.
+18. Tìm cơ chế, điều kiện hệ thống và biện pháp ngăn tái diễn, có thể nhiều nguyên nhân góp phần.
+19. Có thể cải thiện rule, review, automation, quan sát hoặc quy trình, kiểm kết quả thay vì chỉ ban hành.
+20. Đóng issue không đồng nghĩa mọi vùng an toàn, cần coverage và giới hạn quyết định rõ.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Một hiện tượng khác mong đợi nên được ghi trước hết như gì?
++ Quan sát có điều kiện và bằng chứng
+- Nguyên nhân gốc chắc chắn
+- Lỗi của một cá nhân
+Q: Tái hiện cần giữ điều gì?
++ Điều kiện liên quan như build, fixture, quyền và chuỗi bước
+- Mọi thông tin cá nhân máy tester
+- Chỉ ngày phát hiện
+Q: Tiêu đề bug tốt cần diễn tả gì?
++ Hành vi sai, đối tượng và điều kiện nổi bật
+- Chỉ ghi app lỗi
+- Tên người bị nghi
+Q: Severity thường mô tả gì?
++ Tác động của vấn đề theo bối cảnh
+- Thứ tự sửa duy nhất
+- Số screenshot
+Q: Fixed có đồng nghĩa đã verified không?
++ Không
+- Có luôn
+- Có nếu Dev ghi xong
+Q: Evidence tối thiểu cần đạt điều gì?
++ Đủ xác nhận/tái hiện mà tránh dữ liệu không cần
+- Càng nhiều dữ liệu thật càng tốt
+- Chỉ một ảnh không bối cảnh
+Q: Khoanh vùng theo lớp nhằm gì?
++ Thu hẹp nơi sai có căn cứ
+- Quy lỗi nhóm nhanh nhất
+- Thay mọi retest
+Q: Bug có cùng triệu chứng có chắc duplicate không?
++ Không
+- Có luôn
+- Có nếu cùng màn
+Q: Triage giới hạn thời gian cần ưu tiên gì?
++ Tác động, khả năng tái hiện, owner và bước xử lý
+- Sửa code ngay trong mọi cuộc họp
+- Tranh luận tên gọi
+Q: Root cause khác trigger thế nào?
++ Cơ chế gây lỗi khác điều kiện làm nó biểu hiện
+- Hai từ luôn giống
+- Trigger luôn là người dùng sai
+Q: Retest bản sửa cần giữ gì từ bug gốc?
++ Điều kiện liên quan và oracle đúng
+- Chỉ tên issue
+- Mọi dữ liệu khác không cần ghi
+Q: Xu hướng reopen cao gợi điều gì?
++ Cần điều tra chất lượng fix, scope và retest
+- Chắc Dev lười
+- Chỉ cần giảm số bug
+Q: Hồ sơ lỗi bàn giao cần nối được gì?
++ Quan sát, fixture, oracle, version, bản sửa và evidence
+- Chỉ số issue
+- Mọi lịch sử chat
+Q: Lỗi chỉ xảy ra thỉnh thoảng nên báo thế nào?
++ Ghi tần suất quan sát và điều kiện đã thử
+- Khẳng định luôn xảy ra
+- Bỏ ngay vì không ổn định
+Q: Một bug hiển thị nhỏ có thể có priority cao không?
++ Có nếu bối cảnh kinh doanh làm cần sửa sớm
+- Không bao giờ
+- Chỉ khi severity bị sửa giả
+Q: Ảnh màn hình không cho biết điều gì một cách chắc chắn?
++ Trình tự và thời điểm đã gây trạng thái đó
+- Nội dung đang hiển thị
+- Một số bố cục
+Q: Không tái hiện được nên làm gì tiếp?
++ So điều kiện và yêu cầu thông tin có mục tiêu
+- Đóng là không có bug ngay
+- Giữ mãi không owner
+Q: Phân tích nguyên nhân nên tránh gì?
++ Dừng ở quy lỗi cá nhân hoặc một nhãn chung
+- Xem timeline
+- Xem điều kiện góp phần
+Q: Phòng tái diễn nên có đầu ra gì?
++ Hành động cụ thể, owner và cách kiểm hiệu quả
+- Một khẩu hiệu cẩn thận hơn
+- Xóa report cũ
+Q: Report tổng nhiều bug cần công khai gì?
++ Lỗi mở, gap, bản sửa đã kiểm và rủi ro còn lại
+- Chỉ tổng đóng
+- Chỉ dòng xanh

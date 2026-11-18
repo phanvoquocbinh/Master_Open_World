@@ -1,0 +1,733 @@
+=== COURSE cypress
+name: Tự động hoá web với Cypress
+icon: 🌲
+floor: 8
+room: 808
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Từ command queue, retry và selector đến intercept, fixture, session, component, timer/file, CI và dự án hồi quy có ranh giới stub/tích hợp rõ.
+
+## LESSON cypress-01 | Môi trường lab và test đầu tiên
+
+### Lab có hợp đồng trước khi chạy
+Cypress dùng command queue và cơ chế retry riêng. Khóa này kiểm app giả định Mầm Thoi ở localhost, có form/lớp/API theo hợp đồng; người học cần dựng hoặc nhận app lab, không chạy trên website người khác.
+
+### Chuẩn bị thư mục thực hành
+Chọn Node/Cypress tương thích, ghi phiên bản và giữ lockfile sau khi chốt. Các lệnh chỉ dành cho dự án lab riêng; binary/browser cũng cần chuẩn bị theo môi trường được cấp.
+~~~bash
+npm init -y
+npm install --save-dev cypress
+npx cypress open
+# Ghi version đã kiểm và giữ package-lock.json của lab.
+~~~
+
+### Config xác định nơi kiểm
+Mảnh code thuộc cypress.config.js của lab tự dựng. Base URL chỉ trỏ localhost, testIsolation bật; spec pattern làm rõ tập test sẽ chạy, không giả định mọi file JS đều là test.
+~~~js
+const {defineConfig}=require('cypress');
+module.exports=defineConfig({e2e:{
+ baseUrl:'http://localhost:3100',
+ specPattern:'cypress/e2e/**/*.cy.js',testIsolation:true
+}});
+~~~
+
+### Test đầu có expected quan sát được
+App cần h1 và danh sách theo contract. Khởi đầu với assertion nhỏ rồi thêm dữ liệu cụ thể; không có exception chưa chứng minh còn chỗ đúng hoặc lưu đơn thành công.
+~~~js
+describe('Lớp Mầm Thoi',()=>{
+ it('hiển thị danh sách',()=>{
+  cy.visit('/classes');
+  cy.get('h1').should('contain','Lớp học');
+  cy.get('[data-cy=class-list]').should('be.visible');
+ });
+});
+~~~
+
+### Thiếu app phải được ghi rõ
+Nộp contract DOM/API, fixture và cách reset cùng code. Nếu mới thiết kế, ghi chưa thực thi; không bịa pass hoặc đổi URL sang dịch vụ công khai để câu lệnh trông chạy được.
+
+PRACTICE: Tạo lab riêng với config localhost và spec hai assertion có nghĩa. Nộp version, lockfile, contract DOM/API, cách khởi động và reset; ghi rõ phần chưa chạy.
+Q: Ngoài spec, lab Cypress cần gì?
++ App, fixture và cấu hình phiên bản phù hợp
+- Một URL công khai bất kỳ
+- Chỉ ảnh màn hình
+Q: Test không có assertion nghiệp vụ đã chứng minh đúng chưa?
++ Chưa
+- Có nếu không exception
+- Có nếu video đẹp
+
+## LESSON cypress-02 | Queue lệnh, subject và retry
+
+### Queue khác thực thi đồng bộ
+Gọi cy.get chỉ xếp công việc, không lấy DOM ngay tại dòng JavaScript đó. Subject truyền qua chain; không await tùy ý hoặc đọc biến ngoài queue trước khi lệnh chạy.
+
+### Nhận giá trị sau khi yield
+Then xử lý text đã nhận từ chain. Không gán const text=cy.get(...).invoke(...) rồi so như string đồng bộ; đó là chain công việc của runner.
+~~~js
+cy.get('[data-cy=remaining]').invoke('text').then(text=>{
+ expect(Number(text)).to.be.at.least(0);
+});
+~~~
+
+### Should callback cần thuần
+Callback assertion có thể được chạy lại. Không đặt click, POST hay lệnh cy trong callback, vì retry có thể nhân tác dụng; dùng then/action riêng khi mục tiêu không phải polling.
+~~~js
+cy.get('[data-cy=remaining]').should($el=>{
+ expect($el).to.have.length(1);
+ expect(Number($el.text())).to.be.at.least(0);
+});
+~~~
+
+### Action và query có cơ chế khác
+Click chờ actionability rồi thực hiện; không tự lặp click đến khi assertion sau đó xanh. Nếu render đổi DOM, query mới để đọc trạng thái thay vì giữ node cũ.
+~~~js
+cy.get('[data-cy=enroll]').click();
+cy.get('[data-cy=enrollment-status]').should('have.text','Đã đăng ký');
+~~~
+
+### Chọn cách đợi theo câu hỏi
+Trạng thái cần đổi thành confirmed thì query/should phù hợp. Then chỉ đọc một subject tại thời điểm được yield, không thay polling; tránh tự loop/sleep để che race mà không hiểu điều kiện.
+
+PRACTICE: Giải thích ba ví dụ queue/subject/should/then. Dựng nhãn cập nhật chậm trong lab, kiểm bằng query/should và chứng minh callback không có side effect.
+Q: cy.get có trả DOM đồng bộ ngay không?
++ Không, công việc nằm trong queue
+- Có, luôn là DOM node ngay
+- Có, là Promise chuẩn để await tùy ý
+Q: Callback should có thể retry nên cần gì?
++ Assertion thuần, không thêm side effect hoặc lệnh cy
+- POST tạo đơn trong callback
+- Sleep mỗi lần
+
+## LESSON cypress-03 | Selector theo hợp đồng UI
+
+### Selector giữ ý định qua đổi layout
+Thống nhất data-cy cho mục tiêu ổn định, tránh XPath/CSS phụ thuộc div thứ mười. Khi yêu cầu là label, tên truy cập hoặc text, vẫn kiểm những điều đó; test attribute không thay semantics.
+
+### Scope đúng card trước thao tác
+Hai lớp có nút Đăng ký giống nhau. Chọn card theo id fixture rồi thao tác trong vùng đó, không dùng first để che mơ hồ nếu chưa có ý định chọn phần tử đầu.
+~~~js
+cy.get('[data-cy=class-card][data-id=CL-L7-A]').within(()=>{
+ cy.contains('button','Đăng ký').should('be.enabled').click();
+});
+~~~
+
+### Tìm lại sau render
+Sau lọc, không cache DOM node trong biến rồi dùng qua nhiều trạng thái. Query theo contract và assert số dòng/nội dung đúng bộ lọc; dữ liệu server vẫn phải độc lập.
+~~~js
+cy.get('[data-cy=class-filter]').select('open');
+cy.get('[data-cy=class-card]').should('have.length',3);
+cy.get('[data-cy=class-card][data-id=CL-L7-A]').should('contain','Còn chỗ');
+~~~
+
+### Contract selector có scope rõ
+Card lặp hợp lệ, data-id duy nhất trong list là kỳ vọng lab. Control trong card được định danh theo vai trò; đổi ý nghĩa cần review cùng test thay vì đổi mọi selector để xanh.
+~~~text
+class-card: lặp, mỗi data-id duy nhất trong list
+enroll: nút trong card mục tiêu
+assert: card đúng id và tên lớp giả
+change: review contract khi nghĩa control đổi
+Không dùng id hoặc dữ liệu thật trong artifact.
+~~~
+
+### Tìm được chưa là dùng được
+Data-cy match không chứng minh keyboard tới được hoặc screen reader đọc đúng. Bổ sung phép kiểm theo rủi ro, tách testability khỏi đánh giá trải nghiệm người dùng.
+
+PRACTICE: Viết contract cho sáu selector, hai case nhiều card và một re-render. Nộp scope, lý do, expected và ca âm phát hiện card trùng id.
+Q: data-cy là gì trong thiết kế test?
++ Hợp đồng selector ổn định khi phù hợp
+- Thay mọi label và semantics
+- Bảo đảm đạt accessibility
+Q: Hai nút cùng text cần chọn thế nào?
++ Scope theo vùng có nghĩa và đúng đối tượng
+- Luôn first() cho qua
+- Dùng tọa độ cố định
+
+## LESSON cypress-04 | Assertion, actionability và chờ đúng
+
+### Actionability khác thành công nghiệp vụ
+Control thao tác được không bảo đảm remaining giảm hoặc record được tạo. Assert kết quả riêng, chọn timeout theo hợp đồng lab và phân biệt pending/error/success.
+
+### Đọc trạng thái sau action
+Ví dụ giả định form lab có input và status. Không gửi nhiều lần chỉ vì chưa thấy kết quả; query trạng thái đúng ý định và kiểm dữ liệu nếu rủi ro yêu cầu.
+~~~js
+cy.get('[data-cy=student-name]').clear().type('Lam Vạt');
+cy.get('[data-cy=enroll]').click();
+cy.get('[data-cy=enrollment-status]',{timeout:8000})
+ .should('have.text','Đã đăng ký');
+~~~
+
+### Đăng ký alias trước request
+Chờ đúng method/path rồi assert response và UI. Không đợi bất kỳ200 hoặc sleep cố định; route cần trước action để không bỏ response nhanh.
+~~~js
+cy.intercept('POST','/api/enrollments').as('enroll');
+cy.get('[data-cy=enroll]').click();
+cy.wait('@enroll').its('response.statusCode').should('eq',201);
+cy.get('[data-cy=enrollment-status]').should('contain','Đã đăng ký');
+~~~
+
+### Force không phải thuốc chữa mặc định
+Control bị overlay che có thể là lỗi app hoặc luồng chưa đúng. Force có trường hợp hợp lý nhưng không dùng để bỏ mọi actionability rồi nhận người dùng thao tác được.
+~~~text
+failure: button covered
+check: overlay cần đóng, app kẹt hay selector sai?
+fix: đúng luồng hoặc sửa bug, rồi kiểm lại
+not fix: force mọi click và bỏ assertion
+evidence: lỗi đầu, state và request lab
+~~~
+
+### Toast có thể chưa đủ
+Nếu cần xác nhận persistence, đọc lại tài nguyên theo id bằng UI/API actor lab. Không dùng admin để bỏ qua lỗi quyền trong luồng người dùng, ghi consistency budget nếu bất đồng bộ.
+
+PRACTICE: Viết submit chậm với pending/success/error, đợi alias/DOM đúng mục tiêu. Điều tra một covered-button trong lab, không force hoặc sleep để che lỗi.
+Q: Click có lặp như query đến khi assertion sau nó đạt không?
++ Không
+- Có, click vô hạn
+- Chỉ khi có role
+Q: cy.wait(3000) thay chờ điều kiện đáng tin được không?
++ Không
+- Có với mọi mạng
+- Có nếu laptop nhanh
+
+## LESSON cypress-05 | intercept, alias và mạng có kiểm soát
+
+### Match route có chủ đích
+App gọi GET/api/classes khi mở trang. Match method và pathname/query cần thiết, tránh glob rộng bắt nhầm endpoint; query filter cũng phải có expected theo contract.
+
+### Stub response để kiểm một nhánh UI
+Dữ liệu dưới tự viết cho lớp còn chỗ. Matcher pathname không phụ thuộc query nhưng semantics filter cần test riêng; stub không chứng minh provider thật trả đúng.
+~~~js
+cy.intercept({method:'GET',pathname:'/api/classes'},
+ {statusCode:200,body:{items:[{id:'CL-L7-A',name:'Lớp Mầm Sương',remaining:1}]}}).as('classes');
+cy.visit('/classes');
+cy.wait('@classes');
+cy.get('[data-cy=class-card]').should('have.length',1);
+~~~
+
+### HTTP lỗi khác network error
+503 là response, forceNetworkError mô phỏng nhánh lỗi kết nối. Viết ca riêng và assert thông báo/trạng thái để app không báo thành công giả; setup phải đưa tới form trước action.
+~~~js
+cy.intercept('POST','/api/enrollments',{statusCode:503,body:{code:'temporary'}}).as('down');
+cy.get('[data-cy=enroll]').click();
+cy.wait('@down');
+cy.get('[role=alert]').should('contain','Chưa đăng ký được');
+~~~
+
+### Cycle object nối request và response
+Ca có alias enroll trước click có thể kiểm payload và id tạo. Không wait alias cũ rồi suy request mới đã phát; mỗi wait tiêu thụ request khớp kế tiếp theo cơ chế công cụ.
+~~~js
+cy.wait('@enroll').then(({request,response})=>{
+ expect(request.body.classId).to.eq('CL-L7-A');
+ expect(response.statusCode).to.eq(201);
+ expect(response.body.id).to.be.a('string');
+});
+~~~
+
+### API setup không đi cùng intercept như browser
+cy.request không bị cy.intercept chặn như request app. Setup API cần backend lab hoặc stub riêng; ghi case nào UI mock và case nào kiểm tích hợp/persistence thật.
+
+PRACTICE: Viết ba ca200/503/network-error với matcher và assertion payload/UI. Nộp contract route, phần stub và giới hạn kết luận; không gọi provider đã kiểm vì UI có intercept.
+Q: Intercept nên đăng ký lúc nào?
++ Trước action hoặc visit phát request cần bắt
+- Sau response hoàn tất
+- Sau assertion cuối
+Q: cy.intercept có chặn cy.request như request của app không?
++ Không
+- Có luôn
+- Chỉ cần alias
+
+## LESSON cypress-06 | Fixture, seed và dữ liệu độc lập
+
+### Browser sạch chưa tách server
+Test isolation không xóa lớp hay enrollment trên backend. Phân bổ runId/testId, actor và resource riêng; cleanup đúng id đã tạo, không xóa mọi dữ liệu chung sau một ca.
+
+### Fixture nhỏ có nghĩa nghiệp vụ
+File cypress/fixtures/classes-full.json có dữ liệu giả dưới. Cần fixture rỗng, còn chỗ, đầy và sai shape với expected riêng; không lấy response hiện tại làm chuẩn mà không review.
+~~~json
+{"items":[{"id":"CL-L7-A","name":"Lớp Vạt Mầm","remaining":0,"status":"open"}]}
+~~~
+
+### Seed bằng endpoint hỗ trợ lab
+API /lab/classes phải được app lab cung cấp và giới hạn quyền. Kiểm response trước lưu id, không fallback tài nguyên run trước khi setup fail; runId thực phải riêng theo lần chạy.
+~~~js
+cy.request('POST','/lab/classes',{runId:'LAB-CY7',capacity:1}).then(r=>{
+ expect(r.status).to.eq(201);
+ cy.wrap(r.body.id).as('classId');
+});
+~~~
+
+### Cleanup giữ phạm vi tài nguyên
+Sau test xóa classId chính ca tạo theo hợp đồng lab. Hook có thể không chạy đủ khi job bị hủy, nên tài nguyên chia sẻ còn cần lease/cleanup theo run và quyền phù hợp.
+~~~js
+cy.get('@classId').then(id=>{
+ cy.request('DELETE',`/lab/classes/${id}`).its('status').should('eq',204);
+});
+// Không xóa theo tên chung của mọi test.
+~~~
+
+### Kiểm độc lập bằng chạy riêng
+Chạy một ca, đổi thứ tự và chia spec. Nếu chỉ toàn suite xanh, xem fixture/session/state ẩn; đừng giữ global phụ thuộc hoặc skip ca để giả độc lập.
+
+PRACTICE: Tạo ba fixture và seed/reset lab, ba test id riêng, một ca setup fail rõ. Nộp expected/cleanup và kết quả chạy riêng hoặc ghi phần chưa thực thi.
+Q: Fixture JSON có tự là expected đúng không?
++ Không, cần hợp đồng và review
+- Có vì là file
+- Có nếu lấy từ response hiện tại
+Q: Test isolation có tự xóa dữ liệu backend không?
++ Không
+- Có luôn
+- Có nếu headless
+
+## LESSON cypress-07 | Form, lỗi và phiên đăng nhập
+
+### Session và dữ liệu là hai phạm vi
+cy.session cache cookie/storage theo id; trạng thái server vẫn cần fixture. Chọn cache id đủ phân biệt actor/role/cách đăng nhập và validate theo hợp đồng, không dùng admin chung cho mọi case.
+
+### Test-support login chỉ thuộc lab
+Endpoint dưới cần tự dựng trong lab, không phải API thật có sẵn hay hướng dẫn bỏ xác thực sản phẩm. Sau restore, visit trang theo luồng phù hợp và kiểm actor nếu quyền quan trọng.
+~~~js
+cy.session(['student','ST-L7-A'],()=>{
+ cy.request('POST','/lab/login',{studentId:'ST-L7-A'}).its('status').should('eq',200);
+},{validate(){
+ cy.request('/api/me').its('status').should('eq',200);
+}});
+cy.visit('/enroll');
+~~~
+
+### Response âm được kiểm có chủ đích
+Ca chưa đăng nhập bắt đầu từ browser sạch, không gọi session helper trước đó. Chỉ tắt failOnStatusCode cho request cần assert lỗi, không nuốt mọi failure trong suite.
+~~~js
+cy.request({url:'/api/private',failOnStatusCode:false}).then(r=>{
+ expect(r.status).to.eq(401);
+ expect(r.body).not.to.have.property('studentNotes');
+});
+~~~
+
+### Form lỗi phải giúp sửa
+Kiểm text,field association và state, không chỉ border đỏ. Sau sửa input, kiểm lỗi cập nhật và luồng hợp lệ vẫn hoạt động; nhãn có nghĩa hỗ trợ người dùng và test.
+~~~js
+cy.get('[data-cy=student-name]').clear();
+cy.get('[data-cy=enroll]').click();
+cy.get('[data-cy=name-error]').should('contain','Nhập họ tên');
+cy.get('[data-cy=student-name]').should('have.attr','aria-invalid','true');
+~~~
+
+### Cache không che ca hết phiên
+Thử session hết hiệu lực và đổi actor; validate cần phát hiện trạng thái không hợp lệ. Không coi cache hit là quyền server còn đúng; dữ liệu private không được lộ sau logout/đổi tài khoản.
+
+PRACTICE: Viết helper session cho hai actor giả và năm ca form/quyền, gồm401, hết phiên và đổi actor. Nộp cache id, validate, fixture riêng và artifact không có token thật.
+Q: cy.session quản lý loại trạng thái nào?
++ Cookie và browser storage theo cấu hình
+- Mọi bảng database
+- Toàn bộ server production
+Q: Muốn kiểm response401 bằng cy.request cần chú ý gì?
++ failOnStatusCode phù hợp rồi assert401
+- Tắt mọi assertion
+- Luôn coi401 là app crash
+
+## LESSON cypress-08 | Component test và luồng trình duyệt
+
+### Chọn phạm vi component hoặc hành trình
+Component test hữu ích cho form, trạng thái lỗi và tương tác cô lập. E2E kiểm app được dựng cùng routing, API, quyền và dữ liệu theo phạm vi; cùng dùng browser không có nghĩa hai lớp bằng chứng giống nhau.
+
+### Cấu hình adapter cho lab React
+Ví dụ dùng React mã nguồn mở, component EnrollmentForm phải do lab cung cấp với prop onSubmit và label theo contract. cy.mount cần đăng ký trong support component, không tự có trong E2E thông thường.
+~~~js
+// cypress/support/component.js trong dự án lab:
+import {mount} from 'cypress/react';
+Cypress.Commands.add('mount',mount);
+// Cấu hình component.devServer cần chọn framework/bundler tương thích của lab.
+~~~
+
+### Kiểm callback và dữ liệu form
+Spec JSX sau import component thật của lab và dùng stub để quan sát callback. Nó chưa kiểm server, transaction hoặc quyền; props và expected phải được nhóm chốt trước.
+~~~js
+import EnrollmentForm from '../../src/EnrollmentForm';
+it('gửi tên hợp lệ qua callback',()=>{
+ const submitted=cy.stub().as('submitted');
+ cy.mount(<EnrollmentForm onSubmit={submitted}/>);
+ cy.get('[data-cy=student-name]').type('Lam Thoi');
+ cy.get('[data-cy=enroll]').click();
+ cy.get('@submitted').should('have.been.calledOnce');
+});
+~~~
+
+### E2E giữ câu hỏi tích hợp quan trọng
+Một form gọi callback đúng vẫn có thể gửi sai endpoint hoặc actor trên app thật. Giữ luồng đăng ký cục bộ có assertion persistence, không thay mọi E2E bằng mount rồi nhận toàn hệ thống đã kiểm.
+~~~text
+component: label, validation, props/callback
+integration: form nối API/router/state
+E2E: ý định người dùng và kết quả qua app
+server: quyền, quota, transaction, chống lặp
+Ghi mock ở từng lớp, không cộng điểm hình thức.
+~~~
+
+### Bẫy phụ thuộc dựng thiếu
+Component có context, CSS hoặc router có thể cần wrapper đúng. Không sửa production component chỉ để test không có provider; dựng lab theo contract và kiểm phần wrapper không che lỗi mục tiêu.
+
+PRACTICE: Viết ba component case và hai E2E case cho cùng form. Nộp adapter/support/config, prop contract, callback payload assertion và ma trận phần server chưa được component test chứng minh.
+Q: Component test khác E2E chủ yếu ở đâu?
++ Phạm vi và phụ thuộc được dựng
+- Luôn không có browser
+- Không cần expected
+Q: cy.mount cần gì?
++ Component config và adapter framework phù hợp
+- Luôn có trong mọi E2E spec
+- Một biến global bất kỳ
+
+## LESSON cypress-09 | Page action và tái sử dụng đúng mức
+
+### Tái dùng theo ý nghĩa ổn định
+Page action đóng gói thao tác theo miền, giữ test đọc được mục tiêu. Không bọc mọi lệnh thành một tầng tên mới hoặc tạo một global page object cache DOM qua render; abstraction cần có lợi ích rõ.
+
+### Helper trả chain phù hợp
+Hàm điền tên dưới dùng selector contract, không tự visit, seed hay đăng nhập bất ngờ. Test gọi vẫn thấy bước và giữ expected nghiệp vụ riêng; thay layout chỉ cần review helper liên quan.
+~~~js
+export function enterStudentName(name){
+ return cy.get('[data-cy=student-name]').clear().type(name);
+}
+export function submitEnrollment(){
+ return cy.get('[data-cy=enroll]').click();
+}
+~~~
+
+### Custom command cho thao tác dùng nhiều
+Nếu nhiều spec cùng cần lấy control theo data-cy, command nhỏ có contract rõ có thể hữu ích. Giá trị name chỉ do test định nghĩa, không nhận input tùy ý để ghép selector không kiểm.
+~~~js
+Cypress.Commands.add('getByCy',(name)=>{
+ if(!/^[a-z][a-z0-9-]*$/.test(name))throw new Error('test selector name invalid');
+ return cy.get(`[data-cy=${name}]`);
+});
+cy.getByCy('enrollment-status').should('contain','Đã đăng ký');
+~~~
+
+### Không giấu setup và assertion
+Một helper tên openForm nhưng xóa mọi data hoặc đăng nhập admin là hành vi bất ngờ. Đặt tên và đầu vào/ra rõ, quyền tối thiểu; oracle quan trọng nên hiện trong test hoặc hàm assertion có ý nghĩa riêng.
+~~~text
+seedClass -> trả id tài nguyên riêng
+loginStudent -> đúng actor, session validate
+openEnrollment -> chỉ điều hướng
+submitEnrollment -> thao tác một ý định
+assertConfirmed -> kiểm id/class/actor theo contract
+~~~
+
+### Review độ bền thay vì số dòng giảm
+Hai dòng helper khó hiểu chưa tốt hơn mười dòng rõ. Kiểm cách fail, subject, retry và cleanup; khi abstraction có nhiều nhánh theo flag, cân nhắc tách hành vi thay vì thêm option mãi.
+
+PRACTICE: Refactor ba spec lab bằng hai helper và một command có lý do. Chứng minh expected vẫn đọc được, không cache DOM cũ và không thay quyền/setup ngầm; nộp diff nội dung của lab.
+Q: Page action tốt nên thế nào?
++ Hành vi rõ, chain phù hợp, không che expected quan trọng
+- Giữ DOM cũ trong global mãi
+- Một hàm làm mọi việc
+Q: Custom command nên thêm khi nào?
++ Tái sử dụng ổn định và có hợp đồng rõ
+- Bọc mọi dòng dù chỉ dùng một lần
+- Để giấu assertion
+
+## LESSON cypress-10 | Tải file, thời gian và hành vi bất đồng bộ
+
+### Fake clock kiểm timer chứ không đo mạng
+Form tự lưu sau debounce có thể được kiểm không ngủ thật bằng clock/tick. Đặt clock trước khi app tạo timer; server/network latency thật không tự tiến theo tick và cần phép kiểm khác.
+
+### Chốt thời gian trước visit
+Giới hạn stub ở Date/setTimeout/clearTimeout theo hành vi lab để không vô tình đóng băng mọi interval cần cho app. Intercept autosave trước visit, điền input rồi tick qua ngưỡng đã chốt.
+~~~js
+cy.clock(Date.UTC(2030,0,2),['Date','setTimeout','clearTimeout']);
+cy.intercept('POST','/api/drafts',{statusCode:200,body:{saved:true}}).as('saveDraft');
+cy.visit('/enroll');
+cy.get('[data-cy=note]').type('Ghi chú Mầm Vạt');
+cy.tick(500);
+cy.wait('@saveDraft').its('request.body.note').should('eq','Ghi chú Mầm Vạt');
+~~~
+
+### Upload chỉ dùng file giả được cấp
+selectFile nhận fixture cục bộ trong dự án lab. Kiểm tên, type, giới hạn dung lượng và xử lý lỗi theo contract; không dùng tài liệu cá nhân để minh họa upload.
+~~~js
+cy.get('input[type=file]').selectFile('cypress/fixtures/roster-lab.csv');
+cy.get('[data-cy=file-name]').should('contain','roster-lab.csv');
+cy.get('[data-cy=upload]').click();
+cy.get('[data-cy=import-status]').should('contain','Đã kiểm dữ liệu');
+~~~
+
+### Download cần chứng minh file mới và đúng
+Downloads folder phải sạch/riêng theo môi trường và policy, không xóa tùy ý path ngoài lab. cy.readFile có retry theo phiên bản hiện hành nhưng CSV phức tạp cần parser, không split dấu phẩy mù.
+~~~js
+cy.get('[data-cy=export]').click();
+cy.readFile('cypress/downloads/roster-lab.csv','utf8').should(text=>{
+ expect(text).to.include('studentId,classId');
+ expect(text).to.include('ST-L7-A,CL-L7-A');
+});
+// Thêm parser và kiểm toàn bộ rows theo hợp đồng CSV của lab.
+~~~
+
+### Thời gian nghiệp vụ có oracle riêng
+Clock client không thay clock server tính hạn hủy. Nếu cần mốc trước/đúng/sau cutoff, dùng API/harness clock lab được thiết kế; nêu nơi giờ được lấy để tránh test xanh ở client nhưng server sai.
+
+PRACTICE: Viết debounce case với clock/tick và hai ca upload/download dùng fixture giả. Nộp contract timer/file, thư mục sạch, parser/expected và phần chưa đo được về server/network.
+Q: cy.clock/tick điều khiển gì trong bài?
++ Date/timer app được stub, không tự đổi server hoặc mạng
+- Mọi giờ trên server
+- Toàn bộ OS clock
+Q: File tồn tại đã chứng minh run vừa tải đúng chưa?
++ Chưa
+- Có nếu đúng đuôi
+- Có nếu file nhỏ
+
+## LESSON cypress-11 | CI, artifact và giới hạn chạy song song
+
+### CI cần cùng hợp đồng môi trường
+Pin dependency trong lockfile, ghi Node/browser/app/viewport và fixture. Headless không tự bảo đảm giống mọi headed environment; readiness phải có ý nghĩa trước khi chạy suite, không sleep rồi hy vọng.
+
+### Lệnh chạy cục bộ tương ứng CI
+Đây là lệnh hướng dẫn cho app lab đã khởi động, không tự gọi dịch vụ ngoài phạm vi. Output riêng từng run và kiểm exit code; npx có thể tải gói nếu chưa cài, nên cài theo lockfile trước.
+~~~bash
+npm ci
+npx cypress verify
+npx cypress run --browser electron --spec "cypress/e2e/enrollment.cy.js"
+~~~
+
+### Tách spec thủ công không cần giả định dịch vụ
+Hai job chọn spec khác nhau có thể song song nếu runner, app và dữ liệu đủ độc lập. Không gọi đó là tự cân bằng tải; nếu dùng tính năng điều phối khác, phải kiểm điều kiện hiện hành riêng.
+~~~text
+jobA: npx cypress run --spec "cypress/e2e/enrollment.cy.js"
+jobB: npx cypress run --spec "cypress/e2e/cancellation.cy.js"
+Mỗi job có runId/actor/fixture/artifact riêng.
+Không dùng một tài khoản ghi chung hoặc reset chung giữa job.
+~~~
+
+### Artifact sau fail giữ trạng thái đỏ
+Thu screenshot/video khi được cấu hình và report cần thiết, kiểm dữ liệu quyền trong DOM/network/log. Bước lưu bằng chứng không được nuốt exit code hoặc continue-on-error làm gate xanh giả.
+~~~text
+runId/build/browser -> spec -> lỗi đầu
+artifacts: screenshot/report và video nếu bật
+privacy: fixture giả, token/cookie không được upload
+status: test fail vẫn làm gate fail
+retention: theo chính sách lab
+~~~
+
+### Năng lực runner là một biến
+CPU/RAM thiếu có thể làm timeout hoặc render chậm. Đo tài nguyên, độ dài queue và mức song song; không tăng retries/timeout mọi nơi mà chưa phân biệt app, test, fixture hay hạ tầng.
+
+PRACTICE: Chuẩn bị CI lab nháp với readiness, lệnh run, hai nhóm spec độc lập và artifact riêng. Nộp một fail có report nhưng gate vẫn đỏ, không push/deploy hoặc gửi dữ liệu ra ngoài.
+Q: Chia spec giữa hai job có tự tách dữ liệu không?
++ Không
+- Có luôn
+- Có nếu tên job khác
+Q: CI cần giữ thông tin môi trường gì?
++ Dependency, browser, app, fixture và điều kiện chạy
+- Chỉ màu badge
+- Chỉ tên máy
+
+## LESSON cypress-12 | Triage flaky và ranh giới công cụ
+
+### Flaky là tín hiệu cần phân tích
+Một test fail rồi retry xanh chưa xác nhận nguyên nhân mạng. Thu lỗi đầu, command log, state, fixture, request và tài nguyên; chọn giả thuyết có phép kiểm, tránh chỉ thêm delay hoặc tăng retries.
+
+### Trước hết kiểm subject và thời điểm
+DOM có thể bị thay sau click, intercept có thể đăng ký muộn, hoặc alias match sai query. Tìm lỗi đầu và chain liên quan; query lại theo contract chứ không giữ node cũ và force mọi action.
+~~~text
+symptom: detached element
+check: render xảy ra sau action nào?
+check: có giữ node trong then/global qua state không?
+experiment: query mới sau điều kiện hoàn tất
+verify: lặp có kiểm soát cùng fixture và app version
+~~~
+
+### Lặp để quan sát có ngữ cảnh
+Có thể chạy spec nhiều lần qua job/script lab riêng, mỗi lần dữ liệu sạch. Ghi mẫu số, điều kiện và lỗi lần đầu; không rerun đến xanh rồi xóa evidence thất bại.
+~~~text
+observe: run1..run10 với id riêng
+record: pass/fail lần đầu, error category, build
+compare: headed/headless hoặc một/hai job khi phù hợp
+not conclusion: 10lần xanh không chứng minh mọi race hết
+follow-up: regression theo cơ chế đã xác nhận
+~~~
+
+### Giới hạn công cụ cần quyết định đúng
+Một số hành trình nhiều origin/tab hoặc native app có ràng buộc riêng. Kiểm khả năng phiên bản chính thức và chọn lớp/công cụ phù hợp, không tắt kiểm soát browser để bỏ mục tiêu rồi gọi thành công.
+~~~text
+question: app cần origin nào và quyền nào?
+question: Cypress version/config hỗ trợ cách kiểm nào?
+option: contract/API/component thay một phần khi có lý do
+gap: hành trình chưa được E2E thực thi cần ghi rõ
+Không nhận workaround là bằng chứng trải nghiệm thật.
+~~~
+
+### Quarantine có chủ và hạn
+Nếu tạm cách ly ca, ghi issue, tác động, owner và mốc xử lý. Vẫn giữ coverage gap trong release report; skip lâu dài không sửa rủi ro, test xanh cần đúng phạm vi tuyên bố.
+
+PRACTICE: Điều tra ba flaky lab do late intercept, state chung và DOM thay. Nộp lỗi đầu, giả thuyết, experiment, sửa cơ chế và giới hạn kiểm; không dùng force/sleep như mặc định.
+Q: Trước tăng retry vì flaky cần xem gì?
++ Lỗi đầu, state, dữ liệu, network và tài nguyên
+- Chỉ cảm giác
+- Chỉ tổng số test
+Q: Tắt webSecurity để suite xanh có mặc định là sửa đúng không?
++ Không
+- Có luôn
+- Có nếu CI cho phép
+
+## LESSON cypress-13 | Dự án: hồi quy đăng ký lớp với stub
+
+### Dự án hồi quy Mầm Thoi
+App lab có danh sách lớp, đăng ký, hủy và draft autosave. Tạo fixture riêng, kiểm luồng chính tích hợp và các nhánh UI stub có giới hạn; mỗi test nối rule, risk và expected.
+
+### Gói contract đủ để người khác dựng
+Nêu selector, endpoint, actor, dữ liệu, clock và cleanup. API hỗ trợ lab không tồn tại mặc định ở mọi app; nếu chưa có, cần hiện thực trong lab hoặc ghi phần thiết kế chưa chạy.
+~~~text
+GET /api/classes ->items id/name/remaining
+POST /api/enrollments ->201,id,classId,studentId,status
+POST /api/drafts ->saved theo debounce500ms lab
+/lab/classes,/lab/login ->test support có phạm vi
+DOM:data-cy theo contract đã review
+BaseURL:http://localhost:3100
+~~~
+
+### Coverage có ca âm và độ nhạy
+Tối thiểu12case gồm còn chỗ/hết chỗ, form lỗi, 503/network, session/quyền, rerender và file/timer. Dùng bản lỗi hoặc mutation lab để chứng minh assertion đỏ, sau đó phục hồi và chạy riêng/toàn suite.
+~~~text
+TC1..3: danh sách/form/success tích hợp
+TC4..6: validation,quota,quyền
+TC7..8: stub503/network error
+TC9..10: clock/draft,file
+TC11..12: session hết hạn và re-render
+Mỗi case có fixture,oracle và cleanup.
+~~~
+
+### Ví dụ kết quả được nối lại theo id
+Ca tích hợp chờ response tạo rồi đọc bằng actor phù hợp. Stub response không có persistence thật nên không gọi query server để xác nhận dữ liệu không được tạo; tách spec theo ranh giới rõ.
+~~~js
+cy.wait('@enroll').then(({response})=>{
+ expect(response.statusCode).to.eq(201);
+ const id=response.body.id;
+ cy.request(`/api/enrollments/${id}`).then(r=>{
+  expect(r.body.classId).to.eq('CL-L7-A');
+  expect(r.body.studentId).to.eq('ST-L7-A');
+ });
+});
+~~~
+
+### Bàn giao bằng chứng và điều còn mở
+Nộp config, fixture, test, helper, report và matrix stub/tích hợp/component. Nêu dependency/version, app đã chạy hay mô phỏng, gap origin/device/AT và cách tiếp tục; không push/deploy trong bài học.
+
+PRACTICE: Bàn giao12case Cypress lab với data riêng, session, intercept, clock, file và hai component case bổ sung. Có ca lỗi chủ đích bị phát hiện, report/cleanup và coverage ghi rõ phần mock, chưa thực thi.
+Q: Stub503 qua UI chứng minh gì?
++ Nhánh xử lý UI trong điều kiện test đó
+- Backend thật chịu tải tốt
+- Toàn bộ tích hợp đã đúng
+Q: Gói bàn giao Cypress cần gì?
++ Config, fixture, test, evidence và giới hạn
+- Chỉ video đẹp
+- Token thật
+
+## LESSON cypress-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Chốt localhost, hợp đồng DOM/API và dependency để người học biết thành phần nào phải có trước khi chạy.
+2. Subject được yield qua chain; dùng then hoặc query/assertion phù hợp, không đọc biến trước khi queue thực hiện.
+3. Thuộc tính test giúp tìm control nhưng không chứng minh tên truy cập hoặc tương tác đúng.
+4. Action đợi actionability rồi thực hiện; phân biệt với retry query/assertion, đọc lại DOM khi app render mới.
+
+### Dữ liệu và điều kiện biên
+5. Đăng ký muộn có thể bỏ lỡ request; matcher cần đúng method/path/query theo mục tiêu.
+6. Dữ liệu giả phải có version, ca tốt/xấu và oracle độc lập, không copy actual sai thành chuẩn.
+7. Cache session không thay fixture hoặc quyền server; validate và visit lại theo luồng được thiết kế.
+8. Component testing cô lập theo adapter; E2E kiểm luồng app với ranh giới tích hợp được ghi rõ.
+
+### Tính đúng và cách điều tra
+9. Helper nhỏ theo miền giảm trùng mà vẫn đọc được mục tiêu và tránh subject cũ sau render.
+10. Fake clock hữu ích cho debounce/timer; cần đặt trước hành vi và không suy latency mạng thật từ tick.
+11. Actor, id, namespace và artifact phải riêng; việc chia thực thi không thay fixture độc lập.
+12. Retry là tín hiệu điều tra, không sửa race hoặc fixture; phân biệt app/test/infra bằng evidence.
+
+### Rủi ro và lựa chọn phương án
+13. Stub bỏ qua backend thật; ghi ranh giới và giữ kiểm tích hợp riêng theo rủi ro.
+14. Callback có thể được chạy lại; side effect có thể nhân thao tác và làm sai phép kiểm.
+15. Chờ alias hoặc trạng thái cụ thể giúp tránh phụ thuộc tốc độ, vẫn cần timeout và assertion có nghĩa.
+16. Browser sạch vẫn có thể dùng chung actor/class; seed và cleanup server phải có phạm vi riêng.
+
+### Dự án, bằng chứng và bàn giao
+17. Support/config phải đăng ký mount và import component thật của lab; không giả định E2E có sẵn.
+18. Có thể là file cũ hoặc sai nội dung; cần trạng thái sạch, cách chờ và oracle theo hợp đồng.
+19. Đánh giá origin, yêu cầu và giới hạn phiên bản; không bỏ kiểm soát để né hành vi cần kiểm.
+20. Người nhận cần chạy lại lab, biết case stub/tích hợp, cleanup và phần chưa đủ bằng chứng.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Ngoài spec, lab Cypress cần gì?
++ App, fixture và cấu hình phiên bản phù hợp
+- Một URL công khai bất kỳ
+- Chỉ ảnh màn hình
+Q: cy.get có trả DOM đồng bộ ngay không?
++ Không, công việc nằm trong queue
+- Có, luôn là DOM node ngay
+- Có, là Promise chuẩn để await tùy ý
+Q: data-cy là gì trong thiết kế test?
++ Hợp đồng selector ổn định khi phù hợp
+- Thay mọi label và semantics
+- Bảo đảm đạt accessibility
+Q: Click có lặp như query đến khi assertion sau nó đạt không?
++ Không
+- Có, click vô hạn
+- Chỉ khi có role
+Q: Intercept nên đăng ký lúc nào?
++ Trước action hoặc visit phát request cần bắt
+- Sau response hoàn tất
+- Sau assertion cuối
+Q: Fixture JSON có tự là expected đúng không?
++ Không, cần hợp đồng và review
+- Có vì là file
+- Có nếu lấy từ response hiện tại
+Q: cy.session quản lý loại trạng thái nào?
++ Cookie và browser storage theo cấu hình
+- Mọi bảng database
+- Toàn bộ server production
+Q: Component test khác E2E chủ yếu ở đâu?
++ Phạm vi và phụ thuộc được dựng
+- Luôn không có browser
+- Không cần expected
+Q: Page action tốt nên thế nào?
++ Hành vi rõ, chain phù hợp, không che expected quan trọng
+- Giữ DOM cũ trong global mãi
+- Một hàm làm mọi việc
+Q: cy.clock/tick điều khiển gì trong bài?
++ Date/timer app được stub, không tự đổi server hoặc mạng
+- Mọi giờ trên server
+- Toàn bộ OS clock
+Q: Chia spec giữa hai job có tự tách dữ liệu không?
++ Không
+- Có luôn
+- Có nếu tên job khác
+Q: Trước tăng retry vì flaky cần xem gì?
++ Lỗi đầu, state, dữ liệu, network và tài nguyên
+- Chỉ cảm giác
+- Chỉ tổng số test
+Q: Stub503 qua UI chứng minh gì?
++ Nhánh xử lý UI trong điều kiện test đó
+- Backend thật chịu tải tốt
+- Toàn bộ tích hợp đã đúng
+Q: Callback should có thể retry nên cần gì?
++ Assertion thuần, không thêm side effect hoặc lệnh cy
+- POST tạo đơn trong callback
+- Sleep mỗi lần
+Q: cy.wait(3000) thay chờ điều kiện đáng tin được không?
++ Không
+- Có với mọi mạng
+- Có nếu laptop nhanh
+Q: Test isolation có tự xóa dữ liệu backend không?
++ Không
+- Có luôn
+- Có nếu headless
+Q: cy.mount cần gì?
++ Component config và adapter framework phù hợp
+- Luôn có trong mọi E2E spec
+- Một biến global bất kỳ
+Q: File tồn tại đã chứng minh run vừa tải đúng chưa?
++ Chưa
+- Có nếu đúng đuôi
+- Có nếu file nhỏ
+Q: Tắt webSecurity để suite xanh có mặc định là sửa đúng không?
++ Không
+- Có luôn
+- Có nếu CI cho phép
+Q: Gói bàn giao Cypress cần gì?
++ Config, fixture, test, evidence và giới hạn
+- Chỉ video đẹp
+- Token thật

@@ -3,16 +3,32 @@
  "title": "Khả năng và ý định; 可能形・つもり",
  "sub": "この 漢字は 読めます。",
  "goals": [
-  "Hiểu và dùng đúng Khả năng và ý định; 可能形・つもり",
-  "Đọc/nghe phân biệt ít nhất 12 từ/cụm của tình huống",
-  "Hỏi và trả lời ba thông tin cụ thể bằng mức lịch sự phù hợp",
-  "Viết đoạn mới và tự sửa lỗi theo checklist"
+  "Phân tích cách dùng trong câu “この 漢字は 読めます。” và tạo một câu khác giữ đúng quan hệ ý.",
+  "Dùng “漢字” (chữ kanji) và “読めます” (có thể đọc) đúng trong trao đổi của bài.",
+  "Nghe để trả lời câu hỏi “Theo hội thoại: Bạn nói được tiếng Nhật không?”, rồi chỉ ra phần lời nói làm căn cứ.",
+  "Tự viết đoạn có ý chính “Tháng sau” và kiểm lại sự nhất quán với văn bản đọc."
  ],
  "parts": [
   {
    "k": "text",
    "h": "Bối cảnh và cách học",
-   "html": "<p>Phân biệt có thể, dự định và thực tế; diễn đạt kế hoạch học vừa sức bằng dạng khả năng.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+   "html": "<p>Phân biệt có thể, dự định và thực tế; diễn đạt kế hoạch học vừa sức bằng dạng khả năng.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>漢字 có ka-n-ji; 試験 là shi-ke-n, vị trí ん khác nhau. 来月 có ra-i-ge-tsu bốn mora. Khi đối chiếu 読みます và 読めます, giữ rõ i/e trong âm mi/me vì sự khác biệt đó mang nghĩa khả năng.</p>",
+   "items": [
+    {
+     "sym": "かんじ・しけん・らいげつ",
+     "ex": [
+      "漢字",
+      "試験",
+      "来月"
+     ],
+     "vi": "Nghe và đọc đối chiếu 漢字 (かんじ), 試験 (しけん), 来月 (らいげつ). Dùng câu “この 漢字は 読めます。” để kiểm xem các độ dài âm còn giữ được khi nối vào phát ngôn."
+    }
+   ]
   },
   {
    "k": "words",
@@ -47,8 +63,8 @@
      "kana": "はなせます",
      "romaji": "hanasemasu",
      "vi": "có thể nói",
-     "ex": "少し 話せます。漢字も 読めます。",
-     "exVi": "Tôi nói được một chút. Cũng đọc được kanji."
+     "ex": "短い案内なら日本語で話せます。",
+     "exVi": "Tôi nói được chỉ dẫn ngắn bằng tiếng Nhật."
     },
     {
      "w": "できます",
@@ -111,8 +127,8 @@
      "kana": "むり",
      "romaji": "muri",
      "vi": "quá sức/không hợp lý",
-     "ex": "はい。でも 無理は しないつもりです。",
-     "exVi": "Có. Nhưng tôi định không làm quá sức."
+     "ex": "無理に全員を発表させません。",
+     "exVi": "Tôi không ép tất cả trình bày."
     }
    ]
   },
@@ -165,7 +181,7 @@
   {
    "k": "dialog",
    "h": "Nghe: Khả năng và ý định; 可能形・つもり",
-   "note": "Hai học viên của lớp giả Mây Sớm trao đổi; nghe lần đầu lấy ý, lần sau kiểm chi tiết. Không đọc romaji trong âm thanh.",
+   "note": "Trước khi nghe, dự đoán câu trả lời cho “Theo hội thoại: Bạn nói được tiếng Nhật không?”. Sau đó ghi nguyên thông tin làm bạn chọn đáp án; lượt nói “少し 話せます。漢字も 読めます。” là một điểm cần kiểm khi nghe lại.",
    "lang": "ja-JP",
    "lines": [
     {
@@ -219,34 +235,34 @@
    ],
    "qs": [
     {
-     "q": "Theo hội thoại: Bạn nói được tiếng Nhật không?",
+     "q": "Người trả lời nói tiếng Nhật được mức nào?",
      "o": [
-      "Có. Nhưng câu dài còn khó.",
-      "Tôi nói được một chút. Cũng đọc được kanji.",
-      "Có, tôi định dự. Tôi đã lập kế hoạch."
+      "Mọi chủ đề dài",
+      "Một chút",
+      "Hoàn toàn chưa nói được"
      ],
      "a": 1,
-     "e": "Câu trả lời là 少し 話せます。漢字も 読めます。 → Tôi nói được một chút. Cũng đọc được kanji."
+     "e": "Lượt nói “少し 話せます。漢字も 読めます。” nghĩa là: Tôi nói được một chút. Cũng đọc được kanji. Nội dung này làm rõ đáp án “Một chút”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Bạn viết được tên không?",
+     "q": "Tháng sau có dự kiểm tra không?",
      "o": [
-      "Có. Nhưng tôi định không làm quá sức.",
-      "Có, tôi định dự. Tôi đã lập kế hoạch.",
-      "Có. Nhưng câu dài còn khó."
+      "Có ý định dự",
+      "Không bao giờ dự",
+      "Đã dự xong"
+     ],
+     "a": 0,
+     "e": "Lượt nói “はい、受けるつもりです。計画を 作りました。” nghĩa là: Có, tôi định dự. Tôi đã lập kế hoạch. Nội dung này làm rõ đáp án “Có ý định dự”, không phải hai cách hiểu còn lại."
+    },
+    {
+     "q": "Người đó muốn tránh điều gì?",
+     "o": [
+      "Mọi việc ôn tập",
+      "Viết tên",
+      "Học quá sức"
      ],
      "a": 2,
-     "e": "Câu trả lời là はい。でも 長い 文は まだ 難しいです。 → Có. Nhưng câu dài còn khó."
-    },
-    {
-     "q": "Theo hội thoại: Bạn dự kiểm tra tháng sau không?",
-     "o": [
-      "Có. Nhưng tôi định không làm quá sức.",
-      "Có, tôi định dự. Tôi đã lập kế hoạch.",
-      "Tôi nói được một chút. Cũng đọc được kanji."
-     ],
-     "a": 1,
-     "e": "Câu trả lời là はい、受けるつもりです。計画を 作りました。 → Có, tôi định dự. Tôi đã lập kế hoạch."
+     "e": "Lượt nói “はい。でも 無理は しないつもりです。” nghĩa là: Có. Nhưng tôi định không làm quá sức. Nội dung này làm rõ đáp án “Học quá sức”, không phải hai cách hiểu còn lại."
     }
    ]
   },
@@ -331,35 +347,35 @@
    "h": "Nói và phản hồi",
    "tasks": [
     {
-     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "p": "Đóng vai hỏi về chữ kanji và có thể đọc. Dùng lượt “日本語で 話せますか。” để mở đầu, rồi yêu cầu bạn trả lời bằng thông tin của vai đối diện.",
      "model": "日本語で 話せますか。 名前は 書けますか。 来月の 試験を 受けますか。 毎晩 練習できますか。",
      "vi": "Bạn nói được tiếng Nhật không? Bạn viết được tên không? Bạn dự kiểm tra tháng sau không? Bạn luyện được mỗi tối không?",
-     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+     "tips": "Khi bạn nói “名前は 書けますか。”, người nghe phải nhận ra Bạn viết được tên không?; ghi âm và kiểm xem từ nào đang quyết định nghĩa đó."
     },
     {
-     "p": "Tóm tắt nội dung bài đọc bằng ba câu, sau đó nêu một câu hỏi còn muốn làm rõ.",
+     "p": "Tóm tắt ba ý trong bài đọc để trả lời “Kỳ kiểm tra khi nào?”. Kết thúc bằng câu hỏi về quá sức/không hợp lý nếu phần này chưa được người nghe xác nhận.",
      "model": "来月、小さい クラスの 試験が あります。 私は 試験を 受けるつもりです。 短い 文は 読めます。名前も 書けます。",
      "vi": "Tháng sau có kiểm tra của lớp nhỏ. Tôi định dự kiểm tra. Tôi đọc được câu ngắn và viết được tên.",
-     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+     "tips": "So phần tóm tắt của bạn với dữ kiện “Tháng sau”; nếu ý này thay đổi, hãy nói rõ đó là tình huống giả định mới."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có kiểm tra",
-   "task": "Viết một đoạn mới theo tình huống bài học; thay ít nhất hai chi tiết, dùng cấu trúc trọng tâm và kiểm thông tin nhất quán.",
+   "task": "Viết một đoạn tình huống có các ý: Chữ kanji này tôi đọc được. / Tôi viết được tên nhưng chưa viết được câu dài. / Tôi định tiếp tục luyện mỗi tối.. Dùng thêm thông tin của bài đọc để nối các ý, không chỉ chép ba câu rời.",
    "min": 80,
    "model": "来月、小さい クラスの 試験が あります。 私は 試験を 受けるつもりです。 短い 文は 読めます。名前も 書けます。 日本語で 少し 話せますが、長い 説明は まだ できません。 毎晩 二十分 練習を 続ける 計画です。 一度に たくさん 覚えるのは 無理です。 わからない 漢字は 次の日に もう一度 確認します。 試験の 結果だけでなく、できることの 変化も 見ます。",
    "modelVi": "Tháng sau có kiểm tra của lớp nhỏ. Tôi định dự kiểm tra. Tôi đọc được câu ngắn và viết được tên. Tôi nói được một chút tiếng Nhật nhưng chưa giải thích dài được. Kế hoạch là tiếp tục luyện hai mươi phút mỗi tối. Nhớ nhiều một lúc là quá sức. Kanji chưa rõ thì hôm sau kiểm lại. Tôi xem cả thay đổi năng lực chứ không chỉ điểm kiểm tra.",
    "tips": [
-    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
-    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+    "Lập sơ đồ ai làm gì trong câu “この 漢字は 読めます。”, rồi dùng cùng quan hệ chủ thể khi nối sang đoạn của bạn.",
+    "Đối chiếu “名前は 書けますが、長い 文は まだ 書けません。” với mẫu cuối “毎晩 練習を 続けるつもりです。”; chọn phần kết câu phù hợp trước khi sửa chính tả."
    ],
    "checklist": [
-    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
-    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
-    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
-    "Câu kết thúc và mức lịch sự nhất quán"
+    "Người đọc nhận ra đúng nghĩa của “漢字”, thay vì chỉ thấy từ được chèn vào câu.",
+    "Quan hệ ý trong “この 漢字は 読めます。” vẫn đúng khi bạn thay dữ kiện.",
+    "Các ý có thể đọc và quá sức/không hợp lý không bị lẫn vai hoặc phạm vi.",
+    "Đoạn kết không trái với dữ kiện trả lời câu hỏi “Kỳ kiểm tra khi nào?”."
    ]
   }
  ],
@@ -495,7 +511,7 @@
      "mỗi tối"
     ]
    ],
-   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+   "e": "Đối chiếu các cặp “できます → có thể làm” và “毎晩 → mỗi tối”; phân biệt nghĩa trong tình huống, không ghép chỉ dựa vào hình chữ."
   },
   {
    "t": "mc",
@@ -522,52 +538,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ, bảng cấu trúc bài này, loa/giọng đọc tiếng Nhật, phiếu thông tin khác nhau cho từng cặp. Không dùng dữ liệu cá nhân thật.",
+  "prep": "Chuẩn bị thẻ “漢字”, “読めます”, “無理”, bản hội thoại che lượt trả lời và phiếu đọc có câu hỏi “Kỳ kiểm tra khi nào?”.",
   "steps": [
    {
     "t": "10'",
-    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+    "do": "Gợi tình huống bằng câu “日本語で 話せますか。”. Cho cặp học viên nói mình muốn biết điều gì trước khi mở lời đáp."
    },
    {
     "t": "20'",
-    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+    "do": "Cho so thẻ “漢字” với “読めます”: học viên diễn đạt nghĩa chữ kanji và có thể đọc, rồi đặt mỗi từ vào một lượt trao đổi."
    },
    {
     "t": "25'",
-    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+    "do": "Viết hai câu “この 漢字は 読めます。” và “名前は 書けますが、長い 文は まだ 書けません。” cạnh nhau. Học viên giải thích khác biệt ý, sau đó thay một thành phần mà vẫn giữ cấu trúc vừa phân tích."
    },
    {
     "t": "20'",
-    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+    "do": "Che lời thoại và giao câu hỏi “Theo hội thoại: Bạn nói được tiếng Nhật không?”. Sau hai lượt nghe, yêu cầu nêu bằng chứng thay vì đoán theo từ khóa đơn lẻ."
    },
    {
     "t": "15'",
-    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+    "do": "Cho đổi vai quanh lượt “来月の 試験を 受けますか。”. Người nghe hỏi lại thông tin trước khi chuyển sang lời đáp, giáo viên ghi một chỗ gây hiểu nhầm để chữa cuối hoạt động."
    },
    {
     "t": "15'",
-    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+    "do": "Đầu buổi sau, yêu cầu dựng lại ý “Tôi định tiếp tục luyện mỗi tối.” không nhìn chữ Nhật. So lời nói của học viên với câu đích và chữa phần làm thay đổi quan hệ ý."
    },
    {
     "t": "20'",
-    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+    "do": "Đọc để giải quyết câu hỏi “Kỳ kiểm tra khi nào?”. Mỗi nhóm đánh dấu đoạn chứng minh và giải thích vì sao hai lựa chọn còn lại không khớp."
    },
    {
     "t": "20'",
-    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+    "do": "Giao nhiệm vụ nói có thông tin chữ kanji ở một vai và quá sức/không hợp lý ở vai kia. Hai bên chỉ hoàn thành phiếu khi đã hỏi để hiểu dữ kiện của nhau."
    },
    {
     "t": "20'",
-    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+    "do": "Viết đoạn nối ý “Chữ kanji này tôi đọc được.” với “Tôi định tiếp tục luyện mỗi tối.”. Đổi bài và kiểm chủ thể, mốc thời gian cùng từ phủ định trước khi góp ý độ tự nhiên."
    },
    {
     "t": "15'",
-    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+    "do": "Chữa bài tự chấm từ cặp “読めます” và “無理”. Mỗi học viên ghi một câu sửa của chính mình và nêu cách sẽ nhận ra lỗi đó trong lần dùng sau."
    }
   ],
   "games": [
-   "Ghép thẻ câu với tình huống: mỗi nhóm phải giải thích một cặp và chỉ ra từ/cấu trúc quyết định.",
-   "Thông tin lệch: mỗi bạn giữ một phần dữ kiện; phải hỏi lại thay vì đoán để hoàn thành phiếu."
+   "Khoảng trống thông tin: một bạn chỉ thấy “日本語で 話せますか。”, bạn kia giữ câu trả lời. Họ hỏi lại để hoàn thành thông tin về chữ kanji trước khi đổi vai.",
+   "Chọn và bảo vệ đáp án: các nhóm nhận câu hỏi “Kỳ kiểm tra khi nào?”, chọn một phương án rồi tìm chi tiết đủ bác hai phương án nhiễu."
   ],
   "errors": [
    "Nhầm 読みます với 読めます: một bên hành động, một bên khả năng.",
@@ -575,6 +591,6 @@
    "Dùng つもり như bảo đảm chắc chắn mọi việc sẽ xảy ra: nó biểu thị ý định.",
    "Bỏ ら trong thể nhóm II ở mọi văn phong: học dạng chuẩn đầy đủ trước rồi nhận diện khẩu ngữ."
   ],
-  "homework": "Ôn 12–20 thẻ theo lịch 1–3–7 ngày; nghe chép câu đã chọn, ghi âm hai lượt nói và viết đoạn mới thay ít nhất hai chi tiết."
+  "homework": "Ôn “漢字”, “読めます” và “無理” bằng câu mới có nghĩa. Ghi âm câu “この 漢字は 読めます。”, nghe lại phần kết rồi viết lời giải thích cho câu hỏi “Kỳ kiểm tra khi nào?” bằng tiếng Việt."
  }
 }

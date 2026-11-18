@@ -4,7 +4,7 @@ icon: 📱
 floor: 4
 room: 401
 level: Cơ bản → Trung bình
-hours: 7
+hours: 28
 summary: Tự động hóa ứng dụng Android từ con số 0: cài JDK, Android SDK, adb, emulator, Appium server, soi phần tử bằng Inspector và viết test Python đầu tiên với app Settings có sẵn.
 
 ## LESSON appium-01 | Appium là gì và hoạt động thế nào?
@@ -101,7 +101,7 @@ java -version
 Công cụ Android cần Java (JDK = Java Development Kit). Ví von: JDK là "động cơ", nhiều công cụ khác chạy nhờ nó.
 Mở PowerShell: bấm Start, gõ PowerShell, Enter.
 Giải thích từng dòng:
-• winget install ...: dùng trình cài đặt có sẵn của Windows để tải và cài JDK 17 bản Temurin (miễn phí). Nếu máy không có winget, tải file .msi tại trang adoptium.net.
+• winget install ...: dùng trình cài đặt có sẵn của Windows để tải và cài JDK 17 bản Temurin (miễn phí). Nếu máy không có winget, tải file .msi tại trang chính thức của Eclipse Temurin.
 • java -version: kiểm tra Java đã cài chưa.
 Kết quả mong đợi (đóng PowerShell, mở lại rồi chạy): dòng đầu có chữ openjdk version "17.0.x".
 
@@ -132,7 +132,7 @@ Android Studio > More Actions > SDK Manager
 ~~~
 Android Studio là "xưởng" của lập trình viên Android. Tester chủ yếu cần bộ SDK đi kèm: adb, emulator và các bản hệ điều hành ảo.
 Các bước:
-• Cài bằng lệnh winget install Google.AndroidStudio (hoặc tải tại developer.android.com/studio).
+• Cài bằng lệnh winget install Google.AndroidStudio (hoặc tải tại trang hướng dẫn cài Android Studio chính thức).
 • Mở Android Studio, chọn Standard setup, chờ tải xong (có thể 10–20 phút).
 • Vào SDK Manager như sơ đồ trên và tick các mục.
 • Ghi lại dòng Android SDK Location, bài sau cần dùng.
@@ -204,27 +204,27 @@ Lời khuyên: học và viết test trên emulator, chạy kiểm tra cuối tr
 ~~~text
 Android Studio > More Actions > Virtual Device Manager
   > Create Virtual Device (dấu +)
-  > Phone: Pixel 7 > Next
+  > Phone: profile MamLab > Next
   > System Image: API 34 (Google APIs) > Download > Next
-  > AVD Name: Pixel_7_API_34 > Finish
+  > AVD Name: MamLab_API_34 > Finish
   > Bấm nút Play để khởi động
 ~~~
 AVD (Android Virtual Device) là một chiếc điện thoại ảo.
 Giải thích từng bước:
-• Chọn mẫu Pixel 7: kích thước màn hình phổ biến.
+• Chọn profile điện thoại MamLab do giảng viên cấp hoặc tạo bằng New Hardware Profile; ghi kích thước/RAM đã đặt, không xem đây là model thật.
 • Chọn System Image API 34 (Android 14). Bản "Google APIs" có sẵn dịch vụ Google cơ bản.
-• Đặt tên không có dấu cách, ví dụ Pixel_7_API_34, để gõ lệnh dễ.
+• Đặt tên không có dấu cách, ví dụ MamLab_API_34, để gõ lệnh dễ.
 Lần đầu khởi động mất 1–3 phút. Nếu Android Studio báo cần bật ảo hóa (Windows Hypervisor Platform), làm theo hướng dẫn hiện ra; máy công ty có thể cần IT hỗ trợ.
 
 ### Khởi động emulator bằng dòng lệnh
 ~~~bash
 emulator -list-avds
-emulator -avd Pixel_7_API_34
+emulator -avd MamLab_API_34
 ~~~
 Khi đã quen, bạn có thể bật emulator mà không cần mở Android Studio.
 Giải thích từng dòng:
-• emulator -list-avds: liệt kê tên các AVD đã tạo. Kết quả ví dụ: Pixel_7_API_34.
-• emulator -avd Pixel_7_API_34: khởi động AVD có tên đó. Cửa sổ PowerShell sẽ "bận" trong lúc emulator chạy, hãy mở cửa sổ khác để gõ lệnh tiếp.
+• emulator -list-avds: liệt kê tên các AVD đã tạo. Kết quả ví dụ: MamLab_API_34.
+• emulator -avd MamLab_API_34: khởi động AVD có tên đó. Cửa sổ PowerShell sẽ "bận" trong lúc emulator chạy, hãy mở cửa sổ khác để gõ lệnh tiếp.
 Mẹo: thêm -no-snapshot-load để khởi động "sạch" như máy vừa bật nguồn.
 
 ### adb devices: ai đang kết nối?
@@ -270,7 +270,7 @@ Otherwise check for a confirmation dialog on your device.
 • "adb: no devices/emulators found": emulator chưa khởi động xong, hoặc chưa bật USB debugging.
 • Emulator màn hình đen hoặc rất chậm: kiểm tra đã bật ảo hóa (Virtualization) trong BIOS, đóng bớt ứng dụng nặng.
 
-PRACTICE: Tạo AVD Pixel_7_API_34, khởi động bằng lệnh emulator -avd, chạy adb devices và ghi lại serial cùng trạng thái. Nếu có điện thoại Android, bật USB debugging và làm cho nó hiện trạng thái device.
+PRACTICE: Tạo AVD MamLab_API_34, khởi động bằng lệnh emulator -avd, chạy adb devices và ghi lại serial cùng trạng thái. Nếu có điện thoại Android, bật USB debugging và làm cho nó hiện trạng thái device.
 Q: adb devices hiển thị "unauthorized" nghĩa là gì?
 - Cáp USB bị hỏng hoàn toàn
 + Điện thoại chưa cho phép máy tính này gỡ lỗi qua USB
@@ -808,3 +808,357 @@ Q: Khi app crash, bạn nên tìm cụm từ nào trong logcat?
 - SUCCESS
 - Welcome to Appium
 + FATAL EXCEPTION
+
+## LESSON appium-09 | Khả năng phục hồi sau đổi trạng thái app
+
+### Mô hình trạng thái để kiểm phục hồi
+App giả định Nếp Mực có màn hình nhập đăng ký và hàng đợi gửi. Phân biệt background, app bị dừng chủ động, crash và hệ điều hành thu hồi tiến trình; mỗi loại có rủi ro lưu draft khác nhau.
+~~~text
+đang nhập -> background -> foreground
+đang nhập -> terminate chủ động -> activate
+đã xếp hàng -> mất mạng -> mở lại -> phục hồi mạng
+Mỗi cạnh có expected draft/status theo hợp đồng lab.
+~~~
+
+### Dừng và mở app có kiểm soát
+Gói com.example.nepmuc là định danh giả của APK lab đã cài. terminate/activate là phép thử phục hồi một trạng thái, không đại diện mọi OS kill hoặc crash; ghi rõ thao tác trong evidence.
+~~~python
+package='com.example.nepmuc'
+driver.terminate_app(package)
+driver.activate_app(package)
+WebDriverWait(driver,15).until(
+ EC.visibility_of_element_located((AppiumBy.ACCESSIBILITY_ID,'Màn hình đăng ký')))
+~~~
+
+### Chứng minh draft được giữ đúng trường
+Nhập tên và ghi chú giả, quay nền rồi mở lại. Hợp đồng lab giữ draft nhưng không giữ giá trị bí mật; kiểm từng trường, không chỉ ảnh trông giống trước.
+~~~python
+name=driver.find_element(AppiumBy.ID,'com.example.nepmuc:id/student_name')
+name.send_keys('Lam Thoi')
+driver.background_app(3)
+restored=WebDriverWait(driver,10).until(EC.visibility_of_element_located(
+ (AppiumBy.ID,'com.example.nepmuc:id/student_name')))
+assert restored.text=='Lam Thoi'
+~~~
+
+### Bẫy noReset che lỗi first launch
+Giữ dữ liệu có ích cho ca phục hồi, nhưng suite chỉ chạy noReset có thể bỏ first launch, onboarding và migration. Chia ma trận sạch/nâng cấp/giữ state thay vì một capability cho mọi ca.
+
+### Lặp cạnh trạng thái không lặp mù click
+Lưu trạng thái server và draft trước/ sau. Khi test fail, xác định cạnh nào gây mất dữ liệu; không thêm retry toàn scenario vì có thể xóa dấu vết lỗi mất draft.
+
+PRACTICE: Viết sáu ca background/terminate/mở lại với draft hoặc outbox. Nộp expected từng trường, build, device và bằng chứng; nói rõ ca nào chưa kiểm OS reclaim thật.
+Q: terminate/activate có mô phỏng đầy đủ OS kill không?
++ Không
+- Có, giống hệt mọi tình huống
+- Có nếu chạy headless
+Q: Khi app được mở lại cần kiểm gì?
++ Trạng thái khôi phục và dữ liệu chưa gửi
+- Chỉ thấy logo
+- Chỉ driver không exception
+
+## LESSON appium-10 | Chờ, locator bền và tránh stale mobile
+
+### Chờ ý nghĩa màn hình thay vì sleep
+App có thể render node trước khi tải xong lớp. Chờ trạng thái đồng bộ hoàn tất hoặc nội dung mục tiêu; presence chỉ chứng minh có node, không chứng minh dữ liệu mới.
+~~~python
+status=(AppiumBy.ID,'com.example.nepmuc:id/sync_status')
+WebDriverWait(driver,15).until(
+ lambda d:d.find_element(*status).text=='Đã đồng bộ')
+~~~
+
+### Tìm lại node khi native view thay
+Sau đổi bộ lọc, giữ locator nhưng bỏ reference WebElement cũ. Nếu cần đọc text, điều kiện wait tự tìm lại và chỉ bỏ qua ngoại lệ tạm thời được hiểu rõ; không nuốt mọi lỗi.
+~~~python
+from selenium.common.exceptions import NoSuchElementException,StaleElementReferenceException
+def class_ready(d):
+ try:return d.find_element(AppiumBy.ACCESSIBILITY_ID,'Lớp Vệt Sương').is_displayed()
+ except (NoSuchElementException,StaleElementReferenceException):return False
+WebDriverWait(driver,12).until(class_ready)
+~~~
+
+### Scroll có giới hạn và mục tiêu
+Gesture dưới dùng vùng lab xác định, cuộn tối đa ba lần để tìm control. Kích thước thực cần lấy theo thiết bị hoặc container; không biến tọa độ ví dụ thành chuẩn mọi màn hình.
+~~~python
+for _ in range(3):
+ found=driver.find_elements(AppiumBy.ACCESSIBILITY_ID,'Lớp cuối danh sách')
+ if found:break
+ driver.execute_script('mobile: scrollGesture',{
+  'left':20,'top':150,'width':300,'height':500,
+  'direction':'down','percent':0.7})
+assert driver.find_elements(AppiumBy.ACCESSIBILITY_ID,'Lớp cuối danh sách')
+~~~
+
+### Locator gắn hợp đồng giao diện
+Trao đổi với Dev về resource-id/accessibility label ổn định và có ý nghĩa người dùng. Không dùng nhãn truy cập vô nghĩa chỉ để test dễ; XPath là lựa chọn cần giới hạn khi không có cách bền hơn.
+
+### Đo đúng loại timeout
+Tách tạo session, khởi động app, tìm node và đồng bộ server. Mỗi ngân sách dựa vào yêu cầu và môi trường; tăng toàn bộ timeout có thể chỉ che selector sai hoặc app kẹt.
+
+PRACTICE: Viết ca danh sách re-render, sync chậm và mục cuối cần scroll. Có locator ổn định, giới hạn cuộn và lỗi rõ khi không tìm thấy; bỏ toàn bộ sleep không gắn mục tiêu.
+Q: Stale mobile element thường cần làm gì?
++ Tìm lại sau điều kiện màn hình đúng
+- Click cùng reference mãi
+- Đổi mọi locator thành tọa độ
+Q: Implicit wait có thay chờ nghiệp vụ không?
++ Không
+- Có, thấy node là sync xong
+- Có khi dùng XPath
+
+## LESSON appium-11 | Ma trận thiết bị và test song song cô lập
+
+### Ma trận nền tảng và trạng thái
+Thiết bị emulator giúp lặp nhanh, thiết bị thật bổ sung rủi ro phần cứng và OS. Chọn phiên bản Android, cỡ màn hình và cấu hình lab theo nhóm người dùng giả định, không tuyên bố kiểm mọi thiết bị.
+~~~text
+slot | device lab | systemPort | actor
+0 | emulator-5554 | 8201 | ST-LAB7-A
+1 | emulator-5556 | 8202 | ST-LAB7-B
+Mỗi device chỉ một session tại một thời điểm.
+~~~
+
+### Cấu hình phiên UiAutomator2 riêng
+Dùng options API của Appium Python Client. udid dưới là emulator lab cụ thể phải có trong adb devices; khi thay thiết bị, lấy đúng định danh và phân bổ port chưa dùng.
+~~~python
+from appium import webdriver
+from appium.options.android import UiAutomator2Options
+caps={'platformName':'Android','appium:automationName':'UiAutomator2',
+ 'appium:udid':'emulator-5554','appium:systemPort':8201,
+ 'appium:appPackage':'com.example.nepmuc','appium:appActivity':'.MainActivity'}
+driver=webdriver.Remote('http://localhost:4723',options=UiAutomator2Options().load_capabilities(caps))
+~~~
+
+### Lưu phân bổ tài nguyên như dữ liệu
+Nếu test hybrid hoặc video stream cần các port bổ sung riêng theo driver. Không tự tìm một port rồi để nhiều worker cùng chọn lại; cấp slot trước session và giải phóng trong teardown.
+~~~json
+{"run":"LAB7","slots":[{"udid":"emulator-5554","systemPort":8201},{"udid":"emulator-5556","systemPort":8202}],"oneSessionPerDevice":true}
+~~~
+
+### Port riêng chưa tách backend
+Hai máy vẫn có thể dùng cùng học viên hoặc cùng lớp hết chỗ. Gắn actor/classId riêng, lưu danh sách id fixture và không reset app của thiết bị worker khác.
+
+### Nghiệm thu chạy đồng thời
+Bắt đầu hai session, ghi udid/capability và timeline. Sau ca fail cố ý, xác nhận session, app và port được dọn theo thiết kế; không chỉ nhìn tổng thời gian nhanh hơn.
+
+PRACTICE: Chạy hai slot thiết bị lab với systemPort và actor riêng. Nộp ma trận, capability đã che, log session/teardown và kiểm không trùng dữ liệu; ghi phần emulator chưa thay thiết bị thật.
+Q: Một thiết bị nên có mấy session đồng thời trong lab UiAutomator2?
++ Một
+- Tùy số test muốn tăng tốc, không giới hạn
+- Luôn ba
+Q: systemPort của các phiên UiAutomator2 song song cần gì?
++ Khác nhau
+- Luôn 8200 cho tất cả
+- Đổi thành chuỗi token
+Q: Dữ liệu backend có tự tách khi udid khác không?
++ Không
+- Có luôn
+- Có khi systemPort khác
+
+## LESSON appium-12 | API hỗ trợ, dữ liệu và bằng chứng lỗi
+
+### Fixture API giảm thao tác không cần thiết
+Dự án mobile cần lớp còn đúng một chỗ để kiểm đăng ký. Endpoint hỗ trợ lab tạo lớp nhanh và có response kiểm được; không dùng API quản trị thật hoặc bỏ bước UI mục tiêu.
+~~~text
+POST http://localhost:3100/lab/classes
+{"runId":"LAB7-S0","name":"Lớp Nếp Mực","capacity":1}
+Response201:{"id":"CL-LAB7-S0"}
+Cleanup chỉ DELETE id được response trả.
+~~~
+
+### Đối chiếu server sau UI
+Màn hình có thể cập nhật lạc quan trước sync. Query bản ghi theo id do test tạo bằng tài khoản lab đúng quyền để kiểm trạng thái, số lượng và chống trùng.
+~~~python
+import json,urllib.request
+with urllib.request.urlopen('http://localhost:3100/lab/enrollments?runId=LAB7-S0') as r:
+ data=json.load(r)
+assert len(data['items'])==1
+assert data['items'][0]['status']=='confirmed'
+~~~
+
+### Artifact chỉ đủ cho câu hỏi điều tra
+Thu screenshot trước dọn và log theo testId, build, device, timestamp. Logcat có thể lộ thông tin riêng tư; chỉ lấy phạm vi app/thời gian cần và dùng dữ liệu giả.
+~~~python
+from pathlib import Path
+Path('artifacts').mkdir(exist_ok=True)
+driver.save_screenshot('artifacts/LAB7-S0-sync.png')
+# Giữ thêm app log lab đã lọc, không dump token hoặc cookie.
+~~~
+
+### Lỗi mạng do lab kiểm soát
+Dùng stub backend hoặc cấu hình emulator do lab quản lý để mô phỏng mất mạng. Đổi Wi-Fi thiết bị thật có thể ảnh hưởng môi trường; test phải có cách khôi phục và không chạm hệ thống ngoài phạm vi.
+
+### Liên kết evidence về đúng ý định
+Correlation id giả và runId nối UI, API và app log. Báo cáo nêu thời điểm bấm, hàng đợi, server ghi và UI xác nhận để phân biệt mất sync với hiển thị chậm.
+
+PRACTICE: Dựng một lớp qua API lab, đăng ký qua UI, kiểm server và cleanup. Gây sync lỗi có kiểm soát; nộp timeline cùng screenshot/log đã lọc, không chứa dữ liệu quyền.
+Q: API hỗ trợ fixture dùng thế nào?
++ Chỉ endpoint lab có hợp đồng và phạm vi
+- Mọi endpoint admin thật
+- Thay toàn bộ UI assertion
+Q: Logcat hoặc video có thể chứa gì?
++ Dữ liệu và thông tin quyền
+- Chỉ giao diện trống
+- Không bao giờ nhạy cảm
+
+## LESSON appium-13 | Dự án: đăng ký rồi đồng bộ trên thiết bị lab
+
+### Dự án đăng ký rồi đồng bộ
+Ứng dụng giả định Nếp Mực cho nhập đăng ký offline rồi gửi khi mạng phục hồi. Hợp đồng lab giữ draft, chỉ tạo một enrollment và hiển thị confirmed sau server xác nhận.
+~~~text
+offline nhập -> lưu pending -> đóng/mở app
+phục hồi mạng -> gửi với requestId ổn định
+server xác nhận -> confirmed
+retry cùng requestId không tạo thêm enrollment
+~~~
+
+### Bước UI thể hiện yêu cầu quan sát được
+Ca dưới giả định fixture đã đặt mạng lab offline và có lớp CL7. Tên và accessibility id thuộc APK tự tạo; phải khớp build lab, không lấy gói app có thật làm môi trường thử.
+~~~python
+driver.find_element(AppiumBy.ACCESSIBILITY_ID,'Họ tên').send_keys('Thoi Lam')
+driver.find_element(AppiumBy.ACCESSIBILITY_ID,'Lưu đăng ký').click()
+WebDriverWait(driver,10).until(lambda d:
+ d.find_element(AppiumBy.ACCESSIBILITY_ID,'Trạng thái gửi').text=='Chờ mạng')
+~~~
+
+### Nghiệm thu tính đúng một lần
+Sau phục hồi và một retry chủ động, số enrollment theo runId vẫn là một. Không chỉ đếm request vì server có thể nhận nhiều request hợp lệ nhưng phải trả cùng kết quả theo chính sách chống lặp.
+~~~text
+expected: draft giữ họ tên/lớp sau mở lại
+expected: pending -> confirmed khi server xác nhận
+expected: enrollment_count=1 sau retry
+expected: lớp hết chỗ theo đúng một đăng ký
+expected: khác chủ không đọc được dữ liệu
+~~~
+
+### Độ phủ trạng thái và thiết bị
+Ít nhất có clean install, giữ state, background, terminate, mất/phục hồi mạng và lỗi server. Chọn hai thiết bị phù hợp, ghi build/OS và phân biệt hành vi mô phỏng với interruption thật chưa kiểm.
+
+### Bàn giao bằng chứng có thể tái hiện
+Nộp APK lab hoặc hướng dẫn build nội bộ, test, fixture, ma trận và báo cáo. Người review chạy lại được bằng dữ liệu giả; mô tả cách reset và các giới hạn automation cho OS reclaim/hardware.
+
+PRACTICE: Bàn giao ít nhất mười hai ca Appium trên hai slot, có offline/outbox, chống lặp, phục hồi state và kiểm server. Có teardown, artifact lọc và bằng chứng một lỗi cố ý được phát hiện rồi sửa.
+Q: Đăng ký khi mất mạng rồi sync phải kiểm gì?
++ Không mất ý định hoặc tạo trùng theo hợp đồng
+- Chỉ thông báo đẹp
+- Luôn gửi vô hạn
+Q: UI hiện đã đồng bộ đã đủ chưa?
++ Chưa, kiểm trạng thái server liên quan
+- Đủ cho mọi nghiệp vụ
+- Đủ nếu quay video
+Q: Bàn giao dự án mobile gồm gì?
++ Ma trận thiết bị, build, fixture, test và evidence
+- Chỉ udid
+- Tài khoản thật
+
+## LESSON appium-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Client gửi lệnh qua server đến driver; phiên bản và khả năng nền tảng cần được kiểm trước lab.
+2. Biến môi trường chỉ giúp tìm executable; phải kiểm sdk/device thực tế và ghi phiên bản.
+3. Thiết bị phải được cấp quyền gỡ lỗi cho máy lab; không suy ra sẵn sàng chỉ từ cáp được cắm.
+4. Không suy rộng driver Android sang nền tảng khác; iOS có driver và yêu cầu môi trường riêng.
+
+### Dữ liệu và điều kiện biên
+5. Package/activity phải khớp app giả định cài trên thiết bị; tên trong ví dụ cần được thay theo build lab.
+6. Locator ổn định giảm phụ thuộc layout nhưng vẫn cần scope và xác minh phần tử duy nhất.
+7. Vòng đời session phải có teardown kể cả test fail; dữ liệu ứng dụng được dọn theo fixture riêng.
+8. Ưu tiên locator/gesture có phạm vi và kiểm kết quả, tránh cuộn vô hạn khi mục không tồn tại.
+
+### Tính đúng và cách điều tra
+9. Chủ động dừng/mở là một tình huống có kiểm soát; OS reclaim, crash và mất điện cần ca riêng.
+10. Hành vi phải theo chính sách: giữ draft, yêu cầu đăng nhập lại hoặc khôi phục màn hình đều cần expected rõ.
+11. Native view có thể thay sau navigation/recompose; locator giữ ý nghĩa, WebElement cũ không tự cập nhật.
+12. Hiện diện control không chứng minh dữ liệu đã đồng bộ; chờ status/điều kiện mục tiêu và assert kết quả.
+
+### Rủi ro và lựa chọn phương án
+13. Mỗi thiết bị phục vụ một session tại một thời điểm; song song dùng thiết bị và tài nguyên tách biệt.
+14. Port trùng làm phiên can thiệp; cả udid và port liên quan phải được phân bổ theo ma trận.
+15. Hai thiết bị vẫn có thể cùng actor và đơn; cần tài khoản, id và cleanup riêng theo run.
+16. Setup API giảm thao tác phụ nhưng phải kiểm response; luồng UI mục tiêu vẫn cần được thực thi.
+
+### Dự án, bằng chứng và bàn giao
+17. Thu đủ để điều tra, dùng dữ liệu giả và lọc log; phân quyền artifact và thời hạn lưu phù hợp.
+18. Kiểm draft/outbox, trạng thái, số bản ghi sau phục hồi và chính sách chống lặp.
+19. UI có thể cập nhật lạc quan; đối chiếu dữ liệu server theo id tự tạo để xác nhận.
+20. Nêu nền tảng/build đã kiểm, ca trạng thái và giới hạn emulator so với thiết bị thật.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Appium cần gì ngoài client test?
++ Server và driver phù hợp nền tảng
+- Chỉ ảnh app
+- Mọi app phải là web
+Q: ANDROID_HOME/PATH hỗ trợ việc gì?
++ Tìm công cụ SDK theo cấu hình
+- Tự cấp quyền tài khoản app
+- Thay test case
+Q: Thiết bị adb có trạng thái unauthorized thì làm gì?
++ Xác nhận kết nối theo quy trình lab
+- Dùng đại udid khác
+- Bỏ qua rồi chạy test
+Q: UiAutomator2 trong bài dùng cho gì?
++ Tự động hóa Android theo khả năng driver
+- Mọi iOS simulator
+- Chỉ cơ sở dữ liệu
+Q: Capability appPackage là gì trong lab?
++ Định danh gói ứng dụng đã cài
+- Mật khẩu thiết bị
+- Tên tùy ý không cần đúng
+Q: Locator ưu tiên trong app hợp tác nên là gì?
++ Id hoặc accessibility id ổn định
+- Tọa độ cứng mọi màn hình
+- XPath tuyệt đối dài
+Q: Sau test phải quit session để làm gì?
++ Giải phóng tài nguyên driver
+- Tự xóa mọi dữ liệu server
+- Tự thu hồi mọi token
+Q: Scroll bằng tọa độ có giới hạn gì?
++ Phụ thuộc kích thước và trạng thái màn hình
+- Luôn bền trên mọi thiết bị
+- Không cần chờ
+Q: terminate/activate có mô phỏng đầy đủ OS kill không?
++ Không
+- Có, giống hệt mọi tình huống
+- Có nếu chạy headless
+Q: Khi app được mở lại cần kiểm gì?
++ Trạng thái khôi phục và dữ liệu chưa gửi
+- Chỉ thấy logo
+- Chỉ driver không exception
+Q: Stale mobile element thường cần làm gì?
++ Tìm lại sau điều kiện màn hình đúng
+- Click cùng reference mãi
+- Đổi mọi locator thành tọa độ
+Q: Implicit wait có thay chờ nghiệp vụ không?
++ Không
+- Có, thấy node là sync xong
+- Có khi dùng XPath
+Q: Một thiết bị nên có mấy session đồng thời trong lab UiAutomator2?
++ Một
+- Tùy số test muốn tăng tốc, không giới hạn
+- Luôn ba
+Q: systemPort của các phiên UiAutomator2 song song cần gì?
++ Khác nhau
+- Luôn 8200 cho tất cả
+- Đổi thành chuỗi token
+Q: Dữ liệu backend có tự tách khi udid khác không?
++ Không
+- Có luôn
+- Có khi systemPort khác
+Q: API hỗ trợ fixture dùng thế nào?
++ Chỉ endpoint lab có hợp đồng và phạm vi
+- Mọi endpoint admin thật
+- Thay toàn bộ UI assertion
+Q: Logcat hoặc video có thể chứa gì?
++ Dữ liệu và thông tin quyền
+- Chỉ giao diện trống
+- Không bao giờ nhạy cảm
+Q: Đăng ký khi mất mạng rồi sync phải kiểm gì?
++ Không mất ý định hoặc tạo trùng theo hợp đồng
+- Chỉ thông báo đẹp
+- Luôn gửi vô hạn
+Q: UI hiện đã đồng bộ đã đủ chưa?
++ Chưa, kiểm trạng thái server liên quan
+- Đủ cho mọi nghiệp vụ
+- Đủ nếu quay video
+Q: Bàn giao dự án mobile gồm gì?
++ Ma trận thiết bị, build, fixture, test và evidence
+- Chỉ udid
+- Tài khoản thật

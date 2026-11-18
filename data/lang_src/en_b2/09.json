@@ -1,192 +1,876 @@
 {
-  "no": 9,
-  "title": "Liên kết & mạch lạc – đại từ quy chiếu, thay thế, tỉnh lược, từ nối",
-  "sub": "This problem… Such changes… The former… the latter…",
-  "goals": [
-    "Dùng đại từ quy chiếu và this/these/such + danh từ tóm tắt (this problem, such changes) để nối ý giữa các câu, tránh lặp từ",
-    "Dùng thay thế và tỉnh lược: one/ones, do so, so/not, that of/those of",
-    "Chọn đúng từ nối theo chức năng (thêm ý, đối lập, nhượng bộ, nguyên nhân – kết quả, ví dụ) và đúng dấu câu",
-    "Sửa dứt điểm các lỗi Although… but…, Despite + mệnh đề, However nối hai mệnh đề bằng dấu phẩy",
-    "Viết đoạn văn mạch lạc 180–200 từ về ưu – nhược điểm của cuộc sống ở thành phố lớn"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng: từ liên kết & chủ đề môi trường đô thị", "items": [
-      {"w": "coherent", "ipa": "/kəʊˈhɪərənt/", "pos": "adj", "vi": "mạch lạc (ý sắp xếp logic, dễ theo dõi)", "ex": "Her essay was clear and coherent.", "exVi": "Bài luận của cô ấy rõ ràng và mạch lạc."},
-      {"w": "cohesive", "ipa": "/kəʊˈhiːsɪv/", "pos": "adj", "vi": "có tính liên kết (các câu gắn kết với nhau bằng ngôn từ)", "ex": "Linking words make a paragraph more cohesive.", "exVi": "Từ nối giúp đoạn văn liên kết chặt hơn."},
-      {"w": "the former", "ipa": "/ðə ˈfɔːmə(r)/", "pos": "pron", "vi": "cái/người được nhắc trước (trong hai)", "ex": "Tea and coffee are popular, but the former is cheaper.", "exVi": "Trà và cà phê đều phổ biến, nhưng trà (cái trước) rẻ hơn."},
-      {"w": "the latter", "ipa": "/ðə ˈlætə(r)/", "pos": "pron", "vi": "cái/người được nhắc sau (trong hai)", "ex": "I visited Hue and Hoi An; the latter was more crowded.", "exVi": "Tôi đến Huế và Hội An; Hội An (cái sau) đông hơn."},
-      {"w": "furthermore", "ipa": "/ˌfɜːðəˈmɔː(r)/", "pos": "adv", "vi": "hơn nữa, ngoài ra (trang trọng)", "ex": "The plan is cheap. Furthermore, it is easy to implement.", "exVi": "Kế hoạch rẻ. Hơn nữa, nó dễ triển khai."},
-      {"w": "nevertheless", "ipa": "/ˌnevəðəˈles/", "pos": "adv", "vi": "tuy vậy, dù vậy", "ex": "The task was difficult. Nevertheless, we finished on time.", "exVi": "Nhiệm vụ khó. Dù vậy, chúng tôi vẫn xong đúng hạn."},
-      {"w": "consequently", "ipa": "/ˈkɒnsɪkwəntli/", "pos": "adv", "vi": "do đó, vì vậy", "ex": "The drains were blocked. Consequently, the street flooded.", "exVi": "Cống bị tắc. Do đó, con phố bị ngập."},
-      {"w": "whereas", "ipa": "/ˌweərˈæz/", "pos": "conj", "vi": "trong khi (đối lập hai sự việc)", "ex": "Paper decomposes quickly, whereas plastic lasts for centuries.", "exVi": "Giấy phân huỷ nhanh, trong khi nhựa tồn tại hàng thế kỷ."},
-      {"w": "despite", "ipa": "/dɪˈspaɪt/", "pos": "prep", "vi": "mặc dù (+ danh từ / V-ing, KHÔNG + mệnh đề)", "ex": "Despite the rain, the market was busy.", "exVi": "Mặc dù mưa, chợ vẫn đông."},
-      {"w": "namely", "ipa": "/ˈneɪmli/", "pos": "adv", "vi": "cụ thể là", "ex": "Two cities, namely Hanoi and Hue, joined the project.", "exVi": "Hai thành phố, cụ thể là Hà Nội và Huế, đã tham gia dự án."},
-      {"w": "in contrast", "ipa": "/ɪn ˈkɒntrɑːst/", "pos": "phr", "vi": "ngược lại, trái lại (= by contrast)", "ex": "Cities are hot. In contrast, parks are much cooler.", "exVi": "Thành phố nóng. Ngược lại, công viên mát hơn nhiều."},
-      {"w": "disposable", "ipa": "/dɪˈspəʊzəbl/", "pos": "adj", "vi": "dùng một lần rồi bỏ", "ex": "The café no longer uses disposable cups.", "exVi": "Quán cà phê không còn dùng cốc dùng một lần."},
-      {"w": "durable", "ipa": "/ˈdjʊərəbl/", "pos": "adj", "vi": "bền", "ex": "Plastic is light and durable.", "exVi": "Nhựa nhẹ và bền."},
-      {"w": "landfill", "ipa": "/ˈlændfɪl/", "pos": "n", "vi": "bãi chôn lấp rác", "ex": "Most of our rubbish ends up in landfill.", "exVi": "Phần lớn rác của chúng ta cuối cùng ở bãi chôn lấp."},
-      {"w": "recycle", "ipa": "/ˌriːˈsaɪkl/", "pos": "v", "vi": "tái chế", "ex": "Only a small fraction of plastic is recycled.", "exVi": "Chỉ một phần nhỏ nhựa được tái chế."},
-      {"w": "decompose", "ipa": "/ˌdiːkəmˈpəʊz/", "pos": "v", "vi": "phân huỷ", "ex": "Banana leaves decompose in a few weeks.", "exVi": "Lá chuối phân huỷ trong vài tuần."},
-      {"w": "microplastics", "ipa": "/ˈmaɪkrəʊplæstɪks/", "pos": "n", "vi": "vi nhựa (mảnh nhựa cực nhỏ)", "ex": "Microplastics have been found in seafood.", "exVi": "Vi nhựa đã được phát hiện trong hải sản."},
-      {"w": "shade", "ipa": "/ʃeɪd/", "pos": "n", "vi": "bóng râm (≠ shadow: cái bóng)", "ex": "We sat in the shade of a large tree.", "exVi": "Chúng tôi ngồi dưới bóng râm của một cây lớn."},
-      {"w": "absorb", "ipa": "/əbˈzɔːb/", "pos": "v", "vi": "hấp thụ, thấm hút", "ex": "Soil absorbs rainwater; concrete does not.", "exVi": "Đất hấp thụ nước mưa; bê tông thì không."},
-      {"w": "canopy", "ipa": "/ˈkænəpi/", "pos": "n", "vi": "tán cây (lớp lá phía trên)", "ex": "The trees form a green canopy over the street.", "exVi": "Hàng cây tạo thành tán xanh che con phố."}
-    ]},
-    {"k": "grammar", "h": "Quy chiếu: nhắc lại mà không lặp", "html": "<p><b>Coherence</b> (mạch lạc) = ý sắp xếp logic. <b>Cohesion</b> (liên kết) = các câu “móc” vào nhau bằng ngôn từ. Đây là 1/4 điểm IELTS Writing (Coherence & Cohesion). Công cụ đầu tiên: <b>từ quy chiếu</b> – nhắc lại điều đã nói mà không lặp nguyên văn.</p>", "table": [
-      ["Công cụ", "Ví dụ", "Ghi chú"],
-      ["it / they / them / its / their", "Plastic is cheap. It is also durable.", "phải chỉ rõ MỘT danh từ"],
-      ["this / these + danh từ tóm tắt", "Plastic production has doubled. This increase…", "rõ hơn ‘This’ đứng một mình"],
-      ["such + danh từ", "Such changes take time. · such an approach", "= những … như vậy"],
-      ["the former / the latter", "Cars and buses both pollute, but the latter carry more people.", "chỉ dùng khi có đúng 2 đối tượng"],
-      ["the + từ đồng nghĩa", "Bakelite… the material… · Hanoi… the capital…", "đổi cách gọi để tránh lặp"],
-      ["at that time / then / there", "It opened in 1902. At that time, …", "quy chiếu thời gian, nơi chốn"]
-    ], "ex": [
-      {"t": "Many cities have banned plastic bags. This policy has reduced litter significantly.", "vi": "Nhiều thành phố đã cấm túi ni-lông. Chính sách này đã giảm rác đáng kể."},
-      {"t": "Some people walk to work; others drive. The former tend to be healthier.", "vi": "Một số người đi bộ đi làm; số khác lái xe. Nhóm đầu thường khoẻ hơn."},
-      {"t": "Global plastic production has risen sharply. Such growth puts enormous pressure on waste systems.", "vi": "Sản lượng nhựa toàn cầu tăng mạnh. Sự tăng trưởng như vậy gây áp lực khổng lồ lên hệ thống xử lý rác."},
-      {"t": "Long Bien Bridge was completed in 1902. At that time, it was one of the longest bridges in Asia.", "vi": "Cầu Long Biên hoàn thành năm 1902. Vào thời điểm đó, nó là một trong những cây cầu dài nhất châu Á."}
-    ], "tips": [
-      "Đại từ mơ hồ: ❌ <i>The government and companies must cooperate, but they do not trust them.</i> (they = ai? them = ai?) → nêu rõ: <i>…but companies do not trust the government.</i>",
-      "‘This’ đứng một mình đầu câu thường mơ hồ → thêm <b>danh từ tóm tắt</b>: this problem / issue / trend / situation / approach / measure / development / decision.",
-      "Người Việt hay lặp nguyên danh từ (plastic… plastic… plastic…) vì tiếng Việt chấp nhận lặp. Trong tiếng Anh, lặp nhiều bị trừ điểm Cohesion và Lexical Resource."
-    ]},
-    {"k": "grammar", "h": "Thay thế & tỉnh lược: one, do so, so/not, that of", "html": "<p>Công cụ thứ hai: <b>thay thế</b> một danh từ, cụm động từ hoặc cả mệnh đề bằng một từ ngắn – hoặc <b>tỉnh lược</b> (bỏ hẳn) phần đã rõ nghĩa.</p>", "table": [
-      ["Công cụ", "Thay cho", "Ví dụ"],
-      ["one / ones", "danh từ đếm được đã nhắc", "Cheap bags break more easily than strong ones."],
-      ["do so / do the same", "cụm động từ đã nhắc", "The city planned to ban plastic bags, and it did so in 2024."],
-      ["so / not", "cả mệnh đề (sau think, hope, expect, suppose, be afraid)", "Will prices rise? – I think so. / I hope not."],
-      ["that of / those of", "danh từ trong câu so sánh", "The population of Hanoi is larger than that of Da Nang."],
-      ["Tỉnh lược", "phần đã rõ", "Some students prefer online classes; others, face-to-face ones. · I wanted to go, but I couldn't."]
-    ], "ex": [
-      {"t": "Plastic bags are cheaper than paper ones, but they last far longer in the environment.", "vi": "Túi ni-lông rẻ hơn túi giấy, nhưng tồn tại lâu hơn nhiều trong môi trường."},
-      {"t": "Several provinces have introduced recycling schemes, and more are expected to do so next year.", "vi": "Một số tỉnh đã triển khai chương trình tái chế, và dự kiến nhiều tỉnh khác sẽ làm vậy năm sau."},
-      {"t": "Is the new metro line open yet? – I don't think so.", "vi": "Tuyến metro mới đã mở chưa? – Tôi nghĩ là chưa."},
-      {"t": "The salaries of nurses are lower than those of doctors.", "vi": "Lương của y tá thấp hơn lương của bác sĩ."}
-    ], "tips": [
-      "Lỗi IELTS Task 1 rất phổ biến: ❌ <i>The population of Hanoi is larger than Da Nang</i> (so sánh dân số với… một thành phố!) → ✅ <i>than that of Da Nang</i>. Số nhiều dùng <b>those of</b>.",
-      "one/ones chỉ thay danh từ ĐẾM ĐƯỢC: ❌ <i>a good advice and a bad one</i> → ✅ <i>some good advice and some bad advice</i>.",
-      "“Tôi nghĩ vậy” = <i>I think so</i> (❌ <i>I think it</i>); “Tôi nghĩ là không” = <i>I don't think so</i> (tự nhiên hơn <i>I think not</i>)."
-    ]},
-    {"k": "grammar", "h": "Từ nối theo chức năng & dấu câu", "html": "<p>Công cụ thứ ba: <b>từ nối</b>. Điều quan trọng không phải biết nhiều từ nối mà là dùng đúng <b>loại từ</b> và <b>dấu câu</b>: liên từ nối hai mệnh đề trong một câu; trạng từ nối đứng đầu câu mới + dấu phẩy; giới từ đi với danh từ/V-ing.</p>", "table": [
-      ["Chức năng", "Liên từ (nối 2 mệnh đề)", "Trạng từ (đầu câu, + dấu phẩy)", "Giới từ (+ N / V-ing)"],
-      ["Thêm ý", "and, not only… but also", "Furthermore, · Moreover, · In addition,", "In addition to, as well as"],
-      ["Đối lập", "but, whereas, while", "However, · In contrast, · On the other hand,", "Unlike"],
-      ["Nhượng bộ", "although, even though", "Nevertheless, · Even so,", "despite, in spite of"],
-      ["Nguyên nhân", "because, since, as", "–", "because of, due to, owing to"],
-      ["Kết quả", "so, so… that", "Therefore, · Consequently, · As a result,", "–"],
-      ["Ví dụ", "–", "For example, · For instance,", "such as, including"]
-    ], "ex": [
-      {"t": "Although plastic is convenient, it causes serious pollution.", "vi": "Mặc dù nhựa tiện lợi, nó gây ô nhiễm nghiêm trọng. (liên từ)"},
-      {"t": "Plastic is convenient. However, it causes serious pollution.", "vi": "Nhựa tiện lợi. Tuy nhiên, nó gây ô nhiễm nghiêm trọng. (trạng từ, câu mới)"},
-      {"t": "Despite being convenient, plastic causes serious pollution.", "vi": "Mặc dù tiện lợi, nhựa gây ô nhiễm nghiêm trọng. (giới từ + V-ing)"},
-      {"t": "Despite the convenience of plastic, many cities are banning it.", "vi": "Bất chấp sự tiện lợi của nhựa, nhiều thành phố đang cấm nó. (giới từ + danh từ)"},
-      {"t": "Paper bags decompose quickly, whereas plastic bags can last for centuries.", "vi": "Túi giấy phân huỷ nhanh, trong khi túi ni-lông có thể tồn tại hàng thế kỷ."}
-    ], "tips": [
-      "<b>Lỗi số 1 của người Việt:</b> ❌ <i>Although it rained, but we went out.</i> (dịch “Mặc dù… nhưng…”). Tiếng Anh chỉ dùng MỘT từ: <i>Although it rained, we went out.</i> hoặc <i>It rained, but we went out.</i> Tương tự ❌ <i>Because…, so…</i>",
-      "<b>Despite / in spite of</b> + danh từ hoặc V-ing, KHÔNG + mệnh đề: ❌ <i>Despite it rained</i> → ✅ <i>Despite the rain</i> / <i>Despite the fact that it rained</i>.",
-      "<b>However</b> là trạng từ, không nối hai mệnh đề bằng dấu phẩy: ❌ <i>Plastic is cheap, however it pollutes.</i> → ✅ <i>Plastic is cheap. However, it pollutes.</i> hoặc <i>…cheap; however, it…</i>",
-      "Đừng đặt từ nối ở đầu MỌI câu (Firstly, Secondly, Moreover, Furthermore…) – giám khảo gọi là liên kết ‘máy móc’. Kết hợp với quy chiếu và danh từ tóm tắt."
-    ]},
-    {"k": "text", "h": "Liên kết trong văn nói & ngữ điệu từ nối", "html": "<p>IELTS Speaking cũng chấm Fluency & Coherence, nhưng từ nối trong văn nói <b>tự nhiên</b> hơn văn viết:</p><table><tr><th>Văn viết</th><th>Văn nói tự nhiên</th></tr><tr><td>Furthermore, / In addition,</td><td>On top of that, · What's more, · Also,</td></tr><tr><td>However, / Nevertheless,</td><td>Having said that, · Mind you, · But then again,</td></tr><tr><td>Therefore, / Consequently,</td><td>That's why… · So…</td></tr><tr><td>For example,</td><td>Take… for example. · Like…</td></tr><tr><td>In conclusion,</td><td>So overall… · All in all…</td></tr></table><p><b>Ngữ điệu:</b> từ nối đầu câu được đọc tách riêng, hơi lên giọng rồi ngừng ngắn: <i>However ↗ | the situation is changing.</i> Nói liền “however the situation…” khiến người nghe không nhận ra bạn đang chuyển ý.</p>"},
-    {"k": "dialog", "h": "Nghe: Bài giảng “Why Cities Need Trees”", "lang": "en-GB", "note": "Bài giảng ngắn về quy hoạch đô thị. Giáo sư Lâm giảng, sinh viên Mai đặt câu hỏi. Nghe lần 1: cây xanh mang lại mấy lợi ích, là gì? Lần 2: trả lời câu hỏi. Lần 3: ghi lại các từ nối và cụm quy chiếu (this effect, the former, done so…).", "lines": [
-      {"s": "Professor Lam", "g": "m", "t": "Good morning. Today's topic is urban trees. Most people think of them as decoration, something that makes a street look nice. However, research over the past twenty years suggests that they are far more than that. In fact, they may be one of the cheapest ways to make a city healthier.", "vi": "Chào các bạn. Chủ đề hôm nay là cây xanh đô thị. Phần lớn mọi người coi chúng là đồ trang trí, thứ làm con phố đẹp hơn. Tuy nhiên, nghiên cứu hai mươi năm qua cho thấy chúng còn hơn thế nhiều. Thực tế, chúng có thể là một trong những cách rẻ nhất để thành phố khoẻ mạnh hơn."},
-      {"s": "Professor Lam", "g": "m", "t": "Let's start with heat. Cities are usually warmer than the surrounding countryside, because concrete and asphalt absorb heat during the day and release it at night. This effect is known as the urban heat island. Trees reduce it in two ways. The first is shade: a wide canopy can keep the ground beneath it many degrees cooler than an open road. The second is a process called transpiration, in which trees release water through their leaves. This cools the air around them, rather like sweating cools the human body.", "vi": "Hãy bắt đầu với nhiệt độ. Thành phố thường nóng hơn vùng nông thôn xung quanh vì bê tông và nhựa đường hấp thụ nhiệt ban ngày rồi toả ra ban đêm. Hiệu ứng này gọi là đảo nhiệt đô thị. Cây xanh giảm nó theo hai cách. Thứ nhất là bóng râm: một tán cây rộng có thể giữ mặt đất bên dưới mát hơn mặt đường trống nhiều độ. Thứ hai là quá trình thoát hơi nước, khi cây thải nước qua lá. Điều này làm mát không khí xung quanh, giống như mồ hôi làm mát cơ thể người."},
-      {"s": "Mai", "g": "f", "t": "Excuse me, does that work in a city like Hanoi, where the air is already very humid?", "vi": "Thưa thầy, điều đó có hiệu quả ở thành phố như Hà Nội, nơi không khí vốn đã rất ẩm không ạ?"},
-      {"s": "Professor Lam", "g": "m", "t": "Good question. The cooling effect of transpiration is weaker in humid climates, yes. Nevertheless, the effect of shade remains strong, so the overall benefit is still significant.", "vi": "Câu hỏi hay. Đúng là hiệu ứng làm mát do thoát hơi nước yếu hơn ở khí hậu ẩm. Dù vậy, tác dụng của bóng râm vẫn mạnh, nên lợi ích tổng thể vẫn đáng kể."},
-      {"s": "Professor Lam", "g": "m", "t": "The second advantage concerns water. When heavy rain falls on concrete, it runs straight into the drains, which can quickly become overloaded. The soil around trees, by contrast, absorbs much of that water. Consequently, streets with more trees tend to flood less.", "vi": "Lợi ích thứ hai liên quan đến nước. Khi mưa lớn rơi xuống bê tông, nước chảy thẳng vào cống, khiến cống nhanh chóng quá tải. Ngược lại, đất quanh gốc cây hấp thụ phần lớn lượng nước đó. Do đó, những con phố nhiều cây thường ít ngập hơn."},
-      {"s": "Professor Lam", "g": "m", "t": "Finally, there are benefits for mental health. Several studies have found that people living near green spaces report lower levels of stress than those living in areas without them. The reasons are not fully understood, but the former group also tends to walk more.", "vi": "Cuối cùng là lợi ích cho sức khoẻ tinh thần. Nhiều nghiên cứu cho thấy người sống gần không gian xanh cho biết mức căng thẳng thấp hơn người sống ở khu không có cây xanh. Nguyên nhân chưa được hiểu đầy đủ, nhưng nhóm thứ nhất cũng có xu hướng đi bộ nhiều hơn."},
-      {"s": "Professor Lam", "g": "m", "t": "So, if trees are so useful, why do cities cut them down? Usually, it's because roads need widening or because roots damage pavements. Both problems can be solved with better planning. Next week, we'll look at cities that have done so successfully.", "vi": "Vậy nếu cây hữu ích như vậy, tại sao các thành phố lại chặt chúng? Thường là vì cần mở rộng đường hoặc vì rễ cây làm hỏng vỉa hè. Cả hai vấn đề đều có thể giải quyết bằng quy hoạch tốt hơn. Tuần sau, chúng ta sẽ tìm hiểu những thành phố đã làm được điều đó."}
-    ], "qs": [
-      {"q": "“This effect is known as the urban heat island.” What does “this effect” refer to?", "o": ["Trees releasing water through their leaves", "Cities being warmer than the surrounding countryside", "Rain running into the drains"], "a": 1, "e": "‘This effect’ tóm tắt cả câu trước: thành phố nóng hơn nông thôn vì bê tông, nhựa đường giữ nhiệt."},
-      {"q": "What are the two ways in which trees reduce heat?", "o": ["Shade and transpiration", "Wind and rain", "Concrete and asphalt"], "a": 0, "e": "“The first is shade… The second is a process called transpiration…”"},
-      {"q": "True / False / Not Given: The professor says transpiration does not work at all in humid cities.", "o": ["True", "False", "Not Given"], "a": 1, "e": "Ông nói nó ‘weaker’ (yếu hơn), không phải ‘does not work at all’ → False."},
-      {"q": "Streets with more trees tend to ______ less.", "a": "flood", "e": "“Consequently, streets with more trees tend to flood less.”"},
-      {"q": "“…cities that have done so successfully.” Here “done so” means…", "o": ["cut down their trees", "solved these problems with better planning", "widened all their roads"], "a": 1, "e": "do so thay cho cụm động từ vừa nhắc: ‘solved both problems with better planning’."}
-    ]},
-    {"k": "read", "h": "Đọc: Nhựa – vật liệu kỳ diệu hay lời nguyền hiện đại?", "title": "Plastic: Miracle Material or Modern Curse?", "text": "When the Belgian-born chemist Leo Baekeland created Bakelite in 1907, he could hardly have imagined the consequences. His invention, often described as the first fully synthetic plastic, was light, cheap and easy to shape. These qualities made it ideal for products ranging from telephones to radios, and within a few decades, plastics of many kinds had transformed everyday life.\n\nToday, the world produces more than 400 million tonnes of plastic every year. Much of this is used in medicine, construction and transport, where its durability is a genuine advantage. A plastic water pipe, for instance, can last for decades without rusting, whereas a metal one may need replacing far sooner. However, around a third of all plastic is used for packaging, and most of that is thrown away after a single use. It is here that the problems begin.\n\nThe very quality that makes plastic so useful, namely its durability, also makes it difficult to get rid of. Most common plastics do not decompose in any meaningful sense; instead, they break into smaller and smaller pieces. These fragments, known as microplastics, have been found in oceans, rivers, soil and even human blood. Their long-term effects on health are not yet clear, but many scientists regard them as a cause for concern.\n\nRecycling is often presented as the solution. Unfortunately, only a small fraction of all the plastic ever produced has actually been recycled. Many products combine different types of plastic, which makes them expensive to separate, and recycled plastic is often lower in quality than new material. Consequently, most plastic waste ends up in landfill, is burned, or leaks into the environment.\n\nFor these reasons, a growing number of governments are focusing on reducing plastic use rather than simply managing the waste. Some have banned disposable items such as straws and thin shopping bags; others require manufacturers to pay for the collection of their packaging. Such policies are not always popular, and critics argue that the alternatives, such as paper bags, have environmental costs of their own. Nevertheless, most experts agree that the cheapest piece of plastic to deal with is the one that is never made.", "gloss": [
-      {"w": "synthetic", "vi": "tổng hợp, nhân tạo"},
-      {"w": "transform", "vi": "biến đổi hoàn toàn"},
-      {"w": "genuine", "vi": "thật sự"},
-      {"w": "rust", "vi": "gỉ sét"},
-      {"w": "packaging", "vi": "bao bì"},
-      {"w": "get rid of", "vi": "loại bỏ, tống khứ"},
-      {"w": "fragment", "vi": "mảnh vỡ"},
-      {"w": "a cause for concern", "vi": "điều đáng lo ngại"},
-      {"w": "fraction", "vi": "phần nhỏ"},
-      {"w": "manufacturer", "vi": "nhà sản xuất"}
-    ], "qs": [
-      {"q": "In paragraph 1, “These qualities” refers to plastic being…", "o": ["synthetic and new", "light, cheap and easy to shape", "used in telephones and radios"], "a": 1, "e": "‘These qualities’ tóm tắt các tính chất vừa liệt kê ở câu trước: light, cheap and easy to shape."},
-      {"q": "In paragraph 2, “a metal one” means a metal…", "o": ["product", "water pipe", "tonne"], "a": 1, "e": "one thay cho danh từ đếm được vừa nhắc: a plastic water pipe → a metal (water pipe)."},
-      {"q": "True / False / Not Given: More than half of all plastic is used for packaging.", "o": ["True", "False", "Not Given"], "a": 1, "e": "Đoạn 2: “around a third of all plastic is used for packaging” → False."},
-      {"q": "True / False / Not Given: Scientists have proved that microplastics cause serious illness.", "o": ["True", "False", "Not Given"], "a": 1, "e": "Đoạn 3: “Their long-term effects on health are not yet clear” – mâu thuẫn với ‘have proved’ → False."},
-      {"q": "Most common plastics do not decompose; instead, they break into tiny pieces called ______.", "a": "microplastics", "e": "Đoạn 3: “These fragments, known as microplastics…”"},
-      {"q": "What is the writer's main point in the last paragraph?", "o": ["Paper bags are worse than plastic bags.", "Reducing plastic use is the best approach.", "Recycling will soon solve the problem."], "a": 1, "e": "Câu kết: “the cheapest piece of plastic to deal with is the one that is never made” → giảm sử dụng là cách tốt nhất."}
-    ]},
-    {"k": "speak", "h": "Nói: Thành phố, nông thôn & rác nhựa", "tasks": [
-      {"p": "IELTS Part 3: “Is it better to live in a big city or in the countryside?” Trả lời 8–10 câu, dùng ≥ 4 từ nối văn nói (on top of that, having said that, that's why, by contrast…).", "model": "It really depends on your stage of life. For young people, big cities are hard to beat. They offer far more job opportunities, and on top of that, there's always something to do in the evenings. That's why so many of my friends from the countryside have moved to Hanoi or Ho Chi Minh City. Having said that, city life has obvious drawbacks, such as pollution, traffic and high rents, and these problems are getting worse rather than better. The countryside, by contrast, is cleaner and much cheaper, and people there tend to know their neighbours. The downside is that public services, especially hospitals and schools, are often of lower quality. So I'd say the city is better for building a career, whereas the countryside is better for raising a family, or for retiring. Personally, I'd like to try both at some point.", "vi": "Thật ra còn tuỳ giai đoạn cuộc đời. Với người trẻ, thành phố lớn khó gì sánh bằng… Tuy vậy, cuộc sống thành phố có những nhược điểm rõ ràng… Ngược lại, nông thôn sạch hơn và rẻ hơn nhiều… Vậy tôi cho rằng thành phố tốt hơn cho sự nghiệp, còn nông thôn tốt hơn để nuôi dạy con cái hoặc nghỉ hưu.", "tips": "Đọc tách các từ nối (Having said that ↗ |…) để người nghe nhận ra bạn chuyển ý. Dùng ‘these problems’ thay vì lặp lại ‘pollution, traffic and high rents’."},
-      {"p": "IELTS Part 3: “What can individuals do to reduce plastic waste?” Trả lời 6–8 câu.", "model": "Quite a lot, actually. The simplest thing is to carry a reusable bag and a water bottle. It sounds like a small step, but if millions of people do so, the effect is huge. Another thing is to refuse items we don't really need, like straws or extra packaging when we order food online. Most apps now let you tick a box to say you don't want plastic cutlery, and I always do that. Mind you, individuals can only do so much. Unless supermarkets and manufacturers change their packaging, consumers often have no choice. So I think personal habits matter, but they need to be supported by government policy.", "vi": "Thật ra khá nhiều. Đơn giản nhất là mang túi và bình nước dùng lại… Tuy vậy, cá nhân chỉ làm được đến mức nào đó thôi. Nếu siêu thị và nhà sản xuất không thay đổi bao bì, người tiêu dùng thường không có lựa chọn…"},
-      {"p": "Nối hai câu “Plastic is useful. It causes pollution.” bằng 3 cách: although / however / despite. Nói to cả 3 câu.", "model": "Although plastic is useful, it causes pollution. Plastic is useful. However, it causes pollution. Despite being useful, plastic causes pollution.", "vi": "Mặc dù nhựa hữu ích, nó gây ô nhiễm. / Nhựa hữu ích. Tuy nhiên, nó gây ô nhiễm. / Dù hữu ích, nhựa vẫn gây ô nhiễm."}
-    ]},
-    {"k": "write", "h": "Viết: Ưu và nhược điểm của cuộc sống ở thành phố lớn", "task": "Viết đoạn văn 180–200 từ: “Discuss the advantages and disadvantages of living in a big city.” Yêu cầu: ≥ 3 cụm this/these/such + danh từ tóm tắt; ≥ 1 cấu trúc the former/the latter hoặc that of/those of; ≥ 5 từ nối thuộc ít nhất 3 chức năng khác nhau; từ ‘city’ không lặp quá 4 lần.", "min": 180, "model": "Living in a large city such as Ho Chi Minh City has both clear benefits and serious drawbacks. On the one hand, major urban areas offer far more employment opportunities than rural regions, and salaries there are usually higher. This advantage explains why millions of young people leave their hometowns every year. Furthermore, residents enjoy better access to services, namely good hospitals, international schools and cultural events. On the other hand, these benefits come at a price. The cost of living in a metropolis is considerably higher than that of a small town, and many workers spend a large proportion of their income on rent. In addition, heavy traffic and poor air quality can damage people's health. Such problems are particularly serious for children and elderly residents, who are more vulnerable to pollution. Although local authorities have invested in public transport and green spaces, these measures will take years to have a significant effect. Overall, urban life suits people who prioritise their careers, whereas a quieter environment may be better for families. The former may accept the stress in exchange for opportunity, while the latter often value space and clean air more highly.", "modelVi": "Sống ở một thành phố lớn như TP.HCM có cả lợi ích rõ ràng lẫn nhược điểm nghiêm trọng. Một mặt, các đô thị lớn có nhiều cơ hội việc làm hơn hẳn vùng nông thôn, và lương thường cao hơn. Lợi thế này giải thích vì sao hàng triệu người trẻ rời quê mỗi năm. Hơn nữa, cư dân được tiếp cận dịch vụ tốt hơn, cụ thể là bệnh viện tốt, trường quốc tế và các sự kiện văn hoá. Mặt khác, những lợi ích này phải trả giá. Chi phí sinh hoạt ở đô thị lớn cao hơn đáng kể so với ở thị trấn nhỏ, và nhiều người lao động dành phần lớn thu nhập cho tiền thuê nhà. Ngoài ra, giao thông đông đúc và không khí ô nhiễm có thể hại sức khoẻ. Những vấn đề như vậy đặc biệt nghiêm trọng với trẻ em và người già – những người dễ bị ảnh hưởng bởi ô nhiễm. Dù chính quyền đã đầu tư vào giao thông công cộng và không gian xanh, các biện pháp này sẽ cần nhiều năm mới có tác dụng rõ rệt. Nhìn chung, cuộc sống đô thị hợp với người ưu tiên sự nghiệp, trong khi môi trường yên tĩnh hơn có thể tốt hơn cho các gia đình. Nhóm thứ nhất có thể chấp nhận áp lực để đổi lấy cơ hội, còn nhóm thứ hai thường coi trọng không gian và không khí sạch hơn.", "tips": [
-      "Sau mỗi ý lớn, câu tiếp theo nên bắt đầu bằng một danh từ tóm tắt (This advantage…, These benefits…, Such problems…) thay vì lặp lại cả cụm.",
-      "Dùng từ đồng nghĩa để tránh lặp ‘city’: urban area, metropolis, major urban centre.",
-      "Kiểm tra dấu câu: However, / Furthermore, / In addition, đầu câu luôn có dấu phẩy; although/whereas nối trong một câu.",
-      "Bố cục: câu chủ đề → ưu điểm (2 ý) → On the other hand → nhược điểm (2 ý) → câu kết so sánh hai nhóm người."
-    ], "checklist": [
-      "Câu chủ đề nêu rõ có cả ưu và nhược điểm",
-      "≥ 3 cụm this/these/such + danh từ tóm tắt",
-      "≥ 1 cấu trúc the former/the latter hoặc that of/those of",
-      "≥ 5 từ nối, ≥ 3 chức năng, đúng dấu câu",
-      "Không có lỗi Although… but / Despite + mệnh đề",
-      "Không lặp ‘city’ quá 4 lần; 180–200 từ"
-    ]}
-  ],
-  "exercises": [
-    {"t": "mc", "q": "Chọn câu ĐÚNG:", "o": ["Although it was raining, but we went for a walk.", "Although it was raining, we went for a walk.", "Despite it was raining, we went for a walk."], "a": 1, "e": "Chỉ dùng một liên từ (although), không thêm but. Despite không đi với mệnh đề."},
-    {"t": "mc", "q": "___ the heavy traffic, we arrived on time.", "o": ["Although", "Despite", "However"], "a": 1, "e": "Sau chỗ trống là cụm danh từ (the heavy traffic) → Despite."},
-    {"t": "mc", "q": "Plastic bags are cheap. ___, they cause serious pollution.", "o": ["Although", "However", "Despite"], "a": 1, "e": "Đầu câu mới + dấu phẩy → trạng từ nối However."},
-    {"t": "fill", "q": "The population of Hanoi is larger than ___ of Da Nang.", "a": "that", "e": "that of thay cho ‘the population of’ – so sánh dân số với dân số."},
-    {"t": "fill", "q": "I don't need a new laptop – my old ___ works perfectly.", "a": "one", "e": "one thay cho danh từ đếm được số ít vừa nhắc (laptop)."},
-    {"t": "mc", "q": "Will it rain tomorrow? – I hope ___.", "o": ["not", "no", "don't"], "a": 0, "e": "I hope not = Tôi mong là không (not thay cho cả mệnh đề phủ định)."},
-    {"t": "mc", "q": "Buses and cars both cause pollution, but the ___ carry far more passengers per vehicle.", "o": ["former", "latter", "both"], "a": 0, "e": "Xe buýt (nhắc trước) chở nhiều khách hơn → the former."},
-    {"t": "mc", "q": "Global plastic production has doubled since 2000. ___ growth has put pressure on waste systems.", "o": ["This", "These", "It"], "a": 0, "e": "This + danh từ tóm tắt số ít (growth). These đi với danh từ số nhiều; It không đứng trước danh từ."},
-    {"t": "mc", "q": "The government promised to cut taxes, and it ___ last year.", "o": ["did so", "made so", "did it so"], "a": 0, "e": "do so thay cho cụm động từ vừa nhắc (cut taxes)."},
-    {"t": "fill", "q": "Paper decomposes quickly, ___ plastic can last for hundreds of years. (trong khi đó)", "a": "whereas", "alt": ["while"], "e": "whereas / while nối hai mệnh đề đối lập trong cùng một câu."},
-    {"t": "mc", "q": "Từ nối nào diễn tả KẾT QUẢ?", "o": ["Nevertheless", "Consequently", "In contrast"], "a": 1, "e": "Consequently = do đó (kết quả). Nevertheless = dù vậy (nhượng bộ); In contrast = ngược lại (đối lập)."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["Despite", "we enjoyed", "the rain,", "the trip."], "a": "Despite the rain, we enjoyed the trip.", "e": "Despite + danh từ, mệnh đề chính."},
-    {"t": "match", "q": "Nối từ nối với chức năng:", "pairs": [["Furthermore,", "thêm ý"], ["Nevertheless,", "nhượng bộ (dù vậy)"], ["Consequently,", "kết quả"], ["In contrast,", "đối lập"], ["For instance,", "ví dụ"]], "e": "Chọn từ nối theo chức năng, không chọn theo cảm giác ‘nghe hay’."},
-    {"t": "listen", "say": "Many people think recycling solves the problem. However, only a small fraction of plastic is ever recycled. The rest ends up in landfill or in the sea.", "lang": "en-GB", "q": "What is the speaker's point?", "o": ["Recycling is the best solution.", "Recycling alone cannot solve the problem.", "Most plastic is recycled."], "a": 1, "e": "However báo hiệu ý chính đối lập với quan niệm phổ biến: chỉ một phần nhỏ được tái chế."},
-    {"t": "listen", "say": "I visited both Hue and Hoi An last summer. The former was quieter, but the latter had better food.", "lang": "en-GB", "q": "Which place had better food?", "o": ["Hue", "Hoi An", "Both"], "a": 1, "e": "the latter = cái nhắc sau = Hội An."},
-    {"t": "dict", "say": "Despite the high cost, the project was completed on time.", "lang": "en-GB", "a": "Despite the high cost, the project was completed on time.", "e": "Despite + cụm danh từ (the high cost), không có ‘of’ sau despite."}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Hai phiên bản của cùng một đoạn văn (bản ‘lặp từ’ và bản ‘liên kết tốt’); một đoạn văn khác cắt thành 7 câu đã xáo (mỗi nhóm 1 bộ) cho trò ‘Ghép đoạn’; bảng từ nối 6 chức năng để trống; 8 câu lỗi (Although…but, Despite + mệnh đề, However + dấu phẩy, than Da Nang); bút màu 3 màu.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: GV đọc đoạn ‘lặp từ’ (plastic… plastic… plastic…) rồi đoạn ‘liên kết tốt’; học viên chỉ ra khác biệt. Giới thiệu coherence (logic) và cohesion (ngôn từ liên kết)."},
-      {"t": "15'", "do": "Từ vựng: nhóm từ nối (furthermore, nevertheless, consequently, whereas, despite, namely, in contrast, the former/the latter) và nhóm chủ đề (disposable, durable, landfill, recycle, decompose, microplastics, shade, absorb, canopy)."},
-      {"t": "25'", "do": "Quy chiếu & thay thế: trình bày 2 bảng; bài ‘mũi tên’ – học viên vẽ mũi tên từ mỗi it/this/such/the former/one/do so về danh từ gốc trong một đoạn văn mẫu. Luyện that of / those of qua câu so sánh dân số, lương."},
-      {"t": "20'", "do": "Nghe bài giảng về cây xanh: lần 1 – mấy lợi ích; lần 2 – câu hỏi (chú ý câu hỏi quy chiếu); lần 3 – ghi lại mọi từ nối nghe được, đánh dấu chức năng."},
-      {"t": "20'", "do": "Từ nối & dấu câu: học viên điền bảng 6 chức năng; sửa 8 câu lỗi; trò ‘Một câu, ba cách’ (although / however / despite)."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn bằng trò ‘Ghép đoạn’: nhóm xếp 7 câu xáo thành đoạn văn, giải thích dựa vào từ nào mà biết thứ tự."},
-      {"t": "25'", "do": "Đọc ‘Plastic: Miracle Material or Modern Curse?’: làm câu hỏi; tô 3 màu – đại từ quy chiếu (xanh), danh từ tóm tắt (vàng), từ nối (hồng); đếm xem bài dùng bao nhiêu công cụ liên kết."},
-      {"t": "20'", "do": "Nói: 2 câu Part 3 theo cặp; yêu cầu dùng từ nối văn nói (on top of that, having said that, that's why, mind you) và đọc tách từ nối với ngữ điệu lên."},
-      {"t": "25'", "do": "Viết đoạn ưu – nhược điểm cuộc sống thành phố (15'); chấm chéo: đếm số lần lặp ‘city’, khoanh từ nối, kiểm tra dấu câu; GV chữa chung."},
-      {"t": "10'", "do": "Làm phần nghe, chép chính tả trong game; giao bài về nhà."}
+ "no": 9,
+ "title": "Liên kết & mạch lạc – đại từ quy chiếu, thay thế, tỉnh lược, từ nối",
+ "sub": "This problem… Such changes… The former… the latter…",
+ "goals": [
+  "Dùng đại từ quy chiếu và this/these/such + danh từ tóm tắt (this problem, such changes) để nối ý giữa các câu, tránh lặp từ",
+  "Dùng thay thế và tỉnh lược: one/ones, do so, so/not, that of/those of",
+  "Chọn đúng từ nối theo chức năng (thêm ý, đối lập, nhượng bộ, nguyên nhân – kết quả, ví dụ) và đúng dấu câu",
+  "Sửa dứt điểm các lỗi Although… but…, Despite + mệnh đề, However nối hai mệnh đề bằng dấu phẩy",
+  "Viết đoạn văn mạch lạc 180–200 từ về ưu – nhược điểm của cuộc sống ở thành phố lớn"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng: từ liên kết & chủ đề môi trường đô thị",
+   "items": [
+    {
+     "w": "coherent",
+     "ipa": "/kəʊˈhɪərənt/",
+     "pos": "adj",
+     "vi": "mạch lạc (ý sắp xếp logic, dễ theo dõi)",
+     "ex": "Her essay was clear and coherent.",
+     "exVi": "Bài luận của cô ấy rõ ràng và mạch lạc."
+    },
+    {
+     "w": "cohesive",
+     "ipa": "/kəʊˈhiːsɪv/",
+     "pos": "adj",
+     "vi": "có tính liên kết (các câu gắn kết với nhau bằng ngôn từ)",
+     "ex": "Linking words make a paragraph more cohesive.",
+     "exVi": "Từ nối giúp đoạn văn liên kết chặt hơn."
+    },
+    {
+     "w": "the former",
+     "ipa": "/ðə ˈfɔːmə(r)/",
+     "pos": "pron",
+     "vi": "cái/người được nhắc trước (trong hai)",
+     "ex": "Tea and coffee are popular, but the former is cheaper.",
+     "exVi": "Trà và cà phê đều phổ biến, nhưng trà (cái trước) rẻ hơn."
+    },
+    {
+     "w": "the latter",
+     "ipa": "/ðə ˈlætə(r)/",
+     "pos": "pron",
+     "vi": "cái/người được nhắc sau (trong hai)",
+     "ex": "I visited Velmora and Velarin; the latter was more crowded.",
+     "exVi": "Tôi đến Velmora và Velarin; Velarin (cái sau) đông hơn."
+    },
+    {
+     "w": "furthermore",
+     "ipa": "/ˌfɜːðəˈmɔː(r)/",
+     "pos": "adv",
+     "vi": "hơn nữa, ngoài ra (trang trọng)",
+     "ex": "The plan is cheap. Furthermore, it is easy to implement.",
+     "exVi": "Kế hoạch rẻ. Hơn nữa, nó dễ triển khai."
+    },
+    {
+     "w": "nevertheless",
+     "ipa": "/ˌnevəðəˈles/",
+     "pos": "adv",
+     "vi": "tuy vậy, dù vậy",
+     "ex": "The task was difficult. Nevertheless, we finished on time.",
+     "exVi": "Nhiệm vụ khó. Dù vậy, chúng tôi vẫn xong đúng hạn."
+    },
+    {
+     "w": "consequently",
+     "ipa": "/ˈkɒnsɪkwəntli/",
+     "pos": "adv",
+     "vi": "do đó, vì vậy",
+     "ex": "The drains were blocked. Consequently, the street flooded.",
+     "exVi": "Cống bị tắc. Do đó, con phố bị ngập."
+    },
+    {
+     "w": "whereas",
+     "ipa": "/ˌweərˈæz/",
+     "pos": "conj",
+     "vi": "trong khi (đối lập hai sự việc)",
+     "ex": "Paper decomposes quickly, whereas plastic lasts for centuries.",
+     "exVi": "Giấy phân huỷ nhanh, trong khi nhựa tồn tại hàng thế kỷ."
+    },
+    {
+     "w": "despite",
+     "ipa": "/dɪˈspaɪt/",
+     "pos": "prep",
+     "vi": "mặc dù (+ danh từ / V-ing, KHÔNG + mệnh đề)",
+     "ex": "Despite the rain, the market was busy.",
+     "exVi": "Mặc dù mưa, chợ vẫn đông."
+    },
+    {
+     "w": "namely",
+     "ipa": "/ˈneɪmli/",
+     "pos": "adv",
+     "vi": "cụ thể là",
+     "ex": "Two cities, namely Neravale and Velmora, joined the project.",
+     "exVi": "Hai thành phố, cụ thể là Neravale và Velmora, đã tham gia dự án."
+    },
+    {
+     "w": "in contrast",
+     "ipa": "/ɪn ˈkɒntrɑːst/",
+     "pos": "phr",
+     "vi": "ngược lại, trái lại (= by contrast)",
+     "ex": "Cities are hot. In contrast, parks are much cooler.",
+     "exVi": "Thành phố nóng. Ngược lại, công viên mát hơn nhiều."
+    },
+    {
+     "w": "disposable",
+     "ipa": "/dɪˈspəʊzəbl/",
+     "pos": "adj",
+     "vi": "dùng một lần rồi bỏ",
+     "ex": "The café no longer uses disposable cups.",
+     "exVi": "Quán cà phê không còn dùng cốc dùng một lần."
+    },
+    {
+     "w": "durable",
+     "ipa": "/ˈdjʊərəbl/",
+     "pos": "adj",
+     "vi": "bền",
+     "ex": "Plastic is light and durable.",
+     "exVi": "Nhựa nhẹ và bền."
+    },
+    {
+     "w": "landfill",
+     "ipa": "/ˈlændfɪl/",
+     "pos": "n",
+     "vi": "bãi chôn lấp rác",
+     "ex": "Most of our rubbish ends up in landfill.",
+     "exVi": "Phần lớn rác của chúng ta cuối cùng ở bãi chôn lấp."
+    },
+    {
+     "w": "recycle",
+     "ipa": "/ˌriːˈsaɪkl/",
+     "pos": "v",
+     "vi": "tái chế",
+     "ex": "Only a small fraction of plastic is recycled.",
+     "exVi": "Chỉ một phần nhỏ nhựa được tái chế."
+    },
+    {
+     "w": "decompose",
+     "ipa": "/ˌdiːkəmˈpəʊz/",
+     "pos": "v",
+     "vi": "phân huỷ",
+     "ex": "Banana leaves decompose in a few weeks.",
+     "exVi": "Lá chuối phân huỷ trong vài tuần."
+    },
+    {
+     "w": "microplastics",
+     "ipa": "/ˈmaɪkrəʊplæstɪks/",
+     "pos": "n",
+     "vi": "vi nhựa (mảnh nhựa cực nhỏ)",
+     "ex": "Microplastics have been found in seafood.",
+     "exVi": "Vi nhựa đã được phát hiện trong hải sản."
+    },
+    {
+     "w": "shade",
+     "ipa": "/ʃeɪd/",
+     "pos": "n",
+     "vi": "bóng râm (≠ shadow: cái bóng)",
+     "ex": "We sat in the shade of a large tree.",
+     "exVi": "Chúng tôi ngồi dưới bóng râm của một cây lớn."
+    },
+    {
+     "w": "absorb",
+     "ipa": "/əbˈzɔːb/",
+     "pos": "v",
+     "vi": "hấp thụ, thấm hút",
+     "ex": "Soil absorbs rainwater; concrete does not.",
+     "exVi": "Đất hấp thụ nước mưa; bê tông thì không."
+    },
+    {
+     "w": "canopy",
+     "ipa": "/ˈkænəpi/",
+     "pos": "n",
+     "vi": "tán cây (lớp lá phía trên)",
+     "ex": "The trees form a green canopy over the street.",
+     "exVi": "Hàng cây tạo thành tán xanh che con phố."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy chiếu: nhắc lại mà không lặp",
+   "html": "<p><b>Coherence</b> (mạch lạc) = ý sắp xếp logic. <b>Cohesion</b> (liên kết) = các câu “móc” vào nhau bằng ngôn từ. Đây là 1/4 điểm IELTS Writing (Coherence & Cohesion). Công cụ đầu tiên: <b>từ quy chiếu</b> – nhắc lại điều đã nói mà không lặp nguyên văn.</p>",
+   "table": [
+    [
+     "Công cụ",
+     "Ví dụ",
+     "Ghi chú"
     ],
-    "games": [
-      "‘Ghép đoạn’: mỗi nhóm nhận 7 câu của một đoạn văn bị xáo; dựa vào This/These/However/The former… để xếp lại đúng thứ tự trong 5 phút; nhóm đúng nhanh nhất thắng.",
-      "‘Một câu, ba cách’: GV đưa 2 câu đơn; các đội lần lượt nối bằng although / however / despite; thừa ‘but’ hoặc sai dấu phẩy bị trừ điểm.",
-      "‘Thám tử đại từ’: GV đọc một đoạn có đại từ mơ hồ; học viên phát hiện it/they/this nào không rõ chỉ gì và viết lại cho rõ."
+    [
+     "it / they / them / its / their",
+     "Plastic is cheap. It is also durable.",
+     "phải chỉ rõ MỘT danh từ"
     ],
-    "errors": [
-      "*Although…, but… / *Because…, so… → chỉ dùng một liên từ (lỗi dịch ‘Mặc dù… nhưng…’, ‘Vì… nên…’).",
-      "*Despite it rained → Despite the rain / Despite the fact that it rained / Although it rained.",
-      "*Plastic is cheap, however it pollutes → Plastic is cheap. However, it pollutes.",
-      "*The population of Hanoi is larger than Da Nang → larger than that of Da Nang.",
-      "Đại từ mơ hồ (it / they / this không rõ chỉ gì) → thêm danh từ tóm tắt: this problem, these measures.",
-      "Từ nối máy móc ở đầu mọi câu (Firstly, Secondly, Moreover, Furthermore…) → kết hợp quy chiếu, thay thế, danh từ tóm tắt."
+    [
+     "this / these + danh từ tóm tắt",
+     "Plastic production has doubled. This increase…",
+     "rõ hơn ‘This’ đứng một mình"
     ],
-    "homework": "Hoàn thành bài tập trong game (≥ 80%); viết lại đoạn văn sau khi được chữa; lấy một bài viết cũ của mình, gạch chân mọi từ bị lặp và sửa bằng quy chiếu/thay thế; ghi âm câu trả lời ‘city or countryside’ (1,5 phút) dùng ≥ 4 từ nối văn nói; ôn 20 từ mới bằng Thẻ từ vựng."
+    [
+     "such + danh từ",
+     "Such changes take time. · such an approach",
+     "= những … như vậy"
+    ],
+    [
+     "the former / the latter",
+     "Cars and buses both pollute, but the latter carry more people.",
+     "chỉ dùng khi có đúng 2 đối tượng"
+    ],
+    [
+     "the + từ đồng nghĩa",
+     "Bakelite… the material… · Neravale… the capital…",
+     "đổi cách gọi để tránh lặp"
+    ],
+    [
+     "at that time / then / there",
+     "It opened in 1902. At that time, …",
+     "quy chiếu thời gian, nơi chốn"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Many cities have banned plastic bags. This policy has reduced litter significantly.",
+     "vi": "Nhiều thành phố đã cấm túi ni-lông. Chính sách này đã giảm rác đáng kể."
+    },
+    {
+     "t": "Some people walk to work; others drive. The former tend to be healthier.",
+     "vi": "Một số người đi bộ đi làm; số khác lái xe. Nhóm đầu thường khoẻ hơn."
+    },
+    {
+     "t": "Global plastic production has risen sharply. Such growth puts enormous pressure on waste systems.",
+     "vi": "Sản lượng nhựa toàn cầu tăng mạnh. Sự tăng trưởng như vậy gây áp lực khổng lồ lên hệ thống xử lý rác."
+    },
+    {
+     "t": "Varel Crossing Bridge was completed in 1902. At that time, it was one of the longest bridges in Asia.",
+     "vi": "Cầu Varel Crossing hoàn thành năm 1902. Vào thời điểm đó, nó là một trong những cây cầu dài nhất châu Á."
+    }
+   ],
+   "tips": [
+    "Đại từ mơ hồ: ❌ <i>The government and companies must cooperate, but they do not trust them.</i> (they = ai? them = ai?) → nêu rõ: <i>…but companies do not trust the government.</i>",
+    "‘This’ đứng một mình đầu câu thường mơ hồ → thêm <b>danh từ tóm tắt</b>: this problem / issue / trend / situation / approach / measure / development / decision.",
+    "Người Việt hay lặp nguyên danh từ (plastic… plastic… plastic…) vì tiếng Việt chấp nhận lặp. Trong tiếng Anh, lặp nhiều bị trừ điểm Cohesion và Lexical Resource."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Thay thế & tỉnh lược: one, do so, so/not, that of",
+   "html": "<p>Công cụ thứ hai: <b>thay thế</b> một danh từ, cụm động từ hoặc cả mệnh đề bằng một từ ngắn – hoặc <b>tỉnh lược</b> (bỏ hẳn) phần đã rõ nghĩa.</p>",
+   "table": [
+    [
+     "Công cụ",
+     "Thay cho",
+     "Ví dụ"
+    ],
+    [
+     "one / ones",
+     "danh từ đếm được đã nhắc",
+     "Cheap bags break more easily than strong ones."
+    ],
+    [
+     "do so / do the same",
+     "cụm động từ đã nhắc",
+     "The city planned to ban plastic bags, and it did so in 2024."
+    ],
+    [
+     "so / not",
+     "cả mệnh đề (sau think, hope, expect, suppose, be afraid)",
+     "Will prices rise? – I think so. / I hope not."
+    ],
+    [
+     "that of / those of",
+     "danh từ trong câu so sánh",
+     "The population of Neravale is larger than that of Tavarin."
+    ],
+    [
+     "Tỉnh lược",
+     "phần đã rõ",
+     "Some students prefer online classes; others, face-to-face ones. · I wanted to go, but I couldn't."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Plastic bags are cheaper than paper ones, but they last far longer in the environment.",
+     "vi": "Túi ni-lông rẻ hơn túi giấy, nhưng tồn tại lâu hơn nhiều trong môi trường."
+    },
+    {
+     "t": "Several provinces have introduced recycling schemes, and more are expected to do so next year.",
+     "vi": "Một số tỉnh đã triển khai chương trình tái chế, và dự kiến nhiều tỉnh khác sẽ làm vậy năm sau."
+    },
+    {
+     "t": "Is the new metro line open yet? – I don't think so.",
+     "vi": "Tuyến metro mới đã mở chưa? – Tôi nghĩ là chưa."
+    },
+    {
+     "t": "The salaries of nurses are lower than those of doctors.",
+     "vi": "Lương của y tá thấp hơn lương của bác sĩ."
+    }
+   ],
+   "tips": [
+    "Lỗi IELTS Task 1 rất phổ biến: ❌ <i>The population of Neravale is larger than Tavarin</i> (so sánh dân số với… một thành phố!) → ✅ <i>than that of Tavarin</i>. Số nhiều dùng <b>those of</b>.",
+    "one/ones chỉ thay danh từ ĐẾM ĐƯỢC: ❌ <i>a good advice and a bad one</i> → ✅ <i>some good advice and some bad advice</i>.",
+    "“Tôi nghĩ vậy” = <i>I think so</i> (❌ <i>I think it</i>); “Tôi nghĩ là không” = <i>I don't think so</i> (tự nhiên hơn <i>I think not</i>)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Từ nối theo chức năng & dấu câu",
+   "html": "<p>Công cụ thứ ba: <b>từ nối</b>. Điều quan trọng không phải biết nhiều từ nối mà là dùng đúng <b>loại từ</b> và <b>dấu câu</b>: liên từ nối hai mệnh đề trong một câu; trạng từ nối đứng đầu câu mới + dấu phẩy; giới từ đi với danh từ/V-ing.</p>",
+   "table": [
+    [
+     "Chức năng",
+     "Liên từ (nối 2 mệnh đề)",
+     "Trạng từ (đầu câu, + dấu phẩy)",
+     "Giới từ (+ N / V-ing)"
+    ],
+    [
+     "Thêm ý",
+     "and, not only… but also",
+     "Furthermore, · Moreover, · In addition,",
+     "In addition to, as well as"
+    ],
+    [
+     "Đối lập",
+     "but, whereas, while",
+     "However, · In contrast, · On the other hand,",
+     "Unlike"
+    ],
+    [
+     "Nhượng bộ",
+     "although, even though",
+     "Nevertheless, · Even so,",
+     "despite, in spite of"
+    ],
+    [
+     "Nguyên nhân",
+     "because, since, as",
+     "–",
+     "because of, due to, owing to"
+    ],
+    [
+     "Kết quả",
+     "so, so… that",
+     "Therefore, · Consequently, · As a result,",
+     "–"
+    ],
+    [
+     "Ví dụ",
+     "–",
+     "For example, · For instance,",
+     "such as, including"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Although plastic is convenient, it causes serious pollution.",
+     "vi": "Mặc dù nhựa tiện lợi, nó gây ô nhiễm nghiêm trọng. (liên từ)"
+    },
+    {
+     "t": "Plastic is convenient. However, it causes serious pollution.",
+     "vi": "Nhựa tiện lợi. Tuy nhiên, nó gây ô nhiễm nghiêm trọng. (trạng từ, câu mới)"
+    },
+    {
+     "t": "Despite being convenient, plastic causes serious pollution.",
+     "vi": "Mặc dù tiện lợi, nhựa gây ô nhiễm nghiêm trọng. (giới từ + V-ing)"
+    },
+    {
+     "t": "Despite the convenience of plastic, many cities are banning it.",
+     "vi": "Bất chấp sự tiện lợi của nhựa, nhiều thành phố đang cấm nó. (giới từ + danh từ)"
+    },
+    {
+     "t": "Paper bags decompose quickly, whereas plastic bags can last for centuries.",
+     "vi": "Túi giấy phân huỷ nhanh, trong khi túi ni-lông có thể tồn tại hàng thế kỷ."
+    }
+   ],
+   "tips": [
+    "<b>Lỗi số 1 của người Việt: </b> ❌ <i>Although it rained, but we went out.</i> (dịch “Mặc dù… nhưng…”). Tiếng Anh chỉ dùng MỘT từ: <i>Although it rained, we went out.</i> hoặc <i>It rained, but we went out.</i> Tương tự ❌ <i>Because…, so…</i>",
+    "<b>Despite / in spite of</b> + danh từ hoặc V-ing, KHÔNG + mệnh đề: ❌ <i>Despite it rained</i> → ✅ <i>Despite the rain</i> / <i>Despite the fact that it rained</i>.",
+    "<b>However</b> là trạng từ, không nối hai mệnh đề bằng dấu phẩy: ❌ <i>Plastic is cheap, however it pollutes.</i> → ✅ <i>Plastic is cheap. However, it pollutes.</i> hoặc <i>…cheap; however, it…</i>",
+    "Đừng đặt từ nối ở đầu MỌI câu (Firstly, Secondly, Moreover, Furthermore…) – giám khảo gọi là liên kết ‘máy móc’. Kết hợp với quy chiếu và danh từ tóm tắt."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Liên kết trong văn nói & ngữ điệu từ nối",
+   "html": "<p>IELTS Speaking cũng chấm Fluency & Coherence, nhưng từ nối trong văn nói <b>tự nhiên</b> hơn văn viết:</p><table><tr><th>Văn viết</th><th>Văn nói tự nhiên</th></tr><tr><td>Furthermore, / In addition,</td><td>On top of that, · What's more, · Also,</td></tr><tr><td>However, / Nevertheless,</td><td>Having said that, · Mind you, · But then again,</td></tr><tr><td>Therefore, / Consequently,</td><td>That's why… · So…</td></tr><tr><td>For example,</td><td>Take… for example. · Like…</td></tr><tr><td>In conclusion,</td><td>So overall… · All in all…</td></tr></table><p><b>Ngữ điệu:</b> từ nối đầu câu được đọc tách riêng, hơi lên giọng rồi ngừng ngắn: <i>However ↗ | the situation is changing.</i> Nói liền “however the situation…” khiến người nghe không nhận ra bạn đang chuyển ý.</p>"
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Bài giảng “Why Cities Need Trees”",
+   "lang": "en-GB",
+   "note": "Bài giảng ngắn về quy hoạch đô thị. Giáo sư Lâm giảng, sinh viên Mai đặt câu hỏi. Nghe lần 1: cây xanh mang lại mấy lợi ích, là gì? Lần 2: trả lời câu hỏi. Lần 3: ghi lại các từ nối và cụm quy chiếu (this effect, the former, done so…).",
+   "lines": [
+    {
+     "s": "Professor Lam",
+     "g": "m",
+     "t": "Good morning. Today's topic is urban trees. Most people think of them as decoration, something that makes a street look nice. However, research over the past twenty years suggests that they are far more than that. In fact, they may be one of the cheapest ways to make a city healthier.",
+     "vi": "Chào các bạn. Chủ đề hôm nay là cây xanh đô thị. Phần lớn mọi người coi chúng là đồ trang trí, thứ làm con phố đẹp hơn. Tuy nhiên, nghiên cứu hai mươi năm qua cho thấy chúng còn hơn thế nhiều. Thực tế, chúng có thể là một trong những cách rẻ nhất để thành phố khoẻ mạnh hơn."
+    },
+    {
+     "s": "Professor Lam",
+     "g": "m",
+     "t": "Let's start with heat. Cities are usually warmer than the surrounding countryside, because concrete and asphalt absorb heat during the day and release it at night. This effect is known as the urban heat island. Trees reduce it in two ways. The first is shade: a wide canopy can keep the ground beneath it many degrees cooler than an open road. The second is a process called transpiration, in which trees release water through their leaves. This cools the air around them, rather like sweating cools the human body.",
+     "vi": "Hãy bắt đầu với nhiệt độ. Thành phố thường nóng hơn vùng nông thôn xung quanh vì bê tông và nhựa đường hấp thụ nhiệt ban ngày rồi toả ra ban đêm. Hiệu ứng này gọi là đảo nhiệt đô thị. Cây xanh giảm nó theo hai cách. Thứ nhất là bóng râm: một tán cây rộng có thể giữ mặt đất bên dưới mát hơn mặt đường trống nhiều độ. Thứ hai là quá trình thoát hơi nước, khi cây thải nước qua lá. Điều này làm mát không khí xung quanh, giống như mồ hôi làm mát cơ thể người."
+    },
+    {
+     "s": "Mai",
+     "g": "f",
+     "t": "Excuse me, does that work in a city like Neravale, where the air is already very humid?",
+     "vi": "Thưa thầy, điều đó có hiệu quả ở thành phố như Neravale, nơi không khí vốn đã rất ẩm không ạ?"
+    },
+    {
+     "s": "Professor Lam",
+     "g": "m",
+     "t": "Good question. The cooling effect of transpiration is weaker in humid climates, yes. Nevertheless, the effect of shade remains strong, so the overall benefit is still significant.",
+     "vi": "Câu hỏi hay. Đúng là hiệu ứng làm mát do thoát hơi nước yếu hơn ở khí hậu ẩm. Dù vậy, tác dụng của bóng râm vẫn mạnh, nên lợi ích tổng thể vẫn đáng kể."
+    },
+    {
+     "s": "Professor Lam",
+     "g": "m",
+     "t": "The second advantage concerns water. When heavy rain falls on concrete, it runs straight into the drains, which can quickly become overloaded. The soil around trees, by contrast, absorbs much of that water. Consequently, streets with more trees tend to flood less.",
+     "vi": "Lợi ích thứ hai liên quan đến nước. Khi mưa lớn rơi xuống bê tông, nước chảy thẳng vào cống, khiến cống nhanh chóng quá tải. Ngược lại, đất quanh gốc cây hấp thụ phần lớn lượng nước đó. Do đó, những con phố nhiều cây thường ít ngập hơn."
+    },
+    {
+     "s": "Professor Lam",
+     "g": "m",
+     "t": "Finally, there are benefits for mental health. Several studies have found that people living near green spaces report lower levels of stress than those living in areas without them. The reasons are not fully understood, but the former group also tends to walk more.",
+     "vi": "Cuối cùng là lợi ích cho sức khoẻ tinh thần. Nhiều nghiên cứu cho thấy người sống gần không gian xanh cho biết mức căng thẳng thấp hơn người sống ở khu không có cây xanh. Nguyên nhân chưa được hiểu đầy đủ, nhưng nhóm thứ nhất cũng có xu hướng đi bộ nhiều hơn."
+    },
+    {
+     "s": "Professor Lam",
+     "g": "m",
+     "t": "So, if trees are so useful, why do cities cut them down? Usually, it's because roads need widening or because roots damage pavements. Both problems can be solved with better planning. Next week, we'll look at cities that have done so successfully.",
+     "vi": "Vậy nếu cây hữu ích như vậy, tại sao các thành phố lại chặt chúng? Thường là vì cần mở rộng đường hoặc vì rễ cây làm hỏng vỉa hè. Cả hai vấn đề đều có thể giải quyết bằng quy hoạch tốt hơn. Tuần sau, chúng ta sẽ tìm hiểu những thành phố đã làm được điều đó."
+    }
+   ],
+   "qs": [
+    {
+     "q": "“This effect is known as the urban heat island.” What does “this effect” refer to?",
+     "o": [
+      "Trees releasing water through their leaves",
+      "Cities being warmer than the surrounding countryside",
+      "Rain running into the drains"
+     ],
+     "a": 1,
+     "e": "‘This effect’ tóm tắt cả câu trước: thành phố nóng hơn nông thôn vì bê tông, nhựa đường giữ nhiệt."
+    },
+    {
+     "q": "What are the two ways in which trees reduce heat?",
+     "o": [
+      "Shade and transpiration",
+      "Wind and rain",
+      "Concrete and asphalt"
+     ],
+     "a": 0,
+     "e": "“The first is shade… The second is a process called transpiration…”"
+    },
+    {
+     "q": "True / False / Not Given: The professor says transpiration does not work at all in humid cities.",
+     "o": [
+      "True",
+      "False",
+      "Not Given"
+     ],
+     "a": 1,
+     "e": "Ông nói nó ‘weaker’ (yếu hơn), không phải ‘does not work at all’ → False."
+    },
+    {
+     "q": "Streets with more trees tend to ______ less.",
+     "a": "flood",
+     "e": "“Consequently, streets with more trees tend to flood less.”"
+    },
+    {
+     "q": "“…cities that have done so successfully.” Here “done so” means…",
+     "o": [
+      "cut down their trees",
+      "solved these problems with better planning",
+      "widened all their roads"
+     ],
+     "a": 1,
+     "e": "do so thay cho cụm động từ vừa nhắc: ‘solved both problems with better planning’."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Nhựa – vật liệu kỳ diệu hay lời nguyền hiện đại?",
+   "title": "Plastic: Miracle Material or Modern Curse?",
+   "text": "When the Belgian-born chemist Leo Baekeland created Bakelite in 1907, he could hardly have imagined the consequences. His invention, often described as the first fully synthetic plastic, was light, cheap and easy to shape. These qualities made it ideal for products ranging from telephones to radios, and within a few decades, plastics of many kinds had transformed everyday life.\n\nToday, the world produces more than 400 million tonnes of plastic every year. Much of this is used in medicine, construction and transport, where its durability is a genuine advantage. A plastic water pipe, for instance, can last for decades without rusting, whereas a metal one may need replacing far sooner. However, around a third of all plastic is used for packaging, and most of that is thrown away after a single use. It is here that the problems begin.\n\nThe very quality that makes plastic so useful, namely its durability, also makes it difficult to get rid of. Most common plastics do not decompose in any meaningful sense; instead, they break into smaller and smaller pieces. These fragments, known as microplastics, have been found in oceans, rivers, soil and even human blood. Their long-term effects on health are not yet clear, but many scientists regard them as a cause for concern.\n\nRecycling is often presented as the solution. Unfortunately, only a small fraction of all the plastic ever produced has actually been recycled. Many products combine different types of plastic, which makes them expensive to separate, and recycled plastic is often lower in quality than new material. Consequently, most plastic waste ends up in landfill, is burned, or leaks into the environment.\n\nFor these reasons, a growing number of governments are focusing on reducing plastic use rather than simply managing the waste. Some have banned disposable items such as straws and thin shopping bags; others require manufacturers to pay for the collection of their packaging. Such policies are not always popular, and critics argue that the alternatives, such as paper bags, have environmental costs of their own. Nevertheless, most experts agree that the cheapest piece of plastic to deal with is the one that is never made.",
+   "gloss": [
+    {
+     "w": "synthetic",
+     "vi": "tổng hợp, nhân tạo"
+    },
+    {
+     "w": "transform",
+     "vi": "biến đổi hoàn toàn"
+    },
+    {
+     "w": "genuine",
+     "vi": "thật sự"
+    },
+    {
+     "w": "rust",
+     "vi": "gỉ sét"
+    },
+    {
+     "w": "packaging",
+     "vi": "bao bì"
+    },
+    {
+     "w": "get rid of",
+     "vi": "loại bỏ, tống khứ"
+    },
+    {
+     "w": "fragment",
+     "vi": "mảnh vỡ"
+    },
+    {
+     "w": "a cause for concern",
+     "vi": "điều đáng lo ngại"
+    },
+    {
+     "w": "fraction",
+     "vi": "phần nhỏ"
+    },
+    {
+     "w": "manufacturer",
+     "vi": "nhà sản xuất"
+    }
+   ],
+   "qs": [
+    {
+     "q": "In paragraph 1, “These qualities” refers to plastic being…",
+     "o": [
+      "synthetic and new",
+      "light, cheap and easy to shape",
+      "used in telephones and radios"
+     ],
+     "a": 1,
+     "e": "‘These qualities’ tóm tắt các tính chất vừa liệt kê ở câu trước: light, cheap and easy to shape."
+    },
+    {
+     "q": "In paragraph 2, “a metal one” means a metal…",
+     "o": [
+      "product",
+      "water pipe",
+      "tonne"
+     ],
+     "a": 1,
+     "e": "one thay cho danh từ đếm được vừa nhắc: a plastic water pipe → a metal (water pipe)."
+    },
+    {
+     "q": "True / False / Not Given: More than half of all plastic is used for packaging.",
+     "o": [
+      "True",
+      "False",
+      "Not Given"
+     ],
+     "a": 1,
+     "e": "Đoạn 2: “around a third of all plastic is used for packaging” → False."
+    },
+    {
+     "q": "True / False / Not Given: Scientists have proved that microplastics cause serious illness.",
+     "o": [
+      "True",
+      "False",
+      "Not Given"
+     ],
+     "a": 1,
+     "e": "Đoạn 3: “Their long-term effects on health are not yet clear” – mâu thuẫn với ‘have proved’ → False."
+    },
+    {
+     "q": "Most common plastics do not decompose; instead, they break into tiny pieces called ______.",
+     "a": "microplastics",
+     "e": "Đoạn 3: “These fragments, known as microplastics…”"
+    },
+    {
+     "q": "What is the writer's main point in the last paragraph?",
+     "o": [
+      "Paper bags are worse than plastic bags.",
+      "Reducing plastic use is the best approach.",
+      "Recycling will soon solve the problem."
+     ],
+     "a": 1,
+     "e": "Câu kết: “the cheapest piece of plastic to deal with is the one that is never made” → giảm sử dụng là cách tốt nhất."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Thành phố, nông thôn & rác nhựa",
+   "tasks": [
+    {
+     "p": "IELTS Part 3: “Is it better to live in a big city or in the countryside?” Trả lời 8–10 câu, dùng ≥ 4 từ nối văn nói (on top of that, having said that, that's why, by contrast…).",
+     "model": "It really depends on your stage of life. For young people, big cities are hard to beat. They offer far more job opportunities, and on top of that, there's always something to do in the evenings. That's why so many of my friends from the countryside have moved to Neravale or Orinvale. Having said that, city life has obvious drawbacks, such as pollution, traffic and high rents, and these problems are getting worse rather than better. The countryside, by contrast, is cleaner and much cheaper, and people there tend to know their neighbours. The downside is that public services, especially hospitals and schools, are often of lower quality. So I'd say the city is better for building a career, whereas the countryside is better for raising a family, or for retiring. Personally, I'd like to try both at some point.",
+     "vi": "Thật ra còn tuỳ giai đoạn cuộc đời. Với người trẻ, thành phố lớn khó gì sánh bằng… Tuy vậy, cuộc sống thành phố có những nhược điểm rõ ràng… Ngược lại, nông thôn sạch hơn và rẻ hơn nhiều… Vậy tôi cho rằng thành phố tốt hơn cho sự nghiệp, còn nông thôn tốt hơn để nuôi dạy con cái hoặc nghỉ hưu.",
+     "tips": "Đọc tách các từ nối (Having said that ↗ |…) để người nghe nhận ra bạn chuyển ý. Dùng ‘these problems’ thay vì lặp lại ‘pollution, traffic and high rents’."
+    },
+    {
+     "p": "IELTS Part 3: “What can individuals do to reduce plastic waste?” Trả lời 6–8 câu.",
+     "model": "Quite a lot, actually. The simplest thing is to carry a reusable bag and a water bottle. It sounds like a small step, but if millions of people do so, the effect is huge. Another thing is to refuse items we don't really need, like straws or extra packaging when we order food online. Most apps now let you tick a box to say you don't want plastic cutlery, and I always do that. Mind you, individuals can only do so much. Unless supermarkets and manufacturers change their packaging, consumers often have no choice. So I think personal habits matter, but they need to be supported by government policy.",
+     "vi": "Thật ra khá nhiều. Đơn giản nhất là mang túi và bình nước dùng lại… Tuy vậy, cá nhân chỉ làm được đến mức nào đó thôi. Nếu siêu thị và nhà sản xuất không thay đổi bao bì, người tiêu dùng thường không có lựa chọn…"
+    },
+    {
+     "p": "Nối hai câu “Plastic is useful. It causes pollution.” bằng 3 cách: although / however / despite. Nói to cả 3 câu.",
+     "model": "Although plastic is useful, it causes pollution. Plastic is useful. However, it causes pollution. Despite being useful, plastic causes pollution.",
+     "vi": "Mặc dù nhựa hữu ích, nó gây ô nhiễm. / Nhựa hữu ích. Tuy nhiên, nó gây ô nhiễm. / Dù hữu ích, nhựa vẫn gây ô nhiễm."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Ưu và nhược điểm của cuộc sống ở thành phố lớn",
+   "task": "Viết đoạn văn 180–200 từ: “Discuss the advantages and disadvantages of living in a big city.” Yêu cầu: ≥ 3 cụm this/these/such + danh từ tóm tắt; ≥ 1 cấu trúc the former/the latter hoặc that of/those of; ≥ 5 từ nối thuộc ít nhất 3 chức năng khác nhau; từ ‘city’ không lặp quá 4 lần.",
+   "min": 180,
+   "model": "Living in a large city such as Orinvale has both clear benefits and serious drawbacks. On the one hand, major urban areas offer far more employment opportunities than rural regions, and salaries there are usually higher. This advantage explains why millions of young people leave their hometowns every year. Furthermore, residents enjoy better access to services, namely good hospitals, international schools and cultural events. On the other hand, these benefits come at a price. The cost of living in a metropolis is considerably higher than that of a small town, and many workers spend a large proportion of their income on rent. In addition, heavy traffic and poor air quality can damage people's health. Such problems are particularly serious for children and elderly residents, who are more vulnerable to pollution. Although local authorities have invested in public transport and green spaces, these measures will take years to have a significant effect. Overall, urban life suits people who prioritise their careers, whereas a quieter environment may be better for families. The former may accept the stress in exchange for opportunity, while the latter often value space and clean air more highly.",
+   "modelVi": "Sống ở một thành phố lớn như Orinvale có cả lợi ích rõ ràng lẫn nhược điểm nghiêm trọng. Một mặt, các đô thị lớn có nhiều cơ hội việc làm hơn hẳn vùng nông thôn, và lương thường cao hơn. Lợi thế này giải thích vì sao hàng triệu người trẻ rời quê mỗi năm. Hơn nữa, cư dân được tiếp cận dịch vụ tốt hơn, cụ thể là bệnh viện tốt, trường quốc tế và các sự kiện văn hoá. Mặt khác, những lợi ích này phải trả giá. Chi phí sinh hoạt ở đô thị lớn cao hơn đáng kể so với ở thị trấn nhỏ, và nhiều người lao động dành phần lớn thu nhập cho tiền thuê nhà. Ngoài ra, giao thông đông đúc và không khí ô nhiễm có thể hại sức khoẻ. Những vấn đề như vậy đặc biệt nghiêm trọng với trẻ em và người già – những người dễ bị ảnh hưởng bởi ô nhiễm. Dù chính quyền đã đầu tư vào giao thông công cộng và không gian xanh, các biện pháp này sẽ cần nhiều năm mới có tác dụng rõ rệt. Nhìn chung, cuộc sống đô thị hợp với người ưu tiên sự nghiệp, trong khi môi trường yên tĩnh hơn có thể tốt hơn cho các gia đình. Nhóm thứ nhất có thể chấp nhận áp lực để đổi lấy cơ hội, còn nhóm thứ hai thường coi trọng không gian và không khí sạch hơn.",
+   "tips": [
+    "Sau mỗi ý lớn, câu tiếp theo nên bắt đầu bằng một danh từ tóm tắt (This advantage…, These benefits…, Such problems…) thay vì lặp lại cả cụm.",
+    "Dùng từ đồng nghĩa để tránh lặp ‘city’: urban area, metropolis, major urban centre.",
+    "Kiểm tra dấu câu: However, / Furthermore, / In addition, đầu câu luôn có dấu phẩy; although/whereas nối trong một câu.",
+    "Bố cục: câu chủ đề → ưu điểm (2 ý) → On the other hand → nhược điểm (2 ý) → câu kết so sánh hai nhóm người."
+   ],
+   "checklist": [
+    "Câu chủ đề nêu rõ có cả ưu và nhược điểm",
+    "≥ 3 cụm this/these/such + danh từ tóm tắt",
+    "≥ 1 cấu trúc the former/the latter hoặc that of/those of",
+    "≥ 5 từ nối, ≥ 3 chức năng, đúng dấu câu",
+    "Không có lỗi Although… but / Despite + mệnh đề",
+    "Không lặp ‘city’ quá 4 lần; 180–200 từ"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Chọn câu ĐÚNG:",
+   "o": [
+    "Although it was raining, but we went for a walk.",
+    "Although it was raining, we went for a walk.",
+    "Despite it was raining, we went for a walk."
+   ],
+   "a": 1,
+   "e": "Chỉ dùng một liên từ (although), không thêm but. Despite không đi với mệnh đề."
+  },
+  {
+   "t": "mc",
+   "q": "___ the heavy traffic, we arrived on time.",
+   "o": [
+    "Although",
+    "Despite",
+    "However"
+   ],
+   "a": 1,
+   "e": "Sau chỗ trống là cụm danh từ (the heavy traffic) → Despite."
+  },
+  {
+   "t": "mc",
+   "q": "Plastic bags are cheap. ___, they cause serious pollution.",
+   "o": [
+    "Although",
+    "However",
+    "Despite"
+   ],
+   "a": 1,
+   "e": "Đầu câu mới + dấu phẩy → trạng từ nối However."
+  },
+  {
+   "t": "fill",
+   "q": "The population of Neravale is larger than ___ of Tavarin.",
+   "a": "that",
+   "e": "that of thay cho ‘the population of’ – so sánh dân số với dân số."
+  },
+  {
+   "t": "fill",
+   "q": "I don't need a new laptop – my old ___ works perfectly.",
+   "a": "one",
+   "e": "one thay cho danh từ đếm được số ít vừa nhắc (laptop)."
+  },
+  {
+   "t": "mc",
+   "q": "Will it rain tomorrow? – I hope ___.",
+   "o": [
+    "not",
+    "no",
+    "don't"
+   ],
+   "a": 0,
+   "e": "I hope not = Tôi mong là không (not thay cho cả mệnh đề phủ định)."
+  },
+  {
+   "t": "mc",
+   "q": "Buses and cars both cause pollution, but the ___ carry far more passengers per vehicle.",
+   "o": [
+    "former",
+    "latter",
+    "both"
+   ],
+   "a": 0,
+   "e": "Xe buýt (nhắc trước) chở nhiều khách hơn → the former."
+  },
+  {
+   "t": "mc",
+   "q": "Global plastic production has doubled since 2000. ___ growth has put pressure on waste systems.",
+   "o": [
+    "This",
+    "These",
+    "It"
+   ],
+   "a": 0,
+   "e": "This + danh từ tóm tắt số ít (growth). These đi với danh từ số nhiều; It không đứng trước danh từ."
+  },
+  {
+   "t": "mc",
+   "q": "The government promised to cut taxes, and it ___ last year.",
+   "o": [
+    "did so",
+    "made so",
+    "did it so"
+   ],
+   "a": 0,
+   "e": "do so thay cho cụm động từ vừa nhắc (cut taxes)."
+  },
+  {
+   "t": "fill",
+   "q": "Paper decomposes quickly, ___ plastic can last for hundreds of years. (trong khi đó)",
+   "a": "whereas",
+   "alt": [
+    "while"
+   ],
+   "e": "whereas / while nối hai mệnh đề đối lập trong cùng một câu."
+  },
+  {
+   "t": "mc",
+   "q": "Từ nối nào diễn tả KẾT QUẢ?",
+   "o": [
+    "Nevertheless",
+    "Consequently",
+    "In contrast"
+   ],
+   "a": 1,
+   "e": "Consequently = do đó (kết quả). Nevertheless = dù vậy (nhượng bộ); In contrast = ngược lại (đối lập)."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "Despite",
+    "we enjoyed",
+    "the rain,",
+    "the trip."
+   ],
+   "a": "Despite the rain, we enjoyed the trip.",
+   "e": "Despite + danh từ, mệnh đề chính."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ nối với chức năng:",
+   "pairs": [
+    [
+     "Furthermore,",
+     "thêm ý"
+    ],
+    [
+     "Nevertheless,",
+     "nhượng bộ (dù vậy)"
+    ],
+    [
+     "Consequently,",
+     "kết quả"
+    ],
+    [
+     "In contrast,",
+     "đối lập"
+    ],
+    [
+     "For instance,",
+     "ví dụ"
+    ]
+   ],
+   "e": "Chọn từ nối theo chức năng, không chọn theo cảm giác ‘nghe hay’."
+  },
+  {
+   "t": "listen",
+   "say": "Many people think recycling solves the problem. However, only a small fraction of plastic is ever recycled. The rest ends up in landfill or in the sea.",
+   "lang": "en-GB",
+   "q": "What is the speaker's point?",
+   "o": [
+    "Recycling is the best solution.",
+    "Recycling alone cannot solve the problem.",
+    "Most plastic is recycled."
+   ],
+   "a": 1,
+   "e": "However báo hiệu ý chính đối lập với quan niệm phổ biến: chỉ một phần nhỏ được tái chế."
+  },
+  {
+   "t": "listen",
+   "say": "I visited both Velmora and Velarin last summer. The former was quieter, but the latter had better food.",
+   "lang": "en-GB",
+   "q": "Which place had better food?",
+   "o": [
+    "Velmora",
+    "Velarin",
+    "Both"
+   ],
+   "a": 1,
+   "e": "the latter = cái nhắc sau = Velarin."
+  },
+  {
+   "t": "dict",
+   "say": "Despite the high cost, the project was completed on time.",
+   "lang": "en-GB",
+   "a": "Despite the high cost, the project was completed on time.",
+   "e": "Despite + cụm danh từ (the high cost), không có ‘of’ sau despite."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Hai phiên bản của cùng một đoạn văn (bản ‘lặp từ’ và bản ‘liên kết tốt’); một đoạn văn khác cắt thành 7 câu đã xáo (mỗi nhóm 1 bộ) cho trò ‘Ghép đoạn’; bảng từ nối 6 chức năng để trống; 8 câu lỗi (Although…but, Despite + mệnh đề, However + dấu phẩy, than Tavarin); bút màu 3 màu.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: GV đọc đoạn ‘lặp từ’ (plastic… plastic… plastic…) rồi đoạn ‘liên kết tốt’; học viên chỉ ra khác biệt. Giới thiệu coherence (logic) và cohesion (ngôn từ liên kết)."
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng: nhóm từ nối (furthermore, nevertheless, consequently, whereas, despite, namely, in contrast, the former/the latter) và nhóm chủ đề (disposable, durable, landfill, recycle, decompose, microplastics, shade, absorb, canopy)."
+   },
+   {
+    "t": "25'",
+    "do": "Quy chiếu & thay thế: trình bày 2 bảng; bài ‘mũi tên’ – học viên vẽ mũi tên từ mỗi it/this/such/the former/one/do so về danh từ gốc trong một đoạn văn mẫu. Luyện that of / those of qua câu so sánh dân số, lương."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe bài giảng về cây xanh: lần 1 – mấy lợi ích; lần 2 – câu hỏi (chú ý câu hỏi quy chiếu); lần 3 – ghi lại mọi từ nối nghe được, đánh dấu chức năng."
+   },
+   {
+    "t": "20'",
+    "do": "Từ nối & dấu câu: học viên điền bảng 6 chức năng; sửa 8 câu lỗi; trò ‘Một câu, ba cách’ (although / however / despite)."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn bằng trò ‘Ghép đoạn’: nhóm xếp 7 câu xáo thành đoạn văn, giải thích dựa vào từ nào mà biết thứ tự."
+   },
+   {
+    "t": "25'",
+    "do": "Đọc ‘Plastic: Miracle Material or Modern Curse?’: làm câu hỏi; tô 3 màu – đại từ quy chiếu (xanh), danh từ tóm tắt (vàng), từ nối (hồng); đếm xem bài dùng bao nhiêu công cụ liên kết."
+   },
+   {
+    "t": "20'",
+    "do": "Nói: 2 câu Part 3 theo cặp; yêu cầu dùng từ nối văn nói (on top of that, having said that, that's why, mind you) và đọc tách từ nối với ngữ điệu lên."
+   },
+   {
+    "t": "25'",
+    "do": "Viết đoạn ưu – nhược điểm cuộc sống thành phố (15'); chấm chéo: đếm số lần lặp ‘city’, khoanh từ nối, kiểm tra dấu câu; GV chữa chung."
+   },
+   {
+    "t": "10'",
+    "do": "Khoanh đại từ quy chiếu trong đoạn mới; thay một từ nối rồi xem quan hệ ý có còn đúng."
+   }
+  ],
+  "games": [
+   "‘Ghép đoạn’: mỗi nhóm nhận 7 câu của một đoạn văn bị xáo; dựa vào This/These/However/The former… để xếp lại đúng thứ tự trong 5 phút; nhóm đúng nhanh nhất thắng.",
+   "‘Một câu, ba cách’: GV đưa 2 câu đơn; các đội lần lượt nối bằng although / however / despite; thừa ‘but’ hoặc sai dấu phẩy bị trừ điểm.",
+   "‘Thám tử đại từ’: GV đọc một đoạn có đại từ mơ hồ; học viên phát hiện it/they/this nào không rõ chỉ gì và viết lại cho rõ."
+  ],
+  "errors": [
+   "*Although…, but… / *Because…, so… → chỉ dùng một liên từ (lỗi dịch ‘Mặc dù… nhưng…’, ‘Vì… nên…’).",
+   "*Despite it rained → Despite the rain / Despite the fact that it rained / Although it rained.",
+   "*Plastic is cheap, however it pollutes → Plastic is cheap. However, it pollutes.",
+   "*The population of Neravale is larger than Tavarin → larger than that of Tavarin.",
+   "Đại từ mơ hồ (it / they / this không rõ chỉ gì) → thêm danh từ tóm tắt: this problem, these measures.",
+   "Từ nối máy móc ở đầu mọi câu (Firstly, Secondly, Moreover, Furthermore…) → kết hợp quy chiếu, thay thế, danh từ tóm tắt."
+  ],
+  "homework": "Hoàn thành bài tập trong game (≥ 80%); viết lại đoạn văn sau khi được chữa; lấy một bài viết cũ của mình, gạch chân mọi từ bị lặp và sửa bằng quy chiếu/thay thế; ghi âm câu trả lời ‘city or countryside’ (1, 5 phút) dùng ≥ 4 từ nối văn nói; ôn 20 từ mới bằng Thẻ từ vựng."
+ }
 }

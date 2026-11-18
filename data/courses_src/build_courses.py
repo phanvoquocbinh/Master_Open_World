@@ -35,6 +35,7 @@ FLOORS = [
     (5, "Tầng 5 · Hiệu năng & DevOps"),
     (6, "Tầng 6 · Chuyên sâu QA"),
     (7, "Dev City · The Crystal"),
+    (8, "Học viện QA · Mở rộng"),
 ]
 ORDER = [
     ("computer-basics", 1, "101"), ("programming-basics", 1, "102"), ("git", 1, "103"),
@@ -45,6 +46,21 @@ ORDER = [
     ("test-design", 6, "601"), ("security-basics", 6, "602"), ("ai-for-qa", 6, "603"),
     ("backend", 7, "701"), ("frontend", 7, "702"), ("system-design", 7, "703"),
     ("devops", 7, "704"), ("ai-dev", 7, "705"),
+    ("typescript", 7, "706"),
+    ("database-design", 7, "707"),
+    ("dsa", 7, "708"),
+    ("secure-coding", 7, "709"),
+    ("mobile-dev", 7, "710"),
+    ("cloud-basics", 7, "711"),
+    ("manual-testing", 8, "801"),
+    ("istqb-foundation", 8, "802"),
+    ("test-management", 8, "803"),
+    ("bug-life", 8, "804"),
+    ("exploratory", 8, "805"),
+    ("accessibility", 8, "806"),
+    ("database-testing", 8, "807"),
+    ("cypress", 8, "808"),
+
 ]
 NON_TECH = {"mobile-manual", "test-design", "ai-for-qa"}
 LANGS = {"ts", "js", "python", "bash", "sql", "xml", "json", "text"}
@@ -204,8 +220,8 @@ def validate(course, problems):
         if not course.get(k):
             problems.append(f"{cid}: missing {k}")
     ls = course["lessons"]
-    if not 6 <= len(ls) <= 10:
-        problems.append(f"{cid}: {len(ls)} lessons (need 6-10)")
+    if len(ls) != 14:
+        problems.append(f"{cid}: {len(ls)} lessons (need 14)")
     n_slides = n_code = 0
     for i, l in enumerate(ls, 1):
         lid = l["id"]
@@ -223,8 +239,13 @@ def validate(course, problems):
                 problems.append(f"{lid}: slide missing heading/body: {s['h']!r}")
         if not l["practice"]:
             problems.append(f"{lid}: missing practice")
-        if not 2 <= len(l["check"]) <= 3:
-            problems.append(f"{lid}: {len(l['check'])} checks (need 2-3)")
+        expected = (20, 20) if i == 14 else (40, 40) if cid == "istqb-foundation" and i in (12, 13) else (6, 8) if cid == "istqb-foundation" else (2, 3)
+        if not expected[0] <= len(l["check"]) <= expected[1]:
+            problems.append(f"{lid}: {len(l['check'])} checks (need {expected[0]}-{expected[1]})")
+        if i == 14 and l["title"] != "Ôn tập & Thi cuối khoá":
+            problems.append(f"{lid}: last lesson must be Ôn tập & Thi cuối khoá")
+        if i == (11 if cid == "istqb-foundation" else 13) and "Dự án" not in l["title"]:
+            problems.append(f"{lid}: missing practical project lesson")
         for q in l["check"]:
             if len(q["options"]) < 3 or len(q["options"]) > 4:
                 problems.append(f"{lid}: question has {len(q['options'])} options: {q['q'][:40]}")

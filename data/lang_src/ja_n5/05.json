@@ -3,29 +3,30 @@
  "title": "Một ngày; Vます・ません và を",
  "sub": "毎日 七時に 起きます。",
  "goals": [
-  "Hiểu và dùng đúng Một ngày; Vます・ません và を",
-  "Đọc/nghe phân biệt ít nhất 12 từ/cụm của tình huống",
-  "Hỏi và trả lời ba thông tin cụ thể bằng mức lịch sự phù hợp",
-  "Viết đoạn mới và tự sửa lỗi theo checklist"
+  "Phân tích cách dùng trong câu “毎日 七時に 起きます。” và tạo một câu khác giữ đúng quan hệ ý.",
+  "Dùng “起きます” (thức dậy) và “寝ます” (ngủ/đi ngủ) đúng trong trao đổi của bài.",
+  "Nghe để trả lời câu hỏi “Theo hội thoại: Mỗi ngày bạn dậy mấy giờ?”, rồi chỉ ra phần lời nói làm căn cứ.",
+  "Tự viết đoạn có ý chính “Đọc báo” và kiểm lại sự nhất quán với văn bản đọc."
  ],
  "parts": [
   {
    "k": "text",
    "h": "Bối cảnh và cách học",
-   "html": "<p>Kể lịch ngày thường bằng động từ lịch sự, dùng phủ định để phân biệt việc không làm.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+   "html": "<p>Kể lịch ngày thường bằng động từ lịch sự, dùng phủ định để phân biệt việc không làm.</p>"
   },
   {
    "k": "sounds",
    "h": "Phát âm và nhịp",
-   "html": "<p>Luyện mora trong từ của bài, đặc biệt âm dài, ん và っ. Không áp thanh điệu tiếng Việt; nghe câu trọn cụm và giữ phần kết lịch sự.</p>",
+   "html": "<p>新聞 có shi-n-bu-n bốn mora; hai vị trí ん đều cần được nghe thấy về thời lượng. Khi đọc 読みません, giữ rõ せん để người nghe phân biệt phủ định với 読みます; không chỉ hạ giọng thay cho đuôi phủ định.</p>",
    "items": [
     {
-     "sym": "Nhịp câu và âm cuối",
+     "sym": "しんぶん・まいにち・よみます",
      "ex": [
-      "毎日 七時に 起きます。",
-      "朝ご飯を 食べます。"
+      "新聞",
+      "毎日",
+      "読みます"
      ],
-     "vi": "Đọc theo cụm ý, giữ đủ độ dài và không bỏ phần phủ định."
+     "vi": "Nghe và đọc đối chiếu 新聞 (しんぶん), 毎日 (まいにち), 読みます (よみます). Dùng câu “毎日 七時に 起きます。” để kiểm xem các độ dài âm còn giữ được khi nối vào phát ngôn."
     }
    ]
   },
@@ -184,7 +185,7 @@
   {
    "k": "dialog",
    "h": "Nghe: Một ngày; Vます・ません và を",
-   "note": "Hai học viên của lớp giả Mây Sớm trao đổi; nghe lần đầu lấy ý, lần sau kiểm chi tiết. Không đọc romaji trong âm thanh.",
+   "note": "Trước khi nghe, dự đoán câu trả lời cho “Theo hội thoại: Mỗi ngày bạn dậy mấy giờ?”. Sau đó ghi nguyên thông tin làm bạn chọn đáp án; lượt nói “七時に 起きます。” là một điểm cần kiểm khi nghe lại.",
    "lang": "ja-JP",
    "lines": [
     {
@@ -238,34 +239,34 @@
    ],
    "qs": [
     {
-     "q": "Theo hội thoại: Mỗi ngày bạn dậy mấy giờ?",
+     "q": "Người nói dậy lúc mấy giờ?",
      "o": [
-      "Có. Tôi cũng uống nước.",
-      "Tôi dậy bảy giờ.",
-      "Không. Tôi đọc sách và viết ghi chú."
+      "Tám giờ",
+      "Bảy giờ",
+      "Sáu giờ"
      ],
      "a": 1,
-     "e": "Câu trả lời là 七時に 起きます。 → Tôi dậy bảy giờ."
+     "e": "Lượt nói “七時に 起きます。” nghĩa là: Tôi dậy bảy giờ. Nội dung này làm rõ đáp án “Bảy giờ”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Bạn ăn sáng không?",
+     "q": "Người nói có đọc báo buổi sáng không?",
      "o": [
-      "Tôi nghe nhạc. Sau đó đi ngủ.",
-      "Không. Tôi đọc sách và viết ghi chú.",
-      "Có. Tôi cũng uống nước."
+      "Không",
+      "Có mỗi sáng",
+      "Có vào mọi thứ Hai"
+     ],
+     "a": 0,
+     "e": "Lượt nói “いいえ。本を 読みます。メモを 書きます。” nghĩa là: Không. Tôi đọc sách và viết ghi chú. Nội dung này làm rõ đáp án “Không”, không phải hai cách hiểu còn lại."
+    },
+    {
+     "q": "Buổi tối người nói làm gì trước khi ngủ?",
+     "o": [
+      "Đi học",
+      "Viết báo",
+      "Nghe nhạc"
      ],
      "a": 2,
-     "e": "Câu trả lời là はい。水も 飲みます。 → Có. Tôi cũng uống nước."
-    },
-    {
-     "q": "Theo hội thoại: Bạn đọc báo không?",
-     "o": [
-      "Tôi nghe nhạc. Sau đó đi ngủ.",
-      "Không. Tôi đọc sách và viết ghi chú.",
-      "Tôi dậy bảy giờ."
-     ],
-     "a": 1,
-     "e": "Câu trả lời là いいえ。本を 読みます。メモを 書きます。 → Không. Tôi đọc sách và viết ghi chú."
+     "e": "Lượt nói “音楽を 聞きます。それから 寝ます。” nghĩa là: Tôi nghe nhạc. Sau đó đi ngủ. Nội dung này làm rõ đáp án “Nghe nhạc”, không phải hai cách hiểu còn lại."
     }
    ]
   },
@@ -350,35 +351,35 @@
    "h": "Nói và phản hồi",
    "tasks": [
     {
-     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "p": "Đóng vai hỏi về thức dậy và ngủ/đi ngủ. Dùng lượt “毎日 何時に 起きますか。” để mở đầu, rồi yêu cầu bạn trả lời bằng thông tin của vai đối diện.",
      "model": "毎日 何時に 起きますか。 朝ご飯を 食べますか。 新聞を 読みますか。 夜は テレビを 見ますか。",
      "vi": "Mỗi ngày bạn dậy mấy giờ? Bạn ăn sáng không? Bạn đọc báo không? Buổi tối bạn xem tivi không?",
-     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+     "tips": "Khi bạn nói “朝ご飯を 食べますか。”, người nghe phải nhận ra Bạn ăn sáng không?; ghi âm và kiểm xem từ nào đang quyết định nghĩa đó."
     },
     {
-     "p": "Tóm tắt nội dung bài đọc bằng ba câu, sau đó nêu một câu hỏi còn muốn làm rõ.",
+     "p": "Tóm tắt ba ý trong bài đọc để trả lời “Người kể không làm gì buổi sáng?”. Kết thúc bằng câu hỏi về mỗi ngày nếu phần này chưa được người nghe xác nhận.",
      "model": "私は 毎日 七時に 起きます。 家で 朝ご飯を 食べます。水を 飲みます。 朝は 新聞を 読みません。",
      "vi": "Mỗi ngày tôi dậy bảy giờ. Tôi ăn sáng ở nhà và uống nước. Buổi sáng tôi không đọc báo.",
-     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+     "tips": "So phần tóm tắt của bạn với dữ kiện “Đọc báo”; nếu ý này thay đổi, hãy nói rõ đó là tình huống giả định mới."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có kiểm tra",
-   "task": "Viết một đoạn mới theo tình huống bài học; thay ít nhất hai chi tiết, dùng cấu trúc trọng tâm và kiểm thông tin nhất quán.",
+   "task": "Viết một đoạn tình huống có các ý: Mỗi ngày tôi dậy lúc bảy giờ. / Tôi ăn sáng. / Bạn uống nước không?. Dùng thêm thông tin của bài đọc để nối các ý, không chỉ chép ba câu rời.",
    "min": 80,
    "model": "私は 毎日 七時に 起きます。 家で 朝ご飯を 食べます。水を 飲みます。 朝は 新聞を 読みません。 学校で 本を 読みます。ノートに 文を 書きます。 昼、友達と ご飯を 食べます。 夜は 音楽を 聞きます。テレビも 少し 見ます。 十一時に 寝ます。 明日も 七時に 起きます。",
    "modelVi": "Mỗi ngày tôi dậy bảy giờ. Tôi ăn sáng ở nhà và uống nước. Buổi sáng tôi không đọc báo. Ở trường tôi đọc sách và viết câu vào vở. Buổi trưa tôi ăn cơm cùng bạn. Buổi tối tôi nghe nhạc và xem tivi một chút. Tôi đi ngủ lúc mười một giờ. Ngày mai tôi cũng dậy bảy giờ.",
    "tips": [
-    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
-    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+    "Lập sơ đồ ai làm gì trong câu “毎日 七時に 起きます。”, rồi dùng cùng quan hệ chủ thể khi nối sang đoạn của bạn.",
+    "Đối chiếu “朝ご飯を 食べます。” với mẫu cuối “水を 飲みますか。”; chọn phần kết câu phù hợp trước khi sửa chính tả."
    ],
    "checklist": [
-    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
-    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
-    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
-    "Câu kết thúc và mức lịch sự nhất quán"
+    "Người đọc nhận ra đúng nghĩa của “起きます”, thay vì chỉ thấy từ được chèn vào câu.",
+    "Quan hệ ý trong “毎日 七時に 起きます。” vẫn đúng khi bạn thay dữ kiện.",
+    "Các ý ngủ/đi ngủ và mỗi ngày không bị lẫn vai hoặc phạm vi.",
+    "Đoạn kết không trái với dữ kiện trả lời câu hỏi “Người kể không làm gì buổi sáng?”."
    ]
   }
  ],
@@ -513,7 +514,7 @@
      "bữa sáng"
     ]
    ],
-   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+   "e": "Đối chiếu các cặp “読みます → đọc” và “朝ご飯 → bữa sáng”; phân biệt nghĩa trong tình huống, không ghép chỉ dựa vào hình chữ."
   },
   {
    "t": "mc",
@@ -540,52 +541,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ, bảng cấu trúc bài này, loa/giọng đọc tiếng Nhật, phiếu thông tin khác nhau cho từng cặp. Không dùng dữ liệu cá nhân thật.",
+  "prep": "Chuẩn bị thẻ “起きます”, “寝ます”, “毎日”, bản hội thoại che lượt trả lời và phiếu đọc có câu hỏi “Người kể không làm gì buổi sáng?”.",
   "steps": [
    {
     "t": "10'",
-    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+    "do": "Gợi tình huống bằng câu “毎日 何時に 起きますか。”. Cho cặp học viên nói mình muốn biết điều gì trước khi mở lời đáp."
    },
    {
     "t": "20'",
-    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+    "do": "Cho so thẻ “起きます” với “寝ます”: học viên diễn đạt nghĩa thức dậy và ngủ/đi ngủ, rồi đặt mỗi từ vào một lượt trao đổi."
    },
    {
     "t": "25'",
-    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+    "do": "Viết hai câu “毎日 七時に 起きます。” và “朝ご飯を 食べます。” cạnh nhau. Học viên giải thích khác biệt ý, sau đó thay một thành phần mà vẫn giữ cấu trúc vừa phân tích."
    },
    {
     "t": "20'",
-    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+    "do": "Che lời thoại và giao câu hỏi “Theo hội thoại: Mỗi ngày bạn dậy mấy giờ?”. Sau hai lượt nghe, yêu cầu nêu bằng chứng thay vì đoán theo từ khóa đơn lẻ."
    },
    {
     "t": "15'",
-    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+    "do": "Cho đổi vai quanh lượt “新聞を 読みますか。”. Người nghe hỏi lại thông tin trước khi chuyển sang lời đáp, giáo viên ghi một chỗ gây hiểu nhầm để chữa cuối hoạt động."
    },
    {
     "t": "15'",
-    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+    "do": "Đầu buổi sau, yêu cầu dựng lại ý “Bạn uống nước không?” không nhìn chữ Nhật. So lời nói của học viên với câu đích và chữa phần làm thay đổi quan hệ ý."
    },
    {
     "t": "20'",
-    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+    "do": "Đọc để giải quyết câu hỏi “Người kể không làm gì buổi sáng?”. Mỗi nhóm đánh dấu đoạn chứng minh và giải thích vì sao hai lựa chọn còn lại không khớp."
    },
    {
     "t": "20'",
-    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+    "do": "Giao nhiệm vụ nói có thông tin thức dậy ở một vai và mỗi ngày ở vai kia. Hai bên chỉ hoàn thành phiếu khi đã hỏi để hiểu dữ kiện của nhau."
    },
    {
     "t": "20'",
-    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+    "do": "Viết đoạn nối ý “Mỗi ngày tôi dậy lúc bảy giờ.” với “Bạn uống nước không?”. Đổi bài và kiểm chủ thể, mốc thời gian cùng từ phủ định trước khi góp ý độ tự nhiên."
    },
    {
     "t": "15'",
-    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+    "do": "Chữa bài tự chấm từ cặp “寝ます” và “毎日”. Mỗi học viên ghi một câu sửa của chính mình và nêu cách sẽ nhận ra lỗi đó trong lần dùng sau."
    }
   ],
   "games": [
-   "Ghép thẻ câu với tình huống: mỗi nhóm phải giải thích một cặp và chỉ ra từ/cấu trúc quyết định.",
-   "Thông tin lệch: mỗi bạn giữ một phần dữ kiện; phải hỏi lại thay vì đoán để hoàn thành phiếu."
+   "Khoảng trống thông tin: một bạn chỉ thấy “毎日 何時に 起きますか。”, bạn kia giữ câu trả lời. Họ hỏi lại để hoàn thành thông tin về thức dậy trước khi đổi vai.",
+   "Chọn và bảo vệ đáp án: các nhóm nhận câu hỏi “Người kể không làm gì buổi sáng?”, chọn một phương án rồi tìm chi tiết đủ bác hai phương án nhiễu."
   ],
   "errors": [
    "Thêm です sau ます: 読みます đã là kết lịch sự, không 読みますです.",
@@ -593,6 +594,6 @@
    "Coi ます chỉ hiện tại: thêm 明日 để thấy nó còn diễn tả tương lai.",
    "Dùng ません khi muốn nói quá khứ: dạng quá khứ sẽ là ませんでした, học ở bài ôn."
   ],
-  "homework": "Ôn 12–20 thẻ theo lịch 1–3–7 ngày; nghe chép câu đã chọn, ghi âm hai lượt nói và viết đoạn mới thay ít nhất hai chi tiết."
+  "homework": "Ôn “起きます”, “寝ます” và “毎日” bằng câu mới có nghĩa. Ghi âm câu “毎日 七時に 起きます。”, nghe lại phần kết rồi viết lời giải thích cho câu hỏi “Người kể không làm gì buổi sáng?” bằng tiếng Việt."
  }
 }

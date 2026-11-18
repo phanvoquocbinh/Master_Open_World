@@ -1,0 +1,716 @@
+{
+ "no": 11,
+ "title": "Ôn tập tổng hợp 1 – Từ yêu cầu giữ chỗ tới bàn giao có điều kiện",
+ "sub": "送信したら 確保という 意味か、確認したいです。",
+ "goals": [
+  "Làm rõ thuật ngữ giữ chỗ và xác nhận trong một yêu cầu sản phẩm giả.",
+  "Chuyển yêu cầu thành tiêu chí có thể quan sát cùng dữ liệu thử.",
+  "Báo ước lượng với giả định, phạm vi và phần chưa được người liên quan chấp thuận.",
+  "Viết bàn giao phân yêu cầu đã thống nhất, review đã xong, kiểm còn chờ và điều kiện chuyển."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Nhóm giả xây chức năng giữ một bộ dụng cụ cho buổi học. Người dùng sản phẩm nói “đã gửi là giữ”, nhưng vận hành chỉ muốn giữ sau khi đủ kiểm và còn dụng cụ. Bài ôn kết hợp họp yêu cầu, daily, báo lỗi, review và email: phải định nghĩa trạng thái trước khi ước lượng hoặc nói hoàn tất. Mọi dữ liệu và hệ thống ở đây là giả; bài luyện năng lực trao đổi, không yêu cầu triển khai mã hay thao tác dịch vụ thật.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>予約 đọc よやく, 確約 đọc かくやく; không nhầm hai cụm chỉ vì đều có やく. 受入基準 đọc うけいれきじゅん, 見積前提 đọc みつもりぜんてい, giữ nhịp ん trước t. 差戻し đọc さしもどし khác 切り戻し về nghĩa bối cảnh: một bên trả công việc để sửa, một bên quay phiên bản/điều kiện trước theo kế hoạch.</p>",
+   "items": [
+    {
+     "sym": "予約・確約・受入基準",
+     "ex": [
+      "よやく",
+      "かくやく",
+      "うけいれきじゅん"
+     ],
+     "vi": "Đọc rõ phần đầu để giữ mức cam kết, rồi đọc trọn tiêu chí nghiệm thu."
+    },
+    {
+     "sym": "差戻し・切り戻し",
+     "ex": [
+      "さしもどし",
+      "きりもどし"
+     ],
+     "vi": "Các cụm có 戻し nhưng hành động khác, cần gắn đúng đối tượng trả sửa hay quay trạng thái."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "要望",
+     "kana": "ようぼう",
+     "romaji": "yooboo",
+     "vi": "điều người liên quan mong muốn",
+     "ex": "要望をすぐ仕様とは呼びません。",
+     "exVi": "Tôi không gọi mong muốn ngay là đặc tả."
+    },
+    {
+     "w": "業務規則",
+     "kana": "ぎょうむきそく",
+     "romaji": "gyoomu kisoku",
+     "vi": "quy tắc công việc dùng sản phẩm",
+     "ex": "業務規則を運営側に聞きます。",
+     "exVi": "Tôi hỏi quy tắc nghiệp vụ với vận hành."
+    },
+    {
+     "w": "状態遷移",
+     "kana": "じょうたいせんい",
+     "romaji": "jootai seni",
+     "vi": "chuyển giữa các trạng thái đã định",
+     "ex": "状態遷移を三つに分けます。",
+     "exVi": "Tôi chia chuyển trạng thái thành ba bước."
+    },
+    {
+     "w": "受入基準",
+     "kana": "うけいれきじゅん",
+     "romaji": "ukeire kijun",
+     "vi": "tiêu chí chấp nhận có thể kiểm",
+     "ex": "受入基準に拒否の例も入れます。",
+     "exVi": "Tôi đưa cả ví dụ bị từ chối vào tiêu chí."
+    },
+    {
+     "w": "期待結果",
+     "kana": "きたいけっか",
+     "romaji": "kitai kekka",
+     "vi": "kết quả mong theo yêu cầu",
+     "ex": "期待結果を実行前に合意します。",
+     "exVi": "Tôi thống nhất kỳ vọng trước chạy."
+    },
+    {
+     "w": "境界条件",
+     "kana": "きょうかいじょうけん",
+     "romaji": "kyookai jooken",
+     "vi": "điều kiện ở ranh giới cần kiểm",
+     "ex": "境界条件は残り一個です。",
+     "exVi": "Điều kiện biên là chỉ còn một món."
+    },
+    {
+     "w": "対象外",
+     "kana": "たいしょうがい",
+     "romaji": "taishoogai",
+     "vi": "ngoài phạm vi đợt việc",
+     "ex": "通知の変更は今回は対象外です。",
+     "exVi": "Đổi thông báo ngoài phạm vi lần này."
+    },
+    {
+     "w": "見積前提",
+     "kana": "みつもりぜんてい",
+     "romaji": "mitsumori zentei",
+     "vi": "giả định đứng sau ước lượng",
+     "ex": "見積前提を先に説明します。",
+     "exVi": "Tôi giải thích giả định ước lượng trước."
+    },
+    {
+     "w": "依存作業",
+     "kana": "いぞんさぎょう",
+     "romaji": "izon sagyoo",
+     "vi": "việc cần bên khác hoàn tất trước",
+     "ex": "依存作業の担当を確認します。",
+     "exVi": "Tôi kiểm người phụ trách việc phụ thuộc."
+    },
+    {
+     "w": "完了条件",
+     "kana": "かんりょうじょうけん",
+     "romaji": "kanryoo jooken",
+     "vi": "điều kiện được gọi hoàn tất",
+     "ex": "完了条件はレビューだけではありません。",
+     "exVi": "Điều kiện xong không chỉ review."
+    },
+    {
+     "w": "レビュー指摘",
+     "kana": "れびゅーしてき",
+     "romaji": "rebyuu shiteki",
+     "vi": "điểm được chỉ ra khi review",
+     "ex": "レビュー指摘に理由を添えます。",
+     "exVi": "Tôi kèm lý do cho nhận xét review."
+    },
+    {
+     "w": "差戻し",
+     "kana": "さしもどし",
+     "romaji": "sashimodoshi",
+     "vi": "trả lại để sửa theo điều kiện",
+     "ex": "差戻しの対象を明記します。",
+     "exVi": "Tôi ghi rõ phần bị trả sửa."
+    },
+    {
+     "w": "検証待ち",
+     "kana": "けんしょうまち",
+     "romaji": "kenshoo machi",
+     "vi": "đang chờ kiểm",
+     "ex": "旧画面との連携は検証待ちです。",
+     "exVi": "Liên kết màn cũ đang chờ kiểm."
+    },
+    {
+     "w": "判定基準",
+     "kana": "はんていきじゅん",
+     "romaji": "hantei kijun",
+     "vi": "tiêu chí để quyết đạt/chưa đạt",
+     "ex": "判定基準を担当間でそろえます。",
+     "exVi": "Tôi thống nhất tiêu chí giữa người phụ trách."
+    },
+    {
+     "w": "引渡し",
+     "kana": "ひきわたし",
+     "romaji": "hikiwatashi",
+     "vi": "bàn giao sản phẩm/phần việc",
+     "ex": "引渡しには未確認も添えます。",
+     "exVi": "Tôi kèm phần chưa kiểm khi bàn giao."
+    },
+    {
+     "w": "残課題",
+     "kana": "ざんかだい",
+     "romaji": "zankadai",
+     "vi": "việc hoặc vấn đề còn lại",
+     "ex": "残課題に担当と期限を書きます。",
+     "exVi": "Tôi ghi người và hạn cho việc còn."
+    },
+    {
+     "w": "変更履歴",
+     "kana": "へんこうりれき",
+     "romaji": "henkoo rireki",
+     "vi": "lịch sử điểm thay đổi",
+     "ex": "変更履歴に状態の定義を残します。",
+     "exVi": "Tôi lưu định nghĩa trạng thái vào lịch sử."
+    },
+    {
+     "w": "承認者",
+     "kana": "しょうにんしゃ",
+     "romaji": "shooninsha",
+     "vi": "người chấp thuận một bước",
+     "ex": "承認者と確認者を分けます。",
+     "exVi": "Tôi tách người duyệt với người kiểm."
+    },
+    {
+     "w": "段階公開",
+     "kana": "だんかいこうかい",
+     "romaji": "dankai kookai",
+     "vi": "cho dùng theo từng giai đoạn",
+     "ex": "段階公開の範囲は検証班だけです。",
+     "exVi": "Phạm vi giai đoạn đầu chỉ nhóm kiểm."
+    },
+    {
+     "w": "受領",
+     "kana": "じゅりょう",
+     "romaji": "juryoo",
+     "vi": "việc bên nhận đã nhận bàn giao",
+     "ex": "受領は利用承認とは別です。",
+     "exVi": "Nhận bàn giao khác duyệt cho sử dụng."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Ôn という意味か確認したい để làm rõ từ, ～を前提にした見積もりです để giữ ước lượng có điều kiện, ～を除いて…済みです để giới hạn phần xong. レビュー済みですが検証待ちです phân hai bước. ～していただけますか yêu cầu rõ người nhận làm gì, ～までに結果を共有します cho mốc phản hồi. Khi giao việc, bản yêu cầu được duyệt, mã được review và tiêu chí chạy qua là các chứng cứ khác nhau, không có bước nào tự thay tất cả.</p>",
+   "table": [
+    [
+     "Tình huống ôn",
+     "Mẫu dùng"
+    ],
+    [
+     "Hỏi nghĩa",
+     "送信したら確保という意味ですか"
+    ],
+    [
+     "Giữ ước lượng",
+     "状態が三つという前提の見積もりです"
+    ],
+    [
+     "Phân xong/chờ",
+     "レビュー済みですが連携は検証待ちです"
+    ],
+    [
+     "Giới hạn phạm vi",
+     "通知変更を除いた対応です"
+    ],
+    [
+     "Nhờ quyết bước sau",
+     "結果を見て公開可否を判定していただけますか"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "送信したら 確保という 意味か、確認したいです。",
+     "vi": "Tôi muốn kiểm có phải gửi xong là giữ chắc không."
+    },
+    {
+     "t": "状態が 三つという 前提の 見積もりです。",
+     "vi": "Đây là ước lượng theo giả định ba trạng thái."
+    },
+    {
+     "t": "通知の 変更は、今回は 対象外です。",
+     "vi": "Đổi thông báo ngoài phạm vi lần này."
+    },
+    {
+     "t": "レビューは 済みましたが、旧画面との 連携は 検証待ちです。",
+     "vi": "Review xong nhưng liên kết màn cũ còn chờ kiểm."
+    },
+    {
+     "t": "結果を 見て、公開の 可否を 判定していただけますか。",
+     "vi": "Sau khi xem kết quả, nhờ bạn quyết có cho dùng không?"
+    }
+   ],
+   "tips": [
+    "<p>Không nhận một chữ “giữ” là đã thống nhất nghiệp vụ; hỏi lúc nào trừ số dụng cụ và trạng thái nào chỉ tiếp nhận.</p>",
+    "<p>Ước lượng không có giả định dễ bị đọc thành cam kết bất kể thay đổi; giữ phần phụ thuộc.</p>",
+    "<p>Bàn giao nhận được không đồng nghĩa được đưa vào dùng; cần tiêu chí và người quyết riêng.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Nhóm làm rõ giữ chỗ, ước lượng có giả định, review khác kiểm chạy và nhận bàn giao khác đưa dùng.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "貸出の要望に、送信したら道具を確保するとあります。これは受付済みと確約済みを同じ状態にする意味でしょうか。",
+     "vi": "Yêu cầu ghi gửi xong thì giữ dụng cụ. Có nghĩa đã tiếp nhận với đã giữ chắc là cùng trạng thái không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "運営の規則では、内容と残数を確認してから確約します。送信直後は受付中にして、確保したとは表示しないでください。",
+     "vi": "Theo vận hành, kiểm nội dung và còn số rồi mới giữ. Ngay sau gửi là đang nhận, đừng hiện đã giữ."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "では、受付中、確約済み、受付不可の三状態で例を作ります。残り一個に二人が希望した場合の扱いも決めたいです。",
+     "vi": "Vậy tôi tạo ví dụ ba trạng thái nhận, giữ chắc, không nhận. Cũng muốn chốt khi còn một mà hai người muốn."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "その境界条件では、確認できた一人だけを確約にします。同時の希望の順番は、別の規則を担当者に確認する必要があります。",
+     "vi": "Ở biên ấy chỉ một người được xác nhận giữ. Thứ tự khi cùng lúc cần người phụ trách kiểm quy tắc khác."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "見積もりは三状態と既存の通知を使う前提で二日です。通知文を増やすなら、その分は再見積もりにしたいです。",
+     "vi": "Ước lượng hai ngày theo ba trạng thái và dùng thông báo cũ. Nếu thêm câu thông báo thì muốn ước lại phần đó."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "承知しました。今日のレビューでは、送信直後に残数を減らす処理が指摘されました。確約する時点との食い違いです。",
+     "vi": "Tôi hiểu. Review hôm nay chỉ điểm trừ số ngay sau gửi, không khớp lúc xác nhận giữ."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "指摘を受けて直しました。レビューは承認されましたが、旧画面の表示と連携した確認はまだ実行していません。",
+     "vi": "Tôi đã sửa. Review được duyệt nhưng chưa chạy kiểm liên kết hiển thị màn cũ."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "では、全て完了とはせず、レビュー済み、旧画面の検証待ちと書きましょう。期待結果の例は運営にも見てもらいます。",
+     "vi": "Vậy ghi review xong, kiểm màn cũ còn chờ thay vì mọi thứ xong. Nhờ vận hành xem ví dụ kỳ vọng."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "引渡しは今日行い、公開は結果を見て承認者が決める形ですね。未確認の項目には担当と明日の更新時刻を残します。",
+     "vi": "Bàn giao hôm nay, cho dùng thì người duyệt xem kết quả quyết nhỉ. Mục chưa kiểm ghi người và mốc báo mai."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。受領の返事をもらっても利用承認とは数えません。状態の定義と対象外、残課題を一つのメモにまとめてください。次の担当が同じ定義を追えるようにしましょう。",
+     "vi": "Vâng. Có xác nhận nhận cũng không tính duyệt dùng. Hãy gộp định nghĩa trạng thái, ngoài phạm vi, việc còn vào một ghi chú. Ta giữ để người tiếp theo lần lại được cùng định nghĩa."
+    }
+   ],
+   "qs": [
+    {
+     "q": "送信直後の状態は何ですか。",
+     "o": [
+      "全員受付不可",
+      "受付中で確約ではない",
+      "必ず確約済み"
+     ],
+     "a": 1,
+     "e": "Vận hành chỉ giữ sau kiểm nội dung và số, nên gửi mới là nhận."
+    },
+    {
+     "q": "二日の見積もりの前提は何ですか。",
+     "o": [
+      "三状態と既存通知を使う",
+      "全通知変更も無制限に含む",
+      "旧画面検証は不要"
+     ],
+     "a": 0,
+     "e": "Ước lượng giữ phạm vi ba trạng thái/thông báo có sẵn, thay đổi cần xét lại."
+    },
+    {
+     "q": "レビュー指摘は何でしたか。",
+     "o": [
+      "全文章の色だけ",
+      "担当者の名前",
+      "送信直後の減算が確約時点と違った"
+     ],
+     "a": 2,
+     "e": "Thời điểm trừ dụng cụ cần khớp định nghĩa nghiệp vụ giữ chắc."
+    },
+    {
+     "q": "引渡し時に未完了なのは何ですか。",
+     "o": [
+      "修正を入れたこと",
+      "旧画面との連携確認",
+      "レビュー承認"
+     ],
+     "a": 1,
+     "e": "Bàn giao giữ review xong và kiểm liên kết chưa chạy, không đánh đồng."
+    },
+    {
+     "q": "受領の返事は何を意味しませんか。",
+     "o": [
+      "利用公開の承認",
+      "メモを受け取ったこと",
+      "次に検証する必要があること"
+     ],
+     "a": 0,
+     "e": "Nhận bàn giao là một bước, chưa phải quyết đưa dùng."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "架空の道具貸出機能では、要望の一文に「送信したら確保」とあった。開発担当は送信直後に残数を減らす処理を考えたが、運営担当は内容と残数を確認してから確約する規則を想定していた。同じ確保という語でも、受付と確約の境界が共有されていなかったのである。最初の打合せでは、受付中、確約済み、受付不可の三状態を定義し、どの時点で残数を変えるかを明記した。\n\n受入基準には、残り一個で一人が希望した例、残りゼロの例、同じ人が返事を待てずに再送した例を用意した。残り一個へ二人が同時に希望する場合は、順番を決める業務規則が未確認だったため、その点を残課題にした。期待結果を曖昧にしたまま試験だけ先に実行しても、何をもって正しいとするかが決まらない。例の承認と実行結果は別に残す。\n\n見積もりは、三状態で既存の通知を使う前提の二日だった。通知文の追加や別経路への変更は対象外として説明した。前提を示すことは、後から全てを追加費用にするためではない。何が変われば再検討が必要かを、作業を始める前に共有するためである。依存作業の担当が返事をしていない項目を、すでに終わる見込みとして日程に埋め込むこともしない。\n\nレビューでは、送信直後に残数を減らす処理が、確約後という定義と違うことが指摘された。担当は修正し、レビューの承認を受けた。ただし、旧画面との連携確認はまだ実行していなかった。レビューを受けたこと、指摘へ対応したこと、実行して期待結果と合ったことは、それぞれ違う完了条件である。会議では一語で完了とせず、何を確認したかを状態ごとに書くことにした。\n\n引渡しのメモには、状態の定義、受入基準の例、対象外、検証待ち、担当と次の更新時刻を並べた。承認者は結果を見て公開の可否を判断する。受領の返事は、メモと成果物が届いた確認であって、公開してよいという承認ではない。段階公開を行う場合も、誰のどの操作に限るかを記す。検証班だけという範囲を、全利用者へ広げないようにする。\n\n翌日の更新では、旧画面の試験結果と未確認の順番規則を別に伝える予定である。一つの連携が通っても、全ての境界条件が解決したとはしない。逆に一つの課題が残っていても、確認済みの成果を全て消す必要はない。要求から実装、レビュー、検証、引渡しまで、同じ語が同じ意味で使われるかを追えることが、チームに参加して説明する力になる。",
+   "vi": "Tính năng mượn đồ giả có câu yêu cầu gửi xong thì giữ. Phát triển định trừ số ngay sau gửi, trong khi vận hành nghĩ phải kiểm nội dung và số còn rồi mới giữ chắc. Cùng chữ giữ nhưng chưa thống nhất ranh giới. Cuộc họp đầu định ba trạng thái đang nhận, đã giữ chắc và không nhận, cùng thời điểm thay số còn.\n\nTiêu chí chấp nhận gồm còn một món và một người muốn, không còn món, và cùng một người gửi lại vì chưa thấy phản hồi. Hai người đồng thời muốn một món còn là việc phải hỏi quy tắc thứ tự. Chạy trước khi kỳ vọng rõ sẽ không biết dùng gì để xét đúng. Duyệt ví dụ và kết quả chạy được giữ riêng.\n\nƯớc lượng hai ngày dựa trên ba trạng thái và dùng thông báo hiện có. Thêm nội dung thông báo hoặc đổi kênh ngoài phạm vi đợt này. Nêu giả định không phải để sau này tính mọi thay đổi thành phí thêm, mà để biết thay đổi nào cần xem lại trước khi làm. Người phụ trách việc phụ thuộc chưa trả lời thì không tính như chắc sẽ hoàn tất để lấp vào lịch.\n\nReview chỉ ra trừ số ngay sau gửi không khớp định nghĩa sau khi giữ chắc. Người làm đã sửa và được duyệt review, nhưng chưa chạy kiểm liên kết màn cũ. Đã review, đã sửa nhận xét và đã chạy khớp kỳ vọng là những điều kiện hoàn tất khác nhau. Nhóm chọn ghi cụ thể điều đã kiểm thay vì một chữ xong.\n\nGhi chú bàn giao có định nghĩa trạng thái, ví dụ nghiệm thu, ngoài phạm vi, chờ kiểm, người và giờ cập nhật. Người duyệt nhìn kết quả để quyết đưa vào dùng. Xác nhận nhận chỉ nói bên kia đã có tài liệu và sản phẩm, không chấp thuận công bố. Nếu cho dùng theo giai đoạn phải ghi ai được thao tác gì; không mở phạm vi nhóm kiểm thành mọi người dùng.\n\nNgày sau sẽ báo riêng kết quả màn cũ với quy tắc thứ tự còn chưa rõ. Một liên kết chạy qua không giải mọi biên, còn một việc chưa xong cũng không xóa toàn bộ thành quả. Theo được cùng từ có cùng nghĩa từ yêu cầu, thực hiện, review, kiểm tới bàn giao là kỹ năng giải thích khi tham gia nhóm.",
+   "gloss": [
+    {
+     "w": "要望",
+     "kana": "ようぼう",
+     "romaji": "yooboo",
+     "vi": "điều người liên quan mong muốn"
+    },
+    {
+     "w": "業務規則",
+     "kana": "ぎょうむきそく",
+     "romaji": "gyoomu kisoku",
+     "vi": "quy tắc công việc dùng sản phẩm"
+    },
+    {
+     "w": "受入基準",
+     "kana": "うけいれきじゅん",
+     "romaji": "ukeire kijun",
+     "vi": "tiêu chí chấp nhận có thể kiểm"
+    },
+    {
+     "w": "期待結果",
+     "kana": "きたいけっか",
+     "romaji": "kitai kekka",
+     "vi": "kết quả mong theo yêu cầu"
+    },
+    {
+     "w": "境界条件",
+     "kana": "きょうかいじょうけん",
+     "romaji": "kyookai jooken",
+     "vi": "điều kiện ở ranh giới cần kiểm"
+    },
+    {
+     "w": "対象外",
+     "kana": "たいしょうがい",
+     "romaji": "taishoogai",
+     "vi": "ngoài phạm vi đợt việc"
+    }
+   ],
+   "qs": [
+    {
+     "q": "最初の行き違いは何ですか。",
+     "o": [
+      "道具の名前が全て同じだった",
+      "受付と確約の境界が違った",
+      "全員が同じ定義を確認済みだった"
+     ],
+     "a": 1,
+     "e": "Từ giữ che khác thời điểm nghiệp vụ, cần định nghĩa trước kiểm/ước."
+    },
+    {
+     "q": "同時に二人が希望する例はどう扱いましたか。",
+     "o": [
+      "順番規則を残課題にした",
+      "期待を勝手に決めた",
+      "必ず全員に確約した"
+     ],
+     "a": 0,
+     "e": "Điều chưa có quy tắc không được dựng kỳ vọng theo đoán."
+    },
+    {
+     "q": "見積前提を示す目的は何ですか。",
+     "o": [
+      "全変更を無制限に含める",
+      "後から説明しない",
+      "何の変更で再検討するかを共有する"
+     ],
+     "a": 2,
+     "e": "Giữ điều kiện ước lượng để cùng hiểu thay đổi, không hứa mọi phạm vi."
+    },
+    {
+     "q": "レビュー承認だけで言えないことは何ですか。",
+     "o": [
+      "レビューを受けた",
+      "旧画面の連携結果が確認済み",
+      "指摘へ修正した"
+     ],
+     "a": 1,
+     "e": "Các bước có bằng chứng riêng, duyệt review không chứng minh chạy."
+    },
+    {
+     "q": "引渡しと公開の関係は何ですか。",
+     "o": [
+      "受領と利用承認を分ける",
+      "届いたら全利用者へ自動公開",
+      "未確認は書かない"
+     ],
+     "a": 0,
+     "e": "Người duyệt quyết theo kết quả, không dựa nhận file một mình."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thẻ mới: yêu cầu nói đặt xong nhưng thật chỉ ghi nhận chờ duyệt. Hỏi rõ và đề xuất ba trạng thái trước ước lượng.",
+     "model": "予約完了というのは、申込みを受け取っただけですか、それとも道具を確約した状態でしょうか。承認前は受付中と表示し、確約済み、受付不可を別に定義する案です。その境界と残数を変える時点を確認してから、例と見積もりを作りたいです。",
+     "vi": "Đặt hoàn tất nghĩa chỉ nhận hay đã giữ chắc? Tôi đề xuất trước duyệt hiện đang nhận, tách giữ chắc/không nhận. Muốn xác định ranh giới và lúc đổi số rồi tạo ví dụ/ước.",
+     "tips": "Hỏi quy tắc thay vì tự sửa tên trạng thái rồi coi đã chốt."
+    },
+    {
+     "p": "Báo daily: review xong, hai ví dụ qua, trường hợp cùng lúc chưa có quy tắc, cập nhật15giờmai.",
+     "model": "レビューは完了し、二つの例は期待結果と一致しました。ただ、同時に希望する場合の順番規則は未確認で、全条件の完了とはしていません。運営担当へ確認を依頼し、明日の午後三時に結果か、まだ待っている理由を共有します。公開可否は承認者に判断してもらいます。",
+     "vi": "Review đã xong, hai ví dụ khớp kỳ vọng. Tuy nhiên quy tắc thứ tự khi đồng thời chưa kiểm nên chưa gọi mọi điều kiện hoàn tất. Tôi đã hỏi vận hành; ba giờ chiều mai báo kết quả, hoặc nếu còn đợi thì báo lý do và bước xác nhận tiếp. Người duyệt sẽ quyết có cho dùng không.",
+     "tips": "Nếu chưa có trả lời đúng giờ, vẫn cập nhật trạng thái thay vì chờ có kết quả mới báo."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết bàn giao 250–330 chữ Nhật: ba trạng thái đã định; ước lượng hai ngày dùng thông báo cũ; review xong nhưng liên kết màn cũ còn chờ; quy tắc hai người đồng thời chưa chốt; người duyệt quyết đưa vào dùng; cập nhật lúc ba giờ chiều mai.",
+   "model": "受付中、確約済み、受付不可の三状態を定義し、残数は確約時に変えることで合意しました。見積もりは既存通知を使う前提の二日で、通知文の追加は対象外です。送信直後に減算する処理は指摘を受けて直し、レビューは承認済みですが、旧画面との連携は検証待ちです。同時に二人が希望する場合の順番規則も未確認のため、運営担当へ照会しています。受領を公開承認とは数えず、結果を見て承認者が可否を判断します。明日の午後三時に確認済みと残課題を更新し、返事がなければ待っている理由と次の確認を共有します。段階公開する範囲も別に明記する予定です。",
+   "modelVi": "Đã định ba trạng thái đang nhận, giữ chắc và không nhận; cùng thống nhất đổi số còn lúc giữ chắc. Ước lượng hai ngày theo thông báo cũ, thêm câu thông báo ngoài phạm vi. Lỗi trừ ngay sau gửi đã sửa và review được duyệt, nhưng liên kết màn cũ chờ kiểm. Quy tắc thứ tự hai người đồng thời chưa rõ, đang hỏi vận hành. Không tính nhận bàn giao là duyệt công bố, người duyệt xét kết quả để quyết. Ba giờ chiều mai cập nhật phần đã kiểm và việc còn; nếu chưa có trả lời thì nêu lý do chờ với bước xác nhận tiếp. Dự kiến ghi riêng cả phạm vi cho dùng theo giai đoạn.",
+   "min": 250,
+   "tips": [
+    "Bàn giao phải nói đã thống nhất, đã kiểm và còn chờ theo từng loại.",
+    "Hạn cập nhật không được biến thành hứa mọi vấn đề sẽ xong."
+   ],
+   "checklist": [
+    "Ba trạng thái và lúc đổi tồn.",
+    "Ước lượng/ngoài phạm vi.",
+    "Review xong khác liên kết và quy tắc chờ.",
+    "Người duyệt và mốc cập nhật, kể cả khi chưa có trả lời."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “要望” nghĩa là gì?",
+   "o": [
+    "việc cần bên khác hoàn tất trước",
+    "điều người liên quan mong muốn",
+    "kết quả mong theo yêu cầu"
+   ],
+   "a": 1,
+   "e": "要望をすぐ仕様とは呼びません。 → Tôi không gọi mong muốn ngay là đặc tả. Từ cần nhận diện là “要望”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “業務規則” nghĩa là gì?",
+   "o": [
+    "quy tắc công việc dùng sản phẩm",
+    "điều kiện ở ranh giới cần kiểm",
+    "điều kiện được gọi hoàn tất"
+   ],
+   "a": 0,
+   "e": "業務規則を運営側に聞きます。 → Tôi hỏi quy tắc nghiệp vụ với vận hành. Từ cần nhận diện là “業務規則”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “状態遷移” nghĩa là gì?",
+   "o": [
+    "ngoài phạm vi đợt việc",
+    "điểm được chỉ ra khi review",
+    "chuyển giữa các trạng thái đã định"
+   ],
+   "a": 2,
+   "e": "状態遷移を三つに分けます。 → Tôi chia chuyển trạng thái thành ba bước. Từ cần nhận diện là “状態遷移”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “受入基準” nghĩa là gì?",
+   "o": [
+    "trả lại để sửa theo điều kiện",
+    "tiêu chí chấp nhận có thể kiểm",
+    "giả định đứng sau ước lượng"
+   ],
+   "a": 1,
+   "e": "受入基準に拒否の例も入れます。 → Tôi đưa cả ví dụ bị từ chối vào tiêu chí. Từ cần nhận diện là “受入基準”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền làm rõ: 送信したら確約という___ですか。",
+   "a": "意味",
+   "e": "という意味ですか hỏi nội dung từ ngữ trước khi dựng tiêu chí."
+  },
+  {
+   "t": "fill",
+   "q": "Điền giả định: 三状態を___にした見積もりです。",
+   "a": "前提",
+   "e": "前提 giữ điều kiện của hai ngày, đổi phạm vi cần xét lại."
+  },
+  {
+   "t": "fill",
+   "q": "Điền trạng thái: レビュー済みですが、連携は検証___です。",
+   "a": "待ち",
+   "e": "検証待ち là chờ kiểm, không tự thành đã chạy vì review qua."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu nhận không là duyệt dùng.",
+   "w": [
+    "別です。",
+    "受領と",
+    "公開承認は"
+   ],
+   "a": "受領と公開承認は別です。",
+   "e": "Nhận bàn giao và chấp thuận đưa dùng là hai quyết có căn cứ khác."
+  },
+  {
+   "q": "現在の完了範囲はどれですか。",
+   "o": [
+    "例は一つも実行していない",
+    "二例は確認済みで一条件は未確認",
+    "全ての条件が完了"
+   ],
+   "a": 1,
+   "e": "Bằng chứng xác nhận từng phần, không phủ hết hoặc mở thành toàn bộ.",
+   "t": "listen",
+   "say": "二つの例は通りましたが、同時の順番規則は未確認です。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "約束していることは何ですか。",
+   "o": [
+    "結果がなくても状態を更新する",
+    "全課題を必ず三時に解決",
+    "返事まで一切報告しない"
+   ],
+   "a": 0,
+   "e": "Cam kết báo không phải cam kết giải mọi việc, có cách xử lý khi chưa trả lời.",
+   "t": "listen",
+   "say": "明日三時に更新します。返事がなければ理由と次の確認を伝えます。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "完了条件と 残課題を 分けて 引き渡します。",
+   "a": "完了条件と 残課題を 分けて 引き渡します。",
+   "lang": "ja-JP",
+   "e": "Giữ điều kiện xong và việc còn để bên nhận không suy mọi thứ đã được chấp thuận."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "期待結果",
+     "kết quả mong theo yêu cầu"
+    ],
+    [
+     "境界条件",
+     "điều kiện ở ranh giới cần kiểm"
+    ],
+    [
+     "対象外",
+     "ngoài phạm vi đợt việc"
+    ],
+    [
+     "見積前提",
+     "giả định đứng sau ước lượng"
+    ],
+    [
+     "依存作業",
+     "việc cần bên khác hoàn tất trước"
+    ]
+   ],
+   "e": "要望 là mong muốn, 業務規則 đặt hành vi, 状態遷移 chỉ chuyển trạng thái, 受入基準 giúp kiểm và 期待結果 xác định đầu ra; cùng dùng để ngăn từ mơ hồ thành yêu cầu chưa chốt."
+  },
+  {
+   "q": "最初の行き違いは何ですか。",
+   "o": [
+    "道具の名前が全て同じだった",
+    "受付と確約の境界が違った",
+    "全員が同じ定義を確認済みだった"
+   ],
+   "a": 1,
+   "e": "Từ giữ che khác thời điểm nghiệp vụ, cần định nghĩa trước kiểm/ước.",
+   "t": "mc"
+  },
+  {
+   "q": "同時に二人が希望する例はどう扱いましたか。",
+   "o": [
+    "必ず全員に確約した",
+    "順番規則を残課題にした",
+    "期待を勝手に決めた"
+   ],
+   "a": 1,
+   "e": "Điều chưa có quy tắc không được dựng kỳ vọng theo đoán.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Làm phiếu tính năng giả mượn một bộ dụng cụ, bảng ba trạng thái, hai ví dụ xác nhận và một quy tắc đồng thời chưa chốt.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Đọc câu gửi là giữ, đóng vai vận hành/phát triển để hỏi ranh giới trước khi định tiêu chí."
+   },
+   {
+    "t": "30'",
+    "do": "Ôn hỏi yêu cầu, giả định ước lượng, cập nhật daily và phản hồi review qua ba trạng thái cụ thể."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe cuộc bàn giao, ghi loại bằng chứng cho yêu cầu, review, kiểm chạy và quyết đưa dùng."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc hồ sơ, tìm điều chưa định không được tự gán kỳ vọng, dựng bản đồ từ yêu cầu tới nhận bàn giao."
+   },
+   {
+    "t": "30'",
+    "do": "Báo daily theo thẻ mới rồi viết 250–330 chữ; bạn học kiểm hạn cập nhật không bị viết thành hứa giải quyết mọi vấn đề."
+   },
+   {
+    "t": "30'",
+    "do": "Đóng vai bên nhận hỏi lại phần ngoài phạm vi, làm nghe-chính tả và chốt bảng trạng thái có người/hạn."
+   }
+  ],
+  "games": [
+   "Một nhóm giữ yêu cầu, nhóm kia giữ quy tắc, chỉ được ước sau khi hỏi đủ thời điểm xác nhận và giảm số.",
+   "Thẻ xong có review, ví dụ, chạy, nhận; ghép đúng loại bằng chứng thay vì dùng một nhãn hoàn tất chung."
+  ],
+  "errors": [
+   "Đọc gửi là giữ chắc mà chưa hỏi: định nghĩa hai trạng thái trước.",
+   "Ước hai ngày bỏ giả định: ghi ba trạng thái/thông báo cũ.",
+   "Review qua coi chạy qua: giữ bước riêng.",
+   "Nhận bàn giao coi được công bố: hỏi người duyệt và kết quả cần."
+  ],
+  "homework": "Tạo yêu cầu tính năng giả có một từ mơ hồ, viết câu hỏi, ba tiêu chí, ước lượng có giả định và bàn giao có việc chờ người khác."
+ }
+}

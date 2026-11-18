@@ -1,0 +1,616 @@
+{
+ "no": 10,
+ "title": "Gõ kana rồi đọc lại: chữ nhỏ, âm dài và nhịp ん",
+ "sub": "もじを もういちど みます。",
+ "goals": [
+  "Đối chiếu chuỗi muốn viết với chữ đang hiện trước khi xác nhận nhập.",
+  "Phân biệt きゃく và きやく, ほんや và chuỗi làm mất nhịp ん.",
+  "Sửa một phiếu gõ có lỗi âm dài, chữ nhỏ hoặc đục/bán đục mà không đổi ý định ban đầu.",
+  "Nói rõ chỗ cần sửa và hỏi bạn xác nhận phiên bản mới."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Biết đọc một từ chưa bảo đảm gõ ra đúng từ ấy. Bộ gõ có thể chờ thêm ký tự, đưa ra đề xuất hoặc chuyển sang chữ khác. Hãy đọc lại chuỗi kana trước khi xác nhận và đối chiếu với điều mình định viết. Cách bấm chữ nhỏ hay xác nhận n phụ thuộc bộ gõ; bài này luyện kiểm đầu ra, không hứa một tổ hợp phím dùng được ở mọi thiết bị. Ví dụ ほんや cần ho-n-ya, khác chuỗi bỏ mất ん. きゃく có kya-ku hai mora, trong khi きやく là ki-ya-ku ba mora.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>Đọc chính chuỗi đang hiện: きゃく đối chiếu きやく bằng kích thước ゃ/や, メール cần ー để giữ me-e-ru, ファイル có fa-i-ru. Với ほんや, giữ ん một mora trước ya. Dấu nháy trong một số cách nhập Latin như hon'ya chỉ giúp bộ gõ phân ranh giới, không phải dấu được chép vào kana.</p>",
+   "items": [
+    {
+     "sym": "きゃく・きやく",
+     "ex": [
+      "きゃく",
+      "きやく"
+     ],
+     "vi": "Chữ nhỏ làm đổi số mora và nghĩa, không chỉ là kiểu trình bày."
+    },
+    {
+     "sym": "ほんや・メール・ティー",
+     "ex": [
+      "ほんや",
+      "メール",
+      "ティー"
+     ],
+     "vi": "Kiểm cả nhịp mũi và trường âm sau khi nhập, rồi mới xác nhận chuỗi."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "きゃく",
+     "kana": "きゃく",
+     "romaji": "kyaku",
+     "vi": "khách",
+     "ex": "きゃくが きます。",
+     "exVi": "Khách đến."
+    },
+    {
+     "w": "きやく",
+     "kana": "きやく",
+     "romaji": "kiyaku",
+     "vi": "quy ước/điều khoản",
+     "ex": "きやくを よみます。",
+     "exVi": "Tôi đọc quy ước."
+    },
+    {
+     "w": "メール",
+     "kana": "めーる",
+     "romaji": "meeru",
+     "vi": "thư điện tử",
+     "ex": "メールは まだ おくりません。",
+     "exVi": "Tôi chưa gửi thư điện tử."
+    },
+    {
+     "w": "チェック",
+     "kana": "ちぇっく",
+     "romaji": "chekku",
+     "vi": "việc kiểm",
+     "ex": "もじを チェックします。",
+     "exVi": "Tôi kiểm chữ."
+    },
+    {
+     "w": "ファイル",
+     "kana": "ふぁいる",
+     "romaji": "fairu",
+     "vi": "tệp",
+     "ex": "ファイルを ひらきます。",
+     "exVi": "Tôi mở tệp."
+    },
+    {
+     "w": "ティー",
+     "kana": "てぃー",
+     "romaji": "tii",
+     "vi": "trà (từ mượn)",
+     "ex": "ティーの もじを みます。",
+     "exVi": "Tôi nhìn chữ chỉ trà."
+    },
+    {
+     "w": "にゅうりょく",
+     "kana": "にゅうりょく",
+     "romaji": "nyuuryoku",
+     "vi": "việc nhập dữ liệu",
+     "ex": "かなを にゅうりょくします。",
+     "exVi": "Tôi nhập kana."
+    },
+    {
+     "w": "かくにん",
+     "kana": "かくにん",
+     "romaji": "kakunin",
+     "vi": "việc xác nhận",
+     "ex": "さいごに かくにんします。",
+     "exVi": "Cuối cùng tôi xác nhận."
+    },
+    {
+     "w": "もじ",
+     "kana": "もじ",
+     "romaji": "moji",
+     "vi": "chữ",
+     "ex": "もじが おおきいです。",
+     "exVi": "Chữ lớn."
+    },
+    {
+     "w": "けす",
+     "kana": "けす",
+     "romaji": "kesu",
+     "vi": "xóa",
+     "ex": "ちがう もじを けす。",
+     "exVi": "Xóa chữ sai."
+    },
+    {
+     "w": "なおす",
+     "kana": "なおす",
+     "romaji": "naosu",
+     "vi": "sửa",
+     "ex": "メールの もじを なおす。",
+     "exVi": "Sửa chữ trong thư."
+    },
+    {
+     "w": "きって",
+     "kana": "きって",
+     "romaji": "kitte",
+     "vi": "tem",
+     "ex": "この きっては あおいです。",
+     "exVi": "Con tem này màu xanh."
+    },
+    {
+     "w": "ほんや",
+     "kana": "ほんや",
+     "romaji": "hon'ya",
+     "vi": "cửa hàng sách",
+     "ex": "ほんやで ノートを かいます。",
+     "exVi": "Tôi mua vở ở tiệm sách."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Tên chữ và nghĩa của từ cần được kiểm riêng. “ゃを小さくする” là sửa kích thước chữ để được âm ghép; không phải đổi cả từ theo suy đoán. “まだ送らない” giữ việc chưa gửi: cần kiểm trước khi làm bước tiếp theo. Các mẫu もう一度見ます/直します ở đây dùng như lời báo thao tác ngắn, giúp người cùng kiểm biết bản nào đang được nói tới.</p>",
+   "table": [
+    [
+     "Cặp cần so",
+     "Điểm khác"
+    ],
+    [
+     "きゃく / きやく",
+     "ゃ nhỏ / や lớn, hai / ba mora"
+    ],
+    [
+     "メール / メル",
+     "Có / thiếu độ dài e"
+    ],
+    [
+     "きって / きて",
+     "Có / thiếu nhịp giữ"
+    ],
+    [
+     "ほんや / ほにゃ",
+     "Có / mất nhịp ん"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "もじを もういちど みます。",
+     "vi": "Tôi xem chữ thêm một lần."
+    },
+    {
+     "t": "ちがう もじを なおします。",
+     "vi": "Tôi sửa chữ sai."
+    },
+    {
+     "t": "メールは まだ おくりません。",
+     "vi": "Tôi chưa gửi thư điện tử."
+    },
+    {
+     "t": "ほんやで ノートを かいます。",
+     "vi": "Tôi mua vở ở cửa hàng sách."
+    }
+   ],
+   "tips": [
+    "<p>Không đổi chữ chỉ vì bộ gõ đề xuất đầu tiên: đọc chuỗi theo nghĩa của tình huống.</p>",
+    "<p>Khi cần n trước nguyên âm hoặc y, xem hướng dẫn bộ gõ đang dùng và kiểm kana; đừng coi mọi chuỗi Latin là phát âm.</p>",
+    "<p>Sau sửa, đọc lại cả từ thay vì chỉ nhìn một chữ vừa đổi; có thể đã làm mất ー ở vị trí khác.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Nghe để biết tệp đã gửi chưa, chữ nhỏ nào cần sửa và việc người viết làm sau nhập.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "この ファイルを いま おくりますか。",
+     "vi": "Bạn gửi tệp này ngay à?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "いいえ。もじを チェックしてからです。",
+     "vi": "Không. Sau khi kiểm chữ mới gửi."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "ここは「きゃく」ですか、「きやく」ですか。",
+     "vi": "Ở đây là khách hay quy ước?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "「きゃく」です。「ゃ」を ちいさく なおします。",
+     "vi": "Là khách. Tôi sửa ゃ nhỏ."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "この「メール」には「ー」が ありますね。",
+     "vi": "Trong chữ thư điện tử này có ー nhỉ."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。「ティー」にも「ー」が あります。",
+     "vi": "Vâng. Chữ trà cũng có ー."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "「ほんや」の「ん」も かくにんしますか。",
+     "vi": "Bạn cũng kiểm ん trong cửa hàng sách à?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。にゅうりょくの あとで、もういちど よみます。",
+     "vi": "Vâng. Sau khi nhập tôi đọc lại một lần."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Tệp có được gửi ngay không?",
+     "o": [
+      "Đã gửi trước kiểm",
+      "Không có tệp",
+      "Chưa, cần kiểm chữ"
+     ],
+     "a": 2,
+     "e": "Người đáp nói sau khi kiểm chữ mới gửi."
+    },
+    {
+     "q": "Từ chỉ khách cần chữ nào nhỏ?",
+     "o": [
+      "ん",
+      "ゃ",
+      "つ"
+     ],
+     "a": 1,
+     "e": "きゃく dùng ゃ nhỏ; きやく là từ khác."
+    },
+    {
+     "q": "Sau nhập, người đáp làm gì?",
+     "o": [
+      "Đọc lại một lần",
+      "Xóa toàn bộ tệp",
+      "Chỉ tin đề xuất đầu"
+     ],
+     "a": 0,
+     "e": "Lượt cuối nói にゅうりょくのあとでもういちどよみます."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "わたしは ファイルに かなを にゅうりょくします。\n\nさいしょは「きやく」と かきました。\n\nでも、ここは「きゃく」です。もじを なおします。\n\n「メール」と「ティー」の「ー」も チェックします。\n\nきっての「っ」は ちいさいです。\n\nほんやの「ん」は けしません。\n\nぜんぶ よんでから、かくにんします。",
+   "vi": "Tôi nhập kana vào tệp.\n\nBan đầu tôi viết きやく.\n\nNhưng ở đây cần từ khách. Tôi sửa chữ.\n\nTôi cũng kiểm ー trong chữ thư điện tử và trà.\n\nChữ っ của tem là chữ nhỏ.\n\nTôi không xóa ん của cửa hàng sách.\n\nĐọc hết rồi tôi xác nhận.",
+   "gloss": [
+    {
+     "w": "きゃく",
+     "kana": "きゃく",
+     "romaji": "kyaku",
+     "vi": "khách"
+    },
+    {
+     "w": "きやく",
+     "kana": "きやく",
+     "romaji": "kiyaku",
+     "vi": "quy ước/điều khoản"
+    },
+    {
+     "w": "メール",
+     "kana": "めーる",
+     "romaji": "meeru",
+     "vi": "thư điện tử"
+    },
+    {
+     "w": "チェック",
+     "kana": "ちぇっく",
+     "romaji": "chekku",
+     "vi": "việc kiểm"
+    },
+    {
+     "w": "ファイル",
+     "kana": "ふぁいる",
+     "romaji": "fairu",
+     "vi": "tệp"
+    },
+    {
+     "w": "ティー",
+     "kana": "てぃー",
+     "romaji": "tii",
+     "vi": "trà (từ mượn)"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Ban đầu người kể viết từ nào?",
+     "o": [
+      "きゃく",
+      "きって",
+      "きやく"
+     ],
+     "a": 2,
+     "e": "Đoạn đầu ghi さいしょは「きやく」とかきました."
+    },
+    {
+     "q": "Trong ほんや có xóa ん không?",
+     "o": [
+      "Thay bằng ー",
+      "Không",
+      "Có"
+     ],
+     "a": 1,
+     "e": "Câu ほんやの「ん」はけしません giữ nhịp mũi."
+    },
+    {
+     "q": "Trước xác nhận cần làm gì?",
+     "o": [
+      "Đọc lại toàn bộ",
+      "Chỉ xem chữ đầu",
+      "Gửi tệp trước"
+     ],
+     "a": 0,
+     "e": "ぜんぶよんでから nêu thứ tự rõ."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Bạn thấy người kia viết きて nhưng muốn nói tem. Xin sửa っ nhỏ và đọc lại.",
+     "model": "ここは「きって」です。ちいさい「っ」を かいてください。もういちど よみましょう。",
+     "vi": "Ở đây là tem. Xin viết っ nhỏ. Ta đọc lại một lần nhé.",
+     "tips": "Đừng chỉ nói sai rồi; nêu chữ cần thêm và nghĩa của từ."
+    },
+    {
+     "p": "Bạn báo chưa gửi thư vì đang kiểm ー và ん.",
+     "model": "メールは まだ おくりません。「ー」と「ん」を チェックします。",
+     "vi": "Tôi chưa gửi thư. Tôi kiểm ー và ん.",
+     "tips": "Giữ rõ まだ để đối phương không tưởng thao tác gửi đã xong."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết một lời nhắn ba câu: bạn chưa gửi tệp; bạn đang sửa きやく thành きゃく; sau đó bạn sẽ đọc lại toàn bộ. Có thể giữ hai chuỗi trong dấu ngoặc Nhật để người nhận nhìn đúng chữ.",
+   "model": "ファイルは まだ おくりません。「きやく」を「きゃく」に なおします。それから、ぜんぶ もういちど よみます。",
+   "modelVi": "Tôi chưa gửi tệp. Tôi sửa きやく thành きゃく. Sau đó tôi đọc lại toàn bộ một lần.",
+   "min": 30,
+   "tips": [
+    "Viết cả dạng trước và sau để người nhận biết thay chữ nào, không chỉ ghi đã sửa.",
+    "Không thêm tên hoặc địa chỉ thư thật; dùng lời nhắn trong tình huống giả của lớp."
+   ],
+   "checklist": [
+    "Có まだ để nêu chưa gửi.",
+    "Chuỗi trước có や lớn, chuỗi sau có ゃ nhỏ.",
+    "Có bước đọc lại toàn bộ sau khi sửa.",
+    "Không làm mất ー trong từ メール nếu dùng từ đó."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “きゃく” nghĩa là gì?",
+   "o": [
+    "tệp",
+    "chữ",
+    "khách"
+   ],
+   "a": 2,
+   "e": "きゃくが きます。 → Khách đến. Từ cần nhận diện là “きゃく”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “きやく” nghĩa là gì?",
+   "o": [
+    "xóa",
+    "quy ước/điều khoản",
+    "trà (từ mượn)"
+   ],
+   "a": 1,
+   "e": "きやくを よみます。 → Tôi đọc quy ước. Từ cần nhận diện là “きやく”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “メール” nghĩa là gì?",
+   "o": [
+    "thư điện tử",
+    "việc nhập dữ liệu",
+    "sửa"
+   ],
+   "a": 0,
+   "e": "メールは まだ おくりません。 → Tôi chưa gửi thư điện tử. Từ cần nhận diện là “メール”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “チェック” nghĩa là gì?",
+   "o": [
+    "việc xác nhận",
+    "tem",
+    "việc kiểm"
+   ],
+   "a": 2,
+   "e": "もじを チェックします。 → Tôi kiểm chữ. Từ cần nhận diện là “チェック”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền chữ nhỏ để viết “khách”: き___く",
+   "a": "ゃ",
+   "e": "きゃく dùng ゃ nhỏ và có hai mora; や lớn thành きやく, nghĩa khác."
+  },
+  {
+   "t": "fill",
+   "q": "Điền dấu kéo dài trong thư điện tử: メ___ル",
+   "a": "ー",
+   "e": "メール cần kéo dài e. Không thay dấu dài bằng một phụ âm."
+  },
+  {
+   "t": "fill",
+   "q": "Điền âm mũi của cửa hàng sách: ほ___や",
+   "a": "ん",
+   "e": "ほんや có nhịp ん trước や, không ghép thành ほにゃ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu nói chưa gửi tệp.",
+   "w": [
+    "おくりません。",
+    "ファイルは",
+    "まだ"
+   ],
+   "a": "ファイルはまだおくりません。",
+   "e": "まだ đứng trước động từ phủ định để nêu thao tác vẫn chưa làm."
+  },
+  {
+   "q": "Vật ở trên bàn là gì?",
+   "o": [
+    "Thư điện tử",
+    "Quy ước",
+    "Tem"
+   ],
+   "a": 2,
+   "e": "きって là tem; câu nghe mới không nói tới tệp hay điều khoản.",
+   "t": "listen",
+   "say": "この きっては つくえの うえです。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "Thứ tự thao tác nào đúng?",
+   "o": [
+    "Không đọc nhưng gửi",
+    "Đọc chữ rồi gửi",
+    "Gửi rồi mới đọc"
+   ],
+   "a": 1,
+   "e": "よんでから đặt việc đọc trước việc gửi.",
+   "t": "listen",
+   "say": "もじを よんでから、おくります。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "ほんやで きってを みます。",
+   "a": "ほんやで きってを みます。",
+   "lang": "ja-JP",
+   "e": "Câu nói xem tem ở tiệm sách. Chép đủ ん trong ほんや và っ nhỏ trong きって."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "ファイル",
+     "tệp"
+    ],
+    [
+     "ティー",
+     "trà (từ mượn)"
+    ],
+    [
+     "にゅうりょく",
+     "việc nhập dữ liệu"
+    ],
+    [
+     "かくにん",
+     "việc xác nhận"
+    ],
+    [
+     "もじ",
+     "chữ"
+    ]
+   ],
+   "e": "ファイル là vật chứa, にゅうりょく là thao tác nhập và かくにん là xác nhận; ba nghĩa này không thể tráo chỉ vì cùng xuất hiện trong quy trình."
+  },
+  {
+   "q": "Ban đầu người kể viết từ nào?",
+   "o": [
+    "きゃく",
+    "きって",
+    "きやく"
+   ],
+   "a": 2,
+   "e": "Đoạn đầu ghi さいしょは「きやく」とかきました.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong ほんや có xóa ん không?",
+   "o": [
+    "Có",
+    "Thay bằng ー",
+    "Không"
+   ],
+   "a": 2,
+   "e": "Câu ほんやの「ん」はけしません giữ nhịp mũi.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Chuẩn bị phiếu có きやく/きゃく, メル/メール, きて/きって và ほにゃ/ほんや; dùng văn bản giả không có địa chỉ thật.",
+  "steps": [
+   {
+    "t": "10'",
+    "do": "Cho xem hai chuỗi きゃく và きやく, hỏi chúng khác chữ nào và có thể mang cùng nghĩa không."
+   },
+   {
+    "t": "20'",
+    "do": "Dạy từ thao tác にゅうりょく, けす, なおす, かくにん bằng các phiếu giấy để không phụ thuộc một bộ gõ."
+   },
+   {
+    "t": "25'",
+    "do": "Giải thích quy trình nhìn đầu ra rồi xác nhận; đối chiếu ゃ nhỏ, ー và ん bằng ba cặp từ khác nhau."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe cuộc trao đổi về tệp chưa gửi; học viên đánh dấu thao tác đã làm và chưa làm."
+   },
+   {
+    "t": "15'",
+    "do": "Mỗi cặp giữ một bản gõ khác; người nghe chỉ sửa sau khi người nói nêu rõ chuỗi muốn viết."
+   },
+   {
+    "t": "15'",
+    "do": "Buổi sau cho đọc lại ほんや và きって từ trí nhớ, kiểm nhịp mũi và nhịp giữ trước khi cho xem phiếu."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc nhật ký sửa きやく; tìm đúng việc đầu tiên sai và việc người kể cố ý giữ nguyên."
+   },
+   {
+    "t": "20'",
+    "do": "Nhập vai người soát chữ: xin thêm っ nhỏ, rồi nhắc chưa gửi cho tới khi đọc lại hết."
+   },
+   {
+    "t": "20'",
+    "do": "Viết lời nhắn ba câu có chuỗi trước/sau; bạn cùng lớp phải chỉ được chính xác chữ đã thay."
+   },
+   {
+    "t": "15'",
+    "do": "Làm hai câu nghe mới rồi chữa thứ tự よんでから; chốt mỗi người một bước tự kiểm phù hợp bộ gõ của mình."
+   }
+  ],
+  "games": [
+   "Phiếu phiên bản: hai nhóm đổi bản trước và sau, hỏi để xác nhận từng chữ được sửa thay vì tìm lỗi bằng hình thức.",
+   "Đọc rồi mới xác nhận: người đọc được quyền yêu cầu dừng nếu nghĩa chuỗi đang hiện khác tranh cần gọi tên."
+  ],
+  "errors": [
+   "Cho rằng đề xuất đầu của bộ gõ luôn đúng: đối chiếu chuỗi với nghĩa cần nói.",
+   "Xem ゃ nhỏ như trang trí: nó phân biệt きゃく với きやく cả nhịp lẫn nghĩa.",
+   "Xóa ん trong ほんや khi âm nối nhanh: giữ mora mũi trước や.",
+   "Báo đã gửi khi mới chuẩn bị tệp: dùng まだ với phủ định và nhắc bước kiểm còn lại."
+  ],
+  "homework": "Tự tạo hai phiếu giả, mỗi phiếu có một lỗi chữ nhỏ hoặc âm dài. Nhờ bạn đọc, ghi lời xin sửa rồi viết bản cuối kèm một câu xác nhận chưa gửi."
+ }
+}

@@ -1,0 +1,220 @@
+{
+ "no": 41,
+ "lv": "it",
+ "title": "Bên gọi cũ từ chối giá trị mới: hỏi trước khi hứa tương thích",
+ "sub": "仮の予約応答に備考を加え、状態にも保留を追加したいです。既存の項目を消さないので互換性は保てると考えています。",
+ "situation": "Nhóm giả bàn phản hồi API của phiếu đặt phòng học. Bên gọi trong tình huống này bỏ trường lạ nhưng chỉ chấp nhận hai giá trị trạng thái; họ tách hai loại thay đổi và định kiểm trước chuyển.",
+ "lang": "ja-JP",
+ "lines": [
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "仮の予約応答に備考を加え、状態にも保留を追加したいです。既存の項目を消さないので互換性は保てると考えています。",
+   "vi": "Tôi muốn thêm ghi chú và trạng thái chờ vào phản hồi đặt giả. Không bỏ trường cũ nên nghĩ tương thích."
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "今回の旧呼出側は未知項目を無視しますが、状態は二種類だけを受け入れます。項目の追加と列挙値の追加を分けて確認したいです。",
+   "vi": "Bên gọi cũ lần này bỏ trường lạ nhưng chỉ nhận hai trạng thái. Cần tách thêm trường và thêm giá trị."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "では、備考があっても旧側は読まないだけですね。空の文字列と項目なしも同じとしてよいでしょうか。",
+   "vi": "Vậy có ghi chú thì cũ chỉ không đọc. Có thể coi chuỗi rỗng với không có trường giống không?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "旧側が無視しても、新側の表示では違うかもしれません。今回の契約で同じと定義するか、例と期待結果を先に決めましょう。",
+   "vi": "Dù cũ bỏ qua, mới hiển thị có thể khác. Cần định trong hợp đồng bài có giống không và chốt ví dụ/kỳ vọng."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "保留を受け取った旧側はエラーになるので、その追加だけを次の変更へ分ける案を出します。備考の例は今日承認してもらいます。",
+   "vi": "Cũ gặp chờ thì lỗi, nên tôi đề xuất tách giá trị ấy lần sau. Ví dụ ghi chú nhờ duyệt hôm nay."
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "賛成です。ただ、例を承認したことと実行したことは別です。新旧両方で、どの版の規則を使ったかを記録してください。",
+   "vi": "Tôi đồng ý. Nhưng duyệt ví dụ khác chạy. Hãy ghi dùng phiên quy tắc nào ở cả mới/cũ."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "提供側の試験は通っています。旧側の担当が明日まで不在なので、今日の切替は行わず、結果を待つ形にします。",
+   "vi": "Kiểm cung cấp đã qua. Phụ trách cũ vắng tới mai nên hôm nay không chuyển, đợi kết quả."
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "ありがとうございます。期限が来たから旧形式を消すのではなく、残る利用と試験の完了を切替担当が確認する条件も必要です。",
+   "vi": "Cảm ơn. Không vì tới hạn xóa dạng cũ; cần người quyết kiểm dùng còn và kiểm xong."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "併存は十日間の案ですが、未確認が残れば日程を見直すと書きます。誰が承認し、誰が実行するかも別欄にします。",
+   "vi": "Song song đề xuất mười ngày, còn chưa kiểm thì xét lịch. Ai duyệt/ai chạy cũng riêng."
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "はい。互換性という一語だけで済ませず、どの呼出側でどの入力を確認したかが追える報告にしたいです。",
+   "vi": "Vâng. Thay một chữ tương thích, cần báo lần được bên gọi/đầu vào nào đã kiểm."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "明日の午後二時に、実行結果か、まだ待っている項目を更新します。実接続先や利用者の値は例に入れません。",
+   "vi": "Hai giờ chiều mai báo kết quả hoặc mục còn đợi, không đưa kết nối/giá trị người thật vào ví dụ."
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "その内容でお願いします。保留という新値を今回は出さないことも、合意事項として残してください。",
+   "vi": "Nhờ làm vậy. Cũng giữ đã thống nhất không trả giá trị chờ mới trong lần này."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "未知項目を無視する",
+   "vi": "bỏ qua trường chưa biết",
+   "note": "Dữ kiện riêng bên gọi ở tình huống này, khác chủ đề bài học có bên từ chối."
+  },
+  {
+   "t": "列挙値の追加",
+   "vi": "thêm giá trị vào tập liệt kê",
+   "note": "Khác thêm một trường có thể bị bỏ qua."
+  },
+  {
+   "t": "項目なしと空文字列",
+   "vi": "vắng trường và chuỗi rỗng",
+   "note": "Cần kỳ vọng riêng cho bên quan tâm hiển thị."
+  },
+  {
+   "t": "例の承認と実行",
+   "vi": "duyệt ví dụ với chạy kiểm",
+   "note": "Có người và bằng chứng hoàn tất khác nhau."
+  },
+  {
+   "t": "併存は十日間の案",
+   "vi": "đề xuất song song mười ngày",
+   "note": "Khoảng dự kiến cần điều kiện kết thúc, không tự động xóa."
+  },
+  {
+   "t": "切替担当が確認する",
+   "vi": "người quyết chuyển kiểm điều kiện",
+   "note": "Không để một phía tự hứa tương thích toàn bộ."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Cũ xử lý trường lạ thế nào?",
+   "o": [
+    "Xóa mọi dữ liệu",
+    "Bỏ qua",
+    "Từ chối mọi trường lạ"
+   ],
+   "a": 1,
+   "e": "Đây là dữ kiện biến thể, không lặp cũ từ chối trường của bài học."
+  },
+  {
+   "q": "Thay đổi nào tách sang lần sau?",
+   "o": [
+    "Trạng thái chờ",
+    "Ghi chú đã có",
+    "Mọi mã định danh"
+   ],
+   "a": 0,
+   "e": "Cũ nhận hai trạng thái nên không thêm chờ lần này."
+  },
+  {
+   "q": "Chuỗi rỗng/vắng có tự giống không?",
+   "o": [
+    "Luôn giống mọi API",
+    "Không bao giờ cần xét",
+    "Chưa, cần định kỳ vọng phía quan tâm"
+   ],
+   "a": 2,
+   "e": "Cũ bỏ không quyết hiển thị mới, phải hợp đồng cụ thể."
+  },
+  {
+   "q": "Vì sao chưa chuyển hôm nay?",
+   "o": [
+    "Đã hủy tính năng mãi",
+    "Chờ kiểm phía cũ có phụ trách vắng",
+    "Cung cấp chưa viết gì"
+   ],
+   "a": 1,
+   "e": "Kiểm cung cấp qua không thay bên gọi cũ."
+  },
+  {
+   "q": "Song song đề xuất bao lâu?",
+   "o": [
+    "Mười ngày",
+    "Hai tuần",
+    "Không hạn"
+   ],
+   "a": 0,
+   "e": "Lời thoại nêu 十日間の案, có điều kiện xét lại."
+  },
+  {
+   "q": "Lần báo tiếp khi nào?",
+   "o": [
+    "Hai giờ hôm nay",
+    "Chỉ khi mọi thứ xong",
+    "Hai giờ chiều mai"
+   ],
+   "a": 2,
+   "e": "Mốc báo có thể gồm cả mục còn chờ, không phụ thuộc phải có kết quả xong."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "Điền tách thay đổi: 項目と値を___確認します。",
+   "a": "分けて",
+   "e": "分けて tránh lấy trường bị bỏ qua để chứng minh giá trị mới được chấp nhận."
+  },
+  {
+   "t": "fill",
+   "q": "Điền trước chuyển: 結果がそろう___切り替えません。",
+   "a": "までは",
+   "e": "までは giữ chặn tới khi đủ kết quả, không chuyển chỉ theo ngày."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu lần này không trả giá trị mới.",
+   "w": [
+    "返しません。",
+    "今回は",
+    "新しい値を"
+   ],
+   "a": "今回は新しい値を返しません。",
+   "e": "Phạm vi 今回 giới hạn quyết định, không tự cấm mọi đợt sau."
+  },
+  {
+   "t": "dict",
+   "say": "新旧の 規則と 実行結果を 記録します。",
+   "a": "新旧の 規則と 実行結果を 記録します。",
+   "lang": "ja-JP",
+   "e": "Phiên quy tắc và kết quả giúp người sau theo đúng bên đã kiểm, không dùng một chữ tương thích chung."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Thẻ mới: cũ từ chối cả trường lạ và giá trị mới. Báo hai tác động và đề nghị giữ dạng cũ trước kiểm.",
+   "model": "今回の旧側は未知項目も新しい状態値も拒否します。二つを別の差分として記録し、旧形式を残す案を出します。例と期待結果を合意して実行結果がそろうまでは切り替えません。",
+   "vi": "Cũ lần này từ chối cả trường lạ/trạng thái mới. Ghi hai phần khác, đề xuất giữ cũ; chốt kỳ vọng và đủ kết quả rồi chuyển."
+  },
+  {
+   "p": "Bạn chỉ có duyệt ví dụ, chưa chạy kiểm. Báo đúng mốc cập nhật 16 giờ ngày mai và không hứa kiểm đã qua.",
+   "model": "例は承認済みですが、旧側での実行はまだです。明日の午後四時に結果か未完了の理由を更新します。承認を実行済みとは書かず、切替判断は結果を見て担当者へ依頼します。",
+   "vi": "Ví dụ đã duyệt nhưng phía cũ chưa chạy. 16 giờ ngày mai tôi báo kết quả hoặc lý do chưa xong. Tôi không ghi duyệt thành đã chạy; người phụ trách sẽ xem kết quả để quyết chuyển."
+  }
+ ]
+}

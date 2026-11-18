@@ -1,0 +1,585 @@
+{
+ "no": 17,
+ "title": "Vì sao chọn lớp này: hỏi lý do và cách đi",
+ "sub": "教室が 近いですから、歩いて 行きます。",
+ "goals": [
+  "Chọn どうして để hỏi lý do, どう để hỏi cách và どんな để hỏi loại/đặc điểm.",
+  "Nối lý do trước kết quả bằng から.",
+  "Giải thích lựa chọn lớp dựa vào giờ, đường đi và không gian.",
+  "Hỏi thêm một thông tin còn thiếu thay vì tự suy ra."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Ba câu hỏi cùng bắt đầu bằng ど nhưng cần ba kiểu trả lời khác nhau. どうして hỏi vì sao, nên câu trả lời có thể là 近いですから. どうやって行きますか hỏi cách đi, cần phương tiện hoặc tuyến đường. どんな教室ですか hỏi đặc điểm phòng học, cần mô tả như 静かな教室です. Khi tư vấn lớp giả trong bài, phải dựa vào điều người hỏi cần chứ không chọn chỉ theo sở thích của mình.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>どうして có do-o-shi-te, giữ trường âm o. どんな có nhịp ん giữa do và na; không đọc thành どな. 便利 đọc べんり, giữ một nhịp mũi trước r mà không thêm nguyên âm. Trong ～ですから, đọc から nối với lý do, nghỉ nhẹ trước kết quả để người nghe thấy quan hệ hai ý.</p>",
+   "items": [
+    {
+     "sym": "どうして・どんな",
+     "ex": [
+      "どうして",
+      "どんな"
+     ],
+     "vi": "Một bên có nguyên âm dài, một bên có nhịp mũi; không bỏ phần giữa khi nói nhanh."
+    },
+    {
+     "sym": "便利・近い",
+     "ex": [
+      "べんり",
+      "ちかい"
+     ],
+     "vi": "べんり giữ nhịp ん, còn ちかい có ka-i hai mora rõ ở cuối."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "どうして",
+     "kana": "どうして",
+     "romaji": "dooshite",
+     "vi": "vì sao",
+     "ex": "どうして この 本を 選びましたか。",
+     "exVi": "Vì sao bạn chọn quyển sách này?"
+    },
+    {
+     "w": "どうやって",
+     "kana": "どうやって",
+     "romaji": "dooyatte",
+     "vi": "bằng cách nào",
+     "ex": "どうやって 受付へ 行きますか。",
+     "exVi": "Đi đến quầy tiếp nhận bằng cách nào?"
+    },
+    {
+     "w": "どんな",
+     "kana": "どんな",
+     "romaji": "donna",
+     "vi": "loại nào/như thế nào",
+     "ex": "どんな 部屋が いいですか。",
+     "exVi": "Bạn thích phòng như thế nào?"
+    },
+    {
+     "w": "近い",
+     "kana": "ちかい",
+     "romaji": "chikai",
+     "vi": "gần",
+     "ex": "家から 教室は 近いです。",
+     "exVi": "Từ nhà đến lớp gần."
+    },
+    {
+     "w": "遠い",
+     "kana": "とおい",
+     "romaji": "tooi",
+     "vi": "xa",
+     "ex": "駅は 少し 遠いです。",
+     "exVi": "Ga hơi xa."
+    },
+    {
+     "w": "便利",
+     "kana": "べんり",
+     "romaji": "benri",
+     "vi": "thuận tiện",
+     "ex": "この 道は 便利です。",
+     "exVi": "Đường này thuận tiện."
+    },
+    {
+     "w": "にぎやか",
+     "kana": "にぎやか",
+     "romaji": "nigiyaka",
+     "vi": "nhộn nhịp",
+     "ex": "昼の 広場は にぎやかです。",
+     "exVi": "Quảng trường buổi trưa nhộn nhịp."
+    },
+    {
+     "w": "選ぶ",
+     "kana": "えらぶ",
+     "romaji": "erabu",
+     "vi": "chọn",
+     "ex": "時間を 見て クラスを 選びます。",
+     "exVi": "Tôi xem giờ rồi chọn lớp."
+    },
+    {
+     "w": "歩く",
+     "kana": "あるく",
+     "romaji": "aruku",
+     "vi": "đi bộ",
+     "ex": "橋まで 歩きます。",
+     "exVi": "Tôi đi bộ đến cầu."
+    },
+    {
+     "w": "橋",
+     "kana": "はし",
+     "romaji": "hashi",
+     "vi": "cầu",
+     "ex": "橋を 渡ります。",
+     "exVi": "Tôi qua cầu."
+    },
+    {
+     "w": "道",
+     "kana": "みち",
+     "romaji": "michi",
+     "vi": "đường",
+     "ex": "この 道は 明るいです。",
+     "exVi": "Con đường này sáng."
+    },
+    {
+     "w": "料金",
+     "kana": "りょうきん",
+     "romaji": "ryookin",
+     "vi": "chi phí/mức phí",
+     "ex": "料金を 先に 聞きます。",
+     "exVi": "Tôi hỏi mức phí trước."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Lý do + から + kết quả: 近いですから、歩きます. Giữ dạng lịch sự です/ます trong các câu nhận diện đầu tiên; cũng có dạng thông thường 近いから. Với danh từ hoặc tính từ な trong dạng thường dùng 便利だから, không phải 便利から. どんな đứng trước danh từ như どんな部屋; どう thường hỏi đánh giá hoặc tình hình như 都合はどうですか, vì vậy không thay máy móc vào mọi vị trí của どんな.</p>",
+   "table": [
+    [
+     "Điều muốn biết",
+     "Câu hỏi",
+     "Loại câu trả lời"
+    ],
+    [
+     "Lý do",
+     "どうして選びますか",
+     "近いですから"
+    ],
+    [
+     "Cách đi",
+     "どうやって行きますか",
+     "歩いて行きます"
+    ],
+    [
+     "Đặc điểm",
+     "どんな教室ですか",
+     "静かな教室です"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "教室が 近いですから、歩いて 行きます。",
+     "vi": "Vì lớp gần nên tôi đi bộ đến."
+    },
+    {
+     "t": "どうして 夜の クラスを 選びますか。",
+     "vi": "Vì sao bạn chọn lớp buổi tối?"
+    },
+    {
+     "t": "どんな 教室ですか。",
+     "vi": "Đó là phòng học như thế nào?"
+    },
+    {
+     "t": "料金は まだ わかりません。",
+     "vi": "Tôi vẫn chưa biết mức phí."
+    }
+   ],
+   "tips": [
+    "<p>“Thế nào” trong tiếng Việt có thể dùng rộng; xác định đang hỏi loại phòng hay cách đi trước khi chọn từ Nhật.</p>",
+    "<p>Không đảo lý do và kết quả quanh から: phần đứng ngay trước から là lý do.</p>",
+    "<p>Không tự suy ra rẻ từ gần; chi phí là trường thông tin riêng cần hỏi.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Người chọn lớp giải thích ràng buộc giờ làm, mô tả phòng và tách điều chưa biết về học phí.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "どうして こちらの クラスを 選びましたか。",
+     "vi": "Vì sao bạn chọn lớp này?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "午前は 仕事が ありますから。夜なら 行くことが できます。",
+     "vi": "Vì buổi sáng tôi có việc. Nếu buổi tối thì tôi đến được."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "どんな 教室ですか。",
+     "vi": "Phòng học như thế nào?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "小さくて 静かな 教室です。大きい クラスでは ありません。",
+     "vi": "Phòng học nhỏ và yên tĩnh. Không phải lớp lớn."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "家から どうやって 行きますか。",
+     "vi": "Từ nhà bạn đi bằng cách nào?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "橋まで 歩いて、それから バスに 乗ります。",
+     "vi": "Tôi đi bộ đến cầu, sau đó lên xe buýt."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "近いですか。料金も 安いですか。",
+     "vi": "Có gần không? Mức phí cũng rẻ à?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "近くは ありません。料金は まだ 聞いていません。あした 確認します。",
+     "vi": "Không gần. Tôi chưa hỏi mức phí. Ngày mai tôi sẽ xác nhận."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Lý do chọn lớp tối là gì?",
+     "o": [
+      "Biết chắc mức phí rẻ",
+      "Buổi sáng có việc",
+      "Lớp gần nhà"
+     ],
+     "a": 1,
+     "e": "午前は仕事がありますから trả lời lý do lựa chọn thời gian."
+    },
+    {
+     "q": "Cách đi nào được mô tả?",
+     "o": [
+      "Đi bộ đến cầu rồi xe buýt",
+      "Chỉ đi bộ đến lớp",
+      "Xe buýt rồi qua cầu đi bộ"
+     ],
+     "a": 0,
+     "e": "橋まで歩いて、それからバスに乗ります cho biết thứ tự rõ."
+    },
+    {
+     "q": "Thông tin nào còn chưa biết?",
+     "o": [
+      "Lớp lớn hay nhỏ",
+      "Thời điểm có thể đến",
+      "Mức phí"
+     ],
+     "a": 2,
+     "e": "料金はまだ聞いていません thể hiện người nói chưa xác nhận giá."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "来月から 日本語の クラスに 行きたいです。案内には 二つの クラスが あります。午前の クラスは 大きくて、家から 近いです。夜の クラスは 小さくて 静かですが、少し 遠いです。わたしは 午前に 働いていますから、夜を 選びます。\n\n道は 二つ あります。駅から バスで 行くと 二十分です。橋まで 歩いてから バスに 乗ると、三十分 かかりますが、料金は 少し 安いです。雨の 日は 駅から 行きます。天気が いい 日は 少し 歩きたいです。\n\n教室の 写真だけでは 机の 大きさは わかりません。長い ノートを 使いますから、机について 聞きたいです。料金と 休みの 日も 確認します。静かな 写真が あるから、いつも 静かだとは 決めません。初めての 日に、自分で 教室を 見ます。",
+   "vi": "Từ tháng sau tôi muốn đi học tiếng Nhật. Tờ giới thiệu có hai lớp. Lớp sáng lớn và gần nhà. Lớp tối nhỏ, yên tĩnh nhưng hơi xa. Vì tôi làm việc buổi sáng nên chọn lớp tối.\n\nCó hai đường. Đi xe buýt từ ga mất hai mươi phút. Đi bộ đến cầu rồi lên xe buýt mất ba mươi phút nhưng chi phí hơi rẻ hơn. Ngày mưa tôi đi từ ga. Ngày trời đẹp tôi muốn đi bộ một đoạn.\n\nChỉ nhìn ảnh phòng học thì chưa biết kích thước bàn. Vì tôi dùng vở dài nên muốn hỏi về bàn. Tôi cũng kiểm mức phí và ngày nghỉ. Không phải có ảnh yên tĩnh là tôi kết luận lúc nào cũng yên tĩnh. Ngày đầu tôi tự xem phòng học.",
+   "gloss": [
+    {
+     "w": "近い",
+     "kana": "ちかい",
+     "romaji": "chikai",
+     "vi": "gần"
+    },
+    {
+     "w": "遠い",
+     "kana": "とおい",
+     "romaji": "tooi",
+     "vi": "xa"
+    },
+    {
+     "w": "橋",
+     "kana": "はし",
+     "romaji": "hashi",
+     "vi": "cầu"
+    },
+    {
+     "w": "道",
+     "kana": "みち",
+     "romaji": "michi",
+     "vi": "đường"
+    },
+    {
+     "w": "料金",
+     "kana": "りょうきん",
+     "romaji": "ryookin",
+     "vi": "chi phí/mức phí"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Vì sao chọn lớp tối dù hơi xa?",
+     "o": [
+      "Lớp tối chắc chắn miễn phí",
+      "Buổi sáng phải làm việc",
+      "Lớp sáng không có bàn"
+     ],
+     "a": 1,
+     "e": "Lý do được nêu trực tiếp là 午前に働いていますから."
+    },
+    {
+     "q": "Đường qua cầu có đặc điểm gì?",
+     "o": [
+      "Lâu hơn nhưng hơi rẻ hơn",
+      "Nhanh hơn và đắt hơn",
+      "Không dùng xe buýt"
+     ],
+     "a": 0,
+     "e": "Đối chiếu ba mươi với hai mươi phút và 料金は少し安い."
+    },
+    {
+     "q": "Vì sao cần hỏi kích thước bàn?",
+     "o": [
+      "Ảnh không có người",
+      "Bàn đã được xác nhận hỏng",
+      "Người kể dùng vở dài"
+     ],
+     "a": 2,
+     "e": "長いノートを使いますから nêu nhu cầu thực tế; ảnh chưa cho biết kích thước."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thẻ mới: chọn lớp sáng vì buổi tối có việc, đi xe đạp. Nêu lý do và cách đi.",
+     "model": "夜は 仕事が ありますから、午前の クラスを 選びます。自転車で 行きます。",
+     "vi": "Vì buổi tối tôi có việc nên chọn lớp sáng. Tôi đi xe đạp.",
+     "tips": "Không giữ lựa chọn lớp tối của nhân vật; thẻ mới đảo lịch bận."
+    },
+    {
+     "p": "Bạn chỉ biết phòng gần nhà. Hỏi loại phòng và mức phí, không tự nói rẻ.",
+     "model": "どんな 教室ですか。料金は いくらですか。",
+     "vi": "Phòng học như thế nào? Mức phí là bao nhiêu?",
+     "tips": "Hai câu hỏi thu thập hai trường độc lập; khoảng cách không chứng minh mức phí."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết bốn câu theo thẻ mới: chọn lớp sáng vì tối làm việc; đi xe đạp; chưa biết phí; sẽ hỏi ngày mai.",
+   "model": "夜は 働いていますから、午前の クラスを 選びます。自転車で 行きます。料金は まだ わかりません。あした 聞きます。",
+   "modelVi": "Vì buổi tối tôi làm việc nên chọn lớp sáng. Tôi đi xe đạp. Tôi chưa biết mức phí. Ngày mai tôi sẽ hỏi.",
+   "min": 40,
+   "tips": [
+    "Phần trước から là lý do bận tối; phần sau là lựa chọn lớp sáng.",
+    "Phân biệt thông tin đã biết và câu dự định xác nhận."
+   ],
+   "checklist": [
+    "Lớp chọn là buổi sáng.",
+    "Lý do gắn với việc buổi tối.",
+    "Cách đi là xe đạp.",
+    "Mức phí chưa biết và có bước hỏi lại."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “どうして” nghĩa là gì?",
+   "o": [
+    "đi bộ",
+    "vì sao",
+    "xa"
+   ],
+   "a": 1,
+   "e": "どうして この 本を 選びましたか。 → Vì sao bạn chọn quyển sách này? Từ cần nhận diện là “どうして”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “どうやって” nghĩa là gì?",
+   "o": [
+    "bằng cách nào",
+    "thuận tiện",
+    "cầu"
+   ],
+   "a": 0,
+   "e": "どうやって 受付へ 行きますか。 → Đi đến quầy tiếp nhận bằng cách nào? Từ cần nhận diện là “どうやって”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “どんな” nghĩa là gì?",
+   "o": [
+    "nhộn nhịp",
+    "đường",
+    "loại nào/như thế nào"
+   ],
+   "a": 2,
+   "e": "どんな 部屋が いいですか。 → Bạn thích phòng như thế nào? Từ cần nhận diện là “どんな”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “近い” nghĩa là gì?",
+   "o": [
+    "chi phí/mức phí",
+    "gần",
+    "chọn"
+   ],
+   "a": 1,
+   "e": "家から 教室は 近いです。 → Từ nhà đến lớp gần. Từ cần nhận diện là “近い”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ hỏi lý do: ___ この クラスを 選びますか。",
+   "a": "どうして",
+   "e": "どうして hỏi nguyên nhân của lựa chọn; どんな cần đứng trước một danh từ."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ hỏi đặc điểm: ___ 部屋ですか。",
+   "a": "どんな",
+   "e": "どんな bổ nghĩa 部屋, yêu cầu mô tả kiểu phòng thay vì cách đi."
+  },
+  {
+   "t": "fill",
+   "q": "Nối lý do: 家が 近いです___、歩きます。",
+   "a": "から",
+   "e": "から đặt sau lý do nhà gần; đi bộ là kết quả được giải thích."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu vì gần nên đi bộ.",
+   "w": [
+    "歩きます。",
+    "近いですから、",
+    "家が"
+   ],
+   "a": "家が近いですから、歩きます。",
+   "e": "Mệnh đề lý do kết thúc bằng から rồi đến hành động là hệ quả."
+  },
+  {
+   "q": "Lý do lựa chọn là gì?",
+   "o": [
+    "Chắc chắn miễn phí",
+    "Giờ buổi tối thuận tiện",
+    "Đường gần"
+   ],
+   "a": 1,
+   "e": "Tiện giờ được nối với から; đường xa là điểm bất lợi chứ không phải lý do chính.",
+   "t": "listen",
+   "say": "道は 遠いですが、夜の 時間が 便利ですから、ここを 選びます。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "Người đáp dùng cách đi nào từ cầu?",
+   "o": [
+    "Đi bộ",
+    "Xe buýt",
+    "Xe đạp"
+   ],
+   "a": 0,
+   "e": "歩きました trả lời cách đi; 橋から là điểm bắt đầu.",
+   "t": "listen",
+   "say": "どうやって 来ましたか。橋から 歩きました。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "静かな 部屋ですから、ここで 読みます。",
+   "a": "静かな 部屋ですから、ここで 読みます。",
+   "lang": "ja-JP",
+   "e": "Lý do phòng yên tĩnh được nối bằng ですから, sau đó là việc đọc ở đây."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "遠い",
+     "xa"
+    ],
+    [
+     "便利",
+     "thuận tiện"
+    ],
+    [
+     "にぎやか",
+     "nhộn nhịp"
+    ],
+    [
+     "選ぶ",
+     "chọn"
+    ],
+    [
+     "歩く",
+     "đi bộ"
+    ]
+   ],
+   "e": "Ba từ hỏi yêu cầu ba loại đáp án khác nhau; 近い/遠い mô tả khoảng cách, không thay cho 便利 là mức thuận tiện."
+  },
+  {
+   "q": "Vì sao chọn lớp tối dù hơi xa?",
+   "o": [
+    "Lớp tối chắc chắn miễn phí",
+    "Buổi sáng phải làm việc",
+    "Lớp sáng không có bàn"
+   ],
+   "a": 1,
+   "e": "Lý do được nêu trực tiếp là 午前に働いていますから.",
+   "t": "mc"
+  },
+  {
+   "q": "Đường qua cầu có đặc điểm gì?",
+   "o": [
+    "Không dùng xe buýt",
+    "Lâu hơn nhưng hơi rẻ hơn",
+    "Nhanh hơn và đắt hơn"
+   ],
+   "a": 1,
+   "e": "Đối chiếu ba mươi với hai mươi phút và 料金は少し安い.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Tạo hai tờ giới thiệu lớp có giờ và khoảng cách khác nhau; để trống phí ở một bản nhằm buộc người học hỏi thêm.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Cho hai lựa chọn lớp và ba nhu cầu khác nhau; học viên chọn một lớp rồi nói lý do bằng tiếng Việt trước."
+   },
+   {
+    "t": "30'",
+    "do": "Phân ba loại câu hỏi どうして/どうやって/どんな và ghép với lý do, tuyến đi hoặc mô tả phòng."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe lời chọn lớp, ghi điều đã biết và chưa biết, đặc biệt không suy mức phí từ khoảng cách."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc hai tuyến đi, so thời gian và chi phí; chỉ câu nêu lý do hỏi kích thước bàn."
+   },
+   {
+    "t": "30'",
+    "do": "Đổi lịch bận sang buổi tối, luyện lựa chọn lớp sáng và viết lời nhắn có câu dự định hỏi phí."
+   },
+   {
+    "t": "30'",
+    "do": "Thực hiện tư vấn cặp bằng phiếu thiếu thông tin, làm bài nghe và chính tả rồi kiểm thứ tự lý do–kết quả."
+   }
+  ],
+  "games": [
+   "Nhận thẻ ràng buộc bí mật rồi hỏi bạn để tìm lớp phù hợp; chỉ được quyết định sau ba câu hỏi khác loại.",
+   "Giáo viên đưa đáp án như バスで hoặc 近いですから, nhóm tạo đúng từ hỏi thay vì chỉ dịch chung “thế nào”."
+  ],
+  "errors": [
+   "Dùng どんな行きますか: thêm danh từ khi hỏi loại hoặc đổi sang どうやって khi hỏi cách đi.",
+   "Đảo kết quả trước から làm sai quan hệ: vẽ mũi tên từ lý do sang lựa chọn.",
+   "Kết luận gần thì rẻ: ghi hai ô khoảng cách và phí độc lập.",
+   "Bỏ です/だ trước から với tính từ な: luyện 便利ですから ở dạng lịch sự của bài."
+  ],
+  "homework": "Tạo hai lớp giả với giờ và tuyến đi khác nhau; chọn một lớp theo lịch nhân vật, viết lý do và hai câu hỏi về thông tin chưa được cung cấp."
+ }
+}

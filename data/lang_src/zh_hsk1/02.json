@@ -1,155 +1,1018 @@
 {
-  "no": 2,
-  "title": "你叫什么名字？– Tên, quốc tịch; câu 是, 叫, 姓",
-  "sub": "Nǐ jiào shénme míngzi? 你叫什么名字？",
-  "goals": [
-    "Hỏi và nói tên, họ: 你叫什么名字？/ 您贵姓？– 我叫… / 我姓…",
-    "Hỏi và nói quốc tịch, quê quán: 你是哪国人？– 我是越南人，我是河内人。",
-    "Dùng đúng câu chữ 是: khẳng định, phủ định 不是 (bú shì), câu hỏi 吗",
-    "Dùng đại từ nghi vấn 什么 / 哪 (KHÔNG thêm 吗) và câu hỏi lại 呢",
-    "Đọc phân biệt sh – s – x, âm r và thanh nhẹ trong 什么, 名字, 朋友"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
-      {"w": "叫", "py": "jiào", "hv": "khiếu", "pos": "v", "vi": "gọi, tên là", "ex": "我叫小兰。", "exPy": "Wǒ jiào Xiǎo Lán.", "exVi": "Mình tên là Tiểu Lan."},
-      {"w": "什么", "py": "shénme", "hv": "thập ma", "pos": "pron", "vi": "gì, cái gì", "ex": "你叫什么名字？", "exPy": "Nǐ jiào shénme míngzi?", "exVi": "Bạn tên là gì?"},
-      {"w": "名字", "py": "míngzi", "hv": "danh tự", "pos": "n", "vi": "tên", "ex": "我的名字叫阮兰。", "exPy": "Wǒ de míngzi jiào Ruǎn Lán.", "exVi": "Tên mình là Nguyễn Lan."},
-      {"w": "姓", "py": "xìng", "hv": "tính", "pos": "v", "vi": "họ, mang họ", "ex": "我姓阮。", "exPy": "Wǒ xìng Ruǎn.", "exVi": "Tôi họ Nguyễn."},
-      {"w": "贵姓", "py": "guìxìng", "hv": "quý tính", "pos": "phr", "vi": "quý danh – hỏi họ một cách lịch sự", "ex": "您贵姓？— 我姓王。", "exPy": "Nín guìxìng? — Wǒ xìng Wáng.", "exVi": "Ông/bà họ gì ạ? — Tôi họ Vương."},
-      {"w": "是", "py": "shì", "hv": "thị", "pos": "v", "vi": "là; vâng, đúng", "ex": "我是学生。", "exPy": "Wǒ shì xuésheng.", "exVi": "Tôi là học sinh/sinh viên."},
-      {"w": "不", "py": "bù", "hv": "bất", "pos": "adv", "vi": "không (phủ định)", "ex": "我不是老师。", "exPy": "Wǒ bú shì lǎoshī.", "exVi": "Tôi không phải là giáo viên."},
-      {"w": "人", "py": "rén", "hv": "nhân", "pos": "n", "vi": "người", "ex": "他是中国人。", "exPy": "Tā shì Zhōngguó rén.", "exVi": "Anh ấy là người Trung Quốc."},
-      {"w": "哪", "py": "nǎ", "hv": "na", "pos": "pron", "vi": "nào (hỏi lựa chọn)", "ex": "你是哪国人？", "exPy": "Nǐ shì nǎ guó rén?", "exVi": "Bạn là người nước nào?"},
-      {"w": "国", "py": "guó", "hv": "quốc", "pos": "n", "vi": "nước, quốc gia", "ex": "他是哪国人？", "exPy": "Tā shì nǎ guó rén?", "exVi": "Anh ấy là người nước nào?"},
-      {"w": "中国", "py": "Zhōngguó", "hv": "Trung Quốc", "pos": "n", "vi": "Trung Quốc", "ex": "王老师是中国人。", "exPy": "Wáng lǎoshī shì Zhōngguó rén.", "exVi": "Thầy Vương là người Trung Quốc."},
-      {"w": "越南", "py": "Yuènán", "hv": "Việt Nam", "pos": "n", "vi": "Việt Nam", "ex": "我是越南人。", "exPy": "Wǒ shì Yuènán rén.", "exVi": "Tôi là người Việt Nam."},
-      {"w": "河内", "py": "Hénèi", "hv": "Hà Nội", "pos": "n", "vi": "Hà Nội", "ex": "我是河内人。", "exPy": "Wǒ shì Hénèi rén.", "exVi": "Tôi là người Hà Nội."},
-      {"w": "学生", "py": "xuésheng", "hv": "học sinh", "pos": "n", "vi": "học sinh, sinh viên", "ex": "你是学生吗？", "exPy": "Nǐ shì xuésheng ma?", "exVi": "Bạn là sinh viên à?"},
-      {"w": "朋友", "py": "péngyou", "hv": "bằng hữu", "pos": "n", "vi": "bạn, bạn bè", "ex": "安娜是我朋友。", "exPy": "Ānnà shì wǒ péngyou.", "exVi": "Anna là bạn tôi."},
-      {"w": "认识", "py": "rènshi", "hv": "nhận thức", "pos": "v", "vi": "quen, quen biết (người)", "ex": "认识你很高兴。", "exPy": "Rènshi nǐ hěn gāoxìng.", "exVi": "Rất vui được làm quen với bạn."},
-      {"w": "高兴", "py": "gāoxìng", "hv": "cao hứng", "pos": "adj", "vi": "vui, vui mừng", "ex": "我很高兴。", "exPy": "Wǒ hěn gāoxìng.", "exVi": "Tôi rất vui."},
-      {"w": "呢", "py": "ne", "hv": "ni", "pos": "part", "vi": "còn … thì sao? (hỏi lại cùng ý)", "ex": "我是越南人，你呢？", "exPy": "Wǒ shì Yuènán rén, nǐ ne?", "exVi": "Mình là người Việt Nam, còn bạn?"}
-    ]},
-    {"k": "text", "h": "Tên tiếng Trung của bạn – lợi thế Hán Việt", "html": "<p>Phần lớn tên người Việt có gốc Hán, nên đổi sang tiếng Trung rất dễ: tìm chữ Hán có <b>âm Hán Việt</b> giống tên mình rồi đọc theo pinyin. Thứ tự <b>họ trước, tên sau</b> – giống hệt tiếng Việt.</p><table><tr><th>Họ</th><th>Chữ Hán</th><th>Pinyin</th><th>Tên</th><th>Chữ Hán</th><th>Pinyin</th></tr><tr><td>Nguyễn</td><td>阮</td><td>Ruǎn</td><td>Lan</td><td>兰</td><td>Lán</td></tr><tr><td>Trần</td><td>陈</td><td>Chén</td><td>Minh</td><td>明</td><td>Míng</td></tr><tr><td>Lê</td><td>黎</td><td>Lí</td><td>Hùng</td><td>雄</td><td>Xióng</td></tr><tr><td>Phạm</td><td>范</td><td>Fàn</td><td>Mai</td><td>梅</td><td>Méi</td></tr><tr><td>Hoàng / Huỳnh</td><td>黄</td><td>Huáng</td><td>Hương</td><td>香</td><td>Xiāng</td></tr><tr><td>Vũ / Võ</td><td>武</td><td>Wǔ</td><td>Tuấn</td><td>俊</td><td>Jùn</td></tr><tr><td>Đặng</td><td>邓</td><td>Dèng</td><td>Bình</td><td>平</td><td>Píng</td></tr><tr><td>Ngô</td><td>吴</td><td>Wú</td><td>Hải</td><td>海</td><td>Hǎi</td></tr></table><p>Ví dụ: Nguyễn Văn Bình → <b>阮文平</b> Ruǎn Wénpíng; Trần Minh → <b>陈明</b> Chén Míng.</p><ul><li><b>小 + tên</b> (小兰, 小明): gọi thân mật người trẻ – như “bé Lan, em Minh”.</li><li><b>老 + họ</b> (老王): gọi thân người lớn tuổi, đồng nghiệp lâu năm.</li><li>Tên người nước ngoài phiên âm theo âm: Anna → 安娜 Ānnà, David → 大卫 Dàwèi.</li></ul><p>⚠️ Một âm Hán Việt có thể ứng với nhiều chữ (Linh: 玲, 灵, 铃…). Hãy hỏi gia đình hoặc giáo viên để chọn đúng chữ mang ý nghĩa tên mình.</p>"},
-    {"k": "sounds", "h": "Phát âm: sh – s – x, âm r, ü và thanh nhẹ", "html": "<p>Bài này có nhiều âm “xì xào” dễ lẫn. Đọc chậm, soi gương xem vị trí lưỡi và môi.</p>", "items": [
-      {"sym": "sh – s – x", "ex": ["是", "四", "西"], "vi": "<b>sh</b> (是 shì): đầu lưỡi cong lên gần vòm miệng – như “s” uốn lưỡi. <b>s</b> (四 sì): lưỡi phẳng sau răng – như “x” tiếng Việt. <b>x</b> (西 xī): mặt lưỡi áp vòm, môi dẹt như cười. Chú ý: <b>shi, si</b> KHÔNG đọc “i”, nguyên âm gần “ư”: 是 ≈ “sư” uốn lưỡi, 四 ≈ “xư”.", "pairs": [["是", "四"], ["十", "西"]]},
-      {"sym": "r", "ex": ["人", "认识"], "vi": "r (人 rén): uốn lưỡi giống sh nhưng có rung dây thanh, hơi giống “r” nhẹ của người miền Nam đọc “ra”, không rung lưỡi. 人 rén ≈ “rấn” (en ≈ “ân”), KHÔNG đọc “dân”."},
-      {"sym": "ü trong yue / xue", "ex": ["越南", "学生"], "vi": "越 yuè và 学 xué chứa nguyên âm <b>ü</b> (sau y, j, q, x bỏ hai chấm). Chu tròn môi như “uy” rồi mở sang “ê” – gần “uyê” trong “khuyết” nhưng môi tròn hơn."},
-      {"sym": "不 + thanh 4 → bú", "ex": ["不是", "不认识"], "vi": "不是 <b>bú shì</b>, 不认识 <b>bú rènshi</b>. Trước thanh 1, 2, 3 vẫn đọc bù: 不忙 bù máng, 不好 bù hǎo, 不高兴 bù gāoxìng."},
-      {"sym": "thanh nhẹ", "ex": ["什么", "名字", "朋友", "学生", "认识"], "vi": "Âm tiết sau đọc nhẹ, ngắn: shénme, míngzi, péngyou, xuésheng, rènshi. Đọc 名字 thành “míng zì” đủ thanh 4 nghe rất lơ lớ."}
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 1: Câu chữ 是 – A 是 B", "html": "<p><b>A 是 B</b> = A là B, trong đó B là <b>danh từ</b> (nghề nghiệp, quốc tịch, tên…). Phủ định: <b>A 不是 B</b> (đọc <i>bú shì</i>). Câu hỏi: thêm <b>吗</b> ở cuối, trật tự giữ nguyên.</p>", "table": [["Khẳng định", "Phủ định", "Câu hỏi"], ["我是学生。", "我不是老师。", "你是学生吗？"], ["Wǒ shì xuésheng.", "Wǒ bú shì lǎoshī.", "Nǐ shì xuésheng ma?"], ["Tôi là sinh viên.", "Tôi không phải giáo viên.", "Bạn là sinh viên à?"]], "ex": [
-      {"t": "他是中国人。", "py": "Tā shì Zhōngguó rén.", "vi": "Anh ấy là người Trung Quốc."},
-      {"t": "她不是越南人，她是美国人。", "py": "Tā bú shì Yuènán rén, tā shì Měiguó rén.", "vi": "Cô ấy không phải người Việt Nam, cô ấy là người Mỹ."},
-      {"t": "你是河内人吗？— 是，我是河内人。", "py": "Nǐ shì Hénèi rén ma? — Shì, wǒ shì Hénèi rén.", "vi": "Bạn là người Hà Nội à? — Vâng, mình là người Hà Nội."},
-      {"t": "我也是学生。", "py": "Wǒ yě shì xuésheng.", "vi": "Tôi cũng là sinh viên."}
-    ], "tips": ["是 chỉ nối hai danh từ. Với tính từ vẫn dùng 很 (bài 1): ❌ <i>我是高兴</i> → ✅ 我很高兴。", "Trả lời ngắn “phải/vâng” = <b>是</b>, “không phải” = <b>不是</b>. Đừng trả lời ❌ <i>有</i> hay ❌ <i>对是</i>.", "Trạng từ 也, 不 luôn đứng TRƯỚC 是: 我也是学生 (❌ <i>我是也学生</i>), 他也不是老师."]},
-    {"k": "grammar", "h": "Ngữ pháp 2: Hỏi tên, hỏi họ – 叫, 姓, 贵姓", "html": "<p>Ba cách hỏi tên/họ, từ thân mật đến lịch sự. <b>叫</b> đi với tên hoặc họ tên đầy đủ; <b>姓</b> chỉ đi với HỌ.</p>", "table": [["Câu hỏi", "Câu trả lời", "Dùng khi"], ["你叫什么名字？ Nǐ jiào shénme míngzi?", "我叫阮兰。 Wǒ jiào Ruǎn Lán.", "Bạn bè, người trẻ"], ["你姓什么？ Nǐ xìng shénme?", "我姓阮。 Wǒ xìng Ruǎn.", "Hỏi họ, thân mật"], ["您贵姓？ Nín guìxìng?", "我姓王。 Wǒ xìng Wáng.", "Lịch sự: người lớn, khách, lần đầu gặp"]], "ex": [
-      {"t": "我姓陈，叫陈明。", "py": "Wǒ xìng Chén, jiào Chén Míng.", "vi": "Tôi họ Trần, tên là Trần Minh."},
-      {"t": "她叫什么名字？— 她叫安娜。", "py": "Tā jiào shénme míngzi? — Tā jiào Ānnà.", "vi": "Cô ấy tên gì? — Cô ấy tên Anna."},
-      {"t": "老师，您贵姓？— 我姓王。", "py": "Lǎoshī, nín guìxìng? — Wǒ xìng Wáng.", "vi": "Thưa thầy, thầy họ gì ạ? — Thầy họ Vương."},
-      {"t": "认识你很高兴！", "py": "Rènshi nǐ hěn gāoxìng!", "vi": "Rất vui được làm quen với bạn!"}
-    ], "tips": ["贵 (quý) là lời tôn trọng dành cho NGƯỜI KIA. Khi trả lời không lặp 贵: ❌ <i>我贵姓王</i> → ✅ 我姓王。", "❌ <i>我姓阮兰</i> (姓 chỉ đi với họ) → ✅ 我姓阮 / 我叫阮兰。", "Người Trung Quốc ít dùng 你姓什么 với người lớn – hãy quen miệng 您贵姓？ ngay từ đầu."]},
-    {"k": "grammar", "h": "Ngữ pháp 3: Đại từ nghi vấn 什么, 哪 – và 呢", "html": "<p><b>Đại từ nghi vấn</b> (什么 gì, 哪 nào, 谁 ai – bài 3) đặt <b>đúng vào vị trí thông tin cần hỏi</b>, trật tự câu không đổi – y như tiếng Việt. Câu đã có đại từ nghi vấn thì <b>KHÔNG thêm 吗</b>.</p><p><b>呢</b> dùng để hỏi lại cùng ý vừa nói: 我是越南人，你呢？ (Còn bạn?).</p>", "table": [["Câu trần thuật", "Câu hỏi", "Hỏi gì"], ["我叫小兰。", "你叫什么名字？", "tên"], ["我是越南人。", "你是哪国人？", "quốc tịch"], ["我是学生，你呢？", "→ 我也是学生。", "hỏi lại"]], "ex": [
-      {"t": "你是哪国人？— 我是越南人。", "py": "Nǐ shì nǎ guó rén? — Wǒ shì Yuènán rén.", "vi": "Bạn là người nước nào? — Tôi là người Việt Nam."},
-      {"t": "他叫什么名字？— 他叫陈明。", "py": "Tā jiào shénme míngzi? — Tā jiào Chén Míng.", "vi": "Anh ấy tên gì? — Anh ấy tên Trần Minh."},
-      {"t": "我是河内人，你呢？", "py": "Wǒ shì Hénèi rén, nǐ ne?", "vi": "Mình là người Hà Nội, còn bạn?"}
-    ], "tips": ["❌ <i>你叫什么名字吗？</i> – thừa 吗 vì đã có 什么.", "Người học quen tiếng Anh hay nói ❌ <i>什么是你的名字？</i> (What is your name?). Tiếng Trung tự nhiên: 你叫什么名字？", "哪 (nǎ, thanh 3) = “nào”; 那 (nà, thanh 4) = “kia, đó” (bài 3). Hai chữ khác nhau một bộ 口 và khác thanh!"]},
-    {"k": "dialog", "h": "Nghe: Bạn mới trong lớp", "lang": "zh-CN", "note": "Giờ ra chơi, lớp có một bạn mới. Tiểu Minh đến làm quen, sau đó thầy Vương vào lớp. Nghe lần 1 không nhìn chữ: bạn mới là người nước nào?", "lines": [
-      {"s": "小明", "g": "m", "t": "你好！我叫陈明。你叫什么名字？", "py": "Nǐ hǎo! Wǒ jiào Chén Míng. Nǐ jiào shénme míngzi?", "vi": "Chào bạn! Mình là Trần Minh. Bạn tên gì?"},
-      {"s": "安娜", "g": "f", "t": "你好！我叫安娜。", "py": "Nǐ hǎo! Wǒ jiào Ānnà.", "vi": "Chào bạn! Mình tên là Anna."},
-      {"s": "小明", "g": "m", "t": "你是中国人吗？", "py": "Nǐ shì Zhōngguó rén ma?", "vi": "Bạn là người Trung Quốc à?"},
-      {"s": "安娜", "g": "f", "t": "不是，我是美国人。你呢？", "py": "Bú shì, wǒ shì Měiguó rén. Nǐ ne?", "vi": "Không phải, mình là người Mỹ. Còn bạn?"},
-      {"s": "小明", "g": "m", "t": "我是越南人，我是河内人。", "py": "Wǒ shì Yuènán rén, wǒ shì Hénèi rén.", "vi": "Mình là người Việt Nam, người Hà Nội."},
-      {"s": "安娜", "g": "f", "t": "她也是越南人吗？", "py": "Tā yě shì Yuènán rén ma?", "vi": "Bạn ấy cũng là người Việt Nam à?"},
-      {"s": "小明", "g": "m", "t": "是，她叫阮兰。她也是学生。", "py": "Shì, tā jiào Ruǎn Lán. Tā yě shì xuésheng.", "vi": "Ừ, bạn ấy tên Nguyễn Lan. Bạn ấy cũng là sinh viên."},
-      {"s": "小兰", "g": "f", "t": "你好，安娜！认识你很高兴。", "py": "Nǐ hǎo, Ānnà! Rènshi nǐ hěn gāoxìng.", "vi": "Chào Anna! Rất vui được làm quen với bạn."},
-      {"s": "安娜", "g": "f", "t": "认识你，我也很高兴。", "py": "Rènshi nǐ, wǒ yě hěn gāoxìng.", "vi": "Được làm quen với bạn, mình cũng rất vui."},
-      {"s": "王老师", "g": "m", "t": "同学们好！你是安娜吗？", "py": "Tóngxuémen hǎo! Nǐ shì Ānnà ma?", "vi": "Chào các em! Em là Anna phải không?"},
-      {"s": "安娜", "g": "f", "t": "是，老师好！老师，您贵姓？", "py": "Shì, lǎoshī hǎo! Lǎoshī, nín guìxìng?", "vi": "Vâng, em chào thầy ạ! Thưa thầy, thầy họ gì ạ?"},
-      {"s": "王老师", "g": "m", "t": "我姓王，我是中国人。", "py": "Wǒ xìng Wáng, wǒ shì Zhōngguó rén.", "vi": "Thầy họ Vương, thầy là người Trung Quốc."},
-      {"s": "小明", "g": "m", "t": "王老师是北京人！", "py": "Wáng lǎoshī shì Běijīng rén!", "vi": "Thầy Vương là người Bắc Kinh đấy!"}
-    ], "qs": [
-      {"q": "安娜 (Ānnà) là người nước nào?", "o": ["Trung Quốc", "Mỹ", "Việt Nam"], "a": 1, "e": "安娜 nói: 不是，我是美国人。(Không phải, mình là người Mỹ.)"},
-      {"q": "小明 là người ở đâu?", "o": ["Bắc Kinh", "Hà Nội", "Thành phố Hồ Chí Minh"], "a": 1, "e": "我是越南人，我是河内人。"},
-      {"q": "Họ của 小兰 là gì?", "o": ["王 Wáng – Vương", "陈 Chén – Trần", "阮 Ruǎn – Nguyễn"], "a": 2, "e": "小明 nói 她叫阮兰 → họ 阮 (Nguyễn)."},
-      {"q": "Anna hỏi họ thầy giáo một cách lịch sự: 老师，您___？(gõ chữ Hán hoặc pinyin)", "a": "贵姓", "alt": ["guixing"], "e": "您贵姓？ = Thầy/ông/bà họ gì ạ? – cách hỏi lịch sự."},
-      {"q": "王老师 là người ở đâu?", "o": ["Bắc Kinh", "Hà Nội", "Mỹ"], "a": 0, "e": "Câu cuối: 王老师是北京人！"}
-    ]},
-    {"k": "read", "h": "Đọc: Mình và các bạn", "title": "我和我的朋友", "text": "你们好！我叫阮兰，我是越南人，我是河内人。我是学生。\n\n安娜是我的朋友。她不是中国人，她是美国人。她也是学生。\n\n王老师是中国人，他是北京人。认识你们，我很高兴！", "py": "Nǐmen hǎo! Wǒ jiào Ruǎn Lán, wǒ shì Yuènán rén, wǒ shì Hénèi rén. Wǒ shì xuésheng.\n\nĀnnà shì wǒ de péngyou. Tā bú shì Zhōngguó rén, tā shì Měiguó rén. Tā yě shì xuésheng.\n\nWáng lǎoshī shì Zhōngguó rén, tā shì Běijīng rén. Rènshi nǐmen, wǒ hěn gāoxìng!", "vi": "Chào các bạn! Mình tên là Nguyễn Lan, mình là người Việt Nam, người Hà Nội. Mình là sinh viên.\n\nAnna là bạn của mình. Bạn ấy không phải người Trung Quốc, bạn ấy là người Mỹ. Bạn ấy cũng là sinh viên.\n\nThầy Vương là người Trung Quốc, thầy là người Bắc Kinh. Được làm quen với các bạn, mình rất vui!", "gloss": [
-      {"w": "我的", "py": "wǒ de", "vi": "của tôi (的 – học kỹ ở bài 3)"},
-      {"w": "美国", "py": "Měiguó", "vi": "nước Mỹ"},
-      {"w": "北京", "py": "Běijīng", "vi": "Bắc Kinh"},
-      {"w": "你们", "py": "nǐmen", "vi": "các bạn"}
-    ], "qs": [
-      {"q": "阮兰 là người ở đâu?", "o": ["Hà Nội", "Bắc Kinh", "Mỹ"], "a": 0, "e": "我是越南人，我是河内人。"},
-      {"q": "Câu nào ĐÚNG về 安娜?", "o": ["Anna là người Trung Quốc", "Anna là sinh viên", "Anna là giáo viên"], "a": 1, "e": "她也是学生。– Anna cũng là sinh viên; cô ấy là người Mỹ (不是中国人)."},
-      {"q": "王老师 là người nước nào? (gõ chữ Hán hoặc pinyin)", "a": "中国人", "alt": ["中国", "zhongguoren", "zhongguo"], "e": "王老师是中国人，他是北京人。"},
-      {"q": "Trong bài, 朋友 nghĩa là gì?", "o": ["bạn bè", "bạn học", "học sinh"], "a": 0, "e": "朋友 péngyou = bạn bè; 同学 tóngxué = bạn học."}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "是", "py": "shì", "hv": "thị", "parts": "日 (nhật – mặt trời) + 𤴓 (biến thể của 正 chính – ngay thẳng)", "strokes": 9, "vi": "là, đúng – dưới ánh mặt trời, điều ngay thẳng là đúng", "words": "是, 不是"},
-      {"c": "叫", "py": "jiào", "hv": "khiếu", "parts": "口 (khẩu – miệng) + 丩 (gợi âm)", "strokes": 5, "vi": "gọi, kêu – mở miệng gọi tên", "words": "叫, 叫什么"},
-      {"c": "什", "py": "shén", "hv": "thập", "parts": "亻(nhân đứng – người) + 十 (thập – mười)", "strokes": 4, "vi": "dùng trong 什么 (gì) – mười người cùng hỏi “gì thế?”", "words": "什么"},
-      {"c": "名", "py": "míng", "hv": "danh", "parts": "夕 (tịch – buổi tối) + 口 (miệng)", "strokes": 6, "vi": "tên – trời tối không thấy mặt, phải dùng miệng gọi tên", "words": "名字"},
-      {"c": "字", "py": "zì", "hv": "tự", "parts": "宀 (miên – mái nhà) + 子 (tử – con)", "strokes": 6, "vi": "chữ – đứa trẻ ngồi trong nhà học chữ", "words": "名字, 汉字"},
-      {"c": "国", "py": "guó", "hv": "quốc", "parts": "囗 (vi – vòng bao) + 玉 (ngọc)", "strokes": 8, "vi": "nước – biên giới bao quanh, giữ ngọc quý bên trong", "words": "中国, 美国, 哪国"},
-      {"c": "人", "py": "rén", "hv": "nhân", "parts": "chữ tượng hình: người đứng dạng hai chân", "strokes": 2, "vi": "người", "words": "中国人, 越南人"}
-    ]},
-    {"k": "speak", "h": "Nói: Làm quen", "tasks": [
-      {"p": "Tự giới thiệu trước lớp: họ, tên, quốc tịch, quê, là học sinh/sinh viên. Kết thúc bằng câu “rất vui được làm quen”.", "model": "大家好！我姓阮，叫阮兰。我是越南人，我是河内人。我是学生。认识你们很高兴！", "py": "Dàjiā hǎo! Wǒ xìng Ruǎn, jiào Ruǎn Lán. Wǒ shì Yuènán rén, wǒ shì Hénèi rén. Wǒ shì xuésheng. Rènshi nǐmen hěn gāoxìng!", "vi": "Chào mọi người! Mình họ Nguyễn, tên Nguyễn Lan. Mình là người Việt Nam, người Hà Nội. Mình là sinh viên. Rất vui được làm quen với các bạn!", "tips": "Thay bằng tên tiếng Trung của bạn (bảng họ – tên ở trên). 是 đọc uốn lưỡi, 人 đọc “rấn” chứ không phải “dân”."},
-      {"p": "Ở quán cà phê bạn gặp một người nước ngoài. Hỏi tên và quốc tịch, rồi nói về mình.", "model": "你好！你叫什么名字？你是哪国人？我是越南人，我叫陈明。", "py": "Nǐ hǎo! Nǐ jiào shénme míngzi? Nǐ shì nǎ guó rén? Wǒ shì Yuènán rén, wǒ jiào Chén Míng.", "vi": "Chào bạn! Bạn tên gì? Bạn là người nước nào? Mình là người Việt Nam, mình tên Trần Minh.", "tips": "Hai câu hỏi có 什么 và 哪 – không thêm 吗. Lên giọng nhẹ ở cuối câu hỏi là đủ."},
-      {"p": "Bạn gặp một vị khách lớn tuổi người Trung Quốc. Hỏi họ một cách lịch sự và nói rất vui được quen.", "model": "您好！您贵姓？……认识您很高兴！", "py": "Nín hǎo! Nín guìxìng? … Rènshi nín hěn gāoxìng!", "vi": "Chào ông/bà! Ông/bà họ gì ạ? … Rất vui được làm quen với ông/bà!", "tips": "Dùng 您 xuyên suốt: 认识您 thay cho 认识你."}
-    ]},
-    {"k": "write", "h": "Viết: Giới thiệu mình và một người bạn", "task": "Viết 5–7 câu bằng chữ Hán: giới thiệu bản thân (họ, tên, quốc tịch, quê, nghề) và một người bạn (tên, quốc tịch, có/không phải học sinh).", "min": 30, "model": "我姓陈，叫陈明。我是越南人，我是河内人。我是学生。\n安娜是我朋友。她不是中国人，她是美国人。她也是学生。", "modelVi": "Tôi họ Trần, tên Trần Minh. Tôi là người Việt Nam, người Hà Nội. Tôi là sinh viên. Anna là bạn tôi. Cô ấy không phải người Trung Quốc, cô ấy là người Mỹ. Cô ấy cũng là sinh viên.", "tips": ["Dùng 是 nối hai danh từ; phủ định bằng 不是.", "也 đứng trước 是 / 不是: 她也是学生。", "Tên người nước ngoài viết bằng chữ phiên âm: 安娜, 大卫."], "checklist": ["Có 我叫… hoặc 我姓…", "Có 我是…人", "Có ít nhất 1 câu với 不是", "也 đặt đúng chỗ (trước 是)", "Dùng dấu câu tiếng Trung 。，"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "你叫什么名字？", "lang": "zh-CN", "q": "Câu vừa nghe hỏi về điều gì?", "o": ["Tên", "Quốc tịch", "Sức khoẻ"], "a": 0, "e": "什么名字 shénme míngzi = tên gì."},
-    {"t": "listen", "say": "我是越南人。", "lang": "zh-CN", "q": "Người nói là người nước nào?", "o": ["Trung Quốc", "Việt Nam", "Mỹ"], "a": 1, "e": "越南人 Yuènán rén = người Việt Nam."},
-    {"t": "listen", "say": "我不是老师，我是学生。", "lang": "zh-CN", "q": "Người nói là ai?", "o": ["Giáo viên", "Học sinh / sinh viên", "Người Trung Quốc"], "a": 1, "e": "不是老师 (không phải giáo viên), 是学生 (là sinh viên)."},
-    {"t": "mc", "q": "你是哪国人？(Nǐ shì nǎ guó rén?) – câu trả lời phù hợp:", "o": ["我是越南人。", "我叫小兰。", "我很好。"], "a": 0, "e": "哪国人 hỏi quốc tịch → 我是越南人。"},
-    {"t": "mc", "q": "Câu nào SAI?", "o": ["你叫什么名字？", "你叫什么名字吗？", "你是学生吗？"], "a": 1, "e": "Câu đã có đại từ nghi vấn 什么 thì không thêm 吗."},
-    {"t": "mc", "q": "Hỏi họ của một vị khách lớn tuổi, bạn nói:", "o": ["您贵姓？", "你叫什么？", "您姓什么吗？"], "a": 0, "e": "您贵姓 là cách hỏi họ lịch sự nhất; câu 3 thừa 吗."},
-    {"t": "mc", "q": "Có người hỏi bạn 您贵姓？(Nín guìxìng?). Bạn trả lời:", "o": ["我贵姓阮。", "我姓阮。", "我是姓阮。"], "a": 1, "e": "贵 chỉ dùng khi hỏi người khác. Trả lời: 我姓 + họ."},
-    {"t": "mc", "q": "不是 trong câu 我不是老师 đọc là:", "o": ["bù shì", "bú shì", "bū shì"], "a": 1, "e": "不 đứng trước thanh 4 (是 shì) → đọc bú."},
-    {"t": "fill", "q": "我___阮，我叫阮兰。(Tôi họ Nguyễn, tên Nguyễn Lan.)", "a": "姓", "alt": ["xing"], "e": "姓 + họ: 我姓阮。"},
-    {"t": "fill", "q": "我是越南人，你___？(Còn bạn?)", "a": "呢", "alt": ["ne"], "e": "你呢？ = còn bạn thì sao?"},
-    {"t": "fill", "q": "认识你很___！(Rất vui được làm quen với bạn!)", "a": "高兴", "alt": ["gaoxing"], "e": "认识你很高兴 – câu cố định khi làm quen."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Bạn là người nước nào?”", "w": ["人", "你", "哪", "是", "国"], "a": "你是哪国人", "e": "你 + 是 + 哪国人 – đại từ nghi vấn 哪 đứng đúng chỗ thông tin cần hỏi."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Anh ấy cũng không phải giáo viên.”", "w": ["不", "老师", "他", "是", "也"], "a": "他也不是老师", "e": "Chủ ngữ + 也 + 不是 + danh từ."},
-    {"t": "dict", "say": "名字", "lang": "zh-CN", "a": "名字", "py": "míngzi", "e": "名字 míngzi – 字 đọc thanh nhẹ."},
-    {"t": "dict", "say": "我是学生。", "lang": "zh-CN", "a": "我是学生", "py": "wǒ shì xuésheng", "e": "学生 xuésheng – 生 đọc thanh nhẹ."},
-    {"t": "match", "q": "Nối từ với nghĩa:", "pairs": [["中国人", "người Trung Quốc"], ["越南人", "người Việt Nam"], ["美国人", "người Mỹ"], ["朋友", "bạn bè"], ["学生", "học sinh, sinh viên"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Thẻ tên trống để học viên viết tên tiếng Trung; bảng họ – tên Hán Việt (phần “Tên tiếng Trung của bạn”) in sẵn; ảnh cờ 4 nước (Việt Nam, Trung Quốc, Mỹ, Hàn Quốc); thẻ chữ 是 叫 什 名 字 国 人.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: ôn bài 1 bằng chuỗi 你好！– 你好吗？– 我很好，你呢？ Mỗi học viên chào và hỏi thăm bạn bên cạnh."},
-      {"t": "15'", "do": "Đặt tên tiếng Trung: phát bảng họ – tên Hán Việt; học viên tìm chữ cho tên mình, viết lên thẻ tên kèm pinyin. GV kiểm tra, gợi ý chữ đẹp nghĩa cho tên khó."},
-      {"t": "20'", "do": "Từ vựng 18 từ: dạy theo cụm (叫什么名字, 哪国人, 认识你很高兴). Đọc mẫu – lớp nhắc – từng bàn. Nhấn thanh nhẹ: 什么, 名字, 朋友, 学生, 认识."},
-      {"t": "15'", "do": "Phát âm: sh – s – x (是 – 四 – 西) và r (人). Học viên soi gương/điện thoại xem lưỡi; đọc cặp tối thiểu 是/四, 十/西. GV sửa lỗi đọc 是 thành “si”, 人 thành “dân”."},
-      {"t": "20'", "do": "Ngữ pháp 1–2: câu 是 / 不是 (bú shì); hỏi tên với 叫, 姓, 贵姓. Viết ❌ 我贵姓王 và ❌ 我是高兴 lên bảng, cả lớp tìm lỗi."},
-      {"t": "10'", "do": "Làm bài tập 1–8 trong game, chữa nhanh."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: GV giơ ảnh cờ, học viên nói 他是…人 / 她不是…人 nhanh nhất có thể."},
-      {"t": "15'", "do": "Ngữ pháp 3: đại từ nghi vấn + 呢. Cho câu trần thuật, học viên biến thành câu hỏi bằng cách thay đúng chỗ bằng 什么 / 哪."},
-      {"t": "15'", "do": "Nghe hội thoại: lần 1 chỉ nghe – bạn mới là người nước nào? Lần 2 xem pinyin, trả lời câu hỏi. Lần 3 đọc phân vai 4 người."},
-      {"t": "15'", "do": "Đọc ‘我和我的朋友’: học viên đọc pinyin, sau đó che pinyin đọc chữ Hán; tự dịch từng câu rồi so với bản dịch."},
-      {"t": "20'", "do": "Chữ Hán 7 chữ (nhấn bộ 口, 亻, 宀, 囗). Sau đó mỗi học viên tự giới thiệu 30 giây trước lớp (nhiệm vụ nói 1)."},
-      {"t": "15'", "do": "Viết đoạn giới thiệu, làm bài tập 9–16, giao bài về nhà."}
+ "no": 2,
+ "title": "你叫什么名字？– Tên, quốc tịch; câu 是, 叫, 姓",
+ "sub": "Nǐ jiào shénme míngzi? 你叫什么名字？",
+ "goals": [
+  "Hỏi và nói tên, họ: 你叫什么名字？/ 您贵姓？– 我叫… / 我姓…",
+  "Hỏi và nói quốc tịch, quê quán: 你是哪国人？– 我是越南人，我是叶纱城人。",
+  "Dùng đúng câu chữ 是: khẳng định, phủ định 不是 (bú shì), câu hỏi 吗",
+  "Dùng đại từ nghi vấn 什么 / 哪 (KHÔNG thêm 吗) và câu hỏi lại 呢",
+  "Đọc phân biệt sh – s – x, âm r và thanh nhẹ trong 什么, 名字, 朋友"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词 shēngcí)",
+   "items": [
+    {
+     "w": "叫",
+     "py": "jiào",
+     "hv": "khiếu",
+     "pos": "v",
+     "vi": "gọi, tên là",
+     "ex": "我叫小兰。",
+     "exPy": "Wǒ jiào Xiǎo Lán.",
+     "exVi": "Mình tên là Tiểu Lan."
+    },
+    {
+     "w": "什么",
+     "py": "shénme",
+     "hv": "thập ma",
+     "pos": "pron",
+     "vi": "gì, cái gì",
+     "ex": "你叫什么名字？",
+     "exPy": "Nǐ jiào shénme míngzi?",
+     "exVi": "Bạn tên là gì?"
+    },
+    {
+     "w": "名字",
+     "py": "míngzi",
+     "hv": "danh tự",
+     "pos": "n",
+     "vi": "tên",
+     "ex": "我的名字叫阮兰。",
+     "exPy": "Wǒ de míngzi jiào Ruǎn Lán.",
+     "exVi": "Tên mình là Nguyễn Lan."
+    },
+    {
+     "w": "姓",
+     "py": "xìng",
+     "hv": "tính",
+     "pos": "v",
+     "vi": "họ, mang họ",
+     "ex": "我姓阮。",
+     "exPy": "Wǒ xìng Ruǎn.",
+     "exVi": "Tôi họ Nguyễn."
+    },
+    {
+     "w": "贵姓",
+     "py": "guìxìng",
+     "hv": "quý tính",
+     "pos": "phr",
+     "vi": "quý danh – hỏi họ một cách lịch sự",
+     "ex": "您贵姓？— 我姓王。",
+     "exPy": "Nín guìxìng? — Wǒ xìng Wáng.",
+     "exVi": "Ông/bà họ gì ạ? — Tôi họ Vương."
+    },
+    {
+     "w": "是",
+     "py": "shì",
+     "hv": "thị",
+     "pos": "v",
+     "vi": "là; vâng, đúng",
+     "ex": "我是学生。",
+     "exPy": "Wǒ shì xuésheng.",
+     "exVi": "Tôi là học sinh/sinh viên."
+    },
+    {
+     "w": "不",
+     "py": "bù",
+     "hv": "bất",
+     "pos": "adv",
+     "vi": "không (phủ định)",
+     "ex": "我不是老师。",
+     "exPy": "Wǒ bú shì lǎoshī.",
+     "exVi": "Tôi không phải là giáo viên."
+    },
+    {
+     "w": "人",
+     "py": "rén",
+     "hv": "nhân",
+     "pos": "n",
+     "vi": "người",
+     "ex": "他是中国人。",
+     "exPy": "Tā shì Zhōngguó rén.",
+     "exVi": "Anh ấy là người Trung Quốc."
+    },
+    {
+     "w": "哪",
+     "py": "nǎ",
+     "hv": "na",
+     "pos": "pron",
+     "vi": "nào (hỏi lựa chọn)",
+     "ex": "你是哪国人？",
+     "exPy": "Nǐ shì nǎ guó rén?",
+     "exVi": "Bạn là người nước nào?"
+    },
+    {
+     "w": "国",
+     "py": "guó",
+     "hv": "quốc",
+     "pos": "n",
+     "vi": "nước, quốc gia",
+     "ex": "他是哪国人？",
+     "exPy": "Tā shì nǎ guó rén?",
+     "exVi": "Anh ấy là người nước nào?"
+    },
+    {
+     "w": "中国",
+     "py": "Zhōngguó",
+     "hv": "Trung Quốc",
+     "pos": "n",
+     "vi": "Trung Quốc",
+     "ex": "王老师是中国人。",
+     "exPy": "Wáng lǎoshī shì Zhōngguó rén.",
+     "exVi": "Thầy Vương là người Trung Quốc."
+    },
+    {
+     "w": "越南",
+     "py": "Yuènán",
+     "hv": "Việt Nam",
+     "pos": "n",
+     "vi": "Việt Nam",
+     "ex": "我是越南人。",
+     "exPy": "Wǒ shì Yuènán rén.",
+     "exVi": "Tôi là người Việt Nam."
+    },
+    {
+     "w": "叶纱城",
+     "py": "Yèshā Chéng",
+     "hv": "Diệp Sa",
+     "pos": "n",
+     "vi": "Diệp Sa",
+     "ex": "我是叶纱城人。",
+     "exPy": "Wǒ shì Yèshā Chéng rén.",
+     "exVi": "Tôi là người Diệp Sa."
+    },
+    {
+     "w": "学生",
+     "py": "xuésheng",
+     "hv": "học sinh",
+     "pos": "n",
+     "vi": "học sinh, sinh viên",
+     "ex": "你是学生吗？",
+     "exPy": "Nǐ shì xuésheng ma?",
+     "exVi": "Bạn là sinh viên à?"
+    },
+    {
+     "w": "朋友",
+     "py": "péngyou",
+     "hv": "bằng hữu",
+     "pos": "n",
+     "vi": "bạn, bạn bè",
+     "ex": "安娜是我朋友。",
+     "exPy": "Ānnà shì wǒ péngyou.",
+     "exVi": "Anna là bạn tôi."
+    },
+    {
+     "w": "认识",
+     "py": "rènshi",
+     "hv": "nhận thức",
+     "pos": "v",
+     "vi": "quen, quen biết (người)",
+     "ex": "认识你很高兴。",
+     "exPy": "Rènshi nǐ hěn gāoxìng.",
+     "exVi": "Rất vui được làm quen với bạn."
+    },
+    {
+     "w": "高兴",
+     "py": "gāoxìng",
+     "hv": "cao hứng",
+     "pos": "adj",
+     "vi": "vui, vui mừng",
+     "ex": "我很高兴。",
+     "exPy": "Wǒ hěn gāoxìng.",
+     "exVi": "Tôi rất vui."
+    },
+    {
+     "w": "呢",
+     "py": "ne",
+     "hv": "ni",
+     "pos": "part",
+     "vi": "còn … thì sao? (hỏi lại cùng ý)",
+     "ex": "我是越南人，你呢？",
+     "exPy": "Wǒ shì Yuènán rén, nǐ ne?",
+     "exVi": "Mình là người Việt Nam, còn bạn?"
+    }
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Tên tiếng Trung của bạn – lợi thế Hán Việt",
+   "html": "<p>Phần lớn tên người Việt có gốc Hán, nên đổi sang tiếng Trung rất dễ: tìm chữ Hán có <b>âm Hán Việt</b> giống tên mình rồi đọc theo pinyin. Thứ tự <b>họ trước, tên sau</b> – giống hệt tiếng Việt.</p><table><tr><th>Họ</th><th>Chữ Hán</th><th>Pinyin</th><th>Tên</th><th>Chữ Hán</th><th>Pinyin</th></tr><tr><td>Nguyễn</td><td>阮</td><td>Ruǎn</td><td>Lan</td><td>兰</td><td>Lán</td></tr><tr><td>Trần</td><td>陈</td><td>Chén</td><td>Minh</td><td>明</td><td>Míng</td></tr><tr><td>Lê</td><td>黎</td><td>Lí</td><td>Hùng</td><td>雄</td><td>Xióng</td></tr><tr><td>Phạm</td><td>范</td><td>Fàn</td><td>Mai</td><td>梅</td><td>Méi</td></tr><tr><td>Hoàng / Huỳnh</td><td>黄</td><td>Huáng</td><td>Hương</td><td>香</td><td>Xiāng</td></tr><tr><td>Vũ / Võ</td><td>武</td><td>Wǔ</td><td>Tuấn</td><td>俊</td><td>Jùn</td></tr><tr><td>Đặng</td><td>邓</td><td>Dèng</td><td>Bình</td><td>平</td><td>Píng</td></tr><tr><td>Ngô</td><td>吴</td><td>Wú</td><td>Hải</td><td>海</td><td>Hǎi</td></tr></table><p>Ví dụ: Nguyễn Văn Bình → <b>阮文平</b> Ruǎn Wénpíng; Trần Minh → <b>陈明</b> Chén Míng.</p><ul><li><b>小 + tên</b> (小兰, 小明): gọi thân mật người trẻ – như “bé Lan, em Minh”.</li><li><b>老 + họ</b> (老王): gọi thân người lớn tuổi, đồng nghiệp lâu năm.</li><li>Tên người nước ngoài phiên âm theo âm: Anna → 安娜 Ānnà, David → 大卫 Dàwèi.</li></ul><p>⚠️ Một âm Hán Việt có thể ứng với nhiều chữ (Linh: 玲, 灵, 铃…). Hãy hỏi gia đình hoặc giáo viên để chọn đúng chữ mang ý nghĩa tên mình.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: sh – s – x, âm r, ü và thanh nhẹ",
+   "html": "<p>Bài này có nhiều âm “xì xào” dễ lẫn. Đọc chậm, soi gương xem vị trí lưỡi và môi.</p>",
+   "items": [
+    {
+     "sym": "sh – s – x",
+     "ex": [
+      "是",
+      "四",
+      "西"
+     ],
+     "vi": "<b>sh</b> (是 shì): đầu lưỡi cong lên gần vòm miệng – như “s” uốn lưỡi. <b>s</b> (四 sì): lưỡi phẳng sau răng – như “x” tiếng Việt. <b>x</b> (西 xī): mặt lưỡi áp vòm, môi dẹt như cười. Chú ý: <b>shi, si</b> KHÔNG đọc “i”, nguyên âm gần “ư”: 是 ≈ “sư” uốn lưỡi, 四 ≈ “xư”.",
+     "pairs": [
+      [
+       "是",
+       "四"
+      ],
+      [
+       "十",
+       "西"
+      ]
+     ]
+    },
+    {
+     "sym": "r",
+     "ex": [
+      "人",
+      "认识"
+     ],
+     "vi": "r (人 rén): uốn lưỡi giống sh nhưng có rung dây thanh, hơi giống “r” nhẹ của người miền Nam đọc “ra”, không rung lưỡi. 人 rén ≈ “rấn” (en ≈ “ân”), KHÔNG đọc “dân”."
+    },
+    {
+     "sym": "ü trong yue / xue",
+     "ex": [
+      "越南",
+      "学生"
+     ],
+     "vi": "越 yuè và 学 xué chứa nguyên âm <b>ü</b> (sau y, j, q, x bỏ hai chấm). Chu tròn môi như “uy” rồi mở sang “ê” – gần “uyê” trong “khuyết” nhưng môi tròn hơn."
+    },
+    {
+     "sym": "不 + thanh 4 → bú",
+     "ex": [
+      "不是",
+      "不认识"
+     ],
+     "vi": "不是 <b>bú shì</b>, 不认识 <b>bú rènshi</b>. Trước thanh 1, 2, 3 vẫn đọc bù: 不忙 bù máng, 不好 bù hǎo, 不高兴 bù gāoxìng."
+    },
+    {
+     "sym": "thanh nhẹ",
+     "ex": [
+      "什么",
+      "名字",
+      "朋友",
+      "学生",
+      "认识"
+     ],
+     "vi": "Âm tiết sau đọc nhẹ, ngắn: shénme, míngzi, péngyou, xuésheng, rènshi. Đọc 名字 thành “míng zì” đủ thanh 4 nghe rất lơ lớ."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: Câu chữ 是 – A 是 B",
+   "html": "<p><b>A 是 B</b> = A là B, trong đó B là <b>danh từ</b> (nghề nghiệp, quốc tịch, tên…). Phủ định: <b>A 不是 B</b> (đọc <i>bú shì</i>). Câu hỏi: thêm <b>吗</b> ở cuối, trật tự giữ nguyên.</p>",
+   "table": [
+    [
+     "Khẳng định",
+     "Phủ định",
+     "Câu hỏi"
     ],
-    "games": [
-      "Tìm đồng hương: GV phát thẻ nhân vật bí mật (tên, quốc tịch, thành phố). Học viên đi quanh lớp hỏi 你叫什么名字？你是哪国人？ để tìm người cùng nước với mình – nhóm đủ người trước thắng.",
-      "Đoán quốc tịch: một học viên chọn bí mật một nước; cả lớp hỏi 你是中国人吗？你是美国人吗？… người đó chỉ được trả lời 是 / 不是. Ai đoán đúng lên thay."
+    [
+     "我是学生。",
+     "我不是老师。",
+     "你是学生吗？"
     ],
-    "errors": [
-      "Trả lời ❌ 我贵姓王 → ✅ 我姓王 (贵 chỉ dùng để hỏi người khác).",
-      "Thêm 吗 vào câu có 什么/哪: ❌ 你是哪国人吗？ → ✅ 你是哪国人？",
-      "Dùng 是 trước tính từ: ❌ 我是高兴 → ✅ 我很高兴.",
-      "Đọc 是 shì thành “si”, 人 rén thành “dân” – cần uốn lưỡi, nguyên âm “ư”/“ân”.",
-      "Đặt 也 sau 是: ❌ 我是也学生 → ✅ 我也是学生.",
-      "Đọc 不是 thành bù shì (quên biến điệu 不 + thanh 4 → bú)."
+    [
+     "Wǒ shì xuésheng.",
+     "Wǒ bú shì lǎoshī.",
+     "Nǐ shì xuésheng ma?"
     ],
-    "homework": "Làm hết bài tập trong game (≥ 80%); viết mỗi chữ Hán của bài 1 dòng; ghi âm đoạn tự giới thiệu 30 giây và so với giọng mẫu; tìm tên tiếng Trung cho 3 người trong gia đình (chữ Hán + pinyin) – dùng lại ở bài 3."
+    [
+     "Tôi là sinh viên.",
+     "Tôi không phải giáo viên.",
+     "Bạn là sinh viên à?"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "他是中国人。",
+     "py": "Tā shì Zhōngguó rén.",
+     "vi": "Anh ấy là người Trung Quốc."
+    },
+    {
+     "t": "她不是越南人，她是美国人。",
+     "py": "Tā bú shì Yuènán rén, tā shì Měiguó rén.",
+     "vi": "Cô ấy không phải người Việt Nam, cô ấy là người Mỹ."
+    },
+    {
+     "t": "你是叶纱城人吗？— 是，我是叶纱城人。",
+     "py": "Nǐ shì Yèshā Chéng rén ma? — Shì, wǒ shì Yèshā Chéng rén.",
+     "vi": "Bạn là người Diệp Sa à? — Vâng, mình là người Diệp Sa."
+    },
+    {
+     "t": "我也是学生。",
+     "py": "Wǒ yě shì xuésheng.",
+     "vi": "Tôi cũng là sinh viên."
+    }
+   ],
+   "tips": [
+    "是 chỉ nối hai danh từ. Với tính từ vẫn dùng 很 (bài 1): ❌ <i>我是高兴</i> → ✅ 我很高兴。",
+    "Trả lời ngắn “phải/vâng” = <b>是</b>, “không phải” = <b>不是</b>. Đừng trả lời ❌ <i>有</i> hay ❌ <i>对是</i>.",
+    "Trạng từ 也, 不 luôn đứng TRƯỚC 是: 我也是学生 (❌ <i>我是也学生</i>), 他也不是老师."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: Hỏi tên, hỏi họ – 叫, 姓, 贵姓",
+   "html": "<p>Ba cách hỏi tên/họ, từ thân mật đến lịch sự. <b>叫</b> đi với tên hoặc họ tên đầy đủ; <b>姓</b> chỉ đi với HỌ.</p>",
+   "table": [
+    [
+     "Câu hỏi",
+     "Câu trả lời",
+     "Dùng khi"
+    ],
+    [
+     "你叫什么名字？ Nǐ jiào shénme míngzi?",
+     "我叫阮兰。 Wǒ jiào Ruǎn Lán.",
+     "Bạn bè, người trẻ"
+    ],
+    [
+     "你姓什么？ Nǐ xìng shénme?",
+     "我姓阮。 Wǒ xìng Ruǎn.",
+     "Hỏi họ, thân mật"
+    ],
+    [
+     "您贵姓？ Nín guìxìng?",
+     "我姓王。 Wǒ xìng Wáng.",
+     "Lịch sự: người lớn, khách, lần đầu gặp"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我姓陈，叫陈明。",
+     "py": "Wǒ xìng Chén, jiào Chén Míng.",
+     "vi": "Tôi họ Trần, tên là Trần Minh."
+    },
+    {
+     "t": "她叫什么名字？— 她叫安娜。",
+     "py": "Tā jiào shénme míngzi? — Tā jiào Ānnà.",
+     "vi": "Cô ấy tên gì? — Cô ấy tên Anna."
+    },
+    {
+     "t": "老师，您贵姓？— 我姓王。",
+     "py": "Lǎoshī, nín guìxìng? — Wǒ xìng Wáng.",
+     "vi": "Thưa thầy, thầy họ gì ạ? — Thầy họ Vương."
+    },
+    {
+     "t": "认识你很高兴！",
+     "py": "Rènshi nǐ hěn gāoxìng!",
+     "vi": "Rất vui được làm quen với bạn!"
+    }
+   ],
+   "tips": [
+    "贵 (quý) là lời tôn trọng dành cho NGƯỜI KIA. Khi trả lời không lặp 贵: ❌ <i>我贵姓王</i> → ✅ 我姓王。",
+    "❌ <i>我姓阮兰</i> (姓 chỉ đi với họ) → ✅ 我姓阮 / 我叫阮兰。",
+    "Người Trung Quốc ít dùng 你姓什么 với người lớn – hãy quen miệng 您贵姓？ ngay từ đầu."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: Đại từ nghi vấn 什么, 哪 – và 呢",
+   "html": "<p><b>Đại từ nghi vấn</b> (什么 gì, 哪 nào, 谁 ai – bài 3) đặt <b>đúng vào vị trí thông tin cần hỏi</b>, trật tự câu không đổi – y như tiếng Việt. Câu đã có đại từ nghi vấn thì <b>KHÔNG thêm 吗</b>.</p><p><b>呢</b> dùng để hỏi lại cùng ý vừa nói: 我是越南人，你呢？ (Còn bạn?).</p>",
+   "table": [
+    [
+     "Câu trần thuật",
+     "Câu hỏi",
+     "Hỏi gì"
+    ],
+    [
+     "我叫小兰。",
+     "你叫什么名字？",
+     "tên"
+    ],
+    [
+     "我是越南人。",
+     "你是哪国人？",
+     "quốc tịch"
+    ],
+    [
+     "我是学生，你呢？",
+     "→ 我也是学生。",
+     "hỏi lại"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "你是哪国人？— 我是越南人。",
+     "py": "Nǐ shì nǎ guó rén? — Wǒ shì Yuènán rén.",
+     "vi": "Bạn là người nước nào? — Tôi là người Việt Nam."
+    },
+    {
+     "t": "他叫什么名字？— 他叫陈明。",
+     "py": "Tā jiào shénme míngzi? — Tā jiào Chén Míng.",
+     "vi": "Anh ấy tên gì? — Anh ấy tên Trần Minh."
+    },
+    {
+     "t": "我是叶纱城人，你呢？",
+     "py": "Wǒ shì Yèshā Chéng rén, nǐ ne?",
+     "vi": "Mình là người Diệp Sa, còn bạn?"
+    }
+   ],
+   "tips": [
+    "❌ <i>你叫什么名字吗？</i> – thừa 吗 vì đã có 什么.",
+    "Người học quen tiếng Anh hay nói ❌ <i>什么是你的名字？</i> (What is your name?). Tiếng Trung tự nhiên: 你叫什么名字？",
+    "哪 (nǎ, thanh 3) = “nào”; 那 (nà, thanh 4) = “kia, đó” (bài 3). Hai chữ khác nhau một bộ 口 và khác thanh!"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Bạn mới trong lớp",
+   "lang": "zh-CN",
+   "note": "Giờ ra chơi, lớp có một bạn mới. Tiểu Minh đến làm quen, sau đó thầy Vương vào lớp. Nghe lần 1 không nhìn chữ: bạn mới là người nước nào?",
+   "lines": [
+    {
+     "s": "小明",
+     "g": "m",
+     "t": "你好！我叫陈明。你叫什么名字？",
+     "py": "Nǐ hǎo! Wǒ jiào Chén Míng. Nǐ jiào shénme míngzi?",
+     "vi": "Chào bạn! Mình là Trần Minh. Bạn tên gì?"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "你好！我叫安娜。",
+     "py": "Nǐ hǎo! Wǒ jiào Ānnà.",
+     "vi": "Chào bạn! Mình tên là Anna."
+    },
+    {
+     "s": "小明",
+     "g": "m",
+     "t": "你是中国人吗？",
+     "py": "Nǐ shì Zhōngguó rén ma?",
+     "vi": "Bạn là người Trung Quốc à?"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "不是，我是美国人。你呢？",
+     "py": "Bú shì, wǒ shì Měiguó rén. Nǐ ne?",
+     "vi": "Không phải, mình là người Mỹ. Còn bạn?"
+    },
+    {
+     "s": "小明",
+     "g": "m",
+     "t": "我是越南人，我是叶纱城人。",
+     "py": "Wǒ shì Yuènán rén, wǒ shì Yèshā Chéng rén.",
+     "vi": "Mình là người Việt Nam, người Diệp Sa."
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "她也是越南人吗？",
+     "py": "Tā yě shì Yuènán rén ma?",
+     "vi": "Bạn ấy cũng là người Việt Nam à?"
+    },
+    {
+     "s": "小明",
+     "g": "m",
+     "t": "是，她叫阮兰。她也是学生。",
+     "py": "Shì, tā jiào Ruǎn Lán. Tā yě shì xuésheng.",
+     "vi": "Ừ, bạn ấy tên Nguyễn Lan. Bạn ấy cũng là sinh viên."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "你好，安娜！认识你很高兴。",
+     "py": "Nǐ hǎo, Ānnà! Rènshi nǐ hěn gāoxìng.",
+     "vi": "Chào Anna! Rất vui được làm quen với bạn."
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "认识你，我也很高兴。",
+     "py": "Rènshi nǐ, wǒ yě hěn gāoxìng.",
+     "vi": "Được làm quen với bạn, mình cũng rất vui."
+    },
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "同学们好！你是安娜吗？",
+     "py": "Tóngxuémen hǎo! Nǐ shì Ānnà ma?",
+     "vi": "Chào các em! Em là Anna phải không?"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "是，老师好！老师，您贵姓？",
+     "py": "Shì, lǎoshī hǎo! Lǎoshī, nín guìxìng?",
+     "vi": "Vâng, em chào thầy ạ! Thưa thầy, thầy họ gì ạ?"
+    },
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "我姓王，我是中国人。",
+     "py": "Wǒ xìng Wáng, wǒ shì Zhōngguó rén.",
+     "vi": "Thầy họ Vương, thầy là người Trung Quốc."
+    },
+    {
+     "s": "小明",
+     "g": "m",
+     "t": "王老师是云线城人！",
+     "py": "Wáng lǎoshī shì Yúnxiàn Chéng rén!",
+     "vi": "Thầy Vương là người Vân Tuyến đấy!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "安娜 (Ānnà) là người nước nào?",
+     "o": [
+      "Việt Nam",
+      "Trung Quốc",
+      "Mỹ"
+     ],
+     "a": 2,
+     "e": "安娜 nói: 不是，我是美国人。(Không phải, mình là người Mỹ.)"
+    },
+    {
+     "q": "小明 là người ở đâu?",
+     "o": [
+      "Thành phố Tú Điền",
+      "Vân Tuyến",
+      "Diệp Sa"
+     ],
+     "a": 2,
+     "e": "我是越南人，我是叶纱城人。"
+    },
+    {
+     "q": "Họ của 小兰 là gì?",
+     "o": [
+      "王 Wáng – Vương",
+      "陈 Chén – Trần",
+      "阮 Ruǎn – Nguyễn"
+     ],
+     "a": 2,
+     "e": "小明 nói 她叫阮兰 → họ 阮 (Nguyễn)."
+    },
+    {
+     "q": "Anna hỏi họ thầy giáo một cách lịch sự: 老师，您___？(gõ chữ Hán hoặc pinyin)",
+     "a": "贵姓",
+     "alt": [
+      "guixing"
+     ],
+     "e": "您贵姓？ = Thầy/ông/bà họ gì ạ? – cách hỏi lịch sự."
+    },
+    {
+     "q": "王老师 là người ở đâu?",
+     "o": [
+      "Diệp Sa",
+      "Mỹ",
+      "Vân Tuyến"
+     ],
+     "a": 2,
+     "e": "Câu cuối: 王老师是云线城人！"
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Mình và các bạn",
+   "title": "我和我的朋友",
+   "text": "你们好！我叫阮兰，我是越南人，我是叶纱城人。我是学生。\n\n安娜是我的朋友。她不是中国人，她是美国人。她也是学生。\n\n王老师是中国人，他是云线城人。认识你们，我很高兴！",
+   "py": "Nǐmen hǎo! Wǒ jiào Ruǎn Lán, wǒ shì Yuènán rén, wǒ shì Yèshā Chéng rén. Wǒ shì xuésheng.\n\nĀnnà shì wǒ de péngyou. Tā bú shì Zhōngguó rén, tā shì Měiguó rén. Tā yě shì xuésheng.\n\nWáng lǎoshī shì Zhōngguó rén, tā shì Yúnxiàn Chéng rén. Rènshi nǐmen, wǒ hěn gāoxìng!",
+   "vi": "Chào các bạn! Mình tên là Nguyễn Lan, mình là người Việt Nam, người Diệp Sa. Mình là sinh viên.\n\nAnna là bạn của mình. Bạn ấy không phải người Trung Quốc, bạn ấy là người Mỹ. Bạn ấy cũng là sinh viên.\n\nThầy Vương là người Trung Quốc, thầy là người Vân Tuyến. Được làm quen với các bạn, mình rất vui!",
+   "gloss": [
+    {
+     "w": "我的",
+     "py": "wǒ de",
+     "vi": "của tôi (的 – học kỹ ở bài 3)"
+    },
+    {
+     "w": "美国",
+     "py": "Měiguó",
+     "vi": "nước Mỹ"
+    },
+    {
+     "w": "云线城",
+     "py": "Yúnxiàn Chéng",
+     "vi": "Vân Tuyến"
+    },
+    {
+     "w": "你们",
+     "py": "nǐmen",
+     "vi": "các bạn"
+    }
+   ],
+   "qs": [
+    {
+     "q": "阮兰 là người ở đâu?",
+     "o": [
+      "Mỹ",
+      "Diệp Sa",
+      "Vân Tuyến"
+     ],
+     "a": 1,
+     "e": "我是越南人，我是叶纱城人。"
+    },
+    {
+     "q": "Câu nào ĐÚNG về 安娜?",
+     "o": [
+      "Anna là giáo viên",
+      "Anna là người Trung Quốc",
+      "Anna là sinh viên"
+     ],
+     "a": 2,
+     "e": "她也是学生。– Anna cũng là sinh viên; cô ấy là người Mỹ (不是中国人)."
+    },
+    {
+     "q": "王老师 là người nước nào? (gõ chữ Hán hoặc pinyin)",
+     "a": "中国人",
+     "alt": [
+      "中国",
+      "zhongguoren",
+      "zhongguo"
+     ],
+     "e": "王老师是中国人，他是云线城人。"
+    },
+    {
+     "q": "Trong bài, 朋友 nghĩa là gì?",
+     "o": [
+      "bạn học",
+      "học sinh",
+      "bạn bè"
+     ],
+     "a": 2,
+     "e": "朋友 péngyou = bạn bè; 同学 tóngxué = bạn học."
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "是",
+     "py": "shì",
+     "hv": "thị",
+     "parts": "日 (nhật – mặt trời) + 𤴓 (biến thể của 正 chính – ngay thẳng)",
+     "strokes": 9,
+     "vi": "là, đúng – dưới ánh mặt trời, điều ngay thẳng là đúng",
+     "words": "是, 不是"
+    },
+    {
+     "c": "叫",
+     "py": "jiào",
+     "hv": "khiếu",
+     "parts": "口 (khẩu – miệng) + 丩 (gợi âm)",
+     "strokes": 5,
+     "vi": "gọi, kêu – mở miệng gọi tên",
+     "words": "叫, 叫什么"
+    },
+    {
+     "c": "什",
+     "py": "shén",
+     "hv": "thập",
+     "parts": "亻(nhân đứng – người) + 十 (thập – mười)",
+     "strokes": 4,
+     "vi": "dùng trong 什么 (gì) – mười người cùng hỏi “gì thế?”",
+     "words": "什么"
+    },
+    {
+     "c": "名",
+     "py": "míng",
+     "hv": "danh",
+     "parts": "夕 (tịch – buổi tối) + 口 (miệng)",
+     "strokes": 6,
+     "vi": "tên – trời tối không thấy mặt, phải dùng miệng gọi tên",
+     "words": "名字"
+    },
+    {
+     "c": "字",
+     "py": "zì",
+     "hv": "tự",
+     "parts": "宀 (miên – mái nhà) + 子 (tử – con)",
+     "strokes": 6,
+     "vi": "chữ – đứa trẻ ngồi trong nhà học chữ",
+     "words": "名字, 汉字"
+    },
+    {
+     "c": "国",
+     "py": "guó",
+     "hv": "quốc",
+     "parts": "囗 (vi – vòng bao) + 玉 (ngọc)",
+     "strokes": 8,
+     "vi": "nước – biên giới bao quanh, giữ ngọc quý bên trong",
+     "words": "中国, 美国, 哪国"
+    },
+    {
+     "c": "人",
+     "py": "rén",
+     "hv": "nhân",
+     "parts": "chữ tượng hình: người đứng dạng hai chân",
+     "strokes": 2,
+     "vi": "người",
+     "words": "中国人, 越南人"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Làm quen",
+   "tasks": [
+    {
+     "p": "Tự giới thiệu trước lớp: họ, tên, quốc tịch, quê, là học sinh/sinh viên. Kết thúc bằng câu “rất vui được làm quen”.",
+     "model": "大家好！我姓阮，叫阮兰。我是越南人，我是叶纱城人。我是学生。认识你们很高兴！",
+     "py": "Dàjiā hǎo! Wǒ xìng Ruǎn, jiào Ruǎn Lán. Wǒ shì Yuènán rén, wǒ shì Yèshā Chéng rén. Wǒ shì xuésheng. Rènshi nǐmen hěn gāoxìng!",
+     "vi": "Chào mọi người! Mình họ Nguyễn, tên Nguyễn Lan. Mình là người Việt Nam, người Diệp Sa. Mình là sinh viên. Rất vui được làm quen với các bạn!",
+     "tips": "Thay bằng tên tiếng Trung của bạn (bảng họ – tên ở trên). 是 đọc uốn lưỡi, 人 đọc “rấn” chứ không phải “dân”."
+    },
+    {
+     "p": "Ở quán cà phê bạn gặp một người nước ngoài. Hỏi tên và quốc tịch, rồi nói về mình.",
+     "model": "你好！你叫什么名字？你是哪国人？我是越南人，我叫陈明。",
+     "py": "Nǐ hǎo! Nǐ jiào shénme míngzi? Nǐ shì nǎ guó rén? Wǒ shì Yuènán rén, wǒ jiào Chén Míng.",
+     "vi": "Chào bạn! Bạn tên gì? Bạn là người nước nào? Mình là người Việt Nam, mình tên Trần Minh.",
+     "tips": "Hai câu hỏi có 什么 và 哪 – không thêm 吗. Lên giọng nhẹ ở cuối câu hỏi là đủ."
+    },
+    {
+     "p": "Bạn gặp một vị khách lớn tuổi người Trung Quốc. Hỏi họ một cách lịch sự và nói rất vui được quen.",
+     "model": "您好！您贵姓？……认识您很高兴！",
+     "py": "Nín hǎo! Nín guìxìng? … Rènshi nín hěn gāoxìng!",
+     "vi": "Chào ông/bà! Ông/bà họ gì ạ? … Rất vui được làm quen với ông/bà!",
+     "tips": "Dùng 您 xuyên suốt: 认识您 thay cho 认识你."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Giới thiệu mình và một người bạn",
+   "task": "Viết 5–7 câu bằng chữ Hán: giới thiệu bản thân (họ, tên, quốc tịch, quê, nghề) và một người bạn (tên, quốc tịch, có/không phải học sinh).",
+   "min": 30,
+   "model": "我姓陈，叫陈明。我是越南人，我是叶纱城人。我是学生。\n安娜是我朋友。她不是中国人，她是美国人。她也是学生。",
+   "modelVi": "Tôi họ Trần, tên Trần Minh. Tôi là người Việt Nam, người Diệp Sa. Tôi là sinh viên. Anna là bạn tôi. Cô ấy không phải người Trung Quốc, cô ấy là người Mỹ. Cô ấy cũng là sinh viên.",
+   "tips": [
+    "Dùng 是 nối hai danh từ; phủ định bằng 不是.",
+    "也 đứng trước 是 / 不是: 她也是学生。",
+    "Tên người nước ngoài viết bằng chữ phiên âm: 安娜, 大卫."
+   ],
+   "checklist": [
+    "Có 我叫… hoặc 我姓…",
+    "Có 我是…人",
+    "Có ít nhất 1 câu với 不是",
+    "也 đặt đúng chỗ (trước 是)",
+    "Dùng dấu câu tiếng Trung 。，"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "你叫什么名字？",
+   "lang": "zh-CN",
+   "q": "Câu vừa nghe hỏi về điều gì?",
+   "o": [
+    "Quốc tịch",
+    "Sức khoẻ",
+    "Tên"
+   ],
+   "a": 2,
+   "e": "什么名字 shénme míngzi = tên gì."
+  },
+  {
+   "t": "listen",
+   "say": "我是越南人。",
+   "lang": "zh-CN",
+   "q": "Người nói là người nước nào?",
+   "o": [
+    "Việt Nam",
+    "Mỹ",
+    "Trung Quốc"
+   ],
+   "a": 0,
+   "e": "越南人 Yuènán rén = người Việt Nam."
+  },
+  {
+   "t": "listen",
+   "say": "我不是老师，我是学生。",
+   "lang": "zh-CN",
+   "q": "Người nói là ai?",
+   "o": [
+    "Người Trung Quốc",
+    "Giáo viên",
+    "Học sinh / sinh viên"
+   ],
+   "a": 2,
+   "e": "不是老师 (không phải giáo viên), 是学生 (là sinh viên)."
+  },
+  {
+   "t": "mc",
+   "q": "你是哪国人？(Nǐ shì nǎ guó rén?) – câu trả lời phù hợp:",
+   "o": [
+    "我很好。",
+    "我是越南人。",
+    "我叫小兰。"
+   ],
+   "a": 1,
+   "e": "哪国人 hỏi quốc tịch → 我是越南人。"
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào SAI?",
+   "o": [
+    "你叫什么名字吗？",
+    "你是学生吗？",
+    "你叫什么名字？"
+   ],
+   "a": 0,
+   "e": "Câu đã có đại từ nghi vấn 什么 thì không thêm 吗."
+  },
+  {
+   "t": "mc",
+   "q": "Hỏi họ của một vị khách lớn tuổi, bạn nói:",
+   "o": [
+    "您姓什么吗？",
+    "您贵姓？",
+    "你叫什么？"
+   ],
+   "a": 1,
+   "e": "您贵姓 là cách hỏi họ lịch sự nhất; câu 3 thừa 吗."
+  },
+  {
+   "t": "mc",
+   "q": "Có người hỏi bạn 您贵姓？(Nín guìxìng?). Bạn trả lời:",
+   "o": [
+    "我贵姓阮。",
+    "我姓阮。",
+    "我是姓阮。"
+   ],
+   "a": 1,
+   "e": "贵 chỉ dùng khi hỏi người khác. Trả lời: 我姓 + họ."
+  },
+  {
+   "t": "mc",
+   "q": "不是 trong câu 我不是老师 đọc là:",
+   "o": [
+    "bú shì",
+    "bū shì",
+    "bù shì"
+   ],
+   "a": 0,
+   "e": "不 đứng trước thanh 4 (是 shì) → đọc bú."
+  },
+  {
+   "t": "fill",
+   "q": "我___阮，我叫阮兰。(Tôi họ Nguyễn, tên Nguyễn Lan.)",
+   "a": "姓",
+   "alt": [
+    "xing"
+   ],
+   "e": "姓 + họ: 我姓阮。"
+  },
+  {
+   "t": "fill",
+   "q": "我是越南人，你___？(Còn bạn?)",
+   "a": "呢",
+   "alt": [
+    "ne"
+   ],
+   "e": "你呢？ = còn bạn thì sao?"
+  },
+  {
+   "t": "fill",
+   "q": "认识你很___！(Rất vui được làm quen với bạn!)",
+   "a": "高兴",
+   "alt": [
+    "gaoxing"
+   ],
+   "e": "认识你很高兴 – câu cố định khi làm quen."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Bạn là người nước nào?”",
+   "w": [
+    "人",
+    "你",
+    "哪",
+    "是",
+    "国"
+   ],
+   "a": "你是哪国人",
+   "e": "你 + 是 + 哪国人 – đại từ nghi vấn 哪 đứng đúng chỗ thông tin cần hỏi."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Anh ấy cũng không phải giáo viên.”",
+   "w": [
+    "不",
+    "老师",
+    "他",
+    "是",
+    "也"
+   ],
+   "a": "他也不是老师",
+   "e": "Chủ ngữ + 也 + 不是 + danh từ."
+  },
+  {
+   "t": "dict",
+   "say": "名字",
+   "lang": "zh-CN",
+   "a": "名字",
+   "py": "míngzi",
+   "e": "名字 míngzi – 字 đọc thanh nhẹ."
+  },
+  {
+   "t": "dict",
+   "say": "我是学生。",
+   "lang": "zh-CN",
+   "a": "我是学生",
+   "py": "wǒ shì xuésheng",
+   "e": "学生 xuésheng – 生 đọc thanh nhẹ."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa:",
+   "pairs": [
+    [
+     "中国人",
+     "người Trung Quốc"
+    ],
+    [
+     "越南人",
+     "người Việt Nam"
+    ],
+    [
+     "美国人",
+     "người Mỹ"
+    ],
+    [
+     "朋友",
+     "bạn bè"
+    ],
+    [
+     "学生",
+     "học sinh, sinh viên"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ tên trống để học viên viết tên tiếng Trung; bảng họ – tên Hán Việt (phần “Tên tiếng Trung của bạn”) in sẵn; ảnh cờ 4 nước (Việt Nam, Trung Quốc, Mỹ, Hàn Quốc); thẻ chữ 是 叫 什 名 字 国 人.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: ôn bài 1 bằng chuỗi 你好！– 你好吗？– 我很好，你呢？ Mỗi học viên chào và hỏi thăm bạn bên cạnh."
+   },
+   {
+    "t": "15'",
+    "do": "Đặt tên tiếng Trung: phát bảng họ – tên Hán Việt; học viên tìm chữ cho tên mình, viết lên thẻ tên kèm pinyin. GV kiểm tra, gợi ý chữ đẹp nghĩa cho tên khó."
+   },
+   {
+    "t": "20'",
+    "do": "Từ vựng 18 từ: dạy theo cụm (叫什么名字, 哪国人, 认识你很高兴). Đọc mẫu – lớp nhắc – từng bàn. Nhấn thanh nhẹ: 什么, 名字, 朋友, 学生, 认识."
+   },
+   {
+    "t": "15'",
+    "do": "Phát âm: sh – s – x (是 – 四 – 西) và r (人). Học viên soi gương/điện thoại xem lưỡi; đọc cặp tối thiểu 是/四, 十/西. GV sửa lỗi đọc 是 thành “si”, 人 thành “dân”."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 1–2: câu 是 / 不是 (bú shì); hỏi tên với 叫, 姓, 贵姓. Viết ❌ 我贵姓王 và ❌ 我是高兴 lên bảng, cả lớp tìm lỗi."
+   },
+   {
+    "t": "10'",
+    "do": "Làm bài tập 1–8 trong game, chữa nhanh."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: GV giơ ảnh cờ, học viên nói 他是…人 / 她不是…人 nhanh nhất có thể."
+   },
+   {
+    "t": "15'",
+    "do": "Ngữ pháp 3: đại từ nghi vấn + 呢. Cho câu trần thuật, học viên biến thành câu hỏi bằng cách thay đúng chỗ bằng 什么 / 哪."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe hội thoại: lần 1 chỉ nghe – bạn mới là người nước nào? Lần 2 xem pinyin, trả lời câu hỏi. Lần 3 đọc phân vai 4 người."
+   },
+   {
+    "t": "15'",
+    "do": "Đọc ‘我和我的朋友’: học viên đọc pinyin, sau đó che pinyin đọc chữ Hán; tự dịch từng câu rồi so với bản dịch."
+   },
+   {
+    "t": "20'",
+    "do": "Chữ Hán 7 chữ (nhấn bộ 口, 亻, 宀, 囗). Sau đó mỗi học viên tự giới thiệu 30 giây trước lớp (nhiệm vụ nói 1)."
+   },
+   {
+    "t": "15'",
+    "do": "Viết đoạn giới thiệu, làm bài tập 9–16, giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Tìm đồng hương: GV phát thẻ nhân vật bí mật (tên, quốc tịch, thành phố). Học viên đi quanh lớp hỏi 你叫什么名字？你是哪国人？ để tìm người cùng nước với mình – nhóm đủ người trước thắng.",
+   "Đoán quốc tịch: một học viên chọn bí mật một nước; cả lớp hỏi 你是中国人吗？你是美国人吗？… người đó chỉ được trả lời 是 / 不是. Ai đoán đúng lên thay."
+  ],
+  "errors": [
+   "Trả lời ❌ 我贵姓王 → ✅ 我姓王 (贵 chỉ dùng để hỏi người khác).",
+   "Thêm 吗 vào câu có 什么/哪: ❌ 你是哪国人吗？ → ✅ 你是哪国人？",
+   "Dùng 是 trước tính từ: ❌ 我是高兴 → ✅ 我很高兴.",
+   "Đọc 是 shì thành “si”, 人 rén thành “dân” – cần uốn lưỡi, nguyên âm “ư”/“ân”.",
+   "Đặt 也 sau 是: ❌ 我是也学生 → ✅ 我也是学生.",
+   "Đọc 不是 thành bú shì (quên biến điệu 不 + thanh 4 → bú)."
+  ],
+  "homework": "Làm hết bài tập trong game (≥ 80%); viết mỗi chữ Hán của bài 1 dòng; ghi âm đoạn tự giới thiệu 30 giây và so với giọng mẫu; tìm tên tiếng Trung cho 3 người trong gia đình (chữ Hán + pinyin) – dùng lại ở bài 3."
+ }
 }

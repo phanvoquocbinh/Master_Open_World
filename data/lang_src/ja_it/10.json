@@ -1,0 +1,704 @@
+{
+ "no": 10,
+ "title": "Ưu tiên sự cố: ít lần xảy ra vẫn có thể ảnh hưởng lớn",
+ "sub": "再現が 少ないからといって、影響が 小さいとは 限りません。",
+ "goals": [
+  "Phân biệt mức tác động đã quan sát với thứ tự nên xử lý trong bối cảnh.",
+  "Đọc tần suất kèm mẫu thử, phạm vi và khả năng mất hoặc khôi phục dữ liệu giả.",
+  "Thương lượng biện pháp tạm thời, người quyết và thời điểm xem lại ưu tiên.",
+  "Viết cập nhật có dữ kiện, giả thuyết, cách giảm ảnh hưởng và phần chưa xác nhận."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Nhóm kiểm một ứng dụng cho mượn đồ giả có hai lỗi: A hiển thị lệch màu 8/10 lượt; B bấm gửi lại tạo hai phiếu 1/20 chuỗi thử. Đây là tần suất trong bộ thử giả, không ước lượng tự động tỷ lệ người dùng thật. B có thể đáng ưu tiên hơn nếu tạo công việc đối soát hoặc ảnh hưởng tồn dụng cụ, nhưng mức tác động ấy phải kiểm. Bài học luyện cách hỏi thay vì đồng nhất “xảy ra nhiều” với “phải sửa trước”.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>重大度 đọc じゅうだいど, 優先度 đọc ゆうせんど; giữ juu và yuu dài, không coi hai từ là đồng nghĩa. 暫定対処 là ざんていたいしょ có chuỗi te-i/ta-i và しょ nhỏ. 再送 đọc さいそう, 二重登録 là にじゅうとうろく, đừng lược phần 二重 vì nó chỉ bản chất sự việc cần phân tích.</p>",
+   "items": [
+    {
+     "sym": "重大度・優先度",
+     "ex": [
+      "じゅうだいど",
+      "ゆうせんど"
+     ],
+     "vi": "Đọc và giải riêng mức tác động với thứ tự làm; độ dài nguyên âm cần rõ trong báo cáo."
+    },
+    {
+     "sym": "暫定対処・二重登録",
+     "ex": [
+      "ざんていたいしょ",
+      "にじゅうとうろく"
+     ],
+     "vi": "Giữ chữ ghép và nguyên âm liền để phân cách xử lý tạm với hiện tượng trùng đăng ký."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "重大度",
+     "kana": "じゅうだいど",
+     "romaji": "juudaido",
+     "vi": "mức tác động của lỗi theo tiêu chí nhóm",
+     "ex": "重大度の根拠を被害別に書きます。",
+     "exVi": "Tôi ghi căn cứ tác động theo loại thiệt hại."
+    },
+    {
+     "w": "優先度",
+     "kana": "ゆうせんど",
+     "romaji": "yuusendo",
+     "vi": "thứ tự ưu tiên xử lý theo bối cảnh",
+     "ex": "優先度は会議で見直します。",
+     "exVi": "Tôi xem lại ưu tiên trong họp."
+    },
+    {
+     "w": "再現率",
+     "kana": "さいげんりつ",
+     "romaji": "saigenritsu",
+     "vi": "tỷ lệ tái hiện trong bộ thử nêu",
+     "ex": "再現率は二十回中一回でした。",
+     "exVi": "Trong hai mươi lần thử tái hiện một lần."
+    },
+    {
+     "w": "母数",
+     "kana": "ぼすう",
+     "romaji": "bosuu",
+     "vi": "tập/số gốc để tính trong ngữ cảnh",
+     "ex": "母数を実利用者と混同しません。",
+     "exVi": "Tôi không trộn mẫu thử với người dùng thực."
+    },
+    {
+     "w": "発生条件",
+     "kana": "はっせいじょうけん",
+     "romaji": "hassei jooken",
+     "vi": "điều kiện xảy ra",
+     "ex": "発生条件は再送を含みます。",
+     "exVi": "Điều kiện xảy ra có gửi lại."
+    },
+    {
+     "w": "業務影響",
+     "kana": "ぎょうむえいきょう",
+     "romaji": "gyoomu eikyoo",
+     "vi": "ảnh hưởng tới công việc sử dụng",
+     "ex": "業務影響はまだ未確認です。",
+     "exVi": "Ảnh hưởng công việc vẫn chưa kiểm."
+    },
+    {
+     "w": "回避策",
+     "kana": "かいひさく",
+     "romaji": "kaihisaku",
+     "vi": "cách tránh hiện tượng trong lúc chờ sửa",
+     "ex": "回避策の条件を案内します。",
+     "exVi": "Tôi báo điều kiện của cách tránh."
+    },
+    {
+     "w": "暫定対処",
+     "kana": "ざんていたいしょ",
+     "romaji": "zantei taisho",
+     "vi": "biện pháp tạm giảm ảnh hưởng",
+     "ex": "暫定対処と恒久修正を分けます。",
+     "exVi": "Tôi tách xử lý tạm với sửa lâu dài."
+    },
+    {
+     "w": "恒久修正",
+     "kana": "こうきゅうしゅうせい",
+     "romaji": "kookyuu shuusei",
+     "vi": "sửa để giải nguyên nhân trong phạm vi",
+     "ex": "恒久修正は別に検証します。",
+     "exVi": "Tôi kiểm riêng sửa lâu dài."
+    },
+    {
+     "w": "二重登録",
+     "kana": "にじゅうとうろく",
+     "romaji": "nijuu tooroku",
+     "vi": "tạo đăng ký trùng",
+     "ex": "二重登録を架空データで確認します。",
+     "exVi": "Tôi kiểm đăng ký trùng bằng dữ liệu giả."
+    },
+    {
+     "w": "整合性",
+     "kana": "せいごうせい",
+     "romaji": "seigoosei",
+     "vi": "độ nhất quán giữa dữ liệu liên quan",
+     "ex": "票と在庫の整合性を照合します。",
+     "exVi": "Tôi so nhất quán phiếu với tồn."
+    },
+    {
+     "w": "復元",
+     "kana": "ふくげん",
+     "romaji": "fukugen",
+     "vi": "đưa dữ liệu về trạng thái trước theo cách nêu",
+     "ex": "復元できる範囲を調べます。",
+     "exVi": "Tôi kiểm phần phục hồi được."
+    },
+    {
+     "w": "判定保留",
+     "kana": "はんていほりゅう",
+     "romaji": "hantei horyuu",
+     "vi": "giữ chưa chốt phân loại",
+     "ex": "影響不足で判定保留にします。",
+     "exVi": "Thiếu thông tin tác động nên giữ chờ phân loại."
+    },
+    {
+     "w": "監視",
+     "kana": "かんし",
+     "romaji": "kanshi",
+     "vi": "theo dõi chỉ báo trong khoảng nêu",
+     "ex": "監視する項目を三つにします。",
+     "exVi": "Tôi chọn ba mục theo dõi."
+    },
+    {
+     "w": "切り戻し",
+     "kana": "きりもどし",
+     "romaji": "kirimodoshi",
+     "vi": "quay về trạng thái/phiên bản trước theo kế hoạch",
+     "ex": "切り戻しの条件を確認します。",
+     "exVi": "Tôi kiểm điều kiện quay về."
+    },
+    {
+     "w": "連絡経路",
+     "kana": "れんらくけいろ",
+     "romaji": "renraku keiro",
+     "vi": "đường chuyển thông tin tới người cần",
+     "ex": "連絡経路を担当表に残します。",
+     "exVi": "Tôi giữ đường báo trong bảng vai."
+    },
+    {
+     "w": "判定者",
+     "kana": "はんていしゃ",
+     "romaji": "hanteisha",
+     "vi": "người quyết phân loại/phương án",
+     "ex": "判定者に未確認を伝えます。",
+     "exVi": "Tôi báo phần chưa kiểm cho người quyết."
+    },
+    {
+     "w": "調査範囲",
+     "kana": "ちょうさはんい",
+     "romaji": "choosa han'i",
+     "vi": "phạm vi đang điều tra",
+     "ex": "調査範囲は検証環境だけです。",
+     "exVi": "Phạm vi điều tra chỉ môi trường thử."
+    },
+    {
+     "w": "証跡",
+     "kana": "しょうせき",
+     "romaji": "shooseki",
+     "vi": "bằng chứng ghi lại điều đã xảy ra",
+     "ex": "証跡には架空の識別子を使います。",
+     "exVi": "Tôi dùng mã giả trong bằng chứng."
+    },
+    {
+     "w": "更新時刻",
+     "kana": "こうしんじこく",
+     "romaji": "kooshin jikoku",
+     "vi": "mốc cập nhật thông tin tiếp",
+     "ex": "更新時刻を午後四時にします。",
+     "exVi": "Tôi đặt cập nhật tiếp bốn giờ chiều."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Luyện 頻度が低いからといって影響が小さいとは限らない để bác đồng nhất một chỉ số. ～を優先する案ですが、…は未確認です đưa đề nghị mà giữ ranh giới. ～場合に限って回避できます chỉ điều kiện cách tránh, không hứa bao phủ mọi trường hợp. 原因の修正ではなく影響の抑制です phân xử lý tạm với sửa căn nguyên. Những tên mức độ trong bài dùng tiêu chí nhóm giả, không tự áp một thang chuẩn mọi tổ chức.</p>",
+   "table": [
+    [
+     "Nhu cầu",
+     "Mẫu trao đổi"
+    ],
+    [
+     "Bác suy theo tần suất",
+     "少ないからといって軽いとは限らない"
+    ],
+    [
+     "Đề nghị có giới hạn",
+     "二重登録を優先する案です"
+    ],
+    [
+     "Điều kiện tránh",
+     "再送しない場合に限って回避できる"
+    ],
+    [
+     "Giữ trạng thái điều tra",
+     "在庫への影響は未確認です"
+    ],
+    [
+     "Phân sửa tạm",
+     "原因修正ではなく影響抑制です"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "再現が 少ないからといって、影響が 小さいとは 限りません。",
+     "vi": "Ít tái hiện chưa có nghĩa tác động nhỏ."
+    },
+    {
+     "t": "二重登録を 優先して 調べる案です。",
+     "vi": "Đề xuất ưu tiên kiểm đăng ký trùng."
+    },
+    {
+     "t": "在庫への 影響は、まだ 確認していません。",
+     "vi": "Ảnh hưởng tới tồn vẫn chưa kiểm."
+    },
+    {
+     "t": "これは 原因修正ではなく、影響を 抑える 暫定対処です。",
+     "vi": "Đây là giảm ảnh hưởng tạm, không sửa nguyên nhân."
+    },
+    {
+     "t": "次は 午後四時に、判定者へ 更新します。",
+     "vi": "Tiếp theo bốn giờ chiều tôi cập nhật người quyết."
+    }
+   ],
+   "tips": [
+    "<p>Không nói 1/20 người dùng bị lỗi từ 1/20 chuỗi thử; tập đo phải rõ.</p>",
+    "<p>Ưu tiên có bối cảnh thời gian, cách tránh và người quyết, không chỉ nhãn nghiêm trọng.</p>",
+    "<p>Quay phiên bản không tự hoàn tác dữ liệu đã tạo; trong tình huống giả cần hỏi việc đối soát/phục hồi riêng.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Nhóm từ bỏ suy tần suất cao là ưu tiên cao, giữ tác động dữ liệu chưa kiểm và phân cách tránh với sửa nguyên nhân.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "色ずれは十回中八回、二重登録は二十回中一回です。頻度が高い色ずれから直すべきでしょうか。",
+     "vi": "Lệch màu tám trong mười, trùng một trong hai mươi. Có nên sửa màu trước vì nhiều hơn?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "その数は検証環境の試行ですね。業務影響、回避策、復元の条件も確認してから優先度を決めたいです。",
+     "vi": "Đó là lượt thử trong môi trường kiểm nhỉ. Cần xem tác động công việc, tránh và phục hồi rồi quyết ưu tiên."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "色はずれますが、文字と操作は使えました。二重の票は二つとも一覧に出ます。在庫まで二回減ったかは見ていません。",
+     "vi": "Màu lệch nhưng chữ/thao tác dùng được. Hai phiếu đều hiện danh sách, chưa xem tồn giảm hai lần không."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "では、二重登録のデータ整合性を先に調べる案を出します。ただ、在庫損失を確認したとまでは報告しません。",
+     "vi": "Vậy đề xuất kiểm nhất quán trùng trước, nhưng chưa báo đã xác nhận mất tồn."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "回避策として、返事が遅くても再送しないと案内できます。これで修正済みと書いてよいでしょうか。",
+     "vi": "Có thể chỉ dù trả lời chậm đừng gửi lại. Vậy ghi đã sửa được không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "いいえ。今回の条件で発生を避ける暫定対処です。利用者が守れない場合や別の経路は未確認なので、原因の修正とは分けます。",
+     "vi": "Không. Đây là tránh trong điều kiện bài, xử lý tạm. Ai không làm theo hoặc kênh khác chưa kiểm, phải tách sửa căn nguyên."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "切り戻せば二重の票も自動で消えると思っていました。前の版を動かすことと、作られたデータを戻すことも別ですね。",
+     "vi": "Tôi tưởng quay bản thì phiếu trùng tự mất. Chạy bản trước với đưa dữ liệu đã tạo về cũng khác nhỉ."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。この練習では、票と在庫の対照表を残してから復元できる範囲を確認します。証跡には実利用者の情報を入れません。",
+     "vi": "Vâng. Trong bài giữ bảng so phiếu/tồn rồi kiểm phạm vi phục hồi. Bằng chứng không có người dùng thật."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "判定者には、観察済みは二つの票、在庫は未確認、再送しない回避策は限定条件付きと伝えます。次は四時に更新します。",
+     "vi": "Tôi báo người quyết đã thấy hai phiếu, tồn chưa kiểm, cách không gửi lại chỉ có điều kiện. Cập nhật tiếp bốn giờ."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "ありがとうございます。調査の結果で優先度を変える条件も残しましょう。色の問題でも文字が読めない画面が見つかれば、影響の評価は変わります。頻度の数字は、観察した条件の説明と一緒に残してください。",
+     "vi": "Cảm ơn. Giữ điều kiện đổi ưu tiên theo kiểm. Nếu tìm màn màu khiến không đọc chữ thì đánh giá tác động màu cũng đổi. Xin giữ số tần suất cùng mô tả điều kiện đã quan sát."
+    }
+   ],
+   "qs": [
+    {
+     "q": "数値の母数は何ですか。",
+     "o": [
+      "全実利用者",
+      "全端末の台数",
+      "検証環境の試行"
+     ],
+     "a": 2,
+     "e": "Tần suất trong chuỗi thử nêu, chưa tự đo người dùng thật."
+    },
+    {
+     "q": "先に調べる提案は何ですか。",
+     "o": [
+      "全データの即時削除",
+      "二重登録と在庫の整合",
+      "色だけを無条件修正"
+     ],
+     "a": 1,
+     "e": "Tác động dữ liệu có thể quan trọng nên kiểm trước, nhưng chưa khẳng định tồn mất."
+    },
+    {
+     "q": "再送しない案は何に当たりますか。",
+     "o": [
+      "限定条件での暫定対処",
+      "恒久修正の完了",
+      "全経路の成功保証"
+     ],
+     "a": 0,
+     "e": "Cách tránh hành động trong điều kiện nêu không chứng minh căn nguyên đã sửa."
+    },
+    {
+     "q": "優先度を変える条件は何ですか。",
+     "o": [
+      "提案者の好みだけ",
+      "数値が低いので永久固定",
+      "新たな影響や回避条件の確認"
+     ],
+     "a": 2,
+     "e": "Kết luận tạm theo bằng chứng, tác động màu có thể đổi nếu không đọc được."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "架空の貸出アプリの検証環境で、二つの問題が見つかった。問題甲は一覧の色ずれで、十回の表示のうち八回に見られた。問題乙は送信後に返事が遅いとき、同じ操作をもう一度行うと二つの票が作られる現象で、二十回の操作列のうち一回再現した。担当者は頻度の高い甲から修正すべきだと考えたが、その数字だけで業務上の優先度は決められない。\n\n甲では文字が読め、試した範囲の操作は完了した。乙では二つの票が一覧に出たが、在庫が二回減るか、同じ票として後で照合されるかはまだ未確認だった。少ない回数しか再現しなくても、データの整合性や復元に関わるなら、先に調べる必要があるかもしれない。ただし、影響がありそうだという理由だけで、実際に損失が発生したと報告してはならない。\n\nチームは、重大度を観察した影響の大きさ、優先度を今回の状況で先に扱う順番として説明した。これは教材内での用語の整理であり、どの組織にも同じ分類名を強制するものではない。期限、回避策の有効な範囲、調査の人員、影響の不確実性を合わせて相談する。確認不足なら判定保留とし、必要な証跡を集める担当と時刻を決める。\n\n乙の回避策は、返事が遅くても同じ操作を再送しないというものだった。しかし、それは人が案内どおりに操作する場合に限られ、別経路や別条件で起きないとは確認されていない。案内を出したことを恒久修正済みと数えれば、原因の調査が残っていることを見失う。暫定対処、原因修正、修正後の再確認は別の項目にし、どこまで終わったかを更新する。\n\n切り戻しについても確認が必要だった。前の版を使うことと、すでに作られた票を消したり戻したりすることは、同じ作業とは限らない。この練習では、架空の票番号と在庫の対照表を保存し、どの範囲なら復元できるかを別に調べる。証跡に実際の人の情報や接続先を入れず、必要な手順と状態だけを残す。回避策があることから、利用者への連絡が不要になるとも言えない。\n\n最初の更新では、観察済みは二重の票、在庫影響は未確認、回避策は再送しない場合に限定とまとめた。午後四時に判定者へ次の報告を行う。もし甲の色ずれによって文字が読めない例が見つかれば、甲の重大度と優先度も見直す。乙で在庫の二重減少が否定されたとしても、票の照合負担まで自動的になくなるわけではない。新しい根拠が何を変え、何を変えないかを明確にすることが、優先順位を固定化しないための実務である。",
+   "vi": "Trong môi trường kiểm của ứng dụng mượn đồ giả có hai lỗi. A lệch màu ở tám trong mười lần hiển thị. B tạo hai phiếu khi chờ phản hồi lâu rồi gửi lại, tái hiện một trong hai mươi chuỗi thao tác. Người phụ trách nghĩ sửa A trước vì xuất hiện nhiều, nhưng riêng con số ấy chưa quyết được ưu tiên công việc.\n\nVới A, chữ vẫn đọc được và thao tác trong phạm vi thử hoàn tất. Với B, hai phiếu hiện trên danh sách nhưng chưa kiểm tồn có giảm hai lần hay hai phiếu được đối chiếu sau. Dù ít tái hiện, nếu liên quan nhất quán dữ liệu hoặc phục hồi thì có thể cần điều tra trước. Tuy nhiên khả năng tác động khác với đã xác nhận thiệt hại.\n\nNhóm định nghĩa mức nghiêm trọng là độ tác động đã quan sát, ưu tiên là thứ tự xử lý trong hoàn cảnh này. Đây là cách gọi riêng của bài, không buộc mọi tổ chức cùng phân loại. Cần bàn hạn, phạm vi cách tránh, người kiểm và phần chưa chắc. Thiếu căn cứ thì giữ chờ phân loại, nhưng phải có người và mốc thu bằng chứng.\n\nCách tránh B là không gửi lại khi phản hồi chậm. Nó chỉ có hiệu lực khi thao tác theo điều kiện nêu, còn kênh khác chưa được kiểm. Đã phát hướng dẫn không có nghĩa sửa lâu dài xong. Cần ghi riêng xử lý tạm, sửa nguyên nhân và kiểm sau sửa, rồi cập nhật từng trạng thái.\n\nQuay về phiên bản trước khác với xử lý dữ liệu đã tạo. Bài này giữ bảng so mã phiếu giả với tồn, kiểm riêng phần phục hồi được. Bằng chứng không chứa thông tin người thật hoặc địa chỉ kết nối, chỉ giữ trình tự và trạng thái cần. Có cách tránh cũng chưa làm mất nhu cầu báo người liên quan.\n\nBản cập nhật đầu ghi đã thấy hai phiếu, ảnh hưởng tồn chưa kiểm, cách tránh chỉ trong điều kiện không gửi lại. Bốn giờ chiều sẽ báo người quyết. Nếu tìm thấy A khiến chữ không đọc được, đánh giá A phải đổi. Nếu bác được tồn giảm hai lần, công đối chiếu phiếu vẫn có thể còn. Cần nói căn cứ mới thay điều gì và không thay điều gì để ưu tiên không bị cố định.",
+   "gloss": [
+    {
+     "w": "重大度",
+     "kana": "じゅうだいど",
+     "romaji": "juudaido",
+     "vi": "mức tác động của lỗi theo tiêu chí nhóm"
+    },
+    {
+     "w": "優先度",
+     "kana": "ゆうせんど",
+     "romaji": "yuusendo",
+     "vi": "thứ tự ưu tiên xử lý theo bối cảnh"
+    },
+    {
+     "w": "回避策",
+     "kana": "かいひさく",
+     "romaji": "kaihisaku",
+     "vi": "cách tránh hiện tượng trong lúc chờ sửa"
+    },
+    {
+     "w": "暫定対処",
+     "kana": "ざんていたいしょ",
+     "romaji": "zantei taisho",
+     "vi": "biện pháp tạm giảm ảnh hưởng"
+    },
+    {
+     "w": "恒久修正",
+     "kana": "こうきゅうしゅうせい",
+     "romaji": "kookyuu shuusei",
+     "vi": "sửa để giải nguyên nhân trong phạm vi"
+    },
+    {
+     "w": "整合性",
+     "kana": "せいごうせい",
+     "romaji": "seigoosei",
+     "vi": "độ nhất quán giữa dữ liệu liên quan"
+    }
+   ],
+   "qs": [
+    {
+     "q": "頻度だけで優先度を決めない理由は何ですか。",
+     "o": [
+      "全ての頻度が嘘だから",
+      "低頻度は必ず最重大だから",
+      "影響や回避、復元の条件が別にある"
+     ],
+     "a": 2,
+     "e": "Tần suất không tự bao trọn tác động, nhưng cũng không tự đảo thành ít là nặng nhất."
+    },
+    {
+     "q": "乙で確定した観察は何ですか。",
+     "o": [
+      "全利用者が損失を受けた",
+      "一覧に二つの票が出た",
+      "在庫が必ず二回減った"
+     ],
+     "a": 1,
+     "e": "Hai phiếu là hiện tượng thấy, tồn/ảnh hưởng thật cần kiểm riêng."
+    },
+    {
+     "q": "回避策の限界は何ですか。",
+     "o": [
+      "再送しない条件に限定し別経路は未確認",
+      "全経路の原因が修正済み",
+      "全通知が不要になる"
+     ],
+     "a": 0,
+     "e": "Cách tránh có phạm vi, không chứng minh sửa nguyên nhân."
+    },
+    {
+     "q": "切り戻しで別に確認するものは何ですか。",
+     "o": [
+      "前の版の名前だけ",
+      "担当者の好み",
+      "既に作られたデータを復元できる範囲"
+     ],
+     "a": 2,
+     "e": "Phiên bản chạy trước khác dữ liệu đã tạo, cần phục hồi/đối soát riêng."
+    },
+    {
+     "q": "新しい根拠の扱いとして合うのはどれですか。",
+     "o": [
+      "一項目が否定されれば全影響も消す",
+      "何を変え何を変えないかを分ける",
+      "一度決めた優先度は固定"
+     ],
+     "a": 1,
+     "e": "Giải một tác động chưa xóa mọi tác động khác, quyết định phải cập nhật có phạm vi."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thẻ mới: lỗi ảnh thiếu thường xuyên nhưng chữ rõ; một lần thao tác làm mất bản nháp giả, chưa biết phục hồi. Đề nghị ưu tiên kiểm nào và giới hạn báo.",
+     "model": "画像の欠落は頻繁ですが、文字と操作は使えています。一方、下書きが消えた一例は復元の可否が未確認なので、先に影響と復元条件を調べる案です。実利用者の損失とはまだ報告せず、試験の母数と条件を明記します。次は午後五時に確認済みと未確認を更新します。",
+     "vi": "Ảnh thiếu thường xuyên nhưng chữ và thao tác vẫn dùng được. Một trường hợp mất bản nháp giả chưa biết có phục hồi được không, nên tôi đề xuất kiểm tác động và điều kiện phục hồi trước. Chưa báo thiệt hại của người dùng thật; cần nêu mẫu thử và điều kiện. Năm giờ chiều cập nhật phần đã và chưa kiểm.",
+     "tips": "Giữ mất bản nháp trong dữ liệu giả, đừng biến thành mất thật của khách."
+    },
+    {
+     "p": "Bạn bị yêu cầu ghi đã sửa vì phát hướng dẫn tránh. Phản hồi lịch sự tách ba trạng thái và hỏi người quyết.",
+     "model": "案内を出したことは完了ですが、条件付きの回避策であり、恒久修正の完了とは分けたいです。原因の調査と修正後の確認が残っています。更新には三つの状態を別に書き、判定者へこの扱いでよいか確認してもよろしいでしょうか。",
+     "vi": "Đã phát hướng dẫn là việc hoàn tất, nhưng đó là cách tránh có điều kiện, chưa phải sửa nguyên nhân lâu dài. Điều tra nguyên nhân và kiểm sau sửa còn tiếp tục. Tôi muốn ghi ba trạng thái riêng rồi hỏi người quyết cách phân này có phù hợp không.",
+     "tips": "Từ chối nhãn sai bằng thông tin cụ thể, vẫn nêu điều đã làm xong."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết cập nhật 230–310 chữ Nhật: A lệch màu 8/10 lần nhưng còn đọc được; B tạo phiếu trùng 1/20 chuỗi thử, ảnh hưởng tồn chưa kiểm. Đề xuất kiểm B trước; không gửi lại là cách tránh có điều kiện, chưa sửa lâu dài. Quay phiên bản khác với phục hồi dữ liệu. Báo tiếp lúc bốn giờ chiều.",
+   "model": "検証環境では、色ずれが十回中八回、二重登録が二十回中一回でした。色の問題でも文字と操作は使えていますが、二重の票が在庫へ与える影響は未確認です。頻度だけで軽重を決めず、先に整合性を調べる案を出します。再送しない回避策は限定条件での暫定対処であり、恒久修正済みとはしません。切り戻しと作成済みデータの復元も別に確認し、架空の票と在庫を照合します。午後四時に判定者へ更新し、新しい影響が見つかれば優先度を再検討します。実利用者の損失率として試行数を扱わないことも明記します。",
+   "modelVi": "Trong môi trường kiểm, lệch màu xảy ra tám trong mười lần, trùng phiếu một trong hai mươi chuỗi. Chữ và thao tác vẫn dùng được với lỗi màu, nhưng ảnh hưởng phiếu trùng tới tồn chưa kiểm. Không quyết nặng nhẹ chỉ theo tần suất, tôi đề xuất kiểm nhất quán trước. Không gửi lại là tránh tạm có điều kiện, chưa sửa lâu dài. Quay phiên bản và phục hồi dữ liệu được kiểm riêng, dùng phiếu cùng tồn giả để đối chiếu. Bốn giờ chiều báo người quyết; có tác động mới sẽ xem ưu tiên lại. Mẫu thử không phải tỷ lệ thiệt hại của người dùng thật.",
+   "min": 230,
+   "tips": [
+    "Con số chỉ áp cho bộ thử đã nêu, không viết thành tỷ lệ người dùng thật.",
+    "Báo ưu tiên là đề xuất cho người quyết, không tự khẳng định tác động chưa kiểm."
+   ],
+   "checklist": [
+    "Đúng hai mẫu thử và hiện tượng.",
+    "Tồn giữ chưa kiểm.",
+    "Tạm tránh khác sửa nguyên nhân.",
+    "Có phục hồi riêng, giờ cập nhật và điều kiện đổi ưu tiên."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “重大度” nghĩa là gì?",
+   "o": [
+    "điều kiện xảy ra",
+    "sửa để giải nguyên nhân trong phạm vi",
+    "mức tác động của lỗi theo tiêu chí nhóm"
+   ],
+   "a": 2,
+   "e": "重大度の根拠を被害別に書きます。 → Tôi ghi căn cứ tác động theo loại thiệt hại. Từ cần nhận diện là “重大度”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “優先度” nghĩa là gì?",
+   "o": [
+    "tạo đăng ký trùng",
+    "thứ tự ưu tiên xử lý theo bối cảnh",
+    "ảnh hưởng tới công việc sử dụng"
+   ],
+   "a": 1,
+   "e": "優先度は会議で見直します。 → Tôi xem lại ưu tiên trong họp. Từ cần nhận diện là “優先度”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “再現率” nghĩa là gì?",
+   "o": [
+    "tỷ lệ tái hiện trong bộ thử nêu",
+    "cách tránh hiện tượng trong lúc chờ sửa",
+    "độ nhất quán giữa dữ liệu liên quan"
+   ],
+   "a": 0,
+   "e": "再現率は二十回中一回でした。 → Trong hai mươi lần thử tái hiện một lần. Từ cần nhận diện là “再現率”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “母数” nghĩa là gì?",
+   "o": [
+    "biện pháp tạm giảm ảnh hưởng",
+    "đưa dữ liệu về trạng thái trước theo cách nêu",
+    "tập/số gốc để tính trong ngữ cảnh"
+   ],
+   "a": 2,
+   "e": "母数を実利用者と混同しません。 → Tôi không trộn mẫu thử với người dùng thực. Từ cần nhận diện là “母数”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền bác suy: 少ないからと___、軽いとは限りません。",
+   "a": "いって",
+   "e": "からといって bác lấy một căn cứ thành kết luận tất yếu."
+  },
+  {
+   "t": "fill",
+   "q": "Điền tạm thời: これは恒久修正ではなく___対処です。",
+   "a": "暫定",
+   "e": "暫定対処 giảm ảnh hưởng hiện tại, không chứng minh nguyên nhân đã sửa."
+  },
+  {
+   "t": "fill",
+   "q": "Điền điều kiện: 再送しない場合に___回避できます。",
+   "a": "限って",
+   "e": "に限って giới hạn cách tránh vào điều kiện nêu, không hứa mọi trường hợp."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu chưa kiểm ảnh hưởng tồn.",
+   "w": [
+    "未確認です。",
+    "在庫への影響は"
+   ],
+   "a": "在庫への影響は未確認です。",
+   "e": "Nêu tác động cụ thể chưa biết để không làm mờ hiện tượng đã thấy."
+  },
+  {
+   "q": "優先判断で確認すべきものは何ですか。",
+   "o": [
+    "画像の頻度だけ",
+    "担当者の好みだけ",
+    "影響と復元の条件"
+   ],
+   "a": 2,
+   "e": "Một lần có thể cần kiểm tác động lớn nhưng chưa tự chứng minh mất vĩnh viễn.",
+   "t": "listen",
+   "say": "画像は欠けますが操作できます。下書きが消えた一例は復元できるか未確認です。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "状態の説明はどれですか。",
+   "o": [
+    "案内も一度も出していない",
+    "案内完了と原因未解決を分ける",
+    "全て修正済み"
+   ],
+   "a": 1,
+   "e": "Có việc xong và việc còn mở, cần nhãn đúng mỗi việc.",
+   "t": "listen",
+   "say": "回避策の案内は完了しましたが、原因の修正は調査中です。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "頻度だけで 優先度を 固定しません。",
+   "a": "頻度だけで 優先度を 固定しません。",
+   "lang": "ja-JP",
+   "e": "Tần suất là một yếu tố, quyết ưu tiên cần tác động, cách tránh, nguồn lực và bằng chứng mới."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "発生条件",
+     "điều kiện xảy ra"
+    ],
+    [
+     "業務影響",
+     "ảnh hưởng tới công việc sử dụng"
+    ],
+    [
+     "回避策",
+     "cách tránh hiện tượng trong lúc chờ sửa"
+    ],
+    [
+     "暫定対処",
+     "biện pháp tạm giảm ảnh hưởng"
+    ],
+    [
+     "恒久修正",
+     "sửa để giải nguyên nhân trong phạm vi"
+    ]
+   ],
+   "e": "重大度 là mức tác động, 優先度 là thứ tự xử lý, 再現率 gắn bộ thử, 母数 là tập tính, 発生条件 chỉ chuỗi dẫn tới lỗi; mỗi yếu tố có câu hỏi riêng."
+  },
+  {
+   "q": "頻度だけで優先度を決めない理由は何ですか。",
+   "o": [
+    "全ての頻度が嘘だから",
+    "低頻度は必ず最重大だから",
+    "影響や回避、復元の条件が別にある"
+   ],
+   "a": 2,
+   "e": "Tần suất không tự bao trọn tác động, nhưng cũng không tự đảo thành ít là nặng nhất.",
+   "t": "mc"
+  },
+  {
+   "q": "乙で確定した観察は何ですか。",
+   "o": [
+    "在庫が必ず二回減った",
+    "全利用者が損失を受けた",
+    "一覧に二つの票が出た"
+   ],
+   "a": 2,
+   "e": "Hai phiếu là hiện tượng thấy, tồn/ảnh hưởng thật cần kiểm riêng.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Chuẩn bị bảng A lệch màu 8/10 lần, B tạo hai phiếu 1/20 chuỗi và bảng tồn giả chưa kiểm. Không dùng log hay dữ liệu người thật.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Cho hai lỗi khác tần suất, hỏi điều chưa biết trước khi được chọn ưu tiên."
+   },
+   {
+    "t": "30'",
+    "do": "Luyện tác động/ưu tiên/mẫu thử, mẫu bác suy theo một yếu tố và cách mô tả xử lý tạm có giới hạn."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe trao đổi, chia hiện tượng, tác động chưa kiểm, cách tránh và người quyết với mốc cập nhật."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc hồ sơ, phân quay phiên bản với phục hồi dữ liệu và tìm điều kiện đổi đánh giá mỗi lỗi."
+   },
+   {
+    "t": "30'",
+    "do": "Nói theo thẻ mất bản nháp giả rồi viết 230–310 chữ; đổi bài kiểm phần chưa biết không bị viết thành mất dữ liệu thật."
+   },
+   {
+    "t": "30'",
+    "do": "Đóng vai cập nhật mới, làm nghe-chính tả và xét lại ưu tiên theo căn cứ mà không đổi toàn bộ trạng thái vô lý."
+   }
+  ],
+  "games": [
+   "Thẻ tác động mới được mở sau khi nhóm đã chọn, nhóm phải nêu yếu tố nào khiến đổi ưu tiên.",
+   "Mỗi cặp nhận một bước xử lý, nối vào tạm giảm/sửa nguyên nhân/kiểm sau sửa và giải thích trạng thái."
+  ],
+  "errors": [
+   "Gọi 1/20 là tỷ lệ người dùng thật: ghi rõ đây là chuỗi thử trong môi trường kiểm.",
+   "Thấy ít lần rồi coi nhẹ: kiểm tác động, tính phục hồi và điều kiện cách tránh.",
+   "Phát hướng dẫn rồi ghi đã sửa nguyên nhân: tách xử lý tạm với sửa lâu dài.",
+   "Cho rằng quay phiên bản tự hoàn tác dữ liệu: hỏi phạm vi phục hồi và đối soát riêng."
+  ],
+  "homework": "Tạo hai lỗi giả có tần suất và tác động khác nhau; viết đề nghị ưu tiên, cách tránh có điều kiện và bản cập nhật thay đổi khi có bằng chứng mới."
+ }
+}

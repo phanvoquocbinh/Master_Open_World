@@ -4,7 +4,7 @@ icon: 🏗️
 floor: 7
 room: 703
 level: Cơ bản → Thực hành
-hours: 16
+hours: 28
 summary: Từ yêu cầu, ước lượng và cache/DB tới queue, rate limit, quan sát; hai case study rút gọn link và nhắn tin tự soạn.
 
 ## LESSON system-design-01 | Yêu cầu chức năng và chất lượng đo được
@@ -13,7 +13,7 @@ summary: Từ yêu cầu, ước lượng và cache/DB tới queue, rate limit, 
 Thiết kế hệ thống như mở căn tin: cần biết phục vụ ai, vào giờ nào và bán những gì trước khi mua bếp. Sản phẩm giả Phiếu Trưa cho khách đặt/hủy đơn trước 10:30 và cho bếp tổng hợp số suất. Viết riêng phạm vi, bất biến và yêu cầu phi chức năng. Con số trong khóa là giả định của bài học, không phải cam kết cho sản phẩm thực tế.
 
 ### Hợp đồng và dữ liệu
-Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+Bản yêu cầu cần ghi rõ việc tạo, sửa và hủy đơn trước 10:30. Chỉ số p95 phải đi cùng mức tải; RPO 5 phút và RTO 30 phút là hai giới hạn khác nhau, không được dùng thay nhau.
 ~~~text
 Chức năng: tạo đơn, sửa số suất, hủy trước giờ chốt
 Ngoài phạm vi: giao hàng và thanh toán trực tuyến
@@ -23,7 +23,7 @@ RTO: phục hồi dịch vụ trong 30 phút
 ~~~
 
 ### Luồng xử lý và ranh giới
-Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+Order có ownerId để kiểm quyền và version để phát hiện cập nhật cạnh tranh. Trạng thái draft, confirmed, cancelled cần quy tắc chuyển; cùng idempotency key chỉ đại diện một lần tạo đơn logic.
 ~~~text
 Order {id, ownerId, mealDate, qty, status, version}
 Bất biến: qty là số nguyên dương
@@ -32,7 +32,7 @@ Cùng idempotency key không tạo hai đơn logic
 ~~~
 
 ### Kiểm chứng và vận hành
-Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+Sơ đồ tách khách, bếp, API và nơi lưu đơn. Hai vai có quyền khác nhau dù cùng gọi HTTPS. Hãy lần một yêu cầu qua từng mũi tên và chỉ nơi xác nhận chủ sở hữu trước khi đọc dữ liệu.
 ~~~text
 [Khách] --HTTPS--> [API đơn] --> [DB]
 [Bếp]   --HTTPS-->     |
@@ -58,7 +58,7 @@ Q: RPO mô tả gì?
 Ước lượng như tính gạo cho bữa trưa: viết rõ số người và số suất mỗi người. DAU không bằng số người đồng thời. Trung bình ngày che mất đỉnh sát giờ chốt. Ghi đơn vị ở mỗi bước và kiểm bậc độ lớn; không tạo cảm giác chính xác giả từ giả định còn mơ hồ.
 
 ### Hợp đồng và dữ liệu
-Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+Với 20.000 người và 12 lượt đọc mỗi ngày, ta có 240.000 lượt đọc chứ không phải 240.000 lượt mỗi giây. Chia cho 86.400 rồi mới áp hệ số đỉnh 30 để dự báo khoảng 83,4 request/giây.
 ~~~text
 DAU giả = 20.000
 Mỗi người: 12 đọc + 2 ghi/ngày
@@ -68,7 +68,7 @@ Ghi trung bình = 40.000 / 86.400 ≈ 0,46 request/s
 ~~~
 
 ### Luồng xử lý và ranh giới
-Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+Con số 1 KiB mỗi đơn chỉ là dữ liệu thô. Phép tính tiếp theo bổ sung index rồi nhân số bản sao; backup và khoảng trống tăng trưởng vẫn chưa được tính, vì thế không dùng 62,7 GiB làm toàn bộ nhu cầu đĩa.
 ~~~text
 40.000 đơn/ngày * 1 KiB ≈ 39,1 MiB/ngày
 365 ngày ≈ 13,9 GiB dữ liệu thô
@@ -77,7 +77,7 @@ Index giả bằng 50% dữ liệu -> tổng ≈20,9 GiB
 ~~~
 
 ### Kiểm chứng và vận hành
-Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+Ở trạng thái ổn định, 100 request/giây với thời gian trung bình 0,2 giây dẫn tới khoảng 20 request đang xử lý. Khi độ trễ lên 2 giây, lượng việc đồng thời tăng gấp mười, có thể làm đầy pool kết nối.
 ~~~text
 Little ở trạng thái ổn định: L ≈ lambda * W
 100 request/s * 0,2 s trung bình ≈20 request đang xử lý
@@ -104,7 +104,7 @@ Q: 100 request/s nhân 0,2 s bằng gì?
 Load balancer như người điều phối nhiều quầy: phân request tới nơi còn sẵn sàng. API nên đưa trạng thái quan trọng vào kho dùng chung thay vì RAM một replica. Cân bằng tải không tự bảo vệ DB, không tự xử lý request trùng và không đảm bảo dữ liệu bền.
 
 ### Hợp đồng và dữ liệu
-Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+Load balancer phân request đến API A hoặc B; cả hai đọc cùng kho session và dữ liệu. Nếu thẻ đăng nhập chỉ nằm trong RAM của A, người dùng có thể mất phiên khi request chuyển sang B.
 ~~~text
 [Client] -> [Load balancer]
                |       |
@@ -114,7 +114,7 @@ Load balancer như người điều phối nhiều quầy: phân request tới n
 ~~~
 
 ### Luồng xử lý và ranh giới
-Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+Ngân sách 1.000 ms phải bao gồm kết nối, xử lý và các lần thử lại. Hai lần chờ 300 ms chưa tính mọi chi phí khác; chỉ retry thao tác ghi khi server thực hiện idempotency đúng.
 ~~~text
 Ngân sách request = 1000 ms
 Connect timeout = 100 ms
@@ -124,7 +124,7 @@ POST chỉ retry khi có cơ chế idempotency phù hợp
 ~~~
 
 ### Kiểm chứng và vận hành
-Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+Tắt API A trong lab để quan sát readiness và tỷ lệ lỗi, sau đó kiểm cả số đơn đã tạo. Chuyển traffic thành công nhưng tạo hai đơn khi mất ACK vẫn là thất bại nghiệp vụ.
 ~~~text
 Thử dừng API A ở môi trường lớp
 LB bỏ A khỏi luồng nhận mới theo readiness
@@ -151,7 +151,7 @@ Q: Retry thao tác ghi cần gì?
 Cache giống thực đơn chép sẵn: nhanh nhưng có thể cũ. Chọn DB theo mô hình dữ liệu, ràng buộc và truy vấn. NoSQL gồm nhiều họ với đặc tính khác nhau; không thể kết luận mọi NoSQL đều nhanh hơn hoặc thiếu giao dịch. Giải thích yêu cầu nhất quán trước khi chọn.
 
 ### Hợp đồng và dữ liệu
-Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+Cache-aside đọc DB khi miss rồi đặt TTL. Sau sửa giá phải vô hiệu bản cũ; lúc tạo đơn, server xác nhận giá hiện hành thay vì tin số tiền được trình duyệt gửi từ cache.
 ~~~text
 Cache-aside: cache hit -> trả
 Cache miss -> DB -> ghi cache TTL 30s -> trả
@@ -160,7 +160,7 @@ Tạo đơn: server xác nhận giá hiện tại, không tin giá client
 ~~~
 
 ### Luồng xử lý và ranh giới
-Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+Index(owner_id, created_at) phục vụ lịch sử theo một người. Replication tạo bản sao có thể chậm; sharding chia dữ liệu và làm truy vấn liên phần phức tạp hơn. Ba kỹ thuật giải quyết ba vấn đề khác nhau.
 ~~~text
 Index: orders(owner_id, created_at) cho lịch sử theo người
 Replication: primary -> bản sao; có thể có lag
@@ -169,7 +169,7 @@ Cần thiết kế query liên shard, rebalance và backup
 ~~~
 
 ### Kiểm chứng và vận hành
-Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+Đơn hàng cần ràng buộc và transaction; cache cần TTL cùng chính sách hết bộ nhớ. Chọn kho theo truy vấn và tính toàn vẹn, không đổi sang NoSQL chỉ vì kỳ vọng mọi thao tác đều nhanh hơn.
 ~~~text
 Đơn hàng: SQL, unique key, transaction
 Cache/session tạm: key-value với TTL
@@ -196,7 +196,7 @@ Q: Cache miss nên làm gì?
 Hàng đợi như khay phiếu cho đội giao việc. Nếu worker chết trước ACK, message có thể được giao lại. Thiết kế theo khả năng trùng, chậm và sai thứ tự; broker không tự bảo đảm hiệu ứng nghiệp vụ đúng một lần. Tách thông báo khỏi đường tạo đơn để giảm độ trễ khi phù hợp.
 
 ### Hợp đồng và dữ liệu
-Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+Outbox được ghi cùng transaction tạo đơn để tránh commit xong nhưng chưa phát sự kiện. Relay đưa việc sang queue; worker chỉ ACK sau phần xử lý bền vững, và dead-letter giữ lỗi không thể retry mãi.
 ~~~text
 [API] -> transaction [orders + outbox]
 [Relay] -> [Queue] -> [Worker] -> [Thông báo]
@@ -205,7 +205,7 @@ Hàng đợi như khay phiếu cho đội giao việc. Nếu worker chết trư�
 ~~~
 
 ### Luồng xử lý và ranh giới
-Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+Pseudo-code ghi processed(event_id) với unique constraint trong cùng giao dịch thay đổi nội bộ. Email ngoài DB không thể bị thu hồi bằng rollback, nên cần cơ chế chống trùng riêng ở ranh giới gửi.
 ~~~text
 begin transaction
   kiểm event_id đã xử lý bằng unique constraint
@@ -216,7 +216,7 @@ Email ngoài DB cần idempotency/outbox phía gửi riêng
 ~~~
 
 ### Kiểm chứng và vận hành
-Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+Partition theo order_id giữ thứ tự trong một đơn, không hứa thứ tự toàn hệ. Tuổi message cũ nhất cho biết việc đang chờ lâu; giới hạn concurrent worker theo khả năng DB để tránh tự tạo quá tải.
 ~~~text
 Partition key: order_id cho thứ tự trong một đơn
 Retry: 1s, 2s, 4s + jitter, tối đa 3 lần
@@ -243,7 +243,7 @@ Q: Outbox giúp gắn điều gì?
 Bếp chung có thể hiệu quả khi nhóm nhỏ. Modular monolith giữ ranh giới module trong cùng triển khai; microservice tách triển khai nhưng tăng chi phí mạng, hợp đồng và nhất quán. Chọn vì quyền sở hữu, tải hoặc vòng đời độc lập, không theo khẩu hiệu.
 
 ### Hợp đồng và dữ liệu
-Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+Ranh giới Orders và Notify có thể bắt đầu như module trong một ứng dụng. Chỉ tách triển khai khi cần quyền sở hữu hoặc tải độc lập, đồng thời chuẩn bị version hợp đồng và lỗi phụ thuộc.
 ~~~text
 Monolith: [API | Menu | Orders | Notify] -> DB
 Tách có lý do: [Orders + DB] -> event -> [Notify + store]
@@ -251,7 +251,7 @@ Cần version hợp đồng, timeout, trace, xử lý lỗi từng phần
 ~~~
 
 ### Luồng xử lý và ranh giới
-Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+Token bucket chỉ cho request qua khi còn token; tính refill và trừ token phải nguyên tử nếu nhiều replica dùng cùng hạn mức. Phản hồi 429 nên giúp client chọn thời điểm thử lại.
 ~~~text
 Token bucket (pseudo-code nguyên tử):
 tokens=min(capacity, tokens + elapsed*refill)
@@ -261,7 +261,7 @@ Nhiều replica: cần kho/thuật toán phối hợp đúng
 ~~~
 
 ### Kiểm chứng và vận hành
-Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+Metric báo tỷ lệ lỗi và phân bố thời gian; trace nối các bước một request, log giữ sự kiện chi tiết. Cảnh báo giả 5% trong 5 phút cần lưu lượng tối thiểu và người có trách nhiệm xử lý.
 ~~~text
 Metric: request count, tỷ lệ lỗi, histogram duration
 Trace: lần một request qua API -> DB -> queue
@@ -288,7 +288,7 @@ Q: Công cụ lần request qua nhiều service?
 Dịch vụ giả Lối Ngắn tạo mã trỏ tới https://example.com/lesson. Hỏi rõ mã có hết hạn, sửa đích và thống kê không. Đường đọc nhiều hơn ghi nên cache mapping hữu ích. Chuyển hướng cần chính sách chống lạm dụng; không để máy chủ tải URL tùy ý nếu chưa phòng SSRF.
 
 ### Hợp đồng và dữ liệu
-Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+POST tạo mã và GET chuyển hướng có hợp đồng khác nhau. Unique(code) chặn va chạm; trường expires_at quyết định mã còn dùng được. Mã 302 là lựa chọn của bài vì đích có thể thay đổi.
 ~~~text
 POST /links {target: "https://example.com/lesson", ttlDays: 7}
 -> 201 {code: "m7Qp2"}
@@ -297,7 +297,7 @@ links(code UNIQUE, target, owner_id, expires_at)
 ~~~
 
 ### Luồng xử lý và ranh giới
-Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+Đường redirect ưu tiên tra cache rồi DB, còn thống kê click qua queue. Nếu bắt mỗi click chờ ghi báo cáo đồng bộ, sự cố thống kê có thể làm chậm chính việc mở liên kết.
 ~~~text
 [Client] -> [LB] -> [Redirect API] -> [Cache]
                            | miss
@@ -307,7 +307,7 @@ Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời
 ~~~
 
 ### Kiểm chứng và vận hành
-Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+Không gian 62^7 lớn nhưng vẫn có thể trùng. Sinh ngẫu nhiên bảo mật, insert với unique constraint rồi retry hữu hạn; TTL của mapping không được vượt thời gian còn lại trước khi link hết hạn.
 ~~~text
 Sinh code ngẫu nhiên bằng nguồn bảo mật
 62 ký tự, dài 7 -> không gian 62^7
@@ -335,7 +335,7 @@ Q: TTL cache với link hết hạn nên thế nào?
 Ứng dụng giả Hộp Thư Mây cho nhóm lớp gửi tin và đọc lịch sử sau khi mất mạng. Phân biệt server đã nhận, thiết bị đã nhận và người dùng đã đọc. Yêu cầu thứ tự trong một cuộc trò chuyện; không cần thứ tự toàn hệ. Kiểm quyền thành viên cả khi kết nối và gửi/đọc.
 
 ### Hợp đồng và dữ liệu
-Đọc từng dòng, xác định giả định và bất biến. Các số là giả lập để thực hành; khi áp dụng phải đo bằng tải và dữ liệu đại diện.
+Gateway WebSocket chuyển tin tới dịch vụ lưu bền; ACK sau commit chỉ nói server đã nhận, không chứng minh người kia đã đọc. Người offline tải lại lịch sử thay vì phụ thuộc RAM của gateway.
 ~~~text
 [Client] <-> [WS Gateway] -> [Message service] -> [DB]
                                       | commit rồi ACK
@@ -344,7 +344,7 @@ Reconnect -> lấy lịch sử sau cursor đã nhận
 ~~~
 
 ### Luồng xử lý và ranh giới
-Theo dõi nơi dữ liệu được lưu, nơi có thể thất bại và thời điểm trả kết quả. Giải thích một trường hợp bình thường rồi một trường hợp sự cố.
+Unique(sender_id, client_message_id) giúp retry cùng tin không nhân đôi. seq được cấp phía server trong từng cuộc trò chuyện; cursor theo seq giúp lấp đoạn thiếu khi kết nối trở lại.
 ~~~text
 messages(conversation_id, seq, sender_id, client_message_id, body)
 UNIQUE(conversation_id, seq)
@@ -354,7 +354,7 @@ read receipt = max_read_seq của thành viên
 ~~~
 
 ### Kiểm chứng và vận hành
-Biến mỗi nhánh trong mô tả thành một tình huống kiểm thử. Ghi kết quả mong đợi, số đo cần theo dõi và giới hạn của giải pháp.
+Mất ACK cần gửi lại cùng định danh logic; thu hồi thành viên phải làm quyền gửi và đọc thay đổi. Kiểm riêng lỗi gateway, thứ tự tin và quyền, tránh lấy trạng thái online làm bằng chứng đã đọc.
 ~~~text
 Mất ACK -> gửi lại cùng client_message_id -> một tin logic
 Gateway chết -> reconnect + bù lịch sử theo cursor
@@ -374,3 +374,362 @@ Q: Retry cùng tin dùng id thế nào?
 + Giữ cùng client_message_id
 - Đổi id mọi lần
 - Bỏ định danh
+
+## LESSON system-design-09 | Nhất quán, quorum và đánh đổi khi phân vùng
+
+### Nhất quán phải nói bằng hành vi
+Hệ đặt lớp giả định Nếp Vạt có đọc lớp, đăng ký và report. Người vừa ghi cần thấy kết quả khác với báo cáo tổng hợp có thể trễ. Ghi actor, operation và cửa sổ cam kết, không chỉ nói strong hoặc eventual.
+
+### Khi mạng bị chia cắt
+CAP kinh điển không cho bảo đảm đồng thời linearizability và availability trong mọi execution có partition. A ở đây có định nghĩa mô hình, không chỉ SLA uptime; chọn hành vi từng thao tác theo rủi ro.
+~~~text
+partition giữa hai nhóm replica
+quota write: chờ/từ chối theo thiết kế để giữ invariant
+report read: có thể cũ với age/giới hạn rõ
+recovery: xử lý conflict và đối soát
+Không gọi đây là chọn hai trong ba bất kể điều kiện.
+~~~
+
+### Giao tập chưa là chứng minh protocol
+Ví dụ N=3,R=2,W=2 có giao nhau khi membership cố định. Còn version, concurrent write, read repair và sloppy quorum cần cơ chế riêng; đoạn Python chỉ kiểm một tính chất tập hợp.
+~~~python
+from itertools import combinations
+nodes={'A','B','C'}
+reads=[set(x) for x in combinations(nodes,2)]
+writes=[set(x) for x in combinations(nodes,2)]
+assert all(r&w for r in reads for w in writes)
+# Không chứng minh linearizability của một protocol.
+~~~
+
+### Đọc sau ghi theo phiên
+Có thể route tới nơi đủ version hoặc đợi watermark có giới hạn theo thiết kế. Kiểm actor đổi phiên, replica lag và failover; cache cần invalidation/version đúng, không chỉ một write-read tuần tự.
+~~~text
+{"operation":"read enrollment after create","scope":"actor-session","minimumVersion":"version từ response ghi","onLag":"đợi có giới hạn hoặc báo pending theo contract"}
+Report có consistency budget riêng, không áp chung cho quota.
+~~~
+
+### Failure matrix làm rõ đánh đổi
+Mô phỏng partition trong lab, ghi request được nhận/từ chối, dữ liệu hai phía và reconcile. Người dùng phải hiểu trạng thái có thể thấy; nếu chưa có môi trường, nộp plan và giới hạn, không nhận đã chạy.
+
+PRACTICE: Viết consistency contract cho ba operation và sáu ca partition/lag/recovery. Nộp quorum assumptions, oracle và evidence mô phỏng hoặc phần chưa thực thi; không gọi giao quorum là proof đầy đủ.
+Q: CAP kinh điển nêu trade-off nào khi có phân vùng mạng?
++ Không bảo đảm cả linearizability và availability trong mọi execution
+- Luôn chọn bất kỳ hai chữ trong ba
+- Mọi hệ thống phải bỏ performance
+Q: R+W>N có tự chứng minh linearizable không?
++ Không, còn protocol, version và membership
+- Có luôn
+- Có nếu có ba replica
+Q: Read-your-writes bảo vệ nhu cầu nào?
++ Actor thấy ghi của mình trong phạm vi cam kết
+- Mọi read toàn cầu luôn mới nhất
+- Không cần server state
+
+## LESSON system-design-10 | Capacity planning và chống điểm nghẽn dây chuyền
+
+### Capacity theo cả chuỗi phụ thuộc
+API có CPU rảnh vẫn có thể chậm vì DB pool hoặc queue. Bắt đầu từ workload, rate thực đạt và thời gian từng stage, không tăng app replica vô định mà chưa biết điểm nghẽn.
+
+### Ước lượng từ trung bình có điều kiện
+Little relation liên hệ số việc trong hệ, rate và thời gian trung bình cùng phạm vi khi điều kiện phù hợp. Không thay W bằng p95; queue tăng mãi phải được phân tích như chưa ổn định.
+~~~python
+def concurrency_estimate(rate_per_s,mean_time_s):
+ if rate_per_s<0 or mean_time_s<0:raise ValueError('nonnegative_required')
+ return rate_per_s*mean_time_s
+print(concurrency_estimate(40,0.25)) # 10 theo giả định trung bình
+# Không bảo đảm mười worker luôn đủ trước biến động.
+~~~
+
+### Giới hạn từng tầng và budget chung
+Bounded queue, timeout, bulkhead và admission policy cần hành vi rõ. Hai tầng cùng retry tối đa ba attempt có thể nhân thành chín attempt theo cách lồng tương ứng; phải đo thực tế và bảo vệ thao tác ghi.
+~~~json
+{"labLimits":{"inFlight":20,"queueMax":40,"dependencyTimeoutMs":500,"maxAttempts":2},"whenFull":"từ chối có kiểm soát theo contract","note":"Giá trị giả của bài học, cần đo trước áp dụng."}
+~~~
+
+### Queue age và tải đạt cùng latency
+Độ dài queue chưa đủ kết luận nếu đó là batch có budget. Oldest age vượt deadline là rủi ro; báo việc bị drop/chưa nhận, không chỉ latency của request đã hoàn thành.
+~~~text
+stage | cần đo
+API | admitted/rejected và in-flight
+DB | pool wait, lock, query
+queue | depth, oldest age, planned/achieved rate
+worker | completion/error và phục hồi sau burst
+Đối chiếu cùng timestamp và workload.
+~~~
+
+### Thay một yếu tố để kiểm giả thuyết
+Nếu nghi DB pool, thêm app có thể làm tranh connection nặng hơn. Giữ data/workload tương đương khi thử trong lab; so trước/sau cùng invariant, nêu bằng chứng ủng hộ hoặc bác bỏ giả thuyết.
+
+PRACTICE: Nộp capacity model ba stage có đơn vị, giả định, budget và retry amplification. Mô phỏng hoặc chạy load nhỏ, ghi tải đạt, queue age, tài nguyên và recovery; không thử host công khai.
+Q: Quan hệ L=lambda*W cần điều kiện gì?
++ Trung bình cùng phạm vi/đơn vị và điều kiện ổn định phù hợp
+- Luôn thay W bằng p99
+- Không cần đo tải đạt
+Q: Retry nhiều tầng có thể gây gì?
++ Nhân tải lên phụ thuộc và lỗi dây chuyền
+- Luôn tăng availability
+- Chỉ đổi status
+Q: Bounded queue và load shedding nhằm gì?
++ Giới hạn tài nguyên, từ chối có kiểm soát
+- Tạo thêm CPU miễn phí
+- Không bao giờ có request bị từ chối
+
+## LESSON system-design-11 | Khôi phục dữ liệu và diễn tập sự cố
+
+### Bản sao có thể cùng bị sai
+Replica hỗ trợ sẵn sàng nhưng xóa nhầm hoặc corruption có thể lan qua nhiều bản. Backup cần retention, version, quyền và khả năng phục hồi được kiểm, không chỉ có một file nằm trên đĩa.
+
+### RPO và RTO từ nhu cầu nghiệp vụ
+Chốt thời điểm sự cố, điểm dữ liệu phục hồi được và lúc chức năng được nhận lại. Archive delay, restore validation và dữ liệu ngoài DB có thể làm thực tế khác lịch backup.
+~~~text
+mục tiêu lab giả: RPO<=5 phút, RTO<=30 phút
+record: incident time,last recoverable commit,service restored
+observed: data gap và recovery duration theo định nghĩa
+ngoài DB: config, keys, object và queue cần kế hoạch riêng
+Không suy mục tiêu đã đạt chỉ từ backup interval.
+~~~
+
+### Thử bản sao nhỏ bằng API đúng
+Python SQLite backup dưới chỉ dùng file lab riêng. Nó minh họa sao nhất quán theo API, không thay PostgreSQL PITR hoặc backup toàn ứng dụng; không ghi đè file đang phục vụ công việc.
+~~~python
+import sqlite3,hashlib
+from pathlib import Path
+with sqlite3.connect('lab-source.db') as src:
+ with sqlite3.connect('lab-snapshot.db') as dst:src.backup(dst)
+p=Path('lab-snapshot.db')
+print(hashlib.sha256(p.read_bytes()).hexdigest())
+# Giữ snapshot,phục hồi vào bản copy và kiểm invariant.
+~~~
+
+### Mở được DB chưa đủ nghiệm thu
+Khôi phục vào môi trường tách, kiểm integrity, id, số lượng, tiền và app đọc/ghi. PostgreSQL PITR cần base backup/WAL đúng timeline cùng cấu hình riêng; một archive bất kỳ chưa là bản phục hồi đủ.
+~~~sql
+SELECT COUNT(*) FROM enrollments;
+SELECT id FROM classes WHERE remaining<0 OR remaining>capacity;
+-- SQLite lab có thêm PRAGMA integrity_check;
+-- Đối soát id, tiền, status và object liên quan theo fixture.
+-- Expected được lưu trước sự cố và gắn version.
+~~~
+
+### Runbook có quyền và điểm dừng
+Ghi owner, thứ tự, đường dẫn đã kiểm, chuyển traffic/khóa ghi và điều kiện quay lại. Diễn tập trên copy được đặt tên rõ, đủ dung lượng; không xóa/move dữ liệu thật để thử bài.
+
+PRACTICE: Tạo recovery plan lab với RPO/RTO, backup/restore drill và nhiều invariant. Nộp timeline, checksum, bản copy đọc được và gap; nếu chỉ backup chưa restore thì chưa chứng minh mục tiêu.
+Q: Replication có thay backup không?
++ Không
+- Có nếu ba replica
+- Có nếu khác máy
+Q: RPO và RTO khác nhau thế nào?
++ Mục tiêu mất dữ liệu khác mục tiêu thời gian phục hồi
+- Hai từ đồng nghĩa
+- RPO là số CPU
+
+## LESSON system-design-12 | Tiến hóa schema, API và ranh giới dịch vụ
+
+### Đổi ranh giới làm đổi giao dịch
+Tách enrollment và điểm thành hai service tạo cửa sổ một bên commit, bên kia lỗi. Chốt invariant, consistency, transaction boundary và bù/đối soát; chia folder không tự giải coupling dữ liệu.
+
+### Decision record giữ bối cảnh
+Lựa chọn modular backend hay service tách cần alternatives, hậu quả và trigger xem lại. Không coi microservice là nấc bắt buộc hoặc sơ đồ ở một thời điểm là chân lý mãi.
+~~~json
+{"id":"ADR-LAB-07","context":"quota và điểm cần nhất quán khi đăng ký","decision":"giữ cùng transaction trong modular backend lab","alternative":"tách service với reservation/bù","revisitWhen":"ownership hoặc scale thay đổi có evidence","limit":"chưa benchmark phân tán"}
+~~~
+
+### Expand-contract theo reader và writer
+Thêm field, hỗ trợ mixed version, backfill rồi thu gọn khi consumer cũ không còn theo evidence. Event có version và unknown policy, không đổi producer rồi mong các bên tự hiểu.
+~~~text
+phase1: expand schema/contract có compatibility
+phase2: reader/writer hỗ trợ cửa sổ version
+phase3: backfill và đối soát
+phase4: đổi behavior/traffic có monitor
+phase5: contract khi đủ evidence
+Rollback/forward fix và write mới phải có kế hoạch.
+~~~
+
+### Contract test có ranh giới bằng chứng
+Consumer với stub chỉ kiểm cách dùng một contract; provider cần xác nhận response và tác dụng phụ. Integration/failure-window test tìm điều schema không thể hiện; ghi quyền, lỗi, thứ tự và chống lặp.
+~~~text
+operation: reserveSeat
+request: actor,classId,intentKey
+response: reservationId,status,expiry theo rule
+negative: noSeat,wrongOwner,duplicate/conflict
+recovery: expiry/bù và reconciliation
+JSON schema chưa chứng minh distributed invariant.
+~~~
+
+### Rollout cần cả xử lý dữ liệu đã ghi
+Giảm traffic hoặc redeploy không tự sửa record sai đã commit. Runbook cần đối soát/bù và quyết định đúng thẩm quyền; metric phải tách cohort/version, không nhìn trung bình che nhóm lỗi.
+
+PRACTICE: Viết ADR, mixed-version matrix và transaction boundary cho một tách service giả. Nộp contract diff, năm phase migration, failure cases và điều kiện xem lại, không triển khai dịch vụ thật.
+Q: Expand-contract giúp gì trong migration?
++ Giữ tương thích trong cửa sổ nhiều version có kiểm
+- Xóa field cũ ngay
+- Mọi app đổi cùng một mili giây
+Q: Tách service có invariant xuyên ranh giới cần gì?
++ Consistency contract, transaction boundary và bù/đối soát
+- Transaction DB tự phủ mọi service
+- Chỉ chia folder
+
+## LESSON system-design-13 | Dự án: bản thiết kế có bằng chứng và kế hoạch phục hồi
+
+### Dự án thiết kế hệ Nếp Vạt
+Đặt lớp cần quota, điểm, notification và report. Chọn store, cache, queue, ranh giới và consistency từ yêu cầu; đưa evidence/plan kiểm, không thêm component chỉ để sơ đồ trông phức tạp.
+
+### Workload giả có đơn vị và owner
+Rate trung bình/đỉnh, payload, retention và giờ cao điểm đều tự đặt. Tính storage/concurrency với overhead, thử độ nhạy khi input gấp đôi; không dùng số khổng lồ thiếu nguồn.
+~~~text
+flows: browse/enroll/cancel/report
+actors: nhóm học viên và điều phối giả
+load: average/peak có giả định và owner review
+quality: quota,quyền,latency,recovery theo budget
+URL: chỉ localhost/example.com minh họa
+Nếu tính chi phí,dùng đơn vị giả trong bài.
+~~~
+
+### Failure matrix nối oracle và metric
+Mất response, partition, DB busy, queue chậm, duplicate event, cache cũ và migration lỗi có expected theo từng flow. Mô phỏng phải được ghi đúng, không nhận SLA thực từ narrative.
+~~~text
+F1 timeout sau commit -> cùng ý định không nhân record
+F2 partition -> quota policy,report age có giới hạn
+F3 duplicate event -> local effect không nhân
+F4 restore -> dữ liệu và app được đối soát
+F5 mixed version -> compatibility theo matrix
+Mỗi F có oracle,metric,evidence,owner và gap.
+~~~
+
+### Một kiểm chứng nhỏ nhưng có độ nhạy
+Chọn POC như conditional quota hoặc bounded queue để thử giả thuyết trong lab. Nộp code/fixture/cách đo và kết quả thật nếu có; chưa đủ resource thì ghi plan, không bịa đã chứng minh.
+~~~text
+deliverables: requirements,diagram,ADR,capacity worksheet
+contracts: API,event,schema,consistency
+validation: POC lab,failure matrix,metric definitions
+operations: backup,restore,runbook,cleanup
+report: trade-off,gap,risk,trigger xem lại
+~~~
+
+### Bàn giao để người khác phản biện
+Reviewer cần lần được lựa chọn về yêu cầu và evidence, thấy alternatives và điểm yếu. Nêu giả định sai sẽ đổi thiết kế thế nào; không đưa credential/host thật hoặc deploy trong nhiệm vụ soạn bài.
+
+PRACTICE: Bàn giao thiết kế có requirements, capacity, diagram, năm ADR, mười failure cases và recovery runbook. Có một POC với fixture/evidence hoặc ghi chưa thực thi, đủ để reviewer đánh giá trade-off.
+Q: Bản thiết kế cần bằng chứng nào?
++ Workload, trade-off, failure matrix và cách kiểm
+- Chỉ sơ đồ đẹp
+- Chỉ số microservice
+Q: Decision record kiến trúc nên giữ gì?
++ Lý do, lựa chọn khác, hậu quả và trigger xem lại
+- Chỉ tên nhà cung cấp
+- Mọi chi tiết code
+
+## LESSON system-design-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Chốt workload, phạm vi và cửa sổ đo để người khác kiểm lại được; không có ngưỡng chung cho mọi sản phẩm.
+2. Tách tải trung bình/đỉnh, retention, replica và index, rồi đối chiếu bằng đo khi có dữ liệu.
+3. State vẫn có ở DB/cache/queue; phải thiết kế khi đổi instance hoặc restart, không chỉ gắn nhãn stateless.
+4. Key, scope và invalidation phải giữ quyền/nhất quán; cache sai có thể lộ dữ liệu hoặc trả trạng thái cũ.
+
+### Dữ liệu và điều kiện biên
+5. Relay có thể phát lặp; consumer cần idempotency và đối soát, không suy exactly-once toàn hệ thống.
+6. Ranh giới, tổ chức, dữ liệu và chi phí vận hành quyết định; phân tán thêm failure mode và trade-off.
+7. Kiểm chính sách mục tiêu và dữ liệu giả, không biến dịch vụ redirect thành đường bỏ qua kiểm soát.
+8. History, dedup và semantics thứ tự phải được chốt; reconnect có thể gặp lặp hoặc thiếu trong cửa sổ chưa đồng bộ.
+
+### Tính đúng và cách điều tra
+9. C và A có định nghĩa trong mô hình; không dùng khẩu hiệu chọn hai thay phân tích hành vi khi partition.
+10. Giao quorum là điều kiện quan trọng của một số thiết kế, chưa đủ cho mọi concurrent write, sloppy quorum hoặc đổi membership.
+11. Đây là một session guarantee, không đồng nghĩa linearizability của mọi actor; cần nêu scope và cơ chế.
+12. Little relation dùng các đại lượng trung bình; queue tăng mãi không phải cửa sổ ổn định và công thức không bảo đảm deadline.
+
+### Rủi ro và lựa chọn phương án
+13. Đặt budget, số lần, backoff/jitter và điều kiện chống lặp, đo attempt thật thay vì chỉ request bên ngoài.
+14. Admission policy, thông báo và hướng retry cần được chốt; kiểm tác dụng của việc từ chối theo rủi ro.
+15. Xóa nhầm hoặc dữ liệu sai có thể lan qua replica; cần retention/version và thử phục hồi được.
+16. Chốt điểm đo/phạm vi; lịch backup không tự bảo đảm RPO nếu archive hoặc restore không đúng.
+
+### Dự án, bằng chứng và bàn giao
+17. Mở rộng, chuyển reader/writer, backfill rồi thu gọn khi đủ evidence; cần kế hoạch cho write mới và phục hồi.
+18. Ranh giới mới tạo tác dụng một phần/lặp và failure window; cần thiết kế recovery, không chỉ sơ đồ.
+19. Giả định và phép kiểm phải cho reviewer phản biện; mô phỏng không thay benchmark môi trường thật.
+20. Giữ bối cảnh để biết khi giả định đổi phải đánh giá lại, không coi thiết kế đúng mãi.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Yêu cầu chất lượng tốt cần gì?
++ Đại lượng, điều kiện đo và ngưỡng có căn cứ
+- Chỉ nói nhanh và ổn định
+- Chỉ tên công cụ
+Q: Ước lượng dung lượng cần công khai gì?
++ Giả định, đơn vị, tăng trưởng và overhead
+- Chỉ một con số tròn
+- Chỉ số tài khoản
+Q: Stateless ở service có nghĩa gì?
++ Không lệ thuộc phiên riêng ở một instance để phục vụ theo hợp đồng
+- Không có database
+- Không có state ở bất cứ đâu
+Q: Cache có thay nguồn chuẩn và kiểm quyền không?
++ Không
+- Có nếu TTL dài
+- Có nếu dùng RAM
+Q: Outbox thường giải quyết việc gì?
++ Ghi dữ liệu và ý định event trong cùng transaction cục bộ
+- Gửi đúng một lần mọi email
+- Bỏ mọi retry
+Q: Microservice có luôn tốt hơn monolith không?
++ Không
+- Có nếu có nhiều user
+- Có vì có nhiều API
+Q: Thiết kế rút gọn link cần xét gì ngoài collision?
++ Quyền, abuse, redirect và retention
+- Chỉ độ dài id
+- Chỉ màu trang
+Q: Sync tin nhắn sau reconnect cần gì?
++ Định danh, cursor, thứ tự và quy tắc retry
+- Chỉ socket mở
+- Mọi message tự đến đúng một lần
+Q: CAP kinh điển nêu trade-off nào khi có phân vùng mạng?
++ Không bảo đảm cả linearizability và availability trong mọi execution
+- Luôn chọn bất kỳ hai chữ trong ba
+- Mọi hệ thống phải bỏ performance
+Q: R+W>N có tự chứng minh linearizable không?
++ Không, còn protocol, version và membership
+- Có luôn
+- Có nếu có ba replica
+Q: Read-your-writes bảo vệ nhu cầu nào?
++ Actor thấy ghi của mình trong phạm vi cam kết
+- Mọi read toàn cầu luôn mới nhất
+- Không cần server state
+Q: Quan hệ L=lambda*W cần điều kiện gì?
++ Trung bình cùng phạm vi/đơn vị và điều kiện ổn định phù hợp
+- Luôn thay W bằng p99
+- Không cần đo tải đạt
+Q: Retry nhiều tầng có thể gây gì?
++ Nhân tải lên phụ thuộc và lỗi dây chuyền
+- Luôn tăng availability
+- Chỉ đổi status
+Q: Bounded queue và load shedding nhằm gì?
++ Giới hạn tài nguyên, từ chối có kiểm soát
+- Tạo thêm CPU miễn phí
+- Không bao giờ có request bị từ chối
+Q: Replication có thay backup không?
++ Không
+- Có nếu ba replica
+- Có nếu khác máy
+Q: RPO và RTO khác nhau thế nào?
++ Mục tiêu mất dữ liệu khác mục tiêu thời gian phục hồi
+- Hai từ đồng nghĩa
+- RPO là số CPU
+Q: Expand-contract giúp gì trong migration?
++ Giữ tương thích trong cửa sổ nhiều version có kiểm
+- Xóa field cũ ngay
+- Mọi app đổi cùng một mili giây
+Q: Tách service có invariant xuyên ranh giới cần gì?
++ Consistency contract, transaction boundary và bù/đối soát
+- Transaction DB tự phủ mọi service
+- Chỉ chia folder
+Q: Bản thiết kế cần bằng chứng nào?
++ Workload, trade-off, failure matrix và cách kiểm
+- Chỉ sơ đồ đẹp
+- Chỉ số microservice
+Q: Decision record kiến trúc nên giữ gì?
++ Lý do, lựa chọn khác, hậu quả và trigger xem lại
+- Chỉ tên nhà cung cấp
+- Mọi chi tiết code

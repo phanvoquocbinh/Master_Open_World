@@ -1,168 +1,936 @@
 {
-  "no": 5,
-  "title": "Một ngày của tôi – Hiện tại đơn (khẳng định) & nói giờ",
-  "sub": "I get up at six. She starts work at eight.",
-  "goals": [
-    "Kể các hoạt động hằng ngày bằng 19 từ / cụm từ (get up, have breakfast, go to work…)",
-    "Dùng đúng hiện tại đơn khẳng định: I / you / we / they + V; he / she / it + V-s/-es",
-    "Viết đúng chính tả và đọc đúng đuôi -s/-es của động từ (works, goes, watches, studies, has)",
-    "Hỏi và nói giờ theo 2 cách: It's half past seven / It's seven thirty",
-    "Dùng đúng at + giờ, in + buổi (at six o'clock, in the morning, at night)"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng: hoạt động hằng ngày & giờ giấc", "items": [
-      {"w": "get up", "ipa": "/ɡet ˈʌp/", "pos": "phr", "vi": "thức dậy, ra khỏi giường", "ex": "I get up at six o'clock.", "exVi": "Tôi dậy lúc sáu giờ."},
-      {"w": "take a shower", "ipa": "/teɪk ə ˈʃaʊə(r)/", "pos": "phr", "vi": "tắm (vòi sen)", "ex": "She takes a shower in the morning.", "exVi": "Cô ấy tắm vào buổi sáng."},
-      {"w": "have breakfast", "ipa": "/hæv ˈbrekfəst/", "pos": "phr", "vi": "ăn sáng", "ex": "Minh has breakfast at a pho stall.", "exVi": "Minh ăn sáng ở một quán phở."},
-      {"w": "go to work", "ipa": "/ɡəʊ tə ˈwɜːk/", "pos": "phr", "vi": "đi làm", "ex": "My dad goes to work by motorbike.", "exVi": "Bố tôi đi làm bằng xe máy."},
-      {"w": "start", "ipa": "/stɑːt/", "pos": "v", "vi": "bắt đầu", "ex": "The class starts at seven.", "exVi": "Lớp học bắt đầu lúc bảy giờ."},
-      {"w": "finish", "ipa": "/ˈfɪnɪʃ/", "pos": "v", "vi": "kết thúc, xong", "ex": "Lan finishes work at half past five.", "exVi": "Lan tan làm lúc năm rưỡi."},
-      {"w": "have lunch", "ipa": "/hæv ˈlʌntʃ/", "pos": "phr", "vi": "ăn trưa", "ex": "We have lunch at twelve.", "exVi": "Chúng tôi ăn trưa lúc mười hai giờ."},
-      {"w": "go home", "ipa": "/ɡəʊ ˈhəʊm/", "pos": "phr", "vi": "về nhà (KHÔNG có “to”)", "ex": "They go home at six.", "exVi": "Họ về nhà lúc sáu giờ."},
-      {"w": "have dinner", "ipa": "/hæv ˈdɪnə(r)/", "pos": "phr", "vi": "ăn tối", "ex": "We have dinner together.", "exVi": "Chúng tôi ăn tối cùng nhau."},
-      {"w": "watch TV", "ipa": "/wɒtʃ ˌtiː ˈviː/", "pos": "phr", "vi": "xem ti vi", "ex": "My grandma watches TV in the evening.", "exVi": "Bà tôi xem ti vi vào buổi tối."},
-      {"w": "go to bed", "ipa": "/ɡəʊ tə ˈbed/", "pos": "phr", "vi": "đi ngủ", "ex": "Minh goes to bed at midnight.", "exVi": "Minh đi ngủ lúc nửa đêm."},
-      {"w": "live", "ipa": "/lɪv/", "pos": "v", "vi": "sống, ở", "ex": "Mai lives in Ho Chi Minh City.", "exVi": "Mai sống ở TP. Hồ Chí Minh."},
-      {"w": "study", "ipa": "/ˈstʌdi/", "pos": "v", "vi": "học", "ex": "Minh studies at a university.", "exVi": "Minh học ở một trường đại học."},
-      {"w": "every day", "ipa": "/ˈevri deɪ/", "pos": "phr", "vi": "mỗi ngày, hằng ngày", "ex": "I drink coffee every day.", "exVi": "Tôi uống cà phê mỗi ngày."},
-      {"w": "early", "ipa": "/ˈɜːli/", "pos": "adj", "vi": "sớm", "ex": "She gets up early.", "exVi": "Cô ấy dậy sớm."},
-      {"w": "late", "ipa": "/leɪt/", "pos": "adj", "vi": "muộn, trễ", "ex": "Tom goes to bed late.", "exVi": "Thầy Tom đi ngủ muộn."},
-      {"w": "o'clock", "ipa": "/əˈklɒk/", "pos": "adv", "vi": "giờ đúng (chỉ dùng cho giờ chẵn)", "ex": "It's nine o'clock.", "exVi": "Bây giờ là chín giờ."},
-      {"w": "half past", "ipa": "/hɑːf pɑːst/", "pos": "phr", "vi": "rưỡi (qua 30 phút)", "ex": "It's half past seven.", "exVi": "Bây giờ là bảy giờ rưỡi."},
-      {"w": "quarter", "ipa": "/ˈkwɔːtə(r)/", "pos": "n", "vi": "một phần tư; 15 phút (quarter past: hơn 15', quarter to: kém 15')", "ex": "It's a quarter to eight.", "exVi": "Bây giờ là tám giờ kém mười lăm."}
-    ]},
-    {"k": "grammar", "h": "Thì hiện tại đơn – câu khẳng định", "html": "<p>Dùng để nói <b>thói quen, việc lặp lại hằng ngày</b> và <b>sự thật</b>: <i>I get up at six every day. Water boils at 100°C.</i></p><p>Tiếng Việt không chia động từ: <i>tôi <u>làm</u>, cô ấy <u>làm</u></i>. Tiếng Anh: khi chủ ngữ là <b>he / she / it</b> (hay 1 người, 1 vật) thì động từ <b>phải thêm -s / -es</b>.</p>", "table": [["Chủ ngữ", "Động từ", "Ví dụ"], ["I / you / we / they", "V nguyên mẫu", "I work in an office. We live in Hanoi."], ["danh từ số nhiều, A and B", "V nguyên mẫu", "My parents live in Hue. Lan and Minh study English."], ["he / she / it", "V + s / es", "She works in an office. It starts at seven."], ["1 người / 1 vật (Mai, my dad, the class…)", "V + s / es", "Mai lives in Ho Chi Minh City. The class finishes at nine."]], "ex": [
-      {"t": "I get up at six o'clock.", "vi": "Tôi dậy lúc sáu giờ."},
-      {"t": "Minh studies English in the evening.", "vi": "Minh học tiếng Anh vào buổi tối."},
-      {"t": "Mai goes to work by motorbike.", "vi": "Mai đi làm bằng xe máy."},
-      {"t": "My father has breakfast at home.", "vi": "Bố tôi ăn sáng ở nhà."},
-      {"t": "We have dinner at seven.", "vi": "Chúng tôi ăn tối lúc bảy giờ."},
-      {"t": "The sun rises in the east.", "vi": "Mặt trời mọc ở hướng đông. (sự thật)"}
-    ], "tips": [
-      "<b>Lỗi số 1 của người Việt:</b> quên -s ở ngôi thứ ba. ❌ <i>She work in a bank.</i> → ✅ She work<b>s</b> in a bank. Mẹo: nhớ “<b>S</b>he – <b>S</b>”: chủ ngữ là 1 người/vật (không phải I, you) → động từ có -s.",
-      "Không dùng TO BE với động từ thường (đã gặp ở Bài 1): ❌ <i>I am get up at six.</i> ❌ <i>She is works.</i> → ✅ I get up at six. She works.",
-      "Hai người trở lên → KHÔNG thêm -s: ✅ My parents live in Hue. ❌ <i>My parents lives…</i>",
-      "<b>go home</b> không có to: ✅ I go home at six. ❌ <i>I go to home.</i> (nhưng go <b>to</b> work, go <b>to</b> bed)."
-    ]},
-    {"k": "grammar", "h": "Thêm -s hay -es? Quy tắc chính tả ngôi thứ ba", "html": "<p>Quy tắc rất giống danh từ số nhiều ở Bài 4 – học một lần, dùng hai nơi!</p>", "table": [["Quy tắc", "Ví dụ"], ["Hầu hết: + s", "work → works, get → gets, start → starts, live → lives, read → reads"], ["Tận cùng s, ss, sh, ch, x, o: + es", "watch → watches, finish → finishes, wash → washes, go → goes, do → does"], ["Phụ âm + y → bỏ y, + ies", "study → studies, carry → carries, fly → flies"], ["Nguyên âm + y → chỉ + s", "play → plays, say → says, buy → buys"], ["Bất quy tắc", "have → has (❌ haves) · be → is"]], "ex": [
-      {"t": "Lan watches the news at seven.", "vi": "Lan xem thời sự lúc bảy giờ. (watch + es)"},
-      {"t": "Duc plays football after school.", "vi": "Đức chơi bóng đá sau giờ học. (play: nguyên âm + y → plays)"},
-      {"t": "My mum does the housework in the morning.", "vi": "Mẹ tôi làm việc nhà vào buổi sáng. (do → does)"},
-      {"t": "Tom has a big breakfast.", "vi": "Thầy Tom ăn sáng nhiều. (have → has)"}
-    ], "tips": [
-      "Đừng thêm -s vào động từ khi chủ ngữ là I: ❌ <i>I works.</i> Người học hay “sửa thừa” sau khi vừa học quy tắc.",
-      "Chỉ động từ CHÍNH thêm -s, không thêm vào cả cụm: ✅ She gets up. ❌ <i>She gets ups.</i> ✅ He goes to bed. ❌ <i>He goes to beds.</i>"
-    ]},
-    {"k": "grammar", "h": "Nói giờ – What time is it?", "html": "<p><b>Hỏi giờ:</b> What time is it? / What's the time? – Trả lời luôn bắt đầu bằng <b>It's…</b></p><p><b>Cách 1 (truyền thống):</b> phút 1–30 dùng <b>past</b> (qua), phút 31–59 dùng <b>to</b> (kém) và nói <b>phút trước, giờ sau</b>. <b>Cách 2 (dễ, phổ biến):</b> đọc giờ rồi đọc phút như đọc số.</p><p><b>a.m.</b> = từ nửa đêm đến 12 giờ trưa · <b>p.m.</b> = từ 12 giờ trưa đến nửa đêm. <b>noon</b> = 12 giờ trưa, <b>midnight</b> = 12 giờ đêm.</p><p><b>Giới từ:</b> <b>at</b> + giờ (at 7 o'clock, at noon, at midnight, at night) · <b>in</b> + buổi (in the morning, in the afternoon, in the evening).</p>", "table": [["Giờ", "Cách 1 (past / to)", "Cách 2 (đọc số)"], ["7:00", "It's seven o'clock.", "It's seven."], ["7:05", "It's five past seven.", "It's seven oh five."], ["7:15", "It's (a) quarter past seven.", "It's seven fifteen."], ["7:30", "It's half past seven.", "It's seven thirty."], ["7:45", "It's (a) quarter to eight.", "It's seven forty-five."], ["7:50", "It's ten to eight.", "It's seven fifty."]], "ex": [
-      {"t": "What time is it? – It's half past six.", "vi": "Mấy giờ rồi? – Sáu rưỡi."},
-      {"t": "I have lunch at twelve o'clock.", "vi": "Tôi ăn trưa lúc mười hai giờ."},
-      {"t": "Lan goes to bed at eleven p.m.", "vi": "Lan đi ngủ lúc 11 giờ đêm."},
-      {"t": "Tom teaches in the evening.", "vi": "Thầy Tom dạy vào buổi tối."},
-      {"t": "It's a quarter to nine.", "vi": "Bây giờ là chín giờ kém mười lăm (8:45)."}
-    ], "tips": [
-      "<b>half past seven</b> = 7 giờ rưỡi (7:30). Người Anh nói nhanh còn rút gọn thành “half seven” – vẫn là 7:30.",
-      "<b>o'clock</b> chỉ dùng với giờ chẵn: ❌ <i>seven thirty o'clock</i>.",
-      "Sai giới từ rất phổ biến: ❌ <i>in 7 o'clock</i>, ❌ <i>at the morning</i> → ✅ at 7 o'clock, in the morning. Nhớ ngoại lệ: <b>at night</b>.",
-      "Tiếng Việt nói “kém” giống “to”: 8 giờ kém 15 = a quarter <b>to</b> eight. Nhưng phải đổi lên giờ SAU (eight), không nói “a quarter to seven” cho 7:45."
-    ]},
-    {"k": "sounds", "h": "Phát âm: đuôi -s/-es của động từ & cặp -teen / -ty", "html": "<p>Đuôi -s ngôi thứ ba đọc theo đúng quy tắc của danh từ số nhiều (Bài 4). Còn khi nói giờ, nhầm <b>thirteen</b> (13) và <b>thirty</b> (30) có thể làm bạn trễ hẹn – hãy luyện trọng âm thật rõ.</p>", "items": [
-      {"sym": "-s = /s/", "ex": ["works", "gets", "starts", "takes"], "vi": "Sau âm vô thanh /p t k f/ → /s/: works /wɜːks/. Đừng bỏ âm cuối!"},
-      {"sym": "-s = /z/", "ex": ["goes", "lives", "studies", "has"], "vi": "Sau nguyên âm và âm hữu thanh → /z/ rung: goes /ɡəʊz/, has /hæz/."},
-      {"sym": "-es = /ɪz/", "ex": ["watches", "finishes", "washes", "uses"], "vi": "Sau /s z ʃ tʃ dʒ/ → thêm âm tiết /ɪz/: watch (1) → watches (2 âm tiết)."},
-      {"sym": "does /dʌz/ · says /sez/", "ex": ["does", "says"], "vi": "Hai từ đổi luôn nguyên âm: do /duː/ → does /dʌz/ (“đắz”); say /seɪ/ → says /sez/ (“xez”, không phải “xêiz”)."},
-      {"sym": "-teen ↔ -ty", "ex": ["thirteen", "thirty", "fifteen", "fifty"], "vi": "-teen: trọng âm CUỐI, kéo dài /iːn/ – thir-TEEN. -ty: trọng âm ĐẦU, đuôi /ti/ ngắn – THIR-ty.", "pairs": [["thirteen", "thirty"], ["fourteen", "forty"], ["fifteen", "fifty"]]}
-    ]},
-    {"k": "dialog", "h": "Nghe: “Một ngày của tôi” ở lớp thầy Tom", "lang": "en-GB", "note": "Chủ đề buổi học hôm nay là “My day”. Thầy Tom mời Minh và Lan kể về một ngày của mình. Nghe lần 1: ai dậy sớm nhất, ai ngủ muộn nhất? Nghe lần 2: ghi giờ của từng hoạt động.", "lines": [
-      {"s": "Tom", "g": "m", "t": "Today's topic is my day. Minh, tell us about your day, please.", "vi": "Chủ đề hôm nay là “Một ngày của tôi”. Minh, kể cho cả lớp nghe về một ngày của em nhé."},
-      {"s": "Minh", "g": "m", "t": "OK. I get up at half past six. I have a bowl of pho for breakfast, and I go to university at seven fifteen.", "vi": "Vâng. Em dậy lúc sáu rưỡi. Em ăn một bát phở cho bữa sáng và đi đến trường lúc bảy giờ mười lăm."},
-      {"s": "Tom", "g": "m", "t": "Pho for breakfast! I love that. And in the afternoon?", "vi": "Phở cho bữa sáng! Thầy rất thích. Còn buổi chiều?"},
-      {"s": "Minh", "g": "m", "t": "My classes finish at four. I go home and play football with my friends. I go to bed at midnight.", "vi": "Các tiết học của em kết thúc lúc bốn giờ. Em về nhà và đá bóng với bạn. Em đi ngủ lúc nửa đêm."},
-      {"s": "Tom", "g": "m", "t": "Midnight? That's late! Lan, what about you?", "vi": "Nửa đêm à? Muộn đấy! Lan, còn em thì sao?"},
-      {"s": "Lan", "g": "f", "t": "My day is very normal. I get up at six. I take a shower, and I go to work at a quarter past seven.", "vi": "Một ngày của em rất bình thường. Em dậy lúc sáu giờ. Em tắm rồi đi làm lúc bảy giờ mười lăm."},
-      {"s": "Tom", "g": "m", "t": "And what time do you start work?", "vi": "Thế em bắt đầu làm việc lúc mấy giờ?"},
-      {"s": "Lan", "g": "f", "t": "I start at eight o'clock, and I finish at half past five. Then I have dinner with my family.", "vi": "Em bắt đầu lúc tám giờ và xong lúc năm rưỡi. Sau đó em ăn tối với gia đình."},
-      {"s": "Tom", "g": "m", "t": "Very good. My day is different. I get up late, because I teach in the evening. I go to bed at one a.m.", "vi": "Rất tốt. Một ngày của thầy thì khác. Thầy dậy muộn vì thầy dạy buổi tối. Thầy đi ngủ lúc một giờ sáng."},
-      {"s": "Minh", "g": "m", "t": "Tom, what time is it now?", "vi": "Thầy ơi, bây giờ là mấy giờ rồi ạ?"},
-      {"s": "Tom", "g": "m", "t": "It's nine o'clock. Oh! The class finishes at nine. Goodbye, everyone!", "vi": "Chín giờ rồi. Ồ! Lớp mình kết thúc lúc chín giờ. Tạm biệt cả lớp!"}
-    ], "qs": [
-      {"q": "Minh gets up at ______.", "o": ["6:00", "6:30", "7:15"], "a": 1, "e": "“I get up at half past six.” – half past six = 6:30. (7:15 là giờ Minh đi học.)"},
-      {"q": "Minh has ______ for breakfast.", "a": "pho", "alt": ["a bowl of pho"], "e": "“I have a bowl of pho for breakfast.”"},
-      {"q": "Lan starts work at ______.", "o": ["7:15", "8:00", "5:30"], "a": 1, "e": "“I start at eight o'clock.” 7:15 là giờ Lan đi làm, 5:30 là giờ tan làm."},
-      {"q": "Tom goes to bed at ______.", "o": ["midnight", "9 p.m.", "1 a.m."], "a": 2, "e": "“I go to bed at one a.m.” – midnight là giờ Minh đi ngủ."},
-      {"q": "Who gets up early, at six o'clock?", "o": ["Lan", "Minh", "Tom"], "a": 0, "e": "Lan: “I get up at six.” Minh dậy 6:30, Tom dậy muộn."}
-    ]},
-    {"k": "read", "h": "Đọc: Một ngày của chị tester", "title": "A Day in the Life of a Software Tester", "text": "My cousin Mai is a software tester. She lives in Ho Chi Minh City with her husband, Khoa.\n\nMai gets up at six o'clock every day. She drinks a cup of coffee and reads the news. At half past seven, she goes to work by motorbike. The traffic is terrible, so she leaves home early!\n\nHer work starts at eight thirty. She tests apps and websites, and she writes bug reports. She has lunch with her team at twelve. In the afternoon, she has a meeting with Mr Long, her manager. She finishes work at half past five.\n\nIn the evening, Mai and Khoa cook dinner together. Then Mai studies Japanese for an hour. She goes to bed at eleven. It's a busy day, but she loves her job!", "vi": "Chị họ tôi, Mai, là kiểm thử viên phần mềm. Chị sống ở TP. Hồ Chí Minh với chồng là anh Khoa.\n\nChị Mai dậy lúc sáu giờ mỗi ngày. Chị uống một tách cà phê và đọc tin tức. Lúc bảy rưỡi, chị đi làm bằng xe máy. Giao thông rất kinh khủng nên chị rời nhà sớm!\n\nCông việc của chị bắt đầu lúc tám giờ ba mươi. Chị kiểm thử ứng dụng và trang web, và viết báo cáo lỗi. Chị ăn trưa với nhóm lúc mười hai giờ. Buổi chiều, chị họp với anh Long, quản lý của chị. Chị tan làm lúc năm rưỡi.\n\nBuổi tối, chị Mai và anh Khoa cùng nấu bữa tối. Sau đó chị học tiếng Nhật một tiếng. Chị đi ngủ lúc mười một giờ. Một ngày bận rộn, nhưng chị yêu công việc của mình!", "gloss": [
-      {"w": "drink", "vi": "uống"},
-      {"w": "the news", "vi": "tin tức, thời sự"},
-      {"w": "by motorbike", "vi": "bằng xe máy"},
-      {"w": "traffic", "vi": "giao thông, xe cộ"},
-      {"w": "terrible", "vi": "tệ, kinh khủng"},
-      {"w": "leave home", "vi": "rời nhà"},
-      {"w": "test", "vi": "kiểm thử, kiểm tra"},
-      {"w": "bug report", "vi": "báo cáo lỗi (phần mềm)"},
-      {"w": "meeting", "vi": "cuộc họp"},
-      {"w": "busy", "vi": "bận rộn"}
-    ], "qs": [
-      {"q": "Where does Mai live?", "o": ["Hanoi", "Hai Phong", "Ho Chi Minh City"], "a": 2, "e": "“She lives in Ho Chi Minh City with her husband, Khoa.” (Hải Phòng là quê của chị – Bài 1.)"},
-      {"q": "Mai goes to work at ______.", "a": "half past seven", "alt": ["7:30", "seven thirty", "7.30"], "e": "“At half past seven, she goes to work by motorbike.”"},
-      {"q": "Why does she leave home early?", "o": ["Because she has a meeting.", "Because the traffic is terrible.", "Because she studies Japanese."], "a": 1, "e": "“The traffic is terrible, so she leaves home early!” – so = vì vậy."},
-      {"q": "What does Mai do in the evening?", "o": ["She plays football.", "She cooks dinner and studies Japanese.", "She has a meeting with Mr Long."], "a": 1, "e": "“In the evening, Mai and Khoa cook dinner together. Then Mai studies Japanese for an hour.”"},
-      {"q": "Mai's work finishes at 5:30.", "o": ["Đúng", "Sai"], "a": 0, "e": "“She finishes work at half past five.” = 5:30."}
-    ]},
-    {"k": "speak", "h": "Nói: Một ngày của tôi – của người thân", "tasks": [
-      {"p": "Kể một ngày bình thường của bạn: ít nhất 6 câu, câu nào cũng có giờ.", "model": "I get up at six fifteen. I have breakfast at half past six. I go to work at seven. I start work at eight. I have lunch at twelve o'clock. I go home at half past five, and I go to bed at eleven p.m.", "vi": "Tôi dậy lúc 6:15. Tôi ăn sáng lúc 6:30. Tôi đi làm lúc 7 giờ. Tôi bắt đầu làm lúc 8 giờ. Tôi ăn trưa lúc 12 giờ. Tôi về nhà lúc 5:30 và đi ngủ lúc 11 giờ đêm.", "tips": "Dùng cả 2 cách nói giờ. Chú ý at + giờ."},
-      {"p": "Kể về một ngày của một người trong gia đình (ngôi thứ ba – nhớ -s/-es!).", "model": "My mother gets up at five. She goes to the market at six. She works at a primary school. She has lunch at home. In the evening, she watches TV, and she goes to bed at ten.", "tips": "Ghi âm rồi nghe lại: mỗi động từ có âm /s/, /z/ hoặc /ɪz/ ở cuối chưa?"},
-      {"p": "Hỏi – đáp giờ theo cặp: một bạn vẽ giờ lên giấy, bạn kia nói giờ bằng 2 cách.", "model": "What time is it? – It's a quarter past nine. It's nine fifteen.", "tips": "Phân biệt rõ thirteen – thirty, fifteen – fifty."}
-    ]},
-    {"k": "write", "h": "Viết: Một ngày của …", "task": "Viết đoạn 60–80 từ “A day in the life of …” về một người bạn biết (bố, mẹ, anh chị, đồng nghiệp…). Viết ở ngôi thứ ba, có ít nhất 8 động từ và 5 mốc giờ.", "min": 60, "model": "My father, Hung, is a doctor. He gets up at half past five every day. He goes jogging in the park, and then he has breakfast with my mum. He goes to the hospital at seven, and he starts work at half past seven. He has lunch at the hospital. He finishes work at six and comes home at half past six. In the evening, he reads the news and watches TV. He goes to bed at ten thirty.", "modelVi": "Bố tôi, ông Hùng, là bác sĩ. Bố dậy lúc năm rưỡi mỗi ngày. Bố đi chạy bộ trong công viên rồi ăn sáng với mẹ tôi. Bố đến bệnh viện lúc bảy giờ và bắt đầu làm việc lúc bảy rưỡi. Bố ăn trưa ở bệnh viện. Bố tan làm lúc sáu giờ và về nhà lúc sáu rưỡi. Buổi tối, bố đọc tin tức và xem ti vi. Bố đi ngủ lúc mười giờ rưỡi.", "tips": ["Mỗi động từ sau he/she phải có -s/-es; have → has.", "at + giờ; in the morning / in the evening.", "Nối hai việc bằng and, then (sau đó)."], "checklist": ["≥ 8 động từ, tất cả có -s/-es đúng", "≥ 5 mốc giờ đúng cách nói", "Đúng at / in", "Không có TO BE đứng trước động từ thường", "go home (không có to)"]}
-  ],
-  "exercises": [
-    {"t": "mc", "q": "She ___ in a bank.", "o": ["work", "works", "is work"], "a": 1, "e": "Chủ ngữ she → động từ thêm -s: works. “is work” sai vì không dùng TO BE với động từ thường."},
-    {"t": "mc", "q": "My parents ___ in Hue.", "o": ["live", "lives", "is live"], "a": 0, "e": "My parents = họ (số nhiều) → động từ nguyên mẫu, không -s."},
-    {"t": "fill", "q": "Minh ___ (study) English in the evening.", "a": "studies", "e": "Phụ âm d + y → bỏ y thêm ies: studies."},
-    {"t": "fill", "q": "Tom ___ (watch) TV at night.", "a": "watches", "e": "Tận cùng ch → thêm es: watches."},
-    {"t": "fill", "q": "Lan ___ (have) lunch at twelve.", "a": "has", "e": "have là bất quy tắc: he/she/it has."},
-    {"t": "fill", "q": "My brother ___ (go) to school at seven.", "a": "goes", "e": "Tận cùng o → thêm es: goes."},
-    {"t": "mc", "q": "Chọn câu ĐÚNG:", "o": ["I am get up at six.", "I get up at six.", "I gets up at six."], "a": 1, "e": "I + V nguyên mẫu, không TO BE, không -s."},
-    {"t": "mc", "q": "7:30 – What time is it?", "o": ["It's half past seven.", "It's half past six.", "It's seven half."], "a": 0, "e": "half past seven = 7 giờ rưỡi = 7:30."},
-    {"t": "mc", "q": "I have breakfast ___ the morning.", "o": ["at", "in", "on"], "a": 1, "e": "in + buổi trong ngày: in the morning."},
-    {"t": "mc", "q": "The class starts ___ 7 o'clock.", "o": ["at", "in", "on"], "a": 0, "e": "at + giờ cụ thể: at 7 o'clock."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["at", "She", "eleven.", "to", "goes", "bed"], "a": "She goes to bed at eleven.", "e": "Chủ ngữ + động từ (goes) + cụm (to bed) + at + giờ."},
-    {"t": "listen", "say": "It's ten past four.", "lang": "en-GB", "q": "What time is it?", "o": ["4:10", "10:04", "3:50"], "a": 0, "e": "ten past four = 4 giờ 10 (qua 10 phút). 3:50 sẽ là ten to four."},
-    {"t": "listen", "say": "The film starts at a quarter to eight.", "lang": "en-GB", "q": "What time does the film start?", "o": ["7:45", "8:15", "7:15"], "a": 0, "e": "a quarter to eight = 8 giờ kém 15 = 7:45."},
-    {"t": "listen", "say": "Hoa gets up at six. She starts work at nine, and she finishes at five.", "lang": "en-GB", "q": "When does Hoa finish work?", "o": ["at six", "at nine", "at five"], "a": 2, "e": "“she finishes at five.” Sáu giờ là giờ dậy, chín giờ là giờ bắt đầu làm."},
-    {"t": "dict", "say": "He gets up at half past six every day.", "lang": "en-GB", "a": "He gets up at half past six every day.", "e": "gets có -s vì chủ ngữ là He."},
-    {"t": "match", "q": "Nối giờ với cách nói:", "pairs": [["6:00", "six o'clock"], ["6:15", "a quarter past six"], ["6:30", "half past six"], ["6:45", "a quarter to seven"], ["6:50", "ten to seven"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Một đồng hồ giấy có kim xoay được (hoặc vẽ trên bảng); 12 thẻ tranh hoạt động hằng ngày; mỗi học viên một bảng thời gian biểu trống (6:00 → 23:00); thẻ chữ “S” to để giơ khi có lỗi thiếu -s.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Ôn Bài 4: “túi bí ẩn” nhanh với this/these; hỏi What colour is it?"},
-      {"t": "15'", "do": "Nói giờ: xoay kim đồng hồ giấy. Dạy o'clock → half past → quarter past/to → past/to; sau đó cách 2 (seven fifteen). Học viên lên xoay kim theo giờ GV đọc."},
-      {"t": "15'", "do": "Từ vựng hoạt động: GV diễn kịch câm một ngày của mình theo thứ tự, học viên đoán cụm từ; dán thẻ tranh lên trục thời gian trên bảng."},
-      {"t": "20'", "do": "Hiện tại đơn: GV kể ngày của mình (I get up at…) rồi kể ngày của một học viên (Nam gets up at…). Học viên phát hiện điểm khác (-s). Giới thiệu bảng chia động từ và quy tắc -s/-es/-ies, has. Mỗi lần ai quên -s, GV giơ thẻ “S”."},
-      {"t": "20'", "do": "Nghe hội thoại lớp thầy Tom: lần 1 trả lời ai dậy sớm nhất / ngủ muộn nhất; lần 2 điền thời gian biểu cho Minh, Lan, Tom; lần 3 đọc phân vai."},
-      {"t": "10'", "do": "Phát âm: 3 cột /s/ /z/ /ɪz/ cho động từ; cặp thirteen – thirty. Giao bài tập 1–10 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Khởi động: “Mấy giờ rồi?” – GV vẽ giờ lên bảng, đội nào đọc đúng 2 cách trước được điểm."},
-      {"t": "20'", "do": "Đọc “A Day in the Life of a Software Tester”: đọc thầm, điền thời gian biểu của Mai, trả lời câu hỏi. Gạch chân mọi động từ có -s/-es và phân loại cách đọc."},
-      {"t": "25'", "do": "Nói: phỏng vấn theo cặp, điền thời gian biểu của bạn; sau đó đổi cặp và kể lại ngày của bạn cũ bằng ngôi thứ ba (Hoa gets up at…). GV ghi lỗi thiếu -s."},
-      {"t": "20'", "do": "Viết “A day in the life of…” 60–80 từ; đổi bài, bạn dùng bút màu khoanh mọi động từ để kiểm tra -s."},
-      {"t": "15'", "do": "Làm bài tập 11–16 (sắp xếp, nghe giờ, chính tả, nối). Chữa lỗi chung; giao bài về nhà."}
+ "no": 5,
+ "title": "Một ngày của tôi – Hiện tại đơn (khẳng định) & nói giờ",
+ "sub": "I get up at six. She starts work at eight.",
+ "goals": [
+  "Kể các hoạt động hằng ngày bằng 19 từ / cụm từ (get up, have breakfast, go to work…)",
+  "Dùng đúng hiện tại đơn khẳng định: I / you / we / they + V; he / she / it + V-s/-es",
+  "Viết đúng chính tả và đọc đúng đuôi -s/-es của động từ (works, goes, watches, studies, has)",
+  "Hỏi và nói giờ theo 2 cách: It's half past seven / It's seven thirty",
+  "Dùng đúng at + giờ, in + buổi (at six o'clock, in the morning, at night)"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng: hoạt động hằng ngày & giờ giấc",
+   "items": [
+    {
+     "w": "get up",
+     "ipa": "/ɡet ˈʌp/",
+     "pos": "phr",
+     "vi": "thức dậy, ra khỏi giường",
+     "ex": "I get up at six o'clock.",
+     "exVi": "Tôi dậy lúc sáu giờ."
+    },
+    {
+     "w": "take a shower",
+     "ipa": "/teɪk ə ˈʃaʊə(r)/",
+     "pos": "phr",
+     "vi": "tắm (vòi sen)",
+     "ex": "She takes a shower in the morning.",
+     "exVi": "Cô ấy tắm vào buổi sáng."
+    },
+    {
+     "w": "have breakfast",
+     "ipa": "/hæv ˈbrekfəst/",
+     "pos": "phr",
+     "vi": "ăn sáng",
+     "ex": "Minh has breakfast at a pho stall.",
+     "exVi": "Minh ăn sáng ở một quán phở."
+    },
+    {
+     "w": "go to work",
+     "ipa": "/ɡəʊ tə ˈwɜːk/",
+     "pos": "phr",
+     "vi": "đi làm",
+     "ex": "My dad goes to work by motorbike.",
+     "exVi": "Bố tôi đi làm bằng xe máy."
+    },
+    {
+     "w": "start",
+     "ipa": "/stɑːt/",
+     "pos": "v",
+     "vi": "bắt đầu",
+     "ex": "The class starts at seven.",
+     "exVi": "Lớp học bắt đầu lúc bảy giờ."
+    },
+    {
+     "w": "finish",
+     "ipa": "/ˈfɪnɪʃ/",
+     "pos": "v",
+     "vi": "kết thúc, xong",
+     "ex": "Lan finishes work at half past five.",
+     "exVi": "Lan tan làm lúc năm rưỡi."
+    },
+    {
+     "w": "have lunch",
+     "ipa": "/hæv ˈlʌntʃ/",
+     "pos": "phr",
+     "vi": "ăn trưa",
+     "ex": "We have lunch at twelve.",
+     "exVi": "Chúng tôi ăn trưa lúc mười hai giờ."
+    },
+    {
+     "w": "go home",
+     "ipa": "/ɡəʊ ˈhəʊm/",
+     "pos": "phr",
+     "vi": "về nhà (KHÔNG có “to”)",
+     "ex": "They go home at six.",
+     "exVi": "Họ về nhà lúc sáu giờ."
+    },
+    {
+     "w": "have dinner",
+     "ipa": "/hæv ˈdɪnə(r)/",
+     "pos": "phr",
+     "vi": "ăn tối",
+     "ex": "We have dinner together.",
+     "exVi": "Chúng tôi ăn tối cùng nhau."
+    },
+    {
+     "w": "watch TV",
+     "ipa": "/wɒtʃ ˌtiː ˈviː/",
+     "pos": "phr",
+     "vi": "xem ti vi",
+     "ex": "My grandma watches TV in the evening.",
+     "exVi": "Bà tôi xem ti vi vào buổi tối."
+    },
+    {
+     "w": "go to bed",
+     "ipa": "/ɡəʊ tə ˈbed/",
+     "pos": "phr",
+     "vi": "đi ngủ",
+     "ex": "Minh goes to bed at midnight.",
+     "exVi": "Minh đi ngủ lúc nửa đêm."
+    },
+    {
+     "w": "live",
+     "ipa": "/lɪv/",
+     "pos": "v",
+     "vi": "sống, ở",
+     "ex": "Mai lives in Orinvale.",
+     "exVi": "Mai sống ở Orinvale."
+    },
+    {
+     "w": "study",
+     "ipa": "/ˈstʌdi/",
+     "pos": "v",
+     "vi": "học",
+     "ex": "Minh studies at a university.",
+     "exVi": "Minh học ở một trường đại học."
+    },
+    {
+     "w": "every day",
+     "ipa": "/ˈevri deɪ/",
+     "pos": "phr",
+     "vi": "mỗi ngày, hằng ngày",
+     "ex": "I drink coffee every day.",
+     "exVi": "Tôi uống cà phê mỗi ngày."
+    },
+    {
+     "w": "early",
+     "ipa": "/ˈɜːli/",
+     "pos": "adj",
+     "vi": "sớm",
+     "ex": "She gets up early.",
+     "exVi": "Cô ấy dậy sớm."
+    },
+    {
+     "w": "late",
+     "ipa": "/leɪt/",
+     "pos": "adj",
+     "vi": "muộn, trễ",
+     "ex": "Tom goes to bed late.",
+     "exVi": "Thầy Tom đi ngủ muộn."
+    },
+    {
+     "w": "o'clock",
+     "ipa": "/əˈklɒk/",
+     "pos": "adv",
+     "vi": "giờ đúng (chỉ dùng cho giờ chẵn)",
+     "ex": "It's nine o'clock.",
+     "exVi": "Bây giờ là chín giờ."
+    },
+    {
+     "w": "half past",
+     "ipa": "/hɑːf pɑːst/",
+     "pos": "phr",
+     "vi": "rưỡi (qua 30 phút)",
+     "ex": "It's half past seven.",
+     "exVi": "Bây giờ là bảy giờ rưỡi."
+    },
+    {
+     "w": "quarter",
+     "ipa": "/ˈkwɔːtə(r)/",
+     "pos": "n",
+     "vi": "một phần tư; 15 phút (quarter past: hơn 15', quarter to: kém 15')",
+     "ex": "It's a quarter to eight.",
+     "exVi": "Bây giờ là tám giờ kém mười lăm."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Thì hiện tại đơn – câu khẳng định",
+   "html": "<p>Dùng để nói <b>thói quen, việc lặp lại hằng ngày</b> và <b>sự thật</b>: <i>I get up at six every day. Water boils at 100°C.</i></p><p>Tiếng Việt không chia động từ: <i>tôi <u>làm</u>, cô ấy <u>làm</u></i>. Tiếng Anh: khi chủ ngữ là <b>he / she / it</b> (hay 1 người, 1 vật) thì động từ <b>phải thêm -s / -es</b>.</p>",
+   "table": [
+    [
+     "Chủ ngữ",
+     "Động từ",
+     "Ví dụ"
     ],
-    "games": [
-      "Đồng hồ chạy tiếp sức: hai đội xếp hàng; GV đọc giờ (a quarter to ten…), người đầu hàng chạy lên vẽ kim đồng hồ đúng trên bảng.",
-      "Ngày của người nổi tiếng: nhóm bịa thời gian biểu của một nhân vật tưởng tượng (một siêu nhân, một con mèo), đọc to bằng ngôi thứ ba; lớp bình chọn ngày hài hước nhất.",
-      "Thẻ S: cả lớp làm “cảnh sát -s” – nghe bạn kể, ai phát hiện thiếu -s thì giơ tay nói “S!” và sửa lại câu."
+    [
+     "I / you / we / they",
+     "V nguyên mẫu",
+     "I work in an office. We live in Neravale."
     ],
-    "errors": [
-      "Quên -s ngôi thứ ba: *She work, *He go → She works, He goes. Đây là lỗi bền nhất – sửa liên tục suốt cấp A1.",
-      "Thêm TO BE trước động từ thường: *I am get up, *She is goes → I get up, She goes.",
-      "Thêm -s sai chỗ: *I works, *My parents lives, *She gets ups.",
-      "Sai giới từ thời gian: *in 7 o'clock, *at the morning → at 7 o'clock, in the morning.",
-      "Nhầm thirteen/thirty, fifteen/fifty khi nghe – nói giờ. Luyện trọng âm cuối/đầu.",
-      "*go to home → go home."
+    [
+     "danh từ số nhiều, A and B",
+     "V nguyên mẫu",
+     "My parents live in Velmora. Lan and Minh study English."
     ],
-    "homework": "Làm hết bài tập trong game (≥ 80%); viết thời gian biểu 1 ngày của mình bằng tiếng Anh dán ở bàn học; ghi âm phần Nói 2 và nghe lại kiểm tra đuôi -s; ôn 19 từ mới bằng Thẻ từ vựng."
+    [
+     "he / she / it",
+     "V + s / es",
+     "She works in an office. It starts at seven."
+    ],
+    [
+     "1 người / 1 vật (Mai, my dad, the class…)",
+     "V + s / es",
+     "Mai lives in Orinvale. The class finishes at nine."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "I get up at six o'clock.",
+     "vi": "Tôi dậy lúc sáu giờ."
+    },
+    {
+     "t": "Minh studies English in the evening.",
+     "vi": "Minh học tiếng Anh vào buổi tối."
+    },
+    {
+     "t": "Mai goes to work by motorbike.",
+     "vi": "Mai đi làm bằng xe máy."
+    },
+    {
+     "t": "My father has breakfast at home.",
+     "vi": "Bố tôi ăn sáng ở nhà."
+    },
+    {
+     "t": "We have dinner at seven.",
+     "vi": "Chúng tôi ăn tối lúc bảy giờ."
+    },
+    {
+     "t": "The sun rises in the east.",
+     "vi": "Mặt trời mọc ở hướng đông. (sự thật)"
+    }
+   ],
+   "tips": [
+    "<b>Lỗi số 1 của người Việt: </b> quên -s ở ngôi thứ ba. ❌ <i>She work in a bank.</i> → ✅ She work<b>s</b> in a bank. Mẹo: nhớ “<b>S</b>he – <b>S</b>”: chủ ngữ là 1 người/vật (không phải I, you) → động từ có -s.",
+    "Không dùng TO BE với động từ thường (đã gặp ở Bài 1): ❌ <i>I am get up at six.</i> ❌ <i>She is works.</i> → ✅ I get up at six. She works.",
+    "Hai người trở lên → KHÔNG thêm -s: ✅ My parents live in Velmora. ❌ <i>My parents lives…</i>",
+    "<b>go home</b> không có to: ✅ I go home at six. ❌ <i>I go to home.</i> (nhưng go <b>to</b> work, go <b>to</b> bed)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Thêm -s hay -es? Quy tắc chính tả ngôi thứ ba",
+   "html": "<p>Quy tắc rất giống danh từ số nhiều ở Bài 4 – học một lần, dùng hai nơi!</p>",
+   "table": [
+    [
+     "Quy tắc",
+     "Ví dụ"
+    ],
+    [
+     "Hầu hết: + s",
+     "work → works, get → gets, start → starts, live → lives, read → reads"
+    ],
+    [
+     "Tận cùng s, ss, sh, ch, x, o: + es",
+     "watch → watches, finish → finishes, wash → washes, go → goes, do → does"
+    ],
+    [
+     "Phụ âm + y → bỏ y, + ies",
+     "study → studies, carry → carries, fly → flies"
+    ],
+    [
+     "Nguyên âm + y → chỉ + s",
+     "play → plays, say → says, buy → buys"
+    ],
+    [
+     "Bất quy tắc",
+     "have → has (❌ haves) · be → is"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Lan watches the news at seven.",
+     "vi": "Lan xem thời sự lúc bảy giờ. (watch + es)"
+    },
+    {
+     "t": "Duc plays football after school.",
+     "vi": "Đức chơi bóng đá sau giờ học. (play: nguyên âm + y → plays)"
+    },
+    {
+     "t": "My mum does the housework in the morning.",
+     "vi": "Mẹ tôi làm việc nhà vào buổi sáng. (do → does)"
+    },
+    {
+     "t": "Tom has a big breakfast.",
+     "vi": "Thầy Tom ăn sáng nhiều. (have → has)"
+    }
+   ],
+   "tips": [
+    "Đừng thêm -s vào động từ khi chủ ngữ là I: ❌ <i>I works.</i> Người học hay “sửa thừa” sau khi vừa học quy tắc.",
+    "Chỉ động từ CHÍNH thêm -s, không thêm vào cả cụm: ✅ She gets up. ❌ <i>She gets ups.</i> ✅ He goes to bed. ❌ <i>He goes to beds.</i>"
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Nói giờ – What time is it?",
+   "html": "<p><b>Hỏi giờ:</b> What time is it? / What's the time? – Trả lời luôn bắt đầu bằng <b>It's…</b></p><p><b>Cách 1 (truyền thống):</b> phút 1–30 dùng <b>past</b> (qua), phút 31–59 dùng <b>to</b> (kém) và nói <b>phút trước, giờ sau</b>. <b>Cách 2 (dễ, phổ biến):</b> đọc giờ rồi đọc phút như đọc số.</p><p><b>a.m.</b> = từ nửa đêm đến 12 giờ trưa · <b>p.m.</b> = từ 12 giờ trưa đến nửa đêm. <b>noon</b> = 12 giờ trưa, <b>midnight</b> = 12 giờ đêm.</p><p><b>Giới từ:</b> <b>at</b> + giờ (at 7 o'clock, at noon, at midnight, at night) · <b>in</b> + buổi (in the morning, in the afternoon, in the evening).</p>",
+   "table": [
+    [
+     "Giờ",
+     "Cách 1 (past / to)",
+     "Cách 2 (đọc số)"
+    ],
+    [
+     "7:00",
+     "It's seven o'clock.",
+     "It's seven."
+    ],
+    [
+     "7:05",
+     "It's five past seven.",
+     "It's seven oh five."
+    ],
+    [
+     "7:15",
+     "It's (a) quarter past seven.",
+     "It's seven fifteen."
+    ],
+    [
+     "7:30",
+     "It's half past seven.",
+     "It's seven thirty."
+    ],
+    [
+     "7:45",
+     "It's (a) quarter to eight.",
+     "It's seven forty-five."
+    ],
+    [
+     "7:50",
+     "It's ten to eight.",
+     "It's seven fifty."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "What time is it? – It's half past six.",
+     "vi": "Mấy giờ rồi? – Sáu rưỡi."
+    },
+    {
+     "t": "I have lunch at twelve o'clock.",
+     "vi": "Tôi ăn trưa lúc mười hai giờ."
+    },
+    {
+     "t": "Lan goes to bed at eleven p.m.",
+     "vi": "Lan đi ngủ lúc 11 giờ đêm."
+    },
+    {
+     "t": "Tom teaches in the evening.",
+     "vi": "Thầy Tom dạy vào buổi tối."
+    },
+    {
+     "t": "It's a quarter to nine.",
+     "vi": "Bây giờ là chín giờ kém mười lăm (8:45)."
+    }
+   ],
+   "tips": [
+    "<b>half past seven</b> = 7 giờ rưỡi (7:30). Người Anh nói nhanh còn rút gọn thành “half seven” – vẫn là 7:30.",
+    "<b>o'clock</b> chỉ dùng với giờ chẵn: ❌ <i>seven thirty o'clock</i>.",
+    "Sai giới từ rất phổ biến: ❌ <i>in 7 o'clock</i>, ❌ <i>at the morning</i> → ✅ at 7 o'clock, in the morning. Nhớ ngoại lệ: <b>at night</b>.",
+    "Tiếng Việt nói “kém” giống “to”: 8 giờ kém 15 = a quarter <b>to</b> eight. Nhưng phải đổi lên giờ SAU (eight), không nói “a quarter to seven” cho 7:45."
+   ]
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: đuôi -s/-es của động từ & cặp -teen / -ty",
+   "html": "<p>Đuôi -s ngôi thứ ba đọc theo đúng quy tắc của danh từ số nhiều (Bài 4). Còn khi nói giờ, nhầm <b>thirteen</b> (13) và <b>thirty</b> (30) có thể làm bạn trễ hẹn – hãy luyện trọng âm thật rõ.</p>",
+   "items": [
+    {
+     "sym": "-s = /s/",
+     "ex": [
+      "works",
+      "gets",
+      "starts",
+      "takes"
+     ],
+     "vi": "Sau âm vô thanh /p t k f/ → /s/: works /wɜːks/. Đừng bỏ âm cuối!"
+    },
+    {
+     "sym": "-s = /z/",
+     "ex": [
+      "goes",
+      "lives",
+      "studies",
+      "has"
+     ],
+     "vi": "Sau nguyên âm và âm hữu thanh → /z/ rung: goes /ɡəʊz/, has /hæz/."
+    },
+    {
+     "sym": "-es = /ɪz/",
+     "ex": [
+      "watches",
+      "finishes",
+      "washes",
+      "uses"
+     ],
+     "vi": "Sau /s z ʃ tʃ dʒ/ → thêm âm tiết /ɪz/: watch (1) → watches (2 âm tiết)."
+    },
+    {
+     "sym": "does /dʌz/ · says /sez/",
+     "ex": [
+      "does",
+      "says"
+     ],
+     "vi": "Hai từ đổi luôn nguyên âm: do /duː/ → does /dʌz/ (“đắz”); say /seɪ/ → says /sez/ (“xez”, không phải “xêiz”)."
+    },
+    {
+     "sym": "-teen ↔ -ty",
+     "ex": [
+      "thirteen",
+      "thirty",
+      "fifteen",
+      "fifty"
+     ],
+     "vi": "-teen: trọng âm CUỐI, kéo dài /iːn/ – thir-TEEN. -ty: trọng âm ĐẦU, đuôi /ti/ ngắn – THIR-ty.",
+     "pairs": [
+      [
+       "thirteen",
+       "thirty"
+      ],
+      [
+       "fourteen",
+       "forty"
+      ],
+      [
+       "fifteen",
+       "fifty"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: “Một ngày của tôi” ở lớp thầy Tom",
+   "lang": "en-GB",
+   "note": "Chủ đề buổi học hôm nay là “My day”. Thầy Tom mời Minh và Lan kể về một ngày của mình. Nghe lần 1: ai dậy sớm nhất, ai ngủ muộn nhất? Nghe lần 2: ghi giờ của từng hoạt động.",
+   "lines": [
+    {
+     "s": "Tom",
+     "g": "m",
+     "t": "Today's topic is my day. Minh, tell us about your day, please.",
+     "vi": "Chủ đề hôm nay là “Một ngày của tôi”. Minh, kể cho cả lớp nghe về một ngày của em nhé."
+    },
+    {
+     "s": "Minh",
+     "g": "m",
+     "t": "OK. I get up at half past six. I have a bowl of pho for breakfast, and I go to university at seven fifteen.",
+     "vi": "Vâng. Em dậy lúc sáu rưỡi. Em ăn một bát phở cho bữa sáng và đi đến trường lúc bảy giờ mười lăm."
+    },
+    {
+     "s": "Tom",
+     "g": "m",
+     "t": "Pho for breakfast! I love that. And in the afternoon?",
+     "vi": "Phở cho bữa sáng! Thầy rất thích. Còn buổi chiều?"
+    },
+    {
+     "s": "Minh",
+     "g": "m",
+     "t": "My classes finish at four. I go home and play football with my friends. I go to bed at midnight.",
+     "vi": "Các tiết học của em kết thúc lúc bốn giờ. Em về nhà và đá bóng với bạn. Em đi ngủ lúc nửa đêm."
+    },
+    {
+     "s": "Tom",
+     "g": "m",
+     "t": "Midnight? That's late! Lan, what about you?",
+     "vi": "Nửa đêm à? Muộn đấy! Lan, còn em thì sao?"
+    },
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "My day is very normal. I get up at six. I take a shower, and I go to work at a quarter past seven.",
+     "vi": "Một ngày của em rất bình thường. Em dậy lúc sáu giờ. Em tắm rồi đi làm lúc bảy giờ mười lăm."
+    },
+    {
+     "s": "Tom",
+     "g": "m",
+     "t": "And what time do you start work?",
+     "vi": "Thế em bắt đầu làm việc lúc mấy giờ?"
+    },
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "I start at eight o'clock, and I finish at half past five. Then I have dinner with my family.",
+     "vi": "Em bắt đầu lúc tám giờ và xong lúc năm rưỡi. Sau đó em ăn tối với gia đình."
+    },
+    {
+     "s": "Tom",
+     "g": "m",
+     "t": "Very good. My day is different. I get up late, because I teach in the evening. I go to bed at one a.m.",
+     "vi": "Rất tốt. Một ngày của thầy thì khác. Thầy dậy muộn vì thầy dạy buổi tối. Thầy đi ngủ lúc một giờ sáng."
+    },
+    {
+     "s": "Minh",
+     "g": "m",
+     "t": "Tom, what time is it now?",
+     "vi": "Thầy ơi, bây giờ là mấy giờ rồi ạ?"
+    },
+    {
+     "s": "Tom",
+     "g": "m",
+     "t": "It's nine o'clock. Oh! The class finishes at nine. Goodbye, everyone!",
+     "vi": "Chín giờ rồi. Ồ! Lớp mình kết thúc lúc chín giờ. Tạm biệt cả lớp!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Minh gets up at ______.",
+     "o": [
+      "6:00",
+      "6:30",
+      "7:15"
+     ],
+     "a": 1,
+     "e": "“I get up at half past six.” – half past six = 6:30. (7:15 là giờ Minh đi học.)"
+    },
+    {
+     "q": "Minh has ______ for breakfast.",
+     "a": "pho",
+     "alt": [
+      "a bowl of pho"
+     ],
+     "e": "“I have a bowl of pho for breakfast.”"
+    },
+    {
+     "q": "Lan starts work at ______.",
+     "o": [
+      "7:15",
+      "8:00",
+      "5:30"
+     ],
+     "a": 1,
+     "e": "“I start at eight o'clock.” 7:15 là giờ Lan đi làm, 5:30 là giờ tan làm."
+    },
+    {
+     "q": "Tom goes to bed at ______.",
+     "o": [
+      "midnight",
+      "9 p.m.",
+      "1 a.m."
+     ],
+     "a": 2,
+     "e": "“I go to bed at one a.m.” – midnight là giờ Minh đi ngủ."
+    },
+    {
+     "q": "Who gets up early, at six o'clock?",
+     "o": [
+      "Lan",
+      "Minh",
+      "Tom"
+     ],
+     "a": 0,
+     "e": "Lan: “I get up at six.” Minh dậy 6:30, Tom dậy muộn."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Một ngày của chị tester",
+   "title": "A Day in the Life of a Software Tester",
+   "text": "My cousin Mai is a software tester. She lives in Orinvale with her husband, Khoa.\n\nMai gets up at six o'clock every day. She drinks a cup of coffee and reads the news. At half past seven, she goes to work by motorbike. The traffic is terrible, so she leaves home early!\n\nHer work starts at eight thirty. She tests apps and websites, and she writes bug reports. She has lunch with her team at twelve. In the afternoon, she has a meeting with Mr Long, her manager. She finishes work at half past five.\n\nIn the evening, Mai and Khoa cook dinner together. Then Mai studies Japanese for an hour. She goes to bed at eleven. It's a busy day, but she loves her job!",
+   "vi": "Chị họ tôi, Mai, là kiểm thử viên phần mềm. Chị sống ở Orinvale với chồng là anh Khoa.\n\nChị Mai dậy lúc sáu giờ mỗi ngày. Chị uống một tách cà phê và đọc tin tức. Lúc bảy rưỡi, chị đi làm bằng xe máy. Giao thông rất kinh khủng nên chị rời nhà sớm!\n\nCông việc của chị bắt đầu lúc tám giờ ba mươi. Chị kiểm thử ứng dụng và trang web, và viết báo cáo lỗi. Chị ăn trưa với nhóm lúc mười hai giờ. Buổi chiều, chị họp với anh Long, quản lý của chị. Chị tan làm lúc năm rưỡi.\n\nBuổi tối, chị Mai và anh Khoa cùng nấu bữa tối. Sau đó chị học tiếng Nhật một tiếng. Chị đi ngủ lúc mười một giờ. Một ngày bận rộn, nhưng chị yêu công việc của mình!",
+   "gloss": [
+    {
+     "w": "drink",
+     "vi": "uống"
+    },
+    {
+     "w": "the news",
+     "vi": "tin tức, thời sự"
+    },
+    {
+     "w": "by motorbike",
+     "vi": "bằng xe máy"
+    },
+    {
+     "w": "traffic",
+     "vi": "giao thông, xe cộ"
+    },
+    {
+     "w": "terrible",
+     "vi": "tệ, kinh khủng"
+    },
+    {
+     "w": "leave home",
+     "vi": "rời nhà"
+    },
+    {
+     "w": "test",
+     "vi": "kiểm thử, kiểm tra"
+    },
+    {
+     "w": "bug report",
+     "vi": "báo cáo lỗi (phần mềm)"
+    },
+    {
+     "w": "meeting",
+     "vi": "cuộc họp"
+    },
+    {
+     "w": "busy",
+     "vi": "bận rộn"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Where does Mai live?",
+     "o": [
+      "Neravale",
+      "Maverton",
+      "Orinvale"
+     ],
+     "a": 2,
+     "e": "“She lives in Orinvale with her husband, Khoa.” (Maverton là quê của chị – Bài 1.)"
+    },
+    {
+     "q": "Mai goes to work at ______.",
+     "a": "half past seven",
+     "alt": [
+      "7:30",
+      "seven thirty",
+      "7.30"
+     ],
+     "e": "“At half past seven, she goes to work by motorbike.”"
+    },
+    {
+     "q": "Why does she leave home early?",
+     "o": [
+      "Because she has a meeting.",
+      "Because the traffic is terrible.",
+      "Because she studies Japanese."
+     ],
+     "a": 1,
+     "e": "“The traffic is terrible, so she leaves home early!” – so = vì vậy."
+    },
+    {
+     "q": "What does Mai do in the evening?",
+     "o": [
+      "She plays football.",
+      "She cooks dinner and studies Japanese.",
+      "She has a meeting with Mr Long."
+     ],
+     "a": 1,
+     "e": "“In the evening, Mai and Khoa cook dinner together. Then Mai studies Japanese for an hour.”"
+    },
+    {
+     "q": "Mai's work finishes at 5:30.",
+     "o": [
+      "Đúng",
+      "Sai"
+     ],
+     "a": 0,
+     "e": "“She finishes work at half past five.” = 5:30."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Một ngày của tôi – của người thân",
+   "tasks": [
+    {
+     "p": "Kể một ngày bình thường của bạn: ít nhất 6 câu, câu nào cũng có giờ.",
+     "model": "I get up at six fifteen. I have breakfast at half past six. I go to work at seven. I start work at eight. I have lunch at twelve o'clock. I go home at half past five, and I go to bed at eleven p.m.",
+     "vi": "Tôi dậy lúc 6:15. Tôi ăn sáng lúc 6:30. Tôi đi làm lúc 7 giờ. Tôi bắt đầu làm lúc 8 giờ. Tôi ăn trưa lúc 12 giờ. Tôi về nhà lúc 5:30 và đi ngủ lúc 11 giờ đêm.",
+     "tips": "Dùng cả 2 cách nói giờ. Chú ý at + giờ."
+    },
+    {
+     "p": "Kể về một ngày của một người trong gia đình (ngôi thứ ba – nhớ -s/-es!).",
+     "model": "My mother gets up at five. She goes to the market at six. She works at a primary school. She has lunch at home. In the evening, she watches TV, and she goes to bed at ten.",
+     "tips": "Ghi âm rồi nghe lại: mỗi động từ có âm /s/, /z/ hoặc /ɪz/ ở cuối chưa?"
+    },
+    {
+     "p": "Hỏi – đáp giờ theo cặp: một bạn vẽ giờ lên giấy, bạn kia nói giờ bằng 2 cách.",
+     "model": "What time is it? – It's a quarter past nine. It's nine fifteen.",
+     "tips": "Phân biệt rõ thirteen – thirty, fifteen – fifty."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Một ngày của …",
+   "task": "Viết đoạn 60–80 từ “A day in the life of …” về một người bạn biết (bố, mẹ, anh chị, đồng nghiệp…). Viết ở ngôi thứ ba, có ít nhất 8 động từ và 5 mốc giờ.",
+   "min": 60,
+   "model": "My father, Hung, is a doctor. He gets up at half past five every day. He goes jogging in the park, and then he has breakfast with my mum. He goes to the hospital at seven, and he starts work at half past seven. He has lunch at the hospital. He finishes work at six and comes home at half past six. In the evening, he reads the news and watches TV. He goes to bed at ten thirty.",
+   "modelVi": "Bố tôi, ông Hùng, là bác sĩ. Bố dậy lúc năm rưỡi mỗi ngày. Bố đi chạy bộ trong công viên rồi ăn sáng với mẹ tôi. Bố đến bệnh viện lúc bảy giờ và bắt đầu làm việc lúc bảy rưỡi. Bố ăn trưa ở bệnh viện. Bố tan làm lúc sáu giờ và về nhà lúc sáu rưỡi. Buổi tối, bố đọc tin tức và xem ti vi. Bố đi ngủ lúc mười giờ rưỡi.",
+   "tips": [
+    "Mỗi động từ sau he/she phải có -s/-es; have → has.",
+    "at + giờ; in the morning / in the evening.",
+    "Nối hai việc bằng and, then (sau đó)."
+   ],
+   "checklist": [
+    "≥ 8 động từ, tất cả có -s/-es đúng",
+    "≥ 5 mốc giờ đúng cách nói",
+    "Đúng at / in",
+    "Không có TO BE đứng trước động từ thường",
+    "go home (không có to)"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "She ___ in a bank.",
+   "o": [
+    "work",
+    "works",
+    "is work"
+   ],
+   "a": 1,
+   "e": "Chủ ngữ she → động từ thêm -s: works. “is work” sai vì không dùng TO BE với động từ thường."
+  },
+  {
+   "t": "mc",
+   "q": "My parents ___ in Velmora.",
+   "o": [
+    "live",
+    "lives",
+    "is live"
+   ],
+   "a": 0,
+   "e": "My parents = họ (số nhiều) → động từ nguyên mẫu, không -s."
+  },
+  {
+   "t": "fill",
+   "q": "Minh ___ (study) English in the evening.",
+   "a": "studies",
+   "e": "Phụ âm d + y → bỏ y thêm ies: studies."
+  },
+  {
+   "t": "fill",
+   "q": "Tom ___ (watch) TV at night.",
+   "a": "watches",
+   "e": "Tận cùng ch → thêm es: watches."
+  },
+  {
+   "t": "fill",
+   "q": "Lan ___ (have) lunch at twelve.",
+   "a": "has",
+   "e": "have là bất quy tắc: he/she/it has."
+  },
+  {
+   "t": "fill",
+   "q": "My brother ___ (go) to school at seven.",
+   "a": "goes",
+   "e": "Tận cùng o → thêm es: goes."
+  },
+  {
+   "t": "mc",
+   "q": "Chọn câu ĐÚNG:",
+   "o": [
+    "I am get up at six.",
+    "I get up at six.",
+    "I gets up at six."
+   ],
+   "a": 1,
+   "e": "I + V nguyên mẫu, không TO BE, không -s."
+  },
+  {
+   "t": "mc",
+   "q": "7:30 – What time is it?",
+   "o": [
+    "It's half past seven.",
+    "It's half past six.",
+    "It's seven half."
+   ],
+   "a": 0,
+   "e": "half past seven = 7 giờ rưỡi = 7:30."
+  },
+  {
+   "t": "mc",
+   "q": "I have breakfast ___ the morning.",
+   "o": [
+    "at",
+    "in",
+    "on"
+   ],
+   "a": 1,
+   "e": "in + buổi trong ngày: in the morning."
+  },
+  {
+   "t": "mc",
+   "q": "The class starts ___ 7 o'clock.",
+   "o": [
+    "at",
+    "in",
+    "on"
+   ],
+   "a": 0,
+   "e": "at + giờ cụ thể: at 7 o'clock."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "at",
+    "She",
+    "eleven.",
+    "to",
+    "goes",
+    "bed"
+   ],
+   "a": "She goes to bed at eleven.",
+   "e": "Chủ ngữ + động từ (goes) + cụm (to bed) + at + giờ."
+  },
+  {
+   "t": "listen",
+   "say": "It's ten past four.",
+   "lang": "en-GB",
+   "q": "What time is it?",
+   "o": [
+    "4:10",
+    "10:04",
+    "3:50"
+   ],
+   "a": 0,
+   "e": "ten past four = 4 giờ 10 (qua 10 phút). 3:50 sẽ là ten to four."
+  },
+  {
+   "t": "listen",
+   "say": "The film starts at a quarter to eight.",
+   "lang": "en-GB",
+   "q": "What time does the film start?",
+   "o": [
+    "7:45",
+    "8:15",
+    "7:15"
+   ],
+   "a": 0,
+   "e": "a quarter to eight = 8 giờ kém 15 = 7:45."
+  },
+  {
+   "t": "listen",
+   "say": "Hoa gets up at six. She starts work at nine, and she finishes at five.",
+   "lang": "en-GB",
+   "q": "When does Hoa finish work?",
+   "o": [
+    "at six",
+    "at nine",
+    "at five"
+   ],
+   "a": 2,
+   "e": "“she finishes at five.” Sáu giờ là giờ dậy, chín giờ là giờ bắt đầu làm."
+  },
+  {
+   "t": "dict",
+   "say": "He gets up at half past six every day.",
+   "lang": "en-GB",
+   "a": "He gets up at half past six every day.",
+   "e": "gets có -s vì chủ ngữ là He."
+  },
+  {
+   "t": "match",
+   "q": "Nối giờ với cách nói:",
+   "pairs": [
+    [
+     "6:00",
+     "six o'clock"
+    ],
+    [
+     "6:15",
+     "a quarter past six"
+    ],
+    [
+     "6:30",
+     "half past six"
+    ],
+    [
+     "6:45",
+     "a quarter to seven"
+    ],
+    [
+     "6:50",
+     "ten to seven"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Một đồng hồ giấy có kim xoay được (hoặc vẽ trên bảng); 12 thẻ tranh hoạt động hằng ngày; mỗi học viên một bảng thời gian biểu trống (6:00 → 23:00); thẻ chữ “S” to để giơ khi có lỗi thiếu -s.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Ôn Bài 4: “túi bí ẩn” nhanh với this/these; hỏi What colour is it?"
+   },
+   {
+    "t": "15'",
+    "do": "Nói giờ: xoay kim đồng hồ giấy. Dạy o'clock → half past → quarter past/to → past/to; sau đó cách 2 (seven fifteen). Học viên lên xoay kim theo giờ GV đọc."
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng hoạt động: GV diễn kịch câm một ngày của mình theo thứ tự, học viên đoán cụm từ; dán thẻ tranh lên trục thời gian trên bảng."
+   },
+   {
+    "t": "20'",
+    "do": "Hiện tại đơn: GV kể ngày của mình (I get up at…) rồi kể ngày của một học viên (Nam gets up at…). Học viên phát hiện điểm khác (-s). Giới thiệu bảng chia động từ và quy tắc -s/-es/-ies, has. Mỗi lần ai quên -s, GV giơ thẻ “S”."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe hội thoại lớp thầy Tom: lần 1 trả lời ai dậy sớm nhất / ngủ muộn nhất; lần 2 điền thời gian biểu cho Minh, Lan, Tom; lần 3 đọc phân vai."
+   },
+   {
+    "t": "10'",
+    "do": "Phát âm: 3 cột /s/ /z/ /ɪz/ cho động từ; cặp thirteen – thirty. Giao bài tập 1–10 trong game."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Khởi động: “Mấy giờ rồi?” – GV vẽ giờ lên bảng, đội nào đọc đúng 2 cách trước được điểm."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc “A Day in the Life of a Software Tester”: đọc thầm, điền thời gian biểu của Mai, trả lời câu hỏi. Gạch chân mọi động từ có -s/-es và phân loại cách đọc."
+   },
+   {
+    "t": "25'",
+    "do": "Nói: phỏng vấn theo cặp, điền thời gian biểu của bạn; sau đó đổi cặp và kể lại ngày của bạn cũ bằng ngôi thứ ba (Hoa gets up at…). GV ghi lỗi thiếu -s."
+   },
+   {
+    "t": "20'",
+    "do": "Viết “A day in the life of…” 60–80 từ; đổi bài, bạn dùng bút màu khoanh mọi động từ để kiểm tra -s."
+   },
+   {
+    "t": "15'",
+    "do": "Làm bài tập 11–16 (sắp xếp, nghe giờ, chính tả, nối). Chữa lỗi chung; giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Đồng hồ chạy tiếp sức: hai đội xếp hàng; GV đọc giờ (a quarter to ten…), người đầu hàng chạy lên vẽ kim đồng hồ đúng trên bảng.",
+   "Ngày của người nổi tiếng: nhóm bịa thời gian biểu của một nhân vật tưởng tượng (một siêu nhân, một con mèo), đọc to bằng ngôi thứ ba; lớp bình chọn ngày hài hước nhất.",
+   "Thẻ S: cả lớp làm “cảnh sát -s” – nghe bạn kể, ai phát hiện thiếu -s thì giơ tay nói “S!” và sửa lại câu."
+  ],
+  "errors": [
+   "Quên -s ngôi thứ ba: *She work, *He go → She works, He goes. Đây là lỗi bền nhất – sửa liên tục suốt cấp A1.",
+   "Thêm TO BE trước động từ thường: *I am get up, *She is goes → I get up, She goes.",
+   "Thêm -s sai chỗ: *I works, *My parents lives, *She gets ups.",
+   "Sai giới từ thời gian: *in 7 o'clock, *at the morning → at 7 o'clock, in the morning.",
+   "Nhầm thirteen/thirty, fifteen/fifty khi nghe – nói giờ. Luyện trọng âm cuối/đầu.",
+   "*go to home → go home."
+  ],
+  "homework": "Làm hết bài tập trong game (≥ 80%); viết thời gian biểu 1 ngày của mình bằng tiếng Anh dán ở bàn học; ghi âm phần Nói 2 và nghe lại kiểm tra đuôi -s; ôn 19 từ mới bằng Thẻ từ vựng."
+ }
 }

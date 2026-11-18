@@ -4,7 +4,7 @@ icon: 🤖
 floor: 7
 room: 705
 level: Cơ bản → Thực hành
-hours: 16
+hours: 28
 summary: Dữ liệu Python/numpy/pandas, ML và metric, prompt/API giả, RAG, đánh giá, guardrail, đạo đức và quyền riêng tư với dữ liệu tự đặt.
 
 ## LESSON ai-dev-01 | Python, NumPy và pandas cho dữ liệu giả
@@ -389,3 +389,359 @@ Q: Allowlist trường có tự loại mọi PII trong text không?
 + Không, còn cần xử lý nội dung và chính sách
 - Có tuyệt đối
 - Có nếu đổi tên biến
+
+## LESSON ai-dev-09 | Tool calling có quyền và tác dụng phụ
+
+### Tool proposal chưa là quyền hành động
+Trợ lý giả định Hạt Vân chỉ tìm tài liệu lab. Model trả tên tool và args là dữ liệu chưa tin, cần validate và authorize ngoài model; không cho văn bản nguồn tự thêm tool hoặc thay actor.
+
+### Validator có allowlist và miền rõ
+Tool lookup nhận projectId/query với giới hạn. Hàm dưới chỉ kiểm shape/miền nhỏ, không kiểm quyền;reject field lạ giúp tránh model lén đưa URL/path tùy ý vào adapter.
+~~~python
+def validate_call(call):
+ if not isinstance(call,dict) or set(call)!={'tool','args'}:raise ValueError('call_shape')
+ if call['tool']!='lookup_docs':raise ValueError('tool_not_allowed')
+ args=call['args']
+ if not isinstance(args,dict) or set(args)!={'projectId','query'}:raise ValueError('args_shape')
+ if not isinstance(args['projectId'],str) or not 1<=len(args['projectId'])<=40:raise ValueError('project_invalid')
+ if not isinstance(args['query'],str) or not 1<=len(args['query'])<=200:raise ValueError('query_invalid')
+ return args
+~~~
+
+### Dispatch kiểm quyền trước gọi nguồn
+authorize và search là adaptertrusted do lab định nghĩa,không model cung cấp. Quyền không nằm trongprompt;search trả sourceId đã được kiểm,nếu actor không được đọc project thì không gọi search.
+~~~python
+def dispatch(actor,call,authorize,search):
+ args=validate_call(call)
+ if not authorize(actor,args['projectId']):raise PermissionError('project_denied')
+ return search(project_id=args['projectId'],query=args['query'])
+# Adaptersearch không nhận URL hoặc shellcommand từmodel.
+~~~
+
+### Tác dụng ghi là ranh giới khác
+Đọc tài liệu không cần tool gửi tin/xóa record. Nếu sau này thêm ghi,cần policy,ý định,preview/gate theo tác động,idempotency và audit;không gắn quyền admin vào mộtdemo chỉ vì prompt nói an toàn.
+~~~text
+{"actor":"QA-LAB-A","tool":"lookup_docs","projectId":"P-A","decision":"allowed","sourceIds":["DOC-A7"],"runId":"AI-L7"}
+Audit giữ metadata cần thiết,không lưu token hoặc toàn hồ sơ riêng tư.
+~~~
+
+### Test lớp kiểm soát bằng proposal sai
+Thử tool lạ,args thừa,query dài,project ngoài quyền và nguồn có chỉ dẫn đối nghịch. Assert tool thật không được gọi ởca từ chối;output từ model không tự nâng quyền dù viết rõ hãy thực thi.
+
+PRACTICE: Nộp validator/dispatcher lab vàmười ca cho shape,allowlist,quyền,budget. Dùng searchstub không tác dụng ngoài,nêu phần chưa đủ để thực thi ghi;không gọi tool thật ngoài phạm vi.
+Q: Tool call do model đề nghị được xem như gì?
++ Input chưa tin cần kiểm trước dispatch
+- Quyền thực thi mới
+- Lệnh hệ thống tự động
+Q: Schema tool có đủ bảo đảm được gọi đúng tài nguyên không?
++ Không
+- Có nếu tên dài
+- Có nếu args là JSON
+Q: Tool tác dụng ghi cần thêm điều gì?
++ Policy,ý định,đối chiếu và gate theo mức tác động
+- Model ghi confidence100%
+- Một câu đừng gây hại
+
+## LESSON ai-dev-10 | Truy hồi, reranking và chất lượng dữ liệu RAG
+
+### RAG có nhiều cổng chất lượng
+Corpus,chunks,retrieval,rerank và answer đều có thể sai. Đo relevance theoquery,authority/freshness theo metadata và support theo claim;không trộn một điểm cosine thành mọi kết luận đúng.
+
+### Lọc quyền trước đưa chunk vào pipeline
+Mẫu chỉ dùng list giả,actor có project scope được trustedserver cấp.Khi quyền thay,cần kiểm nguồn/cache hiện tại;không chỉ lọc saukhi model đã nhận dữ liệu ngoài quyền.
+~~~python
+def allowed_chunks(actor,chunks):
+ return [x for x in chunks if x['projectId'] in actor['projects'] and x['active']]
+actor={'id':'QA-A','projects':{'P-A'}}
+chunks=[{'id':'D1','projectId':'P-A','active':True,'text':'Qty là số nguyên dương.'},
+ {'id':'D2','projectId':'P-B','active':True,'text':'CANARY-LAB-B'}]
+assert [x['id'] for x in allowed_chunks(actor,chunks)]==['D1']
+~~~
+
+### Metadata và chunking giữ ngữ cảnh
+Tách rule khỏi ngoại lệ có thể khiến answer sai dù đúng từ khóa. Giữ doc/version/section/ACL và quan hệ cần thiết,đánh giá chunksize/overlap bằng fixture chứ không tăng context vô hạn.
+~~~json
+{"id":"D1-C2","docId":"D1","version":"LAB2","section":"quota/ngoại lệ","projectId":"P-A","active":true,"text":"Quy tắc và ngoại lệ tự viết của lab."}
+Không đặt quyền chỉtrong nội dung model cần đọc hiểu.
+~~~
+
+### Rerank không thay support check
+Topk relevance tốt vẫn có thể là nguồn cũ hoặc không ủng hộ claim max100. Chốt claim/source mapping,đánh giá recall/rank và answer riêng,khi thiếu nguồn trả question/abstain thaycitation bịa.
+~~~text
+query:qty tốiđa là bao nhiêu?
+sourceD1:chỉ nói nguyên dương
+retrieval:D1 có liên quan
+support:max100 không được nguồn chứng minh
+expected:hỏi max hoặc ghi chưa có rule,không bịa
+~~~
+
+### Thu hồi và cập nhật là luồng cần test
+Sửa rule,deactivate doc hoặc đổi project ACL phải ảnh hưởng index/cache theo contract. Kiểm both chunk retrieval và output/trace,canary giả giúp phát hiện rò mà không dùng secret thật.
+
+PRACTICE: Dựng corpus hai project với mười doc giả,version/ngoại lệ và canary. Nộp retrieval/rerank/support matrix,ca thu hồi/đổi quyền và giới hạn sourcequality,chưa claim embedding tự giải mọi grounding.
+Q: Retrieval trước rerank cần lọc gì?
++ Quyền và phạm vi nguồn phù hợp
+- Chỉ độ dàitext
+- Không cần lọc vì reranker hiểu
+Q: Reranker giúp đánh giá gì trongpipeline?
++ Mức liên quan theoquery trong tập đã được phép
+- Quyền truy cập tự động
+- Tính đúng tuyệt đối của claim
+Q: Nguồn bị thu hồi cần xử lý đâu?
++ Chỉ mục,cache và dữ liệu dẫn xuất theo thiết kế
+- Chỉ dòng UI
+- Chỉ system prompt
+
+## LESSON ai-dev-11 | Bộ đánh giá độc lập và phân tích lỗi theo nhóm
+
+### Eval độc lập với vòng chọn phiên bản
+Tập dev giúp sửa prompt/retriever,tập holdout đánh giá phiên bản đã chọn. Chia theo nguồn,tình huống hoặc thời gian có nghĩa,không để paraphrase cùngca ở hai bên làm điểm tăng giả.
+
+### Rubric có phần máy và người
+Schema,sourceId,quyền và tool proposal có thể kiểm máy một phần. Support,nội dung và rủi ro cần rubric/nhãn đáng tin và review theo bối cảnh,judge model phải được hiệu chỉnh với ví dụ chuẩn.
+~~~json
+{"evalId":"E-L7-03","riskGroup":"missing-rule","must":["nêu max chưa chốt"],"mustNot":["bịa max100 thành yêu cầu"],"sources":["D1"],"severityIfFailed":"theo thang lab"}
+~~~
+
+### Metric theo nhóm với mẫu số
+Code minh họa tính tỉ lệ trên label giả đã review. Nó không làm mọi metric khách quan tuyệt đối;nhóm ít mẫu,nhãn sai hoặc scope thiếu cần được báo,không tóm tắt chỉ một điểm chung.
+~~~python
+def by_group(rows):
+ groups={}
+ for r in rows:
+  x=groups.setdefault(r['group'],{'n':0,'ok':0})
+  x['n']+=1;x['ok']+=int(r['ok'])
+ return {k:{**v,'rate':v['ok']/v['n']} for k,v in groups.items()}
+print(by_group([{'group':'acl','ok':True},{'group':'acl','ok':False}]))
+~~~
+
+### Mutation kiểm gate có độ nhạy
+Cố ý bỏ authorize hoặc cho citation không có nguồn trongstub lab,eval phải đỏ đúng nhóm. Sau phục hồi,chạy toàn bộ và lưu config/run;không sửa nhãn theooutput lỗi để điểm đẹp.
+~~~text
+M1 bypassACL ->group quyền fail
+M2 sourceId bịa ->grounding gate fail
+M3 alwaysconfirmed ->missing-rule/risk fail
+M4 vượt deadline ->budget/gate theo policy
+Nhữngca tương đương/không hợp lệ được phân loại riêng.
+~~~
+
+### Version và lặp đo giúp hiểu biến động
+Lưu model/config,prompt/sourcehash,retriever,seed nếu có và thời điểm. Chạy lặp mẫu phù hợp,báo sai theo nhóm,tác động và độ chắc chắn;demo đẹp không thay holdout/evidence.
+
+PRACTICE: Tự viết ba mươi eval giả,chia dev/holdout theo tình huống.Nộp rubric,nhãn,metrics theo nhóm,bốn mutation và metadata phiên bản,có review người giả lập ghi rõ giới hạn.
+Q: Holdout dùng lặp để chọn prompt có rủi ro gì?
++ Mất tính độc lập đánh giá
+- Luôn tốt hơn
+- Không ảnh hưởng vì không huấn luyện trọng số
+Q: Metric trung bình có thể che gì?
++ Lỗi nặng ở nhóm ít mẫu
+- Mọi latency đều giống
+- Không thể che gì
+
+## LESSON ai-dev-12 | Độ trễ, chi phí, cache và giám sát chất lượng
+
+### Tối ưu toàn luồng có quyền và chất lượng
+Đo retrieval,rerank,model,validation,retry và review theo phạm vi. Giảm latency bằng cache có thể tạo rủi ro quyền/nguồn cũ,nên chi phí vàtốcđộ không tách khỏi quality gate.
+
+### Cachekey giữ phiên bản liên quan
+Hash cấu trúc nhất quán giúp nhận biết input,còn quyền hiện tại vẫn cần recheck khi hit. Không log query nhạy cảm hoặc đưa token vào key;policy invalidation/revocation được thiết kế ngoài model.
+~~~python
+import json,hashlib
+def answer_key(actor_id,auth_version,corpus_version,prompt_version,query):
+ data=[actor_id,auth_version,corpus_version,prompt_version,query]
+ return hashlib.sha256(json.dumps(data,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+# Cache hit vẫn kiểm quyền hiện tại vànguồn còn hiệu lực.
+~~~
+
+### Budget giả cho bài thực hành
+Đơn vị costUnits không là giá tiền hay khuyến nghị nhà cung cấp. Deadline tổng và maxattempts phải được kiểm,khi thiếu nguồn/vượt budget trả trạng thái cần review thayretry vô hạn.
+~~~json
+{"labBudget":{"costUnitsPerTask":12,"deadlineMs":8000,"maxAttempts":2},"onInsufficientEvidence":"needs_review","onDeniedSource":"do_not_retrieve"}
+~~~
+
+### Quan sát không lộ nội dung riêng
+Metric label hữu hạn theoflow/outcome/modelversion,trace liên kết bằng runId giả. Không dùng mỗi user/query làm tag hoặc ghi toàn prompt chứa private docs;sample/retention/quyền artifact theo policy.
+~~~text
+measure:latency theo stage,total và outcome
+measure:costUnits,retry,cache hit và human-review rate
+quality:group failures,unsupported claims,ACL violations
+audit:run/version/decision tối thiểu
+Không suy cost giảm là quality giữ nếu chưa đánh giá.
+~~~
+
+### Cache và fallback cóma trận lỗi
+Thử permission đổi,doc thu hồi,promptversion mới,cachemiss/hit,modelslow và validationfail. Fallback không được trả dữ liệu ngoài quyền hoặc claim thiếu nguồn chỉ để đạt latency;so quality/chi phí cùng tập độc lập.
+
+PRACTICE: Nộp benchmark lab hai config có latency/costUnits/review/quality theo nhóm. Kiểm cache quyền và thu hồi,deadline/retrybudget,ghi số mẫu và phần stub,chưa suy giá thật từ đơn vị giả.
+Q: Cache answer có quyền cần kiểm gì khi hit?
++ Quyền hiện tại,nguồn/version và scope còn đúng
+- Chỉ key tồn tại
+- TTL chưa hết là đủ
+Q: Chi phí/latency nên đo ở đâu?
++ Toàn luồng gồm retrieval,model,validation,retry/review theo phạm vi
+- Chỉ token đầu
+- Chỉ giá niêm yết
+
+## LESSON ai-dev-13 | Dự án: trợ lý tài liệu có quyền và bằng chứng
+
+### Trợ lý tài liệu chỉ trong quyền
+Hạt Vân đọc yêu cầu hai project giả,tóm tắt rule,dẫn nguồn và nêu câu hỏi. Chỉ tool đọc có allowlist,không gửi tin,xóa dữ liệu hoặc duyệt release;hệ thống giữ quyền/gate độc lập model.
+
+### Contract gói dữ liệu và đầu ra
+Corpus có ACL/version,chunk lineage và metadata nguồn.Modelstub được phép để học pipeline nhưng không chứng minh chất lượng ngôn ngữ model thật;ghi rõ component đã thực hiện và giới hạn.
+~~~text
+input:actor,project,question
+retrieval:ACL trước context,sourceversion hiệu lực
+output:claims +sourceIds +questions +status
+status:answered/needs_review/denied/error theo policy
+tools:lookup_docs validated/authorized
+Mọi tên/URL giả,không dữ liệu khách hàng.
+~~~
+
+### Fixture và eval đủca phảnđối
+Tự tạo ba mươi eval có missingrule,conflict,citation bịa,injection,đổi ACL,thu hồi và toolargs sai. Mỗi ca expected/rubric riêng;không lấy output chạy đầu làm groundtruth hoặc đưa holdout vào vòng tinh chỉnh prompt.
+~~~text
+G1 grounded answers từ rule rõ
+G2 thiếu/mâu thuẫn ->câu hỏi,không bịa
+G3 ACL/revocation ->không lộ canary giả
+G4 untrustedsource instructions ->không đổi nhiệm vụ
+G5 timeout/budget/cache ->trạng thái và quyền đúng
+G6 toolproposal ->gate từ chối khi trái contract
+~~~
+
+### Một adapter model giả để đo luồng
+Hàm dưới cố định chỉ để test wiring/gate,không sinh suy luận thật. Đánh giá ngôn ngữ cần model thật được phép và holdout;không nhận các assertion với stub là chứng minh model không hallucinate.
+~~~python
+def fake_model(question,chunks):
+ if not chunks:return {'status':'needs_review','claims':[],'questions':['Thiếu nguồn được phép.']}
+ return {'status':'needs_review','claims':[],
+ 'questions':['Stub chưa tổng hợp nội dung, cần review.']}
+# Test khả năng route/validation;không chấm như chất lượng sinh thực tế.
+~~~
+
+### Bàn giao với bằng chứng và rủi ro còn lại
+Nộp corpus,prompt/schema,toolvalidator,ACL,retrieval,eval,config,report và README. Ghi lớp stub,metadata,mẫu/giới hạn,tồnđọng và điều kiện chuyển người;không deploy/gửi dữ liệu ra ngoài trong bài học.
+
+PRACTICE: Bàn giao trợ lý tài liệu lab với ba mươi eval,hai quyền,sourceversion,gate và tool đọc stub. Có mutations,cache revocation,deadline/costUnits và report chất lượng với phần chưa thực thi rõ.
+Q: Trợ lý thiếu nguồn đủ support nên làm gì?
++ Nêu thiếu gì và hỏi/chuyển người theo policy
+- Bịa claim có citation
+- Tự làm hành động ghi
+Q: Dự án AI cần bàn giao gì?
++ Corpus,quyền,eval,gate,metadata,evidence và giới hạn
+- Chỉ prompt
+- Credential thật
+
+## LESSON ai-dev-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Dữ liệu sai hoặc ngoài quyền làm đánh giá vô nghĩa;fixture tự đặt và lineage giúp tái hiện.
+2. Tách theo người/thời gian/nguồn phù hợp,tính transform trên train và giữ holdout,không để bản gần trùng qua các tập.
+3. Class lệch có thể làm accuracy gây hiểu sai;so precision/recall,error theo nhóm và ngưỡng phù hợp.
+4. Validation cấu trúc chỉ một lớp;cần grounding,quyền và đánh giá nội dung/hành vi theo mục tiêu.
+
+### Dữ liệu và điều kiện biên
+5. Cần hợp đồng trạng thái/idempotency với tác dụng ghi,retry có budget;không nhân ý định chỉ vì response mất.
+6. Truy xuất và citation vẫn có thể thiếu/sai/cũ;kiểm support từng claim,nguồn hiệu lực và phần không đủ căn cứ.
+7. Judge cần hiệu chỉnh,tập chuẩn và review phù hợp rủi ro;không tự xem điểm model là ground truth.
+8. Bảo vệ từ source,index,context,log,cache đến artifact;dùng fixture giả để học thay hồ sơ thật.
+
+### Tính đúng và cách điều tra
+9. Model không tự cấp quyền;validate tool/args và authorize theoactor/phạm vi ngoài mô hình.
+10. Shape khác authorization;kiểm project/resource và budget ở server,cả trước lookup hoặc side effect.
+11. Tách đề xuất khỏi thực thi,tối thiểu quyền/idempotency/audit;không đưa quyền thật chỉ vì demo đọc chạy được.
+12. Không đưa chunk ngoài quyền vào context;rerank hoặc prompt không thay ACL và cache/query phải giữ phạm vi.
+
+### Rủi ro và lựa chọn phương án
+13. Phân biệt relevance,authority,freshness và support;cần đo retrieval lẫn answer quality riêng.
+14. Policy quyền hiện tại phải được thực thi độc lập mô hình,không để cache trả lại chunk đã mất quyền.
+15. Tối ưu theo tập báo cáo làm kết quả lạc quan;giữ tập độc lập,version và kiểm leakage theo nguồn/tình huống.
+16. Báo từng nhóm có mẫu số,độ biến động và severity;chọn gate theo tác động thay vì chỉ điểm chung.
+
+### Dự án, bằng chứng và bàn giao
+17. Cachekey không cấp quyền,metadata có thể cũ;cần invalidation/recheck theo thiết kế,tránh trả private data sai actor.
+18. Dùng đơn vị giả cho bài,ghi cấu hình và workload;không suy hiệu quả từ một response đẹp.
+19. Thiết kế abstain và partial answer với bằng chứng rõ,không lấy confidence tựchấm làm cổng duy nhất.
+20. Người nhận biết lớp nào là stub,model nào đã được đánh giá và rủi ro còn lại,chưa suy chất lượng ngôn ngữ thật từ fake model.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Dữ liệu Python/pandas cần kiểm gì trước mô hình?
++ Grain, kiểu, thiếu/trùng, nguồn và quyền
+- Chỉ số dòng nhiều
+- Chỉ màu chart
+Q: Leakage xảy ra khi nào?
++ Thông tin không được phép ở thời điểm dự đoán lọt vào train/eval
+- Chỉ khi có file lớn
+- Chỉ khi model chậm
+Q: Chọn metric ML nên theo gì?
++ Chi phí sai,phân bố và mục tiêu tác vụ
+- Chỉ accuracy cao nhất
+- Chỉ một ví dụ đẹp
+Q: Output JSON hợp schema đã bảo đảm nội dung đúng chưa?
++ Chưa
+- Có nếu đủ field
+- Có nếu confidence cao
+Q: Timeout API mô hình có chứng minh tác vụ bên kia chưa chạy không?
++ Không
+- Có luôn
+- Có nếu đóng client
+Q: RAG có tự bảo đảm mọi kết luận đúng nguồn không?
++ Không
+- Có vì có vector
+- Có nếu có URL
+Q: AI tự chấm output có thay kiểm người hoàn toàn không?
++ Không
+- Có nếu model lớn
+- Có nếu prompt khác
+Q: Dữ liệu riêng tư nên vào hệ AI thế nào?
++ Tối thiểu,đúng quyền/chính sách và kiểm toàn luồng
+- Mọi log thật để model hiểu
+- Token thật trongprompt
+Q: Tool call do model đề nghị được xem như gì?
++ Input chưa tin cần kiểm trước dispatch
+- Quyền thực thi mới
+- Lệnh hệ thống tự động
+Q: Schema tool có đủ bảo đảm được gọi đúng tài nguyên không?
++ Không
+- Có nếu tên dài
+- Có nếu args là JSON
+Q: Tool tác dụng ghi cần thêm điều gì?
++ Policy,ý định,đối chiếu và gate theo mức tác động
+- Model ghi confidence100%
+- Một câu đừng gây hại
+Q: Retrieval trước rerank cần lọc gì?
++ Quyền và phạm vi nguồn phù hợp
+- Chỉ độ dàitext
+- Không cần lọc vì reranker hiểu
+Q: Reranker giúp đánh giá gì trongpipeline?
++ Mức liên quan theoquery trong tập đã được phép
+- Quyền truy cập tự động
+- Tính đúng tuyệt đối của claim
+Q: Nguồn bị thu hồi cần xử lý đâu?
++ Chỉ mục,cache và dữ liệu dẫn xuất theo thiết kế
+- Chỉ dòng UI
+- Chỉ system prompt
+Q: Holdout dùng lặp để chọn prompt có rủi ro gì?
++ Mất tính độc lập đánh giá
+- Luôn tốt hơn
+- Không ảnh hưởng vì không huấn luyện trọng số
+Q: Metric trung bình có thể che gì?
++ Lỗi nặng ở nhóm ít mẫu
+- Mọi latency đều giống
+- Không thể che gì
+Q: Cache answer có quyền cần kiểm gì khi hit?
++ Quyền hiện tại,nguồn/version và scope còn đúng
+- Chỉ key tồn tại
+- TTL chưa hết là đủ
+Q: Chi phí/latency nên đo ở đâu?
++ Toàn luồng gồm retrieval,model,validation,retry/review theo phạm vi
+- Chỉ token đầu
+- Chỉ giá niêm yết
+Q: Trợ lý thiếu nguồn đủ support nên làm gì?
++ Nêu thiếu gì và hỏi/chuyển người theo policy
+- Bịa claim có citation
+- Tự làm hành động ghi
+Q: Dự án AI cần bàn giao gì?
++ Corpus,quyền,eval,gate,metadata,evidence và giới hạn
+- Chỉ prompt
+- Credential thật

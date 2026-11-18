@@ -1,0 +1,618 @@
+{
+ "no": 17,
+ "title": "Ôn tập tổng hợp 1 – bảng số liệu và trách nhiệm diễn giải",
+ "sub": "Bị động·nhượng bộ·điều kiện·nguyên nhân·số liệu·suy đoán",
+ "goals": [
+  "Tính và diễn đạt đúng phần trăm, điểm phần trăm và thay đổi tương đối trong một ví dụ.",
+  "Phân biệt dữ kiện khảo sát, suy đoán và khẳng định nguyên nhân.",
+  "Viết bản tin có tác nhân, giới hạn và câu hỏi cần kiểm tiếp."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Điểm xuất phát",
+   "html": "<p>Bạn viết một bản tin từ hai khảo sát giả định khác mẫu. Nhiệm vụ là tính đúng, giải thích đúng phạm vi, giữ người thực hiện và không dùng cách nối nguyên nhân hay sắc thái văn phạm thay bằng chứng.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm cần dùng",
+   "items": [
+    {
+     "w": "응답 비율",
+     "rr": "eungdap biyul",
+     "vi": "tỷ lệ trả lời một phương án",
+     "ex": "응답 비율을 비교해요.",
+     "exVi": "Tôi so tỷ lệ chọn phương án.",
+     "pos": "phr"
+    },
+    {
+     "w": "분모",
+     "rr": "bunmo",
+     "vi": "mẫu số",
+     "ex": "분모가 달라졌어요.",
+     "exVi": "Mẫu số đã thay đổi.",
+     "pos": "phr"
+    },
+    {
+     "w": "표본",
+     "rr": "pyobon",
+     "vi": "mẫu khảo sát",
+     "ex": "표본을 따로 설명해요.",
+     "exVi": "Tôi giải thích riêng mẫu khảo sát.",
+     "pos": "phr"
+    },
+    {
+     "w": "구성",
+     "rr": "guseong",
+     "vi": "thành phần",
+     "ex": "응답자 구성이 달라요.",
+     "exVi": "Thành phần người trả lời khác nhau.",
+     "pos": "phr"
+    },
+    {
+     "w": "퍼센트포인트",
+     "rr": "peosenteupointeu",
+     "vi": "điểm phần trăm",
+     "ex": "십 퍼센트포인트 높아졌어요.",
+     "exVi": "Tỷ lệ tăng mười điểm phần trăm.",
+     "pos": "phr"
+    },
+    {
+     "w": "상대 증가율",
+     "rr": "sangdae jeunggayul",
+     "vi": "mức tăng tương đối",
+     "ex": "상대 증가율을 따로 계산해요.",
+     "exVi": "Tôi tính riêng mức tăng tương đối.",
+     "pos": "phr"
+    },
+    {
+     "w": "기준값",
+     "rr": "gijungap",
+     "vi": "giá trị cơ sở",
+     "ex": "기준값은 사십이에요.",
+     "exVi": "Giá trị cơ sở là bốn mươi.",
+     "pos": "phr"
+    },
+    {
+     "w": "비교 가능성",
+     "rr": "bigyo ganeungseong",
+     "vi": "khả năng so sánh được",
+     "ex": "비교 가능성을 검토해요.",
+     "exVi": "Tôi xét có so sánh được không.",
+     "pos": "phr"
+    },
+    {
+     "w": "동일 집단",
+     "rr": "dongil jipdan",
+     "vi": "cùng một nhóm",
+     "ex": "동일 집단은 아니에요.",
+     "exVi": "Đó không phải cùng một nhóm.",
+     "pos": "phr"
+    },
+    {
+     "w": "문항",
+     "rr": "munhang",
+     "vi": "mục câu hỏi",
+     "ex": "문항의 뜻을 확인해요.",
+     "exVi": "Tôi kiểm nghĩa câu hỏi.",
+     "pos": "phr"
+    },
+    {
+     "w": "공개되다",
+     "rr": "gonggaedoeda",
+     "vi": "được công bố",
+     "ex": "결과가 공개됐어요.",
+     "exVi": "Kết quả đã được công bố.",
+     "pos": "phr"
+    },
+    {
+     "w": "작성 주체",
+     "rr": "jakseong juche",
+     "vi": "chủ thể soạn",
+     "ex": "작성 주체를 밝혀요.",
+     "exVi": "Tôi nêu người soạn.",
+     "pos": "phr"
+    },
+    {
+     "w": "해석 범위",
+     "rr": "haeseok beomwi",
+     "vi": "phạm vi diễn giải",
+     "ex": "해석 범위를 제한해요.",
+     "exVi": "Tôi giới hạn phạm vi diễn giải.",
+     "pos": "phr"
+    },
+    {
+     "w": "인과 주장",
+     "rr": "ingwa jujang",
+     "vi": "khẳng định nhân quả",
+     "ex": "인과 주장은 보류해요.",
+     "exVi": "Tôi tạm hoãn khẳng định nhân quả.",
+     "pos": "phr"
+    },
+    {
+     "w": "후속 조사",
+     "rr": "husok josa",
+     "vi": "khảo sát tiếp theo",
+     "ex": "후속 조사를 제안해요.",
+     "exVi": "Tôi đề xuất khảo sát tiếp.",
+     "pos": "phr"
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Bị động·nhượng bộ·điều kiện·nguyên nhân·số liệu·suy đoán",
+   "html": "<p>Ôn cấu trúc qua một việc viết đúng số. 비율이 공개됐어요 là bị động chưa nêu ai công bố; 보도팀이 공개했어요 cho tác nhân. 사십에서 오십 퍼센트로 biến đổi là tăng mười điểm phần trăm, còn (50−40)/40×100 bằng tăng tương đối25%; đây không phải mười người. 표본이 다르더라도 수치는 계산할 수 있지만 같은 개인이 변했다고 말할 수는 없어요 kết hợp nhượng bộ và giới hạn. 로 인해/기 때문에 có thể nêu quan hệ nguyên nhân trong câu, nhưng việc dùng ngữ pháp không tự chứng minh quảng bá gây thay đổi. 참가자가 늘었나 봐요 là suy từ dấu hiệu, khác xác nhận đúng cùng nhóm. Một số liệu tốt hơn không đủ cho 좋을수록... như quan hệ phổ quát. Khi có điều kiện “nếu hỏi cùng người và cùng câu”, dùng 다면 giữ giả định, chưa coi đã đáp điều kiện.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Ý cần giữ"
+    ],
+    [
+     "40%→50%",
+     "+10 điểm phần trăm; tăng tương đối25%"
+    ],
+    [
+     "100명 중40명 / 200명 중100명",
+     "Mẫu số và số người khác nhau"
+    ],
+    [
+     "공개됐다 / 누가 공개했다",
+     "Bị động và tác nhân"
+    ],
+    [
+     "표본이 같다면...",
+     "Điều kiện cần kiểm, chưa phải sự thật"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "첫 비율보다 십 퍼센트포인트 높아졌어요.",
+     "vi": "Tỷ lệ cao hơn lần đầu mười điểm phần trăm."
+    },
+    {
+     "t": "표본이 다르더라도 계산과 해석은 구별해야 해요.",
+     "vi": "Dù mẫu khác vẫn phải tách tính toán và diễn giải."
+    },
+    {
+     "t": "보도팀이 공개한 표에는 응답자 수가 있어요.",
+     "vi": "Bảng do nhóm bản tin công bố có số người trả lời."
+    },
+    {
+     "t": "홍보 때문에 변했다고 말하려면 추가 근거가 필요해요.",
+     "vi": "Muốn nói đổi do quảng bá cần thêm căn cứ."
+    }
+   ],
+   "tips": [
+    "Gọi10 điểm phần trăm là10% tăng tương đối: tính theo giá trị đầu.",
+    "Đổi chênh tỷ lệ thành10 người đổi ý: kiểm mẫu và người.",
+    "Dùng 덕분에 che khẳng định nguyên nhân chưa đủ: tách đánh giá."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe để giải quyết việc cụ thể",
+   "lang": "ko-KR",
+   "note": "Biên tập một bảng khảo sát giả định: người viết nhầm mười điểm thành mười người và nhận nguyên nhân từ quảng bá.",
+   "lines": [
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "찬성 비율이 사십에서 오십 퍼센트로 높아졌어요.",
+     "vi": "Tỷ lệ tán thành tăng từ bốn mươi lên năm mươi phần trăm."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "그럼 십 명이 생각을 바꾼 거네요?",
+     "vi": "Vậy mười người đổi ý nhỉ?"
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "아니요. 첫 표본은 백 명이고 다음은 이백 명이에요.",
+     "vi": "Không. Mẫu đầu một trăm người, mẫu sau hai trăm."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "같은 사람들을 다시 물은 건 아니군요.",
+     "vi": "Vậy không phải hỏi lại cùng người."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "맞아요. 십 퍼센트포인트 차이는 있지만 개인 변화는 몰라요.",
+     "vi": "Đúng. Chênh mười điểm phần trăm nhưng chưa biết thay đổi từng người."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "홍보가 잘된 덕분이라고 쓸까요?",
+     "vi": "Viết nhờ quảng bá tốt nhé?"
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "그건 긍정적 평가와 인과 주장이 섞여 있어요.",
+     "vi": "Câu đó trộn đánh giá tích cực và khẳng định nhân quả."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "작성자가 누구인지와 조사 문항도 넣을게요.",
+     "vi": "Tôi sẽ thêm người soạn và câu hỏi khảo sát."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "좋아요. 확인된 숫자와 남은 질문을 나누어요.",
+     "vi": "Được. Tách số đã biết và câu hỏi còn lại."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "다음 조사에서는 비교 조건부터 정하도록 제안할게요.",
+     "vi": "Tôi sẽ đề xuất định điều kiện so sánh từ khảo sát sau."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Vì sao không suy mười người đổi ý?",
+     "o": [
+      "Vì mọi người đều đồng ý",
+      "Mẫu số khác và không cùng người",
+      "Vì không thể tính phần trăm"
+     ],
+     "a": 1,
+     "e": "Mẫu đầu100 người, mẫu sau200 và không hỏi cùng từng người, nên chênh tỷ lệ chưa là mười người đổi ý."
+    },
+    {
+     "q": "덕분에 ở câu quảng bá có vấn đề gì khi thiếu căn cứ?",
+     "o": [
+      "Gộp đánh giá với nguyên nhân chưa chứng minh",
+      "Làm sai cách đọc số bắt buộc",
+      "Chứng minh mọi điều đã tốt"
+     ],
+     "a": 0,
+     "e": "Câu nhờ quảng bá vừa đánh giá tích cực vừa quy nguyên nhân; cần dữ kiện trước khi dùng như kết luận."
+    },
+    {
+     "q": "Thông tin nào sẽ được bổ sung?",
+     "o": [
+      "Tên công ty thật",
+      "Chỉ một khẩu hiệu",
+      "Người soạn và mục khảo sát"
+     ],
+     "a": 2,
+     "e": "Nhóm bổ sung ai lập bảng và câu hỏi khảo sát để người đọc kiểm nguồn và tính so sánh."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Bảng tốt hơn chưa kể ai đã thay đổi",
+   "title": "Bảng tốt hơn chưa kể ai đã thay đổi",
+   "text": "가상의 다섯잎 소식팀은 배움터 이용에 관한 두 표를 받았어요. 모든 수치는 수업용으로 만든 값이에요. 첫 조사에서는 백 명 중 사십 명이 저녁 개방에 찬성했어요. 다음 조사에서는 이백 명 중 백 명이 찬성했어요. 두 비율은 사십 퍼센트와 오십 퍼센트였어요. 차이는 십 퍼센트포인트이고 첫 비율을 기준으로 한 상대 증가율은 이십오 퍼센트였어요. 그러나 이것을 십 명이 생각을 바꾸었다고 말할 수는 없었어요. 표본의 크기가 달랐을 뿐만 아니라 같은 사람에게 다시 물은 조사도 아니었어요. 문항의 표현과 응답자를 모은 방법도 더 확인해야 했어요. 첫 초안에는 홍보 덕분에 주민의 생각이 좋아졌다는 문장이 있었어요. 나린 씨는 좋아졌다는 말이 찬성을 더 좋은 생각으로 평가한다고 지적했어요. 또 홍보가 원인이라는 주장을 하려면 홍보를 보았는지와 다른 변화가 있었는지 등을 살펴봐야 했어요. 표에는 그런 정보가 없었어요. 가온 씨는 두 번째 비율이 더 높다는 계산 자체는 남겨도 되느냐고 물었어요. 나린 씨는 계산 결과와 해석의 범위를 나누면 된다고 했어요. 표본이 달라도 표에 적힌 두 비율의 차이는 계산할 수 있어요. 하지만 같은 집단의 변화나 개인의 태도 변화로 넓히면 근거가 달라져요. 팀은 결과가 공개되었다는 수동 문장만 쓰지 않고 누가 언제 표를 만들었는지도 밝혔어요. 조사에 답하지 않은 사람과 배움터에 오지 못한 사람이 얼마나 포함되었는지는 미확인으로 남겼어요. 최종 기사에는 숫자, 계산 방식, 비교의 한계, 추가로 확인할 항목이 함께 들어갔어요. 다음 조사에서는 같은 질문과 비교 가능한 표본을 어떻게 마련할지 먼저 논의하기로 했어요. 좋은 문장을 쓰는 일은 강한 원인 표현을 고르는 일이 아니라 각 숫자가 말할 수 있는 범위를 정확히 정하는 일이었어요.",
+   "vi": "Nhóm bản tin Năm Lá giả định nhận hai bảng sử dụng nhà học, mọi số đều tự đặt cho lớp. Lần đầu40/100 tán thành mở tối, lần sau100/200, tức40% và50%. Chênh10 điểm phần trăm, tăng tương đối25% so giá trị đầu, nhưng không thể nói mười người đổi ý: mẫu khác cỡ và không hỏi lại cùng người, còn cần kiểm câu hỏi và cách lấy đáp. Bản đầu viết nhờ quảng bá nên suy nghĩ cư dân tốt lên. Narin chỉ ra “tốt lên” đánh giá tán thành là tốt hơn, còn quy quảng bá làm nguyên nhân cần biết ai đã xem và thay đổi khác; bảng không có. Gaon hỏi vẫn giữ tính toán tỷ lệ cao hơn được không, Narin nói được nếu tách khỏi diễn giải: chênh lệch hai tỷ lệ vẫn tính được, song thay đổi cùng nhóm hay cá nhân cần căn cứ khác. Nhóm bổ sung ai, khi nào lập bảng thay vì chỉ nói kết quả được công bố. Người không đáp và không đến được được ghi là chưa biết mức hiện diện. Bản cuối có số, cách tính, giới hạn và mục kiểm thêm. Lần sau họ bàn trước cách giữ câu hỏi và mẫu so được. Viết tốt là giới hạn mỗi số nói được gì, không phải chọn cách nối nguyên nhân thật mạnh.",
+   "gloss": [
+    {
+     "w": "응답자를 모은 방법",
+     "rr": "eungdapjareul moeun bangbeop",
+     "vi": "cách tập hợp người trả lời"
+    },
+    {
+     "w": "수동 문장",
+     "rr": "sudong munjang",
+     "vi": "câu bị động"
+    },
+    {
+     "w": "태도 변화",
+     "rr": "taedo byeonhwa",
+     "vi": "thay đổi thái độ"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Tăng tương đối từ40% lên50% là bao nhiêu?",
+     "o": [
+      "25%",
+      "10%",
+      "50%"
+     ],
+     "a": 0,
+     "e": "Chênh là10 điểm phần trăm; chia10 cho giá trị đầu40 rồi nhân100 được25% tăng tương đối."
+    },
+    {
+     "q": "Vì sao không suy ai đổi ý?",
+     "o": [
+      "Vì hai tỷ lệ bằng nhau",
+      "Vì không có mẫu số",
+      "Không hỏi lại cùng người"
+     ],
+     "a": 2,
+     "e": "Không hỏi lại cùng từng người nên chưa xác định cá nhân nào thay đổi thái độ."
+    },
+    {
+     "q": "Câu suy nghĩ tốt lên chứa gì?",
+     "o": [
+      "Chỉ nguồn tác giả",
+      "Đánh giá tán thành là tốt hơn",
+      "Chỉ một phép tính trung tính"
+     ],
+     "a": 1,
+     "e": "Nói suy nghĩ tốt lên đánh giá tán thành là tốt hơn, không chỉ tường thuật phép tính trung tính."
+    },
+    {
+     "q": "Tác nhân công bố được giữ ra sao?",
+     "o": [
+      "Nêu ai và khi nào làm bảng",
+      "Chỉ ghi được công bố",
+      "Bỏ mọi thời điểm"
+     ],
+     "a": 0,
+     "e": "Bản tin ghi ai và khi nào lập bảng, tránh câu bị động làm mất người chịu trách nhiệm nguồn."
+    },
+    {
+     "q": "Lần sau cần bàn trước gì?",
+     "o": [
+      "Cách viết nguyên nhân mạnh hơn",
+      "Chỉ màu bảng",
+      "Câu hỏi và mẫu có thể so"
+     ],
+     "a": 2,
+     "e": "Khảo sát sau cần bàn câu hỏi và mẫu có thể so trước, thay vì chỉ đổi cách viết nguyên nhân mạnh hơn."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và nhận phản hồi",
+   "tasks": [
+    {
+     "p": "Giải thích hai phép tính rồi sửa hiểu nhầm mười người đổi ý.",
+     "model": "비율은 사십에서 오십 퍼센트로 변했어요. 십 퍼센트포인트 차이이고 상대 증가율은 이십오 퍼센트예요. 하지만 표본이 백 명과 이백 명이고 같은 사람들이 아니어서 십 명이 바뀌었다고 말할 수는 없어요.",
+     "vi": "Tỷ lệ40→50%, chênh10 điểm phần trăm, tăng tương đối25%. Nhưng mẫu100 và200 khác người, nên không suy mười người đổi ý."
+    },
+    {
+     "p": "Biên tập viên hỏi giữ câu nhờ quảng bá không; bạn yêu cầu căn cứ và đề xuất câu trung tính.",
+     "model": "가: 홍보 덕분이라고 써도 돼요? 나: 홍보와 응답의 관계를 확인한 자료가 있어요? 가: 아직 없어요. 나: 그럼 두 조사에서 비율이 달랐다고 쓰고 원인 판단은 남겨 두는 게 어때요?",
+     "vi": "A muốn viết nhờ quảng bá, B hỏi căn cứ. Chưa có nên B đề nghị chỉ nêu tỷ lệ khác và để nguyên nhân cần kiểm."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết cho người nhận hiểu được",
+   "task": "Viết tám đến mười câu phân tích bảng giả định 250–400 ký tự Hàn: hai mẫu, hai tỷ lệ, điểm phần trăm, tăng tương đối, giới hạn cá nhân, chưa kết luận quảng bá và bước khảo sát sau.",
+   "min": 240,
+   "model": "첫 조사에서는 백 명 중 사십 명이 찬성했어요. 다음 조사에서는 이백 명 중 백 명이 찬성했어요. 비율은 사십에서 오십 퍼센트로 높아졌어요. 차이는 십 퍼센트포인트이고 상대 증가율은 이십오 퍼센트예요. 하지만 두 표본은 같은 사람들이 아니에요. 따라서 십 명이 생각을 바꿨다고 쓸 수는 없어요. 홍보가 원인이라는 자료도 아직 없어요. 기사에는 작성 주체와 질문 내용을 함께 밝혀야 해요. 다음 조사에서는 문항과 표본의 비교 가능성을 먼저 검토할 거예요.",
+   "modelVi": "Khảo sát đầu40/100, sau100/200 tán thành, nên tỷ lệ40→50%, chênh10 điểm phần trăm và tăng tương đối25%. Hai mẫu không cùng người nên không nói mười người đổi ý, cũng chưa có dữ liệu quy quảng bá là nguyên nhân. Bài cần ghi người soạn và câu hỏi; khảo sát sau phải xét khả năng so câu hỏi và mẫu trước.",
+   "tips": [
+    "Sắp ý theo yêu cầu Viết tám đến mười câu phân tích bảng giả định 250–400 ký tự Hàn: hai mẫu, hai tỷ lệ, điểm phần trăm, tăng tương đối, giới hạn cá nhân, chưa kết luận quảng bá và bước khảo sát sau.; chỉ đưa dữ kiện cần để người nhận hiểu tình huống.",
+    "Dùng Bị động·nhượng bộ·điều kiện·nguyên nhân·số liệu·suy đoán theo ý nghĩa đã giải thích, không thay mọi đuôi chỉ vì chúng trông giống nhau."
+   ],
+   "checklist": [
+    "Sản phẩm đáp đủ mục tiêu: Tính và diễn đạt đúng phần trăm, điểm phần trăm và thay đổi tương đối trong một ví dụ.",
+    "Câu có Bị động·nhượng bộ·điều kiện·nguyên nhân·số liệu·suy đoán giữ đúng vai và thời điểm của người nói.",
+    "Người đọc sản phẩm có thể trả lời câu “Tăng tương đối từ40% lên50% là bao nhiêu?” khi dữ kiện tương ứng được đưa vào; không phải suy từ một chữ khó nhìn."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong câu “응답 비율을 비교해요.”, cụm “응답 비율” có nghĩa gì?",
+   "o": [
+    "giá trị cơ sở",
+    "tỷ lệ trả lời một phương án",
+    "thành phần"
+   ],
+   "a": 1,
+   "e": "Tôi so tỷ lệ chọn phương án. Đây là cách dùng tỷ lệ trả lời một phương án trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “분모가 달라졌어요.”, cụm “분모” có nghĩa gì?",
+   "o": [
+    "mẫu số",
+    "điểm phần trăm",
+    "khả năng so sánh được"
+   ],
+   "a": 0,
+   "e": "Mẫu số đã thay đổi. Đây là cách dùng mẫu số trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “표본을 따로 설명해요.”, cụm “표본” có nghĩa gì?",
+   "o": [
+    "mức tăng tương đối",
+    "cùng một nhóm",
+    "mẫu khảo sát"
+   ],
+   "a": 2,
+   "e": "Tôi giải thích riêng mẫu khảo sát. Đây là cách dùng mẫu khảo sát trong tình huống đang nói."
+  },
+  {
+   "t": "fill",
+   "q": "차이는 십 퍼센트___예요. (điểm phần trăm)",
+   "a": "포인트",
+   "e": "40%→50% là10 퍼센트포인트, không phải10% tăng tương đối."
+  },
+  {
+   "t": "fill",
+   "q": "같은 사람___ 비교의 의미가 달라질 수 있어요. (nếu là)",
+   "a": "이라면",
+   "e": "Danh từ 사람 có batchim, 이라면 đặt giả định chưa tự xác nhận."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Bảng do nhóm bản tin công bố có số người trả lời.",
+   "w": [
+    "공개한",
+    "표에는",
+    "응답자",
+    "수가",
+    "있어요",
+    "보도팀이"
+   ],
+   "a": "보도팀이 공개한 표에는 응답자 수가 있어요.",
+   "e": "Câu đúng là 보도팀이 공개한 표에는 응답자 수가 있어요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt bảng do nhóm bản tin công bố có số người trả lời."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Muốn nói đổi do quảng bá cần thêm căn cứ.",
+   "w": [
+    "때문에",
+    "변했다고",
+    "말하려면",
+    "추가",
+    "근거가",
+    "필요해요",
+    "홍보"
+   ],
+   "a": "홍보 때문에 변했다고 말하려면 추가 근거가 필요해요.",
+   "e": "Câu đúng là 홍보 때문에 변했다고 말하려면 추가 근거가 필요해요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt muốn nói đổi do quảng bá cần thêm căn cứ."
+  },
+  {
+   "t": "match",
+   "q": "Nối các cụm liên quan giá trị cơ sở và được công bố với nghĩa phù hợp trong tình huống.",
+   "pairs": [
+    [
+     "기준값",
+     "giá trị cơ sở"
+    ],
+    [
+     "비교 가능성",
+     "khả năng so sánh được"
+    ],
+    [
+     "동일 집단",
+     "cùng một nhóm"
+    ],
+    [
+     "문항",
+     "mục câu hỏi"
+    ],
+    [
+     "공개되다",
+     "được công bố"
+    ]
+   ],
+   "e": "Cụm 기준값 diễn đạt giá trị cơ sở, khác 공개되다 là được công bố. Hãy dùng câu ví dụ để kiểm chức năng trước khi ghép."
+  },
+  {
+   "t": "listen",
+   "say": "찬성 비율이 사십에서 오십 퍼센트로 높아졌어요. 그럼 십 명이 생각을 바꾼 거네요? 아니요. 첫 표본은 백 명이고 다음은 이백 명이에요. 같은 사람들을 다시 물은 건 아니군요. 맞아요. 십 퍼센트포인트 차이는 있지만 개인 변화는 몰라요. 홍보가 잘된 덕분이라고 쓸까요? 그건 긍정적 평가와 인과 주장이 섞여 있어요. 작성자가 누구인지와 조사 문항도 넣을게요. 좋아요. 확인된 숫자와 남은 질문을 나누어요. 다음 조사에서는 비교 조건부터 정하도록 제안할게요.",
+   "lang": "ko-KR",
+   "q": "Vì sao không suy mười người đổi ý?",
+   "o": [
+    "Vì mọi người đều đồng ý",
+    "Mẫu số khác và không cùng người",
+    "Vì không thể tính phần trăm"
+   ],
+   "a": 1,
+   "e": "Mẫu đầu100 người, mẫu sau200 và không hỏi cùng từng người, nên chênh tỷ lệ chưa là mười người đổi ý."
+  },
+  {
+   "t": "listen",
+   "say": "찬성 비율이 사십에서 오십 퍼센트로 높아졌어요. 그럼 십 명이 생각을 바꾼 거네요? 아니요. 첫 표본은 백 명이고 다음은 이백 명이에요. 같은 사람들을 다시 물은 건 아니군요. 맞아요. 십 퍼센트포인트 차이는 있지만 개인 변화는 몰라요. 홍보가 잘된 덕분이라고 쓸까요? 그건 긍정적 평가와 인과 주장이 섞여 있어요. 작성자가 누구인지와 조사 문항도 넣을게요. 좋아요. 확인된 숫자와 남은 질문을 나누어요. 다음 조사에서는 비교 조건부터 정하도록 제안할게요.",
+   "lang": "ko-KR",
+   "q": "덕분에 ở câu quảng bá có vấn đề gì khi thiếu căn cứ?",
+   "o": [
+    "Gộp đánh giá với nguyên nhân chưa chứng minh",
+    "Làm sai cách đọc số bắt buộc",
+    "Chứng minh mọi điều đã tốt"
+   ],
+   "a": 0,
+   "e": "Câu nhờ quảng bá vừa đánh giá tích cực vừa quy nguyên nhân; cần dữ kiện trước khi dùng như kết luận."
+  },
+  {
+   "t": "dict",
+   "say": "가상의 다섯잎 소식팀은 배움터 이용에 관한 두 표를 받았어요.",
+   "a": "가상의 다섯잎 소식팀은 배움터 이용에 관한 두 표를 받았어요.",
+   "lang": "ko-KR",
+   "e": "Câu bắt đầu bằng “가상의 다섯잎” và kết thúc bằng “받았어요.”. Giữ các khối chữ trong từng từ, viết cách giữa các từ như khi đọc lại cả câu; không đổi cách viết theo một âm nối nghe được."
+  },
+  {
+   "t": "mc",
+   "q": "홍보로 인해 비율이 변했다 dùng ngữ pháp có chứng minh nguyên nhân không?",
+   "o": [
+    "Có vì 로 인해 trang trọng",
+    "Có nếu dùng câu bị động",
+    "Không, cần dữ kiện quan hệ và yếu tố khác"
+   ],
+   "a": 2,
+   "e": "Cách nối không thay căn cứ nhân quả."
+  },
+  {
+   "t": "mc",
+   "q": "Khi viết 결과가 공개됐다, nên bổ sung gì để rõ trách nhiệm thông tin?",
+   "o": [
+    "Một suy đoán về mọi cư dân",
+    "Ai lập, công bố và khi nào",
+    "Chỉ màu chữ"
+   ],
+   "a": 1,
+   "e": "Tác nhân và ngày cho phép kiểm nguồn, phạm vi."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ 응답 비율 / 퍼센트포인트 / 후속 조사, tranh hoặc sơ đồ cho tình huống Biên tập một bảng khảo sát giả định: người viết nhầm mười điểm thành mười người và nhận nguyên nhân từ quảng bá.; giáo viên nghe trước bản TTS để kiểm các số và âm khó.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Giáo viên nêu câu hỏi “Vì sao không suy mười người đổi ý?”. Học viên dự đoán hai hướng trả lời rồi ghi điều cần nghe để phân biệt chúng; chưa mở lời thoại."
+   },
+   {
+    "t": "20 phút",
+    "do": "Làm việc với thẻ “응답 비율” và “구성”. Cho học viên ghép hai câu ví dụ tương ứng với tranh hoặc tình huống, sau đó tự giải thích vì sao không đổi chỗ hai cụm."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đối chiếu “첫 비율보다 십 퍼센트포인트 높아졌어요.” với “표본이 다르더라도 계산과 해석은 구별해야 해요.”. Khoanh thành phần thuộc Bị động·nhượng bộ·điều kiện·nguyên nhân·số liệu·suy đoán và tạo một biến thể đổi nghĩa có chủ ý để cả lớp sửa."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nghe tình huống Biên tập một bảng khảo sát giả định: người viết nhầm mười điểm thành mười người và nhận nguyên nhân từ quảng bá. Lượt đầu lấy mục tiêu hai người, lượt sau ghi dữ kiện giải câu “Vì sao không suy mười người đổi ý?”; yêu cầu chỉ đúng lượt cung cấp căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nhập vai theo nhiệm vụ “Giải thích hai phép tính rồi sửa hiểu nhầm mười người đổi ý.”. Người nghe nhắc lại thông tin quyết định; người nói chỉ xác nhận nếu dữ kiện đã được truyền đúng."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai bắt đầu bằng “상대 증가율” và “후속 조사”. Học viên viết lại một câu đã dùng từ tiết trước rồi đổi bối cảnh để kiểm có còn phù hợp hay không."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc “Bảng tốt hơn chưa kể ai đã thay đổi” để giải câu “Tăng tương đối từ40% lên50% là bao nhiêu?”. So câu chứng cứ với một phương án nhiễu và nêu dữ kiện nào làm phương án đó sai."
+   },
+   {
+    "t": "20 phút",
+    "do": "Giao lượt nói thứ hai: Biên tập viên hỏi giữ câu nhờ quảng bá không; bạn yêu cầu căn cứ và đề xuất câu trung tính. Bạn nghe chỉ phản hồi về mục tiêu nội dung và cấu trúc đang luyện, không sửa mọi lỗi giữa lúc người kia nói."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết theo đề: Viết tám đến mười câu phân tích bảng giả định 250–400 ký tự Hàn: hai mẫu, hai tỷ lệ, điểm phần trăm, tăng tương đối, giới hạn cá nhân, chưa kết luận quảng bá và bước khảo sát sau. Đổi bản cho bạn đọc và đối chiếu yêu cầu “Sản phẩm đáp đủ mục tiêu: Tính và diễn đạt đúng phần trăm, điểm phần trăm và thay đổi tương đối trong một ví dụ.”; người viết tự sửa một ý rồi giải thích căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chốt bằng câu “홍보로 인해 비율이 변했다 dùng ngữ pháp có chứng minh nguyên nhân không?”. Mỗi học viên nêu vì sao lựa chọn sai dễ gây nhầm, rồi tự chọn một câu từ sản phẩm để luyện lại ở nhà."
+   }
+  ],
+  "games": [
+   "Thẻ điều kiện: đổi 응답 비율 thành 퍼센트포인트 trong câu mẫu nếu có nghĩa, sau đó giải thích điều kiện nào buộc phải sửa thêm ở vị ngữ.",
+   "Người kiểm căn cứ: hai bạn giải “Tăng tương đối từ40% lên50% là bao nhiêu?”, chỉ câu hỗ trợ và bác một phương án nhiễu bằng đúng dữ kiện của bài."
+  ],
+  "errors": [
+   "Gọi10 điểm phần trăm là10% tăng tương đối: tính theo giá trị đầu.",
+   "Đổi chênh tỷ lệ thành10 người đổi ý: kiểm mẫu và người.",
+   "Dùng 덕분에 che khẳng định nguyên nhân chưa đủ: tách đánh giá.",
+   "Chỉ dùng bị động làm mất người lập bảng: bổ sung chủ thể.",
+   "Gọi phản hồi tán thành là suy nghĩ tốt hơn một cách trung tính: nhận ra đánh giá."
+  ],
+  "homework": "Lập một tình huống mới có 응답 비율 và 후속 조사. Viết sản phẩm cùng loại với đề lớp nhưng đổi thông tin, gửi bạn nghe/đọc rồi tự sửa lỗi liên quan Bị động·nhượng bộ·điều kiện·nguyên nhân·số liệu·suy đoán."
+ }
+}

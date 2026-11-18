@@ -1,0 +1,587 @@
+{
+ "no": 9,
+ "title": "Batchim kép: chữ viết và âm theo sau",
+ "sub": "겹받침 + âm sau",
+ "goals": [
+  "Nhận diện 11 tổ hợp batchim kép trên chữ in và chỉ vị trí ở đáy khối.",
+  "Đọc phân biệt 읽다/읽어요, 앉다/앉아요 và 없다/없어요 bằng cách xét âm theo sau.",
+  "Giữ chính tả gốc khi nghe nối âm và giải thích một lỗi thêm nguyên âm.",
+  "Đọc một đoạn lớp học ngắn rồi viết lại từ có batchim kép theo nghĩa."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Điểm xuất phát",
+   "html": "<p>Hai phụ âm ở đáy một khối không được đọc thành hai âm tiết riêng. Bài này bổ sung cách nhận diện 11 batchim kép,nhưng chỉ luyện sâu những từ có ích trong lời lớp học. Nghe âm không thay cho ghi nhớ chính tả:đọc gần 일거요 nhưng vẫn viết 읽어요. Các câu có đuôi chưa học được dùng như mẫu đọc nguyên cụm,không yêu cầu người mới biến đổi mọi động từ.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Âm cần nghe trong ngữ liệu",
+   "items": [
+    {
+     "sym": "11 tổ hợp ở đáy khối",
+     "ex": [
+      "넋",
+      "앉다",
+      "많다",
+      "읽다",
+      "삶",
+      "넓다",
+      "외곬",
+      "핥다",
+      "읊다",
+      "싫다",
+      "값"
+     ],
+     "vi": "Nhận diện lần lượt ㄳ, ㄵ, ㄶ, ㄺ, ㄻ, ㄼ, ㄽ, ㄾ, ㄿ, ㅀ, ㅄ. Không đọc hai chữ cuối thành hai âm tiết. Một số dạng thay đổi theo từ và âm sau."
+    },
+    {
+     "sym": "Đứng trước phụ âm và nối trước nguyên âm",
+     "ex": [
+      "읽다",
+      "읽어요",
+      "앉다",
+      "앉아요",
+      "없다",
+      "없어요"
+     ],
+     "vi": "Đối chiếu đọc gần [익따]/[일거요], [안따]/[안자요], [업따]/[업써요]. Các gợi âm trong ngoặc chỉ để giải thích; văn bản cho TTS vẫn dùng chính tả chuẩn."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm cần dùng",
+   "items": [
+    {
+     "w": "읽어요",
+     "rr": "ilgeoyo",
+     "vi": "đọc, lịch sự",
+     "ex": "책을 읽어요.",
+     "exVi": "Tôi đọc sách.",
+     "pos": "phr"
+    },
+    {
+     "w": "앉아요",
+     "rr": "anjayo",
+     "vi": "ngồi, lịch sự",
+     "ex": "여기에 앉아요.",
+     "exVi": "Tôi ngồi ở đây.",
+     "pos": "phr"
+    },
+    {
+     "w": "없어요",
+     "rr": "eopseoyo",
+     "vi": "không có",
+     "ex": "연필이 없어요.",
+     "exVi": "Không có bút chì.",
+     "pos": "phr"
+    },
+    {
+     "w": "많아요",
+     "rr": "manayo",
+     "vi": "nhiều",
+     "ex": "책이 많아요.",
+     "exVi": "Có nhiều sách.",
+     "pos": "phr"
+    },
+    {
+     "w": "짧아요",
+     "rr": "jjalbayo",
+     "vi": "ngắn",
+     "ex": "문장이 짧아요.",
+     "exVi": "Câu ngắn.",
+     "pos": "phr"
+    },
+    {
+     "w": "넓어요",
+     "rr": "neolbeoyo",
+     "vi": "rộng",
+     "ex": "교실이 넓어요.",
+     "exVi": "Phòng học rộng.",
+     "pos": "phr"
+    },
+    {
+     "w": "싫어요",
+     "rr": "sireoyo",
+     "vi": "không thích/không vừa ý",
+     "ex": "저는 큰 소리가 싫어요.",
+     "exVi": "Tôi không thích tiếng lớn.",
+     "pos": "phr"
+    },
+    {
+     "w": "여덟",
+     "rr": "yeodeol",
+     "vi": "tám, thuần Hàn",
+     "ex": "여덟을 읽어요.",
+     "exVi": "Tôi đọc số tám.",
+     "pos": "phr"
+    },
+    {
+     "w": "값",
+     "rr": "gap",
+     "vi": "giá trị/giá",
+     "ex": "값을 확인해요.",
+     "exVi": "Tôi kiểm giá.",
+     "pos": "phr"
+    },
+    {
+     "w": "닭이",
+     "rr": "dalgi",
+     "vi": "con gà kèm trợ từ 이",
+     "ex": "닭이 보여요.",
+     "exVi": "Thấy con gà.",
+     "pos": "phr"
+    },
+    {
+     "w": "핥아요",
+     "rr": "haltayo",
+     "vi": "liếm, lịch sự",
+     "ex": "고양이가 발을 핥아요.",
+     "exVi": "Con mèo liếm chân.",
+     "pos": "phr"
+    },
+    {
+     "w": "읊어요",
+     "rr": "eulpeoyo",
+     "vi": "ngâm/đọc thơ, lịch sự",
+     "ex": "짧은 시를 읊어요.",
+     "exVi": "Tôi ngâm bài thơ ngắn.",
+     "pos": "phr"
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "겹받침 + âm sau",
+   "html": "<p>Giữ hai cột:chính tả và cách phát âm trong chính ngữ cảnh. Nhiều batchim kép rút còn một âm cuối khi đứng riêng hoặc trước phụ âm,nhưng cách chọn không thống nhất cho mọi từ. Chẳng hạn 넓다 đọc gần [널따],còn 밟다 trước phụ âm đọc gần [밥따]. Khi nối với trợ từ hoặc đuôi bắt đầu bằng nguyên âm,thành phần sau thường chuyển sang đầu âm tiết kế:앉아요 gần [안자요],읽어요 gần [일거요]. ㅎ có cách tương tác riêng như 많아요 gần [마나요],싫어요 gần [시러요]. Không dùng một mẹo “bỏ chữ thứ hai” cho toàn bảng. Ở cấp này,học từ trọng tâm bằng nghe và viết;các dạng hiếm chỉ cần nhận diện tổ hợp để tra cứu sau.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Ý cần giữ"
+    ],
+    [
+     "읽다 / 읽어요",
+     "Cùng thân 읽-,nhưng âm sau khác nên cách đọc không giữ nguyên."
+    ],
+    [
+     "앉다 / 앉아요",
+     "Giữ ㄵ trên chữ dù nghe [안따]/[안자요]."
+    ],
+    [
+     "넓다 / 밟다",
+     "Hai từ cùng ㄼ nhưng trước phụ âm không có một cách rút chung."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "책을 읽어요.",
+     "vi": "Tôi đọc sách."
+    },
+    {
+     "t": "여기에 앉아요.",
+     "vi": "Tôi ngồi ở đây."
+    },
+    {
+     "t": "오늘은 숙제가 없어요.",
+     "vi": "Hôm nay không có bài tập về nhà."
+    },
+    {
+     "t": "이 문장은 짧아요.",
+     "vi": "Câu này ngắn."
+    }
+   ],
+   "tips": [
+    "Đọc cả hai phụ âm cuối thành hai âm tiết: đối chiếu từ trọn và không thêm nguyên âm.",
+    "Bỏ luôn chữ thứ hai trong mọi từ: học theo nhóm và âm sau.",
+    "Đổi 읽어요 thành 일거요: giữ riêng cột gợi âm và cột chính tả."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe để giải quyết việc cụ thể",
+   "lang": "ko-KR",
+   "note": "Hai bạn nhìn thẻ 읽다/읽어요 và kiểm xem cách đọc có làm đổi chữ gốc hay không.",
+   "lines": [
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "이 단어는 읽다예요?",
+     "vi": "Từ này là 읽다 phải không?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "네. 뒤에는 다가 있어요.",
+     "vi": "Đúng. Phía sau là 다."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "읽어요도 같은 소리로 읽어요?",
+     "vi": "읽어요 cũng đọc cùng âm như vậy sao?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "아니요. 뒤의 소리도 확인해요.",
+     "vi": "Không. Cần kiểm cả âm theo sau."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "그럼 들리는 대로 일거요라고 써요?",
+     "vi": "Vậy viết 일거요 theo âm nghe sao?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "아니요. 읽어요라고 써요.",
+     "vi": "Không. Vẫn viết 읽어요."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "앉아요도 글자를 바꾸지 않아요?",
+     "vi": "앉아요 cũng không đổi chữ chứ?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "맞아요. 듣고 원래 글자를 확인해요.",
+     "vi": "Đúng. Nghe rồi kiểm chữ gốc."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Với đọc từ, cần kiểm thêm gì ngoài thân?",
+     "o": [
+      "Âm theo sau",
+      "Màu của thẻ",
+      "Tên người đọc"
+     ],
+     "a": 0,
+     "e": "뒤의 소리도 확인해요 yêu cầu xét âm sau."
+    },
+    {
+     "q": "Có đổi chính tả đọc thành 일거요 không?",
+     "o": [
+      "Luôn đổi theo âm nghe",
+      "Bỏ cả batchim",
+      "Không, giữ 읽어요"
+     ],
+     "a": 2,
+     "e": "Câu trả lời là 읽어요라고 써요."
+    },
+    {
+     "q": "Cách làm cuối là gì?",
+     "o": [
+      "Chỉ nhìn hình miệng",
+      "Nghe rồi kiểm chữ gốc",
+      "Chỉ ghi Romaja"
+     ],
+     "a": 1,
+     "e": "듣고 원래 글자를 확인해요."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Hai cột trong vở",
+   "title": "Hai cột trong vở",
+   "text": "공책에 두 칸을 만들어요. 왼쪽에는 읽어요를 써요. 오른쪽에는 들리는 소리를 적어요. 친구는 앉아요를 읽어요. 저는 끝의 두 글자를 봐요. 소리가 달라도 원래 글자를 지켜요. 다음에는 없어요를 들어요. 우리는 먼저 듣고 다시 써요. 빨리 쓰기보다 정확하게 확인해요.",
+   "vi": "Tôi chia vở thành hai cột. Bên trái viết 읽어요, bên phải ghi âm nghe thấy. Bạn đọc 앉아요, tôi nhìn hai chữ ở đáy khối. Dù âm thay đổi, tôi vẫn giữ chữ gốc. Sau đó nghe 없어요. Chúng tôi nghe trước rồi viết lại, ưu tiên kiểm chính xác hơn viết nhanh.",
+   "gloss": [
+    {
+     "w": "읽어요",
+     "rr": "ilgeoyo",
+     "vi": "đọc, lịch sự"
+    },
+    {
+     "w": "앉아요",
+     "rr": "anjayo",
+     "vi": "ngồi, lịch sự"
+    },
+    {
+     "w": "없어요",
+     "rr": "eopseoyo",
+     "vi": "không có"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Cột trái ghi gì?",
+     "o": [
+      "Chỉ tên bạn",
+      "Giá sách",
+      "Chính tả 읽어요"
+     ],
+     "a": 2,
+     "e": "왼쪽에는 읽어요를 써요."
+    },
+    {
+     "q": "Bạn đọc từ nào?",
+     "o": [
+      "포도",
+      "앉아요",
+      "가방"
+     ],
+     "a": 1,
+     "e": "친구는 앉아요를 읽어요."
+    },
+    {
+     "q": "Ưu tiên cuối đoạn là gì?",
+     "o": [
+      "Kiểm chính xác",
+      "Viết nhanh nhất",
+      "Đổi hết chữ theo âm"
+     ],
+     "a": 0,
+     "e": "빨리 쓰기보다 정확하게 확인해요."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và nhận phản hồi",
+   "tasks": [
+    {
+     "p": "Đọc ba cặp 읽다/읽어요, 앉다/앉아요, 없다/없어요. Sau đó giải thích bằng tiếng Việt vì sao không đổi chính tả.",
+     "model": "읽다,읽어요. 앉다,앉아요. 없다,없어요. 원래 글자를 확인해요.",
+     "vi": "읽다–읽어요, 앉다–앉아요, 없다–없어요. Tôi kiểm chữ gốc."
+    },
+    {
+     "p": "Một người hỏi có nên viết theo âm nghe không; người kia yêu cầu kiểm chính tả và đọc một từ làm mẫu.",
+     "model": "일거요라고 써요? 아니요. 읽어요라고 써요. 다시 들어 보세요.",
+     "vi": "Có viết 일거요 không? Không. Viết 읽어요. Hãy nghe lại."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết cho người nhận hiểu được",
+   "task": "Viết hai cột cho ba cặp từ 읽다/읽어요, 앉다/앉아요, 없다/없어요: cột trái giữ chính tả, cột phải ghi điều đã nghe. Sau đó chép ba câu mẫu và khoanh batchim kép.",
+   "min": 20,
+   "model": "읽다 / 읽어요\n앉다 / 앉아요\n없다 / 없어요\n책을 읽어요. 여기에 앉아요. 연필이 없어요.",
+   "modelVi": "Ba cặp chính tả là đọc, ngồi, không có ở dạng từ điển và dạng lịch sự. Ba câu: Tôi đọc sách.Tôi ngồi ở đây.Không có bút chì.",
+   "tips": [
+    "Khoanh hai phụ âm ở đáy khối trước khi nghe đuôi đứng sau.",
+    "Cột âm nghe là ghi chú luyện tập, không được dùng thay chữ gốc trong ba câu cuối."
+   ],
+   "checklist": [
+    "Có đủ ba cặp từ và ba câu.",
+    "Giữ ㄺ trong 읽 và ㄵ trong 앉.",
+    "Giải thích được một chỗ cách đọc thay đổi khi đổi âm sau."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong câu “책을 읽어요.”, cụm “읽어요” có nghĩa gì?",
+   "o": [
+    "đọc, lịch sự",
+    "nhiều",
+    "không thích/không vừa ý"
+   ],
+   "a": 0,
+   "e": "Tôi đọc sách. Đây là cách dùng đọc, lịch sự trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “여기에 앉아요.”, cụm “앉아요” có nghĩa gì?",
+   "o": [
+    "ngắn",
+    "tám, thuần Hàn",
+    "ngồi, lịch sự"
+   ],
+   "a": 2,
+   "e": "Tôi ngồi ở đây. Đây là cách dùng ngồi, lịch sự trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “연필이 없어요.”, cụm “없어요” có nghĩa gì?",
+   "o": [
+    "giá trị/giá",
+    "không có",
+    "rộng"
+   ],
+   "a": 1,
+   "e": "Không có bút chì. Đây là cách dùng không có trong tình huống đang nói."
+  },
+  {
+   "t": "fill",
+   "q": "Điền dạng lịch sự của từ 읽다 đã học: ___.",
+   "a": "읽어요",
+   "e": "Giữ thân đọc có ㄺ, kết hợp đuôi để thành 읽어요."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ trong bài mang nghĩa ngắn: ___.",
+   "a": "짧아요",
+   "e": "짧다 có batchim ㄼ; dạng được luyện ở bài là 짧아요."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Hôm nay không có bài tập về nhà.",
+   "w": [
+    "숙제가",
+    "없어요",
+    "오늘은"
+   ],
+   "a": "오늘은 숙제가 없어요.",
+   "e": "Câu đúng là 오늘은 숙제가 없어요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt hôm nay không có bài tập về nhà."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Bạn ngồi ở đây.",
+   "w": [
+    "여기에",
+    "앉아요",
+    "친구는"
+   ],
+   "a": "친구는 여기에 앉아요.",
+   "e": "Câu đúng là 친구는 여기에 앉아요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt bạn ngồi ở đây."
+  },
+  {
+   "t": "match",
+   "q": "Nối các từ chỉ hành động hoặc đặc điểm có batchim với nghĩa đang luyện.",
+   "pairs": [
+    [
+     "싫어요",
+     "không thích/không vừa ý"
+    ],
+    [
+     "여덟",
+     "tám,thuần Hàn"
+    ],
+    [
+     "값",
+     "giá trị/giá"
+    ],
+    [
+     "닭이",
+     "con gà kèm trợ từ 이"
+    ],
+    [
+     "핥아요",
+     "liếm,lịch sự"
+    ]
+   ],
+   "e": "싫어요 nói không thích, 여덟 là số tám, còn 닭이 là gà có trợ từ; không đoán nghĩa chỉ từ chữ cuối trông giống."
+  },
+  {
+   "t": "listen",
+   "say": "이 단어는 읽다예요? 네. 뒤에는 다가 있어요. 읽어요도 같은 소리로 읽어요? 아니요. 뒤의 소리도 확인해요. 그럼 들리는 대로 일거요라고 써요? 아니요. 읽어요라고 써요. 앉아요도 글자를 바꾸지 않아요? 맞아요. 듣고 원래 글자를 확인해요.",
+   "lang": "ko-KR",
+   "q": "Với đọc từ, cần kiểm thêm gì ngoài thân?",
+   "o": [
+    "Âm theo sau",
+    "Màu của thẻ",
+    "Tên người đọc"
+   ],
+   "a": 0,
+   "e": "Hãy nghe căn cứ cho câu “Với đọc từ, cần kiểm thêm gì ngoài thân?”: 뒤의 소리도 확인해요 yêu cầu xét âm sau."
+  },
+  {
+   "t": "listen",
+   "say": "이 단어는 읽다예요? 네. 뒤에는 다가 있어요. 읽어요도 같은 소리로 읽어요? 아니요. 뒤의 소리도 확인해요. 그럼 들리는 대로 일거요라고 써요? 아니요. 읽어요라고 써요. 앉아요도 글자를 바꾸지 않아요? 맞아요. 듣고 원래 글자를 확인해요.",
+   "lang": "ko-KR",
+   "q": "Có đổi chính tả đọc thành 일거요 không?",
+   "o": [
+    "Luôn đổi theo âm nghe",
+    "Bỏ cả batchim",
+    "Không, giữ 읽어요"
+   ],
+   "a": 2,
+   "e": "Hãy nghe căn cứ cho câu “Có đổi chính tả đọc thành 일거요 không?”: Câu trả lời là 읽어요라고 써요."
+  },
+  {
+   "t": "dict",
+   "say": "책을 읽고 여기에 앉아요.",
+   "a": "책을 읽고 여기에 앉아요.",
+   "lang": "ko-KR",
+   "e": "Chép bằng chính tả 읽 và 앉; âm nối không làm mất hai phụ âm trên chữ."
+  },
+  {
+   "t": "mc",
+   "q": "Có thể áp mẹo bỏ chữ thứ hai cho mọi batchim kép không?",
+   "o": [
+    "Chỉ cần viết theo Romaja",
+    "Không",
+    "Có với mọi từ"
+   ],
+   "a": 1,
+   "e": "Cách đọc phụ thuộc từ và âm theo sau; nhiều nhóm có ngoại lệ."
+  },
+  {
+   "t": "mc",
+   "q": "Khi âm nghe khác chữ đọc, điều nào cần giữ trong văn bản?",
+   "o": [
+    "Chính tả chuẩn của từ",
+    "Mọi ký hiệu gợi âm",
+    "Chỉ chữ Latinh"
+   ],
+   "a": 0,
+   "e": "Gợi âm giúp phát âm, chưa thay chính tả trong câu."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ 11 tổ hợp batchim kép, ba cặp đọc/ngồi/không có, bảng hai cột và giọng mẫu ko-KR; giáo viên đối chiếu trước cách đọc các từ hiếm.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Giáo viên nêu câu hỏi “Với đọc từ, cần kiểm thêm gì ngoài thân?”. Học viên dự đoán hai hướng trả lời rồi ghi điều cần nghe để phân biệt chúng; chưa mở lời thoại."
+   },
+   {
+    "t": "20 phút",
+    "do": "Làm việc với thẻ “읽어요” và “많아요”. Cho học viên ghép hai câu ví dụ tương ứng với tranh hoặc tình huống, sau đó tự giải thích vì sao không đổi chỗ hai cụm."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đối chiếu “책을 읽어요.” với “여기에 앉아요.”. Khoanh thành phần thuộc 겹받침 + âm sau và tạo một biến thể đổi nghĩa có chủ ý để cả lớp sửa."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nghe tình huống Hai bạn nhìn thẻ 읽다/읽어요 và kiểm xem cách đọc có làm đổi chữ gốc hay không. Lượt đầu lấy mục tiêu hai người, lượt sau ghi dữ kiện giải câu “Với đọc từ, cần kiểm thêm gì ngoài thân?”; yêu cầu chỉ đúng lượt cung cấp căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nhập vai theo nhiệm vụ “Đọc ba cặp 읽다/읽어요, 앉다/앉아요, 없다/없어요. Sau đó giải thích bằng tiếng Việt vì sao không đổi chính tả.”. Người nghe nhắc lại thông tin quyết định; người nói chỉ xác nhận nếu dữ kiện đã được truyền đúng."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai bắt đầu bằng “넓어요” và “읊어요”. Học viên viết lại một câu đã dùng từ tiết trước rồi đổi bối cảnh để kiểm có còn phù hợp hay không."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc “Hai cột trong vở” để giải câu “Cột trái ghi gì?”. So câu chứng cứ với một phương án nhiễu và nêu dữ kiện nào làm phương án đó sai."
+   },
+   {
+    "t": "20 phút",
+    "do": "Giao lượt nói thứ hai: Một người hỏi có nên viết theo âm nghe không; người kia yêu cầu kiểm chính tả và đọc một từ làm mẫu. Bạn nghe chỉ phản hồi về mục tiêu nội dung và cấu trúc đang luyện, không sửa mọi lỗi giữa lúc người kia nói."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết theo đề: Viết hai cột cho ba cặp từ 읽다/읽어요, 앉다/앉아요, 없다/없어요: cột trái giữ chính tả, cột phải ghi điều đã nghe. Sau đó chép ba câu mẫu và khoanh batchim kép. Đổi bản cho bạn đọc và đối chiếu yêu cầu “Có đủ ba cặp từ và ba câu.”; người viết tự sửa một ý rồi giải thích căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chốt bằng câu “Có thể áp mẹo bỏ chữ thứ hai cho mọi batchim kép không?”. Mỗi học viên nêu vì sao lựa chọn sai dễ gây nhầm, rồi tự chọn một câu từ sản phẩm để luyện lại ở nhà."
+   }
+  ],
+  "games": [
+   "Mở đuôi bất ngờ: giáo viên che phần 다 hoặc 어요, học viên dự đoán rồi đọc cả từ sau khi mở thẻ.",
+   "Người giữ chữ: người thứ nhất đọc, người thứ hai chọn thẻ chính tả và giải thích vì sao không đổi sang chữ gợi âm."
+  ],
+  "errors": [
+   "Đọc cả hai phụ âm cuối thành hai âm tiết: đối chiếu từ trọn và không thêm nguyên âm.",
+   "Bỏ luôn chữ thứ hai trong mọi từ: học theo nhóm và âm sau.",
+   "Đổi 읽어요 thành 일거요: giữ riêng cột gợi âm và cột chính tả.",
+   "Áp cách đọc đọc từ điển cho mọi dạng: nghe lại khi đổi 다 thành 어요.",
+   "Cho rằng 넓다 và 밟다 rút giống nhau: ghi hai từ cụ thể làm đối chiếu."
+  ],
+  "homework": "Tạo ba thẻ có chính tả ở một mặt và câu chứa từ ở mặt kia. Đọc từ điển rồi dạng lịch sự, ghi âm và đánh dấu nơi âm sau làm cách đọc thay đổi."
+ }
+}

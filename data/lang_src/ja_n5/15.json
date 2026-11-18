@@ -1,0 +1,595 @@
+{
+ "no": 15,
+ "title": "Bây giờ ai đang làm gì: tìm đúng người để nhờ giúp",
+ "sub": "今、案内の 紙を 作っています。",
+ "goals": [
+  "Dùng Vている để báo một hoạt động đang diễn ra lúc nói.",
+  "Phân biệt đang làm với lịch làm thường lệ và việc đã xong.",
+  "Đọc thông tin có thời điểm để biết người nào hiện đang rảnh.",
+  "Viết lời nhắn cập nhật công việc và thời gian có thể hỗ trợ."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Khi cần nhờ giúp, hãy hỏi người kia đang làm gì trước khi giao thêm việc. Vている có nhiều chức năng; bài này tập trung hành động đang diễn ra như 読んでいます và 作っています. Không phải mọi động từ đều mang nghĩa “đang”: 住んでいます thường chỉ nơi cư trú, 結婚しています thường chỉ trạng thái. Các trạng thái kết quả sẽ học sâu hơn ở N4, vì vậy đừng áp quy tắc đang cho mọi câu có ている.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>待っています có ma-Q-te-i-ma-su, giữ nhịp っ trước t. 読んでいます có ん trước d, không thay thành よみています. 話しています giữ shi rồi te; nghe rõ い của います khi luyện chậm, nhưng không thêm một ngắt dài tách nó khỏi phần て. Trong câu hỏi 今、何をしていますか, nhấn nhẹ 今 để hỏi tình hình hiện tại.</p>",
+   "items": [
+    {
+     "sym": "待っています・読んでいます",
+     "ex": [
+      "まっています",
+      "よんでいます"
+     ],
+     "vi": "Nhịp ngắt và âm mũi phản ánh hai cách tạo thể て khác nhau."
+    },
+    {
+     "sym": "しています・作っています",
+     "ex": [
+      "しています",
+      "つくっています"
+     ],
+     "vi": "Đọc trọn đuôi diễn tiến, đừng nghe một phần rồi tưởng hành động đã kết thúc."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "今",
+     "kana": "いま",
+     "romaji": "ima",
+     "vi": "bây giờ",
+     "ex": "今、入口に います。",
+     "exVi": "Bây giờ tôi ở cửa vào."
+    },
+    {
+     "w": "待つ",
+     "kana": "まつ",
+     "romaji": "matsu",
+     "vi": "chờ",
+     "ex": "外で 友だちを 待ちます。",
+     "exVi": "Tôi chờ bạn ở ngoài."
+    },
+    {
+     "w": "作る",
+     "kana": "つくる",
+     "romaji": "tsukuru",
+     "vi": "làm/tạo",
+     "ex": "紙で 小さい 箱を 作ります。",
+     "exVi": "Tôi làm hộp nhỏ bằng giấy."
+    },
+    {
+     "w": "調べる",
+     "kana": "しらべる",
+     "romaji": "shiraberu",
+     "vi": "tra cứu/kiểm tìm",
+     "ex": "ことばの 意味を 調べます。",
+     "exVi": "Tôi tra nghĩa từ."
+    },
+    {
+     "w": "撮る",
+     "kana": "とる",
+     "romaji": "toru",
+     "vi": "chụp",
+     "ex": "机の 写真を 撮ります。",
+     "exVi": "Tôi chụp ảnh cái bàn."
+    },
+    {
+     "w": "電話",
+     "kana": "でんわ",
+     "romaji": "denwa",
+     "vi": "điện thoại/cuộc gọi",
+     "ex": "電話は あとに します。",
+     "exVi": "Tôi để việc gọi điện lại sau."
+    },
+    {
+     "w": "練習",
+     "kana": "れんしゅう",
+     "romaji": "renshuu",
+     "vi": "luyện tập",
+     "ex": "歌の 練習を 始めます。",
+     "exVi": "Tôi bắt đầu luyện hát."
+    },
+    {
+     "w": "準備",
+     "kana": "じゅんび",
+     "romaji": "junbi",
+     "vi": "chuẩn bị",
+     "ex": "準備は 半分 終わりました。",
+     "exVi": "Việc chuẩn bị đã xong một nửa."
+    },
+    {
+     "w": "終わる",
+     "kana": "おわる",
+     "romaji": "owaru",
+     "vi": "kết thúc",
+     "ex": "会は 三時に 終わります。",
+     "exVi": "Buổi sinh hoạt kết thúc lúc ba giờ."
+    },
+    {
+     "w": "忙しい",
+     "kana": "いそがしい",
+     "romaji": "isogashii",
+     "vi": "bận",
+     "ex": "午前は 忙しいです。",
+     "exVi": "Buổi sáng tôi bận."
+    },
+    {
+     "w": "あとで",
+     "kana": "あとで",
+     "romaji": "atode",
+     "vi": "sau đó/lát nữa",
+     "ex": "あとで 手伝います。",
+     "exVi": "Lát nữa tôi giúp."
+    },
+    {
+     "w": "すぐ",
+     "kana": "すぐ",
+     "romaji": "sugu",
+     "vi": "ngay",
+     "ex": "すぐ 行きます。",
+     "exVi": "Tôi đi ngay."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Tạo thể て rồi thêm います: 待つ→待って, 読む→読んで, 作る→作って, 調べる→調べて, する→して. Hỏi 何をしていますか để biết hoạt động lúc nói. So sánh 今読みます “bây giờ sẽ đọc/đọc ngay” với 今読んでいます “bây giờ đang đọc”. Để báo đã xong dùng 終わりました hoặc Vました theo ý, không chỉ bỏ 今 rồi giữ nguyên diễn tiến.</p>",
+   "table": [
+    [
+     "Động từ",
+     "Đang làm"
+    ],
+    [
+     "待つ",
+     "待っています"
+    ],
+    [
+     "読む",
+     "読んでいます"
+    ],
+    [
+     "作る",
+     "作っています"
+    ],
+    [
+     "調べる",
+     "調べています"
+    ],
+    [
+     "する",
+     "しています"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "今、案内の 紙を 作っています。",
+     "vi": "Bây giờ tôi đang làm giấy hướng dẫn."
+    },
+    {
+     "t": "ゆいさんは 写真を 撮っています。",
+     "vi": "Yui đang chụp ảnh."
+    },
+    {
+     "t": "なおさんは 外で 待っています。",
+     "vi": "Nao đang chờ ở ngoài."
+    },
+    {
+     "t": "準備は 終わりました。すぐ 手伝います。",
+     "vi": "Chuẩn bị xong rồi. Tôi giúp ngay."
+    }
+   ],
+   "tips": [
+    "<p>Không ghép 読むています; thể て đúng của 読む là 読んで.</p>",
+    "<p>Tiếng Việt có thể bỏ đang khi ngữ cảnh rõ, nhưng ở bài cập nhật tình hình cần chọn đúng mẫu Nhật.</p>",
+    "<p>Không dịch máy mọi ている thành đang: kiểm nghĩa của động từ và bối cảnh trước.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Hỏi tình hình hiện tại để chọn người có thể giúp; chú ý cuộc gọi đã xong khác việc chờ đang diễn ra.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "今、何を していますか。",
+     "vi": "Bây giờ bạn đang làm gì?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "案内の 紙を 作っています。あと 十分 かかります。",
+     "vi": "Tôi đang làm giấy hướng dẫn. Còn mất mười phút."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "では、今は 手伝うことが できませんね。",
+     "vi": "Vậy hiện giờ bạn chưa giúp được nhỉ."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。あとで 箱を 運びます。ゆいさんは どこですか。",
+     "vi": "Vâng. Lát nữa tôi chuyển hộp. Yui ở đâu?"
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "窓の 近くで 写真を 撮っています。",
+     "vi": "Bạn ấy đang chụp ảnh gần cửa sổ."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "なおさんは 電話を していますか。",
+     "vi": "Nao đang gọi điện à?"
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "いいえ。電話は 終わりました。今は 外で 待っています。",
+     "vi": "Không. Cuộc gọi xong rồi. Bây giờ bạn ấy đang chờ ở ngoài."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "では、なおさんに お願いします。",
+     "vi": "Vậy tôi sẽ nhờ Nao."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Người làm giấy cần thêm bao lâu?",
+     "o": [
+      "Mười phút",
+      "Một giờ",
+      "Đã xong rồi"
+     ],
+     "a": 0,
+     "e": "あと十分かかります cho biết công việc chưa hoàn tất."
+    },
+    {
+     "q": "Yui đang làm gì?",
+     "o": [
+      "Gọi điện",
+      "Chuyển hộp",
+      "Chụp ảnh"
+     ],
+     "a": 2,
+     "e": "写真を撮っています mô tả hoạt động hiện tại của Yui gần cửa sổ."
+    },
+    {
+     "q": "Tình hình Nao hiện tại là gì?",
+     "o": [
+      "Đang làm giấy",
+      "Đã gọi xong và đang chờ ngoài",
+      "Vẫn đang gọi điện"
+     ],
+     "a": 1,
+     "e": "Người đáp sửa giả định gọi điện: 電話は終わりました rồi báo trạng thái hiện tại."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "今は 土曜日の 午前九時です。クラスの 小さい 発表会は 十時からです。わたしは 入口で 案内の 紙を 作っています。友だちは 机を 並べています。まだ 全部 終わっていませんから、九時半までは 少し 忙しいです。\n\nゆいさんは 今、歌の 練習を しています。毎日 歌いますが、今日は いつもの 部屋では ありません。となりの 小さい 部屋で 練習しています。なおさんは 来る 人の 名前を 調べています。電話は 八時半に 終わりました。\n\n九時半に 仕事を いちど 止めて、みんなで 準備を 確認します。わたしの 紙が できたら、入口に はります。今 手伝いに 来る 人には、まず 友だちと 軽い 机を 運んで もらいます。写真を 撮るのは 発表会が 始まってからです。",
+   "vi": "Bây giờ là chín giờ sáng thứ bảy. Buổi trình bày nhỏ của lớp bắt đầu lúc mười giờ. Tôi đang làm giấy hướng dẫn ở cửa vào. Bạn tôi đang xếp bàn. Vì chưa hoàn thành tất cả nên đến chín giờ rưỡi chúng tôi còn hơi bận.\n\nYui hiện đang luyện hát. Ngày nào bạn ấy cũng hát, nhưng hôm nay không ở phòng thường dùng. Bạn ấy đang luyện tại phòng nhỏ bên cạnh. Nao đang kiểm danh sách tên người đến. Cuộc gọi đã kết thúc lúc tám giờ rưỡi.\n\nChín giờ rưỡi chúng tôi tạm dừng việc để cùng kiểm chuẩn bị. Khi giấy của tôi xong, tôi dán ở cửa vào. Người đến hỗ trợ ngay lúc này trước hết sẽ chuyển bàn nhẹ cùng bạn tôi. Việc chụp ảnh thực hiện sau khi buổi trình bày bắt đầu.",
+   "gloss": [
+    {
+     "w": "今",
+     "kana": "いま",
+     "romaji": "ima",
+     "vi": "bây giờ"
+    },
+    {
+     "w": "撮る",
+     "kana": "とる",
+     "romaji": "toru",
+     "vi": "chụp"
+    },
+    {
+     "w": "電話",
+     "kana": "でんわ",
+     "romaji": "denwa",
+     "vi": "điện thoại/cuộc gọi"
+    },
+    {
+     "w": "練習",
+     "kana": "れんしゅう",
+     "romaji": "renshuu",
+     "vi": "luyện tập"
+    },
+    {
+     "w": "準備",
+     "kana": "じゅんび",
+     "romaji": "junbi",
+     "vi": "chuẩn bị"
+    },
+    {
+     "w": "忙しい",
+     "kana": "いそがしい",
+     "romaji": "isogashii",
+     "vi": "bận"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Lúc được mô tả là mấy giờ?",
+     "o": [
+      "Chín giờ sáng",
+      "Chín giờ rưỡi",
+      "Mười giờ"
+     ],
+     "a": 0,
+     "e": "Câu mở đầu いまは…午前九時です xác định thời điểm của toàn bộ bản cập nhật."
+    },
+    {
+     "q": "Yui hôm nay luyện ở đâu?",
+     "o": [
+      "Phòng thường ngày",
+      "Cửa vào",
+      "Phòng nhỏ bên cạnh"
+     ],
+     "a": 2,
+     "e": "いつもの部屋ではありません phủ định nơi quen thuộc, câu tiếp nêu となりの小さい部屋."
+    },
+    {
+     "q": "Người đến hỗ trợ ngay nên làm gì trước?",
+     "o": [
+      "Tập hát với Yui",
+      "Chuyển bàn nhẹ cùng bạn",
+      "Chụp ảnh ngay"
+     ],
+     "a": 1,
+     "e": "Đoạn cuối giao việc trước hết là 軽い机を運んで, còn chụp ảnh để sau lúc bắt đầu."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thẻ mới: bạn đang tra tên, cần thêm năm phút; sau đó giúp xếp sách. Nói lời cập nhật.",
+     "model": "今、名前を 調べています。あと 五分 かかります。それから、本を 並べます。",
+     "vi": "Bây giờ tôi đang kiểm tên. Còn mất năm phút. Sau đó tôi xếp sách.",
+     "tips": "Phân biệt 調べています đang làm với 並べます sẽ làm sau."
+    },
+    {
+     "p": "Bạn thấy Nao đang chờ và Yui đang luyện hát. Nói hai tình hình cho người mới đến.",
+     "model": "なおさんは 待っています。ゆいさんは 歌の 練習を しています。",
+     "vi": "Nao đang chờ. Yui đang luyện hát.",
+     "tips": "Mỗi hoạt động có tên chủ thể để người nghe không nhầm ai đang rảnh."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết tin nhắn bốn câu theo thẻ mới: bây giờ đang làm hộp; cần thêm năm phút; việc gọi điện đã xong; sau đó sẽ chuyển bàn.",
+   "model": "今、箱を 作っています。あと 五分 かかります。電話は もう 終わりました。それから、机を 運びます。",
+   "modelVi": "Bây giờ tôi đang làm hộp. Còn mất năm phút. Cuộc gọi đã xong rồi. Sau đó tôi sẽ chuyển bàn.",
+   "min": 40,
+   "tips": [
+    "Dùng 作っています cho hiện tại diễn tiến và 終わりました cho việc gọi đã xong.",
+    "Nêu năm phút theo thẻ mới, đừng giữ mười phút của hội thoại."
+   ],
+   "checklist": [
+    "Hành động hiện tại là làm hộp.",
+    "Có 五分.",
+    "Điện thoại đã kết thúc.",
+    "Chuyển bàn là bước tiếp theo."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “今” nghĩa là gì?",
+   "o": [
+    "bây giờ",
+    "chụp",
+    "kết thúc"
+   ],
+   "a": 0,
+   "e": "今、入口に います。 → Bây giờ tôi ở cửa vào. Từ cần nhận diện là “今”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “待つ” nghĩa là gì?",
+   "o": [
+    "điện thoại/cuộc gọi",
+    "bận",
+    "chờ"
+   ],
+   "a": 2,
+   "e": "外で 友だちを 待ちます。 → Tôi chờ bạn ở ngoài. Từ cần nhận diện là “待つ”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “作る” nghĩa là gì?",
+   "o": [
+    "sau đó/lát nữa",
+    "làm/tạo",
+    "luyện tập"
+   ],
+   "a": 1,
+   "e": "紙で 小さい 箱を 作ります。 → Tôi làm hộp nhỏ bằng giấy. Từ cần nhận diện là “作る”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “調べる” nghĩa là gì?",
+   "o": [
+    "tra cứu/kiểm tìm",
+    "chuẩn bị",
+    "ngay"
+   ],
+   "a": 0,
+   "e": "ことばの 意味を 調べます。 → Tôi tra nghĩa từ. Từ cần nhận diện là “調べる”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền thể đang chờ: 待つ → ___います。",
+   "a": "待って",
+   "e": "待つ đổi つ thành って trước います; っ giữ một nhịp."
+  },
+  {
+   "t": "fill",
+   "q": "Điền thể đang đọc: 読む → ___います。",
+   "a": "読んで",
+   "e": "Nhóm đuôi む đổi thành んで trong thể て, nên 読んでいます."
+  },
+  {
+   "t": "fill",
+   "q": "Chọn dạng phù hợp: 今、写真を ___います。",
+   "a": "撮って",
+   "e": "撮る thành 撮って, sau đó thêm います để mô tả chụp đang diễn ra."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu đang tra tên.",
+   "w": [
+    "調べています。",
+    "名前を",
+    "今、"
+   ],
+   "a": "今、名前を調べています。",
+   "e": "今 đặt thời điểm hiện tại; 名前を là đối tượng của hành động tra kiểm."
+  },
+  {
+   "q": "Người nói đang làm gì?",
+   "o": [
+    "Nấu ăn",
+    "Ăn rồi",
+    "Chờ gọi điện"
+   ],
+   "a": 0,
+   "e": "作っています khẳng định đang nấu; 食べるのはあと cho biết chưa ăn ngay.",
+   "t": "listen",
+   "say": "今、料理を 作っています。食べるのは あとです。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "Hoạt động hiện tại là gì?",
+   "o": [
+    "Đọc sách",
+    "Mua sách",
+    "Viết thư"
+   ],
+   "a": 2,
+   "e": "Đọc đã xong bằng 読みました; 今は dẫn sang đang viết thư.",
+   "t": "listen",
+   "say": "本は もう 読みました。今は 手紙を 書いています。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "友だちは 外で 待っています。",
+   "a": "友だちは 外で 待っています。",
+   "lang": "ja-JP",
+   "e": "Ghi 待っています với って; 外で là nơi hoạt động chờ diễn ra."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "撮る",
+     "chụp"
+    ],
+    [
+     "電話",
+     "điện thoại/cuộc gọi"
+    ],
+    [
+     "練習",
+     "luyện tập"
+    ],
+    [
+     "準備",
+     "chuẩn bị"
+    ],
+    [
+     "終わる",
+     "kết thúc"
+    ]
+   ],
+   "e": "待つ/作る/調べる/撮る là các hành động khác nhau; 電話 là hoạt động gọi, nên cần dựa vào vật hoặc người liên quan để nhận đúng nghĩa."
+  },
+  {
+   "q": "Lúc được mô tả là mấy giờ?",
+   "o": [
+    "Chín giờ sáng",
+    "Chín giờ rưỡi",
+    "Mười giờ"
+   ],
+   "a": 0,
+   "e": "Câu mở đầu いまは…午前九時です xác định thời điểm của toàn bộ bản cập nhật.",
+   "t": "mc"
+  },
+  {
+   "q": "Yui hôm nay luyện ở đâu?",
+   "o": [
+    "Phòng nhỏ bên cạnh",
+    "Phòng thường ngày",
+    "Cửa vào"
+   ],
+   "a": 0,
+   "e": "いつもの部屋ではありません phủ định nơi quen thuộc, câu tiếp nêu となりの小さい部屋.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Làm bảng cập nhật lúc chín giờ và thẻ việc hoàn tất lúc tám giờ rưỡi; mỗi học viên nhận một hành động chưa xong và một việc đã xong.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Diễn động tác đọc và viết trước lớp để học viên phân biệt hoạt động đang thấy với lịch thường ngày."
+   },
+   {
+    "t": "30'",
+    "do": "Luyện các cặp 待つ→待って, 読む→読んで, 調べる→調べて bằng cách phân nhóm đuôi từ."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe hội thoại, cập nhật thẻ người đang bận và người có thể nhờ thay vì chỉ chép các động từ."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc bản tin lúc chín giờ, vẽ trục tám giờ rưỡi, chín giờ, chín giờ rưỡi và mười giờ."
+   },
+   {
+    "t": "30'",
+    "do": "Nói theo thẻ tra tên năm phút, rồi viết tin làm hộp; bạn học tìm việc hiện tại và bước tiếp theo."
+   },
+   {
+    "t": "30'",
+    "do": "Đổi hành động trên thẻ, làm bài nghe mới và chính tả; tự sửa mọi dạng thể て đã dùng."
+   }
+  ],
+  "games": [
+   "Giáo viên thay ba thẻ hoạt động; nhóm phải báo lại ai đang làm gì và chọn một người rảnh để nhờ.",
+   "Hai nhóm nhận bảng hiện tại và bảng hôm qua; chỉ bảng hiện tại được dùng khi hỏi 今何をしていますか."
+  ],
+  "errors": [
+   "Nối 読む với ています trực tiếp: dùng thẻ trung gian 読んで trước khi thêm います.",
+   "Dịch 住んでいます là đang cư trú tạm thời trong mọi trường hợp: nhắc đây thường là thông tin nơi sống.",
+   "Nhận việc đã hoàn tất là việc hiện tại: khoanh もう và đuôi ました trong bản tin.",
+   "Dùng dữ kiện mười phút cho thẻ năm phút: kiểm lại thời lượng trước khi thông báo."
+  ],
+  "homework": "Vẽ ba nhân vật giả đang làm ba việc và một việc đã xong; viết năm câu có phân biệt rõ thời điểm, không ghi dữ liệu hoạt động thật của người khác."
+ }
+}

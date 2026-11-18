@@ -1,0 +1,706 @@
+{
+ "no": 9,
+ "title": "Hợp đồng API giả: thêm trường có thật sự tương thích",
+ "sub": "未知項目を 無視するという 前提で 考えていました。",
+ "goals": [
+  "Đọc một hợp đồng phản hồi giả và xác định phần bắt buộc, tùy chọn, trường không biết.",
+  "Hỏi cách phía gọi xử lý dữ liệu thiếu, giá trị mới và thứ tự trước khi kết luận tương thích.",
+  "Thương lượng phiên bản chuyển tiếp và bộ ví dụ kiểm hợp đồng.",
+  "Viết ghi chú thay đổi có ảnh hưởng đã kiểm, phần chưa kiểm và điều kiện đưa vào dùng."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Bài này luyện trao đổi bằng tiếng Nhật quanh API hoàn toàn giả của sổ mượn dụng cụ. Hợp đồng bài tập quy định phản hồi có request_id dạng chuỗi và state nhận hai giá trị pending/ready; phía gọi cũ từ chối mọi trường chưa biết. Nhóm định thêm note tùy chọn và state mới paused. Các hành vi này là dữ kiện của tình huống, không phải quy tắc chung cho mọi API. Cần hỏi đúng phía gọi đã làm gì trước khi dùng “chỉ thêm trường nên an toàn”. Không có máy chủ hoặc tài khoản thật được dùng.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>互換性 đọc ごかんせい, 後方互換 là こうほうごかん; giữ ko-o-ho-o trước go-ka-n. 必須 là ひっす với nhịp giữ, 任意 là にんい có ん trước i, không đọc thành にに. Nullable không dùng làm âm Nhật trong câu máy đọc; bài giải thích bằng 空の値を許す để phân rõ vắng trường với giá trị rỗng trong hợp đồng giả.</p>",
+   "items": [
+    {
+     "sym": "互換性・必須・任意",
+     "ex": [
+      "ごかんせい",
+      "ひっす",
+      "にんい"
+     ],
+     "vi": "Giữ nhịp mũi và nhịp ngắt vì đây là các từ phân điều kiện hợp đồng."
+    },
+    {
+     "sym": "後方互換・移行猶予",
+     "ex": [
+      "こうほうごかん",
+      "いこうゆうよ"
+     ],
+     "vi": "Đọc đầy đủ trường âm trong cụm báo tác động và khoảng thời gian chuyển."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "呼出側",
+     "kana": "よびだしがわ",
+     "romaji": "yobidashigawa",
+     "vi": "phía gọi API",
+     "ex": "呼出側の検証方法を聞きます。",
+     "exVi": "Tôi hỏi cách kiểm của phía gọi."
+    },
+    {
+     "w": "提供側",
+     "kana": "ていきょうがわ",
+     "romaji": "teikyoogawa",
+     "vi": "phía cung cấp API",
+     "ex": "提供側だけで互換性を決めません。",
+     "exVi": "Không để bên cung cấp tự quyết tương thích."
+    },
+    {
+     "w": "契約",
+     "kana": "けいやく",
+     "romaji": "keiyaku",
+     "vi": "hợp đồng quy định dữ liệu/hành vi",
+     "ex": "契約に未知項目の扱いを書きます。",
+     "exVi": "Tôi ghi cách xử lý trường lạ vào hợp đồng."
+    },
+    {
+     "w": "応答項目",
+     "kana": "おうとうこうもく",
+     "romaji": "ootoo koomoku",
+     "vi": "trường trong phản hồi",
+     "ex": "応答項目を一つ追加します。",
+     "exVi": "Chúng tôi thêm một trường phản hồi."
+    },
+    {
+     "w": "必須",
+     "kana": "ひっす",
+     "romaji": "hissu",
+     "vi": "bắt buộc",
+     "ex": "識別子は必須です。",
+     "exVi": "Mã định danh là bắt buộc."
+    },
+    {
+     "w": "任意",
+     "kana": "にんい",
+     "romaji": "nin'i",
+     "vi": "tùy chọn",
+     "ex": "備考は任意の項目です。",
+     "exVi": "Ghi chú là trường tùy chọn."
+    },
+    {
+     "w": "未定義値",
+     "kana": "みていぎち",
+     "romaji": "miteigichi",
+     "vi": "giá trị ngoài tập đã định",
+     "ex": "未定義値で処理が止まります。",
+     "exVi": "Xử lý dừng với giá trị chưa định."
+    },
+    {
+     "w": "欠落",
+     "kana": "けつらく",
+     "romaji": "ketsuraku",
+     "vi": "vắng một trường cần xét",
+     "ex": "項目の欠落を試験します。",
+     "exVi": "Tôi kiểm trường hợp thiếu trường."
+    },
+    {
+     "w": "空値",
+     "kana": "くうち",
+     "romaji": "kuuchi",
+     "vi": "giá trị rỗng theo hợp đồng bài",
+     "ex": "空値と項目なしを分けます。",
+     "exVi": "Tôi tách giá trị rỗng với không có trường."
+    },
+    {
+     "w": "互換性",
+     "kana": "ごかんせい",
+     "romaji": "gokansei",
+     "vi": "khả năng dùng chung mà không phá hành vi yêu cầu",
+     "ex": "互換性は旧呼出側でも確認します。",
+     "exVi": "Tôi kiểm tương thích cả phía gọi cũ."
+    },
+    {
+     "w": "列挙値",
+     "kana": "れっきょち",
+     "romaji": "rekkyochi",
+     "vi": "giá trị trong một tập liệt kê",
+     "ex": "列挙値に一つ加える案です。",
+     "exVi": "Đề xuất thêm một giá trị vào tập."
+    },
+    {
+     "w": "検証規則",
+     "kana": "けんしょうきそく",
+     "romaji": "kenshoo kisoku",
+     "vi": "quy tắc kiểm dữ liệu",
+     "ex": "検証規則は変更していません。",
+     "exVi": "Tôi chưa đổi quy tắc kiểm."
+    },
+    {
+     "w": "既定動作",
+     "kana": "きていどうさ",
+     "romaji": "kitei doosa",
+     "vi": "hành vi mặc định",
+     "ex": "既定動作を例で示します。",
+     "exVi": "Tôi nêu hành vi mặc định bằng ví dụ."
+    },
+    {
+     "w": "破壊的変更",
+     "kana": "はかいてきへんこう",
+     "romaji": "hakaiteki henkoo",
+     "vi": "đổi làm hỏng cách dùng đang có",
+     "ex": "破壊的変更の可能性を調べます。",
+     "exVi": "Tôi kiểm khả năng thay đổi phá cách cũ."
+    },
+    {
+     "w": "移行猶予",
+     "kana": "いこうゆうよ",
+     "romaji": "ikoo yuuyo",
+     "vi": "khoảng thời gian cho chuyển đổi",
+     "ex": "移行猶予を二週間置きます。",
+     "exVi": "Chúng tôi để hai tuần chuyển."
+    },
+    {
+     "w": "併存",
+     "kana": "へいぞん",
+     "romaji": "heizon",
+     "vi": "cùng tồn tại tạm thời",
+     "ex": "旧形式との併存を相談します。",
+     "exVi": "Tôi bàn giữ song song dạng cũ."
+    },
+    {
+     "w": "契約試験",
+     "kana": "けいやくしけん",
+     "romaji": "keiyaku shiken",
+     "vi": "kiểm theo ví dụ/yêu cầu hợp đồng",
+     "ex": "契約試験に旧例も残します。",
+     "exVi": "Tôi giữ cả ví dụ cũ trong kiểm hợp đồng."
+    },
+    {
+     "w": "利用実態",
+     "kana": "りようじったい",
+     "romaji": "riyoo jittai",
+     "vi": "cách đang được dùng thực tế trong tình huống",
+     "ex": "利用実態を呼出側に確認します。",
+     "exVi": "Tôi hỏi phía gọi cách đang dùng."
+    },
+    {
+     "w": "差分",
+     "kana": "さぶん",
+     "romaji": "sabun",
+     "vi": "phần khác giữa hai phiên bản",
+     "ex": "差分に値の追加も含めます。",
+     "exVi": "Tôi tính cả giá trị thêm trong phần khác."
+    },
+    {
+     "w": "合意事項",
+     "kana": "ごういじこう",
+     "romaji": "gooi jikoo",
+     "vi": "mục đã cùng thống nhất",
+     "ex": "合意事項と未確認を分けます。",
+     "exVi": "Tôi tách điều đã thống nhất với chưa kiểm."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Luyện ～という前提で để nêu giả định chưa thay thế việc xác nhận: 未知項目を無視するという前提で考えていました. ～だけでは判断できない giới hạn căn cứ một chiều. ～場合の扱いを確認したい hỏi xử lý điều kiện cụ thể thay vì hỏi chung “có vấn đề không”. ～までは切り替えない đặt chặn trước chuyển. Trong hợp đồng giả, vắng note và note có giá trị rỗng là hai đầu vào phải định nghĩa riêng; không suy từ từ 任意 rằng mọi giá trị trong trường đều hợp lệ.</p>",
+   "table": [
+    [
+     "Mục trao đổi",
+     "Mẫu Nhật"
+    ],
+    [
+     "Nêu giả định",
+     "未知項目を無視するという前提でした"
+    ],
+    [
+     "Hỏi điều kiện",
+     "新しい値を受け取った場合はどう扱いますか"
+    ],
+    [
+     "Giới hạn kết luận",
+     "提供側の試験だけでは判断できません"
+    ],
+    [
+     "Chặn chuyển",
+     "旧呼出側を確認するまでは切り替えません"
+    ],
+    [
+     "Chốt phạm vi",
+     "今回は状態値を増やさないことで合意しました"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "未知項目を 無視するという 前提で 考えていました。",
+     "vi": "Tôi đã nghĩ theo giả định sẽ bỏ qua trường chưa biết."
+    },
+    {
+     "t": "項目を 追加しただけでは、互換性を 判断できません。",
+     "vi": "Chỉ thêm trường chưa đủ đánh giá tương thích."
+    },
+    {
+     "t": "新しい 状態を 受け取った場合の 扱いを 確認したいです。",
+     "vi": "Tôi muốn kiểm cách xử lý khi nhận trạng thái mới."
+    },
+    {
+     "t": "旧呼出側の 試験が 終わるまでは、切り替えません。",
+     "vi": "Chưa kiểm phía gọi cũ xong thì chưa chuyển."
+    },
+    {
+     "t": "今回は 形式の 併存期間を 設ける案です。",
+     "vi": "Lần này đề xuất có giai đoạn hai dạng cùng tồn tại."
+    }
+   ],
+   "tips": [
+    "<p>Đừng dịch tùy chọn thành cho phép mọi giá trị; cần hỏi vắng trường và giá trị hợp lệ riêng.</p>",
+    "<p>Hỏi “bên bạn dùng được chứ” quá rộng; nêu chính xác trường/giá trị/điều kiện cần kiểm.</p>",
+    "<p>“Đã thống nhất ví dụ” khác “đã chạy kiểm xong”; giữ hai trạng thái trong ghi chú.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Hai bên tìm giả định sai về trường lạ, tách trạng thái mới và giữ kiểm phía cũ trước quyết chuyển.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "架空の貸出票の応答に、任意の備考を加えたいです。既存項目は変えないので、互換性に問題はないと考えています。",
+     "vi": "Tôi muốn thêm ghi chú tùy chọn vào phản hồi phiếu mượn giả. Không đổi trường cũ nên nghĩ không có vấn đề tương thích."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "旧呼出側の検証規則を確認しましたか。この練習の旧仕様では、知らない項目が一つでもあると拒否する、とあります。",
+     "vi": "Đã kiểm quy tắc phía gọi cũ chưa? Đặc tả cũ bài này ghi có một trường lạ cũng từ chối."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "未知項目を無視するという前提でした。その前提が合わないなら、備考がない旧形式も返せるようにする必要がありますね。",
+     "vi": "Tôi giả định bỏ qua trường lạ. Nếu không khớp thì cần trả được dạng cũ không ghi chú."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。さらに状態へ一時停止を追加する案もあります。旧側は二種類だけを列挙しているので、新しい値をどう扱うかも別に確認したいです。",
+     "vi": "Vâng. Còn đề xuất thêm trạng thái tạm dừng. Cũ chỉ liệt kê hai loại nên phải hỏi riêng cách xử lý giá trị mới."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "項目の追加と列挙値の追加は、同じ差分の説明にまとめず、影響を分けます。欠落と空値の例も必要でしょうか。",
+     "vi": "Tôi tách tác động thêm trường với thêm giá trị thay vì gộp cùng mô tả. Cần ví dụ thiếu trường và giá trị rỗng không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "必要です。任意というのは項目がなくてもよいという今回の規定で、存在するときに空値を許すとはまだ決めていません。",
+     "vi": "Cần. Tùy chọn theo bài là có thể vắng trường, chưa quyết khi có trường thì cho rỗng."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "旧呼出側の担当が休みなので、提供側だけの試験で今日切り替える案は保留にします。いつまでに確認できるかを聞きます。",
+     "vi": "Người phụ trách phía cũ nghỉ nên tôi để chờ đề xuất chuyển hôm nay chỉ theo kiểm cung cấp. Tôi sẽ hỏi hạn kiểm được."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "ありがとうございます。双方が同じ例を見て合意しても、実行結果までは確認済みになりません。例の承認と試験の完了を別に残しましょう。",
+     "vi": "Cảm ơn. Hai bên đồng ý cùng ví dụ chưa là đã kiểm kết quả chạy. Ta giữ duyệt ví dụ với kiểm xong riêng."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "移行猶予は二週間の案にし、旧形式を使う条件も明記します。新しい状態値は今回入れず、次の変更として相談してよいですか。",
+     "vi": "Tôi đề xuất hai tuần chuyển, ghi điều kiện dùng dạng cũ. Lần này chưa thêm trạng thái mới, bàn như thay đổi sau được không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "その範囲で検討できます。切替判断の担当と、旧形式を終了する条件も先に決め、期限が来たら無条件に消す書き方は避けましょう。",
+     "vi": "Có thể xét phạm vi ấy. Chốt người quyết chuyển và điều kiện dừng dạng cũ trước, tránh viết hết hạn là tự bỏ vô điều kiện."
+    }
+   ],
+   "qs": [
+    {
+     "q": "最初の互換性判断の前提は何でしたか。",
+     "o": [
+      "未知項目を無視すると考えた",
+      "旧側が全値を拒否すると確認した",
+      "旧側の試験が完了した"
+     ],
+     "a": 0,
+     "e": "Giả định bỏ qua trường lạ trái dữ kiện cũ từ chối, cần kiểm bên gọi."
+    },
+    {
+     "q": "任意項目について未決定なのは何ですか。",
+     "o": [
+      "項目がなくてもよいこと",
+      "旧形式が備考を持たないこと",
+      "存在するときの空値を許すか"
+     ],
+     "a": 2,
+     "e": "Tùy chọn về sự hiện diện không tự định giá trị rỗng khi có."
+    },
+    {
+     "q": "今回の状態値追加はどうする案ですか。",
+     "o": [
+      "旧列挙を全て削除する",
+      "入れず次の変更として相談する",
+      "全値を即時追加する"
+     ],
+     "a": 1,
+     "e": "Phạm vi cuối tách thêm trạng thái để giảm thay đổi đang xét."
+    },
+    {
+     "q": "例を双方で承認したら何がまだ必要ですか。",
+     "o": [
+      "試験実行結果の確認",
+      "全て完了扱いにする",
+      "旧呼出側の記録を捨てる"
+     ],
+     "a": 0,
+     "e": "Đồng ý ví dụ khác chạy kiểm xong, cần hai trạng thái rõ."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "架空の道具貸出サービスでは、呼出側が貸出票の状態を表示する。今回の契約は、識別子を文字列、状態を受付中または準備済みの二種類と定めている。旧呼出側は、この二種類以外の状態と、知らない応答項目を拒否する。この動作は教材内の個別仕様であり、全ての外部連携に共通する規則ではない。提供側が応答へ任意の備考を加える案を出したため、双方は契約と利用実態を照合することになった。\n\n最初の提案には、既存項目を変えないから互換性は保たれると書かれていた。しかし、旧側の規則を見れば、新しい備考が存在するだけで拒否される可能性がある。追加することが削除より常に安全だという結論は、相手が未知項目をどう扱うかを確認しない限り成立しない。提供側だけで正常に表示できたという試験結果も、旧呼出側で使えることまでは証明しない。\n\n同じ会議では、状態に一時停止を加える案も出た。これは項目の有無とは別の差分である。旧側は二つの値を前提に画面を作っているため、新値を受け取った場合の表示と後続操作を聞く必要がある。備考は任意だから、新状態も使わなくてよいという説明では、二つの条件を混同してしまう。語彙が似ていても、項目の必須性と値の許容範囲を分けて記述する。\n\n例の作成では、識別子と二つの状態を持つ旧応答、備考を欠く応答、備考が通常の文である応答を用意した。空値を含む例も提案されたが、契約ではその扱いが未定だったため、期待結果を先に合意する項目とした。項目がないこと、空の文字列があること、別の型の空値があることは、この教材では別の入力として扱う。都合のよい一例だけを通して契約試験が十分だとはしない。\n\n双方が例を承認した後も、実行結果と利用側の確認は別に残す。担当が休みなら、承認が来たはずだとして欄を埋めない。どの版の規則で、どの応答を使い、何が表示されたかを記録し、未確認は明示する。実際の識別子や接続先を教材へ持ち込まず、例は全て架空の値で行う。問題を再現するために必要な条件と、実データそのものは同じではない。\n\n暫定案は、備考のない旧形式を併存させ、新状態の追加は次の変更として分けるというものになった。二週間の移行猶予を設けるが、日付だけで旧形式を終了するとはしない。旧側の更新と試験が確認できたか、残る利用があるかを切替担当が判断する。差分を小さくし、契約、例、実行、切替の合意をそれぞれ見えるようにすることが、後から責任と条件を追える連携につながる。",
+   "vi": "Dịch vụ mượn đồ giả hiển thị trạng thái phiếu. Hợp đồng đặt mã chuỗi, trạng thái hai loại. Phía gọi cũ từ chối trạng thái khác và trường lạ. Đây là đặc tả riêng bài, không quy tắc mọi liên kết. Cung cấp định thêm ghi chú tùy chọn nên hai bên đối chiếu hợp đồng/cách dùng.\n\nĐề xuất đầu nói không đổi trường cũ nên tương thích. Nhưng theo cũ, chỉ có ghi chú mới là có thể bị từ chối. Không thể nói thêm luôn an toàn hơn xóa nếu chưa biết xử lý trường lạ. Phía cung cấp hiển thị đúng chưa chứng minh bên cũ dùng được.\n\nCũng có đề xuất thêm tạm dừng. Đây khác thêm trường. Cũ dựa hai giá trị để dựng màn nên cần hỏi hiển thị và thao tác tiếp khi gặp mới. Ghi chú tùy chọn không có nghĩa trạng thái mới không cần xét; phải tách bắt buộc hiện diện với tập giá trị.\n\nBộ ví dụ có phản hồi cũ, vắng ghi chú, ghi chú câu thường. Giá trị rỗng chưa có quy định nên phải đồng ý kỳ vọng trước. Trong bài, không có trường, chuỗi rỗng, giá trị rỗng kiểu khác là đầu vào riêng. Một ví dụ thuận qua chưa đủ nói kiểm hợp đồng đủ.\n\nDuyệt ví dụ xong vẫn ghi chạy/kết quả và bên dùng xác nhận riêng. Người nghỉ không coi chắc đã duyệt. Ghi phiên quy tắc, phản hồi và hiển thị, rõ chưa kiểm. Ví dụ hoàn toàn giả, không mang mã/kết nối thật. Điều kiện tái hiện không đồng nghĩa dữ liệu thật.\n\nTạm giữ dạng cũ không ghi chú, tách trạng thái mới sang đợt sau. Hai tuần chuyển không nghĩa hết ngày tự dừng cũ. Người quyết xét phía cũ đã cập nhật/kiểm, còn dùng không. Thay nhỏ và hiện riêng hợp đồng, ví dụ, chạy, chuyển giúp theo trách nhiệm/điều kiện.",
+   "gloss": [
+    {
+     "w": "呼出側",
+     "kana": "よびだしがわ",
+     "romaji": "yobidashigawa",
+     "vi": "phía gọi API"
+    },
+    {
+     "w": "提供側",
+     "kana": "ていきょうがわ",
+     "romaji": "teikyoogawa",
+     "vi": "phía cung cấp API"
+    },
+    {
+     "w": "契約",
+     "kana": "けいやく",
+     "romaji": "keiyaku",
+     "vi": "hợp đồng quy định dữ liệu/hành vi"
+    },
+    {
+     "w": "応答項目",
+     "kana": "おうとうこうもく",
+     "romaji": "ootoo koomoku",
+     "vi": "trường trong phản hồi"
+    },
+    {
+     "w": "必須",
+     "kana": "ひっす",
+     "romaji": "hissu",
+     "vi": "bắt buộc"
+    },
+    {
+     "w": "任意",
+     "kana": "にんい",
+     "romaji": "nin'i",
+     "vi": "tùy chọn"
+    }
+   ],
+   "qs": [
+    {
+     "q": "旧呼出側の規則が示すものは何ですか。",
+     "o": [
+      "未知項目の追加でも拒否され得る",
+      "全APIが未知項目を拒否する",
+      "提供側だけで互換性が決まる"
+     ],
+     "a": 0,
+     "e": "Dữ kiện riêng bên cũ xác định ảnh hưởng, không được áp thành quy tắc mọi API."
+    },
+    {
+     "q": "項目と値について分けるものは何ですか。",
+     "o": [
+      "色と説明の長さだけ",
+      "旧側の名前と会社名",
+      "存在の必須性と許容する値の範囲"
+     ],
+     "a": 2,
+     "e": "Tùy chọn trường khác tập giá trị, cần hợp đồng riêng."
+    },
+    {
+     "q": "空値の例はどう扱いましたか。",
+     "o": [
+      "全例から永久排除",
+      "期待結果を先に合意する未定項目",
+      "何でも自動許可"
+     ],
+     "a": 1,
+     "e": "Chưa rõ hợp đồng thì chưa gán qua/trượt theo đoán."
+    },
+    {
+     "q": "二週間後の旧形式終了はどう決めますか。",
+     "o": [
+      "旧側の更新と試験や残る利用を確認する",
+      "日付だけで無条件に削除する",
+      "提供側が気分で即時消す"
+     ],
+     "a": 0,
+     "e": "Khoảng chuyển cần điều kiện kết thúc thực, không chỉ lịch."
+    },
+    {
+     "q": "試験記録に必要なものは何ですか。",
+     "o": [
+      "実利用者の秘密情報",
+      "担当が休んだ理由だけ",
+      "規則の版、応答例、実際の表示"
+     ],
+     "a": 2,
+     "e": "Điều kiện kiểm được cần phiên/quy tắc/đầu vào/kết quả, không dữ liệu bí mật thật."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thẻ mới: bên gọi bỏ trường lạ nhưng từ chối giá trị state mới. Giải thích thêm note có thể xét riêng, paused phải kiểm riêng; chưa tuyên bố tương thích toàn bộ.",
+     "model": "今回の呼出側は未知項目を無視しますが、新しい状態値は拒否します。備考の追加と状態値の追加は分けて考えたいです。備考の例は確認できますが、それだけで変更全体が互換だとは言えません。新値を受け取った場合の期待動作を合意し、実行結果を見てから切替を判断しましょう。",
+     "vi": "Bên gọi lần này bỏ trường lạ nhưng từ chối trạng thái mới. Cần tách thêm ghi chú với thêm giá trị. Có thể kiểm ví dụ ghi chú nhưng chưa nói cả thay đổi tương thích. Hãy đồng ý hành vi khi gặp giá trị mới, xem kết quả rồi quyết chuyển.",
+     "tips": "Dùng dữ kiện mới bỏ trường lạ, không giữ quy tắc cũ của bài đọc."
+    },
+    {
+     "p": "Bạn bàn giao: ví dụ đã duyệt, kiểm phía cũ chưa chạy, người phụ trách trở lại ngày mai. Nêu chặn chuyển và mốc cập nhật.",
+     "model": "応答例は双方で承認しましたが、旧呼出側での試験はまだ実行していません。担当が明日戻る予定なので、実行時刻を確認します。結果がそろうまでは切り替えず、明日の午後三時に確認済みと未確認を分けて更新します。",
+     "vi": "Hai bên duyệt ví dụ rồi nhưng chưa chạy kiểm bên cũ. Người phụ trách dự kiến mai trở lại nên sẽ xác nhận giờ chạy. Chưa đủ kết quả thì chưa chuyển; ba giờ chiều mai cập nhật riêng phần đã/chưa kiểm.",
+     "tips": "Duyệt ví dụ không đổi thành kiểm xong, giờ cập nhật là lời hứa của bạn theo nhiệm vụ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết ghi chú 220–300 chữ Nhật: giả định bên gọi bỏ trường lạ chưa đúng; tách thêm trường/giá trị; vắng và rỗng chưa định; ví dụ duyệt khác chạy; giữ dạng cũ hai tuần có điều kiện kết thúc, chưa chuyển khi kiểm cũ chưa xong.",
+   "model": "未知項目を無視するという前提でしたが、旧呼出側は追加項目を拒否する規則でした。備考の追加と状態値の追加を分け、今回は新しい状態を入れない案にします。任意項目の欠落と空値は別の例とし、空値の期待結果を先に合意します。例の承認と試験の完了は別に記録し、旧呼出側の結果がそろうまでは切り替えません。旧形式との併存は二週間の案ですが、日付だけで終了せず、更新、試験、残る利用を切替担当が確認する条件を明記します。未確認の項目と次の更新時刻も共有します。",
+   "modelVi": "Tôi giả định bỏ trường lạ nhưng cũ từ chối trường thêm. Tách thêm ghi chú với trạng thái, lần này không thêm mới. Vắng/rỗng là ví dụ riêng, đồng ý kỳ vọng rỗng trước. Ghi duyệt ví dụ và kiểm xong riêng, chưa đủ cũ thì chưa chuyển. Hai tuần song song là đề xuất, không tự hết; người quyết kiểm cập nhật, kiểm chạy, sử dụng còn. Chia sẻ chưa kiểm và mốc báo tiếp.",
+   "min": 220,
+   "tips": [
+    "Giữ hành vi riêng của hợp đồng giả, không diễn đạt như quy tắc phổ quát mọi API.",
+    "Nêu ai xét kết thúc dạng cũ và điều kiện nào, không chỉ ghi hai tuần."
+   ],
+   "checklist": [
+    "Giả định được sửa đúng.",
+    "Trường/giá trị và vắng/rỗng tách.",
+    "Ví dụ duyệt khác chạy.",
+    "Điều kiện chuyển/kết thúc và phần chưa kiểm rõ."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “呼出側” nghĩa là gì?",
+   "o": [
+    "phía gọi API",
+    "bắt buộc",
+    "giá trị rỗng theo hợp đồng bài"
+   ],
+   "a": 0,
+   "e": "呼出側の検証方法を聞きます。 → Tôi hỏi cách kiểm của phía gọi. Từ cần nhận diện là “呼出側”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “提供側” nghĩa là gì?",
+   "o": [
+    "tùy chọn",
+    "khả năng dùng chung mà không phá hành vi yêu cầu",
+    "phía cung cấp API"
+   ],
+   "a": 2,
+   "e": "提供側だけで互換性を決めません。 → Không để bên cung cấp tự quyết tương thích. Từ cần nhận diện là “提供側”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “契約” nghĩa là gì?",
+   "o": [
+    "giá trị trong một tập liệt kê",
+    "hợp đồng quy định dữ liệu/hành vi",
+    "giá trị ngoài tập đã định"
+   ],
+   "a": 1,
+   "e": "契約に未知項目の扱いを書きます。 → Tôi ghi cách xử lý trường lạ vào hợp đồng. Từ cần nhận diện là “契約”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “応答項目” nghĩa là gì?",
+   "o": [
+    "trường trong phản hồi",
+    "vắng một trường cần xét",
+    "quy tắc kiểm dữ liệu"
+   ],
+   "a": 0,
+   "e": "応答項目を一つ追加します。 → Chúng tôi thêm một trường phản hồi. Từ cần nhận diện là “応答項目”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền giới hạn: 追加した___では互換性を判断できません。",
+   "a": "だけ",
+   "e": "だけでは nêu căn cứ thêm trường một mình chưa đủ, cần hành vi bên gọi."
+  },
+  {
+   "t": "fill",
+   "q": "Điền điều kiện: 新値を受け取った___の扱いを確認します。",
+   "a": "場合",
+   "e": "場合 nêu chính xác tình huống cần hỏi, tránh câu hỏi quá rộng."
+  },
+  {
+   "t": "fill",
+   "q": "Điền chặn chuyển: 試験が終わる___切り替えません。",
+   "a": "までは",
+   "e": "までは giữ trạng thái chưa chuyển đến khi điều kiện kiểm xong."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu tách duyệt với chạy.",
+   "w": [
+    "別に記録します。",
+    "例の承認と",
+    "試験の完了を"
+   ],
+   "a": "例の承認と試験の完了を別に記録します。",
+   "e": "Hai bước khác cần kết quả khác, không đánh đồng duyệt đầu vào với chạy xong."
+  },
+  {
+   "q": "何を分けて確認しますか。",
+   "o": [
+    "項目追加と値追加",
+    "全て同じ追加として即時承認",
+    "実データの秘密"
+   ],
+   "a": 0,
+   "e": "Bài nghe mới tách xử lý trường và giá trị, cần kiểm theo mỗi quy tắc.",
+   "t": "listen",
+   "say": "未知項目は無視しますが、未定義の状態値は拒否します。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "今の状態はどれですか。",
+   "o": [
+    "全て完了",
+    "全例が拒否された",
+    "例は合意したが試験結果は未確認"
+   ],
+   "a": 2,
+   "e": "Đã duyệt không đủ chứng minh chạy phía cũ khi việc ấy mới ngày mai.",
+   "t": "listen",
+   "say": "例は承認済みですが、旧側の実行は明日です。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "任意項目の 欠落と 空値を 分けます。",
+   "a": "任意項目の 欠落と 空値を 分けます。",
+   "lang": "ja-JP",
+   "e": "任意 đọc にんい; vắng trường khác giá trị rỗng, mỗi ví dụ cần kỳ vọng hợp đồng."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "必須",
+     "bắt buộc"
+    ],
+    [
+     "任意",
+     "tùy chọn"
+    ],
+    [
+     "未定義値",
+     "giá trị ngoài tập đã định"
+    ],
+    [
+     "欠落",
+     "vắng một trường cần xét"
+    ],
+    [
+     "空値",
+     "giá trị rỗng theo hợp đồng bài"
+    ]
+   ],
+   "e": "呼出側 là bên dùng kết quả, 提供側 là bên trả, 契約 là quy tắc, 応答項目 là trường, 必須 là mức hiện diện; không suy tương thích từ phía cung cấp một mình."
+  },
+  {
+   "q": "旧呼出側の規則が示すものは何ですか。",
+   "o": [
+    "未知項目の追加でも拒否され得る",
+    "全APIが未知項目を拒否する",
+    "提供側だけで互換性が決まる"
+   ],
+   "a": 0,
+   "e": "Dữ kiện riêng bên cũ xác định ảnh hưởng, không được áp thành quy tắc mọi API.",
+   "t": "mc"
+  },
+  {
+   "q": "項目と値について分けるものは何ですか。",
+   "o": [
+    "存在の必須性と許容する値の範囲",
+    "色と説明の長さだけ",
+    "旧側の名前と会社名"
+   ],
+   "a": 0,
+   "e": "Tùy chọn trường khác tập giá trị, cần hợp đồng riêng.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Tạo hai hợp đồng API giả có xử lý trường lạ khác nhau, ví dụ không có thông tin thật; dùng tên field trong bài, không gọi dịch vụ ngoài.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Đọc hợp đồng giả, gạch hành vi đã được quy định và điều người đề xuất mới đang giả định."
+   },
+   {
+    "t": "30'",
+    "do": "Luyện từ và mẫu hỏi trường hợp cụ thể, phân trường tùy chọn với tập giá trị và vắng với rỗng."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe rà thay đổi, lập bảng thêm trường/thêm giá trị, kỳ vọng, phía cần xác nhận và trạng thái chạy."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc biên bản sáu đoạn, tìm vì sao một ví dụ cung cấp qua chưa đủ, xác định điều kiện dừng dạng cũ."
+   },
+   {
+    "t": "30'",
+    "do": "Nói theo thẻ phía gọi mới rồi viết 220–300 chữ; đổi bài kiểm cam kết chuyển chưa vượt trạng thái đã kiểm."
+   },
+   {
+    "t": "30'",
+    "do": "Đóng vai họp hợp đồng và bàn giao người nghỉ, làm nghe-chính tả, chốt mốc cập nhật có điều đã/chưa kiểm."
+   }
+  ],
+  "games": [
+   "Mỗi nhóm giữ hợp đồng một phía, chỉ hỏi bằng điều kiện cụ thể mới dựng đủ bộ ví dụ và kỳ vọng.",
+   "Thẻ thay một quy tắc bên gọi, nhóm phải sửa kết luận tương thích thay vì giữ khẩu hiệu chỉ thêm là an toàn."
+  ],
+  "errors": [
+   "Nói chỉ thêm trường nên luôn an toàn: hỏi cách bên gọi xử lý trường lạ theo hợp đồng riêng.",
+   "Đồng nhất 任意 với cho rỗng: kiểm hiện diện và tập giá trị riêng.",
+   "Ghi ví dụ duyệt là chạy xong: giữ hai trạng thái.",
+   "Hết hai tuần tự xóa cũ: nêu điều kiện cập nhật/kiểm và người quyết."
+  ],
+  "homework": "Soạn hai hợp đồng phản hồi hoàn toàn giả khác cách xử lý trường lạ; viết sáu ví dụ với kỳ vọng, lời hỏi phía gọi và bản ghi quyết chuyển có điều kiện."
+ }
+}

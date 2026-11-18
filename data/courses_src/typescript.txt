@@ -1,0 +1,763 @@
+=== COURSE typescript
+name: TypeScript thực chiến
+icon: 🔷
+floor: 7
+room: 706
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Kiểu tĩnh, narrowing, generic, union, unknown/parser, module/strict, async Result, utility types và SDK lab có kiểm kiểu/runtime riêng.
+
+## LESSON typescript-01 | Kiểu tĩnh và ranh giới runtime
+
+### Kiểu tĩnh giữ quan hệ trước khi chạy
+SDK giả định Mầm Lụa đọc thông tin lớp. TypeScript giúp phát hiện dùng sai kiểu trong chương trình, nhưng kiểu thường không tồn tại để tự kiểm JSON từ network; phân biệt compile và runtime ngay từ đầu.
+
+### Cài trong thư mục lab riêng
+Chọn TypeScript phiên bản đã kiểm, giữ lockfile và ghi Node/runtime. Lệnh chỉ là hướng dẫn cho dự án thực hành, không cài hoặc sửa app chính trong nhiệm vụ soạn nội dung.
+~~~bash
+npm init -y
+npm install --save-dev typescript
+npx tsc --version
+# Ghi phiên bản,giữ lockfile và tạo tsconfig theo bài8.
+~~~
+
+### Interface không ép dữ liệu ngoài thành đúng
+Annotation kiểm cách tạo/dùng trong code, còn as là assertion. Ví dụ hợp lệ dưới không chứng minh một response bất kỳ có qty number; tránh dùng assertion để làm xanh boundary.
+~~~ts
+type ClassInfo={id:string;remaining:number};
+const local:ClassInfo={id:'CL-L7-A',remaining:1};
+console.log(local.remaining+1);
+// JSON từ network nên đi qua unknown + validator,không cast mù.
+~~~
+
+### Tách công việc compile và chạy
+Tsc sinh JavaScript theo config hoặc chỉ kiểm với noEmit. Chọn môi trường module của lab rồi chạy output đúng đường dẫn; không nhận type-check xanh là endpoint hoặc quyền đã được kiểm.
+~~~bash
+npx tsc --noEmit
+# Khi config cho phép emit và đã chốt module/runtime:
+npx tsc
+node dist/main.js
+# Không giả định compiler tự dựng server hoặc cấp fixture.
+~~~
+
+### Lỗi hay gặp là tin quá mức vào dấu as
+Một payload remaining:"1" có thể đi qua cast rồi cộng thành chuỗi. Viết case âm để chứng minh validator runtime chặn, không thêm any hoặc ! chỉ để che triệu chứng thiếu mô hình.
+
+PRACTICE: Tạo lab TypeScript,ghi version/config và ví dụ typed local/unknown response. Nộp một lỗi compiler bắt được và một lỗi runtime type không tự chặn,không giả mạo kết quả chạy.
+Q: TypeScript kiểm kiểu chủ yếu ở đâu?
++ Khi phân tích/biên dịch, không tự validate mọi input runtime
+- Mọi request tự được validate
+- Thay server authorization
+Q: as ClassInfo có làm JSON thật sự đúng shape không?
++ Không
+- Có nếu compile xanh
+- Có nếu interface có readonly
+
+## LESSON typescript-02 | Primitive, union và narrowing
+
+### Union là nhiều khả năng thật
+Mã lớp có thể là string hoặc number trong hợp đồng lab cũ. Dùng narrowing để xử lý từng miền, không gọi trim trên union hoặc ép any; nếu hợp đồng mới chỉ string, sửa ở boundary có review.
+
+### typeof thu hẹp nhánh
+Hàm dưới trả id hiển thị theo miền đã khai báo. Nó không tự validate object/null ngoài chữ ký, dữ liệu ngoài vẫn cần vào unknown; thêm test chuỗi rỗng và số không hữu hạn theo rule riêng.
+~~~ts
+export function displayId(id:string|number):string{
+ if(typeof id==='string')return id.trim();
+ return String(id);
+}
+~~~
+
+### Null và undefined cần nghĩa riêng
+Mẫu return fallback phân biệt thiếu record với tên rỗng theo quyết định lab. Dùng ?? khác || khi 0 hoặc chuỗi rỗng là hợp lệ; đừng đổi mọi giá trị falsy thành thiếu.
+~~~ts
+type Student={name:string|null};
+export function studentName(s:Student|undefined){
+ if(s===undefined)return 'Chưa có hồ sơ lab';
+ return s.name??'Chưa đặt tên';
+}
+~~~
+
+### Literal union giới hạn trạng thái tĩnh
+Status chỉ nhận ba literal giúp code chọn nhánh dễ hơn. Server vẫn có thể trả khác phiên bản, nên parser phải quyết định reject/fallback rõ, không cast status bất kỳ thành hợp lệ.
+~~~ts
+type ClassStatus='open'|'closed'|'cancelled';
+export function canEnroll(status:ClassStatus){return status==='open';}
+const status:ClassStatus='open';
+console.log(canEnroll(status));
+~~~
+
+### Truthiness không phải mọi phép kiểm miền
+If(value) loại 0 và rỗng dù có thể là giá trị hợp lệ. Viết điều kiện theo type/miền,đọc control-flow vàca biên;không dùng ! khi chưa chứng minh có giá trị.
+
+PRACTICE: Viết ba hàm narrow union/null/literal với mười input có expected. Tách ca kiểu sai runtime khỏi ca compiler,và ghi policy cho rỗng/0/null/undefined.
+Q: Union string|number nên xử lý thế nào trước thao tác riêng?
++ Narrow bằng kiểm phù hợp
+- Ép any mọi nơi
+- Gọi mọi method của cả hai
+Q: null khác undefined trong hợp đồng ở đâu?
++ Giá trị tường minh khác thiếu/không được gán theo ngữ cảnh
+- Hai loại luôn bằng nhau
+- Luôn chuyển cả hai thành0
+
+## LESSON typescript-03 | Object, readonly và kiểu tùy chọn
+
+### Object type mô tả cấu trúc
+ClassInfo có id,capacity,remaining và note tùy chọn. Structural typing thuận tiện nhưng không tự ngăn field thừa qua mọi alias,không làm JSON exact hoặc kiểm quyền field;boundary cần policy rõ.
+
+### Optional và readonly ở đúng lớp
+Readonly hạn chế ghi qua type đó,chưa deep freeze runtime. Note optional có nghĩa vắng khi không có ghi chú;nullable phải khai báo riêng,cấu hình exactOptionalPropertyTypes giúp kiểm chặt hơn.
+~~~ts
+type ClassInfo={
+ readonly id:string;capacity:number;remaining:number;note?:string
+};
+const c:ClassInfo={id:'CL-L7-A',capacity:2,remaining:1};
+const updated:ClassInfo={...c,remaining:0};
+console.log(c.remaining,updated.remaining);
+~~~
+
+### Mảng readonly khác copy sâu
+ReadonlyArray giúp API không sửa phần tử mảng qua tham chiếu typed,nhưng object bên trong còn mutable nếu type cho phép. Tạo object mới ở nhánh đổi khi cần bất biến,chốt contract trước.
+~~~ts
+type Row={id:string;qty:number};
+export function increment(rows:ReadonlyArray<Row>,id:string):Row[]{
+ return rows.map(x=>x.id===id?{...x,qty:x.qty+1}:x);
+}
+~~~
+
+### Field thừa và presence cần test riêng
+Exactshape không được bảo đảm chỉ vì có interface. Runtime parser có thể reject unknownfield hoặc allowlist theo hợp đồng,nhất làrole/owner,không dùng Pick như serialization security.
+~~~text
+{"id":"CL-L7-A","remaining":1}
+{"id":"CL-L7-A","remaining":1,"ownerRole":"admin"}
+Hai payload cần quyết định field policy rõ ở parser/server.
+Kiểu readonly không xóa ownerRole lúc runtime.
+~~~
+
+### Bẫy freeze và alias
+Một object được nhìn qua readonlytype vẫn có thể bị sửa qua alias khác hoặc code JavaScript. Không phát biểu readonly bảo đảm an toàn mọi state;test nguồn input không đổi và chọn copy/freeze theo nhu cầu.
+
+PRACTICE: Định nghĩa ClassInfo và update bất biến,kiểm optional/null/undefined với config được chốt. Nộp test đầu vào không đổi và một minh họa giới hạn readonly alias.
+Q: readonly có tự freeze sâu object lúc runtime không?
++ Không
+- Có luôn
+- Có nếu dùng interface
+Q: Trường note?:string nghĩa là gì theo cấu hình phù hợp?
++ Có thể vắng, giá trị khi có theo kiểu đã khai báo
+- Bắt buộc luôn có null
+- Luôn là number
+
+## LESSON typescript-04 | Hàm, overload và callback
+
+### Chữ ký hàm là hợp đồng một phần
+Input/output giúp compiler phát hiện dùng sai,nhưng không nói mọi exception,thời gian hoặc side effect. Đặt tên/tham số rõ và tài liệu phần runtime cần thiết,không hứa overloaded return sai.
+
+### Callback giữ quan hệ input/output
+Mẫu mapLines là generic sẽ học sâu bài 5;ở đây đọc callback biến Row thành string. Không đưa token hoặc mutate source trongcallback theo hợp đồng của hàm lab.
+~~~ts
+type Row={id:string;qty:number};
+export function labels(rows:ReadonlyArray<Row>,format:(r:Row)=>string):string[]{
+ return rows.map(format);
+}
+console.log(labels([{id:'R7',qty:2}],r=>`${r.id}:${r.qty}`));
+~~~
+
+### Overload phải khớp implementation
+Hai chữ ký công khai nhận string hoặc array,implementation xử lý đúng cả hai. Khi input là union ở caller,có thể cần signature union hoặc narrow trước tùy thiết kế;không chỉ thêm overload vô định.
+~~~ts
+export function lengthOf(x:string):number;
+export function lengthOf(x:ReadonlyArray<unknown>):number;
+export function lengthOf(x:string|ReadonlyArray<unknown>):number{
+ return x.length;
+}
+~~~
+
+### Optional parameter có mặc định rõ
+Default trả greeting cho tên giả,không phải validator người dùng. Nếu ghi chú có thể empty và thiếu mang nghĩa khác,không dùng || để gộp;test theo hợp đồng đã chốt.
+~~~ts
+export function greeting(name:string,prefix='Chào'):string{
+ return `${prefix} ${name}`;
+}
+console.log(greeting('Lam Thoi'));
+console.log(greeting('Lam Thoi','Xin chào'));
+~~~
+
+### Đừng lạm dụng bivariant/any
+Functionvariance và framework callback có chi tiết cần xemconfig/version. Bắt đầu từ contract nhỏ,typecheck ca âm và runtime tests;không sửa callback bằng asany rồi nhận API đúng.
+
+PRACTICE: Viết callbackformatter,overloadlength và hàm optional/default,ít nhất sáu runtime test. Thêmca compiler không nhận callback sai kiểu,ghi phạm vi chữ ký không mô tả.
+Q: Callback type giúp gì?
++ Mô tả input/output và kiểm cách dùng
+- Tự bảo đảm callback không ném lỗi
+- Tự chạy đúng một lần
+Q: Overload nên có gì ngoài signatures?
++ Implementation tương thích và xử lý runtime đúng
+- Chỉ nhiều chữ ký không có hàm
+- Luôn any để bỏ kiểm
+
+## LESSON typescript-05 | Generic với ràng buộc hữu ích
+
+### Generic giữ quan hệ chứ không sinh dữ liệu
+Một hàm lấy field muốn giữ kiểu của object và key. T thể hiện quan hệ đó,không là cam kết có thể trả bất kỳ T do caller muốn;tránh functiondecode<T> cast JSON mà không validator.
+
+### K extends keyof T và indexed access
+getField trả T[K] theo keytyped,giữ number choremaining và string choid. Key từ URL vẫn là input runtime cần validate,không tự cho quyền đọc mọi field private.
+~~~ts
+export function getField<T,K extends keyof T>(value:T,key:K):T[K]{
+ return value[key];
+}
+const row={id:'CL7',remaining:2};
+const n=getField(row,'remaining');
+console.log(n+1);
+~~~
+
+### Constraint theo năng lực cần dùng
+findById chỉ cần idstring,khôngép mọi object cófull modelDB. Return có undefined vì có thể không tìm thấy,cần caller kiểm trước đọc field và không thêm! để bỏ bằng chứng thiếu.
+~~~ts
+export function findById<T extends {id:string}>(rows:ReadonlyArray<T>,id:string):T|undefined{
+ return rows.find(x=>x.id===id);
+}
+const found=findById([{id:'C7',remaining:1}],'C7');
+if(found)console.log(found.remaining);
+~~~
+
+### Tối giản typeparameter vô ích
+Generic chỉ xuất hiện một chỗ hoặc được cast tại vị trí return thường làm API hứa quá mức. Viết case consumer để xem inference có giữ mốiquan hệ mà người dùng cần,không đánh giá độgiỏi bằng type phứctạp.
+~~~text
+tốt:getField<T,K extends keyof T> trả T[K]
+rủi ro:parse<T>(text):T chỉ JSON.parse rồi asT
+review:T liên hệ input/output ở đâu?
+review:constraint đủ nhỏ để tái dùng?
+review:runtime unknown đã được kiểm chưa?
+~~~
+
+### Inference có giới hạn đúng nghĩa
+Khi literal bịwiden hoặc union phứctạp,cần thiết kế API/const phù hợp,chưa chắc compiler sai. Giữ ví dụ nhỏ và type tests trước sửa bằng assertion,đọc diagnostic theo phiên bản lab.
+
+PRACTICE: Viết getField/findById và ba consumer type tests,kèm trường hợp thiếu id và key ngoài miền. Nêu vì sao genericdecode không validate là hứa sai,bổ sung runtime validator plan.
+Q: Generic T hữu ích nhất khi nào?
++ Giữ quan hệ kiểu giữa các vị trí
+- Đổi mọi biến thành any
+- Chỉ làm tên hàm dài
+Q: Constraint K extends keyof T giúp gì?
++ Giới hạn key thuộc T và giữ kiểu giá trị liên quan
+- Cho mọi chuỗi truy mọi field
+- Tự xác nhận quyền đọc field
+
+## LESSON typescript-06 | Discriminated union và never
+
+### Tag làm state không mâu thuẫn
+Một response có thể loading,ready,error. Union có discriminator kind bắt compiler đọc dữ liệu đúng nhánh,thay object mọi field optional có thể vừa error vừa success theo mô hình thiếu chặt.
+
+### Mỗi variant có payload riêng
+Ready giữ ClassInfo,error giữ code,loading không có data. Model này còn phải nối các sự kiện chuyển state đúng logic,runtime parser cần kiểm input ngoài union.
+~~~ts
+type ClassInfo={id:string;remaining:number};
+type State={kind:'loading'}|{kind:'ready';data:ClassInfo}|{kind:'error';code:string};
+export function summary(s:State):string{
+ if(s.kind==='ready')return `${s.data.id}:${s.data.remaining}`;
+ if(s.kind==='error')return `Lỗi ${s.code}`;
+ return 'Đang tải';
+}
+~~~
+
+### Never nhắc nhánh mới bị bỏ
+Switch exhaustive giúp khi thêm cancelled mà chưa xử lý,compiler báo lỗi ở assert Never. Nó không chặn dữ liệu lạ lúc runtime nếu caller cast mù;boundary vẫn reject theo contract.
+~~~ts
+type Outcome={kind:'ok';id:string}|{kind:'denied'};
+function assertNever(x:never):never{throw new Error('unexpected_variant');}
+export function renderOutcome(x:Outcome):string{
+ switch(x.kind){
+ case 'ok':return x.id;
+ case 'denied':return 'Không được phép';
+ default:return assertNever(x);
+ }
+}
+~~~
+
+### Transition cần được mô hình hóa riêng
+Discriminated union cấm một số state sai,không tự ngăn confirmed->draft hoặc nhân request. Reducer/server giữ quy tắc sự kiện,idempotency và permission theo hợp đồng lab.
+~~~text
+allowed:loading->ready/error
+action:retry từ error tạo ý định phù hợp
+not automatic:quyền,quota,deadline,request dedup
+verify:type tests cho variant +runtime transition tests
+Không coi compile xanh là workflow luôn đúng.
+~~~
+
+### Lỗi thường gặp là tag chưa đủ literal
+Kind:string không cho compiler biết từng variant theo cùng cách literal. Đừng dùng mọi field optional để tránh narrow;thiết kế state cùng UX/API,công khai unknown status policy khi server tiến hóa.
+
+PRACTICE: Viết State/Outcome có exhaustiveswitch,thêm variant để type test phát hiện thiếu nhánh. Nộp transitiontable và sáu runtimecase,tách lỗi model với input sai boundary.
+Q: Discriminated union cần đặc điểm nào?
++ Trường chung có literal phân biệt variants
+- Mọi field đều optional
+- Chỉ tên type khác nhau
+Q: never ở nhánh exhaustive có ích gì?
++ Compiler nhắc khi thêm variant chưa xử lý
+- Bảo đảm runtime không nhận input lạ
+- Thay mọi throw
+
+## LESSON typescript-07 | unknown, JSON và validation
+
+### Unknown giữ câu hỏi phải kiểm
+JSON từ network/file là dữ liệu chưa đáng tin ở runtime. Gán unknown rồi validate shape,kiểu,miền và quan hệ;tránh asModel/any vì chúng làm compiler thôi nhắc mà dữ liệu không đổi.
+
+### Parser trả kiểu saukhi thật sự kiểm
+TypeScript hiện đại narrow x thành object có property sauin;checknumber riêng trước call số. Integer/minimum giữ miền,còn remaining<=capacity ở rule khác nếu payload có capacity.
+~~~ts
+export type ClassInfo={id:string;remaining:number};
+export function parseClass(x:unknown):ClassInfo{
+ if(typeof x!=='object'||x===null||Array.isArray(x))throw new Error('object_required');
+ if(!('id' in x)||typeof x.id!=='string'||!x.id.trim())throw new Error('id_invalid');
+ if(!('remaining' in x)||typeof x.remaining!=='number'||!Number.isInteger(x.remaining)||x.remaining<0)
+  throw new Error('remaining_invalid');
+ return {id:x.id,remaining:x.remaining};
+}
+~~~
+
+### Allowlist kết quả để không lộ field
+Parser trên tạo object mới chỉ có id/remaining,theopolicy lab field thừa được bỏ. Nếu contract yêu cầu reject,thêm key check đúng miền;Pick type không thực hiện xóa runtime.
+~~~text
+{"id":"CL7","remaining":1,"internalNote":"CANARY-LAB"}
+policy lab:parse trả đúng id/remaining,không copy internalNote
+negative:remaining="1",null,-1,1.5,missing
+Quyền nguồn và field vẫn cần được server kiểm riêng.
+~~~
+
+### Typeguard là lời hứa cần test
+Predicate isClass có thể trả true vô điều kiện,compiler không tự chứng minh logic. Bộcaâm và mutation kiểm độ nhạy,runtimecontract có source rõ,không chỉ test happy.
+~~~ts
+const good=parseClass({id:'CL7',remaining:1});
+console.assert(good.remaining===1);
+for(const bad of [null,[],{}, {id:'CL7',remaining:'1'}, {id:'CL7',remaining:-1}]){
+ let failed=false;try{parseClass(bad);}catch{failed=true;}
+ console.assert(failed);
+}
+~~~
+
+### Lỗi có path và privacy phù hợp
+ProjectSDK có thể cần code/path và Result thay throw,toàn policy được chốt ở bài async. Không log toàn payload hoặc token khiparsefail,dùng id giả và message đủ người học sửa đúng trường.
+
+PRACTICE: Viết parser unknown choClassInfo và Enrollment,có 10 ca tốt/âm,fieldpolicy và mutation guard. Nộp outputallowlist,code/path lỗi và bằng chứng không lộ canary giả,chưa xemparserthay authorization.
+Q: unknown khác any khi dùng dữ liệu ngoài thế nào?
++ Cần narrow/validate trước thao tác
+- Cho gọi mọi method ngay
+- Tự parser JSON
+Q: Type guard tự viết có tự được compiler chứng minh đúng không?
++ Không
+- Có luôn
+- Có nếu tên bắt đầu is
+
+## LESSON typescript-08 | Module, tsconfig và strict
+
+### Config là phần của hợp đồng kiểu
+Lab chọn Node hiện đại có fetch và ESM, TypeScript được pin theo lockfile. Module/target/lib phải phù hợp runtime, không copy tsconfig của bundler sang Node rồi cho lỗi import là do code nghiệp vụ.
+
+### Một tsconfig có mục tiêu rõ
+DOM lib cung cấp type cho fetch trong ví dụ, không dựng DOM thật trong Node. Các flag thêm ngoài strict được bật rõ; types rỗng tránh ambient type tự kéo vào, nếu dùng API Node riêng cần khai báo dependency/type phù hợp.
+~~~json
+{"compilerOptions":{"target":"ES2022","module":"NodeNext","moduleResolution":"NodeNext","lib":["ES2022","DOM"],"types":[],"strict":true,"noUncheckedIndexedAccess":true,"exactOptionalPropertyTypes":true,"rootDir":"src","outDir":"dist","declaration":true},"include":["src/**/*.ts"]}
+~~~
+
+### ESM và đường import cần đồng nhất
+package.json của lab có type:module, source import đường.js theo output NodeNext. Khi compile sang dist, module phải tồn tại đúng vị trí; không dùng assertion để sửa lỗi resolution hoặc bỏ extension tùy hứng.
+~~~ts
+// src/main.ts,parser.ts là file lab do học viên tạo:
+import {parseClass} from './parser.js';
+console.log(parseClass({id:'CL7',remaining:1}));
+// package.json cần có "type":"module" theo lựa chọn runtime này.
+~~~
+
+### Chỉ số và optional cần kiểm
+noUncheckedIndexedAccess nhắc khả năng không có phần tử. Exactoptional không tự thêm undefined vào mọi property optional nếu khai báo không cho; viết ca âm có lý do thay vì thêm ! để làm xanh.
+~~~ts
+const ids:string[]=['CL7'];
+const first=ids[0];
+if(first!==undefined)console.log(first.toLowerCase());
+type Note={text?:string};
+const absent:Note={};
+const present:Note={text:'Ghi chú lab'};
+~~~
+
+### Kiểm config bằng ca thực
+Chạy typecheck toàn project và output runtime, ghi version/command. CLI truyền file trực tiếp có thể không dùng project config như mong muốn; ưu tiên lệnh có project đúng, xem diagnostic trước khi tắt flag.
+
+PRACTICE: Tạo project ESM theo config,parser từ bài 7 và main. Nộp typecheck/build/runtime cùng hai ca âm indexed/optional,ghi phần chưa chạy và dependency cần thiết.
+Q: strict có tự bật mọi kiểm nâng cao không?
++ Không
+- Có cả mọi option
+- Chỉ bật format
+Q: noUncheckedIndexedAccess hỗ trợ gì?
++ Nhắc khả năng undefined của truy cập không chắc tồn tại
+- Tự kiểm index runtime
+- Tự thêm phần tử mảng
+
+## LESSON typescript-09 | Async, lỗi và kiểu kết quả
+
+### Async type không tự biến reject thành dữ liệu
+Promise<Result<ClassInfo>> chỉ đúng khi implementation trả variants như đã hứa. Tách lỗi network,HTTP,parse và validation;không catch mọi thứ thành thành công rỗng hoặc retry thao tác ghi vô hạn.
+
+### Result có discriminator và thông tin vừa đủ
+Dùng union để caller phải xử lý nhánh,nội dung lỗi không chứa token/rawpayload. Code HTTP có thể được phân loại theo policy,còn thiếu rule cần question chứ không bịa value.
+~~~ts
+export type Result<T>=
+ |{ok:true;value:T}
+ |{ok:false;error:{kind:'network'|'http'|'parse'|'validation';status?:number}};
+export function resultLabel<T>(x:Result<T>):string{
+ return x.ok?'Đã đọc dữ liệu':`Lỗi ${x.error.kind}`;
+}
+~~~
+
+### Narrow catch trước sử dụng thuộc tính
+Strict dùng unknown trongcatch theo config phù hợp. Error instance cho phép đọc name/message,nhưng log vẫn cần policy;AbortError không chứng minh server chưa ghi,đối với requestghi phải giữ ý định/chống lặp.
+~~~ts
+export function errorKind(e:unknown):string{
+ if(e instanceof Error&&e.name==='AbortError')return 'aborted';
+ if(e instanceof Error)return 'error_instance';
+ return 'unknown_failure';
+}
+~~~
+
+### Đọc HTTP có các cổng lỗi riêng
+Function dưới làm ảnh SDK:parser và Result từ các file lab tương ứng. Signal optional cần giữ exact optional,không truyền signal:undefined khiconfig không cho;mỗi tầng cócaâm để chứng minh phân loại.
+~~~ts
+import {parseClass,type ClassInfo} from './parser.js';
+import type {Result} from './result.js';
+export async function loadClass(id:string,signal?:AbortSignal):Promise<Result<ClassInfo>>{
+ let r:Response;
+ try{r=await fetch(`http://localhost:3100/classes/${encodeURIComponent(id)}`,signal?{signal}:{});}
+ catch{return {ok:false,error:{kind:'network'}};}
+ if(!r.ok)return {ok:false,error:{kind:'http',status:r.status}};
+ let raw:unknown;
+ try{raw=await r.json();}catch{return {ok:false,error:{kind:'parse'}};}
+ try{return {ok:true,value:parseClass(raw)};}
+ catch{return {ok:false,error:{kind:'validation'}};}
+}
+~~~
+
+### Giới hạn của wrapper phải được nêu
+Mẫu gom abort vào network để giữ 4variant đơn giản,nếu UX cần phân biệt thì mở contract có review. Chữ ký typed không đo latency hoặc quyền,cần test stub và integration riêng;không hứa mọi lỗi đều đã được liệt kê.
+
+PRACTICE: Viết Result và loadClass với5response stub:good,HTTP403,networkfail,badJSON,sai schema. Nộp variant đúng,errorprivacy vàabort policy,chưa dùng GET chỉ đọc làm chuẩn cho retry POST.
+Q: Promise<Result<T>> mô tả gì?
++ Kết quả async có variants theo kiểu, vẫn cần xử lý reject/hành vi
+- Mọi lỗi tự thành Result
+- Tự retry an toàn
+Q: Catch error nên xử lý thế nào?
++ Narrow unknown và phân loại an toàn
+- Luôn log toàn payload/token
+- Ép string rồi coi thành công
+
+## LESSON typescript-10 | Mapped, indexed và utility types
+
+### Tạo kiểu từ kiểu để giảm lệch
+Utility/mapped/indexed types giúp giữ quan hệ với model gốc,không tự sửa dữ liệu runtime. PublicDTO nên allowlist theo quyền vànhu cầu,không export toàn model DB chứa ownerRole/internalNote.
+
+### Pick/Omit chỉ đổi gócnhìn tĩnh
+Một giá trị có field nội bộ vẫn có thể được nhìn qua type nhỏ hơn. Để serialize an toàn,tạo object mới gồm field được phép;không return x asPublic rồi JSON.stringify cảx.
+~~~ts
+type Internal={id:string;remaining:number;internalNote:string};
+type Public=Pick<Internal,'id'|'remaining'>;
+export function publicClass(x:Internal):Public{
+ return {id:x.id,remaining:x.remaining};
+}
+~~~
+
+### Mappedtype và key giữ kiểu liên quan
+Flags ánhxạ field thành boolean,không phải validatorobject. Học đủ để đọc diagnostic và thiết kế API rõ,không xây chuỗi type đệquy phứctạp cho bài toán hai thuộc tính.
+~~~ts
+type Flags<T>={[K in keyof T]:boolean};
+type ClassFields={id:string;remaining:number};
+const requiredFlags:Flags<ClassFields>={id:true,remaining:true};
+const sample:ClassFields['remaining']=2;
+console.log(requiredFlags,sample);
+~~~
+
+### Partial không tự là hợp đồng PATCH
+Nếu Internal córole/owner thì Partial<Internal> cũng chứa chúng ở type. Define patchallowlist riêng và runtime validate kiểu/miền/presence,không tin interface sẽ cấm fieldlạ trên request.
+~~~ts
+type ClassPatch={note?:string|null};
+export function patchSummary(x:ClassPatch):string{
+ if(!Object.hasOwn(x,'note'))return 'Không đổi ghi chú';
+ return x.note===null?'Xóa ghi chú':'Đặt ghi chú';
+}
+// Validator runtime phảichặn note:undefined nếu hợp đồng khôngcho.
+~~~
+
+### Không lạm dụng type để tránh quyết định API
+Một type đẹp vẫn có thể hứa mọi input được nhận hoặc giấu field nhạy cảm sai. Reviewconsumer,serialization và quyền,sau đó thêm type tests/runtime tests bảo vệ đúng contract.
+
+PRACTICE: Thiết kế PublicDTO/PatchDTO choClassInfo,serializer allowlist và validator runtime. Nộp key/mapped examples,sáu ca thiếu/null/undefined/field thừa,có canary giả không lộ raoutput.
+Q: Pick/Omit có xóa field runtime trong object không?
++ Không
+- Có luôn
+- Có nếu export type
+Q: Partial<T> có tự thành schema PATCH đúng không?
++ Không
+- Có cho mọi API
+- Có nếu T nhỏ
+
+## LESSON typescript-11 | Test kiểu và test hành vi
+
+### Hai lớp test bảo vệ hai loại hợp đồng
+Tsc kiểm dùng APItyped,testruntime kiểm parse/nghiệp vụ/tác dụng. Một hàm tính sai nhưng đúng kiểu có thể compile sạch;typed test âm và fixture âm phải được duy trì độc lập oracle.
+
+### Test kiểu có lỗi kỳ vọng rõ
+Dùngts-expect-error trongfiletype-test được compiler kiểm,không trên implementation để che bug. Nếu API thay đổi khiến dònghết lỗi,directive sẽ báo unused,gợi ý review caâm đã mất ý nghĩa.
+~~~ts
+import {parseClass} from './parser.js';
+const parsed=parseClass({id:'CL7',remaining:1});
+const n:number=parsed.remaining;
+// @ts-expect-error remaining lànumber,khôngphải string
+const s:string=parsed.remaining;
+void n;void s;
+~~~
+
+### Runtimeassertion có thể chạy JS saucompile
+Không cần framework cho hàm nhỏ,lỗi assert tự đặt phải làm process fail khi thực thi. Đừng console.assert rồi coi exitcode luôn fail;throw khicondition sai giúp CLI phản ánh đúng.
+~~~ts
+function assert(ok:boolean,message:string):asserts ok{
+ if(!ok)throw new Error(message);
+}
+const good=parseClass({id:'CL7',remaining:1});
+assert(good.remaining===1,'remaining_mismatch');
+let rejected=false;try{parseClass({id:'CL7',remaining:'1'});}catch{rejected=true;}
+assert(rejected,'string_remaining_must_fail');
+~~~
+
+### Mutation đánh giá độ nhạy theo rủi ro
+Tạm bỏ Number.isInteger trongparserlab hoặc return rawobject có canary,test phải đỏ.Sau khôi phục,chạy cả type và runtime;mutant tương đương cần phân loại,không chỉ đếm điểm.
+~~~text
+M1 remaining chuỗi được nhận ->parsernegative fail
+M2 serializer trả internalNote ->privacytest fail
+M3 bỏ variant nhánh ->exhaustive typecheck fail
+M4 total tính sai ->runtime expectedtay fail
+Ghi version,fixture,command và kết quả.
+~~~
+
+### Không viết test cùng công thức sai
+Expected total tính bằng chính hàm implementation sẽ xanh cùng bug. Dùng bảng tay/case nhỏ và mô hình độc lập,đừng lấy số coverage hoặc compile làm chứng minh đủ yêu cầu.
+
+PRACTICE: Bàn giao5type-negative và10runtimecase choSDK lab,có throw assert,canary giả và bốn mutation. Nộp commands/exitcodes,evidence đỏ-rồi-xanh và giới hạn phạm vi.
+Q: Test kiểu và test hành vi khác nhau thế nào?
++ Kiểm hợp đồng tĩnh khác kết quả/runtime
+- Hai loại thay nhau hoàn toàn
+- Tsc xanh là không còn bug
+Q: ts-expect-error nên được dùng ra sao?
++ Ca âm có lý do, kiểm compiler vẫn phát lỗi tại dòng đó
+- Che mọi lỗi production
+- Thay any toàn dự án
+
+## LESSON typescript-12 | Thiết kế API thư viện có tương thích
+
+### Public API cần đọc từ consumer
+Thư viện có thể bị ràng buộc bởi importpath,typeexports,errorvariant và runtime hành vi. Define entrypoint và contract ổn định theo nhu cầu,không export mọi file nội bộ hoặc model DB.
+
+### Export type và value rõ
+Moduleparser cung cấp type ClassInfo và function parseClass.Type-onlyimport giúp thể hiện ý định không cần giá trị runtime,nhưng config/bundler vẫn cần đúng môi trường đã chốt,không đoán mọi runtime hiểu file TypeScript.
+~~~ts
+// src/index.ts
+export {parseClass} from './parser.js';
+export type {ClassInfo} from './parser.js';
+export {loadClass} from './client.js';
+export type {Result} from './result.js';
+~~~
+
+### Tương thích được kiểm bằng client fixture
+Client cũ có thể exhaustive switcherrorvariants hoặc gọi hàm hai tham số. Thêm requiredparam/đổi type có thể breaking;cả typecheck và runtime fixture cần chạy trên bản thư viện mới.
+~~~text
+changeA:thêm field response optional ->đánh giá consumer thực
+changeB:thêm requiredparameter ->client cũ có thể compilefail
+changeC:đổi errorvariant ->exhaustiveswitch có thể fail
+changeD:đổi object runtime giữ type ->cần runtimetest
+Release note nêu migration và giới hạn.
+~~~
+
+### Declaration không thay docs runtime
+D.ts sinh từ build giúp consumer dùng kiểu,nhưng không nói endpointfixture,auth,timeout,lỗi mạng hoặc validationpolicy. Ghi điều kiện và ví dụ chạy được tronglab,cấm credential thật.
+~~~text
+package lab:type=module
+build:tsc với declaration và outDir dist
+entry:dist/index.js +dist/index.d.ts theo packagecontract
+consumer:fixtureproject typecheck/run
+network:chỉ localhost:3100 theo APIlab được cấp
+~~~
+
+### Version và thay đổi có review
+Đừng nâng version để che contract hứa sai,hoặc đóng API theoimplementation nội bộ thay đổi mỗi ngày. Giữ test consumer nhỏ,changelog và quyết định tương thích,có phương án chuyển đổi nếu cần.
+
+PRACTICE: Đóng gói SDKlab cục bộ có index/declaration,hai consumerfixture và compatibilitymatrix bốn thay đổi. Nộp typecheck/runtimeevidence,docs error/timeout và migrationnote,không publish lên registry.
+Q: Thay chữ ký thư viện cần đánh giá gì?
++ Consumer, kiểu, runtime và tương thích
+- Chỉ số version đẹp
+- Chỉ code nội bộ compile
+Q: Public API type nên tránh gì?
++ Lộ cấu trúc nội bộ không cần thiết và hứa kiểu sai
+- Mọi type alias
+- Mọi readonly
+
+## LESSON typescript-13 | Dự án: SDK đặt lớp có validate
+
+### Dự án SDK đặt lớp có validation
+SDK Mầm Lụa đọc class và gửi đăng ký theo APIlab được chốt.Chữ ký typed giúp consumer,parser runtime giữ boundary,server giữ quyền/quota/chống lặp;không để SDK hứa tự bảo đảm toàn nghiệp vụ.
+
+### Gói file và contract nhất quán
+Các đoạn trước ghép thành project ESM riêng,đổi tên/import theo đúng file đã dựng.Validator của response và request cần rule,idempotencykey/actor doapp/server định nghĩa,không gửi token hardcode.
+~~~text
+src/parser.ts ->ClassInfo/parseClass
+src/result.ts ->Result<T>
+src/client.ts ->HTTP/status/JSON/validation gates
+src/index.ts ->public exports
+src/type-test.ts +runtime-test.ts
+fixture API:http://localhost:3100 theo contract bài
+~~~
+
+### Đầu vào request được kiểm có miền
+Hàm dưới chốt ClassId chỉ ASCII lab và qty nguyên 1..20,không phải định danh mọi sản phẩm.Nếu quy tắc đổi,version/consumer và test cần đổi;server vẫn validate lại,input ngoài type ở runtime có thể khác.
+~~~ts
+export type EnrollRequest={classId:string;qty:number};
+export function parseRequest(x:unknown):EnrollRequest{
+ if(typeof x!=='object'||x===null||Array.isArray(x))throw new Error('object_required');
+ if(!('classId' in x)||typeof x.classId!=='string'||!/^CL-[A-Z0-9-]+$/.test(x.classId))throw new Error('classId_invalid');
+ if(!('qty' in x)||typeof x.qty!=='number'||!Number.isInteger(x.qty)||x.qty<1||x.qty>20)throw new Error('qty_invalid');
+ return {classId:x.classId,qty:x.qty};
+}
+~~~
+
+### Nghiệm thu gồm loại sai và hành vi sai
+Tối thiểu15runtimecase choresponse/requestunknown,status/parse/network,fieldpolicy và twoactorfixture.Thêm5type-negative,consumercompatibility và mutation chứng minh chặn sai;mock trả response không chứng minh DB thật.
+~~~text
+G1:unknown/null/array/fieldtypes/range
+G2:HTTPerror/network/badJSON/validationerror
+G3:DTOserialization không lộ canary
+G4:union/exhaustiveness và genericconsumer
+G5:config/build/module và consumercompatibility
+MỗiG có oracle,fixture,command,evidence,gap.
+~~~
+
+### Bàn giao code và giới hạn bằng chứng
+Nộp config,lockfile,SDK,fixture/test,README và report.Nếu chưa được cấp tsc/runtime,ghi bước chưa chạy thay vì bịa0lỗi;bộ kiểm nội dung không thay compile hoặc integration thật.Không publish package hoặc deploy trong nhiệm vụ soạn bài.
+
+PRACTICE: Bàn giaoSDKlab có 15runtimecase,5type-negative,unknownparsers và publicexports. Có mutation,consumerfixture,fieldprivacy và report đỏ-xanh với phần mock/chưa chạy rõ;mọi dữ liệu tự đặt.
+Q: SDK gọi API cần validate ở đâu?
++ Response unknown tại boundary và request theo miền cần thiết
+- Chỉ cast JSON
+- Chỉ constructor typed
+Q: Bàn giao TypeScript lab cần gì?
++ Config, contract, validator, test kiểu/runtime và giới hạn
+- Chỉ interface
+- Credential thật
+
+## LESSON typescript-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Kiểu thường bị xóa khi sinh JavaScript; dữ liệu ngoài vẫn cần kiểm runtime và quyền độc lập.
+2. typeof và control flow giúp thu hẹp kiểu, cần nhánh cho từng miền thay vì assertion che thiếu kiểm.
+3. Readonly chủ yếu hạn chế ghi ở kiểm kiểu trên tham chiếu đó; alias hoặc JavaScript runtime có thể khác, cần thiết kế bất biến phù hợp.
+4. Kiểu không mô tả mọi tác dụng, thời gian hay lỗi runtime; contract và test hành vi vẫn cần.
+
+### Dữ liệu và điều kiện biên
+5. Type parameter cần thể hiện quan hệ thật, không thêm generic không được dùng hoặc assertion hứa trả T từ dữ liệu bất kỳ.
+6. Narrow qua tag giúp truy thuộc tính đúng nhánh và tránh trạng thái mâu thuẫn theo mô hình đã định.
+7. Unknown giữ yêu cầu kiểm, any lan việc bỏ kiểm; vẫn cần validator đúng miền và oracle độc lập.
+8. noUncheckedIndexedAccess và exactOptionalPropertyTypes cần xem/bật riêng theo config, ghi phiên bản thay dựa mặc định.
+
+### Tính đúng và cách điều tra
+9. Nếu API muốn chỉ trả Result, implementation phải phân loại lỗi rõ; bug ngoài contract không được nuốt thành thành công.
+10. Utility type đổi góc nhìn tĩnh, muốn response an toàn phải tạo object allowlist hoặc serialize theo contract.
+11. Type tests có lỗi kỳ vọng kiểm API kiểu, runtime tests kiểm parse, nghiệp vụ và tác dụng; cần cả theo rủi ro.
+12. Thêm required parameter hoặc đổi union có thể phá consumer; contract test và fixture client giúp thấy tác động.
+
+### Rủi ro và lựa chọn phương án
+13. Typed client không buộc server trả đúng; kiểm status, shape, miền, lỗi và quyền server riêng.
+14. Chốt optional/nullable và giữ thông tin hiện diện khi cần; strictNullChecks giúp nhắc xử lý, chưa thay rule runtime.
+15. Overload công khai phải khớp hành vi và implementation, không dùng để hứa kết quả không được code thực hiện.
+16. Never kiểm completeness theo union tĩnh; boundary runtime phải reject payload ngoài hợp đồng.
+
+### Dự án, bằng chứng và bàn giao
+17. Cần nhánh kiểm hoặc mô hình dữ liệu đúng, không dùng ! để làm mất cảnh báo mà không có bằng chứng.
+18. PATCH còn required/nullable/quyền field và semantics, không được tự cho role/owner từ client.
+19. Thiết kế ổn định theo nhu cầu người dùng SDK, không xuất mọi model DB có field riêng tư hoặc phụ thuộc khó thay.
+20. Người khác cần build/check và hiểu môi trường module/runtime, ca âm cùng phần chưa được thực thi.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: TypeScript kiểm kiểu chủ yếu ở đâu?
++ Khi phân tích/biên dịch, không tự validate mọi input runtime
+- Mọi request tự được validate
+- Thay server authorization
+Q: Union string|number nên xử lý thế nào trước thao tác riêng?
++ Narrow bằng kiểm phù hợp
+- Ép any mọi nơi
+- Gọi mọi method của cả hai
+Q: readonly có tự freeze sâu object lúc runtime không?
++ Không
+- Có luôn
+- Có nếu dùng interface
+Q: Callback type giúp gì?
++ Mô tả input/output và kiểm cách dùng
+- Tự bảo đảm callback không ném lỗi
+- Tự chạy đúng một lần
+Q: Generic T hữu ích nhất khi nào?
++ Giữ quan hệ kiểu giữa các vị trí
+- Đổi mọi biến thành any
+- Chỉ làm tên hàm dài
+Q: Discriminated union cần đặc điểm nào?
++ Trường chung có literal phân biệt variants
+- Mọi field đều optional
+- Chỉ tên type khác nhau
+Q: unknown khác any khi dùng dữ liệu ngoài thế nào?
++ Cần narrow/validate trước thao tác
+- Cho gọi mọi method ngay
+- Tự parser JSON
+Q: strict có tự bật mọi kiểm nâng cao không?
++ Không
+- Có cả mọi option
+- Chỉ bật format
+Q: Promise<Result<T>> mô tả gì?
++ Kết quả async có variants theo kiểu, vẫn cần xử lý reject/hành vi
+- Mọi lỗi tự thành Result
+- Tự retry an toàn
+Q: Pick/Omit có xóa field runtime trong object không?
++ Không
+- Có luôn
+- Có nếu export type
+Q: Test kiểu và test hành vi khác nhau thế nào?
++ Kiểm hợp đồng tĩnh khác kết quả/runtime
+- Hai loại thay nhau hoàn toàn
+- Tsc xanh là không còn bug
+Q: Thay chữ ký thư viện cần đánh giá gì?
++ Consumer, kiểu, runtime và tương thích
+- Chỉ số version đẹp
+- Chỉ code nội bộ compile
+Q: SDK gọi API cần validate ở đâu?
++ Response unknown tại boundary và request theo miền cần thiết
+- Chỉ cast JSON
+- Chỉ constructor typed
+Q: null khác undefined trong hợp đồng ở đâu?
++ Giá trị tường minh khác thiếu/không được gán theo ngữ cảnh
+- Hai loại luôn bằng nhau
+- Luôn chuyển cả hai thành0
+Q: Overload nên có gì ngoài signatures?
++ Implementation tương thích và xử lý runtime đúng
+- Chỉ nhiều chữ ký không có hàm
+- Luôn any để bỏ kiểm
+Q: never ở nhánh exhaustive có ích gì?
++ Compiler nhắc khi thêm variant chưa xử lý
+- Bảo đảm runtime không nhận input lạ
+- Thay mọi throw
+Q: noUncheckedIndexedAccess hỗ trợ gì?
++ Nhắc khả năng undefined của truy cập không chắc tồn tại
+- Tự kiểm index runtime
+- Tự thêm phần tử mảng
+Q: Partial<T> có tự thành schema PATCH đúng không?
++ Không
+- Có cho mọi API
+- Có nếu T nhỏ
+Q: Public API type nên tránh gì?
++ Lộ cấu trúc nội bộ không cần thiết và hứa kiểu sai
+- Mọi type alias
+- Mọi readonly
+Q: Bàn giao TypeScript lab cần gì?
++ Config, contract, validator, test kiểu/runtime và giới hạn
+- Chỉ interface
+- Credential thật

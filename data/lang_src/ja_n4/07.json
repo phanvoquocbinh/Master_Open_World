@@ -3,16 +3,33 @@
  "title": "Cho nhận; あげる・くれる・もらう",
  "sub": "妹に 本を あげました。",
  "goals": [
-  "Hiểu và dùng đúng Cho nhận; あげる・くれる・もらう",
-  "Đọc/nghe phân biệt ít nhất 12 từ/cụm của tình huống",
-  "Hỏi và trả lời ba thông tin cụ thể bằng mức lịch sự phù hợp",
-  "Viết đoạn mới và tự sửa lỗi theo checklist"
+  "Phân tích cách dùng trong câu “妹に 本を あげました。” và tạo một câu khác giữ đúng quan hệ ý.",
+  "Dùng “あげる” (cho (hướng ra)) và “くれる” (cho (hướng về người nói)) đúng trong trao đổi của bài.",
+  "Nghe để trả lời câu hỏi “Theo hội thoại: Sinh nhật bạn nhận gì?”, rồi chỉ ra phần lời nói làm căn cứ.",
+  "Tự viết đoạn có ý chính “Anh trai” và kiểm lại sự nhất quán với văn bản đọc."
  ],
  "parts": [
   {
    "k": "text",
    "h": "Bối cảnh và cách học",
-   "html": "<p>Kể việc tặng/nhận từ các góc nhìn khác nhau, luôn xác định người cho và người nhận.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+   "html": "<p>Kể việc tặng/nhận từ các góc nhìn khác nhau, luôn xác định người cho và người nhận.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>誕生日 gồm ta-n-jo-o-bi năm mora; 妹 là i-mo-o-to bốn mora. Đối chiếu 貸す ka-su với 借りる ka-ri-ru trong câu cho mượn và nhận mượn; đổi người nói nhưng không đổi nhầm hai động từ.</p>",
+   "items": [
+    {
+     "sym": "たんじょうび・いもうと",
+     "ex": [
+      "誕生日",
+      "妹",
+      "貸す",
+      "借りる"
+     ],
+     "vi": "Nghe và đọc đối chiếu 誕生日 (たんじょうび), 妹 (いもうと), 貸す (かす), 借りる (かりる). Dùng câu “妹に 本を あげました。” để kiểm xem các độ dài âm còn giữ được khi nối vào phát ngôn."
+    }
+   ]
   },
   {
    "k": "words",
@@ -165,7 +182,7 @@
   {
    "k": "dialog",
    "h": "Nghe: Cho nhận; あげる・くれる・もらう",
-   "note": "Hai học viên của lớp giả Mây Sớm trao đổi; nghe lần đầu lấy ý, lần sau kiểm chi tiết. Không đọc romaji trong âm thanh.",
+   "note": "Trước khi nghe, dự đoán câu trả lời cho “Theo hội thoại: Sinh nhật bạn nhận gì?”. Sau đó ghi nguyên thông tin làm bạn chọn đáp án; lượt nói “兄に プレゼントを もらいました。” là một điểm cần kiểm khi nghe lại.",
    "lang": "ja-JP",
    "lines": [
     {
@@ -219,34 +236,34 @@
    ],
    "qs": [
     {
-     "q": "Theo hội thoại: Sinh nhật bạn nhận gì?",
+     "q": "Người trả lời nhận quà từ ai?",
      "o": [
-      "Bạn giúp chuẩn bị. Tôi vui.",
-      "Có, tôi tặng sách.",
-      "Tôi nhận quà từ anh trai."
+      "Em gái",
+      "Giáo viên",
+      "Anh trai"
      ],
      "a": 2,
-     "e": "Câu trả lời là 兄に プレゼントを もらいました。 → Tôi nhận quà từ anh trai."
+     "e": "Lượt nói “兄に プレゼントを もらいました。” nghĩa là: Tôi nhận quà từ anh trai. Nội dung này làm rõ đáp án “Anh trai”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Bạn cũng cho em gái gì không?",
+     "q": "Người đó tặng em gái gì?",
      "o": [
-      "Bạn giúp chuẩn bị. Tôi vui.",
-      "Có, tôi tặng sách.",
-      "Có, tôi mượn rồi. Tôi sẽ cảm ơn."
+      "Đồng hồ",
+      "Sách",
+      "Bút"
      ],
      "a": 1,
-     "e": "Câu trả lời là はい、本を あげました。 → Có, tôi tặng sách."
+     "e": "Lượt nói “はい、本を あげました。” nghĩa là: Có, tôi tặng sách. Nội dung này làm rõ đáp án “Sách”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Bạn đã làm gì giúp bạn?",
+     "q": "Bạn đã giúp việc gì?",
      "o": [
-      "Bạn giúp chuẩn bị. Tôi vui.",
-      "Tôi nhận quà từ anh trai.",
-      "Có, tôi mượn rồi. Tôi sẽ cảm ơn."
+      "Chuẩn bị",
+      "Chấm điểm",
+      "Đổi ngày sinh nhật"
      ],
      "a": 0,
-     "e": "Câu trả lời là 準備を 手伝ってくれました。うれしいです。 → Bạn giúp chuẩn bị. Tôi vui."
+     "e": "Lượt nói “準備を 手伝ってくれました。うれしいです。” nghĩa là: Bạn giúp chuẩn bị. Tôi vui. Nội dung này làm rõ đáp án “Chuẩn bị”, không phải hai cách hiểu còn lại."
     }
    ]
   },
@@ -331,35 +348,35 @@
    "h": "Nói và phản hồi",
    "tasks": [
     {
-     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "p": "Đóng vai hỏi về cho (hướng ra) và cho (hướng về người nói). Dùng lượt “誕生日に 何を もらいましたか。” để mở đầu, rồi yêu cầu bạn trả lời bằng thông tin của vai đối diện.",
      "model": "誕生日に 何を もらいましたか。 妹にも 何か あげましたか。 友達は 何を してくれましたか。 本も 貸してくれましたか。",
      "vi": "Sinh nhật bạn nhận gì? Bạn cũng cho em gái gì không? Bạn đã làm gì giúp bạn? Bạn cũng cho mượn sách à?",
-     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+     "tips": "Khi bạn nói “妹にも 何か あげましたか。”, người nghe phải nhận ra Bạn cũng cho em gái gì không?; ghi âm và kiểm xem từ nào đang quyết định nghĩa đó."
     },
     {
-     "p": "Tóm tắt nội dung bài đọc bằng ba câu, sau đó nêu một câu hỏi còn muốn làm rõ.",
+     "p": "Tóm tắt ba ý trong bài đọc để trả lời “Ai tặng món quà nhỏ?”. Kết thúc bằng câu hỏi về vui/mừng nếu phần này chưa được người nghe xác nhận.",
      "model": "昨日は 私の 誕生日でした。 兄が 小さい プレゼントを くれました。 妹には 絵の 本を あげました。",
      "vi": "Hôm qua là sinh nhật tôi. Anh trai tặng tôi món quà nhỏ. Tôi tặng em gái sách tranh.",
-     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+     "tips": "So phần tóm tắt của bạn với dữ kiện “Anh trai”; nếu ý này thay đổi, hãy nói rõ đó là tình huống giả định mới."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có kiểm tra",
-   "task": "Viết một đoạn mới theo tình huống bài học; thay ít nhất hai chi tiết, dùng cấu trúc trọng tâm và kiểm thông tin nhất quán.",
+   "task": "Viết một đoạn tình huống có các ý: Tôi đã cho em gái sách. / Anh trai đã tặng quà cho tôi. / Bạn đã giúp tôi làm bài tập.. Dùng thêm thông tin của bài đọc để nối các ý, không chỉ chép ba câu rời.",
    "min": 80,
    "model": "昨日は 私の 誕生日でした。 兄が 小さい プレゼントを くれました。 妹には 絵の 本を あげました。 友達には ペンを もらいました。 友達は 部屋の 準備も 手伝ってくれました。 読みたい 本を 貸してくれたので、家で 読めました。 借りた 本は 来週 返します。 うれしい 気持ちと お礼を 短い 手紙に 書きました。",
    "modelVi": "Hôm qua là sinh nhật tôi. Anh trai tặng tôi món quà nhỏ. Tôi tặng em gái sách tranh. Tôi nhận bút từ bạn. Bạn cũng giúp chuẩn bị phòng. Vì bạn cho mượn sách muốn đọc nên tôi đọc được ở nhà. Sách đã mượn tôi trả tuần sau. Tôi viết niềm vui và lời cảm ơn vào thư ngắn.",
    "tips": [
-    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
-    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+    "Lập sơ đồ ai làm gì trong câu “妹に 本を あげました。”, rồi dùng cùng quan hệ chủ thể khi nối sang đoạn của bạn.",
+    "Đối chiếu “兄が プレゼントを くれました。” với mẫu cuối “友達が 宿題を 手伝ってくれました。”; chọn phần kết câu phù hợp trước khi sửa chính tả."
    ],
    "checklist": [
-    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
-    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
-    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
-    "Câu kết thúc và mức lịch sự nhất quán"
+    "Người đọc nhận ra đúng nghĩa của “あげる”, thay vì chỉ thấy từ được chèn vào câu.",
+    "Quan hệ ý trong “妹に 本を あげました。” vẫn đúng khi bạn thay dữ kiện.",
+    "Các ý cho (hướng về người nói) và vui/mừng không bị lẫn vai hoặc phạm vi.",
+    "Đoạn kết không trái với dữ kiện trả lời câu hỏi “Ai tặng món quà nhỏ?”."
    ]
   }
  ],
@@ -495,7 +512,7 @@
      "lời/cử chỉ cảm ơn"
     ]
    ],
-   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+   "e": "Đối chiếu các cặp “貸す → cho mượn” và “お礼 → lời/cử chỉ cảm ơn”; phân biệt nghĩa trong tình huống, không ghép chỉ dựa vào hình chữ."
   },
   {
    "t": "mc",
@@ -522,52 +539,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ, bảng cấu trúc bài này, loa/giọng đọc tiếng Nhật, phiếu thông tin khác nhau cho từng cặp. Không dùng dữ liệu cá nhân thật.",
+  "prep": "Chuẩn bị thẻ “あげる”, “くれる”, “うれしい”, bản hội thoại che lượt trả lời và phiếu đọc có câu hỏi “Ai tặng món quà nhỏ?”.",
   "steps": [
    {
     "t": "10'",
-    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+    "do": "Gợi tình huống bằng câu “誕生日に 何を もらいましたか。”. Cho cặp học viên nói mình muốn biết điều gì trước khi mở lời đáp."
    },
    {
     "t": "20'",
-    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+    "do": "Cho so thẻ “あげる” với “くれる”: học viên diễn đạt nghĩa cho (hướng ra) và cho (hướng về người nói), rồi đặt mỗi từ vào một lượt trao đổi."
    },
    {
     "t": "25'",
-    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+    "do": "Viết hai câu “妹に 本を あげました。” và “兄が プレゼントを くれました。” cạnh nhau. Học viên giải thích khác biệt ý, sau đó thay một thành phần mà vẫn giữ cấu trúc vừa phân tích."
    },
    {
     "t": "20'",
-    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+    "do": "Che lời thoại và giao câu hỏi “Theo hội thoại: Sinh nhật bạn nhận gì?”. Sau hai lượt nghe, yêu cầu nêu bằng chứng thay vì đoán theo từ khóa đơn lẻ."
    },
    {
     "t": "15'",
-    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+    "do": "Cho đổi vai quanh lượt “友達は 何を してくれましたか。”. Người nghe hỏi lại thông tin trước khi chuyển sang lời đáp, giáo viên ghi một chỗ gây hiểu nhầm để chữa cuối hoạt động."
    },
    {
     "t": "15'",
-    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+    "do": "Đầu buổi sau, yêu cầu dựng lại ý “Bạn đã giúp tôi làm bài tập.” không nhìn chữ Nhật. So lời nói của học viên với câu đích và chữa phần làm thay đổi quan hệ ý."
    },
    {
     "t": "20'",
-    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+    "do": "Đọc để giải quyết câu hỏi “Ai tặng món quà nhỏ?”. Mỗi nhóm đánh dấu đoạn chứng minh và giải thích vì sao hai lựa chọn còn lại không khớp."
    },
    {
     "t": "20'",
-    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+    "do": "Giao nhiệm vụ nói có thông tin cho (hướng ra) ở một vai và vui/mừng ở vai kia. Hai bên chỉ hoàn thành phiếu khi đã hỏi để hiểu dữ kiện của nhau."
    },
    {
     "t": "20'",
-    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+    "do": "Viết đoạn nối ý “Tôi đã cho em gái sách.” với “Bạn đã giúp tôi làm bài tập.”. Đổi bài và kiểm chủ thể, mốc thời gian cùng từ phủ định trước khi góp ý độ tự nhiên."
    },
    {
     "t": "15'",
-    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+    "do": "Chữa bài tự chấm từ cặp “くれる” và “うれしい”. Mỗi học viên ghi một câu sửa của chính mình và nêu cách sẽ nhận ra lỗi đó trong lần dùng sau."
    }
   ],
   "games": [
-   "Ghép thẻ câu với tình huống: mỗi nhóm phải giải thích một cặp và chỉ ra từ/cấu trúc quyết định.",
-   "Thông tin lệch: mỗi bạn giữ một phần dữ kiện; phải hỏi lại thay vì đoán để hoàn thành phiếu."
+   "Khoảng trống thông tin: một bạn chỉ thấy “誕生日に 何を もらいましたか。”, bạn kia giữ câu trả lời. Họ hỏi lại để hoàn thành thông tin về cho (hướng ra) trước khi đổi vai.",
+   "Chọn và bảo vệ đáp án: các nhóm nhận câu hỏi “Ai tặng món quà nhỏ?”, chọn một phương án rồi tìm chi tiết đủ bác hai phương án nhiễu."
   ],
   "errors": [
    "Đổi あげる/くれる chỉ theo tiếng Việt “cho”: phải xét hướng về/ra khỏi người nói.",
@@ -575,6 +592,6 @@
    "Dùng もらう nhưng đặt người cho làm chủ đề: kiểm AはBにNをもらう, A là người nhận.",
    "Dùng Vてあげる với người trên trong mọi tình huống: có thể nghe tự cao; chọn mức lịch sự theo quan hệ."
   ],
-  "homework": "Ôn 12–20 thẻ theo lịch 1–3–7 ngày; nghe chép câu đã chọn, ghi âm hai lượt nói và viết đoạn mới thay ít nhất hai chi tiết."
+  "homework": "Ôn “あげる”, “くれる” và “うれしい” bằng câu mới có nghĩa. Ghi âm câu “妹に 本を あげました。”, nghe lại phần kết rồi viết lời giải thích cho câu hỏi “Ai tặng món quà nhỏ?” bằng tiếng Việt."
  }
 }

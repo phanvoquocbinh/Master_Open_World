@@ -1,0 +1,752 @@
+=== COURSE cloud-basics
+name: Điện toán đám mây cơ bản
+icon: ☁️
+floor: 7
+room: 711
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Mô hình dịch vụ, VM/network/storage/DB/IAM, scale/serverless, recovery/SLO, dự toán giả và dự án kiến trúc trung lập nhà cung cấp.
+
+## LESSON cloud-basics-01 | Dịch vụ đám mây và trách nhiệm chia sẻ
+
+### Dịch vụ theo nhu cầu vẫn cần thiết kế
+Cloud là cách cung cấp tài nguyên dùng chung có thể cấp/thu hồi theo nhu cầu, có đo lường và mô hình trách nhiệm. Khóa dùng nhà cung cấp giả Mây Thoi, không yêu cầu tài khoản thật, không mua dịch vụ hay triển khai bên ngoài.
+
+### Ba mức trừu tượng để hỏi đúng trách nhiệm
+IaaS thường cho khách quản lý OS/app trên tài nguyên nền; PaaS trừu tượng thêm runtime/platform; SaaS cung cấp ứng dụng. Ranh giới cụ thể theo dịch vụ/hợp đồng, không chỉ theo tên nhãn.
+~~~text
+Case lab Mây Thoi:
+IaaS VM: khách patch guest OS và app theo thiết kế
+PaaS app runtime: khách quản code/config/data/identity theo contract
+SaaS lịch lớp: khách quản user/dữ liệu/cấu hình được cấp
+Provider: phần hạ tầng/dịch vụ đã cam kết
+Không suy managed nghĩa mọi lỗi/quyền do provider chịu
+~~~
+
+### Shared responsibility thành bảng hành động
+Với app đặt lớp, khách vẫn cần phân quyền ai xem phiếu, backup policy và xử lý lộ credential. Viết owner cho từng lớp và evidence; nếu một ô chưa rõ, phải hỏi hợp đồng dịch vụ trước khi đưa vào thiết kế thực.
+~~~text
+Control | owner giả | evidence
+Guest OS patch trên VM | nhóm app | image version/patch test
+Resource authorization | nhóm app | two-actor tests
+Physical host | provider giả | điều khoản được mô phỏng
+Backup restore | phối hợp theo dịch vụ | restore drill
+Account/workload IAM | nhóm app | policy review/revoke test
+~~~
+
+### Elasticity không thay capacity
+Có max/quota và thời gian khởi động, còn DB/queue có thể là nút thắt. Bắt đầu từ tải giả, SLO và failure mode; scale là một lựa chọn có độ trễ/chi phí, không là câu trả lời duy nhất.
+~~~text
+Workload assumption:
+ normal=20request/s,peak=80request/s (giả)
+ request mix=read80%,write20%
+ startup=45s (giả),scale max=4instances
+ DB pool budget=40connections toàn app
+ Need: load test và backpressure, không hứa autoscale tức thời
+~~~
+
+### Chọn dịch vụ theo nhu cầu và năng lực
+Một app nhỏ có thể không cần nhiều managed components. So latency, data, ops, cost và khả năng rời dịch vụ; không đề xuất tên thương mại hay mua gói dựa vào ví dụ học tập.
+
+PRACTICE: Nộp responsibility matrix IaaS/PaaS/SaaS cho app giả, nêu owner và phép kiểm. Ghi tải/SLO giả và ba giới hạn elasticity; không đăng ký tài khoản hay tạo tài nguyên tính phí.
+Q: Managed service có làm khách hàng hết trách nhiệm không?
++ Không, trách nhiệm chia theo dịch vụ và hợp đồng
+- Có mọi phần
+- Chỉ còn đổi logo
+Q: Elasticity khác mua dư máy cố định ở đâu?
++ Khả năng điều chỉnh tài nguyên theo nhu cầu trong điều kiện dịch vụ
+- Luôn miễn phí
+- Không cần đo tải
+
+## LESSON cloud-basics-02 | Máy ảo, image và cấu hình tái lập
+
+### VM là đơn vị có vòng đời
+VM chạy guest OS, có CPU/RAM/disk/network theo flavor giả. Container khác VM ở ranh giới runtime, không gọi hai thứ luôn tương đương về cô lập; cấu hình app phải chịu được replace instance.
+
+### Manifest tái lập không chứa credential
+JSON sau là đặc tả lab tự đặt, không phải CLI/API của nhà cung cấp nào. image_digest là nhãn giả để review, không dùng như checksum mật mã thật; secret được cấp riêng bằng identity/secret provider theo thiết kế.
+~~~json
+{"vm":"app-lab-1","image":"lab-os-v3","image_digest":"LAB_DIGEST_PLACEHOLDER","cpu":2,"ramMiB":2048,"rootDisk":"ephemeral","serviceIdentity":"app-reader","publicIp":false}
+~~~
+
+### Image có patch và nguồn gốc
+Build image từ nguồn được review, không bake private key/token vào layer hay user-data. Config runtime có version, không SSH sửa tay rồi quên; khi thay image cần smoke/rollback và kiểm dữ liệu không mất ngoài contract.
+~~~text
+image build -> patch/scan/config baseline
+ -> artifact version/digest thật khi triển khai thực
+ -> instance boot + identity ngắn hạn
+ -> readiness + smoke app
+ -> rollout từng phần + drain
+ -> rollback bằng artifact trước đã kiểm nếu tương thích
+~~~
+
+### Tách ephemeral khỏi dữ liệu cần giữ
+Ổ tạm dùng cache/scratch, không làm bản duy nhất của đăng ký. Volume persistent vẫn cần backup/restore và lifecycle rõ; xóa VM có xóa volume hay không phải kiểm theo API dịch vụ, không đoán từ nhãn.
+~~~text
+Root temp: log buffer/cache có thể mất theo policy
+DB data: persistent volume hoặc DB service có recovery
+Uploads: object/file store theo contract
+Replace VM test: app boot lại, không mất dữ liệu đã xác nhận
+No secret trong snapshot/image artifact
+Không xóa tài nguyên thật trong bài tập
+~~~
+
+### Size bằng số đo có headroom
+CPU/RAM/bandwidth khác nhau theo workload, không chỉ số user. Test leak/memory pressure và throughput, định min/max; giảm máy để tiết kiệm phải còn chịu được failure domain đã chốt.
+
+PRACTICE: Nộp manifest VM giả, image pipeline và timeline replace instance. Chỉ mô phỏng bằng tài liệu hoặc hypervisor lab được cấp, kiểm dữ liệu nào được phép mất và restore từ đâu.
+Q: Image VM cần quản lý gì?
++ Nguồn gốc, patch, cấu hình và version tái lập
+- Chỉ wallpaper
+- Mật khẩu hardcode chung
+Q: Dữ liệu trên disk ephemeral nên coi ra sao?
++ Có thể mất khi vòng đời instance kết thúc theo dịch vụ
+- Luôn backup tự động
+- Luôn shared mọi VM
+
+## LESSON cloud-basics-03 | Mạng riêng, subnet và luồng truy cập
+
+### Vẽ đường đi từng kết nối
+Một subnet private không tự chặn mọi truy cập. Chốt route, gateway, firewall/security group, DNS và egress theo công cụ thực tế khi triển khai; ở đây chỉ đặc tả mạng giả, không thay rule trên máy người dùng.
+
+### Ma trận luồng là tài liệu dễ review
+Tách edge, app, DB và management. Port chỉ là một phần control, identity/TLS/app auth vẫn cần; không mở DB từ Internet để test nhanh. Các tên edge/app/db ở đây là nhãn workload nội bộ, không phải host ngoài.
+~~~text
+source -> dest : purpose / rule
+client -> edge : HTTPS / public app entry theo thiết kế
+edge -> app : app port / chỉ identity hoặc subnet được cấp
+app -> db : DB port / chỉ app service
+admin -> management : qua đường quản trị có kiểm
+app -> outside : deny mặc định hoặc allowlist theo nhu cầu
+DB -> Internet : không tự cấp egress rộng
+~~~
+
+### CIDR học bằng mạng private giả
+10.42.0.0/16 là dải private minh họa trong mô hình, không ra lệnh cấu hình thật. Không chồng dải với mạng lab đang dùng nếu triển khai, và không nhầm subnet mask với authorization ứng dụng.
+~~~python
+import ipaddress
+net=ipaddress.ip_network("10.42.10.0/24")
+assert ipaddress.ip_address("10.42.10.7") in net
+assert ipaddress.ip_address("10.42.11.7") not in net
+# Chỉ tính địa chỉ, không mở socket hay đổi network.
+~~~
+
+### Kiểm rule bằng allowed và denied paths
+Kết nối thành công một chiều chưa chứng minh mọi đường bị chặn. Lập probe từ nguồn đúng/sai trên môi trường được cấp; ghi DNS resolution và đường trả về, phân biệt network timeout với app403.
+~~~text
+Expected paths:
+ app identity -> db endpoint : allowed
+ guest/client -> db endpoint : denied
+ app -> dependency không allowlist : denied
+ management -> app : theo role và audit
+ request không quyền đi qua edge : app vẫn denied
+ Evidence: source,dest,port,identity,time,result
+~~~
+
+### Private service vẫn cần kiểm lỗ hổng
+SSRF, workload bị chiếm hoặc credential lộ có thể vượt giả định mạng. Giới hạn metadata access theo nền tảng, egress và quyền workload; không dùng private IP làm bằng chứng mọi input an toàn.
+
+PRACTICE: Nộp sơ đồ subnet/routes và connectivity matrix, gồm năm đường allowed/denied. Chỉ tính CIDR và thiết kế; không quét mạng hay đổi firewall thật trong bài.
+Q: Subnet private có tự bảo đảm ứng dụng an toàn không?
++ Không
+- Có nếu không có public IP
+- Có nếu CIDR dài
+Q: DB nên mở port cho nguồn nào?
++ Chỉ workload được phép theo đường mạng và quyền
+- Toàn mạng ngoài cho tiện
+- Mọi máy trong tổ chức
+
+## LESSON cloud-basics-04 | Lưu trữ object, block và file
+
+### Chọn storage theo thao tác cần làm
+Object cho đối tượng qua API, block cho thiết bị khối và file cho giao diện filesystem theo dịch vụ. Không suy tính năng từ tên: consistency, atomic operation, access mode và giới hạn cần xem contract cụ thể.
+
+### Object key không tự là đường dẫn OS
+Tệp bài giảng tự tạo có key trông như thư mục nhưng thao tác vẫn theo object API. Metadata/content type không thay kiểm file, authorization và cách phục vụ; bucket không public mặc định theo thiết kế lab.
+~~~json
+{"bucket":"lop-lab-private","key":"handouts/CL7/lesson-1.txt","version":"v1-lab","access":"private","retentionDays":30,"contentType":"text/plain"}
+~~~
+
+### Block có filesystem/attach semantics
+VM gắn block volume rồi dùng filesystem phù hợp. Không gắn đọc-ghi cùng một volume cho nhiều writer nếu stack không hỗ trợ phối hợp; snapshot không tự có app consistency nếu DB đang ghi mà chưa có protocol.
+~~~text
+Block: attach mode,single/multi writer theo dịch vụ
+Filesystem: format/mount/ownership theo runbook
+Snapshot: crash-consistent hay app-consistent? ghi rõ
+Restore: clone riêng + fs/app checks
+Capacity: data+index+temp+growth, không chỉ payload
+No format/mount commands chạy trên máy thật trong bài
+~~~
+
+### File share có quyền và failure mode
+NFS/SMB hoặc dịch vụ file có locking/performance khác nhau. Tách user permission với network reachability, xem latency và khi share unavailable; app cần timeout và xử lý lỗi, không treo vô hạn.
+~~~text
+Storage decision:
+ catalogue static -> object nếu API/consistency phù hợp
+ DB files -> block/managed DB được hỗ trợ
+ shared workspace -> file khi cần semantics tương ứng
+ upload private -> object + policy/download auth
+ backup -> storage tách quyền + restore verified
+~~~
+
+### Durability không bằng availability
+Dữ liệu có thể còn bền nhưng tạm không truy cập được; xóa nhầm và lifecycle sai vẫn là rủi ro. Versioning/retention có chi phí và quyền bypass riêng, backup/recovery cần kế hoạch kiểm chứ không chỉ bật option.
+
+PRACTICE: Lập decision matrix object/block/file cho bốn workload giả, ghi consistency/permissions/backup và failure behavior. Nộp lifecycle rule giả cùng ca ngăn xóa ngoài ý muốn.
+Q: Object storage giống filesystem POSIX mọi mặt không?
++ Không
+- Có nếu key có dấu /
+- Có nếu có bucket
+Q: Block và file storage khác gì khái quát?
++ Block cho thiết bị khối, file cho giao diện filesystem chia sẻ theo dịch vụ
+- Hai tên cùng một API
+- Block luôn backup
+
+## LESSON cloud-basics-05 | Database managed và lựa chọn theo tải
+
+### Managed giảm một phần vận hành
+DB service có thể quản patch/replication/backup theo gói giả, nhưng app vẫn chịu schema/query/transaction và quyền dữ liệu. Chọn relational/document theo access pattern và invariants, không theo nhãn managed.
+
+### Kết nối có identity và pool budget
+Không chia max connection cho mỗi instance tùy ý rồi autoscale làm tổng vượt DB limit. Cần pool, timeout, queue/backpressure và quyền tối thiểu; không log connection string chứa credential.
+~~~text
+DB limit giả=60connections
+reserve admin/maintenance=12
+app max instances=4
+per-instance pool<=12 nếu không consumer khác
+include: worker/migration/monitoring trong budget
+actual: test wait time,transaction duration,failover
+~~~
+
+### Primary/replica có vai trò rõ
+Read replica có thể lag theo contract. Luồng xác nhận đăng ký phải đọc authoritative hoặc có cơ chế consistency phù hợp; failover có thể làm connection cũ hỏng nên app cần reconnect/retry có chọn lọc.
+~~~text
+write register -> primary transaction
+confirm view -> primary/read-your-writes theo thiết kế
+analytics -> replica nếu cho phép stale
+failover -> connection error/unknown outcome cần reconcile
+retry -> giữ idempotency,không nhân lệnh ghi
+quota check -> không dựa replica cũ
+~~~
+
+### Maintenance và restore phải diễn tập
+Ghi cửa sổ update/version support và backup/PITR có điều kiện cụ thể. Restore vào instance khác để đối soát, không đè DB nguồn; credential/key/config cũng là dependency của recovery.
+~~~json
+{"db":"enroll-lab","engine":"PostgreSQL","backup":{"rpoMinutes":15,"rtoMinutes":60,"restoreTarget":"separate-lab"},"maintenance":"window giả đã chốt","publicAccess":false}
+~~~
+
+### Tính đúng cần constraint và transaction
+Managed không tự ngăn oversell, duplicate hay cross-tenant query. Giữ unique/FK/check/protocol concurrency, test ca rollback và hai actor; dịch vụ tốt vẫn có thể phục vụ app sai logic.
+
+PRACTICE: Nộp DB decision record, pool budget có worker/migration, timeline failover/unknown và restore oracle. Không cấp DB thật; mọi limit/RPO/RTO là giả định cần kiểm bằng lab.
+Q: DB managed vẫn cần kiểm gì?
++ Schema/query/quyền/backup restore/maintenance/limits
+- Không cần schema
+- Không cần restore vì có replica
+Q: Replica đọc có thể trả dữ liệu cũ không?
++ Có nếu cơ chế replication/contract cho phép
+- Không bao giờ
+- Chỉ khi thiếu index
+
+## LESSON cloud-basics-06 | IAM và quyền tối thiểu
+
+### Identity tách người, workload và pipeline
+Không dùng một credential admin cho tất cả. Quyền theo action/resource/condition, có owner và vòng đời; ưu tiên cấp quyền ngắn hạn theo cơ chế nền tảng khi có, tránh key dài hạn không quản lý.
+
+### Policy giả minh họa phạm vi
+JSON này là ngôn ngữ policy tự đặt để học review, không paste vào cloud API. App đọc một prefix tài liệu, không tự được xóa mọi object hay quản IAM; deny/allow evaluation thực tế phải theo dịch vụ.
+~~~json
+{"principal":"class-reader-lab","allow":[{"action":"object.read","resource":"lop-lab-private/handouts/*"}],"conditions":{"environment":"lab"},"admin":false}
+~~~
+
+### Kiểm quyền bằng ca đúng và sai
+Nếu tất cả request bị403 thì ca âm xanh nhưng app không làm việc được. Kiểm chính quyền cần, ngoài prefix, action delete, identity khác và credential hết hạn; audit không ghi secret.
+~~~text
+class-reader -> read handouts/CL7 : allow
+class-reader -> delete handouts/CL7 : deny
+class-reader -> read receipts/S7 : deny
+guest -> read private handouts : deny
+expired identity -> read : deny/refresh theo protocol
+Evidence: policy version,principal,action,resource,outcome
+~~~
+
+### Rotation và break-glass có kiểm soát
+Thu hồi identity lộ, chuyển consumer sang quyền mới và kiểm key cũ không còn dùng được. Đường quản trị khẩn cấp phải hạn chế, audit và diễn tập, không giấu một backdoor admin trong app để tiện sửa lỗi.
+~~~text
+Identity lifecycle:
+ request quyền -> review scope/owner
+ issue -> consumer dùng qua provider
+ observe -> audit action không value bí mật
+ rotate -> chuyển/verify/revoke
+ incident -> containment + review blast radius
+ decommission -> revoke và rà dependency còn dùng
+~~~
+
+### IAM không thay quyền nghiệp vụ
+Workload được phép đọc DB không đồng nghĩa user S8 được xem phiếu S7. App còn phải kiểm resource/tenant ở server, serialize allowlist và bảo vệ log; hai lớp quyền cần test khác nhau.
+
+PRACTICE: Nộp ba identity giả với policy tối thiểu và12ca allow/deny. Mô phỏng rotate/revoke theo timeline, chỉ ghi tên/version, không tạo hoặc đọc credential thật.
+Q: IAM least privilege nghĩa gì?
++ Chỉ quyền/hành động/tài nguyên/điều kiện cần thiết
+- Cho admin rồi che UI
+- Một key dùng mọi nơi
+Q: Ẩn credential khỏi source có đủ không?
++ Chưa, còn cấp/phạm vi/log/rotation/revoke
+- Có nếu trong env
+- Có nếu base64
+
+## LESSON cloud-basics-07 | Scale, load balancer và autoscaling
+
+### Scale giải một bottleneck có điều kiện
+Scale ngang app cần state/session phù hợp và downstream chịu được tải. Tăng instance trong khi DB lock-bound có thể làm tệ hơn; đo latency, concurrency, queue và error thay vì chỉ nhìn CPU.
+
+### Ước lượng số instance không là cam kết
+Mô hình tuyến tính đơn giản dùng throughput đo được ở SLO và headroom. Mất một instance vẫn đủ tải là điều kiện thêm; con số này không thay load test hoặc phân tích shared failure domain.
+~~~python
+import math
+peak_rps=80; per_instance_rps=35; target_fraction=0.8
+needed=math.ceil(peak_rps/(per_instance_rps*target_fraction))
+assert needed==3
+n_plus_one=needed+1
+assert n_plus_one==4
+# Throughput/target đều giả, phải đo trên app thực.
+~~~
+
+### Autoscale có min/max và phản ứng trễ
+Đặt tín hiệu theo mục tiêu, cooldown/hysteresis và startup time. Warm capacity/quota cần cho peak đột ngột; scale-to-zero có cold start, max limit phải bảo vệ DB/cost, không chỉ giữ app CPU thấp.
+~~~text
+scale signal: queue age + concurrency theo thiết kế
+min=2,max=4 (giả)
+startup=45s,drain=20s (giả)
+DB pool tổng <= budget đã chốt
+load shed: reject có nghĩa trước khi cạn tài nguyên
+Test burst,scale delay,mất instance và downstream chậm
+~~~
+
+### Health check và drain đúng vòng đời
+Readiness báo có thể nhận tải theo điều kiện, liveness báo cần restart theo cơ chế nền tảng. Đừng làm liveness phụ thuộc mọi downstream để cả cụm restart theo một DB lỗi; drain ngừng nhận mới và xử lý đang chạy có deadline.
+~~~text
+new instance -> boot -> readiness pass -> receive traffic
+unready -> remove khỏi backend theo platform
+terminate -> stop receive -> drain in-flight -> shutdown
+long request -> deadline/cancel/idempotency theo contract
+health200 không chứng minh quyền/quota/business flow
+Need business SLI + synthetic lab riêng
+~~~
+
+### Sẵn sàng cao cần xem lỗi chung
+Hai máy cùng volume, vùng mạng hay DB đơn vẫn có điểm lỗi chung. Chọn failure domain theo tác động và chi phí, đảm bảo capacity khi mất một phần; không hứa không downtime chỉ bằng load balancer.
+
+PRACTICE: Nộp scale policy giả và pool/capacity budget khi mất một instance. Thiết kế burst/DBslow/drain tests cùng expected, không tạo VM hay chạy tải vào dịch vụ thật.
+Q: Autoscaling nên dựa vào gì?
++ Tín hiệu phù hợp bottleneck, SLO, min/max và độ trễ
+- Luôn CPU duy nhất
+- Tăng vô hạn khi lỗi
+Q: Load balancer health check có tự chứng minh business flow đúng không?
++ Không
+- Có nếu trả200
+- Có nếu có hai instance
+
+## LESSON cloud-basics-08 | Serverless, sự kiện và giới hạn
+
+### Serverless đổi phần hạ tầng phải quản
+Function/event runtime giúp giảm quản server trực tiếp, nhưng vẫn có timeout/concurrency/runtime version, quyền và chi phí. State bền phải lưu ở dịch vụ phù hợp; biến global trong process không là nguồn dữ liệu đáng tin duy nhất.
+
+### Event contract có id và phiên bản
+JSON giả cho thông báo lớp, không chứa email thật hay token. Delivery có thể lặp/khác thứ tự theo contract, nên consumer phải validate type/version, scope identity và dùng idempotency phù hợp với tác dụng phụ.
+~~~json
+{"eventId":"EV-LAB-7","schemaVersion":1,"kind":"class.confirmed","enrollmentId":"EN7","classId":"CL7","actorId":"S7"}
+~~~
+
+### Dedupe không chỉ check rồi gửi
+Pseudocode chỉ ra transaction cục bộ và tác dụng ngoài. Check processed rồi gửi email không atomic có cửa sổ crash; dùng outbox/provider idempotency hoặc thiết kế phù hợp, không tuyên bố set in-memory là exactly-once.
+~~~text
+consume event -> validate -> authorize service scope
+DB tx: reserve/record eventId unique + durable work state
+commit -> worker xử lý side effect theo idempotency contract
+crash/retry -> reconcile trạng thái, không gửi lặp mù
+permanent error -> dead-letter/quarantine + owner
+ack theo delivery/transaction design, không mặc định trước side effect
+~~~
+
+### Concurrency tạo tải xuống dịch vụ khác
+Scale function nhanh có thể cạn DB connection hoặc gọi dependency quá mức. Đặt concurrency/max attempts/deadline, budget chi phí và poison-message policy; cold start là một phần latency, cần đo trên target thật nếu triển khai.
+~~~text
+Limits giả:
+function timeout=8s,dependency deadline<8s
+max concurrency=10 theo DB budget
+retry=3attempts tổng,backoff/jitter theo policy
+dead-letter: alert owner + retention
+metrics: duration,throttle,retry age,error,cost units
+Không tự retry lỗi schema/authorization mãi
+~~~
+
+### Chọn event khi chấp nhận mô hình bất đồng bộ
+Trả request accepted khác confirmed; UI cần tra trạng thái khi xử lý sau. Không thêm queue/function nếu nghiệp vụ đồng bộ nhỏ đơn giản hơn và không cần khả năng tách tải đó.
+
+PRACTICE: Thiết kế event consumer giả có duplicate/out-of-order/poison/crash cases. Nộp idempotency boundary, limits và expected UI accepted/confirmed; không gọi dịch vụ serverless thật.
+Q: Serverless có nghĩa không có máy chủ không?
++ Không, hạ tầng do nền tảng quản lý ở mức trừu tượng khác
+- Có mọi xử lý không dùng máy
+- Có nên không cần quota
+Q: Event delivery có thể lặp cần gì?
++ Idempotency/dedupe và retry/dead-letter theo contract
+- Tin đúng một lần mọi nơi
+- Ack trước mọi side effect
+
+## LESSON cloud-basics-09 | Backup, RPO/RTO và diễn tập
+
+### Mục tiêu recovery gắn vào tác động
+RPO là mất dữ liệu chấp nhận được theo điểm phục hồi, RTO là thời gian phục hồi mục tiêu. Chốt thời điểm bắt đầu/kết thúc đo và scope app, không chỉ DB online; quy định dự án thật cần người chịu trách nhiệm quyết định.
+
+### Tính số đo diễn tập rõ đơn vị
+Python sau chỉ tính timeline giả theo phút từ mốc0, không đọc đồng hồ hay gọi backup. Backup mới nhất chưa chắc là điểm phục hồi cuối nếu có log/PITR; record điểm thực sự phục hồi đã xác minh.
+~~~python
+failure_at=100; recovered_data_until=88
+recovery_started=102; business_ready=147
+actual_loss_minutes=failure_at-recovered_data_until
+actual_restore_minutes=business_ready-recovery_started
+rpo_target=15;rto_target=60
+assert actual_loss_minutes==12 and actual_restore_minutes==45
+assert actual_loss_minutes<=rpo_target and actual_restore_minutes<=rto_target
+~~~
+
+### Runbook phục hồi có dependency
+Backup cần schema/data/config, quyền đọc và key giải mã theo thiết kế. Tách quyền backup khỏi quyền app khi phù hợp, kiểm lịch sử không bị xóa cùng sự cố; giữ bản sao theo mô hình rủi ro và chi phí đã chốt.
+~~~text
+Prepare: backup inventory + keys/config access + owner
+Isolate: target restore riêng, không overwrite nguồn
+Restore: đúng engine/version/log chain theo runbook
+Verify: checksum + table counts + quota/owner invariants
+Reconnect: app config/identity/network + smoke business
+Record: actual loss/time,exceptions và follow-up
+~~~
+
+### Replica và snapshot có giới hạn riêng
+Replica có thể nhận xóa nhầm; snapshot storage không tự là backup app-consistent. Phân tích ransomware/credential lộ/lifecycle sai và quyền xóa backup, không chỉ sự cố hỏng đĩa; diễn tập với dữ liệu giả tách biệt.
+~~~text
+Drill scenarios:
+ accidental delete lan replica
+ volume mất hoặc instance bị thay
+ backup thiếu key/config -> restore fail có chủ đích
+ schema version lệch -> phát hiện trước cutover
+ recovered DB online nhưng API sai quyền -> chưa business_ready
+Không đếm status backup xanh như restore evidence
+~~~
+
+### Diễn tập có điều kiện dừng
+Không chạy recovery vào môi trường dùng chung khi chưa được cấp. Bài học chỉ lập timeline/runbook hoặc restore DB lab riêng; đánh dấu phần chưa thực thi, cập nhật RPO/RTO theo số đo thay vì thay mục tiêu để báo đạt.
+
+PRACTICE: Nộp runbook và timeline hai sự cố giả, tính actual loss/restore time. Viết oracle nghiệp vụ sau restore và ca thiếu key; nếu chưa chạy chỉ ghi mô phỏng, không nhận diễn tập thật.
+Q: RPO đo gì?
++ Mức mất dữ liệu chấp nhận được theo điểm phục hồi
+- Thời gian restore duy nhất
+- Số replica
+Q: Backup thành công có chứng minh restore thành công không?
++ Chưa
+- Có nếu status xanh
+- Có nếu file lớn
+
+## LESSON cloud-basics-10 | Quan sát, log và SLO
+
+### Đo trải nghiệm thay số máy đang chạy
+SLI là cách đo, SLO là mục tiêu trong cửa sổ/phạm vi, SLA là cam kết có điều khoản. Với app lớp, đo thành công của request hợp lệ và latency, không chỉ process alive hoặc CPU thấp.
+
+### SLO có mẫu số và loại trừ rõ
+Mô hình theo request dưới đây dùng event hợp lệ theo contract và cửa sổ giả. Chốt timeout/error loại nào bad, request sai từ client có loại khỏi mẫu không; không loại lỗi để làm số đẹp.
+~~~python
+eligible=200_000;bad=120;slo=0.999
+observed=(eligible-bad)/eligible
+budget=round(eligible*(1-slo))
+remaining=budget-bad
+assert budget==200 and remaining==80
+assert observed>=slo
+# Request-based SLO, không quy đổi mù sang phút downtime.
+~~~
+
+### Log metric trace có vai trò khác
+Metric theo xu hướng/alert, log theo sự kiện, trace nối các chặng request. Dùng id tương quan giả, không log raw body/token. Tránh label user_id/request_id không giới hạn trong metric khiến cardinality bùng nổ.
+~~~json
+{"event":"registration_result","correlationId":"LAB-C7","outcome":"conflict","durationMs":84,"service":"enroll-lab","noRawPayload":true}
+~~~
+
+### Alert gắn với hành động và owner
+Error-budget burn và latency quan trọng cần ngưỡng/cửa sổ phù hợp; alert từng spike CPU có thể tạo noise. Runbook phải có kiểm phạm vi và cách rollback/giảm tải, không tự thực hiện thay đổi phá hủy từ một số đo đơn lẻ.
+~~~text
+Alert record:
+ signal: valid request error/latency burn theo cửa sổ
+ owner: nhóm lab Mầm Thoi
+ first checks: traffic/deploy/dependency/DB waits
+ action: giảm rollout hoặc shed load theo policy
+ privacy: dashboard/log không lộ data cá nhân
+ recovery: điều kiện clear + postmortem không quy lỗi cá nhân
+~~~
+
+### Quan sát thiếu cũng là giới hạn bằng chứng
+Không có trace không chứng minh không có lỗi, log sample có thể bỏ sót. Ghi coverage/retention/sampling và gap, kiểm clock/correlation khi điều tra; dashboard không là oracle duy nhất cho tính đúng dữ liệu.
+
+PRACTICE: Nộp SLI/SLO document cho đọc lớp và submit, tính error budget với số giả. Thiết kế dashboard/alert có owner và runbook, kèm kiểm canary không lọt log/metric label.
+Q: SLI/SLO/SLA khác nhau khái quát ra sao?
++ SLI là chỉ số, SLO mục tiêu, SLA là cam kết có điều khoản
+- Ba từ đồng nghĩa
+- SLA chỉ là CPU
+Q: Log nhiều hơn có luôn tốt hơn không?
++ Không, cần tín hiệu/chi phí/privacy và retention
+- Có mọi payload
+- Có mọi token
+
+## LESSON cloud-basics-11 | Chi phí, quota và ngân sách
+
+### Đơn giá trong bài hoàn toàn giả
+Dùng đơn vị tín dụng T để học công thức, không là tiền hay báo giá nhà cung cấp. Tách giờ máy, storage, request, egress, backup và log; ghi tải/retention/region giả và độ bất định, không khuyên mua gói.
+
+### Dự toán bằng Decimal có đơn vị
+Một tháng giả30ngày, hai VM cố định và storage/egress/log đã ước tính. Phép tính chỉ minh họa tuyến tính, không bao gồm tier/free quota/tax/cam kết thực; thêm mỗi giả định vào bảng để review.
+~~~python
+from decimal import Decimal as D
+hours=D(30*24);instances=D(2)
+compute=hours*instances*D("0.4")
+storage=D(100)*D("0.2")
+egress=D(50)*D("0.5")
+logs=D(10)*D("0.3")
+base=compute+storage+egress+logs
+reserve=base*D("0.2")
+assert base==D("624.0")
+assert base+reserve==D("748.80")
+~~~
+
+### Sensitivity cho thấy biến nào đáng đo
+Tăng lượng log hay egress có thể thay tổng đáng kể. Tính normal/peak/failure capacity, retention và backup growth; đừng nhân một con số cost/user từ mẫu nhỏ rồi hứa chính xác cho mọi tải.
+~~~text
+Scenario N: 2VM,50unit egress,10unit log
+Scenario P: VM hours tăng theo peak,egress x3
+Scenario R: restore drill + backup storage tăng
+Each row: quantity*unit price giả = credits T
+Uncertainty: load mix,compression,cache hit,retention
+Decision: đo biến nhạy trước tối ưu nhỏ
+~~~
+
+### Budget alert không mặc định hard cap
+Alert có thể trễ và không dừng chi phí. Dùng quota/min-max/lifecycle/owner cùng kế hoạch xử lý, tránh tắt DB đột ngột làm mất nghiệp vụ. Tài nguyên orphan như volume/IP/snapshot/log cũng có thể tồn tại sau xóa VM.
+~~~json
+{"budgetCredits":800,"unit":"T-fictional","alertsAtPercent":[50,80,100],"owner":"nhom-lab-soi","hardCapGuaranteed":false,"guardrails":{"maxVm":4,"logRetentionDays":14}}
+~~~
+
+### Tiết kiệm đi cùng SLO và an toàn
+Xóa backup để giảm bill có thể phá RPO, giảm replica có thể phá failure capacity. Review cost theo mục đích và evidence, dọn chỉ tài nguyên lab đã xác nhận owner/retention; trong khóa không chạy lệnh xóa hay tạo cloud thật.
+
+PRACTICE: Tạo bảng dự toán ba kịch bản bằng giá giả, kiểm đơn vị và reserve. Nộp sensitivity, budget response/runbook và lý do không tự tắt dịch vụ khi alert100%.
+Q: Budget alert có tự là hard cap chi phí không?
++ Không, tùy cơ chế và độ trễ
+- Có mọi nền tảng
+- Có nếu gửi email
+Q: Dự toán cloud cần ghi gì?
++ Giả định, đơn vị, tải, đơn giá giả và độ bất định
+- Một tổng không nguồn
+- Giá thật thuộc mọi region
+
+## LESSON cloud-basics-12 | Di chuyển tải và tránh khóa vào mô hình
+
+### Di chuyển cần hiểu chỗ phụ thuộc
+Container giúp đóng gói runtime nhưng không xóa khác biệt IAM, network, DB, queue hay observability. Chọn portability có chủ đích ở nơi cần, không tự xây mọi dịch vụ để tránh phụ thuộc với chi phí không đo.
+
+### Hợp đồng giúp thay implementation có kiểm
+Repository/object adapter và export format cần test behavior, consistency, limits và lỗi. Không viết wrapper chỉ đổi tên API rồi hứa mọi nhà cung cấp tương đương; dữ liệu/schema/version mới là phần khó của migration.
+~~~text
+Portability inventory:
+ runtime/container: OS/arch/syscalls/dependencies
+ DB: schema,extensions,transaction/isolation
+ object: API,metadata,versioning,consistency
+ IAM: principal/action/resource/condition mapping
+ queue: delivery/order/retry/dead-letter
+ ops: metrics,backup,incident,ownership
+~~~
+
+### Cutover có cửa sổ ghi và đối soát
+Chốt nguồn ghi chính, snapshot/change capture hoặc downtime có kế hoạch. Copy xong không đủ khi dữ liệu còn thay đổi; DNS TTL không là bảo đảm mọi client chuyển ngay, cần theo dõi traffic và session.
+~~~text
+1 inventory + compatibility tests + recovery plan
+2 seed/snapshot -> copy -> incremental changes theo protocol
+3 reconcile count/checksum/domain invariants
+4 freeze/switch writer theo kế hoạch
+5 route traffic dần + smoke + monitor
+6 retire nguồn cũ sau retention/rollback gate có owner
+~~~
+
+### Rollback dữ liệu không chỉ đổi endpoint
+Sau khi nguồn mới nhận ghi, quay về cũ có thể mất giao dịch mới. Thiết kế reverse sync hay forward-fix theo miền, tránh hai nguồn tự ghi cùng lúc không giải quyết conflict; diễn tập bằng dữ liệu giả.
+~~~json
+{"migration":"lop-lab-a-to-b","writer":"single-authoritative-at-a-time","gates":["reconcile","business_smoke","slo_window"],"rollbackAfterNewWrites":"requires-reviewed-data-plan","externalDeployment":false}
+~~~
+
+### Chấp nhận phụ thuộc khi lợi ích rõ
+Một managed feature có thể giảm vận hành đáng kể và vẫn hợp lý. Ghi chi phí/khả năng rời đi, export và test restore; vendor-neutral là kỹ năng hiểu mô hình, không là lời hứa đổi nền tảng không sửa gì.
+
+PRACTICE: Nộp portability matrix cho app giả và cutover timeline có ghi mới sau chuyển. Chứng minh vì sao đổi URL lại chưa đủ rollback, thiết kế oracle đối soát cùng điều kiện dừng.
+Q: Portability có nghĩa mọi dịch vụ thay thế không sửa code không?
++ Không
+- Có nếu dùng container
+- Có nếu ghi SQL
+Q: Cutover cần gì ngoài copy data?
++ Đối soát, quyền/dns/traffic, cửa sổ ghi và rollback/forward-fix
+- Chỉ đổi URL
+- Chỉ tắt máy cũ
+
+## LESSON cloud-basics-13 | Dự án: kiến trúc lab và dự toán giả
+
+### Dự án kiến trúc Mây Thoi cho lớp Sợi Nếp
+Thiết kế app đặt lớp với tải/SLO giả, dữ liệu tự đặt và nhà cung cấp hư cấu. Bài tập là hồ sơ kiến trúc và mô phỏng tính toán, không yêu cầu account thật, tạo resource hay chi tiền.
+
+### Sơ đồ phải thể hiện trust và failure domain
+Dùng VM/app hoặc runtime managed theo lý do, DB authoritative, storage private, identity riêng và đường quan sát. Chọn số thành phần vừa đủ, vẽ dependency chung và tác động khi mỗi thành phần lỗi.
+~~~text
+client -> edge -> app instances -> authoritative DB
+                         | -> private object store
+                         | -> event/outbox nếu có lý do
+IAM: human/workload/pipeline tách scope
+Recovery: backups + keys/config + separate restore target
+Observability: user-facing SLI,logs privacy,runbook owner
+~~~
+
+### Manifest giả làm đầu vào review
+Tất cả số là giả định, cần kiểm khi có môi trường được cấp. RPO/RTO không được gọi là đã đạt nếu chỉ mô phỏng; reserve cost giả không bảo đảm hard cap, và hai instance không tự bằng HA.
+~~~json
+{"project":"soi-nep-lab","peakRps":80,"app":{"min":2,"max":4},"dbPoolTotal":40,"slo":0.999,"rpoMinutes":15,"rtoMinutes":60,"budget":{"unit":"T-fictional","estimate":748.8,"alertOnly":true},"deployed":false}
+~~~
+
+### Rubric đặt trọng tâm vào quyết định
+Reviewer cần lần theo yêu cầu tới control và phép kiểm. Dự toán có đơn vị, recovery có oracle và threat model có actor; nếu chỉ tính toán offline thì evidence phải ghi đúng, không dựng log deploy giả.
+~~~text
+Rubric /100: requirements15,architecture25,IAM/network15,recovery15,SLO15,cost/docs15
+Deliver: diagrams,ADR,manifests giả,capacity/cost scripts
+Failure cases: app loss,DB lag,secret revoke,backup missing key
+Verify: quyền đúng/sai,quota invariant,recovery oracle
+Handoff: assumptions,owners,limits,unrun checks rõ ràng
+~~~
+
+### Giới hạn giúp hồ sơ dùng được
+Ghi các giả định chưa kiểm như startup time, DB throughput và backup size. Khi có lab thật, ưu tiên đo những biến ảnh hưởng SLO/cost/recovery nhiều nhất; không biến mô phỏng thành lời cam kết dịch vụ.
+
+PRACTICE: Bàn giao hồ sơ theo rubric, nhờ bạn review một failure domain và một khoản chi phí bị quên. Chạy các script tính offline, ghi mọi giá/limit giả và không triển khai đám mây thật.
+Q: Dự án kiến trúc cloud cần bàn giao gì?
++ Sơ đồ, threat/cost/recovery/SLO và bằng chứng lab có giới hạn
+- Chỉ icon
+- Chỉ số máy
+Q: Hai instance có tự bảo đảm hệ thống sẵn sàng cao không?
++ Không
+- Có nếu khác tên
+- Có nếu load balancer bật
+
+## LESSON cloud-basics-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Nhà cung cấp vận hành phần được cam kết, khách vẫn cần quản lý dữ liệu, identity, cấu hình và app theo mô hình; không suy từ nhãn managed.
+2. Image có thể chứa lỗ hổng/secret/dữ liệu thừa; build có kiểm, identity cấp lúc chạy và rollback bằng artifact đã kiểm.
+3. Cần route/firewall/identity/egress và bảo mật app; private network không thay authorization hay patch.
+4. Object API, naming, consistency và cập nhật có contract riêng; dấu / có thể chỉ là phần key, không suy atomic rename/locking như filesystem.
+
+### Dữ liệu và điều kiện biên
+5. Phần vận hành được giảm tùy dịch vụ, nhưng model dữ liệu, app correctness, quyền và khả năng phục hồi vẫn cần bằng chứng.
+6. Identity của workload, người quản trị và pipeline nên tách; quyền ngắn hạn có điều kiện giảm phạm vi ảnh hưởng khi credential lộ.
+7. Queue age/concurrency/latency có thể cần hơn CPU; scale app có thể làm DB quá tải, cần quota/backpressure/cooldown theo hệ thống.
+8. Cần xét timeout/concurrency/cold start/runtime/IAM/state; serverless đổi phần trách nhiệm chứ không bỏ thiết kế hay vận hành.
+
+### Tính đúng và cách điều tra
+9. RPO khác RTO là thời gian khôi phục mục tiêu; cả hai là mục tiêu, phải đo bằng diễn tập và đối soát chứ không chỉ lịch backup.
+10. Chọn chỉ số theo trải nghiệm người dùng, cửa sổ/phạm vi rõ; điều khoản SLA tùy dịch vụ không tự bằng SLO nội bộ.
+11. Alert cần response owner, quota/guardrail và dọn tài nguyên có kiểm; đo đầy đủ egress/storage/log/backup chứ không chỉ compute.
+12. Container không xóa khác biệt IAM/storage/DB/queue/ops; giữ interface/export/runbook có kiểm và tính chi phí chuyển đổi theo nhu cầu.
+
+### Rủi ro và lựa chọn phương án
+13. Thiết kế review được cần giả định tải, ranh giới, identity, failure mode, phục hồi và chi phí; không triển khai thật hay tiêu tiền từ bài tập.
+14. Phân biệt ephemeral và persistent volume theo contract, không lưu dữ liệu duy nhất cần giữ trên ổ tạm rồi kỳ vọng thay VM vẫn còn.
+15. Cách gắn, chia sẻ, locking, performance và recovery cần xét engine/dịch vụ, không mount cùng volume nhiều nơi nếu không có thiết kế hỗ trợ.
+16. Vòng đời secret và identity cần kiểm từ provider tới consumer; config/artifact/log/backups cũng có thể lộ.
+
+### Dự án, bằng chứng và bàn giao
+17. Không suy exactly-once end-to-end từ nhãn một thành phần; thiết kế giao dịch/đánh dấu xử lý và tác dụng ngoài theo rủi ro.
+18. Log/metric/trace phải phục vụ chẩn đoán và mục tiêu, tránh cardinality không giới hạn và dữ liệu nhạy cảm; correlation id không nhạy cảm.
+19. Migration có dữ liệu đang đổi và consumer phụ thuộc, cần kế hoạch chuyển nguồn ghi và đối soát, không để hai bên cùng ghi không có protocol.
+20. Cần xem failure domain, shared dependencies, capacity khi mất một bên, health/drain và dữ liệu; đếm máy không thay phân tích lỗi.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Managed service có làm khách hàng hết trách nhiệm không?
++ Không, trách nhiệm chia theo dịch vụ và hợp đồng
+- Có mọi phần
+- Chỉ còn đổi logo
+Q: Image VM cần quản lý gì?
++ Nguồn gốc, patch, cấu hình và version tái lập
+- Chỉ wallpaper
+- Mật khẩu hardcode chung
+Q: Subnet private có tự bảo đảm ứng dụng an toàn không?
++ Không
+- Có nếu không có public IP
+- Có nếu CIDR dài
+Q: Object storage giống filesystem POSIX mọi mặt không?
++ Không
+- Có nếu key có dấu /
+- Có nếu có bucket
+Q: DB managed vẫn cần kiểm gì?
++ Schema/query/quyền/backup restore/maintenance/limits
+- Không cần schema
+- Không cần restore vì có replica
+Q: IAM least privilege nghĩa gì?
++ Chỉ quyền/hành động/tài nguyên/điều kiện cần thiết
+- Cho admin rồi che UI
+- Một key dùng mọi nơi
+Q: Autoscaling nên dựa vào gì?
++ Tín hiệu phù hợp bottleneck, SLO, min/max và độ trễ
+- Luôn CPU duy nhất
+- Tăng vô hạn khi lỗi
+Q: Serverless có nghĩa không có máy chủ không?
++ Không, hạ tầng do nền tảng quản lý ở mức trừu tượng khác
+- Có mọi xử lý không dùng máy
+- Có nên không cần quota
+Q: RPO đo gì?
++ Mức mất dữ liệu chấp nhận được theo điểm phục hồi
+- Thời gian restore duy nhất
+- Số replica
+Q: SLI/SLO/SLA khác nhau khái quát ra sao?
++ SLI là chỉ số, SLO mục tiêu, SLA là cam kết có điều khoản
+- Ba từ đồng nghĩa
+- SLA chỉ là CPU
+Q: Budget alert có tự là hard cap chi phí không?
++ Không, tùy cơ chế và độ trễ
+- Có mọi nền tảng
+- Có nếu gửi email
+Q: Portability có nghĩa mọi dịch vụ thay thế không sửa code không?
++ Không
+- Có nếu dùng container
+- Có nếu ghi SQL
+Q: Dự án kiến trúc cloud cần bàn giao gì?
++ Sơ đồ, threat/cost/recovery/SLO và bằng chứng lab có giới hạn
+- Chỉ icon
+- Chỉ số máy
+Q: Dữ liệu trên disk ephemeral nên coi ra sao?
++ Có thể mất khi vòng đời instance kết thúc theo dịch vụ
+- Luôn backup tự động
+- Luôn shared mọi VM
+Q: Block và file storage khác gì khái quát?
++ Block cho thiết bị khối, file cho giao diện filesystem chia sẻ theo dịch vụ
+- Hai tên cùng một API
+- Block luôn backup
+Q: Ẩn credential khỏi source có đủ không?
++ Chưa, còn cấp/phạm vi/log/rotation/revoke
+- Có nếu trong env
+- Có nếu base64
+Q: Event delivery có thể lặp cần gì?
++ Idempotency/dedupe và retry/dead-letter theo contract
+- Tin đúng một lần mọi nơi
+- Ack trước mọi side effect
+Q: Log nhiều hơn có luôn tốt hơn không?
++ Không, cần tín hiệu/chi phí/privacy và retention
+- Có mọi payload
+- Có mọi token
+Q: Cutover cần gì ngoài copy data?
++ Đối soát, quyền/dns/traffic, cửa sổ ghi và rollback/forward-fix
+- Chỉ đổi URL
+- Chỉ tắt máy cũ
+Q: Hai instance có tự bảo đảm hệ thống sẵn sàng cao không?
++ Không
+- Có nếu khác tên
+- Có nếu load balancer bật

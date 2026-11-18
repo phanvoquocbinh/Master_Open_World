@@ -1,0 +1,764 @@
+{
+ "no": 18,
+ "title": "Ôn tập tổng hợp 2 – Bản bàn giao sau một đơn vật tư sai",
+ "sub": "数量一样，不代表内容正确 · 建议不等于决定",
+ "goals": [
+  "Đối chiếu số lượng với chủng loại để phát hiện sai khác.",
+  "Tách đề nghị, điều được xác nhận và việc còn chờ trong bản ghi.",
+  "Dùng đối chiếu và mốc thời gian để sửa tin gây hiểu nhầm.",
+  "Viết bàn giao đủ bằng chứng, cách xử lý và trách nhiệm tiếp theo."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tổng số đúng vẫn có thể giao sai",
+   "html": "<p>Nhóm đặt hai hộp thẻ trắng và một hộp thẻ màu, nhưng nhận ba hộp màu. Tổng số hộp vẫn là ba, còn nội dung không đúng. Trong tình huống cửa hàng tự đặt, nhóm phải xác nhận đổi đúng hai hộp và sửa lời ghi nhầm “hoạt động bị hủy”; không suy từ lỗi vật tư ra việc hủy toàn bộ.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Nghe con số cùng loại vật",
+   "html": "<p>Đánh dấu loại đi sau số trước khi cộng tổng. Trong bản bàn giao, từ chỉ trạng thái như 建议、确认、暂时 quyết định người đọc có được thực hiện ngay hay phải chờ.</p>",
+   "items": [
+    {
+     "sym": "liǎng hé / yì hé",
+     "ex": [
+      "两盒白卡",
+      "一盒彩卡",
+      "三盒彩卡"
+     ],
+     "vi": "盒 hé là hộp. Tổng ba hộp không cho biết đúng màu; cần nghe cả 白卡 và 彩卡."
+    },
+    {
+     "sym": "shùliàng",
+     "ex": [
+      "数量",
+      "数量一样"
+     ],
+     "vi": "数 shù trong 数量 là số lượng. Khi nghĩa đếm bằng động từ, chữ 数 có cách đọc shǔ; không áp một âm cho mọi trường hợp."
+    },
+    {
+     "sym": "gāngcái / zuìhòu",
+     "ex": [
+      "刚才的建议",
+      "最后确认"
+     ],
+     "vi": "刚才 định vị phần trước; 最后确认 cho biết kết quả cuối. Giữ hai mốc rõ để không chép đề nghị cũ thành cách xử lý đã chốt."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm từ dùng trong tình huống",
+   "items": [
+    {
+     "w": "订单",
+     "py": "dìngdān",
+     "hv": "đính đơn",
+     "vi": "đơn đặt",
+     "ex": "订单上有两种卡片。",
+     "exPy": "Dìngdān shàng yǒu liǎng zhǒng kǎpiàn.",
+     "exVi": "Đơn có hai loại thẻ."
+    },
+    {
+     "w": "原来",
+     "py": "yuánlái",
+     "hv": "nguyên lai",
+     "vi": "ban đầu",
+     "ex": "原来订的是两白一彩。",
+     "exPy": "Yuánlái dìng de shì liǎng bái yì cǎi.",
+     "exVi": "Ban đầu đặt hai trắng một màu."
+    },
+    {
+     "w": "收到",
+     "py": "shōudào",
+     "hv": "thu đáo",
+     "vi": "nhận được",
+     "ex": "收到的三盒都是彩卡。",
+     "exPy": "Shōudào de sān hé dōu shì cǎikǎ.",
+     "exVi": "Ba hộp nhận đều là thẻ màu."
+    },
+    {
+     "w": "保留",
+     "py": "bǎoliú",
+     "hv": "bảo lưu",
+     "vi": "giữ lại",
+     "ex": "我们保留一盒彩卡。",
+     "exPy": "Wǒmen bǎoliú yì hé cǎikǎ.",
+     "exVi": "Chúng tôi giữ một hộp thẻ màu."
+    },
+    {
+     "w": "处理",
+     "py": "chǔlǐ",
+     "hv": "xử lý",
+     "vi": "xử lý",
+     "ex": "处理办法还要确认。",
+     "exPy": "Chǔlǐ bànfǎ hái yào quèrèn.",
+     "exVi": "Cách xử lý còn phải xác nhận."
+    },
+    {
+     "w": "换货",
+     "py": "huànhuò",
+     "hv": "hoán hóa",
+     "vi": "đổi hàng",
+     "ex": "这次只给两盒换货。",
+     "exPy": "Zhè cì zhǐ gěi liǎng hé huànhuò.",
+     "exVi": "Lần này chỉ đổi hai hộp."
+    },
+    {
+     "w": "运费",
+     "py": "yùnfèi",
+     "hv": "vận phí",
+     "vi": "phí gửi",
+     "ex": "运费写在答复里。",
+     "exPy": "Yùnfèi xiě zài dáfù lǐ.",
+     "exVi": "Phí gửi ghi trong phản hồi."
+    },
+    {
+     "w": "答复",
+     "py": "dáfù",
+     "hv": "đáp phúc",
+     "vi": "trả lời xác nhận",
+     "ex": "请保留这份答复。",
+     "exPy": "Qǐng bǎoliú zhè fèn dáfù.",
+     "exVi": "Hãy giữ phản hồi này."
+    },
+    {
+     "w": "记录",
+     "py": "jìlù",
+     "hv": "ký lục",
+     "vi": "ghi chép",
+     "ex": "原来的记录写错了。",
+     "exPy": "Yuánlái de jìlù xiě cuò le.",
+     "exVi": "Ghi chép ban đầu viết sai."
+    },
+    {
+     "w": "确认",
+     "py": "quèrèn",
+     "hv": "xác nhận",
+     "vi": "xác nhận",
+     "ex": "确认以后再寄。",
+     "exPy": "Quèrèn yǐhòu zài jì.",
+     "exVi": "Xác nhận rồi mới gửi."
+    },
+    {
+     "w": "刚才",
+     "py": "gāngcái",
+     "hv": "",
+     "vi": "lúc nãy",
+     "ex": "刚才不是最后决定。",
+     "exPy": "Gāngcái bú shì zuìhòu juédìng.",
+     "exVi": "Lúc nãy chưa phải quyết định cuối."
+    },
+    {
+     "w": "暂时",
+     "py": "zànshí",
+     "hv": "tạm thời",
+     "vi": "tạm thời",
+     "ex": "暂时先做不用卡片的部分。",
+     "exPy": "Zànshí xiān zuò bú yòng kǎpiàn de bùfen.",
+     "exVi": "Tạm làm phần không cần thẻ trước."
+    },
+    {
+     "w": "数量",
+     "py": "shùliàng",
+     "hv": "số lượng",
+     "vi": "số lượng",
+     "ex": "数量一样，颜色不同。",
+     "exPy": "Shùliàng yíyàng, yánsè bù tóng.",
+     "exVi": "Số lượng giống, màu khác."
+    },
+    {
+     "w": "区别",
+     "py": "qūbié",
+     "hv": "khu biệt",
+     "vi": "sự khác biệt",
+     "ex": "请说清两种方案的区别。",
+     "exPy": "Qǐng shuō qīng liǎng zhǒng fāng’àn de qūbié.",
+     "exVi": "Hãy nói rõ khác biệt giữa hai phương án."
+    },
+    {
+     "w": "修改",
+     "py": "xiūgǎi",
+     "hv": "tu cải",
+     "vi": "sửa đổi",
+     "ex": "我要修改给小组的消息。",
+     "exPy": "Wǒ yào xiūgǎi gěi xiǎozǔ de xiāoxi.",
+     "exVi": "Tôi cần sửa tin gửi nhóm."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ôn 不是…而是… để sửa kết luận quá rộng",
+   "html": "<p>Khi người nghe hiểu “giao sai” thành “mọi thứ phải trả” hoặc “hoạt động bị hủy”, cần chỉ rõ ý bị bác và cách xử lý thật. Không chỉ phủ định rồi để người đọc tự đoán phần đúng.</p>",
+   "ex": [
+    {
+     "t": "不是三盒都不要，而是只换两盒。",
+     "py": "Bú shì sān hé dōu bú yào, ér shì zhǐ huàn liǎng hé.",
+     "vi": "Không phải bỏ cả ba hộp mà chỉ đổi hai."
+    },
+    {
+     "t": "问题不是总数少了，而是颜色不对。",
+     "py": "Wèntí bú shì zǒngshù shǎo le, ér shì yánsè bú duì.",
+     "vi": "Vấn đề không phải thiếu tổng số mà sai màu."
+    },
+    {
+     "t": "不是取消活动，而是先做别的部分。",
+     "py": "Bú shì qǔxiāo huódòng, ér shì xiān zuò bié de bùfen.",
+     "vi": "Không phải hủy hoạt động mà làm phần khác trước."
+    }
+   ],
+   "tips": [
+    "Vế sau phải cung cấp thông tin thay thế đúng, không chỉ thêm một lời trách."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ôn 刚才、后来、最后: theo dõi điều được cập nhật",
+   "html": "<p>刚才 có thể chỉ đề nghị trước đó; 后来 kể bước thay đổi tiếp theo; 最后 đưa kết luận cuối. Gắn trạng thái “đã xác nhận” với thông tin đúng ở cuối, không giữ hai phương án trái nhau trong bản bàn giao.</p>",
+   "ex": [
+    {
+     "t": "刚才说全部寄回，只是一个建议。",
+     "py": "Gāngcái shuō quánbù jì huí, zhǐ shì yí ge jiànyì.",
+     "vi": "Lúc nãy nói gửi lại toàn bộ chỉ là một đề nghị."
+    },
+    {
+     "t": "后来我们确认只换两盒。",
+     "py": "Hòulái wǒmen quèrèn zhǐ huàn liǎng hé.",
+     "vi": "Sau đó xác nhận chỉ đổi hai hộp."
+    },
+    {
+     "t": "最后的答复写清了数量和运费。",
+     "py": "Zuìhòu de dáfù xiě qīng le shùliàng hé yùnfèi.",
+     "vi": "Phản hồi cuối đã ghi rõ số lượng và phí."
+    }
+   ],
+   "tips": [
+    "Một bản ghi tốt cho biết phương án nào đã bị thay thế, không buộc người ca sau đọc lại toàn bộ cuộc gọi."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Ba hộp không có nghĩa đơn đã đúng",
+   "lang": "zh-CN",
+   "note": "An Hòa đại diện nhóm hỏi cửa hàng Diệp Mộc giả. Cần đối chiếu loại thẻ và theo dõi phương án cuối.",
+   "lines": [
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "我们订了两盒白卡、一盒彩卡，收到三盒彩卡。",
+     "py": "Wǒmen dìng le liǎng hé báikǎ, yì hé cǎikǎ, shōudào sān hé cǎikǎ.",
+     "vi": "Chúng tôi đặt hai hộp trắng, một hộp màu nhưng nhận ba hộp màu."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "请发订单和照片，我们先看哪部分不一样。",
+     "py": "Qǐng fā dìngdān hé zhàopiàn, wǒmen xiān kàn nǎ bùfen bù yíyàng.",
+     "vi": "Gửi đơn và ảnh, chúng tôi xem phần nào khác trước."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "已经发了。总数是三盒，但是颜色不对。",
+     "py": "Yǐjīng fā le. Zǒngshù shì sān hé, dànshì yánsè bú duì.",
+     "vi": "Đã gửi rồi. Tổng là ba hộp nhưng sai màu."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "确认了，确实应该换两盒，不用全部寄回。",
+     "py": "Quèrèn le, quèshí yīnggāi huàn liǎng hé, bú yòng quánbù jì huí.",
+     "vi": "Xác nhận rồi, đúng là đổi hai hộp, không cần gửi hết."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "刚才说全部寄回，不是已经决定了吗？",
+     "py": "Gāngcái shuō quánbù jì huí, bú shì yǐjīng juédìng le ma?",
+     "vi": "Lúc nãy nói gửi hết chẳng phải đã chốt sao?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "那只是建议。现在确认保留一盒彩卡，换两盒白卡。",
+     "py": "Nà zhǐ shì jiànyì. Xiànzài quèrèn bǎoliú yì hé cǎikǎ, huàn liǎng hé báikǎ.",
+     "vi": "Đó chỉ là đề nghị. Giờ chốt giữ một màu và đổi lấy hai trắng."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "这次运费由谁付？请写进答复。",
+     "py": "Zhè cì yùnfèi yóu shéi fù? Qǐng xiě jìn dáfù.",
+     "vi": "Ai trả phí lần này? Hãy ghi trong trả lời."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "我们按这次确认的办法付运费，我会写清楚。",
+     "py": "Wǒmen àn zhè cì quèrèn de bànfǎ fù yùnfèi, wǒ huì xiě qīngchu.",
+     "vi": "Theo phương án lần này chúng tôi trả phí và sẽ ghi rõ."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "我还要修改消息，有人以为下午活动取消了。",
+     "py": "Wǒ hái yào xiūgǎi xiāoxi, yǒu rén yǐwéi xiàwǔ huódòng qǔxiāo le.",
+     "vi": "Tôi còn sửa tin vì có người tưởng hủy hoạt động chiều."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "不是取消，只是需要等正确的卡片。",
+     "py": "Bú shì qǔxiāo, zhǐ shì xūyào děng zhèngquè de kǎpiàn.",
+     "vi": "Không hủy, chỉ cần chờ đúng thẻ."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "对，我们先做不用卡片的部分，收到以后再分组。",
+     "py": "Duì, wǒmen xiān zuò bú yòng kǎpiàn de bùfen, shōudào yǐhòu zài fēnzǔ.",
+     "vi": "Đúng, chúng tôi làm phần không cần thẻ trước, nhận rồi chia nhóm."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "好，请把最后方案读一遍，我们一起核对。",
+     "py": "Hǎo, qǐng bǎ zuìhòu fāng’àn dú yí biàn, wǒmen yìqǐ héduì.",
+     "vi": "Được, bạn đọc phương án cuối để cùng đối chiếu."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Điểm sai của hàng là gì?",
+     "o": [
+      "Gửi thừa mười hộp",
+      "Màu/chủng loại, không phải tổng số",
+      "Thiếu toàn bộ ba hộp"
+     ],
+     "a": 1,
+     "e": "Tổng ba đúng nhưng thay vì hai trắng một màu lại là ba màu."
+    },
+    {
+     "q": "Món nào giữ lại theo phương án cuối?",
+     "o": [
+      "Cả ba màu",
+      "Không giữ gì",
+      "Một hộp màu"
+     ],
+     "a": 2,
+     "e": "Phản hồi cuối nêu 保留一盒彩卡."
+    },
+    {
+     "q": "Cần đổi lấy gì?",
+     "o": [
+      "Hai hộp màu",
+      "Ba hộp bất kỳ",
+      "Hai hộp trắng"
+     ],
+     "a": 2,
+     "e": "Phương án chốt là 换两盒白卡."
+    },
+    {
+     "q": "Vì sao sửa tin cho nhóm?",
+     "o": [
+      "Có người tưởng hủy hoạt động",
+      "Tất cả không muốn dự nữa",
+      "Không ai biết gửi ảnh"
+     ],
+     "a": 0,
+     "e": "An Hòa nói có người 以为下午活动取消了."
+    },
+    {
+     "q": "Phương án hoạt động trước khi thẻ đúng tới là gì?",
+     "o": [
+      "Chia nhóm theo thẻ sai ngay",
+      "Làm phần không cần thẻ trước",
+      "Dừng tất cả dù không cần thẻ"
+     ],
+     "a": 1,
+     "e": "Lượt mười một tách phần làm trước với phần chờ nhận thẻ."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc hiểu: Ca sau cần biết kết luận nào còn hiệu lực",
+   "text": "我们为读书活动订了两盒白卡和一盒彩卡，却收到三盒彩卡。总数没有少，内容仍然不对。上午有人建议全部退回，新同学把建议记成已经确认的办法，还告诉大家活动可能取消。\n\n后来我和店员核对订单与照片，确定保留一盒彩卡，只换两盒白卡。店里在这次答复中同意付寄回运费。我把这个结论读了一遍，请对方写清数量、颜色和费用，再修改给小组的消息。\n\n下午不是取消活动，而是先做不用卡片的部分，正确卡片到齐后再分组。我在交接记录中写清什么已确认、什么仍要等，附上最后答复。这样接班的人不用猜哪句话是旧建议，也不会把一个物品问题扩大成全部活动停止。",
+   "py": "Wǒmen wèi dúshū huódòng dìng le liǎng hé báikǎ hé yì hé cǎikǎ, què shōudào sān hé cǎikǎ. Zǒngshù méiyǒu shǎo, nèiróng réngrán bú duì. Shàngwǔ yǒu rén jiànyì quánbù tuì huí, xīn tóngxué bǎ jiànyì jì chéng yǐjīng quèrèn de bànfǎ, hái gàosu dàjiā huódòng kěnéng qǔxiāo.\n\nHòulái wǒ hé diànyuán héduì dìngdān yǔ zhàopiàn, quèdìng bǎoliú yì hé cǎikǎ, zhǐ huàn liǎng hé báikǎ. Diàn lǐ zài zhè cì dáfù zhōng tóngyì fù jì huí yùnfèi. Wǒ bǎ zhège jiélùn dú le yí biàn, qǐng duìfāng xiě qīng shùliàng, yánsè hé fèiyòng, zài xiūgǎi gěi xiǎozǔ de xiāoxi.\n\nXiàwǔ bú shì qǔxiāo huódòng, ér shì xiān zuò bú yòng kǎpiàn de bùfen, zhèngquè kǎpiàn dào qí hòu zài fēnzǔ. Wǒ zài jiāojiē jìlù zhōng xiě qīng shénme yǐ quèrèn, shénme réng yào děng, fù shàng zuìhòu dáfù. Zhèyàng jiēbān de rén bú yòng cāi nǎ jù huà shì jiù jiànyì, yě bú huì bǎ yí ge wùpǐn wèntí kuòdà chéng quánbù huódòng tíngzhǐ.",
+   "vi": "Chúng tôi đặt hai hộp thẻ trắng và một hộp màu nhưng nhận ba hộp màu. Tổng số không thiếu mà nội dung vẫn sai. Sáng có người đề nghị trả hết, bạn mới ghi đề nghị như đã chốt và nói hoạt động có thể hủy.\n\nSau đó tôi đối chiếu đơn/ảnh với nhân viên, chốt giữ một màu và đổi lấy hai trắng. Cửa hàng đồng ý trả phí gửi trong phản hồi lần này. Tôi đọc kết luận, nhờ ghi số lượng, màu, phí rồi sửa tin nhóm.\n\nChiều không hủy mà làm phần không cần thẻ trước, thẻ đúng đến rồi chia nhóm. Bàn giao ghi rõ điều đã xác nhận và điều còn chờ, kèm phản hồi cuối. Người tiếp ca không phải đoán câu nào là đề nghị cũ, cũng không biến một lỗi vật tư thành dừng cả hoạt động.",
+   "gloss": [
+    {
+     "w": "订单",
+     "py": "dìngdān",
+     "vi": "đơn đặt"
+    },
+    {
+     "w": "收到",
+     "py": "shōudào",
+     "vi": "nhận được"
+    },
+    {
+     "w": "保留",
+     "py": "bǎoliú",
+     "vi": "giữ lại"
+    },
+    {
+     "w": "运费",
+     "py": "yùnfèi",
+     "vi": "phí gửi"
+    },
+    {
+     "w": "答复",
+     "py": "dáfù",
+     "vi": "trả lời xác nhận"
+    },
+    {
+     "w": "记录",
+     "py": "jìlù",
+     "vi": "ghi chép"
+    },
+    {
+     "w": "确认",
+     "py": "quèrèn",
+     "vi": "xác nhận"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Vì sao tổng số đúng chưa đủ?",
+     "o": [
+      "Tổng số không bao giờ quan trọng",
+      "Bài không có đơn",
+      "Chủng loại không đúng với đơn"
+     ],
+     "a": 2,
+     "e": "Hai trắng/một màu khác ba màu dù cùng ba hộp."
+    },
+    {
+     "q": "Sai lầm ghi chép ban đầu là gì?",
+     "o": [
+      "Ghi đề nghị thành phương án đã chốt",
+      "Không ghi màu đỏ",
+      "Quên tên nhân vật lịch sử"
+     ],
+     "a": 0,
+     "e": "Đoạn đầu nói 新同学把建议记成已经确认的办法."
+    },
+    {
+     "q": "Phương án cuối gồm những gì?",
+     "o": [
+      "Trả cả ba không cần xác nhận",
+      "Không đổi gì",
+      "Giữ một màu, đổi hai trắng và ghi rõ phí"
+     ],
+     "a": 2,
+     "e": "Đoạn hai nêu đủ món giữ, món đổi và thông tin phí trong trả lời."
+    },
+    {
+     "q": "Phần nào vẫn phải chờ?",
+     "o": [
+      "Việc đối chiếu đơn chưa từng làm",
+      "Việc dùng thẻ đúng để chia nhóm",
+      "Mọi việc không cần thẻ"
+     ],
+     "a": 1,
+     "e": "Hoạt động vẫn làm phần khác, còn 分组 chờ 正确卡片到齐."
+    },
+    {
+     "q": "Bản bàn giao giúp ca sau điều gì?",
+     "o": [
+      "Dừng toàn bộ hoạt động",
+      "Biết kết luận còn hiệu lực và phần đang chờ",
+      "Tự đoán theo tin đầu"
+     ],
+     "a": 1,
+     "e": "Câu kết nhấn tránh suy diễn từ đề nghị cũ và tránh mở rộng lỗi vật tư."
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Nhận diện chữ trong bài",
+   "items": [
+    {
+     "c": "数",
+     "py": "shù",
+     "hv": "số",
+     "parts": "娄 bên trái, 攵 bên phải",
+     "strokes": 13,
+     "vi": "số",
+     "words": "数量，数字"
+    },
+    {
+     "c": "量",
+     "py": "liàng",
+     "hv": "lượng",
+     "parts": "日, 一 ở trên, 里 ở dưới",
+     "strokes": 12,
+     "vi": "lượng",
+     "words": "数量，大量"
+    },
+    {
+     "c": "改",
+     "py": "gǎi",
+     "hv": "cải",
+     "parts": "己 bên trái, 攵 bên phải",
+     "strokes": 7,
+     "vi": "sửa",
+     "words": "修改，改正"
+    },
+    {
+     "c": "收",
+     "py": "shōu",
+     "hv": "thu",
+     "parts": "Phần bên trái rồi 攵",
+     "strokes": 6,
+     "vi": "nhận, thu",
+     "words": "收到，收据"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói có nhiệm vụ",
+   "tasks": [
+    {
+     "p": "Giải thích ba hộp nhận đủ tổng nhưng sai loại; chốt giữ một màu và đổi hai trắng.",
+     "model": "总数是三盒，没有少，但订单是两白一彩，收到的都是彩卡。不是全部退货，而是保留一盒彩卡，把另外两盒换成白卡。",
+     "py": "Zǒngshù shì sān hé, méiyǒu shǎo, dàn dìngdān shì liǎng bái yì cǎi, shōudào de dōu shì cǎikǎ. Bú shì quánbù tuìhuò, ér shì bǎoliú yì hé cǎikǎ, bǎ lìngwài liǎng hé huàn chéng báikǎ.",
+     "vi": "Tổng là ba, không thiếu, nhưng đơn hai trắng/một màu còn nhận toàn màu. Không trả hết mà giữ một màu, đổi hai hộp kia thành trắng.",
+     "tips": "Đọc rõ số cùng loại, không chỉ nhấn con số ba."
+    },
+    {
+     "p": "Sửa lời nhắn “hủy hoạt động” và bàn giao điều còn chờ.",
+     "model": "刚才全部退回只是建议，现在已经改了。下午不是取消，而是先做不用卡片的部分。正确卡片到齐以后再分组，最后答复我放在交接记录里。",
+     "py": "Gāngcái quánbù tuì huí zhǐ shì jiànyì, xiànzài yǐjīng gǎi le. Xiàwǔ bú shì qǔxiāo, ér shì xiān zuò bú yòng kǎpiàn de bùfen. Zhèngquè kǎpiàn dào qí yǐhòu zài fēnzǔ, zuìhòu dáfù wǒ fàng zài jiāojiē jìlù lǐ.",
+     "vi": "Trả hết lúc nãy chỉ là đề nghị, nay đã đổi. Chiều không hủy mà làm phần không cần thẻ. Có đủ thẻ đúng mới chia nhóm; tôi để phản hồi cuối trong ghi chép bàn giao.",
+     "tips": "Nói rõ câu cũ đã bị thay thế để người tiếp ca không giữ hai kết luận trái nhau."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết để hoàn thành tình huống",
+   "task": "Viết từ 140 đến 190 chữ Hán bàn giao cho người phụ trách ca sau: đơn và thực nhận, tin cũ bị hiểu sai, phương án đã chốt, phí theo phản hồi, phần hoạt động tiếp tục và điều còn chờ.",
+   "min": 140,
+   "model": "交接说明：原订单是两盒白卡、一盒彩卡，今天收到三盒彩卡。数量一样，颜色不对。上午说“全部退回”只是建议，不是最后决定，请不要按旧记录寄出。\n\n后来与店员核对照片后，确认保留一盒彩卡，把另外两盒换成白卡。这次寄回运费由店里付，已经写在最后答复中。下午不取消活动，先做不用卡片的部分；正确卡片到齐后再分组。我已修改给大家的消息，把订单、照片和答复放在同一处。接班后请先看这些记录，有不清楚的地方再问。",
+   "modelVi": "Bàn giao: Đơn hai trắng/một màu, nhận ba hộp màu. Số giống nhưng màu sai. “Trả hết” sáng nay chỉ là đề nghị, không phải quyết định cuối, đừng gửi theo ghi cũ.\n\nSau đối chiếu ảnh, đã chốt giữ một màu, đổi hai hộp kia thành trắng. Phí lần này do cửa hàng trả và được ghi trong phản hồi cuối. Chiều không hủy, làm phần không cần thẻ, đủ thẻ đúng mới chia nhóm. Tôi sửa tin, để đơn/ảnh/trả lời cùng chỗ. Ca sau đọc trước, chỗ chưa rõ thì hỏi.",
+   "tips": [
+    "Nêu rõ tin cũ nào không còn hiệu lực.",
+    "Phần đã xác nhận phải có thông tin đủ để người sau thực hiện."
+   ],
+   "checklist": [
+    "Đúng số lượng và loại",
+    "Tách đề nghị với quyết định",
+    "Có phí và tài liệu xác nhận",
+    "Đủ việc tiếp tục và việc chờ"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "数量都是三盒，可是颜色和订单不一样。",
+   "lang": "zh-CN",
+   "q": "Vấn đề nằm ở đâu?",
+   "o": [
+    "Không có hộp nào",
+    "Loại/màu khác đơn",
+    "Tổng số thiếu hai"
+   ],
+   "a": 1,
+   "e": "可是 chuyển từ tổng số đúng sang nội dung khác."
+  },
+  {
+   "t": "listen",
+   "say": "刚才只是建议，最后确认只换两盒。",
+   "lang": "zh-CN",
+   "q": "Phương án đang có hiệu lực là gì?",
+   "o": [
+    "Trả hết theo đề nghị cũ",
+    "Không cần xác nhận",
+    "Chỉ đổi hai hộp"
+   ],
+   "a": 2,
+   "e": "最后确认 đánh dấu kết luận cuối thay cho ý trước."
+  },
+  {
+   "t": "mc",
+   "q": "Trong tình huống này, cùng tổng ba hộp có đủ chứng minh giao đúng không?",
+   "o": [
+    "Có, không cần đơn",
+    "Không, cần kiểm loại/màu",
+    "Có, chỉ số tổng quan trọng"
+   ],
+   "a": 1,
+   "e": "Đơn phân bố hai loại, nên tổng đúng vẫn có thể sai nội dung."
+  },
+  {
+   "t": "mc",
+   "q": "Mẫu nào sửa hiểu “hủy toàn bộ” rõ nhất?",
+   "o": [
+    "不是活动而是取消所有。",
+    "活动不是而是了。",
+    "不是取消活动，而是先做别的部分。"
+   ],
+   "a": 2,
+   "e": "Vế sau cung cấp cách làm thật thay cho kết luận bị bác."
+  },
+  {
+   "t": "mc",
+   "q": "Bản bàn giao nên giữ gì?",
+   "o": [
+    "Chỉ một con số không có loại",
+    "Phương án cuối, bằng chứng và phần còn chờ",
+    "Mọi đề nghị như đều còn hiệu lực"
+   ],
+   "a": 1,
+   "e": "Người tiếp ca cần biết làm gì và thông tin nào đã thay đổi."
+  },
+  {
+   "t": "mc",
+   "q": "刚才的建议 (gāngcái de jiànyì) có nhất thiết là quyết định cuối không?",
+   "o": [
+    "Không",
+    "Luôn luôn",
+    "Chỉ khi câu có số ba"
+   ],
+   "a": 0,
+   "e": "Mốc lúc nãy và từ đề nghị không tự tạo xác nhận; cần đọc phần sau."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “số lượng”: ___一样，颜色不同。(Shùliàng yíyàng, yánsè bù tóng.)",
+   "a": "数量",
+   "py": "shùliàng",
+   "e": "数量 nói tổng số, khác yánsè chỉ màu."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “giữ lại”: 我们___一盒彩卡。(Wǒmen ___ yì hé cǎikǎ.)",
+   "a": "保留",
+   "py": "bǎoliú",
+   "e": "Giữ một hộp phù hợp với đơn, không gửi cả ba."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “sửa đổi”: 我要___旧消息。(Wǒ yào ___ jiù xiāoxi.)",
+   "a": "修改",
+   "py": "xiūgǎi",
+   "e": "修改 cập nhật tin cũ để người nhận không làm theo phương án đã bỏ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "而是",
+    "只换两盒",
+    "不是全部退回"
+   ],
+   "a": "不是全部退回，而是只换两盒。",
+   "e": "Vế đầu bác phạm vi toàn bộ, vế sau chốt đúng số đổi."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "再",
+    "寄出",
+    "收到最后答复以后"
+   ],
+   "a": "收到最后答复以后，再寄出。",
+   "e": "Trả lời cuối là điều kiện trước hành động gửi hàng."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ phục vụ bàn giao và đối chiếu.",
+   "pairs": [
+    [
+     "记录",
+     "ghi chép"
+    ],
+    [
+     "确认",
+     "xác nhận"
+    ],
+    [
+     "区别",
+     "sự khác biệt"
+    ],
+    [
+     "修改",
+     "sửa đổi"
+    ]
+   ],
+   "e": "记录 giữ thông tin, 确认 kiểm/chốt, 区别 chỉ khác nhau và 修改 cập nhật nội dung cũ."
+  },
+  {
+   "t": "dict",
+   "say": "不是取消活动，而是先做别的部分。",
+   "lang": "zh-CN",
+   "a": "不是取消活动，而是先做别的部分。",
+   "py": "Bú shì qǔxiāo huódòng, ér shì xiān zuò bié de bùfen.",
+   "e": "Giữ vế sau 而是 để biết việc thay thế, không chỉ đọc phần không hủy."
+  }
+ ],
+ "teacher": {
+  "time": "180 phút, chia thành hai buổi 90 phút",
+  "prep": "Ba hộp thẻ giấy giả, đơn hai trắng/một màu, tin đề nghị trả hết, phản hồi cuối chỉ đổi hai và phiếu bàn giao trống.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Đưa cùng tổng ba hộp nhưng sai màu, học viên chỉ ra cần kiểm cấu phần chứ không chỉ cộng số."
+   },
+   {
+    "t": "20 phút",
+    "do": "Ôn từ đơn, nhận, giữ, đổi, trả lời và ghi chép bằng hồ sơ giả; luyện 数量 và 处理 đúng âm theo từ."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dựng 不是…而是… để sửa hai hiểu nhầm: trả hết và hủy hoạt động; vế sau phải nêu hành động thật."
+   },
+   {
+    "t": "25 phút",
+    "do": "Xếp thẻ 刚才、后来、最后 với đề nghị và kết luận, yêu cầu đánh dấu tin nào đã bị thay thế."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nghe trao đổi, điền món giữ, món đổi, phí theo phương án giả và kế hoạch hoạt động trước khi thẻ tới."
+   },
+   {
+    "t": "10 phút",
+    "do": "Mở buổi hai bằng người ca sau chỉ thấy tin đầu, học viên phải sửa bằng bằng chứng cuối mà không kể vòng mọi cuộc gọi."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc bản bàn giao, phân loại thực tế, suy đoán, đề nghị cũ, xác nhận cuối và điều còn chờ."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nhóm ba luân phiên người kiểm đơn, cửa hàng và người tiếp ca; chốt phiếu để người không dự cuộc gọi vẫn làm đúng."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết bàn giao từ một trăm bốn mươi đến một trăm chín mươi chữ, bạn đọc thử thực hiện chọn thẻ và chỉ ra phần thiếu."
+   },
+   {
+    "t": "15 phút",
+    "do": "Làm bài tự chấm cuối cấp, nói tóm tắt ba câu về sai khác, cách xử lý và bước kế; tự chọn kỹ năng cần ôn trước đề."
+   }
+  ],
+  "games": [
+   "Đúng tổng chưa đúng đơn: mỗi đội nhận các hộp cùng số nhưng khác loại, phải phát hiện sai cấu phần và lập một yêu cầu đổi đúng số."
+  ],
+  "errors": [
+   "Thấy tổng đủ nên bỏ qua màu/loại: đối chiếu từng dòng đơn với hàng nhận.",
+   "Coi đề nghị lúc đầu là kết luận mãi: tìm dấu hiệu 后来/最后 và phản hồi xác nhận.",
+   "Sửa tin chỉ bằng “không hủy” mà không nêu làm gì: thêm vế 而是 có phương án cụ thể.",
+   "Gửi cả ba dù cuối chỉ đổi hai: chia ba thẻ thành nhóm giữ và nhóm gửi trước khi viết.",
+   "Biến chính sách giả của lần xử lý thành luật bên ngoài: nêu đúng phạm vi 这次答复 và hỏi lại ở tình huống mới."
+  ],
+  "homework": "Tự tạo đơn ba món có tổng đúng nhưng phân loại sai. Viết đề nghị cũ và bản bàn giao cuối khác nhau, thu âm cách sửa hiểu nhầm cho người tiếp ca bằng bằng chứng."
+ }
+}

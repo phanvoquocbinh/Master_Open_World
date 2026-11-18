@@ -1,0 +1,805 @@
+=== COURSE dsa
+name: Cấu trúc dữ liệu & giải thuật
+icon: 🧩
+floor: 7
+room: 708
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Bất biến, Big-O, mảng/chuỗi/hash, stack/queue/list, cây/heap/graph, sort/search và dự án tìm đường tự viết bằng Python.
+
+## LESSON dsa-01 | Big-O và mô hình chi phí
+
+### Đếm theo input thay vì đoán theo tên
+Chọn n là số phần tử, thao tác chính là so sánh hay đọc key. Cùng hàm có best/worst/average khác nhau; cần tách chi phí phụ thuộc độ dài string hoặc số chữ số lớn nếu không thể coi là hằng.
+
+### Hai vòng nối tiếp cộng chi phí
+Mã sau đo số phép tăng và tính tổng hai lần. Nó vẫn tuyến tính theo n; số đo đếm thao tác trên input nhỏ giúp hiểu hệ số trước khi bỏ hệ số khi viết Big-O.
+~~~python
+def twice_sum(xs):
+    total=0
+    steps=0
+    for x in xs:
+        total+=x; steps+=1
+    for x in xs:
+        total+=x; steps+=1
+    return total,steps
+assert twice_sum([2,4,6])==(24,6)
+~~~
+
+### Vòng lồng có giới hạn phải đọc
+Tam giác vẫn bậc hai do tổng 0+1+...+(n-1). Một vòng trong giảm một nửa không tự biến toàn bài thành log n nếu nó được chạy cho n vòng ngoài.
+~~~python
+def pair_count(n):
+    return sum(1 for i in range(n) for j in range(i))
+assert pair_count(4)==6
+# n*(n-1)/2 lần; O(n²) khi thao tác thân O(1).
+~~~
+
+### Tách bộ nhớ input và phụ trợ
+Trả một list mới dài n chiếm O(n) đầu ra; duyệt để tính tổng có thể O(1) phụ trợ trong mô hình số cố định. Đệ quy tốn stack theo độ sâu, slicing list tạo bản sao phải tính.
+~~~text
+report:
+ n: độ dài danh sách
+ time: O(n), thân vòng coi là O(1)
+ auxiliary: O(1), không gồm input
+ output: một tổng và một bộ đếm
+ caveat: số nguyên rất lớn có chi phí theo số bit
+~~~
+
+### Benchmark trả lời câu hỏi khác
+Đo thời gian cần warm-up, version, kích thước, phân bố và lặp có kiểm. Big-O không xếp nhanh chậm cho mọi n; thuật toán nhiều overhead có thể chậm trên tập nhỏ dù bậc thấp hơn.
+
+PRACTICE: Phân tích bốn đoạn: hai vòng nối tiếp, tam giác, vòng chia đôi và slicing đệ quy. Nộp n, phép đếm, time/space và bảng đo riêng; không suy bậc chỉ từ một lần chạy.
+Q: Big-O diễn tả điều gì?
++ Chặn trên tốc độ tăng chi phí theo kích thước input
+- Thời gian chính xác bằng giây
+- Dung lượng luôn bằng n
+Q: Hai vòng lặp nối tiếp đều n lần có bậc gì?
++ O(n) với thao tác thân O(1)
+- Luôn O(n²)
+- O(1)
+
+## LESSON dsa-02 | Mảng, chỉ số và hai con trỏ
+
+### Mảng tăng là điều kiện của bài toán
+Tìm cặp ở hai chỉ số khác nhau có tổng target trên list đã tăng. Nếu đầu vào chưa sắp, phải từ chối theo contract hoặc sắp bản sao và giữ ánh xạ chỉ số; không lặng lẽ làm mất nghĩa chỉ số gốc.
+
+### Hai con trỏ giữ vùng ứng viên
+Khi tổng nhỏ, mọi cặp dùng phần tử trái với đầu phải nhỏ hơn cũng thiếu. Khi tổng lớn, mọi cặp dùng phần tử phải với đầu trái lớn hơn đều dư. Mỗi bước loại được một đầu đúng lý do.
+~~~python
+def pair_sorted(xs,target):
+    lo,hi=0,len(xs)-1
+    while lo<hi:
+        s=xs[lo]+xs[hi]
+        if s==target:return (lo,hi)
+        if s<target:lo+=1
+        else:hi-=1
+    return None
+assert pair_sorted([1,3,4,7],10)==(1,3)
+~~~
+
+### Ca rỗng và phần tử trùng
+Không dùng cùng một phần tử hai lần: điều kiện lo<hi. Số âm không làm hỏng lập luận nếu thứ tự vẫn tăng. Khi nhiều cặp đúng, contract này trả một cặp bất kỳ theo đường duyệt.
+~~~python
+assert pair_sorted([],0) is None
+assert pair_sorted([3],6) is None
+assert pair_sorted([3,3],6)==(0,1)
+assert pair_sorted([-5,-1,2,8],3)==(0,3)
+assert pair_sorted([1,2],9) is None
+~~~
+
+### List thao tác khác nhau có giá khác
+Truy cập chỉ số O(1), chèn đầu dịch các phần tử; append khấu hao O(1) chứ không phải mọi lần đều không cấp phát. Hai con trỏ chỉ O(n) khi truy cập/so sánh được coi là O(1).
+~~~text
+trace xs=[1,3,4,7], target=10
+(0,3):8 -> lo=1
+(1,3):10 -> tìm thấy
+visited pairs=2, không thử toàn bộ6cặp
+extra state: lo,hi,s -> O(1)
+~~~
+
+### Không trả nhiều hơn điều đã chứng minh
+Hàm không kiểm sorted trong runtime để giữ minh họa ngắn. Public API có thể kiểm một lần hoặc dùng kiểu/contract rõ; expected không được lấy từ chính hàm đang test.
+
+PRACTICE: Viết oracle brute force cho list nhỏ, so có/không có cặp với hai con trỏ trên mảng đã sắp, gồm âm/trùng/rỗng. Ghi vì sao thứ tự cho phép loại một đầu.
+Q: Hai con trỏ tìm tổng trên mảng tăng dần dựa vào gì?
++ Bất biến cho phép loại bỏ một phía
+- Tăng cả hai con trỏ tùy ý
+- Mảng chưa sắp cũng đúng
+Q: Truy cập xs[i] trong Python list thường có chi phí gì?
++ O(1), còn tìm giá trị thường O(n)
+- Mọi thao tác O(1)
+- Chèn đầu luôn O(1)
+
+## LESSON dsa-03 | Chuỗi, Unicode và cửa sổ trượt
+
+### Chốt đơn vị ký tự trước yêu cầu
+Trong Python str, chỉ số là code point. Chữ có dấu tổ hợp và emoji ghép có thể khác số grapheme người dùng thấy; khóa học dùng code point cho thuật toán, không gọi nó là cắt chữ hiển thị an toàn.
+
+### Cửa sổ dài nhất không lặp
+last lưu vị trí code point gần nhất. left chỉ tăng, tổng thời gian trung bình O(n) theo giả định dict; không tạo lại set mọi cửa sổ và không lùi left về vị trí đã loại.
+~~~python
+def longest_unique(s):
+    last={};left=0;best=0
+    for right,ch in enumerate(s):
+        if ch in last:left=max(left,last[ch]+1)
+        last[ch]=right
+        best=max(best,right-left+1)
+    return best
+assert longest_unique("abba")==2
+~~~
+
+### Chuẩn hóa là quyết định miền
+Hai chuỗi nhìn giống có thể khác biểu diễn. NFC giúp so sánh theo một kiểu biểu diễn cho nhiều trường hợp, nhưng không thay quy tắc grapheme, locale hay tìm kiếm không dấu.
+~~~python
+import unicodedata
+a="â"; b=chr(97)+chr(0x302)
+assert len(a)==1 and len(b)==2
+assert unicodedata.normalize("NFC",b)==a
+assert longest_unique("")==0
+assert longest_unique("aaaa")==1
+~~~
+
+### Trace chỉ ra lỗi biên trái lùi
+Ở abba, khi gặp a cuối, vị trí cũ của a nằm ngoài cửa sổ hiện tại. Nếu đặt left=last[a]+1 không lấy max thì left lùi, kết quả sai là cửa sổ chứa hai b.
+~~~text
+i0 a: left0,best1,last[a]=0
+i1 b: left0,best2,last[b]=1
+i2 b: left2,best2,last[b]=2
+i3 a: left=max(2,1)=2,best2
+unit=code point; không kết luận về số chữ người nhìn
+~~~
+
+### Chuỗi bất biến và slicing có chi phí
+Nối string lặp nhiều lần có thể tạo nhiều bản sao, slicing tạo chuỗi mới. Cửa sổ chỉ giữ chỉ số để tìm độ dài; nếu trả substring, tính thêm chi phí tạo đầu ra và chính sách hòa kết quả.
+
+PRACTICE: Test longest_unique với oracle liệt kê substring trên chuỗi ngắn. Thêm dấu kết hợp và ghi kết quả theo code point, sau đó mô tả thay đổi yêu cầu nếu UI đòi grapheme.
+Q: Một ký tự người nhìn thấy có luôn là một code point không?
++ Không, có thể gồm nhiều code point
+- Có với mọi ngôn ngữ
+- Chỉ dấu cách mới khác
+Q: Cửa sổ không lặp code point giữ biên trái ra sao?
++ Không lùi, dùng max với lần xuất hiện sau cùng
+- Luôn đặt về 0
+- Lùi khi gặp ký tự mới
+
+## LESSON dsa-04 | Hash map, set và đánh đổi
+
+### Dùng map để đếm không mất thứ tự yêu cầu
+Bài toán đếm lượt chọn lớp theo mã cần map key->count; chọn output sort riêng nếu contract muốn thứ tự mã. Không coi thứ tự duyệt set là thứ tự nghiệp vụ ổn định.
+
+### Đếm tuyến tính trung bình
+Mỗi id phải hashable; khóa học dùng string ngắn có giới hạn. Với key string dài, chi phí hash/so sánh còn phụ thuộc độ dài, nên O(n) là dưới giả định phù hợp.
+~~~python
+def counts(ids):
+    out={}
+    for item in ids:out[item]=out.get(item,0)+1
+    return out
+assert counts(["CL7","CL2","CL7"])=={"CL7":2,"CL2":1}
+~~~
+
+### Khử trùng giữ lần đầu bằng hai cấu trúc
+Set kiểm đã gặp, list giữ thứ tự xuất hiện. Bộ nhớ O(u) với u số giá trị khác nhau; không dùng list membership trong vòng lặp nếu mục tiêu tránh chi phí bậc hai.
+~~~python
+def unique_first(ids):
+    seen=set();out=[]
+    for item in ids:
+        if item not in seen:
+            seen.add(item);out.append(item)
+    return out
+assert unique_first(["B","A","B"])==["B","A"]
+~~~
+
+### Chọn equality đúng miền
+CL7 và cl7 có cùng mã hay khác phải do contract quyết định. Ép lower/strip mọi key có thể gộp hai định danh hợp lệ; normalize trước map chỉ khi có quy tắc được phê duyệt.
+~~~text
+Policy A: mã phân biệt hoa thường -> giữ nguyên
+Policy B: người dùng nhập tên tìm kiếm -> chuẩn hóa riêng
+Test: rỗng, trùng liền, trùng xa, Unicode, key dài
+Không dùng hash() làm id lưu bền giữa process.
+~~~
+
+### Đổi bộ nhớ lấy thời gian có giới hạn
+Input không giới hạn kéo map lớn vô hạn. Khi đếm stream, cần giới hạn key, batch hoặc storage phù hợp; hash map không phải giải pháp bộ nhớ O(1) chỉ vì truy cập nhanh.
+
+PRACTICE: Nộp counts và unique_first với oracle tay, phân tích n/u/độ dài key. Viết hợp đồng mã hoa thường và ca chứng minh normalize sai làm gộp định danh.
+Q: Hash map thường tra cứu trung bình ra sao?
++ O(1) theo giả định hash, không là bảo đảm worst-case mọi loại
+- Luôn O(log n)
+- Không dùng bộ nhớ
+Q: Set và map khác nhau ở mục tiêu nào?
++ Set giữ thành viên, map giữ ánh xạ key-value
+- Map chỉ giữ số
+- Set giữ mọi bản trùng
+
+## LESSON dsa-05 | Stack và kiểm dấu ngoặc
+
+### Ngoặc gần nhất phải đóng trước
+Dãy dấu ngoặc lồng nhau cần stack giữ phần mở chưa đóng. Đếm tổng số mở/đóng không phân biệt thứ tự hay kiểu: ([)] có số lượng khớp nhưng sai cấu trúc.
+
+### Pop có kiểm underflow và khớp kiểu
+Mã bỏ qua ký tự ngoài ba loại ngoặc. Nó kiểm cấu trúc chuỗi bài tập, không lex string/comment của ngôn ngữ lập trình; nêu giới hạn để không dùng sai như bộ kiểm source.
+~~~python
+def balanced(s):
+    expected={")":"(","]":"[","}":"{"};stack=[]
+    for ch in s:
+        if ch in "([{":stack.append(ch)
+        elif ch in expected:
+            if not stack or stack.pop()!=expected[ch]:return False
+    return not stack
+assert balanced("x{[()]}y")
+~~~
+
+### Ca sai phải chạm từng nhánh
+Kết thúc còn phần mở cũng sai; dấu đóng ngay đầu không được pop mù. Mỗi ký tự được đọc một lần, bộ nhớ theo độ sâu lớn nhất O(n) trong trường hợp toàn dấu mở.
+~~~python
+assert balanced("")
+assert not balanced(")(")
+assert not balanced("([)]")
+assert not balanced("((")
+assert balanced("[]{}()")
+~~~
+
+### Trace như một lời giải thích
+Vẽ trạng thái stack sau từng ký tự giúp xác định lỗi ở thời điểm đầu tiên. Không chỉ in kết quả False mà bỏ mất nguyên nhân; bản mở rộng có thể trả index và expected để hỗ trợ người học.
+~~~text
+input=([)]
+0 (: stack[(]
+1 [: stack[(,[]
+2 ): cần (, nhận [ -> mismatch
+Dừng ở index2; không xử lý như phép đếm cân bằng.
+~~~
+
+### Stack ứng dụng ngoài dấu ngoặc
+Undo cục bộ, DFS lặp và đánh giá biểu thức đều dùng stack nhưng cần hợp đồng riêng. Lịch sử undo có thể giữ dữ liệu nhạy cảm nên giới hạn vòng đời và bộ nhớ, không chỉ lưu mọi object vô hạn.
+
+PRACTICE: Bổ sung báo vị trí lỗi và expected, giữ hàm bool ban đầu làm nền. Test underflow/mismatch/còn mở, giải thích vì sao chuỗi code có string literal cần lexer riêng.
+Q: Stack dùng quy tắc nào?
++ Vào sau ra trước
+- Vào trước ra trước
+- Luôn lấy nhỏ nhất
+Q: Bộ kiểm ngoặc đơn giản có hiểu dấu ngoặc trong string literal không?
++ Không nếu chưa có lexer
+- Có tự động
+- Chỉ cần count là đủ
+
+## LESSON dsa-06 | Queue, deque và hàng đợi tác vụ
+
+### FIFO khác thực thi song song
+Queue quyết định thứ tự lấy, không tự đảm bảo thứ tự hoàn thành nếu nhiều worker. Chốt yêu cầu đặt lớp theo actor/resource thay vì suy rằng queue luôn giải quyết mọi cạnh tranh.
+
+### Deque cho hai đầu
+Demo đơn luồng chỉ xử lý tên tác vụ, không gửi request hay ghi dữ liệu. Deque popleft tránh dịch cả list; tính thread-safety của thao tác ghép check-then-act vẫn cần cơ chế đồng bộ phù hợp.
+~~~python
+from collections import deque
+def drain(tasks):
+    q=deque(tasks);done=[]
+    while q:done.append(q.popleft())
+    return done
+assert drain(["T3","T1","T2"])==["T3","T1","T2"]
+~~~
+
+### Giới hạn hàng chờ thể hiện trong API
+Ví dụ này cố ý không dùng deque(maxlen) vì nó có thể loại phần tử đầu khi đầy, khác contract reject. Thực tế nhiều producer cần queue đồng bộ/async tương ứng, không dùng lớp minh họa như worker production.
+~~~python
+class BoundedLab:
+    def __init__(self,limit):
+        if limit<1:raise ValueError("limit")
+        self.limit=limit;self.q=deque()
+    def offer(self,item):
+        if len(self.q)>=self.limit:return False
+        self.q.append(item);return True
+q=BoundedLab(1)
+assert q.offer("T1") and not q.offer("T2")
+~~~
+
+### Phân biệt bị từ chối và đã nhận
+Một response timeout chưa chứng minh tác vụ chưa vào hàng. Worker có thể chết sau side effect trước ack; cần idempotency, lease/retry và trạng thái quan sát theo thiết kế ngoài bài queue cơ bản.
+~~~text
+offer success -> nhiệm vụ đã vào vùng quản lý theo contract
+offer reject -> caller nhận lý do và chính sách thử lại
+worker fail -> retry có giới hạn và idempotency
+metrics -> depth,age,reject,processing time
+Không gọi queue in-memory là lưu bền.
+~~~
+
+### Deque còn phục vụ thuật toán cửa sổ
+Deque đơn điệu tìm max cửa sổ dùng thứ tự giá trị bên cạnh thứ tự chỉ số. Bất biến khác queue FIFO thường, nên cần chứng minh trước khi tối ưu; không xóa phần tử chỉ vì nhìn nhỏ hơn ở vị trí bất kỳ.
+
+PRACTICE: Viết queue bounded đơn luồng có poll và ca đầy/rỗng, rồi mô tả bổ sung cần có cho nhiều worker và crash. So số lần dịch phần tử của list.pop(0) với deque trên dữ liệu giả.
+Q: Queue FIFO thường cần thao tác gì?
++ Thêm cuối và lấy đầu hiệu quả
+- Sắp lại toàn hàng mỗi lần
+- Chỉ pop cuối
+Q: Giới hạn queue và backpressure giúp gì?
++ Kiểm soát tích tụ và quyết định khi đầy
+- Làm tác vụ tự đúng
+- Tăng worker vô hạn
+
+## LESSON dsa-07 | Linked list và định danh nút
+
+### Nút là object, không chỉ giá trị
+Linked list gồm value và tham chiếu next. Hai nút chứa cùng chữ Mầm vẫn là hai nút riêng; thay một link có thể làm mất cả đoạn nên vẽ identity và đường nối trước thao tác.
+
+### Đảo liên kết bằng ba biến
+Giữ next cũ trước khi đổi cur.next. Bất biến: prev là đoạn đã đảo, cur là đầu đoạn chưa xử lý. Hàm giả định list không có vòng, dùng O(1) phụ trợ và O(n) thời gian.
+~~~python
+class Node:
+    def __init__(self,value,next=None):self.value=value;self.next=next
+def reverse(head):
+    prev=None;cur=head
+    while cur is not None:
+        nxt=cur.next;cur.next=prev;prev=cur;cur=nxt
+    return prev
+a=Node("Mầm",Node("Thoi"))
+r=reverse(a)
+assert r.value=="Thoi" and r.next is a and a.next is None
+~~~
+
+### Floyd phát hiện vòng theo identity
+Một con trỏ đi một bước, một con trỏ hai bước. Nếu có vòng, chúng gặp; nếu không, con nhanh tới cuối. Hàm không sửa list, nhưng caller phải tránh list bị thay liên kết đồng thời khi chạy.
+~~~python
+def has_cycle(head):
+    slow=fast=head
+    while fast is not None and fast.next is not None:
+        slow=slow.next;fast=fast.next.next
+        if slow is fast:return True
+    return False
+x=Node(1);y=Node(1);x.next=y
+assert not has_cycle(x)
+y.next=x
+assert has_cycle(x)
+~~~
+
+### Chi phí truy cập không giống mảng
+Muốn tới vị trí k cần đi k link. Xóa sau một nút đã biết O(1) chỉ khi có đúng tham chiếu và không phải tìm lại predecessor; đừng bỏ chi phí tìm nút khi so với list.
+~~~text
+empty -> reverse(None)=None
+one node -> head giữ identity, next=None
+three nodes -> A->B->C thành C->B->A
+cycle input -> reverse không thuộc precondition
+identity check: is, không suy vòng từ value bằng nhau
+~~~
+
+### Chọn cấu trúc theo thao tác thực
+Trong ứng dụng thường Python list/deque đủ tốt và dễ dùng. Tự cài linked list ở đây để hiểu pointer/invariant; không coi nó mặc định tiết kiệm bộ nhớ hay nhanh hơn mảng trong mọi runtime.
+
+PRACTICE: Test đảo list theo identity, không chỉ so value; thử rỗng/một nút/ba nút và vòng ở has_cycle. Vẽ liên kết từng bước, ghi precondition của reverse.
+Q: Linked list so nút bằng gì khi tìm vòng?
++ Định danh nút theo cấu trúc liên kết
+- Chỉ giá trị bằng nhau
+- Tên biến
+Q: Linked list có tự tìm phần tử thứ k O(1) không?
++ Không, thường phải duyệt O(k)
+- Có luôn
+- Chỉ cần thêm head
+
+## LESSON dsa-08 | Cây và duyệt theo cấu trúc
+
+### Cây có cấu trúc và precondition
+Cây không có vòng, mỗi nút ngoài root có một cha trong mô hình bài này. Binary tree chỉ giới hạn hai con, chưa có thứ tự BST hay cân bằng. Nếu input là graph dùng shared node/vòng, thuật toán phải đổi hợp đồng.
+
+### Preorder dùng stack tránh đệ quy sâu
+Đẩy phải trước để trái được xử lý trước theo LIFO. Duyệt O(n), phụ trợ O(h) với cây nhị phân hợp lệ; cây suy biến h=n. Không nối list kết quả đệ quy nhiều lần mà bỏ qua chi phí.
+~~~python
+class Tree:
+    def __init__(self,v,left=None,right=None):
+        self.v=v;self.left=left;self.right=right
+def preorder(root):
+    out=[];stack=[] if root is None else [root]
+    while stack:
+        node=stack.pop();out.append(node.v)
+        if node.right is not None:stack.append(node.right)
+        if node.left is not None:stack.append(node.left)
+    return out
+r=Tree("M",Tree("T"),Tree("L"))
+assert preorder(r)==["M","T","L"]
+~~~
+
+### Postorder tính từ con lên cha
+Mã height trả số nút trên nhánh dài nhất, cây rỗng cao 0. Đệ quy dễ hiểu nhưng có giới hạn stack runtime; dùng bản lặp hoặc giới hạn chiều sâu khi dữ liệu có thể rất sâu.
+~~~python
+def height(root):
+    if root is None:return 0
+    return 1+max(height(root.left),height(root.right))
+assert height(None)==0
+assert height(r)==2
+assert height(Tree(1,Tree(2,Tree(3))))==3
+~~~
+
+### Thứ tự chỉ có ý nghĩa theo mục tiêu
+Inorder của BST hợp lệ trả key theo thứ tự với chính sách trùng đã chốt. Cùng inorder trên cây nhị phân bất kỳ không bảo đảm sort; cần test âm với cây vi phạm quy tắc.
+~~~text
+tree:      M
+          / \
+         T   L
+preorder: M,T,L
+postorder:T,L,M
+inorder:  T,M,L (không phải thứ tự tăng mặc định)
+~~~
+
+### Không dùng DFS như kiểm cây tự động
+Code nhận input đã là cây, không phát hiện cycle. Khi nhận JSON graph bên ngoài cần validate identity, giới hạn node/depth và quyền truy cập; không để đệ quy vô hạn hay tạo cấu trúc quá lớn.
+
+PRACTICE: Viết inorder/postorder và test cây rỗng, một nút, lệch sâu và cây không BST. Nộp định nghĩa height, phân tích n/h và cách xử lý dữ liệu sâu ngoài giới hạn lab.
+Q: Duyệt cây hậu tự xử lý root lúc nào?
++ Sau các cây con
+- Luôn đầu tiên
+- Không bao giờ
+Q: Cây nhị phân có tự là BST cân bằng không?
++ Không
+- Có nếu có root
+- Có nếu mỗi nút hai con
+
+## LESSON dsa-09 | Heap và bài top-k
+
+### Top-k không cần sắp toàn bộ n phần tử
+Bài toán giữ k số lớn nhất từ stream giả. Chọn min-heap tối đa k phần tử: root nhỏ nhất trong tập đang giữ, nên là phần tử cần loại khi gặp ứng viên lớn hơn. Giữ cả giá trị trùng theo contract.
+
+### Heap nhỏ đại diện ngưỡng
+k<=0 trả list rỗng, k>n trả tất cả. Kết quả sort giảm dần để đầu ra dễ kiểm; riêng sort đầu ra tốn O(k log k), được tính ngoài phần scan O(n log k) với k>1.
+~~~python
+import heapq
+def top_k(values,k):
+    if k<=0:return []
+    heap=[]
+    for value in values:
+        if len(heap)<k:heapq.heappush(heap,value)
+        elif value>heap[0]:heapq.heapreplace(heap,value)
+    return sorted(heap,reverse=True)
+assert top_k([3,9,1,9,5],3)==[9,9,5]
+~~~
+
+### Test theo oracle sort độc lập
+Input ở đây là số nguyên, không có NaN hay kiểu lẫn. Khi cần k điểm cao kèm id, phải chốt tie-breaker và cấu trúc tuple để heap không so object không hỗ trợ.
+~~~python
+assert top_k([],2)==[]
+assert top_k([4,2],0)==[]
+assert top_k([4,2],9)==[4,2]
+assert top_k([-5,-1,-8],2)==[-1,-5]
+for k in range(1,5):
+    xs=[2,7,2,-1,6]
+    assert top_k(xs,k)==sorted(xs,reverse=True)[:k]
+~~~
+
+### Đọc mảng heap đúng ý nghĩa
+Heap có thể lưu dưới dạng mảng nhưng chỉ quan hệ parent/con được bảo đảm. Muốn lấy toàn bộ theo thứ tự phải pop liên tiếp hoặc sort, không dùng list(heap) như kết quả xếp hạng.
+~~~text
+stream=3,9,1,9,5 ; k=3
+[3] -> [3,9] -> [1,9,3]
+9 thay root1 -> tập{3,9,9}
+5 thay root3 -> tập{5,9,9}
+root5 là ngưỡng, không phải điểm lớn nhất
+~~~
+
+### Chọn full sort khi đơn giản hơn
+Nếu cần xếp toàn bộ và n nhỏ, sorted có thể phù hợp hơn heap. Quyết định bằng đầu ra cần gì, bộ nhớ và workload, không thêm heap chỉ vì nghe có bậc tốt hơn cho bài top-k.
+
+PRACTICE: Test top_k bằng oracle sorted trên nhiều list nhỏ và k biên. Mở rộng điểm/id với chính sách hòa rõ; giải thích heap invariant và tính chi phí sort đầu ra.
+Q: Heap min giữ thuộc tính gì?
++ Mỗi parent không lớn hơn con
+- Toàn mảng đã sắp tăng
+- Các lá bằng nhau
+Q: Giữ top-k lớn nhất bằng min-heap k phần tử cần gì?
++ Root là ngưỡng nhỏ nhất trong tập đang giữ
+- Dùng root lớn nhất rồi bỏ số nhỏ mới
+- Mỗi lần sort toàn dữ liệu
+
+## LESSON dsa-10 | Đồ thị và BFS/DFS
+
+### Mô hình cạnh trước khi chọn thuật toán
+Dùng adjacency list cho đồ thị có hướng, các node không có cạnh vẫn có thể là key với list rỗng. Bài lab mỗi cạnh một bước; nếu có thời gian khác nhau, BFS không còn bảo đảm tối ưu tổng thời gian.
+
+### BFS lưu parent khi khám phá
+Đánh dấu bằng parent map ngay lúc enqueue. Khi thấy đích, dựng ngược đường rồi đảo. Nếu nguồn/đích không có trong graph, contract trả None; O(V+E) trên phần được khám phá theo mô hình hash trung bình.
+~~~python
+from collections import deque
+def shortest_path(graph,start,goal):
+    if start not in graph or goal not in graph:return None
+    parent={start:None};q=deque([start])
+    while q:
+        u=q.popleft()
+        if u==goal:
+            path=[]
+            while u is not None:path.append(u);u=parent[u]
+            return path[::-1]
+        for v in graph[u]:
+            if v not in graph:raise ValueError("unknown_node")
+            if v not in parent:parent[v]=u;q.append(v)
+    return None
+~~~
+
+### Đường hợp lệ cần kiểm cả cạnh
+Graph test có vòng và node tách rời. Khi có nhiều đường ngắn ngang nhau, thứ tự adjacency quyết định một đáp án; test tính hợp lệ và độ dài thay vì chỉ buộc một đường khi contract không quy định tie-breaker.
+~~~python
+g={"A":["B","C"],"B":["D"],"C":["D"],"D":["A"],"X":[]}
+assert shortest_path(g,"A","D")==["A","B","D"]
+assert shortest_path(g,"A","A")==["A"]
+assert shortest_path(g,"A","X") is None
+assert shortest_path(g,"Q","D") is None
+~~~
+
+### DFS trả lời reachability, không tự ngắn nhất
+DFS dùng stack hoặc đệ quy để đi sâu, phù hợp nhiều bài duyệt/thành phần. Đường đầu tìm thấy bằng DFS có thể dài; đánh dấu visited cần xem loại bài, đặc biệt khi phát hiện cycle có hướng.
+~~~text
+BFS frontier: lớp0={A}; lớp1={B,C}; lớp2={D}
+DFS có thể đi A->B->... rất sâu trước C
+Directed graph: cạnh A->B không ngầm có B->A
+Weighted edges: phải đổi thuật toán theo điều kiện trọng số
+~~~
+
+### Input lớn cần kiểm tài nguyên
+Giới hạn V/E, cấm neighbor không khai báo theo contract, tránh recursion sâu cho dữ liệu ngoài. Node id giả ngắn trong lab không thay quy tắc kiểm input thực tế hay quyền truy cập bản đồ riêng.
+
+PRACTICE: Viết DFS reachability và so kết quả có đường với BFS, thêm vòng/một chiều/tách rời. Dựng oracle độ dài bằng liệt kê đường đơn cho graph rất nhỏ và nêu lý do chỉ dùng làm oracle nhỏ.
+Q: BFS tìm đường ngắn nhất khi nào?
++ Đồ thị cạnh cùng trọng số theo số cạnh
+- Mọi đồ thị trọng số tùy ý
+- Chỉ đồ thị hoàn chỉnh
+Q: Đánh dấu visited trong BFS lúc nào để tránh enqueue lặp?
++ Khi đưa nút vào queue
+- Chỉ khi queue rỗng
+- Sau khi gặp đích bất kỳ
+
+## LESSON dsa-11 | Sắp xếp, ổn định và comparator
+
+### Sắp xếp là hợp đồng thứ tự
+Trước khi sort cần biết key, thứ tự tăng/giảm, tie-breaker, NULL và Unicode. Python sorted ổn định và trả list mới; sort tại chỗ thay input, nên public API phải nói rõ tác dụng phụ.
+
+### Key tuple dễ kiểm nhiều tiêu chí
+Ví dụ danh sách lớp xếp điểm giảm, rồi mã tăng. Dùng key tuple thay comparator tự viết khi có thể, tránh comparator thiếu nhất quán. Mã giả CL dùng thứ tự string như quy ước bài tập.
+~~~python
+rows=[{"id":"CL3","score":8},{"id":"CL1","score":9},{"id":"CL2","score":8}]
+ranked=sorted(rows,key=lambda r:(-r["score"],r["id"]))
+assert [r["id"] for r in ranked]==["CL1","CL2","CL3"]
+assert rows[0]["id"]=="CL3"
+~~~
+
+### Ổn định giữ thứ tự nhập khi key bằng
+Nếu chỉ sort score, hai lớp cùng điểm giữ thứ tự tương đối ban đầu. Điều đó khác chọn id làm tie-breaker; kiểm test cho đúng yêu cầu thay vì ngầm trộn hai chính sách.
+~~~python
+items=[("Thoi",7),("Mầm",7),("Lụa",5)]
+out=sorted(items,key=lambda x:x[1],reverse=True)
+assert out[:2]==[("Thoi",7),("Mầm",7)]
+assert items[2]==("Lụa",5)
+~~~
+
+### Comparator phải tạo thứ tự nhất quán
+Cấm kiểu lẫn hoặc định nghĩa cách xếp riêng, xử lý NaN nếu miền có float. Kiểm phản xạ, đối xứng dấu và bắc cầu; comparator theo thời gian hiện tại hay random không tạo một thứ tự ổn định.
+~~~text
+Review comparator:
+ cmp(a,a)=0
+ sign(cmp(a,b))=-sign(cmp(b,a))
+ a<b và b<c -> a<c
+ key bằng -> chính sách hòa rõ
+ Input rỗng/một phần tử/trùng phải giữ multiset
+~~~
+
+### Đừng chỉ kiểm kết quả đã tăng
+Một hàm trả list rỗng luôn thỏa tăng nhưng mất dữ liệu. Oracle cần vừa sorted theo key vừa giữ số lượng/multiset và chính sách ổn định/tác dụng phụ đúng contract; độ phức tạp phụ thuộc thuật toán cụ thể.
+
+PRACTICE: Thiết kế xếp lớp theo điểm, thời điểm rồi id giả; test hòa, trùng, rỗng, thiếu key theo chính sách reject. Nộp oracle thứ tự+multiset và ca phân biệt ổn định với tie-breaker.
+Q: Sort ổn định giữ gì?
++ Thứ tự tương đối của phần tử có key bằng nhau
+- Mọi phần tử giữ vị trí cũ
+- Luôn O(n)
+Q: Comparator thiếu tính bắc cầu có rủi ro gì?
++ Kết quả sắp xếp không có trật tự nhất quán
+- Luôn nhanh hơn
+- Tự đổi sang hash
+
+## LESSON dsa-12 | Tìm kiếm nhị phân và bất biến
+
+### Giữ khoảng nửa mở để tránh mất biên
+Lower bound tìm vị trí chèn đầu tiên không nhỏ hơn target trên mảng tăng. Kết quả có thể bằng n và không nhất thiết bằng một phần tử đang có; caller phải kiểm trước khi truy cập.
+
+### Bất biến quyết định cập nhật
+Giữ mọi vị trí trước lo < target, mọi vị trí từ hi >= target. mid được loại hoặc trở thành hi, nên khoảng giảm; lo=mid+1 khi nhỏ để tránh vòng lặp vô hạn.
+~~~python
+def lower_bound(xs,target):
+    lo,hi=0,len(xs)
+    while lo<hi:
+        mid=lo+(hi-lo)//2
+        if xs[mid]<target:lo=mid+1
+        else:hi=mid
+    return lo
+assert lower_bound([1,3,3,8],3)==1
+~~~
+
+### Ca biên chứng minh vị trí đầu
+Rỗng, target trước/sau mọi phần tử và nhiều bản trùng là các ca cốt lõi. Python int không overflow ở phép cộng như số nguyên cố định, nhưng công thức mid vẫn dễ chuyển sang ngôn ngữ khác.
+~~~python
+assert lower_bound([],4)==0
+assert lower_bound([2,2,2],2)==0
+assert lower_bound([2,2,2],3)==3
+assert lower_bound([1,3,8],0)==0
+assert lower_bound([1,3,8],4)==2
+~~~
+
+### Từ tìm số sang tìm ngưỡng
+Binary search trên predicate cần đơn điệu false...true. Ví dụ capacity đủ tại một ngưỡng chỉ được dùng nếu tăng capacity không làm predicate quay về false theo mô hình, không suy từ vài điểm đo nhiễu.
+~~~text
+Invariant check tại p=lower_bound(xs,x):
+ all(v<x for v in xs[:p])
+ all(v>=x for v in xs[p:])
+ p nằm trong [0,n]
+ Thời gian O(log n), phụ trợ O(1), với truy cập chỉ số O(1)
+~~~
+
+### Sorted là precondition cần bảo vệ
+Không gọi binary search trên list chưa sắp rồi xem kết quả tình cờ đúng là bằng chứng. Nếu dữ liệu liên tục đổi, cần snapshot/khóa thích hợp hoặc cấu trúc tìm kiếm khác; không kiểm sort O(n) mỗi truy vấn rồi vẫn quảng cáo tổng O(log n).
+
+PRACTICE: So lower_bound với oracle tuyến tính trên mảng nhỏ có trùng. Ghi bất biến trước/sau từng vòng cho target nằm giữa; tạo mutant lo=mid và chứng minh có input gây không tiến.
+Q: Lower bound trả vị trí nào?
++ Chỉ số đầu có giá trị >= mục tiêu, hoặc n
+- Luôn chỉ số bằng mục tiêu
+- Phần tử cuối nhỏ hơn
+Q: Binary search cần điều kiện gì?
++ Dữ liệu hoặc predicate đơn điệu theo contract
+- Mọi mảng bất kỳ
+- Chỉ cần nhiều phần tử
+
+## LESSON dsa-13 | Dự án: tìm đường trong bản đồ giả
+
+### Dự án bản đồ thị trấn Mây Thoi
+Bản đồ là graph có hướng, bước đi cùng chi phí một. Học viên tự đặt tên nút và đường, không dùng địa danh thật. Nguồn/đích có thể giống nhau, đường một chiều và khu tách rời phải thể hiện bằng dữ liệu.
+
+### Dữ liệu và contract đường đi
+Adjacency list sau dùng cho shortest_path bài10. Kết quả là list node hoặc None; graph không bị sửa. Tie-breaker là thứ tự adjacency trong fixture, nhưng bài chấm chính kiểm đường hợp lệ và ít cạnh nhất.
+~~~python
+world={
+ "Cổng Mầm":["Sân Thoi","Ngõ Lụa"],
+ "Sân Thoi":["Tháp Nếp"],
+ "Ngõ Lụa":["Tháp Nếp"],
+ "Tháp Nếp":[],
+ "Đảo Sợi":[]
+}
+# Ghép với shortest_path đã viết, không gọi mạng hay bản đồ ngoài.
+~~~
+
+### Verifier không gọi lại thuật toán để làm expected
+Kiểm đầu/cuối và mọi cạnh có tồn tại, sau đó so độ dài với oracle nhỏ độc lập hoặc khoảng cách đã tính tay. Hàm dưới chỉ kiểm hợp lệ đường, chưa chứng minh ngắn nhất.
+~~~python
+def valid_path(graph,path,start,goal):
+    if not path or path[0]!=start or path[-1]!=goal:return False
+    return all(v in graph[u] for u,v in zip(path,path[1:]))
+assert valid_path(world,["Cổng Mầm","Sân Thoi","Tháp Nếp"],"Cổng Mầm","Tháp Nếp")
+assert not valid_path(world,["Tháp Nếp","Cổng Mầm"],"Tháp Nếp","Cổng Mầm")
+~~~
+
+### Gói bàn giao có tính đúng và số đo
+Tạo CLI riêng theo input JSON nếu muốn, nhưng giữ parser/validate tách thuật toán. Kiểm giới hạn tài nguyên và báo lỗi rõ; benchmark chỉ với graph giả, không nhận mọi input vô hạn từ ngoài.
+~~~text
+Rubric /100: mô hình20, BFS25, oracle25, complexity15, docs15
+Cases: empty,missing,same,cycle,directed,disconnected,ties
+Evidence: seed,graph hash,version,command,expected/actual
+Benchmark: V/E và phân bố degree, không chỉ thời gian
+Scope: unweighted; weighted phải đổi thuật toán và test
+~~~
+
+### Mở rộng có lý do và kiểm lại mô hình
+Thêm cửa khóa theo trạng thái có thể biến node thành cặp vị trí/trạng thái. Khi trọng số khác nhau, không giữ BFS rồi sửa expected cho xanh; cập nhật contract, thuật toán và oracle trước khi tối ưu.
+
+PRACTICE: Bàn giao graph tự đặt, BFS, verifier và ít nhất12ca test có oracle riêng; thêm benchmark ba cỡ graph và complexity. Review chéo một lỗi visited muộn, một lỗi thêm cạnh ngược và một lỗi không có đường.
+Q: Bản đồ lab có cổng một chiều cần mô hình gì?
++ Đồ thị có hướng theo luật đi
+- Tự thêm cạnh ngược mọi nơi
+- Dùng sort tọa độ
+Q: So thuật toán cần bằng chứng nào?
++ Tính đúng, ca biên, độ phức tạp và số đo có giới hạn
+- Một ảnh chạy nhanh
+- Chỉ dòng code ít
+
+## LESSON dsa-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Cần nêu thao tác và mô hình chi phí; O(n) là chặn trên, không phải lời hứa thời gian tuyệt đối trên mọi máy.
+2. Khi tổng nhỏ, đầu trái không thể ghép với vị trí nhỏ hơn đầu phải để đạt tổng; dịch trái tiến. Tổng lớn thì giảm phải.
+3. Python str duyệt code point; dấu kết hợp và chuỗi emoji có thể gồm nhiều điểm mã, grapheme cần quy tắc/thư viện thích hợp.
+4. Hash map đổi bộ nhớ lấy truy cập trung bình tốt; va chạm, hash và kiểu khóa có thể làm chi phí khác, phải nêu mô hình.
+
+### Dữ liệu và điều kiện biên
+5. LIFO phù hợp mở ngoặc gần nhất phải được đóng trước; underflow và kiểu ngoặc sai cần được phát hiện.
+6. collections.deque hỗ trợ hai đầu hiệu quả; list.pop(0) dịch phần tử, không phù hợp hàng đợi dài.
+7. Hai nút cùng value vẫn có thể khác nhau; Floyd so identity, còn giá trị lặp không chứng minh có vòng.
+8. Postorder phù hợp tổng hợp thông tin cây con, trong khi preorder xử lý root trước và inorder của BST có điều kiện thứ tự riêng.
+
+### Tính đúng và cách điều tra
+9. Heap chỉ đảm bảo cực trị ở root, không hỗ trợ duyệt toàn bộ theo thứ tự bằng cách đọc mảng từ trái qua phải.
+10. BFS khám phá theo lớp số cạnh; với trọng số khác nhau cần thuật toán phù hợp như Dijkstra cho trọng số không âm.
+11. Ổn định hữu ích khi xếp nhiều tiêu chí hoặc giữ thứ tự nhập trong nhóm cùng key; phải xác nhận tính ổn định của công cụ.
+12. Dùng khoảng nửa mở [lo,hi), giữ phía trước lo nhỏ hơn target và phía từ hi không nhỏ hơn target.
+
+### Rủi ro và lựa chọn phương án
+13. Mô hình phải phản ánh cạnh được phép và chi phí; BFS đúng nếu mỗi bước có cùng chi phí, không suy hướng từ hình vẽ.
+14. List dựa trên mảng tham chiếu, truy cập chỉ số trực tiếp nhưng chèn/xóa đầu phải dịch; append có chi phí khấu hao O(1).
+15. Set phù hợp membership/khử trùng, map phù hợp đếm và tra dữ liệu theo khóa; cần chốt equality và thứ tự đầu ra.
+16. Hàng đợi không giới hạn có thể cạn bộ nhớ; cần reject/chờ theo deadline và retry/idempotency theo contract.
+
+### Dự án, bằng chứng và bàn giao
+17. Cần phân biệt cấu trúc cây, quy tắc BST và cân bằng; BST suy biến có thể cao n và tìm kiếm O(n).
+18. Đánh dấu khi enqueue giúp mỗi đỉnh vào hàng một lần; giữ parent lúc khám phá để dựng đường đi.
+19. Không có tính đơn điệu thì loại nửa có thể bỏ đáp án; chốt định nghĩa biên và ca rỗng/trùng trước khi viết vòng lặp.
+20. Oracle độc lập và bất biến kiểm tính đúng; benchmark bổ sung trên workload cụ thể, không thay chứng minh hay kết luận mọi input.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Big-O diễn tả điều gì?
++ Chặn trên tốc độ tăng chi phí theo kích thước input
+- Thời gian chính xác bằng giây
+- Dung lượng luôn bằng n
+Q: Hai con trỏ tìm tổng trên mảng tăng dần dựa vào gì?
++ Bất biến cho phép loại bỏ một phía
+- Tăng cả hai con trỏ tùy ý
+- Mảng chưa sắp cũng đúng
+Q: Một ký tự người nhìn thấy có luôn là một code point không?
++ Không, có thể gồm nhiều code point
+- Có với mọi ngôn ngữ
+- Chỉ dấu cách mới khác
+Q: Hash map thường tra cứu trung bình ra sao?
++ O(1) theo giả định hash, không là bảo đảm worst-case mọi loại
+- Luôn O(log n)
+- Không dùng bộ nhớ
+Q: Stack dùng quy tắc nào?
++ Vào sau ra trước
+- Vào trước ra trước
+- Luôn lấy nhỏ nhất
+Q: Queue FIFO thường cần thao tác gì?
++ Thêm cuối và lấy đầu hiệu quả
+- Sắp lại toàn hàng mỗi lần
+- Chỉ pop cuối
+Q: Linked list so nút bằng gì khi tìm vòng?
++ Định danh nút theo cấu trúc liên kết
+- Chỉ giá trị bằng nhau
+- Tên biến
+Q: Duyệt cây hậu tự xử lý root lúc nào?
++ Sau các cây con
+- Luôn đầu tiên
+- Không bao giờ
+Q: Heap min giữ thuộc tính gì?
++ Mỗi parent không lớn hơn con
+- Toàn mảng đã sắp tăng
+- Các lá bằng nhau
+Q: BFS tìm đường ngắn nhất khi nào?
++ Đồ thị cạnh cùng trọng số theo số cạnh
+- Mọi đồ thị trọng số tùy ý
+- Chỉ đồ thị hoàn chỉnh
+Q: Sort ổn định giữ gì?
++ Thứ tự tương đối của phần tử có key bằng nhau
+- Mọi phần tử giữ vị trí cũ
+- Luôn O(n)
+Q: Lower bound trả vị trí nào?
++ Chỉ số đầu có giá trị >= mục tiêu, hoặc n
+- Luôn chỉ số bằng mục tiêu
+- Phần tử cuối nhỏ hơn
+Q: Bản đồ lab có cổng một chiều cần mô hình gì?
++ Đồ thị có hướng theo luật đi
+- Tự thêm cạnh ngược mọi nơi
+- Dùng sort tọa độ
+Q: Truy cập xs[i] trong Python list thường có chi phí gì?
++ O(1), còn tìm giá trị thường O(n)
+- Mọi thao tác O(1)
+- Chèn đầu luôn O(1)
+Q: Set và map khác nhau ở mục tiêu nào?
++ Set giữ thành viên, map giữ ánh xạ key-value
+- Map chỉ giữ số
+- Set giữ mọi bản trùng
+Q: Giới hạn queue và backpressure giúp gì?
++ Kiểm soát tích tụ và quyết định khi đầy
+- Làm tác vụ tự đúng
+- Tăng worker vô hạn
+Q: Cây nhị phân có tự là BST cân bằng không?
++ Không
+- Có nếu có root
+- Có nếu mỗi nút hai con
+Q: Đánh dấu visited trong BFS lúc nào để tránh enqueue lặp?
++ Khi đưa nút vào queue
+- Chỉ khi queue rỗng
+- Sau khi gặp đích bất kỳ
+Q: Binary search cần điều kiện gì?
++ Dữ liệu hoặc predicate đơn điệu theo contract
+- Mọi mảng bất kỳ
+- Chỉ cần nhiều phần tử
+Q: So thuật toán cần bằng chứng nào?
++ Tính đúng, ca biên, độ phức tạp và số đo có giới hạn
+- Một ảnh chạy nhanh
+- Chỉ dòng code ít

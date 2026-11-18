@@ -1,0 +1,1266 @@
+=== COURSE istqb-foundation
+name: Luyện thi chứng chỉ kiểm thử nền tảng
+icon: 📖
+floor: 8
+room: 802
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Kiến thức nền tảng kiểm thử theo sáu nhóm phổ biến:nguyên tắc,vòng đời,static,kỹ thuật,quản lý và công cụ;100 câu gốc được dùng trong bài luyện,hai đề40 câu và đề cuối20 câu.
+
+## LESSON istqb-foundation-01 | Mục tiêu kiểm thử và các nguyên tắc
+
+### Học nền tảng bằng tình huống tự tạo
+Khóa này dùng trung tâm giả định Sương Vạt để giải thích kiến thức kiểm thử theo sáu nhóm phổ biến của CTFL. Mọi câu luyện tự soạn,không sao đề thật;điểm nội bộ không xác nhận chứng chỉ hoặc bảo đảm thi đỗ.
+
+### Mục tiêu kiểm không chỉ tìm bug
+Review yêu cầu,đánh giá rủi ro,xác minh tiêu chí và cung cấp thông tin cho quyết định đều có giá trị. Chọn mục tiêu theo bối cảnh,tránh hứa kiểm hết hoặc chứng minh không còn lỗi.
+~~~text
+bối cảnh:đặt lớp có quota và refund
+mục tiêu:không vượt chỗ,không hoàn điểm lặp
+phép kiểm:rule review,biên,state,quyền
+đầu ra:evidence và rủi ro còn lại
+~~~
+
+### Error,defect và failure theo chuỗi
+Người hiểu sai hạn hủy là error,điều kiện sai trong code là defect,hoàn điểm sai khi chạy là failure. Không phải mọi defect đều biểu hiện trong mọi lần chạy;dữ liệu và trạng thái quyết định việc kích hoạt.
+~~~text
+error:hiểu18:00 là vẫn trước hạn
+defect:điều kiện now<=cutoff thay vì now<cutoff
+failure:hoàn điểm ở đúng 18:00 trái rule lab
+static review có thể tìm defect trước khi failure xảy ra
+~~~
+
+### Nguyên tắc định hướng lựa chọn
+Không kiểm mọi tổ hợp được nên cần rủi ro và kỹ thuật. Lỗi có thể tập trung,tập kiểm cần cập nhật,bối cảnh ảnh hưởng cách kiểm;đúng đặc tả vẫn có thể không hữu ích.
+~~~text
+1 kiểm cho thấy có lỗi,không chứng minh hết lỗi
+2 exhaustive thường bất khả thi
+3 kiểm sớm có lợi
+4 defect có thể tập trung
+5 test cũ có thể mất hiệu lực tìm lỗi mới
+6 kiểm phụ thuộc bối cảnh
+7 hết lỗi đặc tả chưa đủ thành công
+~~~
+
+### Cách học và lỗi dễ mắc
+Giải thích vì sao phương án đúng và vì sao distractor sai bằng tình huống,không học thuộc vị trí đáp án. Khi thuật ngữ nhóm dùng khác,đối chiếu định nghĩa và phạm vi trước suy luận.
+
+PRACTICE: Vẽ chuỗi error-defect-failure cho ba lỗi giả,liên hệ ba nguyên tắc với quyết định kiểm Sương Vạt. Làm sáu câu rồi tự viết phản ví dụ cho một phương án sai.
+Q: Kiểm thử giúp mục tiêu nào của nhóm?
++ Giảm rủi ro bằng thông tin về chất lượng
+- Chứng minh mọi lỗi đã hết
+- Thay trách nhiệm chất lượng của Dev
+Q: Một người hiểu sai phí rồi code sai; runtime tính sai tiền. Đâu là failure?
++ Kết quả tiền sai quan sát khi chạy
+- Suy nghĩ nhầm ban đầu
+- Mọi dòng code trong module
+Q: Nguyên tắc lỗi có thể tập trung dẫn đến hành động nào?
++ Tăng chú ý vùng có bằng chứng rủi ro cao
+- Bỏ kiểm mọi module chưa từng lỗi
+- Chỉ đếm số file
+Q: Bộ ca cũ liên tục xanh nhưng ít phát hiện mới nên làm gì?
++ Rà lại dữ liệu và bổ sung góc kiểm phù hợp
+- Dừng mọi kiểm thử
+- Chỉ đổi tên test
+Q: Vì sao bắt đầu review yêu cầu sớm có ích?
++ Phát hiện mơ hồ trước khi lan vào thiết kế và code
+- Vì không cần test runtime nữa
+- Vì mọi tài liệu đều đúng
+Q: App đúng đặc tả nhưng người dùng không hoàn tất công việc nói lên gì?
++ Thiếu lỗi so với đặc tả chưa đủ bảo đảm hữu ích
+- Chắc chắn test tool sai
+- Không cần validation
+
+## LESSON istqb-foundation-02 | Hoạt động kiểm thử, testware và kỹ năng
+
+### Hoạt động kiểm không phải dây chuyền cứng
+Planning,monitoring/control,analysis,design,implementation,execution và completion có thể lặp,chồng lấn theo vòng đời. Phân biệt câu hỏi mỗi hoạt động trả lời để tránh học như tên bước không có ý nghĩa.
+
+### Từ basis đến condition và ca cụ thể
+Requirement quota là test basis;condition là kiểm biên còn chỗ;case dùng capacity1,confirmed0 và một học viên. Implementation chuẩn bị fixture,thủ tục và thứ tự chạy.
+~~~text
+basis:R-QUOTA lớp không vượt capacity
+condition:đăng ký chỗ cuối
+case:remaining1,ST4 đăng ký ->remaining0
+implementation:fixture CL7,actor ST4,lệnh/steps
+execution:actual và evidence theo build
+~~~
+
+### Testware là tài sản cần quản lý
+Plan,mô hình,case,dữ liệu,script,log và report phục vụ các hoạt động khác nhau. Giữ version và liên kết để biết expected nào áp cho build nào;không chỉ lưu số case pass.
+~~~text
+trace:R-QUOTA ->COND-01 ->TC-07 ->RUN-LAB2
+metadata:build,fixture,actor,timezone
+result:pass/fail/blocked/not-run
+completion:lưu gói evidence,bài học và việc còn mở
+~~~
+
+### Kỹ năng và whole-team
+Tư duy phản biện,giao tiếp,kỹ thuật và hiểu miền bổ sung nhau. Góc nhìn độc lập có thể phát hiện giả định chung nhưng không có nghĩa QA làm riêng và Dev không chịu trách nhiệm chất lượng.
+~~~text
+quan sát:actual khác expected ở qty 0
+trao đổi:trình bày input,rule và effect
+tránh:quy lỗi cá nhân hoặc khẳng định nguyên nhân chưa có bằng chứng
+follow-up:owner,quyết định và retest
+~~~
+
+### Monitoring khác control
+Theo dõi cho biết thực tế so kế hoạch;còn control là hành động điều chỉnh. Nếu môi trường chậm,cần đổi ưu tiên hoặc nguồn lực có review,không chỉ gửi bảng đỏ mỗi ngày.
+
+PRACTICE: Lập chuỗi testware cho rule quota với ba condition và sáu case. Viết một báo cáo anomaly khách quan,phân biệt thông tin monitoring và quyết định control.
+Q: Test analysis thường trả lời câu hỏi nào?
++ Cần kiểm điều gì từ cơ sở kiểm thử
+- Đã chạy lúc mấy giờ
+- Đặt màu report gì
+Q: Test design chuyển test condition thành gì?
++ Ca,dữ liệu và yêu cầu môi trường để kiểm
+- Một quyết định release tự động
+- Chỉ số lỗi của tháng trước
+Q: Trong thực thi,actual khác expected cần làm gì?
++ Ghi kết quả và phân tích anomaly có bằng chứng
+- Tự đổi expected theo actual
+- Luôn gọi ngay là defect sản phẩm
+Q: Traceability giữa cơ sở kiểm và test giúp gì?
++ Đánh giá coverage và tác động thay đổi
+- Bảo đảm mọi expected đúng
+- Thay mọi review
+Q: Kỹ năng hợp tác hữu ích nhất khi báo lỗi là gì?
++ Mô tả quan sát khách quan và tác động
+- Quy lỗi cá nhân để nhanh sửa
+- Giấu dữ liệu không thuận lợi
+Q: Whole-team approach có nghĩa gì?
++ Mọi vai trò góp vào chất lượng theo năng lực
+- Chỉ QA được quyết mọi vấn đề
+- Không còn cần kỹ năng kiểm thử
+
+## LESSON istqb-foundation-03 | Kiểm thử trong vòng đời và shift-left
+
+### Vòng đời đổi cách tạo phản hồi
+Tuần tự hay lặp đều cần phản hồi chất lượng. Ở nhóm Sương Vạt,mỗi increment có review rule,kiểm component,tích hợp và acceptance phù hợp;không chờ cuối dự án mới nghĩ expected.
+
+### Shift-left là chọn kiểm thích hợp sớm
+Review example,static analysis và test component có thể phát hiện vấn đề trước build hệ thống. Điều đó không xóa giá trị kiểm môi trường,vận hành hoặc trải nghiệm người dùng sau này.
+~~~text
+trước code:rule/example/review
+trong code:static analysis,component tests
+tích hợp:contract và tương tác
+release:system/UAT theo rủi ro
+sau release:feedback trong quyền và bảo vệ dữ liệu
+~~~
+
+### Thay đổi kéo theo maintenance testing
+Sửa quota,nâng dependency hoặc chuyển môi trường đều có thể cần kiểm bảo trì. Impact analysis xem rủi ro,phạm vi và testware liên quan,kể cả diff chỉ một dòng.
+~~~text
+change:quota1->quota2 trong rule mới
+impact:remaining,đăng ký,hủy,retry,báo cáo
+update:basis,expected,fixture và regression
+record:rule version và build áp dụng
+~~~
+
+### DevOps tăng nhu cầu hợp tác và automation
+Pipeline giúp phản hồi liên tục,còn test thủ công/thăm dò có vai trò theo mục tiêu. Chất lượng pipeline phụ thuộc oracle và dữ liệu,không chỉ tốc độ chạy hoặc badge xanh.
+~~~text
+feedback loop:commit ->checks ->evidence ->điều chỉnh
+retrospective:điều hiệu quả/chưa hiệu quả
+action:owner,hạn và phép đo kết quả cải tiến
+Không thay review bằng việc rerun đến xanh.
+~~~
+
+### Bẫy hiểu shift-left thành bỏ kiểm cuối
+Một tính năng đúng unit vẫn có thể lỗi config,interface hoặc nhu cầu nghiệp vụ. Giữ danh mục rủi ro theo mức/loại kiểm và bối cảnh,không đếm số hoạt động để chứng minh đầy đủ.
+
+PRACTICE: Chọn vòng đời giả định cho Sương Vạt,vẽ feedback loop và maintenance trigger. Nộp impact analysis cho sửa một dòng quyền và một hành động retrospective có cách kiểm hiệu quả.
+Q: Shift-left chủ yếu hướng tới gì?
++ Đưa hoạt động kiểm thích hợp sớm hơn
+- Bỏ hết kiểm sau triển khai
+- Chỉ chạy UI trước unit
+Q: Trong phát triển lặp,khi yêu cầu đổi nên làm gì?
++ Cập nhật cơ sở kiểm và regression theo tác động
+- Giữ expected cũ mãi
+- Chỉ test tính năng mới
+Q: DevOps có ảnh hưởng gì tới kiểm thử?
++ Tăng nhu cầu phản hồi tự động và hợp tác xuyên vòng đời
+- Loại bỏ mọi test thủ công
+- Biến QA thành người deploy duy nhất
+Q: Retrospective hữu ích khi nào?
++ Tìm cải tiến quy trình từ điều đã xảy ra
+- Chỉ xếp hạng cá nhân
+- Thay retest lỗi
+Q: Một thay đổi nhỏ có cần impact analysis không?
++ Có,tùy ảnh hưởng và rủi ro
+- Không bao giờ
+- Chỉ khi trên1000dòng
+Q: Môi trường production có metric lỗi nào giúp tester?
++ Phản hồi để cập nhật rủi ro và tập kiểm
+- Bằng chứng không cần test trước release
+- Chỉ dữ liệu cho marketing
+
+## LESSON istqb-foundation-04 | Mức kiểm thử và loại kiểm thử
+
+### Mức kiểm là ranh giới đối tượng
+Component,component integration,system,system integration và acceptance được phân biệt theo phạm vi/mục tiêu. Cần chốt kiến trúc để biết interface nào thuộc cấp nào,không suy mức chỉ từ tên công cụ.
+
+### Theo dấu quota qua các mức
+Hàm tính chỗ,service ghi đơn,hệ thống đặt lớp và kết nối hệ ngoài có phép kiểm khác nhau. Một lỗi có thể phát hiện ở nhiều mức,nhưng càng gần cơ chế càng dễ khoanh vùng.
+~~~text
+component:fee()/remaining()
+component integration:service với repository
+system:toàn ứng dụng lab
+system integration:ứng dụng lab với gateway giả
+acceptance:quy trình điều phối mở/chốt lớp
+~~~
+
+### Loại kiểm và mức kiểm hai trục
+Chức năng,phi chức năng và kiểm theo cấu trúc nói về góc đánh giá. Hiệu năng không tự là một mức chỉ áp cuối dự án;có thể đo component hoặc toàn hệ thống theo câu hỏi.
+~~~text
+mức x loại:
+component x correctness/performance phù hợp
+system x function/usability/accessibility
+acceptance x nhu cầu/quy trình
+Ranh giới và oracle được ghi riêng.
+~~~
+
+### Confirmation và regression sau sửa
+Ca qty 0 bị chấp nhận được chạy lại để xác nhận sửa. Những ca qty 1,quota cuối,hủy và retry kiểm tác dụng phụ theo impact,không đồng nghĩa cùng một mục tiêu.
+~~~text
+confirmation:input gốc,build mới,rule cũ đúng
+regression:biên hợp lệ,trạng thái và vùng liên quan
+evidence:expected/actual,fixture và build
+Không dùng việc một ca xanh để suy mọi thay đổi an toàn.
+~~~
+
+### Chọn mức theo rủi ro và chi phí phản hồi
+Đặt nhiều kiểm logic ở mức gần code giúp nhanh,nhưng vẫn giữ tích hợp và acceptance có giá trị. Không dùng sơ đồ số lượng test như quy luật cứng cho mọi kiến trúc.
+
+PRACTICE: Lập ma trận năm mức với đối tượng,phụ thuộc,oracle và ví dụ của app giả. Thiết kế confirmation/regression cho lỗi remaining và giải thích công cụ không quyết định mức kiểm.
+Q: Kiểm một hàm tính phí cô lập thuộc mức nào thường gặp?
++ Component testing
+- System integration luôn luôn
+- Acceptance duy nhất
+Q: Kiểm giao tiếp API với database trong phạm vi hai thành phần tập trung gì?
++ Component integration theo kiến trúc đã chốt
+- Chỉ màu trang
+- Không có liên quan integration
+Q: System testing thường đánh giá gì?
++ Hệ thống hoàn chỉnh so với đặc tả liên quan
+- Chỉ một method riêng
+- Chỉ checklist tài khoản
+Q: Acceptance testing tập trung vào gì?
++ Nhu cầu nghiệp vụ và mức sẵn sàng chấp nhận
+- Chỉ statement coverage
+- Chỉ tốc độ compiler
+Q: Performance testing thuộc cách phân loại nào?
++ Loại kiểm phi chức năng
+- Một mức kiểm thay component
+- Luôn chỉ ở production
+Q: Confirmation khác regression thế nào?
++ Xác nhận bản sửa lỗi gốc khác tìm tác dụng phụ
+- Hai từ luôn đồng nghĩa
+- Regression không cần expected
+
+## LESSON istqb-foundation-05 | Static testing và review có hiệu quả
+
+### Static testing tìm vấn đề trước chạy
+Requirement,thiết kế,code và test case đều có thể được review. Một điều kiện mâu thuẫn hoặc thiếu rule có thể được phát hiện dù chưa có ứng dụng;static analysis bổ sung khả năng máy cho một số mẫu code.
+
+### Review có mục tiêu và đầu vào
+Chọn loại review,mức formal và vai trò theo rủi ro. Chuẩn bị riêng,trao đổi anomaly,quyết định và theo dõi là các hoạt động có thể được tổ chức khác nhau nhưng phải có đầu ra hữu ích.
+~~~text
+input:rule hủy versionLAB2
+focus:biên giờ,quyền,hoàn điểm lặp
+roles:tác giả,reviewer,điều phối theo loại review
+output:issue/question/decision,owner và trạng thái
+~~~
+
+### Chọn review phù hợp thay vì luôn formal nhất
+Informal review,walkthrough,technical review và inspection khác cách tổ chức/mục đích. Inspection có quy trình/vai trò rõ,không mặc nhiên là lựa chọn rẻ hoặc bắt buộc cho mọi tài liệu.
+~~~text
+rủi ro thấp:peer review ngắn có evidence
+rule tiền/quyền:review đa vai trò,tiêu chí rõ
+inspection khi phù hợp:mức formal,chuẩn bị,ghi chép
+Quyết định dựa bối cảnh,không chỉ tên loại.
+~~~
+
+### Giao tiếp giúp issue được làm rõ
+Báo dòng yêu cầu và ví dụ mâu thuẫn thay vì đánh giá người viết. Tách anomaly khỏi defect đã xác nhận;hỏi nguồn có thẩm quyền khi rule chưa rõ,không bỏ phiếu thay nghiệp vụ.
+~~~text
+quan sát:R2 nói trước 18:00,R5 cho đến 18:00
+impact:expected ở18:00 khác nhau
+question:rule nào hiệu lực?
+resolution:quyết định có nguồn và version
+follow-up:cập nhật basis/testware
+~~~
+
+### Công cụ không tự giải quyết mọi cảnh báo
+Static analysis có rule,config,false positive và giới hạn. Review triage dựa ngữ cảnh,không tắt mọi rule đỏ hoặc coi số cảnh báo là số defect chắc chắn.
+
+PRACTICE: Review một requirement giả mười dòng và một đoạn code lab,ghi sáu anomaly có vị trí. Chọn loại review,vai trò và theo dõi ba quyết định;phân biệt điều đã xác nhận và câu hỏi.
+Q: Static testing có cần thực thi code dưới test không?
++ Không
+- Luôn cần browser
+- Luôn cần request mạng
+Q: Review yêu cầu có thể phát hiện loại vấn đề nào?
++ Mâu thuẫn,thiếu rõ ràng và phần bị bỏ sót
+- Chỉ CPU quá tải runtime
+- Chỉ lỗi socket
+Q: Reviewer chuẩn bị riêng trước buổi trao đổi để làm gì?
++ Tìm và ghi anomaly từ góc nhìn được giao
+- Chốt mọi issue trước tác giả
+- Bỏ buổi review
+Q: Trong review chính thức hơn,moderator thường hỗ trợ gì?
++ Điều phối để đạt mục tiêu và quy trình
+- Tự sửa mọi defect thay tác giả
+- Luôn quyết định nghiệp vụ
+Q: Inspection có đặc trưng nào so với trao đổi không chính thức?
++ Quy trình và vai trò rõ,có ghi chép/metric phù hợp
+- Không được ghi issue
+- Không cần chuẩn bị
+Q: Static analysis report nên được xử lý ra sao?
++ Triage theo rule và ngữ cảnh,kiểm false positive
+- Mọi cảnh báo tự là bug chắc chắn
+- Tắt hết rule đỏ
+
+## LESSON istqb-foundation-06 | Phân vùng tương đương và phân tích biên
+
+### Partition là mô hình xử lý tương đương
+Qty lab là số nguyên từ 1đến9. Chia thấp,hợp lệ,cao theo quy tắc,kèm thiếu/null/kiểu sai nếu cần;không gộp mọi dữ liệu không hợp lệ thành một vùng khi chúng có cơ chế xử lý khác.
+
+### Chọn đại diện có lý do
+Một ca mỗi partition đã nhận diện đạt coverage partition tương ứng,nhưng không chứng minh mọi giá trị trong vùng đúng. Chọn đại diện và thêm biên theo rủi ro lỗi >/>= thường gặp.
+~~~text
+P1:số nguyên<1 ->đại diện0
+P2:1..9 ->đại diện5
+P3:số nguyên>9 ->đại diện10
+P4:sai kiểu ->chuỗi"2" theo hợp đồng lab
+P5:thiếu trường ->payload không có qty
+~~~
+
+### Two-value và three-value BVA
+Với miền nguyên,lân cận là bước1. Ghi rõ chiến lược để người khác tính coverage;đừng gọi ba giá trị ngẫu nhiên là kiểm biên.
+~~~text
+biên thấp1:
+  two-value:0,1
+  three-value:0,1,2
+biên cao9:
+  two-value:9,10
+  three-value:8,9,10
+~~~
+
+### Coverage phải có mẫu số minh bạch
+Nếu model có năm partition mà chỉ chọn vùng hợp lệ và vùng cao,coverage là2/5 theo mô hình đó. Nếu requirement đổi max,partition và biên phải cập nhật;các loại input khác không tự được bao phủ.
+~~~text
+model_version:QTY-LAB1
+identified partitions:5
+covered partitions:P2,P3
+coverage:2/5
+BVA coverage tính riêng trên các phần tử biên đã chọn.
+~~~
+
+### Giới hạn và lỗi thường gặp
+BVA cần miền có thứ tự và biên có nghĩa. Với enum màu không thứ tự,partition hoặc bảng quyết định có thể hợp hơn;với float,độ chính xác và bước lân cận phải được chốt trước.
+
+PRACTICE: Thiết kế partition và two/three-value BVA cho qty 1..9 và độ dài tên giả. Nộp miền,đại diện,expected,coverage và ca null/thiếu/sai kiểu có lý do.
+Q: Qty nguyên 1..9 có bao nhiêu phân vùng cơ bản theo miền số?
++ Ba:vùng thấp,hợp lệ,vùng cao
+- Chỉ một
+- Chín vùng vì có chín số
+Q: Ngày hợp lệ/tháng sai/chuỗi không phải ngày là ví dụ gì?
++ Phân vùng theo các cách xử lý mong đợi
+- Mọi input cùng một vùng
+- Chỉ branch coverage
+Q: Hai giá trị BVA cho biên thấp1 của miền nguyên thường chọn gì?
++ 0và1
+- 1và100
+- Chỉ5
+Q: Ba giá trị quanh biên cao9 là gì?
++ 8,9,10
+- 0,5,9
+- 9,90,900
+Q: Có100% partition coverage chứng minh điều gì?
++ Mọi phân vùng đã nhận diện có đại diện được kiểm
+- Mọi giá trị đã kiểm
+- Không còn defect
+Q: BVA phù hợp nhất với kiểu miền nào?
++ Miền có thứ tự và ranh giới có ý nghĩa
+- Mọi danh sách không thứ tự đều như nhau
+- Chỉ nhãn màu ngẫu nhiên
+
+## LESSON istqb-foundation-07 | Bảng quyết định và chuyển trạng thái
+
+### Bảng quyết định biểu diễn quy tắc kết hợp
+Hủy lớp ở Sương Vạt phụ thuộc quyền sở hữu,thời hạn và trạng thái đã hủy. Bảng tách điều kiện/action để thấy tổ hợp thiếu;quy tắc rút gọn chỉ khi kết quả không phụ thuộc điều kiện được đánh dấu không quan tâm.
+
+### Tổ hợp khả thi và cách rút gọn
+Hai điều kiện nhị phân tạo tối đa bốn tổ hợp;thêm ràng buộc có thể loại một số. Ghi lý do để mẫu số coverage không bị thay im lặng;dont-care không có nghĩa chưa biết yêu cầu.
+~~~text
+đúng chủ | trước hạn | action lab
+có | có | hủy,hoàn 20 điểm
+có | không | hủy,hoàn 0 điểm
+không | không quan tâm | chặn,không đổi
+Rule khác về đã hủy cần được bổ sung rõ.
+~~~
+
+### Trạng thái làm sự kiện đổi nghĩa
+Cancel ở confirmed khác cancel ở cancelled. Vẽ trạng thái và cạnh hợp lệ,bị cấm hoặc lặp theo hợp đồng;kiểm trạng thái đến được chưa bảo đảm mọi cạnh đã được đi.
+~~~text
+draft --submit--> pending --confirm--> confirmed
+confirmed --cancel--> cancelled
+cancelled --cancel--> không hoàn thêm
+pending --timeout--> pending hoặc trạng thái rõ theo rule
+Không tự đặt transition còn chưa chốt.
+~~~
+
+### Thiết kế chuỗi và oracle cuối
+Ca lặp hủy phải so cả hai response,tổng điểm và số sự kiện. Nếu response thứ hai báo lỗi nhưng điểm vẫn tăng,ca fail;state model cần tác dụng phụ chứ không chỉ nhãn màn hình.
+~~~text
+pre:confirmed,points80,cost20
+action:cancel đủ điều kiện ->points100
+action:cancel lại ->points100
+assert:refund_count1
+Kiểm bằng fixture giả và quan sát sau commit.
+~~~
+
+### Coverage có nhiều mức mạnh yếu
+State coverage,valid-transition coverage và tiêu chí chuyển tiếp khác có yêu cầu khác nhau. Chốt tiêu chí phù hợp bài thay vì nói100% state nên mọi lịch sử đều an toàn;invalid transition vẫn có giá trị theo rủi ro.
+
+PRACTICE: Lập bảng quyết định hủy và state model với năm trạng thái,tám cạnh. Chọn sáu chuỗi có cạnh không hợp lệ/lặp,ghi coverage,expected và phần yêu cầu cần hỏi.
+Q: Hai điều kiện nhị phân độc lập tạo tối đa bao nhiêu tổ hợp bảng quyết định đầy đủ?
++ Bốn
+- Hai
+- Tám
+Q: Khi một tổ hợp điều kiện không khả thi nên làm gì?
++ Ghi ràng buộc và lý do loại khỏi mô hình
+- Xóa hàng không giải thích
+- Tự đặt expected thành pass
+Q: Dấu không quan tâm trong bảng quyết định dùng khi nào?
++ Điều kiện không làm đổi action trong quy tắc đó
+- Không biết yêu cầu nhưng muốn bỏ qua
+- Ca chưa chạy
+Q: State transition test khác kiểm từng màn riêng ở đâu?
++ Xét trạng thái trước,sự kiện và chuyển tiếp
+- Chỉ đổi tên màn
+- Không cần expected
+Q: Đã cancelled mà nhận cancel lần nữa cần kiểm gì?
++ Cạnh bị cấm hoặc hành vi lặp theo hợp đồng
+- Luôn tạo thêm refund
+- Chỉ nhìn nút
+Q: Bao phủ mọi trạng thái có bảo đảm mọi transition hợp lệ đã kiểm không?
++ Không
+- Có luôn
+- Chỉ khi state ít hơn10
+
+## LESSON istqb-foundation-08 | Bao phủ lệnh, nhánh và kinh nghiệm
+
+### White-box nhìn cấu trúc đang có
+Statement/branch coverage hữu ích để phát hiện mã chưa được thực thi. Chúng không thấy yêu cầu chưa có trong code và không bảo đảm assertion đúng;dùng cùng góc nhìn hộp đen,không thay lẫn nhau.
+
+### Ví dụ statement chưa đủ branch
+Hàm dưới có thể chạy mọi statement chỉ bằng ca qty 5,nhưng kết quả false của if chưa được đi qua. Thêm qty 4 và assertion làm rõ hai lối của điều kiện.
+~~~text
+if qty>=5:
+    fee=0
+return fee
+# precondition lab:fee được khởi tạo12 trước if
+# ca qty 5 đi true;qty 4 đi false
+~~~
+
+### Coverage và oracle hai trục
+Test gọi hàm nhưng không so kết quả có thể tăng coverage mà không bảo vệ gì. Ca theo cấu trúc cần expected và dữ liệu hợp lệ;mutation giúp đánh giá độ nhạy nhưng không tự là bằng chứng đủ yêu cầu.
+~~~text
+TC1 qty 5 ->expected0
+TC2 qty 4 ->expected12
+mutation:đổi>= thành>
+TC1 phải fail;TC2 vẫn đúng
+Nếu cả hai xanh:review assertion và implementation được gọi.
+~~~
+
+### Kinh nghiệm bổ sung góc chưa có mô hình
+Error guessing dùng hiểu biết lỗi và miền,checklist giữ câu hỏi quen thuộc,exploratory học rồi điều chỉnh theo quan sát. Mỗi cách cần evidence và cập nhật,không phải đoán tùy hứng.
+~~~text
+heuristic:rỗng,biên,lặp,đảo thứ tự,gián đoạn
+charter:khám phá retry sau mất response
+notes:input,đường đi,quan sát,câu hỏi
+debrief:rủi ro mới và ca regression đề xuất
+~~~
+
+### Không biến kỹ thuật thành huy hiệu
+Một checklist dài có thể bỏ quyền,một coverage cao có thể thiếu refund,một session nhiều click có thể không học gì. Chọn theo câu hỏi và rủi ro,ghi giới hạn cụ thể để reviewer đánh giá.
+
+PRACTICE: Thiết kế statement/branch cho đoạn phí nhỏ,thử mutation và hai ca hộp đen code còn thiếu. Viết một checklist năm mục và charter thăm dò có oracle.
+Q: Test gọi mọi dòng code nhưng không assert có vấn đề gì?
++ Coverage cao nhưng có thể không phát hiện kết quả sai
+- Không có vấn đề
+- Tự thành acceptance test
+Q: Với if không có else,muốn kiểm hai kết quả điều kiện cần gì?
++ Ca true và ca false
+- Chỉ ca true nếu body đã chạy
+- Chỉ một input null
+Q: Đạt100% branch theo mô hình đã chọn có suy ra100% statement không?
++ Có với phạm vi mã/thước đo tương ứng thông thường
+- Không bao giờ
+- Chỉ khi không có function
+Q: Error guessing dựa vào gì?
++ Kinh nghiệm,kiến thức lỗi và bối cảnh
+- Chọn input không ghi lý do
+- Đo số dòng code
+Q: Checklist-based testing cần điều gì để hữu ích?
++ Mục kiểm rõ,phù hợp bối cảnh và được cập nhật
+- Một danh sách dùng mãi mọi sản phẩm
+- Chỉ tick cho đủ
+Q: Exploratory testing kết hợp những hoạt động nào?
++ Học,thiết kế và thực hiện có phản hồi
+- Chỉ click không mục tiêu
+- Chỉ viết plan trước nhiều tháng
+
+## LESSON istqb-foundation-09 | User story, acceptance criteria và ATDD
+
+### User story là lời mời trao đổi
+Người điều phối muốn chốt lớp để biết danh sách học viên cuối ngày. Thẻ story giữ mục tiêu và giá trị,conversation làm rõ quy tắc,confirmation tạo ví dụ/tiêu chí để xác nhận cách hiểu chung.
+
+### Từ mục tiêu đến acceptance criteria
+Không viết chỉ app dễ dùng hoặc lưu thành công. Chốt actor,điều kiện,kết quả quan sát và ngoại lệ;tiêu chí chưa có quyết định được ghi câu hỏi chứ không tự điền vào automation.
+~~~text
+story:điều phối chốt lớp để xuất danh sách đúng
+AC1:chỉ điều phối đúng phạm vi được chốt
+AC2:lớp chốt không nhận đăng ký mới
+AC3:export khớp enrollment confirmed
+Q1:hủy sau chốt xử lý thế nào?
+~~~
+
+### ATDD hợp tác trước implementation
+BA,Dev,QA cùng chọn ví dụ chấp nhận để hướng xây dựng. Không cần mọi ví dụ tự động ngay;giá trị đầu là giảm mơ hồ,automation sau đó giữ regression khi phù hợp.
+~~~text
+Given lớp CL7 open có 1 enrollment confirmed
+When điều phối đúng phạm vi chốt CL7
+Then CL7 closed và export có đúng 1học viên
+And đăng ký mới bị từ chối không đổi dữ liệu
+~~~
+
+### Ngôn ngữ miền khác bản ghi click
+Scenario nhắc quy tắc và kết quả,adapter chứa locator khi tự động hóa. Không dùng việc feature file đọc đẹp để bỏ review code,fixture,assertion và permission.
+~~~text
+ý định:đăng ký bị từ chối khi lớp đóng
+chi tiết UI:button/selector nằm adapter
+oracle:rule CLASS-CLOSE-01
+trace:story->AC->scenario->run/evidence
+Câu hỏi mở không được âm thầm coi đã chốt.
+~~~
+
+### Đặc tả sống cần được bảo trì
+Khi rule chốt lớp đổi,cập nhật quyết định,ví dụ và code cùng review. Test cũ vẫn xanh không chứng minh còn đúng nhu cầu;tránh expected lấy từ implementation hiện tại mà không có nguồn.
+
+PRACTICE: Viết story chốt lớp với sáu AC và bốn câu hỏi. Chọn sáu ví dụ gồm quyền,lớp rỗng,lớp đóng,đổi rule rồi giải thích cách ATDD tạo feedback trước code.
+Q: User story hữu ích cần góc nhìn gì?
++ Người dùng,mục tiêu và giá trị
+- Chỉ tên bảng database
+- Chỉ tên người Dev
+Q: Ba khía cạnh thường dùng để hiểu user story là gì?
++ Thẻ,trao đổi và xác nhận
+- Code,CPU và cache
+- Case,count và chart
+Q: Acceptance criteria không rõ nên làm gì trước tự động hóa?
++ Trao đổi và bổ sung ví dụ/câu hỏi
+- Mã hóa giả định im lặng
+- Bỏ mọi test
+Q: ATDD nhấn mạnh việc gì?
++ Cùng xác định kiểm chấp nhận trước implementation
+- Viết test sau khi release rồi bỏ
+- Chỉ tăng unit coverage
+Q: Ví dụ Given/When/Then tốt có đặc điểm gì?
++ Bối cảnh,hành động,kết quả quan sát rõ
+- Mọi CSS selector đầy đủ
+- Chỉ một câu hệ thống tốt
+Q: Một acceptance test có thể phục vụ thêm vai trò gì?
++ Ví dụ đặc tả và regression khi được bảo trì
+- Thay toàn bộ khám phá
+- Bảo đảm mọi nhu cầu đúng mãi
+
+## LESSON istqb-foundation-10 | Lập kế hoạch, rủi ro, giám sát và báo cáo
+
+### Plan phản ánh bối cảnh và ngoại lệ
+Kế hoạch Sương Vạt nêu mục tiêu,phạm vi,ngoại lệ,basis,rủi ro,nguồn lực,môi trường,lịch và report. Dùng độ chi tiết đủ quyết định,không viết tài liệu dài để che giả định chưa chốt.
+
+### Product risk và project risk
+Sai tiền,lộ hồ sơ,vượt quota là rủi ro chất lượng sản phẩm;thiếu thiết bị hoặc môi trường trễ ảnh hưởng khả năng dự án kiểm. Hai nhóm có thể liên hệ,cần owner và biện pháp tương ứng.
+~~~text
+risk | loại | impact | response
+hoàn 2 lần | product | sai điểm | state/retry test
+thiếu device | project | chưa đủ evidence | mượn/cấp hoặc ghi gap
+lab trễ | project | blocked execution | owner và lịch dự phòng
+~~~
+
+### Ước lượng có giả định và bất định
+Dữ liệu lịch sử,chia việc hoặc kỹ thuật nhóm có thể hỗ trợ ước lượng. Ghi phạm vi,năng lực,phụ thuộc và khoảng dự tính;requirement đổi phải cập nhật,không biến estimate thành cam kết không đổi.
+~~~text
+scope:20 case có fixture
+assumptions:lab ready,hai actor,build ổn
+estimate:thực thi+điều tra+retest+báo cáo
+uncertainty:rule refund và thiết bị thật
+update:khi giả định thay hoặc có dữ liệu mới
+~~~
+
+### Entry,exit và control
+Entry xác định sẵn sàng bắt đầu;exit đánh giá hoàn tất. Khi chưa đạt exit nhưng deadline đến,công khai rủi ro và quyết định ngoại lệ,cấm sửa metric thành pass giả.
+~~~text
+entry:build cài được,fixture/actor sẵn
+exit:coverage rủi ro trọng tâm,lỗi theo gate,evidence
+monitor:actual so plan,blocked và lỗi mới
+control:đổi ưu tiên/nguồn lực/phạm vi có review
+report:đạt,chưa đạt,chưa đủ bằng chứng
+~~~
+
+### Metric phục vụ quyết định
+Pass rate tăng có thể do bỏ ca khó hoặc tăng ca dễ. Báo coverage,lỗi theo tác động,blocked/not-run và xu hướng kèm ngữ cảnh;không dùng số case để suy năng suất cá nhân hoặc mức an toàn tuyệt đối.
+
+PRACTICE: Lập plan gọn với tám rủi ro,entry/exit và estimate có giả định. Dùng tình huống lab trễ/defect quyền để viết monitoring report và ba hành động control có đánh đổi.
+Q: Test plan nên nêu gì về phạm vi?
++ Phần kiểm,ngoại lệ,giả định và trách nhiệm
+- Chỉ số case dự tính
+- Chỉ tên tester
+Q: Product risk khác project risk chủ yếu ở đâu?
++ Chất lượng sản phẩm khác khả năng thực hiện dự án
+- Hai loại luôn giống
+- Product risk chỉ là chậm lịch
+Q: Risk level thường cân nhắc hai yếu tố cơ bản nào?
++ Khả năng xảy ra và tác động
+- Tên module và màu nút
+- Số tester và số meeting
+Q: Entry criteria dùng để quyết định gì?
++ Điều kiện sẵn sàng bắt đầu hoạt động kiểm cụ thể
+- Thời điểm tất cả lỗi hết
+- Chỉ nơi lưu report
+Q: Exit criteria giúp điều gì?
++ Đánh giá hoàn tất theo tiêu chí và rủi ro
+- Bảo đảm không còn defect
+- Tự thay quyết định kinh doanh
+Q: Test control khác monitoring ở đâu?
++ Điều chỉnh dựa thông tin đã theo dõi
+- Chỉ thu số liệu
+- Chỉ tạo bảng màu
+
+## LESSON istqb-foundation-11 | Dự án ôn: defect management và công cụ
+
+### Dự án ôn kết nối defect và testware
+Nhóm nhận một app giả định có lỗi đăng ký lặp,rule hủy mơ hồ và một timeout lab. Phân loại observation,defect đã xác nhận và vấn đề môi trường,không gọi mọi ca đỏ là lỗi sản phẩm.
+
+### Hồ sơ lỗi đi từ bằng chứng
+Report có build,fixture,bước,expected có nguồn,actual,tác động và evidence minimal. Triage duplicate/not-reproducible/need-info theo giá trị;khó tái hiện chưa chứng minh lỗi không tồn tại.
+~~~text
+ID:FOUND-L7-03
+rule:retry cùng ý định không nhân enrollment
+actual:hai id confirmed sau response mất
+pre:LAB2,ST4,CL7,cùng requestId
+impact:chiếm hai chỗ
+attachments:request placeholder và trạng thái cuối
+~~~
+
+### Tool hỗ trợ quy trình,không thay kỹ năng
+Quản lý test/defect,static analysis,automation,coverage và performance phục vụ mục tiêu khác. Chọn bằng nhu cầu,pilot,chi phí đào tạo/tích hợp/bảo trì;không suy công cụ mới tự làm chất lượng tăng.
+~~~text
+tool need:truy vết rule->case->result
+pilot:10 case,3issue,two roles giả
+success:truy vấn coverage và evidence đúng
+cost:setup,đào tạo,bảo trì,tích hợp
+risk:tin quá mức,dữ liệu sai,flaky
+~~~
+
+### Vòng xử lý và retest có người nhận
+New->triaged->in progress->fixed->verified/closed là một quy trình lab,các nhóm có thể khác. Ghi trách nhiệm và điều kiện chuyển;test phải so ca gốc và regression sau sửa.
+~~~text
+triage:impact,priority,owner
+fixed:build và thay đổi liên quan
+confirmation:ca gốc với điều kiện tái hiện
+regression:biên/quyền/state liên quan
+completion:report,rủi ro còn lại,bài học
+~~~
+
+### Đánh giá trước hai đề luyện
+Tự nối mỗi finding với kỹ thuật,mức,loại kiểm và quyết định plan. Nếu chưa giải thích được vì sao đáp án sai,học lại phần tương ứng;không luyện chỉ theo vị trí chữ cái vì đóng gói sẽ phân bố đáp án.
+
+PRACTICE: Nộp mini-plan,mô hình,12 case,ba report và một retest giả có evidence. Chọn tool bằng pilot có tiêu chí,ghi phần app thật/stub/mô phỏng và giới hạn trước khi làm đề luyện.
+Q: Defect report cần expected có nguồn vì sao?
++ Giúp phân biệt vi phạm yêu cầu với giả định
+- Chỉ để đủ mẫu
+- Để luôn chứng minh Dev sai
+Q: Defect bị đánh duplicate nên làm gì với evidence mới?
++ Liên kết vào lỗi gốc nếu có giá trị
+- Xóa hết dữ liệu
+- Mở lại vô hạn cùng title
+Q: Không tái hiện được có đồng nghĩa không có lỗi không?
++ Không
+- Luôn có
+- Có nếu chạy một lần
+Q: Công cụ quản lý test có thể giúp gì?
++ Tổ chức testware,truy vết và kết quả
+- Tự bảo đảm test tốt
+- Thay mọi người review
+Q: Trước đưa công cụ mới vào nhóm nên làm gì?
++ Pilot với mục tiêu,chi phí và tiêu chí thành công
+- Mua mọi license trước khi biết nhu cầu
+- Thay toàn quy trình một ngày
+Q: Rủi ro của automation có thể là gì?
++ Chi phí bảo trì và tin quá mức vào tập kiểm
+- Không bao giờ có rủi ro
+- Chỉ máy chạy quá nhanh
+
+## LESSON istqb-foundation-12 | Đề luyện tự soạn 1 – 40 câu
+
+### Chữa nhóm 1: câu 1–8
+1. Kiểm thử cung cấp thông tin và phát hiện vấn đề,nhưng tập ca hữu hạn không chứng minh không còn lỗi.
+2. Defect clustering gợi ý ưu tiên theo dữ liệu,không bảo đảm vùng còn lại không lỗi hoặc cụm lỗi không thay đổi.
+3. Kiểm sớm có thể giảm công sửa về sau,nhưng không thay các mức và loại kiểm khác khi sản phẩm hình thành.
+4. Phân tích xác định test conditions từ test basis và rủi ro,trước khi thiết kế chi tiết dữ liệu và thủ tục.
+5. Anomaly có thể do sản phẩm,testware,dữ liệu hoặc môi trường;cần phân tích trước khi kết luận nguyên nhân.
+6. Giao tiếp rõ và tôn trọng giúp nhóm cùng tìm nguyên nhân;report tập trung hành vi và evidence.
+7. Review,static analysis và ví dụ sớm giúp phản hồi;kiểm runtime/vận hành vẫn có giá trị theo rủi ro.
+8. Automation và feedback liên tục hỗ trợ tốc độ,nhưng vẫn cần nhiều kỹ thuật và kiểm con người theo bối cảnh.
+~~~text
+Đề tự soạn 1:40 câu,60 phút luyện nội bộ
+Mục tiêu:trả lời trước khi xem phần chữa
+Ghi câu sai theo nhóm kiến thức,không chỉ đếm điểm
+~~~
+
+### Chữa nhóm 2: câu 9–16
+9. Kích thước diff không quyết định toàn tác động;thay điều kiện quyền một dòng vẫn có thể rủi ro cao.
+10. Component kiểm đơn vị riêng theo phạm vi định nghĩa;dùng stub/double khi cần cô lập phụ thuộc.
+11. Mức hệ thống có thể gồm nhiều loại kiểm chức năng và phi chức năng;không đồng nghĩa chỉ UI.
+12. Loại kiểm diễn đạt đặc tính chất lượng;có thể áp ở nhiều mức khi phù hợp.
+13. Review và static analysis tìm vấn đề trong sản phẩm công việc mà không chạy đối tượng được kiểm.
+14. Chuẩn bị giúp buổi review hiệu quả;issue sau đó được phân tích,quyết định và theo dõi đúng quy trình.
+15. Mức formal cao giúp quản lý review có cấu trúc;không có nghĩa mọi dự án luôn phải dùng inspection.
+16. Theo giả định xử lý tương đương,chọn đại diện mỗi vùng;kiểu sai/null là các chiều validation bổ sung.
+
+### Chữa nhóm 3: câu 17–24
+17. Two-value BVA dùng điểm biên và điểm gần nhất ở phía vùng kề;phải chốt cách áp kỹ thuật và miền trước.
+18. Coverage phụ thuộc mô hình partition đã chọn,có thể thiếu phân vùng hoặc oracle nên không chứng minh đầy đủ.
+19. Hai giá trị cho mỗi điều kiện tạo2x2tổ hợp trước khi xét ràng buộc hoặc đơn giản hóa.
+20. Dont-care giúp rút gọn rule khi đã chứng minh action độc lập điều kiện,không che câu hỏi chưa chốt.
+21. Hệ thống có thể từ chối hoặc trả kết quả cũ,nhưng không được nhân tác dụng nếu quy tắc chống lặp yêu cầu.
+22. Thực thi cấu trúc không thay oracle;assertion và dữ liệu quyết định độ nhạy trước defect.
+23. Branch coverage thường bao hàm statement trong cùng phạm vi,nhưng không chứng minh mọi yêu cầu được hiện thực.
+24. Checklist có thể theo rủi ro/kinh nghiệm;quá chung hoặc lỗi thời dễ tạo cảm giác coverage sai.
+
+### Chữa nhóm 4: câu 25–32
+25. Story là công cụ trao đổi,không tự là đặc tả đầy đủ;acceptance criteria/ví dụ làm rõ giới hạn.
+26. Automation làm giả định chạy nhanh hơn chứ không làm yêu cầu mơ hồ thành đúng.
+27. Ngôn ngữ theo miền giữ ý định,chi tiết UI có thể nằm ở implementation khi tự động hóa.
+28. Phạm vi minh bạch giúp bên liên quan hiểu rủi ro được/không được đánh giá và phụ thuộc cần xử lý.
+29. Cách định lượng/định tính tùy bối cảnh;cần ghi giả định và cập nhật bằng bằng chứng.
+30. Coverage,kết quả,lỗi còn lại và điều kiện khác hỗ trợ quyết định;ngoại lệ cần được ghi và người có thẩm quyền chấp nhận.
+31. Expected có thể từ rule,mô hình hoặc tiêu chí đã chốt;phần chưa rõ cần được nêu là câu hỏi.
+32. So build,dữ liệu,mạng,trạng thái và timeline;ghi mức tái hiện và phần thông tin còn thiếu.
+~~~text
+Review đề1:câu đúng do hiểu/chưa hiểu/đoán
+Với câu sai:ghi rule,phản ví dụ và bài cần ôn
+Đối chiếu metadata phạm vi trong gói khóa học
+~~~
+
+### Chữa nhóm 5: câu 33–40
+33. Đánh giá phù hợp,tích hợp,đào tạo,bảo trì và rủi ro để quyết định dựa evidence.
+34. Chọn kỹ thuật và ưu tiên theo rủi ro thay vì hứa kiểm mọi tổ hợp trong hệ thống thực tế.
+35. Vấn đề sản phẩm công việc có thể phát hiện bằng static testing và xử lý sớm theo quy trình nhóm.
+36. Có thể thay phạm vi hoặc chấp nhận ngoại lệ có lý do,nhưng không nhận tiêu chí đã đạt khi chưa đủ evidence.
+37. Báo cáo cần giúp xử lý phụ thuộc,rủi ro và khoảng trống,không chỉ lặp số liệu.
+38. Defect propagation là lý do kiểm sớm hữu ích,nhưng mức tác động phải được đánh giá theo bối cảnh.
+39. Nêu khoảng và bất định,cập nhật theo tiến độ;ước lượng không phải cam kết không đổi khi đầu vào đổi.
+40. Tác động có thể lớn dù khó tái hiện;giữ evidence,thu điều kiện và quyết định điều tra theo rủi ro.
+
+PRACTICE: Làm 40 câu trong 60 phút luyện nội bộ,không xem lời chữa trước. Mỗi câu 1 điểm,ngưỡng tự đánh giá 26/40 chỉ dùng trong khóa này;không phải chứng nhận hay cam kết đỗ thi thật. Phân loại từng câu sai và viết lý do loại hai phương án còn lại.
+Q: Kiểm thử giúp mục tiêu nào của nhóm?
++ Giảm rủi ro bằng thông tin về chất lượng
+- Chứng minh mọi lỗi đã hết
+- Thay trách nhiệm chất lượng của Dev
+Q: Nguyên tắc lỗi có thể tập trung dẫn đến hành động nào?
++ Tăng chú ý vùng có bằng chứng rủi ro cao
+- Bỏ kiểm mọi module chưa từng lỗi
+- Chỉ đếm số file
+Q: Vì sao bắt đầu review yêu cầu sớm có ích?
++ Phát hiện mơ hồ trước khi lan vào thiết kế và code
+- Vì không cần test runtime nữa
+- Vì mọi tài liệu đều đúng
+Q: Test analysis thường trả lời câu hỏi nào?
++ Cần kiểm điều gì từ cơ sở kiểm thử
+- Đã chạy lúc mấy giờ
+- Đặt màu report gì
+Q: Trong thực thi,actual khác expected cần làm gì?
++ Ghi kết quả và phân tích anomaly có bằng chứng
+- Tự đổi expected theo actual
+- Luôn gọi ngay là defect sản phẩm
+Q: Kỹ năng hợp tác hữu ích nhất khi báo lỗi là gì?
++ Mô tả quan sát khách quan và tác động
+- Quy lỗi cá nhân để nhanh sửa
+- Giấu dữ liệu không thuận lợi
+Q: Shift-left chủ yếu hướng tới gì?
++ Đưa hoạt động kiểm thích hợp sớm hơn
+- Bỏ hết kiểm sau triển khai
+- Chỉ chạy UI trước unit
+Q: DevOps có ảnh hưởng gì tới kiểm thử?
++ Tăng nhu cầu phản hồi tự động và hợp tác xuyên vòng đời
+- Loại bỏ mọi test thủ công
+- Biến QA thành người deploy duy nhất
+Q: Một thay đổi nhỏ có cần impact analysis không?
++ Có,tùy ảnh hưởng và rủi ro
+- Không bao giờ
+- Chỉ khi trên1000dòng
+Q: Kiểm một hàm tính phí cô lập thuộc mức nào thường gặp?
++ Component testing
+- System integration luôn luôn
+- Acceptance duy nhất
+Q: System testing thường đánh giá gì?
++ Hệ thống hoàn chỉnh so với đặc tả liên quan
+- Chỉ một method riêng
+- Chỉ checklist tài khoản
+Q: Performance testing thuộc cách phân loại nào?
++ Loại kiểm phi chức năng
+- Một mức kiểm thay component
+- Luôn chỉ ở production
+Q: Static testing có cần thực thi code dưới test không?
++ Không
+- Luôn cần browser
+- Luôn cần request mạng
+Q: Reviewer chuẩn bị riêng trước buổi trao đổi để làm gì?
++ Tìm và ghi anomaly từ góc nhìn được giao
+- Chốt mọi issue trước tác giả
+- Bỏ buổi review
+Q: Inspection có đặc trưng nào so với trao đổi không chính thức?
++ Quy trình và vai trò rõ,có ghi chép/metric phù hợp
+- Không được ghi issue
+- Không cần chuẩn bị
+Q: Qty nguyên 1..9 có bao nhiêu phân vùng cơ bản theo miền số?
++ Ba:vùng thấp,hợp lệ,vùng cao
+- Chỉ một
+- Chín vùng vì có chín số
+Q: Hai giá trị BVA cho biên thấp1 của miền nguyên thường chọn gì?
++ 0và1
+- 1và100
+- Chỉ5
+Q: Có100% partition coverage chứng minh điều gì?
++ Mọi phân vùng đã nhận diện có đại diện được kiểm
+- Mọi giá trị đã kiểm
+- Không còn defect
+Q: Hai điều kiện nhị phân độc lập tạo tối đa bao nhiêu tổ hợp bảng quyết định đầy đủ?
++ Bốn
+- Hai
+- Tám
+Q: Dấu không quan tâm trong bảng quyết định dùng khi nào?
++ Điều kiện không làm đổi action trong quy tắc đó
+- Không biết yêu cầu nhưng muốn bỏ qua
+- Ca chưa chạy
+Q: Đã cancelled mà nhận cancel lần nữa cần kiểm gì?
++ Cạnh bị cấm hoặc hành vi lặp theo hợp đồng
+- Luôn tạo thêm refund
+- Chỉ nhìn nút
+Q: Test gọi mọi dòng code nhưng không assert có vấn đề gì?
++ Coverage cao nhưng có thể không phát hiện kết quả sai
+- Không có vấn đề
+- Tự thành acceptance test
+Q: Đạt100% branch theo mô hình đã chọn có suy ra100% statement không?
++ Có với phạm vi mã/thước đo tương ứng thông thường
+- Không bao giờ
+- Chỉ khi không có function
+Q: Checklist-based testing cần điều gì để hữu ích?
++ Mục kiểm rõ,phù hợp bối cảnh và được cập nhật
+- Một danh sách dùng mãi mọi sản phẩm
+- Chỉ tick cho đủ
+Q: User story hữu ích cần góc nhìn gì?
++ Người dùng,mục tiêu và giá trị
+- Chỉ tên bảng database
+- Chỉ tên người Dev
+Q: Acceptance criteria không rõ nên làm gì trước tự động hóa?
++ Trao đổi và bổ sung ví dụ/câu hỏi
+- Mã hóa giả định im lặng
+- Bỏ mọi test
+Q: Ví dụ Given/When/Then tốt có đặc điểm gì?
++ Bối cảnh,hành động,kết quả quan sát rõ
+- Mọi CSS selector đầy đủ
+- Chỉ một câu hệ thống tốt
+Q: Test plan nên nêu gì về phạm vi?
++ Phần kiểm,ngoại lệ,giả định và trách nhiệm
+- Chỉ số case dự tính
+- Chỉ tên tester
+Q: Risk level thường cân nhắc hai yếu tố cơ bản nào?
++ Khả năng xảy ra và tác động
+- Tên module và màu nút
+- Số tester và số meeting
+Q: Exit criteria giúp điều gì?
++ Đánh giá hoàn tất theo tiêu chí và rủi ro
+- Bảo đảm không còn defect
+- Tự thay quyết định kinh doanh
+Q: Defect report cần expected có nguồn vì sao?
++ Giúp phân biệt vi phạm yêu cầu với giả định
+- Chỉ để đủ mẫu
+- Để luôn chứng minh Dev sai
+Q: Không tái hiện được có đồng nghĩa không có lỗi không?
++ Không
+- Luôn có
+- Có nếu chạy một lần
+Q: Trước đưa công cụ mới vào nhóm nên làm gì?
++ Pilot với mục tiêu,chi phí và tiêu chí thành công
+- Mua mọi license trước khi biết nhu cầu
+- Thay toàn quy trình một ngày
+Q: Exhaustive testing thường không khả thi vì sao?
++ Tổ hợp input,trạng thái và chuỗi thao tác quá lớn
+- Vì tester không thích
+- Vì không được kiểm biên
+Q: Một anomaly trong tài liệu có phải đợi code mới được báo không?
++ Không
+- Có luôn
+- Chỉ khi có screenshot
+Q: Khi deadline đến nhưng exit criteria chưa đạt cần làm gì?
++ Báo rủi ro và đề nghị quyết định có thẩm quyền
+- Tự sửa số liệu cho đạt
+- Giấu blocked
+Q: Check-in review nên tập trung điều gì?
++ Quyết định và hành động từ thông tin mới
+- Đọc toàn report không mục tiêu
+- Chỉ nêu ai chậm
+Q: Một lỗi nhỏ trong yêu cầu có thể tác động gì?
++ Lan vào nhiều sản phẩm công việc nếu không phát hiện
+- Chỉ ảnh hưởng câu chữ
+- Không có chi phí về sau
+Q: Test effort nên được ước lượng bằng gì?
++ Phạm vi,rủi ro,giả định và dữ liệu lịch sử phù hợp
+- Một con số không giải thích
+- Chỉ số dòng code
+Q: Report lỗi không có cách tái hiện có nên tự bỏ ngay không?
++ Không,cần triage và bổ sung thông tin theo giá trị
+- Có,mọi lỗi hiếm đều bỏ
+- Có nếu không có video
+
+## LESSON istqb-foundation-13 | Đề luyện tự soạn 2 – 40 câu
+
+### Chữa nhóm 1: câu 1–8
+1. Error là sai sót của người,defect nằm trong sản phẩm công việc,failure là hành vi quan sát không đúng khi thực hiện.
+2. Test có thể giảm khả năng tìm lỗi mới khi lặp nguyên tập; vẫn giữ regression hữu ích và cập nhật theo rủi ro.
+3. Absence-of-defects fallacy nhắc rằng đúng đặc tả chưa bảo đảm đáp ứng nhu cầu thực tế hoặc mục tiêu kinh doanh.
+4. Thiết kế cụ thể hóa cách kiểm và expected; implementation tổ chức testware/thủ tục thực thi theo bối cảnh.
+5. Liên kết giúp thấy yêu cầu/rủi ro nào có phép kiểm và kết quả,nhưng chất lượng nội dung vẫn cần review.
+6. Trách nhiệm chất lượng được chia sẻ,QA vẫn cung cấp chuyên môn và góc nhìn riêng cho nhóm.
+7. Mỗi vòng lặp có thay đổi và rủi ro regression,cần cập nhật testware và không bỏ kiểm vùng liên quan.
+8. Nhóm xem việc hiệu quả/chưa hiệu quả và chọn hành động cải tiến có theo dõi,không dùng để đổ lỗi.
+~~~text
+Đề tự soạn 2:40 câu,60 phút luyện nội bộ
+Mục tiêu:trả lời trước khi xem phần chữa
+Ghi câu sai theo nhóm kiến thức,không chỉ đếm điểm
+~~~
+
+### Chữa nhóm 2: câu 9–16
+9. Thông tin vận hành giúp học hành vi thực và khoảng trống,nhưng phải được thu trong quyền và bảo vệ dữ liệu.
+10. Integration kiểm interface/tương tác;ranh giới component/system cần được định nghĩa theo hệ thống và mục tiêu.
+11. Mức chấp nhận gắn nhu cầu và tiêu chí của bên liên quan,có nhiều dạng theo bối cảnh.
+12. Cần retest/confirmation ca lỗi và regression vùng ảnh hưởng để đánh giá bản sửa đầy đủ hơn.
+13. Static review đặc biệt hữu ích với tính rõ và đầy đủ nhưng không thay mọi failure runtime.
+14. Vai trò và mức formal tùy loại review;điều phối giúp trao đổi có mục tiêu và không quy lỗi cá nhân.
+15. Công cụ giúp phát hiện mẫu vấn đề,cần cấu hình và review;cảnh báo không thay phán đoán.
+16. Partition cần ranh giới và quy tắc rõ,có thể nhiều mô hình cho cùng trường theo mục đích kiểm.
+
+### Chữa nhóm 3: câu 17–24
+17. Three-value BVA thêm hai lân cận quanh biên trong miền có thứ tự;độ bước phụ thuộc loại dữ liệu.
+18. Biên cần khái niệm lân cận;với enum không thứ tự,dùng partition hoặc mô hình khác phù hợp hơn.
+19. Mô hình cần nêu tổ hợp không thể xảy ra để coverage có mẫu số đúng và reviewer hiểu phạm vi.
+20. Cùng sự kiện có thể có kết quả khác theo state;chuỗi lịch sử là một phần điều kiện kiểm.
+21. Một state có thể đến bằng nhiều cạnh;coverage trạng thái yếu hơn các tiêu chí chuyển tiếp tương ứng.
+22. Nhánh false vẫn là lối đi cần xét trong mô hình if;statement coverage có thể bỏ nó.
+23. Kinh nghiệm giúp nghĩ ca rủi ro,nhưng nên ghi giả thuyết và kết hợp kỹ thuật có cấu trúc để giảm điểm mù.
+24. Tester điều chỉnh phép kiểm theo điều quan sát trong charter/timebox,note và debrief giúp giữ evidence.
+
+### Chữa nhóm 4: câu 25–32
+25. Card gợi chủ đề,conversation làm rõ,confirmation là bằng chứng/tiêu chí để xác nhận cách hiểu.
+26. Ví dụ chấp nhận được phối hợp giữa các vai trò để hướng implementation và tạo hiểu chung.
+27. Đặc tả sống chỉ có ích khi cập nhật cùng quyết định hành vi và giữ oracle đáng tin.
+28. Ví dụ sai hoàn tiền là rủi ro sản phẩm,còn thiếu thiết bị kiểm có thể là rủi ro dự án ảnh hưởng kế hoạch.
+29. Ví dụ build cài được,fixture sẵn và môi trường ready;không đạt thì đánh giá rủi ro/blocked thay vì giả pass.
+30. Monitoring so thực tế với kế hoạch,control đưa hành động như đổi ưu tiên,nguồn lực hoặc phạm vi có review.
+31. Một lỗi gốc có nhiều điều kiện biểu hiện;evidence mới có thể giúp khoanh vùng nhưng cần tránh phân mảnh theo dõi.
+32. Tool hỗ trợ quy trình,dữ liệu nhập và cách dùng quyết định giá trị;không sửa được yêu cầu hoặc oracle sai tự động.
+~~~text
+Review đề2:câu đúng do hiểu/chưa hiểu/đoán
+Với câu sai:ghi rule,phản ví dụ và bài cần ôn
+Đối chiếu metadata phạm vi trong gói khóa học
+~~~
+
+### Chữa nhóm 5: câu 33–40
+33. Automation có ích cho công việc lặp phù hợp nhưng vẫn cần thiết kế,oracle,review và quản lý flaky.
+34. Hệ điều khiển,web đặt lớp và công cụ nội bộ có rủi ro/phạm vi khác nhau,cần chiến lược phù hợp.
+35. Kết thúc hoạt động cần gói thông tin hữu ích cho bên liên quan,lưu evidence và cải tiến theo bối cảnh.
+36. Tập ca,coverage,mức lỗi và số blocked có thể thay đổi;cần ngữ cảnh để diễn giải metric.
+37. Độc lập có mức độ và đánh đổi giao tiếp;whole-team và góc nhìn độc lập có thể bổ sung nhau.
+38. Confirmation cần giữ điều kiện liên quan và ghi thay đổi;dữ liệu khác có thể làm lỗi không xuất hiện mà chưa được sửa.
+39. Coverage chỉ xem cấu trúc hiện có trong phạm vi đo;test theo yêu cầu cần phát hiện chức năng bị bỏ sót.
+40. Test lỗi thời có thể xác nhận hành vi cũ hoặc bỏ lọt rủi ro mới;cần review cùng thay đổi yêu cầu/code.
+
+PRACTICE: Làm 40 câu trong 60 phút luyện nội bộ,không xem lời chữa trước. Mỗi câu 1 điểm,ngưỡng tự đánh giá 26/40 chỉ dùng trong khóa này;không phải chứng nhận hay cam kết đỗ thi thật. Phân loại từng câu sai và viết lý do loại hai phương án còn lại.
+Q: Một người hiểu sai phí rồi code sai; runtime tính sai tiền. Đâu là failure?
++ Kết quả tiền sai quan sát khi chạy
+- Suy nghĩ nhầm ban đầu
+- Mọi dòng code trong module
+Q: Bộ ca cũ liên tục xanh nhưng ít phát hiện mới nên làm gì?
++ Rà lại dữ liệu và bổ sung góc kiểm phù hợp
+- Dừng mọi kiểm thử
+- Chỉ đổi tên test
+Q: App đúng đặc tả nhưng người dùng không hoàn tất công việc nói lên gì?
++ Thiếu lỗi so với đặc tả chưa đủ bảo đảm hữu ích
+- Chắc chắn test tool sai
+- Không cần validation
+Q: Test design chuyển test condition thành gì?
++ Ca,dữ liệu và yêu cầu môi trường để kiểm
+- Một quyết định release tự động
+- Chỉ số lỗi của tháng trước
+Q: Traceability giữa cơ sở kiểm và test giúp gì?
++ Đánh giá coverage và tác động thay đổi
+- Bảo đảm mọi expected đúng
+- Thay mọi review
+Q: Whole-team approach có nghĩa gì?
++ Mọi vai trò góp vào chất lượng theo năng lực
+- Chỉ QA được quyết mọi vấn đề
+- Không còn cần kỹ năng kiểm thử
+Q: Trong phát triển lặp,khi yêu cầu đổi nên làm gì?
++ Cập nhật cơ sở kiểm và regression theo tác động
+- Giữ expected cũ mãi
+- Chỉ test tính năng mới
+Q: Retrospective hữu ích khi nào?
++ Tìm cải tiến quy trình từ điều đã xảy ra
+- Chỉ xếp hạng cá nhân
+- Thay retest lỗi
+Q: Môi trường production có metric lỗi nào giúp tester?
++ Phản hồi để cập nhật rủi ro và tập kiểm
+- Bằng chứng không cần test trước release
+- Chỉ dữ liệu cho marketing
+Q: Kiểm giao tiếp API với database trong phạm vi hai thành phần tập trung gì?
++ Component integration theo kiến trúc đã chốt
+- Chỉ màu trang
+- Không có liên quan integration
+Q: Acceptance testing tập trung vào gì?
++ Nhu cầu nghiệp vụ và mức sẵn sàng chấp nhận
+- Chỉ statement coverage
+- Chỉ tốc độ compiler
+Q: Confirmation khác regression thế nào?
++ Xác nhận bản sửa lỗi gốc khác tìm tác dụng phụ
+- Hai từ luôn đồng nghĩa
+- Regression không cần expected
+Q: Review yêu cầu có thể phát hiện loại vấn đề nào?
++ Mâu thuẫn,thiếu rõ ràng và phần bị bỏ sót
+- Chỉ CPU quá tải runtime
+- Chỉ lỗi socket
+Q: Trong review chính thức hơn,moderator thường hỗ trợ gì?
++ Điều phối để đạt mục tiêu và quy trình
+- Tự sửa mọi defect thay tác giả
+- Luôn quyết định nghiệp vụ
+Q: Static analysis report nên được xử lý ra sao?
++ Triage theo rule và ngữ cảnh,kiểm false positive
+- Mọi cảnh báo tự là bug chắc chắn
+- Tắt hết rule đỏ
+Q: Ngày hợp lệ/tháng sai/chuỗi không phải ngày là ví dụ gì?
++ Phân vùng theo các cách xử lý mong đợi
+- Mọi input cùng một vùng
+- Chỉ branch coverage
+Q: Ba giá trị quanh biên cao9 là gì?
++ 8,9,10
+- 0,5,9
+- 9,90,900
+Q: BVA phù hợp nhất với kiểu miền nào?
++ Miền có thứ tự và ranh giới có ý nghĩa
+- Mọi danh sách không thứ tự đều như nhau
+- Chỉ nhãn màu ngẫu nhiên
+Q: Khi một tổ hợp điều kiện không khả thi nên làm gì?
++ Ghi ràng buộc và lý do loại khỏi mô hình
+- Xóa hàng không giải thích
+- Tự đặt expected thành pass
+Q: State transition test khác kiểm từng màn riêng ở đâu?
++ Xét trạng thái trước,sự kiện và chuyển tiếp
+- Chỉ đổi tên màn
+- Không cần expected
+Q: Bao phủ mọi trạng thái có bảo đảm mọi transition hợp lệ đã kiểm không?
++ Không
+- Có luôn
+- Chỉ khi state ít hơn10
+Q: Với if không có else,muốn kiểm hai kết quả điều kiện cần gì?
++ Ca true và ca false
+- Chỉ ca true nếu body đã chạy
+- Chỉ một input null
+Q: Error guessing dựa vào gì?
++ Kinh nghiệm,kiến thức lỗi và bối cảnh
+- Chọn input không ghi lý do
+- Đo số dòng code
+Q: Exploratory testing kết hợp những hoạt động nào?
++ Học,thiết kế và thực hiện có phản hồi
+- Chỉ click không mục tiêu
+- Chỉ viết plan trước nhiều tháng
+Q: Ba khía cạnh thường dùng để hiểu user story là gì?
++ Thẻ,trao đổi và xác nhận
+- Code,CPU và cache
+- Case,count và chart
+Q: ATDD nhấn mạnh việc gì?
++ Cùng xác định kiểm chấp nhận trước implementation
+- Viết test sau khi release rồi bỏ
+- Chỉ tăng unit coverage
+Q: Một acceptance test có thể phục vụ thêm vai trò gì?
++ Ví dụ đặc tả và regression khi được bảo trì
+- Thay toàn bộ khám phá
+- Bảo đảm mọi nhu cầu đúng mãi
+Q: Product risk khác project risk chủ yếu ở đâu?
++ Chất lượng sản phẩm khác khả năng thực hiện dự án
+- Hai loại luôn giống
+- Product risk chỉ là chậm lịch
+Q: Entry criteria dùng để quyết định gì?
++ Điều kiện sẵn sàng bắt đầu hoạt động kiểm cụ thể
+- Thời điểm tất cả lỗi hết
+- Chỉ nơi lưu report
+Q: Test control khác monitoring ở đâu?
++ Điều chỉnh dựa thông tin đã theo dõi
+- Chỉ thu số liệu
+- Chỉ tạo bảng màu
+Q: Defect bị đánh duplicate nên làm gì với evidence mới?
++ Liên kết vào lỗi gốc nếu có giá trị
+- Xóa hết dữ liệu
+- Mở lại vô hạn cùng title
+Q: Công cụ quản lý test có thể giúp gì?
++ Tổ chức testware,truy vết và kết quả
+- Tự bảo đảm test tốt
+- Thay mọi người review
+Q: Rủi ro của automation có thể là gì?
++ Chi phí bảo trì và tin quá mức vào tập kiểm
+- Không bao giờ có rủi ro
+- Chỉ máy chạy quá nhanh
+Q: Context-dependent testing gợi điều gì?
++ Cách kiểm điều chỉnh theo hệ thống và mục tiêu
+- Một checklist tốt dùng nguyên cho mọi nơi
+- Không cần nguyên tắc
+Q: Test completion có thể gồm việc gì?
++ Tổng kết,lưu testware và bài học
+- Chỉ tắt máy
+- Xóa mọi report đỏ
+Q: Tỷ lệ pass tăng có luôn nghĩa chất lượng sản phẩm tăng không?
++ Không
+- Có chắc chắn
+- Chỉ khi report xanh
+Q: Test independence có lợi điểm nào?
++ Thêm góc nhìn và giảm một số thiên lệch
+- Không cần hợp tác Dev
+- Luôn phát hiện mọi lỗi
+Q: Chạy lại ca lỗi trên bản mới mà dùng fixture khác cần lưu ý gì?
++ Có thể không kiểm đúng điều kiện gây lỗi gốc
+- Luôn tốt hơn
+- Không cần ghi build
+Q: Một công cụ báo coverage100% nhưng yêu cầu quyền chưa có code cho biết gì?
++ Coverage cấu trúc không chứng minh đầy đủ yêu cầu
+- Quyền chắc đã an toàn
+- Tool không cần cấu hình
+Q: Cập nhật testware sau thay đổi là trách nhiệm gì?
++ Bảo trì tài sản kiểm thử để giữ giá trị
+- Chỉ đổi tên file
+- Không cần nếu test vẫn xanh
+
+## LESSON istqb-foundation-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Đạt tập ca theo đặc tả không bảo đảm sản phẩm hữu ích;đây là tình huống cần validation và phân tích nhu cầu.
+2. Review sản phẩm công việc không cần chạy code có thể tìm mâu thuẫn sớm và tạo câu hỏi cần chốt.
+3. Traceability có liên kết chưa đủ;expected sai có thể khiến test xác nhận bug.
+4. Statement đã thực thi không bảo đảm hai kết quả điều kiện được đi qua;thêm ca false và oracle.
+
+### Dữ liệu và điều kiện biên
+5. Biên thấp3 có 2/3/4,biên cao7 có 6/7/8 theo three-value BVA của miền nguyên đã định.
+6. Mô hình cần giải thích tổ hợp loại bỏ để người review hiểu mẫu số và mức bao phủ.
+7. Lịch sử và state quyết định ý nghĩa sự kiện;kiểm cạnh lặp/không hợp lệ cùng tác dụng phụ.
+8. ATDD tạo hiểu chung qua ví dụ trước implementation,cần làm rõ ngoại lệ có giá trị.
+
+### Tính đúng và cách điều tra
+9. Component riêng đúng chưa chứng minh giao thức,kiểu dữ liệu,trạng thái lỗi giữa thành phần đúng.
+10. Confirmation ca gốc cần bổ sung regression theo impact để tìm tác dụng phụ của sửa.
+11. Review cần an toàn để nêu anomaly/câu hỏi,tập trung sản phẩm và quyết định có nguồn.
+12. Rủi ro quan trọng có thể bị che bởi nhiều ca ít rủi ro pass;cần báo theo tác động và người chịu trách nhiệm.
+
+### Rủi ro và lựa chọn phương án
+13. Không có evidence thực thi không được gọi pass;cần tách vấn đề setup và ca chưa đánh giá.
+14. Control điều chỉnh dựa monitoring và bối cảnh mới,công khai đánh đổi/rủi ro thay vì làm đẹp số liệu.
+15. Tool có giới hạn,false positive/negative;cần xác minh trong phạm vi và ghi mức chắc chắn.
+16. Chi phí không chỉ license;pilot và tiêu chí thành công giúp đánh giá phù hợp trước mở rộng.
+
+### Dự án, bằng chứng và bàn giao
+17. Mục tiêu kiểm thử gồm cung cấp thông tin;chất lượng session không đo chỉ bằng số bug.
+18. Confirmation cần tái hiện điều kiện có ý nghĩa;fixture khác có thể che failure mà defect còn tồn tại.
+19. Quyết định chấp nhận rủi ro không biến bằng chứng chưa đạt thành đã đạt;cần truy vết rõ.
+20. Đề nội bộ không phải đề thật hay cam kết thi đỗ;cần học syllabus và kiểm yêu cầu kỳ thi hiện hành từ đơn vị có thẩm quyền.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Nhóm chạy đủ ca đặc tả nhưng điều phối không thể chốt lớp cuối ngày. Kết luận phù hợp nhất?
++ Cần kiểm lại nhu cầu và quy trình chấp nhận
+- Không thể có vấn đề vì test xanh
+- Chỉ tăng số ca lặp
+Q: Tester đọc requirement thấy hai hạn hủy khác nhau trước khi có code. Hoạt động này là gì?
++ Static testing tìm mâu thuẫn
+- System testing runtime
+- Load testing
+Q: CA-01 nối đúng rule nhưng expected được copy từ output lỗi. Điều gì còn thiếu?
++ Oracle đáng tin và review nội dung
+- Chỉ thêm liên kết
+- Chỉ đổi tên case
+Q: Một ca chạy mọi statement của if nhưng không thử false. Cần gì để đánh giá thêm nhánh?
++ Input làm điều kiện false với assertion phù hợp
+- Chỉ chạy true lần nữa
+- Tắt coverage
+Q: Miền số nguyên 3..7 chọn tập nào để kiểm ba giá trị quanh cả hai biên?
++ 2,3,4,6,7,8
+- 3,5,7
+- 0,10,20
+Q: Bảng hai điều kiện có một tổ hợp bất khả thi. Cách báo coverage tốt nhất?
++ Ghi ràng buộc và tính trên rule khả thi theo tiêu chí
+- Xóa hàng để có 100% không giải thích
+- Luôn giữ expected bất kỳ
+Q: Đơn đã hủy vẫn nhận sự kiện hủy lại và hoàn điểm lần hai. Ca nào nhắm đúng?
++ Transition lặp ở trạng thái cancelled và bất biến điểm
+- Chỉ mở màn hình danh sách
+- Chỉ kiểm font
+Q: User story thiếu hành vi khi lớp đầy trước buổi ATDD. Nhóm nên làm gì?
++ Thảo luận ví dụ từ chối và acceptance criteria
+- Tự động hóa nhánh vui trước rồi bỏ
+- Để code quyết mọi expected
+Q: API mới ghép hai service đã được unit test riêng. Cần bổ sung gì theo rủi ro?
++ Kiểm interface/tương tác giữa chúng
+- Không cần test nữa
+- Chỉ kiểm logo
+Q: Lỗi qty 0 đã sửa,QA chỉ thử qty 0 rồi phát hành. Khoảng trống là gì?
++ Regression vùng liên quan như biên hợp lệ và remaining
+- Không có vì đã retest
+- Chỉ thiếu đổi title bug
+Q: Trong review,một người chưa hiểu rule refund. Phản ứng hiệu quả?
++ Ghi câu hỏi và làm rõ với nguồn có thẩm quyền
+- Bỏ câu hỏi để họp nhanh
+- Quy lỗi cá nhân
+Q: Deadline gần,còn lỗi khác chủ đọc được hồ sơ. QA nên ưu tiên thông tin nào?
++ Tác động,khả năng,phạm vi và evidence để quyết định rủi ro
+- Chỉ tỷ lệ pass tổng
+- Chỉ số test nhanh
+Q: Môi trường không cài được bản build mới,30 ca chưa chạy. Report ghi gì?
++ Blocked/not-run có lý do và phạm vi
+- Pass vì chưa thấy lỗi
+- Fail sản phẩm cho mọi ca
+Q: Hai tuần đầu cho thấy effort gấp ước lượng do requirement đổi. Hành động test control hợp lý?
++ Cập nhật giả định,ưu tiên và kế hoạch cùng bên liên quan
+- Giữ số cũ và giấu trễ
+- Cắt assertion không báo
+Q: Scanner báo vấn đề nhưng fixture không xác nhận. Nên làm gì?
++ Triage rule,ngữ cảnh và evidence thêm
+- Gọi ngay critical chắc chắn
+- Tắt tool vĩnh viễn
+Q: Một dự án mua automation tool nhưng chưa ai biết bảo trì. Rủi ro cần tính?
++ Đào tạo,tích hợp và chi phí sở hữu
+- Chỉ màu giao diện
+- Không có vì tool mã nguồn mở
+Q: Session khám phá không thấy bug nhưng làm rõ ba rule mâu thuẫn. Giá trị là gì?
++ Thông tin mới để giảm rủi ro và cải thiện mô hình
+- Không có vì bug bằng0
+- Chỉ đáng giá nếu thêm screenshot
+Q: Lỗi chỉ xuất hiện sau đổi mạng nhưng retest dùng mạng ổn định. Kết luận đã sửa có đủ không?
++ Chưa,thiếu điều kiện liên quan lỗi gốc
+- Đủ vì build mới
+- Đủ nếu chạy hai lần
+Q: Exit criteria chưa đạt nhưng người có thẩm quyền chấp nhận ngoại lệ. Report cần gì?
++ Tiêu chí thiếu,rủi ro,lý do và quyết định được ghi
+- Sửa số liệu thành đạt
+- Xóa lỗi khỏi report
+Q: Hồ sơ khóa học tự soạn đạt20/20 có bảo đảm đỗ chứng chỉ chính thức không?
++ Không,chỉ là bằng chứng luyện trên phạm vi này
+- Có tự động
+- Có nếu làm nhanh

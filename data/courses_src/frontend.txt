@@ -4,7 +4,7 @@ icon: 🎨
 floor: 7
 room: 702
 level: Cơ bản → Thực hành
-hours: 16
+hours: 28
 summary: Tự xây trang thực đơn với HTML/CSS/DOM, dữ liệu bất đồng bộ, React, biểu mẫu dễ tiếp cận và kiểm thử hành vi UI.
 
 ## LESSON frontend-01 | HTML ngữ nghĩa: trang thực đơn dễ dùng
@@ -439,3 +439,382 @@ Q: Thay sleep cố định bằng gì trong Playwright?
 + Assertion tự chờ điều kiện như toBeVisible
 - Chờ 30 giây trong mọi test
 - Bỏ mọi bước chờ
+
+## LESSON frontend-09 | Kiến trúc state và bộ nhớ đệm phía client
+
+### Chọn nguồn sự thật cho từng loại state
+Ứng dụng đặt lớp giả định Vạt Thoi có input đang gõ,filter ở URL và dữ liệu lớp từ server. Phân biệt state giao diện,URL và server để không lưu ba bản remaining lệch nhau;giá trị suy ra nên tính từ nguồn thích hợp.
+
+### Reducer cho chuyển trạng thái có quy tắc
+Hàm thuần dưới giới hạn qty theo miền lab,chưa thay validation server. Test input và bản gốc,tách side effect fetch khỏi reducer để chuyển trạng thái có thể kiểm độc lập.
+~~~js
+export function cartReducer(state,action){
+ switch(action.type){
+ case 'setQty':
+  if(!Number.isInteger(action.qty)||action.qty<1||action.qty>20)return state;
+  return {...state,qty:action.qty};
+ case 'reset':return {qty:1};
+ default:return state;
+ }
+}
+~~~
+
+### Cache theo đúng phạm vi dữ liệu
+Key minh họa gồm actor và filter/version cần thiết.Nó không cấp quyền,server vẫn kiểm actor hiện tại;đổi tài khoản hoặc quyền phải làm sạch/invalidate theo thiết kế,không dùng cache chung trả private data.
+~~~js
+const cache=new Map();
+const cacheKey=(actorId,filter)=>JSON.stringify(['classes',actorId,filter]);
+export function cacheRead(actorId,filter){return cache.get(cacheKey(actorId,filter));}
+export function cacheWrite(actorId,filter,data){cache.set(cacheKey(actorId,filter),data);}
+export function clearActorCache(){cache.clear();}
+// Lab đơn giản xóa toàn cache trong module khi actor đổi.
+~~~
+
+### Optimistic update có đường đối chiếu
+Giảm remaining ở UI trước response giúp phản hồi nhanh nhưng cần pending,race policy và rollback/refetch khi lỗi.Không lấy optimistic value làm oracle hoặc chuyển thành confirmed trước server xác nhận.
+~~~text
+snapshot trước mutation ->đánh dấu pending theo requestId
+optimistic view ->server response
+success:đối chiếu id/state chuẩn và invalidate cache liên quan
+error:rollback/refetch có kiểm,còn giữ input cần thiết
+concurrent mutation:không rollback chồng lên update mới vô thức
+~~~
+
+### Bẫy effect để đồng bộ mọi giá trị
+Total tính từ items thường không cần effect cập nhật một state total riêng.Càng nhiều bản sao càng có cửa sổ lệch;dùng effect cho đồng bộ hệ bên ngoài theo mục tiêu,không để mọi event tạo chuỗi effect khó hiểu.
+
+PRACTICE: Phân loại state của app lab,viết reducer có tám test và cache scope theo hai actor giả. Mô phỏng optimistic success/error/race,nộp expected và chính sách invalidate/rollback rõ.
+Q: Derived state như tổng tiền thường nên làm gì?
++ Tính từ nguồn state nhất quán nếu phù hợp
+- Lưu nhiều bản riêng rồi effect đồng bộ mãi
+- Đọc DOM để làm nguồn duy nhất
+Q: Cache theo actor/filter cần gì?
++ Scope,key,invalidation và xử lý đổi quyền
+- Một key chung mọi người
+- TTL dài thay mọi kiểm quyền
+Q: Optimistic UI khi server từ chối cần gì?
++ Hoàn tác/đối chiếu và thông báo giữ ý định phù hợp
+- Giữ xanh mãi
+- Xóa draft không báo
+
+## LESSON frontend-10 | Routing, URL state và lỗi màn hình
+
+### URL là input có thể bookmark
+Filter lớp và route detail cần parse/validate,không xem query do browser giữ là đáng tin. Chốt mặc định,giá trị ngoài miền và URL không tồn tại,đừng lưu token hoặc dữ liệu riêng tư trongquery.
+
+### Parse query bằng API chuẩn
+Ví dụ lab chỉ nhận open/all và page nguyên 1..100,giá trị khác về mặc định theo policy minh họa. Giá trị được render bằng text an toàn,không innerHTML;pagination thật cần hợp đồng server riêng.
+~~~js
+export function parseFilter(href){
+ const u=new URL(href,'http://localhost:3100');
+ const status=u.searchParams.get('status')==='all'?'all':'open';
+ const raw=Number(u.searchParams.get('page')||1);
+ const page=Number.isInteger(raw)&&raw>=1&&raw<=100?raw:1;
+ return {status,page};
+}
+~~~
+
+### History phải được nối với state
+Nếu dùng router framework,học API chính thức của phiên bản đãpin.Mảnh browser API dưới minh họa pushState không tự phát popstate,app cần cơ chế thông báo;Back/Forward phải có listener/cleanup phù hợp,không copy như router production đủ.
+~~~js
+export function navigateLab(path){
+ const u=new URL(path,location.origin);
+ if(u.origin!==location.origin)throw new Error('same_origin_required');
+ history.pushState(null,'',u.pathname+u.search+u.hash);
+ dispatchEvent(new PopStateEvent('popstate'));
+}
+// Hook/component cần đăng ký popstate và cleanup khi không còn dùng.
+~~~
+
+### Màn hình lỗi theo ý nghĩa
+404,khác quyền,lỗi tải và danh sách rỗng khác nhau.Chọn state và hướng quay lại/phục hồi,giữ focus/title theo điều hướng,không biến mọi request lỗi thành trang không có lớp.
+~~~text
+unknown class ->not-found theo contract
+unauthenticated ->luồng xác thực hợp lệ,không lộ private data
+network failure ->error +retry có ngân sách
+empty filter ->empty +hướng đổi filter
+back/forward ->URL và state đúng,không nhân mutation
+~~~
+
+### Test trực tiếp link và reload
+Mở URL sâu trong context mới,refresh,Back/Forward và query sai để kiểm cả server fallback lẫn client router.Một click từ home xanh chưa chứng minh deep link hoạt động khi nhận từ bookmark.
+
+PRACTICE: Thiết kế route/query contract vàmười ca bookmark/reload/Back/Forward/error. Nộp parser test,history/focus behavior và gap khi chưa có server fallback lab.
+Q: URL query nên được xử lý như gì?
++ Input ngoài cần parse,validate và mặc định rõ
+- Nguồn đáng tin vì do browser tạo
+- HTML để chèn trực tiếp
+Q: Back/Forward trong SPA cần kiểm gì?
++ URL,state,màn hình và focus phù hợp
+- Chỉ không crash
+- Luôn ép vềhome
+
+## LESSON frontend-11 | Hiệu năng tải, render và đo trải nghiệm
+
+### Đo trải nghiệm trước tối ưu
+LCP liên quan nội dung lớn hiển thị,INP tương tác,CLS ổn định thị giác. Thu metric bằng công cụ phù hợp,cùng phiên bản/dữ liệu/điều kiện;lab một máy và field nhiều người dùng có sức nặng khác nhau.
+
+### Ngân sách nội bộ không là chuẩn mọi app
+Đặt mục tiêu giả định cho bundle,đường critical và tương tác mục tiêu;ghi thiết bị,mạng,cache và sample. Không dùng một điểm tổng hoặc một run nhanh làm bằng chứng toàn người dùng đạt.
+~~~json
+{"labBudget":{"initialJsKiB":150,"searchInteractionMs":200},"conditions":{"device":"máy lab được ghi cấu hình","network":"profile giả được chốt"},"note":"Ngưỡng tự đặt cho bài học,không phải chứng nhận Core Web Vitals."}
+~~~
+
+### Đo một đoạn việc với giới hạn rõ
+Performance API dưới đo hàm lọc đồng bộ,không phải tự tính INP hoặc LCP. Nêu dữ liệu và số lần để so thuật toán,đừng đổi tên duration của một function thành metric trải nghiệm trình duyệt.
+~~~js
+export function measureFilter(rows,query){
+ performance.mark('lab-filter-start');
+ const result=rows.filter(x=>x.name.includes(query));
+ performance.mark('lab-filter-end');
+ const m=performance.measure('lab-filter','lab-filter-start','lab-filter-end');
+ return {result,durationMs:m.duration};
+}
+~~~
+
+### Giảm dịch chuyển do tài nguyên
+Khai báo kích thước/aspect-ratio phù hợp giúp giữ chỗ ảnh,không kéo méo hoặc che nội dung.Tách ảnh quan trọng với ảnh dưới màn,đo tải/scroll/zoom theo luồng;không lazy-load mọi thứ mùquáng.
+~~~text
+<img src="/lab-class-room.png" width=640 height=360 alt="Phòng học giả Mầm Thoi">
+<style>img{max-width:100%;height:auto}</style>
+<!-- Ảnh do lab tự tạo,không tải từ nguồn bên ngoài. -->
+~~~
+
+### Memoization sau khi hiểu nút thắt
+useMemo/memo có điều kiện và chi phí,không tự thay thuật toán tốt hoặc giảm network waterfall. Đo trước/sau cùng workload,kiểm correctness/a11y không bị phá,giữ artifact và giới hạn suy rộng.
+
+PRACTICE: Đo một tương tác lọc và tải trang trên fixture lab,có baseline/lặp đo/điều kiện. Tối ưu một yếu tố,nộp số đo và test kết quả không đổi;không gọi functionduration là INP.
+Q: LCP,INP,CLS lần lượt tập trung vào gì?
++ Tải nội dung lớn,tương tác,ổn định thị giác
+- Chỉ CPU,RAM,disk
+- Chỉ số case,bug,time
+Q: useMemo có tự làm mọi app nhanh hơn không?
++ Không
+- Có luôn
+- Có nếu code dài
+Q: Ảnh thiếu kích thước có thể ảnh hưởng gì?
++ Bố cục dịch chuyển khi tải
+- Luôn tăng chất lượng
+- Chỉ tên file
+
+## LESSON frontend-12 | Thiết kế component và kiểm truy cập thực tế
+
+### Component có contract hành vi
+Một Field cần label,value,error,disabled và callback rõ,kể cả focus/keyboard và name/state. Native control là nền tốt,ARIA bổsung khi cần nhưng không tự hiện thực tương tác;đừng thiết kế chỉ cho screenshot.
+
+### Liên kết nhãn và lỗi bằng id ổn định
+Ví dụ React dùng useId trongcomponent để tạo liên kết,không đặt id chung cho nhiều instance. Mẫu vẫn cần validation và focus policy của form;không ẩn label hoặc chỉ dựa placeholder.
+~~~js
+import {useId} from 'react';
+export function StudentField({value,onChange,error}){
+ const id=useId();
+ return <div><label htmlFor={id}>Họ tên</label>
+ <input id={id} value={value} onChange={e=>onChange(e.target.value)}
+  aria-invalid={Boolean(error)} aria-describedby={error?`${id}-error`:undefined}/>
+ {error&&<p id={`${id}-error`}>{error}</p>}</div>;
+}
+~~~
+
+### Focus và reflow là yêu cầu có trạng thái
+Giữ chỉ báo focus rõ và control không bị overlay che theo tiêu chí áp dụng. CSS minh họa không tự chứng minhcontrast/reflow,target hayAT;kiểm layout/state thực,tránh gán tabindex dương để vá thứ tự.
+~~~text
+:focus-visible{outline:3px solid #123456;outline-offset:3px}
+.form-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem}
+input,button{max-width:100%}
+/* Đo màu/zoom và kiểm focus thực trên lab,không nhận CSS này là chứng nhận. */
+~~~
+
+### Test keyboard đi quaform thật
+Playwright lab có label đúng và submit nêu rõ;kiểm focus/error/khả năng sửa,không chỉ control tồn tại. Tổ hợp AT/browser cần được ghi khi thử,bổsung thao tác người nếu chưa đủ automation.
+~~~js
+await page.goto('http://localhost:3100/enroll');
+await page.getByLabel('Họ tên',{exact:true}).focus();
+await page.keyboard.press('Tab');
+await expect(page.getByRole('button',{name:'Đăng ký'})).toBeFocused();
+// Expected này giả định form lab chỉ có hai control theo contract.
+~~~
+
+### State matrix để tái dùng an toàn
+Default,hover,focus,disabled,loading,error và success cần meaningfulfeedback. Hai component nhìn giống nhau có thể khác hợp đồng,khôngép mọi control vào một wrapper nhiều flag gây khó hiểu và khó kiểm.
+
+PRACTICE: Tạo Field và Button lab với state matrix,kiểm haiinstance không trùng id,label/error liên kết và keyboard/zoom. Nộp10 case,AT observation nếu được cấp và gap,chưa claim toàn bộ WCAG đạt.
+Q: Accessible component cần kiểm những chiều nào?
++ Ngữ nghĩa,name/state,keyboard,focus và hiển thị theo phạm vi
+- Chỉ roleattribute
+- Chỉ data-testid
+Q: Xóa outline mà không có chỉ báo thay thế gây gì?
++ Người dùng khó biết focus ở đâu
+- Luôn tốt hơn
+- Không ảnh hưởng keyboard
+
+## LESSON frontend-13 | Dự án: ứng dụng đặt lớp có dữ liệu bất đồng bộ
+
+### Dự án đặt lớp bất đồng bộ
+Vạt Thoi có list/detail/form và đăng ký khi còn chỗ. UI hiển thị loading/empty/error/ready,pending/confirmed rõ;server giữ quyền/quota/chống lặp,client giữ ý định và không ghi đè kết quả query mới bằng response cũ.
+
+### State model và contract trước code
+Chốt selector,route/query,APIshape,actor,clock và fixture giả. Loader/error cho từng màn,cách invalidate/rollback và quy tắc giữ draft cần được viết,không để booleanok điều khiển mọi tình huống.
+~~~text
+list:loading/empty/error/ready
+form:editing/invalid/submitting/confirmed/error
+URL:filter/page/classId theo parser
+cache:scope actor+query,invalidate saumutation
+server:201,id,state;403/409 theo contract
+base:http://localhost:3100
+~~~
+
+### Cleanup async không ghi state cũ
+Hook minh họa cần useState/useEffect được import và dùng trong component/hook. APIlab phải validate shape ở bước riêng;khi query đổi,ignore kết quả cũ và abort theo khả năng,còn server có thể đã nhận request.
+~~~js
+import {useEffect,useState} from 'react';
+export function useClass(id){
+ const [state,setState]=useState({kind:'loading'});
+ useEffect(()=>{
+  const controller=new AbortController();let active=true;
+  setState({kind:'loading'});
+  fetch(`http://localhost:3100/classes/${encodeURIComponent(id)}`,{signal:controller.signal})
+   .then(r=>{if(!r.ok)throw new Error(`HTTP_${r.status}`);return r.json();})
+   .then(data=>{if(active)setState({kind:'ready',data});})
+   .catch(error=>{if(active&&error.name!=='AbortError')setState({kind:'error'});});
+  return()=>{active=false;controller.abort();};
+ },[id]);return state;
+}
+~~~
+
+### Nghiệm thu bằngca sai có chủ đích
+Ít nhất12 case choqueryrace,network,errorform,quyền/quota,Back/Forward,keyboard và cache đổi actor. Stub một response cũ về muộn để test phát hiện,sửa cleanup rồi chạy lại;không coi mockUI chứng minh DB thật.
+~~~text
+G1:loading/empty/error/ready vàrace query
+G2:form validation,quota,request lặp
+G3:URL/reload/back/forward
+G4:keyboard/name/error/zoom
+G5:cache actor và persistence theoid
+MỗiG nêu fixture,oracle,mock boundary và evidence.
+~~~
+
+### Bàn giao có đo lường và giới hạn
+Nộp component/hooks,state model,fixture,test và report có baseline hiệu năng. Ghiapp/stub thật sự đã chạy,môi trường,AT và phần chưa đủ bằng chứng;không deploy hoặc đẩy code trong nhiệm vụ soạn bài.
+
+PRACTICE: Bàn giaofrontend lab có route/query,asyncstate,cache theoactor,form dễ dùng và12 case. Córace cũ/mới,một mutation bị phát hiện,đo trước/sau và README ghi rõ mock/tích hợp/gap.
+Q: Dự án async cần state nào rõ?
++ Loading,rỗng,lỗi,thành công và chuyển tiếp liên quan
+- Chỉ một booleanok
+- Luôn rỗng khierror
+Q: Bàn giao frontend cần gì?
++ Contract,state model,fixture,test,evidence và giới hạn
+- Chỉ màn hình đẹp
+- Token thật
+
+## LESSON frontend-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Ngữ nghĩa giúp browser,keyboard và công nghệ hỗ trợ;không dùng div click để tránh hành vi native mà không hiện thực đủ.
+2. Layout không bị tràn chưa bảo đảm nút,form và thứ tự focus dùng được;kiểm tác vụ và trạng thái.
+3. Ưu tiên textContent hoặc cơ chế render an toàn;HTML thật sự cần phải xử lý theo chính sách phù hợp,không ghép chuỗi mù.
+4. HTTP lỗi vẫn có thể resolve Promise;phân biệt network,HTTP,parse và nghiệp vụ để UI thông báo đúng.
+
+### Dữ liệu và điều kiện biên
+5. Bất biến có chủ đích giúp giữ dự đoán/render;không copy toàn cấu trúc tùy tiện khi chỉ đổi một nhánh.
+6. Kết quả cũ có thể về muộn;cleanup và trạng thái rõ giúp không ghi dữ liệu sai cho query hiện tại.
+7. Browser giúp trải nghiệm,server vẫn kiểm input,quyền và bất biến;không tin client không bị sửa.
+8. Selector/ảnh hỗ trợ nhưng oracle nghiệp vụ cần rõ;test phải fail khi hành vi mục tiêu sai.
+
+### Tính đúng và cách điều tra
+9. Tránh dư state làm lệch nguồn;chỉ cache tính toán khi có lý do và đo đạc,không lạm dụng effect.
+10. Cache không được lộ dữ liệu actor cũ;server vẫn kiểm quyền và kết quả mới cần được đối chiếu sau mutation.
+11. UI lạc quan phải có chính sách lỗi/race và kết quả thật;không che lỗi bằng toast thành công trước commit.
+12. Bookmark/deep link có thể chứa dữ liệu sai hoặc ngoài miền,cần hợp đồng route/query và không lộ bí mật trong URL.
+
+### Rủi ro và lựa chọn phương án
+13. History cần đồng bộ theo router thiết kế,không tự gửi lại thao tác ghi hoặc làm mất draft ngoài chính sách.
+14. Các metric phản ánh góc khác của trải nghiệm;lab và field cần phân biệt,không suy từ một lượt máy mạnh.
+15. Đo bottleneck và chi phí trước,memoization có đánh đổi/điều kiện,không thay thuật toán,dữ liệu hoặc giảm công việc thừa.
+16. Giữ chỗ phù hợp giúp ổn định,nhưng cần đo/kiểm nhiều trạng thái;không kéo ảnh méo hoặc làm mất nội dung.
+
+### Dự án, bằng chứng và bàn giao
+17. Một prop aria không tự thêm hành vi;native control là nền tốt,custom cần contract và kiểm tương tác đầy đủ.
+18. Cần focus nhìn thấy,không bị che và đủ khả dụng theo tiêu chí áp dụng,không chỉ nhìn control khi chưa focus.
+19. Không đổi lỗi tải thành không có dữ liệu;giữ input/draft và hướng phục hồi theo hợp đồng.
+20. Người khác cần chạy lab,biết mock/tích hợp,keyboard/performance coverage và phần chưa được kiểm thực tế.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Button và a khác mục đích thường gặp gì?
++ Hành động khác điều hướng đến tài nguyên
+- Chỉ khác màu
+- Có thể luôn thay nhau bằngdiv
+Q: Responsive cần kiểm gì ngoài màn hình nhỏ?
++ Nội dung,chức năng,zoom và cách nhập trong phạm vi
+- Chỉ chiều rộng card
+- Chỉ một screenshot
+Q: innerHTML với dữ liệu chưa tin có rủi ro gì?
++ Chèn markup hoặc script theo ngữ cảnh
+- Tự mã hóa mọi input
+- Luôn nhanh và an toàn
+Q: fetch resolve có nghĩa HTTP thành công không?
++ Không,cần kiểm response.ok/status và body
+- Có luôn
+- Có nếu không exception
+Q: React state object nên cập nhật thế nào?
++ Tạo giá trị mới ở nhánh thay đổi
+- Sửa trực tiếp rồi mong render
+- Luôn clone sâu mọi thứ
+Q: Effect fetch thay query nhanh cần gì?
++ Cleanup abort/ignore kết quả cũ và kiểm race
+- Không cần vì Promise tự xếp đúng
+- Thêm sleep cố định
+Q: Client validation có thay server validation không?
++ Không
+- Có nếu disabledbutton
+- Có nếu TypeScript
+Q: Test UI nên assert gì?
++ Hành vi người dùng và kết quả quan trọng
+- Chỉ snapshot
+- Chỉ component mount không lỗi
+Q: Derived state như tổng tiền thường nên làm gì?
++ Tính từ nguồn state nhất quán nếu phù hợp
+- Lưu nhiều bản riêng rồi effect đồng bộ mãi
+- Đọc DOM để làm nguồn duy nhất
+Q: Cache theo actor/filter cần gì?
++ Scope,key,invalidation và xử lý đổi quyền
+- Một key chung mọi người
+- TTL dài thay mọi kiểm quyền
+Q: Optimistic UI khi server từ chối cần gì?
++ Hoàn tác/đối chiếu và thông báo giữ ý định phù hợp
+- Giữ xanh mãi
+- Xóa draft không báo
+Q: URL query nên được xử lý như gì?
++ Input ngoài cần parse,validate và mặc định rõ
+- Nguồn đáng tin vì do browser tạo
+- HTML để chèn trực tiếp
+Q: Back/Forward trong SPA cần kiểm gì?
++ URL,state,màn hình và focus phù hợp
+- Chỉ không crash
+- Luôn ép vềhome
+Q: LCP,INP,CLS lần lượt tập trung vào gì?
++ Tải nội dung lớn,tương tác,ổn định thị giác
+- Chỉ CPU,RAM,disk
+- Chỉ số case,bug,time
+Q: useMemo có tự làm mọi app nhanh hơn không?
++ Không
+- Có luôn
+- Có nếu code dài
+Q: Ảnh thiếu kích thước có thể ảnh hưởng gì?
++ Bố cục dịch chuyển khi tải
+- Luôn tăng chất lượng
+- Chỉ tên file
+Q: Accessible component cần kiểm những chiều nào?
++ Ngữ nghĩa,name/state,keyboard,focus và hiển thị theo phạm vi
+- Chỉ roleattribute
+- Chỉ data-testid
+Q: Xóa outline mà không có chỉ báo thay thế gây gì?
++ Người dùng khó biết focus ở đâu
+- Luôn tốt hơn
+- Không ảnh hưởng keyboard
+Q: Dự án async cần state nào rõ?
++ Loading,rỗng,lỗi,thành công và chuyển tiếp liên quan
+- Chỉ một booleanok
+- Luôn rỗng khierror
+Q: Bàn giao frontend cần gì?
++ Contract,state model,fixture,test,evidence và giới hạn
+- Chỉ màn hình đẹp
+- Token thật

@@ -1,0 +1,725 @@
+=== COURSE test-management
+name: Quản lý kiểm thử
+icon: 🗂️
+floor: 8
+room: 803
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Chiến lược theo rủi ro, kế hoạch, ước lượng, nguồn lực, metric, kiểm soát và quyết định phát hành; dự án giả định có thay đổi và đánh đổi được ghi rõ.
+
+## LESSON test-management-01 | Chiến lược theo bối cảnh và mục tiêu
+
+### Chiến lược trả lời vì sao kiểm như vậy
+Sản phẩm giả định Rìa Nếp mở đăng ký lớp thu điểm. Mục tiêu quản lý là cung cấp đúng bằng chứng cho quyết định phát hành, không tối đa số case hoặc mua tool trước khi biết rủi ro.
+
+### Bối cảnh quyết định danh mục kiểm
+Đặc điểm người dùng, tiền/quyền, dữ liệu, mạng và chu kỳ thay đổi ảnh hưởng cách kiểm. Từ đó chọn mức, loại, kỹ thuật và tỷ trọng automation/thủ công; không áp một tỷ lệ cố định mọi dự án.
+~~~text
+asset:điểm, hồ sơ, chỗ học
+critical flows:đăng ký, hủy, hoàn điểm
+risks:trùng ý định, vượt chỗ, khác chủ đọc dữ liệu
+strategy:logic/integration gần code + UI trọng tâm + thăm dò
+~~~
+
+### Chọn evidence theo quyết định cần
+Muốn quyết định có phát hành cần biết coverage rủi ro, lỗi mở và khả năng phục hồi. Report số lượng không gắn rủi ro có thể làm người nhận hiểu sai mức sẵn sàng.
+~~~text
+decision:release buildLAB3?
+evidence:rule tiền/quyền/quota đã kiểm thế nào
+gap:thiết bị thật chưa có
+options:hoãn, giảm phạm vi hoặc chấp nhận rủi ro có điều kiện
+~~~
+
+### Ngoại lệ phải có owner
+Nếu không kiểm thông báo thiết bị thật, ghi lý do và tác động thay vì để mất khỏi plan. Người chịu trách nhiệm có thể chọn cấp thiết bị hoặc chấp nhận gap theo quy trình.
+~~~text
+excluded:notification trên thiết bị thật
+reason:chưa có slot lab
+risk:đích mở và preview có thể sai
+owner:người điều phối release giả định
+follow-up:cấp slot hoặc quyết định ngoại lệ có ghi
+~~~
+
+### Bẫy chiến lược là danh sách công cụ
+Công cụ là phương tiện, không mô tả mục tiêu hoặc oracle. Review mỗi lựa chọn bằng rủi ro nó giảm và chi phí bảo trì, nếu không liên hệ được thì xem lại nhu cầu.
+
+PRACTICE: Viết chiến lược một trang cho Rìa Nếp với ba mục tiêu, năm rủi ro, evidence cần và hai ngoại lệ có owner. Nêu lý do chọn mức/loại/kỹ thuật.
+Q: Chiến lược kiểm thử nên bắt đầu từ gì?
++ Mục tiêu, bối cảnh và rủi ro sản phẩm
+- Một danh sách công cụ
+- Số case cố định mọi dự án
+Q: Ngoại lệ phạm vi nên được xử lý thế nào?
++ Nêu rõ lý do, tác động và người chấp nhận
+- Giấu để plan ngắn
+- Luôn coi đã pass
+
+## LESSON test-management-02 | Test plan có phạm vi và ngoại lệ
+
+### Plan là hợp đồng làm việc có thể cập nhật
+Từ chiến lược chuyển thành scope, basis, deliverable, trách nhiệm, môi trường, lịch, entry/exit và báo cáo. Độ chi tiết theo quy mô nhóm, không dùng nhiều trang thay quyết định rõ.
+
+### Phạm vi có biên và ví dụ
+Nêu endpoint/luồng/build và dữ liệu được cấp. Ngoại lệ như thanh toán thật hoặc dịch vụ ngoài lab phải được ghi, cùng tác động lên kết luận; không dùng từ kiểm toàn bộ khi chỉ vài flow.
+~~~text
+in:đăng ký/hủy/quota/quyền trong localhost lab
+out:giao dịch thật, thiết bị chưa cấp
+basis:rulesLAB3 và schemaLAB2
+output:case, fixture, report, bug và retest evidence
+~~~
+
+### Entry và exit khác mục đích
+Entry kiểm readiness của hoạt động, exit đánh giá hoàn tất. Không có build ổn có thể blocked execution nhưng vẫn review case; đến deadline không tự biến exit thành đạt.
+~~~text
+entry:build cài được, readiness đạt, fixture/actor sẵn
+exit:đủ evidence rủi ro trọng tâm, lỗi theo gate
+exception:ghi tiêu chí thiếu, impact, owner quyết định
+Không gán pass cho phần chưa thực thi.
+~~~
+
+### Deliverable có người nhận
+Mỗi đầu ra có mục đích, owner và tiêu chí nhận. Một report không được đọc hoặc một fixture không ai dựng lại được là chi phí chưa tạo giá trị; giữ quy trình bàn giao đơn giản.
+~~~text
+artifact | owner | receiver | accept
+fixture | QA-A | nhóm kiểm | id/expected/version rõ
+report | QA-lead | release owner | gap/risk/decision rõ
+bug | người phát hiện | Dev owner | tái hiện và oracle
+~~~
+
+### Cập nhật theo change control
+Khi scope đổi, ghi version, lý do, ảnh hưởng effort/lịch/coverage và quyết định. Không âm thầm thêm việc để plan trông đầy đủ hoặc cắt ca mà bên liên quan không biết rủi ro.
+
+PRACTICE: Lập test plan gọn cho một release lab, đủ scope, entry/exit, deliverables và owner. Đưa một change request vào rồi nộp diff tác động có quyết định.
+Q: Test plan khác bản lịch đơn thuần ở đâu?
++ Còn có mục tiêu, phạm vi, cách kiểm, nguồn lực và tiêu chí
+- Chỉ nhiều trang hơn
+- Chỉ đổi tên cột
+Q: Entry criteria chưa đạt nên làm gì?
++ Đánh giá blocked/rủi ro và xử lý phụ thuộc
+- Tự ghi pass
+- Bỏ mọi setup
+
+## LESSON test-management-03 | Ước lượng bằng giả định và dữ liệu
+
+### Ước lượng từ cấu phần công việc
+Tách review basis, thiết kế, fixture, môi trường, thực thi, điều tra, retest và báo cáo. Nếu chỉ nhân số case với thời gian click, sẽ bỏ công lớn nhất khi lỗi hoặc requirement mơ hồ.
+
+### Dữ liệu lịch sử phải cùng bối cảnh
+Dùng throughput tương tự để tham khảo, ghi skill, mức phức tạp và tỷ lệ lỗi. Không lấy trung bình dự án khác miền rồi gắn chính xác tuyệt đối cho nhóm mới.
+~~~text
+20 case đơn giản x thời gian lịch sử
++setup fixture/build
++điều tra/retest theo khoảng
++report/review
+assumptions:lab ready và rule đã chốt
+~~~
+
+### Khoảng ước lượng thể hiện bất định
+Đưa khoảng thấp/khả dĩ/cao hoặc các kịch bản, giải thích điều kiện. Điểm giữa không phải cam kết; độ không chắc giảm khi có prototype, sample execution và quyết định yêu cầu.
+~~~text
+A rule ổn, fixture sẵn ->effort thấp hơn
+B rule refund mở ->thêm review và sửa case
+C lab trễ ->duration tăng, effort không tăng cùng tỷ lệ
+Cập nhật sau sample thực thi.
+~~~
+
+### Effort không chia thẳng theo số người
+Hai người chỉ song song phần độc lập, đợi môi trường và review vẫn tạo duration. Ghi skill và task dependency trước phân bổ; không hứa thêm người luôn rút lịch gấp đôi.
+~~~text
+taskA thiết kếquota ->taskB review ->taskC execute
+taskD review quyền có thể song songA
+resource:QA-A/QA-B, reviewer, lab slot
+Lịch tính khả năng song song thực tế.
+~~~
+
+### Kiểm sai số để học
+So actual/estimate theo loại công việc và giả định thay đổi. Không dùng sai số để đổ lỗi; dùng để cải thiện mô hình và giải thích vì sao số kế hoạch cần cập nhật.
+
+PRACTICE: Ước lượng release có 30 case bằng breakdown và ba kịch bản. Nộp giả định, effort/duration, lịch phụ thuộc và cách cập nhật sau chạy mẫu 5 case.
+Q: Ước lượng effort cần công khai gì?
++ Giả định, phạm vi, khoảng và bất định
+- Chỉ một con số chính xác tuyệt đối
+- Chỉ ngày đẹp
+Q: Effort và duration khác nhau thế nào?
++ Lượng công khác thời gian lịch có phụ thuộc
+- Hai từ luôn giống
+- Duration chỉ là số tester
+
+## LESSON test-management-04 | Ưu tiên theo rủi ro sản phẩm
+
+### Ưu tiên theo hậu quả và khả năng
+Sai hoàn điểm và nút lệch nhẹ có tác động khác. Dùng mô hình định tính/định lượng có lý do, nguồn và độ chắc chắn; điểm số chỉ hỗ trợ trao đổi, không thay phán đoán.
+
+### Risk register nối tới phép kiểm
+Mỗi rủi ro có tài sản, điều kiện, hậu quả, đánh giá, biện pháp và owner. Thông tin rủi ro thay đổi khi có defect hoặc thiết kế mới, cần cập nhật chứ không chốt đầu kỳ mãi.
+~~~text
+R1 refund2 lần ->mất điểm ->state/retry
+R2 khác chủ ->lộ hồ sơ ->ma trận quyền
+R3 lớp vượt chỗ ->sai quota ->concurrency
+R4 lỗi hiển thị ->khó thao tác ->UI/a11y
+Ghi evidence và owner cho từng R.
+~~~
+
+### Phân bổ depth và thứ tự có lý do
+Vùng cao rủi ro được review, kiểm nhiều lớp và chạy sớm; vùng thấp vẫn có baseline phù hợp. Không hiểu ưu tiên là chỉ kiểm module từng lỗi hoặc bỏ hết vùng chưa có lịch sử.
+~~~text
+R1:review rule +integration +UI smoke +regression
+R2:actor/resource/field +negative side effects
+R3:biên +lịch xen kẽ +đối soát
+R4:baseline theo phạm vi và thiết bị được cấp
+~~~
+
+### Rủi ro dự án ảnh hưởng bằng chứng
+Thiếu thiết bị, lab trễ hoặc skill bottleneck không tự là defect sản phẩm, nhưng làm tăng gap. Đề xuất response có owner và deadline, không giấu vào tỷ lệ pass.
+~~~text
+project risk:lab slot chỉ 1máy
+impact:mobile matrix chưa đủ
+response:đặt slot/cấp emulator hoặc giảm scope có review
+residual risk:thiết bị thật chưa xác nhận
+~~~
+
+### Cập nhật khi evidence đảo giả định
+Module ít đổi nhưng vừa có lỗi quyền nghiêm trọng có thể cần ưu tiên mới. Ghi điều gì thay, lý do và ảnh hưởng kế hoạch; đừng bảo vệ điểm rủi ro cũ chỉ vì đã ký.
+
+PRACTICE: Tạo risk register tám mục và chọn năm mục ưu tiên có lý do. Mô phỏng một finding mới, đổi phân bổ kiểm và nộp rủi ro còn lại có owner.
+Q: Ưu tiên rủi ro sản phẩm xét gì?
++ Khả năng, tác động và bối cảnh
+- Chỉ module nhiều dòng
+- Chỉ yêu cầu của người nói to
+Q: Một vùng ít lỗi lịch sử có thể được bỏ hoàn toàn không?
++ Không thể chỉ dựa thông tin đó
+- Có luôn
+- Có nếu UI đơn giản
+
+## LESSON test-management-05 | Lịch, phụ thuộc và điểm kiểm soát
+
+### Lịch cần đường phụ thuộc thực
+Thiết kế có thể bắt đầu trước build, nhưng execute cần môi trường/fixture. Vẽ các mốc và phần có thể song song để tránh mọi việc cùng mang deadline mà không có đầu vào.
+
+### Điểm kiểm soát cho readiness
+Đặt checkpoint review rule, fixture smoke, build ready, exit review. Mỗi mốc có tiêu chí và người xác nhận; meeting diễn ra không đồng nghĩa mốc đạt.
+~~~text
+M1 rule tiền/quyền chốt ->BA owner
+M2 fixture dựng được ->QA/Dev lab
+M3 build readiness +smoke ->QA
+M4 exit evidence ->release owner
+Blocked ở mốc nào được báo đúng mốc đó.
+~~~
+
+### Buffer gắn bất định đã nhận diện
+Dự phòng điều tra/retest hoặc môi trường cần có căn cứ, không là thời gian giấu. Theo dõi mức dùng và rủi ro gây tiêu hao, để người quyết định biết lúc nào cần đổi phạm vi.
+~~~text
+buffer:R1 refund còn mơ hồ
+trigger:rule đổi sau review
+response:bổ sung case/retest theo impact
+tracking:effort dùng, lý do và remaining
+Không tiêu buffer thay cho fix phụ thuộc kéo dài.
+~~~
+
+### Khi lab trễ, điều chỉnh phần khả dụng
+Tiếp tục review, thiết kế hoặc kiểm component được cấp, nêu phần execute bị chặn. Không gọi chưa chạy là pass và không đổi mọi việc sang ngày cuối mà không đánh giá khả năng retest.
+~~~text
+lab trễ1 ngày ->review/fixture offline còn làm được
+execute ưu tiênR1/R2 khi ready
+gap:thời gian soak/retest bịgiảm
+options:thêm slot, hoãn hoặc giảm scope được chấp nhận
+~~~
+
+### Báo độ lệch theo tác động quyết định
+Thay chỉ ghi trễ20%, nêu mốc nào bị ảnh hưởng, lựa chọn và rủi ro. Mốc lịch là dự báo dựa điều kiện, cần cập nhật khi dữ liệu thực thay đổi.
+
+PRACTICE: Vẽ lịch10 ngày giả với dependency, ba checkpoint và buffer có lý do. Cho lab trễ và bug blocker, mô phỏng hai lựa chọn điều chỉnh có coverage/retest impact.
+Q: Đường phụ thuộc môi trường trễ ảnh hưởng gì?
++ Có thể chặn thực thi dù effort thiết kế còn khả dụng
+- Mọi việc phải dừng ngay
+- Không ảnh hưởng lịch
+Q: Buffer nên được dùng thế nào?
++ Cho bất định có lý do và được theo dõi
+- Thời gian giấu riêng của tester
+- Luôn chia đều mỗi ngày
+
+## LESSON test-management-06 | Nhân lực, kỹ năng và phối hợp
+
+### Nguồn lực gồm năng lực và phối hợp
+Hai QA có giờ làm giống nhau nhưng khác kinh nghiệm API/mobile. Dùng skill matrix để bố trí công việc rủi ro và review, hỗ trợ học chéo; không xếp hạng giá trị cá nhân bằng số bug.
+
+### Phân công có đầu ra và quyền
+Owner case không tự có quyền chỉnh mọi môi trường. Ghi task, deliverable, reviewer và quyền lab phù hợp; whole-team quality cần trách nhiệm rõ thay vì mọi người cùng chịu nên không ai nhận.
+~~~text
+task quyền API ->QA-A, review Dev-service
+task mobile matrix ->QA-B, review QA-A
+fixture ->Dev-lab, QA xác nhận
+release decision ->owner được giao
+Mọi actor/dữ liệu chỉ phạm vi giả định.
+~~~
+
+### Giảm bottleneck kiến thức
+Nếu chỉ một người hiểu refund, dùng session review và tài liệu ví dụ. Luân chuyển có hỗ trợ và pairing theo rủi ro, không giao việc quan trọng cho người mới mà bỏ review vì thiếu thời gian.
+~~~text
+skill gap:refund state/retry
+action:pair thiết kế3 ca +review oracle
+backup:QA-B hiểu fixture và evidence
+check:người nhận tự tái hiện một case
+Không chỉ chuyển file mà chưa hiểu.
+~~~
+
+### Capacity thực có công không phải test
+Meeting, review, triage, hỗ trợ và học cần tính trong capacity. Nếu lên lịch100%execution, sẽ không còn thời gian điều tra/retest; ghi khả năng thực và đánh đổi thay vì hứa đầy mọi giờ.
+~~~text
+available hours -nghỉ/lịch cố định
+-testware review -triage/handover
+-hỗ trợ/đào tạo cần thiết
+=capacity cho phần việc dự kiến
+Điều tra/retest vẫn cần ngân sách theo rủi ro.
+~~~
+
+### Hợp tác và góc nhìn độc lập
+Review chéo giúp tìm giả định chung, nhưng không biến QA và Dev thành hai phía đối đầu. Bám evidence và rule, khi bất đồng expected thì chuyển đúng owner nghiệp vụ.
+
+PRACTICE: Lập skill/capacity matrix ba người giả, phân công tám task có review và backup. Nêu hai bottleneck và kế hoạch học chéo được kiểm bằng đầu ra.
+Q: Ma trận kỹ năng giúp gì?
++ Thấy khả năng, phụ thuộc cá nhân và nhu cầu hỗ trợ
+- Xếp hạng phẩm chất con người
+- Chỉ đếm số người
+Q: Whole-team quality có loại bỏ QA chuyên môn không?
++ Không
+- Có hoàn toàn
+- Chỉ cần PM
+
+## LESSON test-management-07 | Ma trận truy vết và bao phủ
+
+### Coverage không chỉ số case
+Một trăm ca cùng luồng vui có thể bỏ toàn bộ quyền. Lập view theo requirement, risk, platform và model để thấy rỗng; không cần mọi liên kết nhiều tầng nếu không phục vụ quyết định.
+
+### Ma trận truy vết đủ cho impact
+Mỗi hàng nêu nguồn có version, phép kiểm và evidence. Liên kết đúng ID nhưng expected sai vẫn yếu, cần review ý nghĩa và bằng chứng thực thi.
+~~~text
+R-QUOTA1 ->RISK3 ->TC-01/BVA-02/CONC-03 ->RUN7
+R-AUTH2 ->RISK2 ->AUTH-01..04 ->RUN8
+R-REFUND3 ->RISK1 ->STATE-01/RETRY-02 ->RUN9
+OpenQ-04 ->chưa có oracle ->không nhận đã phủ
+~~~
+
+### Tách thiết kế và thực thi
+Case được viết không đồng nghĩa đã chạy; casepass cũng cần fixture/build đúng. Báo coverage thiết kế, runcount, trạng thái và evidence riêng theo ngôn ngữ rõ.
+~~~text
+designed:12/15 condition có case
+executed:9/12 case được chạy
+pass7, fail1, blocked1
+not-run3 case và3 condition chưa thiết kế
+Mẫu số và phạm vi phải được ghi.
+~~~
+
+### Change đi theo liên kết nhưng có review
+Khi rule refund đổi, hệ thống gợi caảnh hưởng nhưng nhóm vẫn cần xem business/process liên quan. Traceability hỗ trợ, không thay impactanalysis hoặc phát hiện yêu cầu chưa được ghi.
+~~~text
+change:cutoff18:00->17:00
+update:basis, biên giờ, example, oracle
+retest:refund/existingcancel flow
+regression:điểm, state, idempotency
+Review gap ngoài các link đang có.
+~~~
+
+### Dùng gap để chọn hành động
+Mỗi ô chưa có evidence có thể cần thêm ca, cấp môi trường hoặc chấp nhận rủi ro. Không tạo liên kết hình thức để biến dashboard thành100%; báo điều người quyết định cần biết.
+
+PRACTICE: Tạo traceability cho sáu rule, ít nhất12 case và hai gap có lý do. Mô phỏng đổi refund, cập nhật ảnh hưởng và báo riêng coverage thiết kế/thực thi.
+Q: Traceability có giá trị khi nào?
++ Nối nội dung đúng và chỉ ra khoảng trống
+- Chỉ có 100% hàng được link
+- Chỉ dùng màu
+Q: Yêu cầu đổi cần dùng traceability làm gì?
++ Tìm testware, rủi ro và evidence bị ảnh hưởng
+- Chỉ đổi ID
+- Xóa mọi case
+
+## LESSON test-management-08 | Metric, dữ liệu và bẫy diễn giải
+
+### Metric phải gắn câu hỏi quyết định
+Release Rìa Nếp có nhiều ca giao diện pass nhưng lỗi hoàn điểm còn mở. Tỷ lệ xanh tổng không thể hiện hậu quả; chọn chỉ số giúp nhìn rủi ro, coverage và khả năng kết thúc kiểm.
+
+### Mẫu số thay đổi làm xu hướng dễ sai
+Pass rate từ 70% lên90% có thể do thêm ca dễ hoặc loại ca bị chặn. Ghi tập ca, build, scope và trạng thái để người nhận so đúng điều kiện, không chỉ xem hai tỷ lệ.
+~~~text
+runA:pass7/fail3 trên10 case trọng tâm
+runB:pass18/fail2 trên20 case, thêm10 case dễ
+Cần so nhóm rủi ro vàca tương ứng
+Không kết luận chất lượng tăng chỉ từ 90%.
+~~~
+
+### Lỗi theo tác động và tuổi có giá trị
+Defect count thô trộn bug giao diện nhỏ với lỗi quyền nghiêm trọng. Xem severity, priority, age, blocked và vùng rủi ro; cách phân loại có định nghĩa và nguồn để tránh số liệu không đồng nhất.
+~~~text
+view:open defects by risk/severity
+view:age và trạng thái chờ owner
+view:reopen/escape với nguyên nhân có evidence
+Không dùng số bug để xếp hạng cá nhân.
+~~~
+
+### Leading và lagging theo bối cảnh
+Readiness, review coverage hoặc fixture gap có thể báo sớm rủi ro kế hoạch; defect escape cho biết điều đã xảy ra. Không metric nào tự là quan hệ nhân quả, cần giả thuyết và cách kiểm.
+~~~text
+question:đủ sẵn sàng chạy không? ->entry gaps
+question:sửa có ổn không? ->retest/regression evidence
+question:còn rủi ro gì? ->coverage+lỗi+not-run
+Mỗi metric có definition, owner và tần suất.
+~~~
+
+### Chống tối ưu lệch mục tiêu
+Nếu thưởng số case, nhóm có thể tách case nhỏ không thêm giá trị. Review metric với hành vi nó khuyến khích, kết hợp bằng chứng định tính và công khai giới hạn dữ liệu.
+
+PRACTICE: Thiết kế dashboard sáu metric cho release giả. Với mỗi metric ghi câu hỏi, mẫu số, nguồn, giới hạn và hành động; phân tích một ví dụ tỷ lệ pass tăng nhưng rủi ro chưa giảm.
+Q: Pass rate tăng có luôn nghĩa release an toàn hơn không?
++ Không
+- Có luôn
+- Có khi gần100%
+Q: Defect count dùng so năng suất cá nhân có vấn đề gì?
++ Khác phạm vi/rủi ro và có thể khuyến khích hành vi sai
+- Không có vấn đề
+- Càng nhiều bug luôn càng tốt
+
+## LESSON test-management-09 | Giám sát tiến độ và điều chỉnh
+
+### Theo dõi để hành động kịp
+Mỗi checkpoint so phạm vi đã thiết kế, thực thi, lỗi, blocked và capacity với plan. Không chỉ báo chậm; phải biết phần nào đang tạo nút thắt và quyết định nào cần người xử lý.
+
+### Control có lựa chọn và hậu quả
+Nếu lỗi quota chặn phần lớn ca, ưu tiên sửa và kiểm vùng độc lập thay vì bắt tester tiếp tục bước không có ý nghĩa. Đổi thứ tự hoặc scope cần ghi tác động coverage và retest.
+~~~text
+observation:8 case quota blocked bởi BUG7
+optionA:sửa trước, đổi sang review quyền
+optionB:build tạm có giới hạn để kiểm vùng khác
+trade-off:không nhận quota đã kiểm trước bản sửa
+owner và mốc cập nhật được ghi.
+~~~
+
+### Backlog lỗi là luồng công việc
+Xem số vào, được triage, được sửa, chờ retest và tuổi. Nếu nút thắt nằm retest, cần giải capacity/fixture hoặc ưu tiên; đóng lỗi không kiểm để giảm backlog làm mất bằng chứng.
+~~~text
+new ->triaged ->in progress ->fixed ->verified
+WIP vàage theo từng bước
+fixed không đồng nghĩa verified
+blocked có lý do, owner và hành động tiếp
+Số lượng đi cùng mức tác động.
+~~~
+
+### Forecast cập nhật từ dữ liệu mới
+Dùng throughput và rủi ro thực tế để dự báo phần còn lại, có khoảng và giả định. Khi scope đổi, không so tiến độ phần trăm cũ mà không điều chỉnh mẫu số.
+~~~text
+remaining:12 case +3retest +2question
+capacity:hai người nhưng chỉ 1lab slot
+forecast:phụ thuộc BUG7 và fixtureLAB3
+report:ngày dự kiến theo kịch bản, không chắc tuyệt đối
+~~~
+
+### Escalation phục vụ tháo gỡ
+Nêu vấn đề, tác động, lựa chọn, đề xuất và thời điểm cần quyết định. Không chuyển lỗi lên cấp trên chỉ để quy trách nhiệm; giữ nhật ký quyết định để nhóm biết vì sao plan đổi.
+
+PRACTICE: Dùng bảng tiến độ giả ba ngày, phân tích một bottleneck và ba control actions. Nộp forecast có giả định, coverage impact và một escalation ngắn có đề nghị cụ thể.
+Q: Monitoring cung cấp gì cho test control?
++ Thực tế, độ lệch và evidence cần hành động
+- Chỉ bảng đẹp
+- Quyết định tự động mọi thứ
+Q: Nếu backlog lỗi tăng nhanh hơn retest nên làm gì?
++ Phân tích tác động và điều chỉnh ưu tiên/năng lực
+- Tự đóng lỗi
+- Chỉ tăng số report
+
+## LESSON test-management-10 | Go/no-go theo tiêu chí đã định
+
+### Go/no-go là đánh giá bằng chứng
+Trước phát hành, xem gate đã chốt, coverage rủi ro, lỗi mở, gap môi trường và khả năng phục hồi. QA đưa kiến nghị, người có thẩm quyền quyết định chấp nhận rủi ro theo quy trình.
+
+### Gate cần định nghĩa trước kết quả
+Ví dụ lab không cho phát hành khi còn lỗi khác chủ hoặc trùng hoàn điểm. Chốt mức lỗi, ca bắt buộc và readiness rollback trước khi chạy để tránh dời cột gôn cho mọi thứ xanh.
+~~~text
+gateLab:không còn lỗi quyền/điểm mức cao chưa xử lý
+critical flows có evidence trên build nhận
+blocked/not-run được đánh giá rủi ro
+rollback/recovery đã có kế hoạch phù hợp
+Đây là tiêu chí nội bộ giả định, không phải chuẩn mọi sản phẩm.
+~~~
+
+### Ngoại lệ không sửa sự thật
+Có thể phát hành giới hạn tính năng nếu người có trách nhiệm chấp nhận gap. Ghi tiêu chí chưa đạt, lý do, biện pháp giảm, owner và điều kiện theo dõi, không đổi case chưa chạy thành pass.
+~~~text
+exception:X7 notification chưa có thiết bị thật
+impact:đích mở/preview chưa xác nhận
+mitigation:tắt tính năng trong phạm vi release nếu phù hợp
+decision:owner được giao ghi nhận
+follow-up:mốc kiểm bổ sung và điều kiện dừng
+~~~
+
+### No-go cũng cần hướng đi
+Đề nghị sửa blocker, chạy retest và regression nào, cần môi trường gì, và checkpoint kế tiếp. Một chữ không phát hành thiếu điều kiện đổi quyết định sẽ không giúp nhóm tiến triển.
+~~~text
+blocking:BUG7 refund lặp
+next:fixLAB4 ->retest retry ->regression điểm/quota
+evidence needed:before/after theo id và build
+review lại:không chốt ngày nếu phụ thuộc chưa rõ
+~~~
+
+### Không lấy một lượt xanh làm cam kết
+Báo phạm vi và khoảng trống của bằng chứng. Giám sát sau phát hành có thể giảm hậu quả nhưng không thay mọi kiểm trước đó; quyết định cần hiểu rủi ro còn lại.
+
+PRACTICE: Tổ chức go/no-go giả với ba lựa chọn:hoãn, giảm tính năng, chấp nhận ngoại lệ. Nộp gate, evidence, rủi ro và người quyết định, không thực hiện phát hành.
+Q: Go/no-go cần dựa trên gì?
++ Tiêu chí đã định, evidence và rủi ro còn lại
+- Chỉ deadline
+- Chỉ mọi smoke xanh
+Q: Chấp nhận ngoại lệ exit criteria có biến nó thành đạt không?
++ Không
+- Có nếu PM đồng ý
+- Có nếu bỏ cột
+
+## LESSON test-management-11 | Báo cáo lãnh đạo và thông điệp rủi ro
+
+### Thông điệp bắt đầu từ quyết định cần
+Lãnh đạo cần biết release sẵn sàng ở phạm vi nào, rủi ro gì và cần chọn gì. Viết kết luận có căn cứ trước, chi tiết log ở phụ lục; không bắt người nhận tự ghép hàng trăm dòng số liệu.
+
+### Một status report đủ ngữ cảnh
+Nêu build, scope, môi trường, kết quả theo rủi ro, lỗi mở, gap và hành động. Số liệu có timestamp và definition; đừng trộn kết quả build cũ vào trạng thái build nhận mà không ghi.
+~~~text
+build:LAB4, scope đăng ký/hủy
+critical risks:quyền đạt, quota đạt, refund còn BUG7
+execution:pass18, fail1, blocked2, not-run3
+recommend:no-go cho refund hiện tại
+need:fix+slot retest+review lại evidence
+~~~
+
+### Quan sát, ước lượng và giả thuyết tách rõ
+Observed là duplicate có hai id, estimated là thêm nửa ngày retest, hypothesis là race worker. Nêu nguồn và mức chắc chắn để người quyết định không hiểu dự báo là sự thật đã được kiểm.
+~~~text
+observed:2 record cho 1requestId trongfixtureLAB7
+estimate:retest theo phạm vi hiện tại, có khoảng
+hypothesis:chưa xác nhận cơ chế gây trùng
+question:rule refund sau chốt còn chờ BA
+~~~
+
+### Lựa chọn đi cùng đánh đổi
+Đưa hai hoặc ba phương án khả thi, mỗi phương án có scope, thời gian phụ thuộc và rủi ro. Không hứa thời điểm tuyệt đối khi fix chưa xong hoặc môi trường chưa cấp.
+~~~text
+A hoãn:giữ scope, chờ fix và evidence
+B tắt refund:giảm chức năng, cần kiểm cấu hình/luồng
+C nhận rủi ro:phải có owner, giám sát và điều kiện dừng
+Đề xuất dựa tác động và khả năng giảm rủi ro.
+~~~
+
+### Review thông điệp trước gửi
+Kiểm số liệu, truy evidence, che dữ liệu quyền và giữ người nhận đúng phạm vi. Trong bài học chỉ soạn report giả, không gửi ra ngoài hoặc đưa thông tin khách hàng vào mẫu.
+
+PRACTICE: Viết status report tối đa một trang và phụ lục evidence cho release giả. Có quyết định cần, ba lựa chọn, độ chắc chắn và gap; kiểm hai số liệu dễ bị hiểu sai.
+Q: Báo lãnh đạo hiệu quả nên ưu tiên gì?
++ Quyết định cần, thông điệp rủi ro và bằng chứng chính
+- Mọi dòng log
+- Chỉ tỷ lệ xanh
+Q: Khi số liệu chưa chắc nên viết gì?
++ Nêu mức chắc chắn, nguồn và điều còn thiếu
+- Khẳng định để báo cáo mạnh
+- Xóa số liệu bất lợi
+
+## LESSON test-management-12 | Làm việc với BA, Dev và người điều phối
+
+### Phối hợp từ ví dụ thay vì vai đối đầu
+BA, Dev, QA và người điều phối có mối quan tâm khác nhau. Dùng dữ liệu và ví dụ chung để chốt expected, phụ thuộc và deadline; không dùng số đông hoặc code hiện tại để thay quyết định nghiệp vụ.
+
+### Bất đồng expected có đường xử lý
+Ghi hai cách hiểu, nguồn và tác động test/implementation, đưa đúng owner quyết định. Kết quả được version và cập nhật testware, tránh cùng một câu hỏi lặp ở nhiều chat riêng.
+~~~text
+issue:18:00 có được refund không?
+sourceA:trước 18:00; sourceB:đến 18:00
+impact:biên giờ và điểm
+owner:nghiệp vụ được giao
+decision:CANCEL-LAB4, áp từ build LAB4
+~~~
+
+### Handover có đầu vào và điều kiện nhận
+Khi Dev báo fixed, cần build, phạm vi sửa, fixture và gợi ý impact, không chỉ một tin xong. QA trả retest/regression evidence và trạng thái, nêu blocked nếu chưa có điều kiện.
+~~~text
+Dev ->QA:build, fix summary, ảnh hưởng, setup
+QA ->Dev:expected/actual, fixture, logs minimal
+QA ->release:coverage, risk, gap, kiến nghị
+Owner nhận xác nhận việc tiếp theo và mốc cập nhật.
+~~~
+
+### Nhịp trao đổi theo nhu cầu
+Triage nhanh cho blocker, review định kỳ cho plan và async update cho số liệu có thể đọc. Meeting phải tạo quyết định hoặc tháo gỡ, không thêm nghi thức khi chưa có thông tin cần trao đổi.
+~~~text
+blocker:hẹn triage có owner và evidence
+plan change:review scope/effort/risk
+status:async report có timestamp
+open question:ghi đầu mối, trạng thái và hạn cần chốt
+~~~
+
+### Ghi lại để tránh kiến thức chỉ ở một người
+Decision log, fixture manifest và report giúp người mới nhận việc. Giữ ngắn, có link đúng nội dung và version; không đổ toàn lịch sử chat thành tài liệu không ai đọc.
+
+PRACTICE: Mô phỏng bất đồng refund và handover bản sửa. Nộp decision log, RACI đơn giản, hai thông điệp bàn giao và lịch trao đổi có mục tiêu; không gửi tin thật.
+Q: Bất đồng BA/Dev/QA về expected nên xử lý thế nào?
++ Đưa ví dụ và nguồn, nhờ người có thẩm quyền chốt
+- Theo số người đồng ý
+- Theo code hiện tại
+Q: Handover tốt cần gì?
++ Nhiệm vụ, đầu ra, trạng thái, phụ thuộc và owner
+- Chỉ nhắn xong rồi
+- Một ảnh không ngữ cảnh
+
+## LESSON test-management-13 | Dự án: kế hoạch phát hành có đánh đổi
+
+### Dự án release có nguồn lực hữu hạn
+Rìa Nếp có mười ngày giả, hai QA, một lab slot và rule refund chưa chốt. Người học phải lập kế hoạch, quản phụ thuộc, cập nhật khi bug phát sinh và kiến nghị release theo evidence, không chỉ điền template.
+
+### Gói đầu vào và thay đổi được cài chủ đích
+Dữ liệu giả có sáu quy tắc, tám rủi ro và capacity/skill cụ thể. Giữa bài đưa thêm bug quyền và lab trễ để đánh giá test control, không sửa plan sau cùng như chưa từng có rủi ro.
+~~~text
+day1:basisLAB3, estimate và assumptions
+day3:lab trễ1 ngày
+day5:BUG quyền mức cao xuất hiện
+day7:refund rule đổi theo quyết định
+day10:review evidence vàgo/no-go giả
+~~~
+
+### Sản phẩm công việc phải nối được
+Plan, risk register, estimate, lịch, traceability, metric, decision log và report dùng cùng id/build. Mỗi điều chỉnh nêu lý do, coverage impact và owner; không cần nhiều biểu mẫu trùng nội dung.
+~~~text
+risk ->test scope ->task ->owner ->checkpoint
+requirement ->case ->run ->result ->evidence
+change ->impact ->decision ->updated plan
+release report ->gap/residual risk ->owner chấp nhận
+~~~
+
+### Nghiệm thu bằng kịch bản đánh đổi
+Cho ba lựa chọn khi không đủ capacity, đánh giá hậu quả lên rủi ro và evidence. Nếu chỉ mô phỏng, ghi dữ liệu/kết quả giả, không gọi đã chạy app hoặc đã phát hành thật.
+
+### Bàn giao để người khác tiếp tục
+Nộp một gói ngắn nhất vẫn đủ hiểu, thực hiện buổi review giả với câu hỏi phản biện. Người nhận phải biết việc đã xong, còn mở, điều kiện đổi quyết định và cách truy bằng chứng.
+~~~text
+accept:scope/ngoại lệ minh bạch
+accept:estimate và lịch có giả định
+accept:control action có lý do/evidence
+accept:report không giấu blocked/not-run
+accept:quyết định giả có owner và rủi ro còn lại
+~~~
+
+PRACTICE: Bàn giao test management pack đầy đủ cho release giả, mô phỏng ba thay đổi và hai lần review. Có plan, risk, estimate, lịch, coverage, metric, decision log vàgo/no-go với đánh đổi truy được.
+Q: Dự án release có budget thiếu cần làm gì?
++ Đề xuất lựa chọn và rủi ro đánh đổi
+- Bỏ ca khó không báo
+- Ghi mọi thứ đạt
+Q: Nghiệm thu test plan dự án cần gì?
++ Kế hoạch, evidence, điều chỉnh và quyết định truy được
+- Chỉ file đúng mẫu
+- Chỉ đủ dòng
+
+## LESSON test-management-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Cần hiểu quyết định nào cần bằng chứng và hậu quả lỗi, để chọn mức, loại, kỹ thuật và nguồn lực phù hợp.
+2. Plan giải thích cách đạt mục tiêu và điều kiện cần, lịch chỉ là một thành phần.
+3. Thay đổi đầu vào có thể đổi ước lượng, cần dữ liệu thực để cập nhật và giải thích.
+4. Điểm rủi ro là mô hình hỗ trợ quyết định, phải nêu căn cứ và cập nhật theo evidence.
+
+### Dữ liệu và điều kiện biên
+5. Tách việc có thể làm song song và đường găng để điều chỉnh thực tế, không chỉ dời mọi ngày giống nhau.
+6. Phân công cần phù hợp rủi ro, đào tạo và khả năng review, không coi mọi giờ công có thể thay thế ngang nhau.
+7. Liên kết phải có chất lượng, oracle đúng và evidence, không suy đủ coverage từ số link hình thức.
+8. Tập case, mức rủi ro, blocked và độ nhạy có thể thay đổi, cần diễn giải theo ngữ cảnh.
+
+### Tính đúng và cách điều tra
+9. Control chọn điều chỉnh phạm vi, ưu tiên, nguồn lực hoặc kế hoạch có review dựa thông tin theo dõi.
+10. Quyết định có trách nhiệm xem lỗi mở, coverage, gap, phục hồi và ngoại lệ, công khai giới hạn bằng chứng.
+11. Người quyết định cần hiểu tác động, lựa chọn, giới hạn và việc cần làm tiếp, có phụ lục để truy evidence.
+12. Quyết định nghiệp vụ cần đúng owner, được ghi version và cập nhật testware.
+
+### Rủi ro và lựa chọn phương án
+13. Quản lý kiểm không tạo bằng chứng từ thiếu thời gian; cần ưu tiên minh bạch và người chấp nhận rủi ro.
+14. Không sẵn sàng có thể làm kết quả vô nghĩa; ngoại lệ cần đánh giá và quyết định rõ.
+15. Thiếu lỗi có thể do ít kiểm hoặc thay đổi mới; rủi ro phải xét tài sản, tác động và độ không chắc.
+16. Nhóm cùng chịu chất lượng nhưng kỹ năng thiết kế kiểm, oracle và điều tra vẫn cần được tổ chức rõ.
+
+### Dự án, bằng chứng và bàn giao
+17. Metric đơn lẻ có thể bị tối ưu lệch mục tiêu; dùng để học chất lượng và quyết định thay vì xếp hạng máy móc.
+18. Ghi tiêu chí chưa đạt, rủi ro, lý do và người quyết định; không sửa sự thật kiểm thử.
+19. Người nhận phải hiểu điều đã làm, còn mở, cách tái hiện và trách nhiệm tiếp theo.
+20. Plan sống phải phản ánh thực tế và thay đổi có lý do, không chỉ tài liệu đầu kỳ.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Chiến lược kiểm thử nên bắt đầu từ gì?
++ Mục tiêu, bối cảnh và rủi ro sản phẩm
+- Một danh sách công cụ
+- Số case cố định mọi dự án
+Q: Test plan khác bản lịch đơn thuần ở đâu?
++ Còn có mục tiêu, phạm vi, cách kiểm, nguồn lực và tiêu chí
+- Chỉ nhiều trang hơn
+- Chỉ đổi tên cột
+Q: Ước lượng effort cần công khai gì?
++ Giả định, phạm vi, khoảng và bất định
+- Chỉ một con số chính xác tuyệt đối
+- Chỉ ngày đẹp
+Q: Ưu tiên rủi ro sản phẩm xét gì?
++ Khả năng, tác động và bối cảnh
+- Chỉ module nhiều dòng
+- Chỉ yêu cầu của người nói to
+Q: Đường phụ thuộc môi trường trễ ảnh hưởng gì?
++ Có thể chặn thực thi dù effort thiết kế còn khả dụng
+- Mọi việc phải dừng ngay
+- Không ảnh hưởng lịch
+Q: Ma trận kỹ năng giúp gì?
++ Thấy khả năng, phụ thuộc cá nhân và nhu cầu hỗ trợ
+- Xếp hạng phẩm chất con người
+- Chỉ đếm số người
+Q: Traceability có giá trị khi nào?
++ Nối nội dung đúng và chỉ ra khoảng trống
+- Chỉ có 100% hàng được link
+- Chỉ dùng màu
+Q: Pass rate tăng có luôn nghĩa release an toàn hơn không?
++ Không
+- Có luôn
+- Có khi gần100%
+Q: Monitoring cung cấp gì cho test control?
++ Thực tế, độ lệch và evidence cần hành động
+- Chỉ bảng đẹp
+- Quyết định tự động mọi thứ
+Q: Go/no-go cần dựa trên gì?
++ Tiêu chí đã định, evidence và rủi ro còn lại
+- Chỉ deadline
+- Chỉ mọi smoke xanh
+Q: Báo lãnh đạo hiệu quả nên ưu tiên gì?
++ Quyết định cần, thông điệp rủi ro và bằng chứng chính
+- Mọi dòng log
+- Chỉ tỷ lệ xanh
+Q: Bất đồng BA/Dev/QA về expected nên xử lý thế nào?
++ Đưa ví dụ và nguồn, nhờ người có thẩm quyền chốt
+- Theo số người đồng ý
+- Theo code hiện tại
+Q: Dự án release có budget thiếu cần làm gì?
++ Đề xuất lựa chọn và rủi ro đánh đổi
+- Bỏ ca khó không báo
+- Ghi mọi thứ đạt
+Q: Entry criteria chưa đạt nên làm gì?
++ Đánh giá blocked/rủi ro và xử lý phụ thuộc
+- Tự ghi pass
+- Bỏ mọi setup
+Q: Một vùng ít lỗi lịch sử có thể được bỏ hoàn toàn không?
++ Không thể chỉ dựa thông tin đó
+- Có luôn
+- Có nếu UI đơn giản
+Q: Whole-team quality có loại bỏ QA chuyên môn không?
++ Không
+- Có hoàn toàn
+- Chỉ cần PM
+Q: Defect count dùng so năng suất cá nhân có vấn đề gì?
++ Khác phạm vi/rủi ro và có thể khuyến khích hành vi sai
+- Không có vấn đề
+- Càng nhiều bug luôn càng tốt
+Q: Chấp nhận ngoại lệ exit criteria có biến nó thành đạt không?
++ Không
+- Có nếu PM đồng ý
+- Có nếu bỏ cột
+Q: Handover tốt cần gì?
++ Nhiệm vụ, đầu ra, trạng thái, phụ thuộc và owner
+- Chỉ nhắn xong rồi
+- Một ảnh không ngữ cảnh
+Q: Nghiệm thu test plan dự án cần gì?
++ Kế hoạch, evidence, điều chỉnh và quyết định truy được
+- Chỉ file đúng mẫu
+- Chỉ đủ dòng

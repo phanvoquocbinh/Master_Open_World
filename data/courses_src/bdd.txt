@@ -4,7 +4,7 @@ icon: 🥒
 floor: 3
 room: 303
 level: Cơ bản → Trung bình
-hours: 5
+hours: 28
 summary: Hiểu BDD, viết kịch bản Gherkin rõ ràng mà cả đội cùng đọc được, rồi biến chúng thành test tự động chạy thật bằng playwright-bdd và Cucumber.
 
 ## LESSON bdd-01 | BDD là gì và vì sao tester nên biết?
@@ -22,7 +22,7 @@ Trước khi code một tính năng, ba vai trò ngồi lại 15–30 phút:
 • Product Owner / BA: "Chúng ta cần gì và vì sao?" (góc nhìn nghiệp vụ).
 • Developer: "Làm thế nào, có giới hạn kỹ thuật gì?" (góc nhìn kỹ thuật).
 • Tester: "Nếu... thì sao? Trường hợp xấu là gì?" (góc nhìn rủi ro).
-Kết quả buổi họp là danh sách ví dụ, ví dụ cho tính năng TodoMVC:
+Kết quả buổi họp là danh sách ví dụ, ví dụ cho tính năng Todo Lab tự viết:
 • Thêm việc "Mua sữa" thì danh sách có 1 việc.
 • Gõ toàn dấu cách rồi Enter thì không thêm việc nào.
 • Hoàn thành 1 trong 2 việc thì bộ đếm còn "1 item left".
@@ -30,14 +30,6 @@ Tester đóng vai trò quan trọng nhất ở câu hỏi "nếu... thì sao?".
 
 ### Một kịch bản Gherkin đầu tiên
 Các ví dụ ở trên được viết lại bằng Gherkin, lưu trong file có đuôi .feature:
-~~~text
-Feature: Quản lý danh sách việc cần làm
-
-  Scenario: Thêm một việc mới
-    Given tôi đang ở trang TodoMVC
-    When tôi thêm việc "Mua sữa"
-    Then danh sách có 1 việc
-~~~
 Giải thích từng dòng:
 • Feature: tên tính năng, giống tên chương trong sách.
 • Scenario: một tình huống cụ thể, giống một ví dụ trong chương.
@@ -45,10 +37,22 @@ Giải thích từng dòng:
 • When (Khi): hành động người dùng làm.
 • Then (Thì): kết quả mong đợi, đây là phần kiểm tra.
 Từ khóa (Feature, Scenario, Given...) viết bằng tiếng Anh; phần câu phía sau bạn viết tiếng Việt thoải mái.
+~~~text
+Feature: Quản lý danh sách việc cần làm
+
+  Scenario: Thêm một việc mới
+    Given tôi đang ở trang Todo Lab tự viết
+    When tôi thêm việc "Mua sữa"
+    Then danh sách có 1 việc
+~~~
 
 ### Từ yêu cầu mơ hồ đến ví dụ cụ thể
 Yêu cầu ban đầu (mơ hồ): "Người dùng có thể xóa các việc đã hoàn thành."
 Tester đặt câu hỏi để có ví dụ:
+Giải thích:
+• Mỗi cặp hỏi đáp trở thành một Scenario sau này.
+• Kỹ thuật này gọi là Example Mapping: quy tắc (rule) đi kèm ví dụ (example), câu hỏi chưa ai trả lời được thì ghi lại để hỏi tiếp.
+• Phát hiện chỗ mơ hồ ở bước này rẻ hơn rất nhiều so với phát hiện khi code đã xong.
 ~~~text
 Hỏi: Nút xóa có hiện khi chưa có việc nào hoàn thành không?
 Đáp: Không, nút "Clear completed" chỉ hiện khi có ít nhất 1 việc hoàn thành.
@@ -59,10 +63,6 @@ Hỏi: Có 3 việc, hoàn thành 2 rồi bấm xóa thì còn gì?
 Hỏi: Xóa xong, bộ đếm hiển thị thế nào?
 Đáp: "1 item left".
 ~~~
-Giải thích:
-• Mỗi cặp hỏi đáp trở thành một Scenario sau này.
-• Kỹ thuật này gọi là Example Mapping: quy tắc (rule) đi kèm ví dụ (example), câu hỏi chưa ai trả lời được thì ghi lại để hỏi tiếp.
-• Phát hiện chỗ mơ hồ ở bước này rẻ hơn rất nhiều so với phát hiện khi code đã xong.
 
 ### BDD KHÔNG phải là gì
 • Không phải chỉ là "cài Cucumber". Dùng công cụ mà không có trao đổi giữa ba vai trò thì chỉ là test UI viết dài dòng hơn.
@@ -71,7 +71,7 @@ Giải thích:
 • Không thay thế unit test hay API test. BDD là một lớp trong chiến lược kiểm thử.
 Khi nào BDD đáng dùng: đội có PO/BA tham gia, nghiệp vụ phức tạp, cần tài liệu yêu cầu luôn cập nhật.
 
-PRACTICE: Chọn tính năng "lọc việc theo trạng thái" (All / Active / Completed) của TodoMVC. Viết 3 câu hỏi kiểu "nếu... thì sao?" và 3 ví dụ cụ thể tương ứng, sau đó viết 1 Scenario Gherkin cho ví dụ quan trọng nhất.
+PRACTICE: Chọn tính năng "lọc việc theo trạng thái" (All / Active / Completed) của Todo Lab tự viết. Viết 3 câu hỏi kiểu "nếu... thì sao?" và 3 ví dụ cụ thể tương ứng, sau đó viết 1 Scenario Gherkin cho ví dụ quan trọng nhất.
 Q: Trong Gherkin, từ khóa nào mô tả kết quả mong đợi?
 - Given
 - When
@@ -88,28 +88,33 @@ Q: Ý nào mô tả đúng BDD?
 ## LESSON bdd-02 | Cú pháp Gherkin cơ bản
 
 ### Cấu trúc một file .feature
-~~~text
-Feature: Đánh dấu việc đã hoàn thành
-  Là người dùng TodoMVC
-  Tôi muốn đánh dấu việc đã làm xong
-  Để biết còn bao nhiêu việc phải làm
-
-  Scenario: Hoàn thành một việc
-    Given tôi đang ở trang TodoMVC
-    And tôi đã thêm việc "Mua sữa"
-    When tôi đánh dấu việc "Mua sữa" là hoàn thành
-    Then bộ đếm hiển thị "0 items left"
-~~~
 Giải thích từng dòng:
 • Feature: tên tính năng, mỗi file chỉ có MỘT Feature.
 • 3 dòng ngay dưới Feature là phần mô tả tự do, thường theo mẫu "Là... Tôi muốn... Để...". Gherkin không chạy phần này, chỉ để người đọc hiểu mục đích.
 • Scenario: tên tình huống, nên mô tả kết quả hoặc quy tắc nghiệp vụ.
 • Các bước thụt vào 4 dấu cách (hoặc 2, miễn thống nhất). Thụt lề giúp dễ đọc, không bắt buộc về cú pháp.
+~~~text
+Feature: Đánh dấu việc đã hoàn thành
+  Là người dùng Todo Lab tự viết
+  Tôi muốn đánh dấu việc đã làm xong
+  Để biết còn bao nhiêu việc phải làm
+
+  Scenario: Hoàn thành một việc
+    Given tôi đang ở trang Todo Lab tự viết
+    And tôi đã thêm việc "Mua sữa"
+    When tôi đánh dấu việc "Mua sữa" là hoàn thành
+    Then bộ đếm hiển thị "0 items left"
+~~~
 
 ### And, But và quy tắc "mỗi phần một nhiệm vụ"
+Giải thích từng dòng:
+• And: nối thêm một bước cùng loại với bước ngay trên (Given thêm, Then thêm...).
+• But: giống And nhưng mang nghĩa phủ định, thường dùng ở phần Then.
+• Thứ tự chuẩn: Given (bối cảnh) → When (hành động) → Then (kết quả).
+• Quy tắc vàng: mỗi Scenario nên chỉ có MỘT khối When. Nếu thấy When... Then... When... Then..., hãy tách thành 2 Scenario.
 ~~~text
   Scenario: Xóa các việc đã hoàn thành
-    Given tôi đang ở trang TodoMVC
+    Given tôi đang ở trang Todo Lab tự viết
     And tôi đã thêm việc "Mua sữa"
     And tôi đã thêm việc "Đi chợ"
     And việc "Mua sữa" đã hoàn thành
@@ -117,59 +122,54 @@ Giải thích từng dòng:
     Then danh sách chỉ còn việc "Đi chợ"
     But tôi không còn thấy việc "Mua sữa"
 ~~~
-Giải thích từng dòng:
-• And: nối thêm một bước cùng loại với bước ngay trên (Given thêm, Then thêm...).
-• But: giống And nhưng mang nghĩa phủ định, thường dùng ở phần Then.
-• Thứ tự chuẩn: Given (bối cảnh) → When (hành động) → Then (kết quả).
-• Quy tắc vàng: mỗi Scenario nên chỉ có MỘT khối When. Nếu thấy When... Then... When... Then..., hãy tách thành 2 Scenario.
 
 ### Ghi chú, dòng trống và ký hiệu *
+Giải thích từng dòng:
+• Dòng bắt đầu bằng # là ghi chú (comment), dùng để nhắc việc, không ảnh hưởng test.
+• Dấu * có thể thay cho Given/When/Then/And khi liệt kê, nhưng người mới nên dùng từ khóa rõ ràng.
+• Dòng trống chỉ để dễ nhìn.
+Lưu ý: từ khóa Given/When/Then chỉ để người đọc hiểu. Khi máy tìm code tương ứng, nó so khớp phần câu phía sau.
 ~~~text
 # Đây là dòng ghi chú, Gherkin bỏ qua
 Feature: Bộ đếm việc
 
   # TODO: hỏi PO về số nhiều "items"
   Scenario: Bộ đếm với 2 việc
-    Given tôi đang ở trang TodoMVC
+    Given tôi đang ở trang Todo Lab tự viết
     * tôi đã thêm việc "A"
     * tôi đã thêm việc "B"
     Then bộ đếm hiển thị "2 items left"
 ~~~
-Giải thích từng dòng:
-• Dòng bắt đầu bằng # là ghi chú (comment), dùng để nhắc việc, không ảnh hưởng test.
-• Dấu * có thể thay cho Given/When/Then/And khi liệt kê, nhưng người mới nên dùng từ khóa rõ ràng.
-• Dòng trống chỉ để dễ nhìn.
-Lưu ý: từ khóa Given/When/Then chỉ để người đọc hiểu. Khi máy tìm code tương ứng, nó so khớp phần câu phía sau.
 
 ### Một file chứa nhiều Scenario
+Giải thích từng dòng:
+• Một Feature có thể chứa nhiều Scenario, mỗi cái là một test độc lập.
+• Scenario 1: trường hợp bình thường (happy path).
+• Scenario 2: trường hợp biên, gõ toàn dấu cách. Todo Lab tự viết bỏ qua việc rỗng nên danh sách vẫn trống.
+• Các Scenario không được phụ thuộc nhau: Scenario 2 không được giả định Scenario 1 đã chạy trước.
 ~~~text
 Feature: Thêm việc cần làm
 
   Scenario: Thêm một việc hợp lệ
-    Given tôi đang ở trang TodoMVC
+    Given tôi đang ở trang Todo Lab tự viết
     When tôi thêm việc "Mua sữa"
     Then danh sách có 1 việc
 
   Scenario: Không thêm việc rỗng
-    Given tôi đang ở trang TodoMVC
+    Given tôi đang ở trang Todo Lab tự viết
     When tôi thêm việc "   "
     Then danh sách có 0 việc
 ~~~
-Giải thích từng dòng:
-• Một Feature có thể chứa nhiều Scenario, mỗi cái là một test độc lập.
-• Scenario 1: trường hợp bình thường (happy path).
-• Scenario 2: trường hợp biên, gõ toàn dấu cách. TodoMVC bỏ qua việc rỗng nên danh sách vẫn trống.
-• Các Scenario không được phụ thuộc nhau: Scenario 2 không được giả định Scenario 1 đã chạy trước.
 
 ### Lỗi thường gặp
-~~~text
-Parse error: (3:5): expected: #EOF, #Comment, #BackgroundLine, #TagLine, #ScenarioLine, #RuleLine, #Empty, got 'Given tôi đang ở trang TodoMVC'
-Parse error: (1:1): expected: #EOF, #Language, #TagLine, #FeatureLine, #Comment, #Empty, got 'Feaure: Thêm việc'
-~~~
 • Lỗi 1: viết bước Given ngay dưới Feature mà quên dòng Scenario. Mọi bước phải nằm trong một Scenario (hoặc Background).
 • Lỗi 2: gõ sai từ khóa (Feaure thay vì Feature). Từ khóa phải đúng chính tả và có dấu hai chấm.
 • Lỗi khác: viết "Given:" có dấu hai chấm. Feature: và Scenario: có dấu hai chấm, còn Given/When/Then/And/But thì KHÔNG.
 • Mẹo: cài extension "Cucumber" (Cucumber Official) trong VS Code để có tô màu và báo lỗi cú pháp ngay khi gõ.
+~~~text
+Parse error: (3:5): expected: #EOF, #Comment, #BackgroundLine, #TagLine, #ScenarioLine, #RuleLine, #Empty, got 'Given tôi đang ở trang Todo Lab tự viết'
+Parse error: (1:1): expected: #EOF, #Language, #TagLine, #FeatureLine, #Comment, #Empty, got 'Feaure: Thêm việc'
+~~~
 
 PRACTICE: Viết file features/filter.feature có 1 Feature và 2 Scenario: (1) lọc "Active" chỉ thấy việc chưa xong, (2) lọc "Completed" chỉ thấy việc đã xong. Dùng And cho các bước chuẩn bị, mỗi Scenario chỉ có một When.
 Q: Từ khóa nào CÓ dấu hai chấm ở cuối?
@@ -189,11 +189,15 @@ Q: Dòng bắt đầu bằng dấu # trong file .feature là gì?
 
 ### Background: bước chung cho mọi Scenario
 Khi mọi Scenario đều bắt đầu giống nhau, đưa phần chung vào Background, giống "phần chuẩn bị nguyên liệu" ở đầu công thức nấu ăn.
+Giải thích từng dòng:
+• Background: chạy TRƯỚC mỗi Scenario trong file (không phải chỉ một lần).
+• Chỉ đặt bước Given trong Background, giữ ngắn (dưới 4–5 bước).
+• Mỗi Scenario vẫn đọc hiểu được khi người đọc nhìn Background ở đầu file.
 ~~~text
 Feature: Bộ lọc việc cần làm
 
   Background:
-    Given tôi đang ở trang TodoMVC
+    Given tôi đang ở trang Todo Lab tự viết
     And tôi đã thêm việc "Mua sữa"
     And tôi đã thêm việc "Đi chợ"
 
@@ -207,15 +211,17 @@ Feature: Bộ lọc việc cần làm
     When tôi chọn bộ lọc "Completed"
     Then danh sách chỉ còn việc "Mua sữa"
 ~~~
-Giải thích từng dòng:
-• Background: chạy TRƯỚC mỗi Scenario trong file (không phải chỉ một lần).
-• Chỉ đặt bước Given trong Background, giữ ngắn (dưới 4–5 bước).
-• Mỗi Scenario vẫn đọc hiểu được khi người đọc nhìn Background ở đầu file.
 
 ### Scenario Outline và Examples: một khuôn, nhiều bộ dữ liệu
+Giải thích từng dòng:
+• Scenario Outline: một "khuôn" kịch bản có chỗ trống.
+• <so_luong>, <thong_bao>: chỗ trống, tên phải khớp với tên cột ở dòng đầu của bảng Examples.
+• Examples: bảng dữ liệu, mỗi dòng (trừ dòng tiêu đề) tạo ra MỘT Scenario riêng.
+• Ở đây 3 dòng dữ liệu → 3 test. Đặc biệt có kiểm tra "item" (số ít) và "items" (số nhiều).
+• Cột ngăn cách bằng dấu |, không cần thẳng hàng nhưng thẳng hàng thì dễ đọc.
 ~~~text
   Scenario Outline: Bộ đếm hiển thị đúng số việc còn lại
-    Given tôi đang ở trang TodoMVC
+    Given tôi đang ở trang Todo Lab tự viết
     When tôi thêm <so_luong> việc
     Then bộ đếm hiển thị "<thong_bao>"
 
@@ -225,17 +231,16 @@ Giải thích từng dòng:
       | 2        | 2 items left  |
       | 5        | 5 items left  |
 ~~~
-Giải thích từng dòng:
-• Scenario Outline: một "khuôn" kịch bản có chỗ trống.
-• <so_luong>, <thong_bao>: chỗ trống, tên phải khớp với tên cột ở dòng đầu của bảng Examples.
-• Examples: bảng dữ liệu, mỗi dòng (trừ dòng tiêu đề) tạo ra MỘT Scenario riêng.
-• Ở đây 3 dòng dữ liệu → 3 test. Đặc biệt có kiểm tra "item" (số ít) và "items" (số nhiều).
-• Cột ngăn cách bằng dấu |, không cần thẳng hàng nhưng thẳng hàng thì dễ đọc.
 
 ### Data Table: truyền cả một bảng vào một bước
+Giải thích từng dòng:
+• Bảng nằm NGAY DƯỚI một bước (When tôi thêm các việc sau:) là Data Table của riêng bước đó.
+• Khác Examples: Data Table không nhân bản Scenario, chỉ là dữ liệu đầu vào cho một bước.
+• Dòng đầu (ten_viec) là tiêu đề cột, code sẽ đọc từng dòng bên dưới (bài 7).
+Mẹo nhớ: Examples → nhiều test; Data Table → một test, nhiều dữ liệu.
 ~~~text
   Scenario: Thêm nhiều việc một lúc
-    Given tôi đang ở trang TodoMVC
+    Given tôi đang ở trang Todo Lab tự viết
     When tôi thêm các việc sau:
       | ten_viec |
       | Mua sữa  |
@@ -243,46 +248,41 @@ Giải thích từng dòng:
       | Học bài  |
     Then danh sách có 3 việc
 ~~~
-Giải thích từng dòng:
-• Bảng nằm NGAY DƯỚI một bước (When tôi thêm các việc sau:) là Data Table của riêng bước đó.
-• Khác Examples: Data Table không nhân bản Scenario, chỉ là dữ liệu đầu vào cho một bước.
-• Dòng đầu (ten_viec) là tiêu đề cột, code sẽ đọc từng dòng bên dưới (bài 7).
-Mẹo nhớ: Examples → nhiều test; Data Table → một test, nhiều dữ liệu.
 
 ### Tag: dán nhãn để chọn test cần chạy
-~~~text
-@todo
-Feature: Thêm việc cần làm
-
-  @smoke
-  Scenario: Thêm một việc hợp lệ
-    Given tôi đang ở trang TodoMVC
-    When tôi thêm việc "Mua sữa"
-    Then danh sách có 1 việc
-
-  @regression @edge-case
-  Scenario: Không thêm việc rỗng
-    Given tôi đang ở trang TodoMVC
-    When tôi thêm việc "   "
-    Then danh sách có 0 việc
-~~~
 Giải thích từng dòng:
 • Tag bắt đầu bằng @, đặt ngay trên Feature hoặc Scenario. Một dòng có thể có nhiều tag.
 • @todo trên Feature: mọi Scenario trong file đều thừa hưởng tag này.
 • @smoke: nhóm test nhanh, quan trọng nhất, chạy sau mỗi lần deploy.
 • @regression, @edge-case: nhóm hồi quy và trường hợp biên.
 • Khi chạy, bạn có thể chọn "chỉ chạy @smoke" hoặc "bỏ qua @slow" (bài 7 và bài 8).
+~~~text
+@todo
+Feature: Thêm việc cần làm
+
+  @smoke
+  Scenario: Thêm một việc hợp lệ
+    Given tôi đang ở trang Todo Lab tự viết
+    When tôi thêm việc "Mua sữa"
+    Then danh sách có 1 việc
+
+  @regression @edge-case
+  Scenario: Không thêm việc rỗng
+    Given tôi đang ở trang Todo Lab tự viết
+    When tôi thêm việc "   "
+    Then danh sách có 0 việc
+~~~
 
 ### Lỗi thường gặp
+• Lỗi 1: tên chỗ trống không khớp tên cột (ví dụ <soluong> nhưng cột là so_luong). Viết giống hệt, phân biệt hoa thường.
+• Lỗi 2: một dòng trong bảng có số cột khác các dòng khác (thiếu hoặc thừa dấu |). Đếm lại dấu | trên mỗi dòng.
+• Lỗi 3: dùng Background cho hành động và kiểm tra. Background chỉ chứa Given; hành động và kiểm tra để trong từng Scenario.
+• Quên viết "Examples:" có dấu hai chấm cũng gây lỗi cú pháp.
 ~~~text
 Lỗi: Scenario Outline sinh ra test với chữ "<so_luong>" nguyên văn
 Lỗi: Parse error ... inconsistent cell count within the table
 Lỗi: Background có bước When, Then khiến mọi Scenario khó hiểu
 ~~~
-• Lỗi 1: tên chỗ trống không khớp tên cột (ví dụ <soluong> nhưng cột là so_luong). Viết giống hệt, phân biệt hoa thường.
-• Lỗi 2: một dòng trong bảng có số cột khác các dòng khác (thiếu hoặc thừa dấu |). Đếm lại dấu | trên mỗi dòng.
-• Lỗi 3: dùng Background cho hành động và kiểm tra. Background chỉ chứa Given; hành động và kiểm tra để trong từng Scenario.
-• Quên viết "Examples:" có dấu hai chấm cũng gây lỗi cú pháp.
 
 PRACTICE: Viết một Scenario Outline cho chức năng "đánh dấu hoàn thành" với bảng Examples 3 dòng: tổng số việc, số việc hoàn thành, bộ đếm mong đợi (ví dụ 3 | 1 | 2 items left). Gắn tag @regression cho Scenario Outline đó.
 Q: Bảng Examples có 4 dòng dữ liệu (không tính dòng tiêu đề) sẽ tạo ra bao nhiêu test?
@@ -301,22 +301,28 @@ Q: Data Table khác Examples ở điểm nào?
 ## LESSON bdd-04 | Viết Scenario tốt: khai báo thay vì ra lệnh
 
 ### Kiểu "ra lệnh" (imperative): tránh dùng
+Giải thích vấn đề:
+• Toàn chi tiết kỹ thuật (Chrome, placeholder, class, phím Enter): PO đọc không hiểu, không thấy giá trị nghiệp vụ.
+• Giao diện đổi một chút (đổi class, đổi cách nhập) là phải sửa kịch bản dù nghiệp vụ không đổi.
+• Dài, khó review, khó thấy "quy tắc" đang được kiểm tra là gì.
 ~~~text
   Scenario: Hoàn thành việc
     Given tôi mở trình duyệt Chrome
-    And tôi vào địa chỉ "https://demo.playwright.dev/todomvc"
+    And tôi vào địa chỉ "http://localhost:3131/todomvc"
     When tôi click vào ô input có placeholder "What needs to be done?"
     And tôi gõ "Mua sữa"
     And tôi nhấn phím Enter
     And tôi click vào checkbox có class "toggle" ở dòng 1
     Then phần tử li đầu tiên có class "completed"
 ~~~
-Giải thích vấn đề:
-• Toàn chi tiết kỹ thuật (Chrome, placeholder, class, phím Enter): PO đọc không hiểu, không thấy giá trị nghiệp vụ.
-• Giao diện đổi một chút (đổi class, đổi cách nhập) là phải sửa kịch bản dù nghiệp vụ không đổi.
-• Dài, khó review, khó thấy "quy tắc" đang được kiểm tra là gì.
 
 ### Kiểu "khai báo" (declarative): nên dùng
+Giải thích từng dòng:
+• Given: mô tả trạng thái, không mô tả cách tạo ra trạng thái đó.
+• When: một hành động nghiệp vụ duy nhất, không nói click hay gõ phím.
+• Then: kết quả người dùng quan tâm, không nói class CSS.
+• Chi tiết "làm thế nào" được giấu trong code step definition, nơi dev và tester kỹ thuật bảo trì.
+Câu hỏi kiểm tra: "Nếu đổi từ web sang app di động, kịch bản này có cần sửa không?" Nếu không cần sửa, bạn viết khai báo tốt.
 ~~~text
   Scenario: Việc đã hoàn thành được đánh dấu là xong
     Given tôi có việc "Mua sữa" trong danh sách
@@ -324,14 +330,12 @@ Giải thích vấn đề:
     Then việc "Mua sữa" hiển thị ở trạng thái hoàn thành
     And bộ đếm hiển thị "0 items left"
 ~~~
-Giải thích từng dòng:
-• Given: mô tả trạng thái, không mô tả cách tạo ra trạng thái đó.
-• When: một hành động nghiệp vụ duy nhất, không nói click hay gõ phím.
-• Then: kết quả người dùng quan tâm, không nói class CSS.
-• Chi tiết "làm thế nào" được giấu trong code step definition, nơi dev và tester kỹ thuật bảo trì.
-Câu hỏi kiểm tra: "Nếu đổi từ web sang app di động, kịch bản này có cần sửa không?" Nếu không cần sửa, bạn viết khai báo tốt.
 
 ### Đặt tên Scenario và dùng ngôn ngữ nghiệp vụ
+Giải thích:
+• Tên tốt nói rõ QUY TẮC được kiểm tra, đọc tên là biết test fail nghĩa là gì.
+• Dùng từ ngữ mà đội nghiệp vụ dùng hằng ngày (gọi là "ngôn ngữ chung" của đội). Nếu PO nói "việc", đừng chỗ thì "task", chỗ thì "item", chỗ thì "nhiệm vụ".
+• Tránh từ "kiểm tra", "test", "verify" trong tên: cả file đã là test rồi.
 ~~~text
 Tên kém:
   Scenario: Test 1
@@ -343,12 +347,9 @@ Tên tốt:
   Scenario: Bộ đếm dùng số ít khi chỉ còn một việc
   Scenario: Người dùng bị khóa không đăng nhập được
 ~~~
-Giải thích:
-• Tên tốt nói rõ QUY TẮC được kiểm tra, đọc tên là biết test fail nghĩa là gì.
-• Dùng từ ngữ mà đội nghiệp vụ dùng hằng ngày (gọi là "ngôn ngữ chung" của đội). Nếu PO nói "việc", đừng chỗ thì "task", chỗ thì "item", chỗ thì "nhiệm vụ".
-• Tránh từ "kiểm tra", "test", "verify" trong tên: cả file đã là test rồi.
 
 ### Checklist review một Scenario
+Cách dùng: khi review file .feature của đồng nghiệp (hoặc của chính bạn), đi lần lượt từng ô. Mỗi ô "không" là một góp ý cụ thể.
 ~~~text
 [ ] Có đúng một hành vi / một quy tắc được kiểm tra?
 [ ] Chỉ có một khối When?
@@ -359,7 +360,6 @@ Giải thích:
 [ ] Độc lập: chạy riêng một mình vẫn đúng?
 [ ] Ngắn: khoảng 3 đến 7 bước?
 ~~~
-Cách dùng: khi review file .feature của đồng nghiệp (hoặc của chính bạn), đi lần lượt từng ô. Mỗi ô "không" là một góp ý cụ thể.
 
 ### Lỗi thường gặp khi viết Gherkin
 • Viết Gherkin sau khi code xong, chỉ để "cho có": mất lợi ích trao đổi trước khi làm.
@@ -391,9 +391,15 @@ playwright-bdd là thư viện nối file .feature với Playwright Test:
 • Bước 3: lệnh playwright test chạy các file vừa sinh như test Playwright bình thường.
 Giống phiên dịch viên: bddgen dịch "tiếng người" (Gherkin) sang "tiếng máy" (Playwright).
 Lợi ích: dùng được mọi thứ của Playwright (fixture page, auto-wait, trace, báo cáo HTML, chạy song song).
-Kiểm tra trước: node -v (cần Node.js 18 trở lên, nên dùng bản LTS mới).
+Kiểm tra trước: node -v (cần Node.js 18 trở lên, nên dùng bản LTS mới). Các ví dụ Todo dùng localhost:3131/todomvc;máy chủ lab_ui_fixture.py được cung cấp ởbài1 khóa Playwright vàbài2 Selenium. Fixture tự viết có contract Enter/checkbox/list/count/filter,không phụ thuộc demo công khai. Chỉ nhận test đã chạy khi máy chủ lab đã được dựng và fixture đúng.
 
 ### Bước 1: Tạo dự án và cài thư viện
+Giải thích từng dòng:
+• mkdir, cd: tạo và đi vào thư mục dự án.
+• npm init -y: tạo file package.json với giá trị mặc định (-y là "yes cho tất cả").
+• npm i -D @playwright/test playwright-bdd: cài 2 thư viện, -D nghĩa là thư viện dùng cho phát triển/kiểm thử (devDependencies).
+• npx playwright install chromium: tải trình duyệt Chromium cho Playwright.
+Kết quả mong đợi: thư mục node_modules xuất hiện, package.json có mục devDependencies chứa 2 thư viện trên.
 ~~~bash
 mkdir bdd-hoc
 cd bdd-hoc
@@ -401,14 +407,13 @@ npm init -y
 npm i -D @playwright/test playwright-bdd
 npx playwright install chromium
 ~~~
-Giải thích từng dòng:
-• mkdir, cd: tạo và đi vào thư mục dự án.
-• npm init -y: tạo file package.json với giá trị mặc định (-y là "yes cho tất cả").
-• npm i -D @playwright/test playwright-bdd: cài 2 thư viện, -D nghĩa là thư viện dùng cho phát triển/kiểm thử (devDependencies).
-• npx playwright install chromium: tải trình duyệt Chromium cho Playwright.
-Kết quả mong đợi: thư mục node_modules xuất hiện, package.json có mục devDependencies chứa 2 thư viện trên.
 
 ### Bước 2: Cấu trúc thư mục
+Giải thích từng dòng:
+• features/: chứa các file .feature (kịch bản Gherkin).
+• features/steps/: chứa code cho từng câu bước (step definitions).
+• playwright.config.ts: cấu hình, nơi khai báo cho playwright-bdd biết feature và steps nằm đâu.
+• .features-gen/ sẽ tự xuất hiện sau khi chạy bddgen. Không sửa tay thư mục này và nên thêm vào .gitignore.
 ~~~text
 bdd-hoc/
 ├── features/
@@ -418,13 +423,16 @@ bdd-hoc/
 ├── playwright.config.ts
 └── package.json
 ~~~
-Giải thích từng dòng:
-• features/: chứa các file .feature (kịch bản Gherkin).
-• features/steps/: chứa code cho từng câu bước (step definitions).
-• playwright.config.ts: cấu hình, nơi khai báo cho playwright-bdd biết feature và steps nằm đâu.
-• .features-gen/ sẽ tự xuất hiện sau khi chạy bddgen. Không sửa tay thư mục này và nên thêm vào .gitignore.
 
 ### Bước 3: Viết playwright.config.ts
+Giải thích từng dòng:
+• import defineConfig: hàm tạo cấu hình Playwright bình thường.
+• import defineBddConfig: hàm cấu hình phần BDD.
+• features: 'features/*.feature': mọi file .feature trong thư mục features.
+• steps: 'features/steps/*.ts': mọi file code bước trong features/steps.
+• defineBddConfig trả về đường dẫn thư mục chứa test được sinh ra (.features-gen), ta gán cho testDir.
+• reporter: 'html': tạo báo cáo HTML như Playwright thường.
+• baseURL: địa chỉ gốc, nhờ đó trong step viết page.goto('/todomvc').
 ~~~ts
 import { defineConfig } from '@playwright/test';
 import { defineBddConfig } from 'playwright-bdd';
@@ -438,45 +446,37 @@ export default defineConfig({
   testDir,
   reporter: 'html',
   use: {
-    baseURL: 'https://demo.playwright.dev',
+    baseURL: 'http://localhost:3131',
     trace: 'on-first-retry',
   },
 });
 ~~~
-Giải thích từng dòng:
-• import defineConfig: hàm tạo cấu hình Playwright bình thường.
-• import defineBddConfig: hàm cấu hình phần BDD.
-• features: 'features/*.feature': mọi file .feature trong thư mục features.
-• steps: 'features/steps/*.ts': mọi file code bước trong features/steps.
-• defineBddConfig trả về đường dẫn thư mục chứa test được sinh ra (.features-gen), ta gán cho testDir.
-• reporter: 'html': tạo báo cáo HTML như Playwright thường.
-• baseURL: địa chỉ gốc, nhờ đó trong step viết page.goto('/todomvc').
 
 ### Bước 4: Viết file feature đầu tiên
 File features/todo.feature:
-~~~text
-Feature: Danh sách việc cần làm
-
-  Scenario: Thêm một việc mới
-    Given tôi đang ở trang TodoMVC
-    When tôi thêm việc "Mua sữa"
-    Then danh sách có 1 việc
-~~~
 Giải thích:
 • Đây đúng là kịch bản ở bài 1, giờ ta sẽ cho nó chạy thật.
 • Mỗi câu (bỏ từ khóa Given/When/Then) cần một step definition có câu khớp, ta viết ở bài sau.
 • Chữ trong ngoặc kép "Mua sữa" sẽ trở thành tham số truyền vào code.
 Nếu chạy ngay bây giờ, bddgen sẽ báo thiếu step definitions, và đó là bình thường.
+~~~text
+Feature: Danh sách việc cần làm
+
+  Scenario: Thêm một việc mới
+    Given tôi đang ở trang Todo Lab tự viết
+    When tôi thêm việc "Mua sữa"
+    Then danh sách có 1 việc
+~~~
 
 ### Lỗi thường gặp
+• Lỗi 1: chưa cài thư viện hoặc đang đứng sai thư mục. Chạy npm i -D playwright-bdd trong thư mục dự án.
+• Lỗi 2: chưa chạy bddgen nên .features-gen chưa có test, hoặc đường dẫn features trong config sai. Chạy npx bddgen trước, kiểm tra lại đường dẫn.
+• Lỗi 3: bddgen tìm thấy câu trong .feature nhưng chưa có code tương ứng. Nó in sẵn đoạn code mẫu (snippet) để bạn copy vào file steps. Ta xử lý ở bài 6.
 ~~~text
 Error: Cannot find module 'playwright-bdd'
 Error: No tests found
 Missing step definitions: 3
 ~~~
-• Lỗi 1: chưa cài thư viện hoặc đang đứng sai thư mục. Chạy npm i -D playwright-bdd trong thư mục dự án.
-• Lỗi 2: chưa chạy bddgen nên .features-gen chưa có test, hoặc đường dẫn features trong config sai. Chạy npx bddgen trước, kiểm tra lại đường dẫn.
-• Lỗi 3: bddgen tìm thấy câu trong .feature nhưng chưa có code tương ứng. Nó in sẵn đoạn code mẫu (snippet) để bạn copy vào file steps. Ta xử lý ở bài 6.
 
 PRACTICE: Tạo dự án bdd-hoc theo đúng 4 bước, viết features/todo.feature với 2 Scenario (thêm 1 việc, thêm 2 việc). Chạy npx bddgen và chụp lại thông báo thiếu step definitions cùng các đoạn snippet được gợi ý.
 Q: Lệnh bddgen làm nhiệm vụ gì?
@@ -496,13 +496,14 @@ Q: Có nên sửa tay các file trong .features-gen không?
 
 ### File steps đầu tiên
 File features/steps/todo.steps.ts:
+Slide sau giải thích từng dòng.
 ~~~ts
 import { expect } from '@playwright/test';
 import { createBdd } from 'playwright-bdd';
 
 const { Given, When, Then } = createBdd();
 
-Given('tôi đang ở trang TodoMVC', async ({ page }) => {
+Given('tôi đang ở trang Todo Lab tự viết', async ({ page }) => {
   await page.goto('/todomvc');
 });
 
@@ -516,35 +517,40 @@ Then('danh sách có {int} việc', async ({ page }, count: number) => {
   await expect(page.getByTestId('todo-item')).toHaveCount(count);
 });
 ~~~
-Slide sau giải thích từng dòng.
 
 ### Giải thích từng dòng
 • import { expect }: công cụ kiểm tra của Playwright.
 • import { createBdd }: hàm tạo bộ từ khóa Given/When/Then cho code.
 • const { Given, When, Then } = createBdd(): lấy ra 3 hàm để khai báo bước.
-• Given('tôi đang ở trang TodoMVC', ...): câu này phải KHỚP CHÍNH XÁC với câu trong .feature (phần sau từ khóa).
+• Given('tôi đang ở trang Todo Lab tự viết', ...): câu này phải KHỚP CHÍNH XÁC với câu trong .feature (phần sau từ khóa).
 • async ({ page }) => ...: giống test Playwright, xin fixture page để điều khiển trình duyệt.
-• page.goto('/todomvc'): nhờ baseURL trong config, địa chỉ đầy đủ là https://demo.playwright.dev/todomvc.
+• page.goto('/todomvc'): nhờ baseURL trong config, địa chỉ đầy đủ là http://localhost:3131/todomvc.
 • {string}: chỗ trống nhận một chuỗi trong ngoặc kép. "Mua sữa" được truyền vào tham số text.
 • {int}: chỗ trống nhận số nguyên. Chữ 1 trong "danh sách có 1 việc" được truyền vào count.
 • toHaveCount(count): kiểm tra số dòng việc trên trang đúng bằng count.
 
 ### Chạy: bddgen rồi playwright test
-~~~bash
-npx bddgen
-npx playwright test
-npx playwright show-report
-~~~
 Giải thích từng dòng:
 • npx bddgen: sinh file test từ .feature. Không in lỗi nghĩa là mọi bước đều đã có code.
 • npx playwright test: chạy test đã sinh.
 • npx playwright show-report: mở báo cáo HTML, mỗi Scenario hiện như một test, các bước Given/When/Then hiện rõ bên trong.
 Kết quả mong đợi:
 Running 1 test using 1 worker
-  1 passed (2.8s)
+1 passed (2.8s)
 Trên PowerShell 7 hoặc Git Bash có thể gõ gộp: npx bddgen && npx playwright test
+~~~bash
+npx bddgen
+npx playwright test
+npx playwright show-report
+~~~
 
 ### Cucumber expression: các loại chỗ trống
+Giải thích từng dòng:
+• {int}: số nguyên (1, 25). Còn có {float} cho số thập phân, {word} cho một từ không có dấu cách.
+• for (let i = 1; i <= n; i++): lặp n lần, mỗi lần thêm một việc tên "Việc số 1", "Việc số 2"...
+• Dấu backtick và ${i}: ghép biến vào chuỗi (template string).
+• { name }: viết tắt của { name: name }, tìm link có tên đúng bằng chữ truyền vào (All, Active, Completed).
+• Bước "bộ đếm hiển thị {string}" dùng lại được cho mọi Scenario Outline ở bài 3.
 ~~~ts
 When('tôi thêm {int} việc', async ({ page }, n: number) => {
   const input = page.getByPlaceholder('What needs to be done?');
@@ -562,14 +568,12 @@ Then('bộ đếm hiển thị {string}', async ({ page }, text: string) => {
   await expect(page.getByTestId('todo-count')).toHaveText(text);
 });
 ~~~
-Giải thích từng dòng:
-• {int}: số nguyên (1, 25). Còn có {float} cho số thập phân, {word} cho một từ không có dấu cách.
-• for (let i = 1; i <= n; i++): lặp n lần, mỗi lần thêm một việc tên "Việc số 1", "Việc số 2"...
-• Dấu backtick và ${i}: ghép biến vào chuỗi (template string).
-• { name }: viết tắt của { name: name }, tìm link có tên đúng bằng chữ truyền vào (All, Active, Completed).
-• Bước "bộ đếm hiển thị {string}" dùng lại được cho mọi Scenario Outline ở bài 3.
 
 ### Lỗi thường gặp
+• Lỗi 1: câu trong .feature không khớp code (ở đây .feature gõ thiếu dấu). Sửa cho hai bên giống hệt từng chữ, kể cả dấu tiếng Việt và dấu cách.
+• Lỗi 2: hai step definition cùng khớp một câu (ambiguous). Xóa bản trùng hoặc làm câu cụ thể hơn.
+• Lỗi 3: Windows PowerShell 5 không hiểu &&. Chạy hai lệnh trên hai dòng riêng, hoặc dùng npm script (bài 7).
+• Quên chạy bddgen sau khi sửa .feature: test cũ vẫn chạy, thay đổi của bạn "không có tác dụng". Luôn chạy bddgen trước playwright test.
 ~~~text
 Missing step definitions: 1
 
@@ -581,10 +585,6 @@ Then('danh sach co {int} viec', async ({}) => {
 Error: Multiple step definitions matched for text: "tôi thêm việc "Mua sữa""
 The token '&&' is not a valid statement separator in this version.
 ~~~
-• Lỗi 1: câu trong .feature không khớp code (ở đây .feature gõ thiếu dấu). Sửa cho hai bên giống hệt từng chữ, kể cả dấu tiếng Việt và dấu cách.
-• Lỗi 2: hai step definition cùng khớp một câu (ambiguous). Xóa bản trùng hoặc làm câu cụ thể hơn.
-• Lỗi 3: Windows PowerShell 5 không hiểu &&. Chạy hai lệnh trên hai dòng riêng, hoặc dùng npm script (bài 7).
-• Quên chạy bddgen sau khi sửa .feature: test cũ vẫn chạy, thay đổi của bạn "không có tác dụng". Luôn chạy bddgen trước playwright test.
 
 PRACTICE: Viết đủ step definitions cho file features/filter.feature ở bài 2 (thêm việc, đánh dấu hoàn thành, chọn bộ lọc, kiểm tra danh sách). Chạy npx bddgen rồi npx playwright test cho tới khi mọi Scenario pass, mở báo cáo HTML xem các bước.
 Q: Trong câu 'tôi thêm việc {string}', {string} khớp với phần nào của câu Gherkin?
@@ -603,12 +603,17 @@ Q: Thông báo "Multiple step definitions matched" nghĩa là gì?
 ## LESSON bdd-07 | Scenario Outline, Data Table, tag và báo cáo trong playwright-bdd
 
 ### Chạy Scenario Outline
+Giải thích:
+• Không cần viết thêm code: các bước "tôi thêm {int} việc" và "bộ đếm hiển thị {string}" đã có từ bài 6.
+• Khi bddgen chạy, mỗi dòng Examples thành một test riêng, tên test có kèm dữ liệu dòng đó.
+• Chạy npx bddgen rồi npx playwright test, kết quả mong đợi: 2 passed.
+Đây chính là sức mạnh của việc viết step tổng quát: thêm test mới chỉ bằng thêm dòng dữ liệu.
 ~~~text
 Feature: Bộ đếm việc
 
   @smoke
   Scenario Outline: Bộ đếm hiển thị đúng
-    Given tôi đang ở trang TodoMVC
+    Given tôi đang ở trang Todo Lab tự viết
     When tôi thêm <so_luong> việc
     Then bộ đếm hiển thị "<thong_bao>"
 
@@ -617,14 +622,16 @@ Feature: Bộ đếm việc
       | 1        | 1 item left  |
       | 3        | 3 items left |
 ~~~
-Giải thích:
-• Không cần viết thêm code: các bước "tôi thêm {int} việc" và "bộ đếm hiển thị {string}" đã có từ bài 6.
-• Khi bddgen chạy, mỗi dòng Examples thành một test riêng, tên test có kèm dữ liệu dòng đó.
-• Chạy npx bddgen rồi npx playwright test, kết quả mong đợi: 2 passed.
-Đây chính là sức mạnh của việc viết step tổng quát: thêm test mới chỉ bằng thêm dòng dữ liệu.
 
 ### Đọc Data Table trong code
 Thêm vào file features/steps/todo.steps.ts (gộp dòng import với import có sẵn):
+Giải thích từng dòng:
+• Các dòng bắt đầu bằng // là ghi chú, nhắc lại bảng trong file .feature.
+• import DataTable: kiểu dữ liệu cho bảng.
+• Tham số cuối table: DataTable: playwright-bdd tự đưa bảng vào đây.
+• table.hashes(): biến bảng thành danh sách đối tượng, mỗi dòng là { ten_viec: 'Mua sữa' }, dòng tiêu đề thành tên khóa.
+• row.ten_viec: lấy giá trị cột ten_viec của từng dòng rồi thêm vào danh sách.
+Chú ý: dấu hai chấm cuối câu "tôi thêm các việc sau:" cũng phải khớp.
 ~~~ts
 // Trong .feature:
 //   When tôi thêm các việc sau:
@@ -643,15 +650,15 @@ When('tôi thêm các việc sau:', async ({ page }, table: DataTable) => {
   }
 });
 ~~~
-Giải thích từng dòng:
-• Các dòng bắt đầu bằng // là ghi chú, nhắc lại bảng trong file .feature.
-• import DataTable: kiểu dữ liệu cho bảng.
-• Tham số cuối table: DataTable: playwright-bdd tự đưa bảng vào đây.
-• table.hashes(): biến bảng thành danh sách đối tượng, mỗi dòng là { ten_viec: 'Mua sữa' }, dòng tiêu đề thành tên khóa.
-• row.ten_viec: lấy giá trị cột ten_viec của từng dòng rồi thêm vào danh sách.
-Chú ý: dấu hai chấm cuối câu "tôi thêm các việc sau:" cũng phải khớp.
 
 ### Chạy theo tag và dùng npm script
+Giải thích từng dòng:
+• Đây là phần scripts trong package.json (thêm vào, giữ nguyên các phần khác).
+• "test": gõ npm test sẽ chạy bddgen rồi playwright test. Trong npm script, && hoạt động cả trên Windows.
+• "test:smoke": playwright-bdd chuyển tag Gherkin thành tag Playwright, nên --grep @smoke chỉ chạy Scenario có tag @smoke. Gõ npm run test:smoke.
+• Muốn loại trừ: playwright test --grep-invert @slow.
+• "report": npm run report để mở báo cáo.
+Tag đặc biệt hữu ích: @skip (bỏ qua), @only (chỉ chạy cái này, nhớ xóa sau khi dùng), @fixme.
 ~~~json
 {
   "scripts": {
@@ -661,15 +668,13 @@ Chú ý: dấu hai chấm cuối câu "tôi thêm các việc sau:" cũng phải
   }
 }
 ~~~
-Giải thích từng dòng:
-• Đây là phần scripts trong package.json (thêm vào, giữ nguyên các phần khác).
-• "test": gõ npm test sẽ chạy bddgen rồi playwright test. Trong npm script, && hoạt động cả trên Windows.
-• "test:smoke": playwright-bdd chuyển tag Gherkin thành tag Playwright, nên --grep @smoke chỉ chạy Scenario có tag @smoke. Gõ npm run test:smoke.
-• Muốn loại trừ: playwright test --grep-invert @slow.
-• "report": npm run report để mở báo cáo.
-Tag đặc biệt hữu ích: @skip (bỏ qua), @only (chỉ chạy cái này, nhớ xóa sau khi dùng), @fixme.
 
 ### Báo cáo kiểu Cucumber (tùy chọn)
+Giải thích từng dòng:
+• reporter là một danh sách: có thể bật nhiều báo cáo cùng lúc.
+• ['html']: báo cáo HTML quen thuộc của Playwright (có trace, ảnh chụp).
+• cucumberReporter('html', ...): thêm báo cáo theo phong cách Cucumber, trình bày Feature/Scenario/Step, dễ gửi cho PO đọc.
+• outputFile: nơi lưu file báo cáo. Mở file cucumber-report/index.html bằng trình duyệt.
 ~~~ts
 import { defineConfig } from '@playwright/test';
 import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
@@ -687,21 +692,16 @@ export default defineConfig({
   ],
 });
 ~~~
-Giải thích từng dòng:
-• reporter là một danh sách: có thể bật nhiều báo cáo cùng lúc.
-• ['html']: báo cáo HTML quen thuộc của Playwright (có trace, ảnh chụp).
-• cucumberReporter('html', ...): thêm báo cáo theo phong cách Cucumber, trình bày Feature/Scenario/Step, dễ gửi cho PO đọc.
-• outputFile: nơi lưu file báo cáo. Mở file cucumber-report/index.html bằng trình duyệt.
 
 ### Lỗi thường gặp
+• Lỗi 1: không có Scenario nào mang tag @smoke, hoặc gõ sai tag. Kiểm tra lại tag trong .feature.
+• Lỗi 2: câu trong .feature không có bảng ngay bên dưới (bảng bị thụt sai chỗ hoặc có dòng trống chen giữa). Bảng phải nằm sát dưới bước.
+• Lỗi 3: tên khóa trong code (tenviec) khác tiêu đề cột (ten_viec). Viết giống hệt.
 ~~~text
 Lỗi: npm run test:smoke báo "No tests found"
 TypeError: Cannot read properties of undefined (reading 'hashes')
 Lỗi: tên cột đọc ra undefined (row.tenviec)
 ~~~
-• Lỗi 1: không có Scenario nào mang tag @smoke, hoặc gõ sai tag. Kiểm tra lại tag trong .feature.
-• Lỗi 2: câu trong .feature không có bảng ngay bên dưới (bảng bị thụt sai chỗ hoặc có dòng trống chen giữa). Bảng phải nằm sát dưới bước.
-• Lỗi 3: tên khóa trong code (tenviec) khác tiêu đề cột (ten_viec). Viết giống hệt.
 
 PRACTICE: Thêm vào dự án một Scenario Outline gắn @smoke với 3 dòng Examples và một Scenario dùng Data Table 3 việc. Tạo npm script test:smoke, chạy npm run test:smoke và xác nhận chỉ các test @smoke được chạy.
 Q: Hàm table.hashes() trả về gì?
@@ -725,6 +725,7 @@ Nhiều dự án cũ dùng Cucumber "gốc" (@cucumber/cucumber, chạy bằng l
 • Playwright chỉ được dùng như thư viện điều khiển trình duyệt.
 • Bạn tự lo mở và đóng trình duyệt trong hook Before/After.
 So với playwright-bdd: không có sẵn fixture page, trace và báo cáo HTML của Playwright, nhưng gần với Cucumber ở các ngôn ngữ khác (Java, Ruby).
+Giải thích: tạo dự án, cài Cucumber và Playwright, tải Chromium. File .feature đặt trong thư mục features, code step đặt trong features/steps (Cucumber mặc định tìm cả hai ở đây).
 ~~~bash
 mkdir cucumber-hoc
 cd cucumber-hoc
@@ -732,10 +733,17 @@ npm init -y
 npm i -D @cucumber/cucumber @playwright/test
 npx playwright install chromium
 ~~~
-Giải thích: tạo dự án, cài Cucumber và Playwright, tải Chromium. File .feature đặt trong thư mục features, code step đặt trong features/steps (Cucumber mặc định tìm cả hai ở đây).
 
 ### Hook: mở và đóng trình duyệt cho mỗi Scenario
 File features/steps/hooks.js:
+Giải thích từng dòng:
+• require('@cucumber/cucumber'): lấy Before, After (hook) và setDefaultTimeout.
+• require('@playwright/test'): lấy chromium để mở trình duyệt.
+• setDefaultTimeout(30 * 1000): mỗi bước được chạy tối đa 30 giây (mặc định Cucumber chỉ cho 5 giây, không đủ để mở trình duyệt).
+• Before(async function () {...}): chạy trước mỗi Scenario: mở Chromium ẩn, tạo một tab mới.
+• this: đối tượng "World", vùng nhớ riêng của từng Scenario, dùng để chia sẻ page giữa các bước.
+• After: chạy sau mỗi Scenario, đóng trình duyệt dù pass hay fail.
+Bắt buộc dùng function thường, KHÔNG dùng arrow function (=>), nếu không this sẽ không phải World.
 ~~~js
 const { Before, After, setDefaultTimeout } = require('@cucumber/cucumber');
 const { chromium } = require('@playwright/test');
@@ -751,23 +759,21 @@ After(async function () {
   await this.browser.close();
 });
 ~~~
-Giải thích từng dòng:
-• require('@cucumber/cucumber'): lấy Before, After (hook) và setDefaultTimeout.
-• require('@playwright/test'): lấy chromium để mở trình duyệt.
-• setDefaultTimeout(30 * 1000): mỗi bước được chạy tối đa 30 giây (mặc định Cucumber chỉ cho 5 giây, không đủ để mở trình duyệt).
-• Before(async function () {...}): chạy trước mỗi Scenario: mở Chromium ẩn, tạo một tab mới.
-• this: đối tượng "World", vùng nhớ riêng của từng Scenario, dùng để chia sẻ page giữa các bước.
-• After: chạy sau mỗi Scenario, đóng trình duyệt dù pass hay fail.
-Bắt buộc dùng function thường, KHÔNG dùng arrow function (=>), nếu không this sẽ không phải World.
 
 ### Step definitions với Cucumber
 File features/steps/todo.steps.js:
+Giải thích từng dòng:
+• Given, When, Then lấy từ Cucumber (không phải từ createBdd).
+• Tham số của step (text, count) đứng trực tiếp trong function, không có ({ page }).
+• this.page: tab đã được mở trong hook Before.
+• expect của Playwright vẫn dùng được để có kiểm tra tự chờ.
+• Cucumber expression {string}, {int} giống hệt playwright-bdd, nên file .feature dùng chung được.
 ~~~js
 const { Given, When, Then } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
 
-Given('tôi đang ở trang TodoMVC', async function () {
-  await this.page.goto('https://demo.playwright.dev/todomvc');
+Given('tôi đang ở trang Todo Lab tự viết', async function () {
+  await this.page.goto('http://localhost:3131/todomvc');
 });
 
 When('tôi thêm việc {string}', async function (text) {
@@ -780,19 +786,8 @@ Then('danh sách có {int} việc', async function (count) {
   await expect(this.page.getByTestId('todo-item')).toHaveCount(count);
 });
 ~~~
-Giải thích từng dòng:
-• Given, When, Then lấy từ Cucumber (không phải từ createBdd).
-• Tham số của step (text, count) đứng trực tiếp trong function, không có ({ page }).
-• this.page: tab đã được mở trong hook Before.
-• expect của Playwright vẫn dùng được để có kiểm tra tự chờ.
-• Cucumber expression {string}, {int} giống hệt playwright-bdd, nên file .feature dùng chung được.
 
 ### Chạy cucumber-js và đọc kết quả
-~~~bash
-npx cucumber-js
-npx cucumber-js --tags "@smoke"
-npx cucumber-js --format html:cucumber-report.html
-~~~
 Giải thích từng dòng:
 • npx cucumber-js: chạy mọi file .feature trong thư mục features.
 • --tags "@smoke": chỉ chạy Scenario có tag @smoke. Có thể viết biểu thức như "@smoke and not @slow".
@@ -802,8 +797,17 @@ Kết quả mong đợi ở cuối màn hình:
 3 steps (3 passed)
 0m02.512s
 Không cần bước sinh code như bddgen: Cucumber đọc thẳng file .feature mỗi lần chạy.
+~~~bash
+npx cucumber-js
+npx cucumber-js --tags "@smoke"
+npx cucumber-js --format html:cucumber-report.html
+~~~
 
 ### Lỗi thường gặp
+• Undefined: chưa có code cho câu này. Copy snippet gợi ý vào file steps rồi viết nội dung.
+• Multiple step definitions match (Ambiguous): hai đoạn code cùng khớp một câu. Xóa bản trùng.
+• function timed out ... 5000 milliseconds: bước chạy quá 5 giây. Thêm setDefaultTimeout(30 * 1000) như trong hooks.js.
+• Cannot read properties of undefined (reading 'goto'): this.page chưa có. Nguyên nhân hay gặp: dùng arrow function (=>) trong hook hoặc step, hoặc file hooks.js không nằm trong thư mục Cucumber đọc.
 ~~~text
 ? When tôi thêm việc "Mua sữa"
     Undefined. Implement with the following snippet:
@@ -812,16 +816,12 @@ Không cần bước sinh code như bddgen: Cucumber đọc thẳng file .featur
         return 'pending';
       });
 
-✖ Given tôi đang ở trang TodoMVC
+✖ Given tôi đang ở trang Todo Lab tự viết
     Multiple step definitions match
 
 Error: function timed out, ensure the promise resolves within 5000 milliseconds
 TypeError: Cannot read properties of undefined (reading 'goto')
 ~~~
-• Undefined: chưa có code cho câu này. Copy snippet gợi ý vào file steps rồi viết nội dung.
-• Multiple step definitions match (Ambiguous): hai đoạn code cùng khớp một câu. Xóa bản trùng.
-• function timed out ... 5000 milliseconds: bước chạy quá 5 giây. Thêm setDefaultTimeout(30 * 1000) như trong hooks.js.
-• Cannot read properties of undefined (reading 'goto'): this.page chưa có. Nguyên nhân hay gặp: dùng arrow function (=>) trong hook hoặc step, hoặc file hooks.js không nằm trong thư mục Cucumber đọc.
 
 PRACTICE: Tạo dự án cucumber-hoc, dùng lại file todo.feature từ bài 5, viết hooks.js và todo.steps.js. Chạy npx cucumber-js tới khi pass, sau đó xuất báo cáo HTML và so sánh với báo cáo của playwright-bdd: ghi 2 điểm giống và 2 điểm khác.
 Q: Vì sao trong Cucumber nên viết async function () thay vì arrow function cho step và hook?
@@ -836,3 +836,361 @@ Q: Điểm khác chính giữa cucumber-js và playwright-bdd là gì?
 - cucumber-js không đọc được file .feature
 - playwright-bdd không hỗ trợ Scenario Outline
 + cucumber-js đọc .feature trực tiếp và bạn tự quản lý trình duyệt; playwright-bdd sinh test Playwright và có sẵn fixture page
+
+## LESSON bdd-09 | Example mapping từ yêu cầu đến quy tắc
+
+### Tách quy tắc khỏi chi tiết giao diện
+Trung tâm giả định Vạt Rêu cho hủy lớp trước hạn. BA, Dev và QA cùng nêu quy tắc; thẻ ví dụ chứng minh cách hiểu, thẻ câu hỏi ghi điểm chưa chốt như múi giờ và hoàn điểm.
+~~~text
+Quy tắc: hủy trước 18:00 ngày liền trước được hoàn điểm
+Ví dụ: bắt đầu ngày12, hủy ngày11 lúc17:59 -> hoàn
+Câu hỏi: 18:00 có được không? dùng múi giờ nào?
+Không tự coi câu hỏi chưa chốt là yêu cầu.
+~~~
+
+### Ví dụ có dữ liệu và kết quả
+Một ví dụ gồm bối cảnh, hành động và kết quả đủ cụ thể để người khác tính lại. Không dùng câu chung kiểu hệ thống hoạt động đúng vì nó không phân biệt hai cách hiện thực.
+~~~text
+Given lớp L7 bắt đầu 2030-05-12 lúc09:00 theo giờ lab
+And tài khoản S4 đã dùng20 điểm đăng ký
+When S4 hủy lúc2030-05-11 17:59
+Then đăng ký được hủy và hoàn 20 điểm đúng một lần
+~~~
+
+### Chốt quyết định có người chịu trách nhiệm
+Sau buổi mapping, ghi quyết định inclusive/exclusive, múi giờ và phạm vi hoàn điểm. Ví dụ dưới là hợp đồng lab đã chốt để bài sau dùng, không phải quy tắc mọi sản phẩm.
+~~~text
+decision_id: CANCEL-02
+clock: giờ cố định của lab
+cutoff: yêu cầu nhận trước 18:00, không gồm18:00
+refund:20 điểm khi đủ điều kiện
+owner: nhóm sản phẩm giả định Vạt Rêu
+~~~
+
+### Bẫy bắt đầu bằng step library
+Nếu viết hàng chục step trước khi hiểu quy tắc, nhóm dễ mã hóa giả định sai. Bắt đầu vài ví dụ đối lập, làm rõ câu hỏi rồi mới chọn trường hợp có giá trị để tự động hóa.
+
+### Đánh giá buổi hợp tác bằng kết quả
+Một phiên tốt giảm mơ hồ và chỉ ra ca biên, không đo bằng số thẻ. Ghi điều gì đã chốt, điều gì còn mở và tác động của câu hỏi lên triển khai hoặc kiểm thử.
+
+PRACTICE: Tổ chức mapping giả lập cho hủy lớp, nộp ba quy tắc, tám ví dụ và bốn câu hỏi. Chốt ít nhất hai câu hỏi kèm lý do, chuyển ba ví dụ thành scenario theo miền.
+Q: Example mapping phân biệt gì?
++ Quy tắc, ví dụ và câu hỏi chưa chốt
+- Mọi thứ là bug
+- Chỉ tên màn hình
+Q: Ví dụ biên tốt quanh ngưỡng 5 là gì?
++ 4,5,6 khi miền số nguyên phù hợp
+- Chỉ 100
+- Chỉ một số ngẫu nhiên
+
+## LESSON bdd-10 | Biên và ngoại lệ trong bảng ví dụ
+
+### Biên thời gian cần đồng hồ xác định
+Hợp đồng lab dùng trước 18:00 ngày liền trước. Tiêm clock cố định qua API hỗ trợ lab thay vì để test tùy thời gian chạy; tránh timezone máy người học đổi expected.
+~~~text
+Scenario Outline: Hoàn điểm theo thời điểm hủy
+ Given lớp bắt đầu ngày "2030-05-12"
+ And đã thanh toán20 điểm
+ When hủy lúc "<time>" ngày "2030-05-11"
+ Then điểm hoàn là <refund>
+ Examples:
+ | time     | refund |
+ | 17:59:59 | 20     |
+ | 18:00:00 | 0      |
+ | 18:00:01 | 0      |
+~~~
+
+### Bảng quyết định chỉ ra tổ hợp
+Kết hợp trước hạn, đã hủy và quyền sở hữu. Thao tác lặp không hoàn thêm điểm; khác chủ bị chặn bất kể thời gian, nên quyền được kiểm trước tác dụng phụ.
+~~~text
+đúng chủ | trước hạn | đã hủy | kết quả
+có       | có        | không  | hủy,hoàn 20
+có       | không     | không  | theo chính sách lab,hoàn 0
+có       | có        | có     | không hoàn thêm
+không    | bất kỳ    | bất kỳ | chặn,không đổi điểm
+~~~
+
+### Assertion vào trạng thái sau lỗi
+Kịch bản khác chủ cần so điểm và trạng thái trước/sau. Chỉ kiểm thông báo không được phép có thể bỏ lọt việc server đã hoàn điểm trước khi từ chối.
+~~~ts
+Then('điểm của học viên không đổi',async({request})=>{
+ const r=await request.get(`http://localhost:3100/lab/students/${studentId}`);
+ expect(r.ok()).toBeTruthy();
+ expect((await r.json()).points).toBe(pointsBefore);
+});
+~~~
+
+### Không biến Outline thành tích Descartes mù
+Dữ liệu không khả thi và ca trùng mục đích làm bảng dài nhưng khó hiểu. Nêu quy tắc mỗi dòng bảo vệ, giữ ca quan trọng theo rủi ro và tách scenario nếu ý định khác nhau.
+
+### Lỗi biên phải giải thích được
+Nếu đúng 18:00 sai, chỉ ra quyết định CANCEL-02 và đồng hồ lab. Không gắn bug trước khi kiểm timezone, độ chính xác timestamp và nơi server nhận request.
+
+PRACTICE: Nộp bảng quyết định và ít nhất chín ca hủy, gồm trước/đúng/sau hạn, lặp và khác chủ. Có clock cố định, expected điểm và trạng thái, giải thích tổ hợp loại bỏ.
+Q: Bảng quyết định giúp khi nào?
++ Nhiều điều kiện phối hợp kết quả
+- Chỉ có một nhãn màu
+- Để bỏ ca lỗi
+Q: Scenario ngoại lệ nên thể hiện gì?
++ Kết quả thất bại và trạng thái còn lại
+- Chỉ thông báo đẹp
+- Không cần kiểm dữ liệu
+
+## LESSON bdd-11 | Scenario theo miền, tránh step dính UI
+
+### Từ hành vi nghiệp vụ đến adapter
+Scenario nói học viên đăng ký lớp thay vì click nút xanh ở div thứ ba. Adapter UI/API chứa chi tiết kỹ thuật; khi layout thay, ý định scenario vẫn đọc được.
+~~~text
+Scenario: Lớp đầy từ chối đăng ký mới
+ Given lớp "R7" đã đủ chỗ
+ When học viên "S4" đăng ký lớp "R7"
+ Then đăng ký bị từ chối vì lớp đầy
+ And không có đăng ký mới của "S4"
+~~~
+
+### Pattern hẹp để giảm mơ hồ
+Ví dụ minh họa step với tham số rõ, không catch-all một regex ăn mọi câu. Chọn một runner cho dự án và khai báo fixture nhất quán; không trộn API World của Cucumber với fixture playwright-bdd.
+~~~ts
+When('học viên {string} đăng ký lớp {string}',async({page},studentId,classId)=>{
+ await page.goto(`http://localhost:3100/classes/${classId}`);
+ await page.getByLabel('Mã học viên').fill(studentId);
+ await page.getByRole('button',{name:'Đăng ký'}).click();
+});
+~~~
+
+### Data Table là dữ liệu có schema
+Nếu bảng gồm qty/status, validate cột và parse số rõ ràng ở adapter. Không nối từng ô trực tiếp vào SQL hoặc tùy tiện chấp nhận cột sai chính tả thành undefined.
+~~~text
+Bảng đầu vào mong đợi: classId, capacity, enrolled
+Kiểm đủ cột và không trùng classId
+capacity/enrolled là số nguyên >=0
+enrolled<=capacity
+Lỗi dữ liệu bảng phải chỉ dòng và cột.
+~~~
+
+### Tái sử dụng theo hợp đồng ổn định
+Hai step cùng đọc lớp có thể dùng chung helper, nhưng hành vi đăng ký mới và chuyển lớp khác nghiệp vụ. Tránh ép mọi thao tác vào hàm action(type, data) nhiều nhánh khó review.
+
+### Review step như review mã kiểm thử
+Kiểm locator, wait, assertion và cleanup giống test thường. Gherkin dễ đọc không tự làm implementation đáng tin; step nuốt lỗi hoặc không assert vẫn tạo kết quả xanh sai.
+
+PRACTICE: Chuyển ba scenario UI chi tiết thành ngôn ngữ miền, hiện thực adapter riêng. Kiểm không có definition mơ hồ, Data Table sai cột báo rõ và một mutation nghiệp vụ làm ca đỏ.
+Q: Step theo miền tốt hơn step theo CSS ở điểm gì?
++ Giữ ý định khi UI thay cấu trúc
+- Luôn chạy nhanh hơn
+- Không cần code
+Q: Một step khớp hai definition là vấn đề gì?
++ Mơ hồ và cần thu hẹp pattern
+- Tự chọn hàm đúng
+- Luôn bị bỏ qua
+Q: Tái sử dụng step nên ưu tiên gì?
++ Ý nghĩa ổn định, không ép mọi bước vào một hàm
+- Một hàm nhận mọi chuỗi
+- Copy toàn kịch bản
+
+## LESSON bdd-12 | Chạy song song và dữ liệu theo kịch bản
+
+### Mỗi scenario có state riêng
+Chọn playwright-bdd cho dự án lab và dùng fixture test-scoped. Dữ liệu server gắn runId+scenarioId; không dùng biến module để giữ classId chung khi chạy nhiều worker.
+~~~text
+run LAB7 / scenario CANCEL-A -> class CL-LAB7-A
+run LAB7 / scenario CANCEL-B -> class CL-LAB7-B
+Fixture giữ id đã tạo và baseline điểm
+Teardown chỉ dọn id thuộc scenario hiện tại.
+~~~
+
+### Tag có ý nghĩa kiểm soát được
+@smoke bao phủ luồng tối quan trọng và chạy nhanh trong lab; @refund nhóm nghiệp vụ. Không dùng tag skip để che lỗi không có chủ xử lý; nếu cách ly phải có lý do và hạn.
+~~~text
+@smoke @enrollment
+Scenario: Đăng ký khi còn một chỗ
+ Given lớp còn 1 chỗ
+ When học viên đăng ký hợp lệ
+ Then lớp hết chỗ và có 1đăng ký mới
+~~~
+
+### Chạy nhiều worker để phát hiện phụ thuộc
+Sinh test từ feature theo cấu hình playwright-bdd hiện có, rồi chạy hai worker. Cấu hình đường dẫn phải pin theo project mẫu, không giả định mọi phiên bản sinh vào cùng thư mục.
+~~~bash
+npx bddgen
+npx playwright test --workers=2
+npx playwright test --workers=1 --repeat-each=2
+~~~
+
+### Teardown không xóa theo tiền tố chung
+Hai scenario có thể cùng dùng runId nhưng khác id. Nếu xóa toàn bộ LAB7 ở cuối mỗi scenario sẽ phá ca đang chạy; quản lý danh sách tài nguyên tạo chính xác và cleanup cuối run riêng nếu cần.
+
+### Đọc report theo rule và dữ liệu
+Một feature fail nhiều bước có thể cùng nguyên nhân setup. Xem lỗi đầu, fixture và trace; báo số scenario cùng quy tắc bảo vệ, không chỉ đếm step xanh để suy coverage.
+
+PRACTICE: Chạy sáu scenario với hai worker, lưu id riêng và teardown. Cố ý dùng chung class để thấy race rồi sửa; nộp report, lỗi đầu và bằng chứng không phụ thuộc thứ tự.
+Q: State mỗi scenario nên được giữ ở đâu?
++ Fixture/World riêng phù hợp runner
+- Biến global chia mọi worker
+- File token chung
+Q: Chạy song song cần cô lập gì?
++ Actor, tài nguyên, id và artifact
+- Chỉ tên feature
+- Chỉ màu report
+
+## LESSON bdd-13 | Dự án: đặc tả sống cho đặt lớp giả
+
+### Đặc tả sống cho trung tâm giả định
+Dự án Vạt Rêu gồm đăng ký, lớp đầy, hủy trước hạn, hủy lặp và khác chủ. Lưu rule/example/question với quyết định sản phẩm; không biến bộ feature thành bản ghi từng click.
+~~~text
+rules/ENROLL-01: không vượt capacity
+rules/CANCEL-02: hoàn theo hạn đã chốt
+features/enrollment.feature
+features/cancellation.feature
+coverage: rule -> scenario -> dữ liệu -> kết quả
+~~~
+
+### Chọn runner và hiện thực nhất quán
+Dự án dùng playwright-bdd đã có ở bài trước, fixture test-scoped và adapter theo miền. Cấu hình package scripts ghi trình tự sinh/running; dependency pin trong lockfile lab.
+~~~json
+{"scripts":{"bdd:generate":"bddgen","bdd:test":"playwright test","bdd:check":"npm run bdd:generate && npm run bdd:test"}}
+~~~
+
+### Thay quy tắc phải cập nhật bằng chứng
+Giả sử hạn hủy đổi từ 18:00 thành17:00 trong phiên bản lab mới. Lưu quyết định và sửa ví dụ biên trước, chạy thấy đỏ với code cũ rồi cập nhật implementation; không chỉ sửa expected để mọi ca xanh.
+~~~text
+CANCEL-03 thay CANCEL-02
+16:59:59 -> hoàn 20
+17:00:00 -> hoàn 0
+17:00:01 -> hoàn 0
+Ca khác chủ và hủy lặp giữ nguyên bất biến.
+~~~
+
+### Nghiệm thu bằng người đọc chưa xem code
+Người review đọc feature phải hiểu điều kiện, hành động và kết quả, rồi chạy lab để kiểm evidence. Câu hỏi mở cần được liệt kê và không bị automation giả định âm thầm.
+
+### Bàn giao có giới hạn coverage
+Nộp ít nhất mười scenario, bảng decision, fixture, report và một mutation bị phát hiện. Nêu ca mock, ca tích hợp, phần chưa kiểm; không đồng nhất số scenario với mức đầy đủ yêu cầu.
+
+PRACTICE: Bàn giao đặc tả sống đặt lớp với mười scenario, rule mapping, câu hỏi đã/chưa chốt, test hai worker và report. Thực hiện một thay đổi hạn có review, chứng minh đỏ rồi xanh và cleanup riêng.
+Q: Đặc tả sống còn hữu ích khi nào?
++ Được review và cập nhật cùng thay đổi hành vi
+- Chỉ có nhiều file feature
+- Không ai đọc
+Q: Dự án cần chứng minh điều gì khi sửa quy tắc?
++ Ví dụ cũ/mới và test thay đổi có lý do
+- Chỉ mọi ca vẫn xanh bằng xóa assertion
+- Chỉ đổi tag
+Q: Bàn giao BDD cần có gì?
++ Quy tắc, ví dụ, câu hỏi, automation và coverage
+- Chỉ step count
+- Tài khoản thật
+
+## LESSON bdd-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. BDD là hợp tác làm rõ hành vi, không chỉ một lớp cú pháp bao quanh automation.
+2. Given đặt điều kiện đầu có ý nghĩa nghiệp vụ; không cần kể mọi thao tác setup kỹ thuật.
+3. Kỳ vọng phải kiểm được và gắn yêu cầu, không đồng nhất hành động với thành công.
+4. Bảng Examples giúp so các tổ hợp cùng quy tắc, không thay mô hình bao phủ hay hợp tác nghiệp vụ.
+
+### Dữ liệu và điều kiện biên
+5. Background dài che điều kiện riêng và làm scenario khó đọc; tách khi phạm vi không còn đồng nhất.
+6. Kiểm cấu trúc và chuyển dữ liệu rõ; tránh trạng thái dùng chung làm scenario can thiệp nhau.
+7. Quy ước tag cần ý nghĩa và chủ quản; smoke là tập chọn theo rủi ro, không phải mọi scenario ngắn.
+8. Chất lượng phụ thuộc ví dụ và assertion; cần review coverage và ca âm chứng minh độ nhạy.
+
+### Tính đúng và cách điều tra
+9. Câu hỏi chưa có quyết định phải được ghi, không tự biến giả định thành expected cố định.
+10. Giá trị sát ngưỡng làm rõ inclusive/exclusive; thêm giá trị không hợp lệ theo miền.
+11. Liệt kê điều kiện và kết quả giúp thấy tổ hợp thiếu, mâu thuẫn hoặc không khả thi.
+12. Từ chối thao tác phải kiểm không có tác dụng phụ ngoài ý muốn, nhất là giao dịch.
+
+### Rủi ro và lựa chọn phương án
+13. Miền tách ý nghĩa nghiệp vụ khỏi chi tiết UI; implementation vẫn phải rõ ràng và được bảo trì.
+14. Tránh regex quá rộng và từ ngữ trùng nghĩa; thư viện step cần quy ước có kiểm.
+15. Abstraction quá rộng tạo nhiều nhánh khó hiểu; chỉ tái dùng khi cùng hợp đồng hành vi.
+16. State riêng ngăn rò dữ liệu; context trình duyệt độc lập chưa tự tách backend.
+
+### Dự án, bằng chứng và bàn giao
+17. Mọi trạng thái chia sẻ có khả năng ghi phải có chiến lược, teardown đúng phạm vi.
+18. Kết nối ví dụ, code và quyết định sản phẩm; scenario lỗi thời phải được sửa có review.
+19. Quy tắc đổi cần cập nhật expected và đánh giá tác động, không sửa test chỉ để khớp code sai.
+20. Người đọc thấy hành vi được chốt, phần còn mở, cách chạy và giới hạn bằng chứng.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: BDD bắt đầu hữu ích nhất từ đâu?
++ Trao đổi hành vi bằng ví dụ cụ thể
+- Viết thật nhiều step ngay
+- Dịch mọi click sang tiếng Anh
+Q: Given thường mô tả gì?
++ Bối cảnh đã biết trước hành động
+- Kết quả cuối
+- Mọi chi tiết CSS
+Q: Then tốt nên mô tả gì?
++ Kết quả quan sát được
+- Chỉ đã click nút
+- Một sleep năm giây
+Q: Scenario Outline phù hợp khi nào?
++ Nhiều ví dụ cùng quy tắc và cấu trúc
+- Mọi bước hoàn toàn khác nhau
+- Để tránh trao đổi BA
+Q: Background nên giữ gì?
++ Bối cảnh chung ngắn và thật sự cần
+- Mọi dữ liệu toàn dự án
+- Mọi login admin
+Q: Step definition nên nhận dữ liệu thế nào?
++ Tham số hoặc bảng theo miền có kiểm
+- Nối input vào SQL
+- Luôn dùng global chung
+Q: Tag có thể phục vụ gì?
++ Lọc tập kiểm theo mục đích
+- Tự chứng minh coverage
+- Tự bỏ mọi lỗi
+Q: Report xanh chứng minh gì?
++ Các ví dụ đã chạy đạt theo assertion hiện tại
+- Yêu cầu hoàn toàn đúng
+- Không còn lỗi phần mềm
+Q: Example mapping phân biệt gì?
++ Quy tắc, ví dụ và câu hỏi chưa chốt
+- Mọi thứ là bug
+- Chỉ tên màn hình
+Q: Ví dụ biên tốt quanh ngưỡng 5 là gì?
++ 4,5,6 khi miền số nguyên phù hợp
+- Chỉ 100
+- Chỉ một số ngẫu nhiên
+Q: Bảng quyết định giúp khi nào?
++ Nhiều điều kiện phối hợp kết quả
+- Chỉ có một nhãn màu
+- Để bỏ ca lỗi
+Q: Scenario ngoại lệ nên thể hiện gì?
++ Kết quả thất bại và trạng thái còn lại
+- Chỉ thông báo đẹp
+- Không cần kiểm dữ liệu
+Q: Step theo miền tốt hơn step theo CSS ở điểm gì?
++ Giữ ý định khi UI thay cấu trúc
+- Luôn chạy nhanh hơn
+- Không cần code
+Q: Một step khớp hai definition là vấn đề gì?
++ Mơ hồ và cần thu hẹp pattern
+- Tự chọn hàm đúng
+- Luôn bị bỏ qua
+Q: Tái sử dụng step nên ưu tiên gì?
++ Ý nghĩa ổn định, không ép mọi bước vào một hàm
+- Một hàm nhận mọi chuỗi
+- Copy toàn kịch bản
+Q: State mỗi scenario nên được giữ ở đâu?
++ Fixture/World riêng phù hợp runner
+- Biến global chia mọi worker
+- File token chung
+Q: Chạy song song cần cô lập gì?
++ Actor, tài nguyên, id và artifact
+- Chỉ tên feature
+- Chỉ màu report
+Q: Đặc tả sống còn hữu ích khi nào?
++ Được review và cập nhật cùng thay đổi hành vi
+- Chỉ có nhiều file feature
+- Không ai đọc
+Q: Dự án cần chứng minh điều gì khi sửa quy tắc?
++ Ví dụ cũ/mới và test thay đổi có lý do
+- Chỉ mọi ca vẫn xanh bằng xóa assertion
+- Chỉ đổi tag
+Q: Bàn giao BDD cần có gì?
++ Quy tắc, ví dụ, câu hỏi, automation và coverage
+- Chỉ step count
+- Tài khoản thật

@@ -1,161 +1,1044 @@
 {
-  "no": 7,
-  "title": "你家离公司远吗？– 从…到…, 离: khoảng cách & thời gian",
-  "sub": "Nǐ jiā lí gōngsī yuǎn ma? 你家离公司远吗？",
-  "goals": [
-    "Nói khoảng thời gian, quãng đường với 从 A 到 B và thời gian di chuyển với 从 A 到 B 要…",
-    "Nói xa – gần bằng A 离 B + 远/近; nói “còn … nữa là đến…” bằng 离 + mốc thời gian + 还有…",
-    "Hỏi và chỉ đường: 怎么走？往前走, 往左/右拐, 在…旁边/左边/右边",
-    "Nói phương tiện đi làm: 骑摩托车, 坐地铁, 坐公共汽车, 走路",
-    "Phân biệt uan – uang (晚/往), in – ing (近/静), üan (远) và l – n (离/泥)"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
-      {"w": "从", "py": "cóng", "hv": "tòng", "pos": "prep", "vi": "từ (điểm bắt đầu)", "ex": "我从河内来。", "exPy": "Wǒ cóng Hénèi lái.", "exVi": "Tôi đến từ Hà Nội."},
-      {"w": "离", "py": "lí", "hv": "ly", "pos": "prep", "vi": "cách (khoảng cách đến…)", "ex": "我家离公司很近。", "exPy": "Wǒ jiā lí gōngsī hěn jìn.", "exVi": "Nhà tôi cách công ty rất gần."},
-      {"w": "远", "py": "yuǎn", "hv": "viễn", "pos": "adj", "vi": "xa", "ex": "机场离这儿很远。", "exPy": "Jīchǎng lí zhèr hěn yuǎn.", "exVi": "Sân bay cách đây rất xa."},
-      {"w": "近", "py": "jìn", "hv": "cận", "pos": "adj", "vi": "gần", "ex": "地铁站很近，走路五分钟。", "exPy": "Dìtiě zhàn hěn jìn, zǒulù wǔ fēnzhōng.", "exVi": "Ga tàu điện rất gần, đi bộ 5 phút."},
-      {"w": "路", "py": "lù", "hv": "lộ", "pos": "n", "vi": "đường; tuyến (xe buýt số…)", "ex": "路上车很多。", "exPy": "Lùshang chē hěn duō.", "exVi": "Trên đường rất đông xe."},
-      {"w": "往", "py": "wǎng", "hv": "vãng", "pos": "prep", "vi": "về phía, hướng về (往前走)", "ex": "一直往前走。", "exPy": "Yìzhí wǎng qián zǒu.", "exVi": "Cứ đi thẳng về phía trước."},
-      {"w": "走", "py": "zǒu", "hv": "tẩu", "pos": "v", "vi": "đi (bộ); rời đi (KHÔNG phải “chạy”)", "ex": "去银行怎么走？", "exPy": "Qù yínháng zěnme zǒu?", "exVi": "Đi ngân hàng thì đi đường nào?"},
-      {"w": "小时", "py": "xiǎoshí", "hv": "tiểu thời", "pos": "n", "vi": "tiếng đồng hồ", "ex": "从河内到下龙湾要三个小时。", "exPy": "Cóng Hénèi dào Xiàlóng Wān yào sān ge xiǎoshí.", "exVi": "Từ Hà Nội đến Hạ Long mất 3 tiếng."},
-      {"w": "机场", "py": "jīchǎng", "hv": "cơ trường", "pos": "n", "vi": "sân bay", "ex": "我去机场接朋友。", "exPy": "Wǒ qù jīchǎng jiē péngyou.", "exVi": "Tôi ra sân bay đón bạn."},
-      {"w": "公共汽车", "py": "gōnggòng qìchē", "hv": "công cộng khí xa", "pos": "n", "vi": "xe buýt", "ex": "我坐公共汽车上班。", "exPy": "Wǒ zuò gōnggòng qìchē shàngbān.", "exVi": "Tôi đi xe buýt đi làm."},
-      {"w": "地铁", "py": "dìtiě", "hv": "địa thiết", "pos": "n", "vi": "tàu điện ngầm, metro", "ex": "河内也有地铁了。", "exPy": "Hénèi yě yǒu dìtiě le.", "exVi": "Hà Nội cũng có tàu điện rồi."},
-      {"w": "骑", "py": "qí", "hv": "kỵ", "pos": "v", "vi": "cưỡi, đi (xe máy, xe đạp)", "ex": "我骑摩托车上班。", "exPy": "Wǒ qí mótuōchē shàngbān.", "exVi": "Tôi đi xe máy đi làm."},
-      {"w": "左边", "py": "zuǒbian", "hv": "tả biên", "pos": "n", "vi": "bên trái", "ex": "银行在公司左边。", "exPy": "Yínháng zài gōngsī zuǒbian.", "exVi": "Ngân hàng ở bên trái công ty."},
-      {"w": "右边", "py": "yòubian", "hv": "hữu biên", "pos": "n", "vi": "bên phải", "ex": "地铁站在宾馆右边。", "exPy": "Dìtiě zhàn zài bīnguǎn yòubian.", "exVi": "Ga tàu điện ở bên phải khách sạn."},
-      {"w": "旁边", "py": "pángbiān", "hv": "bàng biên", "pos": "n", "vi": "bên cạnh", "ex": "我家旁边有一个咖啡馆。", "exPy": "Wǒ jiā pángbiān yǒu yí ge kāfēiguǎn.", "exVi": "Cạnh nhà tôi có một quán cà phê."}
-    ]},
-    {"k": "text", "h": "Đi lại: phương tiện & hỏi đường", "html": "<p><b>Động từ đi với phương tiện:</b></p><ul><li><b>坐</b> zuò + xe có ghế ngồi: 坐公共汽车, 坐地铁, 坐飞机, 坐出租车 (taxi).</li><li><b>骑</b> qí + xe phải “cưỡi”: 骑摩托车 mótuōchē (xe máy), 骑自行车 zìxíngchē (xe đạp).</li><li><b>走路</b> zǒulù – đi bộ; <b>打车</b> dǎchē – gọi taxi/xe công nghệ.</li></ul><p><b>Hỏi đường:</b> 请问，去…怎么走？ – <b>一直往前走</b> (đi thẳng), <b>往左拐 / 往右拐</b> (guǎi – rẽ trái/phải), <b>过马路</b> (guò mǎlù – qua đường).</p><p>⚠️ <b>Bẫy Hán Việt:</b> 走 âm Hán Việt là <i>tẩu</i> (tẩu thoát = chạy trốn), nhưng tiếng Trung hiện đại 走 = <b>đi bộ</b>. “Chạy” là 跑 (Bài 6). Ngược lại, 远 <i>viễn</i>, 近 <i>cận</i> (viễn thị, cận thị), 离 <i>ly</i> (cự ly) – giữ nguyên nghĩa, rất dễ nhớ!</p>"},
-    {"k": "sounds", "h": "Phát âm: uan – uang, in – ing, üan, l – n", "html": "<p>Chỉ đường mà đọc sai âm mũi thì người nghe đi lạc! Luyện các cặp sau thật rõ.</p>", "items": [
-      {"sym": "an – ang (晚 / 往)", "ex": ["往", "晚上", "旁边"], "vi": "<b>-n</b>: đầu lưỡi chạm lợi trên (晚 wǎn ≈ “oản”). <b>-ng</b>: lưỡi rút về sau, âm vang mũi (往 wǎng ≈ “oảng”, 旁 páng). Đọc sai thì “buổi tối” thành “hướng về”!", "pairs": [["晚", "往"], ["站", "张"]]},
-      {"sym": "in – ing (近 / 静)", "ex": ["近", "进", "明天"], "vi": "<b>in</b>: lưỡi chạm lợi, như “in”. <b>ing</b>: lưỡi rút về sau, như “inh”. 近 jìn (gần) ≠ 静 jìng (yên tĩnh).", "pairs": [["近", "静"], ["民", "明"]]},
-      {"sym": "üan (远)", "ex": ["远", "元"], "vi": "y/j/q/x + uan thực chất là <b>üan</b>: môi tròn rồi mở “an” – 远 yuǎn ≈ “uyển” (gần âm Hán Việt viễn!). Đừng đọc thành wǎn.", "pairs": [["远", "晚"]]},
-      {"sym": "l – n (离 / 泥)", "ex": ["离", "路", "旅游"], "vi": "离 lí ≠ 泥 ní (bùn). Bịt mũi kiểm tra như Bài 6: l đọc được khi bịt mũi, n thì nghẹt.", "pairs": [["离", "泥"], ["蓝", "男"]]},
-      {"sym": "左边 / 右边 / 旁边", "ex": ["左边", "右边", "旁边"], "vi": "边 trong 左边, 右边 thường đọc nhẹ: zuǒbian, yòubian; 旁边 pángbiān giữ thanh 1. 左 zuǒ (thanh 3) – 右 yòu (thanh 4): giơ tay trái/phải khi đọc để nhớ."}
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 1: 从 A 到 B – từ … đến …", "html": "<p><b>从 A 到 B</b> dùng cho cả <b>thời gian</b> và <b>nơi chốn</b> – như “từ … đến …” tiếng Việt. Muốn nói <b>mất bao lâu</b>: 从 A 到 B + <b>要</b> (cần, mất) + thời gian. Phương tiện: 坐/骑 + phương tiện đặt <b>trước</b> động từ chính.</p>", "table": [["Ý", "Công thức", "Ví dụ", "Pinyin"], ["Thời gian", "从 + giờ + 到 + giờ + V", "我从八点到五点上班。", "Wǒ cóng bā diǎn dào wǔ diǎn shàngbān."], ["Nơi chốn", "从 + nơi + 到 + nơi", "从河内到北京", "cóng Hénèi dào Běijīng"], ["Mất bao lâu", "从 A 到 B + 要 + thời gian", "从我家到公司要二十分钟。", "Cóng wǒ jiā dào gōngsī yào èrshí fēnzhōng."], ["Phương tiện", "坐/骑 + phương tiện + 去/来", "我骑摩托车去公司。", "Wǒ qí mótuōchē qù gōngsī."], ["Hỏi", "从 A 到 B 要多长时间？", "从这儿到机场要多长时间？", "Cóng zhèr dào jīchǎng yào duō cháng shíjiān?"]], "ex": [
-      {"t": "我们从星期一到星期五上班。", "py": "Wǒmen cóng xīngqīyī dào xīngqīwǔ shàngbān.", "vi": "Chúng tôi đi làm từ thứ Hai đến thứ Sáu."},
-      {"t": "从河内到胡志明市，坐飞机要两个小时。", "py": "Cóng Hénèi dào Húzhìmíng Shì, zuò fēijī yào liǎng ge xiǎoshí.", "vi": "Từ Hà Nội vào TP. Hồ Chí Minh đi máy bay mất 2 tiếng."},
-      {"t": "你从哪儿来？— 我从越南来。", "py": "Nǐ cóng nǎr lái? — Wǒ cóng Yuènán lái.", "vi": "Bạn từ đâu đến? — Tôi đến từ Việt Nam."}
-    ], "tips": [
-      "从…到… cả cụm đứng <b>trước động từ</b>: 我从八点到五点<b>上班</b>. ❌ <i>我上班从八点到五点</i> (dịch kiểu “tôi làm từ 8 đến 5”).",
-      "Phương tiện đặt trước động từ chính: ❌ <i>我去公司坐地铁</i> → 我<b>坐地铁</b>去公司.",
-      "坐 cho xe có ghế ngồi (坐车, 坐地铁, 坐飞机); 骑 cho xe phải “cưỡi” (骑摩托车, 骑自行车)."
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 2: A 离 B + 远 / 近 – A cách B xa/gần", "html": "<p><b>离</b> = “cách”, nói <b>khoảng cách</b> giữa hai điểm: <b>A 离 B + (很) 远 / 近</b> hoặc + số km. Trật tự giống hệt tiếng Việt “nhà tôi <b>cách</b> công ty xa”. Cũng dùng cho <b>thời gian</b>: <b>离 + mốc + 还有 + bao lâu</b> = “còn … nữa là đến …”.</p>", "table": [["Câu", "Pinyin", "Nghĩa"], ["我家离公司很远。", "Wǒ jiā lí gōngsī hěn yuǎn.", "Nhà tôi cách công ty xa."], ["地铁站离这儿不远。", "Dìtiě zhàn lí zhèr bù yuǎn.", "Ga tàu điện cách đây không xa."], ["机场离市中心三十公里。", "Jīchǎng lí shì zhōngxīn sānshí gōnglǐ.", "Sân bay cách trung tâm 30 km."], ["你家离公司远吗？", "Nǐ jiā lí gōngsī yuǎn ma?", "Nhà bạn cách công ty có xa không?"], ["离春节还有十天。", "Lí Chūn Jié hái yǒu shí tiān.", "Còn 10 ngày nữa là Tết."]], "ex": [
-      {"t": "宾馆离机场很近，坐出租车十分钟。", "py": "Bīnguǎn lí jīchǎng hěn jìn, zuò chūzūchē shí fēnzhōng.", "vi": "Khách sạn cách sân bay rất gần, đi taxi 10 phút."},
-      {"t": "离考试还有一个星期。", "py": "Lí kǎoshì hái yǒu yí ge xīngqī.", "vi": "Còn một tuần nữa là thi."}
-    ], "tips": [
-      "❌ <i>我家<b>从</b>公司很远</i> – nói xa/gần phải dùng <b>离</b>.",
-      "❌ <i>我家离公司是很远</i> – không thêm 是 trước tính từ.",
-      "Phân biệt: 从 = điểm xuất phát của một hành trình (có di chuyển); 离 = khoảng cách tĩnh giữa hai điểm."
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 3: Hỏi & chỉ đường – 怎么走？往 + hướng + V · 在…旁边", "html": "<p>Hỏi đường: <b>请问，去 + nơi + 怎么走？</b> Chỉ đường: <b>往 + 前/左/右 + V</b> (往前走, 往左拐). Vị trí: <b>A 在 B + 左边/右边/旁边</b> hoặc <b>B + 旁边 + 有 + A</b>.</p>", "table": [["Câu", "Pinyin", "Nghĩa"], ["请问，去机场怎么走？", "Qǐngwèn, qù jīchǎng zěnme zǒu?", "Xin hỏi, đi sân bay thế nào?"], ["一直往前走。", "Yìzhí wǎng qián zǒu.", "Cứ đi thẳng về phía trước."], ["往左拐 / 往右拐。", "Wǎng zuǒ guǎi / wǎng yòu guǎi.", "Rẽ trái / rẽ phải."], ["银行在公司左边。", "Yínháng zài gōngsī zuǒbian.", "Ngân hàng ở bên trái công ty."], ["公司旁边有一个咖啡馆。", "Gōngsī pángbiān yǒu yí ge kāfēiguǎn.", "Cạnh công ty có một quán cà phê."]], "ex": [
-      {"t": "出了地铁站，往右走五分钟就到了。", "py": "Chūle dìtiě zhàn, wǎng yòu zǒu wǔ fēnzhōng jiù dào le.", "vi": "Ra khỏi ga tàu, đi về bên phải 5 phút là đến."},
-      {"t": "洗手间在哪儿？— 在电梯旁边。", "py": "Xǐshǒujiān zài nǎr? — Zài diàntī pángbiān.", "vi": "Nhà vệ sinh ở đâu? — Ở cạnh thang máy."}
-    ], "tips": [
-      "往 + hướng đứng <b>trước</b> động từ: ❌ <i>走往前</i> → 往前走.",
-      "Bẫy Hán Việt: 走 zǒu (tẩu) = <b>đi bộ</b>, không phải “chạy” (chạy là 跑). 走路 = đi bộ."
-    ]},
-    {"k": "dialog", "h": "Nghe: Đi làm bằng gì?", "lang": "zh-CN", "note": "Lý Hoa mới sang Hà Nội, ở khách sạn xa công ty. Anh hỏi A Minh cách đi làm và đường ra sân bay. Nghe lần 1: A Minh đi làm bằng gì, mất bao lâu?", "lines": [
-      {"s": "李华", "g": "m", "t": "阿明，你家离公司远吗？", "py": "Ā Míng, nǐ jiā lí gōngsī yuǎn ma?", "vi": "A Minh, nhà cậu cách công ty có xa không?"},
-      {"s": "阿明", "g": "m", "t": "不太远。我骑摩托车上班，十五分钟。", "py": "Bú tài yuǎn. Wǒ qí mótuōchē shàngbān, shíwǔ fēnzhōng.", "vi": "Không xa lắm. Tôi đi xe máy đi làm, 15 phút."},
-      {"s": "李华", "g": "m", "t": "我住的宾馆离公司很远。从宾馆到公司要一个小时！", "py": "Wǒ zhù de bīnguǎn lí gōngsī hěn yuǎn. Cóng bīnguǎn dào gōngsī yào yí ge xiǎoshí!", "vi": "Khách sạn tôi ở cách công ty xa lắm. Từ khách sạn đến công ty mất một tiếng!"},
-      {"s": "阿明", "g": "m", "t": "你坐什么车来？", "py": "Nǐ zuò shénme chē lái?", "vi": "Anh đi xe gì đến?"},
-      {"s": "李华", "g": "m", "t": "坐公共汽车。路上车太多了。", "py": "Zuò gōnggòng qìchē. Lùshang chē tài duō le.", "vi": "Đi xe buýt. Trên đường đông xe quá."},
-      {"s": "阿明", "g": "m", "t": "你可以坐地铁。宾馆旁边有地铁站吗？", "py": "Nǐ kěyǐ zuò dìtiě. Bīnguǎn pángbiān yǒu dìtiě zhàn ma?", "vi": "Anh có thể đi tàu điện. Cạnh khách sạn có ga tàu không?"},
-      {"s": "李华", "g": "m", "t": "有，就在宾馆右边。", "py": "Yǒu, jiù zài bīnguǎn yòubian.", "vi": "Có, ngay bên phải khách sạn."},
-      {"s": "阿明", "g": "m", "t": "那你坐地铁吧，从宾馆到公司只要二十分钟。", "py": "Nà nǐ zuò dìtiě ba, cóng bīnguǎn dào gōngsī zhǐ yào èrshí fēnzhōng.", "vi": "Vậy anh đi tàu điện đi, từ khách sạn đến công ty chỉ mất 20 phút."},
-      {"s": "李华", "g": "m", "t": "地铁站离公司远吗？", "py": "Dìtiě zhàn lí gōngsī yuǎn ma?", "vi": "Ga tàu cách công ty có xa không?"},
-      {"s": "阿明", "g": "m", "t": "很近。出了地铁站，往前走五分钟，公司在银行左边。", "py": "Hěn jìn. Chūle dìtiě zhàn, wǎng qián zǒu wǔ fēnzhōng, gōngsī zài yínháng zuǒbian.", "vi": "Rất gần. Ra khỏi ga, đi thẳng 5 phút, công ty ở bên trái ngân hàng."},
-      {"s": "李华", "g": "m", "t": "太好了！对了，下星期我去机场接王经理。从这儿到机场要多长时间？", "py": "Tài hǎo le! Duì le, xià xīngqī wǒ qù jīchǎng jiē Wáng jīnglǐ. Cóng zhèr dào jīchǎng yào duō cháng shíjiān?", "vi": "Tuyệt quá! À này, tuần sau tôi ra sân bay đón giám đốc Vương. Từ đây ra sân bay mất bao lâu?"},
-      {"s": "阿明", "g": "m", "t": "机场离这儿很远，坐出租车要四十分钟。", "py": "Jīchǎng lí zhèr hěn yuǎn, zuò chūzūchē yào sìshí fēnzhōng.", "vi": "Sân bay cách đây xa lắm, đi taxi mất 40 phút."},
-      {"s": "李华", "g": "m", "t": "好，谢谢你！", "py": "Hǎo, xièxie nǐ!", "vi": "Được, cảm ơn cậu!"}
-    ], "qs": [
-      {"q": "A Minh đi làm bằng gì, mất bao lâu?", "o": ["Xe máy, 15 phút", "Tàu điện, 20 phút", "Xe buýt, 1 tiếng"], "a": 0, "e": "我骑摩托车上班，十五分钟."},
-      {"q": "Từ khách sạn đến công ty đi xe buýt mất bao lâu?", "o": ["20 phút", "40 phút", "1 tiếng"], "a": 2, "e": "从宾馆到公司要一个小时."},
-      {"q": "Ga tàu điện ở đâu?", "o": ["Bên trái khách sạn", "Bên phải khách sạn", "Đối diện công ty"], "a": 1, "e": "就在宾馆右边."},
-      {"q": "Công ty ở đâu?", "o": ["Bên trái ngân hàng", "Cạnh khách sạn", "Bên phải ga tàu"], "a": 0, "e": "公司在银行左边."},
-      {"q": "Đi taxi từ đây ra sân bay mất bao lâu?", "o": ["15 phút", "40 phút", "1 tiếng"], "a": 1, "e": "坐出租车要四十分钟."}
-    ]},
-    {"k": "read", "h": "Đọc: Đường đi làm của tôi", "title": "我的上班路", "text": "我叫陈兰。我家在河内，公司在北宁，我家离公司三十多公里，有一点儿远。\n\n我从星期一到星期五上班，从早上八点到下午五点。我不骑摩托车，我坐公司的车。从我家到公司要五十分钟。\n\n公司门口有一个小商店，商店旁边是一个咖啡馆。下班以后，我常常和同事去那儿喝咖啡。离春节还有两个星期，大家都很高兴。", "py": "Wǒ jiào Chén Lán. Wǒ jiā zài Hénèi, gōngsī zài Běiníng, wǒ jiā lí gōngsī sānshí duō gōnglǐ, yǒu yìdiǎnr yuǎn.\n\nWǒ cóng xīngqīyī dào xīngqīwǔ shàngbān, cóng zǎoshang bā diǎn dào xiàwǔ wǔ diǎn. Wǒ bù qí mótuōchē, wǒ zuò gōngsī de chē. Cóng wǒ jiā dào gōngsī yào wǔshí fēnzhōng.\n\nGōngsī ménkǒu yǒu yí ge xiǎo shāngdiàn, shāngdiàn pángbiān shì yí ge kāfēiguǎn. Xiàbān yǐhòu, wǒ chángcháng hé tóngshì qù nàr hē kāfēi. Lí Chūn Jié hái yǒu liǎng ge xīngqī, dàjiā dōu hěn gāoxìng.", "vi": "Tôi là Trần Lan. Nhà tôi ở Hà Nội, công ty ở Bắc Ninh, nhà tôi cách công ty hơn 30 km, hơi xa.\n\nTôi đi làm từ thứ Hai đến thứ Sáu, từ 8 giờ sáng đến 5 giờ chiều. Tôi không đi xe máy, tôi đi xe của công ty. Từ nhà tôi đến công ty mất 50 phút.\n\nỞ cổng công ty có một cửa hàng nhỏ, bên cạnh cửa hàng là một quán cà phê. Tan làm, tôi thường cùng đồng nghiệp đến đó uống cà phê. Còn hai tuần nữa là Tết, mọi người đều rất vui.", "gloss": [
-      {"w": "北宁", "py": "Běiníng", "vi": "Bắc Ninh"},
-      {"w": "公里", "py": "gōnglǐ", "vi": "ki-lô-mét"},
-      {"w": "摩托车", "py": "mótuōchē", "vi": "xe máy"},
-      {"w": "门口", "py": "ménkǒu", "vi": "cổng, trước cửa"},
-      {"w": "咖啡馆", "py": "kāfēiguǎn", "vi": "quán cà phê"},
-      {"w": "下班", "py": "xiàbān", "vi": "tan làm"},
-      {"w": "以后", "py": "yǐhòu", "vi": "sau (khi)"}
-    ], "qs": [
-      {"q": "陈兰家离公司多远？(Chén Lán jiā lí gōngsī duō yuǎn?)", "o": ["三公里 – 3 km", "三十多公里 – hơn 30 km", "五十公里 – 50 km"], "a": 1, "e": "我家离公司三十多公里."},
-      {"q": "Lan đi làm bằng gì?", "o": ["Xe máy", "Xe của công ty", "Tàu điện"], "a": 1, "e": "我不骑摩托车，我坐公司的车."},
-      {"q": "Bên cạnh cửa hàng ở cổng công ty là gì?", "o": ["Ngân hàng", "Quán cà phê", "Ga tàu"], "a": 1, "e": "商店旁边是一个咖啡馆."},
-      {"q": "Còn bao lâu nữa là Tết?", "o": ["Hai ngày", "Hai tuần", "Hai tháng"], "a": 1, "e": "离春节还有两个星期 – 离 + mốc thời gian + 还有…"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "从", "py": "cóng", "hv": "tòng", "parts": "Hai chữ 人 – người đi theo sau người", "strokes": 4, "vi": "theo (tòng); từ", "words": "从…到…"},
-      {"c": "离", "py": "lí", "hv": "ly", "parts": "亠 + 凶 + 禸 (phần dưới)", "strokes": 10, "vi": "rời, cách (ly biệt, cự ly)", "words": "离开, 离…远"},
-      {"c": "远", "py": "yuǎn", "hv": "viễn", "parts": "元 (nguyên – gợi âm) + 辶 (bước đi)", "strokes": 7, "vi": "xa – phải đi bộ nhiều", "words": "很远"},
-      {"c": "近", "py": "jìn", "hv": "cận", "parts": "斤 (cân – gợi âm) + 辶 (bước đi)", "strokes": 7, "vi": "gần", "words": "很近, 附近"},
-      {"c": "路", "py": "lù", "hv": "lộ", "parts": "⻊(túc – chân) + 各 (các – mỗi)", "strokes": 13, "vi": "đường – nơi mỗi bàn chân đi qua", "words": "路上, 走路"},
-      {"c": "往", "py": "wǎng", "hv": "vãng", "parts": "彳(xích – bước chân) + 主 (chủ)", "strokes": 8, "vi": "đi tới, hướng về (vãng lai)", "words": "往前走"},
-      {"c": "边", "py": "biān", "hv": "biên", "parts": "力 (lực) + 辶 (bước đi)", "strokes": 5, "vi": "bên, cạnh, mép (biên giới)", "words": "旁边, 左边, 右边"}
-    ]},
-    {"k": "speak", "h": "Nói: Đường đi & chỉ đường", "tasks": [
-      {"p": "Đồng nghiệp hỏi: 你家离公司远吗？你怎么来公司？ Trả lời: xa/gần, phương tiện, mất bao lâu.", "model": "我家离公司不太远。我骑摩托车来，从我家到公司要二十分钟。", "py": "Wǒ jiā lí gōngsī bú tài yuǎn. Wǒ qí mótuōchē lái, cóng wǒ jiā dào gōngsī yào èrshí fēnzhōng.", "vi": "Nhà tôi cách công ty không xa lắm. Tôi đi xe máy, từ nhà đến công ty mất 20 phút.", "tips": "骑 qí cho xe máy, 坐 zuò cho xe buýt/tàu."},
-      {"p": "Bạn ở ga tàu, hỏi đường đến khách sạn Hoà Bình; người đi đường chỉ đường.", "model": "请问，去和平宾馆怎么走？— 一直往前走，到了银行往右拐，宾馆在银行旁边。", "py": "Qǐngwèn, qù Hépíng Bīnguǎn zěnme zǒu? — Yìzhí wǎng qián zǒu, dàole yínháng wǎng yòu guǎi, bīnguǎn zài yínháng pángbiān.", "vi": "Xin hỏi, đến khách sạn Hoà Bình đi thế nào? — Cứ đi thẳng, đến ngân hàng thì rẽ phải, khách sạn ở cạnh ngân hàng."},
-      {"p": "Giới thiệu lịch làm việc của bạn với 从…到….", "model": "我从星期一到星期六上班，从早上八点到下午五点半。中午从十二点到一点休息。", "py": "Wǒ cóng xīngqīyī dào xīngqīliù shàngbān, cóng zǎoshang bā diǎn dào xiàwǔ wǔ diǎn bàn. Zhōngwǔ cóng shí'èr diǎn dào yī diǎn xiūxi.", "vi": "Tôi làm từ thứ Hai đến thứ Bảy, từ 8 giờ sáng đến 5 giờ rưỡi chiều. Buổi trưa nghỉ từ 12 giờ đến 1 giờ."}
-    ]},
-    {"k": "write", "h": "Viết: Đường đi làm của tôi", "task": "Viết 60–90 chữ mô tả đường đi làm/đi học của bạn: nhà cách nơi làm bao xa, đi bằng gì, mất bao lâu, giờ làm từ… đến…, xung quanh nơi làm có gì (旁边/左边/右边).", "min": 60, "model": "我家在胡志明市，公司在第一郡。我家离公司不远，八公里。我每天骑摩托车上班，从我家到公司要二十五分钟。路上车很多。我从早上八点到下午五点工作。公司左边是一个银行，右边是一个咖啡馆，旁边还有一个小公园。离发工资还有三天，我很高兴！", "modelVi": "Nhà tôi ở TP. Hồ Chí Minh, công ty ở Quận 1. Nhà tôi cách công ty không xa, 8 km. Hằng ngày tôi đi xe máy đi làm, từ nhà đến công ty mất 25 phút. Trên đường rất đông xe. Tôi làm việc từ 8 giờ sáng đến 5 giờ chiều. Bên trái công ty là một ngân hàng, bên phải là một quán cà phê, bên cạnh còn có một công viên nhỏ. Còn ba ngày nữa là nhận lương, tôi vui lắm!", "tips": ["第一郡 Dì-yī Jùn = Quận 1; 发工资 fā gōngzī = nhận lương.", "Từ chỉ vị trí đứng sau danh từ: 公司左边 (bên trái công ty)."], "checklist": ["Có câu A 离 B + 远/近", "Có 从…到… (thời gian) và 从…到…要… (thời gian di chuyển)", "Phương tiện 坐/骑 đặt trước động từ", "Có ≥ 2 từ vị trí 左边 / 右边 / 旁边", "Không dùng 从 thay cho 离"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "我家离公司很近。", "lang": "zh-CN", "q": "Nhà người nói thế nào so với công ty?", "o": ["Rất gần", "Rất xa", "Ở ngay trong công ty"], "a": 0, "e": "离公司很近 = cách công ty rất gần."},
-    {"t": "listen", "say": "从河内到下龙湾要三个小时。", "lang": "zh-CN", "q": "Từ Hà Nội đến Hạ Long mất bao lâu?", "o": ["2 tiếng", "3 tiếng", "30 phút"], "a": 1, "e": "要三个小时 = mất 3 tiếng."},
-    {"t": "listen", "say": "一直往前走，银行在右边。", "lang": "zh-CN", "q": "Ngân hàng ở đâu?", "o": ["Đi thẳng, ở bên phải", "Rẽ trái là đến", "Ở phía sau"], "a": 0, "e": "一直往前走 = đi thẳng; 在右边 = ở bên phải."},
-    {"t": "mc", "q": "“Nhà tôi cách công ty rất xa” – câu đúng:", "o": ["我家从公司很远。", "我家离公司很远。", "我家离公司是很远。"], "a": 1, "e": "Khoảng cách dùng 离; không thêm 是 trước tính từ."},
-    {"t": "mc", "q": "“Tôi đi làm từ 8 giờ đến 5 giờ” – câu đúng:", "o": ["我上班从八点到五点。", "我从八点到五点上班。", "我八点从五点到上班。"], "a": 1, "e": "从…到… đặt trước động từ."},
-    {"t": "mc", "q": "“Tôi đi tàu điện đến công ty” – câu đúng:", "o": ["我去公司坐地铁。", "我坐地铁去公司。", "我地铁坐去公司。"], "a": 1, "e": "坐 + phương tiện đặt trước động từ chính 去."},
-    {"t": "mc", "q": "“Đi xe máy” nói là:", "o": ["坐摩托车", "骑摩托车", "走摩托车"], "a": 1, "e": "骑 dùng cho xe phải “cưỡi” (xe máy, xe đạp)."},
-    {"t": "mc", "q": "走 (zǒu) nghĩa là:", "o": ["chạy", "đi (bộ)", "bay"], "a": 1, "e": "走 = đi bộ, đi; chạy là 跑. Đừng hiểu theo âm Hán Việt “tẩu”."},
-    {"t": "fill", "q": "请问，去机场怎么___？ (Qǐngwèn, qù jīchǎng zěnme ___?) (đi)", "py": "zǒu", "a": "走", "alt": ["zou", "zǒu"], "e": "去…怎么走？ = đi … thế nào?"},
-    {"t": "fill", "q": "___春节还有十天。 (___ Chūn Jié hái yǒu shí tiān.) (còn 10 ngày nữa là Tết – điền 1 chữ)", "py": "lí", "a": "离", "alt": ["li", "lí"], "e": "离 + mốc thời gian + 还有 + bao lâu."},
-    {"t": "fill", "q": "一直___前走。 (Yìzhí ___ qián zǒu.) (về phía)", "py": "wǎng", "a": "往", "alt": ["wang", "wǎng"], "e": "往 + hướng + động từ."},
-    {"t": "order", "q": "Sắp xếp: “Từ đây đến sân bay mất bao lâu?”", "w": ["到机场", "多长时间", "从这儿", "要"], "a": "从这儿到机场要多长时间", "e": "从 A 到 B + 要 + 多长时间？"},
-    {"t": "order", "q": "Sắp xếp: “Cạnh khách sạn có một ga tàu điện.”", "w": ["有", "旁边", "一个", "宾馆", "地铁站"], "a": "宾馆旁边有一个地铁站", "e": "Nơi chốn + 旁边 + 有 + vật."},
-    {"t": "dict", "say": "你家离公司远吗？", "lang": "zh-CN", "a": "你家离公司远吗？", "py": "Nǐ jiā lí gōngsī yuǎn ma?", "e": "Gõ chữ Hán hoặc pinyin."},
-    {"t": "match", "q": "Nối:", "pairs": [["机场", "sân bay"], ["地铁", "tàu điện ngầm"], ["公共汽车", "xe buýt"], ["左边", "bên trái"], ["右边", "bên phải"], ["旁边", "bên cạnh"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Bản đồ khu phố vẽ sẵn (ga tàu, ngân hàng, khách sạn, quán cà phê, công ty); thẻ phương tiện (xe máy, xe buýt, tàu điện, máy bay, taxi); mũi tên trái/phải/thẳng; khăn bịt mắt; thẻ chữ 从 离 远 近 路 往 边.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: hỏi nhanh từng học viên (tiếng Việt) “Bạn đến lớp bằng gì? Mất bao lâu?”, GV nói lại bằng tiếng Trung: 他骑摩托车来，要二十分钟."},
-      {"t": "20'", "do": "Từ vựng 15 từ: phương tiện (公共汽车 地铁 骑 机场), khoảng cách (离 远 近 路 小时), hướng & vị trí (往 走 左边 右边 旁边), 从. Nhấn bẫy 走 ≠ chạy."},
-      {"t": "10'", "do": "Phát âm: an/ang (晚/往), in/ing (近/静), üan (远/晚), l/n (离/泥)."},
-      {"t": "30'", "do": "Ngữ pháp 1–2: 从…到… (thời gian, nơi chốn, mất bao lâu); 坐/骑 + phương tiện trước động từ; A 离 B 远/近; 离 + thời gian. Viết câu sai “我家从公司很远” cho lớp sửa."},
-      {"t": "15'", "do": "Nghe hội thoại 3 lần; học viên vẽ đường từ ga tàu đến công ty trên bản đồ theo lời A Minh."},
-      {"t": "5'", "do": "Giao bài tập 1–8."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: hỏi đáp dây chuyền 你家离…远吗？从…到…要多长时间？"},
-      {"t": "15'", "do": "Ngữ pháp 3: hỏi & chỉ đường trên bản đồ (往前走, 往左拐, 在…旁边/左边/右边)."},
-      {"t": "15'", "do": "Đọc ‘我的上班路’; trả lời câu hỏi; so sánh với đường đi làm của học viên."},
-      {"t": "15'", "do": "Chữ Hán 从 离 远 近 路 往 边 (bộ 辶, 彳, ⻊)."},
-      {"t": "20'", "do": "Nói: trò “Người dẫn đường” + nhiệm vụ 1 và 3."},
-      {"t": "15'", "do": "Viết “Đường đi làm của tôi”; bài tập 9–15; chữa lỗi chung."}
+ "no": 7,
+ "title": "你家离公司远吗？– 从…到…, 离: khoảng cách & thời gian",
+ "sub": "Nǐ jiā lí gōngsī yuǎn ma? 你家离公司远吗？",
+ "goals": [
+  "Nói khoảng thời gian, quãng đường với 从 A 到 B và thời gian di chuyển với 从 A 到 B 要…",
+  "Nói xa – gần bằng A 离 B + 远/近; nói “còn … nữa là đến…” bằng 离 + mốc thời gian + 还有…",
+  "Hỏi và chỉ đường: 怎么走？往前走, 往左/右拐, 在…旁边/左边/右边",
+  "Nói phương tiện đi làm: 骑摩托车, 坐地铁, 坐公共汽车, 走路",
+  "Phân biệt uan – uang (晚/往), in – ing (近/静), üan (远) và l – n (离/泥)"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词 shēngcí)",
+   "items": [
+    {
+     "w": "从",
+     "py": "cóng",
+     "hv": "tòng",
+     "pos": "prep",
+     "vi": "từ (điểm bắt đầu)",
+     "ex": "我从叶纱城来。",
+     "exPy": "Wǒ cóng Yèshā Chéng lái.",
+     "exVi": "Tôi đến từ Diệp Sa."
+    },
+    {
+     "w": "离",
+     "py": "lí",
+     "hv": "ly",
+     "pos": "prep",
+     "vi": "cách (khoảng cách đến…)",
+     "ex": "我家离公司很近。",
+     "exPy": "Wǒ jiā lí gōngsī hěn jìn.",
+     "exVi": "Nhà tôi cách công ty rất gần."
+    },
+    {
+     "w": "远",
+     "py": "yuǎn",
+     "hv": "viễn",
+     "pos": "adj",
+     "vi": "xa",
+     "ex": "机场离这儿很远。",
+     "exPy": "Jīchǎng lí zhèr hěn yuǎn.",
+     "exVi": "Sân bay cách đây rất xa."
+    },
+    {
+     "w": "近",
+     "py": "jìn",
+     "hv": "cận",
+     "pos": "adj",
+     "vi": "gần",
+     "ex": "地铁站很近，走路五分钟。",
+     "exPy": "Dìtiě zhàn hěn jìn, zǒulù wǔ fēnzhōng.",
+     "exVi": "Ga tàu điện rất gần, đi bộ 5 phút."
+    },
+    {
+     "w": "路",
+     "py": "lù",
+     "hv": "lộ",
+     "pos": "n",
+     "vi": "đường; tuyến (xe buýt số…)",
+     "ex": "路上车很多。",
+     "exPy": "Lùshang chē hěn duō.",
+     "exVi": "Trên đường rất đông xe."
+    },
+    {
+     "w": "往",
+     "py": "wǎng",
+     "hv": "vãng",
+     "pos": "prep",
+     "vi": "về phía, hướng về (往前走)",
+     "ex": "一直往前走。",
+     "exPy": "Yìzhí wǎng qián zǒu.",
+     "exVi": "Cứ đi thẳng về phía trước."
+    },
+    {
+     "w": "走",
+     "py": "zǒu",
+     "hv": "tẩu",
+     "pos": "v",
+     "vi": "đi (bộ); rời đi (KHÔNG phải “chạy”)",
+     "ex": "去银行怎么走？",
+     "exPy": "Qù yínháng zěnme zǒu?",
+     "exVi": "Đi ngân hàng thì đi đường nào?"
+    },
+    {
+     "w": "小时",
+     "py": "xiǎoshí",
+     "hv": "tiểu thời",
+     "pos": "n",
+     "vi": "tiếng đồng hồ",
+     "ex": "从叶纱城到纱绫湾要三个小时。",
+     "exPy": "Cóng Yèshā Chéng dào Shālíng Wān yào sān ge xiǎoshí.",
+     "exVi": "Từ Diệp Sa đến Sa Lăng mất 3 tiếng."
+    },
+    {
+     "w": "机场",
+     "py": "jīchǎng",
+     "hv": "cơ trường",
+     "pos": "n",
+     "vi": "sân bay",
+     "ex": "我去机场接朋友。",
+     "exPy": "Wǒ qù jīchǎng jiē péngyou.",
+     "exVi": "Tôi ra sân bay đón bạn."
+    },
+    {
+     "w": "公共汽车",
+     "py": "gōnggòng qìchē",
+     "hv": "công cộng khí xa",
+     "pos": "n",
+     "vi": "xe buýt",
+     "ex": "我坐公共汽车上班。",
+     "exPy": "Wǒ zuò gōnggòng qìchē shàngbān.",
+     "exVi": "Tôi đi xe buýt đi làm."
+    },
+    {
+     "w": "地铁",
+     "py": "dìtiě",
+     "hv": "địa thiết",
+     "pos": "n",
+     "vi": "tàu điện ngầm, metro",
+     "ex": "叶纱城也有地铁了。",
+     "exPy": "Yèshā Chéng yě yǒu dìtiě le.",
+     "exVi": "Diệp Sa cũng có tàu điện rồi."
+    },
+    {
+     "w": "骑",
+     "py": "qí",
+     "hv": "kỵ",
+     "pos": "v",
+     "vi": "cưỡi, đi (xe máy, xe đạp)",
+     "ex": "我骑摩托车上班。",
+     "exPy": "Wǒ qí mótuōchē shàngbān.",
+     "exVi": "Tôi đi xe máy đi làm."
+    },
+    {
+     "w": "左边",
+     "py": "zuǒbian",
+     "hv": "tả biên",
+     "pos": "n",
+     "vi": "bên trái",
+     "ex": "银行在公司左边。",
+     "exPy": "Yínháng zài gōngsī zuǒbian.",
+     "exVi": "Ngân hàng ở bên trái công ty."
+    },
+    {
+     "w": "右边",
+     "py": "yòubian",
+     "hv": "hữu biên",
+     "pos": "n",
+     "vi": "bên phải",
+     "ex": "地铁站在宾馆右边。",
+     "exPy": "Dìtiě zhàn zài bīnguǎn yòubian.",
+     "exVi": "Ga tàu điện ở bên phải khách sạn."
+    },
+    {
+     "w": "旁边",
+     "py": "pángbiān",
+     "hv": "bàng biên",
+     "pos": "n",
+     "vi": "bên cạnh",
+     "ex": "我家旁边有一个咖啡馆。",
+     "exPy": "Wǒ jiā pángbiān yǒu yí ge kāfēiguǎn.",
+     "exVi": "Cạnh nhà tôi có một quán cà phê."
+    }
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Đi lại: phương tiện & hỏi đường",
+   "html": "<p><b>Động từ đi với phương tiện:</b></p><ul><li><b>坐</b> zuò + xe có ghế ngồi: 坐公共汽车, 坐地铁, 坐飞机, 坐出租车 (taxi).</li><li><b>骑</b> qí + xe phải “cưỡi”: 骑摩托车 mótuōchē (xe máy), 骑自行车 zìxíngchē (xe đạp).</li><li><b>走路</b> zǒulù – đi bộ; <b>打车</b> dǎchē – gọi taxi/xe công nghệ.</li></ul><p><b>Hỏi đường:</b> 请问，去…怎么走？ – <b>一直往前走</b> (đi thẳng), <b>往左拐 / 往右拐</b> (guǎi – rẽ trái/phải), <b>过马路</b> (guò mǎlù – qua đường).</p><p>⚠️ <b>Bẫy Hán Việt:</b> 走 âm Hán Việt là <i>tẩu</i> (tẩu thoát = chạy trốn), nhưng tiếng Trung hiện đại 走 = <b>đi bộ</b>. “Chạy” là 跑 (Bài 6). Ngược lại, 远 <i>viễn</i>, 近 <i>cận</i> (viễn thị, cận thị), 离 <i>ly</i> (cự ly) – giữ nguyên nghĩa, rất dễ nhớ!</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: uan – uang, in – ing, üan, l – n",
+   "html": "<p>Chỉ đường mà đọc sai âm mũi thì người nghe đi lạc! Luyện các cặp sau thật rõ.</p>",
+   "items": [
+    {
+     "sym": "an – ang (晚 / 往)",
+     "ex": [
+      "往",
+      "晚上",
+      "旁边"
+     ],
+     "vi": "<b>-n</b>: đầu lưỡi chạm lợi trên (晚 wǎn ≈ “oản”). <b>-ng</b>: lưỡi rút về sau, âm vang mũi (往 wǎng ≈ “oảng”, 旁 páng). Đọc sai thì “buổi tối” thành “hướng về”!",
+     "pairs": [
+      [
+       "晚",
+       "往"
+      ],
+      [
+       "站",
+       "张"
+      ]
+     ]
+    },
+    {
+     "sym": "in – ing (近 / 静)",
+     "ex": [
+      "近",
+      "进",
+      "明天"
+     ],
+     "vi": "<b>in</b>: lưỡi chạm lợi, như “in”. <b>ing</b>: lưỡi rút về sau, như “inh”. 近 jìn (gần) ≠ 静 jìng (yên tĩnh).",
+     "pairs": [
+      [
+       "近",
+       "静"
+      ],
+      [
+       "民",
+       "明"
+      ]
+     ]
+    },
+    {
+     "sym": "üan (远)",
+     "ex": [
+      "远",
+      "元"
+     ],
+     "vi": "y/j/q/x + uan thực chất là <b>üan</b>: môi tròn rồi mở “an” – 远 yuǎn ≈ “uyển” (gần âm Hán Việt viễn!). Đừng đọc thành wǎn.",
+     "pairs": [
+      [
+       "远",
+       "晚"
+      ]
+     ]
+    },
+    {
+     "sym": "l – n (离 / 泥)",
+     "ex": [
+      "离",
+      "路",
+      "旅游"
+     ],
+     "vi": "离 lí ≠ 泥 ní (bùn). Bịt mũi kiểm tra như Bài 6: l đọc được khi bịt mũi, n thì nghẹt.",
+     "pairs": [
+      [
+       "离",
+       "泥"
+      ],
+      [
+       "蓝",
+       "男"
+      ]
+     ]
+    },
+    {
+     "sym": "左边 / 右边 / 旁边",
+     "ex": [
+      "左边",
+      "右边",
+      "旁边"
+     ],
+     "vi": "边 trong 左边, 右边 thường đọc nhẹ: zuǒbian, yòubian; 旁边 pángbiān giữ thanh 1. 左 zuǒ (thanh 3) – 右 yòu (thanh 4): giơ tay trái/phải khi đọc để nhớ."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: 从 A 到 B – từ … đến …",
+   "html": "<p><b>从 A 到 B</b> dùng cho cả <b>thời gian</b> và <b>nơi chốn</b> – như “từ … đến …” tiếng Việt. Muốn nói <b>mất bao lâu</b>: 从 A 到 B + <b>要</b> (cần, mất) + thời gian. Phương tiện: 坐/骑 + phương tiện đặt <b>trước</b> động từ chính.</p>",
+   "table": [
+    [
+     "Ý",
+     "Công thức",
+     "Ví dụ",
+     "Pinyin"
     ],
-    "games": [
-      "Người dẫn đường: một học viên bịt mắt, bạn cùng đội chỉ đường bằng tiếng Trung (往前走三步, 往左拐, 往右走…) để đến “kho báu” trong lớp. Đội nhanh nhất thắng.",
-      "Bản đồ bí ẩn: mỗi cặp có 2 bản đồ thiếu thông tin khác nhau; hỏi nhau 银行在哪儿？离地铁站远吗？ để điền đầy đủ."
+    [
+     "Thời gian",
+     "从 + giờ + 到 + giờ + V",
+     "我从八点到五点上班。",
+     "Wǒ cóng bā diǎn dào wǔ diǎn shàngbān."
     ],
-    "errors": [
-      "Dùng 从 thay 离: ❌ 我家从公司很远 → 我家离公司很远.",
-      "Đặt 从…到… sau động từ: ❌ 我上班从八点到五点 → 我从八点到五点上班.",
-      "Đặt phương tiện sau: ❌ 我去公司坐地铁 → 我坐地铁去公司.",
-      "Dùng 坐 cho xe máy: ❌ 坐摩托车 → 骑摩托车.",
-      "Hiểu 走 là “chạy” theo âm Hán Việt; ❌ 走往前 → 往前走.",
-      "Đọc 远 yuǎn thành wǎn (晚)."
+    [
+     "Nơi chốn",
+     "从 + nơi + 到 + nơi",
+     "从叶纱城到云线城",
+     "cóng Yèshā Chéng dào Yúnxiàn Chéng"
     ],
-    "homework": "Bài tập game ≥ 80%; viết “Đường đi làm của tôi” 60–90 chữ; vẽ bản đồ khu nhà mình và ghi âm chỉ đường từ nhà đến chợ/siêu thị gần nhất; ôn thẻ từ 15 phút/ngày."
+    [
+     "Mất bao lâu",
+     "从 A 到 B + 要 + thời gian",
+     "从我家到公司要二十分钟。",
+     "Cóng wǒ jiā dào gōngsī yào èrshí fēnzhōng."
+    ],
+    [
+     "Phương tiện",
+     "坐/骑 + phương tiện + 去/来",
+     "我骑摩托车去公司。",
+     "Wǒ qí mótuōchē qù gōngsī."
+    ],
+    [
+     "Hỏi",
+     "从 A 到 B 要多长时间？",
+     "从这儿到机场要多长时间？",
+     "Cóng zhèr dào jīchǎng yào duō cháng shíjiān?"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我们从星期一到星期五上班。",
+     "py": "Wǒmen cóng xīngqīyī dào xīngqīwǔ shàngbān.",
+     "vi": "Chúng tôi đi làm từ thứ Hai đến thứ Sáu."
+    },
+    {
+     "t": "从叶纱城到绣田城，坐飞机要两个小时。",
+     "py": "Cóng Yèshā Chéng dào Xiùtián Chéng, zuò fēijī yào liǎng ge xiǎoshí.",
+     "vi": "Từ Diệp Sa vào Tú Điền đi máy bay mất 2 tiếng."
+    },
+    {
+     "t": "你从哪儿来？— 我从越南来。",
+     "py": "Nǐ cóng nǎr lái? — Wǒ cóng Yuènán lái.",
+     "vi": "Bạn từ đâu đến? — Tôi đến từ Việt Nam."
+    }
+   ],
+   "tips": [
+    "从…到… cả cụm đứng <b>trước động từ</b>: 我从八点到五点<b>上班</b>. ❌ <i>我上班从八点到五点</i> (dịch kiểu “tôi làm từ 8 đến 5”).",
+    "Phương tiện đặt trước động từ chính: ❌ <i>我去公司坐地铁</i> → 我<b>坐地铁</b>去公司.",
+    "坐 cho xe có ghế ngồi (坐车, 坐地铁, 坐飞机); 骑 cho xe phải “cưỡi” (骑摩托车, 骑自行车)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: A 离 B + 远 / 近 – A cách B xa/gần",
+   "html": "<p><b>离</b> = “cách”, nói <b>khoảng cách</b> giữa hai điểm: <b>A 离 B + (很) 远 / 近</b> hoặc + số km. Trật tự giống hệt tiếng Việt “nhà tôi <b>cách</b> công ty xa”. Cũng dùng cho <b>thời gian</b>: <b>离 + mốc + 还有 + bao lâu</b> = “còn … nữa là đến …”.</p>",
+   "table": [
+    [
+     "Câu",
+     "Pinyin",
+     "Nghĩa"
+    ],
+    [
+     "我家离公司很远。",
+     "Wǒ jiā lí gōngsī hěn yuǎn.",
+     "Nhà tôi cách công ty xa."
+    ],
+    [
+     "地铁站离这儿不远。",
+     "Dìtiě zhàn lí zhèr bù yuǎn.",
+     "Ga tàu điện cách đây không xa."
+    ],
+    [
+     "机场离市中心三十公里。",
+     "Jīchǎng lí shì zhōngxīn sānshí gōnglǐ.",
+     "Sân bay cách trung tâm 30 km."
+    ],
+    [
+     "你家离公司远吗？",
+     "Nǐ jiā lí gōngsī yuǎn ma?",
+     "Nhà bạn cách công ty có xa không?"
+    ],
+    [
+     "离春节还有十天。",
+     "Lí Chūn Jié hái yǒu shí tiān.",
+     "Còn 10 ngày nữa là Tết."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "宾馆离机场很近，坐出租车十分钟。",
+     "py": "Bīnguǎn lí jīchǎng hěn jìn, zuò chūzūchē shí fēnzhōng.",
+     "vi": "Khách sạn cách sân bay rất gần, đi taxi 10 phút."
+    },
+    {
+     "t": "离考试还有一个星期。",
+     "py": "Lí kǎoshì hái yǒu yí ge xīngqī.",
+     "vi": "Còn một tuần nữa là thi."
+    }
+   ],
+   "tips": [
+    "❌ <i>我家<b>从</b>公司很远</i> – nói xa/gần phải dùng <b>离</b>.",
+    "❌ <i>我家离公司是很远</i> – không thêm 是 trước tính từ.",
+    "Phân biệt: 从 = điểm xuất phát của một hành trình (có di chuyển); 离 = khoảng cách tĩnh giữa hai điểm."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: Hỏi & chỉ đường – 怎么走？往 + hướng + V · 在…旁边",
+   "html": "<p>Hỏi đường: <b>请问，去 + nơi + 怎么走？</b> Chỉ đường: <b>往 + 前/左/右 + V</b> (往前走, 往左拐). Vị trí: <b>A 在 B + 左边/右边/旁边</b> hoặc <b>B + 旁边 + 有 + A</b>.</p>",
+   "table": [
+    [
+     "Câu",
+     "Pinyin",
+     "Nghĩa"
+    ],
+    [
+     "请问，去机场怎么走？",
+     "Qǐngwèn, qù jīchǎng zěnme zǒu?",
+     "Xin hỏi, đi sân bay thế nào?"
+    ],
+    [
+     "一直往前走。",
+     "Yìzhí wǎng qián zǒu.",
+     "Cứ đi thẳng về phía trước."
+    ],
+    [
+     "往左拐 / 往右拐。",
+     "Wǎng zuǒ guǎi / wǎng yòu guǎi.",
+     "Rẽ trái / rẽ phải."
+    ],
+    [
+     "银行在公司左边。",
+     "Yínháng zài gōngsī zuǒbian.",
+     "Ngân hàng ở bên trái công ty."
+    ],
+    [
+     "公司旁边有一个咖啡馆。",
+     "Gōngsī pángbiān yǒu yí ge kāfēiguǎn.",
+     "Cạnh công ty có một quán cà phê."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "出了地铁站，往右走五分钟就到了。",
+     "py": "Chūle dìtiě zhàn, wǎng yòu zǒu wǔ fēnzhōng jiù dào le.",
+     "vi": "Ra khỏi ga tàu, đi về bên phải 5 phút là đến."
+    },
+    {
+     "t": "洗手间在哪儿？— 在电梯旁边。",
+     "py": "Xǐshǒujiān zài nǎr? — Zài diàntī pángbiān.",
+     "vi": "Nhà vệ sinh ở đâu? — Ở cạnh thang máy."
+    }
+   ],
+   "tips": [
+    "往 + hướng đứng <b>trước</b> động từ: ❌ <i>走往前</i> → 往前走.",
+    "Bẫy Hán Việt: 走 zǒu (tẩu) = <b>đi bộ</b>, không phải “chạy” (chạy là 跑). 走路 = đi bộ."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Đi làm bằng gì?",
+   "lang": "zh-CN",
+   "note": "Lý Hoa mới sang Diệp Sa, ở khách sạn xa công ty. Anh hỏi A Minh cách đi làm và đường ra sân bay. Nghe lần 1: A Minh đi làm bằng gì, mất bao lâu?",
+   "lines": [
+    {
+     "s": "李华",
+     "g": "m",
+     "t": "阿明，你家离公司远吗？",
+     "py": "Ā Míng, nǐ jiā lí gōngsī yuǎn ma?",
+     "vi": "A Minh, nhà cậu cách công ty có xa không?"
+    },
+    {
+     "s": "阿明",
+     "g": "m",
+     "t": "不太远。我骑摩托车上班，十五分钟。",
+     "py": "Bú tài yuǎn. Wǒ qí mótuōchē shàngbān, shíwǔ fēnzhōng.",
+     "vi": "Không xa lắm. Tôi đi xe máy đi làm, 15 phút."
+    },
+    {
+     "s": "李华",
+     "g": "m",
+     "t": "我住的宾馆离公司很远。从宾馆到公司要一个小时！",
+     "py": "Wǒ zhù de bīnguǎn lí gōngsī hěn yuǎn. Cóng bīnguǎn dào gōngsī yào yí ge xiǎoshí!",
+     "vi": "Khách sạn tôi ở cách công ty xa lắm. Từ khách sạn đến công ty mất một tiếng!"
+    },
+    {
+     "s": "阿明",
+     "g": "m",
+     "t": "你坐什么车来？",
+     "py": "Nǐ zuò shénme chē lái?",
+     "vi": "Anh đi xe gì đến?"
+    },
+    {
+     "s": "李华",
+     "g": "m",
+     "t": "坐公共汽车。路上车太多了。",
+     "py": "Zuò gōnggòng qìchē. Lùshang chē tài duō le.",
+     "vi": "Đi xe buýt. Trên đường đông xe quá."
+    },
+    {
+     "s": "阿明",
+     "g": "m",
+     "t": "你可以坐地铁。宾馆旁边有地铁站吗？",
+     "py": "Nǐ kěyǐ zuò dìtiě. Bīnguǎn pángbiān yǒu dìtiě zhàn ma?",
+     "vi": "Anh có thể đi tàu điện. Cạnh khách sạn có ga tàu không?"
+    },
+    {
+     "s": "李华",
+     "g": "m",
+     "t": "有，就在宾馆右边。",
+     "py": "Yǒu, jiù zài bīnguǎn yòubian.",
+     "vi": "Có, ngay bên phải khách sạn."
+    },
+    {
+     "s": "阿明",
+     "g": "m",
+     "t": "那你坐地铁吧，从宾馆到公司只要二十分钟。",
+     "py": "Nà nǐ zuò dìtiě ba, cóng bīnguǎn dào gōngsī zhǐ yào èrshí fēnzhōng.",
+     "vi": "Vậy anh đi tàu điện đi, từ khách sạn đến công ty chỉ mất 20 phút."
+    },
+    {
+     "s": "李华",
+     "g": "m",
+     "t": "地铁站离公司远吗？",
+     "py": "Dìtiě zhàn lí gōngsī yuǎn ma?",
+     "vi": "Ga tàu cách công ty có xa không?"
+    },
+    {
+     "s": "阿明",
+     "g": "m",
+     "t": "很近。出了地铁站，往前走五分钟，公司在银行左边。",
+     "py": "Hěn jìn. Chūle dìtiě zhàn, wǎng qián zǒu wǔ fēnzhōng, gōngsī zài yínháng zuǒbian.",
+     "vi": "Rất gần. Ra khỏi ga, đi thẳng 5 phút, công ty ở bên trái ngân hàng."
+    },
+    {
+     "s": "李华",
+     "g": "m",
+     "t": "太好了！对了，下星期我去机场接王经理。从这儿到机场要多长时间？",
+     "py": "Tài hǎo le! Duì le, xià xīngqī wǒ qù jīchǎng jiē Wáng jīnglǐ. Cóng zhèr dào jīchǎng yào duō cháng shíjiān?",
+     "vi": "Tuyệt quá! À này, tuần sau tôi ra sân bay đón giám đốc Vương. Từ đây ra sân bay mất bao lâu?"
+    },
+    {
+     "s": "阿明",
+     "g": "m",
+     "t": "机场离这儿很远，坐出租车要四十分钟。",
+     "py": "Jīchǎng lí zhèr hěn yuǎn, zuò chūzūchē yào sìshí fēnzhōng.",
+     "vi": "Sân bay cách đây xa lắm, đi taxi mất 40 phút."
+    },
+    {
+     "s": "李华",
+     "g": "m",
+     "t": "好，谢谢你！",
+     "py": "Hǎo, xièxie nǐ!",
+     "vi": "Được, cảm ơn cậu!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "A Minh đi làm bằng gì, mất bao lâu?",
+     "o": [
+      "Xe máy, 15 phút",
+      "Tàu điện, 20 phút",
+      "Xe buýt, 1 tiếng"
+     ],
+     "a": 0,
+     "e": "我骑摩托车上班，十五分钟."
+    },
+    {
+     "q": "Từ khách sạn đến công ty đi xe buýt mất bao lâu?",
+     "o": [
+      "40 phút",
+      "1 tiếng",
+      "20 phút"
+     ],
+     "a": 1,
+     "e": "从宾馆到公司要一个小时."
+    },
+    {
+     "q": "Ga tàu điện ở đâu?",
+     "o": [
+      "Bên phải khách sạn",
+      "Đối diện công ty",
+      "Bên trái khách sạn"
+     ],
+     "a": 0,
+     "e": "就在宾馆右边."
+    },
+    {
+     "q": "Công ty ở đâu?",
+     "o": [
+      "Bên phải ga tàu",
+      "Bên trái ngân hàng",
+      "Cạnh khách sạn"
+     ],
+     "a": 1,
+     "e": "公司在银行左边."
+    },
+    {
+     "q": "Đi taxi từ đây ra sân bay mất bao lâu?",
+     "o": [
+      "40 phút",
+      "1 tiếng",
+      "15 phút"
+     ],
+     "a": 0,
+     "e": "坐出租车要四十分钟."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Đường đi làm của tôi",
+   "title": "我的上班路",
+   "text": "我叫陈兰。我家在叶纱城，公司在绒岚城，我家离公司三十多公里，有一点儿远。\n\n我从星期一到星期五上班，从早上八点到下午五点。我不骑摩托车，我坐公司的车。从我家到公司要五十分钟。\n\n公司门口有一个小商店，商店旁边是一个咖啡馆。下班以后，我常常和同事去那儿喝咖啡。离春节还有两个星期，大家都很高兴。",
+   "py": "Wǒ jiào Chén Lán. Wǒ jiā zài Yèshā Chéng, gōngsī zài Rónglán Chéng, wǒ jiā lí gōngsī sānshí duō gōnglǐ, yǒu yìdiǎnr yuǎn.\n\nWǒ cóng xīngqīyī dào xīngqīwǔ shàngbān, cóng zǎoshang bā diǎn dào xiàwǔ wǔ diǎn. Wǒ bù qí mótuōchē, wǒ zuò gōngsī de chē. Cóng wǒ jiā dào gōngsī yào wǔshí fēnzhōng.\n\nGōngsī ménkǒu yǒu yí ge xiǎo shāngdiàn, shāngdiàn pángbiān shì yí ge kāfēiguǎn. Xiàbān yǐhòu, wǒ chángcháng hé tóngshì qù nàr hē kāfēi. Lí Chūn Jié hái yǒu liǎng ge xīngqī, dàjiā dōu hěn gāoxìng.",
+   "vi": "Tôi là Trần Lan. Nhà tôi ở Diệp Sa, công ty ở Nhung Lam, nhà tôi cách công ty hơn 30 km, hơi xa.\n\nTôi đi làm từ thứ Hai đến thứ Sáu, từ 8 giờ sáng đến 5 giờ chiều. Tôi không đi xe máy, tôi đi xe của công ty. Từ nhà tôi đến công ty mất 50 phút.\n\nỞ cổng công ty có một cửa hàng nhỏ, bên cạnh cửa hàng là một quán cà phê. Tan làm, tôi thường cùng đồng nghiệp đến đó uống cà phê. Còn hai tuần nữa là Tết, mọi người đều rất vui.",
+   "gloss": [
+    {
+     "w": "绒岚城",
+     "py": "Rónglán Chéng",
+     "vi": "Nhung Lam"
+    },
+    {
+     "w": "公里",
+     "py": "gōnglǐ",
+     "vi": "ki-lô-mét"
+    },
+    {
+     "w": "摩托车",
+     "py": "mótuōchē",
+     "vi": "xe máy"
+    },
+    {
+     "w": "门口",
+     "py": "ménkǒu",
+     "vi": "cổng, trước cửa"
+    },
+    {
+     "w": "咖啡馆",
+     "py": "kāfēiguǎn",
+     "vi": "quán cà phê"
+    },
+    {
+     "w": "下班",
+     "py": "xiàbān",
+     "vi": "tan làm"
+    },
+    {
+     "w": "以后",
+     "py": "yǐhòu",
+     "vi": "sau (khi)"
+    }
+   ],
+   "qs": [
+    {
+     "q": "陈兰家离公司多远？(Chén Lán jiā lí gōngsī duō yuǎn?)",
+     "o": [
+      "五十公里 – 50 km",
+      "三公里 – 3 km",
+      "三十多公里 – hơn 30 km"
+     ],
+     "a": 2,
+     "e": "我家离公司三十多公里."
+    },
+    {
+     "q": "Lan đi làm bằng gì?",
+     "o": [
+      "Xe máy",
+      "Xe của công ty",
+      "Tàu điện"
+     ],
+     "a": 1,
+     "e": "我不骑摩托车，我坐公司的车."
+    },
+    {
+     "q": "Bên cạnh cửa hàng ở cổng công ty là gì?",
+     "o": [
+      "Ngân hàng",
+      "Quán cà phê",
+      "Ga tàu"
+     ],
+     "a": 1,
+     "e": "商店旁边是一个咖啡馆."
+    },
+    {
+     "q": "Còn bao lâu nữa là Tết?",
+     "o": [
+      "Hai ngày",
+      "Hai tuần",
+      "Hai tháng"
+     ],
+     "a": 1,
+     "e": "离春节还有两个星期 – 离 + mốc thời gian + 还有…"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "从",
+     "py": "cóng",
+     "hv": "tòng",
+     "parts": "Hai chữ 人 – người đi theo sau người",
+     "strokes": 4,
+     "vi": "theo (tòng); từ",
+     "words": "从…到…"
+    },
+    {
+     "c": "离",
+     "py": "lí",
+     "hv": "ly",
+     "parts": "亠 + 凶 + 禸 (phần dưới)",
+     "strokes": 10,
+     "vi": "rời, cách (ly biệt, cự ly)",
+     "words": "离开, 离…远"
+    },
+    {
+     "c": "远",
+     "py": "yuǎn",
+     "hv": "viễn",
+     "parts": "元 (nguyên – gợi âm) + 辶 (bước đi)",
+     "strokes": 7,
+     "vi": "xa – phải đi bộ nhiều",
+     "words": "很远"
+    },
+    {
+     "c": "近",
+     "py": "jìn",
+     "hv": "cận",
+     "parts": "斤 (cân – gợi âm) + 辶 (bước đi)",
+     "strokes": 7,
+     "vi": "gần",
+     "words": "很近, 附近"
+    },
+    {
+     "c": "路",
+     "py": "lù",
+     "hv": "lộ",
+     "parts": "⻊(túc – chân) + 各 (các – mỗi)",
+     "strokes": 13,
+     "vi": "đường – nơi mỗi bàn chân đi qua",
+     "words": "路上, 走路"
+    },
+    {
+     "c": "往",
+     "py": "wǎng",
+     "hv": "vãng",
+     "parts": "彳(xích – bước chân) + 主 (chủ)",
+     "strokes": 8,
+     "vi": "đi tới, hướng về (vãng lai)",
+     "words": "往前走"
+    },
+    {
+     "c": "边",
+     "py": "biān",
+     "hv": "biên",
+     "parts": "力 (lực) + 辶 (bước đi)",
+     "strokes": 5,
+     "vi": "bên, cạnh, mép (biên giới)",
+     "words": "旁边, 左边, 右边"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Đường đi & chỉ đường",
+   "tasks": [
+    {
+     "p": "Đồng nghiệp hỏi: 你家离公司远吗？你怎么来公司？ Trả lời: xa/gần, phương tiện, mất bao lâu.",
+     "model": "我家离公司不太远。我骑摩托车来，从我家到公司要二十分钟。",
+     "py": "Wǒ jiā lí gōngsī bú tài yuǎn. Wǒ qí mótuōchē lái, cóng wǒ jiā dào gōngsī yào èrshí fēnzhōng.",
+     "vi": "Nhà tôi cách công ty không xa lắm. Tôi đi xe máy, từ nhà đến công ty mất 20 phút.",
+     "tips": "骑 qí cho xe máy, 坐 zuò cho xe buýt/tàu."
+    },
+    {
+     "p": "Bạn ở ga tàu, hỏi đường đến khách sạn Hoà Bình; người đi đường chỉ đường.",
+     "model": "请问，去和平宾馆怎么走？— 一直往前走，到了银行往右拐，宾馆在银行旁边。",
+     "py": "Qǐngwèn, qù Hépíng Bīnguǎn zěnme zǒu? — Yìzhí wǎng qián zǒu, dàole yínháng wǎng yòu guǎi, bīnguǎn zài yínháng pángbiān.",
+     "vi": "Xin hỏi, đến khách sạn Hoà Bình đi thế nào? — Cứ đi thẳng, đến ngân hàng thì rẽ phải, khách sạn ở cạnh ngân hàng."
+    },
+    {
+     "p": "Giới thiệu lịch làm việc của bạn với 从…到….",
+     "model": "我从星期一到星期六上班，从早上八点到下午五点半。中午从十二点到一点休息。",
+     "py": "Wǒ cóng xīngqīyī dào xīngqīliù shàngbān, cóng zǎoshang bā diǎn dào xiàwǔ wǔ diǎn bàn. Zhōngwǔ cóng shí'èr diǎn dào yì diǎn xiūxi.",
+     "vi": "Tôi làm từ thứ Hai đến thứ Bảy, từ 8 giờ sáng đến 5 giờ rưỡi chiều. Buổi trưa nghỉ từ 12 giờ đến 1 giờ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Đường đi làm của tôi",
+   "task": "Viết 60–90 chữ mô tả đường đi làm/đi học của bạn: nhà cách nơi làm bao xa, đi bằng gì, mất bao lâu, giờ làm từ… đến…, xung quanh nơi làm có gì (旁边/左边/右边).",
+   "min": 60,
+   "model": "我家在绣田城，公司在第一郡。我家离公司不远，八公里。我每天骑摩托车上班，从我家到公司要二十五分钟。路上车很多。我从早上八点到下午五点工作。公司左边是一个银行，右边是一个咖啡馆，旁边还有一个小公园。离发工资还有三天，我很高兴！",
+   "modelVi": "Nhà tôi ở Tú Điền, công ty ở Quận 1. Nhà tôi cách công ty không xa, 8 km. Hằng ngày tôi đi xe máy đi làm, từ nhà đến công ty mất 25 phút. Trên đường rất đông xe. Tôi làm việc từ 8 giờ sáng đến 5 giờ chiều. Bên trái công ty là một ngân hàng, bên phải là một quán cà phê, bên cạnh còn có một công viên nhỏ. Còn ba ngày nữa là nhận lương, tôi vui lắm!",
+   "tips": [
+    "第一郡 Dì-yī Jùn = Quận 1; 发工资 fā gōngzī = nhận lương.",
+    "Từ chỉ vị trí đứng sau danh từ: 公司左边 (bên trái công ty)."
+   ],
+   "checklist": [
+    "Có câu A 离 B + 远/近",
+    "Có 从…到… (thời gian) và 从…到…要… (thời gian di chuyển)",
+    "Phương tiện 坐/骑 đặt trước động từ",
+    "Có ≥ 2 từ vị trí 左边 / 右边 / 旁边",
+    "Không dùng 从 thay cho 离"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "我家离公司很近。",
+   "lang": "zh-CN",
+   "q": "Nhà người nói thế nào so với công ty?",
+   "o": [
+    "Rất gần",
+    "Rất xa",
+    "Ở ngay trong công ty"
+   ],
+   "a": 0,
+   "e": "离公司很近 = cách công ty rất gần."
+  },
+  {
+   "t": "listen",
+   "say": "从叶纱城到纱绫湾要三个小时。",
+   "lang": "zh-CN",
+   "q": "Từ Diệp Sa đến Sa Lăng mất bao lâu?",
+   "o": [
+    "30 phút",
+    "2 tiếng",
+    "3 tiếng"
+   ],
+   "a": 2,
+   "e": "要三个小时 = mất 3 tiếng."
+  },
+  {
+   "t": "listen",
+   "say": "一直往前走，银行在右边。",
+   "lang": "zh-CN",
+   "q": "Ngân hàng ở đâu?",
+   "o": [
+    "Rẽ trái là đến",
+    "Ở phía sau",
+    "Đi thẳng, ở bên phải"
+   ],
+   "a": 2,
+   "e": "一直往前走 = đi thẳng; 在右边 = ở bên phải."
+  },
+  {
+   "t": "mc",
+   "q": "“Nhà tôi cách công ty rất xa” – câu đúng:",
+   "o": [
+    "我家从公司很远。",
+    "我家离公司很远。",
+    "我家离公司是很远。"
+   ],
+   "a": 1,
+   "e": "Khoảng cách dùng 离; không thêm 是 trước tính từ."
+  },
+  {
+   "t": "mc",
+   "q": "“Tôi đi làm từ 8 giờ đến 5 giờ” – câu đúng:",
+   "o": [
+    "我从八点到五点上班。",
+    "我八点从五点到上班。",
+    "我上班从八点到五点。"
+   ],
+   "a": 0,
+   "e": "从…到… đặt trước động từ."
+  },
+  {
+   "t": "mc",
+   "q": "“Tôi đi tàu điện đến công ty” – câu đúng:",
+   "o": [
+    "我去公司坐地铁。",
+    "我坐地铁去公司。",
+    "我地铁坐去公司。"
+   ],
+   "a": 1,
+   "e": "坐 + phương tiện đặt trước động từ chính 去."
+  },
+  {
+   "t": "mc",
+   "q": "“Đi xe máy” nói là:",
+   "o": [
+    "坐摩托车",
+    "骑摩托车",
+    "走摩托车"
+   ],
+   "a": 1,
+   "e": "骑 dùng cho xe phải “cưỡi” (xe máy, xe đạp)."
+  },
+  {
+   "t": "mc",
+   "q": "走 (zǒu) nghĩa là:",
+   "o": [
+    "chạy",
+    "đi (bộ)",
+    "bay"
+   ],
+   "a": 1,
+   "e": "走 = đi bộ, đi; chạy là 跑. Đừng hiểu theo âm Hán Việt “tẩu”."
+  },
+  {
+   "t": "fill",
+   "q": "请问，去机场怎么___？ (Qǐngwèn, qù jīchǎng zěnme ___?) (đi)",
+   "py": "zǒu",
+   "a": "走",
+   "alt": [
+    "zou",
+    "zǒu"
+   ],
+   "e": "去…怎么走？ = đi … thế nào?"
+  },
+  {
+   "t": "fill",
+   "q": "___春节还有十天。 (___ Chūn Jié hái yǒu shí tiān.) (còn 10 ngày nữa là Tết – điền 1 chữ)",
+   "py": "lí",
+   "a": "离",
+   "alt": [
+    "li",
+    "lí"
+   ],
+   "e": "离 + mốc thời gian + 还有 + bao lâu."
+  },
+  {
+   "t": "fill",
+   "q": "一直___前走。 (Yìzhí ___ qián zǒu.) (về phía)",
+   "py": "wǎng",
+   "a": "往",
+   "alt": [
+    "wang",
+    "wǎng"
+   ],
+   "e": "往 + hướng + động từ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp: “Từ đây đến sân bay mất bao lâu?”",
+   "w": [
+    "到机场",
+    "多长时间",
+    "从这儿",
+    "要"
+   ],
+   "a": "从这儿到机场要多长时间",
+   "e": "从 A 到 B + 要 + 多长时间？"
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp: “Cạnh khách sạn có một ga tàu điện.”",
+   "w": [
+    "有",
+    "旁边",
+    "一个",
+    "宾馆",
+    "地铁站"
+   ],
+   "a": "宾馆旁边有一个地铁站",
+   "e": "Nơi chốn + 旁边 + 有 + vật."
+  },
+  {
+   "t": "dict",
+   "say": "你家离公司远吗？",
+   "lang": "zh-CN",
+   "a": "你家离公司远吗？",
+   "py": "Nǐ jiā lí gōngsī yuǎn ma?",
+   "e": "Gõ chữ Hán hoặc pinyin."
+  },
+  {
+   "t": "match",
+   "q": "Nối:",
+   "pairs": [
+    [
+     "机场",
+     "sân bay"
+    ],
+    [
+     "地铁",
+     "tàu điện ngầm"
+    ],
+    [
+     "公共汽车",
+     "xe buýt"
+    ],
+    [
+     "左边",
+     "bên trái"
+    ],
+    [
+     "右边",
+     "bên phải"
+    ],
+    [
+     "旁边",
+     "bên cạnh"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Bản đồ khu phố vẽ sẵn (ga tàu, ngân hàng, khách sạn, quán cà phê, công ty); thẻ phương tiện (xe máy, xe buýt, tàu điện, máy bay, taxi); mũi tên trái/phải/thẳng; khăn bịt mắt; thẻ chữ 从 离 远 近 路 往 边.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: hỏi nhanh từng học viên (tiếng Việt) “Bạn đến lớp bằng gì? Mất bao lâu?”, GV nói lại bằng tiếng Trung: 他骑摩托车来，要二十分钟."
+   },
+   {
+    "t": "20'",
+    "do": "Từ vựng 15 từ: phương tiện (公共汽车 地铁 骑 机场), khoảng cách (离 远 近 路 小时), hướng & vị trí (往 走 左边 右边 旁边), 从. Nhấn bẫy 走 ≠ chạy."
+   },
+   {
+    "t": "10'",
+    "do": "Phát âm: an/ang (晚/往), in/ing (近/静), üan (远/晚), l/n (离/泥)."
+   },
+   {
+    "t": "30'",
+    "do": "Ngữ pháp 1–2: 从…到… (thời gian, nơi chốn, mất bao lâu); 坐/骑 + phương tiện trước động từ; A 离 B 远/近; 离 + thời gian. Viết câu sai “我家从公司很远” cho lớp sửa."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe hội thoại 3 lần; học viên vẽ đường từ ga tàu đến công ty trên bản đồ theo lời A Minh."
+   },
+   {
+    "t": "5'",
+    "do": "Giao bài tập 1–8."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: hỏi đáp dây chuyền 你家离…远吗？从…到…要多长时间？"
+   },
+   {
+    "t": "15'",
+    "do": "Ngữ pháp 3: hỏi & chỉ đường trên bản đồ (往前走, 往左拐, 在…旁边/左边/右边)."
+   },
+   {
+    "t": "15'",
+    "do": "Đọc ‘我的上班路’; trả lời câu hỏi; so sánh với đường đi làm của học viên."
+   },
+   {
+    "t": "15'",
+    "do": "Chữ Hán 从 离 远 近 路 往 边 (bộ 辶, 彳, ⻊)."
+   },
+   {
+    "t": "20'",
+    "do": "Nói: trò “Người dẫn đường” + nhiệm vụ 1 và 3."
+   },
+   {
+    "t": "15'",
+    "do": "Viết “Đường đi làm của tôi”; bài tập 9–15; chữa lỗi chung."
+   }
+  ],
+  "games": [
+   "Người dẫn đường: một học viên bịt mắt, bạn cùng đội chỉ đường bằng tiếng Trung (往前走三步, 往左拐, 往右走…) để đến “kho báu” trong lớp. Đội nhanh nhất thắng.",
+   "Bản đồ bí ẩn: mỗi cặp có 2 bản đồ thiếu thông tin khác nhau; hỏi nhau 银行在哪儿？离地铁站远吗？ để điền đầy đủ."
+  ],
+  "errors": [
+   "Dùng 从 thay 离: ❌ 我家从公司很远 → 我家离公司很远.",
+   "Đặt 从…到… sau động từ: ❌ 我上班从八点到五点 → 我从八点到五点上班.",
+   "Đặt phương tiện sau: ❌ 我去公司坐地铁 → 我坐地铁去公司.",
+   "Dùng 坐 cho xe máy: ❌ 坐摩托车 → 骑摩托车.",
+   "Hiểu 走 là “chạy” theo âm Hán Việt; ❌ 走往前 → 往前走.",
+   "Đọc 远 yuǎn thành wǎn (晚)."
+  ],
+  "homework": "Bài tập game ≥ 80%; viết “Đường đi làm của tôi” 60–90 chữ; vẽ bản đồ khu nhà mình và ghi âm chỉ đường từ nhà đến chợ/siêu thị gần nhất; ôn thẻ từ 15 phút/ngày."
+ }
 }

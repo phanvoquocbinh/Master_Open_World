@@ -1,136 +1,783 @@
 {
-  "no": 8,
-  "title": "Trọng âm từ – nhấn đúng chỗ để người nghe hiểu",
-  "sub": "TEAcher, hoTEL, PHOtograph, phoTOgrapher",
-  "goals": [
-    "Hiểu trọng âm là gì: âm tiết nhấn to hơn, dài hơn, cao hơn; âm tiết không nhấn thường thành /ə/",
-    "Đọc ký hiệu ˈ ˌ trong từ điển và nhận ra 5 mẫu trọng âm Oo, oO, Ooo, oOo, ooO",
-    "Áp dụng quy tắc cơ bản: danh từ/tính từ 2 âm tiết nhấn đầu, động từ nhấn sau; hậu tố -tion, -ic, -ity, -ee, -ese…",
-    "Nghe xác định âm tiết được nhấn; phân biệt desert/dessert, a present/to present"
-  ],
-  "parts": [
-    {"k": "text", "h": "Trọng âm là gì? Vì sao người Việt hay sai?", "html": "<p>Tiếng Việt: <b>mỗi âm tiết là một tiếng</b>, tiếng nào cũng rõ, mạnh như nhau và có thanh điệu riêng (“Việt – Nam”). Tiếng Anh: trong một từ nhiều âm tiết, <b>chỉ một âm tiết được nhấn</b> – đọc <b>to hơn, dài hơn, cao giọng hơn</b> và nguyên âm rõ; các âm tiết còn lại đọc nhẹ, nhanh, nguyên âm thường thành /ə/.</p><table><tr><th>Từ</th><th>IPA</th><th>Đọc</th><th>Mẫu</th></tr><tr><td>teacher</td><td>/ˈtiːtʃə(r)/</td><td>TEA-cher</td><td>Oo</td></tr><tr><td>hotel</td><td>/həʊˈtel/</td><td>ho-TEL</td><td>oO</td></tr><tr><td>family</td><td>/ˈfæməli/</td><td>FA-mi-ly</td><td>Ooo</td></tr><tr><td>computer</td><td>/kəmˈpjuːtə(r)/</td><td>com-PU-ter</td><td>oOo</td></tr><tr><td>Vietnamese</td><td>/ˌvjetnəˈmiːz/</td><td>viet-na-MESE</td><td>ooO</td></tr></table><p>(O lớn = âm tiết nhấn, o nhỏ = âm tiết yếu.) Trong IPA, dấu <b>ˈ</b> đặt <b>ngay trước</b> âm tiết được nhấn; dấu <b>ˌ</b> là trọng âm phụ, nhẹ hơn.</p><p>⚠️ Sai trọng âm nhiều khi còn khó hiểu hơn sai một âm: người bản ngữ nhận ra từ nhờ “hình dáng nhịp” của nó. Đọc ho-TEL thành HO-tel, hay đọc com-pu-ter đều nhau, người nghe phải đoán. Một số từ còn <b>đổi nghĩa</b> khi đổi trọng âm: DEsert (sa mạc) – deSSERT (món tráng miệng).</p><h4>Ba lỗi kinh điển của người Việt</h4><ul><li>Đọc mọi âm tiết đều nhau như tiếng Việt: “ba-na-na” thay vì bə-NAA-nə.</li><li>Nhấn vào âm tiết cuối theo thói quen: “com-pu-TƠ”, “doc-TƠ”.</li><li>Gắn thanh điệu tiếng Việt vào từ (“hô-ten”, “com-piu-tơ”) – tiếng Anh không có thanh điệu cho từng âm tiết.</li></ul>"},
-    {"k": "sounds", "h": "Phát âm: 5 mẫu trọng âm", "html": "<p>Bấm nghe từng từ, <b>vỗ tay theo nhịp</b>: vỗ mạnh ở âm tiết nhấn, vỗ nhẹ ở âm tiết yếu. Sau đó nhại theo, phóng đại âm tiết nhấn (to – dài – cao).</p>", "items": [
-      {"sym": "Oo", "ex": ["teacher", "doctor", "water", "happy", "morning"], "vi": "2 âm tiết, nhấn âm đầu – mẫu phổ biến nhất của danh từ và tính từ 2 âm tiết. Âm sau yếu: DOC-tə, WA-tə."},
-      {"sym": "oO", "ex": ["begin", "relax", "hotel", "today", "again"], "vi": "2 âm tiết, nhấn âm sau – mẫu của nhiều động từ 2 âm tiết (begin, relax) và một số từ khác (hotel, today). Âm đầu thường là /ə/ hoặc /ɪ/ rất nhẹ: tə-DAY, bɪ-GIN."},
-      {"sym": "Ooo", "ex": ["family", "beautiful", "yesterday", "hospital", "Saturday"], "vi": "3 âm tiết, nhấn âm đầu: FA-mi-ly, BEAU-ti-ful. Hai âm sau đọc nhanh và nhẹ."},
-      {"sym": "oOo", "ex": ["banana", "computer", "important", "tomato", "September"], "vi": "3 âm tiết, nhấn âm giữa – rất nhiều từ thông dụng có mẫu này. Âm đầu và âm cuối yếu: bə-NAA-nə, im-POR-tənt."},
-      {"sym": "ooO", "ex": ["afternoon", "Vietnamese", "Japanese", "engineer", "volunteer"], "vi": "3 âm tiết, nhấn âm cuối – thường gặp ở từ có hậu tố -ese, -eer, -oon, -ee. Âm đầu có trọng âm phụ nhẹ: ˌaf-tə-NOON."},
-      {"sym": "Đổi trọng âm – đổi nghĩa", "ex": ["desert", "dessert", "photograph", "photographer"], "vi": "desert /ˈdezət/ (sa mạc) – dessert /dɪˈzɜːt/ (món tráng miệng). photograph /ˈfəʊtəɡrɑːf/ (bức ảnh) → photographer /fəˈtɒɡrəfə(r)/ (nhiếp ảnh gia): thêm hậu tố, trọng âm nhảy chỗ!", "pairs": [["desert", "dessert"], ["photograph", "photographer"]]}
-    ]},
-    {"k": "grammar", "h": "Quy tắc trọng âm cơ bản", "html": "<p>Không có quy tắc nào đúng 100% – luôn kiểm tra bằng từ điển. Nhưng các quy tắc sau đúng với phần lớn từ bạn sẽ gặp ở cấp A1–A2:</p>", "table": [["Quy tắc", "Ví dụ", "Ngoại lệ hay gặp"], ["Danh từ, tính từ 2 âm tiết: thường nhấn âm 1", "TEAcher, MOther, HAppy, CLEver", "hoTEL, poLICE, misTAKE, jaPAN"], ["Động từ 2 âm tiết: thường nhấn âm 2", "beGIN, reLAX, deCIDE, inVITE", "OPen, LISten, VIsit, ANswer, HAppen"], ["Từ vừa là danh từ vừa là động từ: danh từ nhấn đầu, động từ nhấn sau", "a PREsent – to preSENT; a REcord – to reCORD", "–"], ["Hậu tố -tion, -sion, -ic, -ical, -ity, -ian: nhấn âm tiết NGAY TRƯỚC hậu tố", "inforMAtion, deCIsion, ecoNOMic, uniVERsity, muSIcian", "Arabic, politics (nhấn âm 1)"], ["Hậu tố -ee, -eer, -ese, -oon: nhấn CHÍNH hậu tố", "employEE, engiNEER, VietnaMESE, afterNOON", "committee /kəˈmɪti/; coffee /ˈkɒfi/ (ee không phải hậu tố)"], ["Hậu tố -ful, -less, -ness, -ment, -er, -ly, -ing: KHÔNG đổi trọng âm", "BEAUty → BEAUtiful; HAppy → HAppiness; emPLOY → emPLOYment", "–"], ["Danh từ ghép: nhấn từ đầu", "CLASSroom, BIRTHday, BUS stop, BLACKboard", "–"]], "ex": [
-      {"t": "PHOtograph /ˈfəʊtəɡrɑːf/ → phoTOgrapher /fəˈtɒɡrəfə(r)/ → photoGRAphic /ˌfəʊtəˈɡræfɪk/", "vi": "bức ảnh → nhiếp ảnh gia → thuộc về nhiếp ảnh: trọng âm di chuyển theo hậu tố"},
-      {"t": "educate /ˈedʒukeɪt/ → education /ˌedʒuˈkeɪʃn/", "vi": "giáo dục (động từ) → sự giáo dục: -tion kéo trọng âm về ngay trước nó"},
-      {"t": "Let me preSENT my plan. – Thank you for the PREsent!", "vi": "Để tôi trình bày kế hoạch. – Cảm ơn bạn vì món quà!"},
-      {"t": "HAppy /ˈhæpi/ → HAppiness /ˈhæpinəs/", "vi": "-ness không làm đổi trọng âm"}
-    ], "tips": [
-      "Gặp từ mới: (1) đếm số âm tiết, (2) xem loại từ và hậu tố, (3) đoán theo quy tắc, (4) kiểm tra dấu ˈ trong từ điển.",
-      "Âm tiết KHÔNG nhấn thường chứa /ə/: <b>a</b>bout, <b>com</b>puter /kəm-/, doct<b>or</b> /-tə(r)/. Đọc yếu những âm này là bí quyết để nghe giống người bản ngữ.",
-      "Số đếm: thir<b>TEEN</b> (nhấn sau) – <b>THIR</b>ty (nhấn đầu). Đây là cách chính để nghe phân biệt 13 và 30 – học kỹ ở Bài 10.",
-      "Tên nước & quốc tịch: <b>CHI</b>na – Chi<b>NESE</b>; ja<b>PAN</b> – Japa<b>NESE</b>; Viet<b>NAM</b> /ˌvjetˈnæm/ – Vietna<b>MESE</b>."
-    ]},
-    {"k": "words", "h": "Từ vựng: nghề nghiệp, gia đình, nơi chốn", "items": [
-      {"w": "doctor", "ipa": "/ˈdɒktə(r)/", "pos": "n", "vi": "bác sĩ", "ex": "My aunt is a doctor.", "exVi": "Cô tôi là bác sĩ."},
-      {"w": "hotel", "ipa": "/həʊˈtel/", "pos": "n", "vi": "khách sạn", "ex": "The hotel is near the beach.", "exVi": "Khách sạn ở gần bãi biển."},
-      {"w": "begin", "ipa": "/bɪˈɡɪn/", "pos": "v", "vi": "bắt đầu", "ex": "The film begins at eight.", "exVi": "Bộ phim bắt đầu lúc tám giờ."},
-      {"w": "visit", "ipa": "/ˈvɪzɪt/", "pos": "v", "vi": "thăm, đến thăm", "ex": "I visit my grandparents every Sunday.", "exVi": "Tôi thăm ông bà mỗi Chủ nhật."},
-      {"w": "listen", "ipa": "/ˈlɪsn/", "pos": "v", "vi": "nghe, lắng nghe", "ex": "Listen and repeat.", "exVi": "Nghe và nhắc lại."},
-      {"w": "relax", "ipa": "/rɪˈlæks/", "pos": "v", "vi": "thư giãn", "ex": "I relax at home on Sundays.", "exVi": "Tôi thư giãn ở nhà vào Chủ nhật."},
-      {"w": "family", "ipa": "/ˈfæməli/", "pos": "n", "vi": "gia đình", "ex": "My family is big.", "exVi": "Gia đình tôi đông người."},
-      {"w": "beautiful", "ipa": "/ˈbjuːtɪfl/", "pos": "adj", "vi": "đẹp", "ex": "Ha Long Bay is beautiful.", "exVi": "Vịnh Hạ Long rất đẹp."},
-      {"w": "hospital", "ipa": "/ˈhɒspɪtl/", "pos": "n", "vi": "bệnh viện", "ex": "She works at a hospital.", "exVi": "Cô ấy làm việc ở bệnh viện."},
-      {"w": "computer", "ipa": "/kəmˈpjuːtə(r)/", "pos": "n", "vi": "máy tính", "ex": "I use a computer at work.", "exVi": "Tôi dùng máy tính ở chỗ làm."},
-      {"w": "important", "ipa": "/ɪmˈpɔːtnt/", "pos": "adj", "vi": "quan trọng", "ex": "Family is important to me.", "exVi": "Gia đình quan trọng với tôi."},
-      {"w": "tomato", "ipa": "/təˈmɑːtəʊ/", "pos": "n", "vi": "quả cà chua", "ex": "I need two tomatoes.", "exVi": "Tôi cần hai quả cà chua."},
-      {"w": "Vietnamese", "ipa": "/ˌvjetnəˈmiːz/", "pos": "adj", "vi": "(thuộc) Việt Nam; người Việt; tiếng Việt", "ex": "I'm Vietnamese.", "exVi": "Tôi là người Việt Nam."},
-      {"w": "engineer", "ipa": "/ˌendʒɪˈnɪə(r)/", "pos": "n", "vi": "kỹ sư", "ex": "My brother is an engineer.", "exVi": "Anh trai tôi là kỹ sư."},
-      {"w": "information", "ipa": "/ˌɪnfəˈmeɪʃn/", "pos": "n", "vi": "thông tin", "ex": "Can I have some information, please?", "exVi": "Cho tôi xin ít thông tin được không?"},
-      {"w": "university", "ipa": "/ˌjuːnɪˈvɜːsəti/", "pos": "n", "vi": "trường đại học", "ex": "She studies at a university in Hue.", "exVi": "Cô ấy học ở một trường đại học tại Huế."},
-      {"w": "photograph", "ipa": "/ˈfəʊtəɡrɑːf/", "pos": "n", "vi": "bức ảnh", "ex": "This is a photograph of my family.", "exVi": "Đây là ảnh gia đình tôi."},
-      {"w": "photographer", "ipa": "/fəˈtɒɡrəfə(r)/", "pos": "n", "vi": "nhiếp ảnh gia, thợ chụp ảnh", "ex": "He is a wedding photographer.", "exVi": "Anh ấy là thợ chụp ảnh cưới."}
-    ]},
-    {"k": "dialog", "h": "Nghe: Ở quầy lễ tân khách sạn", "lang": "en-GB", "note": "Nam đi công tác và nhận phòng khách sạn. Nghe lần 1 (che lời thoại): Nam làm nghề gì? Nghe lần 2: máy tính ở đâu? Lần 3: nghe và đánh dấu trọng âm của hotel, Vietnamese, engineer, information, computer, beautiful.", "lines": [
-      {"s": "Lucy", "g": "f", "t": "Good afternoon. Welcome to the Lotus Hotel.", "vi": "Chào buổi chiều. Chào mừng anh đến khách sạn Lotus."},
-      {"s": "Nam", "g": "m", "t": "Good afternoon. I have a room for two nights. My name is Nam.", "vi": "Chào chị. Tôi đã đặt một phòng hai đêm. Tôi tên là Nam."},
-      {"s": "Lucy", "g": "f", "t": "Thank you. Are you Vietnamese?", "vi": "Cảm ơn anh. Anh là người Việt Nam phải không?"},
-      {"s": "Nam", "g": "m", "t": "Yes, I am. I'm an engineer from Hanoi.", "vi": "Vâng. Tôi là kỹ sư đến từ Hà Nội."},
-      {"s": "Lucy", "g": "f", "t": "Here's some information about the city. The museum and the university are near here.", "vi": "Đây là một ít thông tin về thành phố. Bảo tàng và trường đại học ở gần đây."},
-      {"s": "Nam", "g": "m", "t": "Thank you. Is there a computer I can use?", "vi": "Cảm ơn chị. Ở đây có máy tính nào tôi dùng được không?"},
-      {"s": "Lucy", "g": "f", "t": "Yes, next to the café. Enjoy your visit!", "vi": "Có ạ, ở cạnh quán cà phê. Chúc anh có chuyến đi vui vẻ!"},
-      {"s": "Nam", "g": "m", "t": "Thanks. It's a beautiful hotel.", "vi": "Cảm ơn chị. Khách sạn đẹp quá."}
-    ], "qs": [
-      {"q": "Nam is an ______.", "a": "engineer", "e": "“I'm an engineer from Hanoi.” – engineer /ˌendʒɪˈnɪə(r)/ nhấn âm cuối (ooO)."},
-      {"q": "How many nights will Nam stay?", "o": ["one", "two", "three"], "a": 1, "e": "“I have a room for two nights.”"},
-      {"q": "Where is the computer?", "o": ["next to the café", "in his room", "at the university"], "a": 0, "e": "“Yes, next to the café.”"},
-      {"q": "Trọng âm của hotel rơi vào:", "o": ["âm tiết 1 (HO-tel)", "âm tiết 2 (ho-TEL)"], "a": 1, "e": "hotel /həʊˈtel/ – một ngoại lệ của quy tắc danh từ 2 âm tiết nhấn đầu."}
-    ]},
-    {"k": "read", "h": "Đọc: Gia đình của Hà", "title": "Ha's family", "text": "My name is Ha. I'm a photographer. My family is small: my husband, Long, and our daughter, An. Long is a doctor at a hospital in Hue. An is a student at the university.\n\nOn Sundays, we relax at home. I take beautiful photographs of my family. It's important to me.", "vi": "Tôi tên là Hà. Tôi là nhiếp ảnh gia. Gia đình tôi nhỏ: chồng tôi, Long, và con gái chúng tôi, An. Long là bác sĩ ở một bệnh viện tại Huế. An là sinh viên đại học.\n\nVào Chủ nhật, cả nhà thư giãn ở nhà. Tôi chụp những bức ảnh đẹp về gia đình mình. Điều đó rất quan trọng với tôi.", "gloss": [
-      {"w": "husband", "vi": "chồng"},
-      {"w": "daughter", "vi": "con gái"},
-      {"w": "student", "vi": "sinh viên, học sinh"},
-      {"w": "on Sundays", "vi": "vào các ngày Chủ nhật"},
-      {"w": "take photographs", "vi": "chụp ảnh"}
-    ], "qs": [
-      {"q": "Ha's husband is a ______.", "a": "doctor", "e": "“Long is a doctor at a hospital in Hue.”"},
-      {"q": "Where does An study?", "o": ["at the university", "at a hospital", "at home"], "a": 0, "e": "“An is a student at the university.”"},
-      {"q": "Trọng âm của photographer:", "o": ["PHO-to-gra-pher", "pho-TO-gra-pher", "pho-to-GRA-pher"], "a": 1, "e": "photographer /fəˈtɒɡrəfə(r)/ – khác photograph /ˈfəʊtəɡrɑːf/."},
-      {"q": "Từ nào trong bài có mẫu trọng âm Ooo?", "o": ["beautiful", "important", "photographer"], "a": 0, "e": "BEAU-ti-ful (Ooo); im-POR-tant (oOo); pho-TO-gra-pher (oOoo)."}
-    ]},
-    {"k": "speak", "h": "Nói: Vỗ tay theo trọng âm", "tasks": [
-      {"p": "Vỗ tay theo trọng âm: vỗ to ở âm tiết nhấn, vỗ nhẹ ở âm tiết yếu.", "model": "teacher, hotel, family, computer, Vietnamese.", "tips": "TEA-cher (Oo) · ho-TEL (oO) · FA-mi-ly (Ooo) · com-PU-ter (oOo) · viet-na-MESE (ooO)."},
-      {"p": "Trọng âm nhảy chỗ: nhại theo chuỗi 3 từ.", "model": "photograph, photographer, photographic.", "tips": "PHO-to-graph → pho-TO-gra-pher → pho-to-GRA-phic."},
-      {"p": "Danh từ hay động từ? Đọc 2 câu, chú ý từ present.", "model": "Thank you for the present. Let me present my family.", "tips": "a PREsent (món quà) – to preSENT (giới thiệu, trình bày)."},
-      {"p": "Tự giới thiệu 3 câu dùng từ nhiều âm tiết.", "model": "I'm Vietnamese. I'm an engineer. My family is very important to me.", "tips": "viet-na-MESE, en-gi-NEER, FA-mi-ly, im-POR-tant – âm tiết yếu đọc nhẹ /ə/."}
-    ]},
-    {"k": "write", "h": "Viết: Bảng 5 mẫu trọng âm", "task": "Xếp 15 từ vào 5 cột theo mẫu Oo / oO / Ooo / oOo / ooO; mỗi từ viết IPA có dấu ˈ. Sau đó viết 2 câu về gia đình dùng ít nhất 3 từ trong bảng.", "model": "Oo: doctor /ˈdɒktə(r)/, listen /ˈlɪsn/, visit /ˈvɪzɪt/\noO: hotel /həʊˈtel/, begin /bɪˈɡɪn/, relax /rɪˈlæks/\nOoo: family /ˈfæməli/, beautiful /ˈbjuːtɪfl/, hospital /ˈhɒspɪtl/\noOo: computer /kəmˈpjuːtə(r)/, important /ɪmˈpɔːtnt/, tomato /təˈmɑːtəʊ/\nooO: Vietnamese /ˌvjetnəˈmiːz/, engineer /ˌendʒɪˈnɪə(r)/, afternoon /ˌɑːftəˈnuːn/\nMy father is an engineer at a hospital. My family is very important to me.", "modelVi": "Bố tôi là kỹ sư ở một bệnh viện. Gia đình rất quan trọng với tôi.", "tips": ["Dấu ˈ đặt TRƯỚC âm tiết nhấn, không đặt trên nguyên âm.", "Khi viết từ thường, có thể viết HOA âm tiết nhấn để luyện: com-PU-ter."], "checklist": ["5 cột × 3 từ", "IPA có dấu ˈ đúng vị trí", "2 câu đúng chính tả, có dấu chấm", "Đọc to, vỗ tay theo trọng âm"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "hotel", "lang": "en-GB", "q": "Trọng âm rơi vào âm tiết thứ mấy?", "o": ["1", "2"], "a": 1, "e": "hotel /həʊˈtel/ – ho-TEL."},
-    {"t": "listen", "say": "doctor", "lang": "en-GB", "q": "Trọng âm rơi vào âm tiết thứ mấy?", "o": ["1", "2"], "a": 0, "e": "doctor /ˈdɒktə(r)/ – DOC-tor, âm sau yếu /tə/."},
-    {"t": "listen", "say": "computer", "lang": "en-GB", "q": "Trọng âm rơi vào âm tiết thứ mấy?", "o": ["1", "2", "3"], "a": 1, "e": "computer /kəmˈpjuːtə(r)/ – com-PU-ter (oOo)."},
-    {"t": "listen", "say": "Vietnamese", "lang": "en-GB", "q": "Trọng âm rơi vào âm tiết thứ mấy?", "o": ["1", "2", "3"], "a": 2, "e": "Vietnamese /ˌvjetnəˈmiːz/ – hậu tố -ese được nhấn."},
-    {"t": "listen", "say": "family", "lang": "en-GB", "q": "Trọng âm rơi vào âm tiết thứ mấy?", "o": ["1", "2", "3"], "a": 0, "e": "family /ˈfæməli/ – FA-mi-ly (Ooo)."},
-    {"t": "listen", "say": "dessert", "lang": "en-GB", "q": "Bạn nghe từ nào?", "o": ["desert (sa mạc)", "dessert (món tráng miệng)"], "a": 1, "e": "dessert /dɪˈzɜːt/ nhấn âm 2; desert /ˈdezət/ nhấn âm 1."},
-    {"t": "listen", "say": "photographer", "lang": "en-GB", "q": "Bạn nghe từ nào?", "o": ["photograph", "photographer"], "a": 1, "e": "photographer /fəˈtɒɡrəfə(r)/ – 4 âm tiết, nhấn TO; photograph /ˈfəʊtəɡrɑːf/ – 3 âm tiết, nhấn PHO."},
-    {"t": "dict", "say": "important information", "lang": "en-GB", "a": "important information", "e": "im-POR-tant in-for-MA-tion."},
-    {"t": "dict", "say": "a beautiful hotel", "lang": "en-GB", "a": "a beautiful hotel", "e": "BEAU-ti-ful ho-TEL."},
-    {"t": "mc", "q": "Theo quy tắc hậu tố -tion, “education” nhấn ở:", "o": ["e-du-CA-tion", "E-du-ca-tion", "e-DU-ca-tion"], "a": 0, "e": "-tion kéo trọng âm về âm tiết ngay trước nó: /ˌedʒuˈkeɪʃn/."},
-    {"t": "mc", "q": "Động từ nào nhấn âm tiết 1 (ngoại lệ)?", "o": ["begin", "relax", "visit"], "a": 2, "e": "visit /ˈvɪzɪt/ – VI-sit. begin, relax theo quy tắc: nhấn âm 2."},
-    {"t": "mc", "q": "IPA /fəˈtɒɡrəfə(r)/ là từ:", "o": ["photograph", "photographer", "photographic"], "a": 1, "e": "Dấu ˈ trước /tɒ/ → pho-TO-gra-pher."},
-    {"t": "mc", "q": "Từ nào nhấn âm tiết cuối?", "o": ["engineer", "beautiful", "hospital"], "a": 0, "e": "engineer /ˌendʒɪˈnɪə(r)/ – hậu tố -eer được nhấn. beautiful, hospital nhấn âm đầu."},
-    {"t": "match", "q": "Nối từ với mẫu trọng âm:", "pairs": [["teacher", "Oo"], ["begin", "oO"], ["family", "Ooo"], ["computer", "oOo"], ["Japanese", "ooO"]], "e": "O lớn = âm tiết được nhấn."},
-    {"t": "mc", "q": "Trong /həʊˈtel/, âm tiết được nhấn là:", "o": ["/həʊ/", "/tel/"], "a": 1, "e": "Dấu ˈ đứng TRƯỚC âm tiết được nhấn → /tel/."},
-    {"t": "mc", "q": "“Let me present my plan.” – present ở đây đọc:", "o": ["PRE-sent (danh từ)", "pre-SENT (động từ)"], "a": 1, "e": "present là động từ (trình bày) → nhấn âm 2 /prɪˈzent/. Danh từ (món quà) mới nhấn âm 1 /ˈpreznt/."}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Thẻ từ nhiều âm tiết in to (để học viên gạch âm tiết nhấn); 5 tờ giấy ghi mẫu Oo, oO, Ooo, oOo, ooO; dây chun hoặc 1 quả bóng nhỏ; từ điển trên điện thoại.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: GV đọc ‘com-pu-tơ’ đều đều rồi đọc com-PU-ter đúng – hỏi học viên nghe khác gì. Thử thêm với banana, hotel."},
-      {"t": "15'", "do": "Trọng âm là gì: to – dài – cao; âm yếu thành /ə/. Đọc ký hiệu ˈ ˌ trong từ điển. So sánh tiếng Việt (mọi tiếng đều rõ) với tiếng Anh."},
-      {"t": "25'", "do": "5 mẫu trọng âm: GV đọc từng nhóm trong khối Phát âm, học viên vỗ tay theo (to ở âm tiết nhấn). Kéo dây chun ở âm tiết nhấn."},
-      {"t": "20'", "do": "Quy tắc: danh từ/tính từ vs động từ 2 âm tiết; hậu tố. Học viên đoán trọng âm 8 từ mới (police, decide, station, musician, Chinese, employee, kindness, classroom) rồi kiểm tra bằng từ điển."},
-      {"t": "10'", "do": "Nghe – xác định trọng âm: GV đọc từ, học viên giơ 1, 2 hoặc 3 ngón tay."},
-      {"t": "10'", "do": "Tổng kết; giao bài tập 1–8 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: trò Tung bóng trọng âm (xem trò chơi)."},
-      {"t": "15'", "do": "Nghe ‘Ở quầy lễ tân khách sạn’: trả lời câu hỏi; đánh dấu trọng âm 6 từ nhiều âm tiết; đọc phân vai."},
-      {"t": "15'", "do": "Đọc ‘Ha's family’: trả lời câu hỏi; xếp các từ nhiều âm tiết trong bài vào 5 mẫu."},
-      {"t": "20'", "do": "Nói: 4 nhiệm vụ; học viên tự giới thiệu nghề nghiệp & gia đình, bạn nghe chấm trọng âm."},
-      {"t": "20'", "do": "Viết: bảng 5 cột + 2 câu; đổi bài, đọc chéo và sửa vị trí dấu ˈ."},
-      {"t": "10'", "do": "Bài tập 9–16; chữa lỗi chung; giao bài về nhà."}
+ "no": 8,
+ "title": "Trọng âm từ – nhấn đúng chỗ để người nghe hiểu",
+ "sub": "TEAcher, hoTEL, PHOtograph, phoTOgrapher",
+ "goals": [
+  "Hiểu trọng âm là gì: âm tiết nhấn to hơn, dài hơn, cao hơn; âm tiết không nhấn thường thành /ə/",
+  "Đọc ký hiệu ˈ ˌ trong từ điển và nhận ra 5 mẫu trọng âm Oo, oO, Ooo, oOo, ooO",
+  "Áp dụng quy tắc cơ bản: danh từ/tính từ 2 âm tiết nhấn đầu, động từ nhấn sau; hậu tố -tion, -ic, -ity, -ee, -ese…",
+  "Nghe xác định âm tiết được nhấn; phân biệt desert/dessert, a present/to present"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Trọng âm là gì? Vì sao người Việt hay sai?",
+   "html": "<p>Tiếng Việt: <b>mỗi âm tiết là một tiếng</b>, tiếng nào cũng rõ, mạnh như nhau và có thanh điệu riêng (“Việt – Nam”). Tiếng Anh: trong một từ nhiều âm tiết, <b>chỉ một âm tiết được nhấn</b> – đọc <b>to hơn, dài hơn, cao giọng hơn</b> và nguyên âm rõ; các âm tiết còn lại đọc nhẹ, nhanh, nguyên âm thường thành /ə/.</p><table><tr><th>Từ</th><th>IPA</th><th>Đọc</th><th>Mẫu</th></tr><tr><td>teacher</td><td>/ˈtiːtʃə(r)/</td><td>TEA-cher</td><td>Oo</td></tr><tr><td>hotel</td><td>/həʊˈtel/</td><td>ho-TEL</td><td>oO</td></tr><tr><td>family</td><td>/ˈfæməli/</td><td>FA-mi-ly</td><td>Ooo</td></tr><tr><td>computer</td><td>/kəmˈpjuːtə(r)/</td><td>com-PU-ter</td><td>oOo</td></tr><tr><td>Vietnamese</td><td>/ˌvjetnəˈmiːz/</td><td>viet-na-MESE</td><td>ooO</td></tr></table><p>(O lớn = âm tiết nhấn, o nhỏ = âm tiết yếu.) Trong IPA, dấu <b>ˈ</b> đặt <b>ngay trước</b> âm tiết được nhấn; dấu <b>ˌ</b> là trọng âm phụ, nhẹ hơn.</p><p>⚠️ Sai trọng âm nhiều khi còn khó hiểu hơn sai một âm: người bản ngữ nhận ra từ nhờ “hình dáng nhịp” của nó. Đọc ho-TEL thành HO-tel, hay đọc com-pu-ter đều nhau, người nghe phải đoán. Một số từ còn <b>đổi nghĩa</b> khi đổi trọng âm: DEsert (sa mạc) – deSSERT (món tráng miệng).</p><h4>Ba lỗi kinh điển của người Việt</h4><ul><li>Đọc mọi âm tiết đều nhau như tiếng Việt: “ba-na-na” thay vì bə-NAA-nə.</li><li>Nhấn vào âm tiết cuối theo thói quen: “com-pu-TƠ”, “doc-TƠ”.</li><li>Gắn thanh điệu tiếng Việt vào từ (“hô-ten”, “com-piu-tơ”) – tiếng Anh không có thanh điệu cho từng âm tiết.</li></ul>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: 5 mẫu trọng âm",
+   "html": "<p>Bấm nghe từng từ, <b>vỗ tay theo nhịp</b>: vỗ mạnh ở âm tiết nhấn, vỗ nhẹ ở âm tiết yếu. Sau đó nhại theo, phóng đại âm tiết nhấn (to – dài – cao).</p>",
+   "items": [
+    {
+     "sym": "Oo",
+     "ex": [
+      "teacher",
+      "doctor",
+      "water",
+      "happy",
+      "morning"
+     ],
+     "vi": "2 âm tiết, nhấn âm đầu – mẫu phổ biến nhất của danh từ và tính từ 2 âm tiết. Âm sau yếu: DOC-tə, WA-tə."
+    },
+    {
+     "sym": "oO",
+     "ex": [
+      "begin",
+      "relax",
+      "hotel",
+      "today",
+      "again"
+     ],
+     "vi": "2 âm tiết, nhấn âm sau – mẫu của nhiều động từ 2 âm tiết (begin, relax) và một số từ khác (hotel, today). Âm đầu thường là /ə/ hoặc /ɪ/ rất nhẹ: tə-DAY, bɪ-GIN."
+    },
+    {
+     "sym": "Ooo",
+     "ex": [
+      "family",
+      "beautiful",
+      "yesterday",
+      "hospital",
+      "Saturday"
+     ],
+     "vi": "3 âm tiết, nhấn âm đầu: FA-mi-ly, BEAU-ti-ful. Hai âm sau đọc nhanh và nhẹ."
+    },
+    {
+     "sym": "oOo",
+     "ex": [
+      "banana",
+      "computer",
+      "important",
+      "tomato",
+      "September"
+     ],
+     "vi": "3 âm tiết, nhấn âm giữa – rất nhiều từ thông dụng có mẫu này. Âm đầu và âm cuối yếu: bə-NAA-nə, im-POR-tənt."
+    },
+    {
+     "sym": "ooO",
+     "ex": [
+      "afternoon",
+      "Vietnamese",
+      "Japanese",
+      "engineer",
+      "volunteer"
+     ],
+     "vi": "3 âm tiết, nhấn âm cuối – thường gặp ở từ có hậu tố -ese, -eer, -oon, -ee. Âm đầu có trọng âm phụ nhẹ: ˌaf-tə-NOON."
+    },
+    {
+     "sym": "Đổi trọng âm – đổi nghĩa",
+     "ex": [
+      "desert",
+      "dessert",
+      "photograph",
+      "photographer"
+     ],
+     "vi": "desert /ˈdezət/ (sa mạc) – dessert /dɪˈzɜːt/ (món tráng miệng). photograph /ˈfəʊtəɡrɑːf/ (bức ảnh) → photographer /fəˈtɒɡrəfə(r)/ (nhiếp ảnh gia): thêm hậu tố, trọng âm nhảy chỗ!",
+     "pairs": [
+      [
+       "desert",
+       "dessert"
+      ],
+      [
+       "photograph",
+       "photographer"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc trọng âm cơ bản",
+   "html": "<p>Không có quy tắc nào đúng 100% – luôn kiểm tra bằng từ điển. Nhưng các quy tắc sau đúng với phần lớn từ bạn sẽ gặp ở cấp A1–A2:</p>",
+   "table": [
+    [
+     "Quy tắc",
+     "Ví dụ",
+     "Ngoại lệ hay gặp"
     ],
-    "games": [
-      "Tung bóng trọng âm: GV nói một từ, học viên đọc lại và tung bóng lên đúng lúc đọc âm tiết nhấn. Sai nhịp thì chuyền bóng cho bạn khác.",
-      "Xếp hàng theo mẫu: phát mỗi học viên 1 thẻ từ, cả lớp tự đứng thành 5 hàng Oo, oO, Ooo, oOo, ooO trong 2 phút; từng hàng đọc to để cả lớp kiểm tra.",
-      "Đoán từ qua nhịp: một học viên ngân nga nhịp của từ (da-DA-da) mà không nói chữ, cả lớp đoán từ trong danh sách bài (computer, banana, tomato…)."
+    [
+     "Danh từ, tính từ 2 âm tiết: thường nhấn âm 1",
+     "TEAcher, MOther, HAppy, CLEver",
+     "hoTEL, poLICE, misTAKE, jaPAN"
     ],
-    "errors": [
-      "Đọc mọi âm tiết đều nhau như tiếng Việt (ba-na-na, com-pu-tơ) → vỗ tay to – nhỏ; âm yếu đọc /ə/ thật nhẹ.",
-      "Nhấn âm tiết cuối theo thói quen: doc-TOR, com-pu-TER → nhớ danh từ 2 âm tiết thường nhấn đầu; từ dài thì tra dấu ˈ.",
-      "Gắn thanh điệu tiếng Việt vào từ (“hô-ten”, “in-tơ-nét”) → luyện giọng đều, chỉ thay đổi độ to – dài – cao ở âm tiết nhấn.",
-      "Quên trọng âm di chuyển khi thêm hậu tố: phoTOgrapher đọc thành PHOtographer → học theo ‘gia đình từ’: PHOtograph – phoTOgrapher – photoGRAphic.",
-      "Đọc rõ nguyên âm ở âm tiết yếu: tomato thành “tô-ma-tô” → /təˈmɑːtəʊ/: âm đầu /tə/ rất nhẹ."
+    [
+     "Động từ 2 âm tiết: thường nhấn âm 2",
+     "beGIN, reLAX, deCIDE, inVITE",
+     "OPen, LISten, VIsit, ANswer, HAppen"
     ],
-    "homework": "Làm hết bài tập trong game (≥ 80%); tra từ điển 10 từ nhiều âm tiết bạn hay dùng ở công việc/trường học, chép IPA và gạch chân âm tiết nhấn; ghi âm phần Nói; ôn 18 thẻ từ vựng."
+    [
+     "Từ vừa là danh từ vừa là động từ: danh từ nhấn đầu, động từ nhấn sau",
+     "a PREsent – to preSENT; a REcord – to reCORD",
+     "–"
+    ],
+    [
+     "Hậu tố -tion, -sion, -ic, -ical, -ity, -ian: nhấn âm tiết NGAY TRƯỚC hậu tố",
+     "inforMAtion, deCIsion, ecoNOMic, uniVERsity, muSIcian",
+     "Arabic, politics (nhấn âm 1)"
+    ],
+    [
+     "Hậu tố -ee, -eer, -ese, -oon: nhấn CHÍNH hậu tố",
+     "employEE, engiNEER, VietnaMESE, afterNOON",
+     "committee /kəˈmɪti/; coffee /ˈkɒfi/ (ee không phải hậu tố)"
+    ],
+    [
+     "Hậu tố -ful, -less, -ness, -ment, -er, -ly, -ing: KHÔNG đổi trọng âm",
+     "BEAUty → BEAUtiful; HAppy → HAppiness; emPLOY → emPLOYment",
+     "–"
+    ],
+    [
+     "Danh từ ghép: nhấn từ đầu",
+     "CLASSroom, BIRTHday, BUS stop, BLACKboard",
+     "–"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "PHOtograph /ˈfəʊtəɡrɑːf/ → phoTOgrapher /fəˈtɒɡrəfə(r)/ → photoGRAphic /ˌfəʊtəˈɡræfɪk/",
+     "vi": "bức ảnh → nhiếp ảnh gia → thuộc về nhiếp ảnh: trọng âm di chuyển theo hậu tố"
+    },
+    {
+     "t": "educate /ˈedʒukeɪt/ → education /ˌedʒuˈkeɪʃn/",
+     "vi": "giáo dục (động từ) → sự giáo dục: -tion kéo trọng âm về ngay trước nó"
+    },
+    {
+     "t": "Let me preSENT my plan. – Thank you for the PREsent!",
+     "vi": "Để tôi trình bày kế hoạch. – Cảm ơn bạn vì món quà!"
+    },
+    {
+     "t": "HAppy /ˈhæpi/ → HAppiness /ˈhæpinəs/",
+     "vi": "-ness không làm đổi trọng âm"
+    }
+   ],
+   "tips": [
+    "Gặp từ mới: (1) đếm số âm tiết, (2) xem loại từ và hậu tố, (3) đoán theo quy tắc, (4) kiểm tra dấu ˈ trong từ điển.",
+    "Âm tiết KHÔNG nhấn thường chứa /ə/: <b>a</b>bout, <b>com</b>puter /kəm-/, doct<b>or</b> /-tə(r)/. Đọc yếu những âm này là bí quyết để nghe giống người bản ngữ.",
+    "Số đếm: thir<b>TEEN</b> (nhấn sau) – <b>THIR</b>ty (nhấn đầu). Đây là cách chính để nghe phân biệt 13 và 30 – học kỹ ở Bài 10.",
+    "Tên nước & quốc tịch: <b>CHI</b>na – Chi<b>NESE</b>; ja<b>PAN</b> – Japa<b>NESE</b>; Viet<b>NAM</b> /ˌvjetˈnæm/ – Vietna<b>MESE</b>."
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ vựng: nghề nghiệp, gia đình, nơi chốn",
+   "items": [
+    {
+     "w": "doctor",
+     "ipa": "/ˈdɒktə(r)/",
+     "pos": "n",
+     "vi": "bác sĩ",
+     "ex": "My aunt is a doctor.",
+     "exVi": "Cô tôi là bác sĩ."
+    },
+    {
+     "w": "hotel",
+     "ipa": "/həʊˈtel/",
+     "pos": "n",
+     "vi": "khách sạn",
+     "ex": "The hotel is near the beach.",
+     "exVi": "Khách sạn ở gần bãi biển."
+    },
+    {
+     "w": "begin",
+     "ipa": "/bɪˈɡɪn/",
+     "pos": "v",
+     "vi": "bắt đầu",
+     "ex": "The film begins at eight.",
+     "exVi": "Bộ phim bắt đầu lúc tám giờ."
+    },
+    {
+     "w": "visit",
+     "ipa": "/ˈvɪzɪt/",
+     "pos": "v",
+     "vi": "thăm, đến thăm",
+     "ex": "I visit my grandparents every Sunday.",
+     "exVi": "Tôi thăm ông bà mỗi Chủ nhật."
+    },
+    {
+     "w": "listen",
+     "ipa": "/ˈlɪsn/",
+     "pos": "v",
+     "vi": "nghe, lắng nghe",
+     "ex": "Listen and repeat.",
+     "exVi": "Nghe và nhắc lại."
+    },
+    {
+     "w": "relax",
+     "ipa": "/rɪˈlæks/",
+     "pos": "v",
+     "vi": "thư giãn",
+     "ex": "I relax at home on Sundays.",
+     "exVi": "Tôi thư giãn ở nhà vào Chủ nhật."
+    },
+    {
+     "w": "family",
+     "ipa": "/ˈfæməli/",
+     "pos": "n",
+     "vi": "gia đình",
+     "ex": "My family is big.",
+     "exVi": "Gia đình tôi đông người."
+    },
+    {
+     "w": "beautiful",
+     "ipa": "/ˈbjuːtɪfl/",
+     "pos": "adj",
+     "vi": "đẹp",
+     "ex": "Noravel Bay is beautiful.",
+     "exVi": "Vịnh Noravel rất đẹp."
+    },
+    {
+     "w": "hospital",
+     "ipa": "/ˈhɒspɪtl/",
+     "pos": "n",
+     "vi": "bệnh viện",
+     "ex": "She works at a hospital.",
+     "exVi": "Cô ấy làm việc ở bệnh viện."
+    },
+    {
+     "w": "computer",
+     "ipa": "/kəmˈpjuːtə(r)/",
+     "pos": "n",
+     "vi": "máy tính",
+     "ex": "I use a computer at work.",
+     "exVi": "Tôi dùng máy tính ở chỗ làm."
+    },
+    {
+     "w": "important",
+     "ipa": "/ɪmˈpɔːtnt/",
+     "pos": "adj",
+     "vi": "quan trọng",
+     "ex": "Family is important to me.",
+     "exVi": "Gia đình quan trọng với tôi."
+    },
+    {
+     "w": "tomato",
+     "ipa": "/təˈmɑːtəʊ/",
+     "pos": "n",
+     "vi": "quả cà chua",
+     "ex": "I need two tomatoes.",
+     "exVi": "Tôi cần hai quả cà chua."
+    },
+    {
+     "w": "Vietnamese",
+     "ipa": "/ˌvjetnəˈmiːz/",
+     "pos": "adj",
+     "vi": "(thuộc) Việt Nam; người Việt; tiếng Việt",
+     "ex": "I'm Vietnamese.",
+     "exVi": "Tôi là người Việt Nam."
+    },
+    {
+     "w": "engineer",
+     "ipa": "/ˌendʒɪˈnɪə(r)/",
+     "pos": "n",
+     "vi": "kỹ sư",
+     "ex": "My brother is an engineer.",
+     "exVi": "Anh trai tôi là kỹ sư."
+    },
+    {
+     "w": "information",
+     "ipa": "/ˌɪnfəˈmeɪʃn/",
+     "pos": "n",
+     "vi": "thông tin",
+     "ex": "Can I have some information, please?",
+     "exVi": "Cho tôi xin ít thông tin được không?"
+    },
+    {
+     "w": "university",
+     "ipa": "/ˌjuːnɪˈvɜːsəti/",
+     "pos": "n",
+     "vi": "trường đại học",
+     "ex": "She studies at a university in Velmora.",
+     "exVi": "Cô ấy học ở một trường đại học tại Velmora."
+    },
+    {
+     "w": "photograph",
+     "ipa": "/ˈfəʊtəɡrɑːf/",
+     "pos": "n",
+     "vi": "bức ảnh",
+     "ex": "This is a photograph of my family.",
+     "exVi": "Đây là ảnh gia đình tôi."
+    },
+    {
+     "w": "photographer",
+     "ipa": "/fəˈtɒɡrəfə(r)/",
+     "pos": "n",
+     "vi": "nhiếp ảnh gia, thợ chụp ảnh",
+     "ex": "He is a wedding photographer.",
+     "exVi": "Anh ấy là thợ chụp ảnh cưới."
+    }
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Ở quầy lễ tân khách sạn",
+   "lang": "en-GB",
+   "note": "Nam đi công tác và nhận phòng khách sạn. Nghe lần 1 (che lời thoại): Nam làm nghề gì? Nghe lần 2: máy tính ở đâu? Lần 3: nghe và đánh dấu trọng âm của hotel, Vietnamese, engineer, information, computer, beautiful.",
+   "lines": [
+    {
+     "s": "Lucy",
+     "g": "f",
+     "t": "Good afternoon. Welcome to the Lotus Hotel.",
+     "vi": "Chào buổi chiều. Chào mừng anh đến khách sạn Lotus."
+    },
+    {
+     "s": "Nam",
+     "g": "m",
+     "t": "Good afternoon. I have a room for two nights. My name is Nam.",
+     "vi": "Chào chị. Tôi đã đặt một phòng hai đêm. Tôi tên là Nam."
+    },
+    {
+     "s": "Lucy",
+     "g": "f",
+     "t": "Thank you. Are you Vietnamese?",
+     "vi": "Cảm ơn anh. Anh là người Việt Nam phải không?"
+    },
+    {
+     "s": "Nam",
+     "g": "m",
+     "t": "Yes, I am. I'm an engineer from Neravale.",
+     "vi": "Vâng. Tôi là kỹ sư đến từ Neravale."
+    },
+    {
+     "s": "Lucy",
+     "g": "f",
+     "t": "Here's some information about the city. The museum and the university are near here.",
+     "vi": "Đây là một ít thông tin về thành phố. Bảo tàng và trường đại học ở gần đây."
+    },
+    {
+     "s": "Nam",
+     "g": "m",
+     "t": "Thank you. Is there a computer I can use?",
+     "vi": "Cảm ơn chị. Ở đây có máy tính nào tôi dùng được không?"
+    },
+    {
+     "s": "Lucy",
+     "g": "f",
+     "t": "Yes, next to the café. Enjoy your visit!",
+     "vi": "Có ạ, ở cạnh quán cà phê. Chúc anh có chuyến đi vui vẻ!"
+    },
+    {
+     "s": "Nam",
+     "g": "m",
+     "t": "Thanks. It's a beautiful hotel.",
+     "vi": "Cảm ơn chị. Khách sạn đẹp quá."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Nam is an ______.",
+     "a": "engineer",
+     "e": "“I'm an engineer from Neravale.” – engineer /ˌendʒɪˈnɪə(r)/ nhấn âm cuối (ooO)."
+    },
+    {
+     "q": "How many nights will Nam stay?",
+     "o": [
+      "one",
+      "two",
+      "three"
+     ],
+     "a": 1,
+     "e": "“I have a room for two nights.”"
+    },
+    {
+     "q": "Where is the computer?",
+     "o": [
+      "next to the café",
+      "in his room",
+      "at the university"
+     ],
+     "a": 0,
+     "e": "“Yes, next to the café.”"
+    },
+    {
+     "q": "Trọng âm của hotel rơi vào:",
+     "o": [
+      "âm tiết 1 (HO-tel)",
+      "âm tiết 2 (ho-TEL)"
+     ],
+     "a": 1,
+     "e": "hotel /həʊˈtel/ – một ngoại lệ của quy tắc danh từ 2 âm tiết nhấn đầu."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Gia đình của Hà",
+   "title": "Ha's family",
+   "text": "My name is Ha. I'm a photographer. My family is small: my husband, Long, and our daughter, An. Long is a doctor at a hospital in Velmora. An is a student at the university.\n\nOn Sundays, we relax at home. I take beautiful photographs of my family. It's important to me.",
+   "vi": "Tôi tên là Hà. Tôi là nhiếp ảnh gia. Gia đình tôi nhỏ: chồng tôi, Long, và con gái chúng tôi, An. Long là bác sĩ ở một bệnh viện tại Velmora. An là sinh viên đại học.\n\nVào Chủ nhật, cả nhà thư giãn ở nhà. Tôi chụp những bức ảnh đẹp về gia đình mình. Điều đó rất quan trọng với tôi.",
+   "gloss": [
+    {
+     "w": "husband",
+     "vi": "chồng"
+    },
+    {
+     "w": "daughter",
+     "vi": "con gái"
+    },
+    {
+     "w": "student",
+     "vi": "sinh viên, học sinh"
+    },
+    {
+     "w": "on Sundays",
+     "vi": "vào các ngày Chủ nhật"
+    },
+    {
+     "w": "take photographs",
+     "vi": "chụp ảnh"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Ha's husband is a ______.",
+     "a": "doctor",
+     "e": "“Long is a doctor at a hospital in Velmora.”"
+    },
+    {
+     "q": "Where does An study?",
+     "o": [
+      "at the university",
+      "at a hospital",
+      "at home"
+     ],
+     "a": 0,
+     "e": "“An is a student at the university.”"
+    },
+    {
+     "q": "Trọng âm của photographer:",
+     "o": [
+      "PHO-to-gra-pher",
+      "pho-TO-gra-pher",
+      "pho-to-GRA-pher"
+     ],
+     "a": 1,
+     "e": "photographer /fəˈtɒɡrəfə(r)/ – khác photograph /ˈfəʊtəɡrɑːf/."
+    },
+    {
+     "q": "Từ nào trong bài có mẫu trọng âm Ooo?",
+     "o": [
+      "beautiful",
+      "important",
+      "photographer"
+     ],
+     "a": 0,
+     "e": "BEAU-ti-ful (Ooo); im-POR-tant (oOo); pho-TO-gra-pher (oOoo)."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Vỗ tay theo trọng âm",
+   "tasks": [
+    {
+     "p": "Vỗ tay theo trọng âm: vỗ to ở âm tiết nhấn, vỗ nhẹ ở âm tiết yếu.",
+     "model": "teacher, hotel, family, computer, Vietnamese.",
+     "tips": "TEA-cher (Oo) · ho-TEL (oO) · FA-mi-ly (Ooo) · com-PU-ter (oOo) · viet-na-MESE (ooO)."
+    },
+    {
+     "p": "Trọng âm nhảy chỗ: nhại theo chuỗi 3 từ.",
+     "model": "photograph, photographer, photographic.",
+     "tips": "PHO-to-graph → pho-TO-gra-pher → pho-to-GRA-phic."
+    },
+    {
+     "p": "Danh từ hay động từ? Đọc 2 câu, chú ý từ present.",
+     "model": "Thank you for the present. Let me present my family.",
+     "tips": "a PREsent (món quà) – to preSENT (giới thiệu, trình bày)."
+    },
+    {
+     "p": "Tự giới thiệu 3 câu dùng từ nhiều âm tiết.",
+     "model": "I'm Vietnamese. I'm an engineer. My family is very important to me.",
+     "tips": "viet-na-MESE, en-gi-NEER, FA-mi-ly, im-POR-tant – âm tiết yếu đọc nhẹ /ə/."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Bảng 5 mẫu trọng âm",
+   "task": "Xếp 15 từ vào 5 cột theo mẫu Oo / oO / Ooo / oOo / ooO; mỗi từ viết IPA có dấu ˈ. Sau đó viết 2 câu về gia đình dùng ít nhất 3 từ trong bảng.",
+   "model": "Oo: doctor /ˈdɒktə(r)/, listen /ˈlɪsn/, visit /ˈvɪzɪt/\noO: hotel /həʊˈtel/, begin /bɪˈɡɪn/, relax /rɪˈlæks/\nOoo: family /ˈfæməli/, beautiful /ˈbjuːtɪfl/, hospital /ˈhɒspɪtl/\noOo: computer /kəmˈpjuːtə(r)/, important /ɪmˈpɔːtnt/, tomato /təˈmɑːtəʊ/\nooO: Vietnamese /ˌvjetnəˈmiːz/, engineer /ˌendʒɪˈnɪə(r)/, afternoon /ˌɑːftəˈnuːn/\nMy father is an engineer at a hospital. My family is very important to me.",
+   "modelVi": "Bố tôi là kỹ sư ở một bệnh viện. Gia đình rất quan trọng với tôi.",
+   "tips": [
+    "Dấu ˈ đặt TRƯỚC âm tiết nhấn, không đặt trên nguyên âm.",
+    "Khi viết từ thường, có thể viết HOA âm tiết nhấn để luyện: com-PU-ter."
+   ],
+   "checklist": [
+    "5 cột × 3 từ",
+    "IPA có dấu ˈ đúng vị trí",
+    "2 câu đúng chính tả, có dấu chấm",
+    "Đọc to, vỗ tay theo trọng âm"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "hotel",
+   "lang": "en-GB",
+   "q": "Trọng âm rơi vào âm tiết thứ mấy?",
+   "o": [
+    "1",
+    "2"
+   ],
+   "a": 1,
+   "e": "hotel /həʊˈtel/ – ho-TEL."
+  },
+  {
+   "t": "listen",
+   "say": "doctor",
+   "lang": "en-GB",
+   "q": "Trọng âm rơi vào âm tiết thứ mấy?",
+   "o": [
+    "1",
+    "2"
+   ],
+   "a": 0,
+   "e": "doctor /ˈdɒktə(r)/ – DOC-tor, âm sau yếu /tə/."
+  },
+  {
+   "t": "listen",
+   "say": "computer",
+   "lang": "en-GB",
+   "q": "Trọng âm rơi vào âm tiết thứ mấy?",
+   "o": [
+    "1",
+    "2",
+    "3"
+   ],
+   "a": 1,
+   "e": "computer /kəmˈpjuːtə(r)/ – com-PU-ter (oOo)."
+  },
+  {
+   "t": "listen",
+   "say": "Vietnamese",
+   "lang": "en-GB",
+   "q": "Trọng âm rơi vào âm tiết thứ mấy?",
+   "o": [
+    "1",
+    "2",
+    "3"
+   ],
+   "a": 2,
+   "e": "Vietnamese /ˌvjetnəˈmiːz/ – hậu tố -ese được nhấn."
+  },
+  {
+   "t": "listen",
+   "say": "family",
+   "lang": "en-GB",
+   "q": "Trọng âm rơi vào âm tiết thứ mấy?",
+   "o": [
+    "1",
+    "2",
+    "3"
+   ],
+   "a": 0,
+   "e": "family /ˈfæməli/ – FA-mi-ly (Ooo)."
+  },
+  {
+   "t": "listen",
+   "say": "dessert",
+   "lang": "en-GB",
+   "q": "Bạn nghe từ nào?",
+   "o": [
+    "desert (sa mạc)",
+    "dessert (món tráng miệng)"
+   ],
+   "a": 1,
+   "e": "dessert /dɪˈzɜːt/ nhấn âm 2; desert /ˈdezət/ nhấn âm 1."
+  },
+  {
+   "t": "listen",
+   "say": "photographer",
+   "lang": "en-GB",
+   "q": "Bạn nghe từ nào?",
+   "o": [
+    "photograph",
+    "photographer"
+   ],
+   "a": 1,
+   "e": "photographer /fəˈtɒɡrəfə(r)/ – 4 âm tiết, nhấn TO; photograph /ˈfəʊtəɡrɑːf/ – 3 âm tiết, nhấn PHO."
+  },
+  {
+   "t": "dict",
+   "say": "important information",
+   "lang": "en-GB",
+   "a": "important information",
+   "e": "im-POR-tant in-for-MA-tion."
+  },
+  {
+   "t": "dict",
+   "say": "a beautiful hotel",
+   "lang": "en-GB",
+   "a": "a beautiful hotel",
+   "e": "BEAU-ti-ful ho-TEL."
+  },
+  {
+   "t": "mc",
+   "q": "Theo quy tắc hậu tố -tion, “education” nhấn ở:",
+   "o": [
+    "e-du-CA-tion",
+    "E-du-ca-tion",
+    "e-DU-ca-tion"
+   ],
+   "a": 0,
+   "e": "-tion kéo trọng âm về âm tiết ngay trước nó: /ˌedʒuˈkeɪʃn/."
+  },
+  {
+   "t": "mc",
+   "q": "Động từ nào nhấn âm tiết 1 (ngoại lệ)?",
+   "o": [
+    "begin",
+    "relax",
+    "visit"
+   ],
+   "a": 2,
+   "e": "visit /ˈvɪzɪt/ – VI-sit. begin, relax theo quy tắc: nhấn âm 2."
+  },
+  {
+   "t": "mc",
+   "q": "IPA /fəˈtɒɡrəfə(r)/ là từ:",
+   "o": [
+    "photograph",
+    "photographer",
+    "photographic"
+   ],
+   "a": 1,
+   "e": "Dấu ˈ trước /tɒ/ → pho-TO-gra-pher."
+  },
+  {
+   "t": "mc",
+   "q": "Từ nào nhấn âm tiết cuối?",
+   "o": [
+    "engineer",
+    "beautiful",
+    "hospital"
+   ],
+   "a": 0,
+   "e": "engineer /ˌendʒɪˈnɪə(r)/ – hậu tố -eer được nhấn. beautiful, hospital nhấn âm đầu."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với mẫu trọng âm:",
+   "pairs": [
+    [
+     "teacher",
+     "Oo"
+    ],
+    [
+     "begin",
+     "oO"
+    ],
+    [
+     "family",
+     "Ooo"
+    ],
+    [
+     "computer",
+     "oOo"
+    ],
+    [
+     "Japanese",
+     "ooO"
+    ]
+   ],
+   "e": "O lớn = âm tiết được nhấn."
+  },
+  {
+   "t": "mc",
+   "q": "Trong /həʊˈtel/, âm tiết được nhấn là:",
+   "o": [
+    "/həʊ/",
+    "/tel/"
+   ],
+   "a": 1,
+   "e": "Dấu ˈ đứng TRƯỚC âm tiết được nhấn → /tel/."
+  },
+  {
+   "t": "mc",
+   "q": "“Let me present my plan.” – present ở đây đọc:",
+   "o": [
+    "PRE-sent (danh từ)",
+    "pre-SENT (động từ)"
+   ],
+   "a": 1,
+   "e": "present là động từ (trình bày) → nhấn âm 2 /prɪˈzent/. Danh từ (món quà) mới nhấn âm 1 /ˈpreznt/."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ từ nhiều âm tiết in to (để học viên gạch âm tiết nhấn); 5 tờ giấy ghi mẫu Oo, oO, Ooo, oOo, ooO; dây chun hoặc 1 quả bóng nhỏ; từ điển trên điện thoại.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: GV đọc ‘com-pu-tơ’ đều đều rồi đọc com-PU-ter đúng – hỏi học viên nghe khác gì. Thử thêm với banana, hotel."
+   },
+   {
+    "t": "15'",
+    "do": "Trọng âm là gì: to – dài – cao; âm yếu thành /ə/. Đọc ký hiệu ˈ ˌ trong từ điển. So sánh tiếng Việt (mọi tiếng đều rõ) với tiếng Anh."
+   },
+   {
+    "t": "25'",
+    "do": "5 mẫu trọng âm: GV đọc từng nhóm trong khối Phát âm, học viên vỗ tay theo (to ở âm tiết nhấn). Kéo dây chun ở âm tiết nhấn."
+   },
+   {
+    "t": "20'",
+    "do": "Quy tắc: danh từ/tính từ vs động từ 2 âm tiết; hậu tố. Học viên đoán trọng âm 8 từ mới (police, decide, station, musician, Chinese, employee, kindness, classroom) rồi kiểm tra bằng từ điển."
+   },
+   {
+    "t": "10'",
+    "do": "Nghe – xác định trọng âm: GV đọc từ, học viên giơ 1, 2 hoặc 3 ngón tay."
+   },
+   {
+    "t": "10'",
+    "do": "Tổng kết; giao bài tập 1–8 trong game."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: trò Tung bóng trọng âm (xem trò chơi)."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe ‘Ở quầy lễ tân khách sạn’: trả lời câu hỏi; đánh dấu trọng âm 6 từ nhiều âm tiết; đọc phân vai."
+   },
+   {
+    "t": "15'",
+    "do": "Đọc ‘Ha's family’: trả lời câu hỏi; xếp các từ nhiều âm tiết trong bài vào 5 mẫu."
+   },
+   {
+    "t": "20'",
+    "do": "Nói: 4 nhiệm vụ; học viên tự giới thiệu nghề nghiệp & gia đình, bạn nghe chấm trọng âm."
+   },
+   {
+    "t": "20'",
+    "do": "Viết: bảng 5 cột + 2 câu; đổi bài, đọc chéo và sửa vị trí dấu ˈ."
+   },
+   {
+    "t": "10'",
+    "do": "Nghe và đặt dấu trọng âm lên từ vừa học, rồi dùng từ đó trong lời giới thiệu mới."
+   }
+  ],
+  "games": [
+   "Tung bóng trọng âm: GV nói một từ, học viên đọc lại và tung bóng lên đúng lúc đọc âm tiết nhấn. Sai nhịp thì chuyền bóng cho bạn khác.",
+   "Xếp hàng theo mẫu: phát mỗi học viên 1 thẻ từ, cả lớp tự đứng thành 5 hàng Oo, oO, Ooo, oOo, ooO trong 2 phút; từng hàng đọc to để cả lớp kiểm tra.",
+   "Đoán từ qua nhịp: một học viên ngân nga nhịp của từ (da-DA-da) mà không nói chữ, cả lớp đoán từ trong danh sách bài (computer, banana, tomato…)."
+  ],
+  "errors": [
+   "Đọc mọi âm tiết đều nhau như tiếng Việt (ba-na-na, com-pu-tơ) → vỗ tay to – nhỏ; âm yếu đọc /ə/ thật nhẹ.",
+   "Nhấn âm tiết cuối theo thói quen: doc-TOR, com-pu-TER → nhớ danh từ 2 âm tiết thường nhấn đầu; từ dài thì tra dấu ˈ.",
+   "Gắn thanh điệu tiếng Việt vào từ (“hô-ten”, “in-tơ-nét”) → luyện giọng đều, chỉ thay đổi độ to – dài – cao ở âm tiết nhấn.",
+   "Quên trọng âm di chuyển khi thêm hậu tố: phoTOgrapher đọc thành PHOtographer → học theo ‘gia đình từ’: PHOtograph – phoTOgrapher – photoGRAphic.",
+   "Đọc rõ nguyên âm ở âm tiết yếu: tomato thành “tô-ma-tô” → /təˈmɑːtəʊ/: âm đầu /tə/ rất nhẹ."
+  ],
+  "homework": "Làm hết bài tập trong game (≥ 80%); tra từ điển 10 từ nhiều âm tiết bạn hay dùng ở công việc/trường học, chép IPA và gạch chân âm tiết nhấn; ghi âm phần Nói; ôn 18 thẻ từ vựng."
+ }
 }

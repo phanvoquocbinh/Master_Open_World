@@ -1,63 +1,380 @@
 {
-  "no": 43,
-  "lv": "hsk5",
-  "title": "Thăm hỏi sức khoẻ người lớn tuổi – lễ nghi",
-  "sub": "看望长辈 · kànwàng zhǎngbèi",
-  "situation": "Vũ Minh (武明, đồng nghiệp gọi là 小武), nhân viên người Việt làm việc ở Bắc Kinh, nghe tin bố của chị đồng nghiệp Trương Lệ (张丽) – bác Trương (张伯伯) – bị ngã gãy xương, mới phẫu thuật xong về nhà tĩnh dưỡng. Cuối tuần Minh mang quà đến thăm. Chú ý lễ nghi: cách xưng hô, đưa quà và đáp lời khách sáo, hỏi tuổi người cao tuổi, đáp lại câu tự hạ của người già, không ngồi quá lâu, chào ra về, kiêng kỵ khi chọn quà. Nghe lần 1: Bác Trương bị làm sao? Minh mang quà gì và đã kịp tránh món quà nào?",
-  "lang": "zh-CN",
-  "lines": [
-    {"s": "张丽", "g": "f", "t": "小武，你来了！快请进。哎呀，还这么客气，带这么多东西。", "py": "Xiǎo Wǔ, nǐ lái le! Kuài qǐng jìn. Āiyā, hái zhème kèqi, dài zhème duō dōngxi.", "vi": "Minh đến rồi! Mời vào đi. Ôi, còn khách sáo thế, mang nhiều đồ thế này."},
-    {"s": "武明", "g": "m", "t": "张姐，一点儿心意。听说伯伯做了手术，我早就想来看看，又怕打扰他休息。", "py": "Zhāng jiě, yìdiǎnr xīnyì. Tīngshuō bóbo zuòle shǒushù, wǒ zǎo jiù xiǎng lái kànkan, yòu pà dǎrǎo tā xiūxi.", "vi": "Chị Trương, chút lòng thành thôi ạ. Nghe nói bác mới phẫu thuật, em định đến thăm từ lâu, lại sợ làm phiền bác nghỉ ngơi."},
-    {"s": "张丽", "g": "f", "t": "不打扰，不打扰。他一个人在家闷得慌，正盼着有人来聊天呢。爸，我同事小武来看您了！", "py": "Bù dǎrǎo, bù dǎrǎo. Tā yí ge rén zài jiā mèn de huang, zhèng pànzhe yǒu rén lái liáotiān ne. Bà, wǒ tóngshì Xiǎo Wǔ lái kàn nín le!", "vi": "Không phiền đâu. Ông ở nhà một mình buồn lắm, đang mong có người đến nói chuyện đây. Bố ơi, đồng nghiệp con là Minh đến thăm bố này!"},
-    {"s": "张伯伯", "g": "m", "t": "哦，小武啊，快坐快坐。我腿不方便，就不起来了，你别见怪。", "py": "Ò, Xiǎo Wǔ a, kuài zuò kuài zuò. Wǒ tuǐ bù fāngbiàn, jiù bù qǐlai le, nǐ bié jiànguài.", "vi": "À, Minh đấy à, ngồi đi ngồi đi. Chân bác bất tiện, bác không đứng dậy được, cháu đừng trách nhé."},
-    {"s": "武明", "g": "m", "t": "伯伯，您千万别起来，好好躺着。这是我从河内带来的莲花茶，味道很清香，还有一些水果。祝您早日康复！", "py": "Bóbo, nín qiānwàn bié qǐlai, hǎohāo tǎngzhe. Zhè shì wǒ cóng Hénèi dàilái de liánhuā chá, wèidao hěn qīngxiāng, hái yǒu yìxiē shuǐguǒ. Zhù nín zǎorì kāngfù!", "vi": "Bác ơi, bác đừng dậy, cứ nằm nghỉ ạ. Đây là trà sen cháu mang từ Hà Nội, vị rất thanh thơm, còn có ít hoa quả. Chúc bác sớm bình phục!"},
-    {"s": "张伯伯", "g": "m", "t": "来就来吧，还带什么东西！你们年轻人挣钱也不容易。", "py": "Lái jiù lái ba, hái dài shénme dōngxi! Nǐmen niánqīngrén zhèngqián yě bù róngyì.", "vi": "Đến chơi là quý rồi, còn mang quà làm gì! Bọn trẻ các cháu kiếm tiền cũng chẳng dễ."},
-    {"s": "武明", "g": "m", "t": "应该的。伯伯，您这腿是怎么伤的？现在恢复得怎么样？", "py": "Yīnggāi de. Bóbo, nín zhè tuǐ shì zěnme shāng de? Xiànzài huīfù de zěnmeyàng?", "vi": "Là việc nên làm mà bác. Bác ơi, chân bác bị làm sao vậy? Giờ hồi phục thế nào rồi ạ?"},
-    {"s": "张伯伯", "g": "m", "t": "嗨，别提了。上个月下雨，我去楼下买菜，一不小心滑了一跤，小腿骨折了。医生说手术很成功，就是得慢慢养，伤筋动骨一百天嘛。", "py": "Hāi, bié tí le. Shàng ge yuè xià yǔ, wǒ qù lóuxià mǎi cài, yí bù xiǎoxīn huále yì jiāo, xiǎotuǐ gǔzhé le. Yīshēng shuō shǒushù hěn chénggōng, jiùshì děi mànmàn yǎng, shāng jīn dòng gǔ yìbǎi tiān ma.", "vi": "Ôi, đừng nhắc nữa. Tháng trước trời mưa, bác xuống nhà mua thức ăn, sơ ý trượt ngã, gãy xương cẳng chân. Bác sĩ nói phẫu thuật rất thành công, chỉ là phải dưỡng từ từ, ‘động gân động xương phải trăm ngày’ mà."},
-    {"s": "张丽", "g": "f", "t": "现在每天做康复训练，已经能拄着拐杖走几步了。", "py": "Xiànzài měitiān zuò kāngfù xùnliàn, yǐjīng néng zhǔzhe guǎizhàng zǒu jǐ bù le.", "vi": "Giờ ngày nào bố cũng tập phục hồi chức năng, đã chống nạng đi được vài bước rồi."},
-    {"s": "武明", "g": "m", "t": "那太好了！伯伯您身子骨一向硬朗，肯定恢复得快。冒昧问一句，您今年高寿？", "py": "Nà tài hǎo le! Bóbo nín shēnzigǔ yíxiàng yìnglang, kěndìng huīfù de kuài. Màomèi wèn yí jù, nín jīnnián gāoshòu?", "vi": "Thế thì tốt quá! Bác vốn khoẻ mạnh, chắc chắn sẽ hồi phục nhanh. Cháu mạn phép hỏi, năm nay bác bao nhiêu tuổi ạ?"},
-    {"s": "张伯伯", "g": "m", "t": "七十八了，老了，不中用了。", "py": "Qīshíbā le, lǎo le, bù zhōngyòng le.", "vi": "Bảy mươi tám rồi, già rồi, chẳng được tích sự gì nữa."},
-    {"s": "武明", "g": "m", "t": "您可别这么说！您看起来最多七十出头，说话中气十足，精神着呢。", "py": "Nín kě bié zhème shuō! Nín kàn qǐlai zuìduō qīshí chūtóu, shuōhuà zhōngqì shízú, jīngshen zhe ne.", "vi": "Bác đừng nói thế ạ! Trông bác cùng lắm ngoài bảy mươi, giọng nói sang sảng, tinh thần minh mẫn lắm."},
-    {"s": "张伯伯", "g": "m", "t": "哈哈，你这孩子真会说话。小丽说你中文说得好，果然名不虚传。在北京住得习惯吗？", "py": "Hāhā, nǐ zhè háizi zhēn huì shuōhuà. Xiǎo Lì shuō nǐ Zhōngwén shuō de hǎo, guǒrán míng bù xū chuán. Zài Běijīng zhù de xíguàn ma?", "vi": "Haha, cháu này khéo nói thật. Tiểu Lệ bảo tiếng Trung của cháu giỏi, quả là danh bất hư truyền. Sống ở Bắc Kinh quen chưa cháu?"},
-    {"s": "武明", "g": "m", "t": "挺习惯的，就是冬天有点儿干。张姐在工作上特别照顾我，我跟她学到了很多。", "py": "Tǐng xíguàn de, jiùshì dōngtiān yǒudiǎnr gān. Zhāng jiě zài gōngzuò shang tèbié zhàogù wǒ, wǒ gēn tā xuédàole hěn duō.", "vi": "Quen lắm ạ, chỉ là mùa đông hơi hanh khô. Chị Trương trong công việc rất quan tâm cháu, cháu học được ở chị ấy rất nhiều."},
-    {"s": "张伯伯", "g": "m", "t": "互相照顾，互相照顾。你出门在外，有什么困难就跟小丽说，别客气。", "py": "Hùxiāng zhàogù, hùxiāng zhàogù. Nǐ chūmén zài wài, yǒu shénme kùnnan jiù gēn Xiǎo Lì shuō, bié kèqi.", "vi": "Giúp đỡ lẫn nhau thôi. Cháu xa nhà, có khó khăn gì cứ nói với Tiểu Lệ, đừng ngại."},
-    {"s": "武明", "g": "m", "t": "伯伯，时候不早了，您该休息了，我就不多打扰了。您好好养着，等您康复了，我再来看您。", "py": "Bóbo, shíhou bù zǎo le, nín gāi xiūxi le, wǒ jiù bù duō dǎrǎo le. Nín hǎohāo yǎngzhe, děng nín kāngfù le, wǒ zài lái kàn nín.", "vi": "Bác ơi, cũng muộn rồi, bác nên nghỉ ngơi, cháu không làm phiền thêm nữa. Bác tĩnh dưỡng cho tốt, đợi bác khỏi hẳn cháu lại đến thăm."},
-    {"s": "张伯伯", "g": "m", "t": "好，好。小丽，替我送送小武。小武，常来玩儿啊！", "py": "Hǎo, hǎo. Xiǎo Lì, tì wǒ sòngsong Xiǎo Wǔ. Xiǎo Wǔ, cháng lái wánr a!", "vi": "Ừ, ừ. Tiểu Lệ, tiễn Minh giúp bố. Minh này, năng đến chơi nhé!"},
-    {"s": "张丽", "g": "f", "t": "小武，今天真谢谢你。我爸很久没这么高兴了。", "py": "Xiǎo Wǔ, jīntiān zhēn xièxie nǐ. Wǒ bà hěn jiǔ méi zhème gāoxìng le.", "vi": "Minh, hôm nay thật cảm ơn em. Lâu lắm rồi bố chị mới vui như vậy."},
-    {"s": "武明", "g": "m", "t": "张姐别客气。对了，我本来想送伯伯一个钟，后来查了一下，才知道“送钟”和“送终”同音，幸好没送。", "py": "Zhāng jiě bié kèqi. Duìle, wǒ běnlái xiǎng sòng bóbo yí ge zhōng, hòulái chále yíxià, cái zhīdao “sòng zhōng” hé “sòngzhōng” tóngyīn, xìnghǎo méi sòng.", "vi": "Chị đừng khách sáo. À, em vốn định tặng bác một chiếc đồng hồ, sau tra thử mới biết ‘tặng đồng hồ’ (送钟) đồng âm với ‘lo hậu sự’ (送终), may mà chưa tặng."},
-    {"s": "张丽", "g": "f", "t": "哈哈，你想得真周到！不少老人确实挺在意这个。路上慢点儿，到家说一声。", "py": "Hāhā, nǐ xiǎng de zhēn zhōudào! Bù shǎo lǎorén quèshí tǐng zàiyì zhège. Lùshang màn diǎnr, dào jiā shuō yì shēng.", "vi": "Haha, em chu đáo thật! Nhiều người già đúng là khá để ý chuyện này. Đi đường cẩn thận, về đến nhà nhắn chị một tiếng."}
-  ],
-  "phrases": [
-    {"t": "一点儿心意。", "py": "Yìdiǎnr xīnyì.", "vi": "Chút lòng thành.", "note": "Nói khi đưa quà, đưa bằng hai tay. Biến thể: 一点儿小意思 (thân mật), 不成敬意 (rất trang trọng, văn hoa). Lỗi người Việt: đặt quà xuống rồi không nói gì – người Trung thấy hơi cộc."},
-    {"t": "来就来吧，还带什么东西！", "py": "Lái jiù lái ba, hái dài shénme dōngxi!", "vi": "Đến chơi là quý rồi, còn mang quà làm gì!", "note": "Câu khách sáo quen thuộc của chủ nhà khi nhận quà – KHÔNG phải từ chối. Khách đáp: 应该的 / 一点儿心意. Không nên cầm quà về."},
-    {"t": "祝您早日康复！", "py": "Zhù nín zǎorì kāngfù!", "vi": "Chúc bác sớm bình phục!", "note": "Câu chúc chuẩn khi thăm người ốm, dùng cả khi nói lẫn viết thiệp. Thân mật hơn: 快点儿好起来！"},
-    {"t": "我就不起来了，你别见怪。", "py": "Wǒ jiù bù qǐlai le, nǐ bié jiànguài.", "vi": "Bác không đứng dậy được, cháu đừng trách.", "note": "Người lớn tuổi khiêm nhường xin lỗi vì không tiếp khách đúng lễ. Khách đáp ngay: 您千万别起来 / 您快躺着."},
-    {"t": "伤筋动骨一百天。", "py": "Shāng jīn dòng gǔ yìbǎi tiān.", "vi": "Động gân động xương phải trăm ngày (mới lành).", "note": "Tục ngữ dân gian: chấn thương xương khớp cần thời gian dài. Người nghe có thể đáp: 是啊，慢慢养，千万别着急."},
-    {"t": "您身子骨一向硬朗。", "py": "Nín shēnzigǔ yíxiàng yìnglang.", "vi": "Bác vốn khoẻ mạnh, cứng cáp.", "note": "Lời khen sức khoẻ dành riêng cho người già. 身子骨 khẩu ngữ, thân mật mà kính trọng; 硬朗 chỉ người cao tuổi khoẻ mạnh – không dùng khen người trẻ."},
-    {"t": "冒昧问一句，您今年高寿？", "py": "Màomèi wèn yí jù, nín jīnnián gāoshòu?", "vi": "Cháu mạn phép hỏi, năm nay bác bao nhiêu tuổi ạ?", "note": "Hỏi tuổi người cao tuổi (khoảng 70 trở lên). Lỗi người Việt: hỏi người già 您几岁？ (chỉ hỏi trẻ em) hoặc 您多大？ (người trẻ, trung niên). Lịch sự khác: 您多大年纪了？"},
-    {"t": "您可别这么说！", "py": "Nín kě bié zhème shuō!", "vi": "Bác đừng nói thế ạ!", "note": "Đáp câu tự hạ của người già (老了，不中用了). Luôn phủ định nhẹ nhàng rồi khen cụ thể (精神、气色、说话中气十足); im lặng hoặc gật đầu là thất lễ."},
-    {"t": "果然名不虚传。", "py": "Guǒrán míng bù xū chuán.", "vi": "Quả là danh bất hư truyền.", "note": "Thành ngữ người Việt dễ nhớ vì trùng âm Hán Việt. Dùng khen khi thực tế đúng như lời đồn. Khi được khen, đáp khiêm tốn: 哪里哪里，还差得远呢."},
-    {"t": "我就不多打扰了。", "py": "Wǒ jiù bù duō dǎrǎo le.", "vi": "Cháu không làm phiền thêm nữa.", "note": "Câu xin phép ra về lịch sự. Thăm người ốm nên ở 20–30 phút; kết hợp lý do quan tâm: 您该休息了. Chủ nhà tiễn: 常来玩儿 / 慢走 / 路上小心."},
-    {"t": "“送钟”和“送终”同音。", "py": "“Sòng zhōng” hé “sòngzhōng” tóngyīn.", "vi": "‘Tặng đồng hồ’ đồng âm với ‘lo hậu sự’.", "note": "Kiêng kỵ khi tặng quà người Trung Quốc, nhất là người già, người ốm: đồng hồ (送钟 = 送终), lê (梨 = 离, chia lìa – nhất là không bổ lê chia nhau), ô/dù (伞 ≈ 散, tan), hoa cúc trắng/vàng (thường dùng ở đám tang). Quà an toàn: trà, hoa quả, đồ bổ, đặc sản quê."}
-  ],
-  "qs": [
-    {"q": "Bác Trương bị làm sao?", "o": ["Bị cảm nặng", "Trượt ngã ngày mưa, gãy xương cẳng chân, đã phẫu thuật", "Đau lưng lâu năm"], "a": 1, "e": "一不小心滑了一跤，小腿骨折了。医生说手术很成功……"},
-    {"q": "Minh mang quà gì đến?", "o": ["Trà sen Hà Nội và hoa quả", "Một chiếc đồng hồ", "Rượu và thuốc lá"], "a": 0, "e": "这是我从河内带来的莲花茶……还有一些水果. B: Minh định tặng nhưng đã không tặng."},
-    {"q": "Hiện bác Trương hồi phục đến đâu?", "o": ["Đã đi lại bình thường", "Vẫn phải nằm viện", "Đang tập phục hồi, chống nạng đi được vài bước"], "a": 2, "e": "现在每天做康复训练，已经能拄着拐杖走几步了."},
-    {"q": "Bác Trương năm nay bao nhiêu tuổi?", "o": ["70", "78", "87"], "a": 1, "e": "七十八了. A là con số trong lời khen của Minh (七十出头 = ngoài 70)."},
-    {"q": "Khi bác nói 老了，不中用了, Minh đáp thế nào?", "o": ["Phủ định khéo và khen bác trông trẻ, giọng sang sảng, minh mẫn", "Gật đầu đồng ý", "Chuyển sang chuyện công việc"], "a": 0, "e": "您可别这么说！您看起来最多七十出头，说话中气十足，精神着呢. Câu hỏi về lễ nghi giao tiếp."},
-    {"q": "Vì sao Minh không tặng đồng hồ?", "o": ["Vì đồng hồ quá đắt", "Vì bác Trương không thích", "Vì 送钟 đồng âm với 送终 – điều kiêng kỵ"], "a": 2, "e": "“送钟”和“送终”同音，幸好没送."},
-    {"q": "Qua câu của Trương Lệ ở cửa, có thể suy ra điều gì?", "o": ["Bố chị không thích có khách", "Cuộc thăm hỏi làm bố chị rất vui", "Minh ở lại quá lâu"], "a": 1, "e": "我爸很久没这么高兴了 – lâu lắm rồi bố mới vui như vậy. Câu hỏi suy luận."}
-  ],
-  "exercises": [
-    {"t": "fill", "q": "冒昧问一句，您今年高___？", "py": "Màomèi wèn yí jù, nín jīnnián gāoshòu?", "a": "寿", "alt": ["shou"], "e": "高寿 = tuổi thọ (cách hỏi tuổi người cao tuổi một cách kính trọng)."},
-    {"t": "order", "q": "Sắp xếp thành câu: ‘Cháu không làm phiền thêm nữa.’", "w": ["不多", "我", "打扰了", "就"], "a": "我就不多打扰了", "e": "Chủ ngữ + 就 + 不多 + động từ + 了 (câu xin phép ra về)."},
-    {"t": "listen", "say": "来就来吧，还带什么东西！你们年轻人挣钱也不容易。", "lang": "zh-CN", "q": "Câu này của chủ nhà có ý gì?", "o": ["Không muốn nhận quà, muốn khách về", "Lời khách sáo khi nhận quà, thể hiện sự quan tâm đến khách", "Chê quà rẻ"], "a": 1, "e": "Câu khách sáo khi nhận quà; vế sau 年轻人挣钱也不容易 thể hiện thương khách – không phải từ chối."},
-    {"t": "dict", "say": "祝您早日康复！", "lang": "zh-CN", "a": "祝您早日康复！", "py": "Zhù nín zǎorì kāngfù!", "e": "早日 = sớm ngày; 康复 = bình phục."},
-    {"t": "match", "q": "Nối từ với nghĩa", "pairs": [["高寿", "tuổi (hỏi người cao tuổi)"], ["硬朗", "khoẻ, cứng cáp (người già)"], ["骨折", "gãy xương"], ["拐杖", "cái nạng, gậy chống"], ["康复", "bình phục"], ["心意", "tấm lòng"]], "e": "Từ vựng thăm hỏi người ốm."}
-  ],
-  "practice": [
-    {"p": "Bạn đến thăm bà của một người bạn Trung Quốc vừa xuất viện sau đợt viêm phổi: chào hỏi, đưa quà, hỏi thăm bệnh tình, hỏi tuổi lịch sự, khen sức khoẻ, chúc mau khoẻ.", "model": "奶奶好！我是小林的同事阿明。这是一点儿心意，越南的咖啡和一些水果。听说您前段时间住院了，现在身体好些了吗？……那就好！冒昧问一句，您今年高寿？……八十五了？您看起来一点儿也不像，气色这么好，说话也这么清楚。您好好休息，祝您早日康复！", "py": "Nǎinai hǎo! Wǒ shì Xiǎo Lín de tóngshì Ā Míng. Zhè shì yìdiǎnr xīnyì, Yuènán de kāfēi hé yìxiē shuǐguǒ. Tīngshuō nín qián duàn shíjiān zhùyuàn le, xiànzài shēntǐ hǎo xiē le ma? …… Nà jiù hǎo! Màomèi wèn yí jù, nín jīnnián gāoshòu? …… Bāshíwǔ le? Nín kàn qǐlai yìdiǎnr yě bú xiàng, qìsè zhème hǎo, shuōhuà yě zhème qīngchu. Nín hǎohāo xiūxi, zhù nín zǎorì kāngfù!", "vi": "Cháu chào bà ạ! Cháu là Minh, đồng nghiệp của Tiểu Lâm. Đây là chút lòng thành, cà phê Việt Nam và ít hoa quả. Nghe nói thời gian trước bà nằm viện, giờ sức khoẻ khá hơn chưa ạ? … Thế thì tốt quá! Cháu mạn phép hỏi, năm nay bà bao nhiêu tuổi ạ? … Tám mươi lăm rồi ạ? Trông bà chẳng giống chút nào, sắc mặt tốt thế, nói chuyện lại minh mẫn. Bà nghỉ ngơi cho khoẻ, chúc bà sớm bình phục!"},
-    {"p": "Bạn đã ngồi chơi khoảng 20 phút với một người lớn tuổi đang dưỡng bệnh. Hãy xin phép ra về khéo, chúc sức khoẻ, và đáp lại khi chủ nhà mời ở lại ăn cơm.", "model": "伯伯，时候不早了，您该休息了，我就不多打扰了。……不了不了，谢谢您！今天家里还有点儿事，改天等您身体好了，我再来陪您好好聊聊。您多保重，好好养着。张姐，您别送了，快回去照顾伯伯吧！", "py": "Bóbo, shíhou bù zǎo le, nín gāi xiūxi le, wǒ jiù bù duō dǎrǎo le. …… Bù le bù le, xièxie nín! Jīntiān jiāli hái yǒu diǎnr shì, gǎitiān děng nín shēntǐ hǎo le, wǒ zài lái péi nín hǎohāo liáoliao. Nín duō bǎozhòng, hǎohāo yǎngzhe. Zhāng jiě, nín bié sòng le, kuài huíqu zhàogù bóbo ba!", "vi": "Bác ơi, cũng muộn rồi, bác nên nghỉ ngơi, cháu không làm phiền thêm nữa. … Thôi ạ, cháu cảm ơn bác! Hôm nay nhà cháu còn chút việc, hôm nào bác khoẻ hẳn, cháu lại đến trò chuyện với bác lâu hơn. Bác giữ gìn sức khoẻ, tĩnh dưỡng cho tốt. Chị Trương, chị đừng tiễn nữa, vào chăm bác đi ạ!"}
-  ]
+ "no": 43,
+ "lv": "hsk5",
+ "title": "Thăm hỏi sức khoẻ người lớn tuổi – lễ nghi",
+ "sub": "看望长辈 · kànwàng zhǎngbèi",
+ "situation": "Vũ Minh (武明, đồng nghiệp gọi là 小武), nhân viên người Việt làm việc ở Vân Tuyến, nghe tin bố của chị đồng nghiệp Trương Lệ (张丽) – bác Trương (张伯伯) – bị ngã gãy xương, mới phẫu thuật xong về nhà tĩnh dưỡng. Cuối tuần Minh mang quà đến thăm. Chú ý lễ nghi: cách xưng hô, đưa quà và đáp lời khách sáo, hỏi tuổi người cao tuổi, đáp lại câu tự hạ của người già, không ngồi quá lâu, chào ra về, kiêng kỵ khi chọn quà. Nghe lần 1: Bác Trương bị làm sao? Minh mang quà gì và đã kịp tránh món quà nào?",
+ "lang": "zh-CN",
+ "lines": [
+  {
+   "s": "张丽",
+   "g": "f",
+   "t": "小武，你来了！快请进。哎呀，还这么客气，带这么多东西。",
+   "py": "Xiǎo Wǔ, nǐ lái le! Kuài qǐng jìn. Āiyā, hái zhème kèqi, dài zhème duō dōngxi.",
+   "vi": "Minh đến rồi! Mời vào đi. Ôi, còn khách sáo thế, mang nhiều đồ thế này."
+  },
+  {
+   "s": "武明",
+   "g": "m",
+   "t": "张姐，一点儿心意。听说伯伯做了手术，我早就想来看看，又怕打扰他休息。",
+   "py": "Zhāng jiě, yìdiǎnr xīnyì. Tīngshuō bóbo zuòle shǒushù, wǒ zǎo jiù xiǎng lái kànkan, yòu pà dǎrǎo tā xiūxi.",
+   "vi": "Chị Trương, chút lòng thành thôi ạ. Nghe nói bác mới phẫu thuật, em định đến thăm từ lâu, lại sợ làm phiền bác nghỉ ngơi."
+  },
+  {
+   "s": "张丽",
+   "g": "f",
+   "t": "不打扰，不打扰。他一个人在家闷得慌，正盼着有人来聊天呢。爸，我同事小武来看您了！",
+   "py": "Bù dǎrǎo, bù dǎrǎo. Tā yí ge rén zài jiā mèn de huang, zhèng pànzhe yǒu rén lái liáotiān ne. Bà, wǒ tóngshì Xiǎo Wǔ lái kàn nín le!",
+   "vi": "Không phiền đâu. Ông ở nhà một mình buồn lắm, đang mong có người đến nói chuyện đây. Bố ơi, đồng nghiệp con là Minh đến thăm bố này!"
+  },
+  {
+   "s": "张伯伯",
+   "g": "m",
+   "t": "哦，小武啊，快坐快坐。我腿不方便，就不起来了，你别见怪。",
+   "py": "Ò, Xiǎo Wǔ a, kuài zuò kuài zuò. Wǒ tuǐ bù fāngbiàn, jiù bù qǐlai le, nǐ bié jiànguài.",
+   "vi": "À, Minh đấy à, ngồi đi ngồi đi. Chân bác bất tiện, bác không đứng dậy được, cháu đừng trách nhé."
+  },
+  {
+   "s": "武明",
+   "g": "m",
+   "t": "伯伯，您千万别起来，好好躺着。这是我从叶纱城带来的莲花茶，味道很清香，还有一些水果。祝您早日康复！",
+   "py": "Bóbo, nín qiānwàn bié qǐlai, hǎohāo tǎngzhe. Zhè shì wǒ cóng Yèshā Chéng dàilái de liánhuā chá, wèidao hěn qīngxiāng, hái yǒu yìxiē shuǐguǒ. Zhù nín zǎorì kāngfù!",
+   "vi": "Bác ơi, bác đừng dậy, cứ nằm nghỉ ạ. Đây là trà sen cháu mang từ Diệp Sa, vị rất thanh thơm, còn có ít hoa quả. Chúc bác sớm bình phục!"
+  },
+  {
+   "s": "张伯伯",
+   "g": "m",
+   "t": "来就来吧，还带什么东西！你们年轻人挣钱也不容易。",
+   "py": "Lái jiù lái ba, hái dài shénme dōngxi! Nǐmen niánqīngrén zhèngqián yě bù róngyì.",
+   "vi": "Đến chơi là quý rồi, còn mang quà làm gì! Bọn trẻ các cháu kiếm tiền cũng chẳng dễ."
+  },
+  {
+   "s": "武明",
+   "g": "m",
+   "t": "应该的。伯伯，您这腿是怎么伤的？现在恢复得怎么样？",
+   "py": "Yīnggāi de. Bóbo, nín zhè tuǐ shì zěnme shāng de? Xiànzài huīfù de zěnmeyàng?",
+   "vi": "Là việc nên làm mà bác. Bác ơi, chân bác bị làm sao vậy? Giờ hồi phục thế nào rồi ạ?"
+  },
+  {
+   "s": "张伯伯",
+   "g": "m",
+   "t": "嗨，别提了。上个月下雨，我去楼下买菜，一不小心滑了一跤，小腿骨折了。医生说手术很成功，就是得慢慢养，伤筋动骨一百天嘛。",
+   "py": "Hāi, bié tí le. Shàng ge yuè xià yǔ, wǒ qù lóuxià mǎi cài, yí bù xiǎoxīn huále yì jiāo, xiǎotuǐ gǔzhé le. Yīshēng shuō shǒushù hěn chénggōng, jiùshì děi mànmàn yǎng, shāng jīn dòng gǔ yìbǎi tiān ma.",
+   "vi": "Ôi, đừng nhắc nữa. Tháng trước trời mưa, bác xuống nhà mua thức ăn, sơ ý trượt ngã, gãy xương cẳng chân. Bác sĩ nói phẫu thuật rất thành công, chỉ là phải dưỡng từ từ, ‘động gân động xương phải trăm ngày’ mà."
+  },
+  {
+   "s": "张丽",
+   "g": "f",
+   "t": "现在每天做康复训练，已经能拄着拐杖走几步了。",
+   "py": "Xiànzài měitiān zuò kāngfù xùnliàn, yǐjīng néng zhǔzhe guǎizhàng zǒu jǐ bù le.",
+   "vi": "Giờ ngày nào bố cũng tập phục hồi chức năng, đã chống nạng đi được vài bước rồi."
+  },
+  {
+   "s": "武明",
+   "g": "m",
+   "t": "那太好了！伯伯您身子骨一向硬朗，肯定恢复得快。冒昧问一句，您今年高寿？",
+   "py": "Nà tài hǎo le! Bóbo nín shēnzigǔ yíxiàng yìnglang, kěndìng huīfù de kuài. Màomèi wèn yí jù, nín jīnnián gāoshòu?",
+   "vi": "Thế thì tốt quá! Bác vốn khoẻ mạnh, chắc chắn sẽ hồi phục nhanh. Cháu mạn phép hỏi, năm nay bác bao nhiêu tuổi ạ?"
+  },
+  {
+   "s": "张伯伯",
+   "g": "m",
+   "t": "七十八了，老了，不中用了。",
+   "py": "Qīshíbā le, lǎo le, bù zhōngyòng le.",
+   "vi": "Bảy mươi tám rồi, già rồi, chẳng được tích sự gì nữa."
+  },
+  {
+   "s": "武明",
+   "g": "m",
+   "t": "您可别这么说！您看起来最多七十出头，说话中气十足，精神着呢。",
+   "py": "Nín kě bié zhème shuō! Nín kàn qǐlai zuìduō qīshí chūtóu, shuōhuà zhōngqì shízú, jīngshen zhe ne.",
+   "vi": "Bác đừng nói thế ạ! Trông bác cùng lắm ngoài bảy mươi, giọng nói sang sảng, tinh thần minh mẫn lắm."
+  },
+  {
+   "s": "张伯伯",
+   "g": "m",
+   "t": "哈哈，你这孩子真会说话。小丽说你中文说得好，果然名不虚传。在云线城住得习惯吗？",
+   "py": "Hāhā, nǐ zhè háizi zhēn huì shuōhuà. Xiǎo Lì shuō nǐ Zhōngwén shuō de hǎo, guǒrán míng bù xū chuán. Zài Yúnxiàn Chéng zhù de xíguàn ma?",
+   "vi": "Haha, cháu này khéo nói thật. Tiểu Lệ bảo tiếng Trung của cháu giỏi, quả là danh bất hư truyền. Sống ở Vân Tuyến quen chưa cháu?"
+  },
+  {
+   "s": "武明",
+   "g": "m",
+   "t": "挺习惯的，就是冬天有点儿干。张姐在工作上特别照顾我，我跟她学到了很多。",
+   "py": "Tǐng xíguàn de, jiùshì dōngtiān yǒudiǎnr gān. Zhāng jiě zài gōngzuò shang tèbié zhàogù wǒ, wǒ gēn tā xuédàole hěn duō.",
+   "vi": "Quen lắm ạ, chỉ là mùa đông hơi hanh khô. Chị Trương trong công việc rất quan tâm cháu, cháu học được ở chị ấy rất nhiều."
+  },
+  {
+   "s": "张伯伯",
+   "g": "m",
+   "t": "互相照顾，互相照顾。你出门在外，有什么困难就跟小丽说，别客气。",
+   "py": "Hùxiāng zhàogù, hùxiāng zhàogù. Nǐ chūmén zài wài, yǒu shénme kùnnan jiù gēn Xiǎo Lì shuō, bié kèqi.",
+   "vi": "Giúp đỡ lẫn nhau thôi. Cháu xa nhà, có khó khăn gì cứ nói với Tiểu Lệ, đừng ngại."
+  },
+  {
+   "s": "武明",
+   "g": "m",
+   "t": "伯伯，时候不早了，您该休息了，我就不多打扰了。您好好养着，等您康复了，我再来看您。",
+   "py": "Bóbo, shíhou bù zǎo le, nín gāi xiūxi le, wǒ jiù bù duō dǎrǎo le. Nín hǎohāo yǎngzhe, děng nín kāngfù le, wǒ zài lái kàn nín.",
+   "vi": "Bác ơi, cũng muộn rồi, bác nên nghỉ ngơi, cháu không làm phiền thêm nữa. Bác tĩnh dưỡng cho tốt, đợi bác khỏi hẳn cháu lại đến thăm."
+  },
+  {
+   "s": "张伯伯",
+   "g": "m",
+   "t": "好，好。小丽，替我送送小武。小武，常来玩儿啊！",
+   "py": "Hǎo, hǎo. Xiǎo Lì, tì wǒ sòngsong Xiǎo Wǔ. Xiǎo Wǔ, cháng lái wánr a!",
+   "vi": "Ừ, ừ. Tiểu Lệ, tiễn Minh giúp bố. Minh này, năng đến chơi nhé!"
+  },
+  {
+   "s": "张丽",
+   "g": "f",
+   "t": "小武，今天真谢谢你。我爸很久没这么高兴了。",
+   "py": "Xiǎo Wǔ, jīntiān zhēn xièxie nǐ. Wǒ bà hěn jiǔ méi zhème gāoxìng le.",
+   "vi": "Minh, hôm nay thật cảm ơn em. Lâu lắm rồi bố chị mới vui như vậy."
+  },
+  {
+   "s": "武明",
+   "g": "m",
+   "t": "张姐别客气。对了，我本来想送伯伯一个钟，后来查了一下，才知道“送钟”和“送终”同音，幸好没送。",
+   "py": "Zhāng jiě bié kèqi. Duìle, wǒ běnlái xiǎng sòng bóbo yí ge zhōng, hòulái chále yíxià, cái zhīdao “sòng zhōng” hé “sòngzhōng” tóngyīn, xìnghǎo méi sòng.",
+   "vi": "Chị đừng khách sáo. À, em vốn định tặng bác một chiếc đồng hồ, sau tra thử mới biết ‘tặng đồng hồ’ (送钟) đồng âm với ‘lo hậu sự’ (送终), may mà chưa tặng."
+  },
+  {
+   "s": "张丽",
+   "g": "f",
+   "t": "哈哈，你想得真周到！不少老人确实挺在意这个。路上慢点儿，到家说一声。",
+   "py": "Hāhā, nǐ xiǎng de zhēn zhōudào! Bù shǎo lǎorén quèshí tǐng zàiyì zhège. Lùshang màn diǎnr, dào jiā shuō yì shēng.",
+   "vi": "Haha, em chu đáo thật! Nhiều người già đúng là khá để ý chuyện này. Đi đường cẩn thận, về đến nhà nhắn chị một tiếng."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "一点儿心意。",
+   "py": "Yìdiǎnr xīnyì.",
+   "vi": "Chút lòng thành.",
+   "note": "Nói khi đưa quà, đưa bằng hai tay. Biến thể: 一点儿小意思 (thân mật), 不成敬意 (rất trang trọng, văn hoa). Lỗi người Việt: đặt quà xuống rồi không nói gì – người Trung thấy hơi cộc."
+  },
+  {
+   "t": "来就来吧，还带什么东西！",
+   "py": "Lái jiù lái ba, hái dài shénme dōngxi!",
+   "vi": "Đến chơi là quý rồi, còn mang quà làm gì!",
+   "note": "Câu khách sáo quen thuộc của chủ nhà khi nhận quà – KHÔNG phải từ chối. Khách đáp: 应该的 / 一点儿心意. Không nên cầm quà về."
+  },
+  {
+   "t": "祝您早日康复！",
+   "py": "Zhù nín zǎorì kāngfù!",
+   "vi": "Chúc bác sớm bình phục!",
+   "note": "Câu chúc chuẩn khi thăm người ốm, dùng cả khi nói lẫn viết thiệp. Thân mật hơn: 快点儿好起来！"
+  },
+  {
+   "t": "我就不起来了，你别见怪。",
+   "py": "Wǒ jiù bù qǐlai le, nǐ bié jiànguài.",
+   "vi": "Bác không đứng dậy được, cháu đừng trách.",
+   "note": "Người lớn tuổi khiêm nhường xin lỗi vì không tiếp khách đúng lễ. Khách đáp ngay: 您千万别起来 / 您快躺着."
+  },
+  {
+   "t": "伤筋动骨一百天。",
+   "py": "Shāng jīn dòng gǔ yìbǎi tiān.",
+   "vi": "Động gân động xương phải trăm ngày (mới lành).",
+   "note": "Tục ngữ dân gian: chấn thương xương khớp cần thời gian dài. Người nghe có thể đáp: 是啊，慢慢养，千万别着急."
+  },
+  {
+   "t": "您身子骨一向硬朗。",
+   "py": "Nín shēnzigǔ yíxiàng yìnglang.",
+   "vi": "Bác vốn khoẻ mạnh, cứng cáp.",
+   "note": "Lời khen sức khoẻ dành riêng cho người già. 身子骨 khẩu ngữ, thân mật mà kính trọng; 硬朗 chỉ người cao tuổi khoẻ mạnh – không dùng khen người trẻ."
+  },
+  {
+   "t": "冒昧问一句，您今年高寿？",
+   "py": "Màomèi wèn yí jù, nín jīnnián gāoshòu?",
+   "vi": "Cháu mạn phép hỏi, năm nay bác bao nhiêu tuổi ạ?",
+   "note": "Hỏi tuổi người cao tuổi (khoảng 70 trở lên). Lỗi người Việt: hỏi người già 您几岁？ (chỉ hỏi trẻ em) hoặc 您多大？ (người trẻ, trung niên). Lịch sự khác: 您多大年纪了？"
+  },
+  {
+   "t": "您可别这么说！",
+   "py": "Nín kě bié zhème shuō!",
+   "vi": "Bác đừng nói thế ạ!",
+   "note": "Đáp câu tự hạ của người già (老了，不中用了). Luôn phủ định nhẹ nhàng rồi khen cụ thể (精神、气色、说话中气十足); im lặng hoặc gật đầu là thất lễ."
+  },
+  {
+   "t": "果然名不虚传。",
+   "py": "Guǒrán míng bù xū chuán.",
+   "vi": "Quả là danh bất hư truyền.",
+   "note": "Thành ngữ người Việt dễ nhớ vì trùng âm Hán Việt. Dùng khen khi thực tế đúng như lời đồn. Khi được khen, đáp khiêm tốn: 哪里哪里，还差得远呢."
+  },
+  {
+   "t": "我就不多打扰了。",
+   "py": "Wǒ jiù bù duō dǎrǎo le.",
+   "vi": "Cháu không làm phiền thêm nữa.",
+   "note": "Câu xin phép ra về lịch sự. Thăm người ốm nên ở 20–30 phút; kết hợp lý do quan tâm: 您该休息了. Chủ nhà tiễn: 常来玩儿 / 慢走 / 路上小心."
+  },
+  {
+   "t": "“送钟”和“送终”同音。",
+   "py": "“Sòng zhōng” hé “sòngzhōng” tóngyīn.",
+   "vi": "‘Tặng đồng hồ’ đồng âm với ‘lo hậu sự’.",
+   "note": "Kiêng kỵ khi tặng quà người Trung Quốc, nhất là người già, người ốm: đồng hồ (送钟 = 送终), lê (梨 = 离, chia lìa – nhất là không bổ lê chia nhau), ô/dù (伞 ≈ 散, tan), hoa cúc trắng/vàng (thường dùng ở đám tang). Quà an toàn: trà, hoa quả, đồ bổ, đặc sản quê."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Bác Trương bị làm sao?",
+   "o": [
+    "Bị cảm nặng",
+    "Trượt ngã ngày mưa, gãy xương cẳng chân, đã phẫu thuật",
+    "Đau lưng lâu năm"
+   ],
+   "a": 1,
+   "e": "一不小心滑了一跤，小腿骨折了。医生说手术很成功……"
+  },
+  {
+   "q": "Minh mang quà gì đến?",
+   "o": [
+    "Trà sen Diệp Sa và hoa quả",
+    "Một chiếc đồng hồ",
+    "Rượu và thuốc lá"
+   ],
+   "a": 0,
+   "e": "Minh mang trà sen từ Diệp Sa và hoa quả trong truyện. Bạn từng nghĩ tặng đồng hồ nhưng cuối cùng không tặng, nên không lấy ý định làm món đã mang."
+  },
+  {
+   "q": "Hiện bác Trương hồi phục đến đâu?",
+   "o": [
+    "Đang tập phục hồi, chống nạng đi được vài bước",
+    "Đã đi lại bình thường",
+    "Vẫn phải nằm viện"
+   ],
+   "a": 0,
+   "e": "现在每天做康复训练，已经能拄着拐杖走几步了."
+  },
+  {
+   "q": "Bác Trương năm nay bao nhiêu tuổi?",
+   "o": [
+    "70",
+    "78",
+    "87"
+   ],
+   "a": 1,
+   "e": "Ông nói 七十八了, tức bảy mươi tám tuổi. Bảy mươi là con số trong lời khen 七十出头, không phải câu ông xác nhận tuổi."
+  },
+  {
+   "q": "Khi bác nói 老了，不中用了, Minh đáp thế nào?",
+   "o": [
+    "Gật đầu đồng ý",
+    "Chuyển sang chuyện công việc",
+    "Phủ định khéo và khen bác trông trẻ, giọng sang sảng, minh mẫn"
+   ],
+   "a": 2,
+   "e": "您可别这么说！您看起来最多七十出头，说话中气十足，精神着呢. Câu hỏi về lễ nghi giao tiếp."
+  },
+  {
+   "q": "Vì sao Minh không tặng đồng hồ?",
+   "o": [
+    "Vì bác Trương không thích",
+    "Vì 送钟 đồng âm với 送终 – điều kiêng kỵ",
+    "Vì đồng hồ quá đắt"
+   ],
+   "a": 1,
+   "e": "“送钟”和“送终”同音，幸好没送."
+  },
+  {
+   "q": "Qua câu của Trương Lệ ở cửa, có thể suy ra điều gì?",
+   "o": [
+    "Cuộc thăm hỏi làm bố chị rất vui",
+    "Minh ở lại quá lâu",
+    "Bố chị không thích có khách"
+   ],
+   "a": 0,
+   "e": "我爸很久没这么高兴了 – lâu lắm rồi bố mới vui như vậy. Câu hỏi suy luận."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "冒昧问一句，您今年高___？",
+   "py": "Màomèi wèn yí jù, nín jīnnián gāoshòu?",
+   "a": "寿",
+   "alt": [
+    "shou"
+   ],
+   "e": "高寿 = tuổi thọ (cách hỏi tuổi người cao tuổi một cách kính trọng)."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: ‘Cháu không làm phiền thêm nữa.’",
+   "w": [
+    "不多",
+    "我",
+    "打扰了",
+    "就"
+   ],
+   "a": "我就不多打扰了",
+   "e": "Chủ ngữ + 就 + 不多 + động từ + 了 (câu xin phép ra về)."
+  },
+  {
+   "t": "listen",
+   "say": "来就来吧，还带什么东西！你们年轻人挣钱也不容易。",
+   "lang": "zh-CN",
+   "q": "Câu này của chủ nhà có ý gì?",
+   "o": [
+    "Không muốn nhận quà, muốn khách về",
+    "Lời khách sáo khi nhận quà, thể hiện sự quan tâm đến khách",
+    "Chê quà rẻ"
+   ],
+   "a": 1,
+   "e": "Câu khách sáo khi nhận quà; vế sau 年轻人挣钱也不容易 thể hiện thương khách – không phải từ chối."
+  },
+  {
+   "t": "dict",
+   "say": "祝您早日康复！",
+   "lang": "zh-CN",
+   "a": "祝您早日康复！",
+   "py": "Zhù nín zǎorì kāngfù!",
+   "e": "早日 = sớm ngày; 康复 = bình phục."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa",
+   "pairs": [
+    [
+     "高寿",
+     "tuổi (hỏi người cao tuổi)"
+    ],
+    [
+     "硬朗",
+     "khoẻ, cứng cáp (người già)"
+    ],
+    [
+     "骨折",
+     "gãy xương"
+    ],
+    [
+     "拐杖",
+     "cái nạng, gậy chống"
+    ],
+    [
+     "康复",
+     "bình phục"
+    ],
+    [
+     "心意",
+     "tấm lòng"
+    ]
+   ],
+   "e": "Từ vựng thăm hỏi người ốm."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Bạn đến thăm bà của một người bạn Trung Quốc vừa xuất viện sau đợt viêm phổi: chào hỏi, đưa quà, hỏi thăm bệnh tình, hỏi tuổi lịch sự, khen sức khoẻ, chúc mau khoẻ.",
+   "model": "奶奶好！我是小林的同事阿明。这是一点儿心意，越南的咖啡和一些水果。听说您前段时间住院了，现在身体好些了吗？……那就好！冒昧问一句，您今年高寿？……八十五了？您看起来一点儿也不像，气色这么好，说话也这么清楚。您好好休息，祝您早日康复！",
+   "py": "Nǎinai hǎo! Wǒ shì Xiǎo Lín de tóngshì Ā Míng. Zhè shì yìdiǎnr xīnyì, Yuènán de kāfēi hé yìxiē shuǐguǒ. Tīngshuō nín qián duàn shíjiān zhùyuàn le, xiànzài shēntǐ hǎo xiē le ma? …… Nà jiù hǎo! Màomèi wèn yí jù, nín jīnnián gāoshòu? …… Bāshíwǔ le? Nín kàn qǐlai yìdiǎnr yě bú xiàng, qìsè zhème hǎo, shuōhuà yě zhème qīngchu. Nín hǎohāo xiūxi, zhù nín zǎorì kāngfù!",
+   "vi": "Cháu chào bà ạ! Cháu là Minh, đồng nghiệp của Tiểu Lâm. Đây là chút lòng thành, cà phê Việt Nam và ít hoa quả. Nghe nói thời gian trước bà nằm viện, giờ sức khoẻ khá hơn chưa ạ? … Thế thì tốt quá! Cháu mạn phép hỏi, năm nay bà bao nhiêu tuổi ạ? … Tám mươi lăm rồi ạ? Trông bà chẳng giống chút nào, sắc mặt tốt thế, nói chuyện lại minh mẫn. Bà nghỉ ngơi cho khoẻ, chúc bà sớm bình phục!"
+  },
+  {
+   "p": "Bạn đã ngồi chơi khoảng 20 phút với một người lớn tuổi đang dưỡng bệnh. Hãy xin phép ra về khéo, chúc sức khoẻ, và đáp lại khi chủ nhà mời ở lại ăn cơm.",
+   "model": "伯伯，时候不早了，您该休息了，我就不多打扰了。……不了不了，谢谢您！今天家里还有点儿事，改天等您身体好了，我再来陪您好好聊聊。您多保重，好好养着。张姐，您别送了，快回去照顾伯伯吧！",
+   "py": "Bóbo, shíhou bù zǎo le, nín gāi xiūxi le, wǒ jiù bù duō dǎrǎo le. …… Bù le bù le, xièxie nín! Jīntiān jiāli hái yǒu diǎnr shì, gǎitiān děng nín shēntǐ hǎo le, wǒ zài lái péi nín hǎohāo liáoliao. Nín duō bǎozhòng, hǎohāo yǎngzhe. Zhāng jiě, nín bié sòng le, kuài huíqu zhàogù bóbo ba!",
+   "vi": "Bác ơi, cũng muộn rồi, bác nên nghỉ ngơi, cháu không làm phiền thêm nữa. … Thôi ạ, cháu cảm ơn bác! Hôm nay nhà cháu còn chút việc, hôm nào bác khoẻ hẳn, cháu lại đến trò chuyện với bác lâu hơn. Bác giữ gìn sức khoẻ, tĩnh dưỡng cho tốt. Chị Trương, chị đừng tiễn nữa, vào chăm bác đi ạ!"
+  }
+ ]
 }

@@ -4,9 +4,9 @@
  "sub": "물 한 잔 주세요.",
  "goals": [
   "Dùng đúng N 주세요, N하고 N để gọi món và yêu cầu số lượng đơn giản bằng giọng lịch sự",
-  "Hiểu và dùng 12 từ/cụm của tình huống trong câu",
-  "Nghe và lấy ít nhất ba dữ kiện có căn cứ từ hội thoại",
-  "Viết sản phẩm theo đề, tự sửa trợ từ và đuôi câu"
+  "Dùng “밥” (cơm) và “주세요” (xin cho) trong lời trao đổi đúng tình huống.",
+  "Nghe để trả lời câu “Khách gọi mấy suất cơm? ”, sau đó chỉ ra câu nói chứa căn cứ.",
+  "Viết để đáp ứng yêu cầu: Viết đơn gọi món 4 câu và một câu xác nhận: có món, lượng, đồ uống, món thêm. Tự kiểm một điều kiện hoặc dữ kiện dễ bị bỏ."
  ],
  "parts": [
   {
@@ -335,16 +335,16 @@
    "h": "Nói theo vai và thay dữ kiện",
    "tasks": [
     {
-     "p": "Gọi món cho hai người, dùng hai đơn vị khác nhau và xác nhận khi nhân viên hỏi lại.",
+     "p": "Người A cần biết “Khách gọi mấy suất cơm? ”. Người B trả lời theo vai rồi chủ động làm rõ “Khách gọi nước bằng đơn vị nào? ”. Đổi một dữ kiện và kiểm xem câu trả lời còn khớp tình huống không.",
      "model": "밥 두 그릇하고 물 두 잔 주세요. 네. 조금 주세요.",
      "vi": "Cho hai suất cơm và hai cốc nước. Có. Cho một chút.",
-     "tips": "Đổi thông tin cho phù hợp vai; giữ mẫu trọng tâm và đuôi lịch sự."
+     "tips": "Trong lượt đầu, nói rõ dữ kiện được hỏi qua “Khách gọi mấy suất cơm? ”. Lượt đổi vai phải thay thông tin ấy mà vẫn giữ đúng cấu trúc câu."
     },
     {
-     "p": "Đổi từ nước cốc sang nước chai, yêu cầu ít kim chi và cảm ơn.",
+     "p": "Một bạn đặt câu “Sau bữa ăn họ ăn gì? ”, bạn còn lại nêu căn cứ từ tình huống rồi nói điều chưa thể khẳng định.Kết thúc bằng một đề nghị hoặc câu xác nhận đúng mức đã biết.",
      "model": "사과하고 바나나 주세요. 김치도 조금 주세요.",
      "vi": "Cho tôi táo và chuối. Cũng cho tôi chút kim chi.",
-     "tips": "Ghi âm, nghe lại và kiểm xem người nghe có lấy được dữ kiện chính không."
+     "tips": "Nghe lại đoạn ghi âm và kiểm câu “물 한 잔 주세요.”: người nghe có hiểu đúng cho tôi một cốc nước hay không?"
     }
    ]
   },
@@ -356,147 +356,147 @@
    "model": "밥 두 그릇 주세요. 국 한 그릇 주세요. 물 두 잔 주세요. 김치도 조금 주세요. 네, 맞아요.",
    "modelVi": "Cho hai cơm, một canh, hai nước và chút kim chi. Vâng, đúng.",
    "tips": [
-    "Lập ý bằng dữ kiện cụ thể rồi mới viết; không dịch từng từ theo thứ tự tiếng Việt.",
-    "Dùng đúng mẫu trọng tâm; kiểm trợ từ và đuôi câu."
+    "Phác thứ tự ý cho tình huống “Viết đơn gọi món 4 câu và một câu xác nhận: có món, lượng, đồ uống, món thêm.”; chọn dữ kiện cần có trước khi bắt đầu viết.",
+    "Kiểm câu dùng “물 한 잔 주세요.” làm mẫu: đổi dữ kiện của bạn nhưng không làm đổi quan hệ giữa các vế."
    ],
    "checklist": [
     "Đáp ứng đủ dữ kiện trong đề.",
     "Vị ngữ ở cuối và trợ từ phù hợp.",
     "Dùng nhất quán mức lịch sự.",
     "Có ít nhất một câu dùng mẫu trọng tâm.",
-    "Đọc lại thành tiếng và sửa hai điểm có lý do."
+    "So lại mục tiêu dùng đúng n 주세요, n하고 n để gọi món và yêu cầu số lượng đơn giản bằng giọng lịch sự; gạch câu chưa phục vụ mục tiêu rồi sửa."
    ]
   }
  ],
  "exercises": [
   {
    "t": "mc",
-   "q": "Chọn nghĩa phù hợp của “밥” trong bài.",
+   "q": "Trong câu “밥 한 그릇 주세요.”,“밥” có nghĩa gì?",
    "o": [
-    "táo",
+    "đơn vị cốc",
     "cơm",
-    "kim chi"
+    "canh"
    ],
    "a": 1,
-   "e": "밥 한 그릇 주세요. → Cho một bát cơm."
+   "e": "Cho một bát cơm. Nghĩa cần chọn là cơm, không phải hai khái niệm còn lại."
   },
   {
    "t": "mc",
-   "q": "Chọn nghĩa phù hợp của “물” trong bài.",
+   "q": "Trong câu “물 두 잔 주세요.”,“물” có nghĩa gì?",
    "o": [
     "nước",
-    "canh",
-    "chuối"
+    "táo",
+    "đơn vị bát/tô"
    ],
    "a": 0,
-   "e": "물 두 잔 주세요. → Cho hai cốc nước."
+   "e": "Cho hai cốc nước. Nghĩa cần chọn là nước, không phải hai khái niệm còn lại."
   },
   {
    "t": "mc",
-   "q": "Chọn nghĩa phù hợp của “김치” trong bài.",
+   "q": "Trong câu “김치를 조금 먹어요.”,“김치” có nghĩa gì?",
    "o": [
-    "táo",
-    "đơn vị cốc",
+    "chuối",
+    "đơn vị chai",
     "kim chi"
    ],
    "a": 2,
-   "e": "김치를 조금 먹어요. → Tôi ăn chút kim chi."
+   "e": "Tôi ăn chút kim chi. Nghĩa cần chọn là kim chi, không phải hai khái niệm còn lại."
   },
   {
    "t": "fill",
-   "q": "Điền từ/cụm tiếng Hàn có nghĩa “canh”: ___",
+   "q": "Trong tình huống “Cho một bát canh.”,điền từ/cụm mang nghĩa “canh”: ___.",
    "a": "국",
-   "e": "Từ trong bài là 국 (guk). Cho một bát canh."
+   "e": "Câu mẫu tương ứng: 국 한 그릇 주세요. Hãy giữ đúng cụm 국 khi đưa vào lời nói."
   },
   {
    "t": "fill",
-   "q": "Điền từ/cụm tiếng Hàn có nghĩa “táo”: ___",
+   "q": "Trong tình huống “Cho hai quả táo.”,điền từ/cụm mang nghĩa “táo”: ___.",
    "a": "사과",
-   "e": "Từ trong bài là 사과 (sagwa). Cho hai quả táo."
+   "e": "Câu mẫu tương ứng: 사과 두 개 주세요. Hãy giữ đúng cụm 사과 khi đưa vào lời nói."
   },
   {
    "t": "order",
-   "q": "Sắp xếp để nói: Cho tôi một cốc nước.",
+   "q": "Sắp xếp để diễn đạt: Cho một bát cơm.",
    "w": [
     "한",
-    "잔",
-    "주세요",
-    "물"
-   ],
-   "a": "물 한 잔 주세요.",
-   "e": "Đúng: 물 한 잔 주세요. → Cho tôi một cốc nước.. Giữ trợ từ gắn với danh từ và vị ngữ ở cuối."
-  },
-  {
-   "t": "order",
-   "q": "Sắp xếp để nói: Cho tôi hai bát/suất cơm.",
-   "w": [
-    "두",
     "그릇",
     "주세요",
     "밥"
    ],
-   "a": "밥 두 그릇 주세요.",
-   "e": "Đúng: 밥 두 그릇 주세요. → Cho tôi hai bát/suất cơm.. Giữ trợ từ gắn với danh từ và vị ngữ ở cuối."
+   "a": "밥 한 그릇 주세요.",
+   "e": "Trật tự đúng là 밥 한 그릇 주세요. Trợ từ phải đi cùng danh từ và vị ngữ kết thúc ý cơm."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để diễn đạt: Cho hai cốc nước.",
+   "w": [
+    "두",
+    "잔",
+    "주세요",
+    "물"
+   ],
+   "a": "물 두 잔 주세요.",
+   "e": "Trật tự đúng là 물 두 잔 주세요. Trợ từ phải đi cùng danh từ và vị ngữ kết thúc ý nước."
   },
   {
    "t": "match",
-   "q": "Nối từ/cụm với nghĩa",
+   "q": "Ghép các cụm về cơm và nước với nghĩa thích hợp.",
    "pairs": [
     [
-     "바나나",
-     "chuối"
+     "밥",
+     "cơm"
     ],
     [
-     "잔",
-     "đơn vị cốc"
+     "물",
+     "nước"
     ],
     [
-     "그릇",
-     "đơn vị bát/tô"
+     "김치",
+     "kim chi"
     ],
     [
-     "병",
-     "đơn vị chai"
+     "국",
+     "canh"
     ],
     [
-     "메뉴",
-     "thực đơn"
+     "사과",
+     "táo"
     ]
    ],
-   "e": "Các nghĩa được chọn theo bối cảnh bài; không suy từ một âm Hán Việt đơn lẻ."
+   "e": "So cặp 밥 — cơm với 사과 — táo. Hai mục phục vụ những chức năng khác nhau trong tình huống vừa học."
   },
   {
    "t": "listen",
+   "say": "어서 오세요. 무엇을 드릴까요? 밥 두 그릇하고 물 두 잔 주세요. 김치도 드릴까요? 네. 조금 주세요. 밥 두 그릇, 물 두 잔, 김치 조금 맞지요? 네, 맞아요. 감사합니다.",
    "lang": "ko-KR",
-   "say": "밥 두 그릇 주세요.",
-   "q": "Nghe và chọn ý đúng.",
+   "q": "Khách gọi mấy suất cơm?",
    "o": [
-    "Cũng cho tôi chút kim chi.",
-    "Cho tôi hai bát/suất cơm.",
-    "Cho tôi một cốc nước."
+    "Ba",
+    "Hai",
+    "Một"
    ],
    "a": 1,
-   "e": "Câu nghe là: 밥 두 그릇 주세요. → Cho tôi hai bát/suất cơm."
+   "e": "Căn cứ để trả lời “Khách gọi mấy suất cơm? ” là: 밥 두 그릇. Nghe lại lượt chứa dữ kiện ấy, không chọn theo một từ rời."
   },
   {
    "t": "listen",
+   "say": "어서 오세요. 무엇을 드릴까요? 밥 두 그릇하고 물 두 잔 주세요. 김치도 드릴까요? 네. 조금 주세요. 밥 두 그릇, 물 두 잔, 김치 조금 맞지요? 네, 맞아요. 감사합니다.",
    "lang": "ko-KR",
-   "say": "사과하고 바나나 주세요.",
-   "q": "Nghe và chọn ý đúng.",
+   "q": "Khách gọi nước bằng đơn vị nào?",
    "o": [
-    "Cho tôi táo và chuối.",
-    "Cho tôi một cốc nước.",
-    "Cũng cho tôi chút kim chi."
+    "잔: cốc",
+    "병: chai",
+    "권: cuốn"
    ],
    "a": 0,
-   "e": "Câu nghe là: 사과하고 바나나 주세요. → Cho tôi táo và chuối."
+   "e": "Căn cứ để trả lời “Khách gọi nước bằng đơn vị nào? ” là: 물 두 잔. Nghe lại lượt chứa dữ kiện ấy, không chọn theo một từ rời."
   },
   {
    "t": "dict",
+   "say": "오늘 점심에는 작은 식당에 가요.",
+   "a": "오늘 점심에는 작은 식당에 가요.",
    "lang": "ko-KR",
-   "say": "물 한 잔 주세요.",
-   "a": "물 한 잔 주세요.",
-   "e": "Cho tôi một cốc nước.. Viết bằng Hangul; không thêm nguyên âm sau batchim và giữ khoảng cách theo từ."
+   "e": "Chép nguyên câu vừa nghe, trong đó giữ chính tả của các cụm ở đoạn “Ăn uống và yêu cầu lịch sự – 주세요”. So âm nối với chữ gốc trước khi sửa."
   },
   {
    "t": "mc",
@@ -533,48 +533,48 @@
   "steps": [
    {
     "t": "10 phút",
-    "do": "Buổi 1: khởi động bằng tình huống “Ăn uống và yêu cầu lịch sự – 주세요”; cho học viên nói điều đã biết."
+    "do": "Khởi động bằng câu hỏi “Khách gọi mấy suất cơm? ”. Cho học viên dự đoán hai câu trả lời, đợi tới phần nghe mới kiểm; không công bố đáp án ngay."
    },
    {
     "t": "20 phút",
-    "do": "Giới thiệu từ/cụm bằng ví dụ; nghe trước, nhận diện nghĩa rồi mới đọc Romaja."
+    "do": "Dùng thẻ “밥” với câu “밥 한 그릇 주세요.”. Học viên ghép nghĩa “cơm” rồi đối chiếu “물” để chọn ngữ cảnh phù hợp và tự đặt một câu khác."
    },
    {
     "t": "25 phút",
-    "do": "Dạy mẫu trọng tâm; hỏi CCQ về nghĩa và giới hạn sử dụng; làm mẫu một câu đúng và một lỗi."
+    "do": "Viết “물 한 잔 주세요.” cùng “밥 두 그릇 주세요.” lên bảng. Tách vị ngữ và thành phần liên quan tới N 주세요, N하고 N; yêu cầu đổi một thành phần rồi kiểm xem nghĩa có còn đúng ý định không."
    },
    {
     "t": "20 phút",
-    "do": "Nghe hai lượt: lượt một lấy ý chính, lượt hai tìm căn cứ cho câu hỏi; học viên chỉ vào đoạn chứng cứ."
+    "do": "Phát lượt thoại chứa câu hỏi “Khách gọi mấy suất cơm? ” mà chưa cho xem đáp án. Cặp học viên so câu nghe được với ba lựa chọn và giải thích vì sao hai lựa chọn còn lại không phù hợp."
    },
    {
     "t": "15 phút",
-    "do": "Luyện cặp theo vai, đổi dữ kiện; ghi lỗi để sửa cuối hoạt động."
+    "do": "Cho cặp trao đổi xoay quanh hai yêu cầu “Khách gọi mấy suất cơm? ” và “Khách gọi nước bằng đơn vị nào? ”. Người nghe phải hỏi lại chi tiết làm thay đổi câu trả lời, trước khi người nói xác nhận dữ kiện mới."
    },
    {
     "t": "15 phút",
-    "do": "Buổi 2: ôn cách quãng, đọc đoạn mới và trả lời có trích căn cứ."
+    "do": "Ôn đầu buổi hai bằng “밥” và “주세요”. Mỗi học viên viết một câu nhận diện nghĩa và một câu chỉ ra trường hợp dùng sai; giáo viên dùng ví dụ từ thẻ để chữa."
    },
    {
     "t": "20 phút",
-    "do": "Phân tích cấu trúc bài đọc và so sánh cách diễn đạt với tiếng Việt."
+    "do": "Đọc đoạn mới để giải câu “Có bao nhiêu canh khi đồ tới? ”. Đánh dấu căn cứ ngay trong bài, vẽ mũi tên từ dữ kiện tới đáp án và phân biệt phần nói rõ với điều chỉ suy ra."
    },
    {
     "t": "20 phút",
-    "do": "Luyện nói hai nhiệm vụ; bạn học đánh dấu điều đủ ý và điều chưa rõ."
+    "do": "Giao nhập vai: Người A cần biết “Khách gọi mấy suất cơm? ”. Người B trả lời theo vai rồi chủ động làm rõ “Khách gọi nước bằng đơn vị nào? ”. Đổi một dữ kiện và kiểm xem câu trả lời còn khớp tình huống không. Quan sát xem người nhận có nói lại đúng thông tin đã thay hay vẫn giữ đáp án của lượt trước."
    },
    {
     "t": "20 phút",
-    "do": "Viết nháp, đối chiếu checklist, sửa ít nhất hai điểm có lý do."
+    "do": "Yêu cầu viết: Viết đơn gọi món 4 câu và một câu xác nhận: có món, lượng, đồ uống, món thêm. Khi đổi bản, bạn đọc đánh dấu một ý đã rõ và một quan hệ cần giải thích; tác giả sửa dựa trên phản hồi chứ không chép lại mẫu."
    },
    {
     "t": "15 phút",
-    "do": "Làm bài tự chấm, giải thích lỗi; ghi một mục tiêu ôn tiếp."
+    "do": "Chữa câu “밥 두 ___ 주세요.”. Học viên tự nêu điều khiến đáp án sai dễ bị chọn, rồi dùng “주세요” trong một câu kết thúc hoạt động."
    }
   ],
   "games": [
-   "Thẻ bằng chứng: mỗi cặp ghép một câu trả lời với câu tiếng Hàn hỗ trợ nó; phải giải thích bằng tiếng Việt.",
-   "Đổi vai có dữ kiện mới: mỗi người nói ít nhất hai lượt trước khi đổi bạn; không đọc nguyên đáp án."
+   "Tìm mảnh đối chiếu:nhóm nhận “밥”,“사과” và “주세요”;đặt mỗi thẻ vào ví dụ phù hợp rồi bảo vệ lựa chọn bằng nghĩa,cấu trúc hoặc âm đang học.",
+   "Đường tới đáp án:hai đội cùng giải “Có bao nhiêu canh khi đồ tới?”;đội ghi đúng câu chứng cứ và loại được một suy luận quá mức thắng lượt đó."
   ],
   "errors": [
    "Giữ 둘 trước 잔: dùng 두 잔.",
@@ -583,6 +583,6 @@
    "Nhận đơn mà không xác nhận lượng: lặp món và số.",
    "Nhầm gọi hai người với hai suất: nói 명 hay 그릇 theo đối tượng."
   ],
-  "homework": "Ôn thẻ từ 15 phút, nghe chép một câu, ghi âm hai nhiệm vụ nói rồi viết lại sản phẩm sau khi tự kiểm. Ghi lỗi cá nhân liên quan mẫu N 주세요, N하고 N."
+  "homework": "Viết lại sản phẩm sau khi kiểm câu “밥 두 그릇 주세요.”. Ghi âm phần trả lời “Khách gọi mấy suất cơm? ”, nghe lại vào hôm sau và nêu một điểm khác giữa 밥 với 물."
  }
 }

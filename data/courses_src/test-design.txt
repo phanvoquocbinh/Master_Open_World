@@ -4,7 +4,7 @@ icon: 🧩
 floor: 6
 room: 601
 level: Cơ bản → Trung bình
-hours: 6
+hours: 28
 summary: Học cách viết test case rõ ràng và dùng các kỹ thuật EP, BVA, decision table, state transition, pairwise để tìm nhiều lỗi hơn với ít test hơn. Mỗi kỹ thuật đều có ví dụ làm mẫu từng bước.
 
 ## LESSON test-design-01 | Một test case tốt trông như thế nào?
@@ -19,6 +19,12 @@ Test case cũng vậy: nó là bản hướng dẫn để BẤT KỲ AI cũng l�
 
 ### Các thành phần của một test case
 Dưới đây là mẫu (template) phổ biến. Bạn có thể dùng Excel, Google Sheets, Jira, TestRail… đều có các cột tương tự.
+Giải thích từng dòng:
+• ID: giúp nhắc đến test case trong bug report ("Fail ở TC-LOGIN-001").
+• Title: đọc tên là hiểu đang test gì.
+• Preconditions: tránh tình huống "máy tôi chạy được, máy bạn không".
+• Steps + Test data: tách riêng để dễ đổi dữ liệu mà không viết lại bước.
+• Expected result: phần QUAN TRỌNG NHẤT, thiếu nó thì không biết Pass hay Fail.
 ~~~text
 Trường            | Ý nghĩa
 ------------------+------------------------------------------------
@@ -31,14 +37,12 @@ Expected result   | Kết quả mong đợi, đo được, kiểm tra được
 Priority          | P1 (rất quan trọng) / P2 / P3
 Actual / Status   | Điền khi chạy: Pass / Fail / Blocked
 ~~~
-Giải thích từng dòng:
-• ID: giúp nhắc đến test case trong bug report ("Fail ở TC-LOGIN-001").
-• Title: đọc tên là hiểu đang test gì.
-• Preconditions: tránh tình huống "máy tôi chạy được, máy bạn không".
-• Steps + Test data: tách riêng để dễ đổi dữ liệu mà không viết lại bước.
-• Expected result: phần QUAN TRỌNG NHẤT, thiếu nó thì không biết Pass hay Fail.
 
 ### Ví dụ hoàn chỉnh: đăng nhập thành công
+Chú ý cách viết:
+• Mỗi bước là một hành động duy nhất.
+• Kết quả mong đợi có con số và chữ cụ thể, ai nhìn cũng đánh giá giống nhau.
+• Dữ liệu dùng domain example.com, không dùng email thật của khách hàng.
 ~~~text
 ID:            TC-LOGIN-001
 Title:         Đăng nhập thành công với email và mật khẩu hợp lệ
@@ -56,12 +60,11 @@ Expected result:
   - Góc phải hiển thị "Xin chào, tester01"
   - Không hiện thông báo lỗi nào
 ~~~
-Chú ý cách viết:
-• Mỗi bước là một hành động duy nhất.
-• Kết quả mong đợi có con số và chữ cụ thể, ai nhìn cũng đánh giá giống nhau.
-• Dữ liệu dùng domain example.com, không dùng email thật của khách hàng.
 
 ### Viết bước và kết quả mong đợi: tệ và tốt
+• "Hoạt động bình thường" không đo được nên không có giá trị.
+• Kết quả tốt trả lời được: thấy gì, ở đâu, nội dung chính xác là gì.
+• Mẹo: nếu hai người đọc cùng một kết quả mong đợi mà có thể tranh cãi Pass hay Fail, hãy viết lại.
 ~~~text
 TỆ:   Bước: Đăng nhập và kiểm tra.
       Mong đợi: Hệ thống hoạt động bình thường.
@@ -72,9 +75,6 @@ TỐT:  Bước: 1. Nhập email "tester01@example.com"
       Mong đợi: Hiện dòng chữ đỏ "Email hoặc mật khẩu không đúng"
                 bên dưới ô mật khẩu; vẫn ở trang /login.
 ~~~
-• "Hoạt động bình thường" không đo được nên không có giá trị.
-• Kết quả tốt trả lời được: thấy gì, ở đâu, nội dung chính xác là gì.
-• Mẹo: nếu hai người đọc cùng một kết quả mong đợi mà có thể tranh cãi Pass hay Fail, hãy viết lại.
 
 ### Test scenario, test case và checklist khác nhau thế nào?
 • Test scenario: một tình huống ở mức cao, ví dụ "Kiểm tra chức năng đăng nhập".
@@ -119,6 +119,12 @@ Có 2 loại nhóm: nhóm hợp lệ (valid) và nhóm không hợp lệ (invali
 
 ### Ví dụ: ô "Tuổi" chỉ nhận 18 đến 60
 Requirement: "Ô Tuổi chỉ nhận số nguyên từ 18 đến 60."
+Cách đọc bảng:
+• Cột Nhóm: đặt tên để nhắc đến trong test case.
+• Cột Mô tả: quy tắc của nhóm.
+• Cột Loại: hệ thống phải chấp nhận (Valid) hay từ chối (Invalid).
+• Cột Giá trị đại diện: chọn 1 giá trị "điển hình" nằm giữa nhóm.
+Chỉ 6 test thay vì thử hàng trăm con số.
 ~~~text
 Nhóm   | Mô tả                    | Loại     | Giá trị đại diện
 -------+--------------------------+----------+-----------------
@@ -129,22 +135,18 @@ P4     | Số thập phân             | Invalid  | 25.5
 P5     | Chữ / ký tự đặc biệt     | Invalid  | "abc"
 P6     | Bỏ trống                 | Invalid  | (rỗng)
 ~~~
-Cách đọc bảng:
-• Cột Nhóm: đặt tên để nhắc đến trong test case.
-• Cột Mô tả: quy tắc của nhóm.
-• Cột Loại: hệ thống phải chấp nhận (Valid) hay từ chối (Invalid).
-• Cột Giá trị đại diện: chọn 1 giá trị "điển hình" nằm giữa nhóm.
-Chỉ 6 test thay vì thử hàng trăm con số.
 
 ### Phân vùng cho dữ liệu không phải số
 EP không chỉ dùng cho số. Ví dụ:
-• Ô Email: đúng định dạng (a@example.com), thiếu @ (aexample.com), thiếu tên miền (a@), có khoảng trắng ("a b@example.com"), bỏ trống.
+• Ô Email: đúng định dạng (a@example.com), thiếu @ (a.example.com), thiếu tên miền (a@), có khoảng trắng ("a b@example.com"), bỏ trống.
 • Dropdown Quốc gia: chọn một giá trị trong danh sách, không chọn gì.
 • Upload ảnh đại diện (JPG/PNG, tối đa 2 MB): file JPG 1 MB (valid), file PDF (invalid), file PNG 5 MB (invalid), file đổi đuôi .jpg nhưng thực chất là .exe (invalid).
 • Mã giảm giá: mã còn hạn, mã hết hạn, mã không tồn tại, mã đã dùng.
 Câu hỏi giúp tìm nhóm: "Hệ thống sẽ xử lý trường hợp này KHÁC với trường hợp kia không?" Nếu có, đó là hai nhóm.
 
 ### Từ phân vùng ra test case
+• Mỗi nhóm invalid nên có test case RIÊNG. Nếu gộp "10 và abc" vào một test, hệ thống báo lỗi ở giá trị đầu, bạn sẽ không biết giá trị thứ hai có được kiểm tra hay không.
+• Nhiều nhóm valid có thể gộp chung một test để tiết kiệm (ví dụ tuổi hợp lệ + email hợp lệ trong cùng một lần đăng ký).
 ~~~text
 ID          | Dữ liệu | Nhóm | Kết quả mong đợi
 ------------+---------+------+----------------------------------------
@@ -155,8 +157,6 @@ TC-AGE-004  | 25.5    | P4   | Lỗi "Tuổi phải là số nguyên"
 TC-AGE-005  | abc     | P5   | Lỗi "Tuổi phải là số" hoặc không cho gõ chữ
 TC-AGE-006  | (rỗng)  | P6   | Lỗi "Vui lòng nhập tuổi"
 ~~~
-• Mỗi nhóm invalid nên có test case RIÊNG. Nếu gộp "10 và abc" vào một test, hệ thống báo lỗi ở giá trị đầu, bạn sẽ không biết giá trị thứ hai có được kiểm tra hay không.
-• Nhiều nhóm valid có thể gộp chung một test để tiết kiệm (ví dụ tuổi hợp lệ + email hợp lệ trong cùng một lần đăng ký).
 
 ### Sai lầm thường gặp
 • Triệu chứng: chỉ test giá trị hợp lệ, app lên production thì vỡ khi người dùng nhập chữ.
@@ -195,32 +195,35 @@ Boundary Value Analysis (BVA) là kỹ thuật chọn giá trị NGAY TẠI và 
 ### BVA 2 giá trị
 Với mỗi biên, lấy 2 giá trị: chính biên và giá trị liền kề phía bên kia biên.
 Ví dụ ô Tuổi nhận 18–60 (số nguyên, bước nhảy là 1):
+Giải thích:
+• 17: kiểm tra hệ thống có từ chối người vừa thiếu 1 tuổi.
+• 18: kiểm tra người vừa đủ tuổi được chấp nhận (bắt lỗi viết > thay vì >=).
+• 60 và 61: tương tự ở biên trên.
+"Liền kề" phụ thuộc bước nhảy: số nguyên thì cách 1; tiền tệ 2 chữ số thập phân thì cách 0.01.
 ~~~text
 Biên dưới 18:  17 (invalid) | 18 (valid)
 Biên trên 60:  60 (valid)   | 61 (invalid)
 
 => 4 giá trị cần test: 17, 18, 60, 61
 ~~~
-Giải thích:
-• 17: kiểm tra hệ thống có từ chối người vừa thiếu 1 tuổi.
-• 18: kiểm tra người vừa đủ tuổi được chấp nhận (bắt lỗi viết > thay vì >=).
-• 60 và 61: tương tự ở biên trên.
-"Liền kề" phụ thuộc bước nhảy: số nguyên thì cách 1; tiền tệ 2 chữ số thập phân thì cách 0.01.
 
 ### BVA 3 giá trị
 Kỹ thuật kỹ hơn: mỗi biên lấy 3 giá trị: ngay trước, đúng biên, ngay sau.
+• 19 và 59 giúp bắt lỗi kiểu lập trình viên viết "tuổi == 18" hoặc sai lệch biên theo hướng ngược lại.
+• Dùng BVA 3 giá trị cho chức năng rủi ro cao (tiền, phân quyền, giới hạn giao dịch).
+• Dùng BVA 2 giá trị khi thời gian ít và rủi ro thấp.
 ~~~text
 Biên dưới 18:  17 | 18 | 19
 Biên trên 60:  59 | 60 | 61
 
 => 6 giá trị cần test: 17, 18, 19, 59, 60, 61
 ~~~
-• 19 và 59 giúp bắt lỗi kiểu lập trình viên viết "tuổi == 18" hoặc sai lệch biên theo hướng ngược lại.
-• Dùng BVA 3 giá trị cho chức năng rủi ro cao (tiền, phân quyền, giới hạn giao dịch).
-• Dùng BVA 2 giá trị khi thời gian ít và rủi ro thấp.
 
 ### Kết hợp EP + BVA: mật khẩu dài 8–20 ký tự
 Requirement: "Mật khẩu phải dài từ 8 đến 20 ký tự."
+• EP cho giá trị giữa nhóm (14) và nhóm đặc biệt (rỗng).
+• BVA cho các giá trị sát biên (7, 8, 20, 21).
+• Mẹo đếm độ dài: dán chuỗi vào ô tìm kiếm của trình soạn thảo (VS Code hiện số ký tự đang chọn ở thanh dưới cùng).
 ~~~text
 ID         | Độ dài | Ví dụ dữ liệu             | Nguồn  | Mong đợi
 -----------+--------+---------------------------+--------+-----------
@@ -231,9 +234,6 @@ TC-PW-004  | 14     | Abc@1234567890            | EP     | Chấp nhận
 TC-PW-005  | 20     | Abc@1234567890123456      | BVA    | Chấp nhận
 TC-PW-006  | 21     | Abc@12345678901234567     | BVA    | Lỗi độ dài
 ~~~
-• EP cho giá trị giữa nhóm (14) và nhóm đặc biệt (rỗng).
-• BVA cho các giá trị sát biên (7, 8, 20, 21).
-• Mẹo đếm độ dài: dán chuỗi vào ô tìm kiếm của trình soạn thảo (VS Code hiện số ký tự đang chọn ở thanh dưới cùng).
 
 ### Biên ẩn: ngày tháng, tiền, thời gian, kích thước
 Biên không chỉ có trong requirement. Hãy săn các "biên ẩn":
@@ -284,6 +284,11 @@ Requirement:
 • Đơn hàng từ 500.000đ được giảm thêm 5%.
 • Có mã coupon hợp lệ được giảm thêm 5%.
 • Tổng giảm tối đa 15%.
+Cách đọc:
+• Mỗi cột R là một "luật" (rule) = một tổ hợp điều kiện.
+• Y = Yes, N = No.
+• R1: VIP 10 + đơn lớn 5 + coupon 5 = 20, nhưng bị giới hạn tối đa nên còn 15.
+• Số cột = 2 mũ số điều kiện: 3 điều kiện nên có 8 cột.
 ~~~text
 Điều kiện             | R1 | R2 | R3 | R4 | R5 | R6 | R7 | R8
 ----------------------+----+----+----+----+----+----+----+----
@@ -293,11 +298,6 @@ C3: Coupon hợp lệ?    | Y  | N  | Y  | N  | Y  | N  | Y  | N
 ----------------------+----+----+----+----+----+----+----+----
 Kết quả: % giảm       | 15 | 15 | 15 | 10 | 10 | 5  | 5  | 0
 ~~~
-Cách đọc:
-• Mỗi cột R là một "luật" (rule) = một tổ hợp điều kiện.
-• Y = Yes, N = No.
-• R1: VIP 10 + đơn lớn 5 + coupon 5 = 20, nhưng bị giới hạn tối đa nên còn 15.
-• Số cột = 2 mũ số điều kiện: 3 điều kiện nên có 8 cột.
 
 ### Cách lập bảng từng bước
 1. Đọc requirement, gạch chân các điều kiện (thường đi với "nếu", "khi", "trong trường hợp").
@@ -311,6 +311,8 @@ Mẹo: nếu có quá 4 điều kiện (16 cột trở lên), hãy tách thành 
 ### Rút gọn bảng với "không quan tâm" (-)
 Khi một điều kiện không ảnh hưởng kết quả, có thể gộp cột bằng dấu "-".
 Ví dụ đăng nhập: tài khoản bị khóa thì luôn từ chối, mật khẩu đúng hay sai không quan trọng.
+• R1 thay cho 2 cột (khóa + đúng, khóa + sai).
+• Chú ý an toàn: vẫn nên test cả "khóa + mật khẩu đúng" vì đây là trường hợp rủi ro cao (nếu hệ thống kiểm tra mật khẩu trước, người dùng bị khóa vẫn vào được).
 ~~~text
 Điều kiện                | R1 | R2 | R3
 -------------------------+----+----+----
@@ -319,10 +321,11 @@ C2: Mật khẩu đúng?       | -  | Y  | N
 -------------------------+----+----+----
 Kết quả                  | Báo "Tài khoản bị khóa" | Vào Dashboard | Báo "Sai mật khẩu"
 ~~~
-• R1 thay cho 2 cột (khóa + đúng, khóa + sai).
-• Chú ý an toàn: vẫn nên test cả "khóa + mật khẩu đúng" vì đây là trường hợp rủi ro cao (nếu hệ thống kiểm tra mật khẩu trước, người dùng bị khóa vẫn vào được).
 
 ### Chuyển bảng thành test case
+• Mỗi rule thành ít nhất 1 test case, dữ liệu cụ thể.
+• Kết hợp BVA: R6 dùng đúng 500.000đ, R8 dùng 499.999đ để kiểm biên.
+• Ghi số tiền mong đợi đã tính sẵn để người chạy test không phải tự tính.
 ~~~text
 ID          | VIP | Tổng đơn  | Coupon      | Mong đợi
 ------------+-----+-----------+-------------+-------------------------
@@ -331,9 +334,6 @@ TC-DIS-R4   | Có  | 300.000đ  | Không       | Giảm 10% = 30.000đ
 TC-DIS-R6   | Không | 500.000đ | Không      | Giảm 5% = 25.000đ
 TC-DIS-R8   | Không | 499.999đ | Không      | Không giảm
 ~~~
-• Mỗi rule thành ít nhất 1 test case, dữ liệu cụ thể.
-• Kết hợp BVA: R6 dùng đúng 500.000đ, R8 dùng 499.999đ để kiểm biên.
-• Ghi số tiền mong đợi đã tính sẵn để người chạy test không phải tự tính.
 
 ### Sai lầm thường gặp
 • Triệu chứng: bảng có 3 điều kiện nhưng chỉ có 6 cột.
@@ -372,6 +372,10 @@ Các khái niệm:
 Kỹ thuật này hợp với: đăng nhập, đơn hàng, thanh toán, quy trình duyệt, máy bán hàng.
 
 ### Ví dụ: thẻ ATM khóa sau 3 lần nhập PIN sai
+Cách đọc sơ đồ:
+• Hộp vuông là trạng thái, mũi tên là chuyển trạng thái, chữ trên mũi tên là sự kiện.
+• Từ S0, S1, S2 nhập PIN đúng đều vào S4.
+• Sai lần thứ 3 thì sang S3, từ S3 không đi đâu được nữa (trạng thái cuối).
 ~~~text
               PIN đúng
    [S0: Chờ nhập PIN] ---------------------> [S4: Vào menu giao dịch]
@@ -388,13 +392,11 @@ Kỹ thuật này hợp với: đăng nhập, đơn hàng, thanh toán, quy trì
           v
    [S3: Thẻ bị khóa / nuốt thẻ]
 ~~~
-Cách đọc sơ đồ:
-• Hộp vuông là trạng thái, mũi tên là chuyển trạng thái, chữ trên mũi tên là sự kiện.
-• Từ S0, S1, S2 nhập PIN đúng đều vào S4.
-• Sai lần thứ 3 thì sang S3, từ S3 không đi đâu được nữa (trạng thái cuối).
 
 ### Bảng chuyển trạng thái: thấy cả chuyển KHÔNG hợp lệ
 Sơ đồ chỉ vẽ đường đi hợp lệ. Bảng giúp thấy những ô "không được phép xảy ra":
+• Ô "(không hợp lệ)": test rằng hệ thống KHÔNG cho phép, ví dụ thẻ đã khóa nhập PIN đúng vẫn không vào được.
+• Câu hỏi cần hỏi BA: rút thẻ ở S2 rồi cắm lại, bộ đếm sai có reset về 0 không? Đây là rủi ro bảo mật.
 ~~~text
 Trạng thái hiện tại | Sự kiện: PIN đúng | Sự kiện: PIN sai | Sự kiện: Rút thẻ
 --------------------+-------------------+------------------+------------------
@@ -404,10 +406,11 @@ S2 Sai 2 lần        | S4                | S3               | Kết thúc phiê
 S3 Thẻ bị khóa      | (không hợp lệ)    | (không hợp lệ)   | (không hợp lệ)
 S4 Menu giao dịch   | (không áp dụng)   | (không áp dụng)  | Kết thúc phiên
 ~~~
-• Ô "(không hợp lệ)": test rằng hệ thống KHÔNG cho phép, ví dụ thẻ đã khóa nhập PIN đúng vẫn không vào được.
-• Câu hỏi cần hỏi BA: rút thẻ ở S2 rồi cắm lại, bộ đếm sai có reset về 0 không? Đây là rủi ro bảo mật.
 
 ### Ví dụ thứ hai: trạng thái đơn hàng
+• Test hợp lệ: đi đủ "đường chính" Mới tạo đến Hoàn tất.
+• Test không hợp lệ: cố gắng hủy một đơn đã hoàn tất bằng UI và bằng API, mong đợi bị từ chối với thông báo rõ ràng.
+• Mẹo: bấm nút hai lần, mở hai tab cùng thao tác, cũng tạo ra chuyển trạng thái lạ.
 ~~~text
 Mới tạo --(thanh toán)--> Đã thanh toán --(đóng gói)--> Đang giao --(giao xong)--> Hoàn tất
    |                          |
@@ -418,9 +421,6 @@ Chuyển KHÔNG hợp lệ cần test:
   - Đã hủy   -> Đã thanh toán
   - Đang giao -> Hủy (nếu chính sách không cho hủy khi đang giao)
 ~~~
-• Test hợp lệ: đi đủ "đường chính" Mới tạo đến Hoàn tất.
-• Test không hợp lệ: cố gắng hủy một đơn đã hoàn tất bằng UI và bằng API, mong đợi bị từ chối với thông báo rõ ràng.
-• Mẹo: bấm nút hai lần, mở hai tab cùng thao tác, cũng tạo ra chuyển trạng thái lạ.
 
 ### Mức độ phủ (coverage) cần đạt
 Từ yếu đến mạnh:
@@ -469,6 +469,11 @@ Pairwise (kiểm thử từng cặp): chọn ít tổ hợp nhất sao cho MỌI
 
 ### Ví dụ: 27 tổ hợp còn 9
 Tham số: Browser {Chrome, Firefox, Edge}, OS {Windows, macOS, Ubuntu}, Language {VI, EN, JA}.
+Tự kiểm tra:
+• Cặp Browser–OS: mỗi trình duyệt gặp đủ 3 hệ điều hành (9 cặp).
+• Cặp Browser–Language: Chrome gặp VI, EN, JA; Firefox gặp EN, JA, VI; Edge gặp JA, VI, EN.
+• Cặp OS–Language: Windows gặp VI, EN, JA; tương tự với macOS và Ubuntu.
+Chỉ 9 dòng mà phủ hết mọi cặp, giảm 67% công sức.
 ~~~text
 #  | Browser | OS      | Language
 ---+---------+---------+---------
@@ -482,15 +487,15 @@ Tham số: Browser {Chrome, Firefox, Edge}, OS {Windows, macOS, Ubuntu}, Languag
 8  | Edge    | macOS   | VI
 9  | Edge    | Ubuntu  | EN
 ~~~
-Tự kiểm tra:
-• Cặp Browser–OS: mỗi trình duyệt gặp đủ 3 hệ điều hành (9 cặp).
-• Cặp Browser–Language: Chrome gặp VI, EN, JA; Firefox gặp EN, JA, VI; Edge gặp JA, VI, EN.
-• Cặp OS–Language: Windows gặp VI, EN, JA; tương tự với macOS và Ubuntu.
-Chỉ 9 dòng mà phủ hết mọi cặp, giảm 67% công sức.
 
 ### Dùng công cụ PICT để tự sinh tổ hợp
 PICT là công cụ miễn phí của Microsoft (mã nguồn trên GitHub tại microsoft/pict). Trên Windows tải file pict.exe từ trang Releases, đặt vào một thư mục, ví dụ C:\tools\pict.
 Bước 1: tạo file model.txt bằng VS Code với nội dung:
+Giải thích từng dòng:
+• Mỗi dòng "Tên: giá trị1, giá trị2…" khai báo một tham số và các giá trị của nó.
+• Dòng trống ngăn cách phần tham số với phần ràng buộc (constraint).
+• Dòng IF…THEN là ràng buộc: Safari chỉ đi với macOS, PICT sẽ không sinh tổ hợp vô lý như "Safari + Windows".
+• Dấu chấm phẩy ";" kết thúc một ràng buộc, bắt buộc phải có.
 ~~~text
 Browser:  Chrome, Firefox, Edge, Safari
 OS:       Windows, macOS, Ubuntu
@@ -499,25 +504,20 @@ Network:  WiFi, 4G
 
 IF [Browser] = "Safari" THEN [OS] = "macOS";
 ~~~
-Giải thích từng dòng:
-• Mỗi dòng "Tên: giá trị1, giá trị2…" khai báo một tham số và các giá trị của nó.
-• Dòng trống ngăn cách phần tham số với phần ràng buộc (constraint).
-• Dòng IF…THEN là ràng buộc: Safari chỉ đi với macOS, PICT sẽ không sinh tổ hợp vô lý như "Safari + Windows".
-• Dấu chấm phẩy ";" kết thúc một ràng buộc, bắt buộc phải có.
 
 ### Chạy PICT và đọc kết quả
 Mở PowerShell trong thư mục chứa pict.exe và model.txt, chạy:
-~~~bash
-.\pict.exe model.txt
-.\pict.exe model.txt > cases.txt
-.\pict.exe model.txt /o:3
-~~~
 Giải thích từng lệnh:
 • Lệnh 1: in danh sách tổ hợp ra màn hình. Dòng đầu là tên cột, các cột cách nhau bằng phím Tab.
 • Lệnh 2: dấu ">" ghi kết quả vào file cases.txt; mở bằng Excel sẽ tự chia cột.
 • Lệnh 3: /o:3 yêu cầu phủ mọi bộ BA giá trị (3-wise), nhiều dòng hơn nhưng kỹ hơn; mặc định là 2 (pairwise).
 Kết quả mong đợi: khoảng 12–16 dòng cho model trên (thứ tự và số dòng có thể khác nhau giữa các lần chạy hoặc phiên bản). Không có dòng nào chứa Safari đi với Windows hoặc Ubuntu.
 Lỗi thường gặp: "pict.exe is not recognized" vì đang đứng sai thư mục; dùng lệnh cd để vào đúng thư mục hoặc gõ đường dẫn đầy đủ. Lỗi cú pháp ràng buộc thường do thiếu dấu ";" hoặc thiếu ngoặc vuông quanh tên tham số.
+~~~bash
+.\pict.exe model.txt
+.\pict.exe model.txt > cases.txt
+.\pict.exe model.txt /o:3
+~~~
 
 ### Khi nào KHÔNG nên chỉ dựa vào pairwise
 • Tổ hợp rủi ro cao đã biết: ví dụ "iOS + Safari + thanh toán thẻ" là luồng chính của 60% khách hàng, hãy thêm test riêng dù pairwise đã phủ cặp.
@@ -556,6 +556,7 @@ Q: Tham số /o:3 khi chạy PICT có tác dụng gì?
 Các kỹ thuật trước là "có công thức". Error guessing là dùng kinh nghiệm: "Chỗ này người ta hay làm sai".
 Giống thợ sửa xe nghe tiếng máy là đoán được hỏng ở đâu.
 Để người mới cũng dùng được, hãy biến kinh nghiệm thành checklist:
+Cách dùng: chạy checklist sau khi đã có test case từ các kỹ thuật chính, đánh dấu [x] mục đã thử, ghi lại lỗi tìm được để bổ sung checklist cho lần sau.
 ~~~text
 CHECKLIST Ô NHẬP LIỆU
 [ ] Bỏ trống / chỉ toàn khoảng trắng
@@ -574,11 +575,13 @@ CHECKLIST HÀNH VI
 [ ] Phiên đăng nhập hết hạn khi đang nhập form
 [ ] Đổi múi giờ máy tính
 ~~~
-Cách dùng: chạy checklist sau khi đã có test case từ các kỹ thuật chính, đánh dấu [x] mục đã thử, ghi lại lỗi tìm được để bổ sung checklist cho lần sau.
 
 ### Ưu tiên theo rủi ro (risk-based testing)
 Không bao giờ có đủ thời gian test mọi thứ, nên phải chọn test cái QUAN TRỌNG trước.
 Rủi ro = Khả năng xảy ra lỗi (Likelihood) x Mức độ thiệt hại (Impact), mỗi yếu tố chấm từ 1 đến 3.
+• Likelihood cao khi: code mới, code phức tạp, nhiều người sửa, từng có nhiều bug.
+• Impact cao khi: mất tiền, mất dữ liệu, ảnh hưởng nhiều người dùng, vi phạm pháp luật.
+• P1 test đầu tiên và kỹ nhất (cả BVA 3 giá trị); P3 có thể chỉ cần checklist.
 ~~~text
 Chức năng            | Likelihood | Impact | Risk | Ưu tiên
 ---------------------+------------+--------+------+--------
@@ -588,9 +591,6 @@ Tính phí giao hàng   | 3          | 2      | 6    | P1
 Tìm kiếm sản phẩm    | 2          | 2      | 4    | P2
 Đổi ảnh đại diện     | 1          | 1      | 1    | P3
 ~~~
-• Likelihood cao khi: code mới, code phức tạp, nhiều người sửa, từng có nhiều bug.
-• Impact cao khi: mất tiền, mất dữ liệu, ảnh hưởng nhiều người dùng, vi phạm pháp luật.
-• P1 test đầu tiên và kỹ nhất (cả BVA 3 giá trị); P3 có thể chỉ cần checklist.
 
 ### Chọn test cho smoke và regression
 • Smoke test: bộ nhỏ (10–30 phút) chạy ngay khi có bản build mới để trả lời "bản này có đủ ổn để test tiếp không?". Chọn các P1 đường chính: đăng nhập, xem sản phẩm, đặt hàng, thanh toán.
@@ -603,6 +603,7 @@ Traceability nghĩa là nối requirement với test case và bug, để trả l
 • Requirement nào chưa có test? (lỗ hổng)
 • Requirement này đổi thì phải sửa test nào?
 • Bug này thuộc yêu cầu nào?
+Dòng REQ-04 chưa có test case: đây là cảnh báo cần báo cho team trước khi phát hành. Jira, TestRail, Xray… có thể tự tạo bảng này nếu bạn gắn link đúng.
 ~~~text
 Requirement                     | Test case                        | Kết quả | Bug
 --------------------------------+----------------------------------+---------+---------
@@ -611,7 +612,6 @@ REQ-02 Khóa sau 5 lần sai       | TC-LOCK-001 ... TC-LOCK-005      | Fail    
 REQ-03 Giảm giá VIP             | TC-DIS-R1, TC-DIS-R4             | Pass    | -
 REQ-04 Xuất hóa đơn PDF         | (chưa có)                        | -       | -
 ~~~
-Dòng REQ-04 chưa có test case: đây là cảnh báo cần báo cho team trước khi phát hành. Jira, TestRail, Xray… có thể tự tạo bảng này nếu bạn gắn link đúng.
 
 ### Quy trình thiết kế test hoàn chỉnh
 1. Đọc requirement, gạch chân dữ liệu nhập, điều kiện, trạng thái.
@@ -649,3 +649,361 @@ Q: Bấm nút Submit 2 lần liên tục là ví dụ của kỹ thuật nào?
 - Boundary Value Analysis
 - Pairwise
 + Error guessing
+
+## LESSON test-design-08 | Bao phủ lệnh, nhánh và ranh giới áp dụng
+
+### Coverage cấu trúc trả lời câu hỏi hẹp
+Hàm phí lab có nhánh miễn phí và từ chối vùng. Statement cho biết câu lệnh đã chạy,branch cho biết lối quyết định đã đi; cả hai không phát hiện một quy tắc hoàn toàn bị bỏ khỏi code.
+~~~js
+function fee(qty,zone){
+ if(zone==='Z9')return 'unsupported';
+ if(qty>=5)return 0;
+ return 12;
+}
+~~~
+
+### Chọn ca để đi hai phía quyết định
+Ba ca dưới đi các kết quả của hai if, nhưng chưa kiểm qty âm,lẻ hoặc thiếu vì hàm chưa validate. Tách coverage đạt của mô hình code với lỗ hổng yêu cầu đầu vào.
+~~~text
+qty 1,zoneZ9 ->unsupported
+qty 5,zoneZ1 ->0
+qty 1,zoneZ1 ->12
+Khoảng trống:req qty phải nguyên dương chưa được hiện thực.
+~~~
+
+### Đo coverage bằng công cụ có định nghĩa
+coverage.py là công cụ mã nguồn mở cho Python; ví dụ lệnh minh họa project pytest đã có. Báo statement/branch theo cấu hình,exclude có review và không xem con số là tiêu chí duy nhất.
+~~~bash
+coverage run --branch -m pytest
+coverage report -m
+coverage html
+~~~
+
+### Bẫy chạy dòng mà không assert
+Một test gọi fee ba lần nhưng không so kết quả có thể đạt coverage mà không phát hiện lỗi trả tiền. Kết hợp assertion nghiệp vụ và mutation,không tối ưu số phần trăm bằng cách bỏ code khó khỏi báo cáo.
+
+### Khi nào dùng thêm kỹ thuật hộp đen
+Từ miền qty và vùng,thiết kế partition/biên/decision table độc lập code. So với coverage để tìm ca thiếu từ cả hai góc,không thay một kỹ thuật bằng kỹ thuật kia.
+
+PRACTICE: Viết test fee đạt branch trong lab rồi cài lỗi return sai để chứng minh assertion phát hiện. Nộp coverage,ca hộp đen bổ sung và một yêu cầu code còn thiếu.
+Q: 100% statement coverage có bảo đảm branch coverage không?
++ Không
+- Có luôn
+- Chỉ cần một ca
+Q: 100% branch coverage có chứng minh không còn lỗi không?
++ Không
+- Có nếu không exception
+- Có với hàm nhỏ
+
+## LESSON test-design-09 | Mô hình miền và bất biến dữ liệu
+
+### Miền và bất biến cần đơn vị rõ
+Trung tâm giả định Mầm Rêu có capacity,confirmed và remaining số nguyên. Xác định thời điểm sau transaction hoàn tất trước khi assert; trạng thái chuyển tiếp nội bộ có thể chưa dành để quan sát.
+~~~text
+capacity>=0
+confirmed>=0
+remaining=capacity-confirmed
+0<=remaining<=capacity
+Mỗi enrollment confirmed chiếm đúng 1 chỗ theo hợp đồng lab.
+~~~
+
+### Phân biệt kiểu sai và giá trị ngoài miền
+qty:"2" là sai kiểu nếu API không nhận chuỗi,qty:0 là số ngoài miền. Viết expected code lỗi riêng để biết validation nào hoạt động,không gom tất cả thành lỗi400 chung.
+~~~text
+{"qty":2} -> hợp lệ nếu còn chỗ
+{"qty":"2"} -> type_error trong lab
+{"qty":0} -> range_error
+{} -> missing_field
+{"qty":null} -> null_not_allowed
+~~~
+
+### Tiền và làm tròn ở ranh giới
+Lab dùng đơn vị tiền nhỏ nguyên,giảm giá theo chính sách chốt. Tính ví dụ tay ở ngưỡng làm tròn; không mặc định chia phần trăm rồi float bằng nhau là oracle đủ tốt.
+~~~text
+giá đơn vị:105minor
+số lượng:3
+giảm 10% trên tổng,round-half-up trong lab
+tổng trước 315,giảm 31.5->32,tổng sau 283
+Nếu làm tròn từng dòng/quy tắc khác:expected phải đổi có review.
+~~~
+
+### Mô hình nhỏ hơn hệ thống nhưng đủ ý nghĩa
+Chỉ giữ thuộc tính liên quan rủi ro. Nếu mô hình bỏ quan hệ refund với enrollment,sẽ không tìm được hoàn điểm hai lần; ghi giả định và xem lại khi có finding mới.
+
+### Oracle bất biến bắt được lỗi nào
+remaining âm hoặc tổng tiền lệch là tín hiệu mạnh nhưng chưa chỉ ra nguyên nhân. Lưu chuỗi sự kiện và id trước/sau để Dev tái hiện,không chỉ báo invariant failed.
+
+PRACTICE: Lập mô hình miền đặt lớp và tiền lab với năm bất biến. Tạo dữ liệu vi phạm từng bất biến,expected code/path và giải thích thời điểm quan sát.
+Q: Bất biến đặt lớp hợp lý trong lab là gì?
++ 0<=remaining<=capacity sau mỗi giao dịch
+- Mọi request đều200
+- Mọi lớp luôn còn chỗ
+Q: Đơn vị tiền nên được chốt vì sao?
++ Tránh sai làm tròn và so khác đơn vị
+- Chỉ để tên cột đẹp
+- Vì float luôn sai mọi nơi
+
+## LESSON test-design-10 | Kiểm thử dựa thuộc tính và quan hệ biến hình
+
+### Thuộc tính mạnh hơn lặp nhiều ví dụ
+Bộ cộng dòng đơn phải giữ tổng khi đảo thứ tự và không đổi input. Hai thuộc tính chỉ đúng nếu không có quy tắc phụ thuộc thứ tự; ghi miền số nguyên,không overflow theo runtime lab.
+~~~python
+from hypothesis import given,strategies as st
+@given(st.lists(st.integers(min_value=0,max_value=1000),max_size=30))
+def test_total_permutation(xs):
+ before=list(xs)
+ assert total(xs)==total(list(reversed(xs)))
+ assert xs==before
+~~~
+
+### Quan hệ biến hình cần giả định
+Nếu thêm một dòng qty 0 được hợp đồng cho phép,tổng không đổi; nếu qty 0 bị từ chối,quan hệ đó không dùng được. Chọn thay đổi input hợp lệ thay vì ép hệ thống nhận dữ liệu ngoài miền.
+~~~text
+R1 đảo thứ tự dòng -> tổng bằng nhau nếu không có ưu đãi phụ thuộc thứ tự
+R2 tách một dòng qty 3 thành qty 1+qty 2 -> bằng nhau nếu không làm tròn từng dòng
+R3 nhân mọi qty lên2 -> tổng gấp2 nếu không có bậc giảm giá
+~~~
+
+### Shrinking biến lỗi lớn thành phản ví dụ nhỏ
+Hypothesis thử nhiều dữ liệu và có thể thu nhỏ ca làm fail. Giữ dữ liệu nhỏ nhất và viết regression rõ nghĩa; đừng bỏ ca chỉ vì nó hiếm hoặc generator tìm được chứ người không nghĩ ra.
+
+### Không sinh mọi thứ rồi filter gần hết
+Dựng strategy đúng miền để test hiệu quả và tránh quá nhiều reject. Với object liên quan capacity/remaining,generate theo quan hệ thay vì tạo độc lập rồi assume vô số điều kiện.
+
+### Property không thay mọi ví dụ đặc tả
+Một implementation luôn trả0 có thể giữ tổng khi đảo thứ tự. Kết hợp ví dụ tay về giá trị tuyệt đối và thuộc tính để oracle không quá yếu; mutation giúp thấy điểm mù.
+
+PRACTICE: Viết ba property với generator có miền nhỏ cho tổng đơn,thêm năm ví dụ expected tay. Cài lỗi luôn0 và lỗi sửa input,chứng minh tập kiểm phát hiện; lưu phản ví dụ.
+Q: Property-based testing bắt đầu từ gì?
++ Thuộc tính và miền sinh có nghĩa
+- Sinh dữ liệu thật ngẫu nhiên vô hạn
+- Chỉ thêm nhiều ví dụ trùng
+Q: Quan hệ biến hình hữu ích khi nào?
++ Khó biết output tuyệt đối nhưng biết quan hệ khi đổi input
+- Mọi output đều tùy ý
+- Không cần oracle gì
+Q: Shrinking trong property test nhằm gì?
++ Tìm phản ví dụ nhỏ hơn vẫn làm fail
+- Sửa code tự động
+- Bỏ assertion
+
+## LESSON test-design-11 | Thiết kế cho cạnh tranh và sự kiện lặp
+
+### Mô hình lịch xen kẽ thay vì chỉ nhiều thread
+Hai học viên tranh chỗ cuối có cửa sổ đọc còn 1 rồi cùng ghi. Viết lịch các bước để biết điều kiện tranh chấp,cần barrier ở lab để tái hiện,không chỉ chạy 100 lần rồi hy vọng gặp.
+~~~text
+A đọc remaining1
+B đọc remaining1
+A yêu cầu đăng ký
+B yêu cầu đăng ký
+Expected:tối đa1success,remaining0,đúng 1 record confirmed
+~~~
+
+### Sự kiện lặp là chiều rủi ro khác
+Một yêu cầu retry cùng requestId phải giữ tác dụng theo hợp đồng. Ca khác payload cùng key cần kết quả rõ; key mới cùng nghiệp vụ có thể còn bị ràng buộc unique riêng.
+~~~text
+K1+A ->E1
+K1+A retry ->E1,không thêm chỗ chiếm
+K1+B ->xung đột theo lab
+K2+A ->kiểm quy tắc trùng học viên/lớp riêng
+~~~
+
+### Oracle kiểm cả hai response và trạng thái
+Một request403 nhưng đã đổi dữ liệu là lỗi dù response đúng. Đối soát bản ghi sau commit,bất biến chỗ và log runId; không suy kết quả chỉ từ client nhận timeout.
+
+### Không phụ thuộc sleep để tạo race
+Sleep chỉ làm xác suất khác đi. Dùng hook/barrier trong app lab hoặc test integration có điểm đồng bộ để cả hai cùng đến cửa sổ cần kiểm; đánh dấu rõ thiết bị đo chỉ có trong lab.
+
+### Nghiệm thu độ nhạy của ca cạnh tranh
+Tạm tắt kiểm nguyên tử ở phiên bản lab thử,ca phải đỏ rồi xanh sau phục hồi. Không thay đổi dịch vụ thật hoặc dữ liệu công việc để tạo lỗi có chủ đích.
+
+PRACTICE: Thiết kế sáu ca concurrent/retry,out-of-order với lịch xen kẽ và oracle. Chạy trên lab có barrier hoặc mô tả giới hạn tái hiện;nộp id,hai response và bất biến cuối.
+Q: Cạnh tranh hai user tranh một chỗ cần oracle gì?
++ Tối đa một đăng ký thành công và trạng thái nhất quán
+- Cả hai luôn thành công
+- Chỉ thời gian hoàn thành
+Q: Retry cùng sự kiện cần kiểm gì?
++ Không nhân tác dụng theo hợp đồng chống lặp
+- Mỗi retry tạo một đơn mới
+- Luôn trả200
+
+## LESSON test-design-12 | Rà chất lượng test và oracle
+
+### Test là sản phẩm cũng cần review
+Reviewer nhìn mục tiêu,oracle,dữ liệu,assertion và khả năng tái hiện. Một ca dài không tự sâu,một ca ngắn không tự yếu; hỏi lỗi nào ca này phát hiện và lỗi nào nó bỏ lọt.
+
+### Expected không copy implementation
+Nếu code tính giảm giá sai và test gọi cùng helper sai để tính expected,hai bên xanh cùng nhau. Dùng bảng tính tay hoặc mô hình đơn giản độc lập,ghi nguồn quyết định nghiệp vụ.
+~~~text
+Implementation:round từng dòng
+Oracle lab:round tổng theo quyết định PRICE-04
+Fixture:giá105,qty 3,giảm 10%
+Expected283minor theo quy tắc đã chốt
+Không gọi helper discount của code dưới test để tính expected.
+~~~
+
+### Mutation kiểm test có nhận ra sai không
+Đổi >= thành >,bỏ kiểm quyền hoặc trả tổng0 trong nhánh lab. Mỗi mutation phải có lý do và phục hồi sau thử; mutant sống có thể do test thiếu hoặc thay đổi tương đương,cần phân tích.
+
+### Ca trùng không chỉ trùng chữ
+Hai test đổi tên nhưng cùng partition,oracle và luồng có thể không thêm bao phủ. Giữ ca trùng khi có môi trường/rủi ro khác có lý do,không xóa chỉ vì nhìn giống.
+
+### Bảng review có hành động tiếp theo
+Ghi điểm yếu,tác động,đề nghị và evidence sau sửa. Phân biệt ca cần nâng assertion,ca thiếu fixture và câu hỏi yêu cầu chưa chốt; không biến review thành chấm văn phong.
+
+PRACTICE: Review tám ca tự viết,phát hiện ít nhất ba điểm yếu và sửa. Thử bốn mutation,giải thích mutant sống/chết và nộp oracle độc lập cho một phép tính.
+Q: Test luôn xanh có thể thiếu gì?
++ Assertion đủ nhạy hoặc ca âm
+- Tên biến dài
+- Số lượng screenshot
+Q: Oracle độc lập quan trọng vì sao?
++ Tránh expected lặp cùng lỗi implementation
+- Để không cần BA
+- Để bỏ dữ liệu biên
+
+## LESSON test-design-13 | Dự án: bộ kiểm truy vết theo rủi ro
+
+### Dự án bộ kiểm theo rủi ro
+Trung tâm Mầm Rêu có đăng ký,hủy,hoàn điểm và quota. Chọn rủi ro mất điểm,trùng đơn,vượt chỗ và lộ thông tin; mỗi rủi ro cần mô hình phù hợp chứ không chỉ một danh sách test case.
+
+### Ma trận truy vết có ý nghĩa
+Nối yêu cầu,quy tắc,mô hình,ca và evidence. Một hàng được nối nhưng expected sai vẫn không bảo vệ rủi ro; review nội dung và công khai các ô chưa có phép kiểm.
+~~~text
+RISK-01 vượt chỗ ->INV-01 ->CONC-01 ->report/LAB7
+RISK-02 hoàn 2 lần ->STATE-03 ->RETRY-02 ->report/LAB8
+RISK-03 sai tiền ->PRICE-04 ->BVA-07/PBT-01 ->report/LAB9
+RISK-04 khác chủ ->AUTH-02 ->DEC-04 ->report/LAB10
+~~~
+
+### Phối hợp kỹ thuật không chạy theo nhãn
+Dùng partition/biên cho qty,bảng quyết định cho refund,state cho lifecycle,pairwise cho môi trường,property cho tổng và lịch xen kẽ cho chỗ cuối. Nêu vì sao mỗi kỹ thuật hợp câu hỏi,không buộc mọi tính năng dùng tất cả.
+
+### Kiểm và cải tiến bộ test
+Chạy trên lab,dùng mutation có giới hạn để đánh giá oracle. Một test fail phải có expected/actual và đường về fixture; một rủi ro chưa kiểm phải có lý do và đề xuất kiểm bổ sung.
+
+### Bàn giao quyết định có bằng chứng
+Nộp ít nhất hai mươi ca và ba property,các mô hình,fixture,coverage và report. Kết luận phạm vi đạt,chưa đạt,chưa đủ bằng chứng; không hứa không còn lỗi chỉ vì mọi ca chọn đã pass.
+
+PRACTICE: Bàn giao bộ kiểm đặt lớp có hai mươi ca,ba property,bảng quyết định,state,risk traceability và report. Kiểm bốn mutation,có concurrency/retry và ghi rõ giới hạn oracle/môi trường.
+Q: Traceability tốt nối những gì?
++ Rủi ro,yêu cầu,mô hình,test và evidence
+- Chỉ tên file
+- Chỉ thời gian làm
+Q: Bàn giao thiết kế cần nêu gì?
++ Lựa chọn kỹ thuật,coverage,expected và phần chưa kiểm
+- Chỉ số case
+- Tài khoản thật
+
+## LESSON test-design-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Expected phải quan sát được và truy đến yêu cầu/oracle, không ghi chung chung hệ thống đúng.
+2. Phân vùng là cách chọn đại diện có lý do, không bảo đảm mọi giá trị trong vùng không lỗi.
+3. Xác định miền trước; quanh mỗi biên kiểm điểm tại và lân cận phù hợp, thêm kiểu sai ở lớp validation.
+4. Ghi điều kiện,kết quả và tổ hợp không khả thi; không tùy tiện bỏ hàng thiếu mà chưa giải thích.
+
+### Dữ liệu và điều kiện biên
+5. Một trạng thái đến được chưa chứng minh mọi cạnh; chuỗi sự kiện và cạnh bị cấm cũng quan trọng.
+6. Ràng buộc và mức giá trị phải đúng; rủi ro tương tác cao hơn cần ca bổ sung.
+7. Giải thích lý do và cập nhật khi có bằng chứng, không coi điểm số chủ quan là sự thật tuyệt đối.
+8. Một câu lệnh có thể chạy mà một nhánh điều kiện chưa từng được chọn; coverage là tín hiệu cấu trúc.
+
+### Tính đúng và cách điều tra
+9. Code có thể thiếu yêu cầu hoặc oracle sai; coverage không chứng minh tính đầy đủ và đúng nghiệp vụ.
+10. Bất biến mô tả trạng thái luôn cần giữ trong miền; phải gắn thời điểm quan sát và giao dịch đã commit.
+11. Dùng minor unit nguyên trong lab, nêu currency và quy tắc làm tròn tại ranh giới.
+12. Generator phải phù hợp miền,oracle không lặp cùng lỗi implementation; lưu phản ví dụ để tái hiện.
+
+### Rủi ro và lựa chọn phương án
+13. Quan hệ như đảo thứ tự không đổi tổng chỉ đúng với giả định đã chốt; kiểm giới hạn trước áp dụng.
+14. Phản ví dụ nhỏ dễ hiểu; vẫn phân tích gốc lỗi và lưu regression case có nghĩa.
+15. Kiểm kết quả cả hai và số bản ghi sau commit, không chỉ response của một actor.
+16. Status có thể theo hợp đồng, nhưng một ý định không được gây hai tác dụng nếu yêu cầu idempotent.
+
+### Dự án, bằng chứng và bàn giao
+17. Thử mutation hoặc lỗi cố ý có giới hạn để chứng minh test phát hiện hành vi sai mà nó tuyên bố bảo vệ.
+18. Tính expected bằng cùng công thức sai sẽ tạo xanh giả; dùng ví dụ tay,mô hình đơn giản hoặc nguồn đã chốt.
+19. Bảng nối chỉ hữu ích khi nội dung đúng và chỉ ra khoảng trống, không đo đầy đủ bằng phần trăm liên kết hình thức.
+20. Người review cần hiểu vì sao ca được chọn,oracle từ đâu và giới hạn mô hình trước quyết định rủi ro.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Test case cần gì để người khác kiểm lại?
++ Điều kiện,dữ liệu,bước và expected có căn cứ
+- Chỉ tên thật dài
+- Chỉ ảnh thành công
+Q: Phân vùng tương đương dựa vào giả định gì?
++ Các giá trị trong vùng được xử lý tương tự theo mô hình
+- Mọi số đều giống
+- Chọn một giá trị chứng minh mọi code đúng
+Q: Miền qty nguyên 1..10 nên có biên nào?
++ 0,1,2,9,10,11 tùy chiến lược ba giá trị
+- Chỉ5
+- Chỉ1và100
+Q: Bảng quyết định giúp thấy gì?
++ Tổ hợp điều kiện và kết quả
+- Chỉ thứ tự click
+- Chỉ số dòng code
+Q: State transition cần kiểm gì ngoài trạng thái?
++ Sự kiện,cạnh hợp lệ/không hợp lệ và tác dụng
+- Chỉ tên state
+- Chỉ màu nút
+Q: Pairwise bảo đảm điều gì trong mô hình hợp lệ?
++ Bao phủ các cặp giá trị đã chọn
+- Mọi tương tác ba chiều
+- Không còn lỗi
+Q: Ưu tiên theo rủi ro nên cân nhắc gì?
++ Tác động,xác suất và khả năng phát hiện/khắc phục theo bối cảnh
+- Chỉ số lần tester thích
+- Chỉ độ dài test
+Q: 100% statement coverage có bảo đảm branch coverage không?
++ Không
+- Có luôn
+- Chỉ cần một ca
+Q: 100% branch coverage có chứng minh không còn lỗi không?
++ Không
+- Có nếu không exception
+- Có với hàm nhỏ
+Q: Bất biến đặt lớp hợp lý trong lab là gì?
++ 0<=remaining<=capacity sau mỗi giao dịch
+- Mọi request đều200
+- Mọi lớp luôn còn chỗ
+Q: Đơn vị tiền nên được chốt vì sao?
++ Tránh sai làm tròn và so khác đơn vị
+- Chỉ để tên cột đẹp
+- Vì float luôn sai mọi nơi
+Q: Property-based testing bắt đầu từ gì?
++ Thuộc tính và miền sinh có nghĩa
+- Sinh dữ liệu thật ngẫu nhiên vô hạn
+- Chỉ thêm nhiều ví dụ trùng
+Q: Quan hệ biến hình hữu ích khi nào?
++ Khó biết output tuyệt đối nhưng biết quan hệ khi đổi input
+- Mọi output đều tùy ý
+- Không cần oracle gì
+Q: Shrinking trong property test nhằm gì?
++ Tìm phản ví dụ nhỏ hơn vẫn làm fail
+- Sửa code tự động
+- Bỏ assertion
+Q: Cạnh tranh hai user tranh một chỗ cần oracle gì?
++ Tối đa một đăng ký thành công và trạng thái nhất quán
+- Cả hai luôn thành công
+- Chỉ thời gian hoàn thành
+Q: Retry cùng sự kiện cần kiểm gì?
++ Không nhân tác dụng theo hợp đồng chống lặp
+- Mỗi retry tạo một đơn mới
+- Luôn trả200
+Q: Test luôn xanh có thể thiếu gì?
++ Assertion đủ nhạy hoặc ca âm
+- Tên biến dài
+- Số lượng screenshot
+Q: Oracle độc lập quan trọng vì sao?
++ Tránh expected lặp cùng lỗi implementation
+- Để không cần BA
+- Để bỏ dữ liệu biên
+Q: Traceability tốt nối những gì?
++ Rủi ro,yêu cầu,mô hình,test và evidence
+- Chỉ tên file
+- Chỉ thời gian làm
+Q: Bàn giao thiết kế cần nêu gì?
++ Lựa chọn kỹ thuật,coverage,expected và phần chưa kiểm
+- Chỉ số case
+- Tài khoản thật

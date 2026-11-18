@@ -1,0 +1,755 @@
+{
+ "no": 13,
+ "title": "Tám mươi phần trăm của ai: đọc mẫu số trước khi so kết quả",
+ "sub": "回答した 五十四人のうち、四十三人が 満足と 答えました。",
+ "goals": [
+  "Giải thích phân tử, mẫu số và đối tượng được đếm trong báo cáo Nhật.",
+  "Tính và diễn đạt tỷ lệ trả lời, mức hài lòng trong người trả lời, mức tăng người dùng.",
+  "Phân biệt số người thực với số lượt và mô tả dữ liệu thiếu mà không gán họ bất mãn.",
+  "Viết tóm tắt có số liệu đúng, phạm vi so sánh và giả thuyết chưa được kiểm."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Báo cáo giả có hai giai đoạn cùng bốn tuần. Giai đoạn cũ có 50 người dùng thực, 40 trả lời và 32 nói hài lòng. Giai đoạn mới có 90 người dùng, 54 trả lời và 43 hài lòng. Khoảng 80% người trả lời hài lòng ở cả hai, nhưng tỷ lệ trả lời khác nhau. Không được từ đó suy 80% mọi người dùng đều hài lòng, cũng không được coi người chưa trả lời là không hài lòng. Trước khi so, hãy hỏi đang chia số nào cho số nào và mỗi số đếm người hay lượt.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>分母 đọc ぶんぼ, 分子 đọc ぶんし, giữ nhịp ん trước b/sh. 延べ人数 là のべにんずう, 実人数 là じつにんずう; đừng bỏ phần đầu khiến mất đơn vị. 八割 đọc はちわり, 八十パーセント có dấu dài trong パー. 増減率 đọc ぞうげんりつ, có zo-o và ん; khi đọc phép so, đặt nghỉ sau mỗi khoảng thời gian rồi nêu chỉ số.</p>",
+   "items": [
+    {
+     "sym": "分母・分子",
+     "ex": [
+      "ぶんぼ",
+      "ぶんし"
+     ],
+     "vi": "Giữ âm mũi và phần bo/shi để người nghe theo được số chia và số được chia."
+    },
+    {
+     "sym": "実人数・延べ人数・回答率",
+     "ex": [
+      "じつにんずう",
+      "のべにんずう",
+      "かいとうりつ"
+     ],
+     "vi": "Đơn vị và tên tỷ lệ cần được đọc trọn trước con số, không chỉ đọc phần trăm."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "集計対象",
+     "kana": "しゅうけいたいしょう",
+     "romaji": "shuukei taishoo",
+     "vi": "đối tượng được thống kê",
+     "ex": "集計対象は来室者全員です。",
+     "exVi": "Đối tượng đếm là toàn bộ người đến."
+    },
+    {
+     "w": "分母",
+     "kana": "ぶんぼ",
+     "romaji": "bunbo",
+     "vi": "mẫu số",
+     "ex": "分母を回答者に限定します。",
+     "exVi": "Tôi giới hạn mẫu số là người trả lời."
+    },
+    {
+     "w": "分子",
+     "kana": "ぶんし",
+     "romaji": "bunshi",
+     "vi": "tử số",
+     "ex": "分子には満足と答えた人を入れます。",
+     "exVi": "Tử số là người trả lời hài lòng."
+    },
+    {
+     "w": "実人数",
+     "kana": "じつにんずう",
+     "romaji": "jitsuninzuu",
+     "vi": "số người không đếm lặp",
+     "ex": "実人数は番号で照合しました。",
+     "exVi": "Tôi đối chiếu số người thực bằng mã."
+    },
+    {
+     "w": "延べ人数",
+     "kana": "のべにんずう",
+     "romaji": "nobe ninzuu",
+     "vi": "tổng số lượt người có thể đếm lặp",
+     "ex": "延べ人数には再訪も含みます。",
+     "exVi": "Tổng lượt có cả quay lại."
+    },
+    {
+     "w": "回答率",
+     "kana": "かいとうりつ",
+     "romaji": "kaitooritsu",
+     "vi": "tỷ lệ trả lời",
+     "ex": "回答率は六割でした。",
+     "exVi": "Tỷ lệ trả lời là sáu mươi phần trăm."
+    },
+    {
+     "w": "未回答",
+     "kana": "みかいとう",
+     "romaji": "mikaitoo",
+     "vi": "chưa/không trả lời",
+     "ex": "未回答の理由は聞いていません。",
+     "exVi": "Tôi chưa hỏi lý do không trả lời."
+    },
+    {
+     "w": "割合",
+     "kana": "わりあい",
+     "romaji": "wariai",
+     "vi": "tỷ lệ trong một tập",
+     "ex": "割合の対象を文に残します。",
+     "exVi": "Tôi giữ đối tượng tỷ lệ trong câu."
+    },
+    {
+     "w": "平均",
+     "kana": "へいきん",
+     "romaji": "heikin",
+     "vi": "trung bình cộng",
+     "ex": "平均は五分です。",
+     "exVi": "Trung bình là năm phút."
+    },
+    {
+     "w": "中央値",
+     "kana": "ちゅうおうち",
+     "romaji": "chuuoochi",
+     "vi": "trung vị",
+     "ex": "中央値は四分でした。",
+     "exVi": "Trung vị là bốn phút."
+    },
+    {
+     "w": "外れ値",
+     "kana": "はずれち",
+     "romaji": "hazurechi",
+     "vi": "giá trị khác xa nhóm còn lại",
+     "ex": "外れ値を理由なく捨てません。",
+     "exVi": "Tôi không bỏ giá trị khác xa mà không lý do."
+    },
+    {
+     "w": "偏り",
+     "kana": "かたより",
+     "romaji": "katayori",
+     "vi": "sự lệch trong phân bố/lựa chọn",
+     "ex": "回答した人に偏りがあるかもしれません。",
+     "exVi": "Người trả lời có thể bị lệch nhóm."
+    },
+    {
+     "w": "比較可能性",
+     "kana": "ひかくかのうせい",
+     "romaji": "hikaku kanoosei",
+     "vi": "khả năng có thể so sánh hợp lý",
+     "ex": "比較可能性を先に確かめます。",
+     "exVi": "Tôi kiểm khả năng so sánh trước."
+    },
+    {
+     "w": "増減率",
+     "kana": "ぞうげんりつ",
+     "romaji": "zoogenritsu",
+     "vi": "tỷ lệ tăng giảm so mốc gốc",
+     "ex": "増減率の基準を示します。",
+     "exVi": "Tôi nêu mốc gốc của tỷ lệ tăng giảm."
+    },
+    {
+     "w": "因果関係",
+     "kana": "いんがかんけい",
+     "romaji": "inga kankei",
+     "vi": "quan hệ nguyên nhân–kết quả",
+     "ex": "因果関係はまだ確認していません。",
+     "exVi": "Chưa xác nhận quan hệ nguyên nhân."
+    },
+    {
+     "w": "相関",
+     "kana": "そうかん",
+     "romaji": "sookan",
+     "vi": "mối liên hệ biến động giữa các đại lượng",
+     "ex": "相関だけで原因とは決めません。",
+     "exVi": "Tôi không quyết nguyên nhân chỉ từ liên hệ biến động."
+    },
+    {
+     "w": "抽出条件",
+     "kana": "ちゅうしゅつじょうけん",
+     "romaji": "chuushutsu jooken",
+     "vi": "điều kiện chọn bản ghi để thống kê",
+     "ex": "抽出条件を同じにします。",
+     "exVi": "Tôi dùng cùng điều kiện lấy dữ liệu."
+    },
+    {
+     "w": "集計期間",
+     "kana": "しゅうけいきかん",
+     "romaji": "shuukei kikan",
+     "vi": "khoảng thời gian thống kê",
+     "ex": "集計期間はそれぞれ四週間です。",
+     "exVi": "Mỗi khoảng thống kê là bốn tuần."
+    },
+    {
+     "w": "丸め",
+     "kana": "まるめ",
+     "romaji": "marume",
+     "vi": "làm tròn số",
+     "ex": "丸めの前の値も保存します。",
+     "exVi": "Tôi lưu cả giá trị trước làm tròn."
+    },
+    {
+     "w": "不確実性",
+     "kana": "ふかくじつせい",
+     "romaji": "fukakujitsusei",
+     "vi": "điều còn chưa chắc do giới hạn thông tin",
+     "ex": "不確実性を注記に示します。",
+     "exVi": "Tôi ghi điều chưa chắc ở ghi chú."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>～に占める…の割合 nêu phần chiếm trong một tập: 回答者に占める満足者の割合. ～を基準にすると xác lập mốc so; ～に比べて mô tả khác biệt nhưng không tự là nguyên nhân. Trong báo cáo cần giữ ～のうち để chỉ tập: 回答した54人のうち43人. Nói ほぼ八割 khi làm tròn 43÷54≈79,6%, nhưng ghi đối tượng và cách làm tròn. ～とは直ちに言えない giới hạn kết luận ngay từ một số liệu. Tỷ lệ tăng 50→90 là (90−50)÷50=80%, không phải 90÷50=180% “tăng”.</p>",
+   "table": [
+    [
+     "Chỉ số",
+     "Cũ",
+     "Mới"
+    ],
+    [
+     "Người dùng thực",
+     "50人",
+     "90人"
+    ],
+    [
+     "Người trả lời",
+     "40人",
+     "54人"
+    ],
+    [
+     "Hài lòng trong người trả lời",
+     "32人",
+     "43人"
+    ],
+    [
+     "Tỷ lệ trả lời",
+     "40/50=80%",
+     "54/90=60%"
+    ],
+    [
+     "Hài lòng trong người trả lời",
+     "32/40=80%",
+     "43/54≈79,6%"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "回答した 五十四人のうち、四十三人が 満足と 答えました。",
+     "vi": "Trong 54 người trả lời, 43 người nói hài lòng."
+    },
+    {
+     "t": "利用者に対する 回答率は 六十パーセントです。",
+     "vi": "Tỷ lệ trả lời trên người dùng là 60%."
+    },
+    {
+     "t": "旧期間を 基準にすると、実人数は 八十パーセント 増えました。",
+     "vi": "Lấy giai đoạn cũ làm mốc, số người thực tăng 80%."
+    },
+    {
+     "t": "丸めれば どちらも 八割ですが、回答率は 異なります。",
+     "vi": "Làm tròn thì cả hai khoảng tám phần mười, nhưng tỷ lệ trả lời khác."
+    },
+    {
+     "t": "方式の 変更が 原因だとは、直ちに 言えません。",
+     "vi": "Chưa thể nói ngay thay đổi cách làm là nguyên nhân."
+    }
+   ],
+   "tips": [
+    "<p>Không bỏ 回答者のうち khi nói 80% hài lòng; người không trả lời chưa biết phản ứng.</p>",
+    "<p>Không coi 180% quy mô mới so cũ là tăng 180%; tăng là chênh lệch chia mốc cũ, bằng 80%.</p>",
+    "<p>Không lấy liên hệ trước-sau làm nguyên nhân duy nhất; cần kiểm khác biệt đối tượng, mùa, cách hỏi.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Nhóm chất vấn cùng con số tám phần mười nhưng mẫu số khác; giữ quan sát tăng với giả thuyết nguyên nhân riêng.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "報告に「満足度は前後とも八割」と書きました。数字が同じなので、効果は変わらなかったとまとめてよいですか。",
+     "vi": "Tôi viết hài lòng trước sau đều tám phần mười. Số giống thì tóm hiệu quả không đổi được không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "まず八割の分母を示してください。旧期間は利用者五十人のうち四十人が回答し、その中の三十二人が満足と答えています。",
+     "vi": "Trước hết nêu mẫu số. Cũ 50 người dùng có 40 trả lời, trong đó 32 hài lòng."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "新期間は九十人が利用し、五十四人が回答しました。満足は四十三人ですから、ほぼ八割です。",
+     "vi": "Mới 90 người dùng, 54 trả lời, 43 hài lòng, nên gần tám phần mười."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "割合を丸めると近いですが、回答率は八割から六割に下がっています。回答した人の範囲が同じとは限りません。",
+     "vi": "Làm tròn thì gần nhưng tỷ lệ trả lời từ 80 xuống 60%. Phạm vi người trả lời chưa chắc giống."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "では、答えなかった人は不満だったとして、全利用者に対する満足の割合を出すべきでしょうか。",
+     "vi": "Vậy coi người không trả lời là bất mãn rồi tính hài lòng trên toàn người dùng chăng?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "それも根拠がありません。未回答は未回答として残し、分かっている満足者の人数と、分からない範囲を分けます。",
+     "vi": "Cũng không căn cứ. Giữ chưa trả lời là chưa trả lời, tách số hài lòng biết được với phạm vi chưa biết."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "利用者は五十人から九十人です。新方式の導入で八十パーセント増えたとは言えますよね。",
+     "vi": "Người dùng từ 50 lên 90. Có thể nói do cách mới mà tăng 80% nhỉ?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "増減率の計算は合っていますが、「導入で」という原因の部分は未確認です。同じ長さの期間でも、天候や告知の量が違うかもしれません。",
+     "vi": "Phép tăng đúng nhưng nguyên nhân “do áp dụng” chưa kiểm. Cùng độ dài vẫn có thể khác thời tiết, lượng thông báo."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "人数という単位も確かめました。共通番号で再訪を除いた実人数で、両方とも四週間の集計です。",
+     "vi": "Tôi đã kiểm đơn vị. Là người thực loại quay lại bằng mã chung, cả hai bốn tuần."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "その情報は比較の前提として重要です。ただし、抽出条件をそろえたことだけで、全ての影響要因をそろえたとは言えません。",
+     "vi": "Đó là tiền đề so quan trọng. Nhưng cùng điều kiện lấy số không nghĩa mọi yếu tố ảnh hưởng đều giống."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "見出しは利用実人数の増加とし、満足の文には回答者のうちと書きます。未回答の理由も、可能な範囲で尋ねる案を出します。",
+     "vi": "Tiêu đề ghi tăng người thực, câu hài lòng giữ trong người trả lời. Tôi đề xuất hỏi lý do chưa trả lời trong khả năng."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。否定的な結論を急ぐ必要もありません。計算できたこと、比較の条件、原因としてまだ確かめていないことを三つに分けてください。",
+     "vi": "Vâng. Cũng không cần vội kết luận tiêu cực. Xin tách phép tính đã làm, điều kiện so và nguyên nhân chưa kiểm."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "待ち時間の平均だけも危ないでしょうか。一日だけとても長く待った人がいて、全体の値が上がっています。",
+     "vi": "Chỉ trung bình chờ có rủi ro không? Một ngày có người chờ rất lâu làm giá trị chung tăng."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "平均を消すのではなく、人数と分布、中央値なども必要に応じて示しましょう。長く待った理由を調べずに外れ値として捨てるのも避けたいです。",
+     "vi": "Không xóa trung bình mà theo nhu cầu nêu số người, phân bố, trung vị. Cũng tránh bỏ người chờ lâu như ngoại lệ mà chưa kiểm lý do."
+    }
+   ],
+   "qs": [
+    {
+     "q": "満足の八割の分母は何ですか。",
+     "o": [
+      "全ての利用者",
+      "担当者の全人数",
+      "各期間の回答者"
+     ],
+     "a": 2,
+     "e": "32/40 và 43/54 dùng người trả lời; không tự mở thành toàn bộ người dùng."
+    },
+    {
+     "q": "回答率はどう変化しましたか。",
+     "o": [
+      "両方八割で同じ",
+      "八割から六割に下がった",
+      "六割から八割に上がった"
+     ],
+     "a": 1,
+     "e": "40/50=80%, 54/90=60%; khác tỷ lệ hài lòng được làm tròn."
+    },
+    {
+     "q": "未回答者について正しい扱いはどれですか。",
+     "o": [
+      "反応が不明として分ける",
+      "全員不満にする",
+      "全員満足にする"
+     ],
+     "a": 0,
+     "e": "Không có phản hồi thì chưa đủ căn cứ gán một thái độ nào."
+    },
+    {
+     "q": "八十パーセントの増加について何が未確認ですか。",
+     "o": [
+      "五十から九十への計算",
+      "集計期間が四週間であること",
+      "新方式が増加の原因だという部分"
+     ],
+     "a": 2,
+     "e": "Phép chênh 40/50 đúng, nhưng quan hệ do đổi cách cần chứng cứ khác."
+    },
+    {
+     "q": "極端に長い待ち時間はどう扱いますか。",
+     "o": [
+      "平均を必ず捨てる",
+      "理由を調べ分布も示す",
+      "無条件に消す"
+     ],
+     "a": 1,
+     "e": "Đối thoại không loại số thật chỉ vì bất lợi; xem lý do và cách trình bày bổ sung."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "架空の学習支援室が、新しい受付方法の前後を比べる報告を作成した。旧期間も新期間も四週間であり、共通番号を使って再訪を除いた実人数を集計している。旧期間は五十人、新期間は九十人だった。見出し案には「利用が八割増加し、満足度は八割を維持」と書かれた。一見すると、利用が増えても質は保たれたと読める。しかし、何を数え、何を分母にした数字かを確認しなければ、その印象が妥当かどうかは判断できない。\n\n旧期間では、五十人のうち四十人が質問に答え、その中の三十二人が満足を選んだ。新期間では、九十人のうち五十四人が回答し、四十三人が満足を選んだ。回答者に占める満足者の割合は、旧期間が三十二を四十で割った八十パーセント、新期間が四十三を五十四で割った約七十九・六パーセントである。整数に丸めればどちらも八十パーセントに近いが、これは全利用者の反応を直接示す値ではない。\n\n回答率を見ると違いが分かる。旧期間は四十を五十で割った八十パーセント、新期間は五十四を九十で割った六十パーセントである。新期間に未回答が多い理由は、まだ尋ねていない。忙しくて答えられなかったのか、質問が届かなかったのか、不満があったのかは分からない。未回答を全て不満とすることにも、全て満足とすることにも根拠はない。回答した人の評価と、評価を把握していない範囲を分けて示すことが必要だ。\n\n実人数が五十人から九十人に増えた計算自体は確認できる。旧期間を基準にすると増えた四十人を五十人で割るため、増加率は八十パーセントである。九十を五十で割った百八十パーセントは、新しい人数が旧期間の何倍かを百分率で示したもので、増加率そのものではない。また、延べ人数であれば同じ人が何度も数えられる可能性があるため、実人数と比較してはならない。この報告では単位と期間がそろっているが、その前提を読者が分かる場所に書く必要がある。\n\n単位と長さが同じでも、原因まで同じ条件で比べたことにはならない。二つの期間では天候、告知の量、初めて来た人の割合、担当者の配置が異なるかもしれない。新方式の導入後に増えたという順序と、新方式によって増えたという因果関係は区別するべきだ。別の要因を全て消してからでなければ何も報告できないという意味ではない。観察できた変化を報告しつつ、原因については仮説として残し、追加で確かめる条件を示せばよい。\n\n待ち時間についても、平均が下がったという一文だけでは分布が見えない。少数の人が非常に長く待つ一方、多くの人は短い場合がある。中央値は並べた値の中央を示すが、それだけで長く待った人の経験を消せるわけではない。例えば二、四、四、六、九分なら、平均は五分、中央値は四分になる。どちらかを都合よく選ぶのではなく、人数、範囲、極端に長かった例の理由も目的に応じて添える。記録の誤りでない値を、見出しに合わないからという理由で取り除いてはいけない。\n\n最終版では、実人数の増加と回答者の満足の割合を別の文にした。抽出条件と集計期間を表の下に置き、丸める前の値も残した。結論は、新方式と同時期に利用が増え、回答者の評価はほぼ八割だったが、回答率の低下と未回答の理由を追加で確認する必要がある、というものだ。肯定的にも否定的にも言い過ぎず、不確実性を具体的な質問へ変えることが、数字を使った説明の責任だと考えた。\n\n補足すると、満足と答えたことが確認できた人を全利用者で割る値は、旧期間が三十二を五十で割った六十四パーセント、新期間が四十三を九十で割った約四十七・八パーセントになる。ただし、これを全利用者の満足率と呼ぶと、未回答の反応まで把握したように見える。計算できる数値でも、指標の名前と対象を誤れば意味が変わるのである。",
+   "vi": "Phòng hỗ trợ giả lập báo cáo trước–sau cách tiếp nhận mới. Hai giai đoạn cùng bốn tuần, đếm người thực qua mã loại lượt quay lại: 50 và 90. Tiêu đề dự thảo nói dùng tăng 80%, hài lòng giữ 80%, dễ tạo ấn tượng lượng tăng vẫn giữ chất. Nhưng cần biết đếm gì, mẫu số nào trước đánh giá.\n\nCũ có 40/50 trả lời, trong đó 32 hài lòng. Mới 54/90 trả lời, 43 hài lòng. Hài lòng trong người trả lời là 32/40=80%, 43/54≈79,6%. Làm tròn gần 80% nhưng không trực tiếp phản ánh mọi người dùng.\n\nTỷ lệ trả lời cũ 80%, mới 60%. Chưa hỏi vì sao mới nhiều người không trả lời: bận, không nhận được câu hỏi hay bất mãn đều chưa rõ. Không căn cứ coi tất cả bất mãn hoặc hài lòng. Cần tách đánh giá người trả lời với phạm vi chưa biết.\n\nTính 50 lên 90 đúng: chênh 40 chia mốc 50 là tăng 80%. 90/50=180% là quy mô mới so cũ, không phải mức tăng. Lượt có thể đếm lại cùng người, không so tùy tiện với người thực. Báo cáo này cùng đơn vị/thời gian nhưng vẫn cần nêu tiền đề ở chỗ người đọc thấy.\n\nCùng đơn vị và độ dài chưa nghĩa điều kiện nguyên nhân đồng nhất: thời tiết, lượng báo, nhóm người mới, phân người có thể khác. Sau áp dụng tăng là thứ tự, do áp dụng tăng là nguyên nhân cần tách. Không cần loại hết yếu tố khác mới báo được; báo biến đổi thấy được, giữ nguyên nhân là giả thuyết cùng cách kiểm thêm.\n\nChỉ trung bình chờ giảm chưa thấy phân bố: ít người chờ rất lâu, nhiều người chờ ngắn. Trung vị là giá trị giữa khi xếp, không xóa trải nghiệm người chờ lâu. Với 2,4,4,6,9 phút, trung bình 5, trung vị 4. Không chọn tùy số đẹp, nên kèm người, phạm vi, lý do chờ dài theo mục đích. Không bỏ giá trị thật chỉ vì không hợp tiêu đề.\n\nBản cuối tách tăng người thực với tỷ lệ hài lòng người trả lời. Nêu điều kiện lấy dữ liệu, kỳ thống kê, giữ giá trị chưa làm tròn. Kết luận: cùng thời gian cách mới, sử dụng tăng, đánh giá người trả lời khoảng 80%, nhưng cần kiểm tỷ lệ trả lời giảm và lý do chưa trả lời. Không nói quá tốt/xấu mà đổi điều chưa chắc thành câu hỏi cụ thể.\n\nBổ sung: số người đã biết là trả lời hài lòng chia cho toàn người dùng là cũ 32/50=64%, mới 43/90≈47,8%. Nhưng gọi đó là tỷ lệ hài lòng của toàn người dùng sẽ khiến tưởng biết cả phản ứng chưa trả lời. Dù tính được số, đặt sai tên hoặc tập của chỉ số vẫn đổi nghĩa.",
+   "gloss": [
+    {
+     "w": "分母",
+     "kana": "ぶんぼ",
+     "romaji": "bunbo",
+     "vi": "mẫu số"
+    },
+    {
+     "w": "実人数",
+     "kana": "じつにんずう",
+     "romaji": "jitsuninzuu",
+     "vi": "số người không đếm lặp"
+    },
+    {
+     "w": "延べ人数",
+     "kana": "のべにんずう",
+     "romaji": "nobe ninzuu",
+     "vi": "tổng số lượt người có thể đếm lặp"
+    },
+    {
+     "w": "回答率",
+     "kana": "かいとうりつ",
+     "romaji": "kaitooritsu",
+     "vi": "tỷ lệ trả lời"
+    },
+    {
+     "w": "未回答",
+     "kana": "みかいとう",
+     "romaji": "mikaitoo",
+     "vi": "chưa/không trả lời"
+    },
+    {
+     "w": "割合",
+     "kana": "わりあい",
+     "romaji": "wariai",
+     "vi": "tỷ lệ trong một tập"
+    }
+   ],
+   "qs": [
+    {
+     "q": "見出し案が与えやすい印象は何ですか。",
+     "o": [
+      "全員が必ず不満と答えた",
+      "利用が減ったとしか読めない",
+      "利用拡大と質の維持が同時に達成されたように見える"
+     ],
+     "a": 2,
+     "e": "Hai tỷ lệ khi bỏ đối tượng dễ tạo ấn tượng chất giữ trong khi lượng tăng; bài yêu cầu xét mẫu số."
+    },
+    {
+     "q": "新期間の回答率は何パーセントですか。",
+     "o": [
+      "百八十パーセント",
+      "六十パーセント",
+      "約七十九・六パーセント"
+     ],
+     "a": 1,
+     "e": "54 người trả lời/90 người dùng=60%, khác 43/54 mức hài lòng trong người trả lời."
+    },
+    {
+     "q": "未回答の扱いとして適切なのはどれですか。",
+     "o": [
+      "理由は不明として別に示す",
+      "全員を不満に加える",
+      "全員を満足に加える"
+     ],
+     "a": 0,
+     "e": "Không có căn cứ chọn một phản ứng cho người chưa trả lời."
+    },
+    {
+     "q": "五十人から九十人の増加率は何ですか。",
+     "o": [
+      "百八十パーセント",
+      "四十パーセント",
+      "八十パーセント"
+     ],
+     "a": 2,
+     "e": "Chênh 40 chia mốc 50 là 80%; 180% là mức mới so cũ."
+    },
+    {
+     "q": "因果について本文の立場はどれですか。",
+     "o": [
+      "完全な条件統制まで数字は一切示せない",
+      "変化を報告し原因は追加検証の仮説とする",
+      "導入後なら必ず導入が原因だ"
+     ],
+     "a": 1,
+     "e": "Bài tránh cả khẳng định nguyên nhân lẫn đòi tuyệt đối mới báo được; giữ quan sát với giả thuyết."
+    },
+    {
+     "q": "平均と中央値の説明に合うのはどれですか。",
+     "o": [
+      "目的に応じて分布や長い例の理由も添える",
+      "都合がよい値だけ選ぶ",
+      "中央値があれば長い待ち時間は消してよい"
+     ],
+     "a": 0,
+     "e": "Hai thước đo bổ sung điểm nhìn, không xóa số liệu thật hoặc nhóm trải nghiệm khác."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Báo kết quả hai kỳ theo ba lớp: phép tính người dùng tăng, hài lòng trong người trả lời, giới hạn không trả lời/nguyên nhân.",
+     "model": "実人数は五十人から九十人で、旧期間を基準に八十パーセント増えました。満足と答えた割合は、回答者の中で旧期間が八十パーセント、新期間が約七十九・六パーセントです。ただし回答率は八割から六割へ下がり、未回答の理由は未確認です。新方式の導入後に増えたとは言えますが、導入が原因だと断定せず、告知や利用者構成の違いを調べたいです。",
+     "vi": "Người thực 50 lên 90, tăng 80% so cũ. Trong người trả lời, hài lòng cũ 80%, mới khoảng 79,6%. Nhưng trả lời giảm 80 xuống 60%, chưa rõ lý do không trả lời. Có thể nói sau áp dụng tăng nhưng chưa khẳng định do áp dụng; cần kiểm thông báo và cơ cấu người.",
+     "tips": "Đọc đủ tên chỉ số và tập được chia trước phần trăm; cùng 80% có thể là hai chỉ số khác."
+    },
+    {
+     "p": "Bạn yêu cầu gộp người chưa trả lời thành bất mãn để thận trọng. Phản hồi không nghiêng kết luận tốt/xấu, đề nghị cách kiểm thêm.",
+     "model": "慎重にするためでも、未回答を全て不満と決める根拠はありません。回答者の結果と、反応が分からない人の範囲を分けて示すほうが正確だと思います。質問が届いたか、答える時間があったかを可能な範囲で確かめませんか。満足の割合を丸める場合も、分母と丸める前の値を残し、比較できる範囲を説明したいです。",
+     "vi": "Dù để thận trọng cũng không có căn cứ coi không trả lời là bất mãn hết. Nên tách kết quả người trả lời với nhóm chưa biết. Ta kiểm câu hỏi có đến, có thời gian trả lời không trong khả năng nhé? Khi làm tròn cũng giữ mẫu số và giá trị trước làm tròn, giải thích phạm vi so.",
+     "tips": "Thận trọng là giữ phần chưa biết, không tự thay bằng giả định xấu."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết tóm tắt 280–360 chữ Nhật với số liệu hai kỳ: người thực 50→90, trả lời 40/54, hài lòng 32/43; nêu mẫu số, mức tăng, tỷ lệ trả lời và giới hạn nguyên nhân; đề xuất một bước kiểm.",
+   "model": "四週間ずつの実人数は五十人から九十人に増え、旧期間を基準にした増加率は八十パーセントである。満足と答えた人は旧期間が回答者四十人中三十二人、新期間が五十四人中四十三人で、割合は八十パーセントと約七十九・六パーセントだった。ただし、利用者に対する回答率は八割から六割に下がっている。未回答を満足にも不満にも数えず、その理由は未確認として残すべきだ。導入後の増加は観察できるが、新方式が原因と断定するには、告知や利用者構成などの違いを確かめる必要がある。次は質問が届いたかと回答する時間があったかを調べたい。集計対象、期間、丸める前の値を示し、比較の範囲を超えない形で報告する。",
+   "modelVi": "Mỗi kỳ bốn tuần, người thực 50 lên 90, tăng 80% so cũ. Hài lòng cũ 32/40 người trả lời, mới 43/54, là 80% và khoảng 79,6%. Nhưng tỷ lệ trả lời trên người dùng giảm 80 xuống 60%. Không tính người chưa trả lời thành hài lòng hay bất mãn; lý do chưa rõ. Thấy tăng sau áp dụng nhưng để nói do cách mới cần kiểm khác biệt thông báo, cơ cấu người. Tiếp theo muốn kiểm câu hỏi có đến và có giờ trả lời không. Báo phạm vi, kỳ và số chưa làm tròn để kết luận không quá dữ liệu.",
+   "min": 280,
+   "tips": [
+    "Phải giữ cả hai bộ mẫu số người dùng và người trả lời.",
+    "Viết tăng 80% khác mức mới bằng 180% mốc cũ."
+   ],
+   "checklist": [
+    "Người thực và tăng đúng.",
+    "Hai tỷ lệ hài lòng đúng tập.",
+    "Tỷ lệ trả lời 80→60%.",
+    "Không gán phản ứng chưa trả lời hoặc nguyên nhân chưa kiểm."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “集計対象” nghĩa là gì?",
+   "o": [
+    "tổng số lượt người có thể đếm lặp",
+    "trung bình cộng",
+    "đối tượng được thống kê"
+   ],
+   "a": 2,
+   "e": "集計対象は来室者全員です。 → Đối tượng đếm là toàn bộ người đến. Từ cần nhận diện là “集計対象”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “分母” nghĩa là gì?",
+   "o": [
+    "trung vị",
+    "mẫu số",
+    "tỷ lệ trả lời"
+   ],
+   "a": 1,
+   "e": "分母を回答者に限定します。 → Tôi giới hạn mẫu số là người trả lời. Từ cần nhận diện là “分母”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “分子” nghĩa là gì?",
+   "o": [
+    "tử số",
+    "chưa/không trả lời",
+    "giá trị khác xa nhóm còn lại"
+   ],
+   "a": 0,
+   "e": "分子には満足と答えた人を入れます。 → Tử số là người trả lời hài lòng. Từ cần nhận diện là “分子”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “実人数” nghĩa là gì?",
+   "o": [
+    "tỷ lệ trong một tập",
+    "sự lệch trong phân bố/lựa chọn",
+    "số người không đếm lặp"
+   ],
+   "a": 2,
+   "e": "実人数は番号で照合しました。 → Tôi đối chiếu số người thực bằng mã. Từ cần nhận diện là “実人数”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền mẫu số mới cho hài lòng trong người trả lời: 43 ÷ ___ ≈ 79,6%.",
+   "a": "54",
+   "e": "Trong người trả lời có 54 người; 90 là toàn bộ người dùng, không phải mẫu số của chỉ số này."
+  },
+  {
+   "t": "fill",
+   "q": "Điền tỷ lệ trả lời mới bằng số: 54 ÷ 90 × 100 = ___%.",
+   "a": "60",
+   "e": "54 người trả lời trên 90 người dùng là 60%, không lẫn với hài lòng trong 54 người."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ giới hạn tập: 回答者の___、四十三人が満足と答えました。",
+   "a": "うち",
+   "e": "のうち chỉ tập người trả lời; bỏ tập sẽ dễ bị hiểu thành toàn bộ người dùng."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu nguyên nhân chưa thể nói ngay.",
+   "w": [
+    "直ちに言えません。",
+    "方式の変更が原因だとは"
+   ],
+   "a": "方式の変更が原因だとは直ちに言えません。",
+   "e": "だとは直ちに言えない giữ khoảng cách giữa biến đổi quan sát và kết luận nhân quả."
+  },
+  {
+   "q": "回答者の満足割合はいくらですか。",
+   "o": [
+    "四十パーセント",
+    "五十パーセント",
+    "八十パーセント"
+   ],
+   "a": 2,
+   "e": "Mẫu số người trả lời 50, 40/50=80%; 40% sẽ là số hài lòng biết trên toàn 100 nhưng không phải chỉ số được hỏi.",
+   "t": "listen",
+   "say": "利用者は百人、回答者は五十人、そのうち四十人が満足です。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "旧期間を基準にした増加率はいくらですか。",
+   "o": [
+    "二十パーセント",
+    "五十パーセント",
+    "百五十パーセント"
+   ],
+   "a": 1,
+   "e": "Tăng 20 trên mốc40 là50%; 150% là quy mô mới so mốc.",
+   "t": "listen",
+   "say": "実人数が四十人から六十人になりました。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "回答率と 満足の 割合は 別の 指標です。",
+   "a": "回答率と 満足の 割合は 別の 指標です。",
+   "lang": "ja-JP",
+   "e": "回答率 đo có trả lời, tỷ lệ hài lòng xét phản ứng trong một tập; cần nêu mẫu số cho mỗi chỉ số."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "延べ人数",
+     "tổng số lượt người có thể đếm lặp"
+    ],
+    [
+     "回答率",
+     "tỷ lệ trả lời"
+    ],
+    [
+     "未回答",
+     "chưa/không trả lời"
+    ],
+    [
+     "割合",
+     "tỷ lệ trong một tập"
+    ],
+    [
+     "平均",
+     "trung bình cộng"
+    ]
+   ],
+   "e": "集計対象 là tập đếm, 分母 là số chia, 分子 là số được chia trong tỷ lệ, 実人数 loại lặp và 延べ人数 có lượt; thiếu đơn vị dễ so nhầm."
+  },
+  {
+   "q": "見出し案が与えやすい印象は何ですか。",
+   "o": [
+    "全員が必ず不満と答えた",
+    "利用が減ったとしか読めない",
+    "利用拡大と質の維持が同時に達成されたように見える"
+   ],
+   "a": 2,
+   "e": "Hai tỷ lệ khi bỏ đối tượng dễ tạo ấn tượng chất giữ trong khi lượng tăng; bài yêu cầu xét mẫu số.",
+   "t": "mc"
+  },
+  {
+   "q": "新期間の回答率は何パーセントですか。",
+   "o": [
+    "約七十九・六パーセント",
+    "百八十パーセント",
+    "六十パーセント"
+   ],
+   "a": 2,
+   "e": "54 người trả lời/90 người dùng=60%, khác 43/54 mức hài lòng trong người trả lời.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "In hai bảng giả 50/40/32 và 90/54/43, thêm năm thời gian 2/4/4/6/9; không lấy số liệu khảo sát thật.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Cho tiêu đề tám phần mười và yêu cầu nhóm hỏi tập đếm trước khi được xem bảng nguồn."
+   },
+   {
+    "t": "30'",
+    "do": "Tính tỷ lệ trả lời, hài lòng và tăng người; đọc Nhật với tên mẫu số rồi so mức tăng80% với quy mô180%."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe cuộc sửa báo cáo, tìm phần tính đúng và phần nguyên nhân chưa có căn cứ."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc bảy đoạn, đánh dấu giới hạn không trả lời và các yếu tố làm so trước-sau chưa đủ nhân quả."
+   },
+   {
+    "t": "30'",
+    "do": "Trình bày hai kỳ rồi viết 280–360 chữ, bạn học kiểm toàn bộ số, đơn vị và nhóm chưa biết."
+   },
+   {
+    "t": "30'",
+    "do": "Bàn trung bình/trung vị với năm giá trị, làm nghe-chính tả và sửa kết luận có lợi hoặc bất lợi quá dữ liệu."
+   }
+  ],
+  "games": [
+   "Mỗi nhóm bốc một mẫu số khác nhau từ cùng bảng, đọc tỷ lệ để nhóm khác đoán đúng chỉ số.",
+   "Sửa ba tiêu đề cùng số80% nhưng khác tập: nhóm phải giữ phần đúng và thêm phạm vi cần thiết."
+  ],
+  "errors": [
+   "Chia43 cho90 khi hỏi hài lòng trong người trả lời: ghi tập54 trước phép tính.",
+   "Gọi 90/50 là tăng180%: tách mức mới với chênh lệch.",
+   "Coi mọi người không trả lời là bất mãn: giữ nhãn chưa biết.",
+   "Gắn nguyên nhân cho biến đổi sau áp dụng: nêu giả thuyết và điều kiện kiểm thêm."
+  ],
+  "homework": "Tạo hai kỳ khảo sát giả có số người, số trả lời và số hài lòng khác nhau; tính ba tỷ lệ, viết tóm tắt giữ phạm vi và một câu hỏi nguyên nhân còn thiếu."
+ }
+}

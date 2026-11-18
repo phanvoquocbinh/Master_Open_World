@@ -1,0 +1,750 @@
+{
+ "no": 14,
+ "title": "Ôn tập tổng hợp 1 – Ủy ban chọn phương án có điều kiện",
+ "sub": "実人数は 増えたものの、因果関係は 未確認です。",
+ "goals": [
+  "Tóm tắt luận điểm, căn cứ và ý kiến phản đối trong một cuộc họp dài.",
+  "Kết hợp nhượng bộ, biến đổi đồng thời và giới hạn kết luận khi so hai phương án.",
+  "Kiểm tỷ lệ khảo sát cùng gánh nặng công việc trước khi đề nghị mở rộng.",
+  "Viết kiến nghị tạm thời có phạm vi trách nhiệm, bước kiểm và điều kiện xét lại."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Bài ôn đặt người học vào ủy ban của một phòng hỗ trợ học tập giả. Thành viên cùng muốn mở rộng tiếp cận nhưng khác cách làm và thước đo thành công. Nhiệm vụ không phải chọn câu nghe quyết đoán nhất: cần tái dựng luận điểm, nhận phần đúng của ý kiến khác và xác định điều kiện để đổi khuyến nghị. Các cấu trúc N2 chỉ có ích khi giữ được nguồn, mẫu số và phạm vi của quyết định.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>審議 đọc しんぎ, 議事録 đọc ぎじろく; âm đục g/j phải rõ khi ghi tên loại văn bản. 留保 đọc りゅうほ có ryu-u, 暫定 đọc ざんてい có ん và te-i. 条件付き là じょうけんつき, không đọc つ như nhịp っ. Khi nghe câu dài ものの…一方で…, đánh dấu điểm đổi lập trường chứ không gộp mọi vế thành cùng một kết luận.</p>",
+   "items": [
+    {
+     "sym": "審議・議事録・留保",
+     "ex": [
+      "しんぎ",
+      "ぎじろく",
+      "りゅうほ"
+     ],
+     "vi": "Giữ âm đục và trường âm để phân việc bàn xét, bản ghi họp và điều còn bảo lưu."
+    },
+    {
+     "sym": "暫定・条件付き",
+     "ex": [
+      "ざんてい",
+      "じょうけんつき"
+     ],
+     "vi": "Hai cụm giới hạn độ chắc và phạm vi áp dụng; đọc đầy đủ trước khi nêu phương án."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "審議",
+     "kana": "しんぎ",
+     "romaji": "shingi",
+     "vi": "bàn xét một đề xuất",
+     "ex": "二つの案を審議します。",
+     "exVi": "Chúng tôi bàn xét hai đề xuất."
+    },
+    {
+     "w": "論点",
+     "kana": "ろんてん",
+     "romaji": "ronten",
+     "vi": "điểm cần tranh luận",
+     "ex": "論点を費用だけに絞りません。",
+     "exVi": "Tôi không giới hạn luận điểm chỉ chi phí."
+    },
+    {
+     "w": "反対意見",
+     "kana": "はんたいいけん",
+     "romaji": "hantai iken",
+     "vi": "ý kiến phản đối",
+     "ex": "反対意見の根拠も残します。",
+     "exVi": "Tôi giữ cả căn cứ ý phản đối."
+    },
+    {
+     "w": "留保",
+     "kana": "りゅうほ",
+     "romaji": "ryuuho",
+     "vi": "điều bảo lưu/chưa chấp thuận",
+     "ex": "長期の評価には留保があります。",
+     "exVi": "Đánh giá dài hạn còn bảo lưu."
+    },
+    {
+     "w": "条件付き",
+     "kana": "じょうけんつき",
+     "romaji": "jookentsuki",
+     "vi": "có kèm điều kiện",
+     "ex": "条件付きで試行を認めます。",
+     "exVi": "Chúng tôi đồng ý thử có điều kiện."
+    },
+    {
+     "w": "暫定",
+     "kana": "ざんてい",
+     "romaji": "zantei",
+     "vi": "tạm thời chưa cuối cùng",
+     "ex": "これは暫定の提案です。",
+     "exVi": "Đây là đề xuất tạm."
+    },
+    {
+     "w": "実施案",
+     "kana": "じっしあん",
+     "romaji": "jisshian",
+     "vi": "phương án thực hiện",
+     "ex": "実施案に担当を明記します。",
+     "exVi": "Tôi ghi rõ người phụ trách vào phương án."
+    },
+    {
+     "w": "判断材料",
+     "kana": "はんだんざいりょう",
+     "romaji": "handan zairyoo",
+     "vi": "thông tin làm căn cứ đánh giá",
+     "ex": "判断材料がまだ足りません。",
+     "exVi": "Thông tin làm căn cứ vẫn thiếu."
+    },
+    {
+     "w": "優先順位",
+     "kana": "ゆうせんじゅんい",
+     "romaji": "yuusen juni",
+     "vi": "thứ tự ưu tiên",
+     "ex": "優先順位を会議で確認します。",
+     "exVi": "Chúng tôi kiểm thứ tự ưu tiên trong họp."
+    },
+    {
+     "w": "実行可能性",
+     "kana": "じっこうかのうせい",
+     "romaji": "jikkoo kanoosei",
+     "vi": "khả năng thực hiện thực tế",
+     "ex": "実行可能性を人員から検討します。",
+     "exVi": "Chúng tôi xét khả năng làm từ nhân lực."
+    },
+    {
+     "w": "負荷",
+     "kana": "ふか",
+     "romaji": "fuka",
+     "vi": "tải công việc/tải xử lý",
+     "ex": "照合の負荷を測ります。",
+     "exVi": "Tôi đo tải đối chiếu."
+    },
+    {
+     "w": "代行",
+     "kana": "だいこう",
+     "romaji": "daikoo",
+     "vi": "thực hiện thay",
+     "ex": "休む日の代行者を決めます。",
+     "exVi": "Tôi chốt người làm thay khi nghỉ."
+    },
+    {
+     "w": "責任範囲",
+     "kana": "せきにんはんい",
+     "romaji": "sekinin han'i",
+     "vi": "phạm vi chịu trách nhiệm",
+     "ex": "責任範囲を口頭だけにしません。",
+     "exVi": "Tôi không để phạm vi trách nhiệm chỉ bằng lời."
+    },
+    {
+     "w": "見通し",
+     "kana": "みとおし",
+     "romaji": "mitooshi",
+     "vi": "dự kiến triển vọng có căn cứ",
+     "ex": "開始の見通しを伝えます。",
+     "exVi": "Tôi báo triển vọng bắt đầu."
+    },
+    {
+     "w": "整合性",
+     "kana": "せいごうせい",
+     "romaji": "seigoosei",
+     "vi": "tính ăn khớp giữa các thông tin",
+     "ex": "表と本文の整合性を調べます。",
+     "exVi": "Tôi kiểm độ khớp bảng với nội dung."
+    },
+    {
+     "w": "過大評価",
+     "kana": "かだいひょうか",
+     "romaji": "kadai hyooka",
+     "vi": "đánh giá cao quá mức căn cứ",
+     "ex": "一週の結果を過大評価しません。",
+     "exVi": "Tôi không đánh giá quá cao kết quả một tuần."
+    },
+    {
+     "w": "改善余地",
+     "kana": "かいぜんよち",
+     "romaji": "kaizen yochi",
+     "vi": "khả năng/phần còn có thể cải thiện",
+     "ex": "旧方式にも改善余地があります。",
+     "exVi": "Cách cũ cũng còn chỗ cải thiện."
+    },
+    {
+     "w": "議事録",
+     "kana": "ぎじろく",
+     "romaji": "gijiroku",
+     "vi": "biên bản họp",
+     "ex": "議事録に採用条件を残します。",
+     "exVi": "Tôi giữ điều kiện chọn trong biên bản."
+    },
+    {
+     "w": "採否",
+     "kana": "さいひ",
+     "romaji": "saihi",
+     "vi": "việc nhận hay bác một đề xuất",
+     "ex": "採否は確認後に決めます。",
+     "exVi": "Chúng tôi quyết nhận/bác sau kiểm."
+    },
+    {
+     "w": "再検討",
+     "kana": "さいけんとう",
+     "romaji": "saikentoo",
+     "vi": "xét lại",
+     "ex": "負荷が増えれば再検討します。",
+     "exVi": "Tải tăng thì xét lại."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Ôn AもののB thừa nhận A nhưng giữ B trái kỳ vọng; に伴って nêu thay đổi đi cùng, chưa tự chứng minh quan hệ nhân quả. にとって đặt tiêu chí đánh giá theo chủ thể. とは限らない và わけではない giới hạn suy rộng, không phủ định mọi kết quả. Kết hợp にかかわらず cho điều kiện nhận, に応じて cho hỗ trợ và にわたって cho phạm vi thử. Khi đọc họp, phải ghi phần đồng ý, điều bảo lưu và điều kiện chấp nhận, không chỉ chọn phe.</p>",
+   "table": [
+    [
+     "Quan hệ ôn",
+     "Câu có phạm vi"
+    ],
+    [
+     "Thừa nhận và giới hạn",
+     "利用は増えたものの原因は未確認"
+    ],
+    [
+     "Biến đổi đi cùng",
+     "経路の増加に伴って照合も増える"
+    ],
+    [
+     "Lập trường",
+     "利用者にとって選択肢は重要"
+    ],
+    [
+     "Không suy mọi trường hợp",
+     "選択肢が多ければ使いやすいとは限らない"
+    ],
+    [
+     "Quyết định có điều kiện",
+     "担当の承諾を条件に試行する"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "実人数は 増えたものの、因果関係は 未確認です。",
+     "vi": "Người thực tăng nhưng nguyên nhân chưa kiểm."
+    },
+    {
+     "t": "経路が 増えるに伴って、照合の 負荷も 変わります。",
+     "vi": "Kênh tăng thì tải đối chiếu cũng biến đổi."
+    },
+    {
+     "t": "利用者にとって 選べることは 大切です。",
+     "vi": "Đối với người dùng, được chọn là quan trọng."
+    },
+    {
+     "t": "一律にすれば 公平になるとは 限りません。",
+     "vi": "Đồng loạt chưa chắc tạo công bằng."
+    },
+    {
+     "t": "担当の 承諾を 条件に、二週間 試す案です。",
+     "vi": "Đề xuất thử hai tuần với điều kiện người phụ trách nhận việc."
+    }
+   ],
+   "tips": [
+    "<p>に伴って không tự đủ để kết luận “chỉ vì”; tìm yếu tố khác và cách kiểm.</p>",
+    "<p>Giữ điều bảo lưu không đồng nghĩa bác cả đề xuất; nêu phần đồng ý trước.</p>",
+    "<p>Tạm chọn một cách không nghĩa mọi cách khác không còn giá trị; đặt điều kiện xét lại rõ.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Cuộc họp so hai phương án cùng mục tiêu, tranh luận số liệu và điều kiện thực thi trước khi chọn tạm.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "公開相談日の拡大案を審議します。甲案は新用紙へ一斉に切り替える方法、乙案は二週間だけ旧用紙も受け取る方法です。",
+     "vi": "Ta bàn mở rộng ngày tư vấn công khai. A chuyển một lượt mẫu mới, B nhận cả mẫu cũ chỉ hai tuần."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "甲案なら照合する表は一つで済みます。担当が少ない今は、運用を単純にする利点を優先したいです。",
+     "vi": "A chỉ đối chiếu một bảng. Khi ít người, tôi muốn ưu tiên vận hành đơn giản."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "その利点は認めますが、端末を使う経験にかかわらず受け付けるという方針とは整合していますか。",
+     "vi": "Tôi nhận ưu điểm, nhưng có khớp chủ trương nhận bất kể kinh nghiệm thiết bị không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "紙でも新用紙へ書き直せます。ただし入口での説明は増えるかもしれず、一斉切替なら負担が消えるとは言えません。",
+     "vi": "Có thể viết giấy sang mẫu mới. Nhưng giải thích cửa có thể tăng, không thể nói chuyển một lượt xóa tải."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "乙案は利用者の都合に応じて選べますが、経路の増加に伴って同じ人を二回数える危険が出ます。",
+     "vi": "B cho chọn theo hoàn cảnh nhưng thêm kênh kèm nguy cơ đếm lặp."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "そこで共通番号を使い、確認事項は共通にします。方法が二つでも、本人の意思と内容の確認は省きません。",
+     "vi": "Vì vậy dùng mã chung, mục kiểm chung. Hai cách vẫn không bỏ nguyện vọng và nội dung."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "試行の資料では、旧期間三十人、新期間四十五人でした。満足は回答者の七十五パーセントから八十パーセントです。",
+     "vi": "Tư liệu thử cũ30, mới45 người. Hài lòng trong người trả lời từ75 lên80%."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "利用は増えたものの、旧は三十人中二十四人、新は四十五人中三十人が回答しています。回答率の違いも示してください。",
+     "vi": "Dùng tăng nhưng cũ24/30 trả lời, mới30/45. Xin nêu cả khác tỷ lệ trả lời."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "では、乙案が原因で利用が五割増えたと結論するのは早いですね。告知や参加者の構成も違う可能性があります。",
+     "vi": "Vậy kết luận do B tăng dùng50% còn sớm. Thông báo, cơ cấu người cũng có thể khác."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。一方で、データが不完全だから何も決めないのではなく、条件付きの小さな試行を選ぶことはできます。",
+     "vi": "Vâng. Nhưng dữ liệu chưa hoàn hảo không nghĩa không quyết gì; vẫn có thể chọn thử nhỏ có điều kiện."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "乙案を二週間試すなら、誰が例外を判断し、休む日の代行は誰かを開始前に決める必要があります。",
+     "vi": "Nếu thử B hai tuần, trước bắt đầu cần rõ ai xét ngoại lệ, ai thay lúc nghỉ."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "その承諾が得られるまでは開始日を未定にします。責任範囲を議事録に残し、照合の遅れが出れば再検討します。担当が代わっても根拠を追える形にします。",
+     "vi": "Chưa được nhận việc thì ngày chưa chốt. Ghi phạm vi trách nhiệm, đối chiếu trễ thì xem lại. Bản ghi sẽ cho phép người thay cũng lần lại căn cứ."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "甲案を完全に捨てるのではなく、乙案の負荷が高すぎる場合の比較対象として残すのはどうでしょう。",
+     "vi": "Thay vì bỏ hẳn A, giữ để so nếu tải B quá cao được không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "賛成です。採否を永久の評価にせず、目的、記録、条件に照らして見直せる暫定案としてまとめましょう。",
+     "vi": "Tôi đồng ý. Đừng coi nhận/bác là đánh giá mãi, hãy tổng hợp thành phương án tạm có thể xem lại theo mục đích, ghi nhận, điều kiện."
+    }
+   ],
+   "qs": [
+    {
+     "q": "甲案の利点と限界は何ですか。",
+     "o": [
+      "旧用紙を無期限に使う",
+      "表が一つになるが入口の説明負担は残り得る",
+      "全員の負担が必ず消える"
+     ],
+     "a": 1,
+     "e": "A đơn giản bản ghi nhưng chưa chứng minh mọi tải biến mất; có thể chuyển vào giải thích."
+    },
+    {
+     "q": "乙案で共通に残すものは何ですか。",
+     "o": [
+      "本人の意思と内容の確認",
+      "全員が同じ端末を使うこと",
+      "全員に同じ時間の説明"
+     ],
+     "a": 0,
+     "e": "Phương tiện hai cách nhưng hai mục kiểm vẫn chung."
+    },
+    {
+     "q": "データの比較に必要な補足は何ですか。",
+     "o": [
+      "用紙の色だけ",
+      "担当者の好み",
+      "回答率と対象の違い"
+     ],
+     "a": 2,
+     "e": "24/30 và30/45 khác tỷ lệ trả lời, không thể chỉ nêu hài lòng75/80."
+    },
+    {
+     "q": "乙案の開始前に残る条件は何ですか。",
+     "o": [
+      "甲案の記録を捨てること",
+      "例外判断と代行を含む担当者の承諾",
+      "全ての利用者を同時に呼ぶこと"
+     ],
+     "a": 1,
+     "e": "Điều kiện vận hành là người chịu trách nhiệm thực nhận, cả ngoại lệ/nghỉ."
+    },
+    {
+     "q": "甲案を残す理由は何ですか。",
+     "o": [
+      "負荷に応じて再比較できるようにする",
+      "採用案に一切反対する",
+      "二案を必ず永久に同時運用する"
+     ],
+     "a": 0,
+     "e": "Quyết định tạm được xem lại, giữ A làm đối chiếu không đồng nghĩa dùng vô hạn."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "架空の学習支援室の運営委員会は、公開相談日の拡大にあたって受付方法を審議した。目的は利用経験の有無にかかわらず相談を受け入れることであり、申込件数を大きく見せることではない。甲案は開始日に新用紙へ一斉に切り替える方法、乙案は二週間に限って旧用紙も受け取る方法である。どちらも同じ目的を掲げているが、負荷が生じる場所と、利用者が質問できる機会に違いがある。\n\n甲案の提案者は、表を一つにすることで担当交代時の照合を減らせると説明した。例外を少なくすれば、担当者の裁量が広がりすぎることも防ぎやすい。一方、既存利用者が旧用紙を持って来た場合、その場で書き直してもらう必要がある。端末を使う経験がなくても紙で書けるものの、書き直しの意味を説明する時間は増えるかもしれない。記録の表が一つであることと、運用の全てが単純であることは同じではない。\n\n乙案の提案者は、利用者の都合に応じて経路を選べることを評価した。利用者にとって、前の用紙を無駄にしないことや、説明を聞く時間を選べることには意味がある。ただし、二つの経路に同じ申込みが届く可能性があり、共通番号で照合する手順が必要になる。経路が増えるに伴って照合作業も増えるが、それだけで乙案が悪いとは決まらない。どの負荷なら引き受けられ、どの状態なら見直すかを先に決めるという考え方である。\n\n判断材料として、以前の小規模な試行の数字が示された。旧期間の実人数は三十人、新期間は四十五人で、旧を基準にすれば五十パーセントの増加である。満足と答えたのは、旧が回答者二十四人のうち十八人、新が三十人のうち二十四人だった。回答者に占める割合は七十五パーセントから八十パーセントへ上がっている。しかし、回答率は二十四を三十で割った八十パーセントと、三十を四十五で割った約六十六・七パーセントで異なる。未回答の理由は調べていなかった。\n\n委員の一人は、乙案のおかげで利用と満足の両方が改善したと述べた。議長は、改善したように見える点は認めたものの、原因を一つに絞るのは早いと指摘した。二つの期間では告知の量と担当者の配置も違っていたからである。未回答者が全員不満だとも、全員満足だとも言えない。報告では観察した増加を残しつつ、因果関係は未確認とすることになった。肯定的な結果を消すのではなく、その結果から言える範囲を守るための留保である。\n\n審議の結果、乙案を二週間だけ試す暫定案が選ばれた。ただし、例外を判断する人、休む場合の代行、記録を確認する人がそれぞれ引受を承諾することを開始条件とした。依頼した人の名前を表に入れるだけでは足りない。本人の意思確認と内容の確認は両経路で共通に残し、変更した手順には理由を書く。新しい経路を用意することが、その経路を希望する全員に支援を提供できることを保証しない点も、議事録に明記した。\n\n試行中には受付件数だけでなく、書き直し、照合、説明、引き継ぎに使った時間を記録する。照合待ちが次の相談を妨げる場合は拡大を止め、甲案との再比較を行う。反対意見を提出した人にも、記録を見て再検討に参加してもらう。採用されなかった案を単に失敗案として扱えば、後で条件が変わったときに判断材料を失うからである。採否は目的と条件に結びついたものであり、提案者の能力に対する永久の評価ではない。\n\n最後に委員会は、利用者の選択と担当者の継続性を共通の優先事項とした。選択肢が多ければ使いやすいとは限らず、手順が少なければ負荷も小さいとは限らない。だからこそ、共通の確認、個別の調整、検証できる記録を組み合わせる。暫定の判断を行うことは、根拠を軽く扱うことではない。現時点の材料で実行可能な範囲を決め、その判断を変える条件を同時に示すことで、決められないまま待ち続けることと、性急に固定することの両方を避けようとしたのである。",
+   "vi": "Ủy ban phòng hỗ trợ giả bàn cách tiếp nhận khi mở rộng ngày tư vấn. Mục đích nhận không phân biệt kinh nghiệm, không phải làm đẹp số đăng ký. A chuyển mẫu mới một lượt, B nhận cả cũ giới hạn hai tuần. Chung mục tiêu nhưng khác nơi tải phát sinh và cơ hội hỏi.\n\nNgười đề xuất A nói một bảng giảm đối chiếu lúc bàn giao, ít ngoại lệ hạn chế tự quyết quá rộng. Nhưng người cũ mang giấy cũ phải viết lại tại chỗ. Không biết thiết bị vẫn viết giấy được, song cần thêm giờ giải thích vì sao viết lại. Một bảng không nghĩa toàn vận hành đơn giản.\n\nB coi trọng chọn kênh theo hoàn cảnh: không phí giấy cũ, chọn giờ nghe giải thích. Nhưng cùng đăng ký có thể đến hai kênh, cần mã chung. Kênh tăng kèm đối chiếu tăng chưa đủ nói B kém; cần rõ tải nhận được và trạng thái phải xét lại.\n\nDữ liệu thử nhỏ: người thực30 lên45, tăng50% so cũ. Hài lòng cũ18/24 người trả lời=75%, mới24/30=80%. Nhưng tỷ lệ trả lời24/30=80%,30/45≈66,7%; chưa biết lý do thiếu phản hồi.\n\nMột ủy viên nói nhờ B mà lượng và hài lòng cùng tốt. Chủ tọa nhận điểm nhìn có cải thiện nhưng quá sớm quy một nguyên nhân vì lượng báo và phân người cũng khác. Không thể gán mọi người thiếu phản hồi đều bất mãn/hài lòng. Giữ tăng quan sát, nguyên nhân chưa kiểm: bảo lưu phạm vi, không xóa kết quả tích cực.\n\nKết quả chọn B thử hai tuần, có điều kiện người xét ngoại lệ, thay lúc nghỉ, kiểm ghi nhận đều nhận việc. Ghi tên người nhờ chưa đủ. Hai kênh giữ kiểm ý định/nội dung, đổi trình tự ghi lý do. Biên bản nói rõ tạo kênh không bảo đảm hỗ trợ mọi người muốn kênh ấy.\n\nTrong thử ghi cả giờ viết lại, đối chiếu, giải thích, bàn giao. Chờ đối chiếu cản tư vấn sau thì dừng tăng, so A lại. Mời người từng phản đối cùng xem dữ liệu. Gọi phương án chưa chọn là thất bại sẽ mất căn cứ khi điều kiện đổi. Nhận/bác gắn mục tiêu và điều kiện, không đánh giá vĩnh viễn năng lực người đề xuất.\n\nCuối cùng lấy lựa chọn người dùng và duy trì của người trực làm ưu tiên chung. Nhiều lựa chọn chưa chắc dễ dùng, ít bước chưa chắc ít tải. Cần ghép xác nhận chung, chỉnh riêng và bản ghi kiểm được. Quyết tạm không nghĩa coi nhẹ căn cứ; xác định phạm vi làm được hiện tại cùng điều kiện đổi quyết định để tránh chờ mãi hoặc cố định vội.",
+   "gloss": [
+    {
+     "w": "審議",
+     "kana": "しんぎ",
+     "romaji": "shingi",
+     "vi": "bàn xét một đề xuất"
+    },
+    {
+     "w": "反対意見",
+     "kana": "はんたいいけん",
+     "romaji": "hantai iken",
+     "vi": "ý kiến phản đối"
+    },
+    {
+     "w": "留保",
+     "kana": "りゅうほ",
+     "romaji": "ryuuho",
+     "vi": "điều bảo lưu/chưa chấp thuận"
+    },
+    {
+     "w": "暫定",
+     "kana": "ざんてい",
+     "romaji": "zantei",
+     "vi": "tạm thời chưa cuối cùng"
+    },
+    {
+     "w": "判断材料",
+     "kana": "はんだんざいりょう",
+     "romaji": "handan zairyoo",
+     "vi": "thông tin làm căn cứ đánh giá"
+    },
+    {
+     "w": "負荷",
+     "kana": "ふか",
+     "romaji": "fuka",
+     "vi": "tải công việc/tải xử lý"
+    }
+   ],
+   "qs": [
+    {
+     "q": "委員会の共通目的は何ですか。",
+     "o": [
+      "旧用紙を永久に保つ",
+      "経験によらず相談できるようにする",
+      "件数を大きく見せる"
+     ],
+     "a": 1,
+     "e": "Mục đích tiếp cận được tách khỏi chỉ số lượng và phương tiện riêng."
+    },
+    {
+     "q": "甲案について適切な留保はどれですか。",
+     "o": [
+      "表は一つでも書き直し説明の負担はあり得る",
+      "全ての負担が必ず消える",
+      "端末利用者だけを必ず受け入れる"
+     ],
+     "a": 0,
+     "e": "A có lợi bản ghi nhưng tải có thể đổi sang giải thích tại cửa."
+    },
+    {
+     "q": "新期間の満足八割は誰の割合ですか。",
+     "o": [
+      "利用した四十五人全員のうち",
+      "担当者全員のうち",
+      "回答した三十人のうち二十四人"
+     ],
+     "a": 2,
+     "e": "Mẫu số hài lòng mới30 người trả lời, không45 người dùng."
+    },
+    {
+     "q": "因果を未確認とした理由は何ですか。",
+     "o": [
+      "全員が不満と分かった",
+      "告知や配置など他の条件も異なっていた",
+      "人数が増えた事実も一切ない"
+     ],
+     "a": 1,
+     "e": "Quan sát tăng có thật nhưng không quy riêng B khi yếu tố khác thay."
+    },
+    {
+     "q": "乙案の開始条件は何ですか。",
+     "o": [
+      "必要な役割の担当者が引受を承諾する",
+      "名前だけ予定表に入れる",
+      "全ての反対意見を消す"
+     ],
+     "a": 0,
+     "e": "Cần chấp nhận trách nhiệm thực, không dựa vào bảng tên hay im lặng."
+    },
+    {
+     "q": "採用されなかった甲案を残す理由は何ですか。",
+     "o": [
+      "永久に二案を同時使用するため",
+      "提案者を評価し続けるため",
+      "条件が変われば再比較する材料になる"
+     ],
+     "a": 2,
+     "e": "Không chọn hiện tại khác thất bại mãi; giữ phương án để xét lại theo điều kiện."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Tóm tắt lựa chọn B có điều kiện, nhận lợi ích A và nêu số liệu không quá căn cứ.",
+     "model": "甲案には表を一つにできる利点がありますが、入口での説明負担まで消えるとは限りません。乙案は二週間だけ旧用紙も受け取り、共通番号と確認事項を使う案です。旧三十人から新四十五人への増加は五割ですが、回答率が違い、原因は未確認です。例外判断、代行、記録確認の担当が承諾することを開始条件とし、照合待ちが次の利用を妨げれば甲案と再比較する形を提案します。",
+     "vi": "A có lợi một bảng nhưng chưa chắc xóa tải giải thích cửa. B nhận cả mẫu cũ hai tuần với mã và mục kiểm chung.30 lên45 tăng50% nhưng tỷ lệ trả lời khác, nguyên nhân chưa kiểm. Đề xuất bắt đầu khi người xét ngoại lệ/thay/kiểm nhận việc, đối chiếu cản người sau thì so A lại.",
+     "tips": "Mẫu tóm không biến số liệu ủng hộ thành bằng chứng B gây tăng; giữ cơ sở xét lại."
+    },
+    {
+     "p": "Bạn phản đối B vì thêm việc, nhưng cần phản hồi hợp tác. Thừa nhận mục tiêu rồi đề nghị tiêu chí đo cụ thể và người thay.",
+     "model": "選べる経路を残す目的には賛成です。ただ、経路の増加に伴う照合の負荷を過小評価したくありません。二週間の試行を行うなら、受付前の準備と担当交代の時間も記録し、休む場合の代行を先に決めませんか。負荷が次の相談を妨げるときには拡大を中断する、と議事録に残せれば、条件付きの試行として検討できます。",
+     "vi": "Tôi đồng ý giữ kênh chọn nhưng không muốn đánh giá thấp tải đối chiếu đi cùng. Nếu thử hai tuần, ta ghi chuẩn bị trước nhận, giờ đổi người và chốt người thay trước nhé? Ghi điều kiện dừng tăng nếu tải cản tư vấn sau thì tôi có thể xem thử có điều kiện.",
+     "tips": "Phản đối một điểm chưa nghĩa chống mục tiêu chung; đưa điều kiện có thể kiểm thay vì bác toàn bộ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết kiến nghị 300–390 chữ Nhật: so A/B có hai mặt; số liệu30→45 tăng50%, hài lòng18/24 và24/30 nhưng phản hồi khác; đề xuất thử B hai tuần có người nhận trách nhiệm và tiêu chí so lại A.",
+   "model": "甲案は記録を一つにできるものの、旧用紙を書き直す説明の負担は残り得る。乙案は利用者の都合に応じて経路を選べる一方、照合の負荷が増えるため、どちらも無条件に優れているとは言えない。実人数は三十人から四十五人へ五割増え、回答者の満足割合は二十四人中十八人の七十五パーセントと、新期間三十人中二十四人の八十パーセントだった。ただし回答率と告知条件が異なり、因果関係は未確認である。現時点では乙案を二週間だけ試す暫定案を提案する。本人の意思と内容の確認は共通に残し、例外判断、代行、記録確認の担当が承諾してから開始する。準備、書き直し、照合、引き継ぎの時間を測り、待ちが次の相談を妨げる場合は拡大を止め、甲案と再比較したい。",
+   "modelVi": "A một bảng nhưng tải giải thích viết lại có thể còn. B cho chọn theo hoàn cảnh nhưng tăng đối chiếu, nên không cách nào tốt vô điều kiện. Người30 lên45 tăng50%; hài lòng cũ18/24=75%, mới24/30=80%. Tuy nhiên tỷ lệ phản hồi và điều kiện báo khác, nguyên nhân chưa kiểm. Đề xuất tạm thử B hai tuần, giữ kiểm ý định/nội dung, bắt đầu sau người xét ngoại lệ/thay/kiểm nhận việc. Đo chuẩn bị, viết lại, đối chiếu, bàn giao; nếu chờ cản tư vấn sau thì dừng tăng, so A lại.",
+   "min": 300,
+   "tips": [
+    "Viết rõ tập người trả lời trước số người hài lòng, rồi kiểm tỷ lệ75% và80% trên đúng mẫu số.",
+    "Giữ kiến nghị tạm cùng điều kiện xét lại, không biến chọn B thành đánh giá vĩnh viễn về A."
+   ],
+   "checklist": [
+    "Hai mặt mỗi phương án.",
+    "Tỷ lệ và mẫu số đúng.",
+    "Không gán nhân quả chưa kiểm.",
+    "Hai tuần, trách nhiệm nhận và tiêu chí xét lại A."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “審議” nghĩa là gì?",
+   "o": [
+    "thứ tự ưu tiên",
+    "bàn xét một đề xuất",
+    "có kèm điều kiện"
+   ],
+   "a": 1,
+   "e": "二つの案を審議します。 → Chúng tôi bàn xét hai đề xuất. Từ cần nhận diện là “審議”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “論点” nghĩa là gì?",
+   "o": [
+    "điểm cần tranh luận",
+    "tạm thời chưa cuối cùng",
+    "khả năng thực hiện thực tế"
+   ],
+   "a": 0,
+   "e": "論点を費用だけに絞りません。 → Tôi không giới hạn luận điểm chỉ chi phí. Từ cần nhận diện là “論点”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “反対意見” nghĩa là gì?",
+   "o": [
+    "phương án thực hiện",
+    "tải công việc/tải xử lý",
+    "ý kiến phản đối"
+   ],
+   "a": 2,
+   "e": "反対意見の根拠も残します。 → Tôi giữ cả căn cứ ý phản đối. Từ cần nhận diện là “反対意見”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “留保” nghĩa là gì?",
+   "o": [
+    "thực hiện thay",
+    "điều bảo lưu/chưa chấp thuận",
+    "thông tin làm căn cứ đánh giá"
+   ],
+   "a": 1,
+   "e": "長期の評価には留保があります。 → Đánh giá dài hạn còn bảo lưu. Từ cần nhận diện là “留保”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền nhượng bộ: 利用は増えた___、原因は未確認です。",
+   "a": "ものの",
+   "e": "ものの thừa nhận tăng rồi giới hạn kết luận nguyên nhân, không phủ nhận số tăng."
+  },
+  {
+   "t": "fill",
+   "q": "Điền biến đổi đi cùng: 経路の増加に___、照合の負荷も増えます。",
+   "a": "伴って",
+   "e": "に伴って diễn đạt tăng cùng quá trình, nhưng vẫn cần kiểm nếu quy nguyên nhân duy nhất."
+  },
+  {
+   "t": "fill",
+   "q": "Điền giới hạn: 一律なら公平になるとは___。",
+   "a": "限りません",
+   "e": "とは限らない bác tính tất yếu, không có nghĩa mọi cách đồng loạt đều không công bằng."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu thử có người đồng ý nhận việc.",
+   "w": [
+    "試行します。",
+    "担当の承諾を条件に",
+    "二週間だけ"
+   ],
+   "a": "担当の承諾を条件に二週間だけ試行します。",
+   "e": "Nêu điều kiện nhận trách nhiệm và thời hạn thử, không nói áp dụng chính thức vô hạn."
+  },
+  {
+   "q": "増加率は何ですか。",
+   "o": [
+    "十五パーセント",
+    "五十パーセント",
+    "百五十パーセント"
+   ],
+   "a": 1,
+   "e": "Chênh15 chia mốc30 là50%, không nhầm quy mô150% với tăng.",
+   "t": "listen",
+   "say": "旧期間三十人、新期間四十五人です。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "現状に合うものはどれですか。",
+   "o": [
+    "案は選んだが開始条件は未達",
+    "開始は必ず明日",
+    "全ての案を永久に却下"
+   ],
+   "a": 0,
+   "e": "Chọn phương án và đủ điều kiện bắt đầu là hai bước khác; nguồn lực chưa nhận nên ngày còn mở.",
+   "t": "listen",
+   "say": "試行案を採用しましたが、担当の承諾がまだなので開始日は未定です。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "採否は 目的と 条件に 照らして 見直します。",
+   "a": "採否は 目的と 条件に 照らして 見直します。",
+   "lang": "ja-JP",
+   "e": "採否 là nhận hay bác, 見直す cho phép xem lại khi mục tiêu/điều kiện thay đổi; không đánh giá người đề xuất vĩnh viễn."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "条件付き",
+     "có kèm điều kiện"
+    ],
+    [
+     "暫定",
+     "tạm thời chưa cuối cùng"
+    ],
+    [
+     "実施案",
+     "phương án thực hiện"
+    ],
+    [
+     "判断材料",
+     "thông tin làm căn cứ đánh giá"
+    ],
+    [
+     "優先順位",
+     "thứ tự ưu tiên"
+    ]
+   ],
+   "e": "審議 là bàn xét, 論点 là điểm tranh luận, 反対意見 là lập luận phản đối, 留保 là phần bảo lưu, 条件付き là mức chấp nhận có điều kiện; không đồng nhất mọi bất đồng với bác bỏ toàn bộ."
+  },
+  {
+   "q": "委員会の共通目的は何ですか。",
+   "o": [
+    "旧用紙を永久に保つ",
+    "経験によらず相談できるようにする",
+    "件数を大きく見せる"
+   ],
+   "a": 1,
+   "e": "Mục đích tiếp cận được tách khỏi chỉ số lượng và phương tiện riêng.",
+   "t": "mc"
+  },
+  {
+   "q": "甲案について適切な留保はどれですか。",
+   "o": [
+    "端末利用者だけを必ず受け入れる",
+    "表は一つでも書き直し説明の負担はあり得る",
+    "全ての負担が必ず消える"
+   ],
+   "a": 1,
+   "e": "A có lợi bản ghi nhưng tải có thể đổi sang giải thích tại cửa.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Chuẩn bị hai phiếu A/B, bảng30/24/18 và45/30/24 cùng thẻ người nhận ngoại lệ, thay ca, kiểm ghi nhận chưa trả lời.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Nhận vai A/B/chủ tọa, xác định mục tiêu chung và điểm phải đánh giá thay vì lập phe từ đầu."
+   },
+   {
+    "t": "30'",
+    "do": "Ôn nhượng bộ, biến đổi đồng thời, lập trường và giới hạn qua hai mặt của từng phương án; kiểm số tăng50%."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe cuộc họp, ghi điểm được chấp nhận, phần bảo lưu và điều kiện chọn tạm ở từng lượt."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc biên bản phân tích, tính hai tỷ lệ hài lòng cùng phản hồi rồi chỉ vì sao nhân quả vẫn chưa xác định."
+   },
+   {
+    "t": "30'",
+    "do": "Trình bày kiến nghị hợp tác, viết 300–390 chữ và đối chiếu mọi điều kiện trách nhiệm với phiếu nguồn."
+   },
+   {
+    "t": "30'",
+    "do": "Họp bỏ phiếu có điều kiện theo dữ liệu tải mới, làm nghe-chính tả và sửa biên bản biến ý kiến thành đánh giá người."
+   }
+  ],
+  "games": [
+   "Thẻ điều kiện đổi sau khi đã chọn, nhóm phải giải thích giữ hay đổi quyết định bằng căn cứ thay vì bảo vệ phe.",
+   "Mỗi vai tóm tắt đúng một lợi ích của phương án đối lập trước khi đề xuất giới hạn của mình."
+  ],
+  "errors": [
+   "Dùng おかげで quy nguyên nhân từ trước-sau chưa kiểm: giữ tăng là quan sát và nguyên nhân là giả thuyết.",
+   "Coi A một bảng nghĩa không có tải: ghi thêm giải thích cửa.",
+   "Chọn B rồi ghi áp dụng vĩnh viễn: giữ hai tuần và điều kiện xét lại.",
+   "Hiểu bảo lưu là phủ nhận toàn bộ: tách phần đồng ý và điểm chưa đủ căn cứ."
+  ],
+  "homework": "Tạo hai phương án giả cùng mục tiêu có tải khác nhau, một bảng số nhỏ và ba điều kiện thực thi; viết biên bản chọn tạm cùng tiêu chí đổi quyết định."
+ }
+}

@@ -1,0 +1,748 @@
+{
+ "no": 14,
+ "title": "Đổi món giao sai – Trình bày bằng chứng và xác nhận cách xử lý",
+ "sub": "订单与实物不一样 · 把大号换成小号",
+ "goals": [
+  "So sánh đơn đặt với hàng nhận bằng thông tin cụ thể.",
+  "Dùng 被 để báo sự việc và 把 để nêu cách xử lý có kết quả.",
+  "Phân biệt điều quan sát được với nguyên nhân chưa xác minh.",
+  "Viết yêu cầu đổi hàng rõ món, số lượng, bằng chứng và câu hỏi phí gửi."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Quy trình của cửa hàng giả Diệp Hòa",
+   "html": "<p>Trong bài, cửa hàng tự đặt yêu cầu khách gửi ảnh nhãn cỡ cùng đơn, sau đó mới xác nhận đổi chiếc sai. Đây là quy trình của câu chuyện, không phải quyền lợi pháp lý hoặc chính sách áp dụng cho cửa hàng thật. Khách nên nêu điều nhìn thấy trước: đơn là hai áo cỡ nhỏ, nhận một nhỏ và một lớn. Nguyên nhân giao sai chỉ được chốt sau khi đối chiếu.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "chǔlǐ, chǐmǎ và số lượng cần đổi",
+   "html": "<p>Đọc rõ vật cần đổi và vật được giữ. Câu giao dịch có nhiều danh từ nên hãy ngắt ở ranh giới thông tin thay vì đọc từng chữ rời.</p>",
+   "items": [
+    {
+     "sym": "chǐ / chǔ",
+     "ex": [
+      "尺码",
+      "处理"
+     ],
+     "vi": "尺 chǐ thanh ba trong cỡ; 处 chǔ thanh ba trong xử lý. Âm sau ch khác nhau, không lấy một âm Hán Việt thay cả hai."
+    },
+    {
+     "sym": "jìhuí",
+     "ex": [
+      "寄回",
+      "把大号寄回"
+     ],
+     "vi": "寄 jì thanh bốn, 回 huí thanh hai. 回 cho biết hướng gửi trở lại; nếu bỏ nó, người nghe chưa chắc biết gửi đi đâu."
+    },
+    {
+     "sym": "yí jiàn / liǎng jiàn",
+     "ex": [
+      "换一件",
+      "保留一件",
+      "订了两件"
+     ],
+     "vi": "件 jiàn là lượng từ áo. Nhấn số lượng theo phần được đổi hoặc giữ, tránh nhắc hai chiếc ở đầu rồi khiến người nghe gửi cả hai về."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm từ dùng trong tình huống",
+   "items": [
+    {
+     "w": "订单",
+     "py": "dìngdān",
+     "hv": "đính đơn",
+     "vi": "đơn đặt hàng",
+     "ex": "订单上是两件小号。",
+     "exPy": "Dìngdān shàng shì liǎng jiàn xiǎohào.",
+     "exVi": "Đơn ghi hai chiếc cỡ nhỏ."
+    },
+    {
+     "w": "尺码",
+     "py": "chǐmǎ",
+     "hv": "xích mã",
+     "vi": "cỡ quần áo",
+     "ex": "收到的尺码不一样。",
+     "exPy": "Shōudào de chǐmǎ bù yíyàng.",
+     "exVi": "Cỡ nhận được không giống nhau."
+    },
+    {
+     "w": "收据",
+     "py": "shōujù",
+     "hv": "",
+     "vi": "biên nhận",
+     "ex": "我保留了收据。",
+     "exPy": "Wǒ bǎoliú le shōujù.",
+     "exVi": "Tôi đã giữ biên nhận."
+    },
+    {
+     "w": "包装",
+     "py": "bāozhuāng",
+     "hv": "bao trang",
+     "vi": "bao bì, đóng gói",
+     "ex": "包装还在。",
+     "exPy": "Bāozhuāng hái zài.",
+     "exVi": "Bao bì vẫn còn."
+    },
+    {
+     "w": "收到",
+     "py": "shōudào",
+     "hv": "thu đáo",
+     "vi": "nhận được",
+     "ex": "我今天收到衣服。",
+     "exPy": "Wǒ jīntiān shōudào yīfu.",
+     "exVi": "Hôm nay tôi nhận áo."
+    },
+    {
+     "w": "发错",
+     "py": "fā cuò",
+     "hv": "",
+     "vi": "gửi sai",
+     "ex": "店员确认发错了尺码。",
+     "exPy": "Diànyuán quèrèn fā cuò le chǐmǎ.",
+     "exVi": "Nhân viên xác nhận đã gửi sai cỡ."
+    },
+    {
+     "w": "退货",
+     "py": "tuìhuò",
+     "hv": "thoái hóa",
+     "vi": "trả hàng",
+     "ex": "我不是要全部退货。",
+     "exPy": "Wǒ bú shì yào quánbù tuìhuò.",
+     "exVi": "Tôi không muốn trả lại toàn bộ."
+    },
+    {
+     "w": "换货",
+     "py": "huànhuò",
+     "hv": "hoán hóa",
+     "vi": "đổi hàng",
+     "ex": "我想给这一件换货。",
+     "exPy": "Wǒ xiǎng gěi zhè yí jiàn huànhuò.",
+     "exVi": "Tôi muốn đổi chiếc này."
+    },
+    {
+     "w": "运费",
+     "py": "yùnfèi",
+     "hv": "vận phí",
+     "vi": "phí vận chuyển",
+     "ex": "寄回去的运费谁付？",
+     "exPy": "Jì huíqu de yùnfèi shéi fù?",
+     "exVi": "Ai trả phí gửi về?"
+    },
+    {
+     "w": "照片",
+     "py": "zhàopiàn",
+     "hv": "chiếu phiến",
+     "vi": "ảnh",
+     "ex": "照片能看清标签。",
+     "exPy": "Zhàopiàn néng kàn qīng biāoqiān.",
+     "exVi": "Ảnh có thể nhìn rõ nhãn."
+    },
+    {
+     "w": "原来",
+     "py": "yuánlái",
+     "hv": "nguyên lai",
+     "vi": "ban đầu; hóa ra",
+     "ex": "我原来订的是小号。",
+     "exPy": "Wǒ yuánlái dìng de shì xiǎohào.",
+     "exVi": "Ban đầu tôi đặt cỡ nhỏ."
+    },
+    {
+     "w": "保留",
+     "py": "bǎoliú",
+     "hv": "bảo lưu",
+     "vi": "giữ lại",
+     "ex": "合适的那件可以保留。",
+     "exPy": "Héshì de nà jiàn kěyǐ bǎoliú.",
+     "exVi": "Có thể giữ chiếc vừa."
+    },
+    {
+     "w": "处理",
+     "py": "chǔlǐ",
+     "hv": "xử lý",
+     "vi": "xử lý",
+     "ex": "请告诉我怎么处理。",
+     "exPy": "Qǐng gàosu wǒ zěnme chǔlǐ.",
+     "exVi": "Hãy cho tôi biết xử lý thế nào."
+    },
+    {
+     "w": "答复",
+     "py": "dáfù",
+     "hv": "đáp phúc",
+     "vi": "trả lời chính thức",
+     "ex": "我等你的答复再寄。",
+     "exPy": "Wǒ děng nǐ de dáfù zài jì.",
+     "exVi": "Tôi chờ bạn trả lời rồi gửi."
+    },
+    {
+     "w": "寄回",
+     "py": "jì huí",
+     "hv": "ký hồi",
+     "vi": "gửi trở lại",
+     "ex": "只把大号寄回。",
+     "exPy": "Zhǐ bǎ dàhào jì huí.",
+     "exVi": "Chỉ gửi chiếc cỡ lớn trở lại."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "被 + người/thao tác + kết quả sai",
+   "html": "<p>被 đặt sự việc chịu tác động làm chủ đề. Có thể nêu người gây ra khi đã biết, hoặc bỏ khi chưa rõ. Dùng 错 sau động từ để báo kết quả sai; không buộc phải thêm một người gây lỗi chưa có chứng cứ.</p>",
+   "ex": [
+    {
+     "t": "包裹被寄错地方了。",
+     "py": "Bāoguǒ bèi jì cuò dìfang le.",
+     "vi": "Bưu kiện bị gửi sai nơi."
+    },
+    {
+     "t": "订单上的尺码被看错了。",
+     "py": "Dìngdān shàng de chǐmǎ bèi kàn cuò le.",
+     "vi": "Cỡ ghi trên đơn bị đọc nhầm."
+    },
+    {
+     "t": "店员确认，有一件衣服被发错了。",
+     "py": "Diànyuán quèrèn, yǒu yí jiàn yīfu bèi fā cuò le.",
+     "vi": "Nhân viên xác nhận có một chiếc áo được gửi sai."
+    }
+   ],
+   "tips": [
+    "Chỉ dùng câu khẳng định lỗi sau khi đã có căn cứ; trước đó có thể nói 收到的和订单不一样."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "把 + vật + 寄回/换成 + kết quả",
+   "html": "<p>寄回 nêu gửi trở lại, 换成 nêu đổi thành loại hoặc cỡ nào. Trong một đơn có món đúng và sai, thêm 只 hoặc giữ riêng món phù hợp để không hiểu thành trả toàn bộ.</p>",
+   "ex": [
+    {
+     "t": "请只把大号的那件寄回。",
+     "py": "Qǐng zhǐ bǎ dàhào de nà jiàn jì huí.",
+     "vi": "Hãy chỉ gửi chiếc cỡ lớn về."
+    },
+    {
+     "t": "我想把大号换成小号。",
+     "py": "Wǒ xiǎng bǎ dàhào huàn chéng xiǎohào.",
+     "vi": "Tôi muốn đổi cỡ lớn thành cỡ nhỏ."
+    },
+    {
+     "t": "把照片发来以后，我们再确认。",
+     "py": "Bǎ zhàopiàn fā lái yǐhòu, wǒmen zài quèrèn.",
+     "vi": "Sau khi gửi ảnh tới, chúng tôi xác nhận thêm."
+    }
+   ],
+   "tips": [
+    "Đừng chỉ viết 换一下 mà thiếu món nào và đổi thành cỡ nào; người xử lý cần kết quả cụ thể."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Chỉ đổi chiếc sai cỡ",
+   "lang": "zh-CN",
+   "note": "An Hòa đặt hai áo cỡ nhỏ nhưng nhận một lớn, một nhỏ. Nghe rõ món giữ lại và món phải gửi về.",
+   "lines": [
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "你好，我订了两件小号衬衫，收到一大一小。",
+     "py": "Nǐ hǎo, wǒ dìng le liǎng jiàn xiǎohào chènshān, shōudào yí dà yì xiǎo.",
+     "vi": "Chào bạn, tôi đặt hai sơ mi cỡ nhỏ nhưng nhận một lớn và một nhỏ."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "请把订单和尺码标签的照片发来，我们先确认。",
+     "py": "Qǐng bǎ dìngdān hé chǐmǎ biāoqiān de zhàopiàn fā lái, wǒmen xiān quèrèn.",
+     "vi": "Bạn gửi ảnh đơn và nhãn cỡ tới, chúng tôi đối chiếu trước."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "已经发了，包装和收据我也保留着。",
+     "py": "Yǐjīng fā le, bāozhuāng hé shōujù wǒ yě bǎoliú zhe.",
+     "vi": "Tôi gửi rồi, bao bì và biên nhận tôi cũng giữ."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "看到了，确实有一件尺码发错了，不好意思。",
+     "py": "Kàn dào le, quèshí yǒu yí jiàn chǐmǎ fā cuò le, bù hǎoyìsi.",
+     "vi": "Tôi thấy rồi, đúng là một chiếc bị gửi sai cỡ, xin lỗi bạn."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "我不想全部退货，只想把大号换成小号。",
+     "py": "Wǒ bù xiǎng quánbù tuìhuò, zhǐ xiǎng bǎ dàhào huàn chéng xiǎohào.",
+     "vi": "Tôi không muốn trả toàn bộ, chỉ muốn đổi chiếc lớn thành nhỏ."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "可以，合适的那件请保留，只寄回大号。",
+     "py": "Kěyǐ, héshì de nà jiàn qǐng bǎoliú, zhǐ jì huí dàhào.",
+     "vi": "Được, bạn giữ chiếc vừa và chỉ gửi chiếc lớn về."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "寄回去的运费谁付？",
+     "py": "Jì huíqu de yùnfèi shéi fù?",
+     "vi": "Ai trả phí gửi về?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "按这次的处理方案，我们来付。请用确认单上的地址。",
+     "py": "Àn zhè cì de chǔlǐ fāng’àn, wǒmen lái fù. Qǐng yòng quèrèndān shàng de dìzhǐ.",
+     "vi": "Theo cách xử lý lần này, chúng tôi trả. Hãy dùng địa chỉ trên phiếu xác nhận."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "好，等收到你的书面答复，我再寄。",
+     "py": "Hǎo, děng shōudào nǐ de shūmiàn dáfù, wǒ zài jì.",
+     "vi": "Được, tôi nhận trả lời bằng văn bản của bạn rồi gửi."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "没问题，我现在写清数量、尺码和运费。",
+     "py": "Méi wèntí, wǒ xiànzài xiě qīng shùliàng, chǐmǎ hé yùnfèi.",
+     "vi": "Được, giờ tôi ghi rõ số lượng, cỡ và phí vận chuyển."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Đơn ban đầu là gì?",
+     "o": [
+      "Một áo lớn và một nhỏ",
+      "Hai áo cỡ nhỏ",
+      "Hai áo cỡ lớn"
+     ],
+     "a": 1,
+     "e": "Khách nêu 订了两件小号, khác hàng thực nhận."
+    },
+    {
+     "q": "Trước khi chốt lỗi, cửa hàng làm gì?",
+     "o": [
+      "Bảo khách gửi cả hai ngay",
+      "Từ chối xem thông tin",
+      "Xem ảnh đơn và nhãn"
+     ],
+     "a": 2,
+     "e": "Cửa hàng yêu cầu ảnh để 先确认 rồi mới xác nhận sai cỡ."
+    },
+    {
+     "q": "Chiếc nào cần gửi về?",
+     "o": [
+      "Chỉ chiếc lớn",
+      "Cả hai chiếc",
+      "Chỉ chiếc nhỏ"
+     ],
+     "a": 0,
+     "e": "Lượt sáu nêu 保留 chiếc vừa và 只寄回大号."
+    },
+    {
+     "q": "Ai trả phí theo phương án trong câu chuyện?",
+     "o": [
+      "Khách bắt buộc trả",
+      "Không ai vì không cần gửi",
+      "Cửa hàng"
+     ],
+     "a": 2,
+     "e": "Nhân viên nói 我们来付 cho trường hợp giả cụ thể này."
+    },
+    {
+     "q": "Khách chờ gì trước khi gửi?",
+     "o": [
+      "Lịch học của nhân viên",
+      "Trả lời bằng văn bản",
+      "Giá mới của tất cả áo"
+     ],
+     "a": 1,
+     "e": "Khách muốn có 书面答复 ghi rõ điều đã thống nhất."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc hiểu: Bản ghi tránh gửi nhầm lần nữa",
+   "text": "我在叶禾小店订了两件小号衬衫，收到以后发现一件大、一件小。我先把实际情况写清楚，再发订单和标签的照片，没有马上说一定是谁的错。店员看过以后确认，确实有一件发错了尺码。\n\n我需要的不是全部退货，而是把大号换成小号。店员让我保留合适的那件，只把大号寄回，并答复这次运费由店里付。我又问了寄回地址和新衣服什么时候寄出。\n\n最后，我们把数量、尺码和运费写在同一张确认单上。我收到答复后才寄出，也保留了收据和包装。这样即使换了一个人处理，下一位也能看懂前面已经确认了什么，不必从头问一遍。",
+   "py": "Wǒ zài Yèhé xiǎodiàn dìng le liǎng jiàn xiǎohào chènshān, shōudào yǐhòu fāxiàn yí jiàn dà, yí jiàn xiǎo. Wǒ xiān bǎ shíjì qíngkuàng xiě qīngchu, zài fā dìngdān hé biāoqiān de zhàopiàn, méiyǒu mǎshàng shuō yídìng shì shéi de cuò. Diànyuán kàn guo yǐhòu quèrèn, quèshí yǒu yí jiàn fā cuò le chǐmǎ.\n\nWǒ xūyào de bú shì quánbù tuìhuò, ér shì bǎ dàhào huàn chéng xiǎohào. Diànyuán ràng wǒ bǎoliú héshì de nà jiàn, zhǐ bǎ dàhào jì huí, bìng dáfù zhè cì yùnfèi yóu diàn lǐ fù. Wǒ yòu wèn le jì huí dìzhǐ hé xīn yīfu shénme shíhou jì chū.\n\nZuìhòu, wǒmen bǎ shùliàng, chǐmǎ hé yùnfèi xiě zài tóng yì zhāng quèrèndān shàng. Wǒ shōudào dáfù hòu cái jì chū, yě bǎoliú le shōujù hé bāozhuāng. Zhèyàng jíshǐ huàn le yí ge rén chǔlǐ, xià yí wèi yě néng kàn dǒng qiánmiàn yǐjīng quèrèn le shénme, bú bì cóngtóu wèn yí biàn.",
+   "vi": "Tôi đặt hai áo cỡ nhỏ ở cửa hàng Diệp Hòa, nhận ra một lớn và một nhỏ. Tôi viết rõ thực tế, gửi ảnh đơn và nhãn, không kết luận ngay ai gây lỗi. Nhân viên đối chiếu rồi xác nhận một chiếc sai cỡ.\n\nTôi không muốn trả hết mà đổi chiếc lớn thành nhỏ. Nhân viên cho giữ chiếc vừa, chỉ gửi chiếc lớn về và trả lời phí lần này do cửa hàng trả. Tôi hỏi thêm địa chỉ gửi và khi nào áo mới được gửi đi.\n\nCuối cùng, số lượng, cỡ và phí được ghi cùng phiếu. Tôi nhận trả lời mới gửi, giữ biên nhận và bao bì. Nếu đổi người xử lý, người sau vẫn hiểu những điều đã xác nhận, không cần hỏi lại từ đầu.",
+   "gloss": [
+    {
+     "w": "订单",
+     "py": "dìngdān",
+     "vi": "đơn đặt hàng"
+    },
+    {
+     "w": "尺码",
+     "py": "chǐmǎ",
+     "vi": "cỡ quần áo"
+    },
+    {
+     "w": "收据",
+     "py": "shōujù",
+     "vi": "biên nhận"
+    },
+    {
+     "w": "包装",
+     "py": "bāozhuāng",
+     "vi": "bao bì, đóng gói"
+    },
+    {
+     "w": "运费",
+     "py": "yùnfèi",
+     "vi": "phí vận chuyển"
+    },
+    {
+     "w": "答复",
+     "py": "dáfù",
+     "vi": "trả lời chính thức"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Người viết làm gì trước khi kết luận lỗi?",
+     "o": [
+      "Bỏ biên nhận",
+      "Mô tả và gửi bằng chứng",
+      "Quy ngay lỗi cho người giao"
+     ],
+     "a": 1,
+     "e": "Trình tự ở đoạn đầu bắt đầu bằng thực tế và ảnh, sau đó nhân viên mới xác nhận."
+    },
+    {
+     "q": "Yêu cầu thực tế của khách là gì?",
+     "o": [
+      "Đổi mọi áo thành lớn",
+      "Đổi chiếc lớn thành nhỏ",
+      "Trả toàn bộ hai áo"
+     ],
+     "a": 1,
+     "e": "Người viết nêu rõ 不是全部退货，而是…换成小号."
+    },
+    {
+     "q": "Vì sao ghi chung phiếu xác nhận?",
+     "o": [
+      "Người xử lý sau biết điều đã thống nhất",
+      "Để không ai đọc được",
+      "Để thay đổi số lượng tùy ý"
+     ],
+     "a": 0,
+     "e": "Câu kết nhấn tính nối tiếp khi đổi người xử lý."
+    },
+    {
+     "q": "Khách gửi hàng trước hay sau trả lời?",
+     "o": [
+      "Trước",
+      "Không cần trả lời",
+      "Sau"
+     ],
+     "a": 2,
+     "e": "收到答复后才寄出 đặt điều kiện nhận xác nhận trước."
+    },
+    {
+     "q": "Thông tin phí có phải quy định chung cho mọi cửa hàng không?",
+     "o": [
+      "Không, chỉ phương án của trường hợp giả",
+      "Có, áp dụng ở mọi nơi",
+      "Bài khẳng định là luật"
+     ],
+     "a": 0,
+     "e": "Bối cảnh và lời nhân viên giới hạn 这次, không tuyên bố chính sách bên ngoài."
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Nhận diện chữ trong bài",
+   "items": [
+    {
+     "c": "收",
+     "py": "shōu",
+     "hv": "thu",
+     "parts": "Phần bên trái rồi 攵",
+     "strokes": 6,
+     "vi": "nhận, thu",
+     "words": "收到，收据"
+    },
+    {
+     "c": "退",
+     "py": "tuì",
+     "hv": "thoái",
+     "parts": "艮 bên trong, 辶 viết sau",
+     "strokes": 9,
+     "vi": "lùi, trả",
+     "words": "退货，退房"
+    },
+    {
+     "c": "货",
+     "py": "huò",
+     "hv": "hóa",
+     "parts": "化 ở trên, 贝 ở dưới",
+     "strokes": 8,
+     "vi": "hàng",
+     "words": "货物，换货"
+    },
+    {
+     "c": "寄",
+     "py": "jì",
+     "hv": "ký",
+     "parts": "宀 ở trên, 奇 ở dưới",
+     "strokes": 11,
+     "vi": "gửi",
+     "words": "寄回，邮寄"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói có nhiệm vụ",
+   "tasks": [
+    {
+     "p": "Mô tả đơn hai áo nhỏ nhưng nhận một lớn/một nhỏ; đề nghị đối chiếu ảnh trước.",
+     "model": "我的订单是两件小号，收到的却是一大一小。我已经发了订单和标签照片，请先确认。合适的我想保留，只换大号那件。",
+     "py": "Wǒ de dìngdān shì liǎng jiàn xiǎohào, shōudào de què shì yí dà yì xiǎo. Wǒ yǐjīng fā le dìngdān hé biāoqiān zhàopiàn, qǐng xiān quèrèn. Héshì de wǒ xiǎng bǎoliú, zhǐ huàn dàhào nà jiàn.",
+     "vi": "Đơn tôi là hai áo nhỏ, nhận một lớn một nhỏ. Tôi đã gửi ảnh đơn và nhãn, nhờ đối chiếu. Tôi muốn giữ chiếc vừa, chỉ đổi chiếc lớn.",
+     "tips": "Nêu số lượng thực tế rõ rồi mới nói yêu cầu; không cần đoán người gây lỗi."
+    },
+    {
+     "p": "Sau khi được đồng ý đổi, hỏi phí, địa chỉ trên phiếu và lúc gửi áo mới.",
+     "model": "请把大号换成小号。寄回的运费谁付？地址用确认单上的，对吗？新衣服什么时候寄出？请写在答复里，我收到以后再寄。",
+     "py": "Qǐng bǎ dàhào huàn chéng xiǎohào. Jì huí de yùnfèi shéi fù? Dìzhǐ yòng quèrèndān shàng de, duì ma? Xīn yīfu shénme shíhou jì chū? Qǐng xiě zài dáfù lǐ, wǒ shōudào yǐhòu zài jì.",
+     "vi": "Hãy đổi chiếc lớn thành nhỏ. Ai trả phí gửi về? Dùng địa chỉ trên phiếu, đúng không? Bao giờ gửi áo mới? Nhờ ghi vào trả lời, tôi nhận rồi mới gửi.",
+     "tips": "Có thể chia các câu hỏi thành từng lượt thay vì đọc liền không chờ trả lời."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết để hoàn thành tình huống",
+   "task": "Viết từ 130 đến 180 chữ Hán yêu cầu đổi áo trong cửa hàng giả: đơn và hàng thực nhận, bằng chứng đã gửi, chiếc giữ/đổi, cỡ mong muốn và các điểm cần trả lời trước khi gửi về.",
+   "min": 130,
+   "model": "您好！我原来订了两件蓝色小号衬衫，今天收到一件小号和一件大号。订单和标签的照片已经发给您，包装和收据也都保留着，请帮我确认。\n\n小号那件很合适，我不想全部退货，只想把大号换成小号。请问寄回去的运费由谁付？寄回地址是不是确认单上的地址？新衣服大约什么时候寄出？请把数量、尺码和运费写在答复里。我收到确认以后再寄，避免双方理解不一样。谢谢您的帮助！",
+   "modelVi": "Chào bạn! Ban đầu tôi đặt hai áo sơ mi xanh cỡ nhỏ, hôm nay nhận một nhỏ và một lớn. Tôi đã gửi ảnh đơn/nhãn, vẫn giữ bao bì và biên nhận, nhờ đối chiếu.\n\nChiếc nhỏ vừa nên tôi không muốn trả toàn bộ, chỉ đổi chiếc lớn thành nhỏ. Ai trả phí gửi về? Địa chỉ có đúng trên phiếu không? Khoảng bao giờ gửi áo mới? Nhờ ghi số lượng, cỡ và phí trong trả lời. Tôi nhận xác nhận mới gửi để tránh hiểu khác nhau. Cảm ơn!",
+   "tips": [
+    "Giữ một nhỏ/một lớn nhất quán với bằng chứng.",
+    "Tách yêu cầu đổi khỏi các câu hỏi chưa được trả lời."
+   ],
+   "checklist": [
+    "Đủ đơn và thực nhận",
+    "Có bằng chứng/đồ giữ lại",
+    "Đúng món gửi về và cỡ đổi",
+    "Có câu hỏi phí, địa chỉ, thời gian"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "合适的那件请保留，只把大号寄回。",
+   "lang": "zh-CN",
+   "q": "Khách cần gửi món nào?",
+   "o": [
+    "Chỉ áo cỡ lớn",
+    "Cả hai áo",
+    "Chỉ áo cỡ nhỏ"
+   ],
+   "a": 0,
+   "e": "只 giới hạn chiếc lớn; chiếc vừa phải giữ."
+  },
+  {
+   "t": "listen",
+   "say": "收到书面答复以后，我再寄回。",
+   "lang": "zh-CN",
+   "q": "Điều gì xảy ra trước gửi hàng?",
+   "o": [
+    "Gửi cả hai rồi mới hỏi",
+    "Đổi số lượng đơn",
+    "Nhận trả lời bằng văn bản"
+   ],
+   "a": 2,
+   "e": "以后…再 đặt trả lời xác nhận làm điều kiện trước khi gửi."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào nêu đúng kết quả muốn đổi?",
+   "o": [
+    "把大号换。",
+    "把小号是大号。",
+    "把大号换成小号。"
+   ],
+   "a": 2,
+   "e": "换成 nối tới cỡ đích cụ thể, không chỉ nêu hoạt động đổi chung."
+  },
+  {
+   "t": "mc",
+   "q": "Bằng chứng nào giúp so đơn với hàng?",
+   "o": [
+    "Sở thích màu của bạn khác",
+    "Giờ vào học",
+    "Ảnh đơn và nhãn cỡ"
+   ],
+   "a": 2,
+   "e": "Đơn cho biết cỡ đặt, nhãn cho biết cỡ thực nhận."
+  },
+  {
+   "t": "mc",
+   "q": "Khi chưa biết ai làm sai, cách nói nào bám dữ kiện?",
+   "o": [
+    "收到的和订单不一样。",
+    "一定是司机故意发错。",
+    "所有人都没做事。"
+   ],
+   "a": 0,
+   "e": "Câu đúng mô tả khác biệt quan sát được, không đoán ý định hay nguyên nhân."
+  },
+  {
+   "t": "mc",
+   "q": "Vì sao không gửi cả hai chiếc về trong phương án này?",
+   "o": [
+    "Một chiếc đã đúng và khách muốn giữ",
+    "Mọi áo đều không dùng được",
+    "Khách chưa nhận áo nào"
+   ],
+   "a": 0,
+   "e": "Yêu cầu là giữ chiếc vừa và chỉ đổi chiếc sai."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “cỡ”: 订单上的___是小号。",
+   "a": "尺码",
+   "py": "chǐmǎ",
+   "e": "尺码 chỉ thông tin cỡ, không phải màu."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “gửi trở lại”: 请把大号___。",
+   "a": "寄回",
+   "py": "jì huí",
+   "e": "回 nêu hướng gửi về nơi xử lý."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “giữ lại”: 收据请先___。",
+   "a": "保留",
+   "py": "bǎoliú",
+   "e": "保留 giúp giữ thông tin cần đối chiếu trong quy trình giả."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "想",
+    "把大号",
+    "换成",
+    "小号",
+    "我"
+   ],
+   "a": "我想把大号换成小号。",
+   "e": "把 đặt trước món được đổi, 换成 trước cỡ đích."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "发来以后",
+    "我们",
+    "再确认",
+    "照片"
+   ],
+   "a": "照片发来以后，我们再确认。",
+   "e": "Đối chiếu được thực hiện sau khi có ảnh, không khẳng định lỗi trước bằng chứng."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ trong yêu cầu đổi hàng.",
+   "pairs": [
+    [
+     "退货",
+     "trả hàng"
+    ],
+    [
+     "换货",
+     "đổi hàng"
+    ],
+    [
+     "运费",
+     "phí vận chuyển"
+    ],
+    [
+     "答复",
+     "trả lời chính thức"
+    ]
+   ],
+   "e": "退货 trả hàng, 换货 đổi hàng, 运费 phí gửi và 答复 là thông tin phản hồi cần xác nhận."
+  },
+  {
+   "t": "dict",
+   "say": "只把大号的那件寄回。",
+   "lang": "zh-CN",
+   "a": "只把大号的那件寄回。",
+   "py": "Zhǐ bǎ dàhào de nà jiàn jì huí.",
+   "e": "Giữ 只 và 那件 để giới hạn đúng chiếc, không gửi toàn bộ đơn."
+  }
+ ],
+ "teacher": {
+  "time": "180 phút, chia thành hai buổi 90 phút",
+  "prep": "Đơn và nhãn cỡ giả, hai áo giấy khác cỡ, ảnh mô phỏng không có thông tin thật, biên nhận và phiếu xác nhận trống.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Đưa đơn hai áo nhỏ cùng hàng một nhỏ/một lớn; học viên chỉ nêu khác biệt quan sát được, chưa đoán ai gây lỗi."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dạy từ qua bộ hồ sơ giả và thao tác gửi lại; luyện 处理, 尺码, 寄回 với ý nghĩa cụ thể."
+   },
+   {
+    "t": "20 phút",
+    "do": "Luyện 被 để báo kết quả sai có căn cứ, phân biệt với câu mô tả chưa kết luận nguyên nhân."
+   },
+   {
+    "t": "25 phút",
+    "do": "Dùng 把…换成 và 寄回 để lập phương án một món giữ, một món gửi; người nghe phải chọn đúng thẻ vật."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nghe trao đổi, điền đơn/nhận, bằng chứng, món đổi, phí và bước chờ trả lời trước khi gửi."
+   },
+   {
+    "t": "10 phút",
+    "do": "Mở buổi sau bằng thay nhân viên; học viên chỉ được dùng phiếu xác nhận để hiểu và tiếp tục cách xử lý trước đó."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc bản ghi, đánh dấu câu dữ kiện, yêu cầu, điều đã đồng ý và câu hỏi còn cần đáp."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nhóm ba nhập vai khách, nhân viên và người kiểm hồ sơ; chốt số lượng/cỡ/phí bằng một bản ngắn không mâu thuẫn."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết thư từ một trăm ba mươi đến một trăm tám mươi chữ, đổi bài để kiểm có nhầm trả toàn bộ hay thiếu cỡ đích."
+   },
+   {
+    "t": "15 phút",
+    "do": "Làm bài tự chấm rồi nói lại yêu cầu trong ba câu: thực nhận, muốn đổi, điều cần xác nhận."
+   }
+  ],
+  "games": [
+   "Hồ sơ chuyển ca: người thứ hai nhận phiếu không nghe đoạn trước, phải chọn đúng món giữ và món gửi; nếu không đủ dữ kiện, đặt câu hỏi bổ sung."
+  ],
+  "errors": [
+   "Quy lỗi cho người cụ thể khi chưa có bằng chứng: đổi sang mô tả đơn và nhãn thực nhận.",
+   "Dùng 换 mà thiếu cỡ muốn nhận: bổ sung 换成小号 hoặc cỡ tương ứng.",
+   "Gửi cả hai dù có 只: khoanh số lượng và tách thẻ giữ/gửi.",
+   "Đọc 处理 bằng chùlǐ: trong từ xử lý đọc chǔlǐ.",
+   "Coi phương án phí trong truyện là quy định bên ngoài: giữ phạm vi 这次处理 và hỏi lại trong tình huống mới."
+  ],
+  "homework": "Tạo đơn tự đặt với một món đúng/một món sai. Viết yêu cầu kèm ba câu hỏi còn mở, ghi âm lời chốt chỉ đúng món đổi và kết quả mong muốn."
+ }
+}

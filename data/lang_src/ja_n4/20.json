@@ -1,0 +1,654 @@
+{
+ "no": 20,
+ "title": "Ôn tập tổng hợp 2 – Đổi chuyến tham quan mà không truyền sai lịch",
+ "sub": "この 工房に 行ったことが ありますか。",
+ "goals": [
+  "Tóm tắt trải nghiệm và kế hoạch chuyến đi bằng các thể đã học.",
+  "Đối chiếu tin mới với lịch cũ và chỉ rõ nguồn, giờ xác nhận.",
+  "Thương lượng phương tiện, khả năng tham gia và việc không bắt buộc.",
+  "Viết thông báo thay đổi có giới hạn và câu hỏi cần người nhận trả lời."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Chuyến tham quan một xưởng giấy giả được đổi giờ khởi hành, trong khi dự báo mưa vẫn chỉ là khả năng. Người học phải kết hợp kinh nghiệm, điều kiện, so sánh, khả năng và truyền tin để viết thông báo có thể thực hiện. Trước khi viết, lập bảng ba cột: lịch cũ, điều mới đã xác nhận và điều chưa chốt. Đừng gọi chuyến đi đã hủy chỉ vì đường đi hoặc giờ xuất phát thay đổi.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>出発 đọc しゅっぱつ, っ trước p; 到着 đọc とうちゃく, to-o-cha-ku với ちゃ nhỏ. 変更 đọc へんこう, có ん rồi trường âm o. Trong 乗り換え, tách no-ri-ka-e: không nén ka-e thành một âm. Khi nói giờ cũ và mới, dừng nhẹ giữa câu phủ định giờ cũ và khẳng định giờ mới để người nghe sửa lịch đúng.</p>",
+   "items": [
+    {
+     "sym": "出発・到着",
+     "ex": [
+      "しゅっぱつ",
+      "とうちゃく"
+     ],
+     "vi": "Phân biệt nhịp ngắt của khởi hành và trường âm của đến nơi."
+    },
+    {
+     "sym": "乗り換え・変更",
+     "ex": [
+      "のりかえ",
+      "へんこう"
+     ],
+     "vi": "Đọc đủ nguyên âm liền và âm mũi để thông tin chuyển chuyến không bị mất nhịp."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "見学",
+     "kana": "けんがく",
+     "romaji": "kengaku",
+     "vi": "tham quan để học",
+     "ex": "紙の 作り方を 見学します。",
+     "exVi": "Tôi tham quan cách làm giấy."
+    },
+    {
+     "w": "工房",
+     "kana": "こうぼう",
+     "romaji": "kooboo",
+     "vi": "xưởng thủ công",
+     "ex": "工房は 川の 近くです。",
+     "exVi": "Xưởng thủ công gần sông."
+    },
+    {
+     "w": "出発",
+     "kana": "しゅっぱつ",
+     "romaji": "shuppatsu",
+     "vi": "khởi hành",
+     "ex": "出発は 八時です。",
+     "exVi": "Khởi hành lúc tám giờ."
+    },
+    {
+     "w": "到着",
+     "kana": "とうちゃく",
+     "romaji": "toochaku",
+     "vi": "đến nơi",
+     "ex": "到着の 時刻を 書きます。",
+     "exVi": "Tôi ghi giờ đến."
+    },
+    {
+     "w": "乗り換え",
+     "kana": "のりかえ",
+     "romaji": "norikae",
+     "vi": "đổi tuyến/chuyển chuyến",
+     "ex": "乗り換えは 一回です。",
+     "exVi": "Chỉ đổi tuyến một lần."
+    },
+    {
+     "w": "運休",
+     "kana": "うんきゅう",
+     "romaji": "unkyuu",
+     "vi": "ngừng chạy chuyến",
+     "ex": "朝の バスが 運休です。",
+     "exVi": "Chuyến xe buýt sáng ngừng chạy."
+    },
+    {
+     "w": "代わり",
+     "kana": "かわり",
+     "romaji": "kawari",
+     "vi": "sự thay thế",
+     "ex": "バスの 代わりに 電車を 使います。",
+     "exVi": "Tôi dùng tàu thay xe buýt."
+    },
+    {
+     "w": "変更点",
+     "kana": "へんこうてん",
+     "romaji": "henkooten",
+     "vi": "điểm thay đổi",
+     "ex": "変更点を 三つ 書きます。",
+     "exVi": "Tôi ghi ba điểm thay đổi."
+    },
+    {
+     "w": "確定",
+     "kana": "かくてい",
+     "romaji": "kakutei",
+     "vi": "việc xác định/chốt cuối",
+     "ex": "時間は まだ 確定していません。",
+     "exVi": "Giờ vẫn chưa chốt cuối."
+    },
+    {
+     "w": "見込み",
+     "kana": "みこみ",
+     "romaji": "mikomi",
+     "vi": "dự kiến/triển vọng",
+     "ex": "到着の 見込みを 伝えます。",
+     "exVi": "Tôi báo giờ đến dự kiến."
+    },
+    {
+     "w": "参加費",
+     "kana": "さんかひ",
+     "romaji": "sankahi",
+     "vi": "phí tham gia",
+     "ex": "参加費は 当日 払います。",
+     "exVi": "Tôi trả phí tham gia hôm diễn ra."
+    },
+    {
+     "w": "持ち物",
+     "kana": "もちもの",
+     "romaji": "mochimono",
+     "vi": "vật cần mang",
+     "ex": "持ち物を 前日に 確認します。",
+     "exVi": "Tôi kiểm đồ cần mang hôm trước."
+    },
+    {
+     "w": "返事",
+     "kana": "へんじ",
+     "romaji": "henji",
+     "vi": "trả lời/phản hồi",
+     "ex": "今日中に 返事を ください。",
+     "exVi": "Xin trả lời trong hôm nay."
+    },
+    {
+     "w": "再確認",
+     "kana": "さいかくにん",
+     "romaji": "saikakunin",
+     "vi": "xác nhận lại",
+     "ex": "朝、時刻を 再確認します。",
+     "exVi": "Buổi sáng tôi xác nhận lại giờ."
+    },
+    {
+     "w": "集合場所",
+     "kana": "しゅうごうばしょ",
+     "romaji": "shuugoo basho",
+     "vi": "nơi tập trung",
+     "ex": "集合場所は 駅の 南口です。",
+     "exVi": "Nơi tập trung là cửa nam ga."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Ôn kinh nghiệm Vたことがある để hỏi đã tới xưởng chưa; điều kiện Vたら để nêu phương án mưa; khả năng Vことができる hoặc dạng khả năng đã học để kiểm người tham gia có kịp giờ mới. Truyền tin dùng 普通形そうだ có nguồn, còn dự kiến chưa chốt dùng かもしれない hoặc 未定. Nối ví dụ bằng たり và giữ rõ cùng chủ thể trong ながら. Thông báo cuối cần hạn phản hồi bằng までに.</p>",
+   "table": [
+    [
+     "Nhu cầu giao tiếp",
+     "Mẫu ôn"
+    ],
+    [
+     "Hỏi trải nghiệm",
+     "工房に行ったことがありますか"
+    ],
+    [
+     "Điều kiện",
+     "雨だったら屋内だけ見学します"
+    ],
+    [
+     "Khả năng tham gia",
+     "八時に来ることができますか"
+    ],
+    [
+     "Tin có nguồn",
+     "係によると午前は開くそうです"
+    ],
+    [
+     "Hạn phản hồi",
+     "六時までに返事をください"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "この 工房に 行ったことが ありますか。",
+     "vi": "Bạn từng đến xưởng này chưa?"
+    },
+    {
+     "t": "朝の バスが 運休なので、電車で 行きます。",
+     "vi": "Vì xe buýt sáng ngừng chạy nên chúng tôi đi tàu."
+    },
+    {
+     "t": "雨だったら、屋内の 作業だけ 見学します。",
+     "vi": "Nếu mưa, chúng tôi chỉ tham quan việc trong nhà."
+    },
+    {
+     "t": "八時に 集合できますか。",
+     "vi": "Bạn tập trung lúc tám giờ được không?"
+    },
+    {
+     "t": "六時までに 参加できるか 教えてください。",
+     "vi": "Chậm nhất sáu giờ xin cho biết có thể tham gia không."
+    }
+   ],
+   "tips": [
+    "<p>Không lấy giờ đến dự kiến làm giờ đến chắc chắn khi tuyến còn chờ kiểm.</p>",
+    "<p>運休 một chuyến xe không đồng nghĩa hủy chuyến tham quan; tìm phương tiện thay rồi báo đúng phạm vi.</p>",
+    "<p>Câu hỏi kịp giờ mới là kiểm khả năng tham gia, không phải ép người nhận phải đồng ý.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Tin ngừng chạy chỉ áp một chuyến xe; người tổ chức đổi phương tiện và hỏi khả năng đến giờ mới thay vì mặc định ai cũng kịp.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "来週の 工房の 見学は 中止ですか。",
+     "vi": "Chuyến tham quan xưởng tuần sau bị hủy à?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "いいえ。朝の バスだけ 運休です。見学は 行う 予定です。",
+     "vi": "Không. Chỉ xe buýt sáng ngừng chạy. Chuyến tham quan vẫn dự kiến diễn ra."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "では、どうやって 行きますか。",
+     "vi": "Vậy đi bằng cách nào?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "電車に 変えます。八時に 駅の 南口で 集合してください。",
+     "vi": "Đổi sang tàu. Xin tập trung cửa nam ga lúc tám giờ."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "前の 案内は 八時半でしたね。八時なら 少し 急がなければ なりません。",
+     "vi": "Hướng dẫn trước là tám rưỡi nhỉ. Nếu tám giờ thì tôi phải đi gấp hơn một chút."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "難しければ 教えてください。参加できるか、今日の 六時までに 返事を お願いします。",
+     "vi": "Nếu khó xin cho biết. Nhờ trả lời chậm nhất sáu giờ hôm nay xem có tham gia được không."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "雨の 場合は どうなりますか。",
+     "vi": "Nếu mưa thì sao?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "係の 人は、屋内だけなら 見学できると 言っていました。まだ 雨とは 決まっていません。",
+     "vi": "Người phụ trách nói chỉ khu trong nhà thì vẫn tham quan được. Hiện chưa chắc sẽ mưa."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "写真は 持っていかなければ なりませんか。",
+     "vi": "Có phải mang ảnh theo không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "いいえ。任意です。持ち物の 新しい 表を あとで 送ります。",
+     "vi": "Không. Tùy chọn. Lát nữa tôi gửi bảng đồ mang theo mới."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Điều nào thực sự bị ngừng?",
+     "o": [
+      "Mọi chuyến tàu",
+      "Chuyến xe buýt sáng",
+      "Toàn bộ chuyến tham quan"
+     ],
+     "a": 1,
+     "e": "朝のバスだけ運休 giới hạn phạm vi; người đáp phủ nhận hủy tham quan."
+    },
+    {
+     "q": "Giờ và nơi tập trung mới là gì?",
+     "o": [
+      "Tám giờ cửa nam ga",
+      "Tám rưỡi cửa nam ga",
+      "Tám giờ trong xưởng"
+     ],
+     "a": 0,
+     "e": "八時に駅の南口 là lịch mới, khác 八時半 trong bản trước."
+    },
+    {
+     "q": "Cần phản hồi điều gì chậm nhất sáu giờ?",
+     "o": [
+      "Đã mua ảnh chưa",
+      "Mưa chắc chắn hay không",
+      "Có tham gia kịp lịch mới không"
+     ],
+     "a": 2,
+     "e": "参加できるか là nội dung câu trả lời, không phải yêu cầu dự báo thời tiết."
+    },
+    {
+     "q": "Ảnh có bắt buộc mang không?",
+     "o": [
+      "Bị cấm mang",
+      "Không, tùy chọn",
+      "Có, mọi người phải mang"
+     ],
+     "a": 1,
+     "e": "任意です giữ mức yêu cầu ảnh khác bảng vật cần mang khác."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "来週、クラスで 架空の 紙の 工房を 見学する 予定です。わたしは 一度 行ったことが ありますが、友だちは 初めてです。前の 案内では、八時半に バス停へ 集まることに なっていました。ところが、係の 人から 朝の バスが 運休になると 連絡が 来ました。工房が 閉まるという 連絡では ありません。\n\n新しい 予定では、八時に 駅の 南口に 集まって、電車で 行きます。乗り換えは 一回です。十時ごろ 到着する 見込みですが、最後の 区間の 時刻は まだ 再確認していません。到着が 確定したようには 書かず、朝に もう一度 確認します。参加費は 前と 同じです。写真の 持参は 任意なので、持ってこなくても いいです。\n\n予報では 雨になるかもしれないそうですが、係の 人は 屋内の 作業は 見学できると 言いました。見学では、紙を 作ったり、古い 道具を 見たり します。友だちには、今日の 六時までに 新しい 集合時刻に 来られるか 返事を もらいます。難しい 人が いたら、個別に 相談します。みんなに 同じ 時刻を 伝えることと、全員が 参加できると 決めつけることは 別です。",
+   "vi": "Tuần sau lớp dự kiến tham quan một xưởng giấy giả. Tôi đã đến một lần, bạn tôi thì lần đầu. Hướng dẫn cũ ghi tập trung trạm xe buýt lúc tám rưỡi. Nhưng người phụ trách báo xe buýt sáng ngừng chạy. Đây không phải thông báo xưởng đóng.\n\nLịch mới tập trung cửa nam ga lúc tám giờ rồi đi tàu, đổi tuyến một lần. Dự kiến đến khoảng mười giờ nhưng chưa kiểm lại giờ đoạn cuối. Chúng tôi không viết như giờ đến đã chốt mà sẽ kiểm lại buổi sáng. Phí tham gia không đổi. Mang ảnh tùy chọn nên không cần mang.\n\nDự báo nói có thể mưa nhưng người phụ trách nói vẫn tham quan hoạt động trong nhà được. Khi tham quan chúng tôi làm những việc như làm giấy, xem dụng cụ cũ. Tôi nhờ bạn trả lời chậm nhất sáu giờ hôm nay xem có đến kịp giờ tập trung mới không. Ai khó thì bàn riêng. Báo cùng một giờ cho mọi người khác với tự kết luận ai cũng tham gia được.",
+   "gloss": [
+    {
+     "w": "見学",
+     "kana": "けんがく",
+     "romaji": "kengaku",
+     "vi": "tham quan để học"
+    },
+    {
+     "w": "工房",
+     "kana": "こうぼう",
+     "romaji": "kooboo",
+     "vi": "xưởng thủ công"
+    },
+    {
+     "w": "到着",
+     "kana": "とうちゃく",
+     "romaji": "toochaku",
+     "vi": "đến nơi"
+    },
+    {
+     "w": "乗り換え",
+     "kana": "のりかえ",
+     "romaji": "norikae",
+     "vi": "đổi tuyến/chuyển chuyến"
+    },
+    {
+     "w": "運休",
+     "kana": "うんきゅう",
+     "romaji": "unkyuu",
+     "vi": "ngừng chạy chuyến"
+    },
+    {
+     "w": "確定",
+     "kana": "かくてい",
+     "romaji": "kakutei",
+     "vi": "việc xác định/chốt cuối"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Nguồn gây thay đổi phương tiện là gì?",
+     "o": [
+      "Ảnh cũ bị mất",
+      "Thông báo xe buýt sáng ngừng chạy",
+      "Xưởng báo đóng mọi khu"
+     ],
+     "a": 1,
+     "e": "Đoạn đầu xác định tin về vận hành xe, đồng thời phủ nhận tin xưởng đóng."
+    },
+    {
+     "q": "Mười giờ đến nơi đã chắc chắn chưa?",
+     "o": [
+      "Chưa, còn kiểm giờ đoạn cuối",
+      "Rồi, mọi đoạn đã kiểm",
+      "Không, chắc chắn chỉ tới chiều"
+     ],
+     "a": 0,
+     "e": "見込み cùng まだ再確認していません giới hạn độ chắc của mốc đến."
+    },
+    {
+     "q": "Những gì giữ nguyên so với trước?",
+     "o": [
+      "Giờ tập trung",
+      "Phương tiện",
+      "Phí tham gia"
+     ],
+     "a": 2,
+     "e": "参加費は前と同じです; giờ và phương tiện đều đã đổi."
+    },
+    {
+     "q": "Vì sao phải hỏi từng người có đến kịp không?",
+     "o": [
+      "Vì mọi người đã từ chối",
+      "Lịch mới sớm hơn, không thể tự kết luận ai cũng tham gia được",
+      "Vì ảnh bắt buộc"
+     ],
+     "a": 1,
+     "e": "Đoạn cuối phân biệt truyền cùng giờ với giả định toàn bộ có khả năng tham gia."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thẻ mới: chỉ xe buýt chiều ngừng, chuyến học vẫn diễn ra; đổi về tàu; giờ tập trung không đổi. Thông báo đúng phạm vi.",
+     "model": "午後の バスだけ 運休です。見学は 中止では ありません。帰りは 電車に 変えますが、集合の 時間は 同じです。",
+     "vi": "Chỉ xe buýt chiều ngừng. Chuyến tham quan không hủy. Lượt về đổi sang tàu nhưng giờ tập trung giữ nguyên.",
+     "tips": "Không đổi giờ đi sáng khi dữ kiện chỉ tác động lượt về."
+    },
+    {
+     "p": "Bạn không kịp tám giờ nhưng đến tám rưỡi được. Nói giới hạn và xin bàn phương án, chưa tự coi được đồng ý.",
+     "model": "八時の 集合には 間に合いませんが、八時半なら 行けます。別の 方法を 相談しても いいですか。",
+     "vi": "Tôi không kịp tập trung tám giờ nhưng tám rưỡi thì đi được. Tôi có thể bàn phương án khác không?",
+     "tips": "Khả năng đến muộn hơn là điều của bạn, còn phương án thay thế phải được nhóm xác nhận."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết thông báo theo thẻ: xe buýt chiều ngừng, tham quan vẫn diễn ra; lượt về chuyển tàu; giờ tập trung sáng giữ nguyên tám rưỡi; phí không đổi; ảnh tùy chọn; xin phản hồi chậm nhất bảy giờ tối nay nếu lượt về mới khó.",
+   "model": "午後の バスだけ 運休になるので、帰りは 電車に 変えます。見学は 中止では ありません。朝の 集合は 前と 同じ八時半です。参加費も 変わりません。写真は 持ってこなくても いいです。帰りの 予定が 難しい 人は、今日の 夜七時までに 連絡してください。変更のない点も確認してください。",
+   "modelVi": "Vì chỉ xe buýt chiều ngừng nên lượt về chuyển tàu. Chuyến tham quan không hủy. Tập trung sáng vẫn tám rưỡi như trước. Phí cũng không đổi. Không cần mang ảnh. Ai gặp khó với lịch về xin báo chậm nhất bảy giờ tối nay. Xin kiểm cả những điểm không thay đổi.",
+   "min": 115,
+   "tips": [
+    "Thẻ mới tác động lượt về; kiểm rằng thông báo không vô tình đổi giờ đi.",
+    "Hạn phản hồi bảy giờ khác sáu giờ ở bài đọc."
+   ],
+   "checklist": [
+    "Phạm vi xe chiều và lượt về rõ.",
+    "Không hủy chuyến, tập trung tám rưỡi.",
+    "Phí giữ nguyên, ảnh tùy chọn.",
+    "Hạn bảy giờ và ai cần phản hồi được nêu."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “見学” nghĩa là gì?",
+   "o": [
+    "việc xác định/chốt cuối",
+    "tham quan để học",
+    "đổi tuyến/chuyển chuyến"
+   ],
+   "a": 1,
+   "e": "紙の 作り方を 見学します。 → Tôi tham quan cách làm giấy. Từ cần nhận diện là “見学”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “工房” nghĩa là gì?",
+   "o": [
+    "xưởng thủ công",
+    "ngừng chạy chuyến",
+    "dự kiến/triển vọng"
+   ],
+   "a": 0,
+   "e": "工房は 川の 近くです。 → Xưởng thủ công gần sông. Từ cần nhận diện là “工房”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “出発” nghĩa là gì?",
+   "o": [
+    "sự thay thế",
+    "phí tham gia",
+    "khởi hành"
+   ],
+   "a": 2,
+   "e": "出発は 八時です。 → Khởi hành lúc tám giờ. Từ cần nhận diện là “出発”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “到着” nghĩa là gì?",
+   "o": [
+    "vật cần mang",
+    "đến nơi",
+    "điểm thay đổi"
+   ],
+   "a": 1,
+   "e": "到着の 時刻を 書きます。 → Tôi ghi giờ đến. Từ cần nhận diện là “到着”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền kinh nghiệm: 行った___が あります。",
+   "a": "こと",
+   "e": "Vたことがある nêu từng có kinh nghiệm, khác kế hoạch định đi."
+  },
+  {
+   "t": "fill",
+   "q": "Điền điều kiện: 雨だった___、屋内で 見学します。",
+   "a": "ら",
+   "e": "たら nêu phương án trong điều kiện mưa; không khẳng định mưa đã xảy ra."
+  },
+  {
+   "t": "fill",
+   "q": "Điền hạn phản hồi: 七時まで___ 連絡してください。",
+   "a": "に",
+   "e": "までに nêu thời hạn liên hệ, không yêu cầu liên tục liên lạc tới bảy giờ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu chỉ xe chiều ngừng.",
+   "w": [
+    "運休です。",
+    "午後のバスだけ"
+   ],
+   "a": "午後のバスだけ運休です。",
+   "e": "だけ giới hạn thông báo vào xe buýt chiều, không tự mở rộng sang cả chuyến tham quan."
+  },
+  {
+   "q": "Mục nào chưa chốt?",
+   "o": [
+    "Cả buổi đã hủy",
+    "Tàu lượt về",
+    "Giờ tập trung sáng"
+   ],
+   "a": 1,
+   "e": "帰りの電車 còn 確認中, trong khi giờ tập trung được nêu không đổi.",
+   "t": "listen",
+   "say": "帰りの 電車は まだ 確認中です。朝の 集合は 変わりません。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "Vật nào được yêu cầu mang?",
+   "o": [
+    "Giấy đăng ký",
+    "Ảnh",
+    "Không vật nào"
+   ],
+   "a": 0,
+   "e": "写真は不要 miễn ảnh, còn 必ず đi với giấy đăng ký.",
+   "t": "listen",
+   "say": "写真は 不要ですが、登録の 紙は 必ず 持ってきてください。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "集合の 時間は 変わりません。",
+   "a": "集合の 時間は 変わりません。",
+   "lang": "ja-JP",
+   "e": "Phủ định 変わりません giữ ý giờ tập trung không đổi; không chép thành 変わります."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "乗り換え",
+     "đổi tuyến/chuyển chuyến"
+    ],
+    [
+     "運休",
+     "ngừng chạy chuyến"
+    ],
+    [
+     "代わり",
+     "sự thay thế"
+    ],
+    [
+     "変更点",
+     "điểm thay đổi"
+    ],
+    [
+     "確定",
+     "việc xác định/chốt cuối"
+    ]
+   ],
+   "e": "出発/到着 là hai đầu hành trình, 乗り換え là chuyển tuyến, 運休 là chuyến không chạy, 代わり là giải pháp thay; tách nghĩa để báo đúng điểm thay đổi."
+  },
+  {
+   "q": "Nguồn gây thay đổi phương tiện là gì?",
+   "o": [
+    "Ảnh cũ bị mất",
+    "Thông báo xe buýt sáng ngừng chạy",
+    "Xưởng báo đóng mọi khu"
+   ],
+   "a": 1,
+   "e": "Đoạn đầu xác định tin về vận hành xe, đồng thời phủ nhận tin xưởng đóng.",
+   "t": "mc"
+  },
+  {
+   "q": "Mười giờ đến nơi đã chắc chắn chưa?",
+   "o": [
+    "Không, chắc chắn chỉ tới chiều",
+    "Chưa, còn kiểm giờ đoạn cuối",
+    "Rồi, mọi đoạn đã kiểm"
+   ],
+   "a": 1,
+   "e": "見込み cùng まだ再確認していません giới hạn độ chắc của mốc đến.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Làm lịch cũ tám rưỡi xe buýt, lịch mới tám giờ tàu và thẻ riêng chỉ xe chiều ngừng; dùng một xưởng hoàn toàn giả.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "So hai bản lịch, hỏi trải nghiệm đã tham quan và đánh dấu thay đổi thật với thông tin còn giữ nguyên."
+   },
+   {
+    "t": "30'",
+    "do": "Ôn điều kiện, khả năng, truyền tin, mức tùy chọn và hạn phản hồi bằng đúng các trường của chuyến đi."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe tin ngừng xe, xác định phạm vi và lý do không được phát thông báo hủy toàn bộ."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc lịch tàu, tìm mốc đến chỉ dự kiến và giải thích vì sao còn phải kiểm đoạn cuối."
+   },
+   {
+    "t": "30'",
+    "do": "Luyện thẻ chỉ xe chiều ngừng rồi viết thông báo giữ tám rưỡi, đổi lượt về và hạn phản hồi bảy giờ."
+   },
+   {
+    "t": "30'",
+    "do": "Đóng vai người không kịp giờ để thương lượng, làm nghe-chính tả và tự kiểm toàn bộ thông báo bằng bảng thay đổi/giữ nguyên/chưa chốt."
+   }
+  ],
+  "games": [
+   "Bốc thẻ thay một trường của lịch, nhóm nhận phải chỉ đúng các trường liên quan cần đổi và trường được giữ.",
+   "Một người có lịch đi, một người có lịch về; hỏi nhau để tìm xung đột và đề nghị cách xử lý có điều kiện."
+  ],
+  "errors": [
+   "Hiểu 運休 là hủy tham quan: chỉ rõ chủ thể xe nào ngừng chạy.",
+   "Ghi đến mười giờ như chắc chắn dù còn 確認中: giữ nhãn 見込み và bước kiểm lại.",
+   "Truyền ảnh tùy chọn thành vật phải mang: kiểm 不要/任意 trước khi dùng なければならない.",
+   "Tự chấp nhận phương án đến muộn thay nhóm: dùng câu xin bàn và chờ xác nhận."
+  ],
+  "homework": "Tạo lịch tham quan giả gồm bản cũ và một thay đổi mới; viết thông báo giữ đúng điều không đổi, hai điều chưa chốt và hạn phản hồi có người chịu trách nhiệm."
+ }
+}

@@ -1,168 +1,1123 @@
 {
-  "no": 10,
-  "title": "喂，你好！– Gọi điện & mua sắm: 请, 吧, 呢",
-  "sub": "Wéi, qǐngwèn, Xiǎo Lán zài ma? 喂，请问，小兰在吗？",
-  "goals": [
-    "Gọi và nghe điện thoại: 喂，请问，…在吗？– 在，请等一下 / 她不在 / 我就是",
-    "Nói lịch sự với 请 + động từ, động từ + 一下, 可以…吗？",
-    "Dùng 吧 để đề nghị, đoán – xác nhận, đồng ý; phân biệt 吗 / 吧",
-    "Dùng 呢 để hỏi lại, hỏi “… đâu rồi?”, và 在…呢 (đang làm)",
-    "Mua sắm: hỏi giá, chê đắt, mặc cả (太贵了！便宜一点儿吧！); phân biệt 买 / 卖"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
-      {"w": "打电话", "py": "dǎ diànhuà", "hv": "đả điện thoại", "pos": "v", "vi": "gọi điện thoại", "ex": "晚上我给妈妈打电话。", "exPy": "Wǎnshang wǒ gěi māma dǎ diànhuà.", "exVi": "Buổi tối tôi gọi điện cho mẹ."},
-      {"w": "喂", "py": "wéi", "hv": "", "pos": "part", "vi": "alô (khi nghe/gọi điện thoại)", "ex": "喂，你好！", "exPy": "Wéi, nǐ hǎo!", "exVi": "Alô, xin chào!"},
-      {"w": "请", "py": "qǐng", "hv": "thỉnh", "pos": "v", "vi": "mời; xin (vui lòng)", "ex": "请坐！请喝茶。", "exPy": "Qǐng zuò! Qǐng hē chá.", "exVi": "Mời ngồi! Mời uống trà."},
-      {"w": "吧", "py": "ba", "hv": "ba", "pos": "part", "vi": "trợ từ cuối câu: nhé, đi (đề nghị); chắc là… nhỉ (đoán)", "ex": "我们去商店吧！", "exPy": "Wǒmen qù shāngdiàn ba!", "exVi": "Chúng mình đi cửa hàng nhé!"},
-      {"w": "一下", "py": "yíxià", "hv": "nhất hạ", "pos": "phr", "vi": "(làm) một chút, thử", "ex": "请等一下。", "exPy": "Qǐng děng yíxià.", "exVi": "Xin đợi một chút."},
-      {"w": "等", "py": "děng", "hv": "đẳng", "pos": "v", "vi": "đợi, chờ", "ex": "你等我一下。", "exPy": "Nǐ děng wǒ yíxià.", "exVi": "Bạn đợi mình một chút."},
-      {"w": "来", "py": "lái", "hv": "lai", "pos": "v", "vi": "đến, tới (về phía người nói)", "ex": "你来我家吧！", "exPy": "Nǐ lái wǒ jiā ba!", "exVi": "Bạn đến nhà mình chơi nhé!"},
-      {"w": "回", "py": "huí", "hv": "hồi", "pos": "v", "vi": "về, quay về", "ex": "我晚上回家。", "exPy": "Wǒ wǎnshang huí jiā.", "exVi": "Buổi tối tôi về nhà."},
-      {"w": "买", "py": "mǎi", "hv": "mãi", "pos": "v", "vi": "mua (卖 mài = bán)", "ex": "你想买什么？", "exPy": "Nǐ xiǎng mǎi shénme?", "exVi": "Bạn muốn mua gì?"},
-      {"w": "东西", "py": "dōngxi", "hv": "đông tây", "pos": "n", "vi": "đồ, đồ vật, đồ đạc", "ex": "我去商店买东西。", "exPy": "Wǒ qù shāngdiàn mǎi dōngxi.", "exVi": "Tôi đi cửa hàng mua đồ."},
-      {"w": "贵", "py": "guì", "hv": "quý", "pos": "adj", "vi": "đắt", "ex": "太贵了！", "exPy": "Tài guì le!", "exVi": "Đắt quá!"},
-      {"w": "便宜", "py": "piányi", "hv": "tiện nghi", "pos": "adj", "vi": "rẻ", "ex": "这个很便宜。", "exPy": "Zhège hěn piányi.", "exVi": "Cái này rất rẻ."},
-      {"w": "先生", "py": "xiānsheng", "hv": "tiên sinh", "pos": "n", "vi": "ông, anh (cách gọi lịch sự nam giới); chồng", "ex": "先生，您好！", "exPy": "Xiānsheng, nín hǎo!", "exVi": "Chào anh/ông ạ!"},
-      {"w": "小姐", "py": "xiǎojie", "hv": "tiểu thư", "pos": "n", "vi": "cô (gọi phụ nữ trẻ, nên kèm họ)", "ex": "王小姐，您好！", "exPy": "Wáng xiǎojie, nín hǎo!", "exVi": "Chào cô Vương!"},
-      {"w": "电脑", "py": "diànnǎo", "hv": "điện não", "pos": "n", "vi": "máy tính", "ex": "我想买一个电脑。", "exPy": "Wǒ xiǎng mǎi yí ge diànnǎo.", "exVi": "Tôi muốn mua một cái máy tính."},
-      {"w": "可以", "py": "kěyǐ", "hv": "khả dĩ", "pos": "v", "vi": "có thể, được (phép)", "ex": "我可以看一下吗？", "exPy": "Wǒ kěyǐ kàn yíxià ma?", "exVi": "Tôi xem qua một chút được không?"},
-      {"w": "坐", "py": "zuò", "hv": "toạ", "pos": "v", "vi": "ngồi; đi (xe, tàu…)", "ex": "我们坐这儿吧。", "exPy": "Wǒmen zuò zhèr ba.", "exVi": "Chúng ta ngồi đây nhé."},
-      {"w": "再", "py": "zài", "hv": "tái", "pos": "adv", "vi": "lại, nữa (lặp lại trong tương lai)", "ex": "明天再来吧！", "exPy": "Míngtiān zài lái ba!", "exVi": "Mai lại đến nhé!"}
-    ]},
-    {"k": "sounds", "h": "Phát âm: 买 – 卖, 便宜, q – j, g – h, 喂 và 3+3", "items": [
-      {"sym": "买 mǎi – 卖 mài", "ex": ["买", "卖"], "vi": "Cùng âm, khác thanh – nghĩa NGƯỢC nhau: 买 <b>mǎi</b> (thanh 3) = mua; 卖 <b>mài</b> (thanh 4) = bán. Nói sai thanh, người bán sẽ tưởng bạn muốn bán đồ!", "pairs": [["买", "卖"]]},
-      {"sym": "便宜 piányi (đa âm tự 便)", "ex": ["便宜"], "vi": "便 trong 便宜 đọc <b>pián</b> (bật hơi), 宜 đọc nhẹ. Nhưng trong 方便 fāngbiàn (tiện lợi) lại đọc biàn. Hán Việt “tiện nghi” nhưng nghĩa là RẺ!"},
-      {"sym": "q + ing (请) – j", "ex": ["请", "请问"], "vi": "请 <b>qǐng</b>: q bật hơi + ing (≈ “inh”) → gần “chỉnh” có hơi. 请 qǐng ≠ 井 jǐng.", "pairs": [["请", "井"]]},
-      {"sym": "g – h (贵 / 会)", "ex": ["贵", "太贵了"], "vi": "贵 <b>guì</b>: g không bật hơi, ui = uei → gần “cuây”. Đừng đọc thành 会 huì.", "pairs": [["贵", "会"]]},
-      {"sym": "喂 wéi, 吧 ba", "ex": ["喂", "好吧"], "vi": "喂 khi nghe điện thoại thường đọc <b>wéi</b> (thanh 2, lên giọng như hỏi). 吧 luôn đọc nhẹ <b>ba</b>."},
-      {"sym": "3 + 3 (可以, 小姐, 你买)", "ex": ["可以", "小姐", "你买"], "vi": "可以 kěyǐ → <b>kéyǐ</b>; 你买 → ní mǎi; 小姐 khi nói: xiáojie."}
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 1: Nói lịch sự – 请 + động từ, động từ + 一下, 可以…吗", "html": "<p><b>请 + động từ</b> = mời / xin vui lòng: 请坐 (mời ngồi), 请喝茶 (mời uống trà), 请进 jìn (mời vào). <b>请问</b> qǐngwèn = xin hỏi – mở đầu câu hỏi với người lạ.</p><p><b>Động từ + 一下 (yíxià)</b> = làm một chút, làm thử – làm câu mềm hơn: 等一下, 看一下, 试一下 (shì – thử).</p><p><b>可以 + động từ</b> = được (phép), có thể – dùng khi xin phép: 我可以看一下吗？ – 可以 / 不可以 (hoặc 不行 bù xíng).</p>", "table": [["Nói thẳng", "Nói lịch sự hơn"], ["等！", "请等一下。"], ["喝茶。", "请喝茶。"], ["我看。", "我可以看一下吗？"], ["火车站在哪儿？", "请问，火车站在哪儿？"]], "ex": [
-      {"t": "请坐，请喝茶。", "py": "Qǐng zuò, qǐng hē chá.", "vi": "Mời ngồi, mời uống trà."},
-      {"t": "请问，火车站在哪儿？", "py": "Qǐngwèn, huǒchēzhàn zài nǎr?", "vi": "Xin hỏi, ga tàu ở đâu?"},
-      {"t": "我可以看一下吗？— 可以。", "py": "Wǒ kěyǐ kàn yíxià ma? — Kěyǐ.", "vi": "Tôi xem qua một chút được không? — Được."}
-    ], "tips": ["请 dùng để mời/nhờ NGƯỜI KHÁC làm: ❌ <i>我请坐</i>.", "一下 đứng SAU động từ: ❌ <i>一下等</i> → ✅ 等一下. Đọc yíxià.", "Xin phép dùng 可以 hoặc 能 (bài 6) đều được; 可以 phổ biến hơn."]},
-    {"k": "grammar", "h": "Ngữ pháp 2: 吧 – đề nghị, đoán, đồng ý", "html": "<p><b>吧 (ba)</b> cuối câu làm giọng mềm, có 3 cách dùng chính. So sánh: 你是老师<b>吗</b>？ (không biết, hỏi thật) – 你是老师<b>吧</b>？ (mình đoán là phải, hỏi để xác nhận).</p>", "table": [["Cách dùng", "Ví dụ", "Nghĩa"], ["Đề nghị, rủ rê", "我们去商店吧！", "Mình đi cửa hàng nhé!"], ["Đoán – xác nhận", "你是安娜吧？", "Bạn là Anna phải không? (mình đoán vậy)"], ["Đồng ý (hơi miễn cưỡng)", "好吧。", "Thôi được rồi."], ["Mặc cả, nhờ vả", "便宜一点儿吧！", "Bớt chút đi mà!"]], "ex": [
-      {"t": "我们看电影吧！", "py": "Wǒmen kàn diànyǐng ba!", "vi": "Mình đi xem phim đi!"},
-      {"t": "你是小兰的哥哥吧？— 是，我是阮海。", "py": "Nǐ shì Xiǎo Lán de gēge ba? — Shì, wǒ shì Ruǎn Hǎi.", "vi": "Anh là anh trai Tiểu Lan phải không ạ? — Ừ, anh là Nguyễn Hải."},
-      {"t": "好吧，我买这个。", "py": "Hǎo ba, wǒ mǎi zhège.", "vi": "Thôi được, tôi mua cái này."}
-    ], "tips": ["吧 đọc nhẹ, không có thanh.", "Câu có đại từ nghi vấn không dùng 吧 để hỏi: ❌ <i>你是哪国人吧？</i>", "Đã có 吧 thì không thêm 吗: ❌ <i>你是安娜吧吗？</i>"]},
-    {"k": "grammar", "h": "Ngữ pháp 3: 呢 – ba cách dùng; mẫu câu gọi điện", "html": "<p><b>呢 (ne)</b>:</p><ol><li>Hỏi lại (ôn bài 2): 我很好，你呢？</li><li>Hỏi “… đâu rồi?” khi tìm không thấy: 我的手机呢？</li><li><b>在 + động từ + 呢</b> = đang làm gì (HSK 2 học kỹ): 他在打电话呢。</li></ol><p><b>Gọi điện</b>: mở đầu <b>喂</b> (wéi – alô); hỏi người: <b>请问，…在吗？</b>; trả lời 在，请等一下 / 不在 / 我就是 (jiù shì – chính tôi đây). <b>给 + người + 打电话</b> = gọi điện cho ai (给 gěi – HSK 2).</p>", "table": [["Câu", "Nghĩa"], ["喂，你好！请问，小兰在吗？", "Alô, chào bạn! Xin hỏi, Lan có đó không?"], ["在，请等一下。", "Có, xin đợi một chút."], ["她不在。", "Cô ấy không có ở đây."], ["我就是。", "Chính tôi đây."], ["晚上我给你打电话。", "Tối tôi gọi cho bạn."]], "ex": [
-      {"t": "我的手机呢？— 在桌子上。", "py": "Wǒ de shǒujī ne? — Zài zhuōzi shang.", "vi": "Điện thoại của tôi đâu rồi? — Ở trên bàn."},
-      {"t": "小明呢？— 他在打电话呢。", "py": "Xiǎo Míng ne? — Tā zài dǎ diànhuà ne.", "vi": "Tiểu Minh đâu? — Cậu ấy đang gọi điện."},
-      {"t": "喂，是安娜吧？— 是我。", "py": "Wéi, shì Ānnà ba? — Shì wǒ.", "vi": "Alô, Anna phải không? — Mình đây."}
-    ], "tips": ["❌ <i>我打电话妈妈</i> (theo tiếng Việt “gọi điện mẹ”) → ✅ 我给妈妈打电话。", "喂 nghe điện thoại đọc wéi; gọi người ngoài đường “này!” đọc wèi.", "我的手机呢？ dùng khi đang tìm mà không thấy; 我的手机在哪儿？ là câu hỏi trung tính."]},
-    {"k": "text", "h": "Văn hoá mua sắm: mặc cả, cách gọi người bán, số “kiêng”", "html": "<p>Ở chợ, cửa hàng nhỏ Trung Quốc có thể <b>mặc cả</b> (讲价 jiǎngjià): 太贵了！便宜一点儿吧！ / 可以便宜一点儿吗？ Ở siêu thị, trung tâm thương mại giá cố định.</p><p>Thanh toán phổ biến nhất ở Trung Quốc là quét mã QR bằng điện thoại (扫码 sǎomǎ). Hỏi: 可以用手机付钱吗？ Kěyǐ yòng shǒujī fù qián ma? (Trả bằng điện thoại được không?)</p><p><b>先生</b> dùng an toàn với nam giới. <b>小姐</b> nên dùng kèm họ (王小姐) hoặc nơi trang trọng; gọi người bán hàng nữ, nhiều nơi nay nói <b>服务员</b> hoặc <b>美女</b> měinǚ (người đẹp), vì 小姐 đứng một mình đôi khi bị hiểu không hay.</p><p>Mẹo vui: tránh nói giá 250 là <b>二百五</b> – đây là từ lóng nghĩa “đồ ngốc”! Nói 两百五十块 cho chắc.</p>"},
-    {"k": "dialog", "h": "Nghe 1: Gọi điện sang Bắc Kinh", "lang": "zh-CN", "note": "Tối thứ Sáu, Tiểu Lan gọi điện cho anh trai Nguyễn Hải đang học ở Bắc Kinh. Nghe lần 1 không nhìn chữ: anh Hải đang ở đâu, làm gì?", "lines": [
-      {"s": "小兰", "g": "f", "t": "喂，哥哥，你好！", "py": "Wéi, gēge, nǐ hǎo!", "vi": "Alô, anh ơi, em chào anh!"},
-      {"s": "阮海", "g": "m", "t": "喂，是小兰吧？你好！", "py": "Wéi, shì Xiǎo Lán ba? Nǐ hǎo!", "vi": "Alô, Lan đấy à? Chào em!"},
-      {"s": "小兰", "g": "f", "t": "是我。哥哥，你在做什么呢？", "py": "Shì wǒ. Gēge, nǐ zài zuò shénme ne?", "vi": "Em đây. Anh đang làm gì thế?"},
-      {"s": "阮海", "g": "m", "t": "我在商店呢，我想买一个电脑。", "py": "Wǒ zài shāngdiàn ne, wǒ xiǎng mǎi yí ge diànnǎo.", "vi": "Anh đang ở cửa hàng, anh muốn mua một cái máy tính."},
-      {"s": "小兰", "g": "f", "t": "北京天气怎么样？", "py": "Běijīng tiānqì zěnmeyàng?", "vi": "Thời tiết Bắc Kinh thế nào anh?"},
-      {"s": "阮海", "g": "m", "t": "太冷了！零下五度。河内呢？", "py": "Tài lěng le! Língxià wǔ dù. Hénèi ne?", "vi": "Lạnh lắm! Âm 5 độ. Còn Hà Nội?"},
-      {"s": "小兰", "g": "f", "t": "不冷，二十度。哥哥，春节你回来吗？", "py": "Bù lěng, èrshí dù. Gēge, Chūnjié nǐ huílai ma?", "vi": "Không lạnh, 20 độ. Anh ơi, Tết anh có về không?"},
-      {"s": "阮海", "g": "m", "t": "回来！我二月回家。", "py": "Huílai! Wǒ èr yuè huí jiā.", "vi": "Có chứ! Tháng Hai anh về nhà."},
-      {"s": "小兰", "g": "f", "t": "太好了！晚上请给妈妈打电话吧。", "py": "Tài hǎo le! Wǎnshang qǐng gěi māma dǎ diànhuà ba.", "vi": "Tuyệt quá! Tối nay anh gọi điện cho mẹ nhé."},
-      {"s": "阮海", "g": "m", "t": "好，晚上我给妈妈打电话。再见！", "py": "Hǎo, wǎnshang wǒ gěi māma dǎ diànhuà. Zàijiàn!", "vi": "Ừ, tối anh gọi cho mẹ. Tạm biệt em!"}
-    ], "qs": [
-      {"q": "Anh Hải đang ở đâu?", "o": ["Ở nhà", "Ở cửa hàng", "Ở trường"], "a": 1, "e": "我在商店呢 – anh đang ở cửa hàng."},
-      {"q": "Anh Hải muốn mua gì?", "o": ["Điện thoại", "Máy tính", "Quần áo"], "a": 1, "e": "我想买一个电脑。"},
-      {"q": "Bắc Kinh bao nhiêu độ?", "o": ["5 độ", "Âm 5 độ", "20 độ"], "a": 1, "e": "零下五度 = âm 5 độ."},
-      {"q": "Khi nào anh Hải về nhà?", "o": ["Tháng Hai", "Tháng Mười hai", "Ngày mai"], "a": 0, "e": "我二月回家。"}
-    ]},
-    {"k": "dialog", "h": "Nghe 2: Mua máy tính", "lang": "zh-CN", "note": "Cùng lúc đó, ở một cửa hàng máy tính tại Bắc Kinh. (千 qiān = nghìn.) Nghe lần 1 không nhìn chữ: cuối cùng anh Hải mua máy tính giá bao nhiêu?", "lines": [
-      {"s": "服务员", "g": "f", "t": "先生，您好！请问，您想买什么？", "py": "Xiānsheng, nín hǎo! Qǐngwèn, nín xiǎng mǎi shénme?", "vi": "Chào anh ạ! Xin hỏi, anh muốn mua gì?"},
-      {"s": "阮海", "g": "m", "t": "我想买一个电脑。这个多少钱？", "py": "Wǒ xiǎng mǎi yí ge diànnǎo. Zhège duōshao qián?", "vi": "Tôi muốn mua một cái máy tính. Cái này bao nhiêu tiền?"},
-      {"s": "服务员", "g": "f", "t": "这个五千块。", "py": "Zhège wǔqiān kuài.", "vi": "Cái này 5.000 tệ ạ."},
-      {"s": "阮海", "g": "m", "t": "太贵了！有便宜一点儿的吗？", "py": "Tài guì le! Yǒu piányi yìdiǎnr de ma?", "vi": "Đắt quá! Có cái nào rẻ hơn chút không?"},
-      {"s": "服务员", "g": "f", "t": "有。您看一下这个，三千八百块。", "py": "Yǒu. Nín kàn yíxià zhège, sānqiān bābǎi kuài.", "vi": "Có ạ. Anh xem thử cái này, 3.800 tệ."},
-      {"s": "阮海", "g": "m", "t": "我可以试一下吗？", "py": "Wǒ kěyǐ shì yíxià ma?", "vi": "Tôi dùng thử một chút được không?"},
-      {"s": "服务员", "g": "f", "t": "可以，请坐。", "py": "Kěyǐ, qǐng zuò.", "vi": "Được ạ, mời anh ngồi."},
-      {"s": "阮海", "g": "m", "t": "很好。可以便宜一点儿吗？", "py": "Hěn hǎo. Kěyǐ piányi yìdiǎnr ma?", "vi": "Tốt đấy. Bớt chút được không?"},
-      {"s": "服务员", "g": "f", "t": "三千六吧。", "py": "Sānqiān liù ba.", "vi": "Thôi 3.600 nhé."},
-      {"s": "阮海", "g": "m", "t": "好吧，我买这个。", "py": "Hǎo ba, wǒ mǎi zhège.", "vi": "Được rồi, tôi mua cái này."},
-      {"s": "服务员", "g": "f", "t": "好的，请等一下。", "py": "Hǎo de, qǐng děng yíxià.", "vi": "Vâng, anh đợi một chút ạ."}
-    ], "qs": [
-      {"q": "Máy tính đầu tiên giá bao nhiêu?", "o": ["3.600 tệ", "3.800 tệ", "5.000 tệ"], "a": 2, "e": "这个五千块 – 五千 = 5.000."},
-      {"q": "Vì sao anh Hải không mua máy đầu tiên?", "o": ["Đắt quá", "Xấu quá", "Hết hàng"], "a": 0, "e": "太贵了！"},
-      {"q": "Cuối cùng anh mua với giá bao nhiêu?", "o": ["3.600 tệ", "3.800 tệ", "5.000 tệ"], "a": 0, "e": "三千六 = 三千六百 = 3.600 (cách nói tắt)."},
-      {"q": "Trong câu 三千六吧, 吧 thể hiện điều gì?", "o": ["Đề nghị, thương lượng mềm mỏng", "Câu hỏi có/không", "Hành động đang diễn ra"], "a": 0, "e": "吧 cuối câu: đề nghị nhẹ nhàng – “thôi lấy 3.600 nhé”."}
-    ]},
-    {"k": "read", "h": "Đọc: Thứ Bảy của Tiểu Lan", "title": "星期六", "text": "今天是星期六。下午两点，我和安娜去商店买东西。\n\n安娜想买衣服。一件衣服六十万越南盾，有点儿贵。安娜说：“请便宜一点儿吧！”\n\n晚上八点，哥哥给妈妈打电话。妈妈很高兴。", "py": "Jīntiān shì xīngqīliù. Xiàwǔ liǎng diǎn, wǒ hé Ānnà qù shāngdiàn mǎi dōngxi.\n\nĀnnà xiǎng mǎi yīfu. Yí jiàn yīfu liùshí wàn Yuènán dùn, yǒudiǎnr guì. Ānnà shuō: “Qǐng piányi yìdiǎnr ba!”\n\nWǎnshang bā diǎn, gēge gěi māma dǎ diànhuà. Māma hěn gāoxìng.", "vi": "Hôm nay là thứ Bảy. 2 giờ chiều, tôi và Anna đi cửa hàng mua đồ.\n\nAnna muốn mua quần áo. Một chiếc áo 600.000 đồng, hơi đắt. Anna nói: “Bớt cho chút đi ạ!”\n\n8 giờ tối, anh trai gọi điện cho mẹ. Mẹ rất vui.", "gloss": [
-      {"w": "件", "py": "jiàn", "vi": "chiếc (lượng từ cho áo, việc)"},
-      {"w": "万", "py": "wàn", "vi": "vạn = 10.000"},
-      {"w": "越南盾", "py": "Yuènán dùn", "vi": "đồng Việt Nam"},
-      {"w": "给…打电话", "py": "gěi … dǎ diànhuà", "vi": "gọi điện cho…"}
-    ], "qs": [
-      {"q": "Tiểu Lan và Anna đi cửa hàng lúc mấy giờ?", "o": ["2 giờ chiều", "12 giờ trưa", "8 giờ tối"], "a": 0, "e": "下午两点。"},
-      {"q": "Chiếc áo giá bao nhiêu?", "o": ["60.000 đ", "600.000 đ", "6.000.000 đ"], "a": 1, "e": "六十万 = 60 × 10.000 = 600.000 đồng."},
-      {"q": "Anna nói gì với người bán?", "o": ["Đắt quá, tôi không mua", "Bớt cho chút đi ạ!", "Cho tôi xem cái khác"], "a": 1, "e": "请便宜一点儿吧！"},
-      {"q": "Ai gọi điện cho mẹ?", "o": ["Tiểu Lan", "Anh trai", "Anna"], "a": 1, "e": "哥哥给妈妈打电话。"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "打", "py": "dǎ", "hv": "đả", "parts": "扌(thủ – tay) + 丁 (đinh – cái đinh)", "strokes": 5, "vi": "đánh, gõ – tay đóng đinh; 打电话 = gọi điện", "words": "打电话"},
-      {"c": "电", "py": "diàn", "hv": "điện", "parts": "tượng hình tia chớp xuyên qua đám mây", "strokes": 5, "vi": "điện, tia chớp", "words": "电话, 电脑, 电影"},
-      {"c": "话", "py": "huà", "hv": "thoại", "parts": "讠(ngôn – lời) + 舌 (thiệt – cái lưỡi)", "strokes": 8, "vi": "lời nói – lời phát ra từ lưỡi", "words": "电话, 说话"},
-      {"c": "请", "py": "qǐng", "hv": "thỉnh", "parts": "讠(lời nói) + 青 (thanh – gợi âm)", "strokes": 10, "vi": "mời, xin – lời mời lịch sự", "words": "请坐, 请问"},
-      {"c": "买", "py": "mǎi", "hv": "mãi", "parts": "giản thể của 買 (网 lưới + 貝 vỏ sò – tiền xưa)", "strokes": 6, "vi": "mua – dùng tiền đổi đồ", "words": "买东西"},
-      {"c": "来", "py": "lái", "hv": "lai", "parts": "vốn vẽ cây lúa mì, sau mượn nghĩa “đến”", "strokes": 7, "vi": "đến, tới", "words": "来, 回来"},
-      {"c": "回", "py": "huí", "hv": "hồi", "parts": "囗 nhỏ nằm trong 囗 lớn – vòng xoáy quay lại", "strokes": 6, "vi": "về, quay về", "words": "回家, 回来"}
-    ]},
-    {"k": "speak", "h": "Nói: Gọi điện – mua sắm – tiếp khách", "tasks": [
-      {"p": "Gọi điện cho bạn: chào, hỏi bạn có ở đó không, rủ đi mua sắm chiều mai.", "model": "喂，你好！请问，安娜在吗？— 我就是。— 安娜，明天下午我们去商店吧！— 好啊！", "py": "Wéi, nǐ hǎo! Qǐngwèn, Ānnà zài ma? — Wǒ jiù shì. — Ānnà, míngtiān xiàwǔ wǒmen qù shāngdiàn ba! — Hǎo a!", "vi": "Alô, chào bạn! Xin hỏi, Anna có đó không? — Mình đây. — Anna, chiều mai mình đi cửa hàng nhé! — Được!", "tips": "喂 lên giọng nhẹ (wéi); 吧 cuối câu rủ rê đọc nhẹ."},
-      {"p": "Mua một chiếc áo: hỏi giá, chê đắt, mặc cả, rồi đồng ý.", "model": "这件衣服多少钱？— 三百块。— 太贵了！便宜一点儿吧！— 两百八吧。— 好吧，我买。", "py": "Zhè jiàn yīfu duōshao qián? — Sānbǎi kuài. — Tài guì le! Piányi yìdiǎnr ba! — Liǎngbǎi bā ba. — Hǎo ba, wǒ mǎi.", "vi": "Chiếc áo này bao nhiêu tiền? — 300 tệ. — Đắt quá! Bớt chút đi! — 280 nhé. — Thôi được, tôi mua.", "tips": "两百八 = 280 (nói tắt). 买 mǎi thanh 3, đừng nói thành 卖 mài."},
-      {"p": "Bạn mời khách vào nhà: mời vào, mời ngồi, mời uống trà; khi khách về hẹn lần sau lại đến.", "model": "请进！请坐，请喝茶。……再见，明天再来吧！", "py": "Qǐng jìn! Qǐng zuò, qǐng hē chá. … Zàijiàn, míngtiān zài lái ba!", "vi": "Mời vào! Mời ngồi, mời uống trà. … Tạm biệt, mai lại đến chơi nhé!", "tips": "进 jìn = vào. 再来 = lại đến."}
-    ]},
-    {"k": "write", "h": "Viết: Hai cuộc hội thoại", "task": "Viết 2 hội thoại ngắn (mỗi cái 5–6 câu): (1) gọi điện hẹn bạn đi mua sắm; (2) mua một món đồ – hỏi giá, chê đắt, mặc cả.", "min": 60, "model": "（一）\nA：喂，你好！请问，小明在吗？\nB：我就是。你是安娜吧？\nA：是我。明天上午我们去商店买东西吧！\nB：好啊！几点？\nA：十点吧。\n（二）\nA：您好！这个杯子多少钱？\nB：三十块。\nA：太贵了！可以便宜一点儿吗？\nB：二十五块吧。\nA：好吧，我买两个。", "modelVi": "(1) A: Alô, chào bạn! Xin hỏi, Tiểu Minh có đó không? B: Mình đây. Bạn là Anna phải không? A: Mình đây. Sáng mai mình đi cửa hàng mua đồ nhé! B: Được! Mấy giờ? A: 10 giờ nhé. (2) A: Chào chị! Cái cốc này bao nhiêu tiền? B: 30 tệ. A: Đắt quá! Bớt chút được không? B: 25 tệ nhé. A: Thôi được, tôi mua hai cái.", "tips": ["Hội thoại 1 nên có 喂, 请问, 吧 (đoán) và 吧 (rủ rê).", "Hội thoại 2 nên có 多少钱, 太贵了, 便宜一点儿, 好吧.", "Viết đúng dấu câu hội thoại: A：…"], "checklist": ["Có 喂 và 请问", "Có 吧 với 2 nghĩa khác nhau", "Có 一下 hoặc 可以…吗", "Có câu mặc cả 便宜一点儿", "买 / 卖 dùng đúng"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "喂，你好！请问，小兰在吗？", "lang": "zh-CN", "q": "Người gọi muốn gặp ai?", "o": ["Tiểu Lan", "Tiểu Minh", "Anna"], "a": 0, "e": "请问，小兰在吗？ – Xin hỏi, Tiểu Lan có đó không?"},
-    {"t": "listen", "say": "太贵了！便宜一点儿吧！", "lang": "zh-CN", "q": "Người nói muốn gì?", "o": ["Muốn được giảm giá", "Muốn mua thêm", "Muốn đổi màu"], "a": 0, "e": "太贵了 (đắt quá), 便宜一点儿吧 (bớt chút đi)."},
-    {"t": "listen", "say": "请等一下。", "lang": "zh-CN", "q": "Câu vừa nghe nghĩa là:", "o": ["Xin đợi một chút", "Mời ngồi", "Xin hỏi"], "a": 0, "e": "等一下 = đợi một chút."},
-    {"t": "mc", "q": "Bạn đoán người kia là Anna và muốn xác nhận:", "o": ["你是安娜吗？", "你是安娜吧？", "你是安娜呢？"], "a": 1, "e": "吧 = đoán rồi hỏi xác nhận; 吗 = hỏi khi không biết."},
-    {"t": "mc", "q": "“Tối nay tôi gọi điện cho mẹ” – câu đúng:", "o": ["晚上我打电话妈妈。", "晚上我给妈妈打电话。", "晚上我打妈妈电话给。"], "a": 1, "e": "给 + người + 打电话."},
-    {"t": "mc", "q": "我的手机呢？ nghĩa là:", "o": ["Điện thoại của tôi đâu rồi?", "Điện thoại của tôi thế nào?", "Đây là điện thoại của tôi."], "a": 0, "e": "Danh từ + 呢？ khi đang tìm = … đâu rồi?"},
-    {"t": "mc", "q": "买 (mǎi) và 卖 (mài) lần lượt nghĩa là:", "o": ["mua – bán", "bán – mua", "mua – mua"], "a": 0, "e": "买 thanh 3 = mua; 卖 thanh 4 = bán."},
-    {"t": "mc", "q": "Rủ bạn: “Mình đi xem phim đi!”", "o": ["我们看电影吧！", "我们看电影吗？", "我们看电影呢！"], "a": 0, "e": "Đề nghị, rủ rê dùng 吧."},
-    {"t": "fill", "q": "___坐！___喝茶！(Mời ngồi! Mời uống trà! – điền một chữ)", "a": "请", "alt": ["qing"], "e": "请 + động từ = mời…"},
-    {"t": "fill", "q": "我可以看___吗？(Tôi xem qua một chút được không?)", "a": "一下", "alt": ["yixia"], "e": "Động từ + 一下 = làm một chút."},
-    {"t": "fill", "q": "这个很___，我买两个！(Cái này rẻ, tôi mua hai cái!)", "a": "便宜", "alt": ["pianyi"], "e": "便宜 piányi = rẻ."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Xin hỏi, ga tàu ở đâu?”", "w": ["在哪儿", "请问", "火车站"], "a": "请问火车站在哪儿", "e": "请问 mở đầu + câu hỏi vị trí."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Chúng mình đi cửa hàng mua đồ nhé!”", "w": ["吧", "去商店", "我们", "买东西"], "a": "我们去商店买东西吧", "e": "去 + nơi + làm gì + 吧 (rủ rê)."},
-    {"t": "dict", "say": "打电话", "lang": "zh-CN", "a": "打电话", "py": "dǎ diànhuà", "e": "打电话 = gọi điện thoại."},
-    {"t": "dict", "say": "多少钱？太贵了！", "lang": "zh-CN", "a": "多少钱？太贵了！", "py": "duōshao qián tài guì le", "e": "Câu hỏi giá và chê đắt."},
-    {"t": "match", "q": "Nối câu với nghĩa:", "pairs": [["请坐", "mời ngồi"], ["请问", "xin hỏi"], ["等一下", "đợi một chút"], ["太贵了", "đắt quá"], ["便宜一点儿", "rẻ hơn một chút"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Điện thoại đồ chơi hoặc điện thoại thật (tắt mạng) để đóng vai; đồ vật dán giá (cốc, áo, sách…); tiền giả từ bài 7; thẻ chữ 打 电 话 请 买 来 回.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: ôn bài 9 – 今天天气怎么样？ và rủ nhau …，怎么样？"},
-      {"t": "15'", "do": "Từ vựng nhóm 1 (gọi điện, tiếp khách): 打电话, 喂, 请, 等, 一下, 来, 回, 坐, 再."},
-      {"t": "15'", "do": "Ngữ pháp 1: 请 + V, V + 一下, 可以…吗 – học viên biến 5 câu “nói thẳng” thành câu lịch sự."},
-      {"t": "20'", "do": "Ngữ pháp 3: 呢 (3 cách) + mẫu câu gọi điện. Nghe hội thoại 1 (anh Hải ở đâu?) → đóng vai gọi điện theo cặp, ngồi quay lưng vào nhau."},
-      {"t": "15'", "do": "Phát âm: 买/卖, 便宜 (pián), 请 qǐng, 喂 wéi, 3+3 trong 可以."},
-      {"t": "15'", "do": "Bài tập 1–8 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: GV ‘gọi điện’ ngẫu nhiên cho học viên: 喂，请问，…在吗？ – học viên trả lời đúng tình huống."},
-      {"t": "15'", "do": "Từ vựng nhóm 2 (mua sắm): 买, 东西, 贵, 便宜, 先生, 小姐, 电脑 + mục văn hoá mặc cả, cách gọi người bán, 二百五."},
-      {"t": "15'", "do": "Ngữ pháp 2: 吧 (đề nghị / đoán / đồng ý) – so sánh 吗 và 吧 qua cặp câu."},
-      {"t": "15'", "do": "Nghe hội thoại 2 (giá cuối cùng?) + đọc ‘星期六’."},
-      {"t": "20'", "do": "Chữ Hán 7 chữ (扌 thủ, 讠 ngôn) + trò Chợ mặc cả."},
-      {"t": "15'", "do": "Viết hai hội thoại; bài tập 9–16; giao bài về nhà."}
+ "no": 10,
+ "title": "喂，你好！– Gọi điện & mua sắm: 请, 吧, 呢",
+ "sub": "Wéi, qǐngwèn, Xiǎo Lán zài ma? 喂，请问，小兰在吗？",
+ "goals": [
+  "Gọi và nghe điện thoại: 喂，请问，…在吗？– 在，请等一下 / 她不在 / 我就是",
+  "Nói lịch sự với 请 + động từ, động từ + 一下, 可以…吗？",
+  "Dùng 吧 để đề nghị, đoán – xác nhận, đồng ý; phân biệt 吗 / 吧",
+  "Dùng 呢 để hỏi lại, hỏi “… đâu rồi?”, và 在…呢 (đang làm)",
+  "Mua sắm: hỏi giá, chê đắt, mặc cả (太贵了！便宜一点儿吧！); phân biệt 买 / 卖"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词 shēngcí)",
+   "items": [
+    {
+     "w": "打电话",
+     "py": "dǎ diànhuà",
+     "hv": "đả điện thoại",
+     "pos": "v",
+     "vi": "gọi điện thoại",
+     "ex": "晚上我给妈妈打电话。",
+     "exPy": "Wǎnshang wǒ gěi māma dǎ diànhuà.",
+     "exVi": "Buổi tối tôi gọi điện cho mẹ."
+    },
+    {
+     "w": "喂",
+     "py": "wéi",
+     "hv": "",
+     "pos": "part",
+     "vi": "alô (khi nghe/gọi điện thoại)",
+     "ex": "喂，你好！",
+     "exPy": "Wéi, nǐ hǎo!",
+     "exVi": "Alô, xin chào!"
+    },
+    {
+     "w": "请",
+     "py": "qǐng",
+     "hv": "thỉnh",
+     "pos": "v",
+     "vi": "mời; xin (vui lòng)",
+     "ex": "请坐！请喝茶。",
+     "exPy": "Qǐng zuò! Qǐng hē chá.",
+     "exVi": "Mời ngồi! Mời uống trà."
+    },
+    {
+     "w": "吧",
+     "py": "ba",
+     "hv": "ba",
+     "pos": "part",
+     "vi": "trợ từ cuối câu: nhé, đi (đề nghị); chắc là… nhỉ (đoán)",
+     "ex": "我们去商店吧！",
+     "exPy": "Wǒmen qù shāngdiàn ba!",
+     "exVi": "Chúng mình đi cửa hàng nhé!"
+    },
+    {
+     "w": "一下",
+     "py": "yíxià",
+     "hv": "nhất hạ",
+     "pos": "phr",
+     "vi": "(làm) một chút, thử",
+     "ex": "请等一下。",
+     "exPy": "Qǐng děng yíxià.",
+     "exVi": "Xin đợi một chút."
+    },
+    {
+     "w": "等",
+     "py": "děng",
+     "hv": "đẳng",
+     "pos": "v",
+     "vi": "đợi, chờ",
+     "ex": "你等我一下。",
+     "exPy": "Nǐ děng wǒ yíxià.",
+     "exVi": "Bạn đợi mình một chút."
+    },
+    {
+     "w": "来",
+     "py": "lái",
+     "hv": "lai",
+     "pos": "v",
+     "vi": "đến, tới (về phía người nói)",
+     "ex": "你来我家吧！",
+     "exPy": "Nǐ lái wǒ jiā ba!",
+     "exVi": "Bạn đến nhà mình chơi nhé!"
+    },
+    {
+     "w": "回",
+     "py": "huí",
+     "hv": "hồi",
+     "pos": "v",
+     "vi": "về, quay về",
+     "ex": "我晚上回家。",
+     "exPy": "Wǒ wǎnshang huí jiā.",
+     "exVi": "Buổi tối tôi về nhà."
+    },
+    {
+     "w": "买",
+     "py": "mǎi",
+     "hv": "mãi",
+     "pos": "v",
+     "vi": "mua (卖 mài = bán)",
+     "ex": "你想买什么？",
+     "exPy": "Nǐ xiǎng mǎi shénme?",
+     "exVi": "Bạn muốn mua gì?"
+    },
+    {
+     "w": "东西",
+     "py": "dōngxi",
+     "hv": "đông tây",
+     "pos": "n",
+     "vi": "đồ, đồ vật, đồ đạc",
+     "ex": "我去商店买东西。",
+     "exPy": "Wǒ qù shāngdiàn mǎi dōngxi.",
+     "exVi": "Tôi đi cửa hàng mua đồ."
+    },
+    {
+     "w": "贵",
+     "py": "guì",
+     "hv": "quý",
+     "pos": "adj",
+     "vi": "đắt",
+     "ex": "太贵了！",
+     "exPy": "Tài guì le!",
+     "exVi": "Đắt quá!"
+    },
+    {
+     "w": "便宜",
+     "py": "piányi",
+     "hv": "tiện nghi",
+     "pos": "adj",
+     "vi": "rẻ",
+     "ex": "这个很便宜。",
+     "exPy": "Zhège hěn piányi.",
+     "exVi": "Cái này rất rẻ."
+    },
+    {
+     "w": "先生",
+     "py": "xiānsheng",
+     "hv": "tiên sinh",
+     "pos": "n",
+     "vi": "ông, anh (cách gọi lịch sự nam giới); chồng",
+     "ex": "先生，您好！",
+     "exPy": "Xiānsheng, nín hǎo!",
+     "exVi": "Chào anh/ông ạ!"
+    },
+    {
+     "w": "小姐",
+     "py": "xiǎojie",
+     "hv": "tiểu thư",
+     "pos": "n",
+     "vi": "cô (gọi phụ nữ trẻ, nên kèm họ)",
+     "ex": "王小姐，您好！",
+     "exPy": "Wáng xiǎojie, nín hǎo!",
+     "exVi": "Chào cô Vương!"
+    },
+    {
+     "w": "电脑",
+     "py": "diànnǎo",
+     "hv": "điện não",
+     "pos": "n",
+     "vi": "máy tính",
+     "ex": "我想买一个电脑。",
+     "exPy": "Wǒ xiǎng mǎi yí ge diànnǎo.",
+     "exVi": "Tôi muốn mua một cái máy tính."
+    },
+    {
+     "w": "可以",
+     "py": "kěyǐ",
+     "hv": "khả dĩ",
+     "pos": "v",
+     "vi": "có thể, được (phép)",
+     "ex": "我可以看一下吗？",
+     "exPy": "Wǒ kěyǐ kàn yíxià ma?",
+     "exVi": "Tôi xem qua một chút được không?"
+    },
+    {
+     "w": "坐",
+     "py": "zuò",
+     "hv": "toạ",
+     "pos": "v",
+     "vi": "ngồi; đi (xe, tàu…)",
+     "ex": "我们坐这儿吧。",
+     "exPy": "Wǒmen zuò zhèr ba.",
+     "exVi": "Chúng ta ngồi đây nhé."
+    },
+    {
+     "w": "再",
+     "py": "zài",
+     "hv": "tái",
+     "pos": "adv",
+     "vi": "lại, nữa (lặp lại trong tương lai)",
+     "ex": "明天再来吧！",
+     "exPy": "Míngtiān zài lái ba!",
+     "exVi": "Mai lại đến nhé!"
+    }
+   ]
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: 买 – 卖, 便宜, q – j, g – h, 喂 và 3+3",
+   "items": [
+    {
+     "sym": "买 mǎi – 卖 mài",
+     "ex": [
+      "买",
+      "卖"
+     ],
+     "vi": "Cùng âm, khác thanh – nghĩa NGƯỢC nhau: 买 <b>mǎi</b> (thanh 3) = mua; 卖 <b>mài</b> (thanh 4) = bán. Nói sai thanh, người bán sẽ tưởng bạn muốn bán đồ!",
+     "pairs": [
+      [
+       "买",
+       "卖"
+      ]
+     ]
+    },
+    {
+     "sym": "便宜 piányi (đa âm tự 便)",
+     "ex": [
+      "便宜"
+     ],
+     "vi": "便 trong 便宜 đọc <b>pián</b> (bật hơi), 宜 đọc nhẹ. Nhưng trong 方便 fāngbiàn (tiện lợi) lại đọc biàn. Hán Việt “tiện nghi” nhưng nghĩa là RẺ!"
+    },
+    {
+     "sym": "q + ing (请) – j",
+     "ex": [
+      "请",
+      "请问"
+     ],
+     "vi": "请 <b>qǐng</b>: q bật hơi + ing (≈ “inh”) → gần “chỉnh” có hơi. 请 qǐng ≠ 井 jǐng.",
+     "pairs": [
+      [
+       "请",
+       "井"
+      ]
+     ]
+    },
+    {
+     "sym": "g – h (贵 / 会)",
+     "ex": [
+      "贵",
+      "太贵了"
+     ],
+     "vi": "贵 <b>guì</b>: g không bật hơi, ui = uei → gần “cuây”. Đừng đọc thành 会 huì.",
+     "pairs": [
+      [
+       "贵",
+       "会"
+      ]
+     ]
+    },
+    {
+     "sym": "喂 wéi, 吧 ba",
+     "ex": [
+      "喂",
+      "好吧"
+     ],
+     "vi": "喂 khi nghe điện thoại thường đọc <b>wéi</b> (thanh 2, lên giọng như hỏi). 吧 luôn đọc nhẹ <b>ba</b>."
+    },
+    {
+     "sym": "3 + 3 (可以, 小姐, 你买)",
+     "ex": [
+      "可以",
+      "小姐",
+      "你买"
+     ],
+     "vi": "可以 kěyǐ → <b>kéyǐ</b>; 你买 → ní mǎi; 小姐 khi nói: xiáojie."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: Nói lịch sự – 请 + động từ, động từ + 一下, 可以…吗",
+   "html": "<p><b>请 + động từ</b> = mời / xin vui lòng: 请坐 (mời ngồi), 请喝茶 (mời uống trà), 请进 jìn (mời vào). <b>请问</b> qǐngwèn = xin hỏi – mở đầu câu hỏi với người lạ.</p><p><b>Động từ + 一下 (yíxià)</b> = làm một chút, làm thử – làm câu mềm hơn: 等一下, 看一下, 试一下 (shì – thử).</p><p><b>可以 + động từ</b> = được (phép), có thể – dùng khi xin phép: 我可以看一下吗？ – 可以 / 不可以 (hoặc 不行 bù xíng).</p>",
+   "table": [
+    [
+     "Nói thẳng",
+     "Nói lịch sự hơn"
     ],
-    "games": [
-      "Chợ mặc cả: nửa lớp làm người bán (đồ vật dán giá), nửa lớp làm người mua với 100 块 tiền giả. Ai mua được nhiều đồ nhất chỉ bằng tiếng Trung (多少钱？太贵了！便宜一点儿吧！好吧，我买。) thì thắng.",
-      "Điện thoại hỏng: hai đội đứng hàng; GV thì thầm một câu gọi điện cho người đầu hàng, truyền tai đến người cuối; người cuối ‘nghe máy’ nói to – đội giữ nguyên câu thắng."
+    [
+     "等！",
+     "请等一下。"
     ],
-    "errors": [
-      "❌ 我打电话妈妈 → ✅ 我给妈妈打电话.",
-      "Dùng 吧 khi không hề đoán được / câu có đại từ nghi vấn: ❌ 你是哪国人吧？",
-      "Đặt 一下 trước động từ: ❌ 一下等 → ✅ 等一下.",
-      "Đọc 买 mǎi và 卖 mài cùng thanh – thành “tôi muốn bán” thay vì “mua”.",
-      "Đọc 便宜 thành biànyí; hiểu 便宜 theo Hán Việt “tiện nghi” (thật ra là “rẻ”).",
-      "Gọi người bán hàng nữ là 小姐 trống không – nên dùng 服务员 / 您好."
+    [
+     "喝茶。",
+     "请喝茶。"
     ],
-    "homework": "Bài tập trong game ≥ 80%; viết mỗi chữ Hán 1 dòng; ghi âm một cuộc gọi tiếng Trung giả định 1 phút cùng bạn học; đi chợ/siêu thị, ghi giá 5 món và nói bằng tiếng Trung (…多少钱？…)."
+    [
+     "我看。",
+     "我可以看一下吗？"
+    ],
+    [
+     "火车站在哪儿？",
+     "请问，火车站在哪儿？"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "请坐，请喝茶。",
+     "py": "Qǐng zuò, qǐng hē chá.",
+     "vi": "Mời ngồi, mời uống trà."
+    },
+    {
+     "t": "请问，火车站在哪儿？",
+     "py": "Qǐngwèn, huǒchēzhàn zài nǎr?",
+     "vi": "Xin hỏi, ga tàu ở đâu?"
+    },
+    {
+     "t": "我可以看一下吗？— 可以。",
+     "py": "Wǒ kěyǐ kàn yíxià ma? — Kěyǐ.",
+     "vi": "Tôi xem qua một chút được không? — Được."
+    }
+   ],
+   "tips": [
+    "请 dùng để mời/nhờ NGƯỜI KHÁC làm: ❌ <i>我请坐</i>.",
+    "一下 đứng SAU động từ: ❌ <i>一下等</i> → ✅ 等一下. Đọc yíxià.",
+    "Xin phép dùng 可以 hoặc 能 (bài 6) đều được; 可以 phổ biến hơn."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: 吧 – đề nghị, đoán, đồng ý",
+   "html": "<p><b>吧 (ba)</b> cuối câu làm giọng mềm, có 3 cách dùng chính. So sánh: 你是老师<b>吗</b>？ (không biết, hỏi thật) – 你是老师<b>吧</b>？ (mình đoán là phải, hỏi để xác nhận).</p>",
+   "table": [
+    [
+     "Cách dùng",
+     "Ví dụ",
+     "Nghĩa"
+    ],
+    [
+     "Đề nghị, rủ rê",
+     "我们去商店吧！",
+     "Mình đi cửa hàng nhé!"
+    ],
+    [
+     "Đoán – xác nhận",
+     "你是安娜吧？",
+     "Bạn là Anna phải không? (mình đoán vậy)"
+    ],
+    [
+     "Đồng ý (hơi miễn cưỡng)",
+     "好吧。",
+     "Thôi được rồi."
+    ],
+    [
+     "Mặc cả, nhờ vả",
+     "便宜一点儿吧！",
+     "Bớt chút đi mà!"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我们看电影吧！",
+     "py": "Wǒmen kàn diànyǐng ba!",
+     "vi": "Mình đi xem phim đi!"
+    },
+    {
+     "t": "你是小兰的哥哥吧？— 是，我是阮海。",
+     "py": "Nǐ shì Xiǎo Lán de gēge ba? — Shì, wǒ shì Ruǎn Hǎi.",
+     "vi": "Anh là anh trai Tiểu Lan phải không ạ? — Ừ, anh là Nguyễn Hải."
+    },
+    {
+     "t": "好吧，我买这个。",
+     "py": "Hǎo ba, wǒ mǎi zhège.",
+     "vi": "Thôi được, tôi mua cái này."
+    }
+   ],
+   "tips": [
+    "吧 đọc nhẹ, không có thanh.",
+    "Câu có đại từ nghi vấn không dùng 吧 để hỏi: ❌ <i>你是哪国人吧？</i>",
+    "Đã có 吧 thì không thêm 吗: ❌ <i>你是安娜吧吗？</i>"
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: 呢 – ba cách dùng; mẫu câu gọi điện",
+   "html": "<p><b>呢 (ne)</b>:</p><ol><li>Hỏi lại (ôn bài 2): 我很好，你呢？</li><li>Hỏi “… đâu rồi?” khi tìm không thấy: 我的手机呢？</li><li><b>在 + động từ + 呢</b> = đang làm gì (HSK 2 học kỹ): 他在打电话呢。</li></ol><p><b>Gọi điện</b>: mở đầu <b>喂</b> (wéi – alô); hỏi người: <b>请问，…在吗？</b>; trả lời 在，请等一下 / 不在 / 我就是 (jiù shì – chính tôi đây). <b>给 + người + 打电话</b> = gọi điện cho ai (给 gěi – HSK 2).</p>",
+   "table": [
+    [
+     "Câu",
+     "Nghĩa"
+    ],
+    [
+     "喂，你好！请问，小兰在吗？",
+     "Alô, chào bạn! Xin hỏi, Lan có đó không?"
+    ],
+    [
+     "在，请等一下。",
+     "Có, xin đợi một chút."
+    ],
+    [
+     "她不在。",
+     "Cô ấy không có ở đây."
+    ],
+    [
+     "我就是。",
+     "Chính tôi đây."
+    ],
+    [
+     "晚上我给你打电话。",
+     "Tối tôi gọi cho bạn."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我的手机呢？— 在桌子上。",
+     "py": "Wǒ de shǒujī ne? — Zài zhuōzi shang.",
+     "vi": "Điện thoại của tôi đâu rồi? — Ở trên bàn."
+    },
+    {
+     "t": "小明呢？— 他在打电话呢。",
+     "py": "Xiǎo Míng ne? — Tā zài dǎ diànhuà ne.",
+     "vi": "Tiểu Minh đâu? — Cậu ấy đang gọi điện."
+    },
+    {
+     "t": "喂，是安娜吧？— 是我。",
+     "py": "Wéi, shì Ānnà ba? — Shì wǒ.",
+     "vi": "Alô, Anna phải không? — Mình đây."
+    }
+   ],
+   "tips": [
+    "❌ <i>我打电话妈妈</i> (theo tiếng Việt “gọi điện mẹ”) → ✅ 我给妈妈打电话。",
+    "喂 nghe điện thoại đọc wéi; gọi người ngoài đường “này!” đọc wèi.",
+    "我的手机呢？ dùng khi đang tìm mà không thấy; 我的手机在哪儿？ là câu hỏi trung tính."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Văn hoá mua sắm: mặc cả, cách gọi người bán, số “kiêng”",
+   "html": "<p>Ở chợ, cửa hàng nhỏ Trung Quốc có thể <b>mặc cả</b> (讲价 jiǎngjià): 太贵了！便宜一点儿吧！ / 可以便宜一点儿吗？ Ở siêu thị, trung tâm thương mại giá cố định.</p><p>Thanh toán phổ biến nhất ở Trung Quốc là quét mã QR bằng điện thoại (扫码 sǎomǎ). Hỏi: 可以用手机付钱吗？ Kěyǐ yòng shǒujī fù qián ma? (Trả bằng điện thoại được không?)</p><p><b>先生</b> dùng an toàn với nam giới. <b>小姐</b> nên dùng kèm họ (王小姐) hoặc nơi trang trọng; gọi người bán hàng nữ, nhiều nơi nay nói <b>服务员</b> hoặc <b>美女</b> měinǚ (người đẹp), vì 小姐 đứng một mình đôi khi bị hiểu không hay.</p><p>Mẹo vui: tránh nói giá 250 là <b>二百五</b> – đây là từ lóng nghĩa “đồ ngốc”! Nói 两百五十块 cho chắc.</p>"
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe 1: Gọi điện sang Vân Tuyến",
+   "lang": "zh-CN",
+   "note": "Tối thứ Sáu, Tiểu Lan gọi điện cho anh trai Nguyễn Hải đang học ở Vân Tuyến. Nghe lần 1 không nhìn chữ: anh Hải đang ở đâu, làm gì?",
+   "lines": [
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "喂，哥哥，你好！",
+     "py": "Wéi, gēge, nǐ hǎo!",
+     "vi": "Alô, anh ơi, em chào anh!"
+    },
+    {
+     "s": "阮海",
+     "g": "m",
+     "t": "喂，是小兰吧？你好！",
+     "py": "Wéi, shì Xiǎo Lán ba? Nǐ hǎo!",
+     "vi": "Alô, Lan đấy à? Chào em!"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "是我。哥哥，你在做什么呢？",
+     "py": "Shì wǒ. Gēge, nǐ zài zuò shénme ne?",
+     "vi": "Em đây. Anh đang làm gì thế?"
+    },
+    {
+     "s": "阮海",
+     "g": "m",
+     "t": "我在商店呢，我想买一个电脑。",
+     "py": "Wǒ zài shāngdiàn ne, wǒ xiǎng mǎi yí ge diànnǎo.",
+     "vi": "Anh đang ở cửa hàng, anh muốn mua một cái máy tính."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "云线城天气怎么样？",
+     "py": "Yúnxiàn Chéng tiānqì zěnmeyàng?",
+     "vi": "Thời tiết Vân Tuyến thế nào anh?"
+    },
+    {
+     "s": "阮海",
+     "g": "m",
+     "t": "太冷了！零下五度。叶纱城呢？",
+     "py": "Tài lěng le! Língxià wǔ dù. Yèshā Chéng ne?",
+     "vi": "Lạnh lắm! Âm 5 độ. Còn Diệp Sa?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "不冷，二十度。哥哥，春节你回来吗？",
+     "py": "Bù lěng, èrshí dù. Gēge, Chūnjié nǐ huílai ma?",
+     "vi": "Không lạnh, 20 độ. Anh ơi, Tết anh có về không?"
+    },
+    {
+     "s": "阮海",
+     "g": "m",
+     "t": "回来！我二月回家。",
+     "py": "Huílai! Wǒ èr yuè huí jiā.",
+     "vi": "Có chứ! Tháng Hai anh về nhà."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "太好了！晚上请给妈妈打电话吧。",
+     "py": "Tài hǎo le! Wǎnshang qǐng gěi māma dǎ diànhuà ba.",
+     "vi": "Tuyệt quá! Tối nay anh gọi điện cho mẹ nhé."
+    },
+    {
+     "s": "阮海",
+     "g": "m",
+     "t": "好，晚上我给妈妈打电话。再见！",
+     "py": "Hǎo, wǎnshang wǒ gěi māma dǎ diànhuà. Zàijiàn!",
+     "vi": "Ừ, tối anh gọi cho mẹ. Tạm biệt em!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Anh Hải đang ở đâu?",
+     "o": [
+      "Ở cửa hàng",
+      "Ở trường",
+      "Ở nhà"
+     ],
+     "a": 0,
+     "e": "我在商店呢 – anh đang ở cửa hàng."
+    },
+    {
+     "q": "Anh Hải muốn mua gì?",
+     "o": [
+      "Quần áo",
+      "Điện thoại",
+      "Máy tính"
+     ],
+     "a": 2,
+     "e": "我想买一个电脑。"
+    },
+    {
+     "q": "Vân Tuyến bao nhiêu độ?",
+     "o": [
+      "5 độ",
+      "Âm 5 độ",
+      "20 độ"
+     ],
+     "a": 1,
+     "e": "零下五度 = âm 5 độ."
+    },
+    {
+     "q": "Khi nào anh Hải về nhà?",
+     "o": [
+      "Tháng Mười hai",
+      "Ngày mai",
+      "Tháng Hai"
+     ],
+     "a": 2,
+     "e": "我二月回家。"
+    }
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe 2: Mua máy tính",
+   "lang": "zh-CN",
+   "note": "Cùng lúc đó, ở một cửa hàng máy tính tại Vân Tuyến. (千 qiān = nghìn.) Nghe lần 1 không nhìn chữ: cuối cùng anh Hải mua máy tính giá bao nhiêu?",
+   "lines": [
+    {
+     "s": "服务员",
+     "g": "f",
+     "t": "先生，您好！请问，您想买什么？",
+     "py": "Xiānsheng, nín hǎo! Qǐngwèn, nín xiǎng mǎi shénme?",
+     "vi": "Chào anh ạ! Xin hỏi, anh muốn mua gì?"
+    },
+    {
+     "s": "阮海",
+     "g": "m",
+     "t": "我想买一个电脑。这个多少钱？",
+     "py": "Wǒ xiǎng mǎi yí ge diànnǎo. Zhège duōshao qián?",
+     "vi": "Tôi muốn mua một cái máy tính. Cái này bao nhiêu tiền?"
+    },
+    {
+     "s": "服务员",
+     "g": "f",
+     "t": "这个五千块。",
+     "py": "Zhège wǔqiān kuài.",
+     "vi": "Cái này 5.000 tệ ạ."
+    },
+    {
+     "s": "阮海",
+     "g": "m",
+     "t": "太贵了！有便宜一点儿的吗？",
+     "py": "Tài guì le! Yǒu piányi yìdiǎnr de ma?",
+     "vi": "Đắt quá! Có cái nào rẻ hơn chút không?"
+    },
+    {
+     "s": "服务员",
+     "g": "f",
+     "t": "有。您看一下这个，三千八百块。",
+     "py": "Yǒu. Nín kàn yíxià zhège, sānqiān bābǎi kuài.",
+     "vi": "Có ạ. Anh xem thử cái này, 3.800 tệ."
+    },
+    {
+     "s": "阮海",
+     "g": "m",
+     "t": "我可以试一下吗？",
+     "py": "Wǒ kěyǐ shì yíxià ma?",
+     "vi": "Tôi dùng thử một chút được không?"
+    },
+    {
+     "s": "服务员",
+     "g": "f",
+     "t": "可以，请坐。",
+     "py": "Kěyǐ, qǐng zuò.",
+     "vi": "Được ạ, mời anh ngồi."
+    },
+    {
+     "s": "阮海",
+     "g": "m",
+     "t": "很好。可以便宜一点儿吗？",
+     "py": "Hěn hǎo. Kěyǐ piányi yìdiǎnr ma?",
+     "vi": "Tốt đấy. Bớt chút được không?"
+    },
+    {
+     "s": "服务员",
+     "g": "f",
+     "t": "三千六吧。",
+     "py": "Sānqiān liù ba.",
+     "vi": "Thôi 3.600 nhé."
+    },
+    {
+     "s": "阮海",
+     "g": "m",
+     "t": "好吧，我买这个。",
+     "py": "Hǎo ba, wǒ mǎi zhège.",
+     "vi": "Được rồi, tôi mua cái này."
+    },
+    {
+     "s": "服务员",
+     "g": "f",
+     "t": "好的，请等一下。",
+     "py": "Hǎo de, qǐng děng yíxià.",
+     "vi": "Vâng, anh đợi một chút ạ."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Máy tính đầu tiên giá bao nhiêu?",
+     "o": [
+      "3.600 tệ",
+      "3.800 tệ",
+      "5.000 tệ"
+     ],
+     "a": 2,
+     "e": "这个五千块 – 五千 = 5.000."
+    },
+    {
+     "q": "Vì sao anh Hải không mua máy đầu tiên?",
+     "o": [
+      "Xấu quá",
+      "Hết hàng",
+      "Đắt quá"
+     ],
+     "a": 2,
+     "e": "太贵了！"
+    },
+    {
+     "q": "Cuối cùng anh mua với giá bao nhiêu?",
+     "o": [
+      "5.000 tệ",
+      "3.600 tệ",
+      "3.800 tệ"
+     ],
+     "a": 1,
+     "e": "三千六 = 三千六百 = 3.600 (cách nói tắt)."
+    },
+    {
+     "q": "Trong câu 三千六吧, 吧 thể hiện điều gì?",
+     "o": [
+      "Hành động đang diễn ra",
+      "Đề nghị, thương lượng mềm mỏng",
+      "Câu hỏi có/không"
+     ],
+     "a": 1,
+     "e": "吧 cuối câu: đề nghị nhẹ nhàng – “thôi lấy 3.600 nhé”."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Thứ Bảy của Tiểu Lan",
+   "title": "星期六",
+   "text": "今天是星期六。下午两点，我和安娜去商店买东西。\n\n安娜想买衣服。一件衣服六十万越南盾，有点儿贵。安娜说：“请便宜一点儿吧！”\n\n晚上八点，哥哥给妈妈打电话。妈妈很高兴。",
+   "py": "Jīntiān shì xīngqīliù. Xiàwǔ liǎng diǎn, wǒ hé Ānnà qù shāngdiàn mǎi dōngxi.\n\nĀnnà xiǎng mǎi yīfu. Yí jiàn yīfu liùshí wàn Yuènán dùn, yǒudiǎnr guì. Ānnà shuō: “Qǐng piányi yìdiǎnr ba!”\n\nWǎnshang bā diǎn, gēge gěi māma dǎ diànhuà. Māma hěn gāoxìng.",
+   "vi": "Hôm nay là thứ Bảy. 2 giờ chiều, tôi và Anna đi cửa hàng mua đồ.\n\nAnna muốn mua quần áo. Một chiếc áo 600.000 đồng, hơi đắt. Anna nói: “Bớt cho chút đi ạ!”\n\n8 giờ tối, anh trai gọi điện cho mẹ. Mẹ rất vui.",
+   "gloss": [
+    {
+     "w": "件",
+     "py": "jiàn",
+     "vi": "chiếc (lượng từ cho áo, việc)"
+    },
+    {
+     "w": "万",
+     "py": "wàn",
+     "vi": "vạn = 10.000"
+    },
+    {
+     "w": "越南盾",
+     "py": "Yuènán dùn",
+     "vi": "đồng Việt Nam"
+    },
+    {
+     "w": "给…打电话",
+     "py": "gěi … dǎ diànhuà",
+     "vi": "gọi điện cho…"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Tiểu Lan và Anna đi cửa hàng lúc mấy giờ?",
+     "o": [
+      "2 giờ chiều",
+      "12 giờ trưa",
+      "8 giờ tối"
+     ],
+     "a": 0,
+     "e": "下午两点。"
+    },
+    {
+     "q": "Chiếc áo giá bao nhiêu?",
+     "o": [
+      "6.000.000 đ",
+      "60.000 đ",
+      "600.000 đ"
+     ],
+     "a": 2,
+     "e": "六十万 = 60 × 10.000 = 600.000 đồng."
+    },
+    {
+     "q": "Anna nói gì với người bán?",
+     "o": [
+      "Đắt quá, tôi không mua",
+      "Bớt cho chút đi ạ!",
+      "Cho tôi xem cái khác"
+     ],
+     "a": 1,
+     "e": "请便宜一点儿吧！"
+    },
+    {
+     "q": "Ai gọi điện cho mẹ?",
+     "o": [
+      "Anh trai",
+      "Anna",
+      "Tiểu Lan"
+     ],
+     "a": 0,
+     "e": "哥哥给妈妈打电话。"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "打",
+     "py": "dǎ",
+     "hv": "đả",
+     "parts": "扌(thủ – tay) + 丁 (đinh – cái đinh)",
+     "strokes": 5,
+     "vi": "đánh, gõ – tay đóng đinh; 打电话 = gọi điện",
+     "words": "打电话"
+    },
+    {
+     "c": "电",
+     "py": "diàn",
+     "hv": "điện",
+     "parts": "tượng hình tia chớp xuyên qua đám mây",
+     "strokes": 5,
+     "vi": "điện, tia chớp",
+     "words": "电话, 电脑, 电影"
+    },
+    {
+     "c": "话",
+     "py": "huà",
+     "hv": "thoại",
+     "parts": "讠(ngôn – lời) + 舌 (thiệt – cái lưỡi)",
+     "strokes": 8,
+     "vi": "lời nói – lời phát ra từ lưỡi",
+     "words": "电话, 说话"
+    },
+    {
+     "c": "请",
+     "py": "qǐng",
+     "hv": "thỉnh",
+     "parts": "讠(lời nói) + 青 (thanh – gợi âm)",
+     "strokes": 10,
+     "vi": "mời, xin – lời mời lịch sự",
+     "words": "请坐, 请问"
+    },
+    {
+     "c": "买",
+     "py": "mǎi",
+     "hv": "mãi",
+     "parts": "giản thể của 買 (网 lưới + 貝 vỏ sò – tiền xưa)",
+     "strokes": 6,
+     "vi": "mua – dùng tiền đổi đồ",
+     "words": "买东西"
+    },
+    {
+     "c": "来",
+     "py": "lái",
+     "hv": "lai",
+     "parts": "vốn vẽ cây lúa mì, sau mượn nghĩa “đến”",
+     "strokes": 7,
+     "vi": "đến, tới",
+     "words": "来, 回来"
+    },
+    {
+     "c": "回",
+     "py": "huí",
+     "hv": "hồi",
+     "parts": "囗 nhỏ nằm trong 囗 lớn – vòng xoáy quay lại",
+     "strokes": 6,
+     "vi": "về, quay về",
+     "words": "回家, 回来"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Gọi điện – mua sắm – tiếp khách",
+   "tasks": [
+    {
+     "p": "Gọi điện cho bạn: chào, hỏi bạn có ở đó không, rủ đi mua sắm chiều mai.",
+     "model": "喂，你好！请问，安娜在吗？— 我就是。— 安娜，明天下午我们去商店吧！— 好啊！",
+     "py": "Wéi, nǐ hǎo! Qǐngwèn, Ānnà zài ma? — Wǒ jiù shì. — Ānnà, míngtiān xiàwǔ wǒmen qù shāngdiàn ba! — Hǎo a!",
+     "vi": "Alô, chào bạn! Xin hỏi, Anna có đó không? — Mình đây. — Anna, chiều mai mình đi cửa hàng nhé! — Được!",
+     "tips": "喂 lên giọng nhẹ (wéi); 吧 cuối câu rủ rê đọc nhẹ."
+    },
+    {
+     "p": "Mua một chiếc áo: hỏi giá, chê đắt, mặc cả, rồi đồng ý.",
+     "model": "这件衣服多少钱？— 三百块。— 太贵了！便宜一点儿吧！— 两百八吧。— 好吧，我买。",
+     "py": "Zhè jiàn yīfu duōshao qián? — Sānbǎi kuài. — Tài guì le! Piányi yìdiǎnr ba! — Liǎngbǎi bā ba. — Hǎo ba, wǒ mǎi.",
+     "vi": "Chiếc áo này bao nhiêu tiền? — 300 tệ. — Đắt quá! Bớt chút đi! — 280 nhé. — Thôi được, tôi mua.",
+     "tips": "两百八 = 280 (nói tắt). 买 mǎi thanh 3, đừng nói thành 卖 mài."
+    },
+    {
+     "p": "Bạn mời khách vào nhà: mời vào, mời ngồi, mời uống trà; khi khách về hẹn lần sau lại đến.",
+     "model": "请进！请坐，请喝茶。……再见，明天再来吧！",
+     "py": "Qǐng jìn! Qǐng zuò, qǐng hē chá. … Zàijiàn, míngtiān zài lái ba!",
+     "vi": "Mời vào! Mời ngồi, mời uống trà. … Tạm biệt, mai lại đến chơi nhé!",
+     "tips": "进 jìn = vào. 再来 = lại đến."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Hai cuộc hội thoại",
+   "task": "Viết 2 hội thoại ngắn (mỗi cái 5–6 câu): (1) gọi điện hẹn bạn đi mua sắm; (2) mua một món đồ – hỏi giá, chê đắt, mặc cả.",
+   "min": 60,
+   "model": "（一）\nA：喂，你好！请问，小明在吗？\nB：我就是。你是安娜吧？\nA：是我。明天上午我们去商店买东西吧！\nB：好啊！几点？\nA：十点吧。\n（二）\nA：您好！这个杯子多少钱？\nB：三十块。\nA：太贵了！可以便宜一点儿吗？\nB：二十五块吧。\nA：好吧，我买两个。",
+   "modelVi": "(1) A: Alô, chào bạn! Xin hỏi, Tiểu Minh có đó không? B: Mình đây. Bạn là Anna phải không? A: Mình đây. Sáng mai mình đi cửa hàng mua đồ nhé! B: Được! Mấy giờ? A: 10 giờ nhé. (2) A: Chào chị! Cái cốc này bao nhiêu tiền? B: 30 tệ. A: Đắt quá! Bớt chút được không? B: 25 tệ nhé. A: Thôi được, tôi mua hai cái.",
+   "tips": [
+    "Hội thoại 1 nên có 喂, 请问, 吧 (đoán) và 吧 (rủ rê).",
+    "Hội thoại 2 nên có 多少钱, 太贵了, 便宜一点儿, 好吧.",
+    "Viết đúng dấu câu hội thoại: A：…"
+   ],
+   "checklist": [
+    "Có 喂 và 请问",
+    "Có 吧 với 2 nghĩa khác nhau",
+    "Có 一下 hoặc 可以…吗",
+    "Có câu mặc cả 便宜一点儿",
+    "买 / 卖 dùng đúng"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "喂，你好！请问，小兰在吗？",
+   "lang": "zh-CN",
+   "q": "Người gọi muốn gặp ai?",
+   "o": [
+    "Anna",
+    "Tiểu Lan",
+    "Tiểu Minh"
+   ],
+   "a": 1,
+   "e": "请问，小兰在吗？ – Xin hỏi, Tiểu Lan có đó không?"
+  },
+  {
+   "t": "listen",
+   "say": "太贵了！便宜一点儿吧！",
+   "lang": "zh-CN",
+   "q": "Người nói muốn gì?",
+   "o": [
+    "Muốn đổi màu",
+    "Muốn được giảm giá",
+    "Muốn mua thêm"
+   ],
+   "a": 1,
+   "e": "太贵了 (đắt quá), 便宜一点儿吧 (bớt chút đi)."
+  },
+  {
+   "t": "listen",
+   "say": "请等一下。",
+   "lang": "zh-CN",
+   "q": "Câu vừa nghe nghĩa là:",
+   "o": [
+    "Mời ngồi",
+    "Xin hỏi",
+    "Xin đợi một chút"
+   ],
+   "a": 2,
+   "e": "等一下 = đợi một chút."
+  },
+  {
+   "t": "mc",
+   "q": "Bạn đoán người kia là Anna và muốn xác nhận:",
+   "o": [
+    "你是安娜吧？",
+    "你是安娜呢？",
+    "你是安娜吗？"
+   ],
+   "a": 0,
+   "e": "吧 = đoán rồi hỏi xác nhận; 吗 = hỏi khi không biết."
+  },
+  {
+   "t": "mc",
+   "q": "“Tối nay tôi gọi điện cho mẹ” – câu đúng:",
+   "o": [
+    "晚上我给妈妈打电话。",
+    "晚上我打妈妈电话给。",
+    "晚上我打电话妈妈。"
+   ],
+   "a": 0,
+   "e": "给 + người + 打电话."
+  },
+  {
+   "t": "mc",
+   "q": "我的手机呢？ nghĩa là:",
+   "o": [
+    "Điện thoại của tôi đâu rồi?",
+    "Điện thoại của tôi thế nào?",
+    "Đây là điện thoại của tôi."
+   ],
+   "a": 0,
+   "e": "Danh từ + 呢？ khi đang tìm = … đâu rồi?"
+  },
+  {
+   "t": "mc",
+   "q": "买 (mǎi) và 卖 (mài) lần lượt nghĩa là:",
+   "o": [
+    "mua – bán",
+    "bán – mua",
+    "mua – mua"
+   ],
+   "a": 0,
+   "e": "买 thanh 3 = mua; 卖 thanh 4 = bán."
+  },
+  {
+   "t": "mc",
+   "q": "Rủ bạn: “Mình đi xem phim đi!”",
+   "o": [
+    "我们看电影吧！",
+    "我们看电影吗？",
+    "我们看电影呢！"
+   ],
+   "a": 0,
+   "e": "Đề nghị, rủ rê dùng 吧."
+  },
+  {
+   "t": "fill",
+   "q": "___坐！___喝茶！(Mời ngồi! Mời uống trà! – điền một chữ)",
+   "a": "请",
+   "alt": [
+    "qing"
+   ],
+   "e": "请 + động từ = mời…"
+  },
+  {
+   "t": "fill",
+   "q": "我可以看___吗？(Tôi xem qua một chút được không?)",
+   "a": "一下",
+   "alt": [
+    "yixia"
+   ],
+   "e": "Động từ + 一下 = làm một chút."
+  },
+  {
+   "t": "fill",
+   "q": "这个很___，我买两个！(Cái này rẻ, tôi mua hai cái!)",
+   "a": "便宜",
+   "alt": [
+    "pianyi"
+   ],
+   "e": "便宜 piányi = rẻ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Xin hỏi, ga tàu ở đâu?”",
+   "w": [
+    "在哪儿",
+    "请问",
+    "火车站"
+   ],
+   "a": "请问火车站在哪儿",
+   "e": "请问 mở đầu + câu hỏi vị trí."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Chúng mình đi cửa hàng mua đồ nhé!”",
+   "w": [
+    "吧",
+    "去商店",
+    "我们",
+    "买东西"
+   ],
+   "a": "我们去商店买东西吧",
+   "e": "去 + nơi + làm gì + 吧 (rủ rê)."
+  },
+  {
+   "t": "dict",
+   "say": "打电话",
+   "lang": "zh-CN",
+   "a": "打电话",
+   "py": "dǎ diànhuà",
+   "e": "打电话 = gọi điện thoại."
+  },
+  {
+   "t": "dict",
+   "say": "多少钱？太贵了！",
+   "lang": "zh-CN",
+   "a": "多少钱？太贵了！",
+   "py": "duōshao qián tài guì le",
+   "e": "Câu hỏi giá và chê đắt."
+  },
+  {
+   "t": "match",
+   "q": "Nối câu với nghĩa:",
+   "pairs": [
+    [
+     "请坐",
+     "mời ngồi"
+    ],
+    [
+     "请问",
+     "xin hỏi"
+    ],
+    [
+     "等一下",
+     "đợi một chút"
+    ],
+    [
+     "太贵了",
+     "đắt quá"
+    ],
+    [
+     "便宜一点儿",
+     "rẻ hơn một chút"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Điện thoại đồ chơi hoặc điện thoại thật (tắt mạng) để đóng vai; đồ vật dán giá (cốc, áo, sách…); tiền giả từ bài 7; thẻ chữ 打 电 话 请 买 来 回.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: ôn bài 9 – 今天天气怎么样？ và rủ nhau …，怎么样？"
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng nhóm 1 (gọi điện, tiếp khách): 打电话, 喂, 请, 等, 一下, 来, 回, 坐, 再."
+   },
+   {
+    "t": "15'",
+    "do": "Ngữ pháp 1: 请 + V, V + 一下, 可以…吗 – học viên biến 5 câu “nói thẳng” thành câu lịch sự."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 3: 呢 (3 cách) + mẫu câu gọi điện. Nghe hội thoại 1 (anh Hải ở đâu?) → đóng vai gọi điện theo cặp, ngồi quay lưng vào nhau."
+   },
+   {
+    "t": "15'",
+    "do": "Phát âm: 买/卖, 便宜 (pián), 请 qǐng, 喂 wéi, 3+3 trong 可以."
+   },
+   {
+    "t": "15'",
+    "do": "Bài tập 1–8 trong game."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: GV ‘gọi điện’ ngẫu nhiên cho học viên: 喂，请问，…在吗？ – học viên trả lời đúng tình huống."
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng nhóm 2 (mua sắm): 买, 东西, 贵, 便宜, 先生, 小姐, 电脑 + mục văn hoá mặc cả, cách gọi người bán, 二百五."
+   },
+   {
+    "t": "15'",
+    "do": "Ngữ pháp 2: 吧 (đề nghị / đoán / đồng ý) – so sánh 吗 và 吧 qua cặp câu."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe hội thoại 2 (giá cuối cùng?) + đọc ‘星期六’."
+   },
+   {
+    "t": "20'",
+    "do": "Chữ Hán 7 chữ (扌 thủ, 讠 ngôn) + trò Chợ mặc cả."
+   },
+   {
+    "t": "15'",
+    "do": "Viết hai hội thoại; bài tập 9–16; giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Chợ mặc cả: nửa lớp làm người bán (đồ vật dán giá), nửa lớp làm người mua với 100 块 tiền giả. Ai mua được nhiều đồ nhất chỉ bằng tiếng Trung (多少钱？太贵了！便宜一点儿吧！好吧，我买。) thì thắng.",
+   "Điện thoại hỏng: hai đội đứng hàng; GV thì thầm một câu gọi điện cho người đầu hàng, truyền tai đến người cuối; người cuối ‘nghe máy’ nói to – đội giữ nguyên câu thắng."
+  ],
+  "errors": [
+   "❌ 我打电话妈妈 → ✅ 我给妈妈打电话.",
+   "Dùng 吧 khi không hề đoán được / câu có đại từ nghi vấn: ❌ 你是哪国人吧？",
+   "Đặt 一下 trước động từ: ❌ 一下等 → ✅ 等一下.",
+   "Đọc 买 mǎi và 卖 mài cùng thanh – thành “tôi muốn bán” thay vì “mua”.",
+   "Đọc 便宜 thành biànyí; hiểu 便宜 theo Hán Việt “tiện nghi” (thật ra là “rẻ”).",
+   "Gọi người bán hàng nữ là 小姐 trống không – nên dùng 服务员 / 您好."
+  ],
+  "homework": "Bài tập trong game ≥ 80%; viết mỗi chữ Hán 1 dòng; ghi âm một cuộc gọi tiếng Trung giả định 1 phút cùng bạn học; đi chợ/siêu thị, ghi giá 5 món và nói bằng tiếng Trung (…多少钱？…)."
+ }
 }

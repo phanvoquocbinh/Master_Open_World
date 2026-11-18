@@ -1,0 +1,628 @@
+{
+ "no": 11,
+ "title": "Đếm đúng người và đồ: chuẩn bị bàn thủ công",
+ "sub": "この 机には 三人 来ます。",
+ "goals": [
+  "Chọn 人, 枚, 本 hoặc つ theo vật được đếm.",
+  "Đọc đúng ひとり, ふたり, さんぼん và ろっぽん.",
+  "Hỏi và báo số đồ cần bổ sung sau khi so với danh sách.",
+  "Viết lời nhờ mang đồ có tên vật và lượng rõ ràng."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Tiếng Nhật không đặt một số trần sau mọi danh từ như nhau. Người dùng 人, tờ hoặc vật mỏng thường dùng 枚, vật dài như bút dùng 本; つ là cách đếm chung một số đồ vật. Bài này chỉ đếm đồ cho bàn thủ công: không suy rộng 本 sang mọi vật có hình chữ nhật. Có nhiều cách đặt cụm lượng, nhưng trước hết dùng Nを + số đếm + động từ để người nghe nhận tên vật trước.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>ひとり và ふたり là hai cách đọc riêng của 一人, 二人; từ 三人 đọc さんにん. Với 本, âm đầu biến đổi: いっぽん, にほん, さんぼん, ろっぽん. Đọc いっぽん có nhịp っ rồi p, không thêm một tsu. 枚 đọc まい, có hai nhịp ma-i, không gom thành vần tiếng Việt.</p>",
+   "items": [
+    {
+     "sym": "一人・二人・三人",
+     "ex": [
+      "ひとり",
+      "ふたり",
+      "さんにん"
+     ],
+     "vi": "Học hai dạng đầu như cả từ, rồi đối chiếu dạng có にん."
+    },
+    {
+     "sym": "一本・三本・六本",
+     "ex": [
+      "いっぽん",
+      "さんぼん",
+      "ろっぽん"
+     ],
+     "vi": "Giữ cả biến đổi phụ âm lẫn nhịp ngắt của từng lượng."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "一人",
+     "kana": "ひとり",
+     "romaji": "hitori",
+     "vi": "một người",
+     "ex": "一人で 紙を 切ります。",
+     "exVi": "Tôi cắt giấy một mình."
+    },
+    {
+     "w": "二人",
+     "kana": "ふたり",
+     "romaji": "futari",
+     "vi": "hai người",
+     "ex": "二人で 机を 運びます。",
+     "exVi": "Hai người cùng chuyển bàn."
+    },
+    {
+     "w": "三人",
+     "kana": "さんにん",
+     "romaji": "sannin",
+     "vi": "ba người",
+     "ex": "三人が この 机を 使います。",
+     "exVi": "Ba người dùng bàn này."
+    },
+    {
+     "w": "一枚",
+     "kana": "いちまい",
+     "romaji": "ichimai",
+     "vi": "một tờ/tấm mỏng",
+     "ex": "紙を 一枚 ください。",
+     "exVi": "Cho tôi một tờ giấy."
+    },
+    {
+     "w": "二枚",
+     "kana": "にまい",
+     "romaji": "nimai",
+     "vi": "hai tờ/tấm mỏng",
+     "ex": "写真を 二枚 見せます。",
+     "exVi": "Tôi cho xem hai tấm ảnh."
+    },
+    {
+     "w": "一本",
+     "kana": "いっぽん",
+     "romaji": "ippon",
+     "vi": "một vật dài",
+     "ex": "ペンが 一本 あります。",
+     "exVi": "Có một cây bút."
+    },
+    {
+     "w": "三本",
+     "kana": "さんぼん",
+     "romaji": "sanbon",
+     "vi": "ba vật dài",
+     "ex": "鉛筆を 三本 持ってきます。",
+     "exVi": "Tôi mang ba cây bút chì đến."
+    },
+    {
+     "w": "六本",
+     "kana": "ろっぽん",
+     "romaji": "roppon",
+     "vi": "sáu vật dài",
+     "ex": "箱に 六本 入れます。",
+     "exVi": "Tôi bỏ sáu cây vào hộp."
+    },
+    {
+     "w": "ひとつ",
+     "kana": "ひとつ",
+     "romaji": "hitotsu",
+     "vi": "một cái",
+     "ex": "箱を ひとつ 開けます。",
+     "exVi": "Tôi mở một hộp."
+    },
+    {
+     "w": "いくつ",
+     "kana": "いくつ",
+     "romaji": "ikutsu",
+     "vi": "bao nhiêu cái",
+     "ex": "箱は いくつ 必要ですか。",
+     "exVi": "Cần bao nhiêu hộp?"
+    },
+    {
+     "w": "何人",
+     "kana": "なんにん",
+     "romaji": "nannin",
+     "vi": "bao nhiêu người",
+     "ex": "何人 来ますか。",
+     "exVi": "Có bao nhiêu người đến?"
+    },
+    {
+     "w": "足りる",
+     "kana": "たりる",
+     "romaji": "tariru",
+     "vi": "đủ",
+     "ex": "この 紙で 足ります。",
+     "exVi": "Số giấy này là đủ."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Hỏi người bằng 何人, hỏi tờ bằng 何枚, hỏi bút bằng 何本. いくつ phù hợp khi chọn cách đếm chung với つ, không phải từ hỏi thay cho mọi lượng từ. Số lượng đi với danh từ và loại vật: 紙を二枚, ペンを三本. Để báo thiếu ở mức đơn giản, nói 必要な量 rồi lượng hiện có, sau đó nhờ mang thêm; không cần bỏ lượng từ khi đã nhắc vật.</p>",
+   "table": [
+    [
+     "Đối tượng",
+     "Một",
+     "Hai",
+     "Ba",
+     "Câu hỏi"
+    ],
+    [
+     "Người",
+     "ひとり",
+     "ふたり",
+     "さんにん",
+     "なんにん"
+    ],
+    [
+     "Tờ giấy",
+     "いちまい",
+     "にまい",
+     "さんまい",
+     "なんまい"
+    ],
+    [
+     "Bút",
+     "いっぽん",
+     "にほん",
+     "さんぼん",
+     "なんぼん"
+    ],
+    [
+     "Đồ đếm chung",
+     "ひとつ",
+     "ふたつ",
+     "みっつ",
+     "いくつ"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "この 机には 三人 来ます。",
+     "vi": "Có ba người đến bàn này."
+    },
+    {
+     "t": "紙を 六枚 用意します。",
+     "vi": "Tôi chuẩn bị sáu tờ giấy."
+    },
+    {
+     "t": "ペンは 二本 あります。",
+     "vi": "Có hai cây bút."
+    },
+    {
+     "t": "あと 一本 持ってきてください。",
+     "vi": "Xin mang thêm một cây."
+    },
+    {
+     "t": "箱は いくつ ありますか。",
+     "vi": "Có bao nhiêu hộp?"
+    }
+   ],
+   "tips": [
+    "<p>“Ba bút” trong tiếng Việt hiểu được nhưng ペンを三 thường thiếu lượng từ; dùng 三本.</p>",
+    "<p>Không đọc 二人 thành ににん trong bối cảnh thông thường của bài; dùng ふたり.</p>",
+    "<p>Không dùng いくつ để hỏi số người ở bàn; câu cần 何人ですか.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Hai người kiểm số người, giấy và bút trước giờ thủ công; cần phân biệt lượng tổng với lượng mỗi người.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "この 机には 何人 来ますか。",
+     "vi": "Có bao nhiêu người đến bàn này?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "三人です。紙は 一人に 二枚です。",
+     "vi": "Ba người. Mỗi người hai tờ giấy."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "では、六枚ですね。ペンは 何本 ありますか。",
+     "vi": "Vậy là sáu tờ nhỉ. Có bao nhiêu cây bút?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "二本です。三人ですから、一本 足りません。",
+     "vi": "Có hai cây. Vì có ba người nên thiếu một cây."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "わたしが あと 一本 持ってきます。箱も 必要ですか。",
+     "vi": "Tôi sẽ mang thêm một cây. Có cần hộp không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。大きい 箱を ひとつ お願いします。",
+     "vi": "Có. Nhờ bạn mang một hộp lớn."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "写真は この 二枚だけですか。",
+     "vi": "Ảnh chỉ có hai tấm này à?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。六枚の 紙に 絵を かきます。写真は 先生に 見せます。",
+     "vi": "Vâng. Chúng ta vẽ lên sáu tờ giấy. Còn ảnh cho giáo viên xem."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Bàn này có bao nhiêu người?",
+     "o": [
+      "Sáu người",
+      "Ba người",
+      "Hai người"
+     ],
+     "a": 1,
+     "e": "三人 nêu số người, còn 六枚 là lượng giấy cho ba người."
+    },
+    {
+     "q": "Vì sao cần mang thêm một bút?",
+     "o": [
+      "Có ba người nhưng mới hai bút",
+      "Có sáu người và ba bút",
+      "Bút hiện có đều hỏng"
+     ],
+     "a": 0,
+     "e": "Lời đáp so 三人 với 二本 rồi nói 一本足りません."
+    },
+    {
+     "q": "Ảnh sẽ dùng để làm gì?",
+     "o": [
+      "Dán hết lên hộp",
+      "Phát mỗi người hai tấm",
+      "Cho giáo viên xem"
+     ],
+     "a": 2,
+     "e": "Lượt cuối tách vẽ trên giấy với cho giáo viên xem ảnh."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "土曜日、わたしたちは 小さい 工作の 会を します。午前は 四人、午後は 三人 来ます。午前の 人は 紙を 一人に 二枚 使います。午後の 人は 一人に 一枚です。\n\n朝、紙を 十一枚 机に 置きます。ペンは 六本 ありますが、午前に 使うのは 四本です。残りの 二本は 箱に 入れます。大きい 箱は ひとつ、小さい 箱は ふたつです。\n\n午後の 三人は 友だちです。一人は 写真を 二枚 持ってきます。ほかの 二人は 絵を かきます。写真の 紙と 絵の 紙は 別ですから、名前を 書いて おきます。帰る 前に、ペンが 六本 あるか、みんなで 数えます。",
+   "vi": "Thứ bảy chúng tôi tổ chức một buổi thủ công nhỏ. Buổi sáng có bốn người, buổi chiều có ba người. Người học buổi sáng mỗi người dùng hai tờ giấy. Buổi chiều mỗi người dùng một tờ.\n\nBuổi sáng tôi đặt mười một tờ giấy lên bàn. Có sáu cây bút nhưng buổi sáng chỉ dùng bốn cây. Hai cây còn lại được bỏ vào hộp. Có một hộp lớn và hai hộp nhỏ.\n\nBa người buổi chiều là bạn bè. Một người mang đến hai tấm ảnh. Hai người còn lại vẽ tranh. Giấy ảnh và giấy vẽ để riêng nên chúng tôi ghi tên trước. Trước khi về, cả nhóm đếm xem có đủ sáu cây bút không.",
+   "gloss": [
+    {
+     "w": "一人",
+     "kana": "ひとり",
+     "romaji": "hitori",
+     "vi": "một người"
+    },
+    {
+     "w": "二人",
+     "kana": "ふたり",
+     "romaji": "futari",
+     "vi": "hai người"
+    },
+    {
+     "w": "三人",
+     "kana": "さんにん",
+     "romaji": "sannin",
+     "vi": "ba người"
+    },
+    {
+     "w": "一枚",
+     "kana": "いちまい",
+     "romaji": "ichimai",
+     "vi": "một tờ/tấm mỏng"
+    },
+    {
+     "w": "二枚",
+     "kana": "にまい",
+     "romaji": "nimai",
+     "vi": "hai tờ/tấm mỏng"
+    },
+    {
+     "w": "六本",
+     "kana": "ろっぽん",
+     "romaji": "roppon",
+     "vi": "sáu vật dài"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Vì sao cần mười một tờ giấy dùng cho người tham gia?",
+     "o": [
+      "Mỗi người dùng ba tờ",
+      "Buổi sáng tám tờ, chiều ba tờ",
+      "Sáng bốn tờ, chiều bảy tờ"
+     ],
+     "a": 1,
+     "e": "Bốn người buổi sáng dùng hai tờ mỗi người: tám tờ; ba người buổi chiều mỗi người một tờ: ba tờ."
+    },
+    {
+     "q": "Hai bút chưa dùng buổi sáng ở đâu?",
+     "o": [
+      "Trong hộp",
+      "Mỗi người mang về một cây",
+      "Đặt dưới ảnh"
+     ],
+     "a": 0,
+     "e": "Bài đọc nêu 残りの二本は箱に入れます."
+    },
+    {
+     "q": "Trước khi về kiểm điều gì?",
+     "o": [
+      "Có sáu người không",
+      "Có mười một ảnh không",
+      "Có đủ sáu cây bút không"
+     ],
+     "a": 2,
+     "e": "Câu cuối dùng ペンが六本あるか; lượng bút được kiểm lại sau sử dụng."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thẻ mới: bốn người, mỗi người một bút, hiện có ba bút. Nói số người và nhờ mang lượng còn thiếu.",
+     "model": "四人 来ます。ペンは 三本 あります。あと 一本 持ってきてください。",
+     "vi": "Có bốn người đến. Hiện có ba cây bút. Xin mang thêm một cây.",
+     "tips": "Không dùng 六本 từ bài đọc; phép tính theo thẻ là bốn trừ ba."
+    },
+    {
+     "p": "Bạn nhận ba tờ giấy và hai hộp. Báo chính xác hai lượng rồi hỏi cần bao nhiêu người giúp.",
+     "model": "紙は 三枚、箱は ふたつ あります。何人 必要ですか。",
+     "vi": "Có ba tờ giấy và hai hộp. Cần bao nhiêu người?",
+     "tips": "Đổi lượng từ theo giấy, hộp và người thay vì dùng một cách đếm cho cả ba."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết lời nhờ cho thẻ mới: ngày mai hai người đến; cần bốn tờ giấy; hiện có hai tờ; nhờ mang thêm hai tờ và một bút.",
+   "model": "あしたは 二人 来ます。紙は 四枚 必要ですが、二枚しか ありません。あと 二枚と ペンを 一本 持ってきてください。",
+   "modelVi": "Ngày mai có hai người đến. Cần bốn tờ giấy nhưng hiện chỉ có hai tờ. Xin mang thêm hai tờ và một cây bút.",
+   "min": 40,
+   "tips": [
+    "Có thể dùng nguyên mẫu 二枚しかありません để nhấn mạnh chỉ có hai tờ.",
+    "Đặt 枚 sau số tờ và 本 sau số bút trước khi soát phép tính."
+   ],
+   "checklist": [
+    "Số người là 二人.",
+    "Nhu cầu bốn tờ và hiện có hai tờ không bị tráo.",
+    "Lời nhờ thêm hai tờ giấy.",
+    "Bút được đếm bằng 一本."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “一人” nghĩa là gì?",
+   "o": [
+    "một cái",
+    "một người",
+    "hai tờ/tấm mỏng"
+   ],
+   "a": 1,
+   "e": "一人で 紙を 切ります。 → Tôi cắt giấy một mình. Từ cần nhận diện là “一人”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “二人” nghĩa là gì?",
+   "o": [
+    "hai người",
+    "một vật dài",
+    "bao nhiêu cái"
+   ],
+   "a": 0,
+   "e": "二人で 机を 運びます。 → Hai người cùng chuyển bàn. Từ cần nhận diện là “二人”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “三人” nghĩa là gì?",
+   "o": [
+    "ba vật dài",
+    "bao nhiêu người",
+    "ba người"
+   ],
+   "a": 2,
+   "e": "三人が この 机を 使います。 → Ba người dùng bàn này. Từ cần nhận diện là “三人”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “一枚” nghĩa là gì?",
+   "o": [
+    "đủ",
+    "một tờ/tấm mỏng",
+    "sáu vật dài"
+   ],
+   "a": 1,
+   "e": "紙を 一枚 ください。 → Cho tôi một tờ giấy. Từ cần nhận diện là “一枚”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền cách đọc 二人: ___",
+   "a": "ふたり",
+   "e": "Hai người có cách đọc riêng ふたり; không ghép số hai với にん."
+  },
+  {
+   "t": "fill",
+   "q": "Điền lượng từ cho ba tấm ảnh: 写真を 三___ 見せます。",
+   "a": "枚",
+   "e": "Ảnh là vật mỏng nên trong tình huống này dùng 枚, đọc まい."
+  },
+  {
+   "t": "fill",
+   "q": "Điền số còn thiếu: 四人に 一本ずつ。ペンは 三本。あと ___本。",
+   "a": "一",
+   "e": "Bốn người mỗi người một bút cần bốn cây; có ba nên còn thiếu một."
+  },
+  {
+   "t": "order",
+   "q": "Sắp lời yêu cầu ba bút.",
+   "w": [
+    "ください。",
+    "三本",
+    "ペンを"
+   ],
+   "a": "ペンを三本ください。",
+   "e": "Danh từ với を đứng trước cụm số lượng 三本; ください làm lời xin lịch sự."
+  },
+  {
+   "q": "Tổng số giấy cần là bao nhiêu?",
+   "o": [
+    "Ba tờ",
+    "Bốn tờ",
+    "Hai tờ"
+   ],
+   "a": 1,
+   "e": "二枚ずつ nghĩa là mỗi người hai tờ; hai người dùng tổng cộng bốn tờ.",
+   "t": "listen",
+   "say": "二人が 紙を 二枚ずつ 使います。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "Sau khi lấy ra một cây, trong hộp còn bao nhiêu?",
+   "o": [
+    "Bốn cây",
+    "Sáu cây",
+    "Một cây"
+   ],
+   "a": 0,
+   "e": "Nghe 五本 hiện có và 一本 lấy ra; lượng còn lại là bốn.",
+   "t": "listen",
+   "say": "箱に ペンが 五本 あります。一本 出します。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "紙を 三枚、ペンを 二本 用意します。",
+   "a": "紙を 三枚、ペンを 二本 用意します。",
+   "lang": "ja-JP",
+   "e": "Giấy dùng 三枚, bút dùng 二本; viết đúng lượng từ để không đảo loại đồ cần chuẩn bị."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "二枚",
+     "hai tờ/tấm mỏng"
+    ],
+    [
+     "一本",
+     "một vật dài"
+    ],
+    [
+     "三本",
+     "ba vật dài"
+    ],
+    [
+     "六本",
+     "sáu vật dài"
+    ],
+    [
+     "ひとつ",
+     "một cái"
+    ]
+   ],
+   "e": "Hai và ba người có cách đọc khác nhau; lượng giấy dùng 枚 còn bút dùng 本. Chọn theo vật sẽ cho đúng cặp ngay cả khi cùng là số một."
+  },
+  {
+   "q": "Vì sao cần mười một tờ giấy dùng cho người tham gia?",
+   "o": [
+    "Mỗi người dùng ba tờ",
+    "Buổi sáng tám tờ, chiều ba tờ",
+    "Sáng bốn tờ, chiều bảy tờ"
+   ],
+   "a": 1,
+   "e": "Bốn người buổi sáng dùng hai tờ mỗi người: tám tờ; ba người buổi chiều mỗi người một tờ: ba tờ.",
+   "t": "mc"
+  },
+  {
+   "q": "Hai bút chưa dùng buổi sáng ở đâu?",
+   "o": [
+    "Đặt dưới ảnh",
+    "Trong hộp",
+    "Mỗi người mang về một cây"
+   ],
+   "a": 1,
+   "e": "Bài đọc nêu 残りの二本は箱に入れます.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Làm thẻ ba người, sáu tờ giấy, hai bút hiện có và một bút dự phòng; thêm bảng số lượng sáng/chiều để đọc.",
+  "steps": [
+   {
+    "t": "10'",
+    "do": "Đưa hai bút cho nhóm ba học viên để họ nhận ra nhu cầu báo thiếu trước khi học lượng từ."
+   },
+   {
+    "t": "20'",
+    "do": "Phân loại thẻ người, giấy, bút và hộp vào 人/枚/本/つ; đọc riêng ひとり, ふたり."
+   },
+   {
+    "t": "25'",
+    "do": "Luyện chuỗi いっぽん/にほん/さんぼん/ろっぽん và ghi nơi có âm ngắt hoặc đổi phụ âm."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe tình huống bàn thủ công, điền ba cột số người, lượng giấy và số bút còn thiếu."
+   },
+   {
+    "t": "15'",
+    "do": "Đọc kế hoạch sáng chiều, tính tám cộng ba tờ rồi chỉ câu cung cấp từng dữ kiện."
+   },
+   {
+    "t": "15'",
+    "do": "Làm chỗ trống chọn cách đọc và lượng từ; giải thích vì sao 三枚 không dùng cho bút."
+   },
+   {
+    "t": "20'",
+    "do": "Đổi sang thẻ bốn người ba bút, luyện lời nhờ một cây mà không đọc lại hội thoại."
+   },
+   {
+    "t": "20'",
+    "do": "Viết lời nhờ theo thẻ hai người; bạn kiểm số giấy cần, hiện có và cần bổ sung."
+   },
+   {
+    "t": "20'",
+    "do": "Chơi cửa hàng vật liệu: mỗi nhóm nhận đơn có loại đồ và số lượng khác nhau rồi kiểm hàng giao."
+   },
+   {
+    "t": "15'",
+    "do": "Làm nghe và chính tả; tự khoanh các chữ 人/枚/本 đã dùng đúng với đồ."
+   }
+  ],
+  "games": [
+   "Một nhóm giao đồ theo đơn nghe, nhóm kia dùng lượng từ kiểm lại và chỉ phần thiếu.",
+   "Đọc số lượng rồi giơ thẻ hình vật phù hợp; những thẻ có cùng số buộc người học nghe cả lượng từ."
+  ],
+  "errors": [
+   "Nói 二人 là ににん: luyện cả cụm ふたり cạnh hình hai người.",
+   "Đọc 三本 là さんほん: đối chiếu さんぼん và nhắc biến đổi b.",
+   "Dùng 枚 cho hộp vì đều bằng giấy: phân loại theo hình dạng vật hoàn chỉnh, dùng つ trong bài.",
+   "Quên nhân lượng mỗi người: tô riêng số người và ずつ trước khi tính tổng."
+  ],
+  "homework": "Lập danh sách giả cho nhóm năm người gồm giấy, bút, hộp; ghi lượng cần, lượng đang có và một lời nhờ bổ sung có lượng từ đúng."
+ }
+}

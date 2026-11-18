@@ -4,9 +4,9 @@
  "sub": "여기에는 의자가 있어요.",
  "goals": [
   "Nhận diện và đọc các chữ/âm trọng tâm: Nguyên âm mở rộng và nguyên âm ghép",
-  "Phân biệt ít nhất hai mục có âm hoặc hình gần nhau bằng nghe và nghĩa",
-  "Viết đúng 12 mục từ và bốn câu mẫu, không thay Hangul bằng Romaja",
-  "Dùng câu hỏi lại lịch sự khi chưa nghe rõ"
+  "Dùng “야구” (bóng chày) và “귀” (tai) trong lời trao đổi đúng tình huống.",
+  "Nghe để phân biệt câu trả lời cho “과자 có mấy khối theo lời nói? ” với hai khả năng gần âm hoặc gần nghĩa.",
+  "Viết để đáp ứng yêu cầu: Viết các mục từ của bảng thẻ, trong đó đánh dấu khối khó ở 야구 và 과자. Chép bốn câu mẫu rồi nghe lại để kiểm chữ, không thay bằng Romaja. Tự kiểm một điều kiện hoặc dữ kiện dễ bị bỏ."
  ],
  "parts": [
   {
@@ -75,7 +75,7 @@
   },
   {
    "k": "words",
-   "h": "Thẻ đọc có nghĩa – các chữ chưa học được nghe mẫu",
+   "h": "Thẻ đọc: 야구 / 유리 / 과자",
    "items": [
     {
      "w": "야구",
@@ -178,15 +178,15 @@
   {
    "k": "grammar",
    "h": "Đọc cụm và cách ghép chữ trong ngữ cảnh",
-   "html": "<p>Đọc các mẫu dưới đây theo giọng ko-KR. Ở cấp Hangul, mục tiêu là giải mã chữ và nhận diện nghĩa; các đuôi câu được học như cụm, không yêu cầu biến đổi mọi động từ. Khi viết, giữ chính tả gốc và trợ từ đi cùng từ trước.</p>",
+   "html": "<p>Nghe câu “여기에는 의자가 있어요.” rồi khoanh những khối đã nhận diện được. Trong câu thứ hai,“과자를 읽어 보세요.”,hãy xác định phần được giáo viên yêu cầu đọc hoặc viết. Đọc theo giọng mẫu trước khi nhìn Romaja;ở lượt cuối,che phiên âm và giải thích nghĩa bằng tiếng Việt.</p>",
    "table": [
     [
      "Điểm kiểm",
      "Cách làm"
     ],
     [
-     "Khối âm",
-     "Xác định phụ âm đầu – nguyên âm – batchim nếu có"
+     "Chữ cần kiểm",
+     "야구 → yagu; 여자 → yeoja"
     ],
     [
      "Nhịp",
@@ -270,34 +270,34 @@
    ],
    "qs": [
     {
-     "q": "Cuộc trao đổi diễn ra trong bối cảnh nào?",
+     "q": "과자 có mấy khối theo lời nói?",
      "o": [
-      "Luyện đọc và hỏi lại trong lớp",
-      "Đàm phán mua nhà",
-      "Thông báo y tế"
-     ],
-     "a": 0,
-     "e": "Các lượt đều hỏi cách đọc, chữ và hoạt động lớp."
-    },
-    {
-     "q": "Khi chưa rõ, hành động phù hợp là gì?",
-     "o": [
-      "Tự đổi chính tả tùy âm nghe",
-      "Bỏ hoàn toàn Hangul",
-      "Hỏi lại và đối chiếu giọng mẫu"
-     ],
-     "a": 2,
-     "e": "Hội thoại minh họa câu hỏi cụ thể thay vì đoán."
-    },
-    {
-     "q": "Mục tiêu chính của lượt luyện là gì?",
-     "o": [
-      "Đọc mọi từ thật nhanh",
-      "Nguyên âm mở rộng và nguyên âm ghép",
-      "Thuộc tên một công ty thật"
+      "Ba",
+      "Hai",
+      "Một"
      ],
      "a": 1,
-     "e": "Căn cứ các chữ/âm được đối chiếu trong hội thoại."
+     "e": "Người trả lời xác nhận 두 글자예요."
+    },
+    {
+     "q": "ㅘ có bị tách thành hai khối không?",
+     "o": [
+      "Có hai khối độc lập",
+      "Không,nằm trong một khối",
+      "Không có nguyên âm"
+     ],
+     "a": 1,
+     "e": "한 글자 안에 써요 nói rõ vị trí ㅘ."
+    },
+    {
+     "q": "Chỉ nghe có luôn phân biệt 개 và 게 không?",
+     "o": [
+      "Luôn phân biệt tuyệt đối",
+      "Không,cần xét nghĩa và chữ",
+      "Không cần học chính tả"
+     ],
+     "a": 1,
+     "e": "뜻과 글자도 확인해요 bổ sung căn cứ ngoài âm nghe."
     }
    ]
   },
@@ -377,33 +377,33 @@
    "h": "Nói và tự nghe lại",
    "tasks": [
     {
-     "p": "Đọc bốn câu mẫu, ghi âm rồi đánh dấu hai chữ/âm trọng tâm của bài.",
+     "p": "Đọc “여기에는 의자가 있어요.” và “과자를 읽어 보세요.”; đối chiếu hai từ 야구 / 여자 trước khi đọc đủ bốn câu mẫu.",
      "model": "여기에는 의자가 있어요. 과자를 읽어 보세요. 왜와 외는 달라요. 귀는 한 글자예요.",
      "vi": "Ở đây có ghế. Hãy thử đọc 과자. 왜 và 외 khác nhau về chữ viết. 귀 là một khối chữ.",
-     "tips": "Chậm trước, chính xác trước; không đọc Romaja thay Hangul."
+     "tips": "Ở cặp 야구 / 여자, đọc từng khối rồi nối lại; chỉ tăng tốc khi người nghe chọn đúng thẻ."
     },
     {
-     "p": "Đóng vai người học chưa nghe rõ: yêu cầu đọc lại, sau đó đọc một từ trong bài để xác nhận.",
-     "model": "다시 읽어 주세요. 천천히 말해 주세요. 감사합니다.",
-     "vi": "Xin đọc lại. Xin nói chậm. Cảm ơn."
+     "p": "Một người chỉ thẻ 유리, người kia đọc; đổi sang 게 rồi dùng lời nhờ đọc lại khi không chắc.",
+     "model": "다시 읽어 주세요. “유리” 맞아요? 감사합니다.",
+     "vi": "Xin đọc lại. Có đúng là “유리” không? Cảm ơn."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có tự kiểm",
-   "task": "Viết tay 12 mục từ của bài và bốn câu mẫu. Khoanh một khối khó, ghi cấu tạo rồi tự sửa sau khi đối chiếu; không chép Romaja làm đáp án.",
+   "task": "Viết các mục từ của bảng thẻ, trong đó đánh dấu khối khó ở 야구 và 과자. Chép bốn câu mẫu rồi nghe lại để kiểm chữ, không thay bằng Romaja.",
    "min": 20,
    "model": "여기에는 의자가 있어요.\n과자를 읽어 보세요.\n왜와 외는 달라요.\n귀는 한 글자예요.",
    "modelVi": "Ở đây có ghế.\nHãy thử đọc 과자.\n왜 và 외 khác nhau về chữ viết.\n귀 là một khối chữ.",
    "tips": [
-    "Viết theo khối; nguyên âm quyết định bố trí ngang/dọc.",
-    "Giữ chính tả khi âm nối thay đổi."
+    "Phác thứ tự ý cho tình huống “Viết các mục từ của bảng thẻ, trong đó đánh dấu khối khó ở 야구 và 과자. Chép bốn câu mẫu rồi nghe lại để kiểm chữ, không thay bằng Romaja.”; chọn dữ kiện cần có trước khi bắt đầu viết.",
+    "Kiểm câu dùng “여기에는 의자가 있어요.” làm mẫu: đổi dữ kiện của bạn nhưng không làm đổi quan hệ giữa các vế."
    ],
    "checklist": [
     "Có đủ các mục từ và câu mẫu.",
     "Không thêm nguyên âm ngoài chữ.",
-    "Khoảng cách theo từ, trợ từ gắn với từ trước.",
+    "Kiểm phần chữ trong 유리 và 과자: không tách một khối thành nhiều từ, không thêm âm ngoài mẫu.",
     "Tự chỉ ra và sửa ít nhất một lỗi."
    ]
   }
@@ -411,130 +411,128 @@
  "exercises": [
   {
    "t": "mc",
-   "q": "Chọn nghĩa phù hợp của “야구” trong bài.",
+   "q": "Trong câu ““야구”를 읽어요.”,“야구” có nghĩa gì?",
    "o": [
     "bóng chày",
-    "việc nấu ăn",
-    "chó"
+    "thủy tinh",
+    "bánh ăn vặt"
    ],
    "a": 0,
-   "e": "“야구”를 읽어요. → Đọc “야구” (bóng chày)."
+   "e": "Đọc “야구” (bóng chày). Nghĩa cần chọn là bóng chày, không phải hai khái niệm còn lại."
   },
   {
    "t": "mc",
-   "q": "Chọn nghĩa phù hợp của “여자” trong bài.",
+   "q": "Trong câu ““여자”를 읽어요.”,“여자” có nghĩa gì?",
    "o": [
-    "thủy tinh",
-    "cua",
+    "chó",
+    "tại sao",
     "phụ nữ"
    ],
    "a": 2,
-   "e": "“여자”를 읽어요. → Đọc “여자” (phụ nữ)."
+   "e": "Đọc “여자” (phụ nữ). Nghĩa cần chọn là phụ nữ, không phải hai khái niệm còn lại."
   },
   {
    "t": "mc",
-   "q": "Chọn nghĩa phù hợp của “요리” trong bài.",
+   "q": "Trong câu ““요리”를 읽어요.”,“요리” có nghĩa gì?",
    "o": [
-    "bánh ăn vặt",
+    "nước ngoài",
     "việc nấu ăn",
-    "chó"
+    "cua"
    ],
    "a": 1,
-   "e": "“요리”를 읽어요. → Đọc “요리” (việc nấu ăn)."
+   "e": "Đọc “요리” (việc nấu ăn). Nghĩa cần chọn là việc nấu ăn, không phải hai khái niệm còn lại."
   },
   {
    "t": "fill",
-   "q": "Điền từ/cụm tiếng Hàn có nghĩa “thủy tinh”: ___",
+   "q": "Trong tình huống “Đọc “유리” (thủy tinh).”,điền từ/cụm mang nghĩa “thủy tinh”: ___.",
    "a": "유리",
-   "e": "Từ trong bài là 유리 (yuri). Đọc “유리” (thủy tinh)."
+   "e": "Câu mẫu tương ứng: “유리”를 읽어요. Hãy giữ đúng cụm 유리 khi đưa vào lời nói."
   },
   {
    "t": "fill",
-   "q": "Điền từ/cụm tiếng Hàn có nghĩa “chó”: ___",
+   "q": "Trong tình huống “Đọc “개” (chó).”,điền từ/cụm mang nghĩa “chó”: ___.",
    "a": "개",
-   "e": "Từ trong bài là 개 (gae). Đọc “개” (chó)."
+   "e": "Câu mẫu tương ứng: “개”를 읽어요. Hãy giữ đúng cụm 개 khi đưa vào lời nói."
   },
   {
    "t": "order",
-   "q": "Sắp xếp để nói: Ở đây có ghế.",
+   "q": "Sắp xếp để diễn đạt: Đọc “야구” (bóng chày).",
    "w": [
-    "의자가",
-    "있어요",
-    "여기에는"
+    "읽어요",
+    "“야구”를"
    ],
-   "a": "여기에는 의자가 있어요.",
-   "e": "Đúng: 여기에는 의자가 있어요. → Ở đây có ghế.. Giữ trợ từ gắn với danh từ và vị ngữ ở cuối."
+   "a": "“야구”를 읽어요.",
+   "e": "Trật tự đúng là “야구”를 읽어요. Trợ từ phải đi cùng danh từ và vị ngữ kết thúc ý bóng chày."
   },
   {
    "t": "order",
-   "q": "Sắp xếp để nói: Hãy thử đọc 과자.",
+   "q": "Sắp xếp để diễn đạt: Đọc “여자” (phụ nữ).",
    "w": [
-    "읽어",
-    "보세요",
-    "과자를"
+    "읽어요",
+    "“여자”를"
    ],
-   "a": "과자를 읽어 보세요.",
-   "e": "Đúng: 과자를 읽어 보세요. → Hãy thử đọc 과자.. Giữ trợ từ gắn với danh từ và vị ngữ ở cuối."
+   "a": "“여자”를 읽어요.",
+   "e": "Trật tự đúng là “여자”를 읽어요. Trợ từ phải đi cùng danh từ và vị ngữ kết thúc ý phụ nữ."
   },
   {
    "t": "match",
-   "q": "Nối từ/cụm với nghĩa",
+   "q": "Ghép các cụm về bóng chày và phụ nữ với nghĩa thích hợp.",
    "pairs": [
     [
-     "게",
-     "cua"
+     "야구",
+     "bóng chày"
     ],
     [
-     "과자",
-     "bánh ăn vặt"
+     "여자",
+     "phụ nữ"
     ],
     [
-     "왜",
-     "tại sao"
+     "요리",
+     "việc nấu ăn"
     ],
     [
-     "외국",
-     "nước ngoài"
+     "유리",
+     "thủy tinh"
     ],
     [
-     "의자",
-     "ghế"
+     "개",
+     "chó"
     ]
    ],
-   "e": "Các nghĩa được chọn theo bối cảnh bài; không suy từ một âm Hán Việt đơn lẻ."
+   "e": "So cặp 야구 — bóng chày với 개 — chó. Hai mục phục vụ những chức năng khác nhau trong tình huống vừa học."
   },
   {
    "t": "listen",
+   "say": "과자는 몇 글자예요? 두 글자예요. ㅘ를 두 글자로 써요? 아니요. 한 글자 안에 써요. 개와 게는 소리만 듣고 항상 구별해요? 아니요. 뜻과 글자도 확인해요.",
    "lang": "ko-KR",
-   "say": "과자를 읽어 보세요.",
-   "q": "Nghe và chọn ý đúng.",
+   "q": "과자 có mấy khối theo lời nói?",
    "o": [
-    "Hãy thử đọc 과자.",
-    "Ở đây có ghế.",
-    "귀 là một khối chữ."
+    "Ba",
+    "Hai",
+    "Một"
    ],
-   "a": 0,
-   "e": "Câu nghe là: 과자를 읽어 보세요. → Hãy thử đọc 과자."
+   "a": 1,
+   "e": "Nghe lượt trả lời để kiểm: Người trả lời xác nhận 두 글자예요. Câu hỏi này cần hai thay vì suy từ vị trí chữ trên trang."
   },
   {
    "t": "listen",
+   "say": "과자는 몇 글자예요? 두 글자예요. ㅘ를 두 글자로 써요? 아니요. 한 글자 안에 써요. 개와 게는 소리만 듣고 항상 구별해요? 아니요. 뜻과 글자도 확인해요.",
    "lang": "ko-KR",
-   "say": "왜와 외는 달라요.",
-   "q": "Nghe và chọn ý đúng.",
+   "q": "ㅘ có bị tách thành hai khối không?",
    "o": [
-    "Ở đây có ghế.",
-    "귀 là một khối chữ.",
-    "왜 và 외 khác nhau về chữ viết."
+    "Có hai khối độc lập",
+    "Không,nằm trong một khối",
+    "Không có nguyên âm"
    ],
-   "a": 2,
-   "e": "Câu nghe là: 왜와 외는 달라요. → 왜 và 외 khác nhau về chữ viết."
+   "a": 1,
+   "e": "Nghe lượt trả lời để kiểm: 한 글자 안에 써요 nói rõ vị trí ㅘ. Câu hỏi này cần không, nằm trong một khối thay vì suy từ vị trí chữ trên trang."
   },
   {
    "t": "dict",
+   "say": "오늘은 그림을 보고 글자를 골라요.",
+   "a": "오늘은 그림을 보고 글자를 골라요.",
    "lang": "ko-KR",
-   "say": "여기에는 의자가 있어요.",
-   "a": "여기에는 의자가 있어요.",
-   "e": "Ở đây có ghế.. Viết bằng Hangul; không thêm nguyên âm sau batchim và giữ khoảng cách theo từ."
+   "e": "Chép nguyên câu vừa nghe, trong đó giữ chính tả của các cụm ở đoạn “Nhật ký buổi học 3”. So âm nối với chữ gốc trước khi sửa."
   },
   {
    "t": "mc",
@@ -572,52 +570,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ/cụm của bài, bản nghe TTS ko-KR đã kiểm, phiếu hai vai, bảng tiêu chí và giấy viết; Chuẩn bị thẻ chữ lớn, gương nhỏ hoặc giấy nhẹ tùy hoạt động; không ép học viên nghe phân biệt âm mà nhiều giọng đã nhập.",
+  "prep": "Chuẩn bị thẻ 야구, 요리, 왜 và tranh nghĩa tương ứng; giáo viên chọn giọng ko-KR rồi nghe trước các âm đang đối chiếu.",
   "steps": [
    {
     "t": "10 phút",
-    "do": "Buổi 1: khởi động bằng tình huống “Nguyên âm mở rộng và nguyên âm ghép”; cho học viên nói điều đã biết."
+    "do": "Cho học viên nghe chưa nhìn chữ rồi dự đoán “과자 có mấy khối theo lời nói? ”. Giữ lại hai lựa chọn gần nhau để khi nghe lần hai có thể chỉ ra âm hoặc dữ kiện quyết định."
    },
    {
     "t": "20 phút",
-    "do": "Giới thiệu từ/cụm bằng ví dụ; nghe trước, nhận diện nghĩa rồi mới đọc Romaja."
+    "do": "Dùng thẻ “야구” với câu ““야구”를 읽어요.”. Học viên ghép nghĩa “bóng chày” rồi đối chiếu “여자” để chọn ngữ cảnh phù hợp và tự đặt một câu khác."
    },
    {
     "t": "25 phút",
-    "do": "Dạy mẫu trọng tâm; hỏi CCQ về nghĩa và giới hạn sử dụng; làm mẫu một câu đúng và một lỗi."
+    "do": "Viết “여기에는 의자가 있어요.” cùng “과자를 읽어 보세요.” lên bảng. Tách vị ngữ và thành phần liên quan tới Đọc cụm và cách ghép chữ trong ngữ cảnh; yêu cầu đổi một thành phần rồi kiểm xem nghĩa có còn đúng ý định không."
    },
    {
     "t": "20 phút",
-    "do": "Nghe hai lượt: lượt một lấy ý chính, lượt hai tìm căn cứ cho câu hỏi; học viên chỉ vào đoạn chứng cứ."
+    "do": "Dừng đoạn nghe ngay sau câu hỏi liên quan “ㅘ có bị tách thành hai khối không? ”. Học viên chọn thẻ hoặc lời đáp phù hợp, rồi nghe phần còn lại để kiểm thay vì đoán theo chữ Latinh."
    },
    {
     "t": "15 phút",
-    "do": "Luyện cặp theo vai, đổi dữ kiện; ghi lỗi để sửa cuối hoạt động."
+    "do": "Một người hỏi “과자 có mấy khối theo lời nói? ”, người kia trả lời rồi giải thích “Chỉ nghe có luôn phân biệt 개 và 게 không? ”. Đổi thẻ chữ đang chỉ, giữ cách hỏi lịch sự và không làm đổi chính tả theo âm nghe."
    },
    {
     "t": "15 phút",
-    "do": "Buổi 2: ôn cách quãng, đọc đoạn mới và trả lời có trích căn cứ."
+    "do": "Ôn đầu buổi hai bằng “야구” và “귀”. Mỗi học viên viết một câu nhận diện nghĩa và một câu chỉ ra trường hợp dùng sai; giáo viên dùng ví dụ từ thẻ để chữa."
    },
    {
     "t": "20 phút",
-    "do": "Phân tích cấu trúc bài đọc và so sánh cách diễn đạt với tiếng Việt."
+    "do": "Đọc đoạn mới để giải câu “Vì sao dùng tranh và nghĩa? ”. Đánh dấu căn cứ ngay trong bài, vẽ mũi tên từ dữ kiện tới đáp án và phân biệt phần nói rõ với điều chỉ suy ra."
    },
    {
     "t": "20 phút",
-    "do": "Luyện nói hai nhiệm vụ; bạn học đánh dấu điều đủ ý và điều chưa rõ."
+    "do": "Giao nhập vai: Đọc “여기에는 의자가 있어요.” và “과자를 읽어 보세요.”; đối chiếu hai từ 야구 / 여자 trước khi đọc đủ bốn câu mẫu. Quan sát xem người nhận có nói lại đúng thông tin đã thay hay vẫn giữ đáp án của lượt trước."
    },
    {
     "t": "20 phút",
-    "do": "Viết nháp, đối chiếu checklist, sửa ít nhất hai điểm có lý do."
+    "do": "Yêu cầu viết: Viết các mục từ của bảng thẻ, trong đó đánh dấu khối khó ở 야구 và 과자. Chép bốn câu mẫu rồi nghe lại để kiểm chữ, không thay bằng Romaja. Khi đổi bản, bạn đọc đánh dấu một ý đã rõ và một quan hệ cần giải thích; tác giả sửa dựa trên phản hồi chứ không chép lại mẫu."
    },
    {
     "t": "15 phút",
-    "do": "Làm bài tự chấm, giải thích lỗi; ghi một mục tiêu ôn tiếp."
+    "do": "Chữa câu “Cặp ghép nào đúng cho ㅒ và ㅖ? ”. Học viên tự nêu điều khiến đáp án sai dễ bị chọn, rồi dùng “귀” trong một câu kết thúc hoạt động."
    }
   ],
   "games": [
-   "Thẻ bằng chứng: mỗi cặp ghép một câu trả lời với câu tiếng Hàn hỗ trợ nó; phải giải thích bằng tiếng Việt.",
-   "Đổi vai có dữ kiện mới: mỗi người nói ít nhất hai lượt trước khi đổi bạn; không đọc nguyên đáp án."
+   "Tìm mảnh đối chiếu:nhóm nhận “야구”,“개” và “귀”;đặt mỗi thẻ vào ví dụ phù hợp rồi bảo vệ lựa chọn bằng nghĩa,cấu trúc hoặc âm đang học.",
+   "Đường tới đáp án:hai đội cùng giải “Vì sao dùng tranh và nghĩa?”;đội ghi đúng câu chứng cứ và loại được một suy luận quá mức thắng lượt đó."
   ],
   "errors": [
    "Tách nguyên âm ghép ra hai khối: dùng ô vuông để đóng cùng một khối.",
@@ -626,6 +624,6 @@
    "Áp 의 một cách đọc mọi vị trí: học từ/chức năng cụ thể.",
    "Quên ㅒ/ㅖ: ôn bảng 21 nguyên âm có đối chiếu."
   ],
-  "homework": "Ôn thẻ 10 phút/ngày, đọc lại bốn câu mẫu và ghi âm; viết một lỗi đã sửa kèm lý do bằng tiếng Việt."
+  "homework": "Viết lại sản phẩm sau khi kiểm câu “과자를 읽어 보세요.”. Ghi âm phần trả lời “Cuộc trao đổi diễn ra trong bối cảnh nào? ”, nghe lại vào hôm sau và nêu một điểm khác giữa 야구 với 여자."
  }
 }

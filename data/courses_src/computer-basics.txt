@@ -4,7 +4,7 @@ icon: 💻
 floor: 1
 room: 101
 level: Nhập môn
-hours: 5
+hours: 28
 summary: Làm quen thư mục, file, PowerShell, biến PATH và cài Node.js, Python, Java, VS Code trên Windows. Đây là bước chuẩn bị bắt buộc trước mọi khóa automation.
 
 ## LESSON computer-basics-01 | Thư mục, file và đường dẫn
@@ -15,13 +15,10 @@ Hãy tưởng tượng ổ đĩa C: là một tủ hồ sơ lớn.
 • Thư mục (folder) = ngăn kéo, trong ngăn kéo có thể có ngăn nhỏ hơn.
 • File (tệp) = tờ giấy nằm trong ngăn kéo, chứa nội dung thật: chữ, ảnh, code.
 Tester làm việc với file mỗi ngày: file test, file dữ liệu, file báo cáo, ảnh chụp lỗi.
-Học cách sắp xếp gọn gàng ngay từ đầu sẽ giúp bạn không bao giờ hỏi "file của mình đâu rồi?".
+Học cách sắp xếp gọn gàng ngay từ đầu sẽ giúp bạn không bao giờ hỏi "file của mình đâu rồi?". Quy ước thực hành của khóa computer-basics:nếu ví dụ gọi localhost:3130,hãy dựng lab_api_fixture.py ở bài1 khóa API trước;dữ liệu và response là fixture tự viết,không gọi host công khai. URL localhost:3000 ở các ví dụ khác cần app lab riêng theo hợp đồng bài đó.
 
 ### Đường dẫn (path) là địa chỉ nhà
 Mỗi file có một địa chỉ duy nhất gọi là đường dẫn.
-~~~text
-C:\Users\an\qa-lab\tests\login.spec.ts
-~~~
 Giải thích từng phần:
 • C:\ là ổ đĩa (cái tủ).
 • Users\an là thư mục cá nhân của người dùng tên "an".
@@ -29,9 +26,16 @@ Giải thích từng phần:
 • login.spec.ts là tên file, phần sau dấu chấm cuối (.ts) là đuôi file.
 Windows dùng dấu gạch ngược \ để ngăn cách. Trên macOS/Linux và trong URL dùng dấu gạch xuôi /.
 Đường dẫn tuyệt đối bắt đầu từ ổ đĩa. Đường dẫn tương đối tính từ thư mục hiện tại, ví dụ tests\login.spec.ts.
+~~~text
+C:\Users\an\qa-lab\tests\login.spec.ts
+~~~
 
 ### Đuôi file (extension) cho biết loại file
 Đuôi file giống nhãn trên hộp: nhìn là biết bên trong chứa gì và chương trình nào mở nó.
+Mặc định Windows ẩn đuôi file. Hãy bật lên:
+• Mở File Explorer (phím Windows + E).
+• Windows 11: View > Show > File name extensions.
+• Windows 10: tab View > tích ô File name extensions.
 ~~~text
 .txt   ghi chú văn bản thuần
 .js    code JavaScript (Node.js chạy được)
@@ -42,13 +46,13 @@ Windows dùng dấu gạch ngược \ để ngăn cách. Trên macOS/Linux và t
 .jmx   kịch bản JMeter
 .png   ảnh chụp màn hình lỗi
 ~~~
-Mặc định Windows ẩn đuôi file. Hãy bật lên:
-• Mở File Explorer (phím Windows + E).
-• Windows 11: View > Show > File name extensions.
-• Windows 10: tab View > tích ô File name extensions.
 
 ### Tạo khu làm việc chuẩn cho tester
 Nên có một thư mục riêng cho mọi bài thực hành, tên không dấu, không khoảng trắng.
+Giải thích:
+• qa-lab là thư mục gốc cho toàn bộ khóa học.
+• Mỗi thư mục con có một mục đích rõ ràng, giống ngăn kéo có dán nhãn.
+• Tên không dấu, không khoảng trắng giúp gõ lệnh dễ hơn và tránh lỗi đường dẫn về sau.
 ~~~text
 C:\Users\an\qa-lab\
 ├── notes\          ghi chú, checklist
@@ -56,10 +60,6 @@ C:\Users\an\qa-lab\
 ├── evidence\       ảnh chụp, video lỗi
 └── projects\       các dự án automation
 ~~~
-Giải thích:
-• qa-lab là thư mục gốc cho toàn bộ khóa học.
-• Mỗi thư mục con có một mục đích rõ ràng, giống ngăn kéo có dán nhãn.
-• Tên không dấu, không khoảng trắng giúp gõ lệnh dễ hơn và tránh lỗi đường dẫn về sau.
 
 ### Lỗi thường gặp
 Lỗi 1: tạo file test.js nhưng thực tế file tên là test.js.txt.
@@ -100,9 +100,6 @@ Cách mở:
 Hầu hết công cụ automation (Playwright, Newman, JMeter non-GUI, Appium) đều chạy bằng dòng lệnh, nên đây là kỹ năng nền tảng.
 
 ### Câu lệnh đầu tiên: mình đang ở đâu?
-~~~bash
-pwd
-~~~
 Giải thích:
 • pwd = print working directory, in ra thư mục hiện tại bạn đang đứng.
 Cách chạy: gõ pwd rồi nhấn Enter.
@@ -111,13 +108,11 @@ Path
 ----
 C:\Users\an
 Dòng chữ trước con trỏ, ví dụ PS C:\Users\an>, cũng cho biết vị trí hiện tại. Phần đó gọi là prompt.
+~~~bash
+pwd
+~~~
 
 ### Xem có gì trong thư mục: ls / dir
-~~~bash
-ls
-dir
-ls qa-lab
-~~~
 Giải thích từng dòng:
 • dòng 1: ls liệt kê file và thư mục con trong thư mục hiện tại.
 • dòng 2: dir làm y hệt ls (trong PowerShell cả hai đều là tên tắt của Get-ChildItem).
@@ -127,15 +122,13 @@ Mode    LastWriteTime      Length Name
 d----   14/11/2026 09:00          notes
 -a---   14/11/2026 09:05       42 ghi-chu.txt
 Cột Mode bắt đầu bằng d là thư mục (directory), bắt đầu bằng dấu - là file.
+~~~bash
+ls
+dir
+ls qa-lab
+~~~
 
 ### Di chuyển giữa các thư mục: cd
-~~~bash
-cd qa-lab
-cd notes
-cd ..
-cd ~
-cd C:\Users\an\qa-lab\data
-~~~
 Giải thích từng dòng:
 • dòng 1: cd = change directory, đi vào thư mục qa-lab.
 • dòng 2: đi tiếp vào thư mục con notes.
@@ -143,33 +136,40 @@ Giải thích từng dòng:
 • dòng 4: dấu ~ là thư mục người dùng (nhà của bạn).
 • dòng 5: nhảy thẳng tới một đường dẫn tuyệt đối.
 Sau mỗi lệnh, nhìn prompt để biết bạn đang ở đâu, ví dụ PS C:\Users\an\qa-lab\notes>.
+~~~bash
+cd qa-lab
+cd notes
+cd ..
+cd ~
+cd C:\Users\an\qa-lab\data
+~~~
 
 ### Mẹo gõ nhanh như người chuyên nghiệp
-~~~bash
-cd qa<Tab>
-<Mũi tên lên>
-cls
-<Ctrl + C>
-~~~
 Giải thích:
 • Phím Tab: gõ vài chữ đầu rồi nhấn Tab, PowerShell tự điền nốt tên thư mục/file. Nhấn Tab nhiều lần để xoay vòng các lựa chọn.
 • Mũi tên lên/xuống: gọi lại các lệnh đã gõ trước đó, không cần gõ lại.
 • cls: xóa sạch màn hình cho dễ nhìn (lệnh cũ vẫn còn trong lịch sử).
 • Ctrl + C: dừng lệnh đang chạy, ví dụ khi một bài test chạy mãi không dừng.
 Tab giúp tránh gõ sai chính tả, nên dùng nó thường xuyên.
+~~~bash
+cd qa<Tab>
+<Mũi tên lên>
+cls
+<Ctrl + C>
+~~~
 
 ### Lỗi thường gặp
-~~~text
-cd : Cannot find path 'C:\Users\an\qa-lap' because it does not exist.
-
-Set-Location : A positional parameter cannot be found that accepts argument 'Tests'.
-~~~
 Lỗi 1: Cannot find path.
 • Nguyên nhân: gõ sai tên (qa-lap thay vì qa-lab) hoặc đang đứng sai thư mục.
 • Cách sửa: chạy ls để xem tên đúng, dùng Tab để tự điền.
 Lỗi 2: A positional parameter cannot be found khi chạy cd My Tests.
 • Nguyên nhân: tên có khoảng trắng, PowerShell hiểu thành hai tham số.
 • Cách sửa: đặt đường dẫn trong ngoặc kép: cd "My Tests".
+~~~text
+cd : Cannot find path 'C:\Users\an\qa-lap' because it does not exist.
+
+Set-Location : A positional parameter cannot be found that accepts argument 'Tests'.
+~~~
 
 PRACTICE: Mở PowerShell, dùng pwd để xem vị trí, cd vào qa-lab, dùng ls liệt kê, cd vào notes rồi cd .. để quay lại. Thử dùng phím Tab để điền tên thư mục và mũi tên lên để chạy lại lệnh cũ. Cuối cùng gõ cls.
 Q: Lệnh nào dùng để lùi ra thư mục cha?
@@ -189,37 +189,32 @@ Q: Muốn vào thư mục tên "My Tests" (có khoảng trắng), bạn gõ th�
 ## LESSON computer-basics-03 | Tạo, đọc, sao chép và xóa file bằng lệnh
 
 ### Tạo thư mục: mkdir
-~~~bash
-cd ~\qa-lab
-mkdir projects
-mkdir data\json, data\csv
-ls data
-~~~
 Giải thích từng dòng:
 • dòng 1: đi tới thư mục qa-lab trong thư mục người dùng.
 • dòng 2: mkdir = make directory, tạo thư mục projects.
 • dòng 3: tạo cùng lúc hai thư mục con json và csv bên trong data (cách nhau bởi dấu phẩy).
 • dòng 4: kiểm tra lại, phải thấy json và csv.
 Nếu thư mục đã tồn tại, mkdir báo lỗi An item with the specified name ... already exists. Không sao, chỉ là nó đã có rồi.
+~~~bash
+cd ~\qa-lab
+mkdir projects
+mkdir data\json, data\csv
+ls data
+~~~
 
 ### Tạo file rỗng: New-Item
-~~~bash
-New-Item -ItemType File notes\bug-list.txt
-ni notes\test-ideas.txt
-ls notes
-~~~
 Giải thích từng dòng:
 • dòng 1: New-Item tạo mục mới, -ItemType File nói rõ đây là file (không phải thư mục).
 • dòng 2: ni là tên tắt của New-Item, tạo nhanh file test-ideas.txt.
 • dòng 3: liệt kê để kiểm tra hai file mới, cột Length bằng 0 vì file đang rỗng.
 Giống như lấy một tờ giấy trắng bỏ vào ngăn kéo notes.
+~~~bash
+New-Item -ItemType File notes\bug-list.txt
+ni notes\test-ideas.txt
+ls notes
+~~~
 
 ### Ghi và đọc nội dung file
-~~~bash
-Set-Content notes\bug-list.txt "BUG-1: Nut Login khong phan hoi" -Encoding utf8
-Add-Content notes\bug-list.txt "BUG-2: Sai dinh dang ngay"
-Get-Content notes\bug-list.txt
-~~~
 Giải thích từng dòng:
 • dòng 1: Set-Content ghi đè toàn bộ nội dung file bằng dòng chữ mới. -Encoding utf8 giúp lưu đúng tiếng Việt có dấu.
 • dòng 2: Add-Content viết thêm một dòng vào cuối file, không xóa nội dung cũ.
@@ -228,27 +223,27 @@ Kết quả mong đợi:
 BUG-1: Nut Login khong phan hoi
 BUG-2: Sai dinh dang ngay
 Cẩn thận: Set-Content xóa sạch nội dung cũ, giống viết lại tờ giấy mới.
+~~~bash
+Set-Content notes\bug-list.txt "BUG-1: Nut Login khong phan hoi" -Encoding utf8
+Add-Content notes\bug-list.txt "BUG-2: Sai dinh dang ngay"
+Get-Content notes\bug-list.txt
+~~~
 
 ### Sao chép, di chuyển, đổi tên
-~~~bash
-Copy-Item notes\bug-list.txt evidence\bug-list-backup.txt
-Move-Item notes\test-ideas.txt data\test-ideas.txt
-Rename-Item data\test-ideas.txt ideas.txt
-ls evidence, data
-~~~
 Giải thích từng dòng:
 • dòng 1: Copy-Item (tên tắt cp, copy) tạo bản sao, file gốc vẫn còn.
 • dòng 2: Move-Item (tên tắt mv, move) chuyển file sang thư mục khác, chỗ cũ không còn file.
 • dòng 3: Rename-Item đổi tên file, chỉ cần đưa tên mới.
 • dòng 4: liệt kê cùng lúc hai thư mục để kiểm tra kết quả.
 Thứ tự tham số luôn là: nguồn trước, đích sau.
+~~~bash
+Copy-Item notes\bug-list.txt evidence\bug-list-backup.txt
+Move-Item notes\test-ideas.txt data\test-ideas.txt
+Rename-Item data\test-ideas.txt ideas.txt
+ls evidence, data
+~~~
 
 ### Xóa an toàn: Remove-Item
-~~~bash
-Remove-Item evidence\bug-list-backup.txt
-Remove-Item data\csv
-Remove-Item data\json -Recurse
-~~~
 Giải thích từng dòng:
 • dòng 1: xóa một file (tên tắt rm, del).
 • dòng 2: xóa thư mục rỗng csv.
@@ -257,8 +252,16 @@ Cảnh báo quan trọng:
 • Xóa bằng lệnh KHÔNG vào Recycle Bin, mất là mất luôn.
 • Luôn chạy pwd và ls trước khi xóa để chắc mình đang đứng đúng chỗ.
 • Không bao giờ chạy lệnh xóa mà bạn copy từ internet khi chưa hiểu nó làm gì.
+~~~bash
+Remove-Item evidence\bug-list-backup.txt
+Remove-Item data\csv
+Remove-Item data\json -Recurse
+~~~
 
 ### Lỗi thường gặp
+• Lỗi 1: thư mục còn chứa file. PowerShell hỏi xác nhận hoặc báo lỗi. Kiểm tra kỹ rồi mới thêm -Recurse.
+• Lỗi 2: file đang mở trong Excel/Notepad. Đóng chương trình đó rồi chạy lại.
+• Lỗi 3: sai vị trí. File nằm trong notes nhưng bạn đứng ở qa-lab mà gõ thiếu notes\. Dùng Tab để tự điền đường dẫn.
 ~~~text
 Remove-Item : The item at C:\Users\an\qa-lab\data has children and the Recurse parameter was not specified.
 
@@ -266,9 +269,6 @@ Remove-Item : Cannot remove item C:\...\report.xlsx: The process cannot access t
 
 Get-Content : Cannot find path 'C:\Users\an\qa-lab\bug-list.txt' because it does not exist.
 ~~~
-• Lỗi 1: thư mục còn chứa file. PowerShell hỏi xác nhận hoặc báo lỗi. Kiểm tra kỹ rồi mới thêm -Recurse.
-• Lỗi 2: file đang mở trong Excel/Notepad. Đóng chương trình đó rồi chạy lại.
-• Lỗi 3: sai vị trí. File nằm trong notes nhưng bạn đứng ở qa-lab mà gõ thiếu notes\. Dùng Tab để tự điền đường dẫn.
 
 PRACTICE: Trong qa-lab, dùng lệnh (không dùng chuột) để: tạo file notes\checklist.txt, ghi 3 dòng kiểm thử bằng Set-Content và Add-Content, in nội dung ra màn hình, sao chép sang evidence, đổi tên bản sao thành checklist-v1.txt rồi xóa bản sao đó.
 Q: Lệnh nào ghi thêm một dòng vào cuối file mà không xóa nội dung cũ?
@@ -297,57 +297,50 @@ Có hai cách cài: tải bộ cài từ trang chính thức (click Next) hoặc
 
 ### Cài Node.js bản LTS
 Cách 1: trình cài đặt
-• Vào trang nodejs.org, tải bản LTS (Long Term Support, bản ổn định) cho Windows (.msi).
+• Vào trang chính thức của Node.js, tải bản LTS (Long Term Support, bản ổn định) cho Windows (.msi).
 • Chạy file .msi, Next liên tục, giữ nguyên tùy chọn Add to PATH.
 Cách 2: winget
-~~~bash
-winget install OpenJS.NodeJS.LTS
-~~~
 Giải thích:
 • winget là trình quản lý ứng dụng có sẵn trên Windows 10/11 mới.
 • install = cài đặt, OpenJS.NodeJS.LTS là mã định danh gói Node.js bản LTS.
 • Lần đầu dùng winget có thể hỏi đồng ý điều khoản nguồn, gõ Y rồi Enter.
 Sau khi cài xong: ĐÓNG terminal và MỞ LẠI terminal mới thì lệnh node mới được nhận.
+~~~bash
+winget install OpenJS.NodeJS.LTS
+~~~
 
 ### Cài Python
 Cách 1: trình cài đặt
-• Vào python.org > Downloads, tải bản Python 3 mới nhất cho Windows.
+• Vào trang chính thức của Python > Downloads, tải bản Python 3 mới nhất cho Windows.
 • Màn hình đầu tiên: TÍCH ô "Add python.exe to PATH" (rất quan trọng), rồi Install Now.
 Cách 2: winget
-~~~bash
-winget install Python.Python.3.12
-py --version
-python --version
-~~~
 Giải thích từng dòng:
 • dòng 1: cài Python 3.12 (có thể đổi thành 3.13 nếu muốn bản mới hơn).
 • dòng 2: py là trình khởi chạy Python trên Windows, in ra phiên bản.
 • dòng 3: kiểm tra lệnh python có chạy được không.
 Kết quả mong đợi: Python 3.12.x (số cuối có thể khác).
+~~~bash
+winget install Python.Python.3.12
+py --version
+python --version
+~~~
 
 ### Cài Java JDK
 Tester thường dùng bản OpenJDK miễn phí như Eclipse Temurin.
-~~~bash
-winget install EclipseAdoptium.Temurin.21.JDK
-java -version
-~~~
 Giải thích từng dòng:
 • dòng 1: cài JDK 21 (bản LTS) của Eclipse Temurin.
 • dòng 2: kiểm tra Java. Lưu ý: chỉ có MỘT dấu gạch và chữ version viết liền: -version.
 Kết quả mong đợi (số có thể khác):
 openjdk version "21.0.5" 2024-10-15 LTS
 OpenJDK Runtime Environment Temurin-21.0.5+11 (build 21.0.5+11-LTS)
-Nếu cài bằng file .msi từ trang adoptium.net: ở màn hình chọn tính năng, bật "Set JAVA_HOME variable" để tự tạo biến JAVA_HOME.
+Nếu cài bằng file .msi từ trang chính thức của Eclipse Temurin: ở màn hình chọn tính năng, bật "Set JAVA_HOME variable" để tự tạo biến JAVA_HOME.
+~~~bash
+winget install EclipseAdoptium.Temurin.21.JDK
+java -version
+~~~
 
 ### Kiểm tra toàn bộ môi trường một lần
 Mở terminal MỚI rồi chạy:
-~~~bash
-node -v
-npm -v
-python --version
-java -version
-winget --version
-~~~
 Giải thích từng dòng:
 • node -v: phiên bản Node.js, ví dụ v24.11.0.
 • npm -v: phiên bản npm đi kèm, ví dụ 11.6.1.
@@ -355,8 +348,18 @@ Giải thích từng dòng:
 • java -version: thông tin JDK như slide trước.
 • winget --version: phiên bản winget, nếu lỗi thì máy chưa có winget, hãy dùng bộ cài .msi.
 Mẹo: chụp màn hình kết quả này lưu vào evidence, khi nhờ người khác hỗ trợ họ sẽ biết ngay môi trường của bạn.
+~~~bash
+node -v
+npm -v
+python --version
+java -version
+winget --version
+~~~
 
 ### Lỗi thường gặp
+• Lỗi 1: gõ python lại mở Microsoft Store. Cách sửa: Settings > Apps > Advanced app settings > App execution aliases, TẮT hai mục python.exe và python3.exe. Sau đó mở lại terminal. Nếu vẫn lỗi, cài lại Python và nhớ tích Add python.exe to PATH.
+• Lỗi 2: chưa cài JDK hoặc chưa mở lại terminal sau khi cài. Mở terminal mới, nếu vẫn lỗi xem bài PATH.
+• Lỗi 3: Windows cũ chưa có winget. Cập nhật App Installer từ Microsoft Store hoặc dùng bộ cài .msi.
 ~~~text
 Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases.
 
@@ -364,9 +367,6 @@ Python was not found; run without arguments to install from the Microsoft Store,
 
 winget : The term 'winget' is not recognized as the name of a cmdlet...
 ~~~
-• Lỗi 1: gõ python lại mở Microsoft Store. Cách sửa: Settings > Apps > Advanced app settings > App execution aliases, TẮT hai mục python.exe và python3.exe. Sau đó mở lại terminal. Nếu vẫn lỗi, cài lại Python và nhớ tích Add python.exe to PATH.
-• Lỗi 2: chưa cài JDK hoặc chưa mở lại terminal sau khi cài. Mở terminal mới, nếu vẫn lỗi xem bài PATH.
-• Lỗi 3: Windows cũ chưa có winget. Cập nhật App Installer từ Microsoft Store hoặc dùng bộ cài .msi.
 
 PRACTICE: Cài Node.js LTS, Python 3 và JDK 21 bằng một trong hai cách. Mở terminal mới, chạy node -v, npm -v, python --version, java -version. Chụp màn hình kết quả, lưu vào qa-lab\evidence\moi-truong.png.
 Q: Sau khi cài Node.js xong, gõ node -v vẫn báo không nhận lệnh. Việc đầu tiên nên làm là gì?
@@ -378,7 +378,7 @@ Q: Lệnh kiểm tra phiên bản Java đúng là gì?
 - java --ver
 - java version
 + java -version
-Q: Khi cài Python bằng file từ python.org, tùy chọn nào bắt buộc phải tích?
+Q: Khi cài Python bằng file từ trang chính thức của Python, tùy chọn nào bắt buộc phải tích?
 - Install for all users
 + Add python.exe to PATH
 - Disable path length limit
@@ -388,9 +388,6 @@ Q: Khi cài Python bằng file từ python.org, tùy chọn nào bắt buộc ph
 ### PATH là gì? Danh sách chỗ để tìm
 Khi bạn gõ node, Windows không lục khắp ổ đĩa. Nó chỉ tìm trong một danh sách thư mục có sẵn tên là PATH.
 Giống như bạn tìm chìa khóa: bạn chỉ nhìn ở vài chỗ quen thuộc (bàn, túi áo, móc treo). Nếu chìa nằm chỗ khác, bạn sẽ nói "không thấy".
-~~~bash
-$env:Path -split ';'
-~~~
 Giải thích:
 • $env:Path đọc giá trị biến môi trường Path của phiên terminal hiện tại.
 • -split ';' tách chuỗi dài thành từng dòng, vì các thư mục được ngăn bởi dấu chấm phẩy.
@@ -398,26 +395,24 @@ Kết quả mong đợi (một phần):
 C:\Program Files\nodejs\
 C:\Users\an\AppData\Local\Programs\Python\Python312\
 C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot\bin
+~~~bash
+$env:Path -split ';'
+~~~
 
 ### Biến môi trường là gì?
 Biến môi trường là những "tờ giấy nhớ" dán trên máy, chương trình nào cũng đọc được.
-~~~bash
-$env:USERPROFILE
-$env:JAVA_HOME
-Get-ChildItem Env:
-~~~
 Giải thích từng dòng:
 • dòng 1: in đường dẫn thư mục người dùng, ví dụ C:\Users\an.
 • dòng 2: in đường dẫn JDK nếu đã đặt JAVA_HOME, nếu trống tức là chưa đặt.
 • dòng 3: liệt kê tất cả biến môi trường hiện có.
 Tester sẽ gặp các biến như JAVA_HOME (JMeter, Maven), ANDROID_HOME (Appium), BASE_URL, CI (khi chạy trên GitHub Actions).
+~~~bash
+$env:USERPROFILE
+$env:JAVA_HOME
+Get-ChildItem Env:
+~~~
 
 ### Lệnh này nằm ở đâu?
-~~~bash
-Get-Command node
-where.exe node
-where.exe python
-~~~
 Giải thích từng dòng:
 • dòng 1: Get-Command cho biết PowerShell tìm thấy node ở đâu và loại lệnh gì.
 • dòng 2: where.exe liệt kê mọi bản node tìm thấy trong PATH. Trong PowerShell phải gõ đủ where.exe vì where là tên tắt của lệnh khác.
@@ -425,6 +420,11 @@ Giải thích từng dòng:
 Kết quả mong đợi:
 C:\Program Files\nodejs\node.exe
 Nếu where.exe python trả về WindowsApps\python.exe trước tiên, đó là lối tắt Microsoft Store gây lỗi đã nói ở bài trước.
+~~~bash
+Get-Command node
+where.exe node
+where.exe python
+~~~
 
 ### Đặt JAVA_HOME và thêm vào Path
 Cách bằng giao diện (an toàn, dễ hiểu):
@@ -432,28 +432,31 @@ Cách bằng giao diện (an toàn, dễ hiểu):
 • Phần User variables: New > Variable name JAVA_HOME, Variable value là thư mục JDK (ví dụ C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot), OK.
 • Chọn biến Path > Edit > New > gõ %JAVA_HOME%\bin > OK.
 Cách bằng lệnh (chỉ cho tài khoản của bạn):
-~~~bash
-[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot", "User")
-~~~
 Giải thích:
 • SetEnvironmentVariable lưu vĩnh viễn biến JAVA_HOME với giá trị là thư mục JDK.
 • "User" nghĩa là chỉ áp dụng cho tài khoản của bạn, không cần quyền admin.
 • Thay đường dẫn bằng thư mục JDK thật trên máy bạn (mở C:\Program Files\Eclipse Adoptium để xem tên).
 Không dùng lệnh setx để sửa Path: nó có thể cắt cụt Path dài và làm mất cấu hình cũ.
+~~~bash
+[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot", "User")
+~~~
 
 ### Vì sao phải mở lại terminal?
 Mỗi terminal khi mở ra sẽ "chụp ảnh" các biến môi trường lúc đó. Sửa biến xong, terminal cũ vẫn giữ ảnh cũ.
-~~~bash
-$env:BASE_URL = "https://jsonplaceholder.typicode.com"
-echo $env:BASE_URL
-~~~
 Giải thích từng dòng:
 • dòng 1: tạo biến tạm BASE_URL chỉ tồn tại trong cửa sổ terminal này. Đóng cửa sổ là mất.
 • dòng 2: in giá trị ra để kiểm tra.
-Kết quả mong đợi: https://jsonplaceholder.typicode.com
+Kết quả mong đợi: http://localhost:3130
 Quy tắc vàng: sửa PATH hay biến môi trường vĩnh viễn xong thì đóng TẤT CẢ terminal (cả VS Code) và mở lại.
+~~~bash
+$env:BASE_URL = "http://localhost:3130"
+echo $env:BASE_URL
+~~~
 
 ### Lỗi thường gặp
+• Hai lỗi đầu là cùng một vấn đề (bản PowerShell và bản Command Prompt): Windows không tìm thấy node trong PATH.
+Cách sửa: mở terminal mới; nếu vẫn lỗi, kiểm tra C:\Program Files\nodejs có trong $env:Path -split ';' không; nếu không có thì thêm vào Path hoặc cài lại Node.js.
+• Lỗi JAVA_HOME: giá trị trỏ sai, thường do thừa \bin ở cuối hoặc JDK đã gỡ. JAVA_HOME phải trỏ tới thư mục gốc JDK (không có \bin).
 ~~~text
 node : The term 'node' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
 
@@ -461,9 +464,6 @@ node : The term 'node' is not recognized as the name of a cmdlet, function, scri
 
 ERROR: JAVA_HOME is set to an invalid directory
 ~~~
-• Hai lỗi đầu là cùng một vấn đề (bản PowerShell và bản Command Prompt): Windows không tìm thấy node trong PATH.
-  Cách sửa: mở terminal mới; nếu vẫn lỗi, kiểm tra C:\Program Files\nodejs có trong $env:Path -split ';' không; nếu không có thì thêm vào Path hoặc cài lại Node.js.
-• Lỗi JAVA_HOME: giá trị trỏ sai, thường do thừa \bin ở cuối hoặc JDK đã gỡ. JAVA_HOME phải trỏ tới thư mục gốc JDK (không có \bin).
 
 PRACTICE: Chạy $env:Path -split ';' và tìm dòng chứa nodejs. Dùng where.exe để xem node, python, java nằm ở đâu. Đặt JAVA_HOME cho tài khoản của bạn, mở terminal mới và chạy echo $env:JAVA_HOME để kiểm tra.
 Q: PATH dùng để làm gì?
@@ -482,17 +482,17 @@ Q: Bạn vừa thêm thư mục mới vào Path nhưng terminal đang mở vẫn
 ## LESSON computer-basics-06 | VS Code: bàn làm việc của tester
 
 ### Cài VS Code và mở thư mục dự án
+Giải thích từng dòng:
+• dòng 1: cài Visual Studio Code (hoặc tải bộ cài tại trang chính thức của Visual Studio Code, giữ tích Add to PATH).
+• dòng 2: đi tới thư mục qa-lab.
+• dòng 3: code mở VS Code, dấu chấm nghĩa là mở chính thư mục hiện tại.
+Lần đầu mở thư mục, VS Code hỏi "Do you trust the authors of the files in this folder?". Với thư mục do chính bạn tạo, chọn Yes, I trust the authors.
+Cách bằng chuột: File > Open Folder... > chọn qa-lab.
 ~~~bash
 winget install Microsoft.VisualStudioCode
 cd ~\qa-lab
 code .
 ~~~
-Giải thích từng dòng:
-• dòng 1: cài Visual Studio Code (hoặc tải bộ cài tại code.visualstudio.com, giữ tích Add to PATH).
-• dòng 2: đi tới thư mục qa-lab.
-• dòng 3: code mở VS Code, dấu chấm nghĩa là mở chính thư mục hiện tại.
-Lần đầu mở thư mục, VS Code hỏi "Do you trust the authors of the files in this folder?". Với thư mục do chính bạn tạo, chọn Yes, I trust the authors.
-Cách bằng chuột: File > Open Folder... > chọn qa-lab.
 
 ### Các vùng chính trên màn hình
 Hãy coi VS Code như một văn phòng nhỏ:
@@ -506,10 +506,6 @@ Chấm tròn trên tab file nghĩa là chưa lưu. Nhấn Ctrl+S để lưu ho�
 
 ### Chạy file đầu tiên trong terminal tích hợp
 Tạo file hello.js trong qa-lab (Explorer > New File) với nội dung:
-~~~js
-console.log("Xin chào, tester!");
-console.log("Hôm nay tôi chạy file đầu tiên trong VS Code.");
-~~~
 Giải thích từng dòng:
 • dòng 1: console.log in một dòng chữ ra terminal.
 • dòng 2: in dòng thứ hai.
@@ -517,15 +513,12 @@ Cách chạy: lưu file (Ctrl+S), mở terminal (Ctrl+`), gõ node hello.js rồ
 Kết quả mong đợi:
 Xin chào, tester!
 Hôm nay tôi chạy file đầu tiên trong VS Code.
+~~~js
+console.log("Xin chào, tester!");
+console.log("Hôm nay tôi chạy file đầu tiên trong VS Code.");
+~~~
 
 ### Extension nên cài cho tester
-~~~bash
-code --install-extension ms-playwright.playwright
-code --install-extension ms-python.python
-code --install-extension esbenp.prettier-vscode
-code --install-extension dbaeumer.vscode-eslint
-code --list-extensions
-~~~
 Giải thích từng dòng:
 • dòng 1: Playwright Test for VS Code, chạy và debug test Playwright bằng nút bấm.
 • dòng 2: hỗ trợ Python (gợi ý code, chạy, debug).
@@ -533,8 +526,17 @@ Giải thích từng dòng:
 • dòng 4: ESLint, cảnh báo lỗi code JavaScript/TypeScript.
 • dòng 5: liệt kê các extension đã cài để kiểm tra.
 Cũng có thể cài bằng chuột: Ctrl+Shift+X, gõ tên, nhấn Install. Chỉ cài extension từ nhà phát hành uy tín.
+~~~bash
+code --install-extension ms-playwright.playwright
+code --install-extension ms-python.python
+code --install-extension esbenp.prettier-vscode
+code --install-extension dbaeumer.vscode-eslint
+code --list-extensions
+~~~
 
 ### Phím tắt tiết kiệm thời gian
+Giải thích: mỗi dòng là một phím tắt và tác dụng của nó.
+Mẹo: Ctrl+Shift+F rất hữu ích khi bạn cần tìm xem một locator hoặc một URL được dùng ở những file nào.
 ~~~text
 Ctrl+S            Lưu file
 Ctrl+P            Mở nhanh file theo tên
@@ -546,19 +548,17 @@ Ctrl+Shift+F      Tìm trong toàn bộ dự án
 Alt+Up / Alt+Down Di chuyển dòng lên/xuống
 Shift+Alt+F       Định dạng lại file (format)
 ~~~
-Giải thích: mỗi dòng là một phím tắt và tác dụng của nó.
-Mẹo: Ctrl+Shift+F rất hữu ích khi bạn cần tìm xem một locator hoặc một URL được dùng ở những file nào.
 
 ### Lỗi thường gặp
+• Lỗi 1: lệnh code chưa có trong PATH. Mở terminal mới. Nếu vẫn lỗi, cài lại VS Code và giữ tích Add to PATH, hoặc mở VS Code bằng Start menu rồi File > Open Folder.
+• Lỗi 2: terminal đang đứng sai thư mục (C:\Users\an thay vì C:\Users\an\qa-lab), hoặc file chưa được lưu. Kiểm tra bằng pwd và ls, lưu file rồi chạy lại.
+• Mẹo: nếu terminal VS Code không nhận Node.js mới cài, đóng hẳn VS Code rồi mở lại (terminal tích hợp cũng "chụp ảnh" biến môi trường như terminal thường).
 ~~~text
 code : The term 'code' is not recognized as the name of a cmdlet, function, script file, or operable program.
 
 node:internal/modules/cjs/loader
 Error: Cannot find module 'C:\Users\an\hello.js'
 ~~~
-• Lỗi 1: lệnh code chưa có trong PATH. Mở terminal mới. Nếu vẫn lỗi, cài lại VS Code và giữ tích Add to PATH, hoặc mở VS Code bằng Start menu rồi File > Open Folder.
-• Lỗi 2: terminal đang đứng sai thư mục (C:\Users\an thay vì C:\Users\an\qa-lab), hoặc file chưa được lưu. Kiểm tra bằng pwd và ls, lưu file rồi chạy lại.
-• Mẹo: nếu terminal VS Code không nhận Node.js mới cài, đóng hẳn VS Code rồi mở lại (terminal tích hợp cũng "chụp ảnh" biến môi trường như terminal thường).
 
 PRACTICE: Mở qa-lab bằng lệnh code ., tạo hello.js in ra tên của bạn và ngày học hôm nay, chạy bằng node hello.js trong terminal tích hợp. Cài extension Playwright Test for VS Code và kiểm tra bằng code --list-extensions.
 Q: Lệnh code . có tác dụng gì?
@@ -579,35 +579,41 @@ Q: Node báo Cannot find module 'C:\Users\an\hello.js' trong khi file nằm ở 
 ### npm là gì? Cửa hàng thư viện
 npm (Node Package Manager) giống một cửa hàng khổng lồ chứa các "món đồ" code người khác viết sẵn, gọi là package.
 Playwright, Newman, Appium đều được tải về qua npm.
+Giải thích từng dòng:
+• dòng 1–3: tạo và đi vào thư mục dự án first-node.
+• dòng 4: npm init tạo file package.json, -y nghĩa là đồng ý mọi giá trị mặc định.
+Kết quả mong đợi: dòng Wrote to C:\...\first-node\package.json kèm nội dung JSON.
+package.json giống "hồ sơ dự án": tên, phiên bản, danh sách thư viện, các lệnh tắt (scripts).
 ~~~bash
 cd ~\qa-lab\projects
 mkdir first-node
 cd first-node
 npm init -y
 ~~~
-Giải thích từng dòng:
-• dòng 1–3: tạo và đi vào thư mục dự án first-node.
-• dòng 4: npm init tạo file package.json, -y nghĩa là đồng ý mọi giá trị mặc định.
-Kết quả mong đợi: dòng Wrote to C:\...\first-node\package.json kèm nội dung JSON.
-package.json giống "hồ sơ dự án": tên, phiên bản, danh sách thư viện, các lệnh tắt (scripts).
 
 ### Cài một package và dùng nó
 Bước 1: trong terminal, chạy lệnh npm install dayjs
 • Lệnh này tải thư viện xử lý ngày giờ vào thư mục node_modules và ghi tên nó vào package.json.
 • Kết quả cài: added 1 package, and audited 2 packages in 1s ... found 0 vulnerabilities.
 Bước 2: tạo file date.js với nội dung:
-~~~js
-const dayjs = require("dayjs");
-const today = dayjs().format("DD/MM/YYYY");
-console.log("Ngày chạy test: " + today);
-~~~
 Giải thích từng dòng:
 • Code dòng 1: require nạp thư viện dayjs vào biến dayjs.
 • Code dòng 2: lấy ngày hôm nay và định dạng ngày/tháng/năm.
 • Code dòng 3: in ra màn hình.
 Lưu code vào file date.js, chạy node date.js. Kết quả: Ngày chạy test: 14/11/2026 (ngày của bạn).
+~~~js
+const dayjs = require("dayjs");
+const today = dayjs().format("DD/MM/YYYY");
+console.log("Ngày chạy test: " + today);
+~~~
 
 ### Hiểu package.json và node_modules
+Giải thích từng phần:
+• name, version: tên và phiên bản dự án.
+• scripts: lệnh tắt. Sau khi thêm "start", bạn chạy npm start thay vì gõ node date.js.
+• dependencies: danh sách thư viện dự án cần. Dấu ^ cho phép cập nhật bản vá nhỏ.
+• node_modules: thư mục chứa code thư viện thật, có thể rất nặng. KHÔNG gửi thư mục này cho người khác, họ chỉ cần chạy npm install là có lại.
+• package-lock.json: ghi chính xác phiên bản đã cài, nên giữ lại để mọi máy cài giống nhau.
 ~~~json
 {
   "name": "first-node",
@@ -620,45 +626,33 @@ Lưu code vào file date.js, chạy node date.js. Kết quả: Ngày chạy test
   }
 }
 ~~~
-Giải thích từng phần:
-• name, version: tên và phiên bản dự án.
-• scripts: lệnh tắt. Sau khi thêm "start", bạn chạy npm start thay vì gõ node date.js.
-• dependencies: danh sách thư viện dự án cần. Dấu ^ cho phép cập nhật bản vá nhỏ.
-• node_modules: thư mục chứa code thư viện thật, có thể rất nặng. KHÔNG gửi thư mục này cho người khác, họ chỉ cần chạy npm install là có lại.
-• package-lock.json: ghi chính xác phiên bản đã cài, nên giữ lại để mọi máy cài giống nhau.
 
 ### npx: dùng thử công cụ không cần cài vĩnh viễn
-~~~bash
-npx cowsay "Xin chao tester"
-~~~
 Giải thích:
 • npx tải tạm package cowsay rồi chạy nó ngay.
 • Lần đầu npx hỏi Need to install the following packages ... Ok to proceed? (y). Gõ y rồi Enter.
 Kết quả mong đợi: một chú bò vẽ bằng ký tự đang "nói" câu Xin chao tester.
 Sau này bạn sẽ dùng npx rất nhiều: npx playwright test, npx playwright codegen, npx newman run...
+~~~bash
+npx cowsay "Xin chao tester"
+~~~
 
 ### Lỗi thường gặp: running scripts is disabled
 Thông báo lỗi bạn thấy khi gõ npm trong PowerShell:
 npm : File C:\Program Files\nodejs\npm.ps1 cannot be loaded because running scripts is disabled on this system.
 Nguyên nhân: PowerShell mặc định chặn chạy file script .ps1 (npm.ps1, npx.ps1) để bảo vệ máy.
 Cách xử lý:
+• dòng 1: xem chính sách hiện tại ở từng cấp.
+• dòng 2: cho phép tài khoản của bạn chạy script tạo trên máy, script tải từ internet phải có chữ ký. Chỉ ảnh hưởng tài khoản của bạn.
+• dòng 3: cách thay thế không cần đổi chính sách: gọi npm.cmd (và npx.cmd) thay vì npm, hoặc dùng Command Prompt.
+Máy công ty: thường bị khóa bởi chính sách IT. Đừng cố vượt qua, hãy nhờ IT hỗ trợ hoặc dùng npm.cmd.
 ~~~bash
 Get-ExecutionPolicy -List
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 npm.cmd -v
 ~~~
-• dòng 1: xem chính sách hiện tại ở từng cấp.
-• dòng 2: cho phép tài khoản của bạn chạy script tạo trên máy, script tải từ internet phải có chữ ký. Chỉ ảnh hưởng tài khoản của bạn.
-• dòng 3: cách thay thế không cần đổi chính sách: gọi npm.cmd (và npx.cmd) thay vì npm, hoặc dùng Command Prompt.
-Máy công ty: thường bị khóa bởi chính sách IT. Đừng cố vượt qua, hãy nhờ IT hỗ trợ hoặc dùng npm.cmd.
 
 ### Lỗi thường gặp: chạy npm sai thư mục
-~~~text
-npm error code ENOENT
-npm error syscall open
-npm error path C:\Users\an\qa-lab\package.json
-npm error enoent Could not read package.json: Error: ENOENT: no such file or directory
-~~~
 Nguyên nhân: bạn chạy npm install hoặc npm start ở thư mục không có package.json.
 Cách sửa:
 • Chạy pwd để xem vị trí, ls để xem có package.json không.
@@ -666,6 +660,12 @@ Cách sửa:
 Cách kiểm tra nhanh môi trường trước khi bắt đầu mọi khóa học:
 • node -v; npm -v; python --version; java -version; git --version; code --version
 • Gõ cả dòng trên vào PowerShell, dấu chấm phẩy cho phép chạy nhiều lệnh liên tiếp.
+~~~text
+npm error code ENOENT
+npm error syscall open
+npm error path C:\Users\an\qa-lab\package.json
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory
+~~~
 
 PRACTICE: Tạo dự án projects\first-node bằng npm init -y, cài dayjs, viết date.js in ra ngày giờ hiện tại theo định dạng DD/MM/YYYY HH:mm, thêm script "start" vào package.json và chạy bằng npm start. Thử npx cowsay với câu của bạn.
 Q: Lệnh npm init -y tạo ra file nào?
@@ -681,3 +681,388 @@ Q: PowerShell báo npm.ps1 cannot be loaded because running scripts is disabled 
 - Tắt phần mềm diệt virus
 - Chạy PowerShell với quyền admin và tắt mọi chính sách bảo mật
 + Dùng npm.cmd hoặc nhờ IT cấu hình, chỉ tự đổi RemoteSigned cho CurrentUser nếu được phép
+
+## LESSON computer-basics-08 | Quyền file, tài khoản và môi trường lab
+
+### Ai đang thao tác với file?
+Ở phòng lab giả Vân Miên, người soạn được sửa cấu hình còn tài khoản chạy test chỉ cần đọc. Khi báo Access denied, xác định user và file đích trước khi mở quyền; tên nhóm giống nhau không có nghĩa mọi tiến trình đang chạy cùng danh tính.
+
+### Đọc quyền hiện có
+Các lệnh PowerShell dưới đây chỉ quan sát. whoami cho danh tính; Get-Acl đọc danh sách quyền của đúng file. Nếu file chưa có, tạo một file lab trước và kiểm đường dẫn bằng Resolve-Path, không suy từ lỗi rằng cần quản trị toàn máy.
+~~~text
+whoami
+Resolve-Path -LiteralPath ".\lab\config.json"
+Get-Acl -LiteralPath ".\lab\config.json" | Format-List Owner,Access
+~~~
+
+### Thiết kế quyền theo việc
+Viết ma trận trước khi nhờ người quản trị thay quyền. Quyền cho tài khoản chạy kiểm thử khác với người chỉnh dữ liệu; báo cáo chỉ ghi vai trò, không thu tên hoặc mật khẩu thật của đồng nghiệp.
+~~~text
+Tài nguyên         Người soạn    Tài khoản test
+config.json        đọc/ghi        chỉ đọc
+fixtures/          đọc/ghi        chỉ đọc
+results/lab-run/   đọc            tạo kết quả
+~~~
+
+### Tách lỗi quyền khỏi sai đích
+Chuỗi đường dẫn dưới đây là dữ liệu giả. Cả hai lần ghi phải trỏ vào thư mục lab đã xác định. Không sửa ACL bằng một lệnh toàn quyền đệ quy chỉ vì một file thất bại.
+~~~text
+{"target":"lab/config.json","operation":"read","expected":"allowed"}
+{"target":"lab/config.json","operation":"write","expected":"denied_for_test_role"}
+~~~
+
+### Kiểm lại sau điều chỉnh
+Nhờ đúng vai chạy một thao tác đọc và một thao tác ghi bị cấm; ghi kết quả cả hai để chứng minh không chỉ chữa được lỗi mà còn giữ giới hạn. Nếu quyền còn sai, so lại danh tính tiến trình thay vì tiếp tục mở rộng quyền.
+
+PRACTICE: Tạo file cấu hình giả trong lab, ghi danh tính hiện tại và quyền đọc/ghi mong muốn. Chạy lệnh quan sát rồi mô tả ai cần xin điều chỉnh. Tiêu chí đạt: chỉ ra đúng file, đúng vai và một hành động phải bị từ chối.
+Q: Tài khoản test chỉ cần đọc cấu hình. Cấp quyền hợp lý nhất là gì?
++ Quyền đọc đúng file cần dùng
+- Toàn quyền mọi thư mục
+- Quyền quản trị toàn máy
+Q: Get-Acl cho thấy quyền ghi bị từ chối. Điều nào chưa đủ căn cứ để làm ngay?
++ Cấp toàn quyền cho mọi tài khoản
+- Kiểm user đang chạy
+- Đọc quyền của file cha
+
+## LESSON computer-basics-09 | Tiến trình, cổng và mức dùng tài nguyên
+
+### Tiến trình sống chưa chắc dịch vụ khỏe
+Nhóm kiểm thử thấy một tiến trình còn chạy nhưng biểu mẫu vẫn lỗi. Cần tách trạng thái tiến trình, listener cổng và kết quả HTTP. Quan sát trước; không dừng tiến trình chỉ dựa tên giống server của bài học.
+
+### Gắn PID với executable
+Get-Process nhận thông tin tiến trình và Id; chỉ kiểm Path khi có quyền đọc. CPU là tổng thời gian CPU đã dùng, không phải phần trăm tức thời. So hai lần đo với khoảng cách rõ rồi mới nói tiến trình đang tăng tải.
+~~~text
+Get-Process | Select-Object Id,ProcessName,CPU
+# Chọn PID của lab đã xác nhận; không dùng PID tùy ý.
+Get-Process -Id 4321 | Select-Object Id,ProcessName,Path
+~~~
+
+### Từ cổng tới người sở hữu
+Lệnh dưới đây cần môi trường có listener3000; nếu không có đối tượng trả về thì đó cũng là thông tin cần ghi. Lấy OwningProcess rồi đối chiếu PID với tiến trình lab, không coi mọi listener là ứng dụng bạn đang kiểm.
+~~~text
+Get-NetTCPConnection -State Listen -LocalPort 3000 |
+  Select-Object LocalAddress,LocalPort,OwningProcess
+# PID4321 chỉ là ví dụ giả trong phiếu quan sát.
+~~~
+
+### Đọc mức dùng tài nguyên có đơn vị
+Cặp đo giả minh họa cách CPU tích lũy tăng2 giây trong5 giây thời gian thực. Bộ nhớ WorkingSet thay đổi không tự chứng minh rò rỉ; cần nhiều mẫu và hành vi tương ứng.
+~~~text
+Mốc        CPU tích lũy    WorkingSet giả
+00:00      10 giây         80 MiB
+00:05      12 giây         84 MiB
+Cần thêm: số lõi, tải tạo ra, thời gian đo, trạng thái chờ
+~~~
+
+### Bằng chứng để nhờ hỗ trợ
+Một phiếu điều tra tốt nối thời điểm, PID đã xác nhận, cổng và lỗi người dùng. Che đường dẫn chứa tên cá nhân nếu chia sẻ. Khi chưa biết quyền sở hữu, hỏi người vận hành thay vì gửi lệnh kill.
+
+PRACTICE: Quan sát một tiến trình lab do bạn khởi động: ghi PID, cổng nếu có và hai lần đo CPU. Không dừng tiến trình khác. Giải thích vì sao listener, tiến trình và phản hồi HTTP là ba bằng chứng riêng.
+Q: Chỉ nhìn tiến trình tồn tại có chứng minh API sẵn sàng không?
++ Không, cần kiểm điều kiện phục vụ
+- Có, mọi tiến trình đều khỏe
+- Có nếu tên tiến trình ngắn
+Q: CPU trong Get-Process tăng từ 10 lên12 giây qua khoảng đo5 giây. Ý nghĩa phù hợp?
++ Tiến trình dùng thêm khoảng 2 giây CPU trong khoảng đo
+- CPU luôn đúng 12 phần trăm
+- Máy chắc chắn quá tải
+
+## LESSON computer-basics-10 | Mạng cục bộ: DNS, HTTP và chẩn đoán từng lớp
+
+### Đi từ kết nối tới hợp đồng HTTP
+Một request qua nhiều lớp: địa chỉ, cổng, giao thức rồi route ứng dụng. ECONNREFUSED và404 không cùng tầng lỗi. Bắt đầu bằng localhost của dịch vụ lab đã xác định, tránh gửi request hoặc tải vào hệ thống ngoài phạm vi.
+
+### Kiểm kết nối TCP cục bộ
+Test-NetConnection chỉ cho biết thử kết nối đến cổng, chưa kiểm body hoặc quyền. False có thể do chưa bật dịch vụ, sai cổng hoặc chính sách mạng; hãy xác minh cấu hình trước khi sửa tường lửa.
+~~~text
+Test-NetConnection -ComputerName localhost -Port 3000
+# Ghi TcpTestSucceeded và thời điểm thử.
+~~~
+
+### Đọc phản hồi HTTP
+Với server lab trả JSON tại/orders, curl.exe -i in cả status và header. Nếu có 404 thì mạng đã đưa request tới một HTTP server; kiểm route trước khi đổ lỗi DNS. Các lệnh chỉ minh họa, cần server lab chạy trước.
+~~~text
+curl.exe -i http://localhost:3000/orders
+curl.exe -i http://localhost:3000/missing
+# Kỳ vọng theo lab:200 cho/orders,404 cho/missing.
+~~~
+
+### Ghi kết quả theo tầng
+Không gộp mọi lỗi thành không có Internet. Với mỗi phép thử, ghi dữ kiện quan sát và câu hỏi tiếp theo; dòng dưới là bản ghi giả dùng trong buổi thực hành.
+~~~text
+Địa chỉ/cổng: localhost:3000
+TCP: kết nối được
+HTTP:404
+Điều chưa biết: path đúng không, server nào trả lời
+Bước tiếp: đối chiếu route và PID listener
+~~~
+
+### Khi gặp tên miền trong lab
+Tên example.com là miền dành cho ví dụ, không được coi là API khóa học đang hoạt động. Đọc cấu trúc URL để phân biệt host, port, path và query; một path sai không được chữa bằng đổi mọi biến môi trường.
+
+PRACTICE: Dùng server cục bộ do bạn kiểm soát, thử một route có và một route không tồn tại. Ghi trạng thái TCP, status HTTP và câu hỏi tiếp theo. Tiêu chí đạt: phân biệt được lỗi kết nối với lỗi tài nguyên.
+Q: Cổng3000 không có listener. Request localhost:3000 bị từ chối nên ưu tiên kiểm gì?
++ Dịch vụ đã khởi động và có dùng đúng cổng không
+- Token đăng nhập trước mọi thứ
+- Màu giao diện trình duyệt
+Q: curl nhận404 từ localhost. Ta có thể kết luận gì?
++ Đã có phản hồi HTTP nhưng tài nguyên có thể sai
+- Mạng hoàn toàn không hoạt động
+- Luôn là mật khẩu sai
+
+## LESSON computer-basics-11 | Môi trường tái lập và khóa phụ thuộc
+
+### Một máy hai dự án, hai cây phụ thuộc
+Dự án Sổ Mây và Phiếu Gió giả có thể dùng bản thư viện khác nhau. Môi trường tách giúp tránh việc cài cho dự án này làm dự án kia thay đổi. Nó không tự cấp quyền hoặc cô lập mọi tài nguyên của hệ điều hành.
+
+### Nhìn executable trước khi cài gói
+Dùng Get-Command để biết lệnh được chọn từ đâu. Ghi version vào hồ sơ lab, không sửa PATH hàng loạt để thử vận may. Lệnh kiểm không cần đọc file bí mật hoặc toàn bộ biến môi trường.
+~~~text
+Get-Command python | Select-Object Source
+Get-Command node | Select-Object Source
+python --version
+node --version
+~~~
+
+### Dựng theo khai báo đã khóa
+Các lệnh minh họa thực hiện trong thư mục lab riêng. Python venv tách thư viện; npm ci cần package-lock khớp package.json. Nếu không khớp, điều tra nguồn khác biệt thay vì xóa lockfile để làm lệnh xanh.
+~~~text
+python -m venv .venv
+# Sau khi chọn đúng môi trường của lab:
+python -m pip install -r requirements.txt
+npm ci
+~~~
+
+### Bản kê đủ để người khác lặp lại
+requirements.txt trong bài phải dùng phụ thuộc đã chốt và có nguồn kiểm được; một tên gói không ghi phiên bản có thể thay đổi theo thời gian. Mẫu dưới là cấu trúc bàn giao, không phải danh sách cài gói thật.
+~~~text
+runtime: ghi bản Python/Node đã dùng
+dependencies: file khóa kèm dự án
+input: fixtures giả, không dữ liệu người thật
+verify: lệnh test và kết quả mong đợi
+limits: hệ điều hành, quyền, cổng lab
+~~~
+
+### Kiểm môi trường bằng hành vi nhỏ
+Sau cài, chạy một test không cần mạng và đọc exit code. Việc IDE hiển thị interpreter đúng chưa đủ nếu terminal còn trỏ bản khác. Người nhận nên có thể tự dựng lại trong thư mục mới từ cùng hồ sơ.
+
+PRACTICE: Viết bản kê môi trường cho dự án giả gồm executable, version, file phụ thuộc và một lệnh kiểm không dùng mạng. Đối chiếu interpreter trong terminal với trình soạn thảo; không ghi toàn bộ biến môi trường vào báo cáo.
+Q: Môi trường ảo Python phục vụ mục đích gì?
++ Tách phụ thuộc của dự án
+- Tự cô lập mọi quyền của hệ điều hành
+- Tự mã hóa mọi file
+Q: Muốn người khác dựng lại lab, thông tin nào cần ghi?
++ Runtime, lockfile và lệnh kiểm có kết quả mong đợi
+- Chỉ tên người biên soạn
+- Chỉ ảnh desktop
+
+## LESSON computer-basics-12 | Sao lưu, checksum và thử phục hồi
+
+### Backup chỉ có giá trị khi phục hồi được
+Một file tên backup không bảo đảm nó chứa đủ cấu hình. Xác định điều cần giữ, thời điểm và chỗ phục hồi thử trong lab. Không thử restore bằng ghi đè duy nhất lên bản đang làm việc.
+
+### Sao chép sang đích đã xác nhận
+Trong ví dụ, lab/source/config.json là file giả và lab/backup là nơi riêng. Trước Copy-Item, kiểm nguồn và đích; tạo thư mục đích có chủ đích. Không dùng đường dẫn suy ra từ dữ liệu đầu vào chưa kiểm.
+~~~text
+Test-Path -LiteralPath ".\lab\source\config.json"
+New-Item -ItemType Directory -Force -Path ".\lab\backup"
+Copy-Item -LiteralPath ".\lab\source\config.json" -Destination ".\lab\backup\config.json"
+~~~
+
+### Đối chiếu nội dung
+Get-FileHash tạo dấu vân tay nội dung theo thuật toán đã chọn. Hai hash khớp hỗ trợ kết luận nội dung khớp; không chứng minh nguồn đáng tin hoặc file vô hại. Giữ tên thuật toán khi ghi báo cáo.
+~~~text
+Get-FileHash -Algorithm SHA256 -LiteralPath ".\lab\source\config.json"
+Get-FileHash -Algorithm SHA256 -LiteralPath ".\lab\backup\config.json"
+~~~
+
+### Diễn tập phục hồi vào chỗ mới
+Một lần kiểm gồm chép sang thư mục restore-test rồi cho chương trình lab đọc bản đó. Nếu chỉ so checksum mà không thử hành vi, vẫn chưa biết cấu hình có hoạt động với đúng runtime hay không.
+~~~text
+Nguồn phục hồi: lab/backup/config.json
+Đích thử: lab/restore-test/config.json
+Kiểm1: file đọc được và JSON hợp lệ
+Kiểm2: cấu hình cần thiết đầy đủ
+Kiểm3: ứng dụng lab khởi động và test nhỏ đạt
+~~~
+
+### Ghi giới hạn của bản sao
+Bản sao cấu hình không chứa dữ liệu DB trừ khi bạn đã đưa nó vào phạm vi. Nêu rõ thứ gì không được lưu và thời điểm chụp; người nhận không được suy mọi thư mục trên máy đều có thể phục hồi.
+
+PRACTICE: Tạo cấu hình JSON giả, lưu bản sao và so SHA256. Phục hồi vào thư mục lab mới rồi thử đọc JSON. Báo cáo ba dữ kiện: thời điểm sao, nội dung đã giữ và một phần nằm ngoài phạm vi.
+Q: Checksum hai file giống nhau có ý nghĩa thực tế nào?
++ Có bằng chứng nội dung khớp theo thuật toán đã dùng
+- Chứng minh file không thể chứa mã độc
+- Bảo đảm quyền truy cập giống nhau
+Q: Có bản backup nhưng chưa thử restore. Điều gì vẫn chưa biết?
++ Bản đó có phục hồi dùng được hay không
+- Bản đó chắc chắn vô dụng
+- File gốc không còn nữa
+
+## LESSON computer-basics-13 | Dự án: dựng và bàn giao máy kiểm thử
+
+### Bàn giao một lab kiểm thử được
+Bạn nhận một dự án giả có bài test đọc JSON và một server cục bộ. Mục tiêu không phải cài nhiều công cụ, mà là người khác dùng bản kê để dựng đúng, chạy đúng và chẩn đoán được một lỗi được cài sẵn.
+
+### Lập cây thư mục có trách nhiệm
+Mỗi vùng có chức năng: input không chứa kết quả, output không sửa dữ liệu nguồn, backup lưu bản trước thay đổi. Tên ví dụ đủ rõ để người mới kiểm đường dẫn mà không cần đoán nơi file được ghi.
+~~~text
+lab/
+  source/      mã và cấu hình giả
+  fixtures/    dữ liệu tổng hợp
+  results/     báo cáo mỗi lần chạy
+  backup/      bản sao trước chỉnh
+  README.txt   runtime và lệnh kiểm
+~~~
+
+### Ma trận chấp nhận dự án
+Mỗi dòng dưới là một kiểm chứng do người nhận thực hiện, không phải đánh dấu đã viết tài liệu. Cố ý cho một route sai để học viên dùng bằng chứng TCP/HTTP tách vấn đề.
+~~~text
+[ ] Xác định đúng executable và version
+[ ] Đọc fixtures mà không ghi đè nguồn
+[ ] Gọi localhost và phân biệt200/404
+[ ] Ghi kết quả riêng của lần chạy
+[ ] Phục hồi cấu hình giả vào chỗ mới
+~~~
+
+### Một báo cáo không chứa bí mật
+Bản bàn giao ghi đủ lỗi quan sát, phép thử và bước đã làm. Không chèn token thật, thông tin đăng nhập hoặc dump tất cả biến môi trường vào hồ sơ chỉ để chứng minh đã kiểm máy.
+~~~text
+run: lab-check-01
+http:200 trên route mẫu
+missing_route:404 đúng hợp đồng
+restore: đọc JSON thành công
+open_issue: chưa đo tải đồng thời
+next_owner: vai phụ trách lab
+~~~
+
+### Người nhận thử độc lập
+Đổi nhóm và cho người nhận làm từ README, ghi chỗ phải hỏi lại. Sửa hướng dẫn theo điểm thiếu thông tin thực tế. Kết thúc dự án bằng bằng chứng lặp lại được, không bằng ảnh desktop có nhiều biểu tượng.
+
+PRACTICE: Bàn giao lab gồm bản kê runtime, fixtures giả, ma trận kiểm và bản restore thử. Nhờ bạn dựng lại ở thư mục khác, ghi một câu hỏi họ phải hỏi và sửa tài liệu. Đạt khi người nhận lặp lại được kiểm200/404 và đọc bản phục hồi.
+Q: Một script lab cần chạy lặp lại an toàn nên có tính chất nào?
++ Đích rõ, phạm vi nhỏ và kiểm điều kiện trước ghi
+- Luôn ghi vào thư mục bất kỳ hiện tại
+- Ẩn mọi thông báo lỗi
+Q: Bàn giao lab cần tránh ghi gì trong báo cáo chia sẻ?
++ Token và mật khẩu thật
+- Cổng cục bộ giả lập
+- Mã trạng thái từ request thử
+Q: Tiêu chí tốt cho dự án dựng máy kiểm thử là gì?
++ Người khác làm theo tài liệu và lặp lại được kiểm thành công
+- Tài liệu dài nhất nhóm
+- Không ai từng đặt câu hỏi
+
+## LESSON computer-basics-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Đường dẫn tương đối được giải từ vị trí hiện tại; pwd giúp phân biệt sai tên với đứng nhầm thư mục.
+2. Dấu nháy giữ nguyên một chuỗi đường dẫn; quyền cao không giải quyết việc tách đối số sai.
+3. Bản sao trước thay đổi cho phép phục hồi đúng nội dung thay vì cố nhớ cấu hình ban đầu.
+4. Một máy có thể có nhiều runtime; đường dẫn lệnh được phân giải mới cho biết bản đang chạy.
+
+### Dữ liệu và điều kiện biên
+5. PATH là danh sách nơi tìm lệnh, không phải cơ chế tải hoặc cài gói.
+6. Phân biệt vùng đệm của trình soạn thảo và file đã lưu để tránh kiểm nhầm phiên bản.
+7. Lockfile tăng tính tái lập, nhưng vẫn cần kiểm nguồn và rủi ro phụ thuộc.
+8. Quyền tối thiểu giảm phạm vi lỗi thao tác và không cản công việc đọc đã được xác định.
+
+### Tính đúng và cách điều tra
+9. Phải hiểu danh tính và phạm vi cần ghi; mở quyền rộng để chữa tạm có thể tạo rủi ro mới.
+10. Tiến trình sống và ứng dụng phục vụ đúng là hai mức quan sát khác nhau.
+11. Giá trị CPU là thời gian tích lũy; muốn diễn giải tải cần hiệu hai lần đo và số lõi.
+12. Lỗi kết nối trước HTTP thường liên quan listener hoặc địa chỉ/cổng, chưa tới bước xác thực API.
+
+### Rủi ro và lựa chọn phương án
+13. 404 chứng minh đã tới một server HTTP; tiếp tục kiểm path và hợp đồng tài nguyên.
+14. Môi trường ảo quản lý interpreter/phụ thuộc, không thay container hay cơ chế phân quyền.
+15. Tái lập đòi thông tin phiên bản, dữ liệu và tiêu chí kiểm, không chỉ hình thức máy.
+16. Checksum kiểm nội dung; chữ ký nguồn, quyền và độ an toàn là vấn đề khác.
+
+### Dự án, bằng chứng và bàn giao
+17. Tồn tại bản sao chưa chứng minh quy trình phục hồi và tính đầy đủ dữ liệu.
+18. Giới hạn đích và kiểm trước thay đổi làm lần chạy sau có thể dự đoán được.
+19. Bằng chứng phải tối thiểu và loại bí mật trước khi chuyển cho người khác.
+20. Khả năng dựng và kiểm lại bởi người nhận là bằng chứng thực hành, khác với số trang đã viết.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Một lệnh không tìm thấy file dù tên đúng. Nên kiểm gì trước?
++ Thư mục hiện tại và đường dẫn đầy đủ
+- Cài lại toàn bộ hệ điều hành
+- Đổi mọi file sang cùng tên
+Q: Trong PowerShell, cách nào giữ đường dẫn có khoảng trắng thành một đối số?
++ Đặt đường dẫn trong dấu nháy
+- Bỏ hết khoảng trắng khỏi ổ đĩa
+- Thêm quyền quản trị cho mọi lệnh
+Q: Trước khi ghi đè một file cấu hình lab cần làm gì?
++ Lưu bản cũ và xác định đúng file đích
+- Xóa cả thư mục cha
+- Chỉ đổi tên phần mở rộng
+Q: python --version báo một bản khác dự kiến. Bằng chứng đầu tiên nên lấy là gì?
++ Đường dẫn executable thực sự được chọn
+- Màu biểu tượng trong thanh tác vụ
+- Tên người đang dùng máy
+Q: Thêm đường dẫn vào PATH có tự cài phần mềm còn thiếu không?
++ Không, PATH chỉ hỗ trợ tìm executable
+- Có, hệ thống tự tải bản mới nhất
+- Chỉ có nếu tên thư mục viết hoa
+Q: File chưa lưu trong trình soạn thảo có được lệnh ngoài terminal đọc như nội dung đang nhìn không?
++ Không chắc, terminal thường đọc bản trên đĩa
+- Luôn có cùng nội dung
+- Chỉ cần phóng to cửa sổ là được
+Q: package-lock giúp ích gì khi dựng lại dự án Node?
++ Cố định cây phiên bản phụ thuộc để cài có kiểm soát
+- Lưu mật khẩu người dùng
+- Chứng minh mọi gói không có lỗ hổng
+Q: Tài khoản test chỉ cần đọc cấu hình. Cấp quyền hợp lý nhất là gì?
++ Quyền đọc đúng file cần dùng
+- Toàn quyền mọi thư mục
+- Quyền quản trị toàn máy
+Q: Get-Acl cho thấy quyền ghi bị từ chối. Điều nào chưa đủ căn cứ để làm ngay?
++ Cấp toàn quyền cho mọi tài khoản
+- Kiểm user đang chạy
+- Đọc quyền của file cha
+Q: Chỉ nhìn tiến trình tồn tại có chứng minh API sẵn sàng không?
++ Không, cần kiểm điều kiện phục vụ
+- Có, mọi tiến trình đều khỏe
+- Có nếu tên tiến trình ngắn
+Q: CPU trong Get-Process tăng từ 10 lên12 giây qua khoảng đo5 giây. Ý nghĩa phù hợp?
++ Tiến trình dùng thêm khoảng 2 giây CPU trong khoảng đo
+- CPU luôn đúng 12 phần trăm
+- Máy chắc chắn quá tải
+Q: Cổng3000 không có listener. Request localhost:3000 bị từ chối nên ưu tiên kiểm gì?
++ Dịch vụ đã khởi động và có dùng đúng cổng không
+- Token đăng nhập trước mọi thứ
+- Màu giao diện trình duyệt
+Q: curl nhận404 từ localhost. Ta có thể kết luận gì?
++ Đã có phản hồi HTTP nhưng tài nguyên có thể sai
+- Mạng hoàn toàn không hoạt động
+- Luôn là mật khẩu sai
+Q: Môi trường ảo Python phục vụ mục đích gì?
++ Tách phụ thuộc của dự án
+- Tự cô lập mọi quyền của hệ điều hành
+- Tự mã hóa mọi file
+Q: Muốn người khác dựng lại lab, thông tin nào cần ghi?
++ Runtime, lockfile và lệnh kiểm có kết quả mong đợi
+- Chỉ tên người biên soạn
+- Chỉ ảnh desktop
+Q: Checksum hai file giống nhau có ý nghĩa thực tế nào?
++ Có bằng chứng nội dung khớp theo thuật toán đã dùng
+- Chứng minh file không thể chứa mã độc
+- Bảo đảm quyền truy cập giống nhau
+Q: Có bản backup nhưng chưa thử restore. Điều gì vẫn chưa biết?
++ Bản đó có phục hồi dùng được hay không
+- Bản đó chắc chắn vô dụng
+- File gốc không còn nữa
+Q: Một script lab cần chạy lặp lại an toàn nên có tính chất nào?
++ Đích rõ, phạm vi nhỏ và kiểm điều kiện trước ghi
+- Luôn ghi vào thư mục bất kỳ hiện tại
+- Ẩn mọi thông báo lỗi
+Q: Bàn giao lab cần tránh ghi gì trong báo cáo chia sẻ?
++ Token và mật khẩu thật
+- Cổng cục bộ giả lập
+- Mã trạng thái từ request thử
+Q: Tiêu chí tốt cho dự án dựng máy kiểm thử là gì?
++ Người khác làm theo tài liệu và lặp lại được kiểm thành công
+- Tài liệu dài nhất nhóm
+- Không ai từng đặt câu hỏi

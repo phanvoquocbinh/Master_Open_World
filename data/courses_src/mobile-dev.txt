@@ -1,0 +1,813 @@
+=== COURSE mobile-dev
+name: Lập trình di động đa nền tảng
+icon: 📱
+floor: 7
+room: 710
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Flutter/Dart từ widget và state tới API, offline, quyền/vòng đời, test và dự án đặt lớp đa nền tảng có phạm vi kiểm rõ.
+
+## LESSON mobile-dev-01 | Chọn Flutter và dựng ứng dụng lab
+
+### Một hướng học đủ sâu bằng Flutter
+Khóa chọn Flutter và Dart là công cụ mã nguồn mở để đi trọn UI, state, data và test trên một stack. Mục tiêu app Lớp Mây Sợi dùng dữ liệu giả; không so sánh quảng cáo hay hứa mọi plugin hỗ trợ mọi nền tảng.
+
+### Dựng project riêng, ghi môi trường
+Các lệnh dành cho máy học viên đã cài SDK theo tài liệu chính thức. Không chạy chúng trong repo tài liệu hay tự tải toolchain. Ghi output doctor, target và phiên bản; iOS build cần môi trường nền tảng phù hợp.
+~~~text
+flutter --version
+dart --version
+flutter doctor -v
+flutter create --project-name lop_may_soi mobile_lab
+cd mobile_lab
+flutter devices
+flutter run -d <DEVICE_ID_LAB>
+~~~
+
+### Entry point nhỏ có thể thay màn hình
+Dart/Flutter code trong khóa hiển thị bằng code fence text vì bộ tài liệu chưa có nhãn dart, nhưng nội dung là Dart. Đoạn sau là lib/main.dart, dùng MaterialApp và nhãn giả, không gọi mạng.
+~~~text
+import 'package:flutter/material.dart';
+void main()=>runApp(const LabApp());
+class LabApp extends StatelessWidget {
+ const LabApp({super.key});
+ @override
+ Widget build(BuildContext context)=>const MaterialApp(
+  home:Scaffold(body:Center(child:Text('Lớp Mây Sợi'))),
+ );
+}
+~~~
+
+### Bản đồ thư mục giữ trách nhiệm rõ
+UI phụ thuộc abstraction data, không nhét networking vào từng build. Bắt đầu nhỏ, chưa cần nhiều lớp cho một màn hình; tách khi trách nhiệm và test có ích chứ không theo số folder.
+~~~text
+lib/main.dart: bootstrap/config không secret
+lib/classes/: model,repository,viewmodel,page
+lib/shared/: phần thật sự dùng chung
+test/: unit/widget với fake repository
+integration_test/: luồng app theo target
+assets/: chỉ nội dung tự tạo hoặc có quyền dùng
+~~~
+
+### Hot reload không thay kiểm lại từ đầu
+Hot reload giữ một phần state, có thay đổi cần restart/build lại. Khi lỗi chỉ xuất hiện sau nâng dependency hoặc cold start, ghi bước tái hiện và môi trường thay vì kết luận reload xanh là release ổn.
+
+PRACTICE: Tạo app lab riêng, ghi SDK/target/thiết bị và screenshot nhãn Mây Sợi. Nộp sơ đồ trách nhiệm và danh sách nền tảng thực sự sẽ kiểm; không phát hành lên cửa hàng.
+Q: Vì sao khóa chọn Flutter?
++ Một hướng mã nguồn mở với Dart, widget/test đa nền tảng và phạm vi lab rõ
+- Vì không cần học nền tảng
+- Vì mọi plugin chạy mọi OS
+Q: Trước chạy ứng dụng cần ghi gì?
++ SDK/toolchain, target, thiết bị và phiên bản dependency
+- Chỉ tên app
+- Chỉ ảnh UI
+
+## LESSON mobile-dev-02 | Dart: kiểu, null safety và async
+
+### Kiểu rõ giúp giảm giả định ẩn
+Dart phân biệt nullable, final cho binding không gán lại và const cho giá trị compile-time theo quy tắc ngôn ngữ. Null safety không kiểm dữ liệu ngoài hay quyền; tránh dùng dynamic/! để bỏ qua mọi lỗi.
+
+### Parser model kiểm runtime
+Đây là lib/classes/class_info.dart độc lập. Map từ JSON phải có id string không rỗng và remaining int không âm; tạo object mới để không giữ field không thuộc DTO. Quy tắc qty/quota server vẫn riêng.
+~~~text
+class ClassInfo {
+ final String id; final int remaining;
+ const ClassInfo(this.id,this.remaining);
+ factory ClassInfo.parse(Object? raw){
+  if(raw is! Map<String,dynamic>)throw const FormatException('shape');
+  final id=raw['id'];final n=raw['remaining'];
+  if(id is! String || id.isEmpty || n is! int || n<0)throw const FormatException('class');
+  return ClassInfo(id,n);
+ }
+}
+~~~
+
+### Future không làm UI được phép dùng context mãi
+Hàm dưới minh họa await và lỗi, không phát request. Catch xử lý theo error contract ở tầng app; timeout trên Future không tự ngừng công việc gốc nên cần thiết kế cancellation riêng khi có mạng.
+~~~text
+Future<int> delayedCount() async {
+ await Future<void>.delayed(const Duration(milliseconds:20));
+ return 2;
+}
+Future<void> demo() async {
+ final count=await delayedCount().timeout(const Duration(seconds:1));
+ assert(count==2);
+}
+~~~
+
+### Ca null và kiểu sai phải được ghi
+Không ép remaining.toString rồi parse để âm thầm nhận mọi kiểu. Chốt khác biệt missing/null/chuỗi số theo contract; exception FormatException chỉ báo dữ liệu không hợp lệ, không nên chứa toàn raw body.
+~~~text
+valid: {id:CL7,remaining:1}
+invalid: null hoặc list thay object
+invalid: id rỗng, remaining=-1
+invalid: remaining="1" hoặc true
+nullable field tương lai: nêu rõ missing/null nghĩa gì
+UI không hiển thị stacktrace cho người học
+~~~
+
+### Collection có tác dụng phụ cần thấy được
+final List vẫn có thể thay nội dung; muốn snapshot không cho sửa dùng List.unmodifiable với kiểu phù hợp. Không giữ reference list mutable rồi cho rằng viewmodel có immutable state vì biến khai báo final.
+
+PRACTICE: Viết unit test parser cho10ca, thêm field note nullable với policy missing/null rõ. Nộp ví dụ final list vẫn sửa được và snapshot unmodifiable, không dùng ! để che lỗi.
+Q: Dart null safety làm gì?
++ Phân biệt kiểu nullable ở thời điểm kiểm kiểu, không thay validate dữ liệu ngoài
+- Làm mọi API không lỗi
+- Cho dùng ! ở mọi nơi
+Q: Future.timeout có tự hủy toàn bộ tác vụ gốc không?
++ Không
+- Có luôn
+- Có nếu catch TimeoutException
+
+## LESSON mobile-dev-03 | Widget và vòng đời hiển thị
+
+### Widget mô tả cấu hình, State giữ vòng đời
+StatelessWidget xây UI từ input, StatefulWidget tạo State khi cần trạng thái sống theo element. Không lưu business state bền chỉ trong widget nếu yêu cầu phục hồi sau restart; key giúp identity theo contract.
+
+### StatefulWidget có tài nguyên được dispose
+Đây là file widget đầy đủ với controller. Build không gọi request hay tạo controller mới. State sở hữu controller và giải phóng trong dispose; nếu controller được truyền từ ngoài thì ownership phải đổi rõ.
+~~~text
+import 'package:flutter/material.dart';
+class NoteBox extends StatefulWidget {
+ const NoteBox({super.key});
+ @override State<NoteBox> createState()=>_NoteBoxState();
+}
+class _NoteBoxState extends State<NoteBox> {
+ final controller=TextEditingController();
+ @override void dispose(){controller.dispose();super.dispose();}
+ @override Widget build(BuildContext context)=>TextField(
+  controller:controller,decoration:const InputDecoration(labelText:'Ghi chú lớp'),
+ );
+}
+~~~
+
+### Async gap phải kiểm đúng mounted
+Đoạn callback đặt trong build với context đang dùng. Kiểm sau await và trước Navigator; nếu dữ liệu trả về cần setState thì State cũng phải còn mounted. Generation guard ở bài API giải quyết thêm response cũ, khác mounted.
+~~~text
+onPressed:() async {
+ await Future<void>.delayed(const Duration(milliseconds:50));
+ if(!context.mounted)return;
+ Navigator.of(context).pop();
+}
+~~~
+
+### Vẽ lifecycle để tìm leak
+initState chạy khi State được tạo, didUpdateWidget khi cấu hình tương ứng đổi, dispose khi State kết thúc. Listener/subscription cần đăng ký và hủy theo ownership; giữ context trong service lâu dài là dấu hiệu nên review.
+~~~text
+createState -> initState -> build (có thể nhiều lần)
+parent đổi input -> didUpdateWidget -> build
+remove element -> dispose
+controller/listener/timer do State sở hữu -> cleanup
+network hoàn tất sau dispose -> không setState/context access
+~~~
+
+### Key là định danh UI, không phải auth
+Key ổn định giúp list item giữ đúng State khi reorder. Không dùng index làm key nếu item có identity thay đổi vị trí; key cũng không xác thực dữ liệu hay quyết định user được xem item.
+
+PRACTICE: Tạo list NoteBox có key theo id giả, test reorder không chuyển ghi chú sang lớp khác. Thêm callback async rồi rời màn hình, chứng minh không cập nhật State đã dispose.
+Q: build nên chứa gì?
++ Mô tả UI từ state hiện tại, tránh side effect lặp
+- Tạo request mới mọi lần
+- Ghi DB mỗi lần
+Q: Sau await dùng context cần gì?
++ Kiểm mounted của context liên quan nếu có async gap
+- Chỉ await đủ lâu
+- Luôn dùng context cũ
+
+## LESSON mobile-dev-04 | Layout, cỡ chữ và nhiều màn hình
+
+### Constraints đi xuống, kích thước đi lên
+Parent đặt giới hạn, child chọn kích thước trong giới hạn và parent định vị. Không mặc định chiều rộng thiết bị bằng một số cố định; kiểm màn nhỏ, xoay, bàn phím và chữ lớn theo target.
+
+### Row có nội dung dài cần flex
+Đoạn là widget helper với import material.dart trong file chứa nó. Expanded cho text phần còn lại, Wrap cho nhóm nút nếu cần xuống dòng; maxLines/ellipsis chỉ dùng khi thông tin đầy đủ vẫn có cách truy cập theo sản phẩm.
+~~~text
+Widget classRow(String title)=>Row(
+ crossAxisAlignment:CrossAxisAlignment.start,
+ children:[
+  const Icon(Icons.school),const SizedBox(width:8),
+  Expanded(child:Text(title,softWrap:true)),
+ ],
+);
+
+~~~
+
+### Form cuộn khi bàn phím mở
+SafeArea tránh vùng hệ thống theo ngữ cảnh, SingleChildScrollView cho nội dung ngắn cần cuộn. Danh sách lớn dùng builder/lazy phù hợp, không lồng scroll vô hạn rồi đoán framework tự biết chiều cao.
+~~~text
+Widget smallForm(Widget child)=>SafeArea(
+ child:SingleChildScrollView(
+  padding:const EdgeInsets.all(16),
+  child:ConstrainedBox(
+   constraints:const BoxConstraints(maxWidth:600),child:child,
+  ),
+ ),
+);
+
+~~~
+
+### Chữ lớn là ca sử dụng cần hỗ trợ
+Giữ text scaling hệ thống, kiểm nhãn không bị che và nút còn chạm được. Contrast, semantics và focus cần kiểm riêng; ảnh screenshot đẹp ở cỡ mặc định không chứng minh trợ năng.
+~~~text
+Layout matrix:
+ width nhỏ / vừa / lớn theo target lab
+ text scale mặc định / lớn hệ thống
+ bàn phím mở / đóng, dọc / ngang
+ tên lớp dài + tiếng Việt có dấu
+ expected: đọc được, cuộn được, hành động không bị che
+ Không khóa textScaler để che overflow
+~~~
+
+### Responsive không chỉ thêm breakpoint
+Breakpoint dựa vào nội dung và constraints, không chỉ tên thiết bị. Chọn một/two-pane khi có chỗ, giữ order điều hướng và semantics; kiểm việc quay màn hình không mất dữ liệu form ngoài contract.
+
+PRACTICE: Nộp class row/form có chữ dài, screenshot ba width và chữ lớn, bàn phím mở. Ghi lỗi constraints đã gặp và lý do chọn scroll/flex, không chỉ giảm font để qua.
+Q: Overflow khi tăng cỡ chữ nên xử lý thế nào?
++ Thiết kế co giãn/cuộn và test theo nội dung
+- Ép font nhỏ cố định
+- Cắt mọi nhãn
+Q: Expanded trong Row giúp gì?
++ Cho child nhận phần không gian còn lại theo flex
+- Bảo đảm mọi layout không overflow
+- Thay scroll mọi trường hợp
+
+## LESSON mobile-dev-05 | State và luồng dữ liệu
+
+### State rõ thay nhiều bool tự do
+Ví dụ danh sách lớp có loading/data/error. Khi refresh giữ data cũ hay ẩn phải do UX contract quyết định; đừng để isLoading=false,error!=null,success=true cùng tồn tại không có nghĩa.
+
+### Model trạng thái có kiểu
+Dart sealed classes giúp biểu diễn tập trạng thái đóng trong library. Bản mẫu cho một tải đơn; refresh có data cũ hoặc pagination sẽ cần mở model, không ép mọi tính năng vào ba field bool.
+~~~text
+sealed class ClassesState {const ClassesState();}
+class ClassesLoading extends ClassesState {const ClassesLoading();}
+class ClassesData extends ClassesState {
+ final List<ClassInfo> items;
+ ClassesData(Iterable<ClassInfo> xs):items=List.unmodifiable(xs);
+}
+class ClassesError extends ClassesState {
+ final String code;const ClassesError(this.code);
+}
+~~~
+
+### Repository giả giữ test không phụ thuộc mạng
+Abstraction này nhập ClassInfo từ file model. ViewModel nhận repository qua constructor, UI quan sát state bằng cơ chế được chọn; ChangeNotifier là một lựa chọn đơn giản, không là yêu cầu mọi app phải dùng.
+~~~text
+abstract interface class ClassRepository {
+ Future<List<ClassInfo>> list();
+}
+class FakeClasses implements ClassRepository {
+ @override Future<List<ClassInfo>> list() async=>[const ClassInfo('CL7',1)];
+}
+~~~
+
+### Luồng dữ liệu và ownership phải đọc được
+UI phát intent, ViewModel điều phối và đổi state, repository lấy/ghi dữ liệu theo contract. Server chốt quyền/quota. Ai tạo notifier/client thì có trách nhiệm dispose theo thiết kế, tránh nhiều màn hình đóng chung client đang dùng.
+~~~text
+user refresh -> ViewModel.load
+ -> repository.list -> DTO/domain validation
+ -> state Data hoặc Error code
+ -> UI render + semantics
+submit -> server kiểm quyền/quota/idempotency
+UI disable button chỉ giảm bấm lặp, không là control cuối
+~~~
+
+### Derived state không lưu lặp tùy tiện
+Nếu số lớp còn chỗ tính được từ list hiện tại, cân nhắc getter thay biến đếm phải đồng bộ thủ công. Mỗi nguồn state thêm vào tạo khả năng lệch, nên chỉ cache khi có lý do và invalidation rõ.
+
+PRACTICE: Nộp state diagram tải/refresh/error, fake repository và một viewmodel không biết BuildContext. Test transition và snapshot list không bị caller sửa; ghi ai sở hữu notifier/client.
+Q: State loading/error/data nên thiết kế ra sao?
++ Có trạng thái và chuyển tiếp rõ, tránh tổ hợp bool mâu thuẫn
+- Năm bool tự do không contract
+- Luôn chỉ có loading
+Q: ViewModel có nên quyết định quyền quota cuối không?
++ Không, server vẫn authoritative
+- Có vì UI đã khóa nút
+- Có nếu typed
+
+## LESSON mobile-dev-06 | Form và validate có trợ năng
+
+### Form giúp người dùng sửa đúng chỗ
+Dùng label rõ, lỗi cụ thể và không chỉ đổi màu. Trim/normalize phải theo ý nghĩa field, không sửa dữ liệu bí mật tùy tiện; form lab chỉ nhập ghi chú, không nhập mật khẩu thật.
+
+### Validate đồng bộ trên field
+Ví dụ đặt trong State có formKey GlobalKey<FormState>, note controller được dispose như bài3. Length ở đây là code unit của Dart string, không hứa là số grapheme hiển thị; nếu sản phẩm yêu cầu khác cần thư viện/rule phù hợp.
+~~~text
+final formKey=GlobalKey<FormState>();
+// Trong build, note là TextEditingController do State sở hữu.
+Form(key:formKey,child:TextFormField(
+ controller:note,
+ decoration:const InputDecoration(labelText:'Ghi chú đăng ký'),
+ validator:(v){
+  if(v==null || v.trim().isEmpty)return 'Nhập ghi chú cho lớp';
+  if(v.length>120)return 'Ghi chú vượt giới hạn120đơn vị UTF-16';
+  return null;
+ },
+));
+~~~
+
+### Submit cần chống nhiều lệnh cục bộ
+Đoạn là pseudocode điều phối, không phải widget Dart hoàn chỉnh: cần state flag, viewmodel và error map được cài. Disabled button giảm bấm lặp, còn idempotency/quota do server quyết định; form valid chưa nghĩa đăng ký thành công.
+~~~text
+on submit:
+ if submitting: return
+ if form.validate()==false: focus lỗi đầu, return
+ submitting=true
+ await viewmodel.submit(validated values)
+ if still mounted: render result/focus/error theo state
+ finally: reset flag theo ownership, không setState sau dispose
+~~~
+
+### Kiểm semantics cùng thông điệp lỗi
+Test lỗi bằng screen reader/keyboard theo target, nhãn không bị duplicate và focus có thứ tự hợp lý. Không đặt Semantics wrapper tùy tiện làm đọc hai lần; dùng widget có semantics chuẩn trước, kiểm thực tế rồi bổ sung.
+~~~text
+Cases: rỗng, toàn space, dài quá, tiếng Việt, paste
+server validation: field error map về đúng trường
+network fail: giữ draft và cho thử lại có chủ đích
+accessibility: label,error,focus không chỉ màu
+privacy: toast/log không chứa raw note nếu có dữ liệu riêng
+~~~
+
+### Server error không phải lỗi mạng chung
+HTTP400field,403quyền,409hết chỗ và timeout có nghĩa khác. Map code ổn định sang Việt dễ hiểu, giữ nội dung form khi phù hợp, không tự retry command có tác dụng phụ mà không có protocol.
+
+PRACTICE: Viết form ghi chú và test validation/submit đôi/server field error; kiểm nhãn/focus với công cụ target. Nộp policy length và case tiếng Việt tổ hợp, không gọi length là số chữ người nhìn.
+Q: Form client validate có thay server validate không?
++ Không
+- Có nếu regex dài
+- Có nếu app ký release
+Q: Thông báo lỗi form cần gì cho trợ năng?
++ Nhãn, nội dung cụ thể, focus/semantics phù hợp
+- Chỉ đổi màu đỏ
+- Chỉ rung máy
+
+## LESSON mobile-dev-07 | Gọi API, hủy và báo lỗi
+
+### Mạng có nhiều lớp lỗi riêng
+API lab chỉ localhost trên máy học viên. Trên emulator/device, localhost có thể là thiết bị chứ không là máy host: dùng reverse/tunnel cục bộ được cấu hình và ghi base URL tương ứng, không đổi sang API công cộng để tiện.
+
+### Inject client và parse có kiểm
+Dart snippet dùng package:http mã nguồn mở đã khai báo dependency trong project lab, import dart:convert và model. Timeout không tự hủy underlying request; repo không đóng client do caller sở hữu. Quyền INTERNET/transport policy theo target phải cấu hình trong lab.
+~~~text
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+Future<ClassInfo> fetchClass(http.Client client,Uri uri) async {
+ final r=await client.get(uri).timeout(const Duration(seconds:3));
+ if(r.statusCode!=200)throw StateError('HTTP_${r.statusCode}');
+ final Object? raw=jsonDecode(r.body);
+ return ClassInfo.parse(raw);
+}
+~~~
+
+### Generation guard chặn dữ liệu cũ đè mới
+Pseudocode cho ViewModel: mỗi lần load có generation riêng; khi dispose tăng generation/đánh dấu closed. Guard bảo vệ state, còn cancel request nếu client hỗ trợ cần ownership rõ và xử lý riêng, không gọi close client dùng chung để hủy một request.
+~~~text
+load:
+ mine=++generation; emit loading
+ try result=await repository.list()
+ if closed or mine!=generation: bỏ kết quả
+ else emit data
+ catch error: cũng kiểm closed/generation trước emit
+dispose: closed=true;generation++;cleanup tài nguyên sở hữu
+~~~
+
+### Fake response tạo race tái hiện được
+Test không sleep đoán thời gian, dùng Completer/fake để điều khiển thứ tự. Kiểm cả late success và late error, không chỉ một case data; command timeout cần trạng thái unknown/reconcile thay vì khẳng định chưa ghi.
+~~~text
+A request bắt đầu -> B request bắt đầu
+B hoàn tất dataB -> UI hiển thị B
+A hoàn tất dataA -> UI vẫn B
+A late error -> không đè thành error
+dispose trước hoàn tất -> không notify/setState
+HTTP200 badJSON/sai schema -> lỗi dữ liệu, không data thành công
+~~~
+
+### Cancellation không hoàn tác side effect server
+Đóng kết nối hoặc rời màn hình không chứng minh server chưa nhận lệnh. Gửi đăng ký cần idempotency key và tra trạng thái theo contract; parse/network/auth lỗi không gom hết thành một thông báo sai nghĩa.
+
+PRACTICE: Nộp repository có inject client và test status/JSON/schema/timeout, một race A/B điều khiển bằng fake. Ghi base URL cho target lab và phân biệt bỏ response cũ, hủy request, hủy nghiệp vụ.
+Q: Response HTTP200 có đủ coi dữ liệu hợp lệ không?
++ Không, còn JSON/schema/miền và context
+- Có luôn
+- Có nếu mạng nhanh
+Q: Bỏ qua response cũ có đồng nghĩa đã hủy request không?
++ Không
+- Có luôn
+- Có nếu tăng request id
+
+## LESSON mobile-dev-08 | Routing và lưu trạng thái điều hướng
+
+### Điều hướng là trạng thái cần thiết kế
+Lab có danh sách, chi tiết lớp và phiếu của học viên. Chốt system back, deep link, form chưa lưu và trạng thái hết phiên. App nhỏ có thể dùng Navigator, app có URL/deep link phức tạp xem Router hoặc package mã nguồn mở phù hợp.
+
+### Push route có tham số rõ
+Đoạn nằm trong callback của page, nhập material.dart và ClassPage từ file tương ứng. classId là dữ liệu đã validate, page tự tải qua repository; không truyền cả model mutable hoặc secret vào route như nguồn đáng tin vĩnh viễn.
+~~~text
+await Navigator.of(context).push<void>(
+ MaterialPageRoute(builder:(_)=>ClassPage(classId:'CL7')),
+);
+if(!context.mounted)return;
+// Nếu cần refresh khi quay lại, gọi intent có ownership rõ.
+~~~
+
+### Deep link không bỏ qua quyền
+Parse route path thành id theo allowlist, hiển thị loading/auth-required/not-found theo contract và để server kiểm tài nguyên. URL không chứa session token, email hay note riêng; không gọi mọi query param là config đáng tin.
+~~~text
+incoming path: /classes/CL7
+parse: pattern/id giới hạn -> route state
+auth: phiên hết -> luồng login giữ đích an toàn
+load: repository + server authorization
+response: data/not_available theo contract
+back: quay lại danh sách, không tạo vòng login
+~~~
+
+### Restoration khác cache nghiệp vụ
+Khôi phục route/scroll/draft có chính sách riêng, không coi dữ liệu cũ là xác nhận đăng ký mới. Nếu user logout, state riêng của user trước phải bị xóa/không rò sang user sau; kiểm process death theo target.
+~~~text
+Navigation cases:
+ list -> detail -> back giữ scroll theo UX
+ deep link cold start -> đúng màn/đúng auth
+ expired session -> login -> quay lại đích hợp lệ
+ logout S7/login S8 -> không còn phiếu S7
+ draft unsaved -> confirm rời hoặc autosave theo policy
+~~~
+
+### Không thêm back button trùng native tùy tiện
+Thứ tự màn, hệ thống back và browser history nếu web cần kiểm cùng nhau. Modal và nested navigator có scope riêng; ghi rõ pop đang đóng dialog hay page để tránh mất dữ liệu ngoài ý muốn.
+
+PRACTICE: Nộp route map, deep-link parser và ma trận back/cold start/logout/draft. Kiểm server vẫn chặn phiếu khác chủ dù route biết id; ghi case đã chạy theo target thực tế.
+Q: Routing cần chốt gì ngoài màn hình đích?
++ Back/deep link/state restoration/quyền và dữ liệu chưa lưu
+- Chỉ tên route
+- Chỉ animation
+Q: Biết route /receipt/R7 có thay quyền xem không?
++ Không
+- Có nếu app không có nút
+- Có nếu id khó đoán
+
+## LESSON mobile-dev-09 | Lưu cục bộ và đồng bộ ngoại tuyến
+
+### Cache đọc và queue ghi là hai việc khác
+Cache giúp mở danh sách khi mạng yếu, phải có timestamp/version và nhãn dữ liệu cũ. Ghi đăng ký offline cần pending/failed/confirmed rõ, không giảm quota chính thức trên client rồi báo thành công chắc chắn.
+
+### Outbox cục bộ giữ ý định ổn định
+JSON là model lưu giả cho một lệnh, không chứa credential. Intent id/idempotency key được tạo một lần khi người dùng xác nhận, giữ qua retry; server phải thực thi contract chống lặp theo actor/key và payload.
+~~~json
+{"intentId":"LAB-I7","kind":"register","classId":"CL7","qty":1,"idempotencyKey":"LAB-KEY-I7-NOT-SECRET","state":"pending","attempts":0}
+~~~
+
+### Reconcile khi timeout không biết đã ghi chưa
+Pseudocode cần storage transaction khi chuyển state, dedupe và chính sách khôi phục sau crash. Thử lại có backoff/budget, không retry mọi lỗi401/403/validation; server hết chỗ phải là kết quả rõ để người dùng xử lý.
+~~~text
+pending -> sending -> confirmed(response chắc chắn)
+sending -> timeout/unknown -> tra trạng thái theo key/contract
+unknown -> retry cùng key nếu policy cho phép
+validation/forbidden -> failed không retry mù
+app crash -> đọc outbox và reconcile, không tự sinh key mới
+server conflict -> UI thông báo, không ghi đè ý định khác
+~~~
+
+### Dữ liệu cục bộ cũng cần riêng tư
+Giữ tối thiểu, xóa theo logout/retention và phân vùng theo user. Preferences không là nơi lưu password/server secret. Secure storage có bảo đảm theo nền tảng và threat model riêng; mã hóa không thay quyền truy cập hoặc lifecycle.
+~~~text
+Storage policy lab:
+ cache catalogue: public giả, TTL/version rõ
+ draft note: theo actor, xóa khi logout nếu policy yêu cầu
+ outbox: actor/key/state, không raw token
+ credentials: cơ chế platform phù hợp nếu thực sự cần
+ migrations: version+atomic update, test app nâng cấp
+~~~
+
+### Conflict là quyết định sản phẩm
+Hai thiết bị sửa ghi chú hoặc đăng ký cùng lớp có thể tranh state. Last-write-wins không luôn đúng; dùng version/error và lựa chọn hợp nhất khi cần, không che conflict bằng toast chung đã đồng bộ.
+
+PRACTICE: Tạo fake outbox có hai lệnh, mô phỏng crash sau server commit trước nhận response. Nộp state timeline, key giữ ổn định và UI unknown/confirmed; test logout không lộ draft người trước.
+Q: Offline queue cho lệnh ghi cần gì?
++ Trạng thái pending, idempotency và conflict/retry policy
+- Gửi lại vô hạn
+- Báo confirmed ngay
+Q: Local storage có nên giữ mật khẩu plaintext không?
++ Không
+- Có nếu app private
+- Có nếu JSON nhỏ
+
+## LESSON mobile-dev-10 | Quyền, nền và vòng đời app
+
+### Xin quyền theo việc người dùng đang làm
+App đặt lớp cơ bản không cần danh bạ/vị trí liên tục. Chỉ khi thêm tính năng có lý do mới xin quyền tối thiểu, giải thích mục đích và cho phép dùng phần không liên quan khi người dùng từ chối.
+
+### AppLifecycleListener giúp quan sát resume
+Đây là fragment trong State, cần import material.dart và field listener; init/dispose sở hữu listener. Callback chỉ phát intent refresh có guard, không khẳng định app chạy liên tục lúc background hay server chưa thay đổi.
+~~~text
+late final AppLifecycleListener lifecycle;
+@override void initState(){
+ super.initState();
+ lifecycle=AppLifecycleListener(onResume:(){
+  // Gọi viewmodel.refresh có generation/closed guard đã cài.
+ });
+}
+@override void dispose(){lifecycle.dispose();super.dispose();}
+~~~
+
+### Background task không là timer vô hạn
+OS có thể suspend hoặc kill process. Chọn API/plugin được duy trì hỗ trợ target và tuân giới hạn platform, giữ task idempotent và có deadline; không dùng timer.periodic như cam kết đồng bộ kể cả app đóng.
+~~~text
+foreground -> user thấy state trực tiếp
+inactive/paused -> có thể không còn được chạy
+resume -> revalidate phiên/cache/outbox theo protocol
+terminated -> khôi phục từ storage, không dựa biến RAM
+background job -> có platform budget, retry/idempotency
+Không lấy debug behavior làm bảo đảm release
+~~~
+
+### Permission matrix có cả từ chối vĩnh viễn
+Tên trạng thái phụ thuộc API/plugin, không hardcode một enum chung cho mọi OS. Kiểm lần đầu, denied, settings change, limited access nếu có và revoke khi đang dùng; không loop prompt để ép người dùng.
+~~~text
+Feature giả: chọn ảnh ghi chú lớp (nếu bổ sung)
+not asked -> giải thích + system prompt theo platform
+denied -> fallback nhập text
+restricted/permanent -> hướng dẫn settings khi phù hợp
+revoked outside -> reload capability, không crash
+app không cần ảnh -> không xin quyền chỉ để đủ demo
+~~~
+
+### System UI cần kiểm bằng công cụ phù hợp
+Widget test không hiện permission dialog native thật. Integration Flutter có giới hạn với UI native, nên lập kế hoạch kiểm manual hoặc automation platform được cấp; báo đúng case chưa kiểm thay vì chỉ ảnh giả.
+
+PRACTICE: Nộp permission inventory tối thiểu và lifecycle state diagram. Kiểm background/resume/kill trong target lab, phiên hết hạn khi resume và fallback khi từ chối; phân biệt test app với native UI.
+Q: Quyền hệ điều hành nên xin khi nào?
++ Theo nhu cầu và giải thích đúng mục đích, xử lý từ chối
+- Mọi quyền ngay khi mở
+- Chỉ để đủ checklist
+Q: App ở background có được bảo đảm chạy Dart timer mãi không?
++ Không
+- Có nếu timer.periodic
+- Có nếu giữ màn hình
+
+## LESSON mobile-dev-11 | Unit, widget và integration test
+
+### Ba lớp test trả lời ba câu hỏi
+Unit kiểm logic/parser/state, widget kiểm UI/lifecycle trong môi trường Flutter test, integration kiểm phối hợp app trên target. Không dùng một loại thay mọi loại; fake phải có contract và ca lỗi phù hợp.
+
+### Unit parser có expected độc lập
+File test/class_info_test.dart nhập model đúng package name mobile_lab. Không dùng assert trong release để thay validation production; test matcher của framework phát hiện lỗi ngay cả khi app build cấu hình khác.
+~~~text
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mobile_lab/classes/class_info.dart';
+void main(){
+ test('parse class hợp lệ',(){
+  final item=ClassInfo.parse({'id':'CL7','remaining':1});
+  expect(item.id,'CL7');expect(item.remaining,1);
+ });
+ test('reject remaining chuỗi',(){
+  expect(()=>ClassInfo.parse({'id':'CL7','remaining':'1'}),throwsFormatException);
+ });
+}
+~~~
+
+### Widget test kiểm màn tối thiểu
+File test/lab_app_test.dart nhập main.dart chứa LabApp bài1. Đây là smoke có ích cho entry point, chưa kiểm state/race/network. Với UI thực cần test loading/data/error, nhãn và tác dụng phụ qua fake.
+~~~text
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mobile_lab/main.dart';
+void main(){
+ testWidgets('hiện nhãn app lab',(tester) async {
+  await tester.pumpWidget(const LabApp());
+  expect(find.text('Lớp Mây Sợi'),findsOneWidget);
+ });
+}
+~~~
+
+### Integration có dữ liệu và teardown riêng
+Không gọi API công cộng, dùng service lab reset theo contract. integration_test không tự thao tác mọi dialog native; trạng thái quyền cần chuẩn bị bằng công cụ/kiểm tay phù hợp. Tránh pumpAndSettle khi animation vô hạn.
+~~~text
+Run plan học viên:
+ flutter analyze
+ flutter test
+ flutter test integration_test -d <DEVICE_ID_LAB>
+Fixture: lớp CL7 còn1chỗ, actorS7/S8 giả
+Scenario: list/detail/submit/reconcile/logout
+Record: target,SDK,artifact,expected/actual và case native riêng
+~~~
+
+### Kiểm mutation để tránh suite xanh vô nghĩa
+Bỏ parser type check phải làm ca sai fail, bỏ generation guard phải làm race fail, bỏ actor partition trong cache phải lộ canary giả trong test. Khôi phục trước bàn giao, ghi tool chưa sẵn nếu chưa thể chạy Flutter.
+
+PRACTICE: Viết suite parser/viewmodel/widget và một integration flow trên target được cấp. Nộp command/exitcode, evidence mutation đỏ-xanh và danh sách native behavior chưa tự động hóa.
+Q: Widget test có chứng minh native permission dialog hoạt động không?
++ Không
+- Có luôn
+- Có nếu tìm text
+Q: pumpAndSettle luôn phù hợp mọi test không?
++ Không, animation/timer vô hạn có thể không settle
+- Có mọi nơi
+- Chỉ cần tăng timeout
+
+## LESSON mobile-dev-12 | Đóng gói, cấu hình và phát hành có kiểm
+
+### Release là artifact có danh tính
+Ghi version/build number, target, toolchain và cấu hình. Debug chạy được chưa chứng minh release đúng; cần test artifact đã build trên thiết bị/target tương ứng, không phát hành cửa hàng trong bài tập này.
+
+### Config public khác secret
+API_BASE là địa chỉ cấu hình public, không phải nơi giấu credential. dart-define có thể xuất hiện trong artifact nên không chứa server key. Ví dụ localhost phải được ánh xạ cục bộ đúng target, không hardcode production.
+~~~text
+const apiBase=String.fromEnvironment('API_BASE',defaultValue:'http://localhost:3100');
+// Chỉ cấu hình public; server secret không nằm trong app.
+final uri=Uri.parse(apiBase);
+// bootstrap phải validate scheme/origin theo config lab được cấp.
+~~~
+
+### Build theo nền tảng có điều kiện
+Các lệnh là kế hoạch trên máy có toolchain thích hợp. iOS cần môi trường và signing hợp lệ theo nền tảng; không tự tạo key thật hay upload. Bảo quản signing material bằng quy trình dự án, không chép vào source/tài liệu.
+~~~text
+flutter analyze
+flutter test
+flutter build apk --release --dart-define=API_BASE=http://localhost:3100
+# APK lab: test trên target phù hợp, localhost mapping riêng.
+# Nền tảng khác: dùng build target tương ứng khi có toolchain.
+# Không upload/publish hoặc đưa signing secret vào lệnh mẫu.
+~~~
+
+### Smoke release và rollback rõ
+Cài đặt/nâng cấp/hạ cấp có giới hạn platform và storage migration. Rollback binary không tự khôi phục schema local đã đổi, nên thiết kế migration compatible hoặc kế hoạch tiến sửa; giữ artifact trước đã kiểm.
+~~~text
+Release checklist:
+ artifact digest + version + SDK + target
+ cold start,permissions,network policy,offline/resume
+ upgrade giữ data theo contract,logout xóa đúng phạm vi
+ crash/error không lộ config/token
+ rollback/forward-fix: điều kiện và test migration
+ chỉ phân phối lab có chủ đích, không cửa hàng
+~~~
+
+### Không dùng pinning tùy tiện để che TLS lỗi
+Ứng dụng thật cần HTTPS và xác minh chứng thư đúng; không vô hiệu hóa kiểm TLS toàn cục để hết lỗi. HTTP localhost chỉ cho lab cô lập theo platform config, không kéo ngoại lệ cleartext rộng sang release thật.
+
+PRACTICE: Nộp release manifest giả, config allowlist và smoke matrix debug/release. Ghi rõ target đã build, chưa build và lý do; không upload hay dùng signing secret thật trong bài.
+Q: dart-define có phải kho secret an toàn không?
++ Không
+- Có nếu release mode
+- Có nếu tên biến khó đoán
+Q: Release cần kiểm gì?
++ Artifact/config/quyền/version, thiết bị thật và rollback theo quy trình
+- Chỉ chạy debug một lần
+- Chỉ đổi icon
+
+## LESSON mobile-dev-13 | Dự án: ứng dụng đặt lớp đa nền tảng
+
+### Dự án app đặt lớp Lớp Mây Sợi
+App có danh sách/chi tiết/form/phiếu, repository fake trước rồi API lab khi được cấp. Server giữ quyền/quota/chống lặp; UI có loading/error/unknown/confirmed, không coi mất mạng là thất bại chắc chắn.
+
+### Các module ghép theo hợp đồng
+Sơ đồ không yêu cầu một package state cụ thể. Học viên chọn ChangeNotifier hoặc cơ chế mã nguồn mở phù hợp, ghi lý do và ownership. DTO/runtime validation, serializer và lỗi phải nhất quán giữa fake và HTTP.
+~~~text
+UI pages -> ViewModel intents/state
+ViewModel -> ClassRepository interface
+FakeRepository -> test deterministic
+HttpRepository -> client inject + parser + error map
+LocalStore -> cache/draft/outbox theo actor
+Server lab -> authz/quota/idempotency authoritative
+~~~
+
+### Fixture và ca unknown là trọng tâm
+Dùng toàn dữ liệu tự đặt, không token thật. API chưa có thì bàn giao fake và contract, không trỏ dịch vụ ngoài cho nhanh. Hai actor tranh một chỗ giúp kiểm UI kết quả và không lặp đăng ký.
+~~~json
+{"class":{"id":"CL7","title":"Lớp Sợi Nếp","remaining":1},"actors":["S7","S8"],"failureScenario":"commit_then_response_lost","outboxKey":"LAB-INTENT-7-NOT-SECRET"}
+~~~
+
+### Rubric chấm cả trải nghiệm và bằng chứng
+Số màn hình không thay tính đúng. Chữ lớn, trợ năng, back, logout và offline phải có expected; native permission chưa kiểm ghi rõ. Giữ command/fixture/SDK để người khác chạy được suite.
+~~~text
+Rubric /100: UI/a11y20,state/async20,data/offline20,tests25,docs/release15
+Min20ca: parser,empty,error,race,dispose,back,large text,logout,unknown
+Evidence: unit/widget/integration tách rõ
+Targets: chỉ khai báo supported khi có bằng chứng
+Handoff: README lab,contracts,manifest,limits,known issues
+~~~
+
+### Cải tiến sau khi đã kiểm tính đúng
+Chỉ tối ưu rebuild/cache khi profile chỉ ra vấn đề, giữ oracle cho state và side effect. Bản học tập tốt cho reviewer biết cách chạy, phạm vi và rủi ro còn lại, không cần lời hứa chạy mọi thiết bị.
+
+PRACTICE: Bàn giao app lab, tests và báo cáo rubric, kiểm trên target được cấp. Nộp luồng mạng mất sau commit, stale response, chữ lớn/logout và manifest; không phát hành hay gọi đích ngoài lab.
+Q: Dự án mobile phải có trạng thái nào khi mạng mất lúc submit?
++ Pending/unknown theo contract, tra lại/chống lặp
+- Luôn failed chắc chắn
+- Luôn confirmed
+Q: Đa nền tảng cần bằng chứng nào?
++ Ma trận target/thiết bị/chữ lớn/mạng/vòng đời cùng phạm vi đã chạy
+- Chỉ một ảnh emulator
+- Một test unit đủ mọi OS
+
+## LESSON mobile-dev-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Flutter giúp học một stack nhất quán, nhưng quyền, plugin, build và hành vi thiết bị vẫn cần kiểm theo nền tảng; không hứa một code không cần test.
+2. T? cho phép null, còn ! là khẳng định có thể lỗi runtime; JSON/input ngoài vẫn cần kiểm kiểu, miền và presence.
+3. Flutter có thể build nhiều lần; khởi tạo/đăng ký tài nguyên theo lifecycle thích hợp và dispose khi hết sở hữu.
+4. Trợ năng cần nội dung còn dùng được khi chữ lớn, không khóa text scaling để che lỗi layout; chọn constraints và semantics phù hợp.
+
+### Dữ liệu và điều kiện biên
+5. Model rõ giúp UI không vừa báo thành công vừa loading sai; stale response và disposed state cũng cần policy.
+6. Client dễ bị bỏ qua hoặc khác phiên bản, server vẫn kiểm dữ liệu và quyền; lỗi server cần map đúng field và có message dễ hiểu.
+7. Tách network/status/parse/validation, chỉ chuyển sang data khi hợp đồng hợp lệ; không hiển thị raw exception chứa thông tin nội bộ.
+8. Điều hướng có trạng thái, system back và deep link có thể vào app ở chặng khác; kiểm quyền server và giữ hành vi back nhất quán.
+
+### Tính đúng và cách điều tra
+9. Lưu yêu cầu cục bộ không chứng minh server chấp nhận; giữ idempotency key ổn định theo một ý định và thể hiện trạng thái chờ.
+10. Yêu cầu tối thiểu theo tính năng, kiểm denied/permanently denied theo platform và không chặn chức năng không liên quan.
+11. Unit/widget/integration có phạm vi khác; integration_test cũng không trực tiếp điều khiển mọi native UI, cần công cụ/kế hoạch platform phù hợp.
+12. Giá trị cấu hình có thể nằm trong artifact, không nhúng server secret; API base public khác credential cần bảo vệ.
+
+### Rủi ro và lựa chọn phương án
+13. Timeout không chứng minh server chưa ghi; cần idempotency và reconcile để không tạo đăng ký lặp hoặc báo sai kết quả.
+14. Timeout của Future giới hạn chờ kết quả nhưng tác vụ gốc có thể tiếp tục; cancellation phụ thuộc client/API và quyền sở hữu tài nguyên.
+15. Expanded giải constraints theo trục chính, không sửa mọi vấn đề chiều cao/nội dung; còn phải kiểm màn nhỏ, chữ lớn và RTL nếu hỗ trợ.
+16. Người dùng cần biết trường nào và cách sửa, không dựa riêng màu sắc; kiểm screen reader và bàn phím theo target.
+
+### Dự án, bằng chứng và bàn giao
+17. Route là địa chỉ UI, request vẫn cần authorization; deep link không được bỏ qua login/resource checks.
+18. Hệ điều hành có thể suspend/kill, background task có giới hạn; cần API/platform policy phù hợp và đồng bộ trạng thái khi resume.
+19. Debug xanh không chứng minh release/profile, signing hay platform permissions đúng; promotion phải biết artifact nào đã được kiểm.
+20. Khai báo target hỗ trợ và ca đã kiểm, không hứa mọi nền tảng từ một bản build; ghi giới hạn toolchain và native behavior.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Vì sao khóa chọn Flutter?
++ Một hướng mã nguồn mở với Dart, widget/test đa nền tảng và phạm vi lab rõ
+- Vì không cần học nền tảng
+- Vì mọi plugin chạy mọi OS
+Q: Dart null safety làm gì?
++ Phân biệt kiểu nullable ở thời điểm kiểm kiểu, không thay validate dữ liệu ngoài
+- Làm mọi API không lỗi
+- Cho dùng ! ở mọi nơi
+Q: build nên chứa gì?
++ Mô tả UI từ state hiện tại, tránh side effect lặp
+- Tạo request mới mọi lần
+- Ghi DB mỗi lần
+Q: Overflow khi tăng cỡ chữ nên xử lý thế nào?
++ Thiết kế co giãn/cuộn và test theo nội dung
+- Ép font nhỏ cố định
+- Cắt mọi nhãn
+Q: State loading/error/data nên thiết kế ra sao?
++ Có trạng thái và chuyển tiếp rõ, tránh tổ hợp bool mâu thuẫn
+- Năm bool tự do không contract
+- Luôn chỉ có loading
+Q: Form client validate có thay server validate không?
++ Không
+- Có nếu regex dài
+- Có nếu app ký release
+Q: Response HTTP200 có đủ coi dữ liệu hợp lệ không?
++ Không, còn JSON/schema/miền và context
+- Có luôn
+- Có nếu mạng nhanh
+Q: Routing cần chốt gì ngoài màn hình đích?
++ Back/deep link/state restoration/quyền và dữ liệu chưa lưu
+- Chỉ tên route
+- Chỉ animation
+Q: Offline queue cho lệnh ghi cần gì?
++ Trạng thái pending, idempotency và conflict/retry policy
+- Gửi lại vô hạn
+- Báo confirmed ngay
+Q: Quyền hệ điều hành nên xin khi nào?
++ Theo nhu cầu và giải thích đúng mục đích, xử lý từ chối
+- Mọi quyền ngay khi mở
+- Chỉ để đủ checklist
+Q: Widget test có chứng minh native permission dialog hoạt động không?
++ Không
+- Có luôn
+- Có nếu tìm text
+Q: dart-define có phải kho secret an toàn không?
++ Không
+- Có nếu release mode
+- Có nếu tên biến khó đoán
+Q: Dự án mobile phải có trạng thái nào khi mạng mất lúc submit?
++ Pending/unknown theo contract, tra lại/chống lặp
+- Luôn failed chắc chắn
+- Luôn confirmed
+Q: Future.timeout có tự hủy toàn bộ tác vụ gốc không?
++ Không
+- Có luôn
+- Có nếu catch TimeoutException
+Q: Expanded trong Row giúp gì?
++ Cho child nhận phần không gian còn lại theo flex
+- Bảo đảm mọi layout không overflow
+- Thay scroll mọi trường hợp
+Q: Thông báo lỗi form cần gì cho trợ năng?
++ Nhãn, nội dung cụ thể, focus/semantics phù hợp
+- Chỉ đổi màu đỏ
+- Chỉ rung máy
+Q: Biết route /receipt/R7 có thay quyền xem không?
++ Không
+- Có nếu app không có nút
+- Có nếu id khó đoán
+Q: App ở background có được bảo đảm chạy Dart timer mãi không?
++ Không
+- Có nếu timer.periodic
+- Có nếu giữ màn hình
+Q: Release cần kiểm gì?
++ Artifact/config/quyền/version, thiết bị thật và rollback theo quy trình
+- Chỉ chạy debug một lần
+- Chỉ đổi icon
+Q: Đa nền tảng cần bằng chứng nào?
++ Ma trận target/thiết bị/chữ lớn/mạng/vòng đời cùng phạm vi đã chạy
+- Chỉ một ảnh emulator
+- Một test unit đủ mọi OS

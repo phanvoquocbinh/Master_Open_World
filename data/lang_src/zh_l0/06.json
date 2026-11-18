@@ -1,139 +1,991 @@
 {
-  "no": 6,
-  "title": "Vận mẫu mũi an en ang eng ong… & quy tắc viết pinyin (y, w, ü, iu/ui/un)",
-  "sub": "-n hay -ng? 山 shān – 伤 shāng · 新 xīn – 星 xīng",
-  "goals": [
-    "Phân biệt vận mẫu mũi trước -n và mũi sau -ng: an/ang, en/eng, in/ing, ian/iang, uan/uang",
-    "Phát âm đúng ian (≈ “iên”), un (≈ “uân”), üan (≈ “uyên”), ün (≈ “uyn”), ong (≈ “ung”)",
-    "Nắm 6 quy tắc viết pinyin: y, w, bỏ/giữ hai chấm ü, viết tắt iu/ui/un, dấu cách âm ’",
-    "Hỏi và nói tên: 你叫什么名字？– 我叫…"
-  ],
-  "parts": [
-    {"k": "text", "h": "Hai loại âm mũi: -n (mũi trước) và -ng (mũi sau)", "html": "<p>Tiếng Trung có 16 vận mẫu kết thúc bằng âm mũi. Tin vui: tiếng Việt cũng có -n và -ng (lan – lang), nên phần lớn rất dễ. Chỉ cần chú ý vài vần “đọc khác chữ viết”.</p><table><tr><th>Pinyin</th><th>Gần vần tiếng Việt</th><th>Ví dụ</th></tr><tr><td>an</td><td>an</td><td>三 sān, 饭 fàn, 慢 màn</td></tr><tr><td>ang</td><td>ang (miệng mở, vang phía sau)</td><td>忙 máng, 汤 tāng</td></tr><tr><td>en</td><td><b>ân</b></td><td>门 mén, 很 hěn, 人 rén</td></tr><tr><td>eng</td><td><b>âng</b></td><td>冷 lěng, 风 fēng</td></tr><tr><td>in</td><td>in</td><td>新 xīn, 您 nín</td></tr><tr><td>ing</td><td><b>inh</b></td><td>听 tīng, 名 míng</td></tr><tr><td>ong</td><td><b>ung</b> (môi tròn)</td><td>东 dōng, 红 hóng</td></tr><tr><td>ian</td><td><b>iên</b> (KHÔNG đọc “i-an”)</td><td>天 tiān, 钱 qián, 年 nián</td></tr><tr><td>iang</td><td>i-ang (a rõ)</td><td>想 xiǎng, 两 liǎng</td></tr><tr><td>iong</td><td>i-ung</td><td>熊 xióng, 用 yòng</td></tr><tr><td>uan</td><td>oan</td><td>晚 wǎn, 关 guān</td></tr><tr><td>uang</td><td>oang</td><td>黄 huáng, 王 wáng</td></tr><tr><td>uen → un</td><td><b>uân</b></td><td>问 wèn, 春 chūn</td></tr><tr><td>ueng</td><td>uâng (chỉ có weng)</td><td>翁 wēng</td></tr><tr><td>üan</td><td><b>uyên</b></td><td>远 yuǎn, 全 quán</td></tr><tr><td>ün</td><td><b>uyn</b></td><td>云 yún, 军 jūn</td></tr></table><p><b>Mẹo phân biệt</b>: kết thúc <b>-n</b> thì đầu lưỡi chạm lợi trên, miệng hơi khép; kết thúc <b>-ng</b> thì đầu lưỡi hạ xuống, cuống lưỡi nâng chặn hơi, miệng mở.</p><p>⚠️ Người <b>miền Nam</b> hay đọc lẫn an/ang, in/inh, en/eng (lan = lang) – cần luyện kỹ cặp tối thiểu. Người <b>miền Bắc</b> thường làm tốt phần này.</p>"},
-    {"k": "sounds", "h": "Luyện vận mẫu mũi & cặp -n / -ng", "html": "<p>Đọc từng cặp, phóng đại động tác cuối: -n chạm lưỡi lên lợi, -ng mở miệng.</p>", "items": [
-      {"sym": "an ≈ “an”", "ex": ["三", "饭", "慢", "看", "山"], "vi": "三 sān (ba) · 饭 fàn (cơm) · 慢 màn (chậm) · 看 kàn (xem) · 山 shān (núi). Kết thúc bằng đầu lưỡi chạm lợi trên.", "pairs": [["山", "伤"], ["饭", "放"]]},
-      {"sym": "ang ≈ “ang”", "ex": ["忙", "汤", "唱", "上", "胖"], "vi": "忙 máng (bận) · 汤 tāng (canh) · 唱 chàng (hát) · 上 shàng (trên) · 胖 pàng (béo). Miệng mở, âm vang phía sau."},
-      {"sym": "en ≈ “ân”", "ex": ["门", "很", "人", "本", "真"], "vi": "门 mén (cửa) · 很 hěn (rất) · 人 rén (người) · 本 běn (quyển) · 真 zhēn (thật). e ở đây là “ơ” ngắn → en ≈ “ân” (门 ≈ “mân”), không đọc “en”.", "pairs": [["门", "萌"], ["真", "争"], ["身", "生"]]},
-      {"sym": "eng ≈ “âng”", "ex": ["冷", "风", "朋", "等", "生"], "vi": "冷 lěng (lạnh) · 风 fēng (gió) · 朋 péng (bạn) · 等 děng (đợi) · 生 shēng (sinh). Gần “âng” tiếng Việt."},
-      {"sym": "in ≈ “in”", "ex": ["新", "您", "今", "林", "进"], "vi": "新 xīn (mới) · 您 nín (ngài) · 今 jīn (nay) · 林 lín (rừng) · 进 jìn (vào). Như “in” tiếng Việt.", "pairs": [["新", "星"], ["今", "京"], ["林", "零"]]},
-      {"sym": "ing ≈ “inh”", "ex": ["听", "名", "星", "请", "冰"], "vi": "听 tīng (nghe) · 名 míng (tên) · 星 xīng (sao) · 请 qǐng (mời) · 冰 bīng (băng). Như “inh” tiếng Việt."},
-      {"sym": "ong ≈ “ung” (môi tròn)", "ex": ["东", "红", "中", "龙", "空"], "vi": "东 dōng (đông) · 红 hóng (đỏ) · 中 zhōng (giữa) · 龙 lóng (rồng) · 空 kōng (trống). Gần “<b>ung</b>” – đừng đọc như “ong” tiếng Việt (con ong) vốn mở miệng rộng hơn."},
-      {"sym": "ian ≈ “iên”", "ex": ["天", "钱", "年", "面", "点"], "vi": "天 tiān (trời) · 钱 qián (tiền) · 年 nián (năm) · 面 miàn (mì) · 点 diǎn (điểm). Viết a nhưng đọc gần “<b>iên</b>”: 天 tiān ≈ “thiên”, 年 nián ≈ “niên” – trùng cả âm Hán Việt, rất dễ nhớ!", "pairs": [["钱", "墙"], ["年", "娘"]]},
-      {"sym": "iang ≈ “i-ang”", "ex": ["想", "两", "香", "讲", "江"], "vi": "想 xiǎng (muốn) · 两 liǎng (hai) · 香 xiāng (thơm) · 讲 jiǎng (giảng) · 江 jiāng (sông). Ở đây a đọc rõ “a”, không biến thành “ê” như ian."},
-      {"sym": "uan ≈ “oan” · üan ≈ “uyên”", "ex": ["晚", "关", "短", "远", "全", "选"], "vi": "uan: 晚 wǎn (muộn) · 关 guān (đóng) · 短 duǎn (ngắn). üan (sau j q x y): 远 yuǎn (xa) · 全 quán (toàn bộ) · 选 xuǎn (chọn) – tròn môi ü rồi “ên”: ≈ “uyên”.", "pairs": [["晚", "远"], ["关", "光"]]},
-      {"sym": "uang ≈ “oang”", "ex": ["黄", "王", "床", "光", "双"], "vi": "黄 huáng (vàng) · 王 wáng (vua; họ Vương) · 床 chuáng (giường) · 光 guāng (ánh sáng) · 双 shuāng (đôi).", "pairs": [["黄", "环"]]},
-      {"sym": "un (= uen) ≈ “uân”", "ex": ["问", "春", "困", "论", "孙"], "vi": "问 wèn (hỏi) · 春 chūn (xuân) · 困 kùn (buồn ngủ) · 论 lùn (luận) · 孙 sūn (cháu). Viết un nhưng có “ơ” ẩn (u-ơ-n) ≈ “<b>uân</b>”: 春 chūn ≈ “chuân”."},
-      {"sym": "ün ≈ “uyn”", "ex": ["云", "军", "群", "运", "训"], "vi": "云 yún (mây) · 军 jūn (quân) · 群 qún (bầy) · 运 yùn (vận) · 训 xùn (huấn). Tròn môi ü rồi kết thúc bằng n ≈ “<b>uyn</b>”. Chỉ đi sau j q x y nên viết un/yun."},
-      {"sym": "iong ≈ “i-ung”", "ex": ["熊", "用", "穷", "兄"], "vi": "熊 xióng (gấu) · 用 yòng (dùng) · 穷 qióng (nghèo) · 兄 xiōng (anh). i lướt sang ong (“ung” tròn môi)."}
-    ]},
-    {"k": "grammar", "h": "Quy tắc viết pinyin – đọc được mọi âm tiết", "html": "<p>Pinyin có vài quy tắc “trang điểm” khi âm tiết <b>không có thanh mẫu</b> (để ranh giới âm tiết rõ ràng) hoặc để viết gọn. Thuộc 7 quy tắc này là đọc – viết đúng mọi âm tiết.</p>", "table": [["Quy tắc", "Viết thành", "Ví dụ"], ["1. i đứng đầu âm tiết", "i, in, ing → yi, yin, ying; các vần khác thay i bằng y: ia → ya, ie → ye, iao → yao, iou → you, ian → yan, iang → yang, iong → yong", "一 yī, 音 yīn, 英 yīng; 牙 yá, 也 yě, 要 yào, 有 yǒu, 烟 yān, 羊 yáng, 用 yòng"], ["2. u đứng đầu âm tiết", "u → wu; các vần khác thay u bằng w: ua → wa, uo → wo, uai → wai, uei → wei, uan → wan, uen → wen, uang → wang, ueng → weng", "五 wǔ; 娃 wá, 我 wǒ, 外 wài, 位 wèi, 万 wàn, 问 wèn, 王 wáng"], ["3. ü đứng đầu âm tiết", "thêm y, bỏ hai chấm: ü → yu, üe → yue, üan → yuan, ün → yun", "鱼 yú, 月 yuè, 远 yuǎn, 云 yún"], ["4. ü sau j q x", "bỏ hai chấm (j q x không bao giờ đi với u thường)", "句 jù, 去 qù, 学 xué, 全 quán"], ["5. ü sau n l", "GIỮ hai chấm (vì nu, lu là âm khác)", "女 nǚ ≠ 努 nǔ; 绿 lǜ ≠ 路 lù"], ["6. Viết tắt khi có thanh mẫu", "iou → iu, uei → ui, uen → un", "六 liù, 贵 guì, 春 chūn"], ["7. Dấu cách âm ’", "âm tiết bắt đầu bằng a, o, e đứng sau âm tiết khác", "西安 Xī’ān (2 âm tiết) ≠ 先 xiān (1 âm tiết)"]], "ex": [
-      {"t": "一", "py": "yī", "vi": "i đứng một mình → yi"},
-      {"t": "五", "py": "wǔ", "vi": "u đứng một mình → wu"},
-      {"t": "鱼", "py": "yú", "vi": "ü → yu, bỏ hai chấm"},
-      {"t": "去", "py": "qù", "vi": "q + ü → qu, bỏ hai chấm"},
-      {"t": "女", "py": "nǚ", "vi": "n + ü → giữ hai chấm"},
-      {"t": "西安", "py": "Xī’ān", "vi": "thành phố Tây An – có dấu cách âm"}
-    ], "tips": ["Thấy <b>yu, yue, yuan, yun</b> → luôn đọc ü. Thấy <b>ju, qu, xu</b> → luôn đọc ü. Thấy <b>nu, lu</b> → u thường; <b>nü, lü</b> → ü.", "Gõ máy tính: ü gõ bằng phím <b>v</b> (nǚ → nv, lǜ → lv).", "Tên riêng viết hoa chữ cái đầu: Běijīng, Hénèi, Wáng lǎoshī."]},
-    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
-      {"w": "忙", "py": "máng", "hv": "mang", "pos": "adj", "vi": "bận", "ex": "你忙吗？— 我很忙。", "exPy": "Nǐ máng ma? — Wǒ hěn máng.", "exVi": "Bạn bận không? — Tôi rất bận."},
-      {"w": "慢", "py": "màn", "hv": "mạn", "pos": "adj", "vi": "chậm", "ex": "请慢一点儿说。", "exPy": "Qǐng màn yìdiǎnr shuō.", "exVi": "Làm ơn nói chậm một chút."},
-      {"w": "门", "py": "mén", "hv": "môn", "pos": "n", "vi": "cửa", "ex": "请开门。", "exPy": "Qǐng kāi mén.", "exVi": "Làm ơn mở cửa."},
-      {"w": "很", "py": "hěn", "hv": "ngận", "pos": "adv", "vi": "rất", "ex": "我很好。", "exPy": "Wǒ hěn hǎo.", "exVi": "Tôi khoẻ."},
-      {"w": "冷", "py": "lěng", "hv": "lãnh", "pos": "adj", "vi": "lạnh", "ex": "今天很冷。", "exPy": "Jīntiān hěn lěng.", "exVi": "Hôm nay rất lạnh."},
-      {"w": "天", "py": "tiān", "hv": "thiên", "pos": "n", "vi": "trời; ngày", "ex": "天很蓝。", "exPy": "Tiān hěn lán.", "exVi": "Trời rất xanh."},
-      {"w": "听", "py": "tīng", "hv": "thính", "pos": "v", "vi": "nghe", "ex": "我听音乐。", "exPy": "Wǒ tīng yīnyuè.", "exVi": "Tôi nghe nhạc."},
-      {"w": "名字", "py": "míngzi", "hv": "danh tự", "pos": "n", "vi": "tên", "ex": "你叫什么名字？", "exPy": "Nǐ jiào shénme míngzi?", "exVi": "Bạn tên là gì?"},
-      {"w": "东西", "py": "dōngxi", "hv": "đông tây", "pos": "n", "vi": "đồ vật, đồ", "ex": "你买什么东西？", "exPy": "Nǐ mǎi shénme dōngxi?", "exVi": "Bạn mua đồ gì?"},
-      {"w": "晚上", "py": "wǎnshang", "hv": "vãn thượng", "pos": "n", "vi": "buổi tối", "ex": "晚上好！", "exPy": "Wǎnshang hǎo!", "exVi": "Chào buổi tối!"},
-      {"w": "熊猫", "py": "xióngmāo", "hv": "hùng miêu", "pos": "n", "vi": "gấu trúc", "ex": "熊猫很可爱。", "exPy": "Xióngmāo hěn kě’ài.", "exVi": "Gấu trúc rất đáng yêu."},
-      {"w": "云", "py": "yún", "hv": "vân", "pos": "n", "vi": "mây", "ex": "天上有白云。", "exPy": "Tiānshang yǒu bái yún.", "exVi": "Trên trời có mây trắng."},
-      {"w": "远", "py": "yuǎn", "hv": "viễn", "pos": "adj", "vi": "xa", "ex": "你家远吗？", "exPy": "Nǐ jiā yuǎn ma?", "exVi": "Nhà bạn có xa không?"},
-      {"w": "新", "py": "xīn", "hv": "tân", "pos": "adj", "vi": "mới", "ex": "这是我的新书。", "exPy": "Zhè shì wǒ de xīn shū.", "exVi": "Đây là sách mới của tôi."},
-      {"w": "问", "py": "wèn", "hv": "vấn", "pos": "v", "vi": "hỏi", "ex": "我问老师。", "exPy": "Wǒ wèn lǎoshī.", "exVi": "Tôi hỏi giáo viên."},
-      {"w": "黄", "py": "huáng", "hv": "hoàng", "pos": "adj", "vi": "vàng (màu); họ Hoàng", "ex": "香蕉是黄的。", "exPy": "Xiāngjiāo shì huáng de.", "exVi": "Chuối màu vàng."}
-    ]},
-    {"k": "dialog", "h": "Nghe: Bạn tên là gì?", "lang": "zh-CN", "note": "Buổi học tối đầu tiên, cô giáo hỏi tên học viên mới. Nghe lần 1: học viên tên gì? Lần 2: tìm các vần -n và -ng.", "lines": [
-      {"s": "老师", "g": "f", "t": "晚上好！你叫什么名字？", "py": "Wǎnshang hǎo! Nǐ jiào shénme míngzi?", "vi": "Chào buổi tối! Em tên là gì?"},
-      {"s": "学生", "g": "m", "t": "老师好！我叫黄文明。", "py": "Lǎoshī hǎo! Wǒ jiào Huáng Wénmíng.", "vi": "Em chào cô! Em tên là Hoàng Văn Minh."},
-      {"s": "老师", "g": "f", "t": "你家远吗？", "py": "Nǐ jiā yuǎn ma?", "vi": "Nhà em có xa không?"},
-      {"s": "学生", "g": "m", "t": "不远，很近。", "py": "Bù yuǎn, hěn jìn.", "vi": "Không xa ạ, rất gần."},
-      {"s": "老师", "g": "f", "t": "今天很冷，你冷吗？", "py": "Jīntiān hěn lěng, nǐ lěng ma?", "vi": "Hôm nay lạnh quá, em có lạnh không?"},
-      {"s": "学生", "g": "m", "t": "我不冷，谢谢老师！", "py": "Wǒ bù lěng, xièxie lǎoshī!", "vi": "Em không lạnh, cảm ơn cô!"}
-    ], "qs": [
-      {"q": "Học viên tên là gì?", "o": ["黄文明 Huáng Wénmíng", "王文明 Wáng Wénmíng", "黄明 Huáng Míng"], "a": 0, "e": "我叫黄文明 – 黄 huáng (uang) khác 王 wáng (uang không có h)."},
-      {"q": "Nhà học viên có xa không?", "o": ["Rất xa", "Không xa, rất gần"], "a": 1, "e": "不远，很近 – 近 jìn (in) = gần."},
-      {"q": "Học viên có thấy lạnh không?", "o": ["Có", "Không"], "a": 1, "e": "我不冷 – 冷 lěng (eng) = lạnh."}
-    ]},
-    {"k": "read", "h": "Đọc: Gấu trúc con hỏi mẹ", "title": "云在哪儿？", "text": "晚上，天很冷。小熊猫问妈妈：“妈妈，云在哪儿？”\n\n妈妈说：“云很远，在天上。”", "py": "Wǎnshang, tiān hěn lěng. Xiǎo xióngmāo wèn māma: “Māma, yún zài nǎr?”\n\nMāma shuō: “Yún hěn yuǎn, zài tiānshang.”", "vi": "Buổi tối, trời rất lạnh. Gấu trúc con hỏi mẹ: “Mẹ ơi, mây ở đâu ạ?”\n\nMẹ nói: “Mây ở rất xa, trên bầu trời.”", "gloss": [
-      {"w": "在", "py": "zài", "vi": "ở"},
-      {"w": "哪儿", "py": "nǎr", "vi": "ở đâu"},
-      {"w": "天上", "py": "tiānshang", "vi": "trên trời"}
-    ], "qs": [
-      {"q": "Ai hỏi mẹ?", "o": ["小熊猫 – gấu trúc con", "小明", "老师"], "a": 0, "e": "小熊猫问妈妈。"},
-      {"q": "Mây ở đâu?", "o": ["Ở rất xa, trên trời", "Ở trong nhà", "Ở gần cửa"], "a": 0, "e": "云很远，在天上。"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "门", "py": "mén", "hv": "môn", "parts": "Tượng hình cánh cửa (phồn thể 門 có hai cánh)", "strokes": 3, "vi": "cửa", "words": "门口 (cửa ra vào), 我们 (们 có 门 gợi âm)"},
-      {"c": "天", "py": "tiān", "hv": "thiên", "parts": "一 (bầu trời) ở trên 大 (người dang tay)", "strokes": 4, "vi": "trời – khoảng không trên đầu người", "words": "今天, 天气 (thời tiết)"},
-      {"c": "名", "py": "míng", "hv": "danh", "parts": "夕 (tịch – buổi tối) + 口 (miệng)", "strokes": 6, "vi": "tên – trời tối không thấy mặt, phải gọi tên", "words": "名字, 有名 (nổi tiếng)"},
-      {"c": "东", "py": "dōng", "hv": "đông", "parts": "Phồn thể 東 = 日 (mặt trời) mọc sau 木 (cây)", "strokes": 5, "vi": "phía đông", "words": "东西, 东方"},
-      {"c": "云", "py": "yún", "hv": "vân", "parts": "二 + 厶: hình đám mây cuộn", "strokes": 4, "vi": "mây", "words": "白云, 多云 (nhiều mây)"},
-      {"c": "听", "py": "tīng", "hv": "thính", "parts": "口 (miệng) + 斤 (cân – gợi âm)", "strokes": 7, "vi": "nghe", "words": "听说, 好听 (hay, êm tai)"}
-    ]},
-    {"k": "speak", "h": "Nói: -n hay -ng?", "tasks": [
-      {"p": "Đọc các cặp -n / -ng, phóng đại động tác cuối âm.", "model": "山，伤；新，星；钱，墙；门，萌。", "py": "shān, shāng; xīn, xīng; qián, qiáng; mén, méng", "vi": "núi, bị thương; mới, sao; tiền, tường; cửa, nảy mầm", "tips": "-n: lưỡi chạm lợi trên. -ng: lưỡi hạ, miệng mở."},
-      {"p": "Hỏi tên bạn bên cạnh và trả lời bằng tên của mình (tra họ tiếng Trung).", "model": "你叫什么名字？— 我叫黄文明。", "py": "Nǐ jiào shénme míngzi? — Wǒ jiào Huáng Wénmíng.", "vi": "Bạn tên là gì? — Mình tên là Hoàng Văn Minh.", "tips": "名字 míngzi: ing ≈ “inh”, 字 thanh nhẹ."},
-      {"p": "Câu luyện vần mũi tự soạn: Buổi tối rất lạnh, gấu trúc ngồi ở cửa nghe nhạc.", "model": "晚上很冷，熊猫在门口听音乐。", "py": "Wǎnshang hěn lěng, xióngmāo zài ménkǒu tīng yīnyuè.", "vi": "Buổi tối rất lạnh, gấu trúc ở cửa nghe nhạc.", "tips": "晚 uan, 冷 eng, 熊 iong, 门 en, 听 ing, 音 in – đủ 6 loại vần mũi."}
-    ]},
-    {"k": "write", "h": "Viết: Viết pinyin đúng quy tắc", "task": "Cho 12 âm tiết ở dạng “thô” (chưa áp dụng quy tắc). Hãy viết lại cho đúng: i (一), ie (也), iou (有), u (五), uo (我), uei (位), ü (鱼), üe (月), üan (远), ün (云), q + ü (去), n + ü (女). Sau đó viết 门 天 名 东 云 听 mỗi chữ 1 dòng.", "min": 12, "model": "i → yī (一) · ie → yě (也) · iou → yǒu (有) · u → wǔ (五) · uo → wǒ (我) · uei → wèi (位) · ü → yú (鱼) · üe → yuè (月) · üan → yuǎn (远) · ün → yún (云) · q + ü → qù (去) · n + ü → nǚ (女)", "modelVi": "Áp dụng quy tắc y, w, bỏ/giữ hai chấm ü.", "tips": ["Không có thanh mẫu: i → y, u → w, ü → yu.", "Hai chấm chỉ giữ sau n, l."], "checklist": ["Đổi đúng y / w", "Bỏ hai chấm sau j q x y", "Giữ hai chấm sau n l", "Dấu thanh đặt đúng vị trí"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "山", "lang": "zh-CN", "q": "Nghe: -n hay -ng?", "o": ["shān – núi", "shāng – bị thương"], "a": 0, "e": "山 shān – kết thúc -n, lưỡi chạm lợi."},
-    {"t": "listen", "say": "星", "lang": "zh-CN", "q": "Nghe và chọn pinyin đúng:", "o": ["xīn", "xīng"], "a": 1, "e": "星 xīng (sao) – ing ≈ “inh”. 新 xīn = mới."},
-    {"t": "listen", "say": "门", "lang": "zh-CN", "q": "Nghe và chọn pinyin đúng:", "o": ["mén", "méng"], "a": 0, "e": "门 mén (cửa) – en ≈ “ân”."},
-    {"t": "listen", "say": "墙", "lang": "zh-CN", "q": "Nghe và chọn pinyin đúng:", "o": ["qián", "qiáng"], "a": 1, "e": "墙 qiáng (tường) – iang, a rõ. 钱 qián (tiền) – ian ≈ “iên”."},
-    {"t": "listen", "say": "云", "lang": "zh-CN", "q": "Nghe và chọn pinyin đúng:", "o": ["yún", "yíng", "wén"], "a": 0, "e": "云 yún – ün ≈ “uyn”, môi tròn."},
-    {"t": "listen", "say": "远", "lang": "zh-CN", "q": "Nghe và chọn pinyin đúng:", "o": ["yuǎn – xa", "wǎn – muộn"], "a": 0, "e": "远 yuǎn – üan ≈ “uyên”, môi tròn. 晚 wǎn – uan ≈ “oan”."},
-    {"t": "listen", "say": "东", "lang": "zh-CN", "q": "Vận mẫu của âm vừa nghe là:", "o": ["ong", "ang", "eng"], "a": 0, "e": "东 dōng – ong ≈ “ung”."},
-    {"t": "mc", "q": "Âm tiết “ü + an”, thanh 3, không có thanh mẫu (远 – xa) viết là:", "o": ["üǎn", "yuǎn", "wǎn"], "a": 1, "e": "ü đứng đầu âm tiết → thêm y, bỏ hai chấm: yuan."},
-    {"t": "mc", "q": "Âm tiết “u + o”, thanh 3 (我 – tôi) viết là:", "o": ["uǒ", "wǒ", "wuǒ"], "a": 1, "e": "u đứng đầu (có vần sau) → thay u bằng w: wo."},
-    {"t": "mc", "q": "Vì sao 去 viết qù mà không có hai chấm trên u?", "o": ["Vì q không bao giờ đi với u thường nên u sau q luôn là ü", "Vì 去 đọc u thường", "Vì thanh 4 không dùng ü"], "a": 0, "e": "Sau j q x, ü bỏ hai chấm mà không gây nhầm lẫn."},
-    {"t": "mc", "q": "Trường hợp nào PHẢI giữ hai chấm ü?", "o": ["nǚ (女)", "qù (去)", "yú (鱼)"], "a": 0, "e": "Sau n, l phải giữ hai chấm vì có nu, lu khác nghĩa (努 nǔ, 路 lù)."},
-    {"t": "mc", "q": "Vận mẫu ian (天 tiān) đọc gần vần nào của tiếng Việt?", "o": ["i-an", "iên", "anh"], "a": 1, "e": "ian ≈ “iên”: 天 tiān ≈ “thiên”, 年 nián ≈ “niên”."},
-    {"t": "match", "q": "Nối vận mẫu với vần tiếng Việt gần đúng:", "pairs": [["en", "ân"], ["eng", "âng"], ["ong", "ung"], ["üan", "uyên"], ["un (uen)", "uân"], ["ing", "inh"]], "e": "Các vần “đọc khác chữ viết” cần nhớ kỹ."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Bạn tên là gì?”", "w": ["什么", "你", "名字", "叫"], "a": "你叫什么名字", "e": "Câu hỏi tiếng Trung giữ trật tự câu trần thuật: 你叫 + 什么名字."},
-    {"t": "dict", "say": "名字", "lang": "zh-CN", "a": "名字", "py": "míngzi", "e": "名字 míngzi – ing + thanh nhẹ."},
-    {"t": "dict", "say": "晚上", "lang": "zh-CN", "a": "晚上", "py": "wǎnshang", "e": "晚上 wǎnshang – uan → wan, ang thanh nhẹ."}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Bảng 16 vận mẫu mũi chia 2 cột -n / -ng; thẻ cặp 山/伤, 新/星, 钱/墙, 门/萌, 晚/远; bảng quy tắc viết pinyin in to; 12 thẻ âm tiết “thô” (i, uo, ü, üan…) để học viên sửa.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: GV đọc “lan – lang, tin – tinh” tiếng Việt, hỏi lớp khác nhau chỗ nào → -n và -ng."},
-      {"t": "20'", "do": "an ang en eng in ing ong: so với vần tiếng Việt; nhấn mạnh en ≈ “ân”, eng ≈ “âng”, ong ≈ “ung”. Luyện cặp tối thiểu, học viên miền Nam được kèm riêng."},
-      {"t": "20'", "do": "Nhóm có i/u/ü đầu: ian (≈ iên – trùng Hán Việt 天 thiên, 年 niên), iang, iong, uan, uang, un (≈ uân), üan (≈ uyên), ün (≈ uyn)."},
-      {"t": "15'", "do": "Trò “Mũi trước – mũi sau” (tay trái -n, tay phải -ng)."},
-      {"t": "15'", "do": "Từ vựng 16 từ; hội thoại “Bạn tên là gì?”; giao bài tập nghe 1–7."},
-      {"t": "10'", "do": "Chữ Hán 门 天 名 东 云 听 – kể chuyện tạo chữ (名 = trời tối gọi tên)."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: đọc nhanh bảng vận mẫu mũi theo cột."},
-      {"t": "30'", "do": "Quy tắc viết pinyin: dạy từng quy tắc với ví dụ, sau đó trò “Thám tử chính tả” – sửa 12 âm tiết thô. Giải thích logic: y/w giúp tách âm tiết; ü bỏ hai chấm sau j q x vì không nhầm được; giữ sau n l vì có nu/lu."},
-      {"t": "15'", "do": "Bài đọc “云在哪儿？” – đọc pinyin, rồi che pinyin đọc chữ Hán."},
-      {"t": "20'", "do": "Nói: hỏi tên vòng tròn cả lớp (你叫什么名字？), câu luyện vần mũi; làm bài tập 8–16."},
-      {"t": "15'", "do": "Viết pinyin đúng quy tắc; chữa lỗi; giao bài về nhà."}
+ "no": 6,
+ "title": "Vận mẫu mũi an en ang eng ong… & quy tắc viết pinyin (y, w, ü, iu/ui/un)",
+ "sub": "-n hay -ng? 山 shān – 伤 shāng · 新 xīn – 星 xīng",
+ "goals": [
+  "Phân biệt vận mẫu mũi trước -n và mũi sau -ng: an/ang, en/eng, in/ing, ian/iang, uan/uang",
+  "Phát âm đúng ian (≈ “iên”), un (≈ “uân”), üan (≈ “uyên”), ün (≈ “uyn”), ong (≈ “ung”)",
+  "Nắm 6 quy tắc viết pinyin: y, w, bỏ/giữ hai chấm ü, viết tắt iu/ui/un, dấu cách âm ’",
+  "Hỏi và nói tên: 你叫什么名字？– 我叫…"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Hai loại âm mũi: -n (mũi trước) và -ng (mũi sau)",
+   "html": "<p>Tiếng Trung có 16 vận mẫu kết thúc bằng âm mũi. Tin vui: tiếng Việt cũng có -n và -ng (lan – lang), nên phần lớn rất dễ. Chỉ cần chú ý vài vần “đọc khác chữ viết”.</p><table><tr><th>Pinyin</th><th>Gần vần tiếng Việt</th><th>Ví dụ</th></tr><tr><td>an</td><td>an</td><td>三 sān, 饭 fàn, 慢 màn</td></tr><tr><td>ang</td><td>ang (miệng mở, vang phía sau)</td><td>忙 máng, 汤 tāng</td></tr><tr><td>en</td><td><b>ân</b></td><td>门 mén, 很 hěn, 人 rén</td></tr><tr><td>eng</td><td><b>âng</b></td><td>冷 lěng, 风 fēng</td></tr><tr><td>in</td><td>in</td><td>新 xīn, 您 nín</td></tr><tr><td>ing</td><td><b>inh</b></td><td>听 tīng, 名 míng</td></tr><tr><td>ong</td><td><b>ung</b> (môi tròn)</td><td>东 dōng, 红 hóng</td></tr><tr><td>ian</td><td><b>iên</b> (KHÔNG đọc “i-an”)</td><td>天 tiān, 钱 qián, 年 nián</td></tr><tr><td>iang</td><td>i-ang (a rõ)</td><td>想 xiǎng, 两 liǎng</td></tr><tr><td>iong</td><td>i-ung</td><td>熊 xióng, 用 yòng</td></tr><tr><td>uan</td><td>oan</td><td>晚 wǎn, 关 guān</td></tr><tr><td>uang</td><td>oang</td><td>黄 huáng, 王 wáng</td></tr><tr><td>uen → un</td><td><b>uân</b></td><td>问 wèn, 春 chūn</td></tr><tr><td>ueng</td><td>uâng (chỉ có weng)</td><td>翁 wēng</td></tr><tr><td>üan</td><td><b>uyên</b></td><td>远 yuǎn, 全 quán</td></tr><tr><td>ün</td><td><b>uyn</b></td><td>云 yún, 军 jūn</td></tr></table><p><b>Mẹo phân biệt</b>: kết thúc <b>-n</b> thì đầu lưỡi chạm lợi trên, miệng hơi khép; kết thúc <b>-ng</b> thì đầu lưỡi hạ xuống, cuống lưỡi nâng chặn hơi, miệng mở.</p><p>⚠️ Người <b>miền Nam</b> hay đọc lẫn an/ang, in/inh, en/eng (lan = lang) – cần luyện kỹ cặp tối thiểu. Người <b>miền Bắc</b> thường làm tốt phần này.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Luyện vận mẫu mũi & cặp -n / -ng",
+   "html": "<p>Đọc từng cặp, phóng đại động tác cuối: -n chạm lưỡi lên lợi, -ng mở miệng.</p>",
+   "items": [
+    {
+     "sym": "an ≈ “an”",
+     "ex": [
+      "三",
+      "饭",
+      "慢",
+      "看",
+      "山"
+     ],
+     "vi": "三 sān (ba) · 饭 fàn (cơm) · 慢 màn (chậm) · 看 kàn (xem) · 山 shān (núi). Kết thúc bằng đầu lưỡi chạm lợi trên.",
+     "pairs": [
+      [
+       "山",
+       "伤"
+      ],
+      [
+       "饭",
+       "放"
+      ]
+     ]
+    },
+    {
+     "sym": "ang ≈ “ang”",
+     "ex": [
+      "忙",
+      "汤",
+      "唱",
+      "上",
+      "胖"
+     ],
+     "vi": "忙 máng (bận) · 汤 tāng (canh) · 唱 chàng (hát) · 上 shàng (trên) · 胖 pàng (béo). Miệng mở, âm vang phía sau."
+    },
+    {
+     "sym": "en ≈ “ân”",
+     "ex": [
+      "门",
+      "很",
+      "人",
+      "本",
+      "真"
+     ],
+     "vi": "门 mén (cửa) · 很 hěn (rất) · 人 rén (người) · 本 běn (quyển) · 真 zhēn (thật). e ở đây là “ơ” ngắn → en ≈ “ân” (门 ≈ “mân”), không đọc “en”.",
+     "pairs": [
+      [
+       "门",
+       "萌"
+      ],
+      [
+       "真",
+       "争"
+      ],
+      [
+       "身",
+       "生"
+      ]
+     ]
+    },
+    {
+     "sym": "eng ≈ “âng”",
+     "ex": [
+      "冷",
+      "风",
+      "朋",
+      "等",
+      "生"
+     ],
+     "vi": "冷 lěng (lạnh) · 风 fēng (gió) · 朋 péng (bạn) · 等 děng (đợi) · 生 shēng (sinh). Gần “âng” tiếng Việt."
+    },
+    {
+     "sym": "in ≈ “in”",
+     "ex": [
+      "新",
+      "您",
+      "今",
+      "林",
+      "进"
+     ],
+     "vi": "新 xīn (mới) · 您 nín (ngài) · 今 jīn (nay) · 林 lín (rừng) · 进 jìn (vào). Như “in” tiếng Việt.",
+     "pairs": [
+      [
+       "新",
+       "星"
+      ],
+      [
+       "今",
+       "京"
+      ],
+      [
+       "林",
+       "零"
+      ]
+     ]
+    },
+    {
+     "sym": "ing ≈ “inh”",
+     "ex": [
+      "听",
+      "名",
+      "星",
+      "请",
+      "冰"
+     ],
+     "vi": "听 tīng (nghe) · 名 míng (tên) · 星 xīng (sao) · 请 qǐng (mời) · 冰 bīng (băng). Như “inh” tiếng Việt."
+    },
+    {
+     "sym": "ong ≈ “ung” (môi tròn)",
+     "ex": [
+      "东",
+      "红",
+      "中",
+      "龙",
+      "空"
+     ],
+     "vi": "东 dōng (đông) · 红 hóng (đỏ) · 中 zhōng (giữa) · 龙 lóng (rồng) · 空 kōng (trống). Gần “<b>ung</b>” – đừng đọc như “ong” tiếng Việt (con ong) vốn mở miệng rộng hơn."
+    },
+    {
+     "sym": "ian ≈ “iên”",
+     "ex": [
+      "天",
+      "钱",
+      "年",
+      "面",
+      "点"
+     ],
+     "vi": "天 tiān (trời) · 钱 qián (tiền) · 年 nián (năm) · 面 miàn (mì) · 点 diǎn (điểm). Viết a nhưng đọc gần “<b>iên</b>”: 天 tiān ≈ “thiên”, 年 nián ≈ “niên” – trùng cả âm Hán Việt, rất dễ nhớ!",
+     "pairs": [
+      [
+       "钱",
+       "墙"
+      ],
+      [
+       "年",
+       "娘"
+      ]
+     ]
+    },
+    {
+     "sym": "iang ≈ “i-ang”",
+     "ex": [
+      "想",
+      "两",
+      "香",
+      "讲",
+      "江"
+     ],
+     "vi": "想 xiǎng (muốn) · 两 liǎng (hai) · 香 xiāng (thơm) · 讲 jiǎng (giảng) · 江 jiāng (sông). Ở đây a đọc rõ “a”, không biến thành “ê” như ian."
+    },
+    {
+     "sym": "uan ≈ “oan” · üan ≈ “uyên”",
+     "ex": [
+      "晚",
+      "关",
+      "短",
+      "远",
+      "全",
+      "选"
+     ],
+     "vi": "uan: 晚 wǎn (muộn) · 关 guān (đóng) · 短 duǎn (ngắn). üan (sau j q x y): 远 yuǎn (xa) · 全 quán (toàn bộ) · 选 xuǎn (chọn) – tròn môi ü rồi “ên”: ≈ “uyên”.",
+     "pairs": [
+      [
+       "晚",
+       "远"
+      ],
+      [
+       "关",
+       "光"
+      ]
+     ]
+    },
+    {
+     "sym": "uang ≈ “oang”",
+     "ex": [
+      "黄",
+      "王",
+      "床",
+      "光",
+      "双"
+     ],
+     "vi": "黄 huáng (vàng) · 王 wáng (vua; họ Vương) · 床 chuáng (giường) · 光 guāng (ánh sáng) · 双 shuāng (đôi).",
+     "pairs": [
+      [
+       "黄",
+       "环"
+      ]
+     ]
+    },
+    {
+     "sym": "un (= uen) ≈ “uân”",
+     "ex": [
+      "问",
+      "春",
+      "困",
+      "论",
+      "孙"
+     ],
+     "vi": "问 wèn (hỏi) · 春 chūn (xuân) · 困 kùn (buồn ngủ) · 论 lùn (luận) · 孙 sūn (cháu). Viết un nhưng có “ơ” ẩn (u-ơ-n) ≈ “<b>uân</b>”: 春 chūn ≈ “chuân”."
+    },
+    {
+     "sym": "ün ≈ “uyn”",
+     "ex": [
+      "云",
+      "军",
+      "群",
+      "运",
+      "训"
+     ],
+     "vi": "云 yún (mây) · 军 jūn (quân) · 群 qún (bầy) · 运 yùn (vận) · 训 xùn (huấn). Tròn môi ü rồi kết thúc bằng n ≈ “<b>uyn</b>”. Chỉ đi sau j q x y nên viết un/yun."
+    },
+    {
+     "sym": "iong ≈ “i-ung”",
+     "ex": [
+      "熊",
+      "用",
+      "穷",
+      "兄"
+     ],
+     "vi": "熊 xióng (gấu) · 用 yòng (dùng) · 穷 qióng (nghèo) · 兄 xiōng (anh). i lướt sang ong (“ung” tròn môi)."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc viết pinyin – đọc được mọi âm tiết",
+   "html": "<p>Pinyin có vài quy tắc “trang điểm” khi âm tiết <b>không có thanh mẫu</b> (để ranh giới âm tiết rõ ràng) hoặc để viết gọn. Thuộc 7 quy tắc này là đọc – viết đúng mọi âm tiết.</p>",
+   "table": [
+    [
+     "Quy tắc",
+     "Viết thành",
+     "Ví dụ"
     ],
-    "games": [
-      "Mũi trước – mũi sau: GV đọc một chữ; vần -n thì giơ tay trái, -ng giơ tay phải. Đọc nhanh dần, ai sai ngồi xuống.",
-      "Thám tử chính tả: GV viết pinyin sai (uǒ, üè, qǜ, nu cho 女, iǒu…), các đội thi sửa nhanh và nói quy tắc.",
-      "Vòng tròn tên: cả lớp đứng vòng tròn, người cầm bóng hỏi 你叫什么名字？ rồi ném bóng; người nhận trả lời 我叫… và hỏi tiếp."
+    [
+     "1. i đứng đầu âm tiết",
+     "i, in, ing → yi, yin, ying; các vần khác thay i bằng y: ia → ya, ie → ye, iao → yao, iou → you, ian → yan, iang → yang, iong → yong",
+     "一 yī, 音 yīn, 英 yīng; 牙 yá, 也 yě, 要 yào, 有 yǒu, 烟 yān, 羊 yáng, 用 yòng"
     ],
-    "errors": [
-      "Lẫn -n / -ng (an = ang, in = ing), nhất là người miền Nam → luyện cặp tối thiểu, chú ý vị trí lưỡi cuối âm.",
-      "Đọc ian theo chữ viết “i-an” (天 → “thi-an”) → đọc “iên”.",
-      "Đọc en như “en”, eng như “eng” tiếng Việt (门 → “men”) → en ≈ “ân”, eng ≈ “âng”.",
-      "Đọc ong như “ong” tiếng Việt, mở miệng rộng → ong ≈ “ung”, môi tròn.",
-      "Viết pinyin quên quy tắc: uǒ thay vì wǒ, üè thay vì yuè, qǜ thay vì qù, nu thay vì nǚ.",
-      "Đọc un thành “un” (春 → “chun”) → có “ơ” ẩn, ≈ “uân”."
+    [
+     "2. u đứng đầu âm tiết",
+     "u → wu; các vần khác thay u bằng w: ua → wa, uo → wo, uai → wai, uei → wei, uan → wan, uen → wen, uang → wang, ueng → weng",
+     "五 wǔ; 娃 wá, 我 wǒ, 外 wài, 位 wèi, 万 wàn, 问 wèn, 王 wáng"
     ],
-    "homework": "Bài tập game ≥ 80%; đọc bảng 16 vận mẫu mũi mỗi ngày có ghi âm; viết lại 7 quy tắc pinyin kèm 2 ví dụ mỗi quy tắc; viết 门 天 名 东 云 听 mỗi chữ 1 dòng; ghi âm đoạn hỏi – đáp tên."
+    [
+     "3. ü đứng đầu âm tiết",
+     "thêm y, bỏ hai chấm: ü → yu, üe → yue, üan → yuan, ün → yun",
+     "鱼 yú, 月 yuè, 远 yuǎn, 云 yún"
+    ],
+    [
+     "4. ü sau j q x",
+     "bỏ hai chấm (j q x không bao giờ đi với u thường)",
+     "句 jù, 去 qù, 学 xué, 全 quán"
+    ],
+    [
+     "5. ü sau n l",
+     "GIỮ hai chấm (vì nu, lu là âm khác)",
+     "女 nǚ ≠ 努 nǔ; 绿 lǜ ≠ 路 lù"
+    ],
+    [
+     "6. Viết tắt khi có thanh mẫu",
+     "iou → iu, uei → ui, uen → un",
+     "六 liù, 贵 guì, 春 chūn"
+    ],
+    [
+     "7. Dấu cách âm ’",
+     "âm tiết bắt đầu bằng a, o, e đứng sau âm tiết khác",
+     "企鹅 qǐ'é (2 âm tiết) ≠ 切 qiē (1 âm tiết)"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "一",
+     "py": "yī",
+     "vi": "i đứng một mình → yi"
+    },
+    {
+     "t": "五",
+     "py": "wǔ",
+     "vi": "u đứng một mình → wu"
+    },
+    {
+     "t": "鱼",
+     "py": "yú",
+     "vi": "ü → yu, bỏ hai chấm"
+    },
+    {
+     "t": "去",
+     "py": "qù",
+     "vi": "q + ü → qu, bỏ hai chấm"
+    },
+    {
+     "t": "女",
+     "py": "nǚ",
+     "vi": "n + ü → giữ hai chấm"
+    },
+    {
+     "t": "企鹅",
+     "py": "qǐ'é",
+     "vi": "Chim cánh cụt; dấu cách âm đứng trước âm tiết é để phân biệt ranh giới hai âm tiết."
+    }
+   ],
+   "tips": [
+    "Thấy <b>yu, yue, yuan, yun</b> → luôn đọc ü. Thấy <b>ju, qu, xu</b> → luôn đọc ü. Thấy <b>nu, lu</b> → u thường; <b>nü, lü</b> → ü.",
+    "Gõ máy tính: ü gõ bằng phím <b>v</b> (nǚ → nv, lǜ → lv).",
+    "Tên riêng viết hoa chữ cái đầu: Yúnxiàn Chéng, Yèshā Chéng, Wáng lǎoshī."
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ vựng (生词 shēngcí)",
+   "items": [
+    {
+     "w": "忙",
+     "py": "máng",
+     "hv": "mang",
+     "pos": "adj",
+     "vi": "bận",
+     "ex": "你忙吗？— 我很忙。",
+     "exPy": "Nǐ máng ma? — Wǒ hěn máng.",
+     "exVi": "Bạn bận không? — Tôi rất bận."
+    },
+    {
+     "w": "慢",
+     "py": "màn",
+     "hv": "mạn",
+     "pos": "adj",
+     "vi": "chậm",
+     "ex": "请慢一点儿说。",
+     "exPy": "Qǐng màn yìdiǎnr shuō.",
+     "exVi": "Làm ơn nói chậm một chút."
+    },
+    {
+     "w": "门",
+     "py": "mén",
+     "hv": "môn",
+     "pos": "n",
+     "vi": "cửa",
+     "ex": "请开门。",
+     "exPy": "Qǐng kāi mén.",
+     "exVi": "Làm ơn mở cửa."
+    },
+    {
+     "w": "很",
+     "py": "hěn",
+     "hv": "ngận",
+     "pos": "adv",
+     "vi": "rất",
+     "ex": "我很好。",
+     "exPy": "Wǒ hěn hǎo.",
+     "exVi": "Tôi khoẻ."
+    },
+    {
+     "w": "冷",
+     "py": "lěng",
+     "hv": "lãnh",
+     "pos": "adj",
+     "vi": "lạnh",
+     "ex": "今天很冷。",
+     "exPy": "Jīntiān hěn lěng.",
+     "exVi": "Hôm nay rất lạnh."
+    },
+    {
+     "w": "天",
+     "py": "tiān",
+     "hv": "thiên",
+     "pos": "n",
+     "vi": "trời; ngày",
+     "ex": "天很蓝。",
+     "exPy": "Tiān hěn lán.",
+     "exVi": "Trời rất xanh."
+    },
+    {
+     "w": "听",
+     "py": "tīng",
+     "hv": "thính",
+     "pos": "v",
+     "vi": "nghe",
+     "ex": "我听音乐。",
+     "exPy": "Wǒ tīng yīnyuè.",
+     "exVi": "Tôi nghe nhạc."
+    },
+    {
+     "w": "名字",
+     "py": "míngzi",
+     "hv": "danh tự",
+     "pos": "n",
+     "vi": "tên",
+     "ex": "你叫什么名字？",
+     "exPy": "Nǐ jiào shénme míngzi?",
+     "exVi": "Bạn tên là gì?"
+    },
+    {
+     "w": "东西",
+     "py": "dōngxi",
+     "hv": "đông tây",
+     "pos": "n",
+     "vi": "đồ vật, đồ",
+     "ex": "你买什么东西？",
+     "exPy": "Nǐ mǎi shénme dōngxi?",
+     "exVi": "Bạn mua đồ gì?"
+    },
+    {
+     "w": "晚上",
+     "py": "wǎnshang",
+     "hv": "vãn thượng",
+     "pos": "n",
+     "vi": "buổi tối",
+     "ex": "晚上好！",
+     "exPy": "Wǎnshang hǎo!",
+     "exVi": "Chào buổi tối!"
+    },
+    {
+     "w": "熊猫",
+     "py": "xióngmāo",
+     "hv": "hùng miêu",
+     "pos": "n",
+     "vi": "gấu trúc",
+     "ex": "熊猫很可爱。",
+     "exPy": "Xióngmāo hěn kě’ài.",
+     "exVi": "Gấu trúc rất đáng yêu."
+    },
+    {
+     "w": "云",
+     "py": "yún",
+     "hv": "vân",
+     "pos": "n",
+     "vi": "mây",
+     "ex": "天上有白云。",
+     "exPy": "Tiānshang yǒu bái yún.",
+     "exVi": "Trên trời có mây trắng."
+    },
+    {
+     "w": "远",
+     "py": "yuǎn",
+     "hv": "viễn",
+     "pos": "adj",
+     "vi": "xa",
+     "ex": "你家远吗？",
+     "exPy": "Nǐ jiā yuǎn ma?",
+     "exVi": "Nhà bạn có xa không?"
+    },
+    {
+     "w": "新",
+     "py": "xīn",
+     "hv": "tân",
+     "pos": "adj",
+     "vi": "mới",
+     "ex": "这是我的新书。",
+     "exPy": "Zhè shì wǒ de xīn shū.",
+     "exVi": "Đây là sách mới của tôi."
+    },
+    {
+     "w": "问",
+     "py": "wèn",
+     "hv": "vấn",
+     "pos": "v",
+     "vi": "hỏi",
+     "ex": "我问老师。",
+     "exPy": "Wǒ wèn lǎoshī.",
+     "exVi": "Tôi hỏi giáo viên."
+    },
+    {
+     "w": "黄",
+     "py": "huáng",
+     "hv": "hoàng",
+     "pos": "adj",
+     "vi": "vàng (màu); họ Hoàng",
+     "ex": "香蕉是黄的。",
+     "exPy": "Xiāngjiāo shì huáng de.",
+     "exVi": "Chuối màu vàng."
+    }
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Bạn tên là gì?",
+   "lang": "zh-CN",
+   "note": "Buổi học tối đầu tiên, cô giáo hỏi tên học viên mới. Nghe lần 1: học viên tên gì? Lần 2: tìm các vần -n và -ng.",
+   "lines": [
+    {
+     "s": "老师",
+     "g": "f",
+     "t": "晚上好！你叫什么名字？",
+     "py": "Wǎnshang hǎo! Nǐ jiào shénme míngzi?",
+     "vi": "Chào buổi tối! Em tên là gì?"
+    },
+    {
+     "s": "学生",
+     "g": "m",
+     "t": "老师好！我叫黄文明。",
+     "py": "Lǎoshī hǎo! Wǒ jiào Huáng Wénmíng.",
+     "vi": "Em chào cô! Em tên là Hoàng Văn Minh."
+    },
+    {
+     "s": "老师",
+     "g": "f",
+     "t": "你家远吗？",
+     "py": "Nǐ jiā yuǎn ma?",
+     "vi": "Nhà em có xa không?"
+    },
+    {
+     "s": "学生",
+     "g": "m",
+     "t": "不远，很近。",
+     "py": "Bù yuǎn, hěn jìn.",
+     "vi": "Không xa ạ, rất gần."
+    },
+    {
+     "s": "老师",
+     "g": "f",
+     "t": "今天很冷，你冷吗？",
+     "py": "Jīntiān hěn lěng, nǐ lěng ma?",
+     "vi": "Hôm nay lạnh quá, em có lạnh không?"
+    },
+    {
+     "s": "学生",
+     "g": "m",
+     "t": "我不冷，谢谢老师！",
+     "py": "Wǒ bù lěng, xièxie lǎoshī!",
+     "vi": "Em không lạnh, cảm ơn cô!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Học viên tên là gì?",
+     "o": [
+      "黄文明 Huáng Wénmíng",
+      "王文明 Wáng Wénmíng",
+      "黄明 Huáng Míng"
+     ],
+     "a": 0,
+     "e": "我叫黄文明 – 黄 huáng (uang) khác 王 wáng (uang không có h)."
+    },
+    {
+     "q": "Nhà học viên có xa không?",
+     "o": [
+      "Rất xa",
+      "Không xa, rất gần"
+     ],
+     "a": 1,
+     "e": "不远，很近 – 近 jìn (in) = gần."
+    },
+    {
+     "q": "Học viên có thấy lạnh không?",
+     "o": [
+      "Có",
+      "Không"
+     ],
+     "a": 1,
+     "e": "我不冷 – 冷 lěng (eng) = lạnh."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Gấu trúc con hỏi mẹ",
+   "title": "云在哪儿？",
+   "text": "晚上，天很冷。小熊猫问妈妈：“妈妈，云在哪儿？”\n\n妈妈说：“云很远，在天上。”",
+   "py": "Wǎnshang, tiān hěn lěng. Xiǎo xióngmāo wèn māma: “Māma, yún zài nǎr?”\n\nMāma shuō: “Yún hěn yuǎn, zài tiānshang.”",
+   "vi": "Buổi tối, trời rất lạnh. Gấu trúc con hỏi mẹ: “Mẹ ơi, mây ở đâu ạ?”\n\nMẹ nói: “Mây ở rất xa, trên bầu trời.”",
+   "gloss": [
+    {
+     "w": "在",
+     "py": "zài",
+     "vi": "ở"
+    },
+    {
+     "w": "哪儿",
+     "py": "nǎr",
+     "vi": "ở đâu"
+    },
+    {
+     "w": "天上",
+     "py": "tiānshang",
+     "vi": "trên trời"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Ai hỏi mẹ?",
+     "o": [
+      "小熊猫 – gấu trúc con",
+      "小明",
+      "老师"
+     ],
+     "a": 0,
+     "e": "小熊猫问妈妈。"
+    },
+    {
+     "q": "Mây ở đâu?",
+     "o": [
+      "Ở rất xa, trên trời",
+      "Ở trong nhà",
+      "Ở gần cửa"
+     ],
+     "a": 0,
+     "e": "云很远，在天上。"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "门",
+     "py": "mén",
+     "hv": "môn",
+     "parts": "Tượng hình cánh cửa (phồn thể 門 có hai cánh)",
+     "strokes": 3,
+     "vi": "cửa",
+     "words": "门口 (cửa ra vào), 我们 (们 có 门 gợi âm)"
+    },
+    {
+     "c": "天",
+     "py": "tiān",
+     "hv": "thiên",
+     "parts": "一 (bầu trời) ở trên 大 (người dang tay)",
+     "strokes": 4,
+     "vi": "trời – khoảng không trên đầu người",
+     "words": "今天, 天气 (thời tiết)"
+    },
+    {
+     "c": "名",
+     "py": "míng",
+     "hv": "danh",
+     "parts": "夕 (tịch – buổi tối) + 口 (miệng)",
+     "strokes": 6,
+     "vi": "tên – trời tối không thấy mặt, phải gọi tên",
+     "words": "名字, 有名 (nổi tiếng)"
+    },
+    {
+     "c": "东",
+     "py": "dōng",
+     "hv": "đông",
+     "parts": "Phồn thể 東 = 日 (mặt trời) mọc sau 木 (cây)",
+     "strokes": 5,
+     "vi": "phía đông",
+     "words": "东西, 东方"
+    },
+    {
+     "c": "云",
+     "py": "yún",
+     "hv": "vân",
+     "parts": "二 + 厶: hình đám mây cuộn",
+     "strokes": 4,
+     "vi": "mây",
+     "words": "白云, 多云 (nhiều mây)"
+    },
+    {
+     "c": "听",
+     "py": "tīng",
+     "hv": "thính",
+     "parts": "口 (miệng) + 斤 (cân – gợi âm)",
+     "strokes": 7,
+     "vi": "nghe",
+     "words": "听说, 好听 (hay, êm tai)"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: -n hay -ng?",
+   "tasks": [
+    {
+     "p": "Đọc các cặp -n / -ng, phóng đại động tác cuối âm.",
+     "model": "山，伤；新，星；钱，墙；门，萌。",
+     "py": "shān, shāng; xīn, xīng; qián, qiáng; mén, méng",
+     "vi": "núi, bị thương; mới, sao; tiền, tường; cửa, nảy mầm",
+     "tips": "-n: lưỡi chạm lợi trên. -ng: lưỡi hạ, miệng mở."
+    },
+    {
+     "p": "Hỏi tên bạn bên cạnh và trả lời bằng tên của mình (tra họ tiếng Trung).",
+     "model": "你叫什么名字？— 我叫黄文明。",
+     "py": "Nǐ jiào shénme míngzi? — Wǒ jiào Huáng Wénmíng.",
+     "vi": "Bạn tên là gì? — Mình tên là Hoàng Văn Minh.",
+     "tips": "名字 míngzi: ing ≈ “inh”, 字 thanh nhẹ."
+    },
+    {
+     "p": "Câu luyện vần mũi tự soạn: Buổi tối rất lạnh, gấu trúc ngồi ở cửa nghe nhạc.",
+     "model": "晚上很冷，熊猫在门口听音乐。",
+     "py": "Wǎnshang hěn lěng, xióngmāo zài ménkǒu tīng yīnyuè.",
+     "vi": "Buổi tối rất lạnh, gấu trúc ở cửa nghe nhạc.",
+     "tips": "晚 uan, 冷 eng, 熊 iong, 门 en, 听 ing, 音 in – đủ 6 loại vần mũi."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Viết pinyin đúng quy tắc",
+   "task": "Cho 12 âm tiết ở dạng “thô” (chưa áp dụng quy tắc). Hãy viết lại cho đúng: i (一), ie (也), iou (有), u (五), uo (我), uei (位), ü (鱼), üe (月), üan (远), ün (云), q + ü (去), n + ü (女). Sau đó viết 门 天 名 东 云 听 mỗi chữ 1 dòng.",
+   "min": 12,
+   "model": "i → yī (一) · ie → yě (也) · iou → yǒu (有) · u → wǔ (五) · uo → wǒ (我) · uei → wèi (位) · ü → yú (鱼) · üe → yuè (月) · üan → yuǎn (远) · ün → yún (云) · q + ü → qù (去) · n + ü → nǚ (女)",
+   "modelVi": "Áp dụng quy tắc y, w, bỏ/giữ hai chấm ü.",
+   "tips": [
+    "Không có thanh mẫu: i → y, u → w, ü → yu.",
+    "Hai chấm chỉ giữ sau n, l."
+   ],
+   "checklist": [
+    "Đổi đúng y / w",
+    "Bỏ hai chấm sau j q x y",
+    "Giữ hai chấm sau n l",
+    "Dấu thanh đặt đúng vị trí"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "山",
+   "lang": "zh-CN",
+   "q": "Nghe: -n hay -ng?",
+   "o": [
+    "shān – núi",
+    "shāng – bị thương"
+   ],
+   "a": 0,
+   "e": "山 shān – kết thúc -n, lưỡi chạm lợi."
+  },
+  {
+   "t": "listen",
+   "say": "星",
+   "lang": "zh-CN",
+   "q": "Nghe và chọn pinyin đúng:",
+   "o": [
+    "xīng",
+    "xīn"
+   ],
+   "a": 0,
+   "e": "星 xīng (sao) – ing ≈ “inh”. 新 xīn = mới."
+  },
+  {
+   "t": "listen",
+   "say": "门",
+   "lang": "zh-CN",
+   "q": "Nghe và chọn pinyin đúng:",
+   "o": [
+    "méng",
+    "mén"
+   ],
+   "a": 1,
+   "e": "门 mén (cửa) – en ≈ “ân”."
+  },
+  {
+   "t": "listen",
+   "say": "墙",
+   "lang": "zh-CN",
+   "q": "Nghe và chọn pinyin đúng:",
+   "o": [
+    "qiáng",
+    "qián"
+   ],
+   "a": 0,
+   "e": "墙 qiáng (tường) – iang, a rõ. 钱 qián (tiền) – ian ≈ “iên”."
+  },
+  {
+   "t": "listen",
+   "say": "云",
+   "lang": "zh-CN",
+   "q": "Nghe và chọn pinyin đúng:",
+   "o": [
+    "yíng",
+    "wén",
+    "yún"
+   ],
+   "a": 2,
+   "e": "云 yún – ün ≈ “uyn”, môi tròn."
+  },
+  {
+   "t": "listen",
+   "say": "远",
+   "lang": "zh-CN",
+   "q": "Nghe và chọn pinyin đúng:",
+   "o": [
+    "yuǎn – xa",
+    "wǎn – muộn"
+   ],
+   "a": 0,
+   "e": "远 yuǎn – üan ≈ “uyên”, môi tròn. 晚 wǎn – uan ≈ “oan”."
+  },
+  {
+   "t": "listen",
+   "say": "东",
+   "lang": "zh-CN",
+   "q": "Vận mẫu của âm vừa nghe là:",
+   "o": [
+    "ang",
+    "eng",
+    "ong"
+   ],
+   "a": 2,
+   "e": "东 dōng – ong ≈ “ung”."
+  },
+  {
+   "t": "mc",
+   "q": "Âm tiết “ü + an”, thanh 3, không có thanh mẫu (远 – xa) viết là:",
+   "o": [
+    "üǎn",
+    "yuǎn",
+    "wǎn"
+   ],
+   "a": 1,
+   "e": "ü đứng đầu âm tiết → thêm y, bỏ hai chấm: yuan."
+  },
+  {
+   "t": "mc",
+   "q": "Âm tiết “u + o”, thanh 3 (我 – tôi) viết là:",
+   "o": [
+    "wuǒ",
+    "uǒ",
+    "wǒ"
+   ],
+   "a": 2,
+   "e": "u đứng đầu (có vần sau) → thay u bằng w: wo."
+  },
+  {
+   "t": "mc",
+   "q": "Vì sao 去 viết qù mà không có hai chấm trên u?",
+   "o": [
+    "Vì q không bao giờ đi với u thường nên u sau q luôn là ü",
+    "Vì 去 đọc u thường",
+    "Vì thanh 4 không dùng ü"
+   ],
+   "a": 0,
+   "e": "Sau j q x, ü bỏ hai chấm mà không gây nhầm lẫn."
+  },
+  {
+   "t": "mc",
+   "q": "Trường hợp nào PHẢI giữ hai chấm ü?",
+   "o": [
+    "yú (鱼)",
+    "nǚ (女)",
+    "qù (去)"
+   ],
+   "a": 1,
+   "e": "Sau n, l phải giữ hai chấm vì có nu, lu khác nghĩa (努 nǔ, 路 lù)."
+  },
+  {
+   "t": "mc",
+   "q": "Vận mẫu ian (天 tiān) đọc gần vần nào của tiếng Việt?",
+   "o": [
+    "i-an",
+    "iên",
+    "anh"
+   ],
+   "a": 1,
+   "e": "ian ≈ “iên”: 天 tiān ≈ “thiên”, 年 nián ≈ “niên”."
+  },
+  {
+   "t": "match",
+   "q": "Nối vận mẫu với vần tiếng Việt gần đúng:",
+   "pairs": [
+    [
+     "en",
+     "ân"
+    ],
+    [
+     "eng",
+     "âng"
+    ],
+    [
+     "ong",
+     "ung"
+    ],
+    [
+     "üan",
+     "uyên"
+    ],
+    [
+     "un (uen)",
+     "uân"
+    ],
+    [
+     "ing",
+     "inh"
+    ]
+   ],
+   "e": "Các vần “đọc khác chữ viết” cần nhớ kỹ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Bạn tên là gì?”",
+   "w": [
+    "什么",
+    "你",
+    "名字",
+    "叫"
+   ],
+   "a": "你叫什么名字",
+   "e": "Câu hỏi tiếng Trung giữ trật tự câu trần thuật: 你叫 + 什么名字."
+  },
+  {
+   "t": "dict",
+   "say": "名字",
+   "lang": "zh-CN",
+   "a": "名字",
+   "py": "míngzi",
+   "e": "名字 míngzi – ing + thanh nhẹ."
+  },
+  {
+   "t": "dict",
+   "say": "晚上",
+   "lang": "zh-CN",
+   "a": "晚上",
+   "py": "wǎnshang",
+   "e": "晚上 wǎnshang – uan → wan, ang thanh nhẹ."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Bảng 16 vận mẫu mũi chia 2 cột -n / -ng; thẻ cặp 山/伤, 新/星, 钱/墙, 门/萌, 晚/远; bảng quy tắc viết pinyin in to; 12 thẻ âm tiết “thô” (i, uo, ü, üan…) để học viên sửa.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: GV đọc “lan – lang, tin – tinh” tiếng Việt, hỏi lớp khác nhau chỗ nào → -n và -ng."
+   },
+   {
+    "t": "20'",
+    "do": "an ang en eng in ing ong: so với vần tiếng Việt; nhấn mạnh en ≈ “ân”, eng ≈ “âng”, ong ≈ “ung”. Luyện cặp tối thiểu, học viên miền Nam được kèm riêng."
+   },
+   {
+    "t": "20'",
+    "do": "Nhóm có i/u/ü đầu: ian (≈ iên – trùng Hán Việt 天 thiên, 年 niên), iang, iong, uan, uang, un (≈ uân), üan (≈ uyên), ün (≈ uyn)."
+   },
+   {
+    "t": "15'",
+    "do": "Trò “Mũi trước – mũi sau” (tay trái -n, tay phải -ng)."
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng 16 từ; hội thoại “Bạn tên là gì?”; giao bài tập nghe 1–7."
+   },
+   {
+    "t": "10'",
+    "do": "Chữ Hán 门 天 名 东 云 听 – kể chuyện tạo chữ (名 = trời tối gọi tên)."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: đọc nhanh bảng vận mẫu mũi theo cột."
+   },
+   {
+    "t": "30'",
+    "do": "Quy tắc viết pinyin: dạy từng quy tắc với ví dụ, sau đó trò “Thám tử chính tả” – sửa 12 âm tiết thô. Giải thích logic: y/w giúp tách âm tiết; ü bỏ hai chấm sau j q x vì không nhầm được; giữ sau n l vì có nu/lu."
+   },
+   {
+    "t": "15'",
+    "do": "Bài đọc “云在哪儿？” – đọc pinyin, rồi che pinyin đọc chữ Hán."
+   },
+   {
+    "t": "20'",
+    "do": "Nói: hỏi tên vòng tròn cả lớp (你叫什么名字？), câu luyện vần mũi; làm bài tập 8–16."
+   },
+   {
+    "t": "15'",
+    "do": "Viết pinyin đúng quy tắc; chữa lỗi; giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Mũi trước – mũi sau: GV đọc một chữ; vần -n thì giơ tay trái, -ng giơ tay phải. Đọc nhanh dần, ai sai ngồi xuống.",
+   "Thám tử chính tả: GV viết pinyin sai (uǒ, üè, qǜ, nu cho 女, iǒu…), các đội thi sửa nhanh và nói quy tắc.",
+   "Vòng tròn tên: cả lớp đứng vòng tròn, người cầm bóng hỏi 你叫什么名字？ rồi ném bóng; người nhận trả lời 我叫… và hỏi tiếp."
+  ],
+  "errors": [
+   "Lẫn -n / -ng (an = ang, in = ing), nhất là người miền Nam → luyện cặp tối thiểu, chú ý vị trí lưỡi cuối âm.",
+   "Đọc ian theo chữ viết “i-an” (天 → “thi-an”) → đọc “iên”.",
+   "Đọc en như “en”, eng như “eng” tiếng Việt (门 → “men”) → en ≈ “ân”, eng ≈ “âng”.",
+   "Đọc ong như “ong” tiếng Việt, mở miệng rộng → ong ≈ “ung”, môi tròn.",
+   "Viết pinyin quên quy tắc: uǒ thay vì wǒ, üè thay vì yuè, qǜ thay vì qù, nu thay vì nǚ.",
+   "Đọc un thành “un” (春 → “chun”) → có “ơ” ẩn, ≈ “uân”."
+  ],
+  "homework": "Bài tập game ≥ 80%; đọc bảng 16 vận mẫu mũi mỗi ngày có ghi âm; viết lại 7 quy tắc pinyin kèm 2 ví dụ mỗi quy tắc; viết 门 天 名 东 云 听 mỗi chữ 1 dòng; ghi âm đoạn hỏi – đáp tên."
+ }
 }

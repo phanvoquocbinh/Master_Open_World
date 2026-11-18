@@ -1,0 +1,740 @@
+=== COURSE database-testing
+name: Kiểm thử dữ liệu & ETL
+icon: 🧮
+floor: 8
+room: 807
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Ràng buộc, grain, mapping, đối soát, migration, thời gian/tiền, CDC, checkpoint, rerun và report qua pipeline giả định SQLite/Python có kiểm phục hồi.
+
+## LESSON database-testing-01 | Mô hình dữ liệu và ràng buộc kiểm được
+
+### Chốt một dòng nghĩa là gì
+Trung tâm giả định Thoi Mầm có bảng enrollment và payment_attempt. Một enrollment có thể có nhiều lần thử trả điểm,nên join trực tiếp rồi cộng giá enrollment có nguy cơ nhân tổng;grain là điểm bắt đầu mọi phép kiểm.
+
+### Mô hình nhỏ cho bài lab
+Dùng SQLite trên file riêng,dữ liệu giả và SQL có ghi dialect. Khóa,bất biến,miền và quan hệ cần được nêu trước;không lấy schema ngắn làm bằng chứng đã đủ mọi quy tắc nghiệp vụ.
+~~~text
+students:1row/student
+classes:1row/class
+enrollments:1row/ý định được xác nhận
+payment_attempts:1row/lần thử trả
+raw_events:1row/event nhận từ nguồn
+Một đơn vị điểm là số nguyên trong lab.
+~~~
+
+### Staging giữ vết nguồn
+Giữ sourceFile,sourceLine,batchId,receivedAt và payload giả để truy. Bảng đích chỉ chứa dữ liệu đã kiểm theo hợp đồng,quarantine ghi lỗi có vị trí;không xóa dòng xấu rồi báo số đích nhỏ hơn như không vấn đề.
+~~~text
+{"batchId":"B-L7","sourceLine":2,"id":"EN7","version":1,"qty":2}
+lineage:source->raw->validation->target
+error:line2.qty nếu sai miền
+reconciliation:input=accepted+rejected+loại có giải thích
+~~~
+
+### Bất biến phải ở đúng thời điểm
+Remaining=capacity-confirmed sau commit là rule lab. Nếu projection chậm,cần ngân sách nhất quán trước so;không xem mọi snapshot giữa transaction như trạng thái cuối được cam kết.
+~~~text
+after commit:0<=remaining<=capacity
+confirmed count và remaining theo classId
+retry cùng ý định:không nhân chỗ
+wrong actor:không lộ hoặc sửa dữ liệu
+Nguồn rule và version được lưu.
+~~~
+
+### Đầu ra của tester là phép kiểm
+Với mỗi invariant,viết query/expected và fixture có lỗi chủ đích. Schema diagram đẹp nhưng chưa có oracle hoặc dữ liệu âm sẽ không chứng minh checker phát hiện sai.
+
+PRACTICE: Vẽ mô hình Thoi Mầm,ghi grain,khóa và năm invariant. Tạo fixture tốt/xấu theoid và lineage,chỉ dùng file SQLite lab,không truy dữ liệu công việc.
+Q: Grain của một bảng mô tả gì?
++ Một dòng đại diện cho đối tượng/sự kiện nào
+- Chỉ tên khóa
+- Chỉ số cột
+Q: Bảng staging và bảng đích khác vai trò gì?
++ Giữ dữ liệu nhận vào khác dữ liệu đã kiểm/chuẩn hóa
+- Staging luôn được bỏ kiểm
+- Bảng đích không cần constraint
+
+## LESSON database-testing-02 | Khóa, NULL, CHECK và toàn vẹn tham chiếu
+
+### Constraint là hàng rào ở database
+Primary/unique,NOT NULL,CHECK và foreign key bảo vệ các dạng bấtbiến khác nhau. Quyền và quy tắc qua nhiều row vẫn cần logic/transaction phù hợp;không nhét mọi yêu cầu vào một CHECK.
+
+### Khai báo và bật foreign key trongSQLite
+Bật trước transaction cho từng connection rồi đọc lại để xác nhận. Với SQLite,PRIMARY KEY dạng TEXT thông thường nên ghiNOT NULL khi cần tránh NULL theo hành vi engine,không suy giống mọi DBMS.
+~~~sql
+PRAGMA foreign_keys=ON;
+PRAGMA foreign_keys;
+CREATE TABLE classes(id TEXT PRIMARY KEY NOT NULL,capacity INTEGER NOT NULL CHECK(typeof(capacity)='integer' AND capacity>=0));
+CREATE TABLE enrollments(id TEXT PRIMARY KEY NOT NULL,class_id TEXT NOT NULL REFERENCES classes(id),qty INTEGER NOT NULL CHECK(typeof(qty)='integer' AND qty>0));
+~~~
+
+### CHECK và NULL không thay nhau
+CHECK(qty>0) không tự cấm NULL khi biểu thức raNULL. Thử thiếu,NULL,0,sốdương và FK không tồn tại để biết ràng buộc nào chặn;kiểu affinity của SQLite cũng cần hiểu,không mặc định type động giống schema strict.
+~~~sql
+INSERT INTO classes VALUES('CL7',2);
+INSERT INTO enrollments VALUES('EN7','CL7',1);
+-- Các câu sau là ca âm,chạy riêng và xác nhận bị từ chối:
+INSERT INTO enrollments VALUES('EN8','CL7',NULL);
+INSERT INTO enrollments VALUES('EN9','MISSING',1);
+~~~
+
+### Xác nhận lỗi không để lại ghi một phần
+Một statement bị constraint có thể không rollback mọi statement trước trongtransaction. Testharness phải quyết định rollback theo hợp đồng,lưu số row trước/sau;không catch IntegrityError rồi commit phần đã ghi mà không chủ đích.
+~~~text
+before:classCL7,enrollmentEN7
+negative:thử NULL/duplicate/FK
+after:không có record âm,mọi invariant giữ
+transaction policy:chốt cho lô dữ liệu
+Error evidence dùng id giả và code phù hợp.
+~~~
+
+### Dialect và connection là điều kiện test
+Ghi SQLite version,cấu hình và schema trongmanifest. Một test chạy ở DBMS khác hoặc connection quên PRAGMA có thể cho kết quả khác;report cần đủ điều kiện,không gọi tool sai tùytiện.
+
+PRACTICE: Nộp constraint matrix10 ca với NULL,unique,CHECK và FK,bằng chứng before/after. Kiểm hai connection độc lập về foreign_keys,có rollback theo chính sách lô lab.
+Q: CHECK(qty>0) có tự cấm NULL trongSQLite không?
++ Không,cần NOT NULL nếu bắt buộc
+- Có luôn
+- Chỉ khi có ORDER BY
+Q: SQLite foreign keys cần kiểm cấu hình gì?
++ Bật và xác nhận cho từng connection phù hợp
+- Chỉ khai báo một lần trên giấy
+- Không bao giờ cần bật
+
+## LESSON database-testing-03 | Đối soát số lượng và tổng nghiệp vụ
+
+### Count bằng nhau có thể vẫn sai
+Mất EN7 và thêm EN8 giữ count nhưng đổi nghiệp vụ. Đối soát cần khóa,giá trị,tổng theo trạng thái và sai khác có vị trí;chọn invariant có ý nghĩa,không chỉ tạo nhiều SUM ngẫu nhiên.
+
+### Tìm id mất và id dư bằng EXCEPT
+Hai bảng before/after tronglab giúp so tập id. Phép tập không giữ multiplicity như đếm trùng,nên cần kiểm duplicate riêng trước khi suy tập bằng nhau là đủ.
+~~~sql
+SELECT id FROM expected_enrollments EXCEPT SELECT id FROM actual_enrollments;
+SELECT id FROM actual_enrollments EXCEPT SELECT id FROM expected_enrollments;
+SELECT id,COUNT(*) FROM raw_enrollments GROUP BY id HAVING COUNT(*)>1;
+~~~
+
+### Nhóm đúng grain trước join
+Payment_attempt có paid/failed và nhiều row trên enrollment. Chỉsum paid theoenrollment rồi join đích;không SUM enrollment.total sau join trực tiếp hoặc SUM DISTINCT như cách vá chung.
+~~~sql
+WITH p AS(
+ SELECT enrollment_id,SUM(amount_minor) AS paid
+ FROM payments WHERE status='paid' GROUP BY enrollment_id
+) SELECT e.id,e.total_minor,COALESCE(p.paid,0) AS paid
+FROM enrollments e LEFT JOIN p ON p.enrollment_id=e.id
+WHERE e.status='paid' AND COALESCE(p.paid,0)<>e.total_minor;
+~~~
+
+### Đối soát theo nhóm để thấy lệch
+Tổng toàn cục có thể khớp dù phân loại trạng thái sai. So count,money và unique theo ngày/status/currency khi đúng hợp đồng;không cộng các currency hoặc đơn vị khác nhau.
+~~~text
+by status:count,distinctid,summinor
+by date:ngày nghiệp vụ đã chốt
+by currency:không trộn tiền
+rowdiff:field thay đổi theoid
+Expected viết độc lập,không copy actual.
+~~~
+
+### Đủ fixture để kiểm checker
+Một query trả rỗng trên dữ liệu sạch không chứng minh đúng. Cài mất,dư,trùng,sai amount và sai status có chủ đích;checker phải chỉ đúng id/lý do,tránh report toàn lỗi chungchung.
+
+PRACTICE: Tạo before/after có count bằng nhau nhưng mất/dư/trùng và sai tiền. Nộp tám phép đối soát,expected theoid và giải thích grain/NULL/currency.
+Q: Đối soát COUNT trước/sau bằng nhau chứng minh đủ chưa?
++ Chưa,cần khóa,giá trị và tổng theo nhóm
+- Đủ vì dữ liệu bằng nhau
+- Chỉ cần thêm một ảnh
+Q: SUM(order_total) saujoin với nhiều payment có rủi ro gì?
++ Nhân tổng tiền đơn
+- Luôn giảm tổng
+- Không có vì FK
+
+## LESSON database-testing-04 | Mapping ETL và quy tắc biến đổi
+
+### Mapping là hợp đồng biến đổi
+Nguồn CSV của Thoi Mầm có student_code,class_code,qty_text và amount_text. Ghi target,kiểu,đơn vị,nullable,normalization và rule lỗi;không đổi tên cột rồi xemETL đã đúng.
+
+### Ma trận nguồn-đích có ví dụ
+Một dòng mapping cần case tốt/âm và lineage. Chính sách trim,UnicodeNFC hoặc default chỉ được áp khi đã chốt,không tự bỏ dấu hoặc biến chuỗi rỗng thành0.
+~~~text
+source qty_text ->target qty INTEGER
+rule:số nguyên dương,chỉ parse theoformat lab
+empty/null ->reject codeQTY_REQUIRED
+invalid ->reject codeQTY_FORMAT
+lineage:batch/sourceLine->targetId hoặc quarantine
+~~~
+
+### Hàm biến đổi nhỏ kiểm được
+Ví dụ Python dùng Decimal để đọc đơn vị tiền lab có hai sốlẻ,không float nhân100. Chính sách ROUND_HALF_UP là giả định của bài,cần đúng yêu cầu từng currency thật ở bối cảnh khác.
+~~~python
+from decimal import Decimal,ROUND_HALF_UP
+def to_minor(text):
+ value=Decimal(text)
+ if not value.is_finite() or value<0:raise ValueError('amount_invalid')
+ return int((value*100).quantize(Decimal('1'),rounding=ROUND_HALF_UP))
+assert to_minor('1.235')==124
+~~~
+
+### Lineage giữ lý do loại hoặc chuẩn hóa
+Báo raw value có thể nhạy cảm,nên lab dùng chuỗi giả và chỉ giữ field cần thiết. Nếu sửa dữ liệu được phép,ghi rule/version và kết quả;đừng làm thay đổi âmthầm khiến không truy nguồn được.
+~~~text
+sourceLine3.qty_text=" 2 "
+policy:trim được phép ->qty 2
+sourceLine4.qty_text="hai"
+policy:reject ->QTY_FORMAT
+Không convert mọi lỗi thành0hoặc skip imlặng.
+~~~
+
+### So expected bằng bảng tay
+Với mười dòng nhỏ,tính expected độc lập trước chạy pipeline. Dùng cả case có thể quan sát normalization và error,không tính expected bằng chính hàm transform đang kiểm.
+
+PRACTICE: Nộp mapping cho sáu trường,mười fixture với lineage và expected tay. Kiểm trim/Unicode/amount/null theo chính sách,có quarantine rõ khi từ chối.
+Q: Mapping ETL cần nêu gì ngoài tên trường?
++ Kiểu,đơn vị,quy tắc,nullable và nguồn
+- Chỉ alias đẹp
+- Chỉ độ dài file
+Q: Chuẩn hóa chữ/tên nên làm theo gì?
++ Quy tắc nghiệp vụ đã chốt và giữ dấu vết cần thiết
+- Luôn bỏ mọi dấu
+- Luôn cắt độ dài im lặng
+
+## LESSON database-testing-05 | Dữ liệu trùng, thiếu và sai kiểu
+
+### Trùng khóa có thể là nhiều ý nghĩa
+Hai event cùng id có thể là retry,update version mới hoặc conflict cùng version. Quyết định theo khóa,version và payload hash đã chốt;đừng luôn last-write-wins theo giờ nhận.
+
+### Bộ case phân loại rõ
+Nhận event version1 lần đầu,lặp lại cùng payload,version2đổi hợp lệ và version1đến muộn. Cùng version khác payload nên quarantine/raise theo hợp đồng,không ghi đè imlặng.
+~~~text
+E1,v1,payloadA ->insert
+E1,v1,payloadA ->no-op nếu retry
+E1,v2,payloadB ->update hợp lệ
+E1,v1,payloadA sauv2 ->không hạ version
+E1,v2,payloadC ->conflict theo rulelab
+~~~
+
+### Thiếu/null/sai kiểu là chiều riêng
+Staging raw có thể chứa mọi input để báo lỗi,còn đích giữ constraint. Việc một field thiếu khác null có thể ảnh hưởng default/patch semantics,nên expected phải được chốt và kiểm riêng.
+~~~json
+{"id":"E1","qty":2}
+{"id":"E2"}
+{"id":"E3","qty":null}
+{"id":"E4","qty":"2"}
+Bốnrecord cầnexpected theo mapping,khôngcoi tấtcả tựparse.
+~~~
+
+### Quarantine có tổng đối soát
+Giữ sourceLine,field,code và định danh giả,đủ người sửa truy được. Số accepted/rejected/deduplicated phải giải thích tổng input;không để dòng mất không dấu vì catch lỗi rồi continue.
+~~~text
+input10 =accepted7 +rejected2 +duplicate1
+error:{line4,path:qty,code:QTY_REQUIRED}
+error:{line8,path:id/version,code:CONFLICT}
+Dữ liệu riêng tư thật không được đưa vào fixture/report.
+~~~
+
+### Kiểm hậu quả không chỉ error text
+Saurow bị từ chối,đích không đổi ngoài ý muốn,batch status và checkpoint đúng. Nếu allowpartial,cần report rõ;all-or-nothing cần rollback và bằng chứng tác dụng cuối.
+
+PRACTICE: Tạo12event với retry/update/conflict/thiếu/null/sai kiểu,expected từng line. Nộp target snapshot,quarantine và đối soát input/output có mẫu số rõ.
+Q: Hai dòng cùng khóa khác payload cần xử lý sao?
++ Theo quy tắc xung đột,có evidence
+- Luôn lấy dòng cuối không báo
+- Luôn cộng mọi trường
+Q: Dữ liệu bị quarantine nên giữ gì?
++ Vị trí nguồn,lý do và thông tin tối thiểu để sửa
+- Mọi bí mật thật
+- Chỉ bỏ dòng
+
+## LESSON database-testing-06 | Thời gian, múi giờ và tiền tệ
+
+### Instant và ngày địa phương khác nhau
+Timestamp có offset mô tả thời điểm,còn ngày báo cáo có thể theo nơi nghiệp vụ. Chốt timezone,format và precision;không cắt phần ngày UTC rồi xem đúng với mọi báo cáo.
+
+### Chuyển giờ bằng datetime aware
+Ví dụ tự viết dùng offset giả cho fixture,không tên địa danh thật. Chuỗi thiếu offset cần policy,tránh astimezone trên naive làm phụ thuộc timezone máy chạy.
+~~~python
+from datetime import datetime,timezone,timedelta
+instant=datetime.fromisoformat('2030-01-01T23:30:00+00:00')
+local=instant.astimezone(timezone(timedelta(hours=7)))
+assert local.date().isoformat()=='2030-01-02'
+~~~
+
+### Tiền có currency và quy tắc làm tròn
+Lab lưu minor unit nguyên và currencyDLM giả. Cộng total chỉ trong cùng đơn vị,có rule về làm tròn tổng hay từng dòng;hai cách có thể lệch dù đều tính đúng công thức riêng.
+~~~text
+price105minor,qty 3,discount10%
+lab rule:round-half-up trên discount tổng
+315*10%=31.5 ->32minor
+net283minor
+Rule khác ->expected khác,cần version.
+~~~
+
+### Case biên thời gian và decimal
+Thử quanh nửa đêm,offset khác,cùng instant khác chuỗi và số gần ngưỡng làm tròn. Không dùng float expected để kiểm Decimal,cũng không trộn precision cao và format hiển thị.
+~~~text
+time:trước/đúng/sau ranh ngày nghiệp vụ
+source:thiếu offset,sai format,precision khác
+money:1.234/1.235/1.236 theo rulelab
+currency:mismatch phải được phân loại
+Expected tính độc lập và ghi đơn vị.
+~~~
+
+### Ghi môi trường có ảnh hưởng
+Timezone database/runtime,cấu hình locale và schema version có thể đổi parse/format. Manifest phải đủ để tái hiện;không đổi toàn máy công việc chỉ để thử lab,khoanh trongharness/fixture.
+
+PRACTICE: Viết12 ca timestamp/money có ngày biên,offset và rounding,có hai currency giả. Nộp expected instant/date/minor,rule/version và một ví dụ sai khi cắt ngày UTC.
+Q: Tiền nên kiểm đơn vị thế nào?
++ Currency,minor unit và quy tắc rounding
+- Chỉ nhìn số có dấu chấm
+- Luôn dùng float equals
+Q: Timestamp không có offset cần gì?
++ Chính sách timezone rõ trước quy đổi
+- Tự xem là UTC ở mọi nơi
+- Cắt hết phần giờ
+
+## LESSON database-testing-07 | Migration tiến lùi và tương thích
+
+### Migration đổi cấu trúc và nghĩa dữ liệu
+Thêm currency cho đơn cũ cần biết giả định backfill có đúng không. App đọc/ghi trong cửa sổ chuyển đổi có thể dùng schema khác,phải kiểm compatibility và thứ tự rollout theo kế hoạch lab.
+
+### Thử trên bản sao có fixture cũ
+Snapshot before có pending/confirmed/cancelled và row biên. Chạy migration trên filecopy,đối soát id,tiền,status và constraint;không thử đầu tiên trên dữ liệu đang dùng.
+~~~text
+before:LABschema1,snapshot hash được ghi
+apply:migrationM2
+after:rowcount,key,amount/status/currency đúng
+appcompatibility:reader/writer theo version hỗ trợ
+backup restore được thử,trong phạm vi filelab
+~~~
+
+### Ví dụ thêm field có backfill minh bạch
+SQLite lab thêm field nullable rồi backfill theo giả định toàn đơn cũ dùngDLM. Nếu muốn NOT NULL thật,cần migration phù hợp engine và dữ liệu;không gọi bước UPDATE là đã áp constraint mới.
+~~~sql
+BEGIN;
+ALTER TABLE orders ADD COLUMN currency TEXT;
+UPDATE orders SET currency='DLM' WHERE currency IS NULL;
+SELECT COUNT(*) FROM orders WHERE currency IS NULL;
+COMMIT;
+-- Ràng buộc NOT NULL mới cần bước schema riêng theo engine và kế hoạch đã kiểm.
+~~~
+
+### Rollback không tự lấy lại thông tin
+Xóa column có thể mất giá trị đã nhập,còn row mới saumigration không có trong backup cũ. Chốt điểm dừng ghi,phục hồi và reconciliation,gồm khả năng chuyển ngược có giới hạn.
+~~~text
+failure points:giữa DDL/backfill/constraint
+expected:rollback/restore theo từng giai đoạn
+new writes:giữ/chuyển/đối soát có policy
+verify:không mất/trùng và app còn đọc được
+Không hứa rollback mọi thay đổi đều tự động an toàn.
+~~~
+
+### Lần chạy lại cần expected riêng
+Migration có version/checksum,nếu đã áp thìno-op hoặc báo đã áp theotool. Không catch mọi SQL error rồi đánh thành công,cũng không áp lại UPDATE làm ghi đè dữ liệu mới không chủ đích.
+
+PRACTICE: Nộp migration test plan với fixture schema cũ,backfill,appcompatibility và ba failurepoint. Thử restore trên filecopy,đối soát id/tiền/status và ghi khả năng rollback còn thiếu.
+Q: Migration cần kiểm gì về dữ liệu cũ?
++ Giữ nghĩa,backfill,ràng buộc và đối soát
+- Chỉ schema tạo được
+- Chỉ tên cột mới
+Q: Rollback schema có luôn khôi phục dữ liệu đã mất không?
++ Không
+- Có luôn
+- Có nếu xóa column
+
+## LESSON database-testing-08 | CDC, watermark và dữ liệu đến muộn
+
+### Event time và vị trí đọc khác nhau
+CDC mô phỏng của Thoi Mầm có sourceSeq tăng theo log và occurredAt theo sự kiện. Dòng đến muộn có thể mang thời gian cũ nhưng vị trí log mới;đừng dùng một timestamp thay mọi ý nghĩa thứ tự.
+
+### Cursor theo hợp đồng nguồn
+Nếu nguồn chỉ có updatedAt,cặp thời gian/id giúp phân xử tie trong điều kiện đã chốt,chưa giải mọi update/lateness. Với log CDC,cần position,retention,snapshot ban đầu và delete/tombstone theo hợp đồng.
+~~~text
+sourceSeq41:EN7,v1,occurredAt ngày2
+sourceSeq42:EN8,v1,occurredAt ngày1 đến muộn
+sourceSeq43:EN7,v2,delete
+Checkpoint43 nghĩa đã áp đầy đủ tới vị trí đó
+Không dùng occurredAt ngày2đểbỏseq42.
+~~~
+
+### Lookback cần dedup và giới hạn
+Với timestamp polling,đọc chồng window để bắt một phần lateness rồi upsert theo khóa/version. Chốt cửa sổ và cutoff/snapshot;dòng muộn quá window vẫn có thể sót,nên cần reconciliation phù hợp,chưa đủ để hứa không mất tuyệt đối.
+~~~sql
+SELECT id,version,updated_at,payload FROM source_rows
+WHERE updated_at>=:lookback_start AND updated_at<:cutoff
+ORDER BY updated_at,id;
+-- Tham số được cấp bởi harness lab;cutoff vàwindow được ghi.
+~~~
+
+### Delete không để event cũ hồi sinh
+Nếu nguồn có version theoentity,giữ tombstone hoặc cơ chế tương đương để chặn upsert version cũ saudelete. Version phải có nghĩa đã cam kết,cùng version khác payload cần conflict handling trước áp dụng.
+~~~text
+EN7 v1 insert ->live
+EN7 v3 delete ->deleted,tombstone v3
+EN7 v2 update đến muộn ->không hồi sinh
+EN7 v3 khác payload ->conflict theo policy
+Không tin thứ tự giờ nhận là thứ tự nghiệp vụ.
+~~~
+
+### Thiết kế ca có timestamp trùng và dữ liệu đến muộn
+Fixture có hai id cùng timestamp,một update cùng id,một delete và event muộn ngoài window. Nêu kết quả trong phạm vi bảo đảm của nguồn và case cần đối soát toàn bộ định kỳ;không đổ mọi missing vào SQL mà không xem contract.
+
+PRACTICE: Tạo mười event CDC giả với tie,late,delete vàout-of-order. Nộp cursor/checkpoint expected sau từng batch,giới hạn lookback và đối soát phát hiện dữ liệu ngoài window.
+Q: Watermark timestamp dùng dấu>có thể bỏ sót gì?
++ Dòng cùng timestamp hoặc đến muộn theo mô hình nguồn
+- Chỉ cột text
+- Không thể bỏ sót
+Q: CDC event đến sai thứ tự nên kiểm gì?
++ Version/sequence và quy tắc cập nhật/xóa
+- Luôn áp theo giờ nhận
+- Luôn bỏ mọi update
+
+## LESSON database-testing-09 | Idempotency và chạy lại pipeline
+
+### Rerun là tình huống bình thường
+Job ETL có thể crash sau ghi đích trước ghi checkpoint hoặc nhận lại cùng batch. Thiết kế mục tiêu idempotent trên tác dụng,không nhất thiết chỉ một request;mỗi điểm dừng cần expected phục hồi.
+
+### Upsert theo version nhưng kiểm conflict trước
+SQLite ON CONFLICT minh họa nhận bản mới hơn theoid;version bằng payload khác phải được phát hiện trước đoạn này. Nó không tự đảm bảo mọi quy tắc hoặc checkpoint nếu hai việc nằm transaction khác.
+~~~sql
+INSERT INTO target_rows(id,version,qty,deleted) VALUES(:id,:version,:qty,:deleted)
+ON CONFLICT(id) DO UPDATE SET
+ version=excluded.version,qty=excluded.qty,deleted=excluded.deleted
+WHERE excluded.version>target_rows.version;
+~~~
+
+### Đích và checkpoint cùng transaction khi phù hợp
+Lab một SQLite file có thể commit thay đổi đích và checkpoint cùng connection. Với hệ phân tán khác,kế hoạch atomicity/recovery có thể cần thiết kế khác,không giả định transaction phủmọi nơi.
+~~~python
+with conn:
+ for row in validated_batch:
+  conn.execute(upsert_sql,row)
+ conn.execute('UPDATE checkpoints SET position=? WHERE job=?',(last_position,'LAB-ETL'))
+# conn,upsert_sql vàfixture được khởi tạo theo hợp đồng lab.
+# Exception phải lanra để context manager rollback.
+~~~
+
+### Crash matrix kiểm trạng thái cuối
+Chèn failure hook chỉ tronglab ở trước ghi,giữa rows và trước/sau commit. Khởi động lại,đọc đúng checkpoint và rerun;assert target bấtbiến,không trùng và quarantine vẫn truy được.
+~~~text
+C1 beforewrite ->target/checkpoint cũ
+C2 giữa batch ->rollback theo chính sách all-or-nothing
+C3 trước commit ->cảhai chưa commit
+C4 saucommit nhưng trước ack ->rerun không nhân tác dụng
+Số record/phiên bản phải được đối soát.
+~~~
+
+### Không bỏ lỗi để job xanh
+Catch rồi continue có thể làm checkpoint vượt dòng chưa áp dụng. Nếu partial processing,định nghĩa cách đánh dấu và retry từng row rõ;report không được gọi đủ lô khi còn dòng không có quyết định.
+
+PRACTICE: Thử cùng batch ba lần và bốn crashpoint trên lab SQLite. Nộp target/checkpoint trước/sau,reconciliation và conflict cùng version;chỉ dùng filecopy có backup.
+Q: Chạy lại cùng batch nên giữ bất biến gì khi yêu cầu idempotent?
++ Không nhân record hoặc tác dụng
+- Mỗi lần luôn thêm bản copy
+- Luôn trả200
+Q: Lỗi giữa ghi đích và checkpoint có rủi ro gì?
++ Rerun có thể đọc/ghi lại nếu không thiết kế phục hồi
+- Không có vì có log
+- Chỉ đổi màu report
+
+## LESSON database-testing-10 | Kiểm báo cáo, phân nhóm và rounding
+
+### Report là một sản phẩm dữ liệu
+Báo cáo số đăng ký theo ngày/status cần chốt grain,ngày nghiệp vụ,currency,lọc và rounding. UI hiển thị đẹp vẫn có thể cộng payment failed hoặc nhân đơn saujoin;nên oracle phải độc lập.
+
+### Tổng hợp từ nguồn canonical
+Ví dụ report tính trên enrollment confirmed,mỗi row đúng một ý định theo schema lab. Kiểm row trùng/staging trước,kẻo COUNT hoặc SUM có thể đếm sai ngay cả nguồn.
+~~~sql
+SELECT business_date,currency,COUNT(*) AS n,SUM(total_minor) AS amount
+FROM canonical_enrollments WHERE status='confirmed'
+GROUP BY business_date,currency
+ORDER BY business_date,currency;
+~~~
+
+### Quy tắc rounding phải được thấy
+Tổng phần trăm có thể lệch99.9vì hiển thị từng nhóm;không tự sửa thành100nếu không có rule. Kiểm số gốc,tính formula và format,bao gồm denominator0,trống và NULL.
+~~~text
+A=1,B=1,C=1,total3
+Mỗi nhóm33.3% với1sốlẻ ->tổng99.9%
+policy lab:hiểnthị rounding note hoặc phân bổ đã chốt
+Denominator0:hiểnthị theo rule,không NaN vô nghĩa
+Expected gốc khác format hiểnthị.
+~~~
+
+### Filter và export cũng phải đối soát
+Cùng period/role/filter,UI,CSV và query nên khớp theo hợp đồng,snapshot và quyền. Export không được thêm field riêng tư hoặc bỏ lọc actor;chỉ so tổng không thấy dữ liệu lộ.
+~~~text
+filter:business_dateLAB7,statusconfirmed,currencyDLM
+compare:UI count,total vsCSV/query
+access:actor chỉ thấy phạm vi được giao
+empty range:expected có tiêu đề/không row theo rule
+Snapshot timestamp được ghi.
+~~~
+
+### Dữ liệu nhỏ có expected tay
+Tạo ba ngày,hai currency giả và năm status để biết row nào được tính. Chèn một record sai để checker phát hiện,chứ không chỉ đọc report đang có rồi lấy làm expected.
+
+PRACTICE: Nộp report testmatrix10 ca gồm filter,status,timezone,rounding,empty/null và quyền export. Tính expected bằng tay trên fixture nhỏ,so theoid và tổng riêng currency.
+Q: Report theo ngày cần chốt điều gì?
++ Grain,timezone,lọc trạng thái và rounding
+- Chỉ titlechart
+- Chỉ số trang
+Q: Số phần trăm cộng thành99.9 có luôn là bug không?
++ Không,cần xem quy tắc làm tròn và tổng gốc
+- Luôn bug nghiêm trọng
+- Luôn bỏ qua
+
+## LESSON database-testing-11 | Hiệu năng truy vấn và ngân sách tải
+
+### Query đúng nhưng chậm vẫn cần đánh giá
+Chọn truy vấn nghiệp vụ,ràng buộc tải và phân bố fixture trước đo. SELECT có thể tiêuRAM/CPU hoặc chặn luồng khác dù không ghi;chỉ thử tronglab với ngân sách,không quét production vì có quyền đọc.
+
+### Plan giúp hiểu cách đọc dữ liệu
+EXPLAIN QUERY PLAN là cú pháp SQLite,khác EXPLAIN của DBMS khác. XemSCAN/SEARCH,temp và index cùng cardinality;không gọi mọi SCAN là lỗi hoặc mọi SEARCH là tối ưu.
+~~~sql
+EXPLAIN QUERY PLAN
+SELECT id,total_minor FROM canonical_enrollments
+WHERE student_id=:student AND business_date>=:from_date
+ORDER BY business_date,id;
+~~~
+
+### Thêm index cần đo đánh đổi
+Index ghép student/date/id có thể giúp mẫu query,nên đo trước/sau và chi phíghi/dung lượng. Cơ chế tối ưu tùy engine/data,nên không hứa mọi query cùng nhanh hơn.
+~~~sql
+CREATE INDEX ix_enrollments_student_date
+ON canonical_enrollments(student_id,business_date,id);
+-- Chỉ thêm trong bản lab được tạo riêng.
+-- Đo query và nhập lô sau thay đổi,cùng fixture và điều kiện.
+~~~
+
+### Đo lặp và ghi điều kiện
+Warm/cold cache,dữ liệu ít/lệch và máy phát query có thể đổi kết quả. Nộp số row,phiên bản,plan,median và biến động,không chọn một lượt đẹp hoặc so khiSQL/data đã đổi.
+~~~text
+record:engine/version,rows,distribution,indexes
+record:query/params,warmup,runs
+metrics:elapsed,rows returned,resource khi được cấp
+stop:budget vượt hoặc ảnh hưởng lab ngoài phạm vi
+Không suy mọi workload từ một query.
+~~~
+
+### Nghiệm thu có tiêu chí đúng và tải
+Kết quả truy vấn không đổi sau tối ưu,ngân sách đọc/ghi phù hợp và artifact truy được. Nếu chưa đủ data/máy,ghi chưa đủ bằng chứng,không nhận đạtSLA thật từ lab.
+
+PRACTICE: Tạo fixture vài nghìn row có phân bố lệch,đo một query trước/sauindex tronglab. Nộp plan,params,lặp đo,expected không đổi và chi phíghi/giới hạn.
+Q: EXPLAIN plan cho biết gì?
++ Cách engine dự kiến/thực hiện theo công cụ,không tự chứng minh nhanh
+- Mọi query dùng index đều tốt
+- Chất lượng dữ liệu đúng
+Q: Test query nên giới hạn tải thế nào?
++ Chỉ lab,budget,rowlimit/timeout phù hợp
+- Quét production mọi bảng
+- Không cần vì SELECT
+
+## LESSON database-testing-12 | Bảo vệ dữ liệu và bộ test tổng hợp
+
+### Dữ liệu giả cũng cần có ý nghĩa
+Sinhid,tên,email example.com và quan hệ giả có mục đích. Random mọi trường có thể làm fixture hỏng hết hoặc quá đều,không đại diện phân bố/rủi ro;giữ seed hoặc fixture version để tái hiện.
+
+### Generator nhỏ có quan hệ giữ được
+Ví dụ tự tạo theoindex,không dữ liệu người thật. Bộ test còn cần bad rows có chủ đích tách rõ để kiểm quarantine,không trộn xấu mà không expected.
+~~~python
+students=[{'id':f'ST-L7-{i}','name':f'Học viên Mầm {i}','email':f'student-{i}@example.com'} for i in range(1,6)]
+classes=[{'id':f'CL-L7-{i}','capacity':i+1} for i in range(1,4)]
+assert len({x['id'] for x in students})==5
+~~~
+
+### Minimize và canary trong toàn luồng
+Ngay cả fixture,log,backup,report và error cũng có thể chứa quyền nếu không kiểm. Canary giả giúp thấy dữ liệu không nên log,không dùng secret thật để thử che.
+~~~text
+canary:CANARY-LAB-PRIVATE
+places:raw/quarantine/log/report/backup/artifact
+expected:chỉ nơi policy lab cho phép
+actor/read permissions được chốt
+Cleanup và retention theo phạm vi lab
+~~~
+
+### Bộ fixture cóma trận phủ
+Theo keys,nullable,range,version,late,delete,currency và timezone. Dữ liệu tốt/xấu có oracle và lineage;không chỉ nhiều row giống nhau vì cần đủ số.
+~~~text
+GOOD:valid,update,retry hợp lệ
+BAD:missing,null,type,range,FK,conflict
+TIME:tie,late,out-of-order,delete
+MONEY:unit,currency,rounding
+RECOVERY:crash/rerun/checkpoint
+~~~
+
+### Quyền tối thiểu và phục hồi lab
+Chỉ cấp file/schema fixture và mức quyền cần cho bài,tách backup có id rõ. Không chép data thật sanglab rồi coi là giả vì đã đổi tên;đánh giá dữ liệu nhạy cảm toàn luồng.
+
+PRACTICE: Bàn giao generator/fixture có 20 case đánh dấuGOOD/BAD/TIME/MONEY/RECOVERY,expected,lineage và seed/version. Kiểm canary giả ở log/report/backup,chỉ dùng dữ liệu tự đặt.
+Q: Dữ liệu tổng hợp tốt cần gì?
++ Miền,quan hệ,phân bố và trạng thái có mục đích
+- Chỉ random mọi cột
+- Dùng khách thật
+Q: Che dữ liệu test cần bảo vệ đâu?
++ File,log,report,backup và artifact liên quan
+- Chỉ UI
+- Chỉ tên file
+
+## LESSON database-testing-13 | Dự án: đối soát pipeline đặt lớp giả
+
+### Dự án pipeline Thoi Mầm
+Nguồn event giả chuyển raw->validate/quarantine->canonical->dailyreport. Mục tiêu là chứng minh mapping,đối soát,quyền và phục hồi trên lab,chưa phải kiến trúc ETLproduction được chứng nhận.
+
+### Hợp đồng đầu vào nhỏ nhưng đủ rủi ro
+Mỗi event có sourceSeq,id,version,operation,qty,amountMinor,currency và occurredAt. Chốt quy tắc delete,late,conflict và checkpoint trước code;dùng fixture có sai chủ đích để đánh giá checker.
+~~~text
+raw_events:sourceSeq,id,version,op,payload
+canonical:1row/entity +tombstone/version theo rule
+quarantine:sourceLine,code,path tối thiểu
+checkpoint:job,position
+report:business_date,currency,count,total
+Toàn bộ data và id do lab tự tạo.
+~~~
+
+### Gói chạy có expected và crash hooks
+Tạo script dựng lab,loadfixture,run,assert và report bằng Python/SQLite. Failurehook chỉ trong lab,không catch rồi bỏ lỗi;rerun cùng batch và khởi lại saucrash để đối chiếu state cuối.
+~~~text
+1 setup schema/PRAGMA và fixture
+2 validate mapping và quarantine
+3 applybatch/checkpoint atomic theo thiết kế
+4 run reconciliation/report
+5 injectcrash ->restart ->rerun
+6 verify/cleanup trongfilelab được cấp
+~~~
+
+### Nghiệm thu bằng nhiều invariant
+Ít nhất12query/check về count,key,amount,status,late,delete và trùng. Nộp expected tay cho bộ nhỏ và đo lặp query trên bộ lớn,nêu rõ rule/sourceversion và window được kiểm.
+
+### Bàn giao có lineage và giới hạn
+Người nhận phải lần được sai khác về sourceLine,biết row nhận/loại và tại sao. Báo phần mock,chưa đủ lateness/scale hoặc DBMS khác,không gọi count khớp là mọi dữ liệu đúng.
+~~~text
+accept:mapping và oracle độc lập
+accept:constraint/reconciliation phát hiện lỗi chủ đích
+accept:rerun/crash recovery không mất/trùng
+accept:query đúng và performance có budget
+accept:privacy,manifest,backup và gap rõ
+~~~
+
+PRACTICE: Bàn giao pipeline SQLite/Python giả có 20fixture,12check,mapping,quarantine,lineage,report,rerun và crash recovery. Có migration/restore,đo query và báo cáo phạm vi chưa được chứng minh.
+Q: Dự án ETL cần evidence gì?
++ Mapping,fixture,lineage,reconciliation và rerun/recovery
+- Chỉ một file đích
+- Chỉ số dòng code
+Q: Khi chỉ đối soát một mẫu có thể kết luận gì?
++ Kết quả trong mẫu/phạm vi với giới hạn
+- Mọi dữ liệu tương lai đúng
+- Pipeline không bao giờ mất dữ liệu
+
+## LESSON database-testing-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Chốt hạt dữ liệu trước join/tổng hợp giúp tránh nhân tiền hoặc trộn nhiều mức chi tiết.
+2. CHECK có thể cho giá trị NULL qua vì biểu thức không false,cần ràng buộc hiện diện riêng theo thiết kế.
+3. Một dòng mất và một dòng dư có thể bù count,cần nhiều bất biến và sai khác theoid.
+4. Biến đổi cần expected cụ thể và lineage để truy dữ liệu sai về nguồn,không tự đoán mặc định.
+
+### Dữ liệu và điều kiện biên
+5. Trùng khóa có thể là retry,update hoặc conflict;version/hash và hợp đồng giúp quyết định,không tùy tiện ghi đè.
+6. Khác currency/đơn vị không được cộng tùy ý;dùng số nguyên hoặc decimal đúng hợp đồng và kiểm biên làm tròn.
+7. Nâng schema có thể mất/đổi dữ liệu hoặc phá app cũ,cần fixture phiên bản cũ và kế hoạch phục hồi.
+8. Tie-breaker giúp thứ tự ổn định trong điều kiện nguồn,còn lateness cần lookback/dedup hoặc CDC/reconciliation phù hợp,chưa tự giải bằng mộtcặp khóa.
+
+### Tính đúng và cách điều tra
+9. Idempotency cần ràng buộc theo khóa/phiên bản và atomicity của checkpoint/ghi đích theo thiết kế.
+10. Một số tổng có thể lệch vì ngày nghiệp vụ hoặc status,expected phải tính từ rule và fixture độc lập.
+11. Kế hoạch cần đọc cùng số mẫu,phân bố,thời gian và tác động ghi trong môi trường đại diện.
+12. Fixture phải đủ ca tốt/xấu và lineage,không ghép dữ liệu giả mà phá mọi quan hệ đến mức không giống workload.
+
+### Rủi ro và lựa chọn phương án
+13. Người nhận phải chạy lại được,biết dòng nào được nhận/loại và tại sao,có expected và giới hạn rõ.
+14. Lab dùng PRAGMA foreign_keys=ON ngoài transaction rồi đọc lại;constraint không được thực thi nếu connection không bật theo môi trường.
+15. Chuẩn hóa có thể đổi nghĩa,nên phân biệt lỗi,từ chối,trim/normalize được phép và lưu bản gốc theo chính sách.
+16. Thời điểm và ngày địa phương khác nhau,thiếu timezone có thể mơ hồ;expected theo nguồn và quy tắc đã chốt.
+
+### Dự án, bằng chứng và bàn giao
+17. Định nghĩa nguồn thứ tự và tombstone giúp ngăn event cũ hồi sinh dữ liệu;không giả định timestamp luôn tăng nếu chưa cam kết.
+18. Kiểm rule hiển thị,độ chính xác và đối soát dữ liệu gốc,không tự sửa số để ép100.
+19. Không đưa dữ liệu thật rồi chỉ xóa một trường;dùng canary giả và quyền tối thiểu,kiểm toàn luồng lưu/truy xuất.
+20. Nêu coverage,window,lateness vàca chưa kiểm;không suy bảo đảm tuyệt đối từ mẫu hữu hạn.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Grain của một bảng mô tả gì?
++ Một dòng đại diện cho đối tượng/sự kiện nào
+- Chỉ tên khóa
+- Chỉ số cột
+Q: CHECK(qty>0) có tự cấm NULL trongSQLite không?
++ Không,cần NOT NULL nếu bắt buộc
+- Có luôn
+- Chỉ khi có ORDER BY
+Q: Đối soát COUNT trước/sau bằng nhau chứng minh đủ chưa?
++ Chưa,cần khóa,giá trị và tổng theo nhóm
+- Đủ vì dữ liệu bằng nhau
+- Chỉ cần thêm một ảnh
+Q: Mapping ETL cần nêu gì ngoài tên trường?
++ Kiểu,đơn vị,quy tắc,nullable và nguồn
+- Chỉ alias đẹp
+- Chỉ độ dài file
+Q: Hai dòng cùng khóa khác payload cần xử lý sao?
++ Theo quy tắc xung đột,có evidence
+- Luôn lấy dòng cuối không báo
+- Luôn cộng mọi trường
+Q: Tiền nên kiểm đơn vị thế nào?
++ Currency,minor unit và quy tắc rounding
+- Chỉ nhìn số có dấu chấm
+- Luôn dùng float equals
+Q: Migration cần kiểm gì về dữ liệu cũ?
++ Giữ nghĩa,backfill,ràng buộc và đối soát
+- Chỉ schema tạo được
+- Chỉ tên cột mới
+Q: Watermark timestamp dùng dấu>có thể bỏ sót gì?
++ Dòng cùng timestamp hoặc đến muộn theo mô hình nguồn
+- Chỉ cột text
+- Không thể bỏ sót
+Q: Chạy lại cùng batch nên giữ bất biến gì khi yêu cầu idempotent?
++ Không nhân record hoặc tác dụng
+- Mỗi lần luôn thêm bản copy
+- Luôn trả200
+Q: Report theo ngày cần chốt điều gì?
++ Grain,timezone,lọc trạng thái và rounding
+- Chỉ titlechart
+- Chỉ số trang
+Q: EXPLAIN plan cho biết gì?
++ Cách engine dự kiến/thực hiện theo công cụ,không tự chứng minh nhanh
+- Mọi query dùng index đều tốt
+- Chất lượng dữ liệu đúng
+Q: Dữ liệu tổng hợp tốt cần gì?
++ Miền,quan hệ,phân bố và trạng thái có mục đích
+- Chỉ random mọi cột
+- Dùng khách thật
+Q: Dự án ETL cần evidence gì?
++ Mapping,fixture,lineage,reconciliation và rerun/recovery
+- Chỉ một file đích
+- Chỉ số dòng code
+Q: SQLite foreign keys cần kiểm cấu hình gì?
++ Bật và xác nhận cho từng connection phù hợp
+- Chỉ khai báo một lần trên giấy
+- Không bao giờ cần bật
+Q: Chuẩn hóa chữ/tên nên làm theo gì?
++ Quy tắc nghiệp vụ đã chốt và giữ dấu vết cần thiết
+- Luôn bỏ mọi dấu
+- Luôn cắt độ dài im lặng
+Q: Timestamp không có offset cần gì?
++ Chính sách timezone rõ trước quy đổi
+- Tự xem là UTC ở mọi nơi
+- Cắt hết phần giờ
+Q: CDC event đến sai thứ tự nên kiểm gì?
++ Version/sequence và quy tắc cập nhật/xóa
+- Luôn áp theo giờ nhận
+- Luôn bỏ mọi update
+Q: Số phần trăm cộng thành99.9 có luôn là bug không?
++ Không,cần xem quy tắc làm tròn và tổng gốc
+- Luôn bug nghiêm trọng
+- Luôn bỏ qua
+Q: Che dữ liệu test cần bảo vệ đâu?
++ File,log,report,backup và artifact liên quan
+- Chỉ UI
+- Chỉ tên file
+Q: Khi chỉ đối soát một mẫu có thể kết luận gì?
++ Kết quả trong mẫu/phạm vi với giới hạn
+- Mọi dữ liệu tương lai đúng
+- Pipeline không bao giờ mất dữ liệu

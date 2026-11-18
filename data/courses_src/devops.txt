@@ -4,7 +4,7 @@ icon: 🐳
 floor: 7
 room: 704
 level: Cơ bản → Thực hành
-hours: 16
+hours: 28
 summary: Thực hành Linux, Docker/Compose, Kubernetes, pipeline, Terraform, quan sát, secret và phát hành có kế hoạch phục hồi trong môi trường lab.
 
 ## LESSON devops-01 | Linux và shell: quan sát trước khi thay đổi
@@ -422,3 +422,374 @@ Q: Rollback ứng dụng có tự hoàn tác DB không?
 + Không, cần thiết kế tương thích/phục hồi riêng
 - Có mọi trường hợp
 - Có nếu dùng container
+
+## LESSON devops-09 | Mạng dịch vụ, chứng chỉ và cấu hình theo môi trường
+
+### Mạng nhìn từ nơi client thực sự chạy
+App giả định Thoi Mây chạy trong Compose còn người học gọi từ host. localhost của container không tự là host hayDB;vẽ chiều request trước khi sửa config,không lấy kết nối một phía suy mọi phía đã đúng.
+
+### Service discovery khác published port
+Compose cấp tên service trên network phù hợp;host dùng cổng được publish. Ví dụ API cần image tự build của lab,không tự tải image không rõ nguồn;không cần URL host thật để hiểu quan hệ.
+~~~text
+services:
+  api:
+    image: mam-lab-api:reviewed
+    ports: ["127.0.0.1:3100:3000"]
+    networks: [lab]
+networks:
+  lab: {}
+# App trong image lắng cổng3000 theo hợp đồng lab.
+~~~
+
+### Quan sát network trước thay đổi
+Các lệnh dưới chỉ đọc metadata/project lab. Không dump env/logthô có secret;ghiservice,port,readiness và điểm client chạy để đối chiếu đúng giả thuyết.
+~~~bash
+docker compose config --services
+docker compose ps
+docker compose port api 3000
+# Network inspect chỉ trong project lab đã xác định,lọc metadata cần thiết.
+~~~
+
+### Chứng chỉ xác nhận danh tính theo trust
+Lab HTTPS dùng CA/cert đã cấp riêng có SANlocalhost. Curl dùng--cacert thay vì-k để kiểm trust/hostname;expired,wrongname và unknownCA là ba ca khác nhau,không thấy200 là đủ.
+~~~bash
+curl --cacert lab-ca.pem https://localhost:3443/health
+# lab-ca.pem do người hướng dẫn cấp cho fixture riêng.
+# Cert server phải cóSANlocalhost vàcòn hạn theo thời điểm lab.
+# Không dùng-k đểgọi ca kiểmxácminhTLS làđạt.
+~~~
+
+### Config có schema và version
+Tách config công khai với secret,có validation lúc start và manifest môi trường. BaseURL/port bị đổi có thể là lỗi config chứ không app;không print toàn process.env đểdebug,rà key cần thiết và che value quyền.
+
+PRACTICE: Vẽ host/container network choapp lab,kiểm port/readiness và ba caTLS. Nộp manifest công khai,trust config và evidence hoặc ghi thiếu CA/serverlab,chưa nhận handshake được là đạt toàn bộ.
+Q: localhost trong container thường là gì?
++ Chính network namespace của container
+- Luôn host máy chạy CLI
+- Luôn DBcontainer
+Q: Publishedport khác containerport thế nào?
++ Cổng host ánhxạ tới cổng service trongcontainer
+- Hai số luôn bằng nhau
+- Publishedport tự là firewall policy đầy đủ
+Q: TLS kiểm gì ngoài kết nối được?
++ Trust chain,hostname,hiệu lực và policy phù hợp
+- Chỉ có icon khóa
+- Chỉ status200
+
+## LESSON devops-10 | State, backup và thử khôi phục có kiểm
+
+### State cần bảo vệ khác image
+Volume,DB,object,queue và IaC state có dữ liệu ngoài image. Tạo danh mục state,owner,RPO/RTO,retention và phương án restore;restart container không tự phục hồi mất data.
+
+### IaC state có thể chứa thông tin nhạy cảm
+OpenTofu là lựa chọn mã nguồn mở cho phần lab IaC mới,state vẫn có thể giữ secret dù output được đánh sensitive. Local và remote backend cần quyền,encryption,version và locking theo khả năng,cấm commit state thật vào repo.
+~~~text
+state scope:projectlab/resource được cấp
+controls:quyền đọc/ghi,backend encryption,locking/version
+plan artifact:có thể chứa dữ liệu nhạy cảm
+backup/restore:theo backend và runbook
+Không lấy sensitive=true làm bằng chứng state không có secret.
+~~~
+
+### Backupfile giả trước diễn tập
+Hash file lab giúp đối chiếu toàn vẹn,không tự là trustroot. Dùng bản copy riêng để restore,theo engineAPI nếu DB đang chạy;không copy filedatabase đang ghi tùytiện rồi nhận nhất quán.
+~~~python
+from pathlib import Path
+import hashlib
+def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+print(digest('lab-snapshot.db'))
+# Snapshot phảiđược tạo bằngcơchế backup nhấtquán của lab.
+# Restore vào bảncopy riêng,không ghiđè dữliệu côngviệc.
+~~~
+
+### Restore phải kiểm cả dữ liệu và app
+Sau phục hồi,chạy integrity check,đối soátid/status/tổng và smoke read/write theo quyền lab. Config/keys/object có thể cần restore riêng,đừng đóng diễn tập vì DB mở được mà app không đọc được.
+~~~text
+drill:incident giả ->dừng ghi theo plan ->restorecopy
+checks:integrity,fixtureid,money/status,appsmoke
+measure:data gap và service recovery theo định nghĩa
+compare:RPO/RTO mục tiêu giả
+report:thiếu evidence nào và cách dọn copy lab
+~~~
+
+### Khôi phục sau lỗi cần đường quay
+Diễn tập bị lỗi phải giữ evidence và có điều kiện dừng. Không xóa snapshotduy nhất hoặc áp plan tác động thật để thử;phạm vi lab và quyền được ghi rõ trước thao tác.
+
+PRACTICE: Lập inventory state,budgetRPO/RTO và runbook restore. Thử trên copy giả,nộp checksum,đối soát,appsmoke và timeline,có plan bảo vệ state/plan artifact IaC.
+Q: Backup có file rồi cần gì nữa?
++ Thử restore và đối soát theoRPO/RTO
+- Chỉ size>0
+- Chỉ tên backup
+Q: Lock state IaC nhằm gì?
++ Giảm ghi đè khi nhiều thao tác đồng thời theo backend hỗ trợ
+- Thay mọi reviewplan
+- Tự mã hóa mọi file
+
+## LESSON devops-11 | Chuỗi cung ứng phần mềm và artifact có nguồn gốc
+
+### Artifact là đầu ra có nguồn gốc
+Nhóm Thoi Mây muốn biết dist nào đã qua test. Gắn commit,toolchain,lockhash,buildrecipe và digest,review nguồn dependency;không chỉ tin tagimage dễ đổi hoặc file có tên giống nhau.
+
+### Manifest do lab tạo với dữ liệu công khai
+Python dưới kiểm file giả và tạo metadata tối thiểu. Commit giả và hash cần thay bằng gói thực khi học,nói rõ checksum không chứng minh code an toàn nếu manifest hoặc nguồn tin không đáng tin.
+~~~python
+from pathlib import Path
+import json,hashlib
+p=Path('dist/lab.zip')
+manifest={'artifact':p.name,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),
+ 'sourceRevision':'LAB-COMMIT-7','toolchain':'version được ghi trong lab'}
+print(json.dumps(manifest,ensure_ascii=False))
+~~~
+
+### SBOM và provenance hỗ trợ hai câu hỏi
+SBOM cho biết component của artifact,provenance nói quá trình/nguồn tạo theo format được chọn. Chữ ký cần trustroot,identity và policy xác minh riêng;không coi có signaturefield là verify thành công.
+~~~text
+inventory:package,version,source/license theo công cụ đã review
+provenance:source/build inputs/builder/outputdigest
+verify:identity/trustroot/policy phù hợp
+triage:issue có liên quan artifact và reachablepath?
+update:rebuild,test và new digest có review
+~~~
+
+### Promote cùng byte qua cổng
+Dùng artifact đã test để bàn giao,cấu hình runtime được kiểm riêng. Nếu build lại sautest,hợp đồng truy nguồn thay đổi;compare digest và manifest trước nhận,không lấy cache gần nhất làm release.
+~~~text
+build ->digestD7 ->testD7 ->reviewD7 ->handoffD7
+receiver:manifest/digest/version khớp
+changedbyte ->từ chối theo gate
+config:version và validation riêng mỗi môi trường
+Không deploy trong bài tậpsoạn pipeline.
+~~~
+
+### Chuỗi cung ứng có đánh đổi cập nhật
+Pin không có nghĩa giữ package dễ tổn thương mãi. Có cadence review,vulnerabilitytriage,test và rollback/forwardfix,ghi exception có owner;không hứa SBOM hoặc scan giải mọi rủi ro.
+
+PRACTICE: Tạo manifest/SBOM mẫu choartifact giả,chứng minh đổi một byte bị phát hiện. Nộp nguồn tin/policy verify,build/test metadata và plan cập nhật dependency,không secret thật.
+Q: Checksum artifact chứng minh gì?
++ Byte khớp giá trị đã tin,cần nguồn tin riêng
+- Mã nguồn chắc an toàn
+- Mọi dependency không lỗi
+Q: SBOM có thay xử lý lỗhổng không?
++ Không
+- Có luôn
+- Có nếu nhiều package
+Q: Build once,promote artifact giúp gì?
++ Giữ đầu ra đã kiểm khi qua các cổng
+- Không cần config runtime
+- Tự có rollback data
+
+## LESSON devops-12 | SLO, error budget và điều tra sự cố
+
+### SLI là thước đo,SLO là mục tiêu
+Định nghĩa sự kiện hợp lệ,thành công,cửa sổ và phạm vi trước tính. HTTP200 có thể là nghiệp vụ từ chối nên metric không được tùy đổi mẫu số để đẹp;giữ error/service outcome rõ theo contract.
+
+### Budget bằng đơn vị đếm giả
+Ví dụ SLO99.5% trên10.000event đủ điều kiện cho tốiđa50bad theo mô hình request-based lab. Đây là giả định mục tiêu nội bộ,không phải cam kết mọi dịch vụ;window trượt,thiếu event và cách làm tròn cần policy.
+~~~python
+from decimal import Decimal
+total=10000;target=Decimal('0.995');observed_bad=35
+allowed=Decimal(total)*(1-target)
+remaining=allowed-observed_bad
+print(allowed,remaining) # 50.000,15.000 trong ví dụ
+# Định nghĩa event/window trước khi dùng số để ra quyết định.
+~~~
+
+### Alert phục vụ hành động
+Cảnh báo cần đúng tác động và có runbook/owner. Saturation giúp điều tra nhưng không thay SLI người dùng;burnrate/đa cửa sổ có thể hỗ trợ theo policy,không copy ngưỡng thiếu context.
+~~~text
+alert:điều kiện +window +mức chắc chắn
+context:route/flow hữu hạn,build,changes gần đây
+action:owner và runbook đọc được
+privacy:không token hoặc payload thật
+review:false positive/negative và giá trị hành động
+~~~
+
+### Điều tra sự cố không đổi nhiều thứ mù
+Giảm impact,giữ timeline,phân công và giao tiếp trong phạm vi. Ghi giả thuyết/thử nghiệm,tác dụng và quyết định rollback/forwardfix;không đưa mọi debugsecret vàochat hoặc report.
+~~~text
+t0 detect ->t1 triage ->t2 mitigate ->t3 recover
+record:observed vs hypothesis
+change:ai,làm gì,scope,kết quả
+recovery:service/data đối soát,không chỉ dashboardxanh
+postincident:mechanism,contributors,actions có owner
+~~~
+
+### Budget hỗ trợ policy,không thay trách nhiệm
+Còn budget không cấp phép gây bug,hết budget cần action đã chốt như tập trungreliability hoặc giảm thay đổi. Nêu rủi ro và giới hạn metric,review dựa dữ liệu thay vì đổ lỗi cá nhân.
+
+PRACTICE: Định nghĩa haiSLI và SLO lab,tính budget ba tình huống. Mô phỏng sự cố với timeline,mitigation,recoverycheck và ba action có owner/measure,không gửi thông báo thật.
+Q: SLI khác SLO thế nào?
++ Thước đo khác mục tiêu trên phạm vi/cửa sổ đã chốt
+- Hai từ đồng nghĩa
+- SLO chỉ là CPU
+Q: Errorbudget dùng để làm gì?
++ Hỗ trợ đánh đổi reliability và thay đổi theo policy
+- Cho phép giấu lỗi
+- Luôn là tiền thật
+Q: Incident response nên ưu tiên gì?
++ Giảm tác động,thu evidence và phục hồi có kiểm
+- Tìm người để đổ lỗi
+- Đổi nhiều thứ không log
+
+## LESSON devops-13 | Dự án: pipeline và kế hoạch vận hành hệ lab
+
+### Dự án pipeline và vận hành Thoi Mây
+Nhận app đặt lớp giả,artifact và schema được chốt. Người học cần setup lab,gate,lưu evidence,quan sát và diễn tập restore,không deploy lên dịch vụ thật hay cần credential production.
+
+### Hợp đồng môi trường trước thực hiện
+Ghi OS/runtime,dependency,image/manifest,network/port,config/state và quyền. Giá/host/company nếu minh họa đều giả,URL chỉ localhost/example.com;service DNS nội bộ được định nghĩa trongprojectlab.
+~~~text
+source ->build ->test artifact ->manifest ->handoff lab
+network:host3100 ->container3000 theo config
+state:volume/DB/objects/IaCstate có inventory
+secret:placeholder/chỉ cấp lab,không commit/log
+observability:SLI,error,latency,saturation và runbook
+~~~
+
+### Checkmatrix có lỗi chủ đích
+Kiểm readinessfail,certwrongname,artifactchanged,statecorruptcopy và dependency503 tronglab. Mỗi lỗi có expected,stoprule và cách phục hồi,không tắt control đểdemo xanh.
+~~~text
+F1 readinessfail ->không nhận traffic theo gate
+F2 certname sai ->verify từ chối
+F3 artifactbyte đổi ->digestgate fail
+F4 snapshotcopy sai ->restorecheck phát hiện
+F5 dependency503 ->timeout/retrybudget và recovery
+Giữ lỗi đầu và artifact đã che.
+~~~
+
+### Runbook và nghiệm thu người khác chạy lại
+Nộp config,pipeline nháp,manifest,statepolicy,backup/restore và SLI/SLO. Reviewer nhận được phần nào đã chạy thật,phần mock/mô phỏng và gap;các placeholder cần hoàn thiện được đánh dấu trước dùng.
+
+### Bàn giao kèm quyết định rủi ro
+Có report pass/fail/blocked/not-run,version và evidence. Handoff không là release,snapshot không là restore,CI xanh không đồng nghĩa đạt mọi mục tiêu chất lượng;giữ kết luận đúng phạm vi đã chứng minh.
+~~~text
+accept:artifact và config truy nguồn được
+accept:network/readiness/secret có kiểm
+accept:restore và data invariants có evidence
+accept:failurematrix và runbook có owner
+accept:gap,risk và follow-up minh bạch
+~~~
+
+PRACTICE: Bàn giao gói DevOps lab có pipeline gate,manifest,network/config,statebackup,restore drill và SLI/SLO. Có5failurecases được mô phỏng/chạy có ghi rõ,một report rủi ro và cleanup theo phạm vi.
+Q: Gói vận hành lab cần gì?
++ Config,artifact,runbook,kiểm phục hồi và giới hạn
+- Chỉ YAML parse được
+- Credential thật
+Q: Trước thao tác filesystem cần biết gì?
++ Vị trí,phạm vi,quyền và dữ liệu liên quan
+- Chỉ tên máy
+- Chỉ màu terminal
+
+## LESSON devops-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Quan sát trước giúp tránh chạm nhầm dữ liệu;lab phải tách khỏi môi trường phục vụ thật.
+2. Pin tham chiếu hỗ trợ truy nguồn nhưng không tự bảo đảm an toàn;review dependency và kiểm artifact vẫn cần.
+3. Process start và readiness khác nhau,cần điều kiện phục vụ thực và budget chờ theo hợp đồng.
+4. Service không thay app readiness,capacity hoặc dữ liệu;hiểu selector và endpoint thực để điều tra.
+
+### Dữ liệu và điều kiện biên
+5. Gate chỉ phản ánh kiểm được cấu hình,giữ commit/artifact đúng và phần chưa đủ evidence.
+6. Đánh dấu sensitive có thể che hiển thị nhưng không xóa khỏi state;backend/quyền/encryption/locking cần được thiết kế.
+7. Base64 là encoding;quyền đọc,storage encryption và phạm vi mount/env vẫn phải được cấu hình/kiểm.
+8. Write mới,migration và state cần kế hoạch riêng;recovery phải được kiểm bằng dữ liệu và app hành vi.
+
+### Tính đúng và cách điều tra
+9. Địa chỉ truy cập phụ thuộc nơi client chạy;Compose serviceDNS và publishedport có vai trò khác.
+10. Biết chiều host->container và network tương ứng,không gọi localhost trongcontainer để tìm container khác theo thói quen.
+11. Không dùng -k để nhận đạt xác minh danh tính;lab có CA/certificate được cấp và ghi cấu hình riêng.
+12. Không biết phục hồi được thì chưa có evidence đạt;kiểm schema,config,keys và tác vụ theo phạm vi.
+
+### Rủi ro và lựa chọn phương án
+13. Locking và privacy khác mục đích;quản quyền,version/recovery và không áp plan thiếu căn cứ.
+14. Toàn vẹn không đồng nghĩa đáng tin;metadata/chữ ký chỉ có giá trị khi trustroot và quy trình xác minh phù hợp.
+15. Danh mục component hỗ trợ truy vết/triage,cần context,reachability,fix và kiểm,cập nhật theo artifact thực.
+16. Build lại có thể đổi dependency/input;artifact phải gắn commit,digest và evidence,cấu hình mỗi môi trường vẫn cần kiểm.
+
+### Dự án, bằng chứng và bàn giao
+17. SLI cần definition và mẫu số,SLO là mục tiêu nội bộ;phân biệt lỗi nghiệp vụ/lỗi HTTP và window.
+18. Budget theo mục tiêu và window,không thay trách nhiệm xử lý sự cố;action trigger cần được chốt trước.
+19. Timeline,owner,communication và rollback/forwardfix giúp phục hồi,postincident học cơ chế và điều kiện góp phần.
+20. Người nhận phải biết cách dựng,quan sát,điều tra và khôi phục trong phạm vi,không suy productionready từdemo.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Trước thao tác filesystem cần biết gì?
++ Vị trí,phạm vi,quyền và dữ liệu liên quan
+- Chỉ tên máy
+- Chỉ màu terminal
+Q: Image tái lập cần kiểm gì?
++ Base/dependency/build input được khóa và nguồn rõ
+- Chỉ taglatest
+- Chỉ Dockerfile ngắn
+Q: Compose service đang chạy có chắc ready không?
++ Không
+- Có nếu có container
+- Có nếu tên service đúng
+Q: Kubernetes Service chủ yếu giúp gì?
++ Truy cập nhóm endpoint theo cơ chế mạng được cấu hình
+- Tự backup DB
+- Tự sửa mọi appcrash
+Q: Pipeline xanh có đủ cho release không?
++ Chưa,cần phạm vi kiểm,artifact và rủi ro
+- Có luôn
+- Có nếu badge đẹp
+Q: IaC state có thể chứa dữ liệu gì?
++ Giá trị nhạy cảm và thông tin tài nguyên
+- Chỉ text công khai
+- Không có gì cần bảo vệ
+Q: Kubernetes Secret base64 có mặc định là mã hóa không?
++ Không
+- Có luôn
+- Có nếu chuỗi dài
+Q: Rollback image có luôn phục hồi data/schema không?
++ Không
+- Có nếu chạy lại deployment
+- Có nếu có replica
+Q: localhost trong container thường là gì?
++ Chính network namespace của container
+- Luôn host máy chạy CLI
+- Luôn DBcontainer
+Q: Publishedport khác containerport thế nào?
++ Cổng host ánhxạ tới cổng service trongcontainer
+- Hai số luôn bằng nhau
+- Publishedport tự là firewall policy đầy đủ
+Q: TLS kiểm gì ngoài kết nối được?
++ Trust chain,hostname,hiệu lực và policy phù hợp
+- Chỉ có icon khóa
+- Chỉ status200
+Q: Backup có file rồi cần gì nữa?
++ Thử restore và đối soát theoRPO/RTO
+- Chỉ size>0
+- Chỉ tên backup
+Q: Lock state IaC nhằm gì?
++ Giảm ghi đè khi nhiều thao tác đồng thời theo backend hỗ trợ
+- Thay mọi reviewplan
+- Tự mã hóa mọi file
+Q: Checksum artifact chứng minh gì?
++ Byte khớp giá trị đã tin,cần nguồn tin riêng
+- Mã nguồn chắc an toàn
+- Mọi dependency không lỗi
+Q: SBOM có thay xử lý lỗhổng không?
++ Không
+- Có luôn
+- Có nếu nhiều package
+Q: Build once,promote artifact giúp gì?
++ Giữ đầu ra đã kiểm khi qua các cổng
+- Không cần config runtime
+- Tự có rollback data
+Q: SLI khác SLO thế nào?
++ Thước đo khác mục tiêu trên phạm vi/cửa sổ đã chốt
+- Hai từ đồng nghĩa
+- SLO chỉ là CPU
+Q: Errorbudget dùng để làm gì?
++ Hỗ trợ đánh đổi reliability và thay đổi theo policy
+- Cho phép giấu lỗi
+- Luôn là tiền thật
+Q: Incident response nên ưu tiên gì?
++ Giảm tác động,thu evidence và phục hồi có kiểm
+- Tìm người để đổ lỗi
+- Đổi nhiều thứ không log
+Q: Gói vận hành lab cần gì?
++ Config,artifact,runbook,kiểm phục hồi và giới hạn
+- Chỉ YAML parse được
+- Credential thật

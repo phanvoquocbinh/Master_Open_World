@@ -1,0 +1,659 @@
+{
+ "no": 9,
+ "title": "Tra âm và gõ chữ: chọn đúng chữ, không chọn chỉ vì cùng âm",
+ "sub": "拼音输入 · 字音与字义",
+ "goals": [
+  "Tách một âm tiết thành thanh mẫu, vận mẫu và thanh điệu để tra cứu.",
+  "Gõ một cụm từ ngắn bằng pinyin rồi chọn chữ theo nghĩa.",
+  "Hỏi và trả lời cách đọc một chữ chưa biết.",
+  "Nhận ra hai chữ cùng âm không nhất thiết có cùng nghĩa."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Từ âm đến chữ trong một tin nhắn",
+   "html": "<p>Bàn phím pinyin thường nhận chữ cái không dấu, nhưng kết quả hiển thị có thể gồm nhiều chữ cùng âm. Hãy gõ cả cụm từ, đọc lại chữ được chọn và kiểm tra nghĩa. Khi học, vẫn ghi dấu thanh trong sổ; việc bàn phím không cần dấu không có nghĩa tiếng Trung không có thanh điệu. Dùng chữ và tài khoản giả trong mọi lần thực hành.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Đọc âm trước khi chọn chữ",
+   "html": "<p>So sánh âm nghe được với pinyin có dấu. Khi đọc tên chữ, giữ thanh từ điển; trong câu nói, thanh nhẹ của 这个 và 什么 ngắn hơn âm tiết mang trọng âm.</p>",
+   "items": [
+    {
+     "sym": "zì / zhī",
+     "ex": [
+      "字",
+      "知"
+     ],
+     "vi": "字 zì có đầu lưỡi ở phía trước; 知 zhī có đầu lưỡi lùi hơn. Hai âm không phải một cặp chỉ khác thanh."
+    },
+    {
+     "sym": "shū / shǔ",
+     "ex": [
+      "书",
+      "数"
+     ],
+     "vi": "书 shū giữ cao và ngang; 数 shǔ trong nghĩa đếm có thanh ba. Không đọc mọi chữ 数 bằng một âm duy nhất."
+    },
+    {
+     "sym": "shénme",
+     "ex": [
+      "什么",
+      "这是什么"
+     ],
+     "vi": "Âm me trong 什么 nhẹ và ngắn. Không thêm dấu thanh nặng theo từng chữ tiếng Việt."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm từ dùng trong tình huống",
+   "items": [
+    {
+     "w": "字",
+     "py": "zì",
+     "hv": "tự",
+     "vi": "chữ",
+     "ex": "这个字很小。",
+     "exPy": "Zhège zì hěn xiǎo.",
+     "exVi": "Chữ này nhỏ."
+    },
+    {
+     "w": "拼音",
+     "py": "pīnyīn",
+     "hv": "bính âm",
+     "vi": "pinyin",
+     "ex": "我写拼音。",
+     "exPy": "Wǒ xiě pīnyīn.",
+     "exVi": "Tôi viết pinyin."
+    },
+    {
+     "w": "读",
+     "py": "dú",
+     "hv": "độc",
+     "vi": "đọc",
+     "ex": "请读这个字。",
+     "exPy": "Qǐng dú zhège zì.",
+     "exVi": "Hãy đọc chữ này."
+    },
+    {
+     "w": "写",
+     "py": "xiě",
+     "hv": "tả",
+     "vi": "viết",
+     "ex": "我写一个字。",
+     "exPy": "Wǒ xiě yí ge zì.",
+     "exVi": "Tôi viết một chữ."
+    },
+    {
+     "w": "打字",
+     "py": "dǎzì",
+     "hv": "đả tự",
+     "vi": "gõ chữ",
+     "ex": "我用拼音打字。",
+     "exPy": "Wǒ yòng pīnyīn dǎzì.",
+     "exVi": "Tôi dùng pinyin để gõ chữ."
+    },
+    {
+     "w": "选",
+     "py": "xuǎn",
+     "hv": "tuyển",
+     "vi": "chọn",
+     "ex": "请选第二个字。",
+     "exPy": "Qǐng xuǎn dì èr ge zì.",
+     "exVi": "Hãy chọn chữ thứ hai."
+    },
+    {
+     "w": "意思",
+     "py": "yìsi",
+     "hv": "",
+     "vi": "ý nghĩa",
+     "ex": "这个字是什么意思？",
+     "exPy": "Zhège zì shì shénme yìsi?",
+     "exVi": "Chữ này có nghĩa là gì?"
+    },
+    {
+     "w": "声音",
+     "py": "shēngyīn",
+     "hv": "thanh âm",
+     "vi": "âm thanh",
+     "ex": "这个声音很清楚。",
+     "exPy": "Zhège shēngyīn hěn qīngchu.",
+     "exVi": "Âm thanh này rất rõ."
+    },
+    {
+     "w": "书",
+     "py": "shū",
+     "hv": "thư",
+     "vi": "sách",
+     "ex": "这是我的书。",
+     "exPy": "Zhè shì wǒ de shū.",
+     "exVi": "Đây là sách của tôi."
+    },
+    {
+     "w": "树",
+     "py": "shù",
+     "hv": "thụ",
+     "vi": "cây",
+     "ex": "那是一棵树。",
+     "exPy": "Nà shì yì kē shù.",
+     "exVi": "Kia là một cái cây."
+    },
+    {
+     "w": "用",
+     "py": "yòng",
+     "hv": "dụng",
+     "vi": "dùng",
+     "ex": "我用这本书。",
+     "exPy": "Wǒ yòng zhè běn shū.",
+     "exVi": "Tôi dùng cuốn sách này."
+    },
+    {
+     "w": "再",
+     "py": "zài",
+     "hv": "tái",
+     "vi": "lại, thêm lần nữa",
+     "ex": "请再读一次。",
+     "exPy": "Qǐng zài dú yí cì.",
+     "exVi": "Hãy đọc thêm một lần nữa."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Hỏi cách đọc bằng 怎么读",
+   "html": "<p>Đặt đối tượng cần hỏi trước 怎么读. 怎么 ở đây hỏi cách làm, không hỏi ý nghĩa. Không dùng 是 để nối trước động từ 读.</p>",
+   "ex": [
+    {
+     "t": "这个字怎么读？",
+     "py": "Zhège zì zěnme dú?",
+     "vi": "Chữ này đọc thế nào?"
+    },
+    {
+     "t": "“书”怎么读？",
+     "py": "“Shū” zěnme dú?",
+     "vi": "Chữ 书 đọc thế nào?"
+    },
+    {
+     "t": "这个名字怎么读？",
+     "py": "Zhège míngzi zěnme dú?",
+     "vi": "Tên này đọc thế nào?"
+    }
+   ],
+   "tips": [
+    "Hỏi nghĩa dùng 什么意思; hỏi cách đọc dùng 怎么读."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Dùng công cụ: 用 + công cụ + động từ",
+   "html": "<p>用 đứng trước công cụ rồi mới đến hoạt động. Với bàn phím, có thể nói 用拼音打字. Chủ ngữ có thể được lược khi lời hướng dẫn đã rõ.</p>",
+   "ex": [
+    {
+     "t": "我用拼音打字。",
+     "py": "Wǒ yòng pīnyīn dǎzì.",
+     "vi": "Tôi gõ chữ bằng pinyin."
+    },
+    {
+     "t": "请用笔写。",
+     "py": "Qǐng yòng bǐ xiě.",
+     "vi": "Hãy viết bằng bút."
+    },
+    {
+     "t": "他用电脑看书。",
+     "py": "Tā yòng diànnǎo kàn shū.",
+     "vi": "Anh ấy dùng máy tính để đọc sách."
+    }
+   ],
+   "tips": [
+    "Không chuyển nguyên thứ tự “gõ chữ bằng pinyin” thành 打字用拼音 trong mẫu câu đang học."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Một chữ được chọn nhầm",
+   "lang": "zh-CN",
+   "note": "An Hòa tập gõ câu nói về sách. Tử Ninh giúp phân biệt sách và cây; hãy nghe xem vì sao phải đổi chữ.",
+   "lines": [
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "我想写“这是我的书”。",
+     "py": "Wǒ xiǎng xiě “Zhè shì wǒ de shū”.",
+     "vi": "Tôi muốn viết “Đây là sách của tôi”."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "你用拼音打字吗？",
+     "py": "Nǐ yòng pīnyīn dǎzì ma?",
+     "vi": "Bạn gõ chữ bằng pinyin phải không?"
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "对。我选这个字，可以吗？",
+     "py": "Duì. Wǒ xuǎn zhège zì, kěyǐ ma?",
+     "vi": "Đúng vậy. Tôi chọn chữ này được không?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "这是“树”，不是“书”。",
+     "py": "Zhè shì “shù”, bú shì “shū”.",
+     "vi": "Đây là chữ “cây”, không phải chữ “sách”."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "“树”是什么意思？",
+     "py": "“Shù” shì shénme yìsi?",
+     "vi": "Chữ 树 có nghĩa là gì?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "是树木的“树”，读第四声。",
+     "py": "Shì shùmù de “shù”, dú dì sì shēng.",
+     "vi": "Là chữ “cây” trong “cây cối”, đọc thanh bốn."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "我要第一声的“书”。",
+     "py": "Wǒ yào dì yī shēng de “shū”.",
+     "vi": "Tôi cần chữ “sách” có thanh một."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "对。选好以后，再读一遍。",
+     "py": "Duì. Xuǎn hǎo yǐhòu, zài dú yí biàn.",
+     "vi": "Đúng rồi. Sau khi chọn xong, hãy đọc lại một lượt."
+    }
+   ],
+   "qs": [
+    {
+     "q": "An Hòa muốn viết về vật gì?",
+     "o": [
+      "Sách của mình",
+      "Một cái cây",
+      "Một cây bút"
+     ],
+     "a": 0,
+     "e": "Câu định gõ có từ 书, nghĩa là sách."
+    },
+    {
+     "q": "Chữ đã chọn nhầm có thanh nào?",
+     "o": [
+      "Thanh nhẹ",
+      "Thanh bốn",
+      "Thanh một"
+     ],
+     "a": 1,
+     "e": "Tử Ninh nói 树 đọc thanh bốn."
+    },
+    {
+     "q": "Sau khi chọn chữ xong, nên làm gì?",
+     "o": [
+      "Bỏ hết dấu thanh trong sổ",
+      "Đóng sách ngay",
+      "Đọc lại một lượt"
+     ],
+     "a": 2,
+     "e": "Lời cuối yêu cầu 再读一遍 để kiểm tra kết quả."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc hiểu: Mẩu ghi chú khi gõ chữ",
+   "text": "我用拼音打字。我想写“书”，可是选了“树”。老师说：“书”是第一声，“树”是第四声。我再读一次，也再看字的意思。",
+   "py": "Wǒ yòng pīnyīn dǎzì. Wǒ xiǎng xiě “shū”, kěshì xuǎn le “shù”. Lǎoshī shuō: “Shū” shì dì yī shēng, “shù” shì dì sì shēng. Wǒ zài dú yí cì, yě zài kàn zì de yìsi.",
+   "vi": "Tôi gõ chữ bằng pinyin. Tôi muốn viết chữ “sách” nhưng đã chọn chữ “cây”. Giáo viên nói: “Sách” có thanh một, “cây” có thanh bốn. Tôi đọc lại một lần và xem lại cả nghĩa của chữ.",
+   "gloss": [
+    {
+     "w": "拼音",
+     "py": "pīnyīn",
+     "vi": "pinyin"
+    },
+    {
+     "w": "打字",
+     "py": "dǎzì",
+     "vi": "gõ chữ"
+    },
+    {
+     "w": "选",
+     "py": "xuǎn",
+     "vi": "chọn"
+    },
+    {
+     "w": "意思",
+     "py": "yìsi",
+     "vi": "ý nghĩa"
+    },
+    {
+     "w": "再",
+     "py": "zài",
+     "vi": "lại, thêm lần nữa"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Người viết dùng cách nào để gõ?",
+     "o": [
+      "Pinyin",
+      "Chép từng nét trên giấy",
+      "Đọc số điện thoại"
+     ],
+     "a": 0,
+     "e": "Câu đầu nêu rõ 用拼音打字."
+    },
+    {
+     "q": "Vì sao cần đọc lại?",
+     "o": [
+      "Không biết mở sách",
+      "Không có giáo viên",
+      "Đã chọn nhầm chữ cây"
+     ],
+     "a": 2,
+     "e": "Bài ghi rõ muốn viết 书 nhưng chọn 树."
+    },
+    {
+     "q": "Ngoài âm đọc, người viết kiểm tra điều gì?",
+     "o": [
+      "Giá của máy tính",
+      "Ý nghĩa của chữ",
+      "Màu của bút"
+     ],
+     "a": 1,
+     "e": "Câu cuối nói 再看字的意思."
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Nhận diện chữ trong bài",
+   "items": [
+    {
+     "c": "字",
+     "py": "zì",
+     "hv": "tự",
+     "parts": "宀 ở trên, 子 ở dưới",
+     "strokes": 6,
+     "vi": "chữ",
+     "words": "汉字，名字"
+    },
+    {
+     "c": "书",
+     "py": "shū",
+     "hv": "thư",
+     "parts": "Giữ hai nét gập riêng biệt",
+     "strokes": 4,
+     "vi": "sách",
+     "words": "书本，看书"
+    },
+    {
+     "c": "用",
+     "py": "yòng",
+     "hv": "dụng",
+     "parts": "Khung ngoài trước phần trong",
+     "strokes": 5,
+     "vi": "dùng",
+     "words": "用笔，使用"
+    },
+    {
+     "c": "再",
+     "py": "zài",
+     "hv": "tái",
+     "parts": "Ngang đầu trước; ngang đáy sau",
+     "strokes": 6,
+     "vi": "lại",
+     "words": "再见，再读"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói có nhiệm vụ",
+   "tasks": [
+    {
+     "p": "Hỏi cách đọc một chữ trên thẻ rồi đề nghị người bạn đọc lại.",
+     "model": "这个字怎么读？请再读一次。",
+     "py": "Zhège zì zěnme dú? Qǐng zài dú yí cì.",
+     "vi": "Chữ này đọc thế nào? Bạn đọc lại một lần nhé.",
+     "tips": "Dừng ngắn sau câu hỏi; đừng kéo dài me trong 怎么."
+    },
+    {
+     "p": "Giải thích rằng bạn gõ bằng pinyin và muốn chọn chữ “sách”.",
+     "model": "我用拼音打字。我要选“书”，第一声。",
+     "py": "Wǒ yòng pīnyīn dǎzì. Wǒ yào xuǎn “shū”, dì yī shēng.",
+     "vi": "Tôi gõ bằng pinyin. Tôi muốn chọn chữ “sách”, thanh một.",
+     "tips": "Làm rõ âm shū trước khi chỉ chữ; không chỉ đọc tên chữ theo âm Hán Việt."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết để hoàn thành tình huống",
+   "task": "Viết ghi chú 20–40 chữ Hán: bạn dùng gì để gõ, đã chọn nhầm chữ nào và sẽ kiểm tra thế nào. Có thể dùng tình huống sách/cây. Không tính pinyin vào số chữ.",
+   "min": 20,
+   "model": "我用拼音打字。我想写“书”，可是选了“树”。我再读一次，再看字的意思。",
+   "modelVi": "Tôi gõ bằng pinyin. Tôi muốn viết chữ “sách” nhưng đã chọn chữ “cây”. Tôi đọc lại một lần rồi xem lại nghĩa của chữ.",
+   "tips": [
+    "Khoanh chữ nhầm trước khi sửa để nhận ra loại lỗi.",
+    "Viết pinyin có dấu ở dòng riêng khi tự ôn."
+   ],
+   "checklist": [
+    "Có công cụ gõ chữ",
+    "Nêu rõ chữ muốn viết và chữ chọn nhầm",
+    "Có hành động kiểm tra lại"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "请选第二个字。",
+   "lang": "zh-CN",
+   "q": "Người nghe cần chọn chữ thứ mấy?",
+   "o": [
+    "Thứ ba",
+    "Thứ hai",
+    "Thứ nhất"
+   ],
+   "a": 1,
+   "e": "第二个 là vị trí thứ hai, không phải số lượng hai chữ."
+  },
+  {
+   "t": "listen",
+   "say": "请再读一次。",
+   "lang": "zh-CN",
+   "q": "Người nói yêu cầu gì?",
+   "o": [
+    "Đọc thêm một lần",
+    "Viết mười chữ",
+    "Chọn một cây"
+   ],
+   "a": 0,
+   "e": "再读 yêu cầu lặp lại hành động đọc."
+  },
+  {
+   "t": "mc",
+   "q": "Muốn hỏi cách đọc một chữ, chọn câu nào?",
+   "o": [
+    "这个字多少钱？",
+    "这个字几岁？",
+    "这个字怎么读？"
+   ],
+   "a": 2,
+   "e": "怎么读 hỏi cách đọc; hai câu còn lại hỏi giá hoặc tuổi."
+  },
+  {
+   "t": "mc",
+   "q": "Dấu thanh nào thuộc từ “sách”?",
+   "o": [
+    "shǔ",
+    "shū",
+    "shù"
+   ],
+   "a": 1,
+   "e": "书 đọc shū thanh một; shù là âm của 树 trong bài."
+  },
+  {
+   "t": "mc",
+   "q": "Trình tự nào giúp chọn đúng chữ khi gõ?",
+   "o": [
+    "Chỉ nhìn chữ cái, bỏ nghĩa",
+    "Gõ cụm từ rồi kiểm tra chữ và nghĩa",
+    "Chọn kết quả đầu tiên trong mọi tình huống"
+   ],
+   "a": 1,
+   "e": "Các chữ có âm gần nhau cần được phân biệt bằng ngữ cảnh và nghĩa."
+  },
+  {
+   "t": "mc",
+   "q": "Bàn phím không cần dấu có đồng nghĩa lời nói không cần thanh điệu không?",
+   "o": [
+    "Có, chỉ cần nói thật nhanh",
+    "Không, khi nói vẫn phải phân biệt thanh",
+    "Có, mọi âm đều đọc ngang"
+   ],
+   "a": 1,
+   "e": "Cách nhập chữ và quy tắc phát âm là hai việc khác nhau."
+  },
+  {
+   "t": "fill",
+   "q": "Điền từ có nghĩa “lại”: 请___读一次。",
+   "a": "再",
+   "py": "zài",
+   "e": "再 đặt trước 读 để yêu cầu đọc thêm một lần."
+  },
+  {
+   "t": "fill",
+   "q": "Điền công cụ đã học: 我用___打字。",
+   "a": "拼音",
+   "py": "pīnyīn",
+   "e": "拼音 là hệ thống chữ cái dùng để nhập chữ trong tình huống này."
+  },
+  {
+   "t": "fill",
+   "q": "Điền động từ “chọn”: 请___这个字。",
+   "a": "选",
+   "py": "xuǎn",
+   "e": "选 chỉ việc lựa một chữ trong các kết quả gợi ý."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "用",
+    "拼音",
+    "打字",
+    "我"
+   ],
+   "a": "我用拼音打字。",
+   "e": "Đặt 用拼音 trước hành động 打字 để nêu công cụ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "怎么",
+    "读",
+    "这个字"
+   ],
+   "a": "这个字怎么读？",
+   "e": "怎么 đứng trước động từ 读; đối tượng cần hỏi được đặt đầu câu."
+  },
+  {
+   "t": "match",
+   "q": "Nối hoạt động trên màn hình với nghĩa.",
+   "pairs": [
+    [
+     "读",
+     "đọc"
+    ],
+    [
+     "写",
+     "viết"
+    ],
+    [
+     "打字",
+     "gõ chữ"
+    ],
+    [
+     "选",
+     "chọn"
+    ]
+   ],
+   "e": "读 là đọc, 写 là viết; 拼音 là phương tiện biểu âm chứ không phải bản thân chữ Hán."
+  },
+  {
+   "t": "dict",
+   "say": "请再读一次。",
+   "lang": "zh-CN",
+   "a": "请再读一次。",
+   "py": "Qǐng zài dú yí cì.",
+   "e": "Nghe đủ 请, 再, 读 và 一次; 一 trước 次 được đọc yí."
+  }
+ ],
+ "teacher": {
+  "time": "180 phút, chia thành hai buổi 90 phút",
+  "prep": "Chuẩn bị thẻ chữ 书/树, ảnh sách và cây, bàn phím mô phỏng với danh sách ứng viên; không cần tài khoản thật. In phiếu ba cột: âm, chữ và nghĩa.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Cho học viên nhìn hai tranh sách và cây rồi đoán vì sao cùng chuỗi nhập shu có thể cho hai kết quả."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc từ trên thẻ, học viên ghi dấu thanh rồi ghép thẻ 书 với shū và 树 với shù; không chấp nhận chỉ đúng nghĩa mà sai âm."
+   },
+   {
+    "t": "20 phút",
+    "do": "Hướng dẫn gõ cụm từ trong bản mô phỏng. Yêu cầu mỗi nhóm giải thích lý do chọn một ứng viên bằng nghĩa trong câu."
+   },
+   {
+    "t": "25 phút",
+    "do": "Dạy câu 怎么读 và 用拼音打字; cho học viên đổi đối tượng hỏi từ chữ sang tên giả trên thẻ, sau đó sửa vị trí 用."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nghe đoạn chọn nhầm chữ hai lần; lần đầu xác định đồ vật, lần sau ghi lại thanh điệu được nhắc đến."
+   },
+   {
+    "t": "10 phút",
+    "do": "Mở buổi hai bằng thẻ lỗi mới: giáo viên chỉ chữ, học viên nói âm rồi mới cho xem pinyin để tự đối chiếu."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc mẩu ghi chú và gạch các bước phát hiện, sửa lỗi. Học viên diễn đạt lại bằng ba cụm tiếng Việt trước khi nói bằng tiếng Trung."
+   },
+   {
+    "t": "25 phút",
+    "do": "Tổ chức cặp đôi: một người hỏi âm, người kia chọn ứng viên. Người quan sát đánh dấu câu hỏi có dùng 怎么读 hay không."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết ghi chú theo đề, đếm chữ Hán; đổi bài và kiểm tra sự nhất quán giữa chữ muốn viết và cách sửa."
+   },
+   {
+    "t": "15 phút",
+    "do": "Làm 13 bài tự chấm, sau đó mỗi học viên giải thích một lỗi lựa chữ và ghi kế hoạch kiểm tra khi gõ ở nhà."
+   }
+  ],
+  "games": [
+   "Thợ sửa tin nhắn: mỗi đội nhận một câu có 书/树 bị đảo; phải đọc, chỉ ra nghĩa sai và thay đúng chữ mới được tính điểm.",
+   "Ba cửa kiểm tra: học viên chỉ được chuyển từ cửa âm sang cửa chữ rồi cửa nghĩa khi đưa đủ bằng chứng trên thẻ."
+  ],
+  "errors": [
+   "Chọn ứng viên đầu tiên dù nghĩa không phù hợp: yêu cầu đọc cả cụm đã gõ trước khi xác nhận.",
+   "Đọc shū thành shù vì dùng âm Hán Việt “thư”: đối chiếu đường nét thanh một và thanh bốn trong tiếng Trung.",
+   "Hỏi 这个字是什么读: thay bằng 怎么读 để hỏi phương thức đọc, không chen 是 vào mẫu này.",
+   "Đưa 用拼音 ra cuối mọi câu theo tiếng Việt: cho xếp lại thẻ chủ ngữ, công cụ, hành động.",
+   "Bỏ dấu thanh trong sổ vì bàn phím cho phép nhập không dấu: phân biệt bản ghi học phát âm với thao tác nhập liệu."
+  ],
+  "homework": "Tạo sáu thẻ gồm chữ, pinyin có dấu và nghĩa. Gõ ba câu bằng công cụ đang có hoặc mô phỏng trên giấy; ghi một lựa chọn sai có thể gặp và cách kiểm tra lại."
+ }
+}

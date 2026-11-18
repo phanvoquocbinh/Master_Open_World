@@ -4,9 +4,9 @@
  "sub": "옷은 한 글자예요.",
  "goals": [
   "Nhận diện và đọc các chữ/âm trọng tâm: Batchim: bảy âm cuối và cách khép âm",
-  "Phân biệt ít nhất hai mục có âm hoặc hình gần nhau bằng nghe và nghĩa",
-  "Viết đúng 12 mục từ và bốn câu mẫu, không thay Hangul bằng Romaja",
-  "Dùng câu hỏi lại lịch sự khi chưa nghe rõ"
+  "Dùng “국” (canh) và “공” (quả bóng/số không tùy ngữ cảnh) trong lời trao đổi đúng tình huống.",
+  "Nghe để phân biệt câu trả lời cho “Trong 옷, chữ cuối được nhận ra là gì? ” với hai khả năng gần âm hoặc gần nghĩa.",
+  "Viết để đáp ứng yêu cầu: Viết các mục từ của bảng thẻ, trong đó đánh dấu khối khó ở 국 và 밤. Chép bốn câu mẫu rồi nghe lại để kiểm chữ, không thay bằng Romaja. Tự kiểm một điều kiện hoặc dữ kiện dễ bị bỏ."
  ],
  "parts": [
   {
@@ -74,7 +74,7 @@
   },
   {
    "k": "words",
-   "h": "Thẻ đọc có nghĩa – các chữ chưa học được nghe mẫu",
+   "h": "Thẻ đọc: 국 / 낮 / 밤",
    "items": [
     {
      "w": "국",
@@ -177,15 +177,15 @@
   {
    "k": "grammar",
    "h": "Đọc cụm và cách ghép chữ trong ngữ cảnh",
-   "html": "<p>Đọc các mẫu dưới đây theo giọng ko-KR. Ở cấp Hangul, mục tiêu là giải mã chữ và nhận diện nghĩa; các đuôi câu được học như cụm, không yêu cầu biến đổi mọi động từ. Khi viết, giữ chính tả gốc và trợ từ đi cùng từ trước.</p>",
+   "html": "<p>Nghe câu “옷은 한 글자예요.” rồi khoanh những khối đã nhận diện được. Trong câu thứ hai,“밥을 천천히 읽어요.”,hãy xác định phần được giáo viên yêu cầu đọc hoặc viết. Đọc theo giọng mẫu trước khi nhìn Romaja;ở lượt cuối,che phiên âm và giải thích nghĩa bằng tiếng Việt.</p>",
    "table": [
     [
      "Điểm kiểm",
      "Cách làm"
     ],
     [
-     "Khối âm",
-     "Xác định phụ âm đầu – nguyên âm – batchim nếu có"
+     "Chữ cần kiểm",
+     "국 → guk; 산 → san"
     ],
     [
      "Nhịp",
@@ -265,34 +265,34 @@
    ],
    "qs": [
     {
-     "q": "Cuộc trao đổi diễn ra trong bối cảnh nào?",
+     "q": "Trong 옷,chữ cuối được nhận ra là gì?",
      "o": [
-      "Luyện đọc và hỏi lại trong lớp",
-      "Đàm phán mua nhà",
-      "Thông báo y tế"
-     ],
-     "a": 0,
-     "e": "Các lượt đều hỏi cách đọc, chữ và hoạt động lớp."
-    },
-    {
-     "q": "Khi chưa rõ, hành động phù hợp là gì?",
-     "o": [
-      "Tự đổi chính tả tùy âm nghe",
-      "Bỏ hoàn toàn Hangul",
-      "Hỏi lại và đối chiếu giọng mẫu"
-     ],
-     "a": 2,
-     "e": "Hội thoại minh họa câu hỏi cụ thể thay vì đoán."
-    },
-    {
-     "q": "Mục tiêu chính của lượt luyện là gì?",
-     "o": [
-      "Đọc mọi từ thật nhanh",
-      "Batchim: bảy âm cuối và cách khép âm",
-      "Thuộc tên một công ty thật"
+      "ㄴ",
+      "ㅅ",
+      "ㅇ"
      ],
      "a": 1,
-     "e": "Căn cứ các chữ/âm được đối chiếu trong hội thoại."
+     "e": "끝에 ㅅ이 있어요 xác định chữ viết, chưa đổi thành ký hiệu âm cuối."
+    },
+    {
+     "q": "Đọc batchim trong lượt này cần làm gì?",
+     "o": [
+      "Bật thêm một nguyên âm",
+      "Khép âm cuối ngắn",
+      "Bỏ hết âm cuối"
+     ],
+     "a": 1,
+     "e": "받침 소리를 짧게 닫아요 nêu thao tác khép âm."
+    },
+    {
+     "q": "Sau âm cuối có thêm 으 không?",
+     "o": [
+      "Luôn thêm",
+      "Không",
+      "Chỉ thêm khi viết"
+     ],
+     "a": 1,
+     "e": "뒤에 으를 넣어요? được trả lời 아니요."
     }
    ]
   },
@@ -372,33 +372,33 @@
    "h": "Nói và tự nghe lại",
    "tasks": [
     {
-     "p": "Đọc bốn câu mẫu, ghi âm rồi đánh dấu hai chữ/âm trọng tâm của bài.",
+     "p": "Đọc “옷은 한 글자예요.” và “밥을 천천히 읽어요.”; đối chiếu hai từ 국 / 산 trước khi đọc đủ bốn câu mẫu.",
      "model": "옷은 한 글자예요. 밥을 천천히 읽어요. 방의 끝소리를 들어요. 물 뒤에 모음을 붙여요.",
      "vi": "옷 là một khối chữ. Đọc 밥 chậm. Nghe âm cuối của 방. Gắn nguyên âm sau 물.",
-     "tips": "Chậm trước, chính xác trước; không đọc Romaja thay Hangul."
+     "tips": "Ở cặp 국 / 산, đọc từng khối rồi nối lại; chỉ tăng tốc khi người nghe chọn đúng thẻ."
     },
     {
-     "p": "Đóng vai người học chưa nghe rõ: yêu cầu đọc lại, sau đó đọc một từ trong bài để xác nhận.",
-     "model": "다시 읽어 주세요. 천천히 말해 주세요. 감사합니다.",
-     "vi": "Xin đọc lại. Xin nói chậm. Cảm ơn."
+     "p": "Một người chỉ thẻ 낮, người kia đọc; đổi sang 달 rồi dùng lời nhờ đọc lại khi không chắc.",
+     "model": "다시 읽어 주세요. “낮” 맞아요? 감사합니다.",
+     "vi": "Xin đọc lại. Có đúng là “낮” không? Cảm ơn."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có tự kiểm",
-   "task": "Viết tay 12 mục từ của bài và bốn câu mẫu. Khoanh một khối khó, ghi cấu tạo rồi tự sửa sau khi đối chiếu; không chép Romaja làm đáp án.",
+   "task": "Viết các mục từ của bảng thẻ, trong đó đánh dấu khối khó ở 국 và 밤. Chép bốn câu mẫu rồi nghe lại để kiểm chữ, không thay bằng Romaja.",
    "min": 20,
    "model": "옷은 한 글자예요.\n밥을 천천히 읽어요.\n방의 끝소리를 들어요.\n물 뒤에 모음을 붙여요.",
    "modelVi": "옷 là một khối chữ.\nĐọc 밥 chậm.\nNghe âm cuối của 방.\nGắn nguyên âm sau 물.",
    "tips": [
-    "Viết theo khối; nguyên âm quyết định bố trí ngang/dọc.",
-    "Giữ chính tả khi âm nối thay đổi."
+    "Phác thứ tự ý cho tình huống “Viết các mục từ của bảng thẻ, trong đó đánh dấu khối khó ở 국 và 밤. Chép bốn câu mẫu rồi nghe lại để kiểm chữ, không thay bằng Romaja.”; chọn dữ kiện cần có trước khi bắt đầu viết.",
+    "Kiểm câu dùng “옷은 한 글자예요.” làm mẫu: đổi dữ kiện của bạn nhưng không làm đổi quan hệ giữa các vế."
    ],
    "checklist": [
     "Có đủ các mục từ và câu mẫu.",
     "Không thêm nguyên âm ngoài chữ.",
-    "Khoảng cách theo từ, trợ từ gắn với từ trước.",
+    "Kiểm phần chữ trong 낮 và 밤: không tách một khối thành nhiều từ, không thêm âm ngoài mẫu.",
     "Tự chỉ ra và sửa ít nhất một lỗi."
    ]
   }
@@ -406,130 +406,128 @@
  "exercises": [
   {
    "t": "mc",
-   "q": "Chọn nghĩa phù hợp của “국” trong bài.",
+   "q": "Trong câu ““국”을 읽어요.”,“국” có nghĩa gì?",
    "o": [
     "canh",
-    "quần áo",
-    "nước"
+    "ban ngày",
+    "ban đêm/hạt dẻ tùy ngữ cảnh"
    ],
    "a": 0,
-   "e": "“국”을 읽어요. → Đọc “국” (canh)."
+   "e": "Đọc “국” (canh). Nghĩa cần chọn là canh, không phải hai khái niệm còn lại."
   },
   {
    "t": "mc",
-   "q": "Chọn nghĩa phù hợp của “산” trong bài.",
+   "q": "Trong câu ““산”을 읽어요.”,“산” có nghĩa gì?",
    "o": [
-    "ban ngày",
-    "mặt trăng",
+    "nước",
+    "cơ thể",
     "núi"
    ],
    "a": 2,
-   "e": "“산”을 읽어요. → Đọc “산” (núi)."
+   "e": "Đọc “산” (núi). Nghĩa cần chọn là núi, không phải hai khái niệm còn lại."
   },
   {
    "t": "mc",
-   "q": "Chọn nghĩa phù hợp của “옷” trong bài.",
+   "q": "Trong câu ““옷”을 읽어요.”,“옷” có nghĩa gì?",
    "o": [
-    "ban đêm/hạt dẻ tùy ngữ cảnh",
+    "cơm",
     "quần áo",
-    "nước"
+    "mặt trăng"
    ],
    "a": 1,
-   "e": "“옷”을 읽어요. → Đọc “옷” (quần áo)."
+   "e": "Đọc “옷” (quần áo). Nghĩa cần chọn là quần áo, không phải hai khái niệm còn lại."
   },
   {
    "t": "fill",
-   "q": "Điền từ/cụm tiếng Hàn có nghĩa “ban ngày”: ___",
+   "q": "Trong tình huống “Đọc “낮” (ban ngày).”,điền từ/cụm mang nghĩa “ban ngày”: ___.",
    "a": "낮",
-   "e": "Từ trong bài là 낮 (nat). Đọc “낮” (ban ngày)."
+   "e": "Câu mẫu tương ứng: “낮”을 읽어요. Hãy giữ đúng cụm 낮 khi đưa vào lời nói."
   },
   {
    "t": "fill",
-   "q": "Điền từ/cụm tiếng Hàn có nghĩa “nước”: ___",
+   "q": "Trong tình huống “Đọc “물” (nước).”,điền từ/cụm mang nghĩa “nước”: ___.",
    "a": "물",
-   "e": "Từ trong bài là 물 (mul). Đọc “물” (nước)."
+   "e": "Câu mẫu tương ứng: “물”을 읽어요. Hãy giữ đúng cụm 물 khi đưa vào lời nói."
   },
   {
    "t": "order",
-   "q": "Sắp xếp để nói: 옷 là một khối chữ.",
+   "q": "Sắp xếp để diễn đạt: Đọc “국” (canh).",
    "w": [
-    "한",
-    "글자예요",
-    "옷은"
-   ],
-   "a": "옷은 한 글자예요.",
-   "e": "Đúng: 옷은 한 글자예요. → 옷 là một khối chữ.. Giữ trợ từ gắn với danh từ và vị ngữ ở cuối."
-  },
-  {
-   "t": "order",
-   "q": "Sắp xếp để nói: Đọc 밥 chậm.",
-   "w": [
-    "천천히",
     "읽어요",
-    "밥을"
+    "“국”을"
    ],
-   "a": "밥을 천천히 읽어요.",
-   "e": "Đúng: 밥을 천천히 읽어요. → Đọc 밥 chậm.. Giữ trợ từ gắn với danh từ và vị ngữ ở cuối."
+   "a": "“국”을 읽어요.",
+   "e": "Trật tự đúng là “국”을 읽어요. Trợ từ phải đi cùng danh từ và vị ngữ kết thúc ý canh."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để diễn đạt: Đọc “산” (núi).",
+   "w": [
+    "읽어요",
+    "“산”을"
+   ],
+   "a": "“산”을 읽어요.",
+   "e": "Trật tự đúng là “산”을 읽어요. Trợ từ phải đi cùng danh từ và vị ngữ kết thúc ý núi."
   },
   {
    "t": "match",
-   "q": "Nối từ/cụm với nghĩa",
+   "q": "Ghép các cụm về canh và núi với nghĩa thích hợp.",
    "pairs": [
     [
-     "달",
-     "mặt trăng"
+     "국",
+     "canh"
     ],
     [
-     "밤",
-     "ban đêm/hạt dẻ tùy ngữ cảnh"
+     "산",
+     "núi"
     ],
     [
-     "몸",
-     "cơ thể"
+     "옷",
+     "quần áo"
     ],
     [
-     "밥",
-     "cơm"
+     "낮",
+     "ban ngày"
     ],
     [
-     "앞",
-     "phía trước"
+     "물",
+     "nước"
     ]
    ],
-   "e": "Các nghĩa được chọn theo bối cảnh bài; không suy từ một âm Hán Việt đơn lẻ."
+   "e": "So cặp 국 — canh với 물 — nước. Hai mục phục vụ những chức năng khác nhau trong tình huống vừa học."
   },
   {
    "t": "listen",
+   "say": "옷을 읽어 보세요. 끝에 ㅅ이 있어요. 여기서는 어떻게 소리 나요? 받침 소리를 짧게 닫아요. 뒤에 으를 넣어요? 아니요. 글자도 그대로 써요.",
    "lang": "ko-KR",
-   "say": "밥을 천천히 읽어요.",
-   "q": "Nghe và chọn ý đúng.",
+   "q": "Trong 옷,chữ cuối được nhận ra là gì?",
    "o": [
-    "Đọc 밥 chậm.",
-    "옷 là một khối chữ.",
-    "Gắn nguyên âm sau 물."
+    "ㄴ",
+    "ㅅ",
+    "ㅇ"
    ],
-   "a": 0,
-   "e": "Câu nghe là: 밥을 천천히 읽어요. → Đọc 밥 chậm."
+   "a": 1,
+   "e": "Nghe lượt trả lời để kiểm: 끝에 ㅅ이 있어요 xác định chữ viết, chưa đổi thành ký hiệu âm cuối. Câu hỏi này cần ㅅ thay vì suy từ vị trí chữ trên trang."
   },
   {
    "t": "listen",
+   "say": "옷을 읽어 보세요. 끝에 ㅅ이 있어요. 여기서는 어떻게 소리 나요? 받침 소리를 짧게 닫아요. 뒤에 으를 넣어요? 아니요. 글자도 그대로 써요.",
    "lang": "ko-KR",
-   "say": "방의 끝소리를 들어요.",
-   "q": "Nghe và chọn ý đúng.",
+   "q": "Đọc batchim trong lượt này cần làm gì?",
    "o": [
-    "옷 là một khối chữ.",
-    "Gắn nguyên âm sau 물.",
-    "Nghe âm cuối của 방."
+    "Bật thêm một nguyên âm",
+    "Khép âm cuối ngắn",
+    "Bỏ hết âm cuối"
    ],
-   "a": 2,
-   "e": "Câu nghe là: 방의 끝소리를 들어요. → Nghe âm cuối của 방."
+   "a": 1,
+   "e": "Nghe lượt trả lời để kiểm: 받침 소리를 짧게 닫아요 nêu thao tác khép âm. Câu hỏi này cần khép âm cuối ngắn thay vì suy từ vị trí chữ trên trang."
   },
   {
    "t": "dict",
+   "say": "선생님은 옷 카드를 보여 줘요.",
+   "a": "선생님은 옷 카드를 보여 줘요.",
    "lang": "ko-KR",
-   "say": "옷은 한 글자예요.",
-   "a": "옷은 한 글자예요.",
-   "e": "옷 là một khối chữ.. Viết bằng Hangul; không thêm nguyên âm sau batchim và giữ khoảng cách theo từ."
+   "e": "Chép nguyên câu vừa nghe, trong đó giữ chính tả của các cụm ở đoạn “Nhật ký buổi học 6”. So âm nối với chữ gốc trước khi sửa."
   },
   {
    "t": "mc",
@@ -556,52 +554,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ/cụm của bài, bản nghe TTS ko-KR đã kiểm, phiếu hai vai, bảng tiêu chí và giấy viết; Chuẩn bị thẻ chữ lớn, gương nhỏ hoặc giấy nhẹ tùy hoạt động; không ép học viên nghe phân biệt âm mà nhiều giọng đã nhập.",
+  "prep": "Chuẩn bị thẻ 국, 옷, 몸 và tranh nghĩa tương ứng; giáo viên chọn giọng ko-KR rồi nghe trước các âm đang đối chiếu.",
   "steps": [
    {
     "t": "10 phút",
-    "do": "Buổi 1: khởi động bằng tình huống “Batchim: bảy âm cuối và cách khép âm”; cho học viên nói điều đã biết."
+    "do": "Cho học viên nghe chưa nhìn chữ rồi dự đoán “Trong 옷, chữ cuối được nhận ra là gì? ”. Giữ lại hai lựa chọn gần nhau để khi nghe lần hai có thể chỉ ra âm hoặc dữ kiện quyết định."
    },
    {
     "t": "20 phút",
-    "do": "Giới thiệu từ/cụm bằng ví dụ; nghe trước, nhận diện nghĩa rồi mới đọc Romaja."
+    "do": "Dùng thẻ “국” với câu ““국”을 읽어요.”. Học viên ghép nghĩa “canh” rồi đối chiếu “산” để chọn ngữ cảnh phù hợp và tự đặt một câu khác."
    },
    {
     "t": "25 phút",
-    "do": "Dạy mẫu trọng tâm; hỏi CCQ về nghĩa và giới hạn sử dụng; làm mẫu một câu đúng và một lỗi."
+    "do": "Viết “옷은 한 글자예요.” cùng “밥을 천천히 읽어요.” lên bảng. Tách vị ngữ và thành phần liên quan tới Đọc cụm và cách ghép chữ trong ngữ cảnh; yêu cầu đổi một thành phần rồi kiểm xem nghĩa có còn đúng ý định không."
    },
    {
     "t": "20 phút",
-    "do": "Nghe hai lượt: lượt một lấy ý chính, lượt hai tìm căn cứ cho câu hỏi; học viên chỉ vào đoạn chứng cứ."
+    "do": "Dừng đoạn nghe ngay sau câu hỏi liên quan “Đọc batchim trong lượt này cần làm gì? ”. Học viên chọn thẻ hoặc lời đáp phù hợp, rồi nghe phần còn lại để kiểm thay vì đoán theo chữ Latinh."
    },
    {
     "t": "15 phút",
-    "do": "Luyện cặp theo vai, đổi dữ kiện; ghi lỗi để sửa cuối hoạt động."
+    "do": "Một người hỏi “Trong 옷, chữ cuối được nhận ra là gì? ”, người kia trả lời rồi giải thích “Sau âm cuối có thêm 으 không? ”. Đổi thẻ chữ đang chỉ, giữ cách hỏi lịch sự và không làm đổi chính tả theo âm nghe."
    },
    {
     "t": "15 phút",
-    "do": "Buổi 2: ôn cách quãng, đọc đoạn mới và trả lời có trích căn cứ."
+    "do": "Ôn đầu buổi hai bằng “국” và “공”. Mỗi học viên viết một câu nhận diện nghĩa và một câu chỉ ra trường hợp dùng sai; giáo viên dùng ví dụ từ thẻ để chữa."
    },
    {
     "t": "20 phút",
-    "do": "Phân tích cấu trúc bài đọc và so sánh cách diễn đạt với tiếng Việt."
+    "do": "Đọc đoạn mới để giải câu “방 có batchim gì? ”. Đánh dấu căn cứ ngay trong bài, vẽ mũi tên từ dữ kiện tới đáp án và phân biệt phần nói rõ với điều chỉ suy ra."
    },
    {
     "t": "20 phút",
-    "do": "Luyện nói hai nhiệm vụ; bạn học đánh dấu điều đủ ý và điều chưa rõ."
+    "do": "Giao nhập vai: Đọc “옷은 한 글자예요.” và “밥을 천천히 읽어요.”; đối chiếu hai từ 국 / 산 trước khi đọc đủ bốn câu mẫu. Quan sát xem người nhận có nói lại đúng thông tin đã thay hay vẫn giữ đáp án của lượt trước."
    },
    {
     "t": "20 phút",
-    "do": "Viết nháp, đối chiếu checklist, sửa ít nhất hai điểm có lý do."
+    "do": "Yêu cầu viết: Viết các mục từ của bảng thẻ, trong đó đánh dấu khối khó ở 국 và 밤. Chép bốn câu mẫu rồi nghe lại để kiểm chữ, không thay bằng Romaja. Khi đổi bản, bạn đọc đánh dấu một ý đã rõ và một quan hệ cần giải thích; tác giả sửa dựa trên phản hồi chứ không chép lại mẫu."
    },
    {
     "t": "15 phút",
-    "do": "Làm bài tự chấm, giải thích lỗi; ghi một mục tiêu ôn tiếp."
+    "do": "Chữa câu “옷 khi đứng riêng thuộc nhóm cuối nào? ”. Học viên tự nêu điều khiến đáp án sai dễ bị chọn, rồi dùng “공” trong một câu kết thúc hoạt động."
    }
   ],
   "games": [
-   "Thẻ bằng chứng: mỗi cặp ghép một câu trả lời với câu tiếng Hàn hỗ trợ nó; phải giải thích bằng tiếng Việt.",
-   "Đổi vai có dữ kiện mới: mỗi người nói ít nhất hai lượt trước khi đổi bạn; không đọc nguyên đáp án."
+   "Tìm mảnh đối chiếu:nhóm nhận “국”,“물” và “공”;đặt mỗi thẻ vào ví dụ phù hợp rồi bảo vệ lựa chọn bằng nghĩa,cấu trúc hoặc âm đang học.",
+   "Đường tới đáp án:hai đội cùng giải “방 có batchim gì?”;đội ghi đúng câu chứng cứ và loại được một suy luận quá mức thắng lượt đó."
   ],
   "errors": [
    "Thêm ư sau batchim: khép rồi dừng, không mở miệng lại.",
@@ -610,6 +608,6 @@
    "Đọc ㅇ đầu và cuối giống nhau: so 아 với 방.",
    "Đọc hai chữ batchim kép thành hai âm tiết: học quy tắc theo từ và âm sau."
   ],
-  "homework": "Ôn thẻ 10 phút/ngày, đọc lại bốn câu mẫu và ghi âm; viết một lỗi đã sửa kèm lý do bằng tiếng Việt."
+  "homework": "Viết lại sản phẩm sau khi kiểm câu “밥을 천천히 읽어요.”. Ghi âm phần trả lời “Cuộc trao đổi diễn ra trong bối cảnh nào? ”, nghe lại vào hôm sau và nêu một điểm khác giữa 국 với 산."
  }
 }

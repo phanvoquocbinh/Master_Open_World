@@ -3,29 +3,31 @@
  "title": "Địa điểm và tồn tại; あります・います",
  "sub": "机の 上に 本が あります。",
  "goals": [
-  "Hiểu và dùng đúng Địa điểm và tồn tại; あります・います",
-  "Đọc/nghe phân biệt ít nhất 12 từ/cụm của tình huống",
-  "Hỏi và trả lời ba thông tin cụ thể bằng mức lịch sự phù hợp",
-  "Viết đoạn mới và tự sửa lỗi theo checklist"
+  "Phân tích cách dùng trong câu “机の 上に 本が あります。” và tạo một câu khác giữ đúng quan hệ ý.",
+  "Dùng “ここ” (ở đây) và “そこ” (ở đó gần người nghe) đúng trong trao đổi của bài.",
+  "Nghe để trả lời câu hỏi “Theo hội thoại: Ở đây có ghế không?”, rồi chỉ ra phần lời nói làm căn cứ.",
+  "Tự viết đoạn có ý chính “Dưới ghế” và kiểm lại sự nhất quán với văn bản đọc."
  ],
  "parts": [
   {
    "k": "text",
    "h": "Bối cảnh và cách học",
-   "html": "<p>Mô tả phòng học giả bằng vị trí tương đối; chọn động từ tồn tại phù hợp với đối tượng.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+   "html": "<p>Mô tả phòng học giả bằng vị trí tương đối; chọn động từ tồn tại phù hợp với đối tượng.</p>"
   },
   {
    "k": "sounds",
    "h": "Phát âm và nhịp",
-   "html": "<p>Luyện mora trong từ của bài, đặc biệt âm dài, ん và っ. Không áp thanh điệu tiếng Việt; nghe câu trọn cụm và giữ phần kết lịch sự.</p>",
+   "html": "<p>机 có tsu-ku-e ba mora; tránh thêm một nguyên âm trước tsu. Đọc liền あります và います nhưng vẫn giữ khác biệt a-ri ở đầu; hai động từ không phải hai tốc độ của cùng một từ.</p>",
    "items": [
     {
-     "sym": "Nhịp câu và âm cuối",
+     "sym": "つくえ・となり・います",
      "ex": [
-      "机の 上に 本が あります。",
-      "いすの 下に 猫が います。"
+      "机",
+      "隣",
+      "あります",
+      "います"
      ],
-     "vi": "Đọc theo cụm ý, giữ đủ độ dài và không bỏ phần phủ định."
+     "vi": "Nghe và đọc đối chiếu 机 (つくえ), 隣 (となり), あります (あります), います (います). Dùng câu “机の 上に 本が あります。” để kiểm xem các độ dài âm còn giữ được khi nối vào phát ngôn."
     }
    ]
   },
@@ -94,8 +96,8 @@
      "kana": "となり",
      "romaji": "tonari",
      "vi": "bên cạnh",
-     "ex": "はい、机の 隣に あります。",
-     "exVi": "Có, ở cạnh bàn."
+     "ex": "隣の部屋で工事をしています。",
+     "exVi": "Phòng bên cạnh đang thi công."
     },
     {
      "w": "前",
@@ -180,7 +182,7 @@
   {
    "k": "dialog",
    "h": "Nghe: Địa điểm và tồn tại; あります・います",
-   "note": "Hai học viên của lớp giả Mây Sớm trao đổi; nghe lần đầu lấy ý, lần sau kiểm chi tiết. Không đọc romaji trong âm thanh.",
+   "note": "Trước khi nghe, dự đoán câu trả lời cho “Theo hội thoại: Ở đây có ghế không?”. Sau đó ghi nguyên thông tin làm bạn chọn đáp án; lượt nói “はい、机の 隣に あります。” là một điểm cần kiểm khi nghe lại.",
    "lang": "ja-JP",
    "lines": [
     {
@@ -234,34 +236,34 @@
    ],
    "qs": [
     {
-     "q": "Theo hội thoại: Ở đây có ghế không?",
+     "q": "Mèo ở đâu?",
      "o": [
-      "Có, ở cạnh bàn.",
-      "Ở dưới ghế.",
-      "Có, trên bàn."
+      "Trên bàn",
+      "Trước lớp",
+      "Dưới ghế"
      ],
-     "a": 0,
-     "e": "Câu trả lời là はい、机の 隣に あります。 → Có, ở cạnh bàn."
+     "a": 2,
+     "e": "Lượt nói “いすの 下に います。” nghĩa là: Ở dưới ghế. Nội dung này làm rõ đáp án “Dưới ghế”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Mèo ở đâu?",
+     "q": "Bàn ở đâu so với ghế?",
      "o": [
-      "Không, ở trước phòng học.",
-      "Ở dưới ghế.",
-      "Có, trên bàn."
+      "Trên ghế",
+      "Bên cạnh",
+      "Trong ghế"
      ],
      "a": 1,
-     "e": "Câu trả lời là いすの 下に います。 → Ở dưới ghế."
+     "e": "Lượt nói “はい、机の 隣に あります。” nghĩa là: Có, ở cạnh bàn. Nội dung này làm rõ đáp án “Bên cạnh”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Ở đó có sách không?",
+     "q": "Haru ở đâu?",
      "o": [
-      "Có, trên bàn.",
-      "Có, ở cạnh bàn.",
-      "Không, ở trước phòng học."
+      "Trước phòng học",
+      "Cạnh bàn",
+      "Dưới ghế"
      ],
      "a": 0,
-     "e": "Câu trả lời là はい、机の 上に あります。 → Có, trên bàn."
+     "e": "Lượt nói “いいえ、教室の 前に います。” nghĩa là: Không, ở trước phòng học. Nội dung này làm rõ đáp án “Trước phòng học”, không phải hai cách hiểu còn lại."
     }
    ]
   },
@@ -346,35 +348,35 @@
    "h": "Nói và phản hồi",
    "tasks": [
     {
-     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "p": "Đóng vai hỏi về ở đây và ở đó gần người nghe. Dùng lượt “ここに いすが ありますか。” để mở đầu, rồi yêu cầu bạn trả lời bằng thông tin của vai đối diện.",
      "model": "ここに いすが ありますか。 猫は どこに いますか。 そこに 本が ありますか。 はるさんは あそこに いますか。",
      "vi": "Ở đây có ghế không? Mèo ở đâu? Ở đó có sách không? Haru ở kia phải không?",
-     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+     "tips": "Khi bạn nói “猫は どこに いますか。”, người nghe phải nhận ra Mèo ở đâu?; ghi âm và kiểm xem từ nào đang quyết định nghĩa đó."
     },
     {
-     "p": "Tóm tắt nội dung bài đọc bằng ba câu, sau đó nêu một câu hỏi còn muốn làm rõ.",
+     "p": "Tóm tắt ba ý trong bài đọc để trả lời “Mèo ở đâu?”. Kết thúc bằng câu hỏi về có/ở đó (người, động vật) nếu phần này chưa được người nghe xác nhận.",
      "model": "ここは 小さい 教室です。机と いすが あります。 机の 上に 本が あります。 いすの 下に 猫が います。",
      "vi": "Đây là phòng học nhỏ. Có bàn và ghế. Trên bàn có sách. Dưới ghế có mèo.",
-     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+     "tips": "So phần tóm tắt của bạn với dữ kiện “Dưới ghế”; nếu ý này thay đổi, hãy nói rõ đó là tình huống giả định mới."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có kiểm tra",
-   "task": "Viết một đoạn mới theo tình huống bài học; thay ít nhất hai chi tiết, dùng cấu trúc trọng tâm và kiểm thông tin nhất quán.",
+   "task": "Viết một đoạn tình huống có các ý: Trên bàn có sách. / Dưới ghế có mèo. / Đồng hồ ở kia.. Dùng thêm thông tin của bài đọc để nối các ý, không chỉ chép ba câu rời.",
    "min": 80,
    "model": "ここは 小さい 教室です。机と いすが あります。 机の 上に 本が あります。 いすの 下に 猫が います。 ゆいさんは 机の 隣に います。 はるさんは 教室の 前に います。 「あそこに 時計が あります」と ゆいさんが 言います。 私は「そこに ノートも ありますか」と 聞きます。 ノートは ありません。本だけです。",
    "modelVi": "Đây là phòng học nhỏ. Có bàn và ghế. Trên bàn có sách. Dưới ghế có mèo. Yui ở cạnh bàn. Haru ở trước phòng học. Yui nói “Ở kia có đồng hồ”. Tôi hỏi “Ở đó cũng có vở không?”. Không có vở. Chỉ có sách.",
    "tips": [
-    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
-    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+    "Lập sơ đồ ai làm gì trong câu “机の 上に 本が あります。”, rồi dùng cùng quan hệ chủ thể khi nối sang đoạn của bạn.",
+    "Đối chiếu “いすの 下に 猫が います。” với mẫu cuối “時計は あそこに あります。”; chọn phần kết câu phù hợp trước khi sửa chính tả."
    ],
    "checklist": [
-    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
-    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
-    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
-    "Câu kết thúc và mức lịch sự nhất quán"
+    "Người đọc nhận ra đúng nghĩa của “ここ”, thay vì chỉ thấy từ được chèn vào câu.",
+    "Quan hệ ý trong “机の 上に 本が あります。” vẫn đúng khi bạn thay dữ kiện.",
+    "Các ý ở đó gần người nghe và có/ở đó (người, động vật) không bị lẫn vai hoặc phạm vi.",
+    "Đoạn kết không trái với dữ kiện trả lời câu hỏi “Mèo ở đâu?”."
    ]
   }
  ],
@@ -510,7 +512,7 @@
      "phía trước"
     ]
    ],
-   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+   "e": "Đối chiếu các cặp “いす → ghế” và “前 → phía trước”; phân biệt nghĩa trong tình huống, không ghép chỉ dựa vào hình chữ."
   },
   {
    "t": "mc",
@@ -537,52 +539,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ, bảng cấu trúc bài này, loa/giọng đọc tiếng Nhật, phiếu thông tin khác nhau cho từng cặp. Không dùng dữ liệu cá nhân thật.",
+  "prep": "Chuẩn bị thẻ “ここ”, “そこ”, “います”, bản hội thoại che lượt trả lời và phiếu đọc có câu hỏi “Mèo ở đâu?”.",
   "steps": [
    {
     "t": "10'",
-    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+    "do": "Gợi tình huống bằng câu “ここに いすが ありますか。”. Cho cặp học viên nói mình muốn biết điều gì trước khi mở lời đáp."
    },
    {
     "t": "20'",
-    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+    "do": "Cho so thẻ “ここ” với “そこ”: học viên diễn đạt nghĩa ở đây và ở đó gần người nghe, rồi đặt mỗi từ vào một lượt trao đổi."
    },
    {
     "t": "25'",
-    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+    "do": "Viết hai câu “机の 上に 本が あります。” và “いすの 下に 猫が います。” cạnh nhau. Học viên giải thích khác biệt ý, sau đó thay một thành phần mà vẫn giữ cấu trúc vừa phân tích."
    },
    {
     "t": "20'",
-    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+    "do": "Che lời thoại và giao câu hỏi “Theo hội thoại: Ở đây có ghế không?”. Sau hai lượt nghe, yêu cầu nêu bằng chứng thay vì đoán theo từ khóa đơn lẻ."
    },
    {
     "t": "15'",
-    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+    "do": "Cho đổi vai quanh lượt “そこに 本が ありますか。”. Người nghe hỏi lại thông tin trước khi chuyển sang lời đáp, giáo viên ghi một chỗ gây hiểu nhầm để chữa cuối hoạt động."
    },
    {
     "t": "15'",
-    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+    "do": "Đầu buổi sau, yêu cầu dựng lại ý “Đồng hồ ở kia.” không nhìn chữ Nhật. So lời nói của học viên với câu đích và chữa phần làm thay đổi quan hệ ý."
    },
    {
     "t": "20'",
-    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+    "do": "Đọc để giải quyết câu hỏi “Mèo ở đâu?”. Mỗi nhóm đánh dấu đoạn chứng minh và giải thích vì sao hai lựa chọn còn lại không khớp."
    },
    {
     "t": "20'",
-    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+    "do": "Giao nhiệm vụ nói có thông tin ở đây ở một vai và có/ở đó (người, động vật) ở vai kia. Hai bên chỉ hoàn thành phiếu khi đã hỏi để hiểu dữ kiện của nhau."
    },
    {
     "t": "20'",
-    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+    "do": "Viết đoạn nối ý “Trên bàn có sách.” với “Đồng hồ ở kia.”. Đổi bài và kiểm chủ thể, mốc thời gian cùng từ phủ định trước khi góp ý độ tự nhiên."
    },
    {
     "t": "15'",
-    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+    "do": "Chữa bài tự chấm từ cặp “そこ” và “います”. Mỗi học viên ghi một câu sửa của chính mình và nêu cách sẽ nhận ra lỗi đó trong lần dùng sau."
    }
   ],
   "games": [
-   "Ghép thẻ câu với tình huống: mỗi nhóm phải giải thích một cặp và chỉ ra từ/cấu trúc quyết định.",
-   "Thông tin lệch: mỗi bạn giữ một phần dữ kiện; phải hỏi lại thay vì đoán để hoàn thành phiếu."
+   "Khoảng trống thông tin: một bạn chỉ thấy “ここに いすが ありますか。”, bạn kia giữ câu trả lời. Họ hỏi lại để hoàn thành thông tin về ở đây trước khi đổi vai.",
+   "Chọn và bảo vệ đáp án: các nhóm nhận câu hỏi “Mèo ở đâu?”, chọn một phương án rồi tìm chi tiết đủ bác hai phương án nhiễu."
   ],
   "errors": [
    "Dùng あります cho người: người/động vật thường dùng います.",
@@ -590,6 +592,6 @@
    "Quên の giữa danh từ và vị trí: 机の上, không 机上 theo mẫu sơ cấp này.",
    "Nhầm câu hỏi có gì với câu hỏi vật ở đâu: xem chủ đề は và thông tin mới が."
   ],
-  "homework": "Ôn 12–20 thẻ theo lịch 1–3–7 ngày; nghe chép câu đã chọn, ghi âm hai lượt nói và viết đoạn mới thay ít nhất hai chi tiết."
+  "homework": "Ôn “ここ”, “そこ” và “います” bằng câu mới có nghĩa. Ghi âm câu “机の 上に 本が あります。”, nghe lại phần kết rồi viết lời giải thích cho câu hỏi “Mèo ở đâu?” bằng tiếng Việt."
  }
 }

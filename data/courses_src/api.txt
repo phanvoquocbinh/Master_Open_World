@@ -4,7 +4,7 @@ icon: 📮
 floor: 2
 room: 201
 level: Cơ bản → Trung bình
-hours: 6
+hours: 28
 summary: Hiểu HTTP từ con số 0, gửi request bằng Postman, viết test tự động và chạy cả bộ test bằng Newman trên dòng lệnh.
 
 ## LESSON api-01 | API và HTTP là gì?
@@ -18,16 +18,6 @@ Bạn không cần biết bếp nấu thế nào. Bạn chỉ cần gọi món �
 Việc của tester API: gọi đúng thì có ra đúng món không? Gọi sai thì người phục vụ có báo lỗi rõ ràng không?
 
 ### Một request và response trông như thế nào?
-~~~text
-GET /posts/1 HTTP/1.1
-Host: jsonplaceholder.typicode.com
-Accept: application/json
-
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{ "userId": 1, "id": 1, "title": "..." }
-~~~
 Giải thích từng dòng:
 • Dòng 1: method GET (lấy dữ liệu), đường dẫn /posts/1, phiên bản HTTP.
 • Dòng 2: Host là tên máy chủ cần gọi.
@@ -36,19 +26,36 @@ Giải thích từng dòng:
 • HTTP/1.1 200 OK: response bắt đầu bằng status code, 200 nghĩa là thành công.
 • Content-Type: server báo dữ liệu trả về là JSON.
 • Dòng cuối: body, chính là "món ăn" bạn nhận được.
+~~~text
+GET /posts/1 HTTP/1.1
+Host: localhost:3130
+Accept: application/json
+
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{ "userId": 1, "id": 1, "title": "..." }
+~~~
 
 ### URL gồm những phần nào?
-~~~text
-https://jsonplaceholder.typicode.com/comments?postId=1&_limit=2
-~~~
 Tách URL ra từng phần:
 • https:// — giao thức, có mã hóa đường truyền.
-• jsonplaceholder.typicode.com — tên miền, giống địa chỉ nhà hàng.
+• localhost:3130 — tên miền, giống địa chỉ nhà hàng.
 • /comments — path, tài nguyên muốn lấy (gọi món nào).
 • ?postId=1&_limit=2 — query params, bộ lọc thêm. Bắt đầu bằng dấu ?, các cặp nối nhau bằng dấu &.
 Ý nghĩa: lấy comment của bài viết số 1, tối đa 2 kết quả.
+~~~text
+http://localhost:3130/comments?postId=1&_limit=2
+~~~
 
 ### 5 method hay dùng nhất
+Mẹo nhớ bằng nhà hàng:
+• GET = xem thực đơn.
+• POST = gọi món mới.
+• PUT = đổi hẳn sang món khác.
+• PATCH = "bớt cay giùm em".
+• DELETE = hủy món.
+Quy tắc: GET không được làm thay đổi dữ liệu. Nếu gọi GET mà dữ liệu bị xóa hay sửa, đó là bug.
 ~~~text
 GET     /posts        -> lấy danh sách bài viết
 GET     /posts/1      -> lấy bài viết số 1
@@ -57,15 +64,13 @@ PUT     /posts/1      -> thay thế toàn bộ bài viết số 1
 PATCH   /posts/1      -> sửa một phần bài viết số 1
 DELETE  /posts/1      -> xóa bài viết số 1
 ~~~
-Mẹo nhớ bằng nhà hàng:
-• GET = xem thực đơn.
-• POST = gọi món mới.
-• PUT = đổi hẳn sang món khác.
-• PATCH = "bớt cay giùm em".
-• DELETE = hủy món.
-Quy tắc: GET không được làm thay đổi dữ liệu. Nếu gọi GET mà dữ liệu bị xóa hay sửa, đó là bug.
 
 ### Status code: đèn tín hiệu của server
+Nhớ nhanh theo chữ số đầu:
+• 2xx: mọi thứ ổn.
+• 3xx: đi chỗ khác.
+• 4xx: lỗi phía người gọi (client gửi sai).
+• 5xx: lỗi phía server — gần như luôn là bug cần báo cáo.
 ~~~text
 200 OK                     Thành công
 201 Created                Tạo mới thành công (thường sau POST)
@@ -77,24 +82,105 @@ Quy tắc: GET không được làm thay đổi dữ liệu. Nếu gọi GET mà
 404 Not Found              Không tìm thấy tài nguyên
 500 Internal Server Error  Server gặp lỗi
 ~~~
-Nhớ nhanh theo chữ số đầu:
-• 2xx: mọi thứ ổn.
-• 3xx: đi chỗ khác.
-• 4xx: lỗi phía người gọi (client gửi sai).
-• 5xx: lỗi phía server — gần như luôn là bug cần báo cáo.
 
 ### Thử ngay bằng curl trên Windows
 Mở PowerShell (bấm phím Windows, gõ PowerShell, Enter) rồi gõ:
-~~~bash
-curl.exe -i https://jsonplaceholder.typicode.com/posts/1
-~~~
 Giải thích:
 • curl.exe: công cụ gửi request có sẵn trên Windows 10/11.
 • -i: in cả status code và header, không chỉ body.
 Kết quả mong đợi: dòng đầu có "HTTP/1.1 200 OK" (hoặc "HTTP/2 200"), tiếp theo là các header, cuối cùng là body JSON.
 Lỗi thường gặp: gõ curl (thiếu .exe) trong Windows PowerShell sẽ gọi lệnh Invoke-WebRequest và báo lỗi "parameter name 'i' is ambiguous". Hãy gõ đúng curl.exe.
+~~~bash
+curl.exe -i http://localhost:3130/posts/1
+~~~
 
-PRACTICE: Dùng curl.exe -i gọi https://jsonplaceholder.typicode.com/users/3 rồi gọi https://jsonplaceholder.typicode.com/users/999. Ghi lại status code của từng lần và giải thích vì sao khác nhau.
+### API fixture tự viết để học ngoại tuyến
+Lưu code dưới thành lab_api_fixture.py trong thư mục bài tập riêng, chạy python lab_api_fixture.py rồi mở /health tại localhost:3130. Python là runtime đã chuẩn bị ở phần máy tính. Fixture có10users,100posts,500comments tự tạo; GET lọc userId/postId và_limit. POST/PUT/PATCH/DELETE chỉ trả response minh họa, không lưu thay đổi: POSTposts trảid101,GETposts101 vẫn404. Token chỉ là placeholder,không thực hiện JWT/hết hạn; không dùng server này cho dữ liệu thật hoặc làm chuẩn hiệu năng. Các bài nâng cao dùng app đặt lớp localhost:3100 có hợp đồng riêng, không nhầm hai lab.
+~~~python
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlsplit, parse_qs
+import json
+# Fixture hoàn toàn tự viết,không tải dữ liệu từ dịch vụ bên ngoài.
+names=['Lam Thoi','Vạt Nếp','Mầm Sương','Thoi Rìa','Nếp Vân',
+       'Vạt Mây','Mầm Rêu','Thoi Nắng','Nếp Lụa','Vạt Gió']
+users=[{'id':i+1,'name':name,'username':f'lab{i+1}',
+ 'email':f'lab-{i+1}@example.com','website':'example.com',
+ 'address':{'street':f'Ngõ Mầm {i+1}','city':f'Vân Thoi {i+1}',
+            'geo':{'lat':'0.1250','lng':'0.2500'}},
+ 'company':{'name':f'Xưởng Nếp {i+1}'}} for i,name in enumerate(names)]
+posts=[{'id':i,'userId':(i-1)//10+1,'title':f'Phiếu lớp Mầm {i}',
+        'body':f'Nội dung giả của phiếu {i},chỉ dùng trong lab.'} for i in range(1,101)]
+comments=[{'id':i,'postId':(i-1)//5+1,'name':f'Ghi chú Thoi {i}',
+           'email':f'note-{i}@example.com','body':f'Ghi chú giả số {i}.'} for i in range(1,501)]
+TOKEN='LAB_ONLY_OPAQUE_TOKEN_NOT_A_SECRET'
+class Lab(BaseHTTPRequestHandler):
+ def log_message(self,*args): pass
+ def send(self,status,data):
+  raw=json.dumps(data,ensure_ascii=False).encode('utf-8')
+  self.send_response(status)
+  self.send_header('Content-Type','application/json; charset=utf-8')
+  self.send_header('Content-Length',str(len(raw)))
+  self.end_headers();self.wfile.write(raw)
+ def body(self):
+  size=int(self.headers.get('Content-Length','0'))
+  if size>100000:raise ValueError('body_too_large')
+  raw=self.rfile.read(size)
+  if 'application/json' not in self.headers.get('Content-Type',''):return {}
+  return json.loads(raw or b'{}')
+ def do_GET(self):
+  url=urlsplit(self.path);path=url.path.rstrip('/');query=parse_qs(url.query)
+  if path=='/health':return self.send(200,{'ready':True,'fixture':'MAM-1'})
+  if path=='/auth/me':
+   if self.headers.get('Authorization')!='Bearer '+TOKEN:
+    return self.send(401,{'message':'Invalid/Expired Token!'})
+   return self.send(200,{'id':1,'username':'lab-student','email':'student@example.com'})
+  parts=path.strip('/').split('/')
+  if len(parts)==3 and parts[0]=='users' and parts[2]=='posts':
+   if not parts[1].isdigit() or not 1<=int(parts[1])<=10:return self.send(404,{})
+   return self.send(200,[x for x in posts if x['userId']==int(parts[1])])
+  tables={'users':users,'posts':posts,'comments':comments}
+  if parts[0] not in tables:return self.send(404,{})
+  rows=tables[parts[0]]
+  if len(parts)==2:
+   row=next((x for x in rows if str(x['id'])==parts[1]),None)
+   return self.send(200 if row else 404,row or {})
+  if len(parts)!=1:return self.send(404,{})
+  for key,values in query.items():
+   if not key.startswith('_'):rows=[x for x in rows if str(x.get(key))==values[0]]
+  if '_limit' in query:
+   try:rows=rows[:max(0,min(1000,int(query['_limit'][0])))]
+   except ValueError:return self.send(400,{'error':'invalid_limit'})
+  return self.send(200,rows)
+ def do_POST(self):
+  try:data=self.body()
+  except (ValueError,TypeError):return self.send(400,{'error':'invalid_json'})
+  if not isinstance(data,dict):return self.send(400,{'error':'object_required'})
+  path=urlsplit(self.path).path.rstrip('/')
+  if path in ('/auth/login','/api/login'):
+   if not data.get('password'):return self.send(400,{'error':'Missing password'})
+   user_ok=data.get('username')=='lab-student' or data.get('email')=='student@example.com'
+   if not user_ok or data['password']!='LAB_ONLY_NOT_SECRET':
+    return self.send(401,{'message':'Invalid lab credentials'})
+   return self.send(200,{'id':1,'username':'lab-student','accessToken':TOKEN,
+                         'refreshToken':'LAB_ONLY_REFRESH_PLACEHOLDER','token':TOKEN})
+  if path=='/posts':return self.send(201,{**data,'id':101})
+  return self.send(404,{})
+ def do_PUT(self):
+  try:data=self.body()
+  except (ValueError,TypeError):return self.send(400,{'error':'invalid_json'})
+  parts=urlsplit(self.path).path.strip('/').split('/')
+  if len(parts)==2 and parts[0]=='posts' and parts[1].isdigit() and isinstance(data,dict):
+   return self.send(200,{**data,'id':int(parts[1])})
+  return self.send(404,{})
+ do_PATCH=do_PUT
+ def do_DELETE(self):return self.send(200,{})
+if __name__=='__main__':
+ print('API fixture: http://localhost:3130 ; Ctrl+C để dừng')
+ ThreadingHTTPServer(('localhost',3130),Lab).serve_forever()
+
+~~~
+
+PRACTICE: Dùng curl.exe -i gọi http://localhost:3130/users/3 rồi gọi http://localhost:3130/users/999. Ghi lại status code của từng lần và giải thích vì sao khác nhau.
 Q: Server trả về 401. Ý nghĩa đúng nhất là gì?
 - Server bị sập
 + Bạn chưa xác thực hoặc token không hợp lệ
@@ -111,16 +197,6 @@ Q: Trong URL .../comments?postId=1, phần postId=1 gọi là gì?
 ## LESSON api-02 | JSON và request GET đầu tiên với Postman
 
 ### JSON: ngôn ngữ chung giữa client và server
-~~~json
-{
-  "id": 1,
-  "name": "Lan",
-  "isActive": true,
-  "tags": ["tester", "qa"],
-  "address": { "city": "Hà Nội" },
-  "manager": null
-}
-~~~
 JSON giống một tờ phiếu thông tin: mỗi dòng có nhãn và giá trị.
 • { } là một object (một tờ phiếu); bên trong là các cặp "tên": giá trị.
 • "id": 1 — số (number), không có ngoặc kép.
@@ -129,41 +205,43 @@ JSON giống một tờ phiếu thông tin: mỗi dòng có nhãn và giá trị
 • [ ] — array (danh sách).
 • "address" là object lồng trong object.
 • null — không có giá trị.
+~~~json
+{
+  "id": 1,
+  "name": "Lan",
+  "isActive": true,
+  "tags": ["tester", "qa"],
+  "address": { "city": "Vân Thoi" },
+  "manager": null
+}
+~~~
 
 ### Cài Postman trên Windows
-Cách 1: vào postman.com/downloads, tải bản Windows, chạy file .exe.
+Cách 1: vào trang tải bộ cài chính thức của Postman, tải bản Windows, chạy file .exe.
 Cách 2: dùng winget trong PowerShell:
-~~~bash
-winget install --id Postman.Postman -e
-~~~
 Giải thích:
 • winget: trình cài phần mềm có sẵn trên Windows 10/11.
 • --id Postman.Postman: mã định danh của Postman trong kho winget.
 • -e: khớp chính xác mã, tránh cài nhầm phần mềm khác.
 Sau khi cài, mở Postman từ Start menu. Có thể tạo tài khoản miễn phí để lưu collection.
 Lưu ý an toàn: không lưu token, mật khẩu thật vào workspace dạng Public.
+~~~bash
+winget install --id Postman.Postman -e
+~~~
 
 ### Gửi request GET đầu tiên
-~~~text
-Method : GET
-URL    : https://jsonplaceholder.typicode.com/posts/1
-~~~
 Các bước:
 • Bấm New → HTTP (hoặc dấu + để mở tab mới).
 • Chọn GET ở ô method bên trái thanh URL.
 • Dán URL vào rồi bấm Send.
 • Nhìn khung Response phía dưới: Status 200 OK, thời gian (ms), dung lượng (B hoặc KB).
 • Tab Body hiển thị JSON; chọn chế độ Pretty để dễ đọc.
+~~~text
+Method : GET
+URL    : http://localhost:3130/posts/1
+~~~
 
 ### Đọc kết quả trả về
-~~~json
-{
-  "userId": 1,
-  "id": 1,
-  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-  "body": "quia et suscipit\nsuscipit recusandae ..."
-}
-~~~
 Giải thích từng trường:
 • userId: bài viết thuộc người dùng số 1.
 • id: mã bài viết, khớp với số 1 trên URL.
@@ -173,32 +251,40 @@ Một tester sẽ kiểm tra:
 • id có đúng là 1 không?
 • Có đủ 4 trường không? Kiểu dữ liệu đúng không (id là số, title là chuỗi)?
 • Tab Headers của response có Content-Type: application/json không?
+~~~json
+{
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae ..."
+}
+~~~
 
 ### Query Params trong Postman
+• Bạn có thể gõ thẳng ?postId=1 vào URL, hoặc nhập vào tab Params. Postman tự đồng bộ hai nơi.
+• Kết quả mong đợi: một array gồm 5 comment, comment nào cũng có "postId": 1.
+• Bỏ tick ô vuông cạnh postId để tạm tắt param mà không phải xóa.
+Thử đổi postId thành 2 và so sánh kết quả.
 ~~~text
-GET https://jsonplaceholder.typicode.com/comments?postId=1
+GET http://localhost:3130/comments?postId=1
 
 Tab Params:
 KEY      VALUE
 postId   1
 ~~~
-• Bạn có thể gõ thẳng ?postId=1 vào URL, hoặc nhập vào tab Params. Postman tự đồng bộ hai nơi.
-• Kết quả mong đợi: một array gồm 5 comment, comment nào cũng có "postId": 1.
-• Bỏ tick ô vuông cạnh postId để tạm tắt param mà không phải xóa.
-Thử đổi postId thành 2 và so sánh kết quả.
 
 ### Lỗi thường gặp
-~~~text
-Error: getaddrinfo ENOTFOUND jsonplaceholder.typicode.coom
-Error: connect ECONNREFUSED 127.0.0.1:3000
-404 Not Found   (body: {})
-~~~
 • ENOTFOUND: tên miền gõ sai hoặc mất mạng → kiểm tra URL, thử mở trên trình duyệt.
 • ECONNREFUSED: không có server nào đang chạy ở địa chỉ/cổng đó (hay gặp với localhost) → bật server lên hoặc sửa cổng.
 • 404: path sai (ví dụ /post/1 thay vì /posts/1) hoặc id không tồn tại.
 • Mạng công ty dùng proxy: vào Settings → Proxy và cấu hình theo hướng dẫn của IT.
+~~~text
+Error: getaddrinfo ENOTFOUND localhost-sai:3130
+Error: connect ECONNREFUSED 127.0.0.1:3000
+404 Not Found   (body: {})
+~~~
 
-PRACTICE: Trong Postman, gửi GET https://jsonplaceholder.typicode.com/users/1. Ghi lại: status code, thời gian phản hồi, giá trị trường email và giá trị address.city.
+PRACTICE: Trong Postman, gửi GET http://localhost:3130/users/1. Ghi lại: status code, thời gian phản hồi, giá trị trường email và giá trị address.city.
 Q: Trong JSON, giá trị nào là một array?
 - {"a": 1}
 + ["qa", "dev"]
@@ -211,6 +297,13 @@ Q: Bạn gặp lỗi "getaddrinfo ENOTFOUND". Nguyên nhân hay gặp nhất là
 ## LESSON api-03 | POST, PUT, PATCH, DELETE với body JSON
 
 ### POST: gửi dữ liệu để tạo mới
+Các bước trong Postman:
+• Method: POST, URL: http://localhost:3130/posts
+• Tab Body → chọn raw → menu bên phải chọn JSON.
+• Dán đoạn JSON trên vào rồi bấm Send.
+Giải thích body:
+• title, body: nội dung bài viết mới.
+• userId: tác giả là người dùng số 1.
 ~~~json
 {
   "title": "Bài viết của tester",
@@ -218,15 +311,12 @@ Q: Bạn gặp lỗi "getaddrinfo ENOTFOUND". Nguyên nhân hay gặp nhất là
   "userId": 1
 }
 ~~~
-Các bước trong Postman:
-• Method: POST, URL: https://jsonplaceholder.typicode.com/posts
-• Tab Body → chọn raw → menu bên phải chọn JSON.
-• Dán đoạn JSON trên vào rồi bấm Send.
-Giải thích body:
-• title, body: nội dung bài viết mới.
-• userId: tác giả là người dùng số 1.
 
 ### Kết quả mong đợi: 201 Created
+• Status 201 Created — đúng chuẩn cho việc tạo mới.
+• Server trả lại dữ liệu bạn gửi, kèm id mới là 101.
+• Lưu ý: API Mầm Lab là API giả lập, không lưu thật. Gọi GET /posts/101 sẽ nhận 404.
+• Trên hệ thống thật, sau POST bạn nên GET lại hoặc kiểm tra database để chắc dữ liệu đã được lưu.
 ~~~json
 {
   "title": "Bài viết của tester",
@@ -235,57 +325,53 @@ Giải thích body:
   "id": 101
 }
 ~~~
-• Status 201 Created — đúng chuẩn cho việc tạo mới.
-• Server trả lại dữ liệu bạn gửi, kèm id mới là 101.
-• Lưu ý: jsonplaceholder là API giả lập, không lưu thật. Gọi GET /posts/101 sẽ nhận 404.
-• Trên hệ thống thật, sau POST bạn nên GET lại hoặc kiểm tra database để chắc dữ liệu đã được lưu.
 
 ### Header Content-Type quan trọng thế nào?
+• Header này nói với server: "body tôi gửi là JSON".
+• Khi chọn raw + JSON, Postman tự thêm header này (xem tab Headers, mục hidden headers).
+• Nếu chọn raw + Text, server có thể không hiểu body. Với API Mầm Lab, response chỉ còn {"id": 101} — dấu hiệu body đã bị bỏ qua.
+• Tester nên thử cố tình gửi sai Content-Type xem server có báo lỗi rõ ràng không (thường là 400 hoặc 415 Unsupported Media Type).
 ~~~text
 Content-Type: application/json
 ~~~
-• Header này nói với server: "body tôi gửi là JSON".
-• Khi chọn raw + JSON, Postman tự thêm header này (xem tab Headers, mục hidden headers).
-• Nếu chọn raw + Text, server có thể không hiểu body. Với jsonplaceholder, response chỉ còn {"id": 101} — dấu hiệu body đã bị bỏ qua.
-• Tester nên thử cố tình gửi sai Content-Type xem server có báo lỗi rõ ràng không (thường là 400 hoặc 415 Unsupported Media Type).
 
 ### PUT và PATCH khác nhau thế nào?
-~~~text
-PUT https://jsonplaceholder.typicode.com/posts/1
-{ "id": 1, "title": "Tiêu đề mới", "body": "Nội dung mới", "userId": 1 }
-
-PATCH https://jsonplaceholder.typicode.com/posts/1
-{ "title": "Chỉ đổi tiêu đề" }
-~~~
 • PUT: gửi toàn bộ đối tượng để thay thế bản cũ (như thay cả cái áo).
 • PATCH: chỉ gửi phần cần sửa (như khâu lại một chiếc cúc).
 • Cả hai thường trả 200 OK kèm dữ liệu sau khi sửa.
 Ý tưởng test: PUT thiếu trường bắt buộc thì sao? PATCH một trường không tồn tại thì sao? Sửa id trong body khác id trên URL thì sao?
+~~~text
+PUT http://localhost:3130/posts/1
+{ "id": 1, "title": "Tiêu đề mới", "body": "Nội dung mới", "userId": 1 }
+
+PATCH http://localhost:3130/posts/1
+{ "title": "Chỉ đổi tiêu đề" }
+~~~
 
 ### DELETE và status 204
+• DELETE thường không cần body.
+• Nhiều API trả 204 No Content (không có body); một số trả 200 kèm {} như API Mầm Lab.
+• Hãy đọc tài liệu API (API spec, Swagger) để biết status nào là đúng, rồi test theo tài liệu.
+Ý tưởng test: xóa 2 lần cùng một id (lần 2 nên là 404), xóa id không tồn tại, xóa khi không có quyền (nên là 403).
 ~~~text
-DELETE https://jsonplaceholder.typicode.com/posts/1
+DELETE http://localhost:3130/posts/1
 
 Kết quả: 200 OK
 Body: {}
 ~~~
-• DELETE thường không cần body.
-• Nhiều API trả 204 No Content (không có body); một số trả 200 kèm {} như jsonplaceholder.
-• Hãy đọc tài liệu API (API spec, Swagger) để biết status nào là đúng, rồi test theo tài liệu.
-Ý tưởng test: xóa 2 lần cùng một id (lần 2 nên là 404), xóa id không tồn tại, xóa khi không có quyền (nên là 403).
 
 ### Lỗi thường gặp
-~~~text
-400 Bad Request
-SyntaxError: Unexpected token } in JSON at position 52
-~~~
 • Thừa dấu phẩy cuối: { "a": 1, } → JSON không hợp lệ.
 • Dùng nháy đơn 'abc' thay vì nháy kép "abc".
 • Quên chọn JSON trong Body raw → server nhận text thường.
 • Gửi POST tới /posts/1 thay vì /posts → thường bị 404.
 Mẹo: Postman gạch chân đỏ chỗ sai cú pháp trong khung Body, hãy để ý trước khi bấm Send.
+~~~text
+400 Bad Request
+SyntaxError: Unexpected token } in JSON at position 52
+~~~
 
-PRACTICE: Gửi POST https://jsonplaceholder.typicode.com/posts với body JSON có title là tên của bạn. Xác nhận status 201 và id = 101. Sau đó thêm một dấu phẩy thừa ở cuối body, gửi lại và ghi lại phản hồi nhận được.
+PRACTICE: Gửi POST http://localhost:3130/posts với body JSON có title là tên của bạn. Xác nhận status 201 và id = 101. Sau đó thêm một dấu phẩy thừa ở cuối body, gửi lại và ghi lại phản hồi nhận được.
 Q: Method nào phù hợp để chỉ sửa một trường của tài nguyên?
 - PUT
 + PATCH
@@ -302,18 +388,18 @@ Q: Sau khi POST tạo mới thành công, status code chuẩn thường là gì?
 ## LESSON api-04 | Headers, xác thực và Bearer token
 
 ### Header: phần ghi chú đi kèm request
-~~~text
-Accept: application/json
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOi...
-User-Agent: PostmanRuntime/7.x
-~~~
 Header giống dòng ghi chú bên ngoài phong bì thư: không phải nội dung chính nhưng rất quan trọng.
 • Accept: tôi muốn nhận định dạng gì.
 • Content-Type: tôi đang gửi định dạng gì.
 • Authorization: giấy tờ chứng minh tôi là ai.
 • User-Agent: tôi đang dùng công cụ gì để gọi.
 Trong Postman, xem tab Headers của request (phía trên) và tab Headers của response (phía dưới).
+~~~text
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOi...
+User-Agent: PostmanRuntime/7.x
+~~~
 
 ### Xác thực: thẻ ra vào tòa nhà
 • Authentication (xác thực): bạn là ai? Đăng nhập bằng username/password để nhận "thẻ" gọi là token.
@@ -324,61 +410,52 @@ Khi test, phân biệt rõ:
 • 401 Unauthorized: không có thẻ, thẻ giả hoặc thẻ hết hạn.
 • 403 Forbidden: thẻ thật nhưng không được vào phòng này.
 
-### Đăng nhập để lấy token (DummyJSON)
+### Đăng nhập trong fixture cục bộ
+Dùng lab_api_fixture.py ở bài1, tài khoản giả lab-student và chuỗi LAB_ONLY_NOT_SECRET. Đây là quy tắc cố định chỉ để học header/token, không dùng cho xác thực sản xuất. Kết quả200 có accessToken/refreshToken; expiresInMins chỉ là trường request minh họa, fixture không thực hiện thời hạn phiên.
 ~~~text
-POST https://dummyjson.com/auth/login
+POST http://localhost:3130/auth/login
 Content-Type: application/json
 
 {
-  "username": "emilys",
-  "password": "emilyspass",
+  "username": "lab-student",
+  "password": "LAB_ONLY_NOT_SECRET",
   "expiresInMins": 30
 }
 ~~~
-Giải thích:
-• Dòng 1: gọi API đăng nhập của DummyJSON, một API demo công khai.
-• emilys / emilyspass là tài khoản mẫu được công bố trong tài liệu của DummyJSON, không phải tài khoản thật của ai.
-• expiresInMins: token có hiệu lực bao nhiêu phút.
-Kết quả mong đợi: 200 OK, body có id, username, email... và hai trường accessToken, refreshToken.
-accessToken là một chuỗi dài bắt đầu bằng eyJ (định dạng JWT).
 
 ### Dùng token để gọi API cần đăng nhập
-~~~text
-GET https://dummyjson.com/auth/me
-Authorization: Bearer <dán accessToken vào đây>
-~~~
 Cách làm trong Postman:
-• Tạo request GET https://dummyjson.com/auth/me
+• Tạo request GET http://localhost:3130/auth/me
 • Tab Authorization → Auth Type: Bearer Token → dán accessToken vào ô Token.
 • Postman tự tạo header Authorization: Bearer <token>.
-• Bấm Send → mong đợi 200 OK và thông tin của user emilys.
+• Bấm Send → mong đợi 200 OK và thông tin của user lab-student.
 Thử xóa token rồi Send lại → mong đợi 401 kèm thông báo thiếu hoặc sai token.
-
-### Một API demo khác: reqres.in
 ~~~text
-POST https://reqres.in/api/login
-Content-Type: application/json
-x-api-key: <key miễn phí, nếu trang reqres.in yêu cầu>
-
-{ "email": "eve.holt@reqres.in", "password": "cityslicka" }
+GET http://localhost:3130/auth/me
+Authorization: Bearer <dán accessToken vào đây>
 ~~~
-• reqres.in cũng là API demo; email/password trên là dữ liệu mẫu trong tài liệu của họ.
-• Kết quả mong đợi: 200 OK với body dạng {"token": "..."}.
-• Thử bỏ trường password → mong đợi 400 với {"error": "Missing password"}.
-• reqres.in có thể yêu cầu header x-api-key miễn phí. Nếu bị 401/403 khi chưa có key, xem hướng dẫn trên trang chủ reqres.in.
+
+### So sánh hợp đồng token thứ hai của lab
+Endpoint /api/login trong cùng fixture nhận email student@example.com và password LAB_ONLY_NOT_SECRET, trả token khi đúng. Thiếu password trả400 với Missing password. Không đăng ký dịch vụ ngoài hoặc xin API key; cả hai endpoint là dữ liệu tự viết cho việc học.
+~~~text
+POST http://localhost:3130/api/login
+Content-Type: application/json
+
+{ "email": "student@example.com", "password": "LAB_ONLY_NOT_SECRET" }
+~~~
 
 ### Lỗi thường gặp
-~~~text
-401 Unauthorized
-{ "message": "Invalid/Expired Token!" }
-~~~
 • Thiếu chữ "Bearer " hoặc thiếu dấu cách: "Bearer<token>" là sai.
 • Copy thiếu ký tự, hoặc dính cả dấu ngoặc kép "eyJ..." vào token.
 • Token hết hạn (quá expiresInMins) → đăng nhập lại để lấy token mới.
 • Đặt token ở cả tab Headers và tab Authorization với giá trị khác nhau → dễ nhầm, chỉ dùng một chỗ.
 • Không bao giờ dán token thật của môi trường PROD vào ảnh chụp màn hình hay nhóm chat.
+~~~text
+401 Unauthorized
+{ "message": "Invalid/Expired Token!" }
+~~~
 
-PRACTICE: Đăng nhập DummyJSON để lấy accessToken, rồi gọi GET https://dummyjson.com/auth/me bằng Bearer Token. Sau đó xóa 3 ký tự cuối của token, gửi lại và ghi lại status code nhận được.
+PRACTICE: Đăng nhập API đăng nhập Mầm Lab để lấy accessToken, rồi gọi GET http://localhost:3130/auth/me bằng Bearer Token. Sau đó xóa 3 ký tự cuối của token, gửi lại và ghi lại status code nhận được.
 Q: Bạn đã đăng nhập đúng nhưng gọi API chỉ dành cho admin và bị từ chối. Status code hợp lý nhất là gì?
 - 401
 + 403
@@ -391,6 +468,10 @@ Q: Header Authorization nào đúng định dạng Bearer?
 ## LESSON api-05 | Collections, Environments và Variables
 
 ### Collection: tủ hồ sơ chứa request
+• Tạo collection: thanh bên trái → Collections → dấu + → đặt tên "Blog API".
+• Chuột phải vào collection → Add folder để chia nhóm.
+• Với request đang mở, bấm Save (Ctrl+S) → chọn collection/folder để lưu.
+• Đặt tên request rõ ràng theo kiểu hành động + đối tượng, ví dụ "Create post".
 ~~~text
 Blog API                (Collection)
  |-- Auth               (Folder)
@@ -402,52 +483,42 @@ Blog API                (Collection)
  `-- Users
       `-- GET  Get user
 ~~~
-• Tạo collection: thanh bên trái → Collections → dấu + → đặt tên "Blog API".
-• Chuột phải vào collection → Add folder để chia nhóm.
-• Với request đang mở, bấm Save (Ctrl+S) → chọn collection/folder để lưu.
-• Đặt tên request rõ ràng theo kiểu hành động + đối tượng, ví dụ "Create post".
 
 ### Environment: bộ cấu hình cho từng môi trường
-~~~text
-Environment: dev
-VARIABLE   INITIAL VALUE                          CURRENT VALUE
-baseUrl    https://jsonplaceholder.typicode.com   https://jsonplaceholder.typicode.com
-postId     1                                      1
-~~~
 • Environment giống chùm chìa khóa cho từng tòa nhà: dev, staging dùng chung request nhưng khác địa chỉ.
 • Tạo: thanh bên trái → Environments → dấu + → đặt tên "dev" → thêm biến baseUrl và postId.
 • Chọn "dev" ở ô chọn environment góc trên bên phải.
 • Initial value có thể được chia sẻ cho đồng đội; Current value chỉ nằm trên máy bạn.
 • Token, mật khẩu nên đặt kiểu secret và không ghi vào Initial value.
+~~~text
+Environment: dev
+VARIABLE   INITIAL VALUE                          CURRENT VALUE
+baseUrl    http://localhost:3130   http://localhost:3130
+postId     1                                      1
+~~~
 
 ### Dùng biến bằng cặp ngoặc {{ }}
-~~~text
-GET {{baseUrl}}/posts/{{postId}}
-~~~
-• Khi gửi, {{baseUrl}} được thay bằng https://jsonplaceholder.typicode.com và {{postId}} được thay bằng 1.
+• Khi gửi, {{baseUrl}} được thay bằng http://localhost:3130 và {{postId}} được thay bằng 1.
 • Rê chuột lên biến để xem giá trị và nơi biến được định nghĩa.
 • Biến hiện màu xanh: đã tìm thấy. Màu đỏ: chưa được định nghĩa ở environment đang chọn.
 Lợi ích: muốn chuyển sang môi trường khác chỉ cần đổi environment, không phải sửa từng request.
+~~~text
+GET {{baseUrl}}/posts/{{postId}}
+~~~
 
 ### Phạm vi biến (scope)
-~~~text
-Global  >  Collection  >  Environment  >  Data (CSV/JSON)  >  Local
-(rộng nhất)                                                (hẹp nhất)
-~~~
 • Nếu cùng một tên biến có ở nhiều nơi, biến ở phạm vi hẹp hơn sẽ thắng.
 • Global: dùng ở mọi nơi — hạn chế dùng vì dễ rối.
 • Collection: dùng chung trong một collection, ví dụ token của collection đó.
 • Environment: thay đổi theo môi trường (dev, staging).
 • Data: giá trị đọc từ file dữ liệu khi chạy Collection Runner hoặc Newman.
 • Local: chỉ tồn tại trong một lần chạy script.
+~~~text
+Global  >  Collection  >  Environment  >  Data (CSV/JSON)  >  Local
+(rộng nhất)                                                (hẹp nhất)
+~~~
 
 ### Tự động lưu token sau khi login (chaining)
-~~~js
-// Đặt ở tab Scripts > Post-response của request "POST Login"
-const json = pm.response.json();
-pm.environment.set("token", json.accessToken);
-console.log("Đã lưu token:", json.accessToken.substring(0, 10) + "...");
-~~~
 Giải thích từng dòng:
 • Dòng 1: comment (ghi chú), máy bỏ qua dòng này.
 • Dòng 2: đọc body response và biến thành object JavaScript tên json.
@@ -456,18 +527,24 @@ Giải thích từng dòng:
 Ở các request khác: tab Authorization → Bearer Token → ô Token gõ {{token}}.
 Muốn lưu ở mức collection thì dùng pm.collectionVariables.set("token", json.accessToken).
 (Postman bản cũ gọi tab này là Tests.)
+~~~js
+// Đặt ở tab Scripts > Post-response của request "POST Login"
+const json = pm.response.json();
+pm.environment.set("token", json.accessToken);
+console.log("Đã lưu token:", json.accessToken.substring(0, 10) + "...");
+~~~
 
 ### Lỗi thường gặp
-~~~text
-Error: getaddrinfo ENOTFOUND {{baseurl}}
-Error: Invalid URI "%7B%7BbaseUrl%7D%7D/posts"
-TypeError: Cannot read properties of undefined (reading 'substring')
-~~~
 • Biến không được thay: chưa chọn environment (ô góc phải đang là "No environment").
 • Sai chữ hoa/thường: {{baseurl}} khác {{baseUrl}}.
 • Biến có Current value rỗng.
 • Thừa dấu /: baseUrl kết thúc bằng / rồi lại viết {{baseUrl}}/posts → thành //posts.
 • Cannot read properties of undefined: response không có accessToken vì login thất bại → kiểm tra status trước khi đọc token.
+~~~text
+Error: getaddrinfo ENOTFOUND {{baseurl}}
+Error: Invalid URI "%7B%7BbaseUrl%7D%7D/posts"
+TypeError: Cannot read properties of undefined (reading 'substring')
+~~~
 
 PRACTICE: Tạo collection "Blog API" với 3 request dùng {{baseUrl}}: GET danh sách posts, GET post theo {{postId}}, POST tạo post. Tạo environment "dev" chứa baseUrl và postId = 5, chọn "dev" rồi chạy cả 3 request.
 Q: Biến {{baseUrl}} hiển thị màu đỏ trong Postman nghĩa là gì?
@@ -486,11 +563,6 @@ Q: Cùng tên biến tồn tại ở Global và Environment. Postman dùng giá 
 ## LESSON api-06 | Viết test tự động trong Postman
 
 ### Test là gì trong Postman?
-~~~js
-pm.test("Status code là 200", function () {
-  pm.response.to.have.status(200);
-});
-~~~
 Test giống một ô trong checklist: Postman tự kiểm tra và đánh dấu PASS hoặc FAIL.
 Viết ở tab Scripts → Post-response (bản cũ: tab Tests).
 Giải thích từng dòng:
@@ -498,8 +570,19 @@ Giải thích từng dòng:
 • Dòng 2: khẳng định status phải là 200.
 • Dòng 3: đóng hàm và đóng test.
 Bấm Send → xem tab Test Results ở khung response: PASS màu xanh, FAIL màu đỏ.
+~~~js
+pm.test("Status code là 200", function () {
+  pm.response.to.have.status(200);
+});
+~~~
 
 ### Kiểm tra nội dung body
+Dùng với request GET {{baseUrl}}/posts/1.
+• pm.response.json(): chuyển body thành object.
+• pm.expect(a).to.eql(b): a phải bằng b.
+• to.be.a("string"): kiểm tra kiểu dữ liệu là chuỗi.
+• to.be.above(0): phải lớn hơn 0.
+Mỗi pm.test độc lập: một test fail không làm dừng các test khác.
 ~~~js
 const json = pm.response.json();
 
@@ -513,14 +596,14 @@ pm.test("title là chuỗi và không rỗng", function () {
   pm.expect(json.title.length).to.be.above(0);
 });
 ~~~
-Dùng với request GET {{baseUrl}}/posts/1.
-• pm.response.json(): chuyển body thành object.
-• pm.expect(a).to.eql(b): a phải bằng b.
-• to.be.a("string"): kiểm tra kiểu dữ liệu là chuỗi.
-• to.be.above(0): phải lớn hơn 0.
-Mỗi pm.test độc lập: một test fail không làm dừng các test khác.
 
 ### Kiểm tra thời gian phản hồi và header
+Giải thích:
+• responseTime: số mili-giây server cần để trả lời.
+• to.be.below(1000): phải nhỏ hơn 1 giây (ngưỡng ví dụ, hãy theo yêu cầu dự án).
+• headers.get("Content-Type"): đọc giá trị một header.
+• to.include(...): chuỗi phải chứa đoạn văn bản này.
+Lưu ý: thời gian phụ thuộc mạng, đặt ngưỡng quá sát sẽ khiến test lúc pass lúc fail (flaky).
 ~~~js
 pm.test("Phản hồi dưới 1000 ms", function () {
   pm.expect(pm.response.responseTime).to.be.below(1000);
@@ -530,14 +613,13 @@ pm.test("Content-Type là JSON", function () {
   pm.expect(pm.response.headers.get("Content-Type")).to.include("application/json");
 });
 ~~~
-Giải thích:
-• responseTime: số mili-giây server cần để trả lời.
-• to.be.below(1000): phải nhỏ hơn 1 giây (ngưỡng ví dụ, hãy theo yêu cầu dự án).
-• headers.get("Content-Type"): đọc giá trị một header.
-• to.include(...): chuỗi phải chứa đoạn văn bản này.
-Lưu ý: thời gian phụ thuộc mạng, đặt ngưỡng quá sát sẽ khiến test lúc pass lúc fail (flaky).
 
 ### Kiểm tra cấu trúc dữ liệu (JSON schema)
+• schema là "khuôn mẫu" mô tả một response hợp lệ.
+• required: danh sách trường bắt buộc phải có.
+• properties: kiểu dữ liệu của từng trường.
+• pm.response.to.have.jsonSchema(schema): Postman so response với khuôn.
+Nếu một ngày server trả id dạng chuỗi "1" thay vì số 1, test này sẽ bắt được ngay.
 ~~~js
 const schema = {
   type: "object",
@@ -554,13 +636,13 @@ pm.test("Đúng cấu trúc post", function () {
   pm.response.to.have.jsonSchema(schema);
 });
 ~~~
-• schema là "khuôn mẫu" mô tả một response hợp lệ.
-• required: danh sách trường bắt buộc phải có.
-• properties: kiểu dữ liệu của từng trường.
-• pm.response.to.have.jsonSchema(schema): Postman so response với khuôn.
-Nếu một ngày server trả id dạng chuỗi "1" thay vì số 1, test này sẽ bắt được ngay.
 
 ### Kiểm tra danh sách và chạy cả collection
+Dùng với GET {{baseUrl}}/posts.
+• to.be.an("array"): phải là danh sách.
+• lengthOf(100): đúng 100 phần tử (dữ liệu mẫu của API Mầm Lab).
+• forEach: lặp qua từng bài viết, kiểm tra có trường id.
+Chạy cả collection: chuột phải collection → Run → bấm Run Blog API. Kết quả hiển thị tổng số test pass/fail cho từng request.
 ~~~js
 const posts = pm.response.json();
 
@@ -574,22 +656,17 @@ pm.test("Bài nào cũng có id", function () {
   });
 });
 ~~~
-Dùng với GET {{baseUrl}}/posts.
-• to.be.an("array"): phải là danh sách.
-• lengthOf(100): đúng 100 phần tử (dữ liệu mẫu của jsonplaceholder).
-• forEach: lặp qua từng bài viết, kiểm tra có trường id.
-Chạy cả collection: chuột phải collection → Run → bấm Run Blog API. Kết quả hiển thị tổng số test pass/fail cho từng request.
 
 ### Lỗi thường gặp
+• AssertionError: test đã chạy và phát hiện khác biệt → đọc kỹ: là bug thật hay request gửi sai?
+• Unexpected token '<': response là trang HTML (thường là trang lỗi), không phải JSON → kiểm tra URL và status trước khi gọi pm.response.json().
+• ReferenceError: dùng biến chưa khai báo, ví dụ khai báo json nhưng lại viết jsonData.
+• Test luôn PASS dù dữ liệu sai: quên viết pm.expect bên trong pm.test.
 ~~~text
 AssertionError: expected response to have status code 200 but got 404
 JSONError: Unexpected token '<' at 1:1
 ReferenceError: jsonData is not defined
 ~~~
-• AssertionError: test đã chạy và phát hiện khác biệt → đọc kỹ: là bug thật hay request gửi sai?
-• Unexpected token '<': response là trang HTML (thường là trang lỗi), không phải JSON → kiểm tra URL và status trước khi gọi pm.response.json().
-• ReferenceError: dùng biến chưa khai báo, ví dụ khai báo json nhưng lại viết jsonData.
-• Test luôn PASS dù dữ liệu sai: quên viết pm.expect bên trong pm.test.
 
 PRACTICE: Thêm vào request GET {{baseUrl}}/users/1 ba test: status là 200, email có chứa ký tự "@", và address.city là chuỗi. Chạy cả collection bằng Collection Runner và ghi lại số test pass/fail.
 Q: Trong Postman bản mới, nên viết test ở đâu?
@@ -608,52 +685,56 @@ Q: pm.expect(json.id).to.eql(1) kiểm tra điều gì?
 ## LESSON api-07 | Newman: chạy collection bằng dòng lệnh
 
 ### Vì sao cần Newman?
-~~~bash
-node -v
-npm -v
-~~~
 • Newman là "Postman không có giao diện": chạy collection bằng dòng lệnh.
 • Dùng để chạy tự động trong CI/CD (GitHub Actions, Jenkins) mỗi khi có code mới.
 • Newman chạy trên Node.js, nên trước tiên kiểm tra Node bằng 2 lệnh trên trong PowerShell.
 Kết quả mong đợi: in ra phiên bản, ví dụ v22.11.0 và 10.9.0.
 Nếu báo "not recognized": cài Node.js LTS (winget install OpenJS.NodeJS.LTS), đóng và mở lại PowerShell.
+~~~bash
+node -v
+npm -v
+~~~
 
 ### Cài Newman
-~~~bash
-npm install -g newman
-newman -v
-~~~
 Giải thích từng dòng:
 • npm install: tải gói phần mềm từ kho npm.
 • -g: cài toàn cục (global), dùng được ở mọi thư mục.
 • newman -v: kiểm tra đã cài thành công; mong đợi in ra phiên bản, ví dụ 6.x.x.
+~~~bash
+npm install -g newman
+newman -v
+~~~
 
 ### Xuất collection và environment
+• Đặt 2 file vào cùng một thư mục, ví dụ C:\qa\api-tests.
+• Mẹo: đặt tên file không dấu cách để gõ lệnh dễ hơn.
+• Mở file kiểm tra không chứa token, mật khẩu thật trước khi đưa lên Git.
 ~~~text
 Collection : bấm (...) cạnh "Blog API" → Export → Collection v2.1 → Export
              → lưu thành blog.postman_collection.json
 Environment: Environments → bấm (...) cạnh "dev" → Export
              → lưu thành dev.postman_environment.json
 ~~~
-• Đặt 2 file vào cùng một thư mục, ví dụ C:\qa\api-tests.
-• Mẹo: đặt tên file không dấu cách để gõ lệnh dễ hơn.
-• Mở file kiểm tra không chứa token, mật khẩu thật trước khi đưa lên Git.
 
 ### Chạy collection
-~~~bash
-cd C:\qa\api-tests
-newman run blog.postman_collection.json -e dev.postman_environment.json
-~~~
 Giải thích từng dòng:
 • cd: di chuyển vào thư mục chứa 2 file.
 • newman run <collection>: chạy tất cả request theo đúng thứ tự trong collection.
 • -e <environment>: dùng environment dev để thay các biến như {{baseUrl}}.
 Kết quả mong đợi: Newman in từng request kèm status, thời gian, dấu ✓ cho test pass, cuối cùng là bảng tổng kết.
+~~~bash
+cd C:\qa\api-tests
+newman run blog.postman_collection.json -e dev.postman_environment.json
+~~~
 
 ### Đọc kết quả Newman
+• Mũi tên →: tên request đang chạy.
+• [200 OK, 1.2kB, 85ms]: status, dung lượng, thời gian.
+• Dấu ✓ là pass; test fail được đánh số và giải thích ở phần cuối.
+• Có test fail thì Newman kết thúc với exit code 1 → CI báo đỏ. Đây là hành vi mong muốn.
 ~~~text
 → Get post by id
-  GET https://jsonplaceholder.typicode.com/posts/1 [200 OK, 1.2kB, 85ms]
+  GET http://localhost:3130/posts/1 [200 OK, 1.2kB, 85ms]
   ✓  Status code là 200
   ✓  Trả đúng bài viết số 1
 
@@ -667,12 +748,14 @@ Kết quả mong đợi: Newman in từng request kèm status, thời gian, dấ
   #  failure         detail
  1.  AssertionError  Phản hồi dưới 1000 ms
 ~~~
-• Mũi tên →: tên request đang chạy.
-• [200 OK, 1.2kB, 85ms]: status, dung lượng, thời gian.
-• Dấu ✓ là pass; test fail được đánh số và giải thích ở phần cuối.
-• Có test fail thì Newman kết thúc với exit code 1 → CI báo đỏ. Đây là hành vi mong muốn.
 
 ### Báo cáo và tùy chọn hữu ích
+Giải thích:
+• -r cli,junit: vừa in ra màn hình vừa xuất file JUnit XML mà Jenkins/GitHub Actions đọc được.
+• newman-reporter-htmlextra: reporter bên ngoài, phải cài thêm; tạo file HTML đẹp để gửi cả nhóm.
+• -d data.csv: chạy với dữ liệu lấy từ file (data-driven testing).
+• -n 3: lặp 3 vòng (iterations).
+• --delay-request 200: nghỉ 200 ms giữa các request, tránh dồn tải lên server demo.
 ~~~bash
 newman run blog.postman_collection.json -e dev.postman_environment.json -r cli,junit --reporter-junit-export results/junit.xml
 
@@ -681,22 +764,16 @@ newman run blog.postman_collection.json -e dev.postman_environment.json -r cli,h
 
 newman run blog.postman_collection.json -e dev.postman_environment.json -d data.csv -n 3 --delay-request 200
 ~~~
-Giải thích:
-• -r cli,junit: vừa in ra màn hình vừa xuất file JUnit XML mà Jenkins/GitHub Actions đọc được.
-• newman-reporter-htmlextra: reporter bên ngoài, phải cài thêm; tạo file HTML đẹp để gửi cả nhóm.
-• -d data.csv: chạy với dữ liệu lấy từ file (data-driven testing).
-• -n 3: lặp 3 vòng (iterations).
-• --delay-request 200: nghỉ 200 ms giữa các request, tránh dồn tải lên server demo.
 
 ### Lỗi thường gặp
+• Not recognized: chưa cài, hoặc chưa mở lại PowerShell sau khi cài → đóng và mở lại terminal.
+• Scripts disabled: PowerShell chặn file .ps1 → gõ newman.cmd thay cho newman, hoặc dùng Command Prompt (cmd). Trên máy công ty, hỏi IT trước khi đổi ExecutionPolicy.
+• ENOENT: sai tên hoặc đường dẫn file. Tên có dấu cách thì đặt trong ngoặc kép, ví dụ "Blog API.postman_collection.json".
 ~~~text
 newman : The term 'newman' is not recognized as the name of a cmdlet...
 newman : File C:\Users\...\npm\newman.ps1 cannot be loaded because running scripts is disabled on this system.
 error: collection could not be loaded ... ENOENT: no such file or directory
 ~~~
-• Not recognized: chưa cài, hoặc chưa mở lại PowerShell sau khi cài → đóng và mở lại terminal.
-• Scripts disabled: PowerShell chặn file .ps1 → gõ newman.cmd thay cho newman, hoặc dùng Command Prompt (cmd). Trên máy công ty, hỏi IT trước khi đổi ExecutionPolicy.
-• ENOENT: sai tên hoặc đường dẫn file. Tên có dấu cách thì đặt trong ngoặc kép, ví dụ "Blog API.postman_collection.json".
 
 PRACTICE: Export collection "Blog API" và environment "dev", chạy bằng Newman với reporter htmlextra, mở file report.html bằng trình duyệt và tìm xem test nào pass, test nào fail.
 Q: Lệnh nào chạy một collection kèm environment?
@@ -711,3 +788,396 @@ Q: Muốn xuất báo cáo HTML bằng htmlextra, bạn cần làm gì trước?
 - Không cần gì, Newman có sẵn
 + Cài thêm gói newman-reporter-htmlextra
 - Cài Postman bản trả phí
+
+## LESSON api-08 | Hợp đồng API và kiểm thay đổi schema
+
+### Hợp đồng gồm shape và hành vi
+Dịch vụ lớp học giả định Mây Rìa trả danh sách lớp. Mô tả kiểu, trường bắt buộc, miền capacity và quyền đọc; schema chỉ kiểm được một phần, không chứng minh dữ liệu thuộc đúng người gọi.
+~~~text
+{"id":"CL7","capacity":12,"remaining":3,"status":"open"}
+Bất biến lab: 0 <= remaining <= capacity
+Trường status thuộc open/closed; id không rỗng.
+~~~
+
+### Assertion không chỉ đếm status
+Trong Postman lab, kiểm quan hệ remaining/capacity để phát hiện lỗi nghiệp vụ dù response 200. Chỉ dùng pm.response.json khi body được hợp đồng xác nhận là JSON; lỗi parse cũng phải được báo rõ.
+~~~js
+const d=pm.response.json();
+pm.test('remaining nằm trong sức chứa',()=>{
+ pm.expect(d.remaining).to.be.a('number');
+ pm.expect(d.remaining).to.be.at.least(0);
+ pm.expect(d.remaining).to.be.at.most(d.capacity);
+});
+~~~
+
+### Ma trận tương thích có ví dụ cụ thể
+Thêm trường optional thường ít rủi ro hơn xóa trường client dùng nhưng còn tùy client strict. Mô tả thay đổi và kiểm client giả thay vì chỉ gắn nhãn breaking dựa trên cảm giác.
+~~~text
+Thay đổi | client cũ | kỳ vọng
+thêm note optional | bỏ qua trường lạ | đọc được
+xóa id | cần id để đặt lớp | hỏng hợp đồng
+capacity số -> chuỗi | tính số trực tiếp | cần chuyển phiên bản
+~~~
+
+### Bẫy snapshot chứa giá trị thay đổi
+Không so nguyên response có timestamp động hoặc id sinh mới nếu yêu cầu không cố định chúng. Kiểm định dạng và quan hệ, còn giá trị động được lưu trong biến riêng của run.
+
+### Review hợp đồng từ phía người tiêu thụ
+Cho một client giả chỉ cần id, remaining và status. Viết ví dụ trước/sau, chạy kiểm và nêu trường nào có cam kết; tài liệu phải phân biệt yêu cầu đã chốt với giả định cần hỏi BA.
+
+PRACTICE: Viết hợp đồng lớp học và mười ca dữ liệu biên. Kiểm shape, remaining/capacity và ba thay đổi tương thích; nộp expected/actual, không chỉ status.
+Q: Schema có bảo đảm đơn thuộc người gọi không?
++ Không
+- Có nếu id là UUID
+- Có nếu response 200
+Q: Thêm trường bắt buộc vào request cũ có rủi ro gì?
++ Làm client cũ hỏng
+- Luôn tương thích
+- Chỉ đổi màu báo cáo
+
+## LESSON api-09 | Phân trang, lọc, sắp xếp và dữ liệu cạnh tranh
+
+### Định nghĩa thứ tự cho phân trang
+Danh sách lớp xếp createdAt rồi id để phân xử thời gian trùng. Hợp đồng lab dùng cursor opaque do server cấp; client không tự sửa cursor để dự đoán trang kế.
+~~~text
+GET http://localhost:3100/classes?limit=2&sort=createdAt,id
+Response: items + nextCursor
+GET http://localhost:3100/classes?limit=2&cursor=<cursor-do-lab-cap>
+~~~
+
+### Kiểm trùng và thiếu theo id
+Với tập fixture cố định, ghép các trang rồi đối chiếu id đã biết, không chỉ kiểm mỗi trang có hai dòng. Trang cuối, tập rỗng và cursor sai là các nhánh độc lập.
+~~~js
+const ids=pm.collectionVariables.get('seenIds');
+const seen=ids?JSON.parse(ids):[];
+const page=pm.response.json();
+for(const x of page.items){
+ pm.expect(seen).not.to.include(x.id);
+ seen.push(x.id);
+}
+pm.collectionVariables.set('seenIds',JSON.stringify(seen));
+~~~
+
+### Thử lọc kết hợp và khoảng biên
+Tên lớp giả định dùng Unicode có dấu, trạng thái và sức chứa có thể phối hợp. Định nghĩa AND/OR và inclusive/exclusive trước khi kiểm; đừng biến mong đợi chưa chốt thành bug.
+~~~text
+status=open & remaining>=1 -> chỉ lớp còn chỗ
+limit=0 -> lỗi validation theo hợp đồng lab
+limit=201 -> từ chối nếu max=200
+cursor sai định dạng -> 400, không stack trace
+~~~
+
+### Dữ liệu cạnh tranh làm offset trượt
+Chèn hoặc xóa một dòng giữa hai lượt đọc để quan sát. Kết luận theo chính sách snapshot/cursor; nếu API chỉ best effort, ghi giới hạn thay vì đòi mọi hệ thống bất biến.
+
+### Nghiệm thu bằng tập cố định trước
+Bắt đầu với bảy lớp đã biết thứ tự rồi mới thêm cạnh tranh. So kết quả từng trang và toàn bộ tập; kiểm cursor cuối không tạo vòng lặp vô hạn ở client.
+
+PRACTICE: Tạo bảy lớp giả có timestamp trùng, chạy limit 1/2/max và filter kết hợp. Thử thêm/xóa giữa trang, ghi cam kết nhất quán và chứng cứ id thiếu/trùng nếu vi phạm.
+Q: Phân trang ổn định cần gì khi timestamp bằng nhau?
++ Khóa phân xử và quy tắc cursor rõ
+- Chỉ LIMIT
+- Chỉ sắp tên bảng
+Q: Khi dữ liệu đổi giữa hai trang nên kiểm gì?
++ Quy tắc snapshot/cursor mà hợp đồng cam kết
+- Ép mọi hệ thống không được đổi
+- Chỉ tổng số trang
+
+## LESSON api-10 | Idempotency và chống tạo bản ghi trùng
+
+### Một ý định ghi có một mã chống lặp
+Đặt lớp lab dùng Idempotency-Key do client tạo cho một ý định đăng ký. Retry sau mất response dùng lại key và cùng payload; lần đặt lớp mới phải có key mới.
+~~~text
+POST http://localhost:3100/enrollments
+Idempotency-Key: LAB-RUN7-REQ1
+Content-Type: application/json
+
+{"classId":"CL7","studentId":"ST4"}
+~~~
+
+### Kiểm lại kết quả không chỉ body lần hai
+Hai request cùng key có thể trả status khác nhau theo hợp đồng nhưng phải không tạo thêm đăng ký. Sau hai lần gửi, query danh sách theo student/class và kiểm đúng một bản ghi.
+~~~js
+const d=pm.response.json();
+const first=pm.collectionVariables.get('enrollmentId');
+if(!first)pm.collectionVariables.set('enrollmentId',d.id);
+else pm.test('retry trả cùng đăng ký',()=>pm.expect(d.id).to.eql(first));
+~~~
+
+### Ma trận payload và thời hạn key
+Cùng key khác payload phải có hành vi rõ, ví dụ 409 trong lab, không được âm thầm dùng đăng ký cũ cho lớp mới. Kiểm TTL và scope theo actor; key không thay cơ chế xác thực.
+~~~text
+K1 + payload A lần đầu -> tạo E1
+K1 + payload A retry -> E1, không tạo E2
+K1 + payload B -> 409 theo hợp đồng lab
+K2 + payload A -> quy tắc trùng nghiệp vụ được kiểm riêng
+~~~
+
+### Timeout không đồng nghĩa rollback
+Server có thể ghi xong trước khi response mất. Client cần truy trạng thái hoặc retry có chống lặp; đổi key ngay sau timeout có thể nhân giao dịch dù từng request đều hợp lệ.
+
+### Hai yêu cầu cùng lúc cần kiểm nguyên tử
+Gửi hai request đồng thời với cùng key trong lab, kiểm cả response và số dòng thực tế. Một kiểm tuần tự xanh không chứng minh server khóa được cửa sổ cạnh tranh.
+
+PRACTICE: Kiểm bốn tổ hợp key/payload, một ca timeout sau commit và một cặp đồng thời. Nộp id đăng ký, số bản ghi sau chạy, status theo hợp đồng và giới hạn TTL được thử.
+Q: Idempotency key nên gắn với gì?
++ Một ý định thao tác và payload được ràng buộc
+- Mỗi lần retry đổi key mới
+- Mọi giao dịch dùng cùng một key
+Q: POST bị timeout có chứng minh chưa tạo tài nguyên không?
++ Không
+- Có, timeout luôn rollback
+- Có, nếu client đóng cửa sổ
+
+## LESSON api-11 | Ma trận quyền và kiểm sở hữu tài nguyên
+
+### Ma trận vai trò nhân quyền sở hữu
+Dịch vụ lab có học viên, điều phối và khách chưa đăng nhập. Học viên được xem đăng ký của mình; điều phối quản lý lớp trong phạm vi cấp; không suy quyền từ việc biết id.
+~~~text
+actor | tài nguyên | thao tác | kỳ vọng lab
+ST4 | đăng ký ST4 | GET | 200
+ST4 | đăng ký ST9 | GET | 403 hoặc 404 theo chính sách
+khách | đăng ký ST4 | GET | 401
+điều phối lớp A | lớp B | PATCH | bị chặn
+~~~
+
+### Đổi id trên dữ liệu được cấp
+Chỉ dùng hai tài khoản giả do môi trường lab cấp. Token là biến môi trường, không in ra báo cáo; request sửa id khác chủ phải kiểm body không lộ dữ liệu và trạng thái không bị đổi.
+~~~text
+GET http://localhost:3100/enrollments/EN9
+Authorization: Bearer {{student4Token}}
+
+PATCH http://localhost:3100/enrollments/EN9
+{"status":"cancelled"}
+~~~
+
+### Kiểm không có tác dụng phụ
+Chụp trạng thái qua fixture quản trị lab trước và sau request bị từ chối. Nếu status 403 mà dữ liệu đã đổi, đây là lỗi quyền; response đúng không cứu được tác dụng phụ sai.
+~~~js
+const after=pm.response.json();
+const before=JSON.parse(pm.collectionVariables.get('beforeRecord'));
+pm.test('bản ghi không đổi sau thao tác bị chặn',()=>{
+ pm.expect(after.status).to.eql(before.status);
+ pm.expect(after.updatedAt).to.eql(before.updatedAt);
+});
+~~~
+
+### Phân biệt 401 và 403 theo hợp đồng
+401 thường liên quan chưa xác thực hợp lệ, 403 là từ chối quyền; một số API cố ý trả 404 để hạn chế lộ tồn tại. Test bám chính sách đã chốt, không đổi status tùy tiện để đạt mong muốn.
+
+### Quyền trường dữ liệu cũng cần kiểm
+Học viên có thể được xem lịch học nhưng không được thấy ghi chú nội bộ. Kiểm cả trường thừa trong response và mass assignment trong request, thay vì chỉ kiểm endpoint bị chặn.
+
+PRACTICE: Viết ít nhất mười ô ma trận vai trò/sở hữu/thao tác cho lab. Chạy ca đọc và sửa khác chủ, kiểm trường riêng tư và snapshot trước/sau; che toàn bộ token khỏi evidence.
+Q: Ma trận quyền phải bao gồm ca nào?
++ Đúng chủ, khác chủ, không đăng nhập và vai trò khác
+- Chỉ admin thành công
+- Chỉ token sai ký tự
+Q: Đổi id tài nguyên sang của người khác nhằm kiểm gì?
++ Kiểm quyền sở hữu đối tượng trong lab
+- Đánh giá tốc độ CPU
+- Chỉ kiểm cú pháp JSON
+
+## LESSON api-12 | Timeout, retry và test phụ thuộc bằng stub
+
+### Tách lỗi tạm thời khỏi lỗi cố định
+Dịch vụ lịch học phụ thuộc kho thông báo. Timeout và 503 cần hành vi khác 400 do input sai; retry phải có giới hạn số lần, tổng thời gian và điều kiện thao tác an toàn.
+~~~text
+lỗi | hành vi lab
+400 input sai | không retry, báo trường
+503 tạm thời | retry có giới hạn nếu thao tác đủ điều kiện
+429 | xét Retry-After theo hợp đồng
+timeout POST | đối chiếu trạng thái hoặc dùng key chống lặp
+~~~
+
+### Stub giúp điều khiển nhánh lỗi
+Lab chạy stub localhost:3200 để lần đầu trả 503 rồi thành công. Đây là mô tả giao thức stub tự tạo, không phải cú pháp một công cụ cụ thể; người học có thể hiện thực bằng Node HTTP.
+~~~json
+{"sequence":[{"status":503,"delayMs":0},{"status":200,"body":{"sent":true}}],"resetOnRun":true}
+~~~
+
+### Bằng chứng retry đủ nhỏ để hiểu
+Ghi attempt, thời điểm, kết quả và correlation id giả. Không log Authorization/body riêng tư; kiểm request ghi không nhân tài nguyên dù phản hồi phụ thuộc đến chậm.
+~~~text
+run=LAB7 attempt=1 dependency=notify result=503 elapsed=18ms
+run=LAB7 attempt=2 dependency=notify result=200 elapsed=23ms
+assert: enrollment_count=1
+assert: retry_attempts<=2
+~~~
+
+### Bẫy retry chồng nhiều tầng
+Client, gateway và dịch vụ cùng retry có thể nhân tải. Đo tổng số lần phụ thuộc thật sự nhận và đặt ngân sách chung; backoff có jitter giảm đồng loạt nhưng không sửa lỗi nghiệp vụ.
+
+### Kiểm đường cạn ngân sách
+Stub luôn lỗi hoặc chậm hơn timeout để xác nhận dừng đúng hạn và báo trạng thái phù hợp. Chạy thêm phục hồi phụ thuộc, tránh trạng thái circuit hoặc biến của run trước ảnh hưởng kết quả.
+
+PRACTICE: Hiện thực stub cục bộ cho 503→200, luôn503 và response chậm. Đo số attempt, tổng thời gian, trạng thái nghiệp vụ; nộp test không retry400 và không nhân đăng ký sau timeout.
+Q: Retry khi nào cần backoff và giới hạn?
++ Khi có lỗi tạm thời và thao tác đủ điều kiện retry
+- Mọi 4xx đều retry mãi
+- Chỉ khi test đang đỏ
+Q: Stub phụ thuộc trả 503 giúp chứng minh gì?
++ Ứng dụng xử lý nhánh phụ thuộc lỗi theo thiết kế
+- Mạng sản xuất luôn ổn
+- Độ trễ thật đã được đo
+
+## LESSON api-13 | Dự án: kiểm luồng đặt lớp từ đầu đến cuối
+
+### Dự án đặt lớp qua chuỗi API
+Trung tâm giả định Mây Rìa có luồng tạo lớp, đăng ký, xem lịch và hủy. Người học chốt hợp đồng lab, dữ liệu hai học viên và ma trận quyền trước khi viết collection, không thử trên dịch vụ công khai.
+~~~text
+1 tạo lớp CL-RUN7
+2 ST4 đăng ký bằng key RUN7-REQ1
+3 ST4 xem lịch, ST9 không đọc đăng ký ST4
+4 hủy đăng ký đúng chủ
+5 kiểm remaining được hoàn lại đúng một lần
+~~~
+
+### Cô lập dữ liệu theo lần chạy
+runId do môi trường lab cấp giúp fixture và cleanup biết phạm vi. Lưu id đã tạo thay vì xóa mọi lớp theo tên chung; nếu setup thất bại, báo rõ bước và không dùng id sót từ lần trước.
+~~~js
+const runId=pm.environment.get('runId');
+if(!runId||!/^LAB-[A-Z0-9]+$/.test(runId))throw new Error('runId lab required');
+pm.collectionVariables.set('className',`Lớp Mây ${runId}`);
+pm.collectionVariables.unset('enrollmentId');
+~~~
+
+### Chạy CLI có cấu hình bên ngoài
+Newman nhận collection và environment giả đã lọc bí mật. Không commit environment chứa token thật; pipeline chỉ dùng lab cục bộ được dựng trước và phải thất bại khi assertion sai.
+~~~bash
+newman run class-lab.postman_collection.json -e lab.local.postman_environment.json --reporters cli,json --reporter-json-export artifacts/api-run.json
+~~~
+
+### Nghiệm thu cả ca âm và tác dụng phụ
+Bao phủ thiếu trường, hết chỗ, khác chủ, retry, phân trang và phụ thuộc lỗi. Chọn ba lỗi cố ý ở stub hoặc lab để chứng minh assertion đỏ đúng chỗ, sau đó phục hồi và chạy toàn bộ.
+
+### Bàn giao giới hạn kiểm thử
+Nộp collection, fixture, hợp đồng, ma trận coverage và báo cáo đã che dữ liệu quyền. Tách phần đã kiểm qua stub khỏi tích hợp thật chưa kiểm; không gọi một lượt xanh là bằng chứng không còn lỗi.
+
+PRACTICE: Bàn giao lab API cục bộ có tối thiểu mười lăm ca và một lần chạy Newman. Có kiểm quyền, chống lặp, phân trang, stub lỗi, cleanup theo id và báo cáo expected/actual; không nộp token thật.
+Q: Dữ liệu dự án nên được tạo thế nào?
++ Mã run riêng và cleanup đúng phạm vi
+- Dùng chung một đơn cho mọi worker
+- Xóa toàn cơ sở dữ liệu sau test
+Q: Kiểm response 403 mà đơn vẫn bị sửa có đạt không?
++ Không
+- Có vì status đúng
+- Có nếu body rỗng
+Q: Bàn giao bộ API gồm bằng chứng nào?
++ Ma trận, fixture, request, assertion và kết quả tái lập
+- Chỉ screenshot thành công
+- Mật khẩu thật
+
+## LESSON api-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Safe nói về ý định không đổi trạng thái; log hoặc thời gian phản hồi vẫn có thể thay đổi.
+2. Kiểm status cùng body, Location nếu hợp đồng có, và trạng thái thực tế sau khi tạo.
+3. Cú pháp đúng chưa đủ kiểu, miền và nghiệp vụ; header mô tả dạng body để server đọc đúng.
+4. Token là dữ liệu quyền; lab dùng giá trị giả hoặc cấp cục bộ và che trong báo cáo.
+
+### Dữ liệu và điều kiện biên
+5. Kiểm base URL, quyền và dữ liệu trước chạy; tên environment không tự bảo đảm cách ly.
+6. 200 có thể chứa sai dữ liệu hoặc sai người dùng; kiểm shape, nghiệp vụ và tác dụng phụ phù hợp.
+7. CLI phải có dữ liệu tái lập, báo cáo đã che bí mật và trạng thái thất bại máy đọc được.
+8. Quyền đối tượng khác shape; cần ma trận actor/tài nguyên và kiểm dữ liệu không bị lộ.
+
+### Tính đúng và cách điều tra
+9. Tương thích cần đánh giá trên client và hợp đồng, có phiên bản hoặc lộ trình chuyển tiếp phù hợp.
+10. Thứ tự thiếu khóa duy nhất làm dòng bị lặp hoặc bỏ khi các trang được đọc.
+11. Thêm/xóa trong lúc đọc có thể làm offset trượt; expected phải dựa vào cam kết nhất quán.
+12. Retry cùng ý định dùng lại key; server phải xử lý payload khác cùng key theo hợp đồng.
+
+### Rủi ro và lựa chọn phương án
+13. Server có thể đã commit trước khi response mất; truy trạng thái hoặc retry chống lặp thay vì tạo mới mù.
+14. Quyền chức năng và sở hữu đối tượng là hai chiều; kiểm cả dữ liệu bị lộ trong body lỗi.
+15. Chỉ thực hiện với tài khoản và dữ liệu giả được cấp; server phải chặn truy cập đối tượng ngoài quyền.
+16. Phân loại lỗi, cân nhắc Retry-After, giới hạn số lần và tổng thời gian; thao tác ghi cần chống lặp.
+
+### Dự án, bằng chứng và bàn giao
+17. Stub kiểm nhánh có kiểm soát; không thay đo tích hợp và không chứng minh SLA thực tế.
+18. Cô lập theo lần chạy giảm cạnh tranh; cleanup chỉ dữ liệu do chính lần chạy tạo.
+19. Kiểm quyền phải xác nhận không có tác dụng phụ ngoài ý muốn, không chỉ nhìn status.
+20. Nêu phạm vi và giới hạn, bao gồm nhánh lỗi, tác dụng phụ và dữ liệu được dọn sau chạy.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: GET nên có đặc tính gì theo ngữ nghĩa HTTP?
++ Không nhằm đổi trạng thái tài nguyên
+- Luôn trả cùng byte mãi mãi
+- Luôn có body request
+Q: 201 thường biểu thị gì?
++ Tạo tài nguyên thành công
+- Luôn lỗi xác thực
+- Không bao giờ có body
+Q: JSON request cần điều gì ngoài đúng cú pháp?
++ Content-Type và hợp đồng dữ liệu phù hợp
+- Tên biến thật dài
+- Mọi giá trị là chuỗi
+Q: Bearer token nên được truyền ở đâu theo luồng lab?
++ Header Authorization từ biến môi trường
+- Trong tên test công khai
+- Ghi thẳng vào repository
+Q: Environment tách dev và test để làm gì?
++ Tránh nhầm host và dữ liệu cấu hình
+- Đảm bảo API không có bug
+- Tự tạo quyền admin
+Q: Assertion API tốt cần kiểm gì?
++ Hành vi và dữ liệu liên quan yêu cầu
+- Chỉ status 200
+- Chỉ response có chữ ok
+Q: Newman dùng trong pipeline cần gì?
++ Collection, cấu hình ngoài repo và exit code
+- Token hardcode
+- Chỉ ảnh Postman
+Q: Schema có bảo đảm đơn thuộc người gọi không?
++ Không
+- Có nếu id là UUID
+- Có nếu response 200
+Q: Thêm trường bắt buộc vào request cũ có rủi ro gì?
++ Làm client cũ hỏng
+- Luôn tương thích
+- Chỉ đổi màu báo cáo
+Q: Phân trang ổn định cần gì khi timestamp bằng nhau?
++ Khóa phân xử và quy tắc cursor rõ
+- Chỉ LIMIT
+- Chỉ sắp tên bảng
+Q: Khi dữ liệu đổi giữa hai trang nên kiểm gì?
++ Quy tắc snapshot/cursor mà hợp đồng cam kết
+- Ép mọi hệ thống không được đổi
+- Chỉ tổng số trang
+Q: Idempotency key nên gắn với gì?
++ Một ý định thao tác và payload được ràng buộc
+- Mỗi lần retry đổi key mới
+- Mọi giao dịch dùng cùng một key
+Q: POST bị timeout có chứng minh chưa tạo tài nguyên không?
++ Không
+- Có, timeout luôn rollback
+- Có, nếu client đóng cửa sổ
+Q: Ma trận quyền phải bao gồm ca nào?
++ Đúng chủ, khác chủ, không đăng nhập và vai trò khác
+- Chỉ admin thành công
+- Chỉ token sai ký tự
+Q: Đổi id tài nguyên sang của người khác nhằm kiểm gì?
++ Kiểm quyền sở hữu đối tượng trong lab
+- Đánh giá tốc độ CPU
+- Chỉ kiểm cú pháp JSON
+Q: Retry khi nào cần backoff và giới hạn?
++ Khi có lỗi tạm thời và thao tác đủ điều kiện retry
+- Mọi 4xx đều retry mãi
+- Chỉ khi test đang đỏ
+Q: Stub phụ thuộc trả 503 giúp chứng minh gì?
++ Ứng dụng xử lý nhánh phụ thuộc lỗi theo thiết kế
+- Mạng sản xuất luôn ổn
+- Độ trễ thật đã được đo
+Q: Dữ liệu dự án nên được tạo thế nào?
++ Mã run riêng và cleanup đúng phạm vi
+- Dùng chung một đơn cho mọi worker
+- Xóa toàn cơ sở dữ liệu sau test
+Q: Kiểm response 403 mà đơn vẫn bị sửa có đạt không?
++ Không
+- Có vì status đúng
+- Có nếu body rỗng
+Q: Bàn giao bộ API gồm bằng chứng nào?
++ Ma trận, fixture, request, assertion và kết quả tái lập
+- Chỉ screenshot thành công
+- Mật khẩu thật

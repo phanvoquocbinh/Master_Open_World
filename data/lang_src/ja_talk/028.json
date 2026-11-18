@@ -69,34 +69,34 @@
  ],
  "phrases": [
   {
-   "t": "検証用の 登録画面で エラーが 増えています。今 確認できた 影響と、まだ わからないことを 共有します。",
-   "vi": "Màn đăng ký dùng cho kiểm thử đang có nhiều lỗi hơn. Tôi sẽ chia sẻ ảnh hưởng đã xác nhận và điều vẫn chưa biết.",
-   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+   "t": "確認できた影響",
+   "vi": "ảnh hưởng đã xác nhận",
+   "note": "Tách khỏi điều chưa biết."
   },
   {
-   "t": "午後二時以降、仮の 新規登録で 五回中 三回 エラーになりました。既存の 登録への 影響は 未確認です。",
-   "vi": "Từ hai giờ chiều, năm lần đăng ký mới bằng dữ liệu giả thì ba lần báo lỗi. Ảnh hưởng tới đăng ký đã có vẫn chưa được kiểm tra.",
-   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+   "t": "五回中三回",
+   "vi": "ba trong năm lần",
+   "note": "Nêu thời gian và cỡ mẫu quan sát."
   },
   {
-   "t": "影響を 減らすため、直前の 版へ 戻す案は ありますか。データ変更との 互換性は どうでしょうか。",
-   "vi": "Để giảm ảnh hưởng, có phương án quay lại phiên bản trước không? Khả năng tương thích với thay đổi dữ liệu thế nào?",
-   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+   "t": "互換性を確認する",
+   "vi": "kiểm tính tương thích",
+   "note": "Quay bản ứng dụng chưa quay dữ liệu."
   },
   {
-   "t": "アプリの 版は 戻せますが、データまで 自動的に 戻るわけではありません。担当と 互換性を 確認してから 実施します。",
-   "vi": "Có thể quay lại phiên bản ứng dụng, nhưng dữ liệu không tự quay lại theo. Tôi sẽ kiểm tính tương thích với người phụ trách trước khi thực hiện.",
-   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+   "t": "三時に更新する",
+   "vi": "cập nhật lúc ba giờ",
+   "note": "Hẹn cả khi chưa rõ nguyên nhân."
   },
   {
-   "t": "次の 更新は 三時に 出します。原因が 確定していなくても、確認したことと 暫定対応を 分けて お知らせします。",
-   "vi": "Tôi sẽ cập nhật tiếp lúc ba giờ chiều. Dù nguyên nhân chưa chắc chắn, tôi vẫn thông báo riêng phần đã xác nhận và cách xử lý tạm.",
-   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+   "t": "行と影響を指摘する",
+   "vi": "chỉ dòng mã và ảnh hưởng",
+   "note": "Không phê năng lực người làm."
   },
   {
-   "t": "コードレビューでは、問題のある 行と、その 影響を 具体的に 指摘します。人の 能力を 推測する 書き方は 避けます。",
-   "vi": "Khi xem xét mã, tôi sẽ chỉ cụ thể dòng có vấn đề và ảnh hưởng của nó. Tôi tránh viết lời suy đoán về năng lực người làm.",
-   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+   "t": "残る課題を引き継ぐ",
+   "vi": "bàn giao vấn đề còn lại",
+   "note": "Để người tiếp tục kiểm được."
   }
  ],
  "qs": [
@@ -108,7 +108,7 @@
     "Đăng ký mới bằng dữ liệu giả trong môi trường kiểm thử"
    ],
    "a": 2,
-   "e": "Bằng chứng trong hội thoại: 午後二時以降、仮の 新規登録で 五回中 三回 エラーになりました。既存の 登録への 影響は 未確認です。 → Từ hai giờ chiều, năm lần đăng ký mới bằng dữ liệu giả thì ba lần báo lỗi. Ảnh hưởng tới đăng ký đã có vẫn chưa được kiểm tra."
+   "e": "Lời thoại giới hạn quan sát ở các lượt đăng ký mới bằng dữ liệu giả trong môi trường kiểm thử; không có căn cứ mở rộng sang dữ liệu khách thật."
   },
   {
    "q": "Tần suất được quan sát là gì?",
@@ -118,7 +118,7 @@
     "Năm trong năm lần suốt ngày"
    ],
    "a": 1,
-   "e": "Bằng chứng trong hội thoại: 午後二時以降、仮の 新規登録で 五回中 三回 エラーになりました。既存の 登録への 影響は 未確認です。 → Từ hai giờ chiều, năm lần đăng ký mới bằng dữ liệu giả thì ba lần báo lỗi. Ảnh hưởng tới đăng ký đã có vẫn chưa được kiểm tra."
+   "e": "Người nói nêu mốc bắt đầu là hai giờ chiều và cỡ mẫu năm lượt, trong đó ba lượt lỗi. Đây là tần suất quan sát, không phải kết luận cho cả ngày."
   },
   {
    "q": "Ảnh hưởng tới đăng ký đã có được biết thế nào?",
@@ -128,7 +128,7 @@
     "Chắc chắn ảnh hưởng toàn bộ"
    ],
    "a": 0,
-   "e": "Bằng chứng trong hội thoại: 午後二時以降、仮の 新規登録で 五回中 三回 エラーになりました。既存の 登録への 影響は 未確認です。 → Từ hai giờ chiều, năm lần đăng ký mới bằng dữ liệu giả thì ba lần báo lỗi. Ảnh hưởng tới đăng ký đã có vẫn chưa được kiểm tra."
+   "e": "Cụm 既存の登録への影響は未確認です cho biết ảnh hưởng tới đăng ký đã có vẫn chưa được kiểm. Chưa biết khác với đã chứng minh có hoặc không."
   },
   {
    "q": "Quay lại phiên bản ứng dụng có tự quay lại dữ liệu không?",
@@ -167,41 +167,41 @@
   },
   {
    "t": "dict",
-   "say": "コードレビューでは、問題のある 行と、その 影響を 具体的に 指摘します。人の 能力を 推測する 書き方は 避けます。",
+   "say": "復旧したことと 原因が 確定したことは 別なので、残る調査も 引き継ぎます。",
    "lang": "ja-JP",
-   "a": "コードレビューでは、問題のある 行と、その 影響を 具体的に 指摘します。人の 能力を 推測する 書き方は 避けます。",
-   "e": "Nghĩa của câu: Khi xem xét mã, tôi sẽ chỉ cụ thể dòng có vấn đề và ảnh hưởng của nó. Tôi tránh viết lời suy đoán về năng lực người làm. Viết đúng chữ Nhật và giữ nguyên phần điều kiện hoặc phủ định nếu có."
+   "a": "復旧したことと 原因が 確定したことは 別なので、残る調査も 引き継ぎます。",
+   "e": "Bản dịch: Khôi phục khác chốt nguyên nhân nên tôi bàn giao cả điều tra còn. Chú ý giữ các thành phần điều kiện, phủ định và độ dài âm trong câu mới."
   },
   {
    "t": "match",
    "q": "Nối mẫu câu với ý nghĩa trong ngữ cảnh.",
    "pairs": [
     [
-     "検証用の 登録画面で エラーが 増えています。今 確認できた 影響と、まだ わからないことを 共有します。",
-     "Màn đăng ký dùng cho kiểm thử đang có nhiều lỗi hơn. Tôi sẽ chia sẻ ảnh hưởng đã xác nhận và điều vẫn chưa biết."
+     "確認できた影響",
+     "ảnh hưởng đã xác nhận"
     ],
     [
-     "午後二時以降、仮の 新規登録で 五回中 三回 エラーになりました。既存の 登録への 影響は 未確認です。",
-     "Từ hai giờ chiều, năm lần đăng ký mới bằng dữ liệu giả thì ba lần báo lỗi. Ảnh hưởng tới đăng ký đã có vẫn chưa được kiểm tra."
+     "五回中三回",
+     "ba trong năm lần"
     ],
     [
-     "影響を 減らすため、直前の 版へ 戻す案は ありますか。データ変更との 互換性は どうでしょうか。",
-     "Để giảm ảnh hưởng, có phương án quay lại phiên bản trước không? Khả năng tương thích với thay đổi dữ liệu thế nào?"
+     "互換性を確認する",
+     "kiểm tính tương thích"
     ],
     [
-     "アプリの 版は 戻せますが、データまで 自動的に 戻るわけではありません。担当と 互換性を 確認してから 実施します。",
-     "Có thể quay lại phiên bản ứng dụng, nhưng dữ liệu không tự quay lại theo. Tôi sẽ kiểm tính tương thích với người phụ trách trước khi thực hiện."
+     "三時に更新する",
+     "cập nhật lúc ba giờ"
     ],
     [
-     "次の 更新は 三時に 出します。原因が 確定していなくても、確認したことと 暫定対応を 分けて お知らせします。",
-     "Tôi sẽ cập nhật tiếp lúc ba giờ chiều. Dù nguyên nhân chưa chắc chắn, tôi vẫn thông báo riêng phần đã xác nhận và cách xử lý tạm."
+     "行と影響を指摘する",
+     "chỉ dòng mã và ảnh hưởng"
     ],
     [
-     "コードレビューでは、問題のある 行と、その 影響を 具体的に 指摘します。人の 能力を 推測する 書き方は 避けます。",
-     "Khi xem xét mã, tôi sẽ chỉ cụ thể dòng có vấn đề và ảnh hưởng của nó. Tôi tránh viết lời suy đoán về năng lực người làm."
+     "残る課題を引き継ぐ",
+     "bàn giao vấn đề còn lại"
     ]
    ],
-   "e": "Nghĩa thuộc đúng tình huống; ghi chú giải thích mức lịch sự và cách luyện."
+   "e": "Cụm “確認できた影響”: Tách khỏi điều chưa biết. Cụm “残る課題を引き継ぐ”: Để người tiếp tục kiểm được."
   }
  ],
  "practice": [

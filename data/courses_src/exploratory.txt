@@ -1,0 +1,741 @@
+=== COURSE exploratory
+name: Kiểm thử thăm dò
+icon: 🔎
+floor: 8
+room: 805
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Học và kiểm có mục tiêu bằng charter, heuristic, tour, session notes, oracle, pair testing và dự án hai phiên khám phá có bằng chứng.
+
+## LESSON exploratory-01 | Thăm dò là học và kiểm có mục tiêu
+
+### Khám phá có mục tiêu và quyền
+Ứng dụng giả định Mầm Vân có đăng ký, hủy và điểm. Tester học cách hệ thống phản hồi, tạo phép thử từ điều quan sát rồi thực hiện; đây là quy trình phản hồi có chủ đích, không phải click ngẫu nhiên.
+
+### Phân biệt session với script cứng
+Charter nêu điều muốn học và rủi ro, cách đi có thể đổi. Script phù hợp lặp chính xác, thăm dò giúp tìm góc mới; hai cách bổ sung nhau theo mục tiêu và kỹ năng.
+~~~text
+mục tiêu:khám phá mất/trùng đăng ký khi retry
+quan sát mới:pending giữ sau refresh
+phép thử tiếp:đóng/mở rồi đọc server theo id
+notes:lý do đổi hướng và phần chưa khám phá
+~~~
+
+### Evidence làm giá trị có thể trao đổi
+Một session không thấy bug vẫn có thể xác nhận hành vi, phát hiện câu hỏi hoặc gap. Ghi điều học được và phạm vi, tránh nhận hệ thống an toàn chỉ vì không gặp lỗi trong timebox.
+~~~text
+covered:offline, retry, mở lại theofixture
+learned:pending và confirmed có hai thông báo khác
+question:pending quá hạn xử lý gì?
+gap:chưa thửcạnh tranh
+follow-up:charter tiếp theo
+~~~
+
+### Oracle và mô hình vẫn cần
+Dùng rule, nhất quán, kinh nghiệm và nhu cầu người dùng để đặt câu hỏi. Hành vi lạ chưa tự là bug; độ chắc chắn của finding cần được ghi cùng nguồn expected.
+~~~text
+rule:không vượt capacity
+model:draft->pending->confirmed/cancelled
+heuristic:lặp, biên, gián đoạn
+oracle:rule versionLAB2 và trạng thái cuối
+Không lấy sở thích làm quy tắc.
+~~~
+
+### Bẫy đo bằng số click hoặc bug
+Nhiều thao tác không đồng nghĩa nhiều học hỏi. Debrief giải thích giả thuyết, quan sát và quyết định tiếp mới giúp reviewer đánh giá giá trị; giữ dữ liệu giả trong toàn session.
+
+PRACTICE: Viết mô tả hai session giả, một có finding, một chỉ có câu hỏi hữu ích. Phân biệt learning, test design, execution, evidence và phần chưa đủ căn cứ.
+Q: Thăm dò có đặc trưng nào?
++ Học, thiết kế và thực hiện có phản hồi
+- Click không mục tiêu
+- Không cần oracle
+Q: Một session không có bug có thể vẫn hữu ích vì sao?
++ Có thể làm rõ hành vi, câu hỏi và khoảng trống rủi ro
+- Vì thời gian luôn có giá trị như nhau
+- Chỉ nếu quay video dài
+
+## LESSON exploratory-02 | Charter: phạm vi, rủi ro và thời gian
+
+### Charter là lời giao nhiệm vụ nhỏ
+Khám phá luồng gửi khi mất response để đánh giá nguy cơ trùng enrollment là một mục tiêu rõ. Kiểm mọi thứ của app không đủ định hướng; chọn rủi ro, phạm vi và dữ liệu phù hợp timebox.
+
+### Thẻ charter có nguồn lực và biên
+Môi trường localhost, actor, id fixture và profile mạng được cấp trước. Phạm vi quyền là ranh giới không tự thay dù phát hiện mới hấp dẫn; điểm dừng phải có khi thấy dữ liệu ngoài fixture.
+~~~text
+charter:retry và trạng thái pending
+timebox:30 phút
+resource:ST-LAB-A, CL-LAB-7, stubP2
+focus:mất response sau commit, mở lại, thử lại
+stop:dữ liệu ngoài fixture hoặc lab không ổn định
+~~~
+
+### Thời gian gồm chuẩn bị và tổng hợp
+Timebox không chỉ là thời gian click. Dành phần nhỏ cho đọc rule/setup, khám phá và lưu finding/debrief; ghi thời gian bị blocked riêng để không báo sai effort kiểm thực tế.
+~~~text
+00-05:đọc rule và verify fixture
+05-22:khám phá theo câu hỏi
+22-27:tái hiện/thu evidence
+27-30:debrief và next charter
+Nếu setupfail:ghi blocked, không giả đãkhám phá30 phút.
+~~~
+
+### Giả thuyết vừa đủ để bắt đầu
+Nêu hai hoặc ba cách lỗi có thể xảy ra để chọn bước đầu, không khóa session vào một root cause đoán trước. Nếu evidence phản bác, đổi hướng có notes thay vì cố tìm lỗi mong muốn.
+~~~text
+H1 retry đổi key
+H2 server dedup không nguyên tử
+H3 UI đọc projection chậm
+MỗiH có phép kiểm và điều kiện bác bỏ
+Ghi điều học được khiH sai.
+~~~
+
+### Phạm vi quá lớn thì chia
+Tách dữ liệu, quyền, mạng hoặc trạng thái thành các charter liên quan. Nêu quan hệ giữa chúng để không bỏ giao điểm quan trọng, như đổi người dùng khi notification cũ còn tồn tại.
+
+PRACTICE: Viết ba charter cho cùng app, phạm vi không trùng máy móc. Mỗi charter có rủi ro, resource, timebox, giả thuyết, stop rule và đầu ra dự kiến.
+Q: Charter tốt nên nêu gì?
++ Mục tiêu, phạm vi, rủi ro và nguồn lực theo timebox
+- Từng click bắt buộc không đổi
+- Một khẩu hiệu kiểm toàn bộ
+Q: Timebox nhằm gì?
++ Giới hạn đầu tư và tạo điểm tổng hợp
+- Buộc dừng mọi suy nghĩ
+- Thay tiêu chí chất lượng
+
+## LESSON exploratory-03 | Heuristic và nhiều cách đặt câu hỏi
+
+### Heuristic là cách gợi câu hỏi
+Rỗng, biên, lặp, đảo thứ tự, gián đoạn hoặc khác vai giúp khám phá đường mới. Chúng không là requirement; dùng ngữ cảnh và oracle để hiểu kết quả, tránh báo mọi hành vi khác tưởng tượng là bug.
+
+### Cùng một gợi ý có nhiều phép thử
+Gợi ý lặp có thể là double-click, retry, cùng event hoặc mở lại app. Mỗi loại chạm cơ chế khác; chọn theo ý định và trạng thái, không nhập cùng chuỗi nhiều lần chỉ để tăng số test.
+~~~text
+lặp UI:double-submit
+lặp network:retry cùng requestId
+lặp event:worker nhận lại sự kiện lab
+lặp state:cancel saucancel
+expected dựa idempotency và rule, không đoán chung
+~~~
+
+### Tư duy đối lập làm rõ giả định
+Nếu app thích hợp mạng tốt, hỏi mạng chậm hoặc response mất thì sao. Nếu một vai được phép, hỏi actor khác chủ có thể làm cùng hành động không; chỉ dùng quyền/tài nguyên giả được cấp.
+~~~text
+đúng chủ <->khác chủ
+đủ chỗ <->hết chỗ
+đến trước <->đến sau
+record có <->record thiếu
+Mỗi đối lập cần oracle và expected cụ thể.
+~~~
+
+### Không dùng cực đoan gây hại ngoài mục tiêu
+Input dài hoặc nhiều request có thể gây tải không cần thiết. Trong lab chọn kích thước/bước nhỏ đủ kiểm giả thuyết, giới hạn thời gian và tài nguyên; không dùng host công khai để thử giới hạn.
+
+### Lưu ý tưởng để quay lại có lý do
+Session sinh nhiều câu hỏi hơn thời gian cho phép. Ghi parking lot với rủi ro và mức ưu tiên, không lạc khỏi charter vô thức hoặc quên phần chưa kiểm.
+~~~text
+idea:timezone thay giữa draft và submit
+risk:đọc sai hạn hủy
+action:charter mới về clock
+current decision:giữ focusretry trongsession này
+Trade-off được nói ở debrief.
+~~~
+
+PRACTICE: Từ năm heuristic, tạo mười lăm ý tưởng có mục tiêu và oracle. Chọn sáu ý tưởng cho charter mạng, ghi vì sao bỏ hoặc chuyển những ý tưởng còn lại.
+Q: Heuristic được dùng như gì?
++ Gợi ý đặt câu hỏi, cần oracle và bối cảnh
+- Yêu cầu bắt buộc mọi sản phẩm
+- Bằng chứng bug chắc chắn
+Q: Thử mọi chuỗi thật dài có tự là thăm dò sâu không?
++ Không
+- Có luôn
+- Có nếu app chậm
+
+## LESSON exploratory-04 | Tour qua dữ liệu, trạng thái và vai trò
+
+### Tour là góc nhìn có đường đi
+Data tour theo record từ nhập, biến đổi, lưu đến báo cáo; state tour theo vòng đời; role tour theo quyền. Không cần một tên tour cho mọi click, quan trọng là câu hỏi mà góc nhìn giúp trả lời.
+
+### Theo một id xuyên vòng đời
+Dùng enrollment giả EN-L7-A để so UI, API, report và hủy. Ghi nơi sai khác và timestamp; không chỉ so tên người vì hai record có thể cùng tên nhưng khác id.
+~~~text
+create EN-L7-A ->pending ->confirmed
+list/detail/export phải cùng class/student/status
+cancel ->state/points/remaining được cập nhật
+projection có ngân sách nhất quán được chốt
+Không tự đọc dữ liệu ngoài fixture.
+~~~
+
+### Tour vai trò gắn resource/action
+Actor khác chủ và điều phối lớp khác không chỉ cómenu khác. Thử direct link hoặc API lab trong quyền kiểm để xem server có chặn, hãy so cả body và state sau thao tác.
+~~~text
+ST-A / EN-A / GET ->cho phép theo rule
+ST-A / EN-B / GET ->bịchặn
+ST-A / EN-A / PATCH owner ->không đổi owner
+COORD-A / classB ->theo phạm vi được giao
+Evidence che token và dùng id giả.
+~~~
+
+### Tour trạng thái tìm cạnh bất ngờ
+Refresh, Back, mở hai tab hoặc notification có thể đưa người dùng về state cũ. Model giúp hỏi cạnh nào hợp lệ, cạnh lặp có nhân tác dụng không và điểm nào cần đọc lại từ server.
+~~~text
+draft->pending->confirmed
+confirmed+refresh->vẫn1 record
+cancelled+notification cũ->thấy trạng thái hiện tại
+Back không tựphát lại giao dịch
+Cạnh còn mơ hồ ->question, không tự chốt.
+~~~
+
+### Giao điểm tour thường có rủi ro
+Đổi vai khi draft cũ còn cache là giao điểm data/state/role. Ghi ý tưởng quan trọng thành charter tiếp hoặc mộtca đủ điều kiện, không coi đã đi mỗi tour riêng là đã phủ mọi tổ hợp.
+
+PRACTICE: Tạo ba tour và sáu câu hỏi giao điểm cho app giả. Thực hiện một tour theo id fixture, nộp bản đồ trạng thái/điểm quan sát và hai gap.
+Q: Tour theo vai trò giúp khám phá gì?
++ Khác biệt quyền và trải nghiệm theo actor
+- Chỉ màu giao diện
+- Mọi root cause
+Q: Tour dữ liệu nên theo dấu gì?
++ Vòng đời, biến đổi và nơi hiển thị của cùng id
+- Chỉ tên file
+- Chỉ số lần refresh
+
+## LESSON exploratory-05 | Dữ liệu biên, chuỗi thao tác và cạnh tranh
+
+### Lịch sử thao tác là dữ liệu test
+Một enrollment hủy saupending khác hủy sauconfirmed. Chuỗi cần giữ state, sự kiện và thời điểm, không chỉ danh sách màn; chuỗi tối thiểu giúp tái hiện và chuyển thành regression.
+
+### Biên và chuỗi phối hợp có mục đích
+Thử qty ở biên trên khi lớp còn ít chỗ, sau đó refresh/retry. Tách loại input sai khỏi state sai để biết oracle đang chặn quy tắc nào, không gộp quá nhiều yếu tố khiến khó điều tra.
+~~~text
+caseA qty 20, remaining20 ->hợp lệ theo lab
+caseB qty 21, remaining20 ->range error
+caseC qty 20, remaining1 ->quota error
+caseD retry cùng ý định sauA ->không nhân record
+Mỗi bước có snapshot trước/sau.
+~~~
+
+### Cạnh tranh cần lịch xen kẽ kiểm được
+Hai actor tranh chỗ cuối có oracle tốiđa một thành công. Tronglab dùng barrier hoặc stub delay có điểm đồng bộ, không đẩy tải công khai hoặc click vô hạn để hy vọng gặp race.
+~~~text
+A đọc remaining1
+B đọc remaining1
+barrier lab cho2 request cùngcửa sổ
+assert:tốiđa1confirmed, remaining0, không âm
+response và state cuối được đối chiếu
+~~~
+
+### Đổi thứ tự sự kiện theo hợp đồng
+Confirm rồi cancel khác cancel rồi confirm đến muộn. Chỉ điều khiển event ở lab có cơ chế hỗ trợ, ghiexpected theo version/sequence rule; không tự nhận mọi thứ tự đều phải cùng kết quả.
+
+### Giảm phản ví dụ khi tìm được lỗi
+Giữ phiên bản chuỗi đầy đủ, rồi bỏ từng bước để tìm điều kiện cần. Không tối giản mất trigger mạng hoặc clock; ghi experiment và expected để người nhận biết đã xác minh điều gì.
+~~~text
+full sequence ->remove step2 ->còn fail?
+remove networkP2 ->pass?trigger có liên quan
+minimal candidate ->chạy lại theo điều kiện cố định
+Lưu input/fixture/build/clock, không chỉ screenshot cuối
+~~~
+
+PRACTICE: Thiết kế sáu chuỗi biên/retry/out-of-order và một lịch concurrency có oracle. Nếu chưa có app hỗ trợ barrier, ghi kế hoạch và giới hạn thực thi, không bịa kết quả.
+Q: Chuỗi thao tác có giá trị khi nào?
++ Lịch sử làm đổi điều kiện hoặc tác dụng
+- Càng dài càng tốt
+- Mọi click đều tương đương
+Q: Cạnh tranh trong thăm dò nên được kiểm thế nào?
++ Trong lab, có lịch/điểm đồng bộ và oracle
+- Tăng tải host công khai
+- Chỉ click nhanh vô hạn
+
+## LESSON exploratory-06 | Session note và bằng chứng đủ dùng
+
+### Notes nhẹ để không mất nhịp học
+Ghi câu hỏi, đường đi, dữ liệu, quan sát và quyết định ngắn theo mốc. Không cần chép mọi click, nhưng finding phải đủ điều kiện tái hiện; đổi hướng phải để lại lý do cho debrief.
+
+### Một format ghi theo ý định
+Mỗi mục nối intent/action/observation/next. Dùng id giả và link artifact có phạm vi, không logtoken hoặc chụp dữ liệu ngoài quyền chỉ để notes đầy đủ.
+~~~text
+time:10:12 tương đối
+intent:retry sauresponse mất có tạo trùng?
+action:REQ-LAB1 gửi2 lần cùng key
+observation:EN-A/EN-B confirmed
+next:kiểm key trên trace và state bảng
+evidence:LAB7-REQ1 đã che quyền
+~~~
+
+### Tách bug, question và idea
+Bug có evidence vi phạm rule, question là điểm chưa đủ oracle, idea là phép kiểm nên thử. Giữ phân loại giúp triage không biến mọi ghi chú thành issue sản phẩm chắc chắn.
+~~~text
+B1:duplicate theoIDEMP-LAB1
+Q1:pending quá hạn chưa có rule
+I1:đổi timezone saucache có thể ảnh hưởng cutoff
+Status/owner theo điều kiện, không nhận mọi thứ đã xác nhận.
+~~~
+
+### Khi ghi chép bị gián đoạn
+Dùng mốc hoặc artifact an toàn, rồi bổ sung ngay trước quên điều kiện. Nếu thiếu dữ liệu cần thiết, ghi không chắc thay vì dựng lại câu chuyện cóvẻ hợp lý; quay lại lab để kiểm nếu được.
+
+### Review notes bằng khả năng bàn giao
+Người nhận cần biết đãkhám phá gì, phần nào chưa đi và cách tái hiện finding. Một notes dài nhưng không có fixture/basis vẫn yếu; chọn thông tin phục vụ câu hỏi và giữ privacy.
+~~~text
+review:đúng build/id/clock?
+review:expected có nguồn?
+review:evidence khớp quan sát?
+review:hypothesis khác observed?
+review:gap và nextcharter rõ?
+~~~
+
+PRACTICE: Nộp session note mẫu 30 phút cótám mốc, B/Q/I, fixture và artifact giả. Tự review bốn thiếu sót, rồi sửa để người khác tái hiện được finding trọng tâm.
+Q: Session note cần ưu tiên gì?
++ Ý định, dữ liệu, đường đi, quan sát và câu hỏi
+- Mọi tọa độ chuột
+- Chỉ giờ bắt đầu
+Q: Nếu ngừng ghi chép để khám phá sâu nên làm gì?
++ Giữ mốc/ảnh an toàn rồi bổ sung ngay khi có thể
+- Bịa lại sau nhiều ngày
+- Bỏ evidence
+
+## LESSON exploratory-07 | Oracle và đối chiếu khi yêu cầu mơ hồ
+
+### Oracle là căn cứ, cũng cần được kiểm
+Một hành vi bấtngờ có thể là bug hoặc đúng thiết kế. Dùng rule, ví dụ, nhất quán trong/giữa luồng vànhu cầu; ghi nguồn và độ chắc chắn, không lấy sở thích cá nhân làm chân lý.
+
+### Ví dụ nguồn mâu thuẫn
+Tài liệu nói trước 18:00, mockup ghi đến 18:00. Session phát hiện question có giá trị; đưa ví dụ đúng mốc choowner chốt, không tự chọn rồi đánh fail implementation.
+~~~text
+sourceA:CANCEL-LAB1, trước 18:00
+sourceB:mockupLAB2, đến 18:00
+input:2030-05-11T18:00:00 theo clocklab
+expected:chưa được chốt
+next:decisionowner +updatebasis/testware
+~~~
+
+### So nhất quán có giới hạn
+Detail và export khác nhau là tín hiệu, cần xem ngân sách projection và policy. Hai luồng có thể khác ý nghĩa có chủ đích, không so bằng chuỗi rồi gọi lỗi nếu chưa hiểu grain/time.
+~~~text
+same id, version và điểm quan sát
+UI confirmed nhưng export pending
+check:export theo snapshot lúc nào?
+check:consistency budget đã qua chưa?
+record:fact và question trước kếtluận
+~~~
+
+### Oracle từ mô hình và bất biến
+Remaining không âm, tổng điểm theo giao dịch và quyền đối tượng là những phép đối chiếu mạnh khi đã chốt. State chuyển tiếp nội bộ có thể chưa dành choquan sát, cần chọn thời điểm sau commit hoặc đúng hợp đồng async.
+~~~text
+after commit:0<=remaining<=capacity
+retry cùng ý định:không nhân tác dụng
+khác chủ:không lộ/sửa dữ liệu
+Nguồn:basis version lab, không tự áp cho mọi hệ thống
+~~~
+
+### Khi chưa có oracle đủ
+Báo quan sát và câu hỏi, đề xuất cách xác minh. Có thể tiếp tục khámphá vùng khác trong phạm vi; không dừng toàn session chỉ vì một điểm chưa rõ, nhưng không nhận đã đạt hoặc bug chắc chắn.
+
+PRACTICE: Đánh giá sáu hành vi giả bằng nhiều oracle, ghi conflict và độ chắc chắn. Chọn hai question đưa đến owner với ví dụ và impact, không sửa expected ngầm.
+Q: Hành vi khác kỳ vọng cá nhân đã là bug chưa?
++ Chưa, cần oracle và tác động
+- Luôn là bug
+- Chỉ cần một screenshot
+Q: Nguồn oracle mâu thuẫn nên xử lý sao?
++ Ghi hai nguồn và chuyển người có thẩm quyền chốt
+- Chọn nguồn tiện nhất
+- Coi code luôn đúng
+
+## LESSON exploratory-08 | Pair testing và debrief
+
+### Hai góc nhìn cùng xây phép kiểm
+Một người thao tác,một người quan sát đặt câu hỏi và ghi notes. Luân phiên theo nhịp phù hợp để cả hai hiểu tình huống;pair testing không chỉ là thêm một người chép lại mọi click.
+
+### Thỏa thuận vai và mục tiêu
+Cùng đọc charter,oracle,phạm vi và fixture. Người quan sát đề nghị dừng để lưu evidence hoặc kiểm giả thuyết;người điều khiển giải thích ý định để người còn lại theo kịp.
+~~~text
+charter:đổi actor khi draft cũ còn tồn
+roleA:điều khiển và nói ý định
+roleB:quan sát,notes và câu hỏi phản chứng
+swap:sau 10 phút hoặc mốc phù hợp
+Mọi thay đổi trong quyền lab.
+~~~
+
+### Debrief đi từ phạm vi đến thông tin mới
+Tóm tắt điều đã khám phá,finding,câu hỏi,gap và quyết định tiếp. Không đọc lại toàn notes hoặc chỉ đếm bug;thảo luận mô hình đã thay đổi thế nào.
+~~~text
+covered:logout/login và draft theo actor
+learned:cache detail giữ đến refresh
+finding:canaryA hiện trong actorB
+gap:notification và download chưa kiểm
+next:charter dữ liệu sau đổi actor
+~~~
+
+### Bất đồng cần oracle hoặc phép thử
+Một người nghĩ cache được giữ có chủ đích,người khác nghi lộ quyền. So rule và tác động rồi hỏi owner nếu thiếu căn cứ;không quyết theo người thao tác nhanh hoặc chức danh.
+~~~text
+observed:note giả củaA hiển thị ởB
+source:policy cache tài khoản
+question:dữ liệu công khai hay riêng?
+experiment:đọc lại bằng API đúng quyền
+resolution:ghi nguồn và mức chắc chắn
+~~~
+
+### Giữ cộng tác có hiệu quả
+Nếu cả hai tranh điều khiển hoặc một người im lặng,cần điều chỉnh vai. Chọn kỹ năng bổ sung và ghi insight do góc nhìn khác mang lại;đánh giá bằng điều đã học và bước tiếp.
+
+PRACTICE: Thực hiện hoặc mô phỏng pair session20 phút,luân phiên vai. Nộp notes có hai insight khác góc nhìn,debrief và một bất đồng được giải bằng oracle/evidence.
+Q: Pair testing hữu ích nhất khi nào?
++ Hai góc nhìn cùng xây giả thuyết và quan sát
+- Một người chỉ chép lệnh mãi
+- Không ai ghi notes
+Q: Debrief nên trả lời gì?
++ Đã khám phá gì, tìm/học gì, còn rủi ro nào và bước tiếp
+- Chỉ có bao nhiêu bug
+- Chỉ thời gian đủ chưa
+
+## LESSON exploratory-09 | Rủi ro mới và điều chỉnh charter
+
+### Thông tin mới thay bản đồ rủi ro
+Session retry phát hiện đổi actor vẫn giữ draft cũ. Ghi clue và đánh giá tác động trước khi dùng phần timebox còn lại hoặc tạo charter mới;không đổi hướng vô thức rồi quên mục tiêu ban đầu.
+
+### Đổi hướng có lý do và đánh đổi
+Nêu thông tin mới,rủi ro,phạm vi quyền và phần cũ chưa khám phá. Nếu ngoài quyền,dừng phần liên quan theo quy trình,không tự đọc thêm dữ liệu để có report mạnh.
+~~~text
+clue:draft actorA tồn khi actorB đăng nhập
+risk:riêng tư và sai người nhận
+within lab:hai actor giả được cấp
+decision:5 phút xác minh rồi charter mới
+trade-off:retry khi mở lại chưa được kiểm
+~~~
+
+### Parking lot giữ ý tưởng chưa kiểm
+Mỗi ý tưởng có câu hỏi,rủi ro,căn cứ và ưu tiên. Tách candidate bug,hypothesis và test idea để người nhận không hiểu nhầm điều chưa thực hiện thành finding đã xác nhận.
+~~~text
+IDEA-07:notification cũ mở dữ liệu actorA?
+basis:cache clue từ session1
+priority:theo tác động và khả năng
+resource:fixture notification lab
+status:chưa kiểm,không nhận bug chắc chắn
+~~~
+
+### Khám phá không tự mở rộng quyền
+Link đến host khác trong app lab không cấp quyền thử host đó. Ghi thông tin tối thiểu,che dữ liệu cần thiết và báo theo quy trình;chỉ tiếp tục vùng độc lập được phép khi phù hợp.
+
+### Coverage map nói cả điều chưa làm
+Dùng explored,partly explored,not explored kèm phạm vi và evidence. Không tô xanh toàn nhóm vì đã xem một ví dụ;gap giúp chọn session tiếp theo theo mức rủi ro.
+~~~text
+retry:đã xem tuần tự,chưa concurrency
+actor switch:khám phá một phần
+notification:chưa khám phá
+clock:chưa khám phá
+Mỗi trạng thái gắn evidence hoặc lý do.
+~~~
+
+PRACTICE: Nhận ba clue giả,đề nghị đổi hoặc giữ charter có trade-off. Nộp parking lot,risk map và một tình huống cần dừng vì ngoài quyền.
+Q: Finding mới ngoài charter nhưng trong quyền nên làm gì?
++ Ghi lại và quyết định đổi hướng có lý do
+- Luôn bỏ vì không có checklist
+- Tự mở rộng mọi hệ thống
+Q: Finding ngoài phạm vi quyền nên làm gì?
++ Dừng phần liên quan và báo theo quy trình
+- Tiếp tục để có bằng chứng mạnh
+- Chia sẻ dữ liệu thật
+
+## LESSON exploratory-10 | Thăm dò API và dữ liệu
+
+### API có nhiều câu hỏi hơn status
+Dịch vụ Mầm Vân có thể trả200 nhưng sai remaining hoặc lộ field nội bộ. Khám phá shape,miền,quyền,state và tác dụng phụ theo oracle;không chỉ đổi tham số để tìm500.
+
+### Follow-up request theo cùng id
+Sau POST đọc lại tài nguyên rồi kiểm list/report tương ứng. Nếu xử lý bất đồng bộ,chờ theo ngân sách đã chốt;ghi pending thay vì coi chưa thấy ngay là mất dữ liệu.
+~~~text
+POST http://localhost:3100/enrollments
+response201:id EN-L7-A
+GET /enrollments/EN-L7-A đúng actor
+GET /classes/CL-L7-A kiểm remaining
+Đối chiếu status,field và tác dụng theo cùng id.
+~~~
+
+### Query chỉ đọc và đúng fixture
+Database giúp quan sát trạng thái mà UI có thể che. Dùng quyền được cấp,chỉ đọc fixture;không tự sửa record hoặc xem hồ sơ thật để khoanh vùng.
+~~~sql
+SELECT id,request_id,status FROM enrollments
+WHERE id='EN-L7-A';
+SELECT remaining FROM classes WHERE id='CL-L7-A';
+~~~
+
+### Biến đổi input có giả thuyết
+Thử thiếu,null,kiểu sai,field thừa và biên theo rule. Chú ý field server phải quyết như ownerId hoặc giá;expected cần dựa hợp đồng,không phải mọi thay đổi đều phải bị từ chối.
+~~~text
+omit qty ->missing theo hợp đồng
+qty:null ->nullable policy
+qty:"2" ->type policy
+ownerId khác actor ->không chuyển quyền
+retry cùng requestId ->không nhân tác dụng
+~~~
+
+### Báo đúng ranh giới evidence
+Một endpoint lab qua không chứng minh mọi API tương tự an toàn. Ghi method,actor,resource,field,build và mẫu;mock response chỉ kiểm phần tiêu thụ,chưa xác nhận nhà cung cấp thật.
+
+PRACTICE: Thực hiện API/data tour trên lab hoặc mô phỏng có ghi rõ,gồm sáu input biến đổi và follow-up theo id. Nộp hypothesis,oracle,request đã che,query chỉ đọc và gap.
+Q: Thăm dò API nên kiểm gì ngoài status?
++ Shape, quyền, state, tác dụng phụ và quan hệ dữ liệu
+- Chỉ200
+- Chỉ độ dài body
+Q: Query dữ liệu trong session nên giới hạn thế nào?
++ Chỉ đọc fixture được cấp và che thông tin quyền
+- Đọc mọi bảng thật
+- Tự sửa dữ liệu để test nhanh
+
+## LESSON exploratory-11 | Mobile, mạng và gián đoạn có chủ đích
+
+### Mobile đổi điều kiện ngoài app
+Mạng,quyền,nền/foreground,khóa màn hình vàOS thu hồi có thể thay điều kiện luồng. Mô tả phép mô phỏng đã làm;terminate chủ động không đại diện mọi OS kill hoặc crash.
+
+### Chuẩn bị phục hồi môi trường
+Dùng emulator/thiết bị lab và stub mạng được cấp,có kế hoạch trả cấu hình ban đầu. Không làm mất kết nối thiết bị cá nhân hoặc ảnh hưởng người khác để thử nhanh.
+~~~text
+fixture:draft ST-L7-A,CL-L7-A
+network:online,offline,response-lost
+interrupt:background/reopen có kiểm soát
+restore:online,đóng session,cleanup đúng id
+stop:lab không ổn hoặc dữ liệu ngoài fixture
+~~~
+
+### Theo ý định gửi qua pending và retry
+Nhập offline,mở lại và phục hồi có thể làm mất hoặc gửi trùng. Theo requestId/serverId và state,so số record sau sync;toast không tự là oracle đủ.
+~~~text
+offline save ->pending
+reopen ->draft/outbox giữ theo rule
+network back ->confirmed sau xác nhận server
+retry ->cùng ý định,không thêm record
+assert:remaining và enrollment nhất quán
+~~~
+
+### Quyền và cỡ chữ gợi góc mới
+Từ chối camera tùy chọn không nên phá form chữ nếu thiết kế cho phép. Chữ lớn và công nghệ hỗ trợ có thể lộ control không tới được;chọn câu hỏi khả dụng cụ thể,không nhận đã đạt toàn bộ accessibility.
+
+### Giới hạn thiết bị là một phần report
+Browser emulation không thay app native hoặc phần cứng. Ghi OS,build,thiết bị,quyền và phần chưa thử;đề nghị session bổ sung theo rủi ro thay vì che gap.
+~~~text
+tested:emulatorLAB-A,OSversion ghi nhận
+covered:background,offline/recovery
+not covered:OSreclaim thật,notification thật
+follow-up:slot thiết bị và charter riêng
+Không suy mọi mobile đã đạt.
+~~~
+
+PRACTICE: Lập và thực hiện session mobile có năm interruption/network probes. Nộp expected draft/sync,restore checklist,device matrix và phân biệt mô phỏng với trạng thái chưa kiểm.
+Q: Mobile interruption cần expected nào?
++ Draft, state và sync theo hợp đồng
+- Chỉ app mở lại được
+- Luôn xóa dữ liệu
+Q: Mất response sau server ghi cần chú ý gì?
++ Retry có thể nhân ý định nếu chống lặp sai
+- Chắc server rollback
+- Chỉ UI timeout
+
+## LESSON exploratory-12 | Chuyển phát hiện thành hồi quy hữu ích
+
+### Giữ bài học thay vì mọi click
+Finding duplicate cần regression ngắn theo rule chống lặp,không cần replay toàn30 phút khám phá. Chọn oracle,trigger và fixture cần thiết,rồi tìm lớp kiểm ổn định phù hợp cơ chế.
+
+### Từ finding đến ca tối thiểu
+Giữ chuỗi đầy đủ rồi giản lược có thử nghiệm. Mỗi bước bỏ phải kiểm failure còn không;không bỏ network profile nếu nó là trigger dù nhìn có vẻ phụ.
+~~~text
+finding:submit->response-lost->retry->2 record
+minimal:fixtureCL7,cùng requestId gửi2 lần
+oracle:enrollment1,remaining giảm 1
+trigger:barrier lab cho concurrent khi cần
+evidence:build,id và state cuối
+~~~
+
+### Chọn lớp automation hợp rủi ro
+Nếu cơ chế nằm server dedup,integration có barrier có thể ổn hơn click UI thật nhanh. Giữ UI cho ý định/trạng thái quan trọng;mock không chứng minh backend thật,ghi ranh giới.
+~~~text
+unit:logic thuần
+integration:transaction/idempotency
+UI:thông báo và hành vi người dùng
+fixture:run/id riêng,cleanup đúng phạm vi
+assert:theo rule,không chỉ không exception
+~~~
+
+### Chứng minh regression đủ nhạy
+Chạy bản lỗi hoặc mutation trong lab,test phải đỏ đúng lý do. Chỉ xanh ở bản sửa mà chưa chứng minh phát hiện lỗi thì cần review assertion,fixture và code thật được gọi.
+~~~text
+bugbuild ->fail duplicate
+fixedbuild ->pass
+related:khác key/khác payload/luồng hợp lệ
+record:evidence và limitation
+Không dùng alwaysTrue hoặc catch rồi bỏ lỗi.
+~~~
+
+### Không tự động hóa mọi quan sát
+Ý nghĩa nội dung hoặc trải nghiệm công nghệ hỗ trợ có thể cần kiểm người. Giữ charter/checklist khi chưa có oracle máy đủ tốt,tránh biến finding sâu thành snapshot nông dễ vỡ.
+
+PRACTICE: Chuyển hai finding giả thành ba regression ở lớp phù hợp,nêu trigger,fixture và oracle. Có một lỗi chủ đích bị phát hiện,ghi phần mock/manual và giới hạn độ nhạy.
+Q: Finding nào nên chuyển thành regression?
++ Hành vi quan trọng có oracle và khả năng kiểm ổn định
+- Mọi click session thành một test
+- Chỉ bug có ảnh đẹp
+Q: Tự động hóa từ finding cần kiểm điều gì?
++ Độ nhạy, fixture và giới hạn bằng chứng
+- Chỉ code chạy xanh
+- Chỉ số dòng
+
+## LESSON exploratory-13 | Dự án: hai session và bản tổng hợp rủi ro
+
+### Dự án hai session nối bằng việc học
+App Mầm Vân có rủi ro retry và đổi actor. Session đầu khám phá theo charter,sau debrief cập nhật risk map rồi chọn session hai;không lặp cùng thao tác chỉ để đủ hai buổi.
+
+### Đầu vào và đầu ra truy được
+Gói lab có rule,actor,fixture và network profile giả. Mọi artifact gắn runId/build,không dữ liệu thật;thiếu app để thực hiện thì ghi đây là thiết kế/mô phỏng,chưa có kết quả chạy.
+~~~text
+input:rulesLAB2,ST-A/ST-B,CL7,stubP2
+S1:retry sau response mất
+debrief:cache actor clue và gap concurrency
+S2:actor-switch hoặc concurrency theo impact
+output:notes,findings,risk map,regression,next
+~~~
+
+### Nghiệm thu chiều sâu khám phá
+Mỗi session có ba giả thuyết với phép kiểm,notes,oracle và quyết định cập nhật mô hình. Không ép phải có bug khi chưa có evidence;question/gap có giá trị cũng cần follow-up.
+~~~text
+review:phạm vi đã đi cụ thể?
+review:điều mới nào đổi phép kiểm?
+review:observed khác hypothesis?
+review:finding có minimal repro/fixture?
+review:gap ảnh hưởng quyết định thế nào?
+~~~
+
+### Tổng hợp rủi ro và regression
+Nối charter->risk->finding/question->evidence->follow-up. Chọn hai regression hữu ích,giải thích ưu tiên;không tô xanh risk chỉ vì mộtca trong nhóm pass hoặc một finding đã đóng.
+
+### Bàn giao có giới hạn và bước tiếp
+Nộp hai charter,notes,debrief,findings,coverage map,regression và cleanup. Người nhận biết đã học gì,còn thiếu gì,cần quyền/nguồn lực nào;không gửi report hoặc chạm dịch vụ ngoài phạm vi.
+~~~text
+accept:hai session có liên hệ học tập
+accept:evidence tối thiểu,đã che quyền
+accept:findings/questions có oracle,mức chắc chắn
+accept:gap và resource tiếp theo rõ
+accept:lab phục hồi và cleanup đúng id
+~~~
+
+PRACTICE: Bàn giao hai session theo lab với notes,debrief,risk map và hai regression. Có phản biện oracle,một pair review giả và giới hạn chưa kiểm;không bịa pass nếu chỉ mô phỏng.
+Q: Hai session dự án nên liên hệ thế nào?
++ Session sau dựa học từ session đầu và gap còn lại
+- Lặp y nguyên để đủ số
+- Không cần debrief giữa hai lần
+Q: Gói bàn giao exploratory cần gì?
++ Charter, notes, findings, evidence, risk map và follow-up
+- Chỉ tổng bug
+- Chỉ video
+
+## LESSON exploratory-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Tester điều chỉnh phép kiểm theo quan sát trong phạm vi, mục tiêu và bằng chứng có thể trao đổi.
+2. Charter định hướng khám phá, cho phép điều chỉnh cách kiểm khi có thông tin mới nhưng không tự mở rộng quyền.
+3. Gợi ý như rỗng, lặp, gián đoạn giúp phát ý tưởng, nhưng hành vi lạ cần đối chiếu rule và tác động.
+4. Đi cùng tài nguyên và hành động để thấy quyền đối tượng/chức năng/trường, chỉ dùng actor lab được cấp.
+
+### Dữ liệu và điều kiện biên
+5. State và thời điểm có thể làm cùng hành động cho kết quả khác, nên giữ chuỗi tối thiểu tái hiện.
+6. Notes phải đủ tái hiện finding và hiểu phạm vi, không là bản chép click thiếu mục đích.
+7. Yêu cầu, mô hình, nhất quán và nhu cầu người dùng là các căn cứ cần đánh giá, mâu thuẫn phải được nêu rõ.
+8. Vai điều khiển/quan sát có thể luân phiên, cần phối hợp để thêm insight thay vì chỉ tăng số người.
+
+### Tính đúng và cách điều tra
+9. Có thể timebox điều tra hoặc tạo charter mới, nêu đánh đổi phần cũ chưa khám phá.
+10. Một response tốt bề ngoài có thể sai nghiệp vụ hoặc làm dữ liệu lệch, cần oracle đa tầng phù hợp.
+11. Background, mất mạng và OS reclaim khác nhau, ghi hành vi thực đã mô phỏng và giới hạn thiết bị.
+12. Giữ bài học bảo vệ rủi ro, tái hiện tối thiểu và giảm test flaky, không ghi lại toàn session thành script cứng.
+
+### Rủi ro và lựa chọn phương án
+13. Điều chỉnh charter có lý do cho thấy khám phá làm giảm bất định, cần giữ coverage và đánh đổi rõ.
+14. Có thể lập session tiếp theo theo phát hiện, mục đích là học có nhịp và bàn giao evidence.
+15. Id và trạng thái giúp tìm mất, trùng hoặc sai ánh xạ giữa các tầng, không thay kiểm quyền đọc dữ liệu.
+16. Chọn cách ghi nhẹ phù hợp nhịp kiểm, nhưng finding không có điều kiện khó được tái hiện hoặc bàn giao.
+
+### Dự án, bằng chứng và bàn giao
+17. Tổng hợp biến quan sát thành quyết định, câu hỏi và tài sản regression, công khai phần chưa khám phá.
+18. Quyền chỉ đọc không cho phép mọi hồ sơ, phạm vi và bảo vệ dữ liệu vẫn áp dụng.
+19. Cài lỗi có chủ đích hoặc dùng bản lỗi lab để chứng minh assertion phát hiện, ghi phần mock và tích hợp thật.
+20. Người nhận hiểu điều đã khám phá, điều chưa rõ và cách tái hiện/kiểm tiếp mà không đoán.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Thăm dò có đặc trưng nào?
++ Học, thiết kế và thực hiện có phản hồi
+- Click không mục tiêu
+- Không cần oracle
+Q: Charter tốt nên nêu gì?
++ Mục tiêu, phạm vi, rủi ro và nguồn lực theo timebox
+- Từng click bắt buộc không đổi
+- Một khẩu hiệu kiểm toàn bộ
+Q: Heuristic được dùng như gì?
++ Gợi ý đặt câu hỏi, cần oracle và bối cảnh
+- Yêu cầu bắt buộc mọi sản phẩm
+- Bằng chứng bug chắc chắn
+Q: Tour theo vai trò giúp khám phá gì?
++ Khác biệt quyền và trải nghiệm theo actor
+- Chỉ màu giao diện
+- Mọi root cause
+Q: Chuỗi thao tác có giá trị khi nào?
++ Lịch sử làm đổi điều kiện hoặc tác dụng
+- Càng dài càng tốt
+- Mọi click đều tương đương
+Q: Session note cần ưu tiên gì?
++ Ý định, dữ liệu, đường đi, quan sát và câu hỏi
+- Mọi tọa độ chuột
+- Chỉ giờ bắt đầu
+Q: Hành vi khác kỳ vọng cá nhân đã là bug chưa?
++ Chưa, cần oracle và tác động
+- Luôn là bug
+- Chỉ cần một screenshot
+Q: Pair testing hữu ích nhất khi nào?
++ Hai góc nhìn cùng xây giả thuyết và quan sát
+- Một người chỉ chép lệnh mãi
+- Không ai ghi notes
+Q: Finding mới ngoài charter nhưng trong quyền nên làm gì?
++ Ghi lại và quyết định đổi hướng có lý do
+- Luôn bỏ vì không có checklist
+- Tự mở rộng mọi hệ thống
+Q: Thăm dò API nên kiểm gì ngoài status?
++ Shape, quyền, state, tác dụng phụ và quan hệ dữ liệu
+- Chỉ200
+- Chỉ độ dài body
+Q: Mobile interruption cần expected nào?
++ Draft, state và sync theo hợp đồng
+- Chỉ app mở lại được
+- Luôn xóa dữ liệu
+Q: Finding nào nên chuyển thành regression?
++ Hành vi quan trọng có oracle và khả năng kiểm ổn định
+- Mọi click session thành một test
+- Chỉ bug có ảnh đẹp
+Q: Hai session dự án nên liên hệ thế nào?
++ Session sau dựa học từ session đầu và gap còn lại
+- Lặp y nguyên để đủ số
+- Không cần debrief giữa hai lần
+Q: Timebox nhằm gì?
++ Giới hạn đầu tư và tạo điểm tổng hợp
+- Buộc dừng mọi suy nghĩ
+- Thay tiêu chí chất lượng
+Q: Tour dữ liệu nên theo dấu gì?
++ Vòng đời, biến đổi và nơi hiển thị của cùng id
+- Chỉ tên file
+- Chỉ số lần refresh
+Q: Nếu ngừng ghi chép để khám phá sâu nên làm gì?
++ Giữ mốc/ảnh an toàn rồi bổ sung ngay khi có thể
+- Bịa lại sau nhiều ngày
+- Bỏ evidence
+Q: Debrief nên trả lời gì?
++ Đã khám phá gì, tìm/học gì, còn rủi ro nào và bước tiếp
+- Chỉ có bao nhiêu bug
+- Chỉ thời gian đủ chưa
+Q: Query dữ liệu trong session nên giới hạn thế nào?
++ Chỉ đọc fixture được cấp và che thông tin quyền
+- Đọc mọi bảng thật
+- Tự sửa dữ liệu để test nhanh
+Q: Tự động hóa từ finding cần kiểm điều gì?
++ Độ nhạy, fixture và giới hạn bằng chứng
+- Chỉ code chạy xanh
+- Chỉ số dòng
+Q: Gói bàn giao exploratory cần gì?
++ Charter, notes, findings, evidence, risk map và follow-up
+- Chỉ tổng bug
+- Chỉ video

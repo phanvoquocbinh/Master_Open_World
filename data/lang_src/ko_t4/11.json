@@ -1,0 +1,622 @@
+{
+ "no": 11,
+ "title": "Suy đoán từ dấu hiệu: điều có vẻ đúng và điều đã được xác nhận",
+ "sub": "V-나 보다 / A-(으)ㄴ가 보다 / N인가 보다",
+ "goals": [
+  "Tạo suy đoán từ dấu hiệu với động từ, tính từ và danh từ đúng dạng.",
+  "Tách được quan sát, suy luận và xác nhận trong một bản tường trình.",
+  "Đề xuất được nguồn kiểm phù hợp khi có nhiều cách giải thích cùng một dấu hiệu."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Điểm xuất phát",
+   "html": "<p>Một xưởng im ắng có thể đã nghỉ, nhưng cũng có thể đang chuyển sang phòng khác. Bạn suy đoán có căn cứ từ dấu hiệu quan sát được, rồi chọn mức khẳng định và cách kiểm chứng tương ứng.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm cần dùng",
+   "items": [
+    {
+     "w": "단서",
+     "rr": "danseo",
+     "vi": "dấu hiệu gợi suy luận",
+     "ex": "단서를 먼저 제시해요.",
+     "exVi": "Tôi nêu dấu hiệu trước.",
+     "pos": "phr"
+    },
+    {
+     "w": "관측",
+     "rr": "gwancheuk",
+     "vi": "sự quan sát ghi nhận",
+     "ex": "관측한 범위만 적어요.",
+     "exVi": "Tôi chỉ ghi phạm vi đã quan sát.",
+     "pos": "phr"
+    },
+    {
+     "w": "추론",
+     "rr": "churon",
+     "vi": "suy luận",
+     "ex": "추론과 확인을 구별해요.",
+     "exVi": "Tôi phân biệt suy luận và xác nhận.",
+     "pos": "phr"
+    },
+    {
+     "w": "인기척",
+     "rr": "ingicheok",
+     "vi": "dấu hiệu có người",
+     "ex": "인기척이 없어요.",
+     "exVi": "Không thấy dấu hiệu có người.",
+     "pos": "phr"
+    },
+    {
+     "w": "휴무",
+     "rr": "hyumu",
+     "vi": "việc nghỉ hoạt động",
+     "ex": "오늘이 휴무인가 봐요.",
+     "exVi": "Có lẽ hôm nay là ngày nghỉ.",
+     "pos": "phr"
+    },
+    {
+     "w": "임시",
+     "rr": "imsi",
+     "vi": "tạm thời",
+     "ex": "임시 안내가 붙었어요.",
+     "exVi": "Có thông báo tạm thời.",
+     "pos": "phr"
+    },
+    {
+     "w": "옮겨 가다",
+     "rr": "omgyeo gada",
+     "vi": "chuyển sang nơi khác",
+     "ex": "옆방으로 옮겨 갔나 봐요.",
+     "exVi": "Có vẻ họ đã chuyển sang phòng bên.",
+     "pos": "phr"
+    },
+    {
+     "w": "충돌하다",
+     "rr": "chungdolhada",
+     "vi": "mâu thuẫn, xung đột",
+     "ex": "두 안내가 충돌해요.",
+     "exVi": "Hai hướng dẫn mâu thuẫn nhau.",
+     "pos": "phr"
+    },
+    {
+     "w": "갱신",
+     "rr": "gaengsin",
+     "vi": "việc cập nhật",
+     "ex": "갱신 날짜를 확인해요.",
+     "exVi": "Tôi kiểm ngày cập nhật.",
+     "pos": "phr"
+    },
+    {
+     "w": "직접 확인",
+     "rr": "jikjeop hwagin",
+     "vi": "xác nhận trực tiếp",
+     "ex": "직접 확인이 필요해요.",
+     "exVi": "Cần xác nhận trực tiếp.",
+     "pos": "phr"
+    },
+    {
+     "w": "가능한 설명",
+     "rr": "ganeunghan seolmyeong",
+     "vi": "cách giải thích có thể có",
+     "ex": "가능한 설명을 둘 적어요.",
+     "exVi": "Tôi ghi hai cách giải thích có thể có.",
+     "pos": "phr"
+    },
+    {
+     "w": "확신",
+     "rr": "hwaksin",
+     "vi": "sự tin chắc",
+     "ex": "확신의 정도를 낮춰요.",
+     "exVi": "Tôi giảm mức chắc chắn.",
+     "pos": "phr"
+    },
+    {
+     "w": "보류",
+     "rr": "boryu",
+     "vi": "sự tạm hoãn kết luận",
+     "ex": "확인 전에는 판단을 보류해요.",
+     "exVi": "Tôi tạm hoãn kết luận trước khi kiểm.",
+     "pos": "phr"
+    },
+    {
+     "w": "반대 단서",
+     "rr": "bandae danseo",
+     "vi": "dấu hiệu ngược lại",
+     "ex": "반대 단서도 살펴봐요.",
+     "exVi": "Tôi xem cả dấu hiệu ngược lại.",
+     "pos": "phr"
+    },
+    {
+     "w": "추가 문의",
+     "rr": "chuga munui",
+     "vi": "hỏi thêm",
+     "ex": "추가 문의로 범위를 좁혀요.",
+     "exVi": "Tôi hỏi thêm để thu hẹp phạm vi.",
+     "pos": "phr"
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "V-나 보다 / A-(으)ㄴ가 보다 / N인가 보다",
+   "html": "<p>나 보다 thường đi với động từ như 쉬나 봐요, 끝났나 봐요; tính từ thường dùng (으)ㄴ가 보다 như 바쁜가 봐요, 조용한가 봐요; danh từ dùng 인가 보다 như 휴무인가 봐요. 있다/없다 thường dùng 있나/없나 봐요. Trong hội thoại có biến thể giữa các dạng, nhưng bài luyện bộ đối chiếu cơ bản này. Mẫu thể hiện suy đoán dựa trên dấu hiệu hoặc thông tin gián tiếp, không bằng chứng xác nhận. Không lấy có lẽ làm giấy phép khẳng định tùy ý: nêu dấu hiệu, phạm vi quan sát và cách giải thích khác. Với cảm giác trực tiếp của bản thân thường nói 피곤해요; 피곤한가 봐요 có thể xuất hiện khi tự nhận ra gián tiếp nhưng cần ngữ cảnh, không là cách mặc định kể mọi cảm giác. Khi nhắc suy đoán người khác, giữ nguồn. Một ảnh chụp cũ chưa chắc mô tả hiện trạng; ngày cập nhật là phần của căn cứ. Hỏi người phụ trách khác với chỉ lặp lại suy đoán của nhiều người.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Ý cần giữ"
+    ],
+    [
+     "사람들이 갔나 봐요",
+     "Động từ: suy từ dấu hiệu"
+    ],
+    [
+     "방이 조용한가 봐요",
+     "Tính từ theo mẫu cơ bản"
+    ],
+    [
+     "오늘이 휴무인가 봐요",
+     "Danh từ + 인가 보다"
+    ],
+    [
+     "관찰→추론→직접 확인",
+     "Ba bước với mức xác nhận khác nhau"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "신발이 없으니 모두 나갔나 봐요.",
+     "vi": "Không thấy giày nên có lẽ mọi người đã ra ngoài."
+    },
+    {
+     "t": "답장이 늦는 것을 보니 담당자가 바쁜가 봐요.",
+     "vi": "Thấy trả lời chậm nên có vẻ người phụ trách bận."
+    },
+    {
+     "t": "문에 종이가 붙은 것을 보니 임시 휴무인가 봐요.",
+     "vi": "Thấy giấy dán trên cửa nên có lẽ nghỉ tạm."
+    },
+    {
+     "t": "하지만 옆방을 쓰고 있을 수도 있으니 확인해 봐야 해요.",
+     "vi": "Nhưng cũng có thể đang dùng phòng bên, nên cần kiểm."
+    }
+   ],
+   "tips": [
+    "Đổi có lẽ thành chắc chắn khi chuyển tin: giữ đuôi và mức tin.",
+    "Dùng ảnh cũ như quan sát hiện tại: ghi thời điểm.",
+    "Bỏ cách giải thích khác của cửa đóng: kiểm nghỉ hay đổi nơi."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe để giải quyết việc cụ thể",
+   "lang": "ko-KR",
+   "note": "Đến xưởng giả định gặp cửa đóng: một người đoán nghỉ, người kia kiểm thông báo và tìm lời giải thích khác.",
+   "lines": [
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "불이 꺼져 있고 인기척도 없네요. 오늘은 쉬나 봐요.",
+     "vi": "Đèn tắt và không thấy ai. Có lẽ hôm nay nghỉ."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "문 옆에 임시 안내가 있어요. 먼저 읽어 볼까요?",
+     "vi": "Có hướng dẫn tạm cạnh cửa. Đọc trước nhé?"
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "안에는 사람이 없다는 건 직접 봤어요.",
+     "vi": "Tôi trực tiếp thấy bên trong không có người."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "그렇지만 모임이 취소됐다는 건 아직 추론이에요.",
+     "vi": "Nhưng buổi gặp bị hủy thì vẫn là suy luận."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "안내에는 옆방을 쓴다고 써 있는데 날짜가 작아요.",
+     "vi": "Hướng dẫn ghi dùng phòng bên, mà ngày in nhỏ quá."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "갱신된 안내인지 담당자에게 확인해요.",
+     "vi": "Kiểm với người phụ trách xem có phải bản mới không."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "그럼 취소라고 다른 사람에게 보내지 않을게요.",
+     "vi": "Vậy tôi chưa gửi cho người khác là đã hủy."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "좋아요. 옆방에 가기 전에 사용 가능한지도 물어봐요.",
+     "vi": "Được. Trước khi sang phòng bên cũng hỏi có dùng được không."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "답이 왔어요. 이번 주만 옆방에서 모인대요.",
+     "vi": "Có trả lời rồi. Tuần này họ gặp ở phòng bên."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "이제 확인된 범위를 이번 주로 한정해서 전하면 되겠어요.",
+     "vi": "Giờ có thể truyền điều đã xác nhận, giới hạn trong tuần này."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Điều gì đã trực tiếp quan sát?",
+     "o": [
+      "Mọi tuần đều dùng phòng bên",
+      "Phòng đầu không có người",
+      "Buổi gặp đã hủy"
+     ],
+     "a": 1,
+     "e": "Người nói trực tiếp thấy phòng đầu không có người trong phạm vi nhìn qua cửa; hủy buổi còn là suy luận."
+    },
+    {
+     "q": "Vì sao chưa gửi tin hủy?",
+     "o": [
+      "Hủy mới là suy luận, còn cách giải thích khác",
+      "Đã có giấy xác nhận hủy",
+      "Không biết gửi cho ai"
+     ],
+     "a": 0,
+     "e": "Chưa loại khả năng đổi phòng, nên không được truyền việc hủy như thông tin đã xác nhận."
+    },
+    {
+     "q": "Phạm vi câu trả lời cuối là gì?",
+     "o": [
+      "Luôn gặp phòng bên",
+      "Mọi phòng đều đóng",
+      "Chỉ tuần này gặp phòng bên"
+     ],
+     "a": 2,
+     "e": "Câu trả lời chỉ xác nhận tuần này dùng phòng bên do sửa, chưa cho biết lịch mọi tuần."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Cánh cửa đóng và hai lời giải thích",
+   "title": "Cánh cửa đóng và hai lời giải thích",
+   "text": "가상의 나뭇결 공방에서는 매주 짧은 만들기 모임을 열어요. 나린 씨는 토요일 오전에 공방 앞에 도착했어요. 안쪽 불이 꺼져 있었고 신발장도 비어 있었어요. 문 안으로 보이는 범위에는 사람이 없었어요. 나린 씨는 오늘은 쉬나 보다라고 생각했어요. 이 문장은 관찰을 바탕으로 한 추론이었어요. 실제로 확인한 것은 그 시각에 그 방이 비어 있다는 점이었지 모임 전체가 취소되었다는 사실은 아니었어요. 가온 씨가 문 옆의 작은 종이를 발견했어요. 거기에는 옆방을 사용한다는 안내가 있었어요. 하지만 날짜가 흐려서 이번 주 안내인지 알기 어려웠어요. 두 사람은 가능한 설명을 둘로 나누었어요. 하나는 임시 휴무이고 다른 하나는 장소 변경이었어요. 다른 참가자가 보낸 사진에는 며칠 전 이 방에서 활동하는 모습이 있었어요. 그 사진도 오늘 모임이 열리는지 직접 알려 주지는 못했어요. 예전 사진과 현재 관찰은 서로 다른 시점을 가리키기 때문이에요. 나린 씨는 단체 안내에 취소라고 쓰려던 것을 멈추었어요. 대신 현재 방은 비어 있고 장소 변경 여부를 확인 중이라고 적었어요. 가온 씨는 담당자에게 안내의 적용 기간과 옆방 입장 방법을 물었어요. 답장에는 이번 주만 수리 때문에 옆방을 쓴다고 되어 있었어요. 두 사람은 확인된 내용과 그 답을 받은 시각을 함께 전했어요. 또 다음 주도 같은 방을 쓰는지는 아직 모른다고 덧붙였어요. 공방이 조용하다는 인상에서 시작한 이야기는 질문을 거쳐 범위가 있는 정보가 되었어요. 여러 사람이 같은 추측을 반복하는 것보다 그 추측이 기대는 단서와 반대 설명을 살펴보는 일이 도움이 되었어요. 모임 뒤에는 짧은 안내를 다시 읽고 나 보다, 확인했다, 아직 모른다라는 표현의 차이를 함께 정리했어요.",
+   "vi": "Xưởng Vân Gỗ giả định có buổi làm thủ công hằng tuần. Sáng thứ bảy Narin thấy đèn tắt, giá giày trống và không có người trong phạm vi nhìn qua cửa, nên nghĩ có lẽ hôm nay nghỉ. Đó là suy luận từ quan sát; điều trực tiếp biết chỉ là phòng đang trống ở lúc ấy, chưa phải cả buổi bị hủy. Gaon thấy giấy ghi dùng phòng bên, nhưng ngày mờ nên chưa biết áp dụng tuần này không. Họ tách hai cách giải thích: nghỉ tạm hoặc đổi nơi. Ảnh hoạt động từ vài ngày trước cũng không xác nhận hôm nay vì khác thời điểm. Narin dừng gửi tin hủy, thay bằng thông báo phòng hiện trống và đang kiểm việc đổi nơi. Gaon hỏi người phụ trách về thời hạn thông báo, cách vào phòng bên. Trả lời cho biết chỉ tuần này dùng phòng bên do sửa chữa. Họ truyền đúng phạm vi cùng giờ nhận câu trả lời và nói tuần sau chưa biết. Từ một ấn tượng yên ắng, qua câu hỏi họ có thông tin giới hạn rõ. Việc xem dấu hiệu và cách giải thích ngược giúp hơn là nhiều người cùng lặp suy đoán. Sau buổi họ đối chiếu các cách nói có lẽ, đã xác nhận và chưa biết.",
+   "gloss": [
+    {
+     "w": "적용 기간",
+     "rr": "jeogyong gigan",
+     "vi": "thời hạn áp dụng"
+    },
+    {
+     "w": "흐려서",
+     "rr": "heuryeoseo",
+     "vi": "vì bị mờ"
+    },
+    {
+     "w": "반대 설명",
+     "rr": "bandae seolmyeong",
+     "vi": "cách giải thích ngược"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Điều gì KHÔNG trực tiếp được biết từ căn phòng trống?",
+     "o": [
+      "Cả buổi đã bị hủy",
+      "Phòng đang không có người nhìn thấy",
+      "Đèn đang tắt"
+     ],
+     "a": 0,
+     "e": "Phòng trống tại một thời điểm chưa chứng minh toàn buổi bị hủy; đây là phần vượt quan sát."
+    },
+    {
+     "q": "Vì sao giấy đổi phòng chưa đủ để kết luận ngay?",
+     "o": [
+      "Không có chữ nào",
+      "Mọi giấy đều giả",
+      "Ngày mờ, chưa biết thời hạn"
+     ],
+     "a": 2,
+     "e": "Ngày trên giấy mờ nên chưa biết thông báo đổi phòng còn áp dụng tuần này không."
+    },
+    {
+     "q": "Ảnh vài ngày trước có giới hạn gì?",
+     "o": [
+      "Chứng minh mọi tuần đều nghỉ",
+      "Khác thời điểm với việc cần kiểm",
+      "Chứng minh hôm nay chắc mở"
+     ],
+     "a": 1,
+     "e": "Ảnh vài ngày trước mô tả thời điểm khác, chưa trực tiếp xác nhận tình trạng hôm nay."
+    },
+    {
+     "q": "Thông báo tạm được viết thế nào?",
+     "o": [
+      "Phòng hiện trống, đang kiểm đổi nơi",
+      "Đã hủy chắc chắn",
+      "Luôn gặp phòng bên từ nay"
+     ],
+     "a": 0,
+     "e": "Narin chỉ ghi phòng hiện trống và đang kiểm việc đổi nơi, giữ riêng quan sát với điều chưa biết."
+    },
+    {
+     "q": "Câu trả lời mới xác nhận phạm vi gì?",
+     "o": [
+      "Mọi tuần đổi phòng",
+      "Chưa từng có buổi gặp",
+      "Tuần này đổi phòng do sửa"
+     ],
+     "a": 2,
+     "e": "Người phụ trách nói chỉ tuần này dùng phòng bên vì sửa; phạm vi thời gian phải được giữ."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và nhận phản hồi",
+   "tasks": [
+    {
+     "p": "Từ cửa đóng, nêu dấu hiệu và hai suy đoán rồi hỏi cách kiểm.",
+     "model": "불이 꺼져 있어서 쉬나 봐요. 하지만 옆방으로 옮겨 갔을 수도 있어요. 임시 안내가 이번 주에도 해당하는지 담당자에게 물어보는 게 어때요?",
+     "vi": "Đèn tắt nên có lẽ nghỉ, nhưng cũng có thể đã sang phòng bên. Hỏi phụ trách xem giấy tạm còn áp dụng tuần này thì sao?"
+    },
+    {
+     "p": "Người nghe tưởng bạn xác nhận hủy; sửa phạm vi và báo bước tiếp.",
+     "model": "가: 모임이 취소된 게 확실해요? 나: 아니요. 제가 본 것은 방이 비어 있다는 점이에요. 취소인지 장소 변경인지는 아직 확인 중이에요. 가: 그럼 확인된 뒤에 안내할게요.",
+     "vi": "A hỏi chắc hủy không. B phân biệt phòng trống là quan sát, hủy hay đổi nơi vẫn đang kiểm. A chờ để thông báo."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết cho người nhận hiểu được",
+   "task": "Viết tám đến mười câu tường trình 250–400 ký tự Hàn: ba dấu hiệu, một suy đoán bằng 나 보다 hoặc (으)ㄴ가 보다, cách giải thích khác, giới hạn ảnh cũ, bước kiểm và phạm vi kết quả.",
+   "min": 240,
+   "model": "공방에 도착했을 때 안쪽 불이 꺼져 있었어요. 신발장도 비어 있었고 보이는 곳에 사람이 없었어요. 그래서 오늘은 쉬나 보다라고 생각했어요. 하지만 옆방을 사용한다는 작은 안내도 발견했어요. 날짜가 흐려서 이번 주 안내인지 알 수 없었어요. 며칠 전 사진만으로 오늘의 상태를 확인할 수도 없었어요. 저는 취소라고 전하는 대신 담당자에게 적용 기간을 물었어요. 답장에는 이번 주만 수리 때문에 옆방을 쓴다고 되어 있었어요. 이 내용을 받은 시각과 함께 전하고 다음 주 장소는 아직 모른다고 덧붙였어요.",
+   "modelVi": "Đến xưởng tôi thấy đèn tắt, giá giày trống và không có người ở phạm vi nhìn thấy, nên nghĩ có lẽ nghỉ. Tuy nhiên tôi phát hiện giấy dùng phòng bên, ngày mờ nên chưa biết còn áp dụng không. Ảnh cũ không xác nhận hôm nay. Tôi chưa báo hủy mà hỏi người phụ trách về thời hạn. Câu trả lời xác nhận chỉ tuần này đổi do sửa. Tôi truyền cùng giờ nhận, nói rõ tuần sau chưa biết.",
+   "tips": [
+    "Sắp ý theo yêu cầu Viết tám đến mười câu tường trình 250–400 ký tự Hàn: ba dấu hiệu, một suy đoán bằng 나 보다 hoặc (으)ㄴ가 보다, cách giải thích khác, giới hạn ảnh cũ, bước kiểm và phạm vi kết quả.; chỉ đưa dữ kiện cần để người nhận hiểu tình huống.",
+    "Dùng V-나 보다 / A-(으)ㄴ가 보다 / N인가 보다 theo ý nghĩa đã giải thích, không thay mọi đuôi chỉ vì chúng trông giống nhau."
+   ],
+   "checklist": [
+    "Sản phẩm đáp đủ mục tiêu: Tạo suy đoán từ dấu hiệu với động từ, tính từ và danh từ đúng dạng.",
+    "Câu có V-나 보다 / A-(으)ㄴ가 보다 / N인가 보다 giữ đúng vai và thời điểm của người nói.",
+    "Người đọc sản phẩm có thể trả lời câu “Điều gì KHÔNG trực tiếp được biết từ căn phòng trống?” khi dữ kiện tương ứng được đưa vào; không phải suy từ một chữ khó nhìn."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong câu “단서를 먼저 제시해요.”, cụm “단서” có nghĩa gì?",
+   "o": [
+    "chuyển sang nơi khác",
+    "dấu hiệu gợi suy luận",
+    "dấu hiệu có người"
+   ],
+   "a": 1,
+   "e": "Tôi nêu dấu hiệu trước. Đây là cách dùng dấu hiệu gợi suy luận trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “관측한 범위만 적어요.”, cụm “관측” có nghĩa gì?",
+   "o": [
+    "sự quan sát ghi nhận",
+    "việc nghỉ hoạt động",
+    "mâu thuẫn, xung đột"
+   ],
+   "a": 0,
+   "e": "Tôi chỉ ghi phạm vi đã quan sát. Đây là cách dùng sự quan sát ghi nhận trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “추론과 확인을 구별해요.”, cụm “추론” có nghĩa gì?",
+   "o": [
+    "tạm thời",
+    "việc cập nhật",
+    "suy luận"
+   ],
+   "a": 2,
+   "e": "Tôi phân biệt suy luận và xác nhận. Đây là cách dùng suy luận trong tình huống đang nói."
+  },
+  {
+   "t": "fill",
+   "q": "답장이 늦는 걸 보니 담당자가 바쁜___ 봐요.",
+   "a": "가",
+   "e": "바쁘다 là tính từ, dạng cơ bản 바쁜가 보다."
+  },
+  {
+   "t": "fill",
+   "q": "오늘이 임시 휴무___ 봐요.",
+   "a": "인가",
+   "e": "Danh từ 휴무 dùng 인가 보다."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Thấy giấy dán trên cửa nên có lẽ nghỉ tạm.",
+   "w": [
+    "종이가",
+    "붙은",
+    "것을",
+    "보니",
+    "임시",
+    "휴무인가",
+    "봐요",
+    "문에"
+   ],
+   "a": "문에 종이가 붙은 것을 보니 임시 휴무인가 봐요.",
+   "e": "Câu đúng là 문에 종이가 붙은 것을 보니 임시 휴무인가 봐요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt thấy giấy dán trên cửa nên có lẽ nghỉ tạm."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Nhưng cũng có thể đang dùng phòng bên, nên cần kiểm.",
+   "w": [
+    "옆방을",
+    "쓰고",
+    "있을",
+    "수도",
+    "있으니",
+    "확인해",
+    "봐야",
+    "해요",
+    "하지만"
+   ],
+   "a": "하지만 옆방을 쓰고 있을 수도 있으니 확인해 봐야 해요.",
+   "e": "Câu đúng là 하지만 옆방을 쓰고 있을 수도 있으니 확인해 봐야 해요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt nhưng cũng có thể đang dùng phòng bên, nên cần kiểm."
+  },
+  {
+   "t": "match",
+   "q": "Nối các cụm liên quan chuyển sang nơi khác và cách giải thích có thể có với nghĩa phù hợp trong tình huống.",
+   "pairs": [
+    [
+     "옮겨 가다",
+     "chuyển sang nơi khác"
+    ],
+    [
+     "충돌하다",
+     "mâu thuẫn, xung đột"
+    ],
+    [
+     "갱신",
+     "việc cập nhật"
+    ],
+    [
+     "직접 확인",
+     "xác nhận trực tiếp"
+    ],
+    [
+     "가능한 설명",
+     "cách giải thích có thể có"
+    ]
+   ],
+   "e": "Cụm 옮겨 가다 diễn đạt chuyển sang nơi khác, khác 가능한 설명 là cách giải thích có thể có. Hãy dùng câu ví dụ để kiểm chức năng trước khi ghép."
+  },
+  {
+   "t": "listen",
+   "say": "불이 꺼져 있고 인기척도 없네요. 오늘은 쉬나 봐요. 문 옆에 임시 안내가 있어요. 먼저 읽어 볼까요? 안에는 사람이 없다는 건 직접 봤어요. 그렇지만 모임이 취소됐다는 건 아직 추론이에요. 안내에는 옆방을 쓴다고 써 있는데 날짜가 작아요. 갱신된 안내인지 담당자에게 확인해요. 그럼 취소라고 다른 사람에게 보내지 않을게요. 좋아요. 옆방에 가기 전에 사용 가능한지도 물어봐요. 답이 왔어요. 이번 주만 옆방에서 모인대요. 이제 확인된 범위를 이번 주로 한정해서 전하면 되겠어요.",
+   "lang": "ko-KR",
+   "q": "Điều gì đã trực tiếp quan sát?",
+   "o": [
+    "Mọi tuần đều dùng phòng bên",
+    "Phòng đầu không có người",
+    "Buổi gặp đã hủy"
+   ],
+   "a": 1,
+   "e": "Người nói trực tiếp thấy phòng đầu không có người trong phạm vi nhìn qua cửa; hủy buổi còn là suy luận."
+  },
+  {
+   "t": "listen",
+   "say": "불이 꺼져 있고 인기척도 없네요. 오늘은 쉬나 봐요. 문 옆에 임시 안내가 있어요. 먼저 읽어 볼까요? 안에는 사람이 없다는 건 직접 봤어요. 그렇지만 모임이 취소됐다는 건 아직 추론이에요. 안내에는 옆방을 쓴다고 써 있는데 날짜가 작아요. 갱신된 안내인지 담당자에게 확인해요. 그럼 취소라고 다른 사람에게 보내지 않을게요. 좋아요. 옆방에 가기 전에 사용 가능한지도 물어봐요. 답이 왔어요. 이번 주만 옆방에서 모인대요. 이제 확인된 범위를 이번 주로 한정해서 전하면 되겠어요.",
+   "lang": "ko-KR",
+   "q": "Vì sao chưa gửi tin hủy?",
+   "o": [
+    "Hủy mới là suy luận, còn cách giải thích khác",
+    "Đã có giấy xác nhận hủy",
+    "Không biết gửi cho ai"
+   ],
+   "a": 0,
+   "e": "Chưa loại khả năng đổi phòng, nên không được truyền việc hủy như thông tin đã xác nhận."
+  },
+  {
+   "t": "dict",
+   "say": "가상의 나뭇결 공방에서는 매주 짧은 만들기 모임을 열어요.",
+   "a": "가상의 나뭇결 공방에서는 매주 짧은 만들기 모임을 열어요.",
+   "lang": "ko-KR",
+   "e": "Câu bắt đầu bằng “가상의 나뭇결” và kết thúc bằng “열어요.”. Giữ các khối chữ trong từng từ, viết cách giữa các từ như khi đọc lại cả câu; không đổi cách viết theo một âm nối nghe được."
+  },
+  {
+   "t": "mc",
+   "q": "나 보다 cho mức xác nhận nào?",
+   "o": [
+    "Luôn sự thật chắc chắn",
+    "Không bao giờ cần căn cứ",
+    "Suy đoán có dấu hiệu, chưa bằng xác nhận trực tiếp"
+   ],
+   "a": 2,
+   "e": "Cần giữ khác biệt giữa 단서 기반 추론 và 확인."
+  },
+  {
+   "t": "mc",
+   "q": "Đa số người cùng lặp một suy đoán thì sao?",
+   "o": [
+    "Không thể kiểm được nữa",
+    "Vẫn cần xét nguồn và dấu hiệu độc lập",
+    "Tự trở thành xác nhận"
+   ],
+   "a": 1,
+   "e": "Số người lặp không thay cho kiểm căn cứ và phạm vi."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ 단서 / 휴무 / 추가 문의, tranh hoặc sơ đồ cho tình huống Đến xưởng giả định gặp cửa đóng: một người đoán nghỉ, người kia kiểm thông báo và tìm lời giải thích khác.; giáo viên nghe trước bản TTS để kiểm các số và âm khó.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Giáo viên nêu câu hỏi “Điều gì đã trực tiếp quan sát?”. Học viên dự đoán hai hướng trả lời rồi ghi điều cần nghe để phân biệt chúng; chưa mở lời thoại."
+   },
+   {
+    "t": "20 phút",
+    "do": "Làm việc với thẻ “단서” và “인기척”. Cho học viên ghép hai câu ví dụ tương ứng với tranh hoặc tình huống, sau đó tự giải thích vì sao không đổi chỗ hai cụm."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đối chiếu “신발이 없으니 모두 나갔나 봐요.” với “답장이 늦는 것을 보니 담당자가 바쁜가 봐요.”. Khoanh thành phần thuộc V-나 보다 / A-(으)ㄴ가 보다 / N인가 보다 và tạo một biến thể đổi nghĩa có chủ ý để cả lớp sửa."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nghe tình huống Đến xưởng giả định gặp cửa đóng: một người đoán nghỉ, người kia kiểm thông báo và tìm lời giải thích khác. Lượt đầu lấy mục tiêu hai người, lượt sau ghi dữ kiện giải câu “Điều gì đã trực tiếp quan sát?”; yêu cầu chỉ đúng lượt cung cấp căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nhập vai theo nhiệm vụ “Từ cửa đóng, nêu dấu hiệu và hai suy đoán rồi hỏi cách kiểm.”. Người nghe nhắc lại thông tin quyết định; người nói chỉ xác nhận nếu dữ kiện đã được truyền đúng."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai bắt đầu bằng “임시” và “추가 문의”. Học viên viết lại một câu đã dùng từ tiết trước rồi đổi bối cảnh để kiểm có còn phù hợp hay không."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc “Cánh cửa đóng và hai lời giải thích” để giải câu “Điều gì KHÔNG trực tiếp được biết từ căn phòng trống?”. So câu chứng cứ với một phương án nhiễu và nêu dữ kiện nào làm phương án đó sai."
+   },
+   {
+    "t": "20 phút",
+    "do": "Giao lượt nói thứ hai: Người nghe tưởng bạn xác nhận hủy; sửa phạm vi và báo bước tiếp. Bạn nghe chỉ phản hồi về mục tiêu nội dung và cấu trúc đang luyện, không sửa mọi lỗi giữa lúc người kia nói."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết theo đề: Viết tám đến mười câu tường trình 250–400 ký tự Hàn: ba dấu hiệu, một suy đoán bằng 나 보다 hoặc (으)ㄴ가 보다, cách giải thích khác, giới hạn ảnh cũ, bước kiểm và phạm vi kết quả. Đổi bản cho bạn đọc và đối chiếu yêu cầu “Sản phẩm đáp đủ mục tiêu: Tạo suy đoán từ dấu hiệu với động từ, tính từ và danh từ đúng dạng.”; người viết tự sửa một ý rồi giải thích căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chốt bằng câu “나 보다 cho mức xác nhận nào?”. Mỗi học viên nêu vì sao lựa chọn sai dễ gây nhầm, rồi tự chọn một câu từ sản phẩm để luyện lại ở nhà."
+   }
+  ],
+  "games": [
+   "Thẻ điều kiện: đổi 단서 thành 휴무 trong câu mẫu nếu có nghĩa, sau đó giải thích điều kiện nào buộc phải sửa thêm ở vị ngữ.",
+   "Người kiểm căn cứ: hai bạn giải “Điều gì KHÔNG trực tiếp được biết từ căn phòng trống?”, chỉ câu hỗ trợ và bác một phương án nhiễu bằng đúng dữ kiện của bài."
+  ],
+  "errors": [
+   "Đổi có lẽ thành chắc chắn khi chuyển tin: giữ đuôi và mức tin.",
+   "Dùng ảnh cũ như quan sát hiện tại: ghi thời điểm.",
+   "Bỏ cách giải thích khác của cửa đóng: kiểm nghỉ hay đổi nơi.",
+   "Gắn 나 보다 vào danh từ không xét mẫu: ở đây dùng 인가 보다.",
+   "Mở kết quả một tuần cho mọi tuần: giữ 적용 기간."
+  ],
+  "homework": "Lập một tình huống mới có 단서 và 추가 문의. Viết sản phẩm cùng loại với đề lớp nhưng đổi thông tin, gửi bạn nghe/đọc rồi tự sửa lỗi liên quan V-나 보다 / A-(으)ㄴ가 보다 / N인가 보다."
+ }
+}

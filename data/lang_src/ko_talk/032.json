@@ -1,0 +1,194 @@
+{
+ "no": 32,
+ "lv": "t1",
+ "title": "Đang làm gì và kiểm đúng người sở hữu",
+ "sub": "지금 뭐 하고 있어요?",
+ "situation": "Hai bạn dọn lớp sau buổi học. Một người đang tìm vở, người kia kiểm tên thay vì cho rằng cùng màu là của cùng người.",
+ "lang": "ko-KR",
+ "lines": [
+  {
+   "s": "보람",
+   "g": "f",
+   "t": "지금 뭐 하고 있어요?",
+   "vi": "Bây giờ bạn đang làm gì?"
+  },
+  {
+   "s": "서윤",
+   "g": "m",
+   "t": "공책을 찾고 있어요. 표지가 파란색이에요.",
+   "vi": "Tôi đang tìm vở. Bìa màu xanh dương."
+  },
+  {
+   "s": "보람",
+   "g": "f",
+   "t": "책상 위의 이 공책이에요?",
+   "vi": "Quyển này trên bàn à?"
+  },
+  {
+   "s": "서윤",
+   "g": "m",
+   "t": "색은 같아요. 하지만 제 공책이 아니에요.",
+   "vi": "Màu giống nhưng không phải vở tôi."
+  },
+  {
+   "s": "보람",
+   "g": "f",
+   "t": "이름을 어디에 써요?",
+   "vi": "Bạn viết tên ở đâu?"
+  },
+  {
+   "s": "서윤",
+   "g": "m",
+   "t": "첫 장 안쪽에 써요. 먼저 거기를 보세요.",
+   "vi": "Ở phía trong trang đầu. Xem chỗ đó trước nhé."
+  },
+  {
+   "s": "보람",
+   "g": "f",
+   "t": "여기에는 나린이라고 써 있어요.",
+   "vi": "Ở đây có tên Narin."
+  },
+  {
+   "s": "서윤",
+   "g": "m",
+   "t": "제 이름은 보람이에요. 다른 공책도 있어요?",
+   "vi": "Tên tôi là Boram. Còn quyển khác không?"
+  },
+  {
+   "s": "보람",
+   "g": "f",
+   "t": "네. 의자 옆 상자에 있어요.",
+   "vi": "Có. Trong hộp cạnh ghế."
+  },
+  {
+   "s": "서윤",
+   "g": "m",
+   "t": "그 공책에는 제 이름이 있어요. 고마워요.",
+   "vi": "Quyển đó có tên tôi. Cảm ơn."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "공책을 찾고 있어요",
+   "vi": "đang tìm vở",
+   "note": "고 있어요 diễn đạt hành động hiện tại được hỏi trực tiếp."
+  },
+  {
+   "t": "표지가 파란색이에요",
+   "vi": "bìa màu xanh dương",
+   "note": "Màu giúp thu hẹp tìm kiếm, chưa đủ nhận chủ."
+  },
+  {
+   "t": "제 공책이 아니에요",
+   "vi": "không phải vở của tôi",
+   "note": "Phủ định danh từ bằng 아니에요, không đặt 안 trước 공책."
+  },
+  {
+   "t": "첫 장 안쪽",
+   "vi": "phía trong trang đầu",
+   "note": "Chỉ vị trí kiểm tên cụ thể thay lời tìm chung chung."
+  },
+  {
+   "t": "먼저 거기를 보세요",
+   "vi": "hãy xem chỗ đó trước",
+   "note": "Chỉ dẫn lịch sự dùng 보세요 sau thân không batchim."
+  },
+  {
+   "t": "의자 옆 상자",
+   "vi": "hộp cạnh ghế",
+   "note": "Hai mối quan hệ vị trí cần giữ cùng nhau để tìm đúng hộp."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Người được hỏi đang làm gì?",
+   "o": [
+    "Ngủ",
+    "Tìm vở",
+    "Đọc truyện"
+   ],
+   "a": 1,
+   "e": "공책을찾고있어요 là hành động hiện tại."
+  },
+  {
+   "q": "Vì sao không nhận quyển trên bàn?",
+   "o": [
+    "Tên không đúng dù cùng màu",
+    "Vì không có quyển nào",
+    "Vì sách quá dài"
+   ],
+   "a": 0,
+   "e": "색은같지만제공책아님, sau cótênNarin."
+  },
+  {
+   "q": "Tên được ghi ở đâu?",
+   "o": [
+    "Ngoài cửa lớp",
+    "Trên mọi ghế",
+    "Phía trong trang đầu"
+   ],
+   "a": 2,
+   "e": "첫장안쪽 chỉ nơi kiểm."
+  },
+  {
+   "q": "Quyển còn lại ở đâu?",
+   "o": [
+    "Trong nhà Narin",
+    "Trong hộp cạnh ghế",
+    "Ngoài trời"
+   ],
+   "a": 1,
+   "e": "의자옆상자에있어요."
+  },
+  {
+   "q": "Bằng chứng cuối để nhận vở là gì?",
+   "o": [
+    "Có tên mình",
+    "Cùng màu là đủ",
+    "Đứng gần nhất"
+   ],
+   "a": 0,
+   "e": "제이름이있어요 xác nhận."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "이 공책은 제 것이 ___. (không phải)",
+   "a": "아니에요",
+   "e": "Phủ định danh từ 제 것 dùng 아니에요."
+  },
+  {
+   "t": "listen",
+   "say": "지금 뭐 하고 있어요? 공책을 찾고 있어요. 표지가 파란색이에요. 책상 위의 이 공책이에요? 색은 같아요. 하지만 제 공책이 아니에요. 이름을 어디에 써요? 첫 장 안쪽에 써요. 먼저 거기를 보세요. 여기에는 나린이라고 써 있어요. 제 이름은 보람이에요. 다른 공책도 있어요? 네. 의자 옆 상자에 있어요. 그 공책에는 제 이름이 있어요. 고마워요.",
+   "lang": "ko-KR",
+   "q": "Vì sao không nhận quyển trên bàn?",
+   "o": [
+    "Tên không đúng dù cùng màu",
+    "Vì không có quyển nào",
+    "Vì sách quá dài"
+   ],
+   "a": 0,
+   "e": "Căn cứ của câu nghe: 색은같지만제공책아님, sau cótênNarin."
+  },
+  {
+   "t": "dict",
+   "say": "상자 안에 공책이 있어요.",
+   "a": "상자 안에 공책이 있어요.",
+   "lang": "ko-KR",
+   "e": "Định vị với 안에, chủ thể 공책이 và động từ tồn tại 있어요."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Hỏi bạn đang làm gì rồi đề nghị kiểm tên trước khi nhận vở.",
+   "model": "지금 뭐 하고 있어요? 공책을 찾고 있어요? 그럼 먼저 첫 장의 이름을 확인해 주세요.",
+   "vi": "Bạn đang làm gì, đang tìm vở à? Vậy xin kiểm tên trang đầu trước."
+  },
+  {
+   "p": "Bạn được đưa quyển cùng màu nhưng tên khác, từ chối lịch sự và hỏi vị trí quyển khác.",
+   "model": "고마워요. 하지만 이건 제 공책이 아니에요. 이름이 달라요. 다른 공책은 어디에 있어요?",
+   "vi": "Cảm ơn nhưng đây không phải vở tôi vì tên khác. Quyển khác ở đâu?"
+  }
+ ]
+}

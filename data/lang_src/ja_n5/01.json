@@ -3,29 +3,30 @@
  "title": "Chào hỏi và tự giới thiệu; NはNです",
  "sub": "私は 学生です。",
  "goals": [
-  "Hiểu và dùng đúng Chào hỏi và tự giới thiệu; NはNです",
-  "Đọc/nghe phân biệt ít nhất 12 từ/cụm của tình huống",
-  "Hỏi và trả lời ba thông tin cụ thể bằng mức lịch sự phù hợp",
-  "Viết đoạn mới và tự sửa lỗi theo checklist"
+  "Phân tích cách dùng trong câu “私は 学生です。” và tạo một câu khác giữ đúng quan hệ ý.",
+  "Dùng “私” (tôi) và “学生” (học sinh/sinh viên) đúng trong trao đổi của bài.",
+  "Nghe để trả lời câu hỏi “Theo hội thoại: Lần đầu gặp. Tên tôi là Yui.”, rồi chỉ ra phần lời nói làm căn cứ.",
+  "Tự viết đoạn có ý chính “Sinh viên ở Việt Nam” và kiểm lại sự nhất quán với văn bản đọc."
  ],
  "parts": [
   {
    "k": "text",
    "h": "Bối cảnh và cách học",
-   "html": "<p>Tự giới thiệu tên và vai trò trong lớp giả; phân biệt nghề nghiệp với cách gọi 先生 dành cho người khác.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+   "html": "<p>Tự giới thiệu tên và vai trò trong lớp giả; phân biệt nghề nghiệp với cách gọi 先生 dành cho người khác.</p>"
   },
   {
    "k": "sounds",
    "h": "Phát âm và nhịp",
-   "html": "<p>Luyện mora trong từ của bài, đặc biệt âm dài, ん và っ. Không áp thanh điệu tiếng Việt; nghe câu trọn cụm và giữ phần kết lịch sự.</p>",
+   "html": "<p>Giữ phần きょう trong きょうし thành kyo-o, không tách kì-yô. Đối chiếu かいしゃいん thành ka-i-sha-i-n; しゃ là một nhịp, còn ん giữ nhịp cuối.</p>",
    "items": [
     {
-     "sym": "Nhịp câu và âm cuối",
+     "sym": "がくせい・きょうし",
      "ex": [
-      "私は 学生です。",
-      "ゆいさんは 教師ではありません。"
+      "学生",
+      "教師",
+      "会社員"
      ],
-     "vi": "Đọc theo cụm ý, giữ đủ độ dài và không bỏ phần phủ định."
+     "vi": "Nghe và đọc đối chiếu 学生 (がくせい), 教師 (きょうし), 会社員 (かいしゃいん). Dùng câu “私は 学生です。” để kiểm xem các độ dài âm còn giữ được khi nối vào phát ngôn."
     }
    ]
   },
@@ -118,8 +119,8 @@
      "kana": "いいえ",
      "romaji": "iie",
      "vi": "không (đáp)",
-     "ex": "いいえ、学生ではありません。会社員です。",
-     "exVi": "Không, tôi không phải sinh viên. Tôi là nhân viên công ty."
+     "ex": "いいえ、今日は休みません。",
+     "exVi": "Không, hôm nay tôi không nghỉ."
     },
     {
      "w": "よろしくお願いします",
@@ -180,7 +181,7 @@
   {
    "k": "dialog",
    "h": "Nghe: Chào hỏi và tự giới thiệu; NはNです",
-   "note": "Hai học viên của lớp giả Mây Sớm trao đổi; nghe lần đầu lấy ý, lần sau kiểm chi tiết. Không đọc romaji trong âm thanh.",
+   "note": "Trước khi nghe, dự đoán câu trả lời cho “Theo hội thoại: Lần đầu gặp. Tên tôi là Yui.”. Sau đó ghi nguyên thông tin làm bạn chọn đáp án; lượt nói “はじめまして。私は はるです。” là một điểm cần kiểm khi nghe lại.",
    "lang": "ja-JP",
    "lines": [
     {
@@ -234,34 +235,34 @@
    ],
    "qs": [
     {
-     "q": "Theo hội thoại: Lần đầu gặp. Tên tôi là Yui.",
+     "q": "Haru làm nghề gì?",
      "o": [
-      "Không, tôi không phải sinh viên. Tôi là nhân viên công ty.",
-      "Vậy à. Cũng có sinh viên ở Nhật nhỉ.",
-      "Rất vui được gặp. Tôi là Haru."
+      "Giáo viên",
+      "Sinh viên",
+      "Nhân viên công ty"
      ],
      "a": 2,
-     "e": "Câu trả lời là はじめまして。私は はるです。 → Rất vui được gặp. Tôi là Haru."
+     "e": "Lượt nói “いいえ、学生ではありません。会社員です。” nghĩa là: Không, tôi không phải sinh viên. Tôi là nhân viên công ty. Nội dung này làm rõ đáp án “Nhân viên công ty”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Haru là sinh viên phải không?",
+     "q": "Yui học ở đâu?",
      "o": [
-      "Tôi cũng mong được giúp đỡ.",
-      "Vậy à. Cũng có sinh viên ở Nhật nhỉ.",
-      "Không, tôi không phải sinh viên. Tôi là nhân viên công ty."
-     ],
-     "a": 2,
-     "e": "Câu trả lời là いいえ、学生ではありません。会社員です。 → Không, tôi không phải sinh viên. Tôi là nhân viên công ty."
-    },
-    {
-     "q": "Theo hội thoại: Tôi là sinh viên ở Việt Nam.",
-     "o": [
-      "Tôi cũng mong được giúp đỡ.",
-      "Vậy à. Cũng có sinh viên ở Nhật nhỉ.",
-      "Rất vui được gặp. Tôi là Haru."
+      "Không nói là người học",
+      "Ở Việt Nam",
+      "Ở trường nghề giả khác"
      ],
      "a": 1,
-     "e": "Câu trả lời là そうですか。日本の 学生も いますね。 → Vậy à. Cũng có sinh viên ở Nhật nhỉ."
+     "e": "Lượt nói “私は ベトナムの 学生です。” nghĩa là: Tôi là sinh viên ở Việt Nam. Nội dung này làm rõ đáp án “Ở Việt Nam”, không phải hai cách hiểu còn lại."
+    },
+    {
+     "q": "Hai người dùng lời nào khi kết thúc làm quen?",
+     "o": [
+      "Mong được giúp đỡ",
+      "Xin trả lại sách",
+      "Xin đổi giờ"
+     ],
+     "a": 0,
+     "e": "Lượt nói “よろしくお願いします。” nghĩa là: Mong được giúp đỡ. Nội dung này làm rõ đáp án “Mong được giúp đỡ”, không phải hai cách hiểu còn lại."
     }
    ]
   },
@@ -346,35 +347,35 @@
    "h": "Nói và phản hồi",
    "tasks": [
     {
-     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "p": "Đóng vai hỏi về tôi và học sinh/sinh viên. Dùng lượt “はじめまして。名前は ゆいです。” để mở đầu, rồi yêu cầu bạn trả lời bằng thông tin của vai đối diện.",
      "model": "はじめまして。名前は ゆいです。 はるさんは 学生ですか。 私は ベトナムの 学生です。 よろしくお願いします。",
      "vi": "Lần đầu gặp. Tên tôi là Yui. Haru là sinh viên phải không? Tôi là sinh viên ở Việt Nam. Mong được giúp đỡ.",
-     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+     "tips": "Khi bạn nói “はるさんは 学生ですか。”, người nghe phải nhận ra Haru là sinh viên phải không?; ghi âm và kiểm xem từ nào đang quyết định nghĩa đó."
     },
     {
-     "p": "Tóm tắt nội dung bài đọc bằng ba câu, sau đó nêu một câu hỏi còn muốn làm rõ.",
+     "p": "Tóm tắt ba ý trong bài đọc để trả lời “Aki là ai?”. Kết thúc bằng câu hỏi về mong được giúp đỡ/hợp tác nếu phần này chưa được người nghe xác nhận.",
      "model": "私の 名前は あきです。ベトナムの 学生です。 ここは 日本語の 小さい クラスです。 ゆいさんは 教師です。会社員ではありません。",
      "vi": "Tên tôi là Aki. Tôi là sinh viên ở Việt Nam. Đây là lớp tiếng Nhật nhỏ. Yui là giáo viên, không phải nhân viên công ty.",
-     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+     "tips": "So phần tóm tắt của bạn với dữ kiện “Sinh viên ở Việt Nam”; nếu ý này thay đổi, hãy nói rõ đó là tình huống giả định mới."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có kiểm tra",
-   "task": "Viết một đoạn mới theo tình huống bài học; thay ít nhất hai chi tiết, dùng cấu trúc trọng tâm và kiểm thông tin nhất quán.",
+   "task": "Viết một đoạn tình huống có các ý: Tôi là sinh viên. / Yui không phải giáo viên. / Vâng, là nhân viên công ty.. Dùng thêm thông tin của bài đọc để nối các ý, không chỉ chép ba câu rời.",
    "min": 80,
    "model": "私の 名前は あきです。ベトナムの 学生です。 ここは 日本語の 小さい クラスです。 ゆいさんは 教師です。会社員ではありません。 はるさんは 日本の 会社員です。学生ではありません。 ゆいさんは「学生ですか」と 聞きます。 私は「はい、学生です」と 答えます。 はるさんは「いいえ、学生ではありません」と 答えます。 さいごに みんなで「よろしくお願いします」と 言います。",
    "modelVi": "Tên tôi là Aki. Tôi là sinh viên ở Việt Nam. Đây là lớp tiếng Nhật nhỏ. Yui là giáo viên, không phải nhân viên công ty. Haru là nhân viên công ty ở Nhật, không phải sinh viên. Yui hỏi: “Bạn là sinh viên phải không?”. Tôi trả lời: “Vâng, là sinh viên”. Haru trả lời: “Không, tôi không phải sinh viên”. Cuối cùng mọi người cùng nói “Mong được giúp đỡ”.",
    "tips": [
-    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
-    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+    "Lập sơ đồ ai làm gì trong câu “私は 学生です。”, rồi dùng cùng quan hệ chủ thể khi nối sang đoạn của bạn.",
+    "Đối chiếu “ゆいさんは 教師ではありません。” với mẫu cuối “はい、会社員です。”; chọn phần kết câu phù hợp trước khi sửa chính tả."
    ],
    "checklist": [
-    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
-    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
-    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
-    "Câu kết thúc và mức lịch sự nhất quán"
+    "Người đọc nhận ra đúng nghĩa của “私”, thay vì chỉ thấy từ được chèn vào câu.",
+    "Quan hệ ý trong “私は 学生です。” vẫn đúng khi bạn thay dữ kiện.",
+    "Các ý học sinh/sinh viên và mong được giúp đỡ/hợp tác không bị lẫn vai hoặc phạm vi.",
+    "Đoạn kết không trái với dữ kiện trả lời câu hỏi “Aki là ai?”."
    ]
   }
  ],
@@ -509,7 +510,7 @@
      "không phải (lịch sự)"
     ]
    ],
-   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+   "e": "Đối chiếu các cặp “名前 → tên” và “ではありません → không phải (lịch sự)”; phân biệt nghĩa trong tình huống, không ghép chỉ dựa vào hình chữ."
   },
   {
    "t": "mc",
@@ -536,52 +537,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ, bảng cấu trúc bài này, loa/giọng đọc tiếng Nhật, phiếu thông tin khác nhau cho từng cặp. Không dùng dữ liệu cá nhân thật.",
+  "prep": "Chuẩn bị thẻ “私”, “学生”, “よろしくお願いします”, bản hội thoại che lượt trả lời và phiếu đọc có câu hỏi “Aki là ai?”.",
   "steps": [
    {
     "t": "10'",
-    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+    "do": "Gợi tình huống bằng câu “はじめまして。名前は ゆいです。”. Cho cặp học viên nói mình muốn biết điều gì trước khi mở lời đáp."
    },
    {
     "t": "20'",
-    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+    "do": "Cho so thẻ “私” với “学生”: học viên diễn đạt nghĩa tôi và học sinh/sinh viên, rồi đặt mỗi từ vào một lượt trao đổi."
    },
    {
     "t": "25'",
-    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+    "do": "Viết hai câu “私は 学生です。” và “ゆいさんは 教師ではありません。” cạnh nhau. Học viên giải thích khác biệt ý, sau đó thay một thành phần mà vẫn giữ cấu trúc vừa phân tích."
    },
    {
     "t": "20'",
-    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+    "do": "Che lời thoại và giao câu hỏi “Theo hội thoại: Lần đầu gặp. Tên tôi là Yui.”. Sau hai lượt nghe, yêu cầu nêu bằng chứng thay vì đoán theo từ khóa đơn lẻ."
    },
    {
     "t": "15'",
-    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+    "do": "Cho đổi vai quanh lượt “私は ベトナムの 学生です。”. Người nghe hỏi lại thông tin trước khi chuyển sang lời đáp, giáo viên ghi một chỗ gây hiểu nhầm để chữa cuối hoạt động."
    },
    {
     "t": "15'",
-    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+    "do": "Đầu buổi sau, yêu cầu dựng lại ý “Vâng, là nhân viên công ty.” không nhìn chữ Nhật. So lời nói của học viên với câu đích và chữa phần làm thay đổi quan hệ ý."
    },
    {
     "t": "20'",
-    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+    "do": "Đọc để giải quyết câu hỏi “Aki là ai?”. Mỗi nhóm đánh dấu đoạn chứng minh và giải thích vì sao hai lựa chọn còn lại không khớp."
    },
    {
     "t": "20'",
-    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+    "do": "Giao nhiệm vụ nói có thông tin tôi ở một vai và mong được giúp đỡ/hợp tác ở vai kia. Hai bên chỉ hoàn thành phiếu khi đã hỏi để hiểu dữ kiện của nhau."
    },
    {
     "t": "20'",
-    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+    "do": "Viết đoạn nối ý “Tôi là sinh viên.” với “Vâng, là nhân viên công ty.”. Đổi bài và kiểm chủ thể, mốc thời gian cùng từ phủ định trước khi góp ý độ tự nhiên."
    },
    {
     "t": "15'",
-    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+    "do": "Chữa bài tự chấm từ cặp “学生” và “よろしくお願いします”. Mỗi học viên ghi một câu sửa của chính mình và nêu cách sẽ nhận ra lỗi đó trong lần dùng sau."
    }
   ],
   "games": [
-   "Ghép thẻ câu với tình huống: mỗi nhóm phải giải thích một cặp và chỉ ra từ/cấu trúc quyết định.",
-   "Thông tin lệch: mỗi bạn giữ một phần dữ kiện; phải hỏi lại thay vì đoán để hoàn thành phiếu."
+   "Khoảng trống thông tin: một bạn chỉ thấy “はじめまして。名前は ゆいです。”, bạn kia giữ câu trả lời. Họ hỏi lại để hoàn thành thông tin về tôi trước khi đổi vai.",
+   "Chọn và bảo vệ đáp án: các nhóm nhận câu hỏi “Aki là ai?”, chọn một phương án rồi tìm chi tiết đủ bác hai phương án nhiễu."
   ],
   "errors": [
    "Dịch “tôi là” thành 私は là một từ: は chỉ đánh dấu chủ đề, です đứng cuối câu danh từ.",
@@ -589,6 +590,6 @@
    "Dùng 先生 để giới thiệu nghề của mình trong mọi hoàn cảnh: 教師 thích hợp khi nói nghề giáo viên của bản thân.",
    "Lặp 私は ở mọi câu: lược khi chủ thể đã rõ, nhưng không lược khi gây nhầm."
   ],
-  "homework": "Ôn 12–20 thẻ theo lịch 1–3–7 ngày; nghe chép câu đã chọn, ghi âm hai lượt nói và viết đoạn mới thay ít nhất hai chi tiết."
+  "homework": "Ôn “私”, “学生” và “よろしくお願いします” bằng câu mới có nghĩa. Ghi âm câu “私は 学生です。”, nghe lại phần kết rồi viết lời giải thích cho câu hỏi “Aki là ai?” bằng tiếng Việt."
  }
 }

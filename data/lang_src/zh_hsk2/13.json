@@ -1,0 +1,700 @@
+{
+ "no": 13,
+ "title": "Đặt phòng và đổi giờ – Hỏi điều kiện thay vì đoán",
+ "sub": "能不能提前入住？ · 确认房间与时间",
+ "goals": [
+  "Xác nhận loại phòng, số đêm và tên đặt chỗ tự đặt.",
+  "Hỏi khả năng nhận phòng sớm bằng câu hỏi 能不能.",
+  "Phân biệt thời điểm tới nơi với thời điểm được nhận phòng.",
+  "Viết tin nhắn hỏi thay đổi và nêu phương án chấp nhận được."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Điều mong muốn và điều đã được xác nhận",
+   "html": "<p>Trong nhà nghỉ giả Mộc Hòa, khách muốn đến sớm nhưng phòng có thể chưa sẵn sàng. Câu hỏi 能不能提前入住 không tự biến thành một xác nhận. Khi nghe trả lời, tách ba việc: có phòng hay chưa, mấy giờ nhận phòng, có thể để hành lý không. Không dùng số giấy tờ thật trong bài thực hành.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Nối câu hỏi dài và giữ rõ mốc giờ",
+   "html": "<p>Đọc loại phòng thành một cụm, rồi ngắt trước câu hỏi thời gian. Phần phủ định của câu đáp thường quyết định kế hoạch.</p>",
+   "items": [
+    {
+     "sym": "dān / shuāng",
+     "ex": [
+      "单人间",
+      "双人间"
+     ],
+     "vi": "单 dān có n cuối; 双 shuāng có ng cuối và âm sh. Phân biệt loại phòng bằng cả chữ 单/双, không chỉ nghe 人间 giống nhau."
+    },
+    {
+     "sym": "rùzhù / tuìfáng",
+     "ex": [
+      "入住",
+      "退房"
+     ],
+     "vi": "入住 là bắt đầu nhận phòng; 退房 là kết thúc lưu trú và trả phòng. Hai động từ có hướng thời gian đối nhau."
+    },
+    {
+     "sym": "néng bu néng",
+     "ex": [
+      "能不能提前入住",
+      "能不能先放行李"
+     ],
+     "vi": "Trong mẫu hỏi A 不 A, 不 thường đọc nhẹ bu. Tập đọc cả 能不能 thành cụm nhưng không bỏ mất phần hỏi."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm từ dùng trong tình huống",
+   "items": [
+    {
+     "w": "预订",
+     "py": "yùdìng",
+     "hv": "dự đính",
+     "vi": "đặt trước",
+     "ex": "我预订了一间房。",
+     "exPy": "Wǒ yùdìng le yì jiān fáng.",
+     "exVi": "Tôi đã đặt trước một phòng."
+    },
+    {
+     "w": "单人间",
+     "py": "dānrénjiān",
+     "hv": "đơn nhân gian",
+     "vi": "phòng đơn",
+     "ex": "我要一间单人间。",
+     "exPy": "Wǒ yào yì jiān dānrénjiān.",
+     "exVi": "Tôi muốn một phòng đơn."
+    },
+    {
+     "w": "双人间",
+     "py": "shuāngrénjiān",
+     "hv": "song nhân gian",
+     "vi": "phòng đôi",
+     "ex": "我们订了双人间。",
+     "exPy": "Wǒmen dìng le shuāngrénjiān.",
+     "exVi": "Chúng tôi đã đặt phòng đôi."
+    },
+    {
+     "w": "入住",
+     "py": "rùzhù",
+     "hv": "nhập trú",
+     "vi": "nhận phòng, vào ở",
+     "ex": "下午两点可以入住。",
+     "exPy": "Xiàwǔ liǎng diǎn kěyǐ rùzhù.",
+     "exVi": "Hai giờ chiều có thể nhận phòng."
+    },
+    {
+     "w": "退房",
+     "py": "tuìfáng",
+     "hv": "thoái phòng",
+     "vi": "trả phòng",
+     "ex": "我们明天上午退房。",
+     "exPy": "Wǒmen míngtiān shàngwǔ tuìfáng.",
+     "exVi": "Chúng tôi trả phòng sáng mai."
+    },
+    {
+     "w": "行李",
+     "py": "xíngli",
+     "hv": "hành lý",
+     "vi": "hành lý",
+     "ex": "我先放行李。",
+     "exPy": "Wǒ xiān fàng xíngli.",
+     "exVi": "Tôi để hành lý trước."
+    },
+    {
+     "w": "护照",
+     "py": "hùzhào",
+     "hv": "hộ chiếu",
+     "vi": "hộ chiếu",
+     "ex": "请准备好护照。",
+     "exPy": "Qǐng zhǔnbèi hǎo hùzhào.",
+     "exVi": "Hãy chuẩn bị hộ chiếu."
+    },
+    {
+     "w": "确认",
+     "py": "quèrèn",
+     "hv": "xác nhận",
+     "vi": "xác nhận",
+     "ex": "请再确认房间。",
+     "exPy": "Qǐng zài quèrèn fángjiān.",
+     "exVi": "Hãy xác nhận lại phòng."
+    },
+    {
+     "w": "提前",
+     "py": "tíqián",
+     "hv": "đề tiền",
+     "vi": "sớm hơn thời điểm định sẵn",
+     "ex": "我想提前一个小时到。",
+     "exPy": "Wǒ xiǎng tíqián yí ge xiǎoshí dào.",
+     "exVi": "Tôi muốn tới sớm hơn một giờ."
+    },
+    {
+     "w": "推迟",
+     "py": "tuīchí",
+     "hv": "thôi trì",
+     "vi": "lùi lại, muộn hơn",
+     "ex": "退房时间可以推迟吗？",
+     "exPy": "Tuìfáng shíjiān kěyǐ tuīchí ma?",
+     "exVi": "Có thể lùi giờ trả phòng không?"
+    },
+    {
+     "w": "安静",
+     "py": "ānjìng",
+     "hv": "an tĩnh",
+     "vi": "yên tĩnh",
+     "ex": "我想要安静的房间。",
+     "exPy": "Wǒ xiǎng yào ānjìng de fángjiān.",
+     "exVi": "Tôi muốn phòng yên tĩnh."
+    },
+    {
+     "w": "一晚",
+     "py": "yì wǎn",
+     "hv": "nhất vãn",
+     "vi": "một đêm",
+     "ex": "我只住一晚。",
+     "exPy": "Wǒ zhǐ zhù yì wǎn.",
+     "exVi": "Tôi chỉ ở một đêm."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "能不能 + hành động: hỏi khả năng được đáp ứng",
+   "html": "<p>Mẫu 能不能 thường dùng để hỏi điều có làm được hoặc được phép trong tình huống cụ thể không. Không thêm 吗 sau câu A 不 A đơn giản. Câu trả lời có thể có điều kiện hoặc phương án khác.</p>",
+   "ex": [
+    {
+     "t": "能不能提前入住？",
+     "py": "Néng bu néng tíqián rùzhù?",
+     "vi": "Có thể nhận phòng sớm không?"
+    },
+    {
+     "t": "我能不能先放行李？",
+     "py": "Wǒ néng bu néng xiān fàng xíngli?",
+     "vi": "Tôi có thể để hành lý trước không?"
+    },
+    {
+     "t": "退房时间能不能推迟一个小时？",
+     "py": "Tuìfáng shíjiān néng bu néng tuīchí yí ge xiǎoshí?",
+     "vi": "Có thể lùi giờ trả phòng một giờ không?"
+    }
+   ],
+   "tips": [
+    "能不能 không phải lời khẳng định được chấp thuận; phải nghe câu trả lời trước khi chốt lịch."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "提前/推迟 + khoảng thời gian",
+   "html": "<p>提前 làm sớm hơn mốc định sẵn; 推迟 lùi muộn hơn. Khoảng thời gian sau đó cho biết mức chênh lệch. Muốn tránh nhầm, có thể nói thêm giờ mới bằng câu riêng.</p>",
+   "ex": [
+    {
+     "t": "我提前半个小时到。",
+     "py": "Wǒ tíqián bàn ge xiǎoshí dào.",
+     "vi": "Tôi tới sớm nửa giờ."
+    },
+    {
+     "t": "见面时间推迟了一个小时。",
+     "py": "Jiànmiàn shíjiān tuīchí le yí ge xiǎoshí.",
+     "vi": "Giờ gặp đã lùi lại một giờ."
+    },
+    {
+     "t": "原来两点，现在三点，是推迟一个小时。",
+     "py": "Yuánlái liǎng diǎn, xiànzài sān diǎn, shì tuīchí yí ge xiǎoshí.",
+     "vi": "Ban đầu hai giờ, bây giờ ba giờ, nghĩa là lùi một giờ."
+    }
+   ],
+   "tips": [
+    "Muốn kiểm chắc hướng đổi, nhắc thêm giờ mới sau từ 提前 hoặc 推迟."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Đến sớm nhưng chưa nhận phòng",
+   "lang": "zh-CN",
+   "note": "Khách gọi nhà nghỉ giả Mộc Hòa để xác nhận đặt chỗ. Giờ đến và giờ nhận phòng khác nhau; đừng gộp chúng.",
+   "lines": [
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "你好，我想确认一下预订。名字是林安禾。",
+     "py": "Nǐ hǎo, wǒ xiǎng quèrèn yíxià yùdìng. Míngzi shì Lín Ānhé.",
+     "vi": "Chào bạn, tôi muốn xác nhận đặt chỗ. Tên là Lâm An Hòa."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "查到了，明天一间单人间，住两晚，对吗？",
+     "py": "Chá dào le, míngtiān yì jiān dānrénjiān, zhù liǎng wǎn, duì ma?",
+     "vi": "Tôi tìm thấy rồi, ngày mai một phòng đơn, ở hai đêm, đúng không?"
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "对。我中午十二点到，能不能提前入住？",
+     "py": "Duì. Wǒ zhōngwǔ shí’èr diǎn dào, néng bu néng tíqián rùzhù?",
+     "vi": "Đúng. Tôi tới lúc mười hai giờ trưa, có thể nhận phòng sớm không?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "不好意思，房间两点才准备好。",
+     "py": "Bù hǎoyìsi, fángjiān liǎng diǎn cái zhǔnbèi hǎo.",
+     "vi": "Xin lỗi, hai giờ phòng mới chuẩn bị xong."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "那我能不能先放行李？",
+     "py": "Nà wǒ néng bu néng xiān fàng xíngli?",
+     "vi": "Vậy tôi để hành lý trước được không?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "可以，到前台就行。",
+     "py": "Kěyǐ, dào qiántái jiù xíng.",
+     "vi": "Được, bạn tới quầy lễ tân là được."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "请帮我留一间安静一点的房间。",
+     "py": "Qǐng bāng wǒ liú yì jiān ānjìng yìdiǎn de fángjiān.",
+     "vi": "Bạn giữ giúp tôi một phòng yên tĩnh hơn một chút nhé."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "好的。退房是后天中午十二点。",
+     "py": "Hǎo de. Tuìfáng shì hòutiān zhōngwǔ shí’èr diǎn.",
+     "vi": "Được. Trả phòng là mười hai giờ trưa ngày kia."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "明天住两晚，不是大后天退房吗？",
+     "py": "Míngtiān zhù liǎng wǎn, bú shì dàhòutiān tuìfáng ma?",
+     "vi": "Ngày mai ở hai đêm, chẳng phải ngày sau ngày kia mới trả phòng sao?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "你说得对，我改一下：大后天十二点退房。",
+     "py": "Nǐ shuō de duì, wǒ gǎi yíxià: dàhòutiān shí’èr diǎn tuìfáng.",
+     "vi": "Bạn nói đúng, tôi sửa lại: mười hai giờ ngày sau ngày kia trả phòng."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Loại phòng đã đặt là gì?",
+     "o": [
+      "Phòng họp",
+      "Phòng đơn",
+      "Phòng đôi"
+     ],
+     "a": 1,
+     "e": "Người tiếp nhận xác nhận 一间单人间."
+    },
+    {
+     "q": "Khách có nhận phòng ngay lúc12 giờ trưa không?",
+     "o": [
+      "Chỉ cần bỏ hành lý là được ở",
+      "Không, phòng sẵn lúc2 giờ chiều",
+      "Có, đã được hứa nhận ngay"
+     ],
+     "a": 1,
+     "e": "Câu 两点才准备好 chưa cho phép nhận phòng lúc12 giờ."
+    },
+    {
+     "q": "Phương án trong lúc chờ là gì?",
+     "o": [
+      "Hủy đặt chỗ ngay",
+      "Để hành lý ở quầy",
+      "Đổi sang phòng đôi bắt buộc"
+     ],
+     "a": 1,
+     "e": "Nhà nghỉ đồng ý cho 先放行李."
+    },
+    {
+     "q": "Lỗi nào được sửa ở cuối cuộc gọi?",
+     "o": [
+      "Tên khách",
+      "Số người ở phòng",
+      "Ngày trả phòng vì khách ở hai đêm"
+     ],
+     "a": 2,
+     "e": "Nhận phòng ngày mai và ở hai đêm thì trả ngày sau ngày kia; nhân viên sửa lại mốc ngày."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc hiểu: Tin xác nhận đã cập nhật",
+   "text": "安禾：你预订的单人间从明天开始住两晚。你十二点到，可以先在前台放行李，下午两点再入住。我们已记下你想要安静房间的要求。退房时间是大后天中午十二点，不是后天。到店时请准备证件；本练习不需要填写任何真实号码。",
+   "py": "Ānhé: Nǐ yùdìng de dānrénjiān cóng míngtiān kāishǐ zhù liǎng wǎn. Nǐ shí’èr diǎn dào, kěyǐ xiān zài qiántái fàng xíngli, xiàwǔ liǎng diǎn zài rùzhù. Wǒmen yǐ jìxia nǐ xiǎng yào ānjìng fángjiān de yāoqiú. Tuìfáng shíjiān shì dàhòutiān zhōngwǔ shí’èr diǎn, bú shì hòutiān. Dào diàn shí qǐng zhǔnbèi zhèngjiàn; běn liànxí bù xūyào tiánxiě rènhé zhēnshí hàomǎ.",
+   "vi": "An Hòa: Phòng đơn bạn đặt bắt đầu từ ngày mai, ở hai đêm. Bạn tới lúc mười hai giờ, có thể để hành lý ở quầy trước và hai giờ chiều nhận phòng. Chúng tôi đã ghi yêu cầu phòng yên tĩnh. Giờ trả phòng là mười hai giờ trưa ngày sau ngày kia, không phải ngày kia. Khi tới nơi hãy chuẩn bị giấy tờ; bài luyện này không cần ghi số thật nào.",
+   "gloss": [
+    {
+     "w": "预订",
+     "py": "yùdìng",
+     "vi": "đặt trước"
+    },
+    {
+     "w": "单人间",
+     "py": "dānrénjiān",
+     "vi": "phòng đơn"
+    },
+    {
+     "w": "入住",
+     "py": "rùzhù",
+     "vi": "nhận phòng, vào ở"
+    },
+    {
+     "w": "退房",
+     "py": "tuìfáng",
+     "vi": "trả phòng"
+    },
+    {
+     "w": "行李",
+     "py": "xíngli",
+     "vi": "hành lý"
+    },
+    {
+     "w": "安静",
+     "py": "ānjìng",
+     "vi": "yên tĩnh"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Khách nhận phòng lúc nào?",
+     "o": [
+      "Hai giờ chiều ngày mai",
+      "Mười hai giờ trưa ngày mai",
+      "Mười hai giờ ngày kia"
+     ],
+     "a": 0,
+     "e": "Tin nhắn tách giờ tới12 và giờ nhận phòng14."
+    },
+    {
+     "q": "Yêu cầu nào đã được ghi nhận?",
+     "o": [
+      "Thêm giường bắt buộc",
+      "Ở thêm ba đêm",
+      "Phòng yên tĩnh"
+     ],
+     "a": 2,
+     "e": "Câu 我们已记下 nhắc yêu cầu 安静房间."
+    },
+    {
+     "q": "Ngày trả cuối cùng là ngày nào tính từ hôm nay?",
+     "o": [
+      "Ngày sau ngày kia",
+      "Ngày kia",
+      "Ngày mai"
+     ],
+     "a": 0,
+     "e": "Thông báo sửa rõ 大后天，不是后天."
+    },
+    {
+     "q": "Bài luyện có yêu cầu số giấy tờ thật không?",
+     "o": [
+      "Chỉ cần gửi mật khẩu",
+      "Không",
+      "Có, phải gửi mọi số"
+     ],
+     "a": 1,
+     "e": "Câu cuối nêu không cần điền bất kỳ số thật nào."
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Nhận diện chữ trong bài",
+   "items": [
+    {
+     "c": "订",
+     "py": "dìng",
+     "hv": "đính",
+     "parts": "讠 bên trái, 丁 bên phải",
+     "strokes": 4,
+     "vi": "đặt trước",
+     "words": "预订，订房"
+    },
+    {
+     "c": "单",
+     "py": "dān",
+     "hv": "đơn",
+     "parts": "Hai chấm trên rồi phần dưới",
+     "strokes": 8,
+     "vi": "đơn, một",
+     "words": "单人间，名单"
+    },
+    {
+     "c": "双",
+     "py": "shuāng",
+     "hv": "song",
+     "parts": "Hai thành phần 又 cạnh nhau",
+     "strokes": 4,
+     "vi": "đôi, hai",
+     "words": "双人间，双手"
+    },
+    {
+     "c": "住",
+     "py": "zhù",
+     "hv": "trú",
+     "parts": "亻 bên trái, 主 bên phải",
+     "strokes": 7,
+     "vi": "ở",
+     "words": "入住，住家"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói có nhiệm vụ",
+   "tasks": [
+    {
+     "p": "Bạn đặt phòng đơn hai đêm, tới12 giờ nhưng nhận phòng14 giờ; xin để hành lý trước.",
+     "model": "我订了明天的单人间，住两晚。我十二点到，知道两点才能入住。我能不能先放行李？",
+     "py": "Wǒ dìng le míngtiān de dānrénjiān, zhù liǎng wǎn. Wǒ shí’èr diǎn dào, zhīdào liǎng diǎn cái néng rùzhù. Wǒ néng bu néng xiān fàng xíngli?",
+     "vi": "Tôi đặt phòng đơn ngày mai, ở hai đêm. Tôi tới lúc mười hai và biết hai giờ mới được nhận phòng. Tôi để hành lý trước được không?",
+     "tips": "Đọc hai mốc giờ với động từ tương ứng để người nghe không hiểu thành xin nhận phòng ngay."
+    },
+    {
+     "p": "Nhân viên nói sai ngày trả. Nhắc lại số đêm và xin xác nhận ngày đúng.",
+     "model": "我是明天入住，住两晚，应该大后天退房，对吗？请再确认一下。",
+     "py": "Wǒ shì míngtiān rùzhù, zhù liǎng wǎn, yīnggāi dàhòutiān tuìfáng, duì ma? Qǐng zài quèrèn yíxià.",
+     "vi": "Tôi nhận phòng ngày mai, ở hai đêm, vậy phải ngày sau ngày kia trả phòng, đúng không? Bạn xác nhận lại giúp nhé.",
+     "tips": "Giữ giọng kiểm tra hợp tác, đừng chỉ lặp lại “sai rồi” mà thiếu dữ kiện."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết để hoàn thành tình huống",
+   "task": "Viết 70–100 chữ Hán nhắn nhà nghỉ giả: tên đặt, loại phòng và hai đêm ở; giờ tới, giờ nhận phòng đã biết, xin để hành lý trước và xác nhận ngày trả.",
+   "min": 70,
+   "model": "你好，我叫林安禾，预订了明天的单人间，住两晚。我中午十二点到，知道下午两点才能入住。我想先在前台放行李，再出去吃饭。请帮我确认，大后天中午十二点退房，对吗？我希望房间安静一点，谢谢。",
+   "modelVi": "Chào bạn, tôi tên Lâm An Hòa, đã đặt phòng đơn ngày mai, ở hai đêm. Tôi tới lúc mười hai giờ trưa và biết hai giờ chiều mới nhận phòng. Tôi muốn để hành lý ở quầy rồi ra ngoài ăn. Bạn xác nhận giúp, mười hai giờ trưa ngày sau ngày kia trả phòng đúng không? Tôi mong phòng yên tĩnh hơn một chút, cảm ơn.",
+   "tips": [
+    "Liệt kê mốc tới, nhận và trả trước khi viết câu.",
+    "Đưa yêu cầu dạng câu hỏi, không diễn đạt như việc đã được chấp thuận."
+   ],
+   "checklist": [
+    "Đủ loại phòng và số đêm",
+    "Tới và nhận phòng không bị nhập làm một",
+    "Có câu hỏi gửi hành lý",
+    "Ngày trả phù hợp số đêm"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "十二点到，下午两点才能入住。",
+   "lang": "zh-CN",
+   "q": "Khi nào được nhận phòng?",
+   "o": [
+    "Mười hai giờ trưa",
+    "Mười giờ sáng",
+    "Hai giờ chiều"
+   ],
+   "a": 2,
+   "e": "才 nhấn mạnh phải tới2 giờ chiều mới có thể nhận, khác giờ tới."
+  },
+  {
+   "t": "listen",
+   "say": "我订的是单人间，不是双人间。",
+   "lang": "zh-CN",
+   "q": "Khách đã đặt loại nào?",
+   "o": [
+    "Phòng đôi",
+    "Hai phòng họp",
+    "Phòng đơn"
+   ],
+   "a": 2,
+   "e": "是单人间 khẳng định loại đặt; 不是双人间 loại lựa chọn kia."
+  },
+  {
+   "t": "mc",
+   "q": "Câu hỏi nào xin phép để hành lý trước?",
+   "o": [
+    "我能不能行李先是？",
+    "我行李几岁？",
+    "我能不能先放行李？"
+   ],
+   "a": 2,
+   "e": "能不能 đứng trước hành động cần xin, không đảo 行李 thành động từ."
+  },
+  {
+   "t": "mc",
+   "q": "Trong mẫu 能不能, có cần thêm 吗 không?",
+   "o": [
+    "Không cần trong câu hỏi A 不 A này",
+    "Luôn bắt buộc",
+    "Chỉ thêm hai lần"
+   ],
+   "a": 0,
+   "e": "Mẫu A 不 A tự tạo câu hỏi, không thêm 吗 trong cấu trúc cơ bản."
+  },
+  {
+   "t": "mc",
+   "q": "提前一个小时 nghĩa là gì?",
+   "o": [
+    "Ở thêm một đêm",
+    "Đổi sang phòng đôi",
+    "Sớm hơn một giờ so với mốc đã định"
+   ],
+   "a": 2,
+   "e": "提前 đo độ sớm hơn so với mốc, không nêu số đêm."
+  },
+  {
+   "t": "mc",
+   "q": "Nếu tới ngày mai và ở hai đêm, ngày trả tương đối nào phù hợp?",
+   "o": [
+    "Hôm qua",
+    "Ngày sau ngày kia",
+    "Ngày mai"
+   ],
+   "a": 1,
+   "e": "Hai đêm bắt đầu từ ngày mai kéo tới ngày sau ngày kia, cần kiểm cả ngày nhận và số đêm."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “xác nhận”: 请再___一下房间。",
+   "a": "确认",
+   "py": "quèrèn",
+   "e": "确认 là đối chiếu lại đặt chỗ và thông tin đúng."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “trả phòng”: 我们大后天___。",
+   "a": "退房",
+   "py": "tuìfáng",
+   "e": "退房 kết thúc lưu trú, khác 入住 lúc nhận."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “hành lý”: 我先放___。",
+   "a": "行李",
+   "py": "xíngli",
+   "e": "行李 là vật cần gửi trước khi phòng sẵn sàng."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "想",
+    "提前",
+    "一个小时",
+    "到",
+    "我"
+   ],
+   "a": "我想提前一个小时到。",
+   "e": "提前 cùng khoảng thời gian đứng trước 到 để nêu mức đến sớm."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "再",
+    "确认",
+    "退房时间",
+    "请"
+   ],
+   "a": "请再确认退房时间。",
+   "e": "再 trước 确认 chỉ việc kiểm lại thông tin giờ trả."
+  },
+  {
+   "t": "match",
+   "q": "Nối mốc và thao tác lưu trú với nghĩa.",
+   "pairs": [
+    [
+     "入住",
+     "nhận phòng, vào ở"
+    ],
+    [
+     "退房",
+     "trả phòng"
+    ],
+    [
+     "提前",
+     "sớm hơn thời điểm định sẵn"
+    ],
+    [
+     "推迟",
+     "lùi lại, muộn hơn"
+    ]
+   ],
+   "e": "Nhận và trả là hai đầu của thời gian ở; 提前 và 推迟 mô tả hướng thay đổi so với mốc."
+  },
+  {
+   "t": "dict",
+   "say": "我能不能先放行李？",
+   "lang": "zh-CN",
+   "a": "我能不能先放行李？",
+   "py": "Wǒ néng bu néng xiān fàng xíngli?",
+   "e": "Giữ mẫu 能不能 và vị trí 先 trước 放; 李 trong 行李 nhẹ."
+  }
+ ],
+ "teacher": {
+  "time": "180 phút, chia thành hai buổi 90 phút",
+  "prep": "Phiếu đặt phòng giả, trục ba ngày, đồng hồ12/14 và hai thẻ phòng đơn/đôi. Không thu giấy tờ hay số định danh của học viên.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Cho xem thời điểm khách tới và phòng sẵn, học viên xác định hai mốc khác nhau trước khi luyện yêu cầu."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dạy từ bằng phiếu và trục ngày; luyện 单/双, 行李 nhẹ, động từ nhận/trả phòng theo chiều thời gian."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dạy 能不能 qua yêu cầu nhận sớm và gửi hành lý; người đáp có quyền từ chối kèm phương án khác, không luôn đáp 可以."
+   },
+   {
+    "t": "25 phút",
+    "do": "Di chuyển mốc trên đồng hồ để luyện 提前/推迟 với khoảng thời gian; học viên nhắc lại cả giờ cũ và giờ mới."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nghe xác nhận đặt chỗ, ghi loại phòng, số đêm, giờ tới, giờ nhận và lỗi ngày trả được sửa cuối cuộc gọi."
+   },
+   {
+    "t": "10 phút",
+    "do": "Mở buổi hai bằng trục ngày khác, mỗi cặp đặt hai quân đêm để tính đúng ngày trả rồi diễn đạt bằng ngày tương đối."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc tin xác nhận, gạch yêu cầu đã ghi và điều mới chỉ hỏi; phân biệt mong muốn yên tĩnh với mọi điều kiện được bảo đảm."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nhập vai khách–lễ tân–người quan sát; người quan sát kiểm có phản hồi thật cho mỗi yêu cầu và dữ kiện cuối nhất quán."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết tin nhắn70–100 chữ, đổi bài để kiểm ba mốc thời gian; sửa câu khiến người đọc hiểu đã được nhận sớm."
+   },
+   {
+    "t": "15 phút",
+    "do": "Làm bài tự chấm rồi mỗi người đưa một yêu cầu A 不 A và nói lại phương án dự phòng khi chưa thể nhận phòng."
+   }
+  ],
+  "games": [
+   "Ba mốc một lượt ở: đội nhận giờ tới, giờ sẵn và số đêm khác nhau, dựng trục thời gian rồi đóng vai giải thích phương án giữ hành lý."
+  ],
+  "errors": [
+   "Nhầm giờ đến với giờ nhận: gắn hai động từ 到 và 入住 vào hai ô riêng trên đồng hồ.",
+   "Thêm 吗 vào 能不能: luyện nguyên mẫu A 不 A trước khi thay hành động.",
+   "Đếm hai đêm từ hôm nay dù mai mới nhận: đặt quân đêm bắt đầu ở ngày nhận phòng.",
+   "Dùng 提前 cho mọi thay đổi: đối chiếu dịch chuyển sớm hơn và muộn hơn để chọn 提前/推迟.",
+   "Đọc 行李 thành xínglǐ quá nặng âm cuối: luyện xíngli trong cả cụm 放行李."
+  ],
+  "homework": "Tự đặt phiếu phòng với ba mốc giờ và số đêm khác mẫu. Viết yêu cầu thay đổi cùng phương án dự phòng, ghi âm một lượt xác nhận đủ loại phòng và ngày trả."
+ }
+}

@@ -1,0 +1,728 @@
+=== COURSE accessibility
+name: Kiểm thử khả năng tiếp cận
+icon: ♿
+floor: 8
+room: 806
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Thực hành WCAG nền tảng qua bàn phím, focus, tên/vai trò/trạng thái, form, tương phản, reflow, target, AT và automation; báo cáo có phạm vi và giới hạn.
+
+## LESSON accessibility-01 | Người dùng, rào cản và phạm vi đánh giá
+
+### Bắt đầu từ rào cản của công việc
+Website giả định Lụa Mầm cho tìm lớp,đăng ký và hủy. Người chỉ dùng bàn phím,người phóng to chữ hoặc dùng trình đọc màn hình cần hoàn tất cùng công việc;accessibility là khả năng dùng được,không chỉ giao diện đẹp.
+
+### Bối cảnh sử dụng có nhiều dạng
+Xem thị giác,thính giác,vận động,nhận thức và tình huống tạm thời. Không suy một người đại diện cho mọi người dùng;cùng một người có thể dùng nhiều cách nhập/đọc tùy hoàn cảnh.
+~~~text
+task:tìm lớp và đăng ký
+methods:keyboard,pointer,screen reader,zoom
+states:rỗng,lỗi,loading,thành công,modal
+risks:không đến nút,không hiểu lỗi,focus mất
+Dữ liệu lab tự đặt.
+~~~
+
+### Phạm vi đánh giá phải cụ thể
+Ghi build,trang,luồng,trạng thái,tổ hợp browser/AT và mục tiêu tiêu chí. Chọn mẫu giúp học,nhưng không tự là conformance toàn site;khoảng trống cần được ghi cùng report.
+~~~text
+scope:/classes,/enroll,/account tronglocalhost
+process:chọn lớp->form->xác nhận
+build:LAB-A11Y2
+AT/browser:ghi phiên bản thực khi kiểm
+not covered:trang ngoài mẫu và thiết bị chưa cấp
+~~~
+
+### Tác động khác checklist hình thức
+Một lỗi label có thể khiến người dùng nhập nhầm;focus kẹt có thể chặn hoàn toàn luồng. Quan sát tác vụ và trạng thái trước khi chấm severity,không chỉ dựa số rule bị báo.
+~~~text
+barrier:không tới nút hủy bằng Tab
+impact:không hoàn tất tác vụ
+evidence:keys,focus path,build và state
+expected:control vận hành theo keyboard pattern phù hợp
+report:không quy lỗi người dùng
+~~~
+
+### Học với người dùng khi phù hợp
+Feedback của người dùng công nghệ hỗ trợ rất có giá trị nhưng không thay mọi phép kiểm tiêu chí. Tronglab có thể mô phỏng theo kịch bản,phải ghi rõ không nhận đó là nghiên cứu người dùng thật.
+
+PRACTICE: Lập scope cho ba trang và một quy trình của Lụa Mầm,ghi năm rào cản có thể xảy ra và cách kiểm. Nêu tổ hợp được cấp và gap,chưa tuyên bố toàn website đạt.
+Q: Mục tiêu accessibility là gì?
++ Giảm rào cản để nhiều người sử dụng được
+- Chỉ thêm một theme đẹp
+- Chỉ hỗ trợ một dạng khuyết tật
+Q: Chọn phạm vi đánh giá cần ghi gì?
++ Trang,quy trình,trạng thái,thiết bị và tiêu chí
+- Chỉ tên công ty
+- Chỉ số ảnh
+
+## LESSON accessibility-02 | WCAG: nguyên tắc, mức và cách ghi bằng chứng
+
+### Nguyên tắc,tiêu chí và technique khác nhau
+WCAG tổ chức dưới bốn nguyên tắc:nhận biết,vận hành,hiểu và vững trước công nghệ hỗ trợ. Success criterion đưa yêu cầu có thể đánh giá,technique là cách đáp ứng;cần đọc đúng mức và phạm vi.
+
+### A,AA và AAA là các mức khác nhau
+Mục tiêu AA bao gồm A và AA liên quan cùng yêu cầu conformance. Không cộng điểm tool để suy mức,không coi đạt một tiêu chí AA là đạt cả mức;ghi rõ tiêu chí nào được đánh giá.
+~~~text
+criterion ID ->level ->requirement ->test/evidence
+2.1.1 ->A ->keyboard
+2.4.7 ->AA ->focus visible
+2.4.11 ->AA ->focus not entirely obscured
+2.4.12 ->AAA ->no part obscured
+~~~
+
+### Trang đầy đủ và quy trình hoàn chỉnh
+Luồng đăng ký gồm chọn lớp,form,xác nhận và lỗi. Một trang chính tốt nhưng bước thanh toán/confirm không dùng được vẫn làm quy trình bị chặn;đánh giá cần xem đúng phạm vi yêu cầu chứ không cắt đoạn tiện kiểm.
+~~~text
+sample check:quan sát một số trang/state
+full conformance assessment:đủ yêu cầu/phạm vi riêng
+Không gắn nhãn site đạt từ widget được quét
+Record:tested,failed,not tested,not applicable có lý do
+~~~
+
+### Evidence dẫn được tới hành vi
+Ghi criterion,điều kiện,trạng thái,phép kiểm,actual/expected và tác động. Nếu không chắc tiêu chí nào,giữ observation và câu hỏi,không bịa số chuẩn.
+~~~text
+finding:A11Y-L7-03
+barrier:nút submit bị sticky footer che toàn bộ khi focus
+method:keyboard,viewport được ghi
+criterion candidate:2.4.11
+evidence:focus path và ảnh lab
+~~~
+
+### Không biến khóa học thành xác nhận đạt
+Các bài giúp thực hành nền tảng,chưa bao hết chuẩn hoặc mọi công nghệ. Người học phải biết dùng tài liệu chuẩn theo phiên bản đã chốt và ghi hạn chế,không xem completion khóa là chứng nhận website.
+
+PRACTICE: Chọn sáu tiêu chí A/AA,ghi mức,ý nghĩa bằng lời riêng và evidence cần. Phân biệt quan sát mẫu với tuyên bố conformance,liệt kê ba gap cần thêm.
+Q: Bốn nguyên tắc WCAG thường được hiểu ra sao?
++ Có thể nhận biết,vận hành,hiểu và đủ vững cho công nghệ hỗ trợ
+- Chỉ màu,ảnh,font và video
+- Chỉ tốc độ mạng
+Q: Muốn đánh giá mức AA trong phạm vi đã chốt cần xem gì?
++ Các tiêu chí A và AA áp dụng cùng yêu cầu conformance
+- Chỉ một tiêu chíAA
+- Chỉ score tool100
+
+## LESSON accessibility-03 | Bàn phím và thứ tự focus
+
+### Thử tác vụ khi không dùng chuột
+Từ đầu trang,dùng Tab/Shift+Tab và phím phù hợp control để tìm lớp,điền form,đóng modal và quay lại. Kiểm đến được,hiểu được vị trí vàthao tác/thoát được;không chỉ đếm số Tab.
+
+### Ưu tiên control ngữ nghĩa sẵn có
+Button và input native có hành vi bàn phím mặc định;div tự gắn role cần thêm interaction đúng. Mảnh HTML lab dưới là nội dung ví dụ,không sửa file app dự án.
+~~~text
+<label for=student-name>Họ tên học viên</label>
+<input id=student-name name=student-name>
+<button type=submit>Đăng ký</button>
+~~~
+
+### Thứ tự focus theo nghĩa công việc
+DOM hợp lý thường giúp thứ tự đọc và focus.Tabindex dương có thể tạo lối đi khó đoán khi component đổi;kiểm quan hệ label/field/lỗi/nút vàmenu theo pattern phù hợp.
+~~~text
+path:skip link->main->class select->name->submit
+Shift+Tab:đảo lại hợp lý
+modal:mở->focus trongmodal->đóng->trả về trigger
+Không ép mọi widget dùng Tab cho từng item nếu pattern dùng arrow.
+~~~
+
+### Keyboard trap khác modal quản lý focus
+Modal có thể giữ focus trong nó khi đang mở,nhưng cần cách đóng/thoát phù hợp và trả focus. Trap là người dùng kẹt không thể thoát theo cách hợp lệ,hãy ghi phím đã thử và state.
+~~~text
+keys thử:Tab,Shift+Tab,Enter,Space,Escape theo control
+observe:focus có thấy vàdi chuyển đúng không?
+expected:luồng hoàn tất không cần chuột
+negative:đóng modal không làm focus mất ởbody vô nghĩa
+~~~
+
+### Đưa lỗi về tác động
+Nêu không đến nút hoặc không mởmenu bằng phím,thay vì chỉ ghi tabindex sai. Kèm DOM/role,phím,browser và trạng thái để Dev sửa đúng cơ chế;retest cả chuột để không phá cách nhập khác.
+
+PRACTICE: Tạo focus path cho form và modal lab,thực hiện hai chiều và cách kích hoạt phù hợp. Nộp sáu case,bằng chứng trap hoặc đạt,không dùng chuột cứu bước giữa ca.
+Q: Keyboard test cần kiểm gì?
++ Đến được control,thao tác được và thoát được hợp lý
+- Chỉ Tab một lần
+- Chỉ chuột bấm được
+Q: tabindex dương dùng để vá thứ tự thường có rủi ro gì?
++ Tạo thứ tự khó dự đoán và bảo trì
+- Luôn cải thiện mọi form
+- Tự thêm accessible name
+
+## LESSON accessibility-04 | Focus nhìn thấy và tránh bị che
+
+### Focus nhìn thấy và không bị che là hai câu hỏi
+Người dùng bàn phím cần nhận biết vị trí và thấy control khi thao tác.Sticky header/footer,cookie banner hoặcnon-modal overlay có thể che nội dung;kiểm nhiều vị trí scroll và zoom.
+
+### Phân biệt MinimumAA và Enhanced AAA
+2.4.11 yêu cầu control nhận focus không bị nội dung do tác giả tạo che hoàn toàn.2.4.12EnhancedAAA chặt hơn về không che phần nào;không gán yêu cầu AAA thành bắt buộc AA hoặc coi partly visible là đủ mọi tiêu chí.
+~~~text
+AA minimum:not entirely hidden
+AAA enhanced:no part hidden
+Separate:focus visible,contrast và keyboard behavior
+Có ghi chú theo cấu hình/user-movable content cần đọc khi áp dụng
+Không đánh chỉ từ ảnh không biết focus ở đâu.
+~~~
+
+### Fixture sticky để thử bằng keyboard
+HTML/CSS minh họa cần đưa vào tranglab cóform đủdài.Thử nút gần cuối và control sát mép khiTab;ghi viewport,zoom,focus element và overlay đang mở.
+~~~text
+footer {position:fixed;bottom:0;left:0;right:0;height:5rem;}
+main {padding-bottom:7rem;}
+:focus-visible {outline:3px solid #123456;outline-offset:3px;}
+/* Các giá trị là fixture lab,cần kiểm thực tế theo layout. */
+~~~
+
+### Không vá bằng cách xóa outline
+Nếu indicator trông không đẹp,thiết kế thay thế có thể nhìn thấy cần được kiểm,không outline:none mùquáng.Hiện mộtviền nhưng cùng màu nền hoặc bị clip vẫn có thể không hữu ích.
+~~~text
+observe:focus element có indicator?
+observe:control có bị che toàn bộ?
+observe:indicator có bị clip hoặc khó phân biệt?
+test:default/zoom/modal/banner trạng thái
+Mỗi câu có evidence/criterion phù hợp.
+~~~
+
+### Report đúng điều quan sát
+Nêu element,keys đưa tới,overlay và tác động.Với partial overlap,báo chính xác phạm vi tiêu chí thay vì kết luận AA fail chỉ vì một pixel bị che;vẫn có thể đề nghị cải thiện khả dụng có lý do.
+
+PRACTICE: Thử sticky footer/banner tronglab ở hai viewport và zoom.Nộp focus evidence,phân loại fully/partly/not obscured và kiểm focus-visible riêng,không nhầm AA/AAA.
+Q: Theo2.4.11AA,control nhận focus cần tránh điều gì?
++ Bị che hoàn toàn bởi nội dung do tác giả tạo
+- Bị che bất kỳ phần nào trong mọi tình huống
+- Có border màu xanh
+Q: Có focus nhưng không thấy chỉ báo cần xem gì?
++ Focus visible và cấu hình trạng thái liên quan
+- Chỉ target size
+- Chỉ ngôn ngữ trang
+
+## LESSON accessibility-05 | Tên, vai trò và trạng thái điều khiển
+
+### Tên,vai trò và trạng thái cần đọc đúng
+Control phải giúp người dùng hiểu nó là gì,làm gì và đang ở state nào.Nhìn icon đẹp không đủ choAT;ưu tiên native semantics rồi thêm ARIA đúng khi cần,chứ không gắn role tùytiện.
+
+### Tên có nghĩa theo ngữ cảnh
+Hai nút sửa cần được phân biệt lớp nào nếu ngữ cảnh không đủ.Tên truy cập nên phù hợp label hiển thị,mục đích vàvoice input;không dùng tên CSS hoặc id kỹ thuật làm nhãn.
+~~~text
+<button type=button aria-label="Sửa lớp Mầm Sương">Sửa</button>
+<button type=button aria-label="Sửa lớp Thoi Vạt">Sửa</button>
+<!-- Dữ liệu tên lớp giả,kiểm computed accessible name và context. -->
+~~~
+
+### ARIA không tự thêm hành vi
+Div role=button cần keyboard,focus và interaction đúng;native button thường ít lỗi hơn.aria-disabled chỉ thông báo state,không tự ngăn mọi handler;bản lab cần xử lý nghiệp vụ riêng.
+~~~text
+native:<button type=button disabled>Đăng ký</button>
+custom:cần role,name,state,focus và keydown/click đúng pattern
+verify:AT nhận biết,bàn phím hoạt động,quyền/server vẫn đúng
+Không suy disabledUI thay kiểm quy tắc backend.
+~~~
+
+### Trạng thái động phải được cập nhật
+Expanded,selected,checked và invalid cần khớp điều hiển thị và tương tác.Kiểm trước/sau thao tác,bằng accessibility tree và AT;thuộc tính cómặt nhưng sai giá trị vẫn là vấn đề.
+~~~text
+accordion đóng:aria-expanded=false
+activate:content mở,expanded=true
+checkbox:checked state khớp selection
+field invalid:state và error association đúng
+Ghi phương thức kiểm và state.
+~~~
+
+### Dùng công cụ để quan sát,chưa thay trải nghiệm
+DevTools accessibility tree hỗ trợ computed name/role/state;screen reader choevidence tương tác thực với tổ hợp được chọn.Không nhận mọi AT/browser giống hệt từ một lượt kiểm.
+
+PRACTICE: Kiểm sáu control lab về name/role/state,trong đó có nút icon,accordion,checkbox và field lỗi.Nộp computed tree,keyboard behavior và AT observation có version.
+Q: Accessible name của nút cần giúp gì?
++ Nhận biết mục đích và phân biệt hành động
+- Chỉ tên CSSclass
+- Luôn là text rất dài
+Q: aria-label có tự làm div thành button hoạt động đầy đủ không?
++ Không
+- Có luôn
+- Có nếu thêm màu
+
+## LESSON accessibility-06 | Nhãn form, lỗi và hướng dẫn
+
+### Label sống cùng control
+Placeholder biến mất khi nhập và có thể khó đọc,nên không mặc định thaylabel.Hướng dẫn format,required và đơn vị cần được truyền đạt rõ,không chỉ dựa vào màu hoặc vị trí.
+
+### Liên kết label và hướng dẫn
+HTML lab gắn label quafor/id,helper quaaria-describedby.Kiểm computed relation và đọc bằng AT,vì markup đúng cú pháp chưa đảm bảo nội dung rõ hoặc context đủ.
+~~~text
+<label for=student-mail>Email học viên</label>
+<p id=mail-hint>Dùng địa chỉ email của tài khoản lab.</p>
+<input id=student-mail type=email aria-describedby=mail-hint>
+~~~
+
+### Validation cần giúp sửa lỗi
+Khi input sai,nêu field và lý do bằng text,có liên hệ phù hợp.Kiểm focus/summary khi có nhiều error,không luôn cướp focus mỗi lần gõ hoặc chỉ đỏ border.
+~~~text
+<label for=qty>Số lượng</label>
+<input id=qty aria-invalid=true aria-describedby=qty-error>
+<p id=qty-error>Số lượng phải là số nguyên từ 1đến20.</p>
+~~~
+
+### Không lộ dữ liệu khi thêm error
+Thông báo xác thực có thể cần tránh lộ tài khoản tồn tại,nhưng vẫn giúp người dùng biết bước xử lý.Kiểm nội dung,hướng dẫn và liên hệ field theo policy đã chốt,không xem mọi generic error là bug tự động.
+~~~text
+case:rỗng/sai định dạng/ngoài miền
+observe:text lỗi,field association và state
+correct input:error được cập nhật
+submit:error không đọc lặp vô hạn
+Privacy policy là basis riêng cần xem.
+~~~
+
+### Report về hành trình sửa
+Mục đích không chỉ có error text mà người dùng nhận biết,đến đúng trường và sửa được.Ghi chuỗi focus,thông báo và actual state,sau đó retest cảca hợp lệ và nhiều lỗi cùng lúc.
+
+PRACTICE: Tạo matrix tám lỗi form cho rỗng,kiểu,biên và nhiều field.Nộp label/helper/error associations,keyboard/AT evidence và cách sửa thành công.
+Q: Placeholder có đủ thay label bền cho form không?
++ Thường không
+- Có cho mọi control
+- Có nếu màu nhạt
+Q: Lỗi validation chỉ đổi màu đỏ có đủ không?
++ Chưa,cần nhận biết lỗi bằng thông tin phù hợp
+- Đủ nếu tương phản cao
+- Đủ nếu control lớn
+
+## LESSON accessibility-07 | Tương phản, màu và phóng to
+
+### Tương phản cần đúng loại nội dung
+Với1.4.3AA,chữ thường cần4.5:1,chữ lớn theo định nghĩa cần3:1.Có ngoại lệ nhưlogo,inactive hoặc decoration;không áp ngưỡng chữ cho mọi icon/control mà không xem tiêu chí liên quan. Chữ lớn trong tiêu chí là ít nhất 18 pt, hoặc 14 pt đậm; đừng nhầm 14 CSS px với 14 pt.
+
+### Đo màu liềnkề ở trạng thái thực
+Lấy foreground/background effective,bao gồm ảnh,gradient vàhover/focus/selected khi phù hợp.Không làm tròn4.49lên4.5để nhận đạt,báo ratio và phương thức đo.
+~~~text
+sample:bodytext trên panel
+record:computed colors,font size/weight và state
+classify:normal/large/exception có lý do
+measure:ratio theo phương pháp WCAG đã chốt
+Tách tiêu chí text/non-text contrast.
+~~~
+
+### Màu không là kênh duy nhất
+Lớp đầy có thể dùng text/icon kèm trạng thái,không chỉ nền đỏ.Người không nhìn màu vẫn cần hiểu trạng thái,đồng thời nhãn/ảnh phải đúng ngữ cảnh.
+~~~text
+<p><strong>Hết chỗ</strong> — lớp Mầm Sương không nhận đăng ký mới.</p>
+<!-- Không chỉ đổi nền đỏ rồi bỏ nhãn trạng thái. -->
+~~~
+
+### Resize và reflow hai câu hỏi liên quan
+Resize Text kiểm phóng chữ đến 200% trong điều kiện/ngoại lệ tiêu chí.Reflow cho nội dung cuộn dọc xét chiều rộng tương đương320 CSS px,không mất thông tin/chức năng và không cuộn hai chiều không cần thiết;phần thật sự cần layout2D có ngoại lệ.
+~~~text
+resize:text200%,kiểm label/nút/error
+reflow:viewport tương đương320 CSS px cho vertical content
+observe:không cắt text,mất control hoặc buộc scrollhai chiều
+exceptions:ví dụ bảng/sơ đồ cần2D được xét theo tiêu chí
+Ghi setup zoom/viewport thực tế.
+~~~
+
+### Kiểm khả dụng sauzoom
+Form có thể không scroll ngang nhưng nút bị che hoặc error không đọc được.Hoàn tất tác vụ thực,với keyboard và pointer khi phù hợp;ghi gap thay vì xem layoutthu nhỏ là đã đạt accessibility.
+
+PRACTICE: Đo bốn cặp màu lab,có normal/large và một ngoại lệ có lý do.Kiểm200% text và reflow320 CSS px,nộp setup,ratio,ảnh và bước hoàn tấtform.
+Q: Chữ thường thuộc1.4.3AA cần tương phản tối thiểu thường là bao nhiêu?
++ 4.5:1
+- 1:1
+- 2:1 cho mọi loại chữ
+Q: Reflow cho nội dung cuộn dọc xét chiều rộng tương đương nào?
++ 320 CSS px với điều kiện và ngoại lệ của tiêu chí
+- 320device pixels của mọi màn
+- Chỉ desktop1920px
+
+## LESSON accessibility-08 | Kích thước mục tiêu và phương thức nhập
+
+### Mục tiêu dễ kích hoạt theo phương thức nhập
+Người có vận động hạn chế có thể khó chạm icon nhỏ cạnh nhau. Kiểm vùng nhận pointer thật và khoảng cách,không chỉ hình vẽ;đồng thời giữ thao tác keyboard,voice hoặc cách nhập liên quan theo scope.
+
+### 24 CSS px không phải luật44bắt buộc mọi nơi
+2.5.8AA đặt yêu cầu cơ bản24×24 CSS px với các ngoại lệ phù hợp. Mức target44trong tiêu chí EnhancedAAA khác;không thay device pixel choCSSpixel hoặc áp mộtcon số thiếu ngữ cảnh.
+~~~text
+minimumAA:24×24 CSS px hoặc ngoại lệ phù hợp
+spacing/equivalent/inline/user-agent/essential cần xét
+enhancedAAA:ngưỡng khác,không gộp với AA
+record:vùng nhận pointer,layout và lý do ngoại lệ
+Không nhận mọi target20px đều fail tự động.
+~~~
+
+### Spacing phải được kiểm hình học đúng
+Với target nhỏ,xem điều kiện vòng tròn đường kính24 CSS px đặt tại tâm bounding box và quan hệ với target/vòng tròn lâncận theo tiêu chí. Không giản lược thành chỉ cần gap4px trong mọi layout.
+~~~text
+caseA:target đạt kích thước ->kiểm vùng hit thực
+caseB:target nhỏ ->đánh giá spacing exception đúng hình học
+caseC:link inline ->xem ngoại lệ áp dụng
+caseD:iconbutton sát nhau ->không tự cho ngoại lệ
+Evidence:CSS dimensions và bố trí.
+~~~
+
+### Control tự tạo cần tránh click sai
+Tăng padding có thể tăng hitarea nhưng overlay có thể chặn hoặc làm target đè nhau. Thử điểm ở mép và khoảng trống tronglab,đo clicktarget thực và giữ thông báo/name nhất quán.
+~~~text
+fixture:hai button Lưu/Hủy cạnh nhau
+probe:pointer ởmép vàgiữa vùng nhận
+observe:event target,hành động và focus
+check:không kích hoạt control hàngxóm
+Không dùng click thật lên hành động pháhoại ngoài lab.
+~~~
+
+### Không quên phương thức khác
+Pointer lớn vẫn có thể kẹt keyboard hoặc name không rõ cho speech input. Chọn tổ hợp phép kiểm theo rủi ro,ghi tiêu chí riêng;đạt target size không là đạt accessibility toàn control.
+
+PRACTICE: Đo sáu target lab,gồm target nhỏ có spacing,link inline và iconbutton sát nhau. Nộp CSSpx/hit area,sơ đồ ngoại lệ và kết quả keyboard,không áp44 px thành AA.
+Q: 2.5.8AA nói kích thước mục tiêu cơ bản nào?
++ 24×24 CSS px hoặc đáp ứng ngoại lệ phù hợp
+- 44x44device pixels bắt buộc mọi link
+- Mọi target20px luôn fail
+Q: Vì sao không đo target chỉ bằng icon nhìn thấy?
++ Vùng nhận pointer thực có thể khác hình icon
+- Icon luôn là target
+- Chỉ đo font là đủ
+
+## LESSON accessibility-09 | Thông báo động với trình đọc màn hình
+
+### Thông tin động cần được nhận biết
+Toast thành công,số kết quả và lỗi async xuất hiện không reload trang có thể bịbỏlỡ nếu chỉ nhìn DOM. Kiểm người dùng nhận được thông tin phù hợp mà không bị gián đoạn vôích.
+
+### Status message không luôn cần cướp focus
+Thông báo trạng thái phù hợp có thể dùng semantics live region để AT đọc khi focus vẫn ở nơi thao tác. Role alert có tính khẩn hơn status;chọn theo ý nghĩa,không gắn alert cho mọi thay đổi.
+~~~text
+<p id=save-status role=status></p>
+<!-- Khi lưu xong,cập nhật text của vùng đã có trong DOM. -->
+<!-- Không lặp thông báo mỗi render nếu nội dung không đổi. -->
+~~~
+
+### Fixture cập nhật theo hành vi
+ĐoạnJS giả định tranglab có save-button và save-status. Nó chỉ mô phỏng thông báo để kiểm AT,không phải server đã lưu;không dùng ví dụ này làm bằng chứng nghiệp vụ đã commit.
+~~~js
+document.getElementById('save-button').addEventListener('click',()=>{
+ document.getElementById('save-status').textContent='Đã lưu bản nháp lab';
+});
+~~~
+
+### Kiểm quá ít vàquáồn
+Gửi hai lần,thay đổi trạng thái loading->success,error->correct rồi quan sát. Thông báo phải đúng lúc,đủ ngữ cảnh và không lặp vô hạn;screen reader/browser/version có thể ảnh hưởng cách đọc,ghi setup.
+~~~text
+scenario:save một lần ->một thông báo đủ nghĩa
+scenario:validation fail ->lỗi/field association phù hợp
+scenario:background update ->không phá tác vụ chính
+record:spoken output,focus,state và timing
+Screenshot không chứng minh AT đã đọc.
+~~~
+
+### Báo rào cản thực tế
+Nêu người dùng không nhận kết quả,lặp đọc làm khó hoàn tất hoặc focus bị nhảy. Kèm semantic,chuỗi thao tác và môi trường;không chỉ báo thiếu aria-live nếu chưa đánh giá hành vi.
+
+PRACTICE: Tạo ba trạng thái lưu/tìmkiếm/lỗi tronglab,kiểm bằng AT đã chọn. Nộp spoken output,focus,ngữ cảnh và một finding hoặc giới hạn chưa đủ evidence.
+Q: Thông báo lưu thành công động cần được kiểm thế nào?
++ Có thể được nhận biết bởi công nghệ hỗ trợ khi phù hợp
+- Chỉ ảnh chụp cótoast
+- Luôn cướp focus
+Q: Live region quá ồn gây vấn đề gì?
++ Lặp thông báo làm gián đoạn việc hiểu và thao tác
+- Luôn tốt hơn im lặng
+- Chỉ tăng màu chữ
+
+## LESSON accessibility-10 | Nội dung, hình ảnh và phụ đề
+
+### Text alternative theo mục đích
+Ảnh thông tin cần diễn đạt nội dung/phức tạp tương ứng,ảnh trang trí có thể alt rỗng khi đúng ngữ cảnh. Không dùng tên file hoặc một mẫu mô tả cho mọi ảnh;đánh giá tác vụ người dùng cần hoàn thành.
+
+### Hai ảnh khác vai trò
+Ví dụ HTML của Lụa Mầm có ảnh minh họa trang trí và sơ đồ lịch giả. Alt cho ảnh thông tin không thay mô tảdài nếu nội dung phức tạp cần cách truy cập bổsung;kiểm cả text ngữ cảnh.
+~~~text
+<img src=lab-decoration.png alt="">
+<img src=lab-room-map.png alt="Sơ đồ lớp:phòng Mầm ở tầng1,phòng Thoi ở tầng2.">
+<!-- Tên phòng và ảnh là fixture giả,không phải dữ liệu địađiểm thật. -->
+~~~
+
+### Heading,link và ngôn ngữ giúp định hướng
+Cấu trúc ngữ nghĩa hỗ trợ điều hướng theoheading/landmark,linkname cần mục đích theo ngữ cảnh và lang khai báo đúng. Không chọn heading chỉ vì kích thước chữ hoặc mọi link tên xem thêm khi khó phân biệt.
+~~~text
+<html lang=vi>
+<main>
+<h1>Đăng ký lớp Lụa Mầm</h1>
+<h2>Chọn lớp</h2>
+<a href=/classes/CL7>Chi tiết lớp Mầm Sương</a>
+</main>
+</html>
+~~~
+
+### Media cần review ý nghĩa và đồng bộ
+Phụ đề tự động có thể sai tên,từ chuyên môn hoặc âm thanh có nghĩa. Kiểm lời,âm thanh,thời điểm và các yêu cầu media áp dụng;khi có video có thông tin hình ảnh quan trọng,cần xem thêm hình thức thay thế theo tiêu chí.
+~~~text
+fixture:video hướng dẫn đăngký tự tạo
+review:thoại và âm thanh có ý nghĩa
+review:caption đồng bộ và đọc được
+review:thông tin chỉ có bằng hình/âm có cách tiếp cận phù hợp?
+Không nhận caption tự sinh là đã đạt toàn media.
+~~~
+
+### Nội dung cũng có rào cản
+Hướng dẫn mơhồ,link thiếu ngữ cảnh hoặc lỗi khó nhận biết có thể làm người dùng không hoàn tất. Kiểm bằng tác vụ và review nội dung,không chỉ đếm alt tồn tại hoặc heading đủ cấp.
+
+PRACTICE: Review mười ảnh/link/heading và một clip giả định,có lý do alt,ngôn ngữ và media requirements. Nộp bản đề xuất sửa bằng lời riêng,không dùng media có bản quyền.
+Q: Alt text nên phụ thuộc gì?
++ Mục đích ảnh trong ngữ cảnh
+- Tên file mặc định
+- Luôn mô tả mọi pixel
+Q: Phụ đề tự động có đủ bảo đảm nội dung video tiếp cận không?
++ Chưa,cần review đúng nội dung và yêu cầu áp dụng
+- Có luôn
+- Có nếu video ngắn
+
+## LESSON accessibility-11 | Tự động hóa a11y và giới hạn công cụ
+
+### Automation phát hiện một phần
+Axe-core là công cụ mã nguồn mở hỗ trợ kiểm rule trongstate hiện tại. Nó không đánh giá mọi ý nghĩa,nội dung,keyboard path hoặc AT interaction;không lấyzero violations thay tuyên bố conformance.
+
+### Quét đúng trạng thái đã dựng
+Playwright/axe cần mởform,lỗi hoặc modal trước analyze nếu đó là state cần kiểm. Cố định phiên bản và report,node/rule giúp triage;code mẫu cần cài dependency tương thích tronglab.
+~~~ts
+import AxeBuilder from '@axe-core/playwright';
+await page.goto('http://localhost:3120/enroll');
+await page.getByRole('button',{name:'Đăng ký'}).click();
+const results=await new AxeBuilder({page}).analyze();
+console.log(results.violations.map(x=>({id:x.id,nodes:x.nodes.length})));
+~~~
+
+### Triage thay vì chuyển mọi dòng thành bug
+Xemrule,node,impact estimate,incomplete và ngữ cảnh. Xác minh rào cản và mapping tiêu chí,kiểm multiple instances của cùng mechanism;không tắt rule vì nhiều đỏ hoặc áp severity máy móc.
+~~~text
+input:rule/node/state từ reportlab
+verify:nguyên nhân,rào cản và criterion
+classify:confirmed/needs review/not applicable có lý do
+action:buggốc với instances phù hợp
+No findings !=toàn website đạt
+~~~
+
+### Kết hợp keyboard,AT và zoom
+Checklist nền cần bao gồm bài 3–10 ở phạm vi đã chốt. Script có thể assert focus/name,mà vẫn cần thử hành vi và nội dung thực;ghi method nào kiểm tiêu chí nào.
+~~~text
+AUTO:rule hỗ trợ +state cụ thể
+KEY:đường đi/kích hoạt/thoát/focus
+AT:name/role/state và announcement
+VISUAL:contrast,zoom,reflow,target
+CONTENT:alt/link/instruction/media theo ngữ cảnh
+~~~
+
+### Artifact có thể chứa dữ liệu
+DOM,HTMLreport và trace có thể chứa forminput hoặc quyền. Dùng fixture giả,giới hạn upload và retention;trong bài chỉ lưu reportlab được che,không gửi ra dịch vụ ngoài phạm vi.
+
+PRACTICE: Tạo một axe run choform thường/lỗi/modal,triage ba finding hoặc needs-review. Nộp rule/node,state,evidence và matrix manual bổsung;không claim toàn site đạt từ scanner.
+Q: Scanner không báo lỗi có ý nghĩa gì?
++ Không phát hiện lỗi trong phạm vi rule/trạng thái đã quét
+- Toàn website đạt WCAG
+- Không cần kiểm người
+Q: Một issue axe cần làm gì trước kết luận?
++ Đọc node,rule,ngữ cảnh và xác minh tác động
+- Gửi mọi dòng là critical
+- Xóa rule đỏ
+
+## LESSON accessibility-12 | Báo lỗi và kiểm sửa với người dùng
+
+### Report diễn tả công việc bị chặn
+Tiêu đề như không thoát modal bằng keyboard giúp người sửa thấy tác động. Criterion,DOM,node và ảnh hỗ trợ nhưng không thay steps/expected/actual;đừng chỉ gửi score thấp không ngữ cảnh.
+
+### Manifest accessibility đủ tái hiện
+Ghi build,trang/state,browser/AT phiên bản,viewport/zoom,keys và setting liên quan. Không cần thông tin cánhân người kiểm,nêu fixture và cách đưa tới đúng state.
+~~~text
+finding:A11Y-L7-09
+barrier:focus bị stickyfooter che toàn bộ
+setup:buildLAB2,viewport/zoom được ghi
+keys:Tab từ controlX đến submit
+expected:theo2.4.11 và focusvisible riêng
+evidence:ảnh+focuspath+state
+~~~
+
+### Ưu tiên theo rào cản và phạm vi
+Trap chặn quy trình có thể nghiêm trọng hơn vấn đề ít ảnh hưởng,nhưng severity cần định nghĩa và bối cảnh. Feedback người dùng khi được tổchức phù hợp bổsung insight,không biến một người thành đại diện mọi AT.
+~~~text
+impact:taskblocked hoặc gây khókhăn mức nào?
+scope:mọiform hay một state?
+frequency:theo điều kiện đã quan sát
+workaround:thực sự khả dụng và chi phí
+owner:triage theo quy trình nhóm
+~~~
+
+### Retest cơ chế và regression
+Sửa outline cần kiểm keyboard/contrast/obscured ở state liên quan. Sửaaria-label cần name và label hiển thị phù hợp;khi đổi DOM order,còn cần đọc/navigate và pointer không bị phá.
+~~~text
+original:control nhận focus bị che
+fixed:hiển thị phù hợp theocriterion
+regression:banner mở/đóng,zoom,modal,reverseTab
+methods:keyboard +AT/visual khi phù hợp
+record:version,evidence,gap
+~~~
+
+### Đóng finding có giới hạn evidence
+Báo đã xác nhận bản sửa ở tổ hợp nào,còn chưa kiểm ở đâu. Không đóng toàn nhóm vì một node hết violation;đánh giá instances và trang/quy trình liên quan theo phạm vi được giao.
+
+PRACTICE: Viết hai report accessibility giả có rào cản,criterion candidate và manifest. Tạo retest/regression plan,gồm một gap AT/browser và cách xử lý rủi ro;không gửi report thật.
+Q: Bug accessibility nên mô tả gì?
++ Rào cản công việc,bước,môi trường và evidence
+- Chỉ số tiêu chí
+- Chỉ cảm nhận xấu
+Q: Retest sửa accessibility cần thêm gì?
++ Ca gốc,các trạng thái và phương thức nhập liên quan
+- Chỉ nhìn màu mới
+- Chỉ scanner hết đỏ
+
+## LESSON accessibility-13 | Dự án: đánh giá luồng đăng ký bằng nhiều cách
+
+### Dự án luồng đăng ký Lụa Mầm
+Nhận ba trang/state gồm chọn lớp,form và xác nhận,thêm modal và validation error. Mục tiêu là đánh giá mẫu có hệ thống,ghi rào cản và đề xuất sửa;không tuyên bố conformance toàn website từ bài tập.
+
+### Scope và matrix nhiều phương pháp
+Chốt build,rule mục tiêu,tổ hợp browser/AT,viewport/zoom và fixture giả. Mapping criterion->method->state->evidence giúp thấy gap;không chỉquét trang mặc định rồi đóng bài.
+~~~text
+KEY:toàn quy trình,mở/đóng modal
+AT:label/name/state,errors,status
+VISUAL:contrast,focus,zoom/reflow,target
+AUTO:axe ở default/error/modal
+CONTENT:alt,link,instruction và lang
+Ghi nottested/notapplicable có lý do.
+~~~
+
+### Nghiệm thu bằng finding và bản sửa
+Tạo fixture lỗi có chủ đích hoặc nhận bản lab lỗi,viết finding có evidence rồi retest bản sửa. Nếu chưa có app/AT,báo đây là thiết kế/mô phỏng,chưa đạt kết quả thực thi.
+~~~text
+F1 label thiếu liên kết
+F2 stickyfooter chefocus
+F3 status không được nhận biết
+F4 target nhỏ sát nhau không đáp ngoại lệ
+MỗiF có expected,method và evidence saufix
+~~~
+
+### Report gắn phạm vi và rủi ro còn lại
+Cópass/fail/not-tested/not-applicable theo tiêu chí/state cùng lý do. Nêu người dùng có thể hoàn tất tác vụ gì,còn rào cản nào và việc cần làm tiếp;không gộp điểm thành chứng nhận.
+
+### Bàn giao người khác có thể kiểm lại
+Nộp scope,matrix,fixture,script,report,findings,retest và gap. Giữ nội dung gốc,dữ liệu giả và artifact đã che quyền;không sửa app chính hoặc deploy trong bài thực hành.
+~~~text
+accept:phạm vi/phiên bản/tiêu chí rõ
+accept:không nhầm AA/AAA và CSS/devicepx
+accept:đa phương pháp,không chỉ scanner
+accept:report tái hiện được và retest đúng state
+accept:giới hạn và follow-up minh bạch
+~~~
+
+PRACTICE: Bàn giao gói đánh giá luồng đăng ký có scope,matrix,ít nhất mười hai case,năm finding mẫu hoặc quan sát có evidence và hai retest. Ghi đúng phần mô phỏng/chưa kiểm,chưa tuyên bố toàn site đạt.
+Q: Dự án đánh giá cần phối hợp cách kiểm nào?
++ Tự động,bàn phím,AT,zoom/nội dung theo scope
+- Chỉ một plugin
+- Chỉ click chuột
+Q: Báo cáo mẫu trang có thể tuyên bố gì?
++ Kết quả quan sát trong mẫu và phạm vi đã kiểm
+- Mọi trang tương lai đạt
+- Chứng nhận pháp lý toàn tổ chức
+
+## LESSON accessibility-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Cần xét người dùng,công việc,bối cảnh và công nghệ hỗ trợ,không đồng nhất với một nút bật chế độ.
+2. Nguyên tắc định hướng,còn success criteria cho yêu cầu kiểm được;technique là cách đáp ứng,không phải mọi technique đều bắt buộc.
+3. Kiểm đường đi,cách kích hoạt và không kẹt bàn phím theo hành vi control,bám tiêu chí và mẫu thiết kế phù hợp.
+4. Minimum yêu cầu không che toàn bộ;không che phần nào là mức EnhancedAAA khác,cần kiểm cả focus visible và tiêu chí khác liên quan.
+
+### Dữ liệu và điều kiện biên
+5. Ưu tiên tên ngắn rõ theo ngữ cảnh,native semantics và label hiển thị phù hợp;không ghi nhãn kỹ thuật vô nghĩa.
+6. Placeholder có thể biến mất khi nhập và không đáp ứng đầy đủ nhu cầu nhãn/hướng dẫn;cần label hoặc cơ chế tương đương phù hợp.
+7. Chữ lớn theo định nghĩa có ngưỡng3:1 và có ngoại lệ như logo/inactive;phải phân loại đúng,chứ không áp một số cho mọi nội dung.
+8. Cần xét các ngoại lệ spacing,equivalent,inline,user-agent,essential;không áp quy tắc24 một cách thiếu bối cảnh.
+
+### Tính đúng và cách điều tra
+9. Status message cần semantics phù hợp,không nhất thiết luôn chuyển focus;thử với tổ hợp browser/AT đã chọn.
+10. Ảnh thông tin cần text alternative phù hợp;ảnh trang trí có thể có alt rỗng khi đúng ngữ cảnh,không dùng một mẫu cho mọi ảnh.
+11. Automation chỉ kiểm một phần,cần bàn phím,AT,nội dung và luồng thủ công,ghi state và rule đã chạy.
+12. Tiêu chí và code hỗ trợ tái hiện,nhưng tác động như không thoát modal hay không đọc lỗi mới giúp ưu tiên đúng.
+
+### Rủi ro và lựa chọn phương án
+13. Không phương pháp đơn lẻ đủ cho mọi yêu cầu;coverage và giới hạn phải minh bạch.
+14. Phải xét phạm vi,trang đầy đủ/quy trình liên quan và các yêu cầu conformance,không lấy điểm scanner thay đánh giá.
+15. Không bị che chưa đủ nếu người dùng không biết vị trí focus;đừng gộp nhiều tiêu chí thành một phán quyết.
+16. Màu không nên là kênh duy nhất;người dùng cần hiểu trường nào sai và cách sửa theo yêu cầu liên quan.
+
+### Dự án, bằng chứng và bàn giao
+17. Đo bounding/hit area và khoảng cách theo tiêu chí;vùng nhìn thấy không tự là vùng kích hoạt.
+18. Kiểm lời thoại,âm thanh có ý nghĩa,đồng bộ và các yêu cầu media khác;không coi tự sinh là xác nhận đạt.
+19. Sửa focus hoặc name có thể ảnh hưởng luồng khác;kiểm regression và tổ hợp AT/browser theo phạm vi.
+20. Không suy quá evidence;đánh giá conformance đầy đủ có yêu cầu phạm vi/phương pháp riêng cần được đáp ứng.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Mục tiêu accessibility là gì?
++ Giảm rào cản để nhiều người sử dụng được
+- Chỉ thêm một theme đẹp
+- Chỉ hỗ trợ một dạng khuyết tật
+Q: Bốn nguyên tắc WCAG thường được hiểu ra sao?
++ Có thể nhận biết,vận hành,hiểu và đủ vững cho công nghệ hỗ trợ
+- Chỉ màu,ảnh,font và video
+- Chỉ tốc độ mạng
+Q: Keyboard test cần kiểm gì?
++ Đến được control,thao tác được và thoát được hợp lý
+- Chỉ Tab một lần
+- Chỉ chuột bấm được
+Q: Theo2.4.11AA,control nhận focus cần tránh điều gì?
++ Bị che hoàn toàn bởi nội dung do tác giả tạo
+- Bị che bất kỳ phần nào trong mọi tình huống
+- Có border màu xanh
+Q: Accessible name của nút cần giúp gì?
++ Nhận biết mục đích và phân biệt hành động
+- Chỉ tên CSSclass
+- Luôn là text rất dài
+Q: Placeholder có đủ thay label bền cho form không?
++ Thường không
+- Có cho mọi control
+- Có nếu màu nhạt
+Q: Chữ thường thuộc1.4.3AA cần tương phản tối thiểu thường là bao nhiêu?
++ 4.5:1
+- 1:1
+- 2:1 cho mọi loại chữ
+Q: 2.5.8AA nói kích thước mục tiêu cơ bản nào?
++ 24×24 CSS px hoặc đáp ứng ngoại lệ phù hợp
+- 44x44device pixels bắt buộc mọi link
+- Mọi target20px luôn fail
+Q: Thông báo lưu thành công động cần được kiểm thế nào?
++ Có thể được nhận biết bởi công nghệ hỗ trợ khi phù hợp
+- Chỉ ảnh chụp cótoast
+- Luôn cướp focus
+Q: Alt text nên phụ thuộc gì?
++ Mục đích ảnh trong ngữ cảnh
+- Tên file mặc định
+- Luôn mô tả mọi pixel
+Q: Scanner không báo lỗi có ý nghĩa gì?
++ Không phát hiện lỗi trong phạm vi rule/trạng thái đã quét
+- Toàn website đạt WCAG
+- Không cần kiểm người
+Q: Bug accessibility nên mô tả gì?
++ Rào cản công việc,bước,môi trường và evidence
+- Chỉ số tiêu chí
+- Chỉ cảm nhận xấu
+Q: Dự án đánh giá cần phối hợp cách kiểm nào?
++ Tự động,bàn phím,AT,zoom/nội dung theo scope
+- Chỉ một plugin
+- Chỉ click chuột
+Q: Muốn đánh giá mức AA trong phạm vi đã chốt cần xem gì?
++ Các tiêu chí A và AA áp dụng cùng yêu cầu conformance
+- Chỉ một tiêu chíAA
+- Chỉ score tool100
+Q: Có focus nhưng không thấy chỉ báo cần xem gì?
++ Focus visible và cấu hình trạng thái liên quan
+- Chỉ target size
+- Chỉ ngôn ngữ trang
+Q: Lỗi validation chỉ đổi màu đỏ có đủ không?
++ Chưa,cần nhận biết lỗi bằng thông tin phù hợp
+- Đủ nếu tương phản cao
+- Đủ nếu control lớn
+Q: Vì sao không đo target chỉ bằng icon nhìn thấy?
++ Vùng nhận pointer thực có thể khác hình icon
+- Icon luôn là target
+- Chỉ đo font là đủ
+Q: Phụ đề tự động có đủ bảo đảm nội dung video tiếp cận không?
++ Chưa,cần review đúng nội dung và yêu cầu áp dụng
+- Có luôn
+- Có nếu video ngắn
+Q: Retest sửa accessibility cần thêm gì?
++ Ca gốc,các trạng thái và phương thức nhập liên quan
+- Chỉ nhìn màu mới
+- Chỉ scanner hết đỏ
+Q: Báo cáo mẫu trang có thể tuyên bố gì?
++ Kết quả quan sát trong mẫu và phạm vi đã kiểm
+- Mọi trang tương lai đạt
+- Chứng nhận pháp lý toàn tổ chức

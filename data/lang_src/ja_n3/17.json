@@ -1,0 +1,673 @@
+{
+ "no": 17,
+ "title": "Ôn tập tổng hợp 1 – Ba kênh thông báo, một lịch đúng",
+ "sub": "古い 案内が 火曜日にも 配られていました。",
+ "goals": [
+  "Đối chiếu tờ phát, bảng niêm yết và lời nói theo thời điểm, nguồn và đối tượng.",
+  "Dùng bị động, kính ngữ và diễn đạt cho phép phù hợp khi tóm tắt chuỗi sự việc.",
+  "Đọc từ quy chiếu và liên kết để xác định điều gì được sửa, điều gì còn giữ.",
+  "Viết phản hồi có căn cứ, điều kiện và đề xuất kiểm chứ không lặp tin cũ."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Thông tin ở nhiều kênh không phải lúc nào cũng cập nhật cùng lúc. Bài ôn dùng một buổi giới thiệu tư liệu cộng đồng giả, trong đó tờ phát cũ, bảng mới và lời người phụ trách chỉ nói một phần lịch. Hãy ghi mỗi phát biểu vào đúng ngày cập nhật và nhóm được áp dụng. Các mẫu bị động hoặc kính ngữ không làm thông tin đúng hơn; nguồn và phạm vi vẫn phải được kiểm. Kỳ vọng hợp lý có thể đổi khi tìm được bản mới.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>回覧 đọc かいらん, 配布 đọc はいふ; chữ Hán gần về việc đưa tài liệu nhưng âm đọc khác. 訂正箇所 là ていせいかしょ với しょ nhỏ, 公式 đọc こうしき giữ ko-o. Khi đọc ba nguồn, nhấn nhẹ thời điểm 月曜日/火曜日/今日 để người nghe giữ thứ tự cập nhật. Kính ngữ おっしゃる có nhịp っ, không thay bằng おしゃる.</p>",
+   "items": [
+    {
+     "sym": "回覧・配布",
+     "ex": [
+      "かいらん",
+      "はいふ"
+     ],
+     "vi": "Giữ chuỗi a-i và âm mũi cuối của 回覧; đừng đọc theo nghĩa đoán sẵn."
+    },
+    {
+     "sym": "訂正箇所・おっしゃる",
+     "ex": [
+      "ていせいかしょ",
+      "おっしゃる"
+     ],
+     "vi": "Chữ ghép しょ và nhịp っ thuộc hai kiểu nhịp khác nhau trong lời trình bày lịch sự."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "回覧",
+     "kana": "かいらん",
+     "romaji": "kairan",
+     "vi": "việc chuyền đọc thông báo",
+     "ex": "回覧の 最後に 日付が あります。",
+     "exVi": "Cuối thông báo chuyền đọc có ngày."
+    },
+    {
+     "w": "配布",
+     "kana": "はいふ",
+     "romaji": "haifu",
+     "vi": "phát/phân phối tài liệu",
+     "ex": "古い 紙が 再び 配布されました。",
+     "exVi": "Giấy cũ lại bị phát ra."
+    },
+    {
+     "w": "掲示板",
+     "kana": "けいじばん",
+     "romaji": "keijiban",
+     "vi": "bảng niêm yết",
+     "ex": "掲示板の 更新時刻を 見ます。",
+     "exVi": "Tôi xem giờ cập nhật bảng."
+    },
+    {
+     "w": "口頭連絡",
+     "kana": "こうとうれんらく",
+     "romaji": "kootoo renraku",
+     "vi": "thông báo bằng lời",
+     "ex": "口頭連絡の 対象を 確認します。",
+     "exVi": "Tôi kiểm đối tượng của thông báo bằng lời."
+    },
+    {
+     "w": "改訂",
+     "kana": "かいてい",
+     "romaji": "kaitei",
+     "vi": "chỉnh sửa văn bản",
+     "ex": "案内の 改訂は 火曜日でした。",
+     "exVi": "Hướng dẫn được sửa thứ ba."
+    },
+    {
+     "w": "訂正箇所",
+     "kana": "ていせいかしょ",
+     "romaji": "teisei kasho",
+     "vi": "chỗ đính chính",
+     "ex": "訂正箇所を 線で 示します。",
+     "exVi": "Tôi đánh dấu chỗ sửa bằng nét."
+    },
+    {
+     "w": "対象者",
+     "kana": "たいしょうしゃ",
+     "romaji": "taishoosha",
+     "vi": "người thuộc đối tượng áp dụng",
+     "ex": "対象者は 準備の 係だけです。",
+     "exVi": "Đối tượng chỉ là người phụ trách chuẩn bị."
+    },
+    {
+     "w": "開始時刻",
+     "kana": "かいしじこく",
+     "romaji": "kaishi jikoku",
+     "vi": "giờ bắt đầu",
+     "ex": "開始時刻は 変えていません。",
+     "exVi": "Giờ bắt đầu không đổi."
+    },
+    {
+     "w": "集合時刻",
+     "kana": "しゅうごうじこく",
+     "romaji": "shuugoo jikoku",
+     "vi": "giờ tập trung",
+     "ex": "集合時刻だけ 早く なりました。",
+     "exVi": "Chỉ giờ tập trung sớm hơn."
+    },
+    {
+     "w": "本文",
+     "kana": "ほんぶん",
+     "romaji": "honbun",
+     "vi": "nội dung chính",
+     "ex": "本文と 注記を 一緒に 読みます。",
+     "exVi": "Tôi đọc cả nội dung chính và ghi chú."
+    },
+    {
+     "w": "注記",
+     "kana": "ちゅうき",
+     "romaji": "chuuki",
+     "vi": "ghi chú bổ sung",
+     "ex": "注記は 係の 人向けです。",
+     "exVi": "Ghi chú dành cho người phụ trách."
+    },
+    {
+     "w": "公式",
+     "kana": "こうしき",
+     "romaji": "kooshiki",
+     "vi": "chính thức theo nguồn công bố",
+     "ex": "公式の 訂正を 受付で 受け取ります。",
+     "exVi": "Tôi nhận đính chính chính thức ở quầy."
+    },
+    {
+     "w": "転送",
+     "kana": "てんそう",
+     "romaji": "tensoo",
+     "vi": "chuyển tiếp tin",
+     "ex": "転送の 前に 版を 確認します。",
+     "exVi": "Tôi kiểm phiên bản trước khi chuyển tiếp."
+    },
+    {
+     "w": "受信者",
+     "kana": "じゅしんしゃ",
+     "romaji": "jushinsha",
+     "vi": "người nhận tin",
+     "ex": "受信者に 変更点を 伝えます。",
+     "exVi": "Tôi báo điểm đổi cho người nhận."
+    },
+    {
+     "w": "差し替え",
+     "kana": "さしかえ",
+     "romaji": "sashikae",
+     "vi": "thay bản cũ bằng bản khác",
+     "ex": "入口の 紙を 差し替えます。",
+     "exVi": "Tôi thay tờ giấy ở cửa."
+    },
+    {
+     "w": "共有",
+     "kana": "きょうゆう",
+     "romaji": "kyooyuu",
+     "vi": "chia sẻ dùng chung thông tin",
+     "ex": "根拠も 一緒に 共有します。",
+     "exVi": "Tôi chia sẻ cả căn cứ."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Ôn câu bị động để nêu tài liệu được phát: 古い案内が配られました, không suy tự động ai cố ý phát sai. Dùng おっしゃいました khi dẫn lời người cần kính trọng, nhưng vẫn ghi ai, khi nào và nói về đối tượng nào. Để nói được cho cơ hội xem trước dùng 見学させてもらいました theo điểm nhìn người nhận. Nối kỳ vọng với đối chiếu bằng はず/のに, giữ nhượng bộ たとえ～ても khi nói một nguồn cũ có vẻ chính thức vẫn cần kiểm bản.</p>",
+   "table": [
+    [
+     "Mục cần ôn",
+     "Cách dùng trong đối chiếu"
+    ],
+    [
+     "Bị động",
+     "古い紙が再配布された"
+    ],
+    [
+     "Kính ngữ",
+     "係の方がおっしゃった内容"
+    ],
+    [
+     "Được cho cơ hội",
+     "先に見学させてもらった"
+    ],
+    [
+     "Giới hạn nguồn",
+     "公式でも古い版かもしれない"
+    ],
+    [
+     "Quy chiếu",
+     "その変更 = 注記の集合時刻変更"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "古い 案内が 火曜日にも 配られていました。",
+     "vi": "Bản hướng dẫn cũ vẫn được phát hôm thứ ba."
+    },
+    {
+     "t": "係の 方は、開始は 十時のままだと おっしゃいました。",
+     "vi": "Người phụ trách nói giờ bắt đầu vẫn mười giờ."
+    },
+    {
+     "t": "準備のために、先に 会場を 見学させてもらいました。",
+     "vi": "Tôi được cho xem trước nơi tổ chức để chuẩn bị."
+    },
+    {
+     "t": "たとえ 公式の 紙でも、版が 古い 可能性は あります。",
+     "vi": "Dù là giấy chính thức vẫn có khả năng phiên bản cũ."
+    },
+    {
+     "t": "その 変更は 準備係だけに 適用されます。",
+     "vi": "Thay đổi đó chỉ áp dụng cho người chuẩn bị."
+    }
+   ],
+   "tips": [
+    "<p>Thông tin được nói bằng kính ngữ không vì thế thành mới nhất; kiểm ngày và phạm vi.</p>",
+    "<p>Bị động mô tả điều bị tác động không cho biết chủ ý người làm nếu không có dữ kiện.</p>",
+    "<p>それ/その変更 cần nối về đúng nội dung trước, không tự gán sang giờ bắt đầu toàn buổi.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Hai giờ có thể thuộc hai vai trò, còn cửa mới cũ thực sự khác; nghe để xác định trường nào cần sửa và ai bị ảnh hưởng.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "回覧には 十時と ありますが、友だちは 九時半になったと 言っています。どちらが 正しいんでしょう。",
+     "vi": "Thông báo chuyền ghi mười giờ nhưng bạn nói đổi chín rưỡi. Bên nào đúng nhỉ?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "まず、何の 時刻かを 分けましょう。本文の 開始時刻と、注記の 集合時刻は 別かもしれません。",
+     "vi": "Trước hết tách đó là giờ của việc gì. Giờ bắt đầu nội dung chính và giờ tập trung ghi chú có thể khác."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "火曜日の 掲示板には、準備係は 九時半に 集合と 書かれていました。わたしは 参加者です。",
+     "vi": "Bảng thứ ba ghi người chuẩn bị tập trung chín rưỡi. Tôi là người tham gia."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "では、その 変更が あなたに 適用されるとは 限りません。今日の 口頭連絡は 誰向けでしたか。",
+     "vi": "Vậy thay đổi đó không nhất thiết áp cho bạn. Thông báo bằng lời hôm nay dành ai?"
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "係の 方は、一般の 人は 十時からだと おっしゃいました。準備の 人には 別に 説明したそうです。",
+     "vi": "Người phụ trách nói người tham gia thường từ mười giờ. Nghe nói họ giải thích riêng người chuẩn bị."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "三つは 矛盾していないようですね。ただ、古い 回覧の 入口は 北口のままです。最新の 掲示は 南口です。",
+     "vi": "Có vẻ ba giờ không mâu thuẫn. Nhưng cửa trong thông báo cũ vẫn bắc, bảng mới là nam."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "それは 全員に 関係する 変更ですね。古い 紙が もう 一度 配られてしまったかもしれません。",
+     "vi": "Đó là đổi liên quan mọi người. Có thể giấy cũ bị phát lại."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "可能性だけで 誰かを 責めないようにしましょう。受付で 改訂日を 確認してから 差し替えを お願いします。",
+     "vi": "Ta tránh trách ai chỉ từ khả năng. Kiểm ngày sửa tại quầy rồi nhờ thay bản."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "友だちには、時刻は 役割によって 違い、入口は 最新の 案内を 確認すると 伝えます。",
+     "vi": "Tôi báo bạn giờ khác theo vai trò, còn cửa thì kiểm hướng dẫn mới nhất."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。短く まとめるにしても、対象者と 変更点は 省かないでください。",
+     "vi": "Vâng. Dù tóm ngắn cũng xin đừng bỏ đối tượng và điểm thay đổi."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Chín rưỡi áp dụng cho ai?",
+     "o": [
+      "Chỉ người đến xem hôm trước",
+      "Người chuẩn bị",
+      "Mọi người tham gia"
+     ],
+     "a": 1,
+     "e": "掲示板の注記 nói 準備係; không tự đổi giờ bắt đầu chung."
+    },
+    {
+     "q": "Thông tin nào thật sự khác giữa hai bản?",
+     "o": [
+      "Cửa bắc và cửa nam",
+      "Tổng người cố định",
+      "Phí tham gia"
+     ],
+     "a": 0,
+     "e": "Đối thoại xác định thông báo cũ 北口, bảng mới 南口; giờ có thể phân theo vai trò nên chưa mâu thuẫn."
+    },
+    {
+     "q": "Đã chắc ai phát lại giấy cũ chưa?",
+     "o": [
+      "Rồi, bạn của người hỏi",
+      "Rồi, người phụ trách cố ý",
+      "Chưa, mới là khả năng"
+     ],
+     "a": 2,
+     "e": "かもしれません giới hạn điều suy, người hỗ trợ yêu cầu không trách trước khi kiểm."
+    },
+    {
+     "q": "Tóm ngắn cần giữ những gì?",
+     "o": [
+      "Chỉ câu kính ngữ",
+      "Đối tượng và điểm đổi",
+      "Chỉ con số giờ"
+     ],
+     "a": 1,
+     "e": "Lời cuối giữ 対象者と変更点, vì bỏ vai trò sẽ tạo hiểu sai toàn nhóm."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "架空の 地域資料室では、土曜日に 資料を 紹介する 会を 開きます。月曜日に 回覧が 配られ、開始は 十時、入口は 北口と 書かれていました。火曜日の 夕方に 会場の 都合で 入口が 南口へ 変更され、掲示板の 案内が 改訂されました。同じ 掲示の 注記には、準備を 手伝う 人だけ 九時半に 集合すると あります。一般の 参加者の 開始時刻は 変わっていません。\n\nわたしは 水曜日に 友だちから「全部 九時半になった」と 聞きました。回覧を 持っていたので、十時のはずなのに 変だと 思いました。けれども、友だちが 見た 文の 対象者を 確認すると、準備係だけの 話でした。時刻が 二つ 出ているからといって、どちらかが 必ず 間違いとは 限りません。何を する 人の 時刻かを 比べる 必要が ありました。\n\nその後、受付で 係の 方に 質問しました。係の 方は、一般の 人は 十時から 南口へ 来るようにと おっしゃいました。わたしは 準備のために 先に 見学させてもらいましたが、それは 個別の 許可であり、全員が 早く 入れるという 意味では ありません。入口が 変わったことは 全員に 関係するため、古い 回覧を 持つ 人への 訂正は 必要でした。\n\n報告には 三つの 情報源と 日付を 並べ、時刻と 入口を 別の 欄に 書きました。古い 回覧が 再配布されたかどうかは 未確認ですから、誰かが 故意に 間違えたとは 書きません。まず 受付に 公式の 訂正を 作ってもらい、次に 掲示と 回覧を 差し替えます。口頭で 伝える 人にも、対象者を 省かないよう お願いします。たとえ 内容を 短くするにしても、読み手の 行動を 変える 条件は 残すべきだと 感じました。",
+   "vi": "Một phòng tư liệu cộng đồng giả tổ chức giới thiệu tư liệu thứ bảy. Thứ hai phát thông báo ghi mười giờ bắt đầu, cửa bắc. Chiều thứ ba do nơi tổ chức, cửa đổi nam và bảng được sửa. Ghi chú cùng bảng nói chỉ người giúp chuẩn bị tập trung chín rưỡi. Giờ bắt đầu cho người tham gia thường không đổi.\n\nThứ tư tôi nghe bạn nói mọi thứ đổi chín rưỡi. Vì giữ thông báo nên tôi thấy lạ: đáng lẽ mười giờ. Nhưng kiểm đối tượng trong câu bạn đọc thì chỉ người chuẩn bị. Có hai giờ không nhất thiết một giờ sai. Cần so đó là giờ dành người làm việc gì.\n\nSau đó tôi hỏi người phụ trách ở quầy. Họ nói người thường đến cửa nam từ mười giờ. Tôi được cho xem trước để chuẩn bị nhưng đó là phép riêng, không nghĩa ai cũng vào sớm được. Đổi cửa liên quan mọi người nên cần sửa cho người giữ thông báo cũ.\n\nTôi xếp ba nguồn với ngày, viết giờ và cửa ở hai cột. Chưa kiểm giấy cũ có bị phát lại không nên không ghi ai cố ý làm sai. Trước hết nhờ quầy làm đính chính chính thức, rồi thay bảng và thông báo chuyền. Người truyền lời cũng được nhờ giữ đối tượng. Dù rút ngắn vẫn cần giữ điều kiện làm thay đổi hành động người đọc.",
+   "gloss": [
+    {
+     "w": "回覧",
+     "kana": "かいらん",
+     "romaji": "kairan",
+     "vi": "việc chuyền đọc thông báo"
+    },
+    {
+     "w": "配布",
+     "kana": "はいふ",
+     "romaji": "haifu",
+     "vi": "phát/phân phối tài liệu"
+    },
+    {
+     "w": "掲示板",
+     "kana": "けいじばん",
+     "romaji": "keijiban",
+     "vi": "bảng niêm yết"
+    },
+    {
+     "w": "改訂",
+     "kana": "かいてい",
+     "romaji": "kaitei",
+     "vi": "chỉnh sửa văn bản"
+    },
+    {
+     "w": "対象者",
+     "kana": "たいしょうしゃ",
+     "romaji": "taishoosha",
+     "vi": "người thuộc đối tượng áp dụng"
+    },
+    {
+     "w": "開始時刻",
+     "kana": "かいしじこく",
+     "romaji": "kaishi jikoku",
+     "vi": "giờ bắt đầu"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Điểm nào áp dụng cho mọi người theo bản mới?",
+     "o": [
+      "Được xem trước riêng",
+      "Dùng cửa nam",
+      "Tập trung chín rưỡi"
+     ],
+     "a": 1,
+     "e": "Đổi cửa liên quan toàn bộ, còn giờ chín rưỡi chỉ người chuẩn bị."
+    },
+    {
+     "q": "Vì sao hai giờ không nhất thiết mâu thuẫn?",
+     "o": [
+      "Dành hai vai trò khác nhau",
+      "Mọi người tự chọn bất kỳ giờ",
+      "Thông báo không có ngày"
+     ],
+     "a": 0,
+     "e": "Cần đối chiếu 対象者 trước khi gọi hai con số là sai khác."
+    },
+    {
+     "q": "Quyền xem trước của người kể có áp cho toàn bộ không?",
+     "o": [
+      "Có, vì mẫu させてもらう",
+      "Có, mọi người đã đăng ký",
+      "Không, cho phép riêng"
+     ],
+     "a": 2,
+     "e": "Văn bản nhấn 個別の許可 và phủ định suy toàn nhóm được vào sớm."
+    },
+    {
+     "q": "Điều gì trong lịch sử phát chưa được kiểm?",
+     "o": [
+      "Cửa mới là nam",
+      "Có phát lại thông báo cũ không",
+      "Bảng được sửa thứ ba"
+     ],
+     "a": 1,
+     "e": "再配布されたかどうかは未確認 giữ sự kiện lịch sử ở mức chưa biết."
+    },
+    {
+     "q": "Bản sửa cần trình tự nào?",
+     "o": [
+      "Quầy làm đính chính rồi thay các kênh và nhắc người truyền lời",
+      "Chỉ nói miệng một bạn là đủ",
+      "Xóa mọi ngày để tránh mâu thuẫn"
+     ],
+     "a": 0,
+     "e": "Đoạn cuối điều phối nguồn chính thức, các bản giấy và người chuyển tiếp để không còn kênh cũ."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thẻ mới: bản thứ hai đổi cửa sang tây, người chuẩn bị tám rưỡi, người thường chín giờ; bạn chỉ là người thường. Tóm đủ vai trò và nguồn mới.",
+     "model": "新しい案内では入口は西口です。準備係は八時半に集まりますが、一般の参加者は九時からです。わたしは一般の参加者なので、九時に西口へ行く予定です。古い紙の入口とは違うので、改訂日も一緒に確認します。",
+     "vi": "Bản mới dùng cửa tây. Người chuẩn bị tập trung tám rưỡi, người thường từ chín giờ. Tôi là người thường nên dự kiến chín giờ đến cửa tây. Cửa khác giấy cũ nên tôi kiểm cả ngày sửa.",
+     "tips": "Không dùng giờ của người chuẩn bị cho chính mình khi thẻ chỉ là người tham gia thường."
+    },
+    {
+     "p": "Bạn nhận lời chuyển tiếp chỉ ghi “đổi chín rưỡi”. Hỏi ai áp dụng, điều gì đổi và nguồn khi nào.",
+     "model": "九時半というのは、誰の集合時刻のことですか。全体の開始時刻も変わったという意味でしょうか。どの案内を、いつ確認したのか教えてください。対象と情報源がわかってから転送したいです。",
+     "vi": "Chín rưỡi là giờ tập trung của ai? Có nghĩa giờ bắt đầu toàn buổi cũng đổi không? Xin cho biết đã kiểm bản nào khi nào. Tôi muốn rõ đối tượng và nguồn rồi mới chuyển tiếp.",
+     "tips": "Câu hỏi cần kiểm ý nghĩa chứ không mặc định người chuyển tin đã sai."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết phản hồi 180–240 chữ Nhật theo thẻ mới: thông báo mới cửa tây; chuẩn bị tám rưỡi, người thường chín giờ; bạn là người thường; giấy cũ cửa đông; chưa rõ đã phát lại giấy cũ chưa; đề nghị kiểm ngày bản và thay thông báo cũ.",
+   "model": "新しい掲示では入口が西口に変わっています。準備係の集合は八時半ですが、一般の参加者の開始は九時です。わたしは一般の参加者なので、九時に西口へ行く予定です。手元の古い紙には東口とあり、入口については訂正が必要です。ただ、古い紙が再配布されたかどうかはまだ確認していません。まず受付で改訂日と対象を確認し、公式の訂正を受け取ってから差し替えをお願いしたいです。転送するときも対象者は省きません。",
+   "modelVi": "Bảng mới đổi cửa tây. Người chuẩn bị tập trung tám rưỡi nhưng người thường bắt đầu chín giờ. Tôi là người thường nên dự kiến chín giờ đến cửa tây. Giấy cũ tôi giữ ghi cửa đông nên cần sửa cửa. Nhưng chưa kiểm giấy cũ có bị phát lại không. Trước hết kiểm ngày sửa và đối tượng tại quầy, nhận đính chính chính thức rồi nhờ thay. Khi chuyển tiếp tôi cũng không bỏ đối tượng.",
+   "min": 180,
+   "tips": [
+    "Giờ và cửa cần hai trường riêng; cùng lúc có thông tin đúng và thông tin cũ.",
+    "Phần chưa kiểm phát lại giấy không được biến thành lời cáo buộc."
+   ],
+   "checklist": [
+    "Đúng ba dữ kiện cửa tây, tám rưỡi, chín giờ.",
+    "Lịch bản thân theo người thường.",
+    "Giữ cửa đông là thông tin cũ.",
+    "Có giới hạn chưa kiểm và thứ tự đính chính."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “回覧” nghĩa là gì?",
+   "o": [
+    "giờ tập trung",
+    "việc chuyền đọc thông báo",
+    "chỉnh sửa văn bản"
+   ],
+   "a": 1,
+   "e": "回覧の 最後に 日付が あります。 → Cuối thông báo chuyền đọc có ngày. Từ cần nhận diện là “回覧”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “配布” nghĩa là gì?",
+   "o": [
+    "phát/phân phối tài liệu",
+    "chỗ đính chính",
+    "nội dung chính"
+   ],
+   "a": 0,
+   "e": "古い 紙が 再び 配布されました。 → Giấy cũ lại bị phát ra. Từ cần nhận diện là “配布”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “掲示板” nghĩa là gì?",
+   "o": [
+    "người thuộc đối tượng áp dụng",
+    "ghi chú bổ sung",
+    "bảng niêm yết"
+   ],
+   "a": 2,
+   "e": "掲示板の 更新時刻を 見ます。 → Tôi xem giờ cập nhật bảng. Từ cần nhận diện là “掲示板”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “口頭連絡” nghĩa là gì?",
+   "o": [
+    "chính thức theo nguồn công bố",
+    "thông báo bằng lời",
+    "giờ bắt đầu"
+   ],
+   "a": 1,
+   "e": "口頭連絡の 対象を 確認します。 → Tôi kiểm đối tượng của thông báo bằng lời. Từ cần nhận diện là “口頭連絡”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền bị động: 案内を 配る → 案内が ___ました。",
+   "a": "配られ",
+   "e": "配る chuyển bị động 配られる, nêu tài liệu được phát mà chưa chỉ ai hoặc chủ ý."
+  },
+  {
+   "t": "fill",
+   "q": "Điền kính ngữ của nói ở quá khứ: 係の 方が ___。",
+   "a": "おっしゃいました",
+   "e": "おっしゃる là kính ngữ của 言う trong ngữ cảnh kính trọng người phụ trách."
+  },
+  {
+   "t": "fill",
+   "q": "Điền được cho xem: 見学させて___ました。",
+   "a": "もらい",
+   "e": "させてもらう nêu nhận sự cho phép/cơ hội theo điểm nhìn người được xem trước."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu chỉ thay đổi cho người chuẩn bị.",
+   "w": [
+    "適用されます。",
+    "準備係だけに",
+    "その変更は"
+   ],
+   "a": "その変更は準備係だけに適用されます。",
+   "e": "その変更 phải quy chiếu về điều vừa nêu; だけ giới hạn phạm vi người chuẩn bị."
+  },
+  {
+   "q": "Người thường nên theo giờ nào?",
+   "o": [
+    "Tám giờ",
+    "Chín giờ",
+    "Tám rưỡi"
+   ],
+   "a": 1,
+   "e": "開始は九時のまま giữ giờ toàn buổi; ngoại lệ tám rưỡi chỉ 準備係.",
+   "t": "listen",
+   "say": "開始は 九時のままですが、準備係だけ 八時半に 来てください。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "Mức xác nhận nào đúng?",
+   "o": [
+    "Khả năng chưa được kiểm",
+    "Chắc chắn đã phát lại",
+    "Chắc chắn cố ý phát sai"
+   ],
+   "a": 0,
+   "e": "かもしれません và まだ調べていません cùng giữ lịch sử phát ở mức nghi vấn.",
+   "t": "listen",
+   "say": "古い 紙が 配られたかもしれませんが、まだ 調べていません。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "改訂日と 対象者を 確認してから 転送します。",
+   "a": "改訂日と 対象者を 確認してから 転送します。",
+   "lang": "ja-JP",
+   "e": "Trước chuyển tiếp cần kiểm ngày sửa và đối tượng, てから giữ thứ tự xác nhận trước chia sẻ."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "改訂",
+     "chỉnh sửa văn bản"
+    ],
+    [
+     "訂正箇所",
+     "chỗ đính chính"
+    ],
+    [
+     "対象者",
+     "người thuộc đối tượng áp dụng"
+    ],
+    [
+     "開始時刻",
+     "giờ bắt đầu"
+    ],
+    [
+     "集合時刻",
+     "giờ tập trung"
+    ]
+   ],
+   "e": "回覧 là kênh chuyền đọc, 配布 là hành động phát, 掲示板 là nơi niêm yết, 口頭連絡 là kênh bằng lời, 改訂 là sửa bản; mỗi trường giúp lần nguồn cập nhật."
+  },
+  {
+   "q": "Điểm nào áp dụng cho mọi người theo bản mới?",
+   "o": [
+    "Được xem trước riêng",
+    "Dùng cửa nam",
+    "Tập trung chín rưỡi"
+   ],
+   "a": 1,
+   "e": "Đổi cửa liên quan toàn bộ, còn giờ chín rưỡi chỉ người chuẩn bị.",
+   "t": "mc"
+  },
+  {
+   "q": "Vì sao hai giờ không nhất thiết mâu thuẫn?",
+   "o": [
+    "Thông báo không có ngày",
+    "Dành hai vai trò khác nhau",
+    "Mọi người tự chọn bất kỳ giờ"
+   ],
+   "a": 1,
+   "e": "Cần đối chiếu 対象者 trước khi gọi hai con số là sai khác.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Chuẩn bị ba nguồn thứ hai/thứ ba/hôm nay, mỗi nguồn có vai trò và cửa riêng; làm thẻ mới cửa tây cho bài viết chuyển giao.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Đưa ba nguồn cùng lúc, yêu cầu lập cột ngày, người áp dụng, giờ, cửa rồi mới chọn lịch bản thân."
+   },
+   {
+    "t": "30'",
+    "do": "Ôn bị động, kính ngữ, được phép, kỳ vọng và nhượng bộ qua các câu nguồn; không dùng hình thức kính ngữ làm căn cứ đúng sai."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe đối chiếu, tìm hai giờ không mâu thuẫn do vai trò và điểm đổi cửa áp dụng toàn bộ."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc chuỗi thông báo, phân quyền xem riêng với quyền toàn nhóm và xác định lịch sử phát chưa kiểm."
+   },
+   {
+    "t": "30'",
+    "do": "Nói thẻ cửa tây, viết 180–240 chữ rồi dùng bảng trường thông tin kiểm mọi điều kiện quan trọng còn giữ."
+   },
+   {
+    "t": "30'",
+    "do": "Tổ chức truyền tin qua ba kênh, làm nghe-chính tả và đánh giá câu cuối có giữ vai trò cùng nguồn hay không."
+   }
+  ],
+  "games": [
+   "Mỗi nhóm giữ một kênh, phải hỏi ngày và đối tượng mới tìm được lịch đúng; con số đứng riêng không được tính đáp án.",
+   "Rút gọn thông báo còn hai câu nhưng phải giữ cửa, giờ theo vai trò và nhãn phần chưa kiểm."
+  ],
+  "errors": [
+   "Chọn giờ mới nhất mà bỏ vai trò: nối mỗi mốc với対象者.",
+   "Coi giấy có dấu chính thức luôn mới: kiểm改訂日 riêng.",
+   "Suy quyền xem riêng thành ai cũng vào sớm: giữ nhãn個別の許可.",
+   "Ghi có người cố ý phát sai từ câu khả năng: sửa thành chưa kiểm lịch sử phát."
+  ],
+  "homework": "Tạo ba thông báo giả có một thay đổi thật và một khác biệt do vai trò; viết phản hồi kiểm nguồn, giữ phần chưa chắc và đề nghị cập nhật các kênh."
+ }
+}

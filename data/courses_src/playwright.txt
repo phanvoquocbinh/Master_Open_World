@@ -4,7 +4,7 @@ icon: 🎭
 floor: 3
 room: 301
 level: Cơ bản → Trung bình
-hours: 6
+hours: 28
 summary: Viết test tự động cho web bằng Playwright từ con số 0: cài đặt, ghi thao tác bằng codegen, locator, assertion, Page Object Model và đọc báo cáo, trace khi test lỗi.
 
 ## LESSON playwright-01 | Playwright là gì và cài đặt trên Windows
@@ -13,39 +13,36 @@ summary: Viết test tự động cho web bằng Playwright từ con số 0: cà
 Hãy tưởng tượng bạn có một "cánh tay robot" ngồi trước trình duyệt.
 Bạn đưa cho robot một tờ giấy ghi các bước: mở trang, gõ chữ, bấm nút, kiểm tra kết quả.
 Robot làm đúng từng bước, nhanh và không bao giờ mỏi tay.
-• Playwright là thư viện mã nguồn mở (do Microsoft phát triển) để điều khiển trình duyệt bằng code.
+• Playwright là thư viện mã nguồn mở để điều khiển trình duyệt bằng code.
 • Chạy được trên Chromium (Chrome, Edge), Firefox và WebKit (nhân của Safari).
 • Tester dùng nó cho kiểm thử giao diện đầu-cuối (E2E): viết kịch bản một lần, chạy lại bao nhiêu lần cũng được.
 • Trong khóa này ta dùng TypeScript, nhưng bạn chỉ cần biết JavaScript căn bản (Tầng 1, phòng 102).
 
 ### Bước 0: Kiểm tra Node.js đã có chưa
 Playwright chạy trên Node.js. Mở PowerShell (bấm Start, gõ PowerShell, Enter) rồi gõ:
-~~~bash
-node -v
-npm -v
-~~~
 Giải thích từng dòng:
 • node -v: hỏi phiên bản Node.js. Kết quả mong đợi dạng v20.x.x hoặc v22.x.x.
 • npm -v: hỏi phiên bản npm (trình cài thư viện đi kèm Node). Kết quả dạng 10.x.x.
 Nếu báo "'node' is not recognized..." nghĩa là chưa cài Node.js hoặc chưa có trong PATH: quay lại phòng 101 để cài bản LTS rồi mở lại PowerShell.
+~~~bash
+node -v
+npm -v
+~~~
 
 ### Bước 1: Tạo thư mục dự án
 Mỗi dự án test nên có một thư mục riêng, giống như mỗi môn học có một cuốn vở riêng.
-~~~bash
-mkdir pw-hoc
-cd pw-hoc
-code .
-~~~
 Giải thích từng dòng:
 • mkdir pw-hoc: tạo thư mục mới tên pw-hoc ở vị trí hiện tại.
 • cd pw-hoc: đi vào bên trong thư mục đó.
 • code . : mở VS Code tại thư mục hiện tại (dấu chấm nghĩa là "ở đây").
 Từ giờ, bạn có thể dùng Terminal ngay trong VS Code: menu Terminal → New Terminal.
+~~~bash
+mkdir pw-hoc
+cd pw-hoc
+code .
+~~~
 
 ### Bước 2: Cài Playwright bằng một lệnh
-~~~bash
-npm init playwright@latest
-~~~
 Lệnh này tải bộ khởi tạo mới nhất của Playwright và hỏi bạn vài câu. Chọn như sau (dùng phím mũi tên và Enter):
 • Do you want to use TypeScript or JavaScript? → TypeScript
 • Where to put your end-to-end tests? → tests (Enter để giữ mặc định)
@@ -53,8 +50,19 @@ Lệnh này tải bộ khởi tạo mới nhất của Playwright và hỏi bạ
 • Install Playwright browsers? → Y (tải Chromium, Firefox, WebKit, mất vài phút)
 Nếu được hỏi "Need to install the following packages: create-playwright... Ok to proceed? (y)" thì gõ y rồi Enter.
 Khi xong sẽ thấy dòng "Happy hacking! 🎭".
+~~~bash
+npm init playwright@latest
+~~~
 
 ### Các file vừa được tạo
+Giải thích từng dòng:
+• .github/workflows/playwright.yml: kịch bản để GitHub tự chạy test (học ở tầng 5).
+• node_modules/: kho thư viện đã tải về. Không sửa tay, không đưa lên Git.
+• tests/example.spec.ts: file test mẫu. Đuôi .spec.ts nghĩa là "file đặc tả test".
+• package.json: "lý lịch" dự án, ghi các thư viện đang dùng (có @playwright/test).
+• package-lock.json: ghi chính xác phiên bản từng thư viện để máy ai cài cũng giống nhau.
+• playwright.config.ts: bảng điều khiển trung tâm (trình duyệt nào, timeout, báo cáo...).
+Một số phiên bản còn tạo thêm thư mục tests-examples với ví dụ dài hơn, cứ để đó tham khảo.
 ~~~text
 pw-hoc/
 ├── .github/workflows/playwright.yml
@@ -65,38 +73,114 @@ pw-hoc/
 ├── package-lock.json
 └── playwright.config.ts
 ~~~
-Giải thích từng dòng:
-• .github/workflows/playwright.yml: kịch bản để GitHub tự chạy test (học ở tầng 5).
-• node_modules/: kho thư viện đã tải về. Không sửa tay, không đưa lên Git.
-• tests/example.spec.ts: file test mẫu. Đuôi .spec.ts nghĩa là "file đặc tả test".
-• package.json: "lý lịch" dự án, ghi các thư viện đang dùng (có @playwright/test).
-• package-lock.json: ghi chính xác phiên bản từng thư viện để máy ai cài cũng giống nhau.
-• playwright.config.ts: bảng điều khiển trung tâm (trình duyệt nào, timeout, báo cáo...).
-Một số phiên bản còn tạo thêm thư mục tests-examples với ví dụ dài hơn, cứ để đó tham khảo.
 
 ### Bước 3: Chạy test mẫu lần đầu
-~~~bash
-npx playwright test
+Trước khi chạy, lưu và bật UI fixture tự viết ở slide cuối bài trên localhost:3131. Thay toàn bộ tests/example.spec.ts được bộ khởi tạo tạo ra bằng hai test gốc bên dưới; không chạy test trỏ website công khai. Từ terminal project, chạy npx playwright test. Với cấu hình ba project chromium/firefox/webkit và đúng hai test này, có6 lượt chạy; số worker/thời gian phụ thuộc máy và config. Nếu chỉ cấu hình chromium thì có2 lượt, không coi số6 là điều kiện bắt buộc.
+Test has title kiểm title của TodoLab, test thứ hai kiểm heading. Mặc định headless; mở report bằng npx playwright show-report. Các bài sau dùng -g "has title" để lọc đúng tên này.
+~~~ts
+import {test,expect} from '@playwright/test';
+test('has title',async ({page})=>{
+ await page.goto('http://localhost:3131/todomvc');
+ await expect(page).toHaveTitle('Mầm Todo Lab');
+});
+test('hiện tên bảng việc Mầm',async ({page})=>{
+ await page.goto('http://localhost:3131/todomvc');
+ await expect(page.getByRole('heading',{name:'Việc của Mầm'})).toBeVisible();
+});
 ~~~
-Giải thích:
-• npx: chạy một công cụ nằm trong node_modules của dự án mà không cần cài toàn cục.
-• playwright test: bảo Playwright tìm và chạy mọi file test trong thư mục tests.
-Kết quả mong đợi (số giây sẽ khác):
-Running 6 tests using 3 workers
-  6 passed (8.1s)
-To open last HTML report run: npx playwright show-report
-Vì sao 6 test? File mẫu có 2 test, chạy trên 3 trình duyệt (chromium, firefox, webkit) nên 2 × 3 = 6.
-Mặc định trình duyệt chạy ẩn (headless) nên bạn sẽ không thấy cửa sổ nào bật lên. Đó là bình thường.
 
 ### Lỗi thường gặp
+• Lỗi 1 (PowerShell chặn script): gõ npx.cmd playwright test thay cho npx, hoặc dùng Command Prompt. Nếu được phép, chạy Set-ExecutionPolicy -Scope CurrentUser RemoteSigned (máy công ty thì hỏi IT trước).
+• Lỗi 2 (chưa tải trình duyệt): chạy npx playwright install rồi chạy test lại.
+• Lỗi 3 (chưa có Node.js trong PATH): cài Node.js LTS, đóng và mở lại cửa sổ terminal.
 ~~~text
 npx : File C:\Program Files\nodejs\npx.ps1 cannot be loaded because running scripts is disabled on this system.
 Error: browserType.launch: Executable doesn't exist at C:\Users\...\ms-playwright\chromium-...\chrome.exe
 'npx' is not recognized as an internal or external command
 ~~~
-• Lỗi 1 (PowerShell chặn script): gõ npx.cmd playwright test thay cho npx, hoặc dùng Command Prompt. Nếu được phép, chạy Set-ExecutionPolicy -Scope CurrentUser RemoteSigned (máy công ty thì hỏi IT trước).
-• Lỗi 2 (chưa tải trình duyệt): chạy npx playwright install rồi chạy test lại.
-• Lỗi 3 (chưa có Node.js trong PATH): cài Node.js LTS, đóng và mở lại cửa sổ terminal.
+
+### Dựng giao diện lab gốc trên localhost
+Lưu mã dưới thành lab_ui_fixture.py trong thư mục bài tập riêng và chạy python lab_ui_fixture.py. Mở localhost:3131/todomvc để học các bài3–8. Server chỉlắng localhost,không có tài khoản thật hoặc dữ liệu ngoài. Todo fixture không bao gồm mọi chức năng hoặcCSS của app khác;chỉ contract trong bài được bảo đảm. Các bài9–13 đặt lớp ở localhost:3100 là lab khác,cần dựng theo hợp đồng riêng.
+~~~python
+from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
+from urllib.parse import urlsplit,parse_qs
+from html import escape
+import json
+TODO="""<!doctype html><html lang=vi><meta charset=utf-8><title>Mầm Todo Lab</title>
+<h1>Việc của Mầm</h1><main class=todoapp>
+<input class=new-todo placeholder="What needs to be done?" aria-label="What needs to be done?">
+<section class=main><ul class=todo-list></ul></section>
+<footer><span data-testid=todo-count></span>
+<a href=#/>All</a> <a href=#/active>Active</a> <a href=#/completed>Completed</a>
+<button class=clear-completed>Clear completed</button></footer></main>
+<script>
+let tasks=JSON.parse(localStorage.getItem('mam-tasks')||'[]');
+const input=document.querySelector('.new-todo'),list=document.querySelector('.todo-list');
+function render(){
+ localStorage.setItem('mam-tasks',JSON.stringify(tasks));list.replaceChildren();
+ tasks.forEach((x,i)=>{
+  if(location.hash.includes('active')&&x.done)return;
+  if(location.hash.includes('completed')&&!x.done)return;
+  const row=document.createElement('li');row.dataset.testid='todo-item';
+  row.className=x.done?'completed':'';
+  const box=document.createElement('input');box.type='checkbox';box.className='toggle';
+  box.ariaLabel='Toggle Todo';box.checked=x.done;
+  box.onchange=()=>{x.done=box.checked;render();};
+  const label=document.createElement('label');label.dataset.testid='todo-title';label.textContent=x.text;
+  const del=document.createElement('button');del.className='destroy';del.ariaLabel='Delete';
+  del.textContent='×';del.onclick=()=>{tasks.splice(i,1);render();};
+  row.append(box,label,del);list.append(row);
+ });
+ const n=tasks.filter(x=>!x.done).length;
+ document.querySelector('[data-testid=todo-count]').textContent=n+(n===1?' item left':' items left');
+ document.querySelector('.clear-completed').hidden=!tasks.some(x=>x.done);
+}
+input.onkeydown=e=>{if(e.key==='Enter'&&input.value.trim()){
+ tasks.push({text:input.value.trim(),done:false});input.value='';render();}};
+document.querySelector('.clear-completed').onclick=()=>{tasks=tasks.filter(x=>!x.done);render();};
+window.onhashchange=render;render();
+</script></html>"""
+def browser_page(path,query):
+ if path.startswith('/todomvc'):return TODO
+ if path=='/login':return """<h2>Lab Login</h2><form action=/authenticate>
+ <label for=username>Tên lab</label><input id=username name=username>
+ <label for=password>Chuỗi lab</label><input type=password id=password name=password>
+ <button type=submit>Vào lab</button></form><div id=flash></div>"""
+ if path=='/authenticate':
+  ok=query.get('username')==['lab-student'] and query.get('password')==['LAB_ONLY_NOT_SECRET']
+  text='Lab login accepted' if ok else 'Lab secret rejected'
+  return f'<h2>Lab result</h2><div id=flash class={"success" if ok else "error"}>{text}</div>'
+ if path=='/checkboxes':return '<h3>Lab checkboxes</h3><form id=checkboxes><input type=checkbox><input type=checkbox checked></form>'
+ if path.startswith('/dynamic_loading/'):
+  hidden=path.endswith('/1')
+  existing='<div id=finish hidden>Hello lab!</div>' if hidden else ''
+  script="document.getElementById('finish').hidden=false" if hidden else "document.body.insertAdjacentHTML('beforeend','<div id=finish>Hello lab!</div>')"
+  return '<div id=start><button onclick="setTimeout(()=>{'+script+'},700)">Start</button></div>'+existing
+ if path=='/dynamic_controls':return """<div id=checkbox><input type=checkbox></div>
+ <button onclick="setTimeout(()=>{document.getElementById('checkbox').remove();document.getElementById('message').textContent='Removed in lab';},600)">Remove</button><p id=message></p>"""
+ if path=='/dropdown':return '<h3>Lab select</h3><select id=dropdown><option value="">Choose</option><option value=1>Option 1</option><option value=2>Option 2</option></select>'
+ if path=='/javascript_alerts':return """<h3>Lab dialogs</h3>
+ <button onclick="alert('Lab alert');document.getElementById('result').textContent='Lab alert accepted'">Click for JS Alert</button>
+ <button onclick="document.getElementById('result').textContent=confirm('Lab confirm')?'OK':'Cancelled'">Click for JS Confirm</button>
+ <button onclick="document.getElementById('result').textContent='Lab input: '+prompt('Lab prompt')">Click for JS Prompt</button><p id=result></p>"""
+ if path=='/iframe':return '<h3>Lab frame</h3><iframe id=mce_0_ifr title="Lab editor" src=/frame></iframe>'
+ if path=='/frame':return '<body id=tinymce contenteditable=true>Lab editable text.</body>'
+ if path=='/windows':return '<h3>Lab windows</h3><a href=/windows/new target=_blank>Click Here</a>'
+ if path=='/windows/new':return '<h3>Lab New Window</h3>'
+ if path=='/secure':return '<h3>Lab secure placeholder</h3>'
+ return '<h1>UI fixture Mầm</h1><a href=/login>Login</a><a href=/todomvc>Todo</a>'
+class LabUI(BaseHTTPRequestHandler):
+ def log_message(self,*args):pass
+ def do_GET(self):
+  url=urlsplit(self.path);body=browser_page(url.path,parse_qs(url.query))
+  raw=('<!doctype html><html lang=vi><meta charset=utf-8><title>UI Lab Mầm</title>'+body).encode('utf-8') if not body.startswith('<!doctype') else body.encode('utf-8')
+  self.send_response(200);self.send_header('Content-Type','text/html; charset=utf-8')
+  self.send_header('Content-Length',str(len(raw)));self.end_headers();self.wfile.write(raw)
+if __name__=='__main__':
+ print('UI fixture http://localhost:3131 ; Ctrl+C để dừng')
+ ThreadingHTTPServer(('localhost',3131),LabUI).serve_forever()
+
+~~~
 
 PRACTICE: Tạo thư mục pw-hoc, chạy npm init playwright@latest với TypeScript, sau đó chạy npx playwright test và ghi lại dòng tổng kết (bao nhiêu test passed, mất bao nhiêu giây).
 Q: Lệnh nào tạo một dự án Playwright mới?
@@ -118,68 +202,68 @@ Q: Thấy lỗi "Executable doesn't exist at ...chrome.exe", bạn nên làm gì
 • Headless (không đầu): trình duyệt chạy ẩn, không hiện cửa sổ. Nhanh, tiết kiệm máy, dùng trên server CI.
 • Headed (có đầu): trình duyệt hiện ra, bạn nhìn thấy robot gõ và bấm. Dùng khi học hoặc khi tìm lỗi.
 Giống như xem trận bóng: headless là chỉ đọc tỉ số, headed là xem trực tiếp trên TV.
-~~~bash
-npx playwright test --headed
-~~~
 Giải thích:
 • --headed: bật chế độ hiện cửa sổ trình duyệt cho lần chạy này (không đổi file config).
 Kết quả: bạn sẽ thấy các cửa sổ trình duyệt bật lên rồi tự đóng rất nhanh.
+~~~bash
+npx playwright test --headed
+~~~
 
 ### Chỉ chạy một phần test
 Khi dự án có hàng trăm test, bạn thường chỉ muốn chạy một ít.
-~~~bash
-npx playwright test --project=chromium
-npx playwright test tests/example.spec.ts
-npx playwright test -g "has title"
-npx playwright test tests/example.spec.ts:3
-~~~
 Giải thích từng dòng:
 • --project=chromium: chỉ chạy trên trình duyệt chromium (tên project lấy trong playwright.config.ts).
 • tests/example.spec.ts: chỉ chạy đúng một file.
 • -g "has title": chỉ chạy test có tên chứa cụm "has title" (g = grep, nghĩa là lọc theo chữ).
 • :3 ở cuối: chỉ chạy test bắt đầu ở dòng 3 của file đó.
 Có thể kết hợp: npx playwright test --project=chromium --headed -g "has title".
+~~~bash
+npx playwright test --project=chromium
+npx playwright test tests/example.spec.ts
+npx playwright test -g "has title"
+npx playwright test tests/example.spec.ts:3
+~~~
 
 ### UI Mode: bảng điều khiển trực quan
-~~~bash
-npx playwright test --ui
-~~~
 Giải thích:
 • --ui: mở cửa sổ UI Mode. Bên trái là danh sách test, bấm nút ▶ để chạy từng test.
 • Mỗi bước (goto, click, expect...) được ghi lại kèm ảnh chụp, bạn bấm vào để "tua lại" xem trang lúc đó.
 • Có chế độ "watch" (biểu tượng con mắt): sửa code và lưu file là test tự chạy lại.
 Đây là cách học Playwright dễ chịu nhất cho người mới.
+~~~bash
+npx playwright test --ui
+~~~
 
 ### Chạy từng bước với --debug
-~~~bash
-npx playwright test -g "has title" --debug
-~~~
 Giải thích:
 • --debug: mở trình duyệt có đầu cùng cửa sổ Playwright Inspector, test dừng ở bước đầu tiên.
 • Bấm nút Step over (mũi tên cong) để đi từng lệnh một, giống xem phim từng khung hình.
 • Bấm Resume (▶) để chạy tiếp đến hết.
 Mẹo: chỉ debug một test (dùng -g) để khỏi phải bấm qua hàng chục test khác.
+~~~bash
+npx playwright test -g "has title" --debug
+~~~
 
 ### Mở báo cáo HTML
-~~~bash
-npx playwright show-report
-~~~
 Giải thích:
 • Sau mỗi lần chạy, Playwright lưu báo cáo trong thư mục playwright-report.
 • Lệnh này mở báo cáo trên trình duyệt (địa chỉ dạng http://localhost:9323).
 • Báo cáo có bộ lọc Passed / Failed / Flaky / Skipped, bấm vào từng test để xem từng bước, lỗi, ảnh chụp.
 • Nhấn Ctrl+C trong terminal để tắt máy chủ báo cáo khi xem xong.
 Nếu test bị lỗi, Playwright thường tự mở báo cáo này ngay sau khi chạy.
+~~~bash
+npx playwright show-report
+~~~
 
 ### Lỗi thường gặp
+• Lỗi 1: gõ sai tên project. Dùng đúng tên trong playwright.config.ts, ví dụ chromium chứ không phải chrome.
+• Lỗi 2: đường dẫn file sai, chữ trong -g không khớp tên test nào, hoặc file không nằm trong testDir. Kiểm tra lại chính tả và thư mục.
+• Lỗi 3: một báo cáo khác đang mở ở cổng 9323. Tìm terminal cũ và nhấn Ctrl+C, hoặc dùng npx playwright show-report --port 9400.
 ~~~text
 Error: Project(s) "chrome" not found. Available projects: "chromium", "firefox", "webkit"
 Error: No tests found
 Error: listen EADDRINUSE: address already in use ::1:9323
 ~~~
-• Lỗi 1: gõ sai tên project. Dùng đúng tên trong playwright.config.ts, ví dụ chromium chứ không phải chrome.
-• Lỗi 2: đường dẫn file sai, chữ trong -g không khớp tên test nào, hoặc file không nằm trong testDir. Kiểm tra lại chính tả và thư mục.
-• Lỗi 3: một báo cáo khác đang mở ở cổng 9323. Tìm terminal cũ và nhấn Ctrl+C, hoặc dùng npx playwright show-report --port 9400.
 
 PRACTICE: Chạy test mẫu 3 cách: (1) chỉ chromium và headed, (2) chỉ test "has title" bằng -g, (3) mở UI Mode và bấm chạy từng test. Sau đó mở báo cáo HTML và chụp màn hình phần chi tiết một test.
 Q: Muốn nhìn thấy trình duyệt khi test chạy, bạn thêm cờ nào?
@@ -195,24 +279,19 @@ Q: Cờ -g "login" dùng để làm gì?
 + Chỉ chạy các test có tên chứa chữ "login"
 - Tạo file test mới tên login
 
-## LESSON playwright-03 | Viết test đầu tiên trên trang TodoMVC
+## LESSON playwright-03 | Viết test đầu tiên trên trang Todo Lab tự viết
 
 ### Trang để luyện tập
-Ta dùng trang demo công khai của Playwright: https://demo.playwright.dev/todomvc
-Đây là ứng dụng "danh sách việc cần làm": gõ việc vào ô, nhấn Enter, việc hiện trong danh sách.
-Kịch bản kiểm thử bằng lời (test case thủ công):
-• Bước 1: Mở trang TodoMVC.
-• Bước 2: Gõ "Mua sữa" vào ô "What needs to be done?" rồi nhấn Enter.
-• Kết quả mong đợi: danh sách có dòng "Mua sữa", bộ đếm hiện "1 item left".
-Việc của ta: dịch từng bước này thành code.
+Trang Todo Lab tại localhost:3131/todomvc được cung cấp bằng code Python tự viết bên dưới. Không cần truy cập demo công khai. Input Enter thêm việc,checkbox đánh dấu,buttonDelete xóa,các linkAll/Active/Completed lọc;localStorage giữ dữ liệu theo browser context. Mỗi test context mới phải bắt đầu sạch;đây là fixture nhỏ cho locator/assertion,không phải app TodoMVC được sao chép.
 
 ### Code test hoàn chỉnh
 Tạo file mới tests/todo.spec.ts và gõ:
+Slide sau sẽ giải thích từng dòng.
 ~~~ts
 import { test, expect } from '@playwright/test';
 
 test('thêm một việc cần làm', async ({ page }) => {
-  await page.goto('https://demo.playwright.dev/todomvc');
+  await page.goto('http://localhost:3131/todomvc');
   const input = page.getByPlaceholder('What needs to be done?');
   await input.fill('Mua sữa');
   await input.press('Enter');
@@ -220,7 +299,6 @@ test('thêm một việc cần làm', async ({ page }) => {
   await expect(page.getByTestId('todo-count')).toHaveText('1 item left');
 });
 ~~~
-Slide sau sẽ giải thích từng dòng.
 
 ### Giải thích từng dòng
 • import { test, expect } from '@playwright/test': lấy 2 công cụ từ thư viện. test để khai báo một bài test, expect để kiểm tra kết quả.
@@ -235,25 +313,30 @@ Slide sau sẽ giải thích từng dòng.
 Nếu một expect sai, test dừng và báo FAILED kèm lý do.
 
 ### Chạy test và xem kết quả
-~~~bash
-npx playwright test tests/todo.spec.ts --project=chromium --headed
-~~~
 Giải thích:
 • Chỉ chạy file todo.spec.ts, chỉ trên chromium, có hiện trình duyệt để bạn quan sát.
 Kết quả mong đợi:
 Running 1 test using 1 worker
-  ✓  1 [chromium] › tests/todo.spec.ts:3:5 › thêm một việc cần làm (1.5s)
-  1 passed (2.3s)
+✓  1 [chromium] › tests/todo.spec.ts:3:5 › thêm một việc cần làm (1.5s)
+1 passed (2.3s)
 Thử làm test hỏng có chủ đích: sửa 'Mua sữa' trong expect thành 'Mua trà' rồi chạy lại. Bạn sẽ thấy Expected "Mua trà", Received "Mua sữa". Đây là cách test "bắt lỗi".
+~~~bash
+npx playwright test tests/todo.spec.ts --project=chromium --headed
+~~~
 
 ### Gom nhóm test với describe và beforeEach
 Khi nhiều test cùng bắt đầu bằng một bước (mở trang), ta gom bước chung vào beforeEach, giống như "trước mỗi tiết học đều phải điểm danh".
+Giải thích từng dòng:
+• test.describe('Todo Lab tự viết', ...): tạo một nhóm test, trong báo cáo sẽ hiện "Todo Lab tự viết › thêm 2 việc".
+• test.beforeEach(...): đoạn code chạy trước MỖI test trong nhóm. Ở đây là mở trang.
+• toHaveText([...]): khi truyền vào một mảng, Playwright kiểm tra danh sách phần tử có đúng thứ tự các chữ đó.
+Ngoài ra còn có test.afterEach (chạy sau mỗi test), test.beforeAll và test.afterAll (chạy một lần cho cả nhóm).
 ~~~ts
 import { test, expect } from '@playwright/test';
 
-test.describe('TodoMVC', () => {
+test.describe('Todo Lab tự viết', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://demo.playwright.dev/todomvc');
+    await page.goto('http://localhost:3131/todomvc');
   });
 
   test('thêm 2 việc', async ({ page }) => {
@@ -266,13 +349,11 @@ test.describe('TodoMVC', () => {
   });
 });
 ~~~
-Giải thích từng dòng:
-• test.describe('TodoMVC', ...): tạo một nhóm test, trong báo cáo sẽ hiện "TodoMVC › thêm 2 việc".
-• test.beforeEach(...): đoạn code chạy trước MỖI test trong nhóm. Ở đây là mở trang.
-• toHaveText([...]): khi truyền vào một mảng, Playwright kiểm tra danh sách phần tử có đúng thứ tự các chữ đó.
-Ngoài ra còn có test.afterEach (chạy sau mỗi test), test.beforeAll và test.afterAll (chạy một lần cho cả nhóm).
 
 ### Lỗi thường gặp
+• Lỗi 1: kết quả thực tế khác mong đợi. Đọc kỹ Expected (mong đợi) và Received (nhận được). Có thể app bị bug thật, hoặc test viết sai.
+• Lỗi 2: thường do quên chữ await trước một lệnh. Test chạy xong và đóng trình duyệt trong khi lệnh vẫn đang chạy. Cách sửa: thêm await trước mọi lệnh page..., locator... và expect(locator)...
+• Mẹo: VS Code cài extension "Playwright Test for VSCode" sẽ cảnh báo và cho chạy test bằng nút ▶ cạnh từng test.
 ~~~text
 Error: expect(locator).toHaveText(expected) failed
 Expected string: "Mua trà"
@@ -280,11 +361,8 @@ Received string: "Mua sữa"
 
 Error: page.goto: Target page, context or browser has been closed
 ~~~
-• Lỗi 1: kết quả thực tế khác mong đợi. Đọc kỹ Expected (mong đợi) và Received (nhận được). Có thể app bị bug thật, hoặc test viết sai.
-• Lỗi 2: thường do quên chữ await trước một lệnh. Test chạy xong và đóng trình duyệt trong khi lệnh vẫn đang chạy. Cách sửa: thêm await trước mọi lệnh page..., locator... và expect(locator)...
-• Mẹo: VS Code cài extension "Playwright Test for VSCode" sẽ cảnh báo và cho chạy test bằng nút ▶ cạnh từng test.
 
-PRACTICE: Viết file tests/todo.spec.ts có nhóm "TodoMVC" với beforeEach mở trang và 2 test: (1) thêm 1 việc rồi kiểm tra "1 item left", (2) thêm 3 việc rồi kiểm tra bộ đếm "3 items left". Chạy bằng --headed.
+PRACTICE: Viết file tests/todo.spec.ts có nhóm "Todo Lab tự viết" với beforeEach mở trang và 2 test: (1) thêm 1 việc rồi kiểm tra "1 item left", (2) thêm 3 việc rồi kiểm tra bộ đếm "3 items left". Chạy bằng --headed.
 Q: Chữ await trước page.goto(...) có tác dụng gì?
 - Làm trang web tải nhanh hơn
 + Chờ bước này xong rồi mới chạy bước tiếp theo
@@ -305,13 +383,13 @@ Codegen giống như máy ghi âm: bạn bấm "ghi", thao tác trên trang web,
 • Rất hợp cho người mới: nhìn code sinh ra để học cách viết.
 • Giúp tìm locator nhanh: rê chuột lên phần tử là thấy cách Playwright gọi tên nó.
 • Lưu ý: code sinh ra là bản nháp. Bạn vẫn phải đặt tên test, thêm kiểm tra (expect) và dọn dẹp.
-~~~bash
-npx playwright codegen https://demo.playwright.dev/todomvc
-~~~
 Giải thích:
 • codegen: bật chế độ ghi.
 • Địa chỉ phía sau: trang sẽ được mở sẵn để bạn bắt đầu thao tác.
 Kết quả: hai cửa sổ hiện ra, một trình duyệt và một cửa sổ Playwright Inspector đang viết code.
+~~~bash
+npx playwright codegen http://localhost:3131/todomvc
+~~~
 
 ### Hai cửa sổ của codegen
 Cửa sổ trình duyệt:
@@ -327,17 +405,6 @@ Cửa sổ Playwright Inspector:
 
 ### Code mà codegen sinh ra
 Sau khi gõ "Mua sữa", Enter, rồi tick vào ô tròn để đánh dấu hoàn thành, code có dạng:
-~~~ts
-import { test, expect } from '@playwright/test';
-
-test('test', async ({ page }) => {
-  await page.goto('https://demo.playwright.dev/todomvc/#/');
-  await page.getByRole('textbox', { name: 'What needs to be done?' }).click();
-  await page.getByRole('textbox', { name: 'What needs to be done?' }).fill('Mua sữa');
-  await page.getByRole('textbox', { name: 'What needs to be done?' }).press('Enter');
-  await page.getByRole('checkbox', { name: 'Toggle Todo' }).check();
-});
-~~~
 Giải thích từng dòng:
 • Tên test là 'test': cần đổi thành tên có ý nghĩa.
 • getByRole('textbox', { name: ... }): tìm ô nhập theo vai trò "textbox" và tên hiển thị. Đây là cách tìm được khuyến nghị.
@@ -345,13 +412,30 @@ Giải thích từng dòng:
 • check(): tick vào ô checkbox của việc vừa thêm.
 • Chưa có expect nào: test này chỉ "làm" mà chưa "kiểm tra" gì cả.
 Code thực tế trên máy bạn có thể khác chút tùy phiên bản và cách bạn bấm.
+~~~ts
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('http://localhost:3131/todomvc/#/');
+  await page.getByRole('textbox', { name: 'What needs to be done?' }).click();
+  await page.getByRole('textbox', { name: 'What needs to be done?' }).fill('Mua sữa');
+  await page.getByRole('textbox', { name: 'What needs to be done?' }).press('Enter');
+  await page.getByRole('checkbox', { name: 'Toggle Todo' }).check();
+});
+~~~
 
 ### Dọn dẹp code sau khi ghi
+Giải thích các thay đổi:
+• Đặt tên test mô tả hành vi.
+• Lưu locator ô nhập vào biến input để không lặp lại 3 lần.
+• Bỏ click() thừa.
+• Thêm 2 expect: dòng việc có class chứa "completed" (bị gạch ngang) và bộ đếm còn "0 items left".
+Quy tắc nhớ: ghi bằng codegen, nhưng kiểm tra bằng đầu óc tester.
 ~~~ts
 import { test, expect } from '@playwright/test';
 
 test('đánh dấu một việc là hoàn thành', async ({ page }) => {
-  await page.goto('https://demo.playwright.dev/todomvc');
+  await page.goto('http://localhost:3131/todomvc');
   const input = page.getByRole('textbox', { name: 'What needs to be done?' });
   await input.fill('Mua sữa');
   await input.press('Enter');
@@ -360,38 +444,32 @@ test('đánh dấu một việc là hoàn thành', async ({ page }) => {
   await expect(page.getByTestId('todo-count')).toHaveText('0 items left');
 });
 ~~~
-Giải thích các thay đổi:
-• Đặt tên test mô tả hành vi.
-• Lưu locator ô nhập vào biến input để không lặp lại 3 lần.
-• Bỏ click() thừa.
-• Thêm 2 expect: dòng việc có class chứa "completed" (bị gạch ngang) và bộ đếm còn "0 items left".
-Quy tắc nhớ: ghi bằng codegen, nhưng kiểm tra bằng đầu óc tester.
 
 ### Các tùy chọn hữu ích của codegen
-~~~bash
-npx playwright codegen -o tests/ghi-lai.spec.ts https://demo.playwright.dev/todomvc
-npx playwright codegen --device="iPhone 13" https://demo.playwright.dev/todomvc
-npx playwright codegen --viewport-size=800,600 https://demo.playwright.dev/todomvc
-~~~
 Giải thích từng dòng:
 • -o tests/ghi-lai.spec.ts: lưu code thẳng vào file thay vì phải copy (o = output).
-• --device="iPhone 13": giả lập màn hình và trình duyệt của điện thoại iPhone 13.
+• --viewport-size="390,844": đặt viewport390×844CSSpx cho thiết kế lab tự đặt. Đây là kiểm viewport, chưa mô phỏng đầy đủ touch/user-agent/OS hoặc thiết bị thật.
 • --viewport-size=800,600: mở trình duyệt với khung nhìn rộng 800, cao 600 pixel.
 Đóng cửa sổ trình duyệt là kết thúc phiên ghi.
+~~~bash
+npx playwright codegen -o tests/ghi-lai.spec.ts http://localhost:3131/todomvc
+npx playwright codegen --viewport-size="390,844" http://localhost:3131/todomvc
+npx playwright codegen --viewport-size=800,600 http://localhost:3131/todomvc
+~~~
 
 ### Lỗi thường gặp
+• Lỗi 1: codegen chụp lại dữ liệu thay đổi theo thời gian (giờ, mã ngẫu nhiên). Sửa locator thành phần ổn định hơn, ví dụ getByTestId hoặc getByRole kèm tên cố định.
+• Lỗi 2: quên thêm expect. Test không có expect giống như đi chợ mà không kiểm tra hàng. Luôn thêm ít nhất một kiểm tra cuối kịch bản.
+• Nếu cửa sổ codegen không mở: kiểm tra đã chạy npx playwright install chưa.
 ~~~text
 Lỗi: Code ghi lại chứa getByText('Mua sữa 12:05 05/11') rồi lần sau chạy không tìm thấy
 Lỗi: Test ghi lại chạy qua nhưng không phát hiện được bug nào
 ~~~
-• Lỗi 1: codegen chụp lại dữ liệu thay đổi theo thời gian (giờ, mã ngẫu nhiên). Sửa locator thành phần ổn định hơn, ví dụ getByTestId hoặc getByRole kèm tên cố định.
-• Lỗi 2: quên thêm expect. Test không có expect giống như đi chợ mà không kiểm tra hàng. Luôn thêm ít nhất một kiểm tra cuối kịch bản.
-• Nếu cửa sổ codegen không mở: kiểm tra đã chạy npx playwright install chưa.
 
 PRACTICE: Dùng codegen ghi kịch bản: thêm 2 việc, đánh dấu việc thứ nhất hoàn thành, bấm bộ lọc "Active". Lưu bằng -o vào tests/active.spec.ts, sau đó đặt lại tên test và thêm expect kiểm tra chỉ còn 1 việc hiển thị.
-Q: Lệnh nào mở chế độ ghi thao tác trên trang TodoMVC?
-- npx playwright record https://demo.playwright.dev/todomvc
-+ npx playwright codegen https://demo.playwright.dev/todomvc
+Q: Lệnh nào mở chế độ ghi thao tác trên trang Todo Lab tự viết?
+- npx playwright record http://localhost:3131/todomvc
++ npx playwright codegen http://localhost:3131/todomvc
 - npx playwright test --record
 Q: Điều gì thường THIẾU trong code do codegen sinh ra mà tester phải tự thêm?
 - Lệnh import
@@ -417,22 +495,29 @@ Thứ tự ưu tiên khi chọn locator (từ tốt nhất):
 Lý do: locator càng giống cách người dùng nhìn thấy trang thì càng ít bị hỏng khi giao diện đổi màu, đổi class.
 
 ### getByRole: cách được khuyến nghị
+Giải thích từng dòng:
+• Dòng 1: tìm nút (button) có tên hiển thị "Đăng nhập" rồi bấm (ví dụ chung, không có trên Todo Lab tự viết).
+• Dòng 2: tìm đường link tên "Completed" (bộ lọc trên Todo Lab tự viết) rồi bấm.
+• Dòng 3: tìm ô nhập chữ có tên "What needs to be done?" và gõ chữ vào.
+• Dòng 4: trong các checkbox tên "Toggle Todo" (ô tròn cạnh mỗi việc), lấy cái đầu tiên rồi tick. Lưu ý: trang còn một checkbox khác là "Mark all as complete", nên cần thêm name để không bấm nhầm.
+• Dòng 5: kiểm tra tiêu đề lớn "todos" đang hiển thị.
+Các role hay gặp: button, link, textbox, checkbox, radio, heading, listitem, combobox (dropdown), img, dialog.
 ~~~ts
 await page.getByRole('button', { name: 'Đăng nhập' }).click();
 await page.getByRole('link', { name: 'Completed' }).click();
 await page.getByRole('textbox', { name: 'What needs to be done?' }).fill('Học Playwright');
 await page.getByRole('checkbox', { name: 'Toggle Todo' }).first().check();
-await expect(page.getByRole('heading', { name: 'todos' })).toBeVisible();
+await expect(page.getByRole('heading', { name: 'Việc của Mầm' })).toBeVisible();
 ~~~
-Giải thích từng dòng:
-• Dòng 1: tìm nút (button) có tên hiển thị "Đăng nhập" rồi bấm (ví dụ chung, không có trên TodoMVC).
-• Dòng 2: tìm đường link tên "Completed" (bộ lọc trên TodoMVC) rồi bấm.
-• Dòng 3: tìm ô nhập chữ có tên "What needs to be done?" và gõ chữ vào.
-• Dòng 4: trong các checkbox tên "Toggle Todo" (ô tròn cạnh mỗi việc), lấy cái đầu tiên rồi tick. Lưu ý: trang còn một checkbox khác là "Mark all as complete", nên cần thêm name để không bấm nhầm.
-• Dòng 5: kiểm tra tiêu đề lớn "todos" đang hiển thị.
-Các role hay gặp: button, link, textbox, checkbox, radio, heading, listitem, combobox (dropdown), img, dialog.
 
 ### getByLabel, getByPlaceholder, getByText, getByTestId
+Giải thích từng dòng:
+• getByLabel: tìm ô có nhãn "Mark all as complete" (nút tick tất cả trên Todo Lab tự viết).
+• getByPlaceholder: tìm ô có chữ gợi ý mờ.
+• getByText('Mua sữa'): tìm phần tử chứa chữ "Mua sữa". Mặc định không phân biệt hoa thường và khớp một phần.
+• getByText('Clear completed'): bấm vào chữ "Clear completed" (chỉ hiện khi có việc đã hoàn thành).
+• getByTestId('todo-count'): tìm phần tử có thuộc tính data-testid="todo-count" trong HTML.
+Muốn khớp chính xác toàn bộ chữ: page.getByText('Mua sữa', { exact: true }).
 ~~~ts
 await page.getByLabel('Mark all as complete').check();
 await page.getByPlaceholder('What needs to be done?').fill('Mua sữa');
@@ -440,23 +525,8 @@ await expect(page.getByText('Mua sữa')).toBeVisible();
 await page.getByText('Clear completed').click();
 await expect(page.getByTestId('todo-count')).toContainText('item');
 ~~~
-Giải thích từng dòng:
-• getByLabel: tìm ô có nhãn "Mark all as complete" (nút tick tất cả trên TodoMVC).
-• getByPlaceholder: tìm ô có chữ gợi ý mờ.
-• getByText('Mua sữa'): tìm phần tử chứa chữ "Mua sữa". Mặc định không phân biệt hoa thường và khớp một phần.
-• getByText('Clear completed'): bấm vào chữ "Clear completed" (chỉ hiện khi có việc đã hoàn thành).
-• getByTestId('todo-count'): tìm phần tử có thuộc tính data-testid="todo-count" trong HTML.
-Muốn khớp chính xác toàn bộ chữ: page.getByText('Mua sữa', { exact: true }).
 
 ### CSS locator, filter và nth
-~~~ts
-const items = page.getByTestId('todo-item');
-await expect(items).toHaveCount(3);
-await items.nth(1).getByRole('checkbox').check();
-const suaRow = items.filter({ hasText: 'Mua sữa' });
-await suaRow.getByRole('checkbox').check();
-await page.locator('.todo-list li').first().hover();
-~~~
 Giải thích từng dòng:
 • items: locator trỏ tới TẤT CẢ dòng việc (mỗi dòng có data-testid="todo-item").
 • toHaveCount(3): kiểm tra có đúng 3 dòng.
@@ -465,32 +535,40 @@ Giải thích từng dòng:
 • suaRow.getByRole('checkbox'): tìm checkbox NẰM TRONG dòng đó (locator lồng nhau).
 • locator('.todo-list li'): dùng CSS selector, dấu chấm là class, li là thẻ dòng trong danh sách. first() lấy dòng đầu, hover() rê chuột lên.
 Mẹo: filter + locator lồng nhau giúp tránh dùng nth, vì thứ tự có thể đổi.
+~~~ts
+const items = page.getByTestId('todo-item');
+await expect(items).toHaveCount(3);
+await items.nth(1).getByRole('checkbox').check();
+const suaRow = items.filter({ hasText: 'Mua sữa' });
+await suaRow.getByRole('checkbox').check();
+await page.locator('.todo-list li').first().hover();
+~~~
 
 ### Tìm locator bằng công cụ có sẵn
-~~~bash
-npx playwright codegen https://demo.playwright.dev/todomvc
-~~~
 Cách làm:
 • Trong cửa sổ Inspector, bấm Pick locator rồi rê chuột lên phần tử cần tìm.
 • Locator hiện ra ở ô phía dưới, bấm vào là sao chép được.
 • Bạn có thể gõ thử locator vào ô đó, phần tử khớp sẽ được tô sáng trên trang.
 Cách khác: trong UI Mode (npx playwright test --ui) cũng có nút Pick locator tương tự.
 Cách thủ công: bấm F12 trên trình duyệt để mở DevTools, xem HTML của phần tử (id, data-testid, class).
+~~~bash
+npx playwright codegen -o tests/locator-lab.spec.ts http://localhost:3131/todomvc
+~~~
 
 ### Lỗi thường gặp: strict mode violation
-~~~text
-Error: locator.check: Error: strict mode violation: getByRole('checkbox') resolved to 3 elements:
-    1) <input type="checkbox" class="toggle" .../> aka getByTestId('todo-item').filter({ hasText: 'Mua sữa' }).getByLabel('Toggle Todo')
-    2) ...
-~~~
 Nguyên nhân: locator khớp NHIỀU phần tử, Playwright không biết bấm cái nào nên dừng lại để an toàn (strict mode).
 Cách sửa:
 • Làm locator cụ thể hơn: thêm name, dùng filter({ hasText: ... }) hoặc lồng trong một dòng cụ thể.
 • Nếu thật sự muốn cái đầu tiên: dùng .first(), .last() hoặc .nth(i).
 • Đọc gợi ý "aka ..." trong lỗi: Playwright gợi ý sẵn locator cho từng phần tử.
 Lỗi ngược lại: locator không khớp phần tử nào thì lệnh sẽ chờ đến hết timeout rồi báo lỗi.
+~~~text
+Error: locator.check: Error: strict mode violation: getByRole('checkbox') resolved to 3 elements:
+    1) <input type="checkbox" class="toggle" .../> aka getByTestId('todo-item').filter({ hasText: 'Mua sữa' }).getByLabel('Toggle Todo')
+    2) ...
+~~~
 
-PRACTICE: Trên TodoMVC thêm 3 việc "A", "B", "C". Viết test đánh dấu hoàn thành việc "B" bằng filter({ hasText: 'B' }) (không dùng nth), rồi bấm link "Completed" bằng getByRole và kiểm tra chỉ còn 1 dòng hiển thị.
+PRACTICE: Trên Todo Lab tự viết thêm 3 việc "A", "B", "C". Viết test đánh dấu hoàn thành việc "B" bằng filter({ hasText: 'B' }) (không dùng nth), rồi bấm link "Completed" bằng getByRole và kiểm tra chỉ còn 1 dòng hiển thị.
 Q: Theo khuyến nghị của Playwright, nên ưu tiên loại locator nào trước tiên?
 - locator('xpath=//div[3]/span')
 - locator('.css-class-123')
@@ -515,49 +593,55 @@ Playwright có "web-first assertions": chúng tự chờ và thử lại cho đ�
 Ví dụ đời thường: bạn đứng ở trạm chờ xe buýt tối đa 5 phút. Xe tới trong 2 phút thì đi luôn, quá 5 phút thì báo "xe không tới".
 
 ### Các assertion hay dùng nhất (phần 1)
-~~~ts
-await expect(page.getByRole('heading', { name: 'todos' })).toBeVisible();
-await expect(page.getByTestId('todo-title')).toHaveText('Mua sữa');
-await expect(page.getByTestId('todo-count')).toContainText('1');
-await expect(page.getByTestId('todo-item')).toHaveCount(1);
-~~~
 Giải thích từng dòng:
 • toBeVisible(): phần tử đang hiện trên màn hình.
 • toHaveText('Mua sữa'): chữ của phần tử khớp hoàn toàn (khoảng trắng thừa được bỏ qua).
 • toContainText('1'): chữ của phần tử CHỨA "1" (khớp một phần).
 • toHaveCount(1): locator khớp đúng 1 phần tử.
+~~~ts
+await expect(page.getByRole('heading', { name: 'Việc của Mầm' })).toBeVisible();
+await expect(page.getByTestId('todo-title')).toHaveText('Mua sữa');
+await expect(page.getByTestId('todo-count')).toContainText('1');
+await expect(page.getByTestId('todo-item')).toHaveCount(1);
+~~~
 
 ### Các assertion hay dùng nhất (phần 2)
+Giải thích từng dòng:
+• Bấm link "Active" để lọc việc chưa xong.
+• toHaveURL(/.*active/): địa chỉ trang có chứa chữ "active". Dấu /.../ là biểu thức chính quy (regex), học ở phòng 203.
+• toHaveTitle(/Todo Lab tự viết/): tiêu đề tab trình duyệt có chứa "Todo Lab tự viết".
+• toHaveValue('Học bài'): giá trị đang nằm trong ô nhập là "Học bài".
+• toBeChecked(): checkbox đang được tick (dòng này chỉ đúng nếu trước đó bạn đã tick một việc).
 ~~~ts
 await page.getByRole('link', { name: 'Active' }).click();
 await expect(page).toHaveURL(/.*active/);
-await expect(page).toHaveTitle(/TodoMVC/);
+await expect(page).toHaveTitle(/Todo Lab tự viết/);
 const input = page.getByPlaceholder('What needs to be done?');
 await input.fill('Học bài');
 await expect(input).toHaveValue('Học bài');
 await expect(page.getByTestId('todo-item').first().getByRole('checkbox')).toBeChecked();
 ~~~
-Giải thích từng dòng:
-• Bấm link "Active" để lọc việc chưa xong.
-• toHaveURL(/.*active/): địa chỉ trang có chứa chữ "active". Dấu /.../ là biểu thức chính quy (regex), học ở phòng 203.
-• toHaveTitle(/TodoMVC/): tiêu đề tab trình duyệt có chứa "TodoMVC".
-• toHaveValue('Học bài'): giá trị đang nằm trong ô nhập là "Học bài".
-• toBeChecked(): checkbox đang được tick (dòng này chỉ đúng nếu trước đó bạn đã tick một việc).
 
 ### Phủ định với not và chỉnh timeout
+Giải thích từng dòng:
+• not.toBeVisible(): khẳng định chữ "Clear completed" KHÔNG hiện (khi chưa có việc nào hoàn thành).
+• not.toHaveCount(0): danh sách không rỗng.
+• { timeout: 10000 }: riêng lần kiểm tra này được chờ 10 giây (10000 mili giây) thay vì 5.
+• expect(1 + 1).toBe(2): kiểm tra giá trị thường, không phải locator, nên không cần await và không tự chờ.
 ~~~ts
 await expect(page.getByText('Clear completed')).not.toBeVisible();
 await expect(page.getByTestId('todo-item')).not.toHaveCount(0);
 await expect(page.getByTestId('todo-title')).toHaveText('Mua sữa', { timeout: 10000 });
 expect(1 + 1).toBe(2);
 ~~~
-Giải thích từng dòng:
-• not.toBeVisible(): khẳng định chữ "Clear completed" KHÔNG hiện (khi chưa có việc nào hoàn thành).
-• not.toHaveCount(0): danh sách không rỗng.
-• { timeout: 10000 }: riêng lần kiểm tra này được chờ 10 giây (10000 mili giây) thay vì 5.
-• expect(1 + 1).toBe(2): kiểm tra giá trị thường, không phải locator, nên không cần await và không tự chờ.
 
 ### Auto-wait: vì sao KHÔNG dùng sleep
+Giải thích:
+• Mọi hành động như click, fill, check đều tự chờ: phần tử phải xuất hiện, hiển thị, đứng yên, bật (enabled) rồi mới thao tác. Đó là auto-wait.
+• waitForTimeout(3000) luôn bắt test đứng 3 giây dù trang xong sau 0,2 giây (chậm). Nếu mạng chậm 4 giây thì vẫn hỏng (flaky).
+• isVisible() chỉ chụp "ảnh" ở đúng một khoảnh khắc, không chờ, nên dễ sai.
+• await expect(...).toBeVisible() chờ thông minh: xong sớm thì đi tiếp ngay.
+Quy tắc vàng: không dùng waitForTimeout trong test thật, chỉ dùng tạm khi tìm lỗi.
 ~~~ts
 // Cách SAI: chờ cứng 3 giây
 await page.getByRole('button', { name: 'Lưu' }).click();
@@ -568,25 +652,19 @@ expect(await page.getByText('Đã lưu').isVisible()).toBe(true);
 await page.getByRole('button', { name: 'Lưu' }).click();
 await expect(page.getByText('Đã lưu')).toBeVisible();
 ~~~
-Giải thích:
-• Mọi hành động như click, fill, check đều tự chờ: phần tử phải xuất hiện, hiển thị, đứng yên, bật (enabled) rồi mới thao tác. Đó là auto-wait.
-• waitForTimeout(3000) luôn bắt test đứng 3 giây dù trang xong sau 0,2 giây (chậm). Nếu mạng chậm 4 giây thì vẫn hỏng (flaky).
-• isVisible() chỉ chụp "ảnh" ở đúng một khoảnh khắc, không chờ, nên dễ sai.
-• await expect(...).toBeVisible() chờ thông minh: xong sớm thì đi tiếp ngay.
-Quy tắc vàng: không dùng waitForTimeout trong test thật, chỉ dùng tạm khi tìm lỗi.
 
 ### Lỗi thường gặp
+Cách đọc và sửa:
+• Received: element(s) not found: locator không khớp phần tử nào. Kiểm tra lại locator bằng Pick locator, hoặc trang chưa tới đúng bước.
+• Received có giá trị nhưng khác Expected: dữ liệu khác mong đợi. Ở ví dụ trên, ngay cả khi tìm thấy, "Mua sua" (không dấu) cũng khác "Mua sữa".
+• Quên await trước expect(locator): test có thể báo xanh dù sai. Luôn viết await expect(...).
+• Trang thật sự chậm: tăng timeout cho riêng assertion đó thay vì thêm sleep.
 ~~~text
 Error: Timed out 5000ms waiting for expect(locator).toHaveText(expected)
 Locator: getByTestId('todo-title')
 Expected string: "Mua sua"
 Received: <element(s) not found>
 ~~~
-Cách đọc và sửa:
-• Received: element(s) not found: locator không khớp phần tử nào. Kiểm tra lại locator bằng Pick locator, hoặc trang chưa tới đúng bước.
-• Received có giá trị nhưng khác Expected: dữ liệu khác mong đợi. Ở ví dụ trên, ngay cả khi tìm thấy, "Mua sua" (không dấu) cũng khác "Mua sữa".
-• Quên await trước expect(locator): test có thể báo xanh dù sai. Luôn viết await expect(...).
-• Trang thật sự chậm: tăng timeout cho riêng assertion đó thay vì thêm sleep.
 
 PRACTICE: Viết test: thêm 2 việc, tick việc đầu tiên, bấm link "Completed" rồi kiểm tra: URL chứa "completed", danh sách có đúng 1 việc, chữ "Clear completed" hiển thị. Không được dùng waitForTimeout.
 Q: Mặc định một web-first assertion của Playwright chờ tối đa bao lâu?
@@ -615,6 +693,13 @@ Cấu trúc thư mục đề xuất:
 • tests/todo-pom.spec.ts: file test dùng TodoPage
 
 ### Bước 1: Viết class TodoPage
+Giải thích từng dòng:
+• import { type Page, type Locator }: lấy kiểu dữ liệu Page (tab) và Locator (phần tử) để TypeScript gợi ý code.
+• export class TodoPage: tạo "khuôn" tên TodoPage, export để file khác dùng được.
+• readonly newTodo: Locator: khai báo thuộc tính chỉ gán một lần.
+• constructor(page): hàm chạy khi tạo đối tượng, nhận page và gán các locator.
+• goto(): thao tác mở trang.
+• addTodo(text): thao tác thêm một việc với chữ truyền vào.
 ~~~ts
 import { type Page, type Locator } from '@playwright/test';
 
@@ -632,7 +717,7 @@ export class TodoPage {
   }
 
   async goto() {
-    await this.page.goto('https://demo.playwright.dev/todomvc');
+    await this.page.goto('http://localhost:3131/todomvc');
   }
 
   async addTodo(text: string) {
@@ -641,15 +726,14 @@ export class TodoPage {
   }
 }
 ~~~
-Giải thích từng dòng:
-• import { type Page, type Locator }: lấy kiểu dữ liệu Page (tab) và Locator (phần tử) để TypeScript gợi ý code.
-• export class TodoPage: tạo "khuôn" tên TodoPage, export để file khác dùng được.
-• readonly newTodo: Locator: khai báo thuộc tính chỉ gán một lần.
-• constructor(page): hàm chạy khi tạo đối tượng, nhận page và gán các locator.
-• goto(): thao tác mở trang.
-• addTodo(text): thao tác thêm một việc với chữ truyền vào.
 
 ### Bước 2: Dùng TodoPage trong test
+Giải thích từng dòng:
+• import { TodoPage } from './pages/todo-page': lấy class vừa viết. Không ghi đuôi .ts.
+• new TodoPage(page): tạo một chiếc "điều khiển" gắn với tab hiện tại.
+• todoPage.goto(), addTodo(...): gọi thao tác có tên dễ hiểu.
+• expect(todoPage.titles): dùng locator đã khai báo sẵn trong class.
+Chạy: npx playwright test tests/todo-pom.spec.ts --project=chromium. Kết quả mong đợi: 1 passed.
 ~~~ts
 import { test, expect } from '@playwright/test';
 import { TodoPage } from './pages/todo-page';
@@ -663,12 +747,6 @@ test('thêm việc bằng Page Object', async ({ page }) => {
   await expect(todoPage.count).toHaveText('2 items left');
 });
 ~~~
-Giải thích từng dòng:
-• import { TodoPage } from './pages/todo-page': lấy class vừa viết. Không ghi đuôi .ts.
-• new TodoPage(page): tạo một chiếc "điều khiển" gắn với tab hiện tại.
-• todoPage.goto(), addTodo(...): gọi thao tác có tên dễ hiểu.
-• expect(todoPage.titles): dùng locator đã khai báo sẵn trong class.
-Chạy: npx playwright test tests/todo-pom.spec.ts --project=chromium. Kết quả mong đợi: 1 passed.
 
 ### Fixture là gì? page cũng là một fixture
 Fixture là "đồ dùng chuẩn bị sẵn" cho mỗi test, giống khay dụng cụ y tá chuẩn bị trước ca mổ.
@@ -679,6 +757,13 @@ Ta có thể tự tạo fixture riêng, ví dụ todoPage đã mở sẵn trang,
 
 ### Bước 3: Tạo fixture riêng bằng test.extend
 File tests/fixtures.ts:
+Giải thích từng dòng:
+• import { test as base }: lấy test gốc và đặt tên khác là base.
+• base.extend<{ todoPage: TodoPage }>: tạo phiên bản test mới có thêm fixture tên todoPage.
+• async ({ page }, use) => ...: fixture này được dùng page có sẵn.
+• Trước use: phần chuẩn bị (tạo TodoPage, mở trang).
+• await use(todoPage): đưa todoPage cho test dùng. Code sau dòng này (nếu có) là phần dọn dẹp.
+• export { expect }: xuất lại expect để file test chỉ cần import từ một chỗ.
 ~~~ts
 import { test as base } from '@playwright/test';
 import { TodoPage } from './pages/todo-page';
@@ -693,15 +778,14 @@ export const test = base.extend<{ todoPage: TodoPage }>({
 
 export { expect } from '@playwright/test';
 ~~~
-Giải thích từng dòng:
-• import { test as base }: lấy test gốc và đặt tên khác là base.
-• base.extend<{ todoPage: TodoPage }>: tạo phiên bản test mới có thêm fixture tên todoPage.
-• async ({ page }, use) => ...: fixture này được dùng page có sẵn.
-• Trước use: phần chuẩn bị (tạo TodoPage, mở trang).
-• await use(todoPage): đưa todoPage cho test dùng. Code sau dòng này (nếu có) là phần dọn dẹp.
-• export { expect }: xuất lại expect để file test chỉ cần import từ một chỗ.
 
 ### Bước 4: Test dùng fixture và lỗi thường gặp
+Giải thích: import test từ ./fixtures (không phải từ @playwright/test), sau đó xin fixture todoPage, trang đã được mở sẵn.
+Lỗi thường gặp:
+• "Error: Cannot find module './pages/todo-page'": sai đường dẫn import. Đường dẫn tính từ file đang viết.
+• "TypeError: todoPage.addTodo is not a function": viết sai tên hàm hoặc quên export class.
+• Test báo "fixture todoPage not found" hoặc todoPage undefined: quên đổi import test sang './fixtures'.
+• Đừng đặt expect trong Page Object quá nhiều: Page Object lo "làm", test lo "kiểm tra".
 ~~~ts
 import { test, expect } from './fixtures';
 
@@ -710,12 +794,6 @@ test('thêm việc với fixture', async ({ todoPage }) => {
   await expect(todoPage.count).toHaveText('1 item left');
 });
 ~~~
-Giải thích: import test từ ./fixtures (không phải từ @playwright/test), sau đó xin fixture todoPage, trang đã được mở sẵn.
-Lỗi thường gặp:
-• "Error: Cannot find module './pages/todo-page'": sai đường dẫn import. Đường dẫn tính từ file đang viết.
-• "TypeError: todoPage.addTodo is not a function": viết sai tên hàm hoặc quên export class.
-• Test báo "fixture todoPage not found" hoặc todoPage undefined: quên đổi import test sang './fixtures'.
-• Đừng đặt expect trong Page Object quá nhiều: Page Object lo "làm", test lo "kiểm tra".
 
 PRACTICE: Thêm vào TodoPage hàm completeTodo(text) (tick checkbox của dòng chứa text bằng filter) và hàm filter(name) (bấm link All/Active/Completed). Viết test dùng fixture todoPage: thêm 2 việc, hoàn thành 1, lọc Active, kiểm tra còn 1 việc.
 Q: Lợi ích lớn nhất của Page Object Model là gì?
@@ -734,43 +812,24 @@ Q: Fixture page có sẵn của Playwright là gì?
 ## LESSON playwright-08 | Screenshot, video, trace, retries và file config
 
 ### Chụp màn hình bằng code
-~~~ts
-import { test } from '@playwright/test';
-
-test('chụp màn hình TodoMVC', async ({ page }) => {
-  await page.goto('https://demo.playwright.dev/todomvc');
-  await page.screenshot({ path: 'screenshots/trang-chu.png' });
-  await page.screenshot({ path: 'screenshots/ca-trang.png', fullPage: true });
-  await page.getByPlaceholder('What needs to be done?').screenshot({ path: 'screenshots/o-nhap.png' });
-});
-~~~
 Giải thích từng dòng:
 • page.screenshot({ path }): chụp phần đang nhìn thấy, lưu vào file. Thư mục screenshots tự được tạo.
 • fullPage: true: chụp cả trang dài, kể cả phần phải cuộn.
 • locator.screenshot: chỉ chụp đúng một phần tử (ô nhập).
 Chạy xong, mở thư mục screenshots trong VS Code để xem ảnh.
+~~~ts
+import { test } from '@playwright/test';
+
+test('chụp màn hình Todo Lab tự viết', async ({ page }) => {
+  await page.goto('http://localhost:3131/todomvc');
+  await page.screenshot({ path: 'screenshots/trang-chu.png' });
+  await page.screenshot({ path: 'screenshots/ca-trang.png', fullPage: true });
+  await page.getByPlaceholder('What needs to be done?').screenshot({ path: 'screenshots/o-nhap.png' });
+});
+~~~
 
 ### Bật screenshot, video, trace trong config
 Mở playwright.config.ts, tìm phần use và chỉnh:
-~~~ts
-import { defineConfig, devices } from '@playwright/test';
-
-export default defineConfig({
-  testDir: './tests',
-  retries: process.env.CI ? 2 : 0,
-  reporter: 'html',
-  use: {
-    baseURL: 'https://demo.playwright.dev',
-    headless: true,
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-    trace: 'on-first-retry',
-  },
-  projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-  ],
-});
-~~~
 Giải thích từng dòng:
 • testDir: thư mục chứa test.
 • retries: trên máy CI chạy lại tối đa 2 lần nếu fail, trên máy bạn thì 0.
@@ -781,53 +840,72 @@ Giải thích từng dòng:
 • video: 'retain-on-failure': quay video mọi test nhưng chỉ giữ video của test fail.
 • trace: 'on-first-retry': ghi trace khi test được chạy lại lần đầu.
 • projects: danh sách trình duyệt. Ở đây chỉ giữ chromium cho nhanh.
+~~~ts
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './tests',
+  retries: process.env.CI ? 2 : 0,
+  reporter: 'html',
+  use: {
+    baseURL: 'http://localhost:3131',
+    headless: true,
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    trace: 'on-first-retry',
+  },
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+  ],
+});
+~~~
 
 ### Trace Viewer: "hộp đen máy bay" của test
 Trace ghi lại mọi thứ: từng bước, ảnh trước và sau mỗi thao tác, log console, request mạng.
-~~~bash
-npx playwright test --trace on
-npx playwright show-report
-npx playwright show-trace test-results/todo-them-mot-viec-chromium/trace.zip
-~~~
 Giải thích từng dòng:
 • --trace on: bắt ghi trace cho mọi test trong lần chạy này (bỏ qua giá trị trong config).
 • show-report: mở báo cáo, bấm vào test rồi bấm biểu tượng Trace để xem.
 • show-trace <đường dẫn>: mở trực tiếp file trace.zip. Tên thư mục trong test-results trên máy bạn sẽ khác, hãy tìm trong thư mục đó.
 Trong Trace Viewer: thanh thời gian ở trên, danh sách bước bên trái, ảnh trang ở giữa, tab Console và Network bên dưới.
+~~~bash
+npx playwright test --trace on
+npx playwright show-report
+npx playwright show-trace test-results/todo-them-mot-viec-chromium/trace.zip
+~~~
 
 ### Retries và test "flaky"
-~~~bash
-npx playwright test --retries=2
-~~~
 Giải thích:
 • --retries=2: test fail sẽ được chạy lại tối đa 2 lần.
 • Test fail lần đầu nhưng pass lần sau được đánh dấu "flaky" (chập chờn) trong báo cáo.
 Lưu ý quan trọng cho tester:
 • Retry là phao cứu sinh, không phải cách sửa lỗi. Test flaky cần được điều tra: locator chưa ổn định, dữ liệu dùng chung giữa các test, hay app thật sự có lỗi lúc được lúc không.
 • Kết hợp với trace: 'on-first-retry' để luôn có trace của lần chạy lại mà phân tích.
+~~~bash
+npx playwright test --retries=2
+~~~
 
 ### Đọc báo cáo khi test fail
-~~~bash
-npx playwright test --project=chromium
-npx playwright show-report
-~~~
 Trình tự điều tra một test fail:
 • Bước 1: Đọc thông báo lỗi trong terminal (Expected / Received, locator nào).
 • Bước 2: Mở báo cáo HTML, vào test fail, xem phần Errors và dòng code bị lỗi.
 • Bước 3: Xem ảnh chụp (Screenshots) và video ở cuối trang chi tiết.
 • Bước 4: Mở Trace để xem từng bước, trang lúc đó trông thế nào.
 • Bước 5: Kết luận: lỗi do test (locator, dữ liệu) hay lỗi của ứng dụng. Nếu là lỗi app, đính kèm ảnh, video, trace vào bug report.
+~~~bash
+npx playwright test --project=chromium
+npx playwright show-report
+~~~
 
 ### Lỗi thường gặp
+• Lỗi 1: dùng page.goto('/todomvc') nhưng chưa khai báo baseURL trong config. Thêm baseURL hoặc ghi địa chỉ đầy đủ.
+• Lỗi 2: screenshot, video đặt sai chỗ (phải nằm trong use), hoặc test pass nên không lưu (only-on-failure). Lưu file config rồi chạy lại.
+• Lỗi 3: bạn đang xem báo cáo cũ. Chạy lại test rồi mở lại báo cáo. Thư mục playwright-report và test-results bị ghi đè mỗi lần chạy, nên đừng lưu bằng chứng quan trọng trong đó.
+• Nên thêm playwright-report/ và test-results/ vào file .gitignore (phòng 103).
 ~~~text
 Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
 Không thấy ảnh/video trong báo cáo dù test fail
 The 'reporter' folder playwright-report is outdated
 ~~~
-• Lỗi 1: dùng page.goto('/todomvc') nhưng chưa khai báo baseURL trong config. Thêm baseURL hoặc ghi địa chỉ đầy đủ.
-• Lỗi 2: screenshot, video đặt sai chỗ (phải nằm trong use), hoặc test pass nên không lưu (only-on-failure). Lưu file config rồi chạy lại.
-• Lỗi 3: bạn đang xem báo cáo cũ. Chạy lại test rồi mở lại báo cáo. Thư mục playwright-report và test-results bị ghi đè mỗi lần chạy, nên đừng lưu bằng chứng quan trọng trong đó.
-• Nên thêm playwright-report/ và test-results/ vào file .gitignore (phòng 103).
 
 PRACTICE: Sửa playwright.config.ts: thêm baseURL, screenshot 'only-on-failure', video 'retain-on-failure'. Cố ý làm một test fail (sửa expect sai), chạy với --trace on, rồi mở báo cáo và trace, viết 3 dòng mô tả bạn thấy gì ở bước bị lỗi.
 Q: Giá trị screenshot: 'only-on-failure' nghĩa là gì?
@@ -842,3 +920,352 @@ Q: Một test "flaky" là gì?
 + Test lúc pass lúc fail dù code không đổi
 - Test luôn luôn fail
 - Test chạy quá nhanh
+
+## LESSON playwright-09 | Giả lập mạng và lỗi phụ thuộc
+
+### Điều khiển phản hồi trước khi mở trang
+Trang lớp học giả định Rìa Lụa gọi /api/classes khi tải. Đăng ký route trước goto để nhánh lỗi có thể tái hiện, không chờ request thật đi rồi mới mock.
+~~~ts
+await page.route('**/api/classes',route=>route.fulfill({
+ status:503,contentType:'application/json',body:JSON.stringify({code:'temporarily_unavailable'})
+}));
+await page.goto('http://localhost:3100/classes');
+~~~
+
+### Kiểm thông báo và đường phục hồi
+Đừng chỉ chụp ảnh trạng thái lỗi. Kiểm thông báo có thể hiểu, nút thử lại và trạng thái loading; thao tác retry phải theo hợp đồng tránh gửi trùng một hành động ghi.
+~~~ts
+await expect(page.getByRole('alert')).toContainText('Chưa tải được lớp');
+await expect(page.getByRole('button',{name:'Thử lại'})).toBeEnabled();
+~~~
+
+### Phân biệt abort mạng với HTTP lỗi
+HTTP503 vẫn là response, còn route.abort mô phỏng lỗi request ở lớp khác. Viết ca riêng để UI không vô tình dùng một thông báo cho mọi tình huống rồi bỏ sót hướng khắc phục.
+~~~ts
+await page.route('**/api/enrollments',route=>route.abort('failed'));
+await page.goto('http://localhost:3100/enrollments');
+await expect(page.getByRole('alert')).toContainText('Kết nối');
+~~~
+
+### Mock không đo được backend thật
+Route.fulfill bypass logic backend, phù hợp cô lập nhánh UI. Bộ tích hợp riêng vẫn cần kiểm hợp đồng response, xác thực và lưu dữ liệu; báo cáo phải nói rõ ranh giới bằng chứng.
+
+### Chứng minh mock được dùng đúng chỗ
+Đếm số request chặn hoặc chờ response của endpoint cụ thể. Nếu app đổi đường dẫn và test vẫn xanh vì assertion quá chung, ca kiểm không còn bảo vệ nhánh mong muốn.
+
+PRACTICE: Viết ba ca200/503/abort cho trang lớp lab, mỗi ca có assertion nội dung và khả năng phục hồi. Nộp trace một ca lỗi, số request mock và giới hạn kết luận.
+Q: Mock route phải đăng ký lúc nào?
++ Trước thao tác phát request
+- Sau khi assertion đã xong
+- Chỉ sau page.close
+Q: Mock503 qua UI chứng minh gì?
++ UI xử lý nhánh phản hồi đó trong điều kiện test
+- Backend thật chịu tải tốt
+- Tích hợp sản xuất hoàn chỉnh
+
+## LESSON playwright-10 | Fixture theo vai và dữ liệu cô lập
+
+### Actor và dữ liệu phải cùng phạm vi
+Hai browser context có thể dùng cùng tài khoản ở server. Luồng đăng ký đổi trạng thái cần tài khoản hoặc tài nguyên riêng, còn test chỉ đọc có thể chia sẻ fixture nếu hợp đồng dữ liệu bất biến.
+~~~text
+runId LAB-R7 + parallelIndex 0 -> actor LAB-R7-P0
+runId LAB-R7 + parallelIndex 1 -> actor LAB-R7-P1
+Mỗi test tạo classId riêng; không xóa theo tên chung.
+~~~
+
+### Tạo tài nguyên trong fixture có teardown
+Endpoint /test-support/classes chỉ là API hỗ trợ của lab, phải có sẵn trong ứng dụng giả định. Dùng id server trả và dọn trong finally, kiểm setup trước khi chạy assertion UI.
+~~~ts
+export const test=base.extend<{classId:string}>({
+ classId:async({request},use)=>{
+  const r=await request.post('http://localhost:3100/test-support/classes',{data:{name:'Lớp Vệt R7'}});
+  expect(r.ok()).toBeTruthy();
+  const {id}=await r.json();
+  try{await use(id);}finally{
+   const d=await request.delete(`http://localhost:3100/test-support/classes/${id}`);
+   expect(d.ok()).toBeTruthy();
+  }
+ }
+});
+~~~
+
+### Storage state là dữ liệu có quyền
+Tệp trạng thái đăng nhập có thể chứa cookie/token. Tạo từ tài khoản lab và không commit; test đổi quyền không dùng chung state admin cho mọi ca.
+~~~text
+playwright/.auth/
+artifacts/private/
+# Các dòng trên nằm trong .gitignore của dự án lab.
+~~~
+
+### Không che lỗi setup bằng test rỗng
+Nếu tạo class thất bại thì ca phải báo lỗi setup. Tránh catch rồi dùng id mặc định từ run trước vì có thể làm mất tính độc lập và xóa nhầm dữ liệu.
+
+### Thử chạy riêng và đổi thứ tự
+Chạy một test đơn lẻ, toàn nhóm rồi nhiều worker. Nếu chỉ chạy toàn suite mới xanh, tìm phụ thuộc dữ liệu hoặc state ẩn; cô lập context chưa đủ cho dữ liệu backend.
+
+PRACTICE: Tạo fixture classId có teardown và hai actor giả, chứng minh ba test chạy riêng hoặc song song đều độc lập. Kiểm artifact không lộ cookie và cleanup chỉ đúng id tạo.
+Q: Storage state dùng chung có thể gây gì?
++ Các test cùng actor tranh dữ liệu server
+- Tự cách ly tài khoản backend
+- Không cần quyền file
+Q: Fixture cleanup nên xóa gì?
++ Đúng id do fixture tạo
+- Mọi đơn có tiền tố phổ biến
+- Toàn database
+
+## LESSON playwright-11 | Chạy song song, shard và điều tra flaky
+
+### Chia tải sau khi test độc lập
+Playwright dùng worker process; tệp test có thể chạy song song tùy cấu hình. Trước tăng worker, đo CPU/RAM và xác nhận tài nguyên lab đủ, không dùng retries để che lỗi cạn tài nguyên.
+~~~bash
+npx playwright test --workers=2
+npx playwright test --workers=1 --repeat-each=3
+~~~
+
+### Shard cần runId và artifact riêng
+Mỗi job nhận shard khác nhau nhưng có cùng phiên bản ứng dụng/fixture. Cấp runId từ pipeline rồi thêm chỉ số job, tránh dùng thời gian đến giây hoặc một số cố định làm khóa chung.
+~~~bash
+npx playwright test --shard=1/2
+npx playwright test --shard=2/2
+# Hai lệnh thuộc hai job lab với dữ liệu và thư mục report riêng.
+~~~
+
+### Cấu hình điều tra thất bại đầu tiên
+Trace on-first-retry giữ bằng chứng trên lần retry đầu, không phải trace của lần fail gốc. Nếu cần điều tra fail đầu, chọn retain-on-failure phù hợp ngân sách artifact.
+~~~ts
+import {defineConfig} from '@playwright/test';
+export default defineConfig({
+ retries:1,workers:2,
+ use:{trace:'retain-on-failure',screenshot:'only-on-failure'}
+});
+~~~
+
+### Phân loại nguyên nhân flaky
+Đối chiếu lỗi đầu tiên, endpoint, dữ liệu và mức tải. Timeout có thể do selector sai, app chậm hoặc worker tranh dữ liệu; tăng timeout chỉ hợp lý khi có bằng chứng ngân sách quá ngắn.
+
+### Quarantine phải có chủ và hạn xử lý
+Ca chập chờn cần issue, phạm vi rủi ro và thời hạn sửa; không tắt vĩnh viễn rồi gọi pipeline xanh. Giữ thống kê fail lần đầu riêng với pass sau retry.
+
+PRACTICE: Chạy cùng tập test ở một/hai worker và hai shard, ghi thời gian cùng lỗi lần đầu. Cài một xung đột dữ liệu lab để trace phát hiện, sửa bằng fixture riêng rồi đo lại.
+Q: Worker index có thay runId toàn hệ thống không?
++ Không
+- Có, luôn duy nhất mãi mãi
+- Có, kể cả nhiều máy
+Q: Shard giúp điều gì?
++ Chia tập test giữa nhiều job
+- Tự cô lập dữ liệu
+- Tự sửa flaky
+Q: Điều tra flaky nên bắt đầu từ đâu?
++ Trace, lỗi đầu tiên, dữ liệu và điều kiện môi trường
+- Tăng retries vô hạn
+- Thêm waitForTimeout mọi chỗ
+
+## LESSON playwright-12 | Bàn phím, accessibility và nhiều trình duyệt
+
+### Kiểm hành trình bằng bàn phím
+Biểu mẫu giả định Vườn Vạt có họ tên và nút đăng ký. Dùng Tab để kiểm thứ tự focus có nghĩa; một locator theo role tìm thấy nút chưa chứng minh người dùng bàn phím đến được nó.
+~~~ts
+await page.goto('http://localhost:3100/enroll');
+await page.keyboard.press('Tab');
+await expect(page.getByLabel('Họ tên')).toBeFocused();
+await page.keyboard.type('Lam Vạt');
+await page.keyboard.press('Tab');
+~~~
+
+### Tên truy cập và lỗi có liên kết
+Assert tên cho control chính và thông báo lỗi khi gửi thiếu dữ liệu. Ứng dụng cần liên hệ lỗi với trường theo yêu cầu; test chuỗi lỗi không thay đánh giá trình đọc màn hình.
+~~~ts
+await expect(page.getByRole('button',{name:'Đăng ký'})).toHaveAccessibleName('Đăng ký');
+await page.getByRole('button',{name:'Đăng ký'}).click();
+await expect(page.getByRole('alert')).toContainText('Chọn lớp');
+~~~
+
+### Đa trình duyệt theo ma trận sản phẩm
+Cấu hình dự án Chromium/Firefox/WebKit cho chức năng trọng tâm. WebKit desktop không đại diện mọi hành vi thiết bị thật; emulation không thay mọi kiểm phần cứng và công nghệ hỗ trợ.
+~~~ts
+projects:[
+ {name:'lab-chromium',use:{browserName:'chromium'}},
+ {name:'lab-firefox',use:{browserName:'firefox'}},
+ {name:'lab-webkit',use:{browserName:'webkit'}}
+]
+~~~
+
+### Giới hạn của tự động hóa a11y
+Kiểm tự động có thể bắt một số lỗi cấu trúc, còn ý nghĩa nội dung, thứ tự đọc và thao tác thực tế cần đánh giá bổ sung. Không gắn nhãn đạt toàn bộ WCAG từ một suite xanh.
+
+### Báo lỗi bằng tác động người dùng
+Thay vì chỉ ghi selector không click, mô tả người dùng Tab bị kẹt ở modal hay mất focus sau lỗi. Kèm bước, expected, browser và evidence để Dev sửa đúng ranh giới.
+
+PRACTICE: Tạo sáu ca keyboard/form/modal trên ba browser lab. Nộp bảng focus trước/sau, lỗi có tên truy cập và ghi rõ phần cần kiểm thủ công hoặc trình đọc màn hình.
+Q: Kiểm bàn phím nên dùng gì?
++ Thao tác phím và assertion focus/hành vi
+- Chỉ click chuột
+- Chỉ scan tự động
+Q: Tên truy cập đúng có chứng minh đạt toàn bộ WCAG không?
++ Không
+- Có nếu màu đẹp
+- Có nếu test xanh ba browser
+
+## LESSON playwright-13 | Dự án: kiểm luồng đăng ký lớp qua UI/API
+
+### Dự án UI/API đăng ký lớp giả
+Trung tâm giả định Rìa Lụa cần kiểm chọn lớp, đăng ký, xem kết quả và hủy. API hỗ trợ setup dữ liệu, còn UI kiểm tương tác trọng tâm; mỗi run chỉ dùng id tự tạo.
+~~~text
+Setup API -> mở lớp bằng UI -> điền form -> submit
+Assert đăng ký và remaining -> hủy đúng chủ
+Nhánh âm: hết chỗ, thiếu thông tin,503,khác chủ
+Không đăng nhập bằng tài khoản ngoài lab.
+~~~
+
+### Chờ response trước thao tác tạo request
+Tạo promise chờ trước click để không bỏ lỡ response nhanh. URL predicate chỉ nhận endpoint cần thiết; kiểm status và nội dung phù hợp thay vì chờ bất kỳ200 nào.
+~~~ts
+const pending=page.waitForResponse(r=>r.url().endsWith('/api/enrollments')&&r.request().method()==='POST');
+await page.getByRole('button',{name:'Đăng ký'}).click();
+const response=await pending;
+expect(response.status()).toBe(201);
+await expect(page.getByRole('status')).toContainText('Đã đăng ký');
+~~~
+
+### Chứng minh dữ liệu không chỉ toast
+Sau UI thành công, truy tài nguyên do chính test tạo và so classId/actor. Request fixture phải được xác thực theo lab; không dùng quyền admin để bỏ qua lỗi sở hữu trong luồng người dùng.
+~~~ts
+const created=await response.json();
+const r=await request.get(`http://localhost:3100/api/enrollments/${created.id}`);
+expect(r.ok()).toBeTruthy();
+expect((await r.json()).classId).toBe(classId);
+~~~
+
+### Nghiệm thu lỗi thật và lỗi test
+Cài một stub503 để ca UI báo đúng, một assertion sai để runner đỏ, một dữ liệu chung để thấy race. Sửa cả ba rồi chạy riêng, toàn suite và hai worker; lưu kết quả lần đầu.
+
+### Gói bàn giao và phần chưa kiểm
+Nộp fixture, config, test, lệnh chạy, report đã lọc và coverage. Phân biệt route mock với end-to-end thật, nêu giới hạn thiết bị/a11y và cách reset dữ liệu lab.
+
+PRACTICE: Bàn giao dự án Playwright lab tối thiểu mười hai ca, ba browser cho luồng chính, hai worker, fixture/cleanup và report. Có keyboard, quyền, lỗi mạng, chống lặp submit và kiểm API sau UI.
+Q: Dự án UI/API setup nên tận dụng API ở đâu?
++ Tạo dữ liệu nhanh rồi kiểm luồng UI mục tiêu
+- Bỏ hết UI assertion
+- Dùng endpoint quản trị thật ngoài phạm vi
+Q: Assertion toast thành công đã đủ xác nhận tạo đơn chưa?
++ Chưa, cần kiểm trạng thái phù hợp yêu cầu
+- Đủ cho mọi trường hợp
+- Đủ nếu có video
+Q: Gói bàn giao Playwright nên gồm gì?
++ Fixture, cấu hình, test, report và giới hạn
+- Chỉ video dài
+- Tài khoản thật
+
+## LESSON playwright-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Runner quản lý fixture, timeout, report và lỗi; cần assertion thể hiện hành vi sản phẩm.
+2. Cô lập context không tự cô lập dữ liệu server; mỗi test cần setup rõ và không phụ thuộc test trước.
+3. Role locator phản ánh cách giao diện được nhận biết; vẫn kiểm tên, scope và số phần tử phù hợp.
+4. Ghi thao tác chưa mô tả đủ kỳ vọng; bổ sung assertion, fixture và ca lỗi sau khi ghi.
+
+### Dữ liệu và điều kiện biên
+5. Chờ actionability giúp thao tác được, còn kết quả sau thao tác phải được assert riêng.
+6. Abstraction cần nhỏ, rõ hợp đồng; không che assertion quan trọng hoặc gom mọi trang vào một lớp khổng lồ.
+7. Retry cung cấp tín hiệu flaky, không sửa nguyên nhân dữ liệu, race hoặc môi trường.
+8. Chỉ thu phạm vi cần, che fixture và phân quyền artifact; trace là bằng chứng điều tra chứ không phải chứng nhận đúng.
+
+### Tính đúng và cách điều tra
+9. Nếu đăng ký muộn, request thật có thể đã đi; chờ hoặc assert đúng nhánh route được sử dụng.
+10. Route.fulfill bỏ qua phần backend thật; phải tách kết luận UI với tích hợp end-to-end.
+11. Context riêng vẫn có thể chung tài khoản; thao tác đổi trạng thái cần actor/dữ liệu riêng.
+12. Teardown phải có phạm vi và chạy trong finally; tránh xóa dữ liệu worker khác.
+
+### Rủi ro và lựa chọn phương án
+13. parallelIndex hữu ích phân slot trong run; ghép runId do CI cấp để tránh trùng giữa các job.
+14. Phải thống nhất cấu hình, dữ liệu và artifact; shard không thay thiết kế test độc lập.
+15. Thu bằng chứng trước khi đổi; phân biệt lỗi app, test, dữ liệu và tài nguyên.
+16. Tự động có thể kiểm một số luồng focus, vẫn cần đánh giá thủ công và công nghệ hỗ trợ phù hợp.
+
+### Dự án, bằng chứng và bàn giao
+17. Một assertion tên truy cập chỉ kiểm một đặc tính; accessibility là tập yêu cầu rộng hơn.
+18. API setup có kiểm response giúp tập trung UI vào rủi ro cần kiểm; vẫn có ca kiểm setup và tích hợp riêng.
+19. Toast có thể xuất hiện dù dữ liệu sai; kiểm id, nội dung và tác dụng phụ qua giao diện hoặc API phù hợp.
+20. Người khác phải chạy lại được trên lab với dữ liệu riêng, biết ca nào mock và ca nào tích hợp thật.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Playwright Test tổ chức kiểm thử bằng gì?
++ test và assertion có runner
+- Chỉ ảnh màn hình
+- Chỉ lệnh sleep
+Q: Vì sao không dựa vào thứ tự test?
++ Mỗi test phải đủ độc lập để chạy riêng
+- Vì test luôn chạy tuần tự
+- Vì mọi test dùng chung page
+Q: Locator theo role có lợi gì?
++ Gắn với vai trò và tên truy cập
+- Luôn nhanh nhất trong mọi DOM
+- Không cần xác định phần tử duy nhất
+Q: Codegen nên dùng thế nào?
++ Khởi đầu rồi review locator và assertion
+- Xem là bộ test hoàn chỉnh
+- Không cần xóa dữ liệu ghi
+Q: Auto-wait có thay kiểm kết quả nghiệp vụ không?
++ Không
+- Có, click xong là đạt
+- Có nếu chạy headed
+Q: Page Object nên chứa gì?
++ Locator và hành vi theo trang/miền
+- Mọi dữ liệu và bí mật của toàn hệ thống
+- Một sleep cố định mỗi hàm
+Q: Retry xanh có nghĩa gì?
++ Ca đã thất bại lần đầu rồi qua, cần điều tra
+- Chắc chắn không có lỗi
+- Luôn do mạng công cộng
+Q: Trace cần lưu ý gì?
++ Có thể chứa request và dữ liệu riêng tư
+- Luôn không có thông tin nhạy cảm
+- Thay mọi test
+Q: Mock route phải đăng ký lúc nào?
++ Trước thao tác phát request
+- Sau khi assertion đã xong
+- Chỉ sau page.close
+Q: Mock503 qua UI chứng minh gì?
++ UI xử lý nhánh phản hồi đó trong điều kiện test
+- Backend thật chịu tải tốt
+- Tích hợp sản xuất hoàn chỉnh
+Q: Storage state dùng chung có thể gây gì?
++ Các test cùng actor tranh dữ liệu server
+- Tự cách ly tài khoản backend
+- Không cần quyền file
+Q: Fixture cleanup nên xóa gì?
++ Đúng id do fixture tạo
+- Mọi đơn có tiền tố phổ biến
+- Toàn database
+Q: Worker index có thay runId toàn hệ thống không?
++ Không
+- Có, luôn duy nhất mãi mãi
+- Có, kể cả nhiều máy
+Q: Shard giúp điều gì?
++ Chia tập test giữa nhiều job
+- Tự cô lập dữ liệu
+- Tự sửa flaky
+Q: Điều tra flaky nên bắt đầu từ đâu?
++ Trace, lỗi đầu tiên, dữ liệu và điều kiện môi trường
+- Tăng retries vô hạn
+- Thêm waitForTimeout mọi chỗ
+Q: Kiểm bàn phím nên dùng gì?
++ Thao tác phím và assertion focus/hành vi
+- Chỉ click chuột
+- Chỉ scan tự động
+Q: Tên truy cập đúng có chứng minh đạt toàn bộ WCAG không?
++ Không
+- Có nếu màu đẹp
+- Có nếu test xanh ba browser
+Q: Dự án UI/API setup nên tận dụng API ở đâu?
++ Tạo dữ liệu nhanh rồi kiểm luồng UI mục tiêu
+- Bỏ hết UI assertion
+- Dùng endpoint quản trị thật ngoài phạm vi
+Q: Assertion toast thành công đã đủ xác nhận tạo đơn chưa?
++ Chưa, cần kiểm trạng thái phù hợp yêu cầu
+- Đủ cho mọi trường hợp
+- Đủ nếu có video
+Q: Gói bàn giao Playwright nên gồm gì?
++ Fixture, cấu hình, test, report và giới hạn
+- Chỉ video dài
+- Tài khoản thật

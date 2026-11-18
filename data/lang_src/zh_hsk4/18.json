@@ -1,0 +1,768 @@
+{
+ "no": 18,
+ "title": "Ôn tập tổng hợp 2 – Giải trình quyết định từ nhiều nguồn chưa hoàn chỉnh",
+ "sub": "偏好、容量、进度和通知范围要分别核对",
+ "goals": [
+  "Tổng hợp khảo sát, sức chứa, tiến độ và thông báo mà không trộn mẫu số/trạng thái.",
+  "Dùng điều kiện và giới hạn để giải trình một lần thử nhỏ.",
+  "Sửa kết luận mở quá rộng về nhóm áp dụng hoặc người chắc chắn tham gia.",
+  "Viết đề xuất đủ căn cứ, đánh đổi, trách nhiệm và việc cần kiểm tiếp."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bốn nguồn thông tin, bốn loại kết luận",
+   "html": "<p>Giả sử hiện là chiều thứ năm. Tình huống mới có năm mươi phiếu, ba mươi người thích sáng chủ nhật, nhưng chỉ mười tám đã xác nhận ngày. Phòng có hai mươi chỗ; hướng dẫn tám trang mới kiểm năm. Những con số này không thay thế nhau. Bài ôn yêu cầu giữ đúng nguồn, phạm vi và điều kiện trước khi gửi một quyết định cho cả nhóm.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Con số đi cùng trạng thái và đơn vị",
+   "html": "<p>Đọc cùng cụm “phiếu”, “thích”, “xác nhận”, “chỗ” và “trang đã kiểm”; không dừng ở con số mà bỏ nhãn vì đó là nguồn hiểu nhầm chính.</p>",
+   "items": [
+    {
+     "sym": "shíbā / èrshí",
+     "ex": [
+      "十八人确认",
+      "二十个座位"
+     ],
+     "vi": "十八 là mười tám người đã xác nhận, 二十 là hai mươi chỗ. Phân biệt thứ tự shí và số đơn vị, không đảo thành tám mươi."
+    },
+    {
+     "sym": "jǐnxiàn / qíyú",
+     "ex": [
+      "仅限入门交流",
+      "其余不变"
+     ],
+     "vi": "仅限 giới hạn phần đổi, 其余 giữ phần còn lại. Đọc cả hai cụm khi tóm tắt, đừng chỉ truyền dòng giờ mới."
+    },
+    {
+     "sym": "héduì / quèrèn",
+     "ex": [
+      "核对信息",
+      "确认安排"
+     ],
+     "vi": "核 hé có h, 确 què có q bật hơi. 核对 nhấn đối chiếu, 确认 chốt đúng; hai thao tác liên quan nhưng không tự đồng nhất."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm từ dùng trong tình huống",
+   "items": [
+    {
+     "w": "标准",
+     "py": "biāozhǔn",
+     "hv": "tiêu chuẩn",
+     "vi": "tiêu chí",
+     "ex": "先用同一套标准讨论。",
+     "exPy": "Xiān yòng tóng yí tào biāozhǔn tǎolùn.",
+     "exVi": "Bàn theo cùng bộ tiêu chí trước."
+    },
+    {
+     "w": "样本",
+     "py": "yàngběn",
+     "hv": "",
+     "vi": "mẫu khảo sát",
+     "ex": "五十份只是本次样本。",
+     "exPy": "Wǔshí fèn zhǐ shì běn cì yàngběn.",
+     "exVi": "Năm mươi phiếu chỉ là mẫu lần này."
+    },
+    {
+     "w": "占",
+     "py": "zhàn",
+     "hv": "chiếm",
+     "vi": "chiếm tỷ lệ",
+     "ex": "三十人占样本六成。",
+     "exPy": "Sānshí rén zhàn yàngběn liù chéng.",
+     "exVi": "Ba mươi người chiếm sáu phần mười mẫu."
+    },
+    {
+     "w": "确认",
+     "py": "quèrèn",
+     "hv": "xác nhận",
+     "vi": "xác nhận",
+     "ex": "十八人已经确认日期。",
+     "exPy": "Shíbā rén yǐjīng quèrèn rìqī.",
+     "exVi": "Mười tám đã xác nhận ngày."
+    },
+    {
+     "w": "截止",
+     "py": "jiézhǐ",
+     "hv": "tiệt chỉ",
+     "vi": "hết hạn",
+     "ex": "报名截止仍是周五六点。",
+     "exPy": "Bàomíng jiézhǐ réng shì zhōuwǔ liù diǎn.",
+     "exVi": "Hạn đăng ký vẫn thứ sáu sáu giờ."
+    },
+    {
+     "w": "仅限",
+     "py": "jǐnxiàn",
+     "hv": "cận hạn",
+     "vi": "chỉ áp dụng trong",
+     "ex": "时间变化仅限新交流组。",
+     "exPy": "Shíjiān biànhuà jǐnxiàn xīn jiāoliúzǔ.",
+     "exVi": "Đổi giờ chỉ áp dụng nhóm giao lưu mới."
+    },
+    {
+     "w": "其余",
+     "py": "qíyú",
+     "hv": "kỳ dư",
+     "vi": "phần còn lại",
+     "ex": "其余课程不变。",
+     "exPy": "Qíyú kèchéng bú biàn.",
+     "exVi": "Lớp còn lại không đổi."
+    },
+    {
+     "w": "优先",
+     "py": "yōuxiān",
+     "hv": "ưu tiên",
+     "vi": "ưu tiên",
+     "ex": "优先核对关键三页。",
+     "exPy": "Yōuxiān héduì guānjiàn sān yè.",
+     "exVi": "Ưu tiên kiểm ba trang cốt yếu."
+    },
+    {
+     "w": "剩余",
+     "py": "shèngyú",
+     "hv": "thặng dư",
+     "vi": "còn lại",
+     "ex": "剩余三页待回复。",
+     "exPy": "Shèngyú sān yè dài huífù.",
+     "exVi": "Ba trang còn lại chờ trả lời."
+    },
+    {
+     "w": "预计",
+     "py": "yùjì",
+     "hv": "dự kế",
+     "vi": "dự kiến",
+     "ex": "预计今晚收到资料。",
+     "exPy": "Yùjì jīnwǎn shōudào zīliào.",
+     "exVi": "Dự kiến nhận tài liệu tối nay."
+    },
+    {
+     "w": "来不及",
+     "py": "lái bu jí",
+     "hv": "",
+     "vi": "không kịp thời gian",
+     "ex": "明晚才收到就来不及复核。",
+     "exPy": "Míngwǎn cái shōudào jiù lái bu jí fùhé.",
+     "exVi": "Tối mai mới nhận thì không kịp kiểm lại."
+    },
+    {
+     "w": "备用",
+     "py": "bèiyòng",
+     "hv": "bị dụng",
+     "vi": "dự phòng",
+     "ex": "备用方案也要确认。",
+     "exPy": "Bèiyòng fāng’àn yě yào quèrèn.",
+     "exVi": "Dự phòng cũng cần xác nhận."
+    },
+    {
+     "w": "取舍",
+     "py": "qǔshě",
+     "hv": "thủ xả",
+     "vi": "đánh đổi",
+     "ex": "试办规模小是明确的取舍。",
+     "exPy": "Shìbàn guīmó xiǎo shì míngquè de qǔshě.",
+     "exVi": "Quy mô thử nhỏ là đánh đổi rõ."
+    },
+    {
+     "w": "试行",
+     "py": "shìxíng",
+     "hv": "thí hành",
+     "vi": "thực hiện thử",
+     "ex": "先试行，不急于扩大。",
+     "exPy": "Xiān shìxíng, bù jí yú kuòdà.",
+     "exVi": "Thử trước, chưa vội mở rộng."
+    },
+    {
+     "w": "反馈",
+     "py": "fǎnkuì",
+     "hv": "phản quỹ",
+     "vi": "phản hồi",
+     "ex": "未参加者也可以提供反馈。",
+     "exPy": "Wèi cānjiāzhě yě kěyǐ tígōng fǎnkuì.",
+     "exVi": "Người chưa dự cũng có thể phản hồi."
+    },
+    {
+     "w": "核对",
+     "py": "héduì",
+     "hv": "hạch đối",
+     "vi": "đối chiếu",
+     "ex": "发出前核对四类信息。",
+     "exPy": "Fā chū qián héduì sì lèi xìnxī.",
+     "exVi": "Đối chiếu bốn loại thông tin trước gửi."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ôn 既然…就…、只有…才…: chọn bước theo điều kiện",
+   "html": "<p>既然 dựa dữ kiện đã biết để suy bước nên làm; 只有…才 nhấn điều kiện cần trước hành động. Trong đề xuất, có thể ưu tiên thử nhỏ theo sức chứa nhưng vẫn chưa gửi thông báo nếu mốc và phạm vi chưa kiểm xong.</p>",
+   "ex": [
+    {
+     "t": "既然只有二十个座位，就不能承诺三十人同时参加。",
+     "py": "Jìrán zhǐ yǒu èrshí ge zuòwèi, jiù bù néng chéngnuò sānshí rén tóngshí cānjiā.",
+     "vi": "Đã chỉ có hai mươi chỗ thì không hứa ba mươi người cùng dự."
+    },
+    {
+     "t": "只有组别和时间核对以后，才能发正式通知。",
+     "py": "Zhǐyǒu zǔbié hé shíjiān héduì yǐhòu, cái néng fā zhèngshì tōngzhī.",
+     "vi": "Chỉ sau khi kiểm nhóm và giờ mới gửi tin chính thức."
+    },
+    {
+     "t": "既然还有十二人没确认，就继续联系，不替他们决定。",
+     "py": "Jìrán hái yǒu shí’èr rén méi quèrèn, jiù jìxù liánxì, bú tì tāmen juédìng.",
+     "vi": "Đã còn mười hai chưa xác nhận thì tiếp tục hỏi, không quyết thay họ."
+    }
+   ],
+   "tips": [
+    "Đừng dùng điều kiện để tạo vẻ chặt chẽ nếu con số hoặc nguồn ban đầu đã bị đọc sai."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ôn giới hạn: 仅限、其余不变 và 不等于",
+   "html": "<p>仅限 giữ thay đổi trong một nhóm; 其余不变 nói rõ ngoài đó giữ nguyên. 不等于 bác việc đồng nhất hai đại lượng hoặc trạng thái, ví dụ sở thích với cam kết, bản đang chờ với bản đã kiểm.</p>",
+   "ex": [
+    {
+     "t": "喜欢上午不等于确认参加。",
+     "py": "Xǐhuan shàngwǔ bù děngyú quèrèn cānjiā.",
+     "vi": "Thích sáng không đồng nghĩa xác nhận dự."
+    },
+    {
+     "t": "调整仅限入门交流，其余课程不变。",
+     "py": "Tiáozhěng jǐnxiàn rùmén jiāoliú, qíyú kèchéng bú biàn.",
+     "vi": "Chỉ chỉnh giao lưu nhập môn, lớp còn lại không đổi."
+    },
+    {
+     "t": "五页已核对不等于八页全部完成。",
+     "py": "Wǔ yè yǐ héduì bù děngyú bā yè quánbù wánchéng.",
+     "vi": "Năm trang đã kiểm không có nghĩa cả tám trang xong."
+    }
+   ],
+   "tips": [
+    "Mỗi con số cần nhãn của nó: người thích, người xác nhận, chỗ hoặc trang; không bỏ nhãn trong tóm tắt."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Một quyết định không lấy nhầm bốn con số",
+   "lang": "zh-CN",
+   "note": "Nhóm xét mở giao lưu chủ nhật. Bài mới dùng số khác bài khảo sát trước, không chọn theo trí nhớ dữ kiện cũ.",
+   "lines": [
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "这次五十份问卷里，三十人喜欢周日上午。",
+     "py": "Zhè cì wǔshí fèn wènjuàn lǐ, sānshí rén xǐhuan zhōurì shàngwǔ.",
+     "vi": "Trong năm mươi phiếu, ba mươi thích sáng chủ nhật."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "其中十二人还没确认日期，所以现在只有十八人确定。",
+     "py": "Qízhōng shí’èr rén hái méi quèrèn rìqī, suǒyǐ xiànzài zhǐ yǒu shíbā rén quèdìng.",
+     "vi": "Mười hai chưa xác nhận ngày, giờ chỉ mười tám chắc."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "房间二十个座位，先试行可以，但不能承诺三十人都能来。",
+     "py": "Fángjiān èrshí ge zuòwèi, xiān shìxíng kěyǐ, dàn bù néng chéngnuò sānshí rén dōu néng lái.",
+     "vi": "Phòng hai mươi chỗ, thử được nhưng không hứa cả ba mươi tới cùng."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "还有八页指南，五页已核，三页等资料，预计今晚到。",
+     "py": "Hái yǒu bā yè zhǐnán, wǔ yè yǐ hé, sān yè děng zīliào, yùjì jīnwǎn dào.",
+     "vi": "Hướng dẫn tám trang, năm kiểm, ba chờ, dự kiến tối có."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "如果到明晚才来，就来不及按周五六点截止复核。",
+     "py": "Rúguǒ dào míngwǎn cái lái, jiù lái bu jí àn zhōuwǔ liù diǎn jiézhǐ fùhé.",
+     "vi": "Nếu tối mai mới tới thì không kịp kiểm trước hạn thứ sáu sáu giờ."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "我先报告依赖，请负责人确认备用方案，不自己删页。",
+     "py": "Wǒ xiān bàogào yīlài, qǐng fùzérén quèrèn bèiyòng fāng’àn, bú zìjǐ shān yè.",
+     "vi": "Tôi báo phụ thuộc, xin chốt dự phòng, không tự xóa trang."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "旧消息只写课程延后，有提高组同学也打算改时间。",
+     "py": "Jiù xiāoxi zhǐ xiě kèchéng yánhòu, yǒu tígāozǔ tóngxué yě dǎsuàn gǎi shíjiān.",
+     "vi": "Tin cũ chỉ viết lùi lớp nên có người nâng cao cũng định đổi giờ."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "要改清：仅限入门交流，其余课程不变，报名仍周五六点截止。",
+     "py": "Yào gǎi qīng: jǐnxiàn rùmén jiāoliú, qíyú kèchéng bú biàn, bàomíng réng zhōuwǔ liù diǎn jiézhǐ.",
+     "vi": "Cần sửa: chỉ giao lưu nhập môn, lớp khác không đổi, hạn vẫn thứ sáu sáu giờ."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "我负责联系未确认者，你核对通知，之后一起读一遍。",
+     "py": "Wǒ fùzé liánxì wèi quèrènzhě, nǐ héduì tōngzhī, zhīhòu yìqǐ dú yí biàn.",
+     "vi": "Tôi liên hệ người chưa chắc, bạn kiểm tin, rồi cùng đọc lại."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "好，试行后也问没有参加的人，再决定要不要扩大。",
+     "py": "Hǎo, shìxíng hòu yě wèn méiyǒu cānjiā de rén, zài juédìng yào bu yào kuòdà.",
+     "vi": "Được, thử xong hỏi cả người chưa dự rồi quyết mở rộng."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Số đã xác nhận ngày là bao nhiêu?",
+     "o": [
+      "Mười tám",
+      "Ba mươi",
+      "Năm mươi"
+     ],
+     "a": 0,
+     "e": "Ba mươi thích nhưng mười hai chưa chốt, còn mười tám."
+    },
+    {
+     "q": "Sức chứa phòng là bao nhiêu?",
+     "o": [
+      "Mười hai",
+      "Tám",
+      "Hai mươi"
+     ],
+     "a": 2,
+     "e": "Con số chỗ không phải số người trong mẫu hay số trang."
+    },
+    {
+     "q": "Có bao nhiêu trang chưa được xác nhận?",
+     "o": [
+      "Năm",
+      "Tám",
+      "Ba"
+     ],
+     "a": 2,
+     "e": "Tám trang gồm năm đã kiểm, ba chờ tài liệu."
+    },
+    {
+     "q": "Tin cũ gây hiểu nhầm phạm vi nào?",
+     "o": [
+      "Chỉ tên phòng bị sai",
+      "Nhóm nâng cao cũng tưởng đổi",
+      "Không ai thấy tin"
+     ],
+     "a": 1,
+     "e": "Thiếu 仅限 khiến nhóm ngoài phạm vi tự đổi lịch."
+    },
+    {
+     "q": "Sau thử nên hỏi ai?",
+     "o": [
+      "Không cần ai",
+      "Người dự và người chưa dự",
+      "Chỉ người có phản hồi tốt"
+     ],
+     "a": 1,
+     "e": "Lượt cuối giữ nhu cầu ngoài người được nhận vào thử."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc hiểu: Giải trình lựa chọn mà không trộn nguồn",
+   "text": "今天是周四。学习小组想试办周日上午的入门交流。问卷共五十份，三十人表示喜欢这个时段，占样本六成；其中十二人还不能确认指定日期，目前实际确认十八人。房间只能容纳二十人，因此偏好、确认人数和座位不能当成同一个数字。\n\n八页活动指南中，五页已复核，剩余三页依赖合作方资料，预计今晚到。如果明晚才收到，就来不及在周五下午六点前完成复核。负责人需要知道这个风险，并确认是否接受备用方案，而不是等制作人员自行删掉未完成内容。\n\n旧消息只说“课程延后”，提高组也以为要改时间。新通知必须写清仅限入门交流，其余课程不变，报名仍在周五六点截止。时间、地点、组别和截止应逐项核对，不能因为决定试行就省掉通知检查。\n\n小组最终建议先按容量小规模试行，同时继续联系未确认者，记录没有名额者的需求；资料未齐的部分按事实报告。试行后听取两类人意见，再决定是否扩大。这个选择有取舍，但每项依据、限制和下一步都能被接手的人找到，不需要靠一个笼统的“已经准备好了”来猜。",
+   "vi": "Hôm nay là thứ năm. Nhóm muốn thử giao lưu nhập môn sáng chủ nhật. Năm mươi phiếu, ba mươi thích, chiếm sáu phần mười; mười hai chưa chắc ngày, hiện mười tám xác nhận. Phòng hai mươi chỗ, không coi sở thích/xác nhận/chỗ là một số.\n\nHướng dẫn tám trang có năm kiểm, ba phụ thuộc tài liệu dự kiến tối nay. Tối mai mới nhận thì không kịp kiểm trước chiều thứ sáu sáu giờ. Người phụ trách cần biết rủi ro, xác nhận dự phòng thay vì người làm tự bỏ nội dung.\n\nTin cũ chỉ “lùi lớp” khiến nâng cao cũng tưởng đổi. Bản mới phải ghi chỉ nhập môn, lớp khác không đổi, hạn nộp vẫn thứ sáu sáu giờ. Cần kiểm giờ/nơi/nhóm/hạn, không bỏ vì đã định thử.\n\nNhóm đề nghị thử theo sức chứa, hỏi người chưa xác nhận và ghi nhu cầu người chưa có chỗ, báo thật phần còn chờ. Sau đó hỏi cả hai nhóm rồi mới xét mở rộng. Quyết định có đánh đổi nhưng căn cứ/giới hạn/bước tiếp đều rõ, không buộc ca sau đoán từ câu “sẵn sàng rồi”.",
+   "gloss": [
+    {
+     "w": "样本",
+     "py": "yàngběn",
+     "vi": "mẫu khảo sát"
+    },
+    {
+     "w": "占",
+     "py": "zhàn",
+     "vi": "chiếm tỷ lệ"
+    },
+    {
+     "w": "确认",
+     "py": "quèrèn",
+     "vi": "xác nhận"
+    },
+    {
+     "w": "仅限",
+     "py": "jǐnxiàn",
+     "vi": "chỉ áp dụng trong"
+    },
+    {
+     "w": "其余",
+     "py": "qíyú",
+     "vi": "phần còn lại"
+    },
+    {
+     "w": "剩余",
+     "py": "shèngyú",
+     "vi": "còn lại"
+    },
+    {
+     "w": "预计",
+     "py": "yùjì",
+     "vi": "dự kiến"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Sáu phần mười áp trên tổng nào?",
+     "o": [
+      "Mười tám xác nhận",
+      "Hai mươi ghế",
+      "Năm mươi phiếu"
+     ],
+     "a": 2,
+     "e": "Ba mươi trên năm mươi bằng sáu phần mười, không dùng tổng khác."
+    },
+    {
+     "q": "Điều gì làm lịch hướng dẫn có rủi ro?",
+     "o": [
+      "Ba trang phụ thuộc tài liệu chưa nhận",
+      "Năm trang đã kiểm là không có giá trị",
+      "Không tồn tại hạn"
+     ],
+     "a": 0,
+     "e": "Phụ thuộc chậm có thể làm thiếu giờ kiểm lại trước hạn."
+    },
+    {
+     "q": "Ai cần chấp thuận phương án thay phần chờ?",
+     "o": [
+      "Người phụ trách",
+      "Bất kỳ người nhận tin nào tự sửa",
+      "Không ai"
+     ],
+     "a": 0,
+     "e": "Bài tách đề nghị dự phòng với việc tự xóa yêu cầu."
+    },
+    {
+     "q": "Bản mới sửa phạm vi thế nào?",
+     "o": [
+      "Chỉ nhập môn, phần còn lại không đổi",
+      "Tất cả nhóm lùi một ngày",
+      "Hủy toàn bộ"
+     ],
+     "a": 0,
+     "e": "Thông báo cần ghi 仅限 và 其余不变."
+    },
+    {
+     "q": "Vì sao chưa mở rộng ngay?",
+     "o": [
+      "Vì không ai thích",
+      "Vì số ghế nhiều hơn mẫu",
+      "Cần phản hồi, xác nhận và nhu cầu ngoài lần thử"
+     ],
+     "a": 2,
+     "e": "Lần thử nhỏ có giới hạn, bài chưa coi đó là bằng chứng đủ cho mở rộng."
+    },
+    {
+     "q": "Câu kết phê bình điều gì?",
+     "o": [
+      "Mọi bản bàn giao dài",
+      "Việc hỏi thêm người chưa dự",
+      "Lời “sẵn sàng” chung che trạng thái và căn cứ"
+     ],
+     "a": 2,
+     "e": "Báo cáo cần giúp người tiếp thấy từng căn cứ, không đoán từ nhãn lạc quan."
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Nhận diện chữ trong bài",
+   "items": [
+    {
+     "c": "核",
+     "py": "hé",
+     "hv": "hạch",
+     "parts": "木 bên trái, 亥 bên phải",
+     "strokes": 10,
+     "vi": "đối chiếu; hạt",
+     "words": "核对，复核"
+    },
+    {
+     "c": "对",
+     "py": "duì",
+     "hv": "đối",
+     "parts": "又 bên trái, 寸 bên phải",
+     "strokes": 5,
+     "vi": "đối, đúng",
+     "words": "核对，确认对错"
+    },
+    {
+     "c": "余",
+     "py": "yú",
+     "hv": "dư",
+     "parts": "人 ở trên, phần dưới",
+     "strokes": 7,
+     "vi": "còn lại",
+     "words": "剩余，其余"
+    },
+    {
+     "c": "准",
+     "py": "zhǔn",
+     "hv": "chuẩn",
+     "parts": "冫 bên trái, 隹 bên phải",
+     "strokes": 10,
+     "vi": "chuẩn",
+     "words": "标准，准备"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói có nhiệm vụ",
+   "tasks": [
+    {
+     "p": "Tóm tắt năm mươi/ba mươi/mười tám/hai mươi đúng nhãn và đề nghị thử có giới hạn.",
+     "model": "五十份问卷里，三十人喜欢上午，占六成，但十二人没确认日期，实际确认十八人。房间二十个座位，所以可以先小规模试行，不能承诺三十人同时参加，还要记录未参加者需求。",
+     "py": "Wǔshí fèn wènjuàn lǐ, sānshí rén xǐhuan shàngwǔ, zhàn liù chéng, dàn shí’èr rén méi quèrèn rìqī, shíjì quèrèn shíbā rén. Fángjiān èrshí ge zuòwèi, suǒyǐ kěyǐ xiān xiǎo guīmó shìxíng, bù néng chéngnuò sānshí rén tóngshí cānjiā, hái yào jìlù wèi cānjiāzhě xūqiú.",
+     "vi": "Năm mươi phiếu, ba mươi thích sáng/sáu phần mười nhưng mười hai chưa chắc, mười tám xác nhận. Phòng hai mươi chỗ nên thử nhỏ, không hứa ba mươi cùng dự, ghi nhu cầu người chưa dự.",
+     "tips": "Không đọc ba mươi như tổng chắc chắn dự; nói nhãn cùng mỗi số."
+    },
+    {
+     "p": "Báo rủi ro ba trang, sửa phạm vi tin và phân công bước tiếp trước gửi.",
+     "model": "指南五页已核、三页待资料，预计不是承诺。若延误就请求确认备用方案。通知只改入门交流，其余不变，截止仍周五六点。我联系未确认者，你核对通知，读清以后再发。",
+     "py": "Zhǐnán wǔ yè yǐ hé, sān yè dài zīliào, yùjì bú shì chéngnuò. Ruò yánwù jiù qǐngqiú quèrèn bèiyòng fāng’àn. Tōngzhī zhǐ gǎi rùmén jiāoliú, qíyú bú biàn, jiézhǐ réng zhōuwǔ liù diǎn. Wǒ liánxì wèi quèrènzhě, nǐ héduì tōngzhī, dú qīng yǐhòu zài fā.",
+     "vi": "Năm trang kiểm/ba chờ, dự kiến không phải cam kết. Chậm thì xin chốt dự phòng. Chỉ nhập môn đổi, còn lại không, hạn vẫn thứ sáu sáu giờ. Tôi hỏi người chưa chắc, bạn kiểm tin, đọc rõ rồi gửi.",
+     "tips": "Dù tóm tắt ngắn vẫn phải đủ điều kiện và người theo dõi."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết để hoàn thành tình huống",
+   "task": "Viết từ 190 đến 240 chữ Hán giải trình quyết định thử giao lưu: số khảo sát/xác nhận/chỗ, tiến độ hướng dẫn và phụ thuộc, phạm vi/hạn thông báo, đánh đổi và bước kiểm tiếp trước mở rộng.",
+   "min": 190,
+   "model": "建议试办周日入门交流。五十份问卷中三十人喜欢上午，占六成，但十二人尚未确认日期，目前确认十八人，房间有二十个座位。既然容量有限，就不能把三十份偏好写成三十人都能参加，继续联系未确认者，记录无名额者需求。\n\n指南八页中五页已核，三页等资料。预计不等于承诺，若延误影响周五六点前复核，应请负责人确定备用方案，不自行删页。通知要写清仅限入门交流，其余课程不变，报名仍周五六点截止。\n\n我负责联系人员，子宁核对时间、地点和组别，发出前读一遍。试行后分别听参与者和未参与者反馈，再决定是否扩大。这样每个选择都有依据和限制，交接也能看清还需跟进什么。",
+   "modelVi": "Đề nghị thử nhỏ nhập môn chủ nhật. Năm mươi phiếu/ba mươi thích/sáu phần mười, mười hai chưa chốt, mười tám xác nhận, hai mươi ghế. Không coi sở thích là cam kết; tiếp tục hỏi và ghi nhu cầu người chưa có chỗ.\n\nHướng dẫn năm kiểm/ba chờ; dự kiến không phải hứa. Chậm ảnh hưởng kiểm trước thứ sáu sáu giờ thì xin dự phòng, không tự xóa. Tin chỉ nhập môn, lớp khác không đổi, hạn vẫn vậy.\n\nTôi liên hệ, Tử Ninh kiểm giờ/nơi/nhóm, cùng đọc trước gửi. Sau thử nghe hai nhóm rồi xét mở rộng để mọi lựa chọn có căn cứ/giới hạn và bàn giao rõ.",
+   "tips": [
+    "Mỗi con số cần được nối với nguồn và trạng thái.",
+    "Phần đề xuất phải có người làm và điều kiện kiểm tiếp chứ không chỉ kết luận nên thử."
+   ],
+   "checklist": [
+    "Đúng bốn loại số",
+    "Có tiến độ/phụ thuộc/dự phòng",
+    "Đúng phạm vi và hạn",
+    "Có trách nhiệm/phản hồi/giới hạn mở rộng"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "五十份里三十人喜欢，十二人没确认，所以实际确认十八人。",
+   "lang": "zh-CN",
+   "q": "Số đã xác nhận là bao nhiêu?",
+   "o": [
+    "Mười tám",
+    "Ba mươi",
+    "Năm mươi"
+   ],
+   "a": 0,
+   "e": "Phải tách tổng mẫu và sở thích khỏi số xác nhận sau khi loại phần chưa chắc."
+  },
+  {
+   "t": "listen",
+   "say": "指南五页已核、三页等资料，不能写八页全部完成。",
+   "lang": "zh-CN",
+   "q": "Cách báo nào đúng?",
+   "o": [
+    "Năm đã kiểm, ba chờ",
+    "Tám đã hoàn tất",
+    "Tám chưa bắt đầu"
+   ],
+   "a": 0,
+   "e": "Tách trạng thái cho từng phần, không gộp thành toàn bộ."
+  },
+  {
+   "t": "mc",
+   "q": "Ba mươi trên năm mươi là bao nhiêu phần trăm?",
+   "o": [
+    "Sáu mươi",
+    "Ba mươi",
+    "Mười tám"
+   ],
+   "a": 0,
+   "e": "Ba mươi chia năm mươi bằng sáu phần mười, tức sáu mươi phần trăm."
+  },
+  {
+   "t": "mc",
+   "q": "Có hai mươi chỗ, ba mươi người thích có đủ để hứa ba mươi cùng dự không?",
+   "o": [
+    "Chỉ cần bỏ qua giới hạn",
+    "Không",
+    "Có"
+   ],
+   "a": 1,
+   "e": "Sức chứa và xác nhận chưa cho phép cam kết tất cả sở thích."
+  },
+  {
+   "t": "mc",
+   "q": "Điều nào không tự thay đổi theo lịch nhập môn?",
+   "o": [
+    "Mọi thời gian đều phải lùi",
+    "Tất cả nhóm",
+    "Hạn đăng ký đã ghi giữ nguyên"
+   ],
+   "a": 2,
+   "e": "Cần theo phạm vi 仅限 và phần 不变, không suy lan."
+  },
+  {
+   "t": "mc",
+   "q": "Phương án hợp lý với ba trang chờ là gì?",
+   "o": [
+    "Báo tác động, xin chốt dự phòng",
+    "Đổi trạng thái thành đã kiểm",
+    "Âm thầm bỏ"
+   ],
+   "a": 0,
+   "e": "Người phụ trách cần biết phụ thuộc và quyết định thay đổi yêu cầu nếu cần."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “chỉ áp dụng”: 调整___入门交流。",
+   "a": "仅限",
+   "py": "jǐnxiàn",
+   "e": "仅限 giữ thay đổi trong nhóm đã nêu."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “còn lại”: ___三页还要等资料。",
+   "a": "剩余",
+   "py": "shèngyú",
+   "e": "剩余 chỉ phần chưa hoàn tất trong tổng tám trang."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “đối chiếu”: 发出以前逐项___。",
+   "a": "核对",
+   "py": "héduì",
+   "e": "核对 giúp kiểm thông tin từ các nguồn trước truyền tiếp."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "就",
+    "先",
+    "小规模试行",
+    "既然容量有限"
+   ],
+   "a": "既然容量有限，就先小规模试行。",
+   "e": "Dựa giới hạn sức chứa đã biết để chọn phạm vi thử."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "才",
+    "发正式通知",
+    "只有信息核对好以后"
+   ],
+   "a": "只有信息核对好以后，才发正式通知。",
+   "e": "Thông tin kiểm xong là điều kiện cần trước bản chính thức."
+  },
+  {
+   "t": "match",
+   "q": "Nối loại thông tin và hành động xử lý.",
+   "pairs": [
+    [
+     "样本",
+     "mẫu khảo sát"
+    ],
+    [
+     "剩余",
+     "còn lại"
+    ],
+    [
+     "取舍",
+     "đánh đổi"
+    ],
+    [
+     "核对",
+     "đối chiếu"
+    ]
+   ],
+   "e": "样本 là nguồn khảo sát, 剩余 là phần còn chờ, 取舍 là giới hạn chấp nhận và 核对 là kiểm nguồn trước gửi."
+  },
+  {
+   "t": "dict",
+   "say": "喜欢参加不等于已经确认。",
+   "lang": "zh-CN",
+   "a": "喜欢参加不等于已经确认。",
+   "py": "Xǐhuan cānjiā bù děngyú yǐjīng quèrèn.",
+   "e": "Giữ 不等于 để không biến ý thích thành trạng thái đã chốt."
+  }
+ ],
+ "teacher": {
+  "time": "180 phút, chia thành hai buổi 90 phút",
+  "prep": "Bốn bảng giả: khảo sát50/30/18/12, sức chứa20, hướng dẫn8/5/3 và thông báo cũ thiếu phạm vi; phiếu giải trình quyết định.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Cho bốn bảng cùng lúc, học viên gắn nhãn người thích, xác nhận, chỗ, trang rồi chỉ ra con số nào không được thay cho nhau."
+   },
+   {
+    "t": "20 phút",
+    "do": "Ôn từ giới hạn, tiến độ và phạm vi bằng bảng; luyện đọc đủ đơn vị cạnh số trong một tóm tắt ngắn."
+   },
+   {
+    "t": "20 phút",
+    "do": "Luyện 既然/只有 theo căn cứ và điều kiện cần, yêu cầu học viên kiểm nguồn căn cứ trước khi tạo câu nghe có vẻ chắc."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đối chiếu 仅限/其余不变 và 不等于, sửa tin gộp mọi nhóm hoặc mọi trạng thái thành một."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nghe quyết định nhiều nguồn, điền số xác nhận, phụ thuộc tài liệu, hạn giữ nguyên và phân công bước tiếp."
+   },
+   {
+    "t": "10 phút",
+    "do": "Mở buổi sau bằng một cập nhật thêm người xác nhận nhưng không thêm ghế, học viên điều chỉnh đúng mục thay vì đổi mọi dữ kiện."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc giải trình, gạch căn cứ cho từng lựa chọn và phần phải tiếp tục hỏi; tìm câu cho biết ai chịu trách nhiệm."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nhóm ba giữ mỗi người một nguồn thông tin, trao đổi đủ để viết đề xuất không mâu thuẫn và có danh sách việc còn mở."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết từ một trăm chín mươi đến hai trăm bốn mươi chữ, bạn đọc kiểm số/phạm vi và chọn được hành động tiếp theo từ bản ghi."
+   },
+   {
+    "t": "15 phút",
+    "do": "Làm bài tự chấm cuối cấp, tự đánh giá nghe số, đọc giới hạn, viết lập luận và nói quyết định; chọn mục ôn trước đề."
+   }
+  ],
+  "games": [
+   "Bốn nguồn một quyết định: mỗi đội chỉ thấy một bảng, phải hỏi đội khác để hoàn thiện đề xuất; không tính điểm nếu trộn người với trang hoặc chỗ."
+  ],
+  "errors": [
+   "Lấy số thích làm số xác nhận: giữ riêng mười hai người chưa chốt trước khi tính.",
+   "Lấy chỗ trống làm lý do hứa toàn bộ mẫu: sức chứa không tạo cam kết cho người chưa xác nhận.",
+   "Gộp năm đã kiểm thành tám xong: báo từng trạng thái và phụ thuộc.",
+   "Cho hạn nộp lùi theo lớp dù 不变: đọc mục giữ nguyên cùng mục đổi.",
+   "Nêu thử nhưng không có bước phản hồi/mở rộng: thêm nguồn ý kiến, người hỏi và điều kiện quyết định tiếp."
+  ],
+  "homework": "Tự tạo bốn nguồn dữ kiện khác bài và viết quyết định có giới hạn. Thu âm báo cáo hai phút, nhờ bạn chỉ ra bất kỳ chỗ trộn mẫu số, trạng thái hoặc phạm vi."
+ }
+}

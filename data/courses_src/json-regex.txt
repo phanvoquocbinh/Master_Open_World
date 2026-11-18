@@ -4,20 +4,12 @@ icon: 🧩
 floor: 2
 room: 203
 level: Cơ bản → Trung bình
-hours: 5
+hours: 28
 summary: Đọc và kiểm tra JSON không sợ sai cú pháp, dùng JSONPath để lấy dữ liệu trong Postman/JMeter, và dùng Regex để kiểm tra định dạng, trích xuất token, lọc log.
 
 ## LESSON json-regex-01 | JSON từ con số 0
 
 ### JSON là gì?
-~~~json
-{
-  "orderId": "ORD-000123",
-  "customer": "Lan",
-  "total": 450000,
-  "paid": true
-}
-~~~
 • JSON (JavaScript Object Notation) là cách viết dữ liệu dạng chữ mà cả người và máy đều đọc được.
 • Giống một tờ phiếu: bên trái là nhãn (key), bên phải là giá trị (value), ở giữa là dấu hai chấm.
 • Hầu hết API hiện nay gửi và nhận JSON; nhiều file cấu hình (như package.json) cũng là JSON.
@@ -27,8 +19,23 @@ Giải thích từng dòng:
 • "total": 450000 — số, không có nháy.
 • "paid": true — giá trị đúng/sai.
 • } đóng object. Các cặp cách nhau bằng dấu phẩy; cặp cuối cùng KHÔNG có dấu phẩy.
+~~~json
+{
+  "orderId": "ORD-000123",
+  "customer": "Lan",
+  "total": 450000,
+  "paid": true
+}
+~~~
 
 ### 6 kiểu dữ liệu trong JSON
+• string: "Bàn phím" — chữ trong nháy kép.
+• number: 25.5 — số nguyên hoặc thập phân (dùng dấu chấm, không dùng dấu phẩy).
+• boolean: true hoặc false — viết thường.
+• null: không có giá trị.
+• array: [ ... ] — danh sách có thứ tự.
+• object: { ... } — nhóm các cặp key–value.
+Tester chú ý: "25" (chuỗi) khác 25 (số). API trả sai kiểu dữ liệu so với tài liệu là bug.
 ~~~json
 {
   "name": "Bàn phím",
@@ -39,15 +46,12 @@ Giải thích từng dòng:
   "size": { "width": 44, "height": 13 }
 }
 ~~~
-• string: "Bàn phím" — chữ trong nháy kép.
-• number: 25.5 — số nguyên hoặc thập phân (dùng dấu chấm, không dùng dấu phẩy).
-• boolean: true hoặc false — viết thường.
-• null: không có giá trị.
-• array: [ ... ] — danh sách có thứ tự.
-• object: { ... } — nhóm các cặp key–value.
-Tester chú ý: "25" (chuỗi) khác 25 (số). API trả sai kiểu dữ liệu so với tài liệu là bug.
 
 ### Object lồng nhau và danh sách object
+• customer là object nằm trong object lớn — như phong bì bỏ trong phong bì.
+• items là array chứa nhiều object — như các dòng trong một hóa đơn.
+• Để lấy sku của món thứ hai: vào items → phần tử thứ hai → sku. Bài sau sẽ viết đường đi này bằng code.
+• Thụt lề (indent) chỉ giúp dễ đọc; máy không quan tâm khoảng trắng.
 ~~~json
 {
   "orderId": "ORD-000123",
@@ -58,12 +62,15 @@ Tester chú ý: "25" (chuỗi) khác 25 (số). API trả sai kiểu dữ liệu
   ]
 }
 ~~~
-• customer là object nằm trong object lớn — như phong bì bỏ trong phong bì.
-• items là array chứa nhiều object — như các dòng trong một hóa đơn.
-• Để lấy sku của món thứ hai: vào items → phần tử thứ hai → sku. Bài sau sẽ viết đường đi này bằng code.
-• Thụt lề (indent) chỉ giúp dễ đọc; máy không quan tâm khoảng trắng.
 
 ### Quy tắc cú pháp vàng
+Đọc từng dòng:
+• Key luôn nằm trong nháy kép.
+• Chỉ dùng nháy kép, không dùng nháy đơn.
+• Không có dấu phẩy sau phần tử cuối cùng.
+• true, false, null luôn viết thường.
+• Số thập phân dùng dấu chấm.
+• JSON chuẩn không cho phép viết comment.
 ~~~text
 SAI                                  ĐÚNG
 { name: "Lan" }                      { "name": "Lan" }
@@ -73,26 +80,24 @@ SAI                                  ĐÚNG
 { "price": 25,5 }                    { "price": 25.5 }
 { "a": 1 // ghi chú }                { "a": 1 }
 ~~~
-Đọc từng dòng:
-• Key luôn nằm trong nháy kép.
-• Chỉ dùng nháy kép, không dùng nháy đơn.
-• Không có dấu phẩy sau phần tử cuối cùng.
-• true, false, null luôn viết thường.
-• Số thập phân dùng dấu chấm.
-• JSON chuẩn không cho phép viết comment.
 
 ### Kiểm tra JSON hợp lệ bằng dòng lệnh
 Tạo file data.json trong VS Code, rồi mở PowerShell ở cùng thư mục:
-~~~bash
-python -m json.tool data.json
-node -e "JSON.parse(require('fs').readFileSync('data.json', 'utf8')); console.log('JSON hợp lệ')"
-~~~
 Giải thích từng dòng:
 • Dòng 1: Python đọc file; nếu hợp lệ sẽ in lại JSON đã căn lề đẹp, nếu sai sẽ báo dòng và cột bị lỗi.
 • Dòng 2: Node đọc file (readFileSync), phân tích (JSON.parse); nếu không có lỗi thì in "JSON hợp lệ".
 Trong VS Code: chuột phải → Format Document (Shift+Alt+F) để căn lề; chỗ sai cú pháp bị gạch chân đỏ.
+~~~bash
+python -m json.tool data.json
+node -e "JSON.parse(require('fs').readFileSync('data.json', 'utf8')); console.log('JSON hợp lệ')"
+~~~
 
 ### Lỗi thường gặp
+• Illegal trailing comma / Expected double-quoted property name: thừa dấu phẩy cuối object.
+• Expecting property name enclosed in double quotes: key dùng nháy đơn hoặc không có nháy.
+• Expecting value / Unexpected token 'T': giá trị viết sai, ví dụ True thay cho true.
+• "line 3 column 11" chỉ chỗ máy phát hiện lỗi; lỗi thật thường nằm ngay trước vị trí đó.
+(Nội dung thông báo có thể khác đôi chút tùy phiên bản Python/Node.)
 ~~~text
 Python:
 Illegal trailing comma before end of object: line 3 column 11 (char 25)
@@ -103,77 +108,76 @@ Node:
 SyntaxError: Expected double-quoted property name in JSON at position 25
 SyntaxError: Unexpected token 'T', "{"ok": True}" is not valid JSON
 ~~~
-• Illegal trailing comma / Expected double-quoted property name: thừa dấu phẩy cuối object.
-• Expecting property name enclosed in double quotes: key dùng nháy đơn hoặc không có nháy.
-• Expecting value / Unexpected token 'T': giá trị viết sai, ví dụ True thay cho true.
-• "line 3 column 11" chỉ chỗ máy phát hiện lỗi; lỗi thật thường nằm ngay trước vị trí đó.
-(Nội dung thông báo có thể khác đôi chút tùy phiên bản Python/Node.)
 
 PRACTICE: Tạo file order.json mô tả một đơn hàng gồm mã đơn, tên khách, 2 sản phẩm (sku, qty, price) và trạng thái đã thanh toán. Kiểm tra bằng python -m json.tool, sau đó cố tình thêm một dấu phẩy thừa và ghi lại thông báo lỗi.
 Q: Dòng JSON nào hợp lệ?
-- { 'city': 'Huế' }
-+ { "city": "Huế" }
-- { city: "Huế" }
+- { 'city': 'Thoi Vạt' }
++ { "city": "Thoi Vạt" }
+- { city: "Thoi Vạt" }
 Q: Trong JSON, "25" và 25 khác nhau thế nào?
 + "25" là chuỗi, 25 là số
 - Giống hệt nhau
 - 25 là chuỗi, "25" là số
 
-## LESSON json-regex-02 | Đọc JSON lồng nhau trong response thật
+## LESSON json-regex-02 | Đọc JSON lồng nhau trong response lab
 
-### Một response JSON thực tế
-Gửi GET https://jsonplaceholder.typicode.com/users/1 bằng Postman hoặc trình duyệt. Kết quả (đã rút gọn):
+### Một response JSON từ fixture
+Chuẩn bị lab_api_fixture.py ở bài1 khóa API, chạy localhost:3130 rồi GET /users/1. Mẫu dưới do khóa học tự viết và đồng nhất fixture;chỉ dùng id/tên/địa chỉ/email giả. Code này giúp đọc shape,không là dữ liệu của người hoặc doanh nghiệp thật.
 ~~~json
 {
   "id": 1,
-  "name": "Leanne Graham",
-  "email": "Sincere@april.biz",
+  "name": "Lam Thoi",
+  "email": "lab-1@example.com",
   "address": {
-    "street": "Kulas Light",
-    "city": "Gwenborough",
-    "geo": { "lat": "-37.3159", "lng": "81.1496" }
+    "street": "Ngõ Mầm 1",
+    "city": "Vân Thoi 1",
+    "geo": { "lat": "0.1250", "lng": "0.2500" }
   },
-  "company": { "name": "Romaguera-Crona" }
+  "company": { "name": "Xưởng Nếp 1" }
 }
 ~~~
-• Object ngoài cùng là một user.
-• address là object lồng; bên trong address lại có geo lồng thêm một tầng nữa.
-• company cũng là object lồng.
-Chú ý: lat là chuỗi "-37.3159" chứ không phải số. Nếu tài liệu API ghi lat là number thì đây là điểm cần hỏi lại hoặc báo bug.
 
 ### Đường đi bằng dấu chấm
-~~~text
-user.name               -> "Leanne Graham"
-user.address.city       -> "Gwenborough"
-user.address.geo.lat    -> "-37.3159"
-user.company.name       -> "Romaguera-Crona"
-user.website.url        -> undefined (website là chuỗi, không có gì bên trong)
-user.adress.city        -> LỖI (gõ sai adress, tầng này không tồn tại)
-~~~
 • Mỗi dấu chấm nghĩa là "đi vào bên trong".
 • Giống địa chỉ nhà: Tỉnh → Huyện → Xã → Thôn.
 • Đọc từ trái sang phải; mỗi bước phải tồn tại thì mới đi tiếp được.
 • Gõ sai một chữ ở tầng giữa sẽ làm "đứt" cả đường đi.
+~~~text
+user.name               -> "Lam Thoi"
+user.address.city       -> "Vân Thoi 1"
+user.address.geo.lat    -> "0.1250"
+user.company.name       -> "Xưởng Nếp 1"
+user.website.url        -> undefined (website là chuỗi, không có gì bên trong)
+user.adress.city        -> LỖI (gõ sai adress, tầng này không tồn tại)
+~~~
 
 ### Array: đếm từ 0
+• Vị trí (index) trong array đánh số từ 0, không phải từ 1 — giống tầng trệt là tầng 0.
+• Phần tử cuối có index = số phần tử − 1.
+• Lỗi "lệch một" (off-by-one) rất hay gặp: lấy [10] khi chỉ có 10 phần tử.
 ~~~text
-GET https://jsonplaceholder.typicode.com/users  -> array gồm 10 user
+GET http://localhost:3130/users  -> array gồm 10 user
 
-users[0].name     -> "Leanne Graham"       (phần tử đầu tiên)
-users[1].name     -> "Ervin Howell"        (phần tử thứ hai)
+users[0].name     -> "Lam Thoi"       (phần tử đầu tiên)
+users[1].name     -> "Vạt Nếp"        (phần tử thứ hai)
 users[9].name     -> "Clementina DuBuque"  (phần tử cuối)
 users[10]         -> undefined             (không tồn tại)
 users.length      -> 10
 ~~~
-• Vị trí (index) trong array đánh số từ 0, không phải từ 1 — giống tầng trệt là tầng 0.
-• Phần tử cuối có index = số phần tử − 1.
-• Lỗi "lệch một" (off-by-one) rất hay gặp: lấy [10] khi chỉ có 10 phần tử.
 
 ### Đọc JSON bằng JavaScript (Node.js)
+Cách chạy: lưu file vào C:\qa\json, mở PowerShell tại đó, gõ node read-user.js (cần Node.js 18 trở lên).
+Giải thích từng dòng:
+• async function main(): tạo một hàm có thể "chờ" mạng trả lời.
+• fetch(...): gửi request GET; await nghĩa là đợi đến khi có kết quả.
+• res.json(): chuyển body thành object JavaScript.
+• console.log: in status, tên, thành phố và kiểu dữ liệu của lat.
+• main(): gọi hàm để nó chạy.
+Kết quả mong đợi: 200, Lam Thoi, Vân Thoi 1, string.
 ~~~js
 // file: read-user.js
 async function main() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users/1");
+  const res = await fetch("http://localhost:3130/users/1");
   const user = await res.json();
   console.log(res.status);
   console.log(user.name);
@@ -182,21 +186,20 @@ async function main() {
 }
 main();
 ~~~
-Cách chạy: lưu file vào C:\qa\json, mở PowerShell tại đó, gõ node read-user.js (cần Node.js 18 trở lên).
-Giải thích từng dòng:
-• async function main(): tạo một hàm có thể "chờ" mạng trả lời.
-• fetch(...): gửi request GET; await nghĩa là đợi đến khi có kết quả.
-• res.json(): chuyển body thành object JavaScript.
-• console.log: in status, tên, thành phố và kiểu dữ liệu của lat.
-• main(): gọi hàm để nó chạy.
-Kết quả mong đợi: 200, Leanne Graham, Gwenborough, string.
 
 ### Đọc JSON bằng Python
+Cách chạy: lưu thành read_users.py, gõ python read_users.py (không cần cài thêm thư viện).
+Giải thích:
+• import: nạp hai thư viện có sẵn là json và urllib.request.
+• Request(..., headers=...): tạo request kèm User-Agent để server nhận diện công cụ gọi.
+• urlopen: gửi request; json.load: chuyển body thành list Python.
+• Python dùng ngoặc vuông ["key"] thay cho dấu chấm.
+Kết quả mong đợi: 10, Lam Thoi, Deckow-Crist.
 ~~~python
 import json
 import urllib.request
 
-url = "https://jsonplaceholder.typicode.com/users"
+url = "http://localhost:3130/users"
 req = urllib.request.Request(url, headers={"User-Agent": "qa-course"})
 with urllib.request.urlopen(req) as res:
     users = json.load(res)
@@ -205,28 +208,21 @@ print(len(users))
 print(users[0]["name"])
 print(users[1]["company"]["name"])
 ~~~
-Cách chạy: lưu thành read_users.py, gõ python read_users.py (không cần cài thêm thư viện).
-Giải thích:
-• import: nạp hai thư viện có sẵn là json và urllib.request.
-• Request(..., headers=...): tạo request kèm User-Agent để server nhận diện công cụ gọi.
-• urlopen: gửi request; json.load: chuyển body thành list Python.
-• Python dùng ngoặc vuông ["key"] thay cho dấu chấm.
-Kết quả mong đợi: 10, Leanne Graham, Deckow-Crist.
 
 ### Lỗi thường gặp
+• Cannot read properties of undefined: tầng phía trước không tồn tại, ví dụ gõ sai user.adress.city.
+• KeyError: 'Name': Python phân biệt chữ hoa/thường — key đúng là "name".
+• IndexError: lấy vị trí vượt quá độ dài list, ví dụ users[10].
+• fetch is not defined: Node quá cũ (dưới 18) → cài Node.js LTS mới.
+Mẹo: in từng tầng một, ví dụ console.log(user.address), để tìm chỗ đường đi bị "đứt".
 ~~~text
 TypeError: Cannot read properties of undefined (reading 'city')
 KeyError: 'Name'
 IndexError: list index out of range
 ReferenceError: fetch is not defined
 ~~~
-• Cannot read properties of undefined: tầng phía trước không tồn tại, ví dụ gõ sai user.adress.city.
-• KeyError: 'Name': Python phân biệt chữ hoa/thường — key đúng là "name".
-• IndexError: lấy vị trí vượt quá độ dài list, ví dụ users[10].
-• fetch is not defined: Node quá cũ (dưới 18) → cài Node.js LTS mới.
-Mẹo: in từng tầng một, ví dụ console.log(user.address), để tìm chỗ đường đi bị "đứt".
 
-PRACTICE: Viết script Node hoặc Python gọi https://jsonplaceholder.typicode.com/users/5 và in ra name, email, address.city, company.name. Sau đó gọi /users và in tên user cuối cùng mà không gõ cứng số 9 (gợi ý: dùng độ dài danh sách).
+PRACTICE: Viết script Node hoặc Python gọi http://localhost:3130/users/5 và in ra name, email, address.city, company.name. Sau đó gọi /users và in tên user cuối cùng mà không gõ cứng số 9 (gợi ý: dùng độ dài danh sách).
 Q: users là array 10 phần tử. Phần tử cuối cùng có index bao nhiêu?
 - 10
 + 9
@@ -239,6 +235,9 @@ Q: Lỗi "Cannot read properties of undefined (reading 'city')" thường do đ�
 ## LESSON json-regex-03 | JSONPath: chỉ đường đến dữ liệu
 
 ### JSONPath là gì? Dữ liệu mẫu
+• JSONPath là cách viết "địa chỉ" để lấy dữ liệu trong JSON, giống GPS chỉ đường.
+• Nhiều công cụ dùng JSONPath: JMeter (JSON Extractor), REST Assured, nhiều công cụ giám sát hệ thống.
+• Lưu dữ liệu trên thành file shop.json — dùng cho cả bài này.
 ~~~json
 {
   "shop": {
@@ -253,11 +252,14 @@ Q: Lỗi "Cannot read properties of undefined (reading 'city')" thường do đ�
   }
 }
 ~~~
-• JSONPath là cách viết "địa chỉ" để lấy dữ liệu trong JSON, giống GPS chỉ đường.
-• Nhiều công cụ dùng JSONPath: JMeter (JSON Extractor), REST Assured, nhiều công cụ giám sát hệ thống.
-• Lưu dữ liệu trên thành file shop.json — dùng cho cả bài này.
 
 ### Cú pháp cơ bản
+• $ là gốc; dấu chấm là "đi vào bên trong".
+• [0] lấy phần tử đầu; [*] lấy tất cả phần tử.
+• [-1:] lấy phần tử cuối (cú pháp cắt mảng).
+• .. là "tìm ở mọi tầng" — tiện nhưng nguy hiểm: $..id lấy cả id của owner (99) dù bạn chỉ muốn id sản phẩm.
+Kết quả JSONPath thường là một danh sách, kể cả khi chỉ có 1 giá trị.
+Thử bằng script jp.js ở slide kế tiếp trên shop.json do học viên tự tạo; không dán dữ liệu vào website bên ngoài.
 ~~~text
 $                            -> toàn bộ tài liệu (gốc)
 $.shop.name                  -> "QA Store"
@@ -266,40 +268,43 @@ $.shop.products[*].name      -> ["Bàn phím", "Chuột", "Tai nghe", "Cáp USB"
 $.shop.products[-1:].name    -> ["Cáp USB"]  (phần tử cuối)
 $..id                        -> [1, 2, 3, 4, 99]
 ~~~
-• $ là gốc; dấu chấm là "đi vào bên trong".
-• [0] lấy phần tử đầu; [*] lấy tất cả phần tử.
-• [-1:] lấy phần tử cuối (cú pháp cắt mảng).
-• .. là "tìm ở mọi tầng" — tiện nhưng nguy hiểm: $..id lấy cả id của owner (99) dù bạn chỉ muốn id sản phẩm.
-Kết quả JSONPath thường là một danh sách, kể cả khi chỉ có 1 giá trị.
-Thử nhanh: mở jsonpath.com, dán shop.json vào ô dữ liệu, gõ biểu thức vào ô JSONPath và xem kết quả.
 
 ### Bộ lọc (filter)
+• [?( ... )] là bộ lọc: chỉ giữ phần tử thỏa điều kiện.
+• @ nghĩa là "phần tử đang được xét".
+• && là "và", || là "hoặc".
+• Chuỗi trong bộ lọc dùng nháy đơn, ví dụ 'Chuột'.
+Lưu ý: cú pháp filter có khác biệt nhỏ giữa các công cụ (JMeter hoặc thư viện đang cài). Luôn thử trên đúng công cụ bạn sẽ dùng.
 ~~~text
 $.shop.products[?(@.price < 10)].name                       -> ["Chuột", "Cáp USB"]
 $.shop.products[?(@.inStock == false)].name                 -> ["Tai nghe"]
 $.shop.products[?(@.price >= 20 && @.inStock == true)].id   -> [1]
 $.shop.products[?(@.name == 'Chuột')].price                 -> [8]
 ~~~
-• [?( ... )] là bộ lọc: chỉ giữ phần tử thỏa điều kiện.
-• @ nghĩa là "phần tử đang được xét".
-• && là "và", || là "hoặc".
-• Chuỗi trong bộ lọc dùng nháy đơn, ví dụ 'Chuột'.
-Lưu ý: cú pháp filter có khác biệt nhỏ giữa các công cụ (jsonpath.com, JMeter, thư viện). Luôn thử trên đúng công cụ bạn sẽ dùng.
 
 ### Cài thư viện jsonpath-plus
+Giải thích từng dòng:
+• Dòng 1–2: tạo thư mục dự án mới và đi vào đó.
+• npm init -y: tạo file package.json với cấu hình mặc định (-y = đồng ý hết).
+• npm install jsonpath-plus: tải thư viện JSONPath vào thư mục node_modules.
+Kết quả mong đợi: dòng "added ... packages" và không có chữ ERR. Sau đó copy shop.json vào thư mục này.
 ~~~bash
 mkdir C:\qa\jsonpath-demo
 cd C:\qa\jsonpath-demo
 npm init -y
 npm install jsonpath-plus
 ~~~
-Giải thích từng dòng:
-• Dòng 1–2: tạo thư mục dự án mới và đi vào đó.
-• npm init -y: tạo file package.json với cấu hình mặc định (-y = đồng ý hết).
-• npm install jsonpath-plus: tải thư viện JSONPath vào thư mục node_modules.
-Kết quả mong đợi: dòng "added ... packages" và không có chữ ERR. Sau đó copy shop.json vào thư mục này.
 
 ### Chạy JSONPath bằng Node
+Lưu thành jp.js rồi chạy node jp.js.
+Giải thích từng dòng:
+• Dòng 1: nạp hàm JSONPath từ thư viện.
+• Dòng 2: đọc file shop.json thành object.
+• JSONPath({ path, json }): chạy biểu thức path trên dữ liệu json, trả về một array.
+• console.log: in kết quả ra màn hình.
+Kết quả mong đợi:
+[ 'Bàn phím', 'Chuột', 'Tai nghe', 'Cáp USB' ]
+[ 'Chuột', 'Cáp USB' ]
 ~~~js
 const { JSONPath } = require("jsonpath-plus");
 const data = require("./shop.json");
@@ -310,28 +315,19 @@ console.log(names);
 const cheap = JSONPath({ path: "$.shop.products[?(@.price < 10)].name", json: data });
 console.log(cheap);
 ~~~
-Lưu thành jp.js rồi chạy node jp.js.
-Giải thích từng dòng:
-• Dòng 1: nạp hàm JSONPath từ thư viện.
-• Dòng 2: đọc file shop.json thành object.
-• JSONPath({ path, json }): chạy biểu thức path trên dữ liệu json, trả về một array.
-• console.log: in kết quả ra màn hình.
-Kết quả mong đợi:
-[ 'Bàn phím', 'Chuột', 'Tai nghe', 'Cáp USB' ]
-[ 'Chuột', 'Cáp USB' ]
 
 ### Lỗi thường gặp
+• Cannot find module 'jsonpath-plus': chạy node ở thư mục khác với thư mục đã npm install.
+• Cannot find module './shop.json': file không nằm cạnh jp.js, hoặc Notepad đã lưu thành shop.json.txt.
+• Kết quả []: sai chữ hoa/thường (Products khác products), thiếu $ ở đầu, hoặc phần tử không tồn tại.
+• Nhớ: JSONPath trả về array; muốn lấy giá trị đầu tiên thì dùng names[0].
 ~~~text
 Error: Cannot find module 'jsonpath-plus'
 Error: Cannot find module './shop.json'
 []      (kết quả rỗng, không báo lỗi gì)
 ~~~
-• Cannot find module 'jsonpath-plus': chạy node ở thư mục khác với thư mục đã npm install.
-• Cannot find module './shop.json': file không nằm cạnh jp.js, hoặc Notepad đã lưu thành shop.json.txt.
-• Kết quả []: sai chữ hoa/thường (Products khác products), thiếu $ ở đầu, hoặc phần tử không tồn tại.
-• Nhớ: JSONPath trả về array; muốn lấy giá trị đầu tiên thì dùng names[0].
 
-PRACTICE: Viết biểu thức JSONPath cho shop.json để lấy: (1) tên các sản phẩm còn hàng và giá dưới 30, (2) giá của sản phẩm có id 3, (3) tên chủ cửa hàng. Thử trên jsonpath.com hoặc jp.js. Đáp án kết quả: ["Bàn phím","Chuột","Cáp USB"], [40], ["Lan"].
+PRACTICE: Viết biểu thức JSONPath cho shop.json để lấy: (1) tên các sản phẩm còn hàng và giá dưới 30, (2) giá của sản phẩm có id 3, (3) tên chủ cửa hàng. Thử trên jp.js trong thư mục lab. Đáp án kết quả: ["Bàn phím","Chuột","Cáp USB"], [40], ["Lan"].
 Q: Trong bộ lọc JSONPath, ký hiệu @ nghĩa là gì?
 - Gốc của tài liệu
 + Phần tử đang được xét
@@ -348,24 +344,29 @@ Q: $.shop.products[0].name lấy dữ liệu nào trong shop.json?
 ## LESSON json-regex-04 | Lấy dữ liệu JSON trong Postman và JMeter
 
 ### Postman: đi đường bằng JavaScript
-~~~js
-// GET https://jsonplaceholder.typicode.com/users
-const users = pm.response.json();
-
-pm.test("User đầu tiên là Leanne Graham", function () {
-  pm.expect(users[0].name).to.eql("Leanne Graham");
-});
-
-pm.test("User đầu tiên ở Gwenborough", function () {
-  pm.expect(users[0].address.city).to.eql("Gwenborough");
-});
-~~~
 • Postman không dùng JSONPath trực tiếp; ta viết đường đi kiểu JavaScript.
 • Đối chiếu: JSONPath $[0].address.city tương đương JavaScript users[0].address.city.
 • Dán code vào tab Scripts → Post-response, bấm Send, xem tab Test Results.
 Kết quả mong đợi: 2 test PASS.
+~~~js
+// GET http://localhost:3130/users
+const users = pm.response.json();
+
+pm.test("User đầu tiên là Lam Thoi", function () {
+  pm.expect(users[0].name).to.eql("Lam Thoi");
+});
+
+pm.test("User đầu tiên ở Vân Thoi 1", function () {
+  pm.expect(users[0].address.city).to.eql("Vân Thoi 1");
+});
+~~~
 
 ### Postman: find, filter, every
+• u => ... là hàm ngắn (arrow function): "với mỗi user u, kiểm tra điều kiện...".
+• find: phần tử ĐẦU TIÊN thỏa điều kiện (giống bộ lọc JSONPath rồi lấy [0]).
+• filter: TẤT CẢ phần tử thỏa điều kiện (giống [?( ... )] của JSONPath).
+• every: mọi phần tử đều thỏa thì trả về true.
+Kết quả mong đợi: 3 test PASS.
 ~~~js
 const users = pm.response.json();
 
@@ -385,19 +386,8 @@ pm.test("Mọi email đều có @", () => {
   pm.expect(users.every(u => u.email.includes("@"))).to.be.true;
 });
 ~~~
-• u => ... là hàm ngắn (arrow function): "với mỗi user u, kiểm tra điều kiện...".
-• find: phần tử ĐẦU TIÊN thỏa điều kiện (giống bộ lọc JSONPath rồi lấy [0]).
-• filter: TẤT CẢ phần tử thỏa điều kiện (giống [?( ... )] của JSONPath).
-• every: mọi phần tử đều thỏa thì trả về true.
-Kết quả mong đợi: 3 test PASS.
 
 ### Lưu giá trị để request sau dùng (correlation)
-~~~js
-// GET {{baseUrl}}/posts?userId=1
-const posts = pm.response.json();
-pm.collectionVariables.set("firstPostId", posts[0].id);
-pm.collectionVariables.set("postCount", posts.length);
-~~~
 Request tiếp theo: GET {{baseUrl}}/posts/{{firstPostId}}/comments
 Giải thích từng dòng:
 • Dòng 1: comment ghi request nào dùng script này.
@@ -405,26 +395,35 @@ Giải thích từng dòng:
 • Dòng 3: lưu id bài đầu tiên vào biến collection firstPostId (giá trị 1).
 • Dòng 4: lưu số bài viết (10) để đối chiếu sau.
 Lấy dữ liệu từ response trước để dùng cho request sau gọi là correlation — kỹ năng bắt buộc khi test API và test hiệu năng.
+~~~js
+// GET {{baseUrl}}/posts?userId=1
+const posts = pm.response.json();
+pm.collectionVariables.set("firstPostId", posts[0].id);
+pm.collectionVariables.set("postCount", posts.length);
+~~~
 
 ### JMeter: JSON Extractor
-~~~text
-Thread Group
- ├─ HTTP Request: GET https://jsonplaceholder.typicode.com/users
- │    └─ JSON Extractor
- │         Names of created variables : firstUserId
- │         JSON Path expressions      : $[0].id
- │         Match No. (0 for Random)   : 1
- │         Default Values             : NOT_FOUND
- └─ HTTP Request: GET https://jsonplaceholder.typicode.com/users/${firstUserId}/posts
-~~~
 Thêm extractor: chuột phải vào HTTP Request → Add → Post Processors → JSON Extractor.
 • Names of created variables: tên biến JMeter sẽ tạo.
 • JSON Path expressions: biểu thức JSONPath; dùng $[0].id vì response là một array.
 • Match No.: 1 = lấy kết quả thứ nhất.
 • Default Values: giá trị khi không tìm thấy — đặt NOT_FOUND để dễ phát hiện lỗi.
 • Request sau dùng biến bằng cú pháp ${firstUserId}.
+~~~text
+Thread Group
+ ├─ HTTP Request: GET http://localhost:3130/users
+ │    └─ JSON Extractor
+ │         Names of created variables : firstUserId
+ │         JSON Path expressions      : $[0].id
+ │         Match No. (0 for Random)   : 1
+ │         Default Values             : NOT_FOUND
+ └─ HTTP Request: GET http://localhost:3130/users/${firstUserId}/posts
+~~~
 
 ### JMeter: Match No. và nhiều giá trị
+• -1 tạo ra một loạt biến đánh số; thường dùng cùng ForEach Controller để lặp qua từng id.
+• 0 (ngẫu nhiên) hữu ích khi muốn mỗi người dùng ảo chọn một sản phẩm khác nhau.
+• Thêm Debug Sampler và listener View Results Tree để xem các biến đã được tạo ra sao.
 ~~~text
 JSON Path expressions : $[*].id
 
@@ -433,21 +432,18 @@ Match No. = 0    -> ${userId} = ngẫu nhiên từ 1 đến 10
 Match No. = -1   -> ${userId_1} = 1, ${userId_2} = 2, ... ${userId_10} = 10
                     ${userId_matchNr} = 10     (tổng số giá trị tìm được)
 ~~~
-• -1 tạo ra một loạt biến đánh số; thường dùng cùng ForEach Controller để lặp qua từng id.
-• 0 (ngẫu nhiên) hữu ích khi muốn mỗi người dùng ảo chọn một sản phẩm khác nhau.
-• Thêm Debug Sampler và listener View Results Tree để xem các biến đã được tạo ra sao.
 
 ### Lỗi thường gặp
-~~~text
-GET https://jsonplaceholder.typicode.com/users/NOT_FOUND/posts   -> 404
-GET https://jsonplaceholder.typicode.com/users/${firstUserId}/posts
-TypeError: Cannot read properties of undefined (reading 'id')
-~~~
-• Biến ra NOT_FOUND: JSONPath sai hoặc request trước bị lỗi → trong View Results Tree, chọn chế độ hiển thị "JSON Path Tester" để thử biểu thức trên response thật.
+• Biến ra NOT_FOUND: JSONPath sai hoặc request trước bị lỗi → trong View Results Tree, chọn chế độ hiển thị "JSON Path Tester" để thử biểu thức trên response lab.
 • Biến giữ nguyên chữ ${firstUserId}: gõ sai tên biến, hoặc extractor đặt nhầm chỗ (phải là con của request trả về dữ liệu).
 • Postman báo reading 'id': posts là array rỗng → kiểm tra posts.length > 0 trước khi lấy posts[0].
+~~~text
+GET http://localhost:3130/users/NOT_FOUND/posts   -> 404
+GET http://localhost:3130/users/${firstUserId}/posts
+TypeError: Cannot read properties of undefined (reading 'id')
+~~~
 
-PRACTICE: Trong Postman, gửi GET https://jsonplaceholder.typicode.com/posts?userId=2, lưu id bài cuối cùng vào biến collection lastPostId, rồi gọi GET /posts/{{lastPostId}} và viết test kiểm tra userId = 2. Viết thêm biểu thức JSONPath tương đương để lấy id bài cuối.
+PRACTICE: Trong Postman, gửi GET http://localhost:3130/posts?userId=2, lưu id bài cuối cùng vào biến collection lastPostId, rồi gọi GET /posts/{{lastPostId}} và viết test kiểm tra userId = 2. Viết thêm biểu thức JSONPath tương đương để lấy id bài cuối.
 Q: Trong JMeter JSON Extractor, Match No. = -1 nghĩa là gì?
 - Lấy giá trị cuối cùng
 + Lấy tất cả giá trị, tạo các biến _1, _2, ... và _matchNr
@@ -460,6 +456,9 @@ Q: Trong Postman, cách viết nào tương đương JSONPath $[0].address.city?
 ## LESSON json-regex-05 | Regex căn bản: khuôn dò chữ
 
 ### Regex là gì?
+• Regex (regular expression, biểu thức chính quy) là "khuôn" để dò tìm chữ.
+• Giống Ctrl+F nhưng có ký tự đại diện: "một chữ số bất kỳ", "lặp lại 6 lần"...
+• Tester dùng regex để: kiểm tra định dạng (email, mã đơn), trích xuất dữ liệu (token, id) từ response, lọc file log.
 ~~~text
 Mẫu (pattern)     Khớp với
 cat               "cat", "concat", "category"
@@ -467,11 +466,11 @@ cat               "cat", "concat", "category"
 ORD-\d{6}         "ORD-000123"
 ^0\d{9}$          "0912345678" (cả chuỗi là 1 số điện thoại 10 số)
 ~~~
-• Regex (regular expression, biểu thức chính quy) là "khuôn" để dò tìm chữ.
-• Giống Ctrl+F nhưng có ký tự đại diện: "một chữ số bất kỳ", "lặp lại 6 lần"...
-• Tester dùng regex để: kiểm tra định dạng (email, mã đơn), trích xuất dữ liệu (token, id) từ response, lọc file log.
 
 ### Các ký tự đặc biệt
+• \D, \W, \S (viết hoa) là phủ định của \d, \w, \s.
+• Ví dụ: [A-Z]\d khớp "B7", không khớp "b7".
+• Lưu ý: trong JavaScript, \w chỉ gồm chữ không dấu (a-z, A-Z), số và _; trong Python, \w mặc định khớp cả chữ có dấu như "ữ".
 ~~~text
 .        một ký tự bất kỳ (trừ xuống dòng)
 \d       một chữ số 0-9
@@ -483,11 +482,11 @@ ORD-\d{6}         "ORD-000123"
 [^0-9]   một ký tự KHÔNG phải chữ số
 \.       dấu chấm thật (thêm \ để "tắt" ý nghĩa đặc biệt)
 ~~~
-• \D, \W, \S (viết hoa) là phủ định của \d, \w, \s.
-• Ví dụ: [A-Z]\d khớp "B7", không khớp "b7".
-• Lưu ý: trong JavaScript, \w chỉ gồm chữ không dấu (a-z, A-Z), số và _; trong Python, \w mặc định khớp cả chữ có dấu như "ữ".
 
 ### Lượng từ: lặp bao nhiêu lần?
+• Lượng từ (quantifier) đứng SAU thứ nó áp dụng: \d{6} = "chữ số, lặp 6 lần".
+• colou?r khớp cả "color" và "colour".
+• Mặc định lượng từ "tham lam" (greedy) — lấy nhiều nhất có thể. Bài 7 sẽ nói về cái bẫy này.
 ~~~text
 a+        1 hoặc nhiều chữ a          "a", "aaa"
 a*        0 hoặc nhiều chữ a          "", "aaaa"
@@ -496,11 +495,12 @@ a?        0 hoặc 1 chữ a              "", "a"
 \d{2,4}   từ 2 đến 4 chữ số           "12", "1234"
 \d{3,}    từ 3 chữ số trở lên         "123", "1234567"
 ~~~
-• Lượng từ (quantifier) đứng SAU thứ nó áp dụng: \d{6} = "chữ số, lặp 6 lần".
-• colou?r khớp cả "color" và "colour".
-• Mặc định lượng từ "tham lam" (greedy) — lấy nhiều nhất có thể. Bài 7 sẽ nói về cái bẫy này.
 
 ### Neo, lựa chọn và nhóm
+• ^ và $ là "neo": ghim mẫu vào đầu và cuối chuỗi. Không có neo, \d{6} vẫn khớp với "abc1234567xyz".
+• | nghĩa là "hoặc".
+• ( ) gom nhóm và "bắt" phần khớp để lấy ra dùng (capturing group).
+• Khi kiểm tra định dạng (validation), gần như luôn cần ^ ... $.
 ~~~text
 ^ORD                  chuỗi phải BẮT ĐẦU bằng ORD
 \d$                   chuỗi phải KẾT THÚC bằng một chữ số
@@ -509,37 +509,27 @@ PAID|SHIPPED          PAID hoặc SHIPPED
 ^(PAID|SHIPPED)$      cả chuỗi là PAID hoặc SHIPPED
 (\d{4})-(\d{2})       nhóm 1 = năm, nhóm 2 = tháng
 ~~~
-• ^ và $ là "neo": ghim mẫu vào đầu và cuối chuỗi. Không có neo, \d{6} vẫn khớp với "abc1234567xyz".
-• | nghĩa là "hoặc".
-• ( ) gom nhóm và "bắt" phần khớp để lấy ra dùng (capturing group).
-• Khi kiểm tra định dạng (validation), gần như luôn cần ^ ... $.
 
-### Luyện tập trên regex101.com
-~~~text
-1. Mở https://regex101.com
-2. Cột FLAVOR bên trái: chọn ECMAScript (JavaScript) hoặc Python
-3. Ô REGULAR EXPRESSION: gõ   ORD-\d{6}
-4. Ô TEST STRING: dán        Đơn ORD-000123 và ORD-12 đã tạo
-5. Ô flags bên phải ô regex: bật g để tìm tất cả kết quả
-6. Đọc khung EXPLANATION và MATCH INFORMATION bên phải
+### Luyện regex ngay trong Node hoặc DevTools lab
+Mở Node REPL trong thư mục lab hoặc DevTools của localhost, dùng regex JavaScript để tìm mã trong chuỗi tự đặt. Ví dụ trả đúng ORD-000123,không lấy ORD-12 thiếu số. Flagg tìm tất cả,i bỏ phân biệt hoa/thường,m thay cách neo theo dòng;đối chiếu engine thực dùng vì cú pháp không giống nhau hoàn toàn. Không tải dữ liệu lên công cụ công khai.
+~~~js
+const text='Đơn ORD-000123 và ORD-12 đã tạo';
+console.log([...text.matchAll(/ORD-\d{6}/g)].map(x=>x[0]));
+// ['ORD-000123']
 ~~~
-• Kết quả mong đợi: chỉ "ORD-000123" được tô màu; "ORD-12" không khớp vì thiếu chữ số.
-• Khung Explanation giải thích từng phần của regex — rất hợp để tự học.
-• Flag hay dùng: g (global, tìm tất cả), i (không phân biệt hoa thường), m (multiline, ^ và $ áp dụng cho từng dòng).
-• Không dán dữ liệu thật của khách hàng hay token lên trang web công cộng; chỉ dùng dữ liệu giả.
 
 ### Lỗi thường gặp
+• Quên escape: . + ? * ( ) [ ] { } ^ $ | \ là ký tự đặc biệt; muốn tìm đúng ký tự đó phải thêm \ phía trước. Trong JavaScript, dấu / cũng cần viết \/.
+• Quên neo ^ $: regex chỉ khớp một phần nên dữ liệu sai vẫn "pass".
+• Sai flavor: regex chạy đúng trên mẫu Python nhưng sai trong JavaScript → chọn đúng flavor của công cụ bạn dùng.
+• Regex quá dài, không ai đọc nổi → tách nhỏ và ghi chú giải thích.
 ~~~text
 Regex: example.com     khớp nhầm "exampleXcom"      -> sửa: example\.com
 Regex: \d{10}          khớp nhầm "a12345678901b"    -> sửa: ^\d{10}$
-Regex: \d{2}/\d{2}     regex101 (flavor ECMAScript) báo: An unescaped delimiter must be escaped
+Regex: \d{2}/\d{2}     regex literal JavaScript báo: An unescaped delimiter must be escaped
 ~~~
-• Quên escape: . + ? * ( ) [ ] { } ^ $ | \ là ký tự đặc biệt; muốn tìm đúng ký tự đó phải thêm \ phía trước. Trong JavaScript, dấu / cũng cần viết \/.
-• Quên neo ^ $: regex chỉ khớp một phần nên dữ liệu sai vẫn "pass".
-• Sai flavor: regex chạy đúng trên regex101 (Python) nhưng sai trong JavaScript → chọn đúng flavor của công cụ bạn dùng.
-• Regex quá dài, không ai đọc nổi → tách nhỏ và ghi chú giải thích.
 
-PRACTICE: Trên regex101 (flavor ECMAScript), viết regex khớp ngày dạng yyyy-mm-dd (ví dụ 2025-06-01) và một regex khớp mã đơn dạng ORD- cộng 6 chữ số. Dán test string có cả mẫu đúng lẫn sai và ghi lại chuỗi nào được tô màu.
+PRACTICE: Dùng Node REPL cục bộ với RegExp JavaScript, viết regex khớp dạng ngày yyyy-mm-dd và mã ORD- cộng6chữ số. Thử mảng có mẫu đúng/sai rồi ghi kết quả test()/matchAll(). Regex hình thức ngày không tự kiểm ngày có tồn tại trong lịch; bổ sung parse/kiểm miền nếu cần.
 Q: Regex \d{6} khớp với chuỗi nào?
 - "12345"
 + "123456"
@@ -556,6 +546,13 @@ Q: Muốn tìm đúng ký tự dấu chấm trong chuỗi, viết regex thế n�
 ## LESSON json-regex-06 | Regex trong JavaScript và Python
 
 ### JavaScript: kiểm tra đúng/sai với test()
+Lưu thành regex1.js, chạy node regex1.js.
+Giải thích từng dòng:
+• Dòng 1: trong JavaScript, regex được viết giữa hai dấu / /.
+• .test(chuỗi): trả về true nếu khớp, false nếu không.
+• Dòng 3–5: thử một mã đúng, một mã thiếu số, một mã viết thường.
+• Dòng cuối: thêm flag i sau dấu / cuối để không phân biệt hoa thường.
+Kết quả mong đợi: true, false, false, true.
 ~~~js
 const orderCode = /^ORD-\d{6}$/;
 
@@ -564,15 +561,15 @@ console.log(orderCode.test("ORD-12345"));
 console.log(orderCode.test("ord-123456"));
 console.log(/^ORD-\d{6}$/i.test("ord-123456"));
 ~~~
-Lưu thành regex1.js, chạy node regex1.js.
-Giải thích từng dòng:
-• Dòng 1: trong JavaScript, regex được viết giữa hai dấu / /.
-• .test(chuỗi): trả về true nếu khớp, false nếu không.
-• Dòng 3–5: thử một mã đúng, một mã thiếu số, một mã viết thường.
-• Dòng cuối: thêm flag i sau dấu / cuối để không phân biệt hoa thường.
-Kết quả mong đợi: true, false, false, true.
 
 ### JavaScript: lấy kết quả với match()
+• match có flag g: trả về mảng TẤT CẢ chuỗi khớp.
+• match không có g: trả về kết quả khớp đầu tiên kèm các nhóm; [0] là toàn bộ phần khớp, [1] là nhóm thứ nhất.
+Kết quả mong đợi:
+[ 'ORD-100001', 'ORD-100002', 'ORD-100003' ]
+3
+ORD-100002 failed
+100002
 ~~~js
 const log = "Order ORD-100001 paid, ORD-100002 failed, ORD-100003 paid";
 
@@ -584,15 +581,16 @@ const failed = log.match(/ORD-(\d{6}) failed/);
 console.log(failed[0]);
 console.log(failed[1]);
 ~~~
-• match có flag g: trả về mảng TẤT CẢ chuỗi khớp.
-• match không có g: trả về kết quả khớp đầu tiên kèm các nhóm; [0] là toàn bộ phần khớp, [1] là nhóm thứ nhất.
-Kết quả mong đợi:
-[ 'ORD-100001', 'ORD-100002', 'ORD-100003' ]
-3
-ORD-100002 failed
-100002
 
 ### Python: re.findall và re.search
+Lưu thành regex_demo.py, chạy python regex_demo.py.
+Giải thích:
+• import re: nạp thư viện regex có sẵn của Python.
+• r"...": chuỗi "raw" để Python không hiểu nhầm dấu \. Luôn dùng r"" cho regex.
+• re.findall: trả về list mọi chuỗi khớp.
+• re.search: tìm kết quả đầu tiên; trả về None nếu không thấy, nên phải kiểm tra if m.
+• group(0) là toàn bộ phần khớp, group(1) là nhóm thứ nhất.
+Kết quả mong đợi: ['0912345678', '0381234567'], ORD-000123, 000123.
 ~~~python
 import re
 
@@ -606,16 +604,13 @@ if m:
     print(m.group(0))
     print(m.group(1))
 ~~~
-Lưu thành regex_demo.py, chạy python regex_demo.py.
-Giải thích:
-• import re: nạp thư viện regex có sẵn của Python.
-• r"...": chuỗi "raw" để Python không hiểu nhầm dấu \. Luôn dùng r"" cho regex.
-• re.findall: trả về list mọi chuỗi khớp.
-• re.search: tìm kết quả đầu tiên; trả về None nếu không thấy, nên phải kiểm tra if m.
-• group(0) là toàn bộ phần khớp, group(1) là nhóm thứ nhất.
-Kết quả mong đợi: ['0912345678', '0381234567'], ORD-000123, 000123.
 
 ### Bộ regex kiểm tra định dạng thường dùng
+• email: [^\s@]+ = "một hoặc nhiều ký tự không phải khoảng trắng và không phải @". Mẫu này chỉ kiểm tra "trông giống email", không đảm bảo email tồn tại.
+• phoneVN: số 0 rồi đúng 9 chữ số (tổng 10 số). Quy tắc thật của dự án có thể khác — luôn theo tài liệu yêu cầu.
+• date: đúng hình dạng yyyy-mm-dd.
+Kết quả mong đợi: true, false, true, false, true.
+Chú ý dòng cuối: "2025-13-45" vẫn true! Regex chỉ kiểm tra hình dạng, không biết tháng 13 không tồn tại → cần kiểm tra logic ngày tháng riêng.
 ~~~js
 const rules = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -630,15 +625,13 @@ console.log(rules.phoneVN.test("0912345678"));
 console.log(rules.phoneVN.test("912345678"));
 console.log(rules.date.test("2025-13-45"));
 ~~~
-• email: [^\s@]+ = "một hoặc nhiều ký tự không phải khoảng trắng và không phải @". Mẫu này chỉ kiểm tra "trông giống email", không đảm bảo email tồn tại.
-• phoneVN: số 0 rồi đúng 9 chữ số (tổng 10 số). Quy tắc thật của dự án có thể khác — luôn theo tài liệu yêu cầu.
-• date: đúng hình dạng yyyy-mm-dd.
-Kết quả mong đợi: true, false, true, false, true.
-Chú ý dòng cuối: "2025-13-45" vẫn true! Regex chỉ kiểm tra hình dạng, không biết tháng 13 không tồn tại → cần kiểm tra logic ngày tháng riêng.
 
 ### Dùng regex trong test Postman
+• to.match(regex): giá trị phải khớp regex.
+• Với user 1 (email lab-1@example.com, zipcode 92998-3874), mong đợi 2 test PASS.
+• Thử áp dụng test zipcode cho cả 10 user của /users bằng forEach: nếu có user fail, hãy tự hỏi đó là bug dữ liệu hay quy tắc regex quá chặt so với yêu cầu.
 ~~~js
-// GET https://jsonplaceholder.typicode.com/users/1
+// GET http://localhost:3130/users/1
 const user = pm.response.json();
 
 pm.test("Email đúng định dạng", function () {
@@ -649,22 +642,19 @@ pm.test("Zipcode dạng 5 số - 4 số", function () {
   pm.expect(user.address.zipcode).to.match(/^\d{5}-\d{4}$/);
 });
 ~~~
-• to.match(regex): giá trị phải khớp regex.
-• Với user 1 (email Sincere@april.biz, zipcode 92998-3874), mong đợi 2 test PASS.
-• Thử áp dụng test zipcode cho cả 10 user của /users bằng forEach: nếu có user fail, hãy tự hỏi đó là bug dữ liệu hay quy tắc regex quá chặt so với yêu cầu.
 
 ### Lỗi thường gặp
-~~~js
-const re = /ORD-\d{6}/g;
-console.log(re.test("ORD-000001"));
-console.log(re.test("ORD-000001"));
-~~~
 Kết quả: true rồi false! Regex có flag g "nhớ" vị trí tìm lần trước (lastIndex). Khi chỉ cần kiểm tra đúng/sai, đừng dùng flag g.
 Các lỗi khác:
 • SyntaxError: Invalid regular expression: /(ORD/: Unterminated group → thiếu dấu ).
 • Python: SyntaxWarning: invalid escape sequence '\d' → quên chữ r trước chuỗi regex.
 • Python: AttributeError: 'NoneType' object has no attribute 'group' → re.search không tìm thấy mà vẫn gọi .group().
 • JavaScript: TypeError: Cannot read properties of null (reading '1') → match trả về null vì không khớp.
+~~~js
+const re = /ORD-\d{6}/g;
+console.log(re.test("ORD-000001"));
+console.log(re.test("ORD-000001"));
+~~~
 
 PRACTICE: Viết file validate.js chứa 4 regex (email, phoneVN, orderCode, date), thử mỗi regex với 3 chuỗi đúng và 3 chuỗi sai do bạn tự nghĩ. In kết quả dạng "chuỗi -> true/false" và đánh dấu trường hợp nào regex cho kết quả chưa hợp lý.
 Q: Trong Python, vì sao nên viết regex là r"\d+" thay vì "\d+"?
@@ -683,18 +673,24 @@ Q: re.findall(r"0\d{9}", text) trả về gì?
 ## LESSON json-regex-07 | Trích xuất bằng nhóm và bẫy greedy/lazy
 
 ### Nhóm ( ): bắt đúng phần cần lấy
+• Phần nằm trong ngoặc ( ) là thứ ta muốn "bắt" lấy.
+• [^"]+ = một hoặc nhiều ký tự không phải dấu nháy kép → dừng đúng tại dấu " kết thúc giá trị.
+• Nhóm 0 là toàn bộ phần khớp; nhóm 1, 2... là các ngoặc tính từ trái sang phải.
+• Ứng dụng: lấy token ẩn trong trang HTML, lấy mã đơn trong tin nhắn, lấy id trong header Location.
 ~~~text
 Chuỗi  : <input type="hidden" name="csrf_token" value="a1b2c3d4e5">
 Regex  : name="csrf_token" value="([^"]+)"
 Nhóm 0 : name="csrf_token" value="a1b2c3d4e5"
 Nhóm 1 : a1b2c3d4e5
 ~~~
-• Phần nằm trong ngoặc ( ) là thứ ta muốn "bắt" lấy.
-• [^"]+ = một hoặc nhiều ký tự không phải dấu nháy kép → dừng đúng tại dấu " kết thúc giá trị.
-• Nhóm 0 là toàn bộ phần khớp; nhóm 1, 2... là các ngoặc tính từ trái sang phải.
-• Ứng dụng: lấy token ẩn trong trang HTML, lấy mã đơn trong tin nhắn, lấy id trong header Location.
 
 ### Trích xuất bằng JavaScript
+Giải thích từng dòng:
+• Dòng 1–2: dữ liệu mẫu — một đoạn HTML và giá trị của header Location.
+• Dòng 4–5: match trả về mảng; phần tử [1] là nhóm thứ nhất.
+• \/ là dấu / đã được escape, vì trong JavaScript dấu / dùng để bao regex.
+• csrf ? csrf[1] : "...": nếu tìm thấy thì in nhóm 1, nếu không (null) thì in thông báo — tránh lỗi đọc null.
+Kết quả mong đợi: a1b2c3d4e5 và ORD-000777.
 ~~~js
 const html = '<form><input type="hidden" name="csrf_token" value="a1b2c3d4e5"></form>';
 const locationHeader = "/api/orders/ORD-000777";
@@ -705,28 +701,27 @@ const order = locationHeader.match(/\/orders\/(ORD-\d{6})$/);
 console.log(csrf ? csrf[1] : "Không tìm thấy token");
 console.log(order ? order[1] : "Không tìm thấy mã đơn");
 ~~~
-Giải thích từng dòng:
-• Dòng 1–2: dữ liệu mẫu — một đoạn HTML và giá trị của header Location.
-• Dòng 4–5: match trả về mảng; phần tử [1] là nhóm thứ nhất.
-• \/ là dấu / đã được escape, vì trong JavaScript dấu / dùng để bao regex.
-• csrf ? csrf[1] : "...": nếu tìm thấy thì in nhóm 1, nếu không (null) thì in thông báo — tránh lỗi đọc null.
-Kết quả mong đợi: a1b2c3d4e5 và ORD-000777.
 
 ### Greedy và lazy: tham lam hay vừa đủ?
-~~~js
-const html = "<b>Giá</b> và <b>Số lượng</b>";
-
-console.log(html.match(/<b>(.*)<\/b>/)[1]);
-console.log(html.match(/<b>(.*?)<\/b>/)[1]);
-~~~
 Kết quả mong đợi:
 Giá</b> và <b>Số lượng
 Giá
 • .* là tham lam (greedy): ăn nhiều nhất có thể, chạy tới </b> CUỐI CÙNG.
 • .*? là lười (lazy): dừng ở </b> GẦN NHẤT.
 • Khi trích xuất giá trị nằm giữa hai dấu mốc, nên dùng .*? hoặc [^<]+ thay vì .*
+~~~js
+const html = "<b>Giá</b> và <b>Số lượng</b>";
+
+console.log(html.match(/<b>(.*)<\/b>/)[1]);
+console.log(html.match(/<b>(.*?)<\/b>/)[1]);
+~~~
 
 ### Python: nhóm có tên để đọc log
+• (?P<tên>...): nhóm có tên (named group) trong Python — dễ đọc hơn nhóm số 1, 2, 3.
+• .* ở giữa: bỏ qua phần giờ và mức log.
+• Ứng dụng: quét file log hàng nghìn dòng để tìm mọi đơn lỗi PAYMENT_TIMEOUT.
+Kết quả mong đợi: 2025-05-04, ORD-000777, PAYMENT_TIMEOUT.
+Trong JavaScript, nhóm có tên viết là (?<tên>...) — không có chữ P.
 ~~~python
 import re
 
@@ -739,13 +734,13 @@ if m:
     print(m.group("order"))
     print(m.group("code"))
 ~~~
-• (?P<tên>...): nhóm có tên (named group) trong Python — dễ đọc hơn nhóm số 1, 2, 3.
-• .* ở giữa: bỏ qua phần giờ và mức log.
-• Ứng dụng: quét file log hàng nghìn dòng để tìm mọi đơn lỗi PAYMENT_TIMEOUT.
-Kết quả mong đợi: 2025-05-04, ORD-000777, PAYMENT_TIMEOUT.
-Trong JavaScript, nhóm có tên viết là (?<tên>...) — không có chữ P.
 
 ### JMeter: Regular Expression Extractor
+Thêm bằng: chuột phải request → Add → Post Processors → Regular Expression Extractor.
+• Template $1$: lấy nhóm số 1 (phần trong ngoặc).
+• Match No. 1: lấy kết quả khớp đầu tiên.
+• Default Value: giá trị khi không khớp — giúp phát hiện lỗi ngay.
+• Response là JSON thì ưu tiên JSON Extractor; Regular Expression Extractor hợp với HTML, header, text thường.
 ~~~text
 HTTP Request: GET /login-page        (ứng dụng tập luyện chạy trên máy bạn)
  └─ Regular Expression Extractor
@@ -757,13 +752,13 @@ HTTP Request: GET /login-page        (ứng dụng tập luyện chạy trên m�
       Default Value            : CSRF_NOT_FOUND
 HTTP Request: POST /login            (body có csrf_token=${csrf})
 ~~~
-Thêm bằng: chuột phải request → Add → Post Processors → Regular Expression Extractor.
-• Template $1$: lấy nhóm số 1 (phần trong ngoặc).
-• Match No. 1: lấy kết quả khớp đầu tiên.
-• Default Value: giá trị khi không khớp — giúp phát hiện lỗi ngay.
-• Response là JSON thì ưu tiên JSON Extractor; Regular Expression Extractor hợp với HTML, header, text thường.
 
 ### Lỗi thường gặp và khi nào KHÔNG nên dùng regex
+Kết quả mong đợi: abc.def.ghi
+• Regex cho JSON rất dễ vỡ: chỉ cần server thêm khoảng trắng ("token": "...") là regex trên hết khớp. Dữ liệu JSON thì dùng JSON.parse hoặc JSONPath.
+• TypeError: Cannot read properties of null (reading '1'): regex không khớp nên match trả về null → luôn kiểm tra trước khi lấy [1].
+• Biến JMeter ra CSRF_NOT_FOUND: regex khác response lab (dấu cách, thứ tự thuộc tính) → dùng đúng đoạn response giả trong Node REPL để thử bằng RegExp; với response HTML phức tạp cân nhắc parser thay regex.
+• Regex lồng lượng từ như (a+)+ có thể chạy cực lâu với chuỗi dài (catastrophic backtracking) → giữ regex đơn giản.
 ~~~js
 const body = '{"user":"demo","token":"abc.def.ghi"}';
 
@@ -774,11 +769,6 @@ const m = body.match(/"token":"(.+?)"/);
 const token = JSON.parse(body).token;
 console.log(token);
 ~~~
-Kết quả mong đợi: abc.def.ghi
-• Regex cho JSON rất dễ vỡ: chỉ cần server thêm khoảng trắng ("token": "...") là regex trên hết khớp. Dữ liệu JSON thì dùng JSON.parse hoặc JSONPath.
-• TypeError: Cannot read properties of null (reading '1'): regex không khớp nên match trả về null → luôn kiểm tra trước khi lấy [1].
-• Biến JMeter ra CSRF_NOT_FOUND: regex khác response thật (dấu cách, thứ tự thuộc tính) → copy đúng đoạn response vào regex101 để thử.
-• Regex lồng lượng từ như (a+)+ có thể chạy cực lâu với chuỗi dài (catastrophic backtracking) → giữ regex đơn giản.
 
 PRACTICE: Cho chuỗi log "2025-06-01 08:00:01 WARN order=ORD-000321 code=OUT_OF_STOCK". Viết regex (JavaScript hoặc Python) dùng nhóm để lấy ra ngày, mã đơn và mã lỗi. Sau đó thử regex greedy và lazy trên chuỗi "<i>a</i><i>b</i>" và giải thích vì sao kết quả khác nhau.
 Q: Với chuỗi "<b>A</b><b>B</b>", regex <b>(.*?)<\/b> lấy được nhóm 1 là gì?
@@ -793,3 +783,388 @@ Q: Response là JSON. Cách lấy token đáng tin cậy nhất là gì?
 - Regex .* tham lam
 - Cắt chuỗi theo vị trí ký tự
 + Phân tích JSON (JSON.parse, JSONPath hoặc JSON Extractor)
+
+## LESSON json-regex-08 | Schema và validate ở ranh giới API
+
+### Schema kiểm hình dạng tại cửa vào
+Kho giả định Tơ Nâu nhận id chuỗi không rỗng và qty nguyên dương. Phiên bản lab từ chối trường lạ; đổi chính sách phải xem tương thích client, không chỉ sửa mẫu thành công.
+~~~json
+{"type":"object","required":["id","qty"],"properties":{"id":{"type":"string","minLength":1},"qty":{"type":"integer","minimum":1}},"additionalProperties":false}
+~~~
+
+### Hiện diện và giá trị là hai trục
+Ba payload dưới bị từ chối vì thiếu trường, sai kiểu hoặc ngoài miền. Nếu cho phép null, viết rõ union kiểu và quyết định nghĩa nghiệp vụ; required không tự giải quyết điều này.
+~~~text
+{}
+{"id":"K2","qty":null}
+{"id":"K2","qty":0}
+~~~
+
+### Validator thay tự đoán toàn bộ chuẩn
+Ajv là công cụ mã nguồn mở. Biên dịch schema cục bộ một lần rồi kiểm nhiều payload; ví dụ không tải schema qua mạng và cần pin phiên bản dependency trong lab.
+~~~js
+import Ajv from 'ajv';
+const ajv=new Ajv({allErrors:true});
+const schema={type:'object',required:['qty'],properties:{qty:{type:'integer',minimum:1}},additionalProperties:false};
+const valid=ajv.compile(schema);
+console.log(valid({qty:0}),valid.errors);
+~~~
+
+### Đúng shape chưa đủ đúng giao dịch
+qty hợp kiểu vẫn có thể vượt tồn kho hoặc thuộc đơn người khác. Sau kiểm shape phải kiểm quyền và nghiệp vụ; không cố biến regex id thành cơ chế cấp quyền.
+
+### Tạo ca âm có ý nghĩa
+Kiểm trường lạ, id rỗng, qty lẻ và trường thiếu, mỗi ca chỉ nhắm một lý do. Ghi instancePath/keyword cùng expected để biết validator đang chặn đúng điều kiện.
+
+PRACTICE: Tạo lab Node ESM dùng Ajv với schema cục bộ và tám payload tự viết. Chạy cả tốt/xấu, báo path và keyword, tách quy tắc tồn kho khỏi schema.
+Q: Schema có thay kiểm quyền không?
++ Không
+- Có nếu chuỗi ngắn
+- Có nếu không có NULL
+Q: required khác nullable thế nào?
++ Hiện diện khác cho phép null
+- required luôn cấm null
+- Cho null luôn cho thiếu
+
+## LESSON json-regex-09 | Unicode, chuẩn hóa và cách đếm ký tự
+
+### Đơn vị độ dài cần theo sản phẩm
+Nhãn giả định giới hạn ký tự người đọc thấy. length đếm UTF-16, spread đếm code point; chữ có dấu tổ hợp có thể là nhiều code point trong một grapheme.
+~~~js
+const s='á';
+console.log(s.length,[...s].length); // 2,2
+console.log(s.normalize('NFC').length); // 1 với ví dụ này
+~~~
+
+### NFC cho tương đương chuẩn tắc
+Chuẩn hóa có thể hỗ trợ so hai cách nhập cùng chữ, không phải sửa chính tả hay bỏ dấu. Chỉ áp cho trường đã có quy định, giữ bản gốc nếu cần hiển thị hoặc đối chiếu.
+~~~js
+const a='á',b='á';
+console.assert(a!==b);
+console.assert(a.normalize('NFC')===b.normalize('NFC'));
+~~~
+
+### Tách ngân sách byte và ký tự
+Intl.Segmenter chia grapheme trên runtime hỗ trợ. Byte phục vụ giới hạn truyền/lưu, grapheme phục vụ một số yêu cầu hiển thị; cần test emoji và dấu kết hợp theo chính sách.
+~~~js
+const seg=new Intl.Segmenter('vi',{granularity:'grapheme'});
+const count=s=>[...seg.segment(s)].length;
+console.log(count('á'));
+console.log(new TextEncoder().encode('á').length);
+~~~
+
+### Bẫy chuẩn hóa toàn hệ thống
+NFKC có thể gộp khác biệt hình thức có ý nghĩa. Không áp chỉ để test xanh; quy tắc tìm kiếm có thể khác quy tắc lưu nội dung và xác định danh tính.
+
+### Bảng nhập dấu của người Việt
+Dùng chữ dựng sẵn, dấu tổ hợp, emoji nối, khoảng trắng cuối và xuống dòng. Ghi expected từng đơn vị và kiểm max-1/max/max+1 theo tiêu chí thực tế.
+
+PRACTICE: Viết hàm đếm grapheme, so NFC với sáu chuỗi tự tạo. Bàn giao bảng byte/code point/grapheme và chính sách lưu nguyên bản; kiểm runtime có Intl.Segmenter.
+Q: Hai chữ nhìn giống có thể khác mã vì sao?
++ Dựng sẵn và dấu tổ hợp Unicode
+- Unicode chỉ có ASCII
+- Màn hình sửa mã
+Q: JavaScript length đếm đơn vị gì?
++ Đơn vị mã UTF-16
+- Luôn số chữ nhìn thấy
+- Byte UTF-8
+
+## LESSON json-regex-10 | Regex chậm, giới hạn input và parser thay thế
+
+### Nhận diện mẫu có nhiều cách phân tách
+Nhóm lặp lồng nhóm lặp có thể chậm mạnh khi gần khớp rồi hỏng cuối. Chỉ nhận diện mẫu và thử input nhỏ, không tăng chuỗi vô hạn để chứng minh bằng cách làm treo máy.
+~~~js
+// Chỉ xem cấu trúc rủi ro:
+const source='^(a+)+$';
+const simpler=/^a+$/;
+console.log(simpler.test('aaaa'));
+~~~
+
+### Giới hạn nguồn trước phép khớp
+Mã lab có tiền tố LAB- và tối đa hai mươi ký tự ASCII sau đó. Kiểm kiểu/độ dài trước regex; con số là chính sách ví dụ, không phải chuẩn áp dụng mọi sản phẩm.
+~~~js
+function validCode(s){
+ if(typeof s!=='string'||s.length>24)return false;
+ return /^LAB-[A-Z0-9]{1,20}$/.test(s);
+}
+console.assert(validCode('LAB-A3'));
+~~~
+
+### Parser cho cấu trúc lồng
+Regex không phải lựa chọn phù hợp để đọc JSON có escape và object lồng. Giới hạn byte rồi JSON.parse, sau đó kiểm shape và miền; lỗi parse không được biến thành object rỗng thành công.
+~~~js
+function read(s){
+ if(new TextEncoder().encode(s).length>4096)throw new Error('too_large');
+ const x=JSON.parse(s);
+ if(x===null||Array.isArray(x)||typeof x!=='object')throw new Error('object_required');
+ return x;
+}
+~~~
+
+### Timer cùng luồng không bảo đảm ngắt
+Regex JavaScript đồng bộ có thể chặn event loop. setTimeout cùng luồng không chắc ngắt được phép khớp đang chạy; ưu tiên mẫu đơn giản và môi trường đo có giới hạn tài nguyên riêng.
+
+### Finding cần phương án sửa cụ thể
+Nêu pattern, dạng input gần khớp, tác động và cách thay bằng parser hoặc mẫu nhỏ. Một lần chạy nhanh không đủ kết luận an toàn, lazy cũng không tự xóa mọi nguy cơ.
+
+PRACTICE: Review năm mẫu tự đặt, viết lại hai mẫu và thêm giới hạn input. Dùng test gần khớp nhỏ, giải thích khi nào chọn parser; không benchmark tải tăng không giới hạn.
+Q: Lượng từ lồng gần khớp có thể gây gì?
++ Backtracking tốn tài nguyên
+- Luôn thời gian hằng số
+- Chỉ lỗi cú pháp
+Q: Kiểm email sơ bộ nên dựa vào gì?
++ Quy tắc sản phẩm và luồng xác minh
+- Một regex dài là đủ
+- Chỉ có ký tự @
+
+## LESSON json-regex-11 | Đọc JSON lớn và phản hồi lỗi có đường dẫn
+
+### Chốt giao thức NDJSON
+Mỗi dòng không rỗng là một object JSON độc lập theo quy ước lab. Không split một JSON array nhiều dòng bất kỳ; producer phải cam kết cách mã hóa record.
+~~~text
+{"id":"N1","qty":2}
+{"id":"N2","qty":0}
+{"id":"N3","qty":4}
+~~~
+
+### Đọc luồng vẫn cần kiểm tài nguyên
+readline hỗ trợ CRLF nhưng không tự đặt ngân sách chiều dài một dòng. Ví dụ cần thêm giới hạn file và record ở lớp nhập; thu lỗi không đồng nghĩa import được báo thành công.
+~~~js
+import {createReadStream} from 'node:fs';
+import {createInterface} from 'node:readline';
+const rl=createInterface({input:createReadStream('input.ndjson'),crlfDelay:Infinity});
+let n=0;
+for await(const line of rl){
+ n++;if(!line.trim())continue;
+ try{console.log(n,JSON.parse(line).id);}
+ catch{console.error(`line ${n}: invalid_json`);}
+}
+~~~
+
+### Vị trí lỗi vừa đủ để sửa
+Báo số dòng nguồn và path trong record, không dump nguyên dữ liệu riêng tư. Code ổn định giúp tổng hợp số lỗi theo loại và dịch thông báo thân thiện ở giao diện.
+~~~json
+{"file":"input.ndjson","line":2,"path":"$.qty","code":"positive_integer_required"}
+~~~
+
+### Thu đủ lỗi hay dừng phải có chính sách
+Có thể thu lỗi rồi từ chối cả lô hoặc xử lý dòng tốt nếu sản phẩm cho phép. Công khai tính nguyên tử; nếu stream bị cắt giữa chừng, không báo như đã kiểm toàn file.
+
+### Kiểm biên của luồng đọc
+Fixture gồm file rỗng, dòng cuối thiếu newline, CRLF, JSON hỏng và lỗi đọc giả lập. Ghi hành vi mong đợi mỗi ca để phân biệt đầu vào không hợp lệ với nguồn không đọc được.
+
+PRACTICE: Xây CLI báo dòng/path, chỉ hiển thị tối đa hai mươi lỗi nhưng tổng hợp đủ số lỗi. Kiểm file trống và dòng cuối thiếu newline, ghi giới hạn file/record và tính nguyên tử.
+Q: NDJSON lab quy định gì?
++ Một giá trị JSON trên mỗi dòng
+- Mọi JSON đều split dòng được
+- Không cần parse
+Q: Lỗi $[3].qty giúp gì?
++ Tìm vị trí cần sửa
+- Tự sửa số lượng
+- Xóa bản ghi
+
+## LESSON json-regex-12 | So sánh hợp đồng: thiếu, null và khác thứ tự
+
+### So dữ liệu theo nghĩa hợp đồng
+Object lab được coi là ánh xạ, array giữ thứ tự hiển thị. Serialize trực tiếp có thể khác vì thứ tự khóa; tự sort mọi array lại có thể che lỗi thứ tự nghiệp vụ.
+~~~js
+const a={id:'R1',qty:2},b={qty:2,id:'R1'};
+console.log(JSON.stringify(a)===JSON.stringify(b)); // false
+~~~
+
+### Không xóa khác biệt null và thiếu
+hasOwn kiểm trường có thật trên object. Xóa null trước so sánh có thể làm thay đổi hợp đồng bị bỏ lọt; optional và nullable phải có test riêng.
+~~~js
+const a={},b={note:null};
+console.log(Object.hasOwn(a,'note')); // false
+console.log(Object.hasOwn(b,'note')); // true
+~~~
+
+### Báo diff ngắn có đường dẫn
+Mỗi khác biệt có path và loại lỗi. Che dữ liệu riêng tư ở báo cáo theo chính sách, không sửa comparator để coi mọi giá trị nhạy cảm là giống nhau.
+~~~json
+[{"path":"$.items[1].qty","kind":"changed","expected":2,"actual":3},{"path":"$.note","kind":"missing"}]
+~~~
+
+### Chuẩn hóa số và ngày có điều kiện
+1 và 1.0 cùng là number sau parse nhưng "1" khác 1. Chỉ quy hai chuỗi giờ về cùng instant khi hợp đồng cho phép; không bỏ múi giờ để test xanh.
+
+### Kiểm chính công cụ so sánh
+Expected phải viết tay cho khóa đảo, array đảo, null/thiếu và object lồng. Comparator lỗi có thể khiến cả bộ test xanh sai, nên test âm phải chứng minh từng loại lệch bị phát hiện.
+
+PRACTICE: Viết comparator giới hạn cho JSON lab và sáu cặp fixture. Xuất diff có path, nêu chính sách object/array/null/số/ngày và loại cấu trúc chưa hỗ trợ.
+Q: Object đổi thứ tự khóa có luôn đổi nghĩa không?
++ Thường không theo hợp đồng ánh xạ
+- Luôn có
+- Chỉ khi hơn ba khóa
+Q: Thiếu trường và null nên so ra sao?
++ Phân biệt trừ khi hợp đồng quy định khác
+- Luôn đổi thành 0
+- Xóa cả hai
+
+## LESSON json-regex-13 | Dự án: bộ kiểm dữ liệu nhập từ file
+
+### Luồng import chỉ tạo báo cáo
+Xưởng giả định Lụa Vang cần kiểm trước khi nạp kho. Dự án không tự sửa nguồn hay kết nối dữ liệu công việc; trạng thái từng tầng giúp xác định lỗi đọc, cú pháp, shape hoặc trùng mã.
+~~~text
+nguồn -> giới hạn byte -> đọc dòng -> parse
+      -> kiểm shape -> kiểm trùng -> báo cáo
+Trạng thái: OK / INVALID_INPUT / READ_ERROR
+Không biến đổi input.
+~~~
+
+### Regex nhỏ cho mã có quy tắc rõ
+id lab là SP- cộng một đến mười hai ký tự ASCII hoa hoặc số, qty nguyên không âm. Tên Unicode đi qua quy tắc riêng, không dồn mọi yêu cầu vào cùng regex.
+~~~js
+function checkRow(x){
+ if(!x||typeof x!=='object'||Array.isArray(x))return ['object_required'];
+ const e=[];
+ if(typeof x.id!=='string'||!/^SP-[A-Z0-9]{1,12}$/.test(x.id))e.push('id_invalid');
+ if(!Number.isInteger(x.qty)||x.qty<0)e.push('qty_invalid');
+ return e;
+}
+~~~
+
+### Lưu lần xuất hiện đầu khi tìm trùng
+Map lưu dòng đầu để khi gặp trùng chỉ được cả hai vị trí. Không ghi đè ngay khi gặp id mới, vì người sửa cần đầu mối đối chiếu thay vì chỉ biết mã bị trùng.
+~~~js
+const seen=new Map();
+function duplicate(id,line){
+ if(seen.has(id))return {id,firstLine:seen.get(id),line};
+ seen.set(id,line);return null;
+}
+~~~
+
+### Cài lỗi có chủ đích vào bộ nghiệm thu
+Tạo mười fixture gồm trùng mã, ký tự lạ, qty null/âm, dấu tổ hợp và JSON hỏng. Expected tách khỏi hàm kiểm; tạm phá một điều kiện để chứng minh test đủ nhạy.
+
+### Gói bàn giao có thể chạy lại
+Nộp Node ESM, dữ liệu tự viết, báo cáo, exit code và checksum input trước/sau. Công khai giới hạn bộ nhớ, số record và loại lỗi chưa kiểm; không coi lab là chứng nhận an toàn.
+
+PRACTICE: Hoàn thiện CLI import-check với kiểm cú pháp, shape, Unicode, trùng và lỗi I/O. Chạy cả fixture tốt/xấu, nộp lỗi dòng/path, exit code, checksum nguồn và hướng dẫn tái lập.
+Q: Trước parse file nên giới hạn gì?
++ Kích thước và nguồn theo chính sách
+- Màu tên file
+- Chỉ khoảng trắng
+Q: Vì sao không tự sửa mọi input sai?
++ Có thể đổi nghĩa mà người nhập không biết
+- Dữ liệu sai luôn vô hại
+- Schema không báo lỗi
+Q: Nghiệm thu công cụ import dựa vào gì?
++ Fixture tốt/xấu và lỗi có vị trí
+- Số dòng code
+- Độ dài regex
+
+## LESSON json-regex-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. JSON phân biệt boolean true với chuỗi "true"; khóa và chuỗi dùng nháy kép.
+2. JSON không cho dấu phẩy thừa; tách lỗi parse khỏi lỗi schema để người nhập sửa đúng tầng.
+3. Payload ngoài chương trình có thể thiếu object cha; phải quyết định báo thiếu hay cho phép optional.
+4. Neo không thay kiểm miền; cờ multiline và ký tự xuống dòng ảnh hưởng ý nghĩa đầu/cuối.
+
+### Dữ liệu và điều kiện biên
+5. Extraction chỉ lấy phần khớp; validation phải kiểm phạm vi đầy đủ và giới hạn đã công bố.
+6. Lazy đổi ưu tiên tìm nghiệm, không tự bảo đảm đúng hoặc ngăn backtracking quá mức.
+7. Reset và assert biến phụ thuộc để tránh request sau dùng dữ liệu cũ làm kiểm tra xanh sai.
+8. Schema kiểm shape; quyền sở hữu và bất biến nghiệp vụ phải được kiểm ở lớp phù hợp.
+
+### Tính đúng và cách điều tra
+9. Trường bắt buộc vẫn có thể chấp nhận null nếu kiểu cho phép; optional không tự cho null.
+10. NFC xử lý tương đương chuẩn tắc, không xóa dấu hay sửa mọi ký tự gần giống.
+11. Code unit, code point và grapheme có thể khác nhau; chọn theo yêu cầu cụ thể.
+12. Mẫu có nhiều cách phân tách có thể chậm mạnh; cần đơn giản hóa và giới hạn đầu vào.
+
+### Rủi ro và lựa chọn phương án
+13. Kiểm hình dạng không chứng minh hộp thư nhận được thư; quy tắc cần được xác nhận riêng.
+14. Xử lý theo dòng chỉ đúng khi producer giữ quy ước, không dùng cho JSON array nhiều dòng bất kỳ.
+15. Path phải đi cùng code/kỳ vọng; tránh in toàn dữ liệu riêng tư vào log.
+16. Object thường là ánh xạ; array có thể mang thứ tự nên không tự sort mọi cấu trúc.
+
+### Dự án, bằng chứng và bàn giao
+17. Chuẩn hóa quá sớm che regression; giữ thông tin có trường để kiểm hợp đồng.
+18. Giới hạn byte giúp kiểm tài nguyên; sau parse còn cần kiểm số mục và cấu trúc.
+19. Chỉ chuẩn hóa theo quy tắc công khai, báo lỗi với hướng sửa khi không đủ căn cứ đổi dữ liệu.
+20. Kiểm cả Unicode, thiếu/null, trùng mã, lỗi đọc và việc không làm đổi nguồn.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: JSON boolean viết ra sao?
++ true không có nháy
+- True
+- "true" là boolean
+Q: JSON.parse gặp dấu phẩy thừa sẽ làm gì?
++ Ném lỗi cú pháp
+- Luôn tự bỏ dấu phẩy
+- Trả null mặc định
+Q: Đọc thuộc tính sâu cần gì trước?
++ Kiểm lớp cha tồn tại và đúng kiểu
+- Đảo thứ tự thuộc tính
+- Luôn dùng chỉ số 0
+Q: Anchor regex giúp làm gì?
++ Ràng buộc vị trí đầu/cuối theo cờ
+- Luôn khớp tất cả dòng
+- Thay ký tự bất kỳ
+Q: Trích được số trong mã đã chứng minh mã hợp lệ chưa?
++ Chưa, cần kiểm toàn định dạng
+- Có nếu số dương
+- Có nếu nhóm tên ngắn
+Q: Lazy khác greedy chủ yếu ở đâu?
++ Ưu tiên lượng khớp
+- Lazy luôn nhanh hơn
+- Greedy luôn sai
+Q: Extractor thiếu trường phải làm gì?
++ Báo thiếu, không dùng biến cũ
+- Giữ giá trị lần chạy trước
+- Tạo token thật
+Q: Schema có thay kiểm quyền không?
++ Không
+- Có nếu chuỗi ngắn
+- Có nếu không có NULL
+Q: required khác nullable thế nào?
++ Hiện diện khác cho phép null
+- required luôn cấm null
+- Cho null luôn cho thiếu
+Q: Hai chữ nhìn giống có thể khác mã vì sao?
++ Dựng sẵn và dấu tổ hợp Unicode
+- Unicode chỉ có ASCII
+- Màn hình sửa mã
+Q: JavaScript length đếm đơn vị gì?
++ Đơn vị mã UTF-16
+- Luôn số chữ nhìn thấy
+- Byte UTF-8
+Q: Lượng từ lồng gần khớp có thể gây gì?
++ Backtracking tốn tài nguyên
+- Luôn thời gian hằng số
+- Chỉ lỗi cú pháp
+Q: Kiểm email sơ bộ nên dựa vào gì?
++ Quy tắc sản phẩm và luồng xác minh
+- Một regex dài là đủ
+- Chỉ có ký tự @
+Q: NDJSON lab quy định gì?
++ Một giá trị JSON trên mỗi dòng
+- Mọi JSON đều split dòng được
+- Không cần parse
+Q: Lỗi $[3].qty giúp gì?
++ Tìm vị trí cần sửa
+- Tự sửa số lượng
+- Xóa bản ghi
+Q: Object đổi thứ tự khóa có luôn đổi nghĩa không?
++ Thường không theo hợp đồng ánh xạ
+- Luôn có
+- Chỉ khi hơn ba khóa
+Q: Thiếu trường và null nên so ra sao?
++ Phân biệt trừ khi hợp đồng quy định khác
+- Luôn đổi thành 0
+- Xóa cả hai
+Q: Trước parse file nên giới hạn gì?
++ Kích thước và nguồn theo chính sách
+- Màu tên file
+- Chỉ khoảng trắng
+Q: Vì sao không tự sửa mọi input sai?
++ Có thể đổi nghĩa mà người nhập không biết
+- Dữ liệu sai luôn vô hại
+- Schema không báo lỗi
+Q: Nghiệm thu công cụ import dựa vào gì?
++ Fixture tốt/xấu và lỗi có vị trí
+- Số dòng code
+- Độ dài regex

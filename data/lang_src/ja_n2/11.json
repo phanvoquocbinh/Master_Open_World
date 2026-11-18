@@ -1,0 +1,751 @@
+{
+ "no": 11,
+ "title": "Một điều kiện chung, nhiều cách hỗ trợ: đọc phạm vi của quy tắc",
+ "sub": "経験の 有無にかかわらず、相談を 受け付けます。",
+ "goals": [
+  "Dùng にかかわらず để loại một yếu tố khỏi điều kiện áp dụng.",
+  "Dùng に応じて cho điều chỉnh theo mức độ hoặc nhu cầu và にわたって cho phạm vi kéo dài.",
+  "Đánh giá sự công bằng qua tiêu chí chung cùng căn cứ điều chỉnh, không đồng nhất với một cách xử lý.",
+  "Viết khuyến nghị có phạm vi thử, cách ghi nhận và giới hạn kết luận."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Thông báo của một phòng hỗ trợ học tập giả quy định người có hoặc chưa có kinh nghiệm đều được dùng, nhưng cách giải thích được đổi theo mức hiểu. Hai ý không mâu thuẫn: にかかわらず loại yếu tố kinh nghiệm khỏi điều kiện nhận, còn に応じて dùng nhu cầu để chọn hỗ trợ. にわたって đánh dấu phạm vi thời gian hay không gian kéo dài, không có nghĩa tùy theo. Khi đọc quy tắc, phải hỏi yếu tố nào không được dùng để loại người và yếu tố nào hợp lý để điều chỉnh cách đáp ứng.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>一律 đọc いちりつ, còn 個別対応 là こべつたいおう; tách cụm theo ý “cá biệt/đáp ứng”, không theo từng chữ Hán ngẫu nhiên. 裁量 đọc さいりょう có sa-i rồi ryo-o; 基準 đọc きじゅん, じゅ một mora trước ん. Trong にかかわらず, không nuốt âm ka lặp; khi đối chiếu với に応じて, nghỉ sau yếu tố làm căn cứ để người nghe theo được điều loại bỏ và điều vẫn dùng.</p>",
+   "items": [
+    {
+     "sym": "一律・裁量・基準",
+     "ex": [
+      "いちりつ",
+      "さいりょう",
+      "きじゅん"
+     ],
+     "vi": "Đọc rõ thuật ngữ điều chỉnh chính sách, giữ chuỗi nguyên âm và nhịp mũi theo từng từ."
+    },
+    {
+     "sym": "にかかわらず・に応じて",
+     "ex": [
+      "けいけんのうむにかかわらず",
+      "りかいどにおうじて"
+     ],
+     "vi": "Nhóm cả cụm yếu tố với kết cấu sau nó để không đảo tiêu chí loại trừ và tiêu chí điều chỉnh."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "一律",
+     "kana": "いちりつ",
+     "romaji": "ichiritsu",
+     "vi": "đồng loạt cùng một mức/cách",
+     "ex": "一律の説明だけでは伝わりません。",
+     "exVi": "Chỉ giải thích đồng loạt một cách thì chưa truyền đạt được."
+    },
+    {
+     "w": "個別対応",
+     "kana": "こべつたいおう",
+     "romaji": "kobetsu taioo",
+     "vi": "đáp ứng riêng từng trường hợp",
+     "ex": "個別対応の理由を記録します。",
+     "exVi": "Tôi ghi lý do xử lý riêng."
+    },
+    {
+     "w": "利用条件",
+     "kana": "りようじょうけん",
+     "romaji": "riyoo jooken",
+     "vi": "điều kiện được sử dụng",
+     "ex": "利用条件を入口に示します。",
+     "exVi": "Tôi ghi điều kiện sử dụng ở cửa."
+    },
+    {
+     "w": "説明責任",
+     "kana": "せつめいせきにん",
+     "romaji": "setsumei sekinin",
+     "vi": "trách nhiệm giải thích căn cứ",
+     "ex": "変更の説明責任を果たします。",
+     "exVi": "Tôi thực hiện trách nhiệm giải thích thay đổi."
+    },
+    {
+     "w": "裁量",
+     "kana": "さいりょう",
+     "romaji": "sairyoo",
+     "vi": "phạm vi tự quyết theo đánh giá",
+     "ex": "裁量の範囲を先に決めます。",
+     "exVi": "Tôi định trước phạm vi được tự quyết."
+    },
+    {
+     "w": "基準",
+     "kana": "きじゅん",
+     "romaji": "kijun",
+     "vi": "tiêu chí/chuẩn quyết định",
+     "ex": "同じ基準で受け付けます。",
+     "exVi": "Chúng tôi tiếp nhận theo cùng tiêu chí."
+    },
+    {
+     "w": "共通手順",
+     "kana": "きょうつうてじゅん",
+     "romaji": "kyootsuu tejun",
+     "vi": "trình tự chung",
+     "ex": "共通手順は三段階です。",
+     "exVi": "Trình tự chung có ba bước."
+    },
+    {
+     "w": "調整",
+     "kana": "ちょうせい",
+     "romaji": "choosei",
+     "vi": "điều chỉnh",
+     "ex": "説明時間の調整を相談します。",
+     "exVi": "Tôi bàn điều chỉnh thời gian giải thích."
+    },
+    {
+     "w": "配分",
+     "kana": "はいぶん",
+     "romaji": "haibun",
+     "vi": "phân bổ",
+     "ex": "時間の配分を見直します。",
+     "exVi": "Tôi xem lại phân bổ thời gian."
+    },
+    {
+     "w": "記録負担",
+     "kana": "きろくふたん",
+     "romaji": "kiroku futan",
+     "vi": "công sức phải bỏ để ghi nhận",
+     "ex": "記録負担も評価に含めます。",
+     "exVi": "Tôi tính cả công sức ghi nhận vào đánh giá."
+    },
+    {
+     "w": "試行期間",
+     "kana": "しこうきかん",
+     "romaji": "shikoo kikan",
+     "vi": "thời gian thử giới hạn",
+     "ex": "試行期間は六週間です。",
+     "exVi": "Thời gian thử là sáu tuần."
+    },
+    {
+     "w": "継続性",
+     "kana": "けいぞくせい",
+     "romaji": "keizokusei",
+     "vi": "khả năng duy trì liên tục",
+     "ex": "一人に頼る方法は継続性が弱いです。",
+     "exVi": "Cách dựa một người khó duy trì."
+    },
+    {
+     "w": "利用実績",
+     "kana": "りようじっせき",
+     "romaji": "riyoo jisseki",
+     "vi": "kết quả sử dụng đã ghi nhận",
+     "ex": "利用実績を曜日別に見ます。",
+     "exVi": "Tôi xem kết quả sử dụng theo ngày trong tuần."
+    },
+    {
+     "w": "申請経路",
+     "kana": "しんせいけいろ",
+     "romaji": "shinsei keiro",
+     "vi": "kênh nộp yêu cầu",
+     "ex": "申請経路は二つあります。",
+     "exVi": "Có hai kênh nộp yêu cầu."
+    },
+    {
+     "w": "例外処理",
+     "kana": "れいがいしょり",
+     "romaji": "reigai shori",
+     "vi": "xử lý ngoại lệ",
+     "ex": "例外処理を担当者だけで決めません。",
+     "exVi": "Không để một người tự quyết xử lý ngoại lệ."
+    },
+    {
+     "w": "検証可能性",
+     "kana": "けんしょうかのうせい",
+     "romaji": "kenshoo kanoosei",
+     "vi": "khả năng có thể kiểm chứng",
+     "ex": "記録がないと検証可能性が下がります。",
+     "exVi": "Không ghi nhận thì khả năng kiểm chứng giảm."
+    },
+    {
+     "w": "公平性",
+     "kana": "こうへいせい",
+     "romaji": "kooheisei",
+     "vi": "tính công bằng",
+     "ex": "公平性を待ち時間だけで測りません。",
+     "exVi": "Tôi không đo công bằng chỉ bằng thời gian chờ."
+    },
+    {
+     "w": "受け入れ",
+     "kana": "うけいれ",
+     "romaji": "ukeire",
+     "vi": "sự tiếp nhận",
+     "ex": "経験は受け入れの条件ではありません。",
+     "exVi": "Kinh nghiệm không phải điều kiện tiếp nhận."
+    },
+    {
+     "w": "意思確認",
+     "kana": "いしかくにん",
+     "romaji": "ishi kakunin",
+     "vi": "kiểm rõ nguyện vọng",
+     "ex": "代筆の前に意思確認をします。",
+     "exVi": "Tôi hỏi rõ nguyện vọng trước khi viết giúp."
+    },
+    {
+     "w": "段階的",
+     "kana": "だんかいてき",
+     "romaji": "dankaiteki",
+     "vi": "theo từng giai đoạn",
+     "ex": "段階的に申請経路を増やします。",
+     "exVi": "Chúng tôi tăng kênh yêu cầu theo từng giai đoạn."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Nにかかわらず thường loại yếu tố khỏi điều kiện: 経験の有無にかかわらず. Nに応じて nêu thay đổi tương ứng với nhu cầu, mức độ hoặc điều kiện: 理解度に応じて. Nにわたって nêu phạm vi kéo dài tương đối rộng như 六週間にわたって調べる. にかかわらず khác にもかかわらず đã học: mẫu trước không phụ thuộc yếu tố, mẫu sau nhượng bộ điều bất lợi hoặc trái kỳ vọng. Khi đánh giá vận hành, giữ riêng điều kiện tiếp nhận, cách hỗ trợ và phạm vi thu thập dữ liệu.</p>",
+   "table": [
+    [
+     "Quan hệ",
+     "Ví dụ",
+     "Ý cần giữ"
+    ],
+    [
+     "Không phân biệt yếu tố",
+     "経験の有無にかかわらず受け付ける",
+     "Không dùng kinh nghiệm để loại"
+    ],
+    [
+     "Điều chỉnh theo nhu cầu",
+     "理解度に応じて説明を変える",
+     "Cách làm có thể khác"
+    ],
+    [
+     "Phạm vi kéo dài",
+     "六週間にわたって記録する",
+     "Thời gian đánh giá"
+    ],
+    [
+     "Nhượng bộ",
+     "準備したにもかかわらず遅れた",
+     "Trái kỳ vọng, khác độc lập yếu tố"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "経験の 有無にかかわらず、相談を 受け付けます。",
+     "vi": "Tiếp nhận tư vấn không phân biệt có kinh nghiệm hay không."
+    },
+    {
+     "t": "理解度に応じて、説明する 順番を 変えます。",
+     "vi": "Điều chỉnh thứ tự giải thích theo mức hiểu."
+    },
+    {
+     "t": "六週間にわたって、利用と 準備の 時間を 記録しました。",
+     "vi": "Chúng tôi ghi thời gian sử dụng và chuẩn bị suốt sáu tuần."
+    },
+    {
+     "t": "共通の 基準が あっても、一律の 対応が 最適とは 限りません。",
+     "vi": "Dù có tiêu chí chung, xử lý đồng loạt chưa chắc tốt nhất."
+    },
+    {
+     "t": "調整した 理由を 残せば、後から 検証できます。",
+     "vi": "Giữ lý do điều chỉnh thì sau có thể kiểm chứng."
+    }
+   ],
+   "tips": [
+    "<p>Không dùng にかかわらず để nói cách thay theo nhu cầu; chức năng điều chỉnh thuộc に応じて.</p>",
+    "<p>Một tiêu chí nhận chung không có nghĩa mọi người phải nghe cùng một lượng giải thích.</p>",
+    "<p>Không dùng kết quả sáu tuần để tự chứng minh duy trì cả năm; ghi giới hạn giai đoạn thử.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Cuộc họp phân biệt điều kiện nhận chung và hỗ trợ riêng, đồng thời chất vấn thước đo chờ để tránh bỏ tải vận hành.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "新しい案内に、経験の有無にかかわらず利用できるとあります。では、説明も全員同じでよいのでしょうか。",
+     "vi": "Hướng dẫn mới nói không phân biệt kinh nghiệm đều dùng được. Vậy giải thích cho mọi người cũng giống nhau phải không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "受け入れの基準と、受け入れた後の支援は別です。説明は理解度や本人の希望に応じて調整します。",
+     "vi": "Tiêu chí nhận khác với hỗ trợ sau nhận. Giải thích được chỉnh theo mức hiểu và nguyện vọng."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "個別に変えると、担当者の好き嫌いで決まったと見られる心配はありませんか。",
+     "vi": "Nếu thay riêng, có lo bị xem người phụ trách quyết theo thích ghét không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "あります。だからこそ裁量の範囲と、変更する理由を共通の記録に残す必要があります。",
+     "vi": "Có. Chính vì vậy cần giữ phạm vi tự quyết và lý do đổi trong ghi nhận chung."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "例えば、書くのが苦手そうな人には、こちらで先に全部記入しておけばよいですか。",
+     "vi": "Ví dụ ai trông khó viết thì ta điền hết trước cho họ được không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "見た目だけで決めず、まず意思を確認します。本人が希望すれば、口頭で内容を確認しながら一緒に書きます。",
+     "vi": "Không quyết từ bề ngoài, hỏi nguyện vọng trước. Nếu họ muốn thì cùng điền trong lúc xác nhận nội dung bằng lời."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "申請経路を増やすことは、記録負担も増やしますね。今の人数で続けられますか。",
+     "vi": "Tăng kênh yêu cầu cũng tăng công ghi nhận. Nhân sự hiện có duy trì được không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "まだ確かめていません。まず六週間にわたって試し、利用時間だけでなく準備と引き継ぎの時間も測ります。",
+     "vi": "Chưa kiểm. Trước hết thử sáu tuần, đo cả giờ dùng, chuẩn bị và bàn giao."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "待ち時間が短くなれば、公平性が高まったと報告してよいでしょうか。",
+     "vi": "Nếu thời gian chờ giảm, báo tính công bằng tăng được không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "それだけでは不十分です。希望した方法が選べたか、説明が伝わったか、負担が一人に偏らなかったかも見ます。",
+     "vi": "Chỉ vậy chưa đủ. Cũng xem chọn được cách muốn không, hiểu giải thích không, tải có lệch một người không."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "では、一律の速さを目標にするより、共通の手順と理由の記録で調整を支える、というまとめですね。",
+     "vi": "Vậy tóm là hỗ trợ điều chỉnh bằng trình tự chung và ghi lý do, hơn là đặt mục tiêu nhanh đồng loạt nhỉ?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。ただし、六週間の結果で長期の継続性まで証明したとは言わず、見直す条件も併記してください。",
+     "vi": "Vâng. Nhưng đừng nói kết quả sáu tuần chứng minh duy trì dài hạn; xin ghi cả điều kiện xem lại."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "本人が紙での支援を断って、自分で端末を使いたいと言った場合もありますね。その場合、支援を受けなかったことを失敗と数えるのではなく、希望して選んだのか、選べずに諦めたのかを分ける必要がありますか。記録する言葉にも気をつけたいです。",
+     "vi": "Cũng có trường hợp người ấy từ chối hỗ trợ trên giấy và muốn tự dùng thiết bị. Khi đó có cần tách họ chủ động chọn với họ không chọn được nên bỏ, thay vì tính không nhận hỗ trợ là thất bại không? Tôi muốn chú ý cả từ dùng để ghi."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "その区別は重要です。本人が端末を希望し、必要な確認を終えたなら、方法の一つを選んだ結果として残します。反対に、紙の方法を希望したのに人手がなく使えなかったなら、提供側の条件を記録します。推測した性格や能力を書き込まず、確認した希望と対応を具体的に示しましょう。",
+     "vi": "Phân biệt ấy quan trọng. Nếu họ muốn dùng thiết bị và đã xong xác nhận cần thiết thì ghi là kết quả chọn một phương pháp. Ngược lại muốn giấy nhưng thiếu người hỗ trợ nên không dùng được thì ghi điều kiện phía cung cấp. Đừng ghi tính cách hay năng lực suy đoán, hãy nêu cụ thể nguyện vọng và xử lý đã xác nhận."
+    }
+   ],
+   "qs": [
+    {
+     "q": "経験の有無にかかわらずは、何を意味しますか。",
+     "o": [
+      "希望を確認しなくてよい",
+      "経験を受け入れの条件にしない",
+      "説明を全員同じにする"
+     ],
+     "a": 1,
+     "e": "Điều loại khỏi điều kiện nhận là kinh nghiệm, không phải nhu cầu hay lựa chọn phương pháp hỗ trợ."
+    },
+    {
+     "q": "個別の調整が恣意的に見えないため、何が必要ですか。",
+     "o": [
+      "裁量の範囲と変更理由の共通記録",
+      "担当者の記憶だけ",
+      "全員への同じ記入を先に行う"
+     ],
+     "a": 0,
+     "e": "Đối thoại gắn khả năng giải thích với phạm vi và lý do ghi lại, không tự áp cách làm vì đoán nhu cầu."
+    },
+    {
+     "q": "試行では待ち時間以外に何を測りますか。",
+     "o": [
+      "担当者の好みだけ",
+      "全市の利用者数",
+      "準備と引き継ぎの時間"
+     ],
+     "a": 2,
+     "e": "Gánh nặng phía vận hành cũng cần đo để xem duy trì, nên không chỉ nhìn thời gian chờ."
+    },
+    {
+     "q": "六週間の結果について適切な限界はどれですか。",
+     "o": [
+      "記録は不要になる",
+      "長期の継続性を証明したとは言えない",
+      "全期間に永続的に適用できる"
+     ],
+     "a": 1,
+     "e": "Nguồn dữ liệu giới hạn sáu tuần chưa chứng minh toàn bộ dài hạn, cần điều kiện xem lại."
+    },
+    {
+     "q": "代筆する前に求められることはどれですか。",
+     "o": [
+      "本人の意思を確認する",
+      "外見で決める",
+      "質問を省く"
+     ],
+     "a": 0,
+     "e": "Điền giúp phải theo nguyện vọng xác nhận, không suy từ bề ngoài rằng người kia cần hoặc muốn được làm thay."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "架空の学習支援室は、経験の有無にかかわらず相談を受け付ける方針を公表した。これまでの案内は、端末で用紙を作成できることを当然の前提としていたため、相談したい内容はあっても入口で止まってしまう人がいた。新しい方針は、経験を受け入れの条件から外すものであり、申請内容の確認や本人の意思確認をなくすものではない。誰に門戸を開くかという問題と、受け入れた後に何を確認するかという問題は、区別して考える必要がある。\n\n担当者の間では、公平にするなら説明の長さも順番も一律にすべきだという意見が出た。確かに、全員に同じ手順を示せば、誰かだけが優遇されているという疑問を減らしやすい。しかし、同じ説明を受けても理解できる内容は異なる。すでに分かっていることを長く聞かされる人もいれば、重要な点を聞き取れないまま次へ進む人もいる。同じ時間を使うことが、そのまま同じように参加できることにはならないのである。\n\nそこで支援室は、共通手順のうち変えてはいけない部分と、本人の希望や理解度に応じて調整できる部分を分けた。本人が申請を希望していることと、記入内容が正しいことは、どの経路でも確認する。一方、端末を自分で操作する、紙に書く、口頭で確認しながら一緒に記入するという方法は選べるようにする。書くのが苦手そうに見えるからという理由だけで、担当者が先に全部を埋めることはしない。支援を提供することと、本人の選択を代わりに決めることを混同しないためである。\n\n個別対応を増やすなら、担当者の裁量にも説明責任が伴う。変更する理由を残さなければ、次の担当者が同じ判断を再現できず、特定の人に負担が集中する。そこで記録は長文の自由記述だけにせず、選んだ経路、調整した項目、本人に確認した内容を短い共通欄に残す方式にした。例外処理が必要なときは、担当者一人で抱え込まず、別の人と基準を照合する。記録のために相談そのものが進まなくなっては意味がないので、記録にかかる時間も評価の対象とした。\n\n六週間にわたる試行では、利用件数と待ち時間に加え、準備、説明、引き継ぎに使った時間を集めた。待ち時間が短くなった日でも、担当者が開始前に長く準備していた場合があった。数字の一つだけを見れば効率がよくなったように見えるが、その負担を含めれば評価は変わる。また、どの方法を選んだかだけでなく、希望した方法を実際に選べたかも尋ねた。用意された選択肢が多いことと、選択しやすいことは同じではない。\n\n最終報告は、利用条件の共通化と支援方法の調整を両立させる方向を提案した。ただし、六週間の利用実績から一年間の継続性まで確認したとはしない。繁忙期や担当者の交代で問題が出る可能性があるため、段階的に経路を増やし、見直す時期と中断する条件も設ける。公平性を一律の処理に置き換えるのでもなく、個別対応という言葉で基準を曖昧にするのでもない。共通の確認と、調整を検証できる記録の両方があって初めて、違いに応じた支援を説明できると考えたのである。\n\n記録の表現にも調整が必要だった。「難しい人だった」という文では、何が起きたかを次の担当者が確かめられない。「本人は紙を希望したが、その時間には一緒に記入する担当者がいなかった」と書けば、選択が実現しなかった条件を検討できる。一方、本人が端末を選び、共通の確認を終えたなら、紙の支援を受けなかったことだけで失敗とは数えない。支援室は、性格や能力を推測して分類するのではなく、確認した希望、実際の対応、残った制約を記述することを記録の原則に加えた。",
+   "vi": "Phòng hỗ trợ học tập giả công bố nhận tư vấn không phân biệt kinh nghiệm. Hướng dẫn trước mặc định ai cũng tạo biểu mẫu trên thiết bị, khiến có người muốn hỏi nhưng dừng ở cửa. Chủ trương mới loại kinh nghiệm khỏi điều kiện tiếp nhận, không bỏ việc kiểm nội dung và nguyện vọng. Cần tách mở cửa cho ai với sau khi nhận cần kiểm gì.\n\nCó ý kiến muốn công bằng thì độ dài và thứ tự giải thích phải đồng loạt. Cùng một trình tự có thể giảm nghi vấn ưu ái, nhưng cùng giải thích không khiến mọi người hiểu giống nhau. Có người nghe dài điều đã biết, người khác chưa hiểu điểm quan trọng đã phải qua bước. Cùng thời gian không tự tạo khả năng tham gia như nhau.\n\nPhòng tách phần trình tự chung không đổi với phần chỉnh theo nguyện vọng/mức hiểu. Mọi kênh đều kiểm người muốn đăng ký và nội dung đúng. Cách tự dùng thiết bị, viết giấy hoặc cùng điền qua lời nói được chọn. Không điền hết chỉ vì thấy người kia có vẻ khó viết: hỗ trợ khác với quyết thay lựa chọn.\n\nTăng đáp ứng riêng cần trách nhiệm giải thích phần tự quyết. Không giữ lý do thì người sau khó lặp phán đoán, việc có thể dồn một người. Vì vậy không chỉ viết dài tự do mà ghi kênh chọn, mục chỉnh và nội dung đã hỏi trong ô chung ngắn. Ngoại lệ cần đối chiếu tiêu chí với người khác. Công ghi nhận cũng được đánh giá để việc ghi không cản tư vấn.\n\nThử sáu tuần thu số lượt, chờ và giờ chuẩn bị, giải thích, bàn giao. Có ngày chờ ngắn nhưng người trực chuẩn bị lâu trước mở. Một số liệu trông hiệu quả hơn nhưng tính phần tải ấy thì đánh giá đổi. Cũng hỏi không chỉ đã chọn cách nào mà có thực sự chọn được cách muốn không. Nhiều lựa chọn có sẵn không đồng nghĩa dễ chọn.\n\nBáo cáo đề xuất kết hợp điều kiện dùng chung với điều chỉnh hỗ trợ, nhưng không coi sáu tuần đã kiểm duy trì cả năm. Cao điểm hay đổi người có thể nảy vấn đề nên tăng kênh từng bước, đặt kỳ xem lại và điều kiện dừng. Không thay công bằng bằng xử lý đồng loạt, cũng không lấy danh đáp ứng riêng để làm mờ tiêu chí. Cần xác nhận chung và bản ghi kiểm được điều chỉnh để giải thích hỗ trợ theo khác biệt.\n\nCách ghi cũng cần chỉnh. Viết “người khó” không giúp người sau kiểm chuyện gì xảy ra. Viết “người ấy muốn giấy nhưng giờ đó không có người cùng điền” cho phép xét điều kiện cản lựa chọn. Nếu họ tự chọn thiết bị và xong xác nhận chung thì không tính thất bại chỉ vì không nhận hỗ trợ giấy. Phòng thêm nguyên tắc ghi nguyện vọng đã hỏi, xử lý thực tế và giới hạn còn lại, thay vì phân loại bằng tính cách hay năng lực suy đoán.",
+   "gloss": [
+    {
+     "w": "一律",
+     "kana": "いちりつ",
+     "romaji": "ichiritsu",
+     "vi": "đồng loạt cùng một mức/cách"
+    },
+    {
+     "w": "個別対応",
+     "kana": "こべつたいおう",
+     "romaji": "kobetsu taioo",
+     "vi": "đáp ứng riêng từng trường hợp"
+    },
+    {
+     "w": "利用条件",
+     "kana": "りようじょうけん",
+     "romaji": "riyoo jooken",
+     "vi": "điều kiện được sử dụng"
+    },
+    {
+     "w": "説明責任",
+     "kana": "せつめいせきにん",
+     "romaji": "setsumei sekinin",
+     "vi": "trách nhiệm giải thích căn cứ"
+    },
+    {
+     "w": "裁量",
+     "kana": "さいりょう",
+     "romaji": "sairyoo",
+     "vi": "phạm vi tự quyết theo đánh giá"
+    },
+    {
+     "w": "基準",
+     "kana": "きじゅん",
+     "romaji": "kijun",
+     "vi": "tiêu chí/chuẩn quyết định"
+    }
+   ],
+   "qs": [
+    {
+     "q": "新方針で外した条件は何ですか。",
+     "o": [
+      "内容が正しいことの確認",
+      "端末操作などの経験を受け入れの前提にすること",
+      "本人の意思確認"
+     ],
+     "a": 1,
+     "e": "Đoạn đầu loại kinh nghiệm khỏi điều kiện nhận nhưng giữ việc xác nhận nguyện vọng và nội dung."
+    },
+    {
+     "q": "一律の説明への反論は何ですか。",
+     "o": [
+      "同じ時間や内容でも参加しやすさが同じになるとは限らない",
+      "共通手順は全て不要である",
+      "経験者には何も説明すべきでない"
+     ],
+     "a": 0,
+     "e": "Phản luận giữ giá trị tiêu chí chung nhưng chỉ ra nhu cầu hiểu khác, không bác mọi quy trình."
+    },
+    {
+     "q": "変更してはいけない共通部分はどれですか。",
+     "o": [
+      "必ず同じ端末を使うこと",
+      "全員に同じ長さで説明すること",
+      "申請意思と記入内容の確認"
+     ],
+     "a": 2,
+     "e": "Ba phương pháp được chọn nhưng đều phải kiểm ý định và nội dung, nên phương tiện không phải phần cố định."
+    },
+    {
+     "q": "記録を共通欄にした理由として合うものはどれですか。",
+     "o": [
+      "担当者が全て一人で決める",
+      "判断を引き継ぎやすくし記録自体の負担も管理する",
+      "個別対応の理由を消す"
+     ],
+     "a": 1,
+     "e": "Ô chung giúp kiểm và bàn giao, đồng thời phần ghi được đo để tránh gánh nặng dài tự do."
+    },
+    {
+     "q": "待ち時間の減少だけでは評価できないのはなぜですか。",
+     "o": [
+      "準備時間へ負担が移った可能性があるから",
+      "待った人の数は必ず嘘だから",
+      "六週間の記録を全て捨てるべきだから"
+     ],
+     "a": 0,
+     "e": "Bài nêu có người phải chuẩn bị lâu trước mở; nhìn chỉ chờ dễ bỏ phần tải chuyển sang nơi khác."
+    },
+    {
+     "q": "報告が提案する今後の進め方はどれですか。",
+     "o": [
+      "六週間で一年間の成功を証明済みとする",
+      "個別対応の名で基準をなくす",
+      "段階的に増やし長期の条件を別に検証する"
+     ],
+     "a": 2,
+     "e": "Kết luận giới hạn dữ liệu ngắn hạn và giữ cả tiêu chí, điều chỉnh, điều kiện dừng/xem lại."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Bạn tư vấn cho nhóm giả: muốn nhận bất kể kinh nghiệm nhưng giải thích tùy nhu cầu. Trình bày ba cấu trúc, dữ liệu sáu tuần và một giới hạn dài hạn.",
+     "model": "経験の有無にかかわらず受け付け、本人の希望と理解度に応じて説明方法を調整する案です。ただし意思確認と内容の確認は共通にします。まず六週間にわたって利用時間、準備、引き継ぎの負担を記録し、希望した方法を選べたかも尋ねます。その結果だけで一年間続けられると決めず、担当交代時の条件を別に検証したいと考えます。",
+     "vi": "Đề xuất nhận không phân biệt kinh nghiệm, chỉnh phương pháp theo nguyện vọng và mức hiểu. Nhưng kiểm ý muốn và nội dung là chung. Trước hết ghi sáu tuần giờ dùng, chuẩn bị, bàn giao, hỏi có chọn được cách muốn không. Không từ đó kết luận duy trì được cả năm mà kiểm riêng lúc đổi người.",
+     "tips": "Dùng にかかわらず cho tiêu chí nhận, に応じて cho cách hỗ trợ, にわたって cho khoảng thu dữ liệu; đừng hoán đổi."
+    },
+    {
+     "p": "Phản hồi ý kiến chỉ cần cùng số phút là công bằng: thừa nhận ưu điểm của tiêu chí chung, nêu phản ví dụ và đề nghị ghi lý do điều chỉnh.",
+     "model": "同じ基準を示すことで判断が見えやすくなる点には賛成です。しかし、同じ十分の説明でも、既知の内容を聞く人と、必要な点が分からないまま終わる人がいます。時間だけをそろえるより、共通の確認項目を残し、調整した理由を短い欄で記録する方法を試しませんか。記録時間も測れば、支援と負担の両面を比べられると思います。",
+     "vi": "Tôi đồng ý tiêu chí chung giúp thấy cách quyết định. Nhưng cùng mười phút có người nghe điều đã biết, người khác xong vẫn chưa hiểu. Thay vì chỉ đồng thời lượng, ta giữ mục kiểm chung và thử ghi ngắn lý do điều chỉnh nhé? Đo cả giờ ghi sẽ so được hỗ trợ và tải việc.",
+     "tips": "Phản biện một thước đo không đồng nghĩa bỏ mọi tiêu chí chung; giữ phần bạn chấp nhận rồi đề xuất kiểm được."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết khuyến nghị 260–340 chữ Nhật: nhận không phân biệt kinh nghiệm; hỗ trợ theo nguyện vọng/mức hiểu; hai mục xác nhận chung; thử sáu tuần và đo cả tải trước/sau tư vấn; nêu giới hạn dài hạn và điều kiện xem lại.",
+   "model": "利用経験の有無にかかわらず相談を受け付ける方針に賛成する。ただし、受け入れ条件を共通化することと、全員に一律の説明を行うことは分けて考えるべきだ。本人の希望と理解度に応じて方法を選べるようにし、申請意思と内容の確認は全経路で共通に残す。六週間にわたる試行では、待ち時間だけでなく、準備、記録、引き継ぎの時間も集めたい。調整した理由を短い共通欄に残せば、裁量の根拠を後から検証できる。一方、この結果だけで一年間の継続性まで確認したとは言えない。担当者の交代や繁忙期に負担が偏る場合は、経路の拡大を中断し、配分と手順を見直す条件もあらかじめ共有しておく必要がある。",
+   "modelVi": "Tôi đồng ý tiếp nhận không phân biệt kinh nghiệm. Tuy nhiên cần tách điều kiện nhận chung với giải thích đồng loạt. Cho chọn phương pháp theo nguyện vọng và mức hiểu, giữ kiểm ý định và nội dung chung ở mọi kênh. Thử sáu tuần nên đo cả chờ, chuẩn bị, ghi và bàn giao. Ghi lý do điều chỉnh trong ô ngắn giúp kiểm căn cứ tự quyết. Nhưng kết quả này chưa kiểm duy trì cả năm. Cần chia sẻ trước điều kiện dừng mở rộng, xem lại phân bổ và trình tự nếu tải lệch khi đổi người hoặc cao điểm.",
+   "min": 260,
+   "tips": [
+    "Kết luận cần thừa nhận giá trị chung và phần phải điều chỉnh, không chỉ chọn một phía.",
+    "Đặt số liệu trong phạm vi thử; điều kiện dừng phải liên hệ trực tiếp với tải đã đề xuất đo."
+   ],
+   "checklist": [
+    "Ba cấu trúc mục tiêu dùng đúng quan hệ.",
+    "Giữ nguyện vọng và nội dung là xác nhận chung.",
+    "Đo cả phần tải bị chuyển trước/sau tư vấn.",
+    "Có giới hạn sáu tuần và điều kiện xem lại."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “一律” nghĩa là gì?",
+   "o": [
+    "phân bổ",
+    "đồng loạt cùng một mức/cách",
+    "phạm vi tự quyết theo đánh giá"
+   ],
+   "a": 1,
+   "e": "一律の説明だけでは伝わりません。 → Chỉ giải thích đồng loạt một cách thì chưa truyền đạt được. Từ cần nhận diện là “一律”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “個別対応” nghĩa là gì?",
+   "o": [
+    "đáp ứng riêng từng trường hợp",
+    "tiêu chí/chuẩn quyết định",
+    "công sức phải bỏ để ghi nhận"
+   ],
+   "a": 0,
+   "e": "個別対応の理由を記録します。 → Tôi ghi lý do xử lý riêng. Từ cần nhận diện là “個別対応”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “利用条件” nghĩa là gì?",
+   "o": [
+    "trình tự chung",
+    "thời gian thử giới hạn",
+    "điều kiện được sử dụng"
+   ],
+   "a": 2,
+   "e": "利用条件を入口に示します。 → Tôi ghi điều kiện sử dụng ở cửa. Từ cần nhận diện là “利用条件”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “説明責任” nghĩa là gì?",
+   "o": [
+    "khả năng duy trì liên tục",
+    "trách nhiệm giải thích căn cứ",
+    "điều chỉnh"
+   ],
+   "a": 1,
+   "e": "変更の説明責任を果たします。 → Tôi thực hiện trách nhiệm giải thích thay đổi. Từ cần nhận diện là “説明責任”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền mẫu không phụ thuộc: 経験の有無に___、受け付けます。",
+   "a": "かかわらず",
+   "e": "にかかわらず loại yếu tố kinh nghiệm khỏi điều kiện nhận, không nêu cách biến đổi hỗ trợ."
+  },
+  {
+   "t": "fill",
+   "q": "Điền mẫu điều chỉnh: 理解度に___、説明を変えます。",
+   "a": "応じて",
+   "e": "に応じて dùng mức hiểu làm căn cứ thay đổi cách giải thích."
+  },
+  {
+   "t": "fill",
+   "q": "Điền phạm vi kéo dài: 六週間に___、記録を集めました。",
+   "a": "わたって",
+   "e": "にわたって nêu khoảng sáu tuần thu thập, không có nghĩa bất kể thời gian."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu điều chỉnh theo nguyện vọng.",
+   "w": [
+    "方法を調整します。",
+    "本人の希望に応じて",
+    "共通の確認を残し、"
+   ],
+   "a": "共通の確認を残し、本人の希望に応じて方法を調整します。",
+   "e": "Giữ mục kiểm chung trước, nêu nhu cầu làm căn cứ chỉnh cách thực hiện, không xóa tiêu chí nhận."
+  },
+  {
+   "q": "関係の理解として正しいものはどれですか。",
+   "o": [
+    "説明も必ず同じにする",
+    "年齢で断らず説明方法は調整する",
+    "年齢に応じて受け入れを断る"
+   ],
+   "a": 1,
+   "e": "Hai kết cấu có hai yếu tố khác nhau: tuổi không dùng để loại, phương pháp theo nguyện vọng.",
+   "t": "listen",
+   "say": "年齢にかかわらず受け付けますが、説明は希望する方法に応じて変えます。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "調査の限界は何ですか。",
+   "o": [
+    "繁忙期を含まない期間から長期を断定できない",
+    "調査を一度もしなかった",
+    "繁忙期でも必ず成功すると証明した"
+   ],
+   "a": 0,
+   "e": "Phạm vi hai tháng có dữ liệu nhưng thiếu cao điểm nên kết luận dài hạn được giữ chờ.",
+   "t": "listen",
+   "say": "二か月にわたって調べましたが、繁忙期は含まれていません。長期の結論は保留します。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "調整の理由を残し、共通の基準と照合します。",
+   "a": "調整の理由を残し、共通の基準と照合します。",
+   "lang": "ja-JP",
+   "e": "Ghi lý do điều chỉnh rồi đối chiếu tiêu chí chung; cách làm khác nhau vẫn cần giải thích được căn cứ."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "裁量",
+     "phạm vi tự quyết theo đánh giá"
+    ],
+    [
+     "基準",
+     "tiêu chí/chuẩn quyết định"
+    ],
+    [
+     "共通手順",
+     "trình tự chung"
+    ],
+    [
+     "調整",
+     "điều chỉnh"
+    ],
+    [
+     "配分",
+     "phân bổ"
+    ]
+   ],
+   "e": "一律 là cùng cách, 個別対応 là đáp ứng từng trường hợp, 利用条件 quyết ai được nhận, 説明責任 yêu cầu giải thích và 裁量 là phạm vi tự quyết; không đồng nhất công bằng với một dạng duy nhất."
+  },
+  {
+   "q": "新方針で外した条件は何ですか。",
+   "o": [
+    "内容が正しいことの確認",
+    "端末操作などの経験を受け入れの前提にすること",
+    "本人の意思確認"
+   ],
+   "a": 1,
+   "e": "Đoạn đầu loại kinh nghiệm khỏi điều kiện nhận nhưng giữ việc xác nhận nguyện vọng và nội dung.",
+   "t": "mc"
+  },
+  {
+   "q": "一律の説明への反論は何ですか。",
+   "o": [
+    "経験者には何も説明すべきでない",
+    "同じ時間や内容でも参加しやすさが同じになるとは限らない",
+    "共通手順は全て不要である"
+   ],
+   "a": 1,
+   "e": "Phản luận giữ giá trị tiêu chí chung nhưng chỉ ra nhu cầu hiểu khác, không bác mọi quy trình.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Tạo ba hồ sơ học tập giả có nguyện vọng khác nhau, bảng tiêu chí nhận chung và dữ liệu sáu tuần có chờ giảm nhưng chuẩn bị tăng.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "So ba nhu cầu với cùng một tiêu chí nhận, tách câu không phân biệt kinh nghiệm khỏi việc chọn cách hỗ trợ."
+   },
+   {
+    "t": "30'",
+    "do": "Đối chiếu にかかわらず/に応じて/にわたって với にもかかわらず, yêu cầu chỉ yếu tố và quan hệ của từng câu."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe tranh luận về một cách giải thích và điền ưu điểm, phản biện, biện pháp ghi lý do cùng giới hạn dữ liệu."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc báo cáo sáu đoạn, dựng sơ đồ tiêu chí chung–phần chỉnh–ghi nhận–đánh giá, tìm tải đã chuyển sang chuẩn bị."
+   },
+   {
+    "t": "30'",
+    "do": "Tranh luận tiêu chí mười phút rồi viết khuyến nghị 260–340 chữ, đổi bài kiểm đủ căn cứ cho điều kiện dừng."
+   },
+   {
+    "t": "30'",
+    "do": "Đóng vai bàn giao người mới có trường hợp ngoại lệ, làm nghe-chính tả và kiểm ba cấu trúc không bị hoán đổi chức năng."
+   }
+  ],
+  "games": [
+   "Ba vai cùng đủ điều kiện nhưng chọn cách khác nhau; người điều phối phải ghi lý do điều chỉnh trong một ô ngắn kiểm được.",
+   "Hai bảng cùng giảm chờ nhưng tải chuẩn bị khác; nhóm chọn kết luận có giới hạn và chỉ dữ liệu còn cần."
+  ],
+  "errors": [
+   "Dùng にかかわらず cho biến đổi theo nhu cầu: đổi sang に応じて và nêu rõ yếu tố.",
+   "Trộn にかかわらず với にもかかわらず: phân không phụ thuộc với nhượng bộ trái kỳ vọng.",
+   "Suy cùng tiêu chí phải cùng số phút: tách mục kiểm bắt buộc với cách giải thích.",
+   "Dùng sáu tuần chứng minh cả năm: giữ giới hạn cao điểm và đổi người chưa được kiểm."
+  ],
+  "homework": "Soạn quy trình hỗ trợ giả có tiêu chí nhận chung, hai cách chỉnh, ô ghi căn cứ và bảng đo tải trong bốn tuần; viết kết luận không vượt phạm vi thu dữ liệu."
+ }
+}

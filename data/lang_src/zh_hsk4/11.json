@@ -1,181 +1,1153 @@
 {
-  "no": 11,
-  "title": "城市生活 – Thành phố, nông thôn & giao thông · 本来/原来, 往往/常常, 以为/认为",
-  "sub": "Wǒ hái yǐwéi nǐ bù lái le ne! 我还以为你不来了呢！",
-  "goals": [
-    "Nói về giao thông, nhà ở, so sánh thành phố – ngoại ô – nông thôn",
-    "Phân biệt 本来 (vốn dĩ, lẽ ra) và 原来 (hoá ra; trước kia)",
-    "Phân biệt 往往 (quy luật, trong điều kiện nào đó) và 常常 (tần suất)",
-    "Phân biệt 以为 (tưởng – thường là sai) và 认为 (cho rằng – quan điểm)",
-    "Viết đoạn 80–120 chữ so sánh sống ở thành phố và nông thôn"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词)", "items": [
-      {"w": "交通", "py": "jiāotōng", "hv": "giao thông", "pos": "n", "vi": "giao thông", "ex": "这里的交通很方便。", "exPy": "Zhèlǐ de jiāotōng hěn fāngbiàn.", "exVi": "Giao thông ở đây rất thuận tiện."},
-      {"w": "地铁", "py": "dìtiě", "hv": "địa thiết", "pos": "n", "vi": "tàu điện ngầm", "ex": "胡志明市的第一条地铁线已经开通了。", "exPy": "Húzhìmíng Shì de dì-yī tiáo dìtiě xiàn yǐjīng kāitōng le.", "exVi": "Tuyến tàu điện ngầm đầu tiên của TP. Hồ Chí Minh đã khai thông."},
-      {"w": "摩托车", "py": "mótuōchē", "hv": "ma thác xa", "pos": "n", "vi": "xe máy", "ex": "越南人出门常常骑摩托车。", "exPy": "Yuènánrén chūmén chángcháng qí mótuōchē.", "exVi": "Người Việt ra ngoài thường đi xe máy."},
-      {"w": "乘坐", "py": "chéngzuò", "hv": "thừa toạ", "pos": "v", "vi": "đi (phương tiện công cộng) – trang trọng", "ex": "请乘坐地铁二号线。", "exPy": "Qǐng chéngzuò dìtiě èr hào xiàn.", "exVi": "Mời đi tàu điện ngầm tuyến số 2."},
-      {"w": "速度", "py": "sùdù", "hv": "tốc độ", "pos": "n", "vi": "tốc độ", "ex": "这里开车的速度不能超过四十公里。", "exPy": "Zhèlǐ kāi chē de sùdù bù néng chāoguò sìshí gōnglǐ.", "exVi": "Ở đây lái xe không được quá 40 km/h."},
-      {"w": "方向", "py": "fāngxiàng", "hv": "phương hướng", "pos": "n", "vi": "phương hướng, hướng", "ex": "我走错方向了。", "exPy": "Wǒ zǒucuò fāngxiàng le.", "exVi": "Tôi đi nhầm hướng rồi."},
-      {"w": "警察", "py": "jǐngchá", "hv": "cảnh sát", "pos": "n", "vi": "cảnh sát", "ex": "警察让我们停下来。", "exPy": "Jǐngchá ràng wǒmen tíng xiàlai.", "exVi": "Cảnh sát bảo chúng tôi dừng lại."},
-      {"w": "停", "py": "tíng", "hv": "đình", "pos": "v", "vi": "dừng; đỗ (xe)", "ex": "这儿不能停车。", "exPy": "Zhèr bù néng tíng chē.", "exVi": "Ở đây không được đỗ xe."},
-      {"w": "城市", "py": "chéngshì", "hv": "thành thị", "pos": "n", "vi": "thành phố", "ex": "越来越多的年轻人去大城市工作。", "exPy": "Yuè lái yuè duō de niánqīngrén qù dà chéngshì gōngzuò.", "exVi": "Ngày càng nhiều người trẻ lên thành phố lớn làm việc."},
-      {"w": "农村", "py": "nóngcūn", "hv": "nông thôn", "pos": "n", "vi": "nông thôn", "ex": "我爷爷奶奶住在农村。", "exPy": "Wǒ yéye nǎinai zhù zài nóngcūn.", "exVi": "Ông bà tôi sống ở nông thôn."},
-      {"w": "热闹", "py": "rènao", "hv": "nhiệt náo", "pos": "adj", "vi": "náo nhiệt, nhộn nhịp", "ex": "晚上的老街特别热闹。", "exPy": "Wǎnshang de lǎo jiē tèbié rènao.", "exVi": "Phố cổ buổi tối đặc biệt nhộn nhịp."},
-      {"w": "安静", "py": "ānjìng", "hv": "an tĩnh", "pos": "adj", "vi": "yên tĩnh", "ex": "农村的晚上很安静。", "exPy": "Nóngcūn de wǎnshang hěn ānjìng.", "exVi": "Buổi tối ở nông thôn rất yên tĩnh."},
-      {"w": "租", "py": "zū", "hv": "tô", "pos": "v", "vi": "thuê; (n) tiền thuê (房租)", "ex": "我在公司附近租了一个房间。", "exPy": "Wǒ zài gōngsī fùjìn zū le yí ge fángjiān.", "exVi": "Tôi thuê một phòng gần công ty."},
-      {"w": "本来", "py": "běnlái", "hv": "bản lai", "pos": "adv", "vi": "vốn dĩ, ban đầu; lẽ ra (本来就…)", "ex": "我本来想坐公共汽车，后来改坐地铁了。", "exPy": "Wǒ běnlái xiǎng zuò gōnggòng qìchē, hòulái gǎi zuò dìtiě le.", "exVi": "Ban đầu tôi định đi xe buýt, sau đó đổi sang đi tàu điện ngầm."},
-      {"w": "原来", "py": "yuánlái", "hv": "nguyên lai", "pos": "adv", "vi": "hoá ra; trước kia, ban đầu", "ex": "原来你也住在这儿！", "exPy": "Yuánlái nǐ yě zhù zài zhèr!", "exVi": "Hoá ra bạn cũng sống ở đây!"},
-      {"w": "往往", "py": "wǎngwǎng", "hv": "vãng vãng", "pos": "adv", "vi": "thường thường (theo quy luật, trong điều kiện nào đó)", "ex": "周末的早上往往不堵车。", "exPy": "Zhōumò de zǎoshang wǎngwǎng bù dǔchē.", "exVi": "Sáng cuối tuần thường không tắc đường."},
-      {"w": "以为", "py": "yǐwéi", "hv": "dĩ vi", "pos": "v", "vi": "tưởng (là) – thường là suy nghĩ sai", "ex": "我以为今天是星期六。", "exPy": "Wǒ yǐwéi jīntiān shì xīngqīliù.", "exVi": "Tôi tưởng hôm nay là thứ Bảy."},
-      {"w": "认为", "py": "rènwéi", "hv": "nhận vi", "pos": "v", "vi": "cho rằng (nêu quan điểm)", "ex": "我认为城市应该多建公园。", "exPy": "Wǒ rènwéi chéngshì yīnggāi duō jiàn gōngyuán.", "exVi": "Tôi cho rằng thành phố nên xây thêm công viên."},
-      {"w": "拥挤", "py": "yōngjǐ", "hv": "ủng tễ", "pos": "adj", "vi": "chen chúc, đông nghẹt", "ex": "早上的地铁特别拥挤。", "exPy": "Zǎoshang de dìtiě tèbié yōngjǐ.", "exVi": "Tàu điện ngầm buổi sáng cực kỳ đông."},
-      {"w": "来不及", "py": "láibují", "hv": "lai bất cập", "pos": "v", "vi": "không kịp", "ex": "快点儿，要来不及了！", "exPy": "Kuài diǎnr, yào láibují le!", "exVi": "Nhanh lên, sắp không kịp rồi!"},
-      {"w": "来得及", "py": "láidejí", "hv": "lai đắc cập", "pos": "v", "vi": "kịp", "ex": "现在出发还来得及。", "exPy": "Xiànzài chūfā hái láidejí.", "exVi": "Bây giờ xuất phát vẫn còn kịp."},
-      {"w": "郊区", "py": "jiāoqū", "hv": "giao khu", "pos": "n", "vi": "ngoại ô, ngoại thành", "ex": "很多人住在郊区，每天进城上班。", "exPy": "Hěn duō rén zhù zài jiāoqū, měi tiān jìn chéng shàngbān.", "exVi": "Nhiều người sống ở ngoại ô, ngày nào cũng vào thành phố đi làm."},
-      {"w": "风景", "py": "fēngjǐng", "hv": "phong cảnh", "pos": "n", "vi": "phong cảnh", "ex": "这里的风景真美。", "exPy": "Zhèlǐ de fēngjǐng zhēn měi.", "exVi": "Phong cảnh ở đây đẹp thật."},
-      {"w": "吸引", "py": "xīyǐn", "hv": "hấp dẫn", "pos": "v", "vi": "thu hút, hấp dẫn", "ex": "大城市吸引了很多年轻人。", "exPy": "Dà chéngshì xīyǐn le hěn duō niánqīngrén.", "exVi": "Thành phố lớn thu hút rất nhiều người trẻ."},
-      {"w": "规则", "py": "guīzé", "hv": "quy tắc", "pos": "n", "vi": "quy tắc, luật", "ex": "开车要遵守交通规则。", "exPy": "Kāi chē yào zūnshǒu jiāotōng guīzé.", "exVi": "Lái xe phải tuân thủ luật giao thông."},
-      {"w": "加油站", "py": "jiāyóuzhàn", "hv": "gia du trạm", "pos": "n", "vi": "cây xăng, trạm xăng", "ex": "前面有一个加油站。", "exPy": "Qiánmian yǒu yí ge jiāyóuzhàn.", "exVi": "Phía trước có một cây xăng."},
-      {"w": "导航", "py": "dǎoháng", "hv": "đạo hàng", "pos": "n", "vi": "định vị dẫn đường (GPS)", "ex": "我开车的时候常常用手机导航。", "exPy": "Wǒ kāi chē de shíhou chángcháng yòng shǒujī dǎoháng.", "exVi": "Khi lái xe tôi hay dùng điện thoại để chỉ đường."},
-      {"w": "车水马龙", "py": "chēshuǐ-mǎlóng", "hv": "xa thuỷ mã long", "pos": "idiom", "vi": "xe cộ tấp nập (xe như nước chảy, ngựa như rồng)", "ex": "晚上的市中心车水马龙，非常热闹。", "exPy": "Wǎnshang de shì zhōngxīn chēshuǐ-mǎlóng, fēicháng rènao.", "exVi": "Trung tâm thành phố buổi tối xe cộ tấp nập, rất nhộn nhịp."}
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 1: 本来 và 原来", "html": "<p>Hai từ đều có nghĩa “lúc đầu, trước kia”, nhưng mỗi từ có một nghĩa riêng:</p><ul><li><b>原来</b> = <b>hoá ra</b> (phát hiện sự thật trước đó không biết): 原来是你！ Cũng làm định ngữ: 原来的地址 (địa chỉ cũ).</li><li><b>本来</b> = <b>vốn dĩ, lẽ ra, đương nhiên phải thế</b>: 本来就应该… Cũng dùng “ban đầu định… (sau đổi)”: 我本来想…，后来….</li></ul>", "table": [["Nghĩa", "本来", "原来"], ["Lúc đầu, trước kia", "✓ 我本来住在郊区。", "✓ 我原来住在郊区。"], ["Hoá ra (phát hiện)", "✗", "✓ 原来他是你哥哥！"], ["Vốn dĩ phải thế, đương nhiên", "✓ 你本来就应该早点儿出门。", "✗"], ["Định ngữ …的", "本来的意思 (nghĩa gốc)", "原来的地址 (địa chỉ cũ)"]], "ex": [
-      {"t": "我本来想坐公共汽车，可是怕堵车，后来改坐地铁了。", "py": "Wǒ běnlái xiǎng zuò gōnggòng qìchē, kěshì pà dǔchē, hòulái gǎi zuò dìtiě le.", "vi": "Ban đầu tôi định đi xe buýt, nhưng sợ tắc đường nên sau đổi sang tàu điện ngầm."},
-      {"t": "我找了半天钥匙，原来在自己的口袋里。", "py": "Wǒ zhǎo le bàntiān yàoshi, yuánlái zài zìjǐ de kǒudai li.", "vi": "Tôi tìm chìa khoá mãi, hoá ra nằm trong túi mình."},
-      {"t": "这条路原来很窄，现在变宽了。", "py": "Zhè tiáo lù yuánlái hěn zhǎi, xiànzài biàn kuān le.", "vi": "Con đường này trước kia rất hẹp, giờ đã rộng ra."},
-      {"t": "骑车本来就应该戴头盔。", "py": "Qí chē běnlái jiù yīnggāi dài tóukuī.", "vi": "Đi xe vốn dĩ phải đội mũ bảo hiểm."}
-    ], "tips": [
-      "“Hoá ra…” CHỈ dùng 原来: ❌ <i>本来是你！</i> → ✓ <i>原来是你！</i>",
-      "“Vốn dĩ phải thế” (本来就…) CHỈ dùng 本来.",
-      "Người Việt nói “hoá ra” rất nhiều → nhớ ngay 原来 (Hán Việt “nguyên lai” – nguồn gốc là…)."
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 2: 往往 và 常常", "html": "<p><b>往往</b>: tổng kết <b>quy luật</b> từ kinh nghiệm – “trong điều kiện X thì thường Y”. Câu phải có <b>bối cảnh / điều kiện</b>; không dùng cho tương lai, ý muốn chủ quan hay lời khuyên.</p><p><b>常常</b>: chỉ <b>tần suất</b> đơn thuần – “hay, thường xuyên”; dùng được cho tương lai và lời khuyên. Phủ định: <b>不常</b>.</p>", "table": [["", "往往", "常常"], ["Ý nghĩa", "quy luật: điều kiện X → thường Y", "tần suất: hay, thường xuyên"], ["Cần điều kiện", "✓ 下雨的时候，这条路往往堵车。", "không cần: 我常常坐地铁。"], ["Tương lai / ý muốn", "✗ ❌ 以后我往往来看你", "✓ 以后我会常常来看你。"], ["Lời khuyên", "✗", "✓ 你要常常运动。"], ["Phủ định", "✗", "不常 (我不常开车)"]], "ex": [
-      {"t": "节假日的时候，高速公路往往很堵。", "py": "Jiéjiàrì de shíhou, gāosù gōnglù wǎngwǎng hěn dǔ.", "vi": "Vào ngày lễ, đường cao tốc thường rất tắc."},
-      {"t": "住在郊区的人往往要花两个小时上下班。", "py": "Zhù zài jiāoqū de rén wǎngwǎng yào huā liǎng ge xiǎoshí shàng xià bān.", "vi": "Người sống ở ngoại ô thường mất hai tiếng đi làm và về."},
-      {"t": "我常常骑摩托车去公司。", "py": "Wǒ chángcháng qí mótuōchē qù gōngsī.", "vi": "Tôi hay đi xe máy đến công ty."},
-      {"t": "欢迎你以后常常来玩儿！", "py": "Huānyíng nǐ yǐhòu chángcháng lái wánr!", "vi": "Mong sau này bạn hay đến chơi!"}
-    ], "tips": [
-      "❌ <i>我往往骑摩托车</i> (chỉ là thói quen, không có điều kiện) → ✓ <i>我常常骑摩托车</i> / ✓ <i>下雨的时候，我往往坐出租车</i>.",
-      "❌ <i>你要往往运动</i> → ✓ <i>你要常常运动</i>.",
-      "往往 rất hay gặp trong bài đọc khi tác giả tổng kết hiện tượng xã hội: 年轻人往往…"
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 3: 以为 và 认为", "html": "<p><b>以为</b> = <b>tưởng</b>: suy nghĩ thường <b>trái với thực tế</b>, hay đi với 原来, 其实, 没想到, 还以为…呢.</p><p><b>认为</b> = <b>cho rằng</b>: nêu quan điểm, đánh giá – trung tính, trang trọng. Có dạng bị động 被认为 (được coi là).</p>", "table": [["", "以为", "认为"], ["Nghĩa", "tưởng (thường là sai)", "cho rằng (quan điểm)"], ["Hay đi với", "原来、其实、没想到、还以为…呢", "我认为、专家认为、被认为"], ["Ví dụ", "我以为他是中国人，原来是越南人。", "我认为城市应该多建公园。"], ["Bị động", "✗", "✓ 他被认为是最好的司机。"]], "ex": [
-      {"t": "我以为今天是星期六，原来是星期五！", "py": "Wǒ yǐwéi jīntiān shì xīngqīliù, yuánlái shì xīngqīwǔ!", "vi": "Tôi tưởng hôm nay thứ Bảy, hoá ra là thứ Sáu!"},
-      {"t": "我还以为你不来了呢！", "py": "Wǒ hái yǐwéi nǐ bù lái le ne!", "vi": "Tôi còn tưởng bạn không đến nữa chứ!"},
-      {"t": "很多专家认为，发展公共交通是解决堵车的最好办法。", "py": "Hěn duō zhuānjiā rènwéi, fāzhǎn gōnggòng jiāotōng shì jiějué dǔchē de zuì hǎo bànfǎ.", "vi": "Nhiều chuyên gia cho rằng phát triển giao thông công cộng là cách tốt nhất để giải quyết tắc đường."},
-      {"t": "我认为住在郊区也有很多好处。", "py": "Wǒ rènwéi zhù zài jiāoqū yě yǒu hěn duō hǎochù.", "vi": "Tôi cho rằng sống ở ngoại ô cũng có nhiều cái lợi."}
-    ], "tips": [
-      "Nêu quan điểm → 认为: ❌ <i>我以为环境很重要</i> (nghe như “tôi tưởng… mà hoá ra không phải”) → ✓ <i>我认为环境很重要</i>.",
-      "以为 + kết quả trái thực tế: ✓ <i>我以为…，没想到…</i>",
-      "Tiếng Việt: “tưởng” → 以为; “theo tôi / tôi cho rằng” → 我认为 / 我觉得."
-    ]},
-    {"k": "dialog", "h": "Nghe: Đến muộn vì tắc đường", "lang": "zh-CN", "note": "Thu (阮秋) hẹn ăn tối với bạn là Vương Lỗi (王磊) ở một quán trong trung tâm Hà Nội, nhưng đến muộn gần một tiếng. Nghe lần 1: Thu đang sống ở đâu?", "lines": [
-      {"s": "王磊", "g": "m", "t": "秋，你终于来了！我还以为你不来了呢。", "py": "Qiū, nǐ zhōngyú lái le! Wǒ hái yǐwéi nǐ bù lái le ne.", "vi": "Thu, cuối cùng cậu cũng đến! Tớ còn tưởng cậu không đến nữa chứ."},
-      {"s": "阮秋", "g": "f", "t": "真不好意思！我本来六点就出门了，可是路上堵得太厉害了。", "py": "Zhēn bù hǎoyìsi! Wǒ běnlái liù diǎn jiù chūmén le, kěshì lùshang dǔ de tài lìhai le.", "vi": "Ngại quá! Tớ ra khỏi nhà từ 6 giờ rồi, nhưng đường tắc khủng khiếp."},
-      {"s": "王磊", "g": "m", "t": "下班的时候，河内的路往往都很堵。你怎么来的？", "py": "Xiàbān de shíhou, Hénèi de lù wǎngwǎng dōu hěn dǔ. Nǐ zěnme lái de?", "vi": "Giờ tan tầm đường Hà Nội thường tắc lắm. Cậu đến bằng gì?"},
-      {"s": "阮秋", "g": "f", "t": "骑摩托车。我本来想走小路，结果小路也全是车，真是车水马龙。", "py": "Qí mótuōchē. Wǒ běnlái xiǎng zǒu xiǎo lù, jiéguǒ xiǎo lù yě quán shì chē, zhēn shì chēshuǐ-mǎlóng.", "vi": "Đi xe máy. Tớ định đi đường nhỏ, kết quả đường nhỏ cũng toàn xe, đúng là xe cộ tấp nập."},
-      {"s": "王磊", "g": "m", "t": "你为什么不坐地铁？我常常坐，又快又准时。", "py": "Nǐ wèishénme bú zuò dìtiě? Wǒ chángcháng zuò, yòu kuài yòu zhǔnshí.", "vi": "Sao cậu không đi tàu điện ngầm? Tớ hay đi, vừa nhanh vừa đúng giờ."},
-      {"s": "阮秋", "g": "f", "t": "我家附近没有地铁站啊。而且我上个月搬家了，现在住在郊区。", "py": "Wǒ jiā fùjìn méiyǒu dìtiězhàn a. Érqiě wǒ shàng ge yuè bānjiā le, xiànzài zhù zài jiāoqū.", "vi": "Gần nhà tớ không có ga tàu điện mà. Hơn nữa tháng trước tớ chuyển nhà, giờ sống ở ngoại thành."},
-      {"s": "王磊", "g": "m", "t": "搬到郊区了？我以为你很喜欢市中心呢。", "py": "Bān dào jiāoqū le? Wǒ yǐwéi nǐ hěn xǐhuan shì zhōngxīn ne.", "vi": "Chuyển ra ngoại thành rồi à? Tớ tưởng cậu thích trung tâm lắm cơ."},
-      {"s": "阮秋", "g": "f", "t": "原来是很喜欢，热闹、方便，吃的东西也多。可是房租太贵了，一个小房间就要五百万盾。", "py": "Yuánlái shì hěn xǐhuan, rènao, fāngbiàn, chī de dōngxi yě duō. Kěshì fángzū tài guì le, yí ge xiǎo fángjiān jiù yào wǔbǎi wàn dùn.", "vi": "Trước kia đúng là rất thích, nhộn nhịp, tiện lợi, đồ ăn cũng nhiều. Nhưng tiền thuê nhà đắt quá, một phòng nhỏ đã 5 triệu."},
-      {"s": "王磊", "g": "m", "t": "郊区便宜多少？", "py": "Jiāoqū piányi duōshao?", "vi": "Ngoại thành rẻ hơn bao nhiêu?"},
-      {"s": "阮秋", "g": "f", "t": "同样的钱，在郊区能租一套两室一厅的房子，还有个小花园。", "py": "Tóngyàng de qián, zài jiāoqū néng zū yí tào liǎng shì yì tīng de fángzi, hái yǒu ge xiǎo huāyuán.", "vi": "Cùng số tiền đó, ở ngoại thành thuê được một căn hai phòng ngủ một phòng khách, còn có vườn nhỏ."},
-      {"s": "王磊", "g": "m", "t": "那很不错啊！空气也比市中心好吧？", "py": "Nà hěn búcuò a! Kōngqì yě bǐ shì zhōngxīn hǎo ba?", "vi": "Thế thì tốt quá! Không khí cũng tốt hơn trung tâm nhỉ?"},
-      {"s": "阮秋", "g": "f", "t": "是啊，晚上特别安静，我睡得比以前好多了。唯一的问题就是上班太远，每天路上要花两个小时。", "py": "Shì a, wǎnshang tèbié ānjìng, wǒ shuì de bǐ yǐqián hǎo duō le. Wéiyī de wèntí jiù shì shàngbān tài yuǎn, měi tiān lùshang yào huā liǎng ge xiǎoshí.", "vi": "Ừ, buổi tối rất yên tĩnh, tớ ngủ ngon hơn trước nhiều. Vấn đề duy nhất là đi làm xa quá, mỗi ngày mất hai tiếng trên đường."},
-      {"s": "王磊", "g": "m", "t": "我认为政府应该多修几条地铁线，这样住在郊区的人就方便多了。", "py": "Wǒ rènwéi zhèngfǔ yīnggāi duō xiū jǐ tiáo dìtiě xiàn, zhèyàng zhù zài jiāoqū de rén jiù fāngbiàn duō le.", "vi": "Tớ cho rằng nhà nước nên làm thêm vài tuyến tàu điện ngầm, như thế người ở ngoại thành sẽ tiện hơn nhiều."},
-      {"s": "阮秋", "g": "f", "t": "听说明年我家附近就会有一个站。到时候我就不用每天骑车了。", "py": "Tīngshuō míngnián wǒ jiā fùjìn jiù huì yǒu yí ge zhàn. Dào shíhou wǒ jiù bú yòng měi tiān qí chē le.", "vi": "Nghe nói năm sau gần nhà tớ sẽ có một ga. Đến lúc đó tớ không phải đi xe máy hằng ngày nữa."},
-      {"s": "王磊", "g": "m", "t": "太好了！对了，你快看看菜单吧，再不点菜，厨房就要关门了。", "py": "Tài hǎo le! Duì le, nǐ kuài kànkan càidān ba, zài bù diǎn cài, chúfáng jiù yào guānmén le.", "vi": "Tuyệt! À này, cậu xem thực đơn nhanh đi, không gọi món là bếp sắp đóng cửa đấy."},
-      {"s": "阮秋", "g": "f", "t": "啊？原来已经八点半了！", "py": "Á? Yuánlái yǐjīng bā diǎn bàn le!", "vi": "Hả? Hoá ra đã 8 rưỡi rồi!"}
-    ], "qs": [
-      {"q": "Vì sao Thu đến muộn?", "o": ["Tắc đường quá nặng", "Quên giờ hẹn", "Xe bị hỏng"], "a": 0, "e": "我本来六点就出门了，可是路上堵得太厉害了。"},
-      {"q": "Vương Lỗi hay đi phương tiện gì?", "o": ["Tàu điện ngầm", "Xe máy", "Taxi"], "a": 0, "e": "你为什么不坐地铁？我常常坐。"},
-      {"q": "Vì sao Thu chuyển ra ngoại thành?", "o": ["Tiền thuê nhà ở trung tâm quá đắt", "Không thích náo nhiệt", "Gần công ty hơn"], "a": 0, "e": "可是房租太贵了，一个小房间就要五百万盾。"},
-      {"q": "Vấn đề duy nhất khi sống ở ngoại thành là gì?", "o": ["Đi làm xa, mất hai tiếng mỗi ngày", "Buổi tối quá ồn", "Không khí kém"], "a": 0, "e": "唯一的问题就是上班太远，每天路上要花两个小时。"},
-      {"q": "Câu cuối “原来已经八点半了！” thể hiện điều gì?", "o": ["Thu bất ngờ phát hiện đã 8 rưỡi", "Thu nói trước kia là 8 rưỡi", "Thu muốn về lúc 8 rưỡi"], "a": 0, "e": "原来 = hoá ra (phát hiện điều trước đó không để ý)."}
-    ]},
-    {"k": "read", "h": "Đọc: Người trẻ về quê", "title": "回到家乡的年轻人", "text": "很多人认为，年轻人只有去大城市才能有好的发展。我原来也这么想。\n\n大学毕业后，我在胡志明市一家公司工作了五年。城市生活确实很吸引人：高楼、商场、各种各样的餐厅，周末还有看不完的演出。可是，城市的生活成本也很高，我的工资一半以上都花在了房租和交通上。每天早上，我都要在拥挤的路上骑一个小时摩托车，到公司的时候往往已经很累了。\n\n前年春节，我回到了家乡——湄公河边的一个小镇。我本来只打算住一个星期，没想到，我发现家乡变化很大：路修好了，网络也很快，很多年轻人在网上卖本地的水果和特产。于是，我决定留下来，和朋友一起开了一家网店。\n\n现在，我每天早上骑车经过稻田去上班，只要十分钟。收入虽然没有以前那么高，但是生活轻松多了。我以为自己会后悔，其实一点儿也没有。", "vi": "Nhiều người cho rằng người trẻ chỉ có lên thành phố lớn mới phát triển tốt được. Trước kia tôi cũng nghĩ vậy.\n\nTốt nghiệp đại học, tôi làm ở một công ty tại TP. Hồ Chí Minh năm năm. Cuộc sống thành phố quả thật rất hấp dẫn: nhà cao tầng, trung tâm thương mại, đủ loại nhà hàng, cuối tuần còn có vô số buổi biểu diễn. Nhưng chi phí sống ở thành phố cũng rất cao, hơn một nửa lương của tôi đổ vào tiền thuê nhà và đi lại. Sáng nào tôi cũng phải chạy xe máy một tiếng trên con đường đông nghẹt, đến công ty thường đã mệt lử.\n\nTết năm kia, tôi về quê – một thị trấn nhỏ bên sông Mê Kông. Ban đầu tôi chỉ định ở một tuần, không ngờ tôi phát hiện quê thay đổi rất nhiều: đường sá được sửa đẹp, mạng Internet nhanh, nhiều bạn trẻ bán trái cây và đặc sản địa phương trên mạng. Thế là tôi quyết định ở lại, cùng bạn mở một cửa hàng online.\n\nGiờ đây, sáng nào tôi cũng đạp xe qua cánh đồng lúa đi làm, chỉ mất mười phút. Thu nhập tuy không cao bằng trước, nhưng cuộc sống nhẹ nhàng hơn nhiều. Tôi tưởng mình sẽ hối hận, thật ra chẳng hối hận chút nào.", "gloss": [
-      {"w": "高楼", "py": "gāolóu", "vi": "nhà cao tầng"},
-      {"w": "商场", "py": "shāngchǎng", "vi": "trung tâm thương mại"},
-      {"w": "各种各样", "py": "gè zhǒng gè yàng", "vi": "đủ các loại"},
-      {"w": "演出", "py": "yǎnchū", "vi": "buổi biểu diễn"},
-      {"w": "生活成本", "py": "shēnghuó chéngběn", "vi": "chi phí sinh hoạt"},
-      {"w": "家乡", "py": "jiāxiāng", "vi": "quê hương"},
-      {"w": "湄公河", "py": "Méigōng Hé", "vi": "sông Mê Kông"},
-      {"w": "小镇", "py": "xiǎozhèn", "vi": "thị trấn nhỏ"},
-      {"w": "特产", "py": "tèchǎn", "vi": "đặc sản"},
-      {"w": "网店", "py": "wǎngdiàn", "vi": "cửa hàng online"},
-      {"w": "稻田", "py": "dàotián", "vi": "ruộng lúa"}
-    ], "qs": [
-      {"q": "Trước kia tác giả nghĩ gì?", "o": ["Người trẻ phải lên thành phố lớn mới phát triển tốt", "Nông thôn tốt hơn thành phố", "Không cần đi làm"], "a": 0, "e": "很多人认为，年轻人只有去大城市才能有好的发展。我原来也这么想。"},
-      {"q": "Hơn một nửa lương của tác giả tiêu vào đâu?", "o": ["Tiền thuê nhà và đi lại", "Ăn uống", "Xem biểu diễn"], "a": 0, "e": "我的工资一半以上都花在了房租和交通上。"},
-      {"q": "Tết năm kia, ban đầu tác giả định ở quê bao lâu?", "o": ["Một tuần", "Một tháng", "Ở luôn"], "a": 0, "e": "我本来只打算住一个星期。"},
-      {"q": "Quê hương đã thay đổi thế nào?", "o": ["Đường sửa đẹp, mạng nhanh, người trẻ bán đặc sản online", "Có tàu điện ngầm", "Mở nhiều nhà máy lớn"], "a": 0, "e": "路修好了，网络也很快，很多年轻人在网上卖本地的水果和特产。"},
-      {"q": "Bây giờ tác giả cảm thấy thế nào?", "o": ["Thu nhập thấp hơn nhưng nhẹ nhàng hơn, không hối hận", "Rất hối hận", "Muốn quay lại thành phố ngay"], "a": 0, "e": "收入虽然没有以前那么高，但是生活轻松多了。我以为自己会后悔，其实一点儿也没有。"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán trọng tâm (bấm để tập viết)", "items": [
-      {"c": "交", "py": "jiāo", "hv": "giao", "parts": "tượng hình người đứng bắt chéo chân", "strokes": 6, "vi": "giao nhau, qua lại; nộp", "words": "交通, 交流, 交朋友"},
-      {"c": "通", "py": "tōng", "hv": "thông", "parts": "甬 (dũng – lối đi, gợi âm) + 辶 (sước – đi)", "strokes": 10, "vi": "thông suốt, đi qua được", "words": "交通, 通过, 普通"},
-      {"c": "铁", "py": "tiě", "hv": "thiết", "parts": "钅(kim – kim loại) + 失 (thất – gợi âm)", "strokes": 10, "vi": "sắt", "words": "地铁, 高铁"},
-      {"c": "城", "py": "chéng", "hv": "thành", "parts": "土 (thổ – đất) + 成 (thành – gợi âm)", "strokes": 9, "vi": "tường thành (đắp bằng đất) → thành phố", "words": "城市, 长城"},
-      {"c": "村", "py": "cūn", "hv": "thôn", "parts": "木 (mộc – cây) + 寸 (thốn)", "strokes": 7, "vi": "làng, thôn – nơi có cây cối", "words": "农村, 村子"},
-      {"c": "租", "py": "zū", "hv": "tô", "parts": "禾 (hoà – cây lúa) + 且 (thả – gợi âm)", "strokes": 10, "vi": "thuê – xưa nộp tô thuế bằng lúa", "words": "租房, 房租, 出租车"},
-      {"c": "往", "py": "wǎng", "hv": "vãng", "parts": "彳(xích – bước chân) + 主", "strokes": 8, "vi": "đi tới, qua lại", "words": "往往, 往前走, 来往"}
-    ]},
-    {"k": "speak", "h": "Nói: Cuộc sống đô thị", "tasks": [
-      {"p": "Mô tả giao thông ở thành phố bạn sống (dùng 常常, 往往).", "model": "我住在河内。这里的人常常骑摩托车出门，因为又方便又便宜。不过早上七点到九点、下午五点到七点，大马路往往堵得很厉害。最近几年有了地铁，越来越多的年轻人开始坐地铁上下班。", "py": "Wǒ zhù zài Hénèi. Zhèlǐ de rén chángcháng qí mótuōchē chūmén, yīnwèi yòu fāngbiàn yòu piányi. Búguò zǎoshang qī diǎn dào jiǔ diǎn, xiàwǔ wǔ diǎn dào qī diǎn, dà mǎlù wǎngwǎng dǔ de hěn lìhai. Zuìjìn jǐ nián yǒu le dìtiě, yuè lái yuè duō de niánqīngrén kāishǐ zuò dìtiě shàng xià bān.", "vi": "Tôi sống ở Hà Nội. Người ở đây hay đi xe máy vì vừa tiện vừa rẻ. Nhưng từ 7 đến 9 giờ sáng và 5 đến 7 giờ chiều, đường lớn thường tắc kinh khủng. Mấy năm gần đây có tàu điện ngầm, ngày càng nhiều người trẻ bắt đầu đi tàu đi làm."},
-      {"p": "Kể một lần hiểu lầm vì “tưởng” (dùng 以为, 原来).", "model": "上个月我去一个新同事家吃饭。我以为他住在市中心，所以下班后直接骑车去了市中心。到了那里打电话一问，原来他早就搬到郊区了！我又骑了四十分钟才到，饭菜都凉了。", "py": "Shàng ge yuè wǒ qù yí ge xīn tóngshì jiā chī fàn. Wǒ yǐwéi tā zhù zài shì zhōngxīn, suǒyǐ xiàbān hòu zhíjiē qí chē qù le shì zhōngxīn. Dào le nàlǐ dǎ diànhuà yí wèn, yuánlái tā zǎo jiù bān dào jiāoqū le! Wǒ yòu qí le sìshí fēnzhōng cái dào, fàncài dōu liáng le.", "vi": "Tháng trước tôi đến nhà một đồng nghiệp mới ăn cơm. Tôi tưởng anh ấy sống ở trung tâm nên tan làm đi thẳng vào trung tâm. Đến nơi gọi điện hỏi mới biết hoá ra anh ấy đã chuyển ra ngoại thành từ lâu! Tôi chạy thêm bốn mươi phút mới tới, cơm canh nguội hết."},
-      {"p": "Nêu quan điểm: 住在城市好还是住在农村好？(dùng 认为, 本来).", "model": "我认为年轻的时候住在城市比较好，因为机会多，能学到很多东西。不过城市的压力本来就大，房租、交通都是问题。等我年纪大了，我希望回到农村，过安静的生活。", "py": "Wǒ rènwéi niánqīng de shíhou zhù zài chéngshì bǐjiào hǎo, yīnwèi jīhuì duō, néng xuédào hěn duō dōngxi. Búguò chéngshì de yālì běnlái jiù dà, fángzū, jiāotōng dōu shì wèntí. Děng wǒ niánjì dà le, wǒ xīwàng huídào nóngcūn, guò ānjìng de shēnghuó.", "vi": "Tôi cho rằng lúc trẻ sống ở thành phố thì tốt hơn, vì nhiều cơ hội, học được nhiều thứ. Nhưng áp lực ở thành phố vốn đã lớn, tiền nhà, giao thông đều là vấn đề. Khi về già, tôi mong được về nông thôn sống cuộc đời yên tĩnh.", "tips": "Quan điểm 2 mặt: 我认为… 因为… 不过… 等…以后…"}
-    ]},
-    {"k": "write", "h": "Viết: Thành phố hay nông thôn?", "task": "Viết 80–120 chữ so sánh sống ở thành phố và nông thôn, nêu lựa chọn của bạn. Dùng ít nhất: 以为 / 认为, 本来 / 原来, 往往 / 常常.", "min": 80, "model": "很多人认为城市生活比农村好，我原来也这么想。城市里车水马龙，商场、餐厅到处都是，生活非常方便。可是城市的房租很贵，上下班的时候往往堵车。农村本来就安静，空气也新鲜，交通也越来越方便了。我以为离开城市会很不习惯，没想到在农村住了半年，我反而觉得更轻松。所以我更喜欢农村。", "modelVi": "Nhiều người cho rằng sống ở thành phố tốt hơn nông thôn, trước kia tôi cũng nghĩ vậy. Ở thành phố xe cộ tấp nập, trung tâm thương mại, nhà hàng ở khắp nơi, cuộc sống rất tiện lợi. Nhưng tiền thuê nhà ở thành phố rất đắt, giờ đi làm và tan làm thường tắc đường. Nông thôn vốn đã yên tĩnh, không khí trong lành, giao thông cũng ngày càng thuận tiện. Tôi tưởng rời thành phố sẽ rất không quen, không ngờ sống ở nông thôn nửa năm, tôi ngược lại thấy nhẹ nhõm hơn. Vì vậy tôi thích nông thôn hơn.", "tips": ["Bố cục so sánh: ý kiến chung (很多人认为…) → mặt lợi/hại thành phố → mặt lợi nông thôn → trải nghiệm bản thân (以为…没想到…) → kết luận.", "Ôn lại 反而 (bài 5), 没有…那么 (bài 6) khi so sánh.", "Đừng viết 我以为 khi muốn nêu quan điểm – dùng 我认为 / 我觉得."], "checklist": ["Đủ 80–120 chữ", "Có 认为 (quan điểm) và/hoặc 以为 (tưởng – sai)", "Có 本来 hoặc 原来 đúng nghĩa", "Có 往往 kèm điều kiện, hoặc 常常", "Có câu kết nêu lựa chọn rõ ràng"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "我还以为你不来了呢！", "lang": "zh-CN", "q": "Người nói đã nghĩ gì trước đó?", "o": ["Tưởng bạn không đến", "Biết chắc bạn sẽ đến", "Muốn bạn đừng đến"], "a": 0, "e": "还以为…呢 = còn tưởng là… (nhưng thực tế bạn đã đến)."},
-    {"t": "listen", "say": "下雨的时候，这条路往往很堵。", "lang": "zh-CN", "q": "Con đường này thế nào?", "o": ["Khi trời mưa thường bị tắc", "Lúc nào cũng tắc", "Không bao giờ tắc"], "a": 0, "e": "往往 = thường (trong điều kiện 下雨的时候)."},
-    {"t": "listen", "say": "我本来想坐地铁，后来朋友开车来接我了。", "lang": "zh-CN", "q": "Cuối cùng người nói đi bằng gì?", "o": ["Bạn lái xe đến đón", "Tàu điện ngầm", "Xe buýt"], "a": 0, "e": "本来想坐地铁 (dự định ban đầu), 后来朋友开车来接我了 (thực tế)."},
-    {"t": "mc", "q": "我找了半天手机，___在包里。", "o": ["本来", "原来", "往往"], "a": 1, "e": "Phát hiện sự thật → 原来 (hoá ra)."},
-    {"t": "mc", "q": "骑摩托车___就应该戴头盔。", "o": ["本来", "原来", "往往"], "a": 0, "e": "本来就应该 = vốn dĩ phải thế."},
-    {"t": "mc", "q": "Câu nào ĐÚNG?", "o": ["以后我会往往来看你。", "以后我会常常来看你。", "以后我往往会看你。"], "a": 1, "e": "Tương lai, ý muốn → 常常; 往往 chỉ dùng tổng kết quy luật."},
-    {"t": "mc", "q": "___，发展公共交通是解决堵车的好办法。(Tôi cho rằng)", "o": ["我以为", "我认为", "我原来"], "a": 1, "e": "Nêu quan điểm → 认为."},
-    {"t": "mc", "q": "我___他是中国人，原来他是越南人。", "o": ["认为", "以为", "往往"], "a": 1, "e": "Suy nghĩ sai so với thực tế (原来…) → 以为."},
-    {"t": "fill", "q": "这儿不能___车，请开到前面的停车场。(đỗ)", "a": "停", "alt": ["ting", "tíng"], "e": "停车 = đỗ xe."},
-    {"t": "fill", "q": "快点儿走，要来不___了！", "a": "及", "alt": ["ji", "jí"], "e": "来不及 = không kịp; 来得及 = kịp."},
-    {"t": "fill", "q": "晚上的市中心车水马___，非常热闹。", "a": "龙", "alt": ["long", "lóng"], "e": "车水马龙 = xe cộ tấp nập."},
-    {"t": "order", "q": "Sắp xếp: “Tôi tưởng hôm nay là thứ Bảy, hoá ra là thứ Sáu.”", "w": ["原来", "我以为", "是星期五", "今天是星期六"], "a": "我以为今天是星期六，原来是星期五。", "e": "以为 (tưởng sai) + 原来 (hoá ra sự thật)."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["的人", "住在郊区", "往往要花", "两个小时", "上下班"], "a": "住在郊区的人往往要花两个小时上下班。", "e": "Chủ ngữ có điều kiện (住在郊区的人) + 往往 + V."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["应该", "我认为", "多建", "城市", "公园"], "a": "我认为城市应该多建公园。", "e": "我认为 + quan điểm."},
-    {"t": "dict", "say": "这里的交通很方便。", "lang": "zh-CN", "a": "这里的交通很方便。", "py": "Zhèlǐ de jiāotōng hěn fāngbiàn.", "e": "交通 jiāotōng = giao thông."},
-    {"t": "match", "q": "Nối từ với nghĩa:", "pairs": [["地铁", "tàu điện ngầm"], ["摩托车", "xe máy"], ["郊区", "ngoại ô"], ["农村", "nông thôn"], ["热闹", "náo nhiệt"], ["车水马龙", "xe cộ tấp nập"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Bản đồ thành phố đơn giản tự vẽ (ga tàu điện, cây xăng, đường lớn…); 2 ảnh: phố giờ cao điểm và cánh đồng ở quê; 12 thẻ câu “tưởng – hoá ra” để luyện 以为/原来.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: “Bạn đi làm/đi học bằng gì? Mất bao lâu?” – vẽ biểu đồ phương tiện của cả lớp lên bảng."},
-      {"t": "20'", "do": "Từ vựng: dạy trên bản đồ (地铁站, 加油站, 方向, 停车); nhóm từ so sánh 城市/农村/郊区, 热闹/安静, 拥挤. Thành ngữ 车水马龙."},
-      {"t": "20'", "do": "Ngữ pháp 1 本来/原来: thẻ câu “tưởng – hoá ra”, học viên chọn từ đúng; nhấn: “hoá ra” chỉ 原来, “vốn dĩ phải” chỉ 本来."},
-      {"t": "20'", "do": "Ngữ pháp 2 往往/常常: GV nói thói quen của mình, học viên chuyển thành câu có điều kiện với 往往; sửa lỗi dùng 往往 cho tương lai."},
-      {"t": "15'", "do": "Nghe hội thoại: lần 1 “Thu sống ở đâu?”, lần 2 làm qs, lần 3 đọc phân vai, chú ý ngữ điệu 我还以为…呢."},
-      {"t": "5'", "do": "Giao bài tập 1–8 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: mỗi học viên kể 1 câu “tôi tưởng… hoá ra…” về chuyện thật của mình."},
-      {"t": "15'", "do": "Ngữ pháp 3 以为/认为: tranh luận nhanh về giao thông bằng 我认为…; sửa lỗi dùng 以为 để nêu quan điểm."},
-      {"t": "20'", "do": "Đọc 回到家乡的年轻人: tìm 本来, 原来, 以为, 往往 trong bài; thảo luận “bạn có muốn về quê lập nghiệp không?”."},
-      {"t": "10'", "do": "Chữ Hán: 交 通 铁 城 村 租 往."},
-      {"t": "20'", "do": "Nói: tranh luận 2 phe “Thành phố hay nông thôn?”. Viết nháp đoạn so sánh."},
-      {"t": "15'", "do": "Bài tập 9–16, chữa lỗi, giao bài về nhà."}
+ "no": 11,
+ "title": "城市生活 – Thành phố, nông thôn & giao thông · 本来/原来, 往往/常常, 以为/认为",
+ "sub": "Wǒ hái yǐwéi nǐ bù lái le ne! 我还以为你不来了呢！",
+ "goals": [
+  "Nói về giao thông, nhà ở, so sánh thành phố – ngoại ô – nông thôn",
+  "Phân biệt 本来 (vốn dĩ, lẽ ra) và 原来 (hoá ra; trước kia)",
+  "Phân biệt 往往 (quy luật, trong điều kiện nào đó) và 常常 (tần suất)",
+  "Phân biệt 以为 (tưởng – thường là sai) và 认为 (cho rằng – quan điểm)",
+  "Viết đoạn 80–120 chữ so sánh sống ở thành phố và nông thôn"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词)",
+   "items": [
+    {
+     "w": "交通",
+     "py": "jiāotōng",
+     "hv": "giao thông",
+     "pos": "n",
+     "vi": "giao thông",
+     "ex": "这里的交通很方便。",
+     "exPy": "Zhèlǐ de jiāotōng hěn fāngbiàn.",
+     "exVi": "Giao thông ở đây rất thuận tiện."
+    },
+    {
+     "w": "地铁",
+     "py": "dìtiě",
+     "hv": "địa thiết",
+     "pos": "n",
+     "vi": "tàu điện ngầm",
+     "ex": "绣田城的第一条地铁线已经开通了。",
+     "exPy": "Xiùtián Chéng de dì-yī tiáo dìtiě xiàn yǐjīng kāitōng le.",
+     "exVi": "Tuyến tàu điện ngầm đầu tiên của Tú Điền đã khai thông."
+    },
+    {
+     "w": "摩托车",
+     "py": "mótuōchē",
+     "hv": "ma thác xa",
+     "pos": "n",
+     "vi": "xe máy",
+     "ex": "越南人出门常常骑摩托车。",
+     "exPy": "Yuènánrén chūmén chángcháng qí mótuōchē.",
+     "exVi": "Người Việt ra ngoài thường đi xe máy."
+    },
+    {
+     "w": "乘坐",
+     "py": "chéngzuò",
+     "hv": "thừa toạ",
+     "pos": "v",
+     "vi": "đi (phương tiện công cộng) – trang trọng",
+     "ex": "请乘坐地铁二号线。",
+     "exPy": "Qǐng chéngzuò dìtiě èr hào xiàn.",
+     "exVi": "Mời đi tàu điện ngầm tuyến số 2."
+    },
+    {
+     "w": "速度",
+     "py": "sùdù",
+     "hv": "tốc độ",
+     "pos": "n",
+     "vi": "tốc độ",
+     "ex": "这里开车的速度不能超过四十公里。",
+     "exPy": "Zhèlǐ kāi chē de sùdù bù néng chāoguò sìshí gōnglǐ.",
+     "exVi": "Ở đây lái xe không được quá 40 km/h."
+    },
+    {
+     "w": "方向",
+     "py": "fāngxiàng",
+     "hv": "phương hướng",
+     "pos": "n",
+     "vi": "phương hướng, hướng",
+     "ex": "我走错方向了。",
+     "exPy": "Wǒ zǒucuò fāngxiàng le.",
+     "exVi": "Tôi đi nhầm hướng rồi."
+    },
+    {
+     "w": "警察",
+     "py": "jǐngchá",
+     "hv": "cảnh sát",
+     "pos": "n",
+     "vi": "cảnh sát",
+     "ex": "警察让我们停下来。",
+     "exPy": "Jǐngchá ràng wǒmen tíng xiàlai.",
+     "exVi": "Cảnh sát bảo chúng tôi dừng lại."
+    },
+    {
+     "w": "停",
+     "py": "tíng",
+     "hv": "đình",
+     "pos": "v",
+     "vi": "dừng; đỗ (xe)",
+     "ex": "这儿不能停车。",
+     "exPy": "Zhèr bù néng tíng chē.",
+     "exVi": "Ở đây không được đỗ xe."
+    },
+    {
+     "w": "城市",
+     "py": "chéngshì",
+     "hv": "thành thị",
+     "pos": "n",
+     "vi": "thành phố",
+     "ex": "越来越多的年轻人去大城市工作。",
+     "exPy": "Yuè lái yuè duō de niánqīngrén qù dà chéngshì gōngzuò.",
+     "exVi": "Ngày càng nhiều người trẻ lên thành phố lớn làm việc."
+    },
+    {
+     "w": "农村",
+     "py": "nóngcūn",
+     "hv": "nông thôn",
+     "pos": "n",
+     "vi": "nông thôn",
+     "ex": "我爷爷奶奶住在农村。",
+     "exPy": "Wǒ yéye nǎinai zhù zài nóngcūn.",
+     "exVi": "Ông bà tôi sống ở nông thôn."
+    },
+    {
+     "w": "热闹",
+     "py": "rènao",
+     "hv": "nhiệt náo",
+     "pos": "adj",
+     "vi": "náo nhiệt, nhộn nhịp",
+     "ex": "晚上的老街特别热闹。",
+     "exPy": "Wǎnshang de lǎo jiē tèbié rènao.",
+     "exVi": "Phố cổ buổi tối đặc biệt nhộn nhịp."
+    },
+    {
+     "w": "安静",
+     "py": "ānjìng",
+     "hv": "an tĩnh",
+     "pos": "adj",
+     "vi": "yên tĩnh",
+     "ex": "农村的晚上很安静。",
+     "exPy": "Nóngcūn de wǎnshang hěn ānjìng.",
+     "exVi": "Buổi tối ở nông thôn rất yên tĩnh."
+    },
+    {
+     "w": "租",
+     "py": "zū",
+     "hv": "tô",
+     "pos": "v",
+     "vi": "thuê; (n) tiền thuê (房租)",
+     "ex": "我在公司附近租了一个房间。",
+     "exPy": "Wǒ zài gōngsī fùjìn zū le yí ge fángjiān.",
+     "exVi": "Tôi thuê một phòng gần công ty."
+    },
+    {
+     "w": "本来",
+     "py": "běnlái",
+     "hv": "bản lai",
+     "pos": "adv",
+     "vi": "vốn dĩ, ban đầu; lẽ ra (本来就…)",
+     "ex": "我本来想坐公共汽车，后来改坐地铁了。",
+     "exPy": "Wǒ běnlái xiǎng zuò gōnggòng qìchē, hòulái gǎi zuò dìtiě le.",
+     "exVi": "Ban đầu tôi định đi xe buýt, sau đó đổi sang đi tàu điện ngầm."
+    },
+    {
+     "w": "原来",
+     "py": "yuánlái",
+     "hv": "nguyên lai",
+     "pos": "adv",
+     "vi": "hoá ra; trước kia, ban đầu",
+     "ex": "原来你也住在这儿！",
+     "exPy": "Yuánlái nǐ yě zhù zài zhèr!",
+     "exVi": "Hoá ra bạn cũng sống ở đây!"
+    },
+    {
+     "w": "往往",
+     "py": "wǎngwǎng",
+     "hv": "vãng vãng",
+     "pos": "adv",
+     "vi": "thường thường (theo quy luật, trong điều kiện nào đó)",
+     "ex": "周末的早上往往不堵车。",
+     "exPy": "Zhōumò de zǎoshang wǎngwǎng bù dǔchē.",
+     "exVi": "Sáng cuối tuần thường không tắc đường."
+    },
+    {
+     "w": "以为",
+     "py": "yǐwéi",
+     "hv": "dĩ vi",
+     "pos": "v",
+     "vi": "tưởng (là) – thường là suy nghĩ sai",
+     "ex": "我以为今天是星期六。",
+     "exPy": "Wǒ yǐwéi jīntiān shì xīngqīliù.",
+     "exVi": "Tôi tưởng hôm nay là thứ Bảy."
+    },
+    {
+     "w": "认为",
+     "py": "rènwéi",
+     "hv": "nhận vi",
+     "pos": "v",
+     "vi": "cho rằng (nêu quan điểm)",
+     "ex": "我认为城市应该多建公园。",
+     "exPy": "Wǒ rènwéi chéngshì yīnggāi duō jiàn gōngyuán.",
+     "exVi": "Tôi cho rằng thành phố nên xây thêm công viên."
+    },
+    {
+     "w": "拥挤",
+     "py": "yōngjǐ",
+     "hv": "ủng tễ",
+     "pos": "adj",
+     "vi": "chen chúc, đông nghẹt",
+     "ex": "早上的地铁特别拥挤。",
+     "exPy": "Zǎoshang de dìtiě tèbié yōngjǐ.",
+     "exVi": "Tàu điện ngầm buổi sáng cực kỳ đông."
+    },
+    {
+     "w": "来不及",
+     "py": "láibují",
+     "hv": "lai bất cập",
+     "pos": "v",
+     "vi": "không kịp",
+     "ex": "快点儿，要来不及了！",
+     "exPy": "Kuài diǎnr, yào láibují le!",
+     "exVi": "Nhanh lên, sắp không kịp rồi!"
+    },
+    {
+     "w": "来得及",
+     "py": "láidejí",
+     "hv": "lai đắc cập",
+     "pos": "v",
+     "vi": "kịp",
+     "ex": "现在出发还来得及。",
+     "exPy": "Xiànzài chūfā hái láidejí.",
+     "exVi": "Bây giờ xuất phát vẫn còn kịp."
+    },
+    {
+     "w": "郊区",
+     "py": "jiāoqū",
+     "hv": "giao khu",
+     "pos": "n",
+     "vi": "ngoại ô, ngoại thành",
+     "ex": "很多人住在郊区，每天进城上班。",
+     "exPy": "Hěn duō rén zhù zài jiāoqū, měi tiān jìn chéng shàngbān.",
+     "exVi": "Nhiều người sống ở ngoại ô, ngày nào cũng vào thành phố đi làm."
+    },
+    {
+     "w": "风景",
+     "py": "fēngjǐng",
+     "hv": "phong cảnh",
+     "pos": "n",
+     "vi": "phong cảnh",
+     "ex": "这里的风景真美。",
+     "exPy": "Zhèlǐ de fēngjǐng zhēn měi.",
+     "exVi": "Phong cảnh ở đây đẹp thật."
+    },
+    {
+     "w": "吸引",
+     "py": "xīyǐn",
+     "hv": "hấp dẫn",
+     "pos": "v",
+     "vi": "thu hút, hấp dẫn",
+     "ex": "大城市吸引了很多年轻人。",
+     "exPy": "Dà chéngshì xīyǐn le hěn duō niánqīngrén.",
+     "exVi": "Thành phố lớn thu hút rất nhiều người trẻ."
+    },
+    {
+     "w": "规则",
+     "py": "guīzé",
+     "hv": "quy tắc",
+     "pos": "n",
+     "vi": "quy tắc, luật",
+     "ex": "开车要遵守交通规则。",
+     "exPy": "Kāi chē yào zūnshǒu jiāotōng guīzé.",
+     "exVi": "Lái xe phải tuân thủ luật giao thông."
+    },
+    {
+     "w": "加油站",
+     "py": "jiāyóuzhàn",
+     "hv": "gia du trạm",
+     "pos": "n",
+     "vi": "cây xăng, trạm xăng",
+     "ex": "前面有一个加油站。",
+     "exPy": "Qiánmian yǒu yí ge jiāyóuzhàn.",
+     "exVi": "Phía trước có một cây xăng."
+    },
+    {
+     "w": "导航",
+     "py": "dǎoháng",
+     "hv": "đạo hàng",
+     "pos": "n",
+     "vi": "định vị dẫn đường (GPS)",
+     "ex": "我开车的时候常常用手机导航。",
+     "exPy": "Wǒ kāi chē de shíhou chángcháng yòng shǒujī dǎoháng.",
+     "exVi": "Khi lái xe tôi hay dùng điện thoại để chỉ đường."
+    },
+    {
+     "w": "车水马龙",
+     "py": "chēshuǐ-mǎlóng",
+     "hv": "xa thuỷ mã long",
+     "pos": "idiom",
+     "vi": "xe cộ tấp nập (xe như nước chảy, ngựa như rồng)",
+     "ex": "晚上的市中心车水马龙，非常热闹。",
+     "exPy": "Wǎnshang de shì zhōngxīn chēshuǐ-mǎlóng, fēicháng rènao.",
+     "exVi": "Trung tâm thành phố buổi tối xe cộ tấp nập, rất nhộn nhịp."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: 本来 và 原来",
+   "html": "<p>Hai từ đều có nghĩa “lúc đầu, trước kia”, nhưng mỗi từ có một nghĩa riêng:</p><ul><li><b>原来</b> = <b>hoá ra</b> (phát hiện sự thật trước đó không biết): 原来是你！ Cũng làm định ngữ: 原来的地址 (địa chỉ cũ).</li><li><b>本来</b> = <b>vốn dĩ, lẽ ra, đương nhiên phải thế</b>: 本来就应该… Cũng dùng “ban đầu định… (sau đổi)”: 我本来想…，后来….</li></ul>",
+   "table": [
+    [
+     "Nghĩa",
+     "本来",
+     "原来"
     ],
-    "games": [
-      "“Tưởng thế mà không phải”: mỗi học viên viết một câu 我以为… lên giấy, gấp lại; người khác bốc và nói tiếp 原来… thật hài hước.",
-      "“Chỉ đường”: một học viên cầm bản đồ, hướng dẫn bạn đi từ A đến B bằng tiếng Trung (往前走, 左转, 在加油站停…); bạn kia vẽ đường đi."
+    [
+     "Lúc đầu, trước kia",
+     "✓ 我本来住在郊区。",
+     "✓ 我原来住在郊区。"
     ],
-    "errors": [
-      "Dùng 以为 để nêu quan điểm: ❌ 我以为这个办法很好 → 我认为这个办法很好.",
-      "Dùng 本来 với nghĩa “hoá ra”: ❌ 本来是你！ → 原来是你！",
-      "Dùng 往往 cho tương lai/lời khuyên: ❌ 我以后往往锻炼 → 我以后要常常锻炼.",
-      "Phủ định ❌ 不往往 → dùng 不常 / 很少.",
-      "Đọc 热闹 thành rènào – âm sau là thanh nhẹ: rènao.",
-      "Lẫn 来得及 / 来不及: 来得及 = kịp, 来不及 = không kịp (得 khẳng định, 不 phủ định)."
+    [
+     "Hoá ra (phát hiện)",
+     "✗",
+     "✓ 原来他是你哥哥！"
     ],
-    "homework": "Hoàn thành bài tập trong game ≥ 80%; viết đoạn so sánh thành phố – nông thôn 80–120 chữ; vẽ bản đồ đường từ nhà đến chỗ làm/học và viết 5 câu chỉ đường bằng tiếng Trung."
+    [
+     "Vốn dĩ phải thế, đương nhiên",
+     "✓ 你本来就应该早点儿出门。",
+     "✗"
+    ],
+    [
+     "Định ngữ …的",
+     "本来的意思 (nghĩa gốc)",
+     "原来的地址 (địa chỉ cũ)"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我本来想坐公共汽车，可是怕堵车，后来改坐地铁了。",
+     "py": "Wǒ běnlái xiǎng zuò gōnggòng qìchē, kěshì pà dǔchē, hòulái gǎi zuò dìtiě le.",
+     "vi": "Ban đầu tôi định đi xe buýt, nhưng sợ tắc đường nên sau đổi sang tàu điện ngầm."
+    },
+    {
+     "t": "我找了半天钥匙，原来在自己的口袋里。",
+     "py": "Wǒ zhǎo le bàntiān yàoshi, yuánlái zài zìjǐ de kǒudai li.",
+     "vi": "Tôi tìm chìa khoá mãi, hoá ra nằm trong túi mình."
+    },
+    {
+     "t": "这条路原来很窄，现在变宽了。",
+     "py": "Zhè tiáo lù yuánlái hěn zhǎi, xiànzài biàn kuān le.",
+     "vi": "Con đường này trước kia rất hẹp, giờ đã rộng ra."
+    },
+    {
+     "t": "骑车本来就应该戴头盔。",
+     "py": "Qí chē běnlái jiù yīnggāi dài tóukuī.",
+     "vi": "Đi xe vốn dĩ phải đội mũ bảo hiểm."
+    }
+   ],
+   "tips": [
+    "“Hoá ra…” CHỈ dùng 原来: ❌ <i>本来是你！</i> → ✓ <i>原来是你！</i>",
+    "“Vốn dĩ phải thế” (本来就…) CHỈ dùng 本来.",
+    "Người Việt nói “hoá ra” rất nhiều → nhớ ngay 原来 (Hán Việt “nguyên lai” – nguồn gốc là…)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: 往往 và 常常",
+   "html": "<p><b>往往</b>: tổng kết <b>quy luật</b> từ kinh nghiệm – “trong điều kiện X thì thường Y”. Câu phải có <b>bối cảnh / điều kiện</b>; không dùng cho tương lai, ý muốn chủ quan hay lời khuyên.</p><p><b>常常</b>: chỉ <b>tần suất</b> đơn thuần – “hay, thường xuyên”; dùng được cho tương lai và lời khuyên. Phủ định: <b>不常</b>.</p>",
+   "table": [
+    [
+     "",
+     "往往",
+     "常常"
+    ],
+    [
+     "Ý nghĩa",
+     "quy luật: điều kiện X → thường Y",
+     "tần suất: hay, thường xuyên"
+    ],
+    [
+     "Cần điều kiện",
+     "✓ 下雨的时候，这条路往往堵车。",
+     "không cần: 我常常坐地铁。"
+    ],
+    [
+     "Tương lai / ý muốn",
+     "✗ ❌ 以后我往往来看你",
+     "✓ 以后我会常常来看你。"
+    ],
+    [
+     "Lời khuyên",
+     "✗",
+     "✓ 你要常常运动。"
+    ],
+    [
+     "Phủ định",
+     "✗",
+     "不常 (我不常开车)"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "节假日的时候，高速公路往往很堵。",
+     "py": "Jiéjiàrì de shíhou, gāosù gōnglù wǎngwǎng hěn dǔ.",
+     "vi": "Vào ngày lễ, đường cao tốc thường rất tắc."
+    },
+    {
+     "t": "住在郊区的人往往要花两个小时上下班。",
+     "py": "Zhù zài jiāoqū de rén wǎngwǎng yào huā liǎng ge xiǎoshí shàng xià bān.",
+     "vi": "Người sống ở ngoại ô thường mất hai tiếng đi làm và về."
+    },
+    {
+     "t": "我常常骑摩托车去公司。",
+     "py": "Wǒ chángcháng qí mótuōchē qù gōngsī.",
+     "vi": "Tôi hay đi xe máy đến công ty."
+    },
+    {
+     "t": "欢迎你以后常常来玩儿！",
+     "py": "Huānyíng nǐ yǐhòu chángcháng lái wánr!",
+     "vi": "Mong sau này bạn hay đến chơi!"
+    }
+   ],
+   "tips": [
+    "❌ <i>我往往骑摩托车</i> (chỉ là thói quen, không có điều kiện) → ✓ <i>我常常骑摩托车</i> / ✓ <i>下雨的时候，我往往坐出租车</i>.",
+    "❌ <i>你要往往运动</i> → ✓ <i>你要常常运动</i>.",
+    "往往 rất hay gặp trong bài đọc khi tác giả tổng kết hiện tượng xã hội: 年轻人往往…"
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: 以为 và 认为",
+   "html": "<p><b>以为</b> = <b>tưởng</b>: suy nghĩ thường <b>trái với thực tế</b>, hay đi với 原来, 其实, 没想到, 还以为…呢.</p><p><b>认为</b> = <b>cho rằng</b>: nêu quan điểm, đánh giá – trung tính, trang trọng. Có dạng bị động 被认为 (được coi là).</p>",
+   "table": [
+    [
+     "",
+     "以为",
+     "认为"
+    ],
+    [
+     "Nghĩa",
+     "tưởng (thường là sai)",
+     "cho rằng (quan điểm)"
+    ],
+    [
+     "Hay đi với",
+     "原来、其实、没想到、还以为…呢",
+     "我认为、专家认为、被认为"
+    ],
+    [
+     "Ví dụ",
+     "我以为他是中国人，原来是越南人。",
+     "我认为城市应该多建公园。"
+    ],
+    [
+     "Bị động",
+     "✗",
+     "✓ 他被认为是最好的司机。"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我以为今天是星期六，原来是星期五！",
+     "py": "Wǒ yǐwéi jīntiān shì xīngqīliù, yuánlái shì xīngqīwǔ!",
+     "vi": "Tôi tưởng hôm nay thứ Bảy, hoá ra là thứ Sáu!"
+    },
+    {
+     "t": "我还以为你不来了呢！",
+     "py": "Wǒ hái yǐwéi nǐ bù lái le ne!",
+     "vi": "Tôi còn tưởng bạn không đến nữa chứ!"
+    },
+    {
+     "t": "很多专家认为，发展公共交通是解决堵车的最好办法。",
+     "py": "Hěn duō zhuānjiā rènwéi, fāzhǎn gōnggòng jiāotōng shì jiějué dǔchē de zuì hǎo bànfǎ.",
+     "vi": "Nhiều chuyên gia cho rằng phát triển giao thông công cộng là cách tốt nhất để giải quyết tắc đường."
+    },
+    {
+     "t": "我认为住在郊区也有很多好处。",
+     "py": "Wǒ rènwéi zhù zài jiāoqū yě yǒu hěn duō hǎochù.",
+     "vi": "Tôi cho rằng sống ở ngoại ô cũng có nhiều cái lợi."
+    }
+   ],
+   "tips": [
+    "Nêu quan điểm → 认为: ❌ <i>我以为环境很重要</i> (nghe như “tôi tưởng… mà hoá ra không phải”) → ✓ <i>我认为环境很重要</i>.",
+    "以为 + kết quả trái thực tế: ✓ <i>我以为…，没想到…</i>",
+    "Tiếng Việt: “tưởng” → 以为; “theo tôi / tôi cho rằng” → 我认为 / 我觉得."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Đến muộn vì tắc đường",
+   "lang": "zh-CN",
+   "note": "Thu (阮秋) hẹn ăn tối với bạn là Vương Lỗi (王磊) ở một quán trong trung tâm Diệp Sa, nhưng đến muộn gần một tiếng. Nghe lần 1: Thu đang sống ở đâu?",
+   "lines": [
+    {
+     "s": "王磊",
+     "g": "m",
+     "t": "秋，你终于来了！我还以为你不来了呢。",
+     "py": "Qiū, nǐ zhōngyú lái le! Wǒ hái yǐwéi nǐ bù lái le ne.",
+     "vi": "Thu, cuối cùng cậu cũng đến! Tớ còn tưởng cậu không đến nữa chứ."
+    },
+    {
+     "s": "阮秋",
+     "g": "f",
+     "t": "真不好意思！我本来六点就出门了，可是路上堵得太厉害了。",
+     "py": "Zhēn bù hǎoyìsi! Wǒ běnlái liù diǎn jiù chūmén le, kěshì lùshang dǔ de tài lìhai le.",
+     "vi": "Ngại quá! Tớ ra khỏi nhà từ 6 giờ rồi, nhưng đường tắc khủng khiếp."
+    },
+    {
+     "s": "王磊",
+     "g": "m",
+     "t": "下班的时候，叶纱城的路往往都很堵。你怎么来的？",
+     "py": "Xiàbān de shíhou, Yèshā Chéng de lù wǎngwǎng dōu hěn dǔ. Nǐ zěnme lái de?",
+     "vi": "Giờ tan tầm đường Diệp Sa thường tắc lắm. Cậu đến bằng gì?"
+    },
+    {
+     "s": "阮秋",
+     "g": "f",
+     "t": "骑摩托车。我本来想走小路，结果小路也全是车，真是车水马龙。",
+     "py": "Qí mótuōchē. Wǒ běnlái xiǎng zǒu xiǎo lù, jiéguǒ xiǎo lù yě quán shì chē, zhēn shì chēshuǐ-mǎlóng.",
+     "vi": "Đi xe máy. Tớ định đi đường nhỏ, kết quả đường nhỏ cũng toàn xe, đúng là xe cộ tấp nập."
+    },
+    {
+     "s": "王磊",
+     "g": "m",
+     "t": "你为什么不坐地铁？我常常坐，又快又准时。",
+     "py": "Nǐ wèishénme bú zuò dìtiě? Wǒ chángcháng zuò, yòu kuài yòu zhǔnshí.",
+     "vi": "Sao cậu không đi tàu điện ngầm? Tớ hay đi, vừa nhanh vừa đúng giờ."
+    },
+    {
+     "s": "阮秋",
+     "g": "f",
+     "t": "我家附近没有地铁站啊。而且我上个月搬家了，现在住在郊区。",
+     "py": "Wǒ jiā fùjìn méiyǒu dìtiězhàn a. Érqiě wǒ shàng ge yuè bānjiā le, xiànzài zhù zài jiāoqū.",
+     "vi": "Gần nhà tớ không có ga tàu điện mà. Hơn nữa tháng trước tớ chuyển nhà, giờ sống ở ngoại thành."
+    },
+    {
+     "s": "王磊",
+     "g": "m",
+     "t": "搬到郊区了？我以为你很喜欢市中心呢。",
+     "py": "Bān dào jiāoqū le? Wǒ yǐwéi nǐ hěn xǐhuan shì zhōngxīn ne.",
+     "vi": "Chuyển ra ngoại thành rồi à? Tớ tưởng cậu thích trung tâm lắm cơ."
+    },
+    {
+     "s": "阮秋",
+     "g": "f",
+     "t": "原来是很喜欢，热闹、方便，吃的东西也多。可是房租太贵了，一个小房间就要五百万盾。",
+     "py": "Yuánlái shì hěn xǐhuan, rènao, fāngbiàn, chī de dōngxi yě duō. Kěshì fángzū tài guì le, yí ge xiǎo fángjiān jiù yào wǔbǎi wàn dùn.",
+     "vi": "Trước kia đúng là rất thích, nhộn nhịp, tiện lợi, đồ ăn cũng nhiều. Nhưng tiền thuê nhà đắt quá, một phòng nhỏ đã 5 triệu."
+    },
+    {
+     "s": "王磊",
+     "g": "m",
+     "t": "郊区便宜多少？",
+     "py": "Jiāoqū piányi duōshao?",
+     "vi": "Ngoại thành rẻ hơn bao nhiêu?"
+    },
+    {
+     "s": "阮秋",
+     "g": "f",
+     "t": "同样的钱，在郊区能租一套两室一厅的房子，还有个小花园。",
+     "py": "Tóngyàng de qián, zài jiāoqū néng zū yí tào liǎng shì yì tīng de fángzi, hái yǒu ge xiǎo huāyuán.",
+     "vi": "Cùng số tiền đó, ở ngoại thành thuê được một căn hai phòng ngủ một phòng khách, còn có vườn nhỏ."
+    },
+    {
+     "s": "王磊",
+     "g": "m",
+     "t": "那很不错啊！空气也比市中心好吧？",
+     "py": "Nà hěn búcuò a! Kōngqì yě bǐ shì zhōngxīn hǎo ba?",
+     "vi": "Thế thì tốt quá! Không khí cũng tốt hơn trung tâm nhỉ?"
+    },
+    {
+     "s": "阮秋",
+     "g": "f",
+     "t": "是啊，晚上特别安静，我睡得比以前好多了。唯一的问题就是上班太远，每天路上要花两个小时。",
+     "py": "Shì a, wǎnshang tèbié ānjìng, wǒ shuì de bǐ yǐqián hǎo duō le. Wéiyī de wèntí jiù shì shàngbān tài yuǎn, měi tiān lùshang yào huā liǎng ge xiǎoshí.",
+     "vi": "Ừ, buổi tối rất yên tĩnh, tớ ngủ ngon hơn trước nhiều. Vấn đề duy nhất là đi làm xa quá, mỗi ngày mất hai tiếng trên đường."
+    },
+    {
+     "s": "王磊",
+     "g": "m",
+     "t": "我认为政府应该多修几条地铁线，这样住在郊区的人就方便多了。",
+     "py": "Wǒ rènwéi zhèngfǔ yīnggāi duō xiū jǐ tiáo dìtiě xiàn, zhèyàng zhù zài jiāoqū de rén jiù fāngbiàn duō le.",
+     "vi": "Tớ cho rằng nhà nước nên làm thêm vài tuyến tàu điện ngầm, như thế người ở ngoại thành sẽ tiện hơn nhiều."
+    },
+    {
+     "s": "阮秋",
+     "g": "f",
+     "t": "听说明年我家附近就会有一个站。到时候我就不用每天骑车了。",
+     "py": "Tīngshuō míngnián wǒ jiā fùjìn jiù huì yǒu yí ge zhàn. Dào shíhou wǒ jiù bú yòng měi tiān qí chē le.",
+     "vi": "Nghe nói năm sau gần nhà tớ sẽ có một ga. Đến lúc đó tớ không phải đi xe máy hằng ngày nữa."
+    },
+    {
+     "s": "王磊",
+     "g": "m",
+     "t": "太好了！对了，你快看看菜单吧，再不点菜，厨房就要关门了。",
+     "py": "Tài hǎo le! Duì le, nǐ kuài kànkan càidān ba, zài bù diǎn cài, chúfáng jiù yào guānmén le.",
+     "vi": "Tuyệt! À này, cậu xem thực đơn nhanh đi, không gọi món là bếp sắp đóng cửa đấy."
+    },
+    {
+     "s": "阮秋",
+     "g": "f",
+     "t": "啊？原来已经八点半了！",
+     "py": "Á? Yuánlái yǐjīng bā diǎn bàn le!",
+     "vi": "Hả? Hoá ra đã 8 rưỡi rồi!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Vì sao Thu đến muộn?",
+     "o": [
+      "Quên giờ hẹn",
+      "Xe bị hỏng",
+      "Tắc đường quá nặng"
+     ],
+     "a": 2,
+     "e": "我本来六点就出门了，可是路上堵得太厉害了。"
+    },
+    {
+     "q": "Vương Lỗi hay đi phương tiện gì?",
+     "o": [
+      "Xe máy",
+      "Taxi",
+      "Tàu điện ngầm"
+     ],
+     "a": 2,
+     "e": "你为什么不坐地铁？我常常坐。"
+    },
+    {
+     "q": "Vì sao Thu chuyển ra ngoại thành?",
+     "o": [
+      "Tiền thuê nhà ở trung tâm quá đắt",
+      "Không thích náo nhiệt",
+      "Gần công ty hơn"
+     ],
+     "a": 0,
+     "e": "可是房租太贵了，一个小房间就要五百万盾。"
+    },
+    {
+     "q": "Vấn đề duy nhất khi sống ở ngoại thành là gì?",
+     "o": [
+      "Đi làm xa, mất hai tiếng mỗi ngày",
+      "Buổi tối quá ồn",
+      "Không khí kém"
+     ],
+     "a": 0,
+     "e": "唯一的问题就是上班太远，每天路上要花两个小时。"
+    },
+    {
+     "q": "Câu cuối “原来已经八点半了！” thể hiện điều gì?",
+     "o": [
+      "Thu muốn về lúc 8 rưỡi",
+      "Thu bất ngờ phát hiện đã 8 rưỡi",
+      "Thu nói trước kia là 8 rưỡi"
+     ],
+     "a": 1,
+     "e": "原来 = hoá ra (phát hiện điều trước đó không để ý)."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Người trẻ về quê",
+   "title": "回到家乡的年轻人",
+   "text": "很多人认为，年轻人只有去大城市才能有好的发展。我原来也这么想。\n\n大学毕业后，我在绣田城一家公司工作了五年。城市生活确实很吸引人：高楼、商场、各种各样的餐厅，周末还有看不完的演出。可是，城市的生活成本也很高，我的工资一半以上都花在了房租和交通上。每天早上，我都要在拥挤的路上骑一个小时摩托车，到公司的时候往往已经很累了。\n\n前年春节，我回到了家乡——绢水河边的一个小镇。我本来只打算住一个星期，没想到，我发现家乡变化很大：路修好了，网络也很快，很多年轻人在网上卖本地的水果和特产。于是，我决定留下来，和朋友一起开了一家网店。\n\n现在，我每天早上骑车经过稻田去上班，只要十分钟。收入虽然没有以前那么高，但是生活轻松多了。我以为自己会后悔，其实一点儿也没有。",
+   "vi": "Nhiều người cho rằng người trẻ chỉ có lên thành phố lớn mới phát triển tốt được. Trước kia tôi cũng nghĩ vậy.\n\nTốt nghiệp đại học, tôi làm ở một công ty tại Tú Điền năm năm. Cuộc sống thành phố quả thật rất hấp dẫn: nhà cao tầng, trung tâm thương mại, đủ loại nhà hàng, cuối tuần còn có vô số buổi biểu diễn. Nhưng chi phí sống ở thành phố cũng rất cao, hơn một nửa lương của tôi đổ vào tiền thuê nhà và đi lại. Sáng nào tôi cũng phải chạy xe máy một tiếng trên con đường đông nghẹt, đến công ty thường đã mệt lử.\n\nTết năm kia, tôi về quê – một thị trấn nhỏ bên sông Quyến Thủy. Ban đầu tôi chỉ định ở một tuần, không ngờ tôi phát hiện quê thay đổi rất nhiều: đường sá được sửa đẹp, mạng Internet nhanh, nhiều bạn trẻ bán trái cây và đặc sản địa phương trên mạng. Thế là tôi quyết định ở lại, cùng bạn mở một cửa hàng online.\n\nGiờ đây, sáng nào tôi cũng đạp xe qua cánh đồng lúa đi làm, chỉ mất mười phút. Thu nhập tuy không cao bằng trước, nhưng cuộc sống nhẹ nhàng hơn nhiều. Tôi tưởng mình sẽ hối hận, thật ra chẳng hối hận chút nào.",
+   "gloss": [
+    {
+     "w": "高楼",
+     "py": "gāolóu",
+     "vi": "nhà cao tầng"
+    },
+    {
+     "w": "商场",
+     "py": "shāngchǎng",
+     "vi": "trung tâm thương mại"
+    },
+    {
+     "w": "各种各样",
+     "py": "gè zhǒng gè yàng",
+     "vi": "đủ các loại"
+    },
+    {
+     "w": "演出",
+     "py": "yǎnchū",
+     "vi": "buổi biểu diễn"
+    },
+    {
+     "w": "生活成本",
+     "py": "shēnghuó chéngběn",
+     "vi": "chi phí sinh hoạt"
+    },
+    {
+     "w": "家乡",
+     "py": "jiāxiāng",
+     "vi": "quê hương"
+    },
+    {
+     "w": "绢水河",
+     "py": "Juànshuǐ Hé",
+     "vi": "sông Quyến Thủy"
+    },
+    {
+     "w": "小镇",
+     "py": "xiǎozhèn",
+     "vi": "thị trấn nhỏ"
+    },
+    {
+     "w": "特产",
+     "py": "tèchǎn",
+     "vi": "đặc sản"
+    },
+    {
+     "w": "网店",
+     "py": "wǎngdiàn",
+     "vi": "cửa hàng online"
+    },
+    {
+     "w": "稻田",
+     "py": "dàotián",
+     "vi": "ruộng lúa"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Trước kia tác giả nghĩ gì?",
+     "o": [
+      "Không cần đi làm",
+      "Người trẻ phải lên thành phố lớn mới phát triển tốt",
+      "Nông thôn tốt hơn thành phố"
+     ],
+     "a": 1,
+     "e": "很多人认为，年轻人只有去大城市才能有好的发展。我原来也这么想。"
+    },
+    {
+     "q": "Hơn một nửa lương của tác giả tiêu vào đâu?",
+     "o": [
+      "Tiền thuê nhà và đi lại",
+      "Ăn uống",
+      "Xem biểu diễn"
+     ],
+     "a": 0,
+     "e": "我的工资一半以上都花在了房租和交通上。"
+    },
+    {
+     "q": "Tết năm kia, ban đầu tác giả định ở quê bao lâu?",
+     "o": [
+      "Một tuần",
+      "Một tháng",
+      "Ở luôn"
+     ],
+     "a": 0,
+     "e": "我本来只打算住一个星期。"
+    },
+    {
+     "q": "Quê hương đã thay đổi thế nào?",
+     "o": [
+      "Có tàu điện ngầm",
+      "Mở nhiều nhà máy lớn",
+      "Đường sửa đẹp, mạng nhanh, người trẻ bán đặc sản online"
+     ],
+     "a": 2,
+     "e": "路修好了，网络也很快，很多年轻人在网上卖本地的水果和特产。"
+    },
+    {
+     "q": "Bây giờ tác giả cảm thấy thế nào?",
+     "o": [
+      "Thu nhập thấp hơn nhưng nhẹ nhàng hơn, không hối hận",
+      "Rất hối hận",
+      "Muốn quay lại thành phố ngay"
+     ],
+     "a": 0,
+     "e": "收入虽然没有以前那么高，但是生活轻松多了。我以为自己会后悔，其实一点儿也没有。"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán trọng tâm (bấm để tập viết)",
+   "items": [
+    {
+     "c": "交",
+     "py": "jiāo",
+     "hv": "giao",
+     "parts": "tượng hình người đứng bắt chéo chân",
+     "strokes": 6,
+     "vi": "giao nhau, qua lại; nộp",
+     "words": "交通, 交流, 交朋友"
+    },
+    {
+     "c": "通",
+     "py": "tōng",
+     "hv": "thông",
+     "parts": "甬 (dũng – lối đi, gợi âm) + 辶 (sước – đi)",
+     "strokes": 10,
+     "vi": "thông suốt, đi qua được",
+     "words": "交通, 通过, 普通"
+    },
+    {
+     "c": "铁",
+     "py": "tiě",
+     "hv": "thiết",
+     "parts": "钅(kim – kim loại) + 失 (thất – gợi âm)",
+     "strokes": 10,
+     "vi": "sắt",
+     "words": "地铁, 高铁"
+    },
+    {
+     "c": "城",
+     "py": "chéng",
+     "hv": "thành",
+     "parts": "土 (thổ – đất) + 成 (thành – gợi âm)",
+     "strokes": 9,
+     "vi": "tường thành (đắp bằng đất) → thành phố",
+     "words": "城市, 织云桥"
+    },
+    {
+     "c": "村",
+     "py": "cūn",
+     "hv": "thôn",
+     "parts": "木 (mộc – cây) + 寸 (thốn)",
+     "strokes": 7,
+     "vi": "làng, thôn – nơi có cây cối",
+     "words": "农村, 村子"
+    },
+    {
+     "c": "租",
+     "py": "zū",
+     "hv": "tô",
+     "parts": "禾 (hoà – cây lúa) + 且 (thả – gợi âm)",
+     "strokes": 10,
+     "vi": "thuê – xưa nộp tô thuế bằng lúa",
+     "words": "租房, 房租, 出租车"
+    },
+    {
+     "c": "往",
+     "py": "wǎng",
+     "hv": "vãng",
+     "parts": "彳(xích – bước chân) + 主",
+     "strokes": 8,
+     "vi": "đi tới, qua lại",
+     "words": "往往, 往前走, 来往"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Cuộc sống đô thị",
+   "tasks": [
+    {
+     "p": "Mô tả giao thông ở thành phố bạn sống (dùng 常常, 往往).",
+     "model": "我住在叶纱城。这里的人常常骑摩托车出门，因为又方便又便宜。不过早上七点到九点、下午五点到七点，大马路往往堵得很厉害。最近几年有了地铁，越来越多的年轻人开始坐地铁上下班。",
+     "py": "Wǒ zhù zài Yèshā Chéng. Zhèlǐ de rén chángcháng qí mótuōchē chūmén, yīnwèi yòu fāngbiàn yòu piányi. Búguò zǎoshang qī diǎn dào jiǔ diǎn, xiàwǔ wǔ diǎn dào qī diǎn, dà mǎlù wǎngwǎng dǔ de hěn lìhai. Zuìjìn jǐ nián yǒu le dìtiě, yuè lái yuè duō de niánqīngrén kāishǐ zuò dìtiě shàng xià bān.",
+     "vi": "Tôi sống ở Diệp Sa. Người ở đây hay đi xe máy vì vừa tiện vừa rẻ. Nhưng từ 7 đến 9 giờ sáng và 5 đến 7 giờ chiều, đường lớn thường tắc kinh khủng. Mấy năm gần đây có tàu điện ngầm, ngày càng nhiều người trẻ bắt đầu đi tàu đi làm."
+    },
+    {
+     "p": "Kể một lần hiểu lầm vì “tưởng” (dùng 以为, 原来).",
+     "model": "上个月我去一个新同事家吃饭。我以为他住在市中心，所以下班后直接骑车去了市中心。到了那里打电话一问，原来他早就搬到郊区了！我又骑了四十分钟才到，饭菜都凉了。",
+     "py": "Shàng ge yuè wǒ qù yí ge xīn tóngshì jiā chī fàn. Wǒ yǐwéi tā zhù zài shì zhōngxīn, suǒyǐ xiàbān hòu zhíjiē qí chē qù le shì zhōngxīn. Dào le nàlǐ dǎ diànhuà yí wèn, yuánlái tā zǎo jiù bān dào jiāoqū le! Wǒ yòu qí le sìshí fēnzhōng cái dào, fàncài dōu liáng le.",
+     "vi": "Tháng trước tôi đến nhà một đồng nghiệp mới ăn cơm. Tôi tưởng anh ấy sống ở trung tâm nên tan làm đi thẳng vào trung tâm. Đến nơi gọi điện hỏi mới biết hoá ra anh ấy đã chuyển ra ngoại thành từ lâu! Tôi chạy thêm bốn mươi phút mới tới, cơm canh nguội hết."
+    },
+    {
+     "p": "Nêu quan điểm: 住在城市好还是住在农村好？(dùng 认为, 本来).",
+     "model": "我认为年轻的时候住在城市比较好，因为机会多，能学到很多东西。不过城市的压力本来就大，房租、交通都是问题。等我年纪大了，我希望回到农村，过安静的生活。",
+     "py": "Wǒ rènwéi niánqīng de shíhou zhù zài chéngshì bǐjiào hǎo, yīnwèi jīhuì duō, néng xuédào hěn duō dōngxi. Búguò chéngshì de yālì běnlái jiù dà, fángzū, jiāotōng dōu shì wèntí. Děng wǒ niánjì dà le, wǒ xīwàng huídào nóngcūn, guò ānjìng de shēnghuó.",
+     "vi": "Tôi cho rằng lúc trẻ sống ở thành phố thì tốt hơn, vì nhiều cơ hội, học được nhiều thứ. Nhưng áp lực ở thành phố vốn đã lớn, tiền nhà, giao thông đều là vấn đề. Khi về già, tôi mong được về nông thôn sống cuộc đời yên tĩnh.",
+     "tips": "Quan điểm 2 mặt: 我认为… 因为… 不过… 等…以后…"
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Thành phố hay nông thôn?",
+   "task": "Viết 80–120 chữ so sánh sống ở thành phố và nông thôn, nêu lựa chọn của bạn. Dùng ít nhất: 以为 / 认为, 本来 / 原来, 往往 / 常常.",
+   "min": 80,
+   "model": "很多人认为城市生活比农村好，我原来也这么想。城市里车水马龙，商场、餐厅到处都是，生活非常方便。可是城市的房租很贵，上下班的时候往往堵车。农村本来就安静，空气也新鲜，交通也越来越方便了。我以为离开城市会很不习惯，没想到在农村住了半年，我反而觉得更轻松。所以我更喜欢农村。",
+   "modelVi": "Nhiều người cho rằng sống ở thành phố tốt hơn nông thôn, trước kia tôi cũng nghĩ vậy. Ở thành phố xe cộ tấp nập, trung tâm thương mại, nhà hàng ở khắp nơi, cuộc sống rất tiện lợi. Nhưng tiền thuê nhà ở thành phố rất đắt, giờ đi làm và tan làm thường tắc đường. Nông thôn vốn đã yên tĩnh, không khí trong lành, giao thông cũng ngày càng thuận tiện. Tôi tưởng rời thành phố sẽ rất không quen, không ngờ sống ở nông thôn nửa năm, tôi ngược lại thấy nhẹ nhõm hơn. Vì vậy tôi thích nông thôn hơn.",
+   "tips": [
+    "Bố cục so sánh: ý kiến chung (很多人认为…) → mặt lợi/hại thành phố → mặt lợi nông thôn → trải nghiệm bản thân (以为…没想到…) → kết luận.",
+    "Ôn lại 反而 (bài 5), 没有…那么 (bài 6) khi so sánh.",
+    "Đừng viết 我以为 khi muốn nêu quan điểm – dùng 我认为 / 我觉得."
+   ],
+   "checklist": [
+    "Đủ 80–120 chữ",
+    "Có 认为 (quan điểm) và/hoặc 以为 (tưởng – sai)",
+    "Có 本来 hoặc 原来 đúng nghĩa",
+    "Có 往往 kèm điều kiện, hoặc 常常",
+    "Có câu kết nêu lựa chọn rõ ràng"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "我还以为你不来了呢！",
+   "lang": "zh-CN",
+   "q": "Người nói đã nghĩ gì trước đó?",
+   "o": [
+    "Biết chắc bạn sẽ đến",
+    "Muốn bạn đừng đến",
+    "Tưởng bạn không đến"
+   ],
+   "a": 2,
+   "e": "还以为…呢 = còn tưởng là… (nhưng thực tế bạn đã đến)."
+  },
+  {
+   "t": "listen",
+   "say": "下雨的时候，这条路往往很堵。",
+   "lang": "zh-CN",
+   "q": "Con đường này thế nào?",
+   "o": [
+    "Khi trời mưa thường bị tắc",
+    "Lúc nào cũng tắc",
+    "Không bao giờ tắc"
+   ],
+   "a": 0,
+   "e": "往往 = thường (trong điều kiện 下雨的时候)."
+  },
+  {
+   "t": "listen",
+   "say": "我本来想坐地铁，后来朋友开车来接我了。",
+   "lang": "zh-CN",
+   "q": "Cuối cùng người nói đi bằng gì?",
+   "o": [
+    "Xe buýt",
+    "Bạn lái xe đến đón",
+    "Tàu điện ngầm"
+   ],
+   "a": 1,
+   "e": "本来想坐地铁 (dự định ban đầu), 后来朋友开车来接我了 (thực tế)."
+  },
+  {
+   "t": "mc",
+   "q": "我找了半天手机，___在包里。",
+   "o": [
+    "原来",
+    "往往",
+    "本来"
+   ],
+   "a": 0,
+   "e": "Phát hiện sự thật → 原来 (hoá ra)."
+  },
+  {
+   "t": "mc",
+   "q": "骑摩托车___就应该戴头盔。",
+   "o": [
+    "本来",
+    "原来",
+    "往往"
+   ],
+   "a": 0,
+   "e": "本来就应该 = vốn dĩ phải thế."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào ĐÚNG?",
+   "o": [
+    "以后我会常常来看你。",
+    "以后我往往会看你。",
+    "以后我会往往来看你。"
+   ],
+   "a": 0,
+   "e": "Tương lai, ý muốn → 常常; 往往 chỉ dùng tổng kết quy luật."
+  },
+  {
+   "t": "mc",
+   "q": "___，发展公共交通是解决堵车的好办法。(Tôi cho rằng)",
+   "o": [
+    "我认为",
+    "我原来",
+    "我以为"
+   ],
+   "a": 0,
+   "e": "Nêu quan điểm → 认为."
+  },
+  {
+   "t": "mc",
+   "q": "我___他是中国人，原来他是越南人。",
+   "o": [
+    "认为",
+    "以为",
+    "往往"
+   ],
+   "a": 1,
+   "e": "Suy nghĩ sai so với thực tế (原来…) → 以为."
+  },
+  {
+   "t": "fill",
+   "q": "这儿不能___车，请开到前面的停车场。(đỗ)",
+   "a": "停",
+   "alt": [
+    "ting",
+    "tíng"
+   ],
+   "e": "停车 = đỗ xe."
+  },
+  {
+   "t": "fill",
+   "q": "快点儿走，要来不___了！",
+   "a": "及",
+   "alt": [
+    "ji",
+    "jí"
+   ],
+   "e": "来不及 = không kịp; 来得及 = kịp."
+  },
+  {
+   "t": "fill",
+   "q": "晚上的市中心车水马___，非常热闹。",
+   "a": "龙",
+   "alt": [
+    "long",
+    "lóng"
+   ],
+   "e": "车水马龙 = xe cộ tấp nập."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp: “Tôi tưởng hôm nay là thứ Bảy, hoá ra là thứ Sáu.”",
+   "w": [
+    "原来",
+    "我以为",
+    "是星期五",
+    "今天是星期六"
+   ],
+   "a": "我以为今天是星期六，原来是星期五。",
+   "e": "以为 (tưởng sai) + 原来 (hoá ra sự thật)."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "的人",
+    "住在郊区",
+    "往往要花",
+    "两个小时",
+    "上下班"
+   ],
+   "a": "住在郊区的人往往要花两个小时上下班。",
+   "e": "Chủ ngữ có điều kiện (住在郊区的人) + 往往 + V."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "应该",
+    "我认为",
+    "多建",
+    "城市",
+    "公园"
+   ],
+   "a": "我认为城市应该多建公园。",
+   "e": "我认为 + quan điểm."
+  },
+  {
+   "t": "dict",
+   "say": "这里的交通很方便。",
+   "lang": "zh-CN",
+   "a": "这里的交通很方便。",
+   "py": "Zhèlǐ de jiāotōng hěn fāngbiàn.",
+   "e": "交通 jiāotōng = giao thông."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa:",
+   "pairs": [
+    [
+     "地铁",
+     "tàu điện ngầm"
+    ],
+    [
+     "摩托车",
+     "xe máy"
+    ],
+    [
+     "郊区",
+     "ngoại ô"
+    ],
+    [
+     "农村",
+     "nông thôn"
+    ],
+    [
+     "热闹",
+     "náo nhiệt"
+    ],
+    [
+     "车水马龙",
+     "xe cộ tấp nập"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Bản đồ thành phố đơn giản tự vẽ (ga tàu điện, cây xăng, đường lớn…); 2 ảnh: phố giờ cao điểm và cánh đồng ở quê; 12 thẻ câu “tưởng – hoá ra” để luyện 以为/原来.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: “Bạn đi làm/đi học bằng gì? Mất bao lâu?” – vẽ biểu đồ phương tiện của cả lớp lên bảng."
+   },
+   {
+    "t": "20'",
+    "do": "Từ vựng: dạy trên bản đồ (地铁站, 加油站, 方向, 停车); nhóm từ so sánh 城市/农村/郊区, 热闹/安静, 拥挤. Thành ngữ 车水马龙."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 1 本来/原来: thẻ câu “tưởng – hoá ra”, học viên chọn từ đúng; nhấn: “hoá ra” chỉ 原来, “vốn dĩ phải” chỉ 本来."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 2 往往/常常: GV nói thói quen của mình, học viên chuyển thành câu có điều kiện với 往往; sửa lỗi dùng 往往 cho tương lai."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe hội thoại: lần 1 “Thu sống ở đâu?”, lần 2 làm qs, lần 3 đọc phân vai, chú ý ngữ điệu 我还以为…呢."
+   },
+   {
+    "t": "5'",
+    "do": "Giao bài tập 1–8 trong game."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: mỗi học viên kể 1 câu “tôi tưởng… hoá ra…” về chuyện thật của mình."
+   },
+   {
+    "t": "15'",
+    "do": "Ngữ pháp 3 以为/认为: tranh luận nhanh về giao thông bằng 我认为…; sửa lỗi dùng 以为 để nêu quan điểm."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc 回到家乡的年轻人: tìm 本来, 原来, 以为, 往往 trong bài; thảo luận “bạn có muốn về quê lập nghiệp không?”."
+   },
+   {
+    "t": "10'",
+    "do": "Chữ Hán: 交 通 铁 城 村 租 往."
+   },
+   {
+    "t": "20'",
+    "do": "Nói: tranh luận 2 phe “Thành phố hay nông thôn?”. Viết nháp đoạn so sánh."
+   },
+   {
+    "t": "15'",
+    "do": "Tóm tắt khó khăn và giải pháp, kiểm mỗi đại từ còn chỉ đúng người sau khi rút gọn."
+   }
+  ],
+  "games": [
+   "“Tưởng thế mà không phải”: mỗi học viên viết một câu 我以为… lên giấy, gấp lại; người khác bốc và nói tiếp 原来… thật hài hước.",
+   "“Chỉ đường”: một học viên cầm bản đồ, hướng dẫn bạn đi từ A đến B bằng tiếng Trung (往前走, 左转, 在加油站停…); bạn kia vẽ đường đi."
+  ],
+  "errors": [
+   "Dùng 以为 để nêu quan điểm: ❌ 我以为这个办法很好 → 我认为这个办法很好.",
+   "Dùng 本来 với nghĩa “hoá ra”: ❌ 本来是你！ → 原来是你！",
+   "Dùng 往往 cho tương lai/lời khuyên: ❌ 我以后往往锻炼 → 我以后要常常锻炼.",
+   "Phủ định ❌ 不往往 → dùng 不常 / 很少.",
+   "Đọc 热闹 thành rènào – âm sau là thanh nhẹ: rènao.",
+   "Lẫn 来得及 / 来不及: 来得及 = kịp, 来不及 = không kịp (得 khẳng định, 不 phủ định)."
+  ],
+  "homework": "Hoàn thành bài tập trong game ≥ 80%; viết đoạn so sánh thành phố – nông thôn 80–120 chữ; vẽ bản đồ đường từ nhà đến chỗ làm/học và viết 5 câu chỉ đường bằng tiếng Trung."
+ }
 }

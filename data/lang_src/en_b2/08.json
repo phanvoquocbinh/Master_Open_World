@@ -1,200 +1,992 @@
 {
-  "no": 8,
-  "title": "Ngôn ngữ số liệu & xu hướng – tăng, giảm, dao động, tỉ lệ",
-  "sub": "Car ownership rose steadily, reaching 30% in 2025.",
-  "goals": [
-    "Dùng chính xác động từ/danh từ xu hướng (rise, fall, fluctuate, peak, level off…) kèm trạng từ/tính từ mức độ (sharply, slightly, steady, dramatic…)",
-    "Dùng đúng giới từ với số liệu: rise to / by / from… to…, stand at, peak at, a rise of X% in…",
-    "So sánh và ước lượng số liệu: twice as many as, the highest proportion, whereas, respectively, just under a third",
-    "Viết bài mô tả biểu đồ đường ≥ 150 từ theo bố cục mở bài – overview – 2 đoạn chi tiết",
-    "Nghe và ghi chính xác số, phần trăm, phân số; phân biệt fifteen / fifty"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng: xu hướng, mức độ & tỉ lệ", "items": [
-      {"w": "rise", "ipa": "/raɪz/", "pos": "v", "vi": "tăng (rise – rose – risen; nội động từ, không có tân ngữ)", "ex": "House prices rose by 10% last year.", "exVi": "Giá nhà tăng 10% năm ngoái."},
-      {"w": "climb", "ipa": "/klaɪm/", "pos": "v", "vi": "tăng dần lên, leo lên", "ex": "The temperature climbed to 39 degrees.", "exVi": "Nhiệt độ leo lên 39 độ."},
-      {"w": "surge", "ipa": "/sɜːdʒ/", "pos": "v", "vi": "tăng vọt (cũng là danh từ: a surge in…)", "ex": "Online sales surged during the holiday season.", "exVi": "Doanh số online tăng vọt mùa lễ."},
-      {"w": "decline", "ipa": "/dɪˈklaɪn/", "pos": "v", "vi": "giảm, suy giảm (dần)", "ex": "The number of smokers has declined steadily.", "exVi": "Số người hút thuốc đã giảm đều đặn."},
-      {"w": "plummet", "ipa": "/ˈplʌmɪt/", "pos": "v", "vi": "giảm mạnh, lao dốc", "ex": "Tourist numbers plummeted in 2020.", "exVi": "Lượng khách du lịch lao dốc năm 2020."},
-      {"w": "fluctuate", "ipa": "/ˈflʌktʃueɪt/", "pos": "v", "vi": "dao động, lên xuống thất thường", "ex": "Fuel prices fluctuated throughout the year.", "exVi": "Giá nhiên liệu lên xuống thất thường cả năm."},
-      {"w": "peak", "ipa": "/piːk/", "pos": "v", "vi": "đạt đỉnh (peak at…; danh từ: reach a peak of…)", "ex": "Sales peaked at 2 million units in 2022.", "exVi": "Doanh số đạt đỉnh 2 triệu sản phẩm năm 2022."},
-      {"w": "level off", "ipa": "/ˌlevl ˈɒf/", "pos": "phr", "vi": "chững lại, đi ngang (sau khi tăng/giảm)", "ex": "Prices rose quickly and then levelled off.", "exVi": "Giá tăng nhanh rồi chững lại."},
-      {"w": "remain stable", "ipa": "/rɪˌmeɪn ˈsteɪbl/", "pos": "phr", "vi": "giữ ổn định", "ex": "The unemployment rate remained stable at 4%.", "exVi": "Tỉ lệ thất nghiệp giữ ổn định ở mức 4%."},
-      {"w": "sharply", "ipa": "/ˈʃɑːpli/", "pos": "adv", "vi": "mạnh và đột ngột (tính từ: a sharp rise)", "ex": "The number of cars increased sharply.", "exVi": "Số ô tô tăng mạnh."},
-      {"w": "steadily", "ipa": "/ˈstedəli/", "pos": "adv", "vi": "đều đặn (tính từ: a steady fall)", "ex": "Exports grew steadily over the decade.", "exVi": "Xuất khẩu tăng đều trong thập kỷ."},
-      {"w": "slightly", "ipa": "/ˈslaɪtli/", "pos": "adv", "vi": "nhẹ, một chút (tính từ: a slight drop)", "ex": "The figure fell slightly in 2025.", "exVi": "Con số giảm nhẹ năm 2025."},
-      {"w": "gradually", "ipa": "/ˈɡrædʒuəli/", "pos": "adv", "vi": "dần dần (tính từ: a gradual increase)", "ex": "Rents increased gradually over the period.", "exVi": "Giá thuê tăng dần trong giai đoạn đó."},
-      {"w": "dramatically", "ipa": "/drəˈmætɪkli/", "pos": "adv", "vi": "mạnh mẽ, ngoạn mục (tính từ: a dramatic rise)", "ex": "Internet use rose dramatically after 2010.", "exVi": "Việc dùng internet tăng mạnh sau 2010."},
-      {"w": "significantly", "ipa": "/sɪɡˈnɪfɪkəntli/", "pos": "adv", "vi": "đáng kể (tính từ: a significant change)", "ex": "Costs were significantly higher in the city.", "exVi": "Chi phí ở thành phố cao hơn đáng kể."},
-      {"w": "proportion", "ipa": "/prəˈpɔːʃn/", "pos": "n", "vi": "tỉ lệ, phần (so với tổng thể)", "ex": "The proportion of elderly people is rising.", "exVi": "Tỉ lệ người cao tuổi đang tăng."},
-      {"w": "account for", "ipa": "/əˈkaʊnt fə(r)/", "pos": "phr", "vi": "chiếm (bao nhiêu phần)", "ex": "Food accounted for 31% of household spending.", "exVi": "Thực phẩm chiếm 31% chi tiêu hộ gia đình."},
-      {"w": "respectively", "ipa": "/rɪˈspektɪvli/", "pos": "adv", "vi": "lần lượt (theo thứ tự đã nêu)", "ex": "Cars and buses made up 30% and 12% respectively.", "exVi": "Ô tô và xe buýt lần lượt chiếm 30% và 12%."},
-      {"w": "approximately", "ipa": "/əˈprɒksɪmətli/", "pos": "adv", "vi": "xấp xỉ, khoảng", "ex": "Approximately half of the students had part-time jobs.", "exVi": "Khoảng một nửa số sinh viên làm thêm."},
-      {"w": "double", "ipa": "/ˈdʌbl/", "pos": "v", "vi": "tăng gấp đôi (triple: gấp ba)", "ex": "The population of the town doubled in twenty years.", "exVi": "Dân số thị trấn tăng gấp đôi trong 20 năm."},
-      {"w": "halve", "ipa": "/hɑːv/", "pos": "v", "vi": "giảm một nửa", "ex": "The cost of solar panels has halved since 2015.", "exVi": "Giá tấm pin mặt trời đã giảm một nửa từ 2015."},
-      {"w": "overall", "ipa": "/ˌəʊvərˈɔːl/", "pos": "adv", "vi": "nhìn chung (mở đầu câu overview)", "ex": "Overall, spending on leisure increased.", "exVi": "Nhìn chung, chi tiêu cho giải trí tăng."},
-      {"w": "the majority of", "ipa": "/ðə məˈdʒɒrəti əv/", "pos": "phr", "vi": "phần lớn, đa số (≠ the minority of)", "ex": "The majority of households owned a motorbike.", "exVi": "Đa số hộ gia đình có xe máy."},
-      {"w": "stand at", "ipa": "/ˈstænd ət/", "pos": "phr", "vi": "ở mức (số liệu tại một thời điểm)", "ex": "In 2005, the figure stood at 62%.", "exVi": "Năm 2005, con số ở mức 62%."}
-    ]},
-    {"k": "grammar", "h": "Từ vựng xu hướng: động từ + trạng từ ↔ tính từ + danh từ", "html": "<p>Một xu hướng có thể diễn đạt bằng <b>2 cấu trúc</b> – xen kẽ chúng để bài viết không lặp:</p><p>① <b>S + V + adv</b>: <i>Sales <b>rose sharply</b> in 2020.</i><br>② <b>There was / … saw + a + adj + N + in + S</b>: <i>There was <b>a sharp rise in</b> sales in 2020.</i> / <i>2020 saw a sharp rise in sales.</i></p>", "table": [
-      ["Hướng", "Động từ", "Danh từ", "Mức độ (trạng từ → tính từ)"],
-      ["↑ Tăng", "rise, increase, grow, climb, surge (vọt)", "a rise, an increase, growth, a surge", "sharply → sharp · dramatically → dramatic · significantly → significant"],
-      ["↓ Giảm", "fall, decrease, decline, drop, plummet (lao dốc)", "a fall, a decrease, a decline, a drop", "steadily → steady · gradually → gradual"],
-      ["↕ Dao động", "fluctuate", "a fluctuation", "slightly → slight · moderately → moderate"],
-      ["▲ Đỉnh / ▼ Đáy", "peak at · reach a peak of · hit a low of", "a peak, a low", "rapidly → rapid"],
-      ["→ Đi ngang", "remain stable, level off, stay the same", "a period of stability", ""]
-    ], "ex": [
-      {"t": "The number of tourists rose sharply between 2015 and 2019.", "vi": "Lượng khách du lịch tăng mạnh từ 2015 đến 2019."},
-      {"t": "There was a sharp rise in the number of tourists between 2015 and 2019.", "vi": "Đã có sự gia tăng mạnh về lượng khách du lịch từ 2015 đến 2019."},
-      {"t": "The period from 2015 to 2019 saw a sharp rise in tourist numbers.", "vi": "Giai đoạn 2015–2019 chứng kiến lượng khách tăng mạnh."},
-      {"t": "Prices fluctuated between 20,000 and 25,000 dong per kilo.", "vi": "Giá dao động trong khoảng 20.000–25.000 đồng/kg."},
-      {"t": "Unemployment fell gradually before levelling off at 3%.", "vi": "Thất nghiệp giảm dần rồi chững lại ở mức 3%."}
-    ], "tips": [
-      "<b>rise</b> (nội động từ, không có tân ngữ) ≠ <b>raise</b> (ngoại động từ): <i>Prices rose.</i> / <i>The company raised prices.</i> ❌ <i>Prices raised.</i>",
-      "Đừng nhầm loại từ: ❌ <i>a sharply rise</i> · ❌ <i>increased sharp</i> → ✅ <i>a sharp rise</i> · <i>increased sharply</i>.",
-      "Thì: quá khứ đơn cho số liệu đã qua; dự báo dùng <i>is expected / projected / predicted to + V</i>. Ít khi dùng tiếp diễn.",
-      "Đừng lặp increase cả bài – xoay vòng rise, grow, climb và cấu trúc danh từ."
-    ]},
-    {"k": "grammar", "h": "Giới từ với số liệu – sai một chữ, sai cả con số", "html": "<p>Giới từ quyết định <b>ý nghĩa</b> của con số. <i>Sales rose <b>by</b> 10%</i> và <i>Sales rose <b>to</b> 10%</i> là hai thông tin hoàn toàn khác nhau.</p>", "table": [
-      ["Giới từ", "Nghĩa", "Ví dụ"],
-      ["rise / fall TO + số", "đến mức (mức cuối)", "Sales rose to 500 units."],
-      ["rise / fall BY + số", "tăng/giảm một lượng (chênh lệch)", "Sales rose by 100 units (from 400)."],
-      ["FROM … TO …", "từ … đến …", "The figure fell from 40% to 25%."],
-      ["a rise OF + số", "mức tăng là bao nhiêu", "a rise of 10%"],
-      ["a rise IN + đối tượng", "sự tăng của cái gì", "a rise in sales"],
-      ["stand AT / peak AT / level off AT", "ở mức / đạt đỉnh ở / chững ở", "Unemployment stood at 5% in 2010."],
-      [", WITH + số", "bổ sung số liệu cuối câu", "Motorbikes were the most popular, with 85%."]
-    ], "ex": [
-      {"t": "The price of rice rose by 15%, from 20,000 to 23,000 dong per kilo.", "vi": "Giá gạo tăng 15%, từ 20.000 lên 23.000 đồng/kg."},
-      {"t": "There was an increase of 15% in the price of rice.", "vi": "Giá gạo tăng 15%."},
-      {"t": "Car ownership peaked at 30% in 2025.", "vi": "Tỉ lệ sở hữu ô tô đạt đỉnh 30% vào năm 2025."},
-      {"t": "Unemployment stood at 4% at the beginning of the period.", "vi": "Đầu giai đoạn, tỉ lệ thất nghiệp ở mức 4%."}
-    ], "tips": [
-      "<b>BY</b> = khoảng chênh lệch, <b>TO</b> = mức cuối. Câu hỏi tự kiểm tra: con số này là ‘thêm bao nhiêu’ hay ‘thành bao nhiêu’?",
-      "<b>percent</b> đi sau số (30 percent / 30%); <b>percentage</b> là khái niệm (the percentage of students). ❌ <i>The percent of students</i>.",
-      "Từ 20% lên 30% là tăng <b>10 percentage points</b> (điểm phần trăm) – tức tăng 50% so với ban đầu. Viết chính xác điều này là dấu hiệu bài viết band cao."
-    ]},
-    {"k": "grammar", "h": "So sánh & ước lượng số liệu", "html": "<p>Đề IELTS Task 1 luôn yêu cầu “make comparisons where relevant”. Dưới đây là bộ công cụ so sánh và làm tròn số:</p>", "table": [
-      ["Chức năng", "Cấu trúc", "Ví dụ"],
-      ["So sánh gấp", "twice / three times as many (much) as · double · triple", "Twice as many people used buses as trains."],
-      ["Cao / thấp nhất", "the highest / lowest proportion of… · the most popular…", "Motorbikes were the most popular means of transport."],
-      ["Đối lập", "whereas / while + mệnh đề · By contrast, / In contrast, …", "Car ownership rose, whereas bicycle use fell."],
-      ["Lần lượt", "… respectively", "Cars and bicycles accounted for 30% and 22% respectively."],
-      ["Xấp xỉ", "approximately, roughly, around · just over / just under · nearly, almost", "just under a third (≈ 32%) · roughly a quarter (≈ 25%)"],
-      ["Phân số", "a half · a third · a quarter · three quarters · one in five", "One in five households owned a car (20%)."]
-    ], "ex": [
-      {"t": "In 2025, almost three times as many households owned a motorbike as a car.", "vi": "Năm 2025, số hộ có xe máy gần gấp ba số hộ có ô tô."},
-      {"t": "Housing accounted for just under a quarter of spending, whereas food made up almost a third.", "vi": "Nhà ở chiếm gần một phần tư chi tiêu, trong khi thực phẩm chiếm gần một phần ba."},
-      {"t": "The figures for 2000 and 2025 were 45% and 84% respectively.", "vi": "Số liệu năm 2000 và 2025 lần lượt là 45% và 84%."}
-    ], "tips": [
-      "<b>many / few</b> + danh từ đếm được (people, cars); <b>much / little</b> + không đếm được (money, rice): <i>twice as much money as</i>.",
-      "Không nêu ý kiến hay giải thích nguyên nhân không có trong biểu đồ (❌ <i>because people became richer</i>) – Task 1 chỉ mô tả.",
-      "Overview (tổng quan) KHÔNG chứa số liệu chi tiết: chỉ nêu xu hướng chính và điểm nổi bật nhất. Thiếu overview rất khó vượt band 5 ở tiêu chí Task Achievement."
-    ]},
-    {"k": "text", "h": "Bố cục bài mô tả biểu đồ & cách đọc số", "html": "<h4>Bố cục 4 đoạn (IELTS Academic Writing Task 1 – 20 phút, ≥ 150 từ)</h4><ol><li><b>Mở bài (1 câu):</b> paraphrase đề: shows → illustrates / compares; percentage of households → proportion of homes; between 2000 and 2025 → over a 25-year period.</li><li><b>Overview (1–2 câu):</b> Overall, … 2 đặc điểm nổi bật nhất (xu hướng chung, hạng mục cao nhất, thay đổi lớn nhất). Không số liệu.</li><li><b>Chi tiết 1:</b> nhóm tăng (hoặc nhóm thứ nhất) – có số liệu, có so sánh.</li><li><b>Chi tiết 2:</b> nhóm giảm / nhóm còn lại – có số liệu, có so sánh.</li></ol><h4>Đọc số liệu (rất quan trọng cho bài nghe)</h4><table><tr><th>Viết</th><th>Đọc</th></tr><tr><td>15 / 50</td><td>fif<b>TEEN</b> /ˌfɪfˈtiːn/ – <b>FIF</b>ty /ˈfɪfti/ (nhấn khác nhau, -teen có /n/ cuối)</td></tr><tr><td>2.5 million</td><td>two point five million</td></tr><tr><td>0.75</td><td>nought point seven five (Anh) / zero point seven five</td></tr><tr><td>45%</td><td>forty-five percent</td></tr><tr><td>1/3 · 3/4</td><td>a third · three quarters</td></tr><tr><td>1,200</td><td>one thousand two hundred / twelve hundred</td></tr><tr><td>2025</td><td>twenty twenty-five / two thousand and twenty-five</td></tr></table>"},
-    {"k": "dialog", "h": "Nghe: Khảo sát “Sinh viên dùng thời gian rảnh thế nào?”", "lang": "en-GB", "note": "Chương trình radio ‘Numbers Behind the News’. Người dẫn Lan phỏng vấn Tiến sĩ Bảo (Đại học Sông Xanh – thành phố giả định). Trước khi nghe: đọc câu hỏi, đoán chỗ trống cần số hay chữ. Nghe lần 1: ghi mọi con số. Lần 2: điền câu hỏi. Chú ý fifteen / fifty, nine and a half.", "lines": [
-      {"s": "Lan", "g": "f", "t": "Welcome to Numbers Behind the News. Today we're looking at a new survey on how university students spend their free time. Dr Bao from Song Xanh University led the research. Dr Bao, how was the survey carried out?", "vi": "Chào mừng đến với Numbers Behind the News. Hôm nay chúng ta xem một khảo sát mới về cách sinh viên đại học dùng thời gian rảnh. Tiến sĩ Bảo, Đại học Sông Xanh, là người chủ trì nghiên cứu. Thưa ông, khảo sát được tiến hành thế nào?"},
-      {"s": "Dr Bao", "g": "m", "t": "We asked twelve hundred students to keep a diary for one week. We did the same survey in 2015, so we can compare the two years. On average, students had about twenty-eight hours of free time a week, which was almost exactly the same as ten years ago.", "vi": "Chúng tôi đề nghị một nghìn hai trăm sinh viên ghi nhật ký trong một tuần. Chúng tôi đã làm khảo sát tương tự năm 2015 nên có thể so sánh hai năm. Trung bình sinh viên có khoảng 28 giờ rảnh mỗi tuần, gần như y hệt mười năm trước."},
-      {"s": "Lan", "g": "f", "t": "So the total hasn't changed. What about the way they use it?", "vi": "Vậy tổng thời gian không đổi. Còn cách họ sử dụng thì sao?"},
-      {"s": "Dr Bao", "g": "m", "t": "That's where things get interesting. The biggest change was in social media. In 2015, students spent around five hours a week on it. This year, the figure nearly doubled, to nine and a half hours. That's roughly a third of all their free time.", "vi": "Đó là chỗ thú vị. Thay đổi lớn nhất là mạng xã hội. Năm 2015, sinh viên dành khoảng năm giờ mỗi tuần. Năm nay con số gần gấp đôi, lên chín tiếng rưỡi – xấp xỉ một phần ba toàn bộ thời gian rảnh."},
-      {"s": "Lan", "g": "f", "t": "And which activities lost out?", "vi": "Vậy những hoạt động nào bị thiệt?"},
-      {"s": "Dr Bao", "g": "m", "t": "Sport, mainly. Time spent on sport fell from six hours to four, a drop of about a third. Reading also declined, but only slightly, from three hours to two and a half.", "vi": "Chủ yếu là thể thao. Thời gian chơi thể thao giảm từ sáu xuống bốn giờ, tức giảm khoảng một phần ba. Đọc sách cũng giảm nhưng chỉ nhẹ, từ ba giờ xuống hai tiếng rưỡi."},
-      {"s": "Lan", "g": "f", "t": "Were there any activities that stayed the same?", "vi": "Có hoạt động nào giữ nguyên không?"},
-      {"s": "Dr Bao", "g": "m", "t": "Yes. Time with family remained stable at around five hours a week. And part-time work actually increased. In 2015, fifteen percent of students had a part-time job. Now it's twenty-four percent, so almost one in four.", "vi": "Có. Thời gian dành cho gia đình ổn định ở khoảng năm giờ mỗi tuần. Còn việc làm thêm thì thực tế tăng. Năm 2015, mười lăm phần trăm sinh viên đi làm thêm. Giờ là hai mươi tư phần trăm, tức gần một phần tư."},
-      {"s": "Lan", "g": "f", "t": "Did anything surprise you?", "vi": "Có điều gì làm ông bất ngờ không?"},
-      {"s": "Dr Bao", "g": "m", "t": "Honestly, the sport figures. We expected a small decline, but not such a sharp one. On the positive side, students who did more than three hours of sport a week reported much lower stress levels, so we're recommending that universities make their sports facilities free.", "vi": "Thật lòng là số liệu thể thao. Chúng tôi dự đoán giảm nhẹ, nhưng không mạnh đến vậy. Mặt tích cực là sinh viên chơi thể thao hơn ba giờ mỗi tuần cho biết mức căng thẳng thấp hơn nhiều, nên chúng tôi kiến nghị các trường miễn phí cơ sở thể thao."},
-      {"s": "Lan", "g": "f", "t": "Dr Bao, thank you.", "vi": "Cảm ơn Tiến sĩ Bảo."}
-    ], "qs": [
-      {"q": "Number of students in the survey: ______", "a": "1,200", "alt": ["1200", "twelve hundred", "one thousand two hundred", "1 200"], "e": "“We asked twelve hundred students…” – twelve hundred = 1,200."},
-      {"q": "How did the total amount of free time change since 2015?", "o": ["It rose sharply.", "It stayed almost the same.", "It fell by a third."], "a": 1, "e": "“about twenty-eight hours… almost exactly the same as ten years ago.”"},
-      {"q": "Time on social media rose from five to ______ hours a week.", "a": "nine and a half", "alt": ["9.5", "9 and a half", "nine point five", "9,5"], "e": "“the figure nearly doubled, to nine and a half hours.”"},
-      {"q": "Which activity fell by about a third?", "o": ["Reading", "Sport", "Time with family"], "a": 1, "e": "Sport: 6 → 4 giờ, “a drop of about a third”. Reading chỉ giảm nhẹ (3 → 2,5); family ổn định."},
-      {"q": "The percentage of students with a part-time job rose from 15% to ______%.", "a": "24", "alt": ["twenty-four", "24%"], "e": "“Now it's twenty-four percent, so almost one in four.” Bẫy: fifteen (15) – không phải fifty (50)."}
-    ]},
-    {"k": "read", "h": "Đọc: Báo cáo chi tiêu hộ gia đình (thành phố giả định Sông Xanh)", "title": "Where Does the Money Go? Household Spending in Song Xanh, 2005–2025", "text": "Over the past twenty years, the average household in Song Xanh has become considerably richer. According to the city's statistics office, average monthly household income rose from 5 million dong in 2005 to 22 million dong in 2025, more than four times the original figure. However, the way families divide their budget has changed just as dramatically as the amount they earn.\n\nThe most striking change concerns food. In 2005, food accounted for almost half of all household spending, at 48 percent. By 2025, this proportion had fallen steadily to 31 percent. It would be wrong, however, to conclude that families are eating less. Because incomes grew so quickly, the actual amount spent on food nearly tripled, from about 2.4 million to 6.8 million dong a month. In other words, food now takes a smaller slice of a much larger cake.\n\nHousing moved in the opposite direction. Its share climbed from 15 to 24 percent, reflecting a sharp rise in rents and property prices as the city expanded. Education followed a similar but less regular pattern. Spending on schooling and private lessons rose from 8 percent in 2005 to a peak of 16 percent in 2020, before falling slightly to 14 percent in 2025. Officials attribute the recent fall to the introduction of free lunches and lower fees in state primary schools.\n\nSome categories changed very little. Health care remained relatively stable at around 6 to 7 percent throughout the period, while transport fluctuated between 10 and 13 percent, depending largely on fuel prices. By contrast, the share spent on entertainment and travel tripled, from 3 percent to 9 percent, as more families began to take holidays and eat out.\n\nOverall, the figures suggest a classic pattern of development: as incomes rise, the share spent on basic needs such as food tends to fall, while spending on housing, education and leisure grows. Whether this trend continues will depend partly on house prices, which many residents now regard as the city's most serious economic problem.", "gloss": [
-      {"w": "statistics office", "vi": "cơ quan thống kê"},
-      {"w": "budget", "vi": "ngân sách (chi tiêu)"},
-      {"w": "striking", "vi": "nổi bật, gây chú ý"},
-      {"w": "conclude", "vi": "kết luận"},
-      {"w": "a smaller slice of a larger cake", "vi": "phần nhỏ hơn của một chiếc bánh lớn hơn (tỉ lệ giảm nhưng tổng tăng)"},
-      {"w": "share", "vi": "phần, tỉ trọng"},
-      {"w": "property prices", "vi": "giá bất động sản"},
-      {"w": "private lessons", "vi": "học thêm"},
-      {"w": "category", "vi": "hạng mục, nhóm"},
-      {"w": "leisure", "vi": "giải trí, thời gian rảnh"}
-    ], "qs": [
-      {"q": "True / False / Not Given: Average household income in Song Xanh more than quadrupled between 2005 and 2025.", "o": ["True", "False", "Not Given"], "a": 0, "e": "5 → 22 triệu: “more than four times the original figure” = more than quadrupled."},
-      {"q": "True / False / Not Given: Families spent less money on food in 2025 than in 2005.", "o": ["True", "False", "Not Given"], "a": 1, "e": "Tỉ lệ giảm (48% → 31%) nhưng số TIỀN gần gấp ba (2,4 → 6,8 triệu) → False. Bẫy kinh điển: nhầm tỉ lệ với số lượng tuyệt đối."},
-      {"q": "As a proportion of the budget, spending on education…", "o": ["rose steadily throughout the period.", "peaked in 2020 and then fell slightly.", "remained stable at 14%."], "a": 1, "e": "“rose from 8 percent… to a peak of 16 percent in 2020, before falling slightly to 14 percent in 2025.”"},
-      {"q": "Housing's share of spending climbed from 15 to ______ percent.", "a": "24", "alt": ["twenty-four", "24%"], "e": "“Its share climbed from 15 to 24 percent.”"},
-      {"q": "True / False / Not Given: Transport costs went up and down mainly because of changes in fuel prices.", "o": ["True", "False", "Not Given"], "a": 0, "e": "“transport fluctuated between 10 and 13 percent, depending largely on fuel prices.” went up and down = fluctuated; mainly = largely."},
-      {"q": "Which category tripled its share of spending?", "o": ["Health care", "Entertainment and travel", "Housing"], "a": 1, "e": "“the share spent on entertainment and travel tripled, from 3 percent to 9 percent.”"}
-    ]},
-    {"k": "speak", "h": "Nói: Mô tả xu hướng bằng lời", "tasks": [
-      {"p": "Nhìn biểu đồ ở phần Viết, mô tả bằng lời trong 1 phút: mở bài + overview + 3 chi tiết có số liệu.", "model": "This line graph shows how the proportion of households in Song Xanh owning a motorbike or a car, or regularly using a bicycle, changed between 2000 and 2025. Overall, motorbikes and cars became more common, whereas cycling became much less popular. Motorbike ownership grew rapidly from 45 to 85 percent by 2015 and then levelled off. Car ownership rose steadily throughout the period, increasing tenfold from just 3 percent to 30 percent. In contrast, bicycle use fell dramatically, from 70 percent to a low of 20 percent in 2020, although it recovered slightly to 22 percent at the end of the period.", "vi": "Biểu đồ cho thấy tỉ lệ hộ ở Sông Xanh có xe máy, ô tô hoặc thường xuyên đi xe đạp thay đổi thế nào từ 2000 đến 2025. Nhìn chung, xe máy và ô tô phổ biến hơn, còn xe đạp kém phổ biến đi nhiều…", "tips": "Đọc số rõ ràng: forty-five, eighty-five, tenfold. Nhấn vào động từ xu hướng (ROSE, FELL, LEVELLED OFF)."},
-      {"p": "IELTS Part 1: “Have you noticed any changes in the prices of things in your city recently?” Trả lời tự nhiên 4–6 câu, dùng ngôn ngữ xu hướng.", "model": "Definitely. The biggest change I've noticed is in rent. My flat cost about four million dong a month when I moved in three years ago, and now it's nearly six million, so that's a rise of almost fifty percent. Food prices have gone up too, but more gradually. A bowl of phở used to be around thirty thousand, and now it's usually forty or forty-five. Interestingly, some things have actually become cheaper, like mobile data. I pay less for my phone plan now than I did five years ago, and I get far more data.", "vi": "Chắc chắn rồi. Thay đổi lớn nhất là tiền thuê nhà: ba năm trước khoảng bốn triệu, giờ gần sáu triệu, tức tăng gần 50%. Giá đồ ăn cũng tăng nhưng từ từ hơn… Thú vị là một số thứ lại rẻ đi, như dữ liệu di động."},
-      {"p": "Đọc to các số sau thật rõ: 2.5 million · 1/3 · 45% · 0.75 · 2025 · 15 – 50 · 1,200", "model": "Two point five million. A third. Forty-five percent. Nought point seven five. Twenty twenty-five. Fifteen, fifty. One thousand two hundred.", "vi": "Hai phẩy năm triệu. Một phần ba. Bốn mươi lăm phần trăm. Không phẩy bảy lăm. Năm 2025. Mười lăm – năm mươi. Một nghìn hai trăm."}
-    ]},
-    {"k": "write", "h": "Viết: Mô tả biểu đồ đường (IELTS Writing Task 1)", "task": "The line graph shows the percentage of households in Song Xanh City (a fictional city) that owned a motorbike or a car, or regularly used a bicycle, between 2000 and 2025. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words. (Viết ít nhất 150 từ, 20 phút.)", "min": 150, "chart": {"type": "line", "title": "Households owning a motorbike or a car, or regularly using a bicycle – Song Xanh City, 2000–2025", "unit": "%", "labels": ["2000", "2005", "2010", "2015", "2020", "2025"], "series": [{"name": "Motorbike", "data": [45, 62, 78, 85, 86, 84]}, {"name": "Car", "data": [3, 5, 9, 15, 22, 30]}, {"name": "Bicycle", "data": [70, 55, 38, 25, 20, 22]}]}, "model": "The line graph illustrates changes in the proportion of households in Song Xanh City that owned a motorbike or a car, or regularly used a bicycle, over a 25-year period from 2000 to 2025.\n\nOverall, motorised transport became far more common, while cycling declined considerably. Motorbikes were the most widespread form of transport for most of the period, and cars showed the most consistent growth.\n\nIn 2000, 45% of households owned a motorbike. This figure rose rapidly over the next fifteen years, reaching 85% in 2015, after which it levelled off and dipped slightly to 84% in 2025. Car ownership, by contrast, started from a very low base of just 3% but increased steadily throughout the period, climbing to 30% by the end, a tenfold rise.\n\nBicycles followed the opposite trend. In 2000, they were the most common means of transport, used regularly by 70% of households. However, this proportion fell sharply to 25% in 2015 and reached a low of 20% in 2020, before recovering slightly to 22% in 2025. As a result, motorbikes overtook bicycles as the most popular option between 2000 and 2005.", "modelVi": "Biểu đồ đường minh hoạ sự thay đổi tỉ lệ hộ gia đình ở thành phố Sông Xanh sở hữu xe máy, ô tô hoặc thường xuyên đi xe đạp trong 25 năm, từ 2000 đến 2025. Nhìn chung, phương tiện có động cơ trở nên phổ biến hơn nhiều, trong khi xe đạp giảm đáng kể. Xe máy là phương tiện phổ biến nhất trong phần lớn giai đoạn, còn ô tô tăng trưởng ổn định nhất. Năm 2000, 45% hộ có xe máy. Con số này tăng nhanh trong 15 năm tiếp theo, đạt 85% năm 2015, sau đó chững lại và giảm nhẹ còn 84% năm 2025. Ngược lại, tỉ lệ sở hữu ô tô xuất phát rất thấp (3%) nhưng tăng đều suốt giai đoạn, lên 30% vào cuối kỳ – gấp mười lần. Xe đạp đi theo xu hướng ngược lại. Năm 2000 đây là phương tiện phổ biến nhất, 70% hộ thường xuyên sử dụng. Tuy nhiên tỉ lệ này giảm mạnh xuống 25% năm 2015 và chạm đáy 20% năm 2020, trước khi phục hồi nhẹ lên 22% năm 2025. Kết quả là xe máy đã vượt xe đạp trở thành lựa chọn phổ biến nhất trong khoảng 2000–2005.", "tips": [
-      "Mở bài: paraphrase, không chép nguyên đề (shows → illustrates; percentage → proportion; between 2000 and 2025 → over a 25-year period).",
-      "Overview: 2 ý lớn nhất, KHÔNG số liệu: xu hướng chung (động cơ ↑, xe đạp ↓) + điểm nổi bật (xe máy phổ biến nhất, ô tô tăng đều nhất).",
-      "Nhóm số liệu hợp lý: đoạn 1 – hai đường tăng (xe máy, ô tô); đoạn 2 – đường giảm (xe đạp) + điểm giao nhau.",
-      "Không cần mô tả từng mốc 5 năm – chọn điểm đầu, điểm cuối, đỉnh, đáy và điểm đổi hướng."
-    ], "checklist": [
-      "Mở bài paraphrase đề, không chép nguyên văn",
-      "Có overview bắt đầu bằng Overall, không chứa số liệu",
-      "Số liệu chính xác, đúng giới từ (to / by / from… to / at)",
-      "Có so sánh (whereas, by contrast, tenfold, overtook…)",
-      "Xen kẽ cấu trúc động từ + trạng từ và tính từ + danh từ",
-      "Không nêu ý kiến/nguyên nhân; quá khứ đơn; ≥ 150 từ"
-    ]}
-  ],
-  "exercises": [
-    {"t": "mc", "q": "Sales ___ sharply in 2020.", "o": ["raised", "rose", "risen"], "a": 1, "e": "rise – rose – risen (nội động từ). ‘raised’ cần tân ngữ (raise prices)."},
-    {"t": "mc", "q": "There was a ___ increase in the number of tourists.", "o": ["sharply", "sharp", "sharpness"], "a": 1, "e": "Trước danh từ (increase) cần tính từ: a sharp increase."},
-    {"t": "mc", "q": "The price rose ___ 20 to 25 dollars.", "o": ["by", "from", "at"], "a": 1, "e": "from … to … (từ mức này đến mức kia)."},
-    {"t": "fill", "q": "Unemployment fell ___ 2%, from 7% to 5%.", "a": "by", "e": "Lượng chênh lệch (7 − 5 = 2) → by."},
-    {"t": "fill", "q": "In 2010, the figure stood ___ 40%.", "a": "at", "e": "stand at + số = ở mức."},
-    {"t": "mc", "q": "Car ownership ___ at 30% in 2025, its highest level.", "o": ["peaked", "fluctuated", "levelled"], "a": 0, "e": "peak at = đạt đỉnh ở mức. ‘levelled’ phải đi với off (level off at)."},
-    {"t": "mc", "q": "Cars and bicycles accounted for 30% and 22% ___.", "o": ["respectively", "approximately", "significantly"], "a": 0, "e": "respectively = lần lượt (ô tô 30%, xe đạp 22%)."},
-    {"t": "mc", "q": "32% có thể diễn đạt là…", "o": ["roughly a quarter", "just under a third", "just over a half"], "a": 1, "e": "Một phần ba ≈ 33,3%; 32% hơi thấp hơn → just under a third."},
-    {"t": "mc", "q": "Câu nào phù hợp làm OVERVIEW?", "o": ["In 2015, 85% of households owned a motorbike.", "Overall, motorised transport became more common, while cycling declined.", "People bought cars because they became richer."], "a": 1, "e": "Overview nêu xu hướng chung, không số liệu chi tiết (câu 1), không giải thích nguyên nhân (câu 3)."},
-    {"t": "fill", "q": "In 2000, 3% of households had a car; by 2025 the figure was 30%. Car ownership rose ___fold.", "a": "ten", "alt": ["10"], "e": "30 ÷ 3 = 10 → a tenfold rise / rose tenfold."},
-    {"t": "match", "q": "Nối ký hiệu xu hướng với cụm từ:", "pairs": [["↑ tăng mạnh", "rise sharply"], ["↓ giảm nhẹ", "fall slightly"], ["↕ lên xuống thất thường", "fluctuate"], ["→ không đổi", "remain stable"], ["▲ đạt mức cao nhất", "peak"]], "e": "Nhớ cả cặp trạng từ ↔ tính từ: sharply/sharp, slightly/slight."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["a steady", "There was", "in sales.", "rise"], "a": "There was a steady rise in sales.", "e": "There was + a + tính từ + danh từ + in + đối tượng."},
-    {"t": "listen", "say": "The number of visitors rose from fifteen thousand in 2020 to fifty thousand in 2024.", "lang": "en-GB", "q": "How many visitors were there in 2024?", "o": ["15,000", "50,000", "5,000"], "a": 1, "e": "fifty thousand (FIF-ty, nhấn âm đầu) = 50,000; fifteen (fif-TEEN) là số năm 2020."},
-    {"t": "listen", "say": "Unemployment stood at six percent in January, fell to four percent in June, and then rose again slightly to five percent by December.", "lang": "en-GB", "q": "What was the unemployment rate at the end of the year?", "o": ["4%", "5%", "6%"], "a": 1, "e": "Cuối năm (by December) = 5%. Nghe hết câu – đừng chọn số đầu tiên."},
-    {"t": "listen", "say": "Roughly one in five students said they read the news every day, while almost half never read it at all.", "lang": "en-GB", "q": "What proportion of students read the news daily?", "o": ["About 20%", "About 50%", "About 5%"], "a": 0, "e": "one in five = 20%; ‘almost half’ là nhóm không bao giờ đọc."},
-    {"t": "dict", "say": "The figure fell sharply before levelling off at the end of the period.", "lang": "en-GB", "a": "The figure fell sharply before levelling off at the end of the period.", "e": "levelling (Anh-Anh, 2 chữ l) – Mỹ viết leveling."}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Chiếu biểu đồ đường ở phần Viết (game tự vẽ); vẽ sẵn 1 biểu đồ cột và 1 biểu đồ tròn đơn giản trên bảng phụ; thẻ mũi tên (↑ ↓ ↕ → ▲ ▼); giấy kẻ ô cho trò ‘Đọc – vẽ’; 3–4 biểu đồ bí mật (GV tự vẽ) cho các cặp.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: GV vẽ đường ‘giá rau trong tuần’ lên bảng; học viên mô tả bằng từ đã biết; GV ghi lại và giới thiệu mục tiêu: nói/viết về số liệu chính xác như phóng viên kinh tế."},
-      {"t": "20'", "do": "Từ vựng xu hướng với thẻ mũi tên; luyện 2 cấu trúc (rose sharply ↔ a sharp rise); trò ‘Vẽ xu hướng bằng tay’ (GV đọc cụm, lớp vẽ đường trong không khí)."},
-      {"t": "20'", "do": "Giới từ số liệu & so sánh: to / by / from…to / at / of / in; phân số, twice as many as, respectively. Bài tính nhanh: ‘từ 20 lên 30 là tăng bao nhiêu? (by 10 points / by 50%)’."},
-      {"t": "25'", "do": "Nghe khảo sát sinh viên: trước khi nghe, học viên đoán dạng đáp án (số? phân số? tên hoạt động?); lần 1 ghi mọi con số; lần 2 điền; lần 3 kiểm tra; luyện đọc fifteen/fifty, nine and a half, one in four."},
-      {"t": "15'", "do": "Đọc số to theo bảng: thập phân, phân số, phần trăm, năm, hàng nghìn; cặp đôi đọc số cho nhau chép, đổi vai."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn ‘Đọc – vẽ’: A mô tả biểu đồ bí mật, B vẽ lại trên giấy kẻ ô; so sánh với bản gốc."},
-      {"t": "20'", "do": "Đọc báo cáo chi tiêu Sông Xanh: làm câu hỏi; thảo luận bẫy ‘tỉ lệ giảm nhưng số tiền tăng’; gạch chân mọi cụm xu hướng trong bài."},
-      {"t": "15'", "do": "Bố cục Task 1: phân tích bài mẫu thành 4 phần; cả lớp viết overview cho biểu đồ cột và biểu đồ tròn trên bảng phụ, so sánh các phiên bản."},
-      {"t": "35'", "do": "Viết bài mô tả biểu đồ đường trong 20 phút như phòng thi; 10 phút chấm chéo theo checklist; 5 phút GV chữa chung các lỗi giới từ và overview."},
-      {"t": "10'", "do": "Làm phần nghe, chép chính tả trong game; giao bài về nhà."}
+ "no": 8,
+ "title": "Ngôn ngữ số liệu & xu hướng – tăng, giảm, dao động, tỉ lệ",
+ "sub": "Car ownership rose steadily, reaching 30% in 2025.",
+ "goals": [
+  "Dùng chính xác động từ/danh từ xu hướng (rise, fall, fluctuate, peak, level off…) kèm trạng từ/tính từ mức độ (sharply, slightly, steady, dramatic…)",
+  "Dùng đúng giới từ với số liệu: rise to / by / from… to…, stand at, peak at, a rise of X% in…",
+  "So sánh và ước lượng số liệu: twice as many as, the highest proportion, whereas, respectively, just under a third",
+  "Viết bài mô tả biểu đồ đường ≥ 150 từ theo bố cục mở bài – overview – 2 đoạn chi tiết",
+  "Nghe và ghi chính xác số, phần trăm, phân số; phân biệt fifteen / fifty"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng: xu hướng, mức độ & tỉ lệ",
+   "items": [
+    {
+     "w": "rise",
+     "ipa": "/raɪz/",
+     "pos": "v",
+     "vi": "tăng (rise – rose – risen; nội động từ, không có tân ngữ)",
+     "ex": "House prices rose by 10% last year.",
+     "exVi": "Giá nhà tăng 10% năm ngoái."
+    },
+    {
+     "w": "climb",
+     "ipa": "/klaɪm/",
+     "pos": "v",
+     "vi": "tăng dần lên, leo lên",
+     "ex": "The temperature climbed to 39 degrees.",
+     "exVi": "Nhiệt độ leo lên 39 độ."
+    },
+    {
+     "w": "surge",
+     "ipa": "/sɜːdʒ/",
+     "pos": "v",
+     "vi": "tăng vọt (cũng là danh từ: a surge in…)",
+     "ex": "Online sales surged during the holiday season.",
+     "exVi": "Doanh số online tăng vọt mùa lễ."
+    },
+    {
+     "w": "decline",
+     "ipa": "/dɪˈklaɪn/",
+     "pos": "v",
+     "vi": "giảm, suy giảm (dần)",
+     "ex": "The number of smokers has declined steadily.",
+     "exVi": "Số người hút thuốc đã giảm đều đặn."
+    },
+    {
+     "w": "plummet",
+     "ipa": "/ˈplʌmɪt/",
+     "pos": "v",
+     "vi": "giảm mạnh, lao dốc",
+     "ex": "Tourist numbers plummeted in 2020.",
+     "exVi": "Lượng khách du lịch lao dốc năm 2020."
+    },
+    {
+     "w": "fluctuate",
+     "ipa": "/ˈflʌktʃueɪt/",
+     "pos": "v",
+     "vi": "dao động, lên xuống thất thường",
+     "ex": "Fuel prices fluctuated throughout the year.",
+     "exVi": "Giá nhiên liệu lên xuống thất thường cả năm."
+    },
+    {
+     "w": "peak",
+     "ipa": "/piːk/",
+     "pos": "v",
+     "vi": "đạt đỉnh (peak at…; danh từ: reach a peak of…)",
+     "ex": "Sales peaked at 2 million units in 2022.",
+     "exVi": "Doanh số đạt đỉnh 2 triệu sản phẩm năm 2022."
+    },
+    {
+     "w": "level off",
+     "ipa": "/ˌlevl ˈɒf/",
+     "pos": "phr",
+     "vi": "chững lại, đi ngang (sau khi tăng/giảm)",
+     "ex": "Prices rose quickly and then levelled off.",
+     "exVi": "Giá tăng nhanh rồi chững lại."
+    },
+    {
+     "w": "remain stable",
+     "ipa": "/rɪˌmeɪn ˈsteɪbl/",
+     "pos": "phr",
+     "vi": "giữ ổn định",
+     "ex": "The unemployment rate remained stable at 4%.",
+     "exVi": "Tỉ lệ thất nghiệp giữ ổn định ở mức 4%."
+    },
+    {
+     "w": "sharply",
+     "ipa": "/ˈʃɑːpli/",
+     "pos": "adv",
+     "vi": "mạnh và đột ngột (tính từ: a sharp rise)",
+     "ex": "The number of cars increased sharply.",
+     "exVi": "Số ô tô tăng mạnh."
+    },
+    {
+     "w": "steadily",
+     "ipa": "/ˈstedəli/",
+     "pos": "adv",
+     "vi": "đều đặn (tính từ: a steady fall)",
+     "ex": "Exports grew steadily over the decade.",
+     "exVi": "Xuất khẩu tăng đều trong thập kỷ."
+    },
+    {
+     "w": "slightly",
+     "ipa": "/ˈslaɪtli/",
+     "pos": "adv",
+     "vi": "nhẹ, một chút (tính từ: a slight drop)",
+     "ex": "The figure fell slightly in 2025.",
+     "exVi": "Con số giảm nhẹ năm 2025."
+    },
+    {
+     "w": "gradually",
+     "ipa": "/ˈɡrædʒuəli/",
+     "pos": "adv",
+     "vi": "dần dần (tính từ: a gradual increase)",
+     "ex": "Rents increased gradually over the period.",
+     "exVi": "Giá thuê tăng dần trong giai đoạn đó."
+    },
+    {
+     "w": "dramatically",
+     "ipa": "/drəˈmætɪkli/",
+     "pos": "adv",
+     "vi": "mạnh mẽ, ngoạn mục (tính từ: a dramatic rise)",
+     "ex": "Internet use rose dramatically after 2010.",
+     "exVi": "Việc dùng internet tăng mạnh sau 2010."
+    },
+    {
+     "w": "significantly",
+     "ipa": "/sɪɡˈnɪfɪkəntli/",
+     "pos": "adv",
+     "vi": "đáng kể (tính từ: a significant change)",
+     "ex": "Costs were significantly higher in the city.",
+     "exVi": "Chi phí ở thành phố cao hơn đáng kể."
+    },
+    {
+     "w": "proportion",
+     "ipa": "/prəˈpɔːʃn/",
+     "pos": "n",
+     "vi": "tỉ lệ, phần (so với tổng thể)",
+     "ex": "The proportion of elderly people is rising.",
+     "exVi": "Tỉ lệ người cao tuổi đang tăng."
+    },
+    {
+     "w": "account for",
+     "ipa": "/əˈkaʊnt fə(r)/",
+     "pos": "phr",
+     "vi": "chiếm (bao nhiêu phần)",
+     "ex": "Food accounted for 31% of household spending.",
+     "exVi": "Thực phẩm chiếm 31% chi tiêu hộ gia đình."
+    },
+    {
+     "w": "respectively",
+     "ipa": "/rɪˈspektɪvli/",
+     "pos": "adv",
+     "vi": "lần lượt (theo thứ tự đã nêu)",
+     "ex": "Cars and buses made up 30% and 12% respectively.",
+     "exVi": "Ô tô và xe buýt lần lượt chiếm 30% và 12%."
+    },
+    {
+     "w": "approximately",
+     "ipa": "/əˈprɒksɪmətli/",
+     "pos": "adv",
+     "vi": "xấp xỉ, khoảng",
+     "ex": "Approximately half of the students had part-time jobs.",
+     "exVi": "Khoảng một nửa số sinh viên làm thêm."
+    },
+    {
+     "w": "double",
+     "ipa": "/ˈdʌbl/",
+     "pos": "v",
+     "vi": "tăng gấp đôi (triple: gấp ba)",
+     "ex": "The population of the town doubled in twenty years.",
+     "exVi": "Dân số thị trấn tăng gấp đôi trong 20 năm."
+    },
+    {
+     "w": "halve",
+     "ipa": "/hɑːv/",
+     "pos": "v",
+     "vi": "giảm một nửa",
+     "ex": "The cost of solar panels has halved since 2015.",
+     "exVi": "Giá tấm pin mặt trời đã giảm một nửa từ 2015."
+    },
+    {
+     "w": "overall",
+     "ipa": "/ˌəʊvərˈɔːl/",
+     "pos": "adv",
+     "vi": "nhìn chung (mở đầu câu overview)",
+     "ex": "Overall, spending on leisure increased.",
+     "exVi": "Nhìn chung, chi tiêu cho giải trí tăng."
+    },
+    {
+     "w": "the majority of",
+     "ipa": "/ðə məˈdʒɒrəti əv/",
+     "pos": "phr",
+     "vi": "phần lớn, đa số (≠ the minority of)",
+     "ex": "The majority of households owned a motorbike.",
+     "exVi": "Đa số hộ gia đình có xe máy."
+    },
+    {
+     "w": "stand at",
+     "ipa": "/ˈstænd ət/",
+     "pos": "phr",
+     "vi": "ở mức (số liệu tại một thời điểm)",
+     "ex": "In 2005, the figure stood at 62%.",
+     "exVi": "Năm 2005, con số ở mức 62%."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Từ vựng xu hướng: động từ + trạng từ ↔ tính từ + danh từ",
+   "html": "<p>Một xu hướng có thể diễn đạt bằng <b>2 cấu trúc</b> – xen kẽ chúng để bài viết không lặp:</p><p>① <b>S + V + adv</b>: <i>Sales <b>rose sharply</b> in 2020.</i><br>② <b>There was / … saw + a + adj + N + in + S</b>: <i>There was <b>a sharp rise in</b> sales in 2020.</i> / <i>2020 saw a sharp rise in sales.</i></p>",
+   "table": [
+    [
+     "Hướng",
+     "Động từ",
+     "Danh từ",
+     "Mức độ (trạng từ → tính từ)"
     ],
-    "games": [
-      "‘Đọc – vẽ’: cặp đôi; A cầm biểu đồ bí mật và mô tả (It started at 20%, rose sharply to 60% in 2010, then…), B vẽ lại; điểm cho độ giống bản gốc.",
-      "‘Vẽ xu hướng bằng tay’: GV đọc nhanh plummet, level off, fluctuate, peak at, recover slightly – cả lớp vẽ đường trong không khí; ai sai đứng lên.",
-      "‘Bắt lỗi số liệu’: GV đọc câu có lỗi giới từ/số so với biểu đồ (Car ownership rose by 30% in 2025…), đội phát hiện và sửa đúng trước được điểm."
+    [
+     "↑ Tăng",
+     "rise, increase, grow, climb, surge (vọt)",
+     "a rise, an increase, growth, a surge",
+     "sharply → sharp · dramatically → dramatic · significantly → significant"
     ],
-    "errors": [
-      "*Prices raised → Prices rose (rise là nội động từ; raise cần tân ngữ).",
-      "Nhầm by / to: rose by 10% (thêm 10) ≠ rose to 10% (thành 10).",
-      "Thiếu overview, hoặc overview chứa số liệu chi tiết.",
-      "Sai loại từ: *a sharply rise / *increased sharp → a sharp rise / increased sharply.",
-      "Thêm ý kiến/nguyên nhân không có trong biểu đồ (because people are richer…).",
-      "Nghe/đọc nhầm fifteen /ˌfɪfˈtiːn/ – fifty /ˈfɪfti/: luyện trọng âm và âm /n/ cuối."
+    [
+     "↓ Giảm",
+     "fall, decrease, decline, drop, plummet (lao dốc)",
+     "a fall, a decrease, a decline, a drop",
+     "steadily → steady · gradually → gradual"
     ],
-    "homework": "Hoàn thành bài tập trong game (≥ 80%); viết lại bài Task 1 sau khi chữa, bấm giờ 20 phút; tự tìm 1 biểu đồ trên báo (tiếng Việt cũng được) và viết overview 2 câu bằng tiếng Anh; luyện đọc to 20 con số mỗi ngày; ôn 24 từ mới bằng Thẻ từ vựng."
+    [
+     "↕ Dao động",
+     "fluctuate",
+     "a fluctuation",
+     "slightly → slight · moderately → moderate"
+    ],
+    [
+     "▲ Đỉnh / ▼ Đáy",
+     "peak at · reach a peak of · hit a low of",
+     "a peak, a low",
+     "rapidly → rapid"
+    ],
+    [
+     "→ Đi ngang",
+     "remain stable, level off, stay the same",
+     "a period of stability",
+     ""
+    ]
+   ],
+   "ex": [
+    {
+     "t": "The number of tourists rose sharply between 2015 and 2019.",
+     "vi": "Lượng khách du lịch tăng mạnh từ 2015 đến 2019."
+    },
+    {
+     "t": "There was a sharp rise in the number of tourists between 2015 and 2019.",
+     "vi": "Đã có sự gia tăng mạnh về lượng khách du lịch từ 2015 đến 2019."
+    },
+    {
+     "t": "The period from 2015 to 2019 saw a sharp rise in tourist numbers.",
+     "vi": "Giai đoạn 2015–2019 chứng kiến lượng khách tăng mạnh."
+    },
+    {
+     "t": "Prices fluctuated between 20,000 and 25,000 dong per kilo.",
+     "vi": "Giá dao động trong khoảng 20.000–25.000 đồng/kg."
+    },
+    {
+     "t": "Unemployment fell gradually before levelling off at 3%.",
+     "vi": "Thất nghiệp giảm dần rồi chững lại ở mức 3%."
+    }
+   ],
+   "tips": [
+    "<b>rise</b> (nội động từ, không có tân ngữ) ≠ <b>raise</b> (ngoại động từ): <i>Prices rose.</i> / <i>The company raised prices.</i> ❌ <i>Prices raised.</i>",
+    "Đừng nhầm loại từ: ❌ <i>a sharply rise</i> · ❌ <i>increased sharp</i> → ✅ <i>a sharp rise</i> · <i>increased sharply</i>.",
+    "Thì: quá khứ đơn cho số liệu đã qua; dự báo dùng <i>is expected / projected / predicted to + V</i>. Ít khi dùng tiếp diễn.",
+    "Đừng lặp increase cả bài – xoay vòng rise, grow, climb và cấu trúc danh từ."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Giới từ với số liệu – sai một chữ, sai cả con số",
+   "html": "<p>Giới từ quyết định <b>ý nghĩa</b> của con số. <i>Sales rose <b>by</b> 10%</i> và <i>Sales rose <b>to</b> 10%</i> là hai thông tin hoàn toàn khác nhau.</p>",
+   "table": [
+    [
+     "Giới từ",
+     "Nghĩa",
+     "Ví dụ"
+    ],
+    [
+     "rise / fall TO + số",
+     "đến mức (mức cuối)",
+     "Sales rose to 500 units."
+    ],
+    [
+     "rise / fall BY + số",
+     "tăng/giảm một lượng (chênh lệch)",
+     "Sales rose by 100 units (from 400)."
+    ],
+    [
+     "FROM … TO …",
+     "từ … đến …",
+     "The figure fell from 40% to 25%."
+    ],
+    [
+     "a rise OF + số",
+     "mức tăng là bao nhiêu",
+     "a rise of 10%"
+    ],
+    [
+     "a rise IN + đối tượng",
+     "sự tăng của cái gì",
+     "a rise in sales"
+    ],
+    [
+     "stand AT / peak AT / level off AT",
+     "ở mức / đạt đỉnh ở / chững ở",
+     "Unemployment stood at 5% in 2010."
+    ],
+    [
+     ", WITH + số",
+     "bổ sung số liệu cuối câu",
+     "Motorbikes were the most popular, with 85%."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "The price of rice rose by 15%, from 20,000 to 23,000 dong per kilo.",
+     "vi": "Giá gạo tăng 15%, từ 20.000 lên 23.000 đồng/kg."
+    },
+    {
+     "t": "There was an increase of 15% in the price of rice.",
+     "vi": "Giá gạo tăng 15%."
+    },
+    {
+     "t": "Car ownership peaked at 30% in 2025.",
+     "vi": "Tỉ lệ sở hữu ô tô đạt đỉnh 30% vào năm 2025."
+    },
+    {
+     "t": "Unemployment stood at 4% at the beginning of the period.",
+     "vi": "Đầu giai đoạn, tỉ lệ thất nghiệp ở mức 4%."
+    }
+   ],
+   "tips": [
+    "<b>BY</b> = khoảng chênh lệch, <b>TO</b> = mức cuối. Câu hỏi tự kiểm tra: con số này là ‘thêm bao nhiêu’ hay ‘thành bao nhiêu’?",
+    "<b>percent</b> đi sau số (30 percent / 30%); <b>percentage</b> là khái niệm (the percentage of students). ❌ <i>The percent of students</i>.",
+    "Từ 20% lên 30% là tăng <b>10 percentage points</b> (điểm phần trăm) – tức tăng 50% so với ban đầu. Viết chính xác điều này là dấu hiệu bài viết band cao."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "So sánh & ước lượng số liệu",
+   "html": "<p>Đề IELTS Task 1 luôn yêu cầu “make comparisons where relevant”. Dưới đây là bộ công cụ so sánh và làm tròn số:</p>",
+   "table": [
+    [
+     "Chức năng",
+     "Cấu trúc",
+     "Ví dụ"
+    ],
+    [
+     "So sánh gấp",
+     "twice / three times as many (much) as · double · triple",
+     "Twice as many people used buses as trains."
+    ],
+    [
+     "Cao / thấp nhất",
+     "the highest / lowest proportion of… · the most popular…",
+     "Motorbikes were the most popular means of transport."
+    ],
+    [
+     "Đối lập",
+     "whereas / while + mệnh đề · By contrast, / In contrast, …",
+     "Car ownership rose, whereas bicycle use fell."
+    ],
+    [
+     "Lần lượt",
+     "… respectively",
+     "Cars and bicycles accounted for 30% and 22% respectively."
+    ],
+    [
+     "Xấp xỉ",
+     "approximately, roughly, around · just over / just under · nearly, almost",
+     "just under a third (≈ 32%) · roughly a quarter (≈ 25%)"
+    ],
+    [
+     "Phân số",
+     "a half · a third · a quarter · three quarters · one in five",
+     "One in five households owned a car (20%)."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "In 2025, almost three times as many households owned a motorbike as a car.",
+     "vi": "Năm 2025, số hộ có xe máy gần gấp ba số hộ có ô tô."
+    },
+    {
+     "t": "Housing accounted for just under a quarter of spending, whereas food made up almost a third.",
+     "vi": "Nhà ở chiếm gần một phần tư chi tiêu, trong khi thực phẩm chiếm gần một phần ba."
+    },
+    {
+     "t": "The figures for 2000 and 2025 were 45% and 84% respectively.",
+     "vi": "Số liệu năm 2000 và 2025 lần lượt là 45% và 84%."
+    }
+   ],
+   "tips": [
+    "<b>many / few</b> + danh từ đếm được (people, cars); <b>much / little</b> + không đếm được (money, rice): <i>twice as much money as</i>.",
+    "Không nêu ý kiến hay giải thích nguyên nhân không có trong biểu đồ (❌ <i>because people became richer</i>) – Task 1 chỉ mô tả.",
+    "Overview (tổng quan) KHÔNG chứa số liệu chi tiết: chỉ nêu xu hướng chính và điểm nổi bật nhất. Thiếu overview rất khó vượt band 5 ở tiêu chí Task Achievement."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Bố cục bài mô tả biểu đồ & cách đọc số",
+   "html": "<h4>Bố cục 4 đoạn (IELTS Academic Writing Task 1 – 20 phút, ≥ 150 từ)</h4><ol><li><b>Mở bài (1 câu):</b> paraphrase đề: shows → illustrates / compares; percentage of households → proportion of homes; between 2000 and 2025 → over a 25-year period.</li><li><b>Overview (1–2 câu):</b> Overall, … 2 đặc điểm nổi bật nhất (xu hướng chung, hạng mục cao nhất, thay đổi lớn nhất). Không số liệu.</li><li><b>Chi tiết 1:</b> nhóm tăng (hoặc nhóm thứ nhất) – có số liệu, có so sánh.</li><li><b>Chi tiết 2:</b> nhóm giảm / nhóm còn lại – có số liệu, có so sánh.</li></ol><h4>Đọc số liệu (rất quan trọng cho bài nghe)</h4><table><tr><th>Viết</th><th>Đọc</th></tr><tr><td>15 / 50</td><td>fif<b>TEEN</b> /ˌfɪfˈtiːn/ – <b>FIF</b>ty /ˈfɪfti/ (nhấn khác nhau, -teen có /n/ cuối)</td></tr><tr><td>2.5 million</td><td>two point five million</td></tr><tr><td>0.75</td><td>nought point seven five (Anh) / zero point seven five</td></tr><tr><td>45%</td><td>forty-five percent</td></tr><tr><td>1/3 · 3/4</td><td>a third · three quarters</td></tr><tr><td>1,200</td><td>one thousand two hundred / twelve hundred</td></tr><tr><td>2025</td><td>twenty twenty-five / two thousand and twenty-five</td></tr></table>"
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Khảo sát “Sinh viên dùng thời gian rảnh thế nào?”",
+   "lang": "en-GB",
+   "note": "Chương trình radio ‘Numbers Behind the News’. Người dẫn Lan phỏng vấn Tiến sĩ Bảo (Đại học Sông Xanh – thành phố giả định). Trước khi nghe: đọc câu hỏi, đoán chỗ trống cần số hay chữ. Nghe lần 1: ghi mọi con số. Lần 2: điền câu hỏi. Chú ý fifteen / fifty, nine and a half.",
+   "lines": [
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "Welcome to Numbers Behind the News. Today we're looking at a new survey on how university students spend their free time. Dr Bao from Song Xanh University led the research. Dr Bao, how was the survey carried out?",
+     "vi": "Chào mừng đến với Numbers Behind the News. Hôm nay chúng ta xem một khảo sát mới về cách sinh viên đại học dùng thời gian rảnh. Tiến sĩ Bảo, Đại học Sông Xanh, là người chủ trì nghiên cứu. Thưa ông, khảo sát được tiến hành thế nào?"
+    },
+    {
+     "s": "Dr Bao",
+     "g": "m",
+     "t": "We asked twelve hundred students to keep a diary for one week. We did the same survey in 2015, so we can compare the two years. On average, students had about twenty-eight hours of free time a week, which was almost exactly the same as ten years ago.",
+     "vi": "Chúng tôi đề nghị một nghìn hai trăm sinh viên ghi nhật ký trong một tuần. Chúng tôi đã làm khảo sát tương tự năm 2015 nên có thể so sánh hai năm. Trung bình sinh viên có khoảng 28 giờ rảnh mỗi tuần, gần như y hệt mười năm trước."
+    },
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "So the total hasn't changed. What about the way they use it?",
+     "vi": "Vậy tổng thời gian không đổi. Còn cách họ sử dụng thì sao?"
+    },
+    {
+     "s": "Dr Bao",
+     "g": "m",
+     "t": "That's where things get interesting. The biggest change was in social media. In 2015, students spent around five hours a week on it. This year, the figure nearly doubled, to nine and a half hours. That's roughly a third of all their free time.",
+     "vi": "Đó là chỗ thú vị. Thay đổi lớn nhất là mạng xã hội. Năm 2015, sinh viên dành khoảng năm giờ mỗi tuần. Năm nay con số gần gấp đôi, lên chín tiếng rưỡi – xấp xỉ một phần ba toàn bộ thời gian rảnh."
+    },
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "And which activities lost out?",
+     "vi": "Vậy những hoạt động nào bị thiệt?"
+    },
+    {
+     "s": "Dr Bao",
+     "g": "m",
+     "t": "Sport, mainly. Time spent on sport fell from six hours to four, a drop of about a third. Reading also declined, but only slightly, from three hours to two and a half.",
+     "vi": "Chủ yếu là thể thao. Thời gian chơi thể thao giảm từ sáu xuống bốn giờ, tức giảm khoảng một phần ba. Đọc sách cũng giảm nhưng chỉ nhẹ, từ ba giờ xuống hai tiếng rưỡi."
+    },
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "Were there any activities that stayed the same?",
+     "vi": "Có hoạt động nào giữ nguyên không?"
+    },
+    {
+     "s": "Dr Bao",
+     "g": "m",
+     "t": "Yes. Time with family remained stable at around five hours a week. And part-time work actually increased. In 2015, fifteen percent of students had a part-time job. Now it's twenty-four percent, so almost one in four.",
+     "vi": "Có. Thời gian dành cho gia đình ổn định ở khoảng năm giờ mỗi tuần. Còn việc làm thêm thì thực tế tăng. Năm 2015, mười lăm phần trăm sinh viên đi làm thêm. Giờ là hai mươi tư phần trăm, tức gần một phần tư."
+    },
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "Did anything surprise you?",
+     "vi": "Có điều gì làm ông bất ngờ không?"
+    },
+    {
+     "s": "Dr Bao",
+     "g": "m",
+     "t": "Honestly, the sport figures. We expected a small decline, but not such a sharp one. On the positive side, students who did more than three hours of sport a week reported much lower stress levels, so we're recommending that universities make their sports facilities free.",
+     "vi": "Thật lòng là số liệu thể thao. Chúng tôi dự đoán giảm nhẹ, nhưng không mạnh đến vậy. Mặt tích cực là sinh viên chơi thể thao hơn ba giờ mỗi tuần cho biết mức căng thẳng thấp hơn nhiều, nên chúng tôi kiến nghị các trường miễn phí cơ sở thể thao."
+    },
+    {
+     "s": "Lan",
+     "g": "f",
+     "t": "Dr Bao, thank you.",
+     "vi": "Cảm ơn Tiến sĩ Bảo."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Number of students in the survey: ______",
+     "a": "1,200",
+     "alt": [
+      "1200",
+      "twelve hundred",
+      "one thousand two hundred",
+      "1 200"
+     ],
+     "e": "“We asked twelve hundred students…” – twelve hundred = 1,200."
+    },
+    {
+     "q": "How did the total amount of free time change since 2015?",
+     "o": [
+      "It rose sharply.",
+      "It stayed almost the same.",
+      "It fell by a third."
+     ],
+     "a": 1,
+     "e": "“about twenty-eight hours… almost exactly the same as ten years ago.”"
+    },
+    {
+     "q": "Time on social media rose from five to ______ hours a week.",
+     "a": "nine and a half",
+     "alt": [
+      "9.5",
+      "9 and a half",
+      "nine point five",
+      "9,5"
+     ],
+     "e": "“the figure nearly doubled, to nine and a half hours.”"
+    },
+    {
+     "q": "Which activity fell by about a third?",
+     "o": [
+      "Reading",
+      "Sport",
+      "Time with family"
+     ],
+     "a": 1,
+     "e": "Sport: 6 → 4 giờ, “a drop of about a third”. Reading chỉ giảm nhẹ (3 → 2,5); family ổn định."
+    },
+    {
+     "q": "The percentage of students with a part-time job rose from 15% to ______%.",
+     "a": "24",
+     "alt": [
+      "twenty-four",
+      "24%"
+     ],
+     "e": "“Now it's twenty-four percent, so almost one in four.” Bẫy: fifteen (15) – không phải fifty (50)."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Báo cáo chi tiêu hộ gia đình (thành phố giả định Sông Xanh)",
+   "title": "Where Does the Money Go? Household Spending in Song Xanh, 2005–2025",
+   "text": "Over the past twenty years, the average household in Song Xanh has become considerably richer. According to the city's statistics office, average monthly household income rose from 5 million dong in 2005 to 22 million dong in 2025, more than four times the original figure. However, the way families divide their budget has changed just as dramatically as the amount they earn.\n\nThe most striking change concerns food. In 2005, food accounted for almost half of all household spending, at 48 percent. By 2025, this proportion had fallen steadily to 31 percent. It would be wrong, however, to conclude that families are eating less. Because incomes grew so quickly, the actual amount spent on food nearly tripled, from about 2.4 million to 6.8 million dong a month. In other words, food now takes a smaller slice of a much larger cake.\n\nHousing moved in the opposite direction. Its share climbed from 15 to 24 percent, reflecting a sharp rise in rents and property prices as the city expanded. Education followed a similar but less regular pattern. Spending on schooling and private lessons rose from 8 percent in 2005 to a peak of 16 percent in 2020, before falling slightly to 14 percent in 2025. Officials attribute the recent fall to the introduction of free lunches and lower fees in state primary schools.\n\nSome categories changed very little. Health care remained relatively stable at around 6 to 7 percent throughout the period, while transport fluctuated between 10 and 13 percent, depending largely on fuel prices. By contrast, the share spent on entertainment and travel tripled, from 3 percent to 9 percent, as more families began to take holidays and eat out.\n\nOverall, the figures suggest a classic pattern of development: as incomes rise, the share spent on basic needs such as food tends to fall, while spending on housing, education and leisure grows. Whether this trend continues will depend partly on house prices, which many residents now regard as the city's most serious economic problem.",
+   "gloss": [
+    {
+     "w": "statistics office",
+     "vi": "cơ quan thống kê"
+    },
+    {
+     "w": "budget",
+     "vi": "ngân sách (chi tiêu)"
+    },
+    {
+     "w": "striking",
+     "vi": "nổi bật, gây chú ý"
+    },
+    {
+     "w": "conclude",
+     "vi": "kết luận"
+    },
+    {
+     "w": "a smaller slice of a larger cake",
+     "vi": "phần nhỏ hơn của một chiếc bánh lớn hơn (tỉ lệ giảm nhưng tổng tăng)"
+    },
+    {
+     "w": "share",
+     "vi": "phần, tỉ trọng"
+    },
+    {
+     "w": "property prices",
+     "vi": "giá bất động sản"
+    },
+    {
+     "w": "private lessons",
+     "vi": "học thêm"
+    },
+    {
+     "w": "category",
+     "vi": "hạng mục, nhóm"
+    },
+    {
+     "w": "leisure",
+     "vi": "giải trí, thời gian rảnh"
+    }
+   ],
+   "qs": [
+    {
+     "q": "True / False / Not Given: Average household income in Song Xanh more than quadrupled between 2005 and 2025.",
+     "o": [
+      "True",
+      "False",
+      "Not Given"
+     ],
+     "a": 0,
+     "e": "5 → 22 triệu: “more than four times the original figure” = more than quadrupled."
+    },
+    {
+     "q": "True / False / Not Given: Families spent less money on food in 2025 than in 2005.",
+     "o": [
+      "True",
+      "False",
+      "Not Given"
+     ],
+     "a": 1,
+     "e": "Tỉ lệ giảm (48% → 31%) nhưng số TIỀN gần gấp ba (2,4 → 6,8 triệu) → False. Bẫy kinh điển: nhầm tỉ lệ với số lượng tuyệt đối."
+    },
+    {
+     "q": "As a proportion of the budget, spending on education…",
+     "o": [
+      "rose steadily throughout the period.",
+      "peaked in 2020 and then fell slightly.",
+      "remained stable at 14%."
+     ],
+     "a": 1,
+     "e": "“rose from 8 percent… to a peak of 16 percent in 2020, before falling slightly to 14 percent in 2025.”"
+    },
+    {
+     "q": "Housing's share of spending climbed from 15 to ______ percent.",
+     "a": "24",
+     "alt": [
+      "twenty-four",
+      "24%"
+     ],
+     "e": "“Its share climbed from 15 to 24 percent.”"
+    },
+    {
+     "q": "True / False / Not Given: Transport costs went up and down mainly because of changes in fuel prices.",
+     "o": [
+      "True",
+      "False",
+      "Not Given"
+     ],
+     "a": 0,
+     "e": "“transport fluctuated between 10 and 13 percent, depending largely on fuel prices.” went up and down = fluctuated; mainly = largely."
+    },
+    {
+     "q": "Which category tripled its share of spending?",
+     "o": [
+      "Health care",
+      "Entertainment and travel",
+      "Housing"
+     ],
+     "a": 1,
+     "e": "“the share spent on entertainment and travel tripled, from 3 percent to 9 percent.”"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Mô tả xu hướng bằng lời",
+   "tasks": [
+    {
+     "p": "Nhìn biểu đồ ở phần Viết, mô tả bằng lời trong 1 phút: mở bài + overview + 3 chi tiết có số liệu.",
+     "model": "This line graph shows how the proportion of households in Song Xanh owning a motorbike or a car, or regularly using a bicycle, changed between 2000 and 2025. Overall, motorbikes and cars became more common, whereas cycling became much less popular. Motorbike ownership grew rapidly from 45 to 85 percent by 2015 and then levelled off. Car ownership rose steadily throughout the period, increasing tenfold from just 3 percent to 30 percent. In contrast, bicycle use fell dramatically, from 70 percent to a low of 20 percent in 2020, although it recovered slightly to 22 percent at the end of the period.",
+     "vi": "Biểu đồ cho thấy tỉ lệ hộ ở Sông Xanh có xe máy, ô tô hoặc thường xuyên đi xe đạp thay đổi thế nào từ 2000 đến 2025. Nhìn chung, xe máy và ô tô phổ biến hơn, còn xe đạp kém phổ biến đi nhiều…",
+     "tips": "Đọc số rõ ràng: forty-five, eighty-five, tenfold. Nhấn vào động từ xu hướng (ROSE, FELL, LEVELLED OFF)."
+    },
+    {
+     "p": "IELTS Part 1: “Have you noticed any changes in the prices of things in your city recently?” Trả lời tự nhiên 4–6 câu, dùng ngôn ngữ xu hướng.",
+     "model": "Definitely. The biggest change I've noticed is in rent. My flat cost about four million dong a month when I moved in three years ago, and now it's nearly six million, so that's a rise of almost fifty percent. Food prices have gone up too, but more gradually. A bowl of phở used to be around thirty thousand, and now it's usually forty or forty-five. Interestingly, some things have actually become cheaper, like mobile data. I pay less for my phone plan now than I did five years ago, and I get far more data.",
+     "vi": "Chắc chắn rồi. Thay đổi lớn nhất là tiền thuê nhà: ba năm trước khoảng bốn triệu, giờ gần sáu triệu, tức tăng gần 50%. Giá đồ ăn cũng tăng nhưng từ từ hơn… Thú vị là một số thứ lại rẻ đi, như dữ liệu di động."
+    },
+    {
+     "p": "Đọc to các số sau thật rõ: 2.5 million · 1/3 · 45% · 0.75 · 2025 · 15 – 50 · 1,200",
+     "model": "Two point five million. A third. Forty-five percent. Nought point seven five. Twenty twenty-five. Fifteen, fifty. One thousand two hundred.",
+     "vi": "Hai phẩy năm triệu. Một phần ba. Bốn mươi lăm phần trăm. Không phẩy bảy lăm. Năm 2025. Mười lăm – năm mươi. Một nghìn hai trăm."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Mô tả biểu đồ đường (IELTS Writing Task 1)",
+   "task": "The line graph shows the percentage of households in Song Xanh City (a fictional city) that owned a motorbike or a car, or regularly used a bicycle, between 2000 and 2025. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words. (Viết ít nhất 150 từ, 20 phút.)",
+   "min": 150,
+   "chart": {
+    "type": "line",
+    "title": "Households owning a motorbike or a car, or regularly using a bicycle – Song Xanh City, 2000–2025",
+    "unit": "%",
+    "labels": [
+     "2000",
+     "2005",
+     "2010",
+     "2015",
+     "2020",
+     "2025"
+    ],
+    "series": [
+     {
+      "name": "Motorbike",
+      "data": [
+       45,
+       62,
+       78,
+       85,
+       86,
+       84
+      ]
+     },
+     {
+      "name": "Car",
+      "data": [
+       3,
+       5,
+       9,
+       15,
+       22,
+       30
+      ]
+     },
+     {
+      "name": "Bicycle",
+      "data": [
+       70,
+       55,
+       38,
+       25,
+       20,
+       22
+      ]
+     }
+    ]
+   },
+   "model": "The line graph illustrates changes in the proportion of households in Song Xanh City that owned a motorbike or a car, or regularly used a bicycle, over a 25-year period from 2000 to 2025.\n\nOverall, motorised transport became far more common, while cycling declined considerably. Motorbikes were the most widespread form of transport for most of the period, and cars showed the most consistent growth.\n\nIn 2000, 45% of households owned a motorbike. This figure rose rapidly over the next fifteen years, reaching 85% in 2015, after which it levelled off and dipped slightly to 84% in 2025. Car ownership, by contrast, started from a very low base of just 3% but increased steadily throughout the period, climbing to 30% by the end, a tenfold rise.\n\nBicycles followed the opposite trend. In 2000, they were the most common means of transport, used regularly by 70% of households. However, this proportion fell sharply to 25% in 2015 and reached a low of 20% in 2020, before recovering slightly to 22% in 2025. As a result, motorbikes overtook bicycles as the most popular option between 2000 and 2005.",
+   "modelVi": "Biểu đồ đường minh hoạ sự thay đổi tỉ lệ hộ gia đình ở thành phố Sông Xanh sở hữu xe máy, ô tô hoặc thường xuyên đi xe đạp trong 25 năm, từ 2000 đến 2025. Nhìn chung, phương tiện có động cơ trở nên phổ biến hơn nhiều, trong khi xe đạp giảm đáng kể. Xe máy là phương tiện phổ biến nhất trong phần lớn giai đoạn, còn ô tô tăng trưởng ổn định nhất. Năm 2000, 45% hộ có xe máy. Con số này tăng nhanh trong 15 năm tiếp theo, đạt 85% năm 2015, sau đó chững lại và giảm nhẹ còn 84% năm 2025. Ngược lại, tỉ lệ sở hữu ô tô xuất phát rất thấp (3%) nhưng tăng đều suốt giai đoạn, lên 30% vào cuối kỳ – gấp mười lần. Xe đạp đi theo xu hướng ngược lại. Năm 2000 đây là phương tiện phổ biến nhất, 70% hộ thường xuyên sử dụng. Tuy nhiên tỉ lệ này giảm mạnh xuống 25% năm 2015 và chạm đáy 20% năm 2020, trước khi phục hồi nhẹ lên 22% năm 2025. Kết quả là xe máy đã vượt xe đạp trở thành lựa chọn phổ biến nhất trong khoảng 2000–2005.",
+   "tips": [
+    "Mở bài: paraphrase, không chép nguyên đề (shows → illustrates; percentage → proportion; between 2000 and 2025 → over a 25-year period).",
+    "Overview: 2 ý lớn nhất, KHÔNG số liệu: xu hướng chung (động cơ ↑, xe đạp ↓) + điểm nổi bật (xe máy phổ biến nhất, ô tô tăng đều nhất).",
+    "Nhóm số liệu hợp lý: đoạn 1 – hai đường tăng (xe máy, ô tô); đoạn 2 – đường giảm (xe đạp) + điểm giao nhau.",
+    "Không cần mô tả từng mốc 5 năm – chọn điểm đầu, điểm cuối, đỉnh, đáy và điểm đổi hướng."
+   ],
+   "checklist": [
+    "Mở bài paraphrase đề, không chép nguyên văn",
+    "Có overview bắt đầu bằng Overall, không chứa số liệu",
+    "Số liệu chính xác, đúng giới từ (to / by / from… to / at)",
+    "Có so sánh (whereas, by contrast, tenfold, overtook…)",
+    "Xen kẽ cấu trúc động từ + trạng từ và tính từ + danh từ",
+    "Không nêu ý kiến/nguyên nhân; quá khứ đơn; ≥ 150 từ"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Sales ___ sharply in 2020.",
+   "o": [
+    "raised",
+    "rose",
+    "risen"
+   ],
+   "a": 1,
+   "e": "rise – rose – risen (nội động từ). ‘raised’ cần tân ngữ (raise prices)."
+  },
+  {
+   "t": "mc",
+   "q": "There was a ___ increase in the number of tourists.",
+   "o": [
+    "sharply",
+    "sharp",
+    "sharpness"
+   ],
+   "a": 1,
+   "e": "Trước danh từ (increase) cần tính từ: a sharp increase."
+  },
+  {
+   "t": "mc",
+   "q": "The price rose ___ 20 to 25 dollars.",
+   "o": [
+    "by",
+    "from",
+    "at"
+   ],
+   "a": 1,
+   "e": "from … to … (từ mức này đến mức kia)."
+  },
+  {
+   "t": "fill",
+   "q": "Unemployment fell ___ 2%, from 7% to 5%.",
+   "a": "by",
+   "e": "Lượng chênh lệch (7 − 5 = 2) → by."
+  },
+  {
+   "t": "fill",
+   "q": "In 2010, the figure stood ___ 40%.",
+   "a": "at",
+   "e": "stand at + số = ở mức."
+  },
+  {
+   "t": "mc",
+   "q": "Car ownership ___ at 30% in 2025, its highest level.",
+   "o": [
+    "peaked",
+    "fluctuated",
+    "levelled"
+   ],
+   "a": 0,
+   "e": "peak at = đạt đỉnh ở mức. ‘levelled’ phải đi với off (level off at)."
+  },
+  {
+   "t": "mc",
+   "q": "Cars and bicycles accounted for 30% and 22% ___.",
+   "o": [
+    "respectively",
+    "approximately",
+    "significantly"
+   ],
+   "a": 0,
+   "e": "respectively = lần lượt (ô tô 30%, xe đạp 22%)."
+  },
+  {
+   "t": "mc",
+   "q": "32% có thể diễn đạt là…",
+   "o": [
+    "roughly a quarter",
+    "just under a third",
+    "just over a half"
+   ],
+   "a": 1,
+   "e": "Một phần ba ≈ 33,3%; 32% hơi thấp hơn → just under a third."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào phù hợp làm OVERVIEW?",
+   "o": [
+    "In 2015, 85% of households owned a motorbike.",
+    "Overall, motorised transport became more common, while cycling declined.",
+    "People bought cars because they became richer."
+   ],
+   "a": 1,
+   "e": "Overview nêu xu hướng chung, không số liệu chi tiết (câu 1), không giải thích nguyên nhân (câu 3)."
+  },
+  {
+   "t": "fill",
+   "q": "In 2000, 3% of households had a car; by 2025 the figure was 30%. Car ownership rose ___fold.",
+   "a": "ten",
+   "alt": [
+    "10"
+   ],
+   "e": "30 ÷ 3 = 10 → a tenfold rise / rose tenfold."
+  },
+  {
+   "t": "match",
+   "q": "Nối ký hiệu xu hướng với cụm từ:",
+   "pairs": [
+    [
+     "↑ tăng mạnh",
+     "rise sharply"
+    ],
+    [
+     "↓ giảm nhẹ",
+     "fall slightly"
+    ],
+    [
+     "↕ lên xuống thất thường",
+     "fluctuate"
+    ],
+    [
+     "→ không đổi",
+     "remain stable"
+    ],
+    [
+     "▲ đạt mức cao nhất",
+     "peak"
+    ]
+   ],
+   "e": "Nhớ cả cặp trạng từ ↔ tính từ: sharply/sharp, slightly/slight."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "a steady",
+    "There was",
+    "in sales.",
+    "rise"
+   ],
+   "a": "There was a steady rise in sales.",
+   "e": "There was + a + tính từ + danh từ + in + đối tượng."
+  },
+  {
+   "t": "listen",
+   "say": "The number of visitors rose from fifteen thousand in 2020 to fifty thousand in 2024.",
+   "lang": "en-GB",
+   "q": "How many visitors were there in 2024?",
+   "o": [
+    "15,000",
+    "50,000",
+    "5,000"
+   ],
+   "a": 1,
+   "e": "fifty thousand (FIF-ty, nhấn âm đầu) = 50,000; fifteen (fif-TEEN) là số năm 2020."
+  },
+  {
+   "t": "listen",
+   "say": "Unemployment stood at six percent in January, fell to four percent in June, and then rose again slightly to five percent by December.",
+   "lang": "en-GB",
+   "q": "What was the unemployment rate at the end of the year?",
+   "o": [
+    "4%",
+    "5%",
+    "6%"
+   ],
+   "a": 1,
+   "e": "Cuối năm (by December) = 5%. Nghe hết câu – đừng chọn số đầu tiên."
+  },
+  {
+   "t": "listen",
+   "say": "Roughly one in five students said they read the news every day, while almost half never read it at all.",
+   "lang": "en-GB",
+   "q": "What proportion of students read the news daily?",
+   "o": [
+    "About 20%",
+    "About 50%",
+    "About 5%"
+   ],
+   "a": 0,
+   "e": "one in five = 20%; ‘almost half’ là nhóm không bao giờ đọc."
+  },
+  {
+   "t": "dict",
+   "say": "The figure fell sharply before levelling off at the end of the period.",
+   "lang": "en-GB",
+   "a": "The figure fell sharply before levelling off at the end of the period.",
+   "e": "levelling (Anh-Anh, 2 chữ l) – Mỹ viết leveling."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Chiếu biểu đồ đường ở phần Viết (game tự vẽ); vẽ sẵn 1 biểu đồ cột và 1 biểu đồ tròn đơn giản trên bảng phụ; thẻ mũi tên (↑ ↓ ↕ → ▲ ▼); giấy kẻ ô cho trò ‘Đọc – vẽ’; 3–4 biểu đồ bí mật (GV tự vẽ) cho các cặp.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: GV vẽ đường ‘giá rau trong tuần’ lên bảng; học viên mô tả bằng từ đã biết; GV ghi lại và giới thiệu mục tiêu: nói/viết về số liệu chính xác như phóng viên kinh tế."
+   },
+   {
+    "t": "20'",
+    "do": "Từ vựng xu hướng với thẻ mũi tên; luyện 2 cấu trúc (rose sharply ↔ a sharp rise); trò ‘Vẽ xu hướng bằng tay’ (GV đọc cụm, lớp vẽ đường trong không khí)."
+   },
+   {
+    "t": "20'",
+    "do": "Giới từ số liệu & so sánh: to / by / from…to / at / of / in; phân số, twice as many as, respectively. Bài tính nhanh: ‘từ 20 lên 30 là tăng bao nhiêu? (by 10 points / by 50%)’."
+   },
+   {
+    "t": "25'",
+    "do": "Nghe khảo sát sinh viên: trước khi nghe, học viên đoán dạng đáp án (số? phân số? tên hoạt động?); lần 1 ghi mọi con số; lần 2 điền; lần 3 kiểm tra; luyện đọc fifteen/fifty, nine and a half, one in four."
+   },
+   {
+    "t": "15'",
+    "do": "Đọc số to theo bảng: thập phân, phân số, phần trăm, năm, hàng nghìn; cặp đôi đọc số cho nhau chép, đổi vai."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn ‘Đọc – vẽ’: A mô tả biểu đồ bí mật, B vẽ lại trên giấy kẻ ô; so sánh với bản gốc."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc báo cáo chi tiêu Sông Xanh: làm câu hỏi; thảo luận bẫy ‘tỉ lệ giảm nhưng số tiền tăng’; gạch chân mọi cụm xu hướng trong bài."
+   },
+   {
+    "t": "15'",
+    "do": "Bố cục Task 1: phân tích bài mẫu thành 4 phần; cả lớp viết overview cho biểu đồ cột và biểu đồ tròn trên bảng phụ, so sánh các phiên bản."
+   },
+   {
+    "t": "35'",
+    "do": "Viết bài mô tả biểu đồ đường trong 20 phút như phòng thi; 10 phút chấm chéo theo checklist; 5 phút GV chữa chung các lỗi giới từ và overview."
+   },
+   {
+    "t": "10'",
+    "do": "Đọc số tăng tuyệt đối và mức tăng tương đối, kiểm đơn vị trước khi ghi tóm tắt xu hướng."
+   }
+  ],
+  "games": [
+   "‘Đọc – vẽ’: cặp đôi; A cầm biểu đồ bí mật và mô tả (It started at 20%, rose sharply to 60% in 2010, then…), B vẽ lại; điểm cho độ giống bản gốc.",
+   "‘Vẽ xu hướng bằng tay’: GV đọc nhanh plummet, level off, fluctuate, peak at, recover slightly – cả lớp vẽ đường trong không khí; ai sai đứng lên.",
+   "‘Bắt lỗi số liệu’: GV đọc câu có lỗi giới từ/số so với biểu đồ (Car ownership rose by 30% in 2025…), đội phát hiện và sửa đúng trước được điểm."
+  ],
+  "errors": [
+   "*Prices raised → Prices rose (rise là nội động từ; raise cần tân ngữ).",
+   "Nhầm by / to: rose by 10% (thêm 10) ≠ rose to 10% (thành 10).",
+   "Thiếu overview, hoặc overview chứa số liệu chi tiết.",
+   "Sai loại từ: *a sharply rise / *increased sharp → a sharp rise / increased sharply.",
+   "Thêm ý kiến/nguyên nhân không có trong biểu đồ (because people are richer…).",
+   "Nghe/đọc nhầm fifteen /ˌfɪfˈtiːn/ – fifty /ˈfɪfti/: luyện trọng âm và âm /n/ cuối."
+  ],
+  "homework": "Hoàn thành bài tập trong game (≥ 80%); viết lại bài Task 1 sau khi chữa, bấm giờ 20 phút; tự tìm 1 biểu đồ trên báo (tiếng Việt cũng được) và viết overview 2 câu bằng tiếng Anh; luyện đọc to 20 con số mỗi ngày; ôn 24 từ mới bằng Thẻ từ vựng."
+ }
 }

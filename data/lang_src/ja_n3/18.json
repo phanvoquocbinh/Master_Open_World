@@ -1,0 +1,673 @@
+{
+ "no": 18,
+ "title": "Ôn tập tổng hợp 2 – Đăng ký trùng: giải thích rồi kiểm lại",
+ "sub": "九件の 申込みでも、九人とは 限りません。",
+ "goals": [
+  "Đọc chuỗi sự việc và tách số bản ghi với số người thực tế.",
+  "Giải thích nhãn trạng thái theo định nghĩa tại chỗ, không suy đã nhận thành đã duyệt.",
+  "Nêu giả thuyết có giới hạn và điều kiện cần trước khi sửa hoặc hủy dữ liệu.",
+  "Viết báo cáo tích hợp có căn cứ, việc đã xử lý và điều còn chưa giải quyết."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Bài cuối N3 dùng sự cố hoàn toàn giả: một người gửi lại vì chưa thấy phản hồi, khiến số bản ghi nhiều hơn số người. Người học cần tổng hợp nguồn, thời điểm và định nghĩa nhãn, đặt câu hỏi kính trọng, trình bày giả thuyết bằng mức chắc chắn phù hợp, rồi đề xuất xử lý có điều kiện. Không lấy số đếm trên màn hình để kết luận số người đã được nhận. Một việc đã đánh dấu xử lý cũng chưa chắc giải quyết toàn bộ nguyên nhân.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>重複 trong bài đọc ちょうふく, cho-o-fu-ku; không đoán từ việc trùng thành じゅうふく trong các thẻ đọc của bài. 件数 đọc けんすう còn 人数 đọc にんずう: âm đầu và độ đục của s/z đều khác. 再送 đọc さいそう có sa-i-so-o; 受信 đọc じゅしん với じゅ ghép một mora. Đọc rõ 単位 khi báo số để người nghe không biến 件 thành 人.</p>",
+   "items": [
+    {
+     "sym": "件数・人数",
+     "ex": [
+      "けんすう",
+      "にんずう"
+     ],
+     "vi": "Số bản ghi và số người dùng đơn vị khác; giữ cách đọc đầy đủ trong lời báo số."
+    },
+    {
+     "sym": "再送・受信",
+     "ex": [
+      "さいそう",
+      "じゅしん"
+     ],
+     "vi": "Một từ chỉ gửi lại, một từ chỉ nhận; nhịp dài và âm ghép giúp phân biệt hai phía quy trình."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "申込番号",
+     "kana": "もうしこみばんごう",
+     "romaji": "mooshikomi bangoo",
+     "vi": "mã đăng ký",
+     "ex": "申込番号で 二つの 表を 比べます。",
+     "exVi": "Tôi so hai bảng bằng mã đăng ký."
+    },
+    {
+     "w": "重複",
+     "kana": "ちょうふく",
+     "romaji": "choofuku",
+     "vi": "trùng lặp",
+     "ex": "重複の 可能性を 調べます。",
+     "exVi": "Tôi kiểm khả năng trùng."
+    },
+    {
+     "w": "再送",
+     "kana": "さいそう",
+     "romaji": "saisoo",
+     "vi": "gửi lại",
+     "ex": "再送の 前に 受信を 照会します。",
+     "exVi": "Trước gửi lại tôi hỏi đã nhận chưa."
+    },
+    {
+     "w": "受信",
+     "kana": "じゅしん",
+     "romaji": "jushin",
+     "vi": "việc nhận tin/dữ liệu",
+     "ex": "受信の 時刻は 残っています。",
+     "exVi": "Giờ nhận còn được lưu."
+    },
+    {
+     "w": "照会",
+     "kana": "しょうかい",
+     "romaji": "shookai",
+     "vi": "hỏi tra cứu/xác minh thông tin",
+     "ex": "受付に 番号で 照会します。",
+     "exVi": "Tôi hỏi quầy tra theo mã."
+    },
+    {
+     "w": "一致",
+     "kana": "いっち",
+     "romaji": "itchi",
+     "vi": "khớp nhau",
+     "ex": "番号は 一致しています。",
+     "exVi": "Các mã khớp nhau."
+    },
+    {
+     "w": "件数",
+     "kana": "けんすう",
+     "romaji": "kensuu",
+     "vi": "số mục/bản ghi",
+     "ex": "件数は 九件です。",
+     "exVi": "Có chín bản ghi."
+    },
+    {
+     "w": "人数",
+     "kana": "にんずう",
+     "romaji": "ninzuu",
+     "vi": "số người",
+     "ex": "人数は 八人でした。",
+     "exVi": "Có tám người."
+    },
+    {
+     "w": "保留",
+     "kana": "ほりゅう",
+     "romaji": "horyuu",
+     "vi": "tạm chờ quyết",
+     "ex": "削除の 判断は 保留にします。",
+     "exVi": "Tôi tạm để chờ quyết định xóa."
+    },
+    {
+     "w": "取消",
+     "kana": "とりけし",
+     "romaji": "torikeshi",
+     "vi": "hủy bỏ đăng ký",
+     "ex": "本人に 取消の 希望を 聞きます。",
+     "exVi": "Tôi hỏi người đăng ký có muốn hủy không."
+    },
+    {
+     "w": "手順",
+     "kana": "てじゅん",
+     "romaji": "tejun",
+     "vi": "trình tự thao tác",
+     "ex": "送信の 手順を 記録します。",
+     "exVi": "Tôi ghi trình tự gửi."
+    },
+    {
+     "w": "再現",
+     "kana": "さいげん",
+     "romaji": "saigen",
+     "vi": "làm lại để tái hiện",
+     "ex": "架空の データで 再現します。",
+     "exVi": "Tôi tái hiện bằng dữ liệu giả."
+    },
+    {
+     "w": "復旧",
+     "kana": "ふっきゅう",
+     "romaji": "fukkyuu",
+     "vi": "khôi phục hoạt động",
+     "ex": "復旧の 範囲を 確認します。",
+     "exVi": "Tôi kiểm phần đã khôi phục."
+    },
+    {
+     "w": "経緯",
+     "kana": "けいい",
+     "romaji": "keii",
+     "vi": "diễn biến dẫn tới sự việc",
+     "ex": "経緯を 時刻順に 書きます。",
+     "exVi": "Tôi viết diễn biến theo thứ tự giờ."
+    },
+    {
+     "w": "対応済み",
+     "kana": "たいおうずみ",
+     "romaji": "taioozumi",
+     "vi": "đã xử lý một yêu cầu",
+     "ex": "この 問合せは 対応済みです。",
+     "exVi": "Yêu cầu hỏi này đã được xử lý."
+    },
+    {
+     "w": "未解決",
+     "kana": "みかいけつ",
+     "romaji": "mikaiketsu",
+     "vi": "chưa giải quyết",
+     "ex": "原因は まだ 未解決です。",
+     "exVi": "Nguyên nhân vẫn chưa giải quyết."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Ôn というのは để định nghĩa nhãn trong buổi này, はず để nêu kỳ vọng có căn cứ, かもしれない cho giả thuyết và ないことには cho điều kiện cần trước sửa. Dùng 被動 khi nói một bản ghi được gửi hoặc đổi nhưng không suy ngay chủ ý. Với câu nhờ kiểm, 確認させていただけますか xin được kiểm theo cách lịch sự, không bảo đảm đã có phép nếu chưa nhận phản hồi. Nối nhượng bộ たとえ～ても để giữ yêu cầu xác minh dù số bản ghi chỉ tăng một.</p>",
+   "table": [
+    [
+     "Nhiệm vụ ôn",
+     "Cách nói phù hợp"
+    ],
+    [
+     "Định nghĩa trạng thái",
+     "受付済みは届いた状態のこと"
+    ],
+    [
+     "Kỳ vọng",
+     "返事が来るはずだった"
+    ],
+    [
+     "Giả thuyết",
+     "再送で重複したかもしれない"
+    ],
+    [
+     "Điều kiện cần",
+     "番号を照合しないことには削除できない"
+    ],
+    [
+     "Xin kiểm lịch sự",
+     "記録を確認させていただけますか"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "九件の 申込みでも、九人とは 限りません。",
+     "vi": "Dù chín đăng ký cũng không nhất thiết chín người."
+    },
+    {
+     "t": "返事が 来るはずだったのに、表示が 変わりませんでした。",
+     "vi": "Đáng lẽ có phản hồi nhưng hiển thị không đổi."
+    },
+    {
+     "t": "再送したために、同じ 番号が 二つ 出たかもしれません。",
+     "vi": "Có thể do gửi lại nên cùng mã hiện hai lần."
+    },
+    {
+     "t": "番号を 照合しないことには、取消を 決められません。",
+     "vi": "Chưa đối chiếu mã thì chưa quyết hủy được."
+    },
+    {
+     "t": "対応済みでも、原因の 検証は 残っています。",
+     "vi": "Dù đã xử lý yêu cầu, kiểm chứng nguyên nhân vẫn còn."
+    }
+   ],
+   "tips": [
+    "<p>Không dùng 九件 để trả lời chắc 九人; kiểm mã và đối tượng thực tế.</p>",
+    "<p>Bản ghi trùng không tự chứng minh người gửi muốn hủy; hỏi nguyện vọng riêng.</p>",
+    "<p>対応済み có thể chỉ một câu hỏi được trả lời, không có nghĩa mọi nguyên nhân đã khắc phục.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Người nhận câu hỏi muốn xóa bản trùng nhưng chưa đủ căn cứ; nghe các trạng thái nhận, người, chấp thuận và nguyên nhân riêng.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "受付の 表が 九件に 増えています。昨日は 八人の 予定でしたから、一人 増えたんですね。",
+     "vi": "Bảng quầy tăng chín bản ghi. Hôm qua dự kiến tám người nên thêm một người nhỉ?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "件数と 人数は 同じとは 限りません。まず 申込番号を 照合してみませんか。",
+     "vi": "Số bản ghi không nhất thiết số người. Trước hết ta đối chiếu mã đăng ký nhé?"
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "確認すると、一つの 番号だけ 二回あります。内容と 名前は 同じで、受信時刻が 五分 違います。",
+     "vi": "Kiểm thì chỉ một mã có hai lần. Nội dung và tên giống, giờ nhận cách năm phút."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "再送された 可能性が ありますね。ただ、本人の 操作は まだ 聞いていないので、原因は 決められません。",
+     "vi": "Có thể đã được gửi lại. Nhưng chưa hỏi thao tác người đăng ký nên chưa xác định nguyên nhân."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "二つあるなら、古いほうを すぐ 消してしまっても いいですか。",
+     "vi": "Nếu hai bản thì xóa ngay bản cũ được không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "番号の 意味と 取消の 希望を 確認しないことには、削除できません。記録は 残して、受付に 照会しましょう。",
+     "vi": "Chưa kiểm nghĩa mã và mong muốn hủy thì chưa xóa được. Ta giữ bản ghi rồi hỏi quầy."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "本人は 返事が 来るはずだと思ったのに 来なかったので、もう 一度 送ったと 言っていました。",
+     "vi": "Người ấy nói vì nghĩ đáng lẽ có trả lời mà chưa thấy nên gửi lại."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "では、再送の 経緯は 確認できました。受付済みは 届いた意味で、参加確定では ないことも 説明しましょう。",
+     "vi": "Vậy đã kiểm được diễn biến gửi lại. Ta giải thích đã tiếp nhận là đã đến, chưa phải chốt tham gia."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "問合せには 答えましたが、表示が 遅れた 原因は まだ 調べていません。対応済みと 書いても いいでしょうか。",
+     "vi": "Tôi đã trả lời câu hỏi nhưng chưa kiểm nguyên nhân hiển thị chậm. Ghi đã xử lý được không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "問合せの 対応済みと、原因の 未解決を 別の 欄に 書けば 正確です。架空の データで 手順を 再現する 予定も 残しましょう。",
+     "vi": "Nếu tách yêu cầu đã xử lý với nguyên nhân chưa giải quyết ở hai cột thì chính xác. Cũng ghi dự kiến tái hiện trình tự bằng dữ liệu giả nhé."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Vì sao chưa kết luận thêm một người?",
+     "o": [
+      "Chín là bản ghi, có thể trùng người",
+      "Vì không có bảng nào",
+      "Vì mọi người đều đã hủy"
+     ],
+     "a": 0,
+     "e": "Đối thoại yêu cầu đối chiếu 申込番号 thay vì đồng nhất 件数 với 人数."
+    },
+    {
+     "q": "Trước khi hỏi người gửi, nguyên nhân đã chắc chưa?",
+     "o": [
+      "Rồi, chắc chắn lỗi máy",
+      "Rồi, chắc chắn cố ý đăng ký hai người",
+      "Chưa, mới có dấu hiệu hai lần nhận"
+     ],
+     "a": 2,
+     "e": "Dấu hiệu cùng mã và cách giờ gợi giả thuyết, nhưng 本人の操作はまだ聞いていない."
+    },
+    {
+     "q": "Sau khi hỏi, diễn biến nào đã xác nhận?",
+     "o": [
+      "Đã khôi phục toàn bộ hệ thống",
+      "Người ấy gửi lại vì chưa thấy trả lời",
+      "Người ấy muốn hủy mọi đăng ký"
+     ],
+     "a": 1,
+     "e": "Lời người đăng ký xác nhận hành động gửi lại và kỳ vọng phản hồi, chưa giải quyết nguyên nhân hiển thị."
+    },
+    {
+     "q": "Ghi đã xử lý cần giới hạn thế nào?",
+     "o": [
+      "Câu hỏi đã trả lời, nguyên nhân vẫn chưa giải quyết",
+      "Mọi vấn đề hoàn toàn xong",
+      "Không được ghi bất kỳ mục nào xong"
+     ],
+     "a": 0,
+     "e": "Hai cột 問合せ対応済み/原因未解決 giữ trạng thái từng việc riêng."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "架空の 体験会の 受付で、申込みが 八件から 九件に 増えました。係の 一人は、参加者が 一人 増えたのだろうと 考えました。けれども、この 会の 表は 人数ではなく、受信した 用紙の 件数を 示していました。わたしは 九人と 連絡する前に、申込番号、名前、内容、受信時刻を 照合しました。一つの 番号が 二回あり、二つの 受信時刻は 五分 違っていました。\n\nこの時点では、再送の 可能性が あるとしか 言えませんでした。二つの 記録が 同じように 見えても、どちらかを 消してよいという 意味では ありません。内容に 小さい 変更が あるかもしれませんし、本人が 取消を 希望しているかも 未確認でした。記録を 保留のまま 残し、受付を 通して 本人に 経緯を 聞いてもらいました。実際の 連絡先は 教材には 使わず、照会の 練習は 全て 架空の データで 行います。\n\n本人は、自動返信が 来るはずだと 思っていたのに 見つからず、同じ 内容を もう 一度 送ったと 説明しました。申込番号の 一致と 説明を 合わせると、人数は 八人のままだと 確認できました。ただし、八人 全員の 参加が 確定したわけでは ありません。この 会での 受付済みというのは、用紙が 届いた 状態のことだからです。条件の 確認と、参加確定の 通知は 別の 段階に なっていました。\n\n最後に、問合せには 説明したので 対応済みと 記録しました。一方、なぜ 返信が 見つからなかったかは 未解決として 残しました。表示が 遅れたのか、別の 場所に 届いたのか、まだ 根拠が 足りません。担当者に 同じ 手順を 架空の 用紙で 再現してもらい、受信と 表示の 時刻を 記録する 予定です。たとえ 一件だけの 問題でも、確認せずに 原因を 書けば、次に 間違った 対応を 選ぶかもしれません。何を 直し、何を まだ 調べているのかを 分けることが、正確な 引き継ぎに なると 考えました。",
+   "vi": "Một quầy trải nghiệm giả có đăng ký tăng tám lên chín mục. Một người nghĩ thêm một người tham gia. Nhưng bảng hiển thị số biểu mẫu nhận chứ không số người. Trước khi báo chín người, tôi đối chiếu mã, tên, nội dung và giờ nhận. Một mã có hai lần, cách nhau năm phút.\n\nLúc ấy chỉ nói được có khả năng gửi lại. Hai bản trông giống không nghĩa xóa một bản được. Nội dung có thể thay đổi nhỏ, người ấy có muốn hủy chưa rõ. Tôi giữ bản ghi ở trạng thái chờ và nhờ quầy hỏi diễn biến. Giáo trình không dùng liên hệ thật; luyện tra cứu hoàn toàn bằng dữ liệu giả.\n\nNgười ấy giải thích tưởng sẽ có thư tự động nhưng không thấy nên gửi lại cùng nội dung. Kết hợp mã khớp với lời giải thích, xác nhận vẫn tám người. Tuy nhiên không có nghĩa cả tám đã được chốt tham gia. Ở buổi này đã tiếp nhận chỉ là biểu mẫu đến; kiểm điều kiện và thông báo chốt là bước riêng.\n\nCuối cùng tôi ghi câu hỏi đã được giải thích là đã xử lý. Nhưng lý do không thấy thư vẫn chưa giải quyết: thiếu căn cứ biết chậm hiển thị hay đến chỗ khác. Dự kiến nhờ người phụ trách tái hiện cùng trình tự bằng biểu mẫu giả, ghi giờ nhận và giờ hiển thị. Dù chỉ một mục, ghi nguyên nhân chưa kiểm có thể dẫn cách xử lý sai lần sau. Tôi nghĩ bàn giao chính xác là tách đã sửa gì với còn kiểm gì.",
+   "gloss": [
+    {
+     "w": "申込番号",
+     "kana": "もうしこみばんごう",
+     "romaji": "mooshikomi bangoo",
+     "vi": "mã đăng ký"
+    },
+    {
+     "w": "再送",
+     "kana": "さいそう",
+     "romaji": "saisoo",
+     "vi": "gửi lại"
+    },
+    {
+     "w": "受信",
+     "kana": "じゅしん",
+     "romaji": "jushin",
+     "vi": "việc nhận tin/dữ liệu"
+    },
+    {
+     "w": "照会",
+     "kana": "しょうかい",
+     "romaji": "shookai",
+     "vi": "hỏi tra cứu/xác minh thông tin"
+    },
+    {
+     "w": "一致",
+     "kana": "いっち",
+     "romaji": "itchi",
+     "vi": "khớp nhau"
+    },
+    {
+     "w": "件数",
+     "kana": "けんすう",
+     "romaji": "kensuu",
+     "vi": "số mục/bản ghi"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Bảng đếm gì ở lúc đầu?",
+     "o": [
+      "Biểu mẫu nhận, không trực tiếp số người",
+      "Người đã chốt tham gia",
+      "Số chỗ chắc chắn còn trống"
+     ],
+     "a": 0,
+     "e": "Đoạn đầu định nghĩa 件数 là受信した用紙, cần đối chiếu mới suy số người."
+    },
+    {
+     "q": "Hai bản nhìn giống có đủ xóa ngay không?",
+     "o": [
+      "Có, luôn xóa bản cũ",
+      "Có, người gửi chắc chắn muốn hủy",
+      "Chưa, cần kiểm nội dung và ý muốn người gửi"
+     ],
+     "a": 2,
+     "e": "Đoạn hai liệt kê điều kiện chưa kiểm, giữ bản ghi chờ thay vì sửa ngay."
+    },
+    {
+     "q": "Sau hỏi người gửi, điều gì được xác nhận?",
+     "o": [
+      "Máy chủ đã khôi phục toàn bộ",
+      "Vẫn tám người, một người gửi lại",
+      "Chắc chắn tám người đều được duyệt"
+     ],
+     "a": 1,
+     "e": "Mã cùng lời giải thích làm rõ số người, nhưng trạng thái tham gia còn bước riêng."
+    },
+    {
+     "q": "Điều gì chưa giải quyết ở cuối?",
+     "o": [
+      "Vì sao thư không được thấy",
+      "Có ai đã hỏi quầy",
+      "Có cùng mã hay không"
+     ],
+     "a": 0,
+     "e": "Các bằng chứng đã đủ về gửi lại nhưng chưa đủ chọn nguyên nhân phản hồi không thấy."
+    },
+    {
+     "q": "Bước kiểm tiếp được đề xuất thế nào?",
+     "o": [
+      "Xóa toàn bộ để khỏi trùng",
+      "Khẳng định người gửi không đọc",
+      "Tái hiện bằng dữ liệu giả, ghi giờ nhận và hiển thị"
+     ],
+     "a": 2,
+     "e": "Cuối bài nêu cách tạo bằng chứng mới thay cho gán nguyên nhân từ kỳ vọng."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thẻ mới: mười hai bản ghi, mười một mã duy nhất; chưa hỏi người gửi. Báo quan sát và giả thuyết, nêu hai bước kiểm trước sửa.",
+     "model": "受信は十二件ですが、申込番号は十一種類です。重複の可能性はありますが、まだ本人には聞いていません。内容と時刻を照合し、受付を通して経緯を確認してから対応を決めたいです。今は人数や取消を確定できません。",
+     "vi": "Nhận mười hai bản nhưng mã có mười một loại. Có thể trùng nhưng chưa hỏi người gửi. Tôi muốn so nội dung và giờ, hỏi diễn biến qua quầy rồi mới quyết xử lý. Hiện chưa chốt số người hay việc hủy được.",
+     "tips": "Mười một mã không tự đảm bảo mười một người nếu quy ước mã chưa được kiểm; giữ giới hạn theo thẻ."
+    },
+    {
+     "p": "Bạn đã trả lời câu hỏi nhưng nguyên nhân chưa tái hiện. Bàn giao rõ hai trạng thái và cách kiểm tiếp.",
+     "model": "問合せには説明したので対応済みですが、原因はまだ再現できていません。全て復旧したとは書かず、架空のデータで同じ手順を試し、受信と表示の時刻を記録する予定を残します。",
+     "vi": "Câu hỏi đã được giải thích nên đã xử lý, nhưng chưa tái hiện nguyên nhân. Tôi không viết đã khôi phục hết mà ghi dự kiến thử cùng trình tự bằng dữ liệu giả, lưu giờ nhận và hiển thị.",
+     "tips": "Mỗi nhãn phải gắn một việc cụ thể; đừng để một từ đã xử lý bao phủ cả nguyên nhân."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết bàn giao 190–250 chữ Nhật theo thẻ mới: mười hai bản ghi, mười một mã; chưa hỏi người gửi nên chưa chốt số người; giữ bản ghi; sẽ so nội dung và giờ rồi hỏi qua quầy; câu hỏi đã trả lời nhưng nguyên nhân thư chậm chưa tái hiện; nêu kế hoạch dữ liệu giả.",
+   "model": "受信は十二件で、申込番号は十一種類でした。重複の可能性はありますが、本人の操作は未確認なので、人数はまだ確定していません。記録は消さずに保留し、内容と受信時刻を照合してから、受付を通して経緯を確認します。問合せには説明したため対応済みですが、返信が遅れた原因はまだ再現できていません。架空のデータで同じ手順を試し、受信と表示の時刻を残す予定です。受付済みと参加確定も別の欄で管理します。",
+   "modelVi": "Nhận mười hai mục, có mười một loại mã. Có khả năng trùng nhưng thao tác người gửi chưa kiểm nên chưa chốt số người. Không xóa bản ghi, giữ chờ; so nội dung và giờ nhận rồi hỏi diễn biến qua quầy. Câu hỏi đã giải thích nên đã xử lý nhưng nguyên nhân phản hồi chậm chưa tái hiện. Dự kiến thử cùng trình tự bằng dữ liệu giả, ghi giờ nhận và hiển thị. Đã tiếp nhận và đã chốt tham gia cũng quản lý ở hai cột.",
+   "min": 190,
+   "tips": [
+    "Giữ mười hai mục và mười một mã ở hai đơn vị khác nhau.",
+    "Tái hiện là kế hoạch chưa xong, không viết như đã xác định nguyên nhân."
+   ],
+   "checklist": [
+    "Đúng hai số và chưa chốt người.",
+    "Không xóa trước khi kiểm.",
+    "Có đối chiếu và hỏi qua quầy.",
+    "Tách trả lời xong với nguyên nhân chưa tái hiện, có dữ liệu giả."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “申込番号” nghĩa là gì?",
+   "o": [
+    "mã đăng ký",
+    "hỏi tra cứu/xác minh thông tin",
+    "tạm chờ quyết"
+   ],
+   "a": 0,
+   "e": "申込番号で 二つの 表を 比べます。 → Tôi so hai bảng bằng mã đăng ký. Từ cần nhận diện là “申込番号”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “重複” nghĩa là gì?",
+   "o": [
+    "khớp nhau",
+    "hủy bỏ đăng ký",
+    "trùng lặp"
+   ],
+   "a": 2,
+   "e": "重複の 可能性を 調べます。 → Tôi kiểm khả năng trùng. Từ cần nhận diện là “重複”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “再送” nghĩa là gì?",
+   "o": [
+    "trình tự thao tác",
+    "gửi lại",
+    "số mục/bản ghi"
+   ],
+   "a": 1,
+   "e": "再送の 前に 受信を 照会します。 → Trước gửi lại tôi hỏi đã nhận chưa. Từ cần nhận diện là “再送”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “受信” nghĩa là gì?",
+   "o": [
+    "việc nhận tin/dữ liệu",
+    "số người",
+    "làm lại để tái hiện"
+   ],
+   "a": 0,
+   "e": "受信の 時刻は 残っています。 → Giờ nhận còn được lưu. Từ cần nhận diện là “受信”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền đơn vị bản ghi: 受信した 用紙は 十二___です。",
+   "a": "件",
+   "e": "件 đếm mục/bản nhận; không trực tiếp dùng 人 khi chưa xác minh người thực tế."
+  },
+  {
+   "t": "fill",
+   "q": "Điền điều kiện cần: 番号を 照合しない___には 判断できません。",
+   "a": "こと",
+   "e": "Vないことには đặt việc chưa đối chiếu là điều kiện cần chưa có trước quyết định."
+  },
+  {
+   "t": "fill",
+   "q": "Điền giới hạn nghĩa: 受付済みは、参加確定という 意味___ありません。",
+   "a": "では",
+   "e": "という意味ではありません tách việc đã nhận với được chấp thuận theo định nghĩa tại buổi này."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu giữ bản ghi để kiểm.",
+   "w": [
+    "残しておきます。",
+    "確認のために",
+    "記録を"
+   ],
+   "a": "確認のために記録を残しておきます。",
+   "e": "ために nêu mục đích kiểm, ておく nêu giữ lại để dùng cho bước sau."
+  },
+  {
+   "q": "Kết luận nào đúng mức?",
+   "o": [
+    "Mười bản nhận, số người chưa chốt",
+    "Chắc chắn mười người đã duyệt",
+    "Chắc chắn chín người được tham gia"
+   ],
+   "a": 0,
+   "e": "Số bản và dấu hiệu trùng không đủ suy số người hay trạng thái duyệt khi còn 確認中.",
+   "t": "listen",
+   "say": "受信は 十件ですが、同じ 番号が 二つ あります。人数は まだ 確認中です。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "Việc nào chưa kết thúc?",
+   "o": [
+    "Giải thích câu hỏi",
+    "Mọi thứ đều xong",
+    "Kiểm nguyên nhân"
+   ],
+   "a": 2,
+   "e": "が đối chiếu giải thích xong với điều tra nguyên nhân còn tiếp tục.",
+   "t": "listen",
+   "say": "説明は 終わりましたが、原因を 調べる 作業は まだ 続いています。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "件数と 人数は 同じとは 限りません。",
+   "a": "件数と 人数は 同じとは 限りません。",
+   "lang": "ja-JP",
+   "e": "件数 đọc けんすう, 人数 đọc にんずう; とは限りません ngăn kết luận đồng nhất hai lượng."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "照会",
+     "hỏi tra cứu/xác minh thông tin"
+    ],
+    [
+     "一致",
+     "khớp nhau"
+    ],
+    [
+     "件数",
+     "số mục/bản ghi"
+    ],
+    [
+     "人数",
+     "số người"
+    ],
+    [
+     "保留",
+     "tạm chờ quyết"
+    ]
+   ],
+   "e": "申込番号 là khóa đối chiếu, 重複 là hiện tượng có thể trùng, 再送 là hành động gửi lại, 受信 là phía nhận và 照会 là hỏi xác minh; không suy nguyên nhân chỉ từ một nhãn."
+  },
+  {
+   "q": "Bảng đếm gì ở lúc đầu?",
+   "o": [
+    "Biểu mẫu nhận, không trực tiếp số người",
+    "Người đã chốt tham gia",
+    "Số chỗ chắc chắn còn trống"
+   ],
+   "a": 0,
+   "e": "Đoạn đầu định nghĩa 件数 là受信した用紙, cần đối chiếu mới suy số người.",
+   "t": "mc"
+  },
+  {
+   "q": "Hai bản nhìn giống có đủ xóa ngay không?",
+   "o": [
+    "Chưa, cần kiểm nội dung và ý muốn người gửi",
+    "Có, luôn xóa bản cũ",
+    "Có, người gửi chắc chắn muốn hủy"
+   ],
+   "a": 0,
+   "e": "Đoạn hai liệt kê điều kiện chưa kiểm, giữ bản ghi chờ thay vì sửa ngay.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Tạo bảng giả chín bản/tám mã và thẻ mới mười hai bản/mười một mã; dùng tên ký hiệu tự đặt, không có địa chỉ liên hệ hoặc dữ liệu thật.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Đưa bảng bản ghi và yêu cầu báo số, sau đó hỏi đơn vị nào có thể khẳng định và dữ liệu nào còn thiếu để đếm người."
+   },
+   {
+    "t": "30'",
+    "do": "Ôn định nghĩa, kỳ vọng, khả năng, điều kiện cần, bị động và cách xin kiểm lịch sự qua chuỗi xử lý đăng ký."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe đề nghị xóa, lập bảng quan sát/giả thuyết/câu hỏi trước khi cho phép chọn cách xử lý."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc báo cáo, xác định lúc số người được kiểm và vì sao trạng thái tham gia vẫn chưa chốt cho toàn bộ."
+   },
+   {
+    "t": "30'",
+    "do": "Nói thẻ mười hai mục, viết 190–250 chữ; bạn học kiểm mỗi nhãn đã xử lý có đối tượng cụ thể và phần còn mở."
+   },
+   {
+    "t": "30'",
+    "do": "Đóng vai bàn giao cho ca mới, làm nghe-chính tả và đánh giá kế hoạch tạo bằng chứng bằng dữ liệu giả thay cho suy đoán."
+   }
+  ],
+  "games": [
+   "Mỗi nhóm có cùng số mục nhưng mã trùng khác nhau, chỉ được báo số người khi đã hỏi quy ước và nguồn bổ sung.",
+   "Bảng nhiều trạng thái: đánh dấu từng việc nhận, kiểm, trả lời, tái hiện, khắc phục mà không dùng một nhãn xong cho toàn bộ."
+  ],
+  "errors": [
+   "Dùng 件 như số người: đặt cột đơn vị cạnh mọi số.",
+   "Xóa ngay bản cũ từ hai dòng giống nhau: giữ và đối chiếu nội dung, giờ, nguyện vọng.",
+   "Hiểu 受付済み là duyệt: nhắc định nghĩa tại chỗ và thông báo chốt riêng.",
+   "Ghi mọi thứ khôi phục vì đã trả lời câu hỏi: tách yêu cầu trả lời với kiểm nguyên nhân và trạng thái thực tế."
+  ],
+  "homework": "Tạo dữ liệu đăng ký giả có một trường hợp gửi lại và một trường hợp sửa nội dung; viết bàn giao so sánh hai trường hợp, nêu điều đã kiểm và kế hoạch kiểm phần còn mở."
+ }
+}

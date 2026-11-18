@@ -1,0 +1,705 @@
+{
+ "no": 19,
+ "title": "Ôn tập tổng hợp 1 – Lập chuyến đi góc đọc khi trời mưa",
+ "sub": "时间、路线、天气与借书条件",
+ "goals": [
+  "Kết hợp thông tin về thời gian, tuyến xe, thời tiết và thẻ mượn.",
+  "Phân biệt kế hoạch muốn làm với điều kiện cần chuẩn bị.",
+  "Xác nhận một thay đổi giờ gặp rồi nhắc lại lịch cuối.",
+  "Viết kế hoạch ngắn có trình tự và danh sách mang theo."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Một kế hoạch phải dùng được",
+   "html": "<p>Bài ôn trộn tình huống đi lại và mượn sách: muốn tới góc đọc chưa đủ, người đi còn cần giờ hẹn, tiền xe và thẻ. Thông tin thời tiết trong bài là dự báo tự đặt cho câu chuyện; không dùng để quyết định chuyến đi thật. Hai người phải chốt chung một lịch sau khi thay đổi.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Dữ kiện quan trọng trong kế hoạch",
+   "html": "<p>Đánh dấu con số, ngày và vật bắt buộc trước khi đọc. Câu có thể dài nhưng không nên nhấn đều mọi từ.</p>",
+   "items": [
+    {
+     "sym": "liǎng kuài / liǎng běn",
+     "ex": [
+      "两块车费",
+      "两本书"
+     ],
+     "vi": "两块 nói số tiền, 两本 nói số cuốn sách. Nghe cả lượng từ để tránh lấy số tiền làm số sách."
+    },
+    {
+     "sym": "yí / yì",
+     "ex": [
+      "一共",
+      "一点",
+      "一本"
+     ],
+     "vi": "一共 yígòng dùng yí trước thanh bốn; 一点 yìdiǎn và 一本 yì běn dùng yì trước thanh ba. Viết dấu theo từ trong ngữ cảnh."
+    },
+    {
+     "sym": "yǔ / yú",
+     "ex": [
+      "下雨",
+      "鱼"
+     ],
+     "vi": "雨 yǔ thanh ba là mưa; 鱼 yú thanh hai là cá. Khi nhắc mang ô, giữ đúng âm mưa và nối với 下."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm từ dùng trong tình huống",
+   "items": [
+    {
+     "w": "计划",
+     "py": "jìhuà",
+     "hv": "kế hoạch",
+     "vi": "kế hoạch",
+     "ex": "我们的计划改了。",
+     "exPy": "Wǒmen de jìhuà gǎi le.",
+     "exVi": "Kế hoạch của chúng ta đã đổi."
+    },
+    {
+     "w": "出发",
+     "py": "chūfā",
+     "hv": "xuất phát",
+     "vi": "khởi hành",
+     "ex": "我们九点出发。",
+     "exPy": "Wǒmen jiǔ diǎn chūfā.",
+     "exVi": "Chúng ta khởi hành lúc chín giờ."
+    },
+    {
+     "w": "带",
+     "py": "dài",
+     "hv": "đới",
+     "vi": "mang theo",
+     "ex": "请带卡和雨伞。",
+     "exPy": "Qǐng dài kǎ hé yǔsǎn.",
+     "exVi": "Hãy mang thẻ và ô."
+    },
+    {
+     "w": "明天",
+     "py": "míngtiān",
+     "hv": "minh thiên",
+     "vi": "ngày mai",
+     "ex": "明天我们一起去。",
+     "exPy": "Míngtiān wǒmen yìqǐ qù.",
+     "exVi": "Ngày mai chúng ta cùng đi."
+    },
+    {
+     "w": "先",
+     "py": "xiān",
+     "hv": "tiên",
+     "vi": "trước tiên",
+     "ex": "先看天气，再出发。",
+     "exPy": "Xiān kàn tiānqì, zài chūfā.",
+     "exVi": "Xem thời tiết trước rồi khởi hành."
+    },
+    {
+     "w": "再",
+     "py": "zài",
+     "hv": "tái",
+     "vi": "rồi, sau đó",
+     "ex": "我们先还书，再借书。",
+     "exPy": "Wǒmen xiān huán shū, zài jiè shū.",
+     "exVi": "Chúng ta trả sách rồi mượn sách."
+    },
+    {
+     "w": "需要",
+     "py": "xūyào",
+     "hv": "nhu yếu",
+     "vi": "cần",
+     "ex": "坐车需要两块钱。",
+     "exPy": "Zuò chē xūyào liǎng kuài qián.",
+     "exVi": "Đi xe cần hai tệ."
+    },
+    {
+     "w": "一共",
+     "py": "yígòng",
+     "hv": "nhất cộng",
+     "vi": "tổng cộng",
+     "ex": "一共要四块钱。",
+     "exPy": "Yígòng yào sì kuài qián.",
+     "exVi": "Tổng cộng cần bốn tệ."
+    },
+    {
+     "w": "门口",
+     "py": "ménkǒu",
+     "hv": "môn khẩu",
+     "vi": "cửa ra vào",
+     "ex": "我九点在门口等你。",
+     "exPy": "Wǒ jiǔ diǎn zài ménkǒu děng nǐ.",
+     "exVi": "Chín giờ tôi chờ bạn ở cửa."
+    },
+    {
+     "w": "车票",
+     "py": "chēpiào",
+     "hv": "xa phiếu",
+     "vi": "vé xe",
+     "ex": "车票在我的包里。",
+     "exPy": "Chēpiào zài wǒ de bāo lǐ.",
+     "exVi": "Vé xe ở trong túi của tôi."
+    },
+    {
+     "w": "雨伞",
+     "py": "yǔsǎn",
+     "hv": "vũ tản",
+     "vi": "ô, dù",
+     "ex": "这把雨伞很大。",
+     "exPy": "Zhè bǎ yǔsǎn hěn dà.",
+     "exVi": "Chiếc ô này lớn."
+    },
+    {
+     "w": "下雨",
+     "py": "xià yǔ",
+     "hv": "hạ vũ",
+     "vi": "mưa",
+     "ex": "明天可能下雨。",
+     "exPy": "Míngtiān kěnéng xià yǔ.",
+     "exVi": "Ngày mai có thể mưa."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ôn 想 và 需要: ý định và điều kiện",
+   "html": "<p>想 nêu điều muốn làm; 需要 nêu điều cần có hoặc cần thực hiện. Một kế hoạch có thể có cả hai: muốn mượn sách nhưng cần làm thẻ trước. Không dùng 想 để thay mọi yêu cầu bắt buộc.</p>",
+   "ex": [
+    {
+     "t": "我想借书，需要带卡。",
+     "py": "Wǒ xiǎng jiè shū, xūyào dài kǎ.",
+     "vi": "Tôi muốn mượn sách, cần mang thẻ."
+    },
+    {
+     "t": "我们想坐车，需要买票。",
+     "py": "Wǒmen xiǎng zuò chē, xūyào mǎi piào.",
+     "vi": "Chúng ta muốn đi xe, cần mua vé."
+    },
+    {
+     "t": "她想和我们去，可是上午有课。",
+     "py": "Tā xiǎng hé wǒmen qù, kěshì shàngwǔ yǒu kè.",
+     "vi": "Cô ấy muốn đi cùng chúng ta nhưng buổi sáng có lớp."
+    }
+   ],
+   "tips": [
+    "Muốn đi không đồng nghĩa đã rảnh hoặc đã đủ điều kiện; nghe cả phần sau 可是."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ôn câu lịch hẹn và trình tự",
+   "html": "<p>Giờ và nơi thường đứng trước hành động. Khi có nhiều bước, dùng 先…再… hoặc tách thành câu ngắn. Nhắc lại lịch cuối cùng sau khi đổi giờ để người đọc không theo lịch cũ.</p>",
+   "ex": [
+    {
+     "t": "我们九点在学校门口见。",
+     "py": "Wǒmen jiǔ diǎn zài xuéxiào ménkǒu jiàn.",
+     "vi": "Chúng ta gặp ở cửa trường lúc chín giờ."
+    },
+    {
+     "t": "先在门口见，再一起坐车。",
+     "py": "Xiān zài ménkǒu jiàn, zài yìqǐ zuò chē.",
+     "vi": "Gặp ở cửa trước rồi cùng đi xe."
+    },
+    {
+     "t": "不是八点半，是九点。",
+     "py": "Bú shì bā diǎn bàn, shì jiǔ diǎn.",
+     "vi": "Không phải tám rưỡi mà là chín giờ."
+    }
+   ],
+   "tips": [
+    "Một tin xác nhận chỉ nên giữ một giờ chốt; nếu nhắc giờ cũ phải có dấu hiệu phủ định rõ."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Chốt lịch và đồ cần mang",
+   "lang": "zh-CN",
+   "note": "Hai bạn chuẩn bị tới góc đọc vào ngày mưa trong câu chuyện. Có một giờ được đổi và hai loại tiền cần phân biệt: tiền xe mỗi người và tổng hai người.",
+   "lines": [
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "明天你还想去图书角吗？",
+     "py": "Míngtiān nǐ hái xiǎng qù túshūjiǎo ma?",
+     "vi": "Ngày mai bạn vẫn muốn tới góc đọc chứ?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "想去。我们八点半见吗？",
+     "py": "Xiǎng qù. Wǒmen bā diǎn bàn jiàn ma?",
+     "vi": "Muốn. Chúng ta gặp lúc tám rưỡi à?"
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "我九点才有空，改成九点吧。",
+     "py": "Wǒ jiǔ diǎn cái yǒu kòng, gǎi chéng jiǔ diǎn ba.",
+     "vi": "Chín giờ tôi mới rảnh, đổi thành chín giờ nhé."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "好，在学校门口见。",
+     "py": "Hǎo, zài xuéxiào ménkǒu jiàn.",
+     "vi": "Được, gặp ở cửa trường."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "明天可能下雨，请带雨伞。",
+     "py": "Míngtiān kěnéng xià yǔ, qǐng dài yǔsǎn.",
+     "vi": "Ngày mai có thể mưa, bạn mang ô nhé."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "还需要带借书证，对吗？",
+     "py": "Hái xūyào dài jièshūzhèng, duì ma?",
+     "vi": "Còn cần mang thẻ mượn sách, đúng không?"
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "对。每人坐车两块钱。",
+     "py": "Duì. Měi rén zuò chē liǎng kuài qián.",
+     "vi": "Đúng. Tiền xe mỗi người hai tệ."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "两个人一共四块，我来准备。",
+     "py": "Liǎng ge rén yígòng sì kuài, wǒ lái zhǔnbèi.",
+     "vi": "Hai người tổng cộng bốn tệ, tôi sẽ chuẩn bị."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "到书角先还书，再借新书。",
+     "py": "Dào shūjiǎo xiān huán shū, zài jiè xīn shū.",
+     "vi": "Tới góc đọc thì trả sách trước rồi mượn sách mới."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "可以，每人借两本。",
+     "py": "Kěyǐ, měi rén jiè liǎng běn.",
+     "vi": "Được, mỗi người mượn hai cuốn."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "下午三点回学校，可以吗？",
+     "py": "Xiàwǔ sān diǎn huí xuéxiào, kěyǐ ma?",
+     "vi": "Ba giờ chiều về trường được không?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "可以，九点见，别忘了卡。",
+     "py": "Kěyǐ, jiǔ diǎn jiàn, bié wàng le kǎ.",
+     "vi": "Được, chín giờ gặp, đừng quên thẻ nhé."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Giờ gặp cuối cùng là khi nào?",
+     "o": [
+      "Chín giờ",
+      "Tám rưỡi",
+      "Ba giờ chiều"
+     ],
+     "a": 0,
+     "e": "Giờ tám rưỡi bị đổi; hai lượt sau xác nhận 九点."
+    },
+    {
+     "q": "Vì sao cần mang ô?",
+     "o": [
+      "Thẻ bị ướt từ hôm qua",
+      "Cần đổi ô lấy vé",
+      "Trong câu chuyện có thể mưa"
+     ],
+     "a": 2,
+     "e": "Dự báo tự đặt nêu 明天可能下雨."
+    },
+    {
+     "q": "Tiền xe cho hai người là bao nhiêu?",
+     "o": [
+      "Sáu tệ",
+      "Bốn tệ",
+      "Hai tệ"
+     ],
+     "a": 1,
+     "e": "Mỗi người hai tệ, hai người tổng 四块."
+    },
+    {
+     "q": "Tới góc đọc cần làm gì trước?",
+     "o": [
+      "Đọc hết hai cuốn",
+      "Trả sách",
+      "Mượn sách mới ngay"
+     ],
+     "a": 1,
+     "e": "Chuỗi 先还书，再借新书 nêu trả trước."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc hiểu: Kế hoạch đã thống nhất",
+   "text": "明天我们去图书角。先在学校门口见，再坐三路车。天气预报说会下雨，请带雨伞和借书证。每人准备两块车费。到了以后先还书，再借两本新书。下午三点回学校。",
+   "py": "Míngtiān wǒmen qù túshūjiǎo. Xiān zài xuéxiào ménkǒu jiàn, zài zuò sān lù chē. Tiānqì yùbào shuō huì xià yǔ, qǐng dài yǔsǎn hé jièshūzhèng. Měi rén zhǔnbèi liǎng kuài chēfèi. Dào le yǐhòu xiān huán shū, zài jiè liǎng běn xīn shū. Xiàwǔ sān diǎn huí xuéxiào.",
+   "vi": "Ngày mai chúng ta tới góc đọc. Gặp ở cửa trường trước rồi đi tuyến xe số ba. Dự báo trong bài nói sẽ mưa, hãy mang ô và thẻ mượn sách. Mỗi người chuẩn bị hai tệ tiền xe. Tới nơi trả sách trước rồi mượn hai cuốn mới. Ba giờ chiều quay lại trường.",
+   "gloss": [
+    {
+     "w": "带",
+     "py": "dài",
+     "vi": "mang theo"
+    },
+    {
+     "w": "明天",
+     "py": "míngtiān",
+     "vi": "ngày mai"
+    },
+    {
+     "w": "先",
+     "py": "xiān",
+     "vi": "trước tiên"
+    },
+    {
+     "w": "再",
+     "py": "zài",
+     "vi": "rồi, sau đó"
+    },
+    {
+     "w": "门口",
+     "py": "ménkǒu",
+     "vi": "cửa ra vào"
+    },
+    {
+     "w": "雨伞",
+     "py": "yǔsǎn",
+     "vi": "ô, dù"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Đi phương tiện tuyến số mấy?",
+     "o": [
+      "Ba",
+      "Hai",
+      "Bốn"
+     ],
+     "a": 0,
+     "e": "Kế hoạch ghi 坐三路车."
+    },
+    {
+     "q": "Cần mang hai đồ vật nào?",
+     "o": [
+      "Đĩa và cốc",
+      "Ô và thẻ mượn sách",
+      "Giày và áo mới"
+     ],
+     "a": 1,
+     "e": "Câu mang theo nêu 雨伞和借书证."
+    },
+    {
+     "q": "Khi nào quay lại trường?",
+     "o": [
+      "Tám rưỡi tối",
+      "Ba giờ chiều",
+      "Chín giờ sáng"
+     ],
+     "a": 1,
+     "e": "Câu cuối ghi 下午三点回学校."
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Nhận diện chữ trong bài",
+   "items": [
+    {
+     "c": "雨",
+     "py": "yǔ",
+     "hv": "vũ",
+     "parts": "Ngang trên, khung rồi chấm bên trong",
+     "strokes": 8,
+     "vi": "mưa",
+     "words": "下雨，雨水"
+    },
+    {
+     "c": "伞",
+     "py": "sǎn",
+     "hv": "tản",
+     "parts": "人 ở trên, phần trong bên dưới",
+     "strokes": 6,
+     "vi": "ô",
+     "words": "雨伞，打伞"
+    },
+    {
+     "c": "共",
+     "py": "gòng",
+     "hv": "cộng",
+     "parts": "Phần trên trước hai nét dưới",
+     "strokes": 6,
+     "vi": "cùng, tổng",
+     "words": "一共，共同"
+    },
+    {
+     "c": "回",
+     "py": "huí",
+     "hv": "hồi",
+     "parts": "Khung lớn bao 口, đóng đáy cuối",
+     "strokes": 6,
+     "vi": "quay về",
+     "words": "回学校，回去"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói có nhiệm vụ",
+   "tasks": [
+    {
+     "p": "Chốt với bạn chín giờ ở cửa trường; nhắc không phải tám rưỡi.",
+     "model": "我们改成九点，在学校门口见。不是八点半，请记住新的时间。",
+     "py": "Wǒmen gǎi chéng jiǔ diǎn, zài xuéxiào ménkǒu jiàn. Bú shì bā diǎn bàn, qǐng jìzhu xīn de shíjiān.",
+     "vi": "Chúng ta đổi thành chín giờ, gặp ở cửa trường. Không phải tám rưỡi, bạn nhớ giờ mới nhé.",
+     "tips": "Đọc giờ mới trước và xác nhận giờ cũ bị loại."
+    },
+    {
+     "p": "Nhắc bạn ba điều: mang ô, mang thẻ, chuẩn bị hai tệ tiền xe.",
+     "model": "明天可能下雨，请带雨伞和借书证。每人还需要两块车费。",
+     "py": "Míngtiān kěnéng xià yǔ, qǐng dài yǔsǎn hé jièshūzhèng. Měi rén hái xūyào liǎng kuài chēfèi.",
+     "vi": "Ngày mai có thể mưa, hãy mang ô và thẻ mượn sách. Mỗi người còn cần hai tệ tiền xe.",
+     "tips": "Phân biệt vật mang theo với số tiền, đừng đọc cả danh sách thành một cụm khó nghe."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết để hoàn thành tình huống",
+   "task": "Viết kế hoạch 45–70 chữ Hán cho chuyến đi: giờ/nơi gặp, tuyến xe, hai đồ vật mang theo, tiền xe mỗi người và thứ tự trả–mượn sách.",
+   "min": 45,
+   "model": "明天九点在学校门口见，我们坐三路车去图书角。请带雨伞和借书证，每人准备两块车费。到那里先还书，再借新书。下午三点回学校。",
+   "modelVi": "Ngày mai chín giờ gặp ở cửa trường, chúng ta đi tuyến ba tới góc đọc. Hãy mang ô và thẻ, mỗi người chuẩn bị hai tệ tiền xe. Tới đó trả sách rồi mượn sách mới. Ba giờ chiều về trường.",
+   "tips": [
+    "Trước khi viết, liệt kê sáu thông tin cần truyền đạt.",
+    "Đọc lại để kiểm mỗi người hay tổng hai người trước con số tiền."
+   ],
+   "checklist": [
+    "Có giờ và nơi gặp",
+    "Đúng tuyến xe và tiền mỗi người",
+    "Đủ hai vật cần mang",
+    "Thứ tự trả trước, mượn sau"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "每人两块，两个人一共四块。",
+   "lang": "zh-CN",
+   "q": "Hai người cần tổng bao nhiêu tiền?",
+   "o": [
+    "Bốn tệ",
+    "Hai tệ",
+    "Tám tệ"
+   ],
+   "a": 0,
+   "e": "每人 nêu mức mỗi người; 一共 nêu tổng bốn tệ."
+  },
+  {
+   "t": "listen",
+   "say": "不是八点半，九点在门口见。",
+   "lang": "zh-CN",
+   "q": "Giờ nào được giữ lại?",
+   "o": [
+    "Chín rưỡi",
+    "Chín giờ",
+    "Tám rưỡi"
+   ],
+   "a": 1,
+   "e": "不是 loại giờ cũ, vế sau nêu giờ chín."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào nêu điều kiện để mượn sách?",
+   "o": [
+    "借书需要带卡。",
+    "借书想天气。",
+    "借书是两点的雨。"
+   ],
+   "a": 0,
+   "e": "需要 đưa ra việc cần làm để thực hiện dự định mượn."
+  },
+  {
+   "t": "mc",
+   "q": "Bạn mượn sách mới sau khi trả sách cũ. Câu nào đúng?",
+   "o": [
+    "先还书，再借书。",
+    "先借书，再还新书。",
+    "还书再先借。"
+   ],
+   "a": 0,
+   "e": "Câu đầu phản ánh đúng thứ tự hai hành động."
+  },
+  {
+   "t": "mc",
+   "q": "一共 trong khoản tiền nghĩa là gì?",
+   "o": [
+    "Tổng cộng",
+    "Mỗi người",
+    "Chỉ hôm nay"
+   ],
+   "a": 0,
+   "e": "一共 khác 每人; không thay hai khái niệm khi tính."
+  },
+  {
+   "t": "mc",
+   "q": "Đồ nào giúp thực hiện điều kiện mượn trong bài?",
+   "o": [
+    "借书证",
+    "雨伞",
+    "车票"
+   ],
+   "a": 0,
+   "e": "Thẻ mượn sách đáp ứng điều kiện của góc đọc, ô và vé phục vụ việc khác."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “mang theo”: 请___雨伞。",
+   "a": "带",
+   "py": "dài",
+   "e": "带 chỉ việc cầm theo ô khi đi."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “tổng cộng”: 两个人___四块。",
+   "a": "一共",
+   "py": "yígòng",
+   "e": "一共 đứng trước con số tổng cho hai người."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “trả”: 到书角先___书。",
+   "a": "还",
+   "py": "huán",
+   "e": "Kế hoạch yêu cầu trả sách cũ trước khi mượn mới."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "九点",
+    "在门口",
+    "见",
+    "我们"
+   ],
+   "a": "我们九点在门口见。",
+   "e": "Giờ và nơi đứng trước động từ gặp."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "先",
+    "带好卡",
+    "再",
+    "出发",
+    "请"
+   ],
+   "a": "请先带好卡，再出发。",
+   "e": "Chuẩn bị thẻ trước khi khởi hành để đủ điều kiện mượn."
+  },
+  {
+   "t": "match",
+   "q": "Nối các yếu tố trong kế hoạch với nghĩa.",
+   "pairs": [
+    [
+     "计划",
+     "kế hoạch"
+    ],
+    [
+     "出发",
+     "khởi hành"
+    ],
+    [
+     "带",
+     "mang theo"
+    ],
+    [
+     "需要",
+     "cần"
+    ]
+   ],
+   "e": "Kế hoạch gồm thời điểm, xuất phát, vật mang theo và nhu cầu; các từ phục vụ những bước khác nhau."
+  },
+  {
+   "t": "dict",
+   "say": "请带雨伞和借书证。",
+   "lang": "zh-CN",
+   "a": "请带雨伞和借书证。",
+   "py": "Qǐng dài yǔsǎn hé jièshūzhèng.",
+   "e": "Giữ hai đồ vật nối bằng 和; 雨伞 là ô, 借书证 là thẻ."
+  }
+ ],
+ "teacher": {
+  "time": "180 phút, chia thành hai buổi 90 phút",
+  "prep": "Dùng lịch, dự báo mưa giả, sơ đồ tuyến xe và thẻ mượn sách đã tự soạn; chuẩn bị tiền giấy giả hai tệ/người.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Cho nhóm nhận thẻ muốn đi và thẻ điều kiện; học viên liệt kê vì sao muốn đi chưa đủ để thực hiện kế hoạch."
+   },
+   {
+    "t": "20 phút",
+    "do": "Ôn từ bằng một túi đồ đi chơi; chọn vật cần mang và loại vật không liên quan, giải thích bằng tình huống."
+   },
+   {
+    "t": "20 phút",
+    "do": "Trộn câu 想 và 需要 để học viên gắn đúng ý định hoặc điều kiện; yêu cầu kết hợp cả hai trong một lời giải thích."
+   },
+   {
+    "t": "25 phút",
+    "do": "Ôn lịch hẹn bằng hai giờ xung đột; mỗi cặp phải chốt một giờ duy nhất và nói rõ giờ bị hủy."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nghe kế hoạch hai lượt, hoàn thành bảng giờ, nơi, vật, tiền mỗi người và tổng tiền; sửa riêng các con số."
+   },
+   {
+    "t": "10 phút",
+    "do": "Khởi động buổi hai bằng một thẻ thiếu thẻ mượn; học viên thay đổi bước chuẩn bị để kế hoạch thực hiện được."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc kế hoạch và sắp các bước từ gặp tới trở về; dùng sơ đồ xác nhận tuyến xe không liên quan số tiền."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nhập vai điều phối nhóm ba, một bạn chỉ có thẻ thời tiết, một bạn có tuyến xe, một bạn có quy định mượn; trao đổi đủ dữ kiện."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết kế hoạch ngắn, bạn đọc đóng vai người mới và kiểm sáu điều cần biết; bổ sung thông tin còn thiếu mà không sao chép bài mẫu."
+   },
+   {
+    "t": "15 phút",
+    "do": "Làm bài tự chấm, mỗi người giải thích một khác biệt giữa ý muốn và điều kiện; chốt mục còn yếu trước bài ôn cuối."
+   }
+  ],
+  "games": [
+   "Túi đã sẵn sàng: đội nhận dự báo và lịch khác nhau, chọn vật và tiền phù hợp; phải nêu một câu 需要 cùng một câu trình tự để được đi."
+  ],
+  "errors": [
+   "Lấy hai tệ/người thành tổng hai người: gạch nhãn 每人 và 一共 trước khi tính.",
+   "Giữ cả hai giờ trong tin nhắn mà không phủ định giờ cũ: viết một câu 不是…是… để chốt.",
+   "Dùng 想 cho điều bắt buộc mang thẻ: chuyển sang 需要 theo quy định của câu chuyện.",
+   "Nhầm 还 đọc hái khi nói trả: gắn âm huán với việc đưa sách về quầy.",
+   "Quên vật vì chỉ nhớ lịch: dùng danh sách kiểm riêng cho thời gian, đường đi và đồ mang theo."
+  ],
+  "homework": "Lập một chuyến đi giả khác với thời tiết và giờ mới. Viết kế hoạch có đủ điều kiện cần, ghi âm một lời chốt và nhờ bạn kiểm xem có thể làm theo hay chưa."
+ }
+}

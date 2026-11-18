@@ -3,29 +3,30 @@
  "title": "Đồ vật; これ・それ・あれ và sở hữu の",
  "sub": "これは 私の 本です。",
  "goals": [
-  "Hiểu và dùng đúng Đồ vật; これ・それ・あれ và sở hữu の",
-  "Đọc/nghe phân biệt ít nhất 12 từ/cụm của tình huống",
-  "Hỏi và trả lời ba thông tin cụ thể bằng mức lịch sự phù hợp",
-  "Viết đoạn mới và tự sửa lỗi theo checklist"
+  "Phân tích cách dùng trong câu “これは 私の 本です。” và tạo một câu khác giữ đúng quan hệ ý.",
+  "Dùng “これ” (cái này (gần người nói)) và “それ” (cái đó (gần người nghe)) đúng trong trao đổi của bài.",
+  "Nghe để trả lời câu hỏi “Theo hội thoại: Đây là gì?”, rồi chỉ ra phần lời nói làm căn cứ.",
+  "Tự viết đoạn có ý chính “Tên” và kiểm lại sự nhất quán với văn bản đọc."
  ],
  "parts": [
   {
    "k": "text",
    "h": "Bối cảnh và cách học",
-   "html": "<p>Chỉ đồ vật đúng khoảng cách người nói/người nghe; hỏi lại chủ sở hữu khi nhặt đồ thất lạc giả.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+   "html": "<p>Chỉ đồ vật đúng khoảng cách người nói/người nghe; hỏi lại chủ sở hữu khi nhặt đồ thất lạc giả.</p>"
   },
   {
    "k": "sounds",
    "h": "Phát âm và nhịp",
-   "html": "<p>Luyện mora trong từ của bài, đặc biệt âm dài, ん và っ. Không áp thanh điệu tiếng Việt; nghe câu trọn cụm và giữ phần kết lịch sự.</p>",
+   "html": "<p>ほん cần nhịp ho-n; ノート kéo dài o nhờ ー. Đọc かばん với nhịp n cuối rồi mới nối の khi nói かばんの中, không nuốt phần cuối vì thấy hai chữ n.</p>",
    "items": [
     {
-     "sym": "Nhịp câu và âm cuối",
+     "sym": "ほん・ノート・とけい",
      "ex": [
-      "これは 私の 本です。",
-      "それは 何ですか。"
+      "本",
+      "ノート",
+      "時計"
      ],
-     "vi": "Đọc theo cụm ý, giữ đủ độ dài và không bỏ phần phủ định."
+     "vi": "Nghe và đọc đối chiếu 本 (ほん), ノート (のーと), 時計 (とけい). Dùng câu “これは 私の 本です。” để kiểm xem các độ dài âm còn giữ được khi nối vào phát ngôn."
     }
    ]
   },
@@ -180,7 +181,7 @@
   {
    "k": "dialog",
    "h": "Nghe: Đồ vật; これ・それ・あれ và sở hữu の",
-   "note": "Hai học viên của lớp giả Mây Sớm trao đổi; nghe lần đầu lấy ý, lần sau kiểm chi tiết. Không đọc romaji trong âm thanh.",
+   "note": "Trước khi nghe, dự đoán câu trả lời cho “Theo hội thoại: Đây là gì?”. Sau đó ghi nguyên thông tin làm bạn chọn đáp án; lượt nói “私の ノートです。” là một điểm cần kiểm khi nghe lại.",
    "lang": "ja-JP",
    "lines": [
     {
@@ -234,34 +235,34 @@
    ],
    "qs": [
     {
-     "q": "Theo hội thoại: Đây là gì?",
+     "q": "Vở là của ai?",
      "o": [
-      "Không, là sách của Yui.",
-      "Vâng, đồng hồ của phòng học.",
-      "Là vở của tôi."
-     ],
-     "a": 2,
-     "e": "Câu trả lời là 私の ノートです。 → Là vở của tôi."
-    },
-    {
-     "q": "Theo hội thoại: Cuốn sách đó cũng của bạn phải không?",
-     "o": [
-      "Không, là sách của Yui.",
-      "Vâng, đồng hồ của phòng học.",
-      "Là ô của Haru. Túi cũng của Haru."
-     ],
-     "a": 0,
-     "e": "Câu trả lời là いいえ、ゆいさんの 本です。 → Không, là sách của Yui."
-    },
-    {
-     "q": "Theo hội thoại: Cái kia là đồng hồ phải không?",
-     "o": [
-      "Là vở của tôi.",
-      "Vâng, đồng hồ của phòng học.",
-      "Là ô của Haru. Túi cũng của Haru."
+      "Haru",
+      "Người nói",
+      "Yui"
      ],
      "a": 1,
-     "e": "Câu trả lời là はい、教室の 時計です。 → Vâng, đồng hồ của phòng học."
+     "e": "Lượt nói “私の ノートです。” nghĩa là: Là vở của tôi. Nội dung này làm rõ đáp án “Người nói”, không phải hai cách hiểu còn lại."
+    },
+    {
+     "q": "Sách là của ai?",
+     "o": [
+      "Yui",
+      "Người nói",
+      "Haru"
+     ],
+     "a": 0,
+     "e": "Lượt nói “いいえ、ゆいさんの 本です。” nghĩa là: Không, là sách của Yui. Nội dung này làm rõ đáp án “Yui”, không phải hai cách hiểu còn lại."
+    },
+    {
+     "q": "Đồng hồ là của đâu?",
+     "o": [
+      "Haru",
+      "Người nói",
+      "Phòng học"
+     ],
+     "a": 2,
+     "e": "Lượt nói “はい、教室の 時計です。” nghĩa là: Vâng, đồng hồ của phòng học. Nội dung này làm rõ đáp án “Phòng học”, không phải hai cách hiểu còn lại."
     }
    ]
   },
@@ -346,35 +347,35 @@
    "h": "Nói và phản hồi",
    "tasks": [
     {
-     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "p": "Đóng vai hỏi về cái này (gần người nói) và cái đó (gần người nghe). Dùng lượt “これは 何ですか。” để mở đầu, rồi yêu cầu bạn trả lời bằng thông tin của vai đối diện.",
      "model": "これは 何ですか。 それも あなたの 本ですか。 あれは 時計ですか。 この 傘は だれの 傘ですか。",
      "vi": "Đây là gì? Cuốn sách đó cũng của bạn phải không? Cái kia là đồng hồ phải không? Chiếc ô này là của ai?",
-     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+     "tips": "Khi bạn nói “それも あなたの 本ですか。”, người nghe phải nhận ra Cuốn sách đó cũng của bạn phải không?; ghi âm và kiểm xem từ nào đang quyết định nghĩa đó."
     },
     {
-     "p": "Tóm tắt nội dung bài đọc bằng ba câu, sau đó nêu một câu hỏi còn muốn làm rõ.",
+     "p": "Tóm tắt ba ý trong bài đọc để trả lời “Vở của người kể có dấu nhận diện gì?”. Kết thúc bằng câu hỏi về trợ từ chỉ quan hệ nếu phần này chưa được người nghe xác nhận.",
      "model": "教室に 本と ノートが あります。 これは 私の ノートです。名前が あります。 それは ゆいさんの 本です。日本語の 本です。",
      "vi": "Trong lớp có sách và vở. Đây là vở của tôi. Có tên trên đó. Cái đó là sách của Yui. Là sách tiếng Nhật.",
-     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+     "tips": "So phần tóm tắt của bạn với dữ kiện “Tên”; nếu ý này thay đổi, hãy nói rõ đó là tình huống giả định mới."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có kiểm tra",
-   "task": "Viết một đoạn mới theo tình huống bài học; thay ít nhất hai chi tiết, dùng cấu trúc trọng tâm và kiểm thông tin nhất quán.",
+   "task": "Viết một đoạn tình huống có các ý: Đây là sách của tôi. / Cái đó là gì? / Chiếc ô này là ô của ai?. Dùng thêm thông tin của bài đọc để nối các ý, không chỉ chép ba câu rời.",
    "min": 80,
    "model": "教室に 本と ノートが あります。 これは 私の ノートです。名前が あります。 それは ゆいさんの 本です。日本語の 本です。 あれは 教室の 時計です。学生の 時計ではありません。 この 傘は はるさんの 傘です。 かばんも はるさんのです。 私は「これは 何ですか」と 聞きます。 ゆいさんは「だれの ノートですか」と 聞きます。",
    "modelVi": "Trong lớp có sách và vở. Đây là vở của tôi. Có tên trên đó. Cái đó là sách của Yui. Là sách tiếng Nhật. Cái kia là đồng hồ của lớp, không phải của sinh viên. Chiếc ô này là của Haru. Túi cũng là của Haru. Tôi hỏi “Đây là gì?”. Yui hỏi “Vở của ai?”.",
    "tips": [
-    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
-    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+    "Lập sơ đồ ai làm gì trong câu “これは 私の 本です。”, rồi dùng cùng quan hệ chủ thể khi nối sang đoạn của bạn.",
+    "Đối chiếu “それは 何ですか。” với mẫu cuối “この 傘は だれの 傘ですか。”; chọn phần kết câu phù hợp trước khi sửa chính tả."
    ],
    "checklist": [
-    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
-    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
-    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
-    "Câu kết thúc và mức lịch sự nhất quán"
+    "Người đọc nhận ra đúng nghĩa của “これ”, thay vì chỉ thấy từ được chèn vào câu.",
+    "Quan hệ ý trong “これは 私の 本です。” vẫn đúng khi bạn thay dữ kiện.",
+    "Các ý cái đó (gần người nghe) và trợ từ chỉ quan hệ không bị lẫn vai hoặc phạm vi.",
+    "Đoạn kết không trái với dữ kiện trả lời câu hỏi “Vở của người kể có dấu nhận diện gì?”."
    ]
   }
  ],
@@ -511,7 +512,7 @@
      "túi/cặp"
     ]
    ],
-   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+   "e": "Đối chiếu các cặp “本 → sách” và “かばん → túi/cặp”; phân biệt nghĩa trong tình huống, không ghép chỉ dựa vào hình chữ."
   },
   {
    "t": "mc",
@@ -538,52 +539,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ, bảng cấu trúc bài này, loa/giọng đọc tiếng Nhật, phiếu thông tin khác nhau cho từng cặp. Không dùng dữ liệu cá nhân thật.",
+  "prep": "Chuẩn bị thẻ “これ”, “それ”, “の”, bản hội thoại che lượt trả lời và phiếu đọc có câu hỏi “Vở của người kể có dấu nhận diện gì?”.",
   "steps": [
    {
     "t": "10'",
-    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+    "do": "Gợi tình huống bằng câu “これは 何ですか。”. Cho cặp học viên nói mình muốn biết điều gì trước khi mở lời đáp."
    },
    {
     "t": "20'",
-    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+    "do": "Cho so thẻ “これ” với “それ”: học viên diễn đạt nghĩa cái này (gần người nói) và cái đó (gần người nghe), rồi đặt mỗi từ vào một lượt trao đổi."
    },
    {
     "t": "25'",
-    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+    "do": "Viết hai câu “これは 私の 本です。” và “それは 何ですか。” cạnh nhau. Học viên giải thích khác biệt ý, sau đó thay một thành phần mà vẫn giữ cấu trúc vừa phân tích."
    },
    {
     "t": "20'",
-    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+    "do": "Che lời thoại và giao câu hỏi “Theo hội thoại: Đây là gì?”. Sau hai lượt nghe, yêu cầu nêu bằng chứng thay vì đoán theo từ khóa đơn lẻ."
    },
    {
     "t": "15'",
-    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+    "do": "Cho đổi vai quanh lượt “あれは 時計ですか。”. Người nghe hỏi lại thông tin trước khi chuyển sang lời đáp, giáo viên ghi một chỗ gây hiểu nhầm để chữa cuối hoạt động."
    },
    {
     "t": "15'",
-    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+    "do": "Đầu buổi sau, yêu cầu dựng lại ý “Chiếc ô này là ô của ai?” không nhìn chữ Nhật. So lời nói của học viên với câu đích và chữa phần làm thay đổi quan hệ ý."
    },
    {
     "t": "20'",
-    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+    "do": "Đọc để giải quyết câu hỏi “Vở của người kể có dấu nhận diện gì?”. Mỗi nhóm đánh dấu đoạn chứng minh và giải thích vì sao hai lựa chọn còn lại không khớp."
    },
    {
     "t": "20'",
-    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+    "do": "Giao nhiệm vụ nói có thông tin cái này (gần người nói) ở một vai và trợ từ chỉ quan hệ ở vai kia. Hai bên chỉ hoàn thành phiếu khi đã hỏi để hiểu dữ kiện của nhau."
    },
    {
     "t": "20'",
-    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+    "do": "Viết đoạn nối ý “Đây là sách của tôi.” với “Chiếc ô này là ô của ai?”. Đổi bài và kiểm chủ thể, mốc thời gian cùng từ phủ định trước khi góp ý độ tự nhiên."
    },
    {
     "t": "15'",
-    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+    "do": "Chữa bài tự chấm từ cặp “それ” và “の”. Mỗi học viên ghi một câu sửa của chính mình và nêu cách sẽ nhận ra lỗi đó trong lần dùng sau."
    }
   ],
   "games": [
-   "Ghép thẻ câu với tình huống: mỗi nhóm phải giải thích một cặp và chỉ ra từ/cấu trúc quyết định.",
-   "Thông tin lệch: mỗi bạn giữ một phần dữ kiện; phải hỏi lại thay vì đoán để hoàn thành phiếu."
+   "Khoảng trống thông tin: một bạn chỉ thấy “これは 何ですか。”, bạn kia giữ câu trả lời. Họ hỏi lại để hoàn thành thông tin về cái này (gần người nói) trước khi đổi vai.",
+   "Chọn và bảo vệ đáp án: các nhóm nhận câu hỏi “Vở của người kể có dấu nhận diện gì?”, chọn một phương án rồi tìm chi tiết đủ bác hai phương án nhiễu."
   ],
   "errors": [
    "Nói このです mà không có danh từ: dùng これです hoặc この本です.",
@@ -591,6 +592,6 @@
    "Đọc 何 lúc nào cũng nani: trong 何ですか thường là nan desu ka; học cách đọc theo cụm.",
    "Coi mọi の là “của”: 日本語の本 là sách tiếng Nhật, quan hệ loại chứ không phải chủ sở hữu."
   ],
-  "homework": "Ôn 12–20 thẻ theo lịch 1–3–7 ngày; nghe chép câu đã chọn, ghi âm hai lượt nói và viết đoạn mới thay ít nhất hai chi tiết."
+  "homework": "Ôn “これ”, “それ” và “の” bằng câu mới có nghĩa. Ghi âm câu “これは 私の 本です。”, nghe lại phần kết rồi viết lời giải thích cho câu hỏi “Vở của người kể có dấu nhận diện gì?” bằng tiếng Việt."
  }
 }

@@ -3,16 +3,32 @@
  "title": "Kính ngữ cơ bản trong dịch vụ",
  "sub": "ゆいと 申します。",
  "goals": [
-  "Hiểu và dùng đúng Kính ngữ cơ bản trong dịch vụ",
-  "Đọc/nghe phân biệt ít nhất 12 từ/cụm của tình huống",
-  "Hỏi và trả lời ba thông tin cụ thể bằng mức lịch sự phù hợp",
-  "Viết đoạn mới và tự sửa lỗi theo checklist"
+  "Phân tích cách dùng trong câu “ゆいと 申します。” và tạo một câu khác giữ đúng quan hệ ý.",
+  "Dùng “お客様” (quý khách) và “受付” (tiếp tân) đúng trong trao đổi của bài.",
+  "Nghe để trả lời câu hỏi “Theo hội thoại: Xin chào. Tôi là Yui đã đặt hẹn.”, rồi chỉ ra phần lời nói làm căn cứ.",
+  "Tự viết đoạn có ý chính “と申します” và kiểm lại sự nhất quán với văn bản đọc."
  ],
  "parts": [
   {
    "k": "text",
    "h": "Bối cảnh và cách học",
-   "html": "<p>Chọn phía hành động trước khi chọn kính ngữ; nhập vai tiếp tân với thông tin đặt hẹn giả.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+   "html": "<p>Chọn phía hành động trước khi chọn kính ngữ; nhập vai tiếp tân với thông tin đặt hẹn giả.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>お客様 có o-kya-ku-sa-ma năm mora; 少々 là sho-o-sho-o bốn mora, không rút hai trường âm. いらっしゃる có nhịp giữ trước sha; kính ngữ dài không có nghĩa phải đọc nhanh đến mức mất các phần quan trọng.</p>",
+   "items": [
+    {
+     "sym": "おきゃくさま・しょうしょう",
+     "ex": [
+      "お客様",
+      "少々",
+      "いらっしゃる"
+     ],
+     "vi": "Nghe và đọc đối chiếu お客様 (おきゃくさま), 少々 (しょうしょう), いらっしゃる (いらっしゃる). Dùng câu “ゆいと 申します。” để kiểm xem các độ dài âm còn giữ được khi nối vào phát ngôn."
+    }
+   ]
   },
   {
    "k": "words",
@@ -31,16 +47,16 @@
      "kana": "うけつけ",
      "romaji": "uketsuke",
      "vi": "tiếp tân",
-     "ex": "明日 受付へ 伺います。",
-     "exVi": "Ngày mai tôi tới bàn tiếp nhận (khiêm nhường)."
+     "ex": "受付で名前を確認しました。",
+     "exVi": "Tôi đã xác nhận tên ở quầy tiếp nhận."
     },
     {
      "w": "担当者",
      "kana": "たんとうしゃ",
      "romaji": "tantousha",
      "vi": "người phụ trách",
-     "ex": "担当者は いらっしゃいますか。",
-     "exVi": "Người phụ trách có ở đây không? (tôn kính)."
+     "ex": "担当者に確認してから送ります。",
+     "exVi": "Tôi hỏi phụ trách rồi mới gửi."
     },
     {
      "w": "いらっしゃる",
@@ -87,8 +103,8 @@
      "kana": "あんない",
      "romaji": "annai",
      "vi": "hướng dẫn",
-     "ex": "案内の 紙を いただけますか。",
-     "exVi": "Tôi xin tờ hướng dẫn được không?"
+     "ex": "入口に新しい案内を置きます。",
+     "exVi": "Tôi đặt chỉ dẫn mới ở cửa vào."
     },
     {
      "w": "予約",
@@ -111,8 +127,8 @@
      "kana": "かくにん",
      "romaji": "kakunin",
      "vi": "xác nhận",
-     "ex": "いらっしゃいませ。お名前を 確認しても よろしいですか。",
-     "exVi": "Xin chào quý khách. Tôi xác nhận tên được không?"
+     "ex": "記載した時刻を確認します。",
+     "exVi": "Tôi kiểm lại giờ đã ghi."
     }
    ]
   },
@@ -165,7 +181,7 @@
   {
    "k": "dialog",
    "h": "Nghe: Kính ngữ cơ bản trong dịch vụ",
-   "note": "Hai học viên của lớp giả Mây Sớm trao đổi; nghe lần đầu lấy ý, lần sau kiểm chi tiết. Không đọc romaji trong âm thanh.",
+   "note": "Trước khi nghe, dự đoán câu trả lời cho “Theo hội thoại: Xin chào. Tôi là Yui đã đặt hẹn.”. Sau đó ghi nguyên thông tin làm bạn chọn đáp án; lượt nói “いらっしゃいませ。お名前を 確認しても よろしいですか。” là một điểm cần kiểm khi nghe lại.",
    "lang": "ja-JP",
    "lines": [
     {
@@ -219,34 +235,34 @@
    ],
    "qs": [
     {
-     "q": "Theo hội thoại: Xin chào. Tôi là Yui đã đặt hẹn.",
+     "q": "Người khách giới thiệu tên thế nào?",
      "o": [
-      "Xin chào quý khách. Tôi xác nhận tên được không?",
-      "Tôi xin kiểm tra, quý khách vui lòng chờ một chút.",
-      "Tôi đã hiểu. Tôi kiểm cả hẹn ngày mai."
+      "Tự dùng tôn kính cho mình",
+      "Không nói tên",
+      "Tự xưng Yui bằng khiêm nhường"
      ],
-     "a": 0,
-     "e": "Câu trả lời là いらっしゃいませ。お名前を 確認しても よろしいですか。 → Xin chào quý khách. Tôi xác nhận tên được không?"
+     "a": 2,
+     "e": "Lượt nói “こんにちは。予約した ゆいと 申します。” nghĩa là: Xin chào. Tôi là Yui đã đặt hẹn. Nội dung này làm rõ đáp án “Tự xưng Yui bằng khiêm nhường”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Vâng. Người phụ trách có ở đây không?",
+     "q": "Nhân viên làm gì khi khách hỏi phụ trách?",
      "o": [
-      "Vâng, tôi mang tài liệu dành cho quý khách tới.",
-      "Tôi xin kiểm tra, quý khách vui lòng chờ một chút.",
-      "Tôi đã hiểu. Tôi kiểm cả hẹn ngày mai."
+      "Đuổi khách về",
+      "Kiểm rồi xin khách chờ",
+      "Khẳng định ngay không kiểm"
      ],
      "a": 1,
-     "e": "Câu trả lời là 確認いたしますので、少々 お待ちください。 → Tôi xin kiểm tra, quý khách vui lòng chờ một chút."
+     "e": "Lượt nói “確認いたしますので、少々 お待ちください。” nghĩa là: Tôi xin kiểm tra, quý khách vui lòng chờ một chút. Nội dung này làm rõ đáp án “Kiểm rồi xin khách chờ”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Ngày mai tôi cũng định tới đây.",
+     "q": "Khách xin nhận gì?",
      "o": [
-      "Tôi đã hiểu. Tôi kiểm cả hẹn ngày mai.",
-      "Xin chào quý khách. Tôi xác nhận tên được không?",
-      "Vâng, tôi mang tài liệu dành cho quý khách tới."
+      "Tài liệu hướng dẫn",
+      "Hồ sơ người khác",
+      "Mật khẩu thật"
      ],
      "a": 0,
-     "e": "Câu trả lời là 承知しました。明日の ご予約も 確認します。 → Tôi đã hiểu. Tôi kiểm cả hẹn ngày mai."
+     "e": "Lượt nói “案内の 紙を いただけますか。” nghĩa là: Tôi xin tờ hướng dẫn được không? Nội dung này làm rõ đáp án “Tài liệu hướng dẫn”, không phải hai cách hiểu còn lại."
     }
    ]
   },
@@ -331,35 +347,35 @@
    "h": "Nói và phản hồi",
    "tasks": [
     {
-     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "p": "Đóng vai hỏi về quý khách và tiếp tân. Dùng lượt “こんにちは。予約した ゆいと 申します。” để mở đầu, rồi yêu cầu bạn trả lời bằng thông tin của vai đối diện.",
      "model": "こんにちは。予約した ゆいと 申します。 はい。担当者は いらっしゃいますか。 明日も こちらへ 伺う 予定です。 案内の 紙を いただけますか。",
      "vi": "Xin chào. Tôi là Yui đã đặt hẹn. Vâng. Người phụ trách có ở đây không? Ngày mai tôi cũng định tới đây. Tôi xin tờ hướng dẫn được không?",
-     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+     "tips": "Khi bạn nói “はい。担当者は いらっしゃいますか。”, người nghe phải nhận ra Vâng. Người phụ trách có ở đây không?; ghi âm và kiểm xem từ nào đang quyết định nghĩa đó."
     },
     {
-     "p": "Tóm tắt nội dung bài đọc bằng ba câu, sau đó nêu một câu hỏi còn muốn làm rõ.",
+     "p": "Tóm tắt ba ý trong bài đọc để trả lời “Người kể nói tên bằng gì?”. Kết thúc bằng câu hỏi về xác nhận nếu phần này chưa được người nghe xác nhận.",
      "model": "地域の 交流室に 初めて 伺うことになり、私は 受付での 言い方を 練習しました。 「ゆいと 申します」と 自分の 名前を 伝え、予約した 時間を 確認します。 担当者について 聞くときは「いらっしゃいますか」を 使いますが、自分の 行動を 高める 言い方には しません。",
      "vi": "Lần đầu tới phòng giao lưu khu dân cư, tôi luyện cách nói ở tiếp tân. Tôi nói tên “Tôi là Yui”, xác nhận giờ đã đặt. Khi hỏi phụ trách dùng いらっしゃいますか, không dùng nâng hành động của mình.",
-     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+     "tips": "So phần tóm tắt của bạn với dữ kiện “と申します”; nếu ý này thay đổi, hãy nói rõ đó là tình huống giả định mới."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có kiểm tra",
-   "task": "Viết một đoạn mới theo tình huống bài học; thay ít nhất hai chi tiết, dùng cấu trúc trọng tâm và kiểm thông tin nhất quán.",
+   "task": "Viết một đoạn tình huống có các ý: Tôi tên Yui (khiêm nhường). / Người phụ trách có ở đây không? (tôn kính). / Xin vui lòng chờ một chút.. Dùng thêm thông tin của bài đọc để nối các ý, không chỉ chép ba câu rời.",
    "min": 160,
    "model": "地域の 交流室に 初めて 伺うことになり、私は 受付での 言い方を 練習しました。 「ゆいと 申します」と 自分の 名前を 伝え、予約した 時間を 確認します。 担当者について 聞くときは「いらっしゃいますか」を 使いますが、自分の 行動を 高める 言い方には しません。 受付の 人は「少々 お待ちください」と 案内し、確認してから 部屋を 教えてくれました。 別の お客様が 来たときも、名前と 予約だけを 静かに 確認していました。 私は 必要以上に 難しい 敬語を 重ねるより、聞き取りやすく 話すことを 意識しました。 帰る 前に 明日の 予定を 伝え、案内の 資料を 受け取りました。 敬意は 形だけでなく、相手を 待たせる 理由と 次の 行動を 明確にすることにも 表れます。",
    "modelVi": "Lần đầu tới phòng giao lưu khu dân cư, tôi luyện cách nói ở tiếp tân. Tôi nói tên “Tôi là Yui”, xác nhận giờ đã đặt. Khi hỏi phụ trách dùng いらっしゃいますか, không dùng nâng hành động của mình. Nhân viên mời chờ, kiểm xong chỉ phòng. Khi khách khác tới cũng chỉ xác nhận tên và hẹn nhẹ nhàng. Tôi ưu tiên nói dễ nghe hơn chồng quá nhiều kính ngữ khó. Trước khi về, tôi báo lịch mai, nhận tài liệu hướng dẫn. Sự tôn trọng còn nằm ở nói rõ lý do chờ và bước tiếp.",
    "tips": [
-    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
-    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+    "Lập sơ đồ ai làm gì trong câu “ゆいと 申します。”, rồi dùng cùng quan hệ chủ thể khi nối sang đoạn của bạn.",
+    "Đối chiếu “担当者は いらっしゃいますか。” với mẫu cuối “少々 お待ちください。”; chọn phần kết câu phù hợp trước khi sửa chính tả."
    ],
    "checklist": [
-    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
-    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
-    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
-    "Câu kết thúc và mức lịch sự nhất quán"
+    "Người đọc nhận ra đúng nghĩa của “お客様”, thay vì chỉ thấy từ được chèn vào câu.",
+    "Quan hệ ý trong “ゆいと 申します。” vẫn đúng khi bạn thay dữ kiện.",
+    "Các ý tiếp tân và xác nhận không bị lẫn vai hoặc phạm vi.",
+    "Đoạn kết không trái với dữ kiện trả lời câu hỏi “Người kể nói tên bằng gì?”."
    ]
   }
  ],
@@ -494,7 +510,7 @@
      "hướng dẫn"
     ]
    ],
-   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+   "e": "Đối chiếu các cặp “申す → nói/tên là (khiêm nhường)” và “案内 → hướng dẫn”; phân biệt nghĩa trong tình huống, không ghép chỉ dựa vào hình chữ."
   },
   {
    "t": "mc",
@@ -521,52 +537,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ, bảng cấu trúc bài này, loa/giọng đọc tiếng Nhật, phiếu thông tin khác nhau cho từng cặp. Không dùng dữ liệu cá nhân thật.",
+  "prep": "Chuẩn bị thẻ “お客様”, “受付”, “確認”, bản hội thoại che lượt trả lời và phiếu đọc có câu hỏi “Người kể nói tên bằng gì?”.",
   "steps": [
    {
     "t": "10'",
-    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+    "do": "Gợi tình huống bằng câu “こんにちは。予約した ゆいと 申します。”. Cho cặp học viên nói mình muốn biết điều gì trước khi mở lời đáp."
    },
    {
     "t": "20'",
-    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+    "do": "Cho so thẻ “お客様” với “受付”: học viên diễn đạt nghĩa quý khách và tiếp tân, rồi đặt mỗi từ vào một lượt trao đổi."
    },
    {
     "t": "25'",
-    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+    "do": "Viết hai câu “ゆいと 申します。” và “担当者は いらっしゃいますか。” cạnh nhau. Học viên giải thích khác biệt ý, sau đó thay một thành phần mà vẫn giữ cấu trúc vừa phân tích."
    },
    {
     "t": "20'",
-    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+    "do": "Che lời thoại và giao câu hỏi “Theo hội thoại: Xin chào. Tôi là Yui đã đặt hẹn.”. Sau hai lượt nghe, yêu cầu nêu bằng chứng thay vì đoán theo từ khóa đơn lẻ."
    },
    {
     "t": "15'",
-    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+    "do": "Cho đổi vai quanh lượt “明日も こちらへ 伺う 予定です。”. Người nghe hỏi lại thông tin trước khi chuyển sang lời đáp, giáo viên ghi một chỗ gây hiểu nhầm để chữa cuối hoạt động."
    },
    {
     "t": "15'",
-    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+    "do": "Đầu buổi sau, yêu cầu dựng lại ý “Xin vui lòng chờ một chút.” không nhìn chữ Nhật. So lời nói của học viên với câu đích và chữa phần làm thay đổi quan hệ ý."
    },
    {
     "t": "20'",
-    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+    "do": "Đọc để giải quyết câu hỏi “Người kể nói tên bằng gì?”. Mỗi nhóm đánh dấu đoạn chứng minh và giải thích vì sao hai lựa chọn còn lại không khớp."
    },
    {
     "t": "20'",
-    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+    "do": "Giao nhiệm vụ nói có thông tin quý khách ở một vai và xác nhận ở vai kia. Hai bên chỉ hoàn thành phiếu khi đã hỏi để hiểu dữ kiện của nhau."
    },
    {
     "t": "20'",
-    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+    "do": "Viết đoạn nối ý “Tôi tên Yui (khiêm nhường).” với “Xin vui lòng chờ một chút.”. Đổi bài và kiểm chủ thể, mốc thời gian cùng từ phủ định trước khi góp ý độ tự nhiên."
    },
    {
     "t": "15'",
-    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+    "do": "Chữa bài tự chấm từ cặp “受付” và “確認”. Mỗi học viên ghi một câu sửa của chính mình và nêu cách sẽ nhận ra lỗi đó trong lần dùng sau."
    }
   ],
   "games": [
-   "Ghép thẻ câu với tình huống: mỗi nhóm phải giải thích một cặp và chỉ ra từ/cấu trúc quyết định.",
-   "Thông tin lệch: mỗi bạn giữ một phần dữ kiện; phải hỏi lại thay vì đoán để hoàn thành phiếu."
+   "Khoảng trống thông tin: một bạn chỉ thấy “こんにちは。予約した ゆいと 申します。”, bạn kia giữ câu trả lời. Họ hỏi lại để hoàn thành thông tin về quý khách trước khi đổi vai.",
+   "Chọn và bảo vệ đáp án: các nhóm nhận câu hỏi “Người kể nói tên bằng gì?”, chọn một phương án rồi tìm chi tiết đủ bác hai phương án nhiễu."
   ],
   "errors": [
    "Nói 私はいらっしゃいます: dùng tôn kính sai phía mình.",
@@ -574,6 +590,6 @@
    "Chồng nhiều お/ご và thể tôn kính cho chắc: có thể thành không tự nhiên.",
    "Nâng người cùng công ty khi nói với khách: xét nhóm trong/ngoài và vai giao tiếp."
   ],
-  "homework": "Ôn 12–20 thẻ theo lịch 1–3–7 ngày; nghe chép câu đã chọn, ghi âm hai lượt nói và viết đoạn mới thay ít nhất hai chi tiết."
+  "homework": "Ôn “お客様”, “受付” và “確認” bằng câu mới có nghĩa. Ghi âm câu “ゆいと 申します。”, nghe lại phần kết rồi viết lời giải thích cho câu hỏi “Người kể nói tên bằng gì?” bằng tiếng Việt."
  }
 }

@@ -1,184 +1,889 @@
 {
-  "no": 11,
-  "title": "Kỹ năng nghe: ghi chú, nhận diện paraphrase, bẫy số & tên",
-  "sub": "Sorry – was that fifteen or fifty?",
-  "goals": [
-    "Dự đoán loại thông tin cần điền trước khi nghe (số, tên, danh từ, tính từ) và tuân thủ giới hạn từ",
-    "Nghe chính xác số, ngày, giờ, giá tiền, số điện thoại; đánh vần và nghe đánh vần tên, chữ cái dễ nhầm",
-    "Nhận diện 5 kiểu paraphrase: đồng nghĩa, đổi loại từ, chủ động ↔ bị động, phủ định từ trái nghĩa, khái quát ↔ cụ thể",
-    "Nhận ra bẫy ‘đổi ý’ (actually, sorry I mean, no wait…) và phương án gây nhiễu",
-    "Ghi chú nhanh bằng ký hiệu, viết tắt và viết lại ghi chú thành đoạn tóm tắt 120–150 từ"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng: tình huống nghe thường gặp & thuật ngữ kỹ năng", "items": [
-      {"w": "enrol", "ipa": "/ɪnˈrəʊl/", "pos": "v", "vi": "đăng ký học (enrol on/in a course; Mỹ: enroll)", "ex": "I'd like to enrol on the evening course.", "exVi": "Tôi muốn đăng ký khoá buổi tối."},
-      {"w": "registration", "ipa": "/ˌredʒɪˈstreɪʃn/", "pos": "n", "vi": "sự đăng ký, thủ tục đăng ký", "ex": "Registration closes on Friday.", "exVi": "Hạn đăng ký kết thúc vào thứ Sáu."},
-      {"w": "deposit", "ipa": "/dɪˈpɒzɪt/", "pos": "n", "vi": "tiền đặt cọc", "ex": "You need to pay a deposit of 500,000 dong.", "exVi": "Bạn cần đặt cọc 500.000 đồng."},
-      {"w": "refund", "ipa": "/ˈriːfʌnd/", "pos": "n", "vi": "tiền hoàn lại (động từ /rɪˈfʌnd/: hoàn tiền)", "ex": "If you cancel a week before, you'll get a full refund.", "exVi": "Nếu huỷ trước một tuần, bạn được hoàn toàn bộ tiền."},
-      {"w": "accommodation", "ipa": "/əˌkɒməˈdeɪʃn/", "pos": "n", "vi": "chỗ ở (không đếm được; chú ý 2 chữ c, 2 chữ m)", "ex": "The price includes accommodation and breakfast.", "exVi": "Giá đã gồm chỗ ở và bữa sáng."},
-      {"w": "fully booked", "ipa": "/ˌfʊli ˈbʊkt/", "pos": "adj", "vi": "kín chỗ, hết chỗ", "ex": "I'm afraid the Saturday class is fully booked.", "exVi": "Rất tiếc lớp thứ Bảy đã kín chỗ."},
-      {"w": "in advance", "ipa": "/ɪn ədˈvɑːns/", "pos": "phr", "vi": "trước (thời hạn), đặt trước", "ex": "Tickets must be booked in advance.", "exVi": "Vé phải được đặt trước."},
-      {"w": "venue", "ipa": "/ˈvenjuː/", "pos": "n", "vi": "địa điểm tổ chức (sự kiện, hội thảo)", "ex": "The venue has been changed to the main hall.", "exVi": "Địa điểm đã đổi sang hội trường chính."},
-      {"w": "postpone", "ipa": "/pəˈspəʊn/", "pos": "v", "vi": "hoãn lại", "ex": "The trip was postponed because of the storm.", "exVi": "Chuyến đi bị hoãn vì bão."},
-      {"w": "alternatively", "ipa": "/ɔːlˈtɜːnətɪvli/", "pos": "adv", "vi": "hoặc là, cách khác là", "ex": "You can pay online. Alternatively, you can pay at reception.", "exVi": "Bạn có thể trả online. Hoặc trả ở quầy lễ tân."},
-      {"w": "on second thoughts", "ipa": "/ɒn ˌsekənd ˈθɔːts/", "pos": "phr", "vi": "nghĩ lại thì (tín hiệu ĐỔI Ý)", "ex": "I'll have the fish. On second thoughts, I'll have the chicken.", "exVi": "Tôi lấy cá. À nghĩ lại, tôi lấy gà."},
-      {"w": "available", "ipa": "/əˈveɪləbl/", "pos": "adj", "vi": "còn trống, có sẵn, rảnh", "ex": "Is there a room available for next weekend?", "exVi": "Cuối tuần sau còn phòng trống không?"},
-      {"w": "discount", "ipa": "/ˈdɪskaʊnt/", "pos": "n", "vi": "sự giảm giá (a 10% discount)", "ex": "Students get a ten percent discount.", "exVi": "Sinh viên được giảm 10%."},
-      {"w": "membership", "ipa": "/ˈmembəʃɪp/", "pos": "n", "vi": "tư cách hội viên, thẻ hội viên", "ex": "Annual membership costs 1.2 million dong.", "exVi": "Thẻ hội viên năm giá 1,2 triệu đồng."},
-      {"w": "extension", "ipa": "/ɪkˈstenʃn/", "pos": "n", "vi": "số máy lẻ (điện thoại); sự gia hạn", "ex": "Please call extension 214.", "exVi": "Vui lòng gọi số máy lẻ 214."},
-      {"w": "synonym", "ipa": "/ˈsɪnənɪm/", "pos": "n", "vi": "từ đồng nghĩa", "ex": "‘Expensive’ and ‘costly’ are synonyms.", "exVi": "‘Expensive’ và ‘costly’ là từ đồng nghĩa."},
-      {"w": "paraphrase", "ipa": "/ˈpærəfreɪz/", "pos": "v", "vi": "diễn đạt lại bằng từ khác (cũng là danh từ)", "ex": "The recording rarely uses the same words as the question; it paraphrases them.", "exVi": "Bài nghe hiếm khi dùng đúng từ trong câu hỏi; nó diễn đạt lại."},
-      {"w": "distractor", "ipa": "/dɪˈstræktə(r)/", "pos": "n", "vi": "phương án/thông tin gây nhiễu", "ex": "The first price you hear is often a distractor.", "exVi": "Mức giá đầu tiên bạn nghe thấy thường là bẫy gây nhiễu."},
-      {"w": "abbreviation", "ipa": "/əˌbriːviˈeɪʃn/", "pos": "n", "vi": "chữ viết tắt", "ex": "Use abbreviations to take notes quickly.", "exVi": "Dùng chữ viết tắt để ghi chép nhanh."},
-      {"w": "jot down", "ipa": "/ˌdʒɒt ˈdaʊn/", "pos": "phr", "vi": "ghi vội, ghi nhanh", "ex": "Let me jot down your phone number.", "exVi": "Để tôi ghi nhanh số điện thoại của bạn."}
-    ]},
-    {"k": "grammar", "h": "Paraphrase – 5 cách bài nghe “đổi lời” câu hỏi", "html": "<p>Đề nghe (và đọc) IELTS hầu như <b>không dùng lại đúng từ</b> trong câu hỏi. Thông tin được <b>diễn đạt lại</b>. Nếu chỉ chờ nghe đúng từ khoá, bạn sẽ bỏ lỡ đáp án – hoặc rơi vào bẫy.</p>", "table": [
-      ["Kiểu paraphrase", "Câu hỏi viết", "Bạn nghe thấy"],
-      ["Từ đồng nghĩa", "The course is expensive.", "The fees are quite high."],
-      ["Đổi loại từ", "The museum was renovated.", "The renovation of the museum…"],
-      ["Chủ động ↔ bị động", "Students must pay a deposit.", "A deposit is required from all students."],
-      ["Phủ định của từ trái nghĩa", "The room was not large.", "It was rather small."],
-      ["Khái quát ↔ cụ thể", "means of transport", "the bus, the train, a taxi"]
-    ], "ex": [
-      {"t": "Question: When does the course start? → Audio: The first class is on the third of March.", "vi": "Câu hỏi: Khoá học bắt đầu khi nào? → Bài nghe: Buổi học đầu tiên là ngày 3 tháng 3. (start = first class)"},
-      {"t": "Question: What is NOT included in the price? → Audio: Lunch is provided, and so is the coach, but you'll need to pay for the entrance ticket yourself.", "vi": "Câu hỏi: Cái gì KHÔNG bao gồm trong giá? → Bài nghe: Có bữa trưa, có xe đưa đón, nhưng bạn phải tự trả vé vào cửa."},
-      {"t": "Question: The hotel is located near the ______. → Audio: It's just a two-minute walk from the railway station.", "vi": "Câu hỏi: Khách sạn nằm gần… → Bài nghe: Chỉ cách ga tàu hai phút đi bộ. (near = a two-minute walk from)"}
-    ], "tips": [
-      "Nghe thấy <b>đúng y</b> từ trong câu hỏi? Cẩn thận – đó có thể là bẫy gây nhiễu, đáp án thật nằm ở câu sau.",
-      "Trong 30 giây trước khi nghe: gạch chân từ khoá, nghĩ trước 2–3 từ đồng nghĩa có thể xuất hiện.",
-      "Khi điền từ, viết <b>đúng từ nghe thấy</b> (đúng chính tả), không tự paraphrase lại theo ý mình."
-    ]},
-    {"k": "grammar", "h": "Bẫy số, tên & “đổi ý”", "html": "<p>Phần 1 bài nghe IELTS (và rất nhiều tình huống thực tế: gọi điện đặt phòng, đăng ký khoá học) kiểm tra khả năng nghe <b>chính xác</b> thông tin chi tiết. Đây là những bẫy phổ biến nhất:</p>", "table": [
-      ["Bẫy", "Ví dụ", "Cách xử lý"],
-      ["-teen / -ty", "thirteen /ˌθɜːˈtiːn/ – thirty /ˈθɜːti/", "-teen nhấn âm sau, có /n/ cuối; -ty nhấn âm đầu"],
-      ["Số 0 & số lặp", "oh-nine-one · double five (55) · triple seven (777)", "0 đọc oh hoặc zero; double = 2 lần, triple = 3 lần"],
-      ["Ngày tháng", "the third of May / May the third", "viết 3 May hoặc 3rd May"],
-      ["Giá tiền", "twelve pounds fifty (£12.50) · four and a half million", "nghe kỹ đơn vị và phần lẻ"],
-      ["Đánh vần", "A /eɪ/ – E /iː/ – I /aɪ/ · G /dʒiː/ – J /dʒeɪ/ · double L", "luyện tên chữ cái"],
-      ["Đổi ý", "It's on Tuesday – sorry, no, Thursday.", "đáp án là thông tin SAU CÙNG"],
-      ["Nhiều con số", "It was 30 last year, but now it's 45.", "xác định đúng thời điểm câu hỏi hỏi"]
-    ], "ex": [
-      {"t": "My surname is Nguyen: N-G-U-Y-E-N.", "vi": "Họ tôi là Nguyễn: N-G-U-Y-E-N. (người nước ngoài hay nhầm thứ tự U-Y)"},
-      {"t": "The number is oh-nine-oh-four, double three, five, seven-one-eight.", "vi": "Số là 0904 335 718."},
-      {"t": "We were going to meet on the fifteenth, but actually it's been moved to the sixteenth.", "vi": "Lẽ ra gặp ngày 15, nhưng thực ra đã dời sang ngày 16. (đáp án: 16)"},
-      {"t": "The tour costs forty-five dollars. Oh, sorry, that's last year's price. It's now fifty.", "vi": "Tour giá 45 đô. À xin lỗi, đó là giá năm ngoái. Giờ là 50. (đáp án: 50)"}
-    ], "tips": [
-      "Chữ cái người Việt hay nhầm khi nghe: <b>A /eɪ/ – E /iː/ – I /aɪ/</b>, <b>G /dʒiː/ – J /dʒeɪ/</b>, <b>V /viː/ – W /ˈdʌbljuː/</b>, <b>R /ɑː(r)/</b>, <b>Y /waɪ/</b>, <b>H /eɪtʃ/</b>.",
-      "Tín hiệu đổi ý: <i>actually, sorry, I mean, no wait, on second thoughts, that's been changed, rather than, it used to be… but now…</i>",
-      "Đọc kỹ giới hạn từ: <b>NO MORE THAN TWO WORDS AND/OR A NUMBER</b> – viết 3 từ là sai dù đúng nghĩa. Danh từ số nhiều mà quên -s cũng bị tính sai."
-    ]},
-    {"k": "text", "h": "Ghi chú nhanh (note-taking) & 30 giây vàng trước khi nghe", "html": "<h4>30 giây vàng trước khi nghe</h4><ol><li>Đọc tiêu đề, đoán bối cảnh (ai gọi cho ai, về việc gì).</li><li>Với mỗi chỗ trống, đoán <b>loại từ</b>: số? tên riêng? danh từ số ít/nhiều? tính từ?</li><li>Gạch chân từ khoá và nghĩ trước từ đồng nghĩa.</li><li>Để ý giới hạn từ.</li></ol><h4>Ký hiệu & viết tắt khi ghi chú</h4><table><tr><th>Ký hiệu</th><th>Nghĩa</th><th>Viết tắt</th><th>Nghĩa</th></tr><tr><td>↑ / ↓</td><td>tăng / giảm</td><td>b/c</td><td>because</td></tr><tr><td>→</td><td>dẫn đến, gây ra</td><td>w/ · w/o</td><td>with · without</td></tr><tr><td>=  /  ≠</td><td>bằng, giống / khác</td><td>e.g.</td><td>for example</td></tr><tr><td>+</td><td>và, thêm</td><td>approx. / ~</td><td>approximately</td></tr><tr><td>∴</td><td>vì vậy</td><td>govt · info · ppl · yr</td><td>government · information · people · year</td></tr></table><p><b>Nguyên tắc:</b> chỉ ghi <b>từ mang nghĩa</b> (danh từ, động từ chính, số liệu), bỏ mạo từ và trợ động từ; mỗi ý một dòng; ghi số và tên NGAY khi nghe. Sau khi nghe, dành 1 phút viết lại cho đầy đủ trước khi quên.</p><p><b>Luyện nghe hằng ngày:</b> <i>dictation</i> (nghe chép chính tả) giúp bắt từ nhỏ; <i>shadowing</i> (nhại theo sau người nói nửa giây) giúp quen tốc độ và nối âm.</p>"},
-    {"k": "dialog", "h": "Nghe: Gọi điện đăng ký khoá IELTS (dạng IELTS Listening Part 1)", "lang": "en-GB", "note": "Anh Khánh gọi tới một trung tâm ngoại ngữ (tên giả định) để đăng ký khoá học. TRƯỚC KHI NGHE: đọc 5 câu hỏi trong 30 giây, đoán loại thông tin. Nghe MỘT lần như phòng thi rồi điền; nghe lại để kiểm tra và tìm các bẫy: ngày khai giảng, học phí, địa chỉ cũ – mới.", "lines": [
-      {"s": "Receptionist", "g": "f", "t": "Good morning, Riverside Language Centre. How can I help you?", "vi": "Chào buổi sáng, Trung tâm Ngoại ngữ Riverside xin nghe. Tôi có thể giúp gì ạ?"},
-      {"s": "Khanh", "g": "m", "t": "Hello. I'd like to enrol on one of your IELTS preparation courses, please.", "vi": "Xin chào. Tôi muốn đăng ký một khoá luyện thi IELTS."},
-      {"s": "Receptionist", "g": "f", "t": "Certainly. We have two options at the moment: a ten-week evening course and an intensive four-week course during the day. Which would you prefer?", "vi": "Vâng. Hiện chúng tôi có hai lựa chọn: khoá buổi tối mười tuần và khoá cấp tốc bốn tuần ban ngày. Anh muốn khoá nào?"},
-      {"s": "Khanh", "g": "m", "t": "I work during the day, so the evening one, please.", "vi": "Ban ngày tôi đi làm, nên cho tôi khoá buổi tối."},
-      {"s": "Receptionist", "g": "f", "t": "No problem. Can I take your name?", "vi": "Được ạ. Cho tôi xin tên anh?"},
-      {"s": "Khanh", "g": "m", "t": "Yes, it's Khanh, K-H-A-N-H, and my surname is Phung, P-H-U-N-G.", "vi": "Vâng, tên tôi là Khánh, K-H-A-N-H, họ là Phùng, P-H-U-N-G."},
-      {"s": "Receptionist", "g": "f", "t": "Thank you. And a contact number?", "vi": "Cảm ơn anh. Còn số điện thoại liên hệ?"},
-      {"s": "Khanh", "g": "m", "t": "It's oh-nine-one-two, four-seven-six, double eight, three.", "vi": "Là 0912 476 883."},
-      {"s": "Receptionist", "g": "f", "t": "And when would you like to start? The next evening course begins on the fifth of March.", "vi": "Anh muốn bắt đầu khi nào? Khoá tối tiếp theo khai giảng ngày 5 tháng 3."},
-      {"s": "Khanh", "g": "m", "t": "Hmm, I'm away on a business trip that week. Is there a later one?", "vi": "Hừm, tuần đó tôi đi công tác. Có khoá nào muộn hơn không?"},
-      {"s": "Receptionist", "g": "f", "t": "Yes, there's another group starting on the nineteenth of March. Classes are on Tuesdays and Thursdays from six thirty to eight thirty.", "vi": "Có, một lớp khác khai giảng ngày 19 tháng 3. Học tối thứ Ba và thứ Năm, từ 6 giờ 30 đến 8 giờ 30."},
-      {"s": "Khanh", "g": "m", "t": "Tuesdays and Thursdays is fine. I'll take that one.", "vi": "Thứ Ba, thứ Năm được. Tôi đăng ký lớp đó."},
-      {"s": "Receptionist", "g": "f", "t": "Great. The course fee is four million five hundred thousand dong.", "vi": "Tốt quá. Học phí là bốn triệu năm trăm nghìn đồng."},
-      {"s": "Khanh", "g": "m", "t": "Oh, the website says four million.", "vi": "Ồ, trên trang web ghi bốn triệu mà."},
-      {"s": "Receptionist", "g": "f", "t": "Ah, that was last year's price, I'm afraid. However, if you pay in full before the end of February, you get a ten percent discount, so it would come to four million and fifty thousand.", "vi": "À, đó là giá năm ngoái ạ. Tuy nhiên nếu anh đóng đủ trước cuối tháng 2, anh được giảm mười phần trăm, tức còn bốn triệu không trăm năm mươi nghìn."},
-      {"s": "Khanh", "g": "m", "t": "That sounds reasonable. Do I need to buy a textbook?", "vi": "Hợp lý đấy. Tôi có cần mua giáo trình không?"},
-      {"s": "Receptionist", "g": "f", "t": "No, all the materials are included in the fee. You just need to bring a notebook. Oh, and there's a free placement test before the course starts. You can take it online or here at the centre.", "vi": "Không ạ, mọi tài liệu đã gồm trong học phí. Anh chỉ cần mang vở. À, có một bài kiểm tra xếp lớp miễn phí trước khi khai giảng. Anh có thể làm online hoặc tại trung tâm."},
-      {"s": "Khanh", "g": "m", "t": "I'll do it at the centre, I think. Where exactly are you? I've only got the old address.", "vi": "Chắc tôi làm tại trung tâm. Trung tâm ở chính xác chỗ nào? Tôi chỉ có địa chỉ cũ."},
-      {"s": "Receptionist", "g": "f", "t": "We moved last year. We're now at 28 Tran Hung Dao Street, on the third floor, opposite the post office.", "vi": "Năm ngoái chúng tôi đã chuyển. Giờ ở số 28 đường Trần Hưng Đạo, tầng ba, đối diện bưu điện."},
-      {"s": "Khanh", "g": "m", "t": "Twenty-eight, opposite the post office. Got it. Thank you very much.", "vi": "Số 28, đối diện bưu điện. Tôi ghi rồi. Cảm ơn chị nhiều."}
-    ], "qs": [
-      {"q": "Surname: ______", "a": "Phung", "e": "Đánh vần “P-H-U-N-G”. Chú ý: Khanh là tên, Phung là họ (surname)."},
-      {"q": "Phone number: ______", "a": "0912476883", "alt": ["0912 476 883", "0912-476-883"], "e": "oh-nine-one-two (0912), four-seven-six (476), double eight (88), three (3)."},
-      {"q": "Start date:", "o": ["5 March", "19 March", "9 March"], "a": 1, "e": "Khoá 5/3 là bẫy – anh Khánh đi công tác tuần đó và chọn lớp “starting on the nineteenth of March”."},
-      {"q": "Fee if paid in full before the end of February: ______ dong", "a": "4,050,000", "alt": ["4050000", "4.050.000", "four million and fifty thousand", "four million fifty thousand"], "e": "4 triệu là giá cũ (bẫy), 4,5 triệu là giá gốc; giảm 10% → 4.050.000 đồng."},
-      {"q": "New address: ______ Tran Hung Dao Street, 3rd floor", "a": "28", "alt": ["twenty-eight", "No. 28", "number 28"], "e": "“We're now at 28 Tran Hung Dao Street, on the third floor” – địa chỉ cũ không được nhắc đến."}
-    ]},
-    {"k": "read", "h": "Đọc: Vì sao kỹ năng nghe lại khó đến vậy?", "title": "Why Is Listening So Hard?", "text": "Ask a group of English learners which skill they find most difficult, and many will choose listening. This is surprising at first. After all, a learner who can read a newspaper article with little difficulty may still struggle to follow a simple conversation at a bus stop. Why should the same words be easy on the page but hard to catch in the air?\n\nPart of the answer lies in the nature of speech itself. When we read, words are separated by clear spaces. When people speak, however, there are no such gaps. Words run into each other, so that ‘did you eat’ may sound like a single word, and ‘want to’ becomes ‘wanna’. Unstressed words such as ‘to’, ‘of’ and ‘have’ are reduced to short, weak sounds. A learner who knows these words perfectly in writing may simply fail to recognise them in fast speech.\n\nAnother difficulty is time. A reader can slow down, go back and read a sentence again. A listener cannot. The speaker controls the speed, and the information disappears as soon as it has been spoken. As a result, listeners must process sounds, grammar and meaning almost instantly. Researchers often describe two kinds of processing that work together: bottom-up processing, in which the listener builds meaning from individual sounds and words, and top-down processing, in which the listener uses background knowledge and context to predict what is likely to come next. Good listeners combine both. Weaker listeners tend to rely too heavily on one of them, either trying to catch every single word or guessing wildly from a few familiar ones.\n\nFortunately, listening can be trained. Dictation forces learners to notice the small words that they normally miss. Shadowing, in which the learner repeats a recording a fraction of a second behind the speaker, improves both pronunciation and the ability to hear connected speech. Finally, prediction before listening makes a real difference. Learners who spend thirty seconds thinking about the topic and the type of information they need tend to perform better than those who start listening cold.\n\nPerhaps the most important change, however, is psychological. Many learners panic when they miss a word and stop listening while they try to work it out. Accepting that it is normal not to understand everything may be the first step towards understanding much more.", "gloss": [
-      {"w": "struggle", "vi": "chật vật, vất vả"},
-      {"w": "catch", "vi": "nghe kịp, bắt được (lời nói)"},
-      {"w": "gap", "vi": "khoảng trống"},
-      {"w": "unstressed", "vi": "không được nhấn trọng âm"},
-      {"w": "recognise", "vi": "nhận ra"},
-      {"w": "process", "vi": "xử lý (thông tin)"},
-      {"w": "background knowledge", "vi": "kiến thức nền"},
-      {"w": "connected speech", "vi": "lời nói liền mạch (có nối âm, nuốt âm)"},
-      {"w": "start cold", "vi": "bắt đầu mà không chuẩn bị gì"},
-      {"w": "panic", "vi": "hoảng loạn"}
-    ], "qs": [
-      {"q": "True / False / Not Given: Some learners who read well still find it hard to understand simple conversations.", "o": ["True", "False", "Not Given"], "a": 0, "e": "Đoạn 1: “a learner who can read a newspaper article with little difficulty may still struggle to follow a simple conversation”."},
-      {"q": "True / False / Not Given: In speech, words are separated by short pauses, just as they are separated by spaces in writing.", "o": ["True", "False", "Not Given"], "a": 1, "e": "Đoạn 2: “When people speak, however, there are no such gaps.” → False."},
-      {"q": "According to the article, top-down processing means…", "o": ["building meaning from individual sounds and words.", "using background knowledge and context to predict what comes next.", "repeating a recording just after the speaker."], "a": 1, "e": "Đoạn 3 định nghĩa rõ top-down. Phương án 1 là bottom-up; phương án 3 là shadowing – các phương án gây nhiễu lấy từ chính bài."},
-      {"q": "True / False / Not Given: Shadowing is more effective than dictation.", "o": ["True", "False", "Not Given"], "a": 2, "e": "Bài nêu tác dụng của từng phương pháp nhưng không so sánh cái nào hiệu quả hơn → Not Given."},
-      {"q": "In shadowing, the learner repeats a recording a ______ of a second behind the speaker.", "a": "fraction", "e": "Đoạn 4: “a fraction of a second behind the speaker” (một tích tắc sau người nói)."},
-      {"q": "What does the writer suggest in the last paragraph?", "o": ["Learners should stop listening when they miss a word.", "Learners should accept that missing some words is normal.", "Learners should only listen to slow recordings."], "a": 1, "e": "“Accepting that it is normal not to understand everything may be the first step…”"}
-    ]},
-    {"k": "speak", "h": "Nói: Đánh vần, đọc số & nói lại từ ghi chú", "tasks": [
-      {"p": "Đánh vần họ tên đầy đủ của bạn, đọc một địa chỉ (số nhà, tên đường) và số điện thoại theo nhóm – như khi gọi điện đăng ký.", "model": "My name is Tran Thi Mai Anh. That's T-R-A-N, then T-H-I, M-A-I, and A-N-H. I live at 45 Le Loi Street: L-E, new word, L-O-I. My phone number is oh-nine-eight-three, double two five, six-one-seven.", "vi": "Tên tôi là Trần Thị Mai Anh… Tôi sống ở số 45 đường Lê Lợi… Số điện thoại 0983 225 617.", "tips": "Đọc số điện thoại theo nhóm 3–4 chữ số, ngừng ngắn giữa các nhóm. Nói rõ ‘new word’ khi tên có nhiều chữ."},
-      {"p": "IELTS Part 1: “Do you like listening to the radio or podcasts?” Trả lời 4–6 câu.", "model": "Yes, I listen to podcasts almost every day, mainly on my way to work. I've got a forty-minute commute, so it's the perfect time. I usually listen to English-language programmes about science or business, partly for the content and partly to improve my listening. At first I could only understand about half of what they said, especially when the speakers talked fast or used a lot of idioms, but now I can follow most episodes without the transcript. I don't really listen to the radio, though. I prefer choosing exactly what I want to hear.", "vi": "Có, tôi nghe podcast gần như mỗi ngày, chủ yếu trên đường đi làm… Lúc đầu tôi chỉ hiểu khoảng một nửa… nhưng giờ có thể theo được phần lớn các tập mà không cần lời thoại."},
-      {"p": "Dựa vào ghi chú sau, nói lại thành 4–5 câu hoàn chỉnh: “Riverside Lang. Centre – IELTS eve. course – 10 wks – Tue + Thu 6.30–8.30 – fee 4.5m (−10% if pay b4 end Feb) – placement test free – new addr: 28 THĐ St, 3rd fl, opp. post office”.", "model": "Riverside Language Centre offers a ten-week IELTS evening course. Classes are on Tuesdays and Thursdays from half past six to half past eight. The fee is four and a half million dong, but students get a ten percent discount if they pay before the end of February. There is a free placement test, and the centre has moved to 28 Tran Hung Dao Street, on the third floor, opposite the post office.", "vi": "Trung tâm Riverside có khoá IELTS buổi tối mười tuần… Học phí 4,5 triệu, giảm 10% nếu đóng trước cuối tháng 2… Trung tâm đã chuyển đến số 28 Trần Hưng Đạo, tầng 3, đối diện bưu điện."}
-    ]},
-    {"k": "write", "h": "Viết: Từ ghi chú thành đoạn tóm tắt", "task": "Dựa vào ghi chú bài giảng dưới đây, viết đoạn tóm tắt 120–150 từ bằng câu hoàn chỉnh, có từ nối. Ghi chú: “Topic: why listening is hard · speech: no gaps betw. words → ‘did you eat’ = 1 word; weak forms (to, of, have) · time: listener ≠ control speed; info disappears → process instantly · 2 types of processing: bottom-up (sounds → words) + top-down (knowledge/context → predict) · weak listeners: rely on 1 type only · training: dictation (small words), shadowing (pron. + connected speech), prediction b4 listening · psychology: don't panic when you miss a word”.", "min": 120, "model": "Listening is often the most difficult skill for language learners, for several reasons. Firstly, spoken English has no clear gaps between words, so a phrase such as ‘did you eat’ may sound like a single word, and short words like ‘to’ or ‘have’ are reduced to weak forms. Secondly, listeners cannot control the speed of speech, and the information disappears immediately, which means it must be processed almost instantly. Effective listeners combine two types of processing: bottom-up, which builds meaning from sounds and words, and top-down, which uses background knowledge and context to predict what will come next. Weaker listeners, by contrast, tend to depend on only one of these. Fortunately, listening can be improved through dictation, shadowing and prediction before listening. Finally, learners should not panic when they miss a word, since accepting that this is normal helps them to understand more.", "modelVi": "Nghe thường là kỹ năng khó nhất với người học ngoại ngữ vì nhiều lý do. Thứ nhất, tiếng Anh nói không có khoảng trống rõ ràng giữa các từ, nên cụm như ‘did you eat’ có thể nghe như một từ, còn các từ ngắn như ‘to’ hay ‘have’ bị đọc yếu. Thứ hai, người nghe không kiểm soát được tốc độ và thông tin biến mất ngay, nên phải xử lý gần như tức thì. Người nghe giỏi kết hợp hai kiểu xử lý: từ dưới lên (xây nghĩa từ âm và từ) và từ trên xuống (dùng kiến thức nền và ngữ cảnh để dự đoán). Ngược lại, người nghe yếu thường chỉ dựa vào một kiểu. May mắn là kỹ năng nghe có thể cải thiện qua chép chính tả, shadowing và dự đoán trước khi nghe. Cuối cùng, người học không nên hoảng khi lỡ một từ, vì chấp nhận điều đó là bình thường giúp họ hiểu được nhiều hơn.", "tips": [
-      "Biến ký hiệu thành ngôn ngữ: → = which means / so; ≠ = cannot / unlike; + = and; b4 = before.",
-      "Thêm từ nối để các ý trong ghi chú thành đoạn văn liền mạch: Firstly, Secondly, by contrast, Fortunately, Finally.",
-      "Tóm tắt không thêm ý kiến cá nhân, không thêm thông tin ngoài ghi chú."
-    ], "checklist": [
-      "Câu đầu nêu chủ đề của bài giảng",
-      "Đủ các ý chính trong ghi chú, không bỏ sót phần luyện tập",
-      "Mọi ký hiệu/viết tắt đã được chuyển thành câu hoàn chỉnh",
-      "≥ 4 từ nối khác nhau",
-      "Không thêm ý kiến cá nhân",
-      "120–150 từ"
-    ]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "The meeting was planned for Tuesday, but it's been moved to Thursday afternoon.", "lang": "en-GB", "q": "When is the meeting now?", "o": ["Tuesday", "Thursday afternoon", "Thursday morning"], "a": 1, "e": "Bẫy đổi lịch: Tuesday là kế hoạch cũ; “it's been moved to Thursday afternoon”."},
-    {"t": "listen", "say": "Tickets cost thirteen pounds for adults and thirty pounds for a family.", "lang": "en-GB", "q": "How much is an adult ticket?", "o": ["£13", "£30", "£3"], "a": 0, "e": "thir-TEEN (nhấn âm sau, có /n/) = 13; THIR-ty = 30 là vé gia đình."},
-    {"t": "listen", "say": "My surname is Vuong. That's V for Victor, U, O, N, G.", "lang": "en-GB", "q": "How is the surname spelled?", "o": ["Wuong", "Vuong", "Buong"], "a": 1, "e": "V /viː/ – ‘V for Victor’ là cách xác nhận chữ cái khi đánh vần qua điện thoại."},
-    {"t": "listen", "say": "The tour was going to leave at eight fifteen, but the driver says we should be ready by quarter to eight.", "lang": "en-GB", "q": "What time should people be ready?", "o": ["8:15", "7:45", "8:45"], "a": 1, "e": "quarter to eight = 7:45. 8:15 là giờ dự kiến cũ (bẫy)."},
-    {"t": "listen", "say": "Lunch is included in the price, and so is the boat trip, but you'll have to pay for entrance to the caves yourself.", "lang": "en-GB", "q": "What is NOT included in the price?", "o": ["Lunch", "The boat trip", "Entrance to the caves"], "a": 2, "e": "‘you'll have to pay for… yourself’ = not included (paraphrase)."},
-    {"t": "mc", "q": "Câu hỏi viết: “The hotel is not cheap.” Bạn có thể nghe thấy câu nào?", "o": ["The hotel is cheap.", "The rooms are rather expensive.", "The hotel is near the beach."], "a": 1, "e": "Paraphrase kiểu ‘phủ định từ trái nghĩa’: not cheap = rather expensive."},
-    {"t": "mc", "q": "Yêu cầu: NO MORE THAN TWO WORDS. Đáp án nào hợp lệ cho “The lecture is held in the ______.”?", "o": ["main hall", "big main hall", "the big main hall"], "a": 0, "e": "Chỉ ‘main hall’ có ≤ 2 từ. Mạo từ ‘the’ đã có sẵn trong câu, không viết lại."},
-    {"t": "mc", "q": "Cụm nào báo hiệu người nói ĐỔI Ý?", "o": ["For example", "Actually, no", "In addition"], "a": 1, "e": "Actually / Sorry, I mean / No, wait / On second thoughts → thông tin sau mới là đáp án."},
-    {"t": "mc", "q": "“double five” nghĩa là:", "o": ["5", "55", "10"], "a": 1, "e": "double = lặp lại 2 lần: double five = 55; triple seven = 777."},
-    {"t": "mc", "q": "Chữ cái nào phát âm là /dʒeɪ/?", "o": ["G", "J", "Y"], "a": 1, "e": "J = /dʒeɪ/; G = /dʒiː/; Y = /waɪ/. Cặp G/J rất hay bị nhầm."},
-    {"t": "fill", "q": "Ký hiệu ↑ trong ghi chú thường nghĩa là ___ (1 từ tiếng Anh).", "a": "increase", "alt": ["rise", "increases", "up", "grow"], "e": "↑ = increase / rise; ↓ = decrease / fall; → = leads to."},
-    {"t": "fill", "q": "The museum was renovated last year. → The ___ of the museum took place last year.", "a": "renovation", "e": "Paraphrase bằng cách đổi loại từ: renovate → renovation (danh từ hoá – Bài 6)."},
-    {"t": "match", "q": "Nối chữ viết tắt với nghĩa:", "pairs": [["b/c", "because"], ["w/o", "without"], ["approx.", "approximately"], ["govt", "government"], ["e.g.", "for example"]], "e": "Viết tắt giúp ghi chú kịp tốc độ nói."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["second", "On", "thoughts,", "I'll", "take", "the evening class."], "a": "On second thoughts, I'll take the evening class.", "e": "On second thoughts = nghĩ lại thì – tín hiệu đổi ý quen thuộc."},
-    {"t": "dict", "say": "The deposit must be paid in advance, and it cannot be refunded.", "lang": "en-GB", "a": "The deposit must be paid in advance, and it cannot be refunded.", "e": "Chú ý âm cuối /d/ trong paid, refunded và cụm in advance /ɪn ədˈvɑːns/."},
-    {"t": "dict", "say": "Sorry, I mean the sixteenth, not the fifteenth.", "lang": "en-GB", "a": "Sorry, I mean the sixteenth, not the fifteenth.", "e": "sixteenth /ˌsɪksˈtiːnθ/, fifteenth /ˌfɪfˈtiːnθ/ – âm /θ/ cuối của số thứ tự."}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Phiếu đăng ký (form) để trống in cho mỗi học viên; bảng tên chữ cái A–Z có phiên âm; danh sách cặp số dễ nhầm (13/30, 14/40, 15/50… 19/90); thẻ ‘đổi ý’ (Actually…, Sorry, I mean…, On second thoughts…) cho trò đóng vai; một đoạn văn 1 phút để học viên ghi chú.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động ‘Bingo số’: học viên kẻ bảng 9 ô, tự điền số trong danh sách 13–90; GV đọc nhanh (thirteen, thirty, seventeen…); ai đủ hàng trước hô Bingo và phải đọc lại đúng các số của mình."},
-      {"t": "15'", "do": "Từ vựng: nhóm tình huống nghe (enrol, registration, deposit, refund, accommodation, fully booked, in advance, venue, postpone, available, discount, membership, extension) và nhóm kỹ năng (synonym, paraphrase, distractor, abbreviation, jot down). Chú ý chính tả accommodation."},
-      {"t": "20'", "do": "Bẫy số, tên, đổi ý: trình bày bảng; luyện tên chữ cái (A/E/I, G/J, V/W, R, Y, H); cặp đôi đánh vần họ tên đầy đủ và số điện thoại cho nhau chép, đổi vai."},
-      {"t": "25'", "do": "Nghe cuộc gọi đăng ký: 30 giây đọc câu hỏi và đoán loại thông tin; nghe MỘT lần như phòng thi; đối chiếu đáp án; nghe lần 2 có lời thoại, đánh dấu từng bẫy (5/3 – 19/3; 4 triệu – 4,5 triệu – 4,05 triệu; địa chỉ cũ – mới)."},
-      {"t": "20'", "do": "Paraphrase: trình bày 5 kiểu; trò ‘Máy paraphrase’ – GV đọc câu hỏi (The course is expensive), học viên nói câu có thể nghe thấy trong bài (The fees are quite high)."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: chính tả nhanh 10 mục (số điện thoại, giá, ngày tháng, họ tên nước ngoài) do GV đọc."},
-      {"t": "20'", "do": "Ghi chú nhanh: dạy ký hiệu và viết tắt; GV đọc đoạn 1 phút, học viên ghi tối đa 20 từ; cặp đôi so sánh ghi chú và viết lại thành 2–3 câu."},
-      {"t": "25'", "do": "Đọc ‘Why Is Listening So Hard?’: làm câu hỏi; thảo luận khó khăn khi nghe của bản thân; thực hành shadowing 3 phút với 4 câu trong bài nghe (nhại sau giọng đọc nửa giây)."},
-      {"t": "25'", "do": "Viết đoạn tóm tắt từ ghi chú (15'), chấm chéo theo checklist; Nói: cặp đôi dùng ghi chú khoá học nói lại thành câu hoàn chỉnh."},
-      {"t": "10'", "do": "Làm bài tập tự chấm trong game (phần lớn là nghe); chữa nhanh; giao bài về nhà."}
+ "no": 11,
+ "title": "Kỹ năng nghe: ghi chú, nhận diện paraphrase, bẫy số & tên",
+ "sub": "Sorry – was that fifteen or fifty?",
+ "goals": [
+  "Dự đoán loại thông tin cần điền trước khi nghe (số, tên, danh từ, tính từ) và tuân thủ giới hạn từ",
+  "Nghe chính xác số, ngày, giờ, giá tiền, số điện thoại; đánh vần và nghe đánh vần tên, chữ cái dễ nhầm",
+  "Nhận diện 5 kiểu paraphrase: đồng nghĩa, đổi loại từ, chủ động ↔ bị động, phủ định từ trái nghĩa, khái quát ↔ cụ thể",
+  "Nhận ra bẫy ‘đổi ý’ (actually, sorry I mean, no wait…) và phương án gây nhiễu",
+  "Ghi chú nhanh bằng ký hiệu, viết tắt và viết lại ghi chú thành đoạn tóm tắt 120–150 từ"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng: tình huống nghe thường gặp & thuật ngữ kỹ năng",
+   "items": [
+    {
+     "w": "enrol",
+     "ipa": "/ɪnˈrəʊl/",
+     "pos": "v",
+     "vi": "đăng ký học (enrol on/in a course; Mỹ: enroll)",
+     "ex": "I'd like to enrol on the evening course.",
+     "exVi": "Tôi muốn đăng ký khoá buổi tối."
+    },
+    {
+     "w": "registration",
+     "ipa": "/ˌredʒɪˈstreɪʃn/",
+     "pos": "n",
+     "vi": "sự đăng ký, thủ tục đăng ký",
+     "ex": "Registration closes on Friday.",
+     "exVi": "Hạn đăng ký kết thúc vào thứ Sáu."
+    },
+    {
+     "w": "deposit",
+     "ipa": "/dɪˈpɒzɪt/",
+     "pos": "n",
+     "vi": "tiền đặt cọc",
+     "ex": "You need to pay a deposit of 500,000 dong.",
+     "exVi": "Bạn cần đặt cọc 500.000 đồng."
+    },
+    {
+     "w": "refund",
+     "ipa": "/ˈriːfʌnd/",
+     "pos": "n",
+     "vi": "tiền hoàn lại (động từ /rɪˈfʌnd/: hoàn tiền)",
+     "ex": "If you cancel a week before, you'll get a full refund.",
+     "exVi": "Nếu huỷ trước một tuần, bạn được hoàn toàn bộ tiền."
+    },
+    {
+     "w": "accommodation",
+     "ipa": "/əˌkɒməˈdeɪʃn/",
+     "pos": "n",
+     "vi": "chỗ ở (không đếm được; chú ý 2 chữ c, 2 chữ m)",
+     "ex": "The price includes accommodation and breakfast.",
+     "exVi": "Giá đã gồm chỗ ở và bữa sáng."
+    },
+    {
+     "w": "fully booked",
+     "ipa": "/ˌfʊli ˈbʊkt/",
+     "pos": "adj",
+     "vi": "kín chỗ, hết chỗ",
+     "ex": "I'm afraid the Saturday class is fully booked.",
+     "exVi": "Rất tiếc lớp thứ Bảy đã kín chỗ."
+    },
+    {
+     "w": "in advance",
+     "ipa": "/ɪn ədˈvɑːns/",
+     "pos": "phr",
+     "vi": "trước (thời hạn), đặt trước",
+     "ex": "Tickets must be booked in advance.",
+     "exVi": "Vé phải được đặt trước."
+    },
+    {
+     "w": "venue",
+     "ipa": "/ˈvenjuː/",
+     "pos": "n",
+     "vi": "địa điểm tổ chức (sự kiện, hội thảo)",
+     "ex": "The venue has been changed to the main hall.",
+     "exVi": "Địa điểm đã đổi sang hội trường chính."
+    },
+    {
+     "w": "postpone",
+     "ipa": "/pəˈspəʊn/",
+     "pos": "v",
+     "vi": "hoãn lại",
+     "ex": "The trip was postponed because of the storm.",
+     "exVi": "Chuyến đi bị hoãn vì bão."
+    },
+    {
+     "w": "alternatively",
+     "ipa": "/ɔːlˈtɜːnətɪvli/",
+     "pos": "adv",
+     "vi": "hoặc là, cách khác là",
+     "ex": "You can pay online. Alternatively, you can pay at reception.",
+     "exVi": "Bạn có thể trả online. Hoặc trả ở quầy lễ tân."
+    },
+    {
+     "w": "on second thoughts",
+     "ipa": "/ɒn ˌsekənd ˈθɔːts/",
+     "pos": "phr",
+     "vi": "nghĩ lại thì (tín hiệu ĐỔI Ý)",
+     "ex": "I'll have the fish. On second thoughts, I'll have the chicken.",
+     "exVi": "Tôi lấy cá. À nghĩ lại, tôi lấy gà."
+    },
+    {
+     "w": "available",
+     "ipa": "/əˈveɪləbl/",
+     "pos": "adj",
+     "vi": "còn trống, có sẵn, rảnh",
+     "ex": "Is there a room available for next weekend?",
+     "exVi": "Cuối tuần sau còn phòng trống không?"
+    },
+    {
+     "w": "discount",
+     "ipa": "/ˈdɪskaʊnt/",
+     "pos": "n",
+     "vi": "sự giảm giá (a 10% discount)",
+     "ex": "Students get a ten percent discount.",
+     "exVi": "Sinh viên được giảm 10%."
+    },
+    {
+     "w": "membership",
+     "ipa": "/ˈmembəʃɪp/",
+     "pos": "n",
+     "vi": "tư cách hội viên, thẻ hội viên",
+     "ex": "Annual membership costs 1.2 million dong.",
+     "exVi": "Thẻ hội viên năm giá 1, 2 triệu đồng."
+    },
+    {
+     "w": "extension",
+     "ipa": "/ɪkˈstenʃn/",
+     "pos": "n",
+     "vi": "số máy lẻ (điện thoại); sự gia hạn",
+     "ex": "Please call extension 214.",
+     "exVi": "Vui lòng gọi số máy lẻ 214."
+    },
+    {
+     "w": "synonym",
+     "ipa": "/ˈsɪnənɪm/",
+     "pos": "n",
+     "vi": "từ đồng nghĩa",
+     "ex": "‘Expensive’ and ‘costly’ are synonyms.",
+     "exVi": "‘Expensive’ và ‘costly’ là từ đồng nghĩa."
+    },
+    {
+     "w": "paraphrase",
+     "ipa": "/ˈpærəfreɪz/",
+     "pos": "v",
+     "vi": "diễn đạt lại bằng từ khác (cũng là danh từ)",
+     "ex": "The recording rarely uses the same words as the question; it paraphrases them.",
+     "exVi": "Bài nghe hiếm khi dùng đúng từ trong câu hỏi; nó diễn đạt lại."
+    },
+    {
+     "w": "distractor",
+     "ipa": "/dɪˈstræktə(r)/",
+     "pos": "n",
+     "vi": "phương án/thông tin gây nhiễu",
+     "ex": "The first price you hear is often a distractor.",
+     "exVi": "Mức giá đầu tiên bạn nghe thấy thường là bẫy gây nhiễu."
+    },
+    {
+     "w": "abbreviation",
+     "ipa": "/əˌbriːviˈeɪʃn/",
+     "pos": "n",
+     "vi": "chữ viết tắt",
+     "ex": "Use abbreviations to take notes quickly.",
+     "exVi": "Dùng chữ viết tắt để ghi chép nhanh."
+    },
+    {
+     "w": "jot down",
+     "ipa": "/ˌdʒɒt ˈdaʊn/",
+     "pos": "phr",
+     "vi": "ghi vội, ghi nhanh",
+     "ex": "Let me jot down your phone number.",
+     "exVi": "Để tôi ghi nhanh số điện thoại của bạn."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Paraphrase – 5 cách bài nghe “đổi lời” câu hỏi",
+   "html": "<p>Đề nghe (và đọc) IELTS hầu như <b>không dùng lại đúng từ</b> trong câu hỏi. Thông tin được <b>diễn đạt lại</b>. Nếu chỉ chờ nghe đúng từ khoá, bạn sẽ bỏ lỡ đáp án – hoặc rơi vào bẫy.</p>",
+   "table": [
+    [
+     "Kiểu paraphrase",
+     "Câu hỏi viết",
+     "Bạn nghe thấy"
     ],
-    "games": [
-      "‘Bingo số’: bảng 9 ô với các số dễ nhầm (13/30, 15/50, 17/70…); GV đọc nhanh; ai đủ hàng trước thắng nhưng phải đọc lại đúng các số của mình.",
-      "‘Lễ tân khó tính’: cặp đôi đóng vai đăng ký khoá học/đặt phòng; người gọi phải ‘đổi ý’ ít nhất 2 lần (Actually…, Sorry, I mean…); lễ tân điền phiếu; cuối cùng đối chiếu phiếu với thông tin cuối cùng của người gọi.",
-      "‘Tam sao thất bản’: GV thì thầm một câu có số và tên nước ngoài cho học viên đầu dãy; truyền đến cuối; người cuối viết lên bảng – so sánh với bản gốc và tìm chỗ ‘rơi’ thông tin."
+    [
+     "Từ đồng nghĩa",
+     "The course is expensive.",
+     "The fees are quite high."
     ],
-    "errors": [
-      "Nhầm -teen / -ty (thirteen / thirty): luyện trọng âm (thir-TEEN / THIR-ty) và âm /n/ cuối.",
-      "Chọn thông tin nghe thấy ĐẦU TIÊN thay vì thông tin CUỐI CÙNG sau khi người nói đổi ý.",
-      "Viết quá giới hạn từ, hoặc tự diễn đạt lại thay vì dùng đúng từ nghe được.",
-      "Sai chính tả đáp án (accommodation, address, Wednesday, February) – đúng nghĩa vẫn mất điểm; quên -s số nhiều.",
-      "Nhầm chữ cái khi đánh vần: E/I, G/J, V/W, R/A.",
-      "Hoảng khi lỡ một câu và bỏ lỡ luôn các câu sau – luyện thói quen ‘bỏ qua, bám câu tiếp theo’."
+    [
+     "Đổi loại từ",
+     "The museum was renovated.",
+     "The renovation of the museum…"
     ],
-    "homework": "Hoàn thành bài tập trong game (≥ 80%); mỗi ngày 10 phút: 5 phút nghe chép chính tả + 5 phút shadowing một đoạn podcast ngắn; tự luyện đánh vần 10 tên riêng tiếng Việt bằng tiếng Anh; viết lại đoạn tóm tắt sau khi được chữa; ôn 20 từ mới bằng Thẻ từ vựng."
+    [
+     "Chủ động ↔ bị động",
+     "Students must pay a deposit.",
+     "A deposit is required from all students."
+    ],
+    [
+     "Phủ định của từ trái nghĩa",
+     "The room was not large.",
+     "It was rather small."
+    ],
+    [
+     "Khái quát ↔ cụ thể",
+     "means of transport",
+     "the bus, the train, a taxi"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Question: When does the course start? → Audio: The first class is on the third of March.",
+     "vi": "Câu hỏi: Khoá học bắt đầu khi nào? → Bài nghe: Buổi học đầu tiên là ngày 3 tháng 3. (start = first class)"
+    },
+    {
+     "t": "Question: What is NOT included in the price? → Audio: Lunch is provided, and so is the coach, but you'll need to pay for the entrance ticket yourself.",
+     "vi": "Câu hỏi: Cái gì KHÔNG bao gồm trong giá? → Bài nghe: Có bữa trưa, có xe đưa đón, nhưng bạn phải tự trả vé vào cửa."
+    },
+    {
+     "t": "Question: The hotel is located near the ______. → Audio: It's just a two-minute walk from the railway station.",
+     "vi": "Câu hỏi: Khách sạn nằm gần… → Bài nghe: Chỉ cách ga tàu hai phút đi bộ. (near = a two-minute walk from)"
+    }
+   ],
+   "tips": [
+    "Nghe thấy <b>đúng y</b> từ trong câu hỏi? Cẩn thận – đó có thể là bẫy gây nhiễu, đáp án thật nằm ở câu sau.",
+    "Trong 30 giây trước khi nghe: gạch chân từ khoá, nghĩ trước 2–3 từ đồng nghĩa có thể xuất hiện.",
+    "Khi điền từ, viết <b>đúng từ nghe thấy</b> (đúng chính tả), không tự paraphrase lại theo ý mình."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Bẫy số, tên & “đổi ý”",
+   "html": "<p>Phần 1 bài nghe IELTS (và rất nhiều tình huống thực tế: gọi điện đặt phòng, đăng ký khoá học) kiểm tra khả năng nghe <b>chính xác</b> thông tin chi tiết. Đây là những bẫy phổ biến nhất:</p>",
+   "table": [
+    [
+     "Bẫy",
+     "Ví dụ",
+     "Cách xử lý"
+    ],
+    [
+     "-teen / -ty",
+     "thirteen /ˌθɜːˈtiːn/ – thirty /ˈθɜːti/",
+     "-teen nhấn âm sau, có /n/ cuối; -ty nhấn âm đầu"
+    ],
+    [
+     "Số 0 & số lặp",
+     "oh-nine-one · double five (55) · triple seven (777)",
+     "0 đọc oh hoặc zero; double = 2 lần, triple = 3 lần"
+    ],
+    [
+     "Ngày tháng",
+     "the third of May / May the third",
+     "viết 3 May hoặc 3rd May"
+    ],
+    [
+     "Giá tiền",
+     "twelve pounds fifty (£12.50) · four and a half million",
+     "nghe kỹ đơn vị và phần lẻ"
+    ],
+    [
+     "Đánh vần",
+     "A /eɪ/ – E /iː/ – I /aɪ/ · G /dʒiː/ – J /dʒeɪ/ · double L",
+     "luyện tên chữ cái"
+    ],
+    [
+     "Đổi ý",
+     "It's on Tuesday – sorry, no, Thursday.",
+     "đáp án là thông tin SAU CÙNG"
+    ],
+    [
+     "Nhiều con số",
+     "It was 30 last year, but now it's 45.",
+     "xác định đúng thời điểm câu hỏi hỏi"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "My surname is Nguyen: N-G-U-Y-E-N.",
+     "vi": "Họ tôi là Nguyễn: N-G-U-Y-E-N. (người nước ngoài hay nhầm thứ tự U-Y)"
+    },
+    {
+     "t": "The number is oh-nine-oh-four, double three, five, seven-one-eight.",
+     "vi": "Số là 0904 335 718."
+    },
+    {
+     "t": "We were going to meet on the fifteenth, but actually it's been moved to the sixteenth.",
+     "vi": "Lẽ ra gặp ngày 15, nhưng thực ra đã dời sang ngày 16. (đáp án: 16)"
+    },
+    {
+     "t": "The tour costs forty-five dollars. Oh, sorry, that's last year's price. It's now fifty.",
+     "vi": "Tour giá 45 đô. À xin lỗi, đó là giá năm ngoái. Giờ là 50. (đáp án: 50)"
+    }
+   ],
+   "tips": [
+    "Chữ cái người Việt hay nhầm khi nghe: <b>A /eɪ/ – E /iː/ – I /aɪ/</b>, <b>G /dʒiː/ – J /dʒeɪ/</b>, <b>V /viː/ – W /ˈdʌbljuː/</b>, <b>R /ɑː(r)/</b>, <b>Y /waɪ/</b>, <b>H /eɪtʃ/</b>.",
+    "Tín hiệu đổi ý: <i>actually, sorry, I mean, no wait, on second thoughts, that's been changed, rather than, it used to be… but now…</i>",
+    "Đọc kỹ giới hạn từ: <b>NO MORE THAN TWO WORDS AND/OR A NUMBER</b> – viết 3 từ là sai dù đúng nghĩa. Danh từ số nhiều mà quên -s cũng bị tính sai."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Ghi chú nhanh (note-taking) & 30 giây vàng trước khi nghe",
+   "html": "<h4>30 giây vàng trước khi nghe</h4><ol><li>Đọc tiêu đề, đoán bối cảnh (ai gọi cho ai, về việc gì).</li><li>Với mỗi chỗ trống, đoán <b>loại từ</b>: số? tên riêng? danh từ số ít/nhiều? tính từ?</li><li>Gạch chân từ khoá và nghĩ trước từ đồng nghĩa.</li><li>Để ý giới hạn từ.</li></ol><h4>Ký hiệu & viết tắt khi ghi chú</h4><table><tr><th>Ký hiệu</th><th>Nghĩa</th><th>Viết tắt</th><th>Nghĩa</th></tr><tr><td>↑ / ↓</td><td>tăng / giảm</td><td>b/c</td><td>because</td></tr><tr><td>→</td><td>dẫn đến, gây ra</td><td>w/ · w/o</td><td>with · without</td></tr><tr><td>=  /  ≠</td><td>bằng, giống / khác</td><td>e.g.</td><td>for example</td></tr><tr><td>+</td><td>và, thêm</td><td>approx. / ~</td><td>approximately</td></tr><tr><td>∴</td><td>vì vậy</td><td>govt · info · ppl · yr</td><td>government · information · people · year</td></tr></table><p><b>Nguyên tắc:</b> chỉ ghi <b>từ mang nghĩa</b> (danh từ, động từ chính, số liệu), bỏ mạo từ và trợ động từ; mỗi ý một dòng; ghi số và tên NGAY khi nghe. Sau khi nghe, dành 1 phút viết lại cho đầy đủ trước khi quên.</p><p><b>Luyện nghe hằng ngày:</b> <i>dictation</i> (nghe chép chính tả) giúp bắt từ nhỏ; <i>shadowing</i> (nhại theo sau người nói nửa giây) giúp quen tốc độ và nối âm.</p>"
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Gọi điện đăng ký khoá IELTS (dạng IELTS Listening Part 1)",
+   "lang": "en-GB",
+   "note": "Anh Khánh gọi tới một trung tâm ngoại ngữ (tên giả định) để đăng ký khoá học. TRƯỚC KHI NGHE: đọc 5 câu hỏi trong 30 giây, đoán loại thông tin. Nghe MỘT lần như phòng thi rồi điền; nghe lại để kiểm tra và tìm các bẫy: ngày khai giảng, học phí, địa chỉ cũ – mới.",
+   "lines": [
+    {
+     "s": "Receptionist",
+     "g": "f",
+     "t": "Good morning, Riverside Language Centre. How can I help you?",
+     "vi": "Chào buổi sáng, Trung tâm Ngoại ngữ Riverside xin nghe. Tôi có thể giúp gì ạ?"
+    },
+    {
+     "s": "Khanh",
+     "g": "m",
+     "t": "Hello. I'd like to enrol on one of your IELTS preparation courses, please.",
+     "vi": "Xin chào. Tôi muốn đăng ký một khoá luyện thi IELTS."
+    },
+    {
+     "s": "Receptionist",
+     "g": "f",
+     "t": "Certainly. We have two options at the moment: a ten-week evening course and an intensive four-week course during the day. Which would you prefer?",
+     "vi": "Vâng. Hiện chúng tôi có hai lựa chọn: khoá buổi tối mười tuần và khoá cấp tốc bốn tuần ban ngày. Anh muốn khoá nào?"
+    },
+    {
+     "s": "Khanh",
+     "g": "m",
+     "t": "I work during the day, so the evening one, please.",
+     "vi": "Ban ngày tôi đi làm, nên cho tôi khoá buổi tối."
+    },
+    {
+     "s": "Receptionist",
+     "g": "f",
+     "t": "No problem. Can I take your name?",
+     "vi": "Được ạ. Cho tôi xin tên anh?"
+    },
+    {
+     "s": "Khanh",
+     "g": "m",
+     "t": "Yes, it's Khanh, K-H-A-N-H, and my surname is Phung, P-H-U-N-G.",
+     "vi": "Vâng, tên tôi là Khánh, K-H-A-N-H, họ là Phùng, P-H-U-N-G."
+    },
+    {
+     "s": "Receptionist",
+     "g": "f",
+     "t": "Thank you. And a contact number?",
+     "vi": "Cảm ơn anh. Còn số điện thoại liên hệ?"
+    },
+    {
+     "s": "Khanh",
+     "g": "m",
+     "t": "It's oh-nine-one-two, four-seven-six, double eight, three.",
+     "vi": "Là 0912 476 883."
+    },
+    {
+     "s": "Receptionist",
+     "g": "f",
+     "t": "And when would you like to start? The next evening course begins on the fifth of March.",
+     "vi": "Anh muốn bắt đầu khi nào? Khoá tối tiếp theo khai giảng ngày 5 tháng 3."
+    },
+    {
+     "s": "Khanh",
+     "g": "m",
+     "t": "Hmm, I'm away on a business trip that week. Is there a later one?",
+     "vi": "Hừm, tuần đó tôi đi công tác. Có khoá nào muộn hơn không?"
+    },
+    {
+     "s": "Receptionist",
+     "g": "f",
+     "t": "Yes, there's another group starting on the nineteenth of March. Classes are on Tuesdays and Thursdays from six thirty to eight thirty.",
+     "vi": "Có, một lớp khác khai giảng ngày 19 tháng 3. Học tối thứ Ba và thứ Năm, từ 6 giờ 30 đến 8 giờ 30."
+    },
+    {
+     "s": "Khanh",
+     "g": "m",
+     "t": "Tuesdays and Thursdays is fine. I'll take that one.",
+     "vi": "Thứ Ba, thứ Năm được. Tôi đăng ký lớp đó."
+    },
+    {
+     "s": "Receptionist",
+     "g": "f",
+     "t": "Great. The course fee is four million five hundred thousand dong.",
+     "vi": "Tốt quá. Học phí là bốn triệu năm trăm nghìn đồng."
+    },
+    {
+     "s": "Khanh",
+     "g": "m",
+     "t": "Oh, the website says four million.",
+     "vi": "Ồ, trên trang web ghi bốn triệu mà."
+    },
+    {
+     "s": "Receptionist",
+     "g": "f",
+     "t": "Ah, that was last year's price, I'm afraid. However, if you pay in full before the end of February, you get a ten percent discount, so it would come to four million and fifty thousand.",
+     "vi": "À, đó là giá năm ngoái ạ. Tuy nhiên nếu anh đóng đủ trước cuối tháng 2, anh được giảm mười phần trăm, tức còn bốn triệu không trăm năm mươi nghìn."
+    },
+    {
+     "s": "Khanh",
+     "g": "m",
+     "t": "That sounds reasonable. Do I need to buy a textbook?",
+     "vi": "Hợp lý đấy. Tôi có cần mua giáo trình không?"
+    },
+    {
+     "s": "Receptionist",
+     "g": "f",
+     "t": "No, all the materials are included in the fee. You just need to bring a notebook. Oh, and there's a free placement test before the course starts. You can take it online or here at the centre.",
+     "vi": "Không ạ, mọi tài liệu đã gồm trong học phí. Anh chỉ cần mang vở. À, có một bài kiểm tra xếp lớp miễn phí trước khi khai giảng. Anh có thể làm online hoặc tại trung tâm."
+    },
+    {
+     "s": "Khanh",
+     "g": "m",
+     "t": "I'll do it at the centre, I think. Where exactly are you? I've only got the old address.",
+     "vi": "Chắc tôi làm tại trung tâm. Trung tâm ở chính xác chỗ nào? Tôi chỉ có địa chỉ cũ."
+    },
+    {
+     "s": "Receptionist",
+     "g": "f",
+     "t": "We moved last year. We're now at 28 Tavren Street, on the third floor, opposite the post office.",
+     "vi": "Năm ngoái chúng tôi đã chuyển. Giờ ở số 28 đường Tavren, tầng ba, đối diện bưu điện."
+    },
+    {
+     "s": "Khanh",
+     "g": "m",
+     "t": "Twenty-eight, opposite the post office. Got it. Thank you very much.",
+     "vi": "Số 28, đối diện bưu điện. Tôi ghi rồi. Cảm ơn chị nhiều."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Surname: ______",
+     "a": "Phung",
+     "e": "Đánh vần “P-H-U-N-G”. Chú ý: Khanh là tên, Phung là họ (surname)."
+    },
+    {
+     "q": "Phone number: ______",
+     "a": "0912476883",
+     "alt": [
+      "0912 476 883",
+      "0912-476-883"
+     ],
+     "e": "oh-nine-one-two (0912), four-seven-six (476), double eight (88), three (3)."
+    },
+    {
+     "q": "Start date:",
+     "o": [
+      "5 March",
+      "19 March",
+      "9 March"
+     ],
+     "a": 1,
+     "e": "Khoá 5/3 là bẫy – anh Khánh đi công tác tuần đó và chọn lớp “starting on the nineteenth of March”."
+    },
+    {
+     "q": "Fee if paid in full before the end of February: ______ dong",
+     "a": "4,050,000",
+     "alt": [
+      "4050000",
+      "4.050.000",
+      "four million and fifty thousand",
+      "four million fifty thousand"
+     ],
+     "e": "4 triệu là giá cũ (bẫy), 4, 5 triệu là giá gốc; giảm 10% → 4.050.000 đồng."
+    },
+    {
+     "q": "New address: ______ Tavren Street, 3rd floor",
+     "a": "28",
+     "alt": [
+      "twenty-eight",
+      "No. 28",
+      "number 28"
+     ],
+     "e": "“We're now at 28 Tavren Street, on the third floor” – địa chỉ cũ không được nhắc đến."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Vì sao kỹ năng nghe lại khó đến vậy?",
+   "title": "Why Is Listening So Hard?",
+   "text": "Ask a group of English learners which skill they find most difficult, and many will choose listening. This is surprising at first. After all, a learner who can read a newspaper article with little difficulty may still struggle to follow a simple conversation at a bus stop. Why should the same words be easy on the page but hard to catch in the air?\n\nPart of the answer lies in the nature of speech itself. When we read, words are separated by clear spaces. When people speak, however, there are no such gaps. Words run into each other, so that ‘did you eat’ may sound like a single word, and ‘want to’ becomes ‘wanna’. Unstressed words such as ‘to’, ‘of’ and ‘have’ are reduced to short, weak sounds. A learner who knows these words perfectly in writing may simply fail to recognise them in fast speech.\n\nAnother difficulty is time. A reader can slow down, go back and read a sentence again. A listener cannot. The speaker controls the speed, and the information disappears as soon as it has been spoken. As a result, listeners must process sounds, grammar and meaning almost instantly. Researchers often describe two kinds of processing that work together: bottom-up processing, in which the listener builds meaning from individual sounds and words, and top-down processing, in which the listener uses background knowledge and context to predict what is likely to come next. Good listeners combine both. Weaker listeners tend to rely too heavily on one of them, either trying to catch every single word or guessing wildly from a few familiar ones.\n\nFortunately, listening can be trained. Dictation forces learners to notice the small words that they normally miss. Shadowing, in which the learner repeats a recording a fraction of a second behind the speaker, improves both pronunciation and the ability to hear connected speech. Finally, prediction before listening makes a real difference. Learners who spend thirty seconds thinking about the topic and the type of information they need tend to perform better than those who start listening cold.\n\nPerhaps the most important change, however, is psychological. Many learners panic when they miss a word and stop listening while they try to work it out. Accepting that it is normal not to understand everything may be the first step towards understanding much more.",
+   "gloss": [
+    {
+     "w": "struggle",
+     "vi": "chật vật, vất vả"
+    },
+    {
+     "w": "catch",
+     "vi": "nghe kịp, bắt được (lời nói)"
+    },
+    {
+     "w": "gap",
+     "vi": "khoảng trống"
+    },
+    {
+     "w": "unstressed",
+     "vi": "không được nhấn trọng âm"
+    },
+    {
+     "w": "recognise",
+     "vi": "nhận ra"
+    },
+    {
+     "w": "process",
+     "vi": "xử lý (thông tin)"
+    },
+    {
+     "w": "background knowledge",
+     "vi": "kiến thức nền"
+    },
+    {
+     "w": "connected speech",
+     "vi": "lời nói liền mạch (có nối âm, nuốt âm)"
+    },
+    {
+     "w": "start cold",
+     "vi": "bắt đầu mà không chuẩn bị gì"
+    },
+    {
+     "w": "panic",
+     "vi": "hoảng loạn"
+    }
+   ],
+   "qs": [
+    {
+     "q": "True / False / Not Given: Some learners who read well still find it hard to understand simple conversations.",
+     "o": [
+      "True",
+      "False",
+      "Not Given"
+     ],
+     "a": 0,
+     "e": "Đoạn 1: “a learner who can read a newspaper article with little difficulty may still struggle to follow a simple conversation”."
+    },
+    {
+     "q": "True / False / Not Given: In speech, words are separated by short pauses, just as they are separated by spaces in writing.",
+     "o": [
+      "True",
+      "False",
+      "Not Given"
+     ],
+     "a": 1,
+     "e": "Đoạn 2: “When people speak, however, there are no such gaps.” → False."
+    },
+    {
+     "q": "According to the article, top-down processing means…",
+     "o": [
+      "building meaning from individual sounds and words.",
+      "using background knowledge and context to predict what comes next.",
+      "repeating a recording just after the speaker."
+     ],
+     "a": 1,
+     "e": "Đoạn 3 định nghĩa rõ top-down. Phương án 1 là bottom-up; phương án 3 là shadowing – các phương án gây nhiễu lấy từ chính bài."
+    },
+    {
+     "q": "True / False / Not Given: Shadowing is more effective than dictation.",
+     "o": [
+      "True",
+      "False",
+      "Not Given"
+     ],
+     "a": 2,
+     "e": "Bài nêu tác dụng của từng phương pháp nhưng không so sánh cái nào hiệu quả hơn → Not Given."
+    },
+    {
+     "q": "In shadowing, the learner repeats a recording a ______ of a second behind the speaker.",
+     "a": "fraction",
+     "e": "Đoạn 4: “a fraction of a second behind the speaker” (một tích tắc sau người nói)."
+    },
+    {
+     "q": "What does the writer suggest in the last paragraph?",
+     "o": [
+      "Learners should stop listening when they miss a word.",
+      "Learners should accept that missing some words is normal.",
+      "Learners should only listen to slow recordings."
+     ],
+     "a": 1,
+     "e": "“Accepting that it is normal not to understand everything may be the first step…”"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Đánh vần, đọc số & nói lại từ ghi chú",
+   "tasks": [
+    {
+     "p": "Đánh vần họ tên đầy đủ của bạn, đọc một địa chỉ (số nhà, tên đường) và số điện thoại theo nhóm – như khi gọi điện đăng ký.",
+     "model": "My name is Tran Thi Mai Anh. That's T-R-A-N, then T-H-I, M-A-I, and A-N-H. I live at 45 Nerafin Street: L-E, new word, L-O-I. My phone number is oh-nine-eight-three, double two five, six-one-seven.",
+     "vi": "Tên tôi là Trần Thị Mai Anh… Tôi sống ở số 45 đường Nerafin… Số điện thoại 0983 225 617.",
+     "tips": "Đọc số điện thoại theo nhóm 3–4 chữ số, ngừng ngắn giữa các nhóm. Nói rõ ‘new word’ khi tên có nhiều chữ."
+    },
+    {
+     "p": "IELTS Part 1: “Do you like listening to the radio or podcasts?” Trả lời 4–6 câu.",
+     "model": "Yes, I listen to podcasts almost every day, mainly on my way to work. I've got a forty-minute commute, so it's the perfect time. I usually listen to English-language programmes about science or business, partly for the content and partly to improve my listening. At first I could only understand about half of what they said, especially when the speakers talked fast or used a lot of idioms, but now I can follow most episodes without the transcript. I don't really listen to the radio, though. I prefer choosing exactly what I want to hear.",
+     "vi": "Có, tôi nghe podcast gần như mỗi ngày, chủ yếu trên đường đi làm… Lúc đầu tôi chỉ hiểu khoảng một nửa… nhưng giờ có thể theo được phần lớn các tập mà không cần lời thoại."
+    },
+    {
+     "p": "Dựa vào ghi chú sau, nói lại thành 4–5 câu hoàn chỉnh: “Riverside Lang. Centre – IELTS eve. course – 10 wks – Tue + Thu 6.30–8.30 – fee 4.5m (−10% if pay b4 end Feb) – placement test free – new addr: 28 THĐ St, 3rd fl, opp. post office”.",
+     "model": "Riverside Language Centre offers a ten-week IELTS evening course. Classes are on Tuesdays and Thursdays from half past six to half past eight. The fee is four and a half million dong, but students get a ten percent discount if they pay before the end of February. There is a free placement test, and the centre has moved to 28 Tavren Street, on the third floor, opposite the post office.",
+     "vi": "Trung tâm Riverside có khoá IELTS buổi tối mười tuần… Học phí 4, 5 triệu, giảm 10% nếu đóng trước cuối tháng 2… Trung tâm đã chuyển đến số 28 Tavren, tầng 3, đối diện bưu điện."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Từ ghi chú thành đoạn tóm tắt",
+   "task": "Dựa vào ghi chú bài giảng dưới đây, viết đoạn tóm tắt 120–150 từ bằng câu hoàn chỉnh, có từ nối. Ghi chú: “Topic: why listening is hard · speech: no gaps betw. words → ‘did you eat’ = 1 word; weak forms (to, of, have) · time: listener ≠ control speed; info disappears → process instantly · 2 types of processing: bottom-up (sounds → words) + top-down (knowledge/context → predict) · weak listeners: rely on 1 type only · training: dictation (small words), shadowing (pron. + connected speech), prediction b4 listening · psychology: don't panic when you miss a word”.",
+   "min": 120,
+   "model": "Listening is often the most difficult skill for language learners, for several reasons. Firstly, spoken English has no clear gaps between words, so a phrase such as ‘did you eat’ may sound like a single word, and short words like ‘to’ or ‘have’ are reduced to weak forms. Secondly, listeners cannot control the speed of speech, and the information disappears immediately, which means it must be processed almost instantly. Effective listeners combine two types of processing: bottom-up, which builds meaning from sounds and words, and top-down, which uses background knowledge and context to predict what will come next. Weaker listeners, by contrast, tend to depend on only one of these. Fortunately, listening can be improved through dictation, shadowing and prediction before listening. Finally, learners should not panic when they miss a word, since accepting that this is normal helps them to understand more.",
+   "modelVi": "Nghe thường là kỹ năng khó nhất với người học ngoại ngữ vì nhiều lý do. Thứ nhất, tiếng Anh nói không có khoảng trống rõ ràng giữa các từ, nên cụm như ‘did you eat’ có thể nghe như một từ, còn các từ ngắn như ‘to’ hay ‘have’ bị đọc yếu. Thứ hai, người nghe không kiểm soát được tốc độ và thông tin biến mất ngay, nên phải xử lý gần như tức thì. Người nghe giỏi kết hợp hai kiểu xử lý: từ dưới lên (xây nghĩa từ âm và từ) và từ trên xuống (dùng kiến thức nền và ngữ cảnh để dự đoán). Ngược lại, người nghe yếu thường chỉ dựa vào một kiểu. May mắn là kỹ năng nghe có thể cải thiện qua chép chính tả, shadowing và dự đoán trước khi nghe. Cuối cùng, người học không nên hoảng khi lỡ một từ, vì chấp nhận điều đó là bình thường giúp họ hiểu được nhiều hơn.",
+   "tips": [
+    "Biến ký hiệu thành ngôn ngữ: → = which means / so; ≠ = cannot / unlike; + = and; b4 = before.",
+    "Thêm từ nối để các ý trong ghi chú thành đoạn văn liền mạch: Firstly, Secondly, by contrast, Fortunately, Finally.",
+    "Tóm tắt không thêm ý kiến cá nhân, không thêm thông tin ngoài ghi chú."
+   ],
+   "checklist": [
+    "Câu đầu nêu chủ đề của bài giảng",
+    "Đủ các ý chính trong ghi chú, không bỏ sót phần luyện tập",
+    "Mọi ký hiệu/viết tắt đã được chuyển thành câu hoàn chỉnh",
+    "≥ 4 từ nối khác nhau",
+    "Không thêm ý kiến cá nhân",
+    "120–150 từ"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "The meeting was planned for Tuesday, but it's been moved to Thursday afternoon.",
+   "lang": "en-GB",
+   "q": "When is the meeting now?",
+   "o": [
+    "Tuesday",
+    "Thursday afternoon",
+    "Thursday morning"
+   ],
+   "a": 1,
+   "e": "Bẫy đổi lịch: Tuesday là kế hoạch cũ; “it's been moved to Thursday afternoon”."
+  },
+  {
+   "t": "listen",
+   "say": "Tickets cost thirteen pounds for adults and thirty pounds for a family.",
+   "lang": "en-GB",
+   "q": "How much is an adult ticket?",
+   "o": [
+    "£13",
+    "£30",
+    "£3"
+   ],
+   "a": 0,
+   "e": "thir-TEEN (nhấn âm sau, có /n/) = 13; THIR-ty = 30 là vé gia đình."
+  },
+  {
+   "t": "listen",
+   "say": "My surname is Vuong. That's V for Victor, U, O, N, G.",
+   "lang": "en-GB",
+   "q": "How is the surname spelled?",
+   "o": [
+    "Wuong",
+    "Vuong",
+    "Buong"
+   ],
+   "a": 1,
+   "e": "V /viː/ – ‘V for Victor’ là cách xác nhận chữ cái khi đánh vần qua điện thoại."
+  },
+  {
+   "t": "listen",
+   "say": "The tour was going to leave at eight fifteen, but the driver says we should be ready by quarter to eight.",
+   "lang": "en-GB",
+   "q": "What time should people be ready?",
+   "o": [
+    "8:15",
+    "7:45",
+    "8:45"
+   ],
+   "a": 1,
+   "e": "quarter to eight = 7:45. 8:15 là giờ dự kiến cũ (bẫy)."
+  },
+  {
+   "t": "listen",
+   "say": "Lunch is included in the price, and so is the boat trip, but you'll have to pay for entrance to the caves yourself.",
+   "lang": "en-GB",
+   "q": "What is NOT included in the price?",
+   "o": [
+    "Lunch",
+    "The boat trip",
+    "Entrance to the caves"
+   ],
+   "a": 2,
+   "e": "‘you'll have to pay for… yourself’ = not included (paraphrase)."
+  },
+  {
+   "t": "mc",
+   "q": "Câu hỏi viết: “The hotel is not cheap.” Bạn có thể nghe thấy câu nào?",
+   "o": [
+    "The hotel is cheap.",
+    "The rooms are rather expensive.",
+    "The hotel is near the beach."
+   ],
+   "a": 1,
+   "e": "Paraphrase kiểu ‘phủ định từ trái nghĩa’: not cheap = rather expensive."
+  },
+  {
+   "t": "mc",
+   "q": "Yêu cầu: NO MORE THAN TWO WORDS. Đáp án nào hợp lệ cho “The lecture is held in the ______.”?",
+   "o": [
+    "main hall",
+    "big main hall",
+    "the big main hall"
+   ],
+   "a": 0,
+   "e": "Chỉ ‘main hall’ có ≤ 2 từ. Mạo từ ‘the’ đã có sẵn trong câu, không viết lại."
+  },
+  {
+   "t": "mc",
+   "q": "Cụm nào báo hiệu người nói ĐỔI Ý?",
+   "o": [
+    "For example",
+    "Actually, no",
+    "In addition"
+   ],
+   "a": 1,
+   "e": "Actually / Sorry, I mean / No, wait / On second thoughts → thông tin sau mới là đáp án."
+  },
+  {
+   "t": "mc",
+   "q": "“double five” nghĩa là:",
+   "o": [
+    "5",
+    "55",
+    "10"
+   ],
+   "a": 1,
+   "e": "double = lặp lại 2 lần: double five = 55; triple seven = 777."
+  },
+  {
+   "t": "mc",
+   "q": "Chữ cái nào phát âm là /dʒeɪ/?",
+   "o": [
+    "G",
+    "J",
+    "Y"
+   ],
+   "a": 1,
+   "e": "J = /dʒeɪ/; G = /dʒiː/; Y = /waɪ/. Cặp G/J rất hay bị nhầm."
+  },
+  {
+   "t": "fill",
+   "q": "Ký hiệu ↑ trong ghi chú thường nghĩa là ___ (1 từ tiếng Anh).",
+   "a": "increase",
+   "alt": [
+    "rise",
+    "increases",
+    "up",
+    "grow"
+   ],
+   "e": "↑ = increase / rise; ↓ = decrease / fall; → = leads to."
+  },
+  {
+   "t": "fill",
+   "q": "The museum was renovated last year. → The ___ of the museum took place last year.",
+   "a": "renovation",
+   "e": "Paraphrase bằng cách đổi loại từ: renovate → renovation (danh từ hoá – Bài 6)."
+  },
+  {
+   "t": "match",
+   "q": "Nối chữ viết tắt với nghĩa:",
+   "pairs": [
+    [
+     "b/c",
+     "because"
+    ],
+    [
+     "w/o",
+     "without"
+    ],
+    [
+     "approx.",
+     "approximately"
+    ],
+    [
+     "govt",
+     "government"
+    ],
+    [
+     "e.g.",
+     "for example"
+    ]
+   ],
+   "e": "Viết tắt giúp ghi chú kịp tốc độ nói."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "second",
+    "On",
+    "thoughts,",
+    "I'll",
+    "take",
+    "the evening class."
+   ],
+   "a": "On second thoughts, I'll take the evening class.",
+   "e": "On second thoughts = nghĩ lại thì – tín hiệu đổi ý quen thuộc."
+  },
+  {
+   "t": "dict",
+   "say": "The deposit must be paid in advance, and it cannot be refunded.",
+   "lang": "en-GB",
+   "a": "The deposit must be paid in advance, and it cannot be refunded.",
+   "e": "Chú ý âm cuối /d/ trong paid, refunded và cụm in advance /ɪn ədˈvɑːns/."
+  },
+  {
+   "t": "dict",
+   "say": "Sorry, I mean the sixteenth, not the fifteenth.",
+   "lang": "en-GB",
+   "a": "Sorry, I mean the sixteenth, not the fifteenth.",
+   "e": "sixteenth /ˌsɪksˈtiːnθ/, fifteenth /ˌfɪfˈtiːnθ/ – âm /θ/ cuối của số thứ tự."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Phiếu đăng ký (form) để trống in cho mỗi học viên; bảng tên chữ cái A–Z có phiên âm; danh sách cặp số dễ nhầm (13/30, 14/40, 15/50… 19/90); thẻ ‘đổi ý’ (Actually…, Sorry, I mean…, On second thoughts…) cho trò đóng vai; một đoạn văn 1 phút để học viên ghi chú.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động ‘Bingo số’: học viên kẻ bảng 9 ô, tự điền số trong danh sách 13–90; GV đọc nhanh (thirteen, thirty, seventeen…); ai đủ hàng trước hô Bingo và phải đọc lại đúng các số của mình."
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng: nhóm tình huống nghe (enrol, registration, deposit, refund, accommodation, fully booked, in advance, venue, postpone, available, discount, membership, extension) và nhóm kỹ năng (synonym, paraphrase, distractor, abbreviation, jot down). Chú ý chính tả accommodation."
+   },
+   {
+    "t": "20'",
+    "do": "Bẫy số, tên, đổi ý: trình bày bảng; luyện tên chữ cái (A/E/I, G/J, V/W, R, Y, H); cặp đôi đánh vần họ tên đầy đủ và số điện thoại cho nhau chép, đổi vai."
+   },
+   {
+    "t": "25'",
+    "do": "Nghe cuộc gọi đăng ký: 30 giây đọc câu hỏi và đoán loại thông tin; nghe MỘT lần như phòng thi; đối chiếu đáp án; nghe lần 2 có lời thoại, đánh dấu từng bẫy (5/3 – 19/3; 4 triệu – 4, 5 triệu – 4, 05 triệu; địa chỉ cũ – mới)."
+   },
+   {
+    "t": "20'",
+    "do": "Paraphrase: trình bày 5 kiểu; trò ‘Máy paraphrase’ – GV đọc câu hỏi (The course is expensive), học viên nói câu có thể nghe thấy trong bài (The fees are quite high)."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: chính tả nhanh 10 mục (số điện thoại, giá, ngày tháng, họ tên nước ngoài) do GV đọc."
+   },
+   {
+    "t": "20'",
+    "do": "Ghi chú nhanh: dạy ký hiệu và viết tắt; GV đọc đoạn 1 phút, học viên ghi tối đa 20 từ; cặp đôi so sánh ghi chú và viết lại thành 2–3 câu."
+   },
+   {
+    "t": "25'",
+    "do": "Đọc ‘Why Is Listening So Hard?’: làm câu hỏi; thảo luận khó khăn khi nghe của bản thân; thực hành shadowing 3 phút với 4 câu trong bài nghe (nhại sau giọng đọc nửa giây)."
+   },
+   {
+    "t": "25'",
+    "do": "Viết đoạn tóm tắt từ ghi chú (15'), chấm chéo theo checklist; Nói: cặp đôi dùng ghi chú khoá học nói lại thành câu hoàn chỉnh."
+   },
+   {
+    "t": "10'",
+    "do": "Làm bài tập tự chấm trong game (phần lớn là nghe); chữa nhanh; giao bài về nhà."
+   }
+  ],
+  "games": [
+   "‘Bingo số’: bảng 9 ô với các số dễ nhầm (13/30, 15/50, 17/70…); GV đọc nhanh; ai đủ hàng trước thắng nhưng phải đọc lại đúng các số của mình.",
+   "‘Lễ tân khó tính’: cặp đôi đóng vai đăng ký khoá học/đặt phòng; người gọi phải ‘đổi ý’ ít nhất 2 lần (Actually…, Sorry, I mean…); lễ tân điền phiếu; cuối cùng đối chiếu phiếu với thông tin cuối cùng của người gọi.",
+   "‘Tam sao thất bản’: GV thì thầm một câu có số và tên nước ngoài cho học viên đầu dãy; truyền đến cuối; người cuối viết lên bảng – so sánh với bản gốc và tìm chỗ ‘rơi’ thông tin."
+  ],
+  "errors": [
+   "Nhầm -teen / -ty (thirteen / thirty): luyện trọng âm (thir-TEEN / THIR-ty) và âm /n/ cuối.",
+   "Chọn thông tin nghe thấy ĐẦU TIÊN thay vì thông tin CUỐI CÙNG sau khi người nói đổi ý.",
+   "Viết quá giới hạn từ, hoặc tự diễn đạt lại thay vì dùng đúng từ nghe được.",
+   "Sai chính tả đáp án (accommodation, address, Wednesday, February) – đúng nghĩa vẫn mất điểm; quên -s số nhiều.",
+   "Nhầm chữ cái khi đánh vần: E/I, G/J, V/W, R/A.",
+   "Hoảng khi lỡ một câu và bỏ lỡ luôn các câu sau – luyện thói quen ‘bỏ qua, bám câu tiếp theo’."
+  ],
+  "homework": "Hoàn thành bài tập trong game (≥ 80%); mỗi ngày 10 phút: 5 phút nghe chép chính tả + 5 phút shadowing một đoạn podcast ngắn; tự luyện đánh vần 10 tên riêng tiếng Việt bằng tiếng Anh; viết lại đoạn tóm tắt sau khi được chữa; ôn 20 từ mới bằng Thẻ từ vựng."
+ }
 }

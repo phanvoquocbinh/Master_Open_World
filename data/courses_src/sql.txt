@@ -4,12 +4,16 @@ icon: 🗄️
 floor: 2
 room: 202
 level: Cơ bản → Trung bình
-hours: 6
+hours: 28
 summary: Học đọc dữ liệu bằng SQL trên một database SQLite tập luyện: lọc, sắp xếp, gom nhóm, nối bảng, săn bug dữ liệu và kiểm tra database sau khi gọi API một cách an toàn.
 
 ## LESSON sql-01 | Database là gì? Cài SQLite trên Windows
 
 ### Database giống một file Excel lớn
+• Database (cơ sở dữ liệu) là nơi ứng dụng cất dữ liệu lâu dài: người dùng, đơn hàng, sản phẩm...
+• Mỗi bảng giống một sheet, mỗi dòng là một "phiếu", mỗi cột là một loại thông tin.
+• SQL là ngôn ngữ để "hỏi" database, ví dụ: "cho tôi xem tất cả user ở Vân Thoi".
+• Tester dùng SQL để kiểm tra dữ liệu thật sự được lưu đúng hay chưa, không chỉ tin vào màn hình.
 ~~~text
 File Excel "shop"            Database "shop.db"
 - Sheet "users"         ->   Bảng (table) users
@@ -18,15 +22,15 @@ File Excel "shop"            Database "shop.db"
 
 Bảng users:
 id | full_name       | email            | city
-1  | Nguyễn Văn An   | an@example.com   | Hà Nội
-2  | Trần Thị Bình   | binh@example.com | Đà Nẵng
+1  | Nguyễn Văn An   | an@example.com   | Vân Thoi
+2  | Trần Thị Bình   | binh@example.com | Mầm Rìa
 ~~~
-• Database (cơ sở dữ liệu) là nơi ứng dụng cất dữ liệu lâu dài: người dùng, đơn hàng, sản phẩm...
-• Mỗi bảng giống một sheet, mỗi dòng là một "phiếu", mỗi cột là một loại thông tin.
-• SQL là ngôn ngữ để "hỏi" database, ví dụ: "cho tôi xem tất cả user ở Hà Nội".
-• Tester dùng SQL để kiểm tra dữ liệu thật sự được lưu đúng hay chưa, không chỉ tin vào màn hình.
 
 ### Khóa chính và khóa ngoại
+• Primary key (PK, khóa chính): mã định danh duy nhất của mỗi dòng, giống số CCCD — không được trùng.
+• Foreign key (FK, khóa ngoại): cột trỏ sang khóa chính của bảng khác. orders.user_id = 1 nghĩa là đơn này của user có id 1.
+• Nhờ khóa ngoại, ta biết đơn hàng 1 và 2 cùng của anh An.
+• Bug kinh điển: đơn hàng trỏ tới user không tồn tại (gọi là dòng "mồ côi" — orphan row).
 ~~~text
 users                     orders
 id (PK) | full_name       id (PK) | user_id (FK -> users.id) | status
@@ -34,31 +38,22 @@ id (PK) | full_name       id (PK) | user_id (FK -> users.id) | status
 2       | Trần Thị Bình   2       | 1                        | PAID
                           3       | 2                        | SHIPPED
 ~~~
-• Primary key (PK, khóa chính): mã định danh duy nhất của mỗi dòng, giống số CCCD — không được trùng.
-• Foreign key (FK, khóa ngoại): cột trỏ sang khóa chính của bảng khác. orders.user_id = 1 nghĩa là đơn này của user có id 1.
-• Nhờ khóa ngoại, ta biết đơn hàng 1 và 2 cùng của anh An.
-• Bug kinh điển: đơn hàng trỏ tới user không tồn tại (gọi là dòng "mồ côi" — orphan row).
 
 ### Cài công cụ trên Windows
 Mở PowerShell và chạy:
-~~~bash
-winget install --id DBBrowserForSQLite.DBBrowserForSQLite -e
-winget install --id SQLite.SQLite -e
-sqlite3 --version
-~~~
 Giải thích từng dòng:
 • Dòng 1: cài DB Browser for SQLite — ứng dụng có giao diện, xem bảng như Excel.
 • Dòng 2: cài sqlite3 — công cụ dòng lệnh.
 • Dòng 3: kiểm tra cài thành công. Mong đợi in ra dạng 3.4x.x 2025-...
 Sau khi cài, đóng PowerShell và mở lại để Windows nhận đường dẫn (PATH) mới.
 SQLite rất nhẹ: cả database chỉ là một file .db, không cần cài server.
+~~~bash
+winget install --id DBBrowserForSQLite.DBBrowserForSQLite -e
+winget install --id SQLite.SQLite -e
+sqlite3 --version
+~~~
 
 ### Tạo database đầu tiên
-~~~bash
-mkdir C:\qa\sql
-cd C:\qa\sql
-sqlite3 shop.db
-~~~
 Giải thích:
 • mkdir: tạo thư mục làm việc.
 • cd: đi vào thư mục đó.
@@ -68,12 +63,13 @@ Lệnh hữu ích trong sqlite> (bắt đầu bằng dấu chấm, không cần 
 • .tables — liệt kê các bảng.
 • .headers on và .mode column — hiển thị kết quả dạng cột dễ đọc.
 • .quit — thoát.
+~~~bash
+mkdir C:\qa\sql
+cd C:\qa\sql
+sqlite3 shop.db
+~~~
 
 ### Câu SQL đầu tiên
-~~~sql
-SELECT 1 + 1 AS ket_qua;
-SELECT 'Xin chào tester' AS loi_chao;
-~~~
 Gõ từng dòng sau dấu nhắc sqlite> rồi Enter.
 Giải thích:
 • SELECT: "hãy cho tôi xem".
@@ -81,17 +77,21 @@ Giải thích:
 • Chuỗi văn bản đặt trong nháy đơn 'như thế này'.
 • Dấu ; báo hiệu câu lệnh đã kết thúc.
 Kết quả mong đợi: cột ket_qua có giá trị 2, cột loi_chao có giá trị Xin chào tester.
+~~~sql
+SELECT 1 + 1 AS ket_qua;
+SELECT 'Xin chào tester' AS loi_chao;
+~~~
 
 ### Lỗi thường gặp
+• Not recognized: chưa mở lại PowerShell sau khi cài, hoặc cài chưa xong → đóng và mở lại terminal, chạy lại winget.
+• Dấu nhắc đổi thành ...> : bạn quên dấu ; ở cuối câu. Gõ ; rồi Enter là xong.
+• syntax error: gõ sai từ khóa (SELEC thay vì SELECT).
+• Không thấy file shop.db: bạn đã chạy sqlite3 ở thư mục khác → gõ pwd để xem đang ở đâu.
 ~~~text
 sqlite3 : The term 'sqlite3' is not recognized as the name of a cmdlet...
    ...>
 Parse error: near "SELEC": syntax error
 ~~~
-• Not recognized: chưa mở lại PowerShell sau khi cài, hoặc cài chưa xong → đóng và mở lại terminal, chạy lại winget.
-• Dấu nhắc đổi thành ...> : bạn quên dấu ; ở cuối câu. Gõ ; rồi Enter là xong.
-• syntax error: gõ sai từ khóa (SELEC thay vì SELECT).
-• Không thấy file shop.db: bạn đã chạy sqlite3 ở thư mục khác → gõ pwd để xem đang ở đâu.
 
 PRACTICE: Cài sqlite3 và DB Browser for SQLite, tạo file C:\qa\sql\shop.db, chạy SELECT 10 * 5 AS tich; và chụp lại kết quả. Mở cùng file đó bằng DB Browser for SQLite.
 Q: Khóa chính (primary key) có đặc điểm gì?
@@ -107,6 +107,13 @@ Q: Trong sqlite3, dấu nhắc chuyển thành ...> nghĩa là gì?
 
 ### Tạo bảng users
 Mở Notepad hoặc VS Code, tạo file C:\qa\sql\seed.sql. Dán lần lượt code của slide này và 3 slide sau vào cùng file.
+Giải thích từng dòng:
+• DROP TABLE IF EXISTS: xóa bảng cũ nếu có, để chạy lại script nhiều lần. Chỉ dùng trên database tập luyện của bạn!
+• CREATE TABLE users ( ... ): tạo bảng tên users.
+• id INTEGER PRIMARY KEY: cột số nguyên, là khóa chính.
+• full_name TEXT NOT NULL: chuỗi, bắt buộc có giá trị.
+• email TEXT: chuỗi, được phép để trống (NULL).
+• created_at TEXT: ngày tạo, lưu dạng chuỗi yyyy-mm-dd.
 ~~~sql
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS products;
@@ -120,15 +127,14 @@ CREATE TABLE users (
   created_at TEXT
 );
 ~~~
-Giải thích từng dòng:
-• DROP TABLE IF EXISTS: xóa bảng cũ nếu có, để chạy lại script nhiều lần. Chỉ dùng trên database tập luyện của bạn!
-• CREATE TABLE users ( ... ): tạo bảng tên users.
-• id INTEGER PRIMARY KEY: cột số nguyên, là khóa chính.
-• full_name TEXT NOT NULL: chuỗi, bắt buộc có giá trị.
-• email TEXT: chuỗi, được phép để trống (NULL).
-• created_at TEXT: ngày tạo, lưu dạng chuỗi yyyy-mm-dd.
 
 ### Tạo bảng products và orders
+Giải thích:
+• products: sản phẩm với giá (price, đơn vị đồng) và tồn kho (stock).
+• DEFAULT 0: không nhập stock thì tự lấy 0.
+• orders: mỗi đơn có user_id (ai mua), product_id (mua gì), quantity (số lượng), status (trạng thái).
+• FOREIGN KEY ... REFERENCES: khai báo khóa ngoại trỏ sang users và products.
+Lưu ý: SQLite mặc định KHÔNG bắt buộc khóa ngoại (trừ khi bật PRAGMA foreign_keys = ON). Ta lợi dụng điều này để tạo sẵn vài "bug dữ liệu" cho bài săn lỗi.
 ~~~sql
 CREATE TABLE products (
   id INTEGER PRIMARY KEY,
@@ -148,30 +154,28 @@ CREATE TABLE orders (
   FOREIGN KEY (product_id) REFERENCES products(id)
 );
 ~~~
-Giải thích:
-• products: sản phẩm với giá (price, đơn vị đồng) và tồn kho (stock).
-• DEFAULT 0: không nhập stock thì tự lấy 0.
-• orders: mỗi đơn có user_id (ai mua), product_id (mua gì), quantity (số lượng), status (trạng thái).
-• FOREIGN KEY ... REFERENCES: khai báo khóa ngoại trỏ sang users và products.
-Lưu ý: SQLite mặc định KHÔNG bắt buộc khóa ngoại (trừ khi bật PRAGMA foreign_keys = ON). Ta lợi dụng điều này để tạo sẵn vài "bug dữ liệu" cho bài săn lỗi.
 
 ### Thêm dữ liệu users
-~~~sql
-INSERT INTO users (id, full_name, email, city, created_at) VALUES
-  (1, 'Nguyễn Văn An', 'an@example.com',   'Hà Nội',  '2025-01-05'),
-  (2, 'Trần Thị Bình', 'binh@example.com', 'Đà Nẵng', '2025-02-10'),
-  (3, 'Lê Minh Châu',  'chau@example.com', 'TP.HCM',  '2025-02-20'),
-  (4, 'Phạm Thu Dung', NULL,               'Hà Nội',  '2025-03-01'),
-  (5, 'Hoàng Gia Huy', 'an@example.com',   'Cần Thơ', '2025-03-15'),
-  (6, 'Võ Ngọc Lan',   'lan@example.com',  'TP.HCM',  '2025-04-02');
-~~~
 Giải thích:
 • INSERT INTO users (các cột): thêm dữ liệu vào bảng users theo đúng thứ tự cột liệt kê.
 • VALUES: mỗi cặp ngoặc ( ... ) là một dòng; các dòng cách nhau bằng dấu phẩy, dòng cuối kết thúc bằng ;
 • NULL: không có giá trị (user 4 chưa có email).
 Bug cài sẵn: user 5 trùng email với user 1. Trên hệ thống thật đây thường là lỗi.
+~~~sql
+INSERT INTO users (id, full_name, email, city, created_at) VALUES
+  (1, 'Nguyễn Văn An', 'an@example.com',   'Vân Thoi',  '2025-01-05'),
+  (2, 'Trần Thị Bình', 'binh@example.com', 'Mầm Rìa', '2025-02-10'),
+  (3, 'Lê Minh Châu',  'chau@example.com', 'Lụa Mầm',  '2025-02-20'),
+  (4, 'Phạm Thu Dung', NULL,               'Vân Thoi',  '2025-03-01'),
+  (5, 'Hoàng Gia Huy', 'an@example.com',   'Sợi Nếp', '2025-03-15'),
+  (6, 'Võ Ngọc Lan',   'lan@example.com',  'Lụa Mầm',  '2025-04-02');
+~~~
 
 ### Thêm dữ liệu products và orders
+• 5 sản phẩm, 8 đơn hàng.
+Bug cài sẵn để luyện tập:
+• Đơn 7 có user_id = 99 — không có user nào id 99 (dòng mồ côi).
+• Đơn 8 có quantity = 0 mà vẫn PAID — vô lý.
 ~~~sql
 INSERT INTO products (id, name, price, stock) VALUES
   (1, 'Bàn phím cơ',      850000,  20),
@@ -190,34 +194,30 @@ INSERT INTO orders (id, user_id, product_id, quantity, status, created_at) VALUE
   (7, 99, 2, 1, 'PAID',      '2025-05-04'),
   (8, 2,  2, 0, 'PAID',      '2025-05-05');
 ~~~
-• 5 sản phẩm, 8 đơn hàng.
-Bug cài sẵn để luyện tập:
-• Đơn 7 có user_id = 99 — không có user nào id 99 (dòng mồ côi).
-• Đơn 8 có quantity = 0 mà vẫn PAID — vô lý.
 
 ### Chạy script và kiểm tra
-~~~bash
-cd C:\qa\sql
-sqlite3 shop.db ".read seed.sql"
-sqlite3 shop.db "SELECT COUNT(*) FROM users;"
-~~~
 Giải thích từng dòng:
 • Dòng 1: vào thư mục chứa shop.db và seed.sql.
 • Dòng 2: mở shop.db và chạy toàn bộ lệnh trong seed.sql. Không in gì ra nghĩa là thành công.
 • Dòng 3: đếm số user. Kết quả mong đợi: 6.
 Cách bằng giao diện: mở shop.db trong DB Browser → tab Execute SQL → dán nội dung seed.sql → bấm nút chạy (F5 hoặc Ctrl+Enter) → bấm Write Changes (Ctrl+S) để lưu.
+~~~bash
+cd C:\qa\sql
+sqlite3 shop.db ".read seed.sql"
+sqlite3 shop.db "SELECT COUNT(*) FROM users;"
+~~~
 
 ### Lỗi thường gặp
-~~~text
-The '<' operator is reserved for future use.
-Parse error near line 5: table users already exists
-Runtime error near line 20: UNIQUE constraint failed: users.id
-~~~
 • Lệnh sqlite3 shop.db < seed.sql chạy được trong cmd nhưng PowerShell không hỗ trợ dấu < → dùng ".read seed.sql" như slide trước.
 • table users already exists: script thiếu các dòng DROP TABLE IF EXISTS ở đầu.
 • UNIQUE constraint failed: chèn trùng khóa chính (chạy INSERT 2 lần mà không DROP bảng).
 • Dùng DB Browser mà quên Write Changes: đóng app là mất dữ liệu vừa thêm.
 • Chữ tiếng Việt bị lỗi font: lưu seed.sql với encoding UTF-8 (VS Code mặc định đã là UTF-8).
+~~~text
+The '<' operator is reserved for future use.
+Parse error near line 5: table users already exists
+Runtime error near line 20: UNIQUE constraint failed: users.id
+~~~
 
 PRACTICE: Tạo seed.sql từ 4 slide trên, chạy bằng sqlite3 shop.db ".read seed.sql". Đếm số dòng trong 3 bảng; kết quả đúng phải là users = 6, products = 5, orders = 8.
 Q: Vì sao đầu file seed.sql có DROP TABLE IF EXISTS?
@@ -232,90 +232,90 @@ Q: Trong PowerShell, cách nào chạy file seed.sql vào shop.db?
 ## LESSON sql-03 | SELECT và WHERE: hỏi đúng câu hỏi
 
 ### SELECT: xem dữ liệu
-~~~sql
-SELECT * FROM users;
-SELECT id, full_name, city FROM users;
-~~~
 Giải thích:
 • SELECT *: lấy tất cả các cột. Dấu * nghĩa là "mọi thứ".
 • FROM users: từ bảng users.
 • Dòng 2 chỉ lấy 3 cột cần thiết — nên làm vậy với bảng lớn.
 Kết quả mong đợi dòng 2 (gõ .headers on và .mode column trước cho dễ đọc):
 id  full_name      city
-1   Nguyễn Văn An  Hà Nội
-2   Trần Thị Bình  Đà Nẵng
-3   Lê Minh Châu   TP.HCM
+1   Nguyễn Văn An  Vân Thoi
+2   Trần Thị Bình  Mầm Rìa
+3   Lê Minh Châu   Lụa Mầm
 ... (tổng 6 dòng)
+~~~sql
+SELECT * FROM users;
+SELECT id, full_name, city FROM users;
+~~~
 
 ### WHERE: lọc dòng theo điều kiện
-~~~sql
-SELECT name, price FROM products WHERE price < 500000;
-SELECT * FROM orders WHERE status = 'PAID';
-SELECT * FROM orders WHERE status <> 'CANCELLED';
-~~~
 WHERE giống bộ lọc trong Excel: chỉ giữ lại dòng thỏa điều kiện.
 Giải thích từng dòng:
 • Dòng 1: sản phẩm giá dưới 500.000 → Chuột không dây (320000) và Cáp USB-C (90000).
 • Dòng 2: đơn có trạng thái PAID → 5 dòng (đơn 1, 2, 5, 7, 8).
 • Dòng 3: <> nghĩa là "khác" → 7 đơn không bị hủy.
 Các phép so sánh: = , <> (hoặc !=), > , < , >= , <=
+~~~sql
+SELECT name, price FROM products WHERE price < 500000;
+SELECT * FROM orders WHERE status = 'PAID';
+SELECT * FROM orders WHERE status <> 'CANCELLED';
+~~~
 
 ### Kết hợp điều kiện: AND, OR, IN
-~~~sql
-SELECT full_name FROM users WHERE city = 'Hà Nội' AND email IS NOT NULL;
-SELECT full_name, city FROM users WHERE city = 'Hà Nội' OR city = 'TP.HCM';
-SELECT full_name, city FROM users WHERE city IN ('Hà Nội', 'TP.HCM');
-~~~
 • AND: cả hai điều kiện đều đúng → chỉ Nguyễn Văn An.
 • OR: một trong hai đúng là được → An, Châu, Dung, Lan.
 • IN (...): cách viết gọn của nhiều OR → kết quả giống dòng 2.
 Mẹo: khi trộn AND và OR, luôn dùng ngoặc cho rõ, ví dụ:
 WHERE status = 'PAID' AND (user_id = 1 OR user_id = 3)
+~~~sql
+SELECT full_name FROM users WHERE city = 'Vân Thoi' AND email IS NOT NULL;
+SELECT full_name, city FROM users WHERE city = 'Vân Thoi' OR city = 'Lụa Mầm';
+SELECT full_name, city FROM users WHERE city IN ('Vân Thoi', 'Lụa Mầm');
+~~~
 
 ### Tìm gần đúng: LIKE và BETWEEN
-~~~sql
-SELECT full_name FROM users WHERE full_name LIKE 'Nguyễn%';
-SELECT id, email FROM users WHERE email LIKE '%@example.com';
-SELECT name, price FROM products WHERE price BETWEEN 100000 AND 1000000;
-~~~
 Giải thích:
 • LIKE 'Nguyễn%': bắt đầu bằng "Nguyễn", dấu % thay cho "bất kỳ ký tự nào, bao nhiêu cũng được".
 • '%@example.com': kết thúc bằng @example.com → 5 user (user 4 có email NULL nên không xuất hiện).
 • Dấu _ thay cho đúng 1 ký tự, ví dụ 'A_' khớp "An".
 • BETWEEN a AND b: từ a đến b, tính cả hai đầu → Bàn phím cơ (850000), Chuột không dây (320000).
+~~~sql
+SELECT full_name FROM users WHERE full_name LIKE 'Nguyễn%';
+SELECT id, email FROM users WHERE email LIKE '%@example.com';
+SELECT name, price FROM products WHERE price BETWEEN 100000 AND 1000000;
+~~~
 
 ### NULL: giá trị "không biết"
-~~~sql
-SELECT id, full_name FROM users WHERE email IS NULL;
-SELECT id, full_name FROM users WHERE email = NULL;
-SELECT id, full_name FROM users WHERE email IS NOT NULL;
-~~~
 • NULL không phải số 0, không phải chuỗi rỗng ''. Nó nghĩa là "không có dữ liệu".
 • Dòng 1: đúng cách → trả về Phạm Thu Dung.
 • Dòng 2: SAI cách → không trả về dòng nào, và cũng không báo lỗi! Đây là cái bẫy kinh điển.
 • Dòng 3: những user có email → 5 dòng.
 Tester nên hỏi: trường này có được phép NULL không? Màn hình hiển thị gì khi NULL?
+~~~sql
+SELECT id, full_name FROM users WHERE email IS NULL;
+SELECT id, full_name FROM users WHERE email = NULL;
+SELECT id, full_name FROM users WHERE email IS NOT NULL;
+~~~
 
 ### Lỗi thường gặp
+• no such column: gõ sai tên cột (fullname thay vì full_name) → xem cấu trúc bảng bằng .schema users
+• near "FROM": thường do thừa dấu phẩy trước FROM, ví dụ SELECT id, full_name, FROM users
+• Chuỗi phải dùng nháy đơn 'Vân Thoi'. Nháy kép "Vân Thoi" là tên cột → PostgreSQL báo lỗi; SQLite đôi khi bỏ qua, đừng dựa vào điều đó.
+• Không ra kết quả dù chắc chắn có dữ liệu: kiểm tra khoảng trắng thừa, chữ hoa/thường ('paid' khác 'PAID').
 ~~~text
 Parse error: no such column: fullname
 Parse error: near "FROM": syntax error
-ERROR:  column "Hà Nội" does not exist      (PostgreSQL)
+ERROR:  column "Vân Thoi" does not exist      (PostgreSQL)
 ~~~
-• no such column: gõ sai tên cột (fullname thay vì full_name) → xem cấu trúc bảng bằng .schema users
-• near "FROM": thường do thừa dấu phẩy trước FROM, ví dụ SELECT id, full_name, FROM users
-• Chuỗi phải dùng nháy đơn 'Hà Nội'. Nháy kép "Hà Nội" là tên cột → PostgreSQL báo lỗi; SQLite đôi khi bỏ qua, đừng dựa vào điều đó.
-• Không ra kết quả dù chắc chắn có dữ liệu: kiểm tra khoảng trắng thừa, chữ hoa/thường ('paid' khác 'PAID').
 
-PRACTICE: Viết 3 câu SQL: (1) đơn hàng có quantity lớn hơn 1, (2) sản phẩm có stock = 0, (3) user ở TP.HCM có email kết thúc bằng @example.com. Ghi lại số dòng của từng câu (đáp án: 2, 1, 2).
+PRACTICE: Viết 3 câu SQL: (1) đơn hàng có quantity lớn hơn 1, (2) sản phẩm có stock = 0, (3) user ở Lụa Mầm có email kết thúc bằng @example.com. Ghi lại số dòng của từng câu (đáp án: 2, 1, 2).
 Q: Câu nào tìm đúng các user chưa có email?
 - WHERE email = NULL
 + WHERE email IS NULL
 - WHERE email = ''
-Q: WHERE city IN ('Hà Nội', 'TP.HCM') tương đương với điều kiện nào?
-- city = 'Hà Nội' AND city = 'TP.HCM'
-+ city = 'Hà Nội' OR city = 'TP.HCM'
-- city LIKE 'Hà Nội%'
+Q: WHERE city IN ('Vân Thoi', 'Lụa Mầm') tương đương với điều kiện nào?
+- city = 'Vân Thoi' AND city = 'Lụa Mầm'
++ city = 'Vân Thoi' OR city = 'Lụa Mầm'
+- city LIKE 'Vân Thoi%'
 Q: Trong LIKE, ký tự % có nghĩa là gì?
 + Bất kỳ chuỗi ký tự nào, kể cả rỗng
 - Đúng một ký tự
@@ -324,10 +324,6 @@ Q: Trong LIKE, ký tự % có nghĩa là gì?
 ## LESSON sql-04 | Sắp xếp, giới hạn và hàm tổng hợp
 
 ### ORDER BY: sắp xếp kết quả
-~~~sql
-SELECT name, price FROM products ORDER BY price DESC;
-SELECT full_name, city FROM users ORDER BY city ASC, full_name ASC;
-~~~
 • ORDER BY price DESC: giá từ cao xuống thấp (DESC = giảm dần).
 • ASC = tăng dần (mặc định nếu không ghi).
 • Dòng 2: sắp theo city trước; cùng city thì sắp theo tên.
@@ -337,29 +333,39 @@ Tai nghe 1200000
 Bàn phím cơ 850000
 Chuột không dây 320000
 Cáp USB-C 90000
+~~~sql
+SELECT name, price FROM products ORDER BY price DESC;
+SELECT full_name, city FROM users ORDER BY city ASC, full_name ASC;
+~~~
 
 ### LIMIT và OFFSET: lấy vài dòng đầu
-~~~sql
-SELECT name, price FROM products ORDER BY price DESC LIMIT 3;
-SELECT name, price FROM products ORDER BY price DESC LIMIT 2 OFFSET 2;
-~~~
 • LIMIT 3: chỉ lấy 3 dòng đầu → 3 sản phẩm đắt nhất.
 • LIMIT 2 OFFSET 2: bỏ qua 2 dòng đầu, lấy 2 dòng tiếp → Bàn phím cơ, Chuột không dây. Đây chính là cách làm phân trang (trang 2, mỗi trang 2 dòng).
 • Với bảng hàng triệu dòng, luôn thêm LIMIT khi "xem thử" để không làm chậm database.
 • SQLite, PostgreSQL, MySQL dùng LIMIT; SQL Server dùng SELECT TOP 3 ... thay thế.
+~~~sql
+SELECT name, price FROM products ORDER BY price DESC LIMIT 3;
+SELECT name, price FROM products ORDER BY price DESC LIMIT 2 OFFSET 2;
+~~~
 
 ### COUNT: đếm số dòng
+• COUNT(*): đếm mọi dòng → 6.
+• COUNT(email): chỉ đếm dòng có email khác NULL → 5. Khác biệt 6 và 5 chính là user thiếu email!
+• Dòng 3: đếm đơn PAID → 5.
+Ứng dụng: so số liệu trên màn hình báo cáo (ví dụ "Tổng đơn đã thanh toán: 5") với số đếm từ database.
 ~~~sql
 SELECT COUNT(*) FROM users;
 SELECT COUNT(email) FROM users;
 SELECT COUNT(*) FROM orders WHERE status = 'PAID';
 ~~~
-• COUNT(*): đếm mọi dòng → 6.
-• COUNT(email): chỉ đếm dòng có email khác NULL → 5. Khác biệt 6 và 5 chính là user thiếu email!
-• Dòng 3: đếm đơn PAID → 5.
-Ứng dụng: so số liệu trên màn hình báo cáo (ví dụ "Tổng đơn đã thanh toán: 5") với số đếm từ database.
 
 ### SUM, AVG, MIN, MAX
+Giải thích:
+• SUM(stock): cộng tồn kho → 178.
+• AVG(price): giá trung bình → 1192000.0
+• MIN / MAX: nhỏ nhất / lớn nhất → 90000 và 3500000.
+• AS: đặt tên dễ hiểu cho cột kết quả.
+Câu lệnh có thể viết trên nhiều dòng; SQL chỉ quan tâm dấu ; ở cuối.
 ~~~sql
 SELECT SUM(stock)  AS tong_ton_kho,
        AVG(price)  AS gia_trung_binh,
@@ -367,31 +373,25 @@ SELECT SUM(stock)  AS tong_ton_kho,
        MAX(price)  AS dat_nhat
 FROM products;
 ~~~
-Giải thích:
-• SUM(stock): cộng tồn kho → 178.
-• AVG(price): giá trung bình → 1192000.0
-• MIN / MAX: nhỏ nhất / lớn nhất → 90000 và 3500000.
-• AS: đặt tên dễ hiểu cho cột kết quả.
-Câu lệnh có thể viết trên nhiều dòng; SQL chỉ quan tâm dấu ; ở cuối.
 
 ### Cột tính toán và DISTINCT
+• price * stock: tạo cột mới bằng phép nhân, ví dụ Bàn phím cơ: 850000 * 20 = 17000000.
+• DISTINCT: bỏ trùng lặp → 4 thành phố: Vân Thoi, Mầm Rìa, Lụa Mầm, Sợi Nếp.
+Ý tưởng test: so tổng giá trị kho trên trang quản trị với SUM(price * stock) trong database.
 ~~~sql
 SELECT name, price, stock, price * stock AS gia_tri_kho FROM products;
 SELECT DISTINCT city FROM users;
 ~~~
-• price * stock: tạo cột mới bằng phép nhân, ví dụ Bàn phím cơ: 850000 * 20 = 17000000.
-• DISTINCT: bỏ trùng lặp → 4 thành phố: Hà Nội, Đà Nẵng, TP.HCM, Cần Thơ.
-Ý tưởng test: so tổng giá trị kho trên trang quản trị với SUM(price * stock) trong database.
 
 ### Lỗi thường gặp
-~~~sql
-SELECT '90000' < '850000';
-SELECT 90000 < 850000;
-~~~
 • Dòng 1 trả 0 (sai!), dòng 2 trả 1 (đúng). Vì khi là chuỗi, máy so từng ký tự: '9' lớn hơn '8'.
 • Bài học: cột giá mà lưu kiểu TEXT thì ORDER BY và so sánh sẽ cho kết quả lạ → báo bug thiết kế dữ liệu.
 • Lỗi "misuse of aggregate: COUNT()": dùng COUNT trong WHERE → phải dùng HAVING (bài sau).
 • Quên ORDER BY trước LIMIT: kết quả "3 dòng đầu" có thể khác nhau mỗi lần chạy.
+~~~sql
+SELECT '90000' < '850000';
+SELECT 90000 < 850000;
+~~~
 
 PRACTICE: Viết câu SQL tìm 2 sản phẩm rẻ nhất còn hàng (stock > 0), và câu SQL tính tổng số lượng (SUM(quantity)) của các đơn PAID. Đáp án: Cáp USB-C, Chuột không dây; tổng = 5.
 Q: COUNT(*) = 6 nhưng COUNT(email) = 5. Điều đó cho biết gì?
@@ -406,12 +406,6 @@ Q: Câu nào lấy 3 sản phẩm đắt nhất?
 ## LESSON sql-05 | GROUP BY và HAVING: thống kê theo nhóm
 
 ### GROUP BY: chia vào từng rổ rồi đếm
-~~~sql
-SELECT status, COUNT(*) AS so_don
-FROM orders
-GROUP BY status
-ORDER BY status;
-~~~
 Hình dung: đổ hết đơn hàng ra bàn, xếp vào từng rổ theo trạng thái, rồi đếm mỗi rổ.
 Giải thích:
 • GROUP BY status: gom các dòng có cùng status thành một nhóm.
@@ -421,33 +415,44 @@ CANCELLED 1
 PAID 5
 PENDING 1
 SHIPPED 1
+~~~sql
+SELECT status, COUNT(*) AS so_don
+FROM orders
+GROUP BY status
+ORDER BY status;
+~~~
 
 ### Đếm đơn theo từng khách hàng
-~~~sql
-SELECT user_id, COUNT(*) AS so_don, SUM(quantity) AS tong_so_luong
-FROM orders
-GROUP BY user_id
-ORDER BY so_don DESC, user_id;
-~~~
 Giải thích:
 • Mỗi user_id thành một nhóm.
 • COUNT(*): số đơn; SUM(quantity): tổng số món đã đặt.
 • ORDER BY so_don DESC: ai nhiều đơn nhất lên đầu.
 Kết quả mong đợi: user 1, 2, 3 mỗi người 2 đơn; user 6 và user 99 mỗi người 1 đơn.
 Để ý user_id 99 — không có trong bảng users. Thống kê đã "lộ" bug dữ liệu!
+~~~sql
+SELECT user_id, COUNT(*) AS so_don, SUM(quantity) AS tong_so_luong
+FROM orders
+GROUP BY user_id
+ORDER BY so_don DESC, user_id;
+~~~
 
 ### HAVING: lọc sau khi gom nhóm
+• WHERE lọc từng dòng TRƯỚC khi gom nhóm.
+• HAVING lọc từng nhóm SAU khi gom.
+• Câu trên: chỉ giữ khách có từ 2 đơn trở lên → user 1, 2, 3.
 ~~~sql
 SELECT user_id, COUNT(*) AS so_don
 FROM orders
 GROUP BY user_id
 HAVING COUNT(*) >= 2;
 ~~~
-• WHERE lọc từng dòng TRƯỚC khi gom nhóm.
-• HAVING lọc từng nhóm SAU khi gom.
-• Câu trên: chỉ giữ khách có từ 2 đơn trở lên → user 1, 2, 3.
 
 ### WHERE và HAVING dùng cùng nhau
+Máy làm theo thứ tự:
+• Bước 1 (WHERE): chỉ giữ đơn PAID → đơn 1, 2, 5, 7, 8.
+• Bước 2 (GROUP BY): gom theo user_id → user 1 có 2 đơn; user 2, 3, 99 mỗi người 1 đơn.
+• Bước 3 (HAVING): giữ nhóm có từ 2 đơn → chỉ còn user 1.
+Kết quả mong đợi: một dòng 1 | 2.
 ~~~sql
 SELECT user_id, COUNT(*) AS so_don_paid
 FROM orders
@@ -455,13 +460,11 @@ WHERE status = 'PAID'
 GROUP BY user_id
 HAVING COUNT(*) >= 2;
 ~~~
-Máy làm theo thứ tự:
-• Bước 1 (WHERE): chỉ giữ đơn PAID → đơn 1, 2, 5, 7, 8.
-• Bước 2 (GROUP BY): gom theo user_id → user 1 có 2 đơn; user 2, 3, 99 mỗi người 1 đơn.
-• Bước 3 (HAVING): giữ nhóm có từ 2 đơn → chỉ còn user 1.
-Kết quả mong đợi: một dòng 1 | 2.
 
 ### Thứ tự viết một câu SELECT đầy đủ
+• Đây là "khung" để ghép câu lệnh; viết sai thứ tự sẽ bị syntax error.
+• Thứ tự máy thực hiện lại khác: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT.
+• Vì vậy tên đặt bằng AS trong SELECT thường dùng được ở ORDER BY nhưng không dùng được ở WHERE (với nhiều hệ quản trị như PostgreSQL).
 ~~~sql
 SELECT    cột, hàm tổng hợp
 FROM      bảng
@@ -471,18 +474,15 @@ HAVING    điều kiện trên từng nhóm
 ORDER BY  cột sắp xếp
 LIMIT     số dòng;
 ~~~
-• Đây là "khung" để ghép câu lệnh; viết sai thứ tự sẽ bị syntax error.
-• Thứ tự máy thực hiện lại khác: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT.
-• Vì vậy tên đặt bằng AS trong SELECT thường dùng được ở ORDER BY nhưng không dùng được ở WHERE (với nhiều hệ quản trị như PostgreSQL).
 
 ### Lỗi thường gặp
+• misuse of aggregate: viết WHERE COUNT(*) >= 2 → đổi thành HAVING COUNT(*) >= 2.
+• Lỗi PostgreSQL thứ hai: SELECT có cột không nằm trong GROUP BY mà cũng không nằm trong hàm tổng hợp.
+• Bẫy SQLite: SQLite không báo lỗi trường hợp trên mà tự lấy một giá trị bất kỳ → kết quả trông hợp lý nhưng sai. Luôn liệt kê đủ cột trong GROUP BY.
 ~~~text
 Parse error: misuse of aggregate: COUNT()
 ERROR:  column "orders.status" must appear in the GROUP BY clause or be used in an aggregate function   (PostgreSQL)
 ~~~
-• misuse of aggregate: viết WHERE COUNT(*) >= 2 → đổi thành HAVING COUNT(*) >= 2.
-• Lỗi PostgreSQL thứ hai: SELECT có cột không nằm trong GROUP BY mà cũng không nằm trong hàm tổng hợp.
-• Bẫy SQLite: SQLite không báo lỗi trường hợp trên mà tự lấy một giá trị bất kỳ → kết quả trông hợp lý nhưng sai. Luôn liệt kê đủ cột trong GROUP BY.
 
 PRACTICE: Viết câu SQL đếm số đơn theo product_id, chỉ hiển thị sản phẩm có từ 2 đơn trở lên, sắp xếp giảm dần. Đáp án: product 2 có 3 đơn, product 1 có 2 đơn.
 Q: Muốn lọc các nhóm có COUNT(*) > 1, ta dùng gì?
@@ -497,6 +497,10 @@ Q: Trong câu có cả WHERE và GROUP BY, WHERE được thực hiện khi nào
 ## LESSON sql-06 | JOIN: nối các bảng lại với nhau
 
 ### Vì sao cần JOIN?
+• Bảng orders chỉ lưu user_id, không lưu tên khách.
+• Muốn thấy "đơn 1 của Nguyễn Văn An", ta phải nối 2 bảng qua cột chung: orders.user_id = users.id.
+• JOIN giống việc ghép hai danh sách giấy bằng cách dò số thứ tự chung.
+• Đơn 7 không tìm được "bạn ghép" — đó là bug ta sẽ săn ở slide sau.
 ~~~text
 orders                         users
 id | user_id | status          id | full_name
@@ -504,34 +508,22 @@ id | user_id | status          id | full_name
 3  | 2       | SHIPPED  --->   2  | Trần Thị Bình
 7  | 99      | PAID     --->   ?? (không có user 99)
 ~~~
-• Bảng orders chỉ lưu user_id, không lưu tên khách.
-• Muốn thấy "đơn 1 của Nguyễn Văn An", ta phải nối 2 bảng qua cột chung: orders.user_id = users.id.
-• JOIN giống việc ghép hai danh sách giấy bằng cách dò số thứ tự chung.
-• Đơn 7 không tìm được "bạn ghép" — đó là bug ta sẽ săn ở slide sau.
 
 ### INNER JOIN: chỉ lấy dòng ghép được
-~~~sql
-SELECT o.id AS order_id, u.full_name, o.status
-FROM orders o
-INNER JOIN users u ON o.user_id = u.id
-ORDER BY o.id;
-~~~
 Giải thích từng dòng:
 • FROM orders o: lấy bảng orders, đặt biệt danh ngắn là o.
 • INNER JOIN users u: nối với bảng users, biệt danh u.
 • ON o.user_id = u.id: điều kiện ghép — user_id của đơn khớp với id của user.
 • SELECT o.id, u.full_name: lấy cột từ cả hai bảng, ghi rõ bảng nào bằng o. và u.
 Kết quả mong đợi: 7 dòng (đơn 1, 2, 3, 4, 5, 6, 8). Đơn 7 biến mất vì user 99 không tồn tại.
-
-### Nối 3 bảng và tính thành tiền
 ~~~sql
-SELECT o.id, u.full_name, p.name AS product,
-       o.quantity, p.price, o.quantity * p.price AS thanh_tien
+SELECT o.id AS order_id, u.full_name, o.status
 FROM orders o
-JOIN users u    ON o.user_id = u.id
-JOIN products p ON o.product_id = p.id
+INNER JOIN users u ON o.user_id = u.id
 ORDER BY o.id;
 ~~~
+
+### Nối 3 bảng và tính thành tiền
 • JOIN viết tắt cho INNER JOIN.
 • Mỗi JOIN thêm một bảng và một điều kiện ON.
 • thanh_tien = số lượng × đơn giá.
@@ -540,20 +532,33 @@ Kết quả mong đợi vài dòng đầu:
 2 | Nguyễn Văn An | Chuột không dây | 2 | 320000 | 640000
 3 | Trần Thị Bình | Màn hình 24 inch | 1 | 3500000 | 3500000
 Ý tưởng test: so thanh_tien với số tiền hiển thị trên trang chi tiết đơn hàng.
+~~~sql
+SELECT o.id, u.full_name, p.name AS product,
+       o.quantity, p.price, o.quantity * p.price AS thanh_tien
+FROM orders o
+JOIN users u    ON o.user_id = u.id
+JOIN products p ON o.product_id = p.id
+ORDER BY o.id;
+~~~
 
 ### LEFT JOIN: giữ tất cả bên trái
+• LEFT JOIN: giữ MỌI dòng của bảng bên trái (users), kể cả khi không ghép được; phần bên phải khi đó là NULL.
+• WHERE o.id IS NULL: chỉ giữ những user không có đơn nào.
+Kết quả mong đợi: 4 Phạm Thu Dung và 5 Hoàng Gia Huy.
+Ứng dụng: tìm khách chưa mua hàng, sản phẩm chưa ai đặt, user chưa được gán quyền...
 ~~~sql
 SELECT u.id, u.full_name, o.id AS order_id
 FROM users u
 LEFT JOIN orders o ON o.user_id = u.id
 WHERE o.id IS NULL;
 ~~~
-• LEFT JOIN: giữ MỌI dòng của bảng bên trái (users), kể cả khi không ghép được; phần bên phải khi đó là NULL.
-• WHERE o.id IS NULL: chỉ giữ những user không có đơn nào.
-Kết quả mong đợi: 4 Phạm Thu Dung và 5 Hoàng Gia Huy.
-Ứng dụng: tìm khách chưa mua hàng, sản phẩm chưa ai đặt, user chưa được gán quyền...
 
 ### Săn bug dữ liệu bằng SQL
+• Dấu -- bắt đầu một comment (ghi chú), máy bỏ qua.
+• Câu 1 → an@example.com xuất hiện 2 lần.
+• Câu 2 → đơn 7 (user_id 99).
+• Câu 3 → đơn 8 (quantity 0 nhưng PAID).
+Mỗi kết quả là một bug tiềm năng: báo kèm câu SQL để developer chạy lại được.
 ~~~sql
 -- 1) Email bị trùng
 SELECT email, COUNT(*) AS so_lan FROM users
@@ -568,22 +573,17 @@ WHERE u.id IS NULL;
 -- 3) Giá trị vô lý
 SELECT * FROM orders WHERE quantity <= 0;
 ~~~
-• Dấu -- bắt đầu một comment (ghi chú), máy bỏ qua.
-• Câu 1 → an@example.com xuất hiện 2 lần.
-• Câu 2 → đơn 7 (user_id 99).
-• Câu 3 → đơn 8 (quantity 0 nhưng PAID).
-Mỗi kết quả là một bug tiềm năng: báo kèm câu SQL để developer chạy lại được.
 
 ### Lỗi thường gặp
+• ambiguous column name: cả hai bảng đều có cột id → viết rõ o.id hoặc u.id.
+• Ra 48 dòng: quên điều kiện ON, SQLite ghép mọi đơn với mọi user (8 × 6 = 48). Luôn kiểm tra số dòng có hợp lý không.
+• PostgreSQL bắt buộc JOIN phải có ON (hoặc USING), thiếu là báo lỗi cú pháp.
+• Dùng INNER JOIN khi đang tìm dòng "không ghép được" → không bao giờ thấy bug; phải dùng LEFT JOIN.
 ~~~text
 Parse error: ambiguous column name: id
 (kết quả ra 48 dòng thay vì 8)
 ERROR:  syntax error at or near "ORDER"      (PostgreSQL, JOIN thiếu ON)
 ~~~
-• ambiguous column name: cả hai bảng đều có cột id → viết rõ o.id hoặc u.id.
-• Ra 48 dòng: quên điều kiện ON, SQLite ghép mọi đơn với mọi user (8 × 6 = 48). Luôn kiểm tra số dòng có hợp lý không.
-• PostgreSQL bắt buộc JOIN phải có ON (hoặc USING), thiếu là báo lỗi cú pháp.
-• Dùng INNER JOIN khi đang tìm dòng "không ghép được" → không bao giờ thấy bug; phải dùng LEFT JOIN.
 
 PRACTICE: Viết câu SQL liệt kê các sản phẩm chưa từng được đặt (dùng products LEFT JOIN orders). Sau đó viết câu SQL tính tổng thanh_tien của các đơn PAID có user hợp lệ. Đáp án: không có sản phẩm nào chưa được đặt; tổng = 2340000.
 Q: Muốn tìm user chưa có đơn hàng nào, nên dùng loại JOIN nào?
@@ -602,32 +602,37 @@ Q: Kết quả JOIN ra số dòng bằng tích số dòng hai bảng. Nguyên nh
 ## LESSON sql-07 | Kiểm tra dữ liệu sau khi gọi API và quy tắc an toàn
 
 ### Luồng kiểm tra end-to-end
-~~~text
-POST /api/orders
-Body:     { "userId": 2, "productId": 5, "quantity": 2 }
-Response: 201 Created
-          { "id": 9, "status": "PENDING", "createdAt": "2025-06-01" }
-~~~
 API trả 201 chưa chắc dữ liệu đã đúng. Tester kiểm tra thêm trong database (của môi trường test):
 • Có đúng 1 dòng mới với id 9 không?
 • user_id, product_id, quantity, status có khớp request không?
 • Tồn kho sản phẩm 5 có giảm đúng 2 không?
 • Có bị tạo trùng 2 đơn khi bấm gửi 2 lần không?
 Trong khóa này ta không có backend thật, nên slide sau sẽ giả lập việc backend ghi vào shop.db.
+~~~text
+POST /api/orders
+Body:     { "userId": 2, "productId": 5, "quantity": 2 }
+Response: 201 Created
+          { "id": 9, "status": "PENDING", "createdAt": "2025-06-01" }
+~~~
 
 ### Giả lập backend ghi dữ liệu (chỉ trên shop.db tập luyện)
+• Đây là những gì backend sẽ làm khi nhận POST /api/orders. Ta tự chạy để có dữ liệu luyện tập.
+• INSERT: thêm đơn 9.
+• UPDATE ... SET stock = stock - 2 WHERE id = 5: trừ tồn kho của Cáp USB-C. Chú ý có WHERE — thiếu WHERE là trừ kho TẤT CẢ sản phẩm!
+• Trong công việc thật, tester KHÔNG tự sửa dữ liệu như vậy, đặc biệt không bao giờ trên PROD.
 ~~~sql
 INSERT INTO orders (id, user_id, product_id, quantity, status, created_at)
 VALUES (9, 2, 5, 2, 'PENDING', '2025-06-01');
 
 UPDATE products SET stock = stock - 2 WHERE id = 5;
 ~~~
-• Đây là những gì backend sẽ làm khi nhận POST /api/orders. Ta tự chạy để có dữ liệu luyện tập.
-• INSERT: thêm đơn 9.
-• UPDATE ... SET stock = stock - 2 WHERE id = 5: trừ tồn kho của Cáp USB-C. Chú ý có WHERE — thiếu WHERE là trừ kho TẤT CẢ sản phẩm!
-• Trong công việc thật, tester KHÔNG tự sửa dữ liệu như vậy, đặc biệt không bao giờ trên PROD.
 
 ### Câu SQL kiểm tra sau API
+Kết quả mong đợi:
+• Câu 1: đúng 1 dòng 9 | 2 | 5 | 2 | PENDING | 2025-06-01 → so với request và response.
+• Câu 2: 98 (trước là 100, đã trừ 2).
+• Câu 3: 1. Nếu ra 2 nghĩa là có đơn trùng → bug double submit.
+Ghi các câu này vào test case để lần sau chạy lại nhanh.
 ~~~sql
 SELECT id, user_id, product_id, quantity, status, created_at
 FROM orders WHERE id = 9;
@@ -637,20 +642,8 @@ SELECT stock FROM products WHERE id = 5;
 SELECT COUNT(*) AS so_don_giong_nhau FROM orders
 WHERE user_id = 2 AND product_id = 5 AND created_at = '2025-06-01';
 ~~~
-Kết quả mong đợi:
-• Câu 1: đúng 1 dòng 9 | 2 | 5 | 2 | PENDING | 2025-06-01 → so với request và response.
-• Câu 2: 98 (trước là 100, đã trừ 2).
-• Câu 3: 1. Nếu ra 2 nghĩa là có đơn trùng → bug double submit.
-Ghi các câu này vào test case để lần sau chạy lại nhanh.
 
 ### Làm việc với PostgreSQL bằng psql
-~~~bash
-psql -h localhost -p 5432 -U qa_readonly -d shop_test
-\dt
-\d orders
-SELECT * FROM orders WHERE id = 9;
-\q
-~~~
 Giải thích từng dòng:
 • Dòng 1: kết nối PostgreSQL trên máy bạn (localhost), cổng 5432, user chỉ-đọc qa_readonly, database shop_test. psql sẽ hỏi mật khẩu.
 • \dt: liệt kê các bảng (giống .tables của SQLite).
@@ -658,8 +651,21 @@ Giải thích từng dòng:
 • Dòng 4: câu SQL bình thường, nhớ dấu ;
 • \q: thoát.
 Phần lớn câu SQL trong khóa này chạy được cả trên PostgreSQL. Khác biệt nhỏ: tìm không phân biệt hoa thường dùng ILIKE.
+~~~bash
+psql -h localhost -p 5432 -U qa_readonly -d shop_test
+\dt
+\d orders
+SELECT * FROM orders WHERE id = 9;
+\q
+~~~
 
 ### Quy tắc an toàn bắt buộc
+• Không bao giờ chạy UPDATE, DELETE, DROP, TRUNCATE trên PROD.
+• Xem PROD (nếu được phép) chỉ bằng tài khoản read-only.
+• Mọi UPDATE/DELETE phải có WHERE, và WHERE đó đã được thử bằng SELECT.
+• Trước khi chạy, nhìn lại đang kết nối tới server/database nào.
+• Thêm LIMIT khi khám phá bảng lớn.
+• Không sao chép dữ liệu cá nhân của khách hàng ra file, chat hay công cụ bên ngoài.
 ~~~sql
 -- Bước 1: luôn SELECT trước để xem sẽ ảnh hưởng dòng nào
 SELECT * FROM orders WHERE id = 9;
@@ -667,21 +673,8 @@ SELECT * FROM orders WHERE id = 9;
 -- Bước 2: chỉ trên DB test, và chỉ khi được phép, mới sửa với ĐÚNG điều kiện đó
 UPDATE orders SET status = 'PAID' WHERE id = 9;
 ~~~
-• Không bao giờ chạy UPDATE, DELETE, DROP, TRUNCATE trên PROD.
-• Xem PROD (nếu được phép) chỉ bằng tài khoản read-only.
-• Mọi UPDATE/DELETE phải có WHERE, và WHERE đó đã được thử bằng SELECT.
-• Trước khi chạy, nhìn lại đang kết nối tới server/database nào.
-• Thêm LIMIT khi khám phá bảng lớn.
-• Không sao chép dữ liệu cá nhân của khách hàng ra file, chat hay công cụ bên ngoài.
 
 ### Transaction: nút "hoàn tác" trên DB test
-~~~sql
-BEGIN;
-UPDATE products SET price = 0 WHERE id = 1;
-SELECT id, name, price FROM products WHERE id = 1;
-ROLLBACK;
-SELECT id, name, price FROM products WHERE id = 1;
-~~~
 Chạy trong sqlite3 shop.db, từng dòng:
 • BEGIN: mở một giao dịch — mọi thay đổi sau đó chưa được lưu hẳn.
 • UPDATE: thử đổi giá Bàn phím cơ thành 0.
@@ -689,18 +682,25 @@ Chạy trong sqlite3 shop.db, từng dòng:
 • ROLLBACK: hủy mọi thay đổi từ sau BEGIN.
 • SELECT (lần 2): price trở lại 850000.
 Dùng COMMIT thay cho ROLLBACK nếu muốn lưu thật. Transaction là lưới an toàn trên DB test, không phải giấy phép để sửa PROD.
+~~~sql
+BEGIN;
+UPDATE products SET price = 0 WHERE id = 1;
+SELECT id, name, price FROM products WHERE id = 1;
+ROLLBACK;
+SELECT id, name, price FROM products WHERE id = 1;
+~~~
 
 ### Lỗi thường gặp
+• psql not recognized: thêm thư mục bin của PostgreSQL (ví dụ C:\Program Files\PostgreSQL\17\bin) vào PATH, rồi mở lại terminal.
+• password authentication failed: sai user/mật khẩu → hỏi người quản lý DB test, không đoán mò.
+• relation does not exist: kết nối nhầm database/schema, hoặc tên bảng phân biệt hoa thường.
+• cannot start a transaction within a transaction: đã có BEGIN đang mở (hoặc công cụ giao diện tự mở sẵn) → chạy ROLLBACK, hoặc dùng sqlite3 dòng lệnh.
 ~~~text
 psql : The term 'psql' is not recognized as the name of a cmdlet...
 psql: error: ... FATAL:  password authentication failed for user "qa_readonly"
 ERROR:  relation "orders" does not exist
 Runtime error: cannot start a transaction within a transaction
 ~~~
-• psql not recognized: thêm thư mục bin của PostgreSQL (ví dụ C:\Program Files\PostgreSQL\17\bin) vào PATH, rồi mở lại terminal.
-• password authentication failed: sai user/mật khẩu → hỏi người quản lý DB test, không đoán mò.
-• relation does not exist: kết nối nhầm database/schema, hoặc tên bảng phân biệt hoa thường.
-• cannot start a transaction within a transaction: đã có BEGIN đang mở (hoặc công cụ giao diện tự mở sẵn) → chạy ROLLBACK, hoặc dùng sqlite3 dòng lệnh.
 
 PRACTICE: Giả lập một API "hủy đơn" cho đơn 6: trong một transaction, UPDATE status thành 'CANCELLED' và cộng lại tồn kho sản phẩm 3. Viết các câu SELECT kiểm tra, rồi ROLLBACK và xác nhận dữ liệu trở về như cũ.
 Q: Trước khi chạy một câu UPDATE trên DB test, việc nên làm đầu tiên là gì?
@@ -715,3 +715,398 @@ Q: API trả 201 Created. Câu SQL nào giúp phát hiện bug tạo đơn trùn
 - SELECT * FROM products;
 + Đếm số đơn có cùng user_id, product_id và thời điểm tạo
 - DROP TABLE orders;
+
+## LESSON sql-08 | Subquery và CTE để chia bài toán
+
+### Chia phép đối soát thành bước có tên
+Kho giả định Gió Mầm cần biết số tiền từng khách đã trả. CTE dưới chỉ gom payment thành công thành một dòng mỗi khách rồi nối customers; nó làm rõ hạt dữ liệu, không hứa luôn tăng tốc.
+~~~sql
+WITH paid AS (
+ SELECT customer_id,SUM(amount) AS total
+ FROM payments WHERE status='paid' GROUP BY customer_id
+) SELECT c.id,COALESCE(p.total,0) AS total
+FROM customers c LEFT JOIN paid p ON p.customer_id=c.id;
+~~~
+
+### Truy vấn tồn tại phải liên hệ đúng khóa
+Tìm khách chưa có đơn bằng NOT EXISTS. Điều kiện o.customer_id=c.id biến câu hỏi thành kiểm cho từng khách; bỏ nó sẽ hỏi cả bảng có bất kỳ đơn nào hay không.
+~~~sql
+SELECT c.id FROM customers c
+WHERE NOT EXISTS (
+ SELECT 1 FROM orders o WHERE o.customer_id=c.id
+);
+~~~
+
+### NULL có thể làm NOT IN khác dự đoán
+Nếu tập bị loại chứa NULL, phép NOT IN có thể trả unknown. Fixture nhỏ cho thấy vì sao không đổi NOT EXISTS sang NOT IN một cách máy móc.
+~~~sql
+CREATE TEMP TABLE blocked(customer_id INTEGER);
+INSERT INTO blocked VALUES(NULL),(2);
+SELECT 1 NOT IN (SELECT customer_id FROM blocked);
+SELECT NOT EXISTS(SELECT 1 FROM blocked WHERE customer_id=1);
+~~~
+
+### Expected viết tay trước khi chạy
+Tạo ba khách: có hai payment paid, chưa có payment, chỉ có payment failed. Tính tổng bằng tay, rồi kiểm từng dòng để phát hiện lọc trạng thái sai hoặc nhân tổng do join.
+
+### Tối ưu sau khi hiểu kết quả
+Giữ alias rõ nghĩa và kiểm grain trước. Muốn nói CTE nhanh hơn cần kế hoạch và số đo với dữ liệu đại diện; cách viết dễ đọc không thay thế index hay đo thực nghiệm.
+
+PRACTICE: Tạo fixture SQLite cho ba khách và các payment tự đặt. Viết CTE tổng tiền và NOT EXISTS khách chưa có đơn; thêm NULL, so NOT IN và nộp expected/actual giải thích từng khác biệt.
+Q: CTE chủ yếu giúp gì trong bài?
++ Đặt tên bước trung gian
+- Luôn tăng tốc
+- Tạo index vĩnh viễn
+Q: Tìm khách chưa từng có đơn thường dùng gì?
++ NOT EXISTS có liên hệ đúng khóa
+- NOT IN bất kể NULL
+- JOIN thiếu ON
+
+## LESSON sql-09 | Hàm cửa sổ và chọn bản ghi mới nhất
+
+### Lấy một sự kiện mới nhất mỗi đơn
+Nhật ký giả định có nhiều trạng thái cho cùng order_id. Chia theo đơn và xếp giờ giảm dần; event_id là khóa phân xử khi giờ bằng nhau, để dòng rn=1 có ý nghĩa xác định.
+~~~sql
+WITH ranked AS (
+ SELECT *,ROW_NUMBER() OVER (
+ PARTITION BY order_id ORDER BY created_at DESC,event_id DESC
+ ) AS rn FROM order_events
+) SELECT order_id,status FROM ranked WHERE rn=1;
+~~~
+
+### Đối chiếu số dư với dòng liền trước
+LAG nhìn giá trị trước trong cùng tài khoản. Dòng đầu trả NULL vì chưa có lịch sử, không phải thay đổi bằng không; báo cáo phải giữ sự khác biệt này.
+~~~sql
+SELECT account_id,event_id,balance,
+ LAG(balance) OVER(PARTITION BY account_id ORDER BY event_id) AS previous
+FROM balance_events;
+~~~
+
+### Frame tường minh cho cộng dồn
+Khi muốn cộng lần lượt từng dòng, chỉ rõ ROWS và thứ tự duy nhất. Nếu để peer group theo timestamp trùng, một số frame có thể cho kết quả khác cộng từng sự kiện.
+~~~sql
+SELECT account_id,event_id,amount,
+ SUM(amount) OVER(PARTITION BY account_id ORDER BY event_id
+ ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total
+FROM ledger;
+~~~
+
+### Không lẫn cửa sổ với gom nhóm
+GROUP BY rút nhiều dòng thành một nhóm. Window giữ chi tiết và bổ sung giá trị tính; lọc rn ở lớp truy vấn ngoài vì alias cửa sổ chưa phải điều kiện WHERE cùng lớp.
+
+### Bộ thử cố ý có thời điểm bằng nhau
+Tạo đơn chỉ có một sự kiện và đơn có hai timestamp giống nhau. Đổi thứ tự INSERT rồi kiểm bản ghi mới nhất và tổng chạy vẫn theo khóa đã định, không dựa vào thứ tự lưu.
+
+PRACTICE: Viết ba query latest-state, previous-balance, running-total. Bàn giao fixture và bảng kết quả từng dòng; giải thích tie-break, NULL đầu phân vùng và lý do dùng lớp CTE để lọc rn.
+Q: ROW_NUMBER chọn mới nhất khi giờ trùng cần gì?
++ Khóa phân xử duy nhất
+- Chỉ ORDER BY timestamp
+- Lấy ngẫu nhiên một dòng
+Q: Window function khác GROUP BY ra sao?
++ Thường giữ chi tiết từng dòng
+- Luôn chỉ còn một dòng
+- Luôn bỏ NULL
+
+## LESSON sql-10 | Transaction, khóa và bất biến nghiệp vụ
+
+### Gom hai thay đổi ví trong một transaction
+Ví điểm lab chuyển 20 điểm từ W1 sang W2. Ví dụ có hai UPDATE nhưng ứng dụng bắt buộc kiểm mỗi bước ảnh hưởng đúng một dòng; nếu không thì ROLLBACK thay vì COMMIT phần đã làm.
+~~~sql
+BEGIN;
+UPDATE wallets SET balance=balance-20 WHERE id='W1' AND balance>=20;
+-- Ứng dụng xác nhận đúng 1 dòng, nếu không: ROLLBACK.
+UPDATE wallets SET balance=balance+20 WHERE id='W2';
+-- Xác nhận W2 tồn tại trước khi commit.
+COMMIT;
+~~~
+
+### Constraint bảo vệ từng dòng
+CHECK ngăn số dư âm ở bảng SQLite lab. Nó chưa đủ kiểm tổng điểm hai ví hay người nhận đúng, nên phải kết hợp với transaction và quy tắc nghiệp vụ.
+~~~sql
+CREATE TABLE wallets(
+ id TEXT PRIMARY KEY,
+ balance INTEGER NOT NULL CHECK(balance>=0)
+);
+INSERT INTO wallets VALUES('W1',50),('W2',10);
+~~~
+
+### Quan sát khóa bằng hai connection
+BEGIN IMMEDIATE trong SQLite lấy quyền ghi sớm và có thể gặp busy nếu đã có phiên ghi. Hành vi cụ thể này không đại diện mọi hệ quản trị; ghi timeout và chính sách retry có giới hạn.
+~~~sql
+-- Phiên A trên file lab:
+BEGIN IMMEDIATE;
+UPDATE wallets SET balance=balance-5 WHERE id='W1';
+-- Thử phiên B trong lúc A chưa kết thúc.
+-- Sau khi quan sát ở B, kết thúc A:
+ROLLBACK;
+~~~
+
+### Tránh ghi đè từ giá trị đã đọc cũ
+Hai tiến trình cùng đọc số dư rồi ghi số tính sẵn có thể làm mất cập nhật. Dùng cập nhật tương đối với điều kiện và kiểm affected rows; không giữ transaction mở trong lúc chờ người dùng.
+
+### Bất biến sau lỗi giữa chừng
+Gây lỗi ở bước cộng người nhận và rollback. So cả từng ví lẫn tổng trước/sau; thêm thiếu điểm, ví không có và hai yêu cầu tranh cùng số dư để kiểm ranh giới.
+
+PRACTICE: Chạy hai phiên SQLite, ghi bảng thao tác xen kẽ và kết quả busy. Test lỗi giữa hai UPDATE phải khôi phục số dư ban đầu; mọi thao tác chỉ trong tệp ví giả định.
+Q: Transaction chuyển điểm cần bất biến nào?
++ Hai vế cùng commit hoặc rollback
+- Chỉ trừ thành công
+- Tự đổi mọi NULL thành 0
+Q: Đọc số dư rồi ghi giá trị tính sẵn có rủi ro gì?
++ Mất cập nhật khi cạnh tranh
+- Không thể sai trong transaction
+- SQL tự sửa quy tắc
+
+## LESSON sql-11 | Index, EXPLAIN và đo truy vấn
+
+### Bắt đầu từ mẫu truy vấn thực sự dùng
+Quầy giả định Sương Nếp xem đơn theo khách và ngày. Lưu truy vấn, số dòng và phân bố trước khi thêm index; một bảng vài dòng không đủ đại diện quyết định hiệu năng.
+~~~sql
+EXPLAIN QUERY PLAN
+SELECT id,total FROM orders
+WHERE customer_id='C17' AND created_at>='2030-01-01'
+ORDER BY created_at,id;
+~~~
+
+### Index ghép là đánh đổi có đo lường
+Cột khách dùng phép bằng, ngày dùng khoảng, id giúp phân xử. Thêm chỉ mục có chi phí ghi và dung lượng; so plan và thời gian trước/sau thay vì khẳng định mọi SEARCH đều tốt.
+~~~sql
+CREATE INDEX ix_orders_customer_date
+ON orders(customer_id,created_at,id);
+EXPLAIN QUERY PLAN
+SELECT id,total FROM orders
+WHERE customer_id='C17' AND created_at>='2030-01-01'
+ORDER BY created_at,id;
+~~~
+
+### Khoảng nửa mở cho bộ lọc ngày
+Trong lab timestamp có cùng định dạng ISO và múi giờ. Lọc từ đầu tháng đến trước tháng sau tránh đoán giây cuối tháng; không áp cùng logic cho dữ liệu ngày lưu lẫn nhiều định dạng.
+~~~sql
+SELECT id FROM orders
+WHERE created_at>='2030-02-01'
+AND created_at<'2030-03-01';
+~~~
+
+### Đọc plan cùng độ chọn lọc
+SCAN có thể hợp lý nếu cần phần lớn bảng. Đo nhiều lượt, ghi cache và điều kiện máy; không so một lượt nóng sau thêm index với một lượt lạnh trước đó rồi kết luận quá mức.
+
+### Kiểm tác động lên đường ghi
+Đo thêm nhập lô và dung lượng file. Giữ hoặc bỏ index dựa trên câu hỏi sản phẩm và ngân sách, chỉ thử xóa index ở bản sao lab để không ảnh hưởng dữ liệu đang dùng.
+
+PRACTICE: Sinh vài nghìn đơn giả có phân bố lệch. So hai query trước/sau index bằng plan và median nhiều lượt; nộp số dòng, điều kiện đo, chi phí ghi và quyết định có lý do.
+Q: Index có luôn làm nhanh hơn không?
++ Không, có chi phí ghi và dung lượng
+- Có, càng nhiều càng tốt
+- Chỉ khi tên ngắn
+Q: Index (customer_id,created_at) thường phù hợp mẫu nào?
++ Lọc khách rồi khoảng ngày
+- Mọi lọc ngày đều chắc tối ưu
+- Chỉ đếm toàn bảng
+
+## LESSON sql-12 | Migration và đối soát dữ liệu trước sau
+
+### Chuyển schema cần giữ nghĩa dữ liệu cũ
+Lab thêm currency cho orders. Giả định toàn bộ đơn cũ cùng đơn vị tiền giả DLM phải được ghi rõ; không tự áp mặc định cho một hệ thống có nhiều loại tiền chưa được xác nhận.
+~~~sql
+ALTER TABLE orders ADD COLUMN currency TEXT;
+UPDATE orders SET currency='DLM' WHERE currency IS NULL;
+SELECT COUNT(*) FROM orders WHERE currency IS NULL;
+~~~
+
+### Chụp nhiều bất biến theo nhóm
+Đếm dòng, khóa khác nhau và tổng tiền theo trạng thái. Dùng đơn vị nhỏ dạng số nguyên để tránh sai số thập phân trong phép đối soát tiền lab.
+~~~sql
+SELECT status,COUNT(*) AS n,COUNT(DISTINCT id) AS ids,
+ SUM(total_minor) AS money
+FROM orders GROUP BY status ORDER BY status;
+~~~
+
+### Tìm bản ghi mất, dư và đổi giá trị
+Hai bản sao before/after giúp chỉ ra id lệch. EXCEPT trên id chưa so nội dung, nên cần truy vấn nối theo khóa để phát hiện tiền bị sửa dù số dòng khớp.
+~~~sql
+SELECT id FROM orders_before EXCEPT SELECT id FROM orders_after;
+SELECT id FROM orders_after EXCEPT SELECT id FROM orders_before;
+SELECT b.id FROM orders_before b JOIN orders_after a ON a.id=b.id
+WHERE b.total_minor<>a.total_minor;
+~~~
+
+### Quay lui phải tính cả giao dịch mới
+Rollback cấu trúc không tự khôi phục thông tin đã bỏ. Xác định snapshot, điểm dừng ghi và cách xử lý dữ liệu phát sinh; bài lab cố định dữ liệu để tập trước khi bàn tình huống có ghi đồng thời.
+
+### Lần chạy thứ hai cần kết quả đã định
+Không mặc định mọi migration idempotent. Ghi version và checksum, quy định chạy lại báo đã áp dụng hoặc không đổi gì; không catch toàn bộ lỗi rồi ghi thành công giả.
+
+PRACTICE: Migration currency trên bản sao, đối soát theo trạng thái và truy id lệch. Cố ý mất một dòng và thêm một dòng để COUNT vẫn bằng nhau; phục hồi snapshot và xác nhận bất biến.
+Q: Thêm trường bắt buộc vào dữ liệu cũ cần gì?
++ Chính sách backfill và xác nhận
+- Chỉ sửa schema
+- Xóa NULL không báo
+Q: COUNT trước/sau migration bằng nhau có đủ không?
++ Không, còn khóa và tổng theo nhóm
+- Có, chắc dữ liệu giống nhau
+- Chỉ xem thêm một dòng
+
+## LESSON sql-13 | Dự án: kiểm sổ đơn và thanh toán giả
+
+### Chốt hạt dữ liệu sổ đơn
+Quán giả định Vệt Bông có một đơn và nhiều lần thanh toán. Mỗi đơn chỉ tính tổng một lần; payment failed không đóng góp doanh thu. Nêu chính sách thanh toán một phần trước khi kết luận thiếu tiền là lỗi.
+~~~text
+orders: id,customer_id,total_minor,status
+payments: id,order_id,amount_minor,status
+Bất biến lab: đơn paid có paid_sum = total_minor
+Ngoại lệ: thiếu tiền, dư tiền, payment mồ côi
+~~~
+
+### Gom payment trước khi join
+Nếu cộng order_total sau join một-nhiều sẽ nhân tiền đơn. CTE gom theo order_id rồi nối, dùng COALESCE riêng ở phép tính cần coi chưa có payment là không đồng.
+~~~sql
+WITH p AS (
+ SELECT order_id,SUM(amount_minor) AS paid_sum
+ FROM payments WHERE status='paid' GROUP BY order_id
+) SELECT o.id,o.total_minor,COALESCE(p.paid_sum,0) AS paid_sum
+FROM orders o LEFT JOIN p ON p.order_id=o.id
+WHERE o.status='paid' AND COALESCE(p.paid_sum,0)<>o.total_minor;
+~~~
+
+### Kiểm ràng buộc và payment không có đơn
+SQLite cần bật foreign_keys theo connection. Dữ liệu thô có thể nằm bảng staging không constraint để phát hiện lỗi trước chuyển bảng sạch; không tắt ràng buộc trong kho đang dùng để nạp bừa.
+~~~sql
+PRAGMA foreign_keys=ON;
+SELECT p.id FROM payments p LEFT JOIN orders o ON o.id=p.order_id
+WHERE o.id IS NULL;
+PRAGMA foreign_key_check;
+~~~
+
+### Fixture có sai khác để kiểm độ nhạy
+Tạo sáu nhóm: chưa trả, đúng tiền, thiếu, dư, hai paid và mồ côi. Expected ghi từng id với lý do, kể cả ca không lỗi; query rỗng trên toàn dữ liệu tốt chưa chứng minh kiểm đúng.
+
+### Bàn giao quyết định có giới hạn
+Tách lỗi dữ liệu đã chứng minh khỏi câu hỏi cần xác nhận nghiệp vụ. Nộp script dựng lab, query đọc, expected, kế hoạch index và phục hồi; script xóa hoặc sửa dữ liệu không tự chạy khi mở tài liệu.
+
+PRACTICE: Nộp lab SQLite với sáu nhóm fixture và tám phép kiểm, trong đó có đối soát số lượng, tiền, khóa và latest-state. Đo một query, thử migration, phục hồi và viết báo cáo id lỗi kèm ảnh hưởng.
+Q: SUM(order_total) sau join đơn với nhiều payment có nguy cơ gì?
++ Nhân tổng tiền đơn
+- Tự thành NULL
+- Không có vì có khóa ngoại
+Q: Kiểm giá trị NULL bằng gì?
++ IS NULL
+- Luôn = NULL
+- Luôn != NULL
+Q: Bàn giao kiểm sổ cần bằng chứng gì?
++ Fixture, query, expected và sai khác
+- Chỉ ảnh một tổng
+- Tài khoản sản xuất
+
+## LESSON sql-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. WHERE chọn dòng đầu vào; HAVING mới lọc nhóm sau tổng hợp.
+2. COUNT(*) đếm dòng, còn COUNT(email) bỏ các giá trị NULL.
+3. Điều kiện bảng phải ở WHERE có thể loại dòng NULL và làm mất khách chưa có đơn.
+4. HAVING kiểm kết quả tổng hợp; WHERE không dùng để lọc tổng theo nhóm như thế.
+
+### Dữ liệu và điều kiện biên
+5. Cần ORDER BY và khóa phân xử ổn định nếu muốn so thứ tự hoặc phân trang.
+6. Tham số bảo vệ vị trí giá trị; tên bảng/cột động còn cần danh sách cho phép.
+7. Xác định phạm vi ghi, dùng transaction và kiểm affected rows trước khi chấp nhận thay đổi.
+8. CTE làm rõ bước tính; hiệu năng vẫn phụ thuộc kế hoạch và dữ liệu.
+
+### Tính đúng và cách điều tra
+9. NOT EXISTS kiểm sự tồn tại theo từng khách và tránh bẫy NULL thường gặp của NOT IN.
+10. Thêm event_id vào thứ tự giúp xác định một bản ghi khi timestamp bằng nhau.
+11. Hàm cửa sổ tính trên phân vùng nhưng vẫn gắn kết quả lên dòng đầu vào.
+12. Nguyên tử tránh thực hiện một nửa; điều kiện số dư và cạnh tranh còn phải kiểm riêng.
+
+### Rủi ro và lựa chọn phương án
+13. Hai phiên có thể dựa trên giá trị cũ; cần cập nhật có điều kiện hoặc cơ chế đồng thời phù hợp.
+14. Đánh giá độ chọn lọc, plan, thời gian đọc và chi phí duy trì trên dữ liệu đại diện.
+15. Thứ tự cột ảnh hưởng cách dùng tiền tố; kế hoạch cụ thể vẫn cần được đo.
+16. Dữ liệu cũ phải được chuyển theo nghĩa nghiệp vụ trước khi áp ràng buộc mới.
+
+### Dự án, bằng chứng và bàn giao
+17. Một dòng mất và một dòng dư có thể bù nhau; cần nhiều bất biến và truy vấn sai khác.
+18. Quan hệ một-nhiều nhân dòng; tổng hợp đúng hạt dữ liệu trước khi nối.
+19. So sánh thường với NULL tạo unknown; dùng IS NULL/IS NOT NULL theo mục đích.
+20. Gói lab dùng dữ liệu giả và phép kiểm tái lập, không cần quyền dữ liệu thật.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: WHERE lọc ở tầng nào?
++ Trước gom nhóm
+- Sau ORDER BY
+- Chỉ sau HAVING
+Q: COUNT(*) khác COUNT(email) khi nào?
++ email có NULL
+- Bảng có khóa chính
+- Có ORDER BY
+Q: LEFT JOIN cần giữ khách chưa có đơn phù hợp: điều kiện trạng thái đơn đặt đâu?
++ Trong ON
+- Luôn trong WHERE
+- Trong LIMIT
+Q: Lọc nhóm có tổng tiền trên 100 bằng gì?
++ HAVING SUM(amount)>100
+- WHERE SUM(amount)>100
+- LIMIT 100
+Q: Kết quả SELECT không ORDER BY có thứ tự đảm bảo không?
++ Không
+- Theo thứ tự INSERT mãi mãi
+- Theo tên bảng
+Q: Vì sao truyền tham số thay ghép input vào SQL?
++ Tách dữ liệu khỏi cấu trúc lệnh
+- Để nhận mọi cú pháp input
+- Để không cần kiểm quyền
+Q: Trước UPDATE trong lab nên kiểm gì?
++ SELECT cùng điều kiện và số dòng
+- Độ dài tên bảng
+- Tắt constraint
+Q: CTE chủ yếu giúp gì trong bài?
++ Đặt tên bước trung gian
+- Luôn tăng tốc
+- Tạo index vĩnh viễn
+Q: Tìm khách chưa từng có đơn thường dùng gì?
++ NOT EXISTS có liên hệ đúng khóa
+- NOT IN bất kể NULL
+- JOIN thiếu ON
+Q: ROW_NUMBER chọn mới nhất khi giờ trùng cần gì?
++ Khóa phân xử duy nhất
+- Chỉ ORDER BY timestamp
+- Lấy ngẫu nhiên một dòng
+Q: Window function khác GROUP BY ra sao?
++ Thường giữ chi tiết từng dòng
+- Luôn chỉ còn một dòng
+- Luôn bỏ NULL
+Q: Transaction chuyển điểm cần bất biến nào?
++ Hai vế cùng commit hoặc rollback
+- Chỉ trừ thành công
+- Tự đổi mọi NULL thành 0
+Q: Đọc số dư rồi ghi giá trị tính sẵn có rủi ro gì?
++ Mất cập nhật khi cạnh tranh
+- Không thể sai trong transaction
+- SQL tự sửa quy tắc
+Q: Index có luôn làm nhanh hơn không?
++ Không, có chi phí ghi và dung lượng
+- Có, càng nhiều càng tốt
+- Chỉ khi tên ngắn
+Q: Index (customer_id,created_at) thường phù hợp mẫu nào?
++ Lọc khách rồi khoảng ngày
+- Mọi lọc ngày đều chắc tối ưu
+- Chỉ đếm toàn bảng
+Q: Thêm trường bắt buộc vào dữ liệu cũ cần gì?
++ Chính sách backfill và xác nhận
+- Chỉ sửa schema
+- Xóa NULL không báo
+Q: COUNT trước/sau migration bằng nhau có đủ không?
++ Không, còn khóa và tổng theo nhóm
+- Có, chắc dữ liệu giống nhau
+- Chỉ xem thêm một dòng
+Q: SUM(order_total) sau join đơn với nhiều payment có nguy cơ gì?
++ Nhân tổng tiền đơn
+- Tự thành NULL
+- Không có vì có khóa ngoại
+Q: Kiểm giá trị NULL bằng gì?
++ IS NULL
+- Luôn = NULL
+- Luôn != NULL
+Q: Bàn giao kiểm sổ cần bằng chứng gì?
++ Fixture, query, expected và sai khác
+- Chỉ ảnh một tổng
+- Tài khoản sản xuất

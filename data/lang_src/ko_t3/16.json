@@ -1,0 +1,617 @@
+{
+ "no": 16,
+ "title": "Gợi ý, giao việc và phản hồi có xác nhận",
+ "sub": "V-는 게 어때요? / V-도록 하다",
+ "goals": [
+  "Đề nghị được ba giải pháp bằng 는 게 어때요.",
+  "Dùng 도록 하다 theo bối cảnh hướng dẫn hoặc nhận việc phù hợp.",
+  "Tóm tắt được đề xuất, phản hồi và quyết định thành ba trạng thái riêng."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Điểm xuất phát",
+   "html": "<p>Một đề xuất có thể được sửa hoặc từ chối; một hướng dẫn cần nói rõ phạm vi người nhận. Bạn xử lý một việc chia lượt đọc, giữ khác biệt giữa gợi ý và điều đã được nhóm đồng ý.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm cần dùng",
+   "items": [
+    {
+     "w": "차례",
+     "rr": "charye",
+     "vi": "lượt, thứ tự",
+     "ex": "차례를 정해요.",
+     "exVi": "Chúng tôi định lượt.",
+     "pos": "phr"
+    },
+    {
+     "w": "발언",
+     "rr": "bareon",
+     "vi": "phát biểu",
+     "ex": "발언 시간을 나누어요.",
+     "exVi": "Chúng tôi chia thời gian phát biểu.",
+     "pos": "phr"
+    },
+    {
+     "w": "끼어들다",
+     "rr": "kkieodeulda",
+     "vi": "chen vào",
+     "ex": "다른 사람 말에 끼어들지 않아요.",
+     "exVi": "Tôi không chen vào lời người khác.",
+     "pos": "phr"
+    },
+    {
+     "w": "기회",
+     "rr": "gihoe",
+     "vi": "cơ hội",
+     "ex": "말할 기회를 나누어요.",
+     "exVi": "Chúng tôi chia cơ hội nói.",
+     "pos": "phr"
+    },
+    {
+     "w": "조정하다",
+     "rr": "jojeonghada",
+     "vi": "điều chỉnh",
+     "ex": "시간을 조정해요.",
+     "exVi": "Chúng tôi điều chỉnh thời gian.",
+     "pos": "phr"
+    },
+    {
+     "w": "시도하다",
+     "rr": "sidohada",
+     "vi": "thử áp dụng",
+     "ex": "새 방법을 시도해요.",
+     "exVi": "Chúng tôi thử cách mới.",
+     "pos": "phr"
+    },
+    {
+     "w": "부담",
+     "rr": "budam",
+     "vi": "gánh nặng, áp lực",
+     "ex": "부담이 크면 말해 주세요.",
+     "exVi": "Nếu áp lực lớn, xin nói.",
+     "pos": "phr"
+    },
+    {
+     "w": "선호하다",
+     "rr": "seonhohada",
+     "vi": "ưa chọn",
+     "ex": "짧은 순서를 선호해요.",
+     "exVi": "Tôi thích lượt ngắn hơn.",
+     "pos": "phr"
+    },
+    {
+     "w": "수정안",
+     "rr": "sujeongan",
+     "vi": "phương án sửa",
+     "ex": "수정안을 제시해요.",
+     "exVi": "Tôi đưa phương án sửa.",
+     "pos": "phr"
+    },
+    {
+     "w": "거절하다",
+     "rr": "geojeolhada",
+     "vi": "từ chối",
+     "ex": "이번 제안은 거절했어요.",
+     "exVi": "Tôi từ chối đề nghị lần này.",
+     "pos": "phr"
+    },
+    {
+     "w": "받아들이다",
+     "rr": "badadeurida",
+     "vi": "chấp nhận",
+     "ex": "다른 의견을 받아들여요.",
+     "exVi": "Tôi chấp nhận ý khác.",
+     "pos": "phr"
+    },
+    {
+     "w": "합의",
+     "rr": "habui",
+     "vi": "sự thống nhất",
+     "ex": "합의 후에 안내해요.",
+     "exVi": "Chúng tôi thông báo sau khi thống nhất.",
+     "pos": "phr"
+    },
+    {
+     "w": "진행자",
+     "rr": "jinhaengja",
+     "vi": "người điều phối",
+     "ex": "진행자가 시간을 봐요.",
+     "exVi": "Người điều phối theo dõi thời gian.",
+     "pos": "phr"
+    },
+    {
+     "w": "보장하다",
+     "rr": "bojanghada",
+     "vi": "bảo đảm",
+     "ex": "쉴 기회도 보장해요.",
+     "exVi": "Chúng tôi bảo đảm cả cơ hội nghỉ.",
+     "pos": "phr"
+    },
+    {
+     "w": "재검토",
+     "rr": "jaegeomto",
+     "vi": "việc xem xét lại",
+     "ex": "한 번 해 보고 재검토해요.",
+     "exVi": "Chúng tôi thử một lần rồi xét lại.",
+     "pos": "phr"
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "V-는 게 어때요? / V-도록 하다",
+   "html": "<p>V는 게 어때요 là gợi ý “làm ... thì sao”: 번갈아 읽는 게 어때요? 게 là rút gọn 것이 trong mẫu này. Không dùng tính từ 그대로 như 조용한 게 어때요 để thay mọi câu đề xuất hành động nếu ý là đề nghị cách làm; có thể nói 조용히 읽는 게 어때요. V도록 하다 tùy ngữ cảnh là hướng dẫn, sắp xếp hoặc tự nhận sẽ cố thực hiện: 시간을 확인하도록 하세요, 제가 시간을 보도록 할게요. Mẫu không tự biến yêu cầu thành sự đồng ý của người nhận và có thể tạo sắc thái chỉ đạo; cần xem vai trò, quan hệ và lựa chọn người nghe. 제안했어요 khác 합의했어요. Khi nhận phản hồi, nhắc lại sửa đổi và hỏi 확인 để quyết định thực sự chung. Nếu chưa ai đáp, không được ghi 모두 동의. Bài này không học 도록 chỉ mục đích/mức độ độc lập; tập cụm 도록 하다 trong điều phối.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Ý cần giữ"
+    ],
+    [
+     "V는 게 어때요?",
+     "Gợi ý một cách làm"
+    ],
+    [
+     "V도록 하세요",
+     "Hướng dẫn theo vai trò phù hợp"
+    ],
+    [
+     "제가 V도록 할게요",
+     "Nhận sẽ thực hiện/lo làm trong ngữ cảnh"
+    ],
+    [
+     "제안→응답→합의",
+     "Ba trạng thái cần ghi riêng"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "처음에는 한 문단씩 읽는 게 어때요?",
+     "vi": "Lúc đầu mỗi người đọc một đoạn thì sao?"
+    },
+    {
+     "t": "진행자는 시간을 확인하도록 하세요.",
+     "vi": "Người điều phối hãy theo dõi thời gian."
+    },
+    {
+     "t": "제가 쉬는 시간을 알리도록 할게요.",
+     "vi": "Tôi sẽ nhận báo giờ nghỉ."
+    },
+    {
+     "t": "아직 답이 없어서 합의했다고 쓸 수 없어요.",
+     "vi": "Chưa có trả lời nên không thể viết đã thống nhất."
+    }
+   ],
+   "tips": [
+    "Ghi 제안 là 합의 khi chưa có phản hồi: giữ trạng thái chờ.",
+    "Hiểu 도록 하다 luôn nhẹ như gợi ý: xem vai trò và sắc thái chỉ đạo.",
+    "Hỏi mọi người nhưng bỏ người chưa đáp: xác nhận riêng."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe để giải quyết việc cụ thể",
+   "lang": "ko-KR",
+   "note": "Nhóm chia lượt đọc: đề xuất hai phút bị một người thấy ngắn, cả nhóm thử sửa thay vì coi im lặng là đồng ý.",
+   "lines": [
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "모두 두 분씩 말하는 게 어때요?",
+     "vi": "Mỗi người nói hai phút thì sao?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "저는 설명할 내용이 많아서 조금 짧아요.",
+     "vi": "Tôi có nhiều nội dung nên hơi ngắn."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "그럼 첫 발언은 세 분으로 조정할까요?",
+     "vi": "Vậy chỉnh lượt đầu thành ba phút nhé?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "좋아요. 질문 시간도 따로 있으면 좋겠어요.",
+     "vi": "Được. Có giờ hỏi riêng nữa thì tốt."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "그 부분은 받아들일게요. 제가 질문 시간을 알리도록 할게요.",
+     "vi": "Tôi nhận ý đó. Tôi sẽ báo giờ hỏi."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "말하고 싶지 않은 사람도 꼭 해야 해요?",
+     "vi": "Người chưa muốn nói cũng bắt buộc à?"
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "아니요. 이번에는 듣기만 해도 돼요.",
+     "vi": "Không. Lần này chỉ nghe cũng được."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "그럼 세 분 발표와 질문 시간, 듣기 선택으로 정해요?",
+     "vi": "Vậy chốt phát biểu ba phút, giờ hỏi và lựa chọn chỉ nghe nhé?"
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "네. 한 번 시도한 후에 다시 검토해요.",
+     "vi": "Vâng. Thử một lần rồi xem lại."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "알겠어요. 이 내용을 합의한 안으로 적을게요.",
+     "vi": "Tôi hiểu. Tôi sẽ ghi đây là phương án đã thống nhất."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Đề xuất đầu thay đổi ở đâu?",
+     "o": [
+      "Mọi người phải nói lâu hơn cả giờ",
+      "Bỏ hết câu hỏi",
+      "Lượt đầu từ hai thành ba phút"
+     ],
+     "a": 2,
+     "e": "Lượt đầu được sửa từ hai lên ba phút sau phản hồi thiếu thời gian, không giữ đề xuất đầu như đã chốt."
+    },
+    {
+     "q": "Có bắt buộc ai cũng nói không?",
+     "o": [
+      "Chỉ người hỏi được nghỉ",
+      "Không, được chỉ nghe",
+      "Có, không có ngoại lệ"
+     ],
+     "a": 1,
+     "e": "Người chưa muốn nói được chỉ nghe; nhóm không dùng cùng số phút để buộc mọi người cùng cách tham gia."
+    },
+    {
+     "q": "Quyết định được kiểm lại khi nào?",
+     "o": [
+      "Sau một lần thử",
+      "Không bao giờ",
+      "Trước khi nghe phản hồi"
+     ],
+     "a": 0,
+     "e": "Nhóm hẹn thử một lần rồi xem lại khó khăn, giữ khả năng sửa phương án bằng trải nghiệm thực."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Lời đề nghị chưa phải biên bản đồng thuận",
+   "title": "Lời đề nghị chưa phải biên bản đồng thuận",
+   "text": "가상의 작은등 모임에는 발표를 좋아하는 사람과 먼저 듣고 싶은 사람이 함께 있어요. 처음 진행자는 시간을 똑같이 나누는 게 어떠냐고 제안했어요. 나린 씨는 모두에게 기회를 주려는 목적은 좋지만 같은 시간이 모두에게 같은 부담은 아닐 수 있다고 말했어요. 어떤 사람은 한 문장을 읽는 데 시간이 더 필요했고 다른 사람은 말하지 않고 메모로 의견을 내고 싶었어요. 모임은 제안을 바로 규칙으로 쓰지 않았어요. 먼저 어떤 점이 편하고 어려운지 물었어요. 가온 씨는 첫 발언을 세 분으로 하고 질문 시간을 따로 두자고 제안했어요. 또 듣기만 하거나 나중에 짧은 글을 내는 방법도 남기자고 했어요. 진행자는 그 안을 받아들이고 시간을 확인하도록 하겠다고 했어요. 하지만 아직 답하지 않은 두 사람에게도 괜찮은지 다시 물었어요. 그중 한 사람은 세 분이 지나도 문장을 끝낼 작은 여유가 필요하다고 했어요. 모임은 끝내기 신호 뒤에 한 문장 정도는 마칠 수 있도록 안을 고쳤어요. 모두가 수정안을 확인한 후에야 합의한 내용으로 적었어요. 한 번 시행한 뒤에는 말한 사람 수와 듣기를 선택한 사람의 의견을 함께 살펴보기로 했어요. 발표가 많아졌다는 수치만으로 방법이 좋아졌다고 판단하지 않기 위해서예요. 진행자는 다음 안내에서 제안, 수정 요청, 최종 합의를 별도 칸으로 보여 줬어요. 누구의 말이 실제 결정에 반영되었는지 확인할 수 있게 한 것이에요.",
+   "vi": "Nhóm Đèn Nhỏ giả định có người thích trình bày, người muốn nghe trước. Người điều phối đề nghị chia thời gian bằng nhau. Narin nói mục tiêu chia cơ hội tốt, nhưng thời lượng giống nhau có thể tạo áp lực khác nhau: có người đọc một câu lâu hơn, có người muốn gửi ý bằng ghi chú. Nhóm không biến đề xuất ngay thành quy tắc mà hỏi điểm thuận và khó. Gaon đề nghị lượt đầu ba phút, có giờ hỏi riêng và giữ lựa chọn chỉ nghe hoặc gửi bài ngắn sau. Người điều phối nhận ý và nhận theo dõi giờ, nhưng hỏi lại hai người chưa đáp. Một người cần thêm chút thời gian để kết thúc câu sau tín hiệu. Nhóm sửa cho phép kết thúc một câu rồi mới ghi là thống nhất khi mọi người xác nhận. Sau một lần áp dụng họ sẽ xem cả số người đã nói và ý kiến của người chọn nghe, tránh kết luận chỉ từ việc tăng phát biểu. Hướng dẫn sau tách đề xuất, yêu cầu sửa và đồng thuận cuối để thấy lời ai đã được phản ánh vào quyết định.",
+   "gloss": [
+    {
+     "w": "반영되다",
+     "rr": "banyeongdoeda",
+     "vi": "được phản ánh vào"
+    },
+    {
+     "w": "시행",
+     "rr": "sihaeng",
+     "vi": "việc áp dụng"
+    },
+    {
+     "w": "마칠 수 있도록",
+     "rr": "machil su itdorok",
+     "vi": "để có thể kết thúc"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Vì sao thời lượng bằng nhau chưa chắc phù hợp như nhau?",
+     "o": [
+      "Vì không ai muốn nói",
+      "Mức cần và áp lực của người tham gia khác nhau",
+      "Vì mọi người không biết đếm"
+     ],
+     "a": 1,
+     "e": "Người đọc chậm hoặc muốn viết chịu gánh khác, nên cùng thời lượng chưa chắc cùng mức phù hợp."
+    },
+    {
+     "q": "Người điều phối có coi im lặng là đồng ý không?",
+     "o": [
+      "Không, hỏi lại hai người chưa đáp",
+      "Có, ghi chốt ngay",
+      "Không có ai chưa đáp"
+     ],
+     "a": 0,
+     "e": "Người điều phối hỏi lại hai người chưa đáp, không coi im lặng tự động là đồng thuận."
+    },
+    {
+     "q": "Sửa đổi cuối về tín hiệu hết giờ là gì?",
+     "o": [
+      "Bỏ mọi giới hạn",
+      "Cấm nói ngay giữa từ",
+      "Cho kết thúc một câu"
+     ],
+     "a": 2,
+     "e": "Nhóm cho kết thúc một câu sau tín hiệu hết giờ, đáp nhu cầu hoàn thành ý của người tham gia."
+    },
+    {
+     "q": "Vì sao xem ý kiến của người chọn nghe?",
+     "o": [
+      "Để xóa lựa chọn nghe",
+      "Không chỉ đánh giá bằng số người nói tăng",
+      "Để bắt họ lần sau nói"
+     ],
+     "a": 1,
+     "e": "Số người nói tăng chưa đủ đánh giá; cần nghe cả trải nghiệm của người chọn chỉ nghe."
+    },
+    {
+     "q": "Ba cột giúp xem điều gì?",
+     "o": [
+      "Lời ai đã tác động quyết định",
+      "Mọi người có cùng ý từ đầu",
+      "Ai có nhiều đồ nhất"
+     ],
+     "a": 0,
+     "e": "Ba cột đề xuất, yêu cầu sửa và phương án cuối cho thấy tiếng nói nào đã được phản ánh vào quyết định."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và nhận phản hồi",
+   "tasks": [
+    {
+     "p": "Gợi ý mỗi người đọc một đoạn, bạn từ chối vì dài; sửa thành hai câu và hỏi xác nhận.",
+     "model": "가: 한 문단씩 읽는 게 어때요? 나: 저는 길어서 부담돼요. 가: 그럼 두 문장씩 읽고 쉬어도 괜찮아요? 나: 네, 그 방법이면 좋아요. 가: 알겠어요. 두 문장씩으로 안내할게요.",
+     "vi": "A gợi ý một đoạn, B thấy áp lực. A sửa hai câu và nghỉ, B đồng ý; A xác nhận cách sẽ thông báo."
+    },
+    {
+     "p": "Bạn điều phối: nhận theo dõi giờ, giữ lựa chọn nghe và hẹn xét lại.",
+     "model": "제가 시간을 확인하도록 할게요. 오늘은 듣기만 해도 괜찮아요. 한 번 해 본 후에 어떤 점이 어려웠는지 다시 물어볼게요.",
+     "vi": "Tôi sẽ theo dõi thời gian. Hôm nay chỉ nghe cũng được. Thử một lần rồi tôi sẽ hỏi lại điểm khó."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết cho người nhận hiểu được",
+   "task": "Viết bảy đến chín câu biên bản nhỏ: đề xuất bằng 는 게 어때요, một phản hồi không đồng ý, phương án sửa, vai trò bằng 도록 하다, quyền chỉ nghe, xác nhận và hẹn xét lại.",
+   "min": 210,
+   "model": "처음에는 한 문단씩 읽는 게 어떠냐고 제안했어요. 한 참가자는 너무 길어서 부담된다고 했어요. 그래서 두 문장씩 읽고 쉬는 방법으로 고쳤어요. 저는 시간을 확인하도록 할게요. 오늘 말하고 싶지 않은 사람은 듣기만 해도 돼요. 아직 답하지 않은 사람에게도 이 방법이 괜찮은지 물었어요. 모두 확인한 후에 합의한 내용으로 적었어요. 한 번 시도한 뒤에 어려운 점을 다시 검토할 거예요.",
+   "modelVi": "Ban đầu tôi đề nghị mỗi người đọc một đoạn. Có người thấy dài và áp lực nên sửa thành hai câu rồi nghỉ. Tôi nhận theo dõi giờ; ai chưa muốn nói được chỉ nghe. Tôi hỏi cả người chưa đáp xem cách đó ổn không, rồi chỉ ghi là thống nhất sau khi đủ xác nhận. Thử một lần xong sẽ xem lại điểm khó.",
+   "tips": [
+    "Sắp ý theo yêu cầu Viết bảy đến chín câu biên bản nhỏ: đề xuất bằng 는 게 어때요, một phản hồi không đồng ý, phương án sửa, vai trò bằng 도록 하다, quyền chỉ nghe, xác nhận và hẹn xét lại.; chỉ đưa dữ kiện cần để người nhận hiểu tình huống.",
+    "Dùng V-는 게 어때요? / V-도록 하다 theo ý nghĩa đã giải thích, không thay mọi đuôi chỉ vì chúng trông giống nhau."
+   ],
+   "checklist": [
+    "Sản phẩm đáp đủ mục tiêu: Đề nghị được ba giải pháp bằng 는 게 어때요.",
+    "Câu có V-는 게 어때요? / V-도록 하다 giữ đúng vai và thời điểm của người nói.",
+    "Người đọc sản phẩm có thể trả lời câu “Vì sao thời lượng bằng nhau chưa chắc phù hợp như nhau?” khi dữ kiện tương ứng được đưa vào; không phải suy từ một chữ khó nhìn."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong câu “차례를 정해요.”, cụm “차례” có nghĩa gì?",
+   "o": [
+    "cơ hội",
+    "gánh nặng, áp lực",
+    "lượt, thứ tự"
+   ],
+   "a": 2,
+   "e": "Chúng tôi định lượt. Đây là cách dùng lượt, thứ tự trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “발언 시간을 나누어요.”, cụm “발언” có nghĩa gì?",
+   "o": [
+    "ưa chọn",
+    "phát biểu",
+    "điều chỉnh"
+   ],
+   "a": 1,
+   "e": "Chúng tôi chia thời gian phát biểu. Đây là cách dùng phát biểu trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “다른 사람 말에 끼어들지 않아요.”, cụm “끼어들다” có nghĩa gì?",
+   "o": [
+    "chen vào",
+    "thử áp dụng",
+    "phương án sửa"
+   ],
+   "a": 0,
+   "e": "Tôi không chen vào lời người khác. Đây là cách dùng chen vào trong tình huống đang nói."
+  },
+  {
+   "t": "fill",
+   "q": "번갈아 읽___ 게 어때요?",
+   "a": "는",
+   "e": "는 게 어때요 đưa gợi ý hành động đọc luân phiên."
+  },
+  {
+   "t": "fill",
+   "q": "제가 시간을 확인하___ 할게요.",
+   "a": "도록",
+   "e": "도록 하다 ở đây là người nói nhận lo theo dõi thời gian."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Tôi sẽ nhận báo giờ nghỉ.",
+   "w": [
+    "쉬는",
+    "시간을",
+    "알리도록",
+    "할게요",
+    "제가"
+   ],
+   "a": "제가 쉬는 시간을 알리도록 할게요.",
+   "e": "Câu đúng là 제가 쉬는 시간을 알리도록 할게요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt tôi sẽ nhận báo giờ nghỉ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Chưa có trả lời nên không thể viết đã thống nhất.",
+   "w": [
+    "답이",
+    "없어서",
+    "합의했다고",
+    "쓸",
+    "수",
+    "없어요",
+    "아직"
+   ],
+   "a": "아직 답이 없어서 합의했다고 쓸 수 없어요.",
+   "e": "Câu đúng là 아직 답이 없어서 합의했다고 쓸 수 없어요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt chưa có trả lời nên không thể viết đã thống nhất."
+  },
+  {
+   "t": "match",
+   "q": "Nối các cụm liên quan gánh nặng, áp lực và chấp nhận với nghĩa phù hợp trong tình huống.",
+   "pairs": [
+    [
+     "부담",
+     "gánh nặng, áp lực"
+    ],
+    [
+     "선호하다",
+     "ưa chọn"
+    ],
+    [
+     "수정안",
+     "phương án sửa"
+    ],
+    [
+     "거절하다",
+     "từ chối"
+    ],
+    [
+     "받아들이다",
+     "chấp nhận"
+    ]
+   ],
+   "e": "Cụm 부담 diễn đạt gánh nặng, áp lực, khác 받아들이다 là chấp nhận. Hãy dùng câu ví dụ để kiểm chức năng trước khi ghép."
+  },
+  {
+   "t": "listen",
+   "say": "모두 두 분씩 말하는 게 어때요? 저는 설명할 내용이 많아서 조금 짧아요. 그럼 첫 발언은 세 분으로 조정할까요? 좋아요. 질문 시간도 따로 있으면 좋겠어요. 그 부분은 받아들일게요. 제가 질문 시간을 알리도록 할게요. 말하고 싶지 않은 사람도 꼭 해야 해요? 아니요. 이번에는 듣기만 해도 돼요. 그럼 세 분 발표와 질문 시간, 듣기 선택으로 정해요? 네. 한 번 시도한 후에 다시 검토해요. 알겠어요. 이 내용을 합의한 안으로 적을게요.",
+   "lang": "ko-KR",
+   "q": "Đề xuất đầu thay đổi ở đâu?",
+   "o": [
+    "Mọi người phải nói lâu hơn cả giờ",
+    "Bỏ hết câu hỏi",
+    "Lượt đầu từ hai thành ba phút"
+   ],
+   "a": 2,
+   "e": "Lượt đầu được sửa từ hai lên ba phút sau phản hồi thiếu thời gian, không giữ đề xuất đầu như đã chốt."
+  },
+  {
+   "t": "listen",
+   "say": "모두 두 분씩 말하는 게 어때요? 저는 설명할 내용이 많아서 조금 짧아요. 그럼 첫 발언은 세 분으로 조정할까요? 좋아요. 질문 시간도 따로 있으면 좋겠어요. 그 부분은 받아들일게요. 제가 질문 시간을 알리도록 할게요. 말하고 싶지 않은 사람도 꼭 해야 해요? 아니요. 이번에는 듣기만 해도 돼요. 그럼 세 분 발표와 질문 시간, 듣기 선택으로 정해요? 네. 한 번 시도한 후에 다시 검토해요. 알겠어요. 이 내용을 합의한 안으로 적을게요.",
+   "lang": "ko-KR",
+   "q": "Có bắt buộc ai cũng nói không?",
+   "o": [
+    "Chỉ người hỏi được nghỉ",
+    "Không, được chỉ nghe",
+    "Có, không có ngoại lệ"
+   ],
+   "a": 1,
+   "e": "Người chưa muốn nói được chỉ nghe; nhóm không dùng cùng số phút để buộc mọi người cùng cách tham gia."
+  },
+  {
+   "t": "dict",
+   "say": "가상의 작은등 모임에는 발표를 좋아하는 사람과 먼저 듣고 싶은 사람이 함께 있어요.",
+   "a": "가상의 작은등 모임에는 발표를 좋아하는 사람과 먼저 듣고 싶은 사람이 함께 있어요.",
+   "lang": "ko-KR",
+   "e": "Câu bắt đầu bằng “가상의 작은등” và kết thúc bằng “있어요.”. Giữ các khối chữ trong từng từ, viết cách giữa các từ như khi đọc lại cả câu; không đổi cách viết theo một âm nối nghe được."
+  },
+  {
+   "t": "mc",
+   "q": "Một người đề xuất, mọi người chưa đáp, nên ghi trạng thái nào?",
+   "o": [
+    "Đang đề xuất, chờ phản hồi",
+    "Đã đồng thuận tất cả",
+    "Quyết định đã thực hiện"
+   ],
+   "a": 0,
+   "e": "제안 chưa tự thành 합의; cần phản hồi và xác nhận."
+  },
+  {
+   "t": "mc",
+   "q": "Để giảm áp lực, cách nào phù hợp đoạn đọc?",
+   "o": [
+    "Bắt mọi người nói cùng số câu ngay",
+    "Đếm số người nói là đủ đánh giá",
+    "Giữ lựa chọn nghe hoặc gửi ý sau"
+   ],
+   "a": 2,
+   "e": "Bài giữ phương án khác nhau và xem ý của người chọn nghe."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ 차례 / 조정하다 / 재검토, tranh hoặc sơ đồ cho tình huống Nhóm chia lượt đọc: đề xuất hai phút bị một người thấy ngắn, cả nhóm thử sửa thay vì coi im lặng là đồng ý.; giáo viên nghe trước bản TTS để kiểm các số và âm khó.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Giáo viên nêu câu hỏi “Đề xuất đầu thay đổi ở đâu?”. Học viên dự đoán hai hướng trả lời rồi ghi điều cần nghe để phân biệt chúng; chưa mở lời thoại."
+   },
+   {
+    "t": "20 phút",
+    "do": "Làm việc với thẻ “차례” và “기회”. Cho học viên ghép hai câu ví dụ tương ứng với tranh hoặc tình huống, sau đó tự giải thích vì sao không đổi chỗ hai cụm."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đối chiếu “처음에는 한 문단씩 읽는 게 어때요?” với “진행자는 시간을 확인하도록 하세요.”. Khoanh thành phần thuộc V-는 게 어때요? / V-도록 하다 và tạo một biến thể đổi nghĩa có chủ ý để cả lớp sửa."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nghe tình huống Nhóm chia lượt đọc: đề xuất hai phút bị một người thấy ngắn, cả nhóm thử sửa thay vì coi im lặng là đồng ý. Lượt đầu lấy mục tiêu hai người, lượt sau ghi dữ kiện giải câu “Đề xuất đầu thay đổi ở đâu?”; yêu cầu chỉ đúng lượt cung cấp căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nhập vai theo nhiệm vụ “Gợi ý mỗi người đọc một đoạn, bạn từ chối vì dài; sửa thành hai câu và hỏi xác nhận.”. Người nghe nhắc lại thông tin quyết định; người nói chỉ xác nhận nếu dữ kiện đã được truyền đúng."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai bắt đầu bằng “시도하다” và “재검토”. Học viên viết lại một câu đã dùng từ tiết trước rồi đổi bối cảnh để kiểm có còn phù hợp hay không."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc “Lời đề nghị chưa phải biên bản đồng thuận” để giải câu “Vì sao thời lượng bằng nhau chưa chắc phù hợp như nhau?”. So câu chứng cứ với một phương án nhiễu và nêu dữ kiện nào làm phương án đó sai."
+   },
+   {
+    "t": "20 phút",
+    "do": "Giao lượt nói thứ hai: Bạn điều phối: nhận theo dõi giờ, giữ lựa chọn nghe và hẹn xét lại. Bạn nghe chỉ phản hồi về mục tiêu nội dung và cấu trúc đang luyện, không sửa mọi lỗi giữa lúc người kia nói."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết theo đề: Viết bảy đến chín câu biên bản nhỏ: đề xuất bằng 는 게 어때요, một phản hồi không đồng ý, phương án sửa, vai trò bằng 도록 하다, quyền chỉ nghe, xác nhận và hẹn xét lại. Đổi bản cho bạn đọc và đối chiếu yêu cầu “Sản phẩm đáp đủ mục tiêu: Đề nghị được ba giải pháp bằng 는 게 어때요.”; người viết tự sửa một ý rồi giải thích căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chốt bằng câu “Một người đề xuất, mọi người chưa đáp, nên ghi trạng thái nào?”. Mỗi học viên nêu vì sao lựa chọn sai dễ gây nhầm, rồi tự chọn một câu từ sản phẩm để luyện lại ở nhà."
+   }
+  ],
+  "games": [
+   "Thẻ điều kiện: đổi 차례 thành 조정하다 trong câu mẫu nếu có nghĩa, sau đó giải thích điều kiện nào buộc phải sửa thêm ở vị ngữ.",
+   "Người kiểm căn cứ: hai bạn giải “Vì sao thời lượng bằng nhau chưa chắc phù hợp như nhau?”, chỉ câu hỗ trợ và bác một phương án nhiễu bằng đúng dữ kiện của bài."
+  ],
+  "errors": [
+   "Ghi 제안 là 합의 khi chưa có phản hồi: giữ trạng thái chờ.",
+   "Hiểu 도록 하다 luôn nhẹ như gợi ý: xem vai trò và sắc thái chỉ đạo.",
+   "Hỏi mọi người nhưng bỏ người chưa đáp: xác nhận riêng.",
+   "Chia bằng nhau rồi kết luận công bằng như nhau: hỏi mức khó của từng người.",
+   "Chỉ đếm phát biểu để đánh giá: xem cả lựa chọn nghe và phản hồi."
+  ],
+  "homework": "Lập một tình huống mới có 차례 và 재검토. Viết sản phẩm cùng loại với đề lớp nhưng đổi thông tin, gửi bạn nghe/đọc rồi tự sửa lỗi liên quan V-는 게 어때요? / V-도록 하다."
+ }
+}

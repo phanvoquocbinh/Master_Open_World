@@ -3,16 +3,32 @@
  "title": "So sánh và lựa chọn; より・ほど",
  "sub": "この 部屋は あの 部屋より 広いです。",
  "goals": [
-  "Hiểu và dùng đúng So sánh và lựa chọn; より・ほど",
-  "Đọc/nghe phân biệt ít nhất 12 từ/cụm của tình huống",
-  "Hỏi và trả lời ba thông tin cụ thể bằng mức lịch sự phù hợp",
-  "Viết đoạn mới và tự sửa lỗi theo checklist"
+  "Phân tích cách dùng trong câu “この 部屋は あの 部屋より 広いです。” và tạo một câu khác giữ đúng quan hệ ý.",
+  "Dùng “より” (hơn (mốc so sánh)) và “ほど” (bằng/mức (trong mẫu so sánh)) đúng trong trao đổi của bài.",
+  "Nghe để trả lời câu hỏi “Theo hội thoại: Phòng này rộng không?”, rồi chỉ ra phần lời nói làm căn cứ.",
+  "Tự viết đoạn có ý chính “Phòng thứ nhất” và kiểm lại sự nhất quán với văn bản đọc."
  ],
  "parts": [
   {
    "k": "text",
    "h": "Bối cảnh và cách học",
-   "html": "<p>So sánh nhà giả theo từng tiêu chí và giải thích lựa chọn mà không gộp mọi ưu điểm vào một phòng.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+   "html": "<p>So sánh nhà giả theo từng tiêu chí và giải thích lựa chọn mà không gộp mọi ưu điểm vào một phòng.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>遠い có to-o-i ba mora, không rút thành toi hai nhịp. 便利 là be-n-ri; 家賃 là ya-chi-n. Đọc chậm mốc so sánh ngay trước より/ほど để người nghe không đảo phòng đang so với phòng làm chuẩn.</p>",
+   "items": [
+    {
+     "sym": "とおい・べんり・やちん",
+     "ex": [
+      "遠い",
+      "便利",
+      "家賃"
+     ],
+     "vi": "Nghe và đọc đối chiếu 遠い (とおい), 便利 (べんり), 家賃 (やちん). Dùng câu “この 部屋は あの 部屋より 広いです。” để kiểm xem các độ dài âm còn giữ được khi nối vào phát ngôn."
+    }
+   ]
   },
   {
    "k": "words",
@@ -31,8 +47,8 @@
      "kana": "ほど",
      "romaji": "hodo",
      "vi": "bằng/mức (trong mẫu so sánh)",
-     "ex": "この 部屋は あの 部屋ほど 静かではありません。",
-     "exVi": "Phòng này không yên tĩnh bằng phòng kia."
+     "ex": "この部屋は前の部屋ほど広くないです。",
+     "exVi": "Phòng này không rộng bằng phòng trước."
     },
     {
      "w": "一番",
@@ -71,8 +87,8 @@
      "kana": "しずか",
      "romaji": "shizuka",
      "vi": "yên tĩnh",
-     "ex": "この 部屋は あの 部屋ほど 静かではありません。",
-     "exVi": "Phòng này không yên tĩnh bằng phòng kia."
+     "ex": "説明は静かな場所で聞きます。",
+     "exVi": "Tôi nghe giải thích ở chỗ yên tĩnh."
     },
     {
      "w": "広い",
@@ -165,7 +181,7 @@
   {
    "k": "dialog",
    "h": "Nghe: So sánh và lựa chọn; より・ほど",
-   "note": "Hai học viên của lớp giả Mây Sớm trao đổi; nghe lần đầu lấy ý, lần sau kiểm chi tiết. Không đọc romaji trong âm thanh.",
+   "note": "Trước khi nghe, dự đoán câu trả lời cho “Theo hội thoại: Phòng này rộng không?”. Sau đó ghi nguyên thông tin làm bạn chọn đáp án; lượt nói “はい。でも 家賃は あの 部屋より 高いです。” là một điểm cần kiểm khi nghe lại.",
    "lang": "ja-JP",
    "lines": [
     {
@@ -219,34 +235,34 @@
    ],
    "qs": [
     {
-     "q": "Theo hội thoại: Phòng này rộng không?",
+     "q": "Những phòng ở được so theo các tiêu chí nào?",
      "o": [
-      "Không yên tĩnh bằng phòng kia.",
-      "Có. Nhưng tiền thuê cao hơn phòng kia.",
-      "Không, gần nên tiện."
+      "Rộng, giá và khoảng cách",
+      "Chỉ màu sắc",
+      "Chỉ tầng nhà"
+     ],
+     "a": 0,
+     "e": "Lượt nói “はい。でも 家賃は あの 部屋より 高いです。” nghĩa là: Có. Nhưng tiền thuê cao hơn phòng kia. Nội dung này làm rõ đáp án “Rộng, giá và khoảng cách”, không phải hai cách hiểu còn lại."
+    },
+    {
+     "q": "Phòng gần ga có thuận lợi gì?",
+     "o": [
+      "Rộng nhất chắc chắn",
+      "Yên nhất chắc chắn",
+      "Đi lại tiện"
+     ],
+     "a": 2,
+     "e": "Lượt nói “いいえ、近いので 便利です。” nghĩa là: Không, gần nên tiện. Nội dung này làm rõ đáp án “Đi lại tiện”, không phải hai cách hiểu còn lại."
+    },
+    {
+     "q": "Người nói quyết chọn ngay chưa?",
+     "o": [
+      "Không cần xét giá",
+      "Chưa, cần so thêm",
+      "Đã thuê cả hai"
      ],
      "a": 1,
-     "e": "Câu trả lời là はい。でも 家賃は あの 部屋より 高いです。 → Có. Nhưng tiền thuê cao hơn phòng kia."
-    },
-    {
-     "q": "Theo hội thoại: Xa ga không?",
-     "o": [
-      "Không, gần nên tiện.",
-      "Tôi so tiền thuê và khoảng cách rồi chọn.",
-      "Không yên tĩnh bằng phòng kia."
-     ],
-     "a": 0,
-     "e": "Câu trả lời là いいえ、近いので 便利です。 → Không, gần nên tiện."
-    },
-    {
-     "q": "Theo hội thoại: Có yên tĩnh không?",
-     "o": [
-      "Không yên tĩnh bằng phòng kia.",
-      "Có. Nhưng tiền thuê cao hơn phòng kia.",
-      "Tôi so tiền thuê và khoảng cách rồi chọn."
-     ],
-     "a": 0,
-     "e": "Câu trả lời là あの 部屋ほど 静かではありません。 → Không yên tĩnh bằng phòng kia."
+     "e": "Lượt nói “家賃と 距離を 比べてから 選びます。” nghĩa là: Tôi so tiền thuê và khoảng cách rồi chọn. Nội dung này làm rõ đáp án “Chưa, cần so thêm”, không phải hai cách hiểu còn lại."
     }
    ]
   },
@@ -331,35 +347,35 @@
    "h": "Nói và phản hồi",
    "tasks": [
     {
-     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "p": "Đóng vai hỏi về hơn (mốc so sánh) và bằng/mức (trong mẫu so sánh). Dùng lượt “この 部屋は 広いですか。” để mở đầu, rồi yêu cầu bạn trả lời bằng thông tin của vai đối diện.",
      "model": "この 部屋は 広いですか。 駅から 遠いですか。 静かですか。 狭い 部屋と 広い 部屋、どちらを 選びますか。",
      "vi": "Phòng này rộng không? Xa ga không? Có yên tĩnh không? Phòng hẹp và rộng bạn chọn bên nào?",
-     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+     "tips": "Khi bạn nói “駅から 遠いですか。”, người nghe phải nhận ra Xa ga không?; ghi âm và kiểm xem từ nào đang quyết định nghĩa đó."
     },
     {
-     "p": "Tóm tắt nội dung bài đọc bằng ba câu, sau đó nêu một câu hỏi còn muốn làm rõ.",
+     "p": "Tóm tắt ba ý trong bài đọc để trả lời “Phòng nào gần ga nhất?”. Kết thúc bằng câu hỏi về chọn nếu phần này chưa được người nghe xác nhận.",
      "model": "三つの 部屋を 比べて います。 一つ目は 駅に 一番 近くて、便利です。 でも 狭いです。家賃も 高いです。",
      "vi": "Tôi đang so ba phòng. Phòng thứ nhất gần ga nhất, tiện lợi. Nhưng hẹp và tiền thuê cao.",
-     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+     "tips": "So phần tóm tắt của bạn với dữ kiện “Phòng thứ nhất”; nếu ý này thay đổi, hãy nói rõ đó là tình huống giả định mới."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có kiểm tra",
-   "task": "Viết một đoạn mới theo tình huống bài học; thay ít nhất hai chi tiết, dùng cấu trúc trọng tâm và kiểm thông tin nhất quán.",
+   "task": "Viết một đoạn tình huống có các ý: Phòng này rộng hơn phòng kia. / Gần ga tiện lợi. / Trong ba phòng, phòng này gần nhất.. Dùng thêm thông tin của bài đọc để nối các ý, không chỉ chép ba câu rời.",
    "min": 80,
    "model": "三つの 部屋を 比べて います。 一つ目は 駅に 一番 近くて、便利です。 でも 狭いです。家賃も 高いです。 二つ目は 一つ目より 広いです。 駅からは 少し 遠いですが、静かです。 三つ目は 二つ目ほど 静かではありません。 私は 広さだけでなく、毎日の 移動も 考えます。 最後に 条件を 書いてから、部屋を 選ぶつもりです。",
    "modelVi": "Tôi đang so ba phòng. Phòng thứ nhất gần ga nhất, tiện lợi. Nhưng hẹp và tiền thuê cao. Phòng thứ hai rộng hơn phòng thứ nhất. Hơi xa ga nhưng yên tĩnh. Phòng thứ ba không yên tĩnh bằng phòng thứ hai. Tôi xét cả đi lại hằng ngày chứ không chỉ độ rộng. Cuối cùng tôi định viết điều kiện rồi chọn phòng.",
    "tips": [
-    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
-    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+    "Lập sơ đồ ai làm gì trong câu “この 部屋は あの 部屋より 広いです。”, rồi dùng cùng quan hệ chủ thể khi nối sang đoạn của bạn.",
+    "Đối chiếu “駅の 近くは 便利です。” với mẫu cuối “三つの 中で、この 部屋が 一番 近いです。”; chọn phần kết câu phù hợp trước khi sửa chính tả."
    ],
    "checklist": [
-    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
-    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
-    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
-    "Câu kết thúc và mức lịch sự nhất quán"
+    "Người đọc nhận ra đúng nghĩa của “より”, thay vì chỉ thấy từ được chèn vào câu.",
+    "Quan hệ ý trong “この 部屋は あの 部屋より 広いです。” vẫn đúng khi bạn thay dữ kiện.",
+    "Các ý bằng/mức (trong mẫu so sánh) và chọn không bị lẫn vai hoặc phạm vi.",
+    "Đoạn kết không trái với dữ kiện trả lời câu hỏi “Phòng nào gần ga nhất?”."
    ]
   }
  ],
@@ -497,7 +513,7 @@
      "hẹp"
     ]
    ],
-   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+   "e": "Đối chiếu các cặp “遠い → xa” và “狭い → hẹp”; phân biệt nghĩa trong tình huống, không ghép chỉ dựa vào hình chữ."
   },
   {
    "t": "mc",
@@ -524,52 +540,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ, bảng cấu trúc bài này, loa/giọng đọc tiếng Nhật, phiếu thông tin khác nhau cho từng cặp. Không dùng dữ liệu cá nhân thật.",
+  "prep": "Chuẩn bị thẻ “より”, “ほど”, “選ぶ”, bản hội thoại che lượt trả lời và phiếu đọc có câu hỏi “Phòng nào gần ga nhất?”.",
   "steps": [
    {
     "t": "10'",
-    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+    "do": "Gợi tình huống bằng câu “この 部屋は 広いですか。”. Cho cặp học viên nói mình muốn biết điều gì trước khi mở lời đáp."
    },
    {
     "t": "20'",
-    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+    "do": "Cho so thẻ “より” với “ほど”: học viên diễn đạt nghĩa hơn (mốc so sánh) và bằng/mức (trong mẫu so sánh), rồi đặt mỗi từ vào một lượt trao đổi."
    },
    {
     "t": "25'",
-    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+    "do": "Viết hai câu “この 部屋は あの 部屋より 広いです。” và “駅の 近くは 便利です。” cạnh nhau. Học viên giải thích khác biệt ý, sau đó thay một thành phần mà vẫn giữ cấu trúc vừa phân tích."
    },
    {
     "t": "20'",
-    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+    "do": "Che lời thoại và giao câu hỏi “Theo hội thoại: Phòng này rộng không?”. Sau hai lượt nghe, yêu cầu nêu bằng chứng thay vì đoán theo từ khóa đơn lẻ."
    },
    {
     "t": "15'",
-    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+    "do": "Cho đổi vai quanh lượt “静かですか。”. Người nghe hỏi lại thông tin trước khi chuyển sang lời đáp, giáo viên ghi một chỗ gây hiểu nhầm để chữa cuối hoạt động."
    },
    {
     "t": "15'",
-    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+    "do": "Đầu buổi sau, yêu cầu dựng lại ý “Trong ba phòng, phòng này gần nhất.” không nhìn chữ Nhật. So lời nói của học viên với câu đích và chữa phần làm thay đổi quan hệ ý."
    },
    {
     "t": "20'",
-    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+    "do": "Đọc để giải quyết câu hỏi “Phòng nào gần ga nhất?”. Mỗi nhóm đánh dấu đoạn chứng minh và giải thích vì sao hai lựa chọn còn lại không khớp."
    },
    {
     "t": "20'",
-    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+    "do": "Giao nhiệm vụ nói có thông tin hơn (mốc so sánh) ở một vai và chọn ở vai kia. Hai bên chỉ hoàn thành phiếu khi đã hỏi để hiểu dữ kiện của nhau."
    },
    {
     "t": "20'",
-    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+    "do": "Viết đoạn nối ý “Phòng này rộng hơn phòng kia.” với “Trong ba phòng, phòng này gần nhất.”. Đổi bài và kiểm chủ thể, mốc thời gian cùng từ phủ định trước khi góp ý độ tự nhiên."
    },
    {
     "t": "15'",
-    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+    "do": "Chữa bài tự chấm từ cặp “ほど” và “選ぶ”. Mỗi học viên ghi một câu sửa của chính mình và nêu cách sẽ nhận ra lỗi đó trong lần dùng sau."
    }
   ],
   "games": [
-   "Ghép thẻ câu với tình huống: mỗi nhóm phải giải thích một cặp và chỉ ra từ/cấu trúc quyết định.",
-   "Thông tin lệch: mỗi bạn giữ một phần dữ kiện; phải hỏi lại thay vì đoán để hoàn thành phiếu."
+   "Khoảng trống thông tin: một bạn chỉ thấy “この 部屋は 広いですか。”, bạn kia giữ câu trả lời. Họ hỏi lại để hoàn thành thông tin về hơn (mốc so sánh) trước khi đổi vai.",
+   "Chọn và bảo vệ đáp án: các nhóm nhận câu hỏi “Phòng nào gần ga nhất?”, chọn một phương án rồi tìm chi tiết đủ bác hai phương án nhiễu."
   ],
   "errors": [
    "Đảo mốc より dẫn tới đổi nghĩa: xác định A được so và B làm mốc.",
@@ -577,6 +593,6 @@
    "Nói 一番 mà không giới hạn nhóm: thêm 三つの中で khi cần rõ.",
    "Nhầm 遠い và 近い: đối chiếu bằng sơ đồ khoảng cách, không chỉ dịch từng từ."
   ],
-  "homework": "Ôn 12–20 thẻ theo lịch 1–3–7 ngày; nghe chép câu đã chọn, ghi âm hai lượt nói và viết đoạn mới thay ít nhất hai chi tiết."
+  "homework": "Ôn “より”, “ほど” và “選ぶ” bằng câu mới có nghĩa. Ghi âm câu “この 部屋は あの 部屋より 広いです。”, nghe lại phần kết rồi viết lời giải thích cho câu hỏi “Phòng nào gần ga nhất?” bằng tiếng Việt."
  }
 }

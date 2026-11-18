@@ -1,0 +1,640 @@
+{
+ "no": 11,
+ "title": "Nguy cơ dễ xảy ra: cảnh báo có điều kiện thay cho xác suất tưởng tượng",
+ "sub": "V-기 십상이다 / V-기 쉽다 / 우려가 있다",
+ "goals": [
+  "Dùng 기 십상이다 trong cảnh báo kết quả bất lợi có điều kiện rõ.",
+  "Phân biệt sắc thái cảnh báo mạnh với số đo xác suất.",
+  "Đề xuất được cách giảm nguy cơ bằng thao tác kiểm cụ thể và nguồn phản hồi."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Điểm xuất phát",
+   "html": "<p>Một bản tóm tắt ngắn có thể bỏ mất chủ thể và phạm vi. Bạn viết cảnh báo về cách biên tập đó, đồng thời giữ khác biệt giữa nhận định dễ có nguy cơ với một xác suất đã được đo.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm cần dùng",
+   "items": [
+    {
+     "w": "조건 생략",
+     "rr": "jogeon saengnyak",
+     "vi": "sự bỏ điều kiện",
+     "ex": "조건 생략은 오해를 부를 수 있다.",
+     "exVi": "Bỏ điều kiện có thể gây hiểu nhầm.",
+     "pos": "phr"
+    },
+    {
+     "w": "책임 주체",
+     "rr": "chaegim juche",
+     "vi": "chủ thể chịu trách nhiệm",
+     "ex": "책임 주체를 문장에 남긴다.",
+     "exVi": "Giữ người chịu trách nhiệm trong câu.",
+     "pos": "phr"
+    },
+    {
+     "w": "적용 범위",
+     "rr": "jeogyong beomwi",
+     "vi": "phạm vi áp dụng",
+     "ex": "적용 범위를 먼저 밝힌다.",
+     "exVi": "Nêu phạm vi áp dụng trước.",
+     "pos": "phr"
+    },
+    {
+     "w": "단정적 어조",
+     "rr": "danjeongjeok eojo",
+     "vi": "giọng khẳng định tuyệt đối",
+     "ex": "단정적 어조를 조정한다.",
+     "exVi": "Điều chỉnh giọng khẳng định.",
+     "pos": "phr"
+    },
+    {
+     "w": "위험 인식",
+     "rr": "wiheom insik",
+     "vi": "nhận thức về nguy cơ",
+     "ex": "위험 인식의 근거를 묻는다.",
+     "exVi": "Hỏi căn cứ của nhận thức nguy cơ.",
+     "pos": "phr"
+    },
+    {
+     "w": "발생 빈도",
+     "rr": "balsaeng bindo",
+     "vi": "tần suất xảy ra",
+     "ex": "발생 빈도는 아직 측정하지 않았다.",
+     "exVi": "Chưa đo tần suất xảy ra.",
+     "pos": "phr"
+    },
+    {
+     "w": "오독 가능성",
+     "rr": "odok ganeungseong",
+     "vi": "khả năng đọc sai ý",
+     "ex": "오독 가능성을 검토한다.",
+     "exVi": "Xem xét khả năng đọc sai ý.",
+     "pos": "phr"
+    },
+    {
+     "w": "추정 확률",
+     "rr": "chujeong hwangnyul",
+     "vi": "xác suất ước tính",
+     "ex": "추정 확률과 경고를 구별한다.",
+     "exVi": "Phân biệt xác suất ước tính và cảnh báo.",
+     "pos": "phr"
+    },
+    {
+     "w": "완화 조치",
+     "rr": "wanhwa jochi",
+     "vi": "biện pháp giảm nguy cơ",
+     "ex": "완화 조치를 구체화한다.",
+     "exVi": "Cụ thể hóa biện pháp giảm nguy cơ.",
+     "pos": "phr"
+    },
+    {
+     "w": "검토 절차",
+     "rr": "geomto jeolcha",
+     "vi": "quy trình xem xét",
+     "ex": "검토 절차에 독자 확인을 넣는다.",
+     "exVi": "Đưa bước kiểm với người đọc vào quy trình.",
+     "pos": "phr"
+    },
+    {
+     "w": "문맥 의존",
+     "rr": "munmaek uijon",
+     "vi": "sự phụ thuộc văn cảnh",
+     "ex": "문맥 의존이 큰 표현을 살핀다.",
+     "exVi": "Xem các biểu đạt phụ thuộc mạnh vào văn cảnh.",
+     "pos": "phr"
+    },
+    {
+     "w": "누락 정보",
+     "rr": "nurak jeongbo",
+     "vi": "thông tin bị thiếu",
+     "ex": "누락 정보를 원문과 대조한다.",
+     "exVi": "Đối chiếu thông tin thiếu với bản gốc.",
+     "pos": "phr"
+    },
+    {
+     "w": "재현 가능한 점검",
+     "rr": "jaehyeon ganeunghan jeomgeom",
+     "vi": "phép kiểm có thể làm lại",
+     "ex": "재현 가능한 점검 항목을 만든다.",
+     "exVi": "Tạo mục kiểm người khác làm lại được.",
+     "pos": "phr"
+    },
+    {
+     "w": "과도한 일반화",
+     "rr": "gwadohan ilbanhwa",
+     "vi": "khái quát quá mức",
+     "ex": "과도한 일반화를 피한다.",
+     "exVi": "Tránh khái quát quá mức.",
+     "pos": "phr"
+    },
+    {
+     "w": "근거의 강도",
+     "rr": "geungeoui gangdo",
+     "vi": "độ mạnh của căn cứ",
+     "ex": "근거의 강도에 맞게 표현한다.",
+     "exVi": "Diễn đạt theo độ mạnh của căn cứ.",
+     "pos": "phr"
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "V-기 십상이다 / V-기 쉽다 / 우려가 있다",
+   "html": "<p>V기 십상이다 có nghĩa rất dễ dẫn tới một kết quả, thường bất lợi hay không mong: 조건을 빼면 뜻을 오해하기 십상이다. 기 và 십상 được viết cách. Đây là đánh giá xu hướng/nguy cơ theo người nói, không tự cung cấp tỷ lệ90% hay bất cứ số xác suất nào. 기 쉽다 cũng nêu dễ xảy ra nhưng có phạm vi dùng rộng hơn, kể cả mô tả tính dễ; 우려가 있다 đặt trọng tâm vào lo ngại và nên nêu nguồn/căn cứ. Tránh dùng 십상이다 làm dự đoán chắc chắn hoặc để quy người đọc là thiếu năng lực. Hãy đặt điều kiện gây nguy cơ cụ thể, chỉ cơ chế gây nhầm và biện pháp giảm. Nếu đã đo tần suất trong một nhóm, nêu nhóm, cách đo, thời điểm; đừng chuyển từ “dễ” sang con số không có dữ liệu. Trong bài luận dùng đuôi 다 cho mạch trình bày thống nhất; hội thoại có thể dùng 십상이에요. Âm cảnh báo có thể mềm bằng việc giải thích hoàn cảnh, không chỉ thêm có lẽ trước một quy kết mạnh.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Ý cần giữ"
+    ],
+    [
+     "조건을 생략하면 오해하기 십상이다",
+     "Nguy cơ bất lợi trong điều kiện nêu"
+    ],
+    [
+     "오해하기 쉽다",
+     "Dễ xảy ra, cách dùng rộng hơn"
+    ],
+    [
+     "오독 우려가 있다",
+     "Nêu lo ngại, cần căn cứ"
+    ],
+    [
+     "십상이다 ≠ 측정한 확률",
+     "Cảnh báo không phải con số đã đo"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "적용 범위를 빼면 모두에게 해당한다고 읽기 십상이다.",
+     "vi": "Bỏ phạm vi dễ khiến đọc thành áp dụng cho tất cả."
+    },
+    {
+     "t": "주체를 지운 요약은 책임을 흐리기 쉽다.",
+     "vi": "Tóm tắt xóa chủ thể dễ làm mờ trách nhiệm."
+    },
+    {
+     "t": "확인되지 않은 단정을 반복하면 신뢰를 잃기 십상이다.",
+     "vi": "Lặp khẳng định chưa kiểm dễ làm mất tin cậy."
+    },
+    {
+     "t": "이 우려는 세 독자의 질문에서 나왔지만 빈도 조사는 아니다.",
+     "vi": "Lo ngại này từ câu hỏi ba người đọc, chưa phải khảo sát tần suất."
+    },
+    {
+     "t": "점검자는 조건과 주체를 원문에서 다시 찾도록 한다.",
+     "vi": "Người kiểm cần tìm lại điều kiện và chủ thể trong bản gốc."
+    }
+   ],
+   "tips": [
+    "Gán xác suất từ 십상이다: chỉ dùng số nếu có đo và mô tả nguồn.",
+    "Viết 기십상 như một từ: giữ 기 십상이다.",
+    "Cảnh báo chung không nêu điều kiện: chỉ chỗ bị bỏ và cơ chế."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe để giải quyết việc cụ thể",
+   "lang": "ko-KR",
+   "note": "Ban biên tập giả định rút gọn hướng dẫn; một người gán90% hiểu sai dù mới nhận vài phản hồi, nhóm sửa mức khẳng định.",
+   "lines": [
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "요약에서 조건을 빼면 누구나 허락받았다고 읽기 십상이에요.",
+     "vi": "Nếu bỏ điều kiện trong tóm tắt, rất dễ bị đọc thành ai cũng có phép."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "그럼 독자의 구십 퍼센트가 오해한다고 쓰면 될까요?",
+     "vi": "Vậy viết chín mươi phần trăm người đọc hiểu nhầm nhé?"
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "아니요. 십상이라는 판단이 측정한 확률은 아니에요.",
+     "vi": "Không. Nhận định 십상 không phải xác suất đã đo."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "지금 근거는 어떤 자료예요?",
+     "vi": "Căn cứ hiện là dữ liệu gì?"
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "시범 독자 세 명이 같은 조건을 물어봤다는 기록이에요.",
+     "vi": "Ghi chép ba người đọc thử hỏi cùng một điều kiện."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "그 자료는 오독 경로를 살피는 데는 도움이 되겠네요.",
+     "vi": "Tài liệu đó hữu ích để xem đường dẫn đến đọc sai."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "네. 하지만 전체 독자의 발생 빈도를 말할 수는 없어요.",
+     "vi": "Đúng. Nhưng chưa nói được tần suất trong toàn bộ người đọc."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "완화 조치는 조건을 다시 넣는 것만으로 충분할까요?",
+     "vi": "Biện pháp giảm chỉ đưa điều kiện lại đã đủ chưa?"
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "원문 대조와 새 독자의 재확인을 함께 제안해요.",
+     "vi": "Tôi đề xuất vừa đối chiếu bản gốc vừa kiểm lại với người đọc mới."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "좋아요. 경고의 근거와 남은 한계를 나누어 적어요.",
+     "vi": "Được. Ghi riêng căn cứ cảnh báo và giới hạn còn lại."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Vì sao không viết 90%?",
+     "o": [
+      "Vì không ai hỏi lại",
+      "Chưa đo xác suất từ mẫu phù hợp",
+      "Vì90 luôn là số bị cấm"
+     ],
+     "a": 1,
+     "e": "Người nói nêu rõ đây là nhận định về nguy cơ, chưa có phép đo xác suất để đổi thành90%."
+    },
+    {
+     "q": "Ba câu hỏi thử giúp xem điều gì?",
+     "o": [
+      "Cơ chế có thể dẫn đến đọc sai",
+      "Tần suất của toàn bộ độc giả chắc chắn",
+      "Ai cần bị quy lỗi"
+     ],
+     "a": 0,
+     "e": "Ba câu hỏi thử giúp xác định điều kiện nào bị người đọc hiểu thiếu; chúng chưa đại diện tần suất của toàn bộ độc giả."
+    },
+    {
+     "q": "Hai bước giảm nguy cơ được đề nghị là gì?",
+     "o": [
+      "Chỉ thêm nhãn bài",
+      "Xóa mọi điều kiện cho ngắn",
+      "Đối chiếu gốc và người đọc mới kiểm lại"
+     ],
+     "a": 2,
+     "e": "Nhóm đề nghị đối chiếu điều kiện với bản gốc, rồi nhờ người đọc mới giải thích thứ tự để kiểm lại bản sửa."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Cảnh báo cần một đường dẫn từ điều kiện tới nguy cơ",
+   "title": "Cảnh báo cần một đường dẫn từ điều kiện tới nguy cơ",
+   "text": "가상의 이음글 편집모임은 긴 안내를 짧게 바꾸는 작업을 했다. 원문에는 예약이 확인된 참가자에 한해 도구를 사용할 수 있다는 조건이 있었다. 첫 요약에서는 예약 확인이라는 말을 빼고 참가자는 도구를 쓸 수 있다고만 썼다. 또 담당자가 사용법을 설명한 뒤에 시작한다는 문장에서 담당자와 설명 시점을 없앴다. 문장은 짧아졌지만 허락의 범위와 시작 조건도 달라졌다. 나린은 이런 방식이면 모든 참가자가 바로 도구를 써도 된다고 읽기 십상이라고 지적했다. 이 경고에는 구체적인 연결이 있었다. 조건이 빠지면 제한된 집단이 전체 참가자로 넓어지고 설명의 순서가 사라지면 지금 해도 되는 일처럼 보일 수 있다는 것이었다. 한 편집자는 그 말을 독자의 구십 퍼센트가 오해한다는 수치로 바꾸려 했다. 그러나 그 비율을 조사한 자료는 없었다. 현재 가진 것은 시범 독자 세 사람이 허락받은 대상과 시작 시점을 다시 물었다는 기록뿐이었다. 그 기록은 어떤 정보가 부족한지 살피는 데 도움이 되지만 전체 독자의 오독 빈도를 추정할 표본은 아니었다. 모임은 위험 인식의 근거와 발생 빈도에 대한 주장을 분리했다. 경고를 없애는 대신 근거보다 큰 확신을 줄였다. 다음 초안에는 조건과 책임 주체를 되살렸다. 그렇다고 수정했다는 사실만으로 위험이 사라졌다고 선언하지는 않았다. 다른 사람이 원문과 요약을 대조해 같은 항목을 확인할 수 있도록 점검표를 만들었다. 점검표는 예약 확인이 남아 있는지, 누가 설명하는지, 언제 사용을 시작하는지라는 세 질문으로 이루어졌다. 새 독자에게는 답을 미리 알려 주지 않고 요약만 읽은 뒤 행동 순서를 말해 보게 했다. 답이 달랐을 때에는 독자의 잘못으로 먼저 돌리지 않고 어느 표현에서 해석이 갈렸는지 물었다. 모임은 기 십상이다라는 문법을 강한 말투의 장식으로 쓰지 않기로 했다. 조건, 예상되는 오독 경로, 관찰한 근거, 남은 불확실성, 완화 조치가 함께 있어야 유용한 경고가 된다고 보았다. 아직 확인하지 못한 것은 얼마나 많은 사람이 같은 오독을 하는지와 수정이 여러 종류의 안내에서도 통하는지였다. 최종 기록에는 이 한계를 남겼고, 다음 검토의 질문으로 이어 갔다. 위험을 말하는 일은 독자를 낮추는 일이 아니라 정보의 형태가 행동을 어떻게 바꿀 수 있는지 설명하는 일이었다.",
+   "vi": "Nhóm biên tập Nối Chữ giả định rút gọn hướng dẫn có điều kiện chỉ người đã xác nhận đặt chỗ được dùng dụng cụ, và chỉ bắt đầu sau khi phụ trách giải thích. Bản đầu bỏ cả điều kiện, chủ thể và trình tự nên phạm vi phép bị rộng hơn. Narin cảnh báo dễ đọc thành mọi người dùng ngay; cô giải thích đường dẫn gây nhầm cụ thể. Một biên tập định đổi thành90% người đọc hiểu sai, nhưng chưa có khảo sát, chỉ ba người đọc thử hỏi về đối tượng và thời điểm. Ghi chép đó giúp tìm thông tin thiếu, chưa cho tần suất toàn thể. Nhóm tách căn cứ nhận nguy cơ khỏi xác suất, giữ cảnh báo nhưng giảm chắc chắn quá mức. Họ đưa điều kiện và chủ thể trở lại, rồi lập bảng để người khác đối chiếu: còn xác nhận đặt chỗ không, ai giải thích, khi nào bắt đầu. Người đọc mới không được báo đáp án trước, phải kể trình tự từ bản tóm tắt. Nếu khác, nhóm hỏi chỗ biểu đạt phân nhánh thay vì trách người đọc ngay. Họ quyết không dùng 기 십상이다 làm đồ trang trí giọng mạnh: cần điều kiện, cơ chế đọc sai, quan sát, bất định và biện pháp giảm cùng xuất hiện. Tần suất và khả năng áp dụng sang nhiều loại hướng dẫn vẫn chưa biết, được giữ thành câu hỏi kiểm tiếp. Nói nguy cơ là giải thích hình thức thông tin có thể đổi hành động thế nào, không hạ thấp người đọc.",
+   "gloss": [
+    {
+     "w": "되살렸다",
+     "rr": "doesallyeotda",
+     "vi": "đã đưa trở lại"
+    },
+    {
+     "w": "오독 경로",
+     "rr": "odok gyeongno",
+     "vi": "cơ chế dẫn tới đọc sai"
+    },
+    {
+     "w": "불확실성",
+     "rr": "bulhwaksilseong",
+     "vi": "sự chưa chắc chắn"
+    },
+    {
+     "w": "완화 조치",
+     "rr": "wanhwa jochi",
+     "vi": "biện pháp giảm nguy cơ"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Bản tóm đầu làm thay đổi những điều kiện nào?",
+     "o": [
+      "Phạm vi người dùng và thứ tự bắt đầu",
+      "Chỉ màu dụng cụ",
+      "Chỉ giá vé"
+     ],
+     "a": 0,
+     "e": "Bản rút gọn bỏ điều kiện xác nhận đặt chỗ và thứ tự phải nghe người phụ trách giải thích trước khi bắt đầu."
+    },
+    {
+     "q": "Ba câu hỏi thử cho căn cứ loại gì?",
+     "o": [
+      "Chứng minh90% hiểu sai",
+      "Chứng minh mọi người kém năng lực",
+      "Gợi chỗ thiếu và cơ chế nhầm, chưa cho tần suất chung"
+     ],
+     "a": 2,
+     "e": "Ba trường hợp cho dấu hiệu về cơ chế đọc sai, nhưng chưa cho phép tính tỷ lệ đọc sai của toàn bộ người dùng."
+    },
+    {
+     "q": "Vì sao không báo hết nguy cơ ngay khi sửa?",
+     "o": [
+      "Vì mọi câu ngắn đều sai",
+      "Cần kiểm bản sửa với người đọc mới",
+      "Vì không thể sửa gì"
+     ],
+     "a": 1,
+     "e": "Việc đã sửa là hành động biên tập; hiệu quả của bản sửa vẫn cần người đọc mới kiểm, nên chưa được công bố hết nguy cơ."
+    },
+    {
+     "q": "Bảng kiểm gồm ba nội dung nào?",
+     "o": [
+      "Xác nhận đặt chỗ, ai giải thích, khi nào bắt đầu",
+      "Màu giấy, tên phố, giá ghế",
+      "Chỉ số lượng câu"
+     ],
+     "a": 0,
+     "e": "Bảng kiểm hỏi còn điều kiện đặt chỗ không, ai giải thích và khi nào bắt đầu; đó là ba thông tin đã bị bỏ."
+    },
+    {
+     "q": "Nếu cách hiểu khác nhau, hỏi gì trước?",
+     "o": [
+      "Ai cần bị trách ngay",
+      "Có cần bỏ mọi điều kiện không",
+      "Biểu đạt nào làm cách hiểu phân nhánh"
+     ],
+     "a": 2,
+     "e": "Nhóm hỏi biểu đạt nào làm các cách hiểu phân nhánh trước khi đổ lỗi cho năng lực của người đọc."
+    },
+    {
+     "q": "Điều gì còn chưa biết ở cuối?",
+     "o": [
+      "Có ba người thử hay không",
+      "Tần suất chung và khả năng áp dụng sang loại hướng dẫn khác",
+      "Ai đã rút gọn lần đầu"
+     ],
+     "a": 1,
+     "e": "Tần suất chung và khả năng áp dụng sang nhiều loại hướng dẫn còn chưa biết, được giữ thành câu hỏi cho lượt xem xét sau."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và nhận phản hồi",
+   "tasks": [
+    {
+     "p": "Trong90–120 giây, trình bày cảnh báo về tóm tắt bỏ điều kiện: nêu cơ chế, căn cứ nhỏ và bước kiểm, không gán xác suất.",
+     "model": "조건을 뺀 요약은 허락의 대상을 넓혀 읽게 하기 십상입니다. 여기서는 예약 확인이 사라져 누구나 즉시 사용할 수 있는 것처럼 보였습니다. 근거는 시범 독자 세 명의 재질문이므로 전체 오독률을 말하지는 못합니다. 원문 대조와 새 독자의 행동 순서 확인으로 수정을 점검해야 합니다. 질문이 반복되면 독자 탓을 하기 전에 갈리는 표현을 다시 살펴보겠습니다.",
+     "vi": "Tóm tắt bỏ điều kiện dễ làm rộng người được phép. Bỏ xác nhận khiến ai cũng có vẻ dùng ngay. Căn cứ chỉ ba câu hỏi thử, chưa cho tỷ lệ chung. Cần đối chiếu gốc, kiểm trình tự người mới hiểu và xem câu gây khác trước khi trách người đọc."
+    },
+    {
+     "p": "Đối thoại phản biện con số90% không căn cứ và chốt cách viết thay thế.",
+     "model": "가: 십상이라면 구십 퍼센트라고 해도 되겠지요? 나: 그 수치를 측정한 자료가 있습니까? 가: 세 사람의 질문만 있습니다. 나: 그렇다면 그 사례에서 오독 우려가 드러났다고 쓰고, 빈도는 미확인으로 남기는 게 어떻습니까? 가: 동의합니다. 표본 범위도 함께 밝히겠습니다.",
+     "vi": "A suy 십상 thành90%; B hỏi dữ liệu, được biết chỉ ba câu hỏi nên đề nghị nêu lo ngại từ trường hợp ấy và tần suất chưa biết. A đồng ý ghi phạm vi."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết cho người nhận hiểu được",
+   "task": "Viết một đoạn lập luận 300–450 ký tự Hàn về nguy cơ của tóm tắt bỏ điều kiện. Có 기 십상이다, cơ chế gây nhầm, căn cứ và giới hạn, hai thao tác kiểm cụ thể; không bịa xác suất.",
+   "min": 290,
+   "model": "조건을 생략한 요약은 허락의 범위를 넓혀 읽게 하기 십상이다. 예약 확인이 사라지면 제한된 참가자만 가능한 일이 누구에게나 가능한 일처럼 보이기 때문이다. 시범 독자 세 명이 대상을 다시 물었다는 기록은 이런 경로를 살피는 근거가 된다. 그러나 그 사례만으로 전체 독자의 오독 확률을 계산할 수는 없다. 경고를 수치로 바꾸기보다 관찰한 범위와 불확실성을 밝혀야 한다. 수정안은 원문과 대조하여 조건과 책임 주체가 남아 있는지 확인하고, 새 독자에게 행동 순서를 설명하게 하여 다시 점검해야 한다. 답이 갈리면 독자의 능력을 탓하기 전에 문맥 의존이 큰 표현을 찾아 고치는 것이 적절하다.",
+   "modelVi": "Tóm tắt bỏ điều kiện dễ làm rộng phép vì việc chỉ dành cho người xác nhận đặt chỗ có vẻ thành ai cũng làm được. Ba người thử hỏi lại đối tượng giúp xem cơ chế này, chưa cho xác suất toàn thể. Cần nêu phạm vi và bất định thay vì bịa số. Bản sửa phải đối chiếu điều kiện, chủ thể với gốc rồi nhờ người mới kể trình tự. Nếu khác, cần tìm biểu đạt phụ thuộc văn cảnh trước khi trách năng lực người đọc.",
+   "tips": [
+    "Sắp ý theo yêu cầu Viết một đoạn lập luận 300–450 ký tự Hàn về nguy cơ của tóm tắt bỏ điều kiện. Có 기 십상이다, cơ chế gây nhầm, căn cứ và giới hạn, hai thao tác kiểm cụ thể; không bịa xác suất.; chỉ đưa dữ kiện cần để người nhận hiểu tình huống.",
+    "Dùng V-기 십상이다 / V-기 쉽다 / 우려가 있다 theo ý nghĩa đã giải thích, không thay mọi đuôi chỉ vì chúng trông giống nhau."
+   ],
+   "checklist": [
+    "Sản phẩm đáp đủ mục tiêu: Dùng 기 십상이다 trong cảnh báo kết quả bất lợi có điều kiện rõ.",
+    "Câu có V-기 십상이다 / V-기 쉽다 / 우려가 있다 giữ đúng vai và thời điểm của người nói.",
+    "Người đọc sản phẩm có thể trả lời câu “Bản tóm đầu làm thay đổi những điều kiện nào?” khi dữ kiện tương ứng được đưa vào; không phải suy từ một chữ khó nhìn."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong câu “조건 생략은 오해를 부를 수 있다.”, cụm “조건 생략” có nghĩa gì?",
+   "o": [
+    "khả năng đọc sai ý",
+    "sự bỏ điều kiện",
+    "giọng khẳng định tuyệt đối"
+   ],
+   "a": 1,
+   "e": "Bỏ điều kiện có thể gây hiểu nhầm. Đây là cách dùng sự bỏ điều kiện trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “책임 주체를 문장에 남긴다.”, cụm “책임 주체” có nghĩa gì?",
+   "o": [
+    "chủ thể chịu trách nhiệm",
+    "nhận thức về nguy cơ",
+    "xác suất ước tính"
+   ],
+   "a": 0,
+   "e": "Giữ người chịu trách nhiệm trong câu. Đây là cách dùng chủ thể chịu trách nhiệm trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “적용 범위를 먼저 밝힌다.”, cụm “적용 범위” có nghĩa gì?",
+   "o": [
+    "tần suất xảy ra",
+    "biện pháp giảm nguy cơ",
+    "phạm vi áp dụng"
+   ],
+   "a": 2,
+   "e": "Nêu phạm vi áp dụng trước. Đây là cách dùng phạm vi áp dụng trong tình huống đang nói."
+  },
+  {
+   "t": "fill",
+   "q": "조건을 빼면 오해하기 ___이다.",
+   "a": "십상",
+   "e": "기 십상이다 là cảnh báo xu hướng bất lợi, không phải số đo."
+  },
+  {
+   "t": "fill",
+   "q": "그 사례만으로 확률을 계산할 수는 ___. (없다, văn viết)",
+   "a": "없다",
+   "e": "Giới hạn dữ kiện phải giữ, dù đã thấy cơ chế nguy cơ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Lo ngại này từ câu hỏi ba người đọc, chưa phải khảo sát tần suất.",
+   "w": [
+    "우려는",
+    "세",
+    "독자의",
+    "질문에서",
+    "나왔지만",
+    "빈도",
+    "조사는",
+    "아니다",
+    "이"
+   ],
+   "a": "이 우려는 세 독자의 질문에서 나왔지만 빈도 조사는 아니다.",
+   "e": "Câu đúng là 이 우려는 세 독자의 질문에서 나왔지만 빈도 조사는 아니다. Hãy giữ các trợ từ với từ đứng trước để diễn đạt lo ngại này từ câu hỏi ba người đọc, chưa phải khảo sát tần suất."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Người kiểm cần tìm lại điều kiện và chủ thể trong bản gốc.",
+   "w": [
+    "조건과",
+    "주체를",
+    "원문에서",
+    "다시",
+    "찾도록",
+    "한다",
+    "점검자는"
+   ],
+   "a": "점검자는 조건과 주체를 원문에서 다시 찾도록 한다.",
+   "e": "Câu đúng là 점검자는 조건과 주체를 원문에서 다시 찾도록 한다. Hãy giữ các trợ từ với từ đứng trước để diễn đạt người kiểm cần tìm lại điều kiện và chủ thể trong bản gốc."
+  },
+  {
+   "t": "match",
+   "q": "Nối các cụm liên quan khả năng đọc sai ý và sự phụ thuộc văn cảnh với nghĩa phù hợp trong tình huống.",
+   "pairs": [
+    [
+     "오독 가능성",
+     "khả năng đọc sai ý"
+    ],
+    [
+     "추정 확률",
+     "xác suất ước tính"
+    ],
+    [
+     "완화 조치",
+     "biện pháp giảm nguy cơ"
+    ],
+    [
+     "검토 절차",
+     "quy trình xem xét"
+    ],
+    [
+     "문맥 의존",
+     "sự phụ thuộc văn cảnh"
+    ]
+   ],
+   "e": "Cụm 오독 가능성 diễn đạt khả năng đọc sai ý, khác 문맥 의존 là sự phụ thuộc văn cảnh. Hãy dùng câu ví dụ để kiểm chức năng trước khi ghép."
+  },
+  {
+   "t": "listen",
+   "say": "요약에서 조건을 빼면 누구나 허락받았다고 읽기 십상이에요. 그럼 독자의 구십 퍼센트가 오해한다고 쓰면 될까요? 아니요. 십상이라는 판단이 측정한 확률은 아니에요. 지금 근거는 어떤 자료예요? 시범 독자 세 명이 같은 조건을 물어봤다는 기록이에요. 그 자료는 오독 경로를 살피는 데는 도움이 되겠네요. 네. 하지만 전체 독자의 발생 빈도를 말할 수는 없어요. 완화 조치는 조건을 다시 넣는 것만으로 충분할까요? 원문 대조와 새 독자의 재확인을 함께 제안해요. 좋아요. 경고의 근거와 남은 한계를 나누어 적어요.",
+   "lang": "ko-KR",
+   "q": "Vì sao không viết 90%?",
+   "o": [
+    "Vì không ai hỏi lại",
+    "Chưa đo xác suất từ mẫu phù hợp",
+    "Vì90 luôn là số bị cấm"
+   ],
+   "a": 1,
+   "e": "Người nói nêu rõ đây là nhận định về nguy cơ, chưa có phép đo xác suất để đổi thành90%."
+  },
+  {
+   "t": "listen",
+   "say": "요약에서 조건을 빼면 누구나 허락받았다고 읽기 십상이에요. 그럼 독자의 구십 퍼센트가 오해한다고 쓰면 될까요? 아니요. 십상이라는 판단이 측정한 확률은 아니에요. 지금 근거는 어떤 자료예요? 시범 독자 세 명이 같은 조건을 물어봤다는 기록이에요. 그 자료는 오독 경로를 살피는 데는 도움이 되겠네요. 네. 하지만 전체 독자의 발생 빈도를 말할 수는 없어요. 완화 조치는 조건을 다시 넣는 것만으로 충분할까요? 원문 대조와 새 독자의 재확인을 함께 제안해요. 좋아요. 경고의 근거와 남은 한계를 나누어 적어요.",
+   "lang": "ko-KR",
+   "q": "Ba câu hỏi thử giúp xem điều gì?",
+   "o": [
+    "Cơ chế có thể dẫn đến đọc sai",
+    "Tần suất của toàn bộ độc giả chắc chắn",
+    "Ai cần bị quy lỗi"
+   ],
+   "a": 0,
+   "e": "Ba câu hỏi thử giúp xác định điều kiện nào bị người đọc hiểu thiếu; chúng chưa đại diện tần suất của toàn bộ độc giả."
+  },
+  {
+   "t": "dict",
+   "say": "가상의 이음글 편집모임은 긴 안내를 짧게 바꾸는 작업을 했다.",
+   "a": "가상의 이음글 편집모임은 긴 안내를 짧게 바꾸는 작업을 했다.",
+   "lang": "ko-KR",
+   "e": "Câu bắt đầu bằng “가상의 이음글” và kết thúc bằng “했다.”. Giữ các khối chữ trong từng từ, viết cách giữa các từ như khi đọc lại cả câu; không đổi cách viết theo một âm nối nghe được."
+  },
+  {
+   "t": "mc",
+   "q": "기 십상이다 có tự tương đương90% không?",
+   "o": [
+    "Có, theo định nghĩa",
+    "Luôn100%",
+    "Không, không có con số xác suất trong đuôi"
+   ],
+   "a": 2,
+   "e": "Mức cảnh báo định tính không tạo phép đo định lượng."
+  },
+  {
+   "t": "mc",
+   "q": "Một cảnh báo hữu ích cần gì ngoài giọng mạnh?",
+   "o": [
+    "Chỉ lặp rằng người đọc sai",
+    "Điều kiện, cơ chế, căn cứ, giới hạn và bước giảm",
+    "Chỉ nhãn nguy hiểm"
+   ],
+   "a": 1,
+   "e": "Bài nêu đường nối kiểm được giữa thông tin thiếu và hành động hiểu sai."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ 조건 생략 / 위험 인식 / 근거의 강도, tranh hoặc sơ đồ cho tình huống Ban biên tập giả định rút gọn hướng dẫn; một người gán90% hiểu sai dù mới nhận vài phản hồi, nhóm sửa mức khẳng định.; giáo viên nghe trước bản TTS để kiểm các số và âm khó.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Giáo viên nêu câu hỏi “Vì sao không viết 90%?”. Học viên dự đoán hai hướng trả lời rồi ghi điều cần nghe để phân biệt chúng; chưa mở lời thoại."
+   },
+   {
+    "t": "20 phút",
+    "do": "Làm việc với thẻ “조건 생략” và “단정적 어조”. Cho học viên ghép hai câu ví dụ tương ứng với tranh hoặc tình huống, sau đó tự giải thích vì sao không đổi chỗ hai cụm."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đối chiếu “적용 범위를 빼면 모두에게 해당한다고 읽기 십상이다.” với “주체를 지운 요약은 책임을 흐리기 쉽다.”. Khoanh thành phần thuộc V-기 십상이다 / V-기 쉽다 / 우려가 있다 và tạo một biến thể đổi nghĩa có chủ ý để cả lớp sửa."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nghe tình huống Ban biên tập giả định rút gọn hướng dẫn; một người gán90% hiểu sai dù mới nhận vài phản hồi, nhóm sửa mức khẳng định. Lượt đầu lấy mục tiêu hai người, lượt sau ghi dữ kiện giải câu “Vì sao không viết 90%?”; yêu cầu chỉ đúng lượt cung cấp căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nhập vai theo nhiệm vụ “Trong90–120 giây, trình bày cảnh báo về tóm tắt bỏ điều kiện: nêu cơ chế, căn cứ nhỏ và bước kiểm, không gán xác suất.”. Người nghe nhắc lại thông tin quyết định; người nói chỉ xác nhận nếu dữ kiện đã được truyền đúng."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai bắt đầu bằng “발생 빈도” và “근거의 강도”. Học viên viết lại một câu đã dùng từ tiết trước rồi đổi bối cảnh để kiểm có còn phù hợp hay không."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc “Cảnh báo cần một đường dẫn từ điều kiện tới nguy cơ” để giải câu “Bản tóm đầu làm thay đổi những điều kiện nào?”. So câu chứng cứ với một phương án nhiễu và nêu dữ kiện nào làm phương án đó sai."
+   },
+   {
+    "t": "20 phút",
+    "do": "Giao lượt nói thứ hai: Đối thoại phản biện con số90% không căn cứ và chốt cách viết thay thế. Bạn nghe chỉ phản hồi về mục tiêu nội dung và cấu trúc đang luyện, không sửa mọi lỗi giữa lúc người kia nói."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết theo đề: Viết một đoạn lập luận 300–450 ký tự Hàn về nguy cơ của tóm tắt bỏ điều kiện. Có 기 십상이다, cơ chế gây nhầm, căn cứ và giới hạn, hai thao tác kiểm cụ thể; không bịa xác suất. Đổi bản cho bạn đọc và đối chiếu yêu cầu “Sản phẩm đáp đủ mục tiêu: Dùng 기 십상이다 trong cảnh báo kết quả bất lợi có điều kiện rõ.”; người viết tự sửa một ý rồi giải thích căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chốt bằng câu “기 십상이다 có tự tương đương90% không?”. Mỗi học viên nêu vì sao lựa chọn sai dễ gây nhầm, rồi tự chọn một câu từ sản phẩm để luyện lại ở nhà."
+   }
+  ],
+  "games": [
+   "Thẻ điều kiện: đổi 조건 생략 thành 위험 인식 trong câu mẫu nếu có nghĩa, sau đó giải thích điều kiện nào buộc phải sửa thêm ở vị ngữ.",
+   "Người kiểm căn cứ: hai bạn giải “Bản tóm đầu làm thay đổi những điều kiện nào?”, chỉ câu hỗ trợ và bác một phương án nhiễu bằng đúng dữ kiện của bài."
+  ],
+  "errors": [
+   "Gán xác suất từ 십상이다: chỉ dùng số nếu có đo và mô tả nguồn.",
+   "Viết 기십상 như một từ: giữ 기 십상이다.",
+   "Cảnh báo chung không nêu điều kiện: chỉ chỗ bị bỏ và cơ chế.",
+   "Quy người đọc thiếu năng lực từ vài câu hỏi: kiểm câu biểu đạt trước.",
+   "Coi đã sửa bằng đã hết nguy cơ: cần người mới kiểm lại."
+  ],
+  "homework": "Lập một tình huống mới có 조건 생략 và 근거의 강도. Viết sản phẩm cùng loại với đề lớp nhưng đổi thông tin, gửi bạn nghe/đọc rồi tự sửa lỗi liên quan V-기 십상이다 / V-기 쉽다 / 우려가 있다."
+ }
+}

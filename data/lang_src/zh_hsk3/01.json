@@ -474,7 +474,7 @@
    "k": "dialog",
    "h": "Nghe: Ngày chuyển nhà",
    "lang": "zh-CN",
-   "note": "Tiểu Minh (阮明 – sinh viên Việt Nam) chuyển đến căn hộ mới ở Bắc Kinh. Bạn Trung Quốc 张伟 đến giúp, hàng xóm 刘阿姨 sang chào. Nghe lần 1 (không nhìn chữ): Tiểu Minh quên gì ở nhà cũ?",
+   "note": "Tiểu Minh (阮明 – sinh viên Việt Nam) chuyển đến căn hộ mới ở Vân Tuyến. Bạn Trung Quốc 张伟 đến giúp, hàng xóm 刘阿姨 sang chào. Nghe lần 1 (không nhìn chữ): Tiểu Minh quên gì ở nhà cũ?",
    "lines": [
     {
      "s": "张伟",
@@ -589,21 +589,21 @@
     {
      "q": "小明 nhờ đặt tủ lạnh ở đâu?",
      "o": [
+      "Cạnh cửa",
       "Trong thang máy",
-      "Cạnh cửa sổ",
-      "Cạnh cửa"
+      "Cạnh cửa sổ"
      ],
-     "a": 2,
+     "a": 0,
      "e": "请把冰箱放在门旁边 – đặt tủ lạnh cạnh cửa."
     },
     {
      "q": "刘阿姨 mang sang cái gì?",
      "o": [
+      "面包 – bánh mì",
       "米饭 – cơm",
-      "饺子 – sủi cảo",
-      "面包 – bánh mì"
+      "饺子 – sủi cảo"
      ],
-     "a": 1,
+     "a": 2,
      "e": "我刚才包了一些饺子，给你们拿过来了。"
     },
     {
@@ -618,11 +618,11 @@
     {
      "q": "Ăn xong họ định làm gì?",
      "o": [
+      "Sang nhà 刘阿姨 chơi",
       "Dọn sạch phòng và rửa đĩa cũ",
-      "Đi siêu thị mua đồ",
-      "Sang nhà 刘阿姨 chơi"
+      "Đi siêu thị mua đồ"
      ],
-     "a": 0,
+     "a": 1,
      "e": "我们把房间打扫干净，再把旧盘子都洗一洗。"
     }
    ]
@@ -828,7 +828,7 @@
   {
    "k": "write",
    "h": "Viết: Một ngày dọn dẹp",
-   "task": "Viết đoạn 60–100 chữ kể một ngày bạn dọn dẹp phòng (hoặc giúp gia đình chuyển nhà). Dùng ít nhất 4 câu 把 khác nhau: 把…放在…, 把…V干净, 把…送给…, 没把….",
+   "task": "Viết đoạn 60–100 chữ kể một ngày bạn dọn dẹp phòng (hoặc giúp gia đình chuyển nhà). Dùng ít nhất 4 câu 把 khác nhau: 把…放在…, 把…V 干净, 把…送给…, 没把….",
    "min": 60,
    "model": "周末我在家打扫房间。早上，我先把衣服洗了，然后把书都放在书架上。中午，我把冰箱里的旧东西都拿了出来，把冰箱里面也打扫干净了。下午，我把不穿的衣服送给了邻居的孩子。可是我还没把窗户打扫干净，明天再做吧。现在我的房间干净多了！",
    "modelVi": "Cuối tuần tôi ở nhà dọn phòng. Buổi sáng, tôi giặt quần áo trước, sau đó xếp hết sách lên giá sách. Buổi trưa, tôi lấy hết đồ cũ trong tủ lạnh ra, lau dọn sạch cả bên trong tủ. Buổi chiều, tôi đem quần áo không mặc tặng con của hàng xóm. Nhưng tôi vẫn chưa lau sạch cửa sổ, mai làm tiếp vậy. Bây giờ phòng tôi sạch hơn nhiều rồi!",
@@ -866,11 +866,11 @@
    "lang": "zh-CN",
    "q": "Quyển sách đang ở đâu?",
    "o": [
-    "Trên bàn",
     "Trong tủ lạnh",
-    "Trong ba lô"
+    "Trong ba lô",
+    "Trên bàn"
    ],
-   "a": 0,
+   "a": 2,
    "e": "放在桌子上 = để trên bàn."
   },
   {
@@ -879,22 +879,22 @@
    "lang": "zh-CN",
    "q": "Phòng đã sạch chưa?",
    "o": [
-    "Rồi – đã dọn sạch",
     "Người nói không dọn phòng",
-    "Chưa – người nói chưa dọn xong"
+    "Chưa – người nói chưa dọn xong",
+    "Rồi – đã dọn sạch"
    ],
-   "a": 2,
+   "a": 1,
    "e": "还没把…呢 = vẫn chưa…; người nói đang dọn dở."
   },
   {
    "t": "mc",
    "q": "Chọn câu ĐÚNG: “Tôi đặt sách lên bàn.”",
    "o": [
+    "我把书放在桌子上。",
     "我放书在桌子上。",
-    "我把书放桌子。",
-    "我把书放在桌子上。"
+    "我把书放桌子。"
    ],
-   "a": 2,
+   "a": 0,
    "e": "Có 在 + nơi chốn sau động từ → phải dùng 把: 把书放在桌子上."
   },
   {
@@ -912,22 +912,22 @@
    "t": "mc",
    "q": "Câu nào SAI vì động từ không thể dùng với 把?",
    "o": [
-    "我把门关上了。",
     "我把这个人认识了。",
-    "他把冰箱搬走了。"
+    "他把冰箱搬走了。",
+    "我把门关上了。"
    ],
-   "a": 1,
+   "a": 0,
    "e": "认识 (quen biết) không phải hành động xử lý vật → không dùng 把. Nói: 我认识这个人。"
   },
   {
    "t": "mc",
    "q": "我把一本书看完了 (Wǒ bǎ yì běn shū kànwán le) chưa đúng vì:",
    "o": [
+    "Phải dùng 被",
     "Thiếu 了",
-    "Tân ngữ của 把 phải xác định – nên nói 那本书",
-    "Phải dùng 被"
+    "Tân ngữ của 把 phải xác định – nên nói 那本书"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Tân ngữ sau 把 phải là vật cụ thể người nghe biết: 我把那本书看完了。"
   },
   {

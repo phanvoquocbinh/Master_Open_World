@@ -1,0 +1,629 @@
+{
+ "no": 12,
+ "title": "Giữ điều kiện và giới hạn đối tượng: chừng nào, chỉ trong phạm vi nào",
+ "sub": "V-는 한 / N-에 한해(서)",
+ "goals": [
+  "Dùng 는 한 để đặt điều kiện duy trì một kết luận.",
+  "Dùng 에 한해 để giới hạn đối tượng hoặc thời gian rõ ràng.",
+  "Nhận ra suy diễn không hợp lệ khi điều kiện đảo chiều hoặc bị bỏ."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Điểm xuất phát",
+   "html": "<p>Bạn biên tập quy tắc của một kho tư liệu giả định. Cần giữ khác biệt giữa điều kiện duy trì một hoạt động và đối tượng được giới hạn; rút mất một từ có thể mở rộng hoặc thu hẹp phép sai ý.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm cần dùng",
+   "items": [
+    {
+     "w": "열람 범위",
+     "rr": "yeollam beomwi",
+     "vi": "phạm vi xem tư liệu",
+     "ex": "열람 범위를 명시한다.",
+     "exVi": "Nêu rõ phạm vi xem tư liệu.",
+     "pos": "phr"
+    },
+    {
+     "w": "이용 자격",
+     "rr": "iyong jagyeok",
+     "vi": "điều kiện tư cách sử dụng",
+     "ex": "이용 자격을 먼저 확인한다.",
+     "exVi": "Kiểm tư cách sử dụng trước.",
+     "pos": "phr"
+    },
+    {
+     "w": "확인된 자료",
+     "rr": "hwagindoen jaryo",
+     "vi": "tư liệu đã xác nhận",
+     "ex": "확인된 자료에 한해 소개한다.",
+     "exVi": "Chỉ giới thiệu tư liệu đã kiểm.",
+     "pos": "phr"
+    },
+    {
+     "w": "잠정 공개",
+     "rr": "jamjeong gonggae",
+     "vi": "công bố tạm thời",
+     "ex": "잠정 공개의 조건을 적는다.",
+     "exVi": "Ghi điều kiện công bố tạm.",
+     "pos": "phr"
+    },
+    {
+     "w": "유지 조건",
+     "rr": "yuji jogeon",
+     "vi": "điều kiện duy trì",
+     "ex": "유지 조건이 바뀌었다.",
+     "exVi": "Điều kiện duy trì đã đổi.",
+     "pos": "phr"
+    },
+    {
+     "w": "제한 대상",
+     "rr": "jehan daesang",
+     "vi": "đối tượng bị giới hạn",
+     "ex": "제한 대상을 구체화한다.",
+     "exVi": "Cụ thể hóa đối tượng giới hạn.",
+     "pos": "phr"
+    },
+    {
+     "w": "적용 기간",
+     "rr": "jeogyong gigan",
+     "vi": "thời hạn áp dụng",
+     "ex": "적용 기간을 함께 밝힌다.",
+     "exVi": "Nêu cả thời hạn áp dụng.",
+     "pos": "phr"
+    },
+    {
+     "w": "예외 조항",
+     "rr": "yeoe johang",
+     "vi": "điều khoản ngoại lệ",
+     "ex": "예외 조항을 따로 읽는다.",
+     "exVi": "Đọc điều khoản ngoại lệ riêng.",
+     "pos": "phr"
+    },
+    {
+     "w": "철회하다",
+     "rr": "cheolhoehada",
+     "vi": "rút lại",
+     "ex": "허락을 철회할 수 있다.",
+     "exVi": "Có thể rút lại phép.",
+     "pos": "phr"
+    },
+    {
+     "w": "재사용",
+     "rr": "jaesayong",
+     "vi": "việc sử dụng lại",
+     "ex": "재사용은 별도 확인한다.",
+     "exVi": "Kiểm việc dùng lại riêng.",
+     "pos": "phr"
+    },
+    {
+     "w": "전제의 역전",
+     "rr": "jeonjeui yeokjeon",
+     "vi": "sự đảo điều kiện tiền đề",
+     "ex": "전제의 역전을 피한다.",
+     "exVi": "Tránh đảo điều kiện tiền đề.",
+     "pos": "phr"
+    },
+    {
+     "w": "필요조건",
+     "rr": "piryojogeon",
+     "vi": "điều kiện cần",
+     "ex": "필요조건인지 검토한다.",
+     "exVi": "Xem có phải điều kiện cần không.",
+     "pos": "phr"
+    },
+    {
+     "w": "충분조건",
+     "rr": "chungbunjogeon",
+     "vi": "điều kiện đủ",
+     "ex": "충분조건이라고 단정하지 않는다.",
+     "exVi": "Không kết luận đó là điều kiện đủ.",
+     "pos": "phr"
+    },
+    {
+     "w": "범위 확장",
+     "rr": "beomwi hwakjang",
+     "vi": "sự mở rộng phạm vi",
+     "ex": "범위 확장을 막는다.",
+     "exVi": "Ngăn mở rộng phạm vi.",
+     "pos": "phr"
+    },
+    {
+     "w": "조건부 승인",
+     "rr": "jogeonbu seungin",
+     "vi": "chấp thuận có điều kiện",
+     "ex": "조건부 승인을 그대로 전한다.",
+     "exVi": "Truyền đúng chấp thuận có điều kiện.",
+     "pos": "phr"
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "V-는 한 / N-에 한해(서)",
+   "html": "<p>V는 한 thường đặt nền điều kiện tiếp tục đúng cho mệnh đề sau: 출처가 유지되는 한 소개를 계속한다. Với dạng phủ định, 자료가 공개되지 않는 한 검증하기 어렵다 gần nghĩa nếu chưa công bố thì khó kiểm; không được tự suy công bố là đủ để kiểm xong hoặc đủ đáng tin. 에 한해/한해서 gắn danh từ giới hạn người, vật hay thời gian: 확인된 자료에 한해 소개한다, 이번 달에 한해 적용한다. Nằm trong nhóm này có thể mới là điều kiện cần, vẫn cần đọc các điều kiện khác; có tên trong danh sách không tự bảo đảm mọi phép tái sử dụng. 는 한 không thay trực tiếp 에 한해 vì một bên đặt điều kiện, bên kia giới hạn đối tượng. 다만 mở ngoại lệ cần giữ khi chuyển lời. 가능한 한 là cách nói mức có thể, nên không dùng để giải mọi 는 한 trong bài thành khả năng; phải xem cả cụm. Với quy tắc giả định, đọc theo logic của văn bản đang cho, không quảng bá thành quy định thực tế.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Ý cần giữ"
+    ],
+    [
+     "출처가 유지되는 한",
+     "Chừng nào điều kiện nguồn còn được giữ"
+    ],
+    [
+     "확인된 자료에 한해",
+     "Chỉ trong nhóm tư liệu đã xác nhận"
+    ],
+    [
+     "이번 달에 한해",
+     "Giới hạn thời gian"
+    ],
+    [
+     "조건 성립 ≠ 모든 허락 성립",
+     "Một điều kiện đúng chưa đủ cho mọi phép"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "출처와 설명이 유지되는 한 전시를 계속한다.",
+     "vi": "Chừng nào nguồn và giải thích còn được giữ, triển lãm tiếp tục."
+    },
+    {
+     "t": "이번 소개는 확인된 자료에 한해 진행한다.",
+     "vi": "Giới thiệu lần này chỉ trong tư liệu đã kiểm."
+    },
+    {
+     "t": "이번 달에 한해 연습용 사본을 제공한다.",
+     "vi": "Chỉ tháng này cung cấp bản sao luyện tập."
+    },
+    {
+     "t": "공개되지 않는 한 비교가 어렵지만 공개만으로 정확성이 보장되지는 않는다.",
+     "vi": "Chưa công bố thì khó so, nhưng công bố không tự bảo đảm đúng."
+    },
+    {
+     "t": "다만 재사용은 별도의 동의를 확인해야 한다.",
+     "vi": "Riêng việc dùng lại phải kiểm sự đồng ý riêng."
+    }
+   ],
+   "tips": [
+    "Đổi 는 한 và 에 한해 tùy ý: phân biệt điều kiện với đối tượng.",
+    "Đảo điều kiện cần thành đủ: kiểm chiều suy luận.",
+    "Bỏ thời hạn như chi tiết phụ: giữ nó trong phép."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe để giải quyết việc cụ thể",
+   "lang": "ko-KR",
+   "note": "Biên tập tin kho tư liệu: một người gộp có tên trong danh sách với được chia sẻ mọi nơi, nhóm đọc lại điều kiện riêng.",
+   "lines": [
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "확인된 자료에 한해 소개한다는 문장을 줄여도 될까요?",
+     "vi": "Rút câu chỉ giới thiệu tư liệu đã xác nhận được không?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "한해를 빼면 모든 자료를 소개한다는 뜻으로 넓어질 수 있어요.",
+     "vi": "Bỏ 한해 có thể làm rộng thành giới thiệu mọi tư liệu."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "명단에 있으면 어디에나 다시 써도 된다는 뜻인가요?",
+     "vi": "Có trong danh sách thì dùng lại ở đâu cũng được à?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "아니요. 소개 대상과 재사용 허락은 다른 조건이에요.",
+     "vi": "Không. Đối tượng giới thiệu và phép dùng lại là hai điều kiện khác."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "출처가 유지되는 한 계속한다는 말도 있네요.",
+     "vi": "Còn câu chừng nào giữ nguồn thì tiếp tục."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "그 조건이 깨질 때 어떻게 하는지도 다음 문장에 있어요.",
+     "vi": "Câu sau còn nói xử lý thế nào khi điều kiện không còn."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "공개만 하면 정확하다는 결론은 아니겠군요.",
+     "vi": "Vậy không có nghĩa cứ công bố là chính xác."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "맞아요. 공개는 비교의 한 조건이지 신뢰의 완성은 아니에요.",
+     "vi": "Đúng. Công bố là một điều kiện để so, chưa phải hoàn tất độ tin."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "기간과 예외도 별도 칸에 남길게요.",
+     "vi": "Tôi sẽ giữ thời hạn và ngoại lệ trong ô riêng."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "좋아요. 짧게 써도 조건의 논리는 지켜야 해요.",
+     "vi": "Được. Dù ngắn vẫn phải giữ logic điều kiện."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Bỏ 한해 có nguy cơ gì?",
+     "o": [
+      "Mở đối tượng từ đã kiểm thành mọi tư liệu",
+      "Chỉ đổi lịch sử dụng",
+      "Làm mọi tư liệu biến mất"
+     ],
+     "a": 0,
+     "e": "Bỏ cụm giới hạn sẽ làm đối tượng từ tư liệu đã kiểm mở rộng thành mọi tư liệu, đổi phạm vi giới thiệu."
+    },
+    {
+     "q": "Có tên danh sách cho biết phép tái dùng ở mọi nơi chưa?",
+     "o": [
+      "Có hoàn toàn",
+      "Chỉ cần đổi tiêu đề",
+      "Chưa, phải kiểm điều kiện riêng"
+     ],
+     "a": 2,
+     "e": "Có tên trong danh sách chỉ xác định đối tượng giới thiệu; dùng lại ở nơi khác vẫn cần sự đồng ý riêng."
+    },
+    {
+     "q": "Công bố được xem là gì?",
+     "o": [
+      "Không có giá trị kiểm nào",
+      "Một điều kiện để so, không bảo đảm tin cậy hoàn tất",
+      "Chứng minh mọi nội dung đúng"
+     ],
+     "a": 1,
+     "e": "Công bố tạo cơ hội cho người khác so sánh, nhưng không tự chứng minh tư liệu chính xác hoặc đã được kiểm đầy đủ."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Một từ giới hạn không phải chi tiết có thể bỏ",
+   "title": "Một từ giới hạn không phải chi tiết có thể bỏ",
+   "text": "가상의 결무늬 기록실은 주민이 만든 그림과 짧은 설명을 모아 작은 전시를 준비했다. 자료를 보내는 사람은 열람과 재사용의 조건을 따로 고를 수 있었다. 이 제도는 수업에서 만든 약속이며 실제 기관의 규칙을 인용한 것이 아니다. 준비팀의 안내에는 출처와 설명이 유지되는 한 전시를 계속하고, 이번 소개는 확인된 자료에 한해 진행한다는 두 문장이 있었다. 앞 문장은 전시를 유지하는 조건을, 뒤 문장은 소개할 대상의 범위를 정했다. 나린은 두 문장을 같은 뜻으로 줄이려던 초안을 멈추었다. 자료가 확인되었다는 사실과 출처를 계속 남기는 행동은 서로 다른 항목이었기 때문이다. 가온은 확인된 명단에 있으면 다른 모임에서도 자유롭게 쓸 수 있느냐고 물었다. 안내에는 재사용은 별도 동의를 확인해야 한다는 문장이 있었다. 따라서 소개 대상에 든다는 한 조건만으로 모든 이용 허락이 성립하지는 않았다. 또 연습용 사본은 이번 달에 한해 제공한다는 기간 제한도 있었다. 첫 요약은 이번 달이라는 말을 작게 옮기고 사본을 제공한다는 내용만 크게 썼다. 독자는 이후에도 같은 방식으로 받을 수 있다고 기대하기 쉬웠다. 팀은 기간을 부가 설명이 아니라 허락의 일부로 보았다. 어느 자료는 설명이 수정되면 원래 보낸 사람에게 다시 확인하기로 했다. 수정되었다고 무조건 허락이 사라지는 것도 아니고, 한 번 허락했다고 영원히 같은 범위로 유지되는 것도 아니었다. 무엇이 바뀌었는지에 따라 다음 단계가 달라졌다. 회의에서는 공개되지 않는 한 서로 비교하기 어렵다는 주장도 나왔다. 한 사람은 이를 공개하면 모두 검증된다는 말로 받아들였다. 나린은 조건을 뒤집으면 뜻이 달라진다고 설명했다. 공개는 다른 사람이 살펴볼 기회를 줄 수 있지만 자료의 정확성이나 설명의 적절성을 자동으로 보장하지는 않는다. 팀은 필요해 보이는 조건과 충분하다고 확인한 조건을 구별해 적었다. 최종 안내는 대상, 유지 조건, 기간, 예외, 다음 확인의 다섯 항목으로 나뉘었다. 문장을 길게 보존하려는 목적은 아니었다. 짧게 고쳐도 권한의 범위와 조건의 방향을 잃지 않으려는 목적이었다. 새 독자는 한 자료를 다른 모임에 쓰려면 무엇을 더 확인해야 하는지 설명했고, 팀은 그 답을 통해 안내가 실제로 읽히는 방식을 검토했다.",
+   "vi": "Kho tư liệu Vân Nét giả định nhận tranh và thuyết minh; người gửi chọn riêng điều kiện xem và dùng lại, là quy ước tự soạn cho lớp. Hướng dẫn nói triển lãm tiếp tục chừng nào giữ nguồn, giải thích; và lần giới thiệu chỉ lấy tư liệu đã xác nhận. Hai câu lần lượt đặt điều kiện duy trì và phạm vi đối tượng. Narin ngăn việc gộp vì xác nhận tư liệu khác hành động giữ nguồn liên tục. Gaon hỏi có tên trong danh sách được tái dùng mọi nơi không; câu riêng yêu cầu đồng ý riêng nên chưa đủ. Bản sao luyện chỉ cung cấp tháng này, nhưng nháp nhấn việc cung cấp, làm mờ thời hạn. Nhóm xem thời hạn là phần của phép. Với tư liệu sửa giải thích, họ hỏi người gửi lại tùy thay đổi, không mặc định sửa là mất phép hay một lần phép là vĩnh viễn. Khi có ý chưa công bố thì khó so, một người đảo thành công bố thì mọi thứ đã kiểm. Narin giải thích công bố cho cơ hội xem, chưa bảo đảm đúng. Nhóm tách điều kiện cần với điều kiện đủ, chia hướng dẫn thành đối tượng, điều kiện duy trì, thời hạn, ngoại lệ và lượt xác nhận tiếp. Mục đích không giữ mọi câu dài mà giữ logic, phạm vi dù viết ngắn. Người đọc mới phải giải thích cần kiểm gì để dùng tư liệu ở nhóm khác, giúp nhóm xem cách văn bản được hiểu.",
+   "gloss": [
+    {
+     "w": "부가 설명",
+     "rr": "buga seolmyeong",
+     "vi": "giải thích bổ sung"
+    },
+    {
+     "w": "조건의 방향",
+     "rr": "jogeonui banghyang",
+     "vi": "chiều logic của điều kiện"
+    },
+    {
+     "w": "열람",
+     "rr": "yeollam",
+     "vi": "xem tư liệu"
+    },
+    {
+     "w": "재사용",
+     "rr": "jaesayong",
+     "vi": "dùng lại"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Hai câu chính khác chức năng thế nào?",
+     "o": [
+      "Cả hai chỉ nói thời gian",
+      "Một đã quá khứ, một chỉ tương lai",
+      "Một đặt điều kiện duy trì, một giới hạn đối tượng"
+     ],
+     "a": 2,
+     "e": "Câu giữ nguồn đặt điều kiện duy trì triển lãm, còn câu chỉ tư liệu đã kiểm xác định nhóm đối tượng được giới thiệu."
+    },
+    {
+     "q": "Vì sao có tên danh sách chưa đủ dùng lại?",
+     "o": [
+      "Vì mọi chia sẻ đều bị cấm",
+      "Có điều kiện đồng ý riêng",
+      "Vì danh sách không có tên nào"
+     ],
+     "a": 1,
+     "e": "Hướng dẫn tách việc xem và dùng lại: được giới thiệu chưa tự cung cấp mọi quyền tái sử dụng."
+    },
+    {
+     "q": "Thời hạn được coi là gì?",
+     "o": [
+      "Một phần của phép, không chỉ chú thích",
+      "Một chi tiết bỏ cũng được",
+      "Chỉ tên tháng trang trí"
+     ],
+     "a": 0,
+     "e": "Tháng này là thời hạn của phép cung cấp, nên bỏ thời hạn sẽ làm người đọc kỳ vọng phép tiếp tục sau đó."
+    },
+    {
+     "q": "Sai lầm khi đảo công bố là gì?",
+     "o": [
+      "Từ công bố thành không có tư liệu",
+      "Chỉ tính sai số tháng",
+      "Từ khó so khi chưa công bố suy công bố đủ bảo đảm đúng"
+     ],
+     "a": 2,
+     "e": "Từ chưa công bố thì khó so không thể đảo thành chỉ cần công bố là chắc chắn đúng; công bố mới cho cơ hội kiểm."
+    },
+    {
+     "q": "Vì sao người đọc mới kể bước dùng lại?",
+     "o": [
+      "Để bỏ mọi điều kiện",
+      "Kiểm cách hướng dẫn được hiểu thực tế",
+      "Để tự cấp phép"
+     ],
+     "a": 1,
+     "e": "Người đọc kể lại bước cần kiểm giúp nhóm thấy hướng dẫn có giữ được phạm vi dùng lại trong cách hiểu thực tế không."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và nhận phản hồi",
+   "tasks": [
+    {
+     "p": "Trình bày trong90–120 giây khác biệt giữa điều kiện duy trì và giới hạn đối tượng, cho ví dụ và một suy luận cần tránh.",
+     "model": "출처가 유지되는 한이라는 문장은 전시를 계속하는 조건을 말합니다. 확인된 자료에 한해는 소개 대상의 범위를 제한합니다. 두 조건은 서로 대신하지 못합니다. 명단에 들었다고 재사용도 자동으로 허락되는 것은 아니며 별도 동의를 확인해야 합니다. 또한 공개되지 않으면 비교가 어렵다는 말에서 공개하면 모두 정확하다는 결론을 낼 수는 없습니다. 조건의 방향과 다른 항목을 함께 읽어야 합니다.",
+     "vi": "Điều kiện giữ nguồn nói việc duy trì, còn chỉ tư liệu đã kiểm giới hạn đối tượng. Chúng không thay nhau; có tên chưa tự cho tái dùng. Chưa công bố khó so cũng không kéo theo công bố là đúng. Cần đọc chiều logic và các mục khác."
+    },
+    {
+     "p": "Người biên tập muốn bỏ thời hạn, bạn phản biện và cùng chốt cách trình bày ngắn.",
+     "model": "가: 이번 달에 한해는 빼도 핵심이 같지 않습니까? 나: 기간이 빠지면 이후에도 제공한다는 기대를 만들 수 있습니다. 가: 그럼 제목에 제공 기간을 넣을까요? 나: 좋습니다. 대상과 재사용 조건도 별도 줄로 남기면 짧아도 범위를 지킬 수 있습니다.",
+     "vi": "A định bỏ thời hạn. B chỉ nguy cơ kỳ vọng kéo dài. Họ thống nhất đưa thời hạn lên tiêu đề, giữ đối tượng và tái dùng riêng để ngắn mà rõ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết cho người nhận hiểu được",
+   "task": "Viết300–450 ký tự Hàn phân tích hai điều kiện của kho tư liệu giả định. Có 는 한 và 에 한해, thời hạn, ngoại lệ tái dùng, một suy diễn đảo chiều cần tránh và cách kiểm với người đọc.",
+   "min": 290,
+   "model": "출처가 유지되는 한 전시를 계속한다는 문장은 유지 조건을 정한다. 확인된 자료에 한해 소개한다는 문장은 대상의 범위를 제한한다. 두 조건을 하나로 줄이면 확인 행위와 출처 보존이 같은 것으로 읽힐 수 있다. 이번 달에 한한다는 기간도 허락의 일부이므로 생략해서는 안 된다. 명단에 포함되더라도 재사용은 별도 동의를 확인해야 한다. 또한 공개되지 않으면 비교가 어렵다는 말은 공개만으로 정확성이 보장된다는 뜻이 아니다. 대상과 조건, 기간, 예외를 구분해 쓰고 새 독자에게 다른 모임에서 쓰려면 무엇을 더 확인할지 설명하게 하는 점검이 필요하다.",
+   "modelVi": "Câu giữ nguồn đặt điều kiện duy trì, câu chỉ tư liệu đã kiểm đặt giới hạn đối tượng. Gộp sẽ làm xác nhận và bảo tồn nguồn như một. Thời hạn là phần của phép không nên bỏ. Có tên vẫn phải kiểm đồng ý tái dùng. Chưa công bố khó so không có nghĩa công bố bảo đảm đúng. Cần tách đối tượng, điều kiện, thời hạn, ngoại lệ và nhờ người đọc nói bước dùng lại ở nhóm khác.",
+   "tips": [
+    "Sắp ý theo yêu cầu Viết300–450 ký tự Hàn phân tích hai điều kiện của kho tư liệu giả định. Có 는 한 và 에 한해, thời hạn, ngoại lệ tái dùng, một suy diễn đảo chiều cần tránh và cách kiểm với người đọc.; chỉ đưa dữ kiện cần để người nhận hiểu tình huống.",
+    "Dùng V-는 한 / N-에 한해(서) theo ý nghĩa đã giải thích, không thay mọi đuôi chỉ vì chúng trông giống nhau."
+   ],
+   "checklist": [
+    "Sản phẩm đáp đủ mục tiêu: Dùng 는 한 để đặt điều kiện duy trì một kết luận.",
+    "Câu có V-는 한 / N-에 한해(서) giữ đúng vai và thời điểm của người nói.",
+    "Người đọc sản phẩm có thể trả lời câu “Hai câu chính khác chức năng thế nào?” khi dữ kiện tương ứng được đưa vào; không phải suy từ một chữ khó nhìn."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong câu “열람 범위를 명시한다.”, cụm “열람 범위” có nghĩa gì?",
+   "o": [
+    "phạm vi xem tư liệu",
+    "công bố tạm thời",
+    "thời hạn áp dụng"
+   ],
+   "a": 0,
+   "e": "Nêu rõ phạm vi xem tư liệu. Đây là cách dùng phạm vi xem tư liệu trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “이용 자격을 먼저 확인한다.”, cụm “이용 자격” có nghĩa gì?",
+   "o": [
+    "điều kiện duy trì",
+    "điều khoản ngoại lệ",
+    "điều kiện tư cách sử dụng"
+   ],
+   "a": 2,
+   "e": "Kiểm tư cách sử dụng trước. Đây là cách dùng điều kiện tư cách sử dụng trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “확인된 자료에 한해 소개한다.”, cụm “확인된 자료” có nghĩa gì?",
+   "o": [
+    "rút lại",
+    "tư liệu đã xác nhận",
+    "đối tượng bị giới hạn"
+   ],
+   "a": 1,
+   "e": "Chỉ giới thiệu tư liệu đã kiểm. Đây là cách dùng tư liệu đã xác nhận trong tình huống đang nói."
+  },
+  {
+   "t": "fill",
+   "q": "확인된 자료에 ___ 소개한다. (chỉ giới hạn)",
+   "a": "한해",
+   "e": "에 한해 giới hạn đối tượng, không chỉ duy trì thời gian."
+  },
+  {
+   "t": "fill",
+   "q": "출처가 유지되는 ___ 전시를 계속한다.",
+   "a": "한",
+   "e": "는 한 đặt điều kiện còn được giữ cho kết luận tiếp tục."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Chưa công bố thì khó so, nhưng công bố không tự bảo đảm đúng.",
+   "w": [
+    "않는",
+    "한",
+    "비교가",
+    "어렵지만",
+    "공개만으로",
+    "정확성이",
+    "보장되지는",
+    "않는다",
+    "공개되지"
+   ],
+   "a": "공개되지 않는 한 비교가 어렵지만 공개만으로 정확성이 보장되지는 않는다.",
+   "e": "Câu đúng là 공개되지 않는 한 비교가 어렵지만 공개만으로 정확성이 보장되지는 않는다. Hãy giữ các trợ từ với từ đứng trước để diễn đạt chưa công bố thì khó so, nhưng công bố không tự bảo đảm đúng."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Riêng việc dùng lại phải kiểm sự đồng ý riêng.",
+   "w": [
+    "재사용은",
+    "별도의",
+    "동의를",
+    "확인해야",
+    "한다",
+    "다만"
+   ],
+   "a": "다만 재사용은 별도의 동의를 확인해야 한다.",
+   "e": "Câu đúng là 다만 재사용은 별도의 동의를 확인해야 한다. Hãy giữ các trợ từ với từ đứng trước để diễn đạt riêng việc dùng lại phải kiểm sự đồng ý riêng."
+  },
+  {
+   "t": "match",
+   "q": "Nối các cụm liên quan thời hạn áp dụng và sự đảo điều kiện tiền đề với nghĩa phù hợp trong tình huống.",
+   "pairs": [
+    [
+     "적용 기간",
+     "thời hạn áp dụng"
+    ],
+    [
+     "예외 조항",
+     "điều khoản ngoại lệ"
+    ],
+    [
+     "철회하다",
+     "rút lại"
+    ],
+    [
+     "재사용",
+     "việc sử dụng lại"
+    ],
+    [
+     "전제의 역전",
+     "sự đảo điều kiện tiền đề"
+    ]
+   ],
+   "e": "Cụm 적용 기간 diễn đạt thời hạn áp dụng, khác 전제의 역전 là sự đảo điều kiện tiền đề. Hãy dùng câu ví dụ để kiểm chức năng trước khi ghép."
+  },
+  {
+   "t": "listen",
+   "say": "확인된 자료에 한해 소개한다는 문장을 줄여도 될까요? 한해를 빼면 모든 자료를 소개한다는 뜻으로 넓어질 수 있어요. 명단에 있으면 어디에나 다시 써도 된다는 뜻인가요? 아니요. 소개 대상과 재사용 허락은 다른 조건이에요. 출처가 유지되는 한 계속한다는 말도 있네요. 그 조건이 깨질 때 어떻게 하는지도 다음 문장에 있어요. 공개만 하면 정확하다는 결론은 아니겠군요. 맞아요. 공개는 비교의 한 조건이지 신뢰의 완성은 아니에요. 기간과 예외도 별도 칸에 남길게요. 좋아요. 짧게 써도 조건의 논리는 지켜야 해요.",
+   "lang": "ko-KR",
+   "q": "Bỏ 한해 có nguy cơ gì?",
+   "o": [
+    "Mở đối tượng từ đã kiểm thành mọi tư liệu",
+    "Chỉ đổi lịch sử dụng",
+    "Làm mọi tư liệu biến mất"
+   ],
+   "a": 0,
+   "e": "Bỏ cụm giới hạn sẽ làm đối tượng từ tư liệu đã kiểm mở rộng thành mọi tư liệu, đổi phạm vi giới thiệu."
+  },
+  {
+   "t": "listen",
+   "say": "확인된 자료에 한해 소개한다는 문장을 줄여도 될까요? 한해를 빼면 모든 자료를 소개한다는 뜻으로 넓어질 수 있어요. 명단에 있으면 어디에나 다시 써도 된다는 뜻인가요? 아니요. 소개 대상과 재사용 허락은 다른 조건이에요. 출처가 유지되는 한 계속한다는 말도 있네요. 그 조건이 깨질 때 어떻게 하는지도 다음 문장에 있어요. 공개만 하면 정확하다는 결론은 아니겠군요. 맞아요. 공개는 비교의 한 조건이지 신뢰의 완성은 아니에요. 기간과 예외도 별도 칸에 남길게요. 좋아요. 짧게 써도 조건의 논리는 지켜야 해요.",
+   "lang": "ko-KR",
+   "q": "Có tên danh sách cho biết phép tái dùng ở mọi nơi chưa?",
+   "o": [
+    "Có hoàn toàn",
+    "Chỉ cần đổi tiêu đề",
+    "Chưa, phải kiểm điều kiện riêng"
+   ],
+   "a": 2,
+   "e": "Có tên trong danh sách chỉ xác định đối tượng giới thiệu; dùng lại ở nơi khác vẫn cần sự đồng ý riêng."
+  },
+  {
+   "t": "dict",
+   "say": "가상의 결무늬 기록실은 주민이 만든 그림과 짧은 설명을 모아 작은 전시를 준비했다.",
+   "a": "가상의 결무늬 기록실은 주민이 만든 그림과 짧은 설명을 모아 작은 전시를 준비했다.",
+   "lang": "ko-KR",
+   "e": "Câu bắt đầu bằng “가상의 결무늬” và kết thúc bằng “준비했다.”. Giữ các khối chữ trong từng từ, viết cách giữa các từ như khi đọc lại cả câu; không đổi cách viết theo một âm nối nghe được."
+  },
+  {
+   "t": "mc",
+   "q": "Chưa công bố thì khó so có kéo theo công bố đủ bảo đảm chính xác không?",
+   "o": [
+    "Chỉ khi dùng 는 한",
+    "Không",
+    "Có luôn"
+   ],
+   "a": 1,
+   "e": "Không được đảo điều kiện thành bảo đảm kết quả mạnh hơn."
+  },
+  {
+   "t": "mc",
+   "q": "Có tên trong danh sách được giới thiệu, nên kiểm gì khi muốn dùng nơi khác?",
+   "o": [
+    "Điều kiện tái sử dụng riêng",
+    "Chỉ có tên là đủ mọi phép",
+    "Không bao giờ cần hỏi"
+   ],
+   "a": 0,
+   "e": "Một tư cách trong phạm vi A chưa tự là phép trong phạm vi B."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ 열람 범위 / 유지 조건 / 조건부 승인, tranh hoặc sơ đồ cho tình huống Biên tập tin kho tư liệu: một người gộp có tên trong danh sách với được chia sẻ mọi nơi, nhóm đọc lại điều kiện riêng.; giáo viên nghe trước bản TTS để kiểm các số và âm khó.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Giáo viên nêu câu hỏi “Bỏ 한해 có nguy cơ gì?”. Học viên dự đoán hai hướng trả lời rồi ghi điều cần nghe để phân biệt chúng; chưa mở lời thoại."
+   },
+   {
+    "t": "20 phút",
+    "do": "Làm việc với thẻ “열람 범위” và “잠정 공개”. Cho học viên ghép hai câu ví dụ tương ứng với tranh hoặc tình huống, sau đó tự giải thích vì sao không đổi chỗ hai cụm."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đối chiếu “출처와 설명이 유지되는 한 전시를 계속한다.” với “이번 소개는 확인된 자료에 한해 진행한다.”. Khoanh thành phần thuộc V-는 한 / N-에 한해(서) và tạo một biến thể đổi nghĩa có chủ ý để cả lớp sửa."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nghe tình huống Biên tập tin kho tư liệu: một người gộp có tên trong danh sách với được chia sẻ mọi nơi, nhóm đọc lại điều kiện riêng. Lượt đầu lấy mục tiêu hai người, lượt sau ghi dữ kiện giải câu “Bỏ 한해 có nguy cơ gì?”; yêu cầu chỉ đúng lượt cung cấp căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nhập vai theo nhiệm vụ “Trình bày trong90–120 giây khác biệt giữa điều kiện duy trì và giới hạn đối tượng, cho ví dụ và một suy luận cần tránh.”. Người nghe nhắc lại thông tin quyết định; người nói chỉ xác nhận nếu dữ kiện đã được truyền đúng."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai bắt đầu bằng “제한 대상” và “조건부 승인”. Học viên viết lại một câu đã dùng từ tiết trước rồi đổi bối cảnh để kiểm có còn phù hợp hay không."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc “Một từ giới hạn không phải chi tiết có thể bỏ” để giải câu “Hai câu chính khác chức năng thế nào?”. So câu chứng cứ với một phương án nhiễu và nêu dữ kiện nào làm phương án đó sai."
+   },
+   {
+    "t": "20 phút",
+    "do": "Giao lượt nói thứ hai: Người biên tập muốn bỏ thời hạn, bạn phản biện và cùng chốt cách trình bày ngắn. Bạn nghe chỉ phản hồi về mục tiêu nội dung và cấu trúc đang luyện, không sửa mọi lỗi giữa lúc người kia nói."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết theo đề: Viết300–450 ký tự Hàn phân tích hai điều kiện của kho tư liệu giả định. Có 는 한 và 에 한해, thời hạn, ngoại lệ tái dùng, một suy diễn đảo chiều cần tránh và cách kiểm với người đọc. Đổi bản cho bạn đọc và đối chiếu yêu cầu “Sản phẩm đáp đủ mục tiêu: Dùng 는 한 để đặt điều kiện duy trì một kết luận.”; người viết tự sửa một ý rồi giải thích căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chốt bằng câu “Chưa công bố thì khó so có kéo theo công bố đủ bảo đảm chính xác không?”. Mỗi học viên nêu vì sao lựa chọn sai dễ gây nhầm, rồi tự chọn một câu từ sản phẩm để luyện lại ở nhà."
+   }
+  ],
+  "games": [
+   "Thẻ điều kiện: đổi 열람 범위 thành 유지 조건 trong câu mẫu nếu có nghĩa, sau đó giải thích điều kiện nào buộc phải sửa thêm ở vị ngữ.",
+   "Người kiểm căn cứ: hai bạn giải “Hai câu chính khác chức năng thế nào?”, chỉ câu hỗ trợ và bác một phương án nhiễu bằng đúng dữ kiện của bài."
+  ],
+  "errors": [
+   "Đổi 는 한 và 에 한해 tùy ý: phân biệt điều kiện với đối tượng.",
+   "Đảo điều kiện cần thành đủ: kiểm chiều suy luận.",
+   "Bỏ thời hạn như chi tiết phụ: giữ nó trong phép.",
+   "Gộp phép xem và tái dùng: đọc mục riêng.",
+   "Coi một lần đồng ý là vĩnh viễn mọi phạm vi: kiểm thay đổi và ngoại lệ."
+  ],
+  "homework": "Lập một tình huống mới có 열람 범위 và 조건부 승인. Viết sản phẩm cùng loại với đề lớp nhưng đổi thông tin, gửi bạn nghe/đọc rồi tự sửa lỗi liên quan V-는 한 / N-에 한해(서)."
+ }
+}

@@ -1,0 +1,784 @@
+=== COURSE secure-coding
+name: Lập trình an toàn
+icon: 🛡️
+floor: 7
+room: 709
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Trust boundary, input/query/render, phiên và quyền; secret/privacy/upload/build, kiểm ca âm và dự án sửa lab bằng bằng chứng.
+
+## LESSON secure-coding-01 | Tài sản, ranh giới tin cậy và yêu cầu
+
+### Chốt luồng và thiệt hại cần ngăn
+App lab Lụa Mầm cho học viên đăng ký lớp và xem phiếu. Tài sản gồm quyền xem phiếu riêng, quota và bí mật phiên; actor có khách, chủ phiếu, người khác, nhân viên được phân quyền. Mô hình theo hành vi, không theo tên tool.
+
+### Vẽ ranh giới theo luồng dữ liệu
+Browser không đáng tin chỉ vì dùng form chính thức. API kiểm phiên, quyền và input trước DB; worker nhận message cũng kiểm hợp đồng và actor/service quyền được cấp, không tin mọi message vì đi qua queue nội bộ.
+~~~text
+Browser(untrusted) -> API(authn/authz/validation)
+API -> DB(query parameterized,transaction)
+API -> queue(contract/version) -> worker(scoped identity)
+API -> response(serializer allowlist)
+Logs: event code + correlation id, không raw secret
+~~~
+
+### Viết abuse case có hậu điều kiện
+Chọn một tài nguyên giả và tài khoản lab, không kiểm hệ thống khác. Bài tập mô tả người B thử đọc phiếu của A, expected không trả nội dung và không đổi dữ liệu; so với ca A đọc thành công.
+~~~text
+asset: receipt-R7 của student-S7
+actor: student-S8
+action: GET /receipts/R7 trên localhost
+expected: denied theo policy không lộ tồn tại
+after: receipt không đổi, log không chứa nội dung phiếu
+~~~
+
+### Ưu tiên bằng tác động và khả năng
+Không cộng điểm scanner rồi coi là rủi ro chính xác. Ghi giả định về quyền mạng, dữ liệu và số user; chọn người chịu trách nhiệm, biện pháp, test và ngày kiểm lại khi kiến trúc thay đổi.
+~~~text
+risk: đọc chéo phiếu
+impact: riêng tư bị lộ
+control: resource-scope ở service/repository
+evidence: two-actor positive+negative tests
+residual: export/batch chưa kiểm -> việc phải bổ sung
+~~~
+
+### Threat model là tài liệu sống
+Thêm chức năng tải tệp hoặc job mới tạo sink và ranh giới mới. Review lại khi thay đổi lớn, dùng ngôn ngữ cụ thể để dev/QA cùng hiểu; không sao chép danh sách mối đe dọa không liên quan.
+
+PRACTICE: Nộp sơ đồ luồng, năm tài sản và sáu abuse case cho lab. Mỗi case có actor, điều kiện, tác động, control và test; chỉ dữ liệu giả, không gửi request ra hệ thống ngoài.
+Q: Threat model bắt đầu từ đâu?
++ Tài sản, actor, luồng dữ liệu và ranh giới tin cậy
+- Chọn tool quét trước
+- Liệt kê mọi lỗi Internet
+Q: Dữ liệu từ service nội bộ có mặc định đáng tin không?
++ Không, còn nguồn gốc/quyền và hợp đồng
+- Có nếu cùng mạng
+- Có nếu JSON
+
+## LESSON secure-coding-02 | Validate input và encode output
+
+### Hợp đồng nhận dữ liệu rõ ràng
+Request đăng ký chỉ nhận class_id và qty; actor đến từ phiên. Từ chối field lạ để phát hiện client sai và mass assignment, giới hạn body ở tầng HTTP trước JSON parse, sau đó kiểm kiểu/miền.
+
+### Parser Python phân biệt bool và int
+Mã này chạy độc lập, không làm server hoàn chỉnh. Class id lab theo mẫu CL và chữ số, qty 1–3; giới hạn độ dài tránh xử lý chuỗi vô hạn. Trả object mới, không giữ field lạ.
+~~~python
+import re
+def parse_registration(raw):
+    if type(raw) is not dict or set(raw)!={"class_id","qty"}:raise ValueError("shape")
+    cid=raw["class_id"];qty=raw["qty"]
+    if type(cid) is not str or len(cid)>12 or not re.fullmatch(r"CL[0-9]+",cid):raise ValueError("class_id")
+    if type(qty) is not int or not 1<=qty<=3:raise ValueError("qty")
+    return {"class_id":cid,"qty":qty}
+assert parse_registration({"class_id":"CL7","qty":1})["qty"]==1
+~~~
+
+### Ca âm đi qua từng rule
+Không chỉ kiểm chuỗi trống. Boolean, số thực, field role, list thay dict và chuỗi dài là những ca phá giả định phổ biến; test lỗi ổn định nhưng không cần lộ raw payload trong log.
+~~~python
+bad=[{"class_id":"CL7","qty":True},{"class_id":"CL7","qty":0},{"class_id":"CL7","qty":1,"role":"admin"},[]]
+for value in bad:
+    try:parse_registration(value)
+    except ValueError:pass
+    else:raise AssertionError("invalid_accepted")
+~~~
+
+### Encode theo sink, không sửa dữ liệu bừa
+Tên hiển thị hợp lệ có thể chứa ký tự cần encode ở HTML. Không strip mọi dấu nháy rồi cho rằng an toàn SQL; giữ giá trị theo miền và dùng API sink đúng. Normalize Unicode chỉ khi contract có nhu cầu.
+~~~text
+input boundary -> type,shape,length,range
+SQL value -> bind parameters
+HTML text -> textContent hoặc template autoescape
+URL -> URL API + scheme/host allowlist nếu cho liên kết
+Rich HTML -> sanitizer chuyên dụng theo chính sách
+~~~
+
+### Client validation cải thiện trải nghiệm
+Client báo lỗi sớm nhưng có thể bị bỏ qua; server vẫn là điểm thực thi. Không biến parser thành nơi quyết định quota hay quyền vì chúng cần state và identity đã xác thực.
+
+PRACTICE: Mở rộng parser với lỗi theo field không lộ input, kiểm20ca gồm missing/null/bool/float/field thừa/oversize. Vẽ riêng validation, authorization và output encoding cho một request.
+Q: Validate và output encoding khác nhau ra sao?
++ Validate kiểm hợp đồng, encode theo ngữ cảnh đầu ra
+- Một regex thay cả hai
+- Encode là xác thực quyền
+Q: JSON số true trong Python có thể bị nhận nhầm khi nào?
++ Khi chỉ isinstance(x,int) vì bool là subclass int
+- Không bao giờ
+- Chỉ khi mạng chậm
+
+## LESSON secure-coding-03 | SQL injection và tham số hóa
+
+### Query là cấu trúc, input là giá trị
+Dùng SQLite trong bộ nhớ để thấy giá trị chứa dấu nháy vẫn là dữ liệu khi bind. Không có mạng hay dữ liệu thật; driver PostgreSQL có placeholder khác, không sao chép ký hiệu ? sang mọi driver.
+
+### Bind value bằng API driver
+Demo cố ý có chuỗi giống cú pháp SQL nhưng không thực thi cấu trúc đó. Expected bằng không giúp chứng minh điều kiện không bị mở rộng; quyền tenant vẫn phải có ở query hoặc lớp truy cập dữ liệu.
+~~~python
+import sqlite3
+db=sqlite3.connect(":memory:")
+db.execute("CREATE TABLE receipts(id TEXT PRIMARY KEY,owner TEXT NOT NULL)")
+db.execute("INSERT INTO receipts VALUES(?,?)",("R7","S7"))
+def owned_receipt(rid,actor):
+    return db.execute("SELECT id FROM receipts WHERE id=? AND owner=?",(rid,actor)).fetchone()
+assert owned_receipt("R7","S7")==("R7",)
+assert owned_receipt("R7","S8") is None
+assert owned_receipt("R7' OR 1=1 --","S7") is None
+~~~
+
+### Identifier không bind như một value
+Map sort key sang cột cố định. Fragment name lấy từ dictionary của server, limit là int đã kiểm; không dùng f-string từ input trực tiếp, và không cho client chọn mọi cột nội bộ.
+~~~python
+def list_receipts(sort_key,limit):
+    columns={"id":"id","owner":"owner"}
+    if sort_key not in columns:raise ValueError("sort")
+    if type(limit) is not int or not 1<=limit<=50:raise ValueError("limit")
+    col=columns[sort_key]
+    return db.execute(f"SELECT id FROM receipts ORDER BY {col} LIMIT ?",(limit,)).fetchall()
+assert list_receipts("id",5)==[("R7",)]
+~~~
+
+### Phân quyền vẫn là điều kiện riêng
+Hàm list ở trên chỉ demo sort, chưa có actor và không dùng làm endpoint thật. Khi triển khai phải scope theo quyền; stored procedure hay ORM không an toàn tự động nếu vẫn nối SQL từ input.
+~~~text
+Review query boundary:
+ value: parameterized
+ identifier: server allowlist
+ actor: verified session, không request body
+ scope: resource/tenant filter
+ error: code ổn định, SQL text không trả client
+~~~
+
+### Kiểm nhiều tầng để không sửa nhầm
+Regression gồm chuỗi có dấu nháy hợp lệ, payload giả, field sort sai và người khác không xem được. Thêm test query/data layer để thấy quyền được scope, không chỉ kiểm HTTP status ngoài cùng.
+
+PRACTICE: Chạy demo SQLite và thêm hai phiếu khác chủ. Viết list_receipts_scoped(actor,sort,limit), test giá trị lạ và sort ngoài allowlist; nộp dữ liệu trước sau chứng minh không đổi.
+Q: Tham số hóa SQL bảo vệ phần nào?
++ Tách giá trị dữ liệu khỏi cú pháp query
+- Mọi tên cột tùy ý
+- Thay mọi kiểm quyền
+Q: Ghép LIMIT hoặc ORDER BY từ input có an toàn tự động không?
++ Không, phải validate và ánh xạ allowlist
+- Có vì không có WHERE
+- Có nếu UI dropdown
+
+## LESSON secure-coding-04 | XSS, DOM và ngữ cảnh hiển thị
+
+### Render văn bản không cần parser HTML
+Nếu tên lớp là dữ liệu thuần, gán textContent. Không dùng innerHTML cho nội dung từ user/API chỉ vì đã kiểm length; HTML parser có ngữ cảnh khác SQL hoặc JSON, phải bảo vệ đúng sink.
+
+### Safe sink cho tên lớp
+Đoạn JS chạy trong trang lab có node class-title. Tên giả có dấu < và > để kiểm nó được hiển thị nguyên văn, không tạo node. Hàm không hỗ trợ rich text và không xử lý URL.
+~~~js
+const node=document.getElementById("class-title");
+if(!node)throw new Error("missing_title_node");
+const title="Lớp <Mầm & Thoi>";
+node.textContent=title;
+console.assert(node.textContent===title);
+console.assert(node.children.length===0);
+~~~
+
+### Link cũng có hợp đồng scheme và origin
+Nếu ứng dụng chỉ cho link nội bộ, dùng URL API với base cố định rồi kiểm origin và path. Không dùng kiểm tra startsWith trên host; ví dụ chỉ cho các đường /classes/ tại localhost lab.
+~~~js
+function classLink(raw){
+ const u=new URL(raw,"http://localhost:3100");
+ if(u.origin!=="http://localhost:3100" || !u.pathname.startsWith("/classes/"))throw new Error("link_denied");
+ return u.href;
+}
+console.assert(classLink("/classes/CL7")==="http://localhost:3100/classes/CL7");
+~~~
+
+### Rich text cần chính sách khác
+Khi thật sự cần HTML, chọn sanitizer được duy trì và allowlist theo sản phẩm; không tự regex xóa script. CSP được cấu hình chặt là lớp giảm thiểu bổ sung, có test để không phá chức năng hợp lệ.
+~~~text
+Case text: <b>Mầm</b> -> hiển thị chữ nguyên văn
+Case link: javascript:... -> reject theo origin/scheme
+Case link ngoài: http://example.com/classes/CL7 -> reject ở lab này
+Case rich text: chỉ khi có sanitizer + policy + regression riêng
+Không ghi rằng CSP thay mọi encode hoặc authorization.
+~~~
+
+### Test DOM thay vì chỉ tìm chuỗi
+Kiểm node con, thuộc tính và sự kiện không được tạo ngoài mong muốn. Phản hồi JSON an toàn chưa đảm bảo client render an toàn; trace dữ liệu tới sink cuối, bao gồm lỗi/toast và preview.
+
+PRACTICE: Tạo trang thử riêng của học viên, so textContent với render HTML bằng dữ liệu giả. Nộp ca < > & nháy, link ngoài/scheme lạ và kiểm DOM; không kiểm website bên ngoài.
+Q: textContent phù hợp khi nào?
++ Hiển thị dữ liệu như văn bản thuần
+- Cần thực thi HTML tùy ý
+- Thay sanitizer mọi định dạng
+Q: CSP có thay encode/safe sink không?
++ Không, là lớp phòng vệ bổ sung
+- Có nếu bật header
+- Có nếu chặn ảnh
+
+## LESSON secure-coding-05 | CSRF, cookie và trạng thái đăng nhập
+
+### Browser có thể tự gửi cookie phiên
+CSRF lợi dụng credential được browser tự đính kèm khi request đáp ứng điều kiện. Nó khác XSS và không phải chỉ là đọc response; một request đổi trạng thái có thể gây hại dù trang ngoài không đọc được nội dung trả về.
+
+### Chọn cơ chế framework, không tự bịa token
+Với session cookie, dùng middleware CSRF của framework và cấu hình đúng. Synchronizer token gắn session, token không đoán được, không đặt trong URL/log; kiểm Origin/Referer theo policy và proxy tin cậy khi phù hợp.
+~~~text
+Browser form/API cùng origin
+ -> session đã xác minh
+ -> framework CSRF check theo method/content type
+ -> origin được so toàn bộ khi policy yêu cầu
+ -> authorization theo resource
+ -> transaction nghiệp vụ
+GET/HEAD không đổi trạng thái theo contract
+~~~
+
+### Cookie flags có nhiệm vụ riêng
+Mẫu sau là đặc tả header cho HTTPS deployment, không phải lệnh để chạy HTTP localhost. Secure giới hạn gửi qua kênh an toàn theo browser, HttpOnly giảm đọc qua JS, SameSite cần chọn theo luồng đăng nhập/điều hướng.
+~~~text
+Set-Cookie: session=<VALUE_RUNTIME_NOT_A_REAL_SECRET>; Secure; HttpOnly; SameSite=Lax; Path=/
+Domain: không mở rộng nếu không cần
+Expiry: theo chính sách idle/absolute phía server
+Logout: revoke server state và xóa cookie đúng scope
+Không copy placeholder làm session thực
+~~~
+
+### CORS không là tường lửa CSRF chung
+Simple request có thể được gửi trước khi quy tắc đọc response áp dụng. Custom header cho API có thể là một phần defense khi cấu hình CORS chặt, nhưng cần xét subdomain bị chiếm và không whitelist origin rộng.
+~~~text
+Positive: request cùng origin + token hợp lệ -> xử lý
+Negative: thiếu/sai token -> reject
+Negative: token của session khác -> reject
+Negative: origin ngoài theo policy -> reject
+Regression: luồng login/callback hợp lệ còn hoạt động
+Ghi rõ SameSite/site khác origin
+~~~
+
+### XSS có thể làm suy yếu CSRF defense
+Script chạy cùng origin có thể đọc token không HttpOnly và gửi request hợp lệ; nên sửa XSS đồng thời, không tuyên bố token giúp mọi request do người dùng chủ ý tạo. Re-auth cần cho thao tác nhạy cảm theo sản phẩm.
+
+PRACTICE: Viết threat timeline CSRF và test matrix cho middleware được chọn trong lab. Phân biệt cookie flags, token, origin, CORS; nêu cấu hình HTTPS và giới hạn khi chạy HTTP cục bộ.
+Q: SameSite cookie có thay toàn bộ chống CSRF không?
++ Không
+- Có luôn
+- Chỉ cần CORS *
+Q: HttpOnly cookie ngăn được gì trực tiếp?
++ JavaScript đọc cookie, không tự ngăn CSRF hay mọi XSS
+- Mọi request giả
+- Mọi đánh cắp tài khoản
+
+## LESSON secure-coding-06 | Xác thực và quản lý phiên
+
+### Xác thực không chỉ là so mật khẩu
+Chọn thư viện/framework được duy trì, dùng KDF mật khẩu như Argon2id với tham số theo hướng dẫn hiện hành và benchmark. Không tự hash một vòng hoặc lưu plaintext; migration hash cần version và rehash có kế hoạch.
+
+### Thiết kế session lifecycle
+Sau login tăng quyền cần rotate session id để giảm fixation. Ghi idle timeout, absolute expiry và revoke/logout; nếu dùng token ký phải kiểm chữ ký, thuật toán, issuer/audience/time theo thư viện và contract.
+~~~text
+anonymous -> authenticate -> rotate session id
+active -> idle/absolute expiry -> denied
+logout -> revoke state theo mô hình -> cookie cleared
+password reset -> revoke theo chính sách đã chốt
+role change -> quyền cập nhật/thu hồi đúng hạn
+Không coi JWT tự là cơ chế logout hoàn chỉnh
+~~~
+
+### Bảo vệ brute-force và enumeration
+Rate limit theo mô hình nhiều tín hiệu, không chỉ IP chung khiến cả lớp học bị khóa. Error phía ngoài đủ chung, không lộ user có tồn tại; audit nội bộ có quyền giúp điều tra mà không log mật khẩu/token.
+~~~text
+POST /login (localhost lab only)
+request: username giả + secret được cấp cục bộ
+public error: LOGIN_FAILED + correlation_id
+rate limit: budget/recovery policy đã chốt
+audit: attempt outcome, time, actor hint phù hợp
+never log: raw password, session, reset token
+~~~
+
+### Recovery không yếu hơn login chính
+Reset token phải ngẫu nhiên, ngắn hạn, dùng một lần theo thiết kế; không tự tạo từ email hoặc timestamp. Thông báo và đổi địa chỉ liên hệ cần kiểm quyền và chống lạm dụng, tránh gửi email thật từ bài học.
+~~~text
+Test session:
+ id trước/sau login khác theo policy
+ hết idle/absolute -> request mới bị chặn
+ logout -> token cũ không tiếp tục quyền ngoài contract
+ reset token dùng lần2 -> reject
+ lỗi login không lộ user tồn tại qua nội dung rõ rệt
+~~~
+
+### Lab không là mẫu bảo mật production
+Các fixture API khác có opaque token giả chỉ để học kiểm thử. Không tái sử dụng chúng làm auth app thật; mã hóa, lưu trữ và vận hành auth cần thư viện, cấu hình và review riêng của hệ thống.
+
+PRACTICE: Nộp session state diagram, checklist framework và12ca login/logout/reset/expiry. Dùng token giả, không gửi email thật; ghi rõ ca nào đã chạy và ca nào mới là đặc tả.
+Q: Mật khẩu nên lưu thế nào?
++ Hash chuyên dụng qua thư viện được duy trì, salt và tham số phù hợp
+- Plaintext trong DB
+- SHA256 một lần cho mọi user
+Q: Sau đăng nhập cần xem xét gì cho session?
++ Rotate id, expiry, revoke/logout và bảo vệ cookie
+- Giữ id cũ mãi
+- Token dài thì không cần hết hạn
+
+## LESSON secure-coding-07 | Phân quyền theo tài nguyên
+
+### Quyền gồm actor, action, resource và context
+Học viên S7 xem phiếu R7 của mình, S8 bị chặn; nhân viên chỉ được xem trong phạm vi được cấp. Actor lấy từ session đã xác minh, không từ owner_id do request gửi lên.
+
+### Scope truy vấn thay vì lấy rồi quên kiểm
+SQLite ví dụ gắn owner trong cùng truy vấn. Ứng dụng thật còn tenant/role/policy tùy miền, không mở toàn quyền chỉ vì code đi qua route admin có thể đoán được.
+~~~python
+import sqlite3
+conn=sqlite3.connect(":memory:")
+conn.execute("CREATE TABLE r(id TEXT,owner TEXT,title TEXT)")
+conn.executemany("INSERT INTO r VALUES(?,?,?)",[("R7","S7","Phiếu Mầm"),("R8","S8","Phiếu Thoi")])
+def get_own(rid,actor):
+    return conn.execute("SELECT id,title FROM r WHERE id=? AND owner=?",(rid,actor)).fetchone()
+assert get_own("R7","S7")==("R7","Phiếu Mầm")
+assert get_own("R7","S8") is None
+~~~
+
+### Serializer allowlist không để lộ field
+Lấy dữ liệu đúng quyền vẫn cần chọn field trả ra. Body không được đổi owner/role; dùng DTO riêng để hạn chế mass assignment và không serialize toàn object nội bộ.
+~~~python
+def public_receipt(row):
+    return {"id":row["id"],"title":row["title"]}
+x={"id":"R7","title":"Phiếu Mầm","internal_note":"CANARY_LAB_ONLY"}
+assert public_receipt(x)=={"id":"R7","title":"Phiếu Mầm"}
+assert "internal_note" not in public_receipt(x)
+~~~
+
+### Batch/export cũng là đường truy cập
+Một route đơn được bảo vệ không chứng minh batch an toàn. Khi nhận list id, mỗi phần tử phải giữ policy và contract phản hồi; không trả phần không có quyền hoặc để count/error tiết lộ điều bị cấm.
+~~~text
+Matrix:
+ S7,R7,read -> allow
+ S8,R7,read -> deny
+ guest,R7,read -> unauthenticated
+ S7,R7,change_owner -> deny
+ S7,batch[R7,R8] -> chỉ theo contract scoped
+ Export/attachment/background job -> kiểm policy tương ứng
+~~~
+
+### Không dùng id khó đoán làm control chính
+UUID giảm đoán tuần tự nhưng link có thể lộ qua lịch sử/log/chia sẻ. Quyền phải thực thi cho mọi request và job, cùng audit phù hợp; kiểm cả user hợp lệ để bản vá không trở thành deny-all.
+
+PRACTICE: Viết test hai actor và hai tenant giả, gồm đọc/sửa/batch/export. Nộp allowlist serializer, chứng minh role/owner trong body bị từ chối và canary không lọt response/log.
+Q: Biết id tài nguyên có thay quyền truy cập không?
++ Không
+- Có nếu UUID
+- Có nếu mã khó đoán
+Q: Field owner_id từ request dùng thế nào?
++ Không lấy làm danh tính đã xác thực
+- Tin nếu trùng UI
+- Cho đổi role qua body
+
+## LESSON secure-coding-08 | Secret, config và khóa xoay được
+
+### Secret có chủ sở hữu và hạn dùng
+Lập inventory bí mật theo mục đích, consumer, phạm vi quyền và cách thu hồi. Không ghi giá trị vào tài liệu, source, ảnh hay log. Biến môi trường chỉ là một cách cấp, không tự là kho bí mật an toàn trước mọi actor.
+
+### Config lỗi thì dừng rõ
+Ví dụ chỉ đọc dictionary giả, không đụng biến môi trường máy. Hàm không cho thiếu secret rồi rơi về giá trị hardcode, không in value trong error. App thật lấy từ secret provider có quyền tối thiểu theo nền tảng.
+~~~python
+def require_config(config,key):
+    value=config.get(key)
+    if type(value) is not str or not value.strip():raise ValueError("missing_config:"+key)
+    return value
+assert require_config({"LAB_SERVICE_KEY":"PLACEHOLDER_NOT_SECRET"},"LAB_SERVICE_KEY")=="PLACEHOLDER_NOT_SECRET"
+try:require_config({},"LAB_SERVICE_KEY")
+except ValueError as e:assert str(e)=="missing_config:LAB_SERVICE_KEY"
+else:raise AssertionError("missing_key_accepted")
+~~~
+
+### Rotation là chuyển đổi có kiểm
+Nếu hệ hỗ trợ hai phiên bản hiệu lực tạm thời, triển khai consumer mới, xác nhận dùng bản mới rồi thu hồi cũ. Nếu secret đã lộ, ưu tiên containment theo runbook; không rollback bằng cách kích hoạt lại giá trị lộ.
+~~~text
+stage1: cấp version mới với scope tối thiểu
+stage2: phân phối qua secret provider
+stage3: consumer reload/restart theo protocol
+stage4: quan sát xác thực thành công bằng version id
+stage5: revoke cũ, test request dùng bản cũ bị chặn
+incident: khoanh vùng, audit, cấp lại; không log giá trị
+~~~
+
+### Base64 không bảo vệ confidentiality
+Kubernetes Secret hoặc chuỗi base64 vẫn cần quyền truy cập và cấu hình encryption phù hợp. Hạn chế ai đọc, ai mount, ai chạy code trong workload; audit cả backup, crash dump và build artifact có thể chứa secret.
+~~~text
+Inventory entry:
+ name: receipt-service-key (tên, không giá trị)
+ owner: nhóm lab Sợi Mầm
+ consumer: receipt-worker
+ permissions: read một tài nguyên lab theo scope
+ expiry/rotation/revoke: có quy trình kiểm
+ evidence: version id, không credential
+~~~
+
+### Kiểm bằng canary giả không phải secret thật
+Đặt giá trị nhận diện giả trong test rồi tìm trong response/log/artifact. Canary chứng minh đường đang kiểm có lọc, chưa chứng minh mọi path an toàn; thêm kiểm lỗi và crash được mô phỏng trong lab.
+
+PRACTICE: Nộp inventory ba secret giả, config fail-closed và runbook rotate/revoke. Test thiếu key, reload lỗi và consumer cũ; tìm canary trong output mẫu, tuyệt đối không đọc secret thật của máy.
+Q: Secret rotation cần gì ngoài sinh giá trị mới?
++ Phân phối, chuyển consumer, xác nhận và thu hồi cũ
+- Chỉ đổi biến trên máy dev
+- Chỉ xóa log
+Q: Base64 secret có phải mã hóa bảo mật không?
++ Không
+- Có đủ nếu chuỗi dài
+- Có nếu đặt trong JSON
+
+## LESSON secure-coding-09 | Lưu trữ dữ liệu cá nhân tối thiểu
+
+### Mỗi trường cần lý do giữ lại
+App đặt lớp cần liên hệ theo mục đích đã chốt, không mặc định cần ngày sinh, địa chỉ nhà hay hồ sơ khác. Xác định retention, quyền xem/export/xóa và ảnh hưởng backup, dùng dữ liệu giả trong mọi bài tập.
+
+### DTO theo mục đích thay toàn bộ hồ sơ
+Bảng điểm danh có thể chỉ cần mã hiển thị và tên tự đặt. Serializer tạo object mới theo allowlist; không gửi email chỉ vì DB có sẵn, không gửi internal_note rồi giấu bằng CSS.
+~~~python
+def attendance_view(student):
+    return {"display_id":student["display_id"],"display_name":student["display_name"]}
+fake={"display_id":"S7","display_name":"Lam Sợi","email":"student7@example.com","internal_note":"CANARY_PRIVATE_LAB"}
+view=attendance_view(fake)
+assert set(view)=={"display_id","display_name"}
+assert "CANARY_PRIVATE_LAB" not in str(view)
+~~~
+
+### Retention có trạng thái và điều kiện
+Không xóa tùy tiện chỉ vì đủ số ngày: nghiệp vụ có thể giữ hồ sơ tối thiểu theo chính sách đã review. Bài này dùng policy giả, không tuyên bố đáp ứng quy định pháp lý; tách dữ liệu vận hành, audit và backup theo mục đích.
+~~~text
+dataset: lab_contact
+purpose: thông báo lớp giả
+retention: 30ngày sau kết thúc (policy bài tập)
+action: xóa trường liên hệ khi đủ điều kiện
+exceptions: không dùng dữ liệu thật, không áp dụng policy vào hệ thật
+backup: lịch hết hạn và hạn chế truy cập được ghi riêng
+~~~
+
+### Log theo sự kiện có allowlist
+Logging function nhận event riêng, không nhận request body. Correlation id phục vụ tra cứu, không nhúng email hay token vào id. Masking không biến dữ liệu thành vô danh tuyệt đối nếu còn có thể liên kết lại.
+~~~python
+def audit_event(event,correlation_id,outcome):
+    if event not in {"receipt_read","registration_submit"}:raise ValueError("event")
+    return {"event":event,"correlation_id":correlation_id,"outcome":outcome}
+record=audit_event("receipt_read","LAB-CORR-7","denied")
+assert set(record)=={"event","correlation_id","outcome"}
+~~~
+
+### Kiểm cả export và đường lỗi
+Một response chuẩn ít trường có thể vẫn lộ dữ liệu qua CSV, debug endpoint hoặc stacktrace. Rà mọi cách dữ liệu rời hệ thống, quyền và audit; canary giả giúp chỉ ra leak mà không phải thử bằng thông tin cá nhân thật.
+
+PRACTICE: Lập data map cho điểm danh/phiếu/thông báo, bỏ trường không cần, viết serializer và kiểm export/error/log không lộ canary. Nộp retention policy giả cùng những câu hỏi còn phải được chủ dữ liệu quyết định.
+Q: Thu thập tối thiểu dữ liệu giúp gì?
++ Giảm phạm vi lộ và chi phí quản lý
+- Thay xác thực
+- Làm DB không cần backup
+Q: Log request body toàn bộ có rủi ro gì?
++ Lộ token, mật khẩu hoặc dữ liệu cá nhân
+- Luôn giúp debug an toàn
+- Chỉ tốn đĩa
+
+## LESSON secure-coding-10 | Tệp tải lên, đường dẫn và giới hạn
+
+### Upload là luồng có nhiều điểm kiểm
+Giới hạn kích thước ở proxy/app/stream, không chỉ sau khi đã đọc hết. Allowlist loại file, kiểm signature/decoder, sinh storage key và không phục vụ dưới quyền thực thi. MIME và extension từ client chưa đáng tin.
+
+### Tên lưu do server sinh
+Mã tạo key cho file giả, không tạo file trên đĩa. Extension phải là kết quả xác minh loại file theo pipeline, không lấy nguyên phần đuôi client. Tên hiển thị lưu riêng và render như văn bản thuần.
+~~~python
+import uuid
+def storage_key(verified_type):
+    ext={"image/png":".png","image/jpeg":".jpg"}.get(verified_type)
+    if ext is None:raise ValueError("file_type")
+    return uuid.uuid4().hex+ext
+key=storage_key("image/png")
+assert key.endswith(".png") and "/" not in key and "\\" not in key
+~~~
+
+### Path traversal không sửa bằng replace đơn giản
+Không đưa filename tùy ý vào join rồi tin rằng bỏ ../ là đủ. Nếu buộc truy cập file theo tên, dùng mapping id->path đã quản lý; defense phải xét separator, encoding, absolute path, symlink và race trên nền tảng thực.
+~~~text
+request: file_id=F7
+server lookup: F7 -> storage_key do server quản lý
+authorize: actor có quyền file này
+read: storage API trong vùng cố định
+response: content type/disposition an toàn theo loại
+Không cho client gửi đường dẫn ổ đĩa để đọc trực tiếp
+~~~
+
+### Archive và ảnh có chi phí sau giải mã
+File nén nhỏ có thể bung rất lớn; ảnh kích thước pixel quá lớn có thể cạn bộ nhớ. Hạn mức tổng bytes/số entry/độ sâu/thời gian, xử lý cách ly và kiểm tên entry khi giải nén; scan không thay toàn bộ pipeline.
+~~~text
+Upload tests:
+ size > limit -> dừng sớm
+ MIME giả/đuôi kép -> không tin metadata
+ tên trùng/path tuyệt đối/separator -> không dùng làm storage path
+ ảnh vượt pixel policy -> reject theo decoder
+ archive vượt quota giải nén -> dừng,cách ly
+ download chéo chủ -> denied
+~~~
+
+### Chỉ kiểm fixture tự tạo vô hại
+Dùng byte nhỏ/text giả để test metadata và limit, không tải mẫu độc hại ngoài. Những kiểm scanner/decoder cần môi trường riêng được cấp; ghi rõ chưa xác minh nếu bài mới là thiết kế.
+
+PRACTICE: Nộp pipeline upload/download có quyền, quota và storage key. Tạo15ca metadata/path/oversize giả, chỉ rõ giai đoạn chặn; không ghi file ra ngoài thư mục lab học viên tự tạo.
+Q: Filename từ người dùng có nên làm đường dẫn lưu trực tiếp không?
++ Không
+- Có nếu bỏ dấu cách
+- Có nếu UI cấm dấu chấm
+Q: Content-Type do client gửi có chứng minh file an toàn không?
++ Không
+- Có nếu image/*
+- Có nếu extension png
+
+## LESSON secure-coding-11 | Phụ thuộc, build và nguồn artifact
+
+### Build cũng nằm trong threat model
+Dependency, script cài đặt, compiler plugin và CI workflow đều có thể chạy code. Khóa phiên bản giúp tái lập, còn tin cậy cần xem nguồn gốc, integrity, quyền và thay đổi; không coi package phổ biến là mặc định an toàn.
+
+### Artifact đi qua chuỗi kiểm được
+Dùng lockfile phù hợp và môi trường build tái lập, lưu hash/artifact id. Không ghi credential vào Docker layer hoặc cache; SBOM/provenance giúp truy vết, không tự chứng minh mọi dependency không có lỗi.
+~~~text
+source đã review -> dependency theo lock/integrity
+ -> build ít quyền, không production secret
+ -> unit/security checks
+ -> artifact immutable + digest
+ -> SBOM/provenance theo pipeline
+ -> promotion cùng artifact đã kiểm, không rebuild khác tùy ý
+~~~
+
+### PR không tin cậy không nhận đặc quyền
+Tách bước build PR khỏi bước ký/phát hành. Không chạy mã chưa review trong context có token ghi rộng; hạn chế egress/mount theo môi trường và không đưa secret vào log để kiểm chúng có tồn tại.
+~~~text
+Context PR: read code, run test sandbox, no deploy secret
+Context release: nguồn đã review, quyền ngắn hạn tối thiểu
+Approval: theo dự án cho bước có đặc quyền
+Cache: không tin nội dung từ context thấp hơn
+Artifact: kiểm digest/provenance trước promotion
+~~~
+
+### Xử lý vulnerability theo khả năng khai thác
+Scan report cần triage theo version thật, đường dùng, exposure và fix. Pin mãi phiên bản cũ để build xanh có thể giữ rủi ro; upgrade có regression và rollback bằng artifact trước đã kiểm, không tải tùy ý từ link chat.
+~~~text
+Finding record:
+ component/version/digest
+ affected path + exposure
+ severity nguồn + đánh giá hệ thống
+ decision: fix/mitigate/accept có owner và hạn
+ evidence: patch tests + scan lại + runtime regression
+ Không sửa report để che finding chưa xử lý
+~~~
+
+### Bài tập không tự nâng dependency dự án
+Học viên làm trong repo lab riêng, không cài package vào hệ đang dùng. Nộp review plan và fixture lockfile giả nếu chưa có toolchain; phân biệt bằng chứng đã chạy với checklist dự kiến.
+
+PRACTICE: Vẽ trust context PR/release, rà một dependency giả và viết triage record. Nộp kế hoạch lock/integrity/SBOM, cách kiểm artifact và test canary không vào cache/image/log.
+Q: Dependency lock có bảo đảm không có lỗ hổng không?
++ Không, chỉ giúp tái lập phiên bản
+- Có vĩnh viễn
+- Có nếu package phổ biến
+Q: Build từ PR không tin cậy nên xử lý secret thế nào?
++ Không cấp secret/quyền ghi không cần thiết
+- Cấp production key để test
+- Chỉ che trên màn hình
+
+## LESSON secure-coding-12 | Kiểm bảo mật và xử lý lỗi không lộ tin
+
+### Kiểm đường đúng cùng đường bị chặn
+Mỗi control cần ca dương chứng minh chức năng còn chạy, ca âm đúng rủi ro và hậu điều kiện. Chỉ status403 mọi nơi không chứng minh phân quyền đúng; scanner chỉ cho tín hiệu cần điều tra.
+
+### Error response nhỏ và ổn định
+Không serialize exception hoặc config thẳng ra client. Map lỗi nội bộ sang code được phép và correlation id; thông tin chi tiết giữ trong hệ quan sát có quyền theo chính sách, không ghép stack vào message công khai.
+~~~python
+def public_error(kind,correlation_id):
+    allowed={"validation":"INVALID_REQUEST","forbidden":"NOT_AVAILABLE","internal":"INTERNAL_ERROR"}
+    return {"error":allowed.get(kind,"INTERNAL_ERROR"),"correlation_id":correlation_id}
+out=public_error("internal","LAB-CORR-9")
+assert out=={"error":"INTERNAL_ERROR","correlation_id":"LAB-CORR-9"}
+~~~
+
+### Canary giả kiểm lộ nội dung
+Bài test dùng secret giả, không đọc cấu hình máy. Bản vá phải không lộ qua response/log được kiểm; việc không tìm thấy trong một kênh không chứng minh mọi output an toàn.
+~~~python
+import json
+canary="CANARY_NOT_A_REAL_SECRET"
+internal=RuntimeError("db_config="+canary)
+response=public_error("internal","LAB-CORR-10")
+assert canary not in json.dumps(response)
+assert str(internal) not in json.dumps(response)
+~~~
+
+### Mutation chứng minh test có độ nhạy
+Cố ý bỏ owner filter trong bản lab, test chéo chủ phải fail; đổi textContent thành innerHTML, DOM test phải phát hiện. Khôi phục trước bàn giao và ghi mutant tương đương nếu có, không chỉ đếm mutation score.
+~~~text
+M1 bỏ owner scope -> S8/R7 negative đỏ
+M2 serializer thêm internal_note -> canary leak đỏ
+M3 bỏ qty type check -> bool input đỏ
+M4 trả str(exception) -> error privacy đỏ
+M5 deny-all -> positive user hợp lệ đỏ
+Sau khôi phục: suite xanh, evidence có command và version
+~~~
+
+### Báo cáo có mức chắc chắn phù hợp
+Tách lỗi tái hiện được, rủi ro chưa kiểm và giả định đã dựa vào. Không gọi code secure tuyệt đối từ một lần scan; checklist phải gắn vào luồng và phiên bản đã kiểm để người khác tái lập.
+
+PRACTICE: Xây suite cho parser/query/serializer/error ở trên, gồm hai actor và canary. Thực hiện ít nhất ba mutation trên bản lab rồi khôi phục; nộp đỏ-xanh và phạm vi còn chưa kiểm.
+Q: Error response công khai nên chứa gì?
++ Mã lỗi ổn định và id tra cứu không nhạy cảm
+- Stacktrace với env
+- Toàn câu SQL và credential
+Q: Kiểm bảo mật có cần ca dương hợp lệ không?
++ Có, để chứng minh vẫn phục vụ người có quyền
+- Không, chỉ cần mọi request403
+- Chỉ scanner
+
+## LESSON secure-coding-13 | Dự án: sửa luồng đặt lớp trong lab
+
+### Dự án sửa luồng đặt lớp Lụa Mầm
+Giảng viên cấp skeleton lab hoặc học viên ghép parser, SQLite scoped query và serializer từ khóa này trong thư mục riêng. Không cần hệ thống thật. Chốt request/response, actor từ phiên giả đã được fixture xác minh và quota/state.
+
+### Contract làm tiêu chí nghiệm thu
+Service ghép phải có transaction và error map, nhưng không tự viết mật mã/auth production. Mẫu này là schema bài tập cho request; không cho client gửi actor, owner hay role, và không chứa credential thật.
+~~~json
+{"class_id":"CL7","qty":1}
+~~~
+
+### Bộ dữ liệu giúp test quyền độc lập
+Seed hai user, hai tài nguyên và canary giả trong field nội bộ. Đảm bảo test có oracle đúng cho mỗi actor, dùng DB in-memory hay file chỉ trong lab; không lấy credential hoặc dữ liệu từ máy làm fixture.
+~~~text
+students: S7=Lam Sợi, S8=Nếp Thoi
+classes: CL7 remaining1, CL8 remaining0
+receipts: R7 ownerS7, R8 ownerS8
+internal_note: CANARY_PROJECT_LAB
+identity fixture: mapping do test cấp, không nhận actor từ body
+external calls: none
+~~~
+
+### Chấm bản vá theo bằng chứng
+Review cả đường render, quyền và log. Tối thiểu20ca phủ input/query/authz/CSRF theo framework được chọn/output/privacy/resource limit; các phần chưa dựng HTTP/browser chỉ được ghi đặc tả, không ghi đã chạy.
+~~~text
+Rubric /100: threat model15,input/query20,authz20,session/CSRF15,privacy15,tests/docs15
+Required: positive flow + negative two-actor + rollback
+Mutation: bỏ owner,bỏ validation,lộ exception
+Evidence: commands,fixtures,expected/actual,phạm vi tool
+Gate: không dùng credential thật, không kiểm đích ngoài lab
+~~~
+
+### Bàn giao có kế hoạch vận hành
+Ghi framework/library version, cấu hình bảo mật cần review và dependency update policy. Một demo đạt không tự thành hệ production; reviewer cần biết phần nào được cài, phần nào mới thiết kế để tiếp tục đúng phạm vi.
+
+PRACTICE: Hoàn thiện lab và báo cáo theo rubric, đổi chéo chạy suite từ seed sạch. Nộp bản vá, evidence dương/âm/mutation, threat model cập nhật và danh sách kiểm HTTP/browser còn phải thực hiện.
+Q: Lab secure coding phải kiểm những gì?
++ Luồng đúng/sai, quyền, dữ liệu và tác dụng phụ
+- Chỉ regex input
+- Chỉ điểm scanner
+Q: Một bản vá XSS có tự sửa SQLi/CSRF không?
++ Không, từng ranh giới/sink có cơ chế riêng
+- Có vì đều input xấu
+- Có nếu dùng HTTPS
+
+## LESSON secure-coding-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Tập trung tác động và quyền trên luồng cụ thể, từ đó chọn biện pháp và phép kiểm; scan chỉ bổ sung bằng chứng.
+2. Validation không làm string an toàn cho mọi sink; render HTML, URL, JS và SQL cần cách dùng riêng phù hợp.
+3. Placeholder thường dành cho value, còn identifier/order direction cần allowlist hoặc API quote đúng engine; quyền vẫn phải kiểm.
+4. textContent không phân tích nội dung thành HTML; nếu cố ý cho rich text cần sanitizer chuyên dụng và cấu hình được review.
+
+### Dữ liệu và điều kiện biên
+5. SameSite là lớp bổ sung theo ngữ cảnh site; cần cơ chế CSRF của framework, token/origin theo thiết kế và không dùng GET đổi trạng thái.
+6. Không tự thiết kế mật mã; chọn KDF mật khẩu như Argon2id theo hướng dẫn và benchmark, nâng tham số/re-hash có kế hoạch.
+7. Mỗi request cần kiểm actor/action/resource/tenant ở server, kể cả batch/export; che id không thay authorization.
+8. Cần protocol theo hệ thống, overlap nếu có, monitoring và xử lý rollback không phục hồi secret đã lộ; không log giá trị.
+
+### Tính đúng và cách điều tra
+9. Chỉ giữ trường cần mục đích đã chốt, giới hạn retention/access và kiểm export/log; dữ liệu giả không là lý do ghi vô hạn trong app thật.
+10. Sinh storage key phía server, giới hạn loại/kích thước và đặt ngoài vùng thực thi; kiểm path vẫn cần tránh symlink/race theo mô hình.
+11. Cần nguồn gốc, integrity, cập nhật, scan/review và quyền build tối thiểu; artifact provenance không tự chứng minh code vô hại.
+12. Chi tiết debug giữ trong hệ quan sát có quyền, không trả path/config/token; vẫn đủ thông tin cho client xử lý và hỗ trợ.
+
+### Rủi ro và lựa chọn phương án
+13. Bản vá cần bằng chứng exploit giả bị chặn và use case hợp lệ còn chạy; không đổi expected để hợp thức hóa bug.
+14. Nếu hợp đồng cấm boolean, dùng type(x) is int hoặc rule tương đương; kiểm miền, presence và giới hạn kích thước riêng.
+15. XSS còn phụ thuộc sink và policy; CSP tốt giảm rủi ro nhưng không cho phép nối input vào HTML/JS tùy tiện.
+16. Session fixation, timeout, thu hồi và logout cần contract; JWT cũng không tự giải quyết lưu/thu hồi/quyền hay lộ token.
+
+### Dự án, bằng chứng và bàn giao
+17. Base64 chỉ biểu diễn dữ liệu; bảo vệ bằng secret store/quyền, encryption phù hợp và vòng đời được kiểm soát.
+18. Kết hợp allowlist, signature/decoder thích hợp, limit và cách phục vụ; không tin extension/MIME một mình, archive còn cần giới hạn giải nén.
+19. Một hệ từ chối tất cả có thể qua ca âm nhưng hỏng nghiệp vụ; kiểm actor hợp lệ, cross-tenant, log privacy và hậu điều kiện.
+20. Bảo mật theo nhiều lớp: quyền, query, render, session, resource limit và quan sát. HTTPS bảo vệ đường truyền, không thay thiết kế server.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Threat model bắt đầu từ đâu?
++ Tài sản, actor, luồng dữ liệu và ranh giới tin cậy
+- Chọn tool quét trước
+- Liệt kê mọi lỗi Internet
+Q: Validate và output encoding khác nhau ra sao?
++ Validate kiểm hợp đồng, encode theo ngữ cảnh đầu ra
+- Một regex thay cả hai
+- Encode là xác thực quyền
+Q: Tham số hóa SQL bảo vệ phần nào?
++ Tách giá trị dữ liệu khỏi cú pháp query
+- Mọi tên cột tùy ý
+- Thay mọi kiểm quyền
+Q: textContent phù hợp khi nào?
++ Hiển thị dữ liệu như văn bản thuần
+- Cần thực thi HTML tùy ý
+- Thay sanitizer mọi định dạng
+Q: SameSite cookie có thay toàn bộ chống CSRF không?
++ Không
+- Có luôn
+- Chỉ cần CORS *
+Q: Mật khẩu nên lưu thế nào?
++ Hash chuyên dụng qua thư viện được duy trì, salt và tham số phù hợp
+- Plaintext trong DB
+- SHA256 một lần cho mọi user
+Q: Biết id tài nguyên có thay quyền truy cập không?
++ Không
+- Có nếu UUID
+- Có nếu mã khó đoán
+Q: Secret rotation cần gì ngoài sinh giá trị mới?
++ Phân phối, chuyển consumer, xác nhận và thu hồi cũ
+- Chỉ đổi biến trên máy dev
+- Chỉ xóa log
+Q: Thu thập tối thiểu dữ liệu giúp gì?
++ Giảm phạm vi lộ và chi phí quản lý
+- Thay xác thực
+- Làm DB không cần backup
+Q: Filename từ người dùng có nên làm đường dẫn lưu trực tiếp không?
++ Không
+- Có nếu bỏ dấu cách
+- Có nếu UI cấm dấu chấm
+Q: Dependency lock có bảo đảm không có lỗ hổng không?
++ Không, chỉ giúp tái lập phiên bản
+- Có vĩnh viễn
+- Có nếu package phổ biến
+Q: Error response công khai nên chứa gì?
++ Mã lỗi ổn định và id tra cứu không nhạy cảm
+- Stacktrace với env
+- Toàn câu SQL và credential
+Q: Lab secure coding phải kiểm những gì?
++ Luồng đúng/sai, quyền, dữ liệu và tác dụng phụ
+- Chỉ regex input
+- Chỉ điểm scanner
+Q: JSON số true trong Python có thể bị nhận nhầm khi nào?
++ Khi chỉ isinstance(x,int) vì bool là subclass int
+- Không bao giờ
+- Chỉ khi mạng chậm
+Q: CSP có thay encode/safe sink không?
++ Không, là lớp phòng vệ bổ sung
+- Có nếu bật header
+- Có nếu chặn ảnh
+Q: Sau đăng nhập cần xem xét gì cho session?
++ Rotate id, expiry, revoke/logout và bảo vệ cookie
+- Giữ id cũ mãi
+- Token dài thì không cần hết hạn
+Q: Base64 secret có phải mã hóa bảo mật không?
++ Không
+- Có đủ nếu chuỗi dài
+- Có nếu đặt trong JSON
+Q: Content-Type do client gửi có chứng minh file an toàn không?
++ Không
+- Có nếu image/*
+- Có nếu extension png
+Q: Kiểm bảo mật có cần ca dương hợp lệ không?
++ Có, để chứng minh vẫn phục vụ người có quyền
+- Không, chỉ cần mọi request403
+- Chỉ scanner
+Q: Một bản vá XSS có tự sửa SQLi/CSRF không?
++ Không, từng ranh giới/sink có cơ chế riêng
+- Có vì đều input xấu
+- Có nếu dùng HTTPS

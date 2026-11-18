@@ -1,1279 +1,737 @@
 {
  "no": 3,
- "title": "越译汉 – Dịch Việt→Trung: tư duy câu tiếng Trung, định ngữ & thuật ngữ Việt Nam",
- "sub": "从“越南式中文”到地道表达",
+ "title": "Dịch Việt → Trung – xác định quan hệ trước khi xếp từ",
+ "sub": "中心语、修饰关系、专名与数字单位",
  "goals": [
-  "Đảo đúng trật tự định ngữ, trạng ngữ, bổ ngữ khi chuyển câu Việt sang câu Trung; tách – gộp câu theo lối “ý hợp” của tiếng Trung",
-  "Tránh “dịch âm Hán Việt”: chọn từ Trung hiện đại đúng (phương tiện → 交通工具, trình độ → 水平, được tổ chức → 举行…), xử lý bị/được",
-  "Dịch đúng tên cơ quan, chức danh, đơn vị hành chính, địa danh, họ tên Việt Nam theo cách gọi đã quen dùng (约定俗成)",
-  "Chuyển tục ngữ Việt sang thành ngữ/tục ngữ Trung tương đương và nhận ra chỗ khác sắc thái",
-  "Dịch được đoạn giới thiệu doanh nghiệp và đoạn văn hoá Việt ~150 chữ sang tiếng Trung tự nhiên"
+  "Tìm trung tâm và phạm vi bổ nghĩa trước khi chuyển cụm danh từ Việt sang Trung.",
+  "Nêu rõ chủ thể, đối tượng và thời gian; không đưa mọi câu có được sang 被.",
+  "Giữ bảng tên hư cấu và quy đổi số theo đơn vị, không đoán tên người từ âm Hán Việt.",
+  "Biên tập bản dịch tự nhiên nhưng không thêm quyền, kết quả hoặc thông tin chưa có."
  ],
  "parts": [
   {
    "k": "text",
-   "h": "Khởi động: “Tiếng Trung kiểu Việt” (越南式中文) là gì?",
-   "html": "<p>Dịch Trung → Việt là dịch <b>vào tiếng mẹ đẻ</b>: câu nào trúc trắc, ta tự nghe ra. Dịch Việt → Trung là dịch <b>ra ngoại ngữ</b>: câu có thể đúng ngữ pháp mà người Trung vẫn thấy “lạ tai”. Năm dấu hiệu của <b>越南式中文</b>:</p><table><tr><th>Dấu hiệu</th><th>❌ Kiểu Việt</th><th>✅ Tiếng Trung tự nhiên</th></tr><tr><td>1. Định ngữ đặt sau danh từ</td><td>我买书昨天在书店的</td><td>我昨天在书店买的书</td></tr><tr><td>2. Trạng ngữ nơi chốn/thời gian cuối câu</td><td>我学汉语在河内三年了</td><td>我在河内学了三年汉语了</td></tr><tr><td>3. Mượn từ Hán Việt sai nghĩa</td><td>公共交通方便 (phương tiện)</td><td>公共交通工具</td></tr><tr><td>4. Lạm dụng câu bị động “được”</td><td>会议被组织在岘港</td><td>会议在岘港举行</td></tr><tr><td>5. Dịch tục ngữ từng chữ</td><td>喝水记得水源 (uống nước nhớ nguồn)</td><td>饮水思源</td></tr></table><p>Nguyên tắc: <b>nghĩ bằng ý, viết bằng khuôn câu Trung</b>. Trước khi dịch, hãy hỏi: “Một người Trung Quốc muốn nói ý này thì sẽ nói thế nào?”</p>"
+   "h": "Từ cùng ý đến câu có quan hệ rõ",
+   "html": "<p>Dịch ra tiếng Trung cần kiểm đồng thời ý và cấu trúc. Bài dùng công ty, lớp học, nhân vật và bảng tên tự đặt; mọi số liệu chỉ để luyện. Trước khi chọn từ, hãy nói rõ ai làm gì, danh từ nào là trung tâm, phần nào bổ nghĩa và đơn vị số là gì. Không dùng địa danh thật hoặc khẳng định tên giả đã có cách dịch chính thức.</p>"
   },
   {
    "k": "words",
-   "h": "Từ vựng A – Thuật ngữ dịch Việt → Trung",
+   "h": "Cụm từ lập luận và diễn đạt",
    "items": [
+    {
+     "w": "词序",
+     "py": "cíxù",
+     "hv": "",
+     "pos": "n.",
+     "vi": "trật tự từ",
+     "ex": "词序调整后，关系仍须保持。",
+     "exVi": "Đổi thứ tự nhưng vẫn phải giữ quan hệ ý."
+    },
+    {
+     "w": "中心语",
+     "py": "zhōngxīnyǔ",
+     "hv": "",
+     "pos": "n.",
+     "vi": "thành phần trung tâm",
+     "ex": "先找名词短语的中心语。",
+     "exVi": "Tìm trung tâm cụm danh từ trước."
+    },
     {
      "w": "定语",
      "py": "dìngyǔ",
-     "hv": "định ngữ",
-     "pos": "n",
-     "vi": "định ngữ (thành phần bổ nghĩa cho danh từ, đứng TRƯỚC danh từ trong tiếng Trung)",
-     "ex": "汉语的定语一般放在中心语前面。",
-     "exVi": "Định ngữ tiếng Trung thường đặt trước từ trung tâm."
+     "hv": "",
+     "pos": "n.",
+     "vi": "định ngữ",
+     "ex": "这段定语只修饰后面的工具。",
+     "exVi": "Định ngữ này chỉ bổ nghĩa dụng cụ phía sau."
     },
     {
-     "w": "状语",
-     "py": "zhuàngyǔ",
-     "hv": "trạng ngữ",
-     "pos": "n",
-     "vi": "trạng ngữ (thời gian, nơi chốn, cách thức – thường đứng trước động từ)",
-     "ex": "时间状语和地点状语通常放在动词前面。",
-     "exVi": "Trạng ngữ thời gian và nơi chốn thường đặt trước động từ."
+     "w": "修饰",
+     "py": "xiūshì",
+     "hv": "",
+     "pos": "v.",
+     "vi": "bổ nghĩa",
+     "ex": "请说明这个条件修饰哪一步。",
+     "exVi": "Hãy nói điều kiện này bổ nghĩa bước nào."
     },
     {
-     "w": "补语",
-     "py": "bǔyǔ",
-     "hv": "bổ ngữ",
-     "pos": "n",
-     "vi": "bổ ngữ (kết quả, trạng thái, thời lượng… đứng sau động từ)",
-     "ex": "“跑得很快”中的“很快”是情态补语。",
-     "exVi": "“很快” trong “跑得很快” là bổ ngữ trạng thái."
+     "w": "所属",
+     "py": "suǒshǔ",
+     "hv": "",
+     "pos": "n.",
+     "vi": "quan hệ thuộc về",
+     "ex": "所属关系不能靠距离猜测。",
+     "exVi": "Không đoán quan hệ thuộc về chỉ bằng khoảng cách từ."
+    },
+    {
+     "w": "主语",
+     "py": "zhǔyǔ",
+     "hv": "",
+     "pos": "n.",
+     "vi": "chủ ngữ",
+     "ex": "补出主语后，句子更清楚。",
+     "exVi": "Thêm chủ ngữ giúp câu rõ hơn."
+    },
+    {
+     "w": "施事",
+     "py": "shīshì",
+     "hv": "",
+     "pos": "n.",
+     "vi": "chủ thể thực hiện",
+     "ex": "施事与受事在草稿中混淆了。",
+     "exVi": "Nháp đã nhầm bên làm và bên chịu tác động."
+    },
+    {
+     "w": "受事",
+     "py": "shòushì",
+     "hv": "",
+     "pos": "n.",
+     "vi": "đối tượng chịu tác động",
+     "ex": "修改时不能随意更换受事。",
+     "exVi": "Sửa không được tùy đổi đối tượng chịu tác động."
+    },
+    {
+     "w": "重组",
+     "py": "chóngzǔ",
+     "hv": "",
+     "pos": "v.",
+     "vi": "sắp xếp lại cấu trúc",
+     "ex": "译者重组句子，没有增加规定。",
+     "exVi": "Người dịch xếp lại câu, không thêm quy định."
     },
     {
      "w": "搭配",
      "py": "dāpèi",
-     "hv": "đáp phối",
-     "pos": "n/v",
-     "vi": "kết hợp từ (collocation)",
-     "ex": "“提高水平”是常见搭配，“提高程度”则不太自然。",
-     "exVi": "“提高水平” là kết hợp thường gặp, còn “提高程度” không tự nhiên lắm."
-    },
-    {
-     "w": "量词",
-     "py": "liàngcí",
-     "hv": "lượng từ",
-     "pos": "n",
-     "vi": "lượng từ",
-     "ex": "越译汉时，最容易漏掉的就是量词。",
-     "exVi": "Khi dịch Việt → Trung, thứ dễ bỏ sót nhất là lượng từ."
-    },
-    {
-     "w": "主干",
-     "py": "zhǔgàn",
-     "hv": "chủ cán",
-     "pos": "n",
-     "vi": "thân câu (chủ – vị – tân chính)",
-     "ex": "先找出句子的主干，再处理修饰成分。",
-     "exVi": "Trước tiên tìm thân câu, sau đó mới xử lý các thành phần bổ nghĩa."
-    },
-    {
-     "w": "规范",
-     "py": "guīfàn",
-     "hv": "quy phạm",
-     "pos": "n/adj",
-     "vi": "chuẩn mực; đúng chuẩn",
-     "ex": "政府机构的名称必须使用规范译名。",
-     "exVi": "Tên cơ quan nhà nước phải dùng tên dịch chuẩn."
-    },
-    {
-     "w": "译名",
-     "py": "yìmíng",
-     "hv": "dịch danh",
-     "pos": "n",
-     "vi": "tên dịch (của người, nơi chốn, tổ chức)",
-     "ex": "同一个地名出现了三种译名，读者很容易混淆。",
-     "exVi": "Một địa danh có ba tên dịch, người đọc rất dễ nhầm."
-    },
-    {
-     "w": "约定俗成",
-     "py": "yuēdìng-súchéng",
-     "hv": "ước định tục thành",
-     "pos": "idiom",
-     "vi": "thành quen theo thói dùng, ai cũng chấp nhận",
-     "ex": "“胡志明市”这个译名早已约定俗成。",
-     "exVi": "Tên dịch “胡志明市” từ lâu đã thành cách gọi quen dùng."
-    },
-    {
-     "w": "对等",
-     "py": "duìděng",
-     "hv": "đối đẳng",
-     "pos": "adj/n",
-     "vi": "tương đương, ngang bằng",
-     "ex": "两种语言中很难找到完全对等的词。",
-     "exVi": "Rất khó tìm được từ tương đương hoàn toàn giữa hai ngôn ngữ."
-    },
-    {
-     "w": "归化",
-     "py": "guīhuà",
-     "hv": "quy hoá",
-     "pos": "n/v",
-     "vi": "dịch “bản địa hoá” (đưa về cách nói quen thuộc của người đọc)",
-     "ex": "把越南俗语译成汉语成语，是一种归化策略。",
-     "exVi": "Dịch tục ngữ Việt thành thành ngữ Trung là một chiến lược bản địa hoá."
-    },
-    {
-     "w": "异化",
-     "py": "yìhuà",
-     "hv": "dị hoá",
-     "pos": "n/v",
-     "vi": "dịch “giữ nét lạ” (giữ hình ảnh văn hoá gốc, có chú thích)",
-     "ex": "介绍越南美食时，可以采用异化策略，保留原有的文化特色。",
-     "exVi": "Khi giới thiệu ẩm thực Việt, có thể giữ nét lạ để bảo toàn bản sắc văn hoá."
-    },
-    {
-     "w": "意合",
-     "py": "yìhé",
-     "hv": "ý hợp",
-     "pos": "n",
-     "vi": "liên kết bằng ý (ít từ nối) – đặc điểm câu tiếng Trung",
-     "ex": "汉语重意合，很多复句不需要关联词。",
-     "exVi": "Tiếng Trung coi trọng liên kết bằng ý, nhiều câu phức không cần từ nối."
-    },
-    {
-     "w": "形合",
-     "py": "xínghé",
-     "hv": "hình hợp",
-     "pos": "n",
-     "vi": "liên kết bằng hình thức (dùng nhiều từ nối)",
-     "ex": "与汉语相比，越南语的书面语更偏重形合。",
-     "exVi": "So với tiếng Trung, văn viết tiếng Việt thiên về liên kết bằng hình thức hơn."
-    }
-   ]
-  },
-  {
-   "k": "words",
-   "h": "Từ vựng B – Cơ quan, hành chính & văn hoá Việt Nam bằng tiếng Trung",
-   "items": [
-    {
-     "w": "国会",
-     "py": "guóhuì",
-     "hv": "quốc hội",
-     "pos": "n",
-     "vi": "Quốc hội (Việt Nam)",
-     "ex": "越南国会每年举行两次例会。",
-     "exVi": "Quốc hội Việt Nam họp thường kỳ hai lần mỗi năm."
-    },
-    {
-     "w": "国家主席",
-     "py": "guójiā zhǔxí",
-     "hv": "quốc gia chủ tịch",
-     "pos": "n",
-     "vi": "Chủ tịch nước",
-     "ex": "代表团受到了越南国家主席的接见。",
-     "exVi": "Đoàn được Chủ tịch nước Việt Nam tiếp kiến."
-    },
-    {
-     "w": "政府总理",
-     "py": "zhèngfǔ zǒnglǐ",
-     "hv": "chính phủ tổng lý",
-     "pos": "n",
-     "vi": "Thủ tướng Chính phủ",
-     "ex": "政府总理出席了论坛开幕式。",
-     "exVi": "Thủ tướng Chính phủ dự lễ khai mạc diễn đàn."
-    },
-    {
-     "w": "人民委员会",
-     "py": "rénmín wěiyuánhuì",
-     "hv": "nhân dân ủy viên hội",
-     "pos": "n",
-     "vi": "Ủy ban nhân dân (UBND)",
-     "ex": "河内市人民委员会发布了新的交通管理规定。",
-     "exVi": "UBND thành phố Hà Nội ban hành quy định quản lý giao thông mới."
-    },
-    {
-     "w": "祖国阵线",
-     "py": "zǔguó zhènxiàn",
-     "hv": "tổ quốc trận tuyến",
-     "pos": "n",
-     "vi": "Mặt trận Tổ quốc (越南祖国阵线)",
-     "ex": "越南祖国阵线组织了多场慈善活动。",
-     "exVi": "Mặt trận Tổ quốc Việt Nam tổ chức nhiều hoạt động từ thiện."
-    },
-    {
-     "w": "中央直辖市",
-     "py": "zhōngyāng zhíxiáshì",
-     "hv": "trung ương trực hạt thị",
-     "pos": "n",
-     "vi": "thành phố trực thuộc trung ương",
-     "ex": "岘港是越南的中央直辖市之一。",
-     "exVi": "Đà Nẵng là một trong các thành phố trực thuộc trung ương của Việt Nam."
-    },
-    {
-     "w": "郡",
-     "py": "jùn",
-     "hv": "quận",
-     "pos": "n",
-     "vi": "quận (đơn vị hành chính nội thành Việt Nam)",
-     "ex": "这家公司位于河内市还剑郡。",
-     "exVi": "Công ty này ở quận Hoàn Kiếm, Hà Nội."
-    },
-    {
-     "w": "坊",
-     "py": "fāng",
-     "hv": "phường",
-     "pos": "n",
-     "vi": "phường",
-     "ex": "她家住在顺化市的一个老坊里。",
-     "exVi": "Nhà cô ấy ở một phường cổ của thành phố Huế."
-    },
-    {
-     "w": "有关部门",
-     "py": "yǒuguān bùmén",
-     "hv": "hữu quan bộ môn",
-     "pos": "phr",
-     "vi": "cơ quan hữu quan, cơ quan chức năng",
-     "ex": "产品已通过有关部门的质量检验。",
-     "exVi": "Sản phẩm đã qua kiểm định chất lượng của cơ quan chức năng."
-    },
-    {
-     "w": "股份公司",
-     "py": "gǔfèn gōngsī",
-     "hv": "cổ phần công ty",
-     "pos": "n",
-     "vi": "công ty cổ phần (lưu ý đảo trật tự)",
-     "ex": "这家股份公司的总部设在胡志明市。",
-     "exVi": "Trụ sở chính của công ty cổ phần này đặt tại TP. Hồ Chí Minh."
-    },
-    {
-     "w": "奥黛",
-     "py": "àodài",
-     "hv": "áo đại",
-     "pos": "n",
-     "vi": "áo dài (phiên âm)",
-     "ex": "白色奥黛是越南女学生的传统校服。",
-     "exVi": "Áo dài trắng là đồng phục truyền thống của nữ sinh Việt Nam."
-    },
-    {
-     "w": "河粉",
-     "py": "héfěn",
-     "hv": "hà phấn",
-     "pos": "n",
-     "vi": "phở (bánh phở); còn gọi 越南粉",
-     "ex": "一碗热腾腾的牛肉河粉是河内人最常见的早餐。",
-     "exVi": "Một bát phở bò nóng hổi là bữa sáng quen thuộc nhất của người Hà Nội."
-    },
-    {
-     "w": "滴漏咖啡",
-     "py": "dīlòu kāfēi",
      "hv": "",
-     "pos": "n",
-     "vi": "cà phê phin",
-     "ex": "慢慢等一杯滴漏咖啡，是越南人的生活节奏。",
-     "exVi": "Thong thả chờ một ly cà phê phin là nhịp sống của người Việt."
+     "pos": "n./v.",
+     "vi": "cách kết hợp từ",
+     "ex": "查搭配时也要看语体。",
+     "exVi": "Tra kết hợp từ cũng cần xét văn phong."
     },
     {
-     "w": "方粽",
-     "py": "fāngzòng",
-     "hv": "phương tống",
-     "pos": "n",
-     "vi": "bánh chưng (bánh tét: 圆柱形粽子)",
-     "ex": "春节前，一家人围着火炉煮方粽。",
-     "exVi": "Trước Tết, cả nhà quây quần bên bếp lửa nấu bánh chưng."
-    },
-    {
-     "w": "斗笠",
-     "py": "dǒulì",
-     "hv": "đẩu lạp",
-     "pos": "n",
-     "vi": "nón (nón lá)",
-     "ex": "戴着斗笠的农民在稻田里插秧。",
-     "exVi": "Người nông dân đội nón lá cấy lúa trên đồng."
-    },
-    {
-     "w": "水上集市",
-     "py": "shuǐshàng jíshì",
-     "hv": "thủy thượng tập thị",
-     "pos": "n",
-     "vi": "chợ nổi",
-     "ex": "芹苴的水上集市天不亮就热闹起来了。",
-     "exVi": "Chợ nổi Cần Thơ nhộn nhịp từ khi trời chưa sáng."
-    },
-    {
-     "w": "压岁钱",
-     "py": "yāsuìqián",
-     "hv": "áp tuế tiền",
-     "pos": "n",
-     "vi": "tiền lì xì (mừng tuổi)",
-     "ex": "孩子们给长辈拜年，收到了压岁钱。",
-     "exVi": "Trẻ con chúc Tết người lớn và được lì xì."
-    }
-   ]
-  },
-  {
-   "k": "words",
-   "h": "Từ vựng C – Tục ngữ Việt ↔ thành ngữ Trung tương đương",
-   "items": [
-    {
-     "w": "饮水思源",
-     "py": "yǐnshuǐ-sīyuán",
-     "hv": "ẩm thủy tư nguyên",
-     "pos": "idiom",
-     "vi": "uống nước nhớ nguồn (tương đương hoàn toàn)",
-     "ex": "饮水思源，我们不能忘记老一辈的付出。",
-     "exVi": "Uống nước nhớ nguồn, chúng ta không thể quên công lao thế hệ đi trước."
-    },
-    {
-     "w": "吃水不忘挖井人",
-     "py": "chī shuǐ bú wàng wā jǐng rén",
+     "w": "从事",
+     "py": "cóngshì",
      "hv": "",
-     "pos": "phr",
-     "vi": "ăn quả nhớ kẻ trồng cây (uống nước không quên người đào giếng)",
-     "ex": "吃水不忘挖井人，这份恩情我们会一直记在心里。",
-     "exVi": "Ăn quả nhớ kẻ trồng cây, ân tình này chúng tôi sẽ luôn ghi nhớ."
+     "pos": "v.",
+     "vi": "làm, hoạt động trong lĩnh vực",
+     "ex": "丝禾公司从事课堂材料制作。",
+     "exVi": "Công ty Ti Hòa làm vật liệu học tập."
     },
     {
-     "w": "水滴石穿",
-     "py": "shuǐdī-shíchuān",
-     "hv": "thủy trích thạch xuyên",
-     "pos": "idiom",
-     "vi": "nước chảy đá mòn (giọt nước xuyên đá)",
-     "ex": "学语言没有捷径，只要坚持，水滴石穿。",
-     "exVi": "Học ngôn ngữ không có lối tắt; cứ kiên trì thì nước chảy đá mòn."
+     "w": "位于",
+     "py": "wèiyú",
+     "hv": "",
+     "pos": "v.",
+     "vi": "nằm ở",
+     "ex": "工作室位于叶纱市绫页区。",
+     "exVi": "Xưởng nằm tại quận Lăng Diệp, thành phố Diệp Sa."
     },
     {
-     "w": "隔墙有耳",
-     "py": "géqiáng-yǒu'ěr",
-     "hv": "cách tường hữu nhĩ",
-     "pos": "idiom",
-     "vi": "tai vách mạch rừng",
-     "ex": "这件事还没定下来，说话小心点儿，隔墙有耳。",
-     "exVi": "Việc này chưa quyết, nói năng cẩn thận, tai vách mạch rừng."
+     "w": "折合",
+     "py": "zhéhé",
+     "hv": "",
+     "pos": "v.",
+     "vi": "quy đổi tương đương theo đơn vị",
+     "ex": "折合数额时应保留币种。",
+     "exVi": "Quy đổi số tiền cần giữ loại tiền."
     },
     {
-     "w": "近朱者赤，近墨者黑",
-     "py": "jìn zhū zhě chì, jìn mò zhě hēi",
-     "hv": "cận chu giả xích, cận mặc giả hắc",
-     "pos": "phr",
-     "vi": "gần mực thì đen, gần đèn thì sáng",
-     "ex": "近朱者赤，近墨者黑，交朋友一定要慎重。",
-     "exVi": "Gần mực thì đen, gần đèn thì sáng, kết bạn nhất định phải thận trọng."
+     "w": "单位",
+     "py": "dānwèi",
+     "hv": "",
+     "pos": "n.",
+     "vi": "đơn vị",
+     "ex": "同一个数字换单位后写法不同。",
+     "exVi": "Cùng lượng đổi đơn vị thì cách ghi số khác."
     },
     {
-     "w": "临时抱佛脚",
-     "py": "línshí bào fójiǎo",
-     "hv": "lâm thời bão Phật cước",
-     "pos": "phr",
-     "vi": "nước đến chân mới nhảy (đến lúc gấp mới ôm chân Phật)",
-     "ex": "平时不努力，考前临时抱佛脚是没有用的。",
-     "exVi": "Ngày thường không cố gắng, nước đến chân mới nhảy trước kỳ thi thì vô ích."
+     "w": "核算",
+     "py": "hésuàn",
+     "hv": "",
+     "pos": "v.",
+     "vi": "tính kiểm tra",
+     "ex": "先核算，再润色数字句。",
+     "exVi": "Tính kiểm trước rồi trau chuốt câu số liệu."
     },
     {
-     "w": "众人拾柴火焰高",
-     "py": "zhòngrén shí chái huǒyàn gāo",
-     "hv": "chúng nhân thập sài hỏa diệm cao",
-     "pos": "phr",
-     "vi": "một cây làm chẳng nên non, ba cây chụm lại nên hòn núi cao (nhiều người nhặt củi thì lửa cháy cao); cũng nói 独木不成林",
-     "ex": "众人拾柴火焰高，只要大家齐心协力，就一定能完成任务。",
-     "exVi": "Ba cây chụm lại nên hòn núi cao, chỉ cần mọi người đồng lòng, nhất định sẽ hoàn thành nhiệm vụ."
+     "w": "专名",
+     "py": "zhuānmíng",
+     "hv": "",
+     "pos": "n.",
+     "vi": "tên riêng",
+     "ex": "专名按本课对照表书写。",
+     "exVi": "Tên riêng viết theo bảng đối chiếu của bài."
+    },
+    {
+     "w": "约定",
+     "py": "yuēdìng",
+     "hv": "",
+     "pos": "n./v.",
+     "vi": "quy ước, thỏa thuận",
+     "ex": "这里的名称只是故事约定。",
+     "exVi": "Tên ở đây chỉ là quy ước trong truyện."
+    },
+    {
+     "w": "核对",
+     "py": "héduì",
+     "hv": "",
+     "pos": "v.",
+     "vi": "đối chiếu",
+     "ex": "请核对译文中的否定范围。",
+     "exVi": "Hãy đối chiếu phạm vi phủ định trong bản dịch."
+    },
+    {
+     "w": "保留",
+     "py": "bǎoliú",
+     "hv": "",
+     "pos": "v.",
+     "vi": "giữ lại",
+     "ex": "未确认的信息应保留为问题。",
+     "exVi": "Thông tin chưa xác nhận cần giữ thành câu hỏi."
+    },
+    {
+     "w": "自然",
+     "py": "zìrán",
+     "hv": "",
+     "pos": "adj.",
+     "vi": "tự nhiên",
+     "ex": "句子自然不等于意思正确。",
+     "exVi": "Câu tự nhiên không đồng nghĩa đúng ý."
     }
    ]
   },
   {
    "k": "grammar",
-   "h": "Kỹ thuật 1: Đảo trật tự câu – từ “đuôi dài” Việt sang “đầu to” Trung",
-   "html": "<p>Tiếng Việt: <b>danh từ trước – bổ nghĩa sau</b>, trạng ngữ có thể ở cuối câu. Tiếng Trung: <b>bổ nghĩa trước – danh từ sau</b>, trạng ngữ thời gian/nơi chốn đứng trước động từ, bổ ngữ (kết quả, thời lượng, trạng thái) đứng SAU động từ.</p><p><b>Công thức câu Trung</b>: (Thời gian) + Chủ ngữ + (Thời gian) + Nơi chốn/Cách thức + Động từ + Bổ ngữ + 的 + Tân ngữ.</p><p><b>Thứ tự nhiều định ngữ</b>: sở hữu → chỉ định + số lượng → cụm động từ/chủ-vị → tính từ → danh từ chất liệu → danh từ trung tâm.</p>",
+   "h": "Định ngữ, chủ thể và đơn vị: ba lượt kiểm",
+   "html": "<p>Cụm danh từ Việt thường có phần bổ nghĩa sau trung tâm; khi dịch, xác định quan hệ rồi mới chọn cấu trúc có 的 hoặc cụm động từ trước trung tâm. Không đảo từng chữ một cách máy móc. Câu có được không luôn biểu đạt bị động; được thành lập có thể dùng 成立于. Khi ghi tiền, tách số, đơn vị đếm và loại tiền trước khi tính.</p>",
    "table": [
     [
-     "Câu Việt",
-     "❌ Theo trật tự Việt",
-     "✅ Tiếng Trung"
+     "Quan hệ",
+     "Cách kiểm",
+     "Ví dụ"
     ],
     [
-     "Cuốn sách mà tôi mua hôm qua ở hiệu sách gần nhà rất hay.",
-     "书我买昨天在书店附近家很有意思。",
-     "我昨天在家附近的书店买的那本书很有意思。"
+     "Trung tâm + bổ nghĩa",
+     "Cái gì là đối tượng chính?",
+     "去年制作的材料包"
     ],
     [
-     "Tôi học tiếng Trung ở Hà Nội ba năm rồi.",
-     "我学汉语在河内三年了。",
-     "我在河内学了三年汉语了。"
+     "Ai làm gì cho ai",
+     "Nêu chủ thể và đối tượng",
+     "编辑组向新成员提供说明。"
     ],
     [
-     "Anh ấy chạy rất nhanh.",
-     "他跑很快。",
-     "他跑得很快。"
-    ],
-    [
-     "Ba chiếc áo dài lụa mới của mẹ tôi",
-     "奥黛三件丝绸新的我妈妈",
-     "我妈妈那三件崭新的丝绸奥黛"
-    ],
-    [
-     "Tôi gặp anh ấy ở quán cà phê lúc 8 giờ sáng nay.",
-     "我见他在咖啡馆八点今天早上。",
-     "今天早上八点，我在咖啡馆见到了他。"
+     "Số theo đơn vị",
+     "Viết phép nhân/chia để đối chiếu",
+     "五百亿越南盾 = 50 tỷ đồng"
     ]
    ],
    "ex": [
     {
-     "t": "这是一座建于十一世纪、至今保存完好的古老寺庙。",
-     "vi": "Đây là một ngôi chùa cổ được xây dựng từ thế kỷ XI, đến nay vẫn còn nguyên vẹn. (định ngữ dài dồn lên trước 寺庙)"
+     "t": "我们昨天收到的材料需要核对。",
+     "vi": "Tài liệu chúng tôi nhận hôm qua cần đối chiếu."
     },
     {
-     "t": "去年在岘港举行的那次旅游博览会吸引了上万名游客。",
-     "vi": "Hội chợ du lịch tổ chức ở Đà Nẵng năm ngoái đã thu hút hàng chục nghìn du khách."
+     "t": "供新成员使用的工具放在左边。",
+     "vi": "Dụng cụ dành cho người mới nằm bên trái."
     },
     {
-     "t": "他每天骑摩托车送孩子上学。",
-     "vi": "Ngày nào anh ấy cũng chở con đi học bằng xe máy. (cách thức 骑摩托车 đứng trước động từ chính)"
+     "t": "这家公司成立于二〇一四年。",
+     "vi": "Công ty này thành lập năm 2014."
+    },
+    {
+     "t": "编辑组向参加者提供说明。",
+     "vi": "Nhóm biên tập cung cấp hướng dẫn cho người tham gia."
+    },
+    {
+     "t": "五十亿越南盾是五十乘以一亿越南盾。",
+     "vi": "Năm mươi ức đồng là năm mươi nhân một trăm triệu đồng."
+    },
+    {
+     "t": "名称按约定保留，关系按原文重组。",
+     "vi": "Tên giữ theo quy ước, quan hệ câu sắp lại theo nguồn."
     }
    ],
    "tips": [
-    "Khi định ngữ quá dài (> 15 chữ), đừng cố nhồi trước danh từ – tách thành câu riêng: “Công ty, được thành lập năm 2010 và hiện có 500 nhân viên, …” → 公司成立于2010年，现有员工500人。",
-    "Tiếng Trung chuộng <b>意合</b>: bớt từ nối. “Vì trời mưa nên trận đấu bị hoãn” → 因雨，比赛推迟 hoặc 下雨了，比赛推迟了 – không cần đủ cặp 因为…所以….",
-    "Đừng quên lượng từ và 的: “ba thành phố lớn của Việt Nam” → 越南的三个大城市 (không phải 三城市大越南)."
-   ]
-  },
-  {
-   "k": "grammar",
-   "h": "Kỹ thuật 2: Chọn từ – Hán Việt dùng được, không dùng được, “bị/được”",
-   "html": "<p>Ba nhóm từ khi đi từ tiếng Việt sang tiếng Trung:</p><ul><li><b>Dùng thẳng được</b>: kinh tế 经济, giáo dục 教育, văn hoá 文化, hộ khẩu 户口, thủ tục 手续, cán bộ 干部…</li><li><b>Không dùng được</b> (nghĩa đã khác): phương tiện ≠ 方便, trình độ (ngoại ngữ) ≠ 程度, khẩn trương ≠ 紧张, kích động ≠ 激动, bác sĩ ≠ 博士…</li><li><b>Phải chọn theo ngữ cảnh</b>: “chương trình” → 节目 (TV) / 程序 (máy tính) / 课程 (học) / 计划, 方案 (hành động); “đào tạo” → 培养 (nhân tài, dài hạn) / 培训 (tập huấn); “kinh doanh” → 经营 / 做生意 / 商业.</li></ul>",
-   "table": [
-    [
-     "Tiếng Việt",
-     "❌ Dịch âm Hán Việt",
-     "✅ Tiếng Trung"
-    ],
-    [
-     "phương tiện giao thông",
-     "交通方便",
-     "交通工具"
-    ],
-    [
-     "trình độ tiếng Trung / trình độ học vấn",
-     "汉语程度",
-     "汉语水平 / 学历 (文化程度)"
-    ],
-    [
-     "khẩn trương hoàn thành",
-     "紧张完成",
-     "抓紧完成 / 尽快完成"
-    ],
-    [
-     "chương trình đào tạo",
-     "程序培训",
-     "培养方案 / 课程设置"
-    ],
-    [
-     "Hội nghị được tổ chức tại Hà Nội.",
-     "会议被组织在河内。",
-     "会议在河内举行。"
-    ],
-    [
-     "Ngôi chùa được xây dựng vào thế kỷ XI.",
-     "寺庙被建设在十一世纪。",
-     "这座寺庙建于十一世纪。"
-    ],
-    [
-     "Món ăn này được nhiều người yêu thích.",
-     "这道菜被很多人喜欢。",
-     "这道菜深受大家喜爱。"
-    ],
-    [
-     "Anh ấy bị phạt 2 triệu đồng.",
-     "他被罚2百万越南盾。(chấp nhận) ",
-     "他被罚款200万越南盾。"
-    ]
-   ],
-   "ex": [
-    {
-     "t": "该项目得到了地方政府的大力支持。",
-     "vi": "Dự án nhận được sự ủng hộ mạnh mẽ của chính quyền địa phương. (“được ủng hộ” → 得到…支持, không cần 被)"
-    },
-    {
-     "t": "这部电影受到了观众的一致好评。",
-     "vi": "Bộ phim được khán giả nhất trí khen ngợi. (“được khen” → 受到…好评)"
-    },
-    {
-     "t": "不少村民的房屋遭到了洪水的破坏。",
-     "vi": "Nhà cửa của nhiều người dân bị lũ tàn phá. (“bị” tiêu cực mạnh → 遭到 / 遭受)"
-    }
-   ],
-   "tips": [
-    "“Được” trong tiếng Việt thường KHÔNG cần 被: được tổ chức → 举行; được xây dựng → 建于/建成; được yêu thích → 深受…喜爱; được cấp → 获得/获颁; được khen → 受到表扬.",
-    "“Bị” tiêu cực: 被 (khẩu ngữ, trung tính), 遭到/遭受 (văn viết, thiệt hại nặng), 受到 (ảnh hưởng, phê bình).",
-    "Lượng từ hay quên: một <b>công ty</b> 一家公司, một <b>dự án</b> 一个/一项项目, một <b>chính sách</b> 一项政策, một <b>bài báo</b> 一篇文章, một <b>ngôi chùa</b> 一座寺庙."
-   ]
-  },
-  {
-   "k": "grammar",
-   "h": "Kỹ thuật 3: Tên riêng, cơ quan, địa danh & tục ngữ",
-   "html": "<p><b>Họ tên Việt</b> → chữ Hán theo âm Hán Việt: Nguyễn 阮, Trần 陈, Lê 黎, Phạm 范, Hoàng/Huỳnh 黄, Phan 潘, Vũ/Võ 武, Ngô 吴, Đặng 邓, Bùi 裴, Đỗ 杜, Hồ 胡, Dương 杨; Văn 文, Thị 氏. VD: Nguyễn Thị Hương 阮氏香, Trần Văn Nam 陈文南. Tên thuần Việt không có chữ Hán thì phiên âm hoặc giữ Latinh kèm chú thích.</p><p><b>Tên cơ quan, địa danh</b>: KHÔNG tự sáng tạo – dùng tên đã quen dùng trên báo chí Trung Quốc. Tục ngữ: ưu tiên <b>归化</b> (tìm câu tương đương), nhưng kiểm tra sắc thái.</p>",
-   "table": [
-    [
-     "Tiếng Việt",
-     "Tiếng Trung",
-     "Ghi chú"
-    ],
-    [
-     "Ủy ban nhân dân TP. Hà Nội",
-     "河内市人民委员会",
-     "không dịch thành 市政府 khi cần chính xác"
-    ],
-    [
-     "Thủ tướng Chính phủ",
-     "政府总理",
-     "—"
-    ],
-    [
-     "quận Hoàn Kiếm / phường / xã / huyện",
-     "还剑郡 / 坊 / 社 / 县",
-     "quận = 郡 (không phải 区)"
-    ],
-    [
-     "Đà Nẵng · Huế · Nha Trang · Cần Thơ · Đà Lạt",
-     "岘港 · 顺化 · 芽庄 · 芹苴 · 大叻",
-     "tên quen dùng"
-    ],
-    [
-     "Hạ Long · Hội An · Sa Pa · Phú Quốc · Sài Gòn",
-     "下龙 · 会安 · 沙坝 · 富国岛 · 西贡",
-     "—"
-    ],
-    [
-     "Uống nước nhớ nguồn",
-     "饮水思源",
-     "tương đương hoàn toàn"
-    ],
-    [
-     "Nước chảy đá mòn",
-     "水滴石穿",
-     "tương đương"
-    ],
-    [
-     "Có công mài sắt có ngày nên kim",
-     "只要功夫深，铁杵磨成针",
-     "tương đương"
-    ],
-    [
-     "Nước đến chân mới nhảy",
-     "临时抱佛脚",
-     "khác hình ảnh, cùng ý"
-    ],
-    [
-     "Mất bò mới lo làm chuồng",
-     "≈ 亡羊补牢 (cẩn thận!)",
-     "亡羊补牢，犹未为晚 nghĩa TÍCH CỰC “sửa còn kịp”; ý chê muộn của tiếng Việt nên dịch 事后才想办法 / 马后炮"
-    ],
-    [
-     "Đi một ngày đàng học một sàng khôn",
-     "读万卷书，行万里路",
-     "gần ý, nhấn việc trải nghiệm"
-    ]
-   ],
-   "ex": [
-    {
-     "t": "越南人常说：饮水思源。",
-     "vi": "Người Việt thường nói: Uống nước nhớ nguồn."
-    },
-    {
-     "t": "公司总部位于胡志明市第一郡。",
-     "vi": "Trụ sở chính của công ty đặt tại Quận 1, TP. Hồ Chí Minh."
-    }
-   ],
-   "tips": [
-    "Khi không có câu tương đương, dịch Ý và có thể thêm chú thích: “Buôn có bạn, bán có phường” → 做生意离不开朋友和伙伴.",
-    "Số tiền: 500 tỷ đồng = 5000亿越南盾; 2 triệu = 200万. Luôn ghi đơn vị 越南盾 để người Trung không hiểu nhầm thành nhân dân tệ."
+    "Định ngữ dài cần chia quan hệ, không chỉ kéo toàn bộ phần sau danh từ lên trước.",
+    "Không suy chữ Hán duy nhất của tên người từ họ hoặc âm đọc; dùng cách viết được cung cấp hay ghi cần xác nhận.",
+    "50 tỷ = 50 × 10^9 = 500 × 10^8 = 500亿; đừng nhầm 50亿 là 50 tỷ."
    ]
   },
   {
    "k": "dialog",
-   "h": "Nghe: Phỏng vấn phiên dịch viên hội nghị",
+   "h": "Nghe hai người duyệt bản dịch giới thiệu xưởng",
    "lang": "zh-CN",
-   "note": "Phóng viên Vương Lâm (王琳, nữ) phỏng vấn ông Phạm Văn Long (范文龙, nam), phiên dịch chính của đoàn Việt Nam tại một hội chợ kinh tế – thương mại vừa kết thúc. Nghe lần 1: theo ông Long, dịch chiều nào khó hơn và vì sao?",
+   "note": "Sa Ninh và Hòa Nhứ đọc một bản giới thiệu tự viết. Tên Ti Hòa được quy ước là 丝禾, Diệp Sa là 叶纱, quận Lăng Diệp là 绫页区. Nghe để phân biệt sửa cấu trúc với tự thêm nội dung.",
    "lines": [
     {
-     "s": "王琳",
+     "s": "纱宁",
      "g": "f",
-     "t": "范先生，您好！听说您在刚刚结束的经贸博览会上担任了越方代表团的首席翻译，辛苦了！",
-     "vi": "Chào ông Phạm! Nghe nói ông là phiên dịch chính của đoàn Việt Nam tại hội chợ kinh tế – thương mại vừa kết thúc, ông vất vả rồi!"
+     "t": "这段介绍说公司为新加入小组的学生制作材料包，中心语应当是哪一个？",
+     "vi": "Đoạn nói công ty làm túi vật liệu cho học viên mới vào nhóm; trung tâm cần tìm là gì?"
     },
     {
-     "s": "范文龙",
+     "s": "禾絮",
      "g": "m",
-     "t": "谢谢！确实很辛苦，不过收获也很大。",
-     "vi": "Cảm ơn chị! Đúng là vất vả, nhưng thu hoạch cũng lớn."
+     "t": "先看材料包。为谁使用与什么时候加入是两层关系，不能把新误写成材料本身。",
+     "vi": "Tìm túi vật liệu trước. Dành cho ai và mới gia nhập khi nào là hai quan hệ, không biến mới thành tính chất vật liệu."
     },
     {
-     "s": "王琳",
+     "s": "纱宁",
      "g": "f",
-     "t": "很多人认为，越南人学汉语有先天优势，越译汉应该比汉译越容易。您同意吗？",
-     "vi": "Nhiều người cho rằng người Việt học tiếng Trung có lợi thế bẩm sinh, dịch Việt → Trung hẳn dễ hơn Trung → Việt. Ông có đồng ý không?"
+     "t": "原文有得到通知的人，是否每次都要译成被通知者？",
+     "vi": "Nguồn có người được thông báo; có phải lần nào cũng dịch 被通知者?"
     },
     {
-     "s": "范文龙",
+     "s": "禾絮",
      "g": "m",
-     "t": "恰恰相反。对我们越南译者来说，越译汉往往更难。汉译越是译入母语，哪里不通顺，自己一读就知道；而越译汉是译入外语，很多句子语法上挑不出毛病，可中国人一听就知道是越南式中文。",
-     "vi": "Ngược lại hoàn toàn. Với người dịch Việt Nam chúng tôi, dịch Việt → Trung thường khó hơn. Dịch Trung → Việt là dịch vào tiếng mẹ đẻ, chỗ nào không xuôi tự đọc là biết; còn dịch Việt → Trung là dịch ra ngoại ngữ, nhiều câu ngữ pháp không bắt bẻ được, nhưng người Trung nghe là biết ngay “tiếng Trung kiểu Việt”."
+     "t": "不必机械处理。可以根据语境说收到通知的人，但要确认接收者和通知内容没有改变。",
+     "vi": "Không xử lý máy móc. Theo ngữ cảnh có thể nói người nhận thông báo, nhưng giữ đúng người nhận và nội dung."
     },
     {
-     "s": "王琳",
+     "s": "纱宁",
      "g": "f",
-     "t": "什么是越南式中文？能举个例子吗？",
-     "vi": "“Tiếng Trung kiểu Việt” là gì? Ông có thể cho ví dụ không?"
+     "t": "收入数字写五十亿越南盾，好像跟越南语原文保留了同一个五十。",
+     "vi": "Doanh thu ghi năm mươi ức đồng, trông như cùng năm mươi tỷ trong tiếng Việt."
     },
     {
-     "s": "范文龙",
+     "s": "禾絮",
      "g": "m",
-     "t": "最典型的是语序。越南语的修饰语放在名词后面，汉语却放在前面。初学者常常把这种顺序带进汉语里。到了高级阶段，问题会更隐蔽，比如时间和地点状语的位置。越南人很容易说出我学汉语在河内三年了这样的句子，而汉语必须说我在河内学了三年汉语。",
-     "vi": "Điển hình nhất là trật tự từ. Tiếng Việt đặt thành phần bổ nghĩa sau danh từ, tiếng Trung lại đặt trước. Người mới học hay mang trật tự ấy vào tiếng Trung. Lên trình độ cao, vấn đề kín đáo hơn, chẳng hạn vị trí trạng ngữ thời gian và nơi chốn. Người Việt rất dễ nói câu kiểu “我学汉语在河内三年了”, trong khi tiếng Trung phải nói “我在河内学了三年汉语”."
+     "t": "单位不同。原文的金额应折合五百亿越南盾，应把乘法写出来核对，不能只看前面的五十。",
+     "vi": "Đơn vị khác. Năm mươi tỷ là năm trăm ức đồng, cần viết phép nhân để kiểm, không chỉ nhìn số năm mươi."
     },
     {
-     "s": "王琳",
+     "s": "纱宁",
      "g": "f",
-     "t": "那用词方面呢？",
-     "vi": "Còn về dùng từ thì sao?"
+     "t": "译文最后加了所有客户都满意，读起来更完整，要保留吗？",
+     "vi": "Cuối bản dịch thêm mọi khách đều hài lòng, nghe trọn hơn; có giữ không?"
     },
     {
-     "s": "范文龙",
+     "s": "禾絮",
      "g": "m",
-     "t": "用词上，最大的陷阱是汉越词。越南语里很多词来自汉语，但意思变了。比如越南语里表示交通工具的那个词，写成汉字恰好是方便两个字。如果直接搬过来，公共交通工具就成了公共交通方便，中国人会完全听不懂。",
-     "vi": "Về từ ngữ, cái bẫy lớn nhất là từ Hán Việt. Nhiều từ tiếng Việt gốc Hán nhưng nghĩa đã đổi. Ví dụ từ tiếng Việt chỉ phương tiện giao thông, viết ra chữ Hán lại đúng là hai chữ 方便. Nếu bê nguyên sang, “phương tiện giao thông công cộng” thành “公共交通方便”, người Trung hoàn toàn không hiểu."
-    },
-    {
-     "s": "王琳",
-     "g": "f",
-     "t": "原来如此。还有别的难点吗？",
-     "vi": "Ra vậy. Còn khó khăn nào khác không ạ?"
-    },
-    {
-     "s": "范文龙",
-     "g": "m",
-     "t": "被动句也很麻烦。越南语有表示不幸和幸运的两种被动标记，越南人特别喜欢用被动句，连会议被组织在河内这样的句子都说得出来。其实汉语只要说会议在河内举行就够了。",
-     "vi": "Câu bị động cũng phiền. Tiếng Việt có hai dấu hiệu bị động chỉ điều không may và điều may mắn, nên người Việt rất thích dùng câu bị động, đến cả câu “会议被组织在河内” cũng nói ra được. Thực ra tiếng Trung chỉ cần nói “会议在河内举行” là đủ."
-    },
-    {
-     "s": "王琳",
-     "g": "f",
-     "t": "那机构名称和职务呢？这些应该有固定的译法吧？",
-     "vi": "Thế tên cơ quan và chức vụ thì sao? Những cái đó chắc có cách dịch cố định?"
-    },
-    {
-     "s": "范文龙",
-     "g": "m",
-     "t": "对，这些都有约定俗成的译名，不能自己发明。比如越南的国会、政府总理、人民委员会，还有郡、坊这样的行政区划，都要按规范来译。每次开会之前，我都会专门做一个术语表，反复背熟。",
-     "vi": "Đúng, những thứ này đều có tên dịch quen dùng, không được tự sáng tác. Như Quốc hội, Thủ tướng Chính phủ, Ủy ban nhân dân của Việt Nam, rồi các đơn vị hành chính như quận, phường, đều phải dịch theo chuẩn. Trước mỗi hội nghị, tôi đều làm riêng một bảng thuật ngữ và học thuộc kỹ."
-    },
-    {
-     "s": "王琳",
-     "g": "f",
-     "t": "听说越南人讲话很喜欢用俗语，这会不会给翻译带来麻烦？",
-     "vi": "Nghe nói người Việt nói chuyện rất thích dùng tục ngữ, điều đó có gây khó cho phiên dịch không?"
-    },
-    {
-     "s": "范文龙",
-     "g": "m",
-     "t": "会，而且这是最考验功夫的地方。这次博览会开幕时，越方领导说了一句俗语，意思是做买卖要有朋友、有伙伴。我没有逐字翻译，而是译成做生意离不开朋友。中方代表马上接了一句：独木不成林。全场都笑了，气氛一下子就活跃起来了。",
-     "vi": "Có, và đây là chỗ thử thách tay nghề nhất. Lúc khai mạc hội chợ lần này, lãnh đạo phía Việt nói một câu tục ngữ, ý là buôn bán phải có bạn, có phường. Tôi không dịch từng chữ mà dịch thành “làm ăn không thể thiếu bạn bè”. Đại diện phía Trung lập tức đáp một câu: “Một cây không thành rừng”. Cả hội trường bật cười, không khí sôi nổi hẳn lên."
-    },
-    {
-     "s": "王琳",
-     "g": "f",
-     "t": "这就是翻译的魅力吧！最后，您对学习越译汉的年轻人有什么建议？",
-     "vi": "Đó chính là sức hút của phiên dịch! Cuối cùng, ông có lời khuyên gì cho người trẻ học dịch Việt → Trung?"
-    },
-    {
-     "s": "范文龙",
-     "g": "m",
-     "t": "我建议大家多读中国人写的原创文章，而不是只读翻译作品。只有积累了足够多地道的表达，脑子里才会形成汉语的语感。另外，翻译完以后，最好请中国朋友读一读，看看他们会不会觉得别扭。",
-     "vi": "Tôi khuyên mọi người đọc nhiều bài viết gốc do người Trung Quốc viết, chứ không chỉ đọc tác phẩm dịch. Chỉ khi tích lũy đủ nhiều cách diễn đạt chuẩn, trong đầu mới hình thành ngữ cảm tiếng Trung. Ngoài ra, dịch xong tốt nhất nên nhờ bạn người Trung đọc thử, xem họ có thấy gượng không."
-    },
-    {
-     "s": "王琳",
-     "g": "f",
-     "t": "非常感谢您接受我们的采访！",
-     "vi": "Cảm ơn ông rất nhiều vì đã nhận lời phỏng vấn!"
-    },
-    {
-     "s": "范文龙",
-     "g": "m",
-     "t": "不客气，谢谢！",
-     "vi": "Không có gì, cảm ơn chị!"
+     "t": "原文只说几位试读者给过意见。我们可以让句子自然，却不能扩大范围；缺的信息应列出来询问。",
+     "vi": "Nguồn chỉ nói vài người đọc thử đã góp ý. Có thể viết tự nhiên nhưng không nới phạm vi; thông tin thiếu cần ghi để hỏi."
     }
    ],
    "qs": [
     {
-     "q": "Theo ông Phạm, vì sao dịch Việt → Trung thường khó hơn?",
+     "q": "两人先找什么？",
      "o": [
-      "Vì tiếng Trung có quá nhiều chữ Hán",
-      "Vì dịch ra ngoại ngữ: câu đúng ngữ pháp vẫn có thể là “tiếng Trung kiểu Việt”",
-      "Vì người Việt không biết từ Hán Việt",
-      "Vì dịch Trung → Việt không cần biên tập"
+      "真实城市的历史",
+      "名词短语的中心语",
+      "所有句子的最后一个字"
      ],
      "a": 1,
-     "e": "越译汉是译入外语，很多句子语法上挑不出毛病，可中国人一听就知道是越南式中文。"
+     "e": "Tìm trung tâm trước để phân các lớp bổ nghĩa, không đảo từ chỉ theo vị trí."
     },
     {
-     "q": "Câu “我学汉语在河内三年了” sai ở đâu?",
+     "q": "五十 tỷ 应写成多少亿越南盾？",
      "o": [
-      "Sai từ vựng",
-      "Thiếu lượng từ",
-      "Sai thanh điệu",
-      "Trạng ngữ nơi chốn và bổ ngữ thời lượng đặt sai chỗ"
+      "五百亿",
+      "五十亿",
+      "五亿"
      ],
-     "a": 3,
-     "e": "Phải là 我在河内学了三年汉语: 在河内 trước động từ, 三年 (thời lượng) sau động từ."
+     "a": 0,
+     "e": "50 × 10^9 chia 10^8 bằng 500, nên 500亿越南盾."
     },
     {
-     "q": "Theo ông, câu “Hội nghị được tổ chức tại Hà Nội” nên dịch là:",
+     "q": "所有客户都满意为何被质疑？",
      "o": [
-      "会议被组织在河内。",
-      "河内被组织了会议。",
-      "会议被河内举行。",
-      "会议在河内举行。"
+      "因为原文没有任何人",
+      "超过了几位试读者提意见的范围",
+      "因为满意永远不能用"
      ],
-     "a": 3,
-     "e": "汉语只要说会议在河内举行就够了 – không cần 被."
+     "a": 1,
+     "e": "Vài người góp ý không chứng minh mọi khách hài lòng; cần giữ đúng lượng từ."
     },
     {
-     "q": "Khi lãnh đạo phía Việt nói câu tục ngữ, ông xử lý thế nào?",
+     "q": "收到通知的人能否使用？",
      "o": [
-      "Dịch từng chữ cho chính xác",
-      "Bỏ qua không dịch",
-      "Dịch theo ý: 做生意离不开朋友",
-      "Nhờ phía Trung tự hiểu"
+      "所有句子都必须用被",
+      "可以不看通知是谁收到的",
+      "可按语境使用并核对关系"
      ],
      "a": 2,
-     "e": "我没有逐字翻译，而是译成做生意离不开朋友。"
-    },
-    {
-     "q": "Đại diện phía Trung đáp lại bằng câu nào? (gõ chữ Hán)",
-     "a": "独木不成林",
-     "alt": [
-      "dumubuchenglin",
-      "dúmù bù chéng lín"
-     ],
-     "e": "独木不成林 – một cây không thành rừng, tương đương “một cây làm chẳng nên non”."
+     "e": "Có thể dùng cấu trúc tự nhiên nếu giữ người nhận và nội dung, không có phép thay máy móc mọi trường hợp."
     }
    ]
   },
   {
    "k": "read",
-   "h": "Đọc: Bản tiếng Trung của bài viết “Tết của người Việt” (đối chiếu bản tiếng Việt)",
-   "title": "越南人的春节",
-   "text": "在越南，一年之中最隆重的节日莫过于春节。越南语中春节的全称来自汉字“节元旦”，人们平时只简称一个“节”字。在越南人心中，春节就是“节日中的节日”。和中国一样，越南的春节也按农历计算，大多在公历一月底到二月中旬之间。\n\n一进入农历腊月，家家户户就忙碌起来：打扫房屋，粉刷墙壁，添置新衣。腊月二十三是送灶神的日子。人们会把鲤鱼放生到河里或湖里，相传灶神要骑着鲤鱼上天，向玉皇大帝汇报这一家人一年来的情况。\n\n春节的餐桌上，最不可缺少的是方粽。它用糯米、绿豆和猪肉做馅，外面裹上柊叶，捆成四四方方的形状，要煮上十来个小时。相传在雄王时代，一位孝顺的王子用方粽和圆形的糯米糍粑祭祀天地：方的象征大地，圆的象征天空。南方人则更常吃圆柱形的粽子。直到今天，一家人围着火炉守着锅煮粽子，依然是许多越南人最温暖的春节记忆。\n\n除了粽子，供桌上还少不了一盘五果。北方和南方摆放的水果不尽相同，但都寄托着美好的愿望。南方人喜欢摆番荔枝、椰子、木瓜、芒果和无花果，因为这几种水果的越南语名称连起来读，谐音“祈求够花够用”，表达了人们对来年生活富足的期盼。\n\n春节前的花市也是一道亮丽的风景线。北方人喜欢在家里摆一枝桃花，或者一盆挂满果实的金橘；南方气候温暖，家家户户则爱摆放金黄色的“黄梅”。值得一提的是，越南南方的这种“梅”和中国人熟悉的梅花并不是同一种植物，翻译时最好稍加说明。在河内，年轻人捧着桃花、骑着摩托车穿行于大街小巷，已经成为春节前最有代表性的画面之一。\n\n除夕之夜，人们在家中摆上供品，祭拜祖先，迎接新年的到来。零点一过，许多城市都会燃放烟花。越南人非常重视大年初一第一个踏进家门的客人，认为他会影响全家一年的运气，因此主人往往会提前邀请性格开朗、事业顺利的亲友在初一一早登门。越南有句俗话：初一拜父亲，初二拜母亲，初三拜老师。孩子们穿上新衣给长辈拜年，说上几句吉祥话，就能收到装在红包里的压岁钱。\n\n近年来，越南人过春节的方式也在悄悄改变。不少年轻人选择在网上购买年货，有的家庭干脆利用长假外出旅游。但无论形式怎样变化，回家团圆始终是春节不变的主题。每到年底，从胡志明市开往北方的列车上总是挤满了归心似箭的游子。正如越南人常说的那句话：饮水思源。不管走得多远，都不能忘记自己的根。",
-   "vi": "Ở Việt Nam, ngày lễ trọng đại nhất trong năm không gì bằng Tết Nguyên Đán. Tên gọi đầy đủ “Tết Nguyên Đán” bắt nguồn từ chữ Hán “節元旦”, bình thường người ta chỉ gọi tắt là “Tết”. Trong lòng người Việt, Tết là “ngày lễ của các ngày lễ”. Giống như Trung Quốc, Tết của Việt Nam cũng tính theo âm lịch, thường rơi vào khoảng cuối tháng Một đến giữa tháng Hai dương lịch.\n\nVừa bước sang tháng Chạp, nhà nhà đã tất bật: dọn dẹp nhà cửa, quét vôi tường, sắm quần áo mới. Ngày 23 tháng Chạp là ngày tiễn ông Công ông Táo. Người ta thả cá chép xuống sông, xuống hồ; tương truyền Táo quân cưỡi cá chép lên trời, tâu với Ngọc Hoàng mọi việc trong năm của gia đình.\n\nTrên mâm cỗ ngày Tết, thứ không thể thiếu là bánh chưng. Bánh làm từ gạo nếp, đậu xanh, thịt lợn, gói bằng lá dong, buộc thành hình vuông vức, phải luộc chừng mười tiếng đồng hồ. Tương truyền thời Hùng Vương, một hoàng tử hiếu thảo đã dâng bánh chưng và bánh giầy tròn để tế trời đất: bánh vuông tượng trưng cho đất, bánh tròn tượng trưng cho trời. Người miền Nam thì hay ăn bánh tét hình trụ hơn. Cho đến hôm nay, cả nhà quây quần bên bếp lửa canh nồi bánh chưng vẫn là ký ức Tết ấm áp nhất của biết bao người Việt.\n\nNgoài bánh chưng, bàn thờ còn không thể thiếu mâm ngũ quả. Miền Bắc và miền Nam bày trái cây không hoàn toàn giống nhau, nhưng đều gửi gắm ước mong tốt đẹp. Người miền Nam thích bày mãng cầu, dừa, đu đủ, xoài và sung, vì tên các loại quả này đọc liền nhau gần âm với câu “cầu vừa đủ xài”, thể hiện mong ước năm mới đủ đầy, sung túc.\n\nChợ hoa ngày Tết cũng là một nét đẹp rực rỡ. Người miền Bắc thích chưng một cành đào hoặc một chậu quất trĩu quả; miền Nam khí hậu ấm áp, nhà nhà lại chuộng mai vàng. Điều đáng nói là cây “mai” ở miền Nam Việt Nam không cùng loài với cây mai (梅) quen thuộc của người Trung Quốc, khi dịch nên giải thích đôi chút. Ở Hà Nội, hình ảnh các bạn trẻ ôm cành đào, chạy xe máy len qua phố lớn ngõ nhỏ đã trở thành một trong những khung cảnh tiêu biểu nhất những ngày giáp Tết.\n\nĐêm giao thừa, mọi nhà bày lễ vật, cúng tổ tiên, đón năm mới. Vừa qua 0 giờ, nhiều thành phố bắn pháo hoa. Người Việt rất coi trọng người “xông đất” – vị khách đầu tiên bước vào nhà ngày mùng Một – vì tin rằng người đó ảnh hưởng đến vận may cả năm của gia đình; vì thế gia chủ thường mời trước người thân, bạn bè tính tình vui vẻ, công việc suôn sẻ đến nhà từ sáng sớm mùng Một. Người Việt có câu: “Mùng một Tết cha, mùng hai Tết mẹ, mùng ba Tết thầy.” Trẻ con mặc quần áo mới, chúc Tết ông bà cha mẹ, nói vài lời chúc tốt lành là được nhận phong bao lì xì.\n\nNhững năm gần đây, cách người Việt đón Tết cũng đang lặng lẽ thay đổi. Nhiều bạn trẻ mua sắm Tết trên mạng, có gia đình tận dụng kỳ nghỉ dài để đi du lịch. Nhưng dù hình thức đổi thay ra sao, đoàn tụ gia đình vẫn luôn là chủ đề không đổi của ngày Tết. Cứ cuối năm, những chuyến tàu từ TP. Hồ Chí Minh ra Bắc lại chật kín những người con xa quê nóng lòng về nhà. Đúng như câu người Việt vẫn nói: “Uống nước nhớ nguồn.” Dù đi xa đến đâu cũng không thể quên cội rễ của mình.",
+   "h": "Đọc và đối chiếu lập luận",
+   "title": "先写出关系，再安排词序（课程自拟）",
+   "text": "虚构的丝禾材料公司请两名学习者把一份越南语介绍译成中文。原文说明，公司为刚加入学习小组的学生制作材料包，工作室位于叶纱市绫页区，上一年的课堂假设收入用越南语写成五十 tỷ 越南盾，其中 tỷ 按十亿计算。负责人要求保留用途、对象与数字，却没有规定每句话必须跟原文一样长。两位译者首先面对的不是找漂亮词，而是确定各部分之间的关系。\n\n第一位译者沿着原文从左到右写，把表示加入时间的部分放在材料包后面。试读者因而以为材料刚加入了小组。第二位先画出关系：材料包是中心，学生是使用者，刚加入小组修饰学生，而不是材料。随后再组织成供新加入小组的学生使用的材料包。句子变长并非问题本身，关键是读者能否找到每一层修饰的对象。\n\n动词也需要同样核对。越南语中一个常见的“được”可以出现在不同结构里，有时说明受到动作影响，有时涉及获得机会或完成状态。若遇到它就统一写被，译文可能显得生硬，也可能把关系改错。公司成立于某年，不必为了保留一个表面的词而补出没有必要的施事；但若原文确实强调谁作了决定，又不能只为简短把负责人删去。\n\n数字造成了另一类错觉。原文用五十 tỷ，草稿直接写五十亿，看起来都保留了五十，数量却少了一个数量级。译者写出算式：五十乘以十的九次方，等于五百乘以十的八次方，所以应写五百亿越南盾。换单位是为了让目标读者理解，不是改动原来的金额。数字、计数单位与币种都要分别核对，不能把流畅当成核算正确的证据。\n\n名称则按课堂提供的表处理：丝禾、叶纱与绫页区都是虚构名称，不代表真实企业或地方。译者不把故事约定说成官方译名，也不凭熟悉的汉越音为人名选择唯一汉字。若材料没有提供原写法，就保留拉丁字母或列为待确认。需要解释的注释另有标识，不能混入介绍正文，让读者误以为公司自己声明了那一层意思。\n\n有一处原文说几位试读者提出意见，草稿为了结尾好听，写成所有客户一致认可。这个版本既有完整主语，也没有明显语病，却仍不忠实。把建议者改成客户、把几位改成所有、把提出意见改成认可，连续改变了对象、范围与态度。修订不能只查单个词是否在词典里成立，还要检查整句话实际声称了什么。\n\n最后，两位译者分开进行三轮检查。先用自己的话讲清谁做什么、条件落在哪里，再检查中文词序与搭配，最后逐项核对名称、数字、时间和否定。未解决的问题随译稿一同交给负责人，不以猜测填满。好的译文允许句式变化，却不把变化当成增加事实的许可；它帮助读者自然地理解同一件事，也让后来核对的人看见仍需确认的边界。",
+   "vi": "Công ty vật liệu hư cấu Ti Hòa nhờ hai người học dịch một bản giới thiệu Việt sang Trung. Nguồn nói làm túi vật liệu cho học viên mới vào nhóm, xưởng ở quận Lăng Diệp, thành phố Diệp Sa và có doanh thu giả định 50 tỷ đồng. Cần giữ mục đích, đối tượng và số, không bắt câu dài bằng nguồn. Việc đầu là làm rõ quan hệ, chưa phải tìm từ đẹp.\n\nNgười dịch theo thứ tự gốc đặt phần nói mới gia nhập sau túi vật liệu, khiến người đọc tưởng vật liệu vào nhóm. Người kia xác định túi là trung tâm, học viên là người dùng, mới gia nhập bổ nghĩa học viên. Sau đó mới xếp thành túi vật liệu dành cho học viên mới vào nhóm. Câu dài chưa tự là lỗi; vấn đề là tìm được đối tượng của từng lớp bổ nghĩa.\n\nTừ được có nhiều cấu trúc, không thể gặp đâu cũng viết 被. Đôi khi nó nói chịu tác động, có khi là có cơ hội hoặc trạng thái hoàn thành. Công ty thành lập năm nào không cần ép thêm chủ thể chỉ để giữ một từ bề mặt. Ngược lại, nguồn nhấn ai quyết định thì không được xóa người ấy chỉ cho gọn.\n\nNguồn dùng 50 tỷ, nháp viết 50亿: giữ số 50 nhưng sai một bậc đơn vị. Phép tính 50 × 10^9 = 500 × 10^8 cho 500亿越南盾. Đổi đơn vị giúp người đọc hiểu cùng số tiền, không phải đổi tiền gốc. Cần kiểm riêng số, đơn vị đếm và loại tiền; câu trôi chảy không chứng phép tính đúng.\n\nBảng tên tự đặt quy ước Ti Hòa, Diệp Sa và Lăng Diệp, không đại diện nơi hoặc công ty thật. Không gọi quy ước truyện là tên dịch chính thức, không từ âm Hán Việt đoán duy nhất chữ Hán của tên người. Thiếu cách viết thì giữ Latin hoặc ghi cần xác nhận. Chú giải đặt riêng để người đọc không tưởng công ty tự nói ý đó.\n\nNguồn chỉ nói vài người đọc thử góp ý, nháp lại thành mọi khách nhất trí công nhận. Câu hoàn chỉnh về ngữ pháp nhưng đã đổi đối tượng, phạm vi và thái độ. Biên tập cần kiểm cả câu khẳng định gì, không chỉ từng từ có trong từ điển không.\n\nBa lượt kiểm cuối lần lượt làm rõ ai làm gì và điều kiện ở đâu, chỉnh trật tự/kết hợp từ Trung, rồi đối chiếu tên, số, thời gian và phủ định. Câu chưa giải được giao người phụ trách cùng bản dịch. Có thể đổi kiểu câu để diễn đạt tự nhiên nhưng không dùng việc đổi cấu trúc làm quyền thêm sự thật; người sau vẫn thấy ranh giới cần xác nhận.",
    "gloss": [
     {
-     "w": "莫过于",
-     "py": "mòguòyú",
-     "vi": "không gì bằng, nhất là (dịch “… nhất không gì bằng”)"
+     "w": "中心",
+     "py": "zhōngxīn",
+     "vi": "trung tâm"
     },
     {
-     "w": "腊月",
-     "py": "làyuè",
-     "vi": "tháng Chạp"
+     "w": "施事",
+     "py": "shīshì",
+     "vi": "chủ thể thực hiện"
     },
     {
-     "w": "送灶神",
-     "py": "sòng Zàoshén",
-     "vi": "tiễn ông Táo (dùng tên lễ Trung tương ứng – 归化)"
+     "w": "数量级",
+     "py": "shùliàngjí",
+     "vi": "bậc độ lớn"
     },
     {
-     "w": "柊叶",
-     "py": "zhōngyè",
-     "vi": "lá dong (tên thực vật tiếng Trung, tránh dịch “叶子” chung chung)"
+     "w": "币种",
+     "py": "bìzhǒng",
+     "vi": "loại tiền"
     },
     {
-     "w": "糯米糍粑",
-     "py": "nuòmǐ cíbā",
-     "vi": "bánh giầy (mượn tên món tương tự + mô tả hình tròn)"
+     "w": "官方译名",
+     "py": "guānfāng yìmíng",
+     "vi": "tên dịch chính thức"
     },
     {
-     "w": "圆柱形的粽子",
-     "py": "yuánzhùxíng de zòngzi",
-     "vi": "bánh tét (dịch mô tả)"
-    },
-    {
-     "w": "谐音",
-     "py": "xiéyīn",
-     "vi": "đồng âm, gần âm (giải thích chơi chữ “cầu vừa đủ xài” – 增译)"
-    },
-    {
-     "w": "第一个踏进家门的客人",
-     "py": "dì yī ge tàjìn jiāmén de kèrén",
-     "vi": "người xông đất (không có từ tương đương → dịch mô tả)"
-    },
-    {
-     "w": "初一拜父亲，初二拜母亲，初三拜老师",
-     "py": "chūyī bài fùqin, chū'èr bài mǔqin, chūsān bài lǎoshī",
-     "vi": "“Mùng một Tết cha, mùng hai Tết mẹ, mùng ba Tết thầy”"
-    },
-    {
-     "w": "金橘 / 黄梅",
-     "py": "jīnjú / huángméi",
-     "vi": "cây quất / mai vàng (chú thích: không phải cây mai 梅 của Trung Quốc)"
-    },
-    {
-     "w": "归心似箭",
-     "py": "guīxīn-sìjiàn",
-     "vi": "lòng muốn về như tên bắn – “nóng lòng về nhà”"
-    },
-    {
-     "w": "团圆",
-     "py": "tuányuán",
-     "vi": "đoàn tụ, sum vầy"
+     "w": "范围",
+     "py": "fànwéi",
+     "vi": "phạm vi"
     }
    ],
    "qs": [
     {
-     "q": "Theo bài, chữ “Tết” bắt nguồn từ chữ Hán nào?",
+     "q": "第一份草稿的修饰问题是什么？",
      "o": [
-      "春",
-      "节",
-      "年",
-      "元"
-     ],
-     "a": 1,
-     "e": "春节的全称来自汉字“节元旦”，人们平时只简称一个“节”字。"
-    },
-    {
-     "q": "Người dịch xử lý món “bánh giầy” như thế nào?",
-     "o": [
-      "Phiên âm Latinh",
-      "Bỏ đi không dịch",
-      "Mượn tên món tương tự 糯米糍粑 kèm mô tả hình tròn",
-      "Dịch là 方粽"
+      "没有出现任何材料",
+      "只写了天气",
+      "让人误以为材料加入小组"
      ],
      "a": 2,
-     "e": "圆形的糯米糍粑 – dịch mô tả + mượn món tương tự (归化)."
+     "e": "Phần mới gia nhập phải chỉ học viên, không phải vật liệu. Cần đọc quan hệ thay chỉ đảo vị trí."
     },
     {
-     "q": "Câu “谐音‘祈求够花够用’” trong bản Trung là ví dụ của kỹ thuật nào?",
+     "q": "关于 được，文章强调什么？",
      "o": [
-      "Thêm thông tin giải thích chơi chữ (增译)",
-      "Lược bỏ (减译)",
-      "Dịch sát chữ (直译)",
-      "Đảo trật tự câu"
+      "先看结构与意义，再选中文表达",
+      "每次必须使用被",
+      "所有被字句都不自然"
      ],
      "a": 0,
-     "e": "Chơi chữ “cầu vừa đủ xài” không thể dịch sát → giải thích ý nghĩa cho người đọc Trung (增译)."
+     "e": "Từ được không đồng nhất với bị động mọi trường hợp; bài cũng không cấm mọi cấu trúc 被."
     },
     {
-     "q": "Theo bài, điều gì KHÔNG đổi dù cách đón Tết thay đổi?",
+     "q": "五十 tỷ 与五十亿相差在哪里？",
      "o": [
-      "Mua sắm ở chợ truyền thống",
-      "Đi du lịch dịp Tết",
-      "Bắn pháo hoa ở mọi tỉnh",
-      "Đoàn tụ gia đình"
+      "一个没有任何数字",
+      "计数单位导致金额不同",
+      "只是字体不同"
      ],
-     "a": 3,
-     "e": "无论形式怎样变化，回家团圆始终是春节不变的主题。"
+     "a": 1,
+     "e": "50 tỷ bằng 500亿 đồng. Giữ chữ số nhưng đổi đơn vị không đúng sẽ làm sai lượng."
     },
     {
-     "q": "Câu tục ngữ ở cuối bài là gì? (gõ chữ Hán)",
-     "a": "饮水思源",
-     "alt": [
-      "yinshuisiyuan",
-      "yǐnshuǐ sīyuán"
+     "q": "没有人名汉字原写法时应怎样？",
+     "o": [
+      "借用一位名人的名字",
+      "保留拉丁字母或列待确认",
+      "凭熟悉读音猜唯一汉字"
      ],
-     "e": "饮水思源 = Uống nước nhớ nguồn."
+     "a": 1,
+     "e": "Bảng nguồn hoặc người có trách nhiệm phải xác nhận cách viết; âm Hán Việt không tự quyết duy nhất tên người."
+    },
+    {
+     "q": "结尾好听为何仍可能不忠实？",
+     "o": [
+      "主语、范围和态度可能被扩大",
+      "所有流畅句都错误",
+      "词典里的词不能使用"
+     ],
+     "a": 0,
+     "e": "Câu vài người góp ý thành mọi khách công nhận đã đổi cả đối tượng, lượng và thái độ dù không có lỗi ngữ pháp rõ."
     }
    ]
   },
   {
    "k": "chars",
-   "h": "Chữ Hán trọng tâm (bấm để tập viết)",
+   "h": "Chữ trọng tâm: cấu tạo và dùng trong từ",
    "items": [
     {
-     "c": "郡",
-     "py": "jùn",
-     "hv": "quận",
-     "parts": "君 (quân – vua, gợi âm) + 阝(ấp – vùng đất, bên phải)",
-     "strokes": 9,
-     "vi": "quận – vùng đất do vua phân chia; dùng dịch “quận” của Việt Nam",
-     "words": "还剑郡, 第一郡"
+     "c": "名",
+     "py": "míng",
+     "hv": "",
+     "parts": "夕在上，口在下",
+     "strokes": 6,
+     "vi": "tên",
+     "words": "专名、名称"
     },
     {
-     "c": "坊",
-     "py": "fāng",
-     "hv": "phường",
-     "parts": "土 (thổ – đất) + 方 (phương – gợi âm)",
+     "c": "译",
+     "py": "yì",
+     "hv": "",
+     "parts": "讠在左，右部含又形与两横一竖",
      "strokes": 7,
-     "vi": "phường, phố phường; xưởng nhỏ (作坊)",
-     "words": "坊, 街坊, 作坊"
-    },
-    {
-     "c": "粽",
-     "py": "zòng",
-     "hv": "tống",
-     "parts": "米 (mễ – gạo) + 宗 (tông – gợi âm)",
-     "strokes": 14,
-     "vi": "bánh làm bằng gạo nếp gói lá",
-     "words": "粽子, 方粽"
-    },
-    {
-     "c": "搭",
-     "py": "dā",
-     "hv": "đáp",
-     "parts": "扌(tay) + 荅 (đáp – gợi âm)",
-     "strokes": 12,
-     "vi": "bắc, dựng; phối hợp",
-     "words": "搭配, 搭建, 搭车"
+     "vi": "dịch",
+     "words": "翻译、译文"
     },
     {
      "c": "序",
      "py": "xù",
-     "hv": "tự",
-     "parts": "广 (nghiễm – mái nhà) + 予 (dư – gợi âm)",
+     "hv": "",
+     "parts": "广在外，予在内",
      "strokes": 7,
-     "vi": "thứ tự; lời tựa",
-     "words": "语序, 顺序, 秩序"
+     "vi": "thứ tự",
+     "words": "词序、顺序"
     },
     {
-     "c": "饮",
-     "py": "yǐn",
-     "hv": "ẩm",
-     "parts": "饣(thực – ăn) + 欠 (khiếm – há miệng)",
-     "strokes": 7,
-     "vi": "uống – há miệng để ăn uống",
-     "words": "饮水思源, 饮料, 餐饮"
+     "c": "总",
+     "py": "zǒng",
+     "hv": "",
+     "parts": "丷与口在上，心在下",
+     "strokes": 9,
+     "vi": "tổng",
+     "words": "总额、总量"
     }
    ]
   },
   {
    "k": "speak",
-   "h": "Nói & dịch nói Việt → Trung",
+   "h": "Nói có căn cứ",
    "tasks": [
     {
-     "p": "Dịch nói sang tiếng Trung lời chào mừng (giả định) của Phó Chủ tịch UBND tỉnh: «Thay mặt Ủy ban nhân dân tỉnh Quảng Ninh, tôi nhiệt liệt chào mừng đoàn doanh nghiệp đến từ Quảng Tây, Trung Quốc. Quảng Ninh nổi tiếng với vịnh Hạ Long – Di sản thiên nhiên thế giới. Uống nước nhớ nguồn, chúng tôi luôn trân trọng tình hữu nghị truyền thống giữa nhân dân hai nước. Mong rằng chuyến thăm lần này sẽ mở ra nhiều cơ hội hợp tác mới.»",
-     "model": "我谨代表广宁省人民委员会，热烈欢迎来自中国广西的企业代表团。广宁省以世界自然遗产下龙湾而闻名。饮水思源，我们始终珍视两国人民之间的传统友谊。希望此次访问能为双方开辟更多新的合作机遇。",
-     "vi": "Ghi chú: “Thay mặt…” → 我谨代表… (谨 tăng độ trang trọng) · “nổi tiếng với…” → 以…而闻名 · “Uống nước nhớ nguồn” → 饮水思源 · “mở ra cơ hội” → 开辟机遇 (kết hợp từ chuẩn) · “chuyến thăm lần này” → 此次访问 (văn phong lễ tân).",
-     "tips": "Lời chào lễ tân luôn có khung: 我谨代表… 热烈欢迎… 希望/祝… Nói chậm, rõ, ngắt sau mỗi vế; tên địa danh phải thuộc trước (广宁 Guǎngníng, 下龙湾 Xiàlóng Wān)."
+     "p": "Giải thích90 giây cách dịch cụm túi vật liệu dành cho học viên mới vào nhóm. Chỉ trung tâm và hai quan hệ, không đọc một danh sách từ rời.",
+     "model": "我先确定中心语是材料包，再确认使用者是学生。新加入学习小组修饰学生，不是说材料刚加入了小组。因此，可以先组织供新加入小组的学生使用这一层，再接材料包。最终还要检查句子是否太长，必要时拆成两句；拆句可以改变形式，但不能把使用者或加入时间移到别的对象上。",
+     "vi": "Tìm túi vật liệu làm trung tâm, học viên là người dùng; mới gia nhập chỉ học viên. Xếp lớp dành cho ai rồi nối túi. Nếu dài có thể tách câu nhưng không đổi người dùng hay đối tượng thời gian bổ nghĩa.",
+     "tips": [
+      "Đặt tên cho từng quan hệ trước nói mẫu dịch.",
+      "Tách câu nếu cần nhưng đối chiếu lại các đối tượng."
+     ]
     },
     {
-     "p": "Giới thiệu (1 phút, bằng tiếng Trung) một thành phố Việt Nam cho đoàn khách Trung Quốc: vị trí, di sản, món đặc sản, và một câu tục ngữ Việt chuyển sang tiếng Trung.",
-     "model": "欢迎大家来到顺化！顺化位于越南中部，曾是越南最后一个封建王朝阮朝的都城。城里的皇城和历代皇陵早已被列入世界文化遗产名录。顺化的美食也很有名，比如顺化牛肉粉，汤头又香又辣，很多游客吃过一次就念念不忘。越南有一句俗话，意思是出门走上一天，就能学到一大筐知识，这和汉语里的读万卷书、行万里路可以说是异曲同工。希望大家这次旅行既能欣赏美景，又能有所收获。",
-     "vi": "Chào mừng mọi người đến Huế! Huế nằm ở miền Trung Việt Nam, từng là kinh đô của triều đại phong kiến cuối cùng – nhà Nguyễn. Kinh thành và lăng tẩm các đời vua từ lâu đã được ghi vào danh mục Di sản văn hoá thế giới. Ẩm thực Huế cũng nổi tiếng, như bún bò Huế, nước dùng vừa thơm vừa cay, nhiều du khách ăn một lần là nhớ mãi. Người Việt có câu tục ngữ “Đi một ngày đàng, học một sàng khôn”, gần với câu “đọc vạn quyển sách, đi vạn dặm đường” của tiếng Trung. Chúc mọi người chuyến đi này vừa ngắm cảnh đẹp vừa có nhiều thu hoạch.",
-     "tips": "Bún bò Huế → 顺化牛肉粉; triều Nguyễn → 阮朝; dùng 异曲同工 để nối tục ngữ Việt với câu Trung tương đương. Tránh đọc tục ngữ tiếng Việt chen giữa câu Trung – hãy dịch ý."
+     "p": "Đáp người nói chỉ cần dịch tự nhiên, không phải hỏi lại tên riêng chưa rõ. Nêu cách xử lý và điều chưa được tự quyết.",
+     "model": "自然表达很重要，但不能代替事实核对。若材料没有给出人名的汉字写法，我会先保留拉丁字母，并在问题表中请负责人确认。课堂虚构名称可按提供的对照表使用，却不能说成真实地名的官方译法。注释也应单列，让读者知道哪些来自原文，哪些只是译者的解释。",
+     "vi": "Tự nhiên quan trọng nhưng không thay kiểm thông tin. Chưa có chữ tên thì giữ Latin và hỏi người phụ trách. Tên giả dùng bảng đã cho, không gọi tên dịch chính thức địa danh thật; chú giải riêng để phân nguồn và người dịch.",
+     "tips": [
+      "Đưa phương án tạm rõ thay bịa một tên.",
+      "Nói ai xác nhận phần thiếu."
+     ]
     }
    ]
   },
   {
    "k": "write",
-   "h": "Viết 1 – Dịch Việt → Trung: giới thiệu doanh nghiệp",
-   "task": "Dịch sang tiếng Trung văn viết (tên công ty và số liệu là giả định):\n«Công ty Cổ phần Nông sản Sông Hồng được thành lập năm 2010, có trụ sở chính tại quận Long Biên, thành phố Hà Nội. Công ty chuyên sản xuất và xuất khẩu các loại trái cây nhiệt đới như thanh long, vải thiều và sầu riêng. Năm 2024, doanh thu của công ty đạt 500 tỷ đồng, trong đó 60% đến từ thị trường Trung Quốc. Sản phẩm của công ty đã được cơ quan chức năng cấp chứng nhận chất lượng. Chúng tôi mong muốn hợp tác lâu dài với các đối tác Trung Quốc trên tinh thần bình đẳng, cùng có lợi.»",
-   "min": 120,
-   "model": "红河农产品股份公司（名称为假设）成立于2010年，总部位于河内市龙边郡。公司专门从事火龙果、荔枝、榴莲等热带水果的生产和出口。2024年，公司营业额达5000亿越南盾，其中60%来自中国市场（数据为假设）。公司产品已获得有关部门颁发的质量认证。我们希望本着平等互利的精神，与中国合作伙伴开展长期合作。",
-   "modelVi": "Ghi chú kỹ thuật: “Công ty Cổ phần Nông sản Sông Hồng” → 红河农产品股份公司 (tên riêng đặt trước, loại hình 股份公司 sau) · “được thành lập năm 2010” → 成立于2010年 (không dùng 被) · “có trụ sở chính tại quận Long Biên” → 总部位于河内市龙边郡 (từ lớn đến nhỏ: thành phố → quận) · “chuyên sản xuất và xuất khẩu” → 专门从事…的生产和出口 · “các loại trái cây nhiệt đới như…” → 火龙果、荔枝、榴莲等热带水果 (liệt kê trước, 等 + danh từ chung sau) · “500 tỷ đồng” → 5000亿越南盾 · “được… cấp chứng nhận” → 获得…颁发的质量认证 · “trên tinh thần bình đẳng, cùng có lợi” → 本着平等互利的精神.",
+   "h": "Viết có mục đích và giới hạn",
+   "task": "Viết 300–400 chữ Hán báo cáo quyết định biên tập cho bản dịch giới thiệu Ti Hòa. Phải xử lý cụm học viên mới, từ được, 50 tỷ đồng, bảng tên tự đặt và câu vài người góp ý. Đây là báo cáo cách dịch, không cần quảng cáo doanh nghiệp hay tạo chứng nhận chất lượng.",
+   "min": 300,
+   "model": "先确认关系，再整理表达\n本次译稿应保持丝禾材料公司介绍中的用途、对象和金额。材料包是中心语，新加入学习小组修饰学生，而不是材料。中文可以重组为供新成员使用的材料包，也可拆句交代加入背景，但不能改变实际使用者。\n原文的 được 要按结构判断。公司成立于某年不必机械加被；涉及谁提供说明、谁收到通知时，则应让施事与受事清楚。删去必要主语虽然省字，却可能让后文指代失去对象。\n收入应核算为五百亿越南盾，因为五十乘以十的九次方等于五百乘以十的八次方。丝禾、叶纱和绫页区按课堂表使用，不称官方译名。未给出原写法的人名保留拉丁字母，请负责人确认。\n结尾只说几位试读者提出意见，不扩成所有客户一致认可。修改后先检查中文搭配，再逐项对照时间、否定和范围。未解决的问题单列交付，译者注释另作标识。这样既能使文字自然，也保留来源实际支持的内容。",
+   "modelVi": "Báo cáo giữ mục đích, đối tượng và số tiền; xác định túi là trung tâm, mới vào nhóm bổ nghĩa người dùng. Xét từ được theo cấu trúc, nêu bên làm/nhận khi cần. Quy đổi 50 tỷ thành 500亿, giữ bảng tên giả, thiếu tên thì hỏi. Không nâng vài người góp ý thành mọi khách công nhận; kiểm kết hợp từ, thời gian, phủ định, phạm vi và tách chú thích.",
    "tips": [
-    "Địa chỉ tiếng Trung đi từ LỚN đến NHỎ (ngược tiếng Việt): 河内市龙边郡.",
-    "Văn giới thiệu doanh nghiệp ưa khuôn: 成立于…, 位于…, 从事…, 达…, 本着…的精神.",
-    "Kiểm tra số: 500 tỷ = 500 × 10⁹ = 5000 × 10⁸ = 5000亿."
+    "Dùng trường hợp cụ thể để giải lý do sửa.",
+    "Chép phép tính đơn vị ra nháp trước khi nộp."
    ],
    "checklist": [
-    "Không có 被 thừa",
-    "Địa chỉ từ lớn đến nhỏ",
-    "Liệt kê + 等 + danh từ chung",
-    "Số tiền quy đổi đúng, có 越南盾",
-    "Có 本着…的精神 hoặc tương đương"
-   ]
-  },
-  {
-   "k": "write",
-   "h": "Viết 2 – Dịch Việt → Trung: đoạn văn hoá",
-   "task": "Dịch sang tiếng Trung:\n«Cà phê phin là nét văn hoá đặc trưng của người Việt. Khác với cà phê pha máy, cà phê phin được pha chậm rãi: nước sôi nhỏ từng giọt qua lớp bột cà phê, mất khoảng năm phút mới đầy ly. Người Hà Nội thích uống cà phê đen nóng vào sáng sớm, còn người Sài Gòn lại chuộng cà phê sữa đá. Ngồi bên ly cà phê, ngắm phố phường qua lại, có lẽ là cách thư giãn giản dị nhất của người Việt.»",
-   "min": 100,
-   "model": "滴漏咖啡是越南人颇具特色的饮食文化。与机器冲泡的咖啡不同，滴漏咖啡讲究一个“慢”字：沸水一滴一滴地穿过咖啡粉，大约五分钟才能滴满一杯。河内人喜欢在清晨喝一杯热的黑咖啡，西贡人则偏爱冰奶咖啡。坐在咖啡桌旁，看街上人来人往，或许是越南人最简单的放松方式。",
-   "modelVi": "Ghi chú: “nét văn hoá đặc trưng” → 颇具特色的饮食文化 (thêm 饮食 cho rõ phạm vi) · “được pha chậm rãi” → 讲究一个“慢”字 (bỏ bị động, dùng cách nói tự nhiên của người Trung) · “nhỏ từng giọt” → 一滴一滴地 · “còn người Sài Gòn lại…” → 西贡人则… (则 diễn tả đối lập, văn viết) · “chuộng” → 偏爱 · “ngắm phố phường qua lại” → 看街上人来人往.",
-   "tips": [
-    "“Khác với…” → 与…不同; “còn… lại…” → …则….",
-    "Thành ngữ bốn chữ (人来人往) giúp văn tự nhiên, nhưng đừng nhồi quá nhiều."
-   ],
-   "checklist": [
-    "Không dịch “được pha” thành 被冲泡",
-    "Có 与…不同 / 则 / 偏爱",
-    "Giữ hình ảnh văn hoá (滴漏咖啡, 冰奶咖啡)",
-    "Câu cuối mềm mại (或许是…)"
+    "Đủ 300–400 chữ Hán.",
+    "Giải đúng trung tâm và đối tượng bổ nghĩa.",
+    "Có50 tỷ = 500亿越南盾.",
+    "Không thêm sự hài lòng, chứng nhận hay tên chính thức chưa có."
    ]
   }
  ],
  "exercises": [
   {
    "t": "listen",
-   "say": "会议于昨天上午在河内举行。",
+   "say": "先确认中心语，再调整定语的位置。",
    "lang": "zh-CN",
-   "q": "Thông tin nào đúng?",
+   "q": "Bước nào trước?",
    "o": [
-    "Hội nghị bị hoãn ở Hà Nội",
-    "Hội nghị được tổ chức tại Hà Nội sáng hôm qua",
-    "Hội nghị sẽ tổ chức tại Hà Nội sáng mai",
-    "Hội nghị được tổ chức tại TP. Hồ Chí Minh"
-   ],
-   "a": 1,
-   "e": "于昨天上午 = vào sáng hôm qua; 在河内举行 = được tổ chức tại Hà Nội (không dùng 被)."
-  },
-  {
-   "t": "listen",
-   "say": "这座寺庙建于十一世纪，深受当地人喜爱。",
-   "lang": "zh-CN",
-   "q": "Ngôi chùa được xây dựng khi nào?",
-   "o": [
-    "Thế kỷ X",
-    "Thế kỷ XII",
-    "Thế kỷ XI",
-    "Năm 1011"
+    "Đảo hết từ trước đọc",
+    "Đặt số trước tên",
+    "Xác định trung tâm trước chỉnh định ngữ"
    ],
    "a": 2,
-   "e": "建于十一世纪 = xây dựng vào thế kỷ XI; 深受…喜爱 = được… yêu thích."
+   "e": "先…再… giữ trình tự phân tích quan hệ rồi sắp cấu trúc."
   },
   {
    "t": "listen",
-   "say": "我在河内学了三年汉语了，现在还在学。",
+   "say": "原文金额应折合五百亿越南盾。",
    "lang": "zh-CN",
-   "q": "Câu nào đúng với người nói?",
+   "q": "Số đúng theo đơn vị 亿 là gì?",
    "o": [
-    "Đã học tiếng Trung ở Hà Nội 3 năm và vẫn đang học",
-    "Đã học ở Hà Nội 3 tháng",
-    "Đã thôi học tiếng Trung",
-    "Sẽ học tiếng Trung 3 năm nữa"
+    "500亿越南盾",
+    "50亿越南盾",
+    "5亿越南盾"
    ],
    "a": 0,
-   "e": "学了三年汉语了 (hai chữ 了) = đã học 3 năm tính đến nay và vẫn tiếp tục; 现在还在学 xác nhận."
+   "e": "50 × 10^9 = 500 × 10^8. Đơn vị tiền không thay dù đơn vị đếm đổi."
+  },
+  {
+   "t": "mc",
+   "q": "Bản dịch tự nhiên có đủ chứng minh đúng ý chưa?",
+   "o": [
+    "Chưa, vẫn phải kiểm quan hệ và phạm vi",
+    "Đủ vì người đọc thấy hay",
+    "Đủ nếu có thành ngữ"
+   ],
+   "a": 0,
+   "e": "Câu thuận vẫn có thể đổi người, điều kiện hoặc lượng từ."
+  },
+  {
+   "t": "mc",
+   "q": "Tên người chưa có cách viết Hán nên xử lý thế nào?",
+   "o": [
+    "Tự đoán từ họ quen",
+    "Mượn tên tác giả thật",
+    "Giữ Latin hoặc ghi hỏi xác nhận"
+   ],
+   "a": 2,
+   "e": "Tên riêng không có phép suy một đáp án duy nhất từ âm Hán Việt."
+  },
+  {
+   "t": "mc",
+   "q": "Cụm mới tham gia trong bài bổ nghĩa cho ai?",
+   "o": [
+    "Học viên",
+    "Vật liệu",
+    "Con số doanh thu"
+   ],
+   "a": 0,
+   "e": "Thời điểm gia nhập thuộc người dùng, không phải vật liệu."
+  },
+  {
+   "t": "mc",
+   "q": "几位试读者提出意见 có thể đổi thành gì mà giữ mức?",
+   "o": [
+    "Không ai từng góp ý",
+    "Một vài người đọc thử đưa ý kiến",
+    "Tất cả khách đều công nhận"
+   ],
+   "a": 1,
+   "e": "Hai cách còn lại đổi lượng hoặc phủ nhận lời nguồn."
+  },
+  {
+   "t": "fill",
+   "q": "Điền thuật ngữ: 先找名词短语的___。",
+   "a": "中心语",
+   "py": "zhōngxīnyǔ",
+   "e": "中心语 là thành phần trung tâm; xác định nó trước các lớp bổ nghĩa."
+  },
+  {
+   "t": "fill",
+   "q": "Điền động từ đối chiếu: 请___原文中的数字与单位。",
+   "a": "核对",
+   "py": "héduì",
+   "e": "核对 là kiểm đối chiếu số cùng đơn vị, không chỉ xem chữ số trông giống."
+  },
+  {
+   "t": "fill",
+   "q": "Điền cụm theo mẫu: 公司___二〇一四年。",
+   "a": "成立于",
+   "py": "chénglì yú",
+   "e": "成立于 nối thành lập với mốc năm trong cấu trúc tự nhiên, không bắt buộc thêm 被."
+  },
+  {
+   "t": "order",
+   "q": "Xếp các mảnh thành câu đúng quan hệ ý.",
+   "w": [
+    "再安排词序",
+    "先确认关系"
+   ],
+   "a": "先确认关系再安排词序",
+   "e": "先…再… giữ quan hệ nghĩa trước thao tác từ."
+  },
+  {
+   "t": "order",
+   "q": "Xếp các mảnh thành câu đúng quan hệ ý.",
+   "w": [
+    "不等于内容忠实",
+    "句子自然"
+   ],
+   "a": "句子自然不等于内容忠实",
+   "e": "Không đồng nhất sự tự nhiên về lời với sự trung thành nội dung."
+  },
+  {
+   "t": "match",
+   "q": "Nối khái niệm dịch với nghĩa trong quy trình biên tập.",
+   "pairs": [
+    [
+     "词序",
+     "trật tự từ"
+    ],
+    [
+     "中心语",
+     "thành phần trung tâm"
+    ],
+    [
+     "单位",
+     "đơn vị"
+    ],
+    [
+     "专名",
+     "tên riêng"
+    ]
+   ],
+   "e": "词序 là trật tự từ, 中心语 là thành phần trung tâm, 单位 là đơn vị và 专名 là tên riêng. Mỗi mục cần được kiểm trong quan hệ với nguồn."
   },
   {
    "t": "dict",
-   "say": "饮水思源，我们不能忘记老一辈的付出。",
+   "say": "不能只按原文顺序排列词语。",
+   "a": "不能只按原文顺序排列词语。",
+   "py": "Bùnéng zhǐ àn yuánwén shùnxù páiliè cíyǔ.",
    "lang": "zh-CN",
-   "a": "饮水思源，我们不能忘记老一辈的付出。",
-   "py": "Yǐnshuǐ sīyuán, wǒmen bù néng wàngjì lǎo yí bèi de fùchū.",
-   "e": "饮水思源 = uống nước nhớ nguồn; 老一辈 = thế hệ đi trước; 付出 = công sức bỏ ra."
-  },
-  {
-   "t": "mc",
-   "q": "Dịch đúng: “Tôi học tiếng Trung ở Hà Nội ba năm rồi.”",
-   "o": [
-    "我学汉语在河内三年了。",
-    "我三年在河内学了汉语。",
-    "我在河内学了三年汉语了。",
-    "在河内我学了汉语三年。"
-   ],
-   "a": 2,
-   "e": "Nơi chốn 在河内 trước động từ; thời lượng 三年 sau động từ, trước tân ngữ: 学了三年汉语."
-  },
-  {
-   "t": "mc",
-   "q": "“Hội nghị được tổ chức tại Đà Nẵng.”",
-   "o": [
-    "会议被组织在岘港。",
-    "会议在岘港举行。",
-    "会议被岘港举行。",
-    "会议组织在岘港。"
-   ],
-   "a": 1,
-   "e": "“được tổ chức” → 举行, trạng ngữ 在岘港 trước động từ; không dùng 被."
-  },
-  {
-   "t": "mc",
-   "q": "“phương tiện giao thông công cộng” dịch là:",
-   "o": [
-    "公共交通方便",
-    "公共方便交通",
-    "交通公共手段",
-    "公共交通工具"
-   ],
-   "a": 3,
-   "e": "phương tiện (giao thông) = 交通工具. 方便 = thuận tiện – bẫy Hán Việt."
-  },
-  {
-   "t": "mc",
-   "q": "Câu Trung tương đương “Nước đến chân mới nhảy” là:",
-   "o": [
-    "临时抱佛脚",
-    "饮水思源",
-    "隔墙有耳",
-    "水滴石穿"
-   ],
-   "a": 0,
-   "e": "临时抱佛脚 = đến lúc gấp mới ôm chân Phật – cùng ý “nước đến chân mới nhảy”."
-  },
-  {
-   "t": "mc",
-   "q": "“Ủy ban nhân dân thành phố Hà Nội” dịch chuẩn là:",
-   "o": [
-    "河内市政府委员会",
-    "河内人民议会",
-    "河内市人民委员会",
-    "河内市民委员会"
-   ],
-   "a": 2,
-   "e": "UBND = 人民委员会; tên cơ quan dùng tên quen dùng (约定俗成), không tự sáng tạo."
-  },
-  {
-   "t": "fill",
-   "q": "“trình độ tiếng Trung của cô ấy rất cao” → 她的汉语______很高。",
-   "a": "水平",
-   "alt": [
-    "shuiping",
-    "shuǐpíng"
-   ],
-   "e": "trình độ (ngôn ngữ) = 水平; 程度 = mức độ."
-  },
-  {
-   "t": "fill",
-   "q": "“Thành phố Hồ Chí Minh” → ______市",
-   "a": "胡志明",
-   "alt": [
-    "huzhiming",
-    "húzhìmíng"
-   ],
-   "e": "胡志明市 Húzhìmíng Shì; Sài Gòn = 西贡."
-  },
-  {
-   "t": "order",
-   "q": "Sắp xếp: “Cuốn sách mà tôi mua hôm qua ở hiệu sách gần nhà rất hay.”",
-   "w": [
-    "很有意思",
-    "我昨天",
-    "买的那本书",
-    "在家附近的书店"
-   ],
-   "a": "我昨天在家附近的书店买的那本书很有意思",
-   "e": "Toàn bộ phần bổ nghĩa (我昨天在家附近的书店买的) đứng TRƯỚC 那本书."
-  },
-  {
-   "t": "order",
-   "q": "Sắp xếp: “Tôi gặp anh ấy ở quán cà phê lúc 8 giờ sáng nay.”",
-   "w": [
-    "见到了他",
-    "我",
-    "今天早上八点",
-    "在咖啡馆"
-   ],
-   "a": "今天早上八点我在咖啡馆见到了他",
-   "e": "Thời gian (có thể đầu câu) → chủ ngữ → nơi chốn → động từ + bổ ngữ + tân ngữ.",
-   "alt": [
-    "我今天早上八点在咖啡馆见到了他"
-   ]
-  },
-  {
-   "t": "match",
-   "q": "Nối tục ngữ Việt với câu Trung tương đương:",
-   "pairs": [
-    [
-     "Uống nước nhớ nguồn",
-     "饮水思源"
-    ],
-    [
-     "Nước chảy đá mòn",
-     "水滴石穿"
-    ],
-    [
-     "Tai vách mạch rừng",
-     "隔墙有耳"
-    ],
-    [
-     "Gần mực thì đen, gần đèn thì sáng",
-     "近朱者赤，近墨者黑"
-    ],
-    [
-     "Có công mài sắt có ngày nên kim",
-     "只要功夫深，铁杵磨成针"
-    ]
-   ],
-   "e": "Khi có câu tương đương, ưu tiên dùng (归化) – người Trung đọc thấy tự nhiên."
-  },
-  {
-   "t": "match",
-   "q": "Nối địa danh Việt Nam với tên tiếng Trung:",
-   "pairs": [
-    [
-     "Đà Nẵng",
-     "岘港"
-    ],
-    [
-     "Huế",
-     "顺化"
-    ],
-    [
-     "Nha Trang",
-     "芽庄"
-    ],
-    [
-     "Cần Thơ",
-     "芹苴"
-    ],
-    [
-     "Đà Lạt",
-     "大叻"
-    ]
-   ],
-   "e": "Địa danh dùng tên quen dùng trên báo chí Trung Quốc."
+   "e": "不能 giữ phủ định trước chỉ làm theo thứ tự gốc; câu không cấm mọi giữ trật tự, mà bác cách xử lý máy móc."
   }
  ],
  "teacher": {
-  "time": "2 buổi × 90 phút",
-  "prep": "10 câu tiếng Việt “bẫy trật tự” in trên giấy; bảng thuật ngữ cơ quan – địa danh Việt Nam (học viên điền tiếng Trung); 2 đoạn văn cần dịch (doanh nghiệp, cà phê phin); thẻ tục ngữ Việt và thẻ câu Trung tương đương để ghép.",
+  "time": "2 buổi × 90 phút, tổng 180 phút",
+  "prep": "Chuẩn bị bảng tên tự đặt Ti Hòa/Diệp Sa/Lăng Diệp, ba cụm danh từ có lớp bổ nghĩa, nháp số tiền sai và câu kết bị làm mạnh.",
   "steps": [
    {
-    "t": "Buổi 1 · 10'",
-    "do": "Khởi động: GV đọc 5 câu tiếng Trung “kiểu Việt” (bảng khởi động), học viên đoán vì sao người Trung thấy lạ. Dẫn vào khái niệm 越南式中文."
+    "t": "10 phút",
+    "do": "Cho hai cách dịch cùng câu, học viên chỉ người mới gia nhập là ai rồi chọn cách giữ đúng quan hệ."
    },
    {
-    "t": "20'",
-    "do": "Kỹ thuật 1 – trật tự câu: vẽ sơ đồ “đuôi dài” (Việt) ↔ “đầu to” (Trung). Học viên dịch 10 câu bẫy trật tự theo cặp, đổi bài sửa."
+    "t": "20 phút",
+    "do": "Dạy 20 từ theo trung tâm/bổ nghĩa/chủ thể/số/tên; mỗi nhóm tự lập một ví dụ mới."
    },
    {
-    "t": "20'",
-    "do": "Từ vựng A + Kỹ thuật 2: ba nhóm Hán Việt (dùng được / không dùng được / theo ngữ cảnh); xử lý bị/được: luyện chuyển 8 câu “được…” sang tiếng Trung không dùng 被."
+    "t": "20 phút",
+    "do": "Phân tích sáu câu ngữ pháp; viết rõ vai người làm/người nhận và phép đổi đơn vị."
    },
    {
-    "t": "20'",
-    "do": "Nghe phỏng vấn ông Phạm: lần 1 trả lời câu hỏi khởi động; lần 2 làm câu hỏi; lần 3 ghi lại 4 khó khăn ông nêu (trật tự, từ Hán Việt, bị động, tục ngữ)."
+    "t": "25 phút",
+    "do": "Nghe hai lượt, ghi quyết định và lý do; kiểm nguyên nhân bác câu mọi khách hài lòng."
    },
    {
-    "t": "15'",
-    "do": "Từ vựng B: thi điền nhanh bảng thuật ngữ cơ quan – hành chính – địa danh. Giao bài tập 1–8."
+    "t": "15 phút",
+    "do": "Nói đôi 90 giây giải thích cụm dài, bạn nghe vẽ sơ đồ để phát hiện đối tượng bị chuyển."
    },
    {
-    "t": "5'",
-    "do": "Tổng kết buổi 1."
+    "t": "10 phút",
+    "do": "Buổi hai tính ba số giả, ghi số gốc/đơn vị đếm/tiền; phân biệt giữ chữ số và giữ số lượng."
    },
    {
-    "t": "Buổi 2 · 10'",
-    "do": "Ôn: trò “Ghép tục ngữ” (xem phần trò chơi)."
+    "t": "20 phút",
+    "do": "Đọc bảy đoạn, lập bảng lỗi cấu trúc/lỗi lượng/lỗi nguồn và căn cứ cần trả lại."
    },
    {
-    "t": "15'",
-    "do": "Kỹ thuật 3: tên riêng, cơ quan, tục ngữ; thảo luận cặp “Mất bò mới lo làm chuồng” ↔ 亡羊补牢 (khác sắc thái)."
+    "t": "25 phút",
+    "do": "Nhóm duyệt bản dịch mới, tách câu hỏi chờ xác nhận với chú giải được phép bổ sung."
    },
    {
-    "t": "20'",
-    "do": "Đọc 越南人的春节: học viên đọc bản tiếng Việt trước, tự dịch 1 đoạn sang tiếng Trung, rồi đối chiếu bản Trung – ghi lại 5 cách xử lý đắt giá (柊叶, 糯米糍粑, 谐音, 第一个踏进家门的客人…)."
+    "t": "20 phút",
+    "do": "Viết 300–400 chữ, đổi bài kiểm quan hệ, tiền, tên và lời nguồn trước đánh giá phong cách."
    },
    {
-    "t": "25'",
-    "do": "Viết 1 + 2: dịch đoạn doanh nghiệp (cá nhân 12'), dịch đoạn cà phê phin (nhóm 10'); chữa chung theo checklist, nhấn địa chỉ từ lớn đến nhỏ và số tiền 越南盾."
-   },
-   {
-    "t": "15'",
-    "do": "Dịch nói: lời chào mừng của UBND tỉnh – từng học viên dịch nối tiếp, GV ghi lỗi. Làm bài tập 9–15."
-   },
-   {
-    "t": "5'",
-    "do": "Giao bài về nhà."
+    "t": "15 phút",
+    "do": "Chữa 13 bài tập rồi mỗi người nêu một thay đổi hình thức hợp lệ và một thay đổi ý không được phép."
    }
   ],
   "games": [
-   "Ghép tục ngữ: chia lớp 2 đội, một đội cầm thẻ tục ngữ Việt, đội kia cầm thẻ câu Trung; GV hô “bắt đầu”, các cặp phải tìm nhau trong 2 phút và đọc to cả hai câu.",
-   "Sửa “tiếng Trung kiểu Việt”: GV chiếu 1 câu sai (会议被组织在河内), đội nào giơ tay sửa đúng và giải thích lý do trước được điểm.",
-   "Hướng dẫn viên 60 giây: mỗi học viên bốc thăm 1 địa danh Việt Nam, giới thiệu 60 giây bằng tiếng Trung, phải dùng đúng tên Trung của địa danh và 1 câu tục ngữ."
+   "Trung tâm ở đâu: bốc cụm Việt, nhóm còn lại chỉ thành phần chính và vẽ đường bổ nghĩa.",
+   "Giữ số hay giữ lượng: hai thẻ cùng chữ số nhưng khác đơn vị, tính lại trước quyết đúng sai."
   ],
   "errors": [
-   "Đặt định ngữ sau danh từ (我买书昨天的) → toàn bộ phần bổ nghĩa + 的 đứng trước danh từ.",
-   "Đặt trạng ngữ nơi chốn/thời gian ở cuối câu (我学汉语在河内) → 在河内 đứng trước động từ.",
-   "Lạm dụng 被 để dịch “được” (会议被组织) → dùng động từ chủ động 举行, 建于, 深受…喜爱, 获得.",
-   "Mượn từ Hán Việt sai nghĩa: phương tiện → 方便, trình độ → 程度, khẩn trương → 紧张 → 交通工具, 水平, 抓紧.",
-   "Tự sáng tạo tên cơ quan/địa danh, dịch quận = 区 → dùng tên chuẩn: 人民委员会, 郡, 坊.",
-   "Dịch tục ngữ từng chữ (喝水记得水源) → tìm câu tương đương (饮水思源) hoặc dịch ý."
+   "Đảo mọi phần sau danh từ lên trước: chia lớp nghĩa và xác định đối tượng từng lớp.",
+   "Gặp được liền thêm 被: đọc cấu trúc, mục đích và xem ai thực hiện.",
+   "Giữ chữ số 50 chưa bảo đảm đúng lượng tiền: viết phép nhân theo đơn vị và so kết quả.",
+   "Đoán tên Hán từ âm Việt: giữ cách nguồn cho hoặc ghi câu hỏi xác nhận.",
+   "Thêm mọi người đồng ý cho kết đẹp: khoanh lượng từ và thái độ rồi so nguồn."
   ],
-  "homework": "Hoàn thành bài tập trong game ≥ 85%; dịch hoàn chỉnh Viết 1 và Viết 2; tự làm bảng thuật ngữ 30 mục (cơ quan, chức danh, địa danh quê mình); chọn 1 bài báo tiếng Việt ~150 chữ về văn hoá Việt và dịch sang tiếng Trung, đánh dấu các chỗ đã đảo trật tự."
+  "homework": "Tự viết đoạn Việt hư cấu bốn câu có một cụm bổ nghĩa dài, một mốc năm, một số tiền và một lời góp ý có giới hạn. Dịch sang Trung, nộp bảng tên tự đặt cùng hai câu hỏi còn cần xác nhận."
  }
 }

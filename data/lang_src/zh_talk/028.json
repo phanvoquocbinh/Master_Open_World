@@ -1,61 +1,368 @@
 {
-  "no": 28,
-  "lv": "hsk4",
-  "title": "Báo cáo tiến độ với sếp",
-  "sub": "向领导汇报工作 · Xiàng lǐngdǎo huìbào gōngzuò",
-  "situation": "Lê Văn Tuấn (黎文俊), quản lý dự án người Việt, vào phòng giám đốc Vương (王总, nữ, người Trung Quốc) báo cáo dự án phần mềm quản lý cho một nhà máy ở Hải Phòng: đã xong 70%, nhưng sẽ chậm vì khách đổi yêu cầu. Tuấn trình bày nguyên nhân, đưa 2 phương án, nói rủi ro và xin chỉ đạo. Học cách báo cáo ‘có kết luận trước – có phương án – có rủi ro’. Nghe lần 1: Tuấn chọn phương án nào? Sếp đánh giá Tuấn thế nào?",
-  "lang": "zh-CN",
-  "lines": [
-    {"s": "黎文俊", "g": "m", "t": "王总，您现在方便吗？我想跟您汇报一下海防项目的进度。", "py": "Wáng zǒng, nín xiànzài fāngbiàn ma? Wǒ xiǎng gēn nín huìbào yíxià Hǎifáng xiàngmù de jìndù.", "vi": "Chị Vương, bây giờ chị có tiện không ạ? Em muốn báo cáo chị tiến độ dự án Hải Phòng."},
-    {"s": "王总", "g": "f", "t": "方便，坐吧。现在进行到哪一步了？", "py": "Fāngbiàn, zuò ba. Xiànzài jìnxíng dào nǎ yí bù le?", "vi": "Tiện, ngồi đi. Hiện giờ làm đến bước nào rồi?"},
-    {"s": "黎文俊", "g": "m", "t": "整体来说，已经完成了百分之七十。仓库管理和采购模块都已经交付，客户试用以后反馈不错。", "py": "Zhěngtǐ lái shuō, yǐjīng wánchéngle bǎi fēn zhī qīshí. Cāngkù guǎnlǐ hé cǎigòu mókuài dōu yǐjīng jiāofù, kèhù shìyòng yǐhòu fǎnkuì búcuò.", "vi": "Nhìn chung đã hoàn thành 70%. Mô-đun quản lý kho và mua hàng đều đã bàn giao, khách dùng thử phản hồi tốt."},
-    {"s": "王总", "g": "f", "t": "很好。那按计划月底能全部完成吗？", "py": "Hěn hǎo. Nà àn jìhuà yuèdǐ néng quánbù wánchéng ma?", "vi": "Tốt lắm. Vậy theo kế hoạch cuối tháng có xong toàn bộ được không?"},
-    {"s": "黎文俊", "g": "m", "t": "这正是我要向您报告的问题。上周客户突然要求修改财务报表的格式，我们估计要推迟一个星期。", "py": "Zhè zhèng shì wǒ yào xiàng nín bàogào de wèntí. Shàng zhōu kèhù tūrán yāoqiú xiūgǎi cáiwù bàobiǎo de géshì, wǒmen gūjì yào tuīchí yí ge xīngqī.", "vi": "Đây chính là vấn đề em cần báo cáo chị. Tuần trước khách đột nhiên yêu cầu sửa định dạng báo cáo tài chính, bọn em ước tính phải lùi một tuần."},
-    {"s": "王总", "g": "f", "t": "推迟一个星期？合同上写的是月底交付，晚了是要扣钱的。", "py": "Tuīchí yí ge xīngqī? Hétong shang xiě de shì yuèdǐ jiāofù, wǎnle shì yào kòu qián de.", "vi": "Lùi một tuần? Hợp đồng ghi là cuối tháng bàn giao, trễ là bị trừ tiền đấy."},
-    {"s": "黎文俊", "g": "m", "t": "我明白。不过这次修改属于新增需求，不在原来的合同范围内。我已经让客户签了需求变更单。", "py": "Wǒ míngbai. Búguò zhè cì xiūgǎi shǔyú xīnzēng xūqiú, bú zài yuánlái de hétong fànwéi nèi. Wǒ yǐjīng ràng kèhù qiānle xūqiú biàngēng dān.", "vi": "Em hiểu ạ. Nhưng lần sửa này thuộc yêu cầu phát sinh, không nằm trong phạm vi hợp đồng ban đầu. Em đã cho khách ký phiếu thay đổi yêu cầu rồi."},
-    {"s": "王总", "g": "f", "t": "做得对，有书面的东西就好办了。那你有什么解决方案？", "py": "Zuò de duì, yǒu shūmiàn de dōngxi jiù hǎobàn le. Nà nǐ yǒu shénme jiějué fāng'àn?", "vi": "Làm đúng đấy, có giấy tờ là dễ xử lý rồi. Vậy em có phương án giải quyết gì?"},
-    {"s": "黎文俊", "g": "m", "t": "我有两个方案。第一，从别的项目调一个开发人员过来，这样只推迟三天。第二，人员不变，推迟一周，但是费用不增加。", "py": "Wǒ yǒu liǎng ge fāng'àn. Dì-yī, cóng bié de xiàngmù diào yí ge kāifā rényuán guòlai, zhèyàng zhǐ tuīchí sān tiān. Dì-èr, rényuán bú biàn, tuīchí yì zhōu, dànshì fèiyòng bù zēngjiā.", "vi": "Em có hai phương án. Một, điều một lập trình viên từ dự án khác sang, như vậy chỉ chậm ba ngày. Hai, giữ nguyên nhân sự, chậm một tuần nhưng chi phí không tăng."},
-    {"s": "王总", "g": "f", "t": "你倾向于哪个？", "py": "Nǐ qīngxiàng yú nǎge?", "vi": "Em nghiêng về phương án nào?"},
-    {"s": "黎文俊", "g": "m", "t": "我倾向于第一个。客户很在乎时间，早三天交付，对我们以后的合作有好处。", "py": "Wǒ qīngxiàng yú dì-yī ge. Kèhù hěn zàihu shíjiān, zǎo sān tiān jiāofù, duì wǒmen yǐhòu de hézuò yǒu hǎochu.", "vi": "Em nghiêng về phương án một. Khách rất coi trọng thời gian, bàn giao sớm ba ngày có lợi cho việc hợp tác sau này."},
-    {"s": "王总", "g": "f", "t": "可是别的项目也很紧，调人不容易。你先跟李经理商量一下，看他那边能不能放一个人。", "py": "Kěshì bié de xiàngmù yě hěn jǐn, diào rén bù róngyì. Nǐ xiān gēn Lǐ jīnglǐ shāngliang yíxià, kàn tā nàbiān néng bu néng fàng yí ge rén.", "vi": "Nhưng các dự án khác cũng gấp, điều người không dễ. Em bàn trước với anh Lý xem bên anh ấy có nhả ra được một người không."},
-    {"s": "黎文俊", "g": "m", "t": "好的，我今天就去找他。另外，客户希望下周二开一次视频会议，您能参加吗？", "py": "Hǎo de, wǒ jīntiān jiù qù zhǎo tā. Lìngwài, kèhù xīwàng xià zhōu'èr kāi yí cì shìpín huìyì, nín néng cānjiā ma?", "vi": "Vâng, hôm nay em đi gặp anh ấy. Ngoài ra, khách muốn thứ Ba tuần sau họp trực tuyến một buổi, chị tham gia được không ạ?"},
-    {"s": "王总", "g": "f", "t": "下周二上午我要出差，下午可以。你帮我安排在三点以后吧。", "py": "Xià zhōu'èr shàngwǔ wǒ yào chūchāi, xiàwǔ kěyǐ. Nǐ bāng wǒ ānpái zài sān diǎn yǐhòu ba.", "vi": "Sáng thứ Ba tuần sau chị đi công tác, chiều thì được. Em xếp giúp chị sau 3 giờ nhé."},
-    {"s": "黎文俊", "g": "m", "t": "没问题。还有一个风险：客户的服务器还没准备好，可能会影响上线测试。", "py": "Méi wèntí. Hái yǒu yí ge fēngxiǎn: kèhù de fúwùqì hái méi zhǔnbèi hǎo, kěnéng huì yǐngxiǎng shàngxiàn cèshì.", "vi": "Không vấn đề ạ. Còn một rủi ro: máy chủ của khách chưa chuẩn bị xong, có thể ảnh hưởng đến kiểm thử trước khi vận hành."},
-    {"s": "王总", "g": "f", "t": "这个要提前提醒客户，用邮件，正式一点儿，免得以后说不清楚。", "py": "Zhège yào tíqián tíxǐng kèhù, yòng yóujiàn, zhèngshì yìdiǎnr, miǎnde yǐhòu shuō bu qīngchu.", "vi": "Việc này phải nhắc khách trước, bằng email, trang trọng một chút, kẻo sau này nói không rõ được."},
-    {"s": "黎文俊", "g": "m", "t": "明白。今天下班以前，我把书面报告和邮件草稿发给您。", "py": "Míngbai. Jīntiān xiàbān yǐqián, wǒ bǎ shūmiàn bàogào hé yóujiàn cǎogǎo fā gěi nín.", "vi": "Em hiểu. Trước giờ tan làm hôm nay em gửi chị báo cáo bằng văn bản và bản nháp email."},
-    {"s": "王总", "g": "f", "t": "好。小黎，这次你处理得很主动，继续保持。有困难随时找我。", "py": "Hǎo. Xiǎo Lí, zhè cì nǐ chǔlǐ de hěn zhǔdòng, jìxù bǎochí. Yǒu kùnnan suíshí zhǎo wǒ.", "vi": "Được. Tiểu Lê, lần này em xử lý rất chủ động, cứ giữ vững nhé. Có khó khăn gì cứ tìm chị."},
-    {"s": "黎文俊", "g": "m", "t": "谢谢王总，我一定尽力。", "py": "Xièxie Wáng zǒng, wǒ yídìng jìnlì.", "vi": "Cảm ơn chị Vương, em nhất định cố gắng hết sức."}
-  ],
-  "phrases": [
-    {"t": "您现在方便吗？我想跟您汇报一下进度。", "py": "Nín xiànzài fāngbiàn ma? Wǒ xiǎng gēn nín huìbào yíxià jìndù.", "vi": "Bây giờ anh/chị có tiện không? Tôi muốn báo cáo tiến độ.", "note": "Mở đầu khi vào gặp cấp trên. 汇报 chỉ dùng khi báo cáo LÊN cấp trên (trang trọng); 报告 dùng rộng hơn (cũng là danh từ: 测试报告). Lỗi: nói với sếp 我想告诉你一件事 – thiếu tôn trọng, dùng 你 và 告诉 nghe như chuyện riêng."},
-    {"t": "整体来说，已经完成了百分之七十。", "py": "Zhěngtǐ lái shuō, yǐjīng wánchéngle bǎi fēn zhī qīshí.", "vi": "Nhìn chung, đã hoàn thành 70%.", "note": "Nói KẾT LUẬN trước rồi mới chi tiết – sếp Trung Quốc rất thích kiểu này. Phần trăm: 百分之 + số (đọc ngược với tiếng Việt: 百分之七十 = 70%). Lỗi: đọc 七十百分."},
-    {"t": "这正是我要向您报告的问题。", "py": "Zhè zhèng shì wǒ yào xiàng nín bàogào de wèntí.", "vi": "Đây chính là vấn đề tôi cần báo cáo anh/chị.", "note": "Câu chuyển sang tin xấu một cách chủ động. 正是 = chính là. 向 + người + 报告 (báo cáo với ai) – 向 trang trọng hơn 跟."},
-    {"t": "这属于新增需求，不在合同范围内。", "py": "Zhè shǔyú xīnzēng xūqiú, bú zài hétong fànwéi nèi.", "vi": "Cái này thuộc yêu cầu phát sinh, không nằm trong phạm vi hợp đồng.", "note": "Câu ‘bảo vệ’ dự án khi khách đổi yêu cầu. 属于 = thuộc về (văn viết/trang trọng). 需求变更单 = phiếu thay đổi yêu cầu (change request). Khẩu ngữ: 这不是合同里的."},
-    {"t": "我有两个方案。第一……第二……", "py": "Wǒ yǒu liǎng ge fāng'àn. Dì-yī…… dì-èr……", "vi": "Tôi có hai phương án. Một là… Hai là…", "note": "Báo tin xấu thì luôn mang theo phương án để sếp CHỌN, không để sếp phải nghĩ thay. 方案 fāng'àn – có dấu cách âm. Người Việt hay nói 我有两个办法 – được, nhưng 方案 chuyên nghiệp hơn."},
-    {"t": "我倾向于第一个。", "py": "Wǒ qīngxiàng yú dì-yī ge.", "vi": "Tôi nghiêng về phương án thứ nhất.", "note": "Nêu đề xuất của mình mà vẫn để quyền quyết định cho sếp. 倾向于 + lựa chọn. Thẳng hơn: 我建议选第一个。"},
-    {"t": "你先跟李经理商量一下。", "py": "Nǐ xiān gēn Lǐ jīnglǐ shāngliang yíxià.", "vi": "Bạn bàn trước với giám đốc Lý.", "note": "商量 shāngliang (thanh nhẹ) = bàn bạc để thống nhất. Lỗi người Việt: 商量李经理 (thiếu 跟) – SAI, phải 跟 + người + 商量."},
-    {"t": "还有一个风险：……", "py": "Hái yǒu yí ge fēngxiǎn: ……", "vi": "Còn một rủi ro: …", "note": "Chủ động báo rủi ro trước khi nó xảy ra – kỹ năng then chốt của quản lý dự án/QA. 风险 fēngxiǎn; 影响 yǐngxiǎng."},
-    {"t": "用邮件，正式一点儿，免得以后说不清楚。", "py": "Yòng yóujiàn, zhèngshì yìdiǎnr, miǎnde yǐhòu shuō bu qīngchu.", "vi": "Dùng email, trang trọng chút, kẻo sau này không nói rõ được.", "note": "免得 = để khỏi, kẻo (đứng đầu vế sau, nêu điều muốn tránh). 说不清楚 = bổ ngữ khả năng phủ định. Trang trọng hơn: 以免……"},
-    {"t": "我一定尽力。", "py": "Wǒ yídìng jìnlì.", "vi": "Tôi nhất định cố gắng hết sức.", "note": "Câu kết khi nhận nhiệm vụ. 一定 đọc yídìng (一 trước thanh 4). Thân mật hơn với đồng nghiệp: 放心吧！"}
-  ],
-  "qs": [
-    {"q": "Dự án đã hoàn thành bao nhiêu phần trăm?", "o": ["50%", "70%", "90%"], "a": 1, "e": "已经完成了百分之七十."},
-    {"q": "Nguyên nhân khiến dự án có thể bị chậm?", "o": ["Thiếu lập trình viên từ đầu", "Khách đột ngột yêu cầu sửa định dạng báo cáo tài chính", "Máy chủ bị hỏng"], "a": 1, "e": "上周客户突然要求修改财务报表的格式. (Máy chủ chưa sẵn sàng là một RỦI RO khác, không phải nguyên nhân chậm.)"},
-    {"q": "Vì sao sếp khen 做得对 khi biết khách đã ký phiếu thay đổi yêu cầu?", "o": ["Vì có giấy tờ chứng minh chậm trễ do khách đổi yêu cầu, công ty khó bị phạt", "Vì khách sẽ trả tiền ngay", "Vì sếp thích giấy tờ"], "a": 0, "e": "有书面的东西就好办了 – hợp đồng có điều khoản trừ tiền khi trễ; phiếu thay đổi yêu cầu là bằng chứng bảo vệ công ty. Câu hỏi suy luận."},
-    {"q": "Tuấn đề xuất chọn phương án nào?", "o": ["Giữ nguyên nhân sự, chậm 1 tuần", "Điều thêm 1 lập trình viên, chỉ chậm 3 ngày", "Yêu cầu khách huỷ thay đổi"], "a": 1, "e": "我倾向于第一个……早三天交付，对我们以后的合作有好处."},
-    {"q": "Sếp phản ứng thế nào với đề xuất của Tuấn?", "o": ["Đồng ý ngay lập tức", "Còn e ngại vì dự án khác cũng gấp, bảo Tuấn bàn với giám đốc Lý", "Từ chối thẳng"], "a": 1, "e": "别的项目也很紧，调人不容易。你先跟李经理商量一下 – chưa duyệt, cũng chưa bác."},
-    {"q": "Cuộc họp trực tuyến với khách được sắp xếp vào lúc nào?", "o": ["Sáng thứ Ba tuần sau", "Chiều thứ Ba tuần sau, sau 3 giờ", "Thứ Hai tuần sau"], "a": 1, "e": "下周二上午我要出差，下午可以……安排在三点以后."},
-    {"q": "Cuối buổi, sếp đánh giá Tuấn thế nào?", "o": ["Không hài lòng vì dự án chậm", "Khen Tuấn chủ động và động viên", "Không nói gì"], "a": 1, "e": "这次你处理得很主动，继续保持。有困难随时找我 – khen + động viên. Câu hỏi thái độ."}
-  ],
-  "exercises": [
-    {"t": "fill", "q": "我___于第一个方案。(Tôi nghiêng về phương án một)", "py": "Wǒ qīngxiàng yú dì-yī ge fāng'àn.", "a": "倾向", "alt": ["qingxiang"], "e": "倾向于 + lựa chọn = nghiêng về. Ví dụ: 大家都倾向于推迟。"},
-    {"t": "order", "q": "Sắp xếp thành câu: ‘Lần sửa này không nằm trong phạm vi hợp đồng ban đầu.’", "w": ["合同", "这次修改", "范围内", "不在", "原来的"], "a": "这次修改不在原来的合同范围内", "e": "Chủ ngữ + 不在 + định ngữ (原来的) + 合同 + 范围内. 在……内 = trong phạm vi…"},
-    {"t": "listen", "say": "这个要提前提醒客户，用邮件，正式一点儿，免得以后说不清楚。", "lang": "zh-CN", "q": "Vì sao sếp muốn nhắc khách bằng email?", "o": ["Để có văn bản làm bằng chứng, tránh tranh cãi sau này", "Vì khách không nghe điện thoại", "Vì email nhanh hơn gọi điện"], "a": 0, "e": "免得以后说不清楚 – kẻo sau này nói không rõ (không có bằng chứng ai đã báo gì)."},
-    {"t": "dict", "say": "您现在方便吗？", "lang": "zh-CN", "a": "您现在方便吗？", "py": "Nín xiànzài fāngbiàn ma?", "e": "Câu hỏi lịch sự trước khi làm phiền cấp trên. 方便 fāngbiàn."},
-    {"t": "match", "q": "Nối từ với nghĩa", "pairs": [["汇报", "báo cáo (lên cấp trên)"], ["交付", "bàn giao"], ["风险", "rủi ro"], ["方案", "phương án"], ["推迟", "lùi lại, hoãn"], ["扣钱", "trừ tiền"]], "e": "Từ vựng báo cáo dự án."}
-  ],
-  "practice": [
-    {"p": "Báo cáo sếp: dự án dịch tài liệu kỹ thuật đã xong 80%, có thể chậm 2 ngày vì khách gửi file muộn; đưa 2 phương án và nói bạn nghiêng về phương án nào.", "model": "王总，您现在方便吗？我想汇报一下翻译项目的进度。整体来说，已经完成了百分之八十。不过客户上周才把最后一批文件发过来，我们估计要推迟两天。我有两个方案：第一，请两位兼职翻译帮忙，按时交付，但费用会增加；第二，人员不变，推迟两天。我倾向于第二个，因为技术文件需要统一术语，人多了反而容易出错。您看怎么样？", "py": "Wáng zǒng, nín xiànzài fāngbiàn ma? Wǒ xiǎng huìbào yíxià fānyì xiàngmù de jìndù. Zhěngtǐ lái shuō, yǐjīng wánchéngle bǎi fēn zhī bāshí. Búguò kèhù shàng zhōu cái bǎ zuìhòu yì pī wénjiàn fā guòlai, wǒmen gūjì yào tuīchí liǎng tiān. Wǒ yǒu liǎng ge fāng'àn: dì-yī, qǐng liǎng wèi jiānzhí fānyì bāngmáng, ànshí jiāofù, dàn fèiyòng huì zēngjiā; dì-èr, rényuán bú biàn, tuīchí liǎng tiān. Wǒ qīngxiàng yú dì-èr ge, yīnwèi jìshù wénjiàn xūyào tǒngyī shùyǔ, rén duōle fǎn'ér róngyì chūcuò. Nín kàn zěnmeyàng?", "vi": "Chị Vương, chị có tiện không ạ? Em muốn báo cáo tiến độ dự án dịch. Nhìn chung đã xong 80%. Nhưng tuần trước khách mới gửi đợt file cuối, bọn em ước tính chậm hai ngày. Em có hai phương án: một là thuê thêm hai phiên dịch bán thời gian để kịp hạn nhưng chi phí tăng; hai là giữ nguyên người, chậm hai ngày. Em nghiêng về phương án hai, vì tài liệu kỹ thuật cần thống nhất thuật ngữ, đông người lại dễ sai. Chị thấy sao ạ?"},
-    {"p": "Báo cáo một rủi ro cho sếp và đề xuất gửi email chính thức cho khách.", "model": "还有一个风险需要跟您说一下：客户的测试账号到现在还没开通，如果周五以前还没有，我们就没法按时测试。我建议今天就给客户发一封正式邮件，说明情况和截止时间，免得以后说不清楚。", "py": "Hái yǒu yí ge fēngxiǎn xūyào gēn nín shuō yíxià: kèhù de cèshì zhànghào dào xiànzài hái méi kāitōng, rúguǒ zhōuwǔ yǐqián hái méiyǒu, wǒmen jiù méifǎ ànshí cèshì. Wǒ jiànyì jīntiān jiù gěi kèhù fā yì fēng zhèngshì yóujiàn, shuōmíng qíngkuàng hé jiézhǐ shíjiān, miǎnde yǐhòu shuō bu qīngchu.", "vi": "Còn một rủi ro em cần báo chị: tài khoản test của khách đến giờ vẫn chưa được mở, nếu trước thứ Sáu vẫn chưa có thì mình không thể test đúng hạn. Em đề nghị hôm nay gửi khách một email chính thức, nói rõ tình hình và hạn chót, kẻo sau này không rõ ràng."}
-  ]
+ "no": 28,
+ "lv": "hsk4",
+ "title": "Báo cáo tiến độ với sếp",
+ "sub": "向领导汇报工作 · Xiàng lǐngdǎo huìbào gōngzuò",
+ "situation": "Lê Văn Tuấn (黎文俊), quản lý dự án người Việt, vào phòng giám đốc Vương (王总, nữ, người Trung Quốc) báo cáo dự án phần mềm quản lý cho một nhà máy ở Tố Diệp: đã xong 70%, nhưng sẽ chậm vì khách đổi yêu cầu. Tuấn trình bày nguyên nhân, đưa 2 phương án, nói rủi ro và xin chỉ đạo. Học cách báo cáo ‘có kết luận trước – có phương án – có rủi ro’. Nghe lần 1: Tuấn chọn phương án nào? Sếp đánh giá Tuấn thế nào?",
+ "lang": "zh-CN",
+ "lines": [
+  {
+   "s": "黎文俊",
+   "g": "m",
+   "t": "王总，您现在方便吗？我想跟您汇报一下素叶城项目的进度。",
+   "py": "Wáng zǒng, nín xiànzài fāngbiàn ma? Wǒ xiǎng gēn nín huìbào yíxià Sùyè Chéng xiàngmù de jìndù.",
+   "vi": "Chị Vương, bây giờ chị có tiện không ạ? Em muốn báo cáo chị tiến độ dự án Tố Diệp."
+  },
+  {
+   "s": "王总",
+   "g": "f",
+   "t": "方便，坐吧。现在进行到哪一步了？",
+   "py": "Fāngbiàn, zuò ba. Xiànzài jìnxíng dào nǎ yí bù le?",
+   "vi": "Tiện, ngồi đi. Hiện giờ làm đến bước nào rồi?"
+  },
+  {
+   "s": "黎文俊",
+   "g": "m",
+   "t": "整体来说，已经完成了百分之七十。仓库管理和采购模块都已经交付，客户试用以后反馈不错。",
+   "py": "Zhěngtǐ lái shuō, yǐjīng wánchéngle bǎi fēn zhī qīshí. Cāngkù guǎnlǐ hé cǎigòu mókuài dōu yǐjīng jiāofù, kèhù shìyòng yǐhòu fǎnkuì búcuò.",
+   "vi": "Nhìn chung đã hoàn thành 70%. Mô-đun quản lý kho và mua hàng đều đã bàn giao, khách dùng thử phản hồi tốt."
+  },
+  {
+   "s": "王总",
+   "g": "f",
+   "t": "很好。那按计划月底能全部完成吗？",
+   "py": "Hěn hǎo. Nà àn jìhuà yuèdǐ néng quánbù wánchéng ma?",
+   "vi": "Tốt lắm. Vậy theo kế hoạch cuối tháng có xong toàn bộ được không?"
+  },
+  {
+   "s": "黎文俊",
+   "g": "m",
+   "t": "这正是我要向您报告的问题。上周客户突然要求修改财务报表的格式，我们估计要推迟一个星期。",
+   "py": "Zhè zhèng shì wǒ yào xiàng nín bàogào de wèntí. Shàng zhōu kèhù tūrán yāoqiú xiūgǎi cáiwù bàobiǎo de géshì, wǒmen gūjì yào tuīchí yí ge xīngqī.",
+   "vi": "Đây chính là vấn đề em cần báo cáo chị. Tuần trước khách đột nhiên yêu cầu sửa định dạng báo cáo tài chính, bọn em ước tính phải lùi một tuần."
+  },
+  {
+   "s": "王总",
+   "g": "f",
+   "t": "推迟一个星期？合同上写的是月底交付，晚了是要扣钱的。",
+   "py": "Tuīchí yí ge xīngqī? Hétong shang xiě de shì yuèdǐ jiāofù, wǎnle shì yào kòu qián de.",
+   "vi": "Lùi một tuần? Hợp đồng ghi là cuối tháng bàn giao, trễ là bị trừ tiền đấy."
+  },
+  {
+   "s": "黎文俊",
+   "g": "m",
+   "t": "我明白。不过这次修改属于新增需求，不在原来的合同范围内。我已经让客户签了需求变更单。",
+   "py": "Wǒ míngbai. Búguò zhè cì xiūgǎi shǔyú xīnzēng xūqiú, bú zài yuánlái de hétong fànwéi nèi. Wǒ yǐjīng ràng kèhù qiānle xūqiú biàngēng dān.",
+   "vi": "Em hiểu ạ. Nhưng lần sửa này thuộc yêu cầu phát sinh, không nằm trong phạm vi hợp đồng ban đầu. Em đã cho khách ký phiếu thay đổi yêu cầu rồi."
+  },
+  {
+   "s": "王总",
+   "g": "f",
+   "t": "做得对，有书面的东西就好办了。那你有什么解决方案？",
+   "py": "Zuò de duì, yǒu shūmiàn de dōngxi jiù hǎobàn le. Nà nǐ yǒu shénme jiějué fāng'àn?",
+   "vi": "Làm đúng đấy, có giấy tờ là dễ xử lý rồi. Vậy em có phương án giải quyết gì?"
+  },
+  {
+   "s": "黎文俊",
+   "g": "m",
+   "t": "我有两个方案。第一，从别的项目调一个开发人员过来，这样只推迟三天。第二，人员不变，推迟一周，但是费用不增加。",
+   "py": "Wǒ yǒu liǎng ge fāng'àn. Dì-yī, cóng bié de xiàngmù diào yí ge kāifā rényuán guòlai, zhèyàng zhǐ tuīchí sān tiān. Dì-èr, rényuán bú biàn, tuīchí yì zhōu, dànshì fèiyòng bù zēngjiā.",
+   "vi": "Em có hai phương án. Một, điều một lập trình viên từ dự án khác sang, như vậy chỉ chậm ba ngày. Hai, giữ nguyên nhân sự, chậm một tuần nhưng chi phí không tăng."
+  },
+  {
+   "s": "王总",
+   "g": "f",
+   "t": "你倾向于哪个？",
+   "py": "Nǐ qīngxiàng yú nǎge?",
+   "vi": "Em nghiêng về phương án nào?"
+  },
+  {
+   "s": "黎文俊",
+   "g": "m",
+   "t": "我倾向于第一个。客户很在乎时间，早三天交付，对我们以后的合作有好处。",
+   "py": "Wǒ qīngxiàng yú dì-yí ge. Kèhù hěn zàihu shíjiān, zǎo sān tiān jiāofù, duì wǒmen yǐhòu de hézuò yǒu hǎochu.",
+   "vi": "Em nghiêng về phương án một. Khách rất coi trọng thời gian, bàn giao sớm ba ngày có lợi cho việc hợp tác sau này."
+  },
+  {
+   "s": "王总",
+   "g": "f",
+   "t": "可是别的项目也很紧，调人不容易。你先跟李经理商量一下，看他那边能不能放一个人。",
+   "py": "Kěshì bié de xiàngmù yě hěn jǐn, diào rén bù róngyì. Nǐ xiān gēn Lǐ jīnglǐ shāngliang yíxià, kàn tā nàbiān néng bu néng fàng yí ge rén.",
+   "vi": "Nhưng các dự án khác cũng gấp, điều người không dễ. Em bàn trước với anh Lý xem bên anh ấy có nhả ra được một người không."
+  },
+  {
+   "s": "黎文俊",
+   "g": "m",
+   "t": "好的，我今天就去找他。另外，客户希望下周二开一次视频会议，您能参加吗？",
+   "py": "Hǎo de, wǒ jīntiān jiù qù zhǎo tā. Lìngwài, kèhù xīwàng xià zhōu'èr kāi yí cì shìpín huìyì, nín néng cānjiā ma?",
+   "vi": "Vâng, hôm nay em đi gặp anh ấy. Ngoài ra, khách muốn thứ Ba tuần sau họp trực tuyến một buổi, chị tham gia được không ạ?"
+  },
+  {
+   "s": "王总",
+   "g": "f",
+   "t": "下周二上午我要出差，下午可以。你帮我安排在三点以后吧。",
+   "py": "Xià zhōu'èr shàngwǔ wǒ yào chūchāi, xiàwǔ kěyǐ. Nǐ bāng wǒ ānpái zài sān diǎn yǐhòu ba.",
+   "vi": "Sáng thứ Ba tuần sau chị đi công tác, chiều thì được. Em xếp giúp chị sau 3 giờ nhé."
+  },
+  {
+   "s": "黎文俊",
+   "g": "m",
+   "t": "没问题。还有一个风险：客户的服务器还没准备好，可能会影响上线测试。",
+   "py": "Méi wèntí. Hái yǒu yí ge fēngxiǎn: kèhù de fúwùqì hái méi zhǔnbèi hǎo, kěnéng huì yǐngxiǎng shàngxiàn cèshì.",
+   "vi": "Không vấn đề ạ. Còn một rủi ro: máy chủ của khách chưa chuẩn bị xong, có thể ảnh hưởng đến kiểm thử trước khi vận hành."
+  },
+  {
+   "s": "王总",
+   "g": "f",
+   "t": "这个要提前提醒客户，用邮件，正式一点儿，免得以后说不清楚。",
+   "py": "Zhège yào tíqián tíxǐng kèhù, yòng yóujiàn, zhèngshì yìdiǎnr, miǎnde yǐhòu shuō bu qīngchu.",
+   "vi": "Việc này phải nhắc khách trước, bằng email, trang trọng một chút, kẻo sau này nói không rõ được."
+  },
+  {
+   "s": "黎文俊",
+   "g": "m",
+   "t": "明白。今天下班以前，我把书面报告和邮件草稿发给您。",
+   "py": "Míngbai. Jīntiān xiàbān yǐqián, wǒ bǎ shūmiàn bàogào hé yóujiàn cǎogǎo fā gěi nín.",
+   "vi": "Em hiểu. Trước giờ tan làm hôm nay em gửi chị báo cáo bằng văn bản và bản nháp email."
+  },
+  {
+   "s": "王总",
+   "g": "f",
+   "t": "好。小黎，这次你处理得很主动，继续保持。有困难随时找我。",
+   "py": "Hǎo. Xiǎo Lí, zhè cì nǐ chǔlǐ de hěn zhǔdòng, jìxù bǎochí. Yǒu kùnnan suíshí zhǎo wǒ.",
+   "vi": "Được. Tiểu Lê, lần này em xử lý rất chủ động, cứ giữ vững nhé. Có khó khăn gì cứ tìm chị."
+  },
+  {
+   "s": "黎文俊",
+   "g": "m",
+   "t": "谢谢王总，我一定尽力。",
+   "py": "Xièxie Wáng zǒng, wǒ yídìng jìnlì.",
+   "vi": "Cảm ơn chị Vương, em nhất định cố gắng hết sức."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "您现在方便吗？我想跟您汇报一下进度。",
+   "py": "Nín xiànzài fāngbiàn ma? Wǒ xiǎng gēn nín huìbào yíxià jìndù.",
+   "vi": "Bây giờ anh/chị có tiện không? Tôi muốn báo cáo tiến độ.",
+   "note": "Mở đầu khi vào gặp cấp trên. 汇报 chỉ dùng khi báo cáo LÊN cấp trên (trang trọng); 报告 dùng rộng hơn (cũng là danh từ: 测试报告). Lỗi: nói với sếp 我想告诉你一件事 – thiếu tôn trọng, dùng 你 và 告诉 nghe như chuyện riêng."
+  },
+  {
+   "t": "整体来说，已经完成了百分之七十。",
+   "py": "Zhěngtǐ lái shuō, yǐjīng wánchéngle bǎi fēn zhī qīshí.",
+   "vi": "Nhìn chung, đã hoàn thành 70%.",
+   "note": "Nói KẾT LUẬN trước rồi mới chi tiết – sếp Trung Quốc rất thích kiểu này. Phần trăm: 百分之 + số (đọc ngược với tiếng Việt: 百分之七十 = 70%). Lỗi: đọc 七十百分."
+  },
+  {
+   "t": "这正是我要向您报告的问题。",
+   "py": "Zhè zhèng shì wǒ yào xiàng nín bàogào de wèntí.",
+   "vi": "Đây chính là vấn đề tôi cần báo cáo anh/chị.",
+   "note": "Câu chuyển sang tin xấu một cách chủ động. 正是 = chính là. 向 + người + 报告 (báo cáo với ai) – 向 trang trọng hơn 跟."
+  },
+  {
+   "t": "这属于新增需求，不在合同范围内。",
+   "py": "Zhè shǔyú xīnzēng xūqiú, bú zài hétong fànwéi nèi.",
+   "vi": "Cái này thuộc yêu cầu phát sinh, không nằm trong phạm vi hợp đồng.",
+   "note": "Câu ‘bảo vệ’ dự án khi khách đổi yêu cầu. 属于 = thuộc về (văn viết/trang trọng). 需求变更单 = phiếu thay đổi yêu cầu (change request). Khẩu ngữ: 这不是合同里的."
+  },
+  {
+   "t": "我有两个方案。第一……第二……",
+   "py": "Wǒ yǒu liǎng ge fāng'àn. Dì-yī…… dì-èr……",
+   "vi": "Tôi có hai phương án. Một là… Hai là…",
+   "note": "Báo tin xấu thì luôn mang theo phương án để sếp CHỌN, không để sếp phải nghĩ thay. 方案 fāng'àn – có dấu cách âm. Người Việt hay nói 我有两个办法 – được, nhưng 方案 chuyên nghiệp hơn."
+  },
+  {
+   "t": "我倾向于第一个。",
+   "py": "Wǒ qīngxiàng yú dì-yí ge.",
+   "vi": "Tôi nghiêng về phương án thứ nhất.",
+   "note": "Nêu đề xuất của mình mà vẫn để quyền quyết định cho sếp. 倾向于 + lựa chọn. Thẳng hơn: 我建议选第一个。"
+  },
+  {
+   "t": "你先跟李经理商量一下。",
+   "py": "Nǐ xiān gēn Lǐ jīnglǐ shāngliang yíxià.",
+   "vi": "Bạn bàn trước với giám đốc Lý.",
+   "note": "商量 shāngliang (thanh nhẹ) = bàn bạc để thống nhất. Lỗi người Việt: 商量李经理 (thiếu 跟) – SAI, phải 跟 + người + 商量."
+  },
+  {
+   "t": "还有一个风险：……",
+   "py": "Hái yǒu yí ge fēngxiǎn: ……",
+   "vi": "Còn một rủi ro: …",
+   "note": "Chủ động báo rủi ro trước khi nó xảy ra – kỹ năng then chốt của quản lý dự án/QA. 风险 fēngxiǎn; 影响 yǐngxiǎng."
+  },
+  {
+   "t": "用邮件，正式一点儿，免得以后说不清楚。",
+   "py": "Yòng yóujiàn, zhèngshì yìdiǎnr, miǎnde yǐhòu shuō bu qīngchu.",
+   "vi": "Dùng email, trang trọng chút, kẻo sau này không nói rõ được.",
+   "note": "免得 = để khỏi, kẻo (đứng đầu vế sau, nêu điều muốn tránh). 说不清楚 = bổ ngữ khả năng phủ định. Trang trọng hơn: 以免……"
+  },
+  {
+   "t": "我一定尽力。",
+   "py": "Wǒ yídìng jìnlì.",
+   "vi": "Tôi nhất định cố gắng hết sức.",
+   "note": "Câu kết khi nhận nhiệm vụ. 一定 đọc yídìng (一 trước thanh 4). Thân mật hơn với đồng nghiệp: 放心吧！"
+  }
+ ],
+ "qs": [
+  {
+   "q": "Dự án đã hoàn thành bao nhiêu phần trăm?",
+   "o": [
+    "70%",
+    "90%",
+    "50%"
+   ],
+   "a": 0,
+   "e": "已经完成了百分之七十."
+  },
+  {
+   "q": "Nguyên nhân khiến dự án có thể bị chậm?",
+   "o": [
+    "Thiếu lập trình viên từ đầu",
+    "Khách đột ngột yêu cầu sửa định dạng báo cáo tài chính",
+    "Máy chủ bị hỏng"
+   ],
+   "a": 1,
+   "e": "上周客户突然要求修改财务报表的格式. (Máy chủ chưa sẵn sàng là một RỦI RO khác, không phải nguyên nhân chậm.)"
+  },
+  {
+   "q": "Vì sao sếp khen 做得对 khi biết khách đã ký phiếu thay đổi yêu cầu?",
+   "o": [
+    "Vì khách sẽ trả tiền ngay",
+    "Vì sếp thích giấy tờ",
+    "Vì có giấy tờ chứng minh chậm trễ do khách đổi yêu cầu, công ty khó bị phạt"
+   ],
+   "a": 2,
+   "e": "有书面的东西就好办了 – hợp đồng có điều khoản trừ tiền khi trễ; phiếu thay đổi yêu cầu là bằng chứng bảo vệ công ty. Câu hỏi suy luận."
+  },
+  {
+   "q": "Tuấn đề xuất chọn phương án nào?",
+   "o": [
+    "Điều thêm 1 lập trình viên, chỉ chậm 3 ngày",
+    "Yêu cầu khách huỷ thay đổi",
+    "Giữ nguyên nhân sự, chậm 1 tuần"
+   ],
+   "a": 0,
+   "e": "我倾向于第一个……早三天交付，对我们以后的合作有好处."
+  },
+  {
+   "q": "Sếp phản ứng thế nào với đề xuất của Tuấn?",
+   "o": [
+    "Đồng ý ngay lập tức",
+    "Còn e ngại vì dự án khác cũng gấp, bảo Tuấn bàn với giám đốc Lý",
+    "Từ chối thẳng"
+   ],
+   "a": 1,
+   "e": "别的项目也很紧，调人不容易。你先跟李经理商量一下 – chưa duyệt, cũng chưa bác."
+  },
+  {
+   "q": "Cuộc họp trực tuyến với khách được sắp xếp vào lúc nào?",
+   "o": [
+    "Chiều thứ Ba tuần sau, sau 3 giờ",
+    "Thứ Hai tuần sau",
+    "Sáng thứ Ba tuần sau"
+   ],
+   "a": 0,
+   "e": "下周二上午我要出差，下午可以……安排在三点以后."
+  },
+  {
+   "q": "Cuối buổi, sếp đánh giá Tuấn thế nào?",
+   "o": [
+    "Khen Tuấn chủ động và động viên",
+    "Không nói gì",
+    "Không hài lòng vì dự án chậm"
+   ],
+   "a": 0,
+   "e": "这次你处理得很主动，继续保持。有困难随时找我 – khen + động viên. Câu hỏi thái độ."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "我___于第一个方案。(Tôi nghiêng về phương án một)",
+   "py": "Wǒ qīngxiàng yú dì-yí ge fāng'àn.",
+   "a": "倾向",
+   "alt": [
+    "qingxiang"
+   ],
+   "e": "倾向于 + lựa chọn = nghiêng về. Ví dụ: 大家都倾向于推迟。"
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: ‘Lần sửa này không nằm trong phạm vi hợp đồng ban đầu.’",
+   "w": [
+    "合同",
+    "这次修改",
+    "范围内",
+    "不在",
+    "原来的"
+   ],
+   "a": "这次修改不在原来的合同范围内",
+   "e": "Chủ ngữ + 不在 + định ngữ (原来的) + 合同 + 范围内. 在……内 = trong phạm vi…"
+  },
+  {
+   "t": "listen",
+   "say": "这个要提前提醒客户，用邮件，正式一点儿，免得以后说不清楚。",
+   "lang": "zh-CN",
+   "q": "Vì sao sếp muốn nhắc khách bằng email?",
+   "o": [
+    "Vì email nhanh hơn gọi điện",
+    "Để có văn bản làm bằng chứng, tránh tranh cãi sau này",
+    "Vì khách không nghe điện thoại"
+   ],
+   "a": 1,
+   "e": "免得以后说不清楚 – kẻo sau này nói không rõ (không có bằng chứng ai đã báo gì)."
+  },
+  {
+   "t": "dict",
+   "say": "您现在方便吗？",
+   "lang": "zh-CN",
+   "a": "您现在方便吗？",
+   "py": "Nín xiànzài fāngbiàn ma?",
+   "e": "Câu hỏi lịch sự trước khi làm phiền cấp trên. 方便 fāngbiàn."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa",
+   "pairs": [
+    [
+     "汇报",
+     "báo cáo (lên cấp trên)"
+    ],
+    [
+     "交付",
+     "bàn giao"
+    ],
+    [
+     "风险",
+     "rủi ro"
+    ],
+    [
+     "方案",
+     "phương án"
+    ],
+    [
+     "推迟",
+     "lùi lại, hoãn"
+    ],
+    [
+     "扣钱",
+     "trừ tiền"
+    ]
+   ],
+   "e": "Từ vựng báo cáo dự án."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Báo cáo sếp: dự án dịch tài liệu kỹ thuật đã xong 80%, có thể chậm 2 ngày vì khách gửi file muộn; đưa 2 phương án và nói bạn nghiêng về phương án nào.",
+   "model": "王总，您现在方便吗？我想汇报一下翻译项目的进度。整体来说，已经完成了百分之八十。不过客户上周才把最后一批文件发过来，我们估计要推迟两天。我有两个方案：第一，请两位兼职翻译帮忙，按时交付，但费用会增加；第二，人员不变，推迟两天。我倾向于第二个，因为技术文件需要统一术语，人多了反而容易出错。您看怎么样？",
+   "py": "Wáng zǒng, nín xiànzài fāngbiàn ma? Wǒ xiǎng huìbào yíxià fānyì xiàngmù de jìndù. Zhěngtǐ lái shuō, yǐjīng wánchéngle bǎi fēn zhī bāshí. Búguò kèhù shàng zhōu cái bǎ zuìhòu yì pī wénjiàn fā guòlai, wǒmen gūjì yào tuīchí liǎng tiān. Wǒ yǒu liǎng ge fāng'àn: dì-yī, qǐng liǎng wèi jiānzhí fānyì bāngmáng, ànshí jiāofù, dàn fèiyòng huì zēngjiā; dì-èr, rényuán bú biàn, tuīchí liǎng tiān. Wǒ qīngxiàng yú dì-èr ge, yīnwèi jìshù wénjiàn xūyào tǒngyī shùyǔ, rén duōle fǎn'ér róngyì chūcuò. Nín kàn zěnmeyàng?",
+   "vi": "Chị Vương, chị có tiện không ạ? Em muốn báo cáo tiến độ dự án dịch. Nhìn chung đã xong 80%. Nhưng tuần trước khách mới gửi đợt file cuối, bọn em ước tính chậm hai ngày. Em có hai phương án: một là thuê thêm hai phiên dịch bán thời gian để kịp hạn nhưng chi phí tăng; hai là giữ nguyên người, chậm hai ngày. Em nghiêng về phương án hai, vì tài liệu kỹ thuật cần thống nhất thuật ngữ, đông người lại dễ sai. Chị thấy sao ạ?"
+  },
+  {
+   "p": "Báo cáo một rủi ro cho sếp và đề xuất gửi email chính thức cho khách.",
+   "model": "还有一个风险需要跟您说一下：客户的测试账号到现在还没开通，如果周五以前还没有，我们就没法按时测试。我建议今天就给客户发一封正式邮件，说明情况和截止时间，免得以后说不清楚。",
+   "py": "Hái yǒu yí ge fēngxiǎn xūyào gēn nín shuō yíxià: kèhù de cèshì zhànghào dào xiànzài hái méi kāitōng, rúguǒ zhōuwǔ yǐqián hái méiyǒu, wǒmen jiù méifǎ ànshí cèshì. Wǒ jiànyì jīntiān jiù gěi kèhù fā yì fēng zhèngshì yóujiàn, shuōmíng qíngkuàng hé jiézhǐ shíjiān, miǎnde yǐhòu shuō bu qīngchu.",
+   "vi": "Còn một rủi ro em cần báo chị: tài khoản test của khách đến giờ vẫn chưa được mở, nếu trước thứ Sáu vẫn chưa có thì mình không thể test đúng hạn. Em đề nghị hôm nay gửi khách một email chính thức, nói rõ tình hình và hạn chót, kẻo sau này không rõ ràng."
+  }
+ ]
 }

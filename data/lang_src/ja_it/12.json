@@ -1,0 +1,727 @@
+{
+ "no": 12,
+ "title": "Ôn tập tổng hợp 2 – Bàn giao sự cố và tổng kết có hành động kiểm được",
+ "sub": "三つの 操作の 応答は 確認しましたが、二件の 対照は 未完了です。",
+ "goals": [
+  "Dựng chuỗi thời gian từ quan sát, biện pháp giảm ảnh hưởng và kiểm sau xử lý.",
+  "Tách dịch vụ đáp lại, dữ liệu đã đối soát và nguyên nhân đã xác định.",
+  "Viết nhận xét review không gán động cơ từ hành vi quan sát.",
+  "Đề xuất việc ngừa lặp với người nhận, hạn và cách kiểm hiệu quả, không chỉ lời hứa cẩn thận."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Trong bài giả, môi trường kiểm đăng ký phiếu phản hồi chậm từ 14 giờ. Nhóm tắt gửi lại tự động lúc 14 giờ 20, màn hình đáp lại bình thường lúc 14 giờ 30, nhưng hai phiếu nghi trùng còn chờ đối chiếu. Phản hồi tốt lên chưa chứng minh dữ liệu nhất quán hoặc nguyên nhân đã giải. Bài ôn yêu cầu bàn giao theo từng trạng thái và tổng kết cách hệ thống cho phép sai sót lọt qua, thay vì đoán ai thiếu cẩn thận.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>時系列 đọc じけいれつ, 復旧 đọc ふっきゅう với nhịp っ rồi きゅう dài. 復元 đọc ふくげん khác về cách dùng trong bài: dịch vụ chạy lại với dữ liệu về trạng thái trước. 事後検証 đọc じごけんしょう, 完了判定 đọc かんりょうはんてい. Khi nói14時20分và14時30分, giữ đơn vị phút và chuỗi thời gian để người nhận không coi xử lý và kiểm phục hồi cùng lúc.</p>",
+   "items": [
+    {
+     "sym": "復旧・復元・時系列",
+     "ex": [
+      "ふっきゅう",
+      "ふくげん",
+      "じけいれつ"
+     ],
+     "vi": "Hai từ khôi phục được gắn với đối tượng khác nhau trong hồ sơ; giữ nhịp ngắt, âm mũi và trường âm."
+    },
+    {
+     "sym": "事後検証・完了判定",
+     "ex": [
+      "じごけんしょう",
+      "かんりょうはんてい"
+     ],
+     "vi": "Đọc trọn cụm kiểm sau sự cố và điều kiện kết thúc trước khi công bố trạng thái xong."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "時系列",
+     "kana": "じけいれつ",
+     "romaji": "jikeiretsu",
+     "vi": "chuỗi diễn biến theo thời gian",
+     "ex": "時系列には観察と操作を分けます。",
+     "exVi": "Tôi tách quan sát với thao tác trong chuỗi giờ."
+    },
+    {
+     "w": "初動",
+     "kana": "しょどう",
+     "romaji": "shodoo",
+     "vi": "hành động đầu khi phát hiện",
+     "ex": "初動の判断材料を残します。",
+     "exVi": "Tôi giữ căn cứ cho xử lý đầu."
+    },
+    {
+     "w": "影響軽減",
+     "kana": "えいきょうけいげん",
+     "romaji": "eikyoo keigen",
+     "vi": "giảm tác động trong lúc xử lý",
+     "ex": "影響軽減の結果を確認します。",
+     "exVi": "Tôi kiểm kết quả giảm tác động."
+    },
+    {
+     "w": "復旧確認",
+     "kana": "ふっきゅうかくにん",
+     "romaji": "fukkyuu kakunin",
+     "vi": "kiểm chức năng đã hoạt động lại",
+     "ex": "復旧確認は三操作で行います。",
+     "exVi": "Tôi kiểm hoạt động lại bằng ba thao tác."
+    },
+    {
+     "w": "未処理票",
+     "kana": "みしょりひょう",
+     "romaji": "mishori hyoo",
+     "vi": "phiếu còn chưa xử lý/đối soát",
+     "ex": "未処理票は二件残っています。",
+     "exVi": "Còn hai phiếu chưa xử lý."
+    },
+    {
+     "w": "対照表",
+     "kana": "たいしょうひょう",
+     "romaji": "taishoohyoo",
+     "vi": "bảng so hai tập liên quan",
+     "ex": "対照表で票と在庫を見ます。",
+     "exVi": "Tôi dùng bảng so phiếu với tồn."
+    },
+    {
+     "w": "根本原因",
+     "kana": "こんぽんげんいん",
+     "romaji": "konpon gen'in",
+     "vi": "nguyên nhân gốc",
+     "ex": "根本原因はまだ仮説です。",
+     "exVi": "Nguyên nhân gốc vẫn là giả thuyết."
+    },
+    {
+     "w": "寄与要因",
+     "kana": "きよよういん",
+     "romaji": "kiyo yooin",
+     "vi": "yếu tố góp phần vào sự việc",
+     "ex": "寄与要因を一つに絞りません。",
+     "exVi": "Tôi không thu yếu tố góp phần về một."
+    },
+    {
+     "w": "検出遅延",
+     "kana": "けんしゅつちえん",
+     "romaji": "kenshutsu chien",
+     "vi": "chậm phát hiện điều đã xảy ra",
+     "ex": "検出遅延の条件を調べます。",
+     "exVi": "Tôi kiểm điều kiện chậm phát hiện."
+    },
+    {
+     "w": "監視不足",
+     "kana": "かんしぶそく",
+     "romaji": "kanshi busoku",
+     "vi": "thiếu phần theo dõi cần thiết",
+     "ex": "監視不足と断定する前に記録を見ます。",
+     "exVi": "Tôi xem ghi nhận trước kết luận thiếu theo dõi."
+    },
+    {
+     "w": "再発防止策",
+     "kana": "さいはつぼうしさく",
+     "romaji": "saihatsu booshisaku",
+     "vi": "biện pháp ngừa lặp có cách kiểm",
+     "ex": "再発防止策に確認方法を付けます。",
+     "exVi": "Tôi kèm cách kiểm cho việc ngừa lặp."
+    },
+    {
+     "w": "担当引受",
+     "kana": "たんとうひきうけ",
+     "romaji": "tantoo hikiuke",
+     "vi": "người phụ trách đã nhận việc",
+     "ex": "担当引受は返事で確認します。",
+     "exVi": "Tôi kiểm nhận việc bằng phản hồi."
+    },
+    {
+     "w": "実施期限",
+     "kana": "じっしきげん",
+     "romaji": "jisshi kigen",
+     "vi": "hạn làm xong hành động",
+     "ex": "実施期限を来週火曜にします。",
+     "exVi": "Tôi đặt hạn làm xong thứ ba tuần sau."
+    },
+    {
+     "w": "効果確認",
+     "kana": "こうかかくにん",
+     "romaji": "kooka kakunin",
+     "vi": "kiểm biện pháp có đạt mục đích",
+     "ex": "効果確認は実装と別にします。",
+     "exVi": "Tôi tách kiểm hiệu quả với làm thay đổi."
+    },
+    {
+     "w": "記録欠落",
+     "kana": "きろくけつらく",
+     "romaji": "kiroku ketsuraku",
+     "vi": "thiếu bản ghi cần đối chiếu",
+     "ex": "記録欠落の範囲を明示します。",
+     "exVi": "Tôi nêu phần ghi nhận thiếu."
+    },
+    {
+     "w": "推測",
+     "kana": "すいそく",
+     "romaji": "suisoku",
+     "vi": "điều suy đoán chưa xác nhận",
+     "ex": "推測を時系列の事実に入れません。",
+     "exVi": "Tôi không đưa suy đoán vào sự việc theo giờ."
+    },
+    {
+     "w": "非難",
+     "kana": "ひなん",
+     "romaji": "hinan",
+     "vi": "quy trách móc vào người",
+     "ex": "非難より条件を調べます。",
+     "exVi": "Tôi xét điều kiện thay vì trách móc."
+    },
+    {
+     "w": "振り返り",
+     "kana": "ふりかえり",
+     "romaji": "furikaeri",
+     "vi": "xem lại sự việc để rút cách cải thiện",
+     "ex": "振り返りに未確認も残します。",
+     "exVi": "Tôi giữ cả chưa kiểm trong tổng kết."
+    },
+    {
+     "w": "完了判定",
+     "kana": "かんりょうはんてい",
+     "romaji": "kanryoo hantei",
+     "vi": "quyết đủ điều kiện kết thúc",
+     "ex": "完了判定の担当を明記します。",
+     "exVi": "Tôi ghi ai quyết kết thúc."
+    },
+    {
+     "w": "次回確認",
+     "kana": "じかいかくにん",
+     "romaji": "jikai kakunin",
+     "vi": "bước kiểm lại vào mốc tiếp",
+     "ex": "次回確認は午後五時です。",
+     "exVi": "Lần kiểm tiếp năm giờ chiều."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Ôn ～を確認しましたが…は未確認です để bàn giao nhiều trạng thái. ～の可能性がありますが根拠が足りません giữ giả thuyết nguyên nhân. ～したことと効果が出たことは別です phân làm biện pháp với hiệu quả. Review dùng なぜ…の条件になっていたかを調べたい thay vì なぜ注意しなかったか để hỏi điều kiện quan sát được. ～までに実施し、…で確認する đặt hành động cùng cách kiểm, nhưng cần người được giao đã nhận trước khi gọi cam kết.</p>",
+   "table": [
+    [
+     "Phần bàn giao",
+     "Mẫu"
+    ],
+    [
+     "Hoạt động lại",
+     "三操作の応答を確認しました"
+    ],
+    [
+     "Dữ liệu còn mở",
+     "二件の対照は未完了です"
+    ],
+    [
+     "Nguyên nhân",
+     "再送が寄与した可能性はあります"
+    ],
+    [
+     "Không gán động cơ",
+     "操作の記録はあるが意図は未確認"
+    ],
+    [
+     "Hành động kiểm được",
+     "試験を追加し再送時の結果を確認します"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "三つの 操作の 応答は 確認しましたが、二件の 対照は 未完了です。",
+     "vi": "Đã kiểm phản hồi ba thao tác, nhưng đối chiếu hai phiếu chưa xong."
+    },
+    {
+     "t": "再送が 寄与した可能性は ありますが、根本原因は 未確定です。",
+     "vi": "Gửi lại có thể góp phần, nhưng nguyên nhân gốc chưa chốt."
+    },
+    {
+     "t": "誰が 操作したかと、なぜ そうしたかは 別に 確認します。",
+     "vi": "Ai thao tác và vì sao làm được kiểm riêng."
+    },
+    {
+     "t": "試験を 追加したことと、再発を 防げることは 同じではありません。",
+     "vi": "Thêm kiểm thử khác với chứng minh ngừa lặp."
+    },
+    {
+     "t": "担当が 引き受けてから、期限と 効果確認を 合意します。",
+     "vi": "Sau khi người phụ trách nhận việc mới thống nhất hạn và cách kiểm hiệu quả."
+    }
+   ],
+   "tips": [
+    "<p>“Không đổ lỗi” không nghĩa xóa ai làm thao tác; ghi chủ thể/hành động có căn cứ và tránh suy động cơ.</p>",
+    "<p>Dịch vụ đáp lại chưa chứng minh dữ liệu đúng hoặc nguyên nhân xong.</p>",
+    "<p>Lời hứa cẩn thận không có cách kiểm; nêu thay đổi cụ thể và điều kiện xét hiệu quả.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Nhóm phân phản hồi trở lại, dữ liệu còn đối chiếu và nguyên nhân chưa chốt; tổng kết thay lời trách bằng điều kiện quy trình.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "十四時から検証環境の反応が遅くなり、二重の票が疑われています。現時点の復旧状況を教えてください。",
+     "vi": "Từ 14 giờ, môi trường kiểm phản hồi chậm và có nghi vấn phiếu trùng. Xin báo trạng thái khôi phục hiện tại."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "十四時二十分に自動再送を止め、十四時半には三つの操作で通常の応答を確認しました。ただ、二件の票と在庫はまだ対照していません。",
+     "vi": "Lúc 14 giờ 20 chúng tôi tắt gửi lại tự động. Đến 14 giờ 30, ba thao tác phản hồi bình thường, nhưng hai phiếu và tồn vẫn chưa đối chiếu."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "では復旧済みと書いて、原因の調査だけを後へ回してよいでしょうか。利用側には早く安心してもらいたいです。",
+     "vi": "Vậy ghi đã phục hồi, chỉ để điều tra nguyên nhân sau được không? Muốn bên dùng yên tâm sớm."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "応答が戻った範囲は報告できますが、データ整合性まで完了とはしません。問い合わせにも、確認済みの操作と未処理票を分けて伝えます。",
+     "vi": "Có thể báo phạm vi phản hồi trở lại nhưng dữ liệu chưa gọi xong. Khi trả lời cũng tách thao tác đã kiểm với phiếu còn."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "再送を止めて改善したので、根本原因は再送だと決められますか。前の版でも同じかはまだ調べていません。",
+     "vi": "Tắt gửi lại rồi tốt, có kết luận nguyên nhân gốc là gửi lại không? Chưa kiểm bản trước."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "寄与した可能性の根拠にはなりますが、それだけで唯一の原因とは言えません。時刻、操作列、記録の欠落を確認してから仮説を絞ります。",
+     "vi": "Có căn cứ nghĩ góp phần nhưng chưa nguyên nhân duy nhất. Cần giờ, chuỗi thao tác, phần thiếu ghi để hẹp giả thuyết."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "レビューでは、担当が慌てて二回押したと書かれています。記録には二回の送信はありますが、慌てたかまでは分かりません。",
+     "vi": "Review viết người phụ trách vội nên bấm hai. Ghi có hai gửi, không biết có vội."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "その表現は観察と推測を分けて直しましょう。二回送れる状態だった理由や、返事が遅いときの案内も振り返りの対象です。",
+     "vi": "Ta sửa tách quan sát/suy đoán. Cũng tổng kết vì sao có trạng thái gửi hai và hướng dẫn khi chậm."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "再発防止策を、担当者は注意する、から、再送を含む試験と結果の対照を追加する、へ変えます。実施は来週火曜の案です。",
+     "vi": "Tôi đổi ngừa lặp từ cẩn thận thành thêm kiểm có gửi lại và so kết quả. Đề xuất làm thứ ba tuần sau."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "担当引受を確認してから期限を合意してください。追加しただけで効果確認済みとはせず、期待した結果をどの条件で確かめるかも残しましょう。",
+     "vi": "Hãy kiểm người nhận rồi chốt hạn. Thêm chưa là hiệu quả xong, giữ cả điều kiện kiểm kỳ vọng."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "次の班には、応答確認、未処理二件、原因仮説、再発防止の引受待ちを四項目で渡します。午後五時に更新します。",
+     "vi": "Tôi bàn giao ca sau bốn mục: phản hồi đã kiểm, hai phiếu chưa xử lý, giả thuyết nguyên nhân và việc ngừa lặp đang chờ nhận. Năm giờ chiều cập nhật tiếp."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "お願いします。完了判定は、応答だけでなく対照と連絡の状態を見て責任者が行う形にし、受領の返事も別に確認しましょう。",
+     "vi": "Nhờ bạn. Người trách nhiệm xét kết thúc theo cả phản hồi, đối chiếu và liên lạc; cũng kiểm riêng nhận bàn giao."
+    }
+   ],
+   "qs": [
+    {
+     "q": "十四時半に確認したものは何ですか。",
+     "o": [
+      "三操作の通常応答",
+      "全データ整合性",
+      "根本原因の確定"
+     ],
+     "a": 0,
+     "e": "Phản hồi ba thao tác là phạm vi xác nhận, không mở sang dữ liệu/căn nguyên."
+    },
+    {
+     "q": "再送を止めた後の改善から言える範囲は何ですか。",
+     "o": [
+      "唯一原因が証明された",
+      "全ての仮説が無価値",
+      "寄与の可能性で唯一原因は未確定"
+     ],
+     "a": 2,
+     "e": "Biến đổi sau can thiệp hỗ trợ giả thuyết nhưng chưa chứng minh nguyên nhân duy nhất."
+    },
+    {
+     "q": "慌てて二回押したという文の問題は何ですか。",
+     "o": [
+      "担当者を全て省くべき",
+      "操作記録から心理を推測している",
+      "二回の送信記録が必ず嘘"
+     ],
+     "a": 1,
+     "e": "Có thao tác quan sát, chưa có căn cứ động cơ/tâm lý, cần tách."
+    },
+    {
+     "q": "再発防止策に必要なものは何ですか。",
+     "o": [
+      "担当引受、期限、効果の確認条件",
+      "注意するという一文だけ",
+      "実装したら効果確認不要"
+     ],
+     "a": 0,
+     "e": "Cải thiện cụ thể cần người nhận và cách xem có mục đích đạt không."
+    },
+    {
+     "q": "五時の更新で分けるものは何ですか。",
+     "o": [
+      "全て復旧済みの一項目",
+      "全て原因不明の一項目",
+      "応答、未処理、仮説、引受待ち"
+     ],
+     "a": 2,
+     "e": "Bốn trạng thái có bằng chứng và người tiếp khác, không gom xong hoặc không biết toàn bộ."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "架空の貸出アプリの検証環境で、十四時から応答が遅くなった。担当者は同じ操作列で二回の送信を確認し、二件の票が重複している可能性を記録した。十四時二十分に自動再送を止め、十四時半に三つの操作で通常の応答を確認した。しかし、票と在庫の対照はまだ終わっていなかった。初回の報告は、応答が戻ったことだけをもって、全て復旧済みと書きかけていた。\n\nチームは、サービスが応答する状態、作られたデータが整合する状態、原因の説明が確認された状態を分けた。応答の確認が済めば、その範囲は伝えられる。一方、未処理票が二件残ることや、在庫への影響が未確認であることも同じ更新に含める。利用側を安心させたいからといって、未確認を消すことはできない。逆に、原因が未確定だからといって、確認できた復旧の範囲まで隠す必要もない。\n\n時系列には、観察と操作と推測を別に残した。送信が二回あったことは記録から確認できたが、担当者が慌てたという心理は確認していない。誰がどの操作をしたかを省くことが非難しない振り返りなのではない。根拠のある行動を残し、意図や性格の評価へ広げないことが大切である。二回送れる状態や、返事が遅いときの案内がどうなっていたかも、寄与要因の候補として検討する。\n\n自動再送を止めて応答が改善したことは、一つの仮説を支える観察である。しかし、同時刻の別の変更や、前の版の動作はまだ調べていない。根本原因が再送だけだと断定するには、同じ条件での比較や記録の照合が必要になる。記録が欠けた部分は、その不足を明示する。原因を一つに早くまとめることと、説明を検証できることは同じではない。仮説を絞るための次の確認を決める。\n\n再発防止策の初案は、担当者が注意するというものだった。会議では、それだけでは実施したかも効果があったかも確かめにくいと指摘された。案を、再送を含む試験例を追加し、票と在庫の期待結果を対照する手順を設ける、という行動へ変えた。担当者の引受を確認してから実施期限を合意し、変更を入れたことと、その条件で再発を防げたことを分けて記録する。\n\n次の班への引継ぎは、応答の復旧確認、未処理二件の対照、原因仮説の検証、再発防止策の引受待ちという四項目にした。午後五時に結果か未完了の理由を更新する。受領の返事をもらうことも、全ての課題を閉じたという承認とは別である。完了判定は責任者が各項目の根拠を見て行い、利用側へ何を伝えたかも確認する。事故の説明をきれいな物語にするより、次の人がどこから調べればよいかを示すことを優先した。",
+   "vi": "Ứng dụng mượn đồ giả phản hồi chậm từ 14 giờ. Người phụ trách xác nhận hai lần gửi trong cùng chuỗi thao tác và ghi khả năng hai phiếu trùng. Lúc 14 giờ 20 họ tắt gửi lại tự động; 14 giờ 30 kiểm ba thao tác phản hồi bình thường. Nhưng đối chiếu phiếu và tồn chưa xong. Bản báo đầu định gọi mọi thứ đã khôi phục chỉ vì phản hồi trở lại.\n\nNhóm tách ba trạng thái: dịch vụ phản hồi, dữ liệu nhất quán và giải thích nguyên nhân đã được kiểm. Có thể báo phần phản hồi đã xác nhận, đồng thời giữ hai phiếu chưa xử lý và ảnh hưởng tồn chưa rõ trong cùng bản cập nhật. Muốn bên dùng yên tâm không phải lý do bỏ phần chưa biết; ngược lại chưa rõ nguyên nhân cũng không cần giấu phạm vi đã phục hồi.\n\nChuỗi thời gian ghi riêng quan sát, thao tác và suy đoán. Hai lần gửi có căn cứ trong bản ghi, nhưng tâm lý vội chưa được xác nhận. Tổng kết không đổ lỗi không phải xóa ai thao tác gì, mà giữ hành động có căn cứ và tránh mở thành ý định hay tính cách. Trạng thái cho phép gửi hai lần và hướng dẫn lúc phản hồi chậm cũng là yếu tố góp phần cần xét.\n\nTắt gửi lại rồi phản hồi tốt lên là quan sát hỗ trợ một giả thuyết. Nhưng thay đổi khác cùng lúc và hành vi bản trước còn chưa kiểm. Muốn chốt nguyên nhân duy nhất cần so cùng điều kiện và đối chiếu bản ghi. Phần ghi nhận thiếu phải hiện rõ. Chốt một nguyên nhân nhanh khác với có giải thích kiểm được; cần bước tiếp để thu hẹp giả thuyết.\n\nNgừa lặp ban đầu là người phụ trách cẩn thận hơn. Cuộc họp chỉ ra khó kiểm đã làm hoặc có hiệu quả không. Họ đổi thành thêm ví dụ gửi lại và bước so phiếu, tồn với kỳ vọng. Chỉ sau khi người phụ trách nhận mới chốt hạn. Ghi riêng việc thêm thay đổi với việc kiểm điều kiện ấy đã ngăn tái diễn.\n\nBàn giao ca sau có bốn mục: kiểm phản hồi, đối chiếu hai phiếu, kiểm giả thuyết và ngừa lặp chờ nhận việc. Năm giờ chiều cập nhật kết quả hoặc lý do chưa xong. Xác nhận nhận bàn giao khác với duyệt đóng mọi việc. Người trách nhiệm xét từng căn cứ và kiểm đã báo bên dùng điều gì. Ưu tiên cho người sau biết bắt đầu điều tra từ đâu thay vì viết một câu chuyện đẹp.",
+   "gloss": [
+    {
+     "w": "時系列",
+     "kana": "じけいれつ",
+     "romaji": "jikeiretsu",
+     "vi": "chuỗi diễn biến theo thời gian"
+    },
+    {
+     "w": "復旧確認",
+     "kana": "ふっきゅうかくにん",
+     "romaji": "fukkyuu kakunin",
+     "vi": "kiểm chức năng đã hoạt động lại"
+    },
+    {
+     "w": "未処理票",
+     "kana": "みしょりひょう",
+     "romaji": "mishori hyoo",
+     "vi": "phiếu còn chưa xử lý/đối soát"
+    },
+    {
+     "w": "根本原因",
+     "kana": "こんぽんげんいん",
+     "romaji": "konpon gen'in",
+     "vi": "nguyên nhân gốc"
+    },
+    {
+     "w": "寄与要因",
+     "kana": "きよよういん",
+     "romaji": "kiyo yooin",
+     "vi": "yếu tố góp phần vào sự việc"
+    },
+    {
+     "w": "再発防止策",
+     "kana": "さいはつぼうしさく",
+     "romaji": "saihatsu booshisaku",
+     "vi": "biện pháp ngừa lặp có cách kiểm"
+    }
+   ],
+   "qs": [
+    {
+     "q": "復旧の三状態は何ですか。",
+     "o": [
+      "応答、データ整合、原因説明の確認",
+      "色、名前、担当者の年齢",
+      "全て同じ完了状態"
+     ],
+     "a": 0,
+     "e": "Ba lớp có bằng chứng riêng nên một lớp xong không thay tất cả."
+    },
+    {
+     "q": "非難しない振り返りとは何ですか。",
+     "o": [
+      "誰の操作も消す",
+      "原因を一人の性格だけにする",
+      "根拠ある操作を残し意図や性格を推測しない"
+     ],
+     "a": 2,
+     "e": "Tránh trách không xóa vai, mà giữ sự việc và giới hạn suy người."
+    },
+    {
+     "q": "再送が唯一原因と断定しない理由は何ですか。",
+     "o": [
+      "仮説を作ることが禁止",
+      "同時の変更や前版など未確認の条件がある",
+      "応答改善は一切なかった"
+     ],
+     "a": 1,
+     "e": "Có quan sát đỡ giả thuyết nhưng còn phương án khác cần kiểm."
+    },
+    {
+     "q": "注意するから変更した行動は何ですか。",
+     "o": [
+      "再送の試験と票・在庫の期待結果の対照",
+      "全記録の削除",
+      "期限のない個人の誓い"
+     ],
+     "a": 0,
+     "e": "Hành động kiểm được thay lời hứa chung, cần người/hạn/hiệu quả."
+    },
+    {
+     "q": "引継ぎで優先したものは何ですか。",
+     "o": [
+      "全て解決した物語を作る",
+      "未完了を隠す",
+      "次の人が調べる出発点を明示する"
+     ],
+     "a": 2,
+     "e": "Bàn giao giúp tiếp tục theo bằng chứng, không chỉ đẹp báo cáo."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thẻ mới: ba thao tác phản hồi bình thường lúc 15 giờ nhưng còn ba phiếu và nguyên nhân chưa kiểm xong; việc ngừa lặp chưa có người nhận. Báo bốn mục và mốc cập nhật 16 giờ.",
+     "model": "十五時に三つの操作で通常応答を確認しましたが、未処理票は三件残っています。原因は再送の可能性を調査中で、再発防止策の担当引受も未確認です。応答、対照、原因、引受を四項目に分け、午後四時に結果か待っている理由を更新します。完了判定はその後に責任者へ依頼します。",
+     "vi": "Lúc 15 giờ đã kiểm phản hồi bình thường của ba thao tác nhưng còn ba phiếu chưa xử lý. Đang điều tra khả năng gửi lại góp phần, việc ngừa lặp chưa có người nhận. Tôi tách phản hồi, đối chiếu, nguyên nhân và nhận việc thành bốn mục, báo kết quả hoặc lý do chờ lúc 16 giờ. Sau đó nhờ người trách nhiệm quyết kết thúc.",
+     "tips": "Dùng ba phiếu, 15 giờ và 16 giờ theo thẻ mới; không lặp hai phiếu, 14 giờ 30 và 17 giờ từ nguồn."
+    },
+    {
+     "p": "Phản hồi review viết người thao tác bất cẩn. Nêu phần có căn cứ, phần chưa biết và câu hỏi quy trình.",
+     "model": "記録で確認できるのは二回送信したことまでで、不注意だったという意図は分かりません。その評価を事実の欄から分けたいです。なぜ再送できる状態だったか、返事が遅いときの案内が十分だったかを調べ、担当者が次に何を確認すればよいかを残しませんか。",
+     "vi": "Bản ghi chỉ xác nhận hai lần gửi, chưa biết người làm có bất cẩn hay không. Tôi muốn tách đánh giá ấy khỏi cột sự việc. Ta kiểm vì sao có thể gửi lại và hướng dẫn khi phản hồi chậm có đủ không, rồi giữ bước người phụ trách cần kiểm tiếp nhé?",
+     "tips": "Không loại mọi chủ thể thao tác, chỉ giới hạn suy đoán động cơ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết bàn giao 260–350 chữ Nhật: phát hiện chậm lúc 14 giờ, tắt tự gửi lại lúc 14 giờ 20, kiểm ba thao tác bình thường lúc 14 giờ 30. Hai phiếu chưa đối chiếu và nguyên nhân chưa chốt. Việc ngừa lặp là thêm kiểm, còn chờ người nhận. Báo tiếp 17 giờ; kết thúc phải theo căn cứ từng mục.",
+   "model": "十四時から応答が遅れ、十四時二十分に自動再送を止めました。十四時半に三操作の通常応答を確認しましたが、二件の票と在庫の対照は未完了です。再送が寄与した可能性はありますが、根本原因は確定していません。二回送信した記録と、担当者の意図の推測は分けます。再発防止策は、再送を含む試験例と期待結果の対照を追加する案で、担当引受はまだ確認中です。引受後に期限と効果確認の条件を合意します。午後五時に四項目の結果か未完了の理由を更新し、受領も確認します。完了判定は応答、データ、原因、連絡の根拠を見て責任者に依頼する予定です。確認できた範囲と、次の班が調べる出発点を同じメモに残します。",
+   "modelVi": "Từ 14 giờ phản hồi chậm, 14 giờ 20 tắt tự gửi lại. Đến 14 giờ 30 kiểm ba thao tác bình thường nhưng hai phiếu và tồn chưa đối chiếu xong. Gửi lại có thể góp phần, nguyên nhân gốc chưa chốt. Hai lần gửi có ghi nhận khác với suy ý định người làm. Đề xuất ngừa lặp là thêm ví dụ gửi lại và so kỳ vọng, còn chờ xác nhận người nhận. Sau đó chốt hạn và cách kiểm hiệu quả. Năm giờ chiều báo bốn mục đã có kết quả hoặc lý do chưa xong, kiểm nhận bàn giao. Người trách nhiệm xét kết thúc theo phản hồi, dữ liệu, nguyên nhân và liên lạc. Tôi giữ phạm vi đã xác nhận và điểm ca sau cần bắt đầu kiểm trong cùng ghi chú.",
+   "min": 260,
+   "tips": [
+    "Thời điểm thao tác và kiểm kết quả phải giữ riêng.",
+    "Báo nguyên nhân là giả thuyết nếu chưa đủ kiểm, không gọi người vi phạm khi chỉ có suy đoán."
+   ],
+   "checklist": [
+    "Đúng ba mốc thời gian và thao tác.",
+    "Giữ hai phiếu cùng nguyên nhân chưa xong.",
+    "Ngừa lặp có hành động cụ thể và còn chờ nhận.",
+    "Có 17 giờ và tiêu chí kết thúc dựa căn cứ."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “時系列” nghĩa là gì?",
+   "o": [
+    "chuỗi diễn biến theo thời gian",
+    "phiếu còn chưa xử lý/đối soát",
+    "chậm phát hiện điều đã xảy ra"
+   ],
+   "a": 0,
+   "e": "時系列には観察と操作を分けます。 → Tôi tách quan sát với thao tác trong chuỗi giờ. Từ cần nhận diện là “時系列”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “初動” nghĩa là gì?",
+   "o": [
+    "bảng so hai tập liên quan",
+    "thiếu phần theo dõi cần thiết",
+    "hành động đầu khi phát hiện"
+   ],
+   "a": 2,
+   "e": "初動の判断材料を残します。 → Tôi giữ căn cứ cho xử lý đầu. Từ cần nhận diện là “初動”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “影響軽減” nghĩa là gì?",
+   "o": [
+    "biện pháp ngừa lặp có cách kiểm",
+    "giảm tác động trong lúc xử lý",
+    "nguyên nhân gốc"
+   ],
+   "a": 1,
+   "e": "影響軽減の結果を確認します。 → Tôi kiểm kết quả giảm tác động. Từ cần nhận diện là “影響軽減”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “復旧確認” nghĩa là gì?",
+   "o": [
+    "kiểm chức năng đã hoạt động lại",
+    "yếu tố góp phần vào sự việc",
+    "người phụ trách đã nhận việc"
+   ],
+   "a": 0,
+   "e": "復旧確認は三操作で行います。 → Tôi kiểm hoạt động lại bằng ba thao tác. Từ cần nhận diện là “復旧確認”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền giới hạn: 応答は確認しました___、対照は未完了です。",
+   "a": "が",
+   "e": "が nối hai trạng thái khác nhau, giữ một phần đã xác nhận cùng phần còn mở."
+  },
+  {
+   "t": "fill",
+   "q": "Điền giả thuyết: 寄与した___はありますが、未確定です。",
+   "a": "可能性",
+   "e": "可能性 giữ mức có thể, không tự chứng minh nguyên nhân duy nhất."
+  },
+  {
+   "t": "fill",
+   "q": "Điền phân biệt: 実装と効果確認は___です。",
+   "a": "別",
+   "e": "Hai bước khác nhau, làm xong biện pháp chưa đủ nói đã đạt mục đích."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu cập nhật khi chưa xong.",
+   "w": [
+    "未完了の理由を共有します。",
+    "結果がなければ、"
+   ],
+   "a": "結果がなければ、未完了の理由を共有します。",
+   "e": "Cam kết thông tin vẫn thực hiện khi chưa có kết quả, không để người nhận chờ vô thời hạn."
+  },
+  {
+   "q": "どこまで完了していますか。",
+   "o": [
+    "応答の範囲でデータ対照は未完了",
+    "全てのデータと原因が確定",
+    "何も一切確認していない"
+   ],
+   "a": 0,
+   "e": "Giữ từng phần kiểm được và phần chưa, không gom toàn bộ xong/chưa.",
+   "t": "listen",
+   "say": "応答は戻りましたが、未処理票三件はまだ照合中です。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "期限の約束はどう扱いますか。",
+   "o": [
+    "依頼だけで確約済みにする",
+    "担当の不履行と断定する",
+    "本人の引受を確認してから合意する"
+   ],
+   "a": 2,
+   "e": "Lời nhờ khác nhận cam kết, chưa nên tự hứa thay hoặc quy không làm.",
+   "t": "listen",
+   "say": "担当へ依頼しましたが、引受の返事はまだです。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "観察と 推測を 分けて 時系列に 残します。",
+   "a": "観察と 推測を 分けて 時系列に 残します。",
+   "lang": "ja-JP",
+   "e": "Ghi theo giờ cần nêu sự việc có căn cứ khác suy tâm lý/nguyên nhân, để người sau kiểm tiếp được."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "未処理票",
+     "phiếu còn chưa xử lý/đối soát"
+    ],
+    [
+     "対照表",
+     "bảng so hai tập liên quan"
+    ],
+    [
+     "根本原因",
+     "nguyên nhân gốc"
+    ],
+    [
+     "寄与要因",
+     "yếu tố góp phần vào sự việc"
+    ],
+    [
+     "検出遅延",
+     "chậm phát hiện điều đã xảy ra"
+    ]
+   ],
+   "e": "時系列 giữ thứ tự, 初動 là phản ứng đầu, 影響軽減 giảm tác động, 復旧確認 kiểm hoạt động lại, 未処理票 còn đối soát; không có một nhãn xong tự thay tất cả."
+  },
+  {
+   "q": "復旧の三状態は何ですか。",
+   "o": [
+    "応答、データ整合、原因説明の確認",
+    "色、名前、担当者の年齢",
+    "全て同じ完了状態"
+   ],
+   "a": 0,
+   "e": "Ba lớp có bằng chứng riêng nên một lớp xong không thay tất cả.",
+   "t": "mc"
+  },
+  {
+   "q": "非難しない振り返りとは何ですか。",
+   "o": [
+    "根拠ある操作を残し意図や性格を推測しない",
+    "誰の操作も消す",
+    "原因を一人の性格だけにする"
+   ],
+   "a": 0,
+   "e": "Tránh trách không xóa vai, mà giữ sự việc và giới hạn suy người.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Tạo log giả ở 14 giờ, 14 giờ 20 và 14 giờ 30; hai phiếu chưa đối chiếu, bảng giả thuyết và việc ngừa lặp chưa có người nhận. Không dùng log thật.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Xếp quan sát và thao tác theo giờ, loại suy đoán tâm lý khỏi cột sự việc mà không xóa chủ thể có căn cứ."
+   },
+   {
+    "t": "30'",
+    "do": "Ôn daily, báo lỗi, review và email qua ba trạng thái phục hồi; luyện câu hỏi điều kiện thay lời trách."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe bàn giao, ghi bốn mục và điều cần cho quyết kết thúc; đánh dấu lời hứa chưa có người nhận."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc tổng kết, phân giả thuyết với căn nguyên, biến lời cẩn thận thành hành động cùng cách kiểm."
+   },
+   {
+    "t": "30'",
+    "do": "Nói theo thẻ 15 giờ và ba phiếu rồi viết 260–350 chữ; đổi bài kiểm số, mốc và phần chưa biết có được giữ đúng không."
+   },
+   {
+    "t": "30'",
+    "do": "Đóng vai ca tiếp theo hỏi bằng chứng, làm nghe-chính tả và tạo bản hành động có người/hạn/điều kiện hiệu quả."
+   }
+  ],
+  "games": [
+   "Nhóm nhận log thiếu một mốc, phải hỏi thay vì tự điền câu chuyện nguyên nhân mượt.",
+   "Chuyển ba lời hứa chung thành hành động kiểm được, nhóm khác tìm người nhận và cách biết đạt mục đích."
+  ],
+  "errors": [
+   "Đáp lại rồi ghi dữ liệu đúng hết: giữ hai mục riêng.",
+   "Tắt gửi lại tốt hơn là nguyên nhân duy nhất: kiểm thay khác và đối chứng.",
+   "Không đổ lỗi thành xóa ai thao tác: giữ hành động căn cứ, bỏ suy tâm lý.",
+   "Giao việc rồi coi như người kia đã nhận: xác nhận 引受 trước khi hứa hạn thay họ."
+  ],
+  "homework": "Tạo sự cố giả có ba mốc, hai trạng thái chưa xong và một hành động ngừa lặp; viết bàn giao, phản hồi review và kế hoạch kiểm hiệu quả không dùng dữ liệu thật."
+ }
+}

@@ -1,99 +1,565 @@
 {
-  "no": 12,
-  "for": "teacher",
-  "title": "Mở & vận hành lớp học tiếng Trung miễn phí",
-  "sub": "开办免费中文班 · Kāibàn miǎnfèi Zhōngwén bān",
-  "goals": [
-    "Chuẩn bị đủ điều kiện mở một lớp tiếng Trung miễn phí: mục tiêu, địa điểm, tài liệu, tuyển sinh",
-    "Thiết kế lộ trình khóa theo cấp và xếp lớp bằng bài test 20 câu kèm phỏng vấn nói",
-    "Quản lý lớp, theo dõi tiến độ và giữ động lực để giảm tỉ lệ bỏ học",
-    "Áp dụng mẫu kế hoạch 12 tuần cho khóa đầu tiên và đo hiệu quả sau khóa"
-  ],
-  "parts": [
-    {"k": "text", "h": "Trước khi mở lớp: 7 câu hỏi cần trả lời", "html": "<ol><li><b>Dạy ai, đến đâu?</b> Ví dụ: “người đi làm ở Hà Nội, từ con số 0 đến HSK 2 trong 6 tháng”. Mục tiêu càng cụ thể, tuyển sinh và giữ học viên càng dễ.</li><li><b>Mình có bao nhiêu thời gian bền vững?</b> Chọn lịch giữ được ít nhất 3 tháng liên tục (thường 2 buổi × 90 phút/tuần), cộng 1–2 giờ chuẩn bị và chữa bài mỗi tuần.</li><li><b>Hình thức nào?</b> Trực tiếp (tương tác tốt, sửa phát âm dễ), trực tuyến (không cần địa điểm, học viên ở xa vẫn học được), hoặc kết hợp.</li><li><b>Ở đâu?</b> Phòng đọc thư viện, nhà văn hóa, phòng họp công ty ngoài giờ, quán cà phê yên tĩnh, nhà riêng. Dùng địa điểm công cộng thì xin phép trước và giữ vệ sinh, giờ giấc.</li><li><b>Bao nhiêu học viên?</b> Trực tiếp 8–15, trực tuyến 6–12. Ít hơn 6 thiếu không khí luyện nói; nhiều hơn 15 khó sửa phát âm từng người.</li><li><b>Dùng tài liệu gì?</b> Các bài học trong Trung tâm Ngoại ngữ QC World đã có từ vựng, phát âm, hội thoại, bài tập tự chấm và giáo án 90 phút – học viên tự ôn được ở nhà. Không photo sách có bản quyền để phát.</li><li><b>Chi phí ẩn?</b> In ấn, nước uống, điện, phần thưởng nhỏ. Có thể dùng quỹ lớp tự nguyện, công khai thu chi trong nhóm; tuyệt đối không biến lớp miễn phí thành thu phí trá hình.</li></ol><p><b>Vấn đề lớn nhất của lớp miễn phí</b> là đăng ký dễ nên bỏ cũng dễ. Hãy tạo “chi phí cam kết” không bằng tiền: làm bài test xếp lớp, viết mục tiêu cá nhân, ký cam kết chuyên cần, nộp bài tập tuần đầu – ai làm đủ mới vào danh sách chính thức.</p>"},
-    {"k": "grammar", "h": "Lộ trình khóa học theo cấp", "html": "<p>Số buổi là khung gợi ý (mỗi buổi 90 phút, đã gồm buổi ôn và kiểm tra); điều chỉnh theo số bài thực tế của từng cấp và tiến độ lớp. Học viên cần tự học gấp đôi thời gian lên lớp.</p>", "table": [
-      ["Cấp", "Số buổi", "Thời lượng (2 buổi/tuần)", "Nội dung chính", "Đầu ra"],
-      ["Cấp 0 – Nhập môn", "6", "3 tuần", "Pinyin đầy đủ, thanh điệu, biến điệu, nét cơ bản và bút thuận, 20–30 bộ thủ đầu tiên, câu chào hỏi", "Đọc đúng pinyin bất kỳ, viết đúng thứ tự nét"],
-      ["HSK 1", "18", "9 tuần", "150 từ, câu 是/有/在, câu hỏi 吗/呢/什么, số đếm, thời gian, lượng từ cơ bản, 了 cơ bản", "Giới thiệu bản thân, hỏi đáp đơn giản; đạt đề thử HSK 1"],
-      ["HSK 2", "24", "12 tuần", "300 từ, 了/过/着, 是…的, bổ ngữ trình độ 得, so sánh 比 cơ bản", "Giao tiếp sinh hoạt hằng ngày; đạt đề thử HSK 2"],
-      ["HSK 3", "36", "18 tuần", "600 từ, viết tay chữ cấp 3, bổ ngữ kết quả/xu hướng/khả năng, câu 把/被", "Kể chuyện ngắn, viết 5–8 câu; đạt HSK 3 và HSKK sơ cấp"],
-      ["HSK 4", "48", "24 tuần", "1.200 từ, cặp liên từ, đọc đoạn văn, viết câu theo tranh, nói 2 phút", "Thảo luận chủ đề quen thuộc; đạt HSK 4 và HSKK trung cấp"],
-      ["HSK 5", "60", "30 tuần", "2.500 từ, thành ngữ thông dụng, đọc bài dài, viết 80–150 chữ", "Đọc báo phổ thông, viết đoạn văn; đạt HSK 5"],
-      ["HSK 6", "72", "36 tuần", "5.000 từ, văn viết trang trọng, tìm câu sai, viết rút gọn", "Học tập, làm việc bằng tiếng Trung; đạt HSK 6 và HSKK cao cấp"]
-    ], "tips": ["Khóa đầu tiên chỉ nên mở Nhập môn + HSK 1 (12 tuần, xem mẫu kế hoạch bên dưới). Chạy trơn tru một khóa rồi mới mở thêm lớp.", "Giữa hai cấp nên nghỉ 1–2 tuần và có bài kiểm tra chuyển cấp; học viên chưa đạt có thể học lại cùng khóa sau."]},
-    {"k": "text", "h": "Bài test xếp lớp: cách dùng", "html": "<p>Phần <b>bài tập</b> cuối chuyên đề này chính là bài test xếp lớp 20 câu tự chấm (khoảng 25 phút), chia 4 phần tăng dần độ khó:</p><ul><li><b>Câu 1–5</b>: Cấp 0 – HSK 1 (thanh điệu, chào hỏi, câu 是, câu hỏi tên, trật tự câu cơ bản).</li><li><b>Câu 6–10</b>: HSK 2 (nghe lý do, 得, 还是, thời lượng, 是…的).</li><li><b>Câu 11–15</b>: HSK 3 (câu 把, câu 比, 虽然…但是, bổ ngữ khả năng, câu 被).</li><li><b>Câu 16–20</b>: HSK 4 (即使…也, đọc hiểu, thái độ người nói, 不但…而且, câu 把 + bổ ngữ nơi chốn).</li></ul><p>Cách tổ chức: gửi đường dẫn cho người đăng ký làm tại nhà, yêu cầu chụp màn hình kết quả từng phần; sau đó gọi phỏng vấn nói 3–5 phút. Dặn rõ: <b>đây không phải bài thi</b>, đoán bừa chỉ khiến bị xếp vào lớp quá sức. Người hoàn toàn chưa học tiếng Trung không cần làm test – vào thẳng lớp Nhập môn.</p>"},
-    {"k": "grammar", "h": "Bảng quy đổi kết quả xếp lớp", "html": "<p>Một phần được coi là <b>đạt</b> khi đúng từ 4/5 câu. Xếp vào cấp ứng với phần đạt cao nhất mà <b>mọi phần dưới nó cũng đạt</b>.</p>", "table": [
-      ["Kết quả test", "Xếp vào lớp", "Ghi chú"],
-      ["Phần 1 chưa đạt", "Cấp 0 – Nhập môn", "Kể cả khi đúng lẻ tẻ ở phần sau (thường do đoán)"],
-      ["Đạt phần 1, phần 2 chưa đạt", "HSK 1", "Nếu phát âm và nói tốt, có thể vào lớp HSK 1 đang học giữa khóa"],
-      ["Đạt phần 1–2, phần 3 chưa đạt", "HSK 2", "Kiểm tra thêm khả năng viết chữ tay"],
-      ["Đạt phần 1–3, phần 4 chưa đạt", "HSK 3", "Phỏng vấn nói phải trả lời được câu hỏi cấp HSK 3"],
-      ["Đạt cả 4 phần (từ 16/20)", "HSK 4 trở lên", "Cho làm thêm đề thử HSK 4–5 và phỏng vấn dài để xếp chính xác"]
-    ], "tips": ["Kỹ năng nói thường kém hơn đọc: nếu phỏng vấn không trả lời được câu hỏi của cấp được xếp, hạ xuống 1 cấp.", "Học viên tự học lâu năm nhưng phát âm sai nhiều: xếp đúng cấp theo test, đồng thời giao lộ trình sửa phát âm riêng 4 tuần."]},
-    {"k": "grammar", "h": "Phỏng vấn nói xếp lớp (3–5 phút)", "html": "<p>Hỏi lần lượt từ dễ đến khó, dừng ở cấp mà học viên bắt đầu không trả lời được. Ghi chú nhanh về thanh điệu, âm khó (zh/ch/sh/r, ü, -n/-ng) để chuẩn bị bài sửa phát âm.</p>", "table": [
-      ["Cấp", "Câu hỏi mẫu", "Đạt khi"],
-      ["Cấp 0 – HSK 1", "你叫什么名字？你是哪国人？你家有几口人？", "Hiểu câu hỏi, trả lời bằng câu ngắn, thanh điệu tương đối đúng"],
-      ["HSK 2", "你每天几点起床？周末你常常做什么？你去过中国吗？", "Trả lời 2–3 câu, dùng được 了/过"],
-      ["HSK 3", "说说你的一个好朋友。你为什么学中文？", "Nói liền 30–60 giây, có từ nối 因为, 所以, 然后"],
-      ["HSK 4", "你觉得网上购物好不好？为什么？", "Nói 1–2 phút, có quan điểm và lý do, ít lỗi cơ bản"],
-      ["HSK 5+", "你认为城市生活和农村生活各有什么优点和缺点？", "Nói 2–3 phút, lập luận rõ, dùng được từ trừu tượng"]
-    ]},
-    {"k": "text", "h": "Quản lý lớp", "html": "<h4>Kênh liên lạc và nội quy</h4><ul><li>Một nhóm chat cho cả lớp: thông báo, nộp bài, hỏi đáp. Ghim nội quy, lịch học, đường dẫn bài học.</li><li><b>Nội quy 5 điều</b>: đến đúng giờ; vắng thì báo trước; làm bài tập trước buổi sau; học trực tuyến thì bật camera; không chê cười người nói sai.</li><li><b>Quy tắc chuyên cần</b>: vắng quá 3 buổi không báo thì nhường chỗ cho người trong danh sách chờ – nói rõ từ buổi đầu để không ai bất ngờ.</li></ul><h4>Sổ theo dõi (bảng tính)</h4><p>Mỗi học viên một dòng: điểm danh từng buổi · bài tập (đã nộp/chưa) · điểm test xếp lớp, giữa khóa, cuối khóa · ghi chú phát âm và điểm yếu. Cập nhật ngay sau buổi học, mất khoảng 5 phút. Dữ liệu này giúp phát hiện sớm người sắp bỏ học và chứng minh hiệu quả lớp khi xin địa điểm hoặc tài trợ.</p><h4>Phân vai để giáo viên không ôm hết việc</h4><ul><li><b>Lớp trưởng</b>: điểm danh, nhắc lịch, mở phòng học.</li><li><b>Người nhắc thẻ</b>: mỗi tối nhắc cả lớp ôn thẻ, tổng hợp chuỗi ngày học.</li><li><b>Trợ giảng</b>: học viên khá hoặc học viên khóa trước – chữa bài tập, dẫn nhóm nhỏ luyện nói. Đây cũng là cách đào tạo giáo viên kế cận cho lớp sau.</li></ul><h4>Lớp chênh trình độ</h4><ul><li><b>Nhiệm vụ phân tầng</b>: cùng một chủ đề, nhóm cơ bản nói 3 câu, nhóm khá nói 1 phút và đặt câu hỏi ngược lại.</li><li><b>Ghép cặp mạnh – yếu</b> trong luyện hội thoại, đổi cặp mỗi buổi.</li><li>Chuẩn bị sẵn <b>bài mở rộng</b> cho người làm xong sớm (đọc thêm, viết thêm 3 câu).</li></ul><h4>Lớp trực tuyến</h4><ul><li>Chia phòng nhỏ 2–3 người khi luyện nói; giáo viên đi qua từng phòng.</li><li>Dùng bảng trắng chung, đố nhanh trực tuyến để giữ tập trung.</li><li>Muốn ghi hình buổi học cho người vắng phải xin phép cả lớp trước và chỉ chia sẻ trong nhóm lớp.</li></ul><h4>Bảo vệ thông tin học viên</h4><p>Danh sách, số điện thoại, kết quả test chỉ dùng cho việc của lớp; không đăng bảng điểm có tên lên mạng; hỏi ý kiến trước khi đăng ảnh có mặt học viên.</p>"},
-    {"k": "text", "h": "Giữ động lực – giảm tỉ lệ bỏ học", "html": "<p>Không ít lớp miễn phí chỉ còn khoảng một nửa học viên sau 1–2 tháng. Nguyên nhân thường gặp: không thấy tiến bộ, bài quá nhanh hoặc quá chậm, bận việc, không có ai nhắc. Các biện pháp đã được nhiều lớp áp dụng hiệu quả:</p><ol><li><b>Thắng nhanh</b>: buổi 1 nói được câu tự giới thiệu; tuần 3 đọc được thực đơn đơn giản. Thấy tiến bộ sớm là động lực mạnh nhất.</li><li><b>Mục tiêu viết ra giấy</b> ở buổi khai giảng; nhắc lại và đánh giá ở tuần 6 và tuần 12.</li><li><b>Mốc nhỏ có ghi nhận</b>: chứng nhận nội bộ cuối mỗi cấp, bảng tiến độ của lớp, tuyên dương chuỗi 30 ngày ôn thẻ.</li><li><b>Mỗi buổi ít nhất một hoạt động vui</b>: trò chơi, nhập vai, đố nhanh.</li><li><b>Hoạt động văn hóa</b> mỗi tháng: Tết Trung thu, viết thư pháp, gói sủi cảo, giao lưu với bạn bản ngữ (trực tiếp hoặc trực tuyến).</li><li><b>Cho học viên dạy lại</b>: mỗi buổi một học viên giảng 5 phút một điểm ngữ pháp hoặc một bộ thủ – người dạy học sâu hơn và gắn bó hơn với lớp.</li><li><b>Chăm sóc cá nhân</b>: học viên vắng 2 buổi liên tiếp → nhắn hỏi thăm (không trách móc), gửi tóm tắt bài để theo kịp.</li><li><b>Khen cụ thể</b>: “thanh 3 của bạn hôm nay chuẩn hơn hẳn” có giá trị hơn “giỏi lắm”.</li><li><b>Giáo viên cũng cần giữ sức</b>: lịch dạy bền vững, có trợ giảng, dùng giáo án sẵn, nghỉ 1–2 tuần giữa các khóa. Giáo viên kiệt sức là lý do phổ biến khiến lớp miễn phí đóng cửa.</li></ol>"},
-    {"k": "grammar", "h": "Mẫu kế hoạch 12 tuần – khóa Nhập môn + HSK 1 (2 buổi/tuần)", "html": "<p>24 buổi × 90 phút: 3 tuần đầu là Nhập môn (pinyin, chữ Hán), 9 tuần sau là HSK 1. Mỗi chủ đề HSK 1 dùng bài học tương ứng trong Trung tâm Ngoại ngữ; chọn bài theo chủ đề trong cột Buổi A/B.</p>", "table": [
-      ["Tuần", "Buổi A", "Buổi B", "Mốc / kiểm tra"],
-      ["1", "Khai giảng; tiếng Trung và chữ Hán là gì; 4 thanh điệu; 你好, 谢谢, 再见", "Thanh mẫu b p m f d t n l; vận mẫu đơn; 8 nét cơ bản", "Đọc đúng 4 thanh"],
-      ["2", "Thanh mẫu g k h j q x; vận mẫu kép", "zh ch sh r z c s; vận mẫu mũi; quy tắc viết pinyin", "Test pinyin 10 phút"],
-      ["3", "Biến điệu 3+3, 不, 一; thanh nhẹ; số đếm 1–100", "Bút thuận, 20 bộ thủ đầu tiên; câu tự giới thiệu", "Mỗi người tự giới thiệu 3 câu"],
-      ["4", "Gia đình: câu 有, lượng từ 个/口", "Nghề nghiệp: câu 是, câu hỏi 吗/呢", "Bắt đầu thử thách chuỗi 30 ngày ôn thẻ"],
-      ["5", "Ngày tháng, thứ, giờ", "Thời gian biểu, vị trí trạng ngữ thời gian", "Bài kiểm tra 30 chữ Hán"],
-      ["6", "Mua sắm: tiền, 多少/几", "Ăn uống: gọi món, 想/要", "Nhập vai cửa hàng – quán ăn; đánh giá lại mục tiêu cá nhân"],
-      ["7", "Nơi chốn: 在, 哪儿", "Phương hướng, hỏi đường", "Kiểm tra giữa khóa 30 phút"],
-      ["8", "Thời tiết; tính từ với 很/太…了", "Sở thích: 喜欢 + động từ", "Buổi văn hóa (gói sủi cảo hoặc thư pháp)"],
-      ["9", "Giao thông: 怎么, 坐", "Hẹn gặp, gọi điện: 会/能", "Ghi âm bài nói 1 phút"],
-      ["10", "Sức khỏe, đi khám bệnh", "Kể việc hôm qua với 了", "Viết nhật ký 5 câu"],
-      ["11", "Ôn tổng hợp từ vựng và ngữ pháp", "Luyện đề HSK 1 theo từng phần", "Đề thử lần 1"],
-      ["12", "Thi thử HSK 1 đủ giờ + phỏng vấn nói", "Chữa đề, tổng kết, trao chứng nhận nội bộ, tư vấn lộ trình HSK 2", "Báo cáo kết quả khóa"]
-    ]},
-    {"k": "text", "h": "Một buổi học 90 phút & checklist", "html": "<p>Khung buổi học (chi tiết phương pháp ở chuyên đề 1): <b>10'</b> khởi động, ôn bài cũ → <b>20'</b> từ mới → <b>20'</b> ngữ pháp → <b>25'</b> hội thoại, nhập vai → <b>10'</b> bài tập hoặc trò chơi → <b>5'</b> tổng kết, giao bài.</p><h4>Trước buổi học</h4><ul><li>Giáo án, slide, file âm thanh đã thử loa/mic.</li><li>Thẻ từ, giấy ô tập viết, phần thưởng nhỏ.</li><li>Danh sách điểm danh; ghi chú học viên cần hỗ trợ riêng.</li></ul><h4>Sau buổi học (15 phút)</h4><ul><li>Cập nhật sổ theo dõi.</li><li>Gửi vào nhóm lớp: tóm tắt 5 dòng, đường dẫn bài học, bài tập, hạn nộp.</li><li>Ghi 1 điều làm tốt và 1 điều cần sửa cho buổi sau.</li></ul>"},
-    {"k": "text", "h": "Mẫu thông báo tuyển sinh", "html": "<p><b>LỚP TIẾNG TRUNG MIỄN PHÍ – KHÓA NHẬP MÔN + HSK 1</b><br>Dành cho: người chưa biết tiếng Trung hoặc mới học pinyin, từ 16 tuổi.<br>Thời gian: 12 tuần, tối thứ Ba và thứ Năm, 19:00–20:30.<br>Địa điểm: (ghi rõ địa chỉ hoặc “học trực tuyến”).<br>Sĩ số: tối đa 12 người – ưu tiên người hoàn thành đủ các bước đăng ký.<br>Học viên nhận được: lộ trình rõ ràng, bài học và bài tập tự chấm, sửa phát âm trực tiếp, chứng nhận nội bộ khi hoàn thành.<br>Cam kết: tham gia ít nhất 80% số buổi, tự học khoảng 30 phút mỗi ngày.<br>Đăng ký: điền phiếu (họ tên, năm sinh, đã học tiếng Trung chưa, mục tiêu, khung giờ rảnh) trước ngày …; người đã học làm thêm bài test xếp lớp.<br><small>Thông tin cá nhân chỉ dùng để xếp lớp và liên lạc trong khóa học.</small></p><p><b>Mẹo:</b> đăng thông báo kèm 1 video 30 giây giáo viên tự giới thiệu và đọc vài câu tiếng Trung – người đăng ký sẽ tin tưởng hơn hẳn.</p>"},
-    {"k": "text", "h": "Đo hiệu quả và cải tiến sau mỗi khóa", "html": "<ul><li><b>Tỉ lệ chuyên cần</b> trung bình mỗi buổi và <b>tỉ lệ hoàn thành khóa</b> (số học viên còn ở buổi cuối / số học viên buổi đầu).</li><li><b>Điểm test</b> đầu khóa – giữa khóa – cuối khóa; tỉ lệ đạt đề thử; số học viên đi thi thật và đạt.</li><li><b>Khảo sát ẩn danh 5 câu</b>: mức độ hài lòng, tốc độ bài, phần thích nhất, phần muốn bỏ, có giới thiệu lớp cho bạn bè không.</li><li><b>Họp rút kinh nghiệm</b> với trợ giảng: giữ 3 điều tốt, sửa 3 điều chưa tốt; lưu giáo án, slide, đề kiểm tra vào một thư mục chung để khóa sau dùng lại.</li><li>Mời 1–2 học viên tiêu biểu làm trợ giảng khóa sau – lớp tự lớn lên mà giáo viên không quá tải.</li></ul>"}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "马", "q": "Câu 1. Bạn nghe thấy âm tiết mang thanh mấy?", "o": ["Thanh 1 (mā)", "Thanh 2 (má)", "Thanh 3 (mǎ)", "Thanh 4 (mà)"], "a": 2, "e": "马 mǎ (ngựa) mang thanh 3: xuống thấp rồi lên. So sánh 妈 mā, 麻 má, 骂 mà."},
-    {"t": "mc", "q": "Câu 2. 谢谢 (xièxie) nghĩa là:", "o": ["Xin lỗi", "Cảm ơn", "Tạm biệt", "Không sao"], "a": 1, "e": "谢谢 xièxie = cảm ơn. Xin lỗi: 对不起; tạm biệt: 再见; không sao: 没关系."},
-    {"t": "mc", "q": "Câu 3. 我___越南人。(Wǒ ___ Yuènánrén. – Tôi là người Việt Nam.)", "o": ["是 shì", "有 yǒu", "在 zài", "叫 jiào"], "a": 0, "e": "Câu “A là B” dùng 是: 我是越南人. 有 = có, 在 = ở, 叫 = tên là."},
-    {"t": "mc", "q": "Câu 4. Chọn câu trả lời phù hợp: 你叫什么名字？(Nǐ jiào shénme míngzi?)", "o": ["我二十岁。(Wǒ èrshí suì.)", "我是老师。(Wǒ shì lǎoshī.)", "我在河内。(Wǒ zài Hénèi.)", "我叫阿明。(Wǒ jiào Ā Míng.)"], "a": 3, "e": "Câu hỏi tên (你叫什么名字) → trả lời 我叫… Các câu khác trả lời tuổi, nghề nghiệp, nơi ở."},
-    {"t": "order", "q": "Câu 5. Sắp xếp thành câu đúng (Đây là sách của tôi):", "w": ["我的书", "是", "这"], "a": "这是我的书", "e": "Câu 是: 这 (chủ ngữ) + 是 + 我的书 (tân ngữ)."},
-    {"t": "listen", "say": "你昨天为什么没来上课？我生病了，去医院了。", "q": "Câu 6. Vì sao người thứ hai không đi học hôm qua?", "o": ["Đi du lịch", "Bị ốm, phải đi bệnh viện", "Phải đi làm thêm", "Ngủ quên"], "a": 1, "e": "Người thứ hai trả lời 我生病了，去医院了 – tôi bị ốm, đi bệnh viện."},
-    {"t": "mc", "q": "Câu 7. 他跑___很快。(Tā pǎo ___ hěn kuài. – Anh ấy chạy rất nhanh.)", "o": ["的 de", "地 de", "得 de", "了 le"], "a": 2, "e": "Động từ + 得 + bổ ngữ trình độ: 跑得很快. 的 đứng trước danh từ, 地 đứng trước động từ."},
-    {"t": "mc", "q": "Câu 8. 你喝茶___喝咖啡？(Nǐ hē chá ___ hē kāfēi? – Bạn uống trà hay cà phê?)", "o": ["或者 huòzhě", "但是 dànshì", "所以 suǒyǐ", "还是 háishi"], "a": 3, "e": "Câu hỏi lựa chọn dùng 还是. 或者 cũng là “hoặc” nhưng dùng trong câu trần thuật, không dùng để hỏi."},
-    {"t": "fill", "q": "Câu 9. 我学了两___汉语了。(Wǒ xuéle liǎng ___ Hànyǔ le. – Tôi học tiếng Trung được hai năm rồi.)", "a": "年", "alt": ["nian", "nián"], "py": "nián", "e": "Bổ ngữ thời lượng đặt giữa động từ và tân ngữ: 学了两年汉语了. 年 không cần lượng từ."},
-    {"t": "mc", "q": "Câu 10. 我是___北京来的。(Wǒ shì ___ Běijīng lái de. – Tôi đến từ Bắc Kinh.)", "o": ["从 cóng", "在 zài", "到 dào", "对 duì"], "a": 0, "e": "Cấu trúc 是…的 nhấn mạnh nơi xuất phát: 是从北京来的. 从 = từ."},
-    {"t": "mc", "q": "Câu 11. Câu nào đúng? (Tôi làm xong bài tập rồi.)", "o": ["我把写完了作业。", "我把作业写完了。", "我写把作业完了。", "把我作业写完了。"], "a": 1, "e": "Câu 把: Chủ ngữ + 把 + tân ngữ + động từ + thành phần khác (完了): 我把作业写完了."},
-    {"t": "mc", "q": "Câu 12. 今天比昨天___热。(Jīntiān bǐ zuótiān ___ rè. – Hôm nay nóng hơn hôm qua.)", "o": ["很 hěn", "非常 fēicháng", "太 tài", "更 gèng"], "a": 3, "e": "Câu so sánh 比 không dùng 很/非常/太; muốn nhấn mạnh dùng 更 hoặc 还: 今天比昨天更热."},
-    {"t": "listen", "say": "这件衣服虽然很漂亮，但是太贵了，我不买了。", "q": "Câu 13. Người nói quyết định thế nào?", "o": ["Mua ngay", "Mua vì rẻ", "Không mua vì quá đắt", "Mua tặng bạn"], "a": 2, "e": "虽然很漂亮，但是太贵了，我不买了 – tuy đẹp nhưng đắt quá, tôi không mua nữa. Ý chính nằm sau 但是."},
-    {"t": "fill", "q": "Câu 14. 这个字太难了，我看___懂。(Zhège zì tài nán le, wǒ kàn ___ dǒng. – Chữ này khó quá, tôi đọc không hiểu.)", "a": "不", "alt": ["bu", "bù"], "py": "bu", "e": "Bổ ngữ khả năng dạng phủ định: động từ + 不 + bổ ngữ kết quả → 看不懂 (đọc không hiểu)."},
-    {"t": "order", "q": "Câu 15. Sắp xếp thành câu đúng (Xe đạp của tôi bị em trai đi mất rồi):", "w": ["骑走了", "弟弟", "被", "我的自行车"], "a": "我的自行车被弟弟骑走了", "e": "Câu bị động: đối tượng + 被 + người thực hiện + động từ + bổ ngữ (骑走) + 了."},
-    {"t": "mc", "q": "Câu 16. ___明天下雨，比赛也会照常进行。", "o": ["即使", "因为", "虽然", "只有"], "a": 0, "e": "Giả thiết nhượng bộ “cho dù… cũng…”: 即使…也…. 虽然 dùng cho sự thật đã xảy ra; 只有 đi với 才; 因为 đi với 所以."},
-    {"t": "mc", "q": "Câu 17. Đọc: 小李原来打算周末去爬山，可是天气预报说周六有大雨，所以他决定改到下个周末再去。Hỏi: 小李这个周末会做什么？", "o": ["去爬山", "不去爬山了", "周六冒雨去爬山", "周日去爬山"], "a": 1, "e": "Bài nói anh ấy quyết định 改到下个周末再去 – dời sang cuối tuần sau, nên cuối tuần này không đi leo núi."},
-    {"t": "listen", "say": "这次比赛我们输了，不过大家都尽力了，下次一定会更好。", "q": "Câu 18. Thái độ của người nói là gì?", "o": ["Tức giận", "Thất vọng hoàn toàn", "Không quan tâm", "Vẫn lạc quan"], "a": 3, "e": "Sau 不过 người nói nhấn mạnh mọi người đã cố hết sức và 下次一定会更好 – lần sau chắc chắn tốt hơn → lạc quan."},
-    {"t": "mc", "q": "Câu 19. 他不但会说汉语，___会写很多汉字。", "o": ["但是", "所以", "而且", "因为"], "a": 2, "e": "Cặp liên từ tăng tiến 不但…而且… (không những… mà còn…)."},
-    {"t": "order", "q": "Câu 20. Sắp xếp thành câu đúng (Anh ấy để quên điện thoại trên taxi):", "w": ["忘在", "他", "出租车上了", "把手机"], "a": "他把手机忘在出租车上了", "e": "Câu 把 với bổ ngữ nơi chốn: chủ ngữ + 把 + tân ngữ + động từ + 在 + nơi chốn: 他把手机忘在出租车上了."}
-  ],
-  "teacher": {
-    "time": "Buổi khai giảng 90 phút (buổi 1 của khóa)",
-    "prep": "Chuẩn bị: danh sách học viên đã xếp lớp, bảng tên, nội quy và phiếu cam kết in sẵn, slide giới thiệu lộ trình 12 tuần, nhóm chat lớp đã tạo, đường dẫn bài học đầu tiên trong Trung tâm Ngoại ngữ, vài tấm ảnh tự chụp hoặc tư liệu được phép về văn hóa Trung Quốc.",
-    "steps": [
-      {"t": "10'", "do": "Làm quen: trò chơi truyền tên – mỗi người nói tên mình và một lý do học tiếng Trung, rồi nhắc lại tên người trước."},
-      {"t": "15'", "do": "Giới thiệu lộ trình 12 tuần, nội quy 5 điều, cách tự học (kho thẻ ôn tập, tỉ lệ tự học 2:1), cách nộp bài trong nhóm lớp."},
-      {"t": "25'", "do": "Bài đầu tiên: 4 thanh điệu với 妈 – 麻 – 马 – 骂, sau đó 你好, 谢谢, 再见, 我叫…; luyện đồng thanh rồi từng người."},
-      {"t": "20'", "do": "Luyện cặp: chào hỏi và giới thiệu tên bằng tiếng Trung; giáo viên đi từng cặp sửa thanh điệu."},
-      {"t": "10'", "do": "Viết mục tiêu cá nhân cho 12 tuần, ký phiếu cam kết chuyên cần; lớp bầu lớp trưởng và người nhắc thẻ."},
-      {"t": "10'", "do": "Hướng dẫn bài tập về nhà, chụp ảnh lớp (hỏi ý kiến trước), nhắc lịch buổi sau."}
+ "no": 12,
+ "for": "teacher",
+ "title": "Mở & vận hành lớp học tiếng Trung miễn phí",
+ "sub": "开办免费中文班 · Kāibàn miǎnfèi Zhōngwén bān",
+ "goals": [
+  "Chuẩn bị đủ điều kiện mở một lớp tiếng Trung miễn phí: mục tiêu, địa điểm, tài liệu, tuyển sinh",
+  "Thiết kế lộ trình khóa theo cấp và xếp lớp bằng bài test 20 câu kèm phỏng vấn nói",
+  "Quản lý lớp, theo dõi tiến độ và giữ động lực để giảm tỉ lệ bỏ học",
+  "Áp dụng mẫu kế hoạch 12 tuần cho khóa đầu tiên và đo hiệu quả sau khóa"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Trước khi mở lớp: 7 câu hỏi cần trả lời",
+   "html": "<ol><li><b>Dạy ai, đến đâu?</b> Ví dụ: “người đi làm ở Diệp Sa, từ con số 0 đến HSK 2 trong 6 tháng”. Mục tiêu càng cụ thể, tuyển sinh và giữ học viên càng dễ.</li><li><b>Mình có bao nhiêu thời gian bền vững?</b> Chọn lịch giữ được ít nhất 3 tháng liên tục (thường 2 buổi × 90 phút/tuần), cộng 1–2 giờ chuẩn bị và chữa bài mỗi tuần.</li><li><b>Hình thức nào?</b> Trực tiếp (tương tác tốt, sửa phát âm dễ), trực tuyến (không cần địa điểm, học viên ở xa vẫn học được), hoặc kết hợp.</li><li><b>Ở đâu?</b> Phòng đọc thư viện, nhà văn hóa, phòng họp công ty ngoài giờ, quán cà phê yên tĩnh, nhà riêng. Dùng địa điểm công cộng thì xin phép trước và giữ vệ sinh, giờ giấc.</li><li><b>Bao nhiêu học viên?</b> Trực tiếp 8–15, trực tuyến 6–12. Ít hơn 6 thiếu không khí luyện nói; nhiều hơn 15 khó sửa phát âm từng người.</li><li><b>Dùng tài liệu gì?</b> Các bài học trong Trung tâm Ngoại ngữ QC World đã có từ vựng, phát âm, hội thoại, bài tập tự chấm và giáo án 90 phút – học viên tự ôn được ở nhà. Không photo sách có bản quyền để phát.</li><li><b>Chi phí ẩn?</b> In ấn, nước uống, điện, phần thưởng nhỏ. Có thể dùng quỹ lớp tự nguyện, công khai thu chi trong nhóm; tuyệt đối không biến lớp miễn phí thành thu phí trá hình.</li></ol><p><b>Vấn đề lớn nhất của lớp miễn phí</b> là đăng ký dễ nên bỏ cũng dễ. Hãy tạo “chi phí cam kết” không bằng tiền: làm bài test xếp lớp, viết mục tiêu cá nhân, ký cam kết chuyên cần, nộp bài tập tuần đầu – ai làm đủ mới vào danh sách chính thức.</p>"
+  },
+  {
+   "k": "grammar",
+   "h": "Lộ trình khóa học theo cấp",
+   "html": "<p>Số buổi là khung gợi ý (mỗi buổi 90 phút, đã gồm buổi ôn và kiểm tra); điều chỉnh theo số bài thực tế của từng cấp và tiến độ lớp. Học viên cần tự học gấp đôi thời gian lên lớp.</p>",
+   "table": [
+    [
+     "Cấp",
+     "Số buổi",
+     "Thời lượng (2 buổi/tuần)",
+     "Nội dung chính",
+     "Đầu ra"
     ],
-    "games": ["Truyền tên tiếng Trung: “我叫Lan。她叫Minh。他叫…” – người sau nhắc lại tên tất cả người trước.", "Đoán thanh bằng ngón tay: giáo viên đọc một âm tiết, học viên giơ 1–4 ngón tay chỉ thanh điệu."],
-    "errors": ["Nhận quá nhiều học viên “cho vui” → không sửa được phát âm, lớp ồn. Sửa: giới hạn sĩ số, có danh sách chờ.", "Không test xếp lớp → người đã học HSK 2 ngồi chung người mới, cả hai nhóm chán. Sửa: test 20 câu + phỏng vấn nói.", "Giáo viên ôm hết việc → kiệt sức sau 1 tháng. Sửa: phân vai lớp trưởng, trợ giảng; dùng giáo án sẵn.", "Không có nội quy chuyên cần → học viên đến buổi có buổi không. Sửa: nội quy và cam kết từ buổi 1.", "Chạy theo giáo trình quá nhanh → học viên yếu bỏ học. Sửa: theo dõi điểm test giữa khóa, có buổi ôn bù.", "Không thu phản hồi → lặp lại lỗi ở khóa sau. Sửa: khảo sát ẩn danh tuần 6 và tuần 12."],
-    "homework": "Ôn 4 thanh điệu 10 phút mỗi ngày bằng bài phát âm của Trung tâm Ngoại ngữ; ghi âm câu “你好！我叫…，我是越南人。” gửi vào nhóm lớp; bắt đầu ôn thẻ mỗi ngày và báo cáo chuỗi ngày học."
+    [
+     "Cấp 0 – Nhập môn",
+     "6",
+     "3 tuần",
+     "Pinyin đầy đủ, thanh điệu, biến điệu, nét cơ bản và bút thuận, 20–30 bộ thủ đầu tiên, câu chào hỏi",
+     "Đọc đúng pinyin bất kỳ, viết đúng thứ tự nét"
+    ],
+    [
+     "HSK 1",
+     "18",
+     "9 tuần",
+     "150 từ, câu 是/有/在, câu hỏi 吗/呢/什么, số đếm, thời gian, lượng từ cơ bản, 了 cơ bản",
+     "Giới thiệu bản thân, hỏi đáp đơn giản; đạt đề thử HSK 1"
+    ],
+    [
+     "HSK 2",
+     "24",
+     "12 tuần",
+     "300 từ, 了/过/着, 是…的, bổ ngữ trình độ 得, so sánh 比 cơ bản",
+     "Giao tiếp sinh hoạt hằng ngày; đạt đề thử HSK 2"
+    ],
+    [
+     "HSK 3",
+     "36",
+     "18 tuần",
+     "600 từ, viết tay chữ cấp 3, bổ ngữ kết quả/xu hướng/khả năng, câu 把/被",
+     "Kể chuyện ngắn, viết 5–8 câu; đạt HSK 3 và HSKK sơ cấp"
+    ],
+    [
+     "HSK 4",
+     "48",
+     "24 tuần",
+     "1.200 từ, cặp liên từ, đọc đoạn văn, viết câu theo tranh, nói 2 phút",
+     "Thảo luận chủ đề quen thuộc; đạt HSK 4 và HSKK trung cấp"
+    ],
+    [
+     "HSK 5",
+     "60",
+     "30 tuần",
+     "2.500 từ, thành ngữ thông dụng, đọc bài dài, viết 80–150 chữ",
+     "Đọc báo phổ thông, viết đoạn văn; đạt HSK 5"
+    ],
+    [
+     "HSK 6",
+     "72",
+     "36 tuần",
+     "5.000 từ, văn viết trang trọng, tìm câu sai, viết rút gọn",
+     "Học tập, làm việc bằng tiếng Trung; đạt HSK 6 và HSKK cao cấp"
+    ]
+   ],
+   "tips": [
+    "Khóa đầu tiên chỉ nên mở Nhập môn + HSK 1 (12 tuần, xem mẫu kế hoạch bên dưới). Chạy trơn tru một khóa rồi mới mở thêm lớp.",
+    "Giữa hai cấp nên nghỉ 1–2 tuần và có bài kiểm tra chuyển cấp; học viên chưa đạt có thể học lại cùng khóa sau."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Bài test xếp lớp: cách dùng",
+   "html": "<p>Phần <b>bài tập</b> cuối chuyên đề này chính là bài test xếp lớp 20 câu tự chấm (khoảng 25 phút), chia 4 phần tăng dần độ khó:</p><ul><li><b>Câu 1–5</b>: Cấp 0 – HSK 1 (thanh điệu, chào hỏi, câu 是, câu hỏi tên, trật tự câu cơ bản).</li><li><b>Câu 6–10</b>: HSK 2 (nghe lý do, 得, 还是, thời lượng, 是…的).</li><li><b>Câu 11–15</b>: HSK 3 (câu 把, câu 比, 虽然…但是, bổ ngữ khả năng, câu 被).</li><li><b>Câu 16–20</b>: HSK 4 (即使…也, đọc hiểu, thái độ người nói, 不但…而且, câu 把 + bổ ngữ nơi chốn).</li></ul><p>Cách tổ chức: gửi đường dẫn cho người đăng ký làm tại nhà, yêu cầu chụp màn hình kết quả từng phần; sau đó gọi phỏng vấn nói 3–5 phút. Dặn rõ: <b>đây không phải bài thi</b>, đoán bừa chỉ khiến bị xếp vào lớp quá sức. Người hoàn toàn chưa học tiếng Trung không cần làm test – vào thẳng lớp Nhập môn.</p>"
+  },
+  {
+   "k": "grammar",
+   "h": "Bảng quy đổi kết quả xếp lớp",
+   "html": "<p>Một phần được coi là <b>đạt</b> khi đúng từ 4/5 câu. Xếp vào cấp ứng với phần đạt cao nhất mà <b>mọi phần dưới nó cũng đạt</b>.</p>",
+   "table": [
+    [
+     "Kết quả test",
+     "Xếp vào lớp",
+     "Ghi chú"
+    ],
+    [
+     "Phần 1 chưa đạt",
+     "Cấp 0 – Nhập môn",
+     "Kể cả khi đúng lẻ tẻ ở phần sau (thường do đoán)"
+    ],
+    [
+     "Đạt phần 1, phần 2 chưa đạt",
+     "HSK 1",
+     "Nếu phát âm và nói tốt, có thể vào lớp HSK 1 đang học giữa khóa"
+    ],
+    [
+     "Đạt phần 1–2, phần 3 chưa đạt",
+     "HSK 2",
+     "Kiểm tra thêm khả năng viết chữ tay"
+    ],
+    [
+     "Đạt phần 1–3, phần 4 chưa đạt",
+     "HSK 3",
+     "Phỏng vấn nói phải trả lời được câu hỏi cấp HSK 3"
+    ],
+    [
+     "Đạt cả 4 phần (từ 16/20)",
+     "HSK 4 trở lên",
+     "Cho làm thêm đề thử HSK 4–5 và phỏng vấn dài để xếp chính xác"
+    ]
+   ],
+   "tips": [
+    "Kỹ năng nói thường kém hơn đọc: nếu phỏng vấn không trả lời được câu hỏi của cấp được xếp, hạ xuống 1 cấp.",
+    "Học viên tự học lâu năm nhưng phát âm sai nhiều: xếp đúng cấp theo test, đồng thời giao lộ trình sửa phát âm riêng 4 tuần."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Phỏng vấn nói xếp lớp (3–5 phút)",
+   "html": "<p>Hỏi lần lượt từ dễ đến khó, dừng ở cấp mà học viên bắt đầu không trả lời được. Ghi chú nhanh về thanh điệu, âm khó (zh/ch/sh/r, ü, -n/-ng) để chuẩn bị bài sửa phát âm.</p>",
+   "table": [
+    [
+     "Cấp",
+     "Câu hỏi mẫu",
+     "Đạt khi"
+    ],
+    [
+     "Cấp 0 – HSK 1",
+     "你叫什么名字？你是哪国人？你家有几口人？",
+     "Hiểu câu hỏi, trả lời bằng câu ngắn, thanh điệu tương đối đúng"
+    ],
+    [
+     "HSK 2",
+     "你每天几点起床？周末你常常做什么？你去过中国吗？",
+     "Trả lời 2–3 câu, dùng được 了/过"
+    ],
+    [
+     "HSK 3",
+     "说说你的一个好朋友。你为什么学中文？",
+     "Nói liền 30–60 giây, có từ nối 因为, 所以, 然后"
+    ],
+    [
+     "HSK 4",
+     "你觉得网上购物好不好？为什么？",
+     "Nói 1–2 phút, có quan điểm và lý do, ít lỗi cơ bản"
+    ],
+    [
+     "HSK 5+",
+     "你认为城市生活和农村生活各有什么优点和缺点？",
+     "Nói 2–3 phút, lập luận rõ, dùng được từ trừu tượng"
+    ]
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Quản lý lớp",
+   "html": "<h4>Kênh liên lạc và nội quy</h4><ul><li>Một nhóm chat cho cả lớp: thông báo, nộp bài, hỏi đáp. Ghim nội quy, lịch học, đường dẫn bài học.</li><li><b>Nội quy 5 điều</b>: đến đúng giờ; vắng thì báo trước; làm bài tập trước buổi sau; học trực tuyến thì bật camera; không chê cười người nói sai.</li><li><b>Quy tắc chuyên cần</b>: vắng quá 3 buổi không báo thì nhường chỗ cho người trong danh sách chờ – nói rõ từ buổi đầu để không ai bất ngờ.</li></ul><h4>Sổ theo dõi (bảng tính)</h4><p>Mỗi học viên một dòng: điểm danh từng buổi · bài tập (đã nộp/chưa) · điểm test xếp lớp, giữa khóa, cuối khóa · ghi chú phát âm và điểm yếu. Cập nhật ngay sau buổi học, mất khoảng 5 phút. Dữ liệu này giúp phát hiện sớm người sắp bỏ học và chứng minh hiệu quả lớp khi xin địa điểm hoặc tài trợ.</p><h4>Phân vai để giáo viên không ôm hết việc</h4><ul><li><b>Lớp trưởng</b>: điểm danh, nhắc lịch, mở phòng học.</li><li><b>Người nhắc thẻ</b>: mỗi tối nhắc cả lớp ôn thẻ, tổng hợp chuỗi ngày học.</li><li><b>Trợ giảng</b>: học viên khá hoặc học viên khóa trước – chữa bài tập, dẫn nhóm nhỏ luyện nói. Đây cũng là cách đào tạo giáo viên kế cận cho lớp sau.</li></ul><h4>Lớp chênh trình độ</h4><ul><li><b>Nhiệm vụ phân tầng</b>: cùng một chủ đề, nhóm cơ bản nói 3 câu, nhóm khá nói 1 phút và đặt câu hỏi ngược lại.</li><li><b>Ghép cặp mạnh – yếu</b> trong luyện hội thoại, đổi cặp mỗi buổi.</li><li>Chuẩn bị sẵn <b>bài mở rộng</b> cho người làm xong sớm (đọc thêm, viết thêm 3 câu).</li></ul><h4>Lớp trực tuyến</h4><ul><li>Chia phòng nhỏ 2–3 người khi luyện nói; giáo viên đi qua từng phòng.</li><li>Dùng bảng trắng chung, đố nhanh trực tuyến để giữ tập trung.</li><li>Muốn ghi hình buổi học cho người vắng phải xin phép cả lớp trước và chỉ chia sẻ trong nhóm lớp.</li></ul><h4>Bảo vệ thông tin học viên</h4><p>Danh sách, số điện thoại, kết quả test chỉ dùng cho việc của lớp; không đăng bảng điểm có tên lên mạng; hỏi ý kiến trước khi đăng ảnh có mặt học viên.</p>"
+  },
+  {
+   "k": "text",
+   "h": "Giữ động lực – giảm tỉ lệ bỏ học",
+   "html": "<p>Không ít lớp miễn phí chỉ còn khoảng một nửa học viên sau 1–2 tháng. Nguyên nhân thường gặp: không thấy tiến bộ, bài quá nhanh hoặc quá chậm, bận việc, không có ai nhắc. Các biện pháp đã được nhiều lớp áp dụng hiệu quả:</p><ol><li><b>Thắng nhanh</b>: buổi 1 nói được câu tự giới thiệu; tuần 3 đọc được thực đơn đơn giản. Thấy tiến bộ sớm là động lực mạnh nhất.</li><li><b>Mục tiêu viết ra giấy</b> ở buổi khai giảng; nhắc lại và đánh giá ở tuần 6 và tuần 12.</li><li><b>Mốc nhỏ có ghi nhận</b>: chứng nhận nội bộ cuối mỗi cấp, bảng tiến độ của lớp, tuyên dương chuỗi 30 ngày ôn thẻ.</li><li><b>Mỗi buổi ít nhất một hoạt động vui</b>: trò chơi, nhập vai, đố nhanh.</li><li><b>Hoạt động văn hóa</b> mỗi tháng: Tết Trung thu, viết thư pháp, gói sủi cảo, giao lưu với bạn bản ngữ (trực tiếp hoặc trực tuyến).</li><li><b>Cho học viên dạy lại</b>: mỗi buổi một học viên giảng 5 phút một điểm ngữ pháp hoặc một bộ thủ – người dạy học sâu hơn và gắn bó hơn với lớp.</li><li><b>Chăm sóc cá nhân</b>: học viên vắng 2 buổi liên tiếp → nhắn hỏi thăm (không trách móc), gửi tóm tắt bài để theo kịp.</li><li><b>Khen cụ thể</b>: “thanh 3 của bạn hôm nay chuẩn hơn hẳn” có giá trị hơn “giỏi lắm”.</li><li><b>Giáo viên cũng cần giữ sức</b>: lịch dạy bền vững, có trợ giảng, dùng giáo án sẵn, nghỉ 1–2 tuần giữa các khóa. Giáo viên kiệt sức là lý do phổ biến khiến lớp miễn phí đóng cửa.</li></ol>"
+  },
+  {
+   "k": "grammar",
+   "h": "Mẫu kế hoạch 12 tuần – khóa Nhập môn + HSK 1 (2 buổi/tuần)",
+   "html": "<p>24 buổi × 90 phút: 3 tuần đầu là Nhập môn (pinyin, chữ Hán), 9 tuần sau là HSK 1. Mỗi chủ đề HSK 1 dùng bài học tương ứng trong Trung tâm Ngoại ngữ; chọn bài theo chủ đề trong cột Buổi A/B.</p>",
+   "table": [
+    [
+     "Tuần",
+     "Buổi A",
+     "Buổi B",
+     "Mốc / kiểm tra"
+    ],
+    [
+     "1",
+     "Khai giảng; tiếng Trung và chữ Hán là gì; 4 thanh điệu; 你好, 谢谢, 再见",
+     "Thanh mẫu b p m f d t n l; vận mẫu đơn; 8 nét cơ bản",
+     "Đọc đúng 4 thanh"
+    ],
+    [
+     "2",
+     "Thanh mẫu g k h j q x; vận mẫu kép",
+     "zh ch sh r z c s; vận mẫu mũi; quy tắc viết pinyin",
+     "Test pinyin 10 phút"
+    ],
+    [
+     "3",
+     "Biến điệu 3+3, 不, 一; thanh nhẹ; số đếm 1–100",
+     "Bút thuận, 20 bộ thủ đầu tiên; câu tự giới thiệu",
+     "Mỗi người tự giới thiệu 3 câu"
+    ],
+    [
+     "4",
+     "Gia đình: câu 有, lượng từ 个/口",
+     "Nghề nghiệp: câu 是, câu hỏi 吗/呢",
+     "Bắt đầu thử thách chuỗi 30 ngày ôn thẻ"
+    ],
+    [
+     "5",
+     "Ngày tháng, thứ, giờ",
+     "Thời gian biểu, vị trí trạng ngữ thời gian",
+     "Bài kiểm tra 30 chữ Hán"
+    ],
+    [
+     "6",
+     "Mua sắm: tiền, 多少/几",
+     "Ăn uống: gọi món, 想/要",
+     "Nhập vai cửa hàng – quán ăn; đánh giá lại mục tiêu cá nhân"
+    ],
+    [
+     "7",
+     "Nơi chốn: 在, 哪儿",
+     "Phương hướng, hỏi đường",
+     "Kiểm tra giữa khóa 30 phút"
+    ],
+    [
+     "8",
+     "Thời tiết; tính từ với 很/太…了",
+     "Sở thích: 喜欢 + động từ",
+     "Buổi văn hóa (gói sủi cảo hoặc thư pháp)"
+    ],
+    [
+     "9",
+     "Giao thông: 怎么, 坐",
+     "Hẹn gặp, gọi điện: 会/能",
+     "Ghi âm bài nói 1 phút"
+    ],
+    [
+     "10",
+     "Sức khỏe, đi khám bệnh",
+     "Kể việc hôm qua với 了",
+     "Viết nhật ký 5 câu"
+    ],
+    [
+     "11",
+     "Ôn tổng hợp từ vựng và ngữ pháp",
+     "Luyện đề HSK 1 theo từng phần",
+     "Đề thử lần 1"
+    ],
+    [
+     "12",
+     "Thi thử HSK 1 đủ giờ + phỏng vấn nói",
+     "Chữa đề, tổng kết, trao chứng nhận nội bộ, tư vấn lộ trình HSK 2",
+     "Báo cáo kết quả khóa"
+    ]
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Một buổi học 90 phút & checklist",
+   "html": "<p>Khung buổi học (chi tiết phương pháp ở chuyên đề 1): <b>10'</b> khởi động, ôn bài cũ → <b>20'</b> từ mới → <b>20'</b> ngữ pháp → <b>25'</b> hội thoại, nhập vai → <b>10'</b> bài tập hoặc trò chơi → <b>5'</b> tổng kết, giao bài.</p><h4>Trước buổi học</h4><ul><li>Giáo án, slide, file âm thanh đã thử loa/mic.</li><li>Thẻ từ, giấy ô tập viết, phần thưởng nhỏ.</li><li>Danh sách điểm danh; ghi chú học viên cần hỗ trợ riêng.</li></ul><h4>Sau buổi học (15 phút)</h4><ul><li>Cập nhật sổ theo dõi.</li><li>Gửi vào nhóm lớp: tóm tắt 5 dòng, đường dẫn bài học, bài tập, hạn nộp.</li><li>Ghi 1 điều làm tốt và 1 điều cần sửa cho buổi sau.</li></ul>"
+  },
+  {
+   "k": "text",
+   "h": "Mẫu thông báo tuyển sinh",
+   "html": "<p><b>LỚP TIẾNG TRUNG MIỄN PHÍ – KHÓA NHẬP MÔN + HSK 1</b><br>Dành cho: người chưa biết tiếng Trung hoặc mới học pinyin, từ 16 tuổi.<br>Thời gian: 12 tuần, tối thứ Ba và thứ Năm, 19:00–20:30.<br>Địa điểm: (ghi rõ địa chỉ hoặc “học trực tuyến”).<br>Sĩ số: tối đa 12 người – ưu tiên người hoàn thành đủ các bước đăng ký.<br>Học viên nhận được: lộ trình rõ ràng, bài học và bài tập tự chấm, sửa phát âm trực tiếp, chứng nhận nội bộ khi hoàn thành.<br>Cam kết: tham gia ít nhất 80% số buổi, tự học khoảng 30 phút mỗi ngày.<br>Đăng ký: điền phiếu (họ tên, năm sinh, đã học tiếng Trung chưa, mục tiêu, khung giờ rảnh) trước ngày …; người đã học làm thêm bài test xếp lớp.<br><small>Thông tin cá nhân chỉ dùng để xếp lớp và liên lạc trong khóa học.</small></p><p><b>Mẹo:</b> đăng thông báo kèm 1 video 30 giây giáo viên tự giới thiệu và đọc vài câu tiếng Trung – người đăng ký sẽ tin tưởng hơn hẳn.</p>"
+  },
+  {
+   "k": "text",
+   "h": "Đo hiệu quả và cải tiến sau mỗi khóa",
+   "html": "<ul><li><b>Tỉ lệ chuyên cần</b> trung bình mỗi buổi và <b>tỉ lệ hoàn thành khóa</b> (số học viên còn ở buổi cuối / số học viên buổi đầu).</li><li><b>Điểm test</b> đầu khóa – giữa khóa – cuối khóa; tỉ lệ đạt đề thử; số học viên đi thi thật và đạt.</li><li><b>Khảo sát ẩn danh 5 câu</b>: mức độ hài lòng, tốc độ bài, phần thích nhất, phần muốn bỏ, có giới thiệu lớp cho bạn bè không.</li><li><b>Họp rút kinh nghiệm</b> với trợ giảng: giữ 3 điều tốt, sửa 3 điều chưa tốt; lưu giáo án, slide, đề kiểm tra vào một thư mục chung để khóa sau dùng lại.</li><li>Mời 1–2 học viên tiêu biểu làm trợ giảng khóa sau – lớp tự lớn lên mà giáo viên không quá tải.</li></ul>"
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "马",
+   "q": "Câu 1. Bạn nghe thấy âm tiết mang thanh mấy?",
+   "o": [
+    "Thanh 3 (mǎ)",
+    "Thanh 4 (mà)",
+    "Thanh 1 (mā)",
+    "Thanh 2 (má)"
+   ],
+   "a": 0,
+   "e": "马 mǎ (ngựa) mang thanh 3: xuống thấp rồi lên. So sánh 妈 mā, 麻 má, 骂 mà."
+  },
+  {
+   "t": "mc",
+   "q": "Câu 2. 谢谢 (xièxie) nghĩa là:",
+   "o": [
+    "Không sao",
+    "Xin lỗi",
+    "Cảm ơn",
+    "Tạm biệt"
+   ],
+   "a": 2,
+   "e": "谢谢 xièxie = cảm ơn. Xin lỗi: 对不起; tạm biệt: 再见; không sao: 没关系."
+  },
+  {
+   "t": "mc",
+   "q": "Câu 3. 我___越南人。(Wǒ ___ Yuènánrén. – Tôi là người Việt Nam.)",
+   "o": [
+    "在 zài",
+    "叫 jiào",
+    "是 shì",
+    "有 yǒu"
+   ],
+   "a": 2,
+   "e": "Câu “A là B” dùng 是: 我是越南人. 有 = có, 在 = ở, 叫 = tên là."
+  },
+  {
+   "t": "mc",
+   "q": "Câu 4. Chọn câu trả lời phù hợp: 你叫什么名字？(Nǐ jiào shénme míngzi?)",
+   "o": [
+    "我是老师。(Wǒ shì lǎoshī.)",
+    "我在叶纱城。(Wǒ zài Yèshā Chéng.)",
+    "我叫阿明。(Wǒ jiào Ā Míng.)",
+    "我二十岁。(Wǒ èrshí suì.)"
+   ],
+   "a": 2,
+   "e": "Câu hỏi tên (你叫什么名字) → trả lời 我叫… Các câu khác trả lời tuổi, nghề nghiệp, nơi ở."
+  },
+  {
+   "t": "order",
+   "q": "Câu 5. Sắp xếp thành câu đúng (Đây là sách của tôi):",
+   "w": [
+    "我的书",
+    "是",
+    "这"
+   ],
+   "a": "这是我的书",
+   "e": "Câu 是: 这 (chủ ngữ) + 是 + 我的书 (tân ngữ)."
+  },
+  {
+   "t": "listen",
+   "say": "你昨天为什么没来上课？我生病了，去医院了。",
+   "q": "Câu 6. Vì sao người thứ hai không đi học hôm qua?",
+   "o": [
+    "Phải đi làm thêm",
+    "Ngủ quên",
+    "Đi du lịch",
+    "Bị ốm, phải đi bệnh viện"
+   ],
+   "a": 3,
+   "e": "Người thứ hai trả lời 我生病了，去医院了 – tôi bị ốm, đi bệnh viện."
+  },
+  {
+   "t": "mc",
+   "q": "Câu 7. 他跑___很快。(Tā pǎo ___ hěn kuài. – Anh ấy chạy rất nhanh.)",
+   "o": [
+    "的 de",
+    "地 de",
+    "得 de",
+    "了 le"
+   ],
+   "a": 2,
+   "e": "Động từ + 得 + bổ ngữ trình độ: 跑得很快. 的 đứng trước danh từ, 地 đứng trước động từ."
+  },
+  {
+   "t": "mc",
+   "q": "Câu 8. 你喝茶___喝咖啡？(Nǐ hē chá ___ hē kāfēi? – Bạn uống trà hay cà phê?)",
+   "o": [
+    "还是 háishi",
+    "或者 huòzhě",
+    "但是 dànshì",
+    "所以 suǒyǐ"
+   ],
+   "a": 0,
+   "e": "Câu hỏi lựa chọn dùng 还是. 或者 cũng là “hoặc” nhưng dùng trong câu trần thuật, không dùng để hỏi."
+  },
+  {
+   "t": "fill",
+   "q": "Câu 9. 我学了两___汉语了。(Wǒ xuéle liǎng ___ Hànyǔ le. – Tôi học tiếng Trung được hai năm rồi.)",
+   "a": "年",
+   "alt": [
+    "nian",
+    "nián"
+   ],
+   "py": "nián",
+   "e": "Bổ ngữ thời lượng đặt giữa động từ và tân ngữ: 学了两年汉语了. 年 không cần lượng từ."
+  },
+  {
+   "t": "mc",
+   "q": "Câu 10. 我是___云线城来的。(Wǒ shì ___ Yúnxiàn Chéng lái de. – Tôi đến từ Vân Tuyến.)",
+   "o": [
+    "到 dào",
+    "对 duì",
+    "从 cóng",
+    "在 zài"
+   ],
+   "a": 2,
+   "e": "Cấu trúc 是…的 nhấn mạnh nơi xuất phát: 是从云线城来的. 从 = từ."
+  },
+  {
+   "t": "mc",
+   "q": "Câu 11. Câu nào đúng? (Tôi làm xong bài tập rồi.)",
+   "o": [
+    "我写把作业完了。",
+    "把我作业写完了。",
+    "我把写完了作业。",
+    "我把作业写完了。"
+   ],
+   "a": 3,
+   "e": "Câu 把: Chủ ngữ + 把 + tân ngữ + động từ + thành phần khác (完了): 我把作业写完了."
+  },
+  {
+   "t": "mc",
+   "q": "Câu 12. 今天比昨天___热。(Jīntiān bǐ zuótiān ___ rè. – Hôm nay nóng hơn hôm qua.)",
+   "o": [
+    "很 hěn",
+    "非常 fēicháng",
+    "太 tài",
+    "更 gèng"
+   ],
+   "a": 3,
+   "e": "Câu so sánh 比 không dùng 很/非常/太; muốn nhấn mạnh dùng 更 hoặc 还: 今天比昨天更热."
+  },
+  {
+   "t": "listen",
+   "say": "这件衣服虽然很漂亮，但是太贵了，我不买了。",
+   "q": "Câu 13. Người nói quyết định thế nào?",
+   "o": [
+    "Mua ngay",
+    "Mua vì rẻ",
+    "Không mua vì quá đắt",
+    "Mua tặng bạn"
+   ],
+   "a": 2,
+   "e": "虽然很漂亮，但是太贵了，我不买了 – tuy đẹp nhưng đắt quá, tôi không mua nữa. Ý chính nằm sau 但是."
+  },
+  {
+   "t": "fill",
+   "q": "Câu 14. 这个字太难了，我看___懂。(Zhège zì tài nán le, wǒ kàn ___ dǒng. – Chữ này khó quá, tôi đọc không hiểu.)",
+   "a": "不",
+   "alt": [
+    "bu",
+    "bù"
+   ],
+   "py": "bu",
+   "e": "Bổ ngữ khả năng dạng phủ định: động từ + 不 + bổ ngữ kết quả → 看不懂 (đọc không hiểu)."
+  },
+  {
+   "t": "order",
+   "q": "Câu 15. Sắp xếp thành câu đúng (Xe đạp của tôi bị em trai đi mất rồi):",
+   "w": [
+    "骑走了",
+    "弟弟",
+    "被",
+    "我的自行车"
+   ],
+   "a": "我的自行车被弟弟骑走了",
+   "e": "Câu bị động: đối tượng + 被 + người thực hiện + động từ + bổ ngữ (骑走) + 了."
+  },
+  {
+   "t": "mc",
+   "q": "Câu 16. ___明天下雨，比赛也会照常进行。",
+   "o": [
+    "即使",
+    "因为",
+    "虽然",
+    "只有"
+   ],
+   "a": 0,
+   "e": "Giả thiết nhượng bộ “cho dù… cũng…”: 即使…也…. 虽然 dùng cho sự thật đã xảy ra; 只有 đi với 才; 因为 đi với 所以."
+  },
+  {
+   "t": "mc",
+   "q": "Câu 17. Đọc: 小李原来打算周末去爬山，可是天气预报说周六有大雨，所以他决定改到下个周末再去。Hỏi: 小李这个周末会做什么？",
+   "o": [
+    "周六冒雨去爬山",
+    "周日去爬山",
+    "去爬山",
+    "不去爬山了"
+   ],
+   "a": 3,
+   "e": "Bài nói anh ấy quyết định 改到下个周末再去 – dời sang cuối tuần sau, nên cuối tuần này không đi leo núi."
+  },
+  {
+   "t": "listen",
+   "say": "这次比赛我们输了，不过大家都尽力了，下次一定会更好。",
+   "q": "Câu 18. Thái độ của người nói là gì?",
+   "o": [
+    "Thất vọng hoàn toàn",
+    "Không quan tâm",
+    "Vẫn lạc quan",
+    "Tức giận"
+   ],
+   "a": 2,
+   "e": "Sau 不过 người nói nhấn mạnh mọi người đã cố hết sức và 下次一定会更好 – lần sau chắc chắn tốt hơn → lạc quan."
+  },
+  {
+   "t": "mc",
+   "q": "Câu 19. 他不但会说汉语，___会写很多汉字。",
+   "o": [
+    "但是",
+    "所以",
+    "而且",
+    "因为"
+   ],
+   "a": 2,
+   "e": "Cặp liên từ tăng tiến 不但…而且… (không những… mà còn…)."
+  },
+  {
+   "t": "order",
+   "q": "Câu 20. Sắp xếp thành câu đúng (Anh ấy để quên điện thoại trên taxi):",
+   "w": [
+    "忘在",
+    "他",
+    "出租车上了",
+    "把手机"
+   ],
+   "a": "他把手机忘在出租车上了",
+   "e": "Câu 把 với bổ ngữ nơi chốn: chủ ngữ + 把 + tân ngữ + động từ + 在 + nơi chốn: 他把手机忘在出租车上了."
+  }
+ ],
+ "teacher": {
+  "time": "Buổi khai giảng 90 phút (buổi 1 của khóa)",
+  "prep": "Chuẩn bị: danh sách học viên đã xếp lớp, bảng tên, nội quy và phiếu cam kết in sẵn, slide giới thiệu lộ trình 12 tuần, nhóm chat lớp đã tạo, đường dẫn bài học đầu tiên trong Trung tâm Ngoại ngữ, vài tấm ảnh tự chụp hoặc tư liệu được phép về văn hóa Trung Quốc.",
+  "steps": [
+   {
+    "t": "10'",
+    "do": "Làm quen: trò chơi truyền tên – mỗi người nói tên mình và một lý do học tiếng Trung, rồi nhắc lại tên người trước."
+   },
+   {
+    "t": "15'",
+    "do": "Giới thiệu lộ trình 12 tuần, nội quy 5 điều, cách tự học (kho thẻ ôn tập, tỉ lệ tự học 2:1), cách nộp bài trong nhóm lớp."
+   },
+   {
+    "t": "25'",
+    "do": "Bài đầu tiên: 4 thanh điệu với 妈 – 麻 – 马 – 骂, sau đó 你好, 谢谢, 再见, 我叫…; luyện đồng thanh rồi từng người."
+   },
+   {
+    "t": "20'",
+    "do": "Luyện cặp: chào hỏi và giới thiệu tên bằng tiếng Trung; giáo viên đi từng cặp sửa thanh điệu."
+   },
+   {
+    "t": "10'",
+    "do": "Viết mục tiêu cá nhân cho 12 tuần, ký phiếu cam kết chuyên cần; lớp bầu lớp trưởng và người nhắc thẻ."
+   },
+   {
+    "t": "10'",
+    "do": "Hướng dẫn bài tập về nhà, chụp ảnh lớp (hỏi ý kiến trước), nhắc lịch buổi sau."
+   }
+  ],
+  "games": [
+   "Truyền tên tiếng Trung: “我叫 Lan。她叫 Minh。他叫…” – người sau nhắc lại tên tất cả người trước.",
+   "Đoán thanh bằng ngón tay: giáo viên đọc một âm tiết, học viên giơ 1–4 ngón tay chỉ thanh điệu."
+  ],
+  "errors": [
+   "Nhận quá nhiều học viên “cho vui” → không sửa được phát âm, lớp ồn. Sửa: giới hạn sĩ số, có danh sách chờ.",
+   "Không test xếp lớp → người đã học HSK 2 ngồi chung người mới, cả hai nhóm chán. Sửa: test 20 câu + phỏng vấn nói.",
+   "Giáo viên ôm hết việc → kiệt sức sau 1 tháng. Sửa: phân vai lớp trưởng, trợ giảng; dùng giáo án sẵn.",
+   "Không có nội quy chuyên cần → học viên đến buổi có buổi không. Sửa: nội quy và cam kết từ buổi 1.",
+   "Chạy theo giáo trình quá nhanh → học viên yếu bỏ học. Sửa: theo dõi điểm test giữa khóa, có buổi ôn bù.",
+   "Không thu phản hồi → lặp lại lỗi ở khóa sau. Sửa: khảo sát ẩn danh tuần 6 và tuần 12."
+  ],
+  "homework": "Ôn 4 thanh điệu 10 phút mỗi ngày bằng bài phát âm của Trung tâm Ngoại ngữ; ghi âm câu “你好！我叫…，我是越南人。” gửi vào nhóm lớp; bắt đầu ôn thẻ mỗi ngày và báo cáo chuỗi ngày học."
+ }
 }

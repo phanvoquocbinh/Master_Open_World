@@ -1,0 +1,722 @@
+=== COURSE manual-testing
+name: Kiểm thử thủ công từ A–Z
+icon: 🧭
+floor: 8
+room: 801
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Từ đọc yêu cầu và thiết kế phép kiểm đến thực thi web/mobile,thăm dò,UAT,báo cáo và dự án đăng ký lớp giả định; có đề cuối khóa tự soạn.
+
+## LESSON manual-testing-01 | Vai trò kiểm thử và vòng đời sản phẩm
+
+### Chất lượng không bắt đầu ở màn hình test
+Nhóm giả định Nếp Sương làm ứng dụng đặt lớp. QA có thể phát hiện yêu cầu thiếu trước code,kiểm thiết kế,thử bản dựng và theo dõi lỗi sau sửa; mục tiêu là cung cấp bằng chứng,rủi ro và phản hồi có ích.
+
+### Vòng đời có điểm kiểm cụ thể
+Mỗi giai đoạn có sản phẩm công việc riêng,không chỉ một checklist chung. Kết quả review requirement có thể là câu hỏi,không nhất thiết luôn là bug sản phẩm.
+~~~text
+yêu cầu ->review tiêu chí và ví dụ
+thiết kế ->review luồng/quyền/dữ liệu
+code ->unit/integration theo trách nhiệm
+build ->smoke,system,UAT hỗ trợ
+sửa lỗi ->retest và regression
+~~~
+
+### Verification và validation bằng ví dụ
+Nếu app tính đúng giảm giá10% như đặc tả nhưng nghiệp vụ thật cần giá theo hạng,nhóm có thể đạt đặc tả mà chưa đáp ứng nhu cầu. Hỏi đúng vấn đề giúp phát hiện sai từ đầu.
+~~~text
+verification:total đúng công thức đã duyệt?
+validation:người phụ trách bán lớp có hoàn tất quy trình thật không?
+Hai câu hỏi bổ sung nhau,không phải hai loại test loại trừ.
+~~~
+
+### Vai trò cùng chịu trách nhiệm chất lượng
+Dev,BA,QA và nghiệp vụ có góc nhìn khác nhau. QA nêu evidence và kiến nghị,không phải người duy nhất bảo đảm chất lượng hoặc người tự quyết mọi rủi ro phát hành.
+~~~text
+BA:quy tắc/ngoại lệ
+Dev:thiết kế và kiểm mã
+QA:mô hình rủi ro,phép kiểm,evidence
+Nghiệp vụ:nhu cầu,tiêu chí,quyết định theo thẩm quyền
+~~~
+
+### Lỗi hay gặp khi chờ code xong
+Không hỏi yêu cầu đến cuối dễ biến câu hỏi nghiệp vụ thành tranh luận bug. Bắt đầu từ ví dụ nhỏ có dữ liệu và expected,ghi phần chưa chốt để nhóm xử lý trước khi đầu tư implementation.
+
+PRACTICE: Lập sơ đồ vòng đời ứng dụng Nếp Sương với sáu điểm kiểm và sản phẩm đầu ra. Viết một ví dụ đúng đặc tả nhưng chưa đúng nhu cầu,phân công người cần trao đổi.
+Q: Kiểm thử góp gì trong vòng đời sản phẩm?
++ Cung cấp bằng chứng về chất lượng và rủi ro
+- Chứng minh không còn lỗi
+- Chỉ tìm lỗi sau khi code xong
+Q: Verification và validation khác trọng tâm gì?
++ Đúng đặc tả và phù hợp nhu cầu sử dụng
+- Hai thuật ngữ chỉ màu report
+- Chỉ validation mới có test
+
+## LESSON manual-testing-02 | Đọc yêu cầu và tìm câu hỏi còn thiếu
+
+### Đọc yêu cầu như một mô hình quyết định
+Câu học viên được hủy trước giờ học chưa rõ hạn,phí và trạng thái đã thanh toán. Gạch actor,đối tượng,hành động,điều kiện và kết quả; phần không có chữ phải được hỏi thay vì tự điền.
+
+### Tách điều đã chốt khỏi giả định
+Bảng nhỏ giúp reviewer thấy nguồn của expected. Mỗi giả định có người xác nhận và tác động nếu thay,không để nó trôi vào test case như yêu cầu thật.
+~~~text
+ID | nội dung | trạng thái
+R1 | qty là số nguyên dương | đã chốt
+Q1 | max qty? | còn hỏi
+A1 | lab thử max20 để thiết kế nháp | giả định,chưa là yêu cầu
+~~~
+
+### Tiêu chí có ví dụ quan sát được
+Thay từ xử lý nhanh bằng điều kiện đo được và ngưỡng do sản phẩm chốt. Với chức năng,nêu input,trạng thái trước và kết quả,sau đó thêm ca từ chối.
+~~~text
+Given lớp còn 1 chỗ và học viên chưa đăng ký
+When đăng ký đúng thông tin
+Then có 1 enrollment confirmed và remaining0
+Ngoại lệ cần chốt:học viên đăng ký lại cùng lớp
+~~~
+
+### Câu hỏi tốt có tác động rõ
+Hỏi max để chọn biên,timezone để tính hạn,quyền để chọn actor. Không gửi danh sách câu hỏi chung không liên quan; nêu vì sao câu trả lời làm đổi thiết kế và expected.
+~~~text
+Câu hỏi:mốc18:00 có được hủy không?
+Tác động:ca17:59:59/18:00:00/18:00:01
+Người chốt:đại diện nghiệp vụ giả định
+Evidence:quyết định CANCEL-LAB-01
+~~~
+
+### Xử lý mâu thuẫn giữa nguồn
+Nếu mockup cho hủy còn tài liệu không cho,ghi hai nguồn và đề nghị chốt phiên bản. Không tự chọn cái dễ test rồi báo phía còn lại sai;kết quả chưa rõ phải là pending question.
+
+PRACTICE: Review yêu cầu đăng ký/hủy lớp tự viết,nộp mười câu hỏi có tác động và sáu tiêu chí nghiệm thu. Ghi nguồn,giả định và người chốt cho từng expected.
+Q: Yêu cầu qty hợp lệ nhưng thiếu max thì làm gì?
++ Ghi câu hỏi và giả định rõ
+- Tự đặt100 thành quy tắc
+- Không kiểm gì
+Q: Tiêu chí nghiệm thu tốt có đặc điểm gì?
++ Có thể quan sát và đánh giá với điều kiện rõ
+- Chỉ ghi nhanh và đẹp
+- Chỉ dùng từ thân thiện
+
+## LESSON manual-testing-03 | Test case, checklist và oracle
+
+### Chọn dạng tài liệu theo người thực hiện
+Test case chi tiết hữu ích khi cần lặp chính xác,checklist phù hợp người hiểu miền có mục tiêu rõ. Cả hai đều cần expected có căn cứ; dài hơn không tự tốt hơn.
+
+### Một case có tiền điều kiện thật
+Nêu build,actor,lớp còn chỗ và dữ liệu giả trước bước. Nếu chưa có fixture,case đang thiếu điều kiện chứ không được coi thực hiện thất bại sản phẩm.
+~~~text
+ID:MAN-07
+Pre:lớp CL7 còn 1 chỗ,ST4 chưa đăng ký
+Data:tên giả Lam Nếp
+Steps:mở CL7,điền,submit một lần
+Expected:confirmed1 record,remaining0
+~~~
+
+### Oracle độc lập với code hiện tại
+Expected lấy từ tiêu chí hoặc ví dụ tay đã duyệt. Nếu chụp output hiện tại rồi gọi đó là chuẩn,bug đang có sẽ được ghi thành expected và khó phát hiện regression.
+~~~text
+oracle source:R-ENROLL-01
+expected độc lập:remaining giảm từ 1 xuống0
+actual đọc lại từ UI/API lab sau commit
+Không dùng actual đầu tiên để sinh expected tự động.
+~~~
+
+### Checklist phải là câu hỏi kiểm được
+Đổi mục form tốt thành nhãn,lỗi,biên,focus và trạng thái submit cụ thể. Mỗi mục có dấu evidence hoặc finding,không tick toàn nhóm chỉ vì một ví dụ hợp lệ qua.
+~~~text
+[ ] label rõ và gắn control
+[ ] thiếu trường có lỗi hữu ích
+[ ] qty biên theo miền đã chốt
+[ ] submit lặp không nhân ý định
+[ ] trạng thái đọc lại đúng
+~~~
+
+### Review độ nhạy của assertion
+Cố ý đổi expected hoặc dùng fixture sai trong lab để ca đỏ đúng lý do. Case chỉ ghi không crash không bảo vệ tiền,quyền hoặc số chỗ; bổ sung kết quả nghiệp vụ.
+
+PRACTICE: Viết sáu test case và một checklist cho form lớp. Đổi chéo với người review giả lập,kiểm oracle,điều kiện và evidence; sửa ba điểm mơ hồ.
+Q: Test case khác checklist chủ yếu ở đâu?
++ Mức chi tiết bước/dữ liệu/expected theo mục đích
+- Checklist luôn kém
+- Test case luôn phải dài
+Q: Oracle là gì trong kiểm thử?
++ Căn cứ để quyết định expected/đúng sai
+- Chỉ cơ sở dữ liệu
+- Luôn output code hiện tại
+
+## LESSON manual-testing-04 | Môi trường, dữ liệu và tính tái lập
+
+### Build và cấu hình là phần của ca
+Một lỗi chỉ có ở timezone hoặc feature flag nhất định cần các điều kiện đó trong evidence. Ghi phiên bản app/API,schema,OS/browser và dữ liệu liên quan,không thu mọi thứ vô ích.
+
+### Manifest lab ngắn nhưng đủ chạy lại
+Tệp mô tả được lưu cùng kết quả kiểm. Không ghi token/password vào manifest; dữ liệu quyền được cấp cục bộ và thay mới theo quy trình lab.
+~~~text
+runId:LAB-MAN7
+build:LAB2
+baseUrl:http://localhost:3100
+actor:ST4 giả
+fixture:CL7 còn 1 chỗ
+timezone:giờ lab đã chốt
+secret:không lưu giá trị trong evidence
+~~~
+
+### Dữ liệu giả theo miền và trạng thái
+Không lấy số điện thoại,email hoặc hồ sơ thật cho tiện. Tạo tên giả,email example.com và id canary; fixture phải chứa trạng thái cần kiểm,không chỉ có trường đầy đủ.
+~~~text
+{"id":"ST-L7-A","name":"Lam Vạt","email":"student-a@example.com"}
+{"id":"CL-L7-A","capacity":1,"remaining":1,"status":"open"}
+~~~
+
+### Setup và cleanup đúng phạm vi
+Giữ id tạo bởi run để dọn,có bước xác nhận trước xóa. Không reset toàn database chung sau một case; nếu chỉ có quyền đọc thì mô tả dữ liệu tồn và giới hạn thay vì tự nâng quyền.
+~~~text
+setup:nhận id fixture LAB-MAN7
+execute:chỉ thao tác id được cấp
+cleanup:dọn danh sách id của run theo hướng dẫn lab
+verify:không còn dữ liệu run,suite khác không bị đổi
+~~~
+
+### Tái hiện cần cùng điều kiện có ý nghĩa
+Nếu lỗi biến mất,trước khi đóng cần so build,dữ liệu,mạng,quyền và thời điểm. Không yêu cầu người báo quay lại mọi click cá nhân; thu evidence đủ cho giả thuyết lỗi.
+
+PRACTICE: Tạo manifest và fixture cho bốn ca,rồi mô phỏng đổi build/timezone/dữ liệu để thấy kết quả khác. Nộp cách setup/cleanup theo id và báo cáo không chứa bí mật.
+Q: Môi trường tái lập cần lưu gì?
++ Build,cấu hình,dữ liệu và điều kiện liên quan
+- Chỉ tên tester
+- Chỉ thời gian click
+Q: Dữ liệu test nên chọn gì?
++ Dữ liệu giả có miền và trạng thái rõ
+- Thông tin khách thật tiện nhất
+- Một tài khoản chung cho mọi người
+
+## LESSON manual-testing-05 | Kiểm form web theo giá trị biên
+
+### Bắt đầu từ miền qty đã được chốt
+Lab quy định qty nguyên từ 1đến20. Phân vùng hợp lệ,ngoài miền,kiểu sai và thiếu dữ liệu trước khi chọn điểm; không lấy một số ngẫu nhiên rồi gọi đã bao phủ.
+
+### Biên theo chiến lược minh bạch
+Ba giá trị quanh mỗi biên gồm tại biên và hai phía gần nhất theo miền nguyên. Ca20hợp lệ chưa đủ vì lỗi >/< thường lộ ở19hoặc21.
+~~~text
+vùng | ví dụ | expected lab
+<1 | 0,-1 | từ chối
+1..20 | 1,2,10,19,20 | chấp nhận nếu điều kiện khác đủ
+>20 | 21 | từ chối
+kiểu sai | "2",null,[] | theo lỗi validation
+~~~
+
+### Kiểm gửi dữ liệu và phản hồi
+Gõ,xóa,paste,submit bằng Enter và bấm nút đều cần kiểm khi có rủi ro khác nhau. Đừng chỉ nhìn validation client; nếu lab có API hỗ trợ,kiểm server cũng chặn dữ liệu không hợp lệ.
+~~~text
+input raw: " 2 "
+quyết định cần chốt:trim/parse hay từ chối
+expected phải cùng hợp đồng client/server
+submit sai ->không tạo record và có lỗi giúp sửa
+~~~
+
+### Tên Unicode và lỗi không chỉ màu
+Thử dấu tổ hợp,tên giả dài và khoảng trắng theo quy tắc. Label và thông báo phải đọc được,liên kết đúng trường; tự bỏ dấu có thể đổi dữ liệu nên không coi là chuẩn hóa mặc định.
+~~~text
+tên giả:Thoi Vạt
+biên độ dài:max-1/max/max+1 theo đơn vị đã chốt
+trống:thiếu/chuỗi rỗng/toàn khoảng trắng
+Expected:giữ nghĩa,không mất dấu hoặc cắt im lặng
+~~~
+
+### Evidence cho lỗi biên cụ thể
+Ghi input đúng byte/chuỗi và expected từ rule,không chỉ nói nhập số lớn. Với dấu tổ hợp,nêu cách tạo dữ liệu để người sửa phân biệt độ dài hiển thị và đơn vị mã.
+
+PRACTICE: Thiết kế mười hai ca form cho qty/tên,ghi partition,biên,expected và tác dụng phụ. Thử hai cách submit,kiểm không tạo record khi validation fail.
+Q: Qty nguyên 1..20 nên kiểm biên nào?
++ 0,1,2,19,20,21 theo chiến lược ba giá trị
+- Chỉ10
+- Chỉ100
+Q: Form báo lỗi bằng màu đỏ đã đủ chưa?
++ Chưa,cần thông báo và liên hệ trường phù hợp
+- Đủ nếu màu rõ
+- Đủ nếu nút bị ẩn
+
+## LESSON manual-testing-06 | Kiểm điều hướng, trạng thái và thông báo
+
+### Điều hướng là chuỗi trạng thái
+Từ danh sách vào chi tiết,rồi đăng ký và Back/Refresh có thể làm lặp gửi hoặc mất draft. Vẽ trạng thái quan sát được và điều kiện chuyển,không chỉ kiểm từng màn riêng lẻ.
+
+### Bảng trạng thái có cả cạnh bị cấm
+Đơn confirmed không được trở lại pending chỉ vì browser Back. Expected theo server hiện tại và chính sách cache; UI cần phản ánh đúng sau reload.
+~~~text
+list ->detail ->draft ->submitting ->confirmed
+submitting + refresh ->không nhân đăng ký theo hợp đồng
+confirmed + back ->không tự hủy hoặc tạo mới
+link id không tồn tại ->lỗi có hướng quay lại
+~~~
+
+### Thông báo phải khớp dữ liệu thực
+Toast đã lưu trong khi server từ chối là lỗi dù chữ xanh. Đọc lại đăng ký theo id và kiểm còn chỗ; status thành công là một phần evidence,chưa phải toàn oracle.
+~~~text
+before:remaining1,enrollment0
+action:submit một ý định
+UI:Đã đăng ký
+after:remaining0,enrollment1
+Nếu UI và after mâu thuẫn:ghi cả hai theo timestamp
+~~~
+
+### Đổi tab và dữ liệu cũ
+Mở cùng lớp ở hai tab rồi đăng ký tab đầu. Tab sau có thể còn số chỗ cũ nhưng thao tác ghi phải được server kiểm lại; lỗi nên hướng người dùng cập nhật thay vì nhận hai đăng ký sai.
+~~~text
+tabA xem1 chỗ ->đăng ký thành công
+tabB vẫn hiển thị1 chỗ ->submit
+expected:theo rule lớp đầy,không vượt capacity
+refresh tabB ->remaining đúng
+~~~
+
+### Lỗi hay gặp là kiểm chỉ đường vui
+Liên kết cũ,bookmark,lỗi tải và thao tác lặp đều có thể phá trạng thái. Chọn ca theo tác động,đặc biệt thao tác ghi; không yêu cầu mọi URL lạ trả cùng một thông báo.
+
+PRACTICE: Vẽ mô hình sáu trạng thái,thiết kế tám ca Back/Refresh/tab/link lỗi. Ghi số record trước/sau và nội dung lỗi theo hợp đồng lab.
+Q: Sau Back/Refresh cần kiểm gì?
++ Trạng thái,dữ liệu và tác dụng phụ
+- Chỉ không crash
+- Chỉ tiêu đề trang
+Q: Toast thành công có đủ chứng minh lưu đúng không?
++ Chưa
+- Luôn đủ
+- Đủ nếu biến mất nhanh
+
+## LESSON manual-testing-07 | Mobile: mạng, quyền và gián đoạn
+
+### Mobile kết hợp mạng,quyền và vòng đời
+App giả định lưu draft đăng ký và sync sau. Chia ca offline,đổi mạng,nền/foreground và từ chối quyền vì tác động khác nhau; không gộp thành một ca thử mất mạng chung.
+
+### Gián đoạn có expected theo từng trường
+Nhập tên/lớp rồi khóa màn hình,đổi app hoặc background trong lab. Quy tắc giữ draft và yêu cầu xác thực lại phải chốt; một app mở lại được chưa chứng minh dữ liệu đúng.
+~~~text
+nhập draft ->background ->foreground
+expected:giữ tên/lớp theo rule
+đang gửi ->mất mạng ->mở lại
+expected:pending rõ,không báo confirmed giả
+phục hồi ->đúng 1 record
+~~~
+
+### Quyền không cần thiết không được đòi vô cớ
+Nếu chụp ảnh tùy chọn bị từ chối,phần đăng ký bằng chữ vẫn hoạt động theo thiết kế. Kiểm lần đầu,từ chối,đổi trong settings và quay lại app; không tự cấp quyền cho test xanh.
+~~~text
+camera denied ->không đính ảnh,có hướng xử lý
+đăng ký chữ ->vẫn dùng được theo rule
+permission đổi ngoài app ->quay lại kiểm trạng thái
+Không dùng dữ liệu ảnh cá nhân.
+~~~
+
+### Mạng phục hồi không nhân ý định
+Timeout client không chắc server chưa lưu. Ghi pending/confirmed và id request nếu lab cung cấp; retry hoặc mở lại không được tạo hai enrollment cho cùng ý định chống lặp.
+~~~text
+server đã ghi,response bị mất
+client hiển thị chưa rõ kết quả
+retry cùng ý định ->đối chiếu/trả cùng kết quả
+after:enrollment1,remaining giảm đúng 1
+~~~
+
+### Ma trận thiết bị có lý do
+Chọn OS/cỡ chữ/màn hình theo phạm vi hỗ trợ giả định,ghi emulator/thiết bị thật. Không nhận đã kiểm toàn mobile từ một browser emulation;công khai khoảng trống thiết bị và cách xử lý rủi ro.
+
+PRACTICE: Lập mười ca mobile theo mạng,quyền và interruption,có fixture giả và cách phục hồi cấu hình. Nộp ma trận thiết bị,expected draft/sync và bằng chứng không mất/trùng dữ liệu.
+Q: App bị gián đoạn cần kiểm điều gì khi trở lại?
++ Khôi phục trạng thái theo thiết kế
+- Chỉ có logo
+- Luôn xóa toàn dữ liệu
+Q: Từ chối quyền mobile có nên làm hỏng chức năng không cần quyền không?
++ Không theo thiết kế giảm chức năng hợp lý
+- Luôn phải crash
+- Luôn tự cấp lại quyền
+
+## LESSON manual-testing-08 | Tích hợp API và dữ liệu bằng thao tác thủ công
+
+### Một hành vi có dấu vết nhiều tầng
+Sau đăng ký qua UI,API và database cần nói về cùng enrollment. Dùng id fixture,timestamp và actor giả để nối bằng chứng; lỗi UI có thể nằm ở hiển thị trong khi dữ liệu đã đúng,hoặc ngược lại.
+
+### Đọc request bằng công cụ sẵn có
+DevTools Network cho thấy method,path,status và payload của lab. Không sửa hay phát lại request ngoài phạm vi; che token/cookie trước lưu evidence,không copy toàn HAR thật vô điều kiện.
+~~~text
+UI submit lớp CL-L7-A
+POST http://localhost:3100/enrollments
+body:{"classId":"CL-L7-A","studentId":"ST-L7-A"}
+response201:{"id":"EN-L7-A","status":"confirmed"}
+~~~
+
+### Đối chiếu dữ liệu bằng quyền được cấp
+Query read-only trên bản lab giúp xác nhận số bản ghi và trường liên quan. Quyền đọc không cho phép xem mọi hồ sơ; chỉ dùng id fixture và không đưa SQL ghi vào thao tác điều tra mặc định.
+~~~sql
+SELECT id,class_id,student_id,status
+FROM enrollments WHERE id='EN-L7-A';
+SELECT remaining FROM classes WHERE id='CL-L7-A';
+~~~
+
+### Kiểm thứ tự thời gian để tránh kết luận sớm
+Luồng bất đồng bộ có thể trả pending trước confirmed. Chờ theo ngân sách và trạng thái đã chốt,ghi mốc; không gọi bug ngay khi đọc quá sớm,nhưng cũng không chờ vô hạn đến khi tình cờ đúng.
+~~~text
+t0 submit ->pending theo hợp đồng
+t1 worker nhận ->đang xử lý
+t2 server confirmed ->UI cập nhật trong ngân sách lab
+Hết ngân sách vẫn pending ->finding có timeline
+~~~
+
+### Bẫy cùng tên nhưng khác tài nguyên
+Hai lớp cùng tên có thể khác id và capacity. Luôn nối theo khóa ổn định,không chỉ text trên màn hình; screenshot cần đủ bối cảnh nhưng không lộ dữ liệu không liên quan.
+
+PRACTICE: Kiểm một đăng ký từ UI qua Network và query chỉ đọc lab. Nộp id,timeline,expected/actual ở ba tầng và một finding giả về UI khác dữ liệu; che mọi thông tin quyền.
+Q: Khi kiểm UI/API/dữ liệu cần nối bằng gì?
++ Id fixture và thời điểm thao tác
+- Tên màu nút
+- Số ảnh chụp
+Q: Quyền read-only database cho tester có ý nghĩa gì?
++ Giới hạn tác động và vẫn phải đúng phạm vi
+- Cho phép đọc mọi dữ liệu
+- Không cần bảo vệ log
+
+## LESSON manual-testing-09 | Smoke, sanity và regression theo rủi ro
+
+### Smoke kiểm build có thể dùng để kiểm tiếp
+Chọn luồng mở app,đăng nhập lab,xem lớp,đăng ký tối thiểu và đọc lại. Số case nhỏ nhưng phải bảo vệ nền tảng; smoke không chỉ trang chủ tải được hoặc logo xuất hiện.
+
+### Sanity có phạm vi cần nói rõ
+Thuật ngữ sanity có thể được nhóm dùng khác nhau. Trong khóa này là kiểm nhanh vùng thay đổi sau sửa nhỏ; ghi danh sách và mục tiêu thay vì tranh luận nhãn hoặc coi nó mặc nhiên đủ regression.
+~~~text
+bản sửa:validation qty
+sanity lab:qty 1/20 hợp lệ,0/21 bị chặn
+retest:ca gốc qty 0 từng lọt
+regression:đăng ký,hủy,remaining và lỗi form liên quan
+~~~
+
+### Regression chọn theo tác động thay đổi
+Sửa tính chỗ có thể ảnh hưởng đặt,hủy,đăng ký lặp và màn danh sách. Lập bản đồ vùng ảnh hưởng,kèm lý do ca được chọn; không chạy toàn suite vô thức nếu nền đang hỏng.
+~~~text
+change:remaining service
+impact:UI list,detail,enroll,cancel,retry
+ưu tiên:rủi ro vượt chỗ và hoàn chỗ sai
+coverage:ca thường,biên,chỗ cuối và cạnh tranh lab
+~~~
+
+### Retest là xác nhận lỗi gốc
+Dùng build mới,cùng điều kiện cần thiết và expected đã chốt. Sau đó thêm biến thể để kiểm cơ chế sửa,không chỉ đổi dữ liệu đến khi lỗi không còn xuất hiện.
+~~~text
+bug BUG-L7-04:qty 0 tạo record
+retest:qty 0 không tạo,thông báo đúng
+biến thể:qty âm,lẻ,thiếu
+hợp lệ:qty 1 vẫn tạo đúng
+Ghi build và evidence trước/sau.
+~~~
+
+### Không kiểm được không phải pass
+Nếu API lab không ready,đánh blocked cho ca phụ thuộc,ghi lỗi môi trường và người xử lý. Tổng số pass phải đi cùng fail/blocked/not-run và rủi ro còn lại.
+
+PRACTICE: Cho ba thay đổi giả,thiết kế smoke,sanity,retest và regression có phạm vi. Nộp mười lăm ca có lý do ưu tiên và báo cáo một build bị blocked.
+Q: Smoke nhằm mục đích gì?
++ Xác nhận build/luồng quan trọng đủ ổn để kiểm tiếp
+- Mọi regression đầy đủ
+- Chỉ kiểm giao diện đẹp
+Q: Retest khác regression ở đâu?
++ Xác nhận lỗi đã sửa khác tìm tác động phụ
+- Hai từ luôn giống
+- Regression chỉ trước code
+
+## LESSON manual-testing-10 | UAT, tiêu chí nghiệm thu và vai nghiệp vụ
+
+### UAT đánh giá nhu cầu sử dụng
+Đại diện nghiệp vụ giả định cần mở lớp,duyệt đăng ký và đối chiếu điểm cuối ngày. QA chuẩn bị dữ liệu,hướng dẫn và evidence; không tự thay người nghiệp vụ quyết định chấp nhận mọi quy trình.
+
+### Tiêu chí và vai trò trước buổi thử
+Chốt người đánh giá,phạm vi,build,fixture và tiêu chí. Mỗi luồng có expected từ nghiệp vụ,câu hỏi chưa chốt được theo dõi; tránh mở app rồi mới tranh luận cái nào là yêu cầu.
+~~~text
+luồng:điều phối mở lớp và xem danh sách
+actor:coordinator-A giả
+fixture:lớp CL7,hai học viên giả
+accept:capacity đúng,quyền đúng,báo cáo khớp
+owner quyết định:đại diện nghiệp vụ được giao
+~~~
+
+### Kịch bản theo công việc thực tế
+Một kịch bản UAT có đầu vào,công việc và kết quả kinh doanh,không cần mô tả mọi click nếu người dùng đã hiểu app. Kiểm cả ngoại lệ có giá trị như lớp đầy hoặc hủy sát hạn.
+~~~text
+Bắt đầu:lớp còn 1 chỗ,hai yêu cầu đăng ký
+Nhiệm vụ:duyệt đúng phạm vi và xử lý người còn lại
+Kết quả:không vượt capacity,danh sách/điểm nhất quán
+Câu hỏi:chính sách danh sách chờ nếu chưa chốt
+~~~
+
+### Phân biệt bug với thay đổi yêu cầu
+Nếu tiêu chí đã duyệt nói chỉ điều phối xem báo cáo nhưng giờ muốn học viên xem,đó có thể là change request. Ghi nguồn,quyết định và tác động; không im lặng sửa expected để khớp mong muốn mới.
+~~~text
+issue type:bug/change/question
+source:tiêu chí UAT-L7-03
+impact:quyền xem báo cáo
+decision owner:nghiệp vụ + kỹ thuật theo quy trình
+QA giữ evidence,tránh tự nới quyền.
+~~~
+
+### Ký nhận không xóa rủi ro còn lại
+Bản chấp nhận cần nêu ngoại lệ,lỗi mở,điều kiện triển khai và người chịu trách nhiệm. Không coi chữ ký hoặc mọi case chọn pass là cam kết không còn lỗi.
+
+PRACTICE: Soạn gói UAT sáu kịch bản cho điều phối/học viên giả,có tiêu chí và hai ngoại lệ. Nộp biên bản pass/fail/question/change cùng rủi ro và quyết định giả lập.
+Q: UAT tập trung vào điều gì?
++ Phù hợp nhu cầu và quy trình nghiệp vụ
+- Chỉ mọi unit test xanh
+- Chỉ tester tự duyệt
+Q: Khi UAT yêu cầu mới xuất hiện cần làm gì?
++ Ghi rõ thay đổi và đánh giá tác động
+- Tự sửa expected im lặng
+- Gọi mọi thứ là bug
+
+## LESSON manual-testing-11 | Thăm dò trong giới hạn thời gian
+
+### Charter tập trung một câu hỏi rủi ro
+Thăm dò không có nghĩa click ngẫu nhiên. Charter lab tập trung việc đổi trạng thái gửi khi mạng mất/phục hồi,để học hệ thống,thiết kế thêm phép thử và ghi bằng chứng trong cùng session.
+
+### Timebox và dữ liệu được chuẩn bị
+Chọn ba mươi phút trong phạm vi được cấp,có fixture,build và điểm dừng. Tài khoản lab và mạng giả lập phải phục hồi sau thử; không dùng app thật ngoài nhiệm vụ để tìm thêm lỗi.
+~~~text
+charter:khám phá mất/trùng đăng ký khi đổi mạng
+timebox:30 phút
+resources:ST-L7-A,CL-L7-A,stub network lab
+focus:pending,retry,đóng/mở app
+stop:dữ liệu ngoài fixture hoặc lab không ổn định
+~~~
+
+### Notes ghi ý định và phát hiện
+Ghi mốc,đường đi,dữ liệu,quan sát và câu hỏi đủ tái hiện. Không cần log mọi click vô nghĩa nhưng phải giữ input/trạng thái của finding; nếu quên,có thể không tái hiện được.
+~~~text
+00-05:đọc trạng thái pending,kiểm expected
+05-15:offline->submit->mở lại,giữ draft
+15-22:retry sau mất response,nghi trùng id
+22-30:tái hiện,thu evidence,câu hỏi về timeout
+~~~
+
+### Heuristic gợi ý,chưa phải oracle
+Thử rỗng,biên,lặp,đảo thứ tự hoặc gián đoạn giúp tìm ý tưởng. Một hành vi lạ cần đối chiếu yêu cầu và tác động; không gọi mọi thứ khác kỳ vọng cá nhân là bug.
+
+### Debrief chuyển khám phá thành hành động
+Tóm tắt phạm vi đã đi,finding,câu hỏi và ca regression đề xuất. Nếu thời gian hết,nêu phần chưa khám phá; số bug không phải thước duy nhất của giá trị session.
+~~~text
+covered:offline/reopen/retry cùng ý định
+finding:EN-L7-A vàEN-L7-B trùng nghiệp vụ
+question:pending quá hạn hiển thị gì?
+follow-up:ca hồi quy chống lặp sau mất response
+~~~
+
+PRACTICE: Thực hiện session ba mươi phút trên lab hoặc mô phỏng có ghi rõ. Nộp charter,notes,debrief,một finding hoặc câu hỏi và hai ca regression rút ra.
+Q: Exploratory có phải kiểm tùy hứng không?
++ Không,có mục tiêu,quan sát và ghi chép
+- Có,không cần evidence
+- Có,chỉ click nhiều
+Q: Một session thăm dò nên ghi gì?
++ Mục tiêu,dữ liệu,đường đi,finding và câu hỏi
+- Chỉ số click
+- Chỉ thời gian kết thúc
+
+## LESSON manual-testing-12 | Bằng chứng, báo cáo và quyết định phát hành
+
+### Evidence phục vụ người sửa và người quyết định
+Bug report cần actor,build,fixture,bước,expected/actual và tác động. Screenshot hỗ trợ nhưng không thay dữ liệu đầu vào hoặc timeline; dùng nội dung giả và che quyền trước chia sẻ.
+
+### Report tách quan sát và giả thuyết
+Actual là số bản ghi tăng hai sau một ý định,còn nghi server retry là giả thuyết. Phân biệt giúp Dev điều tra mà không bị dẫn vào nguyên nhân chưa chứng minh.
+~~~text
+title:Một ý định đăng ký tạo hai enrollment sau mất response
+pre:LAB2,ST-L7-A,CL-L7-A
+steps:submit,mất response,retry theo UI
+actual:EN1 vàEN2 confirmed
+expected:đúng 1 ý định theo rule ID-L7
+hypothesis:chưa xác định cơ chế
+~~~
+
+### Triage có tác động và thứ tự sửa
+Mức độ lỗi dựa hậu quả,priority dựa bối cảnh và kế hoạch. Cung cấp số người/luồng giả bị ảnh hưởng,cách tránh và phạm vi evidence; không nâng mức vì người báo muốn sửa trước.
+
+### Release report công khai khoảng trống
+Ghi build,phạm vi,môi trường,pass/fail/blocked/not-run,lỗi mở và coverage theo rủi ro. Nếu chưa có thiết bị thật,không ẩn trong phần phụ; nêu ảnh hưởng tới kiến nghị.
+~~~text
+build LAB2;scope đăng ký/hủy
+pass14,fail2,blocked3,not-run1
+open critical risk:trùng enrollment
+not tested:notification thiết bị thật
+recommend:chưa phát hành lab theo gate đã chốt
+~~~
+
+### Quyết định có người chịu trách nhiệm
+QA kiến nghị dựa bằng chứng,người được giao quyết định chấp nhận rủi ro. Theo dõi retest và regression sau sửa; không đóng bug chỉ vì Dev nói đã sửa hoặc không còn tái hiện một lần.
+~~~text
+bug fixed buildLAB3 ->retest ca gốc
+->regression retry/cancel/remaining
+->evidence gắn build và fixture
+->đóng hoặc mở lại theo kết quả xác nhận
+~~~
+
+PRACTICE: Viết hai bug report và một release report từ dữ liệu lab giả. Có severity/priority có lý do,blocked/not-run,rủi ro và retest plan; không dùng thông tin thật.
+Q: Severity và priority nên được xử lý thế nào?
++ Mô tả tác động và thống nhất thứ tự sửa theo bối cảnh
+- Luôn bằng nhau
+- Theo người báo lớn tiếng
+Q: Release report nên có trạng thái nào ngoài pass/fail?
++ Blocked/not-run và rủi ro còn lại
+- Chỉ mọi thứ xanh
+- Không cần nêu thiếu thiết bị
+
+## LESSON manual-testing-13 | Dự án: kiểm bản đăng ký lớp giả
+
+### Dự án kiểm bản đăng ký lớp Nếp Sương
+Nhận yêu cầu giả định đã chốt về qty,capacity,hủy và quyền. Review tìm câu hỏi,dựng fixture,kiểm form/luồng/dữ liệu rồi báo quyết định; không chỉ nộp danh sách case chưa có evidence.
+
+### Gói đầu vào có hợp đồng nhỏ
+Lab localhost phải được cung cấp hoặc tự dựng theo hợp đồng bên dưới. Nếu chỉ mô phỏng giấy,công khai chưa thực hiện trên app; không nhận các output giả là kết quả chạy thật.
+~~~text
+qty:nguyên 1..20 và không vượt remaining
+role:học viên chỉ xem/sửa đăng ký của mình
+retry:cùng ý định không tạo trùng
+cancel:theo hạn và rule hoàn điểm đã duyệt
+fixture:hai actor giả,ba lớp trống/1 chỗ/đầy
+~~~
+
+### Bộ kiểm phối hợp kỹ thuật
+Hai mươi ca tối thiểu có partition/biên,bảng quyết định,state,quyền và mạng. Mỗi ca nối yêu cầu,rủi ro và expected; chọn hai charter để khám phá điểm chưa rõ sau thực thi.
+~~~text
+coverage:REQ ->RISK ->MODEL ->CASE ->EVIDENCE
+BVA:qty 0/1/2/19/20/21
+DECISION:đúng chủ/trước hạn/đã hủy
+STATE:draft,pending,confirmed,cancelled
+EXPLORATORY:mất response và đổi người dùng
+~~~
+
+### Thực thi và retest có dấu vết
+Ghi pass/fail/blocked/not-run cùng build và fixture. Cài một lỗi trong app lab hoặc dùng bản lỗi được cấp,viết report,kiểm bản sửa và regression; không bịa bug cho đủ số lượng.
+
+### Điều kiện bàn giao
+Nộp requirement review,manifest,fixture,hai mươi ca,hai charter,evidence,report và release recommendation. Nêu app thật/stub/mô phỏng và phần chưa kiểm để người nhận đánh giá đúng sức nặng bằng chứng.
+~~~text
+accept:gói đọc và chạy lại được
+accept:expected có nguồn và dữ liệu tự đặt
+accept:report che quyền,id nhất quán
+accept:ít nhất một retest có evidence hoặc ghi rõ chưa có bản sửa
+Không deploy,push hoặc gửi báo cáo ra ngoài trong bài học.
+~~~
+
+PRACTICE: Bàn giao trọn bộ kiểm Nếp Sương với hai mươi ca,hai session,hai report mẫu và release report. Nếu chưa có ứng dụng lab,ghi phần thiết kế và kế hoạch thực thi,chưa nhận pass thực tế.
+Q: Dự án kiểm bản đăng ký lớp cần gì trước chạy?
++ Phạm vi,tiêu chí,môi trường và fixture
+- Chỉ mở app
+- Chỉ deadline
+Q: Điều kiện bàn giao bộ kiểm là gì?
++ Có ca,evidence,bug retest và giới hạn rõ
+- Chỉ thật nhiều screenshot
+- Chỉ file case đủ dòng
+
+## LESSON manual-testing-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Review yêu cầu,kiểm sớm và phản hồi khi vận hành đều có giá trị; không chỉ chạy test cuối vòng đời.
+2. Điểm chưa chốt phải được làm rõ với người chịu trách nhiệm; không biến ý tưởng tester thành expected bắt buộc.
+3. Chọn dạng theo người thực hiện,rủi ro và nhu cầu tái hiện; checklist vẫn cần oracle rõ khi kiểm.
+4. Cùng bước trên build/dữ liệu khác có thể khác kết quả; evidence phải đủ để người khác tái hiện.
+
+### Dữ liệu và điều kiện biên
+5. Xác định miền nguyên và kiểm quanh mỗi ranh giới,thêm kiểu sai/null/thiếu ở lớp nhập.
+6. Điều hướng có thể gửi lại thao tác hoặc mất draft; expected theo hợp đồng và kiểm số bản ghi.
+7. Mạng,quyền,nền/foreground có ảnh hưởng khác nhau; nêu expected cụ thể cho draft và gửi dữ liệu.
+8. Id giúp theo dấu cùng tài nguyên qua các tầng,phân biệt lỗi hiển thị và lỗi lưu dữ liệu.
+
+### Tính đúng và cách điều tra
+9. Smoke nhỏ nhưng có ý nghĩa theo rủi ro; nếu nền hỏng nên xử lý trước nhiều ca chi tiết.
+10. Đại diện nghiệp vụ có trách nhiệm đánh giá tiêu chí; QA chuẩn bị dữ liệu,evidence và hỗ trợ.
+11. Học,thiết kế và thực hiện diễn ra cùng nhau trong charter/timebox,có debrief để tổng hợp.
+12. Bằng chứng người dùng/nghiệp vụ và rủi ro giúp triage,có owner quyết định.
+
+### Rủi ro và lựa chọn phương án
+13. Kế hoạch nhỏ có oracle và dữ liệu giúp kiểm có mục đích,tái lập và có thể đánh giá kết quả.
+14. Ví dụ cụ thể về dữ liệu,kết quả và điều kiện giúp nhóm tránh hiểu khác nhau.
+15. Fixture giả giảm rủi ro và giúp expected cố định; cần riêng id khi nhiều người cùng ghi.
+16. Kiểm trạng thái đọc lại hoặc nguồn dữ liệu phù hợp; UI có thể thông báo trước khi backend hoàn tất.
+
+### Dự án, bằng chứng và bàn giao
+17. Quyền chỉ đọc giảm rủi ro ghi nhưng dữ liệu vẫn có thể nhạy cảm; chỉ truy fixture được cấp.
+18. Phân biệt lỗi so với tiêu chí đã chốt và yêu cầu thay đổi,có người quyết định phạm vi.
+19. Không kiểm được phải được công khai; số pass không thay coverage và mức rủi ro.
+20. Người nhận phải hiểu hành vi được bảo vệ,bằng chứng và phần chưa đủ điều kiện kiểm trước quyết định.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Kiểm thử góp gì trong vòng đời sản phẩm?
++ Cung cấp bằng chứng về chất lượng và rủi ro
+- Chứng minh không còn lỗi
+- Chỉ tìm lỗi sau khi code xong
+Q: Yêu cầu qty hợp lệ nhưng thiếu max thì làm gì?
++ Ghi câu hỏi và giả định rõ
+- Tự đặt100 thành quy tắc
+- Không kiểm gì
+Q: Test case khác checklist chủ yếu ở đâu?
++ Mức chi tiết bước/dữ liệu/expected theo mục đích
+- Checklist luôn kém
+- Test case luôn phải dài
+Q: Môi trường tái lập cần lưu gì?
++ Build,cấu hình,dữ liệu và điều kiện liên quan
+- Chỉ tên tester
+- Chỉ thời gian click
+Q: Qty nguyên 1..20 nên kiểm biên nào?
++ 0,1,2,19,20,21 theo chiến lược ba giá trị
+- Chỉ10
+- Chỉ100
+Q: Sau Back/Refresh cần kiểm gì?
++ Trạng thái,dữ liệu và tác dụng phụ
+- Chỉ không crash
+- Chỉ tiêu đề trang
+Q: App bị gián đoạn cần kiểm điều gì khi trở lại?
++ Khôi phục trạng thái theo thiết kế
+- Chỉ có logo
+- Luôn xóa toàn dữ liệu
+Q: Khi kiểm UI/API/dữ liệu cần nối bằng gì?
++ Id fixture và thời điểm thao tác
+- Tên màu nút
+- Số ảnh chụp
+Q: Smoke nhằm mục đích gì?
++ Xác nhận build/luồng quan trọng đủ ổn để kiểm tiếp
+- Mọi regression đầy đủ
+- Chỉ kiểm giao diện đẹp
+Q: UAT tập trung vào điều gì?
++ Phù hợp nhu cầu và quy trình nghiệp vụ
+- Chỉ mọi unit test xanh
+- Chỉ tester tự duyệt
+Q: Exploratory có phải kiểm tùy hứng không?
++ Không,có mục tiêu,quan sát và ghi chép
+- Có,không cần evidence
+- Có,chỉ click nhiều
+Q: Severity và priority nên được xử lý thế nào?
++ Mô tả tác động và thống nhất thứ tự sửa theo bối cảnh
+- Luôn bằng nhau
+- Theo người báo lớn tiếng
+Q: Dự án kiểm bản đăng ký lớp cần gì trước chạy?
++ Phạm vi,tiêu chí,môi trường và fixture
+- Chỉ mở app
+- Chỉ deadline
+Q: Tiêu chí nghiệm thu tốt có đặc điểm gì?
++ Có thể quan sát và đánh giá với điều kiện rõ
+- Chỉ ghi nhanh và đẹp
+- Chỉ dùng từ thân thiện
+Q: Dữ liệu test nên chọn gì?
++ Dữ liệu giả có miền và trạng thái rõ
+- Thông tin khách thật tiện nhất
+- Một tài khoản chung cho mọi người
+Q: Toast thành công có đủ chứng minh lưu đúng không?
++ Chưa
+- Luôn đủ
+- Đủ nếu biến mất nhanh
+Q: Quyền read-only database cho tester có ý nghĩa gì?
++ Giới hạn tác động và vẫn phải đúng phạm vi
+- Cho phép đọc mọi dữ liệu
+- Không cần bảo vệ log
+Q: Khi UAT yêu cầu mới xuất hiện cần làm gì?
++ Ghi rõ thay đổi và đánh giá tác động
+- Tự sửa expected im lặng
+- Gọi mọi thứ là bug
+Q: Release report nên có trạng thái nào ngoài pass/fail?
++ Blocked/not-run và rủi ro còn lại
+- Chỉ mọi thứ xanh
+- Không cần nêu thiếu thiết bị
+Q: Điều kiện bàn giao bộ kiểm là gì?
++ Có ca,evidence,bug retest và giới hạn rõ
+- Chỉ thật nhiều screenshot
+- Chỉ file case đủ dòng

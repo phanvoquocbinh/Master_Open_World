@@ -1,170 +1,948 @@
 {
-  "no": 6,
-  "title": "Hiện tại hoàn thành hay quá khứ đơn? – just / already / yet, for / since",
-  "sub": "I've just finished the slides. I sent them ten minutes ago.",
-  "goals": [
-    "Phân biệt hiện tại hoàn thành (kết quả hiện tại, thời gian chưa kết thúc/không nói rõ) với quá khứ đơn (thời điểm đã kết thúc)",
-    "Dùng just / already / yet / still đúng nghĩa và đúng vị trí",
-    "Hỏi – đáp How long…? với for (khoảng thời gian) và since (mốc thời gian); dùng ago với quá khứ đơn",
-    "Báo cáo tiến độ công việc ở văn phòng bằng lời nói và email",
-    "Nối âm tự nhiên (just arrived, sent it) và đọc đúng already, yet"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng: công việc & thời gian", "items": [
-      {"w": "deadline", "ipa": "/ˈdedlaɪn/", "pos": "n", "vi": "hạn chót", "ex": "The deadline for the report is Friday.", "exVi": "Hạn chót nộp báo cáo là thứ Sáu."},
-      {"w": "report", "ipa": "/rɪˈpɔːt/", "pos": "n", "vi": "bản báo cáo", "ex": "Have you finished the report yet?", "exVi": "Bạn làm xong báo cáo chưa?"},
-      {"w": "task", "ipa": "/tɑːsk/", "pos": "n", "vi": "nhiệm vụ, đầu việc", "ex": "I've already done three tasks this morning.", "exVi": "Sáng nay tôi đã làm xong ba việc rồi."},
-      {"w": "project", "ipa": "/ˈprɒdʒekt/", "pos": "n", "vi": "dự án", "ex": "We've worked on this project since March.", "exVi": "Chúng tôi làm dự án này từ tháng Ba."},
-      {"w": "customer", "ipa": "/ˈkʌstəmə(r)/", "pos": "n", "vi": "khách hàng", "ex": "The customer has just called.", "exVi": "Khách hàng vừa gọi."},
-      {"w": "check", "ipa": "/tʃek/", "pos": "v", "vi": "kiểm tra", "ex": "Have you checked your email yet?", "exVi": "Bạn đã kiểm tra email chưa?"},
-      {"w": "reply", "ipa": "/rɪˈplaɪ/", "pos": "v", "vi": "trả lời (thư, tin nhắn)", "ex": "They haven't replied to my email yet.", "exVi": "Họ vẫn chưa trả lời email của tôi."},
-      {"w": "update", "ipa": "/ˌʌpˈdeɪt/", "pos": "v", "vi": "cập nhật; (n) /ˈʌpdeɪt/ bản cập nhật", "ex": "I've just updated the price list.", "exVi": "Tôi vừa cập nhật bảng giá."},
-      {"w": "print", "ipa": "/prɪnt/", "pos": "v", "vi": "in (tài liệu)", "ex": "Please print ten copies for the meeting.", "exVi": "Làm ơn in mười bản cho cuộc họp."},
-      {"w": "join", "ipa": "/dʒɔɪn/", "pos": "v", "vi": "gia nhập, vào (công ty, câu lạc bộ)", "ex": "I joined the company three years ago.", "exVi": "Tôi vào công ty ba năm trước."},
-      {"w": "move house", "ipa": "/ˌmuːv ˈhaʊs/", "pos": "phr", "vi": "chuyển nhà", "ex": "We've moved house twice since 2020.", "exVi": "Từ năm 2020 đến nay chúng tôi đã chuyển nhà hai lần."},
-      {"w": "get married", "ipa": "/ˌɡet ˈmærid/", "pos": "phr", "vi": "kết hôn, cưới", "ex": "They got married in 2015.", "exVi": "Họ cưới nhau năm 2015."},
-      {"w": "just", "ipa": "/dʒʌst/", "pos": "adv", "vi": "vừa mới", "ex": "I've just finished lunch.", "exVi": "Tôi vừa ăn trưa xong."},
-      {"w": "already", "ipa": "/ɔːlˈredi/", "pos": "adv", "vi": "đã … rồi (sớm hơn mong đợi)", "ex": "She has already sent the email.", "exVi": "Cô ấy đã gửi email rồi."},
-      {"w": "yet", "ipa": "/jet/", "pos": "adv", "vi": "chưa (câu phủ định); … chưa? (câu hỏi)", "ex": "Have you eaten yet?", "exVi": "Bạn ăn (cơm) chưa?"},
-      {"w": "recently", "ipa": "/ˈriːsntli/", "pos": "adv", "vi": "gần đây", "ex": "Have you seen any good films recently?", "exVi": "Gần đây bạn có xem phim nào hay không?"},
-      {"w": "so far", "ipa": "/ˌsəʊ ˈfɑː(r)/", "pos": "phr", "vi": "cho đến nay", "ex": "So far, we've sold 200 tickets.", "exVi": "Đến giờ chúng tôi đã bán được 200 vé."},
-      {"w": "since", "ipa": "/sɪns/", "pos": "prep", "vi": "từ (một mốc thời gian) đến nay", "ex": "I've lived here since 2019.", "exVi": "Tôi sống ở đây từ năm 2019."},
-      {"w": "for ages", "ipa": "/fər ˈeɪdʒɪz/", "pos": "phr", "vi": "lâu lắm rồi", "ex": "I haven't seen you for ages!", "exVi": "Lâu lắm rồi không gặp bạn!"},
-      {"w": "owner", "ipa": "/ˈəʊnə(r)/", "pos": "n", "vi": "người chủ (quán, nhà, xe)", "ex": "The owner has run this cafe for twelve years.", "exVi": "Ông chủ đã điều hành quán cà phê này 12 năm."}
-    ]},
-    {"k": "grammar", "h": "just / already / yet / still – báo cáo tiến độ", "html": "<p>Các trạng từ này rất hay đi với hiện tại hoàn thành khi nói về <b>tiến độ công việc</b> hoặc <b>việc vừa xảy ra mà kết quả còn ở hiện tại</b>.</p>", "table": [["Từ", "Nghĩa", "Vị trí", "Ví dụ"], ["just", "vừa mới", "giữa have/has và V3", "I've just finished the slides."], ["already", "đã … rồi (sớm hơn mong đợi)", "giữa have/has và V3 (hoặc cuối câu)", "She's already sent the email."], ["yet", "chưa (phủ định) / … chưa? (câu hỏi)", "cuối câu phủ định & câu hỏi", "I haven't replied yet. · Have you eaten yet?"], ["still … not", "vẫn chưa (sốt ruột hơn yet)", "still đứng trước haven't / hasn't", "He still hasn't called me."]], "ex": [
-      {"t": "– Is Lan here? – No, she's just left.", "vi": "– Lan có đây không? – Không, cô ấy vừa đi xong."},
-      {"t": "I've already booked the meeting room for Friday.", "vi": "Tôi đã đặt phòng họp cho thứ Sáu rồi."},
-      {"t": "Have you eaten yet? – Yes, I have. / No, not yet.", "vi": "Bạn ăn chưa? – Rồi. / Chưa."},
-      {"t": "The customer hasn't replied yet.", "vi": "Khách hàng chưa trả lời."},
-      {"t": "It's ten o'clock and Huy still hasn't arrived!", "vi": "Mười giờ rồi mà Huy vẫn chưa đến!"}
-    ], "tips": [
-      "Câu chào kiểu Việt “Ăn cơm chưa?” → <i>Have you eaten yet?</i>; trả lời “Chưa” → <b>Not yet.</b>",
-      "<b>yet</b> chỉ dùng trong câu phủ định và câu hỏi; câu khẳng định dùng <b>already</b>: ❌ <i>I've finished yet</i> → ✅ <i>I've already finished.</i>",
-      "Tiếng Anh-Mỹ hay nói <i>Did you eat yet?</i>, nhưng trong giáo trình này (Anh-Anh) và khi đi thi, hãy dùng hiện tại hoàn thành với just / already / yet."
-    ]},
-    {"k": "grammar", "h": "How long…? – for & since", "html": "<p>Hiện tại hoàn thành còn dùng cho tình huống <b>bắt đầu trong quá khứ và vẫn còn đến bây giờ</b>. Hỏi bằng <b>How long have / has + S + V3?</b> và trả lời với <b>for</b> hoặc <b>since</b>.</p>", "table": [["", "for + khoảng thời gian", "since + mốc thời gian"], ["Nghĩa", "trong (bao lâu)", "từ (lúc nào) đến nay"], ["Đi với", "three years · six months · two hours · a long time · ages", "2020 · Monday · last summer · 8 o'clock · I was a child"], ["Câu", "I've worked here for three years.", "I've worked here since 2023."]], "ex": [
-      {"t": "How long have you lived in Da Nang? – For five years.", "vi": "Bạn sống ở Đà Nẵng bao lâu rồi? – Năm năm."},
-      {"t": "She has been a nurse since she was twenty-two.", "vi": "Cô ấy làm y tá từ năm 22 tuổi."},
-      {"t": "We've known each other since primary school.", "vi": "Chúng tôi quen nhau từ hồi tiểu học."},
-      {"t": "I haven't seen my grandparents for two months.", "vi": "Đã hai tháng rồi tôi không gặp ông bà."},
-      {"t": "I joined the company three years ago. → I've worked here for three years.", "vi": "Tôi vào công ty ba năm trước. → Tôi đã làm ở đây được ba năm."}
-    ], "tips": [
-      "Tiếng Việt “Tôi làm ở đây <u>2 năm rồi</u>” → người Việt hay nói ❌ <i>I work here for two years</i> (hiện tại đơn). Đúng: ✅ <i>I've worked here for two years.</i>",
-      "❌ <i>since three years</i> → ✅ <i>for three years</i> (khoảng) hoặc <i>since 2023</i> (mốc).",
-      "<b>ago</b> đi với <b>quá khứ đơn</b> (một thời điểm đã qua): <i>I joined three years ago.</i> ❌ <i>I have joined three years ago.</i>",
-      "Động từ trạng thái (know, be, have, live…) hay đi với for / since: ✅ <i>I've known her for ten years</i> – ❌ <i>I know her for ten years</i>."
-    ]},
-    {"k": "grammar", "h": "Hiện tại hoàn thành hay quá khứ đơn?", "html": "<p>Câu hỏi quan trọng nhất: <b>người nói có nhắc (hoặc đang nghĩ đến) một thời điểm đã kết thúc không?</b> Có → <b>quá khứ đơn</b>. Không nói thời điểm, hoặc khoảng thời gian vẫn còn kéo dài đến nay → <b>hiện tại hoàn thành</b>.</p>", "table": [["", "Hiện tại hoàn thành", "Quá khứ đơn"], ["Thời gian", "Không nói rõ / chưa kết thúc: today, this week, this year, so far, ever, recently", "Đã kết thúc, xác định: yesterday, last week, in 2020, ago, when I was…"], ["Tập trung vào", "Kết quả ở hiện tại, trải nghiệm, tin mới", "Sự việc trong quá khứ, chi tiết câu chuyện"], ["Ví dụ", "I've lost my keys. (giờ vẫn chưa thấy)", "I lost my keys yesterday, but I found them later."], ["Câu hỏi", "Have you seen this film?", "When did you see it? (KHÔNG dùng When have you…?)"]], "ex": [
-      {"t": "– Have you ever been to Hue? – Yes, I have. I went there in 2022.", "vi": "Hỏi trải nghiệm bằng HTHT → kể chi tiết bằng quá khứ đơn."},
-      {"t": "I've drunk three coffees today.", "vi": "Hôm nay tôi đã uống ba cốc cà phê. (hôm nay chưa hết)"},
-      {"t": "I drank three coffees yesterday.", "vi": "Hôm qua tôi uống ba cốc cà phê. (hôm qua đã hết)"},
-      {"t": "She has worked here since 2021. Before that, she worked at a bank for two years.", "vi": "Việc hiện tại → HTHT; công việc cũ đã kết thúc → quá khứ đơn (dù có for)."},
-      {"t": "What time did you arrive?", "vi": "Bạn đến lúc mấy giờ? (❌ What time have you arrived?)"}
-    ], "tips": [
-      "❌ <i>I have finished it yesterday.</i> → ✅ <i>I finished it yesterday.</i> – có yesterday thì phải dùng quá khứ đơn.",
-      "❌ <i>When have you arrived?</i> → ✅ <i>When did you arrive?</i> – When luôn hỏi về thời điểm → quá khứ đơn.",
-      "Mẹo nói tự nhiên: mở đầu bằng HTHT (tin mới) rồi chuyển sang quá khứ đơn để kể chi tiết: <i>I've bought a new motorbike! I got it on Sunday. It cost 35 million.</i>"
-    ]},
-    {"k": "sounds", "h": "Phát âm: 've just, nối âm, already & yet", "html": "<p>Các câu báo cáo tiến độ có những âm rất dễ bị nuốt: <b>'ve / 's + just / already</b>. Người bản ngữ còn <b>nối âm</b> phụ âm cuối với nguyên âm đầu của từ sau: <i>just arrived</i> → /dʒʌst əˈraɪvd/ nghe như “jus-tơ-raivd”, <i>sent it</i> → /ˈsentɪt/. Ngoài ra, <b>yet</b> /jet/ bắt đầu bằng âm /j/ lướt nhẹ (như đầu từ <i>yes</i>), không bật mạnh như <b>jet</b> /dʒet/.</p>", "items": [
-      {"sym": "'ve / 's + just", "ex": ["I've just finished.", "She's just left.", "We've just arrived."], "vi": "'ve, 's rất nhỏ nhưng phải có: /aɪv dʒʌst/, /ʃiːz dʒʌst/. Bỏ đi thì câu thành “I just finished” – mất âm hoàn thành."},
-      {"sym": "Nối âm phụ âm + nguyên âm", "ex": ["just arrived", "sent it", "for a long time", "since eight o'clock"], "vi": "Phụ âm cuối + nguyên âm đầu của từ sau → đọc liền: sent it /ˈsentɪt/, for a /fərə/. Nói liền mạch, đừng ngắt từng chữ."},
-      {"sym": "/ɔːlˈredi/", "ex": ["already", "I've already sent it.", "She's already gone."], "vi": "Trọng âm rơi vào âm tiết thứ hai: al-READ-y. Âm đầu /ɔːl/ tròn môi và có /l/."},
-      {"sym": "/jet/ ≠ /dʒet/", "ex": ["yet", "Not yet.", "Have you eaten yet?"], "vi": "yet mở đầu bằng /j/ lướt nhẹ (như yes), không bật hơi mạnh như jet /dʒet/ (máy bay phản lực).", "pairs": [["yet", "jet"], ["yes", "Jess"]]}
-    ]},
-    {"k": "dialog", "h": "Nghe: Kiểm tra tiến độ trước cuộc họp", "lang": "en-GB", "note": "Văn phòng, 9 giờ sáng thứ Hai. 11 giờ có khách hàng lớn đến họp. Chị Thảo (quản lý) kiểm tra tiến độ với Linh và Huy. Nghe lần 1: việc nào đã xong, việc nào chưa? Nghe lần 2: Linh làm việc với khách hàng này bao lâu rồi?", "lines": [
-      {"s": "Mrs Thao", "g": "f", "t": "Good morning, both. The customer is coming at eleven. Have you finished the slides yet, Linh?", "vi": "Chào hai em. 11 giờ khách hàng đến. Linh làm xong slide chưa em?"},
-      {"s": "Linh", "g": "f", "t": "Yes, I've just finished them. I sent them to you ten minutes ago.", "vi": "Rồi ạ, em vừa làm xong. Em đã gửi cho chị mười phút trước."},
-      {"s": "Mrs Thao", "g": "f", "t": "Great. I haven't checked my email yet. What about the report, Huy?", "vi": "Tốt. Chị chưa kiểm tra email. Còn báo cáo thì sao, Huy?"},
-      {"s": "Huy", "g": "m", "t": "I've already written most of it, but I haven't added the sales numbers yet.", "vi": "Em đã viết gần xong rồi, nhưng chưa thêm số liệu bán hàng."},
-      {"s": "Mrs Thao", "g": "f", "t": "Why not? When did the sales team send them?", "vi": "Sao vậy? Phòng kinh doanh gửi số liệu khi nào?"},
-      {"s": "Huy", "g": "m", "t": "They sent them on Friday evening, but there was a mistake, so I asked them again this morning. They haven't replied yet.", "vi": "Họ gửi tối thứ Sáu, nhưng có chỗ sai, nên sáng nay em hỏi lại. Họ vẫn chưa trả lời."},
-      {"s": "Mrs Thao", "g": "f", "t": "OK, I'll call their manager now. Linh, how long have you worked with this customer?", "vi": "Được rồi, chị sẽ gọi cho trưởng phòng bên đó ngay. Linh, em làm việc với khách hàng này bao lâu rồi?"},
-      {"s": "Linh", "g": "f", "t": "Since my first month here, so for about three years.", "vi": "Từ tháng đầu tiên em vào công ty, tức là khoảng ba năm rồi ạ."},
-      {"s": "Mrs Thao", "g": "f", "t": "Good, you know them well. Have you met their new director?", "vi": "Tốt, em hiểu họ. Em đã gặp giám đốc mới của họ chưa?"},
-      {"s": "Linh", "g": "f", "t": "Yes, I have. I met him at a conference in Da Nang last month.", "vi": "Rồi ạ. Em gặp ông ấy ở một hội nghị tại Đà Nẵng tháng trước."},
-      {"s": "Mrs Thao", "g": "f", "t": "Perfect. You can introduce us. Huy, please print ten copies when the report is ready.", "vi": "Tuyệt. Em giới thiệu chị với ông ấy nhé. Huy, báo cáo xong thì em in mười bản."},
-      {"s": "Huy", "g": "m", "t": "Sure. Oh, the sales team has just replied! I'll add the numbers now.", "vi": "Vâng ạ. Ồ, phòng kinh doanh vừa trả lời rồi! Em thêm số liệu ngay đây."},
-      {"s": "Mrs Thao", "g": "f", "t": "Excellent. We've still got two hours.", "vi": "Tuyệt vời. Chúng ta vẫn còn hai tiếng."}
-    ], "qs": [
-      {"q": "When did Linh send the slides to Mrs Thao?", "o": ["ten minutes ago", "on Friday evening", "last month"], "a": 0, "e": "“I sent them to you ten minutes ago.” – có ago → quá khứ đơn."},
-      {"q": "What hasn't Huy added to the report yet?", "o": ["the charts", "the sales numbers", "the slides"], "a": 1, "e": "“I haven't added the sales numbers yet.”"},
-      {"q": "How long has Linh worked with this customer?", "o": ["for three months", "for about three years", "since last month"], "a": 1, "e": "“Since my first month here, so for about three years.”"},
-      {"q": "Where did Linh meet the new director?", "a": "Da Nang", "alt": ["in da nang", "at a conference in da nang", "danang"], "e": "“I met him at a conference in Da Nang last month.” – có last month → quá khứ đơn."},
-      {"q": "Mrs Thao has already read Linh's email.", "o": ["Đúng", "Sai"], "a": 1, "e": "“I haven't checked my email yet.” – chị Thảo chưa kiểm tra email."}
-    ]},
-    {"k": "read", "h": "Đọc: Mười hai năm cà phê trứng", "title": "Twelve Years of Egg Coffee", "text": "Mr Phuc has owned a small coffee shop in Hoi An for twelve years. He opened it when he was twenty-six, with only four tables and one old coffee machine.\n\n‘At first, it was very hard,’ he says. ‘In the first year, I nearly closed the shop twice. Then a travel blogger wrote about my egg coffee, and everything changed.’\n\nSince then, the shop has grown a lot. Phuc has added a second floor, and he has hired eight staff. He has served coffee to visitors from more than forty countries, and he has learned to say ‘thank you’ in eleven languages.\n\nThis year has been especially busy. Phuc has already opened a small bakery next door, and he has just started online orders. ‘I haven't had a day off since January,’ he laughs. ‘But I've never felt bored.’\n\nHas he ever thought about moving to a bigger city? ‘Yes, once. A company in Ho Chi Minh City offered me a job in 2019, but I said no. Hoi An is my home. I've been happy here, and I'm going to stay.’", "vi": "Anh Phúc đã làm chủ một quán cà phê nhỏ ở Hội An được 12 năm. Anh mở quán năm 26 tuổi, chỉ với bốn cái bàn và một chiếc máy pha cà phê cũ.\n\n“Lúc đầu rất vất vả,” anh kể. “Năm đầu tiên, tôi suýt đóng cửa quán hai lần. Rồi một blogger du lịch viết về món cà phê trứng của tôi, và mọi thứ thay đổi.”\n\nTừ đó đến nay, quán đã phát triển rất nhiều. Anh Phúc đã xây thêm tầng hai và đã thuê tám nhân viên. Anh đã phục vụ cà phê cho du khách đến từ hơn 40 quốc gia, và đã học cách nói “cảm ơn” bằng 11 thứ tiếng.\n\nNăm nay đặc biệt bận rộn. Anh Phúc đã mở thêm một tiệm bánh nhỏ ngay bên cạnh, và vừa bắt đầu nhận đơn hàng trực tuyến. “Từ tháng Một đến giờ tôi chưa được nghỉ ngày nào,” anh cười. “Nhưng tôi chưa bao giờ thấy chán.”\n\nAnh đã bao giờ nghĩ đến chuyện chuyển lên thành phố lớn hơn chưa? “Rồi, một lần. Năm 2019, một công ty ở TP. Hồ Chí Minh mời tôi về làm, nhưng tôi từ chối. Hội An là nhà của tôi. Tôi sống ở đây hạnh phúc, và tôi sẽ ở lại.”", "gloss": [
-      {"w": "own", "vi": "sở hữu, làm chủ"},
-      {"w": "nearly", "vi": "suýt, gần như"},
-      {"w": "travel blogger", "vi": "người viết blog du lịch"},
-      {"w": "grow (grew – grown)", "vi": "phát triển, lớn lên"},
-      {"w": "hire", "vi": "thuê (người làm)"},
-      {"w": "serve", "vi": "phục vụ"},
-      {"w": "especially", "vi": "đặc biệt là"},
-      {"w": "bakery", "vi": "tiệm bánh"},
-      {"w": "next door", "vi": "ngay bên cạnh"}
-    ], "qs": [
-      {"q": "How long has Mr Phuc owned the coffee shop?", "o": ["for twelve years", "since he was twelve", "for twenty-six years"], "a": 0, "e": "“Mr Phuc has owned a small coffee shop in Hoi An for twelve years.”"},
-      {"q": "What changed everything for the shop?", "o": ["a new coffee machine", "a travel blogger's article about his egg coffee", "a second floor"], "a": 1, "e": "“Then a travel blogger wrote about my egg coffee, and everything changed.”"},
-      {"q": "How many staff has he hired?", "a": "eight", "alt": ["8", "eight staff"], "e": "“he has hired eight staff.”"},
-      {"q": "What has Phuc just started?", "o": ["a bakery", "online orders", "English lessons"], "a": 1, "e": "“he has just started online orders.” – còn tiệm bánh thì anh đã mở rồi (already)."},
-      {"q": "Vì sao câu “A company … offered me a job in 2019” dùng quá khứ đơn?", "o": ["Vì có mốc thời gian xác định đã kết thúc (in 2019)", "Vì sự việc vẫn còn tiếp diễn", "Vì đó là trải nghiệm không rõ thời điểm"], "a": 0, "e": "in 2019 là thời điểm xác định, đã kết thúc → quá khứ đơn."},
-      {"q": "Phuc has had many days off this year.", "o": ["Đúng", "Sai"], "a": 1, "e": "“I haven't had a day off since January.” – từ tháng Một đến giờ anh chưa nghỉ ngày nào."}
-    ]},
-    {"k": "speak", "h": "Nói: Báo cáo tiến độ & kể chuyện", "tasks": [
-      {"p": "Báo cáo tiến độ: sếp hỏi về 4 việc – trả lời email khách, đặt phòng họp, in tài liệu, gọi nhà cung cấp. Dùng just / already / yet và 1 câu quá khứ đơn có thời gian.", "model": "I've already replied to the customer's email – I sent it at nine. I've just booked the meeting room for Thursday afternoon. I haven't printed the documents yet, but I'll do it after lunch. And I called the supplier this morning, but they haven't called me back yet.", "vi": "Em đã trả lời email của khách rồi – em gửi lúc 9 giờ. Em vừa đặt phòng họp cho chiều thứ Năm. Em chưa in tài liệu, nhưng em sẽ in sau bữa trưa. Còn nhà cung cấp thì sáng nay em đã gọi, nhưng họ chưa gọi lại.", "tips": "Nối âm: sent it, called the; nhấn vào already, just, yet."},
-      {"p": "Trả lời 4 câu How long…? về bản thân: sống ở nhà hiện tại, làm/học ở chỗ hiện tại, quen bạn thân nhất, dùng chiếc điện thoại hiện tại.", "model": "I've lived in my flat for two years. I've worked at this company since 2022. I've known my best friend Hoa since we were in primary school – that's about twenty years! And I've had this phone for about eighteen months.", "vi": "Tôi sống ở căn hộ này được hai năm. Tôi làm ở công ty này từ năm 2022. Tôi quen bạn thân Hoa từ hồi tiểu học – khoảng 20 năm rồi! Còn chiếc điện thoại này thì tôi dùng được khoảng 18 tháng."},
-      {"p": "Hội thoại 3 bước theo cặp: hỏi Have you ever…? → bạn trả lời Yes → hỏi chi tiết bằng When / Where / How … did …?", "model": "A: Have you ever been on a sleeper train? — B: Yes, I have. — A: Where did you go? — B: I went from Hanoi to Lao Cai. — A: How was it? — B: It was noisy, but I slept quite well.", "vi": "A: Bạn đi tàu giường nằm bao giờ chưa? — B: Rồi. — A: Bạn đi đâu? — B: Mình đi từ Hà Nội lên Lào Cai. — A: Thấy thế nào? — B: Hơi ồn, nhưng mình ngủ khá ngon."}
-    ]},
-    {"k": "write", "h": "Viết: Email báo cáo tiến độ", "task": "Viết email 80–100 từ gửi quản lý báo cáo tiến độ một dự án (ví dụ: tổ chức tiệc cuối năm của công ty). Có just / already / yet, ít nhất 1 câu for hoặc since và 1–2 câu quá khứ đơn có thời gian cụ thể.", "min": 80, "model": "Dear Mrs Thao,\n\nHere is a quick update on the year-end party. I've already booked the restaurant for the 20th of December, and I paid the deposit yesterday. I've also sent the invitations to all 60 staff. So far, 45 people have replied. I haven't chosen the music band yet because two bands haven't sent their prices. I've just called them again, and they promised to reply by Friday. I've worked on this event for two weeks, and I think it will be great!\n\nBest regards,\nLinh", "modelVi": "Kính gửi chị Thảo,\n\nEm xin cập nhật nhanh về tiệc cuối năm. Em đã đặt nhà hàng cho ngày 20 tháng 12, và hôm qua em đã trả tiền đặt cọc. Em cũng đã gửi thư mời cho toàn bộ 60 nhân viên. Đến giờ đã có 45 người phản hồi. Em chưa chọn ban nhạc vì hai nhóm chưa gửi báo giá. Em vừa gọi lại cho họ, và họ hứa sẽ trả lời trước thứ Sáu. Em đã làm sự kiện này được hai tuần, và em nghĩ nó sẽ rất tuyệt!\n\nTrân trọng,\nLinh", "tips": ["Mở thư: Dear + tên, / Here is a quick update on…; kết thư: Best regards,", "Việc đã xong (không nói giờ) → have + already / just + V3; việc chưa xong → haven't + V3 + yet.", "Có thời gian cụ thể (yesterday, on Monday) → quá khứ đơn."], "checklist": ["Có already, just và yet đúng vị trí", "Có for hoặc since", "≥ 1 câu quá khứ đơn có mốc thời gian", "Không dùng HTHT với yesterday / ago", "Có lời chào – lời kết lịch sự", "Độ dài 80–100 từ"]}
-  ],
-  "exercises": [
-    {"t": "mc", "q": "I ___ my homework yet.", "o": ["haven't finished", "have finished", "finished"], "a": 0, "e": "yet ở cuối câu phủ định → haven't + V3 … yet."},
-    {"t": "mc", "q": "She ___ the company in 2020.", "o": ["has joined", "joined", "has join"], "a": 1, "e": "in 2020 là thời điểm xác định đã qua → quá khứ đơn joined."},
-    {"t": "fill", "q": "We've lived in this flat ___ 2018.", "a": "since", "e": "2018 là mốc thời gian → since."},
-    {"t": "fill", "q": "I've known Huy ___ ten years.", "a": "for", "e": "ten years là khoảng thời gian → for."},
-    {"t": "mc", "q": "When ___ you arrive in Da Nang?", "o": ["did", "have", "has"], "a": 0, "e": "When hỏi về thời điểm → quá khứ đơn: When did you arrive? ❌ When have you arrived?"},
-    {"t": "mc", "q": "Lan has ___ left. You missed her by one minute!", "o": ["yet", "just", "ever"], "a": 1, "e": "Vừa mới đi (một phút trước) → just."},
-    {"t": "fill", "q": "Have you replied to the customer ___? – No, not yet.", "a": "yet", "e": "Câu hỏi về việc đã làm chưa → yet ở cuối câu."},
-    {"t": "mc", "q": "Câu nào SAI?", "o": ["I have seen him yesterday.", "I saw him yesterday.", "I have seen him recently."], "a": 0, "e": "Có yesterday (thời điểm xác định) thì phải dùng quá khứ đơn. recently đi được với HTHT."},
-    {"t": "mc", "q": "“Tôi làm ở công ty này được 3 năm rồi (và vẫn đang làm).”", "o": ["I work for this company for three years.", "I've worked for this company for three years.", "I worked for this company since three years."], "a": 1, "e": "Việc bắt đầu trong quá khứ và còn đến nay → HTHT + for + khoảng thời gian."},
-    {"t": "mc", "q": "I joined the company three years ___.", "o": ["ago", "for", "since"], "a": 0, "e": "Quá khứ đơn + khoảng thời gian + ago = cách đây…"},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["already", "the report.", "sent", "I have"], "a": "I have already sent the report.", "e": "already đứng giữa have và V3."},
-    {"t": "order", "q": "Sắp xếp thành câu hỏi đúng:", "w": ["lived", "How long", "in Hanoi?", "have you"], "a": "How long have you lived in Hanoi?", "e": "How long + have/has + S + V3?"},
-    {"t": "match", "q": "Nối từ với nghĩa:", "pairs": [["just", "vừa mới"], ["already", "đã … rồi"], ["yet", "chưa (câu phủ định / câu hỏi)"], ["for", "trong khoảng (bao lâu)"], ["since", "từ (mốc thời gian)"], ["ago", "cách đây"]]},
-    {"t": "listen", "say": "I joined the company five years ago, and I've worked in the sales team since last March.", "lang": "en-GB", "q": "When did the speaker join the company?", "o": ["five years ago", "last March", "one year ago"], "a": 0, "e": "“I joined the company five years ago” – còn last March là lúc chuyển sang nhóm bán hàng."},
-    {"t": "listen", "say": "Have you booked the meeting room yet? Yes, I've already booked it for two o'clock.", "lang": "en-GB", "q": "When is the meeting room booked for?", "o": ["twelve o'clock", "two o'clock", "ten o'clock"], "a": 1, "e": "“I've already booked it for two o'clock.”"},
-    {"t": "dict", "say": "She has already sent the email.", "lang": "en-GB", "a": "She has already sent the email.", "e": "already đứng giữa has và V3; send – sent – sent."}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "To-do list in sẵn có ô ✓ / ✗ cho mỗi cặp; 10 thẻ thời gian (2019, three weeks, Monday, a long time, I was ten, ages, last summer, two hours, Christmas, 8 o'clock) cho trò for/since; 8 câu có lỗi HTHT – QKĐ in trên giấy to; ảnh một căn phòng khách sạn bừa bộn.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: GV hỏi ‘Have you eaten yet?’ (Ăn cơm chưa?) – học viên trả lời Yes, I have / Not yet. GV viết lên bảng và hỏi: tiếng Việt và tiếng Anh giống nhau ở chỗ nào?"},
-      {"t": "15'", "do": "Từ vựng văn phòng: deadline, report, task, reply, update, print… qua một to-do list thật trên bảng; luyện already (trọng âm âm tiết 2) và yet /jet/ ≠ jet."},
-      {"t": "20'", "do": "just / already / yet / still: phát to-do list có ✓ / ✗; học viên báo cáo theo cặp (I've already…, I haven't … yet, I've just…). Chốt vị trí từng từ."},
-      {"t": "20'", "do": "for / since: trò ‘Chia thẻ’ (xem mục Trò chơi); rồi học viên hỏi nhau How long have you…? Chốt lỗi ‘I work here for 2 years’ và ago + quá khứ đơn."},
-      {"t": "15'", "do": "Nghe hội thoại văn phòng: lần 1 – việc nào xong, việc nào chưa; lần 2 – trả lời câu hỏi; lần 3 – đọc phân vai, chú ý nối âm sent them, just finished."},
-      {"t": "10'", "do": "Tổng kết; giao bài tập 1–10 trong game."},
-      {"t": "Buổi 2 · 15'", "do": "HTHT vs QKĐ: dạy bảng so sánh; dán 8 câu có lỗi (I have finished it yesterday, When have you arrived?…) – các nhóm thi sửa nhanh và giải thích."},
-      {"t": "20'", "do": "Đọc ‘Twelve Years of Egg Coffee’: gạch 2 màu – HTHT và QKĐ; giải thích vì sao từng câu dùng thì đó; trả lời câu hỏi."},
-      {"t": "20'", "do": "Nói: nhiệm vụ 1 (báo cáo tiến độ) đóng vai sếp – nhân viên; nhiệm vụ 3 (Have you ever… → When did…?) theo cặp, đổi bạn 2 lần. Chơi thêm ‘Thám tử phòng khách sạn’ nếu còn thời gian."},
-      {"t": "10'", "do": "Nhiệm vụ 2: 4–5 học viên trả lời How long…? trước lớp; GV ghi lỗi for / since."},
-      {"t": "15'", "do": "Viết email báo cáo tiến độ; đổi bài chấm theo checklist."},
-      {"t": "10'", "do": "Bài tập 11–16; chữa lỗi chung; giao bài về nhà."}
+ "no": 6,
+ "title": "Hiện tại hoàn thành hay quá khứ đơn? – just / already / yet, for / since",
+ "sub": "I've just finished the slides. I sent them ten minutes ago.",
+ "goals": [
+  "Phân biệt hiện tại hoàn thành (kết quả hiện tại, thời gian chưa kết thúc/không nói rõ) với quá khứ đơn (thời điểm đã kết thúc)",
+  "Dùng just / already / yet / still đúng nghĩa và đúng vị trí",
+  "Hỏi – đáp How long…? với for (khoảng thời gian) và since (mốc thời gian); dùng ago với quá khứ đơn",
+  "Báo cáo tiến độ công việc ở văn phòng bằng lời nói và email",
+  "Nối âm tự nhiên (just arrived, sent it) và đọc đúng already, yet"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng: công việc & thời gian",
+   "items": [
+    {
+     "w": "deadline",
+     "ipa": "/ˈdedlaɪn/",
+     "pos": "n",
+     "vi": "hạn chót",
+     "ex": "The deadline for the report is Friday.",
+     "exVi": "Hạn chót nộp báo cáo là thứ Sáu."
+    },
+    {
+     "w": "report",
+     "ipa": "/rɪˈpɔːt/",
+     "pos": "n",
+     "vi": "bản báo cáo",
+     "ex": "Have you finished the report yet?",
+     "exVi": "Bạn làm xong báo cáo chưa?"
+    },
+    {
+     "w": "task",
+     "ipa": "/tɑːsk/",
+     "pos": "n",
+     "vi": "nhiệm vụ, đầu việc",
+     "ex": "I've already done three tasks this morning.",
+     "exVi": "Sáng nay tôi đã làm xong ba việc rồi."
+    },
+    {
+     "w": "project",
+     "ipa": "/ˈprɒdʒekt/",
+     "pos": "n",
+     "vi": "dự án",
+     "ex": "We've worked on this project since March.",
+     "exVi": "Chúng tôi làm dự án này từ tháng Ba."
+    },
+    {
+     "w": "customer",
+     "ipa": "/ˈkʌstəmə(r)/",
+     "pos": "n",
+     "vi": "khách hàng",
+     "ex": "The customer has just called.",
+     "exVi": "Khách hàng vừa gọi."
+    },
+    {
+     "w": "check",
+     "ipa": "/tʃek/",
+     "pos": "v",
+     "vi": "kiểm tra",
+     "ex": "Have you checked your email yet?",
+     "exVi": "Bạn đã kiểm tra email chưa?"
+    },
+    {
+     "w": "reply",
+     "ipa": "/rɪˈplaɪ/",
+     "pos": "v",
+     "vi": "trả lời (thư, tin nhắn)",
+     "ex": "They haven't replied to my email yet.",
+     "exVi": "Họ vẫn chưa trả lời email của tôi."
+    },
+    {
+     "w": "update",
+     "ipa": "/ˌʌpˈdeɪt/",
+     "pos": "v",
+     "vi": "cập nhật; (n) /ˈʌpdeɪt/ bản cập nhật",
+     "ex": "I've just updated the price list.",
+     "exVi": "Tôi vừa cập nhật bảng giá."
+    },
+    {
+     "w": "print",
+     "ipa": "/prɪnt/",
+     "pos": "v",
+     "vi": "in (tài liệu)",
+     "ex": "Please print ten copies for the meeting.",
+     "exVi": "Làm ơn in mười bản cho cuộc họp."
+    },
+    {
+     "w": "join",
+     "ipa": "/dʒɔɪn/",
+     "pos": "v",
+     "vi": "gia nhập, vào (công ty, câu lạc bộ)",
+     "ex": "I joined the company three years ago.",
+     "exVi": "Tôi vào công ty ba năm trước."
+    },
+    {
+     "w": "move house",
+     "ipa": "/ˌmuːv ˈhaʊs/",
+     "pos": "phr",
+     "vi": "chuyển nhà",
+     "ex": "We've moved house twice since 2020.",
+     "exVi": "Từ năm 2020 đến nay chúng tôi đã chuyển nhà hai lần."
+    },
+    {
+     "w": "get married",
+     "ipa": "/ˌɡet ˈmærid/",
+     "pos": "phr",
+     "vi": "kết hôn, cưới",
+     "ex": "They got married in 2015.",
+     "exVi": "Họ cưới nhau năm 2015."
+    },
+    {
+     "w": "just",
+     "ipa": "/dʒʌst/",
+     "pos": "adv",
+     "vi": "vừa mới",
+     "ex": "I've just finished lunch.",
+     "exVi": "Tôi vừa ăn trưa xong."
+    },
+    {
+     "w": "already",
+     "ipa": "/ɔːlˈredi/",
+     "pos": "adv",
+     "vi": "đã … rồi (sớm hơn mong đợi)",
+     "ex": "She has already sent the email.",
+     "exVi": "Cô ấy đã gửi email rồi."
+    },
+    {
+     "w": "yet",
+     "ipa": "/jet/",
+     "pos": "adv",
+     "vi": "chưa (câu phủ định); … chưa? (câu hỏi)",
+     "ex": "Have you eaten yet?",
+     "exVi": "Bạn ăn (cơm) chưa?"
+    },
+    {
+     "w": "recently",
+     "ipa": "/ˈriːsntli/",
+     "pos": "adv",
+     "vi": "gần đây",
+     "ex": "Have you seen any good films recently?",
+     "exVi": "Gần đây bạn có xem phim nào hay không?"
+    },
+    {
+     "w": "so far",
+     "ipa": "/ˌsəʊ ˈfɑː(r)/",
+     "pos": "phr",
+     "vi": "cho đến nay",
+     "ex": "So far, we've sold 200 tickets.",
+     "exVi": "Đến giờ chúng tôi đã bán được 200 vé."
+    },
+    {
+     "w": "since",
+     "ipa": "/sɪns/",
+     "pos": "prep",
+     "vi": "từ (một mốc thời gian) đến nay",
+     "ex": "I've lived here since 2019.",
+     "exVi": "Tôi sống ở đây từ năm 2019."
+    },
+    {
+     "w": "for ages",
+     "ipa": "/fər ˈeɪdʒɪz/",
+     "pos": "phr",
+     "vi": "lâu lắm rồi",
+     "ex": "I haven't seen you for ages!",
+     "exVi": "Lâu lắm rồi không gặp bạn!"
+    },
+    {
+     "w": "owner",
+     "ipa": "/ˈəʊnə(r)/",
+     "pos": "n",
+     "vi": "người chủ (quán, nhà, xe)",
+     "ex": "The owner has run this cafe for twelve years.",
+     "exVi": "Ông chủ đã điều hành quán cà phê này 12 năm."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "just / already / yet / still – báo cáo tiến độ",
+   "html": "<p>Các trạng từ này rất hay đi với hiện tại hoàn thành khi nói về <b>tiến độ công việc</b> hoặc <b>việc vừa xảy ra mà kết quả còn ở hiện tại</b>.</p>",
+   "table": [
+    [
+     "Từ",
+     "Nghĩa",
+     "Vị trí",
+     "Ví dụ"
     ],
-    "games": [
-      "Chia thẻ for/since: 2 đội, mỗi đội 10 thẻ thời gian lẫn lộn. Đội nào xếp đúng vào 2 cột FOR / SINCE nhanh nhất và đặt được 3 câu How long…? đúng thì thắng.",
-      "Thám tử phòng khách sạn: GV chiếu ảnh một căn phòng bừa bộn (cốc cà phê còn bốc khói, giường chưa dọn, vali mở, điện thoại đang sạc). Học viên đoán chuyện gì vừa xảy ra: ‘Someone has just drunk coffee. They haven't made the bed yet. They've already unpacked…’ – mỗi câu đúng ngữ pháp được 1 điểm."
+    [
+     "just",
+     "vừa mới",
+     "giữa have/has và V3",
+     "I've just finished the slides."
     ],
-    "errors": [
-      "Dùng HTHT với thời gian xác định: *I have finished it yesterday → I finished it yesterday.",
-      "Hỏi When bằng HTHT: *When have you arrived? → When did you arrive?",
-      "Dùng hiện tại đơn cho việc kéo dài đến nay: *I work here for two years / *I know her since 2015 → I've worked… / I've known…",
-      "Nhầm for / since: *since three years → for three years / since 2023.",
-      "Dùng yet trong câu khẳng định: *I've finished it yet → I've already finished it.",
-      "Kết hợp ago với HTHT: *I have joined three years ago → I joined three years ago."
+    [
+     "already",
+     "đã … rồi (sớm hơn mong đợi)",
+     "giữa have/has và V3 (hoặc cuối câu)",
+     "She's already sent the email."
     ],
-    "homework": "Làm hết bài tập trong game (≥ 80%); viết to-do list tuần này bằng tiếng Anh và tối Chủ nhật viết 6 câu báo cáo (already / just / yet); viết 5 câu How long…? về gia đình (My parents have been married for…); ghi âm email báo cáo tiến độ."
+    [
+     "yet",
+     "chưa (phủ định) / … chưa? (câu hỏi)",
+     "cuối câu phủ định & câu hỏi",
+     "I haven't replied yet. · Have you eaten yet?"
+    ],
+    [
+     "still … not",
+     "vẫn chưa (sốt ruột hơn yet)",
+     "still đứng trước haven't / hasn't",
+     "He still hasn't called me."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "– Is Lan here? – No, she's just left.",
+     "vi": "– Lan có đây không? – Không, cô ấy vừa đi xong."
+    },
+    {
+     "t": "I've already booked the meeting room for Friday.",
+     "vi": "Tôi đã đặt phòng họp cho thứ Sáu rồi."
+    },
+    {
+     "t": "Have you eaten yet? – Yes, I have. / No, not yet.",
+     "vi": "Bạn ăn chưa? – Rồi. / Chưa."
+    },
+    {
+     "t": "The customer hasn't replied yet.",
+     "vi": "Khách hàng chưa trả lời."
+    },
+    {
+     "t": "It's ten o'clock and Huy still hasn't arrived!",
+     "vi": "Mười giờ rồi mà Huy vẫn chưa đến!"
+    }
+   ],
+   "tips": [
+    "Câu chào kiểu Việt “Ăn cơm chưa?” → <i>Have you eaten yet?</i>; trả lời “Chưa” → <b>Not yet.</b>",
+    "<b>yet</b> chỉ dùng trong câu phủ định và câu hỏi; câu khẳng định dùng <b>already</b>: ❌ <i>I've finished yet</i> → ✅ <i>I've already finished.</i>",
+    "Tiếng Anh-Mỹ hay nói <i>Did you eat yet?</i>, nhưng trong giáo trình này (Anh-Anh) và khi đi thi, hãy dùng hiện tại hoàn thành với just / already / yet."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "How long…? – for & since",
+   "html": "<p>Hiện tại hoàn thành còn dùng cho tình huống <b>bắt đầu trong quá khứ và vẫn còn đến bây giờ</b>. Hỏi bằng <b>How long have / has + S + V3?</b> và trả lời với <b>for</b> hoặc <b>since</b>.</p>",
+   "table": [
+    [
+     "",
+     "for + khoảng thời gian",
+     "since + mốc thời gian"
+    ],
+    [
+     "Nghĩa",
+     "trong (bao lâu)",
+     "từ (lúc nào) đến nay"
+    ],
+    [
+     "Đi với",
+     "three years · six months · two hours · a long time · ages",
+     "2020 · Monday · last summer · 8 o'clock · I was a child"
+    ],
+    [
+     "Câu",
+     "I've worked here for three years.",
+     "I've worked here since 2023."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "How long have you lived in Tavarin? – For five years.",
+     "vi": "Bạn sống ở Tavarin bao lâu rồi? – Năm năm."
+    },
+    {
+     "t": "She has been a nurse since she was twenty-two.",
+     "vi": "Cô ấy làm y tá từ năm 22 tuổi."
+    },
+    {
+     "t": "We've known each other since primary school.",
+     "vi": "Chúng tôi quen nhau từ hồi tiểu học."
+    },
+    {
+     "t": "I haven't seen my grandparents for two months.",
+     "vi": "Đã hai tháng rồi tôi không gặp ông bà."
+    },
+    {
+     "t": "I joined the company three years ago. → I've worked here for three years.",
+     "vi": "Tôi vào công ty ba năm trước. → Tôi đã làm ở đây được ba năm."
+    }
+   ],
+   "tips": [
+    "Tiếng Việt “Tôi làm ở đây <u>2 năm rồi</u>” → người Việt hay nói ❌ <i>I work here for two years</i> (hiện tại đơn). Đúng: ✅ <i>I've worked here for two years.</i>",
+    "❌ <i>since three years</i> → ✅ <i>for three years</i> (khoảng) hoặc <i>since 2023</i> (mốc).",
+    "<b>ago</b> đi với <b>quá khứ đơn</b> (một thời điểm đã qua): <i>I joined three years ago.</i> ❌ <i>I have joined three years ago.</i>",
+    "Động từ trạng thái (know, be, have, live…) hay đi với for / since: ✅ <i>I've known her for ten years</i> – ❌ <i>I know her for ten years</i>."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Hiện tại hoàn thành hay quá khứ đơn?",
+   "html": "<p>Câu hỏi quan trọng nhất: <b>người nói có nhắc (hoặc đang nghĩ đến) một thời điểm đã kết thúc không?</b> Có → <b>quá khứ đơn</b>. Không nói thời điểm, hoặc khoảng thời gian vẫn còn kéo dài đến nay → <b>hiện tại hoàn thành</b>.</p>",
+   "table": [
+    [
+     "",
+     "Hiện tại hoàn thành",
+     "Quá khứ đơn"
+    ],
+    [
+     "Thời gian",
+     "Không nói rõ / chưa kết thúc: today, this week, this year, so far, ever, recently",
+     "Đã kết thúc, xác định: yesterday, last week, in 2020, ago, when I was…"
+    ],
+    [
+     "Tập trung vào",
+     "Kết quả ở hiện tại, trải nghiệm, tin mới",
+     "Sự việc trong quá khứ, chi tiết câu chuyện"
+    ],
+    [
+     "Ví dụ",
+     "I've lost my keys. (giờ vẫn chưa thấy)",
+     "I lost my keys yesterday, but I found them later."
+    ],
+    [
+     "Câu hỏi",
+     "Have you seen this film?",
+     "When did you see it? (KHÔNG dùng When have you…?)"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "– Have you ever been to Velmora? – Yes, I have. I went there in 2022.",
+     "vi": "Hỏi trải nghiệm bằng HTHT → kể chi tiết bằng quá khứ đơn."
+    },
+    {
+     "t": "I've drunk three coffees today.",
+     "vi": "Hôm nay tôi đã uống ba cốc cà phê. (hôm nay chưa hết)"
+    },
+    {
+     "t": "I drank three coffees yesterday.",
+     "vi": "Hôm qua tôi uống ba cốc cà phê. (hôm qua đã hết)"
+    },
+    {
+     "t": "She has worked here since 2021. Before that, she worked at a bank for two years.",
+     "vi": "Việc hiện tại → HTHT; công việc cũ đã kết thúc → quá khứ đơn (dù có for)."
+    },
+    {
+     "t": "What time did you arrive?",
+     "vi": "Bạn đến lúc mấy giờ? (❌ What time have you arrived?)"
+    }
+   ],
+   "tips": [
+    "❌ <i>I have finished it yesterday.</i> → ✅ <i>I finished it yesterday.</i> – có yesterday thì phải dùng quá khứ đơn.",
+    "❌ <i>When have you arrived?</i> → ✅ <i>When did you arrive?</i> – When luôn hỏi về thời điểm → quá khứ đơn.",
+    "Mẹo nói tự nhiên: mở đầu bằng HTHT (tin mới) rồi chuyển sang quá khứ đơn để kể chi tiết: <i>I've bought a new motorbike! I got it on Sunday. It cost 35 million.</i>"
+   ]
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: 've just, nối âm, already & yet",
+   "html": "<p>Các câu báo cáo tiến độ có những âm rất dễ bị nuốt: <b>'ve / 's + just / already</b>. Người bản ngữ còn <b>nối âm</b> phụ âm cuối với nguyên âm đầu của từ sau: <i>just arrived</i> → /dʒʌst əˈraɪvd/ nghe như “jus-tơ-raivd”, <i>sent it</i> → /ˈsentɪt/. Ngoài ra, <b>yet</b> /jet/ bắt đầu bằng âm /j/ lướt nhẹ (như đầu từ <i>yes</i>), không bật mạnh như <b>jet</b> /dʒet/.</p>",
+   "items": [
+    {
+     "sym": "'ve / 's + just",
+     "ex": [
+      "I've just finished.",
+      "She's just left.",
+      "We've just arrived."
+     ],
+     "vi": "'ve, 's rất nhỏ nhưng phải có: /aɪv dʒʌst/, /ʃiːz dʒʌst/. Bỏ đi thì câu thành “I just finished” – mất âm hoàn thành."
+    },
+    {
+     "sym": "Nối âm phụ âm + nguyên âm",
+     "ex": [
+      "just arrived",
+      "sent it",
+      "for a long time",
+      "since eight o'clock"
+     ],
+     "vi": "Phụ âm cuối + nguyên âm đầu của từ sau → đọc liền: sent it /ˈsentɪt/, for a /fərə/. Nói liền mạch, đừng ngắt từng chữ."
+    },
+    {
+     "sym": "/ɔːlˈredi/",
+     "ex": [
+      "already",
+      "I've already sent it.",
+      "She's already gone."
+     ],
+     "vi": "Trọng âm rơi vào âm tiết thứ hai: al-READ-y. Âm đầu /ɔːl/ tròn môi và có /l/."
+    },
+    {
+     "sym": "/jet/ ≠ /dʒet/",
+     "ex": [
+      "yet",
+      "Not yet.",
+      "Have you eaten yet?"
+     ],
+     "vi": "yet mở đầu bằng /j/ lướt nhẹ (như yes), không bật hơi mạnh như jet /dʒet/ (máy bay phản lực).",
+     "pairs": [
+      [
+       "yet",
+       "jet"
+      ],
+      [
+       "yes",
+       "Jess"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Kiểm tra tiến độ trước cuộc họp",
+   "lang": "en-GB",
+   "note": "Văn phòng, 9 giờ sáng thứ Hai. 11 giờ có khách hàng lớn đến họp. Chị Thảo (quản lý) kiểm tra tiến độ với Linh và Huy. Nghe lần 1: việc nào đã xong, việc nào chưa? Nghe lần 2: Linh làm việc với khách hàng này bao lâu rồi?",
+   "lines": [
+    {
+     "s": "Mrs Thao",
+     "g": "f",
+     "t": "Good morning, both. The customer is coming at eleven. Have you finished the slides yet, Linh?",
+     "vi": "Chào hai em. 11 giờ khách hàng đến. Linh làm xong slide chưa em?"
+    },
+    {
+     "s": "Linh",
+     "g": "f",
+     "t": "Yes, I've just finished them. I sent them to you ten minutes ago.",
+     "vi": "Rồi ạ, em vừa làm xong. Em đã gửi cho chị mười phút trước."
+    },
+    {
+     "s": "Mrs Thao",
+     "g": "f",
+     "t": "Great. I haven't checked my email yet. What about the report, Huy?",
+     "vi": "Tốt. Chị chưa kiểm tra email. Còn báo cáo thì sao, Huy?"
+    },
+    {
+     "s": "Huy",
+     "g": "m",
+     "t": "I've already written most of it, but I haven't added the sales numbers yet.",
+     "vi": "Em đã viết gần xong rồi, nhưng chưa thêm số liệu bán hàng."
+    },
+    {
+     "s": "Mrs Thao",
+     "g": "f",
+     "t": "Why not? When did the sales team send them?",
+     "vi": "Sao vậy? Phòng kinh doanh gửi số liệu khi nào?"
+    },
+    {
+     "s": "Huy",
+     "g": "m",
+     "t": "They sent them on Friday evening, but there was a mistake, so I asked them again this morning. They haven't replied yet.",
+     "vi": "Họ gửi tối thứ Sáu, nhưng có chỗ sai, nên sáng nay em hỏi lại. Họ vẫn chưa trả lời."
+    },
+    {
+     "s": "Mrs Thao",
+     "g": "f",
+     "t": "OK, I'll call their manager now. Linh, how long have you worked with this customer?",
+     "vi": "Được rồi, chị sẽ gọi cho trưởng phòng bên đó ngay. Linh, em làm việc với khách hàng này bao lâu rồi?"
+    },
+    {
+     "s": "Linh",
+     "g": "f",
+     "t": "Since my first month here, so for about three years.",
+     "vi": "Từ tháng đầu tiên em vào công ty, tức là khoảng ba năm rồi ạ."
+    },
+    {
+     "s": "Mrs Thao",
+     "g": "f",
+     "t": "Good, you know them well. Have you met their new director?",
+     "vi": "Tốt, em hiểu họ. Em đã gặp giám đốc mới của họ chưa?"
+    },
+    {
+     "s": "Linh",
+     "g": "f",
+     "t": "Yes, I have. I met him at a conference in Tavarin last month.",
+     "vi": "Rồi ạ. Em gặp ông ấy ở một hội nghị tại Tavarin tháng trước."
+    },
+    {
+     "s": "Mrs Thao",
+     "g": "f",
+     "t": "Perfect. You can introduce us. Huy, please print ten copies when the report is ready.",
+     "vi": "Tuyệt. Em giới thiệu chị với ông ấy nhé. Huy, báo cáo xong thì em in mười bản."
+    },
+    {
+     "s": "Huy",
+     "g": "m",
+     "t": "Sure. Oh, the sales team has just replied! I'll add the numbers now.",
+     "vi": "Vâng ạ. Ồ, phòng kinh doanh vừa trả lời rồi! Em thêm số liệu ngay đây."
+    },
+    {
+     "s": "Mrs Thao",
+     "g": "f",
+     "t": "Excellent. We've still got two hours.",
+     "vi": "Tuyệt vời. Chúng ta vẫn còn hai tiếng."
+    }
+   ],
+   "qs": [
+    {
+     "q": "When did Linh send the slides to Mrs Thao?",
+     "o": [
+      "ten minutes ago",
+      "on Friday evening",
+      "last month"
+     ],
+     "a": 0,
+     "e": "“I sent them to you ten minutes ago.” – có ago → quá khứ đơn."
+    },
+    {
+     "q": "What hasn't Huy added to the report yet?",
+     "o": [
+      "the charts",
+      "the sales numbers",
+      "the slides"
+     ],
+     "a": 1,
+     "e": "“I haven't added the sales numbers yet.”"
+    },
+    {
+     "q": "How long has Linh worked with this customer?",
+     "o": [
+      "for three months",
+      "for about three years",
+      "since last month"
+     ],
+     "a": 1,
+     "e": "“Since my first month here, so for about three years.”"
+    },
+    {
+     "q": "Where did Linh meet the new director?",
+     "a": "Tavarin",
+     "alt": [
+      "in tavarin",
+      "at a conference in tavarin",
+      "tavarin"
+     ],
+     "e": "“I met him at a conference in Tavarin last month.” – có last month → quá khứ đơn."
+    },
+    {
+     "q": "Mrs Thao has already read Linh's email.",
+     "o": [
+      "Đúng",
+      "Sai"
+     ],
+     "a": 1,
+     "e": "“I haven't checked my email yet.” – chị Thảo chưa kiểm tra email."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Mười hai năm cà phê trứng",
+   "title": "Twelve Years of Egg Coffee",
+   "text": "Mr Phuc has owned a small coffee shop in Velarin for twelve years. He opened it when he was twenty-six, with only four tables and one old coffee machine.\n\n‘At first, it was very hard,’ he says. ‘In the first year, I nearly closed the shop twice. Then a travel blogger wrote about my egg coffee, and everything changed.’\n\nSince then, the shop has grown a lot. Phuc has added a second floor, and he has hired eight staff. He has served coffee to visitors from more than forty countries, and he has learned to say ‘thank you’ in eleven languages.\n\nThis year has been especially busy. Phuc has already opened a small bakery next door, and he has just started online orders. ‘I haven't had a day off since January,’ he laughs. ‘But I've never felt bored.’\n\nHas he ever thought about moving to a bigger city? ‘Yes, once. A company in Orinvale offered me a job in 2019, but I said no. Velarin is my home. I've been happy here, and I'm going to stay.’",
+   "vi": "Anh Phúc đã làm chủ một quán cà phê nhỏ ở Velarin được 12 năm. Anh mở quán năm 26 tuổi, chỉ với bốn cái bàn và một chiếc máy pha cà phê cũ.\n\n“Lúc đầu rất vất vả, ” anh kể. “Năm đầu tiên, tôi suýt đóng cửa quán hai lần. Rồi một blogger du lịch viết về món cà phê trứng của tôi, và mọi thứ thay đổi.”\n\nTừ đó đến nay, quán đã phát triển rất nhiều. Anh Phúc đã xây thêm tầng hai và đã thuê tám nhân viên. Anh đã phục vụ cà phê cho du khách đến từ hơn 40 quốc gia, và đã học cách nói “cảm ơn” bằng 11 thứ tiếng.\n\nNăm nay đặc biệt bận rộn. Anh Phúc đã mở thêm một tiệm bánh nhỏ ngay bên cạnh, và vừa bắt đầu nhận đơn hàng trực tuyến. “Từ tháng Một đến giờ tôi chưa được nghỉ ngày nào, ” anh cười. “Nhưng tôi chưa bao giờ thấy chán.”\n\nAnh đã bao giờ nghĩ đến chuyện chuyển lên thành phố lớn hơn chưa? “Rồi, một lần. Năm 2019, một công ty ở Orinvale mời tôi về làm, nhưng tôi từ chối. Velarin là nhà của tôi. Tôi sống ở đây hạnh phúc, và tôi sẽ ở lại.”",
+   "gloss": [
+    {
+     "w": "own",
+     "vi": "sở hữu, làm chủ"
+    },
+    {
+     "w": "nearly",
+     "vi": "suýt, gần như"
+    },
+    {
+     "w": "travel blogger",
+     "vi": "người viết blog du lịch"
+    },
+    {
+     "w": "grow (grew – grown)",
+     "vi": "phát triển, lớn lên"
+    },
+    {
+     "w": "hire",
+     "vi": "thuê (người làm)"
+    },
+    {
+     "w": "serve",
+     "vi": "phục vụ"
+    },
+    {
+     "w": "especially",
+     "vi": "đặc biệt là"
+    },
+    {
+     "w": "bakery",
+     "vi": "tiệm bánh"
+    },
+    {
+     "w": "next door",
+     "vi": "ngay bên cạnh"
+    }
+   ],
+   "qs": [
+    {
+     "q": "How long has Mr Phuc owned the coffee shop?",
+     "o": [
+      "for twelve years",
+      "since he was twelve",
+      "for twenty-six years"
+     ],
+     "a": 0,
+     "e": "“Mr Phuc has owned a small coffee shop in Velarin for twelve years.”"
+    },
+    {
+     "q": "What changed everything for the shop?",
+     "o": [
+      "a new coffee machine",
+      "a travel blogger's article about his egg coffee",
+      "a second floor"
+     ],
+     "a": 1,
+     "e": "“Then a travel blogger wrote about my egg coffee, and everything changed.”"
+    },
+    {
+     "q": "How many staff has he hired?",
+     "a": "eight",
+     "alt": [
+      "8",
+      "eight staff"
+     ],
+     "e": "“he has hired eight staff.”"
+    },
+    {
+     "q": "What has Phuc just started?",
+     "o": [
+      "a bakery",
+      "online orders",
+      "English lessons"
+     ],
+     "a": 1,
+     "e": "“he has just started online orders.” – còn tiệm bánh thì anh đã mở rồi (already)."
+    },
+    {
+     "q": "Vì sao câu “A company … offered me a job in 2019” dùng quá khứ đơn?",
+     "o": [
+      "Vì có mốc thời gian xác định đã kết thúc (in 2019)",
+      "Vì sự việc vẫn còn tiếp diễn",
+      "Vì đó là trải nghiệm không rõ thời điểm"
+     ],
+     "a": 0,
+     "e": "in 2019 là thời điểm xác định, đã kết thúc → quá khứ đơn."
+    },
+    {
+     "q": "Phuc has had many days off this year.",
+     "o": [
+      "Đúng",
+      "Sai"
+     ],
+     "a": 1,
+     "e": "“I haven't had a day off since January.” – từ tháng Một đến giờ anh chưa nghỉ ngày nào."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Báo cáo tiến độ & kể chuyện",
+   "tasks": [
+    {
+     "p": "Báo cáo tiến độ: sếp hỏi về 4 việc – trả lời email khách, đặt phòng họp, in tài liệu, gọi nhà cung cấp. Dùng just / already / yet và 1 câu quá khứ đơn có thời gian.",
+     "model": "I've already replied to the customer's email – I sent it at nine. I've just booked the meeting room for Thursday afternoon. I haven't printed the documents yet, but I'll do it after lunch. And I called the supplier this morning, but they haven't called me back yet.",
+     "vi": "Em đã trả lời email của khách rồi – em gửi lúc 9 giờ. Em vừa đặt phòng họp cho chiều thứ Năm. Em chưa in tài liệu, nhưng em sẽ in sau bữa trưa. Còn nhà cung cấp thì sáng nay em đã gọi, nhưng họ chưa gọi lại.",
+     "tips": "Nối âm: sent it, called the; nhấn vào already, just, yet."
+    },
+    {
+     "p": "Trả lời 4 câu How long…? về bản thân: sống ở nhà hiện tại, làm/học ở chỗ hiện tại, quen bạn thân nhất, dùng chiếc điện thoại hiện tại.",
+     "model": "I've lived in my flat for two years. I've worked at this company since 2022. I've known my best friend Hoa since we were in primary school – that's about twenty years! And I've had this phone for about eighteen months.",
+     "vi": "Tôi sống ở căn hộ này được hai năm. Tôi làm ở công ty này từ năm 2022. Tôi quen bạn thân Hoa từ hồi tiểu học – khoảng 20 năm rồi! Còn chiếc điện thoại này thì tôi dùng được khoảng 18 tháng."
+    },
+    {
+     "p": "Hội thoại 3 bước theo cặp: hỏi Have you ever…? → bạn trả lời Yes → hỏi chi tiết bằng When / Where / How … did …?",
+     "model": "A: Have you ever been on a sleeper train? — B: Yes, I have. — A: Where did you go? — B: I went from Neravale to Laverin. — A: How was it? — B: It was noisy, but I slept quite well.",
+     "vi": "A: Bạn đi tàu giường nằm bao giờ chưa? — B: Rồi. — A: Bạn đi đâu? — B: Mình đi từ Neravale lên Laverin. — A: Thấy thế nào? — B: Hơi ồn, nhưng mình ngủ khá ngon."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Email báo cáo tiến độ",
+   "task": "Viết email 80–100 từ gửi quản lý báo cáo tiến độ một dự án (ví dụ: tổ chức tiệc cuối năm của công ty). Có just / already / yet, ít nhất 1 câu for hoặc since và 1–2 câu quá khứ đơn có thời gian cụ thể.",
+   "min": 80,
+   "model": "Dear Mrs Thao,\n\nHere is a quick update on the year-end party. I've already booked the restaurant for the 20th of December, and I paid the deposit yesterday. I've also sent the invitations to all 60 staff. So far, 45 people have replied. I haven't chosen the music band yet because two bands haven't sent their prices. I've just called them again, and they promised to reply by Friday. I've worked on this event for two weeks, and I think it will be great!\n\nBest regards,\nLinh",
+   "modelVi": "Kính gửi chị Thảo,\n\nEm xin cập nhật nhanh về tiệc cuối năm. Em đã đặt nhà hàng cho ngày 20 tháng 12, và hôm qua em đã trả tiền đặt cọc. Em cũng đã gửi thư mời cho toàn bộ 60 nhân viên. Đến giờ đã có 45 người phản hồi. Em chưa chọn ban nhạc vì hai nhóm chưa gửi báo giá. Em vừa gọi lại cho họ, và họ hứa sẽ trả lời trước thứ Sáu. Em đã làm sự kiện này được hai tuần, và em nghĩ nó sẽ rất tuyệt!\n\nTrân trọng,\nLinh",
+   "tips": [
+    "Mở thư: Dear + tên, / Here is a quick update on…; kết thư: Best regards,",
+    "Việc đã xong (không nói giờ) → have + already / just + V3; việc chưa xong → haven't + V3 + yet.",
+    "Có thời gian cụ thể (yesterday, on Monday) → quá khứ đơn."
+   ],
+   "checklist": [
+    "Có already, just và yet đúng vị trí",
+    "Có for hoặc since",
+    "≥ 1 câu quá khứ đơn có mốc thời gian",
+    "Không dùng HTHT với yesterday / ago",
+    "Có lời chào – lời kết lịch sự",
+    "Độ dài 80–100 từ"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "I ___ my homework yet.",
+   "o": [
+    "haven't finished",
+    "have finished",
+    "finished"
+   ],
+   "a": 0,
+   "e": "yet ở cuối câu phủ định → haven't + V3 … yet."
+  },
+  {
+   "t": "mc",
+   "q": "She ___ the company in 2020.",
+   "o": [
+    "has joined",
+    "joined",
+    "has join"
+   ],
+   "a": 1,
+   "e": "in 2020 là thời điểm xác định đã qua → quá khứ đơn joined."
+  },
+  {
+   "t": "fill",
+   "q": "We've lived in this flat ___ 2018.",
+   "a": "since",
+   "e": "2018 là mốc thời gian → since."
+  },
+  {
+   "t": "fill",
+   "q": "I've known Huy ___ ten years.",
+   "a": "for",
+   "e": "ten years là khoảng thời gian → for."
+  },
+  {
+   "t": "mc",
+   "q": "When ___ you arrive in Tavarin?",
+   "o": [
+    "did",
+    "have",
+    "has"
+   ],
+   "a": 0,
+   "e": "When hỏi về thời điểm → quá khứ đơn: When did you arrive? ❌ When have you arrived?"
+  },
+  {
+   "t": "mc",
+   "q": "Lan has ___ left. You missed her by one minute!",
+   "o": [
+    "yet",
+    "just",
+    "ever"
+   ],
+   "a": 1,
+   "e": "Vừa mới đi (một phút trước) → just."
+  },
+  {
+   "t": "fill",
+   "q": "Have you replied to the customer ___? – No, not yet.",
+   "a": "yet",
+   "e": "Câu hỏi về việc đã làm chưa → yet ở cuối câu."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào SAI?",
+   "o": [
+    "I have seen him yesterday.",
+    "I saw him yesterday.",
+    "I have seen him recently."
+   ],
+   "a": 0,
+   "e": "Có yesterday (thời điểm xác định) thì phải dùng quá khứ đơn. recently đi được với HTHT."
+  },
+  {
+   "t": "mc",
+   "q": "“Tôi làm ở công ty này được 3 năm rồi (và vẫn đang làm).”",
+   "o": [
+    "I work for this company for three years.",
+    "I've worked for this company for three years.",
+    "I worked for this company since three years."
+   ],
+   "a": 1,
+   "e": "Việc bắt đầu trong quá khứ và còn đến nay → HTHT + for + khoảng thời gian."
+  },
+  {
+   "t": "mc",
+   "q": "I joined the company three years ___.",
+   "o": [
+    "ago",
+    "for",
+    "since"
+   ],
+   "a": 0,
+   "e": "Quá khứ đơn + khoảng thời gian + ago = cách đây…"
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "already",
+    "the report.",
+    "sent",
+    "I have"
+   ],
+   "a": "I have already sent the report.",
+   "e": "already đứng giữa have và V3."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu hỏi đúng:",
+   "w": [
+    "lived",
+    "How long",
+    "in Neravale?",
+    "have you"
+   ],
+   "a": "How long have you lived in Neravale?",
+   "e": "How long + have/has + S + V3?"
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa:",
+   "pairs": [
+    [
+     "just",
+     "vừa mới"
+    ],
+    [
+     "already",
+     "đã … rồi"
+    ],
+    [
+     "yet",
+     "chưa (câu phủ định / câu hỏi)"
+    ],
+    [
+     "for",
+     "trong khoảng (bao lâu)"
+    ],
+    [
+     "since",
+     "từ (mốc thời gian)"
+    ],
+    [
+     "ago",
+     "cách đây"
+    ]
+   ]
+  },
+  {
+   "t": "listen",
+   "say": "I joined the company five years ago, and I've worked in the sales team since last March.",
+   "lang": "en-GB",
+   "q": "When did the speaker join the company?",
+   "o": [
+    "five years ago",
+    "last March",
+    "one year ago"
+   ],
+   "a": 0,
+   "e": "“I joined the company five years ago” – còn last March là lúc chuyển sang nhóm bán hàng."
+  },
+  {
+   "t": "listen",
+   "say": "Have you booked the meeting room yet? Yes, I've already booked it for two o'clock.",
+   "lang": "en-GB",
+   "q": "When is the meeting room booked for?",
+   "o": [
+    "twelve o'clock",
+    "two o'clock",
+    "ten o'clock"
+   ],
+   "a": 1,
+   "e": "“I've already booked it for two o'clock.”"
+  },
+  {
+   "t": "dict",
+   "say": "She has already sent the email.",
+   "lang": "en-GB",
+   "a": "She has already sent the email.",
+   "e": "already đứng giữa has và V3; send – sent – sent."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "To-do list in sẵn có ô ✓ / ✗ cho mỗi cặp; 10 thẻ thời gian (2019, three weeks, Monday, a long time, I was ten, ages, last summer, two hours, Christmas, 8 o'clock) cho trò for/since; 8 câu có lỗi HTHT – QKĐ in trên giấy to; ảnh một căn phòng khách sạn bừa bộn.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: GV hỏi ‘Have you eaten yet?’ (Ăn cơm chưa?) – học viên trả lời Yes, I have / Not yet. GV viết lên bảng và hỏi: tiếng Việt và tiếng Anh giống nhau ở chỗ nào?"
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng văn phòng: deadline, report, task, reply, update, print… qua một to-do list thật trên bảng; luyện already (trọng âm âm tiết 2) và yet /jet/ ≠ jet."
+   },
+   {
+    "t": "20'",
+    "do": "just / already / yet / still: phát to-do list có ✓ / ✗; học viên báo cáo theo cặp (I've already…, I haven't … yet, I've just…). Chốt vị trí từng từ."
+   },
+   {
+    "t": "20'",
+    "do": "for / since: trò ‘Chia thẻ’ (xem mục Trò chơi); rồi học viên hỏi nhau How long have you…? Chốt lỗi ‘I work here for 2 years’ và ago + quá khứ đơn."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe hội thoại văn phòng: lần 1 – việc nào xong, việc nào chưa; lần 2 – trả lời câu hỏi; lần 3 – đọc phân vai, chú ý nối âm sent them, just finished."
+   },
+   {
+    "t": "10'",
+    "do": "Tổng kết; giao bài tập 1–10 trong game."
+   },
+   {
+    "t": "Buổi 2 · 15'",
+    "do": "HTHT vs QKĐ: dạy bảng so sánh; dán 8 câu có lỗi (I have finished it yesterday, When have you arrived?…) – các nhóm thi sửa nhanh và giải thích."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc ‘Twelve Years of Egg Coffee’: gạch 2 màu – HTHT và QKĐ; giải thích vì sao từng câu dùng thì đó; trả lời câu hỏi."
+   },
+   {
+    "t": "20'",
+    "do": "Nói: nhiệm vụ 1 (báo cáo tiến độ) đóng vai sếp – nhân viên; nhiệm vụ 3 (Have you ever… → When did…?) theo cặp, đổi bạn 2 lần. Chơi thêm ‘Thám tử phòng khách sạn’ nếu còn thời gian."
+   },
+   {
+    "t": "10'",
+    "do": "Nhiệm vụ 2:4–5 học viên trả lời How long…? trước lớp; GV ghi lỗi for / since."
+   },
+   {
+    "t": "15'",
+    "do": "Viết email báo cáo tiến độ; đổi bài chấm theo checklist."
+   },
+   {
+    "t": "10'",
+    "do": "Bài tập 11–16; chữa lỗi chung; giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Chia thẻ for/since: 2 đội, mỗi đội 10 thẻ thời gian lẫn lộn. Đội nào xếp đúng vào 2 cột FOR / SINCE nhanh nhất và đặt được 3 câu How long…? đúng thì thắng.",
+   "Thám tử phòng khách sạn: GV chiếu ảnh một căn phòng bừa bộn (cốc cà phê còn bốc khói, giường chưa dọn, vali mở, điện thoại đang sạc). Học viên đoán chuyện gì vừa xảy ra: ‘Someone has just drunk coffee. They haven't made the bed yet. They've already unpacked…’ – mỗi câu đúng ngữ pháp được 1 điểm."
+  ],
+  "errors": [
+   "Dùng HTHT với thời gian xác định: *I have finished it yesterday → I finished it yesterday.",
+   "Hỏi When bằng HTHT: *When have you arrived? → When did you arrive?",
+   "Dùng hiện tại đơn cho việc kéo dài đến nay: *I work here for two years / *I know her since 2015 → I've worked… / I've known…",
+   "Nhầm for / since: *since three years → for three years / since 2023.",
+   "Dùng yet trong câu khẳng định: *I've finished it yet → I've already finished it.",
+   "Kết hợp ago với HTHT: *I have joined three years ago → I joined three years ago."
+  ],
+  "homework": "Làm hết bài tập trong game (≥ 80%); viết to-do list tuần này bằng tiếng Anh và tối Chủ nhật viết 6 câu báo cáo (already / just / yet); viết 5 câu How long…? về gia đình (My parents have been married for…); ghi âm email báo cáo tiến độ."
+ }
 }

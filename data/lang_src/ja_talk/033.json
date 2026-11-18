@@ -1,0 +1,219 @@
+{
+ "no": 33,
+ "lv": "n4",
+ "title": "Đèn tắt và chìa khóa rơi: báo điều thật đã thấy",
+ "sub": "部屋に 来たとき、何か 変わったことが ありましたか。",
+ "situation": "Hai bạn nhận ca tại phòng sinh hoạt giả. Người đến trước báo tình trạng và hành động của mình, đồng thời sửa câu hỏi dễ gán lỗi khi chưa rõ nguyên nhân.",
+ "lang": "ja-JP",
+ "lines": [
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "部屋に 来たとき、何か 変わったことが ありましたか。",
+   "vi": "Lúc đến phòng có thấy điều gì khác thường không?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "窓は 閉まっていましたが、入口の 電気が 消えていました。",
+   "vi": "Cửa sổ đóng nhưng đèn cửa vào tắt."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "誰かが 電気を 消したんですね。前の 係の 人ですか。",
+   "vi": "Ai đó tắt đèn nhỉ. Là người ca trước à?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "消えていたことは 確かですが、誰が 消したかは 見ていません。",
+   "vi": "Chắc chắn là đèn đang tắt, nhưng tôi không thấy ai tắt."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "そのあと、あなたが 電気を つけましたか。",
+   "vi": "Sau đó bạn bật đèn à?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "はい。電気を つけたら、床に 鍵が 落ちているのを 見つけました。",
+   "vi": "Vâng. Bật đèn thì thấy chìa khóa rơi trên sàn."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "鍵を 落とした 人は もう わかりましたか。",
+   "vi": "Đã biết người làm rơi chìa chưa?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "まだです。受付へ 持っていきました。名前は ついていませんでした。",
+   "vi": "Chưa. Tôi mang đến quầy. Không có tên gắn trên chìa."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "机の 時計も 止まっています。あなたが 壊したのでは ありませんよね。",
+   "vi": "Đồng hồ bàn cũng dừng. Không phải bạn làm hỏng chứ?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "来たときから 止まっていました。電池かどうかは 未確認です。",
+   "vi": "Nó đã dừng lúc tôi đến. Chưa kiểm có phải do pin không."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "わかりました。状態と、自分が したことを 分けて メモに します。",
+   "vi": "Tôi hiểu. Tôi ghi riêng tình trạng với việc bạn tự làm."
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "お願いします。原因は 係の 人に 聞いてから 書きましょう。",
+   "vi": "Nhờ bạn. Nguyên nhân hỏi người phụ trách rồi mới ghi nhé."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "電気が消えていた",
+   "vi": "đèn đang tắt lúc thấy",
+   "note": "Tự động từ mô tả trạng thái, không chỉ người tắt."
+  },
+  {
+   "t": "電気をつけた",
+   "vi": "đã bật đèn",
+   "note": "Tha động từ đi với đối tượng を và người thực hiện."
+  },
+  {
+   "t": "鍵が落ちている",
+   "vi": "chìa đang rơi nằm đó",
+   "note": "Không tự nhận ai làm rơi từ hiện tượng trên sàn."
+  },
+  {
+   "t": "誰が落としたか",
+   "vi": "ai đã làm rơi",
+   "note": "落とす cần chủ thể tác động, khác 落ちる."
+  },
+  {
+   "t": "来たときから",
+   "vi": "từ lúc đến",
+   "note": "Giới hạn điều người kể quan sát, không chứng minh thời điểm bắt đầu hỏng."
+  },
+  {
+   "t": "原因は未確認",
+   "vi": "nguyên nhân chưa kiểm",
+   "note": "Giữ phần chưa biết cụ thể thay vì gán cho ca trước."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Lúc mới đến, đèn thế nào?",
+   "o": [
+    "Tắt",
+    "Đang nhấp nháy",
+    "Đã vỡ"
+   ],
+   "a": 0,
+   "e": "消えていました mô tả đèn tắt, không có dữ kiện vỡ hay chớp."
+  },
+  {
+   "q": "Có biết ai tắt không?",
+   "o": [
+    "Có, chắc ca trước",
+    "Có, người kể nhận tắt",
+    "Không, chưa thấy người thực hiện"
+   ],
+   "a": 2,
+   "e": "Người kể tách chắc trạng thái với không thấy ai tắt."
+  },
+  {
+   "q": "Sau bật đèn thấy gì?",
+   "o": [
+    "Đồng hồ mới",
+    "Chìa khóa trên sàn",
+    "Tên chủ chìa"
+   ],
+   "a": 1,
+   "e": "鍵が落ちている được thấy sau bật."
+  },
+  {
+   "q": "Chìa khóa được mang đâu?",
+   "o": [
+    "Quầy tiếp nhận",
+    "Nhà người kể",
+    "Bỏ đi"
+   ],
+   "a": 0,
+   "e": "受付へ持っていきました là hành động đã làm."
+  },
+  {
+   "q": "Đồng hồ có chắc do pin không?",
+   "o": [
+    "Chắc chắn",
+    "Không thể do pin",
+    "Chưa kiểm"
+   ],
+   "a": 2,
+   "e": "Điện pin chỉ là câu hỏi chưa xác nhận, không phải nguyên nhân đã chốt."
+  },
+  {
+   "q": "Ghi chú cần phân gì?",
+   "o": [
+    "Chỉ tên người giữ khóa",
+    "Tình trạng với hành động của người đến",
+    "Chỉ lỗi ca trước"
+   ],
+   "a": 1,
+   "e": "Hai lượt cuối nêu tách trạng thái/việc tự làm, hỏi nguyên nhân trước ghi."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "Điền tự động từ trạng thái: 電気が___いました。",
+   "a": "消えて",
+   "e": "消える nêu đèn tắt, ていた đặt trạng thái quá khứ lúc đến."
+  },
+  {
+   "t": "fill",
+   "q": "Điền trợ từ tác động: わたしが電気___つけました。",
+   "a": "を",
+   "e": "つける là thao tác lên đèn, đối tượng đi với を."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu chưa rõ ai làm rơi.",
+   "w": [
+    "わかりません。",
+    "誰が鍵を落としたかは"
+   ],
+   "a": "誰が鍵を落としたかはわかりません。",
+   "e": "Câu hỏi lồng giữ điều chưa biết là người thực hiện, không phủ nhận hiện tượng chìa rơi."
+  },
+  {
+   "t": "dict",
+   "say": "窓が 開いていたので、わたしが 閉めました。",
+   "a": "窓が 開いていたので、わたしが 閉めました。",
+   "lang": "ja-JP",
+   "e": "Phân trạng thái cửa mở với hành động tự đóng, dùng đúng cặp 開く/閉める."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Thẻ mới: cửa mở, bạn đóng; bút nằm dưới bàn, chưa biết ai làm rơi. Báo ba ý.",
+   "model": "ドアが 開いていたので、わたしが 閉めました。ペンが 机の 下に 落ちていましたが、誰が 落としたかは わかりません。",
+   "vi": "Cửa đang mở nên tôi đóng. Bút rơi dưới bàn nhưng tôi không biết ai làm rơi."
+  },
+  {
+   "p": "Người kia cho rằng ca trước làm hỏng đèn. Nói chỉ biết đèn không sáng, sẽ hỏi kiểm trước kết luận.",
+   "model": "電気が つかないことは 確認しましたが、誰が 壊したかは わかりません。原因を 調べてから 報告します。",
+   "vi": "Tôi kiểm đèn không sáng nhưng không biết ai làm hỏng. Tôi sẽ kiểm nguyên nhân rồi báo."
+  }
+ ]
+}

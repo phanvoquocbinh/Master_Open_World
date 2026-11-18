@@ -4,7 +4,7 @@ icon: 📈
 floor: 5
 room: 501
 level: Cơ bản → Trung bình
-hours: 8
+hours: 28
 summary: Làm quen kiểm thử hiệu năng với Apache JMeter: dựng test plan, dùng dữ liệu CSV, assertion, correlation, chạy non-GUI và đọc báo cáo HTML (p90/p95, throughput). Mọi bài tập chỉ chạy trên server local của chính bạn.
 
 ## LESSON jmeter-01 | Kiểm thử hiệu năng là gì?
@@ -29,21 +29,25 @@ Người mới nên bắt đầu với load test nhỏ, sau đó mới thử cá
 • Throughput (thông lượng): server xử lý được bao nhiêu request mỗi giây (req/s), giống số khách thu ngân phục vụ mỗi phút.
 • Error rate (tỉ lệ lỗi): phần trăm request thất bại.
 Dưới đây là một dòng kết quả mẫu JMeter in ra. Bài 8 sẽ học đọc kỹ hơn.
-~~~text
-summary =    150 in 00:00:31 =    4.8/s Avg:    12 Min:     3 Max:    95 Err:     0 (0.00%)
-~~~
 Giải thích từng phần:
 • 150: tổng số request đã gửi.
 • 00:00:31: chạy hết 31 giây.
 • 4.8/s: throughput khoảng 4,8 request mỗi giây.
 • Avg 12, Min 3, Max 95: thời gian phản hồi trung bình, nhanh nhất, chậm nhất (ms).
 • Err 0 (0.00%): không có lỗi.
+~~~text
+summary =    150 in 00:00:31 =    4.8/s Avg:    12 Min:     3 Max:    95 Err:     0 (0.00%)
+~~~
 
 ### Quy tắc vàng: chỉ test server của chính bạn
 Load test giống như cho 500 người cùng gõ cửa một ngôi nhà. Làm vậy với nhà người khác là gây rối, thậm chí phạm pháp.
 • Không bao giờ load test website công cộng, website công ty hay hệ thống production khi chưa có văn bản cho phép.
 • Trong khóa này ta dựng một server giả trên chính máy bạn bằng json-server.
 Bước 1: tạo file db.json chứa dữ liệu mẫu (nội dung bên dưới).
+Giải thích:
+• "posts", "users", "sessions": ba "bảng" dữ liệu, mỗi bảng sẽ thành một địa chỉ API, ví dụ /posts.
+• Mỗi phần tử trong ngoặc vuông là một bản ghi có "id" riêng.
+• "sessions" giả lập việc đăng nhập để bài 6 luyện lấy token.
 ~~~json
 {
   "posts": [
@@ -57,19 +61,9 @@ Bước 1: tạo file db.json chứa dữ liệu mẫu (nội dung bên dưới)
   ]
 }
 ~~~
-Giải thích:
-• "posts", "users", "sessions": ba "bảng" dữ liệu, mỗi bảng sẽ thành một địa chỉ API, ví dụ /posts.
-• Mỗi phần tử trong ngoặc vuông là một bản ghi có "id" riêng.
-• "sessions" giả lập việc đăng nhập để bài 6 luyện lấy token.
 
 ### Dựng server mục tiêu trên máy bạn
 Cần cài Node.js LTS trước (xem khóa Máy tính & dòng lệnh). Mở PowerShell và gõ:
-~~~bash
-mkdir C:\perf-lab
-cd C:\perf-lab
-notepad db.json
-npx json-server db.json
-~~~
 Giải thích từng dòng:
 • mkdir C:\perf-lab: tạo thư mục làm việc.
 • cd C:\perf-lab: đi vào thư mục đó.
@@ -77,16 +71,22 @@ Giải thích từng dòng:
 • npx json-server db.json: tải và chạy json-server. Lần đầu nó hỏi "Ok to proceed? (y)", gõ y rồi Enter.
 Kết quả mong đợi: dòng chữ JSON Server started on PORT :3000 và danh sách Endpoints như http://localhost:3000/posts.
 Giữ cửa sổ này mở suốt buổi học, mở một cửa sổ PowerShell khác để làm tiếp. Kiểm tra nhanh: Invoke-RestMethod http://localhost:3000/posts phải in ra 2 bài viết.
+~~~bash
+mkdir C:\perf-lab
+cd C:\perf-lab
+notepad db.json
+npx json-server db.json
+~~~
 
 ### Lỗi thường gặp
+• Lỗi 1: chưa cài Node.js hoặc chưa mở lại PowerShell sau khi cài. Cách sửa: cài Node.js LTS, đóng và mở lại PowerShell.
+• Lỗi 2: PowerShell chặn chạy script. Cách sửa nhanh: gõ npx.cmd json-server db.json. Hoặc chạy Set-ExecutionPolicy -Scope CurrentUser RemoteSigned (trên máy công ty hãy hỏi IT trước).
+• Lỗi 3: cổng 3000 đang bị chương trình khác dùng. Cách sửa: tắt chương trình kia hoặc chạy npx json-server --port 3001 db.json và nhớ đổi port trong JMeter.
 ~~~text
 npx : The term 'npx' is not recognized as the name of a cmdlet...
 npx : File C:\Program Files\nodejs\npx.ps1 cannot be loaded because running scripts is disabled on this system.
 Error: listen EADDRINUSE: address already in use :::3000
 ~~~
-• Lỗi 1: chưa cài Node.js hoặc chưa mở lại PowerShell sau khi cài. Cách sửa: cài Node.js LTS, đóng và mở lại PowerShell.
-• Lỗi 2: PowerShell chặn chạy script. Cách sửa nhanh: gõ npx.cmd json-server db.json. Hoặc chạy Set-ExecutionPolicy -Scope CurrentUser RemoteSigned (trên máy công ty hãy hỏi IT trước).
-• Lỗi 3: cổng 3000 đang bị chương trình khác dùng. Cách sửa: tắt chương trình kia hoặc chạy npx json-server --port 3001 db.json và nhớ đổi port trong JMeter.
 
 PRACTICE: Tạo thư mục C:\perf-lab, viết file db.json như bài học, chạy npx json-server db.json, rồi mở trình duyệt vào http://localhost:3000/posts và chụp màn hình danh sách bài viết.
 Q: Bạn muốn biết hệ thống có bị chậm dần khi chạy liên tục 6 tiếng hay không. Đó là kiểu test nào?
@@ -107,47 +107,43 @@ Q: Trong dòng "150 in 00:00:31 = 4.8/s", con số 4.8/s là gì?
 ### JMeter cần Java để chạy
 JMeter được viết bằng Java. Giống một trò chơi cần "engine", JMeter cần Java (JDK hoặc JRE) đã cài sẵn. Bản JMeter mới cần Java 8 trở lên, khuyên dùng Java 17.
 Kiểm tra máy đã có Java chưa: mở PowerShell, gõ lệnh bên dưới.
-~~~bash
-java -version
-~~~
 Kết quả mong đợi (số phiên bản có thể khác):
 • openjdk version "17.0.12" 2024-07-16
 • OpenJDK Runtime Environment Temurin-17.0.12+7 ...
 Nếu thấy dòng có số 17 (hoặc 11, 21) là đủ. Nếu báo 'java' is not recognized thì làm slide tiếp theo.
+~~~bash
+java -version
+~~~
 
 ### Cài Java 17 bằng winget
 winget là "kho ứng dụng dòng lệnh" có sẵn trong Windows 10/11.
+Giải thích từng dòng:
+• winget install ...: tải và cài bản Java 17 miễn phí (Eclipse Temurin). Có thể bị hỏi đồng ý điều khoản, gõ Y.
+• java -version: chạy lại sau khi ĐÓNG và MỞ LẠI PowerShell, phải thấy phiên bản 17.
+• echo $env:JAVA_HOME: xem biến JAVA_HOME. Nếu trống cũng không sao, JMeter vẫn tìm Java qua PATH.
+Cách khác: tải bộ cài .msi từ trang chính thức của Eclipse Temurin, khi cài nhớ tích chọn "Set JAVA_HOME variable".
 ~~~bash
 winget install EclipseAdoptium.Temurin.17.JDK
 java -version
 echo $env:JAVA_HOME
 ~~~
-Giải thích từng dòng:
-• winget install ...: tải và cài bản Java 17 miễn phí (Eclipse Temurin). Có thể bị hỏi đồng ý điều khoản, gõ Y.
-• java -version: chạy lại sau khi ĐÓNG và MỞ LẠI PowerShell, phải thấy phiên bản 17.
-• echo $env:JAVA_HOME: xem biến JAVA_HOME. Nếu trống cũng không sao, JMeter vẫn tìm Java qua PATH.
-Cách khác: tải bộ cài .msi từ trang adoptium.net, khi cài nhớ tích chọn "Set JAVA_HOME variable".
 
 ### Tải và giải nén JMeter
-1. Vào trang chính thức jmeter.apache.org, mục Download Releases.
+1. Vào trang chính thức của dự án JMeter, mục Download Releases.
 2. Ở phần Binaries, tải file apache-jmeter-x.y.z.zip (KHÔNG tải bản Source).
 3. Giải nén vào một thư mục ngắn gọn, không có dấu tiếng Việt, ví dụ C:\Tools.
 Có thể giải nén bằng PowerShell (thay 5.6.3 bằng số phiên bản bạn tải):
+Giải thích từng dòng:
+• mkdir C:\Tools: tạo thư mục chứa công cụ.
+• Expand-Archive: giải nén file zip trong thư mục Downloads vào C:\Tools.
+• dir ...jmeter.bat: kiểm tra file khởi động có tồn tại. Thấy tên file và dung lượng là thành công.
 ~~~bash
 mkdir C:\Tools
 Expand-Archive -Path "$HOME\Downloads\apache-jmeter-5.6.3.zip" -DestinationPath "C:\Tools"
 dir C:\Tools\apache-jmeter-5.6.3\bin\jmeter.bat
 ~~~
-Giải thích từng dòng:
-• mkdir C:\Tools: tạo thư mục chứa công cụ.
-• Expand-Archive: giải nén file zip trong thư mục Downloads vào C:\Tools.
-• dir ...jmeter.bat: kiểm tra file khởi động có tồn tại. Thấy tên file và dung lượng là thành công.
 
 ### Mở JMeter lần đầu
-~~~bash
-cd C:\Tools\apache-jmeter-5.6.3\bin
-.\jmeter.bat
-~~~
 Giải thích từng dòng:
 • cd ...\bin: đi vào thư mục bin, nơi chứa các file chạy.
 • .\jmeter.bat: chạy JMeter. Trong PowerShell phải có .\ phía trước khi chạy file ở thư mục hiện tại.
@@ -155,28 +151,32 @@ Kết quả mong đợi:
 • Cửa sổ đen hiện thông báo "Don't use GUI mode for load testing !, only for Test creation and Test debugging."
 • Vài giây sau, cửa sổ giao diện JMeter mở ra với "Test Plan" bên trái.
 Lời nhắc trong cửa sổ đen rất quan trọng: giao diện (GUI) chỉ để TẠO và SỬA kịch bản; khi chạy tải thật phải dùng chế độ dòng lệnh (bài 7). Đừng tắt cửa sổ đen, tắt nó là JMeter cũng đóng.
+~~~bash
+cd C:\Tools\apache-jmeter-5.6.3\bin
+.\jmeter.bat
+~~~
 
 ### Thêm JMeter vào PATH
 PATH là "danh bạ" giúp Windows tìm chương trình khi bạn gõ tên của nó ở bất kỳ thư mục nào.
 1. Nhấn phím Windows, gõ "Edit environment variables for your account" và mở.
 2. Chọn dòng Path > Edit > New, dán C:\Tools\apache-jmeter-5.6.3\bin > OK.
 3. Đóng hết PowerShell, mở cửa sổ mới rồi gõ:
+Giải thích: jmeter -v in ra logo chữ lớn và số phiên bản, ví dụ 5.6.3, rồi thoát.
+Từ giờ bạn gõ jmeter ở bất kỳ đâu đều được, kể cả mở giao diện bằng lệnh jmeter.
 ~~~bash
 jmeter -v
 ~~~
-Giải thích: jmeter -v in ra logo chữ lớn và số phiên bản, ví dụ 5.6.3, rồi thoát.
-Từ giờ bạn gõ jmeter ở bất kỳ đâu đều được, kể cả mở giao diện bằng lệnh jmeter.
 
 ### Lỗi thường gặp
+• Lỗi 1: chưa thêm thư mục bin vào PATH, hoặc chưa mở lại PowerShell. Cách sửa: kiểm tra lại đường dẫn trong Path, mở cửa sổ mới.
+• Lỗi 2 và 3: chưa cài Java hoặc Java không nằm trong PATH. Cách sửa: cài lại Java 17, mở lại PowerShell, chạy java -version.
+• Giải nén vào thư mục có dấu cách hoặc tiếng Việt (ví dụ "Tài liệu") đôi khi gây lỗi khó hiểu. Hãy dùng C:\Tools.
+• Bấm đúp file jmeter.bat mà cửa sổ chớp rồi tắt: mở PowerShell, chạy .\jmeter.bat để đọc được thông báo lỗi.
 ~~~text
 jmeter : The term 'jmeter' is not recognized as the name of a cmdlet, function, script file, or operable program.
 'java' is not recognized as an internal or external command, operable program or batch file.
 Not able to find Java executable or version. Please check your Java installation.
 ~~~
-• Lỗi 1: chưa thêm thư mục bin vào PATH, hoặc chưa mở lại PowerShell. Cách sửa: kiểm tra lại đường dẫn trong Path, mở cửa sổ mới.
-• Lỗi 2 và 3: chưa cài Java hoặc Java không nằm trong PATH. Cách sửa: cài lại Java 17, mở lại PowerShell, chạy java -version.
-• Giải nén vào thư mục có dấu cách hoặc tiếng Việt (ví dụ "Tài liệu") đôi khi gây lỗi khó hiểu. Hãy dùng C:\Tools.
-• Bấm đúp file jmeter.bat mà cửa sổ chớp rồi tắt: mở PowerShell, chạy .\jmeter.bat để đọc được thông báo lỗi.
 
 PRACTICE: Cài Java 17 và JMeter, thêm thư mục bin vào PATH, chạy jmeter -v để thấy số phiên bản, rồi mở giao diện JMeter bằng lệnh jmeter.
 Q: Vì sao phải cài Java trước khi dùng JMeter?
@@ -196,6 +196,12 @@ Q: Thông báo "Don't use GUI mode for load testing" có ý nghĩa gì?
 
 ### Cấu trúc một Test Plan
 Một kịch bản JMeter có dạng cây, giống mục lục của một cuốn sách. Ví dụ kịch bản "đọc danh sách bài viết":
+Giải thích:
+• Test Plan: gốc của mọi thứ, mỗi file .jmx là một Test Plan.
+• Thread Group: "đoàn khách" gồm bao nhiêu người ảo, vào nhanh hay chậm.
+• HTTP Request: việc mỗi khách làm, ví dụ mở trang danh sách bài viết.
+• Listener (View Results Tree): nơi xem kết quả.
+Thao tác chung: chuột phải vào một mục > Add > chọn loại phần tử muốn thêm.
 ~~~text
 Test Plan (kịch bản tổng)
 └── Thread Group (nhóm người dùng ảo)
@@ -204,30 +210,30 @@ Test Plan (kịch bản tổng)
     ├── HTTP Request: GET /posts (một hành động)
     └── View Results Tree (màn hình xem kết quả)
 ~~~
-Giải thích:
-• Test Plan: gốc của mọi thứ, mỗi file .jmx là một Test Plan.
-• Thread Group: "đoàn khách" gồm bao nhiêu người ảo, vào nhanh hay chậm.
-• HTTP Request: việc mỗi khách làm, ví dụ mở trang danh sách bài viết.
-• Listener (View Results Tree): nơi xem kết quả.
-Thao tác chung: chuột phải vào một mục > Add > chọn loại phần tử muốn thêm.
 
 ### Thread Group: bao nhiêu người, vào nhanh cỡ nào
 Chuột phải Test Plan > Add > Threads (Users) > Thread Group, rồi điền:
-~~~text
-Name: Nguoi doc bai
-Number of Threads (users): 5
-Ramp-up period (seconds): 10
-Loop Count: 3
-~~~
 Giải thích từng dòng:
 • Name: đặt tên dễ hiểu (nên không dấu để log dễ đọc).
 • Number of Threads: 5 người dùng ảo.
 • Ramp-up period 10: trong 10 giây đưa đủ 5 người vào, tức cứ khoảng 2 giây thêm 1 người, không ùa vào cùng lúc.
 • Loop Count 3: mỗi người lặp lại kịch bản 3 lần.
 Tổng số lần thực hiện = 5 người × 3 vòng = 15. Nếu trong Thread Group có 2 HTTP Request thì tổng là 30 request.
+~~~text
+Name: Nguoi doc bai
+Number of Threads (users): 5
+Ramp-up period (seconds): 10
+Loop Count: 3
+~~~
 
 ### HTTP Request: gửi một yêu cầu
 Chuột phải Thread Group > Add > Sampler > HTTP Request. Điền vào form:
+Giải thích từng dòng:
+• Protocol: http hoặc https. Server local của ta dùng http.
+• Server Name or IP: chỉ ghi tên máy, KHÔNG ghi "http://" và không có dấu / ở cuối.
+• Port Number: cổng json-server đang chạy (3000).
+• Method GET: "lấy" dữ liệu, giống mở một trang để đọc.
+• Path: phần đường dẫn sau tên máy. Ghép lại thành http://localhost:3000/posts.
 ~~~text
 Name: GET danh sach bai viet
 Protocol [http]: http
@@ -236,16 +242,15 @@ Port Number: 3000
 HTTP Request Method: GET
 Path: /posts
 ~~~
-Giải thích từng dòng:
-• Protocol: http hoặc https. Server local của ta dùng http.
-• Server Name or IP: chỉ ghi tên máy, KHÔNG ghi "http://" và không có dấu / ở cuối.
-• Port Number: cổng json-server đang chạy (3000).
-• Method GET: "lấy" dữ liệu, giống mở một trang để đọc.
-• Path: phần đường dẫn sau tên máy. Ghép lại thành http://localhost:3000/posts.
 
 ### HTTP Request Defaults và HTTP Header Manager
 Nếu có 20 request cùng gửi tới localhost:3000, gõ lại 20 lần rất dễ sai. Hãy đặt cấu hình chung một chỗ.
 Chuột phải Thread Group > Add > Config Element > HTTP Request Defaults, và > HTTP Header Manager:
+Giải thích:
+• HTTP Request Defaults: các HTTP Request bên dưới để trống Server/Port sẽ tự dùng giá trị này. Đổi server chỉ cần sửa 1 chỗ.
+• Content-Type: application/json: báo cho server biết dữ liệu ta gửi lên là JSON.
+• Accept: application/json: báo ta muốn nhận về JSON.
+Header Manager đặt ở Thread Group thì áp dụng cho mọi request trong nhóm đó.
 ~~~text
 [HTTP Request Defaults]
 Protocol: http
@@ -256,11 +261,6 @@ Port Number: 3000
 Name: Content-Type      Value: application/json
 Name: Accept            Value: application/json
 ~~~
-Giải thích:
-• HTTP Request Defaults: các HTTP Request bên dưới để trống Server/Port sẽ tự dùng giá trị này. Đổi server chỉ cần sửa 1 chỗ.
-• Content-Type: application/json: báo cho server biết dữ liệu ta gửi lên là JSON.
-• Accept: application/json: báo ta muốn nhận về JSON.
-Header Manager đặt ở Thread Group thì áp dụng cho mọi request trong nhóm đó.
 
 ### Lưu, chạy và xem kết quả
 1. Chuột phải Thread Group > Add > Listener > View Results Tree.
@@ -270,15 +270,19 @@ Header Manager đặt ở Thread Group thì áp dụng cho mọi request trong n
 • Tab Sampler result: mã phản hồi (Response code: 200), thời gian (Load time).
 • Tab Response data: dữ liệu JSON server trả về.
 File .jmx thực chất là XML. Mở bằng Notepad sẽ thấy đoạn tương tự (rút gọn, có thể khác chút theo phiên bản):
+Giải thích: num_threads là số người dùng, ramp_time là thời gian tăng dần. Không cần sửa XML bằng tay, chỉ cần biết để đọc khi review.
 ~~~xml
 <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Nguoi doc bai">
   <stringProp name="ThreadGroup.num_threads">5</stringProp>
   <stringProp name="ThreadGroup.ramp_time">10</stringProp>
 </ThreadGroup>
 ~~~
-Giải thích: num_threads là số người dùng, ramp_time là thời gian tăng dần. Không cần sửa XML bằng tay, chỉ cần biết để đọc khi review.
 
 ### Lỗi thường gặp
+• Connection refused: không có server nào nghe ở localhost:3000. Cách sửa: kiểm tra cửa sổ json-server còn chạy không, port có đúng không.
+• UnknownHostException: tên máy sai, thường do gõ "http://localhost" vào ô Server Name. Cách sửa: chỉ ghi localhost.
+• 404 Not Found: Path sai, ví dụ /post thay vì /posts. Cách sửa: thử đường dẫn trên trình duyệt trước.
+• Bấm Start mà không thấy gì: chưa thêm Listener, hoặc Listener nằm ngoài Thread Group.
 ~~~text
 Non HTTP response code: java.net.ConnectException
 Non HTTP response message: Connection refused: connect
@@ -286,10 +290,6 @@ Non HTTP response message: Connection refused: connect
 Non HTTP response code: java.net.UnknownHostException
 Response code: 404  Response message: Not Found
 ~~~
-• Connection refused: không có server nào nghe ở localhost:3000. Cách sửa: kiểm tra cửa sổ json-server còn chạy không, port có đúng không.
-• UnknownHostException: tên máy sai, thường do gõ "http://localhost" vào ô Server Name. Cách sửa: chỉ ghi localhost.
-• 404 Not Found: Path sai, ví dụ /post thay vì /posts. Cách sửa: thử đường dẫn trên trình duyệt trước.
-• Bấm Start mà không thấy gì: chưa thêm Listener, hoặc Listener nằm ngoài Thread Group.
 
 PRACTICE: Tạo plan.jmx gồm Thread Group (3 users, ramp-up 3, loop 2), HTTP Request Defaults trỏ tới localhost:3000, một HTTP Request GET /posts và View Results Tree. Chạy và xác nhận có 6 dòng màu xanh.
 Q: Thread Group có 4 users, Loop Count 5, chứa 1 HTTP Request. Tổng số request là bao nhiêu?
@@ -316,6 +316,11 @@ CSV = Comma-Separated Values: các cột ngăn cách bằng dấu phẩy.
 
 ### Tạo file users.csv
 Mở Notepad, gõ nội dung dưới đây và lưu thành C:\perf-lab\users.csv (chọn Encoding: UTF-8).
+Giải thích từng dòng:
+• Dòng 1 là tiêu đề cột: username và email.
+• Các dòng sau là dữ liệu, mỗi dòng một người dùng.
+• Dùng tên miền example.com vì đây là tên miền dành riêng cho ví dụ, không gửi thư tới ai thật.
+Lưu ý: không để dòng trống ở cuối file và không có dấu cách thừa quanh dấu phẩy.
 ~~~text
 username,email
 tester01,tester01@example.com
@@ -323,14 +328,16 @@ tester02,tester02@example.com
 tester03,tester03@example.com
 tester04,tester04@example.com
 ~~~
-Giải thích từng dòng:
-• Dòng 1 là tiêu đề cột: username và email.
-• Các dòng sau là dữ liệu, mỗi dòng một người dùng.
-• Dùng tên miền example.com vì đây là tên miền dành riêng cho ví dụ, không gửi thư tới ai thật.
-Lưu ý: không để dòng trống ở cuối file và không có dấu cách thừa quanh dấu phẩy.
 
 ### Cấu hình CSV Data Set Config
 Chuột phải Thread Group > Add > Config Element > CSV Data Set Config:
+Giải thích từng dòng:
+• Filename: đường dẫn file. Ghi ngắn users.csv thì JMeter tìm cạnh file plan.jmx.
+• Variable Names: tên biến cho từng cột. Sau này dùng ${username}, ${email}.
+• Ignore first line True: bỏ qua dòng tiêu đề.
+• Recycle on EOF True: hết file thì quay lại dòng đầu.
+• Stop thread on EOF False: hết file không dừng người dùng ảo.
+• Sharing mode All threads: mọi người dùng ảo chia nhau đọc chung một file, mỗi lần lấy dòng kế tiếp.
 ~~~text
 Filename: users.csv
 File encoding: UTF-8
@@ -341,16 +348,15 @@ Recycle on EOF ?: True
 Stop thread on EOF ?: False
 Sharing mode: All threads
 ~~~
-Giải thích từng dòng:
-• Filename: đường dẫn file. Ghi ngắn users.csv thì JMeter tìm cạnh file plan.jmx.
-• Variable Names: tên biến cho từng cột. Sau này dùng ${username}, ${email}.
-• Ignore first line True: bỏ qua dòng tiêu đề.
-• Recycle on EOF True: hết file thì quay lại dòng đầu.
-• Stop thread on EOF False: hết file không dừng người dùng ảo.
-• Sharing mode All threads: mọi người dùng ảo chia nhau đọc chung một file, mỗi lần lấy dòng kế tiếp.
 
 ### Gửi POST với dữ liệu JSON
 Thêm một HTTP Request mới: Method POST, Path /users. Chọn tab Body Data và dán:
+Giải thích từng dòng:
+• Dấu { } bao quanh một đối tượng JSON.
+• "username": "${username}": JMeter thay ${username} bằng giá trị lấy từ CSV, ví dụ tester01.
+• "email": "${email}": tương tự, lấy cột email.
+• "role": "tester": giá trị cố định, giống nhau cho mọi người.
+Nhớ đã có HTTP Header Manager với Content-Type: application/json (bài 3). Chạy thử, trong View Results Tree chọn tab Request > Request Body để thấy dữ liệu thật đã gửi. Kết quả mong đợi: Response code 201 (Created) và JSON trả về có thêm "id".
 ~~~json
 {
   "username": "${username}",
@@ -358,34 +364,28 @@ Thêm một HTTP Request mới: Method POST, Path /users. Chọn tab Body Data v
   "role": "tester"
 }
 ~~~
-Giải thích từng dòng:
-• Dấu { } bao quanh một đối tượng JSON.
-• "username": "${username}": JMeter thay ${username} bằng giá trị lấy từ CSV, ví dụ tester01.
-• "email": "${email}": tương tự, lấy cột email.
-• "role": "tester": giá trị cố định, giống nhau cho mọi người.
-Nhớ đã có HTTP Header Manager với Content-Type: application/json (bài 3). Chạy thử, trong View Results Tree chọn tab Request > Request Body để thấy dữ liệu thật đã gửi. Kết quả mong đợi: Response code 201 (Created) và JSON trả về có thêm "id".
 
 ### Kiểm tra dữ liệu đã được tạo
 Sau khi chạy, xác nhận server thực sự đã lưu dữ liệu. Mở PowerShell khác và gõ:
-~~~bash
-Invoke-RestMethod http://localhost:3000/users
-(Invoke-RestMethod http://localhost:3000/users).Count
-~~~
 Giải thích từng dòng:
 • Lệnh 1: gọi GET /users và in bảng các user đã tạo, có cột username, email, role, id.
 • Lệnh 2: đếm số user. Nếu Thread Group có 2 users × 2 vòng thì kết quả là 4.
 json-server ghi luôn vào file db.json. Muốn làm sạch dữ liệu, dừng json-server (Ctrl+C), sửa "users": [] trong db.json rồi chạy lại.
+~~~bash
+Invoke-RestMethod http://localhost:3000/users
+(Invoke-RestMethod http://localhost:3000/users).Count
+~~~
 
 ### Lỗi thường gặp
+• Thấy nguyên chữ ${username} bị gửi đi: CSV chưa được đọc. Kiểm tra Variable Names gõ đúng chính tả, CSV Data Set Config nằm trong Thread Group.
+• FileNotFoundException: sai đường dẫn file. Cách sửa: dùng đường dẫn đầy đủ C:\perf-lab\users.csv, hoặc đặt CSV cạnh file .jmx.
+• Request đầu gửi chữ "username": quên đặt Ignore first line = True nên JMeter coi dòng tiêu đề là dữ liệu.
+• Server trả 415 hoặc dữ liệu rỗng: thiếu header Content-Type: application/json.
 ~~~text
 Request body: {"username": "${username}", ...}
 java.io.FileNotFoundException: users.csv (The system cannot find the file specified)
 username = "username" trong request đầu tiên
 ~~~
-• Thấy nguyên chữ ${username} bị gửi đi: CSV chưa được đọc. Kiểm tra Variable Names gõ đúng chính tả, CSV Data Set Config nằm trong Thread Group.
-• FileNotFoundException: sai đường dẫn file. Cách sửa: dùng đường dẫn đầy đủ C:\perf-lab\users.csv, hoặc đặt CSV cạnh file .jmx.
-• Request đầu gửi chữ "username": quên đặt Ignore first line = True nên JMeter coi dòng tiêu đề là dữ liệu.
-• Server trả 415 hoặc dữ liệu rỗng: thiếu header Content-Type: application/json.
 
 PRACTICE: Tạo users.csv với 5 người dùng, cấu hình CSV Data Set Config và một request POST /users gửi username, email. Chạy với 5 users, loop 1, rồi dùng Invoke-RestMethod để đếm đúng 5 user mới.
 Q: Trong CSV Data Set Config, ô nào quyết định tên biến như ${email}?
@@ -411,6 +411,11 @@ Phạm vi: assertion đặt BÊN DƯỚI một HTTP Request thì chỉ kiểm re
 
 ### Response Assertion: kiểm mã và nội dung
 Chuột phải HTTP Request GET /posts > Add > Assertions > Response Assertion:
+Giải thích từng dòng:
+• Assertion 1 (Field to Test: Response Code, Equals, 200): mã phản hồi phải đúng bằng 200.
+• Assertion 2 (Text Response, Contains, "title"): nội dung trả về phải có chữ "title". Mỗi assertion là một phần tử riêng, thêm 2 lần.
+• Với request POST /users, đổi thành 201.
+Chạy lại: request đạt cả hai điều kiện thì xanh, sai một điều thì đỏ và tab Assertion result ghi lý do.
 ~~~text
 Field to Test: Response Code
 Pattern Matching Rules: Equals
@@ -420,36 +425,31 @@ Field to Test: Text Response
 Pattern Matching Rules: Contains
 Patterns to Test: "title"
 ~~~
-Giải thích từng dòng:
-• Assertion 1 (Field to Test: Response Code, Equals, 200): mã phản hồi phải đúng bằng 200.
-• Assertion 2 (Text Response, Contains, "title"): nội dung trả về phải có chữ "title". Mỗi assertion là một phần tử riêng, thêm 2 lần.
-• Với request POST /users, đổi thành 201.
-Chạy lại: request đạt cả hai điều kiện thì xanh, sai một điều thì đỏ và tab Assertion result ghi lý do.
 
 ### JSON Assertion: kiểm một trường cụ thể
 JSON Assertion đọc dữ liệu JSON theo "đường dẫn" (JSONPath). Ký hiệu $ là gốc, [0] là phần tử đầu tiên của danh sách.
 Add > Assertions > JSON Assertion:
-~~~text
-Assert JSON Path exists: $[0].author
-Additionally assert value: (tích chọn)
-Expected Value: tester1
-~~~
 Giải thích từng dòng:
 • $[0].author: lấy trường author của bài viết đầu tiên trong danh sách /posts.
 • Additionally assert value: không chỉ kiểm trường tồn tại mà còn kiểm giá trị.
 • Expected Value: giá trị mong đợi là tester1 (khớp với db.json ở bài 1).
 Thử đổi Expected Value thành tester9 rồi chạy để xem request chuyển đỏ. Đó là cách tự kiểm tra assertion của mình có hoạt động thật.
+~~~text
+Assert JSON Path exists: $[0].author
+Additionally assert value: (tích chọn)
+Expected Value: tester1
+~~~
 
 ### Duration Assertion: kiểm thời gian
 Yêu cầu thường gặp: "Trang danh sách phải trả về trong 500 ms". Add > Assertions > Duration Assertion:
-~~~text
-Duration to Assert (in milliseconds): 500
-~~~
 Giải thích: request nào mất hơn 500 ms sẽ bị đánh dấu lỗi, dù dữ liệu đúng.
 Lưu ý:
 • Server local thường rất nhanh (vài ms), nên assertion này hiếm khi đỏ ở máy bạn.
 • Thử đặt 1 ms để thấy assertion đỏ, rồi đặt lại 500.
 • Đừng đặt ngưỡng quá chặt tùy hứng: ngưỡng phải lấy từ yêu cầu (requirement) đã thống nhất với nhóm.
+~~~text
+Duration to Assert (in milliseconds): 500
+~~~
 
 ### Listener: Summary Report và Aggregate Report
 Listener là "bảng điểm". Add > Listener:
@@ -457,16 +457,20 @@ Listener là "bảng điểm". Add > Listener:
 • Summary Report: bảng tổng hợp gọn.
 • Aggregate Report: giống Summary nhưng có thêm median, 90%, 95%, 99% Line.
 Ví dụ một dòng Aggregate Report:
-~~~text
-Label             # Samples  Average  Median  90% Line  95% Line  99% Line  Min  Max  Error %  Throughput
-GET danh sach     150        12       9       20        28        60        3    95   0.00%    4.8/sec
-~~~
 Giải thích từng cột:
 • # Samples: số request. Average: trung bình (ms). Median: số ở giữa.
 • 90% Line: 90% request nhanh hơn hoặc bằng số này (bài 8 giải thích kỹ).
 • Error %: tỉ lệ lỗi, tính cả lỗi assertion. Throughput: request mỗi giây.
+~~~text
+Label             # Samples  Average  Median  90% Line  95% Line  99% Line  Min  Max  Error %  Throughput
+GET danh sach     150        12       9       20        28        60        3    95   0.00%    4.8/sec
+~~~
 
 ### Lỗi thường gặp
+• Đây là lỗi Response Assertion: mong đợi 200 nhưng nhận 201. Với POST tạo mới, 201 là đúng, hãy sửa assertion chứ không phải báo bug.
+• JSON Assertion báo không tìm thấy đường dẫn: gõ sai tên trường (ví dụ $[0].autor), hoặc dữ liệu là danh sách mà quên [0].
+• Assertion đặt sai chỗ: đặt dưới Thread Group nên kiểm cả request POST, khiến POST đỏ vì không phải 200. Cách sửa: kéo assertion vào đúng request.
+• Máy chậm, đơ khi chạy nhiều user: tắt (Disable) View Results Tree.
 ~~~text
 Assertion error: false
 Assertion failure: true
@@ -474,10 +478,6 @@ Assertion failure message: Test failed: code expected to equal /
 ****** received  : [[[201]]]
 ****** comparison: [[[200]]]
 ~~~
-• Đây là lỗi Response Assertion: mong đợi 200 nhưng nhận 201. Với POST tạo mới, 201 là đúng, hãy sửa assertion chứ không phải báo bug.
-• JSON Assertion báo không tìm thấy đường dẫn: gõ sai tên trường (ví dụ $[0].autor), hoặc dữ liệu là danh sách mà quên [0].
-• Assertion đặt sai chỗ: đặt dưới Thread Group nên kiểm cả request POST, khiến POST đỏ vì không phải 200. Cách sửa: kéo assertion vào đúng request.
-• Máy chậm, đơ khi chạy nhiều user: tắt (Disable) View Results Tree.
 
 PRACTICE: Thêm vào request GET /posts một Response Assertion (mã 200), một JSON Assertion ($[0].author bằng tester1) và một Duration Assertion 500 ms. Cố ý đổi giá trị mong đợi để thấy request đỏ, sau đó sửa lại cho xanh.
 Q: Server trả mã 200 nhưng nội dung là trang báo lỗi. Thành phần nào giúp JMeter phát hiện?
@@ -504,21 +504,26 @@ Correlation là việc "lấy giá trị động từ response trước, đưa v
 
 ### JSON Extractor: lấy id của bài vừa tạo
 Thêm request POST /posts với Body Data: {"title": "Bai test ${__threadNum}", "author": "jmeter"}. Chuột phải request đó > Add > Post Processors > JSON Extractor:
-~~~text
-Names of created variables: postId
-JSON Path expressions: $.id
-Match No. (0 for Random): 1
-Default Values: NOT_FOUND
-~~~
 Giải thích từng dòng:
 • Names of created variables: tên biến sẽ tạo ra, sau này dùng ${postId}.
 • $.id: lấy trường id ở gốc của JSON trả về, ví dụ {"id": "a1b2", "title": "..."}.
 • Match No. 1: lấy kết quả khớp đầu tiên.
 • Default Values NOT_FOUND: nếu không tìm thấy thì biến mang giá trị NOT_FOUND, giúp dễ phát hiện lỗi.
 ${__threadNum} là hàm có sẵn trả về số thứ tự người dùng ảo, giúp tiêu đề khác nhau.
+~~~text
+Names of created variables: postId
+JSON Path expressions: $.id
+Match No. (0 for Random): 1
+Default Values: NOT_FOUND
+~~~
 
 ### Dùng biến ở request tiếp theo
 Thêm HTTP Request thứ hai NGAY SAU request POST: Method GET, Path /posts/${postId}.
+Giải thích:
+• JSON Extractor nằm BÊN DƯỚI request POST nên chỉ đọc response của POST.
+• GET /posts/${postId}: JMeter thay ${postId} bằng id thật, ví dụ /posts/a1b2.
+• Debug Sampler (Add > Sampler > Debug Sampler): in ra mọi biến hiện có. Mở nó trong View Results Tree, tab Response data, sẽ thấy dòng postId=a1b2.
+Kết quả mong đợi: GET trả mã 200 và đúng bài vừa tạo.
 ~~~text
 Thread Group
 ├── HTTP Request: POST /posts
@@ -527,14 +532,15 @@ Thread Group
 ├── Debug Sampler
 └── View Results Tree
 ~~~
-Giải thích:
-• JSON Extractor nằm BÊN DƯỚI request POST nên chỉ đọc response của POST.
-• GET /posts/${postId}: JMeter thay ${postId} bằng id thật, ví dụ /posts/a1b2.
-• Debug Sampler (Add > Sampler > Debug Sampler): in ra mọi biến hiện có. Mở nó trong View Results Tree, tab Response data, sẽ thấy dòng postId=a1b2.
-Kết quả mong đợi: GET trả mã 200 và đúng bài vừa tạo.
 
 ### Regular Expression Extractor: khi không phải JSON
 Nếu response là HTML hoặc chữ thường, dùng Regular Expression Extractor (biểu thức chính quy, xem khóa JSON & Regex):
+Giải thích từng dòng:
+• "id":\s*": tìm chữ "id": rồi các khoảng trắng nếu có, rồi dấu ngoặc kép.
+• ([^"]+): nhóm 1, lấy mọi ký tự cho đến dấu ngoặc kép tiếp theo, chính là giá trị id.
+• Template $1$: lấy nội dung của nhóm số 1.
+• Match No. 1: lấy lần khớp đầu tiên.
+Với JSON, JSON Extractor dễ đọc hơn; Regex dùng khi không có lựa chọn khác.
 ~~~text
 Field to check: Body
 Name of created variable: postIdRegex
@@ -543,15 +549,14 @@ Template ($i$ where i is capturing group number): $1$
 Match No. (0 for Random): 1
 Default Value: NOT_FOUND
 ~~~
-Giải thích từng dòng:
-• "id":\s*": tìm chữ "id": rồi các khoảng trắng nếu có, rồi dấu ngoặc kép.
-• ([^"]+): nhóm 1, lấy mọi ký tự cho đến dấu ngoặc kép tiếp theo, chính là giá trị id.
-• Template $1$: lấy nội dung của nhóm số 1.
-• Match No. 1: lấy lần khớp đầu tiên.
-Với JSON, JSON Extractor dễ đọc hơn; Regex dùng khi không có lựa chọn khác.
 
 ### Lấy token và gửi header Authorization
 Hệ thống thật thường có POST /login trả về token. Server luyện tập của ta giả lập bằng bảng sessions:
+Giải thích từng dòng:
+• GET /sessions?username=tester1: lấy phiên đăng nhập của tester1, kết quả là một danh sách.
+• $[0].token: phần tử đầu danh sách, trường token, tức demo-token-111.
+• Authorization: Bearer ${token}: cách gửi token chuẩn, giống đưa vé gửi xe cho bảo vệ.
+json-server không kiểm tra token nên bài này chỉ để luyện cơ chế. Trên hệ thống thật, sai token sẽ nhận 401 Unauthorized.
 ~~~text
 1) HTTP Request: GET /sessions?username=tester1
    └── JSON Extractor
@@ -561,21 +566,16 @@ Hệ thống thật thường có POST /login trả về token. Server luyện t
 2) HTTP Header Manager (đặt dưới request cần đăng nhập)
    Name: Authorization    Value: Bearer ${token}
 ~~~
-Giải thích từng dòng:
-• GET /sessions?username=tester1: lấy phiên đăng nhập của tester1, kết quả là một danh sách.
-• $[0].token: phần tử đầu danh sách, trường token, tức demo-token-111.
-• Authorization: Bearer ${token}: cách gửi token chuẩn, giống đưa vé gửi xe cho bảo vệ.
-json-server không kiểm tra token nên bài này chỉ để luyện cơ chế. Trên hệ thống thật, sai token sẽ nhận 401 Unauthorized.
 
 ### Lỗi thường gặp
+• Thấy NOT_FOUND trong URL: extractor không lấy được giá trị. Kiểm tra JSON Path, xem response thật trong View Results Tree; dữ liệu là danh sách thì cần $[0].
+• Thấy nguyên chữ ${token}: biến chưa từng được tạo, thường do gõ sai tên (Token khác token, JMeter phân biệt hoa thường) hoặc extractor nằm dưới request khác.
+• Extractor đặt ngay dưới Thread Group: nó chạy sau MỌI request và có thể ghi đè biến bằng giá trị mặc định. Hãy đặt nó dưới đúng request cần đọc.
 ~~~text
 GET http://localhost:3000/posts/NOT_FOUND  ->  Response code: 404
 Authorization: Bearer ${token}   (gửi nguyên chữ, không được thay)
 Authorization: Bearer NO_TOKEN
 ~~~
-• Thấy NOT_FOUND trong URL: extractor không lấy được giá trị. Kiểm tra JSON Path, xem response thật trong View Results Tree; dữ liệu là danh sách thì cần $[0].
-• Thấy nguyên chữ ${token}: biến chưa từng được tạo, thường do gõ sai tên (Token khác token, JMeter phân biệt hoa thường) hoặc extractor nằm dưới request khác.
-• Extractor đặt ngay dưới Thread Group: nó chạy sau MỌI request và có thể ghi đè biến bằng giá trị mặc định. Hãy đặt nó dưới đúng request cần đọc.
 
 PRACTICE: Xây chuỗi 3 request: POST /posts (JSON Extractor lấy postId), GET /posts/${postId} (Response Assertion mã 200), DELETE /posts/${postId}. Thêm Debug Sampler để in giá trị postId và chụp màn hình.
 Q: Correlation trong JMeter nghĩa là gì?
@@ -596,6 +596,10 @@ Q: URL gửi đi là /posts/NOT_FOUND. Bạn nên kiểm tra gì trước tiên?
 ### Think time: người thật không bấm liên tục
 Người dùng thật đọc trang vài giây rồi mới bấm tiếp. Nếu người dùng ảo bắn request liên tục không nghỉ, 10 user ảo có thể tạo tải bằng 100 người thật, làm kết quả sai lệch.
 Timer thêm thời gian chờ trước mỗi request. Add > Timer:
+Giải thích từng dòng:
+• Constant Timer 1000: luôn chờ đúng 1 giây.
+• Uniform Random Timer: chờ 1000 ms cộng thêm ngẫu nhiên 0 đến 2000 ms, tức 1 đến 3 giây, giống người thật hơn.
+Timer đặt dưới Thread Group áp dụng trước MỖI request trong nhóm.
 ~~~text
 Constant Timer
   Thread Delay (in milliseconds): 1000
@@ -603,10 +607,6 @@ Uniform Random Timer
   Random Delay Maximum (in milliseconds): 2000
   Constant Delay Offset (in milliseconds): 1000
 ~~~
-Giải thích từng dòng:
-• Constant Timer 1000: luôn chờ đúng 1 giây.
-• Uniform Random Timer: chờ 1000 ms cộng thêm ngẫu nhiên 0 đến 2000 ms, tức 1 đến 3 giây, giống người thật hơn.
-Timer đặt dưới Thread Group áp dụng trước MỖI request trong nhóm.
 
 ### Vì sao phải chạy non-GUI?
 Giao diện JMeter vẽ biểu đồ, cập nhật bảng liên tục nên ăn nhiều CPU và RAM. Khi chạy tải, chính máy test có thể trở thành "nút thắt", kết quả đo không còn đúng.
@@ -618,10 +618,6 @@ Ví dụ so sánh: GUI giống vừa lái xe vừa quay phim, CLI giống chỉ 
 
 ### Lệnh chạy non-GUI
 Mở PowerShell trong thư mục chứa plan.jmx:
-~~~bash
-cd C:\perf-lab
-jmeter -n -t plan.jmx -l result.jtl -e -o report
-~~~
 Giải thích từng phần:
 • -n: chạy không giao diện (non-GUI).
 • -t plan.jmx: file kịch bản cần chạy.
@@ -629,9 +625,19 @@ Giải thích từng phần:
 • -e: chạy xong thì tạo báo cáo HTML.
 • -o report: thư mục chứa báo cáo HTML. Thư mục này phải CHƯA tồn tại hoặc đang TRỐNG.
 Nếu muốn chạy lại và tự xóa kết quả cũ, thêm -f: jmeter -n -t plan.jmx -l result.jtl -f -e -o report.
+~~~bash
+cd C:\perf-lab
+jmeter -n -t plan.jmx -l result.jtl -e -o report
+~~~
 
 ### Đọc màn hình khi đang chạy
 Trong lúc chạy, cứ khoảng 30 giây JMeter in một dòng summary:
+Giải thích từng dòng:
+• summary +: số liệu của riêng khoảng thời gian vừa qua.
+• summary =: số liệu cộng dồn từ đầu đến giờ.
+• Active/Started/Finished: số user đang chạy, đã bắt đầu, đã xong.
+• Err: số lỗi và tỉ lệ lỗi. Thấy Err tăng thì xem log ngay.
+• ... end of run: chạy xong. Mở báo cáo bằng lệnh: start .\report\index.html
 ~~~text
 Creating summariser <summary>
 Starting standalone test @ 2026 Nov 14 09:00:00 ICT
@@ -640,34 +646,28 @@ summary =    150 in 00:00:31 =    4.8/s Avg:    12 Min:     3 Max:    95 Err:   
 Tidying up ...    @ 2026 Nov 14 09:00:32 ICT
 ... end of run
 ~~~
-Giải thích từng dòng:
-• summary +: số liệu của riêng khoảng thời gian vừa qua.
-• summary =: số liệu cộng dồn từ đầu đến giờ.
-• Active/Started/Finished: số user đang chạy, đã bắt đầu, đã xong.
-• Err: số lỗi và tỉ lệ lỗi. Thấy Err tăng thì xem log ngay.
-• ... end of run: chạy xong. Mở báo cáo bằng lệnh: start .\report\index.html
 
 ### Truyền tham số và tạo báo cáo từ file cũ
 Không muốn mở GUI chỉ để đổi số user? Trong Thread Group, ô Number of Threads ghi ${__P(threads,5)} (nghĩa là: đọc thuộc tính threads, không có thì dùng 5). Rồi chạy:
-~~~bash
-jmeter -n -t plan.jmx -Jthreads=20 -l result20.jtl -e -o report20
-jmeter -g result.jtl -o report2
-~~~
 Giải thích từng dòng:
 • -Jthreads=20: đặt thuộc tính threads = 20, Thread Group sẽ chạy 20 user.
 • jmeter -g result.jtl -o report2: KHÔNG chạy test, chỉ tạo báo cáo HTML từ file kết quả có sẵn vào thư mục report2.
 Mẹo: đặt tên file theo lần chạy (result20.jtl, report20) để so sánh các lần với nhau.
+~~~bash
+jmeter -n -t plan.jmx -Jthreads=20 -l result20.jtl -e -o report20
+jmeter -g result.jtl -o report2
+~~~
 
 ### Lỗi thường gặp
+• Results file is not empty: file result.jtl của lần trước vẫn còn. Cách sửa: xóa file, đổi tên file, hoặc thêm -f.
+• folder is not empty: thư mục report đã có báo cáo cũ. Cách sửa: dùng tên thư mục mới (report2) hoặc thêm -f.
+• OutOfMemoryError: thiếu bộ nhớ, thường do bật View Results Tree hoặc chạy bằng GUI. Cách sửa: chạy non-GUI, disable listener nặng; nếu vẫn thiếu, trước khi chạy gõ $env:HEAP="-Xms1g -Xmx2g -XX:MaxMetaspaceSize=256m" để tăng bộ nhớ cho JMeter.
+• Lỗi file not found khi chạy: đang đứng sai thư mục. Dùng dir để chắc chắn thấy plan.jmx.
 ~~~text
 Error in NonGUIDriver java.lang.IllegalArgumentException: Results file:result.jtl is not empty
 Cannot write to 'C:\perf-lab\report' as folder is not empty
 java.lang.OutOfMemoryError: Java heap space
 ~~~
-• Results file is not empty: file result.jtl của lần trước vẫn còn. Cách sửa: xóa file, đổi tên file, hoặc thêm -f.
-• folder is not empty: thư mục report đã có báo cáo cũ. Cách sửa: dùng tên thư mục mới (report2) hoặc thêm -f.
-• OutOfMemoryError: thiếu bộ nhớ, thường do bật View Results Tree hoặc chạy bằng GUI. Cách sửa: chạy non-GUI, disable listener nặng; nếu vẫn thiếu, trước khi chạy gõ $env:HEAP="-Xms1g -Xmx2g -XX:MaxMetaspaceSize=256m" để tăng bộ nhớ cho JMeter.
-• Lỗi file not found khi chạy: đang đứng sai thư mục. Dùng dir để chắc chắn thấy plan.jmx.
 
 PRACTICE: Thêm Uniform Random Timer vào plan.jmx, đổi Number of Threads thành ${__P(threads,5)}, rồi chạy non-GUI hai lần với -Jthreads=5 và -Jthreads=20, mỗi lần một thư mục report riêng. Ghi lại throughput và Avg của hai lần.
 Q: Trong lệnh jmeter -n -t plan.jmx -l result.jtl -e -o report, cờ -o có tác dụng gì?
@@ -695,21 +695,27 @@ Mở report\index.html bằng trình duyệt. Trang Dashboard gồm:
 Menu Charts bên trái có biểu đồ theo thời gian, ví dụ Response Times Over Time, Transactions Per Second.
 
 ### Bảng Statistics
-~~~text
-Label           #Samples  FAIL  Error%  Average  Min  Max  Median  90th pct  95th pct  99th pct  Transactions/s
-GET danh sach   1500      3     0.20%   120      15   2100 95      210       320       900       24.8
-POST tao bai    1500      0     0.00%   180      20   1500 150     300       410       700       24.8
-Total           3000      3     0.10%   150      15   2100 120     260       380       850       49.6
-~~~
 Giải thích từng cột:
 • #Samples: số request. FAIL và Error%: số và tỉ lệ thất bại.
 • Average: trung bình cộng thời gian (ms). Median: giá trị ở giữa khi xếp từ nhanh đến chậm.
 • 90th/95th/99th pct: phân vị 90, 95, 99 (xem slide sau).
 • Transactions/s: throughput, số request xử lý mỗi giây.
 • Dòng Total: tổng hợp mọi request.
+~~~text
+Label           #Samples  FAIL  Error%  Average  Min  Max  Median  90th pct  95th pct  99th pct  Transactions/s
+GET danh sach   1500      3     0.20%   120      15   2100 95      210       320       900       24.8
+POST tao bai    1500      0     0.00%   180      20   1500 150     300       410       700       24.8
+Total           3000      3     0.10%   150      15   2100 120     260       380       850       49.6
+~~~
 
 ### p90, p95 giải thích bằng hàng chờ cà phê
 Quán cà phê phục vụ 10 khách, thời gian chờ (giây) sau khi xếp từ nhanh đến chậm:
+Giải thích từng dòng:
+• Một khách xui xẻo chờ 30 giây kéo Average lên 6,2 giây, trong khi đa số chỉ chờ 2 đến 6 giây. Average dễ bị "đánh lừa".
+• Median 3,5: một nửa khách chờ ít hơn mức này.
+• p90 = 6: 90% khách chờ không quá 6 giây; 10% còn lại chờ lâu hơn.
+• p95 tương tự: 95% request nhanh hơn hoặc bằng con số đó.
+Vì vậy yêu cầu hiệu năng thường viết theo phân vị, ví dụ "p95 dưới 500 ms", thay vì dùng trung bình.
 ~~~text
 Khách:     1   2   3   4   5   6   7   8   9   10
 Thời gian: 2   2   3   3   3   4   4   5   6   30
@@ -717,27 +723,26 @@ Average = (2+2+3+3+3+4+4+5+6+30) / 10 = 6.2 giây
 Median  = 3.5 giây (giữa khách thứ 5 và 6)
 p90     = 6 giây   (9/10 khách chờ không quá 6 giây)
 ~~~
-Giải thích từng dòng:
-• Một khách xui xẻo chờ 30 giây kéo Average lên 6,2 giây, trong khi đa số chỉ chờ 2 đến 6 giây. Average dễ bị "đánh lừa".
-• Median 3,5: một nửa khách chờ ít hơn mức này.
-• p90 = 6: 90% khách chờ không quá 6 giây; 10% còn lại chờ lâu hơn.
-• p95 tương tự: 95% request nhanh hơn hoặc bằng con số đó.
-Vì vậy yêu cầu hiệu năng thường viết theo phân vị, ví dụ "p95 dưới 500 ms", thay vì dùng trung bình.
 
 ### Throughput và cách đọc cùng thời gian phản hồi
 Throughput = tổng số request / tổng thời gian chạy.
-~~~text
-3000 request / 60 giây = 50 request/giây
-~~~
 Giải thích: hệ thống xử lý khoảng 50 request mỗi giây trong bài test này.
 Đọc throughput phải đi cùng response time và error:
 • Tăng user mà throughput tăng theo, response time ổn định: hệ thống còn sức.
 • Tăng user mà throughput đứng yên, response time tăng vọt: đã chạm giới hạn, giống quầy thu ngân chỉ phục vụ được chừng đó khách, người đến thêm chỉ đứng chờ.
 • Throughput giảm, error tăng: hệ thống bắt đầu quá tải hoặc lỗi.
 Hãy chạy nhiều mức tải (5, 20, 50 user) và ghi bảng so sánh để thấy điểm gãy.
+~~~text
+3000 request / 60 giây = 50 request/giây
+~~~
 
 ### Tiêu chí đạt (pass criteria) và báo cáo kết quả
 Trước khi chạy, thống nhất tiêu chí với nhóm. Ví dụ:
+Giải thích từng dòng:
+• Mỗi dòng là một tiêu chí có mục tiêu đo được bằng số.
+• Cột Kết quả lấy từ bảng Statistics, dòng Total hoặc từng request.
+• Max 2100 ms tuy không có mục tiêu nhưng bất thường, ghi chú để dev điều tra.
+Khi báo cáo, luôn ghi rõ: số user, thời gian chạy, môi trường (ví dụ server local, cấu hình máy), phiên bản build.
 ~~~text
 Tiêu chí                    Mục tiêu        Kết quả     Đánh giá
 p95 response time           < 500 ms        380 ms      ĐẠT
@@ -745,11 +750,6 @@ Error %                     < 1%            0.10%       ĐẠT
 Throughput                  >= 40 req/s     49.6 req/s  ĐẠT
 Max response time           (theo dõi)      2100 ms     Cần xem lại
 ~~~
-Giải thích từng dòng:
-• Mỗi dòng là một tiêu chí có mục tiêu đo được bằng số.
-• Cột Kết quả lấy từ bảng Statistics, dòng Total hoặc từng request.
-• Max 2100 ms tuy không có mục tiêu nhưng bất thường, ghi chú để dev điều tra.
-Khi báo cáo, luôn ghi rõ: số user, thời gian chạy, môi trường (ví dụ server local, cấu hình máy), phiên bản build.
 
 ### Lỗi thường gặp khi đọc báo cáo
 • Chỉ nhìn Average rồi kết luận "nhanh": hãy xem p95, p99 và Max.
@@ -772,3 +772,327 @@ Q: Tăng số user nhưng throughput đứng yên và response time tăng mạnh
 - Hệ thống đang chạy rất tốt
 - JMeter bị lỗi cài đặt
 + Hệ thống đã chạm giới hạn xử lý
+
+## LESSON jmeter-09 | Mô hình tải mở, tải đóng và lịch đến
+
+### Chọn câu hỏi trước Thread Group
+Dịch vụ đặt lớp giả định Vệt Mùa nhận lượt đến từ nhiều người độc lập. Nếu muốn kiểm20giao dịch/giây theo lịch, số thread cố định chưa mô tả đầy đủ; mô hình đóng phù hợp câu hỏi một số user tương tác lặp.
+~~~text
+đóng:40 user, mỗi user gửi -> chờ -> nghĩ2s -> gửi
+mở:20lượt bắt đầu/giây trong5 phút
+Cùng40 user không bảo đảm cùng arrival khi latency đổi
+Đo achieved arrival và completed throughput riêng.
+~~~
+
+### Ước tính concurrency để cấp injector
+Dùng quan hệ L xấp xỉ lambda nhân W trong điều kiện ổn định để ước lượng, không coi là bảo đảm slot luôn đủ. Nếu trung bình thời gian tăng, nhu cầu concurrent cũng tăng theo.
+~~~text
+lambda=20lượt/s,W=0.4s -> L xấp xỉ8
+W tăng2s -> L xấp xỉ40
+Cần headroom và đo thực tế, không dùng p95 thay trung bình tùy tiện
+Backlog tăng liên tục nghĩa là điều kiện ổn định chưa đạt.
+~~~
+
+### JMeter plan cần cơ chế lịch đến phù hợp
+Thread Group chuẩn là vòng user; Constant Throughput Timer giúp pacing nhưng không tự giải mọi giới hạn thread. Nếu dùng thành phần arrival mã nguồn mở, pin plugin và xác minh bằng timestamp bắt đầu thực tế.
+~~~text
+plan_version: ARR-LAB1
+model: ghi rõ thành phần cấp lịch đến
+planned_rate:20/s
+record: started/completed/error và timestamp
+Nếu chỉ đạt14/s: báo không đạt tải,không gọi20/s thành công.
+~~~
+
+### Tránh coordinated omission trong diễn giải
+User vòng kín giảm nhịp gửi khi chậm, có thể khiến tập mẫu không đại diện lịch đến mong muốn. Báo cơ chế cấp tải và phần công việc không được phát thay vì chỉ nhìn p95 của request hoàn thành.
+
+### Thực nghiệm hai mô hình cùng lab
+Làm server lab chậm có kiểm soát, so started rate và concurrent của hai plan. Giải thích khác biệt bằng mô hình, không kết luận công cụ nào tốt hơn từ một đồ thị.
+
+PRACTICE: Nộp hai plan đóng/mở hoặc mô tả rõ giới hạn nếu thiếu thành phần mở. Chạy lab tải nhỏ, ghi planned/achieved rate, latency và concurrency trước/sau khi tăng độ trễ.
+Q: Mô hình tải đóng có đặc tính gì?
++ Số user giới hạn, nhịp đến phụ thuộc thời gian hoàn thành
+- Arrival rate cố định bất kể độ trễ
+- Không cần think time
+Q: Mô hình mở nhằm giữ đại lượng nào?
++ Nhịp đến theo lịch được cấp
+- Luôn số thread cố định
+- Luôn latency hằng số
+Q: Thread Group thường với timer có chắc thành mô hình mở không?
++ Không
+- Có nếu đủ nhiều thread
+- Có nếu tên chứa arrival
+
+## LESSON jmeter-10 | Kiểm thử stress, soak và phục hồi
+
+### Stress là tìm ranh giới có tiêu chí dừng
+Tăng tải theo bậc trong lab được cấp, giữ đủ lâu để quan sát ổn định. Chốt ngưỡng lỗi/latency/tài nguyên trước chạy; không đưa tải vào host công khai hay tăng vô hạn để tìm điểm sập.
+
+### Soak giữ tải để thấy xu hướng
+Chọn tải thấp hơn ranh giới quan sát và chạy đủ thời gian theo ngân sách lab. Đo memory, connection, queue và tỷ lệ lỗi theo cửa sổ; một lần tăng RAM ngắn chưa chứng minh rò bộ nhớ.
+~~~text
+pha | mục đích | đo
+warmup | ổn định cache/JIT | không trộn tùy tiện vào ngưỡng
+steady | tìm xu hướng | latency,error,memory,queue
+recovery | hạ tải | thời gian queue về nền
+stop | vượt tiêu chí | giữ log và kiểm dữ liệu
+~~~
+
+### Chạy non-GUI với kết quả tách từng run
+JTL và thư mục report phải riêng, report output chưa có dữ liệu cũ. Lệnh là ví dụ lab, không tự chạy tải khi mở bài; cấu hình target chỉ localhost.
+~~~bash
+jmeter -n -t lab-soak.jmx -l results/LAB7.jtl -j results/LAB7.log
+jmeter -g results/LAB7.jtl -o reports/LAB7
+~~~
+
+### Phục hồi bao gồm dữ liệu và hàng đợi
+Sau hạ tải, kiểm backlog, số đăng ký, chống lặp và số chỗ. Latency về nền không đủ nếu còn tác vụ thất lạc hoặc connection không trả lại pool.
+
+### Đặt giới hạn cho kết luận dài hạn
+Soak ngắn chỉ phát hiện xu hướng trong cửa sổ đã chạy. Ghi thời lượng và điều kiện, không suy rằng không rò sau ba mươi phút thì sẽ ổn định nhiều tháng.
+
+PRACTICE: Thiết kế stress ba bậc và soak nhỏ có stop rule. Nộp timeline metric, thời điểm dừng/hạ tải, recovery time và kiểm dữ liệu; không chạy quá năng lực lab đã biết.
+Q: Soak test nhắm vào gì?
++ Suy giảm theo thời gian ở tải có chủ đích
+- Một spike rất ngắn
+- Chỉ đo cold start
+Q: Sau stress cần kiểm gì?
++ Khả năng phục hồi và trạng thái dữ liệu
+- Chỉ peak throughput
+- Chỉ ảnh cuối
+
+## LESSON jmeter-11 | Phân tách dữ liệu và liên kết request
+
+### Dữ liệu tải là một phần workload
+Mỗi actor lab có giỏ và lớp riêng trừ khi chủ đích kiểm hotspot. CSV chia theo injector để không cùng người dùng vô tình làm khóa nóng; nêu tỷ lệ đọc/ghi và phân bố lớp.
+
+### EOF và sharing mode phải được thử
+CSV Data Set có chính sách recycle/stop thread và phạm vi sharing. Thử bằng vài dòng ở tải nhỏ để thấy mỗi thread nhận gì, không chờ tải lớn mới phát hiện mọi user dùng cùng id.
+~~~text
+actorId,classId
+ST-L7-A,CL-L7-A
+ST-L7-B,CL-L7-B
+ST-L7-C,CL-L7-C
+Tệp dành riêng injector0; actor/password thật không được ghi vào fixture.
+~~~
+
+### Correlation kiểm được trước request sau
+Extractor lấy enrollmentId từ response JSON. Dùng giá trị mặc định NOT_FOUND và assertion chặn thiếu; không để default là một id hợp lệ cũ.
+~~~text
+sampler:POST /enrollments
+extractor: enrollmentId từ $.id
+default:NOT_FOUND
+assert: enrollmentId khác NOT_FOUND và không rỗng
+request sau:GET /enrollments/${enrollmentId}
+~~~
+
+### Cleanup không nằm lẫn trong phép đo
+Tạo/xóa fixture có thể làm bẩn metric của giao dịch mục tiêu. Chọn phase setup/teardown riêng hoặc tag/label tách rõ; không bỏ cleanup đến mức run sau dùng dữ liệu sót.
+
+### Kiểm đúng giao dịch chứ không chỉ request
+Một đăng ký gồm nhiều request có thể thành công một phần. Định nghĩa transaction và assertion dữ liệu để error rate có ý nghĩa, tránh báo thành công vì bước đọc healthcheck luôn200.
+
+PRACTICE: Chuẩn bị CSV riêng hai injector giả, thử EOF và extraction lỗi ở tải nhỏ. Nộp trace ba actor, id được nối, kế hoạch cleanup và cách tính giao dịch thành công.
+Q: Dữ liệu test dùng chung một tài khoản có rủi ro gì?
++ Tranh chấp không đại diện workload
+- Luôn giống người dùng thật
+- Tự tăng độ chính xác
+Q: Extractor không tìm thấy id phải làm gì?
++ Fail bước và không dùng id cũ
+- Tiếp tục với giá trị mặc định thật
+- Tăng timer
+
+## LESSON jmeter-12 | Nút thắt injector và phép đo đáng tin
+
+### Máy phát tải cũng là hệ thống cần đo
+CPU, heap, GC, socket và băng thông của injector có thể bão hòa trước server. Thu metric cùng timestamp; khi achieved rate thấp phải xem cả hai phía trước khi nói server hết năng lực.
+
+### Giảm chi phí quan sát không cần thiết
+Tắt listener hiển thị response trong phép đo chính, chỉ lưu trường JTL cần và log lỗi có giới hạn. Debug một user trước, sau đó chạy non-GUI; không dùng kết quả GUI nặng làm baseline.
+~~~text
+Debug:1 thread, xem response/assertion
+Đo chính:non-GUI, listener tối thiểu
+JTL:timestamp,elapsed,label,responseCode,success,latency
+Không lưu toàn body chứa dữ liệu quyền.
+~~~
+
+### Đồng hồ và nhãn cần thống nhất
+Nhiều injector phải có cách căn thời gian phù hợp và cùng phiên bản plan/dữ liệu. Nhãn hữu hạn theo endpoint/transaction; id mỗi user trong label làm thống kê phân mảnh và tốn tài nguyên.
+~~~text
+label=GET classes
+label=POST enrollment
+tag run=LAB7
+Không dùng label=GET enrollment-<id-riêng> cho hàng nghìn id.
+~~~
+
+### Không cộng trung bình các phân vị
+p95 từng máy không thể lấy trung bình thành p95 chung. Tổng hợp mẫu hoặc histogram bằng công cụ có quy tắc rõ; lưu số mẫu và tách lỗi/endpoint để tránh che nhóm chậm.
+
+### Xác minh phép đo bằng thử chéo
+Giảm tải mỗi injector hoặc dùng thêm injector lab rồi so tổng rate và latency. Nếu số đo đổi mạnh khi chỉ đổi máy phát, kết luận cũ có thể bị giới hạn bởi injector; ghi điều kiện và kiểm lại.
+
+PRACTICE: Nộp dashboard hoặc bảng timestamp cả injector/server, JTL tối giản và phân tích một run không đạt rate. Chứng minh không lấy trung bình p95; báo giới hạn đồng hồ và mẫu.
+Q: Nếu CPU injector bão hòa thì kết luận server chậm được chưa?
++ Chưa
+- Được vì mọi request cùng chậm
+- Được nếu có HTML report
+Q: Có nên lấy trung bình p95 của nhiều máy thành p95 chung không?
++ Không
+- Có luôn
+- Chỉ khi cùng tên file
+
+## LESSON jmeter-13 | Dự án: báo cáo năng lực hệ đặt lớp
+
+### Báo cáo năng lực của dịch vụ giả định
+Dự án Vệt Mùa mô phỏng đọc lớp70%,đăng ký20%,hủy10% trong môi trường localhost được cấp. Tỷ lệ là giả định workload của lab, cần kiểm đủ dữ liệu và bất biến chỗ còn lại.
+
+### Kế hoạch tải và ngưỡng có chủ
+Chốt mô hình, rate/user, warmup, cửa sổ ổn định, thời lượng và stop rule. Ngưỡng bên dưới chỉ để luyện, không phải chuẩn công nghiệp hay SLA sản phẩm.
+~~~text
+mục tiêu lab:10 transaction/s trong5 phút
+ngưỡng: p95 đăng ký<500ms,error<1% theo định nghĩa đã chốt
+stop: error>10% trong30s hoặc tài nguyên vượt ngân sách lab
+recovery:queue về nền và dữ liệu đúng
+~~~
+
+### Kiểm plan ở mức tải một user
+Chạy smoke để xác nhận CSV,correlation,assertion và cleanup. Nếu một giao dịch đã sai ở tải thấp, sửa trước phép đo để không biến lỗi logic thành kết luận hiệu năng.
+~~~bash
+jmeter -n -t capacity-smoke.jmx -l results/smoke.jtl
+# Sau khi smoke đạt mới chạy plan chính đã review:
+jmeter -n -t capacity-lab.jmx -l results/capacity.jtl
+~~~
+
+### Kết luận phải kèm tải thực đạt
+Báo planned/started/completed, p50/p95/p99,số mẫu,lỗi và tài nguyên theo pha. Nếu thiếu rate hoặc injector bão hòa, ghi phép thử chưa chứng minh mục tiêu; không chỉ ghi đạt vì p95 thấp.
+
+### Nghiệm thu và kiến nghị tiếp theo
+Nộp plan pin phiên bản, fixture tự tạo, JTL,report và phân tích bottleneck có bằng chứng. Đề xuất một thay đổi, đo lại cùng điều kiện và xác nhận dữ liệu/recovery, nêu giới hạn suy rộng.
+
+PRACTICE: Bàn giao một gói JMeter lab có workload,ngưỡng,stop rule,smoke,load và recovery. Báo planned/achieved rate, phân vị theo transaction, lỗi, hai phía tài nguyên, dữ liệu và quyết định có/không đủ bằng chứng.
+Q: Ngưỡng error rate cần tính trên gì?
++ Mẫu/giao dịch và định nghĩa lỗi đã chốt
+- Chỉ lỗi kết nối
+- Chỉ response500
+Q: Dự án báo năng lực phải giới hạn kết luận thế nào?
++ Theo workload,môi trường,khoảng đo và tải đạt
+- Áp cho mọi hệ thống
+- Chỉ dựa VU tối đa
+Q: Khi vượt tiêu chí dừng nên làm gì?
++ Dừng tải có kiểm soát và kiểm phục hồi
+- Tăng thread tiếp
+- Xóa log
+
+## LESSON jmeter-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Phải biết workload và ngưỡng cần kiểm; con số request không có ngữ cảnh không đủ đánh giá hệ thống.
+2. Ghi phiên bản Java/JMeter trong môi trường lab và xác nhận tương thích trước phép đo.
+3. Một response lỗi nghiệp vụ200 vẫn không phải giao dịch thành công; assertion phải phản ánh mục tiêu.
+4. Dữ liệu cạn hoặc chia sai gây cạnh tranh giả; thiết kế phân bổ theo actor và workload.
+
+### Dữ liệu và điều kiện biên
+5. GUI và lưu response lớn có thể làm injector thành nút thắt; chạy non-GUI với log vừa đủ.
+6. Id/token động phải được extract và assert hợp lệ, tránh giá trị cũ hoặc mặc định che lỗi.
+7. Think time/pacing phải thuộc workload; nếu bỏ tùy tiện sẽ đổi tải thực tế.
+8. Phân vị thuộc mẫu và tập đo; cần số mẫu, nhãn, khoảng thời gian và lỗi để diễn giải.
+
+### Tính đúng và cách điều tra
+9. Khi server chậm, user chờ lâu nên arrival có thể giảm và che thiếu năng lực nếu mục tiêu là lịch đến độc lập.
+10. Muốn giữ lịch đến khi chậm cần đủ concurrency và injector; vẫn phải đo đạt tải thực tế.
+11. Mô hình phụ thuộc cơ chế cấp công việc; timer giới hạn không tự bảo đảm lịch đến độc lập.
+12. Quan sát rò tài nguyên, backlog và biến động dài hạn, kèm tiêu chí dừng để bảo vệ lab.
+
+### Rủi ro và lựa chọn phương án
+13. Hệ thống có thể giảm latency nhưng backlog hoặc dữ liệu vẫn sai; đo thời gian phục hồi và bất biến.
+14. Có thể tạo khóa nóng giả; nếu sản phẩm thật có hotspot thì mô hình phải ghi rõ và đo riêng.
+15. Kiểm extraction trước request phụ thuộc để tránh tải vào endpoint sai hoặc thống kê thành công giả.
+16. Máy phát tải có thể giới hạn nhịp gửi và đo latency; kiểm tài nguyên và tải đạt trước khi quy lỗi server.
+
+### Dự án, bằng chứng và bàn giao
+17. Phải tổng hợp phân bố/mẫu bằng cách phù hợp; trung bình các phân vị không tạo phân vị gộp chính xác.
+18. Bao gồm assertion nghiệp vụ và xác định mẫu số; tránh làm đẹp tỷ lệ bằng request phụ hoặc healthcheck.
+19. Năng lực quan sát được không phải cam kết mọi traffic; ghi dữ liệu, phiên bản và độ bất định.
+20. Tiêu chí dừng được chốt trước như lỗi/latency/tài nguyên; lưu bằng chứng để phân tích rồi kiểm lab ổn định.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Kiểm hiệu năng phải bắt đầu từ đâu?
++ Mục tiêu, tải và tiêu chí đo
+- Số thread thật lớn
+- Ảnh dashboard đẹp
+Q: JMeter cần Java để làm gì?
++ Chạy ứng dụng và test plan
+- Tự tạo API mục tiêu
+- Tự cấp quyền dữ liệu
+Q: HTTP Request sampler cần kiểm gì?
++ Method,path,body và response đúng nghiệp vụ
+- Chỉ có status200
+- Chỉ tên sampler
+Q: CSV Data Set cần quyết định gì?
++ Phạm vi chia sẻ, EOF và cách tái dùng dòng
+- Chỉ tên file
+- Mọi thread dùng cùng tài khoản
+Q: Listener nặng nên dùng khi nào?
++ Debug tải nhỏ, tránh lúc đo tải chính
+- Luôn bật mọi listener
+- Để tăng throughput
+Q: Correlation là gì trong luồng API?
++ Lấy giá trị động để request sau dùng
+- Hardcode id mọi run
+- Đổi tên thread
+Q: Timer ảnh hưởng gì?
++ Nhịp thực hiện và mô hình tải
+- Tự tăng năng lực server
+- Tự sửa response
+Q: p95=400ms nói gì?
++ Khoảng95% mẫu trong tập có thời gian không quá400ms theo cách tính
+- 95% người dùng luôn dưới400ms
+- Mọi endpoint đều dưới400ms
+Q: Mô hình tải đóng có đặc tính gì?
++ Số user giới hạn, nhịp đến phụ thuộc thời gian hoàn thành
+- Arrival rate cố định bất kể độ trễ
+- Không cần think time
+Q: Mô hình mở nhằm giữ đại lượng nào?
++ Nhịp đến theo lịch được cấp
+- Luôn số thread cố định
+- Luôn latency hằng số
+Q: Thread Group thường với timer có chắc thành mô hình mở không?
++ Không
+- Có nếu đủ nhiều thread
+- Có nếu tên chứa arrival
+Q: Soak test nhắm vào gì?
++ Suy giảm theo thời gian ở tải có chủ đích
+- Một spike rất ngắn
+- Chỉ đo cold start
+Q: Sau stress cần kiểm gì?
++ Khả năng phục hồi và trạng thái dữ liệu
+- Chỉ peak throughput
+- Chỉ ảnh cuối
+Q: Dữ liệu test dùng chung một tài khoản có rủi ro gì?
++ Tranh chấp không đại diện workload
+- Luôn giống người dùng thật
+- Tự tăng độ chính xác
+Q: Extractor không tìm thấy id phải làm gì?
++ Fail bước và không dùng id cũ
+- Tiếp tục với giá trị mặc định thật
+- Tăng timer
+Q: Nếu CPU injector bão hòa thì kết luận server chậm được chưa?
++ Chưa
+- Được vì mọi request cùng chậm
+- Được nếu có HTML report
+Q: Có nên lấy trung bình p95 của nhiều máy thành p95 chung không?
++ Không
+- Có luôn
+- Chỉ khi cùng tên file
+Q: Ngưỡng error rate cần tính trên gì?
++ Mẫu/giao dịch và định nghĩa lỗi đã chốt
+- Chỉ lỗi kết nối
+- Chỉ response500
+Q: Dự án báo năng lực phải giới hạn kết luận thế nào?
++ Theo workload,môi trường,khoảng đo và tải đạt
+- Áp cho mọi hệ thống
+- Chỉ dựa VU tối đa
+Q: Khi vượt tiêu chí dừng nên làm gì?
++ Dừng tải có kiểm soát và kiểm phục hồi
+- Tăng thread tiếp
+- Xóa log

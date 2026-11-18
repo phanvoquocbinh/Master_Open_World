@@ -1,160 +1,1109 @@
 {
-  "no": 2,
-  "title": "我的伞被风刮走了 – Câu bị động 被",
-  "sub": "Wǒ de sǎn bèi fēng guāzǒu le. 我的伞被风刮走了。",
-  "goals": [
-    "Dùng đúng câu bị động: Chủ thể + 被 + (tác nhân) + động từ + thành phần khác",
-    "Biết khi nào chữ “được / bị” tiếng Việt KHÔNG dịch thành 被 (bị cảm, được đi, bài làm xong rồi…)",
-    "Dùng 叫 / 让 trong khẩu ngữ; đặt 没 / 也 / 又 / 已经 trước 被",
-    "Chuyển đổi qua lại câu 把 ⇄ câu 被",
-    "Kể lại một ngày xui xẻo (mất đồ, hỏng đồ, bị mượn đồ) bằng 4–6 câu 被"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词) – Sự cố & cảm xúc", "items": [
-      {"w": "被", "py": "bèi", "hv": "bị", "pos": "prep", "vi": "bị, được (giới từ bị động); (danh từ) chăn – 被子", "ex": "我的蛋糕被弟弟吃了。", "exPy": "Wǒ de dàngāo bèi dìdi chī le.", "exVi": "Bánh ngọt của tôi bị em trai ăn mất rồi."},
-      {"w": "坏", "py": "huài", "hv": "hoại", "pos": "adj", "vi": "hỏng; xấu (người xấu = 坏人)", "ex": "我的手机坏了。", "exPy": "Wǒ de shǒujī huài le.", "exVi": "Điện thoại của tôi hỏng rồi."},
-      {"w": "忘记", "py": "wàngjì", "hv": "vong ký", "pos": "v", "vi": "quên", "ex": "我忘记带伞了。", "exPy": "Wǒ wàngjì dài sǎn le.", "exVi": "Tôi quên mang ô rồi."},
-      {"w": "伞", "py": "sǎn", "hv": "tản", "pos": "n", "vi": "cái ô, dù (lượng từ 把)", "ex": "下雨了，带把伞吧。", "exPy": "Xià yǔ le, dài bǎ sǎn ba.", "exVi": "Mưa rồi, mang theo cái ô đi."},
-      {"w": "刮风", "py": "guā fēng", "hv": "quát phong", "pos": "v", "vi": "nổi gió, gió thổi", "ex": "外面刮风了，很冷。", "exPy": "Wàimiàn guā fēng le, hěn lěng.", "exVi": "Ngoài trời nổi gió rồi, lạnh lắm."},
-      {"w": "护照", "py": "hùzhào", "hv": "hộ chiếu", "pos": "n", "vi": "hộ chiếu", "ex": "你的护照带了吗？", "exPy": "Nǐ de hùzhào dài le ma?", "exVi": "Bạn mang hộ chiếu chưa?"},
-      {"w": "信用卡", "py": "xìnyòngkǎ", "hv": "", "pos": "n", "vi": "thẻ tín dụng", "ex": "这里可以用信用卡吗？", "exPy": "Zhèlǐ kěyǐ yòng xìnyòngkǎ ma?", "exVi": "Ở đây dùng thẻ tín dụng được không?"},
-      {"w": "照相机", "py": "zhàoxiàngjī", "hv": "chiếu tướng cơ", "pos": "n", "vi": "máy ảnh", "ex": "这个照相机是我爸爸的。", "exPy": "Zhège zhàoxiàngjī shì wǒ bàba de.", "exVi": "Cái máy ảnh này là của bố tôi."},
-      {"w": "地铁", "py": "dìtiě", "hv": "địa thiết", "pos": "n", "vi": "tàu điện ngầm", "ex": "我每天坐地铁上班。", "exPy": "Wǒ měi tiān zuò dìtiě shàng bān.", "exVi": "Hằng ngày tôi đi tàu điện ngầm đi làm."},
-      {"w": "司机", "py": "sījī", "hv": "tư cơ", "pos": "n", "vi": "tài xế", "ex": "那位司机很热情。", "exPy": "Nà wèi sījī hěn rèqíng.", "exVi": "Bác tài xế đó rất nhiệt tình."},
-      {"w": "发现", "py": "fāxiàn", "hv": "phát hiện", "pos": "v", "vi": "phát hiện, nhận ra", "ex": "到家以后，我才发现钱包不见了。", "exPy": "Dào jiā yǐhòu, wǒ cái fāxiàn qiánbāo bú jiàn le.", "exVi": "Về đến nhà tôi mới phát hiện ví không thấy đâu."},
-      {"w": "突然", "py": "tūrán", "hv": "đột nhiên", "pos": "adv", "vi": "đột nhiên, bỗng nhiên", "ex": "突然下雨了。", "exPy": "Tūrán xià yǔ le.", "exVi": "Bỗng nhiên trời mưa."},
-      {"w": "生气", "py": "shēngqì", "hv": "sinh khí", "pos": "v", "vi": "tức giận, giận", "ex": "别生气了，好吗？", "exPy": "Bié shēngqì le, hǎo ma?", "exVi": "Đừng giận nữa, được không?"},
-      {"w": "着急", "py": "zháojí", "hv": "", "pos": "adj", "vi": "sốt ruột, cuống, lo cuống lên", "ex": "别着急，慢慢说。", "exPy": "Bié zháojí, mànmàn shuō.", "exVi": "Đừng cuống, cứ từ từ nói."},
-      {"w": "害怕", "py": "hàipà", "hv": "hại phạ", "pos": "v", "vi": "sợ, sợ hãi", "ex": "我害怕一个人坐电梯。", "exPy": "Wǒ hàipà yí ge rén zuò diàntī.", "exVi": "Tôi sợ đi thang máy một mình."},
-      {"w": "哭", "py": "kū", "hv": "khốc", "pos": "v", "vi": "khóc", "ex": "别哭了，我帮你找。", "exPy": "Bié kū le, wǒ bāng nǐ zhǎo.", "exVi": "Đừng khóc nữa, mình giúp bạn tìm."},
-      {"w": "借", "py": "jiè", "hv": "tá", "pos": "v", "vi": "mượn; cho mượn (借给)", "ex": "我的词典被同学借走了。", "exPy": "Wǒ de cídiǎn bèi tóngxué jièzǒu le.", "exVi": "Từ điển của tôi bị bạn học mượn mất rồi."},
-      {"w": "还", "py": "huán", "hv": "hoàn", "pos": "v", "vi": "trả lại (khác 还 hái = còn, vẫn)", "ex": "明天我把书还给你。", "exPy": "Míngtiān wǒ bǎ shū huán gěi nǐ.", "exVi": "Mai mình trả sách cho bạn."},
-      {"w": "小心", "py": "xiǎoxīn", "hv": "tiểu tâm", "pos": "v", "vi": "cẩn thận, coi chừng", "ex": "小心！地上有水。", "exPy": "Xiǎoxīn! Dì shang yǒu shuǐ.", "exVi": "Cẩn thận! Dưới đất có nước."},
-      {"w": "帽子", "py": "màozi", "hv": "mạo tử", "pos": "n", "vi": "cái mũ (lượng từ 顶 / 个)", "ex": "我的帽子被风刮走了。", "exPy": "Wǒ de màozi bèi fēng guāzǒu le.", "exVi": "Mũ của tôi bị gió thổi bay mất."},
-      {"w": "检查", "py": "jiǎnchá", "hv": "kiểm tra", "pos": "v", "vi": "kiểm tra (đồ, sức khoẻ, bài)", "ex": "请检查一下你的包。", "exPy": "Qǐng jiǎnchá yíxià nǐ de bāo.", "exVi": "Hãy kiểm tra túi của bạn một chút."},
-      {"w": "自己", "py": "zìjǐ", "hv": "tự kỷ", "pos": "pron", "vi": "tự mình, bản thân", "ex": "我自己去找吧。", "exPy": "Wǒ zìjǐ qù zhǎo ba.", "exVi": "Để tôi tự đi tìm."},
-      {"w": "难过", "py": "nánguò", "hv": "nan quá", "pos": "adj", "vi": "buồn, khó chịu trong lòng", "ex": "钱包丢了，她很难过。", "exPy": "Qiánbāo diū le, tā hěn nánguò.", "exVi": "Mất ví, cô ấy rất buồn."},
-      {"w": "终于", "py": "zhōngyú", "hv": "chung ư", "pos": "adv", "vi": "cuối cùng (thì) – sau thời gian chờ đợi", "ex": "我终于找到护照了！", "exPy": "Wǒ zhōngyú zhǎodào hùzhào le!", "exVi": "Cuối cùng tôi cũng tìm thấy hộ chiếu!"}
-    ]},
-    {"k": "text", "h": "被 khác chữ “bị / được” của tiếng Việt thế nào? + mẹo phát âm", "html": "<p>Tiếng Việt phân biệt rõ <b>“bị”</b> (việc xấu) và <b>“được”</b> (việc tốt). Tiếng Trung chỉ có một chữ <b>被</b>, và theo truyền thống 被 thường dùng cho việc <b>không may, ngoài ý muốn</b>: 被偷 (bị trộm), 被风刮走 (bị gió thổi bay), 被雨打湿 (bị mưa làm ướt). Ngày nay 被 cũng dùng cho việc tốt (他被选为班长 – cậu ấy được bầu làm lớp trưởng) nhưng <b>ít hơn nhiều</b> so với chữ “được” của ta.</p><p>⚠️ Rất nhiều câu có “được / bị” trong tiếng Việt <b>không phải câu bị động</b> trong tiếng Trung:</p><ul><li>“Tôi <b>được</b> đi Trung Quốc” = có cơ hội → 我<b>有机会</b>去中国。</li><li>“Tôi <b>bị</b> cảm / bị muộn” = trạng thái → 我感冒了 / 我迟到了。</li><li>“Cơm nấu xong rồi” (được nấu) → 饭做好了。 (không cần 被)</li></ul><h4>Mẹo phát âm</h4><ul><li>被 <span class=\"py\">bèi</span> thanh 4 dứt khoát, đừng đọc thành “bì”.</li><li>Bổ ngữ 走 trong 刮走、借走、拿走 giữ thanh 3 nhưng đọc nhẹ, ngắn: <span class=\"py\">guāzǒu le</span>.</li><li>着急 đọc <span class=\"py\">zháojí</span> (着 thanh 2) – khác 着 <span class=\"py\">zhe</span> trợ từ sẽ học ở bài 10.</li></ul>"},
-    {"k": "grammar", "h": "Ngữ pháp 1: Cấu trúc câu bị động 被", "html": "<p>Công thức: <b>Chủ ngữ (vật/người chịu tác động, xác định) + 被 + (tác nhân) + Động từ + Thành phần khác</b>.</p><p>Giống câu 把, động từ <b>không đứng trơ</b>: phải có 了, bổ ngữ kết quả (坏, 走, 完), bổ ngữ xu hướng, hoặc 在/到/给… Tác nhân có thể <b>bỏ đi</b> nếu không biết hoặc không cần nói.</p>", "table": [["Chủ ngữ (chịu tác động)", "被 + tác nhân", "Động từ", "Thành phần khác", "Nghĩa"], ["我的伞", "被风", "刮", "坏了。", "Ô của tôi bị gió thổi hỏng."], ["蛋糕", "被弟弟", "吃", "了。", "Bánh bị em trai ăn mất."], ["我的词典", "被同学", "借", "走了。", "Từ điển bị bạn mượn đi rồi."], ["护照", "被他", "忘", "在宾馆了。", "Hộ chiếu bị anh ấy để quên ở khách sạn."], ["我的钱包", "被(人)", "偷", "了。", "Ví của tôi bị (người ta) trộm mất."]], "ex": [
-      {"t": "我的钱包被小偷偷走了。", "py": "Wǒ de qiánbāo bèi xiǎotōu tōuzǒu le.", "vi": "Ví của tôi bị kẻ trộm lấy mất rồi."},
-      {"t": "冰箱里的蛋糕被谁吃了？", "py": "Bīngxiāng li de dàngāo bèi shéi chī le?", "vi": "Bánh trong tủ lạnh bị ai ăn rồi?"},
-      {"t": "我的帽子被风刮走了。", "py": "Wǒ de màozi bèi fēng guāzǒu le.", "vi": "Mũ của tôi bị gió thổi bay rồi."},
-      {"t": "他被选为班长了。", "py": "Tā bèi xuǎn wéi bānzhǎng le.", "vi": "Cậu ấy được bầu làm lớp trưởng. (被 mang nghĩa tốt – ít gặp hơn)"}
-    ], "tips": ["Động từ không đứng trơ: ❌ <i>我的钱包被偷。</i> → ✅ <b>我的钱包被偷了。</b>", "Chủ ngữ phải xác định: ❌ <i>一本书被他借走了</i> → ✅ <b>那本书被他借走了。</b>", "Tác nhân có thể bỏ sau 被: <b>我的自行车被骑走了</b> (không biết ai)."]},
-    {"k": "grammar", "h": "Ngữ pháp 2: “Được / bị” tiếng Việt ≠ 被 – câu bị động không cần 被", "html": "<p>Người Việt hay dịch máy móc mọi chữ “được / bị” thành 被 – đây là lỗi số 1 của bài này. Hãy tự hỏi: <b>câu có hành động tác động lên chủ ngữ không?</b> Nếu chỉ là cơ hội, trạng thái, bệnh tật → không dùng 被.</p><p>Ngoài ra, khi chủ ngữ là <b>vật không thể tự làm</b> hành động (cơm, bài tập, thư, vé) và không cần nói ai làm, người Trung thường <b>bỏ 被</b> – gọi là câu bị động ý niệm: 饭做好了, 作业写完了, 票卖完了.</p>", "table": [["Tiếng Việt", "❌ Dịch máy móc", "✅ Tiếng Trung tự nhiên"], ["Tôi được đi Trung Quốc.", "我被去中国。", "我有机会去中国。"], ["Tôi được mẹ cho tiền.", "我被妈妈给钱。", "妈妈给了我钱。"], ["Bài tập làm xong rồi.", "作业被做完了。", "作业做完了。"], ["Món này được làm từ gạo.", "这个菜被米做。", "这个菜是用米做的。"], ["Tôi bị cảm rồi.", "我被感冒了。", "我感冒了。"]], "ex": [
-      {"t": "信已经写好了。", "py": "Xìn yǐjīng xiěhǎo le.", "vi": "Thư đã viết xong rồi."},
-      {"t": "房间打扫干净了。", "py": "Fángjiān dǎsǎo gānjìng le.", "vi": "Phòng đã được dọn sạch."},
-      {"t": "电影票卖完了。", "py": "Diànyǐng piào màiwán le.", "vi": "Vé xem phim bán hết rồi."},
-      {"t": "我迟到了，因为地铁坏了。", "py": "Wǒ chídào le, yīnwèi dìtiě huài le.", "vi": "Tôi bị muộn vì tàu điện ngầm hỏng."}
-    ], "tips": ["“Bị” + bệnh / trạng thái (bị ốm, bị cảm, bị muộn, bị đói) → <b>không dùng 被</b>: 我病了, 我饿了, 我迟到了.", "“Được” = có cơ hội / được phép → 有机会, 可以, 能: ❌ <i>我被去旅游</i> → ✅ <b>我有机会去旅游。</b>"]},
-    {"k": "grammar", "h": "Ngữ pháp 3: 叫 / 让 thay 被; phủ định; đổi 把 ⇄ 被", "html": "<p>Trong khẩu ngữ, <b>叫 jiào / 让 ràng</b> có thể thay 被, nhưng sau 叫/让 <b>bắt buộc</b> phải có tác nhân. Phủ định (没), phó từ (也, 又, 已经, 都) và động từ năng nguyện đặt <b>trước 被</b>.</p>", "table": [["Mẫu", "Ví dụ", "Ghi chú"], ["被 (có / không tác nhân)", "我的车被(人)骑走了。", "Văn viết & nói"], ["叫 / 让 + tác nhân", "我的车让人骑走了。", "Khẩu ngữ, không được bỏ tác nhân"], ["没 + 被", "我的护照没被偷。", "Phủ định – không có 了"], ["也 / 又 / 已经 + 被", "他的照相机又被弟弟拿走了。", "Phó từ đứng trước 被"], ["把 ⇄ 被", "小狗把我的帽子拿走了。⇄ 我的帽子被小狗拿走了。", "Đổi chỗ người làm và vật chịu tác động"]], "ex": [
-      {"t": "我的伞让我朋友借走了。", "py": "Wǒ de sǎn ràng wǒ péngyou jièzǒu le.", "vi": "Ô của tôi bị bạn tôi mượn đi rồi."},
-      {"t": "还好，我的信用卡没被偷。", "py": "Hái hǎo, wǒ de xìnyòngkǎ méi bèi tōu.", "vi": "May quá, thẻ tín dụng của tôi không bị trộm."},
-      {"t": "我的自行车已经被人骑走了。", "py": "Wǒ de zìxíngchē yǐjīng bèi rén qízǒu le.", "vi": "Xe đạp của tôi đã bị người ta đạp đi mất rồi."},
-      {"t": "小狗把我的帽子拿走了。→ 我的帽子被小狗拿走了。", "py": "Xiǎo gǒu bǎ wǒ de màozi názǒu le. → Wǒ de màozi bèi xiǎo gǒu názǒu le.", "vi": "Con chó con lấy mất mũ của tôi. → Mũ của tôi bị chó con lấy mất."}
-    ], "tips": ["❌ <i>我的车让骑走了</i> (thiếu tác nhân) → ✅ <b>我的车让人骑走了</b> / <b>我的车被骑走了</b>.", "❌ <i>我的护照被没偷</i> → ✅ <b>我的护照没被偷。</b>", "让 còn nghĩa “bảo, để cho” (妈妈让我去买菜 – mẹ bảo tôi đi chợ): xem ngữ cảnh để phân biệt."]},
-    {"k": "dialog", "h": "Nghe: Một buổi sáng xui xẻo", "lang": "zh-CN", "note": "王丽 ngồi đợi 小兰 ở quán cà phê đã nửa tiếng. 小兰 đến muộn và kể chuyện. Nghe lần 1: túi của 小兰 có bị trộm không?", "lines": [
-      {"s": "王丽", "g": "f", "t": "小兰，你怎么才来？我等了你半个小时了。", "py": "Xiǎo Lán, nǐ zěnme cái lái? Wǒ děngle nǐ bàn ge xiǎoshí le.", "vi": "Tiểu Lan, sao giờ cậu mới đến? Mình đợi cậu nửa tiếng rồi."},
-      {"s": "小兰", "g": "f", "t": "对不起！今天我太倒霉了。", "py": "Duìbuqǐ! Jīntiān wǒ tài dǎoméi le.", "vi": "Xin lỗi! Hôm nay mình xui quá."},
-      {"s": "王丽", "g": "f", "t": "怎么了？别着急，慢慢说。", "py": "Zěnme le? Bié zháojí, mànmàn shuō.", "vi": "Sao thế? Đừng cuống, từ từ kể."},
-      {"s": "小兰", "g": "f", "t": "早上出门的时候突然刮风了，我的伞被风刮坏了，帽子也被刮走了。", "py": "Zǎoshang chū mén de shíhou tūrán guā fēng le, wǒ de sǎn bèi fēng guāhuài le, màozi yě bèi guāzǒu le.", "vi": "Sáng ra khỏi nhà thì bỗng nổi gió, ô của mình bị gió thổi hỏng, mũ cũng bị thổi bay mất."},
-      {"s": "王丽", "g": "f", "t": "哎呀！那你是坐地铁来的吧？", "py": "Āiyā! Nà nǐ shì zuò dìtiě lái de ba?", "vi": "Trời! Thế cậu đi tàu điện ngầm đến à?"},
-      {"s": "小兰", "g": "f", "t": "对。可是下了地铁，我发现我的包不见了！", "py": "Duì. Kěshì xiàle dìtiě, wǒ fāxiàn wǒ de bāo bú jiàn le!", "vi": "Ừ. Nhưng xuống tàu, mình phát hiện túi của mình biến mất!"},
-      {"s": "王丽", "g": "f", "t": "是被人偷了吗？里面有什么？", "py": "Shì bèi rén tōu le ma? Lǐmiàn yǒu shénme?", "vi": "Bị người ta trộm à? Trong đó có gì?"},
-      {"s": "小兰", "g": "f", "t": "有护照、信用卡，还有你借给我的照相机。我害怕极了，差点儿哭了。", "py": "Yǒu hùzhào, xìnyòngkǎ, hái yǒu nǐ jiè gěi wǒ de zhàoxiàngjī. Wǒ hàipà jí le, chàdiǎnr kū le.", "vi": "Có hộ chiếu, thẻ tín dụng, còn có cái máy ảnh cậu cho mình mượn. Mình sợ cực kỳ, suýt nữa thì khóc."},
-      {"s": "王丽", "g": "f", "t": "那后来呢？找到了吗？", "py": "Nà hòulái ne? Zhǎodào le ma?", "vi": "Thế sau đó thì sao? Tìm thấy chưa?"},
-      {"s": "小兰", "g": "f", "t": "找到了！包没被偷，是我自己忘在地铁上了。一位叔叔把它交给了地铁站的工作人员。", "py": "Zhǎodào le! Bāo méi bèi tōu, shì wǒ zìjǐ wàng zài dìtiě shang le. Yí wèi shūshu bǎ tā jiāo gěile dìtiězhàn de gōngzuò rényuán.", "vi": "Tìm thấy rồi! Túi không bị trộm, là mình tự để quên trên tàu. Một chú đã đưa nó cho nhân viên ga tàu."},
-      {"s": "王丽", "g": "f", "t": "太好了！你检查了吗？东西都在吗？", "py": "Tài hǎo le! Nǐ jiǎnchá le ma? Dōngxi dōu zài ma?", "vi": "Tốt quá! Cậu kiểm tra chưa? Đồ còn đủ không?"},
-      {"s": "小兰", "g": "f", "t": "都在。不过……你的照相机被我弄坏了。真对不起！", "py": "Dōu zài. Búguò…… nǐ de zhàoxiàngjī bèi wǒ nònghuài le. Zhēn duìbuqǐ!", "vi": "Đủ cả. Có điều… máy ảnh của cậu bị mình làm hỏng rồi. Thật xin lỗi!"},
-      {"s": "王丽", "g": "f", "t": "没事儿，别难过。照相机坏了可以修，你没事就好。", "py": "Méi shìr, bié nánguò. Zhàoxiàngjī huài le kěyǐ xiū, nǐ méi shì jiù hǎo.", "vi": "Không sao, đừng buồn. Máy ảnh hỏng thì sửa được, cậu không sao là tốt rồi."},
-      {"s": "小兰", "g": "f", "t": "谢谢你！以后我一定小心，不会再把东西忘在地铁上了。", "py": "Xièxie nǐ! Yǐhòu wǒ yídìng xiǎoxīn, bú huì zài bǎ dōngxi wàng zài dìtiě shang le.", "vi": "Cảm ơn cậu! Sau này mình nhất định cẩn thận, sẽ không để quên đồ trên tàu nữa."}
-    ], "qs": [
-      {"q": "Cái ô của 小兰 bị làm sao?", "o": ["Bị người ta lấy mất", "Bị gió thổi hỏng", "Để quên trên tàu"], "a": 1, "e": "我的伞被风刮坏了。"},
-      {"q": "Trong túi của 小兰 KHÔNG có thứ nào?", "o": ["手机 – điện thoại", "护照 – hộ chiếu", "信用卡 – thẻ tín dụng"], "a": 0, "e": "Cô ấy kể: 护照、信用卡，还有…照相机 – không nhắc đến điện thoại."},
-      {"q": "Túi của 小兰 có bị trộm không?", "o": ["Không – cô ấy tự để quên trên tàu", "Có – bị trộm lấy", "Bị gió thổi bay"], "a": 0, "e": "包没被偷，是我自己忘在地铁上了。"},
-      {"q": "Máy ảnh là của ai?", "o": ["小兰", "Chú nhặt được túi", "王丽"], "a": 2, "e": "你借给我的照相机 – máy ảnh 王丽 cho mượn."},
-      {"q": "Điền: 帽子也被___走了。(gõ chữ Hán hoặc pinyin)", "a": "刮", "alt": ["gua", "guā"], "e": "帽子也被刮走了 – mũ cũng bị (gió) thổi bay."}
-    ]},
-    {"k": "read", "h": "Đọc: Chiếc xe đạp “bị mượn”", "title": "被借走的自行车", "text": "上个月，我买了一辆新自行车，是蓝色的，非常漂亮。我每天骑它去学校。\n\n有一天下午，我从图书馆出来，突然发现我的自行车不见了！我很着急：是不是被人偷了？我在附近找了半个小时，也没找到。回到宿舍以后，我很难过，晚饭也不想吃。\n\n晚上九点，同屋小王回来了。他笑着说：“对不起，你的自行车被我骑走了。下午我有急事，要去银行，可是我的车坏了。我给你打电话，你没接。”\n\n我听了，又生气又高兴。生气的是他没告诉我，高兴的是车没被偷。后来，我们说好了：以后谁想借车，一定要先问一下。", "py": "Shàng ge yuè, wǒ mǎile yí liàng xīn zìxíngchē, shì lánsè de, fēicháng piàoliang. Wǒ měi tiān qí tā qù xuéxiào.\n\nYǒu yì tiān xiàwǔ, wǒ cóng túshūguǎn chūlai, tūrán fāxiàn wǒ de zìxíngchē bú jiàn le! Wǒ hěn zháojí: shì bu shì bèi rén tōu le? Wǒ zài fùjìn zhǎole bàn ge xiǎoshí, yě méi zhǎodào. Huídào sùshè yǐhòu, wǒ hěn nánguò, wǎnfàn yě bù xiǎng chī.\n\nWǎnshang jiǔ diǎn, tóngwū Xiǎo Wáng huílai le. Tā xiàozhe shuō: “Duìbuqǐ, nǐ de zìxíngchē bèi wǒ qízǒu le. Xiàwǔ wǒ yǒu jíshì, yào qù yínháng, kěshì wǒ de chē huài le. Wǒ gěi nǐ dǎ diànhuà, nǐ méi jiē.”\n\nWǒ tīngle, yòu shēngqì yòu gāoxìng. Shēngqì de shì tā méi gàosu wǒ, gāoxìng de shì chē méi bèi tōu. Hòulái, wǒmen shuōhǎo le: yǐhòu shéi xiǎng jiè chē, yídìng yào xiān wèn yíxià.", "vi": "Tháng trước, tôi mua một chiếc xe đạp mới, màu xanh lam, rất đẹp. Ngày nào tôi cũng đạp nó đến trường.\n\nMột buổi chiều, tôi từ thư viện đi ra, bỗng phát hiện xe đạp của mình biến mất! Tôi rất cuống: có phải bị trộm rồi không? Tôi tìm quanh đó nửa tiếng mà không thấy. Về ký túc xá, tôi rất buồn, chẳng muốn ăn tối.\n\n9 giờ tối, bạn cùng phòng Tiểu Vương về. Cậu ấy cười nói: “Xin lỗi, xe đạp của cậu bị mình đạp đi. Chiều nay mình có việc gấp phải ra ngân hàng mà xe mình hỏng. Mình gọi điện cho cậu, cậu không nghe máy.”\n\nNghe xong, tôi vừa giận vừa mừng. Giận vì cậu ấy không báo cho tôi, mừng vì xe không bị trộm. Sau đó, chúng tôi giao hẹn: sau này ai muốn mượn xe nhất định phải hỏi trước.", "gloss": [
-      {"w": "辆", "py": "liàng", "vi": "chiếc (lượng từ cho xe)"},
-      {"w": "宿舍", "py": "sùshè", "vi": "ký túc xá"},
-      {"w": "同屋", "py": "tóngwū", "vi": "bạn cùng phòng"},
-      {"w": "偷", "py": "tōu", "vi": "ăn trộm"},
-      {"w": "急事", "py": "jíshì", "vi": "việc gấp"},
-      {"w": "接(电话)", "py": "jiē (diànhuà)", "vi": "nghe máy"},
-      {"w": "说好", "py": "shuōhǎo", "vi": "giao hẹn, thống nhất"}
-    ], "qs": [
-      {"q": "Xe đạp mới của “tôi” màu gì?", "o": ["绿色 – xanh lá", "蓝色 – xanh lam", "黑色 – đen"], "a": 1, "e": "是蓝色的，非常漂亮。"},
-      {"q": "Thực ra chiếc xe đạp đã đi đâu?", "o": ["Bị trộm", "Bạn cùng phòng đạp đi", "Bị hỏng nên mang đi sửa"], "a": 1, "e": "你的自行车被我骑走了 – 小王 nói."},
-      {"q": "Vì sao 小王 phải dùng xe của “tôi”?", "o": ["Muốn đi thư viện", "Xe cậu ấy bị trộm", "Có việc gấp phải ra ngân hàng mà xe cậu ấy hỏng"], "a": 2, "e": "下午我有急事，要去银行，可是我的车坏了。"},
-      {"q": "Vì sao “tôi” vừa giận vừa mừng?", "o": ["Giận vì không được báo, mừng vì xe không bị trộm", "Giận vì xe bị hỏng, mừng vì có xe mới", "Giận vì bị muộn học, mừng vì được nghỉ"], "a": 0, "e": "生气的是他没告诉我，高兴的是车没被偷。"},
-      {"q": "Sau đó họ giao hẹn gì?", "o": ["Không bao giờ cho mượn xe", "Mua thêm một chiếc xe", "Ai muốn mượn xe phải hỏi trước"], "a": 2, "e": "以后谁想借车，一定要先问一下。"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "被", "py": "bèi", "hv": "bị", "parts": "衤(y – áo) + 皮 (bì – gợi âm)", "strokes": 10, "vi": "vốn là “chăn đắp” (vật phủ lên người) → bị (phủ lên, chịu tác động)", "words": "被子, 被偷"},
-      {"c": "坏", "py": "huài", "hv": "hoại", "parts": "土 (thổ – đất) + 不 (bất – không)", "strokes": 7, "vi": "hỏng, xấu – đất “không” tốt", "words": "坏了, 坏人"},
-      {"c": "忘", "py": "wàng", "hv": "vong", "parts": "亡 (vong – mất) + 心 (tâm – lòng)", "strokes": 7, "vi": "quên – mất khỏi trong lòng", "words": "忘记, 别忘了"},
-      {"c": "借", "py": "jiè", "hv": "tá", "parts": "亻(người) + 昔 (tích – gợi âm)", "strokes": 10, "vi": "mượn – nhờ vào người khác", "words": "借书, 借给"},
-      {"c": "还", "py": "huán / hái", "hv": "hoàn", "parts": "辶 (sước – bước đi) + 不", "strokes": 7, "vi": "huán: trả lại (đi trở về); hái: còn, vẫn", "words": "还书, 还是"},
-      {"c": "哭", "py": "kū", "hv": "khốc", "parts": "吅 (hai miệng – hai mắt mếu) + 犬 (khuyển)", "strokes": 10, "vi": "khóc – mặt mếu máo kêu thành tiếng", "words": "哭了, 别哭"},
-      {"c": "怕", "py": "pà", "hv": "phạ", "parts": "忄(tâm đứng – lòng) + 白 (bạch – gợi âm)", "strokes": 8, "vi": "sợ – lòng trắng bệch", "words": "害怕, 怕冷"}
-    ]},
-    {"k": "speak", "h": "Nói: Kể sự cố & báo mất đồ", "tasks": [
-      {"p": "Kể với bạn: tuần trước đồ gì của bạn bị hỏng / bị mất / bị mượn, do ai hoặc cái gì.", "model": "上个星期真倒霉！我的手机被弟弟弄坏了，我的伞也被风刮走了。", "py": "Shàng ge xīngqī zhēn dǎoméi! Wǒ de shǒujī bèi dìdi nònghuài le, wǒ de sǎn yě bèi fēng guāzǒu le.", "vi": "Tuần trước xui thật! Điện thoại của mình bị em trai làm hỏng, ô cũng bị gió thổi bay mất.", "tips": "倒霉 dǎoméi = xui xẻo; 弄坏 nònghuài = làm hỏng. 也 đứng trước 被."},
-      {"p": "Bạn đến quầy dịch vụ ga tàu điện ngầm báo mất túi: túi màu gì, bên trong có gì, có thể bị trộm hay tự để quên.", "model": "您好，我的包不见了。可能被人拿走了，也可能是我自己忘在地铁上了。是一个蓝色的包，里面有护照和信用卡。", "py": "Nín hǎo, wǒ de bāo bú jiàn le. Kěnéng bèi rén názǒu le, yě kěnéng shì wǒ zìjǐ wàng zài dìtiě shang le. Shì yí ge lánsè de bāo, lǐmiàn yǒu hùzhào hé xìnyòngkǎ.", "vi": "Chào anh/chị, túi của tôi mất rồi. Có thể bị người ta lấy, cũng có thể là tôi tự để quên trên tàu. Là một cái túi màu xanh, bên trong có hộ chiếu và thẻ tín dụng.", "tips": "不见了 đọc bú jiàn le (不 + thanh 4)."},
-      {"p": "Chuyển 3 câu 把 sang câu 被 và nói to: 弟弟把蛋糕吃了 / 风把我的帽子刮走了 / 同学把我的词典借走了.", "model": "蛋糕被弟弟吃了。我的帽子被风刮走了。我的词典被同学借走了。", "py": "Dàngāo bèi dìdi chī le. Wǒ de màozi bèi fēng guāzǒu le. Wǒ de cídiǎn bèi tóngxué jièzǒu le.", "vi": "Bánh bị em trai ăn mất. Mũ của tôi bị gió thổi bay. Từ điển của tôi bị bạn mượn đi rồi."}
-    ]},
-    {"k": "write", "h": "Viết: Một ngày xui xẻo", "task": "Viết đoạn 60–100 chữ với nhan đề “倒霉的一天” (Một ngày xui xẻo). Dùng ít nhất 4 câu 被 (trong đó có 1 câu 没被) và các từ 突然, 发现, 终于 / 后来.", "min": 60, "model": "昨天是我最倒霉的一天。早上出门的时候，突然下起了大雨，我的伞被风刮坏了，衣服也被雨打湿了。到了公司，我发现手机不见了，很着急。后来同事告诉我，手机被我忘在地铁上了。我给地铁站打电话，终于找到了。还好，手机没被别人拿走。", "modelVi": "Hôm qua là ngày xui nhất của tôi. Sáng ra khỏi nhà, bỗng trời đổ mưa to, ô của tôi bị gió thổi hỏng, quần áo cũng bị mưa làm ướt. Đến công ty, tôi phát hiện điện thoại không thấy đâu, rất cuống. Sau đó đồng nghiệp bảo tôi, điện thoại bị tôi để quên trên tàu điện ngầm. Tôi gọi điện cho ga tàu, cuối cùng cũng tìm thấy. May mà điện thoại không bị người khác lấy mất.", "tips": ["Từ mở rộng: 倒霉 dǎoméi xui xẻo, 打湿 dǎshī làm ướt, 下起了大雨 bỗng đổ mưa to.", "Không dùng 被 cho “bị muộn, bị cảm”: 我迟到了, 我感冒了.", "Kết bằng một câu cảm nhận hoặc bài học để đoạn văn trọn vẹn."], "checklist": ["≥ 4 câu 被, động từ có thành phần sau (了 / 坏 / 走 / 在…)", "Có 1 câu 没被 (không có 了)", "Có 突然, 发现 và 终于 hoặc 后来", "Không dùng 被 với 迟到 / 感冒 / 病", "Độ dài 60–100 chữ"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "我的伞被风刮走了。", "lang": "zh-CN", "q": "Chuyện gì đã xảy ra?", "o": ["Ô bị bạn mượn", "Ô bị hỏng vì mưa", "Ô bị gió thổi bay"], "a": 2, "e": "被风刮走了 = bị gió thổi bay đi."},
-    {"t": "listen", "say": "我的词典被小王借走了。", "lang": "zh-CN", "q": "Từ điển của người nói đâu rồi?", "o": ["Bị mất trên tàu", "Để ở nhà", "Tiểu Vương mượn đi rồi"], "a": 2, "e": "被小王借走了 = bị Tiểu Vương mượn đi."},
-    {"t": "listen", "say": "还好，我的护照没被偷。", "lang": "zh-CN", "q": "Hộ chiếu của người nói thế nào?", "o": ["Không bị trộm", "Bị trộm rồi", "Bị để quên"], "a": 0, "e": "没被偷 = không bị trộm; 还好 = may quá."},
-    {"t": "mc", "q": "Chọn câu ĐÚNG: “Bánh của tôi bị em trai ăn mất.”", "o": ["我的蛋糕被弟弟吃。", "我的蛋糕被弟弟吃了。", "弟弟被我的蛋糕吃了。"], "a": 1, "e": "Động từ sau 被 không đứng trơ – cần 了. Câu 3 đảo ngược nghĩa (em trai bị bánh ăn!)."},
-    {"t": "mc", "q": "Câu nào dịch đúng “Tôi bị cảm rồi”?", "o": ["我感冒了。", "我被感冒了。", "我被感冒。"], "a": 0, "e": "Bệnh tật, trạng thái không dùng 被."},
-    {"t": "mc", "q": "Câu nào tự nhiên nhất cho “Bài tập đã làm xong rồi”?", "o": ["作业被做完了。", "作业把做完了。", "作业做完了。"], "a": 2, "e": "Chủ ngữ là vật, không cần nói ai làm → câu bị động ý niệm, bỏ 被."},
-    {"t": "mc", "q": "Chọn câu ĐÚNG với 让 (khẩu ngữ):", "o": ["我的车让骑走了。", "我的车人让骑走了。", "我的车让人骑走了。"], "a": 2, "e": "Sau 叫/让 bắt buộc có tác nhân (人, 他, 我朋友…)."},
-    {"t": "mc", "q": "Đổi sang câu 被: 小狗把我的帽子拿走了。(Xiǎo gǒu bǎ wǒ de màozi názǒu le.)", "o": ["小狗被我的帽子拿走了。", "我的帽子被小狗拿走了。", "我的帽子把小狗拿走了。"], "a": 1, "e": "Vật chịu tác động (帽子) làm chủ ngữ, tác nhân (小狗) đứng sau 被."},
-    {"t": "fill", "q": "我的自行车___人骑走了。(Wǒ de zìxíngchē ___ rén qízǒu le.)", "a": "被", "alt": ["bei", "bèi", "让", "rang", "叫", "jiao"], "e": "被 / 让 / 叫 + tác nhân (人) + động từ + bổ ngữ."},
-    {"t": "fill", "q": "还好，我的信用卡___被偷。(Hái hǎo, wǒ de xìnyòngkǎ ___ bèi tōu. – May mà thẻ không bị trộm.)", "a": "没", "alt": ["mei", "méi", "没有", "meiyou"], "e": "Phủ định 没 đứng trước 被, cuối câu không có 了."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Hộ chiếu của tôi không bị trộm.”", "w": ["没", "我的", "被", "护照", "偷"], "a": "我的护照没被偷", "e": "Chủ ngữ + 没 + 被 + động từ."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Máy ảnh bị em trai làm hỏng rồi.”", "w": ["弄坏了", "被", "照相机", "弟弟"], "a": "照相机被弟弟弄坏了", "e": "Chủ ngữ + 被 + tác nhân + động từ + kết quả (坏) + 了."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Mũ của tôi cũng bị gió thổi bay.”", "w": ["也", "被风", "我的帽子", "刮走了"], "a": "我的帽子也被风刮走了", "e": "Phó từ 也 đứng trước 被."},
-    {"t": "dict", "say": "护照", "lang": "zh-CN", "a": "护照", "py": "hùzhào", "e": "护照 hùzhào – hộ chiếu."},
-    {"t": "dict", "say": "我的手机坏了。", "lang": "zh-CN", "a": "我的手机坏了", "py": "wǒ de shǒujī huài le", "e": "Điện thoại của tôi hỏng rồi."},
-    {"t": "match", "q": "Nối từ chỉ cảm xúc / thời điểm với nghĩa:", "pairs": [["着急", "sốt ruột"], ["害怕", "sợ hãi"], ["难过", "buồn"], ["生气", "tức giận"], ["突然", "đột nhiên"], ["终于", "cuối cùng thì"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Tranh “tai nạn nhỏ”: ô bị gió thổi, bánh bị ăn, xe bị mượn, ví bị trộm; thẻ câu 把 để học viên đổi sang 被; bảng so sánh “được / bị” tiếng Việt – tiếng Trung (5 câu ở Ngữ pháp 2); thẻ “nghi phạm” cho trò Thám tử.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: GV kể “chuyện xui” kèm tranh: 我的蛋糕被弟弟吃了！我的伞被风刮走了！ Hỏi: ai ăn bánh? bánh ra sao? → học viên tự rút ra vị trí chủ ngữ – 被 – tác nhân."},
-      {"t": "20'", "do": "Từ vựng: nhóm cảm xúc (着急, 害怕, 生气, 难过, 哭) dạy bằng nét mặt; nhóm đồ vật (伞, 帽子, 护照, 信用卡, 照相机); động từ (借, 还, 忘记, 发现, 检查). Phân biệt 还 huán / hái."},
-      {"t": "25'", "do": "Ngữ pháp 1 + 3: công thức 被, phủ định 没被, phó từ 也/又 trước 被, 叫/让 bắt buộc có tác nhân. Hoạt động “máy biến hình”: GV đọc câu 把, học viên đổi sang câu 被 và ngược lại."},
-      {"t": "15'", "do": "Nghe “Một buổi sáng xui xẻo”: lần 1 trả lời câu hỏi chính (túi có bị trộm không?), lần 2 làm qs, lần 3 hai bạn nữ đọc phân vai."},
-      {"t": "15'", "do": "Trò chơi “Thám tử: Ai làm?” (mục games)."},
-      {"t": "5'", "do": "Giao bài tập 1–8 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: GV diễn kịch câm (bị gió thổi bay mũ, bị bạn lấy bút), học viên nói câu 被 tương ứng."},
-      {"t": "20'", "do": "Ngữ pháp 2: chiếu 5 câu tiếng Việt có “được / bị”, nhóm 3 người thảo luận cách dịch, rồi đối chiếu bảng. Giới thiệu câu bị động ý niệm (饭做好了, 票卖完了)."},
-      {"t": "20'", "do": "Đọc “被借走的自行车”: đọc thầm, tìm tất cả câu 被 / 没被; trả lời câu hỏi; kể lại câu chuyện theo vai “tôi” và vai 小王."},
-      {"t": "15'", "do": "Chữ Hán 被 坏 忘 借 还 哭 怕 (chú ý bộ 衤 khác 礻 – 被 có 2 chấm); nói theo 3 nhiệm vụ theo cặp."},
-      {"t": "15'", "do": "Viết đoạn “倒霉的一天” tại lớp, đổi bài chấm chéo theo checklist."},
-      {"t": "10'", "do": "Bài tập 9–16, chữa lỗi chung, giao bài về nhà."}
+ "no": 2,
+ "title": "我的伞被风刮走了 – Câu bị động 被",
+ "sub": "Wǒ de sǎn bèi fēng guāzǒu le. 我的伞被风刮走了。",
+ "goals": [
+  "Dùng đúng câu bị động: Chủ thể + 被 + (tác nhân) + động từ + thành phần khác",
+  "Biết khi nào chữ “được / bị” tiếng Việt KHÔNG dịch thành 被 (bị cảm, được đi, bài làm xong rồi…)",
+  "Dùng 叫 / 让 trong khẩu ngữ; đặt 没 / 也 / 又 / 已经 trước 被",
+  "Chuyển đổi qua lại câu 把 ⇄ câu 被",
+  "Kể lại một ngày xui xẻo (mất đồ, hỏng đồ, bị mượn đồ) bằng 4–6 câu 被"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词) – Sự cố & cảm xúc",
+   "items": [
+    {
+     "w": "被",
+     "py": "bèi",
+     "hv": "bị",
+     "pos": "prep",
+     "vi": "bị, được (giới từ bị động); (danh từ) chăn – 被子",
+     "ex": "我的蛋糕被弟弟吃了。",
+     "exPy": "Wǒ de dàngāo bèi dìdi chī le.",
+     "exVi": "Bánh ngọt của tôi bị em trai ăn mất rồi."
+    },
+    {
+     "w": "坏",
+     "py": "huài",
+     "hv": "hoại",
+     "pos": "adj",
+     "vi": "hỏng; xấu (người xấu = 坏人)",
+     "ex": "我的手机坏了。",
+     "exPy": "Wǒ de shǒujī huài le.",
+     "exVi": "Điện thoại của tôi hỏng rồi."
+    },
+    {
+     "w": "忘记",
+     "py": "wàngjì",
+     "hv": "vong ký",
+     "pos": "v",
+     "vi": "quên",
+     "ex": "我忘记带伞了。",
+     "exPy": "Wǒ wàngjì dài sǎn le.",
+     "exVi": "Tôi quên mang ô rồi."
+    },
+    {
+     "w": "伞",
+     "py": "sǎn",
+     "hv": "tản",
+     "pos": "n",
+     "vi": "cái ô, dù (lượng từ 把)",
+     "ex": "下雨了，带把伞吧。",
+     "exPy": "Xià yǔ le, dài bǎ sǎn ba.",
+     "exVi": "Mưa rồi, mang theo cái ô đi."
+    },
+    {
+     "w": "刮风",
+     "py": "guā fēng",
+     "hv": "quát phong",
+     "pos": "v",
+     "vi": "nổi gió, gió thổi",
+     "ex": "外面刮风了，很冷。",
+     "exPy": "Wàimiàn guā fēng le, hěn lěng.",
+     "exVi": "Ngoài trời nổi gió rồi, lạnh lắm."
+    },
+    {
+     "w": "护照",
+     "py": "hùzhào",
+     "hv": "hộ chiếu",
+     "pos": "n",
+     "vi": "hộ chiếu",
+     "ex": "你的护照带了吗？",
+     "exPy": "Nǐ de hùzhào dài le ma?",
+     "exVi": "Bạn mang hộ chiếu chưa?"
+    },
+    {
+     "w": "信用卡",
+     "py": "xìnyòngkǎ",
+     "hv": "",
+     "pos": "n",
+     "vi": "thẻ tín dụng",
+     "ex": "这里可以用信用卡吗？",
+     "exPy": "Zhèlǐ kěyǐ yòng xìnyòngkǎ ma?",
+     "exVi": "Ở đây dùng thẻ tín dụng được không?"
+    },
+    {
+     "w": "照相机",
+     "py": "zhàoxiàngjī",
+     "hv": "chiếu tướng cơ",
+     "pos": "n",
+     "vi": "máy ảnh",
+     "ex": "这个照相机是我爸爸的。",
+     "exPy": "Zhège zhàoxiàngjī shì wǒ bàba de.",
+     "exVi": "Cái máy ảnh này là của bố tôi."
+    },
+    {
+     "w": "地铁",
+     "py": "dìtiě",
+     "hv": "địa thiết",
+     "pos": "n",
+     "vi": "tàu điện ngầm",
+     "ex": "我每天坐地铁上班。",
+     "exPy": "Wǒ měi tiān zuò dìtiě shàng bān.",
+     "exVi": "Hằng ngày tôi đi tàu điện ngầm đi làm."
+    },
+    {
+     "w": "司机",
+     "py": "sījī",
+     "hv": "tư cơ",
+     "pos": "n",
+     "vi": "tài xế",
+     "ex": "那位司机很热情。",
+     "exPy": "Nà wèi sījī hěn rèqíng.",
+     "exVi": "Bác tài xế đó rất nhiệt tình."
+    },
+    {
+     "w": "发现",
+     "py": "fāxiàn",
+     "hv": "phát hiện",
+     "pos": "v",
+     "vi": "phát hiện, nhận ra",
+     "ex": "到家以后，我才发现钱包不见了。",
+     "exPy": "Dào jiā yǐhòu, wǒ cái fāxiàn qiánbāo bú jiàn le.",
+     "exVi": "Về đến nhà tôi mới phát hiện ví không thấy đâu."
+    },
+    {
+     "w": "突然",
+     "py": "tūrán",
+     "hv": "đột nhiên",
+     "pos": "adv",
+     "vi": "đột nhiên, bỗng nhiên",
+     "ex": "突然下雨了。",
+     "exPy": "Tūrán xià yǔ le.",
+     "exVi": "Bỗng nhiên trời mưa."
+    },
+    {
+     "w": "生气",
+     "py": "shēngqì",
+     "hv": "sinh khí",
+     "pos": "v",
+     "vi": "tức giận, giận",
+     "ex": "别生气了，好吗？",
+     "exPy": "Bié shēngqì le, hǎo ma?",
+     "exVi": "Đừng giận nữa, được không?"
+    },
+    {
+     "w": "着急",
+     "py": "zháojí",
+     "hv": "",
+     "pos": "adj",
+     "vi": "sốt ruột, cuống, lo cuống lên",
+     "ex": "别着急，慢慢说。",
+     "exPy": "Bié zháojí, mànmàn shuō.",
+     "exVi": "Đừng cuống, cứ từ từ nói."
+    },
+    {
+     "w": "害怕",
+     "py": "hàipà",
+     "hv": "hại phạ",
+     "pos": "v",
+     "vi": "sợ, sợ hãi",
+     "ex": "我害怕一个人坐电梯。",
+     "exPy": "Wǒ hàipà yí ge rén zuò diàntī.",
+     "exVi": "Tôi sợ đi thang máy một mình."
+    },
+    {
+     "w": "哭",
+     "py": "kū",
+     "hv": "khốc",
+     "pos": "v",
+     "vi": "khóc",
+     "ex": "别哭了，我帮你找。",
+     "exPy": "Bié kū le, wǒ bāng nǐ zhǎo.",
+     "exVi": "Đừng khóc nữa, mình giúp bạn tìm."
+    },
+    {
+     "w": "借",
+     "py": "jiè",
+     "hv": "tá",
+     "pos": "v",
+     "vi": "mượn; cho mượn (借给)",
+     "ex": "我的词典被同学借走了。",
+     "exPy": "Wǒ de cídiǎn bèi tóngxué jièzǒu le.",
+     "exVi": "Từ điển của tôi bị bạn học mượn mất rồi."
+    },
+    {
+     "w": "还",
+     "py": "huán",
+     "hv": "hoàn",
+     "pos": "v",
+     "vi": "trả lại (khác 还 hái = còn, vẫn)",
+     "ex": "明天我把书还给你。",
+     "exPy": "Míngtiān wǒ bǎ shū huán gěi nǐ.",
+     "exVi": "Mai mình trả sách cho bạn."
+    },
+    {
+     "w": "小心",
+     "py": "xiǎoxīn",
+     "hv": "tiểu tâm",
+     "pos": "v",
+     "vi": "cẩn thận, coi chừng",
+     "ex": "小心！地上有水。",
+     "exPy": "Xiǎoxīn! Dì shang yǒu shuǐ.",
+     "exVi": "Cẩn thận! Dưới đất có nước."
+    },
+    {
+     "w": "帽子",
+     "py": "màozi",
+     "hv": "mạo tử",
+     "pos": "n",
+     "vi": "cái mũ (lượng từ 顶 / 个)",
+     "ex": "我的帽子被风刮走了。",
+     "exPy": "Wǒ de màozi bèi fēng guāzǒu le.",
+     "exVi": "Mũ của tôi bị gió thổi bay mất."
+    },
+    {
+     "w": "检查",
+     "py": "jiǎnchá",
+     "hv": "kiểm tra",
+     "pos": "v",
+     "vi": "kiểm tra (đồ, sức khoẻ, bài)",
+     "ex": "请检查一下你的包。",
+     "exPy": "Qǐng jiǎnchá yíxià nǐ de bāo.",
+     "exVi": "Hãy kiểm tra túi của bạn một chút."
+    },
+    {
+     "w": "自己",
+     "py": "zìjǐ",
+     "hv": "tự kỷ",
+     "pos": "pron",
+     "vi": "tự mình, bản thân",
+     "ex": "我自己去找吧。",
+     "exPy": "Wǒ zìjǐ qù zhǎo ba.",
+     "exVi": "Để tôi tự đi tìm."
+    },
+    {
+     "w": "难过",
+     "py": "nánguò",
+     "hv": "nan quá",
+     "pos": "adj",
+     "vi": "buồn, khó chịu trong lòng",
+     "ex": "钱包丢了，她很难过。",
+     "exPy": "Qiánbāo diū le, tā hěn nánguò.",
+     "exVi": "Mất ví, cô ấy rất buồn."
+    },
+    {
+     "w": "终于",
+     "py": "zhōngyú",
+     "hv": "chung ư",
+     "pos": "adv",
+     "vi": "cuối cùng (thì) – sau thời gian chờ đợi",
+     "ex": "我终于找到护照了！",
+     "exPy": "Wǒ zhōngyú zhǎodào hùzhào le!",
+     "exVi": "Cuối cùng tôi cũng tìm thấy hộ chiếu!"
+    }
+   ]
+  },
+  {
+   "k": "text",
+   "h": "被 khác chữ “bị / được” của tiếng Việt thế nào? + mẹo phát âm",
+   "html": "<p>Tiếng Việt phân biệt rõ <b>“bị”</b> (việc xấu) và <b>“được”</b> (việc tốt). Tiếng Trung chỉ có một chữ <b>被</b>, và theo truyền thống 被 thường dùng cho việc <b>không may, ngoài ý muốn</b>: 被偷 (bị trộm), 被风刮走 (bị gió thổi bay), 被雨打湿 (bị mưa làm ướt). Ngày nay 被 cũng dùng cho việc tốt (他被选为班长 – cậu ấy được bầu làm lớp trưởng) nhưng <b>ít hơn nhiều</b> so với chữ “được” của ta.</p><p>⚠️ Rất nhiều câu có “được / bị” trong tiếng Việt <b>không phải câu bị động</b> trong tiếng Trung:</p><ul><li>“Tôi <b>được</b> đi Trung Quốc” = có cơ hội → 我<b>有机会</b>去中国。</li><li>“Tôi <b>bị</b> cảm / bị muộn” = trạng thái → 我感冒了 / 我迟到了。</li><li>“Cơm nấu xong rồi” (được nấu) → 饭做好了。 (không cần 被)</li></ul><h4>Mẹo phát âm</h4><ul><li>被 <span class=\"py\">bèi</span> thanh 4 dứt khoát, đừng đọc thành “bì”.</li><li>Bổ ngữ 走 trong 刮走、借走、拿走 giữ thanh 3 nhưng đọc nhẹ, ngắn: <span class=\"py\">guāzǒu le</span>.</li><li>着急 đọc <span class=\"py\">zháojí</span> (着 thanh 2) – khác 着 <span class=\"py\">zhe</span> trợ từ sẽ học ở bài 10.</li></ul>"
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: Cấu trúc câu bị động 被",
+   "html": "<p>Công thức: <b>Chủ ngữ (vật/người chịu tác động, xác định) + 被 + (tác nhân) + Động từ + Thành phần khác</b>.</p><p>Giống câu 把, động từ <b>không đứng trơ</b>: phải có 了, bổ ngữ kết quả (坏, 走, 完), bổ ngữ xu hướng, hoặc 在/到/给… Tác nhân có thể <b>bỏ đi</b> nếu không biết hoặc không cần nói.</p>",
+   "table": [
+    [
+     "Chủ ngữ (chịu tác động)",
+     "被 + tác nhân",
+     "Động từ",
+     "Thành phần khác",
+     "Nghĩa"
     ],
-    "games": [
-      "Thám tử “Ai làm?”: GV dựng “hiện trường” (bánh biến mất, ô hỏng, sách mất). 3 học viên nhận thẻ bí mật làm nghi phạm. Thám tử hỏi 蛋糕是被谁吃的？你的书被谁拿走了？, nghi phạm trả lời bằng câu 被 (được nói dối 1 lần). Đoán đúng thủ phạm được điểm.",
-      "Máy biến hình 把 ⇄ 被: chia 2 đội, GV đọc câu 把 (弟弟把杯子打破了), đội nào nói đúng câu 被 trước được 1 điểm; vòng 2 đổi ngược 被 → 把."
+    [
+     "我的伞",
+     "被风",
+     "刮",
+     "坏了。",
+     "Ô của tôi bị gió thổi hỏng."
     ],
-    "errors": [
-      "Dịch mọi chữ “được / bị” thành 被: ❌ 我被去中国 / 我被感冒了 → ✅ 我有机会去中国 / 我感冒了.",
-      "Động từ đứng trơ: ❌ 我的钱包被偷 → ✅ 我的钱包被偷了.",
-      "Phủ định sai chỗ: ❌ 我的护照被没偷 → ✅ 我的护照没被偷.",
-      "Dùng 叫 / 让 mà bỏ tác nhân: ❌ 我的车让骑走了 → ✅ 我的车让人骑走了.",
-      "Lạm dụng 被 khi không cần: ❌ 作业被做完了 → ✅ 作业做完了 (bị động ý niệm).",
-      "Đọc 被 bèi thành “bì” hoặc thanh 3; nhầm 着急 zháojí với trợ từ 着 zhe."
+    [
+     "蛋糕",
+     "被弟弟",
+     "吃",
+     "了。",
+     "Bánh bị em trai ăn mất."
     ],
-    "homework": "Làm bài tập trong game ≥ 80%; viết 8 câu 被 về đồ vật của bạn (4 câu có tác nhân, 2 câu bỏ tác nhân, 2 câu 没被); dịch 5 câu “được / bị” trong bảng Ngữ pháp 2 mà không nhìn đáp án; viết mỗi chữ Hán 1 dòng; ghi âm bài đọc."
+    [
+     "我的词典",
+     "被同学",
+     "借",
+     "走了。",
+     "Từ điển bị bạn mượn đi rồi."
+    ],
+    [
+     "护照",
+     "被他",
+     "忘",
+     "在宾馆了。",
+     "Hộ chiếu bị anh ấy để quên ở khách sạn."
+    ],
+    [
+     "我的钱包",
+     "被(人)",
+     "偷",
+     "了。",
+     "Ví của tôi bị (người ta) trộm mất."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我的钱包被小偷偷走了。",
+     "py": "Wǒ de qiánbāo bèi xiǎotōu tōuzǒu le.",
+     "vi": "Ví của tôi bị kẻ trộm lấy mất rồi."
+    },
+    {
+     "t": "冰箱里的蛋糕被谁吃了？",
+     "py": "Bīngxiāng li de dàngāo bèi shéi chī le?",
+     "vi": "Bánh trong tủ lạnh bị ai ăn rồi?"
+    },
+    {
+     "t": "我的帽子被风刮走了。",
+     "py": "Wǒ de màozi bèi fēng guāzǒu le.",
+     "vi": "Mũ của tôi bị gió thổi bay rồi."
+    },
+    {
+     "t": "他被选为班长了。",
+     "py": "Tā bèi xuǎn wéi bānzhǎng le.",
+     "vi": "Cậu ấy được bầu làm lớp trưởng. (被 mang nghĩa tốt – ít gặp hơn)"
+    }
+   ],
+   "tips": [
+    "Động từ không đứng trơ: ❌ <i>我的钱包被偷。</i> → ✅ <b>我的钱包被偷了。</b>",
+    "Chủ ngữ phải xác định: ❌ <i>一本书被他借走了</i> → ✅ <b>那本书被他借走了。</b>",
+    "Tác nhân có thể bỏ sau 被: <b>我的自行车被骑走了</b> (không biết ai)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: “Được / bị” tiếng Việt ≠ 被 – câu bị động không cần 被",
+   "html": "<p>Người Việt hay dịch máy móc mọi chữ “được / bị” thành 被 – đây là lỗi số 1 của bài này. Hãy tự hỏi: <b>câu có hành động tác động lên chủ ngữ không?</b> Nếu chỉ là cơ hội, trạng thái, bệnh tật → không dùng 被.</p><p>Ngoài ra, khi chủ ngữ là <b>vật không thể tự làm</b> hành động (cơm, bài tập, thư, vé) và không cần nói ai làm, người Trung thường <b>bỏ 被</b> – gọi là câu bị động ý niệm: 饭做好了, 作业写完了, 票卖完了.</p>",
+   "table": [
+    [
+     "Tiếng Việt",
+     "❌ Dịch máy móc",
+     "✅ Tiếng Trung tự nhiên"
+    ],
+    [
+     "Tôi được đi Trung Quốc.",
+     "我被去中国。",
+     "我有机会去中国。"
+    ],
+    [
+     "Tôi được mẹ cho tiền.",
+     "我被妈妈给钱。",
+     "妈妈给了我钱。"
+    ],
+    [
+     "Bài tập làm xong rồi.",
+     "作业被做完了。",
+     "作业做完了。"
+    ],
+    [
+     "Món này được làm từ gạo.",
+     "这个菜被米做。",
+     "这个菜是用米做的。"
+    ],
+    [
+     "Tôi bị cảm rồi.",
+     "我被感冒了。",
+     "我感冒了。"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "信已经写好了。",
+     "py": "Xìn yǐjīng xiěhǎo le.",
+     "vi": "Thư đã viết xong rồi."
+    },
+    {
+     "t": "房间打扫干净了。",
+     "py": "Fángjiān dǎsǎo gānjìng le.",
+     "vi": "Phòng đã được dọn sạch."
+    },
+    {
+     "t": "电影票卖完了。",
+     "py": "Diànyǐng piào màiwán le.",
+     "vi": "Vé xem phim bán hết rồi."
+    },
+    {
+     "t": "我迟到了，因为地铁坏了。",
+     "py": "Wǒ chídào le, yīnwèi dìtiě huài le.",
+     "vi": "Tôi bị muộn vì tàu điện ngầm hỏng."
+    }
+   ],
+   "tips": [
+    "“Bị” + bệnh / trạng thái (bị ốm, bị cảm, bị muộn, bị đói) → <b>không dùng 被</b>: 我病了, 我饿了, 我迟到了.",
+    "“Được” = có cơ hội / được phép → 有机会, 可以, 能: ❌ <i>我被去旅游</i> → ✅ <b>我有机会去旅游。</b>"
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: 叫 / 让 thay 被; phủ định; đổi 把 ⇄ 被",
+   "html": "<p>Trong khẩu ngữ, <b>叫 jiào / 让 ràng</b> có thể thay 被, nhưng sau 叫/让 <b>bắt buộc</b> phải có tác nhân. Phủ định (没), phó từ (也, 又, 已经, 都) và động từ năng nguyện đặt <b>trước 被</b>.</p>",
+   "table": [
+    [
+     "Mẫu",
+     "Ví dụ",
+     "Ghi chú"
+    ],
+    [
+     "被 (có / không tác nhân)",
+     "我的车被(人)骑走了。",
+     "Văn viết & nói"
+    ],
+    [
+     "叫 / 让 + tác nhân",
+     "我的车让人骑走了。",
+     "Khẩu ngữ, không được bỏ tác nhân"
+    ],
+    [
+     "没 + 被",
+     "我的护照没被偷。",
+     "Phủ định – không có 了"
+    ],
+    [
+     "也 / 又 / 已经 + 被",
+     "他的照相机又被弟弟拿走了。",
+     "Phó từ đứng trước 被"
+    ],
+    [
+     "把 ⇄ 被",
+     "小狗把我的帽子拿走了。⇄ 我的帽子被小狗拿走了。",
+     "Đổi chỗ người làm và vật chịu tác động"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我的伞让我朋友借走了。",
+     "py": "Wǒ de sǎn ràng wǒ péngyou jièzǒu le.",
+     "vi": "Ô của tôi bị bạn tôi mượn đi rồi."
+    },
+    {
+     "t": "还好，我的信用卡没被偷。",
+     "py": "Hái hǎo, wǒ de xìnyòngkǎ méi bèi tōu.",
+     "vi": "May quá, thẻ tín dụng của tôi không bị trộm."
+    },
+    {
+     "t": "我的自行车已经被人骑走了。",
+     "py": "Wǒ de zìxíngchē yǐjīng bèi rén qízǒu le.",
+     "vi": "Xe đạp của tôi đã bị người ta đạp đi mất rồi."
+    },
+    {
+     "t": "小狗把我的帽子拿走了。→ 我的帽子被小狗拿走了。",
+     "py": "Xiǎo gǒu bǎ wǒ de màozi názǒu le. → Wǒ de màozi bèi xiǎo gǒu názǒu le.",
+     "vi": "Con chó con lấy mất mũ của tôi. → Mũ của tôi bị chó con lấy mất."
+    }
+   ],
+   "tips": [
+    "❌ <i>我的车让骑走了</i> (thiếu tác nhân) → ✅ <b>我的车让人骑走了</b> / <b>我的车被骑走了</b>.",
+    "❌ <i>我的护照被没偷</i> → ✅ <b>我的护照没被偷。</b>",
+    "让 còn nghĩa “bảo, để cho” (妈妈让我去买菜 – mẹ bảo tôi đi chợ): xem ngữ cảnh để phân biệt."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Một buổi sáng xui xẻo",
+   "lang": "zh-CN",
+   "note": "王丽 ngồi đợi 小兰 ở quán cà phê đã nửa tiếng. 小兰 đến muộn và kể chuyện. Nghe lần 1: túi của 小兰 có bị trộm không?",
+   "lines": [
+    {
+     "s": "王丽",
+     "g": "f",
+     "t": "小兰，你怎么才来？我等了你半个小时了。",
+     "py": "Xiǎo Lán, nǐ zěnme cái lái? Wǒ děngle nǐ bàn ge xiǎoshí le.",
+     "vi": "Tiểu Lan, sao giờ cậu mới đến? Mình đợi cậu nửa tiếng rồi."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "对不起！今天我太倒霉了。",
+     "py": "Duìbuqǐ! Jīntiān wǒ tài dǎoméi le.",
+     "vi": "Xin lỗi! Hôm nay mình xui quá."
+    },
+    {
+     "s": "王丽",
+     "g": "f",
+     "t": "怎么了？别着急，慢慢说。",
+     "py": "Zěnme le? Bié zháojí, mànmàn shuō.",
+     "vi": "Sao thế? Đừng cuống, từ từ kể."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "早上出门的时候突然刮风了，我的伞被风刮坏了，帽子也被刮走了。",
+     "py": "Zǎoshang chū mén de shíhou tūrán guā fēng le, wǒ de sǎn bèi fēng guāhuài le, màozi yě bèi guāzǒu le.",
+     "vi": "Sáng ra khỏi nhà thì bỗng nổi gió, ô của mình bị gió thổi hỏng, mũ cũng bị thổi bay mất."
+    },
+    {
+     "s": "王丽",
+     "g": "f",
+     "t": "哎呀！那你是坐地铁来的吧？",
+     "py": "Āiyā! Nà nǐ shì zuò dìtiě lái de ba?",
+     "vi": "Trời! Thế cậu đi tàu điện ngầm đến à?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "对。可是下了地铁，我发现我的包不见了！",
+     "py": "Duì. Kěshì xiàle dìtiě, wǒ fāxiàn wǒ de bāo bú jiàn le!",
+     "vi": "Ừ. Nhưng xuống tàu, mình phát hiện túi của mình biến mất!"
+    },
+    {
+     "s": "王丽",
+     "g": "f",
+     "t": "是被人偷了吗？里面有什么？",
+     "py": "Shì bèi rén tōu le ma? Lǐmiàn yǒu shénme?",
+     "vi": "Bị người ta trộm à? Trong đó có gì?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "有护照、信用卡，还有你借给我的照相机。我害怕极了，差点儿哭了。",
+     "py": "Yǒu hùzhào, xìnyòngkǎ, hái yǒu nǐ jiè gěi wǒ de zhàoxiàngjī. Wǒ hàipà jí le, chàdiǎnr kū le.",
+     "vi": "Có hộ chiếu, thẻ tín dụng, còn có cái máy ảnh cậu cho mình mượn. Mình sợ cực kỳ, suýt nữa thì khóc."
+    },
+    {
+     "s": "王丽",
+     "g": "f",
+     "t": "那后来呢？找到了吗？",
+     "py": "Nà hòulái ne? Zhǎodào le ma?",
+     "vi": "Thế sau đó thì sao? Tìm thấy chưa?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "找到了！包没被偷，是我自己忘在地铁上了。一位叔叔把它交给了地铁站的工作人员。",
+     "py": "Zhǎodào le! Bāo méi bèi tōu, shì wǒ zìjǐ wàng zài dìtiě shang le. Yí wèi shūshu bǎ tā jiāo gěile dìtiězhàn de gōngzuò rényuán.",
+     "vi": "Tìm thấy rồi! Túi không bị trộm, là mình tự để quên trên tàu. Một chú đã đưa nó cho nhân viên ga tàu."
+    },
+    {
+     "s": "王丽",
+     "g": "f",
+     "t": "太好了！你检查了吗？东西都在吗？",
+     "py": "Tài hǎo le! Nǐ jiǎnchá le ma? Dōngxi dōu zài ma?",
+     "vi": "Tốt quá! Cậu kiểm tra chưa? Đồ còn đủ không?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "都在。不过……你的照相机被我弄坏了。真对不起！",
+     "py": "Dōu zài. Búguò…… nǐ de zhàoxiàngjī bèi wǒ nònghuài le. Zhēn duìbuqǐ!",
+     "vi": "Đủ cả. Có điều… máy ảnh của cậu bị mình làm hỏng rồi. Thật xin lỗi!"
+    },
+    {
+     "s": "王丽",
+     "g": "f",
+     "t": "没事儿，别难过。照相机坏了可以修，你没事就好。",
+     "py": "Méi shìr, bié nánguò. Zhàoxiàngjī huài le kěyǐ xiū, nǐ méi shì jiù hǎo.",
+     "vi": "Không sao, đừng buồn. Máy ảnh hỏng thì sửa được, cậu không sao là tốt rồi."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "谢谢你！以后我一定小心，不会再把东西忘在地铁上了。",
+     "py": "Xièxie nǐ! Yǐhòu wǒ yídìng xiǎoxīn, bú huì zài bǎ dōngxi wàng zài dìtiě shang le.",
+     "vi": "Cảm ơn cậu! Sau này mình nhất định cẩn thận, sẽ không để quên đồ trên tàu nữa."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Cái ô của 小兰 bị làm sao?",
+     "o": [
+      "Bị gió thổi hỏng",
+      "Để quên trên tàu",
+      "Bị người ta lấy mất"
+     ],
+     "a": 0,
+     "e": "我的伞被风刮坏了。"
+    },
+    {
+     "q": "Trong túi của 小兰 KHÔNG có thứ nào?",
+     "o": [
+      "手机 – điện thoại",
+      "护照 – hộ chiếu",
+      "信用卡 – thẻ tín dụng"
+     ],
+     "a": 0,
+     "e": "Cô ấy kể: 护照、信用卡，还有…照相机 – không nhắc đến điện thoại."
+    },
+    {
+     "q": "Túi của 小兰 có bị trộm không?",
+     "o": [
+      "Có – bị trộm lấy",
+      "Bị gió thổi bay",
+      "Không – cô ấy tự để quên trên tàu"
+     ],
+     "a": 2,
+     "e": "包没被偷，是我自己忘在地铁上了。"
+    },
+    {
+     "q": "Máy ảnh là của ai?",
+     "o": [
+      "小兰",
+      "Chú nhặt được túi",
+      "王丽"
+     ],
+     "a": 2,
+     "e": "你借给我的照相机 – máy ảnh 王丽 cho mượn."
+    },
+    {
+     "q": "Điền: 帽子也被___走了。(gõ chữ Hán hoặc pinyin)",
+     "a": "刮",
+     "alt": [
+      "gua",
+      "guā"
+     ],
+     "e": "帽子也被刮走了 – mũ cũng bị (gió) thổi bay."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Chiếc xe đạp “bị mượn”",
+   "title": "被借走的自行车",
+   "text": "上个月，我买了一辆新自行车，是蓝色的，非常漂亮。我每天骑它去学校。\n\n有一天下午，我从图书馆出来，突然发现我的自行车不见了！我很着急：是不是被人偷了？我在附近找了半个小时，也没找到。回到宿舍以后，我很难过，晚饭也不想吃。\n\n晚上九点，同屋小王回来了。他笑着说：“对不起，你的自行车被我骑走了。下午我有急事，要去银行，可是我的车坏了。我给你打电话，你没接。”\n\n我听了，又生气又高兴。生气的是他没告诉我，高兴的是车没被偷。后来，我们说好了：以后谁想借车，一定要先问一下。",
+   "py": "Shàng ge yuè, wǒ mǎile yí liàng xīn zìxíngchē, shì lánsè de, fēicháng piàoliang. Wǒ měi tiān qí tā qù xuéxiào.\n\nYǒu yì tiān xiàwǔ, wǒ cóng túshūguǎn chūlai, tūrán fāxiàn wǒ de zìxíngchē bú jiàn le! Wǒ hěn zháojí: shì bu shì bèi rén tōu le? Wǒ zài fùjìn zhǎole bàn ge xiǎoshí, yě méi zhǎodào. Huídào sùshè yǐhòu, wǒ hěn nánguò, wǎnfàn yě bù xiǎng chī.\n\nWǎnshang jiǔ diǎn, tóngwū Xiǎo Wáng huílai le. Tā xiàozhe shuō: “Duìbuqǐ, nǐ de zìxíngchē bèi wǒ qízǒu le. Xiàwǔ wǒ yǒu jíshì, yào qù yínháng, kěshì wǒ de chē huài le. Wǒ gěi nǐ dǎ diànhuà, nǐ méi jiē.”\n\nWǒ tīngle, yòu shēngqì yòu gāoxìng. Shēngqì de shì tā méi gàosu wǒ, gāoxìng de shì chē méi bèi tōu. Hòulái, wǒmen shuōhǎo le: yǐhòu shéi xiǎng jiè chē, yídìng yào xiān wèn yíxià.",
+   "vi": "Tháng trước, tôi mua một chiếc xe đạp mới, màu xanh lam, rất đẹp. Ngày nào tôi cũng đạp nó đến trường.\n\nMột buổi chiều, tôi từ thư viện đi ra, bỗng phát hiện xe đạp của mình biến mất! Tôi rất cuống: có phải bị trộm rồi không? Tôi tìm quanh đó nửa tiếng mà không thấy. Về ký túc xá, tôi rất buồn, chẳng muốn ăn tối.\n\n9 giờ tối, bạn cùng phòng Tiểu Vương về. Cậu ấy cười nói: “Xin lỗi, xe đạp của cậu bị mình đạp đi. Chiều nay mình có việc gấp phải ra ngân hàng mà xe mình hỏng. Mình gọi điện cho cậu, cậu không nghe máy.”\n\nNghe xong, tôi vừa giận vừa mừng. Giận vì cậu ấy không báo cho tôi, mừng vì xe không bị trộm. Sau đó, chúng tôi giao hẹn: sau này ai muốn mượn xe nhất định phải hỏi trước.",
+   "gloss": [
+    {
+     "w": "辆",
+     "py": "liàng",
+     "vi": "chiếc (lượng từ cho xe)"
+    },
+    {
+     "w": "宿舍",
+     "py": "sùshè",
+     "vi": "ký túc xá"
+    },
+    {
+     "w": "同屋",
+     "py": "tóngwū",
+     "vi": "bạn cùng phòng"
+    },
+    {
+     "w": "偷",
+     "py": "tōu",
+     "vi": "ăn trộm"
+    },
+    {
+     "w": "急事",
+     "py": "jíshì",
+     "vi": "việc gấp"
+    },
+    {
+     "w": "接(电话)",
+     "py": "jiē (diànhuà)",
+     "vi": "nghe máy"
+    },
+    {
+     "w": "说好",
+     "py": "shuōhǎo",
+     "vi": "giao hẹn, thống nhất"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Xe đạp mới của “tôi” màu gì?",
+     "o": [
+      "绿色 – xanh lá",
+      "蓝色 – xanh lam",
+      "黑色 – đen"
+     ],
+     "a": 1,
+     "e": "是蓝色的，非常漂亮。"
+    },
+    {
+     "q": "Thực ra chiếc xe đạp đã đi đâu?",
+     "o": [
+      "Bị hỏng nên mang đi sửa",
+      "Bị trộm",
+      "Bạn cùng phòng đạp đi"
+     ],
+     "a": 2,
+     "e": "你的自行车被我骑走了 – 小王 nói."
+    },
+    {
+     "q": "Vì sao 小王 phải dùng xe của “tôi”?",
+     "o": [
+      "Xe cậu ấy bị trộm",
+      "Có việc gấp phải ra ngân hàng mà xe cậu ấy hỏng",
+      "Muốn đi thư viện"
+     ],
+     "a": 1,
+     "e": "下午我有急事，要去银行，可是我的车坏了。"
+    },
+    {
+     "q": "Vì sao “tôi” vừa giận vừa mừng?",
+     "o": [
+      "Giận vì bị muộn học, mừng vì được nghỉ",
+      "Giận vì không được báo, mừng vì xe không bị trộm",
+      "Giận vì xe bị hỏng, mừng vì có xe mới"
+     ],
+     "a": 1,
+     "e": "生气的是他没告诉我，高兴的是车没被偷。"
+    },
+    {
+     "q": "Sau đó họ giao hẹn gì?",
+     "o": [
+      "Ai muốn mượn xe phải hỏi trước",
+      "Không bao giờ cho mượn xe",
+      "Mua thêm một chiếc xe"
+     ],
+     "a": 0,
+     "e": "以后谁想借车，一定要先问一下。"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "被",
+     "py": "bèi",
+     "hv": "bị",
+     "parts": "衤(y – áo) + 皮 (bì – gợi âm)",
+     "strokes": 10,
+     "vi": "vốn là “chăn đắp” (vật phủ lên người) → bị (phủ lên, chịu tác động)",
+     "words": "被子, 被偷"
+    },
+    {
+     "c": "坏",
+     "py": "huài",
+     "hv": "hoại",
+     "parts": "土 (thổ – đất) + 不 (bất – không)",
+     "strokes": 7,
+     "vi": "hỏng, xấu – đất “không” tốt",
+     "words": "坏了, 坏人"
+    },
+    {
+     "c": "忘",
+     "py": "wàng",
+     "hv": "vong",
+     "parts": "亡 (vong – mất) + 心 (tâm – lòng)",
+     "strokes": 7,
+     "vi": "quên – mất khỏi trong lòng",
+     "words": "忘记, 别忘了"
+    },
+    {
+     "c": "借",
+     "py": "jiè",
+     "hv": "tá",
+     "parts": "亻(người) + 昔 (tích – gợi âm)",
+     "strokes": 10,
+     "vi": "mượn – nhờ vào người khác",
+     "words": "借书, 借给"
+    },
+    {
+     "c": "还",
+     "py": "huán / hái",
+     "hv": "hoàn",
+     "parts": "辶 (sước – bước đi) + 不",
+     "strokes": 7,
+     "vi": "huán: trả lại (đi trở về); hái: còn, vẫn",
+     "words": "还书, 还是"
+    },
+    {
+     "c": "哭",
+     "py": "kū",
+     "hv": "khốc",
+     "parts": "吅 (hai miệng – hai mắt mếu) + 犬 (khuyển)",
+     "strokes": 10,
+     "vi": "khóc – mặt mếu máo kêu thành tiếng",
+     "words": "哭了, 别哭"
+    },
+    {
+     "c": "怕",
+     "py": "pà",
+     "hv": "phạ",
+     "parts": "忄(tâm đứng – lòng) + 白 (bạch – gợi âm)",
+     "strokes": 8,
+     "vi": "sợ – lòng trắng bệch",
+     "words": "害怕, 怕冷"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Kể sự cố & báo mất đồ",
+   "tasks": [
+    {
+     "p": "Kể với bạn: tuần trước đồ gì của bạn bị hỏng / bị mất / bị mượn, do ai hoặc cái gì.",
+     "model": "上个星期真倒霉！我的手机被弟弟弄坏了，我的伞也被风刮走了。",
+     "py": "Shàng ge xīngqī zhēn dǎoméi! Wǒ de shǒujī bèi dìdi nònghuài le, wǒ de sǎn yě bèi fēng guāzǒu le.",
+     "vi": "Tuần trước xui thật! Điện thoại của mình bị em trai làm hỏng, ô cũng bị gió thổi bay mất.",
+     "tips": "倒霉 dǎoméi = xui xẻo; 弄坏 nònghuài = làm hỏng. 也 đứng trước 被."
+    },
+    {
+     "p": "Bạn đến quầy dịch vụ ga tàu điện ngầm báo mất túi: túi màu gì, bên trong có gì, có thể bị trộm hay tự để quên.",
+     "model": "您好，我的包不见了。可能被人拿走了，也可能是我自己忘在地铁上了。是一个蓝色的包，里面有护照和信用卡。",
+     "py": "Nín hǎo, wǒ de bāo bú jiàn le. Kěnéng bèi rén názǒu le, yě kěnéng shì wǒ zìjǐ wàng zài dìtiě shang le. Shì yí ge lánsè de bāo, lǐmiàn yǒu hùzhào hé xìnyòngkǎ.",
+     "vi": "Chào anh/chị, túi của tôi mất rồi. Có thể bị người ta lấy, cũng có thể là tôi tự để quên trên tàu. Là một cái túi màu xanh, bên trong có hộ chiếu và thẻ tín dụng.",
+     "tips": "不见了 đọc bú jiàn le (不 + thanh 4)."
+    },
+    {
+     "p": "Chuyển 3 câu 把 sang câu 被 và nói to: 弟弟把蛋糕吃了 / 风把我的帽子刮走了 / 同学把我的词典借走了.",
+     "model": "蛋糕被弟弟吃了。我的帽子被风刮走了。我的词典被同学借走了。",
+     "py": "Dàngāo bèi dìdi chī le. Wǒ de màozi bèi fēng guāzǒu le. Wǒ de cídiǎn bèi tóngxué jièzǒu le.",
+     "vi": "Bánh bị em trai ăn mất. Mũ của tôi bị gió thổi bay. Từ điển của tôi bị bạn mượn đi rồi."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Một ngày xui xẻo",
+   "task": "Viết đoạn 60–100 chữ với nhan đề “倒霉的一天” (Một ngày xui xẻo). Dùng ít nhất 4 câu 被 (trong đó có 1 câu 没被) và các từ 突然, 发现, 终于 / 后来.",
+   "min": 60,
+   "model": "昨天是我最倒霉的一天。早上出门的时候，突然下起了大雨，我的伞被风刮坏了，衣服也被雨打湿了。到了公司，我发现手机不见了，很着急。后来同事告诉我，手机被我忘在地铁上了。我给地铁站打电话，终于找到了。还好，手机没被别人拿走。",
+   "modelVi": "Hôm qua là ngày xui nhất của tôi. Sáng ra khỏi nhà, bỗng trời đổ mưa to, ô của tôi bị gió thổi hỏng, quần áo cũng bị mưa làm ướt. Đến công ty, tôi phát hiện điện thoại không thấy đâu, rất cuống. Sau đó đồng nghiệp bảo tôi, điện thoại bị tôi để quên trên tàu điện ngầm. Tôi gọi điện cho ga tàu, cuối cùng cũng tìm thấy. May mà điện thoại không bị người khác lấy mất.",
+   "tips": [
+    "Từ mở rộng: 倒霉 dǎoméi xui xẻo, 打湿 dǎshī làm ướt, 下起了大雨 bỗng đổ mưa to.",
+    "Không dùng 被 cho “bị muộn, bị cảm”: 我迟到了, 我感冒了.",
+    "Kết bằng một câu cảm nhận hoặc bài học để đoạn văn trọn vẹn."
+   ],
+   "checklist": [
+    "≥ 4 câu 被, động từ có thành phần sau (了 / 坏 / 走 / 在…)",
+    "Có 1 câu 没被 (không có 了)",
+    "Có 突然, 发现 và 终于 hoặc 后来",
+    "Không dùng 被 với 迟到 / 感冒 / 病",
+    "Độ dài 60–100 chữ"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "我的伞被风刮走了。",
+   "lang": "zh-CN",
+   "q": "Chuyện gì đã xảy ra?",
+   "o": [
+    "Ô bị gió thổi bay",
+    "Ô bị bạn mượn",
+    "Ô bị hỏng vì mưa"
+   ],
+   "a": 0,
+   "e": "被风刮走了 = bị gió thổi bay đi."
+  },
+  {
+   "t": "listen",
+   "say": "我的词典被小王借走了。",
+   "lang": "zh-CN",
+   "q": "Từ điển của người nói đâu rồi?",
+   "o": [
+    "Để ở nhà",
+    "Tiểu Vương mượn đi rồi",
+    "Bị mất trên tàu"
+   ],
+   "a": 1,
+   "e": "被小王借走了 = bị Tiểu Vương mượn đi."
+  },
+  {
+   "t": "listen",
+   "say": "还好，我的护照没被偷。",
+   "lang": "zh-CN",
+   "q": "Hộ chiếu của người nói thế nào?",
+   "o": [
+    "Không bị trộm",
+    "Bị trộm rồi",
+    "Bị để quên"
+   ],
+   "a": 0,
+   "e": "没被偷 = không bị trộm; 还好 = may quá."
+  },
+  {
+   "t": "mc",
+   "q": "Chọn câu ĐÚNG: “Bánh của tôi bị em trai ăn mất.”",
+   "o": [
+    "我的蛋糕被弟弟吃。",
+    "我的蛋糕被弟弟吃了。",
+    "弟弟被我的蛋糕吃了。"
+   ],
+   "a": 1,
+   "e": "Động từ sau 被 không đứng trơ – cần 了. Câu 3 đảo ngược nghĩa (em trai bị bánh ăn!)."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào dịch đúng “Tôi bị cảm rồi”?",
+   "o": [
+    "我感冒了。",
+    "我被感冒了。",
+    "我被感冒。"
+   ],
+   "a": 0,
+   "e": "Bệnh tật, trạng thái không dùng 被."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào tự nhiên nhất cho “Bài tập đã làm xong rồi”?",
+   "o": [
+    "作业被做完了。",
+    "作业把做完了。",
+    "作业做完了。"
+   ],
+   "a": 2,
+   "e": "Chủ ngữ là vật, không cần nói ai làm → câu bị động ý niệm, bỏ 被."
+  },
+  {
+   "t": "mc",
+   "q": "Chọn câu ĐÚNG với 让 (khẩu ngữ):",
+   "o": [
+    "我的车人让骑走了。",
+    "我的车让人骑走了。",
+    "我的车让骑走了。"
+   ],
+   "a": 1,
+   "e": "Sau 叫/让 bắt buộc có tác nhân (人, 他, 我朋友…)."
+  },
+  {
+   "t": "mc",
+   "q": "Đổi sang câu 被: 小狗把我的帽子拿走了。(Xiǎo gǒu bǎ wǒ de màozi názǒu le.)",
+   "o": [
+    "我的帽子把小狗拿走了。",
+    "小狗被我的帽子拿走了。",
+    "我的帽子被小狗拿走了。"
+   ],
+   "a": 2,
+   "e": "Vật chịu tác động (帽子) làm chủ ngữ, tác nhân (小狗) đứng sau 被."
+  },
+  {
+   "t": "fill",
+   "q": "我的自行车___人骑走了。(Wǒ de zìxíngchē ___ rén qízǒu le.)",
+   "a": "被",
+   "alt": [
+    "bei",
+    "bèi",
+    "让",
+    "rang",
+    "叫",
+    "jiao"
+   ],
+   "e": "被 / 让 / 叫 + tác nhân (人) + động từ + bổ ngữ."
+  },
+  {
+   "t": "fill",
+   "q": "还好，我的信用卡___被偷。(Hái hǎo, wǒ de xìnyòngkǎ ___ bèi tōu. – May mà thẻ không bị trộm.)",
+   "a": "没",
+   "alt": [
+    "mei",
+    "méi",
+    "没有",
+    "meiyou"
+   ],
+   "e": "Phủ định 没 đứng trước 被, cuối câu không có 了."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Hộ chiếu của tôi không bị trộm.”",
+   "w": [
+    "没",
+    "我的",
+    "被",
+    "护照",
+    "偷"
+   ],
+   "a": "我的护照没被偷",
+   "e": "Chủ ngữ + 没 + 被 + động từ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Máy ảnh bị em trai làm hỏng rồi.”",
+   "w": [
+    "弄坏了",
+    "被",
+    "照相机",
+    "弟弟"
+   ],
+   "a": "照相机被弟弟弄坏了",
+   "e": "Chủ ngữ + 被 + tác nhân + động từ + kết quả (坏) + 了."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Mũ của tôi cũng bị gió thổi bay.”",
+   "w": [
+    "也",
+    "被风",
+    "我的帽子",
+    "刮走了"
+   ],
+   "a": "我的帽子也被风刮走了",
+   "e": "Phó từ 也 đứng trước 被."
+  },
+  {
+   "t": "dict",
+   "say": "护照",
+   "lang": "zh-CN",
+   "a": "护照",
+   "py": "hùzhào",
+   "e": "护照 hùzhào – hộ chiếu."
+  },
+  {
+   "t": "dict",
+   "say": "我的手机坏了。",
+   "lang": "zh-CN",
+   "a": "我的手机坏了",
+   "py": "wǒ de shǒujī huài le",
+   "e": "Điện thoại của tôi hỏng rồi."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ chỉ cảm xúc / thời điểm với nghĩa:",
+   "pairs": [
+    [
+     "着急",
+     "sốt ruột"
+    ],
+    [
+     "害怕",
+     "sợ hãi"
+    ],
+    [
+     "难过",
+     "buồn"
+    ],
+    [
+     "生气",
+     "tức giận"
+    ],
+    [
+     "突然",
+     "đột nhiên"
+    ],
+    [
+     "终于",
+     "cuối cùng thì"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Tranh “tai nạn nhỏ”: ô bị gió thổi, bánh bị ăn, xe bị mượn, ví bị trộm; thẻ câu 把 để học viên đổi sang 被; bảng so sánh “được / bị” tiếng Việt – tiếng Trung (5 câu ở Ngữ pháp 2); thẻ “nghi phạm” cho trò Thám tử.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: GV kể “chuyện xui” kèm tranh: 我的蛋糕被弟弟吃了！我的伞被风刮走了！ Hỏi: ai ăn bánh? bánh ra sao? → học viên tự rút ra vị trí chủ ngữ – 被 – tác nhân."
+   },
+   {
+    "t": "20'",
+    "do": "Từ vựng: nhóm cảm xúc (着急, 害怕, 生气, 难过, 哭) dạy bằng nét mặt; nhóm đồ vật (伞, 帽子, 护照, 信用卡, 照相机); động từ (借, 还, 忘记, 发现, 检查). Phân biệt 还 huán / hái."
+   },
+   {
+    "t": "25'",
+    "do": "Ngữ pháp 1 + 3: công thức 被, phủ định 没被, phó từ 也/又 trước 被, 叫/让 bắt buộc có tác nhân. Hoạt động “máy biến hình”: GV đọc câu 把, học viên đổi sang câu 被 và ngược lại."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe “Một buổi sáng xui xẻo”: lần 1 trả lời câu hỏi chính (túi có bị trộm không?), lần 2 làm qs, lần 3 hai bạn nữ đọc phân vai."
+   },
+   {
+    "t": "15'",
+    "do": "Trò chơi “Thám tử: Ai làm?” (mục games)."
+   },
+   {
+    "t": "5'",
+    "do": "Giao bài tập 1–8 trong game."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: GV diễn kịch câm (bị gió thổi bay mũ, bị bạn lấy bút), học viên nói câu 被 tương ứng."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 2: chiếu 5 câu tiếng Việt có “được / bị”, nhóm 3 người thảo luận cách dịch, rồi đối chiếu bảng. Giới thiệu câu bị động ý niệm (饭做好了, 票卖完了)."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc “被借走的自行车”: đọc thầm, tìm tất cả câu 被 / 没被; trả lời câu hỏi; kể lại câu chuyện theo vai “tôi” và vai 小王."
+   },
+   {
+    "t": "15'",
+    "do": "Chữ Hán 被 坏 忘 借 还 哭 怕 (chú ý bộ 衤 khác 礻 – 被 có 2 chấm); nói theo 3 nhiệm vụ theo cặp."
+   },
+   {
+    "t": "15'",
+    "do": "Viết đoạn “倒霉的一天” tại lớp, đổi bài chấm chéo theo checklist."
+   },
+   {
+    "t": "10'",
+    "do": "Bài tập 9–16, chữa lỗi chung, giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Thám tử “Ai làm?”: GV dựng “hiện trường” (bánh biến mất, ô hỏng, sách mất). 3 học viên nhận thẻ bí mật làm nghi phạm. Thám tử hỏi 蛋糕是被谁吃的？你的书被谁拿走了？, nghi phạm trả lời bằng câu 被 (được nói dối 1 lần). Đoán đúng thủ phạm được điểm.",
+   "Máy biến hình 把 ⇄ 被: chia 2 đội, GV đọc câu 把 (弟弟把杯子打破了), đội nào nói đúng câu 被 trước được 1 điểm; vòng 2 đổi ngược 被 → 把."
+  ],
+  "errors": [
+   "Dịch mọi chữ “được / bị” thành 被: ❌ 我被去中国 / 我被感冒了 → ✅ 我有机会去中国 / 我感冒了.",
+   "Động từ đứng trơ: ❌ 我的钱包被偷 → ✅ 我的钱包被偷了.",
+   "Phủ định sai chỗ: ❌ 我的护照被没偷 → ✅ 我的护照没被偷.",
+   "Dùng 叫 / 让 mà bỏ tác nhân: ❌ 我的车让骑走了 → ✅ 我的车让人骑走了.",
+   "Lạm dụng 被 khi không cần: ❌ 作业被做完了 → ✅ 作业做完了 (bị động ý niệm).",
+   "Đọc 被 bèi thành “bì” hoặc thanh 3; nhầm 着急 zháojí với trợ từ 着 zhe."
+  ],
+  "homework": "Làm bài tập trong game ≥ 80%; viết 8 câu 被 về đồ vật của bạn (4 câu có tác nhân, 2 câu bỏ tác nhân, 2 câu 没被); dịch 5 câu “được / bị” trong bảng Ngữ pháp 2 mà không nhìn đáp án; viết mỗi chữ Hán 1 dòng; ghi âm bài đọc."
+ }
 }

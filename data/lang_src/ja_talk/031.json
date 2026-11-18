@@ -1,0 +1,208 @@
+{
+ "no": 31,
+ "lv": "n5",
+ "title": "Đặt vật liệu cho năm người: giấy đủ nhưng bút thiếu",
+ "sub": "あしたの 会には 何人 来ますか。",
+ "situation": "Hai người nhận vật liệu cho buổi làm nhãn sách giả. Họ tính tổng giấy và số bút bổ sung, phân biệt lượng người với lượng vật.",
+ "lang": "ja-JP",
+ "lines": [
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "あしたの 会には 何人 来ますか。",
+   "vi": "Buổi sinh hoạt ngày mai có bao nhiêu người?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "五人です。一人に 紙を 三枚 使います。",
+   "vi": "Năm người. Mỗi người dùng ba tờ giấy."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "全部で 十五枚ですね。今、何枚 ありますか。",
+   "vi": "Tổng cộng mười lăm tờ nhỉ. Hiện có bao nhiêu?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "二十枚 あります。紙は 足ります。",
+   "vi": "Có hai mươi tờ. Giấy đủ."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "ペンは どうですか。一人に 一本ですか。",
+   "vi": "Còn bút thế nào? Mỗi người một cây à?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "はい。でも、四本しか ありません。",
+   "vi": "Vâng. Nhưng chỉ có bốn cây."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "では、あと 一本 持ってきます。箱は いくつ 必要ですか。",
+   "vi": "Vậy tôi mang thêm một cây. Cần bao nhiêu hộp?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "大きい 箱を ひとつ お願いします。小さい 箱は もう あります。",
+   "vi": "Nhờ bạn mang một hộp lớn. Hộp nhỏ đã có."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "わかりました。紙は 買わないで、ペンと 大きい 箱を 持ってきます。",
+   "vi": "Tôi hiểu. Không mua giấy, mang bút và hộp lớn đến."
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "ありがとうございます。終わったら、ペンが 五本 あるか 一緒に 数えましょう。",
+   "vi": "Cảm ơn. Xong ta cùng đếm có đủ năm bút không nhé."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "五人",
+   "vi": "năm người",
+   "note": "Người dùng 人, không đổi thành lượng vật."
+  },
+  {
+   "t": "一人に三枚",
+   "vi": "mỗi người ba tờ",
+   "note": "Lượng mỗi người cần nhân với số người để có tổng."
+  },
+  {
+   "t": "十五枚",
+   "vi": "mười lăm tờ",
+   "note": "枚 dùng cho giấy trong tình huống, không phải số bút."
+  },
+  {
+   "t": "四本しかありません",
+   "vi": "chỉ có bốn cây",
+   "note": "しか đi với phủ định để nhấn lượng hiện có ít."
+  },
+  {
+   "t": "あと一本",
+   "vi": "thêm một cây nữa",
+   "note": "Lượng bổ sung khác tổng nhu cầu năm cây."
+  },
+  {
+   "t": "ひとつ",
+   "vi": "một cái",
+   "note": "Cách đếm chung dùng cho hộp ở đây."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Có mấy người đến?",
+   "o": [
+    "Ba người",
+    "Hai mươi người",
+    "Năm người"
+   ],
+   "a": 2,
+   "e": "五人 là người tham gia, còn 三枚 là mỗi người dùng."
+  },
+  {
+   "q": "Tổng giấy cần là bao nhiêu?",
+   "o": [
+    "Ba tờ",
+    "Mười lăm tờ",
+    "Hai mươi tờ"
+   ],
+   "a": 1,
+   "e": "Năm người nhân ba tờ là mười lăm, được xác nhận trong lời thoại."
+  },
+  {
+   "q": "Giấy có thiếu không?",
+   "o": [
+    "Không, có hai mươi tờ",
+    "Thiếu năm tờ",
+    "Thiếu mười lăm tờ"
+   ],
+   "a": 0,
+   "e": "Hai mươi hiện có lớn hơn mười lăm cần; 足ります báo đủ."
+  },
+  {
+   "q": "Cần thêm bao nhiêu bút?",
+   "o": [
+    "Bốn cây",
+    "Năm cây",
+    "Một cây"
+   ],
+   "a": 2,
+   "e": "Cần năm, hiện bốn nên あと一本."
+  },
+  {
+   "q": "Hộp cần mang là loại nào?",
+   "o": [
+    "Không cần hộp nào",
+    "Một hộp lớn",
+    "Hai hộp nhỏ"
+   ],
+   "a": 1,
+   "e": "大きい箱をひとつ, nhỏ đã có."
+  },
+  {
+   "q": "Sau buổi sinh hoạt kiểm gì?",
+   "o": [
+    "Đủ năm bút không",
+    "Có mua hai mươi tờ không",
+    "Có ba người không"
+   ],
+   "a": 0,
+   "e": "Lượt cuối nêu ペンが五本あるか数える để kiểm hoàn trả."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "Điền lượng từ cho giấy: 紙を十五___使います。",
+   "a": "枚",
+   "e": "Giấy dùng 枚, số mười lăm không thay lượng từ theo lượng người."
+  },
+  {
+   "t": "fill",
+   "q": "Điền lượng thiếu: 五人に一本。今は四本。あと___本。",
+   "a": "一",
+   "e": "Nhu cầu năm cây trừ bốn hiện có còn một."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu mang thêm một bút.",
+   "w": [
+    "持ってきます。",
+    "あと一本",
+    "ペンを"
+   ],
+   "a": "ペンをあと一本持ってきます。",
+   "e": "Đối tượng ペンを, lượng thêm あと一本, hành động mang đến."
+  },
+  {
+   "t": "dict",
+   "say": "大きい 箱を ひとつ 用意します。",
+   "a": "大きい 箱を ひとつ 用意します。",
+   "lang": "ja-JP",
+   "e": "Hộp lớn một cái, dùng ひとつ; không lẫn số bút hay tờ."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Thẻ mới: bốn người, hai tờ mỗi người, hiện sáu tờ. Nói lượng cần và thiếu.",
+   "model": "四人に 二枚ずつですから、八枚 必要です。今は 六枚です。あと 二枚 お願いします。",
+   "vi": "Bốn người mỗi người hai tờ nên cần tám. Hiện sáu tờ. Xin thêm hai tờ."
+  },
+  {
+   "p": "Thẻ mới: sáu người, bút bốn cây, hộp lớn đã có. Nhận mang phần thiếu, không mang hộp.",
+   "model": "ペンを あと 二本 持ってきます。大きい 箱は もう ありますから、持ってきません。",
+   "vi": "Tôi mang thêm hai cây bút. Hộp lớn đã có nên tôi không mang."
+  }
+ ]
+}

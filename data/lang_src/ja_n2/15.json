@@ -1,0 +1,750 @@
+{
+ "no": 15,
+ "title": "Ôn tập tổng hợp 2 – Đính chính báo cáo và email xin thay bản",
+ "sub": "単位を 誤って 記載しておりました。",
+ "goals": [
+  "Tổng hợp hai văn bản có điều kiện thống kê khác nhau để chỉ lỗi trong kết luận.",
+  "Giữ dữ liệu thô đúng nhưng rút lại hoặc giới hạn phát biểu sai đơn vị, phạm vi hay nguyên nhân.",
+  "Dùng email lịch sự để xin thay bản, báo hạn và yêu cầu xác nhận nhận.",
+  "Viết đính chính trộn kỹ năng với căn cứ, ảnh hưởng còn chưa kiểm và bước ngừa tái diễn."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Bản tóm tắt giả đã được gửi nhưng phát hiện gọi số lượt thành số người và so hai khoảng thời gian khác nhau. Không cần xóa mọi dữ liệu, cũng không nên chỉ đổi vài con số mà giữ kết luận cũ. Bài ôn yêu cầu nối văn phong báo cáo, giới hạn nguyên nhân và email công việc: nói lỗi gì, điều nào vẫn đúng, điều nào phải rút lại, bản sửa khi nào có và người nhận cần làm gì. Một lời xin lỗi không thay được thông tin để hành động.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>訂正依頼 đọc ていせいいらい, giữ hai chuỗi nguyên âm nối nhau; 誤記 đọc ごき và 集計漏れ đọc しゅうけいもれ khác loại lỗi nên không đọc lướt thành một nhãn chung. 差替版 đọc さしかえばん, có ka-e hai mora; 確定版 đọc かくていばん. Trong email đọc thành tiếng, ngắt sau phần nêu phạm vi đính chính trước lời nhờ, tránh giọng xin lỗi khiến điều cần làm bị mờ.</p>",
+   "items": [
+    {
+     "sym": "訂正依頼・差替版",
+     "ex": [
+      "ていせいいらい",
+      "さしかえばん"
+     ],
+     "vi": "Giữ các nguyên âm liền để phân tên yêu cầu và phiên bản cần thay."
+    },
+    {
+     "sym": "誤記・集計漏れ・対象範囲",
+     "ex": [
+      "ごき",
+      "しゅうけいもれ",
+      "たいしょうはんい"
+     ],
+     "vi": "Đọc đúng loại sai sót và phạm vi ảnh hưởng, không dùng một từ mơ hồ cho mọi vấn đề."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "訂正依頼",
+     "kana": "ていせいいらい",
+     "romaji": "teisei irai",
+     "vi": "yêu cầu đính chính",
+     "ex": "訂正依頼には理由を添えます。",
+     "exVi": "Tôi kèm lý do vào yêu cầu đính chính."
+    },
+    {
+     "w": "配信済み",
+     "kana": "はいしんずみ",
+     "romaji": "haishinzumi",
+     "vi": "đã gửi/phân phối tin",
+     "ex": "この要約は配信済みです。",
+     "exVi": "Bản tóm tắt này đã gửi."
+    },
+    {
+     "w": "差替版",
+     "kana": "さしかえばん",
+     "romaji": "sashikaeban",
+     "vi": "bản thay thế bản trước",
+     "ex": "差替版の名前を明記します。",
+     "exVi": "Tôi ghi rõ tên bản thay."
+    },
+    {
+     "w": "誤記",
+     "kana": "ごき",
+     "romaji": "goki",
+     "vi": "ghi sai/chữ sai",
+     "ex": "単位の誤記を直します。",
+     "exVi": "Tôi sửa việc ghi sai đơn vị."
+    },
+    {
+     "w": "集計漏れ",
+     "kana": "しゅうけいもれ",
+     "romaji": "shuukei more",
+     "vi": "bỏ sót khi thống kê",
+     "ex": "集計漏れの有無を調べます。",
+     "exVi": "Tôi kiểm có sót dữ liệu không."
+    },
+    {
+     "w": "対象範囲",
+     "kana": "たいしょうはんい",
+     "romaji": "taishoo han'i",
+     "vi": "phạm vi đối tượng",
+     "ex": "対象範囲は回答者だけです。",
+     "exVi": "Phạm vi chỉ người trả lời."
+    },
+    {
+     "w": "比較条件",
+     "kana": "ひかくじょうけん",
+     "romaji": "hikaku jooken",
+     "vi": "điều kiện để so sánh",
+     "ex": "比較条件を表の上に示します。",
+     "exVi": "Tôi ghi điều kiện so trên bảng."
+    },
+    {
+     "w": "根拠資料",
+     "kana": "こんきょしりょう",
+     "romaji": "konkyo shiryoo",
+     "vi": "tài liệu làm căn cứ",
+     "ex": "根拠資料に時刻を残します。",
+     "exVi": "Tôi giữ giờ trong tài liệu căn cứ."
+    },
+    {
+     "w": "影響範囲",
+     "kana": "えいきょうはんい",
+     "romaji": "eikyoo han'i",
+     "vi": "phạm vi chịu ảnh hưởng",
+     "ex": "転送された影響範囲は未確認です。",
+     "exVi": "Phạm vi đã chuyển tiếp còn chưa kiểm."
+    },
+    {
+     "w": "受領確認",
+     "kana": "じゅりょうかくにん",
+     "romaji": "juryoo kakunin",
+     "vi": "xác nhận đã nhận",
+     "ex": "受領確認を一行お願いします。",
+     "exVi": "Nhờ xác nhận đã nhận trong một dòng."
+    },
+    {
+     "w": "誤解防止",
+     "kana": "ごかいぼうし",
+     "romaji": "gokai booshi",
+     "vi": "ngăn hiểu lầm",
+     "ex": "誤解防止の注記を加えます。",
+     "exVi": "Tôi thêm ghi chú tránh hiểu lầm."
+    },
+    {
+     "w": "再発防止",
+     "kana": "さいはつぼうし",
+     "romaji": "saihatsu booshi",
+     "vi": "ngừa việc lặp lại",
+     "ex": "再発防止には確認手順も変えます。",
+     "exVi": "Để ngừa lặp, tôi đổi cả bước kiểm."
+    },
+    {
+     "w": "承認経路",
+     "kana": "しょうにんけいろ",
+     "romaji": "shoonin keiro",
+     "vi": "luồng người xét/chấp thuận",
+     "ex": "承認経路を確認します。",
+     "exVi": "Tôi kiểm luồng chấp thuận."
+    },
+    {
+     "w": "修正履歴",
+     "kana": "しゅうせいりれき",
+     "romaji": "shuusei rireki",
+     "vi": "lịch sử sửa đổi",
+     "ex": "修正履歴に撤回した文を残します。",
+     "exVi": "Tôi lưu câu đã rút trong lịch sử sửa."
+    },
+    {
+     "w": "撤回",
+     "kana": "てっかい",
+     "romaji": "tekkai",
+     "vi": "rút lại phát biểu",
+     "ex": "原因を断定した文は撤回します。",
+     "exVi": "Tôi rút câu khẳng định nguyên nhân."
+    },
+    {
+     "w": "限定",
+     "kana": "げんてい",
+     "romaji": "gentei",
+     "vi": "giới hạn phạm vi",
+     "ex": "結論を回答者に限定します。",
+     "exVi": "Tôi giới hạn kết luận vào người trả lời."
+    },
+    {
+     "w": "お詫び",
+     "kana": "おわび",
+     "romaji": "owabi",
+     "vi": "lời xin lỗi lịch sự",
+     "ex": "お詫びと対応を同時に伝えます。",
+     "exVi": "Tôi báo xin lỗi cùng cách xử lý."
+    },
+    {
+     "w": "取り急ぎ",
+     "kana": "とりいそぎ",
+     "romaji": "toriisogi",
+     "vi": "trước mắt xin báo nhanh",
+     "ex": "取り急ぎ使用停止をお願いします。",
+     "exVi": "Trước mắt xin tạm ngừng dùng."
+    },
+    {
+     "w": "差し控える",
+     "kana": "さしひかえる",
+     "romaji": "sashihikaeru",
+     "vi": "tạm tránh/không làm khi chưa đủ điều kiện",
+     "ex": "確認まで原因の断定を差し控えます。",
+     "exVi": "Chưa kiểm thì tôi tránh khẳng định nguyên nhân."
+    },
+    {
+     "w": "確定版",
+     "kana": "かくていばん",
+     "romaji": "kakuteiban",
+     "vi": "bản đã chốt trong phạm vi công việc",
+     "ex": "確定版の確認者を示します。",
+     "exVi": "Tôi ghi người kiểm bản chốt."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Ôn văn phong báo cáo với ～において cho bối cảnh, ～ものの/にもかかわらず để giữ tương phản và ～とは限らない để giới hạn. せいで/おかげで mang đánh giá nguyên nhân; không dùng để gán trách nhiệm hoặc công trạng khi chỉ biết trước-sau. Email lịch sự có thể dùng ～しておりました để nhận việc mình làm, お手数ですが…いただけますか để nhờ, ～までにお送りします cho hạn. Lịch sự không được làm mơ hồ hành động cần người nhận thực hiện. Nhãn 確定版 vẫn cần nêu người kiểm và phạm vi chốt, không có nghĩa mọi nguyên nhân đã giải quyết.</p>",
+   "table": [
+    [
+     "Việc trong đính chính",
+     "Mẫu phù hợp"
+    ],
+    [
+     "Nhận lỗi",
+     "単位を誤って記載しておりました"
+    ],
+    [
+     "Rút suy luận",
+     "増加率としての表現を撤回します"
+    ],
+    [
+     "Giới hạn kết luận",
+     "回答者に限った値です"
+    ],
+    [
+     "Nhờ thay bản",
+     "差替版をご使用いただけますか"
+    ],
+    [
+     "Hạn và xác nhận",
+     "十七時までにお送りします。受領をご連絡ください"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "単位を 誤って 記載しておりました。",
+     "vi": "Tôi đã ghi sai đơn vị."
+    },
+    {
+     "t": "延べ件数の 増加を、実人数の 増加と 書いてしまいました。",
+     "vi": "Tôi lỡ viết tăng số lượt thành tăng số người thực."
+    },
+    {
+     "t": "条件が 異なるため、効果の 比較は 差し控えます。",
+     "vi": "Do điều kiện khác, tôi tạm tránh so hiệu quả."
+    },
+    {
+     "t": "お手数ですが、差替版を ご使用いただけますか。",
+     "vi": "Phiền bạn dùng bản thay thế được không?"
+    },
+    {
+     "t": "影響範囲は、配信先と 転送先を 分けて 確認します。",
+     "vi": "Tôi kiểm phạm vi ảnh hưởng tách nơi gửi ban đầu và nơi chuyển tiếp."
+    }
+   ],
+   "tips": [
+    "<p>Không dùng せいで để quy lỗi người kiểm chỉ vì họ đọc sau đó; kiểm trách nhiệm theo bằng chứng.</p>",
+    "<p>おかげで hàm đánh giá có nguyên nhân tích cực, không dùng cho tăng đồng thời chưa giải thích được.</p>",
+    "<p>Đừng chỉ viết xin lỗi bất tiện mà quên bản nào ngừng dùng, bản mới khi nào đến và cần phản hồi gì.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Người soạn phân sai đơn vị với phép tính còn đúng, so khác kỳ/khung giờ và ảnh hưởng chuyển tiếp chưa rõ.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "配信した要約について訂正依頼が来ました。利用者四割増という見出しは、根拠資料と合っていますか。",
+     "vi": "Có yêu cầu sửa bản tóm tắt đã gửi. Tiêu đề người dùng tăng 40% có khớp tài liệu căn cứ không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "件数は七十から九十八で、四割増の計算です。ただ、記録は延べ件数であり、同じ人の再訪を除いていません。",
+     "vi": "Tổng số mục từ 70 lên 98 nên phép tính tăng 40% là đúng. Tuy nhiên đây là tổng lượt, chưa loại những lần cùng người quay lại."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "では、実人数が増えたという表現は撤回する必要がありますね。期間も同じでしょうか。",
+     "vi": "Vậy cần rút câu nói số người thực tăng. Hai khoảng thời gian có giống nhau không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "旧は四週間、新は三週間でした。合計件数は残せますが、同じ期間の増加率としては比べられません。",
+     "vi": "Giai đoạn cũ là bốn tuần, mới là ba tuần. Có thể giữ tổng lượt nhưng không so như mức tăng trong cùng một khoảng thời gian."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "満足九割という文は、どの範囲の結果ですか。全利用者に当てはめていませんか。",
+     "vi": "Câu hài lòng 90% áp dụng cho ai? Có đang gán cho toàn bộ người dùng không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "回答した二十人のうち十八人です。全利用者の人数が未確定なので、全体の回答率もまだ出せません。",
+     "vi": "Đó là 18 trong 20 người trả lời. Chưa đối chiếu xong số người dùng thực nên cũng chưa tính được tỷ lệ trả lời trên toàn bộ người dùng."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "待ち時間は平均十分から七分とあります。短縮したという結論も維持できますか。",
+     "vi": "Bảng ghi thời gian chờ trung bình từ mười xuống bảy phút. Có giữ được kết luận rút ngắn thời gian chờ không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "旧は午前だけ、新は一日分なので比較条件が違います。同じ範囲で再集計するまで効果の断定は控えます。",
+     "vi": "Giai đoạn cũ chỉ có buổi sáng, mới có cả ngày nên điều kiện so khác nhau. Chờ thống kê lại cùng phạm vi rồi mới khẳng định hiệu quả."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "取り急ぎ旧要約の使用を止めてもらい、今日十七時までに差替版を送ると知らせましょう。どの文を直すかも必要です。",
+     "vi": "Trước mắt hãy nhờ ngừng dùng bản tóm tắt cũ và báo sẽ gửi bản thay trước 17 giờ hôm nay. Cũng cần nêu những câu sẽ sửa."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "承知しました。元の記録は削除せず、単位、期間、対象を注記します。因果を述べた一文は撤回と履歴に残します。",
+     "vi": "Tôi hiểu. Không xóa dữ liệu gốc mà ghi rõ đơn vị, khoảng thời gian và đối tượng. Câu khẳng định nguyên nhân được rút lại và giữ trong lịch sử sửa."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "配信先は五人ですが、さらに転送されたかは分かりません。五人だけに影響したとは書かないでください。受信者が会議で使う前に、旧版と差替版の関係を明確に伝える必要があります。",
+     "vi": "Đã gửi trực tiếp cho năm người nhưng chưa biết có được chuyển tiếp không. Xin đừng viết chỉ năm người bị ảnh hưởng. Trước khi người nhận dùng tài liệu ở cuộc họp, cần nói rõ quan hệ giữa bản cũ với bản thay."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。直接の配信先には受領確認と転送の有無をお願いします。返事がないことを、読んでいない証拠にはしません。",
+     "vi": "Vâng. Tôi nhờ những người nhận trực tiếp xác nhận đã nhận và có chuyển tiếp không. Tôi không coi chưa trả lời là bằng chứng chưa đọc."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "再発防止は二人で数を確認するだけでしょうか。今回の問題は計算より、指標の意味と比較条件でしたね。",
+     "vi": "Ngừa tái diễn chỉ cần hai người kiểm con số thôi sao? Vấn đề lần này nằm ở nghĩa của chỉ số và điều kiện so hơn là phép tính."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "その通りです。承認前に分母、単位、期間、抽出条件を見る欄を設けます。今回の訂正と、原因の検証が残ることも分けて記録します。",
+     "vi": "Đúng vậy. Trước chấp thuận sẽ có ô kiểm mẫu số, đơn vị, khoảng thời gian và điều kiện lấy dữ liệu. Cũng ghi riêng lần đính chính với việc kiểm nguyên nhân còn tiếp tục."
+    }
+   ],
+   "qs": [
+    {
+     "q": "四割増の見出しの問題は何ですか。",
+     "o": [
+      "延べ件数を実人数として書き期間も異なった",
+      "七十から九十八の差だけが計算ミス",
+      "全員の満足度がゼロだった"
+     ],
+     "a": 0,
+     "e": "Phép tính tổng từ 70 lên 98 đúng là tăng 40%, nhưng đơn vị là lượt và hai kỳ dài bốn với ba tuần, nên tiêu đề người thực tăng cùng kỳ không đúng."
+    },
+    {
+     "q": "満足九割の対象は誰ですか。",
+     "o": [
+      "全利用者の九割",
+      "配信先五人全員",
+      "回答した二十人のうち十八人"
+     ],
+     "a": 2,
+     "e": "Chỉ 18 trong 20 người trả lời chọn hài lòng. Số người dùng thực chưa chốt nên chưa biết tỷ lệ phản hồi toàn bộ."
+    },
+    {
+     "q": "待ち時間の効果を断定しない理由は何ですか。",
+     "o": [
+      "新期間が必ず悪いから",
+      "午前のみと一日分で比較範囲が違う",
+      "平均は常に無意味だから"
+     ],
+     "a": 1,
+     "e": "Điều kiện lấy thời gian khác nhau: chỉ buổi sáng so với cả ngày. Không phải mọi trung bình vô nghĩa, mà cần so cùng phạm vi."
+    },
+    {
+     "q": "影響範囲について未確認なのは何ですか。",
+     "o": [
+      "転送されたかどうか",
+      "直接五人に配信したこと",
+      "差替版の予定時刻"
+     ],
+     "a": 0,
+     "e": "Đã biết năm người nhận trực tiếp, nhưng chưa biết có chuyển tiếp. Không được dùng số trực tiếp để giới hạn toàn bộ ảnh hưởng."
+    },
+    {
+     "q": "再発防止に追加する確認は何ですか。",
+     "o": [
+      "計算を同じ方法で繰り返すだけ",
+      "記録を全て消すこと",
+      "分母、単位、期間、抽出条件"
+     ],
+     "a": 2,
+     "e": "Vấn đề là ý nghĩa chỉ số và điều kiện đi cùng kết luận, nên kiểm phải bao gồm cả bốn trường chứ không chỉ tính lại."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "【配信済み要約】架空の学習支援室は、新しい受付方法の導入で利用者が四割増え、満足度は九割に達し、平均待ち時間も三割短くなったと報告した。要約は運営班の五人に送られ、その後の会議で使われる予定だった。担当者は根拠資料の合計を確認していたものの、表の注記を本文に残していなかった。数字を短くまとめる際に、何を数え、どの期間を比べたかという条件が消えてしまったのである。\n\n【根拠資料一】旧期間の記録は四週間で七十件、新期間は三週間で九十八件だった。いずれも受け付けた用紙の延べ件数であり、一人が出し直した場合も含まれる。九十八から七十を引いた二十八を七十で割れば四十パーセントになるが、それは異なる期間の合計同士の計算である。実人数の増加を示す値でも、同じ長さの期間における利用率の変化でもない。元の数を残すことと、見出しの解釈を維持することは別である。\n\n【根拠資料二】満足を選んだのは回答者二十人のうち十八人であり、その範囲なら九十パーセントである。しかし、全利用者の実人数をまだ照合していないため、利用者全体に対する回答率は算出できない。回答していない人の反応も不明である。満足九割という表現は、回答者に限定した値として書き直す必要がある。不明な反応を不満に置き換えて慎重な数字にするのも、根拠のない処理である。\n\n【根拠資料三】待ち時間の旧平均は十分、新平均は七分で、数値上の差は三割に当たる。ただし旧資料は午前の記録だけ、新資料は一日分を含んでいた。混雑の程度が違う時間帯を比べている可能性がある。新方式の後で平均が低くなったという並びは確認できても、新方式のおかげで同じ条件の待ち時間が短くなったとは言えない。説明が丁寧であったにもかかわらず、比較条件の注記が欠けていれば、読者は別の意味で受け取ることになる。\n\n【訂正方針】担当者は、全ての数を消すのではなく、延べ件数、期間、回答者の範囲を示した差替版を作ることにした。利用者四割増と、導入によって待ち時間が短縮したという結論は撤回する。満足九割は回答者に限った値として残す。同じ期間と時間帯で再集計できるかを確認し、その作業が終わるまでは比較の効果を差し控える。誤記の訂正と因果関係の検証は別の仕事として記録する。前者が終わったことだけで、全ての原因が解決したとは書かない。\n\n【連絡の範囲】直接の配信先は五人と分かっているが、転送先は未確認である。そこで旧要約の使用を止める依頼を先に送り、差替版を当日十七時までに送ると伝える。受領と転送の有無を知らせてもらい、返信がなければ確認が取れていないと記録する。返事がないから誰も読んでいない、または五人にしか影響していないと考えるのは早い。影響範囲を小さく見せるための言い換えは、訂正の目的に反する。\n\n【再発防止】今回は計算よりも、指標の名前と比較条件を結論に引き継ぐ手順に問題があった。承認に先立って、分母、単位、期間、抽出条件を本文と照合する欄を追加する。確認者は数字が合うかだけでなく、その数字から何を言おうとしているかを見る。担当者が変わっても同じ確認ができるよう、修正履歴には撤回した表現と理由を残す。謝罪を丁寧にすることは大切だが、相手が次に何を使い、何を確認すべきかまで示して初めて、実務上の訂正になると考えた。\n\n【補足】差替版に確定版と名付ける場合も、何を確定したかを明示する。今回確定するのは資料の値と対象を正しく記述したことまでであり、新方式の効果を全て証明したという意味ではない。修正後の文面に未確認の項目があることは、必ずしも作業の失敗ではない。未確認を見える形で残すことが、その後に必要な確認を引き継ぐ条件になる。",
+   "vi": "Bản tóm tắt đã gửi của phòng hỗ trợ giả nói nhờ cách tiếp nhận mới, người dùng tăng 40%, hài lòng đạt 90% và thời gian chờ trung bình giảm 30%. Tài liệu được gửi cho năm người để dùng trong họp. Người soạn kiểm tổng nhưng không giữ ghi chú khi tóm tắt, khiến đơn vị và điều kiện so biến mất.\n\nNguồn thứ nhất: giai đoạn cũ có 70 mục trong bốn tuần, mới có 98 mục trong ba tuần. Cả hai là tổng lượt biểu mẫu, có cả nộp lại. Chênh 28 chia 70 là 40%, nhưng đó là phép tính giữa tổng của hai kỳ khác nhau. Nó không chứng minh số người thực tăng hay tỷ lệ dùng thay đổi trong cùng độ dài. Giữ số gốc khác với giữ cách diễn giải của tiêu đề.\n\nNguồn thứ hai: 18 trong 20 người trả lời chọn hài lòng, nên 90% đúng trong tập ấy. Chưa đối chiếu số người dùng thực nên chưa tính được tỷ lệ trả lời toàn bộ. Cũng chưa biết phản ứng người không trả lời. Phải giới hạn câu hài lòng theo tập người trả lời; không thể tự coi phần thiếu là bất mãn để tạo một số có vẻ thận trọng.\n\nNguồn thứ ba: trung bình cũ mười phút, mới bảy phút, chênh số học là 30%. Nhưng cũ chỉ ghi buổi sáng, mới ghi cả ngày, có thể khác mức đông. Thấy giá trị thấp hơn sau áp dụng không chứng minh nhờ cách mới mà cùng điều kiện chờ ngắn đi. Dù giải thích chi tiết, thiếu ghi chú điều kiện so vẫn khiến người đọc hiểu khác.\n\nPhương án sửa: không xóa mọi số mà làm bản thay ghi rõ tổng lượt, khoảng thời gian và người trả lời. Rút câu người dùng tăng 40% và câu do áp dụng mà chờ ngắn hơn. Giữ 90% theo người trả lời. Kiểm khả năng thống kê lại cùng kỳ và khung giờ; trước khi xong thì chưa so hiệu quả. Sửa thông tin với kiểm chứng nguyên nhân là hai việc riêng, hoàn tất việc đầu không nghĩa mọi nguyên nhân đã được giải quyết.\n\nPhạm vi liên lạc: biết gửi trực tiếp năm người nhưng chưa biết chuyển tiếp. Gửi yêu cầu ngừng dùng trước, báo gửi bản thay chậm nhất 17 giờ hôm ấy. Nhờ xác nhận nhận và có chuyển tiếp không; chưa trả lời thì ghi chưa xác nhận. Im lặng không chứng minh chưa đọc, số gửi ban đầu không chứng minh chỉ từng ấy người bị ảnh hưởng.\n\nNgừa tái diễn: vấn đề chính là giữ tên chỉ số và điều kiện khi đưa vào kết luận. Trước chấp thuận thêm ô đối chiếu mẫu số, đơn vị, kỳ và điều kiện chọn dữ liệu với thân bài. Người kiểm xét cả phép tính và điều đang được suy ra. Lưu câu rút cùng lý do để người tiếp theo kiểm được. Lời xin lỗi chỉ thành đính chính thực tế khi cho người nhận biết nên dùng gì và cần kiểm gì tiếp.\n\nBổ sung: nếu gọi bản đã chốt, cần nói chốt điều gì. Ở đây là mô tả đúng giá trị và đối tượng, chưa phải chứng minh toàn bộ hiệu quả cách mới. Bản sửa còn mục chưa kiểm không nhất thiết là thất bại. Giữ phần ấy nhìn thấy được là điều kiện bàn giao việc cần kiểm sau.",
+   "gloss": [
+    {
+     "w": "配信済み",
+     "kana": "はいしんずみ",
+     "romaji": "haishinzumi",
+     "vi": "đã gửi/phân phối tin"
+    },
+    {
+     "w": "差替版",
+     "kana": "さしかえばん",
+     "romaji": "sashikaeban",
+     "vi": "bản thay thế bản trước"
+    },
+    {
+     "w": "誤記",
+     "kana": "ごき",
+     "romaji": "goki",
+     "vi": "ghi sai/chữ sai"
+    },
+    {
+     "w": "比較条件",
+     "kana": "ひかくじょうけん",
+     "romaji": "hikaku jooken",
+     "vi": "điều kiện để so sánh"
+    },
+    {
+     "w": "根拠資料",
+     "kana": "こんきょしりょう",
+     "romaji": "konkyo shiryoo",
+     "vi": "tài liệu làm căn cứ"
+    },
+    {
+     "w": "影響範囲",
+     "kana": "えいきょうはんい",
+     "romaji": "eikyoo han'i",
+     "vi": "phạm vi chịu ảnh hưởng"
+    }
+   ],
+   "qs": [
+    {
+     "q": "四割の計算から言えないことは何ですか。",
+     "o": [
+      "実人数が同じ期間で四割増えた",
+      "延べ件数の合計は七十と九十八だった",
+      "二十八を七十で割ると四割になる"
+     ],
+     "a": 0,
+     "e": "Phép tính tổng đúng nhưng đơn vị là lượt, hai kỳ dài bốn và ba tuần không cho phép nói người thực cùng kỳ tăng 40%."
+    },
+    {
+     "q": "満足九割の訂正はどうすべきですか。",
+     "o": [
+      "全員の九割とする",
+      "未回答を全員不満として計算し直す",
+      "回答した二十人の範囲に限定して残す"
+     ],
+     "a": 2,
+     "e": "Giữ giá trị đúng 18/20 và nêu tập người trả lời; không gán phản ứng cho những người chưa có thông tin."
+    },
+    {
+     "q": "待ち時間の因果を差し控える理由は何ですか。",
+     "o": [
+      "平均を一切使えない",
+      "午前のみと一日分という比較条件が違う",
+      "計算の引き算が不可能"
+     ],
+     "a": 1,
+     "e": "Khung buổi sáng và cả ngày khác nhau khiến chưa so được hiệu quả cùng điều kiện, không phải phủ nhận mọi phép tính."
+    },
+    {
+     "q": "配信先について確定している範囲は何ですか。",
+     "o": [
+      "直接五人に送ったことだけ",
+      "転送が絶対にないこと",
+      "五人が全員まだ読んでいないこと"
+     ],
+     "a": 0,
+     "e": "Chỉ biết gửi trực tiếp năm người; nơi chuyển tiếp chưa rõ, và im lặng không chứng minh chưa đọc."
+    },
+    {
+     "q": "再発防止で確認者が見るべきものは何ですか。",
+     "o": [
+      "数字の形だけ",
+      "謝罪の長さだけ",
+      "数値と指標名、条件、結論の対応"
+     ],
+     "a": 2,
+     "e": "Cần kiểm tên chỉ số, điều kiện và kết luận có đi cùng số liệu đúng hay không, thay vì chỉ hình thức con số."
+    },
+    {
+     "q": "確定版の名称に関する留意点は何ですか。",
+     "o": [
+      "未確認を全て消す",
+      "何を確定したのかと未確認項目を示す",
+      "全ての効果を証明した意味にする"
+     ],
+     "a": 1,
+     "e": "Bản chốt có phạm vi công việc xác định; không có nghĩa toàn bộ hiệu quả hoặc nguyên nhân đã kiểm xong."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Tóm tắt ba điểm đính chính và việc còn kiểm theo lối báo cáo, không đổ lỗi người khác.",
+     "model": "延べ件数七十件と九十八件を実人数の増加として書いたため、その結論を撤回します。期間も四週間と三週間で異なります。満足九割は回答者二十人中十八人に限定します。待ち時間は旧が午前のみ、新が一日分なので、同じ範囲で再集計するまで効果の断定を控えます。直接五人への配信は確認済みですが、転送は未確認です。訂正と原因検証を分けて引き継ぎたいです。",
+     "vi": "Tôi rút kết luận người thực tăng vì đã viết tổng lượt 70 và 98 thành số người, trong khi kỳ dài bốn và ba tuần. Giới hạn 90% trong 18/20 người trả lời. Chờ cũ chỉ sáng, mới cả ngày nên đợi thống kê cùng phạm vi mới khẳng định hiệu quả. Gửi trực tiếp năm người đã biết, chuyển tiếp chưa biết. Tôi muốn bàn giao riêng đính chính với kiểm nguyên nhân.",
+     "tips": "Nhận lỗi đơn vị và phạm vi của mình; không tự ghi vì ai khác chưa kiểm."
+    },
+    {
+     "p": "Đóng vai gọi cho người nhận: xin dừng bản cũ, báo bản thay17giờ, nhờ xác nhận và hỏi chuyển tiếp, phân biệt lời nhờ với điều đã biết.",
+     "model": "先ほどの要約に単位と比較条件の誤りがありました。申し訳ありませんが、いったん使用を止めていただけますか。本日十七時までに差替版をお送りします。受領後に一言ご連絡いただけますと助かります。また、転送された場合は範囲を教えてください。現時点では直接の配信先以外を確認できておらず、影響が五人だけとは申し上げられません。",
+     "vi": "Bản tóm tắt vừa gửi sai đơn vị và điều kiện so. Xin lỗi, bạn có thể tạm ngừng dùng không? Tôi sẽ gửi bản thay trước 17 giờ hôm nay. Nhờ báo một dòng sau khi nhận và cho biết phạm vi đã chuyển tiếp nếu có. Hiện chưa kiểm ngoài người nhận trực tiếp nên không thể nói chỉ năm người bị ảnh hưởng.",
+     "tips": "Lời nhờ lịch sự phải có hành động cụ thể; không nói đã được dừng dùng khi chưa nhận xác nhận."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết email 320–420 chữ Nhật: xin dừng bản tóm tắt cũ; nhận lỗi đã viết lượt 70/98 thành người trong hai kỳ bốn/ba tuần; 90% chỉ là 18/20 người trả lời; so chờ khác phạm vi; hẹn bản thay 17 giờ; nhờ xác nhận và hỏi chuyển tiếp; giữ nguyên nhân ở trạng thái chưa kiểm.",
+   "model": "運営班の皆様。先ほど配信した要約に、単位と比較条件の誤りがありました。お詫び申し上げます。七十件と九十八件は延べ件数であり、実人数の増加を示すものではありません。期間も四週間と三週間で異なるため、利用者四割増という結論を撤回します。満足九割は回答者二十人中十八人に限定した値です。また、待ち時間は午前のみと一日分を比べていたため、同条件で再集計するまで効果の断定を差し控えます。取り急ぎ旧要約の使用を止めていただけますか。本日十七時までに、対象と条件を注記した差替版をお送りします。受領後のご一報と、転送された場合はその範囲をお知らせいただけますと幸いです。直接の配信先以外は未確認です。今回の訂正と原因の検証は分けて記録し、今後は承認前に分母、単位、期間、抽出条件を照合いたします。",
+   "modelVi": "Kính gửi nhóm vận hành. Bản tóm tắt vừa gửi có lỗi về đơn vị và điều kiện so, tôi xin lỗi. 70 và 98 là tổng lượt, không chứng minh tăng số người thực. Hai kỳ bốn và ba tuần cũng khác nên tôi rút kết luận người dùng tăng 40%. 90% chỉ là 18/20 người trả lời. Thời gian chờ so buổi sáng với cả ngày nên tôi chưa khẳng định hiệu quả trước khi thống kê lại. Trước mắt xin ngừng bản cũ; tôi gửi bản thay có ghi đối tượng và điều kiện chậm nhất 17 giờ hôm nay. Nhờ xác nhận đã nhận và cho biết phạm vi chuyển tiếp. Ngoài người nhận trực tiếp còn chưa kiểm. Tôi ghi riêng đính chính với kiểm nguyên nhân, sau này đối chiếu mẫu số, đơn vị, kỳ và điều kiện lấy dữ liệu trước chấp thuận.",
+   "min": 320,
+   "tips": [
+    "Email cần chỉ rõ bản cũ ngừng dùng và thời hạn bản thay, không chỉ xin lỗi.",
+    "Không hứa đã kiểm hết tác động hoặc nguyên nhân khi nguồn còn thiếu."
+   ],
+   "checklist": [
+    "Nhận đúng lỗi đơn vị và điều kiện so.",
+    "Giữ 90% trong tập 18/20 người trả lời.",
+    "Có hạn 17 giờ và lời nhờ xác nhận, hỏi chuyển tiếp.",
+    "Không nói nguyên nhân đã kiểm hết; có bước ngừa lặp."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “訂正依頼” nghĩa là gì?",
+   "o": [
+    "yêu cầu đính chính",
+    "bỏ sót khi thống kê",
+    "phạm vi chịu ảnh hưởng"
+   ],
+   "a": 0,
+   "e": "訂正依頼には理由を添えます。 → Tôi kèm lý do vào yêu cầu đính chính. Từ cần nhận diện là “訂正依頼”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “配信済み” nghĩa là gì?",
+   "o": [
+    "phạm vi đối tượng",
+    "xác nhận đã nhận",
+    "đã gửi/phân phối tin"
+   ],
+   "a": 2,
+   "e": "この要約は配信済みです。 → Bản tóm tắt này đã gửi. Từ cần nhận diện là “配信済み”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “差替版” nghĩa là gì?",
+   "o": [
+    "ngăn hiểu lầm",
+    "bản thay thế bản trước",
+    "điều kiện để so sánh"
+   ],
+   "a": 1,
+   "e": "差替版の名前を明記します。 → Tôi ghi rõ tên bản thay. Từ cần nhận diện là “差替版”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “誤記” nghĩa là gì?",
+   "o": [
+    "ghi sai/chữ sai",
+    "tài liệu làm căn cứ",
+    "ngừa việc lặp lại"
+   ],
+   "a": 0,
+   "e": "単位の誤記を直します。 → Tôi sửa việc ghi sai đơn vị. Từ cần nhận diện là “誤記”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền giới hạn nguyên nhân: 効果の断定を___。",
+   "a": "差し控えます",
+   "e": "差し控える giữ lại phán đoán khi điều kiện so chưa đủ; không xóa số liệu thô đúng."
+  },
+  {
+   "t": "fill",
+   "q": "Điền rút phát biểu: 実人数の増加という結論を___。",
+   "a": "撤回します",
+   "e": "撤回する dùng cho rút kết luận sai đơn vị, cần nêu rõ câu bị rút."
+  },
+  {
+   "t": "fill",
+   "q": "Điền kính ngữ nhờ: 差替版をご使用___ますか。",
+   "a": "いただけ",
+   "e": "ご使用いただけますか nhờ người nhận dùng bản thay theo lối lịch sự, vẫn có hành động rõ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu gửi bản thay đúng hạn.",
+   "w": [
+    "お送りします。",
+    "本日十七時までに",
+    "差替版を"
+   ],
+   "a": "本日十七時までに差替版をお送りします。",
+   "e": "までに là hạn hoàn tất gửi; bản cần dùng được xác định bằng 差替版."
+  },
+  {
+   "q": "影響範囲として正しい表現はどれですか。",
+   "o": [
+    "直接三人以外はまだ確認していない",
+    "必ず三人だけ",
+    "誰も読んでいない"
+   ],
+   "a": 0,
+   "e": "Số người nhận trực tiếp đã biết là ba, nhưng chuyển tiếp còn chưa kiểm nên không thể nói chỉ ba người bị ảnh hưởng.",
+   "t": "listen",
+   "say": "配信先は三人ですが、転送されたかは未確認です。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "九割という値は何に限定されますか。",
+   "o": [
+    "全利用者",
+    "全担当者",
+    "回答者"
+   ],
+   "a": 2,
+   "e": "Mẫu số là mười người trả lời, nên 90% nằm trong tập ấy; chưa đủ thông tin về toàn bộ người dùng.",
+   "t": "listen",
+   "say": "満足は回答者十人中九人です。全利用者の実人数は未確定です。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "差替版の 受領確認を お願いします。",
+   "a": "差替版の 受領確認を お願いします。",
+   "lang": "ja-JP",
+   "e": "受領確認 là xác nhận nhận bản thay, cần kiểm riêng không suy chỉ gửi xong là người kia có."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "集計漏れ",
+     "bỏ sót khi thống kê"
+    ],
+    [
+     "対象範囲",
+     "phạm vi đối tượng"
+    ],
+    [
+     "比較条件",
+     "điều kiện để so sánh"
+    ],
+    [
+     "根拠資料",
+     "tài liệu làm căn cứ"
+    ],
+    [
+     "影響範囲",
+     "phạm vi chịu ảnh hưởng"
+    ]
+   ],
+   "e": "訂正依頼 là yêu cầu sửa, 配信済み là đã gửi, 差替版 là bản thay, 誤記 là ghi sai và 集計漏れ là bỏ sót khi đếm; sửa đúng loại cần căn cứ khác nhau."
+  },
+  {
+   "q": "四割の計算から言えないことは何ですか。",
+   "o": [
+    "実人数が同じ期間で四割増えた",
+    "延べ件数の合計は七十と九十八だった",
+    "二十八を七十で割ると四割になる"
+   ],
+   "a": 0,
+   "e": "Phép tính tổng đúng nhưng đơn vị là lượt, hai kỳ dài bốn và ba tuần không cho phép nói người thực cùng kỳ tăng 40%.",
+   "t": "mc"
+  },
+  {
+   "q": "満足九割の訂正はどうすべきですか。",
+   "o": [
+    "回答した二十人の範囲に限定して残す",
+    "全員の九割とする",
+    "未回答を全員不満として計算し直す"
+   ],
+   "a": 0,
+   "e": "Giữ giá trị đúng 18/20 và nêu tập người trả lời; không gán phản ứng cho những người chưa có thông tin.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Tạo bản tóm tắt giả với 40%/90%/30% và bảng 70/98 lượt trong bốn/ba tuần, 18/20 người trả lời, mười/bảy phút ở khung giờ khác nhau; không dùng báo cáo thật.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Đọc tóm tắt đã gửi và chỉ câu nào dữ liệu thô còn đúng nhưng diễn giải vượt phạm vi."
+   },
+   {
+    "t": "30'",
+    "do": "Ôn văn phong báo cáo, nguyên nhân có đánh giá và email lịch sự; phân số học với tên chỉ số và điều kiện."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe rà lỗi, lập ba nhóm giữ dữ liệu/rút kết luận/chờ kiểm, ghi hạn thay cùng việc người nhận cần làm."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc tám phần văn bản, đối chiếu nguồn, ảnh hưởng đã biết/chưa biết và trách nhiệm kiểm trước duyệt."
+   },
+   {
+    "t": "30'",
+    "do": "Gọi mô phỏng cho người nhận rồi viết email 320–420 chữ; bạn học kiểm bản, hạn và phản hồi cần người nhận thực hiện."
+   },
+   {
+    "t": "30'",
+    "do": "Đóng vai bàn giao kiểm duyệt, làm nghe và chính tả rồi phân biệt đính chính đã xong với nguyên nhân còn đang kiểm."
+   }
+  ],
+  "games": [
+   "Mỗi nhóm giữ một nguồn có lỗi phạm vi khác nhau, phải hợp lại thành email không xóa dữ liệu đúng.",
+   "Một vai là người đã chuyển tiếp, vai kia phải hỏi phạm vi mà không tự giới hạn số người từ số gửi ban đầu."
+  ],
+  "errors": [
+   "Thấy phép tính 40% đúng rồi cho tiêu đề người dùng đúng: kiểm lại đơn vị lượt/người và độ dài hai kỳ.",
+   "Gán người chưa trả lời thành bất mãn để thận trọng: giữ trạng thái chưa biết cho tới khi có căn cứ.",
+   "Nhờ thay bản nhưng thiếu tên bản hoặc hạn: thêm 差替版 và thời điểm gửi để người nhận hành động được.",
+   "Ghi đã khắc phục hết vì sửa thông tin xong: tách đính chính với công việc kiểm nguyên nhân."
+  ],
+  "homework": "Tạo một tóm tắt giả có hai lỗi phạm vi, giữ bảng dữ liệu đúng; viết email xin thay bản và phiếu bàn giao việc đã sửa với việc còn phải kiểm."
+ }
+}

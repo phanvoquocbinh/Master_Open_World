@@ -1,0 +1,765 @@
+{
+ "no": 15,
+ "title": "Ôn tập tổng hợp 2 – Hồ sơ nhiều nguồn và thương lượng một quyết định tạm",
+ "sub": "延べ件数は 増えたとはいえ、実人数は 未照合です。",
+ "goals": [
+  "Tổng hợp số liệu, phản hồi và biên bản mà không làm mất khác biệt về đối tượng hoặc tiêu chí.",
+  "Thương lượng phạm vi thử, nguồn lực và người có trách nhiệm khi chưa đủ căn cứ dài hạn.",
+  "Dùng sắc thái N1 phân thừa nhận, cảnh báo, ràng buộc và bảo lưu.",
+  "Viết kết luận 420–550 chữ có bảng điều đã biết, giả thuyết và điều kiện tái xét trong nội dung."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Bài cuối N1 đặt người học vào cuộc thương lượng của một kho tư liệu cộng đồng giả. Có số lượt nhận tăng, người bị từ chối, nơi bảo quản chưa kiểm và đối tác mới chỉ được hỏi. Kết luận cần làm được trong ràng buộc hiện tại, đồng thời không gọi tạm dừng là rút hẳn hay lời hứa là nguồn lực chắc chắn. Người học phải chọn từ theo mức bằng chứng và nêu điều kiện thay quyết định, không chỉ ghép nhiều cấu trúc khó.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>折衝 đọc せっしょう, っ trước sh và しょう dài; 交渉 đọc こうしょう có hai trường âm. 妥結 đọc だけつ không có nhịp ngắt, 暫定合意 đọc ざんていごうい. Trong 不可逆 đọc ふかぎゃく giữ ぎゃ ghép một mora, khác chuỗi ぎや. Khi bàn điều kiện thương lượng, đọc cụm 条件が整うまでは thành một khối để người nghe không tách hạn chế khỏi lời hứa.</p>",
+   "items": [
+    {
+     "sym": "折衝・交渉・妥結",
+     "ex": [
+      "せっしょう",
+      "こうしょう",
+      "だけつ"
+     ],
+     "vi": "Hai cách đọc có nhịp ngắt hoặc trường âm khác nhau; đừng đọc tất cả theo cùng nhịp vì cùng nghĩa thương lượng."
+    },
+    {
+     "sym": "暫定合意・不可逆",
+     "ex": [
+      "ざんていごうい",
+      "ふかぎゃく"
+     ],
+     "vi": "Giữ chuỗi nguyên âm và chữ ghép trong từ chỉ mức cam kết, vì đó là phần quyết phạm vi quyết định."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "折衝",
+     "kana": "せっしょう",
+     "romaji": "sesshoo",
+     "vi": "thương lượng giữa các bên khác điều kiện",
+     "ex": "条件を整理して折衝します。",
+     "exVi": "Tôi thương lượng sau khi sắp điều kiện."
+    },
+    {
+     "w": "交渉経緯",
+     "kana": "こうしょうけいい",
+     "romaji": "kooshoo keii",
+     "vi": "diễn biến thương lượng",
+     "ex": "交渉経緯を時刻順に残します。",
+     "exVi": "Tôi giữ diễn biến theo thứ tự giờ."
+    },
+    {
+     "w": "妥結",
+     "kana": "だけつ",
+     "romaji": "daketsu",
+     "vi": "đạt thỏa thuận ở các điều đã xác định",
+     "ex": "妥結した範囲だけを公表します。",
+     "exVi": "Tôi chỉ công bố phạm vi đã thỏa thuận."
+    },
+    {
+     "w": "暫定合意",
+     "kana": "ざんていごうい",
+     "romaji": "zantei gooi",
+     "vi": "thỏa thuận tạm có điều kiện",
+     "ex": "暫定合意には期限があります。",
+     "exVi": "Thỏa thuận tạm có thời hạn."
+    },
+    {
+     "w": "実施主体",
+     "kana": "じっししゅたい",
+     "romaji": "jisshi shutai",
+     "vi": "bên thực hiện hoạt động",
+     "ex": "実施主体の承諾を確認します。",
+     "exVi": "Tôi kiểm sự nhận việc của bên làm."
+    },
+    {
+     "w": "条件成就",
+     "kana": "じょうけんじょうじゅ",
+     "romaji": "jooken jooju",
+     "vi": "việc điều kiện đã được đáp ứng",
+     "ex": "条件成就を別欄で記録します。",
+     "exVi": "Tôi ghi điều kiện đủ ở cột riêng."
+    },
+    {
+     "w": "未確約",
+     "kana": "みかくやく",
+     "romaji": "mikakuyaku",
+     "vi": "chưa được cam kết chắc",
+     "ex": "代替先の協力は未確約です。",
+     "exVi": "Hỗ trợ nơi thay chưa được cam kết."
+    },
+    {
+     "w": "不履行",
+     "kana": "ふりこう",
+     "romaji": "furikoo",
+     "vi": "không thực hiện điều đã nhận",
+     "ex": "不履行と未承諾を混同しません。",
+     "exVi": "Tôi không trộn không làm điều đã nhận với chưa nhận."
+    },
+    {
+     "w": "救済策",
+     "kana": "きゅうさいさく",
+     "romaji": "kyuusaisaku",
+     "vi": "cách hỗ trợ người chịu bất lợi",
+     "ex": "利用できない人への救済策を検討します。",
+     "exVi": "Tôi xét cách hỗ trợ người không dùng được."
+    },
+    {
+     "w": "代替経路",
+     "kana": "だいたいけいろ",
+     "romaji": "daitai keiro",
+     "vi": "kênh thay thế",
+     "ex": "代替経路の担当を決めます。",
+     "exVi": "Tôi chốt người ở kênh thay."
+    },
+    {
+     "w": "利害調整",
+     "kana": "りがいちょうせい",
+     "romaji": "rigai choosei",
+     "vi": "điều chỉnh lợi ích và gánh nặng giữa bên",
+     "ex": "利害調整を人数だけで判断しません。",
+     "exVi": "Tôi không xét cân lợi ích chỉ bằng số người."
+    },
+    {
+     "w": "説明可能性",
+     "kana": "せつめいかのうせい",
+     "romaji": "setsumei kanoosei",
+     "vi": "khả năng giải thích được căn cứ",
+     "ex": "説明可能性を記録で支えます。",
+     "exVi": "Tôi dùng ghi nhận hỗ trợ khả năng giải thích."
+    },
+    {
+     "w": "可視化",
+     "kana": "かしか",
+     "romaji": "kashika",
+     "vi": "làm điều kiện/thông tin nhìn thấy được",
+     "ex": "未確認の条件を可視化します。",
+     "exVi": "Tôi làm rõ điều kiện chưa kiểm."
+    },
+    {
+     "w": "撤回条件",
+     "kana": "てっかいじょうけん",
+     "romaji": "tekkai jooken",
+     "vi": "điều kiện rút một đề xuất/quyết định",
+     "ex": "撤回条件を開始前に決めます。",
+     "exVi": "Tôi định điều kiện rút trước bắt đầu."
+    },
+    {
+     "w": "再審議",
+     "kana": "さいしんぎ",
+     "romaji": "saishingi",
+     "vi": "bàn xét lại có căn cứ mới",
+     "ex": "資料が加われば再審議します。",
+     "exVi": "Thêm nguồn thì bàn xét lại."
+    },
+    {
+     "w": "不可逆",
+     "kana": "ふかぎゃく",
+     "romaji": "fukagyaku",
+     "vi": "không dễ hoặc không thể đảo lại",
+     "ex": "不可逆な変更は後に回します。",
+     "exVi": "Tôi để thay đổi không dễ đảo về sau."
+    },
+    {
+     "w": "持続可能性",
+     "kana": "じぞくかのうせい",
+     "romaji": "jizoku kanoosei",
+     "vi": "khả năng duy trì trong điều kiện nêu",
+     "ex": "持続可能性は短期件数だけで分かりません。",
+     "exVi": "Không biết khả năng duy trì chỉ từ lượt ngắn hạn."
+    },
+    {
+     "w": "共同責任",
+     "kana": "きょうどうせきにん",
+     "romaji": "kyoodoo sekinin",
+     "vi": "trách nhiệm chung được phân vai rõ",
+     "ex": "共同責任でも役割を明記します。",
+     "exVi": "Dù trách nhiệm chung vẫn ghi vai rõ."
+    },
+    {
+     "w": "論点整理",
+     "kana": "ろんてんせいり",
+     "romaji": "ronten seiri",
+     "vi": "sắp điểm tranh luận theo câu hỏi",
+     "ex": "論点整理で異論の場所を示します。",
+     "exVi": "Tôi chỉ chỗ ý khác khi sắp điểm bàn."
+    },
+    {
+     "w": "主張限定",
+     "kana": "しゅちょうげんてい",
+     "romaji": "shuchoo gentei",
+     "vi": "giới hạn mức khẳng định",
+     "ex": "主張限定で残る成果を示します。",
+     "exVi": "Tôi chỉ thành quả còn lại bằng giới hạn khẳng định."
+    },
+    {
+     "w": "資料照合",
+     "kana": "しりょうしょうごう",
+     "romaji": "shiryoo shoogoo",
+     "vi": "đối chiếu giữa các nguồn",
+     "ex": "資料照合の単位をそろえます。",
+     "exVi": "Tôi thống nhất đơn vị khi so nguồn."
+    },
+    {
+     "w": "議論再開",
+     "kana": "ぎろんさいかい",
+     "romaji": "giron saikai",
+     "vi": "mở lại thảo luận theo điều kiện",
+     "ex": "議論再開の日を決めます。",
+     "exVi": "Tôi chốt ngày mở lại thảo luận."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Ôn toàn cấp bằng chức năng: とはいえ/ながらも công nhận mà giữ giới hạn; に限らず mở phạm vi; を除いて nêu ngoại lệ; にほかならない khẳng định mạnh cần căn cứ; おそれがある/かねない cảnh báo khả năng chứ không coi đã xảy ra. とされる phải giữ nguồn; というより tái định khung mà giữ dữ kiện; ざるを得ない chỉ ràng buộc hiện tại. までもない không bỏ xác nhận tối thiểu, に足る gắn mục đích xét. Trong thương lượng, dùng 条件が整えば…、整うまでは… để biến bảo lưu thành bước vận hành kiểm được.</p>",
+   "table": [
+    [
+     "Lớp thông tin",
+     "Mẫu giữ phạm vi"
+    ],
+    [
+     "Sự việc",
+     "記録上は延べ件数が増えた"
+    ],
+    [
+     "Đánh giá nguồn",
+     "運営班では成果とされる"
+    ],
+    [
+     "Khả năng rủi ro",
+     "担当が偏れば継続を損ないかねない"
+    ],
+    [
+     "Ràng buộc hiện tại",
+     "点検済みの場所がなく停止せざるを得ない"
+    ],
+    [
+     "Điều kiện đổi",
+     "代替先が承諾すれば再審議する"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "延べ件数は 増えたとはいえ、実人数は 未照合です。",
+     "vi": "Dù tổng lượt tăng, số người thực chưa đối chiếu."
+    },
+    {
+     "t": "協力は 依頼中であり、確約されたわけではありません。",
+     "vi": "Hỗ trợ đang được nhờ, chưa được cam kết."
+    },
+    {
+     "t": "一人に 負担が 偏れば、継続を 損ないかねません。",
+     "vi": "Nếu tải dồn một người, có thể làm hại khả năng duy trì."
+    },
+    {
+     "t": "不可逆な 変更を 急ぐまでもなく、暫定の 経路を 試せます。",
+     "vi": "Không cần vội thay đổi khó đảo, có thể thử kênh tạm."
+    },
+    {
+     "t": "条件が 整うまでは、長期の 実施を 約束しません。",
+     "vi": "Chưa đủ điều kiện thì không hứa thực hiện dài hạn."
+    }
+   ],
+   "tips": [
+    "<p>Đừng gọi đối tác không thực hiện khi họ chưa nhận cam kết; 未承諾 khác 不履行.</p>",
+    "<p>Cảnh báo かねない không chứng minh rủi ro đã xảy ra; hỏi dấu hiệu và tác động cần theo.</p>",
+    "<p>Trách nhiệm chung không nghĩa không ai có nhiệm vụ cụ thể; tên vai và quyền quyết phải rõ.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Cuộc thương lượng tách tăng sử dụng với bảo quản, nhận mới với xem cũ, kế hoạch với nguồn lực đã nhận; nghe điều kiện để có quyết định sửa được.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "最後の協議では、受付拡大と保管不足を同じ判断としてまとめたいと思います。件数は増えたので成功、それゆえ受入れは続ける、という案です。",
+     "vi": "Tôi muốn gộp mở rộng tiếp nhận và thiếu chỗ vào một quyết định: lượt tăng là thành công, vì vậy cứ nhận."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "その結論では、利用の評価から保管の条件へ飛躍しています。増えたのは延べ件数で、再送を除いた実人数はまだ確認していません。",
+     "vi": "Kết luận nhảy từ đánh giá dùng sang điều kiện bảo quản. Tăng là lượt, người thực loại gửi lại chưa kiểm."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "一方、保管担当は点検済みの棚が満杯なので止めざるを得ないと言っています。利用者の希望より内部の都合を優先するのでしょうか。",
+     "vi": "Người bảo quản nói kệ đã kiểm đầy nên buộc dừng. Có phải ưu tiên tiện nội bộ hơn nhu cầu người dùng không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "保管条件は資料を預かる目的の一部です。希望を軽く見るのではなく、新規だけ二週間止め、既存の閲覧と問い合わせを続ける案を検討しています。",
+     "vi": "Điều kiện bảo quản là một phần mục đích giữ tư liệu. Không coi nhẹ nhu cầu mà xét dừng nhận mới hai tuần, vẫn cho xem cũ và hỏi."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "代替の施設へ頼んだので、そこへ移せばよいという意見もあります。まだ返事はありませんが、以前も手伝ってくれました。",
+     "vi": "Có ý đã nhờ nơi thay thì chuyển đó. Chưa trả lời nhưng trước từng giúp."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "過去の協力は検討に足る材料ですが、今回の承諾ではありません。未確約を不履行と書かず、依頼と引受を分けて記録しましょう。",
+     "vi": "Từng giúp là nguồn đáng xét, không phải nhận lần này. Đừng viết chưa hứa thành không làm, hãy tách nhờ/nhận."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "夕方しか来られない人の手紙もあります。この一通を理由に、全体の受入れ方針を変更する必要がありますか。",
+     "vi": "Có thư người chỉ đến chiều. Một thư có cần đổi toàn chính sách nhận không?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "一通から全体の反応は分かりません。ただ、全員に経路があるという主張は限定すべきです。本人ならではの経験を、代替経路の検討に使えます。",
+     "vi": "Một thư chưa biết toàn phản ứng nhưng cần hạn khẳng định ai cũng có kênh. Trải nghiệm riêng giúp xét kênh thay."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "では、棚の点検が終われば自動再開し、夕方の受付も恒久的に設けるという妥結でどうでしょう。二つの条件を一度に解けます。",
+     "vi": "Vậy kiểm kệ xong tự mở, lập nhận chiều vĩnh viễn được không? Giải hai điều kiện một lượt."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "点検終了と夕方の担当は別です。前者が整っても後者の人員は増えません。二つの判断を分け、整った条件の範囲だけ再開する必要があります。",
+     "vi": "Kiểm xong và người trực chiều khác. Đủ cái trước chưa tăng người sau. Cần tách quyết, chỉ mở lại phạm vi điều kiện đủ."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "暫定合意を、停止範囲、問い合わせ窓口、点検担当、代替先の回答期限、再審議日という五項目に分ける案ですね。共同責任でも実施主体を明記します。",
+     "vi": "Vậy thỏa thuận tạm chia năm mục: phần dừng, chỗ hỏi, người kiểm, hạn nơi thay trả lời, ngày xét lại. Trách nhiệm chung vẫn nêu bên làm."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。再開と拡大の撤回条件も別にします。照合待ちや負荷が次の利用を妨げれば拡大を止め、資料の保管条件は最低限守ります。",
+     "vi": "Vâng. Điều kiện rút mở lại và tăng cũng riêng. Chờ đối chiếu/tải cản lượt sau thì ngừng tăng, giữ tối thiểu bảo quản."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "公表文には、成功とされるの主体を運営班とし、件数、個別経験、保管条件を別々に示します。全て決着したという見出しは避けます。未確認を本文から隠すと、次の担当が確定した合意と読み違えるおそれがあります。",
+     "vi": "Công bố ghi nguồn coi thành công là vận hành, tách lượt, trải nghiệm riêng, điều kiện bảo quản; tránh tiêu đề mọi thứ xong. Nếu giấu mục chưa kiểm khỏi nội dung chính, người tiếp theo có thể đọc nhầm thành thỏa thuận đã chốt đủ."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "それなら異論を残したままでも実施可能です。誰が何を確かめ、どの条件で議論を再開するかを共有することが、今回の合意の射程になります。合意した内容の価値を守るためにも、その限界を同じ文書で伝えます。",
+     "vi": "Như vậy còn ý khác vẫn làm được. Phạm vi đồng thuận lần này là chia ai kiểm gì và điều kiện mở lại bàn, không phải đồng ý mọi đánh giá. Để giữ giá trị của nội dung đã thống nhất, cũng cần nêu giới hạn trong cùng văn bản."
+    }
+   ],
+   "qs": [
+    {
+     "q": "最初の案の飛躍は何ですか。",
+     "o": [
+      "利用件数の評価から保管条件の充足を導いた",
+      "件数が一切存在しなかった",
+      "全員の不満が証明された"
+     ],
+     "a": 0,
+     "e": "Số dùng tăng không chứng minh chỗ bảo quản đủ, hai quyết dựa điều kiện khác."
+    },
+    {
+     "q": "過去の協力について正しい扱いはどれですか。",
+     "o": [
+      "今回も確約済みとする",
+      "今回の不履行とする",
+      "今回の承諾と分ける"
+     ],
+     "a": 2,
+     "e": "Lịch sử hợp tác có giá trị tham khảo, chưa là cam kết hiện tại hay vi phạm."
+    },
+    {
+     "q": "手紙の役割は何ですか。",
+     "o": [
+      "全方針を自動変更する",
+      "普遍的な経路の主張を限定し改善案を検討する",
+      "全体反応を計算する"
+     ],
+     "a": 1,
+     "e": "Một trải nghiệm riêng giúp kiểm khẳng định mọi người, không tự đo hoặc bắt thay toàn bộ."
+    },
+    {
+     "q": "棚の点検終了は何を自動的に満たしませんか。",
+     "o": [
+      "夕方の人員条件",
+      "点検が終了したという事実",
+      "棚の確認項目"
+     ],
+     "a": 0,
+     "e": "Điều kiện chỗ và người trực chiều độc lập, không dùng giải một để hứa mọi chức năng."
+    },
+    {
+     "q": "暫定合意の射程は何ですか。",
+     "o": [
+      "全評価に異論が消えた",
+      "全活動を永久停止する",
+      "実施主体と確認条件、再審議の道筋を共有する"
+     ],
+     "a": 2,
+     "e": "Thỏa thuận vận hành có thể tồn tại dù còn bất đồng giá trị, nếu phạm vi và điều kiện rõ."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "【統計資料】架空の地域資料室では、申込用紙の延べ件数が前期より増加した。共通番号で再送を除く作業はまだ終わっておらず、実人数は未確定である。運営班の要約は、件数の増加から利用拡大の成果と評価しているが、全ての希望者が利用できたかまでは調査していない。数値が正しい範囲は用紙の受信回数であり、それを人数や機会の広がりへ移すには別の確認が必要になる。\n\n【個別経験】夕方しか来られなかった人は、受付が閉じていて申込みを諦めたと手紙に書いた。この語りは本人ならではの経験を示すが、全利用者の不満を代表するものではない。一方、全員に同じ機会があったという命題に対しては反例になり得る。運営班は、手紙を書かなかった人の沈黙を賛成と数えないこと、個別の希望を全員の希望としないことを確認した。\n\n【保管状況】点検済みの棚は満杯に近く、新しい場所の温度と出入りの手順は未確認である。保管担当は、新規受入れだけを二週間止めざるを得ないと提案した。既存資料の閲覧と問い合わせは続ける。その判断は現時点の実行可能な条件の下でのものであり、全活動から撤退するという意味ではない。未使用の部屋があることだけでは、資料を直ちに置けるとまでは言えない。\n\n【代替先への依頼】別の架空施設へ保管の協力を頼んだが、今回の返事はまだない。以前に協力した経緯はあるものの、今回も引き受ける確約にはならない。依頼中の案を実施可能な代替として数えれば、条件を過大評価することになる。相手が未承諾である段階を不履行と表現するのも誤りである。受け入れる数量と期間、移す担当が確認されて初めて、具体的な選択として比較できる。\n\n【初回の協議】運営担当は、件数が増えたのだから受入れを続けるべきだと主張した。保管担当は、条件を守れなければ資料を預かる目的を損ないかねないと応じた。両者の対立は、利用者を大切にするか内部の都合を優先するかという二者択一に見えた。しかし、資料を適切に保管することも、利用者の希望を支える条件の一部である。目的の違いだけでなく、判断している対象が新規受入れ、既存閲覧、夕方の経路と異なることを整理する必要があった。\n\n【判断の切り分け】新しい棚の点検が終われば、保管に関する条件は変わる。しかし、それによって夕方の受付担当が確保されるわけではない。逆に夕方に人を置けても、未点検の場所へ資料を移す根拠にはならない。条件の一つが整ったことから、全ての活動を自動再開するという合意はできない。成立した条件に応じて、実施する範囲を段階的に変える必要がある。\n\n【暫定合意】最終の協議では、五つの項目に分けて妥結した。新規受入れの一時停止、既存閲覧と問い合わせの継続、新場所を点検する担当、代替先へ返事を求める期限、二週間後の再審議日である。共同責任という語だけでは、誰が何をするかは明らかにならない。各項目に実施主体と引受の確認を置き、未承諾の項目はそのまま見える形にした。合意したことと、条件が成就したことも別の欄で記録する。\n\n【再審議の条件】点検が終わるか、代替先の承諾と移動担当がそろえば、二週間を待たずに議論を再開する。期限が来ても条件が整わなければ、自動再開とはしない。拡大した経路で照合待ちが次の利用を妨げる場合は、拡大を一度撤回して分担を見直す。不可逆な変更を急ぐまでもなく、小さい可逆的な対応を選ぶことで、追加資料を待つ間にも限定した行動はできる。\n\n【公表文】対外的な説明では、成果とされるのは運営班の評価だと明示し、延べ件数と個別経験と保管条件を分けた。数値を残すことと、因果や全体の代表性を断定することは別である。不人気というより参加経路の制約を問うべきだという再定位も、入った人の行動を消すためではない。どの問いには今の資料が足り、どの問いには追加確認が必要かを示すためである。\n\n【残る不一致】運営担当は長い停止による利用機会の喪失を懸念し、保管担当は人員の偏りを懸念した。この不一致は妥結後も残った。それでも、両者は何を記録すれば次の判断に役立つかでは一致した。断った相談の件数だけでなく、希望した時間、案内した代替、対応できなかった条件を可能な範囲で残す。担当者の準備と引き継ぎの時間も記録し、一方の負担が数字の外へ移らないようにする。\n\n【評価の扱い】一つの指標で成功を確定しないからといって、全ての成果を疑わしいものにする必要はない。延べ件数が増え、ある人の語りを記録できたことは、その範囲で残せる。初回にしては丁寧だという講評も感想として保存できるが、採否を決める基準とは分ける。当事者ならではの経験を尊重しながらも、他の当事者の声がないことを同じ経験だったという証明にはしない。\n\n【結論】今回の妥結は、全員が同じ評価を持ったという合意ではなく、確認と再判断の道筋を共有した暫定合意である。誰が何を確認し、条件が変わればどの範囲を見直すかを明示した。資料の不足を隠して強い結論を作るのでも、不確実性がある限り決めないのでもない。根拠のある範囲で実施し、その射程と撤回条件を残すことで、責任を持って修正できる判断を次の担当へ渡そうとしたのである。",
+   "vi": "Thống kê phòng giả cho thấy tổng lượt biểu mẫu tăng. Chưa loại gửi lại nên người thực chưa chốt. Vận hành coi đó là thành quả mở rộng nhưng chưa hỏi mọi người muốn có dùng được không. Số đúng theo lần nhận giấy, muốn nói người/cơ hội cần kiểm khác.\n\nThư một người chỉ đến chiều kể quầy đóng nên bỏ đăng ký. Nét riêng không đại diện bất mãn mọi người nhưng có thể phản ví dụ cơ hội như nhau. Không tính im lặng là tán thành, cũng không mở mong muốn riêng thành tất cả.\n\nKệ đã kiểm gần đầy, chỗ mới chưa kiểm nhiệt và trình tự ra vào. Phụ trách đề xuất buộc dừng mới hai tuần, vẫn xem cũ/hỏi. Đây là theo điều kiện làm được hiện tại, không rút hết hoạt động. Phòng trống chưa nghĩa đặt ngay.\n\nNơi giả khác được nhờ giữ, chưa đáp. Trước giúp không thành chắc nhận lần này. Tính đang nhờ là nguồn lực làm được sẽ phóng đại điều kiện, gọi chưa nhận là không thực hiện cũng sai. Cần lượng/kỳ/người chuyển rõ mới so cách thực tế.\n\nHọp đầu: vận hành nói lượt tăng nên nhận tiếp; bảo quản cảnh báo không giữ điều kiện có thể hại mục đích. Có vẻ chọn người dùng hay tiện nội bộ, nhưng bảo quản đúng cũng hỗ trợ nguyện vọng. Cần sắp cả đối tượng quyết khác: nhận mới, xem cũ, kênh chiều.\n\nKiểm kệ xong đổi điều kiện bảo quản nhưng chưa có người chiều. Có người chiều cũng không làm căn cứ chuyển chỗ chưa kiểm. Không từ đủ một điều suy tự mở mọi hoạt động; đổi phạm vi theo điều kiện đã đủ.\n\nThỏa thuận tạm có năm mục: dừng mới, tiếp xem/hỏi, người kiểm nơi mới, hạn nơi thay đáp, ngày xét lại hai tuần. Trách nhiệm chung chưa rõ ai làm gì, nên mỗi mục có bên làm/nhận việc; chưa nhận để rõ. Đồng ý kế hoạch khác điều kiện đã đủ, ghi riêng.\n\nKiểm xong hoặc nơi thay/người chuyển đủ thì xét sớm. Đến hạn thiếu điều kiện không tự mở. Nếu kênh tăng gây chờ đối chiếu cản người sau thì rút tăng, xét phân công. Chọn cách nhỏ dễ đảo thay vì vội đổi không đảo cho phép hành động hẹp khi chờ nguồn.\n\nCông bố gắn đánh giá thành quả với vận hành, tách lượt/trải nghiệm/bảo quản. Giữ số khác khẳng định nhân quả/đại diện. Đổi khung sang kênh hơn mức thích không xóa hành vi người vào, mà nói câu hỏi nào đủ nguồn, câu nào cần thêm.\n\nBất đồng còn: vận hành lo mất cơ hội vì dừng lâu, bảo quản lo lệch nhân lực. Họ cùng nhận cần ghi gì cho quyết sau: không chỉ số hỏi bị từ chối mà giờ muốn, cách thay đã chỉ, điều kiện chưa đáp ứng; cả chuẩn bị/bàn giao để tải không chuyển ngoài số.\n\nKhông chốt thành công bằng một chỉ số không nghĩa nghi mọi thành quả. Giữ lượt tăng/lời một người theo phạm vi, lời khen công phu so lần đầu như cảm tưởng khác chuẩn chọn. Tôn trọng riêng nhưng thiếu tiếng khác không chứng họ giống.\n\nThỏa thuận không nghĩa mọi người cùng đánh giá, mà chia đường kiểm/quyết lại. Rõ ai kiểm gì, đổi điều kiện thì xét phạm vi nào. Không giấu thiếu để kết mạnh, cũng không chưa chắc là không quyết. Làm trong phạm vi căn cứ, giữ tầm/điều kiện rút để người sau sửa có trách nhiệm.",
+   "gloss": [
+    {
+     "w": "妥結",
+     "kana": "だけつ",
+     "romaji": "daketsu",
+     "vi": "đạt thỏa thuận ở các điều đã xác định"
+    },
+    {
+     "w": "暫定合意",
+     "kana": "ざんていごうい",
+     "romaji": "zantei gooi",
+     "vi": "thỏa thuận tạm có điều kiện"
+    },
+    {
+     "w": "実施主体",
+     "kana": "じっししゅたい",
+     "romaji": "jisshi shutai",
+     "vi": "bên thực hiện hoạt động"
+    },
+    {
+     "w": "不履行",
+     "kana": "ふりこう",
+     "romaji": "furikoo",
+     "vi": "không thực hiện điều đã nhận"
+    },
+    {
+     "w": "撤回条件",
+     "kana": "てっかいじょうけん",
+     "romaji": "tekkai jooken",
+     "vi": "điều kiện rút một đề xuất/quyết định"
+    },
+    {
+     "w": "再審議",
+     "kana": "さいしんぎ",
+     "romaji": "saishingi",
+     "vi": "bàn xét lại có căn cứ mới"
+    }
+   ],
+   "qs": [
+    {
+     "q": "統計資料で未確定のものは何ですか。",
+     "o": [
+      "再送を除いた実人数",
+      "延べ件数が増えたという記録",
+      "運営班が成果と評価したこと"
+     ],
+     "a": 0,
+     "e": "Đã biết số lượt và đánh giá nguồn, chưa đối chiếu người thực."
+    },
+    {
+     "q": "代替先への依頼で区別すべきことは何ですか。",
+     "o": [
+      "用紙の色と文字数",
+      "全員の不満と全員の賛成だけ",
+      "過去の協力、現在の依頼、今回の承諾"
+     ],
+     "a": 2,
+     "e": "Ba trạng thái liên quan nhưng không thay cho nhau hoặc thành vi phạm chưa nhận."
+    },
+    {
+     "q": "保管条件と夕方担当の関係は何ですか。",
+     "o": [
+      "夕方担当がいれば点検は不要",
+      "一方が整っても他方は自動的に満たされない",
+      "点検が終われば人員も必ず増える"
+     ],
+     "a": 1,
+     "e": "Điều kiện độc lập cần quyết theo từng phạm vi thay vì tự mở tất cả."
+    },
+    {
+     "q": "暫定合意で別欄にしたものは何ですか。",
+     "o": [
+      "合意したことと条件が実際に成就したこと",
+      "全ての感想と全ての人数を同一化",
+      "過去の依頼だけ"
+     ],
+     "a": 0,
+     "e": "Chọn kế hoạch khác có nguồn lực thực hiện, cần kiểm/ghi riêng."
+    },
+    {
+     "q": "公表文の再定位は何を行いますか。",
+     "o": [
+      "都合の悪い数値を消す",
+      "個別経験を全員に広げる",
+      "数量を残し参加経路という別の問いを示す"
+     ],
+     "a": 2,
+     "e": "Đổi khung giữ dữ kiện và chỉ câu hỏi nào nguồn đủ/thiếu."
+    },
+    {
+     "q": "最終の妥結が意味するものは何ですか。",
+     "o": [
+      "条件に関係なく永続運用",
+      "評価の一致でなく確認と再判断の道筋の共有",
+      "全ての異論の消滅"
+     ],
+     "a": 1,
+     "e": "Thỏa thuận vận hành có thể giữ bất đồng nếu rõ trách nhiệm, dữ liệu và điều kiện xét lại."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thương lượng với vai vận hành: nhận giá trị dùng tăng nhưng đồng ý dừng hẹp có điều kiện, giữ nhu cầu người chiều và yêu cầu nguồn lực cụ thể.",
+     "model": "延べ件数が増えたことは成果として残したいですが、実人数や全員の機会まで確認したとは言いません。保管条件が整うまでは新規だけ二週間止め、閲覧と問い合わせは続ける案を検討できます。ただ、夕方の希望を無視しないよう、代替経路の担当と時間、対応できない場合の案内を明記してほしいです。点検と人員を別条件にし、整った範囲から再審議する形で合意できるでしょうか。",
+     "vi": "Tôi muốn giữ lượt tăng như thành quả nhưng chưa nói người thực/cơ hội mọi người đã kiểm. Có thể xét dừng mới hai tuần khi thiếu chỗ, vẫn xem/hỏi. Tuy nhiên cần người/giờ kênh thay và cách hướng dẫn nếu chưa đáp để không bỏ nhu cầu chiều. Ta tách kiểm và nhân lực, xét phạm vi đủ được không?",
+     "tips": "Đưa điều kiện để hợp tác, không suy người giữ tư liệu coi nhẹ người dùng."
+    },
+    {
+     "p": "Bàn giao kết quả họp: nói rõ năm mục, khác giữa đồng ý kế hoạch và điều kiện đủ, hai cách mở thảo luận lại.",
+     "model": "暫定合意は、新規停止、既存閲覧と問い合わせの継続、点検担当、代替先への回答期限、再審議日の五項目です。ただ、合意したことと担当が承諾して条件が整ったことは別欄にします。点検が終わるか代替先と移動担当がそろえば期限前に再検討し、二週間後も不足があれば自動再開はしません。照合が次の利用を妨げる場合は拡大を撤回して分担を見直す条件も残します。",
+     "vi": "Thỏa thuận năm mục dừng mới, tiếp xem/hỏi, người kiểm, hạn nơi thay, ngày xét. Nhưng ghi riêng đồng ý với người nhận/đủ điều kiện. Kiểm xong hoặc nơi thay/người chuyển đủ thì xét sớm; hết hai tuần thiếu không tự mở. Nếu đối chiếu cản người sau, rút mở rộng để xem phân công.",
+     "tips": "Nêu điều kiện làm và điều kiện rút cụ thể; không biến ngày xét thành lời hứa mở."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết kết luận thương lượng 420–550 chữ Nhật: tách lượt/đánh giá/thư riêng/bảo quản; nhận dừng mới hai tuần và tiếp xem/hỏi; nơi thay chưa cam kết; phân kiểm chỗ với người chiều; nêu người quyết, điều kiện xét sớm và rút mở rộng.",
+   "model": "今回確認できるのは延べ件数の増加であり、実人数や全員の利用機会ではない。成果とされるのは運営班の評価として帰属を明示し、夕方に利用できなかった手紙は個別経験として残す。その一通から全体の不満は言えないが、全員に経路があったという主張は限定すべきである。保管については、点検済みの棚が満杯である現状から、新規受入れだけを二週間止めざるを得ない暫定案に合意する。ただし既存閲覧と問い合わせは続け、代替先への依頼は未確約として扱う。過去の協力を今回の承諾や不履行と混同しない。新場所の点検と夕方担当の確保は別条件であり、一方から全活動の再開を導かない。実施主体と引受を項目ごとに示し、点検が終わるか代替先と移動担当がそろえば期限前に再審議する。二週間は自動再開の約束ではなく、責任者が資料に基づいて判断する時点とする。照合待ちが次の利用を妨げれば拡大を撤回し、分担を見直す。残る異論と未確認を可視化し、条件が変わったときに修正できる合意として引き継ぎたい。",
+   "modelVi": "Biết tổng lượt tăng, chưa biết người thực/cơ hội mọi người. Gắn đánh giá thành quả với vận hành, thư chiều là kinh nghiệm riêng; không suy toàn bất mãn nhưng giới hạn khẳng định ai cũng có kênh. Hiện kệ đã kiểm đầy nên đồng ý tạm dừng mới hai tuần, tiếp xem/hỏi. Nơi thay chưa cam kết, không lẫn từng giúp với nhận hay vi phạm lần này. Kiểm nơi và người chiều độc lập, không mở mọi hoạt động từ một. Rõ bên làm/nhận từng mục; kiểm xong hoặc nơi thay/người chuyển đủ thì xét sớm. Hai tuần là mốc người trách nhiệm quyết theo nguồn, không tự mở. Đối chiếu cản người sau thì rút tăng, xem phân công. Giữ ý khác/chưa biết để thỏa thuận có thể sửa khi điều kiện đổi.",
+   "min": 420,
+   "tips": [
+    "Kết luận phải nhận một hành động hiện tại và chỉ cách sửa khi điều kiện đổi, không chỉ liệt kê thiếu.",
+    "Phân đề nghị giúp với cam kết thực tế để tránh quy vi phạm sai."
+   ],
+   "checklist": [
+    "Bốn nguồn/thông tin không trộn.",
+    "Dừng mới hẹp và tiếp chức năng rõ.",
+    "Nguồn lực chưa nhận, điều kiện độc lập.",
+    "Có người quyết, mốc xét và tiêu chí rút tăng."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “折衝” nghĩa là gì?",
+   "o": [
+    "thương lượng giữa các bên khác điều kiện",
+    "bên thực hiện hoạt động",
+    "cách hỗ trợ người chịu bất lợi"
+   ],
+   "a": 0,
+   "e": "条件を整理して折衝します。 → Tôi thương lượng sau khi sắp điều kiện. Từ cần nhận diện là “折衝”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “交渉経緯” nghĩa là gì?",
+   "o": [
+    "việc điều kiện đã được đáp ứng",
+    "kênh thay thế",
+    "diễn biến thương lượng"
+   ],
+   "a": 2,
+   "e": "交渉経緯を時刻順に残します。 → Tôi giữ diễn biến theo thứ tự giờ. Từ cần nhận diện là “交渉経緯”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “妥結” nghĩa là gì?",
+   "o": [
+    "điều chỉnh lợi ích và gánh nặng giữa bên",
+    "đạt thỏa thuận ở các điều đã xác định",
+    "chưa được cam kết chắc"
+   ],
+   "a": 1,
+   "e": "妥結した範囲だけを公表します。 → Tôi chỉ công bố phạm vi đã thỏa thuận. Từ cần nhận diện là “妥結”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “暫定合意” nghĩa là gì?",
+   "o": [
+    "thỏa thuận tạm có điều kiện",
+    "không thực hiện điều đã nhận",
+    "khả năng giải thích được căn cứ"
+   ],
+   "a": 0,
+   "e": "暫定合意には期限があります。 → Thỏa thuận tạm có thời hạn. Từ cần nhận diện là “暫定合意”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền khả năng cảnh báo: 継続を損ない___。",
+   "a": "かねません",
+   "e": "かねない nêu khả năng bất lợi, không khẳng định đã gây hại hoặc chắc chắn sẽ xảy ra."
+  },
+  {
+   "t": "fill",
+   "q": "Điền giới hạn cam kết: 協力はまだ確約された___ありません。",
+   "a": "わけでは",
+   "e": "わけではない bác suy đã cam kết từ lời nhờ hoặc lịch sử giúp."
+  },
+  {
+   "t": "fill",
+   "q": "Điền mức đủ xét: 代替案は検討に___ます。",
+   "a": "足り",
+   "e": "に足る/足ります nêu đủ để xét theo mục đích, không chứng minh đã thực hiện được."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu chỉ mở phạm vi đủ điều kiện.",
+   "w": [
+    "再審議します。",
+    "条件が整った範囲から"
+   ],
+   "a": "条件が整った範囲から再審議します。",
+   "e": "Phạm vi đủ điều kiện quyết phần xem lại, không tự suy đủ mọi điều kiện."
+  },
+  {
+   "q": "現状の記述として適切なのはどれですか。",
+   "o": [
+    "今回の協力は未確約である",
+    "今回の不履行が確定した",
+    "今回も承諾済みである"
+   ],
+   "a": 0,
+   "e": "Lịch sử không thay phản hồi hiện tại; chưa nhận khác không làm điều đã nhận.",
+   "t": "listen",
+   "say": "代替先は以前協力しましたが、今回は返事がまだです。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "何を区別すべきですか。",
+   "o": [
+    "全ての条件が成就したこと",
+    "全活動が撤退したこと",
+    "保管条件と人員条件"
+   ],
+   "a": 2,
+   "e": "Đủ kiểm chỗ không tạo người chiều, nên xét từng chức năng.",
+   "t": "listen",
+   "say": "点検は終わりましたが、夕方の担当は未承諾です。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "合意と 条件成就を 別の 欄に 記録します。",
+   "a": "合意と 条件成就を 別の 欄に 記録します。",
+   "lang": "ja-JP",
+   "e": "合意 là đã thống nhất kế hoạch, 条件成就 là điều kiện đã thực sự đủ; ghi riêng giúp tránh hứa vượt nguồn lực."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "実施主体",
+     "bên thực hiện hoạt động"
+    ],
+    [
+     "条件成就",
+     "việc điều kiện đã được đáp ứng"
+    ],
+    [
+     "未確約",
+     "chưa được cam kết chắc"
+    ],
+    [
+     "不履行",
+     "không thực hiện điều đã nhận"
+    ],
+    [
+     "救済策",
+     "cách hỗ trợ người chịu bất lợi"
+    ]
+   ],
+   "e": "折衝 là thương lượng, 交渉経緯 giữ diễn biến, 妥結 là điểm đã thỏa, 暫定合意 có điều kiện, 実施主体 là bên thực hiện; nhãn đồng thuận không tự tạo nguồn lực."
+  },
+  {
+   "q": "統計資料で未確定のものは何ですか。",
+   "o": [
+    "再送を除いた実人数",
+    "延べ件数が増えたという記録",
+    "運営班が成果と評価したこと"
+   ],
+   "a": 0,
+   "e": "Đã biết số lượt và đánh giá nguồn, chưa đối chiếu người thực.",
+   "t": "mc"
+  },
+  {
+   "q": "代替先への依頼で区別すべきことは何ですか。",
+   "o": [
+    "過去の協力、現在の依頼、今回の承諾",
+    "用紙の色と文字数",
+    "全員の不満と全員の賛成だけ"
+   ],
+   "a": 0,
+   "e": "Ba trạng thái liên quan nhưng không thay cho nhau hoặc thành vi phạm chưa nhận.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Tạo hồ sơ giả gồm lượt chưa loại lặp, thư người chiều, kệ đã kiểm đầy, phòng chưa kiểm và nơi thay chưa đáp; không dùng tư liệu cư dân thật.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Phân hồ sơ thành sự việc, đánh giá, kinh nghiệm riêng và ràng buộc; ghi đơn vị cùng trạng thái xác nhận trước bàn phương án."
+   },
+   {
+    "t": "30'",
+    "do": "Ôn sắc thái N1 theo mục đích công nhận, cảnh báo, ràng buộc, định khung và bảo lưu, không chỉ theo danh sách mẫu."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe thương lượng, đánh dấu lúc một điều kiện bị dùng để hứa cả chức năng khác và cách tách lại."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc mười hai phần, dựng năm mục thỏa thuận cùng chủ thể, điều kiện đủ và tiêu chí mở bàn sớm."
+   },
+   {
+    "t": "30'",
+    "do": "Đổi vai vận hành/bảo quản, viết 420–550 chữ rồi kiểm kết luận có hành động hiện tại cùng điều kiện đảo."
+   },
+   {
+    "t": "30'",
+    "do": "Thêm dữ kiện mới và tái thương lượng, làm nghe-chính tả, lập bản bàn giao cuối phân ý khác còn lại với điều đã thống nhất."
+   }
+  ],
+  "games": [
+   "Mỗi bên có một nguồn lực chưa nhận, phải thương lượng mà không tự coi nó sẵn dùng; người kiểm đánh dấu lời hứa vượt điều kiện.",
+   "Thay một điều kiện sau thỏa thuận, nhóm chỉ được sửa chức năng liên quan và giải thích phần còn giữ."
+  ],
+  "errors": [
+   "Gọi chưa nhận là không thực hiện: kiểm đã có cam kết chưa trước dùng 不履行.",
+   "Từ kệ kiểm xong suy cả người chiều đủ: giữ hai điều kiện độc lập.",
+   "Báo tạm dừng mới thành rút toàn bộ: chỉ rõ phạm vi tiếp/dừng.",
+   "Ghi trách nhiệm chung nhưng không có ai làm: mỗi mục cần bên thực hiện và nhận việc."
+  ],
+  "homework": "Tạo hồ sơ giả bốn nguồn và một cuộc thương lượng có hai điều kiện độc lập; viết thỏa thuận tạm, bản sửa khi có nguồn mới và câu hỏi còn phải kiểm."
+ }
+}

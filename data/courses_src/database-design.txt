@@ -1,0 +1,754 @@
+=== COURSE database-design
+name: Thiết kế cơ sở dữ liệu
+icon: 🗄️
+floor: 7
+room: 707
+level: Nền tảng → Thực hành chuyên sâu
+hours: 28
+summary: Mô hình, khóa và ràng buộc; SQL/index, đồng thời, migration, NoSQL, phục hồi và dự án PostgreSQL có bất biến.
+
+## LESSON database-design-01 | Từ quy tắc nghiệp vụ tới thực thể
+
+### Bắt đầu từ sự thật nghiệp vụ
+Trung tâm giả định Thoi Rêu có học viên,lớp,đăng ký và lần thử trả điểm. Một đăng ký có thể có nhiều lần thử nên cần grain riêng;đặt câu hỏi dữ liệu phải trả lời trước khi chọn công nghệ.
+
+### Entity khác hành động quan sát
+Student/Class là đối tượng,Enrollment gắn ý định đăng ký,PaymentAttempt là lần thử có kết quả. Tên bảng không đủ,ghi id,vòng đời và nghĩa mỗi dòng để tránh nhân tổng hoặc ghi đè lịch sử.
+~~~text
+students:1row/student
+classes:1row/class
+enrollments:1row/ý định đăng ký theo contract
+payment_attempts:1row/lần thử trả điểm
+Không gộp mọi lần thử vào một field text không có quy tắc.
+~~~
+
+### Invariant chọn theo thời điểm quan sát
+Sau commit,remaining không âm và không vượt capacity;đăng ký confirmed có đúng actor/class theo policy. Trạng thái trunggian async có thể có budget riêng,chưa được đọc như kết quả cuối.
+~~~text
+I1:0<=remaining<=capacity saucommit
+I2:qty nguyên dương theo miền lab
+I3:quy tắc trùng đăng ký hiệu lực được chốt
+I4:tiền theo currency/đơn vị
+I5:actor không đọc/sửa ngoài quyền
+~~~
+
+### Dữ liệu giả làm oracle có thể tính tay
+Fixture nhỏ nên chứa lớp trống,còn một chỗ,đầy và học viên đã đăng ký. Id/tên/company/city tự đặt,email example.com;không copy hồsơ thật để đỡ tạo dữ liệu.
+~~~text
+{"studentId":"ST-L7-A","name":"Lam Rêu","email":"student-a@example.com"}
+{"classId":"CL-L7-A","capacity":1,"remaining":1}
+{"enrollmentId":"EN-L7-A","studentId":"ST-L7-A","classId":"CL-L7-A","status":"confirmed"}
+~~~
+
+### Ghi câu hỏi chưa chốt
+Một học viên có được học lại cùng lớp sau hủy hay không làm đổi unique rule. Đừng tự chọn constraint rồiép nghiệp vụ theoDB;ghi ví dụ,owner và quyết định trước implementation.
+
+PRACTICE: Vẽ mô hình Thoi Rêu với grain,6 rule và5question. Nộp fixture tốt/xấu,oracle theoid và lý do chưa chọn DBMS chỉ dựa tên công nghệ.
+Q: Mô hình dữ liệu nên bắt đầu từ gì?
++ Quy tắc,đối tượng,vòng đời và câu hỏi truy cập
+- Tên DBMS đang nổi
+- Mọi thứ là một bảng
+Q: Grain của bảng là gì?
++ Một dòng đại diện điều gì
+- Số index
+- Số người dùng
+
+## LESSON database-design-02 | Khóa, quan hệ và tính bắt buộc
+
+### Khóa kỹ thuật và khóa nghiệp vụ khác nhau
+Id kỹ thuật phân biệt row,khóa nghiệp vụ bảo vệ ý nghĩa như mã lớp duy nhất theo phạm vi. UUID không tự ngăn đăng ký trùng,cần chốt actor/class/status và vòng đời.
+
+### PostgreSQL là dialect lab chính
+Schema tối giản dưới chỉ nêu quan hệ,id TEXT để dùng fixture giả. Kết nối DB chỉ localhost do lớp cấp,không ghi password thật vào SQL/README;version và config được ghi trongmanifest.
+~~~sql
+CREATE TABLE students(id TEXT PRIMARY KEY,name TEXT NOT NULL);
+CREATE TABLE classes(id TEXT PRIMARY KEY,capacity INTEGER NOT NULL CHECK(capacity>=0));
+CREATE TABLE enrollments(
+ id TEXT PRIMARY KEY,student_id TEXT NOT NULL REFERENCES students(id),
+ class_id TEXT NOT NULL REFERENCES classes(id),status TEXT NOT NULL
+);
+~~~
+
+### Unique theo miền có thể là partial index
+Giả định lab chỉ một enrollment confirmed cho cùng student/class,còn cancelled là lịch sử. Partial unique dưới theoPostgreSQL,nếu quy tắc thêm status pending hoặc reservation thì model/index cần được xem lại,cấm copy như chuẩn mọi product.
+~~~sql
+CREATE UNIQUE INDEX ux_enrollments_active
+ON enrollments(student_id,class_id)
+WHERE status='confirmed';
+~~~
+
+### Xóa/đổi theo vòng đời dữ liệu
+Cascade có thể xóa mất lịch sử,RESTRICT có thể chặn thao tác cần quy trình. Chọn soft delete/archive/deny theo nhu cầu/retention,kiểm FK,báo cáo và authorization riêng,không dùng FK làm quyền.
+~~~text
+student cóhistory ->policy xóa/ẩn/giữ theo contract
+class cancelled ->enrollment giữaudit?
+FK nullability:optional hay bắt buộc?
+ON DELETE/UPDATE:chọn và test từng quan hệ
+Không cascade mọi bảng vìdễdemo.
+~~~
+
+### Test constraint bằngca âm
+Trùng id,FK không có,NULL ở field bắt buộc và trùng business key cần fail đúng tầng. Kiểm không để lại ghi một phần theo transactionpolicy,ghi lỗi/code và snapshot để review.
+
+PRACTICE: Nộp ERD vớiPK/businesskey/FK/cardinality,10negativecase và xóa/đổi policy. Chạy SQL lab hoặc ghi thiếu PostgreSQL,chưa nhận schema tạo được là đủ bất biến.
+Q: Surrogate key có thay mọi business unique constraint không?
++ Không
+- Có nếu UUID
+- Có nếu id dài
+Q: Quan hệ tùy chọn cần xem gì?
++ Nullable,FK,vòng đời và hành vi khi xóa/đổi
+- Chỉ màu sơ đồ
+- Luôn cascade mọi nơi
+
+## LESSON database-design-03 | Chuẩn hóa và dị thường cập nhật
+
+### Một sự thật lặp có thể gây mâu thuẫn
+Nếu tên học viên lưu trên mọi đăng ký và update từng nơi,một lần bỏ sót làm report khác detail. Phân tích phụ thuộc và tách entity khi đó là sự thật cùng nghĩa,không chỉ tách càng nhiều bảng càng tốt.
+
+### Dị thường insert/update/delete
+Bảng gộp học viên/lớp/đăng ký có thể không thêm được lớp chưa có học viên hoặc xóa đăng ký cuối làm mất thông tin lớp. Dùng fixture để chỉ ra vấn đề trước chuẩn hóa,đừng chỉ học tên normal form.
+~~~text
+flat:studentId,studentName,classId,className,enrollmentId
+update:đổi studentName có thể lệch nhiều row
+insert:class chưa có enrollment nằm đâu?
+delete:row cuối mất class Name?
+Tách theo functional dependencies đã xác nhận.
+~~~
+
+### Phân biệt tên hiện tại và snapshot lịch sử
+Giá tại thời điểm đăng ký khác giá hiện tại nên lưu historical snapshot có thể đúng nghiệp vụ. Đặt tên rõ,nguồn và version,chưa phải lưu trùng thiếu kiểm soát;privacy/retention phải được xét.
+~~~text
+classes.current_price_minor
+enrollments.agreed_price_minor
+enrollments.currency
+enrollments.price_rule_version
+Report lịch sử dùng agreedprice theo contract,không join giá hiện tại rồi đổi doanhthu cũ.
+~~~
+
+### Mô hình quan hệ sau tách
+StudentName trở về student,ClassName trở về class,enrollment giữ FK và snapshot đã chốt. Queryjoin đúng grain để trả view,cần index/workload và test,mộtERD đẹp không bảo đảm performance.
+~~~sql
+SELECT e.id,s.name,c.id AS class_id,e.agreed_price_minor
+FROM enrollments e
+JOIN students s ON s.id=e.student_id
+JOIN classes c ON c.id=e.class_id;
+-- agreed_price_minor là field cần thêm theo schema bài snapshot.
+~~~
+
+### Denormalize là quyết định có chi phí
+Nếu cần readmodel nhanh,cần nguồn canonical,cơ chế cập nhật,version và reconciliation. Không nhân mọi field chỉ để bớt JOIN mà không định nghĩa consistency/rủi ro dữ liệu cũ.
+
+PRACTICE: Cho bảng gộp giả6row,chỉ ba dị thường và đề xuất chuẩn hóa. Nộp schema/fixture mới,queryview và snapshot price rule,so expected trước/sau theoid.
+Q: Dị thường cập nhật thường đến từ gì?
++ Một sự thật bị lưu lặp không được kiểm soát
+- Mọi JOIN
+- Tên cột ngắn
+Q: Chuẩn hóa có nghĩa không bao giờ lưu snapshot không?
++ Không
+- Có luôn
+- Chỉ lưu một field
+
+## LESSON database-design-04 | Ràng buộc và kiểu dữ liệu
+
+### Kiểu lưu trữ giữ nghĩa dữ liệu
+PostgreSQLINTEGER,NUMERIC,TEXT,BOOLEAN,TIMESTAMPTZ có miền và ngữ nghĩa riêng. Chốt precision,currency và thời điểm/ngàyđịa phương,không lưu tất cả TEXT rồi hy vọng app luôn parse đúng.
+
+### NOT NULL cùng CHECK khi cần
+CHECK có thể choNULL qua theoSQL unknown;mandatory cần NOT NULL. Miền remaining và capacity được ràng buộc cùng row,chưa đếm tổng mọi enrollment,xử lý cross-row cần thiết kế transaction/constraint khác.
+~~~sql
+CREATE TABLE class_limits(
+ id TEXT PRIMARY KEY,capacity INTEGER NOT NULL CHECK(capacity>=0),
+ remaining INTEGER NOT NULL,
+ CHECK(remaining>=0 AND remaining<=capacity)
+);
+~~~
+
+### Tiền có đơn vị và quy tắc
+Lab dùng minor unitBIGINT/currencyDLM giả,không áp cho mọi currency. Nếu NUMERIC,cần precision/scale và rounding theo contract;float không tự sai mọi phép đo nhưng không nên so tiền bằng thói quen.
+~~~sql
+CREATE TABLE price_quotes(
+ id TEXT PRIMARY KEY,amount_minor BIGINT NOT NULL CHECK(amount_minor>=0),
+ currency TEXT NOT NULL CHECK(currency IN ('DLM','RUM')),
+ quoted_at TIMESTAMPTZ NOT NULL
+);
+~~~
+
+### Ngày và instant cần policy
+Timestampwithtimezone lưu instant theoengine,còn hiển thị phụ thuộc session/client. Chốt ngày nghiệp vụ và timezone cho report,không cắt UTCdate rồi coi đúng mọi vùng;thử mốc nửa đêm và offset.
+~~~text
+fixture instant:2030-01-01T23:30:00+00:00
+view offset+07 ->ngày2030-01-02
+view offset-03 ->ngày2030-01-01
+Ngày nghiệp vụ được chốt riêng theo mục đích báo cáo
+Không dùngtimezone của máy tester làm rule ngầm.
+~~~
+
+### Lỗi thường gặp là chọn kiểu theooutput một lần
+Mã có zero đầu cần TEXT,qty cần nguyên,amount cần đơn vị rõ. Migration kiểu có thể đổi dữ liệu,cần fixture và đối soát,không chỉ sửa entity ORM rồi đánh đạt.
+
+PRACTICE: Nộp data dictionary10field với kiểu/miền/nullability/đơn vị,12constraintcase vàdate/money biên. Phân biệt cùng row/crossrow invariant và phần server còn phải kiểm.
+Q: NOT NULL và CHECK khác nhau thế nào?
++ Hiện diện khác điều kiện giá trị
+- CHECK luôn cấm NULL
+- Hai loại luôn thay nhau
+Q: Tiền nên chọn kiểu theo gì?
++ Đơn vị,precision,currency và quy tắc làm tròn
+- Float cho mọi thứ
+- Chỉ số chữ số đẹp
+
+## LESSON database-design-05 | SQL truy vấn và hợp đồng kết quả
+
+### Query là hợp đồng trả kết quả
+API listclass cần filter,sort,pagination vàshape rõ. ORDERBY theo timestamp không duy nhất cần id phân xử;NULL,joinmultiplicity và policy trạng thái làm đổi nghĩa,không chỉ SQL chạy được.
+
+### Phân trang thứ tự xác định
+Ví dụ PostgreSQL dùng tuple created_at/id cho cursor,khi timestamp/id theo contract và không NULL. Cursoropaque ở API phải được validate/chốt snapshot;query này chưa giải mọi cạnh tranh/update/delete.
+~~~sql
+SELECT id,created_at,remaining FROM classes
+WHERE (created_at,id)>(:cursor_time,:cursor_id)
+ORDER BY created_at,id LIMIT :page_size;
+-- Schema bổ sung created_at NOT NULL và id có quy tắc so rõ.
+-- Tham số do driverbind,không nối chuỗi từ URL.
+~~~
+
+### Tổng hợp đúng grain trước nối
+Nhiều payment mỗi enrollment làm SUM phí đăng ký bị nhân. Gom paymentpaid theoFK,rồi đối chiếu total đã chốt,NULL không có payment có thể coi0trong phép đối soát khi đúng rule.
+~~~sql
+WITH p AS(
+ SELECT enrollment_id,SUM(amount_minor) AS paid
+ FROM payments WHERE status='paid' GROUP BY enrollment_id
+) SELECT e.id,e.total_minor,COALESCE(p.paid,0)
+FROM enrollments e LEFT JOIN p ON p.enrollment_id=e.id;
+-- Các field/bảng là contract lab cần tạo trước truy vấn.
+~~~
+
+### Kết quả view không tự bảo đảm quyền
+Query phải giới hạn actor/tenant theo chính sách ngoài hoặc trong DB được thiết kế.Cả list/export/detail đều cần kiểm,không chỉ GET một id,cũng không lộ field riêng vì view model lấy SELECT*.
+~~~text
+public fields:id,name,remaining
+private fields:internalNote,studentNotes
+filter:actor/resource scope hiện tại
+empty/error:shape/status theo APIcontract
+Không Picktype rồi serialize nguyên object nội bộ.
+~~~
+
+### Fixture đủ phát hiện query sai
+Có row không payment,có hai payment,có NULL và timestamp tie. Expectedtheoid và tổng được tính độc lập,đổi thứ tự INSERT để thấy ORDER BY không dựa trật tự lưu.
+
+PRACTICE: Viết sáu query theo contract với fixture cótie/NULL/one-to-many và quyền. Nộp expectedtheoid,một query sai có lỗi chủ đích và bản sửa,ghi concurrencylimit của cursor.
+Q: Query trả nhiều dòng cần thứ tự ổn định khi nào?
++ Khi contract/phân trang yêu cầu,nên có tie-breaker
+- Tự theo INSERT mãi
+- Không bao giờ cần
+Q: JOIN một-nhiều rồi SUM tiền phía một có nguy cơ gì?
++ Nhân tổng do nhân dòng
+- Luôn giữ tổng
+- Tự bỏ NULL
+
+## LESSON database-design-06 | Index theo workload và chi phí ghi
+
+### Index chọn từ workload
+Lọc student_id rồi khoảng date/sortid là một mẫu khác lọc date toàn cục.Index thêm chi phí write/storage,một bảng và id liệu nhỏ không đại diện quyết định production,cần đo phân bố và độ chọn lọc.
+
+### Bắt đầu bằng plan của query thật
+PostgreSQL EXPLAIN mặc định nêu plan dự kiến;EXPLAINANALYZE có thể thực thi query.Phần lab chỉ dùng SELECT review và budget,không chạy ANALYZE của DML với ý nghĩa đọc metadata vô hại.
+~~~sql
+EXPLAIN SELECT id,total_minor FROM enrollments
+WHERE student_id=:student AND created_at>=:from_time
+ORDER BY created_at,id;
+-- Đo runtime bằng phương pháp được cấp trong lab sau review query.
+~~~
+
+### Index ghép và khóa phân xử
+Thứ tự cột cân nhắc equality/range/sort và engine,nên kiểm plan trước/sau.Chọn covering/partial khi có evidence,đừng bắt mọi query dùng index hoặc nhân index trùng prefix không tính writecost.
+~~~sql
+CREATE INDEX ix_enrollments_student_time
+ON enrollments(student_id,created_at,id);
+-- Cần field created_at và fixture đại diện theo bài query.
+-- Chỉ tạo index trong DB lab riêng,so query result không đổi.
+~~~
+
+### Đo cả đọc và ghi
+Warm/coldcache,số row,phân bố,statistics và machine làm đổi latency.Nộp lặp đo/median/variance theo cách chốt,cùng query/params,so với import/updatecost,không chỉ chọn run nhanh nhất.
+~~~text
+record:engine/version,rows,distribution,indexes
+read:query/params,plan,elapsed,runs/cacheconditions
+write:import/update latency và resource
+storage:index/table sizes theo engine
+decision:giữ/bỏ index với lý do và gap
+~~~
+
+### Không lấy query plan làm nguyên nhân tuyệt đối
+SCAN có thể hợp lý khi đọc phần lớn bảng,SEARCH/indexscan chưa chắc nhanh.Metriccho giả thuyết,cần experiment cùng workload và xem các nút thắt lock/pool/I/O.
+
+PRACTICE: Tạo fixture vài nghìn row có phân bố lệch,so một query trước/sauindex và chi phíghi. Nộp plan,params,lặp đo,giữ correctness và giới hạn thực nghiệm.
+Q: Index theo workload cần xét gì?
++ Filter,sort,độ chọn lọc,phân bố và chi phí ghi
+- Càng nhiều càng tốt
+- Chỉ tên index
+Q: Index ghép thứ tự cột có luôn vô nghĩa không?
++ Không
+- Có với mọi DBMS
+- Có nếu có FK
+
+## LESSON database-design-07 | Transaction và mức cô lập
+
+### Isolation là lựa chọn có hậu quả
+Hai request có thể đọc cùng remaining1,transaction riêng vẫn có thể cùng quyết định sai nếu protocol không giữ invariant. Chọn Read Committed/RepeatableRead/Serializable theoengine/mô hình rồi test anomaly,cấm đồng nhất atomicity với toàn bộ đồng thời đúng.
+
+### Conditional UPDATE bảo vệ chỗ cuối
+Một statement giảm chỗ có điều kiện và RETURNING,số row khớp nói lấy được chỗ theo query.Những ghi enrollment/điểm/outbox liên quan cần cùng transaction hoặc design khác rõ,không commit một phần.
+~~~sql
+BEGIN;
+UPDATE classes SET remaining=remaining-1
+WHERE id=:class_id AND remaining>0 RETURNING id,remaining;
+-- Service kiểm đúng1row rồi INSERT enrollment;không được thì ROLLBACK.
+-- Các bước được review theoengine/constraint và quyền.
+COMMIT;
+~~~
+
+### Serializable vẫn có lỗi cần xử lý
+PostgreSQL có thể abortserialization/deadlock theo điều kiện,ứng dụng phải retry toàn transaction trongbudget khi phù hợp.Không retry side effect ngoài như email mù vì DB rollback không hoàn tác chúng.
+~~~text
+attempt:BEGIN Serializable ->read/check/write ->COMMIT
+if serializationfailure:rollback và retry theo policy
+maxattempts/deadline được chốt
+external effects:outbox/idempotency phù hợp
+Không catch mọi SQL error rồi lặp vô hạn.
+~~~
+
+### Lịch xen kẽ làm phép kiểm rõ
+Dùng hai connection và barrier lab để hai actor đọc/ghi trong cửa sổ rủi ro.Theo dõi response cả hai và snapshot saucommit,không chỉ click nhanh rồi đếm một phía.
+~~~text
+A bắt đầu ->B bắt đầu
+A lấy remaining/lock theo protocol
+B tranh cùng resource
+expected:tốiđa1confirmed khi chỉ 1 chỗ
+after:remaining0,recordcount1,không âm
+Ghi timeout/retry và lỗi bị hủy theo thiết kế.
+~~~
+
+### Đừng suy isolation từmộtca xanh
+Một lịch qua chưa kiểm mọi anomaly,gồm read skew,write-skew hoặc phantom theoengine.Sử dụng constraint và mô hình invariants,ghi loại đã kiểm/điều chưa đủ bằng chứng.
+
+PRACTICE: Nộp isolationmatrix và hai-sessiontest cho chỗ cuối,mộtca rollback giữ bất biến,mộtca retry có budget. Chỉ lab PostgreSQL được cấp,ghi lỗi/response/data và giới hạn tác dụng ngoài.
+Q: Transaction có tự ngăn mọi anomaly không?
++ Không,còn isolation và cách kiểm invariant
+- Có luôn
+- Chỉ cần COMMIT
+Q: Serializable có thể đòi ứng dụng làm gì?
++ Xử lý serialization failure và retry toàn transaction theo policy
+- Bỏ mọi error
+- Luôn không bao giờ retry
+
+## LESSON database-design-08 | Đồng thời, khóa và chống ghi đè
+
+### Hai người cùng sửa một bản ghi
+Ví dụ lớp CL7 có note và version. Hai màn hình cùng đọc version 3 rồi gửi thay đổi khác nhau. Nếu server ghi không có điều kiện, người lưu sau có thể xóa thay đổi đã được xác nhận của người trước.
+
+### Optimistic locking với version
+Bổ sung cột version integer NOT NULL DEFAULT 1. Service truyền giá trị đã đọc bằng tham số, kiểm số dòng trả về; không có dòng thì báo xung đột hoặc đọc lại để người dùng quyết định, không tự ghi đè.
+~~~sql
+UPDATE classes
+SET note=:note,version=version+1
+WHERE id=:id AND version=:expected_version
+RETURNING id,note,version;
+-- Kỳ vọng đúng một dòng. Không có dòng: phân biệt quyền, không tồn tại, xung đột ở service.
+~~~
+
+### Khóa có phạm vi và thứ tự
+Khi cần chuyển chỗ giữa hai lớp, lấy khóa theo id tăng dần để giảm chu trình chờ. Đây là protocol mọi đường ghi phải tuân theo, vẫn xử lý deadlock/timeout và giữ transaction ngắn; không gọi mạng trong khi giữ khóa.
+~~~sql
+BEGIN;
+SELECT id,remaining FROM classes
+WHERE id IN (:from_id,:to_id) ORDER BY id FOR UPDATE;
+-- Kiểm quyền, trạng thái và cập nhật theo quy tắc chuyển chỗ.
+-- Không đủ điều kiện: ROLLBACK. Thành công: COMMIT.
+~~~
+
+### Lập lịch thử xung đột có kiểm soát
+Test hai connection với barrier giúp tái hiện ổn định. Dữ liệu lab riêng, đặt lock timeout để lỗi không treo; xem trạng thái cuối và phản hồi của cả hai actor thay vì chỉ xem request cuối.
+~~~text
+fixture: CL7 note=ban-dau,version=3
+A đọc v3; B đọc v3
+A update expected=3 -> v4
+B update expected=3 -> 0 dòng
+expected: note của A giữ nguyên; B nhận conflict
+Không tự retry với version mới nếu chưa có quyết định hợp nhất.
+~~~
+
+### Chọn cơ chế theo bất biến
+Version bảo vệ thay đổi dựa trên bản đọc cũ; cập nhật số học có điều kiện phù hợp giữ quota. Unique constraint giữ tính duy nhất theo khóa. Phân biệt ba nhu cầu trước khi dùng một kiểu khóa cho mọi vấn đề.
+
+PRACTICE: Tạo hai connection kiểm version conflict, một ca khóa đảo thứ tự và một ca chuyển chỗ rollback. Nộp lịch, timeout, phản hồi và snapshot; giải thích cơ chế nào giữ từng bất biến.
+Q: Lost update có thể xảy ra khi nào?
++ Hai bên ghi lại giá trị tính từ cùng bản đọc cũ
+- Chỉ khi không có id
+- Không thể nếu có SQL
+Q: SELECT FOR UPDATE có thay mọi constraint không?
++ Không
+- Có luôn
+- Có nếu khóa đủ lâu
+
+## LESSON database-design-09 | Migration và schema tương thích
+
+### Schema tồn tại cùng nhiều phiên bản app
+Migration không chỉ chạy DDL một lần. Trong thời gian rolling release, code cũ/mới và job có thể cùng đọc ghi; cần hợp đồng tương thích và kế hoạch xử lý dữ liệu dở dang.
+
+### Expand trước khi đổi cách đọc
+Ví dụ chuyển tên hiển thị sang cột display_name mới nullable. Thêm cột trước, code mới đọc fallback và ghi theo protocol chuyển tiếp; không xóa cột name lúc client cũ còn dùng. Kiểm hành vi lock DDL trên engine lab.
+~~~sql
+ALTER TABLE students ADD COLUMN display_name text;
+-- Giai đoạn chuyển tiếp, dữ liệu cũ vẫn tồn tại.
+SELECT id,COALESCE(display_name,name) AS shown_name
+FROM students WHERE id=:student_id;
+-- Chỉ minh họa: cần chốt NULL/rỗng và ý nghĩa tên trong miền.
+~~~
+
+### Backfill có thể chạy lại
+Chia lô theo khóa ổn định, chỉ điền ô chưa có giá trị mới để không đè ghi mới. Ví dụ CTE là PostgreSQL, dùng transaction ngắn và kiểm tải/lag; nếu cần chuyển đổi phức tạp phải đối soát riêng.
+~~~sql
+WITH batch AS (
+ SELECT id FROM students WHERE display_name IS NULL
+ ORDER BY id LIMIT 100
+)
+UPDATE students s SET display_name=s.name
+FROM batch b WHERE s.id=b.id AND s.display_name IS NULL
+RETURNING s.id;
+~~~
+
+### Contract sau bằng chứng sử dụng
+Đổi reader chính, theo dõi client/job cũ rồi mới chặn ghi cũ và bỏ cột. Rollback binary không tự đảo dữ liệu đã chuyển; có khi tiến sửa an toàn hơn downgrade, phải luyện trên bản sao lab.
+~~~text
+Gate E: schema mới được thêm, binary cũ vẫn chạy
+Gate B: backfill có checkpoint và đối soát
+Gate R: reader mới, writer tương thích, theo dõi lỗi
+Gate C: không còn consumer cũ, phê duyệt bỏ cột
+Mỗi gate: owner, evidence, điều kiện dừng, cách phục hồi.
+~~~
+
+### Đừng dùng ORM như lời bảo đảm
+ORM migration sinh được câu lệnh nhưng không biết giờ cao điểm hay job cũ. Review lock, constraint validation, index build và thời gian chạy với dữ liệu đại diện; không tự chạy destructive migration vào môi trường dùng chung.
+
+PRACTICE: Nộp expand/backfill/contract cho tên hiển thị, test hai phiên bản app và bản ghi được sửa giữa backfill. Viết phương án khi job dừng nửa chừng; chỉ thực hiện trên DB lab sao chép.
+Q: Migration expand-contract cần gì?
++ Compatibility,backfill/đối soát và kế hoạch quay lại/tiến sửa
+- Drop cột ngay
+- Chỉ đổi modelORM
+Q: Backup chưa restore thử có chứng minh phục hồi được không?
++ Chưa
+- Có nếu file lớn
+- Có nếu có ba replica
+
+## LESSON database-design-10 | Partition, replication và backup
+
+### Ba cơ chế giải ba bài toán khác nhau
+Partition chia tập dữ liệu theo quy tắc; replication tạo bản sao phục vụ sẵn sàng/đọc; backup giữ khả năng quay về trạng thái quá khứ. Xóa nhầm có thể lan sang replica, nên replica không thay backup.
+
+### Partition cần khóa và truy vấn phù hợp
+Ví dụ PostgreSQL bảng nhật ký chia theo tháng UTC. Unique constraint toàn bảng partition phải tuân giới hạn engine, thường cần chứa khóa partition. Không đưa mô hình này vào bảng enrollment rồi vô tình mất unique nghiệp vụ.
+~~~sql
+CREATE TABLE event_log(
+ occurred_at timestamptz NOT NULL,
+ event_id text NOT NULL, payload jsonb NOT NULL,
+ PRIMARY KEY(occurred_at,event_id)
+) PARTITION BY RANGE(occurred_at);
+CREATE TABLE event_log_m01 PARTITION OF event_log
+FOR VALUES FROM ('2031-01-01 00:00:00+00')
+TO ('2031-02-01 00:00:00+00');
+~~~
+
+### Đọc replica phải chấp nhận hoặc xử lý lag
+Sau ghi thành công, replica bất đồng bộ có thể chưa thấy dữ liệu. Luồng cần read-your-writes có thể đọc primary hoặc dùng cơ chế đảm bảo tiến độ phù hợp; không đưa replica vào check quota như thể luôn mới nhất.
+~~~text
+write enrollment -> primary commit
+list ngay -> replica có thể còn cũ
+choice A: đọc primary trong luồng xác nhận
+choice B: chờ vị trí replication theo cơ chế được hỗ trợ
+choice C: UI thể hiện đang đồng bộ nếu contract cho phép
+Đo lag, không lấy một lần thử xanh làm cam kết.
+~~~
+
+### Restore có điểm đích và oracle
+Chọn RPO/RTO theo tác động nghiệp vụ; nêu backup logic hay physical, WAL và cấu hình cần thiết. Diễn tập trên DB tách biệt, giữ dữ liệu thật ngoài lab, đối soát quan hệ và invariants sau phục hồi.
+~~~text
+Scenario: thao tác sai giả lúc T_bad
+Target: trạng thái trước T_bad, phạm vi đã chốt
+Evidence: backup/WAL liên tục, checksum, quyền giải mã
+Restore: DB lab cô lập, không ghi đè nguồn
+Verify: bảng/version, số dòng và invariant quota
+Measure: mất dữ liệu và thời gian thực tế so mục tiêu.
+~~~
+
+### Không hứa zero mất dữ liệu mặc định
+Tính bền phụ thuộc cấu hình, topology và sự cố. Replication đồng bộ cũng có độ trễ, quorum và khả năng chặn ghi; ghi rõ lựa chọn thay vì quảng cáo rằng managed hay nhiều bản sao sẽ luôn an toàn.
+
+PRACTICE: Thiết kế partition nhật ký một tháng, thử truy vấn pruning và mô phỏng replica lag bằng timeline. Viết runbook restore với RPO/RTO giả và oracle nghiệp vụ; không gọi replica là backup.
+Q: Partition và replication khác nhau chủ yếu ở đâu?
++ Chia tập dữ liệu khác nhân bản để phục vụ mục tiêu
+- Hai từ luôn giống
+- Partition tự backup
+Q: Khi nào xem xét NoSQL có lý do?
++ Theo access pattern,model,consistency vàscale có evidence
+- Vì mọi SQL chậm
+- Vì không cần schema/constraint nữa
+
+## LESSON database-design-11 | NoSQL theo kiểu truy cập thực
+
+### Bắt đầu từ câu hỏi truy cập
+NoSQL là nhóm nhiều mô hình, không phải một engine đồng nhất. Với catalogue lớp thường đọc nguyên bản theo id, document có thể hợp lý; với quota/đăng ký nhiều quan hệ, transaction và constraint cần đánh giá riêng.
+
+### Document có version và giới hạn
+Ví dụ JSON này là dữ liệu thiết kế, không phải lệnh của một dịch vụ cụ thể. Giữ lịch sử vô hạn trong một document làm document lớn và cạnh tranh ghi; mảng buổi học có giới hạn phải ghi rõ contract.
+~~~json
+{"id":"CL7","schemaVersion":1,"title":"Lớp Mây Thoi","sessions":[{"id":"S1","startUtc":"2031-03-04T01:00:00Z"}],"published":true}
+~~~
+
+### Key-value cần hợp đồng cập nhật
+Nếu giữ cart tạm theo key thì TTL không thay tính đúng lúc xác nhận đơn. Compare-and-set hay transaction phải theo khả năng engine; cần chống cập nhật cũ và xử lý key hết hạn một cách minh bạch.
+~~~text
+key: cart:student-S7
+value: {version:4,classIds:[CL7]}
+read version4 -> sửa -> CAS expected4
+CAS fail: đọc lại, không ghi đè mù
+TTL hết: trả giỏ hết hạn theo contract
+Quota: chỉ chốt trong nguồn ghi authoritative.
+~~~
+
+### Denormalize có kế hoạch sửa sai
+Một projection tên lớp phục vụ tìm kiếm có thể trễ. Ghi source of truth, event version, cơ chế rebuild và cách phát hiện lệch. Thay đổi schema vẫn cần migrate/reader tương thích dù engine không bắt buộc cột cố định.
+~~~text
+source: classes trên DB chính
+projection: search_doc theo class_id/version
+consumer: bỏ event version cũ, xử lý lặp
+rebuild: snapshot + theo dõi phần thay đổi theo protocol
+reconcile: so version/count và mẫu nội dung
+UI: không dùng projection để quyết định còn chỗ.
+~~~
+
+### So sánh bằng tải và rủi ro
+Đánh giá query, kích thước, consistency, transaction, vận hành và khả năng xuất dữ liệu. Không chọn theo nhãn scale hay bỏ thiết kế vì nghĩ document tự nhận mọi cấu trúc sẽ luôn đúng.
+
+PRACTICE: Nộp access-pattern matrix cho catalogue, giỏ tạm và đăng ký. Đề xuất một mô hình SQL, một document/key-value, chỉ rõ nguồn giữ quota, giới hạn document và bài test version/TTL.
+Q: EXPLAIN hoặc EXPLAIN ANALYZE cần phân biệt gì?
++ Kế hoạch dự kiến khác phép có thể thực thi query theoengine
+- Hai lệnh luôn không chạy
+- ANALYZE chỉ đổi màu
+Q: Capacity dữ liệu cần tính gì ngoài rowcount?
++ Index,replica,retention,overhead và workload
+- Chỉ số người đăng ký
+- Chỉ độ dài tên bảng
+
+## LESSON database-design-12 | Đọc plan và capacity cho dữ liệu
+
+### Plan là bằng chứng trên một bộ dữ liệu
+Planner dùng thống kê và cost model. Scan không tự là lỗi, index scan không tự nhanh; cardinality, selectivity, caching và phân bố đều ảnh hưởng. Dùng dữ liệu giả đủ đại diện, ghi version/config.
+
+### Đọc estimated và actual rows
+PostgreSQL EXPLAIN ANALYZE thực thi truy vấn. Mẫu chỉ dùng SELECT lab; chú ý loops, row estimate và buffers. Không chạy ANALYZE tùy tiện trên câu ghi hoặc hàm có tác dụng phụ.
+~~~sql
+EXPLAIN (ANALYZE,BUFFERS)
+SELECT id,student_id FROM enrollments
+WHERE class_id=:class_id AND status='confirmed'
+ORDER BY id LIMIT 50;
+-- Tham số do client bind; so hai class có độ phổ biến khác nhau.
+~~~
+
+### Thí nghiệm thay một yếu tố
+Đo trước/sau một index với cùng fixture và workload. Ghi cả chi phí INSERT/UPDATE, dung lượng và bloat; có thể bỏ index không dùng sau thời gian quan sát nhưng phải xem constraint/dependency.
+~~~text
+baseline: version,fixture hash,rowcount,distribution
+workload: query + tần suất + concurrency giả
+measure: p50/p95, buffers, rows, write throughput
+change: một index theo giả thuyết
+repeat: cold/warm theo protocol, không xóa cache hệ dùng chung
+result: benefit/cost + giới hạn thí nghiệm.
+~~~
+
+### Capacity là phép ước lượng có khoảng
+Kích thước trên đĩa không chỉ bằng tổng payload. Tính row/index/overhead, retention, tốc độ tăng và headroom bằng số đo. Ví dụ ước lượng chỉ minh họa, cần xác nhận bằng dữ liệu engine lab.
+~~~text
+rows/day = 12000 (giả định)
+retention = 90 ngày
+measured bytes/row incl index = 900 (fixture)
+base = 12000*90*900 bytes
+reserve = base*1.6 (giả định headroom)
+Thêm WAL, backup, temp và replica theo mô hình riêng.
+~~~
+
+### Chậm có thể ở ngoài query
+Pool cạn, lock wait, mạng hoặc ứng dụng giữ transaction lâu đều làm request chậm. Trace thời gian theo chặng và chờ, tránh thêm index khi bottleneck là contention hoặc số connection vượt khả năng xử lý.
+
+PRACTICE: Nộp hai plan cùng truy vấn với class phổ biến/hiếm, bảng trước sau index và write cost. Tính capacity có đơn vị và khoảng bất định; giải thích một tình huống scan phù hợp.
+Q: Mô hình lịch sử nên giữ gì?
++ Sự thật tại thời điểm nghiệp vụ và quan hệ truy vết
+- Luôn ghi đè bằng giá hiện tại
+- Chỉ updated_at
+Q: FK có tự bảo vệ quyền actor không?
++ Không
+- Có nếu ON DELETE RESTRICT
+- Có nếu id UUID
+
+## LESSON database-design-13 | Dự án: lược đồ đặt lớp có bất biến
+
+### Dự án lược đồ đặt lớp Mây Thoi
+Thiết kế học viên, lớp, đăng ký và thử thanh toán. Chốt grain mỗi bảng, lịch sử, quyền và bất biến: quota không âm, một đăng ký hiệu lực mỗi cặp, trạng thái hợp lệ; mọi tên và dữ liệu đều giả.
+
+### Artifact lược đồ phải đọc lại được
+Nộp DDL PostgreSQL, ERD dạng văn bản và data dictionary. Mẫu constraint duy nhất có điều kiện minh họa bảng một dòng mỗi lần đăng ký; trạng thái cancelled cho phép lịch sử nhiều lần, cần xem quy tắc khôi phục.
+~~~sql
+CREATE UNIQUE INDEX enrollment_one_active
+ON enrollments(student_id,class_id)
+WHERE status IN ('pending','confirmed');
+-- Cần CHECK/NOT NULL cho status và FK trong DDL đầy đủ.
+-- Tạo fixture có cancelled cũ, active mới để kiểm đúng chính sách.
+~~~
+
+### Oracle chống âm và đăng ký mồ côi
+Các câu đọc sau dùng để tìm vi phạm trên snapshot đã chốt. Quota gốc nên lưu rõ và đối soát với những trạng thái thực sự chiếm chỗ, không ép công thức nếu pending có chính sách giữ chỗ khác.
+~~~sql
+SELECT id FROM classes WHERE remaining<0;
+SELECT e.id FROM enrollments e
+LEFT JOIN students s ON s.id=e.student_id
+LEFT JOIN classes c ON c.id=e.class_id
+WHERE s.id IS NULL OR c.id IS NULL;
+-- Kỳ vọng không có dòng, đồng thời thử ghi sai phải bị FK chặn.
+~~~
+
+### Chấm bằng cả thất bại có kiểm soát
+Dự án phải chứng minh rollback khi bước hai lỗi, hai actor tranh chỗ cuối, migration tương thích và restore. Giữ script tái lập, fixture nhỏ cho correctness và fixture lớn cho plan/capacity.
+~~~text
+Deliverables: DDL/seed/query + dictionary + ADR
+12 ca đúng/sai gồm NULL,FK,unique,state,concurrency
+2 plan + benchmark có giới hạn
+1 migration expand-contract + 1 restore drill
+Rubric /100: model25,constraint25,concurrency20,ops20,docs10
+Gate: không lộ dữ liệu thật, mọi số đo có cách tái hiện.
+~~~
+
+### Bàn giao quyết định chưa giải quyết
+Liệt kê trade-off còn mở: pending có giữ chỗ không, xóa học viên xử lý lịch sử thế nào, đổi currency ra sao. Một thiết kế tốt nêu rõ giả định để reviewer kiểm, không giấu khoảng trống bằng sơ đồ đẹp.
+
+PRACTICE: Hoàn thiện dự án theo rubric, đổi chéo với bạn để chạy seed và các ca âm. Nộp evidence lỗi được chặn, transaction rollback, chống cạnh tranh, restore và danh sách giới hạn; chỉ DB lab cục bộ.
+Q: Dự án schema cần nghiệm thu bằng gì?
++ Invariant,query,concurrency,migration và restore evidence
+- ChỉERD đẹp
+- Chỉ create table được
+Q: Bàn giao database design cần công khai gì?
++ Dialect/version,giả định,trade-off,fixture và gap
+- Password thật
+- Mọi record thật
+
+## LESSON database-design-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Hiểu miền và invariant trước sẽ giúp chọn grain,khóa,quan hệ và kiểu lưu trữ phù hợp.
+2. Id kỹ thuật phân biệt dòng,quy tắc như một đăng ký đang hiệu lực mỗi học viên/lớp vẫn cần thiết kế riêng.
+3. Chuẩn hóa giúp giảm bất nhất từ phụ thuộc dữ liệu;denormalize có thể có lý do nhưng cần cơ chế đồng bộ.
+4. CHECK trong SQL có thể cho unknown qua;khai báo NOT NULL khi bắt buộc và kiểm miền/kiểu phù hợp engine.
+
+### Dữ liệu và điều kiện biên
+5. ORDER BY có khóa phân xử duy nhất tránh phụ thuộc thứ tự không được DB cam kết.
+6. Đo kế hoạch và đọc/ghi trên dữ liệu đại diện,không nhận mọi SEARCH đều nhanh hơn SCAN.
+7. Atomicity không đồng nghĩa serializable mọi thứ,mức isolation và query/constraint/khóa phải phù hợp.
+8. Dùng cập nhật nguyên tử,version check hoặc khóa phù hợp,kiểm affected rows và trường hợp cạnh tranh.
+
+### Tính đúng và cách điều tra
+9. DDL,data và app version tương tác,cần fixture cũ/mới và write trong cửa sổ chuyển đổi theo thiết kế.
+10. Cả hai thêm vận hành/constraint/routing trade-off,cần workload,bằng chứng và recovery phù hợp.
+11. Phải biết dialect và tác động trước chạy,đặc biệt statement ghi;chỉ lab với budget và query được review.
+12. Audit/event/snapshot có mục đích khác,cần privacy/retention và thứ tự/phiên bản,cấm dùng tên lịch sử để lưu mọiPII vô hạn.
+
+### Rủi ro và lựa chọn phương án
+13. Thiết kế được đánh giá qua dữ liệu tốt/xấu và workload,không suy productionready từ sơ đồ.
+14. Ràng buộc phải giữ nghĩa miền,không xóa lịch sử hoặc dữ liệu liên quan mù quáng.
+15. Số nguyên minor unit hoặc NUMERIC phù hợp tùy contract,không trộn currency hoặc so float tùy tiện.
+16. Thứ tự và operator ảnh hưởng cách dùng tiền tố/range/sort,cần xem engine vàplan cụ thể.
+
+### Dự án, bằng chứng và bàn giao
+17. Khóa theo protocol giúp thứ tự hóa nhưng vẫn cần unique/check và xử lý deadlock/timeout,không khóa mọi bảng vô hạn.
+18. Document/key-value vẫn có hợp đồng và migration,không phải bỏ thiết kế dữ liệu;so alternatives theo rủi ro.
+19. Toàn vẹn tham chiếu và authorization khác nhau,service/server cần kiểm quyền trên mỗi hành động theo tài nguyên.
+20. Người nhận cần chạy lab/kiểm lại và biết giới hạn scale/consistency/recovery,có owner cho quyết định.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Mô hình dữ liệu nên bắt đầu từ gì?
++ Quy tắc,đối tượng,vòng đời và câu hỏi truy cập
+- Tên DBMS đang nổi
+- Mọi thứ là một bảng
+Q: Surrogate key có thay mọi business unique constraint không?
++ Không
+- Có nếu UUID
+- Có nếu id dài
+Q: Dị thường cập nhật thường đến từ gì?
++ Một sự thật bị lưu lặp không được kiểm soát
+- Mọi JOIN
+- Tên cột ngắn
+Q: NOT NULL và CHECK khác nhau thế nào?
++ Hiện diện khác điều kiện giá trị
+- CHECK luôn cấm NULL
+- Hai loại luôn thay nhau
+Q: Query trả nhiều dòng cần thứ tự ổn định khi nào?
++ Khi contract/phân trang yêu cầu,nên có tie-breaker
+- Tự theo INSERT mãi
+- Không bao giờ cần
+Q: Index theo workload cần xét gì?
++ Filter,sort,độ chọn lọc,phân bố và chi phí ghi
+- Càng nhiều càng tốt
+- Chỉ tên index
+Q: Transaction có tự ngăn mọi anomaly không?
++ Không,còn isolation và cách kiểm invariant
+- Có luôn
+- Chỉ cần COMMIT
+Q: Lost update có thể xảy ra khi nào?
++ Hai bên ghi lại giá trị tính từ cùng bản đọc cũ
+- Chỉ khi không có id
+- Không thể nếu có SQL
+Q: Migration expand-contract cần gì?
++ Compatibility,backfill/đối soát và kế hoạch quay lại/tiến sửa
+- Drop cột ngay
+- Chỉ đổi modelORM
+Q: Partition và replication khác nhau chủ yếu ở đâu?
++ Chia tập dữ liệu khác nhân bản để phục vụ mục tiêu
+- Hai từ luôn giống
+- Partition tự backup
+Q: EXPLAIN hoặc EXPLAIN ANALYZE cần phân biệt gì?
++ Kế hoạch dự kiến khác phép có thể thực thi query theoengine
+- Hai lệnh luôn không chạy
+- ANALYZE chỉ đổi màu
+Q: Mô hình lịch sử nên giữ gì?
++ Sự thật tại thời điểm nghiệp vụ và quan hệ truy vết
+- Luôn ghi đè bằng giá hiện tại
+- Chỉ updated_at
+Q: Dự án schema cần nghiệm thu bằng gì?
++ Invariant,query,concurrency,migration và restore evidence
+- ChỉERD đẹp
+- Chỉ create table được
+Q: Quan hệ tùy chọn cần xem gì?
++ Nullable,FK,vòng đời và hành vi khi xóa/đổi
+- Chỉ màu sơ đồ
+- Luôn cascade mọi nơi
+Q: Tiền nên chọn kiểu theo gì?
++ Đơn vị,precision,currency và quy tắc làm tròn
+- Float cho mọi thứ
+- Chỉ số chữ số đẹp
+Q: Index ghép thứ tự cột có luôn vô nghĩa không?
++ Không
+- Có với mọi DBMS
+- Có nếu có FK
+Q: SELECT FOR UPDATE có thay mọi constraint không?
++ Không
+- Có luôn
+- Có nếu khóa đủ lâu
+Q: Khi nào xem xét NoSQL có lý do?
++ Theo access pattern,model,consistency vàscale có evidence
+- Vì mọi SQL chậm
+- Vì không cần schema/constraint nữa
+Q: FK có tự bảo vệ quyền actor không?
++ Không
+- Có nếu ON DELETE RESTRICT
+- Có nếu id UUID
+Q: Bàn giao database design cần công khai gì?
++ Dialect/version,giả định,trade-off,fixture và gap
+- Password thật
+- Mọi record thật

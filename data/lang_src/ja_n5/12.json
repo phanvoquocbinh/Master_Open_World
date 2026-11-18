@@ -1,0 +1,600 @@
+{
+ "no": 12,
+ "title": "Ngày nào có hẹn: đọc lịch sinh hoạt của lớp",
+ "sub": "申込日は 六月二日です。",
+ "goals": [
+  "Đọc đúng các ngày mùng một, hai, bốn, tám, mười và hai mươi.",
+  "Hỏi ngày hẹn bằng 何月何日 và phân biệt ngày với khoảng thời gian.",
+  "Đối chiếu hạn đăng ký với ngày hoạt động để không đến nhầm.",
+  "Viết lời xác nhận tháng, ngày và giờ trên một thẻ lịch mới."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Ngày trong tháng không phải lúc nào cũng đọc số cộng にち. 一日 trong ngày mùng một là ついたち, 二日 là ふつか, 四日 là よっか và 二十日 là はつか. Các dạng có thể được dùng để nói khoảng ngày trong ngữ cảnh khác, nhưng bài này tập trung lịch cụ thể. Hãy tìm cả tháng lẫn ngày và phân biệt ngày đăng ký với ngày tham gia, giống như khi đọc một lịch câu lạc bộ ở Việt Nam.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>Đếm nhịp của よっか: yo-Q-ka, giữ っ trước k; ようか là yo-o-ka, kéo dài o. Cả hai có ba mora nhưng khác nhịp giữa nên chỉ gõ số nhịp chưa đủ. はつか có tsu đầy đủ, không đổi thành はっか. 一日 đọc ついたち khi là mùng một, còn một ngày về độ dài thường đọc いちにち.</p>",
+   "items": [
+    {
+     "sym": "四日・八日",
+     "ex": [
+      "よっか",
+      "ようか"
+     ],
+     "vi": "Cùng số nhịp nhưng một bên ngắt, một bên kéo dài; nghe chất của nhịp giữa."
+    },
+    {
+     "sym": "一日・二十日",
+     "ex": [
+      "ついたち",
+      "はつか"
+     ],
+     "vi": "Ghi nhớ cách đọc ngày như cả từ, đừng suy đoán từ số viết bằng chữ Hán."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "一日",
+     "kana": "ついたち",
+     "romaji": "tsuitachi",
+     "vi": "ngày mùng một",
+     "ex": "会は 六月一日です。",
+     "exVi": "Buổi họp vào ngày mùng một tháng sáu."
+    },
+    {
+     "w": "二日",
+     "kana": "ふつか",
+     "romaji": "futsuka",
+     "vi": "ngày mùng hai",
+     "ex": "二日に 手紙を 出します。",
+     "exVi": "Tôi gửi thư vào ngày mùng hai."
+    },
+    {
+     "w": "四日",
+     "kana": "よっか",
+     "romaji": "yokka",
+     "vi": "ngày mùng bốn",
+     "ex": "四日は 休みです。",
+     "exVi": "Ngày mùng bốn được nghỉ."
+    },
+    {
+     "w": "八日",
+     "kana": "ようか",
+     "romaji": "yooka",
+     "vi": "ngày mùng tám",
+     "ex": "八日に 絵を 見ます。",
+     "exVi": "Tôi xem tranh vào ngày mùng tám."
+    },
+    {
+     "w": "十日",
+     "kana": "とおか",
+     "romaji": "tooka",
+     "vi": "ngày mùng mười",
+     "ex": "十日に 申し込みます。",
+     "exVi": "Tôi đăng ký vào ngày mùng mười."
+    },
+    {
+     "w": "二十日",
+     "kana": "はつか",
+     "romaji": "hatsuka",
+     "vi": "ngày hai mươi",
+     "ex": "二十日に 友だちと 会います。",
+     "exVi": "Tôi gặp bạn vào ngày hai mươi."
+    },
+    {
+     "w": "何月",
+     "kana": "なんがつ",
+     "romaji": "nangatsu",
+     "vi": "tháng mấy",
+     "ex": "旅行は 何月ですか。",
+     "exVi": "Chuyến đi vào tháng mấy?"
+    },
+    {
+     "w": "何日",
+     "kana": "なんにち",
+     "romaji": "nannichi",
+     "vi": "ngày mấy",
+     "ex": "今日は 何日ですか。",
+     "exVi": "Hôm nay là ngày mấy?"
+    },
+    {
+     "w": "予定",
+     "kana": "よてい",
+     "romaji": "yotei",
+     "vi": "kế hoạch/lịch đã dự kiến",
+     "ex": "予定を ノートに 書きます。",
+     "exVi": "Tôi ghi lịch dự kiến vào vở."
+    },
+    {
+     "w": "申込日",
+     "kana": "もうしこみび",
+     "romaji": "mooshikomibi",
+     "vi": "ngày đăng ký",
+     "ex": "申込日は 来週です。",
+     "exVi": "Ngày đăng ký là tuần sau."
+    },
+    {
+     "w": "締め切り",
+     "kana": "しめきり",
+     "romaji": "shimekiri",
+     "vi": "hạn cuối",
+     "ex": "締め切りを 確認します。",
+     "exVi": "Tôi kiểm hạn cuối."
+    },
+    {
+     "w": "カレンダー",
+     "kana": "かれんだー",
+     "romaji": "karendaa",
+     "vi": "lịch",
+     "ex": "カレンダーに 丸を つけます。",
+     "exVi": "Tôi khoanh tròn trên lịch."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Một lịch hẹn đầy đủ có thể viết 六月八日の午前十時. Trợ từ の nối ngày với phần buổi/giờ. Câu 八日に行きます dùng に sau ngày; 日曜日に cũng được nhưng きょう thường không cần に. Với hạn cuối, trước hết dùng mẫu 締め切りは六月四日です để người nghe không lẫn với ngày hoạt động.</p>",
+   "table": [
+    [
+     "Trường lịch",
+     "Mẫu"
+    ],
+    [
+     "Hỏi tháng và ngày",
+     "何月何日ですか"
+    ],
+    [
+     "Nêu ngày tổ chức",
+     "六月八日です"
+    ],
+    [
+     "Nêu ngày hành động",
+     "六月四日に申し込みます"
+    ],
+    [
+     "Phân biệt mùng bốn/tám",
+     "よっか / ようか"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "申込日は 六月二日です。",
+     "vi": "Ngày đăng ký là mùng hai tháng sáu."
+    },
+    {
+     "t": "締め切りは 六月四日です。",
+     "vi": "Hạn cuối là mùng bốn tháng sáu."
+    },
+    {
+     "t": "会は 六月八日に あります。",
+     "vi": "Buổi sinh hoạt diễn ra ngày mùng tám tháng sáu."
+    },
+    {
+     "t": "午前十時に 入口で 会いましょう。",
+     "vi": "Chúng ta gặp ở cửa vào lúc mười giờ sáng nhé."
+    }
+   ],
+   "tips": [
+    "<p>Không đọc mọi 日 thành にち; 四日と八日 cần hai dạng riêng.</p>",
+    "<p>Ngày mùng một khác khoảng một ngày; đọc trường “ngày tổ chức” trước khi chọn cách đọc 一日.</p>",
+    "<p>Đừng chỉ chép số 4 rồi bỏ tháng khi lịch có nhiều tháng; lời xác nhận nên giữ cả 六月.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Người hỏi nghe nhầm mùng tám thành mùng bốn, sau đó kiểm riêng ngày đăng ký; ghi hai mục trên lịch.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "絵の 会は 何月何日ですか。",
+     "vi": "Buổi sinh hoạt vẽ tranh vào tháng mấy, ngày mấy?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "六月八日です。午前十時からです。",
+     "vi": "Ngày mùng tám tháng sáu. Bắt đầu từ mười giờ sáng."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "四日ですか。もう 一度 お願いします。",
+     "vi": "Mùng bốn à? Nhờ bạn nói lại."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "いいえ、八日です。よ・う・か、です。",
+     "vi": "Không, mùng tám. Là yo-o-ka."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "わかりました。申し込みも 八日ですか。",
+     "vi": "Tôi hiểu rồi. Đăng ký cũng vào mùng tám à?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "いいえ。二日から 四日までです。",
+     "vi": "Không. Từ mùng hai đến mùng bốn."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "では、二日に 申し込みます。",
+     "vi": "Vậy tôi sẽ đăng ký ngày mùng hai."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。八日は 色の ペンを 持ってきてください。",
+     "vi": "Vâng. Hôm mùng tám xin mang bút màu đến."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Buổi vẽ tổ chức vào ngày nào?",
+     "o": [
+      "Mùng tám tháng sáu",
+      "Mùng bốn tháng sáu",
+      "Mùng hai tháng tám"
+     ],
+     "a": 0,
+     "e": "Người đáp nhắc rõ 八日 và tách nhịp よ・う・か để sửa việc nghe thành 四日."
+    },
+    {
+     "q": "Khoảng đăng ký là khi nào?",
+     "o": [
+      "Mùng bốn đến mùng tám",
+      "Chỉ đúng ngày mùng tám",
+      "Mùng hai đến mùng bốn"
+     ],
+     "a": 2,
+     "e": "二日から四日まで tách ngày đăng ký khỏi ngày sinh hoạt."
+    },
+    {
+     "q": "Ngày hoạt động cần mang gì?",
+     "o": [
+      "Bút chỉ màu đen",
+      "Bút màu",
+      "Lịch giấy"
+     ],
+     "a": 1,
+     "e": "Lời nhắc cuối dùng 色のペンを持ってきてください."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "六月の クラスの カレンダーです。一日は 休みです。二日から 四日まで、絵の 会の 申し込みを します。受付は 午後一時から 五時までです。朝は 開いていません。\n\n絵の 会は 八日の 午前十時から 十二時までです。初めての 人も 来ることが できます。紙は 教室に ありますが、ペンは 自分で 持ってきます。十日は 作品を みんなで 見ます。\n\n二十日は 次の 月の 予定を 話します。この 日は 絵を かきません。わたしは 二日の 午後に 申し込んで、八日の 会に 行きます。友だちは 四日に 申し込みます。二人とも カレンダーに 会の 日と 締め切りを 別の 色で 書きます。",
+   "vi": "Đây là lịch lớp tháng sáu. Mùng một được nghỉ. Từ mùng hai đến mùng bốn nhận đăng ký buổi vẽ tranh. Quầy nhận đăng ký từ một đến năm giờ chiều. Buổi sáng không mở.\n\nBuổi vẽ diễn ra mùng tám, từ mười giờ sáng đến mười hai giờ. Người mới cũng có thể tham gia. Giấy có sẵn ở phòng học nhưng bút do mỗi người tự mang. Mùng mười cả nhóm xem tác phẩm.\n\nNgày hai mươi chúng tôi bàn lịch tháng tiếp theo. Hôm đó không vẽ. Tôi đăng ký chiều mùng hai và đến buổi vẽ mùng tám. Bạn tôi đăng ký mùng bốn. Cả hai ghi ngày sinh hoạt và hạn cuối bằng hai màu riêng trên lịch.",
+   "gloss": [
+    {
+     "w": "一日",
+     "kana": "ついたち",
+     "romaji": "tsuitachi",
+     "vi": "ngày mùng một"
+    },
+    {
+     "w": "二日",
+     "kana": "ふつか",
+     "romaji": "futsuka",
+     "vi": "ngày mùng hai"
+    },
+    {
+     "w": "四日",
+     "kana": "よっか",
+     "romaji": "yokka",
+     "vi": "ngày mùng bốn"
+    },
+    {
+     "w": "八日",
+     "kana": "ようか",
+     "romaji": "yooka",
+     "vi": "ngày mùng tám"
+    },
+    {
+     "w": "十日",
+     "kana": "とおか",
+     "romaji": "tooka",
+     "vi": "ngày mùng mười"
+    },
+    {
+     "w": "二十日",
+     "kana": "はつか",
+     "romaji": "hatsuka",
+     "vi": "ngày hai mươi"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Có thể đăng ký buổi sáng mùng hai không?",
+     "o": [
+      "Không, quầy chỉ mở chiều",
+      "Có, từ mười giờ",
+      "Có, cả ngày"
+     ],
+     "a": 0,
+     "e": "受付は午後一時から五時まで và 朝は開いていません cùng loại lựa chọn buổi sáng."
+    },
+    {
+     "q": "Vật gì có sẵn trong phòng học?",
+     "o": [
+      "Mọi loại bút",
+      "Lịch cá nhân",
+      "Giấy"
+     ],
+     "a": 2,
+     "e": "Đoạn hai đối chiếu 紙は教室にあります với bút tự mang."
+    },
+    {
+     "q": "Ngày hai mươi làm gì?",
+     "o": [
+      "Đăng ký lần đầu",
+      "Bàn lịch tháng sau",
+      "Vẽ thêm tác phẩm"
+     ],
+     "a": 1,
+     "e": "Bài đọc nói 次の月の予定を話します rồi xác nhận hôm đó không vẽ."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Lịch mới: buổi đọc sách ngày bốn tháng bảy lúc hai giờ chiều. Báo đầy đủ và hỏi bạn có đến không.",
+     "model": "本の 会は 七月四日の 午後二時からです。来ますか。",
+     "vi": "Buổi đọc sách bắt đầu hai giờ chiều ngày mùng bốn tháng bảy. Bạn có đến không?",
+     "tips": "Giữ よっか cho 四日; đừng dùng ようか của lịch vẽ tranh."
+    },
+    {
+     "p": "Bạn nghe chưa rõ là mùng bốn hay mùng tám. Hỏi lại hai lựa chọn và nhờ nói chậm.",
+     "model": "四日ですか、八日ですか。ゆっくり お願いします。",
+     "vi": "Là mùng bốn hay mùng tám? Nhờ bạn nói chậm.",
+     "tips": "Nêu rõ cặp ngày đang phân vân để người kia biết cần xác nhận điểm nào."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Theo thẻ mới, viết ba câu: đăng ký ngày hai tháng bảy; buổi đọc sách ngày bốn tháng bảy lúc hai giờ chiều; hỏi cần mang sách không.",
+   "model": "七月二日に 申し込みます。本の 会は 七月四日の 午後二時からですね。本を 持っていきますか。",
+   "modelVi": "Tôi đăng ký ngày mùng hai tháng bảy. Buổi đọc sách bắt đầu hai giờ chiều mùng bốn tháng bảy nhỉ. Tôi có cần mang sách đi không?",
+   "min": 40,
+   "tips": [
+    "Không gộp ngày đăng ký và ngày tổ chức thành một ngày.",
+    "Khi hỏi mang đồ tới nơi khác, 持っていきますか phù hợp hướng đi từ chỗ người nói."
+   ],
+   "checklist": [
+    "Có tháng bảy ở hai trường ngày.",
+    "Ngày đăng ký là 二日.",
+    "Hoạt động là 四日午後二時.",
+    "Có một câu hỏi về mang sách."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “一日” nghĩa là gì?",
+   "o": [
+    "ngày mùng một",
+    "ngày mùng mười",
+    "kế hoạch/lịch đã dự kiến"
+   ],
+   "a": 0,
+   "e": "会は 六月一日です。 → Buổi họp vào ngày mùng một tháng sáu. Từ cần nhận diện là “一日”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “二日” nghĩa là gì?",
+   "o": [
+    "ngày hai mươi",
+    "ngày đăng ký",
+    "ngày mùng hai"
+   ],
+   "a": 2,
+   "e": "二日に 手紙を 出します。 → Tôi gửi thư vào ngày mùng hai. Từ cần nhận diện là “二日”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “四日” nghĩa là gì?",
+   "o": [
+    "hạn cuối",
+    "ngày mùng bốn",
+    "tháng mấy"
+   ],
+   "a": 1,
+   "e": "四日は 休みです。 → Ngày mùng bốn được nghỉ. Từ cần nhận diện là “四日”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “八日” nghĩa là gì?",
+   "o": [
+    "ngày mùng tám",
+    "ngày mấy",
+    "lịch"
+   ],
+   "a": 0,
+   "e": "八日に 絵を 見ます。 → Tôi xem tranh vào ngày mùng tám. Từ cần nhận diện là “八日”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Viết cách đọc ngày mùng bốn: 四日 = ___",
+   "a": "よっか",
+   "e": "四日 có nhịp ngắt っ, khác 八日 với trường âm o."
+  },
+  {
+   "t": "fill",
+   "q": "Viết cách đọc ngày hai mươi: 二十日 = ___",
+   "a": "はつか",
+   "e": "二十日 là cách đọc ngày đặc biệt はつか, không đọc にじゅうにち."
+  },
+  {
+   "t": "fill",
+   "q": "Điền trợ từ nối ngày và buổi: 七月四日___ 午後です。",
+   "a": "の",
+   "e": "の nối cụm ngày với 午後 trong một danh ngữ chỉ thời điểm."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu báo ngày tổ chức.",
+   "w": [
+    "です。",
+    "八日",
+    "会は",
+    "六月"
+   ],
+   "a": "会は六月八日です。",
+   "e": "六月 đứng trước 八日, cả cụm là ngày mùng tám tháng sáu."
+  },
+  {
+   "q": "Ngày tổ chức sinh hoạt là khi nào?",
+   "o": [
+    "Hai mươi tháng tám",
+    "Mùng mười tháng tám",
+    "Mùng hai tháng mười"
+   ],
+   "a": 0,
+   "e": "受付 là tiếp nhận; 会 được nêu riêng vào 二十日.",
+   "t": "listen",
+   "say": "受付は 八月十日です。会は 八月二十日です。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "Người nghe nên đến ngày nào?",
+   "o": [
+    "Mùng một tháng bảy",
+    "Mùng hai tháng sáu",
+    "Mùng hai tháng bảy"
+   ],
+   "a": 2,
+   "e": "Mùng một được báo nghỉ, lời yêu cầu đến dùng 二日.",
+   "t": "listen",
+   "say": "七月一日は 休みです。二日に 来てください。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "六月四日に 予定を 書きます。",
+   "a": "六月四日に 予定を 書きます。",
+   "lang": "ja-JP",
+   "e": "Nghe ろくがつよっか, giữ tháng sáu và ngày mùng bốn rồi viết hành động ghi kế hoạch."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "十日",
+     "ngày mùng mười"
+    ],
+    [
+     "二十日",
+     "ngày hai mươi"
+    ],
+    [
+     "何月",
+     "tháng mấy"
+    ],
+    [
+     "何日",
+     "ngày mấy"
+    ],
+    [
+     "予定",
+     "kế hoạch/lịch đã dự kiến"
+    ]
+   ],
+   "e": "Ngày, từ hỏi tháng/ngày và kế hoạch có chức năng khác nhau. Xác định 何月 hỏi tháng, 何日 hỏi ngày để không ghép đáp án theo hình chữ 日."
+  },
+  {
+   "q": "Có thể đăng ký buổi sáng mùng hai không?",
+   "o": [
+    "Không, quầy chỉ mở chiều",
+    "Có, từ mười giờ",
+    "Có, cả ngày"
+   ],
+   "a": 0,
+   "e": "受付は午後一時から五時まで và 朝は開いていません cùng loại lựa chọn buổi sáng.",
+   "t": "mc"
+  },
+  {
+   "q": "Vật gì có sẵn trong phòng học?",
+   "o": [
+    "Giấy",
+    "Mọi loại bút",
+    "Lịch cá nhân"
+   ],
+   "a": 0,
+   "e": "Đoạn hai đối chiếu 紙は教室にあります với bút tự mang.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Vẽ lịch giả tháng sáu và tháng bảy, tô ô đăng ký khác màu ô hoạt động, chuẩn bị âm thanh các cặp よっか/ようか.",
+  "steps": [
+   {
+    "t": "20'",
+    "do": "Khởi động bằng hai lịch có cùng số ngày khác tháng; học viên nhận ra cần nghe đủ cả tháng và ngày."
+   },
+   {
+    "t": "20'",
+    "do": "Dạy ついたち/ふつか/よっか/ようか/とおか/はつか, dùng thẻ số để không học chỉ theo thứ tự thuộc lòng."
+   },
+   {
+    "t": "25'",
+    "do": "Đối chiếu nhịp ngắt của よっか với trường âm của ようか; từng cặp nghe và ghi số rồi đổi vai."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe lần đầu ghi ngày hoạt động, lần hai ghi khoảng đăng ký và giờ quầy mở."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc lịch tháng sáu, tô hai màu cho hạn đăng ký và ngày sinh hoạt rồi trả lời bằng chứng."
+   },
+   {
+    "t": "25'",
+    "do": "Luyện thẻ mới tháng bảy với ngày mùng bốn; người nghe cố tình hỏi lại mùng tám để người nói sửa rõ."
+   },
+   {
+    "t": "25'",
+    "do": "Viết xác nhận ngày đăng ký và lịch đọc sách, đổi bài kiểm xem phần giờ có 午後 hay chưa."
+   },
+   {
+    "t": "25'",
+    "do": "Làm bài nghe, điền và chính tả, sau đó giải thích bằng lời sự khác nhau của 一日 chỉ ngày và chỉ khoảng thời gian."
+   }
+  ],
+  "games": [
+   "Bingo ngày trong tháng: giáo viên đọc ngẫu nhiên, học viên đánh số rồi đọc lại ô trúng.",
+   "Hai lịch khác nhau: mỗi cặp phải hỏi 何月何日 để tìm đúng cuộc hẹn thay vì chỉ nghe con số."
+  ],
+  "errors": [
+   "Đọc 四日 và 八日 giống nhau: luyện nhịp ngắt so với kéo dài trước khi ghép tháng.",
+   "Đọc 二十日 theo từng chữ số: học はつか như một đơn vị từ vựng.",
+   "Đến ngày sinh hoạt mới đăng ký: dùng hai màu để tách 締め切り khỏi 会の日.",
+   "Bỏ 午後 vì nghĩ giờ hai đã rõ: yêu cầu nói cả buổi để tránh người nhận hiểu nhầm."
+  ],
+  "homework": "Làm lịch giả tháng tiếp theo có ba sự kiện và hai hạn đăng ký; đọc ghi âm đầy đủ tháng, ngày, buổi và giờ của từng mục."
+ }
+}

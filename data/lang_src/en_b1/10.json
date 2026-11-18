@@ -1,163 +1,852 @@
 {
-  "no": 10,
-  "title": "Viết đoạn văn – Từ nối (although, however, therefore, in addition…)",
-  "sub": "Although it is convenient, online learning has some drawbacks.",
-  "goals": [
-    "Dùng đúng từ nối theo 6 chức năng: thêm ý, đối lập, nguyên nhân, kết quả, ví dụ, kết luận",
-    "Đặt từ nối đúng vị trí và dấu câu; tránh lỗi ‘Although… but…’, ‘Because… so…’",
-    "Chuyển đổi although ↔ despite / in spite of (+ danh từ / V-ing)",
-    "Viết đoạn văn chuẩn: câu chủ đề – câu hỗ trợ – ví dụ – câu kết",
-    "Viết đoạn nghị luận 120–150 từ cân bằng hai mặt của một vấn đề xã hội – công nghệ"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng: từ nối & từ để lập luận", "items": [
-      {"w": "although", "ipa": "/ɔːlˈðəʊ/", "pos": "conj", "vi": "mặc dù (+ mệnh đề)", "ex": "Although it was raining, we went out.", "exVi": "Mặc dù trời mưa, chúng tôi vẫn ra ngoài."},
-      {"w": "even though", "ipa": "/ˌiːvn ˈðəʊ/", "pos": "conj", "vi": "mặc dù (nhấn mạnh hơn although)", "ex": "She went to work even though she was ill.", "exVi": "Cô ấy vẫn đi làm dù đang ốm."},
-      {"w": "despite", "ipa": "/dɪˈspaɪt/", "pos": "prep", "vi": "mặc dù, bất chấp (+ danh từ / V-ing – KHÔNG có of)", "ex": "Despite the rain, the match continued.", "exVi": "Bất chấp trời mưa, trận đấu vẫn tiếp tục."},
-      {"w": "in spite of", "ipa": "/ɪn ˈspaɪt əv/", "pos": "prep", "vi": "mặc dù (= despite, + danh từ / V-ing)", "ex": "In spite of feeling tired, he finished the report.", "exVi": "Dù thấy mệt, anh ấy vẫn làm xong báo cáo."},
-      {"w": "however", "ipa": "/haʊˈevə(r)/", "pos": "adv", "vi": "tuy nhiên (thường đầu câu, sau nó có dấu phẩy)", "ex": "The hotel was cheap. However, it was very noisy.", "exVi": "Khách sạn rẻ. Tuy nhiên, nó rất ồn."},
-      {"w": "nevertheless", "ipa": "/ˌnevəðəˈles/", "pos": "adv", "vi": "tuy vậy, dù sao (trang trọng hơn however)", "ex": "The task was difficult. Nevertheless, we completed it on time.", "exVi": "Nhiệm vụ khó. Tuy vậy, chúng tôi vẫn hoàn thành đúng hạn."},
-      {"w": "whereas", "ipa": "/ˌweərˈæz/", "pos": "conj", "vi": "trong khi (đối lập hai sự việc)", "ex": "My brother loves spicy food, whereas I can't eat it.", "exVi": "Anh tôi mê đồ cay, trong khi tôi không ăn được."},
-      {"w": "on the other hand", "ipa": "/ɒn ði ˈʌðə hænd/", "pos": "phr", "vi": "mặt khác", "ex": "Cities offer more jobs. On the other hand, they are more expensive.", "exVi": "Thành phố có nhiều việc làm hơn. Mặt khác, chúng đắt đỏ hơn."},
-      {"w": "therefore", "ipa": "/ˈðeəfɔː(r)/", "pos": "adv", "vi": "vì vậy, do đó", "ex": "The road was closed. Therefore, we took another route.", "exVi": "Đường bị chặn. Vì vậy, chúng tôi đi đường khác."},
-      {"w": "as a result", "ipa": "/əz ə rɪˈzʌlt/", "pos": "phr", "vi": "kết quả là", "ex": "He didn't revise. As a result, he failed the test.", "exVi": "Cậu ấy không ôn bài. Kết quả là trượt bài kiểm tra."},
-      {"w": "due to", "ipa": "/ˈdjuː tə/", "pos": "prep", "vi": "do, bởi vì (+ danh từ)", "ex": "The flight was delayed due to bad weather.", "exVi": "Chuyến bay bị hoãn do thời tiết xấu."},
-      {"w": "in addition", "ipa": "/ɪn əˈdɪʃn/", "pos": "phr", "vi": "ngoài ra, thêm vào đó", "ex": "The course is cheap. In addition, it is very flexible.", "exVi": "Khoá học rẻ. Ngoài ra, nó rất linh hoạt."},
-      {"w": "moreover", "ipa": "/mɔːrˈəʊvə(r)/", "pos": "adv", "vi": "hơn nữa (trang trọng)", "ex": "The plan is expensive. Moreover, it may not work.", "exVi": "Kế hoạch tốn kém. Hơn nữa, nó có thể không hiệu quả."},
-      {"w": "furthermore", "ipa": "/ˌfɜːðəˈmɔː(r)/", "pos": "adv", "vi": "hơn nữa, vả lại (trang trọng)", "ex": "Furthermore, the new system saves energy.", "exVi": "Hơn nữa, hệ thống mới tiết kiệm năng lượng."},
-      {"w": "for instance", "ipa": "/fər ˈɪnstəns/", "pos": "phr", "vi": "ví dụ (= for example)", "ex": "Some fruits, for instance mangoes, are cheaper in summer.", "exVi": "Một số loại quả, ví dụ xoài, rẻ hơn vào mùa hè."},
-      {"w": "such as", "ipa": "/ˈsʌtʃ əz/", "pos": "phr", "vi": "như là (+ danh từ, đứng giữa câu)", "ex": "I like outdoor sports such as hiking and cycling.", "exVi": "Tôi thích thể thao ngoài trời như leo núi và đạp xe."},
-      {"w": "in conclusion", "ipa": "/ɪn kənˈkluːʒn/", "pos": "phr", "vi": "tóm lại, kết luận lại", "ex": "In conclusion, both options have advantages.", "exVi": "Tóm lại, cả hai lựa chọn đều có ưu điểm."},
-      {"w": "overall", "ipa": "/ˌəʊvərˈɔːl/", "pos": "adv", "vi": "nhìn chung, tổng thể", "ex": "Overall, it was a successful year.", "exVi": "Nhìn chung, đó là một năm thành công."},
-      {"w": "advantage", "ipa": "/ədˈvɑːntɪdʒ/", "pos": "n", "vi": "ưu điểm, lợi thế", "ex": "One advantage of living alone is freedom.", "exVi": "Một ưu điểm của sống một mình là sự tự do."},
-      {"w": "drawback", "ipa": "/ˈdrɔːbæk/", "pos": "n", "vi": "nhược điểm, hạn chế (= disadvantage)", "ex": "The main drawback of this job is the long hours.", "exVi": "Nhược điểm chính của công việc này là làm nhiều giờ."},
-      {"w": "benefit", "ipa": "/ˈbenɪfɪt/", "pos": "n", "vi": "lợi ích; (động từ) có lợi cho", "ex": "Regular exercise has many benefits.", "exVi": "Tập thể dục đều đặn có nhiều lợi ích."},
-      {"w": "topic sentence", "ipa": "/ˈtɒpɪk ˌsentəns/", "pos": "n", "vi": "câu chủ đề (câu nêu ý chính của đoạn)", "ex": "Every paragraph needs a clear topic sentence.", "exVi": "Mỗi đoạn văn cần một câu chủ đề rõ ràng."}
-    ]},
-    {"k": "grammar", "h": "Từ nối theo chức năng – vị trí & dấu câu", "html": "<p>Từ nối giống như “biển chỉ đường” cho người đọc: báo trước ý tiếp theo là thêm, trái ngược, nguyên nhân hay kết quả. Chúng chia thành 3 nhóm ngữ pháp – mỗi nhóm có vị trí và dấu câu riêng:</p><ul><li><b>Liên từ</b> (+ mệnh đề, nối 2 vế trong 1 câu): although, even though, because, since, whereas, while, so, but.</li><li><b>Giới từ</b> (+ danh từ / V-ing): despite, in spite of, because of, due to, such as.</li><li><b>Trạng từ nối</b> (nối 2 câu, đầu câu + dấu phẩy): however, nevertheless, therefore, as a result, in addition, moreover, for example, in conclusion.</li></ul>", "table": [["Chức năng", "+ mệnh đề (trong 1 câu)", "+ danh từ / V-ing", "Đầu câu mới + dấu phẩy"], ["Thêm ý", "and, not only… but also", "as well as, besides", "In addition, / Moreover, / Furthermore, / Also,"], ["Đối lập", "but, although, even though, whereas, while", "despite, in spite of", "However, / Nevertheless, / On the other hand,"], ["Nguyên nhân", "because, since, as", "because of, due to", "–"], ["Kết quả", "so", "–", "Therefore, / As a result, / Consequently,"], ["Ví dụ", "–", "such as, like", "For example, / For instance,"], ["Kết luận", "–", "–", "In conclusion, / Overall, / To sum up,"]], "ex": [
-      {"t": "Although online shopping is convenient, it can be risky.", "vi": "Mặc dù mua sắm trực tuyến tiện lợi, nó có thể rủi ro. (although + mệnh đề, có dấu phẩy giữa hai vế)"},
-      {"t": "Online shopping is convenient. However, it can be risky.", "vi": "Mua sắm trực tuyến tiện lợi. Tuy nhiên, nó có thể rủi ro. (However mở đầu câu mới)"},
-      {"t": "Many people shop online because it saves time.", "vi": "Nhiều người mua sắm trực tuyến vì nó tiết kiệm thời gian."},
-      {"t": "Many people shop online because of the low prices.", "vi": "Nhiều người mua sắm trực tuyến vì giá rẻ. (because of + danh từ)"},
-      {"t": "Prices online are often lower. As a result, small shops are losing customers.", "vi": "Giá trên mạng thường thấp hơn. Kết quả là các cửa hàng nhỏ đang mất khách."}
-    ], "tips": [
-      "<b>Lỗi số 1 của người Việt:</b> tiếng Việt nói “<i>Mặc dù</i>… <i>nhưng</i>…”, “<i>Vì</i>… <i>nên</i>…” – dùng cặp. Tiếng Anh <b>chỉ dùng MỘT</b>: ❌ <i>Although it rained, but we went out.</i> → ✅ <i>Although it rained, we went out.</i> / ✅ <i>It rained, but we went out.</i> Tương tự ❌ <i>Because I was tired, so I went home.</i>",
-      "❌ <i>However I like it.</i> / ❌ <i>I like it, however it is expensive.</i> → ✅ <i>I like it. However, it is expensive.</i> (hoặc dùng dấu chấm phẩy: <i>I like it; however, it is expensive.</i>)",
-      "<b>such as</b> đứng giữa câu, theo sau là danh từ: <i>fruits such as mangoes</i>. Không mở đầu câu bằng ❌ <i>Such as…</i>",
-      "Đừng lạm dụng: mỗi câu một từ nối nghe rất máy móc. Dùng từ nối khi nó thật sự giúp người đọc hiểu quan hệ giữa các ý."
-    ]},
-    {"k": "grammar", "h": "although ↔ despite / in spite of", "html": "<p>Cùng nghĩa “mặc dù”, nhưng khác ngữ pháp: <b>although / even though + mệnh đề (S + V)</b>; <b>despite / in spite of + danh từ / V-ing / the fact that + mệnh đề</b>.</p>", "table": [["although + mệnh đề", "despite / in spite of + …"], ["Although it rained, we played football.", "Despite the rain, we played football. (danh từ)"], ["Although she was tired, she kept working.", "Despite being tired, she kept working. (V-ing, cùng chủ ngữ)"], ["Although he earns a lot, he isn't happy.", "In spite of earning a lot, he isn't happy."], ["Although the hotel was expensive, …", "Despite the fact that the hotel was expensive, …"]], "ex": [
-      {"t": "Even though I set two alarms, I overslept.", "vi": "Dù đặt hai cái báo thức, tôi vẫn ngủ quên."},
-      {"t": "In spite of the traffic, we arrived on time.", "vi": "Bất chấp tắc đường, chúng tôi vẫn đến đúng giờ."},
-      {"t": "Despite having little money, they travelled around Vietnam.", "vi": "Dù có ít tiền, họ vẫn đi du lịch khắp Việt Nam."}
-    ], "tips": [
-      "❌ <i>despite of</i> – sai! Chỉ có <b>despite</b> hoặc <b>in spite of</b>.",
-      "❌ <i>Despite it was raining</i> → ✅ <i>Although it was raining</i> / ✅ <i>Despite the rain</i> / ✅ <i>Despite the fact that it was raining</i>.",
-      "Tương tự: <b>because + mệnh đề</b> (because it rained) ↔ <b>because of / due to + danh từ</b> (because of the rain)."
-    ]},
-    {"k": "text", "h": "Cấu trúc một đoạn văn tiếng Anh chuẩn", "html": "<p>Văn tiếng Việt ở trường thường mở bài dài, “dẫn dắt” rồi mới vào ý. Đoạn văn tiếng Anh thì <b>đi thẳng vào vấn đề</b> và mỗi đoạn chỉ có <b>MỘT ý chính</b>. Cấu trúc 4 phần:</p><table><tr><th>Phần</th><th>Nhiệm vụ</th><th>Ví dụ (chủ đề: làm việc tại nhà)</th></tr><tr><td><b>1. Câu chủ đề</b> (topic sentence)</td><td>Nêu ý chính của cả đoạn – thường là câu đầu</td><td>Working from home has several clear benefits for employees.</td></tr><tr><td><b>2. Câu hỗ trợ</b> (supporting sentences)</td><td>2–3 lý do / luận điểm, nối bằng Firstly, In addition, Moreover…</td><td>Firstly, people save time because they do not have to commute. In addition, they can often concentrate better.</td></tr><tr><td><b>3. Ví dụ / giải thích</b></td><td>Làm rõ luận điểm bằng ví dụ cụ thể, số liệu, trải nghiệm</td><td>For example, a worker who spends 90 minutes a day in traffic gets more than seven hours a week back.</td></tr><tr><td><b>4. Câu kết</b> (concluding sentence)</td><td>Nhắc lại ý chính bằng từ khác / nêu nhận định</td><td>Therefore, it is not surprising that many employees prefer to work at home.</td></tr></table><p><b>Mẹo kiểm tra:</b> che câu chủ đề lại, đọc phần còn lại – người khác có đoán được câu chủ đề không? Nếu có câu nào không liên quan đến ý chính → xoá. Đây chính là tiêu chí <i>Coherence and Cohesion</i> (mạch lạc và liên kết) trong IELTS Writing mà bạn sẽ gặp ở Bài 12.</p>"},
-    {"k": "dialog", "h": "Nghe: Bài giảng ngắn – viết đoạn văn hay", "lang": "en-GB", "note": "Cô Hương giảng cho lớp về cách viết một đoạn văn tiếng Anh; bạn Khoa đặt câu hỏi. Nghe lần 1 (che lời thoại): một đoạn văn tốt có mấy phần? Nghe lần 2: ghi lại sự khác nhau giữa however và although.", "lines": [
-      {"s": "Ms Huong", "g": "f", "t": "Good afternoon, everyone. Today we're going to look at how to write a good paragraph in English.", "vi": "Chào cả lớp. Hôm nay chúng ta sẽ tìm hiểu cách viết một đoạn văn tiếng Anh hay."},
-      {"s": "Ms Huong", "g": "f", "t": "A good paragraph has one main idea. Firstly, you need a topic sentence, which tells the reader what the paragraph is about. For example: online shopping has several advantages for busy people.", "vi": "Một đoạn văn tốt có một ý chính. Thứ nhất, các em cần một câu chủ đề, cho người đọc biết đoạn văn nói về gì. Ví dụ: mua sắm trực tuyến có nhiều ưu điểm cho người bận rộn."},
-      {"s": "Ms Huong", "g": "f", "t": "Secondly, you need two or three supporting sentences. These explain your idea and give examples. For instance, you could say that online shopping saves time, since you don't have to travel to the shops. In addition, prices are often lower.", "vi": "Thứ hai, các em cần hai hoặc ba câu hỗ trợ. Chúng giải thích ý và đưa ví dụ. Chẳng hạn, các em có thể nói mua sắm trực tuyến tiết kiệm thời gian vì không phải đi đến cửa hàng. Ngoài ra, giá thường rẻ hơn."},
-      {"s": "Ms Huong", "g": "f", "t": "Finally, you finish with a concluding sentence, which repeats the main idea in different words.", "vi": "Cuối cùng, các em kết thúc bằng một câu kết, nhắc lại ý chính bằng cách diễn đạt khác."},
-      {"s": "Khoa", "g": "m", "t": "Excuse me, what's the difference between however and although?", "vi": "Thưa cô, however và although khác nhau thế nào ạ?"},
-      {"s": "Ms Huong", "g": "f", "t": "Good question. Although joins two ideas in one sentence. However usually starts a new sentence, and it's followed by a comma.", "vi": "Câu hỏi hay. Although nối hai ý trong một câu. However thường mở đầu câu mới và theo sau là dấu phẩy."},
-      {"s": "Khoa", "g": "m", "t": "So we can't use although and but in the same sentence?", "vi": "Vậy mình không được dùng although và but trong cùng một câu ạ?"},
-      {"s": "Ms Huong", "g": "f", "t": "Exactly. In Vietnamese we use two words together, but in English you use only one of them. The same is true for because and so.", "vi": "Chính xác. Trong tiếng Việt ta dùng cặp hai từ, nhưng tiếng Anh chỉ dùng một trong hai. Because và so cũng vậy."},
-      {"s": "Ms Huong", "g": "f", "t": "One more tip: don't use too many linking words. If every sentence starts with moreover, your writing will sound unnatural. Therefore, use them only when they really help the reader. Now, let's practise.", "vi": "Thêm một mẹo nữa: đừng dùng quá nhiều từ nối. Nếu câu nào cũng bắt đầu bằng moreover, bài viết sẽ thiếu tự nhiên. Vì vậy, chỉ dùng khi chúng thật sự giúp người đọc. Giờ chúng ta luyện tập nhé."}
-    ], "qs": [
-      {"q": "How many main ideas should a good paragraph have?", "o": ["One", "Two", "Three"], "a": 0, "e": "“A good paragraph has one main idea.”"},
-      {"q": "What does a topic sentence do?", "o": ["It gives an example.", "It tells the reader what the paragraph is about.", "It repeats the conclusion."], "a": 1, "e": "“…a topic sentence, which tells the reader what the paragraph is about.”"},
-      {"q": "Which sentence is correct according to the teacher?", "o": ["Although online shopping is convenient, but it can be risky.", "Although online shopping is convenient, it can be risky.", "Online shopping is convenient, however it can be risky."], "a": 1, "e": "Chỉ dùng although (không kèm but). However phải mở đầu câu mới, có dấu phẩy sau."},
-      {"q": "If you use too many linking words, your writing will sound ______.", "a": "unnatural", "e": "“…your writing will sound unnatural.”"},
-      {"q": "What comes at the end of a paragraph?", "o": ["A concluding sentence", "A new topic sentence", "A question"], "a": 0, "e": "“Finally, you finish with a concluding sentence…”"}
-    ]},
-    {"k": "read", "h": "Đọc: Làm việc tại nhà – tốt hơn thật không?", "title": "Working From Home: Is It Really Better?", "text": "Since 2020, millions of office workers around the world have tried working from home. Some people love it, whereas others can't wait to get back to the office. So, is working from home really better?\n\nThere are several clear advantages. Firstly, people save time and money because they do not have to commute. For instance, a worker in Ho Chi Minh City who spends ninety minutes a day in traffic gets more than seven hours a week back. In addition, many people say that they can concentrate better at home, as there are fewer interruptions from colleagues. As a result, some companies have found that their staff are more productive.\n\nOn the other hand, working from home also has serious drawbacks. Although it is comfortable, it can be lonely. Many employees miss chatting with colleagues over lunch, and young workers, in particular, lose the chance to learn from more experienced people. Moreover, the line between work and home life can disappear. Due to messages arriving late at night, some people feel that they are never really off work. Therefore, they become stressed despite working in their own living room.\n\nOverall, working from home is neither perfect nor terrible. It works well for people who are organised and have a quiet space; however, it can be difficult for those who live in small, crowded homes. In my view, a mix of both, such as three days in the office and two at home, may be the best solution for most people.", "vi": "Từ năm 2020, hàng triệu nhân viên văn phòng trên thế giới đã thử làm việc tại nhà. Có người rất thích, trong khi người khác nóng lòng muốn quay lại văn phòng. Vậy làm việc tại nhà có thật sự tốt hơn?\n\nCó một số ưu điểm rõ ràng. Thứ nhất, mọi người tiết kiệm thời gian và tiền bạc vì không phải đi lại. Ví dụ, một người ở TP.HCM mất chín mươi phút mỗi ngày kẹt xe sẽ lấy lại được hơn bảy tiếng mỗi tuần. Ngoài ra, nhiều người nói họ tập trung tốt hơn ở nhà vì ít bị đồng nghiệp làm gián đoạn. Kết quả là một số công ty nhận thấy nhân viên làm việc hiệu quả hơn.\n\nMặt khác, làm việc tại nhà cũng có những nhược điểm nghiêm trọng. Mặc dù thoải mái, nó có thể gây cô đơn. Nhiều nhân viên nhớ những lúc trò chuyện với đồng nghiệp trong bữa trưa, và đặc biệt là người trẻ mất cơ hội học hỏi từ người nhiều kinh nghiệm hơn. Hơn nữa, ranh giới giữa công việc và cuộc sống gia đình có thể biến mất. Do tin nhắn đến cả lúc khuya, một số người cảm thấy mình chẳng bao giờ thật sự được nghỉ. Vì vậy, họ bị căng thẳng dù làm việc ngay trong phòng khách nhà mình.\n\nNhìn chung, làm việc tại nhà không hoàn hảo mà cũng không tồi tệ. Nó phù hợp với người ngăn nắp và có không gian yên tĩnh; tuy nhiên, nó có thể khó khăn với người sống trong nhà chật chội, đông người. Theo tôi, kết hợp cả hai, chẳng hạn ba ngày ở văn phòng và hai ngày ở nhà, có lẽ là giải pháp tốt nhất cho phần lớn mọi người.", "gloss": [
-      {"w": "interruption", "vi": "sự gián đoạn"},
-      {"w": "productive", "vi": "làm việc hiệu quả, năng suất"},
-      {"w": "employee", "vi": "nhân viên, người lao động"},
-      {"w": "in particular", "vi": "đặc biệt là"},
-      {"w": "experienced", "vi": "có kinh nghiệm"},
-      {"w": "be off work", "vi": "được nghỉ, không làm việc"},
-      {"w": "neither … nor …", "vi": "không … cũng không …"},
-      {"w": "organised", "vi": "ngăn nắp, có tổ chức"},
-      {"w": "solution", "vi": "giải pháp"}
-    ], "qs": [
-      {"q": "What is the main idea of paragraph 2?", "o": ["The advantages of working from home", "The drawbacks of working from home", "The history of working from home"], "a": 0, "e": "Câu chủ đề đoạn 2: “There are several clear advantages.”"},
-      {"q": "The worker in Ho Chi Minh City gets more than ______ hours a week back.", "a": "seven", "alt": ["7"], "e": "“…gets more than seven hours a week back.” (90 phút × 5 ngày = 7,5 tiếng)."},
-      {"q": "Which linker at the start of paragraph 3 shows a contrast with paragraph 2?", "o": ["On the other hand", "Moreover", "Therefore"], "a": 0, "e": "On the other hand = mặt khác – chuyển từ ưu điểm sang nhược điểm."},
-      {"q": "“Due to messages arriving late at night…” – due to được theo sau bởi:", "o": ["một mệnh đề đầy đủ (S + V chia thì)", "một cụm danh từ", "một động từ nguyên mẫu"], "a": 1, "e": "due to là giới từ → + danh từ / cụm danh từ (messages arriving late at night)."},
-      {"q": "What does the writer suggest?", "o": ["Everyone should work from home.", "Everyone should go back to the office.", "A mix of office and home working"], "a": 2, "e": "“…a mix of both… may be the best solution for most people.”"},
-      {"q": "“…whereas others can't wait to get back to the office.” – whereas dùng để:", "o": ["thêm ý", "đối lập hai ý", "chỉ kết quả"], "a": 1, "e": "whereas = trong khi (đối lập: some people love it ↔ others want to go back)."}
-    ]},
-    {"k": "speak", "h": "Nói: Trả lời cân bằng hai mặt", "tasks": [
-      {"p": "Trả lời theo kiểu IELTS Speaking Part 3: “What are the advantages and disadvantages of online shopping?” (60–90 giây), dùng ít nhất 5 từ nối khác nhau.", "model": "Well, I think online shopping has both benefits and drawbacks. On the positive side, it's extremely convenient, because you can buy almost anything without leaving your home. In addition, prices online are often lower, and it's easy to compare different shops. For example, I bought my laptop online and saved about two million dong. On the other hand, there are some risks. Although most websites are safe, some sellers send fake or damaged products. Moreover, you can't touch or try things before you buy them. So overall, I'd say online shopping is great for simple things, but for expensive items I still prefer real shops.", "vi": "Tôi nghĩ mua sắm trực tuyến có cả lợi ích và hạn chế. Về mặt tích cực, nó cực kỳ tiện lợi vì bạn có thể mua gần như mọi thứ mà không cần ra khỏi nhà. Ngoài ra, giá trên mạng thường rẻ hơn và dễ so sánh giữa các cửa hàng. Ví dụ, tôi mua laptop online và tiết kiệm được khoảng hai triệu đồng. Mặt khác, có một số rủi ro. Dù phần lớn trang web an toàn, một số người bán gửi hàng giả hoặc hỏng. Hơn nữa, bạn không thể sờ hay thử đồ trước khi mua. Vì vậy, nhìn chung tôi cho rằng mua sắm trực tuyến rất tốt cho những thứ đơn giản, còn đồ đắt tiền thì tôi vẫn thích cửa hàng thật hơn.", "tips": "Khi nói, ngắt hơi ngắn sau từ nối đầu câu (On the other hand, | there are…). Từ nối giúp bạn có thời gian suy nghĩ ý tiếp theo – rất có lợi cho độ trôi chảy."},
-      {"p": "Nối ý: nói 4 câu về chủ đề “sống ở thành phố lớn”, mỗi câu dùng một từ nối: although / however / therefore / for example.", "model": "Although big cities are noisy, they offer many job opportunities. Life there is exciting. However, the cost of living is very high. For example, rent in central Hanoi can be half of a young worker's salary. Therefore, many young people share flats with friends.", "vi": "Mặc dù thành phố lớn ồn ào, chúng có nhiều cơ hội việc làm. Cuộc sống ở đó sôi động. Tuy nhiên, chi phí sinh hoạt rất cao. Ví dụ, tiền thuê nhà ở trung tâm Hà Nội có thể bằng một nửa lương của một người đi làm trẻ. Vì vậy, nhiều người trẻ ở ghép với bạn bè.", "tips": "Kiểm tra: không có ‘Although… but’ và không có ‘However’ ở giữa câu không dấu."},
-      {"p": "“Do you prefer studying online or in a classroom? Why?” – nêu lựa chọn, 2 lý do, 1 nhượng bộ (although / despite), câu kết.", "model": "I prefer studying in a classroom. Firstly, I can ask the teacher questions immediately. Secondly, studying with classmates keeps me motivated, whereas at home I get distracted by my phone. Despite the long journey to my English centre, I think it's worth it. That's why I only use online courses for extra practice.", "vi": "Tôi thích học trên lớp hơn. Thứ nhất, tôi có thể hỏi giáo viên ngay lập tức. Thứ hai, học cùng bạn bè giúp tôi có động lực, trong khi ở nhà tôi bị điện thoại làm xao nhãng. Dù đường đến trung tâm tiếng Anh xa, tôi nghĩ điều đó đáng giá. Đó là lý do tôi chỉ dùng khoá học trực tuyến để luyện thêm.", "tips": "despite + danh từ (the long journey) – không thêm of."}
-    ]},
-    {"k": "write", "h": "Viết: Đoạn văn nghị luận cân bằng", "task": "Viết MỘT đoạn văn 120–150 từ trả lời câu hỏi: “Is online learning as good as classroom learning?” Có câu chủ đề nêu quan điểm, ưu điểm của học trực tuyến (kèm ví dụ), hạn chế, câu kết. Dùng ít nhất 6 từ nối thuộc ít nhất 4 chức năng khác nhau.", "min": 120, "model": "Online learning has become very popular in recent years; however, I believe it cannot completely replace classroom learning. On the one hand, online courses are convenient and often cheaper. For example, a student in a small town can take a course from a famous university without travelling or paying for accommodation. In addition, learners can watch lessons again and study at their own speed. On the other hand, studying alone at home requires a lot of self-discipline. Many students lose motivation because there is no teacher to check their progress. Moreover, it is difficult to practise speaking or teamwork through a screen, and internet problems can interrupt lessons. Although online learning is a useful tool, students still need real teachers and classmates. Therefore, in my opinion, the best option is to combine online and classroom learning.", "modelVi": "Học trực tuyến đã trở nên rất phổ biến trong những năm gần đây; tuy nhiên, tôi tin rằng nó không thể thay thế hoàn toàn việc học trên lớp. Một mặt, các khoá học trực tuyến tiện lợi và thường rẻ hơn. Ví dụ, một học sinh ở thị trấn nhỏ có thể học khoá của một trường đại học nổi tiếng mà không cần đi lại hay trả tiền chỗ ở. Ngoài ra, người học có thể xem lại bài và học theo tốc độ của mình. Mặt khác, tự học ở nhà đòi hỏi rất nhiều kỷ luật. Nhiều học sinh mất động lực vì không có giáo viên kiểm tra tiến độ. Hơn nữa, rất khó luyện nói hay làm việc nhóm qua màn hình, và sự cố mạng có thể làm gián đoạn bài học. Dù học trực tuyến là công cụ hữu ích, học sinh vẫn cần giáo viên và bạn học thật. Vì vậy, theo tôi, lựa chọn tốt nhất là kết hợp học trực tuyến và học trên lớp.", "tips": [
-      "Viết thành MỘT đoạn liền (không xuống dòng) – đúng yêu cầu ‘paragraph’.",
-      "Câu chủ đề nêu rõ quan điểm ngay câu đầu; câu kết khẳng định lại bằng từ khác (Therefore, in my opinion…).",
-      "Cặp On the one hand… / On the other hand… giúp trình bày hai mặt rất rõ ràng.",
-      "Mỗi luận điểm nên có một ví dụ cụ thể (For example, …) – đây là điều giám khảo IELTS đánh giá cao."
-    ], "checklist": [
-      "Một đoạn liền, 120–150 từ",
-      "Câu chủ đề nêu quan điểm ở câu đầu",
-      "Có ít nhất 6 từ nối thuộc ≥ 4 chức năng (thêm ý, đối lập, ví dụ, kết quả, kết luận…)",
-      "Không có lỗi ‘Although… but’ hoặc ‘Because… so’",
-      "However / Therefore / In addition đứng đầu câu (hoặc sau dấu chấm phẩy) và có dấu phẩy sau",
-      "Có ít nhất 1 ví dụ cụ thể và 1 câu kết"
-    ]}
-  ],
-  "exercises": [
-    {"t": "mc", "q": "___ it was raining heavily, we went to the beach.", "o": ["Despite", "Although", "However"], "a": 1, "e": "Sau chỗ trống là mệnh đề (it was raining) → although. Despite + danh từ; However nối hai câu."},
-    {"t": "mc", "q": "___ the heavy rain, we went to the beach.", "o": ["Although", "Despite", "Because"], "a": 1, "e": "Sau chỗ trống là cụm danh từ (the heavy rain) → despite."},
-    {"t": "mc", "q": "The hotel was expensive. ___, the service was excellent.", "o": ["However", "Although", "Despite"], "a": 0, "e": "Mở đầu câu mới, có dấu phẩy sau, ý đối lập → However."},
-    {"t": "mc", "q": "Câu nào ĐÚNG?", "o": ["Although he is rich, but he is not happy.", "Although he is rich, he is not happy.", "Despite he is rich, he is not happy."], "a": 1, "e": "Không dùng although + but cùng nhau; despite không đi với mệnh đề."},
-    {"t": "mc", "q": "Câu nào ĐÚNG?", "o": ["Because it was late, so we took a taxi.", "It was late, so we took a taxi.", "Because of it was late, we took a taxi."], "a": 1, "e": "Chỉ dùng một: because… hoặc …so…. because of + danh từ, không + mệnh đề."},
-    {"t": "fill", "q": "The flight was cancelled ___ to bad weather.", "a": "due", "e": "due to + danh từ = do, bởi vì."},
-    {"t": "fill", "q": "Many tropical fruits, ___ as mangoes and lychees, grow well in this area.", "a": "such", "e": "such as + danh từ (liệt kê ví dụ giữa câu)."},
-    {"t": "mc", "q": "She studied very hard. ___, she passed with excellent marks.", "o": ["As a result", "Despite", "Whereas"], "a": 0, "e": "Câu sau là kết quả của câu trước → As a result."},
-    {"t": "mc", "q": "My brother loves spicy food, ___ I can't eat it at all.", "o": ["whereas", "therefore", "in addition"], "a": 0, "e": "Đối lập hai người trong cùng một câu → whereas."},
-    {"t": "fill", "q": "In ___ of feeling tired, he finished the report. (dùng 1 từ)", "a": "spite", "e": "in spite of + V-ing = despite + V-ing."},
-    {"t": "match", "q": "Nối chức năng với từ nối phù hợp:", "pairs": [["Thêm ý", "in addition"], ["Đối lập", "however"], ["Kết quả", "therefore"], ["Đưa ví dụ", "for instance"], ["Kết luận", "in conclusion"], ["Nguyên nhân (+ danh từ)", "because of"]], "e": "Nắm chức năng để chọn đúng từ nối khi viết."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["time.", "the", "we", "Despite", "arrived", "on", "traffic,"], "a": "Despite the traffic, we arrived on time.", "e": "Despite + cụm danh từ, + mệnh đề chính."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["cheaper.", "online", "are", "In", "often", "courses", "addition,"], "a": "In addition, online courses are often cheaper.", "e": "In addition đứng đầu câu, có dấu phẩy."},
-    {"t": "listen", "say": "Although the course was expensive, I think it was worth the money, because I learnt a lot.", "lang": "en-GB", "q": "What is the speaker's opinion of the course?", "o": ["It was too expensive and not useful.", "It was expensive but worth it.", "It was cheap and useful."], "a": 1, "e": "Although… expensive (nhượng bộ), … worth the money (ý chính)."},
-    {"t": "listen", "say": "Working from home saves time. However, it can be lonely, and some people find it hard to stop working in the evening.", "lang": "en-GB", "q": "What problem does the speaker mention?", "o": ["It wastes time.", "It can be lonely.", "It is expensive."], "a": 1, "e": "Sau However là nhược điểm: it can be lonely…"},
-    {"t": "listen", "say": "Due to the heavy rain, the outdoor concert has been moved to the sports hall.", "lang": "en-GB", "q": "Why was the concert moved?", "o": ["Because of the rain", "Because the hall was free", "Because of the traffic"], "a": 0, "e": "Due to the heavy rain = because of the rain."},
-    {"t": "dict", "say": "However, there are also some disadvantages.", "lang": "en-GB", "a": "However, there are also some disadvantages.", "e": "However đầu câu + dấu phẩy."}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Thẻ từ nối màu theo chức năng (xanh: thêm ý, đỏ: đối lập, vàng: nguyên nhân – kết quả, tím: ví dụ – kết luận); 1 đoạn văn mẫu cắt rời thành từng câu để học viên xếp lại; bút dạ 4 màu để ‘tô màu cấu trúc’ đoạn văn; đồng hồ bấm giờ.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: GV viết 2 câu rời ‘It was raining. We played football.’ – học viên nối bằng càng nhiều cách càng tốt (but, although, despite, however…). GV ghi lại, phát hiện ngay lỗi ‘Although… but’ nếu có."},
-      {"t": "15'", "do": "Từ vựng: phát thẻ màu, học viên xếp từ nối vào 6 chức năng. Luyện phát âm: although /ɔːlˈðəʊ/ (âm ð), therefore /ˈðeəfɔː/, whereas /ˌweərˈæz/, moreover /mɔːrˈəʊvə/."},
-      {"t": "25'", "do": "Ngữ pháp 1: bảng 3 nhóm (liên từ / giới từ / trạng từ nối) và dấu câu. Nhấn mạnh lỗi cặp ‘Mặc dù… nhưng’, ‘Vì… nên’. Drill: GV đọc 2 câu, học viên nối bằng từ nối được chỉ định."},
-      {"t": "15'", "do": "Ngữ pháp 2: although ↔ despite. Học viên viết lại 6 câu theo 2 cách. Lưu ý ‘despite of’ là sai."},
-      {"t": "20'", "do": "Nghe bài giảng của cô Hương: lần 1 – đoạn văn có mấy phần? Lần 2 – ghi khác biệt however/although. Lần 3 – liệt kê mọi từ nối cô Hương dùng."},
-      {"t": "5'", "do": "Tổng kết; giao bài tập 1–10 trong game."},
-      {"t": "Buổi 2 · 15'", "do": "Cấu trúc đoạn văn: phát đoạn văn mẫu cắt rời, nhóm xếp lại đúng thứ tự; sau đó dùng 4 màu tô câu chủ đề / câu hỗ trợ / ví dụ / câu kết."},
-      {"t": "20'", "do": "Đọc ‘Working From Home…’: tìm câu chủ đề mỗi đoạn; khoanh tròn từ nối và ghi chức năng; trả lời 6 câu hỏi."},
-      {"t": "15'", "do": "Nói: cặp đôi trả lời câu hỏi online shopping (task 1), người nghe đếm số từ nối khác nhau của bạn; đổi vai với task 3."},
-      {"t": "25'", "do": "Viết đoạn văn 120–150 từ: 5' lập dàn ý (câu chủ đề + 2 ưu + 2 nhược + kết), 15' viết, 5' đổi bài, bạn dùng 4 màu tô cấu trúc và kiểm tra checklist."},
-      {"t": "15'", "do": "Bài tập 11–17 trong game; chữa lỗi chung; giao bài về nhà."}
+ "no": 10,
+ "title": "Viết đoạn văn – Từ nối (although, however, therefore, in addition…)",
+ "sub": "Although it is convenient, online learning has some drawbacks.",
+ "goals": [
+  "Dùng đúng từ nối theo 6 chức năng: thêm ý, đối lập, nguyên nhân, kết quả, ví dụ, kết luận",
+  "Đặt từ nối đúng vị trí và dấu câu; tránh lỗi ‘Although… but…’, ‘Because… so…’",
+  "Chuyển đổi although ↔ despite / in spite of (+ danh từ / V-ing)",
+  "Viết đoạn văn chuẩn: câu chủ đề – câu hỗ trợ – ví dụ – câu kết",
+  "Viết đoạn nghị luận 120–150 từ cân bằng hai mặt của một vấn đề xã hội – công nghệ"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng: từ nối & từ để lập luận",
+   "items": [
+    {
+     "w": "although",
+     "ipa": "/ɔːlˈðəʊ/",
+     "pos": "conj",
+     "vi": "mặc dù (+ mệnh đề)",
+     "ex": "Although it was raining, we went out.",
+     "exVi": "Mặc dù trời mưa, chúng tôi vẫn ra ngoài."
+    },
+    {
+     "w": "even though",
+     "ipa": "/ˌiːvn ˈðəʊ/",
+     "pos": "conj",
+     "vi": "mặc dù (nhấn mạnh hơn although)",
+     "ex": "She went to work even though she was ill.",
+     "exVi": "Cô ấy vẫn đi làm dù đang ốm."
+    },
+    {
+     "w": "despite",
+     "ipa": "/dɪˈspaɪt/",
+     "pos": "prep",
+     "vi": "mặc dù, bất chấp (+ danh từ / V-ing – KHÔNG có of)",
+     "ex": "Despite the rain, the match continued.",
+     "exVi": "Bất chấp trời mưa, trận đấu vẫn tiếp tục."
+    },
+    {
+     "w": "in spite of",
+     "ipa": "/ɪn ˈspaɪt əv/",
+     "pos": "prep",
+     "vi": "mặc dù (= despite, + danh từ / V-ing)",
+     "ex": "In spite of feeling tired, he finished the report.",
+     "exVi": "Dù thấy mệt, anh ấy vẫn làm xong báo cáo."
+    },
+    {
+     "w": "however",
+     "ipa": "/haʊˈevə(r)/",
+     "pos": "adv",
+     "vi": "tuy nhiên (thường đầu câu, sau nó có dấu phẩy)",
+     "ex": "The hotel was cheap. However, it was very noisy.",
+     "exVi": "Khách sạn rẻ. Tuy nhiên, nó rất ồn."
+    },
+    {
+     "w": "nevertheless",
+     "ipa": "/ˌnevəðəˈles/",
+     "pos": "adv",
+     "vi": "tuy vậy, dù sao (trang trọng hơn however)",
+     "ex": "The task was difficult. Nevertheless, we completed it on time.",
+     "exVi": "Nhiệm vụ khó. Tuy vậy, chúng tôi vẫn hoàn thành đúng hạn."
+    },
+    {
+     "w": "whereas",
+     "ipa": "/ˌweərˈæz/",
+     "pos": "conj",
+     "vi": "trong khi (đối lập hai sự việc)",
+     "ex": "My brother loves spicy food, whereas I can't eat it.",
+     "exVi": "Anh tôi mê đồ cay, trong khi tôi không ăn được."
+    },
+    {
+     "w": "on the other hand",
+     "ipa": "/ɒn ði ˈʌðə hænd/",
+     "pos": "phr",
+     "vi": "mặt khác",
+     "ex": "Cities offer more jobs. On the other hand, they are more expensive.",
+     "exVi": "Thành phố có nhiều việc làm hơn. Mặt khác, chúng đắt đỏ hơn."
+    },
+    {
+     "w": "therefore",
+     "ipa": "/ˈðeəfɔː(r)/",
+     "pos": "adv",
+     "vi": "vì vậy, do đó",
+     "ex": "The road was closed. Therefore, we took another route.",
+     "exVi": "Đường bị chặn. Vì vậy, chúng tôi đi đường khác."
+    },
+    {
+     "w": "as a result",
+     "ipa": "/əz ə rɪˈzʌlt/",
+     "pos": "phr",
+     "vi": "kết quả là",
+     "ex": "He didn't revise. As a result, he failed the test.",
+     "exVi": "Cậu ấy không ôn bài. Kết quả là trượt bài kiểm tra."
+    },
+    {
+     "w": "due to",
+     "ipa": "/ˈdjuː tə/",
+     "pos": "prep",
+     "vi": "do, bởi vì (+ danh từ)",
+     "ex": "The flight was delayed due to bad weather.",
+     "exVi": "Chuyến bay bị hoãn do thời tiết xấu."
+    },
+    {
+     "w": "in addition",
+     "ipa": "/ɪn əˈdɪʃn/",
+     "pos": "phr",
+     "vi": "ngoài ra, thêm vào đó",
+     "ex": "The course is cheap. In addition, it is very flexible.",
+     "exVi": "Khoá học rẻ. Ngoài ra, nó rất linh hoạt."
+    },
+    {
+     "w": "moreover",
+     "ipa": "/mɔːrˈəʊvə(r)/",
+     "pos": "adv",
+     "vi": "hơn nữa (trang trọng)",
+     "ex": "The plan is expensive. Moreover, it may not work.",
+     "exVi": "Kế hoạch tốn kém. Hơn nữa, nó có thể không hiệu quả."
+    },
+    {
+     "w": "furthermore",
+     "ipa": "/ˌfɜːðəˈmɔː(r)/",
+     "pos": "adv",
+     "vi": "hơn nữa, vả lại (trang trọng)",
+     "ex": "Furthermore, the new system saves energy.",
+     "exVi": "Hơn nữa, hệ thống mới tiết kiệm năng lượng."
+    },
+    {
+     "w": "for instance",
+     "ipa": "/fər ˈɪnstəns/",
+     "pos": "phr",
+     "vi": "ví dụ (= for example)",
+     "ex": "Some fruits, for instance mangoes, are cheaper in summer.",
+     "exVi": "Một số loại quả, ví dụ xoài, rẻ hơn vào mùa hè."
+    },
+    {
+     "w": "such as",
+     "ipa": "/ˈsʌtʃ əz/",
+     "pos": "phr",
+     "vi": "như là (+ danh từ, đứng giữa câu)",
+     "ex": "I like outdoor sports such as hiking and cycling.",
+     "exVi": "Tôi thích thể thao ngoài trời như leo núi và đạp xe."
+    },
+    {
+     "w": "in conclusion",
+     "ipa": "/ɪn kənˈkluːʒn/",
+     "pos": "phr",
+     "vi": "tóm lại, kết luận lại",
+     "ex": "In conclusion, both options have advantages.",
+     "exVi": "Tóm lại, cả hai lựa chọn đều có ưu điểm."
+    },
+    {
+     "w": "overall",
+     "ipa": "/ˌəʊvərˈɔːl/",
+     "pos": "adv",
+     "vi": "nhìn chung, tổng thể",
+     "ex": "Overall, it was a successful year.",
+     "exVi": "Nhìn chung, đó là một năm thành công."
+    },
+    {
+     "w": "advantage",
+     "ipa": "/ədˈvɑːntɪdʒ/",
+     "pos": "n",
+     "vi": "ưu điểm, lợi thế",
+     "ex": "One advantage of living alone is freedom.",
+     "exVi": "Một ưu điểm của sống một mình là sự tự do."
+    },
+    {
+     "w": "drawback",
+     "ipa": "/ˈdrɔːbæk/",
+     "pos": "n",
+     "vi": "nhược điểm, hạn chế (= disadvantage)",
+     "ex": "The main drawback of this job is the long hours.",
+     "exVi": "Nhược điểm chính của công việc này là làm nhiều giờ."
+    },
+    {
+     "w": "benefit",
+     "ipa": "/ˈbenɪfɪt/",
+     "pos": "n",
+     "vi": "lợi ích; (động từ) có lợi cho",
+     "ex": "Regular exercise has many benefits.",
+     "exVi": "Tập thể dục đều đặn có nhiều lợi ích."
+    },
+    {
+     "w": "topic sentence",
+     "ipa": "/ˈtɒpɪk ˌsentəns/",
+     "pos": "n",
+     "vi": "câu chủ đề (câu nêu ý chính của đoạn)",
+     "ex": "Every paragraph needs a clear topic sentence.",
+     "exVi": "Mỗi đoạn văn cần một câu chủ đề rõ ràng."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Từ nối theo chức năng – vị trí & dấu câu",
+   "html": "<p>Từ nối giống như “biển chỉ đường” cho người đọc: báo trước ý tiếp theo là thêm, trái ngược, nguyên nhân hay kết quả. Chúng chia thành 3 nhóm ngữ pháp – mỗi nhóm có vị trí và dấu câu riêng:</p><ul><li><b>Liên từ</b> (+ mệnh đề, nối 2 vế trong 1 câu): although, even though, because, since, whereas, while, so, but.</li><li><b>Giới từ</b> (+ danh từ / V-ing): despite, in spite of, because of, due to, such as.</li><li><b>Trạng từ nối</b> (nối 2 câu, đầu câu + dấu phẩy): however, nevertheless, therefore, as a result, in addition, moreover, for example, in conclusion.</li></ul>",
+   "table": [
+    [
+     "Chức năng",
+     "+ mệnh đề (trong 1 câu)",
+     "+ danh từ / V-ing",
+     "Đầu câu mới + dấu phẩy"
     ],
-    "games": [
-      "Domino từ nối: mỗi nhóm có thẻ nửa câu đầu (Although the hotel was cheap,… / The hotel was cheap.…) và nửa sau; ghép đúng ngữ pháp và dấu câu, nhóm nhanh nhất thắng.",
-      "Tranh luận 60 giây: GV nêu chủ đề (Should students wear uniforms?), 2 học viên luân phiên nói, mỗi câu phải bắt đầu bằng một từ nối khác nhau; ai lặp lại hoặc dùng sai thì thua.",
-      "Tô màu đoạn văn: các nhóm thi phân tích nhanh một đoạn văn lạ bằng 4 màu, nhóm xác định đúng câu chủ đề và câu kết trước được điểm."
+    [
+     "Thêm ý",
+     "and, not only… but also",
+     "as well as, besides",
+     "In addition, / Moreover, / Furthermore, / Also,"
     ],
-    "errors": [
-      "‘*Although…, but…’, ‘*Because…, so…’ (dịch cặp từ tiếng Việt). Sửa: chỉ giữ một từ.",
-      "‘*However I agree’ / ‘…, however it is…’ (thiếu dấu, sai vị trí). Sửa: … . However, it is… hoặc …; however, it is…",
-      "‘*Despite of the rain’, ‘*Despite it rained’. Sửa: Despite the rain / Although it rained.",
-      "‘*Because of it was late’. Sửa: Because it was late / Because of the late hour.",
-      "Mở câu bằng ‘*Such as…’. Sửa: For example, … hoặc đặt such as giữa câu sau danh từ.",
-      "Lạm dụng moreover/furthermore ở mọi câu khiến bài viết máy móc; đoạn văn không có câu chủ đề (mở bài lan man kiểu văn trường)."
+    [
+     "Đối lập",
+     "but, although, even though, whereas, while",
+     "despite, in spite of",
+     "However, / Nevertheless, / On the other hand,"
     ],
-    "homework": "Làm 17 bài tập trong game (≥ 80%); viết lại đoạn văn sau khi được bạn góp ý; tìm 1 đoạn văn tiếng Anh ngắn (báo, blog học tập) và tô màu 4 phần cấu trúc; ghi âm phần Nói 1 (90 giây); ôn thẻ từ vựng mỗi ngày."
+    [
+     "Nguyên nhân",
+     "because, since, as",
+     "because of, due to",
+     "–"
+    ],
+    [
+     "Kết quả",
+     "so",
+     "–",
+     "Therefore, / As a result, / Consequently,"
+    ],
+    [
+     "Ví dụ",
+     "–",
+     "such as, like",
+     "For example, / For instance,"
+    ],
+    [
+     "Kết luận",
+     "–",
+     "–",
+     "In conclusion, / Overall, / To sum up,"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Although online shopping is convenient, it can be risky.",
+     "vi": "Mặc dù mua sắm trực tuyến tiện lợi, nó có thể rủi ro. (although + mệnh đề, có dấu phẩy giữa hai vế)"
+    },
+    {
+     "t": "Online shopping is convenient. However, it can be risky.",
+     "vi": "Mua sắm trực tuyến tiện lợi. Tuy nhiên, nó có thể rủi ro. (However mở đầu câu mới)"
+    },
+    {
+     "t": "Many people shop online because it saves time.",
+     "vi": "Nhiều người mua sắm trực tuyến vì nó tiết kiệm thời gian."
+    },
+    {
+     "t": "Many people shop online because of the low prices.",
+     "vi": "Nhiều người mua sắm trực tuyến vì giá rẻ. (because of + danh từ)"
+    },
+    {
+     "t": "Prices online are often lower. As a result, small shops are losing customers.",
+     "vi": "Giá trên mạng thường thấp hơn. Kết quả là các cửa hàng nhỏ đang mất khách."
+    }
+   ],
+   "tips": [
+    "<b>Lỗi số 1 của người Việt: </b> tiếng Việt nói “<i>Mặc dù</i>… <i>nhưng</i>…”, “<i>Vì</i>… <i>nên</i>…” – dùng cặp. Tiếng Anh <b>chỉ dùng MỘT</b>: ❌ <i>Although it rained, but we went out.</i> → ✅ <i>Although it rained, we went out.</i> / ✅ <i>It rained, but we went out.</i> Tương tự ❌ <i>Because I was tired, so I went home.</i>",
+    "❌ <i>However I like it.</i> / ❌ <i>I like it, however it is expensive.</i> → ✅ <i>I like it. However, it is expensive.</i> (hoặc dùng dấu chấm phẩy: <i>I like it; however, it is expensive.</i>)",
+    "<b>such as</b> đứng giữa câu, theo sau là danh từ: <i>fruits such as mangoes</i>. Không mở đầu câu bằng ❌ <i>Such as…</i>",
+    "Đừng lạm dụng: mỗi câu một từ nối nghe rất máy móc. Dùng từ nối khi nó thật sự giúp người đọc hiểu quan hệ giữa các ý."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "although ↔ despite / in spite of",
+   "html": "<p>Cùng nghĩa “mặc dù”, nhưng khác ngữ pháp: <b>although / even though + mệnh đề (S + V)</b>; <b>despite / in spite of + danh từ / V-ing / the fact that + mệnh đề</b>.</p>",
+   "table": [
+    [
+     "although + mệnh đề",
+     "despite / in spite of + …"
+    ],
+    [
+     "Although it rained, we played football.",
+     "Despite the rain, we played football. (danh từ)"
+    ],
+    [
+     "Although she was tired, she kept working.",
+     "Despite being tired, she kept working. (V-ing, cùng chủ ngữ)"
+    ],
+    [
+     "Although he earns a lot, he isn't happy.",
+     "In spite of earning a lot, he isn't happy."
+    ],
+    [
+     "Although the hotel was expensive, …",
+     "Despite the fact that the hotel was expensive, …"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Even though I set two alarms, I overslept.",
+     "vi": "Dù đặt hai cái báo thức, tôi vẫn ngủ quên."
+    },
+    {
+     "t": "In spite of the traffic, we arrived on time.",
+     "vi": "Bất chấp tắc đường, chúng tôi vẫn đến đúng giờ."
+    },
+    {
+     "t": "Despite having little money, they travelled around Vietnam.",
+     "vi": "Dù có ít tiền, họ vẫn đi du lịch khắp Việt Nam."
+    }
+   ],
+   "tips": [
+    "❌ <i>despite of</i> – sai! Chỉ có <b>despite</b> hoặc <b>in spite of</b>.",
+    "❌ <i>Despite it was raining</i> → ✅ <i>Although it was raining</i> / ✅ <i>Despite the rain</i> / ✅ <i>Despite the fact that it was raining</i>.",
+    "Tương tự: <b>because + mệnh đề</b> (because it rained) ↔ <b>because of / due to + danh từ</b> (because of the rain)."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Cấu trúc một đoạn văn tiếng Anh chuẩn",
+   "html": "<p>Văn tiếng Việt ở trường thường mở bài dài, “dẫn dắt” rồi mới vào ý. Đoạn văn tiếng Anh thì <b>đi thẳng vào vấn đề</b> và mỗi đoạn chỉ có <b>MỘT ý chính</b>. Cấu trúc 4 phần:</p><table><tr><th>Phần</th><th>Nhiệm vụ</th><th>Ví dụ (chủ đề: làm việc tại nhà)</th></tr><tr><td><b>1. Câu chủ đề</b> (topic sentence)</td><td>Nêu ý chính của cả đoạn – thường là câu đầu</td><td>Working from home has several clear benefits for employees.</td></tr><tr><td><b>2. Câu hỗ trợ</b> (supporting sentences)</td><td>2–3 lý do / luận điểm, nối bằng Firstly, In addition, Moreover…</td><td>Firstly, people save time because they do not have to commute. In addition, they can often concentrate better.</td></tr><tr><td><b>3. Ví dụ / giải thích</b></td><td>Làm rõ luận điểm bằng ví dụ cụ thể, số liệu, trải nghiệm</td><td>For example, a worker who spends 90 minutes a day in traffic gets more than seven hours a week back.</td></tr><tr><td><b>4. Câu kết</b> (concluding sentence)</td><td>Nhắc lại ý chính bằng từ khác / nêu nhận định</td><td>Therefore, it is not surprising that many employees prefer to work at home.</td></tr></table><p><b>Mẹo kiểm tra:</b> che câu chủ đề lại, đọc phần còn lại – người khác có đoán được câu chủ đề không? Nếu có câu nào không liên quan đến ý chính → xoá. Đây chính là tiêu chí <i>Coherence and Cohesion</i> (mạch lạc và liên kết) trong IELTS Writing mà bạn sẽ gặp ở Bài 12.</p>"
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Bài giảng ngắn – viết đoạn văn hay",
+   "lang": "en-GB",
+   "note": "Cô Hương giảng cho lớp về cách viết một đoạn văn tiếng Anh; bạn Khoa đặt câu hỏi. Nghe lần 1 (che lời thoại): một đoạn văn tốt có mấy phần? Nghe lần 2: ghi lại sự khác nhau giữa however và although.",
+   "lines": [
+    {
+     "s": "Ms Huong",
+     "g": "f",
+     "t": "Good afternoon, everyone. Today we're going to look at how to write a good paragraph in English.",
+     "vi": "Chào cả lớp. Hôm nay chúng ta sẽ tìm hiểu cách viết một đoạn văn tiếng Anh hay."
+    },
+    {
+     "s": "Ms Huong",
+     "g": "f",
+     "t": "A good paragraph has one main idea. Firstly, you need a topic sentence, which tells the reader what the paragraph is about. For example: online shopping has several advantages for busy people.",
+     "vi": "Một đoạn văn tốt có một ý chính. Thứ nhất, các em cần một câu chủ đề, cho người đọc biết đoạn văn nói về gì. Ví dụ: mua sắm trực tuyến có nhiều ưu điểm cho người bận rộn."
+    },
+    {
+     "s": "Ms Huong",
+     "g": "f",
+     "t": "Secondly, you need two or three supporting sentences. These explain your idea and give examples. For instance, you could say that online shopping saves time, since you don't have to travel to the shops. In addition, prices are often lower.",
+     "vi": "Thứ hai, các em cần hai hoặc ba câu hỗ trợ. Chúng giải thích ý và đưa ví dụ. Chẳng hạn, các em có thể nói mua sắm trực tuyến tiết kiệm thời gian vì không phải đi đến cửa hàng. Ngoài ra, giá thường rẻ hơn."
+    },
+    {
+     "s": "Ms Huong",
+     "g": "f",
+     "t": "Finally, you finish with a concluding sentence, which repeats the main idea in different words.",
+     "vi": "Cuối cùng, các em kết thúc bằng một câu kết, nhắc lại ý chính bằng cách diễn đạt khác."
+    },
+    {
+     "s": "Khoa",
+     "g": "m",
+     "t": "Excuse me, what's the difference between however and although?",
+     "vi": "Thưa cô, however và although khác nhau thế nào ạ?"
+    },
+    {
+     "s": "Ms Huong",
+     "g": "f",
+     "t": "Good question. Although joins two ideas in one sentence. However usually starts a new sentence, and it's followed by a comma.",
+     "vi": "Câu hỏi hay. Although nối hai ý trong một câu. However thường mở đầu câu mới và theo sau là dấu phẩy."
+    },
+    {
+     "s": "Khoa",
+     "g": "m",
+     "t": "So we can't use although and but in the same sentence?",
+     "vi": "Vậy mình không được dùng although và but trong cùng một câu ạ?"
+    },
+    {
+     "s": "Ms Huong",
+     "g": "f",
+     "t": "Exactly. In Vietnamese we use two words together, but in English you use only one of them. The same is true for because and so.",
+     "vi": "Chính xác. Trong tiếng Việt ta dùng cặp hai từ, nhưng tiếng Anh chỉ dùng một trong hai. Because và so cũng vậy."
+    },
+    {
+     "s": "Ms Huong",
+     "g": "f",
+     "t": "One more tip: don't use too many linking words. If every sentence starts with moreover, your writing will sound unnatural. Therefore, use them only when they really help the reader. Now, let's practise.",
+     "vi": "Thêm một mẹo nữa: đừng dùng quá nhiều từ nối. Nếu câu nào cũng bắt đầu bằng moreover, bài viết sẽ thiếu tự nhiên. Vì vậy, chỉ dùng khi chúng thật sự giúp người đọc. Giờ chúng ta luyện tập nhé."
+    }
+   ],
+   "qs": [
+    {
+     "q": "How many main ideas should a good paragraph have?",
+     "o": [
+      "One",
+      "Two",
+      "Three"
+     ],
+     "a": 0,
+     "e": "“A good paragraph has one main idea.”"
+    },
+    {
+     "q": "What does a topic sentence do?",
+     "o": [
+      "It gives an example.",
+      "It tells the reader what the paragraph is about.",
+      "It repeats the conclusion."
+     ],
+     "a": 1,
+     "e": "“…a topic sentence, which tells the reader what the paragraph is about.”"
+    },
+    {
+     "q": "Which sentence is correct according to the teacher?",
+     "o": [
+      "Although online shopping is convenient, but it can be risky.",
+      "Although online shopping is convenient, it can be risky.",
+      "Online shopping is convenient, however it can be risky."
+     ],
+     "a": 1,
+     "e": "Chỉ dùng although (không kèm but). However phải mở đầu câu mới, có dấu phẩy sau."
+    },
+    {
+     "q": "If you use too many linking words, your writing will sound ______.",
+     "a": "unnatural",
+     "e": "“…your writing will sound unnatural.”"
+    },
+    {
+     "q": "What comes at the end of a paragraph?",
+     "o": [
+      "A concluding sentence",
+      "A new topic sentence",
+      "A question"
+     ],
+     "a": 0,
+     "e": "“Finally, you finish with a concluding sentence…”"
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Làm việc tại nhà – tốt hơn thật không?",
+   "title": "Working From Home: Is It Really Better?",
+   "text": "Since 2020, millions of office workers around the world have tried working from home. Some people love it, whereas others can't wait to get back to the office. So, is working from home really better?\n\nThere are several clear advantages. Firstly, people save time and money because they do not have to commute. For instance, a worker in Orinvale who spends ninety minutes a day in traffic gets more than seven hours a week back. In addition, many people say that they can concentrate better at home, as there are fewer interruptions from colleagues. As a result, some companies have found that their staff are more productive.\n\nOn the other hand, working from home also has serious drawbacks. Although it is comfortable, it can be lonely. Many employees miss chatting with colleagues over lunch, and young workers, in particular, lose the chance to learn from more experienced people. Moreover, the line between work and home life can disappear. Due to messages arriving late at night, some people feel that they are never really off work. Therefore, they become stressed despite working in their own living room.\n\nOverall, working from home is neither perfect nor terrible. It works well for people who are organised and have a quiet space; however, it can be difficult for those who live in small, crowded homes. In my view, a mix of both, such as three days in the office and two at home, may be the best solution for most people.",
+   "vi": "Từ năm 2020, hàng triệu nhân viên văn phòng trên thế giới đã thử làm việc tại nhà. Có người rất thích, trong khi người khác nóng lòng muốn quay lại văn phòng. Vậy làm việc tại nhà có thật sự tốt hơn?\n\nCó một số ưu điểm rõ ràng. Thứ nhất, mọi người tiết kiệm thời gian và tiền bạc vì không phải đi lại. Ví dụ, một người ở Orinvale mất chín mươi phút mỗi ngày kẹt xe sẽ lấy lại được hơn bảy tiếng mỗi tuần. Ngoài ra, nhiều người nói họ tập trung tốt hơn ở nhà vì ít bị đồng nghiệp làm gián đoạn. Kết quả là một số công ty nhận thấy nhân viên làm việc hiệu quả hơn.\n\nMặt khác, làm việc tại nhà cũng có những nhược điểm nghiêm trọng. Mặc dù thoải mái, nó có thể gây cô đơn. Nhiều nhân viên nhớ những lúc trò chuyện với đồng nghiệp trong bữa trưa, và đặc biệt là người trẻ mất cơ hội học hỏi từ người nhiều kinh nghiệm hơn. Hơn nữa, ranh giới giữa công việc và cuộc sống gia đình có thể biến mất. Do tin nhắn đến cả lúc khuya, một số người cảm thấy mình chẳng bao giờ thật sự được nghỉ. Vì vậy, họ bị căng thẳng dù làm việc ngay trong phòng khách nhà mình.\n\nNhìn chung, làm việc tại nhà không hoàn hảo mà cũng không tồi tệ. Nó phù hợp với người ngăn nắp và có không gian yên tĩnh; tuy nhiên, nó có thể khó khăn với người sống trong nhà chật chội, đông người. Theo tôi, kết hợp cả hai, chẳng hạn ba ngày ở văn phòng và hai ngày ở nhà, có lẽ là giải pháp tốt nhất cho phần lớn mọi người.",
+   "gloss": [
+    {
+     "w": "interruption",
+     "vi": "sự gián đoạn"
+    },
+    {
+     "w": "productive",
+     "vi": "làm việc hiệu quả, năng suất"
+    },
+    {
+     "w": "employee",
+     "vi": "nhân viên, người lao động"
+    },
+    {
+     "w": "in particular",
+     "vi": "đặc biệt là"
+    },
+    {
+     "w": "experienced",
+     "vi": "có kinh nghiệm"
+    },
+    {
+     "w": "be off work",
+     "vi": "được nghỉ, không làm việc"
+    },
+    {
+     "w": "neither … nor …",
+     "vi": "không … cũng không …"
+    },
+    {
+     "w": "organised",
+     "vi": "ngăn nắp, có tổ chức"
+    },
+    {
+     "w": "solution",
+     "vi": "giải pháp"
+    }
+   ],
+   "qs": [
+    {
+     "q": "What is the main idea of paragraph 2?",
+     "o": [
+      "The advantages of working from home",
+      "The drawbacks of working from home",
+      "The history of working from home"
+     ],
+     "a": 0,
+     "e": "Câu chủ đề đoạn 2: “There are several clear advantages.”"
+    },
+    {
+     "q": "The worker in Orinvale gets more than ______ hours a week back.",
+     "a": "seven",
+     "alt": [
+      "7"
+     ],
+     "e": "“…gets more than seven hours a week back.” (90 phút × 5 ngày = 7, 5 tiếng)."
+    },
+    {
+     "q": "Which linker at the start of paragraph 3 shows a contrast with paragraph 2?",
+     "o": [
+      "On the other hand",
+      "Moreover",
+      "Therefore"
+     ],
+     "a": 0,
+     "e": "On the other hand = mặt khác – chuyển từ ưu điểm sang nhược điểm."
+    },
+    {
+     "q": "“Due to messages arriving late at night…” – due to được theo sau bởi:",
+     "o": [
+      "một mệnh đề đầy đủ (S + V chia thì)",
+      "một cụm danh từ",
+      "một động từ nguyên mẫu"
+     ],
+     "a": 1,
+     "e": "due to là giới từ → + danh từ / cụm danh từ (messages arriving late at night)."
+    },
+    {
+     "q": "What does the writer suggest?",
+     "o": [
+      "Everyone should work from home.",
+      "Everyone should go back to the office.",
+      "A mix of office and home working"
+     ],
+     "a": 2,
+     "e": "“…a mix of both… may be the best solution for most people.”"
+    },
+    {
+     "q": "“…whereas others can't wait to get back to the office.” – whereas dùng để:",
+     "o": [
+      "thêm ý",
+      "đối lập hai ý",
+      "chỉ kết quả"
+     ],
+     "a": 1,
+     "e": "whereas = trong khi (đối lập: some people love it ↔ others want to go back)."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Trả lời cân bằng hai mặt",
+   "tasks": [
+    {
+     "p": "Trả lời theo kiểu IELTS Speaking Part 3: “What are the advantages and disadvantages of online shopping?” (60–90 giây), dùng ít nhất 5 từ nối khác nhau.",
+     "model": "Well, I think online shopping has both benefits and drawbacks. On the positive side, it's extremely convenient, because you can buy almost anything without leaving your home. In addition, prices online are often lower, and it's easy to compare different shops. For example, I bought my laptop online and saved about two million dong. On the other hand, there are some risks. Although most websites are safe, some sellers send fake or damaged products. Moreover, you can't touch or try things before you buy them. So overall, I'd say online shopping is great for simple things, but for expensive items I still prefer real shops.",
+     "vi": "Tôi nghĩ mua sắm trực tuyến có cả lợi ích và hạn chế. Về mặt tích cực, nó cực kỳ tiện lợi vì bạn có thể mua gần như mọi thứ mà không cần ra khỏi nhà. Ngoài ra, giá trên mạng thường rẻ hơn và dễ so sánh giữa các cửa hàng. Ví dụ, tôi mua laptop online và tiết kiệm được khoảng hai triệu đồng. Mặt khác, có một số rủi ro. Dù phần lớn trang web an toàn, một số người bán gửi hàng giả hoặc hỏng. Hơn nữa, bạn không thể sờ hay thử đồ trước khi mua. Vì vậy, nhìn chung tôi cho rằng mua sắm trực tuyến rất tốt cho những thứ đơn giản, còn đồ đắt tiền thì tôi vẫn thích cửa hàng thật hơn.",
+     "tips": "Khi nói, ngắt hơi ngắn sau từ nối đầu câu (On the other hand, | there are…). Từ nối giúp bạn có thời gian suy nghĩ ý tiếp theo – rất có lợi cho độ trôi chảy."
+    },
+    {
+     "p": "Nối ý: nói 4 câu về chủ đề “sống ở thành phố lớn”, mỗi câu dùng một từ nối: although / however / therefore / for example.",
+     "model": "Although big cities are noisy, they offer many job opportunities. Life there is exciting. However, the cost of living is very high. For example, rent in central Neravale can be half of a young worker's salary. Therefore, many young people share flats with friends.",
+     "vi": "Mặc dù thành phố lớn ồn ào, chúng có nhiều cơ hội việc làm. Cuộc sống ở đó sôi động. Tuy nhiên, chi phí sinh hoạt rất cao. Ví dụ, tiền thuê nhà ở trung tâm Neravale có thể bằng một nửa lương của một người đi làm trẻ. Vì vậy, nhiều người trẻ ở ghép với bạn bè.",
+     "tips": "Kiểm tra: không có ‘Although… but’ và không có ‘However’ ở giữa câu không dấu."
+    },
+    {
+     "p": "“Do you prefer studying online or in a classroom? Why?” – nêu lựa chọn, 2 lý do, 1 nhượng bộ (although / despite), câu kết.",
+     "model": "I prefer studying in a classroom. Firstly, I can ask the teacher questions immediately. Secondly, studying with classmates keeps me motivated, whereas at home I get distracted by my phone. Despite the long journey to my English centre, I think it's worth it. That's why I only use online courses for extra practice.",
+     "vi": "Tôi thích học trên lớp hơn. Thứ nhất, tôi có thể hỏi giáo viên ngay lập tức. Thứ hai, học cùng bạn bè giúp tôi có động lực, trong khi ở nhà tôi bị điện thoại làm xao nhãng. Dù đường đến trung tâm tiếng Anh xa, tôi nghĩ điều đó đáng giá. Đó là lý do tôi chỉ dùng khoá học trực tuyến để luyện thêm.",
+     "tips": "despite + danh từ (the long journey) – không thêm of."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Đoạn văn nghị luận cân bằng",
+   "task": "Viết MỘT đoạn văn 120–150 từ trả lời câu hỏi: “Is online learning as good as classroom learning?” Có câu chủ đề nêu quan điểm, ưu điểm của học trực tuyến (kèm ví dụ), hạn chế, câu kết. Dùng ít nhất 6 từ nối thuộc ít nhất 4 chức năng khác nhau.",
+   "min": 120,
+   "model": "Online learning has become very popular in recent years; however, I believe it cannot completely replace classroom learning. On the one hand, online courses are convenient and often cheaper. For example, a student in a small town can take a course from a famous university without travelling or paying for accommodation. In addition, learners can watch lessons again and study at their own speed. On the other hand, studying alone at home requires a lot of self-discipline. Many students lose motivation because there is no teacher to check their progress. Moreover, it is difficult to practise speaking or teamwork through a screen, and internet problems can interrupt lessons. Although online learning is a useful tool, students still need real teachers and classmates. Therefore, in my opinion, the best option is to combine online and classroom learning.",
+   "modelVi": "Học trực tuyến đã trở nên rất phổ biến trong những năm gần đây; tuy nhiên, tôi tin rằng nó không thể thay thế hoàn toàn việc học trên lớp. Một mặt, các khoá học trực tuyến tiện lợi và thường rẻ hơn. Ví dụ, một học sinh ở thị trấn nhỏ có thể học khoá của một trường đại học nổi tiếng mà không cần đi lại hay trả tiền chỗ ở. Ngoài ra, người học có thể xem lại bài và học theo tốc độ của mình. Mặt khác, tự học ở nhà đòi hỏi rất nhiều kỷ luật. Nhiều học sinh mất động lực vì không có giáo viên kiểm tra tiến độ. Hơn nữa, rất khó luyện nói hay làm việc nhóm qua màn hình, và sự cố mạng có thể làm gián đoạn bài học. Dù học trực tuyến là công cụ hữu ích, học sinh vẫn cần giáo viên và bạn học thật. Vì vậy, theo tôi, lựa chọn tốt nhất là kết hợp học trực tuyến và học trên lớp.",
+   "tips": [
+    "Viết thành MỘT đoạn liền (không xuống dòng) – đúng yêu cầu ‘paragraph’.",
+    "Câu chủ đề nêu rõ quan điểm ngay câu đầu; câu kết khẳng định lại bằng từ khác (Therefore, in my opinion…).",
+    "Cặp On the one hand… / On the other hand… giúp trình bày hai mặt rất rõ ràng.",
+    "Mỗi luận điểm nên có một ví dụ cụ thể (For example, …) – đây là điều giám khảo IELTS đánh giá cao."
+   ],
+   "checklist": [
+    "Một đoạn liền, 120–150 từ",
+    "Câu chủ đề nêu quan điểm ở câu đầu",
+    "Có ít nhất 6 từ nối thuộc ≥ 4 chức năng (thêm ý, đối lập, ví dụ, kết quả, kết luận…)",
+    "Không có lỗi ‘Although… but’ hoặc ‘Because… so’",
+    "However / Therefore / In addition đứng đầu câu (hoặc sau dấu chấm phẩy) và có dấu phẩy sau",
+    "Có ít nhất 1 ví dụ cụ thể và 1 câu kết"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "___ it was raining heavily, we went to the beach.",
+   "o": [
+    "Despite",
+    "Although",
+    "However"
+   ],
+   "a": 1,
+   "e": "Sau chỗ trống là mệnh đề (it was raining) → although. Despite + danh từ; However nối hai câu."
+  },
+  {
+   "t": "mc",
+   "q": "___ the heavy rain, we went to the beach.",
+   "o": [
+    "Although",
+    "Despite",
+    "Because"
+   ],
+   "a": 1,
+   "e": "Sau chỗ trống là cụm danh từ (the heavy rain) → despite."
+  },
+  {
+   "t": "mc",
+   "q": "The hotel was expensive. ___, the service was excellent.",
+   "o": [
+    "However",
+    "Although",
+    "Despite"
+   ],
+   "a": 0,
+   "e": "Mở đầu câu mới, có dấu phẩy sau, ý đối lập → However."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào ĐÚNG?",
+   "o": [
+    "Although he is rich, but he is not happy.",
+    "Although he is rich, he is not happy.",
+    "Despite he is rich, he is not happy."
+   ],
+   "a": 1,
+   "e": "Không dùng although + but cùng nhau; despite không đi với mệnh đề."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào ĐÚNG?",
+   "o": [
+    "Because it was late, so we took a taxi.",
+    "It was late, so we took a taxi.",
+    "Because of it was late, we took a taxi."
+   ],
+   "a": 1,
+   "e": "Chỉ dùng một: because… hoặc …so…. because of + danh từ, không + mệnh đề."
+  },
+  {
+   "t": "fill",
+   "q": "The flight was cancelled ___ to bad weather.",
+   "a": "due",
+   "e": "due to + danh từ = do, bởi vì."
+  },
+  {
+   "t": "fill",
+   "q": "Many tropical fruits, ___ as mangoes and lychees, grow well in this area.",
+   "a": "such",
+   "e": "such as + danh từ (liệt kê ví dụ giữa câu)."
+  },
+  {
+   "t": "mc",
+   "q": "She studied very hard. ___, she passed with excellent marks.",
+   "o": [
+    "As a result",
+    "Despite",
+    "Whereas"
+   ],
+   "a": 0,
+   "e": "Câu sau là kết quả của câu trước → As a result."
+  },
+  {
+   "t": "mc",
+   "q": "My brother loves spicy food, ___ I can't eat it at all.",
+   "o": [
+    "whereas",
+    "therefore",
+    "in addition"
+   ],
+   "a": 0,
+   "e": "Đối lập hai người trong cùng một câu → whereas."
+  },
+  {
+   "t": "fill",
+   "q": "In ___ of feeling tired, he finished the report. (dùng 1 từ)",
+   "a": "spite",
+   "e": "in spite of + V-ing = despite + V-ing."
+  },
+  {
+   "t": "match",
+   "q": "Nối chức năng với từ nối phù hợp:",
+   "pairs": [
+    [
+     "Thêm ý",
+     "in addition"
+    ],
+    [
+     "Đối lập",
+     "however"
+    ],
+    [
+     "Kết quả",
+     "therefore"
+    ],
+    [
+     "Đưa ví dụ",
+     "for instance"
+    ],
+    [
+     "Kết luận",
+     "in conclusion"
+    ],
+    [
+     "Nguyên nhân (+ danh từ)",
+     "because of"
+    ]
+   ],
+   "e": "Nắm chức năng để chọn đúng từ nối khi viết."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "time.",
+    "the",
+    "we",
+    "Despite",
+    "arrived",
+    "on",
+    "traffic,"
+   ],
+   "a": "Despite the traffic, we arrived on time.",
+   "e": "Despite + cụm danh từ, + mệnh đề chính."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đúng:",
+   "w": [
+    "cheaper.",
+    "online",
+    "are",
+    "In",
+    "often",
+    "courses",
+    "addition,"
+   ],
+   "a": "In addition, online courses are often cheaper.",
+   "e": "In addition đứng đầu câu, có dấu phẩy."
+  },
+  {
+   "t": "listen",
+   "say": "Although the course was expensive, I think it was worth the money, because I learnt a lot.",
+   "lang": "en-GB",
+   "q": "What is the speaker's opinion of the course?",
+   "o": [
+    "It was too expensive and not useful.",
+    "It was expensive but worth it.",
+    "It was cheap and useful."
+   ],
+   "a": 1,
+   "e": "Although… expensive (nhượng bộ), … worth the money (ý chính)."
+  },
+  {
+   "t": "listen",
+   "say": "Working from home saves time. However, it can be lonely, and some people find it hard to stop working in the evening.",
+   "lang": "en-GB",
+   "q": "What problem does the speaker mention?",
+   "o": [
+    "It wastes time.",
+    "It can be lonely.",
+    "It is expensive."
+   ],
+   "a": 1,
+   "e": "Sau However là nhược điểm: it can be lonely…"
+  },
+  {
+   "t": "listen",
+   "say": "Due to the heavy rain, the outdoor concert has been moved to the sports hall.",
+   "lang": "en-GB",
+   "q": "Why was the concert moved?",
+   "o": [
+    "Because of the rain",
+    "Because the hall was free",
+    "Because of the traffic"
+   ],
+   "a": 0,
+   "e": "Due to the heavy rain = because of the rain."
+  },
+  {
+   "t": "dict",
+   "say": "However, there are also some disadvantages.",
+   "lang": "en-GB",
+   "a": "However, there are also some disadvantages.",
+   "e": "However đầu câu + dấu phẩy."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ từ nối màu theo chức năng (xanh: thêm ý, đỏ: đối lập, vàng: nguyên nhân – kết quả, tím: ví dụ – kết luận); 1 đoạn văn mẫu cắt rời thành từng câu để học viên xếp lại; bút dạ 4 màu để ‘tô màu cấu trúc’ đoạn văn; đồng hồ bấm giờ.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: GV viết 2 câu rời ‘It was raining. We played football.’ – học viên nối bằng càng nhiều cách càng tốt (but, although, despite, however…). GV ghi lại, phát hiện ngay lỗi ‘Although… but’ nếu có."
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng: phát thẻ màu, học viên xếp từ nối vào 6 chức năng. Luyện phát âm: although /ɔːlˈðəʊ/ (âm ð), therefore /ˈðeəfɔː/, whereas /ˌweərˈæz/, moreover /mɔːrˈəʊvə/."
+   },
+   {
+    "t": "25'",
+    "do": "Ngữ pháp 1: bảng 3 nhóm (liên từ / giới từ / trạng từ nối) và dấu câu. Nhấn mạnh lỗi cặp ‘Mặc dù… nhưng’, ‘Vì… nên’. Drill: GV đọc 2 câu, học viên nối bằng từ nối được chỉ định."
+   },
+   {
+    "t": "15'",
+    "do": "Ngữ pháp 2: although ↔ despite. Học viên viết lại 6 câu theo 2 cách. Lưu ý ‘despite of’ là sai."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe bài giảng của cô Hương: lần 1 – đoạn văn có mấy phần? Lần 2 – ghi khác biệt however/although. Lần 3 – liệt kê mọi từ nối cô Hương dùng."
+   },
+   {
+    "t": "5'",
+    "do": "Tổng kết; giao bài tập 1–10 trong game."
+   },
+   {
+    "t": "Buổi 2 · 15'",
+    "do": "Cấu trúc đoạn văn: phát đoạn văn mẫu cắt rời, nhóm xếp lại đúng thứ tự; sau đó dùng 4 màu tô câu chủ đề / câu hỗ trợ / ví dụ / câu kết."
+   },
+   {
+    "t": "20'",
+    "do": "Đọc ‘Working From Home…’: tìm câu chủ đề mỗi đoạn; khoanh tròn từ nối và ghi chức năng; trả lời 6 câu hỏi."
+   },
+   {
+    "t": "15'",
+    "do": "Nói: cặp đôi trả lời câu hỏi online shopping (task 1), người nghe đếm số từ nối khác nhau của bạn; đổi vai với task 3."
+   },
+   {
+    "t": "25'",
+    "do": "Viết đoạn văn 120–150 từ: 5' lập dàn ý (câu chủ đề + 2 ưu + 2 nhược + kết), 15' viết, 5' đổi bài, bạn dùng 4 màu tô cấu trúc và kiểm tra checklist."
+   },
+   {
+    "t": "15'",
+    "do": "Bài tập 11–17 trong game; chữa lỗi chung; giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Domino từ nối: mỗi nhóm có thẻ nửa câu đầu (Although the hotel was cheap, … / The hotel was cheap.…) và nửa sau; ghép đúng ngữ pháp và dấu câu, nhóm nhanh nhất thắng.",
+   "Tranh luận 60 giây: GV nêu chủ đề (Should students wear uniforms?), 2 học viên luân phiên nói, mỗi câu phải bắt đầu bằng một từ nối khác nhau; ai lặp lại hoặc dùng sai thì thua.",
+   "Tô màu đoạn văn: các nhóm thi phân tích nhanh một đoạn văn lạ bằng 4 màu, nhóm xác định đúng câu chủ đề và câu kết trước được điểm."
+  ],
+  "errors": [
+   "‘*Although…, but…’, ‘*Because…, so…’ (dịch cặp từ tiếng Việt). Sửa: chỉ giữ một từ.",
+   "‘*However I agree’ / ‘…, however it is…’ (thiếu dấu, sai vị trí). Sửa: … . However, it is… hoặc …; however, it is…",
+   "‘*Despite of the rain’, ‘*Despite it rained’. Sửa: Despite the rain / Although it rained.",
+   "‘*Because of it was late’. Sửa: Because it was late / Because of the late hour.",
+   "Mở câu bằng ‘*Such as…’. Sửa: For example, … hoặc đặt such as giữa câu sau danh từ.",
+   "Lạm dụng moreover/furthermore ở mọi câu khiến bài viết máy móc; đoạn văn không có câu chủ đề (mở bài lan man kiểu văn trường)."
+  ],
+  "homework": "Làm 17 bài tập trong game (≥ 80%); viết lại đoạn văn sau khi được bạn góp ý; tìm 1 đoạn văn tiếng Anh ngắn (báo, blog học tập) và tô màu 4 phần cấu trúc; ghi âm phần Nói 1 (90 giây); ôn thẻ từ vựng mỗi ngày."
+ }
 }

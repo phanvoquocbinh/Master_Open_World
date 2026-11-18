@@ -69,34 +69,34 @@
  ],
  "phrases": [
   {
-   "t": "昨日は 登録画面の 入力チェックを 実装しました。ただし、結合テストは まだ 終わっていません。",
-   "vi": "Hôm qua tôi đã thực hiện phần kiểm tra dữ liệu nhập của màn đăng ký. Tuy nhiên, kiểm thử tích hợp vẫn chưa hoàn tất.",
-   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+   "t": "実装しました",
+   "vi": "đã thực hiện bằng mã",
+   "note": "Chưa đồng nghĩa đã kiểm xong."
   },
   {
-   "t": "今日は エラー表示を 確認します。APIが 返す エラー形式が 未確定なので、二つの ケースが 保留です。",
-   "vi": "Hôm nay tôi kiểm tra thông báo lỗi. Dạng lỗi API trả về chưa được chốt, nên hai trường hợp đang tạm giữ.",
-   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+   "t": "結合テストは未完了",
+   "vi": "kiểm thử tích hợp chưa xong",
+   "note": "Ghi riêng trạng thái kiểm thử."
   },
   {
-   "t": "はい。仮の 形式だと 明記して、実際の 応答が 決まったあとで 差分を 確認します。",
-   "vi": "Được. Tôi sẽ ghi rõ đó là định dạng tạm, rồi kiểm phần khác biệt khi phản hồi thực tế được chốt.",
-   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+   "t": "エラー形式が未確定",
+   "vi": "dạng lỗi chưa được chốt",
+   "note": "Nêu trở ngại cụ thể."
   },
   {
-   "t": "では、ブロッカーは エラー形式の 確認ですね。実装済みという 言葉だけで、全て 完了と 受け取られないようにしましょう。",
-   "vi": "Vậy trở ngại là xác nhận định dạng lỗi. Chúng ta nên tránh để từ “đã thực hiện” bị hiểu thành toàn bộ công việc đã xong.",
-   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+   "t": "仮の形式と明記する",
+   "vi": "ghi rõ là định dạng tạm",
+   "note": "Không lấy giả làm hợp đồng cuối."
   },
   {
-   "t": "その点は タスクにも 書きます。午後に 正常系と 入力不正の テスト結果を 共有する予定です。",
-   "vi": "Tôi cũng sẽ ghi rõ trong tác vụ. Buổi chiều tôi định chia sẻ kết quả kiểm thử trường hợp hợp lệ và dữ liệu nhập không hợp lệ.",
-   "note": "Mẫu lấy từ tình huống; thay dữ kiện phù hợp, giữ quan hệ giữa các vế và mức cam kết."
+   "t": "テスト結果を共有する",
+   "vi": "chia sẻ kết quả kiểm thử",
+   "note": "Nêu đầu ra và thời điểm."
   },
   {
-   "t": "細かい 実装相談は Dailyのあと、十分ほど お時間を いただけますか。",
-   "vi": "Sau phần cập nhật hằng ngày, tôi xin khoảng mười phút để trao đổi chi tiết cách thực hiện được không?",
-   "note": "Câu hỏi theo tình huống; giữ đuôi lịch sự và hỏi lại khi chưa rõ, không tự đoán thông tin."
+   "t": "関係者だけで確認する",
+   "vi": "kiểm riêng với bên liên quan",
+   "note": "Để chi tiết sau lượt cập nhật."
   }
  ],
  "qs": [
@@ -167,41 +167,41 @@
   },
   {
    "t": "dict",
-   "say": "細かい 実装相談は Dailyのあと、十分ほど お時間を いただけますか。",
+   "say": "実装が 完了した項目と、検証を 待っている項目を 分けて 報告します。",
    "lang": "ja-JP",
-   "a": "細かい 実装相談は Dailyのあと、十分ほど お時間を いただけますか。",
-   "e": "Nghĩa của câu: Sau phần cập nhật hằng ngày, tôi xin khoảng mười phút để trao đổi chi tiết cách thực hiện được không? Viết đúng chữ Nhật và giữ nguyên phần điều kiện hoặc phủ định nếu có."
+   "a": "実装が 完了した項目と、検証を 待っている項目を 分けて 報告します。",
+   "e": "Bản dịch: Tôi báo riêng mục đã thực hiện xong và mục chờ kiểm. Chú ý giữ các thành phần điều kiện, phủ định và độ dài âm trong câu mới."
   },
   {
    "t": "match",
    "q": "Nối mẫu câu với ý nghĩa trong ngữ cảnh.",
    "pairs": [
     [
-     "昨日は 登録画面の 入力チェックを 実装しました。ただし、結合テストは まだ 終わっていません。",
-     "Hôm qua tôi đã thực hiện phần kiểm tra dữ liệu nhập của màn đăng ký. Tuy nhiên, kiểm thử tích hợp vẫn chưa hoàn tất."
+     "実装しました",
+     "đã thực hiện bằng mã"
     ],
     [
-     "今日は エラー表示を 確認します。APIが 返す エラー形式が 未確定なので、二つの ケースが 保留です。",
-     "Hôm nay tôi kiểm tra thông báo lỗi. Dạng lỗi API trả về chưa được chốt, nên hai trường hợp đang tạm giữ."
+     "結合テストは未完了",
+     "kiểm thử tích hợp chưa xong"
     ],
     [
-     "はい。仮の 形式だと 明記して、実際の 応答が 決まったあとで 差分を 確認します。",
-     "Được. Tôi sẽ ghi rõ đó là định dạng tạm, rồi kiểm phần khác biệt khi phản hồi thực tế được chốt."
+     "エラー形式が未確定",
+     "dạng lỗi chưa được chốt"
     ],
     [
-     "では、ブロッカーは エラー形式の 確認ですね。実装済みという 言葉だけで、全て 完了と 受け取られないようにしましょう。",
-     "Vậy trở ngại là xác nhận định dạng lỗi. Chúng ta nên tránh để từ “đã thực hiện” bị hiểu thành toàn bộ công việc đã xong."
+     "仮の形式と明記する",
+     "ghi rõ là định dạng tạm"
     ],
     [
-     "その点は タスクにも 書きます。午後に 正常系と 入力不正の テスト結果を 共有する予定です。",
-     "Tôi cũng sẽ ghi rõ trong tác vụ. Buổi chiều tôi định chia sẻ kết quả kiểm thử trường hợp hợp lệ và dữ liệu nhập không hợp lệ."
+     "テスト結果を共有する",
+     "chia sẻ kết quả kiểm thử"
     ],
     [
-     "細かい 実装相談は Dailyのあと、十分ほど お時間を いただけますか。",
-     "Sau phần cập nhật hằng ngày, tôi xin khoảng mười phút để trao đổi chi tiết cách thực hiện được không?"
+     "関係者だけで確認する",
+     "kiểm riêng với bên liên quan"
     ]
    ],
-   "e": "Nghĩa thuộc đúng tình huống; ghi chú giải thích mức lịch sự và cách luyện."
+   "e": "Cụm “実装しました”: Chưa đồng nghĩa đã kiểm xong. Cụm “関係者だけで確認する”: Để chi tiết sau lượt cập nhật."
   }
  ],
  "practice": [

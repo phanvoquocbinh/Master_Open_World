@@ -1,0 +1,608 @@
+{
+ "no": 20,
+ "title": "Ôn tập tổng hợp 2 – đón người mới và xử lý thông tin chưa rõ",
+ "sub": "Hiện tại đơn/tiếp diễn · chỉ dẫn · phép · số lượng",
+ "goals": [
+  "Tổng hợp được giờ, nơi, vai và đồ chuẩn bị trong một lời nhắn.",
+  "Dùng đúng hiện tại tiếp diễn cho việc đang làm, can cho khả năng hoặc phép theo ngữ cảnh.",
+  "Xác nhận đơn vị đồ ăn và người nhận trước khi làm theo lời nhờ."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bắt đầu từ tình huống",
+   "html": "<p>Ở buổi mở lớp tự soạn, một người đang chuẩn bị đồ trong khi người khác đón khách. Bạn cần hỏi đúng điều còn thiếu, giữ thói quen khác việc ngay lúc này và chuyển yêu cầu có đủ vật, đơn vị, người nhận.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Nghe và đọc đúng trọng tâm",
+   "items": [
+    {
+     "sym": "/kjuː/",
+     "ex": [
+      "queue",
+      "join the queue"
+     ],
+     "vi": "Queue có một âm tiết và đọc giống tên chữ Q. Không đọc lần lượt các chữ viết thành nhiều tiếng."
+    },
+    {
+     "sym": "/speɪs/ /ˈempti/",
+     "ex": [
+      "space",
+      "empty"
+     ],
+     "vi": "Giữ /s/ trước /p/ ở space và cụm /mpt/ ở empty theo tốc độ phù hợp; không thêm tiếng “ơ” giữa cụm."
+    },
+    {
+     "sym": "Nhấn thông tin còn thiếu",
+     "ex": [
+      "Two glasses or two bottles?",
+      "Who is waiting outside?"
+     ],
+     "vi": "Câu hỏi làm nổi đơn vị glasses/bottles hoặc người đang đợi; có thể ngắt giữa hai khả năng để bạn nghe trả lời đúng trường."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm của tình huống",
+   "items": [
+    {
+     "w": "welcome",
+     "ipa": "/ˈwelkəm/",
+     "pos": "v",
+     "vi": "chào đón",
+     "ex": "We welcome new students.",
+     "exVi": "Chúng tôi đón học viên mới."
+    },
+    {
+     "w": "visitor",
+     "ipa": "/ˈvɪzɪtə(r)/",
+     "pos": "n",
+     "vi": "khách tới",
+     "ex": "A visitor is at the door.",
+     "exVi": "Có khách ở cửa."
+    },
+    {
+     "w": "notice",
+     "ipa": "/ˈnəʊtɪs/",
+     "pos": "n",
+     "vi": "thông báo",
+     "ex": "Read the notice first.",
+     "exVi": "Đọc thông báo trước."
+    },
+    {
+     "w": "queue",
+     "ipa": "/kjuː/",
+     "pos": "n",
+     "vi": "hàng người đợi",
+     "ex": "Please join the queue.",
+     "exVi": "Xin xếp vào hàng."
+    },
+    {
+     "w": "corner",
+     "ipa": "/ˈkɔːnə(r)/",
+     "pos": "n",
+     "vi": "góc",
+     "ex": "The cups are in the corner.",
+     "exVi": "Các cốc ở góc."
+    },
+    {
+     "w": "space",
+     "ipa": "/speɪs/",
+     "pos": "n",
+     "vi": "chỗ trống, không gian",
+     "ex": "There is space for six people.",
+     "exVi": "Có chỗ cho sáu người."
+    },
+    {
+     "w": "ready",
+     "ipa": "/ˈredi/",
+     "pos": "adj",
+     "vi": "sẵn sàng",
+     "ex": "The classroom is ready.",
+     "exVi": "Lớp đã sẵn sàng."
+    },
+    {
+     "w": "full",
+     "ipa": "/fʊl/",
+     "pos": "adj",
+     "vi": "đầy",
+     "ex": "This bottle is full.",
+     "exVi": "Chai này đầy."
+    },
+    {
+     "w": "empty",
+     "ipa": "/ˈempti/",
+     "pos": "adj",
+     "vi": "rỗng",
+     "ex": "Those cups are empty.",
+     "exVi": "Các cốc kia rỗng."
+    },
+    {
+     "w": "inside",
+     "ipa": "/ˌɪnˈsaɪd/",
+     "pos": "adv",
+     "vi": "bên trong",
+     "ex": "The class is inside.",
+     "exVi": "Lớp ở bên trong."
+    },
+    {
+     "w": "outside",
+     "ipa": "/ˌaʊtˈsaɪd/",
+     "pos": "adv",
+     "vi": "bên ngoài",
+     "ex": "Wait outside for a moment.",
+     "exVi": "Đợi ngoài một lát."
+    },
+    {
+     "w": "group",
+     "ipa": "/ɡruːp/",
+     "pos": "n",
+     "vi": "nhóm",
+     "ex": "Our group has six people.",
+     "exVi": "Nhóm chúng tôi có sáu người."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Hiện tại đơn/tiếp diễn · chỉ dẫn · phép · số lượng",
+   "html": "<p>Ôn theo tình huống: We usually welcome visitors at two là thói quen, nhưng Today we are opening the room at one nói việc hiện tại trong lịch tập. Khi mô tả hành động đang diễn ra dùng am/is/are + V-ing: Nera is writing, They are waiting. Không dùng We are need vì need ở nghĩa thông thường trong bài là động từ trạng thái: We need four cups. Can I come in? hỏi phép, I can carry the cups nói khả năng; đọc cùng bối cảnh trước khi dịch. Đồ có đơn vị phải giữ cả số và vật: two glasses of water khác two bottles. Chỉ dẫn dùng động từ nguyên mẫu và be trước tính từ: Read the notice, Be quiet. Đại từ them phải có nhóm hoặc vật rõ; nếu cả cups và visitors vừa được nói, nhắc lại danh từ khi cần. Bài ôn khuyến khích hỏi lại chỗ thiếu thay vì hỏi lại mọi câu từ đầu.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Cách hiểu"
+    ],
+    [
+     "We usually open ... / We are opening ... today",
+     "Thói quen khác việc hiện tại"
+    ],
+    [
+     "We need cups / We are carrying cups",
+     "Trạng thái nhu cầu khác hành động đang làm"
+    ],
+    [
+     "Can I ...? / I can ...",
+     "Phép hoặc khả năng theo ngữ cảnh"
+    ],
+    [
+     "two glasses / two bottles",
+     "Số giống nhau nhưng đơn vị khác"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Mela is writing the notice now.",
+     "vi": "Mela đang viết thông báo lúc này."
+    },
+    {
+     "t": "The visitors are waiting outside.",
+     "vi": "Khách đang đợi bên ngoài."
+    },
+    {
+     "t": "We need four glasses, not four bottles.",
+     "vi": "Chúng tôi cần bốn cốc, không phải bốn chai."
+    },
+    {
+     "t": "Can I come in and help you?",
+     "vi": "Tôi vào giúp bạn được không?"
+    }
+   ],
+   "tips": [
+    "Dùng are need: need thông thường không nhận mẫu tiếp diễn này.",
+    "Bỏ be trước writing/waiting: giữ am/is/are theo chủ ngữ.",
+    "Đổi hai cốc thành hai chai vì chỉ nghe số: nhắc cả đơn vị."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: giúp chuẩn bị trước khi đón khách",
+   "note": "Nera đang viết thông báo, Tavin nhận mang đồ và cần hỏi rõ hai đơn vị cùng một người nhận.",
+   "lang": "en-GB",
+   "lines": [
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "What are you doing now?",
+     "vi": "Bây giờ bạn đang làm gì?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "I am writing the welcome notice. The visitors are outside.",
+     "vi": "Tôi đang viết thông báo chào đón. Khách ở ngoài."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "Can I come in and help?",
+     "vi": "Tôi vào giúp được không?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Yes, please. We need two glasses of water.",
+     "vi": "Được. Chúng tôi cần hai cốc nước."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "Two bottles?",
+     "vi": "Hai chai à?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "No, two glasses. One full bottle is in the corner.",
+     "vi": "Không, hai cốc. Một chai đầy ở góc."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "Who needs them?",
+     "vi": "Ai cần chúng?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Mela and Nalin. Please give the glasses to them.",
+     "vi": "Mela và Nalin. Xin đưa các cốc cho họ."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "All right. Is the classroom ready?",
+     "vi": "Được. Lớp sẵn sàng chưa?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Yes. After that, show the visitors the notice and ask them to wait here.",
+     "vi": "Rồi. Sau đó cho khách xem thông báo và nhờ họ đợi ở đây."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Nera đang làm gì?",
+     "o": [
+      "Đọc ở nhà",
+      "Viết thông báo chào đón",
+      "Mang hai chai"
+     ],
+     "a": 1,
+     "e": "Câu I am writing the welcome notice trả lời hành động lúc này."
+    },
+    {
+     "q": "Đơn vị nước đã sửa thành gì?",
+     "o": [
+      "Hai cốc từ chai đầy",
+      "Hai chai cho mỗi khách",
+      "Hai ổ bánh"
+     ],
+     "a": 0,
+     "e": "No, two glasses sửa two bottles; chai là nguồn lấy nước."
+    },
+    {
+     "q": "Cốc dành cho ai?",
+     "o": [
+      "Mọi khách ngoài cửa",
+      "Chỉ người viết",
+      "Mela và Nalin"
+     ],
+     "a": 2,
+     "e": "Who needs them được trả Mela and Nalin nên người nhận không mơ hồ."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Buổi mở lớp nhỏ",
+   "title": "Buổi mở lớp nhỏ",
+   "text": "Our imaginary learning house has an open afternoon today. We usually welcome visitors at two, but today we are ready at one. Nera is writing a notice near the entrance. Tavin is carrying empty glasses to the table. There is one full bottle of water in the corner. The group needs two glasses for Mela and Nalin, not two bottles. Outside, three new visitors are waiting. They can come in after Nera puts the notice on the door. The notice says, “Please read the class time. Be quiet near the reading room.” A blue scarf is on a chair. It is Mela’s, so Nera gives it to her. Everyone checks the names and the time before the lesson.",
+   "vi": "Nhà học tưởng tượng mở cửa đón khách chiều nay. Thường đón lúc hai nhưng hôm nay sẵn lúc một. Nera đang viết thông báo gần lối vào, Tavin mang cốc rỗng lên bàn. Góc có một chai nước đầy, nhóm cần hai cốc cho Mela và Nalin chứ không hai chai. Ngoài có ba khách mới, được vào sau khi Nera treo thông báo: đọc giờ lớp, giữ yên gần phòng đọc. Có khăn xanh trên ghế là của Mela nên Nera đưa cô ấy. Mọi người kiểm tên, giờ trước buổi học.",
+   "gloss": [
+    {
+     "w": "open afternoon",
+     "vi": "buổi chiều mở cửa đón khách"
+    },
+    {
+     "w": "empty glasses",
+     "vi": "các cốc rỗng"
+    },
+    {
+     "w": "full bottle",
+     "vi": "chai đầy"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Hôm nay giờ sẵn sàng khác thường thế nào?",
+     "o": [
+      "Một giờ thay vì hai",
+      "Ba giờ thay vì một",
+      "Mọi ngày đều một"
+     ],
+     "a": 0,
+     "e": "Usually...two đối chiếu today...one, cần giữ mốc thói quen/hôm nay."
+    },
+    {
+     "q": "Cốc Tavin đang mang có nước chưa?",
+     "o": [
+      "Đầy mọi cốc",
+      "Đều đã vỡ",
+      "Chưa, là cốc rỗng"
+     ],
+     "a": 2,
+     "e": "Empty glasses chỉ trạng thái rỗng, chai đầy được nêu riêng."
+    },
+    {
+     "q": "Ba khách được vào sau điều gì?",
+     "o": [
+      "Mela lấy mọi ghế",
+      "Nera treo thông báo",
+      "Họ mang bốn chai"
+     ],
+     "a": 1,
+     "e": "They can come in after...puts the notice đặt điều kiện thứ tự."
+    },
+    {
+     "q": "Vì sao khăn được đưa Mela?",
+     "o": [
+      "Đó là khăn của cô ấy",
+      "Mọi vật đều của Mela",
+      "Chỉ vì ở trên ghế"
+     ],
+     "a": 0,
+     "e": "It is Mela’s nêu chủ, rồi her là tân ngữ chỉ Mela."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: hỏi việc, phép và người nhận",
+   "tasks": [
+    {
+     "p": "Bạn mới đến: hỏi bạn đang làm gì, xin vào giúp và hỏi rõ cốc hay chai.",
+     "model": "What are you doing? Can I come in and help? Do you need two glasses or two bottles? Please tell me who needs them.",
+     "vi": "Bạn đang làm gì? Tôi vào giúp được không? Cần hai cốc hay hai chai? Xin cho biết ai cần."
+    },
+    {
+     "p": "Đóng vai người chuẩn bị: nói việc đang làm, giao cốc cho Mela/Nalin rồi chỉ dẫn khách đợi.",
+     "model": "I am writing the notice. Please give two glasses of water to Mela and Nalin. Then show the visitors the class time and ask them to wait here.",
+     "vi": "Tôi đang viết thông báo. Xin đưa hai cốc nước cho Mela và Nalin, rồi cho khách xem giờ lớp và nhờ đợi đây."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: bàn giao một việc đang làm",
+   "task": "Viết50–70 từ nhờ bạn hỗ trợ chiều đón khách giả định: bạn đang viết thông báo, có3 khách ngoài, cần2 cốc từ1 chai cho Mela/Nalin và cần cho khách xem giờ rồi đợi. Dùng ít nhất một câu hiện tại tiếp diễn, một yêu cầu và đại từ có đối tượng rõ.",
+   "min": 50,
+   "model": "I am writing the welcome notice now. Three visitors are waiting outside. Can you help me? Please take two empty glasses and use the full bottle in the corner. Mela and Nalin need the water, so give the glasses to them. After that, show the visitors the class time and ask them to wait near the entrance.",
+   "modelVi": "Tôi đang viết thông báo. Ba khách chờ ngoài, bạn giúp tôi nhé? Lấy hai cốc rỗng, dùng chai đầy ở góc, đưa nước cho Mela và Nalin. Sau đó cho khách xem giờ lớp và nhờ đợi gần lối vào.",
+   "tips": [
+    "Hai nhóm người và đồ đều có thể được thay bằng them; nhắc danh từ khi đổi từ cốc/người nhận sang khách.",
+    "Giữ am writing/are waiting cho hiện tại và nguyên mẫu sau Please/Can you, không thêm -ing tùy tiện."
+   ],
+   "checklist": [
+    "Đủ 50–70 từ, các số3 khách/2 cốc/1 chai không bị trộn.",
+    "Có hành động đang diễn ra, yêu cầu rõ vật và người nhận.",
+    "Khách được xem giờ rồi đợi đúng nơi; không tự đổi thành được vào ngay."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "A queue là gì?",
+   "o": [
+    "Một chai nước",
+    "Một hàng người đợi",
+    "Một tờ thông báo"
+   ],
+   "a": 1,
+   "e": "Queue chỉ người xếp đợi, không phải đồ đựng."
+  },
+  {
+   "t": "mc",
+   "q": "Empty glasses có nghĩa gì?",
+   "o": [
+    "Cốc rỗng",
+    "Chai đầy",
+    "Ghế cũ"
+   ],
+   "a": 0,
+   "e": "Empty mô tả chưa có đồ bên trong, đối chiếu full bottle."
+  },
+  {
+   "t": "mc",
+   "q": "Welcome visitors là làm gì?",
+   "o": [
+    "Gửi khách đi không nói",
+    "Giấu thông báo",
+    "Chào đón khách"
+   ],
+   "a": 2,
+   "e": "Welcome là động từ đón người đến, visitors là đối tượng."
+  },
+  {
+   "t": "fill",
+   "q": "Nera ___ writing the notice now.",
+   "a": "is",
+   "e": "Chủ ngữ Nera số ít cần is trước V-ing để tạo hiện tại tiếp diễn."
+  },
+  {
+   "t": "fill",
+   "q": "We need two glasses ___ water.",
+   "a": "of",
+   "e": "Of nối cốc với nước, giúp người nghe chuẩn bị đúng phần."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Khách đang đợi bên ngoài.",
+   "w": [
+    "visitors",
+    "are",
+    "waiting",
+    "outside",
+    "The"
+   ],
+   "a": "The visitors are waiting outside.",
+   "e": "Câu “The visitors are waiting outside.” diễn đạt khách đang đợi bên ngoài. Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Xin cho họ xem thông báo.",
+   "w": [
+    "show",
+    "them",
+    "the",
+    "notice",
+    "Please"
+   ],
+   "a": "Please show them the notice.",
+   "e": "Câu “Please show them the notice.” diễn đạt xin cho họ xem thông báo. Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "match",
+   "q": "Nối ready, full, empty, inside và outside với nghĩa để mô tả trạng thái và vị trí khi đón khách.",
+   "pairs": [
+    [
+     "ready",
+     "sẵn sàng"
+    ],
+    [
+     "full",
+     "đầy"
+    ],
+    [
+     "empty",
+     "rỗng"
+    ],
+    [
+     "inside",
+     "bên trong"
+    ],
+    [
+     "outside",
+     "bên ngoài"
+    ]
+   ],
+   "e": "Ready nói sẵn sàng, full/empty nói đầy/rỗng, inside/outside nói trong/ngoài; không dùng từ vị trí thay trạng thái đồ."
+  },
+  {
+   "t": "listen",
+   "say": "What are you doing now? I am writing the welcome notice. The visitors are outside. Can I come in and help? Yes, please. We need two glasses of water. Two bottles? No, two glasses. One full bottle is in the corner. Who needs them? Mela and Nalin. Please give the glasses to them. All right. Is the classroom ready? Yes. After that, show the visitors the notice and ask them to wait here.",
+   "lang": "en-GB",
+   "q": "Nera đang làm gì?",
+   "o": [
+    "Đọc ở nhà",
+    "Viết thông báo chào đón",
+    "Mang hai chai"
+   ],
+   "a": 1,
+   "e": "Câu I am writing the welcome notice trả lời hành động lúc này."
+  },
+  {
+   "t": "listen",
+   "say": "What are you doing now? I am writing the welcome notice. The visitors are outside. Can I come in and help? Yes, please. We need two glasses of water. Two bottles? No, two glasses. One full bottle is in the corner. Who needs them? Mela and Nalin. Please give the glasses to them. All right. Is the classroom ready? Yes. After that, show the visitors the notice and ask them to wait here.",
+   "lang": "en-GB",
+   "q": "Đơn vị nước đã sửa thành gì?",
+   "o": [
+    "Hai cốc từ chai đầy",
+    "Hai chai cho mỗi khách",
+    "Hai ổ bánh"
+   ],
+   "a": 0,
+   "e": "No, two glasses sửa two bottles; chai là nguồn lấy nước."
+  },
+  {
+   "t": "dict",
+   "say": "The visitors are waiting outside.",
+   "a": "The visitors are waiting outside.",
+   "lang": "en-GB",
+   "e": "Visitors số nhiều đi với are waiting, giữ outside cho nơi hiện tại; không đổi thành inside vì sau đó có phép vào."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào mô tả nhu cầu hiện tại tự nhiên trong bài?",
+   "o": [
+    "We are need two glasses.",
+    "We needing two glasses.",
+    "We need two glasses."
+   ],
+   "a": 2,
+   "e": "Need ở nghĩa nhu cầu dùng hiện tại đơn, không thêm are trước dạng nguyên mẫu."
+  },
+  {
+   "t": "mc",
+   "q": "Có cả cốc và khách trong hai câu liền, muốn rõ người nhận nên làm gì?",
+   "o": [
+    "Bỏ toàn bộ người nhận",
+    "Nhắc lại danh từ khi đổi đối tượng",
+    "Dùng them cho mọi chỗ không cần rõ"
+   ],
+   "a": 1,
+   "e": "Đại từ cần tham chiếu rõ, lặp danh từ có ích khi hai khả năng cạnh tranh."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Sơ đồ buổi mở lớp có3 khách, thẻ Nera đang viết, 2 cốc/1 chai và hai người nhận; đặt thông báo và giờ ở hai góc để người chỉ phải nêu rõ.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Cho ảnh lớp đang chuẩn bị, học viên tách trạng thái ready/full với hành động writing/carrying rồi nói điều còn cần hỏi."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dạy queue/corner/inside/outside và full/empty bằng sơ đồ, yêu cầu chỉ đúng vị trí trước khi làm câu dài."
+   },
+   {
+    "t": "20 phút",
+    "do": "Ôn hiện tại đơn với usually/need và tiếp diễn với now, ghép be+V-ing theo người hoặc nhóm trong tranh."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nghe hội thoại, sửa hai chai thành hai cốc và ghi Mela/Nalin là người nhận; chỉ lượt hỏi who để xác nhận tham chiếu."
+   },
+   {
+    "t": "15 phút",
+    "do": "Đóng vai xin vào giúp, người giao phải cho việc có đủ đơn vị và tên người nhận, người giúp nhắc lại trước thực hiện."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai đọc queue và cụm space/empty, kiểm không thêm âm tiết vì các cụm phụ âm."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đọc chiều mở lớp, tách giờ thường2 và hômnay1; tìm điều kiện khách vào sau treo thông báo và chủ khăn."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nói nhiệm vụ bàn giao ba việc, người nghe chỉ điểm them còn mơ hồ và yêu cầu nhắc danh từ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Viết50–70 từ, đổi bản cho bạn đặt thẻ người/vật theo đúng lời nhờ; kiểm số lượng và việc khách chỉ đợi."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chữa dict visitors are waiting và câu need, tổng kết bốn kỹ năng bằng việc hoàn tất sơ đồ đón khách từ một lời nhắn mới."
+   }
+  ],
+  "games": [
+   "Bàn giao thiếu một trường: giáo viên bỏ đơn vị hoặc tên người nhận, đội phải đặt đúng một câu hỏi rồi mới lấy vật.",
+   "Thường và đang: một đội rút usually, đội kia rút now; cùng bối cảnh lớp nhưng phải tạo hai câu khác thì đúng ý."
+  ],
+  "errors": [
+   "Dùng are need: need thông thường không nhận mẫu tiếp diễn này.",
+   "Bỏ be trước writing/waiting: giữ am/is/are theo chủ ngữ.",
+   "Đổi hai cốc thành hai chai vì chỉ nghe số: nhắc cả đơn vị.",
+   "Them không rõ là cốc hay khách: thêm danh từ ở chỗ chuyển đối tượng.",
+   "Dùng phép vào như đã vào trong khi khách còn đợi: giữ điều kiện, trạng thái hiện tại riêng."
+  ],
+  "homework": "Tạo sơ đồ một buổi học giả có người đang làm việc và khách chờ, viết lời nhờ60từ rồi nhờ bạn dựng lại bằng thẻ; sửa một câu thiếu người, vật, đơn vị hoặc mốc."
+ }
+}

@@ -3,16 +3,32 @@
  "title": "Thể て: nối việc và nhờ vả",
  "sub": "窓を 開けてください。",
  "goals": [
-  "Hiểu và dùng đúng Thể て: nối việc và nhờ vả",
-  "Đọc/nghe phân biệt ít nhất 12 từ/cụm của tình huống",
-  "Hỏi và trả lời ba thông tin cụ thể bằng mức lịch sự phù hợp",
-  "Viết đoạn mới và tự sửa lỗi theo checklist"
+  "Phân tích cách dùng trong câu “窓を 開けてください。” và tạo một câu khác giữ đúng quan hệ ý.",
+  "Dùng “開ける” (mở) và “閉める” (đóng) đúng trong trao đổi của bài.",
+  "Nghe để trả lời câu hỏi “Theo hội thoại: Tôi vào lớp được không?”, rồi chỉ ra phần lời nói làm căn cứ.",
+  "Tự viết đoạn có ý chính “Đóng cửa ra vào, mở cửa sổ” và kiểm lại sự nhất quán với văn bản đọc."
  ],
  "parts": [
   {
    "k": "text",
    "h": "Bối cảnh và cách học",
-   "html": "<p>Thực hiện hướng dẫn lớp học theo đúng thứ tự; phân biệt nhờ vả với kể chuỗi hành động.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+   "html": "<p>Thực hiện hướng dẫn lớp học theo đúng thứ tự; phân biệt nhờ vả với kể chuỗi hành động.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>書いて giữ ka-i-te, không rút ai thành một âm tiếng Việt. 読んで có ん một mora, còn 待って có っ một mora giữ; cho bạn nghe rồi phân loại hai loại nhịp trước khi thực hiện yêu cầu.</p>",
+   "items": [
+    {
+     "sym": "かいて・よんで・まって",
+     "ex": [
+      "書いて",
+      "読んで",
+      "待って"
+     ],
+     "vi": "Nghe và đọc đối chiếu 書いて (かいて), 読んで (よんで), 待って (まって). Dùng câu “窓を 開けてください。” để kiểm xem các độ dài âm còn giữ được khi nối vào phát ngôn."
+    }
+   ]
   },
   {
    "k": "words",
@@ -169,7 +185,7 @@
   {
    "k": "dialog",
    "h": "Nghe: Thể て: nối việc và nhờ vả",
-   "note": "Hai học viên của lớp giả Mây Sớm trao đổi; nghe lần đầu lấy ý, lần sau kiểm chi tiết. Không đọc romaji trong âm thanh.",
+   "note": "Trước khi nghe, dự đoán câu trả lời cho “Theo hội thoại: Tôi vào lớp được không?”. Sau đó ghi nguyên thông tin làm bạn chọn đáp án; lượt nói “はい。ドアを 閉めてください。” là một điểm cần kiểm khi nghe lại.",
    "lang": "ja-JP",
    "lines": [
     {
@@ -223,34 +239,34 @@
    ],
    "qs": [
     {
-     "q": "Theo hội thoại: Tôi vào lớp được không?",
+     "q": "Cửa ra vào cần làm gì?",
      "o": [
-      "Không, xin mở cửa sổ.",
-      "Vâng. Tôi đọc hướng dẫn rồi đợi ở đây.",
-      "Vâng. Xin đóng cửa."
+      "Mở ra",
+      "Tháo bỏ",
+      "Đóng lại"
      ],
      "a": 2,
-     "e": "Câu trả lời là はい。ドアを 閉めてください。 → Vâng. Xin đóng cửa."
+     "e": "Lượt nói “はい。ドアを 閉めてください。” nghĩa là: Vâng. Xin đóng cửa. Nội dung này làm rõ đáp án “Đóng lại”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Có đóng cửa sổ luôn không?",
+     "q": "Cửa sổ cần làm gì?",
      "o": [
-      "Hiểu rồi. Có bật đèn không?",
-      "Vâng. Tôi đọc hướng dẫn rồi đợi ở đây.",
-      "Không, xin mở cửa sổ."
-     ],
-     "a": 2,
-     "e": "Câu trả lời là いいえ、窓を 開けてください。 → Không, xin mở cửa sổ."
-    },
-    {
-     "q": "Theo hội thoại: Xin viết tên trên giấy này.",
-     "o": [
-      "Hiểu rồi. Có bật đèn không?",
-      "Vâng. Tôi đọc hướng dẫn rồi đợi ở đây.",
-      "Vâng. Xin đóng cửa."
+      "Không được chạm",
+      "Mở ra",
+      "Đóng lại"
      ],
      "a": 1,
-     "e": "Câu trả lời là はい。説明も 読んで、ここで 待って います。 → Vâng. Tôi đọc hướng dẫn rồi đợi ở đây."
+     "e": "Lượt nói “いいえ、窓を 開けてください。” nghĩa là: Không, xin mở cửa sổ. Nội dung này làm rõ đáp án “Mở ra”, không phải hai cách hiểu còn lại."
+    },
+    {
+     "q": "Trước khi vào cần làm gì?",
+     "o": [
+      "Rửa tay",
+      "Viết báo cáo",
+      "Tắt mọi đèn"
+     ],
+     "a": 0,
+     "e": "Lượt nói “手を 洗ってから 入ってください。” nghĩa là: Xin rửa tay rồi vào. Nội dung này làm rõ đáp án “Rửa tay”, không phải hai cách hiểu còn lại."
     }
    ]
   },
@@ -335,35 +351,35 @@
    "h": "Nói và phản hồi",
    "tasks": [
     {
-     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "p": "Đóng vai hỏi về mở và đóng. Dùng lượt “教室に 入っても いいですか。” để mở đầu, rồi yêu cầu bạn trả lời bằng thông tin của vai đối diện.",
      "model": "教室に 入っても いいですか。 窓も 閉めますか。 この 紙に 名前を 書いてください。 手を 洗ってから 入ってください。",
      "vi": "Tôi vào lớp được không? Có đóng cửa sổ luôn không? Xin viết tên trên giấy này. Xin rửa tay rồi vào.",
-     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+     "tips": "Khi bạn nói “窓も 閉めますか。”, người nghe phải nhận ra Có đóng cửa sổ luôn không?; ghi âm và kiểm xem từ nào đang quyết định nghĩa đó."
     },
     {
-     "p": "Tóm tắt nội dung bài đọc bằng ba câu, sau đó nêu một câu hỏi còn muốn làm rõ.",
+     "p": "Tóm tắt ba ý trong bài đọc để trả lời “Cửa ra vào và cửa sổ thế nào?”. Kết thúc bằng câu hỏi về hãy vào/dạng te của vào nếu phần này chưa được người nghe xác nhận.",
      "model": "新しい 教室に 入って、最初に 手を 洗います。 先生は「窓を 開けてください」と 言います。 ドアは 閉めますが、窓は 開けます。",
      "vi": "Vào phòng học mới, trước tiên tôi rửa tay. Giáo viên nói “Xin mở cửa sổ”. Cửa ra vào thì đóng nhưng cửa sổ mở.",
-     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+     "tips": "So phần tóm tắt của bạn với dữ kiện “Đóng cửa ra vào, mở cửa sổ”; nếu ý này thay đổi, hãy nói rõ đó là tình huống giả định mới."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có kiểm tra",
-   "task": "Viết một đoạn mới theo tình huống bài học; thay ít nhất hai chi tiết, dùng cấu trúc trọng tâm và kiểm thông tin nhất quán.",
+   "task": "Viết một đoạn tình huống có các ý: Xin mở cửa sổ. / Xin viết tên. / Xin đợi ở đây.. Dùng thêm thông tin của bài đọc để nối các ý, không chỉ chép ba câu rời.",
    "min": 80,
    "model": "新しい 教室に 入って、最初に 手を 洗います。 先生は「窓を 開けてください」と 言います。 ドアは 閉めますが、窓は 開けます。 私は 紙に 名前を 書いて、説明を 読みます。 友達は まだ 外に います。「ここで 待ってください」と 先生が 言います。 電気を つけてから、みんなで 本を 読みます。 わからない ときは 手を 上げます。 最後に 本を 閉じて、名前を もう一度 確認します。",
    "modelVi": "Vào phòng học mới, trước tiên tôi rửa tay. Giáo viên nói “Xin mở cửa sổ”. Cửa ra vào thì đóng nhưng cửa sổ mở. Tôi viết tên trên giấy rồi đọc hướng dẫn. Bạn vẫn ở ngoài. Giáo viên nói “Xin đợi ở đây”. Sau khi bật đèn, mọi người cùng đọc sách. Khi không hiểu thì giơ tay. Cuối cùng gấp sách và kiểm tên lần nữa.",
    "tips": [
-    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
-    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+    "Lập sơ đồ ai làm gì trong câu “窓を 開けてください。”, rồi dùng cùng quan hệ chủ thể khi nối sang đoạn của bạn.",
+    "Đối chiếu “名前を 書いてください。” với mẫu cuối “ここで 待ってください。”; chọn phần kết câu phù hợp trước khi sửa chính tả."
    ],
    "checklist": [
-    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
-    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
-    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
-    "Câu kết thúc và mức lịch sự nhất quán"
+    "Người đọc nhận ra đúng nghĩa của “開ける”, thay vì chỉ thấy từ được chèn vào câu.",
+    "Quan hệ ý trong “窓を 開けてください。” vẫn đúng khi bạn thay dữ kiện.",
+    "Các ý đóng và hãy vào/dạng te của vào không bị lẫn vai hoặc phạm vi.",
+    "Đoạn kết không trái với dữ kiện trả lời câu hỏi “Cửa ra vào và cửa sổ thế nào?”."
    ]
   }
  ],
@@ -498,7 +514,7 @@
      "hãy đợi/dạng te của đợi"
     ]
    ],
-   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+   "e": "Đối chiếu các cặp “電気 → đèn/điện” và “待って → hãy đợi/dạng te của đợi”; phân biệt nghĩa trong tình huống, không ghép chỉ dựa vào hình chữ."
   },
   {
    "t": "mc",
@@ -525,52 +541,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ, bảng cấu trúc bài này, loa/giọng đọc tiếng Nhật, phiếu thông tin khác nhau cho từng cặp. Không dùng dữ liệu cá nhân thật.",
+  "prep": "Chuẩn bị thẻ “開ける”, “閉める”, “入って”, bản hội thoại che lượt trả lời và phiếu đọc có câu hỏi “Cửa ra vào và cửa sổ thế nào?”.",
   "steps": [
    {
     "t": "10'",
-    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+    "do": "Gợi tình huống bằng câu “教室に 入っても いいですか。”. Cho cặp học viên nói mình muốn biết điều gì trước khi mở lời đáp."
    },
    {
     "t": "20'",
-    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+    "do": "Cho so thẻ “開ける” với “閉める”: học viên diễn đạt nghĩa mở và đóng, rồi đặt mỗi từ vào một lượt trao đổi."
    },
    {
     "t": "25'",
-    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+    "do": "Viết hai câu “窓を 開けてください。” và “名前を 書いてください。” cạnh nhau. Học viên giải thích khác biệt ý, sau đó thay một thành phần mà vẫn giữ cấu trúc vừa phân tích."
    },
    {
     "t": "20'",
-    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+    "do": "Che lời thoại và giao câu hỏi “Theo hội thoại: Tôi vào lớp được không?”. Sau hai lượt nghe, yêu cầu nêu bằng chứng thay vì đoán theo từ khóa đơn lẻ."
    },
    {
     "t": "15'",
-    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+    "do": "Cho đổi vai quanh lượt “この 紙に 名前を 書いてください。”. Người nghe hỏi lại thông tin trước khi chuyển sang lời đáp, giáo viên ghi một chỗ gây hiểu nhầm để chữa cuối hoạt động."
    },
    {
     "t": "15'",
-    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+    "do": "Đầu buổi sau, yêu cầu dựng lại ý “Xin đợi ở đây.” không nhìn chữ Nhật. So lời nói của học viên với câu đích và chữa phần làm thay đổi quan hệ ý."
    },
    {
     "t": "20'",
-    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+    "do": "Đọc để giải quyết câu hỏi “Cửa ra vào và cửa sổ thế nào?”. Mỗi nhóm đánh dấu đoạn chứng minh và giải thích vì sao hai lựa chọn còn lại không khớp."
    },
    {
     "t": "20'",
-    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+    "do": "Giao nhiệm vụ nói có thông tin mở ở một vai và hãy vào/dạng te của vào ở vai kia. Hai bên chỉ hoàn thành phiếu khi đã hỏi để hiểu dữ kiện của nhau."
    },
    {
     "t": "20'",
-    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+    "do": "Viết đoạn nối ý “Xin mở cửa sổ.” với “Xin đợi ở đây.”. Đổi bài và kiểm chủ thể, mốc thời gian cùng từ phủ định trước khi góp ý độ tự nhiên."
    },
    {
     "t": "15'",
-    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+    "do": "Chữa bài tự chấm từ cặp “閉める” và “入って”. Mỗi học viên ghi một câu sửa của chính mình và nêu cách sẽ nhận ra lỗi đó trong lần dùng sau."
    }
   ],
   "games": [
-   "Ghép thẻ câu với tình huống: mỗi nhóm phải giải thích một cặp và chỉ ra từ/cấu trúc quyết định.",
-   "Thông tin lệch: mỗi bạn giữ một phần dữ kiện; phải hỏi lại thay vì đoán để hoàn thành phiếu."
+   "Khoảng trống thông tin: một bạn chỉ thấy “教室に 入っても いいですか。”, bạn kia giữ câu trả lời. Họ hỏi lại để hoàn thành thông tin về mở trước khi đổi vai.",
+   "Chọn và bảo vệ đáp án: các nhóm nhận câu hỏi “Cửa ra vào và cửa sổ thế nào?”, chọn một phương án rồi tìm chi tiết đủ bác hai phương án nhiễu."
   ],
   "errors": [
    "Đổi mọi る→て: nhóm I như 入る→入って khác nhóm II 食べる→食べて.",
@@ -578,6 +594,6 @@
    "Bỏ ん trong 読んで: giữ mora và âm đục で.",
    "Dịch chuỗi て như các việc đồng thời: xem ngữ cảnh và dùng てから khi cần nhấn thứ tự."
   ],
-  "homework": "Ôn 12–20 thẻ theo lịch 1–3–7 ngày; nghe chép câu đã chọn, ghi âm hai lượt nói và viết đoạn mới thay ít nhất hai chi tiết."
+  "homework": "Ôn “開ける”, “閉める” và “入って” bằng câu mới có nghĩa. Ghi âm câu “窓を 開けてください。”, nghe lại phần kết rồi viết lời giải thích cho câu hỏi “Cửa ra vào và cửa sổ thế nào?” bằng tiếng Việt."
  }
 }

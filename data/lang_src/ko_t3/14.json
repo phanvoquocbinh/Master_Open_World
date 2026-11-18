@@ -1,0 +1,618 @@
+{
+ "no": 14,
+ "title": "Thông tin chưa biết: hỏi ai, lúc nào, có hay không",
+ "sub": "V-는지 / A-(으)ㄴ지 / N-인지",
+ "goals": [
+  "Tạo được câu hỏi gián tiếp với động từ, tính từ và danh từ.",
+  "Phân biệt 는지 câu hỏi với (으)ㄴ 지 tính thời gian.",
+  "Ghi rõ điều chưa biết và nguồn sẽ xác nhận."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Điểm xuất phát",
+   "html": "<p>Bạn chuẩn bị một bảng câu hỏi cho việc chưa có câu trả lời. Đuôi gián tiếp giữ khoảng trống thông tin; nó không tự biến câu hỏi thành sự khẳng định.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm cần dùng",
+   "items": [
+    {
+     "w": "확인 항목",
+     "rr": "hwagin hangmok",
+     "vi": "mục cần xác nhận",
+     "ex": "확인 항목을 나누어요.",
+     "exVi": "Tôi chia các mục cần xác nhận.",
+     "pos": "phr"
+    },
+    {
+     "w": "운영하다",
+     "rr": "unyeonghada",
+     "vi": "vận hành, mở hoạt động",
+     "ex": "언제 운영하는지 물어요.",
+     "exVi": "Tôi hỏi khi nào nơi đó hoạt động.",
+     "pos": "phr"
+    },
+    {
+     "w": "열리다",
+     "rr": "yeollida",
+     "vi": "được mở, diễn ra",
+     "ex": "문이 열리는지 확인해요.",
+     "exVi": "Tôi kiểm cửa có mở không.",
+     "pos": "phr"
+    },
+    {
+     "w": "닫히다",
+     "rr": "dachida",
+     "vi": "được đóng",
+     "ex": "언제 닫히는지 알아봐요.",
+     "exVi": "Tôi tìm hiểu lúc nào cửa đóng.",
+     "pos": "phr"
+    },
+    {
+     "w": "해당하다",
+     "rr": "haedanghada",
+     "vi": "thuộc phạm vi, áp dụng",
+     "ex": "누구에게 해당하는지 봐요.",
+     "exVi": "Tôi xem áp dụng cho ai.",
+     "pos": "phr"
+    },
+    {
+     "w": "유료",
+     "rr": "yuryo",
+     "vi": "có thu phí",
+     "ex": "유료인지 물어요.",
+     "exVi": "Tôi hỏi có thu phí không.",
+     "pos": "phr"
+    },
+    {
+     "w": "무료",
+     "rr": "muryo",
+     "vi": "miễn phí",
+     "ex": "무료인지는 아직 몰라요.",
+     "exVi": "Tôi chưa biết có miễn phí không.",
+     "pos": "phr"
+    },
+    {
+     "w": "충분하다",
+     "rr": "chungbunhada",
+     "vi": "đủ",
+     "ex": "시간이 충분한지 확인해요.",
+     "exVi": "Tôi kiểm thời gian có đủ không.",
+     "pos": "phr"
+    },
+    {
+     "w": "정확하다",
+     "rr": "jeonghwakada",
+     "vi": "chính xác",
+     "ex": "주소가 정확한지 물어요.",
+     "exVi": "Tôi hỏi địa chỉ có chính xác không.",
+     "pos": "phr"
+    },
+    {
+     "w": "최신",
+     "rr": "choesin",
+     "vi": "mới nhất",
+     "ex": "최신 안내인지 확인해요.",
+     "exVi": "Tôi kiểm có phải hướng dẫn mới nhất không.",
+     "pos": "phr"
+    },
+    {
+     "w": "예외",
+     "rr": "yeoe",
+     "vi": "ngoại lệ",
+     "ex": "예외가 있는지 물어요.",
+     "exVi": "Tôi hỏi có ngoại lệ không.",
+     "pos": "phr"
+    },
+    {
+     "w": "출처",
+     "rr": "chulcheo",
+     "vi": "nguồn",
+     "ex": "출처를 함께 적어요.",
+     "exVi": "Tôi ghi cả nguồn.",
+     "pos": "phr"
+    },
+    {
+     "w": "미정",
+     "rr": "mijeong",
+     "vi": "chưa quyết định",
+     "ex": "시간은 미정이에요.",
+     "exVi": "Giờ chưa quyết định.",
+     "pos": "phr"
+    },
+    {
+     "w": "별도",
+     "rr": "byeoldo",
+     "vi": "riêng biệt",
+     "ex": "별도 확인이 필요해요.",
+     "exVi": "Cần xác nhận riêng.",
+     "pos": "phr"
+    },
+    {
+     "w": "보류하다",
+     "rr": "boryuhada",
+     "vi": "tạm hoãn quyết định",
+     "ex": "모르면 결정을 보류해요.",
+     "exVi": "Nếu chưa biết, tôi tạm hoãn quyết định.",
+     "pos": "phr"
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "V-는지 / A-(으)ㄴ지 / N-인지",
+   "html": "<p>Dùng V는지 cho thông tin hành động hiện tại: 언제 여는지 몰라요, 누가 오는지 물어봐요. Tính từ thường dùng (으)ㄴ지: 넓은지, 바쁜지; 있다/없다 dùng 있는지/없는지. Danh từ dùng 인지: 무료인지, 학생인지. Quá khứ dùng 았/었는지 và dự kiến dùng (으)ㄹ지 tùy thời điểm: 이미 보냈는지, 내일 올지. Đuôi này gắn liền với phần trước vì là đuôi câu: 오는지. Trái lại 온 지 한 달의 지 thời gian viết cách và theo sau thời lượng 되다. Không phân biệt chỉ bằng mắt thấy ㄴ지: hãy hỏi câu đang giữ một thông tin chưa biết hay đo thời gian từ sự kiện. Hỏi 운영하는지 chưa khẳng định có mở; 최신 안내인지도 là đang kiểm độ cập nhật. Giữ nguồn và ngày của câu trả lời để tránh biến thông tin cũ thành hiện hành.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Ý cần giữ"
+    ],
+    [
+     "누가 오는지 물어요",
+     "Động từ hiện tại"
+    ],
+    [
+     "시간이 충분한지 몰라요",
+     "Tính từ"
+    ],
+    [
+     "무료인지 확인해요",
+     "Danh từ + 인지"
+    ],
+    [
+     "온 지 한 달 / 누가 오는지",
+     "Thời gian viết cách / câu hỏi gắn đuôi"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "토요일에도 운영하는지 알아봐 주세요.",
+     "vi": "Xin tìm hiểu thứ bảy có hoạt động không."
+    },
+    {
+     "t": "방이 충분히 넓은지 아직 몰라요.",
+     "vi": "Tôi chưa biết phòng có đủ rộng không."
+    },
+    {
+     "t": "이 안내가 최신인지 확인했어요.",
+     "vi": "Tôi đã kiểm có phải hướng dẫn mới nhất không."
+    },
+    {
+     "t": "여기에 온 지 두 달 됐지만 언제 닫는지는 몰라요.",
+     "vi": "Tôi đến đây được hai tháng nhưng chưa biết khi nào đóng."
+    }
+   ],
+   "tips": [
+    "Viết mọi 지 cách hoặc mọi 지 liền: phân biệt chức năng.",
+    "Dùng 무료는지 theo động từ: miễn phí là 무료인지.",
+    "Báo đã mở chỉ vì đã hỏi 운영하는지: cần câu trả lời."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe để giải quyết việc cụ thể",
+   "lang": "ko-KR",
+   "note": "Đọc tờ hướng dẫn không có ngày cập nhật: người học lập danh sách hỏi chứ chưa công bố là thông tin mới nhất.",
+   "lines": [
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "이 안내대로 토요일에 가면 돼요?",
+     "vi": "Cứ theo hướng dẫn này mà đi thứ bảy được chứ?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "먼저 최신 안내인지 확인해야 해요.",
+     "vi": "Trước tiên phải kiểm có phải hướng dẫn mới nhất không."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "무엇을 더 물어볼까요?",
+     "vi": "Cần hỏi thêm gì?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "토요일에도 운영하는지, 몇 시에 닫는지 물어봐 주세요.",
+     "vi": "Xin hỏi thứ bảy có mở không và mấy giờ đóng."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "참가비는 없다고 들었어요.",
+     "vi": "Tôi nghe nói không có phí tham gia."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "그 말이 이번 활동에도 해당하는지는 아직 몰라요.",
+     "vi": "Chưa biết thông tin đó có áp dụng cho hoạt động lần này không."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "그럼 무료라고 안내하면 안 되겠네요.",
+     "vi": "Vậy chưa nên thông báo là miễn phí nhỉ."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "네. 무료인지와 별도 재료비가 있는지를 나누어 확인해요.",
+     "vi": "Đúng. Kiểm riêng có miễn phí không và có phí vật liệu riêng không."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "답이 오기 전에는 참가 결정을 보류할게요.",
+     "vi": "Trước khi có trả lời tôi sẽ hoãn quyết định tham gia."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "좋아요. 답을 받은 날짜와 출처도 적어 주세요.",
+     "vi": "Được. Xin ghi cả ngày nhận trả lời và nguồn."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Việc đầu trước khi dùng hướng dẫn là gì?",
+     "o": [
+      "Đổi tên hướng dẫn",
+      "Kiểm tính mới nhất",
+      "Công bố mọi điều là đúng"
+     ],
+     "a": 1,
+     "e": "Không thấy ngày tạo, nên cần kiểm bản mới nhất trước khi dùng thông tin cũ cho thứ bảy này."
+    },
+    {
+     "q": "Hai loại phí cần kiểm riêng là gì?",
+     "o": [
+      "Phí tham gia và phí vật liệu",
+      "Phí nhà ở và học phí thật",
+      "Phí gửi thư và giá ghế"
+     ],
+     "a": 0,
+     "e": "Miễn phí tham gia chưa chắc miễn vật liệu; hai khoản được hỏi riêng để không mở phạm vi miễn phí."
+    },
+    {
+     "q": "Trước trả lời, người học làm gì với quyết định?",
+     "o": [
+      "Khẳng định chắc tham gia miễn phí",
+      "Đặt hết mọi chỗ",
+      "Tạm hoãn"
+     ],
+     "a": 2,
+     "e": "Người học nhận hoãn quyết định cho tới khi có trả lời, thay vì công bố chắc được đến miễn phí."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Bảng điều đã biết và điều cần hỏi",
+   "title": "Bảng điều đã biết và điều cần hỏi",
+   "text": "나린 씨는 가상의 종이숲 자료실을 방문하려고 했어요. 친구가 예전에 받은 안내 종이를 보내 줬어요. 종이에는 토요일에도 문을 열고 참가비가 없다고 써 있었어요. 그러나 언제 만든 안내인지 보이지 않았어요. 나린 씨는 곧바로 모임에 무료 방문이 가능하다고 알리려 했어요. 가온 씨는 아직 최신 안내인지 모른다고 말했어요. 두 사람은 확인 항목을 따로 만들었어요. 첫째는 이번 토요일에도 운영하는지였어요. 둘째는 몇 시에 닫는지, 셋째는 방이 여섯 명에게 충분한지였어요. 마지막에는 무료인지와 재료비가 있는지도 따로 적었어요. 담당자에게 문의한 후에 새로운 답이 왔어요. 토요일에는 예약한 사람만 들어갈 수 있고 참가비는 없지만 종이를 만드는 활동에는 재료비가 있었어요. 금액은 수업에서 정한 가상 값으로만 연습했어요. 나린 씨는 예전 안내가 전부 틀렸다고 쓰지 않았어요. 일부 내용은 같았고 적용 조건과 재료비 설명이 추가되어 있었어요. 두 사람은 답을 받은 날과 담당자의 역할도 남겼어요. 가온 씨는 자료실에 온 지 두 달 됐지만 이런 조건은 이번에 처음 알았다고 말했어요. 온 지 두 달은 지나간 시간을 뜻하고 운영하는지는 아직 모르는 내용을 묻는 말이라는 점도 비교했어요. 이제 안내를 다시 전할 때에는 확인된 내용과 추가로 물어야 할 내용을 구분할 수 있었어요.",
+   "vi": "Narin định đến phòng tư liệu Rừng Giấy giả định. Bạn gửi hướng dẫn cũ ghi mở thứ bảy và không có phí tham gia, nhưng không thấy ngày soạn. Cô định thông báo ngay là được đến miễn phí. Gaon nhắc chưa biết đó có phải bản mới nhất. Họ lập các mục cần kiểm: thứ bảy này có mở không, đóng lúc nào, phòng có đủ sáu người không, có phí tham gia và phí vật liệu riêng không. Câu trả lời mới cho biết thứ bảy chỉ người đã đặt chỗ được vào; không thu phí tham gia nhưng làm giấy có phí vật liệu. Giá chỉ là giá giả định trong lớp. Narin không gọi toàn bộ hướng dẫn cũ là sai vì một phần vẫn đúng, còn điều kiện áp dụng và giải thích phí được bổ sung. Họ lưu ngày nhận câu trả lời và vai trò người phụ trách. Gaon đến đây được hai tháng mà giờ mới biết điều kiện này. Họ đối chiếu 온 지 두 달, đo thời gian đã trôi qua, với 운영하는지, hỏi nội dung chưa biết. Nhờ vậy lời chuyển tiếp tách được điều đã xác nhận và điều cần hỏi thêm.",
+   "gloss": [
+    {
+     "w": "예약한 사람",
+     "rr": "yeyakan saram",
+     "vi": "người đã đặt chỗ"
+    },
+    {
+     "w": "적용 조건",
+     "rr": "jeogyong jogeon",
+     "vi": "điều kiện áp dụng"
+    },
+    {
+     "w": "추가",
+     "rr": "chuga",
+     "vi": "phần bổ sung"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Chi tiết nào làm chưa thể tin hướng dẫn là bản mới nhất?",
+     "o": [
+      "Không thấy ngày soạn",
+      "Có chữ Hàn",
+      "Có lời miễn phí"
+     ],
+     "a": 0,
+     "e": "Ngày soạn không nhìn thấy là thông tin thiếu khiến chưa xác định độ cập nhật của tờ giấy."
+    },
+    {
+     "q": "Đáp mới về thứ bảy là gì?",
+     "o": [
+      "Ai cũng vào không cần điều kiện",
+      "Đóng mọi thứ bảy",
+      "Chỉ người đặt chỗ được vào"
+     ],
+     "a": 2,
+     "e": "Trả lời mới giới hạn thứ bảy ở người đã đặt chỗ, không cho mọi người đến ngay."
+    },
+    {
+     "q": "Không phí tham gia có nghĩa không khoản phí nào không?",
+     "o": [
+      "Không có hoạt động nào",
+      "Không, hoạt động làm giấy có phí vật liệu",
+      "Có, luôn miễn mọi thứ"
+     ],
+     "a": 1,
+     "e": "Không có phí tham gia nhưng hoạt động làm giấy có phí vật liệu; một chữ miễn phí chưa bao mọi khoản."
+    },
+    {
+     "q": "Vì sao không gọi hướng dẫn cũ hoàn toàn sai?",
+     "o": [
+      "Một phần vẫn đúng, có điều kiện bổ sung",
+      "Vì không muốn đọc",
+      "Vì mọi hướng dẫn cũ luôn đúng"
+     ],
+     "a": 0,
+     "e": "Một phần hướng dẫn cũ vẫn đúng, chỉ có điều kiện và giải thích bổ sung nên không gọi toàn bộ sai."
+    },
+    {
+     "q": "온 지 두 달 khác 운영하는지 thế nào?",
+     "o": [
+      "Cả hai đều câu hỏi về giá",
+      "Cả hai đều một từ chỉ nơi",
+      "Một cái đo thời gian, một cái giữ thông tin chưa biết"
+     ],
+     "a": 2,
+     "e": "온 지 hai tháng đo thời gian từ khi đến, còn 운영하는지 giữ nội dung hoạt động chưa biết; hai chức năng khác nhau."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và nhận phản hồi",
+   "tasks": [
+    {
+     "p": "Lập ba câu hỏi gián tiếp trước khi tổ chức chuyến đến.",
+     "model": "이번 토요일에도 운영하는지 확인해 주세요. 방이 충분한지도 궁금해요. 무료인지, 별도 재료비가 있는지도 물어봐 주세요.",
+     "vi": "Xin kiểm thứ bảy này có mở không, phòng có đủ không, và có phí tham gia hay phí vật liệu riêng không."
+    },
+    {
+     "p": "Một bạn nói không phí tham gia nghĩa mọi thứ miễn phí; hỏi lại rồi tóm tắt giới hạn.",
+     "model": "가: 참가비가 없으니까 재료도 무료예요? 나: 그건 아직 몰라요. 재료비가 있는지 따로 확인해야 해요. 가: 그럼 확인 전에는 전체 무료라고 쓰지 않을게요.",
+     "vi": "A hỏi có phải miễn luôn vật liệu. B chưa biết và đề nghị kiểm riêng. A đồng ý chưa viết miễn tất cả."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết cho người nhận hiểu được",
+   "task": "Viết bảy đến chín câu ghi chú xác nhận một thông báo: thiếu ngày, ít nhất ba thông tin cần hỏi bằng 지, một kết quả mới, một giới hạn và cách lưu nguồn.",
+   "min": 210,
+   "model": "친구에게 예전 안내를 받았어요. 만든 날짜가 없어서 최신인지 몰라요. 토요일에도 운영하는지 물어볼 거예요. 방이 여섯 명에게 충분한지도 확인해야 해요. 참가가 무료인지와 재료비가 있는지는 따로 물어봐야 해요. 새 답에는 예약한 사람만 들어갈 수 있다고 써 있었어요. 따라서 누구나 바로 방문해도 된다고 안내하면 정확하지 않아요. 답을 받은 날짜와 담당자의 역할을 함께 기록할게요.",
+   "modelVi": "Tôi nhận hướng dẫn cũ từ bạn, không có ngày soạn nên chưa biết có phải mới nhất. Tôi sẽ hỏi thứ bảy có mở không, phòng đủ sáu người không, và kiểm riêng phí tham gia với vật liệu. Câu trả lời mới chỉ cho người đặt chỗ vào, nên nói ai cũng đến ngay được là thiếu chính xác. Tôi sẽ ghi ngày nhận trả lời cùng vai trò người trả lời.",
+   "tips": [
+    "Sắp ý theo yêu cầu Viết bảy đến chín câu ghi chú xác nhận một thông báo: thiếu ngày, ít nhất ba thông tin cần hỏi bằng 지, một kết quả mới, một giới hạn và cách lưu nguồn.; chỉ đưa dữ kiện cần để người nhận hiểu tình huống.",
+    "Dùng V-는지 / A-(으)ㄴ지 / N-인지 theo ý nghĩa đã giải thích, không thay mọi đuôi chỉ vì chúng trông giống nhau."
+   ],
+   "checklist": [
+    "Sản phẩm đáp đủ mục tiêu: Tạo được câu hỏi gián tiếp với động từ, tính từ và danh từ.",
+    "Câu có V-는지 / A-(으)ㄴ지 / N-인지 giữ đúng vai và thời điểm của người nói.",
+    "Người đọc sản phẩm có thể trả lời câu “Chi tiết nào làm chưa thể tin hướng dẫn là bản mới nhất?” khi dữ kiện tương ứng được đưa vào; không phải suy từ một chữ khó nhìn."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong câu “확인 항목을 나누어요.”, cụm “확인 항목” có nghĩa gì?",
+   "o": [
+    "miễn phí",
+    "mục cần xác nhận",
+    "được đóng"
+   ],
+   "a": 1,
+   "e": "Tôi chia các mục cần xác nhận. Đây là cách dùng mục cần xác nhận trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “언제 운영하는지 물어요.”, cụm “운영하다” có nghĩa gì?",
+   "o": [
+    "vận hành, mở hoạt động",
+    "thuộc phạm vi, áp dụng",
+    "đủ"
+   ],
+   "a": 0,
+   "e": "Tôi hỏi khi nào nơi đó hoạt động. Đây là cách dùng vận hành, mở hoạt động trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “문이 열리는지 확인해요.”, cụm “열리다” có nghĩa gì?",
+   "o": [
+    "có thu phí",
+    "chính xác",
+    "được mở, diễn ra"
+   ],
+   "a": 2,
+   "e": "Tôi kiểm cửa có mở không. Đây là cách dùng được mở, diễn ra trong tình huống đang nói."
+  },
+  {
+   "t": "fill",
+   "q": "무료___ 확인해 주세요. (có miễn phí không)",
+   "a": "인지",
+   "e": "무료 là danh từ, dùng 인지 cho câu hỏi gián tiếp."
+  },
+  {
+   "t": "fill",
+   "q": "온 ___ 두 달 됐어요. (thời gian)",
+   "a": "지",
+   "e": "지 thời gian viết cách sau 온; khác đuôi 오는지."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Tôi đã kiểm có phải hướng dẫn mới nhất không.",
+   "w": [
+    "안내가",
+    "최신인지",
+    "확인했어요",
+    "이"
+   ],
+   "a": "이 안내가 최신인지 확인했어요.",
+   "e": "Câu đúng là 이 안내가 최신인지 확인했어요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt tôi đã kiểm có phải hướng dẫn mới nhất không."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Tôi đến đây được hai tháng nhưng chưa biết khi nào đóng.",
+   "w": [
+    "온",
+    "지",
+    "두",
+    "달",
+    "됐지만",
+    "언제",
+    "닫는지는",
+    "몰라요",
+    "여기에"
+   ],
+   "a": "여기에 온 지 두 달 됐지만 언제 닫는지는 몰라요.",
+   "e": "Câu đúng là 여기에 온 지 두 달 됐지만 언제 닫는지는 몰라요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt tôi đến đây được hai tháng nhưng chưa biết khi nào đóng."
+  },
+  {
+   "t": "match",
+   "q": "Nối các cụm liên quan miễn phí và ngoại lệ với nghĩa phù hợp trong tình huống.",
+   "pairs": [
+    [
+     "무료",
+     "miễn phí"
+    ],
+    [
+     "충분하다",
+     "đủ"
+    ],
+    [
+     "정확하다",
+     "chính xác"
+    ],
+    [
+     "최신",
+     "mới nhất"
+    ],
+    [
+     "예외",
+     "ngoại lệ"
+    ]
+   ],
+   "e": "Cụm 무료 diễn đạt miễn phí, khác 예외 là ngoại lệ. Hãy dùng câu ví dụ để kiểm chức năng trước khi ghép."
+  },
+  {
+   "t": "listen",
+   "say": "이 안내대로 토요일에 가면 돼요? 먼저 최신 안내인지 확인해야 해요. 무엇을 더 물어볼까요? 토요일에도 운영하는지, 몇 시에 닫는지 물어봐 주세요. 참가비는 없다고 들었어요. 그 말이 이번 활동에도 해당하는지는 아직 몰라요. 그럼 무료라고 안내하면 안 되겠네요. 네. 무료인지와 별도 재료비가 있는지를 나누어 확인해요. 답이 오기 전에는 참가 결정을 보류할게요. 좋아요. 답을 받은 날짜와 출처도 적어 주세요.",
+   "lang": "ko-KR",
+   "q": "Việc đầu trước khi dùng hướng dẫn là gì?",
+   "o": [
+    "Đổi tên hướng dẫn",
+    "Kiểm tính mới nhất",
+    "Công bố mọi điều là đúng"
+   ],
+   "a": 1,
+   "e": "Không thấy ngày tạo, nên cần kiểm bản mới nhất trước khi dùng thông tin cũ cho thứ bảy này."
+  },
+  {
+   "t": "listen",
+   "say": "이 안내대로 토요일에 가면 돼요? 먼저 최신 안내인지 확인해야 해요. 무엇을 더 물어볼까요? 토요일에도 운영하는지, 몇 시에 닫는지 물어봐 주세요. 참가비는 없다고 들었어요. 그 말이 이번 활동에도 해당하는지는 아직 몰라요. 그럼 무료라고 안내하면 안 되겠네요. 네. 무료인지와 별도 재료비가 있는지를 나누어 확인해요. 답이 오기 전에는 참가 결정을 보류할게요. 좋아요. 답을 받은 날짜와 출처도 적어 주세요.",
+   "lang": "ko-KR",
+   "q": "Hai loại phí cần kiểm riêng là gì?",
+   "o": [
+    "Phí tham gia và phí vật liệu",
+    "Phí nhà ở và học phí thật",
+    "Phí gửi thư và giá ghế"
+   ],
+   "a": 0,
+   "e": "Miễn phí tham gia chưa chắc miễn vật liệu; hai khoản được hỏi riêng để không mở phạm vi miễn phí."
+  },
+  {
+   "t": "dict",
+   "say": "나린 씨는 가상의 종이숲 자료실을 방문하려고 했어요.",
+   "a": "나린 씨는 가상의 종이숲 자료실을 방문하려고 했어요.",
+   "lang": "ko-KR",
+   "e": "Câu bắt đầu bằng “나린 씨는” và kết thúc bằng “했어요.”. Giữ các khối chữ trong từng từ, viết cách giữa các từ như khi đọc lại cả câu; không đổi cách viết theo một âm nối nghe được."
+  },
+  {
+   "t": "mc",
+   "q": "시간이 충분한지 몰라요 dùng 형태 nào với 충분하다?",
+   "o": [
+    "는지 như mọi động từ hành động",
+    "지 thời gian sau tháng",
+    "(으)ㄴ지 của tính từ"
+   ],
+   "a": 2,
+   "e": "충분하다 là tính từ nên 충분한지."
+  },
+  {
+   "t": "mc",
+   "q": "운영하는지 물었어요 khẳng định đã mở không?",
+   "o": [
+    "Khẳng định đóng cửa",
+    "Không, chỉ thuật việc hỏi",
+    "Có chắc chắn"
+   ],
+   "a": 1,
+   "e": "Câu hỏi gián tiếp giữ nội dung chưa xác định, không bảo đảm câu trả lời."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ 확인 항목 / 해당하다 / 보류하다, tranh hoặc sơ đồ cho tình huống Đọc tờ hướng dẫn không có ngày cập nhật: người học lập danh sách hỏi chứ chưa công bố là thông tin mới nhất.; giáo viên nghe trước bản TTS để kiểm các số và âm khó.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Giáo viên nêu câu hỏi “Việc đầu trước khi dùng hướng dẫn là gì?”. Học viên dự đoán hai hướng trả lời rồi ghi điều cần nghe để phân biệt chúng; chưa mở lời thoại."
+   },
+   {
+    "t": "20 phút",
+    "do": "Làm việc với thẻ “확인 항목” và “닫히다”. Cho học viên ghép hai câu ví dụ tương ứng với tranh hoặc tình huống, sau đó tự giải thích vì sao không đổi chỗ hai cụm."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đối chiếu “토요일에도 운영하는지 알아봐 주세요.” với “방이 충분히 넓은지 아직 몰라요.”. Khoanh thành phần thuộc V-는지 / A-(으)ㄴ지 / N-인지 và tạo một biến thể đổi nghĩa có chủ ý để cả lớp sửa."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nghe tình huống Đọc tờ hướng dẫn không có ngày cập nhật: người học lập danh sách hỏi chứ chưa công bố là thông tin mới nhất. Lượt đầu lấy mục tiêu hai người, lượt sau ghi dữ kiện giải câu “Việc đầu trước khi dùng hướng dẫn là gì?”; yêu cầu chỉ đúng lượt cung cấp căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nhập vai theo nhiệm vụ “Lập ba câu hỏi gián tiếp trước khi tổ chức chuyến đến.”. Người nghe nhắc lại thông tin quyết định; người nói chỉ xác nhận nếu dữ kiện đã được truyền đúng."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai bắt đầu bằng “유료” và “보류하다”. Học viên viết lại một câu đã dùng từ tiết trước rồi đổi bối cảnh để kiểm có còn phù hợp hay không."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc “Bảng điều đã biết và điều cần hỏi” để giải câu “Chi tiết nào làm chưa thể tin hướng dẫn là bản mới nhất?”. So câu chứng cứ với một phương án nhiễu và nêu dữ kiện nào làm phương án đó sai."
+   },
+   {
+    "t": "20 phút",
+    "do": "Giao lượt nói thứ hai: Một bạn nói không phí tham gia nghĩa mọi thứ miễn phí; hỏi lại rồi tóm tắt giới hạn. Bạn nghe chỉ phản hồi về mục tiêu nội dung và cấu trúc đang luyện, không sửa mọi lỗi giữa lúc người kia nói."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết theo đề: Viết bảy đến chín câu ghi chú xác nhận một thông báo: thiếu ngày, ít nhất ba thông tin cần hỏi bằng 지, một kết quả mới, một giới hạn và cách lưu nguồn. Đổi bản cho bạn đọc và đối chiếu yêu cầu “Sản phẩm đáp đủ mục tiêu: Tạo được câu hỏi gián tiếp với động từ, tính từ và danh từ.”; người viết tự sửa một ý rồi giải thích căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chốt bằng câu “시간이 충분한지 몰라요 dùng 형태 nào với 충분하다?”. Mỗi học viên nêu vì sao lựa chọn sai dễ gây nhầm, rồi tự chọn một câu từ sản phẩm để luyện lại ở nhà."
+   }
+  ],
+  "games": [
+   "Thẻ điều kiện: đổi 확인 항목 thành 해당하다 trong câu mẫu nếu có nghĩa, sau đó giải thích điều kiện nào buộc phải sửa thêm ở vị ngữ.",
+   "Người kiểm căn cứ: hai bạn giải “Chi tiết nào làm chưa thể tin hướng dẫn là bản mới nhất?”, chỉ câu hỗ trợ và bác một phương án nhiễu bằng đúng dữ kiện của bài."
+  ],
+  "errors": [
+   "Viết mọi 지 cách hoặc mọi 지 liền: phân biệt chức năng.",
+   "Dùng 무료는지 theo động từ: miễn phí là 무료인지.",
+   "Báo đã mở chỉ vì đã hỏi 운영하는지: cần câu trả lời.",
+   "Gộp phí tham gia và vật liệu: hỏi riêng phạm vi.",
+   "Gọi toàn bộ bản cũ sai khi chỉ có điều kiện bổ sung: mô tả phần đổi chính xác."
+  ],
+  "homework": "Lập một tình huống mới có 확인 항목 và 보류하다. Viết sản phẩm cùng loại với đề lớp nhưng đổi thông tin, gửi bạn nghe/đọc rồi tự sửa lỗi liên quan V-는지 / A-(으)ㄴ지 / N-인지."
+ }
+}

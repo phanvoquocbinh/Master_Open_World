@@ -1,0 +1,598 @@
+{
+ "no": 16,
+ "title": "Đặt lịch rõ ngày và buổi – in, on, at và mốc không cần giới từ",
+ "sub": "in tháng/buổi · on ngày/ngày+buổi · at giờ/night",
+ "goals": [
+  "Chọn được in/on/at cho ngày, tháng, buổi và giờ trong tám cụm.",
+  "Phân biệt được in the morning với on Monday morning.",
+  "Chốt được hai cuộc hẹn có ngày và giờ không bị trộn."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bắt đầu từ tình huống",
+   "html": "<p>Bạn đọc một lịch luyện tập tự đặt, có ngày và giờ nằm ở các ô khác nhau. Mục tiêu là chọn giới từ theo cả cụm thời gian, không dịch mọi chữ “vào” của tiếng Việt thành cùng một từ.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Nghe và đọc đúng trọng tâm",
+   "items": [
+    {
+     "sym": "/mʌn/ /mɔː/",
+     "ex": [
+      "Monday",
+      "morning"
+     ],
+     "vi": "Monday có /ʌ/ trong âm đầu, morning có /ɔː/. Không đọc theo cùng một nguyên âm vì hai từ cùng mở bằng m."
+    },
+    {
+     "sym": "/ˌɑːftəˈnuːn/",
+     "ex": [
+      "afternoon",
+      "Friday afternoon"
+     ],
+     "vi": "Afternoon nhấn chính phần noon; ngắt Friday afternoon thành một cụm thời gian, không thêm âm giữa hai từ."
+    },
+    {
+     "sym": "Các từ nhỏ trong cụm thời gian",
+     "ex": [
+      "in the morning",
+      "on Monday morning",
+      "at three"
+     ],
+     "vi": "In/on/at thường nhẹ trong câu, nhưng vẫn có nghĩa và cần giữ trong chữ viết. Nhấn ngày hoặc giờ mới được sửa khi xác nhận."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm của tình huống",
+   "items": [
+    {
+     "w": "weekday",
+     "ipa": "/ˈwiːkdeɪ/",
+     "pos": "n",
+     "vi": "ngày trong tuần làm việc, thứ hai đến thứ sáu",
+     "ex": "I study on weekdays.",
+     "exVi": "Tôi học vào các ngày thứ hai đến thứ sáu."
+    },
+    {
+     "w": "weekend",
+     "ipa": "/ˌwiːkˈend/",
+     "pos": "n",
+     "vi": "cuối tuần",
+     "ex": "We meet at the weekend.",
+     "exVi": "Chúng tôi gặp cuối tuần."
+    },
+    {
+     "w": "morning",
+     "ipa": "/ˈmɔːnɪŋ/",
+     "pos": "n",
+     "vi": "buổi sáng",
+     "ex": "I read in the morning.",
+     "exVi": "Tôi đọc buổi sáng."
+    },
+    {
+     "w": "afternoon",
+     "ipa": "/ˌɑːftəˈnuːn/",
+     "pos": "n",
+     "vi": "buổi chiều",
+     "ex": "The room is open in the afternoon.",
+     "exVi": "Phòng mở buổi chiều."
+    },
+    {
+     "w": "evening",
+     "ipa": "/ˈiːvnɪŋ/",
+     "pos": "n",
+     "vi": "buổi tối",
+     "ex": "We draw in the evening.",
+     "exVi": "Chúng tôi vẽ buổi tối."
+    },
+    {
+     "w": "night",
+     "ipa": "/naɪt/",
+     "pos": "n",
+     "vi": "ban đêm",
+     "ex": "I do not study late at night.",
+     "exVi": "Tôi không học khuya."
+    },
+    {
+     "w": "Monday",
+     "ipa": "/ˈmʌndeɪ/",
+     "pos": "n",
+     "vi": "thứ hai",
+     "ex": "The class is on Monday.",
+     "exVi": "Lớp vào thứ hai."
+    },
+    {
+     "w": "Friday",
+     "ipa": "/ˈfraɪdeɪ/",
+     "pos": "n",
+     "vi": "thứ sáu",
+     "ex": "I call you on Friday afternoon.",
+     "exVi": "Tôi gọi bạn chiều thứ sáu."
+    },
+    {
+     "w": "January",
+     "ipa": "/ˈdʒænjuəri/",
+     "pos": "n",
+     "vi": "tháng một",
+     "ex": "The course starts in January.",
+     "exVi": "Khóa học bắt đầu tháng một."
+    },
+    {
+     "w": "June",
+     "ipa": "/dʒuːn/",
+     "pos": "n",
+     "vi": "tháng sáu",
+     "ex": "We have a short break in June.",
+     "exVi": "Chúng tôi nghỉ ngắn trong tháng sáu."
+    },
+    {
+     "w": "date",
+     "ipa": "/deɪt/",
+     "pos": "n",
+     "vi": "ngày trong lịch, ngày tháng",
+     "ex": "Please check the date.",
+     "exVi": "Xin kiểm ngày tháng."
+    },
+    {
+     "w": "calendar",
+     "ipa": "/ˈkælɪndə(r)/",
+     "pos": "n",
+     "vi": "lịch",
+     "ex": "The calendar is on the wall.",
+     "exVi": "Lịch trên tường."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "in tháng/buổi · on ngày/ngày+buổi · at giờ/night",
+   "html": "<p>In dùng với tháng và buổi nói chung: in June, in the morning, in the afternoon, in the evening. On dùng ngày: on Monday, on the fifth of June; khi có ngày+buổi dùng on Monday morning, không in Monday morning trong mẫu này. At dùng giờ và một số cụm cố định: at three, at night; bài chọn at the weekend theo cách dùng Anh-Anh, còn on the weekend phổ biến ở Anh-Mỹ. Không gán một giới từ bằng chữ vào trong mọi trường hợp. Với this, next, last, every ngay trước mốc thông thường không thêm in/on/at: this Friday, next Monday, every morning. Tên ngày và tháng viết hoa. Một lịch luyện tập có thể tự đặt thứ và ngày để luyện câu; không coi lịch giả trong bài là lịch thực của năm hiện tại. Hỏi ngày và giờ riêng nếu còn thiếu, rồi nhắc lại cả hai trước khi chốt.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Cách hiểu"
+    ],
+    [
+     "in June / in the morning",
+     "Tháng hoặc buổi nói chung"
+    ],
+    [
+     "on Friday / on Friday afternoon",
+     "Ngày, hoặc ngày có buổi"
+    ],
+    [
+     "at two / at night",
+     "Giờ và cụm night"
+    ],
+    [
+     "this Friday / every morning",
+     "Không thêm giới từ ngay trước các cụm này"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "I study in the evening.",
+     "vi": "Tôi học buổi tối."
+    },
+    {
+     "t": "We meet on Monday morning.",
+     "vi": "Chúng tôi gặp sáng thứ hai."
+    },
+    {
+     "t": "The lesson starts at two.",
+     "vi": "Buổi học bắt đầu lúc hai giờ."
+    },
+    {
+     "t": "I can help you this Friday.",
+     "vi": "Tôi có thể giúp bạn thứ sáu này."
+    }
+   ],
+   "tips": [
+    "Dùng in Monday vì nhớ in the morning: xét cả ngày+buổi.",
+    "Dùng on every morning theo chữ vào: cụm every không cần giới từ trước.",
+    "Gộp Friday2 với Monday10 thành một hẹn: để hai ô và nhắc lại từng mốc."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: ngày không đổi, giờ được sửa",
+   "note": "Hai bạn so lịch thực hành giả định cho một cuộc hẹn thứ sáu và một cuộc gọi sáng thứ hai.",
+   "lang": "en-GB",
+   "lines": [
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "Is our meeting in June?",
+     "vi": "Cuộc gặp của mình trong tháng sáu à?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Yes, on Friday afternoon in our practice calendar.",
+     "vi": "Đúng, chiều thứ sáu trong lịch tập của mình."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "At three?",
+     "vi": "Lúc ba giờ?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "No, at two. The day is the same.",
+     "vi": "Không, hai giờ. Ngày vẫn thế."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "Can we also talk on Monday morning?",
+     "vi": "Mình nói chuyện sáng thứ hai nữa được không?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Yes. I read every morning, but I am free at ten.",
+     "vi": "Được. Tôi đọc mỗi sáng nhưng rảnh lúc mười giờ."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "So, Friday at two and Monday at ten.",
+     "vi": "Vậy thứ sáu hai giờ, thứ hai mười giờ."
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "That is right. Please write both times on the calendar.",
+     "vi": "Đúng. Xin ghi cả hai giờ vào lịch."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Cuộc gặp thứ sáu cuối cùng lúc nào?",
+     "o": [
+      "Ba giờ chiều",
+      "Mười giờ sáng",
+      "Hai giờ chiều"
+     ],
+     "a": 2,
+     "e": "At three bị sửa thành at two; chiều thứ sáu giữ nguyên."
+    },
+    {
+     "q": "Cuộc gọi thứ hai vào buổi nào?",
+     "o": [
+      "Đêm",
+      "Sáng",
+      "Chiều"
+     ],
+     "a": 1,
+     "e": "Câu hỏi on Monday morning xác định cả ngày và buổi, lời đáp cho giờ mười."
+    },
+    {
+     "q": "Người hỗ trợ nhờ ghi gì?",
+     "o": [
+      "Cả hai mốc hẹn",
+      "Chỉ tháng sáu",
+      "Chỉ giờ bị nghe nhầm"
+     ],
+     "a": 0,
+     "e": "Both times chỉ thứ sáu hai giờ và thứ hai mười giờ đã xác nhận."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Một lịch tập có hai ô hẹn",
+   "title": "Một lịch tập có hai ô hẹn",
+   "text": "This is our practice calendar, not a real calendar for this year. The drawing class is in June. We meet on Friday afternoon at two. Nera writes three at first, but Tavin checks the note and changes the time. The day stays Friday. They also have a short call on Monday morning at ten. Nera reads every morning, but she can stop for the call. Tavin works on weekdays and helps at the learning house at the weekend. He does not work there late at night. They put the two meetings in different boxes, so the times are easy to find.",
+   "vi": "Đây là lịch tập, không phải lịch thật của năm. Lớp vẽ trong tháng sáu, gặp chiều thứ sáu lúc hai giờ. Nera ban đầu ghi ba, Tavin kiểm nhắn và sửa giờ, giữ nguyên thứ sáu. Họ còn gọi ngắn sáng thứ hai lúc mười. Nera đọc mỗi sáng nhưng dừng để gọi được. Tavin làm các ngày trong tuần, hỗ trợ nhà học cuối tuần, không làm khuya. Họ đặt hai hẹn ở hai ô để dễ tìm.",
+   "gloss": [
+    {
+     "w": "stays",
+     "vi": "vẫn giữ như vậy"
+    },
+    {
+     "w": "different boxes",
+     "vi": "các ô khác nhau"
+    },
+    {
+     "w": "at first",
+     "vi": "lúc đầu"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Lịch có được giới thiệu là lịch thật năm nay không?",
+     "o": [
+      "Chỉ ngày thứ hai là thật",
+      "Không, là lịch luyện",
+      "Có chắc chắn"
+     ],
+     "a": 1,
+     "e": "Câu đầu nói not a real calendar for this year để không suy dữ kiện lịch thực."
+    },
+    {
+     "q": "Trong hẹn thứ sáu, điều gì đổi?",
+     "o": [
+      "Giờ, không đổi ngày",
+      "Cả ngày và tháng",
+      "Chỉ tên Nera"
+     ],
+     "a": 0,
+     "e": "Tavin changes the time, the day stays Friday."
+    },
+    {
+     "q": "Tavin hỗ trợ nhà học khi nào?",
+     "o": [
+      "Mỗi đêm khuya",
+      "Chỉ sáng thứ hai",
+      "Cuối tuần"
+     ],
+     "a": 2,
+     "e": "At the weekend khác on weekdays là việc làm thường ngày của anh."
+    },
+    {
+     "q": "Vì sao hai hẹn nằm ở ô khác?",
+     "o": [
+      "Để bỏ một cuộc gọi",
+      "Dễ tìm và không trộn giờ",
+      "Vì hai người không nói chuyện"
+     ],
+     "a": 1,
+     "e": "Câu cuối nối hai ô với the times are easy to find."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: hỏi và nhắc lại lịch",
+   "tasks": [
+    {
+     "p": "Hỏi gặp tháng nào, ngày/buổi nào và giờ nào; người trả lời đưa tháng sáu, chiều thứ sáu, hai giờ.",
+     "model": "Which month is the meeting in? It is in June. Which day? On Friday afternoon. What time? At two.",
+     "vi": "Cuộc gặp tháng nào? Tháng sáu. Ngày nào? Chiều thứ sáu. Mấy giờ? Hai giờ."
+    },
+    {
+     "p": "Sửa bạn nói on every morning, rồi đưa một ví dụ ngày+buổi.",
+     "model": "I read every morning, not on every morning. Our call is on Monday morning at ten.",
+     "vi": "Tôi đọc every morning, không on every morning. Cuộc gọi sáng thứ hai lúc mười."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: hai cuộc hẹn trong lịch giả",
+   "task": "Viết40–60 từ ghi hai hẹn giả định: gặp chiều thứ sáu trong tháng sáu lúc 2 và gọi sáng thứ hai lúc 10. Thêm một thói quen có every và nhờ kiểm lại hai mốc.",
+   "min": 40,
+   "model": "Our meeting is in June, on Friday afternoon at two. We also have a short call on Monday morning at ten. I read every morning, but I am free for the call. Please put the meetings in two boxes on the practice calendar and check the times with me.",
+   "modelVi": "Cuộc gặp trong tháng sáu, chiều thứ sáu lúc hai. Chúng ta còn gọi ngắn sáng thứ hai lúc mười. Tôi đọc mỗi sáng nhưng rảnh lúc gọi. Xin ghi hai hẹn vào hai ô lịch tập và kiểm giờ với tôi.",
+   "tips": [
+    "Một câu có thể có in June, on Friday afternoon và at two vì ba cụm ở ba mức khác nhau.",
+    "Every morning không cần on đứng trước; vẫn giữ on trong on Monday morning."
+   ],
+   "checklist": [
+    "Đủ 40–60 từ và không đảo hai ngày/giờ.",
+    "Có tháng, ngày+buổi, giờ và every dùng đúng kiểu.",
+    "Người đọc được nhờ kiểm lại hai mốc chứ không tự đoán lịch thật."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "On weekdays thường chỉ lúc nào trong bài?",
+   "o": [
+    "Chỉ đêm chủ nhật",
+    "Mọi tháng sáu",
+    "Các ngày thứ hai đến thứ sáu"
+   ],
+   "a": 2,
+   "e": "Weekdays được đối chiếu với weekend, không phải một giờ."
+  },
+  {
+   "t": "mc",
+   "q": "Calendar là gì?",
+   "o": [
+    "Đôi găng",
+    "Lịch",
+    "Tên phòng"
+   ],
+   "a": 1,
+   "e": "Calendar tổ chức ngày, tháng và hẹn theo các ô."
+  },
+  {
+   "t": "mc",
+   "q": "In the afternoon nói buổi nào?",
+   "o": [
+    "Chiều",
+    "Sáng",
+    "Đêm"
+   ],
+   "a": 0,
+   "e": "Afternoon khác morning và night; cần giữ khi kèm giờ."
+  },
+  {
+   "t": "fill",
+   "q": "The call is ___ Monday morning.",
+   "a": "on",
+   "e": "Khi có ngày Monday cùng buổi morning, chọn on cho cả cụm."
+  },
+  {
+   "t": "fill",
+   "q": "I read ___ morning. (mỗi)",
+   "a": "every",
+   "e": "Every morning tự là cụm thời gian, không cần giới từ ngay trước."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Chúng tôi gặp lúc hai giờ thứ sáu.",
+   "w": [
+    "meet",
+    "at",
+    "two",
+    "on",
+    "Friday",
+    "We"
+   ],
+   "a": "We meet at two on Friday.",
+   "e": "Câu “We meet at two on Friday.” diễn đạt chúng tôi gặp lúc hai giờ thứ sáu. Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Lớp học trong tháng sáu.",
+   "w": [
+    "class",
+    "is",
+    "in",
+    "June",
+    "The"
+   ],
+   "a": "The class is in June.",
+   "e": "Câu “The class is in June.” diễn đạt lớp học trong tháng sáu. Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "match",
+   "q": "Nối Monday, Friday, January, June và date với nghĩa để đọc đúng lịch tập.",
+   "pairs": [
+    [
+     "Monday",
+     "thứ hai"
+    ],
+    [
+     "Friday",
+     "thứ sáu"
+    ],
+    [
+     "January",
+     "tháng một"
+    ],
+    [
+     "June",
+     "tháng sáu"
+    ],
+    [
+     "date",
+     "ngày trong lịch, ngày tháng"
+    ]
+   ],
+   "e": "Hai ngày trong tuần khác hai tháng; date hỏi ngày tháng cụ thể, không chỉ một giờ bắt đầu."
+  },
+  {
+   "t": "listen",
+   "say": "Is our meeting in June? Yes, on Friday afternoon in our practice calendar. At three? No, at two. The day is the same. Can we also talk on Monday morning? Yes. I read every morning, but I am free at ten. So, Friday at two and Monday at ten. That is right. Please write both times on the calendar.",
+   "lang": "en-GB",
+   "q": "Cuộc gặp thứ sáu cuối cùng lúc nào?",
+   "o": [
+    "Ba giờ chiều",
+    "Mười giờ sáng",
+    "Hai giờ chiều"
+   ],
+   "a": 2,
+   "e": "At three bị sửa thành at two; chiều thứ sáu giữ nguyên."
+  },
+  {
+   "t": "listen",
+   "say": "Is our meeting in June? Yes, on Friday afternoon in our practice calendar. At three? No, at two. The day is the same. Can we also talk on Monday morning? Yes. I read every morning, but I am free at ten. So, Friday at two and Monday at ten. That is right. Please write both times on the calendar.",
+   "lang": "en-GB",
+   "q": "Cuộc gọi thứ hai vào buổi nào?",
+   "o": [
+    "Đêm",
+    "Sáng",
+    "Chiều"
+   ],
+   "a": 1,
+   "e": "Câu hỏi on Monday morning xác định cả ngày và buổi, lời đáp cho giờ mười."
+  },
+  {
+   "t": "dict",
+   "say": "The call is on Monday morning.",
+   "a": "The call is on Monday morning.",
+   "lang": "en-GB",
+   "e": "Giữ on cho ngày+buổi; Monday viết hoa, morning không cần viết hoa ở vị trí này."
+  },
+  {
+   "t": "mc",
+   "q": "Cụm nào đúng cách dùng Anh-Anh được chọn trong bài?",
+   "o": [
+    "at the weekend",
+    "in Monday",
+    "at June"
+   ],
+   "a": 0,
+   "e": "At the weekend là mẫu bài; Monday dùng on, June dùng in."
+  },
+  {
+   "t": "mc",
+   "q": "Cụm nào không cần thêm giới từ ngay trước?",
+   "o": [
+    "the morning nói chung",
+    "June khi chỉ tháng",
+    "this Friday"
+   ],
+   "a": 2,
+   "e": "This Friday đã có this xác định mốc; hai cụm còn lại thường cần in trong câu đang học."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Lịch giả có hai ô thứ sáu/thứ hai, thẻ tháng sáu và hai bộ giờ2/3/10; bảng in/on/at chỉ gắn sau khi người học đã phân loại mốc.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Cho nghe cuộc hẹn có ba mức tháng/ngày/giờ, học viên đặt từng mảnh vào ba cột thay vì chép thành một chuỗi không rõ."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dạy weekday/weekend, tên ngày và tháng bằng lịch giả; làm rõ đây không phải lịch thật để không học nhầm quan hệ ngày–thứ."
+   },
+   {
+    "t": "20 phút",
+    "do": "So in the morning và on Monday morning, sau đó at night/at two; giải thích dựa cả cụm thay vì một từ cuối."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nghe hội thoại, gạch bỏ giờ3 khi có sửa2 và giữ thứ sáu; ghi cuộc gọi thứ hai vào ô riêng."
+   },
+   {
+    "t": "15 phút",
+    "do": "Hỏi–đáp tháng, ngày, giờ theo nhiệm vụ, người nghe nhắc cả hai lịch để người nói xác nhận."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai sửa cụm on every morning rồi so với on Monday morning; học viên nêu vì sao không áp một quy tắc theo chữ morning đơn lẻ."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đọc lịch tập, tìm câu nói lịch giả, mốc đổi và cách trình bày hai ô; trả lời bằng câu trong văn bản."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nói lịch mới có this/next/every và một ngày+buổi; bạn kiểm từng cụm, không sửa kiểu Anh-Mỹ thành lỗi nếu hiểu đúng biến thể."
+   },
+   {
+    "t": "15 phút",
+    "do": "Viết40–60 từ về hai hẹn, đổi bản để bạn đặt lại thẻ vào lịch; kiểm tên ngày/tháng và giới từ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Làm dict cùng câu tự chấm, chốt một điều học viên nghe đổi và một điều giữ nguyên trong hẹn; giao lịch giả để luyện ở nhà."
+   }
+  ],
+  "games": [
+   "Một mảnh đổi: giáo viên chỉ thay giờ trong một hẹn, đội phải giữ tháng và ngày, giải thích phần nào không được tự đổi.",
+   "Cả cụm quyết định: lật thêm Monday trước morning, học viên đổi in the morning thành on Monday morning rồi đưa every để bỏ giới từ."
+  ],
+  "errors": [
+   "Dùng in Monday vì nhớ in the morning: xét cả ngày+buổi.",
+   "Dùng on every morning theo chữ vào: cụm every không cần giới từ trước.",
+   "Gộp Friday2 với Monday10 thành một hẹn: để hai ô và nhắc lại từng mốc.",
+   "Viết thường tên ngày/tháng: giữ Monday, Friday, June.",
+   "Coi on the weekend luôn sai: đó là biến thể Anh-Mỹ, bài chọn cách Anh-Anh at the weekend."
+  ],
+  "homework": "Tạo lịch luyện tập ba hẹn tự đặt, dùng một tháng, một ngày+buổi, một mốc this/next. Nhờ bạn nghe và ghi vào lịch, ghi lại câu hỏi xác nhận đã giúp sửa một mốc."
+ }
+}

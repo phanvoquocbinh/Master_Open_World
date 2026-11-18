@@ -1,0 +1,610 @@
+{
+ "no": 17,
+ "title": "Ôn tập tổng hợp 1 – số người tăng, tỉ lệ có tăng không?",
+ "sub": "Ngôn ngữ số liệu · mẫu số · nhượng bộ · hedge · mục đích và kết quả",
+ "goals": [
+  "Tính và mô tả đúng số tuyệt đối với tỉ lệ dựa trên mẫu số khác nhau.",
+  "Kết hợp xu hướng, nhượng bộ và mức chắc trong một báo cáo.",
+  "Đưa đề xuất thử tiếp có nguồn lực, tiêu chí và phạm vi rõ."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bắt đầu từ tình huống",
+   "html": "<p>Câu lạc bộ sân khấu giả mở thêm chỗ trong buổi diễn thứ hai. Số người đến tăng nhưng phần trăm lấp chỗ giảm. Bạn viết báo cáo phân biệt hai phép so, giữ đúng mức nhân quả và đề xuất lần thử tiếp theo.</p>"
+  },
+  {
+   "k": "text",
+   "h": "Nhịp và sắc thái khi nói",
+   "html": "<p>Denominator nhấn âm thứ hai; occupancy nhấn âm đầu. Đọc rõ eighty per cent, sixty per cent và twenty percentage points. Không nuốt points rồi biến chênh lệch hai tỉ lệ thành một phần trăm thay đổi tương đối khác.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm của tình huống",
+   "items": [
+    {
+     "w": "attendance",
+     "ipa": "/əˈtendəns/",
+     "pos": "n",
+     "vi": "số người tham dự",
+     "ex": "Attendance rose to sixty.",
+     "exVi": "Số người dự tăng lên sáu mươi."
+    },
+    {
+     "w": "occupancy",
+     "ipa": "/ˈɒkjəpənsi/",
+     "pos": "n",
+     "vi": "mức lấp chỗ",
+     "ex": "Occupancy fell to sixty per cent.",
+     "exVi": "Mức lấp chỗ giảm còn sáu mươi phần trăm."
+    },
+    {
+     "w": "proportion",
+     "ipa": "/prəˈpɔːʃn/",
+     "pos": "n",
+     "vi": "tỉ lệ",
+     "ex": "The proportion depends on the total.",
+     "exVi": "Tỉ lệ phụ thuộc tổng số."
+    },
+    {
+     "w": "denominator",
+     "ipa": "/dɪˈnɒmɪneɪtə(r)/",
+     "pos": "n",
+     "vi": "mẫu số",
+     "ex": "The denominator changed between shows.",
+     "exVi": "Mẫu số đổi giữa hai buổi diễn."
+    },
+    {
+     "w": "absolute number",
+     "ipa": "/ˌæbsəluːt ˈnʌmbə(r)/",
+     "pos": "n phr",
+     "vi": "số tuyệt đối",
+     "ex": "The absolute number increased.",
+     "exVi": "Số tuyệt đối tăng."
+    },
+    {
+     "w": "capacity",
+     "ipa": "/kəˈpæsəti/",
+     "pos": "n",
+     "vi": "sức chứa",
+     "ex": "Capacity was expanded to one hundred.",
+     "exVi": "Sức chứa được tăng lên một trăm."
+    },
+    {
+     "w": "percentage point",
+     "ipa": "/pəˈsentɪdʒ pɔɪnt/",
+     "pos": "n phr",
+     "vi": "điểm phần trăm",
+     "ex": "The drop was twenty percentage points.",
+     "exVi": "Mức giảm là hai mươi điểm phần trăm."
+    },
+    {
+     "w": "comparison",
+     "ipa": "/kəmˈpærɪsn/",
+     "pos": "n",
+     "vi": "phép so sánh",
+     "ex": "Make the basis of comparison clear.",
+     "exVi": "Hãy làm rõ cơ sở so."
+    },
+    {
+     "w": "comparable",
+     "ipa": "/ˈkɒmpərəbl/",
+     "pos": "adj",
+     "vi": "có thể so trên cơ sở phù hợp",
+     "ex": "The two shows were not fully comparable.",
+     "exVi": "Hai buổi diễn chưa hoàn toàn tương đồng để so."
+    },
+    {
+     "w": "coincide",
+     "ipa": "/ˌkəʊɪnˈsaɪd/",
+     "pos": "v",
+     "vi": "xảy ra cùng lúc",
+     "ex": "The rise coincided with a new timetable.",
+     "exVi": "Mức tăng trùng lúc lịch mới."
+    },
+    {
+     "w": "association",
+     "ipa": "/əˌsəʊsiˈeɪʃn/",
+     "pos": "n",
+     "vi": "mối liên hệ quan sát",
+     "ex": "An association is not a complete explanation.",
+     "exVi": "Mối liên hệ chưa phải lời giải thích đầy đủ."
+    },
+    {
+     "w": "projection",
+     "ipa": "/prəˈdʒekʃn/",
+     "pos": "n",
+     "vi": "ước tính hướng tới tương lai",
+     "ex": "The projection needs stated assumptions.",
+     "exVi": "Ước tính tương lai cần nêu giả định."
+    },
+    {
+     "w": "caveat",
+     "ipa": "/ˈkæviæt/",
+     "pos": "n",
+     "vi": "điều lưu ý giới hạn",
+     "ex": "Add a caveat about the small sample.",
+     "exVi": "Hãy thêm lưu ý về mẫu nhỏ."
+    },
+    {
+     "w": "inquiry",
+     "ipa": "/ɪnˈkwaɪəri/",
+     "pos": "n",
+     "vi": "lời hỏi thông tin",
+     "ex": "Record each inquiry about the show time.",
+     "exVi": "Hãy ghi từng lời hỏi về giờ diễn."
+    },
+    {
+     "w": "feasible",
+     "ipa": "/ˈfiːzəbl/",
+     "pos": "adj",
+     "vi": "khả thi",
+     "ex": "A smaller trial is feasible.",
+     "exVi": "Một đợt thử nhỏ hơn là khả thi."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngôn ngữ số liệu · mẫu số · nhượng bộ · hedge · mục đích và kết quả",
+   "html": "<p>Bài ôn mô tả hai phép so cùng đúng. Show A có 48 người trong 60 chỗ: 48/60 = 80%. Show B có 60 trong 100: 60/100 = 60%. Attendance rose by twelve, from forty-eight to sixty; occupancy fell by twenty percentage points, from eighty to sixty per cent. Twenty percentage points khác mức giảm tương đối 25% tính trên 80%; nêu rõ đơn vị để không lẫn. Although attendance rose, occupancy fell nhượng bộ hai hướng khác nhau. A new timetable coincided with the rise không bằng caused it; có thay đổi sức chứa, chương trình và đối tượng mời. Future perfect có thể gắn mốc kế hoạch: by the review, we will have collected three sets of feedback, nhưng đây là cam kết dự kiến cần người thực hiện, chưa là dữ kiện. Dùng propose/recommend that đúng bổ ngữ, và with a view to comparing theo V-ing. Bản đề xuất phải nêu phép so muốn kiểm: thêm chỗ, đổi giờ hoặc đổi chương trình là các biến khác nhau, không nên gộp rồi gán hết tác dụng cho giờ.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Cách hiểu"
+    ],
+    [
+     "Attendance rose from 48 to 60.",
+     "Số người tăng 12."
+    ],
+    [
+     "Occupancy fell from 80% to 60%.",
+     "Giảm 20 điểm phần trăm với mẫu số đổi."
+    ],
+    [
+     "Although attendance rose, occupancy fell.",
+     "Hai phép so không mâu thuẫn."
+    ],
+    [
+     "The timetable may have contributed.",
+     "Giữ mức nhân quả khi nhiều yếu tố đổi."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "Forty-eight of sixty seats were occupied.",
+     "vi": "Bốn mươi tám trong sáu mươi chỗ có người."
+    },
+    {
+     "t": "Sixty of one hundred seats were occupied at the second show.",
+     "vi": "Sáu mươi trong một trăm chỗ có người ở buổi hai."
+    },
+    {
+     "t": "Attendance increased, whereas the proportion of seats filled decreased.",
+     "vi": "Số người tăng trong khi tỉ lệ chỗ lấp giảm."
+    },
+    {
+     "t": "The new time coincided with higher attendance.",
+     "vi": "Giờ mới trùng với số người dự cao hơn."
+    },
+    {
+     "t": "We recommend keeping capacity constant for the next comparison.",
+     "vi": "Chúng tôi khuyên giữ sức chứa không đổi cho phép so tiếp."
+    }
+   ],
+   "tips": [
+    "Lấy số người tăng làm bằng chứng tỉ lệ tăng: kiểm mẫu số.",
+    "Nhầm 20 điểm phần trăm với giảm tương đối 20%: ghi đơn vị và cách tính.",
+    "Gán nguyên nhân độc nhất khi chương trình cũng đổi: giới hạn lời giải thích."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: cùng tăng người, khác tỉ lệ lấp chỗ",
+   "note": "Hai thành viên câu lạc bộ sân khấu giả Olari sửa báo cáo hai buổi diễn có số chỗ khác nhau.",
+   "lang": "en-GB",
+   "lines": [
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "The second show had sixty visitors instead of forty-eight. I wrote that occupancy increased because our later start attracted more people.",
+     "vi": "Buổi hai có sáu mươi khách thay bốn mươi tám. Tôi ghi mức lấp chỗ tăng vì giờ muộn hút thêm người."
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Attendance increased, but occupancy did not. The first show had sixty seats and the second had one hundred.",
+     "vi": "Số người tăng nhưng mức lấp chỗ không tăng. Buổi đầu sáu mươi chỗ, buổi sau một trăm."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "So the first filled eighty per cent and the second sixty per cent. That is a fall of twenty percentage points, correct?",
+     "vi": "Vậy đầu lấp tám mươi phần trăm, sau sáu mươi, giảm hai mươi điểm phần trăm, đúng không?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Correct. We also changed the programme, so we cannot attribute the attendance rise entirely to the later start.",
+     "vi": "Đúng. Chương trình cũng đổi nên không thể quy hết mức tăng người cho giờ muộn."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "Could we say that the later start may have contributed, with a caveat about the other changes?",
+     "vi": "Mình nói giờ muộn có thể góp phần và lưu ý các thay đổi khác được không?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Yes. I recommend keeping the same capacity and programme for the next comparison, if that is feasible.",
+     "vi": "Được. Tôi khuyên giữ cùng sức chứa và chương trình lần so tiếp nếu khả thi."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "We could also record inquiries from people who could not attend, in order to understand their time constraints.",
+     "vi": "Mình cũng ghi lời hỏi của người không đến được để hiểu giới hạn thời gian của họ."
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Then the report will show the two measures separately and explain what the next test is intended to find out.",
+     "vi": "Vậy báo cáo tách hai thước đo và giải thích phép thử tiếp nhằm tìm điều gì."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Thước đo nào tăng?",
+     "o": [
+      "Cả hai như nhau",
+      "Số người tham dự",
+      "Tỉ lệ lấp chỗ"
+     ],
+     "a": 1,
+     "e": "Số tăng 48 lên 60 nhưng mẫu số tăng 60 lên 100 nên tỉ lệ giảm."
+    },
+    {
+     "q": "Tỉ lệ giảm bao nhiêu điểm phần trăm?",
+     "o": [
+      "Hai mươi",
+      "Mười hai",
+      "Bốn mươi"
+     ],
+     "a": 0,
+     "e": "80% trừ 60% bằng 20 điểm phần trăm; mười hai là số người tăng."
+    },
+    {
+     "q": "Vì sao chưa quy hết mức tăng cho giờ?",
+     "o": [
+      "Không có ai được đếm",
+      "Sức chứa giữ hệt",
+      "Chương trình cũng thay"
+     ],
+     "a": 2,
+     "e": "Một thay đổi khác cùng lúc ngăn kết luận nguyên nhân độc nhất."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Một biểu đồ, hai câu chuyện số liệu cùng đúng",
+   "title": "Một biểu đồ, hai câu chuyện số liệu cùng đúng",
+   "text": "The fictional Olari theatre circle compared two trial performances. Forty-eight people attended the first, which offered sixty seats. The second attracted sixty people and offered one hundred seats. A draft report announced an increase in occupancy and attributed it to a later starting time. The figures supported neither part of that sentence as written.\n\nAttendance and occupancy answered different questions. Attendance counted people: it rose by twelve, from forty-eight to sixty. Occupancy divided attendance by the number of available seats. The first show filled eighty per cent of its seats; the second filled sixty per cent. The proportion therefore fell by twenty percentage points even though more people attended. There was no contradiction once the denominator was visible. The report also needed to distinguish percentage points from a relative percentage change.\n\nThe explanation for the attendance rise was less certain than the count. The team had changed the programme as well as the starting time and the room capacity. The later time may have helped some visitors, but the new programme may also have attracted a different audience. Two performances could not show what would happen in every later session. A projection of continuing growth would need assumptions that the team had not tested.\n\nThe revised report kept both measures and limited its interpretation. It recommended another comparison with the same capacity and programme, if feasible, while changing the starting time. Volunteers would record inquiries from people who could not attend, not only positive comments from those who came. The purpose was to understand time constraints more clearly, not to collect support for a conclusion already chosen.\n\nBy the review meeting, the team planned to have collected the new counts and feedback. The final decision would consider attendance, the proportion of seats filled and the work needed to organise each show. No single measure was labelled the only true result. Instead, the report explained what each measure meant and which decision it could help inform.",
+   "vi": "Nhóm sân khấu Olari hư cấu so hai buổi thử: đầu bốn mươi tám người trong sáu mươi chỗ, sau sáu mươi người trong một trăm. Báo cáo nháp nói mức lấp chỗ tăng do đổi giờ muộn, nhưng số chưa hỗ trợ câu ấy. Attendance đếm người, tăng mười hai; occupancy chia người cho chỗ, đầu tám mươi phần trăm, sau sáu mươi, nên giảm hai mươi điểm phần trăm dù người tăng. Không mâu thuẫn khi thấy mẫu số; còn cần phân biệt điểm phần trăm với phần trăm thay đổi tương đối. Nguyên nhân tăng người chưa chắc như số đếm: nhóm đổi cả chương trình, giờ và sức chứa. Giờ muộn có thể giúp nhưng chương trình mới cũng có thể thu hút đối tượng khác. Hai buổi chưa bảo đảm các buổi sau, còn dự báo tăng liên tục cần giả định chưa thử. Bản sửa giữ hai thước đo và giới hạn giải thích. Nhóm đề nghị so tiếp với cùng sức chứa/chương trình nếu khả thi, chỉ đổi giờ, rồi ghi cả lời hỏi người không đến để hiểu hạn thời gian, không chỉ kiếm lời khen. Đến buổi xem lại, dự kiến có số và phản hồi mới. Quyết định xét người đến, tỉ lệ chỗ và công tổ chức, không gọi một thước đo là kết quả duy nhất đúng.",
+   "gloss": [
+    {
+     "w": "relative percentage change",
+     "vi": "phần trăm thay đổi tính so với mức ban đầu"
+    },
+    {
+     "w": "denominator",
+     "vi": "mẫu số"
+    },
+    {
+     "w": "time constraints",
+     "vi": "giới hạn về thời gian"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Số người thay đổi thế nào?",
+     "o": [
+      "Tăng mười hai",
+      "Giảm hai mươi",
+      "Giữ bốn mươi tám"
+     ],
+     "a": 0,
+     "e": "60 − 48 = 12 người; không lấy chênh tỉ lệ làm số người."
+    },
+    {
+     "q": "Vì sao tỉ lệ giảm dù người tăng?",
+     "o": [
+      "Không ai đến buổi sau",
+      "Mẫu số không đổi",
+      "Tổng chỗ tăng nhanh hơn số người"
+     ],
+     "a": 2,
+     "e": "60/100 nhỏ hơn 48/60 khi số chỗ khác nhau."
+    },
+    {
+     "q": "Kết luận nguyên nhân có giới hạn gì?",
+     "o": [
+      "Không hề có đổi chương trình",
+      "Nhiều yếu tố thay cùng lúc",
+      "Giờ là yếu tố duy nhất đổi"
+     ],
+     "a": 1,
+     "e": "Bài ghi cả programme, starting time và capacity."
+    },
+    {
+     "q": "Tại sao hỏi người không dự?",
+     "o": [
+      "Để hiểu hạn thời gian ngoài nhóm đã đến",
+      "Để buộc họ khen",
+      "Để đổi số đếm cũ"
+     ],
+     "a": 0,
+     "e": "Nhóm muốn thông tin về người chưa được phản hồi tại buổi diễn."
+    },
+    {
+     "q": "Quyết định cuối xét gì?",
+     "o": [
+      "Chỉ một thước đo được gọi chân lý",
+      "Chỉ dự báo tăng",
+      "Cả người, tỉ lệ và công tổ chức"
+     ],
+     "a": 2,
+     "e": "Các thước đo trả lời câu hỏi khác nhau nên dùng cùng bối cảnh quyết định."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: trình bày hai phép so rõ đơn vị",
+   "tasks": [
+    {
+     "p": "Báo số người tăng và tỉ lệ giảm, giải thích mẫu số trong khoảng một phút.",
+     "model": "Attendance rose from forty-eight to sixty, an increase of twelve people. However, capacity rose from sixty to one hundred seats. Occupancy therefore fell from eighty to sixty per cent, a drop of twenty percentage points. These results are compatible because they measure different things.",
+     "vi": "Người dự tăng bốn mươi tám lên sáu mươi, thêm mười hai. Nhưng sức chứa tăng sáu mươi lên một trăm, nên mức lấp giảm tám mươi xuống sáu mươi phần trăm, giảm hai mươi điểm. Hai kết quả cùng đúng vì đo việc khác."
+    },
+    {
+     "p": "Phản hồi nhận định giờ muộn là nguyên nhân duy nhất, đề nghị so tiếp và hỏi khả thi.",
+     "model": "The later start may have contributed, but the programme changed too. I suggest keeping the programme and capacity the same for another comparison while varying the time. Could we also record inquiries from people who cannot attend? Is that feasible with our volunteers?",
+     "vi": "Giờ muộn có thể góp phần nhưng chương trình cũng đổi. Tôi đề nghị giữ chương trình và sức chứa cho phép so khác, đổi giờ. Mình ghi lời hỏi người không đến được nhé? Nhân lực có làm nổi không?"
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: báo cáo dữ liệu dẫn tới phép thử",
+   "task": "Viết 170–200 từ về hai buổi diễn Olari giả. Dùng đúng 48/60 và 60/100, số người tăng và tỉ lệ giảm; giới hạn nguyên nhân giờ muộn vì chương trình cũng đổi. Đề nghị thử tiếp giữ điều kiện và thu phản hồi cả người không dự.",
+   "min": 170,
+   "model": "The two trial performances produced different patterns in attendance and occupancy. Attendance rose from forty-eight to sixty people, an increase of twelve. However, the number of seats rose from sixty to one hundred, so occupancy fell from eighty to sixty per cent. That was a decrease of twenty percentage points, not an increase in the proportion filled. The later starting time coincided with higher attendance, but the programme also changed. It may have contributed to the rise, yet the comparison does not establish it as the only cause. I recommend another test with the same programme and capacity, if feasible, while varying the starting time. Volunteers should record inquiries from people who cannot attend as well as comments from those who come. This would help us understand time constraints rather than simply confirm our preferred explanation. At the review, we should consider the number of visitors, the proportion of seats filled and the work required. These measures answer different questions, so the report should retain them separately and explain which decision each can inform.",
+   "modelVi": "Hai buổi thử có hướng khác nhau ở số người và mức lấp. Người tăng bốn mươi tám lên sáu mươi, thêm mười hai; số chỗ tăng sáu mươi lên một trăm nên mức lấp giảm tám mươi xuống sáu mươi phần trăm, giảm hai mươi điểm phần trăm. Giờ muộn trùng mức tăng người nhưng chương trình cũng đổi, nên có thể góp phần chứ chưa là nguyên nhân duy nhất. Tôi khuyên thử tiếp giữ chương trình và sức chứa nếu khả thi, đổi giờ và ghi cả lời hỏi của người không đến lẫn nhận xét người dự. Cách đó giúp hiểu giới hạn thời gian thay vì chỉ xác nhận ý mình thích. Khi xem lại nên xét người, tỉ lệ và công việc cần, giữ các thước đo riêng cùng câu hỏi chúng hỗ trợ.",
+   "tips": [
+    "Mỗi số đi với người, chỗ, phần trăm hoặc điểm phần trăm rõ.",
+    "Đề xuất phải xử lý một giới hạn phép so đã nêu, không chỉ “more research”."
+   ],
+   "checklist": [
+    "Có 170–200 từ và tính đúng hai tỉ lệ.",
+    "Không gọi giảm 20 điểm phần trăm là tăng occupancy.",
+    "Kế hoạch thu thông tin ngoài nhóm phản hồi thuận lợi hiện có."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Denominator trong tỉ lệ lấp là gì?",
+   "o": [
+    "Mốc giờ diễn",
+    "Số chỗ có sẵn",
+    "Chỉ số người khen"
+   ],
+   "a": 1,
+   "e": "Occupancy chia người dự cho chỗ, nên thay tổng chỗ làm phép so tỉ lệ đổi."
+  },
+  {
+   "t": "mc",
+   "q": "Coincide with có tự nghĩa gây ra không?",
+   "o": [
+    "Không, chỉ trùng xảy ra",
+    "Có, bảo đảm nguyên nhân duy nhất",
+    "Có, mọi lần đều vậy"
+   ],
+   "a": 0,
+   "e": "Trùng thời điểm là quan hệ quan sát, chưa đủ kết luận nhân quả."
+  },
+  {
+   "t": "mc",
+   "q": "A feasible comparison cần gì?",
+   "o": [
+    "Bắt buộc cho kết quả mình thích",
+    "Không cần giữ điều kiện",
+    "Có thể làm được với nguồn lực thực"
+   ],
+   "a": 2,
+   "e": "Feasible đánh giá khả năng triển khai chứ không hứa kết quả."
+  },
+  {
+   "t": "fill",
+   "q": "Occupancy fell from eighty to sixty per cent, by twenty percentage ___.",
+   "a": "points",
+   "e": "Chênh trực tiếp giữa 80% và 60% là 20 percentage points, không chỉ 20 per cent tương đối."
+  },
+  {
+   "t": "fill",
+   "q": "The rise coincided ___ the later start.",
+   "a": "with",
+   "e": "Coincide with nêu hai việc trùng nhau, không tự khẳng định nguyên nhân."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Số người tăng trong khi mức lấp giảm.",
+   "w": [
+    "increased",
+    "while",
+    "occupancy",
+    "decreased",
+    "Attendance"
+   ],
+   "a": "Attendance increased while occupancy decreased.",
+   "e": "Câu “Attendance increased while occupancy decreased.” diễn đạt số người tăng trong khi mức lấp giảm. Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Chúng ta nên giữ mẫu số rõ ràng.",
+   "w": [
+    "should",
+    "keep",
+    "the",
+    "denominator",
+    "visible",
+    "We"
+   ],
+   "a": "We should keep the denominator visible.",
+   "e": "Câu “We should keep the denominator visible.” diễn đạt chúng ta nên giữ mẫu số rõ ràng. Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "match",
+   "q": "Nối association, projection, caveat, inquiry và feasible theo báo cáo buổi diễn.",
+   "pairs": [
+    [
+     "percentage point",
+     "điểm phần trăm"
+    ],
+    [
+     "comparison",
+     "phép so sánh"
+    ],
+    [
+     "comparable",
+     "có thể so trên cơ sở phù hợp"
+    ],
+    [
+     "coincide",
+     "xảy ra cùng lúc"
+    ],
+    [
+     "association",
+     "mối liên hệ quan sát"
+    ]
+   ],
+   "e": "Association là liên hệ, projection nhìn tương lai theo giả định; caveat giới hạn nhận định. Inquiry là lời hỏi cần ghi, feasible đánh giá phép thử làm nổi không."
+  },
+  {
+   "t": "listen",
+   "say": "The second show had sixty visitors instead of forty-eight. I wrote that occupancy increased because our later start attracted more people. Attendance increased, but occupancy did not. The first show had sixty seats and the second had one hundred. So the first filled eighty per cent and the second sixty per cent. That is a fall of twenty percentage points, correct? Correct. We also changed the programme, so we cannot attribute the attendance rise entirely to the later start. Could we say that the later start may have contributed, with a caveat about the other changes? Yes. I recommend keeping the same capacity and programme for the next comparison, if that is feasible. We could also record inquiries from people who could not attend, in order to understand their time constraints. Then the report will show the two measures separately and explain what the next test is intended to find out.",
+   "lang": "en-GB",
+   "q": "Thước đo nào tăng?",
+   "o": [
+    "Cả hai như nhau",
+    "Số người tham dự",
+    "Tỉ lệ lấp chỗ"
+   ],
+   "a": 1,
+   "e": "Số tăng 48 lên 60 nhưng mẫu số tăng 60 lên 100 nên tỉ lệ giảm."
+  },
+  {
+   "t": "listen",
+   "say": "The second show had sixty visitors instead of forty-eight. I wrote that occupancy increased because our later start attracted more people. Attendance increased, but occupancy did not. The first show had sixty seats and the second had one hundred. So the first filled eighty per cent and the second sixty per cent. That is a fall of twenty percentage points, correct? Correct. We also changed the programme, so we cannot attribute the attendance rise entirely to the later start. Could we say that the later start may have contributed, with a caveat about the other changes? Yes. I recommend keeping the same capacity and programme for the next comparison, if that is feasible. We could also record inquiries from people who could not attend, in order to understand their time constraints. Then the report will show the two measures separately and explain what the next test is intended to find out.",
+   "lang": "en-GB",
+   "q": "Tỉ lệ giảm bao nhiêu điểm phần trăm?",
+   "o": [
+    "Hai mươi",
+    "Mười hai",
+    "Bốn mươi"
+   ],
+   "a": 0,
+   "e": "80% trừ 60% bằng 20 điểm phần trăm; mười hai là số người tăng."
+  },
+  {
+   "t": "dict",
+   "say": "The proportion fell despite the higher attendance.",
+   "a": "The proportion fell despite the higher attendance.",
+   "lang": "en-GB",
+   "e": "Despite theo cụm danh từ higher attendance; câu giữ hai hướng thay đổi khác nhau chứ không coi chúng mâu thuẫn."
+  },
+  {
+   "t": "mc",
+   "q": "48/60 và 60/100 cho tỉ lệ nào?",
+   "o": [
+    "60% rồi 80%",
+    "48% rồi 60%",
+    "80% rồi 60%"
+   ],
+   "a": 2,
+   "e": "Phải chia mỗi số người cho số chỗ tương ứng, không đọc tử số thành phần trăm."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào giới hạn nguyên nhân đúng?",
+   "o": [
+    "More people prove every seat was filled.",
+    "The later start may have contributed to the rise.",
+    "The later start proved every future show will be full."
+   ],
+   "a": 1,
+   "e": "May have contributed giữ khả năng đóng góp trong bối cảnh nhiều thay đổi."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Hai sơ đồ ghế giả 60/100, thẻ người dự 48/60, lịch và chương trình hai buổi khác nhau, mẫu ghi lời hỏi người không dự.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Cho riêng số người để đoán xu hướng, rồi mở số chỗ nhằm cho thấy câu trả lời tỉ lệ có thể đảo."
+   },
+   {
+    "t": "20 phút",
+    "do": "Tính attendance và occupancy bằng hai sơ đồ; gắn đơn vị percentage point với chênh hai tỉ lệ."
+   },
+   {
+    "t": "20 phút",
+    "do": "Ôn although/whereas, hedge nguyên nhân và recommend V-ing bằng cùng bảng dữ liệu, tránh đổi số."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nghe báo cáo nháp rồi sửa hai lỗi tăng occupancy và quy hết cho giờ muộn."
+   },
+   {
+    "t": "15 phút",
+    "do": "Đóng vai báo số cho người chưa xem bảng, người nghe phải nhắc lại đúng tử số/mẫu số."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai đọc eighty/sixty và percentage points rõ trọng tâm; nghe phân biệt số người mười hai với chênh tỉ lệ hai mươi."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đọc bài, nối từng yếu tố đổi với giới hạn so sánh và cách giữ điều kiện lần tiếp."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nói đề xuất thử khả thi có người ghi inquiries, bạn nghe hỏi về nguồn lực và người không đến."
+   },
+   {
+    "t": "15 phút",
+    "do": "Viết 170–200 từ, kiểm đơn vị ở từng số và xóa dự báo tăng chưa có giả định."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chữa percentage points bị nhầm phần trăm tương đối, làm dict proportion rồi giao bảng số khác để báo hai thước đo."
+   }
+  ],
+  "games": [
+   "Mở mẫu số: đội chỉ được kết luận tỉ lệ sau khi thấy tổng chỗ, điểm trừ cho gọi tử số là phần trăm.",
+   "Nguyên nhân cần phép so: mỗi đội đề xuất giữ hai điều kiện và đổi một điều kiện, giải thích câu hỏi mà phép thử có thể trả lời."
+  ],
+  "errors": [
+   "Lấy số người tăng làm bằng chứng tỉ lệ tăng: kiểm mẫu số.",
+   "Nhầm 20 điểm phần trăm với giảm tương đối 20%: ghi đơn vị và cách tính.",
+   "Gán nguyên nhân độc nhất khi chương trình cũng đổi: giới hạn lời giải thích.",
+   "Viết dự báo liên tục từ hai buổi: nêu giả định và nhu cầu kiểm.",
+   "Chỉ hỏi người đã đến rồi gọi là toàn bộ nhu cầu: mở nhóm phản hồi."
+  ],
+  "homework": "Tạo hai buổi giả có tử số tăng nhưng tỉ lệ giảm. Viết 170–200 từ, giải thích hai kết quả, một yếu tố gây nhiễu và một phép so khả thi để kiểm tiếp."
+ }
+}

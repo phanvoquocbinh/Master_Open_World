@@ -5,7 +5,7 @@
  "goals": [
   "Nhận xét, khen ngợi cách làm một việc bằng V + 得 + (很/非常) + tính từ",
   "Dùng đúng cấu trúc khi có tân ngữ: (V) + O + V + 得 + tính từ",
-  "Phủ định V + 得 + 不 + tính từ; hỏi V得怎么样？/ V得 + tính từ 不 + tính từ？",
+  "Phủ định V + 得 + 不 + tính từ; hỏi V 得怎么样？/ V 得 + tính từ 不 + tính từ？",
   "Nói về thể thao, sở thích, sức khoẻ; so sánh 他跑得比我快; đáp lời khen kiểu Trung Quốc",
   "Phân biệt l – n, ü – u và ba chữ cùng đọc “de”: 的, 得, 地"
  ],
@@ -364,7 +364,7 @@
   {
    "k": "grammar",
    "h": "Ngữ pháp 3: 得 kết hợp 比 · phân biệt 的 / 得 / 地",
-   "html": "<p><b>So sánh cách làm:</b> 比 có thể đứng trước động từ hoặc sau 得 – cả hai đều đúng: 他<b>比我</b>跑得快 = 他跑得<b>比我</b>快 (Anh ấy chạy nhanh hơn tôi). Phủ định: A + V得 + 没有 B + Adj.</p><p><b>Ba chữ “de”</b> đọc giống nhau nhưng vị trí khác nhau:</p>",
+   "html": "<p><b>So sánh cách làm:</b> 比 có thể đứng trước động từ hoặc sau 得 – cả hai đều đúng: 他<b>比我</b>跑得快 = 他跑得<b>比我</b>快 (Anh ấy chạy nhanh hơn tôi). Phủ định: A + V 得 + 没有 B + Adj.</p><p><b>Ba chữ “de”</b> đọc giống nhau nhưng vị trí khác nhau:</p>",
    "table": [
     [
      "Chữ",
@@ -515,21 +515,21 @@
     {
      "q": "Ai chạy nhanh hơn?",
      "o": [
-      "李华",
       "阿明",
-      "小兰"
+      "小兰",
+      "李华"
      ],
-     "a": 1,
+     "a": 0,
      "e": "他跑得比我快多了 – 他 = A Minh, 我 = Lý Hoa."
     },
     {
      "q": "李华 chơi bóng rổ thế nào?",
      "o": [
+      "Không biết chơi",
       "Rất giỏi",
-      "Tạm được",
-      "Không biết chơi"
+      "Tạm được"
      ],
-     "a": 1,
+     "a": 2,
      "e": "还可以 = tạm được, cũng được."
     },
     {
@@ -545,11 +545,11 @@
     {
      "q": "A Minh nói chuyện thế nào?",
      "o": [
-      "Rất chậm",
       "Rất nhanh",
-      "Rất to"
+      "Rất to",
+      "Rất chậm"
      ],
-     "a": 0,
+     "a": 2,
      "e": "他说话说得很慢，踢球踢得很快."
     },
     {
@@ -617,20 +617,20 @@
     {
      "q": "谁跑得快？(Shéi pǎo de kuài?)",
      "o": [
-      "李华",
-      "小白 – con chó"
+      "小白 – con chó",
+      "李华"
      ],
-     "a": 1,
+     "a": 0,
      "e": "它跑得比李华快多了 – 它 chỉ con chó Tiểu Bạch."
     },
     {
      "q": "Họ đá bóng thế nào?",
      "o": [
+      "Họ không đá bóng",
       "Rất hay",
-      "Không hay lắm nhưng rất vui",
-      "Họ không đá bóng"
+      "Không hay lắm nhưng rất vui"
      ],
-     "a": 1,
+     "a": 2,
      "e": "他们踢得不太好，可是大家都笑得很高兴."
     },
     {
@@ -770,11 +770,11 @@
    "lang": "zh-CN",
    "q": "Người nói muốn gì?",
    "o": [
+    "Nói to hơn",
     "Nói nhanh hơn",
-    "Nói chậm lại",
-    "Nói to hơn"
+    "Nói chậm lại"
    ],
-   "a": 1,
+   "a": 2,
    "e": "请说慢一点儿 = xin nói chậm một chút."
   },
   {
@@ -783,32 +783,32 @@
    "lang": "zh-CN",
    "q": "Ai bơi giỏi hơn?",
    "o": [
-    "Người nói",
-    "Cô ấy"
+    "Cô ấy",
+    "Người nói"
    ],
-   "a": 1,
+   "a": 0,
    "e": "A 没有 B 好 = A không giỏi bằng B → cô ấy giỏi hơn."
   },
   {
    "t": "mc",
    "q": "“Anh ấy chạy rất nhanh” – câu đúng:",
    "o": [
-    "他跑很快。",
     "他跑得很快。",
-    "他很快跑得。"
+    "他很快跑得。",
+    "他跑很快。"
    ],
-   "a": 1,
+   "a": 0,
    "e": "V + 得 + (很) + tính từ; không được bỏ 得."
   },
   {
    "t": "mc",
    "q": "Phủ định của 他唱得好 (Tā chàng de hǎo) là:",
    "o": [
+    "他没唱得好。",
     "他不唱得好。",
-    "他唱得不好。",
-    "他没唱得好。"
+    "他唱得不好。"
    ],
-   "a": 1,
+   "a": 2,
    "e": "不 đứng sau 得: 唱得不好."
   },
   {
@@ -826,11 +826,11 @@
    "t": "mc",
    "q": "Chọn chữ đúng: 这是我___狗，它跑___很快。(Zhè shì wǒ ___ gǒu, tā pǎo ___ hěn kuài.)",
    "o": [
+    "的 / 的",
     "的 / 得",
-    "得 / 的",
-    "的 / 的"
+    "得 / 的"
    ],
-   "a": 0,
+   "a": 1,
    "e": "的 + danh từ (我的狗); động từ + 得 + tính từ (跑得快)."
   },
   {
@@ -899,7 +899,7 @@
     "踢得"
    ],
    "a": "他足球踢得比我好",
-   "e": "S + O + V得 + 比 B + tính từ.",
+   "e": "S + O + V 得 + 比 B + tính từ.",
    "alt": [
     "他足球比我踢得好"
    ]
@@ -961,7 +961,7 @@
    },
    {
     "t": "30'",
-    "do": "Ngữ pháp 1–2: công thức V得Adj; phủ định 不 sau 得; 3 kiểu hỏi; khi có tân ngữ – 2 cách. Bảng đúng/sai: học viên sửa 4 câu sai lên bảng."
+    "do": "Ngữ pháp 1–2: công thức V 得 Adj; phủ định 不 sau 得; 3 kiểu hỏi; khi có tân ngữ – 2 cách. Bảng đúng/sai: học viên sửa 4 câu sai lên bảng."
    },
    {
     "t": "15'",

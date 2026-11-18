@@ -1,191 +1,1357 @@
 {
-  "no": 2,
-  "for": "ref",
-  "title": "Hệ thống pinyin đầy đủ & cách dạy, sửa phát âm cho người Việt",
-  "sub": "汉语拼音 · Hànyǔ Pīnyīn",
-  "goals": [
-    "Tra cứu đủ 21 thanh mẫu, 39 vận mẫu kèm IPA, cách phát âm và âm Việt gần nhất",
-    "Nắm bảng kết hợp thanh mẫu – vận mẫu và toàn bộ quy tắc viết pinyin",
-    "Đọc đúng các hiện tượng biến điệu: 3+3, nửa thanh 3, 一, 不, thanh nhẹ, nhi hoá, 啊",
-    "Chẩn đoán và sửa 14 lỗi phát âm điển hình của người Việt bằng bài luyện cụ thể"
-  ],
-  "parts": [
-    {"k": "text", "h": "Tổng quan: âm tiết tiếng Trung gồm những gì?", "html": "<p><b>Pinyin</b> (汉语拼音方案, công bố năm 1958) là hệ thống chữ Latin ghi âm tiếng Trung phổ thông. Mỗi âm tiết = <b>thanh mẫu</b> (phụ âm đầu) + <b>vận mẫu</b> (phần vần) + <b>thanh điệu</b>.</p><table><tr><th>Âm tiết</th><th>Thanh mẫu</th><th>Vận mẫu</th><th>Thanh</th></tr><tr><td>好 hǎo</td><td>h</td><td>ao</td><td>3</td></tr><tr><td>学 xué</td><td>x</td><td>üe (viết ue)</td><td>2</td></tr><tr><td>爱 ài</td><td>(không có)</td><td>ai</td><td>4</td></tr></table><ul><li>Tiếng Trung phổ thông chỉ có khoảng <b>400 âm tiết cơ bản</b> (không tính thanh) và khoảng 1.300 âm tiết có thanh – rất ít so với tiếng Việt. Vì vậy có nhiều chữ đồng âm, và <b>thanh điệu cực kỳ quan trọng</b>.</li><li>Âm tiết <b>không bao giờ</b> kết thúc bằng âm tắc (-p, -t, -c) hay -m như tiếng Việt; chỉ kết thúc bằng nguyên âm, -n, -ng (hoặc -r khi nhi hoá).</li><li>Chữ cái pinyin <b>không đọc như chữ quốc ngữ</b>: c, z, q, x, zh, e, ü… có giá trị riêng. Đây là nguồn lỗi lớn nhất của người Việt.</li></ul>"},
-    {"k": "grammar", "h": "Bảng 21 thanh mẫu (声母)", "html": "<p>Xếp theo vị trí cấu âm. Cột “Gần âm Việt” chỉ để định hướng – luôn nghe giọng mẫu để chỉnh. <b>Bật hơi</b> = có luồng hơi mạnh thoát ra (đặt tờ giấy trước miệng sẽ thấy giấy bay).</p>", "table": [
-      ["Nhóm", "Thanh mẫu", "IPA", "Cách phát âm", "Gần âm Việt", "Lỗi hay gặp"],
-      ["Môi", "b", "[p]", "Hai môi khép, bật nhẹ, không bật hơi, không rung dây thanh", "“p” nhẹ (như trong “pin”)", "Đọc thành “b” Việt (rung, hút hơi vào)"],
-      ["Môi", "p", "[pʰ]", "Như b nhưng bật luồng hơi mạnh", "“p” + hơi", "Đọc thành “ph” [f] hoặc quên bật hơi"],
-      ["Môi", "m", "[m]", "Âm mũi hai môi", "“m”", "–"],
-      ["Môi – răng", "f", "[f]", "Răng trên chạm môi dưới", "“ph”", "–"],
-      ["Đầu lưỡi", "d", "[t]", "Đầu lưỡi chạm lợi trên, không bật hơi", "“t”", "Đọc thành “đ” Việt (rung, hút hơi)"],
-      ["Đầu lưỡi", "t", "[tʰ]", "Như d nhưng bật hơi", "“th”", "Ít lỗi"],
-      ["Đầu lưỡi", "n", "[n]", "Âm mũi", "“n”", "Lẫn n/l ở một số vùng"],
-      ["Đầu lưỡi", "l", "[l]", "Âm bên", "“l”", "Lẫn n/l"],
-      ["Gốc lưỡi", "g", "[k]", "Gốc lưỡi chạm ngạc mềm, không bật hơi", "“c/k”", "Đọc thành “g” Việt (âm xát, rung)"],
-      ["Gốc lưỡi", "k", "[kʰ]", "Như g nhưng bật hơi", "“c” + hơi", "Đọc thành “kh” Việt (âm xát) – sai"],
-      ["Gốc lưỡi", "h", "[x]", "Gốc lưỡi tiến gần ngạc mềm, hơi cọ xát", "“kh”", "Đọc “h” Việt – quá nhẹ"],
-      ["Mặt lưỡi", "j", "[tɕ]", "Mặt lưỡi áp ngạc cứng, đầu lưỡi tựa răng dưới, môi dẹt, không bật hơi", "“ch” môi dẹt", "Đọc thành “gi” hoặc “tr”"],
-      ["Mặt lưỡi", "q", "[tɕʰ]", "Như j nhưng bật hơi mạnh", "“ch” + hơi", "Quên bật hơi; đọc thành “kh”"],
-      ["Mặt lưỡi", "x", "[ɕ]", "Mặt lưỡi gần ngạc cứng, hơi xát, môi dẹt như đang cười", "giữa “x” và “s”", "Đọc thành “x” Việt (đầu lưỡi)"],
-      ["Uốn lưỡi", "zh", "[ʈʂ]", "Đầu lưỡi cong lên chạm phía trước ngạc cứng, không bật hơi", "“tr” có uốn lưỡi", "Không uốn → nghe như z hoặc “ch”"],
-      ["Uốn lưỡi", "ch", "[ʈʂʰ]", "Như zh nhưng bật hơi", "“tr” uốn lưỡi + hơi", "Đọc thành “ch” Việt"],
-      ["Uốn lưỡi", "sh", "[ʂ]", "Đầu lưỡi cong, hơi cọ xát", "“s” uốn lưỡi", "Đọc thành “x” Việt"],
-      ["Uốn lưỡi", "r", "[ʐ]~[ɻ]", "Vị trí như sh nhưng rung dây thanh, rất nhẹ, lưỡi không rung", "“r” miền Nam đọc nhẹ", "Rung lưỡi; đọc thành “d/gi” hoặc “l”"],
-      ["Đầu lưỡi trước", "z", "[ts]", "Đầu lưỡi sau răng cửa trên: bật rồi xát ngay “tx”, không bật hơi", "không có (gần “tx”)", "Đọc thành “d/gi” miền Bắc [z]"],
-      ["Đầu lưỡi trước", "c", "[tsʰ]", "Như z nhưng bật hơi mạnh “tsh”", "không có", "Đọc thành “c” Việt (= k) – lỗi rất nặng"],
-      ["Đầu lưỡi trước", "s", "[s]", "Đầu lưỡi gần răng, hơi xát", "“x”", "Đọc thành “s” uốn lưỡi"]
-    ], "tips": ["<b>y</b> và <b>w</b> không phải thanh mẫu thật: chỉ là cách viết khi âm tiết bắt đầu bằng i, u, ü (yi, wu, yu…).", "Mẹo nhớ nhanh cho người Việt: <b>t = th, h = kh, s = x, f = ph, d = t, b = p, g = c</b>."]},
-    {"k": "sounds", "h": "Luyện cặp không bật hơi – bật hơi", "html": "<p>Đặt tờ giấy (hoặc lòng bàn tay) trước miệng: âm bật hơi làm giấy rung mạnh, âm không bật hơi thì không. Nghe từng cặp, đọc theo.</p>", "items": [
-      {"sym": "b – p", "ex": ["包", "抛", "饱", "跑"], "vi": "bāo – pāo; bǎo (no) – pǎo (chạy).", "pairs": [["饱", "跑"]]},
-      {"sym": "d – t", "ex": ["读", "图", "肚", "兔"], "vi": "dú (đọc) – tú (tranh); dù (bụng) – tù (thỏ).", "pairs": [["读", "图"]]},
-      {"sym": "g – k", "ex": ["哥", "科", "姑", "哭"], "vi": "gē – kē; gū (cô) – kū (khóc).", "pairs": [["姑", "哭"]]},
-      {"sym": "j – q", "ex": ["鸡", "七", "见", "欠"], "vi": "jī (gà) – qī (bảy); jiàn (gặp) – qiàn (nợ).", "pairs": [["鸡", "七"]]},
-      {"sym": "zh – ch", "ex": ["知", "吃", "找", "吵"], "vi": "zhī – chī (ăn); zhǎo (tìm) – chǎo (ồn).", "pairs": [["找", "吵"]]},
-      {"sym": "z – c", "ex": ["字", "次", "早", "草"], "vi": "zì (chữ) – cì (lần); zǎo (sớm) – cǎo (cỏ).", "pairs": [["早", "草"]]}
-    ]},
-    {"k": "sounds", "h": "Ba nhóm âm hay lẫn: j q x – zh ch sh r – z c s", "html": "<p>Ba nhóm này khác nhau ở <b>vị trí lưỡi</b>: z c s – đầu lưỡi thẳng sau răng; zh ch sh r – đầu lưỡi cong lên; j q x – mặt lưỡi nâng, môi dẹt, chỉ đi với i/ü.</p>", "items": [
-      {"sym": "j – zh – z", "ex": ["鸡", "知", "资"], "vi": "jī – zhī – zī: môi dẹt / lưỡi cong / lưỡi thẳng.", "pairs": [["知", "资"]]},
-      {"sym": "q – ch – c", "ex": ["七", "吃", "词"], "vi": "qī – chī – cí: cả ba đều bật hơi.", "pairs": [["柴", "才"]]},
-      {"sym": "x – sh – s", "ex": ["西", "诗", "思"], "vi": "xī – shī – sī: nghe kỹ sự khác nhau của luồng hơi.", "pairs": [["西", "诗"], ["是", "四"]]},
-      {"sym": "r", "ex": ["日", "热", "人", "肉"], "vi": "rì – rè – rén – ròu: giữ lưỡi như sh, thêm rung dây thanh, không rung lưỡi.", "pairs": [["热", "乐"], ["肉", "漏"]]}
-    ]},
-    {"k": "grammar", "h": "Bảng 39 vận mẫu (韵母)", "html": "<p>Gồm 10 vận mẫu đơn, 13 vận mẫu kép, 16 vận mẫu mũi. Cột “Cách viết khi đứng một mình” cho biết dạng có y/w.</p>", "table": [
-      ["Nhóm", "Vận mẫu", "IPA", "Gần âm Việt / mẹo", "Ví dụ"],
-      ["Đơn", "a", "[a]", "“a”, mở rộng miệng", "八 bā, 大 dà"],
-      ["Đơn", "o", "[o]", "“ô” tròn môi; sau b p m f nghe như “uô”", "波 bō, 我 wǒ"],
-      ["Đơn", "e", "[ɤ]", "“ơ” lùi sâu, môi không tròn (gần “ưa” nói nhanh)", "喝 hē, 饿 è"],
-      ["Đơn", "i", "[i]", "“i” (đứng một mình viết yi)", "一 yī, 你 nǐ"],
-      ["Đơn", "u", "[u]", "“u” (đứng một mình viết wu)", "五 wǔ, 不 bù"],
-      ["Đơn", "ü", "[y]", "Đọc “i” rồi chu tròn môi, lưỡi giữ nguyên (viết yu)", "鱼 yú, 女 nǚ"],
-      ["Đơn", "ê", "[ɛ]", "“e”; chỉ gặp trong ie, üe", "姐 jiě, 学 xué"],
-      ["Đơn", "er", "[ɚ]", "“ơ” + cong đầu lưỡi", "二 èr, 儿 ér"],
-      ["Đơn", "-i (sau z c s)", "[ɿ]", "“ư” đầu lưỡi kéo dài", "四 sì, 字 zì"],
-      ["Đơn", "-i (sau zh ch sh r)", "[ʅ]", "“ư” với lưỡi cong", "是 shì, 吃 chī"],
-      ["Kép", "ai", "[ai]", "“ai”", "爱 ài"],
-      ["Kép", "ei", "[ei]", "“ây”", "黑 hēi, 美 měi"],
-      ["Kép", "ao", "[ɑu]", "“ao”", "好 hǎo"],
-      ["Kép", "ou", "[ou]", "“âu”", "狗 gǒu, 走 zǒu"],
-      ["Kép", "ia (ya)", "[ia]", "“ia” đọc liền, nhấn a", "家 jiā"],
-      ["Kép", "ie (ye)", "[iɛ]", "“iê”", "姐 jiě, 谢 xiè"],
-      ["Kép", "ua (wa)", "[ua]", "“oa”", "花 huā"],
-      ["Kép", "uo (wo)", "[uo]", "“uô”", "多 duō, 我 wǒ"],
-      ["Kép", "üe (yue)", "[yɛ]", "“uyê”", "学 xué, 月 yuè"],
-      ["Kép", "iao (yao)", "[iɑu]", "“iao” (gần “iêu” mở)", "小 xiǎo"],
-      ["Kép", "iou (-iu, you)", "[iou]", "“iêu”; thanh 1, 2 nghe gần “iu”", "九 jiǔ, 六 liù"],
-      ["Kép", "uai (wai)", "[uai]", "“oai”", "快 kuài"],
-      ["Kép", "uei (-ui, wei)", "[uei]", "“uây”; thanh 1, 2 nghe gần “uy”", "对 duì, 贵 guì"],
-      ["Mũi", "an", "[an]", "“an”", "三 sān"],
-      ["Mũi", "en", "[ən]", "“ân”", "门 mén"],
-      ["Mũi", "in (yin)", "[in]", "“in”", "心 xīn"],
-      ["Mũi", "ün (yun)", "[yn]", "“uyn”, môi tròn", "云 yún, 军 jūn"],
-      ["Mũi", "ian (yan)", "[iɛn]", "“iên” (không đọc “i-an”)", "天 tiān"],
-      ["Mũi", "uan (wan)", "[uan]", "“oan”", "晚 wǎn, 关 guān"],
-      ["Mũi", "üan (yuan)", "[yɛn]", "“uyên”", "远 yuǎn, 全 quán"],
-      ["Mũi", "uen (-un, wen)", "[uən]", "“uân”", "春 chūn, 问 wèn"],
-      ["Mũi", "ang", "[ɑŋ]", "“ang”", "忙 máng"],
-      ["Mũi", "eng", "[ɤŋ]", "“âng”", "冷 lěng"],
-      ["Mũi", "ing (ying)", "[iŋ]", "“inh” nhưng lưỡi lùi về sau (gần “i-ng”)", "名 míng"],
-      ["Mũi", "ong", "[ʊŋ]", "“ung”, môi tròn", "中 zhōng"],
-      ["Mũi", "iang (yang)", "[iɑŋ]", "“i-ang” đọc liền", "两 liǎng"],
-      ["Mũi", "uang (wang)", "[uɑŋ]", "“oang”", "黄 huáng"],
-      ["Mũi", "ueng (weng)", "[uɤŋ]", "“uâng”; chỉ có dạng weng", "翁 wēng"],
-      ["Mũi", "iong (yong)", "[yʊŋ]", "“iung”", "用 yòng, 穷 qióng"]
-    ], "tips": ["Ba vần người Việt đọc sai nhiều nhất: <b>ian</b> (phải đọc “iên”), <b>e</b> (không phải “e”), <b>ü</b> (môi tròn suốt, không trượt thành “uy”)."]},
-    {"k": "grammar", "h": "Bảng kết hợp thanh mẫu – vận mẫu", "html": "<p>Không phải thanh mẫu nào cũng ghép được với mọi vận mẫu. Nắm bảng này giúp học viên <b>tự phát hiện pinyin sai</b> (ví dụ không bao giờ có “gi”, “zü”, “fi”).</p>", "table": [
-      ["Nhóm thanh mẫu", "Vần a / o / e (hở)", "Vần i và i-", "Vần u và u-", "Vần ü và ü-"],
-      ["b p m", "✓ (bo po mo, không có “buo”)", "✓ (bi, pian, ming…)", "Chỉ u (bu pu mu)", "✗"],
-      ["f", "✓ (fa, fo, fei, fen…)", "✗ (không có fi)", "Chỉ u (fu)", "✗"],
-      ["d t", "✓", "✓ (di, tian, ding…)", "✓ (du, duo, dui, tuan…)", "✗"],
-      ["n l", "✓", "✓", "✓", "✓ nü, lü, nüe, lüe (giữ hai chấm)"],
-      ["g k h", "✓", "✗", "✓ (gu, guo, kuai, huang…)", "✗"],
-      ["j q x", "✗", "✓", "✗ (u sau j q x thực chất là ü)", "✓ viết ju, que, xuan, jun"],
-      ["zh ch sh r", "✓", "Chỉ -i đặc biệt: zhi chi shi ri", "✓ (zhu, chuan, shui, ruo…)", "✗"],
-      ["z c s", "✓", "Chỉ -i đặc biệt: zi ci si", "✓ (zu, cuo, sui, sun…)", "✗"],
-      ["Không thanh mẫu", "a, o, e, ai, ao, ou, an, en, ang, eng, er", "Viết với y: yi, ya, ye, yao, you, yan, yin, yang, ying, yong", "Viết với w: wu, wa, wo, wai, wei, wan, wen, wang, weng", "Viết với yu: yu, yue, yuan, yun"]
-    ], "tips": ["Hệ quả quan trọng: chữ <b>u</b> sau j, q, x, y luôn đọc là <b>ü</b>: 去 qù, 鱼 yú, 学 xué, 军 jūn.", "Vần <b>ong</b> không bao giờ đứng một mình (đứng một mình chỉ có weng)."]},
-    {"k": "grammar", "h": "Quy tắc viết pinyin (chính tả)", "html": "<p>Đây là các quy tắc trong Phương án pinyin và quy tắc viết pinyin theo từ. Học viên phải viết đúng để gõ máy và tra từ điển.</p>", "table": [
-      ["Quy tắc", "Cách viết", "Ví dụ"],
-      ["i đứng đầu âm tiết", "i → yi, in → yin, ing → ying; các vần khác đổi i thành y", "ia → ya, ie → ye, iao → yao, iou → you, ian → yan, iang → yang, iong → yong"],
-      ["u đứng đầu âm tiết", "u → wu; các vần khác đổi u thành w", "ua → wa, uo → wo, uai → wai, uei → wei, uan → wan, uen → wen, uang → wang, ueng → weng"],
-      ["ü đứng đầu âm tiết", "Thêm y, bỏ hai chấm", "ü → yu, üe → yue, üan → yuan, ün → yun"],
-      ["ü sau j q x", "Bỏ hai chấm", "jù, qù, xué, quán, jūn"],
-      ["ü sau n l", "Giữ hai chấm (để phân biệt với u)", "nǚ (女) ≠ nǔ (努); lǜ (绿) ≠ lù (路)"],
-      ["Rút gọn khi có thanh mẫu", "iou → iu, uei → ui, uen → un", "liù (六), guì (贵), lùn (论)"],
-      ["Vị trí dấu thanh", "Ưu tiên a → o, e → i, u, ü; riêng iu, ui đặt trên chữ sau", "hǎo, duō, xiè, guì, liù, lǜ"],
-      ["Dấu cách âm ’", "Âm tiết bắt đầu bằng a, o, e đứng sau âm tiết khác", "Xī’ān (西安) ≠ xiān (先); nǚ’ér (女儿)"],
-      ["Viết hoa", "Đầu câu; tên riêng; họ và tên viết tách, mỗi phần viết hoa", "Běijīng, Wáng Xiǎomíng"],
-      ["Viết liền theo từ", "Các âm tiết của một từ viết liền, từ khác cách nhau", "Wǒ shì xuésheng. (không viết “xué sheng”)"],
-      ["Ghi thanh", "Từ điển ghi thanh gốc; sách dạy ghi 一, 不 theo thanh thực đọc", "yí ge, bú shì (giáo trình này)"]
-    ], "tips": ["Học viên thường bỏ dấu thanh khi chép – yêu cầu <b>luôn</b> ghi dấu thanh trong vở trong suốt HSK 1–2."]},
-    {"k": "sounds", "h": "Biến điệu (变调) – nghe & đọc theo", "html": "<p>Biến điệu là thay đổi thanh khi các âm tiết đứng cạnh nhau. Chữ viết (trong từ điển) vẫn giữ thanh gốc.</p>", "items": [
-      {"sym": "3 + 3 → 2 + 3", "ex": ["你好", "很好", "可以", "水果"], "vi": "nǐ hǎo → <b>ní</b> hǎo; kěyǐ → <b>ké</b>yǐ; shuǐguǒ → <b>shuí</b>guǒ."},
-      {"sym": "Nửa thanh 3", "ex": ["好吃", "很忙", "可是", "我们"], "vi": "Thanh 3 đứng trước thanh 1, 2, 4 hoặc thanh nhẹ chỉ đọc phần thấp (21), không vòng lên."},
-      {"sym": "Ba thanh 3 liền nhau", "ex": ["我很好", "展览馆", "小老虎"], "vi": "Biến theo nhóm nghĩa: 我很好 → wó hén hǎo; 展览|馆 → zhán lán guǎn; 小|老虎 → xiǎo láo hǔ (小 đọc nửa thanh 3)."},
-      {"sym": "一 yī", "ex": ["一天", "一年", "一起", "一样", "第一"], "vi": "Trước thanh 1, 2, 3 → yì (yì tiān, yì nián, yìqǐ); trước thanh 4 → yí (yíyàng, yí ge); đứng một mình, cuối từ, số thứ tự, đọc số → yī (dì-yī)."},
-      {"sym": "不 bù", "ex": ["不是", "不对", "不忙", "不好", "对不起"], "vi": "Trước thanh 4 → bú (bú shì, bú duì); các trường hợp khác giữ bù; giữa hai âm tiết đọc nhẹ (duìbuqǐ)."},
-      {"sym": "Thanh nhẹ", "ex": ["妈妈", "桌子", "我们", "东西", "看看"], "vi": "māma, zhuōzi, wǒmen, dōngxi, kànkan: âm tiết sau ngắn, nhẹ."},
-      {"sym": "啊 biến âm", "ex": ["好啊", "你啊", "看啊"], "vi": "啊 cuối câu đổi theo âm trước: hǎo wa (sau -o/-u), nǐ ya (sau -i), kàn na (sau -n)."}
-    ]},
-    {"k": "grammar", "h": "Thanh nhẹ (轻声): khi nào đọc nhẹ?", "html": "<p>Thanh nhẹ không có cao độ cố định: sau thanh 1, 2 nó hơi thấp; sau thanh 3 nó hơi cao; sau thanh 4 nó thấp nhất. Một số trường hợp <b>bắt buộc</b> và một số từ <b>theo thói quen</b>:</p>", "table": [
-      ["Loại", "Ví dụ"],
-      ["Trợ từ 的 地 得 了 着 过 吗 呢 吧 啊", "我的 wǒ de, 走了 zǒu le, 好吗 hǎo ma"],
-      ["Hậu tố 子 头 们 么", "桌子 zhuōzi, 木头 mùtou, 我们 wǒmen, 什么 shénme"],
-      ["Từ láy danh từ chỉ người thân, động từ láy", "妈妈 māma, 哥哥 gēge, 看看 kànkan, 谢谢 xièxie"],
-      ["Bổ ngữ xu hướng sau động từ", "进来 jìnlai, 出去 chūqu, 拿起来 ná qilai"],
-      ["Phương vị từ sau danh từ", "桌子上 zhuōzi shang, 家里 jiā li"],
-      ["Từ song tiết quen dùng (phải học thuộc)", "东西 dōngxi (đồ vật), 朋友 péngyou, 衣服 yīfu, 认识 rènshi, 喜欢 xǐhuan, 时候 shíhou, 知道 zhīdao, 地方 dìfang"]
-    ], "ex": [
-      {"t": "东西", "py": "dōngxi", "vi": "đồ vật (thanh nhẹ) – khác 东西 dōngxī: phía đông và phía tây"},
-      {"t": "地道", "py": "dìdao", "vi": "chính gốc, chuẩn (地道 dìdào: đường hầm)"}
-    ], "tips": ["Thanh nhẹ có thể <b>phân biệt nghĩa</b>, nên dạy như một “thanh thứ năm”, không phải lỗi đọc ẩu."]},
-    {"k": "grammar", "h": "Âm nhi hoá (儿化)", "html": "<p>Thêm 儿 vào cuối âm tiết và <b>cong lưỡi</b> ngay khi đọc vần. Rất phổ biến ở Bắc Kinh và miền Bắc Trung Quốc; miền Nam ít dùng. Đề HSK chấp nhận cả hai cách nói.</p>", "table": [
-      ["Vần gốc", "Cách đọc khi nhi hoá", "Ví dụ"],
-      ["Kết thúc a, o, e, u", "Giữ vần, cong lưỡi ở cuối", "花儿 huār, 歌儿 gēr"],
-      ["Kết thúc -i, -n (ai, ei, an, en…)", "Bỏ i/n rồi cong lưỡi", "一块儿 yíkuàir (đọc ≈ yíkuàr), 一点儿 yìdiǎnr (≈ yìdiǎr), 玩儿 wánr (≈ wár)"],
-      ["Kết thúc -ng", "Bỏ ng, nguyên âm hơi mũi rồi cong lưỡi", "空儿 kòngr, 有空儿 yǒu kòngr"],
-      ["-i đặc biệt (zi, shi…)", "Đổi thành “ơr”", "事儿 shìr, 字儿 zìr"],
-      ["i, ü", "Thêm “ơr”", "小鸡儿 xiǎojīr, 小鱼儿 xiǎoyúr"]
-    ], "ex": [
-      {"t": "你有空儿吗？", "py": "Nǐ yǒu kòngr ma?", "vi": "Bạn có rảnh không?"},
-      {"t": "我们一块儿去吧。", "py": "Wǒmen yíkuàir qù ba.", "vi": "Chúng ta cùng đi nhé."}
-    ], "tips": ["Một số cặp phân biệt nghĩa nhờ 儿: 一点 (một giờ) – 一点儿 (một chút); 头 tóu (cái đầu) – 头儿 tóur (sếp, người đứng đầu); 信 xìn (lá thư) – 信儿 xìnr (tin tức) → dạy học viên dùng 儿 đúng chỗ, không thêm tuỳ tiện."]},
-    {"k": "grammar", "h": "14 lỗi phát âm điển hình của người Việt & cách sửa", "html": "<p>Dùng bảng này để <b>chẩn đoán</b> khi nghe học viên đọc. Mỗi buổi chỉ chọn 1–2 lỗi để sửa.</p>", "table": [
-      ["#", "Lỗi", "Biểu hiện", "Cách sửa"],
-      ["1", "b, d, g đọc như b, đ, g tiếng Việt", "Âm “đục”, có rung dây thanh", "Đọc như p, t, c tiếng Việt nhẹ; đặt tay lên cổ – không được rung"],
-      ["2", "Không bật hơi p t k q ch c", "跑 pǎo nghe thành 饱 bǎo", "Tờ giấy trước miệng phải bay; luyện cặp 肚 dù – 兔 tù"],
-      ["3", "c đọc như “c” tiếng Việt (= k)", "菜 cài thành “cài” (kài)", "c = “ts” + hơi mạnh; đọc “ts” trước rồi thêm hơi"],
-      ["4", "z đọc như “d/gi” miền Bắc", "在 zài thành “dài”", "z không rung dây thanh: “tx” nhẹ"],
-      ["5", "zh ch sh r không uốn lưỡi", "是 shì nghe như 四 sì", "Cong đầu lưỡi chạm ngạc cứng phía sau lợi; soi gương"],
-      ["6", "r đọc rung lưỡi, “d” hoặc “l”", "热 rè thành “dè/lè”", "Giữ vị trí sh, thêm rung dây thanh, lưỡi không chạm"],
-      ["7", "x đọc như “x” tiếng Việt", "西 xī nghe như 思 sī", "Môi dẹt (cười), mặt lưỡi nâng; luyện 西 – 思 – 诗"],
-      ["8", "ü đọc thành u hoặc “uy” trượt", "女 nǚ thành 努 nǔ", "Đọc i kéo dài rồi chu môi tròn, lưỡi không đổi"],
-      ["9", "e đọc như “e” tiếng Việt", "饿 è thành “e”", "Đọc “ơ” rồi lùi lưỡi ra sau, môi không tròn"],
-      ["10", "-i sau z c s / zh ch sh r đọc thành i", "四 sì thành “xi”", "Đọc “ư” kéo dài, lưỡi giữ nguyên vị trí phụ âm"],
-      ["11", "Lẫn -n / -ng", "山 shān – 商 shāng", "Mẹo Hán Việt: -m/-n → -n (三 tam sān); -ng/-nh → -ng (生 sinh shēng)"],
-      ["12", "Thêm âm tắc cuối theo thói quen Hán Việt", "学 thành “xuéc”, 十 thành “shíp”", "Âm tiết luôn mở hoặc -n/-ng; kéo dài nguyên âm cuối"],
-      ["13", "Đọc ian theo mặt chữ “i-an”", "天 tiān thành “ti-an”", "ian = “iên”; luyện 天 – 先 – 年 – 面"],
-      ["14", "Thanh 3 đọc đủ 214 ở mọi vị trí", "Câu nghe giật, chậm", "Trước thanh khác chỉ đọc nửa thanh 3 (thấp); chỉ đọc đủ khi đứng cuối câu/nhấn mạnh"]
-    ], "tips": ["Người miền Nam thường lẫn -n/-ng và v/d; người miền Bắc thường lẫn n/l và đọc r, d, gi như nhau; người miền Trung thường đọc thanh 4 bị gãy – điều chỉnh trọng tâm theo vùng của học viên."]},
-    {"k": "text", "h": "Quy trình 6 bước sửa một âm khó trên lớp", "html": "<ol><li><b>Nghe – nhận diện:</b> giáo viên đọc 2 âm khác nhau (是/四), học viên giơ tay chỉ ra âm nào. Chưa nghe ra thì chưa thể nói đúng.</li><li><b>Phân biệt bằng cặp tối thiểu:</b> đọc lẫn lộn 10 lần, học viên ghi số 1/2.</li><li><b>Mô tả cấu âm:</b> vẽ mặt cắt miệng lên bảng, chỉ vị trí lưỡi; cho soi gương điện thoại.</li><li><b>Đọc tách:</b> phát âm riêng phụ âm hoặc vần, có thể <i>phóng đại</i> (kéo dài, uốn lưỡi quá mức) rồi giảm dần.</li><li><b>Đưa vào từ, rồi vào câu:</b> 是 → 不是 → 我不是老师。</li><li><b>Ghi âm & tự so sánh:</b> học viên ghi âm, nghe lại cạnh giọng mẫu trong game; giáo viên chỉ nhận xét 1 điểm.</li></ol><p><b>Mẹo với âm uốn lưỡi:</b> bắt đầu từ âm “r” kéo dài (rrr…) để học viên cảm nhận vị trí lưỡi cong, rồi “tắt tiếng” thành sh, rồi thêm tắc thành zh. <b>Mẹo với ü:</b> giữ chữ “i” kéo dài, dùng ngón tay đẩy hai má cho môi chu tròn. <b>Mẹo với thanh điệu:</b> luôn cho đọc kèm động tác tay trong 4 tuần đầu.</p>"},
-    {"k": "sounds", "h": "Cặp tối thiểu luyện tai (dùng cho kiểm tra 5 phút)", "html": "<p>Giáo viên đọc ngẫu nhiên một chữ trong cặp, học viên chỉ ra chữ nào.</p>", "items": [
-      {"sym": "-n / -ng", "ex": ["陈", "城", "山", "商", "金", "京"], "vi": "chén – chéng; shān – shāng; jīn – jīng.", "pairs": [["陈", "城"], ["山", "商"], ["金", "京"]]},
-      {"sym": "n / l", "ex": ["男", "蓝", "你", "李"], "vi": "nán – lán; nǐ – lǐ.", "pairs": [["男", "蓝"], ["你", "李"]]},
-      {"sym": "u / ü", "ex": ["路", "绿", "努", "女"], "vi": "lù – lǜ; nǔ – nǚ.", "pairs": [["路", "绿"], ["努", "女"]]},
-      {"sym": "j q x / zh ch sh", "ex": ["鸡", "知", "七", "吃", "西", "诗"], "vi": "jī – zhī; qī – chī; xī – shī.", "pairs": [["鸡", "知"], ["七", "吃"], ["西", "诗"]]}
-    ]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "四", "lang": "zh-CN", "q": "Bạn nghe được âm nào?", "o": ["sì", "shì", "xì"], "a": 0, "e": "四 sì: đầu lưỡi thẳng sau răng, vần -i đọc như “ư”. shì phải uốn lưỡi; xì môi dẹt."},
-    {"t": "listen", "say": "女", "lang": "zh-CN", "q": "Bạn nghe được âm nào?", "o": ["nǚ", "nǔ", "lù"], "a": 0, "e": "女 nǚ: môi tròn suốt (ü), thanh 3."},
-    {"t": "listen", "say": "跑", "lang": "zh-CN", "q": "Bạn nghe được âm nào?", "o": ["pǎo – chạy", "bǎo – no", "bào – báo"], "a": 0, "e": "跑 pǎo có bật hơi mạnh; 饱 bǎo không bật hơi."},
-    {"t": "mc", "q": "Cách viết pinyin đúng của j + üe là:", "o": ["jüe", "jue", "jwe"], "a": 1, "e": "Sau j, q, x bỏ hai chấm của ü: jué (觉), xué (学)."},
-    {"t": "mc", "q": "l + ü, thanh 4 (绿 – màu xanh lá) viết là:", "o": ["lù", "lǜ", "lyù"], "a": 1, "e": "Sau n, l phải giữ hai chấm để phân biệt lǜ (绿) với lù (路)."},
-    {"t": "mc", "q": "贵 (g + uei, thanh 4) viết là:", "o": ["guì", "gùi", "guèi"], "a": 0, "e": "uei rút gọn thành ui khi có thanh mẫu; với ui, dấu đặt trên chữ sau → guì."},
-    {"t": "mc", "q": "一样 đọc thực tế là:", "o": ["yīyàng", "yíyàng", "yìyàng"], "a": 1, "e": "一 trước thanh 4 đọc thanh 2: yíyàng."},
-    {"t": "mc", "q": "不客气 đọc thực tế là:", "o": ["bù kèqi", "bú kèqi", "bū kèqi"], "a": 1, "e": "不 trước thanh 4 (kè) đọc thành bú."},
-    {"t": "mc", "q": "Từ nào cần dấu cách âm (’) khi viết pinyin?", "o": ["西安 Xī’ān", "先 xiān", "天 tiān"], "a": 0, "e": "Âm tiết thứ hai 安 ān bắt đầu bằng a → cần ’ để không đọc nhầm thành xiān."},
-    {"t": "fill", "q": "Vần iou đứng một mình (không có thanh mẫu) viết là ___ (không cần dấu)", "a": "you", "e": "i đứng đầu âm tiết đổi thành y: iou → you (有 yǒu)."},
-    {"t": "dict", "say": "学习", "lang": "zh-CN", "a": "学习", "py": "xuéxí", "e": "xué: x + üe (viết ue); xí: x + i. Hai âm tiết thanh 2."},
-    {"t": "match", "q": "Nối thanh mẫu pinyin với âm tiếng Việt gần nhất:", "pairs": [["t", "th"], ["h", "kh"], ["s", "x"], ["d", "t"], ["f", "ph"]]}
-  ]
+ "no": 2,
+ "for": "ref",
+ "title": "Hệ thống pinyin đầy đủ & cách dạy, sửa phát âm cho người Việt",
+ "sub": "汉语拼音 · Hànyǔ Pīnyīn",
+ "goals": [
+  "Tra cứu đủ 21 thanh mẫu, 39 vận mẫu kèm IPA, cách phát âm và âm Việt gần nhất",
+  "Nắm bảng kết hợp thanh mẫu – vận mẫu và toàn bộ quy tắc viết pinyin",
+  "Đọc đúng các hiện tượng biến điệu: 3+3, nửa thanh 3, 一, 不, thanh nhẹ, nhi hoá, 啊",
+  "Chẩn đoán và sửa 14 lỗi phát âm điển hình của người Việt bằng bài luyện cụ thể"
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tổng quan: âm tiết tiếng Trung gồm những gì?",
+   "html": "<p><b>Pinyin</b> (汉语拼音方案, công bố năm 1958) là hệ thống chữ Latin ghi âm tiếng Trung phổ thông. Mỗi âm tiết = <b>thanh mẫu</b> (phụ âm đầu) + <b>vận mẫu</b> (phần vần) + <b>thanh điệu</b>.</p><table><tr><th>Âm tiết</th><th>Thanh mẫu</th><th>Vận mẫu</th><th>Thanh</th></tr><tr><td>好 hǎo</td><td>h</td><td>ao</td><td>3</td></tr><tr><td>学 xué</td><td>x</td><td>üe (viết ue)</td><td>2</td></tr><tr><td>爱 ài</td><td>(không có)</td><td>ai</td><td>4</td></tr></table><ul><li>Tiếng Trung phổ thông chỉ có khoảng <b>400 âm tiết cơ bản</b> (không tính thanh) và khoảng 1.300 âm tiết có thanh – rất ít so với tiếng Việt. Vì vậy có nhiều chữ đồng âm, và <b>thanh điệu cực kỳ quan trọng</b>.</li><li>Âm tiết <b>không bao giờ</b> kết thúc bằng âm tắc (-p, -t, -c) hay -m như tiếng Việt; chỉ kết thúc bằng nguyên âm, -n, -ng (hoặc -r khi nhi hoá).</li><li>Chữ cái pinyin <b>không đọc như chữ quốc ngữ</b>: c, z, q, x, zh, e, ü… có giá trị riêng. Đây là nguồn lỗi lớn nhất của người Việt.</li></ul>"
+  },
+  {
+   "k": "grammar",
+   "h": "Bảng 21 thanh mẫu (声母)",
+   "html": "<p>Xếp theo vị trí cấu âm. Cột “Gần âm Việt” chỉ để định hướng – luôn nghe giọng mẫu để chỉnh. <b>Bật hơi</b> = có luồng hơi mạnh thoát ra (đặt tờ giấy trước miệng sẽ thấy giấy bay).</p>",
+   "table": [
+    [
+     "Nhóm",
+     "Thanh mẫu",
+     "IPA",
+     "Cách phát âm",
+     "Gần âm Việt",
+     "Lỗi hay gặp"
+    ],
+    [
+     "Môi",
+     "b",
+     "[p]",
+     "Hai môi khép, bật nhẹ, không bật hơi, không rung dây thanh",
+     "“p” nhẹ (như trong “pin”)",
+     "Đọc thành “b” Việt (rung, hút hơi vào)"
+    ],
+    [
+     "Môi",
+     "p",
+     "[pʰ]",
+     "Như b nhưng bật luồng hơi mạnh",
+     "“p” + hơi",
+     "Đọc thành “ph” [f] hoặc quên bật hơi"
+    ],
+    [
+     "Môi",
+     "m",
+     "[m]",
+     "Âm mũi hai môi",
+     "“m”",
+     "–"
+    ],
+    [
+     "Môi – răng",
+     "f",
+     "[f]",
+     "Răng trên chạm môi dưới",
+     "“ph”",
+     "–"
+    ],
+    [
+     "Đầu lưỡi",
+     "d",
+     "[t]",
+     "Đầu lưỡi chạm lợi trên, không bật hơi",
+     "“t”",
+     "Đọc thành “đ” Việt (rung, hút hơi)"
+    ],
+    [
+     "Đầu lưỡi",
+     "t",
+     "[tʰ]",
+     "Như d nhưng bật hơi",
+     "“th”",
+     "Ít lỗi"
+    ],
+    [
+     "Đầu lưỡi",
+     "n",
+     "[n]",
+     "Âm mũi",
+     "“n”",
+     "Lẫn n/l ở một số vùng"
+    ],
+    [
+     "Đầu lưỡi",
+     "l",
+     "[l]",
+     "Âm bên",
+     "“l”",
+     "Lẫn n/l"
+    ],
+    [
+     "Gốc lưỡi",
+     "g",
+     "[k]",
+     "Gốc lưỡi chạm ngạc mềm, không bật hơi",
+     "“c/k”",
+     "Đọc thành “g” Việt (âm xát, rung)"
+    ],
+    [
+     "Gốc lưỡi",
+     "k",
+     "[kʰ]",
+     "Như g nhưng bật hơi",
+     "“c” + hơi",
+     "Đọc thành “kh” Việt (âm xát) – sai"
+    ],
+    [
+     "Gốc lưỡi",
+     "h",
+     "[x]",
+     "Gốc lưỡi tiến gần ngạc mềm, hơi cọ xát",
+     "“kh”",
+     "Đọc “h” Việt – quá nhẹ"
+    ],
+    [
+     "Mặt lưỡi",
+     "j",
+     "[tɕ]",
+     "Mặt lưỡi áp ngạc cứng, đầu lưỡi tựa răng dưới, môi dẹt, không bật hơi",
+     "“ch” môi dẹt",
+     "Đọc thành “gi” hoặc “tr”"
+    ],
+    [
+     "Mặt lưỡi",
+     "q",
+     "[tɕʰ]",
+     "Như j nhưng bật hơi mạnh",
+     "“ch” + hơi",
+     "Quên bật hơi; đọc thành “kh”"
+    ],
+    [
+     "Mặt lưỡi",
+     "x",
+     "[ɕ]",
+     "Mặt lưỡi gần ngạc cứng, hơi xát, môi dẹt như đang cười",
+     "giữa “x” và “s”",
+     "Đọc thành “x” Việt (đầu lưỡi)"
+    ],
+    [
+     "Uốn lưỡi",
+     "zh",
+     "[ʈʂ]",
+     "Đầu lưỡi cong lên chạm phía trước ngạc cứng, không bật hơi",
+     "“tr” có uốn lưỡi",
+     "Không uốn → nghe như z hoặc “ch”"
+    ],
+    [
+     "Uốn lưỡi",
+     "ch",
+     "[ʈʂʰ]",
+     "Như zh nhưng bật hơi",
+     "“tr” uốn lưỡi + hơi",
+     "Đọc thành “ch” Việt"
+    ],
+    [
+     "Uốn lưỡi",
+     "sh",
+     "[ʂ]",
+     "Đầu lưỡi cong, hơi cọ xát",
+     "“s” uốn lưỡi",
+     "Đọc thành “x” Việt"
+    ],
+    [
+     "Uốn lưỡi",
+     "r",
+     "[ʐ]~[ɻ]",
+     "Vị trí như sh nhưng rung dây thanh, rất nhẹ, lưỡi không rung",
+     "“r” miền Nam đọc nhẹ",
+     "Rung lưỡi; đọc thành “d/gi” hoặc “l”"
+    ],
+    [
+     "Đầu lưỡi trước",
+     "z",
+     "[ts]",
+     "Đầu lưỡi sau răng cửa trên: bật rồi xát ngay “tx”, không bật hơi",
+     "không có (gần “tx”)",
+     "Đọc thành “d/gi” miền Bắc [z]"
+    ],
+    [
+     "Đầu lưỡi trước",
+     "c",
+     "[tsʰ]",
+     "Như z nhưng bật hơi mạnh “tsh”",
+     "không có",
+     "Đọc thành “c” Việt (= k) – lỗi rất nặng"
+    ],
+    [
+     "Đầu lưỡi trước",
+     "s",
+     "[s]",
+     "Đầu lưỡi gần răng, hơi xát",
+     "“x”",
+     "Đọc thành “s” uốn lưỡi"
+    ]
+   ],
+   "tips": [
+    "<b>y</b> và <b>w</b> không phải thanh mẫu thật: chỉ là cách viết khi âm tiết bắt đầu bằng i, u, ü (yi, wu, yu…).",
+    "Mẹo nhớ nhanh cho người Việt: <b>t = th, h = kh, s = x, f = ph, d = t, b = p, g = c</b>."
+   ]
+  },
+  {
+   "k": "sounds",
+   "h": "Luyện cặp không bật hơi – bật hơi",
+   "html": "<p>Đặt tờ giấy (hoặc lòng bàn tay) trước miệng: âm bật hơi làm giấy rung mạnh, âm không bật hơi thì không. Nghe từng cặp, đọc theo.</p>",
+   "items": [
+    {
+     "sym": "b – p",
+     "ex": [
+      "包",
+      "抛",
+      "饱",
+      "跑"
+     ],
+     "vi": "bāo – pāo; bǎo (no) – pǎo (chạy).",
+     "pairs": [
+      [
+       "饱",
+       "跑"
+      ]
+     ]
+    },
+    {
+     "sym": "d – t",
+     "ex": [
+      "读",
+      "图",
+      "肚",
+      "兔"
+     ],
+     "vi": "dú (đọc) – tú (tranh); dù (bụng) – tù (thỏ).",
+     "pairs": [
+      [
+       "读",
+       "图"
+      ]
+     ]
+    },
+    {
+     "sym": "g – k",
+     "ex": [
+      "哥",
+      "科",
+      "姑",
+      "哭"
+     ],
+     "vi": "gē – kē; gū (cô) – kū (khóc).",
+     "pairs": [
+      [
+       "姑",
+       "哭"
+      ]
+     ]
+    },
+    {
+     "sym": "j – q",
+     "ex": [
+      "鸡",
+      "七",
+      "见",
+      "欠"
+     ],
+     "vi": "jī (gà) – qī (bảy); jiàn (gặp) – qiàn (nợ).",
+     "pairs": [
+      [
+       "鸡",
+       "七"
+      ]
+     ]
+    },
+    {
+     "sym": "zh – ch",
+     "ex": [
+      "知",
+      "吃",
+      "找",
+      "吵"
+     ],
+     "vi": "zhī – chī (ăn); zhǎo (tìm) – chǎo (ồn).",
+     "pairs": [
+      [
+       "找",
+       "吵"
+      ]
+     ]
+    },
+    {
+     "sym": "z – c",
+     "ex": [
+      "字",
+      "次",
+      "早",
+      "草"
+     ],
+     "vi": "zì (chữ) – cì (lần); zǎo (sớm) – cǎo (cỏ).",
+     "pairs": [
+      [
+       "早",
+       "草"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "k": "sounds",
+   "h": "Ba nhóm âm hay lẫn: j q x – zh ch sh r – z c s",
+   "html": "<p>Ba nhóm này khác nhau ở <b>vị trí lưỡi</b>: z c s – đầu lưỡi thẳng sau răng; zh ch sh r – đầu lưỡi cong lên; j q x – mặt lưỡi nâng, môi dẹt, chỉ đi với i/ü.</p>",
+   "items": [
+    {
+     "sym": "j – zh – z",
+     "ex": [
+      "鸡",
+      "知",
+      "资"
+     ],
+     "vi": "jī – zhī – zī: môi dẹt / lưỡi cong / lưỡi thẳng.",
+     "pairs": [
+      [
+       "知",
+       "资"
+      ]
+     ]
+    },
+    {
+     "sym": "q – ch – c",
+     "ex": [
+      "七",
+      "吃",
+      "词"
+     ],
+     "vi": "qī – chī – cí: cả ba đều bật hơi.",
+     "pairs": [
+      [
+       "柴",
+       "才"
+      ]
+     ]
+    },
+    {
+     "sym": "x – sh – s",
+     "ex": [
+      "西",
+      "诗",
+      "思"
+     ],
+     "vi": "xī – shī – sī: nghe kỹ sự khác nhau của luồng hơi.",
+     "pairs": [
+      [
+       "西",
+       "诗"
+      ],
+      [
+       "是",
+       "四"
+      ]
+     ]
+    },
+    {
+     "sym": "r",
+     "ex": [
+      "日",
+      "热",
+      "人",
+      "肉"
+     ],
+     "vi": "rì – rè – rén – ròu: giữ lưỡi như sh, thêm rung dây thanh, không rung lưỡi.",
+     "pairs": [
+      [
+       "热",
+       "乐"
+      ],
+      [
+       "肉",
+       "漏"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Bảng 39 vận mẫu (韵母)",
+   "html": "<p>Gồm 10 vận mẫu đơn, 13 vận mẫu kép, 16 vận mẫu mũi. Cột “Cách viết khi đứng một mình” cho biết dạng có y/w.</p>",
+   "table": [
+    [
+     "Nhóm",
+     "Vận mẫu",
+     "IPA",
+     "Gần âm Việt / mẹo",
+     "Ví dụ"
+    ],
+    [
+     "Đơn",
+     "a",
+     "[a]",
+     "“a”, mở rộng miệng",
+     "八 bā, 大 dà"
+    ],
+    [
+     "Đơn",
+     "o",
+     "[o]",
+     "“ô” tròn môi; sau b p m f nghe như “uô”",
+     "波 bō, 我 wǒ"
+    ],
+    [
+     "Đơn",
+     "e",
+     "[ɤ]",
+     "“ơ” lùi sâu, môi không tròn (gần “ưa” nói nhanh)",
+     "喝 hē, 饿 è"
+    ],
+    [
+     "Đơn",
+     "i",
+     "[i]",
+     "“i” (đứng một mình viết yi)",
+     "一 yī, 你 nǐ"
+    ],
+    [
+     "Đơn",
+     "u",
+     "[u]",
+     "“u” (đứng một mình viết wu)",
+     "五 wǔ, 不 bù"
+    ],
+    [
+     "Đơn",
+     "ü",
+     "[y]",
+     "Đọc “i” rồi chu tròn môi, lưỡi giữ nguyên (viết yu)",
+     "鱼 yú, 女 nǚ"
+    ],
+    [
+     "Đơn",
+     "ê",
+     "[ɛ]",
+     "“e”; chỉ gặp trong ie, üe",
+     "姐 jiě, 学 xué"
+    ],
+    [
+     "Đơn",
+     "er",
+     "[ɚ]",
+     "“ơ” + cong đầu lưỡi",
+     "二 èr, 儿 ér"
+    ],
+    [
+     "Đơn",
+     "-i (sau z c s)",
+     "[ɿ]",
+     "“ư” đầu lưỡi kéo dài",
+     "四 sì, 字 zì"
+    ],
+    [
+     "Đơn",
+     "-i (sau zh ch sh r)",
+     "[ʅ]",
+     "“ư” với lưỡi cong",
+     "是 shì, 吃 chī"
+    ],
+    [
+     "Kép",
+     "ai",
+     "[ai]",
+     "“ai”",
+     "爱 ài"
+    ],
+    [
+     "Kép",
+     "ei",
+     "[ei]",
+     "“ây”",
+     "黑 hēi, 美 měi"
+    ],
+    [
+     "Kép",
+     "ao",
+     "[ɑu]",
+     "“ao”",
+     "好 hǎo"
+    ],
+    [
+     "Kép",
+     "ou",
+     "[ou]",
+     "“âu”",
+     "狗 gǒu, 走 zǒu"
+    ],
+    [
+     "Kép",
+     "ia (ya)",
+     "[ia]",
+     "“ia” đọc liền, nhấn a",
+     "家 jiā"
+    ],
+    [
+     "Kép",
+     "ie (ye)",
+     "[iɛ]",
+     "“iê”",
+     "姐 jiě, 谢 xiè"
+    ],
+    [
+     "Kép",
+     "ua (wa)",
+     "[ua]",
+     "“oa”",
+     "花 huā"
+    ],
+    [
+     "Kép",
+     "uo (wo)",
+     "[uo]",
+     "“uô”",
+     "多 duō, 我 wǒ"
+    ],
+    [
+     "Kép",
+     "üe (yue)",
+     "[yɛ]",
+     "“uyê”",
+     "学 xué, 月 yuè"
+    ],
+    [
+     "Kép",
+     "iao (yao)",
+     "[iɑu]",
+     "“iao” (gần “iêu” mở)",
+     "小 xiǎo"
+    ],
+    [
+     "Kép",
+     "iou (-iu, you)",
+     "[iou]",
+     "“iêu”; thanh 1, 2 nghe gần “iu”",
+     "九 jiǔ, 六 liù"
+    ],
+    [
+     "Kép",
+     "uai (wai)",
+     "[uai]",
+     "“oai”",
+     "快 kuài"
+    ],
+    [
+     "Kép",
+     "uei (-ui, wei)",
+     "[uei]",
+     "“uây”; thanh 1, 2 nghe gần “uy”",
+     "对 duì, 贵 guì"
+    ],
+    [
+     "Mũi",
+     "an",
+     "[an]",
+     "“an”",
+     "三 sān"
+    ],
+    [
+     "Mũi",
+     "en",
+     "[ən]",
+     "“ân”",
+     "门 mén"
+    ],
+    [
+     "Mũi",
+     "in (yin)",
+     "[in]",
+     "“in”",
+     "心 xīn"
+    ],
+    [
+     "Mũi",
+     "ün (yun)",
+     "[yn]",
+     "“uyn”, môi tròn",
+     "云 yún, 军 jūn"
+    ],
+    [
+     "Mũi",
+     "ian (yan)",
+     "[iɛn]",
+     "“iên” (không đọc “i-an”)",
+     "天 tiān"
+    ],
+    [
+     "Mũi",
+     "uan (wan)",
+     "[uan]",
+     "“oan”",
+     "晚 wǎn, 关 guān"
+    ],
+    [
+     "Mũi",
+     "üan (yuan)",
+     "[yɛn]",
+     "“uyên”",
+     "远 yuǎn, 全 quán"
+    ],
+    [
+     "Mũi",
+     "uen (-un, wen)",
+     "[uən]",
+     "“uân”",
+     "春 chūn, 问 wèn"
+    ],
+    [
+     "Mũi",
+     "ang",
+     "[ɑŋ]",
+     "“ang”",
+     "忙 máng"
+    ],
+    [
+     "Mũi",
+     "eng",
+     "[ɤŋ]",
+     "“âng”",
+     "冷 lěng"
+    ],
+    [
+     "Mũi",
+     "ing (ying)",
+     "[iŋ]",
+     "“inh” nhưng lưỡi lùi về sau (gần “i-ng”)",
+     "名 míng"
+    ],
+    [
+     "Mũi",
+     "ong",
+     "[ʊŋ]",
+     "“ung”, môi tròn",
+     "中 zhōng"
+    ],
+    [
+     "Mũi",
+     "iang (yang)",
+     "[iɑŋ]",
+     "“i-ang” đọc liền",
+     "两 liǎng"
+    ],
+    [
+     "Mũi",
+     "uang (wang)",
+     "[uɑŋ]",
+     "“oang”",
+     "黄 huáng"
+    ],
+    [
+     "Mũi",
+     "ueng (weng)",
+     "[uɤŋ]",
+     "“uâng”; chỉ có dạng weng",
+     "翁 wēng"
+    ],
+    [
+     "Mũi",
+     "iong (yong)",
+     "[yʊŋ]",
+     "“iung”",
+     "用 yòng, 穷 qióng"
+    ]
+   ],
+   "tips": [
+    "Ba vần người Việt đọc sai nhiều nhất: <b>ian</b> (phải đọc “iên”), <b>e</b> (không phải “e”), <b>ü</b> (môi tròn suốt, không trượt thành “uy”)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Bảng kết hợp thanh mẫu – vận mẫu",
+   "html": "<p>Không phải thanh mẫu nào cũng ghép được với mọi vận mẫu. Nắm bảng này giúp học viên <b>tự phát hiện pinyin sai</b> (ví dụ không bao giờ có “gi”, “zü”, “fi”).</p>",
+   "table": [
+    [
+     "Nhóm thanh mẫu",
+     "Vần a / o / e (hở)",
+     "Vần i và i-",
+     "Vần u và u-",
+     "Vần ü và ü-"
+    ],
+    [
+     "b p m",
+     "✓ (bo po mo, không có “buo”)",
+     "✓ (bi, pian, ming…)",
+     "Chỉ u (bu pu mu)",
+     "✗"
+    ],
+    [
+     "f",
+     "✓ (fa, fo, fei, fen…)",
+     "✗ (không có fi)",
+     "Chỉ u (fu)",
+     "✗"
+    ],
+    [
+     "d t",
+     "✓",
+     "✓ (di, tian, ding…)",
+     "✓ (du, duo, dui, tuan…)",
+     "✗"
+    ],
+    [
+     "n l",
+     "✓",
+     "✓",
+     "✓",
+     "✓ nü, lü, nüe, lüe (giữ hai chấm)"
+    ],
+    [
+     "g k h",
+     "✓",
+     "✗",
+     "✓ (gu, guo, kuai, huang…)",
+     "✗"
+    ],
+    [
+     "j q x",
+     "✗",
+     "✓",
+     "✗ (u sau j q x thực chất là ü)",
+     "✓ viết ju, que, xuan, jun"
+    ],
+    [
+     "zh ch sh r",
+     "✓",
+     "Chỉ -i đặc biệt: zhi chi shi ri",
+     "✓ (zhu, chuan, shui, ruo…)",
+     "✗"
+    ],
+    [
+     "z c s",
+     "✓",
+     "Chỉ -i đặc biệt: zi ci si",
+     "✓ (zu, cuo, sui, sun…)",
+     "✗"
+    ],
+    [
+     "Không thanh mẫu",
+     "a, o, e, ai, ao, ou, an, en, ang, eng, er",
+     "Viết với y: yi, ya, ye, yao, you, yan, yin, yang, ying, yong",
+     "Viết với w: wu, wa, wo, wai, wei, wan, wen, wang, weng",
+     "Viết với yu: yu, yue, yuan, yun"
+    ]
+   ],
+   "tips": [
+    "Hệ quả quan trọng: chữ <b>u</b> sau j, q, x, y luôn đọc là <b>ü</b>: 去 qù, 鱼 yú, 学 xué, 军 jūn.",
+    "Vần <b>ong</b> không bao giờ đứng một mình (đứng một mình chỉ có weng)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc viết pinyin (chính tả)",
+   "html": "<p>Đây là các quy tắc trong Phương án pinyin và quy tắc viết pinyin theo từ. Học viên phải viết đúng để gõ máy và tra từ điển.</p>",
+   "table": [
+    [
+     "Quy tắc",
+     "Cách viết",
+     "Ví dụ"
+    ],
+    [
+     "i đứng đầu âm tiết",
+     "i → yi, in → yin, ing → ying; các vần khác đổi i thành y",
+     "ia → ya, ie → ye, iao → yao, iou → you, ian → yan, iang → yang, iong → yong"
+    ],
+    [
+     "u đứng đầu âm tiết",
+     "u → wu; các vần khác đổi u thành w",
+     "ua → wa, uo → wo, uai → wai, uei → wei, uan → wan, uen → wen, uang → wang, ueng → weng"
+    ],
+    [
+     "ü đứng đầu âm tiết",
+     "Thêm y, bỏ hai chấm",
+     "ü → yu, üe → yue, üan → yuan, ün → yun"
+    ],
+    [
+     "ü sau j q x",
+     "Bỏ hai chấm",
+     "jù, qù, xué, quán, jūn"
+    ],
+    [
+     "ü sau n l",
+     "Giữ hai chấm (để phân biệt với u)",
+     "nǚ (女) ≠ nǔ (努); lǜ (绿) ≠ lù (路)"
+    ],
+    [
+     "Rút gọn khi có thanh mẫu",
+     "iou → iu, uei → ui, uen → un",
+     "liù (六), guì (贵), lùn (论)"
+    ],
+    [
+     "Vị trí dấu thanh",
+     "Ưu tiên a → o, e → i, u, ü; riêng iu, ui đặt trên chữ sau",
+     "hǎo, duō, xiè, guì, liù, lǜ"
+    ],
+    [
+     "Dấu cách âm ’",
+     "Âm tiết bắt đầu bằng a, o, e đứng sau âm tiết khác",
+     "Miángǔ Chéng (棉谷城) ≠ xiān (先); nǚ’ér (女儿)"
+    ],
+    [
+     "Viết hoa",
+     "Đầu câu; tên riêng; họ và tên viết tách, mỗi phần viết hoa",
+     "Yúnxiàn Chéng, Wáng Xiǎomíng"
+    ],
+    [
+     "Viết liền theo từ",
+     "Các âm tiết của một từ viết liền, từ khác cách nhau",
+     "Wǒ shì xuésheng. (không viết “xué sheng”)"
+    ],
+    [
+     "Ghi thanh",
+     "Từ điển ghi thanh gốc; sách dạy ghi 一, 不 theo thanh thực đọc",
+     "yí ge, bú shì (giáo trình này)"
+    ]
+   ],
+   "tips": [
+    "Học viên thường bỏ dấu thanh khi chép – yêu cầu <b>luôn</b> ghi dấu thanh trong vở trong suốt HSK 1–2."
+   ]
+  },
+  {
+   "k": "sounds",
+   "h": "Biến điệu (变调) – nghe & đọc theo",
+   "html": "<p>Biến điệu là thay đổi thanh khi các âm tiết đứng cạnh nhau. Chữ viết (trong từ điển) vẫn giữ thanh gốc.</p>",
+   "items": [
+    {
+     "sym": "3 + 3 → 2 + 3",
+     "ex": [
+      "你好",
+      "很好",
+      "可以",
+      "水果"
+     ],
+     "vi": "nǐ hǎo → <b>ní</b> hǎo; kěyǐ → <b>ké</b>yǐ; shuǐguǒ → <b>shuí</b>guǒ."
+    },
+    {
+     "sym": "Nửa thanh 3",
+     "ex": [
+      "好吃",
+      "很忙",
+      "可是",
+      "我们"
+     ],
+     "vi": "Thanh 3 đứng trước thanh 1, 2, 4 hoặc thanh nhẹ chỉ đọc phần thấp (21), không vòng lên."
+    },
+    {
+     "sym": "Ba thanh 3 liền nhau",
+     "ex": [
+      "我很好",
+      "展览馆",
+      "小老虎"
+     ],
+     "vi": "Biến theo nhóm nghĩa: 我很好 → wó hén hǎo; 展览|馆 → zhán lán guǎn; 小|老虎 → xiǎo láo hǔ (小 đọc nửa thanh 3)."
+    },
+    {
+     "sym": "一 yī",
+     "ex": [
+      "一天",
+      "一年",
+      "一起",
+      "一样",
+      "第一"
+     ],
+     "vi": "Trước thanh 1, 2, 3 → yì (yì tiān, yì nián, yìqǐ); trước thanh 4 → yí (yíyàng, yí ge); đứng một mình, cuối từ, số thứ tự, đọc số → yī (dì-yī)."
+    },
+    {
+     "sym": "不 bù",
+     "ex": [
+      "不是",
+      "不对",
+      "不忙",
+      "不好",
+      "对不起"
+     ],
+     "vi": "Trước thanh 4 → bú (bú shì, bú duì); các trường hợp khác giữ bù; giữa hai âm tiết đọc nhẹ (duìbuqǐ)."
+    },
+    {
+     "sym": "Thanh nhẹ",
+     "ex": [
+      "妈妈",
+      "桌子",
+      "我们",
+      "东西",
+      "看看"
+     ],
+     "vi": "māma, zhuōzi, wǒmen, dōngxi, kànkan: âm tiết sau ngắn, nhẹ."
+    },
+    {
+     "sym": "啊 biến âm",
+     "ex": [
+      "好啊",
+      "你啊",
+      "看啊"
+     ],
+     "vi": "啊 cuối câu đổi theo âm trước: hǎo wa (sau -o/-u), nǐ ya (sau -i), kàn na (sau -n)."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Thanh nhẹ (轻声): khi nào đọc nhẹ?",
+   "html": "<p>Thanh nhẹ không có cao độ cố định: sau thanh 1, 2 nó hơi thấp; sau thanh 3 nó hơi cao; sau thanh 4 nó thấp nhất. Một số trường hợp <b>bắt buộc</b> và một số từ <b>theo thói quen</b>:</p>",
+   "table": [
+    [
+     "Loại",
+     "Ví dụ"
+    ],
+    [
+     "Trợ từ 的 地 得 了 着 过 吗 呢 吧 啊",
+     "我的 wǒ de, 走了 zǒu le, 好吗 hǎo ma"
+    ],
+    [
+     "Hậu tố 子 头 们 么",
+     "桌子 zhuōzi, 木头 mùtou, 我们 wǒmen, 什么 shénme"
+    ],
+    [
+     "Từ láy danh từ chỉ người thân, động từ láy",
+     "妈妈 māma, 哥哥 gēge, 看看 kànkan, 谢谢 xièxie"
+    ],
+    [
+     "Bổ ngữ xu hướng sau động từ",
+     "进来 jìnlai, 出去 chūqu, 拿起来 ná qilai"
+    ],
+    [
+     "Phương vị từ sau danh từ",
+     "桌子上 zhuōzi shang, 家里 jiā li"
+    ],
+    [
+     "Từ song tiết quen dùng (phải học thuộc)",
+     "东西 dōngxi (đồ vật), 朋友 péngyou, 衣服 yīfu, 认识 rènshi, 喜欢 xǐhuan, 时候 shíhou, 知道 zhīdao, 地方 dìfang"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "东西",
+     "py": "dōngxi",
+     "vi": "đồ vật (thanh nhẹ) – khác 东西 dōngxī: phía đông và phía tây"
+    },
+    {
+     "t": "地道",
+     "py": "dìdao",
+     "vi": "chính gốc, chuẩn (地道 dìdào: đường hầm)"
+    }
+   ],
+   "tips": [
+    "Thanh nhẹ có thể <b>phân biệt nghĩa</b>, nên dạy như một “thanh thứ năm”, không phải lỗi đọc ẩu."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Âm nhi hoá (儿化)",
+   "html": "<p>Thêm 儿 vào cuối âm tiết và <b>cong lưỡi</b> ngay khi đọc vần. Rất phổ biến ở Vân Tuyến và miền Bắc Trung Quốc; miền Nam ít dùng. Đề HSK chấp nhận cả hai cách nói.</p>",
+   "table": [
+    [
+     "Vần gốc",
+     "Cách đọc khi nhi hoá",
+     "Ví dụ"
+    ],
+    [
+     "Kết thúc a, o, e, u",
+     "Giữ vần, cong lưỡi ở cuối",
+     "花儿 huār, 歌儿 gēr"
+    ],
+    [
+     "Kết thúc -i, -n (ai, ei, an, en…)",
+     "Bỏ i/n rồi cong lưỡi",
+     "一块儿 yíkuàir (đọc ≈ yíkuàr), 一点儿 yìdiǎnr (≈ yìdiǎr), 玩儿 wánr (≈ wár)"
+    ],
+    [
+     "Kết thúc -ng",
+     "Bỏ ng, nguyên âm hơi mũi rồi cong lưỡi",
+     "空儿 kòngr, 有空儿 yǒu kòngr"
+    ],
+    [
+     "-i đặc biệt (zi, shi…)",
+     "Đổi thành “ơr”",
+     "事儿 shìr, 字儿 zìr"
+    ],
+    [
+     "i, ü",
+     "Thêm “ơr”",
+     "小鸡儿 xiǎojīr, 小鱼儿 xiǎoyúr"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "你有空儿吗？",
+     "py": "Nǐ yǒu kòngr ma?",
+     "vi": "Bạn có rảnh không?"
+    },
+    {
+     "t": "我们一块儿去吧。",
+     "py": "Wǒmen yíkuàir qù ba.",
+     "vi": "Chúng ta cùng đi nhé."
+    }
+   ],
+   "tips": [
+    "Một số cặp phân biệt nghĩa nhờ 儿: 一点 (một giờ) – 一点儿 (một chút); 头 tóu (cái đầu) – 头儿 tóur (sếp, người đứng đầu); 信 xìn (lá thư) – 信儿 xìnr (tin tức) → dạy học viên dùng 儿 đúng chỗ, không thêm tuỳ tiện."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "14 lỗi phát âm điển hình của người Việt & cách sửa",
+   "html": "<p>Dùng bảng này để <b>chẩn đoán</b> khi nghe học viên đọc. Mỗi buổi chỉ chọn 1–2 lỗi để sửa.</p>",
+   "table": [
+    [
+     "#",
+     "Lỗi",
+     "Biểu hiện",
+     "Cách sửa"
+    ],
+    [
+     "1",
+     "b, d, g đọc như b, đ, g tiếng Việt",
+     "Âm “đục”, có rung dây thanh",
+     "Đọc như p, t, c tiếng Việt nhẹ; đặt tay lên cổ – không được rung"
+    ],
+    [
+     "2",
+     "Không bật hơi p t k q ch c",
+     "跑 pǎo nghe thành 饱 bǎo",
+     "Tờ giấy trước miệng phải bay; luyện cặp 肚 dù – 兔 tù"
+    ],
+    [
+     "3",
+     "c đọc như “c” tiếng Việt (= k)",
+     "菜 cài thành “cài” (kài)",
+     "c = “ts” + hơi mạnh; đọc “ts” trước rồi thêm hơi"
+    ],
+    [
+     "4",
+     "z đọc như “d/gi” miền Bắc",
+     "在 zài thành “dài”",
+     "z không rung dây thanh: “tx” nhẹ"
+    ],
+    [
+     "5",
+     "zh ch sh r không uốn lưỡi",
+     "是 shì nghe như 四 sì",
+     "Cong đầu lưỡi chạm ngạc cứng phía sau lợi; soi gương"
+    ],
+    [
+     "6",
+     "r đọc rung lưỡi, “d” hoặc “l”",
+     "热 rè thành “dè/lè”",
+     "Giữ vị trí sh, thêm rung dây thanh, lưỡi không chạm"
+    ],
+    [
+     "7",
+     "x đọc như “x” tiếng Việt",
+     "西 xī nghe như 思 sī",
+     "Môi dẹt (cười), mặt lưỡi nâng; luyện 西 – 思 – 诗"
+    ],
+    [
+     "8",
+     "ü đọc thành u hoặc “uy” trượt",
+     "女 nǚ thành 努 nǔ",
+     "Đọc i kéo dài rồi chu môi tròn, lưỡi không đổi"
+    ],
+    [
+     "9",
+     "e đọc như “e” tiếng Việt",
+     "饿 è thành “e”",
+     "Đọc “ơ” rồi lùi lưỡi ra sau, môi không tròn"
+    ],
+    [
+     "10",
+     "-i sau z c s / zh ch sh r đọc thành i",
+     "四 sì thành “xi”",
+     "Đọc “ư” kéo dài, lưỡi giữ nguyên vị trí phụ âm"
+    ],
+    [
+     "11",
+     "Lẫn -n / -ng",
+     "山 shān – 商 shāng",
+     "Mẹo Hán Việt: -m/-n → -n (三 tam sān); -ng/-nh → -ng (生 sinh shēng)"
+    ],
+    [
+     "12",
+     "Thêm âm tắc cuối theo thói quen Hán Việt",
+     "学 thành “xuéc”, 十 thành “shíp”",
+     "Âm tiết luôn mở hoặc -n/-ng; kéo dài nguyên âm cuối"
+    ],
+    [
+     "13",
+     "Đọc ian theo mặt chữ “i-an”",
+     "天 tiān thành “ti-an”",
+     "ian = “iên”; luyện 天 – 先 – 年 – 面"
+    ],
+    [
+     "14",
+     "Thanh 3 đọc đủ 214 ở mọi vị trí",
+     "Câu nghe giật, chậm",
+     "Trước thanh khác chỉ đọc nửa thanh 3 (thấp); chỉ đọc đủ khi đứng cuối câu/nhấn mạnh"
+    ]
+   ],
+   "tips": [
+    "Người miền Nam thường lẫn -n/-ng và v/d; người miền Bắc thường lẫn n/l và đọc r, d, gi như nhau; người miền Trung thường đọc thanh 4 bị gãy – điều chỉnh trọng tâm theo vùng của học viên."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Quy trình 6 bước sửa một âm khó trên lớp",
+   "html": "<ol><li><b>Nghe – nhận diện:</b> giáo viên đọc 2 âm khác nhau (是/四), học viên giơ tay chỉ ra âm nào. Chưa nghe ra thì chưa thể nói đúng.</li><li><b>Phân biệt bằng cặp tối thiểu:</b> đọc lẫn lộn 10 lần, học viên ghi số 1/2.</li><li><b>Mô tả cấu âm:</b> vẽ mặt cắt miệng lên bảng, chỉ vị trí lưỡi; cho soi gương điện thoại.</li><li><b>Đọc tách:</b> phát âm riêng phụ âm hoặc vần, có thể <i>phóng đại</i> (kéo dài, uốn lưỡi quá mức) rồi giảm dần.</li><li><b>Đưa vào từ, rồi vào câu:</b> 是 → 不是 → 我不是老师。</li><li><b>Ghi âm & tự so sánh:</b> học viên ghi âm, nghe lại cạnh giọng mẫu trong game; giáo viên chỉ nhận xét 1 điểm.</li></ol><p><b>Mẹo với âm uốn lưỡi:</b> bắt đầu từ âm “r” kéo dài (rrr…) để học viên cảm nhận vị trí lưỡi cong, rồi “tắt tiếng” thành sh, rồi thêm tắc thành zh. <b>Mẹo với ü:</b> giữ chữ “i” kéo dài, dùng ngón tay đẩy hai má cho môi chu tròn. <b>Mẹo với thanh điệu:</b> luôn cho đọc kèm động tác tay trong 4 tuần đầu.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Cặp tối thiểu luyện tai (dùng cho kiểm tra 5 phút)",
+   "html": "<p>Giáo viên đọc ngẫu nhiên một chữ trong cặp, học viên chỉ ra chữ nào.</p>",
+   "items": [
+    {
+     "sym": "-n / -ng",
+     "ex": [
+      "陈",
+      "城",
+      "山",
+      "商",
+      "金",
+      "京"
+     ],
+     "vi": "chén – chéng; shān – shāng; jīn – jīng.",
+     "pairs": [
+      [
+       "陈",
+       "城"
+      ],
+      [
+       "山",
+       "商"
+      ],
+      [
+       "金",
+       "京"
+      ]
+     ]
+    },
+    {
+     "sym": "n / l",
+     "ex": [
+      "男",
+      "蓝",
+      "你",
+      "李"
+     ],
+     "vi": "nán – lán; nǐ – lǐ.",
+     "pairs": [
+      [
+       "男",
+       "蓝"
+      ],
+      [
+       "你",
+       "李"
+      ]
+     ]
+    },
+    {
+     "sym": "u / ü",
+     "ex": [
+      "路",
+      "绿",
+      "努",
+      "女"
+     ],
+     "vi": "lù – lǜ; nǔ – nǚ.",
+     "pairs": [
+      [
+       "路",
+       "绿"
+      ],
+      [
+       "努",
+       "女"
+      ]
+     ]
+    },
+    {
+     "sym": "j q x / zh ch sh",
+     "ex": [
+      "鸡",
+      "知",
+      "七",
+      "吃",
+      "西",
+      "诗"
+     ],
+     "vi": "jī – zhī; qī – chī; xī – shī.",
+     "pairs": [
+      [
+       "鸡",
+       "知"
+      ],
+      [
+       "七",
+       "吃"
+      ],
+      [
+       "西",
+       "诗"
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "四",
+   "lang": "zh-CN",
+   "q": "Bạn nghe được âm nào?",
+   "o": [
+    "xì",
+    "sì",
+    "shì"
+   ],
+   "a": 1,
+   "e": "四 sì: đầu lưỡi thẳng sau răng, vần -i đọc như “ư”. shì phải uốn lưỡi; xì môi dẹt."
+  },
+  {
+   "t": "listen",
+   "say": "女",
+   "lang": "zh-CN",
+   "q": "Bạn nghe được âm nào?",
+   "o": [
+    "nǔ",
+    "lù",
+    "nǚ"
+   ],
+   "a": 2,
+   "e": "女 nǚ: môi tròn suốt (ü), thanh 3."
+  },
+  {
+   "t": "listen",
+   "say": "跑",
+   "lang": "zh-CN",
+   "q": "Bạn nghe được âm nào?",
+   "o": [
+    "bǎo – no",
+    "bào – báo",
+    "pǎo – chạy"
+   ],
+   "a": 2,
+   "e": "跑 pǎo có bật hơi mạnh; 饱 bǎo không bật hơi."
+  },
+  {
+   "t": "mc",
+   "q": "Cách viết pinyin đúng của j + üe là:",
+   "o": [
+    "jüe",
+    "jue",
+    "jwe"
+   ],
+   "a": 1,
+   "e": "Sau j, q, x bỏ hai chấm của ü: jué (觉), xué (学)."
+  },
+  {
+   "t": "mc",
+   "q": "l + ü, thanh 4 (绿 – màu xanh lá) viết là:",
+   "o": [
+    "lù",
+    "lǜ",
+    "lyù"
+   ],
+   "a": 1,
+   "e": "Sau n, l phải giữ hai chấm để phân biệt lǜ (绿) với lù (路)."
+  },
+  {
+   "t": "mc",
+   "q": "贵 (g + uei, thanh 4) viết là:",
+   "o": [
+    "guì",
+    "gùi",
+    "guèi"
+   ],
+   "a": 0,
+   "e": "uei rút gọn thành ui khi có thanh mẫu; với ui, dấu đặt trên chữ sau → guì."
+  },
+  {
+   "t": "mc",
+   "q": "一样 đọc thực tế là:",
+   "o": [
+    "yìyàng",
+    "yīyàng",
+    "yíyàng"
+   ],
+   "a": 2,
+   "e": "一 trước thanh 4 đọc thanh 2: yíyàng."
+  },
+  {
+   "t": "mc",
+   "q": "不客气 đọc thực tế là:",
+   "o": [
+    "bù kèqi",
+    "bú kèqi",
+    "bū kèqi"
+   ],
+   "a": 1,
+   "e": "不 trước thanh 4 (kè) đọc thành bú."
+  },
+  {
+   "t": "mc",
+   "q": "Từ nào cần dấu cách âm (’) khi viết pinyin?",
+   "o": [
+    "棉谷城 Miángǔ Chéng",
+    "先 xiān",
+    "天 tiān"
+   ],
+   "a": 0,
+   "e": "Âm tiết thứ hai 安 ān bắt đầu bằng a → cần ’ để không đọc nhầm thành xiān."
+  },
+  {
+   "t": "fill",
+   "q": "Vần iou đứng một mình (không có thanh mẫu) viết là ___ (không cần dấu)",
+   "a": "you",
+   "e": "i đứng đầu âm tiết đổi thành y: iou → you (有 yǒu)."
+  },
+  {
+   "t": "dict",
+   "say": "学习",
+   "lang": "zh-CN",
+   "a": "学习",
+   "py": "xuéxí",
+   "e": "xué: x + üe (viết ue); xí: x + i. Hai âm tiết thanh 2."
+  },
+  {
+   "t": "match",
+   "q": "Nối thanh mẫu pinyin với âm tiếng Việt gần nhất:",
+   "pairs": [
+    [
+     "t",
+     "th"
+    ],
+    [
+     "h",
+     "kh"
+    ],
+    [
+     "s",
+     "x"
+    ],
+    [
+     "d",
+     "t"
+    ],
+    [
+     "f",
+     "ph"
+    ]
+   ]
+  }
+ ]
 }

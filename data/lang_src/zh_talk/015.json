@@ -1,58 +1,317 @@
 {
-  "no": 15,
-  "lv": "hsk3",
-  "title": "Gửi và nhận hàng chuyển phát nhanh",
-  "sub": "寄快递 · Jì kuàidì",
-  "situation": "Nguyễn Lan (阮兰) mang quà sinh nhật ra điểm chuyển phát nhanh để gửi cho bạn ở Quảng Châu: khai người nhận, chọn gửi thường hay hoả tốc, cân hàng, nhận mã vận đơn. Hôm sau, một anh shipper khác gọi điện giao hàng cho Lan khi cô đang ở trường. Nghe lần 1: vì sao Lan chọn gửi hoả tốc?",
-  "lang": "zh-CN",
-  "lines": [
-    {"s": "阮兰", "g": "f", "t": "师傅，我想寄一个快递到广州。", "py": "Shīfu, wǒ xiǎng jì yí ge kuàidì dào Guǎngzhōu.", "vi": "Anh ơi, tôi muốn gửi một bưu kiện đi Quảng Châu."},
-    {"s": "快递员", "g": "m", "t": "寄什么东西？", "py": "Jì shénme dōngxi?", "vi": "Gửi đồ gì vậy?"},
-    {"s": "阮兰", "g": "f", "t": "两盒茶叶和一本书，是给朋友的生日礼物。", "py": "Liǎng hé cháyè hé yì běn shū, shì gěi péngyou de shēngrì lǐwù.", "vi": "Hai hộp trà và một quyển sách, là quà sinh nhật cho bạn tôi."},
-    {"s": "快递员", "g": "m", "t": "好的，我先看一下，然后帮你包好。你把收件人的名字、电话和地址写在这儿。", "py": "Hǎo de, wǒ xiān kàn yíxià, ránhòu bāng nǐ bāo hǎo. Nǐ bǎ shōujiànrén de míngzi, diànhuà hé dìzhǐ xiě zài zhèr.", "vi": "Được, tôi kiểm tra trước rồi đóng gói giúp chị. Chị viết tên, số điện thoại và địa chỉ người nhận vào đây."},
-    {"s": "阮兰", "g": "f", "t": "写好了。大概几天能到？", "py": "Xiě hǎo le. Dàgài jǐ tiān néng dào?", "vi": "Viết xong rồi. Khoảng mấy ngày thì đến?"},
-    {"s": "快递员", "g": "m", "t": "普通的要三天，加急的明天就能到，但是贵一些。", "py": "Pǔtōng de yào sān tiān, jiājí de míngtiān jiù néng dào, dànshì guì yìxiē.", "vi": "Gửi thường mất ba ngày, hoả tốc thì mai là đến, nhưng đắt hơn một chút."},
-    {"s": "阮兰", "g": "f", "t": "她的生日是后天，我要加急的吧。多少钱？", "py": "Tā de shēngrì shì hòutiān, wǒ yào jiājí de ba. Duōshao qián?", "vi": "Sinh nhật bạn ấy là ngày kia, tôi gửi hoả tốc vậy. Bao nhiêu tiền?"},
-    {"s": "快递员", "g": "m", "t": "我称一下。一点五公斤，一共二十八块。", "py": "Wǒ chēng yíxià. Yī diǎn wǔ gōngjīn, yígòng èrshíbā kuài.", "vi": "Để tôi cân. Một cân rưỡi (1,5 kg), tổng cộng 28 tệ."},
-    {"s": "阮兰", "g": "f", "t": "好的。我怎么知道快递到哪儿了？", "py": "Hǎo de. Wǒ zěnme zhīdào kuàidì dào nǎr le?", "vi": "Vâng. Làm sao tôi biết hàng đi đến đâu rồi?"},
-    {"s": "快递员", "g": "m", "t": "这是快递单号，你可以在手机上查。", "py": "Zhè shì kuàidì dānhào, nǐ kěyǐ zài shǒujī shang chá.", "vi": "Đây là mã vận đơn, chị có thể tra trên điện thoại."},
-    {"s": "快递小哥", "g": "m", "t": "喂，你好，是阮兰吗？你有一个快递，现在在你们楼下。", "py": "Wéi, nǐ hǎo, shì Ruǎn Lán ma? Nǐ yǒu yí ge kuàidì, xiànzài zài nǐmen lóu xià.", "vi": "A lô, chào chị, chị là Nguyễn Lan phải không? Chị có một bưu kiện, giờ tôi đang ở dưới toà nhà."},
-    {"s": "阮兰", "g": "f", "t": "不好意思，我现在不在家，在学校上课。", "py": "Bù hǎoyìsi, wǒ xiànzài bú zài jiā, zài xuéxiào shàngkè.", "vi": "Xin lỗi anh, giờ tôi không ở nhà, đang học ở trường."},
-    {"s": "快递小哥", "g": "m", "t": "那我把它放在快递柜里，还是放在门卫那儿？", "py": "Nà wǒ bǎ tā fàng zài kuàidìguì li, háishi fàng zài ménwèi nàr?", "vi": "Vậy tôi để vào tủ nhận hàng, hay gửi ở phòng bảo vệ?"},
-    {"s": "阮兰", "g": "f", "t": "放在快递柜里吧，谢谢！", "py": "Fàng zài kuàidìguì li ba, xièxie!", "vi": "Anh để vào tủ nhận hàng giúp tôi, cảm ơn!"},
-    {"s": "快递小哥", "g": "m", "t": "好的，取件码会发到你的手机上。", "py": "Hǎo de, qǔjiànmǎ huì fā dào nǐ de shǒujī shang.", "vi": "Được, mã lấy hàng sẽ được gửi vào điện thoại của chị."},
-    {"s": "阮兰", "g": "f", "t": "好的，辛苦了！", "py": "Hǎo de, xīnkǔ le!", "vi": "Vâng, anh vất vả rồi!"}
-  ],
-  "phrases": [
-    {"t": "我想寄一个快递到……", "vi": "Tôi muốn gửi một bưu kiện đến…", "note": "Wǒ xiǎng jì yí ge kuàidì dào … – 寄 jì = gửi (qua bưu điện/chuyển phát). 快递 vừa là dịch vụ vừa là món hàng. Lỗi người Việt: dùng 送 (sòng – tặng/đưa tận tay) thay cho 寄."},
-    {"t": "收件人 / 寄件人 / 地址", "vi": "Người nhận / người gửi / địa chỉ", "note": "Shōujiànrén / jìjiànrén / dìzhǐ. – Địa chỉ Trung Quốc viết từ lớn đến nhỏ: tỉnh → thành phố → quận → đường → số nhà → phòng (ngược với Việt Nam)."},
-    {"t": "你把地址写在这儿。", "vi": "Bạn viết địa chỉ vào đây.", "note": "Nǐ bǎ dìzhǐ xiě zài zhèr. – Câu 把: 把 + vật + V + 在 + nơi chốn (đặt/viết vật vào đâu). Khi động từ có 在/到 + nơi chốn phía sau, gần như bắt buộc dùng 把. Lỗi: 你写地址在这儿 – SAI."},
-    {"t": "大概几天能到？", "vi": "Khoảng mấy ngày thì tới?", "note": "Dàgài jǐ tiān néng dào? – 能到 = có thể tới. Đáp: 三天能到 / 明天就能到 (就 = sớm)."},
-    {"t": "普通 / 加急", "vi": "Thường / hoả tốc", "note": "Pǔtōng / jiājí. – 加急 cũng gọi 次日达 (cìrìdá – hôm sau đến), 当日达 (trong ngày). So sánh: 贵一些 / 贵一点儿 = đắt hơn một chút."},
-    {"t": "我称一下。", "vi": "Để tôi cân một chút.", "note": "Wǒ chēng yíxià. – 称 chēng = cân. Phí tính theo 公斤 (kg); 一点五公斤 = 1,5 kg."},
-    {"t": "快递单号 / 查快递", "vi": "Mã vận đơn / tra hàng", "note": "Kuàidì dānhào / chá kuàidì. – Hỏi: 我的快递到哪儿了？(hàng của tôi đến đâu rồi?)."},
-    {"t": "放在快递柜里 / 放在门卫那儿", "vi": "Để trong tủ nhận hàng / gửi phòng bảo vệ", "note": "Fàng zài kuàidìguì li / fàng zài ménwèi nàr. – 门卫 = bảo vệ cổng. Sau danh từ chỉ người phải thêm 那儿/这儿 mới thành nơi chốn: 放在门卫那儿 (không nói 放在门卫)."},
-    {"t": "取件码", "vi": "Mã lấy hàng", "note": "Qǔjiànmǎ. – Mã số để mở tủ nhận hàng hoặc lấy hàng ở trạm (驿站 yìzhàn)."},
-    {"t": "辛苦了！", "vi": "Anh/chị vất vả rồi!", "note": "Xīnkǔ le! – Lời cảm ơn rất tự nhiên với shipper, nhân viên, người vừa làm việc giúp mình. Đáp: 不辛苦 / 应该的."}
-  ],
-  "qs": [
-    {"q": "Lan gửi hàng đi đâu?", "o": ["上海 Shànghǎi", "广州 Guǎngzhōu", "河内 Hénèi"], "a": 1, "e": "我想寄一个快递到广州."},
-    {"q": "Trong bưu kiện có gì?", "o": ["Một hộp trà và hai quyển sách", "Bánh sinh nhật", "Hai hộp trà và một quyển sách"], "a": 2, "e": "两盒茶叶和一本书."},
-    {"q": "Vì sao Lan chọn gửi hoả tốc?", "o": ["Vì sinh nhật của bạn là ngày kia", "Vì rẻ hơn", "Vì shipper khuyên"], "a": 0, "e": "她的生日是后天 – gửi thường mất 3 ngày sẽ trễ, nên chọn 加急 (mai đến)."},
-    {"q": "Phí gửi là bao nhiêu? (gõ số hoặc chữ Hán)", "a": "二十八", "alt": ["28", "28块", "二十八块", "ershiba"], "e": "一点五公斤，一共二十八块."},
-    {"q": "Làm sao Lan biết hàng đã đi đến đâu?", "o": ["Gọi cho bạn ở Quảng Châu", "Tra mã vận đơn trên điện thoại", "Hỏi shipper mỗi ngày"], "a": 1, "e": "这是快递单号，你可以在手机上查."},
-    {"q": "Hôm sau vì sao Lan không nhận hàng trực tiếp?", "o": ["Cô đang ngủ", "Cô đang học ở trường", "Cô đi Quảng Châu"], "a": 1, "e": "我现在不在家，在学校上课."},
-    {"q": "Cuối cùng hàng được để ở đâu?", "o": ["快递柜 – tủ nhận hàng", "门卫 – phòng bảo vệ", "Trước cửa phòng"], "a": 0, "e": "放在快递柜里吧."}
-  ],
-  "exercises": [
-    {"t": "fill", "q": "我想___一个快递到广州。(Tôi muốn gửi một bưu kiện đi Quảng Châu.)", "py": "Wǒ xiǎng jì yí ge kuàidì dào Guǎngzhōu.", "a": "寄", "alt": ["ji"], "e": "寄 jì = gửi qua bưu điện/chuyển phát."},
-    {"t": "order", "q": "Sắp xếp thành câu ‘Tôi để nó vào tủ nhận hàng’", "w": ["放在", "把它", "快递柜里", "我"], "a": "我把它放在快递柜里", "e": "Wǒ bǎ tā fàng zài kuàidìguì li – Chủ ngữ + 把 + tân ngữ + V + 在 + nơi chốn."},
-    {"t": "listen", "say": "普通的三天到，加急的明天就能到。", "lang": "zh-CN", "q": "Gửi hoả tốc mất bao lâu?", "o": ["Ba ngày", "Hôm nay đến", "Ngày mai đến"], "a": 2, "e": "加急的明天就能到 – hoả tốc mai đến."},
-    {"t": "dict", "say": "你把地址写在这儿。", "lang": "zh-CN", "a": "你把地址写在这儿。", "py": "Nǐ bǎ dìzhǐ xiě zài zhèr.", "e": "Câu 把 với V + 在 + nơi chốn."},
-    {"t": "mc", "q": "Shipper giao hàng xong, câu cảm ơn tự nhiên nhất:", "o": ["没关系！", "辛苦了！", "不客气！"], "a": 1, "e": "辛苦了 = anh vất vả rồi – lời cảm ơn người lao động. 没关系 đáp lời xin lỗi; 不客气 đáp lời cảm ơn."}
-  ],
-  "practice": [
-    {"p": "Bạn gửi một túi quần áo cho mẹ ở Thượng Hải. Nói muốn gửi gì, đi đâu, hỏi mấy ngày tới và bao nhiêu tiền.", "model": "师傅，我想寄这些衣服到上海，是给我妈妈的。大概几天能到？多少钱？", "py": "Shīfu, wǒ xiǎng jì zhèxiē yīfu dào Shànghǎi, shì gěi wǒ māma de. Dàgài jǐ tiān néng dào? Duōshao qián?", "vi": "Anh ơi, tôi muốn gửi chỗ quần áo này đi Thượng Hải, gửi cho mẹ tôi. Khoảng mấy ngày tới? Bao nhiêu tiền?"},
-    {"p": "Shipper gọi điện khi bạn không ở nhà. Xin lỗi, nói bạn đang ở đâu, nhờ để ở phòng bảo vệ và cảm ơn.", "model": "不好意思，我现在不在家，在公司上班。你把快递放在门卫那儿吧，谢谢，辛苦了！", "py": "Bù hǎoyìsi, wǒ xiànzài bú zài jiā, zài gōngsī shàngbān. Nǐ bǎ kuàidì fàng zài ménwèi nàr ba, xièxie, xīnkǔ le!", "vi": "Xin lỗi anh, giờ tôi không ở nhà, đang làm ở công ty. Anh gửi hàng ở phòng bảo vệ giúp tôi nhé, cảm ơn, anh vất vả rồi!"}
-  ]
+ "no": 15,
+ "lv": "hsk3",
+ "title": "Gửi và nhận hàng chuyển phát nhanh",
+ "sub": "寄快递 · Jì kuàidì",
+ "situation": "Nguyễn Lan (阮兰) mang quà sinh nhật ra điểm chuyển phát nhanh để gửi cho bạn ở Nhung Đình: khai người nhận, chọn gửi thường hay hoả tốc, cân hàng, nhận mã vận đơn. Hôm sau, một anh shipper khác gọi điện giao hàng cho Lan khi cô đang ở trường. Nghe lần 1: vì sao Lan chọn gửi hoả tốc?",
+ "lang": "zh-CN",
+ "lines": [
+  {
+   "s": "阮兰",
+   "g": "f",
+   "t": "师傅，我想寄一个快递到绒庭城。",
+   "py": "Shīfu, wǒ xiǎng jì yí ge kuàidì dào Róngtíng Chéng.",
+   "vi": "Anh ơi, tôi muốn gửi một bưu kiện đi Nhung Đình."
+  },
+  {
+   "s": "快递员",
+   "g": "m",
+   "t": "寄什么东西？",
+   "py": "Jì shénme dōngxi?",
+   "vi": "Gửi đồ gì vậy?"
+  },
+  {
+   "s": "阮兰",
+   "g": "f",
+   "t": "两盒茶叶和一本书，是给朋友的生日礼物。",
+   "py": "Liǎng hé cháyè hé yì běn shū, shì gěi péngyou de shēngrì lǐwù.",
+   "vi": "Hai hộp trà và một quyển sách, là quà sinh nhật cho bạn tôi."
+  },
+  {
+   "s": "快递员",
+   "g": "m",
+   "t": "好的，我先看一下，然后帮你包好。你把收件人的名字、电话和地址写在这儿。",
+   "py": "Hǎo de, wǒ xiān kàn yíxià, ránhòu bāng nǐ bāo hǎo. Nǐ bǎ shōujiànrén de míngzi, diànhuà hé dìzhǐ xiě zài zhèr.",
+   "vi": "Được, tôi kiểm tra trước rồi đóng gói giúp chị. Chị viết tên, số điện thoại và địa chỉ người nhận vào đây."
+  },
+  {
+   "s": "阮兰",
+   "g": "f",
+   "t": "写好了。大概几天能到？",
+   "py": "Xiě hǎo le. Dàgài jǐ tiān néng dào?",
+   "vi": "Viết xong rồi. Khoảng mấy ngày thì đến?"
+  },
+  {
+   "s": "快递员",
+   "g": "m",
+   "t": "普通的要三天，加急的明天就能到，但是贵一些。",
+   "py": "Pǔtōng de yào sān tiān, jiājí de míngtiān jiù néng dào, dànshì guì yìxiē.",
+   "vi": "Gửi thường mất ba ngày, hoả tốc thì mai là đến, nhưng đắt hơn một chút."
+  },
+  {
+   "s": "阮兰",
+   "g": "f",
+   "t": "她的生日是后天，我要加急的吧。多少钱？",
+   "py": "Tā de shēngrì shì hòutiān, wǒ yào jiājí de ba. Duōshao qián?",
+   "vi": "Sinh nhật bạn ấy là ngày kia, tôi gửi hoả tốc vậy. Bao nhiêu tiền?"
+  },
+  {
+   "s": "快递员",
+   "g": "m",
+   "t": "我称一下。一点五公斤，一共二十八块。",
+   "py": "Wǒ chēng yíxià. Yì diǎn wǔ gōngjīn, yígòng èrshíbā kuài.",
+   "vi": "Để tôi cân. Một cân rưỡi (1,5 kg), tổng cộng 28 tệ."
+  },
+  {
+   "s": "阮兰",
+   "g": "f",
+   "t": "好的。我怎么知道快递到哪儿了？",
+   "py": "Hǎo de. Wǒ zěnme zhīdào kuàidì dào nǎr le?",
+   "vi": "Vâng. Làm sao tôi biết hàng đi đến đâu rồi?"
+  },
+  {
+   "s": "快递员",
+   "g": "m",
+   "t": "这是快递单号，你可以在手机上查。",
+   "py": "Zhè shì kuàidì dānhào, nǐ kěyǐ zài shǒujī shang chá.",
+   "vi": "Đây là mã vận đơn, chị có thể tra trên điện thoại."
+  },
+  {
+   "s": "快递小哥",
+   "g": "m",
+   "t": "喂，你好，是阮兰吗？你有一个快递，现在在你们楼下。",
+   "py": "Wéi, nǐ hǎo, shì Ruǎn Lán ma? Nǐ yǒu yí ge kuàidì, xiànzài zài nǐmen lóu xià.",
+   "vi": "A lô, chào chị, chị là Nguyễn Lan phải không? Chị có một bưu kiện, giờ tôi đang ở dưới toà nhà."
+  },
+  {
+   "s": "阮兰",
+   "g": "f",
+   "t": "不好意思，我现在不在家，在学校上课。",
+   "py": "Bù hǎoyìsi, wǒ xiànzài bú zài jiā, zài xuéxiào shàngkè.",
+   "vi": "Xin lỗi anh, giờ tôi không ở nhà, đang học ở trường."
+  },
+  {
+   "s": "快递小哥",
+   "g": "m",
+   "t": "那我把它放在快递柜里，还是放在门卫那儿？",
+   "py": "Nà wǒ bǎ tā fàng zài kuàidìguì li, háishi fàng zài ménwèi nàr?",
+   "vi": "Vậy tôi để vào tủ nhận hàng, hay gửi ở phòng bảo vệ?"
+  },
+  {
+   "s": "阮兰",
+   "g": "f",
+   "t": "放在快递柜里吧，谢谢！",
+   "py": "Fàng zài kuàidìguì li ba, xièxie!",
+   "vi": "Anh để vào tủ nhận hàng giúp tôi, cảm ơn!"
+  },
+  {
+   "s": "快递小哥",
+   "g": "m",
+   "t": "好的，取件码会发到你的手机上。",
+   "py": "Hǎo de, qǔjiànmǎ huì fā dào nǐ de shǒujī shang.",
+   "vi": "Được, mã lấy hàng sẽ được gửi vào điện thoại của chị."
+  },
+  {
+   "s": "阮兰",
+   "g": "f",
+   "t": "好的，辛苦了！",
+   "py": "Hǎo de, xīnkǔ le!",
+   "vi": "Vâng, anh vất vả rồi!"
+  }
+ ],
+ "phrases": [
+  {
+   "t": "我想寄一个快递到……",
+   "vi": "Tôi muốn gửi một bưu kiện đến…",
+   "note": "Wǒ xiǎng jì yí ge kuàidì dào … – 寄 jì = gửi (qua bưu điện/chuyển phát). 快递 vừa là dịch vụ vừa là món hàng. Lỗi người Việt: dùng 送 (sòng – tặng/đưa tận tay) thay cho 寄."
+  },
+  {
+   "t": "收件人 / 寄件人 / 地址",
+   "vi": "Người nhận / người gửi / địa chỉ",
+   "note": "Shōujiànrén / jìjiànrén / dìzhǐ. – Địa chỉ Trung Quốc viết từ lớn đến nhỏ: tỉnh → thành phố → quận → đường → số nhà → phòng (ngược với Việt Nam)."
+  },
+  {
+   "t": "你把地址写在这儿。",
+   "vi": "Bạn viết địa chỉ vào đây.",
+   "note": "Nǐ bǎ dìzhǐ xiě zài zhèr. – Câu 把: 把 + vật + V + 在 + nơi chốn (đặt/viết vật vào đâu). Khi động từ có 在/到 + nơi chốn phía sau, gần như bắt buộc dùng 把. Lỗi: 你写地址在这儿 – SAI."
+  },
+  {
+   "t": "大概几天能到？",
+   "vi": "Khoảng mấy ngày thì tới?",
+   "note": "Dàgài jǐ tiān néng dào? – 能到 = có thể tới. Đáp: 三天能到 / 明天就能到 (就 = sớm)."
+  },
+  {
+   "t": "普通 / 加急",
+   "vi": "Thường / hoả tốc",
+   "note": "Pǔtōng / jiājí. – 加急 cũng gọi 次日达 (cìrìdá – hôm sau đến), 当日达 (trong ngày). So sánh: 贵一些 / 贵一点儿 = đắt hơn một chút."
+  },
+  {
+   "t": "我称一下。",
+   "vi": "Để tôi cân một chút.",
+   "note": "Wǒ chēng yíxià. – 称 chēng = cân. Phí tính theo 公斤 (kg); 一点五公斤 = 1,5 kg."
+  },
+  {
+   "t": "快递单号 / 查快递",
+   "vi": "Mã vận đơn / tra hàng",
+   "note": "Kuàidì dānhào / chá kuàidì. – Hỏi: 我的快递到哪儿了？(hàng của tôi đến đâu rồi?)."
+  },
+  {
+   "t": "放在快递柜里 / 放在门卫那儿",
+   "vi": "Để trong tủ nhận hàng / gửi phòng bảo vệ",
+   "note": "Fàng zài kuàidìguì li / fàng zài ménwèi nàr. – 门卫 = bảo vệ cổng. Sau danh từ chỉ người phải thêm 那儿/这儿 mới thành nơi chốn: 放在门卫那儿 (không nói 放在门卫)."
+  },
+  {
+   "t": "取件码",
+   "vi": "Mã lấy hàng",
+   "note": "Qǔjiànmǎ. – Mã số để mở tủ nhận hàng hoặc lấy hàng ở trạm (驿站 yìzhàn)."
+  },
+  {
+   "t": "辛苦了！",
+   "vi": "Anh/chị vất vả rồi!",
+   "note": "Xīnkǔ le! – Lời cảm ơn rất tự nhiên với shipper, nhân viên, người vừa làm việc giúp mình. Đáp: 不辛苦 / 应该的."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Lan gửi hàng đi đâu?",
+   "o": [
+    "叶纱城 Yèshā Chéng",
+    "丝湾城 Sīwān Chéng",
+    "绒庭城 Róngtíng Chéng"
+   ],
+   "a": 2,
+   "e": "我想寄一个快递到绒庭城."
+  },
+  {
+   "q": "Trong bưu kiện có gì?",
+   "o": [
+    "Một hộp trà và hai quyển sách",
+    "Bánh sinh nhật",
+    "Hai hộp trà và một quyển sách"
+   ],
+   "a": 2,
+   "e": "两盒茶叶和一本书."
+  },
+  {
+   "q": "Vì sao Lan chọn gửi hoả tốc?",
+   "o": [
+    "Vì shipper khuyên",
+    "Vì sinh nhật của bạn là ngày kia",
+    "Vì rẻ hơn"
+   ],
+   "a": 1,
+   "e": "她的生日是后天 – gửi thường mất 3 ngày sẽ trễ, nên chọn 加急 (mai đến)."
+  },
+  {
+   "q": "Phí gửi là bao nhiêu? (gõ số hoặc chữ Hán)",
+   "a": "二十八",
+   "alt": [
+    "28",
+    "28块",
+    "二十八块",
+    "ershiba"
+   ],
+   "e": "一点五公斤，一共二十八块."
+  },
+  {
+   "q": "Làm sao Lan biết hàng đã đi đến đâu?",
+   "o": [
+    "Tra mã vận đơn trên điện thoại",
+    "Hỏi shipper mỗi ngày",
+    "Gọi cho bạn ở Nhung Đình"
+   ],
+   "a": 0,
+   "e": "这是快递单号，你可以在手机上查."
+  },
+  {
+   "q": "Hôm sau vì sao Lan không nhận hàng trực tiếp?",
+   "o": [
+    "Cô đang ngủ",
+    "Cô đang học ở trường",
+    "Cô đi Nhung Đình"
+   ],
+   "a": 1,
+   "e": "我现在不在家，在学校上课."
+  },
+  {
+   "q": "Cuối cùng hàng được để ở đâu?",
+   "o": [
+    "门卫 – phòng bảo vệ",
+    "Trước cửa phòng",
+    "快递柜 – tủ nhận hàng"
+   ],
+   "a": 2,
+   "e": "放在快递柜里吧."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "我想___一个快递到绒庭城。(Tôi muốn gửi một bưu kiện đi Nhung Đình.)",
+   "py": "Wǒ xiǎng jì yí ge kuàidì dào Róngtíng Chéng.",
+   "a": "寄",
+   "alt": [
+    "ji"
+   ],
+   "e": "寄 jì = gửi qua bưu điện/chuyển phát."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu ‘Tôi để nó vào tủ nhận hàng’",
+   "w": [
+    "放在",
+    "把它",
+    "快递柜里",
+    "我"
+   ],
+   "a": "我把它放在快递柜里",
+   "e": "Wǒ bǎ tā fàng zài kuàidìguì li – Chủ ngữ + 把 + tân ngữ + V + 在 + nơi chốn."
+  },
+  {
+   "t": "listen",
+   "say": "普通的三天到，加急的明天就能到。",
+   "lang": "zh-CN",
+   "q": "Gửi hoả tốc mất bao lâu?",
+   "o": [
+    "Hôm nay đến",
+    "Ngày mai đến",
+    "Ba ngày"
+   ],
+   "a": 1,
+   "e": "加急的明天就能到 – hoả tốc mai đến."
+  },
+  {
+   "t": "dict",
+   "say": "你把地址写在这儿。",
+   "lang": "zh-CN",
+   "a": "你把地址写在这儿。",
+   "py": "Nǐ bǎ dìzhǐ xiě zài zhèr.",
+   "e": "Câu 把 với V + 在 + nơi chốn."
+  },
+  {
+   "t": "mc",
+   "q": "Shipper giao hàng xong, câu cảm ơn tự nhiên nhất:",
+   "o": [
+    "没关系！",
+    "辛苦了！",
+    "不客气！"
+   ],
+   "a": 1,
+   "e": "辛苦了 = anh vất vả rồi – lời cảm ơn người lao động. 没关系 đáp lời xin lỗi; 不客气 đáp lời cảm ơn."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Bạn gửi một túi quần áo cho mẹ ở Ti Loan. Nói muốn gửi gì, đi đâu, hỏi mấy ngày tới và bao nhiêu tiền.",
+   "model": "师傅，我想寄这些衣服到丝湾城，是给我妈妈的。大概几天能到？多少钱？",
+   "py": "Shīfu, wǒ xiǎng jì zhèxiē yīfu dào Sīwān Chéng, shì gěi wǒ māma de. Dàgài jǐ tiān néng dào? Duōshao qián?",
+   "vi": "Anh ơi, tôi muốn gửi chỗ quần áo này đi Ti Loan, gửi cho mẹ tôi. Khoảng mấy ngày tới? Bao nhiêu tiền?"
+  },
+  {
+   "p": "Shipper gọi điện khi bạn không ở nhà. Xin lỗi, nói bạn đang ở đâu, nhờ để ở phòng bảo vệ và cảm ơn.",
+   "model": "不好意思，我现在不在家，在公司上班。你把快递放在门卫那儿吧，谢谢，辛苦了！",
+   "py": "Bù hǎoyìsi, wǒ xiànzài bú zài jiā, zài gōngsī shàngbān. Nǐ bǎ kuàidì fàng zài ménwèi nàr ba, xièxie, xīnkǔ le!",
+   "vi": "Xin lỗi anh, giờ tôi không ở nhà, đang làm ở công ty. Anh gửi hàng ở phòng bảo vệ giúp tôi nhé, cảm ơn, anh vất vả rồi!"
+  }
+ ]
 }

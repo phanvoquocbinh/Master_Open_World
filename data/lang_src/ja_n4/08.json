@@ -3,16 +3,32 @@
  "title": "Điều kiện; たら・と・なら",
  "sub": "雨が 降ったら、傘を 持ちます。",
  "goals": [
-  "Hiểu và dùng đúng Điều kiện; たら・と・なら",
-  "Đọc/nghe phân biệt ít nhất 12 từ/cụm của tình huống",
-  "Hỏi và trả lời ba thông tin cụ thể bằng mức lịch sự phù hợp",
-  "Viết đoạn mới và tự sửa lỗi theo checklist"
+  "Phân tích cách dùng trong câu “雨が 降ったら、傘を 持ちます。” và tạo một câu khác giữ đúng quan hệ ý.",
+  "Dùng “雨” (mưa) và “降る” (rơi (mưa/tuyết)) đúng trong trao đổi của bài.",
+  "Nghe để trả lời câu hỏi “Theo hội thoại: Ngày mai nếu mưa bạn làm sao?”, rồi chỉ ra phần lời nói làm căn cứ.",
+  "Tự viết đoạn có ý chính “Xe buýt và mang ô” và kiểm lại sự nhất quán với văn bản đọc."
  ],
  "parts": [
   {
    "k": "text",
    "h": "Bối cảnh và cách học",
-   "html": "<p>Chọn điều kiện theo quan hệ ý và thực hành chỉ đường bằng kết quả quan sát được.</p><p>Học theo cụm có nghĩa, nghe trước rồi nhìn chữ. Romaji chỉ là cầu nối; khi đã nhận chữ, che romaji để không lệ thuộc cách đọc tiếng Việt.</p>"
+   "html": "<p>Chọn điều kiện theo quan hệ ý và thực hành chỉ đường bằng kết quả quan sát được.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>雨 là a-me hai mora; 晴れる ha-re-ru ba mora. Trong ボタン, giữ n cuối trước khi nói を押すと. Luyện nhịp dừng sau mệnh đề điều kiện để người nghe nhận vế sau là kết quả hay lời yêu cầu.</p>",
+   "items": [
+    {
+     "sym": "あめ・はれる・ボタン",
+     "ex": [
+      "雨",
+      "晴れる",
+      "ボタン"
+     ],
+     "vi": "Nghe và đọc đối chiếu 雨 (あめ), 晴れる (はれる), ボタン (ぼたん). Dùng câu “雨が 降ったら、傘を 持ちます。” để kiểm xem các độ dài âm còn giữ được khi nối vào phát ngôn."
+    }
+   ]
   },
   {
    "k": "words",
@@ -71,8 +87,8 @@
      "kana": "おと",
      "romaji": "oto",
      "vi": "âm thanh",
-     "ex": "ボタンを 押すと、音が 出ます。",
-     "exVi": "Ấn nút thì phát âm thanh."
+     "ex": "外の音で声が聞こえません。",
+     "exVi": "Tiếng ngoài khiến không nghe được nói."
     },
     {
      "w": "出る",
@@ -165,7 +181,7 @@
   {
    "k": "dialog",
    "h": "Nghe: Điều kiện; たら・と・なら",
-   "note": "Hai học viên của lớp giả Mây Sớm trao đổi; nghe lần đầu lấy ý, lần sau kiểm chi tiết. Không đọc romaji trong âm thanh.",
+   "note": "Trước khi nghe, dự đoán câu trả lời cho “Theo hội thoại: Ngày mai nếu mưa bạn làm sao?”. Sau đó ghi nguyên thông tin làm bạn chọn đáp án; lượt nói “傘を 持って、バスで 行きます。” là một điểm cần kiểm khi nghe lại.",
    "lang": "ja-JP",
    "lines": [
     {
@@ -219,34 +235,34 @@
    ],
    "qs": [
     {
-     "q": "Theo hội thoại: Ngày mai nếu mưa bạn làm sao?",
+     "q": "Nếu mưa, người trả lời đi thế nào?",
      "o": [
-      "Tôi mang ô, đi xe buýt.",
-      "Rẽ phải thì phía trước có ga.",
-      "Có. Tôi đi đường này."
+      "Không ra khỏi nhà",
+      "Mang ô và đi xe buýt",
+      "Đi bộ không ô"
      ],
-     "a": 0,
-     "e": "Câu trả lời là 傘を 持って、バスで 行きます。 → Tôi mang ô, đi xe buýt."
+     "a": 1,
+     "e": "Lượt nói “傘を 持って、バスで 行きます。” nghĩa là: Tôi mang ô, đi xe buýt. Nội dung này làm rõ đáp án “Mang ô và đi xe buýt”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Nếu quang thì đi bộ không?",
+     "q": "Rẽ phải thì thấy nơi nào?",
      "o": [
-      "Có. Tôi đi đường này.",
-      "Ấn thì phát hướng dẫn. Đến nơi hãy nghe.",
-      "Rẽ phải thì phía trước có ga."
+      "Nhà ga",
+      "Công viên",
+      "Bệnh viện"
      ],
      "a": 0,
-     "e": "Câu trả lời là はい。この 道を 行きます。 → Có. Tôi đi đường này."
+     "e": "Lượt nói “右へ 曲がると、前に 駅が あります。” nghĩa là: Rẽ phải thì phía trước có ga. Nội dung này làm rõ đáp án “Nhà ga”, không phải hai cách hiểu còn lại."
     },
     {
-     "q": "Theo hội thoại: Ga ở bên phải hay trái?",
+     "q": "Ấn nút thì có gì?",
      "o": [
-      "Rẽ phải thì phía trước có ga.",
-      "Tôi mang ô, đi xe buýt.",
-      "Ấn thì phát hướng dẫn. Đến nơi hãy nghe."
+      "Vé miễn phí",
+      "Đèn tắt",
+      "Âm thanh hướng dẫn"
      ],
-     "a": 0,
-     "e": "Câu trả lời là 右へ 曲がると、前に 駅が あります。 → Rẽ phải thì phía trước có ga."
+     "a": 2,
+     "e": "Lượt nói “押すと、案内の 音が 出ます。着いたら 聞いてください。” nghĩa là: Ấn thì phát hướng dẫn. Đến nơi hãy nghe. Nội dung này làm rõ đáp án “Âm thanh hướng dẫn”, không phải hai cách hiểu còn lại."
     }
    ]
   },
@@ -331,35 +347,35 @@
    "h": "Nói và phản hồi",
    "tasks": [
     {
-     "p": "Đóng vai thứ nhất trong hội thoại; thay một thông tin và nhờ bạn hỏi lại để kiểm sự hiểu.",
+     "p": "Đóng vai hỏi về mưa và rơi (mưa/tuyết). Dùng lượt “明日、雨が 降ったら どうしますか。” để mở đầu, rồi yêu cầu bạn trả lời bằng thông tin của vai đối diện.",
      "model": "明日、雨が 降ったら どうしますか。 晴れたら、歩きますか。 駅は 右ですか、左ですか。 この ボタンは 何ですか。",
      "vi": "Ngày mai nếu mưa bạn làm sao? Nếu quang thì đi bộ không? Ga ở bên phải hay trái? Nút này là gì?",
-     "tips": "Giữ mức lịch sự, nói theo cụm và không thêm thanh điệu tiếng Việt."
+     "tips": "Khi bạn nói “晴れたら、歩きますか。”, người nghe phải nhận ra Nếu quang thì đi bộ không?; ghi âm và kiểm xem từ nào đang quyết định nghĩa đó."
     },
     {
-     "p": "Tóm tắt nội dung bài đọc bằng ba câu, sau đó nêu một câu hỏi còn muốn làm rõ.",
+     "p": "Tóm tắt ba ý trong bài đọc để trả lời “Mưa thì đi thế nào?”. Kết thúc bằng câu hỏi về đến nơi nếu phần này chưa được người nghe xác nhận.",
      "model": "明日、友達と 駅で 会います。 雨が 降ったら、傘を 持って バスで 行きます。 晴れたら、家から 歩くつもりです。",
      "vi": "Ngày mai tôi gặp bạn ở ga. Nếu mưa tôi mang ô đi xe buýt. Nếu quang tôi định đi bộ từ nhà.",
-     "tips": "Không cần đọc nhanh; ưu tiên đúng ý, độ dài âm và trợ từ."
+     "tips": "So phần tóm tắt của bạn với dữ kiện “Xe buýt và mang ô”; nếu ý này thay đổi, hãy nói rõ đó là tình huống giả định mới."
     }
    ]
   },
   {
    "k": "write",
    "h": "Viết có kiểm tra",
-   "task": "Viết một đoạn mới theo tình huống bài học; thay ít nhất hai chi tiết, dùng cấu trúc trọng tâm và kiểm thông tin nhất quán.",
+   "task": "Viết một đoạn tình huống có các ý: Nếu mưa thì tôi mang ô. / Ấn nút thì phát âm thanh. / Khi đến nơi hãy liên hệ.. Dùng thêm thông tin của bài đọc để nối các ý, không chỉ chép ba câu rời.",
    "min": 80,
    "model": "明日、友達と 駅で 会います。 雨が 降ったら、傘を 持って バスで 行きます。 晴れたら、家から 歩くつもりです。 この 道を 右へ 曲がると、駅が 見えます。 左へ 行くと、公園に 出ます。 案内の ボタンを 押すと、音が 出ます。 友達が 着いたら、入口で 会います。 道が わからないなら、先に メモを 見てください。",
    "modelVi": "Ngày mai tôi gặp bạn ở ga. Nếu mưa tôi mang ô đi xe buýt. Nếu quang tôi định đi bộ từ nhà. Rẽ phải ở đường này sẽ thấy ga. Đi trái thì ra công viên. Ấn nút hướng dẫn thì có âm thanh. Khi bạn đến nơi tôi gặp ở lối vào. Nếu chưa rõ đường thì xem ghi chú trước.",
    "tips": [
-    "Lập ý bằng tiếng Việt rồi viết theo trật tự tiếng Nhật, không dịch từng từ.",
-    "Dùng mẫu để kiểm cấu trúc; nội dung bài nộp phải thay đổi theo nhiệm vụ."
+    "Lập sơ đồ ai làm gì trong câu “雨が 降ったら、傘を 持ちます。”, rồi dùng cùng quan hệ chủ thể khi nối sang đoạn của bạn.",
+    "Đối chiếu “ボタンを 押すと、音が 出ます。” với mẫu cuối “着いたら、連絡してください。”; chọn phần kết câu phù hợp trước khi sửa chính tả."
    ],
    "checklist": [
-    "Đủ mục tiêu giao tiếp và không tự mâu thuẫn",
-    "Cấu trúc trọng tâm đúng nghĩa và hình thức",
-    "Trợ từ, kana nhỏ và độ dài âm đã kiểm",
-    "Câu kết thúc và mức lịch sự nhất quán"
+    "Người đọc nhận ra đúng nghĩa của “雨”, thay vì chỉ thấy từ được chèn vào câu.",
+    "Quan hệ ý trong “雨が 降ったら、傘を 持ちます。” vẫn đúng khi bạn thay dữ kiện.",
+    "Các ý rơi (mưa/tuyết) và đến nơi không bị lẫn vai hoặc phạm vi.",
+    "Đoạn kết không trái với dữ kiện trả lời câu hỏi “Mưa thì đi thế nào?”."
    ]
   }
  ],
@@ -494,7 +510,7 @@
      "đường"
     ]
    ],
-   "e": "Các nghĩa đều thuộc ngữ cảnh bài; đọc lại câu ví dụ để xác nhận."
+   "e": "Đối chiếu các cặp “ボタン → nút bấm” và “道 → đường”; phân biệt nghĩa trong tình huống, không ghép chỉ dựa vào hình chữ."
   },
   {
    "t": "mc",
@@ -521,52 +537,52 @@
  ],
  "teacher": {
   "time": "2 buổi × 90 phút",
-  "prep": "Thẻ từ, bảng cấu trúc bài này, loa/giọng đọc tiếng Nhật, phiếu thông tin khác nhau cho từng cặp. Không dùng dữ liệu cá nhân thật.",
+  "prep": "Chuẩn bị thẻ “雨”, “降る”, “着く”, bản hội thoại che lượt trả lời và phiếu đọc có câu hỏi “Mưa thì đi thế nào?”.",
   "steps": [
    {
     "t": "10'",
-    "do": "Buổi 1: khơi tình huống, kiểm kiến thức cũ bằng một lượt hỏi đáp."
+    "do": "Gợi tình huống bằng câu “明日、雨が 降ったら どうしますか。”. Cho cặp học viên nói mình muốn biết điều gì trước khi mở lời đáp."
    },
    {
     "t": "20'",
-    "do": "Dạy từ qua ví dụ của bài, cho đoán nghĩa rồi kiểm; không đọc danh sách rời rạc."
+    "do": "Cho so thẻ “雨” với “降る”: học viên diễn đạt nghĩa mưa và rơi (mưa/tuyết), rồi đặt mỗi từ vào một lượt trao đổi."
    },
    {
     "t": "25'",
-    "do": "Giải thích cấu trúc, đối chiếu tiếng Việt, làm mẫu với bốn ví dụ và kiểm hiểu."
+    "do": "Viết hai câu “雨が 降ったら、傘を 持ちます。” và “ボタンを 押すと、音が 出ます。” cạnh nhau. Học viên giải thích khác biệt ý, sau đó thay một thành phần mà vẫn giữ cấu trúc vừa phân tích."
    },
    {
     "t": "20'",
-    "do": "Nghe hai lượt: lấy ý rồi ghi chi tiết; cho chỉ bằng chứng trước khi xem lời thoại."
+    "do": "Che lời thoại và giao câu hỏi “Theo hội thoại: Ngày mai nếu mưa bạn làm sao?”. Sau hai lượt nghe, yêu cầu nêu bằng chứng thay vì đoán theo từ khóa đơn lẻ."
    },
    {
     "t": "15'",
-    "do": "Luyện cặp thay chi tiết và phản hồi một lỗi có ảnh hưởng tới nghĩa."
+    "do": "Cho đổi vai quanh lượt “駅は 右ですか、左ですか。”. Người nghe hỏi lại thông tin trước khi chuyển sang lời đáp, giáo viên ghi một chỗ gây hiểu nhầm để chữa cuối hoạt động."
    },
    {
     "t": "15'",
-    "do": "Buổi 2: truy hồi từ/cấu trúc không nhìn mẫu, ôn lỗi đầu buổi."
+    "do": "Đầu buổi sau, yêu cầu dựng lại ý “Khi đến nơi hãy liên hệ.” không nhìn chữ Nhật. So lời nói của học viên với câu đích và chữa phần làm thay đổi quan hệ ý."
    },
    {
     "t": "20'",
-    "do": "Đọc văn bản mới, xác định bằng chứng và giải thích tại sao phương án nhiễu sai."
+    "do": "Đọc để giải quyết câu hỏi “Mưa thì đi thế nào?”. Mỗi nhóm đánh dấu đoạn chứng minh và giải thích vì sao hai lựa chọn còn lại không khớp."
    },
    {
     "t": "20'",
-    "do": "Đóng vai có khoảng trống thông tin; đổi vai, ghi âm và nghe lại."
+    "do": "Giao nhiệm vụ nói có thông tin mưa ở một vai và đến nơi ở vai kia. Hai bên chỉ hoàn thành phiếu khi đã hỏi để hiểu dữ kiện của nhau."
    },
    {
     "t": "20'",
-    "do": "Viết theo nhiệm vụ, đổi bài kiểm ý và cấu trúc; giáo viên phản hồi theo checklist."
+    "do": "Viết đoạn nối ý “Nếu mưa thì tôi mang ô.” với “Khi đến nơi hãy liên hệ.”. Đổi bài và kiểm chủ thể, mốc thời gian cùng từ phủ định trước khi góp ý độ tự nhiên."
    },
    {
     "t": "15'",
-    "do": "Làm bài tự chấm, chữa hai lỗi phổ biến và giao nhiệm vụ ôn cách quãng."
+    "do": "Chữa bài tự chấm từ cặp “降る” và “着く”. Mỗi học viên ghi một câu sửa của chính mình và nêu cách sẽ nhận ra lỗi đó trong lần dùng sau."
    }
   ],
   "games": [
-   "Ghép thẻ câu với tình huống: mỗi nhóm phải giải thích một cặp và chỉ ra từ/cấu trúc quyết định.",
-   "Thông tin lệch: mỗi bạn giữ một phần dữ kiện; phải hỏi lại thay vì đoán để hoàn thành phiếu."
+   "Khoảng trống thông tin: một bạn chỉ thấy “明日、雨が 降ったら どうしますか。”, bạn kia giữ câu trả lời. Họ hỏi lại để hoàn thành thông tin về mưa trước khi đổi vai.",
+   "Chọn và bảo vệ đáp án: các nhóm nhận câu hỏi “Mưa thì đi thế nào?”, chọn một phương án rồi tìm chi tiết đủ bác hai phương án nhiễu."
   ],
   "errors": [
    "Thay mọi たら bằng と dù vế sau là lời mời: phân biệt chức năng hạn chế của と.",
@@ -574,6 +590,6 @@
    "Dùng たら nhưng quên dạng quá khứ hình thức: 降る→降ったら.",
    "Nhầm 右/左 khi nghe: chỉ hướng trên sơ đồ, không nhớ bằng vị trí trên màn hình."
   ],
-  "homework": "Ôn 12–20 thẻ theo lịch 1–3–7 ngày; nghe chép câu đã chọn, ghi âm hai lượt nói và viết đoạn mới thay ít nhất hai chi tiết."
+  "homework": "Ôn “雨”, “降る” và “着く” bằng câu mới có nghĩa. Ghi âm câu “雨が 降ったら、傘を 持ちます。”, nghe lại phần kết rồi viết lời giải thích cho câu hỏi “Mưa thì đi thế nào?” bằng tiếng Việt."
  }
 }

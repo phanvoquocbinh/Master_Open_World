@@ -4,7 +4,7 @@ icon: 🤳
 floor: 4
 room: 402
 level: Cơ bản → Trung bình
-hours: 5
+hours: 28
 summary: Test app di động như người dùng thật: chọn thiết bị, cài đặt và cập nhật, gián đoạn, mạng chập chờn, quyền truy cập, deep link, giao diện, và viết bug report mobile đầy đủ bằng chứng.
 
 ## LESSON mobile-manual-01 | Mobile khác web ở đâu?
@@ -19,6 +19,11 @@ Vì vậy test mobile cần thêm nhiều câu hỏi:
 • Máy cũ, màn hình nhỏ, chữ to thì giao diện có vỡ không?
 
 ### Ba kiểu app di động
+Biết loại app giúp bạn chọn cách test và công cụ phù hợp.
+• Native: chú ý quyền truy cập, cập nhật từ store, khác biệt Android/iOS.
+• Web app: chú ý nhiều trình duyệt, kích thước màn hình, bàn phím ảo.
+• Hybrid: chú ý chỗ chuyển giữa phần native và phần web (nút Back, tải chậm, mất mạng).
+Cách nhanh nhất: hỏi dev "app mình viết bằng gì?" và ghi vào tài liệu test.
 ~~~text
 Native app : viết riêng cho Android (Kotlin/Java) hoặc iOS (Swift)
              -> cài từ store, dùng camera, GPS, thông báo trực tiếp
@@ -28,11 +33,6 @@ Hybrid app : "vỏ" native bọc nội dung web (WebView),
              hoặc viết một lần chạy hai nền tảng (Flutter, React Native)
              -> cài từ store, một phần giao diện có thể là web
 ~~~
-Biết loại app giúp bạn chọn cách test và công cụ phù hợp.
-• Native: chú ý quyền truy cập, cập nhật từ store, khác biệt Android/iOS.
-• Web app: chú ý nhiều trình duyệt, kích thước màn hình, bàn phím ảo.
-• Hybrid: chú ý chỗ chuyển giữa phần native và phần web (nút Back, tải chậm, mất mạng).
-Cách nhanh nhất: hỏi dev "app mình viết bằng gì?" và ghi vào tài liệu test.
 
 ### Các nhóm kiểm thử mobile
 • Chức năng: tính năng chạy đúng yêu cầu.
@@ -47,6 +47,8 @@ Cách nhanh nhất: hỏi dev "app mình viết bằng gì?" và ghi vào tài l
 Các bài tiếp theo đi sâu vào từng nhóm.
 
 ### Emulator, simulator và máy thật
+Emulator (Android) là điện thoại ảo chạy hệ điều hành thật bên trong máy tính. Simulator (iOS, chạy trên Mac có Xcode) chỉ mô phỏng iOS, không giống 100% iPhone thật.
+Quy tắc vàng: dùng emulator/simulator để test nhanh hằng ngày; luôn xác nhận trên máy thật trước khi phát hành, nhất là camera, thanh toán, thông báo đẩy và hiệu năng.
 ~~~text
                   Emulator (Android)   Simulator (iOS)      Máy thật
 Chi phí           Miễn phí             Miễn phí (cần Mac)   Phải mua
@@ -54,12 +56,15 @@ Tạo nhiều bản     Rất dễ               Dễ                   Khó
 Camera, cảm biến  Giả lập              Hạn chế              Thật
 Cuộc gọi, SMS     Giả lập được         Không                Thật
 Hiệu năng, pin    Không chính xác      Không chính xác      Chính xác
-Giao diện hãng    Android gốc          iOS gốc              Samsung, Xiaomi...
+Giao diện hãng    Android gốc          iOS gốc              tùy biến theo thiết bị lab
 ~~~
-Emulator (Android) là điện thoại ảo chạy hệ điều hành thật bên trong máy tính. Simulator (iOS, chạy trên Mac có Xcode) chỉ mô phỏng iOS, không giống 100% iPhone thật.
-Quy tắc vàng: dùng emulator/simulator để test nhanh hằng ngày; luôn xác nhận trên máy thật trước khi phát hành, nhất là camera, thanh toán, thông báo đẩy và hiệu năng.
 
 ### Bộ đồ nghề của tester mobile
+Chuẩn bị trước giúp bạn không mất thời gian khi cần tái hiện lỗi gấp.
+Lưu ý an toàn:
+• Máy test chỉ dùng để test: không đăng nhập tài khoản ngân hàng hay mạng xã hội cá nhân.
+• Chỉ dùng dữ liệu giả, không dùng thông tin thật của khách hàng.
+• Đặt tên máy dễ nhận biết, ví dụ QA-Android-01.
 ~~~text
 [ ] 2–4 điện thoại thật (Android cũ + mới, 1 iPhone nếu có app iOS)
 [ ] Cáp USB truyền dữ liệu tốt
@@ -70,11 +75,6 @@ Quy tắc vàng: dùng emulator/simulator để test nhanh hằng ngày; luôn x
 [ ] Cách quay màn hình + lấy log
 [ ] Bảng theo dõi thiết bị: model, hệ điều hành, ai đang mượn
 ~~~
-Chuẩn bị trước giúp bạn không mất thời gian khi cần tái hiện lỗi gấp.
-Lưu ý an toàn:
-• Máy test chỉ dùng để test: không đăng nhập tài khoản ngân hàng hay mạng xã hội cá nhân.
-• Chỉ dùng dữ liệu giả, không dùng thông tin thật của khách hàng.
-• Đặt tên máy dễ nhận biết, ví dụ QA-Android-01.
 
 PRACTICE: Chọn một app bạn đang dùng (ví dụ app ghi chú), viết ra 5 tình huống chỉ có trên mobile mà web không có, và đoán app đó là native, web hay hybrid kèm lý do.
 Q: Điểm khác biệt lớn của app mobile so với web trên máy tính là gì?
@@ -102,23 +102,32 @@ iOS ít phân mảnh hơn nhưng vẫn cần test vài đời iPhone và vài ph
 Không thể test mọi máy, nên ta lập ma trận thiết bị (device matrix) để chọn thông minh.
 
 ### Lập ma trận thiết bị
-~~~text
-Thiết bị            OS          Màn hình   Lý do chọn                       Ưu tiên
-Samsung tầm trung   Android 14  6.5"       Nhiều người dùng nhất            P1
-Máy giá rẻ RAM 3GB  Android 12  6.7"       Cấu hình yếu, chặn chạy nền      P1
-Pixel emulator      Android 15  6.3"       Android gốc, bản mới nhất        P2
-Máy cũ              Android 9   5.5"       Bằng phiên bản thấp nhất hỗ trợ  P2
-iPhone đời mới      iOS 18      6.1"       iOS mới nhất                     P1
-iPhone màn nhỏ      iOS 16      4.7"       Màn hình nhỏ nhất còn hỗ trợ     P3
-~~~
+Bảng dưới là fixture hư cấu để học chọn coverage; OS/version/kích thước là số giả định, không mô tả model thật hoặc phiên bản mới nhất hiện hành.
 Cách chọn thiết bị:
 • Hỏi team số liệu analytics: hãng, model, phiên bản hệ điều hành mà người dùng thật dùng nhiều nhất.
 • Luôn có phiên bản thấp nhất app hỗ trợ (minSdk) và bản mới nhất.
 • Có màn hình nhỏ nhất và lớn nhất (cả máy tính bảng nếu app hỗ trợ).
 • Có ít nhất một máy cấu hình yếu.
 Mức ưu tiên: P1 test mọi bản build, P2 test trước khi phát hành, P3 test khi có thời gian.
+~~~text
+Thiết bị            OS          Màn hình   Lý do chọn                       Ưu tiên
+Thiết bị Mầm A   Android 14  6.5"       Nhóm phổ biến giả định            P1
+Máy giá rẻ RAM 3GB  Android 12  6.7"       Cấu hình yếu, chặn chạy nền      P1
+Emulator Nếp B      Android 15  6.3"       Android gốc, bản giả định        P2
+Máy cũ              Android 9   5.5"       Bằng phiên bản thấp nhất hỗ trợ  P2
+Thiết bị iOS C      iOS 18      6.1"       Bản iOS trong fixture                     P1
+Thiết bị iOS D      iOS 16      4.7"       Màn hình nhỏ nhất còn hỗ trợ     P3
+~~~
 
 ### Lấy thông tin thiết bị bằng adb
+Thay vì mò trong menu, bạn có thể hỏi máy Android bằng lệnh (máy đã bật USB debugging, adb devices hiện trạng thái device).
+Giải thích từng dòng và kết quả ví dụ:
+• manufacturer: hãng sản xuất, ví dụ hãng hư cấu Sợi Mầm.
+• model: mẫu máy, ví dụ LAB-MAM-A.
+• version.release: phiên bản Android, ví dụ 14.
+• version.sdk: mức API, ví dụ 34 (Android 14 tương ứng API 34).
+• wm size: độ phân giải, ví dụ Physical size: 1080x2340.
+Copy các dòng này vào bug report để dev biết chính xác máy của bạn.
 ~~~bash
 adb shell getprop ro.product.manufacturer
 adb shell getprop ro.product.model
@@ -126,16 +135,10 @@ adb shell getprop ro.build.version.release
 adb shell getprop ro.build.version.sdk
 adb shell wm size
 ~~~
-Thay vì mò trong menu, bạn có thể hỏi máy Android bằng lệnh (máy đã bật USB debugging, adb devices hiện trạng thái device).
-Giải thích từng dòng và kết quả ví dụ:
-• manufacturer: hãng sản xuất, ví dụ samsung.
-• model: mẫu máy, ví dụ SM-A546E.
-• version.release: phiên bản Android, ví dụ 14.
-• version.sdk: mức API, ví dụ 34 (Android 14 tương ứng API 34).
-• wm size: độ phân giải, ví dụ Physical size: 1080x2340.
-Copy các dòng này vào bug report để dev biết chính xác máy của bạn.
 
 ### Test cài đặt lần đầu
+Lần cài đầu tiên là "ấn tượng đầu tiên" của người dùng. Nếu crash ngay khi mở, họ sẽ gỡ app và chấm 1 sao.
+Mẹo: trước mỗi lần test "mở lần đầu", xóa sạch dữ liệu app để máy trở về trạng thái như mới cài (lệnh ở slide cuối bài).
 ~~~text
 [ ] Cài từ store / từ bản build test: thành công, icon và tên app đúng
 [ ] Mở lần đầu: màn hình chào, hỏi quyền đúng lúc, không crash
@@ -144,8 +147,6 @@ Copy các dòng này vào bug report để dev biết chính xác máy của b�
 [ ] Cài trên máy tính bảng (nếu không hỗ trợ: store không cho cài)
 [ ] Thời gian mở app lần đầu ở mức chấp nhận được
 ~~~
-Lần cài đầu tiên là "ấn tượng đầu tiên" của người dùng. Nếu crash ngay khi mở, họ sẽ gỡ app và chấm 1 sao.
-Mẹo: trước mỗi lần test "mở lần đầu", xóa sạch dữ liệu app để máy trở về trạng thái như mới cài (lệnh ở slide cuối bài).
 
 ### Test cập nhật và gỡ app
 Cập nhật là chỗ rất hay có lỗi vì dữ liệu cũ gặp code mới.
@@ -159,13 +160,6 @@ Gỡ app:
 • Dữ liệu trên server (tài khoản) vẫn còn, đăng nhập lại thấy đủ.
 
 ### Lệnh adb hỗ trợ cài, cập nhật, gỡ
-~~~bash
-adb install app-v1.apk
-adb install -r app-v2.apk
-adb shell pm list packages | findstr example
-adb shell pm clear com.example.demo
-adb uninstall com.example.demo
-~~~
 Giải thích từng dòng (com.example.demo là package giả định, thay bằng package app của team bạn):
 • adb install app-v1.apk: cài bản cũ. Kết quả: Success.
 • adb install -r app-v2.apk: cài đè bản mới, GIỮ dữ liệu, mô phỏng người dùng cập nhật.
@@ -173,6 +167,13 @@ Giải thích từng dòng (com.example.demo là package giả định, thay b�
 • pm clear ...: xóa sạch dữ liệu app (như Settings > Apps > Storage > Clear storage).
 • adb uninstall ...: gỡ app. Kết quả: Success.
 Lưu ý: cập nhật qua store có thể khác cài APK; trước khi phát hành hãy test thêm qua kênh test của store (internal testing, TestFlight).
+~~~bash
+adb install app-v1.apk
+adb install -r app-v2.apk
+adb shell pm list packages | findstr example
+adb shell pm clear com.example.demo
+adb uninstall com.example.demo
+~~~
 
 PRACTICE: Lập ma trận 5 thiết bị cho một app bán hàng giả định có phiên bản thấp nhất là Android 9, ghi lý do chọn và mức ưu tiên P1/P2/P3 cho từng máy; sau đó dùng adb getprop lấy thông tin emulator của bạn.
 Q: Vì sao ma trận thiết bị nên có máy chạy phiên bản OS thấp nhất app hỗ trợ?
@@ -212,6 +213,8 @@ Câu hỏi luôn là: quay lại app, mọi thứ có còn đúng không?
 Hãy hỏi PO/BA kết quả mong đợi cho các màn hình nhạy cảm, vì "đúng" phụ thuộc nghiệp vụ.
 
 ### Checklist gián đoạn cho một màn hình
+Áp dụng cho các màn hình quan trọng: đăng nhập, form dài, thanh toán, chụp ảnh, phát video, làm bài kiểm tra.
+Mỗi dòng là một test case nhỏ; ghi Pass/Fail và thiết bị đã dùng.
 ~~~text
 Màn hình: Nhập địa chỉ giao hàng (đã điền 4/6 ô)
 [ ] Cuộc gọi đến -> nghe -> kết thúc -> quay lại app
@@ -225,18 +228,8 @@ Màn hình: Nhập địa chỉ giao hàng (đã điền 4/6 ô)
 [ ] Rút/cắm sạc, cắm tai nghe
 Với mỗi dòng: dữ liệu còn? đúng màn hình? có crash?
 ~~~
-Áp dụng cho các màn hình quan trọng: đăng nhập, form dài, thanh toán, chụp ảnh, phát video, làm bài kiểm tra.
-Mỗi dòng là một test case nhỏ; ghi Pass/Fail và thiết bị đã dùng.
 
 ### Giả lập gián đoạn trên emulator
-~~~bash
-adb emu gsm call 0901234567
-adb emu gsm cancel 0901234567
-adb emu sms send 0901234567 "Ma OTP cua ban la 123456"
-adb emu power capacity 10
-adb shell input keyevent KEYCODE_HOME
-adb shell input keyevent KEYCODE_POWER
-~~~
 Lệnh adb emu chỉ dùng cho emulator Android. Với máy thật, nhờ đồng nghiệp gọi tới hoặc dùng SIM test.
 Giải thích từng dòng:
 • gsm call: giả lập cuộc gọi đến từ số 0901234567 (số giả).
@@ -246,19 +239,27 @@ Giải thích từng dòng:
 • keyevent KEYCODE_HOME: bấm nút Home.
 • keyevent KEYCODE_POWER: bấm nút nguồn (tắt/mở màn hình).
 Cách bằng giao diện: nút ... (Extended controls) trên thanh bên emulator > Phone, Battery.
+~~~bash
+adb emu gsm call 0901234567
+adb emu gsm cancel 0901234567
+adb emu sms send 0901234567 "Ma OTP cua ban la 123456"
+adb emu power capacity 10
+adb shell input keyevent KEYCODE_HOME
+adb shell input keyevent KEYCODE_POWER
+~~~
 
 ### Mẹo nâng cao: "Don't keep activities"
-~~~text
-Settings > System > Developer options
-  > Apps: [x] Don't keep activities
-  > Background process limit: No background processes
-~~~
 Khi điện thoại thiếu RAM, Android có thể "dọn" app đang chạy nền. Người dùng quay lại, app phải tự khôi phục. Lỗi kiểu này rất khó gặp nếu chờ tự nhiên.
 Hai tùy chọn trên giúp ép tình huống đó xảy ra:
 • Don't keep activities: rời một màn hình là màn hình đó bị hủy ngay.
 • Background process limit: không giữ app nào chạy nền.
 Cách test: bật tùy chọn, vào màn hình đang nhập dở, bấm Home, mở lại app. Lỗi hay gặp: crash, mất dữ liệu đã nhập, màn hình trống trơn.
 Nhớ TẮT các tùy chọn này sau khi test, nếu không máy sẽ hoạt động khác thường.
+~~~text
+Settings > System > Developer options
+  > Apps: [x] Don't keep activities
+  > Background process limit: No background processes
+~~~
 
 PRACTICE: Chọn màn hình đăng ký hoặc soạn ghi chú của một app có sẵn trên emulator, chạy đủ checklist gián đoạn (dùng adb emu cho cuộc gọi và SMS), ghi Pass/Fail từng dòng và mô tả 1 lỗi nếu tìm thấy.
 Q: Đang điền form dài thì có cuộc gọi đến; kết quả mong đợi phổ biến nhất là gì?
@@ -287,6 +288,10 @@ Các trạng thái mạng cần test:
 • Chuyển từ WiFi sang 4G giữa chừng.
 
 ### Kịch bản test mạng
+Với mỗi kịch bản, kiểm tra 3 điều:
+• Thông báo cho người dùng có rõ ràng không.
+• App có hồi phục khi mạng trở lại không.
+• Dữ liệu có bị trùng hoặc bị mất không.
 ~~~text
 [ ] Mở app khi đang ở chế độ máy bay -> thông báo thân thiện, có nút Thử lại
 [ ] Đang tải danh sách thì tắt mạng -> không treo, không crash
@@ -297,12 +302,15 @@ Các trạng thái mạng cần test:
 [ ] Dữ liệu đã xem có hiển thị khi offline? (nếu thiết kế có cache)
 [ ] Tin nhắn soạn khi offline -> tự gửi khi có mạng hay báo thất bại?
 ~~~
-Với mỗi kịch bản, kiểm tra 3 điều:
-• Thông báo cho người dùng có rõ ràng không.
-• App có hồi phục khi mạng trở lại không.
-• Dữ liệu có bị trùng hoặc bị mất không.
 
 ### Điều khiển mạng trên emulator
+Giải thích từng dòng:
+• svc wifi disable / enable: tắt / bật WiFi của thiết bị.
+• svc data disable: tắt dữ liệu di động. Tắt cả WiFi và dữ liệu = mất mạng hoàn toàn.
+• network speed edge: giới hạn tốc độ như mạng EDGE (rất chậm), chỉ dùng cho emulator.
+• network delay gprs: thêm độ trễ như mạng GPRS, chỉ dùng cho emulator.
+• network speed full: trả về tốc độ tối đa.
+Cách bằng giao diện: Extended controls (...) > Cellular, chọn Network type và Signal strength.
 ~~~bash
 adb shell svc wifi disable
 adb shell svc data disable
@@ -311,13 +319,6 @@ adb emu network speed edge
 adb emu network delay gprs
 adb emu network speed full
 ~~~
-Giải thích từng dòng:
-• svc wifi disable / enable: tắt / bật WiFi của thiết bị.
-• svc data disable: tắt dữ liệu di động. Tắt cả WiFi và dữ liệu = mất mạng hoàn toàn.
-• network speed edge: giới hạn tốc độ như mạng EDGE (rất chậm), chỉ dùng cho emulator.
-• network delay gprs: thêm độ trễ như mạng GPRS, chỉ dùng cho emulator.
-• network speed full: trả về tốc độ tối đa.
-Cách bằng giao diện: Extended controls (...) > Cellular, chọn Network type và Signal strength.
 
 ### Test mạng trên máy thật
 • Chế độ máy bay: cách nhanh nhất để mất mạng hoàn toàn. Lưu ý: vẫn có thể bật lại WiFi khi đang ở chế độ máy bay.
@@ -328,6 +329,13 @@ Cách bằng giao diện: Extended controls (...) > Cellular, chọn Network typ
 Luôn ghi rõ loại mạng và thời điểm tắt/bật vào bug report.
 
 ### Lỗi kinh điển: bấm hai lần, tạo hai đơn
+Mạng chậm làm lộ ra những lỗi nghiêm trọng mà mạng nhanh che giấu.
+Ngoài bấm nhiều lần, hãy để ý:
+• Loading quay mãi không dừng (thiếu timeout).
+• Màn hình trắng không có chữ nào khi lỗi.
+• Thông báo kỹ thuật khó hiểu như "SocketTimeoutException" hiện thẳng cho người dùng.
+• Dữ liệu cũ và mới lẫn lộn sau khi có mạng lại.
+Chỉ test trên môi trường test với tài khoản test, không thử thanh toán thật.
 ~~~text
 Bước 1: Đặt mạng rất chậm (adb emu network speed edge)
 Bước 2: Vào giỏ hàng, bấm "Đặt hàng"
@@ -336,15 +344,8 @@ Bước 4: Trả mạng về bình thường (network speed full)
 Mong đợi: chỉ tạo 1 đơn hàng, nút bị khóa sau lần bấm đầu
 Thực tế (lỗi): tạo 3 đơn hàng giống nhau
 ~~~
-Mạng chậm làm lộ ra những lỗi nghiêm trọng mà mạng nhanh che giấu.
-Ngoài bấm nhiều lần, hãy để ý:
-• Loading quay mãi không dừng (thiếu timeout).
-• Màn hình trắng không có chữ nào khi lỗi.
-• Thông báo kỹ thuật khó hiểu như "SocketTimeoutException" hiện thẳng cho người dùng.
-• Dữ liệu cũ và mới lẫn lộn sau khi có mạng lại.
-Chỉ test trên môi trường test với tài khoản test, không thử thanh toán thật.
 
-PRACTICE: Trên emulator, mở Chrome tới một trang demo công khai (ví dụ https://demo.playwright.dev/todomvc), lần lượt tắt WiFi và dữ liệu, đặt network speed edge, rồi ghi lại cách trình duyệt phản hồi theo 3 tiêu chí: thông báo, khả năng hồi phục, dữ liệu.
+PRACTICE: Trên emulator, mở Chrome tới một trang demo công khai (ví dụ http://localhost:3131/todomvc), lần lượt tắt WiFi và dữ liệu, đặt network speed edge, rồi ghi lại cách trình duyệt phản hồi theo 3 tiêu chí: thông báo, khả năng hồi phục, dữ liệu.
 Q: Vì sao test với mạng chậm có thể tìm ra lỗi "tạo đơn trùng"?
 - Vì mạng chậm làm sai giá tiền
 + Vì người dùng không thấy phản hồi nên bấm nút nhiều lần
@@ -368,6 +369,12 @@ Tester kiểm tra 3 điều:
 • App vẫn chạy hợp lý khi người dùng từ chối.
 
 ### Các lựa chọn của người dùng
+Mỗi lựa chọn là một nhánh test riêng.
+Điểm cần nhớ:
+• Android: từ chối 2 lần thì hệ thống không hiện hộp thoại xin quyền nữa; app phải hướng dẫn người dùng vào Settings.
+• iOS: chỉ hỏi một lần; sau đó người dùng phải tự vào Settings.
+• Android 13 trở lên: quyền gửi thông báo (POST_NOTIFICATIONS) phải xin; bị từ chối thì app không hiện được thông báo.
+• "Only this time" / "Allow Once": quyền mất sau khi đóng app một lúc; lần sau phải hỏi lại.
 ~~~text
 Android (vị trí, camera, micro):
   While using the app | Only this time | Don't allow
@@ -378,14 +385,10 @@ iOS:
   Allow While Using App | Allow Once | Don't Allow
   Ảnh: Limited Access (chọn một số ảnh) / Full Access
 ~~~
-Mỗi lựa chọn là một nhánh test riêng.
-Điểm cần nhớ:
-• Android: từ chối 2 lần thì hệ thống không hiện hộp thoại xin quyền nữa; app phải hướng dẫn người dùng vào Settings.
-• iOS: chỉ hỏi một lần; sau đó người dùng phải tự vào Settings.
-• Android 13 trở lên: quyền gửi thông báo (POST_NOTIFICATIONS) phải xin; bị từ chối thì app không hiện được thông báo.
-• "Only this time" / "Allow Once": quyền mất sau khi đóng app một lúc; lần sau phải hỏi lại.
 
 ### Test case cho quyền camera
+Nhân bản checklist này cho vị trí, micro, ảnh, danh bạ, thông báo.
+Điểm quan trọng: khi bạn thu hồi quyền trong Settings, Android thường dừng luôn tiến trình app. Quay lại, app phải khởi động lại ổn định, không crash, không mất dữ liệu đã lưu. Đây là chỗ rất hay có lỗi.
 ~~~text
 [ ] Lần đầu bấm "Quét QR": hiện giải thích, rồi hộp thoại hệ thống
 [ ] Chọn Allow -> camera mở được
@@ -395,22 +398,20 @@ Mỗi lựa chọn là một nhánh test riêng.
 [ ] Đang dùng app, vào Settings thu hồi quyền -> quay lại app
 [ ] Cấp quyền trong Settings -> quay lại app dùng được ngay
 ~~~
-Nhân bản checklist này cho vị trí, micro, ảnh, danh bạ, thông báo.
-Điểm quan trọng: khi bạn thu hồi quyền trong Settings, Android thường dừng luôn tiến trình app. Quay lại, app phải khởi động lại ổn định, không crash, không mất dữ liệu đã lưu. Đây là chỗ rất hay có lỗi.
 
 ### Cấp và thu hồi quyền bằng adb
-~~~bash
-adb shell pm grant com.example.demo android.permission.CAMERA
-adb shell pm revoke com.example.demo android.permission.CAMERA
-adb shell dumpsys package com.example.demo | findstr CAMERA
-adb shell pm clear com.example.demo
-~~~
 Giải thích từng dòng (com.example.demo là app giả định):
 • pm grant: cấp quyền camera mà không cần bấm hộp thoại, tiết kiệm thời gian khi đang test tính năng khác.
 • pm revoke: thu hồi quyền, giống người dùng tắt quyền trong Settings.
 • dumpsys package ... | findstr CAMERA: xem trạng thái quyền; dòng mong đợi dạng android.permission.CAMERA: granted=true (hoặc false).
 • pm clear: xóa dữ liệu app và đưa các quyền về trạng thái chưa hỏi, để test lại "lần đầu".
 Lỗi thường gặp: "SecurityException: Package com.example.demo has not requested permission ..." nghĩa là app không khai báo quyền đó, không thể cấp.
+~~~bash
+adb shell pm grant com.example.demo android.permission.CAMERA
+adb shell pm revoke com.example.demo android.permission.CAMERA
+adb shell dumpsys package com.example.demo | findstr CAMERA
+adb shell pm clear com.example.demo
+~~~
 
 ### Hành vi đúng khi bị từ chối
 • Tính năng cần quyền bị tắt nhẹ nhàng, phần còn lại của app vẫn dùng được (từ chối vị trí vẫn tìm được cửa hàng bằng cách gõ địa chỉ).
@@ -442,22 +443,24 @@ Deep link xuất hiện ở: email, SMS, thông báo đẩy, mã QR, quảng cá
 Nếu deep link hỏng, người dùng bị đưa về trang chủ hoặc app crash, và cả chiến dịch marketing mất tác dụng.
 
 ### Các loại link
-~~~text
-Custom scheme      : myapp://product/123
-                     -> app khai báo scheme "myapp" sẽ mở; chưa cài app thì không có gì xảy ra
-Android App Link   : https://shop.example.com/product/123
-                     -> tên miền đã xác minh, mở thẳng app, không hỏi chọn app
-iOS Universal Link : https://shop.example.com/product/123
-                     -> tương tự App Link nhưng trên iPhone
-Deferred deep link : chưa cài app -> vào store -> cài xong mở đúng sản phẩm 123
-~~~
 Giải thích:
 • Custom scheme: dễ làm, nhưng app khác cũng có thể đăng ký trùng tên scheme.
 • App Link / Universal Link: dùng link https thật; chưa cài app thì mở trang web.
 • Deferred deep link: thường cần dịch vụ bên thứ ba, nên test trên bản build phát hành qua kênh test của store.
 Mọi ví dụ trong khóa này dùng scheme giả myapp:// và tên miền mẫu example.com.
+~~~text
+Custom scheme      : myapp://product/123
+                     -> app khai báo scheme "myapp" sẽ mở; chưa cài app thì không có gì xảy ra
+Android App Link   : https://example.com/product/123
+                     -> tên miền đã xác minh, mở thẳng app, không hỏi chọn app
+iOS Universal Link : https://example.com/product/123
+                     -> tương tự App Link nhưng trên iPhone
+Deferred deep link : chưa cài app -> vào store -> cài xong mở đúng sản phẩm 123
+~~~
 
 ### Danh sách test case deep link
+Với mỗi case, ghi lại: nguồn mở link, trạng thái app trước khi mở (đóng, chạy nền, chưa đăng nhập) và màn hình thực tế hiện ra.
+Xin dev danh sách deep link chính thức để không bỏ sót.
 ~~~text
 [ ] App đã cài, đang đóng hẳn -> mở đúng màn hình product 123
 [ ] App đang chạy nền ở màn hình khác -> chuyển đúng sang product 123
@@ -468,15 +471,8 @@ Mọi ví dụ trong khóa này dùng scheme giả myapp:// và tên miền mẫ
 [ ] Mở từ nhiều nguồn: trình duyệt, SMS, email, QR, thông báo đẩy
 [ ] Chưa cài app -> App Link mở trang web hoặc store
 ~~~
-Với mỗi case, ghi lại: nguồn mở link, trạng thái app trước khi mở (đóng, chạy nền, chưa đăng nhập) và màn hình thực tế hiện ra.
-Xin dev danh sách deep link chính thức để không bỏ sót.
 
 ### Mở deep link trên Android bằng adb
-~~~bash
-adb shell am start -W -a android.intent.action.VIEW -d "myapp://product/123"
-adb shell am start -W -a android.intent.action.VIEW -d "myapp://product/123" com.example.demo
-adb shell pm get-app-links com.example.demo
-~~~
 Giải thích các phần của dòng 1:
 • am start: nhờ Activity Manager của Android mở một màn hình.
 • -W: chờ màn hình mở xong rồi in kết quả.
@@ -484,26 +480,28 @@ Giải thích các phần của dòng 1:
 • -d "myapp://product/123": dữ liệu, tức đường link cần mở.
 Dòng 2: thêm tên package để chắc chắn link được mở bằng đúng app.
 Kết quả mong đợi: Status: ok, dòng Activity: com.example.demo/... và TotalTime tính bằng ms.
-Dòng 3 (Android 12+): xem trạng thái xác minh App Link của từng tên miền; mong đợi shop.example.com: verified.
+Dòng 3 (Android 12+): xem trạng thái xác minh App Link của từng tên miền; mong đợi example.com: verified.
 Nếu thấy "Error: Activity not started, unable to resolve Intent": không app nào nhận link này (sai scheme hoặc app chưa khai báo).
+~~~bash
+adb shell am start -W -a android.intent.action.VIEW -d "myapp://product/123"
+adb shell am start -W -a android.intent.action.VIEW -d "myapp://product/123" com.example.demo
+adb shell pm get-app-links com.example.demo
+~~~
 
 ### Mở deep link trên iOS Simulator
-~~~bash
-xcrun simctl list devices booted
-xcrun simctl openurl booted "myapp://product/123"
-xcrun simctl openurl booted "https://shop.example.com/product/123"
-~~~
 Các lệnh này chạy trên máy Mac có Xcode, với iOS Simulator đang bật.
 Giải thích từng dòng:
 • simctl list devices booted: liệt kê simulator đang chạy.
 • openurl booted "...": mở link trên simulator đang chạy, như thể người dùng bấm vào link.
 • Dòng 3 thử Universal Link; nếu Safari mở thay vì app, có thể cấu hình xác minh tên miền chưa đúng, hãy báo dev.
 Trên iPhone thật: gửi link vào Notes hoặc Messages rồi bấm. Gõ link trực tiếp vào thanh địa chỉ Safari thường KHÔNG mở app; đó là hành vi bình thường của iOS.
+~~~bash
+xcrun simctl list devices booted
+xcrun simctl openurl booted "myapp://product/123"
+xcrun simctl openurl booted "https://example.com/product/123"
+~~~
 
 ### Mẹo dòng lệnh và lỗi deep link hay gặp
-~~~bash
-adb shell "am start -W -a android.intent.action.VIEW -d 'myapp://search?q=ao&size=M'"
-~~~
 Dấu & trong link bị dòng lệnh hiểu là ký tự đặc biệt, làm mất phần size=M phía sau. Cách sửa: bọc cả lệnh am start trong nháy kép, còn link đặt trong nháy đơn như trên.
 Lỗi deep link hay gặp:
 • Mở app nhưng về trang chủ thay vì trang sản phẩm.
@@ -511,8 +509,11 @@ Lỗi deep link hay gặp:
 • Mở 2 bản sao màn hình chồng nhau, phải bấm Back nhiều lần.
 • Crash khi id rỗng hoặc chứa ký tự đặc biệt.
 • Link khuyến mãi hết hạn nhưng không có thông báo gì.
+~~~bash
+adb shell "am start -W -a android.intent.action.VIEW -d 'myapp://search?q=ao&size=M'"
+~~~
 
-PRACTICE: Với scheme giả định myapp://, viết 8 test case deep link theo danh sách mẫu; sau đó trên emulator chạy am start -W với link https://demo.playwright.dev/todomvc và ghi lại app nào mở cùng giá trị Status, Activity, TotalTime.
+PRACTICE: Với scheme giả định myapp://, viết 8 test case deep link theo danh sách mẫu; sau đó trên emulator chạy am start -W với link http://localhost:3131/todomvc và ghi lại app nào mở cùng giá trị Status, Activity, TotalTime.
 Q: Deep link là gì?
 - Link tải app từ store
 + Đường dẫn mở thẳng một màn hình cụ thể bên trong app
@@ -539,20 +540,22 @@ Tình huống dễ lỗi: bấm thật nhanh nhiều lần, bấm hai nút cùng
 Nút quá nhỏ cũng là lỗi trải nghiệm: vùng chạm nên từ khoảng 48dp (Android) hoặc 44pt (iOS) trở lên.
 
 ### Chữ to, chế độ tối, ngôn ngữ
-~~~bash
-adb shell cmd uimode night yes
-adb shell cmd uimode night no
-adb shell settings put system font_scale 1.3
-adb shell settings put system font_scale 1.0
-~~~
 Nhiều người dùng (đặc biệt người lớn tuổi) đặt cỡ chữ lớn; nhiều người bật chế độ tối.
 Giải thích từng dòng:
 • uimode night yes / no: bật / tắt Dark mode.
 • font_scale 1.3: phóng chữ lên 130%; 1.0 trả về mặc định.
 Kiểm tra: chữ có bị cắt thành "...", chồng lên nhau, nút bị đẩy ra ngoài màn hình; chữ đen trên nền đen khi bật Dark mode; icon và logo vẫn nhìn rõ.
 Đổi ngôn ngữ thiết bị (tiếng Anh, tiếng Việt, tiếng Đức có từ rất dài) để xem chữ có tràn không.
+~~~bash
+adb shell cmd uimode night yes
+adb shell cmd uimode night no
+adb shell settings put system font_scale 1.3
+adb shell settings put system font_scale 1.0
+~~~
 
 ### Màn hình nhỏ, xoay màn hình, bàn phím
+Lỗi "bàn phím che ô nhập" rất phổ biến ở form dài và màn hình nhỏ: người dùng gõ mà không thấy mình đang gõ gì.
+Test với ít nhất 2 bàn phím khác nhau (bàn phím mặc định của hãng và Gboard) vì cách chúng đẩy giao diện lên có thể khác nhau.
 ~~~text
 [ ] Màn hình nhỏ nhất trong ma trận: không phải cuộn ngang, nút không bị che
 [ ] Màn hình có "tai thỏ"/lỗ camera: nội dung không bị khuất
@@ -563,15 +566,8 @@ Kiểm tra: chữ có bị cắt thành "...", chồng lên nhau, nút bị đ�
 [ ] Nút Next trên bàn phím chuyển sang ô tiếp theo
 [ ] Chạm ra ngoài / bấm Back đóng bàn phím đúng cách
 ~~~
-Lỗi "bàn phím che ô nhập" rất phổ biến ở form dài và màn hình nhỏ: người dùng gõ mà không thấy mình đang gõ gì.
-Test với ít nhất 2 bàn phím khác nhau (bàn phím mặc định của hãng và Gboard) vì cách chúng đẩy giao diện lên có thể khác nhau.
 
 ### Pin: app có "ngốn" pin không?
-~~~bash
-adb shell dumpsys battery unplug
-adb shell dumpsys battery set level 5
-adb shell dumpsys battery reset
-~~~
 Giải thích từng dòng:
 • battery unplug: giả lập rút sạc (máy vẫn sạc thật, chỉ "báo" cho Android là đang dùng pin).
 • battery set level 5: giả lập pin còn 5% để xem cảnh báo pin yếu và Battery Saver.
@@ -580,12 +576,13 @@ Cần kiểm tra:
 • Khi bật Battery Saver, chức năng chính vẫn chạy; tác vụ nền có thể chậm hơn (bình thường).
 • App không giữ GPS, không đánh thức máy liên tục khi không dùng.
 • Settings > Battery: app có nằm trong danh sách tốn pin bất thường sau 1 giờ dùng thử không.
+~~~bash
+adb shell dumpsys battery unplug
+adb shell dumpsys battery set level 5
+adb shell dumpsys battery reset
+~~~
 
 ### Bộ nhớ và dung lượng
-~~~bash
-adb shell df -h /data
-adb shell dumpsys meminfo com.example.demo
-~~~
 Giải thích từng dòng:
 • df -h /data: xem dung lượng bộ nhớ trong (cột Avail là phần còn trống).
 • dumpsys meminfo com.example.demo: xem app đang dùng bao nhiêu RAM (dòng TOTAL PSS, đơn vị KB). Ghi lại trước và sau khi dùng app 10 phút; nếu con số tăng mãi không giảm, có thể app bị rò rỉ bộ nhớ (memory leak).
@@ -593,6 +590,10 @@ Kịch bản cần test:
 • Bộ nhớ gần đầy: tải file, chụp ảnh, cập nhật app có báo lỗi rõ ràng không.
 • Dữ liệu cache của app có phình to bất thường không (Settings > Apps > Storage).
 • Máy RAM thấp: mở nhiều app nặng song song rồi quay lại app.
+~~~bash
+adb shell df -h /data
+adb shell dumpsys meminfo com.example.demo
+~~~
 
 ### Khả năng tiếp cận cơ bản
 Khả năng tiếp cận (accessibility) giúp người khiếm thị, người lớn tuổi, người khó khăn vận động dùng được app.
@@ -628,26 +629,20 @@ Ba loại bằng chứng quan trọng:
 Bật "Show taps" trong Developer options để video hiện chấm tròn nơi bạn chạm, người xem dễ theo dõi.
 
 ### Chụp ảnh và quay video bằng adb
-~~~bash
-adb shell screencap -p /sdcard/bug-01.png
-adb pull /sdcard/bug-01.png
-adb shell screenrecord /sdcard/bug-01.mp4
-adb pull /sdcard/bug-01.mp4
-~~~
 Giải thích từng dòng:
 • screencap -p: chụp màn hình thiết bị, lưu file PNG trong bộ nhớ điện thoại.
 • adb pull: kéo file từ điện thoại về thư mục hiện tại trên máy tính.
 • screenrecord: bắt đầu quay video; thao tác lại lỗi, xong bấm Ctrl + C để dừng (tối đa 3 phút mỗi lần).
 • adb pull file .mp4: lấy video về máy tính để đính kèm bug.
 Đặt tên file theo mã bug (bug-01) để dễ quản lý. Trên máy thật cũng có thể chụp bằng nút nguồn + giảm âm lượng.
+~~~bash
+adb shell screencap -p /sdcard/bug-01.png
+adb pull /sdcard/bug-01.png
+adb shell screenrecord /sdcard/bug-01.mp4
+adb pull /sdcard/bug-01.mp4
+~~~
 
 ### Đọc log với logcat
-~~~bash
-adb logcat -c
-adb logcat -d > logcat-bug-01.txt
-adb logcat -d *:E
-adb logcat -d | findstr /C:"FATAL EXCEPTION"
-~~~
 Quy trình 3 bước: xóa log cũ, tái hiện lỗi, lưu log.
 Giải thích từng dòng:
 • logcat -c: xóa sạch bộ đệm log.
@@ -655,23 +650,32 @@ Giải thích từng dòng:
 • *:E: chỉ hiện các dòng mức Error.
 • findstr /C:"FATAL EXCEPTION": tìm đúng cụm từ báo app crash (/C: để tìm cả cụm, không tách từng từ). Bên dưới là tên lỗi như java.lang.NullPointerException và các dòng "at ...".
 Không cần hiểu hết log; chỉ cần lưu đúng lúc và đính kèm. Trước khi gửi, kiểm tra log không chứa mật khẩu, token hay thông tin cá nhân.
+~~~bash
+adb logcat -c
+adb logcat -d > logcat-bug-01.txt
+adb logcat -d *:E
+adb logcat -d | findstr /C:"FATAL EXCEPTION"
+~~~
 
 ### Crash, ANR và adb bugreport
-~~~bash
-adb bugreport bugreport-01.zip
-~~~
 Hai kiểu lỗi nặng trên Android:
 • Crash: app tự đóng, có khi hiện "App keeps stopping". Trong log có FATAL EXCEPTION.
 • ANR (Application Not Responding): app treo khoảng 5 giây trở lên, hệ thống hiện hộp thoại "App isn't responding" với nút Close app / Wait.
 Lệnh trên gom log, trạng thái hệ thống và nhiều thông tin khác vào một file zip (mất 1–3 phút, file khá lớn). Dùng khi dev cần điều tra sâu crash hoặc ANR.
 Trên iPhone: báo cáo crash nằm ở Settings > Privacy & Security > Analytics & Improvements > Analytics Data.
 Lưu ý: file bugreport chứa rất nhiều thông tin thiết bị; chỉ tạo trên máy test và chỉ chia sẻ trong hệ thống nội bộ.
+~~~bash
+adb bugreport bugreport-01.zip
+~~~
 
 ### Mẫu bug report mobile
+Bug mobile thiếu thông tin thiết bị, phiên bản hệ điều hành, bản build và mạng gần như không thể xử lý.
+Tiêu đề nên trả lời: ở đâu, làm gì, chuyện gì xảy ra; thêm tiền tố [Android] hoặc [iOS].
+Ghi tần suất (5/5, 1/10) và thử trên máy thứ hai để biết lỗi chung hay chỉ riêng một dòng máy.
 ~~~text
 Tiêu đề: [Android] Crash khi xoay màn hình ở bước nhập địa chỉ giao hàng
 Môi trường:
-  Thiết bị: Samsung SM-A546E | Android 14 (API 34)
+  Thiết bị: Sợi Mầm LAB-MAM-A | Android 14 (API 34)
   Bản build: 2.3.0 (build 230) - môi trường STAGING
   Mạng: WiFi | Ngôn ngữ: Tiếng Việt | Cỡ chữ: mặc định
 Điều kiện trước: đăng nhập tài khoản test qa_user01, có 1 sản phẩm trong giỏ
@@ -681,12 +685,9 @@ Các bước:
   3. Xoay ngang màn hình
 Kết quả mong đợi: form giữ nguyên dữ liệu, không crash
 Kết quả thực tế: app đóng, hiện "App keeps stopping"
-Tần suất: 5/5 lần | Cũng xảy ra trên: Pixel emulator Android 15
+Tần suất: 5/5 lần | Cũng xảy ra trên: Emulator Nếp B Android 15
 Bằng chứng: bug-01.mp4, logcat-bug-01.txt (dòng FATAL EXCEPTION)
 ~~~
-Bug mobile thiếu thông tin thiết bị, phiên bản hệ điều hành, bản build và mạng gần như không thể xử lý.
-Tiêu đề nên trả lời: ở đâu, làm gì, chuyện gì xảy ra; thêm tiền tố [Android] hoặc [iOS].
-Ghi tần suất (5/5, 1/10) và thử trên máy thứ hai để biết lỗi chung hay chỉ riêng một dòng máy.
 
 ### Bug report tệ và cách sửa
 Bản tệ: "App bị lỗi khi thanh toán, sửa gấp!"
@@ -714,3 +715,304 @@ Q: Hộp thoại "App isn't responding" là dấu hiệu của loại lỗi nào
 - Crash do hết dung lượng
 + ANR: app bị treo, không phản hồi
 - Lỗi quyền truy cập
+
+## LESSON mobile-manual-09 | Nâng cấp và migration dữ liệu ngoại tuyến
+
+### Dữ liệu cũ là đầu vào migration
+App giả định Nếp Mực lưu đăng ký chờ gửi ở schema1 và nâng lên schema2 có requestId. Clean install không tạo dữ liệu cũ nên không kiểm được lỗi này; chuẩn bị bộ fixture theo từng đường nâng cấp hỗ trợ.
+~~~text
+v1 -> v2: draft rỗng / draft đủ / pending / sent
+v1 -> v3 nếu được hỗ trợ: cần đường migration rõ
+Mỗi fixture có số bản ghi và trạng thái kỳ vọng
+Không dùng backup cá nhân làm dữ liệu thử.
+~~~
+
+### Giữ ý định pending khi nâng cấp
+Đăng ký chưa gửi phải còn họ tên, lớp, thời điểm và khóa chống lặp phù hợp. Nếu thiếu requestId ở bản cũ, chính sách sinh mã phải ổn định cho cùng ý định; không tùy tiện đánh mọi pending thành sent.
+~~~text
+Trước: P7 pending, lớp CL4, qty 1
+Sau: P7 pending, requestId mới theo migration
+Phục hồi mạng: server tạo đúng 1 enrollment
+Mở lại app: P7 confirmed, không gửi thêm
+~~~
+
+### Nâng cấp lỗi và bộ nhớ gần đầy
+Mô phỏng thiếu dung lượng trong emulator hoặc thiết bị lab được quản lý. Expected có thể là từ chối an toàn, giữ dữ liệu cũ và hướng xử lý; không thử lấp ổ cá nhân hay xóa ngẫu nhiên file hệ thống.
+
+### Backup không chỉ là copy file
+Khôi phục dữ liệu có thể gặp schema khác, khóa mã hóa khác hoặc tài khoản hết quyền. Xác định backup được sản phẩm hỗ trợ và kiểm yêu cầu đăng nhập lại; dữ liệu có sẵn không tự cấp quyền.
+
+### Nghiệm thu bằng đối soát trước sau
+Chụp id, trạng thái và tổng theo nhóm của fixture giả trước nâng cấp. Sau đó kiểm từng bản ghi và sync; chỉ số lượng bằng nhau có thể che một dòng mất được bù bằng một dòng trùng.
+
+PRACTICE: Lập mười ca migration theo hai phiên bản lab, gồm pending và dữ liệu hỏng có kiểm soát. Nộp bảng before/after theo id, kết quả sync và phương án phục hồi khi nâng cấp thất bại.
+Q: Migration offline nên kiểm từ phiên bản nào?
++ Các đường nâng cấp còn được hỗ trợ
+- Chỉ bản hiện tại sạch
+- Mọi phiên bản không phân biệt
+Q: Dữ liệu pending sau nâng cấp cần gì?
++ Giữ ý định và tránh mất/trùng theo hợp đồng
+- Luôn xóa sạch
+- Luôn coi đã gửi
+Q: Khôi phục backup qua phiên bản khác cần kiểm gì?
++ Khả năng đọc, schema và chính sách bảo mật
+- Chỉ dung lượng file
+- Chỉ icon app
+
+## LESSON mobile-manual-10 | Khả năng tiếp cận và cỡ chữ hệ thống
+
+### Phóng to chữ theo cài đặt hệ thống
+Màn đăng ký giả định có label, lỗi và nút hành động. Kiểm cỡ chữ lớn nhất thuộc phạm vi hỗ trợ, xoay ngang/dọc nếu app hỗ trợ; không chỉ kiểm tên màn hình vì lỗi và nút thường bị cắt trước.
+
+### Kiểm luồng bằng công nghệ hỗ trợ
+Dùng trình đọc màn hình có sẵn trên thiết bị lab, tắt màn hình quan sát nếu quy trình cho phép rồi đi qua form. Ghi tên, vai trò, trạng thái và thứ tự focus; không diễn giải âm thanh chỉ từ ảnh.
+
+### Nội dung lỗi phải được nhận biết
+Gửi form thiếu lớp, kiểm lỗi được thông báo và gắn đúng trường. Focus không được nhảy về đầu khiến người dùng mất vị trí; expected cụ thể theo thiết kế accessibility đã chốt.
+~~~text
+Thao tác: gửi thiếu lớp
+Expected: lỗi có tên trường, được đọc, không chỉ đổi màu
+Focus: đến lỗi hoặc giữ tại vị trí có hướng xử lý hợp lý
+Sửa lớp: lỗi được cập nhật và không đọc lặp vô hạn
+~~~
+
+### Mục tiêu chạm và trạng thái động
+Đánh giá vùng chạm thực, khoảng cách control và khả năng thao tác khi tay không chính xác. Khi danh sách tải thêm hoặc modal đóng, focus và thông báo cần có nghĩa; scan tự động chỉ hỗ trợ một phần.
+
+### Báo lỗi bằng tác động thực tế
+Ghi người dùng không đọc được phần nào hoặc không thể hoàn tất bước nào. Kèm build, OS, cỡ chữ, công nghệ hỗ trợ và bước tái hiện, không chỉ ghi giao diện xấu.
+
+PRACTICE: Kiểm form, danh sách và modal ở cỡ chữ mặc định/lớn cùng trình đọc màn hình lab. Nộp sáu finding hoặc bằng chứng đạt, thứ tự focus và giới hạn thiết bị đã kiểm.
+Q: Cỡ chữ hệ thống lớn cần kiểm gì?
++ Nội dung, thao tác và bố cục còn dùng được
+- Chỉ font đổi màu
+- Cố định cỡ chữ nhỏ
+Q: TalkBack/VoiceOver xanh một màn hình đã đủ chưa?
++ Chưa
+- Đủ cho mọi app
+- Đủ nếu có screenshot
+
+## LESSON mobile-manual-11 | Thông báo, múi giờ và liên kết vào ứng dụng
+
+### Phân biệt thời điểm và ngày địa phương
+Lịch lớp giả định bắt đầu ở một thời điểm xác định, còn hạn đăng ký theo ngày nơi lớp diễn ra. Hai loại dữ liệu cần expected khác nhau; đổi timezone thiết bị không được tự thay nghĩa ngày nghiệp vụ.
+
+### Ma trận thông báo theo trạng thái app
+Kiểm foreground, background, app đóng và sau logout. Thông báo đến không bảo đảm quyền xem nội dung còn hiệu lực; khi chạm, app phải kiểm trạng thái hiện tại thay vì tin payload cũ.
+~~~text
+trạng thái | thao tác | expected lab
+foreground | nhận nhắc lớp | không nhân màn hình
+background | chạm nhắc | vào lớp đúng id
+logout | chạm nhắc cũ | yêu cầu đăng nhập,không lộ dữ liệu
+lớp đã hủy | chạm | thông báo trạng thái hiện tại
+~~~
+
+### Đổi giờ theo ca có kiểm soát
+Trong emulator lab, chọn hai timezone và mốc gần nửa đêm. Ghi timestamp gốc, timezone, giờ hiển thị và expected; phục hồi cấu hình sau thử, không thay giờ máy dùng công việc một cách ngẫu nhiên.
+~~~text
+Lớp:2030-05-12T01:00:00Z
+Thiết bị vùng+07 ->08:00 ngày12
+Thiết bị vùng-03 ->22:00 ngày11
+Ngày nghiệp vụ nơi lớp diễn ra được kiểm riêng.
+~~~
+
+### Liên kết đích không bỏ qua quyền
+Thử id lớp đã xóa, khác chủ, tham số sai và link lặp. Chỉ dùng example.com/localhost hoặc scheme của app giả định; không gửi link tới người khác hay truy tài nguyên ngoài lab.
+
+### Bẫy thông báo trùng và sai người
+Đăng nhập người mới trên cùng thiết bị rồi kiểm token đăng ký nhận thông báo được đổi/hủy theo chính sách. Không để nhắc lớp người cũ lộ trên màn khóa; nội dung preview cần phù hợp quyền riêng tư.
+
+PRACTICE: Lập mười hai ca notification/deep link/timezone, có mốc gần nửa đêm và logout. Nộp bảng timestamp/giờ hiển thị, đích mở và kiểm dữ liệu người cũ không xuất hiện.
+Q: Thông báo chứa thông tin nhạy cảm cần kiểm đâu?
++ Màn khóa, nội dung và chính sách người nhận
+- Chỉ màu icon
+- Chỉ âm thanh
+Q: Lịch theo ngày địa phương cần thử gì?
++ Đổi múi giờ, ngày và quy tắc hiển thị
+- Chỉ định dạng chữ
+- Luôn dùng UTC cho mọi nghĩa
+Q: Chạm thông báo sau logout cần kiểm gì?
++ Xác thực và không lộ dữ liệu trước quyền
+- Tự vào tài khoản cũ
+- Chỉ app không crash
+
+## LESSON mobile-manual-12 | Dữ liệu cá nhân, lưu nền và xóa tài khoản
+
+### Lập bản đồ dữ liệu tài khoản
+App giả định lưu draft, cache lịch, token và ảnh đính kèm lab. Xác định thứ gì thuộc tài khoản, thứ gì công khai và thời hạn lưu trước khi kiểm logout/xóa; không mặc định xóa toàn thiết bị là đúng.
+
+### Đổi người dùng trên cùng thiết bị
+Người S4 đăng xuất rồi S9 đăng nhập. Kiểm màn gần đây, cache, tìm kiếm, file tải và thông báo không lộ nội dung S4; dữ liệu giả được gắn dấu riêng để dễ nhận ra.
+~~~text
+S4 tạo note CANARY-LAB-S4
+Logout,đóng/mở app,đăng nhập S9
+Tìm note ở danh sách/search/recent/notification
+Expected: không lộ note; dữ liệu công khai vẫn theo chính sách.
+~~~
+
+### Luồng yêu cầu xóa có nhiều giai đoạn
+Sản phẩm có thể xử lý bất đồng bộ và lưu một số dữ liệu theo chính sách. Kiểm xác nhận, thu hồi quyền, trạng thái đang xử lý và thông báo hoàn tất; không tự hứa xóa tức thì khỏi mọi backup.
+
+### Khôi phục từ nền không vượt xác thực
+Sau logout hoặc token hết hiệu lực, app quay foreground phải kiểm lại quyền theo thiết kế. Hình chụp preview và dữ liệu đã cache cần được xử lý phù hợp, không chỉ đổi nút đăng nhập.
+
+### Evidence tránh lộ chính dữ liệu đang kiểm
+Dùng canary tự đặt thay thông tin thật, che token và ghi id giả. Báo cáo mô tả nơi dữ liệu còn lại, điều kiện truy cập và tác động; không đính kèm toàn bộ bộ nhớ thiết bị.
+
+PRACTICE: Viết ma trận logout/đổi tài khoản/yêu cầu xóa gồm cache,preview,thông báo,file. Chạy bằng hai tài khoản giả, nộp canary và kết quả có phạm vi, ghi chính sách còn cần xác nhận.
+Q: Logout cần xem xét dữ liệu nào?
++ Cache, màn gần đây và thông báo theo chính sách
+- Chỉ biến trên UI
+- Xóa mọi dữ liệu thiết bị
+Q: Xóa tài khoản cần kiểm điều gì?
++ Luồng xác nhận, trạng thái xử lý và dữ liệu theo chính sách
+- Chỉ nút biến mất
+- Luôn hứa xóa mọi backup tức thì
+
+## LESSON mobile-manual-13 | Dự án: chiến lược kiểm thử một bản phát hành
+
+### Chiến lược theo rủi ro bản phát hành
+Bản lab Nếp Mực thêm offline và notification nên migration/outbox/quyền là trọng tâm. Nêu tác động, xác suất và lý do ưu tiên; không chia đều thời gian cho mọi màn hình chỉ để đủ số ca.
+
+### Ma trận tối thiểu nhưng có lý do
+Chọn hai OS còn hỗ trợ, cỡ màn hình, trạng thái cài mới/nâng cấp và mạng. Dùng ghép cặp hoặc lựa chọn theo rủi ro nhưng vẫn giữ các tổ hợp đặc biệt như nâng cấp+pending+offline.
+~~~text
+R1 mất draft: upgrade+pending+offline
+R2 lộ dữ liệu: logout+notification cũ
+R3 không thao tác được: chữ lớn+form lỗi
+R4 sai giờ: đổi timezone+gần nửa đêm
+Mỗi rủi ro có expected và evidence owner.
+~~~
+
+### Kế hoạch chạy và điều kiện dừng
+Smoke xác nhận build có thể kiểm trước regression. Nếu migration làm mất fixture hoặc app crash luồng chính, ghi blocker và phạm vi ảnh hưởng; không tiếp tục hàng trăm ca vô nghĩa trên nền sai.
+
+### Go/no-go thể hiện rủi ro còn lại
+Báo lỗi mở, severity/priority đã thống nhất, coverage, thiết bị chưa kiểm và khả năng rollback/giám sát. Người có trách nhiệm quyết định, QA cung cấp bằng chứng và kiến nghị rõ.
+
+### Gói nghiệm thu có thể kiểm lại
+Nộp ma trận, ít nhất hai mươi ca, exploratory charter, bug report và release report. Thực hiện một vòng retest/regression sau sửa để phân biệt lỗi đã khắc phục với tác dụng phụ mới.
+
+PRACTICE: Bàn giao chiến lược kiểm release lab với hai mươi ca và ba charter, dữ liệu giả, ma trận thiết bị, bằng chứng, go/no-go có lý do. Nêu phần không đủ thiết bị để kiểm và biện pháp xử lý rủi ro.
+Q: Go/no-go mobile nên dựa vào gì?
++ Rủi ro còn lại, lỗi, coverage và khả năng phục hồi
+- Chỉ số ca pass
+- Chỉ deadline
+Q: Bàn giao chiến lược cần có gì?
++ Ma trận, luồng, expected, evidence và khoảng trống
+- Chỉ danh sách máy
+- Mật khẩu thiết bị thật
+
+## LESSON mobile-manual-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. Mobile chịu trạng thái nền/foreground, quyền và tài nguyên thiết bị, cần ma trận theo hành vi thực tế.
+2. Lựa chọn đại diện cần được giải thích và ghi khoảng trống; số máy nhiều chưa chắc đủ rủi ro.
+3. Dữ liệu tồn và schema cũ tạo rủi ro migration không xuất hiện khi cài mới.
+4. Cuộc gọi, khóa màn hình hoặc đổi app có thể làm mất draft hoặc lặp thao tác; expected theo chính sách.
+
+### Dữ liệu và điều kiện biên
+5. Không nhận response không chứng minh server chưa ghi; cần đối chiếu và cơ chế chống lặp.
+6. App nên giải thích và giảm chức năng theo thiết kế, không làm hỏng phần không cần quyền.
+7. Link không được bỏ qua xác thực hoặc đưa dữ liệu ngoài quyền; trạng thái đăng nhập/nền cũng ảnh hưởng.
+8. Thu phạm vi cần, dùng dữ liệu giả và che bí mật; artifact cần kiểm quyền truy cập.
+
+### Tính đúng và cách điều tra
+9. Ma trận phải theo cam kết hỗ trợ và schema cũ; bao gồm dữ liệu chưa sync khi nâng cấp.
+10. Migration phải giữ đủ metadata như requestId/trạng thái để sync đúng một ý định sau đó.
+11. Backup có thể mang dữ liệu cũ hoặc quyền không còn hợp lệ; kiểm phiên bản và đăng nhập lại theo thiết kế.
+12. Không để chữ cắt mất nghĩa, nút chồng hoặc lỗi không đọc được; kiểm nhóm màn hình rủi ro.
+
+### Rủi ro và lựa chọn phương án
+13. Tên, vai trò, thứ tự, focus và hành vi cần kiểm trên các luồng quan trọng; một màn hình không đại diện toàn app.
+14. Người chưa mở khóa có thể thấy preview; quyền thông báo và lựa chọn riêng tư phải được tôn trọng.
+15. Instant và ngày địa phương khác nhau; expected phụ thuộc việc lịch gắn thời điểm hay ngày tại nơi diễn ra.
+16. Deep link từ thông báo phải qua kiểm quyền hiện tại, kể cả payload hoặc session đã cũ.
+
+### Dự án, bằng chứng và bàn giao
+17. Phân biệt dữ liệu công khai, dữ liệu tài khoản và khóa cục bộ; kiểm không lộ sau đổi người dùng.
+18. Yêu cầu xóa, thời hạn, phần phải lưu và thu hồi quyền cần minh bạch theo thiết kế đã duyệt.
+19. Quyết định cần bằng chứng và người chịu trách nhiệm; test không bảo đảm không còn lỗi.
+20. Người khác phải biết build nào, điều kiện nào đã kiểm và rủi ro chưa được kiểm trước phát hành.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Mobile có rủi ro nào khác desktop web?
++ OS lifecycle, cảm biến, pin và mạng đổi
+- Chỉ màn hình nhỏ
+- Không cần kiểm dữ liệu
+Q: Ma trận thiết bị nên chọn theo gì?
++ Người dùng, rủi ro và môi trường hỗ trợ
+- Mọi thiết bị từng bán
+- Chỉ máy tester có
+Q: Clean install và upgrade khác ở đâu?
++ Upgrade phải xử lý dữ liệu/cấu hình cũ
+- Hai ca luôn giống nhau
+- Upgrade không cần đăng nhập
+Q: Interruption cần kiểm gì sau khi quay lại app?
++ Trạng thái và dữ liệu người dùng
+- Chỉ app mở được
+- Chỉ màu nền
+Q: Đổi mạng khi đang gửi có rủi ro gì?
++ Mất phản hồi hoặc gửi trùng
+- Server luôn rollback
+- Mọi request tự thành công
+Q: Từ chối quyền cần kiểm điều gì?
++ Chức năng bị ảnh hưởng và hướng xử lý
+- Buộc app crash
+- Tự cấp lại quyền không hỏi
+Q: Deep link phải kiểm gì ngoài mở app?
++ Quyền, tham số và màn hình đích
+- Chỉ scheme đúng
+- Chỉ logo xuất hiện
+Q: Log mobile có thể chứa gì?
++ Dữ liệu cá nhân và thông tin quyền
+- Chỉ số FPS
+- Luôn vô hại
+Q: Migration offline nên kiểm từ phiên bản nào?
++ Các đường nâng cấp còn được hỗ trợ
+- Chỉ bản hiện tại sạch
+- Mọi phiên bản không phân biệt
+Q: Dữ liệu pending sau nâng cấp cần gì?
++ Giữ ý định và tránh mất/trùng theo hợp đồng
+- Luôn xóa sạch
+- Luôn coi đã gửi
+Q: Khôi phục backup qua phiên bản khác cần kiểm gì?
++ Khả năng đọc, schema và chính sách bảo mật
+- Chỉ dung lượng file
+- Chỉ icon app
+Q: Cỡ chữ hệ thống lớn cần kiểm gì?
++ Nội dung, thao tác và bố cục còn dùng được
+- Chỉ font đổi màu
+- Cố định cỡ chữ nhỏ
+Q: TalkBack/VoiceOver xanh một màn hình đã đủ chưa?
++ Chưa
+- Đủ cho mọi app
+- Đủ nếu có screenshot
+Q: Thông báo chứa thông tin nhạy cảm cần kiểm đâu?
++ Màn khóa, nội dung và chính sách người nhận
+- Chỉ màu icon
+- Chỉ âm thanh
+Q: Lịch theo ngày địa phương cần thử gì?
++ Đổi múi giờ, ngày và quy tắc hiển thị
+- Chỉ định dạng chữ
+- Luôn dùng UTC cho mọi nghĩa
+Q: Chạm thông báo sau logout cần kiểm gì?
++ Xác thực và không lộ dữ liệu trước quyền
+- Tự vào tài khoản cũ
+- Chỉ app không crash
+Q: Logout cần xem xét dữ liệu nào?
++ Cache, màn gần đây và thông báo theo chính sách
+- Chỉ biến trên UI
+- Xóa mọi dữ liệu thiết bị
+Q: Xóa tài khoản cần kiểm điều gì?
++ Luồng xác nhận, trạng thái xử lý và dữ liệu theo chính sách
+- Chỉ nút biến mất
+- Luôn hứa xóa mọi backup tức thì
+Q: Go/no-go mobile nên dựa vào gì?
++ Rủi ro còn lại, lỗi, coverage và khả năng phục hồi
+- Chỉ số ca pass
+- Chỉ deadline
+Q: Bàn giao chiến lược cần có gì?
++ Ma trận, luồng, expected, evidence và khoảng trống
+- Chỉ danh sách máy
+- Mật khẩu thiết bị thật

@@ -4,7 +4,7 @@ icon: 🖥️
 floor: 7
 room: 701
 level: Cơ bản → Thực hành
-hours: 16
+hours: 28
 summary: Xây dựng API đặt cơm giả lập bằng Express và FastAPI; hiểu routing, validation, SQL/ORM, xác thực, log, kiểm thử và cache với ví dụ chạy cục bộ.
 
 ## LESSON backend-01 | HTTP/REST: hợp đồng giữa hai phía
@@ -431,3 +431,371 @@ Q: Khóa cache /profile chung nguy hiểm vì sao?
 + Có thể trả dữ liệu người này cho người khác
 - Vì URL quá ngắn
 - Vì TTL không bao giờ hết
+
+## LESSON backend-09 | Transaction đồng thời và idempotency
+
+### Bất biến phải giữ khi nhiều người cùng ghi
+API trung tâm giả định Thoi Vân còn một chỗ nhưng hai học viên có thể cùng đọc remaining1. Transaction không tự sửa kiểu read-modify-write sai;đặt kiểm quota ở một cập nhật nguyên tử rồi kiểm số dòng được nhận.
+
+### Conditional update theo dialect PostgreSQL
+Schema lab có remaining nguyên không âm. Câu UPDATE dưới trả một dòng khi lấy được chỗ,không dòng khi hết hoặc không có lớp;service cần phân loại theo quyền/hợp đồng và rollback phần khác nếu không thể hoàn tất.
+~~~sql
+UPDATE classes SET remaining=remaining-1
+WHERE id=$1 AND remaining>0
+RETURNING id,remaining;
+-- $1 là tham số do driverbind,không nối input vào SQL.
+-- INSERT enrollment và các ghi liên quan ở cùngtransaction.
+~~~
+
+### Khóa chống lặp cần scope và fingerprint
+Bảng ý định ràng actor/key duy nhất,hash để phát hiện cùng key khác payload. Đây là schema tối giản:không lưu secret,phải thiết kế TTL,status/kết quả và xử lý cạnh tranh;hash không thay validation quyền.
+~~~sql
+CREATE TABLE idempotency (
+ actor_id TEXT NOT NULL, request_key TEXT NOT NULL,
+ payload_hash TEXT NOT NULL, response_json JSONB,
+ PRIMARY KEY(actor_id,request_key)
+);
+~~~
+
+### Thứ tự trong service cần cơ chế nguyên tử
+Pseudocode mô tả hợp đồng adapter,không phải thư viện có sẵn. Reservation key,quota,enrollment,outbox và response cache cùng transaction lab;request cạnh tranh cùng key phải đợi/đọc kết quả theo engine,không commit một pending vô chủ.
+~~~text
+BEGIN
+reserve(actor,key,hash) hoặc đọc kết quả đã commit
+if key tồn tại:verify hash,return same result theo rule
+else:take seat atomically;insert enrollment/outbox
+store result for key
+COMMIT; nếu lỗi trước commit thì ROLLBACK
+Timeout saucommit:client dùng lại key hoặc query status
+~~~
+
+### Kiểm đúng cơ chế dưới cạnh tranh
+Dùng barrier lab cho hai request tranh chỗ cuối và hai request cùng key. Assert response cả hai,recordcount và remaining saucommit;thử crash trước/saucommit,không chỉ một POST tuần tự xanh.
+
+PRACTICE: Bổ sung transaction/idempotency choAPI lab,có actor/key/hash và conditional quota. Nộp sáuca cạnh tranh/retry/payloadconflict cùng snapshot trước/sau,ghi policy businesserror/TTL và điểm rollback.
+Q: Hai request tranh chỗ cuối nên cập nhật thế nào?
++ Có kiểm nguyên tử và affected rows theo thiết kế
+- Đọc remaining rồi ghi giá trị cũ trừ1
+- Chỉ khóa nút UI
+Q: Idempotency key cần ràng buộc với gì?
++ Actor,ý định và payload theo hợp đồng
+- Mỗi retry key mới
+- Mọi giao dịch cùng key
+Q: Timeout client sauPOST có chứng minh server chưa commit không?
++ Không
+- Có luôn
+- Có nếu trình duyệt đóng
+
+## LESSON backend-10 | Tác vụ nền, outbox và xử lý trùng
+
+### Ghi ý định gửi trong cùng database
+Sau tạo enrollment,worker cần gửi thông báo. Nếu ghi DB rồi gọi broker ở hai bước riêng,có thể mất thông báo khi crash;outbox ghi enrollment và sự kiện cùng transaction cục bộ,relay đọc saucommit.
+
+### Bảng outbox cần định danh và trạng thái
+Schema PostgreSQL lab lưu eventId duy nhất và payload tối thiểu. Thiết kế published/lease/retry cho relay cần được chốt ngoài schema này;không khẳng định mỗi event chỉ được gửi một lần.
+~~~sql
+CREATE TABLE outbox (
+ event_id TEXT PRIMARY KEY, aggregate_id TEXT NOT NULL,
+ kind TEXT NOT NULL,payload JSONB NOT NULL,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT now(),published_at TIMESTAMPTZ
+);
+~~~
+
+### Transaction phát sinh dữ liệu và event
+Đoạn SQL là ảnh cấu trúc,tham số đúng driver. Nếu insert outbox fail,rollback enrollment và quota trong cùng transaction;gọi email/provider ngoài không nằm trongrollback này.
+~~~sql
+BEGIN;
+-- Sau bướcquota đãđược bảo vệ:
+INSERT INTO enrollments(id,class_id,student_id,status) VALUES($1,$2,$3,'confirmed');
+INSERT INTO outbox(event_id,aggregate_id,kind,payload) VALUES($4,$1,'EnrollmentConfirmed',$5);
+COMMIT;
+~~~
+
+### Consumer idempotent vẫn cần thiết
+Relay có thể gửi rồi crash trước đánh dấu published.Consumer local có thể dùng processed_events unique cùng transaction với tác dụng DB;nếu tác dụng ngoài như email,cần provider key/ledger và reconciliation phù hợp.
+~~~text
+receive E7
+BEGIN:claim E7 cho consumerC,apply local effect,COMMIT
+duplicate E7 ->không áp lại local effect
+ack sau khi đủ điều kiện theo brokercontract
+external send:thiết kế riêng,không claim DBrollback hoàn tác email
+~~~
+
+### Kiểm mất,lặp và sai thứ tự
+Crash saubusinesscommit,trước publish,sau publish/trước mark là các điểm khác nhau. Đối soát enrollment/outbox/consumerledger và kết quả cuối;event đến muộn cần version/order rule chứ không dedup chỉ theo type.
+
+PRACTICE: Nộp outbox/relay/consumer contract và crashmatrix sáu điểm. Thực hiện trên lab bằng queue stub hoặc DB riêng,có duplicate/out-of-order và giới hạn tác dụng ngoài,chưa nhận exactly-once toàn hệ thống.
+Q: Outbox giải quyết khoảng trống nào?
++ Ghi dữ liệu và ý định phát sự kiện cùng transaction cục bộ
+- Tự bảo đảm broker không lỗi
+- Tự đúng một lần mọi tác dụng ngoài
+Q: Consumer nhận event hai lần nên làm gì?
++ Kiểm trùng và tác dụng trong cùng phạm vi nguyên tử khi phù hợp
+- Áp tác dụng hai lần
+- Bỏ mọi event giống type
+Q: Email gửi ngoài database có nằm trong transaction DB không?
++ Không
+- Có nếu gọi trước COMMIT
+- Có nếu function async
+
+## LESSON backend-11 | Tương thích API, migration và rollout
+
+### API tiến hóa cùng client và schema
+Đổi remaining từ number sangstring có thể phá client dù status200. Ghi hợp đồng và client tiêu thụ,phân loại thêm field optional,thêm field bắt buộc,xóa/đổi type;chính sách version phải được kiểm,không đoán mọi additive đều an toàn.
+
+### Compatibility matrix trong cửa sổ rollout
+Tronglab,có appA cũ và appB mới dùng chung DB. Xác định read/write nào được hỗ trợ,kể cả worker/report;không chỉ kiểm giao diện mới trên schema mới rồi xóa cột cũ ngay.
+~~~text
+appA +schema1 ->baseline
+appA +schema2 expanded ->cần đọc/ghi được theo plan
+appB +schema2 ->new flow
+rollback appB->A ->schema/data vẫn tương thích?
+contract phase chỉ khi old readers không còn theo evidence
+~~~
+
+### Expand rồi backfill có đối soát
+Thêm field nullable trước,chuyển writer/reader theo kế hoạch rồi backfill và kiểm. Constraint hoặc drop cuối cần cơ chế engine thích hợp,có backup/restore;không gọi SQL ngắn là migration production hoàn chỉnh.
+~~~sql
+ALTER TABLE enrollments ADD COLUMN source_version INTEGER;
+-- Backfill theo rule đãchốt trênbảnlab riêng.
+UPDATE enrollments SET source_version=1 WHERE source_version IS NULL;
+SELECT COUNT(*) FROM enrollments WHERE source_version IS NULL;
+-- Constraint/contract tiếp theo được thiết kế và kiểm riêng.
+~~~
+
+### Response lỗi cũng là hợp đồng
+Client cần mã ổn định và path/lý do phù hợp,không stacktrace nội bộ. Test thiếu field/null/sai type và quyền,kèm compatibility của consumer;không thay mọi lỗi thành200 để client không fail.
+~~~text
+{"error":{"code":"QTY_INVALID","path":"qty","message":"Số lượng không hợp lệ","requestId":"REQ-LAB-7"}}
+HTTP status theo hợp đồng,không suy từ text message
+Không đưa token,SQLthô hoặc stacktrace vào responsepublic
+~~~
+
+### Rollback code không rollback mọi dữ liệu
+Write mới hoặc backfill mất thông tin có thể không đọc bằng app cũ. Nêu migrationforwardfix/restore/đối soát và thời điểm dừng ghi,kiểm bằng fixture cũ/mới thay vì chỉ lệnh redeployimage.
+
+PRACTICE: Viết compatibility matrix12ô chohaiapp/hai schema,contract diff và migration lab. Nộp backfill/đốisoát/restore evidence hoặc ghi phần thiết kế chưa thực thi.
+Q: Migration expand-contract nhắm gì?
++ Giữ tương thích trong cửa sổ nhiều version
+- Xóa field ngay trước app cũ
+- Không cần kiểm dữ liệu
+Q: Deploy rollback code có luôn khôi phục schema/data không?
++ Không
+- Có luôn
+- Có nếu image cũ
+
+## LESSON backend-12 | Quan sát, deadline và giới hạn phụ thuộc
+
+### Request có ngân sách xuyên phụ thuộc
+API gọi database và notification có thể tích lũy timeout/retry vượt thời gian người dùng chờ. Chốt deadline,phân bổ ngân sách còn lại,giới hạn concurrency và phân loại lỗi;không mỗi tầng tự đợi30 giây bấtchấp cả luồng.
+
+### Abort là cơ chế hợp tác
+Fetch Node hỗ trợ signal,nhưng hủy client không bảo đảm server chưa commit. Mã minh họa chỉ đọc dependency lab;với thao tác ghi cần idempotency và đối soát trạng thái.
+~~~js
+const controller=new AbortController();
+const timer=setTimeout(()=>controller.abort(),600);
+try{
+ const r=await fetch('http://localhost:3200/notify-status',{signal:controller.signal});
+ if(!r.ok)throw new Error(`dependency_${r.status}`);
+ return await r.json();
+}finally{clearTimeout(timer);}
+~~~
+
+### Metric và log đủ liên kết
+Latency,error,rate,saturation theoendpoint/flow hữu hạn giúp điều tra.Correlationid trong log không nên thành tag vô hạn;không log Authorization/body nhạy cảm,trạng thái nghiệp vụ phải được đo riêng khi cần.
+~~~text
+{"requestId":"REQ-LAB-7","route":"POST enrollment","status":201,"durationMs":84,"outcome":"confirmed"}
+metric labels:route/status/outcome hữu hạn
+Không tag mỗi studentId hoặc requestId vào mọi timeseries
+~~~
+
+### Giảm lỗi dây chuyền bằng giới hạn
+Bulkhead/concurrencycap,timeout,boundedretry và circuit state có thể hữu ích theo thiết kế. Chúng không tự sửa quorum/quyền/nghiệp vụ;cần kiểm nhánh mở/hồi phục và response khiqueue đầy.
+~~~text
+dependency503 ->retry có budget nếu thao tác đủ điều kiện
+queue đầy ->từ chối có kiểm soát theo contract
+deadline hết ->dừng chờ/hủy khi hỗ trợ
+recovery ->half-open/closed theo thiết kế lab
+Không retry mọi4xx hoặc ghi không chống lặp
+~~~
+
+### Readiness khác process sống
+Readiness lab có thể gồm schema đúng và dependency cần thiết,song liveness không nên tự restart mọi khiexternal lỗi gây vòng lặp. Ghi định nghĩa,probe và tác động routing theo hạ tầng đã chốt.
+
+PRACTICE: Dựng dependency stub200/503/slow và kiểm deadline,retrycap,concurrencycap,readiness. Nộp timeline/log đã che,metric hữu hạn và recovery sau hạ lỗi,có giới hạn tác dụng server.
+Q: Deadline toàn request cần truyền thế nào?
++ Theo ngân sách còn lại tới phụ thuộc phù hợp
+- Mỗi tầng tự đợi30s không liên quan
+- Chỉ timeout client là đủ
+Q: Retry mọi lỗi vô hạn có rủi ro gì?
++ Nhân tải và lặp tác dụng
+- Luôn tăng reliability
+- Chỉ tốn log
+Q: Readiness có nghĩa gì cho API lab?
++ Sẵn sàng phục vụ theo điều kiện đã chốt
+- Process còn sống là đủ
+- Chỉ có cổng mở
+
+## LESSON backend-13 | Dự án: API đặt lớp bền vững trong lab
+
+### Dự án API Thoi Vân bền vững tronglab
+Luồng tạo lớp,đăng ký,hủy và thông báo cần giữ quota,quyền,chống lặp và evidence. Chốt API/schema/fixture trước,không gọi demo là productionready hoặc đổi mục tiêu khi bị constraint.
+
+### Gói contract và dữ liệu
+PostgreSQL hoặc adapter lab cần đúng dialect/schema đã nêu,actor giả và namespace run riêng. Test-support chỉ trong lab,có quyền và cleanup,không đưa endpoint bỏ xác thực vào môi trường thật.
+~~~text
+POST /enrollments:actor/key/classId
+GET /enrollments/:id:đúng quyền
+POST /enrollments/:id/cancel:rule hủy/hoàn điểm
+outbox:eventId duy nhất,consumer idempotent
+fixture:hai actor,ba lớp,clock và dependency stub
+base:http://localhost:3100
+~~~
+
+### Test matrix đi qua trạng thái sai
+Ít nhất15 ca gồm validation,quyền,quota cuối,retry/cùng key khác payload,crash/duplicateevent,migration và dependency timeout. Expected viết độc lập,theoid và state cuối saucommit,không chỉ status.
+~~~text
+G1:happy/validation/ownership
+G2:last-seat concurrent và idempotency
+G3:outbox crash/duplicate/order
+G4:schema/clientcompatibility và restore
+G5:deadline/error/queue/recovery
+MỗiG có oracle,fixture,evidence và gap.
+~~~
+
+### Giữ phạm vi bản triển khai lab
+Nộp service,migration,test,fixture và README chạy local;các SQL/pseudocode trước là ảnh hợp đồng,cần hiện thực adapter thực và xử lý lỗi. Nếu chỉ stub,ghi đúng lớp được kiểm,chưa nhận transaction thật đã được chứng minh.
+
+### Bàn giao quyết định có căn cứ
+Report tổng hợp coverage,lỗi,planned/actual ở môi trường lab và rủi ro còn lại. Có một lỗi cài chủ đích được test phát hiện rồi phục hồi;cleanup theoid,không push/deploy hoặc gửi report ra ngoài.
+~~~text
+accept:APIcontract và server validation rõ
+accept:invariant/quyền/cạnh tranh đúng theo evidence
+accept:outbox/recovery có crashmatrix
+accept:migration/restore và observability có giới hạn
+accept:code/fixture/version/checks chạy lại được
+~~~
+
+PRACTICE: Bàn giao APIlab15 ca có quyền,transaction,idempotency,outbox,dependency và migration. Có bằng chứng một lỗi bị phát hiện,restore/cleanup,contract và phần chưa thực thi rõ.
+Q: Dự án backend cần chứng minh gì?
++ Hợp đồng,quyền,bấtbiến,cạnh tranh,phụ thuộc và phục hồi
+- Chỉ endpoint200
+- Chỉ số service
+Q: REST API cần chốt gì để client dùng đúng?
++ Method,path,status,shape và hành vi
+- Chỉ tên service
+- Chỉ response200
+
+## LESSON backend-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. HTTP là giao thức,hợp đồng nghiệp vụ cần rõ dữ liệu,quyền,lỗi và tác dụng phụ.
+2. Kiểm quy tắc matching của framework,đặt route và validation có chủ đích,không dùng tên path thay phân quyền.
+3. Dữ liệu qua trust boundary phải được kiểm ở server,không tin validation UI hoặc kiểu tĩnh client.
+4. Transaction cần thiết kế cách giữ invariant dưới cạnh tranh;kiểm hai phiên và lỗi giữa các bước.
+
+### Dữ liệu và điều kiện biên
+5. Cần xác minh chữ ký/thuộc tính theo thiết kế và kiểm quyền hiện tại;không tin claim chỉ vì đọc được JSON.
+6. Giữ khả năng điều tra mà tránh rò quyền;response public không trả stacktrace hoặc chi tiết nội bộ không cần thiết.
+7. Unit test với double kiểm logic trong điều kiện giả,phải có integration với schema/transaction thật của lab.
+8. Cache phải giữ semantics quyền và nhất quán theo hợp đồng;hitcache không thay validation quyền.
+
+### Tính đúng và cách điều tra
+9. ConditionalUPDATE hoặc cơ chế khóa phù hợp bảo vệ quota;unique và transaction giữ thêm bấtbiến khác.
+10. Cùng key khác payload cần xử lý xung đột,scope/TTL và kết quả retry phải được chốt.
+11. Server có thể đã ghi trước response mất,nên truy trạng thái hoặc retry an toàn thay vì tạo ý định mới mù.
+12. Relay có thể phát lặp,cần consumer idempotent và reconciliation;outbox không xóa mọi vấn đề phân tán.
+
+### Rủi ro và lựa chọn phương án
+13. Dedup theoeventId/consumer và hợp đồng,không bỏ nhầm update mới cùng loại;điểm ack/crash phải được kiểm.
+14. Tác dụng ngoài cần idempotency/provider contract hoặc ledger/reconciliation riêng,không claim rollbackDB hoàn tác email.
+15. Thêm trước,chuyển đọc/ghi có kiểm,backfill rồi thu gọn khioldreader không còn,có đối soát và phục hồi.
+16. Schema/data đã đổi và write mới cần kế hoạch riêng,backup/restore và compatibility phải được thử.
+
+### Dự án, bằng chứng và bàn giao
+17. Timeout/retry cộngdồn có thể vượt ngân sách,giới hạn concurrency và hủy hợp tác theo khả năng dependency.
+18. Phân loại lỗi,tổng budget,backoff/jitter và idempotency,tránh nhiều tầng retry nhân nhau.
+19. Liveness và readiness có mục đích khác,không để dependency lỗi là restartloop mù hoặc nhận traffic khi schema chưa đúng.
+20. Bằng chứng phải gắn fixture/version vàca âm,ghi rõ lab/stub,chưa suy productionready từ một demo.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: REST API cần chốt gì để client dùng đúng?
++ Method,path,status,shape và hành vi
+- Chỉ tên service
+- Chỉ response200
+Q: Route /classes/:id trước route cụ thể có thể gây gì?
++ Bắt nhầm path tùy router và thứ tự
+- Luôn nhanh hơn
+- Tự xác nhận quyền
+Q: Body JSON hợp cú pháp đã đủ chưa?
++ Chưa,cần kiểu,miền,quyền và nghiệp vụ
+- Đủ nếu có id
+- Đủ nếu body ngắn
+Q: Transaction có bảo đảm mọi quy tắc đồng thời tự đúng không?
++ Không,còn isolation,query và bất biến
+- Có luôn
+- Chỉ cần đặt BEGIN
+Q: JWT decode có thay xác minh token không?
++ Không
+- Có nếu payload đẹp
+- Có nếu chứa roleadmin
+Q: Log lỗi nên chứa gì?
++ Mã lỗi,correlation id và ngữ cảnh tối thiểu phù hợp
+- Toàn token và body
+- Mọi secret của process
+Q: Mock repository xanh có chứng minh SQL tích hợp đúng không?
++ Không
+- Có vì cùng interface
+- Có nếu coverage100%
+Q: Cache dữ liệu theo actor cần gì?
++ Key/phạm vi/invalidations không làm lộ hoặc cũ sai
+- Một key chung mọi user
+- TTL dài là đủ
+Q: Hai request tranh chỗ cuối nên cập nhật thế nào?
++ Có kiểm nguyên tử và affected rows theo thiết kế
+- Đọc remaining rồi ghi giá trị cũ trừ1
+- Chỉ khóa nút UI
+Q: Idempotency key cần ràng buộc với gì?
++ Actor,ý định và payload theo hợp đồng
+- Mỗi retry key mới
+- Mọi giao dịch cùng key
+Q: Timeout client sauPOST có chứng minh server chưa commit không?
++ Không
+- Có luôn
+- Có nếu trình duyệt đóng
+Q: Outbox giải quyết khoảng trống nào?
++ Ghi dữ liệu và ý định phát sự kiện cùng transaction cục bộ
+- Tự bảo đảm broker không lỗi
+- Tự đúng một lần mọi tác dụng ngoài
+Q: Consumer nhận event hai lần nên làm gì?
++ Kiểm trùng và tác dụng trong cùng phạm vi nguyên tử khi phù hợp
+- Áp tác dụng hai lần
+- Bỏ mọi event giống type
+Q: Email gửi ngoài database có nằm trong transaction DB không?
++ Không
+- Có nếu gọi trước COMMIT
+- Có nếu function async
+Q: Migration expand-contract nhắm gì?
++ Giữ tương thích trong cửa sổ nhiều version
+- Xóa field ngay trước app cũ
+- Không cần kiểm dữ liệu
+Q: Deploy rollback code có luôn khôi phục schema/data không?
++ Không
+- Có luôn
+- Có nếu image cũ
+Q: Deadline toàn request cần truyền thế nào?
++ Theo ngân sách còn lại tới phụ thuộc phù hợp
+- Mỗi tầng tự đợi30s không liên quan
+- Chỉ timeout client là đủ
+Q: Retry mọi lỗi vô hạn có rủi ro gì?
++ Nhân tải và lặp tác dụng
+- Luôn tăng reliability
+- Chỉ tốn log
+Q: Readiness có nghĩa gì cho API lab?
++ Sẵn sàng phục vụ theo điều kiện đã chốt
+- Process còn sống là đủ
+- Chỉ có cổng mở
+Q: Dự án backend cần chứng minh gì?
++ Hợp đồng,quyền,bấtbiến,cạnh tranh,phụ thuộc và phục hồi
+- Chỉ endpoint200
+- Chỉ số service

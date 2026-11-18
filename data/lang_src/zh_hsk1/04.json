@@ -1,155 +1,1061 @@
 {
-  "no": 4,
-  "title": "你今年多大？– Số đếm, tuổi, số điện thoại",
-  "sub": "Nǐ jīnnián duō dà? 你今年多大？",
-  "goals": [
-    "Đếm và đọc đúng số 0–999 (十一, 二十, 九十九, 一百零一)",
-    "Phân biệt 二 và 两; dùng 两 trước lượng từ (两个人, 两岁)",
-    "Hỏi – đáp tuổi đúng đối tượng: 几岁 / 多大 / 多大年纪; nói 我二十岁 (không có 是)",
-    "Hỏi và đọc số điện thoại: 你的手机号码是多少？; phân biệt 几 và 多少",
-    "Đọc chuẩn cặp sì – shí (四 / 十) và biến điệu của 一"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
-      {"w": "零", "py": "líng", "hv": "linh", "pos": "num", "vi": "số không; “linh” (số 0 ở giữa)", "ex": "一百零一", "exPy": "yìbǎi líng yī", "exVi": "một trăm linh một"},
-      {"w": "一", "py": "yī", "hv": "nhất", "pos": "num", "vi": "một", "ex": "我有一个哥哥。", "exPy": "Wǒ yǒu yí ge gēge.", "exVi": "Tôi có một anh trai."},
-      {"w": "二", "py": "èr", "hv": "nhị", "pos": "num", "vi": "hai (khi đếm, trong số nhiều chữ số)", "ex": "我哥哥二十四岁。", "exPy": "Wǒ gēge èrshísì suì.", "exVi": "Anh tôi 24 tuổi."},
-      {"w": "三", "py": "sān", "hv": "tam", "pos": "num", "vi": "ba", "ex": "安娜家有三口人。", "exPy": "Ānnà jiā yǒu sān kǒu rén.", "exVi": "Nhà Anna có ba người."},
-      {"w": "四", "py": "sì", "hv": "tứ", "pos": "num", "vi": "bốn", "ex": "四十四", "exPy": "sìshísì", "exVi": "bốn mươi tư"},
-      {"w": "五", "py": "wǔ", "hv": "ngũ", "pos": "num", "vi": "năm", "ex": "我爸爸五十岁。", "exPy": "Wǒ bàba wǔshí suì.", "exVi": "Bố tôi 50 tuổi."},
-      {"w": "六", "py": "liù", "hv": "lục", "pos": "num", "vi": "sáu", "ex": "我妹妹六岁。", "exPy": "Wǒ mèimei liù suì.", "exVi": "Em gái tôi 6 tuổi."},
-      {"w": "七", "py": "qī", "hv": "thất", "pos": "num", "vi": "bảy", "ex": "我们有七个老师。", "exPy": "Wǒmen yǒu qī ge lǎoshī.", "exVi": "Chúng tôi có bảy giáo viên."},
-      {"w": "八", "py": "bā", "hv": "bát", "pos": "num", "vi": "tám", "ex": "八十八", "exPy": "bāshíbā", "exVi": "tám mươi tám"},
-      {"w": "九", "py": "jiǔ", "hv": "cửu", "pos": "num", "vi": "chín", "ex": "九十九", "exPy": "jiǔshíjiǔ", "exVi": "chín mươi chín"},
-      {"w": "十", "py": "shí", "hv": "thập", "pos": "num", "vi": "mười", "ex": "十四", "exPy": "shísì", "exVi": "mười bốn"},
-      {"w": "百", "py": "bǎi", "hv": "bách", "pos": "num", "vi": "trăm", "ex": "一百个学生", "exPy": "yìbǎi ge xuésheng", "exVi": "một trăm học sinh"},
-      {"w": "两", "py": "liǎng", "hv": "lưỡng", "pos": "num", "vi": "hai (đứng trước lượng từ)", "ex": "我有两个妹妹。", "exPy": "Wǒ yǒu liǎng ge mèimei.", "exVi": "Tôi có hai em gái."},
-      {"w": "岁", "py": "suì", "hv": "tuế", "pos": "mw", "vi": "tuổi", "ex": "我今年十九岁。", "exPy": "Wǒ jīnnián shíjiǔ suì.", "exVi": "Năm nay tôi 19 tuổi."},
-      {"w": "多大", "py": "duō dà", "hv": "đa đại", "pos": "phr", "vi": "bao nhiêu tuổi (hỏi bạn bè, người ngang tuổi); to bao nhiêu", "ex": "你今年多大？", "exPy": "Nǐ jīnnián duō dà?", "exVi": "Năm nay bạn bao nhiêu tuổi?"},
-      {"w": "大", "py": "dà", "hv": "đại", "pos": "adj", "vi": "to, lớn; lớn tuổi", "ex": "我家很大。", "exPy": "Wǒ jiā hěn dà.", "exVi": "Nhà tôi rất rộng."},
-      {"w": "小", "py": "xiǎo", "hv": "tiểu", "pos": "adj", "vi": "nhỏ, bé; ít tuổi", "ex": "我妹妹很小。", "exPy": "Wǒ mèimei hěn xiǎo.", "exVi": "Em gái tôi còn nhỏ."},
-      {"w": "今年", "py": "jīnnián", "hv": "kim niên", "pos": "n", "vi": "năm nay", "ex": "你今年几岁？", "exPy": "Nǐ jīnnián jǐ suì?", "exVi": "Năm nay cháu mấy tuổi?"},
-      {"w": "多少", "py": "duōshao", "hv": "đa thiểu", "pos": "pron", "vi": "bao nhiêu", "ex": "你的手机号码是多少？", "exPy": "Nǐ de shǒujī hàomǎ shì duōshao?", "exVi": "Số điện thoại của bạn là bao nhiêu?"},
-      {"w": "手机", "py": "shǒujī", "hv": "thủ cơ", "pos": "n", "vi": "điện thoại di động", "ex": "这是我的手机。", "exPy": "Zhè shì wǒ de shǒujī.", "exVi": "Đây là điện thoại của tôi."}
-    ]},
-    {"k": "sounds", "h": "Phát âm: sì – shí, biến điệu 一, q – j, l – n, ui, er", "html": "<p>Số đếm là nơi người Việt hay đọc sai nhất – và sai số thì sai tiền, sai giờ! Luyện kỹ.</p>", "items": [
-      {"sym": "sì (四) – shí (十)", "ex": ["四", "十", "十四", "四十"], "vi": "四 <b>sì</b>: lưỡi phẳng, thanh 4 rơi xuống ≈ “xư”. 十 <b>shí</b>: uốn lưỡi, thanh 2 đi lên ≈ “sư” uốn lưỡi. 十四 shísì (14) ≠ 四十 sìshí (40). Câu luyện dân gian: 四是四，十是十，十四是十四，四十是四十。", "pairs": [["四", "十"], ["十四", "四十"]]},
-      {"sym": "一: yī / yí / yì / yāo", "ex": ["一", "十一", "一个", "一百"], "vi": "Đếm, số thứ tự, đứng cuối: <b>yī</b> (十一 shíyī). Trước thanh 4: <b>yí</b> (一个 yí ge). Trước thanh 1, 2, 3: <b>yì</b> (一百 yìbǎi, 一年 yì nián). Đọc số điện thoại, số phòng: thường đọc <b>yāo</b> (幺)."},
-      {"sym": "q – j (七 / 九)", "ex": ["七", "九", "鸡"], "vi": "七 <b>qī</b> bật hơi (≈ “chi” kèm luồng hơi). 九 <b>jiǔ</b> không bật hơi; iu = iou nên đọc gần “chiếu” lướt → “chiêu”.", "pairs": [["七", "鸡"]]},
-      {"sym": "l – n (六 / 零 / 两)", "ex": ["六", "零", "两"], "vi": "Người miền Bắc hay lẫn l/n. <b>l</b>: đầu lưỡi chạm lợi, hơi thoát hai bên, KHÔNG qua mũi. 六 liù ≠ 牛 niú (con bò).", "pairs": [["六", "牛"]]},
-      {"sym": "ui = uei (岁)", "ex": ["岁", "几岁"], "vi": "岁 viết suì nhưng đọc gần “xuây” (u – ê – i lướt nhanh), không đọc “xui”."},
-      {"sym": "er (二)", "ex": ["二", "二十"], "vi": "二 èr: “ơ” rồi cong đầu lưỡi, thanh 4 dứt khoát. 二十 èrshí."}
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 1: Số đếm 0 – 999", "html": "<p>Tin vui: cách ghép số tiếng Trung <b>gần như giống hệt tiếng Việt</b>, và âm Hán Việt của số rất quen: nhất, nhị, tam, tứ, ngũ, lục, thất, bát, cửu, thập, bách.</p>", "table": [["Số", "Chữ Hán", "Pinyin", "Mẹo"], ["11", "十一", "shíyī", "mười một"], ["20", "二十", "èrshí", "hai mươi"], ["25", "二十五", "èrshíwǔ", "hai mươi lăm"], ["99", "九十九", "jiǔshíjiǔ", "chín mươi chín"], ["100", "一百", "yìbǎi", "một trăm – phải có 一"], ["101", "一百零一", "yìbǎi líng yī", "một trăm LINH một"], ["110", "一百一十", "yìbǎi yīshí", "một trăm mười"], ["365", "三百六十五", "sānbǎi liùshíwǔ", "ba trăm sáu mươi lăm"]], "ex": [
-      {"t": "我们学校有三百二十个学生。", "py": "Wǒmen xuéxiào yǒu sānbǎi èrshí ge xuésheng.", "vi": "Trường chúng tôi có 320 học sinh."},
-      {"t": "一年有三百六十五天。", "py": "Yì nián yǒu sānbǎi liùshíwǔ tiān.", "vi": "Một năm có 365 ngày."},
-      {"t": "王老师有一百零八本书。", "py": "Wáng lǎoshī yǒu yìbǎi líng bā běn shū.", "vi": "Thầy Vương có 108 cuốn sách."}
-    ], "tips": ["10–19 nói 十一, 十二… (không nói 一十一). Nhưng từ 100 trở lên phải có 一: 一百, 一百一十.", "Số 0 ở giữa đọc 零 (linh): 105 = 一百零五 – y như “một trăm linh năm”. Coi chừng: 一百五 (nói tắt) = 150!", "Tiếng Việt biến âm “mười LĂM, hai mươi MỐT, hai mươi TƯ”; tiếng Trung thì không: 十五, 二十一, 二十四 – đọc đúng từng số."]},
-    {"k": "grammar", "h": "Ngữ pháp 2: 二 hay 两?", "html": "<p>Cùng nghĩa “hai” nhưng dùng khác nhau:</p><ul><li><b>二 èr</b>: khi đếm (一、二、三), số thứ tự, ngày tháng, số có nhiều chữ số (十二, 二十, 一百二十), số điện thoại.</li><li><b>两 liǎng</b>: khi “hai” đứng một mình <b>trước lượng từ</b> để chỉ số lượng: 两个人, 两口人, 两岁, 两百 (200 cũng nói 二百).</li></ul>", "table": [["Dùng 二", "Dùng 两"], ["十二个人 (12 người)", "两个人 (2 người)"], ["二十岁 (20 tuổi)", "两岁 (2 tuổi)"], ["第二 (thứ hai)", "两本书 (2 cuốn sách)"]], "ex": [
-      {"t": "我有两个妹妹。", "py": "Wǒ yǒu liǎng ge mèimei.", "vi": "Tôi có hai em gái."},
-      {"t": "他十二岁。", "py": "Tā shí'èr suì.", "vi": "Cậu ấy 12 tuổi."},
-      {"t": "我有两个手机。", "py": "Wǒ yǒu liǎng ge shǒujī.", "vi": "Tôi có hai cái điện thoại."}
-    ], "tips": ["❌ <i>二个人</i> → ✅ 两个人. Nhưng 12 người = 十二个人 (❌ <i>十两个人</i>).", "Mẹo nhớ: “两 + lượng từ”, mọi trường hợp khác dùng 二."]},
-    {"k": "grammar", "h": "Ngữ pháp 3: Hỏi tuổi – 几岁 / 多大 / 多大年纪; câu vị ngữ danh từ", "html": "<p>Hỏi tuổi phải chọn câu theo <b>đối tượng</b> – giống tiếng Việt phân biệt “cháu mấy tuổi?” và “bác năm nay bao nhiêu tuổi ạ?”.</p><p>Trả lời: <b>Chủ ngữ + (今年) + số + 岁</b>: 我今年二十岁。 Đây là <b>câu vị ngữ danh từ</b> – câu khẳng định KHÔNG cần 是. Phủ định mới cần 不是: 我不是二十岁，我十九岁。</p>", "table": [["Hỏi ai", "Câu hỏi", "Pinyin"], ["Trẻ em (dưới 10 tuổi)", "你几岁？", "Nǐ jǐ suì?"], ["Bạn bè, người ngang tuổi / trẻ hơn", "你多大？/ 你今年多大？", "Nǐ duō dà? / Nǐ jīnnián duō dà?"], ["Người lớn tuổi (lịch sự)", "您多大年纪？", "Nín duō dà niánjì?"]], "ex": [
-      {"t": "小梅，你几岁？— 我六岁。", "py": "Xiǎo Méi, nǐ jǐ suì? — Wǒ liù suì.", "vi": "Tiểu Mai, cháu mấy tuổi? — Cháu sáu tuổi."},
-      {"t": "你今年多大？— 我今年二十二岁。", "py": "Nǐ jīnnián duō dà? — Wǒ jīnnián èrshí'èr suì.", "vi": "Năm nay bạn bao nhiêu tuổi? — Năm nay mình 22 tuổi."},
-      {"t": "我不是二十岁，我十九岁。", "py": "Wǒ bú shì èrshí suì, wǒ shíjiǔ suì.", "vi": "Tôi không phải 20 tuổi, tôi 19 tuổi."},
-      {"t": "我比我妹妹大十三岁。", "py": "Wǒ bǐ wǒ mèimei dà shísān suì.", "vi": "Tôi hơn em gái 13 tuổi. (比 – so sánh, học ở HSK 2)"}
-    ], "tips": ["Câu khẳng định không dùng 是, cũng không dùng 有: ❌ <i>我是二十岁</i> / ❌ <i>我有二十岁</i> → ✅ 我二十岁。", "Hỏi người lớn tuổi bằng 你几岁？ là bất lịch sự (như hỏi trẻ con).", "多大 còn hỏi kích thước: 你家多大？ = nhà bạn rộng bao nhiêu? – ngữ cảnh sẽ rõ."]},
-    {"k": "text", "h": "Số điện thoại; 几 hay 多少? Đếm bằng một bàn tay", "html": "<p>Số điện thoại đọc <b>từng chữ số</b>, chia nhóm như tiếng Việt: 0985 367 240 → líng jiǔ bā wǔ, sān liù qī, èr sì líng. Số 1 trong số điện thoại, số phòng thường đọc <b>yāo</b> để khỏi nhầm với 七 qī: 110 (số cảnh sát Trung Quốc) đọc <i>yāo yāo líng</i>.</p><p>Hỏi: <b>你的手机号码是多少？</b> (Nǐ de shǒujī hàomǎ shì duōshao?)</p><table><tr><th></th><th>几 jǐ</th><th>多少 duōshao</th></tr><tr><td>Số lượng dự đoán</td><td>nhỏ (thường dưới 10)</td><td>bất kỳ, thường lớn</td></tr><tr><td>Lượng từ</td><td>bắt buộc: 几个人</td><td>có thể bỏ: 多少(个)学生</td></tr><tr><td>Ví dụ</td><td>你有几个妹妹？</td><td>你们学校有多少学生？</td></tr></table><p><b>Đếm bằng tay kiểu Trung Quốc</b> (rất hay gặp khi mua bán): 1–5 giơ ngón như ta; <b>6</b> = ngón cái + ngón út; <b>7</b> = chụm ba đầu ngón; <b>8</b> = ngón cái + ngón trỏ (hình chữ L); <b>9</b> = ngón trỏ cong như móc câu; <b>10</b> = nắm tay hoặc bắt chéo hai ngón trỏ.</p>"},
-    {"k": "dialog", "h": "Nghe: Cô bé nhiều chuyện", "lang": "zh-CN", "note": "Anna đến nhà Tiểu Lan và gặp em gái Tiểu Mai. Nghe lần 1 không nhìn chữ: Tiểu Mai mấy tuổi?", "lines": [
-      {"s": "安娜", "g": "f", "t": "小妹妹，你好！你叫什么名字？", "py": "Xiǎo mèimei, nǐ hǎo! Nǐ jiào shénme míngzi?", "vi": "Chào em gái nhỏ! Em tên là gì?"},
-      {"s": "小梅", "g": "f", "t": "我叫小梅。", "py": "Wǒ jiào Xiǎo Méi.", "vi": "Em tên Tiểu Mai."},
-      {"s": "安娜", "g": "f", "t": "小梅，你几岁？", "py": "Xiǎo Méi, nǐ jǐ suì?", "vi": "Tiểu Mai, em mấy tuổi?"},
-      {"s": "小梅", "g": "f", "t": "我六岁。姐姐，你多大？", "py": "Wǒ liù suì. Jiějie, nǐ duō dà?", "vi": "Em sáu tuổi. Chị ơi, chị bao nhiêu tuổi?"},
-      {"s": "安娜", "g": "f", "t": "我今年二十岁。", "py": "Wǒ jīnnián èrshí suì.", "vi": "Năm nay chị hai mươi tuổi."},
-      {"s": "小梅", "g": "f", "t": "我姐姐十九岁，我哥哥二十四岁。", "py": "Wǒ jiějie shíjiǔ suì, wǒ gēge èrshísì suì.", "vi": "Chị em mười chín tuổi, anh em hai mươi tư tuổi."},
-      {"s": "安娜", "g": "f", "t": "你哥哥二十四岁？他有手机吗？", "py": "Nǐ gēge èrshísì suì? Tā yǒu shǒujī ma?", "vi": "Anh em 24 tuổi à? Anh ấy có điện thoại không?"},
-      {"s": "小梅", "g": "f", "t": "有！他的手机号码是零九八八，七六五，四三二。", "py": "Yǒu! Tā de shǒujī hàomǎ shì líng jiǔ bā bā, qī liù wǔ, sì sān èr.", "vi": "Có ạ! Số điện thoại của anh ấy là 0988 765 432."},
-      {"s": "小兰", "g": "f", "t": "小梅！", "py": "Xiǎo Méi!", "vi": "Tiểu Mai! (nhắc em)"},
-      {"s": "安娜", "g": "f", "t": "零九八八，七六五，四三二。谢谢你，小梅！", "py": "Líng jiǔ bā bā, qī liù wǔ, sì sān èr. Xièxie nǐ, Xiǎo Méi!", "vi": "0988 765 432. Cảm ơn em, Tiểu Mai!"},
-      {"s": "小梅", "g": "f", "t": "不客气！姐姐，你的手机号码是多少？", "py": "Bú kèqi! Jiějie, nǐ de shǒujī hàomǎ shì duōshao?", "vi": "Không có gì ạ! Chị ơi, số điện thoại của chị là bao nhiêu?"},
-      {"s": "安娜", "g": "f", "t": "我的是零九零三，二五八，六七九。", "py": "Wǒ de shì líng jiǔ líng sān, èr wǔ bā, liù qī jiǔ.", "vi": "Của chị là 0903 258 679."}
-    ], "qs": [
-      {"q": "小梅 mấy tuổi?", "o": ["6 tuổi", "16 tuổi", "19 tuổi"], "a": 0, "e": "我六岁。– 六 liù = 6."},
-      {"q": "安娜 bao nhiêu tuổi?", "o": ["19", "20", "24"], "a": 1, "e": "我今年二十岁。"},
-      {"q": "Anh trai của 小梅 bao nhiêu tuổi?", "o": ["14", "24", "42"], "a": 1, "e": "二十四岁 èrshísì suì = 24 tuổi. Cẩn thận: 十四 = 14, 四十二 = 42."},
-      {"q": "Số điện thoại của anh trai là:", "o": ["0988 765 432", "0988 756 432", "0898 765 432"], "a": 0, "e": "零九八八，七六五，四三二。"},
-      {"q": "Tiểu Mai hỏi Anna: 你的手机号码是___？(gõ chữ Hán hoặc pinyin)", "a": "多少", "alt": ["duoshao"], "e": "Hỏi số điện thoại dùng 多少 (bao nhiêu)."}
-    ]},
-    {"k": "read", "h": "Đọc: Những con số của nhà Tiểu Lan", "title": "我家的数字", "text": "我叫阮兰，今年十九岁。我家有五口人。\n\n我爸爸五十岁，我妈妈四十八岁。我哥哥二十四岁，我妹妹小梅六岁。\n\n我的手机号码是零九八五，三六七，二四零。我妹妹很小，她没有手机。", "py": "Wǒ jiào Ruǎn Lán, jīnnián shíjiǔ suì. Wǒ jiā yǒu wǔ kǒu rén.\n\nWǒ bàba wǔshí suì, wǒ māma sìshíbā suì. Wǒ gēge èrshísì suì, wǒ mèimei Xiǎo Méi liù suì.\n\nWǒ de shǒujī hàomǎ shì líng jiǔ bā wǔ, sān liù qī, èr sì líng. Wǒ mèimei hěn xiǎo, tā méiyǒu shǒujī.", "vi": "Tôi tên Nguyễn Lan, năm nay 19 tuổi. Nhà tôi có năm người.\n\nBố tôi 50 tuổi, mẹ tôi 48 tuổi. Anh trai tôi 24 tuổi, em gái tôi Tiểu Mai 6 tuổi.\n\nSố điện thoại của tôi là 0985 367 240. Em gái tôi còn nhỏ, em ấy không có điện thoại.", "gloss": [
-      {"w": "数字", "py": "shùzì", "vi": "con số"},
-      {"w": "号码", "py": "hàomǎ", "vi": "số (điện thoại, phòng…)"},
-      {"w": "小梅", "py": "Xiǎo Méi", "vi": "Tiểu Mai (tên em gái)"}
-    ], "qs": [
-      {"q": "Mẹ của 小兰 bao nhiêu tuổi?", "o": ["48", "50", "84"], "a": 0, "e": "我妈妈四十八岁 – sìshíbā = 48."},
-      {"q": "Ai 50 tuổi?", "o": ["Bố", "Mẹ", "Anh trai"], "a": 0, "e": "我爸爸五十岁。"},
-      {"q": "小兰 năm nay bao nhiêu tuổi? (gõ chữ Hán, số hoặc pinyin)", "a": "十九", "alt": ["19", "shijiu", "十九岁", "19岁"], "e": "今年十九岁。"},
-      {"q": "Vì sao 小梅 không có điện thoại?", "o": ["Vì em còn nhỏ", "Vì em không thích", "Vì nhà nghèo"], "a": 0, "e": "我妹妹很小，她没有手机。"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "四", "py": "sì", "hv": "tứ", "parts": "囗 (vòng bao) + 儿 (bên trong)", "strokes": 5, "vi": "bốn – căn phòng bốn bức tường", "words": "四, 十四, 四十"},
-      {"c": "六", "py": "liù", "hv": "lục", "parts": "亠 (đầu – nóc nhà) + 八 (bát)", "strokes": 4, "vi": "sáu", "words": "六, 十六"},
-      {"c": "十", "py": "shí", "hv": "thập", "parts": "一 (ngang) + 丨 (sổ) – hình chữ thập", "strokes": 2, "vi": "mười – hai nét bắt chéo như hai ngón tay đếm số 10", "words": "十, 二十, 十二"},
-      {"c": "岁", "py": "suì", "hv": "tuế", "parts": "山 (sơn – núi) + 夕 (tịch – buổi tối)", "strokes": 6, "vi": "tuổi – qua bao núi, bao buổi chiều là thêm tuổi", "words": "几岁, 二十岁"},
-      {"c": "多", "py": "duō", "hv": "đa", "parts": "夕 + 夕 (hai buổi tối chồng lên nhau)", "strokes": 6, "vi": "nhiều – tối này nối tối kia, nhiều ngày", "words": "多大, 多少"},
-      {"c": "两", "py": "liǎng", "hv": "lưỡng", "parts": "一 + 冂 (khung) + hai nét 人 bên trong", "strokes": 7, "vi": "hai – hai người đứng chung một khung", "words": "两个, 两岁"}
-    ]},
-    {"k": "speak", "h": "Nói: Tuổi và số điện thoại", "tasks": [
-      {"p": "Hỏi tuổi 3 người: một bé 5 tuổi, một bạn cùng lớp, một bác lớn tuổi.", "model": "小朋友，你几岁？— 你今年多大？— 您多大年纪？", "py": "Xiǎopéngyou, nǐ jǐ suì? — Nǐ jīnnián duō dà? — Nín duō dà niánjì?", "vi": "Cháu ơi, cháu mấy tuổi? — Năm nay bạn bao nhiêu tuổi? — Bác năm nay bao nhiêu tuổi ạ?", "tips": "小朋友 xiǎopéngyou = “bạn nhỏ”, cách gọi trẻ em thân thiện."},
-      {"p": "Đọc to số điện thoại của bạn (hoặc một số tự nghĩ ra) theo từng nhóm.", "model": "我的手机号码是零九八五，三六七，二四零。", "py": "Wǒ de shǒujī hàomǎ shì líng jiǔ bā wǔ, sān liù qī, èr sì líng.", "vi": "Số điện thoại của tôi là 0985 367 240.", "tips": "Ngắt nhẹ giữa các nhóm số; số 1 có thể đọc yāo."},
-      {"p": "Nói tuổi của các thành viên trong gia đình bạn.", "model": "我爸爸五十岁，我妈妈四十八岁，我今年十九岁，我妹妹六岁。", "py": "Wǒ bàba wǔshí suì, wǒ māma sìshíbā suì, wǒ jīnnián shíjiǔ suì, wǒ mèimei liù suì.", "vi": "Bố tôi 50 tuổi, mẹ tôi 48 tuổi, năm nay tôi 19 tuổi, em gái tôi 6 tuổi."}
-    ]},
-    {"k": "write", "h": "Viết: Thẻ thông tin", "task": "Viết “thẻ thông tin” cho 3 người (bạn, một người thân, một người bạn): tên, tuổi, số điện thoại (nếu có) – mỗi người 2–3 câu, số viết bằng chữ Hán.", "min": 40, "model": "我叫阮兰，今年十九岁。我的手机号码是零九八五，三六七，二四零。\n我妹妹叫小梅，她六岁。她没有手机。\n我的朋友叫安娜，她是美国人，今年二十岁。", "modelVi": "Tôi tên Nguyễn Lan, năm nay 19 tuổi. Số điện thoại của tôi là 0985 367 240. Em gái tôi tên Tiểu Mai, em ấy 6 tuổi. Em ấy không có điện thoại. Bạn tôi tên Anna, cô ấy là người Mỹ, năm nay 20 tuổi.", "tips": ["Tuổi: Chủ ngữ + (今年) + số + 岁 – không có 是.", "Viết số bằng chữ Hán để luyện mặt chữ: 十九, 二十, 四十八.", "Nhớ 两岁 (2 tuổi) nhưng 十二岁 (12 tuổi)."], "checklist": ["Số viết bằng chữ Hán", "Câu nói tuổi không có 是 / 有", "Dùng 两 đúng chỗ (nếu có số 2 trước lượng từ)", "Có ít nhất 1 câu với 没有"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "十四", "lang": "zh-CN", "q": "Bạn nghe số nào?", "o": ["14", "40", "44"], "a": 0, "e": "十四 shísì = 14; 四十 sìshí = 40; 四十四 = 44."},
-    {"t": "listen", "say": "我今年二十岁。", "lang": "zh-CN", "q": "Người nói bao nhiêu tuổi?", "o": ["12", "20", "22"], "a": 1, "e": "二十 èrshí = 20."},
-    {"t": "listen", "say": "我的手机号码是零九八七，六五四，三二零。", "lang": "zh-CN", "q": "Số điện thoại vừa nghe là:", "o": ["0987 654 320", "0978 654 320", "0987 645 320"], "a": 0, "e": "零九八七，六五四，三二零 = 0987 654 320."},
-    {"t": "mc", "q": "Hỏi tuổi một bé 5 tuổi, câu tự nhiên nhất là:", "o": ["你几岁？", "您多大年纪？", "你多少岁？"], "a": 0, "e": "Trẻ nhỏ dùng 几岁; 多大年纪 dành cho người lớn tuổi; 你多少岁 không phải cách nói chuẩn phổ biến."},
-    {"t": "mc", "q": "“Hai người” nói là:", "o": ["二个人", "两个人", "二人个"], "a": 1, "e": "Trước lượng từ 个 dùng 两."},
-    {"t": "mc", "q": "105 viết là:", "o": ["一百五", "一百零五", "十零五"], "a": 1, "e": "Số 0 ở giữa đọc 零 (linh). 一百五 là cách nói tắt của 150."},
-    {"t": "mc", "q": "Câu nào ĐÚNG? (Tôi 19 tuổi.)", "o": ["我是十九岁。", "我十九岁。", "我有十九岁。"], "a": 1, "e": "Câu vị ngữ danh từ chỉ tuổi: không dùng 是, không dùng 有."},
-    {"t": "mc", "q": "Trong số điện thoại, số 1 thường đọc là:", "o": ["yī", "yāo", "yí"], "a": 1, "e": "Đọc yāo để khỏi nhầm với 七 qī."},
-    {"t": "fill", "q": "你今年___大？(Năm nay bạn bao nhiêu tuổi?)", "a": "多", "alt": ["duo"], "e": "多大 hỏi tuổi bạn bè, người ngang tuổi."},
-    {"t": "fill", "q": "我妹妹___岁。(Em gái tôi 2 tuổi – điền chữ Hán)", "a": "两", "alt": ["liang"], "e": "“Hai” đứng một mình trước 岁 / lượng từ dùng 两."},
-    {"t": "fill", "q": "你的手机号码是___？(Số điện thoại của bạn là bao nhiêu?)", "a": "多少", "alt": ["duoshao"], "e": "Hỏi số điện thoại dùng 多少, không dùng 几."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Số điện thoại của bạn là bao nhiêu?”", "w": ["是", "你的", "多少", "手机号码"], "a": "你的手机号码是多少", "e": "你的手机号码 + 是 + 多少."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Anh ấy có hai con gái.”", "w": ["两个", "他", "女儿", "有"], "a": "他有两个女儿", "e": "Chủ ngữ + 有 + 两个 + danh từ."},
-    {"t": "dict", "say": "四十四", "lang": "zh-CN", "a": "四十四", "py": "sìshísì", "e": "44 – luyện phân biệt sì / shí."},
-    {"t": "dict", "say": "你多大？", "lang": "zh-CN", "a": "你多大", "py": "nǐ duō dà", "e": "你多大？ – hỏi tuổi bạn bè."},
-    {"t": "match", "q": "Nối số với chữ Hán:", "pairs": [["12", "十二"], ["20", "二十"], ["99", "九十九"], ["100", "一百"], ["108", "一百零八"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Thẻ số 0–10 (chữ Hán một mặt, chữ số mặt kia); xúc xắc hoặc app quay số ngẫu nhiên; thẻ “danh thiếp” giả (tên, tuổi, số điện thoại tự nghĩ); thẻ chữ 四 六 十 岁 多 两.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: ôn bài 3 – vòng tròn hỏi 你家有几口人？你有哥哥吗？"},
-      {"t": "15'", "do": "Số 0–10 kèm cử chỉ tay Trung Quốc (6, 7, 8, 9, 10). GV hô số – lớp giơ tay; GV giơ tay – lớp hô số."},
-      {"t": "15'", "do": "Số 11–999: cho học viên tự phát hiện quy tắc (giống tiếng Việt). Nhấn 零 = “linh”, 100 phải có 一. Luyện cặp 四/十, câu 四是四，十是十…"},
-      {"t": "20'", "do": "Ngữ pháp 1–2: bảng số; 二 hay 两 – học viên phân loại 10 thẻ cụm từ vào hai cột."},
-      {"t": "15'", "do": "Phát âm: biến điệu 一 (yī/yí/yì), l–n (六/牛), q–j (七/九), ui trong 岁."},
-      {"t": "15'", "do": "Trò Bingo số + bài tập 1–8."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: GV đọc nhanh 10 số, học viên viết chữ số (nghe – viết), đổi chéo chấm."},
-      {"t": "20'", "do": "Ngữ pháp 3: hỏi tuổi theo đối tượng; câu vị ngữ danh từ. Viết ❌ 我是二十岁 / ❌ 我有二十岁 cho lớp sửa. Đóng vai: hỏi tuổi em bé, bạn, bác lớn tuổi."},
-      {"t": "15'", "do": "Số điện thoại & 几/多少: cặp đôi trao đổi “danh thiếp” giả, ghi số của bạn rồi đọc lại để kiểm tra."},
-      {"t": "15'", "do": "Nghe hội thoại (lần 1: Tiểu Mai mấy tuổi? lần 2: chép số điện thoại) + đọc ‘我家的数字’."},
-      {"t": "20'", "do": "Chữ Hán 6 chữ; nhiệm vụ nói 1–3; viết thẻ thông tin."},
-      {"t": "10'", "do": "Bài tập 9–16, chữa, giao bài về nhà."}
+ "no": 4,
+ "title": "你今年多大？– Số đếm, tuổi, số điện thoại",
+ "sub": "Nǐ jīnnián duō dà? 你今年多大？",
+ "goals": [
+  "Đếm và đọc đúng số 0–999 (十一, 二十, 九十九, 一百零一)",
+  "Phân biệt 二 và 两; dùng 两 trước lượng từ (两个人, 两岁)",
+  "Hỏi – đáp tuổi đúng đối tượng: 几岁 / 多大 / 多大年纪; nói 我二十岁 (không có 是)",
+  "Hỏi và đọc số điện thoại: 你的手机号码是多少？; phân biệt 几 và 多少",
+  "Đọc chuẩn cặp sì – shí (四 / 十) và biến điệu của 一"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词 shēngcí)",
+   "items": [
+    {
+     "w": "零",
+     "py": "líng",
+     "hv": "linh",
+     "pos": "num",
+     "vi": "số không; “linh” (số 0 ở giữa)",
+     "ex": "一百零一",
+     "exPy": "yìbǎi líng yī",
+     "exVi": "một trăm linh một"
+    },
+    {
+     "w": "一",
+     "py": "yī",
+     "hv": "nhất",
+     "pos": "num",
+     "vi": "một",
+     "ex": "我有一个哥哥。",
+     "exPy": "Wǒ yǒu yí ge gēge.",
+     "exVi": "Tôi có một anh trai."
+    },
+    {
+     "w": "二",
+     "py": "èr",
+     "hv": "nhị",
+     "pos": "num",
+     "vi": "hai (khi đếm, trong số nhiều chữ số)",
+     "ex": "我哥哥二十四岁。",
+     "exPy": "Wǒ gēge èrshísì suì.",
+     "exVi": "Anh tôi 24 tuổi."
+    },
+    {
+     "w": "三",
+     "py": "sān",
+     "hv": "tam",
+     "pos": "num",
+     "vi": "ba",
+     "ex": "安娜家有三口人。",
+     "exPy": "Ānnà jiā yǒu sān kǒu rén.",
+     "exVi": "Nhà Anna có ba người."
+    },
+    {
+     "w": "四",
+     "py": "sì",
+     "hv": "tứ",
+     "pos": "num",
+     "vi": "bốn",
+     "ex": "四十四",
+     "exPy": "sìshísì",
+     "exVi": "bốn mươi tư"
+    },
+    {
+     "w": "五",
+     "py": "wǔ",
+     "hv": "ngũ",
+     "pos": "num",
+     "vi": "năm",
+     "ex": "我爸爸五十岁。",
+     "exPy": "Wǒ bàba wǔshí suì.",
+     "exVi": "Bố tôi 50 tuổi."
+    },
+    {
+     "w": "六",
+     "py": "liù",
+     "hv": "lục",
+     "pos": "num",
+     "vi": "sáu",
+     "ex": "我妹妹六岁。",
+     "exPy": "Wǒ mèimei liù suì.",
+     "exVi": "Em gái tôi 6 tuổi."
+    },
+    {
+     "w": "七",
+     "py": "qī",
+     "hv": "thất",
+     "pos": "num",
+     "vi": "bảy",
+     "ex": "我们有七个老师。",
+     "exPy": "Wǒmen yǒu qī ge lǎoshī.",
+     "exVi": "Chúng tôi có bảy giáo viên."
+    },
+    {
+     "w": "八",
+     "py": "bā",
+     "hv": "bát",
+     "pos": "num",
+     "vi": "tám",
+     "ex": "八十八",
+     "exPy": "bāshíbā",
+     "exVi": "tám mươi tám"
+    },
+    {
+     "w": "九",
+     "py": "jiǔ",
+     "hv": "cửu",
+     "pos": "num",
+     "vi": "chín",
+     "ex": "九十九",
+     "exPy": "jiǔshíjiǔ",
+     "exVi": "chín mươi chín"
+    },
+    {
+     "w": "十",
+     "py": "shí",
+     "hv": "thập",
+     "pos": "num",
+     "vi": "mười",
+     "ex": "十四",
+     "exPy": "shísì",
+     "exVi": "mười bốn"
+    },
+    {
+     "w": "百",
+     "py": "bǎi",
+     "hv": "bách",
+     "pos": "num",
+     "vi": "trăm",
+     "ex": "一百个学生",
+     "exPy": "yìbǎi ge xuésheng",
+     "exVi": "một trăm học sinh"
+    },
+    {
+     "w": "两",
+     "py": "liǎng",
+     "hv": "lưỡng",
+     "pos": "num",
+     "vi": "hai (đứng trước lượng từ)",
+     "ex": "我有两个妹妹。",
+     "exPy": "Wǒ yǒu liǎng ge mèimei.",
+     "exVi": "Tôi có hai em gái."
+    },
+    {
+     "w": "岁",
+     "py": "suì",
+     "hv": "tuế",
+     "pos": "mw",
+     "vi": "tuổi",
+     "ex": "我今年十九岁。",
+     "exPy": "Wǒ jīnnián shíjiǔ suì.",
+     "exVi": "Năm nay tôi 19 tuổi."
+    },
+    {
+     "w": "多大",
+     "py": "duō dà",
+     "hv": "đa đại",
+     "pos": "phr",
+     "vi": "bao nhiêu tuổi (hỏi bạn bè, người ngang tuổi); to bao nhiêu",
+     "ex": "你今年多大？",
+     "exPy": "Nǐ jīnnián duō dà?",
+     "exVi": "Năm nay bạn bao nhiêu tuổi?"
+    },
+    {
+     "w": "大",
+     "py": "dà",
+     "hv": "đại",
+     "pos": "adj",
+     "vi": "to, lớn; lớn tuổi",
+     "ex": "我家很大。",
+     "exPy": "Wǒ jiā hěn dà.",
+     "exVi": "Nhà tôi rất rộng."
+    },
+    {
+     "w": "小",
+     "py": "xiǎo",
+     "hv": "tiểu",
+     "pos": "adj",
+     "vi": "nhỏ, bé; ít tuổi",
+     "ex": "我妹妹很小。",
+     "exPy": "Wǒ mèimei hěn xiǎo.",
+     "exVi": "Em gái tôi còn nhỏ."
+    },
+    {
+     "w": "今年",
+     "py": "jīnnián",
+     "hv": "kim niên",
+     "pos": "n",
+     "vi": "năm nay",
+     "ex": "你今年几岁？",
+     "exPy": "Nǐ jīnnián jǐ suì?",
+     "exVi": "Năm nay cháu mấy tuổi?"
+    },
+    {
+     "w": "多少",
+     "py": "duōshao",
+     "hv": "đa thiểu",
+     "pos": "pron",
+     "vi": "bao nhiêu",
+     "ex": "你的手机号码是多少？",
+     "exPy": "Nǐ de shǒujī hàomǎ shì duōshao?",
+     "exVi": "Số điện thoại của bạn là bao nhiêu?"
+    },
+    {
+     "w": "手机",
+     "py": "shǒujī",
+     "hv": "thủ cơ",
+     "pos": "n",
+     "vi": "điện thoại di động",
+     "ex": "这是我的手机。",
+     "exPy": "Zhè shì wǒ de shǒujī.",
+     "exVi": "Đây là điện thoại của tôi."
+    }
+   ]
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: sì – shí, biến điệu 一, q – j, l – n, ui, er",
+   "html": "<p>Số đếm là nơi người Việt hay đọc sai nhất – và sai số thì sai tiền, sai giờ! Luyện kỹ.</p>",
+   "items": [
+    {
+     "sym": "sì (四) – shí (十)",
+     "ex": [
+      "四",
+      "十",
+      "十四",
+      "四十"
+     ],
+     "vi": "四 <b>sì</b>: lưỡi phẳng, thanh 4 rơi xuống ≈ “xư”. 十 <b>shí</b>: uốn lưỡi, thanh 2 đi lên ≈ “sư” uốn lưỡi. 十四 shísì (14) ≠ 四十 sìshí (40). Câu luyện dân gian: 四是四，十是十，十四是十四，四十是四十。",
+     "pairs": [
+      [
+       "四",
+       "十"
+      ],
+      [
+       "十四",
+       "四十"
+      ]
+     ]
+    },
+    {
+     "sym": "一: yī / yí / yì / yāo",
+     "ex": [
+      "一",
+      "十一",
+      "一个",
+      "一百"
+     ],
+     "vi": "Đếm, số thứ tự, đứng cuối: <b>yī</b> (十一 shíyī). Trước thanh 4: <b>yí</b> (一个 yí ge). Trước thanh 1, 2, 3: <b>yì</b> (一百 yìbǎi, 一年 yì nián). Đọc số điện thoại, số phòng: thường đọc <b>yāo</b> (幺)."
+    },
+    {
+     "sym": "q – j (七 / 九)",
+     "ex": [
+      "七",
+      "九",
+      "鸡"
+     ],
+     "vi": "七 <b>qī</b> bật hơi (≈ “chi” kèm luồng hơi). 九 <b>jiǔ</b> không bật hơi; iu = iou nên đọc gần “chiếu” lướt → “chiêu”.",
+     "pairs": [
+      [
+       "七",
+       "鸡"
+      ]
+     ]
+    },
+    {
+     "sym": "l – n (六 / 零 / 两)",
+     "ex": [
+      "六",
+      "零",
+      "两"
+     ],
+     "vi": "Người miền Bắc hay lẫn l/n. <b>l</b>: đầu lưỡi chạm lợi, hơi thoát hai bên, KHÔNG qua mũi. 六 liù ≠ 牛 niú (con bò).",
+     "pairs": [
+      [
+       "六",
+       "牛"
+      ]
+     ]
+    },
+    {
+     "sym": "ui = uei (岁)",
+     "ex": [
+      "岁",
+      "几岁"
+     ],
+     "vi": "岁 viết suì nhưng đọc gần “xuây” (u – ê – i lướt nhanh), không đọc “xui”."
+    },
+    {
+     "sym": "er (二)",
+     "ex": [
+      "二",
+      "二十"
+     ],
+     "vi": "二 èr: “ơ” rồi cong đầu lưỡi, thanh 4 dứt khoát. 二十 èrshí."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: Số đếm 0 – 999",
+   "html": "<p>Tin vui: cách ghép số tiếng Trung <b>gần như giống hệt tiếng Việt</b>, và âm Hán Việt của số rất quen: nhất, nhị, tam, tứ, ngũ, lục, thất, bát, cửu, thập, bách.</p>",
+   "table": [
+    [
+     "Số",
+     "Chữ Hán",
+     "Pinyin",
+     "Mẹo"
     ],
-    "games": [
-      "Bingo số: học viên kẻ bảng 4×4, điền 16 số tuỳ ý từ 1–99; GV đọc số tiếng Trung, ai đủ một hàng hô 好了！(Hǎo le!) và đọc lại các số để kiểm tra.",
-      "Ai nhanh hơn: hai đội; GV giơ phép tính (3 + 4 = ?, 20 + 15 = ?), đội nào nói đáp án tiếng Trung đúng trước được điểm.",
-      "Tam sao thất bản: các hàng dọc truyền tai nhau một số điện thoại tiếng Trung; người cuối viết lên bảng – hàng nào đúng nhiều nhất thắng."
+    [
+     "11",
+     "十一",
+     "shíyī",
+     "mười một"
     ],
-    "errors": [
-      "❌ 二个人 → ✅ 两个人; nhưng 12 người là 十二个人.",
-      "Dùng 是 / 有 khi nói tuổi: ❌ 我是二十岁 / ❌ 我有二十岁 → ✅ 我二十岁.",
-      "Nhầm 四 sì (thanh 4, lưỡi phẳng) với 十 shí (thanh 2, uốn lưỡi): 十四 ≠ 四十.",
-      "Bỏ 零 ở giữa: nói 一百五 khi muốn 105 → ✅ 一百零五 (一百五 = 150).",
-      "Hỏi người lớn tuổi bằng 你几岁？ – bất lịch sự.",
-      "Đọc 一 cứng nhắc yī trong 一个 / 一百 (phải là yí ge / yìbǎi)."
+    [
+     "20",
+     "二十",
+     "èrshí",
+     "hai mươi"
     ],
-    "homework": "Bài tập trong game ≥ 80%; viết chữ Hán các số 1–10 và 百 mỗi số 1 dòng; đọc to và ghi âm số điện thoại của 3 người; luyện câu 四是四，十是十 5 lần mỗi ngày."
+    [
+     "25",
+     "二十五",
+     "èrshíwǔ",
+     "hai mươi lăm"
+    ],
+    [
+     "99",
+     "九十九",
+     "jiǔshíjiǔ",
+     "chín mươi chín"
+    ],
+    [
+     "100",
+     "一百",
+     "yìbǎi",
+     "một trăm – phải có 一"
+    ],
+    [
+     "101",
+     "一百零一",
+     "yìbǎi líng yī",
+     "một trăm LINH một"
+    ],
+    [
+     "110",
+     "一百一十",
+     "yìbǎi yīshí",
+     "một trăm mười"
+    ],
+    [
+     "365",
+     "三百六十五",
+     "sānbǎi liùshíwǔ",
+     "ba trăm sáu mươi lăm"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我们学校有三百二十个学生。",
+     "py": "Wǒmen xuéxiào yǒu sānbǎi èrshí ge xuésheng.",
+     "vi": "Trường chúng tôi có 320 học sinh."
+    },
+    {
+     "t": "一年有三百六十五天。",
+     "py": "Yì nián yǒu sānbǎi liùshíwǔ tiān.",
+     "vi": "Một năm có 365 ngày."
+    },
+    {
+     "t": "王老师有一百零八本书。",
+     "py": "Wáng lǎoshī yǒu yìbǎi líng bā běn shū.",
+     "vi": "Thầy Vương có 108 cuốn sách."
+    }
+   ],
+   "tips": [
+    "10–19 nói 十一, 十二… (không nói 一十一). Nhưng từ 100 trở lên phải có 一: 一百, 一百一十.",
+    "Số 0 ở giữa đọc 零 (linh): 105 = 一百零五 – y như “một trăm linh năm”. Coi chừng: 一百五 (nói tắt) = 150!",
+    "Tiếng Việt biến âm “mười LĂM, hai mươi MỐT, hai mươi TƯ”; tiếng Trung thì không: 十五, 二十一, 二十四 – đọc đúng từng số."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: 二 hay 两?",
+   "html": "<p>Cùng nghĩa “hai” nhưng dùng khác nhau:</p><ul><li><b>二 èr</b>: khi đếm (一、二、三), số thứ tự, ngày tháng, số có nhiều chữ số (十二, 二十, 一百二十), số điện thoại.</li><li><b>两 liǎng</b>: khi “hai” đứng một mình <b>trước lượng từ</b> để chỉ số lượng: 两个人, 两口人, 两岁, 两百 (200 cũng nói 二百).</li></ul>",
+   "table": [
+    [
+     "Dùng 二",
+     "Dùng 两"
+    ],
+    [
+     "十二个人 (12 người)",
+     "两个人 (2 người)"
+    ],
+    [
+     "二十岁 (20 tuổi)",
+     "两岁 (2 tuổi)"
+    ],
+    [
+     "第二 (thứ hai)",
+     "两本书 (2 cuốn sách)"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我有两个妹妹。",
+     "py": "Wǒ yǒu liǎng ge mèimei.",
+     "vi": "Tôi có hai em gái."
+    },
+    {
+     "t": "他十二岁。",
+     "py": "Tā shí'èr suì.",
+     "vi": "Cậu ấy 12 tuổi."
+    },
+    {
+     "t": "我有两个手机。",
+     "py": "Wǒ yǒu liǎng ge shǒujī.",
+     "vi": "Tôi có hai cái điện thoại."
+    }
+   ],
+   "tips": [
+    "❌ <i>二个人</i> → ✅ 两个人. Nhưng 12 người = 十二个人 (❌ <i>十两个人</i>).",
+    "Mẹo nhớ: “两 + lượng từ”, mọi trường hợp khác dùng 二."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: Hỏi tuổi – 几岁 / 多大 / 多大年纪; câu vị ngữ danh từ",
+   "html": "<p>Hỏi tuổi phải chọn câu theo <b>đối tượng</b> – giống tiếng Việt phân biệt “cháu mấy tuổi?” và “bác năm nay bao nhiêu tuổi ạ?”.</p><p>Trả lời: <b>Chủ ngữ + (今年) + số + 岁</b>: 我今年二十岁。 Đây là <b>câu vị ngữ danh từ</b> – câu khẳng định KHÔNG cần 是. Phủ định mới cần 不是: 我不是二十岁，我十九岁。</p>",
+   "table": [
+    [
+     "Hỏi ai",
+     "Câu hỏi",
+     "Pinyin"
+    ],
+    [
+     "Trẻ em (dưới 10 tuổi)",
+     "你几岁？",
+     "Nǐ jǐ suì?"
+    ],
+    [
+     "Bạn bè, người ngang tuổi / trẻ hơn",
+     "你多大？/ 你今年多大？",
+     "Nǐ duō dà? / Nǐ jīnnián duō dà?"
+    ],
+    [
+     "Người lớn tuổi (lịch sự)",
+     "您多大年纪？",
+     "Nín duō dà niánjì?"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "小梅，你几岁？— 我六岁。",
+     "py": "Xiǎo Méi, nǐ jǐ suì? — Wǒ liù suì.",
+     "vi": "Tiểu Mai, cháu mấy tuổi? — Cháu sáu tuổi."
+    },
+    {
+     "t": "你今年多大？— 我今年二十二岁。",
+     "py": "Nǐ jīnnián duō dà? — Wǒ jīnnián èrshí'èr suì.",
+     "vi": "Năm nay bạn bao nhiêu tuổi? — Năm nay mình 22 tuổi."
+    },
+    {
+     "t": "我不是二十岁，我十九岁。",
+     "py": "Wǒ bú shì èrshí suì, wǒ shíjiǔ suì.",
+     "vi": "Tôi không phải 20 tuổi, tôi 19 tuổi."
+    },
+    {
+     "t": "我比我妹妹大十三岁。",
+     "py": "Wǒ bǐ wǒ mèimei dà shísān suì.",
+     "vi": "Tôi hơn em gái 13 tuổi. (比 – so sánh, học ở HSK 2)"
+    }
+   ],
+   "tips": [
+    "Câu khẳng định không dùng 是, cũng không dùng 有: ❌ <i>我是二十岁</i> / ❌ <i>我有二十岁</i> → ✅ 我二十岁。",
+    "Hỏi người lớn tuổi bằng 你几岁？ là bất lịch sự (như hỏi trẻ con).",
+    "多大 còn hỏi kích thước: 你家多大？ = nhà bạn rộng bao nhiêu? – ngữ cảnh sẽ rõ."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Số điện thoại; 几 hay 多少? Đếm bằng một bàn tay",
+   "html": "<p>Số điện thoại đọc <b>từng chữ số</b>, chia nhóm như tiếng Việt: 0985 367 240 → líng jiǔ bā wǔ, sān liù qī, èr sì líng. Số 1 trong số điện thoại, số phòng thường đọc <b>yāo</b> để khỏi nhầm với 七 qī: 110 (số cảnh sát Trung Quốc) đọc <i>yāo yāo líng</i>.</p><p>Hỏi: <b>你的手机号码是多少？</b> (Nǐ de shǒujī hàomǎ shì duōshao?)</p><table><tr><th></th><th>几 jǐ</th><th>多少 duōshao</th></tr><tr><td>Số lượng dự đoán</td><td>nhỏ (thường dưới 10)</td><td>bất kỳ, thường lớn</td></tr><tr><td>Lượng từ</td><td>bắt buộc: 几个人</td><td>có thể bỏ: 多少(个)学生</td></tr><tr><td>Ví dụ</td><td>你有几个妹妹？</td><td>你们学校有多少学生？</td></tr></table><p><b>Đếm bằng tay kiểu Trung Quốc</b> (rất hay gặp khi mua bán): 1–5 giơ ngón như ta; <b>6</b> = ngón cái + ngón út; <b>7</b> = chụm ba đầu ngón; <b>8</b> = ngón cái + ngón trỏ (hình chữ L); <b>9</b> = ngón trỏ cong như móc câu; <b>10</b> = nắm tay hoặc bắt chéo hai ngón trỏ.</p>"
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Cô bé nhiều chuyện",
+   "lang": "zh-CN",
+   "note": "Anna đến nhà Tiểu Lan và gặp em gái Tiểu Mai. Nghe lần 1 không nhìn chữ: Tiểu Mai mấy tuổi?",
+   "lines": [
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "小妹妹，你好！你叫什么名字？",
+     "py": "Xiǎo mèimei, nǐ hǎo! Nǐ jiào shénme míngzi?",
+     "vi": "Chào em gái nhỏ! Em tên là gì?"
+    },
+    {
+     "s": "小梅",
+     "g": "f",
+     "t": "我叫小梅。",
+     "py": "Wǒ jiào Xiǎo Méi.",
+     "vi": "Em tên Tiểu Mai."
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "小梅，你几岁？",
+     "py": "Xiǎo Méi, nǐ jǐ suì?",
+     "vi": "Tiểu Mai, em mấy tuổi?"
+    },
+    {
+     "s": "小梅",
+     "g": "f",
+     "t": "我六岁。姐姐，你多大？",
+     "py": "Wǒ liù suì. Jiějie, nǐ duō dà?",
+     "vi": "Em sáu tuổi. Chị ơi, chị bao nhiêu tuổi?"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "我今年二十岁。",
+     "py": "Wǒ jīnnián èrshí suì.",
+     "vi": "Năm nay chị hai mươi tuổi."
+    },
+    {
+     "s": "小梅",
+     "g": "f",
+     "t": "我姐姐十九岁，我哥哥二十四岁。",
+     "py": "Wǒ jiějie shíjiǔ suì, wǒ gēge èrshísì suì.",
+     "vi": "Chị em mười chín tuổi, anh em hai mươi tư tuổi."
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "你哥哥二十四岁？他有手机吗？",
+     "py": "Nǐ gēge èrshísì suì? Tā yǒu shǒujī ma?",
+     "vi": "Anh em 24 tuổi à? Anh ấy có điện thoại không?"
+    },
+    {
+     "s": "小梅",
+     "g": "f",
+     "t": "有！他的手机号码是零九八八，七六五，四三二。",
+     "py": "Yǒu! Tā de shǒujī hàomǎ shì líng jiǔ bā bā, qī liù wǔ, sì sān èr.",
+     "vi": "Có ạ! Số điện thoại của anh ấy là 0988 765 432."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "小梅！",
+     "py": "Xiǎo Méi!",
+     "vi": "Tiểu Mai! (nhắc em)"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "零九八八，七六五，四三二。谢谢你，小梅！",
+     "py": "Líng jiǔ bā bā, qī liù wǔ, sì sān èr. Xièxie nǐ, Xiǎo Méi!",
+     "vi": "0988 765 432. Cảm ơn em, Tiểu Mai!"
+    },
+    {
+     "s": "小梅",
+     "g": "f",
+     "t": "不客气！姐姐，你的手机号码是多少？",
+     "py": "Bú kèqi! Jiějie, nǐ de shǒujī hàomǎ shì duōshao?",
+     "vi": "Không có gì ạ! Chị ơi, số điện thoại của chị là bao nhiêu?"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "我的是零九零三，二五八，六七九。",
+     "py": "Wǒ de shì líng jiǔ líng sān, èr wǔ bā, liù qī jiǔ.",
+     "vi": "Của chị là 0903 258 679."
+    }
+   ],
+   "qs": [
+    {
+     "q": "小梅 mấy tuổi?",
+     "o": [
+      "6 tuổi",
+      "16 tuổi",
+      "19 tuổi"
+     ],
+     "a": 0,
+     "e": "我六岁。– 六 liù = 6."
+    },
+    {
+     "q": "安娜 bao nhiêu tuổi?",
+     "o": [
+      "20",
+      "24",
+      "19"
+     ],
+     "a": 0,
+     "e": "我今年二十岁。"
+    },
+    {
+     "q": "Anh trai của 小梅 bao nhiêu tuổi?",
+     "o": [
+      "24",
+      "42",
+      "14"
+     ],
+     "a": 0,
+     "e": "二十四岁 èrshísì suì = 24 tuổi. Cẩn thận: 十四 = 14, 四十二 = 42."
+    },
+    {
+     "q": "Số điện thoại của anh trai là:",
+     "o": [
+      "0988 765 432",
+      "0988 756 432",
+      "0898 765 432"
+     ],
+     "a": 0,
+     "e": "零九八八，七六五，四三二。"
+    },
+    {
+     "q": "Tiểu Mai hỏi Anna: 你的手机号码是___？(gõ chữ Hán hoặc pinyin)",
+     "a": "多少",
+     "alt": [
+      "duoshao"
+     ],
+     "e": "Hỏi số điện thoại dùng 多少 (bao nhiêu)."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Những con số của nhà Tiểu Lan",
+   "title": "我家的数字",
+   "text": "我叫阮兰，今年十九岁。我家有五口人。\n\n我爸爸五十岁，我妈妈四十八岁。我哥哥二十四岁，我妹妹小梅六岁。\n\n我的手机号码是零九八五，三六七，二四零。我妹妹很小，她没有手机。",
+   "py": "Wǒ jiào Ruǎn Lán, jīnnián shíjiǔ suì. Wǒ jiā yǒu wǔ kǒu rén.\n\nWǒ bàba wǔshí suì, wǒ māma sìshíbā suì. Wǒ gēge èrshísì suì, wǒ mèimei Xiǎo Méi liù suì.\n\nWǒ de shǒujī hàomǎ shì líng jiǔ bā wǔ, sān liù qī, èr sì líng. Wǒ mèimei hěn xiǎo, tā méiyǒu shǒujī.",
+   "vi": "Tôi tên Nguyễn Lan, năm nay 19 tuổi. Nhà tôi có năm người.\n\nBố tôi 50 tuổi, mẹ tôi 48 tuổi. Anh trai tôi 24 tuổi, em gái tôi Tiểu Mai 6 tuổi.\n\nSố điện thoại của tôi là 0985 367 240. Em gái tôi còn nhỏ, em ấy không có điện thoại.",
+   "gloss": [
+    {
+     "w": "数字",
+     "py": "shùzì",
+     "vi": "con số"
+    },
+    {
+     "w": "号码",
+     "py": "hàomǎ",
+     "vi": "số (điện thoại, phòng…)"
+    },
+    {
+     "w": "小梅",
+     "py": "Xiǎo Méi",
+     "vi": "Tiểu Mai (tên em gái)"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Mẹ của 小兰 bao nhiêu tuổi?",
+     "o": [
+      "84",
+      "48",
+      "50"
+     ],
+     "a": 1,
+     "e": "我妈妈四十八岁 – sìshíbā = 48."
+    },
+    {
+     "q": "Ai 50 tuổi?",
+     "o": [
+      "Anh trai",
+      "Bố",
+      "Mẹ"
+     ],
+     "a": 1,
+     "e": "我爸爸五十岁。"
+    },
+    {
+     "q": "小兰 năm nay bao nhiêu tuổi? (gõ chữ Hán, số hoặc pinyin)",
+     "a": "十九",
+     "alt": [
+      "19",
+      "shijiu",
+      "十九岁",
+      "19岁"
+     ],
+     "e": "今年十九岁。"
+    },
+    {
+     "q": "Vì sao 小梅 không có điện thoại?",
+     "o": [
+      "Vì nhà nghèo",
+      "Vì em còn nhỏ",
+      "Vì em không thích"
+     ],
+     "a": 1,
+     "e": "我妹妹很小，她没有手机。"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "四",
+     "py": "sì",
+     "hv": "tứ",
+     "parts": "囗 (vòng bao) + 儿 (bên trong)",
+     "strokes": 5,
+     "vi": "bốn – căn phòng bốn bức tường",
+     "words": "四, 十四, 四十"
+    },
+    {
+     "c": "六",
+     "py": "liù",
+     "hv": "lục",
+     "parts": "亠 (đầu – nóc nhà) + 八 (bát)",
+     "strokes": 4,
+     "vi": "sáu",
+     "words": "六, 十六"
+    },
+    {
+     "c": "十",
+     "py": "shí",
+     "hv": "thập",
+     "parts": "一 (ngang) + 丨 (sổ) – hình chữ thập",
+     "strokes": 2,
+     "vi": "mười – hai nét bắt chéo như hai ngón tay đếm số 10",
+     "words": "十, 二十, 十二"
+    },
+    {
+     "c": "岁",
+     "py": "suì",
+     "hv": "tuế",
+     "parts": "山 (sơn – núi) + 夕 (tịch – buổi tối)",
+     "strokes": 6,
+     "vi": "tuổi – qua bao núi, bao buổi chiều là thêm tuổi",
+     "words": "几岁, 二十岁"
+    },
+    {
+     "c": "多",
+     "py": "duō",
+     "hv": "đa",
+     "parts": "夕 + 夕 (hai buổi tối chồng lên nhau)",
+     "strokes": 6,
+     "vi": "nhiều – tối này nối tối kia, nhiều ngày",
+     "words": "多大, 多少"
+    },
+    {
+     "c": "两",
+     "py": "liǎng",
+     "hv": "lưỡng",
+     "parts": "一 + 冂 (khung) + hai nét 人 bên trong",
+     "strokes": 7,
+     "vi": "hai – hai người đứng chung một khung",
+     "words": "两个, 两岁"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Tuổi và số điện thoại",
+   "tasks": [
+    {
+     "p": "Hỏi tuổi 3 người: một bé 5 tuổi, một bạn cùng lớp, một bác lớn tuổi.",
+     "model": "小朋友，你几岁？— 你今年多大？— 您多大年纪？",
+     "py": "Xiǎopéngyou, nǐ jǐ suì? — Nǐ jīnnián duō dà? — Nín duō dà niánjì?",
+     "vi": "Cháu ơi, cháu mấy tuổi? — Năm nay bạn bao nhiêu tuổi? — Bác năm nay bao nhiêu tuổi ạ?",
+     "tips": "小朋友 xiǎopéngyou = “bạn nhỏ”, cách gọi trẻ em thân thiện."
+    },
+    {
+     "p": "Đọc to số điện thoại của bạn (hoặc một số tự nghĩ ra) theo từng nhóm.",
+     "model": "我的手机号码是零九八五，三六七，二四零。",
+     "py": "Wǒ de shǒujī hàomǎ shì líng jiǔ bā wǔ, sān liù qī, èr sì líng.",
+     "vi": "Số điện thoại của tôi là 0985 367 240.",
+     "tips": "Ngắt nhẹ giữa các nhóm số; số 1 có thể đọc yāo."
+    },
+    {
+     "p": "Nói tuổi của các thành viên trong gia đình bạn.",
+     "model": "我爸爸五十岁，我妈妈四十八岁，我今年十九岁，我妹妹六岁。",
+     "py": "Wǒ bàba wǔshí suì, wǒ māma sìshíbā suì, wǒ jīnnián shíjiǔ suì, wǒ mèimei liù suì.",
+     "vi": "Bố tôi 50 tuổi, mẹ tôi 48 tuổi, năm nay tôi 19 tuổi, em gái tôi 6 tuổi."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Thẻ thông tin",
+   "task": "Viết “thẻ thông tin” cho 3 người (bạn, một người thân, một người bạn): tên, tuổi, số điện thoại (nếu có) – mỗi người 2–3 câu, số viết bằng chữ Hán.",
+   "min": 40,
+   "model": "我叫阮兰，今年十九岁。我的手机号码是零九八五，三六七，二四零。\n我妹妹叫小梅，她六岁。她没有手机。\n我的朋友叫安娜，她是美国人，今年二十岁。",
+   "modelVi": "Tôi tên Nguyễn Lan, năm nay 19 tuổi. Số điện thoại của tôi là 0985 367 240. Em gái tôi tên Tiểu Mai, em ấy 6 tuổi. Em ấy không có điện thoại. Bạn tôi tên Anna, cô ấy là người Mỹ, năm nay 20 tuổi.",
+   "tips": [
+    "Tuổi: Chủ ngữ + (今年) + số + 岁 – không có 是.",
+    "Viết số bằng chữ Hán để luyện mặt chữ: 十九, 二十, 四十八.",
+    "Nhớ 两岁 (2 tuổi) nhưng 十二岁 (12 tuổi)."
+   ],
+   "checklist": [
+    "Số viết bằng chữ Hán",
+    "Câu nói tuổi không có 是 / 有",
+    "Dùng 两 đúng chỗ (nếu có số 2 trước lượng từ)",
+    "Có ít nhất 1 câu với 没有"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "十四",
+   "lang": "zh-CN",
+   "q": "Bạn nghe số nào?",
+   "o": [
+    "44",
+    "14",
+    "40"
+   ],
+   "a": 1,
+   "e": "十四 shísì = 14; 四十 sìshí = 40; 四十四 = 44."
+  },
+  {
+   "t": "listen",
+   "say": "我今年二十岁。",
+   "lang": "zh-CN",
+   "q": "Người nói bao nhiêu tuổi?",
+   "o": [
+    "20",
+    "22",
+    "12"
+   ],
+   "a": 0,
+   "e": "二十 èrshí = 20."
+  },
+  {
+   "t": "listen",
+   "say": "我的手机号码是零九八七，六五四，三二零。",
+   "lang": "zh-CN",
+   "q": "Số điện thoại vừa nghe là:",
+   "o": [
+    "0987 645 320",
+    "0987 654 320",
+    "0978 654 320"
+   ],
+   "a": 1,
+   "e": "零九八七，六五四，三二零 = 0987 654 320."
+  },
+  {
+   "t": "mc",
+   "q": "Hỏi tuổi một bé 5 tuổi, câu tự nhiên nhất là:",
+   "o": [
+    "你多少岁？",
+    "你几岁？",
+    "您多大年纪？"
+   ],
+   "a": 1,
+   "e": "Trẻ nhỏ dùng 几岁; 多大年纪 dành cho người lớn tuổi; 你多少岁 không phải cách nói chuẩn phổ biến."
+  },
+  {
+   "t": "mc",
+   "q": "“Hai người” nói là:",
+   "o": [
+    "二人个",
+    "二个人",
+    "两个人"
+   ],
+   "a": 2,
+   "e": "Trước lượng từ 个 dùng 两."
+  },
+  {
+   "t": "mc",
+   "q": "105 viết là:",
+   "o": [
+    "十零五",
+    "一百五",
+    "一百零五"
+   ],
+   "a": 2,
+   "e": "Số 0 ở giữa đọc 零 (linh). 一百五 là cách nói tắt của 150."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào ĐÚNG? (Tôi 19 tuổi.)",
+   "o": [
+    "我十九岁。",
+    "我有十九岁。",
+    "我是十九岁。"
+   ],
+   "a": 0,
+   "e": "Câu vị ngữ danh từ chỉ tuổi: không dùng 是, không dùng 有."
+  },
+  {
+   "t": "mc",
+   "q": "Trong số điện thoại, số 1 thường đọc là:",
+   "o": [
+    "yí",
+    "yī",
+    "yāo"
+   ],
+   "a": 2,
+   "e": "Đọc yāo để khỏi nhầm với 七 qī."
+  },
+  {
+   "t": "fill",
+   "q": "你今年___大？(Năm nay bạn bao nhiêu tuổi?)",
+   "a": "多",
+   "alt": [
+    "duo"
+   ],
+   "e": "多大 hỏi tuổi bạn bè, người ngang tuổi."
+  },
+  {
+   "t": "fill",
+   "q": "我妹妹___岁。(Em gái tôi 2 tuổi – điền chữ Hán)",
+   "a": "两",
+   "alt": [
+    "liang"
+   ],
+   "e": "“Hai” đứng một mình trước 岁 / lượng từ dùng 两."
+  },
+  {
+   "t": "fill",
+   "q": "你的手机号码是___？(Số điện thoại của bạn là bao nhiêu?)",
+   "a": "多少",
+   "alt": [
+    "duoshao"
+   ],
+   "e": "Hỏi số điện thoại dùng 多少, không dùng 几."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Số điện thoại của bạn là bao nhiêu?”",
+   "w": [
+    "是",
+    "你的",
+    "多少",
+    "手机号码"
+   ],
+   "a": "你的手机号码是多少",
+   "e": "你的手机号码 + 是 + 多少."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Anh ấy có hai con gái.”",
+   "w": [
+    "两个",
+    "他",
+    "女儿",
+    "有"
+   ],
+   "a": "他有两个女儿",
+   "e": "Chủ ngữ + 有 + 两个 + danh từ."
+  },
+  {
+   "t": "dict",
+   "say": "四十四",
+   "lang": "zh-CN",
+   "a": "四十四",
+   "py": "sìshísì",
+   "e": "44 – luyện phân biệt sì / shí."
+  },
+  {
+   "t": "dict",
+   "say": "你多大？",
+   "lang": "zh-CN",
+   "a": "你多大",
+   "py": "nǐ duō dà",
+   "e": "你多大？ – hỏi tuổi bạn bè."
+  },
+  {
+   "t": "match",
+   "q": "Nối số với chữ Hán:",
+   "pairs": [
+    [
+     "12",
+     "十二"
+    ],
+    [
+     "20",
+     "二十"
+    ],
+    [
+     "99",
+     "九十九"
+    ],
+    [
+     "100",
+     "一百"
+    ],
+    [
+     "108",
+     "一百零八"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ số 0–10 (chữ Hán một mặt, chữ số mặt kia); xúc xắc hoặc app quay số ngẫu nhiên; thẻ “danh thiếp” giả (tên, tuổi, số điện thoại tự nghĩ); thẻ chữ 四 六 十 岁 多 两.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: ôn bài 3 – vòng tròn hỏi 你家有几口人？你有哥哥吗？"
+   },
+   {
+    "t": "15'",
+    "do": "Số 0–10 kèm cử chỉ tay Trung Quốc (6, 7, 8, 9, 10). GV hô số – lớp giơ tay; GV giơ tay – lớp hô số."
+   },
+   {
+    "t": "15'",
+    "do": "Số 11–999: cho học viên tự phát hiện quy tắc (giống tiếng Việt). Nhấn 零 = “linh”, 100 phải có 一. Luyện cặp 四/十, câu 四是四，十是十…"
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 1–2: bảng số; 二 hay 两 – học viên phân loại 10 thẻ cụm từ vào hai cột."
+   },
+   {
+    "t": "15'",
+    "do": "Phát âm: biến điệu 一 (yī/yí/yì), l–n (六/牛), q–j (七/九), ui trong 岁."
+   },
+   {
+    "t": "15'",
+    "do": "Trò Bingo số + bài tập 1–8."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: GV đọc nhanh 10 số, học viên viết chữ số (nghe – viết), đổi chéo chấm."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 3: hỏi tuổi theo đối tượng; câu vị ngữ danh từ. Viết ❌ 我是二十岁 / ❌ 我有二十岁 cho lớp sửa. Đóng vai: hỏi tuổi em bé, bạn, bác lớn tuổi."
+   },
+   {
+    "t": "15'",
+    "do": "Số điện thoại & 几/多少: cặp đôi trao đổi “danh thiếp” giả, ghi số của bạn rồi đọc lại để kiểm tra."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe hội thoại (lần 1: Tiểu Mai mấy tuổi? lần 2: chép số điện thoại) + đọc ‘我家的数字’."
+   },
+   {
+    "t": "20'",
+    "do": "Chữ Hán 6 chữ; nhiệm vụ nói 1–3; viết thẻ thông tin."
+   },
+   {
+    "t": "10'",
+    "do": "Bài tập 9–16, chữa, giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Bingo số: học viên kẻ bảng 4 ×4, điền 16 số tuỳ ý từ 1–99; GV đọc số tiếng Trung, ai đủ một hàng hô 好了！(Hǎo le!) và đọc lại các số để kiểm tra.",
+   "Ai nhanh hơn: hai đội; GV giơ phép tính (3 + 4 = ?, 20 + 15 = ?), đội nào nói đáp án tiếng Trung đúng trước được điểm.",
+   "Tam sao thất bản: các hàng dọc truyền tai nhau một số điện thoại tiếng Trung; người cuối viết lên bảng – hàng nào đúng nhiều nhất thắng."
+  ],
+  "errors": [
+   "❌ 二个人 → ✅ 两个人; nhưng 12 người là 十二个人.",
+   "Dùng 是 / 有 khi nói tuổi: ❌ 我是二十岁 / ❌ 我有二十岁 → ✅ 我二十岁.",
+   "Nhầm 四 sì (thanh 4, lưỡi phẳng) với 十 shí (thanh 2, uốn lưỡi): 十四 ≠ 四十.",
+   "Bỏ 零 ở giữa: nói 一百五 khi muốn 105 → ✅ 一百零五 (一百五 = 150).",
+   "Hỏi người lớn tuổi bằng 你几岁？ – bất lịch sự.",
+   "Đọc 一 cứng nhắc yī trong 一个 / 一百 (phải là yí ge / yìbǎi)."
+  ],
+  "homework": "Bài tập trong game ≥ 80%; viết chữ Hán các số 1–10 và 百 mỗi số 1 dòng; đọc to và ghi âm số điện thoại của 3 người; luyện câu 四是四，十是十 5 lần mỗi ngày."
+ }
 }

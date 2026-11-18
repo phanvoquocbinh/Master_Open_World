@@ -1,0 +1,753 @@
+{
+ "no": 14,
+ "title": "Đọc thông báo điều chỉnh – Đúng nhóm, đúng mốc, đúng phiên bản",
+ "sub": "仅限入门组 · 其余安排不变",
+ "goals": [
+  "Xác định phạm vi thay đổi và phần giữ nguyên trong thông báo.",
+  "Phân biệt giờ diễn ra, hạn đăng ký và thời điểm bản mới có hiệu lực.",
+  "Dùng mẫu 原定…现调整为… để viết đính chính có đối chiếu.",
+  "Viết thông báo mới đủ dữ kiện và lời nhắc bỏ phiên bản cũ."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Thông báo giả của lớp Mộc Ninh",
+   "html": "<p>Nhập môn và nâng cao trong bài là hai nhóm tự đặt, không phải lớp đang tuyển thật. Thông báo chỉ đổi lịch của một nhóm nhưng vẫn có thể bị đọc thành đổi toàn bộ. Muốn tránh hiểu lầm, phải ghi rõ nhóm chịu tác động, giờ/địa điểm mới, phần không đổi và phiên bản cần dùng.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Trọng tâm ở phần giới hạn",
+   "html": "<p>Đọc rõ 仅限、其余、不变 và 不取消, vì một chữ phủ định hoặc giới hạn có thể đổi phạm vi cả thông báo.</p>",
+   "items": [
+    {
+     "sym": "jǐnxiàn",
+     "ex": [
+      "仅限入门组",
+      "不仅限这个时间"
+     ],
+     "vi": "仅 jǐn có n cuối, 限 xiàn thanh bốn. Cụm 仅限 giới hạn phạm vi, không phải lời thông báo hủy."
+    },
+    {
+     "sym": "réngrán",
+     "ex": [
+      "仍然有效",
+      "仍然在青禾室"
+     ],
+     "vi": "仍 réng có ng cuối, 然 rán có n cuối. Giữ rõ hai âm, tránh đọc thành một chuỗi cùng kết thúc n."
+    },
+    {
+     "sym": "jiézhǐ / shēngxiào",
+     "ex": [
+      "报名截止",
+      "通知生效"
+     ],
+     "vi": "截止 jiézhǐ là hết hạn, 生效 shēngxiào là bắt đầu có hiệu lực. Hai từ gắn hai mốc đối nhau, không chọn chỉ vì đều nói thời gian."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm từ dùng trong tình huống",
+   "items": [
+    {
+     "w": "原定",
+     "py": "yuándìng",
+     "hv": "nguyên định",
+     "vi": "được ấn định ban đầu",
+     "ex": "原定星期六下午上课。",
+     "exPy": "Yuándìng xīngqīliù xiàwǔ shàngkè.",
+     "exVi": "Ban đầu định học chiều thứ bảy."
+    },
+    {
+     "w": "调整",
+     "py": "tiáozhěng",
+     "hv": "điều chỉnh",
+     "vi": "điều chỉnh",
+     "ex": "这次只调整入门组。",
+     "exPy": "Zhè cì zhǐ tiáozhěng rùménzǔ.",
+     "exVi": "Lần này chỉ chỉnh nhóm nhập môn."
+    },
+    {
+     "w": "通知",
+     "py": "tōngzhī",
+     "hv": "thông tri",
+     "vi": "thông báo",
+     "ex": "请转发最新通知。",
+     "exPy": "Qǐng zhuǎnfā zuì xīn tōngzhī.",
+     "exVi": "Hãy chuyển thông báo mới nhất."
+    },
+    {
+     "w": "生效",
+     "py": "shēngxiào",
+     "hv": "sinh hiệu",
+     "vi": "có hiệu lực",
+     "ex": "新安排从发布时生效。",
+     "exPy": "Xīn ānpái cóng fābù shí shēngxiào.",
+     "exVi": "Lịch mới có hiệu lực khi công bố."
+    },
+    {
+     "w": "仅限",
+     "py": "jǐnxiàn",
+     "hv": "cận hạn",
+     "vi": "chỉ giới hạn ở",
+     "ex": "变更仅限时间和地点。",
+     "exPy": "Biàngēng jǐnxiàn shíjiān hé dìdiǎn.",
+     "exVi": "Thay đổi chỉ giới hạn ở giờ và nơi."
+    },
+    {
+     "w": "其余",
+     "py": "qíyú",
+     "hv": "kỳ dư",
+     "vi": "phần còn lại",
+     "ex": "其余安排保持不变。",
+     "exPy": "Qíyú ānpái bǎochí bú biàn.",
+     "exVi": "Phần còn lại giữ nguyên."
+    },
+    {
+     "w": "仍然",
+     "py": "réngrán",
+     "hv": "nhưng nhiên",
+     "vi": "vẫn",
+     "ex": "提高组仍然在原教室。",
+     "exPy": "Tígāozǔ réngrán zài yuán jiàoshì.",
+     "exVi": "Nhóm nâng cao vẫn ở phòng cũ."
+    },
+    {
+     "w": "另行",
+     "py": "lìngxíng",
+     "hv": "",
+     "vi": "riêng, bằng lần thông báo khác",
+     "ex": "如果再变动，会另行通知。",
+     "exPy": "Rúguǒ zài biàndòng, huì lìngxíng tōngzhī.",
+     "exVi": "Nếu đổi nữa sẽ thông báo riêng."
+    },
+    {
+     "w": "截止",
+     "py": "jiézhǐ",
+     "hv": "tiệt chỉ",
+     "vi": "hết hạn",
+     "ex": "报名周五六点截止。",
+     "exPy": "Bàomíng zhōuwǔ liù diǎn jiézhǐ.",
+     "exVi": "Đăng ký hết hạn sáu giờ thứ sáu."
+    },
+    {
+     "w": "取消",
+     "py": "qǔxiāo",
+     "hv": "thủ tiêu",
+     "vi": "hủy",
+     "ex": "课程没有取消。",
+     "exPy": "Kèchéng méiyǒu qǔxiāo.",
+     "exVi": "Buổi học không bị hủy."
+    },
+    {
+     "w": "延后",
+     "py": "yánhòu",
+     "hv": "diên hậu",
+     "vi": "lùi muộn hơn",
+     "ex": "上课延后一天。",
+     "exPy": "Shàngkè yánhòu yì tiān.",
+     "exVi": "Buổi học lùi một ngày."
+    },
+    {
+     "w": "地点",
+     "py": "dìdiǎn",
+     "hv": "địa điểm",
+     "vi": "địa điểm",
+     "ex": "地点从青禾室换到木宁室。",
+     "exPy": "Dìdiǎn cóng Qīnghé Shì huàn dào Mùníng Shì.",
+     "exVi": "Đổi nơi từ phòng Thanh Hòa sang Mộc Ninh."
+    },
+    {
+     "w": "时段",
+     "py": "shíduàn",
+     "hv": "thời đoạn",
+     "vi": "khung giờ",
+     "ex": "新的时段是上午十点到十二点。",
+     "exPy": "Xīn de shíduàn shì shàngwǔ shí diǎn dào shí’èr diǎn.",
+     "exVi": "Khung mới là mười đến mười hai giờ sáng."
+    },
+    {
+     "w": "版本",
+     "py": "bǎnběn",
+     "hv": "bản bản",
+     "vi": "phiên bản",
+     "ex": "旧版本不能继续转发。",
+     "exPy": "Jiù bǎnběn bù néng jìxù zhuǎnfā.",
+     "exVi": "Không tiếp tục chuyển bản cũ."
+    },
+    {
+     "w": "转发",
+     "py": "zhuǎnfā",
+     "hv": "chuyển phát",
+     "vi": "chuyển tiếp tin",
+     "ex": "转发时不要删掉限制条件。",
+     "exPy": "Zhuǎnfā shí bú yào shān diào xiànzhì tiáojiàn.",
+     "exVi": "Khi chuyển tiếp đừng xóa điều kiện giới hạn."
+    },
+    {
+     "w": "核对",
+     "py": "héduì",
+     "hv": "hạch đối",
+     "vi": "đối chiếu",
+     "ex": "请核对组别和时间。",
+     "exPy": "Qǐng héduì zǔbié hé shíjiān.",
+     "exVi": "Hãy đối chiếu nhóm và giờ."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "原定…现调整为… và 其余…不变",
+   "html": "<p>Nêu lịch cũ rồi lịch mới để người nhận biết điều bị thay thế. Sau đó ghi phần còn lại không đổi bằng 其余…不变. Không chỉ dùng tiêu đề “có thay đổi” mà thiếu dữ kiện cụ thể.</p>",
+   "ex": [
+    {
+     "t": "入门组原定周六下午，现调整为周日上午。",
+     "py": "Rùménzǔ yuándìng zhōuliù xiàwǔ, xiàn tiáozhěng wéi zhōurì shàngwǔ.",
+     "vi": "Nhập môn từ chiều thứ bảy đổi sang sáng chủ nhật."
+    },
+    {
+     "t": "地点改为木宁室，其余要求不变。",
+     "py": "Dìdiǎn gǎi wéi Mùníng Shì, qíyú yāoqiú bú biàn.",
+     "vi": "Nơi đổi sang Mộc Ninh, yêu cầu còn lại không đổi."
+    },
+    {
+     "t": "本次调整仅限入门组，提高组不受影响。",
+     "py": "Běn cì tiáozhěng jǐnxiàn rùménzǔ, tígāozǔ bú shòu yǐngxiǎng.",
+     "vi": "Lần chỉnh chỉ cho nhập môn, không tác động nhóm nâng cao."
+    }
+   ],
+   "tips": [
+    "Ghi rõ nhóm trước chi tiết đổi để người đọc nhóm khác không tự đổi lịch."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "自…起、截至… và 截止: đầu mốc khác cuối mốc",
+   "html": "<p>自 A 起 nghĩa kể từ A; 截至 B là tính đến mốc B trong báo cáo; 截止 nêu kết thúc nhận hoặc làm việc gì. Một thông báo có thể có giờ học và hạn đăng ký khác nhau, cần gắn đúng động từ.</p>",
+   "ex": [
+    {
+     "t": "自本通知发布起，请以新版本为准。",
+     "py": "Zì běn tōngzhī fābù qǐ, qǐng yǐ xīn bǎnběn wéi zhǔn.",
+     "vi": "Từ khi công bố tin này, hãy lấy bản mới làm chuẩn."
+    },
+    {
+     "t": "截至今天中午，我们收到十份确认。",
+     "py": "Jiézhì jīntiān zhōngwǔ, wǒmen shōudào shí fèn quèrèn.",
+     "vi": "Tính tới trưa nay nhận mười xác nhận."
+    },
+    {
+     "t": "报名周五下午六点截止，上课时间另算。",
+     "py": "Bàomíng zhōuwǔ xiàwǔ liù diǎn jiézhǐ, shàngkè shíjiān lìng suàn.",
+     "vi": "Đăng ký hết hạn chiều thứ sáu sáu giờ, giờ học tính riêng."
+    }
+   ],
+   "tips": [
+    "截至 không nhất thiết nghĩa một hoạt động bị cấm tiếp diễn sau đó; nó giới hạn mốc tổng hợp thông tin."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Lịch nhóm nào thay đổi?",
+   "lang": "zh-CN",
+   "note": "Hai người kiểm bản đính chính của lớp giả. Theo dõi riêng nhóm nhập môn, nhóm nâng cao và hạn đăng ký.",
+   "lines": [
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "原通知写入门组周六两点到四点，在青禾室。",
+     "py": "Yuán tōngzhī xiě rùménzǔ zhōuliù liǎng diǎn dào sì diǎn, zài Qīnghé Shì.",
+     "vi": "Tin cũ ghi nhập môn thứ bảy hai đến bốn giờ, phòng Thanh Hòa."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "现在只把入门组改到周日十点到十二点，地点是木宁室。",
+     "py": "Xiànzài zhǐ bǎ rùménzǔ gǎi dào zhōurì shí diǎn dào shí’èr diǎn, dìdiǎn shì Mùníng Shì.",
+     "vi": "Giờ chỉ đổi nhập môn sang chủ nhật mười đến mười hai, phòng Mộc Ninh."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "提高组是不是也改到周日？",
+     "py": "Tígāozǔ shì bu shì yě gǎi dào zhōurì?",
+     "vi": "Nhóm nâng cao cũng sang chủ nhật à?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "没有，提高组仍然是周六两点到四点，青禾室。",
+     "py": "Méiyǒu, tígāozǔ réngrán shì zhōuliù liǎng diǎn dào sì diǎn, Qīnghé Shì.",
+     "vi": "Không, nâng cao vẫn thứ bảy hai đến bốn, Thanh Hòa."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "报名截止也跟着延后一天吗？",
+     "py": "Bàomíng jiézhǐ yě gēnzhe yánhòu yì tiān ma?",
+     "vi": "Hạn đăng ký cũng lùi một ngày theo à?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "不延后，周五下午六点截止，这一点没变。",
+     "py": "Bù yánhòu, zhōuwǔ xiàwǔ liù diǎn jiézhǐ, zhè yì diǎn méi biàn.",
+     "vi": "Không lùi, sáu giờ chiều thứ sáu hết hạn, điều này không đổi."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "那标题最好写“仅限入门组”，不要让人以为全部取消。",
+     "py": "Nà biāotí zuì hǎo xiě “jǐnxiàn rùménzǔ”, bú yào ràng rén yǐwéi quánbù qǔxiāo.",
+     "vi": "Vậy tiêu đề nên ghi chỉ nhập môn, đừng để tưởng hủy hết."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "同意。我也会写自发布起以这份新版本为准。",
+     "py": "Tóngyì. Wǒ yě huì xiě zì fābù qǐ yǐ zhè fèn xīn bǎnběn wéi zhǔn.",
+     "vi": "Đồng ý, tôi ghi từ khi công bố lấy bản mới này làm chuẩn."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "转发时请保留完整内容，别只截一张时间表。",
+     "py": "Zhuǎnfā shí qǐng bǎoliú wánzhěng nèiróng, bié zhǐ jié yì zhāng shíjiānbiǎo.",
+     "vi": "Chuyển tin hãy giữ đủ nội dung, đừng chỉ cắt bảng giờ."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "好，先核对组别、地点和截止时间，再发。",
+     "py": "Hǎo, xiān héduì zǔbié, dìdiǎn hé jiézhǐ shíjiān, zài fā.",
+     "vi": "Được, kiểm nhóm, nơi và hạn rồi gửi."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Nhóm nhập môn chuyển sang khi nào?",
+     "o": [
+      "Chủ nhật hai đến bốn",
+      "Chủ nhật mười đến mười hai",
+      "Thứ bảy hai đến bốn"
+     ],
+     "a": 1,
+     "e": "Lượt hai nêu mốc mới riêng nhập môn."
+    },
+    {
+     "q": "Nhóm nâng cao có đổi lịch không?",
+     "o": [
+      "Bị hủy",
+      "Không",
+      "Có, cùng lịch nhập môn"
+     ],
+     "a": 1,
+     "e": "Lượt bốn nhấn 仍然 lịch thứ bảy phòng cũ."
+    },
+    {
+     "q": "Hạn đăng ký là lúc nào?",
+     "o": [
+      "Mười hai giờ chủ nhật",
+      "Lùi thêm một ngày",
+      "Sáu giờ chiều thứ sáu"
+     ],
+     "a": 2,
+     "e": "Người đáp nói 不延后 và giữ mốc thứ sáu."
+    },
+    {
+     "q": "Vì sao cần giữ đủ nội dung khi chuyển tin?",
+     "o": [
+      "Để không mất phạm vi và phần không đổi",
+      "Để ai cũng tưởng mọi nhóm đổi",
+      "Để ẩn hạn đăng ký"
+     ],
+     "a": 0,
+     "e": "Chỉ bảng giờ có thể bỏ sót 仅限 và hạn không đổi."
+    },
+    {
+     "q": "Bản mới có hiệu lực từ khi nào theo tin giả?",
+     "o": [
+      "Khi công bố",
+      "Chỉ sau buổi cuối",
+      "Không có hiệu lực"
+     ],
+     "a": 0,
+     "e": "Câu 自发布起…为准 nêu mốc bắt đầu sử dụng phiên bản mới."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc hiểu: Ba mốc không thay cho nhau",
+   "text": "木宁学习组发布了一份调整通知：入门组原定本周六下午两点到四点在青禾室上课，现改为周日上午十点到十二点，地点换成木宁室。本次变更仅限入门组，提高组仍按周六下午原安排进行。\n\n有人看见“延后”就以为报名也能晚交一天，还有人只转发新时间表，没写适用组别，结果提高组同学也准备周日来。组织者于是补充说明：报名仍在周五下午六点截止，并没有随上课时间延后。自新通知发布起，应以完整的新版本为准；课程只是调整，不是取消。\n\n截至当天中午，工作人员已经收到十份确认，但这只是一个统计时点，不是新的报名截止。发出前，他们把组别、日期、时段、地点和截止时间逐项核对，要求转发者不要删掉“仅限入门组”和“其余不变”。一份通知是否清楚，不在于字越少越好，而在于读者能否知道哪部分对自己有效。",
+   "vi": "Nhóm Mộc Ninh ra thông báo: nhập môn từ chiều thứ bảy hai đến bốn ở Thanh Hòa đổi sang sáng chủ nhật mười đến mười hai tại Mộc Ninh. Chỉ nhập môn đổi, nâng cao giữ lịch thứ bảy.\n\nCó người thấy “lùi” tưởng hạn nộp lùi theo; người khác chỉ chuyển bảng giờ thiếu nhóm nên học viên nâng cao định tới chủ nhật. Ban tổ chức bổ sung: đăng ký vẫn hết hạn sáu giờ chiều thứ sáu, không lùi theo buổi học. Từ khi công bố lấy bản mới đầy đủ làm chuẩn; chỉ chỉnh, không hủy.\n\nTính tới trưa đã có mười xác nhận, nhưng đây là mốc thống kê chứ không phải hạn mới. Trước gửi, họ kiểm từng mục và yêu cầu giữ phạm vi nhập môn/phần còn lại không đổi. Tin rõ không đơn giản là ít chữ, mà người đọc biết phần nào áp cho mình.",
+   "gloss": [
+    {
+     "w": "原定",
+     "py": "yuándìng",
+     "vi": "được ấn định ban đầu"
+    },
+    {
+     "w": "调整",
+     "py": "tiáozhěng",
+     "vi": "điều chỉnh"
+    },
+    {
+     "w": "仅限",
+     "py": "jǐnxiàn",
+     "vi": "chỉ giới hạn ở"
+    },
+    {
+     "w": "其余",
+     "py": "qíyú",
+     "vi": "phần còn lại"
+    },
+    {
+     "w": "截止",
+     "py": "jiézhǐ",
+     "vi": "hết hạn"
+    },
+    {
+     "w": "版本",
+     "py": "bǎnběn",
+     "vi": "phiên bản"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Nguyên nhân người nâng cao định tới chủ nhật là gì?",
+     "o": [
+      "Tin chuyển tiếp thiếu nhóm áp dụng",
+      "Họ được chính thức đổi lịch",
+      "Hạn nộp đã qua"
+     ],
+     "a": 0,
+     "e": "Bảng mới bị tách khỏi giới hạn nhóm khiến phạm vi bị hiểu sai."
+    },
+    {
+     "q": "“Lùi” trong thông báo có bao gồm hạn đăng ký không?",
+     "o": [
+      "Có, mọi thời gian đều lùi",
+      "Chỉ hạn được lùi còn giờ học không",
+      "Không"
+     ],
+     "a": 2,
+     "e": "Đoạn hai tách giờ học thay đổi với hạn nộp giữ nguyên."
+    },
+    {
+     "q": "Mốc trưa dùng làm gì?",
+     "o": [
+      "Hết hạn đăng ký mới",
+      "Bắt đầu lớp nâng cao",
+      "Thống kê xác nhận đã nhận"
+     ],
+     "a": 2,
+     "e": "截至当天中午 giới hạn thời điểm đếm, không thay thế 截止."
+    },
+    {
+     "q": "Điều nào cần giữ khi chuyển tiếp?",
+     "o": [
+      "Mỗi người tự suy nhóm mình",
+      "Phạm vi nhóm và các phần không đổi",
+      "Chỉ một ảnh không có chú thích"
+     ],
+     "a": 1,
+     "e": "Hai cụm được yêu cầu giữ giúp xác định tin áp cho ai."
+    },
+    {
+     "q": "Câu cuối đánh giá tin rõ dựa trên gì?",
+     "o": [
+      "Người đọc xác định phần có hiệu lực với mình",
+      "Chỉ độ ngắn của tin",
+      "Số người chia sẻ"
+     ],
+     "a": 0,
+     "e": "Bài nhấn chức năng hiểu đúng phạm vi hơn là giảm chữ bằng mọi giá."
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Nhận diện chữ trong bài",
+   "items": [
+    {
+     "c": "原",
+     "py": "yuán",
+     "hv": "nguyên",
+     "parts": "厂 bao 白 và 小",
+     "strokes": 10,
+     "vi": "ban đầu",
+     "words": "原定，原来"
+    },
+    {
+     "c": "仅",
+     "py": "jǐn",
+     "hv": "cận",
+     "parts": "亻 bên trái, 又 bên phải",
+     "strokes": 4,
+     "vi": "chỉ",
+     "words": "仅限，仅有"
+    },
+    {
+     "c": "余",
+     "py": "yú",
+     "hv": "dư",
+     "parts": "人 ở trên, phần dưới",
+     "strokes": 7,
+     "vi": "còn lại",
+     "words": "其余，多余"
+    },
+    {
+     "c": "仍",
+     "py": "réng",
+     "hv": "nhưng",
+     "parts": "亻 bên trái, 乃 bên phải",
+     "strokes": 4,
+     "vi": "vẫn",
+     "words": "仍然，仍旧"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói có nhiệm vụ",
+   "tasks": [
+    {
+     "p": "Giải thích chỉ nhập môn đổi sang chủ nhật ở Mộc Ninh; nâng cao và hạn nộp giữ nguyên.",
+     "model": "调整仅限入门组：周日上午十点到十二点，木宁室。提高组仍然周六下午在青禾室。报名截止不变，还是周五下午六点，不跟着延后。",
+     "py": "Tiáozhěng jǐnxiàn rùménzǔ: zhōurì shàngwǔ shí diǎn dào shí’èr diǎn, Mùníng Shì. Tígāozǔ réngrán zhōuliù xiàwǔ zài Qīnghé Shì. Bàomíng jiézhǐ bú biàn, háishi zhōuwǔ xiàwǔ liù diǎn, bù gēnzhe yánhòu.",
+     "vi": "Chỉ nhập môn đổi: chủ nhật mười đến mười hai, Mộc Ninh. Nâng cao vẫn chiều thứ bảy Thanh Hòa. Hạn nộp vẫn thứ sáu sáu giờ, không lùi theo.",
+     "tips": "Nêu phạm vi trước dữ kiện mới, sau đó nhắc rõ phần không đổi."
+    },
+    {
+     "p": "Một bạn hiểu mốc trưa thống kê là hạn đăng ký. Sửa và nhắc đọc bản đầy đủ.",
+     "model": "截至中午收到十份确认，只是在说当时的数量，不是说中午截止报名。真正截止是周五六点。请看完整新通知，别只看转发的时间表。",
+     "py": "Jiézhì zhōngwǔ shōudào shí fèn quèrèn, zhǐ shì zài shuō dāngshí de shùliàng, bú shì shuō zhōngwǔ jiézhǐ bàomíng. Zhēnzhèng jiézhǐ shì zhōuwǔ liù diǎn. Qǐng kàn wánzhěng xīn tōngzhī, bié zhǐ kàn zhuǎnfā de shíjiānbiǎo.",
+     "vi": "Tính tới trưa có mười xác nhận chỉ nói số lúc đó, không nghĩa trưa hết đăng ký. Hạn thật là thứ sáu sáu giờ. Hãy xem tin mới đầy đủ, không chỉ bảng chuyển tiếp.",
+     "tips": "Phân biệt mốc tổng hợp và mốc kết thúc bằng đúng động từ đi kèm."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết để hoàn thành tình huống",
+   "task": "Viết từ 180 đến 230 chữ Hán một thông báo đính chính cho hai nhóm giả: lịch nhập môn cũ/mới và nơi mới, nhóm nâng cao không đổi, hạn đăng ký không đổi, bản có hiệu lực và yêu cầu chuyển tiếp đầy đủ.",
+   "min": 180,
+   "model": "补充通知：仅调整入门组。原定周六下午两点到四点在青禾室的课程，现改为周日上午十点到十二点，在木宁室进行。提高组仍按周六下午原时间、原地点上课，不受此次变动影响。\n\n请注意，延后的是入门组上课时间，不是报名截止。报名仍在周五下午六点结束。此前提到“截至中午收到十份确认”，只是统计数量，没有设立新的截止时间。\n\n自本通知发布起，请以这份完整版本为准。课程没有取消；如以后再有变更，将另行说明。转发时请保留适用组别和所有不变事项，不要只截取一张表。收到后请核对自己所属的组别，有疑问先问清楚，避免按旧消息到错时间或地点。",
+   "modelVi": "Thông báo bổ sung: Chỉ nhập môn đổi từ chiều thứ bảy hai đến bốn tại Thanh Hòa sang chủ nhật mười đến mười hai ở Mộc Ninh. Nâng cao giữ giờ/nơi cũ.\n\nLùi giờ học nhập môn, không lùi hạn đăng ký vẫn chiều thứ sáu sáu giờ. “Tới trưa nhận mười xác nhận” chỉ là thống kê, không lập hạn mới.\n\nTừ khi công bố dùng bản đầy đủ này. Không hủy lớp; đổi tiếp sẽ báo riêng. Chuyển tin giữ nhóm áp dụng và mọi phần không đổi, đừng chỉ cắt bảng. Người nhận kiểm nhóm của mình, hỏi rõ để không tới sai theo tin cũ.",
+   "tips": [
+    "Dùng một phiên bản lịch mới nhất quán, không đưa hai giờ như cùng còn hiệu lực.",
+    "Đặt các phần giữ nguyên cạnh phần thay đổi để tránh suy lan."
+   ],
+   "checklist": [
+    "Đủ nhóm, lịch cũ/mới, nơi",
+    "Hạn đăng ký tách riêng",
+    "Có hiệu lực và không hủy",
+    "Có hướng dẫn chuyển tiếp/kiểm nhóm"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "仅限入门组，提高组的时间地点不变。",
+   "lang": "zh-CN",
+   "q": "Nhóm nào chịu điều chỉnh?",
+   "o": [
+    "Chỉ nâng cao",
+    "Chỉ nhập môn",
+    "Cả hai"
+   ],
+   "a": 1,
+   "e": "仅限 giới hạn thay đổi, còn nhóm nâng cao được nói rõ không đổi."
+  },
+  {
+   "t": "listen",
+   "say": "截至中午收到十份，不代表报名中午截止。",
+   "lang": "zh-CN",
+   "q": "Mốc trưa trong câu là gì?",
+   "o": [
+    "Giờ bắt đầu mọi lớp",
+    "Mốc tổng hợp số đã nhận",
+    "Hạn kết thúc đăng ký"
+   ],
+   "a": 1,
+   "e": "截至 giới hạn lúc đếm; vế sau trực tiếp bác nhầm thành hạn nộp."
+  },
+  {
+   "t": "mc",
+   "q": "Nếu chỉ giờ học nhập môn đổi, kết luận nào đúng?",
+   "o": [
+    "Hạn nộp luôn lùi theo",
+    "Không tự suy mọi nhóm và hạn đều đổi",
+    "Cả lịch nâng cao chắc chắn đổi"
+   ],
+   "a": 1,
+   "e": "Phạm vi thông báo phải đọc theo điều được nêu, không lan sang mục giữ nguyên."
+  },
+  {
+   "t": "mc",
+   "q": "自发布起 nghĩa là gì trong thông báo?",
+   "o": [
+    "Tính tới lúc công bố rồi dừng",
+    "Sau khi mọi lớp xong",
+    "Kể từ khi công bố"
+   ],
+   "a": 2,
+   "e": "自…起 đặt mốc bắt đầu áp dụng bản mới."
+  },
+  {
+   "t": "mc",
+   "q": "其余安排不变 nói gì?",
+   "o": [
+    "Tất cả bị hủy",
+    "Các phần ngoài điều chỉnh giữ nguyên",
+    "Không có phần nào có hiệu lực"
+   ],
+   "a": 1,
+   "e": "其余 chỉ phần còn lại, 不变 giữ trạng thái cũ."
+  },
+  {
+   "t": "mc",
+   "q": "Cách chuyển tin nào giảm hiểu nhầm?",
+   "o": [
+    "Tự thêm nhóm khác",
+    "Giữ cả phạm vi và phần không đổi",
+    "Chỉ cắt dòng giờ mới"
+   ],
+   "a": 1,
+   "e": "Bỏ giới hạn có thể khiến người không thuộc nhóm cũng đổi lịch."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “chỉ giới hạn”: 调整___入门组。",
+   "a": "仅限",
+   "py": "jǐnxiàn",
+   "e": "仅限 nêu phạm vi thay đổi."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “hết hạn”: 报名周五六点___。",
+   "a": "截止",
+   "py": "jiézhǐ",
+   "e": "截止 gắn với việc dừng nhận đăng ký."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “phiên bản”: 请以新___为准。",
+   "a": "版本",
+   "py": "bǎnběn",
+   "e": "版本 phân biệt nội dung mới với bản cũ đã bị thay."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "现",
+    "调整为",
+    "周日上午",
+    "原定周六的课程"
+   ],
+   "a": "原定周六的课程现调整为周日上午。",
+   "e": "Nêu lịch cũ trước rồi dùng 调整为 chỉ lịch thay thế."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "保持",
+    "不变",
+    "其余安排"
+   ],
+   "a": "其余安排保持不变。",
+   "e": "Các phần không thuộc thay đổi được giữ nguyên."
+  },
+  {
+   "t": "match",
+   "q": "Nối mốc và phạm vi trong thông báo.",
+   "pairs": [
+    [
+     "生效",
+     "có hiệu lực"
+    ],
+    [
+     "仅限",
+     "chỉ giới hạn ở"
+    ],
+    [
+     "其余",
+     "phần còn lại"
+    ],
+    [
+     "截止",
+     "hết hạn"
+    ]
+   ],
+   "e": "生效 bắt đầu áp dụng, 截止 hết hạn, 仅限 giới hạn đối tượng và 其余 là phần ngoài phạm vi ấy."
+  },
+  {
+   "t": "dict",
+   "say": "仅限入门组，其余安排不变。",
+   "lang": "zh-CN",
+   "a": "仅限入门组，其余安排不变。",
+   "py": "Jǐnxiàn rùménzǔ, qíyú ānpái bú biàn.",
+   "e": "Giữ cả giới hạn và phần không đổi, không chỉ chép dòng lịch mới."
+  }
+ ],
+ "teacher": {
+  "time": "180 phút, chia thành hai buổi 90 phút",
+  "prep": "Hai bản thông báo tự đặt, thẻ nhóm nhập môn/nâng cao, ba cột giờ học/hạn nộp/mốc thống kê và một ảnh bảng bị cắt mất phạm vi.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Cho hai nhóm đọc ảnh bảng thiếu tiêu đề, học viên dự đoán hai cách hiểu khác nhau rồi xác định thông tin phạm vi còn thiếu."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dạy từ thông báo và phiên bản bằng bản cũ/mới, luyện 仅限、仍然、截止 trong cụm có đối tượng."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dựng mẫu 原定…现调整为… và 其余不变, học viên thay một mục nhưng phải giữ các mục ngoài phạm vi."
+   },
+   {
+    "t": "25 phút",
+    "do": "Phân loại 自…起、截至、截止 vào đầu hiệu lực, lúc thống kê, cuối nhận; dùng ba mốc khác nhau trên cùng lịch."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nghe rà đính chính, điền lịch hai nhóm và hạn nộp; chỉ ra những câu hỏi bị bác thay vì chỉ ghi số mới."
+   },
+   {
+    "t": "10 phút",
+    "do": "Mở buổi hai bằng tin chuyển tiếp thiếu nhóm, học viên viết hai câu bổ sung đủ phạm vi và phần không đổi."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc thông báo, tìm nguyên nhân hai hiểu nhầm và bằng chứng sửa từng hiểu nhầm bằng mốc/động từ cụ thể."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nhóm ba đóng vai người soạn, người chuyển, người nhận thuộc nhóm khác; kiểm tin có bị mất giới hạn qua mỗi lượt không."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết từ một trăm tám mươi đến hai trăm ba mươi chữ, bạn đọc đánh ba màu cho giờ học, hạn nộp, mốc hiệu lực."
+   },
+   {
+    "t": "15 phút",
+    "do": "Làm bài tự chấm rồi giải thích một khác biệt giữa 截至 và 截止 bằng chính dữ kiện bài, không chỉ dịch từ."
+   }
+  ],
+  "games": [
+   "Chỉ đổi một ô: mỗi đội nhận bảng nhiều nhóm và thẻ điều chỉnh một mục, phải thông báo sao cho đội kia chỉ đổi đúng ô đó."
+  ],
+  "errors": [
+   "Thấy 延后 rồi lùi mọi mốc: gắn thay đổi với đúng chủ thể và mục được nêu.",
+   "Nhầm 截至 trưa với hạn nộp: đọc động từ tổng hợp số và mốc 截止 riêng.",
+   "Chuyển bảng giờ mà bỏ 仅限: giữ tiêu đề/phạm vi khi truyền thông tin.",
+   "Giữ hai phiên bản như cùng chuẩn: ghi rõ mốc bắt đầu áp dụng bản mới.",
+   "Nói 不变 nhưng không nêu phần nào: gọi đúng nhóm và những mốc không đổi để người đọc không đoán."
+  ],
+  "homework": "Tạo hai nhóm và một thông báo chỉ đổi một mục, với hạn đăng ký giữ nguyên. Viết bản đính chính đầy đủ, thu âm giải thích cho người thuộc nhóm không bị ảnh hưởng."
+ }
+}

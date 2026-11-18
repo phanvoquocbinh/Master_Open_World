@@ -1,157 +1,1053 @@
 {
-  "no": 8,
-  "title": "你在哪儿？– Vị trí & nơi chốn: 在, 哪儿, phương vị từ",
-  "sub": "Wǒ de shū zài nǎr? 我的书在哪儿？",
-  "goals": [
-    "Hỏi và nói vị trí người / vật: 猫在哪儿？– 在椅子下面。",
-    "Dùng phương vị từ 上, 下, 里, 前面, 后面 đúng trật tự (桌子上 – ngược tiếng Việt)",
-    "Nói làm gì ở đâu: 在 + nơi chốn + động từ (我在学校学习), 住在, 去 + nơi chốn",
-    "Phân biệt câu 在 (vật ở đâu) và câu 有 tồn tại (ở đâu có gì)",
-    "Đọc đúng âm cuốn lưỡi 哪儿, 这儿, 那儿 và phân biệt l – n (里 / 你)"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
-      {"w": "在", "py": "zài", "hv": "tại", "pos": "v", "vi": "ở, tại (động từ & giới từ)", "ex": "我妈妈在学校。", "exPy": "Wǒ māma zài xuéxiào.", "exVi": "Mẹ tôi đang ở trường."},
-      {"w": "哪儿", "py": "nǎr", "hv": "na nhi", "pos": "pron", "vi": "đâu, chỗ nào", "ex": "你在哪儿？", "exPy": "Nǐ zài nǎr?", "exVi": "Bạn đang ở đâu?"},
-      {"w": "这儿", "py": "zhèr", "hv": "giá nhi", "pos": "pron", "vi": "chỗ này, ở đây", "ex": "我的书在这儿。", "exPy": "Wǒ de shū zài zhèr.", "exVi": "Sách của tôi ở đây."},
-      {"w": "那儿", "py": "nàr", "hv": "na nhi", "pos": "pron", "vi": "chỗ kia, ở đó", "ex": "猫在那儿！", "exPy": "Māo zài nàr!", "exVi": "Con mèo ở đằng kia!"},
-      {"w": "上", "py": "shàng", "hv": "thượng", "pos": "n", "vi": "trên (phương vị từ); lên", "ex": "书在桌子上。", "exPy": "Shū zài zhuōzi shang.", "exVi": "Sách ở trên bàn."},
-      {"w": "下", "py": "xià", "hv": "hạ", "pos": "n", "vi": "dưới (下面 = phía dưới); xuống", "ex": "我的手机在书下面。", "exPy": "Wǒ de shǒujī zài shū xiàmiàn.", "exVi": "Điện thoại của tôi ở dưới quyển sách."},
-      {"w": "里", "py": "lǐ", "hv": "lý", "pos": "n", "vi": "trong (phương vị từ)", "ex": "杯子里有水。", "exPy": "Bēizi li yǒu shuǐ.", "exVi": "Trong cốc có nước."},
-      {"w": "前面", "py": "qiánmiàn", "hv": "tiền diện", "pos": "n", "vi": "phía trước", "ex": "学校前面有一个商店。", "exPy": "Xuéxiào qiánmiàn yǒu yí ge shāngdiàn.", "exVi": "Trước trường có một cửa hàng."},
-      {"w": "后面", "py": "hòumiàn", "hv": "hậu diện", "pos": "n", "vi": "phía sau", "ex": "医院在火车站后面。", "exPy": "Yīyuàn zài huǒchēzhàn hòumiàn.", "exVi": "Bệnh viện ở phía sau ga tàu."},
-      {"w": "桌子", "py": "zhuōzi", "hv": "trác tử", "pos": "n", "vi": "cái bàn", "ex": "这是我的桌子。", "exPy": "Zhè shì wǒ de zhuōzi.", "exVi": "Đây là bàn của tôi."},
-      {"w": "椅子", "py": "yǐzi", "hv": "ỷ tử", "pos": "n", "vi": "cái ghế", "ex": "椅子上有一只猫。", "exPy": "Yǐzi shang yǒu yì zhī māo.", "exVi": "Trên ghế có một con mèo."},
-      {"w": "猫", "py": "māo", "hv": "miêu", "pos": "n", "vi": "con mèo", "ex": "我家有一只猫。", "exPy": "Wǒ jiā yǒu yì zhī māo.", "exVi": "Nhà tôi có một con mèo."},
-      {"w": "狗", "py": "gǒu", "hv": "cẩu", "pos": "n", "vi": "con chó", "ex": "你喜欢狗吗？", "exPy": "Nǐ xǐhuan gǒu ma?", "exVi": "Bạn thích chó không?"},
-      {"w": "去", "py": "qù", "hv": "khứ", "pos": "v", "vi": "đi (đến đâu)", "ex": "你去哪儿？— 我去学校。", "exPy": "Nǐ qù nǎr? — Wǒ qù xuéxiào.", "exVi": "Bạn đi đâu? — Tôi đến trường."},
-      {"w": "学校", "py": "xuéxiào", "hv": "học hiệu", "pos": "n", "vi": "trường học", "ex": "我的学校很大。", "exPy": "Wǒ de xuéxiào hěn dà.", "exVi": "Trường tôi rất rộng."},
-      {"w": "医院", "py": "yīyuàn", "hv": "y viện", "pos": "n", "vi": "bệnh viện", "ex": "我爸爸在医院工作。", "exPy": "Wǒ bàba zài yīyuàn gōngzuò.", "exVi": "Bố tôi làm việc ở bệnh viện."},
-      {"w": "商店", "py": "shāngdiàn", "hv": "thương điếm", "pos": "n", "vi": "cửa hàng", "ex": "商店里有很多东西。", "exPy": "Shāngdiàn li yǒu hěn duō dōngxi.", "exVi": "Trong cửa hàng có rất nhiều đồ."},
-      {"w": "火车站", "py": "huǒchēzhàn", "hv": "hoả xa trạm", "pos": "n", "vi": "ga tàu hoả", "ex": "火车站在哪儿？", "exPy": "Huǒchēzhàn zài nǎr?", "exVi": "Ga tàu ở đâu?"},
-      {"w": "住", "py": "zhù", "hv": "trú", "pos": "v", "vi": "ở, sống, cư trú", "ex": "你住在哪儿？— 我住在河内。", "exPy": "Nǐ zhù zài nǎr? — Wǒ zhù zài Hénèi.", "exVi": "Bạn sống ở đâu? — Tôi sống ở Hà Nội."},
-      {"w": "北京", "py": "Běijīng", "hv": "Bắc Kinh", "pos": "n", "vi": "Bắc Kinh", "ex": "北京很大。", "exPy": "Běijīng hěn dà.", "exVi": "Bắc Kinh rất rộng lớn."}
-    ]},
-    {"k": "sounds", "h": "Phát âm: âm cuốn lưỡi 儿, l – n, zh – z, 去 qù", "items": [
-      {"sym": "âm cuốn lưỡi (儿化)", "ex": ["哪儿", "这儿", "那儿"], "vi": "儿 gắn vào âm trước: 哪儿 <b>nǎr</b>, 这儿 <b>zhèr</b>, 那儿 <b>nàr</b> – cuối âm cong đầu lưỡi lên. Giọng Bắc Kinh dùng nhiều; miền Nam Trung Quốc hay nói 哪里 nǎlǐ, 这里 zhèlǐ, 那里 nàlǐ – cũng hoàn toàn đúng."},
-      {"sym": "l – n", "ex": ["里", "你", "那", "六"], "vi": "Người miền Bắc Việt Nam hay lẫn l/n. <b>n</b>: hơi đi qua mũi (bịt mũi sẽ thấy khó đọc). <b>l</b>: hơi thoát hai bên lưỡi, không qua mũi. 里 lǐ ≠ 你 nǐ; 那 nà ≠ 辣 là (cay).", "pairs": [["里", "你"], ["那", "辣"]]},
-      {"sym": "zh – z", "ex": ["住", "桌子", "火车站", "在"], "vi": "住 zhù, 桌 zhuō, 站 zhàn: uốn lưỡi (≈ “tr”). 在 zài, 子 zi: lưỡi phẳng (≈ “ch” nhẹ). 火车站 huǒchēzhàn có h – ch – zh liên tiếp: đọc chậm từng âm.", "pairs": [["站", "赞"]]},
-      {"sym": "去 qù = q + ü", "ex": ["去", "去哪儿"], "vi": "去 viết qu nhưng nguyên âm là <b>ü</b>: môi tròn, lưỡi như “i”. Đừng đọc “chu” hay “chi”. 去 qù ≠ 气 qì.", "pairs": [["去", "气"]]},
-      {"sym": "g – k (ôn)", "ex": ["狗", "口"], "vi": "狗 <b>gǒu</b> không bật hơi; 口 <b>kǒu</b> bật hơi. Đọc nhầm “nhà tôi có 5 con chó” thành “5 miệng ăn” thì buồn cười lắm!", "pairs": [["狗", "口"]]}
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 1: 在 + nơi chốn; phương vị từ đứng SAU danh từ", "html": "<p><b>Người / vật + 在 + nơi chốn</b> = … ở … Phủ định <b>不在</b>; hỏi <b>…在哪儿？</b> – trật tự giống hệt tiếng Việt: “Bạn ở đâu?” = 你在哪儿？</p><p>Vị trí cụ thể dùng <b>danh từ + phương vị từ</b> – NGƯỢC tiếng Việt: “trên bàn” = 桌子<b>上</b>, “trong nhà” = 家<b>里</b>, “trước trường” = 学校<b>前面</b>.</p>", "table": [["Tiếng Việt", "Tiếng Trung", "Pinyin"], ["trên bàn", "桌子上 / 桌子上面", "zhuōzi shang / zhuōzi shàngmiàn"], ["dưới ghế", "椅子下面", "yǐzi xiàmiàn"], ["trong cốc", "杯子里", "bēizi li"], ["trước trường", "学校前面", "xuéxiào qiánmiàn"], ["sau bệnh viện", "医院后面", "yīyuàn hòumiàn"]], "ex": [
-      {"t": "我的书在哪儿？— 在桌子上。", "py": "Wǒ de shū zài nǎr? — Zài zhuōzi shang.", "vi": "Sách của tôi đâu? — Ở trên bàn."},
-      {"t": "猫在椅子下面。", "py": "Māo zài yǐzi xiàmiàn.", "vi": "Con mèo ở dưới ghế."},
-      {"t": "爸爸不在家，他在医院。", "py": "Bàba bú zài jiā, tā zài yīyuàn.", "vi": "Bố không ở nhà, bố ở bệnh viện."},
-      {"t": "商店在学校前面。", "py": "Shāngdiàn zài xuéxiào qiánmiàn.", "vi": "Cửa hàng ở trước trường."}
-    ], "tips": ["❌ <i>在上桌子</i> (theo tiếng Việt “ở trên bàn”) → ✅ 在桌子上。", "Tên nước, thành phố KHÔNG thêm 里: ❌ <i>在北京里</i> → ✅ 在北京. Nơi chốn sẵn có (学校, 医院, 家) thường không cần 里.", "Đồ vật (桌子, 书, 椅子) muốn thành nơi chốn PHẢI thêm phương vị từ: ❌ <i>猫在桌子</i> → ✅ 猫在桌子上。"]},
-    {"k": "grammar", "h": "Ngữ pháp 2: 在 + nơi chốn + động từ; 住在; 去 + nơi chốn", "html": "<p><b>Chủ ngữ + 在 + nơi chốn + động từ</b> = làm gì ở đâu. Nơi chốn đứng TRƯỚC động từ – ngược với tiếng Việt “tôi học tiếng Trung <i>ở trường</i>”.</p><p>Ngoại lệ hay dùng: <b>住在 + nơi</b> (sống ở): 我住在河内。</p><p><b>去 + nơi chốn</b> = đi đến đâu: 你去哪儿？— 我去学校。 (Không có 在: ❌ 去在学校.)</p>", "table": [["Tiếng Việt", "Tiếng Trung"], ["Tôi học tiếng Trung ở trường.", "我在学校学习汉语。"], ["Bố tôi làm việc ở bệnh viện.", "我爸爸在医院工作。"], ["Bạn sống ở đâu?", "你住在哪儿？"], ["Bạn đi đâu đấy?", "你去哪儿？"]], "ex": [
-      {"t": "我在学校学习汉语。", "py": "Wǒ zài xuéxiào xuéxí Hànyǔ.", "vi": "Tôi học tiếng Trung ở trường."},
-      {"t": "我爸爸在医院工作。", "py": "Wǒ bàba zài yīyuàn gōngzuò.", "vi": "Bố tôi làm việc ở bệnh viện. (工作 – bài 12)"},
-      {"t": "你住在哪儿？— 我住在河内。", "py": "Nǐ zhù zài nǎr? — Wǒ zhù zài Hénèi.", "vi": "Bạn sống ở đâu? — Tôi sống ở Hà Nội."},
-      {"t": "你去哪儿？— 我去火车站。", "py": "Nǐ qù nǎr? — Wǒ qù huǒchēzhàn.", "vi": "Bạn đi đâu? — Tôi ra ga tàu."}
-    ], "tips": ["❌ <i>我学习汉语在学校</i> → ✅ 我在学校学习汉语。 Đây là lỗi trật tự số 1 của người Việt!", "Có cả thời gian và nơi chốn: thời gian trước, nơi chốn sau – 我明天在家学习 (bài 12 ôn kỹ).", "去 đi thẳng với nơi chốn: ❌ <i>去在学校</i> → ✅ 去学校."]},
-    {"k": "grammar", "h": "Ngữ pháp 3: 在 hay 有? – “vật ở đâu” và “ở đâu có gì”", "html": "<p>Hai cách nói vị trí, khác nhau ở <b>cái gì là thông tin mới</b>:</p><ul><li><b>Vật (đã biết, xác định) + 在 + nơi</b>: 我的猫在椅子上。– trả lời “ở đâu?”.</li><li><b>Nơi + 有 + vật (chưa biết)</b>: 椅子上有一只猫。– trả lời “có gì?”.</li></ul><p>Phủ định câu tồn tại dùng <b>没有</b>: 桌子上没有书。</p>", "table": [["在 – vật ở đâu?", "有 – ở đó có gì?"], ["书在桌子上。", "桌子上有一本书。"], ["商店在学校前面。", "学校前面有一个商店。"], ["我妈妈在家。", "家里有人吗？"]], "ex": [
-      {"t": "学校前面有一个商店。", "py": "Xuéxiào qiánmiàn yǒu yí ge shāngdiàn.", "vi": "Trước trường có một cửa hàng."},
-      {"t": "杯子里有水吗？— 没有。", "py": "Bēizi li yǒu shuǐ ma? — Méiyǒu.", "vi": "Trong cốc có nước không? — Không có."},
-      {"t": "火车站在哪儿？— 在医院后面。", "py": "Huǒchēzhàn zài nǎr? — Zài yīyuàn hòumiàn.", "vi": "Ga tàu ở đâu? — Ở sau bệnh viện."}
-    ], "tips": ["❌ <i>有一本书在桌子上</i> (dịch từ “there is a book on the table”) → ✅ 桌子上有一本书。", "Vật xác định (我的书, 那个商店) dùng 在; vật chưa xác định (一本书, 一个商店) dùng 有.", "Con vật dùng lượng từ <b>只 zhī</b>: 一只猫, 两只狗."]},
-    {"k": "text", "h": "Mở rộng: phương hướng & địa danh Hà Nội", "html": "<p>Từ chỉ hướng rất hay dùng khi hỏi đường (HSK 2): <b>左边</b> zuǒbian (bên trái), <b>右边</b> yòubian (bên phải), <b>旁边</b> pángbiān (bên cạnh), <b>中间</b> zhōngjiān (ở giữa), <b>对面</b> duìmiàn (đối diện). Hậu tố 面 / 边 thay được cho nhau: 前面 = 前边, 后面 = 后边, 上面 = 上边.</p><p>Địa danh Hà Nội bằng chữ Hán – âm Hán Việt giúp nhớ ngay:</p><ul><li>还剑湖 Huánjiàn Hú – hồ Hoàn Kiếm</li><li>西湖 Xī Hú – Hồ Tây</li><li>巴亭广场 Bātíng Guǎngchǎng – quảng trường Ba Đình</li><li>河内火车站 Hénèi huǒchēzhàn – ga Hà Nội</li></ul>"},
-    {"k": "dialog", "h": "Nghe: Sáng thứ Hai vội vàng", "lang": "zh-CN", "note": "Sáng thứ Hai, Tiểu Lan vội đi học nhưng không tìm thấy sách. Nghe lần 1 không nhìn chữ: sách ở đâu?", "lines": [
-      {"s": "小兰", "g": "f", "t": "妈妈，我的汉语书在哪儿？", "py": "Māma, wǒ de Hànyǔ shū zài nǎr?", "vi": "Mẹ ơi, sách tiếng Trung của con đâu rồi?"},
-      {"s": "妈妈", "g": "f", "t": "在桌子上。", "py": "Zài zhuōzi shang.", "vi": "Ở trên bàn ấy."},
-      {"s": "小兰", "g": "f", "t": "桌子上没有。", "py": "Zhuōzi shang méiyǒu.", "vi": "Trên bàn không có ạ."},
-      {"s": "妈妈", "g": "f", "t": "你看，在椅子下面。", "py": "Nǐ kàn, zài yǐzi xiàmiàn.", "vi": "Con xem kìa, ở dưới ghế."},
-      {"s": "小兰", "g": "f", "t": "哈哈，猫也在那儿！", "py": "Hāhā, māo yě zài nàr!", "vi": "Ha ha, con mèo cũng ở đó!"},
-      {"s": "妈妈", "g": "f", "t": "你去哪儿？", "py": "Nǐ qù nǎr?", "vi": "Con đi đâu đấy?"},
-      {"s": "小兰", "g": "f", "t": "我去学校。爸爸在家吗？", "py": "Wǒ qù xuéxiào. Bàba zài jiā ma?", "vi": "Con đến trường. Bố có ở nhà không mẹ?"},
-      {"s": "妈妈", "g": "f", "t": "不在，他在医院。", "py": "Bú zài, tā zài yīyuàn.", "vi": "Không, bố ở bệnh viện."},
-      {"s": "小兰", "g": "f", "t": "啊？爸爸在医院？", "py": "Á? Bàba zài yīyuàn?", "vi": "Hả? Bố ở bệnh viện ạ?"},
-      {"s": "妈妈", "g": "f", "t": "你爸爸是医生，他在医院工作！", "py": "Nǐ bàba shì yīshēng, tā zài yīyuàn gōngzuò!", "vi": "Bố con là bác sĩ, bố làm việc ở bệnh viện mà!"},
-      {"s": "小兰", "g": "f", "t": "对，对！妈妈，再见！", "py": "Duì, duì! Māma, zàijiàn!", "vi": "À đúng rồi! Mẹ ơi, con đi đây!"},
-      {"s": "妈妈", "g": "f", "t": "小兰，你的手机在这儿！", "py": "Xiǎo Lán, nǐ de shǒujī zài zhèr!", "vi": "Lan ơi, điện thoại của con ở đây này!"}
-    ], "qs": [
-      {"q": "Sách tiếng Trung của Tiểu Lan ở đâu?", "o": ["Trên bàn", "Dưới ghế", "Trong cặp"], "a": 1, "e": "在椅子下面 – ở dưới ghế (桌子上没有 – trên bàn không có)."},
-      {"q": "Con mèo ở đâu?", "o": ["Trên bàn", "Cũng ở dưới ghế", "Ở trường"], "a": 1, "e": "猫也在那儿 – 那儿 = chỗ dưới ghế vừa nói."},
-      {"q": "Tiểu Lan đi đâu?", "o": ["Bệnh viện", "Trường học", "Cửa hàng"], "a": 1, "e": "我去学校。"},
-      {"q": "Bố Tiểu Lan làm nghề gì?", "o": ["Giáo viên", "Bác sĩ", "Nhân viên cửa hàng"], "a": 1, "e": "你爸爸是医生，他在医院工作。"},
-      {"q": "Cuối cùng Tiểu Lan để quên gì? 你的___在这儿！(gõ chữ Hán hoặc pinyin)", "a": "手机", "alt": ["shouji"], "e": "你的手机在这儿！– Điện thoại của con ở đây!"}
-    ]},
-    {"k": "read", "h": "Đọc: Anna sống ở Hà Nội", "title": "我住在河内", "text": "我叫安娜，我是美国人。现在我住在河内。\n\n我家前面有一个商店，后面是一个医院。我的学校不在这儿，在火车站那儿。\n\n我有一只猫，它很小。它喜欢在椅子上睡觉。我很喜欢河内！", "py": "Wǒ jiào Ānnà, wǒ shì Měiguó rén. Xiànzài wǒ zhù zài Hénèi.\n\nWǒ jiā qiánmiàn yǒu yí ge shāngdiàn, hòumiàn shì yí ge yīyuàn. Wǒ de xuéxiào bú zài zhèr, zài huǒchēzhàn nàr.\n\nWǒ yǒu yì zhī māo, tā hěn xiǎo. Tā xǐhuan zài yǐzi shang shuìjiào. Wǒ hěn xǐhuan Hénèi!", "vi": "Tôi tên Anna, tôi là người Mỹ. Hiện giờ tôi sống ở Hà Nội.\n\nTrước nhà tôi có một cửa hàng, phía sau là một bệnh viện. Trường tôi không ở đây, mà ở chỗ ga tàu.\n\nTôi có một con mèo, nó còn nhỏ. Nó thích ngủ trên ghế. Tôi rất thích Hà Nội!", "gloss": [
-      {"w": "只", "py": "zhī", "vi": "con (lượng từ cho con vật)"},
-      {"w": "它", "py": "tā", "vi": "nó (chỉ con vật, đồ vật)"},
-      {"w": "睡觉", "py": "shuìjiào", "vi": "ngủ (bài 11)"},
-      {"w": "火车站那儿", "py": "huǒchēzhàn nàr", "vi": "chỗ ga tàu, khu ga tàu"}
-    ], "qs": [
-      {"q": "Trước nhà Anna có gì?", "o": ["Bệnh viện", "Cửa hàng", "Trường học"], "a": 1, "e": "我家前面有一个商店。"},
-      {"q": "Trường của Anna ở đâu?", "o": ["Ngay cạnh nhà", "Ở chỗ ga tàu", "Sau bệnh viện"], "a": 1, "e": "我的学校不在这儿，在火车站那儿。"},
-      {"q": "Con mèo thích ngủ ở đâu?", "o": ["Trên ghế", "Dưới bàn", "Trong cửa hàng"], "a": 0, "e": "它喜欢在椅子上睡觉。"},
-      {"q": "Anna hiện sống ở đâu? (gõ chữ Hán hoặc pinyin)", "a": "河内", "alt": ["henei"], "e": "现在我住在河内。"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "在", "py": "zài", "hv": "tại", "parts": "𠂇 + 丨 + 土 (thổ – đất)", "strokes": 6, "vi": "ở, tại – đứng vững trên mặt đất", "words": "在家, 在哪儿"},
-      {"c": "哪", "py": "nǎ", "hv": "na", "parts": "口 (miệng) + 那 (na – gợi âm)", "strokes": 9, "vi": "nào, đâu – mở miệng hỏi", "words": "哪儿, 哪国"},
-      {"c": "儿", "py": "ér", "hv": "nhi", "parts": "tượng hình đứa trẻ (đầu to, hai chân)", "strokes": 2, "vi": "con trẻ; hậu tố cuốn lưỡi -r", "words": "哪儿, 女儿, 儿子"},
-      {"c": "上", "py": "shàng", "hv": "thượng", "parts": "chỉ sự: vạch ngắn nằm TRÊN đường ngang", "strokes": 3, "vi": "trên, lên", "words": "桌子上, 上午"},
-      {"c": "下", "py": "xià", "hv": "hạ", "parts": "chỉ sự: vạch ngắn nằm DƯỚI đường ngang", "strokes": 3, "vi": "dưới, xuống", "words": "下面, 下午"},
-      {"c": "里", "py": "lǐ", "hv": "lý", "parts": "田 (điền – ruộng) + 土 (thổ – đất)", "strokes": 7, "vi": "trong; nghĩa gốc là làng (lý)", "words": "家里, 杯子里"},
-      {"c": "猫", "py": "māo", "hv": "miêu", "parts": "犭(khuyển – bộ thú) + 苗 (miêu – gợi âm)", "strokes": 11, "vi": "con mèo – kêu “meo” giống âm 苗", "words": "小猫, 一只猫"}
-    ]},
-    {"k": "speak", "h": "Nói: Ở đâu? Có gì?", "tasks": [
-      {"p": "Miêu tả vị trí 4 đồ vật trong phòng bạn.", "model": "我的书在桌子上，手机在书下面，椅子在桌子前面，猫在椅子上。", "py": "Wǒ de shū zài zhuōzi shang, shǒujī zài shū xiàmiàn, yǐzi zài zhuōzi qiánmiàn, māo zài yǐzi shang.", "vi": "Sách của tôi ở trên bàn, điện thoại ở dưới sách, ghế ở trước bàn, mèo ở trên ghế.", "tips": "Danh từ + phương vị từ; 上 sau danh từ đọc nhẹ."},
-      {"p": "Hỏi bạn sống ở đâu, học tiếng Trung ở đâu; bạn trả lời.", "model": "你住在哪儿？— 我住在河内。你在哪儿学习汉语？— 我在学校学习汉语。", "py": "Nǐ zhù zài nǎr? — Wǒ zhù zài Hénèi. Nǐ zài nǎr xuéxí Hànyǔ? — Wǒ zài xuéxiào xuéxí Hànyǔ.", "vi": "Bạn sống ở đâu? — Mình sống ở Hà Nội. Bạn học tiếng Trung ở đâu? — Mình học ở trường.", "tips": "在 + nơi chốn đứng trước 学习."},
-      {"p": "Tả xung quanh nhà bạn bằng câu 有.", "model": "我家前面有一个商店，后面有一个学校。我家里有一只狗。", "py": "Wǒ jiā qiánmiàn yǒu yí ge shāngdiàn, hòumiàn yǒu yí ge xuéxiào. Wǒ jiā li yǒu yì zhī gǒu.", "vi": "Trước nhà tôi có một cửa hàng, phía sau có một trường học. Trong nhà tôi có một con chó."}
-    ]},
-    {"k": "write", "h": "Viết: Nhà tôi và khu phố", "task": "Viết 6–8 câu: bạn sống ở đâu, quanh nhà có gì (dùng 有), trong phòng bạn đồ vật nào ở đâu (dùng 在).", "min": 50, "model": "我住在河内。我家前面有一个商店，后面有一个医院。我的学校不在这儿，在火车站那儿。我的房间不大。桌子上有很多书，椅子下面有一只猫。我很喜欢我的家。", "modelVi": "Tôi sống ở Hà Nội. Trước nhà tôi có một cửa hàng, phía sau có một bệnh viện. Trường tôi không ở đây, mà ở chỗ ga tàu. Phòng tôi không rộng. Trên bàn có rất nhiều sách, dưới ghế có một con mèo. Tôi rất thích nhà mình.", "tips": ["房间 fángjiān = căn phòng (HSK 2).", "Câu 有 cho thông tin mới (一个商店); câu 在 cho vật đã biết (我的学校).", "Tên thành phố không thêm 里."], "checklist": ["Có 住在…", "Có ít nhất 2 câu 有 tồn tại", "Có ít nhất 2 câu 在 + danh từ + phương vị từ", "Phương vị từ đứng sau danh từ", "Lượng từ 只 cho con vật"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "猫在椅子下面。", "lang": "zh-CN", "q": "Con mèo ở đâu?", "o": ["Trên ghế", "Dưới ghế", "Trên bàn"], "a": 1, "e": "椅子下面 = dưới ghế."},
-    {"t": "listen", "say": "我住在北京。", "lang": "zh-CN", "q": "Người nói sống ở đâu?", "o": ["Hà Nội", "Bắc Kinh", "Mỹ"], "a": 1, "e": "住在北京 = sống ở Bắc Kinh."},
-    {"t": "listen", "say": "学校前面有一个商店。", "lang": "zh-CN", "q": "Trước trường có gì?", "o": ["Một cửa hàng", "Một bệnh viện", "Một nhà ga"], "a": 0, "e": "商店 shāngdiàn = cửa hàng."},
-    {"t": "mc", "q": "“trên bàn” nói là:", "o": ["上桌子", "桌子上", "在上桌子"], "a": 1, "e": "Phương vị từ đứng SAU danh từ: 桌子上."},
-    {"t": "mc", "q": "Câu nào ĐÚNG? (Tôi học tiếng Trung ở trường.)", "o": ["我学习汉语在学校。", "我在学校学习汉语。", "在学校我学习汉语在。"], "a": 1, "e": "在 + nơi chốn đứng trước động từ."},
-    {"t": "mc", "q": "Câu nào SAI?", "o": ["我在北京。", "我在北京里。", "我住在北京。"], "a": 1, "e": "Tên thành phố/nước không thêm 里."},
-    {"t": "mc", "q": "“Trên ghế có một con mèo” nói là:", "o": ["一只猫在椅子上。", "椅子上有一只猫。", "椅子上在一只猫。"], "a": 1, "e": "Vật chưa xác định → Nơi + 有 + vật."},
-    {"t": "mc", "q": "你去哪儿？(Nǐ qù nǎr?) – câu trả lời phù hợp:", "o": ["我去医院。", "我在医院。", "我是医院。"], "a": 0, "e": "Hỏi 去哪儿 (đi đâu) → trả lời 去 + nơi chốn."},
-    {"t": "fill", "q": "我的书___哪儿？(Sách của tôi ở đâu?)", "a": "在", "alt": ["zai"], "e": "Vật + 在 + 哪儿？"},
-    {"t": "fill", "q": "我___在河内。(Tôi sống ở Hà Nội.)", "a": "住", "alt": ["zhu"], "e": "住在 + nơi = sống ở."},
-    {"t": "fill", "q": "火车站在医院___。(Ga tàu ở phía sau bệnh viện.)", "a": "后面", "alt": ["houmian", "后边", "houbian"], "e": "后面 = phía sau."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Bố tôi làm việc ở bệnh viện.”", "w": ["工作", "在", "我爸爸", "医院"], "a": "我爸爸在医院工作", "e": "Chủ ngữ + 在 + nơi chốn + động từ."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Trong cốc có nước không?”", "w": ["水", "杯子里", "吗", "有"], "a": "杯子里有水吗", "e": "Nơi + 有 + vật + 吗."},
-    {"t": "dict", "say": "你在哪儿？", "lang": "zh-CN", "a": "你在哪儿", "py": "nǐ zài nǎr", "e": "哪儿 nǎr – cuốn lưỡi."},
-    {"t": "dict", "say": "火车站", "lang": "zh-CN", "a": "火车站", "py": "huǒchēzhàn", "e": "火车站 = ga tàu hoả."},
-    {"t": "match", "q": "Nối phương vị từ với nghĩa:", "pairs": [["上", "trên"], ["下", "dưới"], ["里", "trong"], ["前面", "phía trước"], ["后面", "phía sau"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Hộp giấy (盒子 hézi) + mèo, chó đồ chơi để minh hoạ phương vị; bản đồ khu phố tự vẽ (trường, bệnh viện, cửa hàng, ga tàu); tranh căn phòng có nhiều đồ vật; thẻ chữ 在 哪 儿 上 下 里 猫.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: ôn bài 7 – GV hỏi giá vài đồ vật, học viên gọi món nhanh."},
-      {"t": "15'", "do": "Từ vựng nơi chốn (学校, 医院, 商店, 火车站, 北京) trên bản đồ; đồ vật 桌子, 椅子, 猫, 狗 bằng tranh/đồ thật."},
-      {"t": "15'", "do": "Phương vị từ với hộp giấy + đồ chơi: GV đặt mèo trên/dưới/trong/trước/sau hộp, lớp nói 猫在盒子上 / 里 / 前面…"},
-      {"t": "15'", "do": "Phát âm: âm cuốn lưỡi (哪儿, 这儿, 那儿), l – n (里/你, bịt mũi kiểm tra), zh – z (站/在), 去 qù."},
-      {"t": "20'", "do": "Ngữ pháp 1: 在 + danh từ + phương vị từ; viết ❌ 在上桌子, ❌ 在北京里 cho lớp sửa. Chơi ‘Mèo đâu rồi?’."},
-      {"t": "15'", "do": "Bài tập 1–8 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: GV giấu điện thoại trong lớp, học viên hỏi 手机在哪儿？ và trả lời bằng phương vị từ."},
-      {"t": "20'", "do": "Ngữ pháp 2: 在 + nơi + V; 住在; 去 + nơi. Phỏng vấn cặp: 你住在哪儿？你在哪儿学习汉语？你去哪儿？"},
-      {"t": "15'", "do": "Ngữ pháp 3: 在 vs 有 – mô tả tranh căn phòng bằng cả hai kiểu câu."},
-      {"t": "15'", "do": "Nghe hội thoại (lần 1: sách ở đâu? lần 2: bố ở đâu, làm gì?) + đọc ‘我住在河内’."},
-      {"t": "15'", "do": "Chữ Hán 7 chữ (上, 下 chỉ sự; 犭 bộ thú) + nhiệm vụ nói 1–3."},
-      {"t": "15'", "do": "Viết đoạn văn về nhà mình; bài tập 9–16; giao bài về nhà."}
+ "no": 8,
+ "title": "你在哪儿？– Vị trí & nơi chốn: 在, 哪儿, phương vị từ",
+ "sub": "Wǒ de shū zài nǎr? 我的书在哪儿？",
+ "goals": [
+  "Hỏi và nói vị trí người / vật: 猫在哪儿？– 在椅子下面。",
+  "Dùng phương vị từ 上, 下, 里, 前面, 后面 đúng trật tự (桌子上 – ngược tiếng Việt)",
+  "Nói làm gì ở đâu: 在 + nơi chốn + động từ (我在学校学习), 住在, 去 + nơi chốn",
+  "Phân biệt câu 在 (vật ở đâu) và câu 有 tồn tại (ở đâu có gì)",
+  "Đọc đúng âm cuốn lưỡi 哪儿, 这儿, 那儿 và phân biệt l – n (里 / 你)"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词 shēngcí)",
+   "items": [
+    {
+     "w": "在",
+     "py": "zài",
+     "hv": "tại",
+     "pos": "v",
+     "vi": "ở, tại (động từ & giới từ)",
+     "ex": "我妈妈在学校。",
+     "exPy": "Wǒ māma zài xuéxiào.",
+     "exVi": "Mẹ tôi đang ở trường."
+    },
+    {
+     "w": "哪儿",
+     "py": "nǎr",
+     "hv": "na nhi",
+     "pos": "pron",
+     "vi": "đâu, chỗ nào",
+     "ex": "你在哪儿？",
+     "exPy": "Nǐ zài nǎr?",
+     "exVi": "Bạn đang ở đâu?"
+    },
+    {
+     "w": "这儿",
+     "py": "zhèr",
+     "hv": "giá nhi",
+     "pos": "pron",
+     "vi": "chỗ này, ở đây",
+     "ex": "我的书在这儿。",
+     "exPy": "Wǒ de shū zài zhèr.",
+     "exVi": "Sách của tôi ở đây."
+    },
+    {
+     "w": "那儿",
+     "py": "nàr",
+     "hv": "na nhi",
+     "pos": "pron",
+     "vi": "chỗ kia, ở đó",
+     "ex": "猫在那儿！",
+     "exPy": "Māo zài nàr!",
+     "exVi": "Con mèo ở đằng kia!"
+    },
+    {
+     "w": "上",
+     "py": "shàng",
+     "hv": "thượng",
+     "pos": "n",
+     "vi": "trên (phương vị từ); lên",
+     "ex": "书在桌子上。",
+     "exPy": "Shū zài zhuōzi shang.",
+     "exVi": "Sách ở trên bàn."
+    },
+    {
+     "w": "下",
+     "py": "xià",
+     "hv": "hạ",
+     "pos": "n",
+     "vi": "dưới (下面 = phía dưới); xuống",
+     "ex": "我的手机在书下面。",
+     "exPy": "Wǒ de shǒujī zài shū xiàmiàn.",
+     "exVi": "Điện thoại của tôi ở dưới quyển sách."
+    },
+    {
+     "w": "里",
+     "py": "lǐ",
+     "hv": "lý",
+     "pos": "n",
+     "vi": "trong (phương vị từ)",
+     "ex": "杯子里有水。",
+     "exPy": "Bēizi li yǒu shuǐ.",
+     "exVi": "Trong cốc có nước."
+    },
+    {
+     "w": "前面",
+     "py": "qiánmiàn",
+     "hv": "tiền diện",
+     "pos": "n",
+     "vi": "phía trước",
+     "ex": "学校前面有一个商店。",
+     "exPy": "Xuéxiào qiánmiàn yǒu yí ge shāngdiàn.",
+     "exVi": "Trước trường có một cửa hàng."
+    },
+    {
+     "w": "后面",
+     "py": "hòumiàn",
+     "hv": "hậu diện",
+     "pos": "n",
+     "vi": "phía sau",
+     "ex": "医院在火车站后面。",
+     "exPy": "Yīyuàn zài huǒchēzhàn hòumiàn.",
+     "exVi": "Bệnh viện ở phía sau ga tàu."
+    },
+    {
+     "w": "桌子",
+     "py": "zhuōzi",
+     "hv": "trác tử",
+     "pos": "n",
+     "vi": "cái bàn",
+     "ex": "这是我的桌子。",
+     "exPy": "Zhè shì wǒ de zhuōzi.",
+     "exVi": "Đây là bàn của tôi."
+    },
+    {
+     "w": "椅子",
+     "py": "yǐzi",
+     "hv": "ỷ tử",
+     "pos": "n",
+     "vi": "cái ghế",
+     "ex": "椅子上有一只猫。",
+     "exPy": "Yǐzi shang yǒu yì zhī māo.",
+     "exVi": "Trên ghế có một con mèo."
+    },
+    {
+     "w": "猫",
+     "py": "māo",
+     "hv": "miêu",
+     "pos": "n",
+     "vi": "con mèo",
+     "ex": "我家有一只猫。",
+     "exPy": "Wǒ jiā yǒu yì zhī māo.",
+     "exVi": "Nhà tôi có một con mèo."
+    },
+    {
+     "w": "狗",
+     "py": "gǒu",
+     "hv": "cẩu",
+     "pos": "n",
+     "vi": "con chó",
+     "ex": "你喜欢狗吗？",
+     "exPy": "Nǐ xǐhuan gǒu ma?",
+     "exVi": "Bạn thích chó không?"
+    },
+    {
+     "w": "去",
+     "py": "qù",
+     "hv": "khứ",
+     "pos": "v",
+     "vi": "đi (đến đâu)",
+     "ex": "你去哪儿？— 我去学校。",
+     "exPy": "Nǐ qù nǎr? — Wǒ qù xuéxiào.",
+     "exVi": "Bạn đi đâu? — Tôi đến trường."
+    },
+    {
+     "w": "学校",
+     "py": "xuéxiào",
+     "hv": "học hiệu",
+     "pos": "n",
+     "vi": "trường học",
+     "ex": "我的学校很大。",
+     "exPy": "Wǒ de xuéxiào hěn dà.",
+     "exVi": "Trường tôi rất rộng."
+    },
+    {
+     "w": "医院",
+     "py": "yīyuàn",
+     "hv": "y viện",
+     "pos": "n",
+     "vi": "bệnh viện",
+     "ex": "我爸爸在医院工作。",
+     "exPy": "Wǒ bàba zài yīyuàn gōngzuò.",
+     "exVi": "Bố tôi làm việc ở bệnh viện."
+    },
+    {
+     "w": "商店",
+     "py": "shāngdiàn",
+     "hv": "thương điếm",
+     "pos": "n",
+     "vi": "cửa hàng",
+     "ex": "商店里有很多东西。",
+     "exPy": "Shāngdiàn li yǒu hěn duō dōngxi.",
+     "exVi": "Trong cửa hàng có rất nhiều đồ."
+    },
+    {
+     "w": "火车站",
+     "py": "huǒchēzhàn",
+     "hv": "hoả xa trạm",
+     "pos": "n",
+     "vi": "ga tàu hoả",
+     "ex": "火车站在哪儿？",
+     "exPy": "Huǒchēzhàn zài nǎr?",
+     "exVi": "Ga tàu ở đâu?"
+    },
+    {
+     "w": "住",
+     "py": "zhù",
+     "hv": "trú",
+     "pos": "v",
+     "vi": "ở, sống, cư trú",
+     "ex": "你住在哪儿？— 我住在叶纱城。",
+     "exPy": "Nǐ zhù zài nǎr? — Wǒ zhù zài Yèshā Chéng.",
+     "exVi": "Bạn sống ở đâu? — Tôi sống ở Diệp Sa."
+    },
+    {
+     "w": "云线城",
+     "py": "Yúnxiàn Chéng",
+     "hv": "Vân Tuyến",
+     "pos": "n",
+     "vi": "Vân Tuyến",
+     "ex": "云线城很大。",
+     "exPy": "Yúnxiàn Chéng hěn dà.",
+     "exVi": "Vân Tuyến rất rộng lớn."
+    }
+   ]
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: âm cuốn lưỡi 儿, l – n, zh – z, 去 qù",
+   "items": [
+    {
+     "sym": "âm cuốn lưỡi (儿化)",
+     "ex": [
+      "哪儿",
+      "这儿",
+      "那儿"
+     ],
+     "vi": "儿 gắn vào âm trước trong 哪儿 nǎr, 这儿 zhèr, 那儿 nàr, làm âm cuối có sắc thái cong lưỡi. Các cách 哪里 nǎlǐ, 这里 zhèlǐ, 那里 nàlǐ cũng thông dụng; mức dùng nhi hóa tùy người nói, không phải quy tắc bắt buộc."
+    },
+    {
+     "sym": "l – n",
+     "ex": [
+      "里",
+      "你",
+      "那",
+      "六"
+     ],
+     "vi": "Người miền Bắc Việt Nam hay lẫn l/n. <b>n</b>: hơi đi qua mũi (bịt mũi sẽ thấy khó đọc). <b>l</b>: hơi thoát hai bên lưỡi, không qua mũi. 里 lǐ ≠ 你 nǐ; 那 nà ≠ 辣 là (cay).",
+     "pairs": [
+      [
+       "里",
+       "你"
+      ],
+      [
+       "那",
+       "辣"
+      ]
+     ]
+    },
+    {
+     "sym": "zh – z",
+     "ex": [
+      "住",
+      "桌子",
+      "火车站",
+      "在"
+     ],
+     "vi": "住 zhù, 桌 zhuō, 站 zhàn: uốn lưỡi (≈ “tr”). 在 zài, 子 zi: lưỡi phẳng (≈ “ch” nhẹ). 火车站 huǒchēzhàn có h – ch – zh liên tiếp: đọc chậm từng âm.",
+     "pairs": [
+      [
+       "站",
+       "赞"
+      ]
+     ]
+    },
+    {
+     "sym": "去 qù = q + ü",
+     "ex": [
+      "去",
+      "去哪儿"
+     ],
+     "vi": "去 viết qu nhưng nguyên âm là <b>ü</b>: môi tròn, lưỡi như “i”. Đừng đọc “chu” hay “chi”. 去 qù ≠ 气 qì.",
+     "pairs": [
+      [
+       "去",
+       "气"
+      ]
+     ]
+    },
+    {
+     "sym": "g – k (ôn)",
+     "ex": [
+      "狗",
+      "口"
+     ],
+     "vi": "狗 <b>gǒu</b> không bật hơi; 口 <b>kǒu</b> bật hơi. Đọc nhầm “nhà tôi có 5 con chó” thành “5 miệng ăn” thì buồn cười lắm!",
+     "pairs": [
+      [
+       "狗",
+       "口"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: 在 + nơi chốn; phương vị từ đứng SAU danh từ",
+   "html": "<p><b>Người / vật + 在 + nơi chốn</b> = … ở … Phủ định <b>不在</b>; hỏi <b>…在哪儿？</b> – trật tự giống hệt tiếng Việt: “Bạn ở đâu?” = 你在哪儿？</p><p>Vị trí cụ thể dùng <b>danh từ + phương vị từ</b> – NGƯỢC tiếng Việt: “trên bàn” = 桌子<b>上</b>, “trong nhà” = 家<b>里</b>, “trước trường” = 学校<b>前面</b>.</p>",
+   "table": [
+    [
+     "Tiếng Việt",
+     "Tiếng Trung",
+     "Pinyin"
     ],
-    "games": [
-      "Mèo đâu rồi?: một học viên giấu mèo đồ chơi trong lớp, cả lớp hỏi 猫在桌子上吗？猫在书包里吗？… người giấu chỉ trả lời 在 / 不在. Ai đoán đúng lên giấu tiếp.",
-      "Vẽ theo lời tả: A tả căn phòng (桌子上有一本书，椅子下面有一只狗…), B vẽ theo mà không nhìn; so tranh với lời tả.",
-      "Bản đồ khu phố: nhóm nhận bản đồ trống, nghe GV đọc 医院在学校后面，商店在火车站前面… rồi điền đúng vị trí."
+    [
+     "trên bàn",
+     "桌子上 / 桌子上面",
+     "zhuōzi shang / zhuōzi shàngmiàn"
     ],
-    "errors": [
-      "❌ 在上桌子 → ✅ 在桌子上 (phương vị từ đứng SAU danh từ).",
-      "❌ 我学习汉语在学校 → ✅ 我在学校学习汉语 (nơi chốn trước động từ).",
-      "Thêm 里 sau tên thành phố/nước: ❌ 在北京里 → ✅ 在北京.",
-      "Bỏ phương vị từ sau đồ vật: ❌ 书在桌子 → ✅ 书在桌子上.",
-      "Câu tồn tại kiểu tiếng Anh: ❌ 有一只猫在椅子上 → ✅ 椅子上有一只猫.",
-      "Lẫn l/n: đọc 里 lǐ thành nǐ; quên cuốn lưỡi ở 哪儿; dùng 个 cho con vật (一个猫 → 一只猫)."
+    [
+     "dưới ghế",
+     "椅子下面",
+     "yǐzi xiàmiàn"
     ],
-    "homework": "Bài tập trong game ≥ 80%; viết mỗi chữ Hán 1 dòng; dán giấy note tiếng Trung lên 5 đồ vật trong nhà và mỗi ngày nói vị trí của chúng; vẽ bản đồ khu nhà mình kèm 4 câu mô tả (2 câu 在, 2 câu 有)."
+    [
+     "trong cốc",
+     "杯子里",
+     "bēizi li"
+    ],
+    [
+     "trước trường",
+     "学校前面",
+     "xuéxiào qiánmiàn"
+    ],
+    [
+     "sau bệnh viện",
+     "医院后面",
+     "yīyuàn hòumiàn"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我的书在哪儿？— 在桌子上。",
+     "py": "Wǒ de shū zài nǎr? — Zài zhuōzi shang.",
+     "vi": "Sách của tôi đâu? — Ở trên bàn."
+    },
+    {
+     "t": "猫在椅子下面。",
+     "py": "Māo zài yǐzi xiàmiàn.",
+     "vi": "Con mèo ở dưới ghế."
+    },
+    {
+     "t": "爸爸不在家，他在医院。",
+     "py": "Bàba bú zài jiā, tā zài yīyuàn.",
+     "vi": "Bố không ở nhà, bố ở bệnh viện."
+    },
+    {
+     "t": "商店在学校前面。",
+     "py": "Shāngdiàn zài xuéxiào qiánmiàn.",
+     "vi": "Cửa hàng ở trước trường."
+    }
+   ],
+   "tips": [
+    "❌ <i>在上桌子</i> (theo tiếng Việt “ở trên bàn”) → ✅ 在桌子上。",
+    "Tên địa điểm thường đứng trực tiếp sau 在: 在云线城. 里 có thể dùng khi nhấn bên trong một phạm vi, nhưng không cần tự thêm vào mọi tên nơi; trong bài nhập môn hãy dùng mẫu đơn giản đã cho.",
+    "Đồ vật (桌子, 书, 椅子) muốn thành nơi chốn PHẢI thêm phương vị từ: ❌ <i>猫在桌子</i> → ✅ 猫在桌子上。"
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: 在 + nơi chốn + động từ; 住在; 去 + nơi chốn",
+   "html": "<p><b>Chủ ngữ + 在 + nơi chốn + động từ</b> = làm gì ở đâu. Nơi chốn đứng TRƯỚC động từ – ngược với tiếng Việt “tôi học tiếng Trung <i>ở trường</i>”.</p><p>Ngoại lệ hay dùng: <b>住在 + nơi</b> (sống ở): 我住在叶纱城。</p><p><b>去 + nơi chốn</b> = đi đến đâu: 你去哪儿？— 我去学校。 (Không có 在: ❌ 去在学校.)</p>",
+   "table": [
+    [
+     "Tiếng Việt",
+     "Tiếng Trung"
+    ],
+    [
+     "Tôi học tiếng Trung ở trường.",
+     "我在学校学习汉语。"
+    ],
+    [
+     "Bố tôi làm việc ở bệnh viện.",
+     "我爸爸在医院工作。"
+    ],
+    [
+     "Bạn sống ở đâu?",
+     "你住在哪儿？"
+    ],
+    [
+     "Bạn đi đâu đấy?",
+     "你去哪儿？"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "我在学校学习汉语。",
+     "py": "Wǒ zài xuéxiào xuéxí Hànyǔ.",
+     "vi": "Tôi học tiếng Trung ở trường."
+    },
+    {
+     "t": "我爸爸在医院工作。",
+     "py": "Wǒ bàba zài yīyuàn gōngzuò.",
+     "vi": "Bố tôi làm việc ở bệnh viện. (工作 – bài 12)"
+    },
+    {
+     "t": "你住在哪儿？— 我住在叶纱城。",
+     "py": "Nǐ zhù zài nǎr? — Wǒ zhù zài Yèshā Chéng.",
+     "vi": "Bạn sống ở đâu? — Tôi sống ở Diệp Sa."
+    },
+    {
+     "t": "你去哪儿？— 我去火车站。",
+     "py": "Nǐ qù nǎr? — Wǒ qù huǒchēzhàn.",
+     "vi": "Bạn đi đâu? — Tôi ra ga tàu."
+    }
+   ],
+   "tips": [
+    "❌ <i>我学习汉语在学校</i> → ✅ 我在学校学习汉语。 Đây là lỗi trật tự số 1 của người Việt!",
+    "Có cả thời gian và nơi chốn: thời gian trước, nơi chốn sau – 我明天在家学习 (bài 12 ôn kỹ).",
+    "去 đi thẳng với nơi chốn: ❌ <i>去在学校</i> → ✅ 去学校."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: 在 hay 有? – “vật ở đâu” và “ở đâu có gì”",
+   "html": "<p>Hai cách nói vị trí, khác nhau ở <b>cái gì là thông tin mới</b>:</p><ul><li><b>Vật (đã biết, xác định) + 在 + nơi</b>: 我的猫在椅子上。– trả lời “ở đâu?”.</li><li><b>Nơi + 有 + vật (chưa biết)</b>: 椅子上有一只猫。– trả lời “có gì?”.</li></ul><p>Phủ định câu tồn tại dùng <b>没有</b>: 桌子上没有书。</p>",
+   "table": [
+    [
+     "在 – vật ở đâu?",
+     "有 – ở đó có gì?"
+    ],
+    [
+     "书在桌子上。",
+     "桌子上有一本书。"
+    ],
+    [
+     "商店在学校前面。",
+     "学校前面有一个商店。"
+    ],
+    [
+     "我妈妈在家。",
+     "家里有人吗？"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "学校前面有一个商店。",
+     "py": "Xuéxiào qiánmiàn yǒu yí ge shāngdiàn.",
+     "vi": "Trước trường có một cửa hàng."
+    },
+    {
+     "t": "杯子里有水吗？— 没有。",
+     "py": "Bēizi li yǒu shuǐ ma? — Méiyǒu.",
+     "vi": "Trong cốc có nước không? — Không có."
+    },
+    {
+     "t": "火车站在哪儿？— 在医院后面。",
+     "py": "Huǒchēzhàn zài nǎr? — Zài yīyuàn hòumiàn.",
+     "vi": "Ga tàu ở đâu? — Ở sau bệnh viện."
+    }
+   ],
+   "tips": [
+    "❌ <i>有一本书在桌子上</i> (dịch từ “there is a book on the table”) → ✅ 桌子上有一本书。",
+    "Vật xác định (我的书, 那个商店) dùng 在; vật chưa xác định (一本书, 一个商店) dùng 有.",
+    "Con vật dùng lượng từ <b>只 zhī</b>: 一只猫, 两只狗."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Mở rộng: phương hướng & địa danh Diệp Sa",
+   "html": "<p>Từ chỉ hướng dùng với sơ đồ: 左边 zuǒbian (bên trái), 右边 yòubian (bên phải), 旁边 pángbiān (bên cạnh), 中间 zhōngjiān (ở giữa), 对面 duìmiàn (đối diện). Một số cụm dùng 面 hoặc 边 với nghĩa gần nhau: 前面／前边, 后面／后边.</p><p>Đọc sơ đồ Diệp Sa tự đặt trong bài: 纱月湖 Shāyuè Hú là hồ Sa Nguyệt; 木禾广场 Mùhé Guǎngchǎng là quảng trường Mộc Hòa; 叶纱城火车站 Yèshā Chéng huǒchēzhàn là ga Diệp Sa. Đây là tên phục vụ nhập vai, không phải thông tin du lịch.</p>"
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Sáng thứ Hai vội vàng",
+   "lang": "zh-CN",
+   "note": "Sáng thứ Hai, Tiểu Lan vội đi học nhưng không tìm thấy sách. Nghe lần 1 không nhìn chữ: sách ở đâu?",
+   "lines": [
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "妈妈，我的汉语书在哪儿？",
+     "py": "Māma, wǒ de Hànyǔ shū zài nǎr?",
+     "vi": "Mẹ ơi, sách tiếng Trung của con đâu rồi?"
+    },
+    {
+     "s": "妈妈",
+     "g": "f",
+     "t": "在桌子上。",
+     "py": "Zài zhuōzi shang.",
+     "vi": "Ở trên bàn ấy."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "桌子上没有。",
+     "py": "Zhuōzi shang méiyǒu.",
+     "vi": "Trên bàn không có ạ."
+    },
+    {
+     "s": "妈妈",
+     "g": "f",
+     "t": "你看，在椅子下面。",
+     "py": "Nǐ kàn, zài yǐzi xiàmiàn.",
+     "vi": "Con xem kìa, ở dưới ghế."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "哈哈，猫也在那儿！",
+     "py": "Hāhā, māo yě zài nàr!",
+     "vi": "Ha ha, con mèo cũng ở đó!"
+    },
+    {
+     "s": "妈妈",
+     "g": "f",
+     "t": "你去哪儿？",
+     "py": "Nǐ qù nǎr?",
+     "vi": "Con đi đâu đấy?"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "我去学校。爸爸在家吗？",
+     "py": "Wǒ qù xuéxiào. Bàba zài jiā ma?",
+     "vi": "Con đến trường. Bố có ở nhà không mẹ?"
+    },
+    {
+     "s": "妈妈",
+     "g": "f",
+     "t": "不在，他在医院。",
+     "py": "Bú zài, tā zài yīyuàn.",
+     "vi": "Không, bố ở bệnh viện."
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "啊？爸爸在医院？",
+     "py": "Á? Bàba zài yīyuàn?",
+     "vi": "Hả? Bố ở bệnh viện ạ?"
+    },
+    {
+     "s": "妈妈",
+     "g": "f",
+     "t": "你爸爸是医生，他在医院工作！",
+     "py": "Nǐ bàba shì yīshēng, tā zài yīyuàn gōngzuò!",
+     "vi": "Bố con là bác sĩ, bố làm việc ở bệnh viện mà!"
+    },
+    {
+     "s": "小兰",
+     "g": "f",
+     "t": "对，对！妈妈，再见！",
+     "py": "Duì, duì! Māma, zàijiàn!",
+     "vi": "À đúng rồi! Mẹ ơi, con đi đây!"
+    },
+    {
+     "s": "妈妈",
+     "g": "f",
+     "t": "小兰，你的手机在这儿！",
+     "py": "Xiǎo Lán, nǐ de shǒujī zài zhèr!",
+     "vi": "Lan ơi, điện thoại của con ở đây này!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Sách tiếng Trung của Tiểu Lan ở đâu?",
+     "o": [
+      "Trên bàn",
+      "Dưới ghế",
+      "Trong cặp"
+     ],
+     "a": 1,
+     "e": "在椅子下面 – ở dưới ghế (桌子上没有 – trên bàn không có)."
+    },
+    {
+     "q": "Con mèo ở đâu?",
+     "o": [
+      "Ở trường",
+      "Trên bàn",
+      "Cũng ở dưới ghế"
+     ],
+     "a": 2,
+     "e": "猫也在那儿 – 那儿 = chỗ dưới ghế vừa nói."
+    },
+    {
+     "q": "Tiểu Lan đi đâu?",
+     "o": [
+      "Bệnh viện",
+      "Trường học",
+      "Cửa hàng"
+     ],
+     "a": 1,
+     "e": "我去学校。"
+    },
+    {
+     "q": "Bố Tiểu Lan làm nghề gì?",
+     "o": [
+      "Bác sĩ",
+      "Nhân viên cửa hàng",
+      "Giáo viên"
+     ],
+     "a": 0,
+     "e": "你爸爸是医生，他在医院工作。"
+    },
+    {
+     "q": "Cuối cùng Tiểu Lan để quên gì? 你的___在这儿！(gõ chữ Hán hoặc pinyin)",
+     "a": "手机",
+     "alt": [
+      "shouji"
+     ],
+     "e": "你的手机在这儿！– Điện thoại của con ở đây!"
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Anna sống ở Diệp Sa",
+   "title": "我住在叶纱城",
+   "text": "我叫安娜，我是美国人。现在我住在叶纱城。\n\n我家前面有一个商店，后面是一个医院。我的学校不在这儿，在火车站那儿。\n\n我有一只猫，它很小。它喜欢在椅子上睡觉。我很喜欢叶纱城！",
+   "py": "Wǒ jiào Ānnà, wǒ shì Měiguó rén. Xiànzài wǒ zhù zài Yèshā Chéng.\n\nWǒ jiā qiánmiàn yǒu yí ge shāngdiàn, hòumiàn shì yí ge yīyuàn. Wǒ de xuéxiào bú zài zhèr, zài huǒchēzhàn nàr.\n\nWǒ yǒu yì zhī māo, tā hěn xiǎo. Tā xǐhuan zài yǐzi shang shuìjiào. Wǒ hěn xǐhuan Yèshā Chéng!",
+   "vi": "Tôi tên Anna, tôi là người Mỹ. Hiện giờ tôi sống ở Diệp Sa.\n\nTrước nhà tôi có một cửa hàng, phía sau là một bệnh viện. Trường tôi không ở đây, mà ở chỗ ga tàu.\n\nTôi có một con mèo, nó còn nhỏ. Nó thích ngủ trên ghế. Tôi rất thích Diệp Sa!",
+   "gloss": [
+    {
+     "w": "只",
+     "py": "zhī",
+     "vi": "con (lượng từ cho con vật)"
+    },
+    {
+     "w": "它",
+     "py": "tā",
+     "vi": "nó (chỉ con vật, đồ vật)"
+    },
+    {
+     "w": "睡觉",
+     "py": "shuìjiào",
+     "vi": "ngủ (bài 11)"
+    },
+    {
+     "w": "火车站那儿",
+     "py": "huǒchēzhàn nàr",
+     "vi": "chỗ ga tàu, khu ga tàu"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Trước nhà Anna có gì?",
+     "o": [
+      "Trường học",
+      "Bệnh viện",
+      "Cửa hàng"
+     ],
+     "a": 2,
+     "e": "我家前面有一个商店。"
+    },
+    {
+     "q": "Trường của Anna ở đâu?",
+     "o": [
+      "Ở chỗ ga tàu",
+      "Sau bệnh viện",
+      "Ngay cạnh nhà"
+     ],
+     "a": 0,
+     "e": "我的学校不在这儿，在火车站那儿。"
+    },
+    {
+     "q": "Con mèo thích ngủ ở đâu?",
+     "o": [
+      "Trong cửa hàng",
+      "Trên ghế",
+      "Dưới bàn"
+     ],
+     "a": 1,
+     "e": "它喜欢在椅子上睡觉。"
+    },
+    {
+     "q": "Anna hiện sống ở đâu? (gõ chữ Hán hoặc pinyin)",
+     "a": "叶纱城",
+     "alt": [
+      "yeshacheng"
+     ],
+     "e": "现在我住在叶纱城。"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "在",
+     "py": "zài",
+     "hv": "tại",
+     "parts": "𠂇 + 丨 + 土 (thổ – đất)",
+     "strokes": 6,
+     "vi": "ở, tại – đứng vững trên mặt đất",
+     "words": "在家, 在哪儿"
+    },
+    {
+     "c": "哪",
+     "py": "nǎ",
+     "hv": "na",
+     "parts": "口 (miệng) + 那 (na – gợi âm)",
+     "strokes": 9,
+     "vi": "nào, đâu – mở miệng hỏi",
+     "words": "哪儿, 哪国"
+    },
+    {
+     "c": "儿",
+     "py": "ér",
+     "hv": "nhi",
+     "parts": "tượng hình đứa trẻ (đầu to, hai chân)",
+     "strokes": 2,
+     "vi": "con trẻ; hậu tố cuốn lưỡi -r",
+     "words": "哪儿, 女儿, 儿子"
+    },
+    {
+     "c": "上",
+     "py": "shàng",
+     "hv": "thượng",
+     "parts": "chỉ sự: vạch ngắn nằm TRÊN đường ngang",
+     "strokes": 3,
+     "vi": "trên, lên",
+     "words": "桌子上, 上午"
+    },
+    {
+     "c": "下",
+     "py": "xià",
+     "hv": "hạ",
+     "parts": "chỉ sự: vạch ngắn nằm DƯỚI đường ngang",
+     "strokes": 3,
+     "vi": "dưới, xuống",
+     "words": "下面, 下午"
+    },
+    {
+     "c": "里",
+     "py": "lǐ",
+     "hv": "lý",
+     "parts": "田 (điền – ruộng) + 土 (thổ – đất)",
+     "strokes": 7,
+     "vi": "trong; nghĩa gốc là làng (lý)",
+     "words": "家里, 杯子里"
+    },
+    {
+     "c": "猫",
+     "py": "māo",
+     "hv": "miêu",
+     "parts": "犭(khuyển – bộ thú) + 苗 (miêu – gợi âm)",
+     "strokes": 11,
+     "vi": "con mèo – kêu “meo” giống âm 苗",
+     "words": "小猫, 一只猫"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Ở đâu? Có gì?",
+   "tasks": [
+    {
+     "p": "Miêu tả vị trí 4 đồ vật trong phòng bạn.",
+     "model": "我的书在桌子上，手机在书下面，椅子在桌子前面，猫在椅子上。",
+     "py": "Wǒ de shū zài zhuōzi shang, shǒujī zài shū xiàmiàn, yǐzi zài zhuōzi qiánmiàn, māo zài yǐzi shang.",
+     "vi": "Sách của tôi ở trên bàn, điện thoại ở dưới sách, ghế ở trước bàn, mèo ở trên ghế.",
+     "tips": "Danh từ + phương vị từ; 上 sau danh từ đọc nhẹ."
+    },
+    {
+     "p": "Hỏi bạn sống ở đâu, học tiếng Trung ở đâu; bạn trả lời.",
+     "model": "你住在哪儿？— 我住在叶纱城。你在哪儿学习汉语？— 我在学校学习汉语。",
+     "py": "Nǐ zhù zài nǎr? — Wǒ zhù zài Yèshā Chéng. Nǐ zài nǎr xuéxí Hànyǔ? — Wǒ zài xuéxiào xuéxí Hànyǔ.",
+     "vi": "Bạn sống ở đâu? — Mình sống ở Diệp Sa. Bạn học tiếng Trung ở đâu? — Mình học ở trường.",
+     "tips": "在 + nơi chốn đứng trước 学习."
+    },
+    {
+     "p": "Tả xung quanh nhà bạn bằng câu 有.",
+     "model": "我家前面有一个商店，后面有一个学校。我家里有一只狗。",
+     "py": "Wǒ jiā qiánmiàn yǒu yí ge shāngdiàn, hòumiàn yǒu yí ge xuéxiào. Wǒ jiā li yǒu yì zhī gǒu.",
+     "vi": "Trước nhà tôi có một cửa hàng, phía sau có một trường học. Trong nhà tôi có một con chó."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Nhà tôi và khu phố",
+   "task": "Viết 6–8 câu: bạn sống ở đâu, quanh nhà có gì (dùng 有), trong phòng bạn đồ vật nào ở đâu (dùng 在).",
+   "min": 50,
+   "model": "我住在叶纱城。我家前面有一个商店，后面有一个医院。我的学校不在这儿，在火车站那儿。我的房间不大。桌子上有很多书，椅子下面有一只猫。我很喜欢我的家。",
+   "modelVi": "Tôi sống ở Diệp Sa. Trước nhà tôi có một cửa hàng, phía sau có một bệnh viện. Trường tôi không ở đây, mà ở chỗ ga tàu. Phòng tôi không rộng. Trên bàn có rất nhiều sách, dưới ghế có một con mèo. Tôi rất thích nhà mình.",
+   "tips": [
+    "房间 fángjiān = căn phòng (HSK 2).",
+    "Câu 有 cho thông tin mới (一个商店); câu 在 cho vật đã biết (我的学校).",
+    "Tên thành phố không thêm 里."
+   ],
+   "checklist": [
+    "Có 住在…",
+    "Có ít nhất 2 câu 有 tồn tại",
+    "Có ít nhất 2 câu 在 + danh từ + phương vị từ",
+    "Phương vị từ đứng sau danh từ",
+    "Lượng từ 只 cho con vật"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "猫在椅子下面。",
+   "lang": "zh-CN",
+   "q": "Con mèo ở đâu?",
+   "o": [
+    "Trên bàn",
+    "Trên ghế",
+    "Dưới ghế"
+   ],
+   "a": 2,
+   "e": "椅子下面 = dưới ghế."
+  },
+  {
+   "t": "listen",
+   "say": "我住在云线城。",
+   "lang": "zh-CN",
+   "q": "Người nói sống ở đâu?",
+   "o": [
+    "Diệp Sa",
+    "Vân Tuyến",
+    "Mỹ"
+   ],
+   "a": 1,
+   "e": "住在云线城 = sống ở Vân Tuyến."
+  },
+  {
+   "t": "listen",
+   "say": "学校前面有一个商店。",
+   "lang": "zh-CN",
+   "q": "Trước trường có gì?",
+   "o": [
+    "Một bệnh viện",
+    "Một nhà ga",
+    "Một cửa hàng"
+   ],
+   "a": 2,
+   "e": "商店 shāngdiàn = cửa hàng."
+  },
+  {
+   "t": "mc",
+   "q": "“trên bàn” nói là:",
+   "o": [
+    "上桌子",
+    "桌子上",
+    "在上桌子"
+   ],
+   "a": 1,
+   "e": "Phương vị từ đứng SAU danh từ: 桌子上."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào ĐÚNG? (Tôi học tiếng Trung ở trường.)",
+   "o": [
+    "在学校我学习汉语在。",
+    "我学习汉语在学校。",
+    "我在学校学习汉语。"
+   ],
+   "a": 2,
+   "e": "在 + nơi chốn đứng trước động từ."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào SAI?",
+   "o": [
+    "我在云线城里。",
+    "我住在云线城。",
+    "我在云线城。"
+   ],
+   "a": 0,
+   "e": "Tên thành phố/nước không thêm 里."
+  },
+  {
+   "t": "mc",
+   "q": "“Trên ghế có một con mèo” nói là:",
+   "o": [
+    "一只猫在椅子上。",
+    "椅子上有一只猫。",
+    "椅子上在一只猫。"
+   ],
+   "a": 1,
+   "e": "Vật chưa xác định → Nơi + 有 + vật."
+  },
+  {
+   "t": "mc",
+   "q": "你去哪儿？(Nǐ qù nǎr?) – câu trả lời phù hợp:",
+   "o": [
+    "我是医院。",
+    "我去医院。",
+    "我在医院。"
+   ],
+   "a": 1,
+   "e": "Hỏi 去哪儿 (đi đâu) → trả lời 去 + nơi chốn."
+  },
+  {
+   "t": "fill",
+   "q": "我的书___哪儿？(Sách của tôi ở đâu?)",
+   "a": "在",
+   "alt": [
+    "zai"
+   ],
+   "e": "Vật + 在 + 哪儿？"
+  },
+  {
+   "t": "fill",
+   "q": "我___在叶纱城。(Tôi sống ở Diệp Sa.)",
+   "a": "住",
+   "alt": [
+    "zhu"
+   ],
+   "e": "住在 + nơi = sống ở."
+  },
+  {
+   "t": "fill",
+   "q": "火车站在医院___。(Ga tàu ở phía sau bệnh viện.)",
+   "a": "后面",
+   "alt": [
+    "houmian",
+    "后边",
+    "houbian"
+   ],
+   "e": "后面 = phía sau."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Bố tôi làm việc ở bệnh viện.”",
+   "w": [
+    "工作",
+    "在",
+    "我爸爸",
+    "医院"
+   ],
+   "a": "我爸爸在医院工作",
+   "e": "Chủ ngữ + 在 + nơi chốn + động từ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Trong cốc có nước không?”",
+   "w": [
+    "水",
+    "杯子里",
+    "吗",
+    "有"
+   ],
+   "a": "杯子里有水吗",
+   "e": "Nơi + 有 + vật + 吗."
+  },
+  {
+   "t": "dict",
+   "say": "你在哪儿？",
+   "lang": "zh-CN",
+   "a": "你在哪儿",
+   "py": "nǐ zài nǎr",
+   "e": "哪儿 nǎr – cuốn lưỡi."
+  },
+  {
+   "t": "dict",
+   "say": "火车站",
+   "lang": "zh-CN",
+   "a": "火车站",
+   "py": "huǒchēzhàn",
+   "e": "火车站 = ga tàu hoả."
+  },
+  {
+   "t": "match",
+   "q": "Nối phương vị từ với nghĩa:",
+   "pairs": [
+    [
+     "上",
+     "trên"
+    ],
+    [
+     "下",
+     "dưới"
+    ],
+    [
+     "里",
+     "trong"
+    ],
+    [
+     "前面",
+     "phía trước"
+    ],
+    [
+     "后面",
+     "phía sau"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Hộp giấy (盒子 hézi) + mèo, chó đồ chơi để minh hoạ phương vị; bản đồ khu phố tự vẽ (trường, bệnh viện, cửa hàng, ga tàu); tranh căn phòng có nhiều đồ vật; thẻ chữ 在 哪 儿 上 下 里 猫.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: ôn bài 7 – GV hỏi giá vài đồ vật, học viên gọi món nhanh."
+   },
+   {
+    "t": "15'",
+    "do": "Từ vựng nơi chốn (学校, 医院, 商店, 火车站, 云线城) trên bản đồ; đồ vật 桌子, 椅子, 猫, 狗 bằng tranh/đồ thật."
+   },
+   {
+    "t": "15'",
+    "do": "Phương vị từ với hộp giấy + đồ chơi: GV đặt mèo trên/dưới/trong/trước/sau hộp, lớp nói 猫在盒子上 / 里 / 前面…"
+   },
+   {
+    "t": "15'",
+    "do": "Phát âm: âm cuốn lưỡi (哪儿, 这儿, 那儿), l – n (里/你, bịt mũi kiểm tra), zh – z (站/在), 去 qù."
+   },
+   {
+    "t": "20'",
+    "do": "Luyện 在 + danh từ + phương vị từ bằng sơ đồ bàn và ghế; sửa 在上桌子 thành 在桌子上. Với tên thành phố dùng trực tiếp sau 在, không biến điều này thành lệnh cấm 里 trong mọi ngữ cảnh."
+   },
+   {
+    "t": "15'",
+    "do": "Bài tập 1–8 trong game."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: GV giấu điện thoại trong lớp, học viên hỏi 手机在哪儿？ và trả lời bằng phương vị từ."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 2: 在 + nơi + V; 住在; 去 + nơi. Phỏng vấn cặp: 你住在哪儿？你在哪儿学习汉语？你去哪儿？"
+   },
+   {
+    "t": "15'",
+    "do": "Ngữ pháp 3: 在 vs 有 – mô tả tranh căn phòng bằng cả hai kiểu câu."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe hội thoại (lần 1: sách ở đâu? lần 2: bố ở đâu, làm gì?) + đọc ‘我住在叶纱城’."
+   },
+   {
+    "t": "15'",
+    "do": "Chữ Hán 7 chữ (上, 下 chỉ sự; 犭 bộ thú) + nhiệm vụ nói 1–3."
+   },
+   {
+    "t": "15'",
+    "do": "Viết đoạn văn về nhà mình; bài tập 9–16; giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Mèo đâu rồi?: một học viên giấu mèo đồ chơi trong lớp, cả lớp hỏi 猫在桌子上吗？猫在书包里吗？… người giấu chỉ trả lời 在 / 不在. Ai đoán đúng lên giấu tiếp.",
+   "Vẽ theo lời tả: A tả căn phòng (桌子上有一本书，椅子下面有一只狗…), B vẽ theo mà không nhìn; so tranh với lời tả.",
+   "Bản đồ khu phố: nhóm nhận bản đồ trống, nghe GV đọc 医院在学校后面，商店在火车站前面… rồi điền đúng vị trí."
+  ],
+  "errors": [
+   "❌ 在上桌子 → ✅ 在桌子上 (phương vị từ đứng SAU danh từ).",
+   "❌ 我学习汉语在学校 → ✅ 我在学校学习汉语 (nơi chốn trước động từ).",
+   "Thêm 里 sau tên thành phố/nước: ❌ 在云线城里 → ✅ 在云线城.",
+   "Bỏ phương vị từ sau đồ vật: ❌ 书在桌子 → ✅ 书在桌子上.",
+   "Câu tồn tại kiểu tiếng Anh: ❌ 有一只猫在椅子上 → ✅ 椅子上有一只猫.",
+   "Lẫn l/n: đọc 里 lǐ thành nǐ; quên cuốn lưỡi ở 哪儿; dùng 个 cho con vật (一个猫 → 一只猫)."
+  ],
+  "homework": "Bài tập trong game ≥ 80%; viết mỗi chữ Hán 1 dòng; dán giấy note tiếng Trung lên 5 đồ vật trong nhà và mỗi ngày nói vị trí của chúng; vẽ bản đồ khu nhà mình kèm 4 câu mô tả (2 câu 在, 2 câu 有)."
+ }
 }

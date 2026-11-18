@@ -1,0 +1,207 @@
+{
+ "no": 29,
+ "lv": "kana",
+ "title": "Âm nghe nhẹ: chọn đúng hình đôi giày",
+ "sub": "この えは なんですか。",
+ "situation": "Hai bạn nhìn tranh đồ vật trong lớp giả. Một người nghe không rõ phần u trong くつ, hỏi lại rồi đối chiếu chữ; lời nhắc phân biệt âm nhẹ với xóa kana.",
+ "lang": "ja-JP",
+ "lines": [
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "この えは なんですか。",
+   "vi": "Bức tranh này là gì?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "くつです。あおい くつです。",
+   "vi": "Là giày. Đôi giày màu xanh."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "もういちど、ゆっくり おねがいします。",
+   "vi": "Nhờ bạn nói chậm thêm một lần."
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "く・つ、です。ここに もじも あります。",
+   "vi": "Là ku-tsu. Ở đây cũng có chữ."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "「くつ」ですね。「つ」の「う」が ちいさく きこえました。",
+   "vi": "Là giày nhỉ. Phần u của tsu tôi nghe rất nhỏ."
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "はい。でも「つ」は かきます。もじは けしません。",
+   "vi": "Vâng. Nhưng vẫn viết つ. Không xóa chữ."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "となりの えは「くち」ですか。",
+   "vi": "Tranh bên cạnh là miệng à?"
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "はい。「くつ」と「くち」は さいごが ちがいます。",
+   "vi": "Vâng. Giày và miệng khác phần cuối."
+  },
+  {
+   "s": "みお",
+   "g": "f",
+   "t": "わかりました。あおい くつを えらびます。",
+   "vi": "Tôi hiểu rồi. Tôi chọn giày xanh."
+  },
+  {
+   "s": "れん",
+   "g": "m",
+   "t": "いいですね。さいごに「くつ」を かいてください。",
+   "vi": "Được đấy. Cuối cùng xin viết くつ."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "くつ",
+   "vi": "giày",
+   "note": "Giữ hai kana dù nguyên âm có thể nghe nhẹ trong lời nói."
+  },
+  {
+   "t": "くち",
+   "vi": "miệng",
+   "note": "Phần cuối là ち, không suy theo hình chữ gần giống."
+  },
+  {
+   "t": "もういちど",
+   "vi": "thêm một lần",
+   "note": "Xin người kia nhắc lại khi chưa nghe đủ."
+  },
+  {
+   "t": "ゆっくり",
+   "vi": "chậm rãi",
+   "note": "Có thể đặt trước おねがいします để xin nói chậm."
+  },
+  {
+   "t": "もじは けしません",
+   "vi": "không xóa chữ",
+   "note": "Âm nhẹ không tự làm mất kana trong cách viết."
+  },
+  {
+   "t": "さいごが ちがいます",
+   "vi": "phần cuối khác nhau",
+   "note": "Chỉ đúng điểm cần nghe thay vì nói chung hai từ khác."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Tranh đầu là vật gì?",
+   "o": [
+    "Bút",
+    "Giày",
+    "Miệng"
+   ],
+   "a": 1,
+   "e": "Người đáp nêu くつ rồi mô tả màu xanh."
+  },
+  {
+   "q": "Màu vật cần chọn là gì?",
+   "o": [
+    "Xanh",
+    "Đỏ",
+    "Đen"
+   ],
+   "a": 0,
+   "e": "あおい gắn với giày ngay lượt đầu trả lời."
+  },
+  {
+   "q": "Vì sao người hỏi xin nhắc?",
+   "o": [
+    "Không biết màu chữ",
+    "Muốn đổi vật",
+    "Chưa nghe rõ âm"
+   ],
+   "a": 2,
+   "e": "Lượt sau giải thích phần u nghe nhỏ, cần nghe lại chứ không tự đoán."
+  },
+  {
+   "q": "Có xóa chữ つ khi nghe u nhẹ không?",
+   "o": [
+    "Đổi thành っ",
+    "Không",
+    "Có"
+   ],
+   "a": 1,
+   "e": "Người đáp nói つはかきます、もじはけしません."
+  },
+  {
+   "q": "Tranh bên cạnh là gì?",
+   "o": [
+    "Miệng",
+    "Giày thứ hai",
+    "Cửa"
+   ],
+   "a": 0,
+   "e": "Lượt hỏi くちですか được xác nhận bằng はい."
+  },
+  {
+   "q": "Cuối cùng cần làm gì?",
+   "o": [
+    "Xóa toàn bộ tranh",
+    "Viết くち thay giày",
+    "Viết くつ"
+   ],
+   "a": 2,
+   "e": "Lời yêu cầu cuối giữ từ giày vừa chọn."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "Điền từ xin lặp: ___ おねがいします。",
+   "a": "もういちど",
+   "e": "もういちど xin nhắc thêm một lần, không phải yêu cầu đổi đáp án."
+  },
+  {
+   "t": "fill",
+   "q": "Chọn kana cuối để viết miệng: く___",
+   "a": "ち",
+   "e": "くち chỉ miệng, còn くつ là giày; cần nghe phần cuối."
+  },
+  {
+   "t": "order",
+   "q": "Sắp lời xin nói chậm.",
+   "w": [
+    "おねがいします。",
+    "ゆっくり"
+   ],
+   "a": "ゆっくりおねがいします。",
+   "e": "ゆっくり yêu cầu tốc độ chậm để nghe rõ, không cần thêm từ bị cắt ngẫu nhiên."
+  },
+  {
+   "t": "dict",
+   "say": "くつは あおいです。",
+   "a": "くつは あおいです。",
+   "lang": "ja-JP",
+   "e": "Giày màu xanh; chép đủ くつ và trợ từ は, không xóa âm nghe nhẹ."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Thẻ mới là giày đỏ. Nói vật và màu, rồi xin bạn viết từ ấy.",
+   "model": "これは あかい くつです。「くつ」を かいてください。",
+   "vi": "Đây là giày đỏ. Xin viết くつ."
+  },
+  {
+   "p": "Bạn chưa rõ là miệng hay giày. Hỏi hai lựa chọn và xin nhắc chậm.",
+   "model": "くちですか、くつですか。ゆっくり、もういちど おねがいします。",
+   "vi": "Là miệng hay giày? Nhờ nói chậm thêm một lần."
+  }
+ ]
+}

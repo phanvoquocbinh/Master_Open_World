@@ -1,0 +1,631 @@
+{
+ "no": 14,
+ "title": "Ôn tập tổng hợp 1 – nguồn, giả định và một lựa chọn phân bổ không gian",
+ "sub": "Phạm vi định lượng · nguồn/lập trường · nhượng bộ · phản thực · tổng hợp lập luận",
+ "goals": [
+  "Đọc các nguồn khác loại và giữ rõ đơn vị, người phản hồi, điều kiện so.",
+  "Kết hợp lượng từ chính xác, nhượng bộ và phản thực vào lập luận có giới hạn.",
+  "Viết bài thảo luận hai phía với quan điểm riêng, tiêu chí phân bổ và cơ chế xem lại."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bắt đầu từ tình huống",
+   "html": "<p>Một quảng trường hư cấu có người muốn giờ yên và người muốn biểu diễn. Báo cáo từ số lượt đến và thư góp ý chưa tự cho một đáp án công bằng. Bạn phân biệt dữ kiện, giả định và tiêu chí để bảo vệ lựa chọn có thể xem lại.</p>"
+  },
+  {
+   "k": "text",
+   "h": "Nhịp và sắc thái khi nói",
+   "html": "<p>Aggregate tính từ trong bài nhấn âm đầu và kết thúc /ɡət/, khác động từ thường /ɡeɪt/. Heterogeneous nhấn âm -ge-, enforceability nhấn -bi-. Đọc rõ some, all but và at most trong báo cáo để người nghe biết phạm vi nhóm trước khi nghe đánh giá.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm của tình huống",
+   "items": [
+    {
+     "w": "baseline",
+     "ipa": "/ˈbeɪslaɪn/",
+     "pos": "n",
+     "vi": "mốc nền để so sánh",
+     "ex": "The baseline came from a different season.",
+     "exVi": "Mốc nền lấy từ mùa khác."
+    },
+    {
+     "w": "counterfactual",
+     "ipa": "/ˌkaʊntəˈfæktʃuəl/",
+     "pos": "adj",
+     "vi": "phản thực, giả định điều đã không xảy ra",
+     "ex": "The counterfactual comparison is uncertain.",
+     "exVi": "Phép so phản thực chưa chắc."
+    },
+    {
+     "w": "aggregate",
+     "ipa": "/ˈæɡrɪɡət/",
+     "pos": "adj",
+     "vi": "gộp chung",
+     "ex": "The aggregate count hides different uses.",
+     "exVi": "Số gộp che các cách dùng khác."
+    },
+    {
+     "w": "heterogeneous",
+     "ipa": "/ˌhetərəˈdʒiːniəs/",
+     "pos": "adj",
+     "vi": "không đồng nhất",
+     "ex": "The users are heterogeneous.",
+     "exVi": "Người dùng không đồng nhất."
+    },
+    {
+     "w": "self-selection",
+     "ipa": "/ˌself sɪˈlekʃn/",
+     "pos": "n",
+     "vi": "việc người tham gia tự chọn phản hồi",
+     "ex": "Self-selection limits the survey.",
+     "exVi": "Tự chọn phản hồi giới hạn khảo sát."
+    },
+    {
+     "w": "opportunity cost",
+     "ipa": "/ˌɒpəˈtjuːnəti kɒst/",
+     "pos": "n phr",
+     "vi": "giá trị phương án bị bỏ khi chọn một cách dùng",
+     "ex": "The event has an opportunity cost in space.",
+     "exVi": "Sự kiện chiếm chỗ vốn có thể dùng cách khác."
+    },
+    {
+     "w": "enforceability",
+     "ipa": "/ɪnˌfɔːsəˈbɪləti/",
+     "pos": "n",
+     "vi": "khả năng thực hiện và duy trì quy tắc",
+     "ex": "The proposal ignores enforceability.",
+     "exVi": "Đề xuất bỏ qua khả năng thực hiện quy tắc."
+    },
+    {
+     "w": "reversible",
+     "ipa": "/rɪˈvɜːsəbl/",
+     "pos": "adj",
+     "vi": "có thể đảo lại hoặc điều chỉnh về trước",
+     "ex": "The trial is reversible.",
+     "exVi": "Đợt thử có thể đảo lại."
+    },
+    {
+     "w": "proportionate",
+     "ipa": "/prəˈpɔːʃənət/",
+     "pos": "adj",
+     "vi": "tương xứng",
+     "ex": "A restriction should be proportionate.",
+     "exVi": "Một giới hạn nên tương xứng."
+    },
+    {
+     "w": "restriction",
+     "ipa": "/rɪˈstrɪkʃn/",
+     "pos": "n",
+     "vi": "sự hạn chế, quy định giới hạn",
+     "ex": "The restriction applies to one hour.",
+     "exVi": "Giới hạn áp dụng một giờ."
+    },
+    {
+     "w": "salience",
+     "ipa": "/ˈseɪliəns/",
+     "pos": "n",
+     "vi": "mức nổi bật thu hút chú ý",
+     "ex": "Salience is not the same as prevalence.",
+     "exVi": "Độ nổi bật không giống mức phổ biến."
+    },
+    {
+     "w": "dissent",
+     "ipa": "/dɪˈsent/",
+     "pos": "n",
+     "vi": "ý kiến không đồng thuận",
+     "ex": "The minutes retain the dissent.",
+     "exVi": "Biên bản giữ ý kiến không đồng thuận."
+    },
+    {
+     "w": "procedural fairness",
+     "ipa": "/prəˌsiːdʒərəl ˈfeənəs/",
+     "pos": "n phr",
+     "vi": "tính công bằng của quy trình xem xét",
+     "ex": "Procedural fairness requires a chance to respond.",
+     "exVi": "Quy trình công bằng cần cơ hội phản hồi."
+    },
+    {
+     "w": "allocation",
+     "ipa": "/ˌæləˈkeɪʃn/",
+     "pos": "n",
+     "vi": "việc phân bổ",
+     "ex": "The allocation can change after review.",
+     "exVi": "Phân bổ có thể đổi sau xem lại."
+    },
+    {
+     "w": "contested",
+     "ipa": "/kənˈtestɪd/",
+     "pos": "adj",
+     "vi": "còn có tranh luận",
+     "ex": "The square has a contested purpose.",
+     "exVi": "Mục đích quảng trường còn được tranh luận."
+    },
+    {
+     "w": "prevalence",
+     "ipa": "/ˈprevələns/",
+     "pos": "n",
+     "vi": "mức phổ biến",
+     "ex": "Letters alone do not establish prevalence.",
+     "exVi": "Chỉ thư góp ý chưa xác định mức phổ biến."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Phạm vi định lượng · nguồn/lập trường · nhượng bộ · phản thực · tổng hợp lập luận",
+   "html": "<p>Bài ôn không xem từ khó là thay cho lý luận. Aggregate attendance tăng chưa chứng minh mọi nhóm được lợi; all but three of the twenty letters support quiet hours chỉ mô tả 17 thư, không toàn cư dân. Not necessarily representative bác bảo đảm tính đại diện, không nói mọi thư vô giá trị. Quiet though the square appeared, some users still left nêu quan sát có thể cùng tồn tại; having compared the letters, the panel revised its wording cần panel làm chủ thể so và sửa. Phản thực If events had not been held, those visitors might have stayed longer là khả năng chưa được quan sát, không tự biến thành số mất đã đo. Theo nguồn: residents argue…, organisers acknowledge…, the report records… giữ khác loại phát biểu. The issue is not whether events have value but how access is allocated dùng not whether…but how để đổi trọng tâm có lý do, không né đề. Trong Task 2, discuss both views cần lý do đáng cân của cả hai và lập trường được phát triển; reversible trial có thể là lựa chọn riêng nhưng phải nói ai review theo tiêu chí nào.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Cách hiểu"
+    ],
+    [
+     "Seventeen of twenty letters favour quiet hours.",
+     "Nhóm là thư đã nhận, không toàn dân."
+    ],
+    [
+     "The letters are not necessarily representative.",
+     "Chưa bảo đảm đại diện, vẫn có giá trị riêng."
+    ],
+    [
+     "Had no event taken place, some users might have stayed.",
+     "Phản thực có giới hạn, chưa phải số đo."
+    ],
+    [
+     "The issue is how access is allocated.",
+     "Tiêu chí quyết định được nêu rõ."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "All but three of the twenty letters favour a quiet hour.",
+     "vi": "Mười bảy trong hai mươi thư ủng hộ một giờ yên."
+    },
+    {
+     "t": "The aggregate count does not reveal which activities were displaced.",
+     "vi": "Số gộp chưa cho biết hoạt động nào bị thay chỗ."
+    },
+    {
+     "t": "Lively though the event was, not every user wanted to join.",
+     "vi": "Dù sự kiện sôi động, không phải người dùng nào cũng muốn tham gia."
+    },
+    {
+     "t": "Having compared the sources, the panel proposed a reversible trial.",
+     "vi": "Sau khi so các nguồn, hội đồng đề nghị thử có thể điều chỉnh lại."
+    },
+    {
+     "t": "The alternative might have served different users, but that outcome was not observed.",
+     "vi": "Phương án khác có thể phục vụ người khác, nhưng chưa được quan sát."
+    }
+   ],
+   "tips": [
+    "Đổi thư tự chọn thành dân số: giữ nhóm phản hồi.",
+    "Đổi một giờ yên thành xóa mọi sự kiện: giữ nội dung yêu cầu.",
+    "Lấy phản thực khả dĩ làm số đo: nêu trạng thái giả định."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: mười bảy thư không phải mười bảy phần mọi cư dân",
+   "note": "Hai người tổng hợp nguồn cho quảng trường giả Laverin, có sổ lượt và hai nhóm thư không đồng loại.",
+   "lang": "en-GB",
+   "lines": [
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "Seventeen of the twenty letters favour a quiet hour. Can the memo say that almost all residents want events removed from the square?",
+     "vi": "Mười bảy trên hai mươi thư thích giờ yên. Memo nói gần như mọi cư dân muốn bỏ sự kiện được không?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "No. The letters came from people who chose to write, and a quiet hour is not a demand to remove every event. Both the group and the proposal would change.",
+     "vi": "Không. Thư do người tự chọn viết; một giờ yên không phải bỏ mọi sự kiện. Cả nhóm và đề xuất sẽ bị đổi."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "The organisers report more visits during the performance weekend. Should that settle the issue in their favour?",
+     "vi": "Người tổ chức báo tăng lượt cuối tuần diễn. Có đủ quyết theo họ không?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "It shows use by those who came. It does not count people who left or chose another place, and the comparison weekend had different opening hours.",
+     "vi": "Nó cho mức dùng của người đến, không đếm người rời hoặc đi nơi khác; cuối tuần so còn khác giờ mở."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "So we need to separate a visible benefit from the opportunity cost. Could a limited schedule preserve both types of use?",
+     "vi": "Vậy tách lợi ích nhìn thấy với cách dùng bị bỏ. Lịch giới hạn có giữ hai kiểu dùng được không?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Possibly. I would propose one quiet period and a separate event period, with a review of access, volunteer work and feedback from users in each.",
+     "vi": "Có thể. Tôi đề nghị một khoảng yên và một khoảng sự kiện riêng, review tiếp cận, công việc tình nguyện và phản hồi mỗi nhóm."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "We should retain dissent in the minutes rather than write unanimous agreement just because nobody spoke at the final moment.",
+     "vi": "Nên giữ ý bất đồng trong biên bản, không viết nhất trí chỉ vì lúc cuối không ai nói."
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Agreed. Silence can have several explanations. The trial should be reversible, and the report should say which assumptions the review is meant to test.",
+     "vi": "Đồng ý. Im lặng có nhiều lý do. Trial cần điều chỉnh lại được, báo cáo nêu review kiểm giả định nào."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Memo nháp sẽ đổi sai gì?",
+     "o": [
+      "Số thư vẫn đủ đại diện mọi người",
+      "Nhóm thư thành mọi cư dân và giờ yên thành bỏ sự kiện",
+      "Chỉ dấu câu"
+     ],
+     "a": 1,
+     "e": "Hai bước mở rộng đều vượt nguồn cụ thể."
+    },
+    {
+     "q": "So lượt cuối tuần có giới hạn gì?",
+     "o": [
+      "Giờ mở khác và chưa đo người bị thay chỗ",
+      "Mọi điều kiện hệt nhau",
+      "Không ai đến"
+     ],
+     "a": 0,
+     "e": "Comparison cần xét điều kiện và nhóm vắng khỏi count."
+    },
+    {
+     "q": "Im lặng cuối họp có tự chứng minh nhất trí không?",
+     "o": [
+      "Có, không cần kiểm",
+      "Có, nếu memo cần ngắn",
+      "Không"
+     ],
+     "a": 2,
+     "e": "Không được xóa dissent đã ghi chỉ vì final silence chưa được giải thích."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Quảng trường không chỉ có một loại người dùng",
+   "title": "Quảng trường không chỉ có một loại người dùng",
+   "text": "A public square can support a performance, a conversation or a period of quiet sitting. These uses may coexist, but they can also compete for time and attention. Calling the square lively or peaceful does not settle which allocation is fair. The description names a quality while leaving open who can use the space, under what conditions and with what alternatives.\n\nIn the fictional Laverin square, organisers reported increased visits during a performance weekend. Several residents sent letters requesting a quiet hour. Of the twenty letters received, seventeen supported that request. A draft memo described this as almost universal opposition to events. It changed a self-selected set of letters into the resident population and a request for one period into a demand for complete removal. The stronger sentence was not a more efficient summary; it was a different claim.\n\nThe attendance report had limits too. It recorded the people who came during the event, not those who left early or avoided the square. Its baseline weekend had shorter opening hours. More visits were an observed benefit, but the report could not attribute the entire difference to the performance or quantify the uses displaced. A counterfactual claim that quiet visitors would have stayed longer might be plausible, yet it was not an observed total that could simply be subtracted from attendance.\n\nThe disagreement therefore involved both evidence and values. Evidence could describe which activities occurred, which responses were received and how much work each arrangement required. It could not, by itself, decide how to weigh an informal conversation against a scheduled performance. That judgement needed a stated principle. One proposal prioritised the largest visible audience. Another sought predictable periods in which different activities could take place. Each had implications for people whose preferences were less publicly expressed.\n\nThe review panel proposed a reversible trial: one announced quiet period and one separate event period. The proposal did not assume that every user belonged permanently to one group. A person might enjoy a performance on one day and seek a quiet seat on another. The panel wanted feedback about particular uses and constraints rather than labels that turned heterogeneous users into opposing camps.\n\nImplementation mattered as well. A schedule that looked balanced on paper would fail if nobody could explain it or support its operation. The panel named volunteers, set a review date and retained dissent in the minutes. Silence at the end of the meeting was not treated as proof that every participant had abandoned an earlier concern. Procedural fairness included making the disagreement and the criteria for reconsideration visible.\n\nThe trial would not remove the need for judgement. It would give that judgement a more explicit basis: what each period enabled, what it displaced, whose responses were collected and what work was required. Its reversibility was valuable because it allowed revision without pretending that a permanent answer had already been found. A proportionate restriction could then be defended through its purpose and effects, rather than through the loudness of either praise or complaint.",
+   "vi": "Quảng trường công có thể cho biểu diễn, trò chuyện hay ngồi yên; chúng có thể cùng hoặc cạnh tranh thời gian/chú ý. Gọi sôi động hay yên chưa quyết phân bổ công bằng, còn phải hỏi ai dùng với điều kiện và lựa chọn khác nào. Quảng trường Laverin hư cấu báo tăng lượt cuối tuần diễn, nhận hai mươi thư trong đó mười bảy xin một giờ yên. Memo gọi gần như toàn dân chống sự kiện, đổi tập thư tự chọn thành dân và giờ thành xóa hết. Đây là nhận định khác chứ không tóm tắt gọn. Sổ lượt cũng chỉ đếm người tới, không người rời/né; cuối tuần nền mở ngắn hơn. Tăng lượt là lợi ích thấy, chưa quy hết cho diễn hoặc đo được cách dùng bị thay. Phản thực người yên sẽ ở lâu có thể hợp lý nhưng chưa là số quan sát để trừ. Bất đồng gồm chứng cứ và giá trị: chứng cứ mô tả hoạt động, phản hồi và công sức, chưa tự quyết cân trò chuyện với biểu diễn. Cần nguyên tắc công khai. Một ý ưu tiên khán giả thấy đông nhất, ý khác muốn khoảng có thể dự liệu cho hoạt động khác, đều ảnh hưởng người ít lên tiếng. Hội đồng đề xuất trial đảo lại được với khoảng yên và sự kiện riêng, không gán mỗi người cố định một nhóm vì họ có thể thích hai cách khác ngày. Cần hỏi cách dùng/rào cản chứ không tạo hai phe đồng nhất. Thực hiện cũng quan trọng: lịch đẹp không đủ nếu không ai giải thích và vận hành. Nhóm nêu người, ngày review, giữ dissent; im lặng cuối chưa chứng minh bỏ lo ngại trước. Công bằng quy trình làm rõ bất đồng và tiêu chí xét lại. Trial không xóa phán đoán mà làm cơ sở rõ: mỗi khoảng cho và thay gì, phản hồi ai, công sức bao nhiêu. Có thể sửa mà chưa giả vờ tìm đáp án vĩnh viễn. Giới hạn tương xứng cần được bảo vệ bằng mục đích/hiệu ứng, không độ lớn lời khen hoặc phàn nàn.",
+   "gloss": [
+    {
+     "w": "uses displaced",
+     "vi": "những cách dùng bị thay chỗ"
+    },
+    {
+     "w": "opposing camps",
+     "vi": "hai phe đối lập"
+    },
+    {
+     "w": "reconsideration",
+     "vi": "việc cân nhắc lại"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Memo đầu làm mạnh nguồn thế nào?",
+     "o": [
+      "Đổi thư tự chọn và yêu cầu một giờ thành toàn dân chống mọi sự kiện",
+      "Giữ y nguyên cả phạm vi",
+      "Chỉ sửa chữ sôi động"
+     ],
+     "a": 0,
+     "e": "Bài chỉ hai slippages về population và proposal."
+    },
+    {
+     "q": "Baseline có vấn đề gì?",
+     "o": [
+      "Không tồn tại lượt nào",
+      "Hệt mọi điều kiện",
+      "Giờ mở ngắn hơn"
+     ],
+     "a": 2,
+     "e": "Khác exposure time giới hạn phép so với weekend biểu diễn."
+    },
+    {
+     "q": "Phản thực khách yên ở lâu được dùng như số đo không?",
+     "o": [
+      "Có, chắc chắn tất cả ở",
+      "Không, đó là khả năng chưa quan sát",
+      "Có, trừ trực tiếp mọi lượt"
+     ],
+     "a": 1,
+     "e": "Plausibility chưa chuyển thành observed count."
+    },
+    {
+     "q": "Chứng cứ chưa tự quyết phần nào?",
+     "o": [
+      "Nguyên tắc cân các loại sử dụng",
+      "Số thư đã nhận",
+      "Giờ mở có khác"
+     ],
+     "a": 0,
+     "e": "Values cần tiêu chí công khai, không giấu trong con số."
+    },
+    {
+     "q": "Vì sao không chia người cố định hai phe?",
+     "o": [
+      "Mọi người có cùng sở thích",
+      "Không ai muốn yên",
+      "Một người có thể thích cách dùng khác theo dịp"
+     ],
+     "a": 2,
+     "e": "Heterogeneous uses và changing needs không khớp nhãn đơn giản."
+    },
+    {
+     "q": "Reversible trial có ích gì?",
+     "o": [
+      "Bỏ nhu cầu review",
+      "Cho sửa theo cơ sở rõ hơn mà không hứa đáp án vĩnh viễn",
+      "Bảo đảm hết bất đồng"
+     ],
+     "a": 1,
+     "e": "Bài giữ judgement nhưng làm tiêu chí, tác động và quyền sửa rõ."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: bảo vệ tiêu chí mà không làm mạnh số liệu",
+   "tasks": [
+    {
+     "p": "Thuật hai nguồn, sửa memo universal opposition và nêu một giới hạn attendance.",
+     "model": "The letters and the attendance report describe different parts of the situation. Seventeen of twenty letters request a quiet hour, but the writers selected themselves and did not necessarily oppose every event. The attendance increase shows that the performance attracted use, yet the baseline had shorter opening hours and the count excludes people who left or stayed away. I would not treat either source as a vote by the whole population. They identify benefits and concerns that a decision should address, while leaving the principle of allocation to be argued explicitly. Could the memo preserve those distinctions before recommending a schedule?",
+     "vi": "Thư và lượt nói hai phần. Mười bảy thư xin giờ yên, người tự viết chưa chắc chống mọi sự kiện. Lượt tăng cho dùng nhưng nền mở ngắn, không có người rời/né. Không nguồn nào là phiếu toàn dân. Chúng nêu ích/lo cần giải, còn nguyên tắc phân bổ phải lý luận rõ. Memo giữ phân biệt rồi khuyên lịch nhé?"
+    },
+    {
+     "p": "Một người nói thử có nghĩa chưa có lập trường. Phản hồi bằng lựa chọn có tiêu chí và khả năng sửa.",
+     "model": "A reversible trial is still a substantive choice. It allocates time to particular activities and accepts that one use can displace another. What makes it provisional is the commitment to reconsider the arrangement against stated criteria, not an absence of reasons. I would defend separate announced periods because they may make access more predictable for different uses. However, the review must examine who actually benefits, what work is required and which concerns remain unheard. We should retain dissent rather than manufacture unanimity. That gives the decision a position that can be tested and revised, instead of a permanent claim stronger than the evidence.",
+     "vi": "Trial vẫn là lựa chọn thật: chia thời gian và nhận việc này thay việc khác. Tạm ở cam kết xét theo tiêu chí chứ không thiếu lý do. Tôi bảo vệ khoảng tách vì giúp dự liệu, nhưng review phải hỏi ai lợi, công sức và lo chưa nghe. Giữ dissent thay nhất trí bịa để lập trường có thể thử và sửa."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Task 2 – cân hai mục đích của không gian chung",
+   "task": "Public squares should prioritise quiet everyday use rather than organised events. Discuss both views and give your own opinion. Viết 260–300 từ, dùng ví dụ tự tạo và nêu tiêu chí lựa chọn. Không biến vài thư góp ý hoặc lượt đếm thành ý toàn cư dân.",
+   "min": 260,
+   "model": "Quiet everyday use and organised events both deserve consideration in a public square. I would not make either an unconditional priority in every setting. Instead, I favour predictable periods for different uses, supported by a review of access and the work required. Those who prioritise quiet use can reasonably argue that a square should remain available without a booking or an invitation. A person may want to sit, meet a friend or pass through without joining a scheduled activity. An event can displace these less visible uses even when its audience is large. Counting visitors alone therefore does not establish that everyone benefits. Supporters of events have a strong argument too. A performance or shared activity can give people a reason to gather and make something possible that an unprogrammed space does not provide. In an imagined square, a small public performance might introduce neighbours who would otherwise never speak. That opportunity should not be dismissed merely because some people prefer quiet. The difficulty is deciding how to allocate time without treating either group as fixed or uniform. One resident may enjoy an event on Saturday and seek a quiet seat on Monday. I would therefore announce separate quiet and event periods, initially as a reversible trial. The review should consider the activities enabled and displaced, feedback from people who came and those who stayed away, and the resources needed to maintain the schedule. Complaints and praise would remain important, but neither a self-selected set of letters nor a single attendance total should stand for the whole population. This approach takes a position in favour of shared, predictable access while keeping the allocation open to justified revision.",
+   "modelVi": "Cả dùng yên hằng ngày và sự kiện đều đáng xét, tôi không ưu tiên vô điều kiện một cách ở mọi nơi. Tôi chọn khoảng dự liệu được cho các cách dùng, review tiếp cận và công sức. Người thích yên có lý khi muốn quảng trường không cần đặt/mời, cho ngồi, gặp bạn, đi qua; sự kiện có thể thay các cách ít thấy dù đông, nên đếm chưa chứng minh mọi người lợi. Người thích sự kiện cũng có lý: biểu diễn tạo lý do gặp và việc không gian trống chưa tạo, như tình huống giả láng giềng lần đầu nói. Không nên gạt vì có người thích yên. Khó ở chia thời gian mà không coi nhóm cố định: một người có thể thích diễn thứ bảy, yên thứ hai. Tôi chọn giờ riêng công bố, thử có thể sửa, xét hoạt động được/thay, người đến/vắng và nguồn lực. Khen/chê quan trọng nhưng thư tự chọn hoặc một số tổng chưa đại diện cả dân. Cách này có lập trường chia tiếp cận dự liệu được, vẫn mở sửa có lý do.",
+   "tips": [
+    "Discuss both views cần lý do thực cho hai phía, không dựng một phía yếu để bác.",
+    "Quan điểm trial phải có tiêu chí, không chỉ nói “it depends” rồi dừng."
+   ],
+   "checklist": [
+    "Có 260–300 từ và lập trường có phạm vi rõ.",
+    "Ví dụ được ghi giả, không bịa dữ liệu thực.",
+    "Giữ nhóm phản hồi khác toàn dân và số gộp khác hiệu ứng phân bổ."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Salience có đồng nghĩa prevalence không?",
+   "o": [
+    "Có, một thư đủ toàn dân",
+    "Không, nổi bật khác phổ biến",
+    "Có, cái ồn nhất luôn nhiều nhất"
+   ],
+   "a": 1,
+   "e": "Độ gây chú ý không tự đo số người có cùng quan điểm."
+  },
+  {
+   "t": "mc",
+   "q": "Opportunity cost ở đây nhắc điều gì?",
+   "o": [
+    "Cách dùng khác bị bỏ khi phân chỗ/thời gian",
+    "Chỉ giá vé thật",
+    "Mọi lợi ích đều giả"
+   ],
+   "a": 0,
+   "e": "Phân bổ một hoạt động có thể làm hoạt động khác không thực hiện được."
+  },
+  {
+   "t": "mc",
+   "q": "Reversible có bảo đảm hết bất đồng không?",
+   "o": [
+    "Có, mọi người tự nhất trí",
+    "Có, khỏi review",
+    "Không, chỉ cho phép điều chỉnh lại"
+   ],
+   "a": 2,
+   "e": "Khả năng sửa là thuộc thiết kế quyết định, không bảo đảm cảm nhận hoặc kết quả."
+  },
+  {
+   "t": "fill",
+   "q": "All ___ three of the twenty letters favour a quiet hour.",
+   "a": "but",
+   "e": "All but three nghĩa đúng mười bảy trong nhóm hai mươi thư."
+  },
+  {
+   "t": "fill",
+   "q": "The increase coincided ___ longer opening hours.",
+   "a": "with",
+   "e": "Coincided with không tự xác định quan hệ nguyên nhân giữa hai việc."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Các thư không đại diện mọi cư dân.",
+   "w": [
+    "letters",
+    "do",
+    "not",
+    "represent",
+    "every",
+    "resident",
+    "The"
+   ],
+   "a": "The letters do not represent every resident.",
+   "e": "Câu “The letters do not represent every resident.” diễn đạt các thư không đại diện mọi cư dân. Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Chúng ta nên giữ ý kiến bất đồng trong biên bản.",
+   "w": [
+    "should",
+    "retain",
+    "dissent",
+    "in",
+    "the",
+    "minutes",
+    "We"
+   ],
+   "a": "We should retain dissent in the minutes.",
+   "e": "Câu “We should retain dissent in the minutes.” diễn đạt chúng ta nên giữ ý kiến bất đồng trong biên bản. Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "match",
+   "q": "Nối salience, dissent, procedural fairness, allocation và contested theo cuộc bàn quảng trường.",
+   "pairs": [
+    [
+     "enforceability",
+     "khả năng thực hiện và duy trì quy tắc"
+    ],
+    [
+     "reversible",
+     "có thể đảo lại hoặc điều chỉnh về trước"
+    ],
+    [
+     "proportionate",
+     "tương xứng"
+    ],
+    [
+     "restriction",
+     "sự hạn chế, quy định giới hạn"
+    ],
+    [
+     "salience",
+     "mức nổi bật thu hút chú ý"
+    ]
+   ],
+   "e": "Salience nói độ nổi bật, dissent là ý không đồng thuận. Procedural fairness xét quy trình cơ hội phản hồi, allocation chia nguồn lực, contested chỉ mục đích còn tranh luận."
+  },
+  {
+   "t": "listen",
+   "say": "Seventeen of the twenty letters favour a quiet hour. Can the memo say that almost all residents want events removed from the square? No. The letters came from people who chose to write, and a quiet hour is not a demand to remove every event. Both the group and the proposal would change. The organisers report more visits during the performance weekend. Should that settle the issue in their favour? It shows use by those who came. It does not count people who left or chose another place, and the comparison weekend had different opening hours. So we need to separate a visible benefit from the opportunity cost. Could a limited schedule preserve both types of use? Possibly. I would propose one quiet period and a separate event period, with a review of access, volunteer work and feedback from users in each. We should retain dissent in the minutes rather than write unanimous agreement just because nobody spoke at the final moment. Agreed. Silence can have several explanations. The trial should be reversible, and the report should say which assumptions the review is meant to test.",
+   "lang": "en-GB",
+   "q": "Memo nháp sẽ đổi sai gì?",
+   "o": [
+    "Số thư vẫn đủ đại diện mọi người",
+    "Nhóm thư thành mọi cư dân và giờ yên thành bỏ sự kiện",
+    "Chỉ dấu câu"
+   ],
+   "a": 1,
+   "e": "Hai bước mở rộng đều vượt nguồn cụ thể."
+  },
+  {
+   "t": "listen",
+   "say": "Seventeen of the twenty letters favour a quiet hour. Can the memo say that almost all residents want events removed from the square? No. The letters came from people who chose to write, and a quiet hour is not a demand to remove every event. Both the group and the proposal would change. The organisers report more visits during the performance weekend. Should that settle the issue in their favour? It shows use by those who came. It does not count people who left or chose another place, and the comparison weekend had different opening hours. So we need to separate a visible benefit from the opportunity cost. Could a limited schedule preserve both types of use? Possibly. I would propose one quiet period and a separate event period, with a review of access, volunteer work and feedback from users in each. We should retain dissent in the minutes rather than write unanimous agreement just because nobody spoke at the final moment. Agreed. Silence can have several explanations. The trial should be reversible, and the report should say which assumptions the review is meant to test.",
+   "lang": "en-GB",
+   "q": "So lượt cuối tuần có giới hạn gì?",
+   "o": [
+    "Giờ mở khác và chưa đo người bị thay chỗ",
+    "Mọi điều kiện hệt nhau",
+    "Không ai đến"
+   ],
+   "a": 0,
+   "e": "Comparison cần xét điều kiện và nhóm vắng khỏi count."
+  },
+  {
+   "t": "dict",
+   "say": "A visible benefit can coexist with a displaced use.",
+   "a": "A visible benefit can coexist with a displaced use.",
+   "lang": "en-GB",
+   "e": "Coexist giữ hai điều cùng đúng; displaced use là cách dùng bị thay chỗ, không phủ nhận lợi ích thấy được."
+  },
+  {
+   "t": "mc",
+   "q": "Từ seventeen of twenty letters có thể nói gì?",
+   "o": [
+    "Gần như toàn dân muốn bỏ mọi sự kiện",
+    "Không ai thích biểu diễn",
+    "Đúng mười bảy thư trong nhóm đó ủng hộ yêu cầu"
+   ],
+   "a": 2,
+   "e": "Nhóm và nội dung yêu cầu phải giữ nguyên khi paraphrase."
+  },
+  {
+   "t": "mc",
+   "q": "Had no event taken place, some users might have stayed là gì?",
+   "o": [
+    "Bằng chứng mọi khách yên rời",
+    "Phản thực có kết quả khả năng",
+    "Số mất đã đo chính xác"
+   ],
+   "a": 1,
+   "e": "Might have trong điều kiện quá khứ chưa trở thành observed total."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Hai mươi thư giả với mười bảy xin một giờ yên, sổ lượt hai cuối tuần có giờ mở khác, thẻ mục đích và lịch trial có khoảng riêng.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "So thư xin một giờ với memo bỏ mọi sự kiện, phát hiện đổi đối tượng và mức yêu cầu."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dạy baseline, self-selection, opportunity cost bằng hai nguồn khác loại và người vắng khỏi chúng."
+   },
+   {
+    "t": "20 phút",
+    "do": "Ôn all but, not necessarily, phản thực và nhượng bộ đảo; mỗi mẫu phải giữ cùng một dữ kiện."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nghe tranh luận, ghi lợi ích, giới hạn và nguồn lực trước khi chọn lập trường."
+   },
+   {
+    "t": "15 phút",
+    "do": "Đóng vai người coi cuối họp im lặng là nhất trí, bạn chỉ dissent đã ghi và đề nghị kiểm lại."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai luyện aggregate tính từ và trọng âm heterogeneous, nói rõ phạm vi nhóm thư."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đọc bài, phân evidence và value judgement, tìm nguyên tắc mà mỗi đề xuất cần công khai."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nói bảo vệ trial bằng tiêu chí có thể xem lại, người nghe hỏi ai chịu công việc thực hiện."
+   },
+   {
+    "t": "15 phút",
+    "do": "Viết 260–300 từ, kiểm hai phía đều có lý do được phát triển và thesis không tuyệt đối hơn dữ kiện."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chữa số phản thực bị coi số đo, làm dict coexist và giao trường hợp phân bổ thời gian giả khác."
+   }
+  ],
+  "games": [
+   "Nhóm nào trong câu: đội chỉ được đổi từ letters sang residents khi có bằng chứng coverage; không được lấy almost all để giấu bước đổi.",
+   "Một chỗ hai cách dùng: đội phân lịch và ghi cả hoạt động được lẫn bị thay, sau đó bảo vệ tiêu chí trước phản vấn."
+  ],
+  "errors": [
+   "Đổi thư tự chọn thành dân số: giữ nhóm phản hồi.",
+   "Đổi một giờ yên thành xóa mọi sự kiện: giữ nội dung yêu cầu.",
+   "Lấy phản thực khả dĩ làm số đo: nêu trạng thái giả định.",
+   "Coi im lặng là bỏ mọi dissent: hỏi và ghi đúng.",
+   "Dùng it depends mà không tiêu chí: đưa nguyên tắc, người làm và review."
+  ],
+  "homework": "Tạo hai nguồn khác loại cho không gian chung giả. Viết Task 2 260–300 từ, giữ nhóm/tiêu chí rõ và ghi thêm ba câu hỏi review để thử giả định của phương án bạn chọn."
+ }
+}

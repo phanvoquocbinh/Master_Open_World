@@ -1,65 +1,353 @@
 {
-  "no": 40,
-  "lv": "b2",
-  "title": "Xử lý khách hàng phàn nàn qua điện thoại",
-  "sub": "I'm sorry we've let you down.",
-  "situation": "Ông Grant, giám đốc một studio thiết kế, gọi đến tổng đài hỗ trợ của Planwise (phần mềm quản lý dự án) trong trạng thái rất bực bội: sau bản cập nhật hôm thứ Ba, toàn bộ file đính kèm của nhóm ông biến mất, trong khi thứ Sáu phải nộp sản phẩm cho khách. Thảo, nhân viên hỗ trợ, áp dụng quy trình xử lý phàn nàn: lắng nghe – đồng cảm – xin lỗi – hỏi để chẩn đoán – đưa giải pháp – bồi thường – cam kết theo dõi. Bài học: biến một khách hàng giận dữ thành khách hàng hài lòng.",
-  "lang": "en-GB",
-  "lines": [
-    {"s": "Thao", "g": "f", "t": "Good morning, you're through to Planwise customer support. My name's Thao. How can I help?", "vi": "Chào buổi sáng, đây là bộ phận hỗ trợ khách hàng của Planwise. Tôi là Thảo. Tôi có thể giúp gì cho anh ạ?"},
-    {"s": "Mr Grant", "g": "m", "t": "Morning. I'm calling because, frankly, I'm extremely frustrated. Since your update on Tuesday, half of my team's project files have disappeared, and we've got a client deadline on Friday.", "vi": "Chào cô. Tôi gọi vì, nói thẳng là, tôi cực kỳ bực mình. Từ bản cập nhật hôm thứ Ba của các cô, một nửa số file dự án của nhóm tôi đã biến mất, mà thứ Sáu chúng tôi phải nộp cho khách hàng."},
-    {"s": "Thao", "g": "f", "t": "I'm really sorry to hear that, Mr Grant. I can completely understand how stressful that must be, especially with a deadline coming up. Let me see what I can do. Could I take the email address on your account, please?", "vi": "Tôi rất tiếc khi nghe điều đó, anh Grant. Tôi hoàn toàn hiểu chuyện đó căng thẳng thế nào, nhất là khi sắp đến hạn chót. Để tôi xem có thể làm gì. Anh cho tôi xin địa chỉ email đăng ký tài khoản được không ạ?"},
-    {"s": "Mr Grant", "g": "m", "t": "It's david at grant design dot com. Look, this is the third time I've had problems this year. I'm seriously thinking about cancelling.", "vi": "Là david@grantdesign.com. Này cô, đây là lần thứ ba trong năm tôi gặp sự cố. Tôi đang nghiêm túc tính chuyện huỷ dịch vụ."},
-    {"s": "Thao", "g": "f", "t": "I understand, and I'm sorry we've let you down again. I'd really like to put this right for you. Could I ask a few questions so I can find out exactly what's happened?", "vi": "Tôi hiểu, và tôi xin lỗi vì chúng tôi lại làm anh thất vọng. Tôi thực sự muốn khắc phục việc này cho anh. Tôi hỏi anh vài câu để tìm hiểu chính xác chuyện gì đã xảy ra được không ạ?"},
-    {"s": "Mr Grant", "g": "m", "t": "Go on.", "vi": "Cô hỏi đi."},
-    {"s": "Thao", "g": "f", "t": "Thank you. Is it whole projects that are missing, or just certain files?", "vi": "Cảm ơn anh. Mất cả dự án hay chỉ một số file nhất định ạ?"},
-    {"s": "Mr Grant", "g": "m", "t": "The tasks and comments are all there, but every attachment uploaded before Tuesday has gone. Designs, contracts, everything.", "vi": "Công việc và bình luận vẫn còn đủ, nhưng mọi file đính kèm tải lên trước thứ Ba đều mất sạch. Bản thiết kế, hợp đồng, mọi thứ."},
-    {"s": "Thao", "g": "f", "t": "Thank you, that's really helpful. I can see that a small number of accounts were affected by a file storage issue during the update. The good news is that your files haven't been deleted. They're safe in our backups.", "vi": "Cảm ơn anh, thông tin đó rất hữu ích. Tôi thấy một số ít tài khoản bị ảnh hưởng bởi sự cố lưu trữ file trong đợt cập nhật. Tin tốt là file của anh không bị xoá. Chúng vẫn an toàn trong bản sao lưu của chúng tôi."},
-    {"s": "Mr Grant", "g": "m", "t": "Well, that's something, I suppose. How long will it take to get them back?", "vi": "Ừ, thế thì cũng còn đỡ. Mất bao lâu để lấy lại?"},
-    {"s": "Thao", "g": "f", "t": "I'll escalate this to our technical team as a priority. They'll restore your attachments within twenty-four hours, and in most cases it's much quicker.", "vi": "Tôi sẽ chuyển việc này lên đội kỹ thuật với mức ưu tiên cao. Họ sẽ khôi phục file đính kèm của anh trong vòng hai mươi bốn giờ, và đa số trường hợp còn nhanh hơn nhiều."},
-    {"s": "Mr Grant", "g": "m", "t": "Twenty-four hours is cutting it fine with our deadline. Is there anything faster?", "vi": "Hai mươi bốn giờ thì quá sát với hạn chót của chúng tôi. Có cách nào nhanh hơn không?"},
-    {"s": "Thao", "g": "f", "t": "If there are any files you need urgently today, I can ask the team to restore those first. Could you email me a list?", "vi": "Nếu có file nào anh cần gấp trong hôm nay, tôi có thể đề nghị đội kỹ thuật khôi phục những file đó trước. Anh gửi email cho tôi danh sách được không ạ?"},
-    {"s": "Mr Grant", "g": "m", "t": "Yes, I can do that within the hour.", "vi": "Được, tôi sẽ gửi trong vòng một tiếng."},
-    {"s": "Thao", "g": "f", "t": "Great. I'll give you a reference number and my direct email, so you won't have to explain everything again. And to apologise for the inconvenience, I'd like to offer you one month's subscription free of charge.", "vi": "Tuyệt ạ. Tôi sẽ gửi anh mã tham chiếu và email trực tiếp của tôi, để anh không phải giải thích lại từ đầu. Và để xin lỗi vì sự bất tiện, tôi xin tặng anh một tháng sử dụng miễn phí."},
-    {"s": "Mr Grant", "g": "m", "t": "OK. I appreciate that. But I need to know this won't happen again.", "vi": "Được. Tôi ghi nhận điều đó. Nhưng tôi cần biết chuyện này sẽ không lặp lại."},
-    {"s": "Thao", "g": "f", "t": "That's completely reasonable. Our team is reviewing what went wrong, and I'll make sure you receive a full explanation once the investigation is complete. I'll also call you tomorrow morning to check that everything's been restored.", "vi": "Yêu cầu đó hoàn toàn hợp lý. Đội ngũ của chúng tôi đang rà soát nguyên nhân sự cố, và tôi sẽ đảm bảo anh nhận được giải thích đầy đủ khi điều tra hoàn tất. Sáng mai tôi cũng sẽ gọi cho anh để kiểm tra mọi thứ đã được khôi phục chưa."},
-    {"s": "Mr Grant", "g": "m", "t": "Right. Well, thank you, Thao. You've been very helpful, considering.", "vi": "Được rồi. Cảm ơn cô, Thảo. Trong hoàn cảnh này thì cô đã giúp đỡ rất nhiều."},
-    {"s": "Thao", "g": "f", "t": "You're welcome. Once again, I'm sorry for the trouble. Your reference number is P H seven four two. I'll be in touch shortly.", "vi": "Không có gì ạ. Một lần nữa, tôi xin lỗi vì sự phiền toái. Mã tham chiếu của anh là PH742. Tôi sẽ sớm liên lạc lại ạ."}
-  ],
-  "phrases": [
-    {"t": "You're through to… How can I help?", "vi": "Đây là (bộ phận)… Tôi có thể giúp gì?", "note": "Câu chào chuẩn khi nhận điện thoại ở tổng đài (Anh-Anh). Luôn nói tên mình để khách thấy được phục vụ bởi một con người cụ thể."},
-    {"t": "I can completely understand how stressful that must be.", "vi": "Tôi hoàn toàn hiểu chuyện đó căng thẳng thế nào.", "note": "Câu ĐỒNG CẢM – bước quan trọng nhất trước khi giải quyết. must be = suy đoán chắc chắn. TUYỆT ĐỐI tránh “Calm down” (Bình tĩnh đi) – khiến khách giận hơn."},
-    {"t": "Let me see what I can do.", "vi": "Để tôi xem có thể làm gì.", "note": "Thể hiện sự chủ động, cho khách cảm giác vấn đề đang được xử lý. Tránh câu máy móc kiểu “That's our policy” hoặc “It's not my department”."},
-    {"t": "I'm sorry we've let you down.", "vi": "Tôi xin lỗi vì chúng tôi đã làm anh/chị thất vọng.", "note": "let somebody down = làm ai thất vọng. Dùng “we” (cả công ty) chứ không đổ lỗi cho bộ phận khác (“The developers made a mistake”) – khách không quan tâm lỗi của ai."},
-    {"t": "I'd really like to put this right for you.", "vi": "Tôi thực sự muốn khắc phục việc này cho anh/chị.", "note": "put something right = sửa chữa, khắc phục sai sót. Câu cam kết hành động sau lời xin lỗi – xin lỗi mà không có hành động thì vô nghĩa."},
-    {"t": "Could I ask a few questions so I can find out exactly what's happened?", "vi": "Tôi hỏi vài câu để tìm hiểu chính xác chuyện gì đã xảy ra được không?", "note": "Xin phép trước khi hỏi giúp khách hợp tác hơn. Hỏi câu cụ thể: Which…? When did it start? Is it all… or just…? – giống kỹ năng điều tra lỗi của tester."},
-    {"t": "The good news is that…", "vi": "Tin tốt là…", "note": "Chuyển hướng tích cực sau khi đã đồng cảm. Dùng khi có tin tốt THẬT – không hứa hẹn suông."},
-    {"t": "I'll escalate this to our technical team as a priority.", "vi": "Tôi sẽ chuyển việc này lên đội kỹ thuật với mức ưu tiên cao.", "note": "escalate = chuyển vấn đề lên cấp/bộ phận có thẩm quyền cao hơn. Nói rõ thời gian cụ thể (within 24 hours) thay vì “as soon as possible”."},
-    {"t": "That's cutting it fine.", "vi": "Thế thì sát giờ quá.", "note": "cut it fine = để quá ít thời gian dự phòng. Khi khách nói câu này, hãy tìm phương án ưu tiên (restore urgent files first) thay vì chỉ lặp lại quy trình."},
-    {"t": "To apologise for the inconvenience, I'd like to offer you…", "vi": "Để xin lỗi vì sự bất tiện, tôi xin tặng anh/chị…", "note": "Bồi thường (compensation / goodwill gesture) đi kèm xin lỗi. Anh-Anh viết apologise; Anh-Mỹ: apologize. free of charge = miễn phí (trang trọng)."},
-    {"t": "That's completely reasonable.", "vi": "Yêu cầu đó hoàn toàn hợp lý.", "note": "Công nhận yêu cầu của khách là chính đáng, giúp họ hạ giọng. Sau đó đưa cam kết cụ thể: giải thích nguyên nhân + gọi lại kiểm tra."},
-    {"t": "I'll be in touch shortly.", "vi": "Tôi sẽ sớm liên lạc lại.", "note": "Kết thúc bằng cam kết theo dõi (follow-up). Đọc mã tham chiếu chậm, từng ký tự. Quy trình tổng quát dễ nhớ: Listen – Empathise – Apologise – Solve – Follow up."}
-  ],
-  "qs": [
-    {"q": "Why is Mr Grant calling?", "o": ["He forgot his password.", "His team's files disappeared after an update.", "He wants a discount."], "a": 1, "e": "Mr Grant: “Since your update on Tuesday, half of my team's project files have disappeared.”"},
-    {"q": "Why is the problem especially urgent for him?", "o": ["He has a client deadline on Friday.", "He is going on holiday.", "His contract ends today."], "a": 0, "e": "“we've got a client deadline on Friday.”"},
-    {"q": "What is Mr Grant thinking of doing?", "o": ["Suing the company", "Cancelling his subscription", "Upgrading his plan"], "a": 1, "e": "Mr Grant: “this is the third time I've had problems this year. I'm seriously thinking about cancelling.”"},
-    {"q": "What exactly is missing from his account?", "o": ["All tasks and comments", "Attachments uploaded before Tuesday", "The whole account"], "a": 1, "e": "“The tasks and comments are all there, but every attachment uploaded before Tuesday has gone.”"},
-    {"q": "The technical team will restore the attachments within ______ hours.", "a": "twenty-four", "alt": ["24", "twenty four"], "e": "Thao: “They'll restore your attachments within twenty-four hours.”"},
-    {"q": "What does Thao offer for the files he needs urgently?", "o": ["To restore them first if he emails a list", "To send them by post", "Nothing – he has to wait"], "a": 0, "e": "Thao: “If there are any files you need urgently today, I can ask the team to restore those first. Could you email me a list?”"},
-    {"q": "What compensation does Thao offer?", "o": ["A full refund", "One month's subscription free of charge", "A new computer"], "a": 1, "e": "“I'd like to offer you one month's subscription free of charge.”"},
-    {"q": "How does Mr Grant's attitude change during the call?", "o": ["He becomes angrier.", "He goes from extremely frustrated to calmer and appreciative.", "He stays exactly the same."], "a": 1, "e": "Đầu cuộc gọi: “I'm extremely frustrated”; cuối: “You've been very helpful, considering.” – nhờ Thảo đồng cảm, đưa giải pháp cụ thể và cam kết theo dõi."}
-  ],
-  "exercises": [
-    {"t": "fill", "q": "I'm sorry we've ___ you down. I'd really like to put this right.", "a": "let", "e": "let somebody down (let – let – let) = làm ai thất vọng."},
-    {"t": "mc", "q": "Khách hàng nói: “This is the third time this has happened! I'm furious!” Câu đáp nào tốt nhất?", "o": ["Please calm down, sir.", "I completely understand your frustration, and I'm sorry. Let me see what I can do right now.", "That's not my department."], "a": 1, "e": "Đồng cảm + xin lỗi + hành động. “Calm down” khiến khách giận hơn; “not my department” đẩy trách nhiệm."},
-    {"t": "order", "q": "Sắp xếp thành câu cam kết xử lý:", "w": ["to our technical team", "I'll escalate this", "as a priority."], "a": "I'll escalate this to our technical team as a priority.", "e": "escalate something to somebody = chuyển vấn đề lên ai đó; as a priority = ưu tiên."},
-    {"t": "dict", "say": "The good news is that your files haven't been deleted.", "a": "The good news is that your files haven't been deleted.", "e": "news là danh từ không đếm được → “The good news IS”. Bị động hiện tại hoàn thành: haven't been deleted."},
-    {"t": "listen", "say": "Twenty-four hours is cutting it fine with our deadline.", "q": "Khách hàng có ý gì?", "o": ["24 giờ là quá sát so với hạn chót của họ", "24 giờ là rất ổn", "Họ muốn huỷ hạn chót"], "a": 0, "e": "cut it fine = để quá ít thời gian dự phòng. Khách đang ngầm yêu cầu một giải pháp nhanh hơn."},
-    {"t": "match", "q": "Nối các bước xử lý phàn nàn với câu nói:", "pairs": [["Đồng cảm", "I can understand how stressful that must be."], ["Xin lỗi", "I'm sorry we've let you down."], ["Hỏi để chẩn đoán", "Is it all your files, or just some?"], ["Bồi thường", "I'd like to offer you a month free."], ["Theo dõi", "I'll call you tomorrow to check."]]}
-  ],
-  "practice": [
-    {"p": "Bạn là nhân viên hỗ trợ. Một khách hàng gọi vì bị trừ tiền gói năm hai lần. Hãy đồng cảm, xin lỗi, hỏi thông tin, đưa giải pháp hoàn tiền và thời gian cụ thể.", "model": "I'm really sorry to hear that. Being charged twice is the last thing you need, and I completely understand why you're upset. Could I take your account email, please? … Thank you. I can see two payments on the third of March. That's clearly our mistake. I've just requested a full refund for the second payment, and it should be back in your account within three to five working days. I'll email you the confirmation right now.", "vi": "Tôi rất tiếc khi nghe điều đó. Bị trừ tiền hai lần là điều không ai mong muốn, và tôi hoàn toàn hiểu vì sao anh khó chịu. Anh cho tôi xin email tài khoản được không ạ? … Cảm ơn anh. Tôi thấy có hai khoản thanh toán vào ngày 3 tháng 3. Rõ ràng đó là lỗi của chúng tôi. Tôi vừa yêu cầu hoàn toàn bộ khoản thanh toán thứ hai, và tiền sẽ về tài khoản của anh trong vòng ba đến năm ngày làm việc. Tôi sẽ gửi email xác nhận cho anh ngay bây giờ."},
-    {"p": "Khách yêu cầu điều bạn không thể làm (hoàn tiền cả năm vì một lỗi nhỏ). Từ chối lịch sự và đưa phương án thay thế.", "model": "I completely understand why you'd ask for that, and I'm sorry for the trouble this has caused. I'm afraid I'm not able to refund the whole year, as the service has been working for the rest of the time. What I can do is give you two months free and make sure the bug is fixed in this week's update. Would that be acceptable?", "vi": "Tôi hoàn toàn hiểu vì sao anh yêu cầu như vậy, và tôi xin lỗi vì những phiền toái đã gây ra. Tiếc là tôi không thể hoàn tiền cả năm, vì dịch vụ vẫn hoạt động bình thường trong thời gian còn lại. Điều tôi có thể làm là tặng anh hai tháng miễn phí và đảm bảo lỗi được sửa trong bản cập nhật tuần này. Như vậy anh thấy có chấp nhận được không ạ?"}
-  ]
+ "no": 40,
+ "lv": "b2",
+ "title": "Xử lý khách hàng phàn nàn qua điện thoại",
+ "sub": "I'm sorry we've let you down.",
+ "situation": "Ông Grant, giám đốc một studio thiết kế, gọi đến tổng đài hỗ trợ của Neral Loom Board (phần mềm quản lý dự án) trong trạng thái rất bực bội: sau bản cập nhật hôm thứ Ba, toàn bộ file đính kèm của nhóm ông biến mất, trong khi thứ Sáu phải nộp sản phẩm cho khách. Thảo, nhân viên hỗ trợ, áp dụng quy trình xử lý phàn nàn: lắng nghe – đồng cảm – xin lỗi – hỏi để chẩn đoán – đưa giải pháp – bồi thường – cam kết theo dõi. Bài học: biến một khách hàng giận dữ thành khách hàng hài lòng.",
+ "lang": "en-GB",
+ "lines": [
+  {
+   "s": "Thao",
+   "g": "f",
+   "t": "Good morning, you're through to Neral Loom Board customer support. My name's Thao. How can I help?",
+   "vi": "Chào buổi sáng, đây là bộ phận hỗ trợ khách hàng của Neral Loom Board. Tôi là Thảo. Tôi có thể giúp gì cho anh ạ?"
+  },
+  {
+   "s": "Mr Grant",
+   "g": "m",
+   "t": "Morning. I'm calling because, frankly, I'm extremely frustrated. Since your update on Tuesday, half of my team's project files have disappeared, and we've got a client deadline on Friday.",
+   "vi": "Chào cô. Tôi gọi vì, nói thẳng là, tôi cực kỳ bực mình. Từ bản cập nhật hôm thứ Ba của các cô, một nửa số file dự án của nhóm tôi đã biến mất, mà thứ Sáu chúng tôi phải nộp cho khách hàng."
+  },
+  {
+   "s": "Thao",
+   "g": "f",
+   "t": "I'm really sorry to hear that, Mr Grant. I can completely understand how stressful that must be, especially with a deadline coming up. Let me see what I can do. Could I take the email address on your account, please?",
+   "vi": "Tôi rất tiếc khi nghe điều đó, anh Grant. Tôi hoàn toàn hiểu chuyện đó căng thẳng thế nào, nhất là khi sắp đến hạn chót. Để tôi xem có thể làm gì. Anh cho tôi xin địa chỉ email đăng ký tài khoản được không ạ?"
+  },
+  {
+   "s": "Mr Grant",
+   "g": "m",
+   "t": "It's david at grant design dot com. Look, this is the third time I've had problems this year. I'm seriously thinking about cancelling.",
+   "vi": "Là david@grantdesign.com. Này cô, đây là lần thứ ba trong năm tôi gặp sự cố. Tôi đang nghiêm túc tính chuyện huỷ dịch vụ."
+  },
+  {
+   "s": "Thao",
+   "g": "f",
+   "t": "I understand, and I'm sorry we've let you down again. I'd really like to put this right for you. Could I ask a few questions so I can find out exactly what's happened?",
+   "vi": "Tôi hiểu, và tôi xin lỗi vì chúng tôi lại làm anh thất vọng. Tôi thực sự muốn khắc phục việc này cho anh. Tôi hỏi anh vài câu để tìm hiểu chính xác chuyện gì đã xảy ra được không ạ?"
+  },
+  {
+   "s": "Mr Grant",
+   "g": "m",
+   "t": "Go on.",
+   "vi": "Cô hỏi đi."
+  },
+  {
+   "s": "Thao",
+   "g": "f",
+   "t": "Thank you. Is it whole projects that are missing, or just certain files?",
+   "vi": "Cảm ơn anh. Mất cả dự án hay chỉ một số file nhất định ạ?"
+  },
+  {
+   "s": "Mr Grant",
+   "g": "m",
+   "t": "The tasks and comments are all there, but every attachment uploaded before Tuesday has gone. Designs, contracts, everything.",
+   "vi": "Công việc và bình luận vẫn còn đủ, nhưng mọi file đính kèm tải lên trước thứ Ba đều mất sạch. Bản thiết kế, hợp đồng, mọi thứ."
+  },
+  {
+   "s": "Thao",
+   "g": "f",
+   "t": "Thank you, that's really helpful. I can see that a small number of accounts were affected by a file storage issue during the update. The good news is that your files haven't been deleted. They're safe in our backups.",
+   "vi": "Cảm ơn anh, thông tin đó rất hữu ích. Tôi thấy một số ít tài khoản bị ảnh hưởng bởi sự cố lưu trữ file trong đợt cập nhật. Tin tốt là file của anh không bị xoá. Chúng vẫn an toàn trong bản sao lưu của chúng tôi."
+  },
+  {
+   "s": "Mr Grant",
+   "g": "m",
+   "t": "Well, that's something, I suppose. How long will it take to get them back?",
+   "vi": "Ừ, thế thì cũng còn đỡ. Mất bao lâu để lấy lại?"
+  },
+  {
+   "s": "Thao",
+   "g": "f",
+   "t": "I'll escalate this to our technical team as a priority. They'll restore your attachments within twenty-four hours, and in most cases it's much quicker.",
+   "vi": "Tôi sẽ chuyển việc này lên đội kỹ thuật với mức ưu tiên cao. Họ sẽ khôi phục file đính kèm của anh trong vòng hai mươi bốn giờ, và đa số trường hợp còn nhanh hơn nhiều."
+  },
+  {
+   "s": "Mr Grant",
+   "g": "m",
+   "t": "Twenty-four hours is cutting it fine with our deadline. Is there anything faster?",
+   "vi": "Hai mươi bốn giờ thì quá sát với hạn chót của chúng tôi. Có cách nào nhanh hơn không?"
+  },
+  {
+   "s": "Thao",
+   "g": "f",
+   "t": "If there are any files you need urgently today, I can ask the team to restore those first. Could you email me a list?",
+   "vi": "Nếu có file nào anh cần gấp trong hôm nay, tôi có thể đề nghị đội kỹ thuật khôi phục những file đó trước. Anh gửi email cho tôi danh sách được không ạ?"
+  },
+  {
+   "s": "Mr Grant",
+   "g": "m",
+   "t": "Yes, I can do that within the hour.",
+   "vi": "Được, tôi sẽ gửi trong vòng một tiếng."
+  },
+  {
+   "s": "Thao",
+   "g": "f",
+   "t": "Great. I'll give you a reference number and my direct email, so you won't have to explain everything again. And to apologise for the inconvenience, I'd like to offer you one month's subscription free of charge.",
+   "vi": "Tuyệt ạ. Tôi sẽ gửi anh mã tham chiếu và email trực tiếp của tôi, để anh không phải giải thích lại từ đầu. Và để xin lỗi vì sự bất tiện, tôi xin tặng anh một tháng sử dụng miễn phí."
+  },
+  {
+   "s": "Mr Grant",
+   "g": "m",
+   "t": "OK. I appreciate that. But I need to know this won't happen again.",
+   "vi": "Được. Tôi ghi nhận điều đó. Nhưng tôi cần biết chuyện này sẽ không lặp lại."
+  },
+  {
+   "s": "Thao",
+   "g": "f",
+   "t": "That's completely reasonable. Our team is reviewing what went wrong, and I'll make sure you receive a full explanation once the investigation is complete. I'll also call you tomorrow morning to check that everything's been restored.",
+   "vi": "Yêu cầu đó hoàn toàn hợp lý. Đội ngũ của chúng tôi đang rà soát nguyên nhân sự cố, và tôi sẽ đảm bảo anh nhận được giải thích đầy đủ khi điều tra hoàn tất. Sáng mai tôi cũng sẽ gọi cho anh để kiểm tra mọi thứ đã được khôi phục chưa."
+  },
+  {
+   "s": "Mr Grant",
+   "g": "m",
+   "t": "Right. Well, thank you, Thao. You've been very helpful, considering.",
+   "vi": "Được rồi. Cảm ơn cô, Thảo. Trong hoàn cảnh này thì cô đã giúp đỡ rất nhiều."
+  },
+  {
+   "s": "Thao",
+   "g": "f",
+   "t": "You're welcome. Once again, I'm sorry for the trouble. Your reference number is P H seven four two. I'll be in touch shortly.",
+   "vi": "Không có gì ạ. Một lần nữa, tôi xin lỗi vì sự phiền toái. Mã tham chiếu của anh là PH742. Tôi sẽ sớm liên lạc lại ạ."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "You're through to… How can I help?",
+   "vi": "Đây là (bộ phận)… Tôi có thể giúp gì?",
+   "note": "Câu chào chuẩn khi nhận điện thoại ở tổng đài (Anh-Anh). Luôn nói tên mình để khách thấy được phục vụ bởi một con người cụ thể."
+  },
+  {
+   "t": "I can completely understand how stressful that must be.",
+   "vi": "Tôi hoàn toàn hiểu chuyện đó căng thẳng thế nào.",
+   "note": "Câu ĐỒNG CẢM – bước quan trọng nhất trước khi giải quyết. must be = suy đoán chắc chắn. TUYỆT ĐỐI tránh “Calm down” (Bình tĩnh đi) – khiến khách giận hơn."
+  },
+  {
+   "t": "Let me see what I can do.",
+   "vi": "Để tôi xem có thể làm gì.",
+   "note": "Thể hiện sự chủ động, cho khách cảm giác vấn đề đang được xử lý. Tránh câu máy móc kiểu “That's our policy” hoặc “It's not my department”."
+  },
+  {
+   "t": "I'm sorry we've let you down.",
+   "vi": "Tôi xin lỗi vì chúng tôi đã làm anh/chị thất vọng.",
+   "note": "let somebody down = làm ai thất vọng. Dùng “we” (cả công ty) chứ không đổ lỗi cho bộ phận khác (“The developers made a mistake”) – khách không quan tâm lỗi của ai."
+  },
+  {
+   "t": "I'd really like to put this right for you.",
+   "vi": "Tôi thực sự muốn khắc phục việc này cho anh/chị.",
+   "note": "put something right = sửa chữa, khắc phục sai sót. Câu cam kết hành động sau lời xin lỗi – xin lỗi mà không có hành động thì vô nghĩa."
+  },
+  {
+   "t": "Could I ask a few questions so I can find out exactly what's happened?",
+   "vi": "Tôi hỏi vài câu để tìm hiểu chính xác chuyện gì đã xảy ra được không?",
+   "note": "Xin phép trước khi hỏi giúp khách hợp tác hơn. Hỏi câu cụ thể: Which…? When did it start? Is it all… or just…? – giống kỹ năng điều tra lỗi của tester."
+  },
+  {
+   "t": "The good news is that…",
+   "vi": "Tin tốt là…",
+   "note": "Chuyển hướng tích cực sau khi đã đồng cảm. Dùng khi có tin tốt THẬT – không hứa hẹn suông."
+  },
+  {
+   "t": "I'll escalate this to our technical team as a priority.",
+   "vi": "Tôi sẽ chuyển việc này lên đội kỹ thuật với mức ưu tiên cao.",
+   "note": "escalate = chuyển vấn đề lên cấp/bộ phận có thẩm quyền cao hơn. Nói rõ thời gian cụ thể (within 24 hours) thay vì “as soon as possible”."
+  },
+  {
+   "t": "That's cutting it fine.",
+   "vi": "Thế thì sát giờ quá.",
+   "note": "cut it fine = để quá ít thời gian dự phòng. Khi khách nói câu này, hãy tìm phương án ưu tiên (restore urgent files first) thay vì chỉ lặp lại quy trình."
+  },
+  {
+   "t": "To apologise for the inconvenience, I'd like to offer you…",
+   "vi": "Để xin lỗi vì sự bất tiện, tôi xin tặng anh/chị…",
+   "note": "Bồi thường (compensation / goodwill gesture) đi kèm xin lỗi. Anh-Anh viết apologise; Anh-Mỹ: apologize. free of charge = miễn phí (trang trọng)."
+  },
+  {
+   "t": "That's completely reasonable.",
+   "vi": "Yêu cầu đó hoàn toàn hợp lý.",
+   "note": "Công nhận yêu cầu của khách là chính đáng, giúp họ hạ giọng. Sau đó đưa cam kết cụ thể: giải thích nguyên nhân + gọi lại kiểm tra."
+  },
+  {
+   "t": "I'll be in touch shortly.",
+   "vi": "Tôi sẽ sớm liên lạc lại.",
+   "note": "Kết thúc bằng cam kết theo dõi (follow-up). Đọc mã tham chiếu chậm, từng ký tự. Quy trình tổng quát dễ nhớ: Listen – Empathise – Apologise – Solve – Follow up."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Why is Mr Grant calling?",
+   "o": [
+    "He forgot his password.",
+    "His team's files disappeared after an update.",
+    "He wants a discount."
+   ],
+   "a": 1,
+   "e": "Mr Grant: “Since your update on Tuesday, half of my team's project files have disappeared.”"
+  },
+  {
+   "q": "Why is the problem especially urgent for him?",
+   "o": [
+    "He has a client deadline on Friday.",
+    "He is going on holiday.",
+    "His contract ends today."
+   ],
+   "a": 0,
+   "e": "“we've got a client deadline on Friday.”"
+  },
+  {
+   "q": "What is Mr Grant thinking of doing?",
+   "o": [
+    "Suing the company",
+    "Cancelling his subscription",
+    "Upgrading his plan"
+   ],
+   "a": 1,
+   "e": "Mr Grant: “this is the third time I've had problems this year. I'm seriously thinking about cancelling.”"
+  },
+  {
+   "q": "What exactly is missing from his account?",
+   "o": [
+    "All tasks and comments",
+    "Attachments uploaded before Tuesday",
+    "The whole account"
+   ],
+   "a": 1,
+   "e": "“The tasks and comments are all there, but every attachment uploaded before Tuesday has gone.”"
+  },
+  {
+   "q": "The technical team will restore the attachments within ______ hours.",
+   "a": "twenty-four",
+   "alt": [
+    "24",
+    "twenty four"
+   ],
+   "e": "Thao: “They'll restore your attachments within twenty-four hours.”"
+  },
+  {
+   "q": "What does Thao offer for the files he needs urgently?",
+   "o": [
+    "To restore them first if he emails a list",
+    "To send them by post",
+    "Nothing – he has to wait"
+   ],
+   "a": 0,
+   "e": "Thao: “If there are any files you need urgently today, I can ask the team to restore those first. Could you email me a list?”"
+  },
+  {
+   "q": "What compensation does Thao offer?",
+   "o": [
+    "A full refund",
+    "One month's subscription free of charge",
+    "A new computer"
+   ],
+   "a": 1,
+   "e": "“I'd like to offer you one month's subscription free of charge.”"
+  },
+  {
+   "q": "How does Mr Grant's attitude change during the call?",
+   "o": [
+    "He becomes angrier.",
+    "He goes from extremely frustrated to calmer and appreciative.",
+    "He stays exactly the same."
+   ],
+   "a": 1,
+   "e": "Đầu cuộc gọi: “I'm extremely frustrated”; cuối: “You've been very helpful, considering.” – nhờ Thảo đồng cảm, đưa giải pháp cụ thể và cam kết theo dõi."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "I'm sorry we've ___ you down. I'd really like to put this right.",
+   "a": "let",
+   "e": "let somebody down (let – let – let) = làm ai thất vọng."
+  },
+  {
+   "t": "mc",
+   "q": "Khách hàng nói: “This is the third time this has happened! I'm furious!” Câu đáp nào tốt nhất?",
+   "o": [
+    "Please calm down, sir.",
+    "I completely understand your frustration, and I'm sorry. Let me see what I can do right now.",
+    "That's not my department."
+   ],
+   "a": 1,
+   "e": "Đồng cảm + xin lỗi + hành động. “Calm down” khiến khách giận hơn; “not my department” đẩy trách nhiệm."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu cam kết xử lý:",
+   "w": [
+    "to our technical team",
+    "I'll escalate this",
+    "as a priority."
+   ],
+   "a": "I'll escalate this to our technical team as a priority.",
+   "e": "escalate something to somebody = chuyển vấn đề lên ai đó; as a priority = ưu tiên."
+  },
+  {
+   "t": "dict",
+   "say": "The good news is that your files haven't been deleted.",
+   "a": "The good news is that your files haven't been deleted.",
+   "e": "news là danh từ không đếm được → “The good news IS”. Bị động hiện tại hoàn thành: haven't been deleted."
+  },
+  {
+   "t": "listen",
+   "say": "Twenty-four hours is cutting it fine with our deadline.",
+   "q": "Khách hàng có ý gì?",
+   "o": [
+    "24 giờ là quá sát so với hạn chót của họ",
+    "24 giờ là rất ổn",
+    "Họ muốn huỷ hạn chót"
+   ],
+   "a": 0,
+   "e": "cut it fine = để quá ít thời gian dự phòng. Khách đang ngầm yêu cầu một giải pháp nhanh hơn."
+  },
+  {
+   "t": "match",
+   "q": "Nối các bước xử lý phàn nàn với câu nói:",
+   "pairs": [
+    [
+     "Đồng cảm",
+     "I can understand how stressful that must be."
+    ],
+    [
+     "Xin lỗi",
+     "I'm sorry we've let you down."
+    ],
+    [
+     "Hỏi để chẩn đoán",
+     "Is it all your files, or just some?"
+    ],
+    [
+     "Bồi thường",
+     "I'd like to offer you a month free."
+    ],
+    [
+     "Theo dõi",
+     "I'll call you tomorrow to check."
+    ]
+   ]
+  }
+ ],
+ "practice": [
+  {
+   "p": "Bạn là nhân viên hỗ trợ. Một khách hàng gọi vì bị trừ tiền gói năm hai lần. Hãy đồng cảm, xin lỗi, hỏi thông tin, đưa giải pháp hoàn tiền và thời gian cụ thể.",
+   "model": "I'm really sorry to hear that. Being charged twice is the last thing you need, and I completely understand why you're upset. Could I take your account email, please? … Thank you. I can see two payments on the third of March. That's clearly our mistake. I've just requested a full refund for the second payment, and it should be back in your account within three to five working days. I'll email you the confirmation right now.",
+   "vi": "Tôi rất tiếc khi nghe điều đó. Bị trừ tiền hai lần là điều không ai mong muốn, và tôi hoàn toàn hiểu vì sao anh khó chịu. Anh cho tôi xin email tài khoản được không ạ? … Cảm ơn anh. Tôi thấy có hai khoản thanh toán vào ngày 3 tháng 3. Rõ ràng đó là lỗi của chúng tôi. Tôi vừa yêu cầu hoàn toàn bộ khoản thanh toán thứ hai, và tiền sẽ về tài khoản của anh trong vòng ba đến năm ngày làm việc. Tôi sẽ gửi email xác nhận cho anh ngay bây giờ."
+  },
+  {
+   "p": "Khách yêu cầu điều bạn không thể làm (hoàn tiền cả năm vì một lỗi nhỏ). Từ chối lịch sự và đưa phương án thay thế.",
+   "model": "I completely understand why you'd ask for that, and I'm sorry for the trouble this has caused. I'm afraid I'm not able to refund the whole year, as the service has been working for the rest of the time. What I can do is give you two months free and make sure the bug is fixed in this week's update. Would that be acceptable?",
+   "vi": "Tôi hoàn toàn hiểu vì sao anh yêu cầu như vậy, và tôi xin lỗi vì những phiền toái đã gây ra. Tiếc là tôi không thể hoàn tiền cả năm, vì dịch vụ vẫn hoạt động bình thường trong thời gian còn lại. Điều tôi có thể làm là tặng anh hai tháng miễn phí và đảm bảo lỗi được sửa trong bản cập nhật tuần này. Như vậy anh thấy có chấp nhận được không ạ?"
+  }
+ ]
 }

@@ -1,56 +1,305 @@
 {
-  "no": 8,
-  "lv": "hsk2",
-  "title": "Nhận phòng khách sạn",
-  "sub": "在酒店 · Zài jiǔdiàn",
-  "situation": "Nguyễn Minh đến khách sạn ở Thành Đô, làm thủ tục nhận phòng đã đặt trên mạng: đưa hộ chiếu, đặt cọc, hỏi wifi, giờ ăn sáng, giờ trả phòng. Tối đó anh gọi xuống lễ tân vì điều hoà hỏng. Nghe lần 1: Minh ở phòng số mấy, tầng mấy?",
-  "lang": "zh-CN",
-  "lines": [
-    {"s": "前台", "g": "f", "t": "您好！欢迎光临。请问有预订吗？", "py": "Nín hǎo! Huānyíng guānglín. Qǐngwèn yǒu yùdìng ma?", "vi": "Xin chào! Hoan nghênh quý khách. Anh có đặt phòng trước không ạ?"},
-    {"s": "阮明", "g": "m", "t": "有，我在网上订了一个大床房，住三个晚上。", "py": "Yǒu, wǒ zài wǎngshang dìngle yí ge dàchuángfáng, zhù sān ge wǎnshang.", "vi": "Có, tôi đã đặt trên mạng một phòng giường đôi lớn, ở ba đêm."},
-    {"s": "前台", "g": "f", "t": "请给我看一下您的护照。", "py": "Qǐng gěi wǒ kàn yíxià nín de hùzhào.", "vi": "Anh cho tôi xem hộ chiếu một chút ạ."},
-    {"s": "阮明", "g": "m", "t": "给你。我叫阮明。", "py": "Gěi nǐ. Wǒ jiào Ruǎn Míng.", "vi": "Đây ạ. Tôi tên Nguyễn Minh."},
-    {"s": "前台", "g": "f", "t": "好的，阮先生，找到了。需要交三百块押金，退房的时候还给您。", "py": "Hǎo de, Ruǎn xiānsheng, zhǎodào le. Xūyào jiāo sānbǎi kuài yājīn, tuìfáng de shíhou huán gěi nín.", "vi": "Vâng, anh Nguyễn, tìm thấy rồi. Anh cần đặt cọc ba trăm tệ, khi trả phòng sẽ hoàn lại."},
-    {"s": "阮明", "g": "m", "t": "好。房间里有无线网吗？", "py": "Hǎo. Fángjiān li yǒu wúxiànwǎng ma?", "vi": "Được. Trong phòng có wifi không?"},
-    {"s": "前台", "g": "f", "t": "有，密码在房卡上。您的房间是八零六，在八楼。", "py": "Yǒu, mìmǎ zài fángkǎ shang. Nín de fángjiān shì bā líng liù, zài bā lóu.", "vi": "Có ạ, mật khẩu ở trên thẻ phòng. Phòng của anh là 806, ở tầng tám."},
-    {"s": "阮明", "g": "m", "t": "早饭几点开始？", "py": "Zǎofàn jǐ diǎn kāishǐ?", "vi": "Bữa sáng bắt đầu lúc mấy giờ?"},
-    {"s": "前台", "g": "f", "t": "早上七点到十点，在二楼餐厅。", "py": "Zǎoshang qī diǎn dào shí diǎn, zài èr lóu cāntīng.", "vi": "Từ bảy giờ đến mười giờ sáng, ở nhà hàng tầng hai."},
-    {"s": "阮明", "g": "m", "t": "退房是几点？", "py": "Tuìfáng shì jǐ diǎn?", "vi": "Trả phòng lúc mấy giờ?"},
-    {"s": "前台", "g": "f", "t": "中午十二点以前。电梯在您的右边。祝您住得愉快！", "py": "Zhōngwǔ shí'èr diǎn yǐqián. Diàntī zài nín de yòubian. Zhù nín zhù de yúkuài!", "vi": "Trước mười hai giờ trưa. Thang máy ở bên phải anh. Chúc anh lưu trú vui vẻ!"},
-    {"s": "阮明", "g": "m", "t": "喂，你好，我是八零六的客人。房间的空调好像坏了，一点儿也不冷。", "py": "Wéi, nǐ hǎo, wǒ shì bā líng liù de kèrén. Fángjiān de kōngtiáo hǎoxiàng huài le, yìdiǎnr yě bù lěng.", "vi": "A lô, chào chị, tôi là khách phòng 806. Điều hoà trong phòng hình như hỏng rồi, chẳng mát chút nào."},
-    {"s": "前台", "g": "f", "t": "不好意思，我马上让人去看看。", "py": "Bù hǎoyìsi, wǒ mǎshàng ràng rén qù kànkan.", "vi": "Xin lỗi anh, tôi cho người lên xem ngay."},
-    {"s": "阮明", "g": "m", "t": "谢谢。还有，能再给我两瓶水吗？", "py": "Xièxie. Hái yǒu, néng zài gěi wǒ liǎng píng shuǐ ma?", "vi": "Cảm ơn. Còn nữa, cho tôi thêm hai chai nước được không?"},
-    {"s": "前台", "g": "f", "t": "没问题，五分钟以后送到您的房间。", "py": "Méi wèntí, wǔ fēnzhōng yǐhòu sòngdào nín de fángjiān.", "vi": "Không vấn đề gì, năm phút nữa sẽ mang lên phòng anh."}
-  ],
-  "phrases": [
-    {"t": "我在网上订了一个……", "vi": "Tôi đã đặt trên mạng một…", "note": "Wǒ zài wǎngshang dìngle yí ge … – Báo đã đặt phòng. Loại phòng: 大床房 (giường đôi lớn), 双床房/标准间 (hai giường đơn), 单人间 (phòng đơn). Ngắn gọn: 我有预订 (tôi có đặt trước)."},
-    {"t": "住三个晚上", "vi": "Ở ba đêm", "note": "Zhù sān ge wǎnshang. – Đếm đêm bằng 晚上 hoặc 晚 (住三晚). Hỏi nhận phòng: 我想办入住 (bàn rùzhù – làm thủ tục nhận phòng)."},
-    {"t": "押金", "vi": "Tiền đặt cọc", "note": "Yājīn. – Khách sạn TQ thường thu cọc, trả lại khi 退房 (tuìfáng – trả phòng). Hỏi: 押金多少？/ 押金什么时候退？"},
-    {"t": "房间里有……吗？", "vi": "Trong phòng có… không?", "note": "Fángjiān li yǒu … ma? – Địa điểm + 有 + vật. Các tiện nghi: 无线网/WiFi, 热水 (nước nóng), 吹风机 (máy sấy tóc), 冰箱 (tủ lạnh)."},
-    {"t": "……几点开始？/ 几点到几点？", "vi": "…bắt đầu lúc mấy giờ? / Từ mấy giờ đến mấy giờ?", "note": "… jǐ diǎn kāishǐ? / jǐ diǎn dào jǐ diǎn? – Hỏi giờ ăn sáng, giờ mở cửa hồ bơi… Đáp: 七点到十点."},
-    {"t": "……坏了。", "vi": "…hỏng rồi.", "note": "… huài le. – Báo sự cố: 空调坏了, 灯坏了 (đèn hỏng), 马桶堵了 (bồn cầu tắc), 没有热水 (không có nước nóng). Thêm 好像 (hǎoxiàng – hình như) để nói nhẹ nhàng."},
-    {"t": "一点儿也不冷", "vi": "Chẳng mát/lạnh chút nào", "note": "Yìdiǎnr yě bù lěng. – 一点儿也不 + tính từ = không… chút nào (nhấn mạnh phủ định). Ví dụ: 一点儿也不贵 (chẳng đắt chút nào)."},
-    {"t": "能再给我……吗？", "vi": "Cho tôi thêm… được không?", "note": "Néng zài gěi wǒ … ma? – Xin thêm đồ: 毛巾 (khăn), 枕头 (gối), 拖鞋 (dép). 再 = thêm."},
-    {"t": "祝您住得愉快！", "vi": "Chúc quý khách lưu trú vui vẻ!", "note": "Zhù nín zhù de yúkuài! – Câu lễ tân hay nói, nghe hiểu là được. Hai chữ 住 (zhù – ở) và 祝 (zhù – chúc) đồng âm."}
-  ],
-  "qs": [
-    {"q": "Minh đặt loại phòng gì, ở mấy đêm?", "o": ["双床房，两个晚上 – hai giường, 2 đêm", "大床房，三个晚上 – giường đôi lớn, 3 đêm", "大床房，两个晚上 – giường đôi lớn, 2 đêm"], "a": 1, "e": "我在网上订了一个大床房，住三个晚上."},
-    {"q": "Tiền đặt cọc là bao nhiêu?", "o": ["200 tệ", "300 tệ", "800 tệ"], "a": 1, "e": "需要交三百块押金 – 300 tệ."},
-    {"q": "Mật khẩu wifi ở đâu?", "o": ["Trên thẻ phòng", "Trên bàn trong phòng", "Ở cạnh thang máy"], "a": 0, "e": "密码在房卡上 – trên thẻ phòng."},
-    {"q": "Minh ở phòng số mấy? (gõ số hoặc chữ Hán)", "a": "八零六", "alt": ["806", "ba ling liu", "八〇六"], "e": "您的房间是八零六，在八楼 – phòng 806 tầng 8. Số phòng đọc từng chữ số."},
-    {"q": "Bữa sáng phục vụ khi nào, ở đâu?", "o": ["6–9 giờ, tầng 2", "7–10 giờ, tầng 8", "7–10 giờ, tầng 2"], "a": 2, "e": "早上七点到十点，在二楼餐厅."},
-    {"q": "Phải trả phòng trước mấy giờ?", "o": ["10 giờ sáng", "12 giờ trưa", "2 giờ chiều"], "a": 1, "e": "中午十二点以前 – trước 12 giờ trưa."},
-    {"q": "Vì sao Minh gọi lễ tân?", "o": ["Điều hoà hỏng", "Mất thẻ phòng", "Không có nước nóng"], "a": 0, "e": "空调好像坏了，一点儿也不冷 – điều hoà hình như hỏng."}
-  ],
-  "exercises": [
-    {"t": "fill", "q": "房间的空调___了。(Điều hoà trong phòng hỏng rồi.)", "py": "Fángjiān de kōngtiáo huài le.", "a": "坏", "alt": ["huai"], "e": "坏了 huài le = hỏng rồi."},
-    {"t": "order", "q": "Sắp xếp thành câu ‘Vui lòng cho tôi xem hộ chiếu của anh’", "w": ["的护照", "请", "一下", "给我看", "您"], "a": "请给我看一下您的护照", "e": "Qǐng gěi wǒ kàn yíxià nín de hùzhào – 请 + 给我 + V + 一下 + tân ngữ."},
-    {"t": "listen", "say": "退房的时候，押金还给您。", "lang": "zh-CN", "q": "Tiền cọc được trả lại khi nào?", "o": ["Khi nhận phòng", "Sau một tuần", "Khi trả phòng"], "a": 2, "e": "退房的时候 = lúc trả phòng."},
-    {"t": "dict", "say": "早饭几点开始？", "lang": "zh-CN", "a": "早饭几点开始？", "py": "Zǎofàn jǐ diǎn kāishǐ?", "e": "早饭 zǎofàn = bữa sáng (cũng nói 早餐 zǎocān)."},
-    {"t": "mc", "q": "Bạn muốn xin thêm một cái khăn tắm, nói:", "o": ["能再给我一条毛巾吗？", "我要毛巾一个。", "毛巾在哪儿买？"], "a": 0, "e": "能再给我 + số + lượng từ + đồ + 吗？ là cách xin lịch sự. Khăn dùng lượng từ 条 tiáo."}
-  ],
-  "practice": [
-    {"p": "Nhận phòng: bạn đã đặt phòng hai giường, ở hai đêm. Hỏi wifi và giờ ăn sáng.", "model": "你好，我在网上订了一个双床房，住两个晚上。房间里有无线网吗？早饭几点到几点？", "py": "Nǐ hǎo, wǒ zài wǎngshang dìngle yí ge shuāngchuángfáng, zhù liǎng ge wǎnshang. Fángjiān li yǒu wúxiànwǎng ma? Zǎofàn jǐ diǎn dào jǐ diǎn?", "vi": "Chào chị, tôi đã đặt trên mạng một phòng hai giường, ở hai đêm. Trong phòng có wifi không? Bữa sáng từ mấy giờ đến mấy giờ?"},
-    {"p": "Gọi lễ tân: phòng 502 không có nước nóng; xin thêm một chiếc khăn tắm.", "model": "喂，你好，我是五零二的客人。房间里没有热水。还有，能再给我一条毛巾吗？谢谢！", "py": "Wéi, nǐ hǎo, wǒ shì wǔ líng èr de kèrén. Fángjiān li méiyǒu rèshuǐ. Hái yǒu, néng zài gěi wǒ yì tiáo máojīn ma? Xièxie!", "vi": "A lô, chào chị, tôi là khách phòng 502. Trong phòng không có nước nóng. Còn nữa, cho tôi thêm một cái khăn tắm được không? Cảm ơn!"}
-  ]
+ "no": 8,
+ "lv": "hsk2",
+ "title": "Nhận phòng khách sạn",
+ "sub": "在酒店 · Zài jiǔdiàn",
+ "situation": "Nguyễn Minh đến khách sạn ở Thành Đô, làm thủ tục nhận phòng đã đặt trên mạng: đưa hộ chiếu, đặt cọc, hỏi wifi, giờ ăn sáng, giờ trả phòng. Tối đó anh gọi xuống lễ tân vì điều hoà hỏng. Nghe lần 1: Minh ở phòng số mấy, tầng mấy?",
+ "lang": "zh-CN",
+ "lines": [
+  {
+   "s": "前台",
+   "g": "f",
+   "t": "您好！欢迎光临。请问有预订吗？",
+   "py": "Nín hǎo! Huānyíng guānglín. Qǐngwèn yǒu yùdìng ma?",
+   "vi": "Xin chào! Hoan nghênh quý khách. Anh có đặt phòng trước không ạ?"
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "有，我在网上订了一个大床房，住三个晚上。",
+   "py": "Yǒu, wǒ zài wǎngshang dìngle yí ge dàchuángfáng, zhù sān ge wǎnshang.",
+   "vi": "Có, tôi đã đặt trên mạng một phòng giường đôi lớn, ở ba đêm."
+  },
+  {
+   "s": "前台",
+   "g": "f",
+   "t": "请给我看一下您的护照。",
+   "py": "Qǐng gěi wǒ kàn yíxià nín de hùzhào.",
+   "vi": "Anh cho tôi xem hộ chiếu một chút ạ."
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "给你。我叫阮明。",
+   "py": "Gěi nǐ. Wǒ jiào Ruǎn Míng.",
+   "vi": "Đây ạ. Tôi tên Nguyễn Minh."
+  },
+  {
+   "s": "前台",
+   "g": "f",
+   "t": "好的，阮先生，找到了。需要交三百块押金，退房的时候还给您。",
+   "py": "Hǎo de, Ruǎn xiānsheng, zhǎodào le. Xūyào jiāo sānbǎi kuài yājīn, tuìfáng de shíhou huán gěi nín.",
+   "vi": "Vâng, anh Nguyễn, tìm thấy rồi. Anh cần đặt cọc ba trăm tệ, khi trả phòng sẽ hoàn lại."
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "好。房间里有无线网吗？",
+   "py": "Hǎo. Fángjiān li yǒu wúxiànwǎng ma?",
+   "vi": "Được. Trong phòng có wifi không?"
+  },
+  {
+   "s": "前台",
+   "g": "f",
+   "t": "有，密码在房卡上。您的房间是八零六，在八楼。",
+   "py": "Yǒu, mìmǎ zài fángkǎ shang. Nín de fángjiān shì bā líng liù, zài bā lóu.",
+   "vi": "Có ạ, mật khẩu ở trên thẻ phòng. Phòng của anh là 806, ở tầng tám."
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "早饭几点开始？",
+   "py": "Zǎofàn jǐ diǎn kāishǐ?",
+   "vi": "Bữa sáng bắt đầu lúc mấy giờ?"
+  },
+  {
+   "s": "前台",
+   "g": "f",
+   "t": "早上七点到十点，在二楼餐厅。",
+   "py": "Zǎoshang qī diǎn dào shí diǎn, zài èr lóu cāntīng.",
+   "vi": "Từ bảy giờ đến mười giờ sáng, ở nhà hàng tầng hai."
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "退房是几点？",
+   "py": "Tuìfáng shì jǐ diǎn?",
+   "vi": "Trả phòng lúc mấy giờ?"
+  },
+  {
+   "s": "前台",
+   "g": "f",
+   "t": "中午十二点以前。电梯在您的右边。祝您住得愉快！",
+   "py": "Zhōngwǔ shí'èr diǎn yǐqián. Diàntī zài nín de yòubian. Zhù nín zhù de yúkuài!",
+   "vi": "Trước mười hai giờ trưa. Thang máy ở bên phải anh. Chúc anh lưu trú vui vẻ!"
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "喂，你好，我是八零六的客人。房间的空调好像坏了，一点儿也不冷。",
+   "py": "Wéi, nǐ hǎo, wǒ shì bā líng liù de kèrén. Fángjiān de kōngtiáo hǎoxiàng huài le, yìdiǎnr yě bù lěng.",
+   "vi": "A lô, chào chị, tôi là khách phòng 806. Điều hoà trong phòng hình như hỏng rồi, chẳng mát chút nào."
+  },
+  {
+   "s": "前台",
+   "g": "f",
+   "t": "不好意思，我马上让人去看看。",
+   "py": "Bù hǎoyìsi, wǒ mǎshàng ràng rén qù kànkan.",
+   "vi": "Xin lỗi anh, tôi cho người lên xem ngay."
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "谢谢。还有，能再给我两瓶水吗？",
+   "py": "Xièxie. Hái yǒu, néng zài gěi wǒ liǎng píng shuǐ ma?",
+   "vi": "Cảm ơn. Còn nữa, cho tôi thêm hai chai nước được không?"
+  },
+  {
+   "s": "前台",
+   "g": "f",
+   "t": "没问题，五分钟以后送到您的房间。",
+   "py": "Méi wèntí, wǔ fēnzhōng yǐhòu sòngdào nín de fángjiān.",
+   "vi": "Không vấn đề gì, năm phút nữa sẽ mang lên phòng anh."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "我在网上订了一个……",
+   "vi": "Tôi đã đặt trên mạng một…",
+   "note": "Wǒ zài wǎngshang dìngle yí ge … – Báo đã đặt phòng. Loại phòng: 大床房 (giường đôi lớn), 双床房/标准间 (hai giường đơn), 单人间 (phòng đơn). Ngắn gọn: 我有预订 (tôi có đặt trước)."
+  },
+  {
+   "t": "住三个晚上",
+   "vi": "Ở ba đêm",
+   "note": "Zhù sān ge wǎnshang. – Đếm đêm bằng 晚上 hoặc 晚 (住三晚). Hỏi nhận phòng: 我想办入住 (bàn rùzhù – làm thủ tục nhận phòng)."
+  },
+  {
+   "t": "押金",
+   "vi": "Tiền đặt cọc",
+   "note": "Yājīn. – Khách sạn TQ thường thu cọc, trả lại khi 退房 (tuìfáng – trả phòng). Hỏi: 押金多少？/ 押金什么时候退？"
+  },
+  {
+   "t": "房间里有……吗？",
+   "vi": "Trong phòng có… không?",
+   "note": "Fángjiān li yǒu … ma? – Địa điểm + 有 + vật. Các tiện nghi: 无线网/WiFi, 热水 (nước nóng), 吹风机 (máy sấy tóc), 冰箱 (tủ lạnh)."
+  },
+  {
+   "t": "……几点开始？/ 几点到几点？",
+   "vi": "…bắt đầu lúc mấy giờ? / Từ mấy giờ đến mấy giờ?",
+   "note": "… jǐ diǎn kāishǐ? / jǐ diǎn dào jǐ diǎn? – Hỏi giờ ăn sáng, giờ mở cửa hồ bơi… Đáp: 七点到十点."
+  },
+  {
+   "t": "……坏了。",
+   "vi": "…hỏng rồi.",
+   "note": "… huài le. – Báo sự cố: 空调坏了, 灯坏了 (đèn hỏng), 马桶堵了 (bồn cầu tắc), 没有热水 (không có nước nóng). Thêm 好像 (hǎoxiàng – hình như) để nói nhẹ nhàng."
+  },
+  {
+   "t": "一点儿也不冷",
+   "vi": "Chẳng mát/lạnh chút nào",
+   "note": "Yìdiǎnr yě bù lěng. – 一点儿也不 + tính từ = không… chút nào (nhấn mạnh phủ định). Ví dụ: 一点儿也不贵 (chẳng đắt chút nào)."
+  },
+  {
+   "t": "能再给我……吗？",
+   "vi": "Cho tôi thêm… được không?",
+   "note": "Néng zài gěi wǒ … ma? – Xin thêm đồ: 毛巾 (khăn), 枕头 (gối), 拖鞋 (dép). 再 = thêm."
+  },
+  {
+   "t": "祝您住得愉快！",
+   "vi": "Chúc quý khách lưu trú vui vẻ!",
+   "note": "Zhù nín zhù de yúkuài! – Câu lễ tân hay nói, nghe hiểu là được. Hai chữ 住 (zhù – ở) và 祝 (zhù – chúc) đồng âm."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Minh đặt loại phòng gì, ở mấy đêm?",
+   "o": [
+    "大床房，三个晚上 – giường đôi lớn, 3 đêm",
+    "大床房，两个晚上 – giường đôi lớn, 2 đêm",
+    "双床房，两个晚上 – hai giường, 2 đêm"
+   ],
+   "a": 0,
+   "e": "我在网上订了一个大床房，住三个晚上."
+  },
+  {
+   "q": "Tiền đặt cọc là bao nhiêu?",
+   "o": [
+    "200 tệ",
+    "300 tệ",
+    "800 tệ"
+   ],
+   "a": 1,
+   "e": "需要交三百块押金 – 300 tệ."
+  },
+  {
+   "q": "Mật khẩu wifi ở đâu?",
+   "o": [
+    "Ở cạnh thang máy",
+    "Trên thẻ phòng",
+    "Trên bàn trong phòng"
+   ],
+   "a": 1,
+   "e": "密码在房卡上 – trên thẻ phòng."
+  },
+  {
+   "q": "Minh ở phòng số mấy? (gõ số hoặc chữ Hán)",
+   "a": "八零六",
+   "alt": [
+    "806",
+    "ba ling liu",
+    "八〇六"
+   ],
+   "e": "您的房间是八零六，在八楼 – phòng 806 tầng 8. Số phòng đọc từng chữ số."
+  },
+  {
+   "q": "Bữa sáng phục vụ khi nào, ở đâu?",
+   "o": [
+    "7–10 giờ, tầng 2",
+    "6–9 giờ, tầng 2",
+    "7–10 giờ, tầng 8"
+   ],
+   "a": 0,
+   "e": "早上七点到十点，在二楼餐厅."
+  },
+  {
+   "q": "Phải trả phòng trước mấy giờ?",
+   "o": [
+    "2 giờ chiều",
+    "10 giờ sáng",
+    "12 giờ trưa"
+   ],
+   "a": 2,
+   "e": "中午十二点以前 – trước 12 giờ trưa."
+  },
+  {
+   "q": "Vì sao Minh gọi lễ tân?",
+   "o": [
+    "Không có nước nóng",
+    "Điều hoà hỏng",
+    "Mất thẻ phòng"
+   ],
+   "a": 1,
+   "e": "空调好像坏了，一点儿也不冷 – điều hoà hình như hỏng."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "房间的空调___了。(Điều hoà trong phòng hỏng rồi.)",
+   "py": "Fángjiān de kōngtiáo huài le.",
+   "a": "坏",
+   "alt": [
+    "huai"
+   ],
+   "e": "坏了 huài le = hỏng rồi."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu ‘Vui lòng cho tôi xem hộ chiếu của anh’",
+   "w": [
+    "的护照",
+    "请",
+    "一下",
+    "给我看",
+    "您"
+   ],
+   "a": "请给我看一下您的护照",
+   "e": "Qǐng gěi wǒ kàn yíxià nín de hùzhào – 请 + 给我 + V + 一下 + tân ngữ."
+  },
+  {
+   "t": "listen",
+   "say": "退房的时候，押金还给您。",
+   "lang": "zh-CN",
+   "q": "Tiền cọc được trả lại khi nào?",
+   "o": [
+    "Khi nhận phòng",
+    "Sau một tuần",
+    "Khi trả phòng"
+   ],
+   "a": 2,
+   "e": "退房的时候 = lúc trả phòng."
+  },
+  {
+   "t": "dict",
+   "say": "早饭几点开始？",
+   "lang": "zh-CN",
+   "a": "早饭几点开始？",
+   "py": "Zǎofàn jǐ diǎn kāishǐ?",
+   "e": "早饭 zǎofàn = bữa sáng (cũng nói 早餐 zǎocān)."
+  },
+  {
+   "t": "mc",
+   "q": "Bạn muốn xin thêm một cái khăn tắm, nói:",
+   "o": [
+    "毛巾在哪儿买？",
+    "能再给我一条毛巾吗？",
+    "我要毛巾一个。"
+   ],
+   "a": 1,
+   "e": "能再给我 + số + lượng từ + đồ + 吗？ là cách xin lịch sự. Khăn dùng lượng từ 条 tiáo."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Nhận phòng: bạn đã đặt phòng hai giường, ở hai đêm. Hỏi wifi và giờ ăn sáng.",
+   "model": "你好，我在网上订了一个双床房，住两个晚上。房间里有无线网吗？早饭几点到几点？",
+   "py": "Nǐ hǎo, wǒ zài wǎngshang dìngle yí ge shuāngchuángfáng, zhù liǎng ge wǎnshang. Fángjiān li yǒu wúxiànwǎng ma? Zǎofàn jǐ diǎn dào jǐ diǎn?",
+   "vi": "Chào chị, tôi đã đặt trên mạng một phòng hai giường, ở hai đêm. Trong phòng có wifi không? Bữa sáng từ mấy giờ đến mấy giờ?"
+  },
+  {
+   "p": "Gọi lễ tân: phòng 502 không có nước nóng; xin thêm một chiếc khăn tắm.",
+   "model": "喂，你好，我是五零二的客人。房间里没有热水。还有，能再给我一条毛巾吗？谢谢！",
+   "py": "Wéi, nǐ hǎo, wǒ shì wǔ líng èr de kèrén. Fángjiān li méiyǒu rèshuǐ. Hái yǒu, néng zài gěi wǒ yì tiáo máojīn ma? Xièxie!",
+   "vi": "A lô, chào chị, tôi là khách phòng 502. Trong phòng không có nước nóng. Còn nữa, cho tôi thêm một cái khăn tắm được không? Cảm ơn!"
+  }
+ ]
 }

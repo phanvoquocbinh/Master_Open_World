@@ -1,62 +1,323 @@
 {
-  "no": 24,
-  "lv": "a2",
-  "title": "Hỏi thăm khi bạn bị ốm",
-  "sub": "I heard you're not well",
-  "situation": "Minh bị cúm, nghỉ làm mấy hôm. Đồng nghiệp Anna gọi điện hỏi thăm, hỏi đã đi khám chưa, đề nghị mang đồ ăn đến và nhắn đã báo nhóm cho anh nghỉ. Bài dạy cách hỏi thăm, thể hiện cảm thông, đề nghị giúp đỡ và nhận/từ chối sự giúp đỡ lịch sự.",
-  "lang": "en-GB",
-  "lines": [
-    {"s": "Anna", "g": "f", "t": "Hi Minh, it's Anna. I heard you're not well. How are you feeling?", "vi": "Chào Minh, Anna đây. Nghe nói anh không khoẻ. Anh thấy thế nào rồi?"},
-    {"s": "Minh", "g": "m", "t": "Hi Anna. Not great, to be honest. I've got the flu.", "vi": "Chào Anna. Nói thật là không ổn lắm. Anh bị cúm."},
-    {"s": "Anna", "g": "f", "t": "Oh no, I'm sorry to hear that. When did it start?", "vi": "Ôi không, em rất tiếc. Bắt đầu từ khi nào vậy?"},
-    {"s": "Minh", "g": "m", "t": "On Tuesday. I've had a high temperature for two days.", "vi": "Từ thứ Ba. Anh bị sốt cao hai ngày nay rồi."},
-    {"s": "Anna", "g": "f", "t": "That sounds awful. Have you seen a doctor?", "vi": "Nghe tệ quá. Anh đi khám bác sĩ chưa?"},
-    {"s": "Minh", "g": "m", "t": "Yes, I went yesterday. She told me to rest and drink lots of fluids.", "vi": "Rồi, hôm qua anh đi. Bác sĩ dặn nghỉ ngơi và uống nhiều nước."},
-    {"s": "Anna", "g": "f", "t": "Are you eating OK?", "vi": "Anh ăn uống được không?"},
-    {"s": "Minh", "g": "m", "t": "Not really. I'm not very hungry.", "vi": "Không lắm. Anh không thấy đói mấy."},
-    {"s": "Anna", "g": "f", "t": "Do you need anything? I can bring you some soup or some fruit.", "vi": "Anh có cần gì không? Em có thể mang cho anh ít súp hoặc hoa quả."},
-    {"s": "Minh", "g": "m", "t": "That's really kind of you, but you don't have to.", "vi": "Em tốt quá, nhưng em không cần phải thế đâu."},
-    {"s": "Anna", "g": "f", "t": "It's no trouble at all. I live nearby. I'll drop by after work.", "vi": "Không phiền gì đâu. Em ở gần mà. Tan làm em sẽ ghé qua."},
-    {"s": "Minh", "g": "m", "t": "Thanks so much. Could you get me some orange juice too?", "vi": "Cảm ơn em nhiều. Em mua giúp anh ít nước cam luôn được không?"},
-    {"s": "Anna", "g": "f", "t": "Of course. I'll leave everything outside your door, so you can rest.", "vi": "Tất nhiên rồi. Em sẽ để mọi thứ ngoài cửa để anh nghỉ ngơi."},
-    {"s": "Minh", "g": "m", "t": "Good idea. I don't want you to catch it.", "vi": "Ý hay đấy. Anh không muốn em bị lây."},
-    {"s": "Anna", "g": "f", "t": "And don't worry about work. I told the team you're off this week.", "vi": "Và đừng lo chuyện công việc. Em đã báo cả nhóm là tuần này anh nghỉ."},
-    {"s": "Minh", "g": "m", "t": "Thanks, Anna. You're a lifesaver.", "vi": "Cảm ơn Anna. Em đúng là cứu tinh."},
-    {"s": "Anna", "g": "f", "t": "No problem. Take care, and get well soon!", "vi": "Không có gì. Anh giữ gìn sức khoẻ và mau khoẻ nhé!"},
-    {"s": "Minh", "g": "m", "t": "Thanks. Bye!", "vi": "Cảm ơn em. Chào em!"}
-  ],
-  "phrases": [
-    {"t": "I heard you're not well. How are you feeling?", "vi": "Nghe nói bạn không khoẻ. Bạn thấy thế nào rồi?", "note": "Mở đầu hỏi thăm tự nhiên. “How are you feeling?” hỏi về sức khoẻ thật sự (khác câu chào “How are you?”). Hôm sau hỏi: “Are you feeling any better?”"},
-    {"t": "Not great, to be honest. / A bit better, thanks.", "vi": "Nói thật là không ổn lắm. / Đỡ hơn chút rồi, cảm ơn.", "note": "Cách trả lời của người ốm. “to be honest” = nói thật là. Đỡ nhiều: “Much better, thanks.”"},
-    {"t": "I'm sorry to hear that. / That sounds awful.", "vi": "Tôi rất tiếc. / Nghe tệ quá.", "note": "Thể hiện cảm thông – rất quan trọng, đừng bỏ qua mà hỏi ngay chuyện khác. Mạnh hơn: “Oh no, you poor thing!” (thân mật, Anh)."},
-    {"t": "Have you seen a doctor?", "vi": "Bạn đi khám bác sĩ chưa?", "note": "Hiện tại hoàn thành hỏi việc đã làm chưa. Khuyên: “You should see a doctor.” / “Make sure you get some rest.”"},
-    {"t": "Do you need anything? / Is there anything I can do?", "vi": "Bạn có cần gì không? / Mình có giúp gì được không?", "note": "Đề nghị giúp đỡ. Cụ thể hơn thì người ốm dễ nhận: “I can bring you some soup.”, “Shall I get you some medicine?”"},
-    {"t": "That's really kind of you, but you don't have to.", "vi": "Bạn tốt quá, nhưng không cần đâu.", "note": "Khách sáo lịch sự khi được giúp. Người giúp đáp: “It's no trouble at all.” (không phiền gì) – rồi người ốm nhận: “Thanks so much.”"},
-    {"t": "I'll drop by after work.", "vi": "Tan làm mình sẽ ghé qua.", "note": "drop by / pop round (Anh) = ghé qua chốc lát. Biến thể: “I'll pop round later.”"},
-    {"t": "Don't worry about work. / You're a lifesaver.", "vi": "Đừng lo chuyện công việc. / Bạn đúng là cứu tinh.", "note": "“You're a lifesaver!” = cảm ơn rất nhiệt tình (thân mật). “be off (work)” = nghỉ làm: “I'm off this week.”"},
-    {"t": "Take care, and get well soon!", "vi": "Giữ gìn sức khoẻ và mau khoẻ nhé!", "note": "Lời chúc chuẩn: “Get well soon!”, “Hope you feel better soon.”, trang trọng (thiệp): “Wishing you a speedy recovery.” Lỗi dịch từ tiếng Việt: “Wish you get well soon”, “Wish you fast recovery” – sai cấu trúc."}
-  ],
-  "qs": [
-    {"q": "What's wrong with Minh?", "o": ["He has the flu.", "He broke his leg.", "He has a toothache."], "a": 0, "e": "Minh: “I've got the flu.”"},
-    {"q": "When did Minh get ill?", "o": ["On Monday", "On Tuesday", "Yesterday"], "a": 1, "e": "Anna hỏi “When did it start?” – Minh: “On Tuesday.”"},
-    {"q": "What did the doctor tell Minh to do?", "o": ["Take antibiotics", "Go to hospital", "Rest and drink lots of fluids"], "a": 2, "e": "“She told me to rest and drink lots of fluids.” – fluids = chất lỏng, nước uống."},
-    {"q": "Is Minh eating well?", "o": ["Yes, he's very hungry.", "Not really. He isn't very hungry.", "He only eats soup."], "a": 1, "e": "Minh: “Not really. I'm not very hungry.”"},
-    {"q": "What will Anna bring?", "a": "soup or fruit", "alt": ["soup", "some soup or some fruit", "soup, fruit and orange juice", "soup and fruit", "fruit"], "e": "Anna: “I can bring you some soup or some fruit.” – Minh xin thêm nước cam."},
-    {"q": "Where will Anna leave the things?", "o": ["At the office", "With his neighbour", "Outside his door"], "a": 2, "e": "Anna: “I'll leave everything outside your door, so you can rest.”"},
-    {"q": "Why is that a good idea?", "o": ["Minh doesn't want Anna to catch the flu.", "Minh isn't at home.", "Anna is busy."], "a": 0, "e": "Minh: “Good idea. I don't want you to catch it.” – catch = bị lây."},
-    {"q": "What did Anna tell the team?", "o": ["Minh is working from home.", "Minh is off this week.", "Minh is in hospital."], "a": 1, "e": "Anna: “I told the team you're off this week.”"}
-  ],
-  "exercises": [
-    {"t": "fill", "q": "You've got the flu? Oh no, I'm sorry to ___ that.", "a": "hear", "e": "I'm sorry to hear that = Tôi rất tiếc khi nghe điều đó."},
-    {"t": "fill", "q": "Take care, and get ___ soon!", "a": "well", "e": "Get well soon! = Mau khoẻ nhé! (well = khoẻ, không dùng good)."},
-    {"t": "mc", "q": "Câu chúc mau khoẻ nào ĐÚNG?", "o": ["Wish you get well soon.", "Hope you feel better soon.", "Wish you fast healthy."], "a": 1, "e": "“(I) hope you feel better soon.” là câu tự nhiên. wish + you + DANH TỪ (Wishing you a speedy recovery), không theo sau bằng mệnh đề “you get well”."},
-    {"t": "order", "q": "Sắp xếp thành câu đề nghị giúp đỡ:", "w": ["can", "there", "I", "anything", "do?", "Is"], "a": "Is there anything I can do?", "e": "Is there anything + I can do? = Mình có giúp gì được không?"},
-    {"t": "dict", "say": "I heard you're not well. How are you feeling?", "a": "I heard you're not well. How are you feeling?", "e": "Câu mở đầu hỏi thăm người ốm."},
-    {"t": "listen", "say": "I've got a really bad cold.", "q": "Chọn câu đáp phù hợp nhất:", "o": ["Congratulations!", "That's a good idea.", "Oh no! I hope you feel better soon."], "a": 2, "e": "Người kia bị ốm → cảm thông + lời chúc: “Oh no! I hope you feel better soon.”"}
-  ],
-  "practice": [
-    {"p": "Đồng nghiệp bị gãy chân, phải nghỉ ở nhà. Gọi điện hỏi thăm và đề nghị giúp mua đồ.", "model": "Hi Tom, it's Lan. I heard about your leg. How are you feeling? … That sounds awful. Is there anything I can do? I can do some shopping for you.", "vi": "Chào Tom, Lan đây. Mình nghe chuyện chân cậu rồi. Cậu thấy thế nào? … Nghe tệ quá. Mình có giúp gì được không? Mình đi chợ giúp cậu nhé."},
-    {"p": "Bạn vào bệnh viện thăm một người bạn vừa mổ ruột thừa: hỏi thăm, tặng hoa quả, chúc mau khoẻ.", "model": "Hi! How are you feeling today? … I brought you some fruit. … Don't worry about anything. Just rest. Get well soon!", "vi": "Chào cậu! Hôm nay cậu thấy sao? … Mình mang cho cậu ít hoa quả. … Đừng lo gì cả. Cứ nghỉ ngơi đi. Mau khoẻ nhé!"},
-    {"p": "Đổi vai: bạn là người ốm (Minh) – trả lời câu hỏi thăm, từ chối khách sáo rồi nhận lời giúp đỡ và cảm ơn.", "model": "Not great, to be honest. I've got a bad cold. … Yes, I saw a doctor yesterday. … That's really kind of you, but you don't have to. … Thanks so much. You're a lifesaver!", "vi": "Nói thật là không ổn lắm. Mình bị cảm nặng. … Rồi, hôm qua mình đi khám. … Cậu tốt quá, nhưng không cần đâu. … Cảm ơn cậu nhiều. Cậu đúng là cứu tinh!"}
-  ]
+ "no": 24,
+ "lv": "a2",
+ "title": "Hỏi thăm khi bạn bị ốm",
+ "sub": "I heard you're not well",
+ "situation": "Minh bị cúm, nghỉ làm mấy hôm. Đồng nghiệp Anna gọi điện hỏi thăm, hỏi đã đi khám chưa, đề nghị mang đồ ăn đến và nhắn đã báo nhóm cho anh nghỉ. Bài dạy cách hỏi thăm, thể hiện cảm thông, đề nghị giúp đỡ và nhận/từ chối sự giúp đỡ lịch sự.",
+ "lang": "en-GB",
+ "lines": [
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Hi Minh, it's Anna. I heard you're not well. How are you feeling?",
+   "vi": "Chào Minh, Anna đây. Nghe nói anh không khoẻ. Anh thấy thế nào rồi?"
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "Hi Anna. Not great, to be honest. I've got the flu.",
+   "vi": "Chào Anna. Nói thật là không ổn lắm. Anh bị cúm."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Oh no, I'm sorry to hear that. When did it start?",
+   "vi": "Ôi không, em rất tiếc. Bắt đầu từ khi nào vậy?"
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "On Tuesday. I've had a high temperature for two days.",
+   "vi": "Từ thứ Ba. Anh bị sốt cao hai ngày nay rồi."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "That sounds awful. Have you seen a doctor?",
+   "vi": "Nghe tệ quá. Anh đi khám bác sĩ chưa?"
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "Yes, I went yesterday. She told me to rest and drink lots of fluids.",
+   "vi": "Rồi, hôm qua anh đi. Bác sĩ dặn nghỉ ngơi và uống nhiều nước."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Are you eating OK?",
+   "vi": "Anh ăn uống được không?"
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "Not really. I'm not very hungry.",
+   "vi": "Không lắm. Anh không thấy đói mấy."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Do you need anything? I can bring you some soup or some fruit.",
+   "vi": "Anh có cần gì không? Em có thể mang cho anh ít súp hoặc hoa quả."
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "That's really kind of you, but you don't have to.",
+   "vi": "Em tốt quá, nhưng em không cần phải thế đâu."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "It's no trouble at all. I live nearby. I'll drop by after work.",
+   "vi": "Không phiền gì đâu. Em ở gần mà. Tan làm em sẽ ghé qua."
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "Thanks so much. Could you get me some orange juice too?",
+   "vi": "Cảm ơn em nhiều. Em mua giúp anh ít nước cam luôn được không?"
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "Of course. I'll leave everything outside your door, so you can rest.",
+   "vi": "Tất nhiên rồi. Em sẽ để mọi thứ ngoài cửa để anh nghỉ ngơi."
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "Good idea. I don't want you to catch it.",
+   "vi": "Ý hay đấy. Anh không muốn em bị lây."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "And don't worry about work. I told the team you're off this week.",
+   "vi": "Và đừng lo chuyện công việc. Em đã báo cả nhóm là tuần này anh nghỉ."
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "Thanks, Anna. You're a lifesaver.",
+   "vi": "Cảm ơn Anna. Em đúng là cứu tinh."
+  },
+  {
+   "s": "Anna",
+   "g": "f",
+   "t": "No problem. Take care, and get well soon!",
+   "vi": "Không có gì. Anh giữ gìn sức khoẻ và mau khoẻ nhé!"
+  },
+  {
+   "s": "Minh",
+   "g": "m",
+   "t": "Thanks. Bye!",
+   "vi": "Cảm ơn em. Chào em!"
+  }
+ ],
+ "phrases": [
+  {
+   "t": "I heard you're not well. How are you feeling?",
+   "vi": "Nghe nói bạn không khoẻ. Bạn thấy thế nào rồi?",
+   "note": "Mở đầu hỏi thăm tự nhiên. “How are you feeling?” hỏi về sức khoẻ thật sự (khác câu chào “How are you?”). Hôm sau hỏi: “Are you feeling any better?”"
+  },
+  {
+   "t": "Not great, to be honest. / A bit better, thanks.",
+   "vi": "Nói thật là không ổn lắm. / Đỡ hơn chút rồi, cảm ơn.",
+   "note": "Cách trả lời của người ốm. “to be honest” = nói thật là. Đỡ nhiều: “Much better, thanks.”"
+  },
+  {
+   "t": "I'm sorry to hear that. / That sounds awful.",
+   "vi": "Tôi rất tiếc. / Nghe tệ quá.",
+   "note": "Thể hiện cảm thông – rất quan trọng, đừng bỏ qua mà hỏi ngay chuyện khác. Mạnh hơn: “Oh no, you poor thing!” (thân mật, Anh)."
+  },
+  {
+   "t": "Have you seen a doctor?",
+   "vi": "Bạn đi khám bác sĩ chưa?",
+   "note": "Hiện tại hoàn thành hỏi việc đã làm chưa. Khuyên: “You should see a doctor.” / “Make sure you get some rest.”"
+  },
+  {
+   "t": "Do you need anything? / Is there anything I can do?",
+   "vi": "Bạn có cần gì không? / Mình có giúp gì được không?",
+   "note": "Đề nghị giúp đỡ. Cụ thể hơn thì người ốm dễ nhận: “I can bring you some soup.”, “Shall I get you some medicine?”"
+  },
+  {
+   "t": "That's really kind of you, but you don't have to.",
+   "vi": "Bạn tốt quá, nhưng không cần đâu.",
+   "note": "Khách sáo lịch sự khi được giúp. Người giúp đáp: “It's no trouble at all.” (không phiền gì) – rồi người ốm nhận: “Thanks so much.”"
+  },
+  {
+   "t": "I'll drop by after work.",
+   "vi": "Tan làm mình sẽ ghé qua.",
+   "note": "drop by / pop round (Anh) = ghé qua chốc lát. Biến thể: “I'll pop round later.”"
+  },
+  {
+   "t": "Don't worry about work. / You're a lifesaver.",
+   "vi": "Đừng lo chuyện công việc. / Bạn đúng là cứu tinh.",
+   "note": "“You're a lifesaver!” = cảm ơn rất nhiệt tình (thân mật). “be off (work)” = nghỉ làm: “I'm off this week.”"
+  },
+  {
+   "t": "Take care, and get well soon!",
+   "vi": "Giữ gìn sức khoẻ và mau khoẻ nhé!",
+   "note": "Lời chúc chuẩn: “Get well soon!”, “Hope you feel better soon.”, trang trọng (thiệp): “Wishing you a speedy recovery.” Lỗi dịch từ tiếng Việt: “Wish you get well soon”, “Wish you fast recovery” – sai cấu trúc."
+  }
+ ],
+ "qs": [
+  {
+   "q": "What's wrong with Minh?",
+   "o": [
+    "He has the flu.",
+    "He broke his leg.",
+    "He has a toothache."
+   ],
+   "a": 0,
+   "e": "Minh: “I've got the flu.”"
+  },
+  {
+   "q": "When did Minh get ill?",
+   "o": [
+    "On Monday",
+    "On Tuesday",
+    "Yesterday"
+   ],
+   "a": 1,
+   "e": "Anna hỏi “When did it start?” – Minh: “On Tuesday.”"
+  },
+  {
+   "q": "What did the doctor tell Minh to do?",
+   "o": [
+    "Book a different room",
+    "Go to hospital",
+    "Rest and drink lots of fluids"
+   ],
+   "a": 2,
+   "e": "“She told me to rest and drink lots of fluids.” – fluids = chất lỏng, nước uống."
+  },
+  {
+   "q": "Is Minh eating well?",
+   "o": [
+    "Yes, he's very hungry.",
+    "Not really. He isn't very hungry.",
+    "He only eats soup."
+   ],
+   "a": 1,
+   "e": "Minh: “Not really. I'm not very hungry.”"
+  },
+  {
+   "q": "What will Anna bring?",
+   "a": "soup or fruit",
+   "alt": [
+    "soup",
+    "some soup or some fruit",
+    "soup, fruit and orange juice",
+    "soup and fruit",
+    "fruit"
+   ],
+   "e": "Anna: “I can bring you some soup or some fruit.” – Minh xin thêm nước cam."
+  },
+  {
+   "q": "Where will Anna leave the things?",
+   "o": [
+    "At the office",
+    "With his neighbour",
+    "Outside his door"
+   ],
+   "a": 2,
+   "e": "Anna: “I'll leave everything outside your door, so you can rest.”"
+  },
+  {
+   "q": "Why is that a good idea?",
+   "o": [
+    "Minh doesn't want Anna to catch the flu.",
+    "Minh isn't at home.",
+    "Anna is busy."
+   ],
+   "a": 0,
+   "e": "Minh: “Good idea. I don't want you to catch it.” – catch = bị lây."
+  },
+  {
+   "q": "What did Anna tell the team?",
+   "o": [
+    "Minh is working from home.",
+    "Minh is off this week.",
+    "Minh is in hospital."
+   ],
+   "a": 1,
+   "e": "Anna: “I told the team you're off this week.”"
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "You've got the flu? Oh no, I'm sorry to ___ that.",
+   "a": "hear",
+   "e": "I'm sorry to hear that = Tôi rất tiếc khi nghe điều đó."
+  },
+  {
+   "t": "fill",
+   "q": "Take care, and get ___ soon!",
+   "a": "well",
+   "e": "Get well soon! = Mau khoẻ nhé! (well = khoẻ, không dùng good)."
+  },
+  {
+   "t": "mc",
+   "q": "Câu chúc mau khoẻ nào ĐÚNG?",
+   "o": [
+    "Wish you get well soon.",
+    "Hope you feel better soon.",
+    "Wish you fast healthy."
+   ],
+   "a": 1,
+   "e": "“(I) hope you feel better soon.” là câu tự nhiên. wish + you + DANH TỪ (Wishing you a speedy recovery), không theo sau bằng mệnh đề “you get well”."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu đề nghị giúp đỡ:",
+   "w": [
+    "can",
+    "there",
+    "I",
+    "anything",
+    "do?",
+    "Is"
+   ],
+   "a": "Is there anything I can do?",
+   "e": "Is there anything + I can do? = Mình có giúp gì được không?"
+  },
+  {
+   "t": "dict",
+   "say": "I hope you feel stronger after some rest.",
+   "a": "I hope you feel stronger after some rest.",
+   "e": "Câu mới cùng chủ đề: Tôi mong bạn khỏe hơn sau khi nghỉ ngơi. Khi chép, giữ đủ trợ động từ và âm cuối."
+  },
+  {
+   "t": "listen",
+   "say": "I've got a really bad cold.",
+   "q": "Chọn câu đáp phù hợp nhất:",
+   "o": [
+    "Congratulations!",
+    "That's a good idea.",
+    "Oh no! I hope you feel better soon."
+   ],
+   "a": 2,
+   "e": "Người kia bị ốm → cảm thông + lời chúc: “Oh no! I hope you feel better soon.”"
+  }
+ ],
+ "practice": [
+  {
+   "p": "Đồng nghiệp bị gãy chân, phải nghỉ ở nhà. Gọi điện hỏi thăm và đề nghị giúp mua đồ.",
+   "model": "Hi Tom, it's Lan. I heard about your leg. How are you feeling? … That sounds awful. Is there anything I can do? I can do some shopping for you.",
+   "vi": "Chào Tom, Lan đây. Mình nghe chuyện chân cậu rồi. Cậu thấy thế nào? … Nghe tệ quá. Mình có giúp gì được không? Mình đi chợ giúp cậu nhé."
+  },
+  {
+   "p": "Bạn vào bệnh viện thăm một người bạn vừa mổ ruột thừa: hỏi thăm, tặng hoa quả, chúc mau khoẻ.",
+   "model": "Hi! How are you feeling today? … I brought you some fruit. … Don't worry about anything. Just rest. Get well soon!",
+   "vi": "Chào cậu! Hôm nay cậu thấy sao? … Mình mang cho cậu ít hoa quả. … Đừng lo gì cả. Cứ nghỉ ngơi đi. Mau khoẻ nhé!"
+  },
+  {
+   "p": "Đổi vai: bạn là người ốm (Minh) – trả lời câu hỏi thăm, từ chối khách sáo rồi nhận lời giúp đỡ và cảm ơn.",
+   "model": "Not great, to be honest. I've got a bad cold. … Yes, I saw a doctor yesterday. … That's really kind of you, but you don't have to. … Thanks so much. You're a lifesaver!",
+   "vi": "Nói thật là không ổn lắm. Mình bị cảm nặng. … Rồi, hôm qua mình đi khám. … Cậu tốt quá, nhưng không cần đâu. … Cảm ơn cậu nhiều. Cậu đúng là cứu tinh!"
+  }
+ ]
 }

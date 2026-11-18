@@ -4,7 +4,7 @@ icon: 🧩
 floor: 1
 room: 102
 level: Nhập môn → Cơ bản
-hours: 8
+hours: 28
 summary: Học lập trình từ con số 0 bằng JavaScript chạy trên Node.js: biến, điều kiện, vòng lặp, hàm, mảng, object và async/await. Kết thúc bằng việc tự viết một bộ test API mini.
 
 ## LESSON programming-basics-01 | Chương trình là gì? Chạy file JavaScript đầu tiên
@@ -20,11 +20,6 @@ Chuẩn bị: đã cài Node.js và VS Code (khóa Máy tính & dòng lệnh, ph
 
 ### File đầu tiên: hello.js
 Trong VS Code, mở thư mục qa-lab\projects, tạo thư mục js-basics và file hello.js:
-~~~js
-console.log("Xin chào, tôi là tester!");
-console.log(2 + 3);
-console.log("Kết quả test:", "PASS");
-~~~
 Giải thích từng dòng:
 • dòng 1: console.log in nội dung trong ngoặc ra màn hình. Chữ phải nằm trong dấu nháy.
 • dòng 2: không có nháy nên đây là phép tính, máy in ra 5.
@@ -34,9 +29,20 @@ Kết quả mong đợi:
 Xin chào, tôi là tester!
 5
 Kết quả test: PASS
+~~~js
+console.log("Xin chào, tôi là tester!");
+console.log(2 + 3);
+console.log("Kết quả test:", "PASS");
+~~~
 
 ### Thử nhanh với Node REPL
 REPL là chế độ "hỏi gì đáp nấy": gõ một dòng, Node trả lời ngay. Rất hợp để thử nghiệm.
+Giải thích từng dòng:
+• node (không kèm tên file): mở REPL, thấy dấu nhắc >.
+• 10 * 3: phép nhân, Node in 30.
+• ghép ba chuỗi chữ thành 'QA/QC'.
+• .exit: thoát REPL (hoặc nhấn Ctrl+C hai lần).
+Dòng không có dấu > là câu trả lời của Node, bạn không cần gõ.
 ~~~bash
 node
 > 10 * 3
@@ -45,14 +51,13 @@ node
 'QA/QC'
 > .exit
 ~~~
-Giải thích từng dòng:
-• node (không kèm tên file): mở REPL, thấy dấu nhắc >.
-• 10 * 3: phép nhân, Node in 30.
-• ghép ba chuỗi chữ thành 'QA/QC'.
-• .exit: thoát REPL (hoặc nhấn Ctrl+C hai lần).
-Dòng không có dấu > là câu trả lời của Node, bạn không cần gõ.
 
 ### Comment: ghi chú cho người đọc
+Giải thích:
+• // biến phần còn lại của dòng thành ghi chú, máy không chạy.
+• /* ... */ bao một đoạn nhiều dòng làm ghi chú.
+• Dòng cuối là cách "tắt tạm" một dòng code. Trong VS Code, chọn dòng rồi nhấn Ctrl+/ để bật/tắt comment.
+Kết quả khi chạy: chỉ in Bắt đầu test đăng nhập.
 ~~~js
 // Đây là comment một dòng, máy bỏ qua
 console.log("Bắt đầu test đăng nhập"); // comment cuối dòng
@@ -63,13 +68,12 @@ console.log("Bắt đầu test đăng nhập"); // comment cuối dòng
 */
 // console.log("Dòng này bị tắt, không chạy");
 ~~~
-Giải thích:
-• // biến phần còn lại của dòng thành ghi chú, máy không chạy.
-• /* ... */ bao một đoạn nhiều dòng làm ghi chú.
-• Dòng cuối là cách "tắt tạm" một dòng code. Trong VS Code, chọn dòng rồi nhấn Ctrl+/ để bật/tắt comment.
-Kết quả khi chạy: chỉ in Bắt đầu test đăng nhập.
 
 ### Lỗi thường gặp
+• Invalid or unexpected token: thiếu dấu nháy đóng. Mỗi chuỗi phải mở và đóng bằng cùng loại nháy.
+• consol is not defined: gõ sai tên. JavaScript phân biệt chữ hoa/thường, Console.log cũng sai.
+• missing ) after argument list: thiếu ngoặc đóng.
+Cách đọc lỗi: Node in tên file và số dòng, ví dụ hello.js:3. Mở đúng dòng đó để sửa. Đừng sợ lỗi, đọc kỹ nó là kỹ năng số một của lập trình viên và tester.
 ~~~text
 console.log("Xin chào);
 SyntaxError: Invalid or unexpected token
@@ -80,10 +84,6 @@ ReferenceError: consol is not defined
 console.log("Hi";
 SyntaxError: missing ) after argument list
 ~~~
-• Invalid or unexpected token: thiếu dấu nháy đóng. Mỗi chuỗi phải mở và đóng bằng cùng loại nháy.
-• consol is not defined: gõ sai tên. JavaScript phân biệt chữ hoa/thường, Console.log cũng sai.
-• missing ) after argument list: thiếu ngoặc đóng.
-Cách đọc lỗi: Node in tên file và số dòng, ví dụ hello.js:3. Mở đúng dòng đó để sửa. Đừng sợ lỗi, đọc kỹ nó là kỹ năng số một của lập trình viên và tester.
 
 PRACTICE: Tạo file about-me.js in ra 3 dòng: tên của bạn, kết quả phép tính 365 * 24 và câu "Tôi sẽ viết automation test". Cố ý xóa một dấu nháy để xem lỗi, đọc số dòng báo lỗi rồi sửa lại.
 Q: Lệnh nào chạy file hello.js bằng Node.js?
@@ -104,33 +104,24 @@ Q: Lỗi ReferenceError: consol is not defined nghĩa là gì?
 
 ### Biến là chiếc hộp có dán nhãn
 Biến giúp bạn đặt tên cho một giá trị để dùng lại nhiều lần.
-~~~js
-const baseUrl = "https://jsonplaceholder.typicode.com";
-let retryCount = 0;
-retryCount = retryCount + 1;
-console.log(baseUrl);
-console.log(retryCount);
-~~~
 Giải thích từng dòng:
 • dòng 1: const tạo hộp tên baseUrl, bỏ vào một địa chỉ web. const = hằng số, không được đổi giá trị sau này.
 • dòng 2: let tạo hộp retryCount có giá trị 0. let cho phép thay đổi về sau.
 • dòng 3: lấy giá trị cũ cộng 1 rồi bỏ lại vào hộp, giờ là 1.
 • dòng 4–5: in giá trị hai hộp.
 Kết quả mong đợi:
-https://jsonplaceholder.typicode.com
+http://localhost:3130
 1
 Quy tắc: mặc định dùng const, chỉ dùng let khi chắc chắn cần đổi giá trị. Không dùng var (cách cũ).
+~~~js
+const baseUrl = "http://localhost:3130";
+let retryCount = 0;
+retryCount = retryCount + 1;
+console.log(baseUrl);
+console.log(retryCount);
+~~~
 
 ### Các kiểu dữ liệu cơ bản
-~~~js
-const username = "tester01";
-const statusCode = 200;
-const isLoggedIn = true;
-let token = null;
-let lastError;
-console.log(typeof username, typeof statusCode, typeof isLoggedIn);
-console.log(token, lastError);
-~~~
 Giải thích từng dòng:
 • string (chuỗi): chữ, nằm trong nháy "..." hoặc '...'.
 • number (số): 200, 3.14, -5, không có nháy.
@@ -141,33 +132,35 @@ Giải thích từng dòng:
 Kết quả mong đợi:
 string number boolean
 null undefined
+~~~js
+const username = "tester01";
+const statusCode = 200;
+const isLoggedIn = true;
+let token = null;
+let lastError;
+console.log(typeof username, typeof statusCode, typeof isLoggedIn);
+console.log(token, lastError);
+~~~
 
 ### Ghép chuỗi và template literal
-~~~js
-const userId = 5;
-const env = "staging";
-const url1 = "https://jsonplaceholder.typicode.com/users/" + userId;
-const url2 = `https://jsonplaceholder.typicode.com/users/${userId}`;
-console.log(url1);
-console.log(`Đang test trên môi trường ${env}, user số ${userId}`);
-~~~
 Giải thích từng dòng:
 • dòng 1–2: tạo hai biến.
 • dòng 3: cách cũ, dùng dấu + để nối chuỗi với số.
 • dòng 4: template literal: chuỗi nằm giữa hai dấu backtick (phím dưới Esc), chèn biến bằng ${tênBiến}. Dễ đọc hơn.
 • dòng 5–6: in kết quả.
 Kết quả mong đợi:
-https://jsonplaceholder.typicode.com/users/5
+http://localhost:3130/users/5
 Đang test trên môi trường staging, user số 5
+~~~js
+const userId = 5;
+const env = "staging";
+const url1 = "http://localhost:3130/users/" + userId;
+const url2 = `http://localhost:3130/users/${userId}`;
+console.log(url1);
+console.log(`Đang test trên môi trường ${env}, user số ${userId}`);
+~~~
 
 ### Bẫy chuyển kiểu mà tester hay gặp
-~~~js
-console.log("5" + 1);
-console.log("5" - 1);
-console.log(Number("200") === 200);
-console.log(Number("abc"));
-console.log(String(404).length);
-~~~
 Giải thích từng dòng:
 • "5" + 1 cho "51": dấu + gặp chuỗi thì NỐI chứ không cộng.
 • "5" - 1 cho 4: dấu - ép chuỗi thành số.
@@ -175,8 +168,18 @@ Giải thích từng dòng:
 • Number("abc") cho NaN (Not a Number), không đổi được.
 • String(404) đổi số thành chuỗi "404", .length là số ký tự: 3.
 Ý nghĩa với tester: dữ liệu đọc từ file CSV hay ô input luôn là chuỗi. Nhớ đổi sang số trước khi tính toán hoặc so sánh.
+~~~js
+console.log("5" + 1);
+console.log("5" - 1);
+console.log(Number("200") === 200);
+console.log(Number("abc"));
+console.log(String(404).length);
+~~~
 
 ### Lỗi thường gặp
+• Assignment to constant variable: cố đổi giá trị một const. Đổi thành let nếu thật sự cần thay đổi.
+• is not defined: dùng biến chưa tạo, hoặc sai chữ hoa/thường (username khác userName).
+• has already been declared: tạo cùng một tên biến hai lần. Lần sau chỉ gán lại (count = 2), không viết let nữa.
 ~~~text
 const total = 10;
 total = 20;
@@ -189,9 +192,6 @@ let count = 1;
 let count = 2;
 SyntaxError: Identifier 'count' has already been declared
 ~~~
-• Assignment to constant variable: cố đổi giá trị một const. Đổi thành let nếu thật sự cần thay đổi.
-• is not defined: dùng biến chưa tạo, hoặc sai chữ hoa/thường (username khác userName).
-• has already been declared: tạo cùng một tên biến hai lần. Lần sau chỉ gán lại (count = 2), không viết let nữa.
 
 PRACTICE: Viết file vars.js: tạo các biến testName (string), durationMs (number), passed (boolean). In ra một câu bằng template literal, ví dụ: Test "Đăng nhập" chạy 1520 ms, kết quả: true. Thử đổi passed từ const sang let rồi gán lại false.
 Q: Khi nào nên dùng let thay vì const?
@@ -212,6 +212,13 @@ Q: Template literal dùng ký hiệu nào để chèn biến vào chuỗi?
 
 ### if giống biển chỉ đường
 Chương trình cần ra quyết định: nếu điều kiện đúng thì đi đường A, ngược lại đi đường B.
+Giải thích từng dòng:
+• dòng 1: giả lập status code nhận được từ API.
+• dòng 3: if kiểm tra điều kiện trong ngoặc tròn. === nghĩa là "bằng chính xác".
+• dòng 4: chỉ chạy khi điều kiện đúng. Code bên trong ngoặc nhọn {} gọi là khối lệnh.
+• dòng 5: else = "ngược lại".
+• dòng 6: chỉ chạy khi điều kiện sai.
+Kết quả mong đợi: PASS: API trả về thành công. Thử đổi 200 thành 500 và chạy lại.
 ~~~js
 const statusCode = 200;
 
@@ -221,23 +228,8 @@ if (statusCode === 200) {
   console.log("FAIL: status code là " + statusCode);
 }
 ~~~
-Giải thích từng dòng:
-• dòng 1: giả lập status code nhận được từ API.
-• dòng 3: if kiểm tra điều kiện trong ngoặc tròn. === nghĩa là "bằng chính xác".
-• dòng 4: chỉ chạy khi điều kiện đúng. Code bên trong ngoặc nhọn {} gọi là khối lệnh.
-• dòng 5: else = "ngược lại".
-• dòng 6: chỉ chạy khi điều kiện sai.
-Kết quả mong đợi: PASS: API trả về thành công. Thử đổi 200 thành 500 và chạy lại.
 
 ### Các phép so sánh
-~~~js
-console.log(200 === 200);
-console.log(200 === "200");
-console.log(200 == "200");
-console.log(404 !== 200);
-console.log(1500 > 1000);
-console.log(3 <= 2);
-~~~
 Giải thích từng dòng:
 • === so sánh cả giá trị và kiểu: true.
 • 200 === "200": số và chuỗi khác kiểu nên false.
@@ -246,8 +238,23 @@ Giải thích từng dòng:
 • > lớn hơn, < nhỏ hơn, >= lớn hơn hoặc bằng, <= nhỏ hơn hoặc bằng.
 Kết quả mong đợi: true, false, true, true, true, false.
 Quy tắc cho tester: luôn dùng === và !==. Giống kiểm tra hàng: phải đúng cả mã hàng lẫn loại hàng.
+~~~js
+console.log(200 === 200);
+console.log(200 === "200");
+console.log(200 == "200");
+console.log(404 !== 200);
+console.log(1500 > 1000);
+console.log(3 <= 2);
+~~~
 
 ### Nhiều nhánh với else if
+Giải thích từng dòng:
+• dòng 3: kiểm tra nhóm 2xx. && nghĩa là VÀ: cả hai điều kiện phải đúng.
+• dòng 5: nếu nhánh trên sai, thử tiếp nhóm 4xx.
+• dòng 7: tiếp tục thử nhóm 5xx.
+• dòng 9: không khớp nhánh nào thì chạy else.
+Máy kiểm tra từ trên xuống, gặp nhánh đúng đầu tiên thì chạy nhánh đó và bỏ qua phần còn lại.
+Kết quả mong đợi: Lỗi phía client (4xx).
 ~~~js
 const status = 404;
 
@@ -261,15 +268,15 @@ if (status >= 200 && status < 300) {
   console.log("Mã khác");
 }
 ~~~
-Giải thích từng dòng:
-• dòng 3: kiểm tra nhóm 2xx. && nghĩa là VÀ: cả hai điều kiện phải đúng.
-• dòng 5: nếu nhánh trên sai, thử tiếp nhóm 4xx.
-• dòng 7: tiếp tục thử nhóm 5xx.
-• dòng 9: không khớp nhánh nào thì chạy else.
-Máy kiểm tra từ trên xuống, gặp nhánh đúng đầu tiên thì chạy nhánh đó và bỏ qua phần còn lại.
-Kết quả mong đợi: Lỗi phía client (4xx).
 
 ### Kết hợp điều kiện: VÀ, HOẶC, PHỦ ĐỊNH
+Giải thích từng dòng:
+• && (VÀ): đúng khi cả hai vế đúng. Ở đây role là viewer nên không in.
+• || (HOẶC): đúng khi ít nhất một vế đúng. viewer không khớp vế nào nên không in.
+• ! (PHỦ ĐỊNH): đảo ngược. !false thành true nên in dòng cuối.
+• Khi khối lệnh chỉ có một dòng, có thể viết ngay sau if không cần {}, nhưng người mới nên luôn dùng {} cho rõ ràng.
+Kết quả mong đợi: chỉ một dòng Hệ thống đang hoạt động.
+Đây chính là cách nghĩ khi test phân quyền: mỗi vai trò thấy gì, không thấy gì.
 ~~~js
 const isLoggedIn = true;
 const role = "viewer";
@@ -279,15 +286,13 @@ if (isLoggedIn && role === "admin") console.log("Hiện nút Xóa");
 if (role === "admin" || role === "editor") console.log("Cho phép sửa");
 if (!isMaintenance) console.log("Hệ thống đang hoạt động");
 ~~~
-Giải thích từng dòng:
-• && (VÀ): đúng khi cả hai vế đúng. Ở đây role là viewer nên không in.
-• || (HOẶC): đúng khi ít nhất một vế đúng. viewer không khớp vế nào nên không in.
-• ! (PHỦ ĐỊNH): đảo ngược. !false thành true nên in dòng cuối.
-• Khi khối lệnh chỉ có một dòng, có thể viết ngay sau if không cần {}, nhưng người mới nên luôn dùng {} cho rõ ràng.
-Kết quả mong đợi: chỉ một dòng Hệ thống đang hoạt động.
-Đây chính là cách nghĩ khi test phân quyền: mỗi vai trò thấy gì, không thấy gì.
 
 ### Lỗi thường gặp
+Giải thích:
+• Một dấu = là GÁN giá trị, không phải so sánh. Viết status = 200 trong if sẽ gán 200 vào status.
+• Với const, Node báo lỗi ngay. Với let, code chạy "êm" và luôn in PASS, kiểu bug nguy hiểm nhất với tester: test xanh nhưng sai.
+• Cách sửa: dùng ===.
+Lỗi khác: SyntaxError: Unexpected token 'else' do thừa dấu ; sau if (...) hoặc thiếu dấu } trước else. Bấm Shift+Alt+F trong VS Code để format, các khối lệnh sẽ thẳng hàng và dễ phát hiện ngoặc thiếu.
 ~~~js
 const status = 500;
 if (status = 200) {
@@ -296,11 +301,6 @@ if (status = 200) {
 // TypeError: Assignment to constant variable.
 // Nếu status là let: không báo lỗi nhưng LUÔN in PASS (bug ẩn!)
 ~~~
-Giải thích:
-• Một dấu = là GÁN giá trị, không phải so sánh. Viết status = 200 trong if sẽ gán 200 vào status.
-• Với const, Node báo lỗi ngay. Với let, code chạy "êm" và luôn in PASS, kiểu bug nguy hiểm nhất với tester: test xanh nhưng sai.
-• Cách sửa: dùng ===.
-Lỗi khác: SyntaxError: Unexpected token 'else' do thừa dấu ; sau if (...) hoặc thiếu dấu } trước else. Bấm Shift+Alt+F trong VS Code để format, các khối lệnh sẽ thẳng hàng và dễ phát hiện ngoặc thiếu.
 
 PRACTICE: Viết file grade.js: cho biến responseTimeMs. Nếu nhỏ hơn 500 in "Nhanh", từ 500 đến dưới 2000 in "Chấp nhận được", từ 2000 trở lên in "Chậm - cần báo bug hiệu năng". Thử với các giá trị 499, 500, 1999, 2000 (đây chính là kiểm thử giá trị biên).
 Q: Biểu thức 200 === "200" cho kết quả gì?
@@ -321,11 +321,6 @@ Q: Vì sao if (status = 200) là một bug nguy hiểm?
 ### Vì sao cần vòng lặp?
 Tester thường phải kiểm tra cùng một việc với nhiều bộ dữ liệu: 5 email, 10 mật khẩu, 100 user.
 Viết tay 100 lần là cực hình. Vòng lặp giống máy dập: cài đặt một lần, chạy bao nhiêu lần cũng được.
-~~~js
-for (let i = 1; i <= 3; i++) {
-  console.log(`Chạy test lần thứ ${i}`);
-}
-~~~
 Giải thích các phần trong ngoặc của for:
 • let i = 1: điểm bắt đầu, biến đếm i bằng 1.
 • i <= 3: điều kiện tiếp tục, còn đúng thì còn lặp.
@@ -335,28 +330,42 @@ Kết quả mong đợi:
 Chạy test lần thứ 1
 Chạy test lần thứ 2
 Chạy test lần thứ 3
-
-### for...of: duyệt từng phần tử của danh sách
 ~~~js
-const emails = ["a@test.com", "b@test", "c@test.com", ""];
-
-for (const email of emails) {
-  const valid = email.includes("@") && email.includes(".");
-  console.log(`${email || "(rỗng)"} -> ${valid ? "hợp lệ" : "không hợp lệ"}`);
+for (let i = 1; i <= 3; i++) {
+  console.log(`Chạy test lần thứ ${i}`);
 }
 ~~~
+
+### for...of: duyệt từng phần tử của danh sách
 Giải thích từng dòng:
 • dòng 1: danh sách 4 email cần kiểm tra (học kỹ về mảng ở bài 6).
 • dòng 3: for...of lấy lần lượt từng email bỏ vào biến email.
 • dòng 4: includes kiểm tra chuỗi có chứa ký tự đó không. Ở đây yêu cầu có cả @ và dấu chấm (quy tắc đơn giản cho ví dụ).
 • dòng 5: email || "(rỗng)" in chữ (rỗng) khi email trống. điều_kiện ? A : B là if/else viết gọn.
 Kết quả mong đợi:
-a@test.com -> hợp lệ
+a@example.com -> hợp lệ
 b@test -> không hợp lệ
-c@test.com -> hợp lệ
+c@example.com -> hợp lệ
 (rỗng) -> không hợp lệ
+~~~js
+const emails = ["a@example.com", "b@test", "c@example.com", ""];
+
+for (const email of emails) {
+  const valid = email.includes("@") && email.includes(".");
+  console.log(`${email || "(rỗng)"} -> ${valid ? "hợp lệ" : "không hợp lệ"}`);
+}
+~~~
 
 ### break và continue
+Giải thích từng dòng:
+• continue: bỏ qua phần còn lại của vòng hiện tại, nhảy sang phần tử tiếp theo.
+• break: thoát hẳn khỏi vòng lặp.
+• Vì vậy "PASS" cuối cùng không bao giờ được in.
+Kết quả mong đợi:
+OK: PASS
+OK: PASS
+Gặp FAIL, dừng kiểm tra!
+Ứng dụng: chế độ "fail fast", dừng ngay ở lỗi đầu tiên để tiết kiệm thời gian.
 ~~~js
 const results = ["PASS", "PASS", "SKIP", "FAIL", "PASS"];
 
@@ -369,17 +378,15 @@ for (const r of results) {
   console.log("OK:", r);
 }
 ~~~
-Giải thích từng dòng:
-• continue: bỏ qua phần còn lại của vòng hiện tại, nhảy sang phần tử tiếp theo.
-• break: thoát hẳn khỏi vòng lặp.
-• Vì vậy "PASS" cuối cùng không bao giờ được in.
-Kết quả mong đợi:
-OK: PASS
-OK: PASS
-Gặp FAIL, dừng kiểm tra!
-Ứng dụng: chế độ "fail fast", dừng ngay ở lỗi đầu tiên để tiết kiệm thời gian.
 
 ### while: lặp đến khi đạt điều kiện (retry)
+Giải thích từng dòng:
+• dòng 1–2: biến đếm số lần thử và trạng thái thành công.
+• dòng 4: lặp khi CHƯA thành công VÀ chưa quá 3 lần.
+• dòng 5: tăng số lần thử.
+• dòng 6: Math.random() cho số ngẫu nhiên 0–1, giả lập một thao tác lúc được lúc không.
+• dòng 9: tổng kết sau vòng lặp.
+Kết quả mỗi lần chạy có thể khác nhau, đó là chủ ý. Đây là ý tưởng của "retry" trong automation.
 ~~~js
 let attempt = 0;
 let success = false;
@@ -391,15 +398,11 @@ while (!success && attempt < 3) {
 }
 console.log(success ? "Xong" : "Hết lượt thử, báo lỗi");
 ~~~
-Giải thích từng dòng:
-• dòng 1–2: biến đếm số lần thử và trạng thái thành công.
-• dòng 4: lặp khi CHƯA thành công VÀ chưa quá 3 lần.
-• dòng 5: tăng số lần thử.
-• dòng 6: Math.random() cho số ngẫu nhiên 0–1, giả lập một thao tác lúc được lúc không.
-• dòng 9: tổng kết sau vòng lặp.
-Kết quả mỗi lần chạy có thể khác nhau, đó là chủ ý. Đây là ý tưởng của "retry" trong automation.
 
 ### Lỗi thường gặp
+• Lệch một (off-by-one): mảng 3 phần tử có vị trí 0, 1, 2. Dùng i < users.length chứ không phải <=.
+• Vòng lặp vô hạn: quên tăng biến đếm. Nhấn Ctrl+C trong terminal để dừng, rồi thêm n++.
+• Mẹo: khi không cần vị trí i, ưu tiên for...of vì không bao giờ bị lệch một.
 ~~~js
 const users = ["an", "binh", "chi"];
 for (let i = 0; i <= users.length; i++) {
@@ -413,9 +416,6 @@ while (n < 5) {
   // quên n++ -> lặp vô hạn, terminal in mãi không dừng
 }
 ~~~
-• Lệch một (off-by-one): mảng 3 phần tử có vị trí 0, 1, 2. Dùng i < users.length chứ không phải <=.
-• Vòng lặp vô hạn: quên tăng biến đếm. Nhấn Ctrl+C trong terminal để dừng, rồi thêm n++.
-• Mẹo: khi không cần vị trí i, ưu tiên for...of vì không bao giờ bị lệch một.
 
 PRACTICE: Viết file passwords.js với mảng 5 mật khẩu mẫu. Dùng for...of kiểm tra mỗi mật khẩu có độ dài từ 8 đến 20 ký tự không (dùng .length) và in "OK" hoặc "Quá ngắn"/"Quá dài". Cuối cùng in tổng số mật khẩu hợp lệ.
 Q: Vòng for (let i = 0; i < 3; i++) chạy bao nhiêu lần?
@@ -435,6 +435,12 @@ Q: Terminal in chữ liên tục không dừng do vòng lặp vô hạn. Bạn l
 
 ### Hàm giống chiếc máy xay sinh tố
 Bỏ nguyên liệu vào (tham số), bấm nút (gọi hàm), nhận ly sinh tố (giá trị trả về).
+Giải thích từng dòng:
+• dòng 1: function khai báo hàm tên add, nhận hai tham số a và b.
+• dòng 2: return trả kết quả ra ngoài và kết thúc hàm.
+• dòng 5: gọi hàm bằng tên kèm dấu ngoặc và giá trị thật (đối số). Kết quả lưu vào total.
+• dòng 6–7: in ra 5 và 30.
+Định nghĩa hàm một lần, gọi bao nhiêu lần cũng được. Trong automation, mỗi hành động lặp lại (đăng nhập, thêm vào giỏ) nên là một hàm.
 ~~~js
 function add(a, b) {
   return a + b;
@@ -444,14 +450,16 @@ const total = add(2, 3);
 console.log(total);
 console.log(add(10, 20));
 ~~~
-Giải thích từng dòng:
-• dòng 1: function khai báo hàm tên add, nhận hai tham số a và b.
-• dòng 2: return trả kết quả ra ngoài và kết thúc hàm.
-• dòng 5: gọi hàm bằng tên kèm dấu ngoặc và giá trị thật (đối số). Kết quả lưu vào total.
-• dòng 6–7: in ra 5 và 30.
-Định nghĩa hàm một lần, gọi bao nhiêu lần cũng được. Trong automation, mỗi hành động lặp lại (đăng nhập, thêm vào giỏ) nên là một hàm.
 
 ### return khác console.log thế nào?
+Giải thích từng dòng:
+• dòng 2–3: gặp return là hàm dừng ngay và trả giá trị, các dòng sau không chạy.
+• dòng 4: nếu không khớp điều kiện nào thì trả "Unknown".
+• dòng 7: kết quả trả về được lưu vào biến để dùng tiếp.
+Kết quả mong đợi:
+Kết quả: Not Found
+Unknown
+Khác biệt: console.log chỉ IN ra cho người xem. return TRẢ giá trị cho code khác dùng tiếp. Hàm kiểm tra nên return, không chỉ in.
 ~~~js
 function getStatusText(code) {
   if (code === 200) return "OK";
@@ -463,27 +471,8 @@ const text = getStatusText(404);
 console.log(`Kết quả: ${text}`);
 console.log(getStatusText(500));
 ~~~
-Giải thích từng dòng:
-• dòng 2–3: gặp return là hàm dừng ngay và trả giá trị, các dòng sau không chạy.
-• dòng 4: nếu không khớp điều kiện nào thì trả "Unknown".
-• dòng 7: kết quả trả về được lưu vào biến để dùng tiếp.
-Kết quả mong đợi:
-Kết quả: Not Found
-Unknown
-Khác biệt: console.log chỉ IN ra cho người xem. return TRẢ giá trị cho code khác dùng tiếp. Hàm kiểm tra nên return, không chỉ in.
 
 ### Arrow function và tham số mặc định
-~~~js
-const multiply = (a, b) => a * b;
-
-const buildUrl = (path, base = "https://jsonplaceholder.typicode.com") => {
-  return `${base}${path}`;
-};
-
-console.log(multiply(4, 5));
-console.log(buildUrl("/posts/1"));
-console.log(buildUrl("/users", "http://localhost:3000"));
-~~~
 Giải thích từng dòng:
 • dòng 1: arrow function, cách viết gọn của hàm. Một biểu thức sau => thì tự động return.
 • dòng 3: base = "..." là giá trị mặc định, dùng khi người gọi không truyền.
@@ -491,31 +480,45 @@ Giải thích từng dòng:
 • dòng 7–9: gọi hàm.
 Kết quả mong đợi:
 20
-https://jsonplaceholder.typicode.com/posts/1
+http://localhost:3130/posts/1
 http://localhost:3000/users
 Bạn sẽ gặp arrow function khắp nơi trong Playwright: test("...", async ({ page }) => { ... }).
+~~~js
+const multiply = (a, b) => a * b;
+
+const buildUrl = (path, base = "http://localhost:3130") => {
+  return `${base}${path}`;
+};
+
+console.log(multiply(4, 5));
+console.log(buildUrl("/posts/1"));
+console.log(buildUrl("/users", "http://localhost:3000"));
+~~~
 
 ### Hàm hữu ích cho tester
+Giải thích từng dòng:
+• dòng 1–3: hàm kiểm tra email theo quy tắc rất đơn giản: có @, @ không đứng đầu, kết thúc bằng .com. (Kiểm tra email thật sẽ học bằng Regex ở phòng 203.)
+• dòng 5–7: tạo email duy nhất bằng Date.now() (số mili giây hiện tại), giúp mỗi lần test đăng ký dùng email mới, không bị trùng.
+• dòng 9–11: thử hàm.
+Kết quả mong đợi: true, false, và một email như user_1789370000000@example.com.
 ~~~js
 function isValidEmail(email) {
   return email.includes("@") && email.indexOf("@") > 0 && email.endsWith(".com");
 }
 
 function randomEmail() {
-  return `user_${Date.now()}@test.com`;
+  return `user_${Date.now()}@example.com`;
 }
 
-console.log(isValidEmail("qa@test.com"));
-console.log(isValidEmail("@test.com"));
+console.log(isValidEmail("qa@example.com"));
+console.log(isValidEmail("@example.com"));
 console.log(randomEmail());
 ~~~
-Giải thích từng dòng:
-• dòng 1–3: hàm kiểm tra email theo quy tắc rất đơn giản: có @, @ không đứng đầu, kết thúc bằng .com. (Kiểm tra email thật sẽ học bằng Regex ở phòng 203.)
-• dòng 5–7: tạo email duy nhất bằng Date.now() (số mili giây hiện tại), giúp mỗi lần test đăng ký dùng email mới, không bị trùng.
-• dòng 9–11: thử hàm.
-Kết quả mong đợi: true, false, và một email như user_1789370000000@test.com.
 
 ### Lỗi thường gặp
+• undefined: hàm không có return thì mặc định trả undefined. Thêm return a + b.
+• [Function: randomEmail]: viết tên hàm mà thiếu () nên chỉ in "bản thân cái máy", chưa bấm nút. Sửa thành randomEmail().
+• is not a function: gọi () trên thứ không phải hàm, thường do đặt trùng tên biến hoặc gõ sai tên.
 ~~~js
 function sum(a, b) {
   a + b;            // quên return
@@ -527,9 +530,6 @@ console.log(randomEmail);  // [Function: randomEmail] - quên ()
 const login = "admin";
 login();                   // TypeError: login is not a function
 ~~~
-• undefined: hàm không có return thì mặc định trả undefined. Thêm return a + b.
-• [Function: randomEmail]: viết tên hàm mà thiếu () nên chỉ in "bản thân cái máy", chưa bấm nút. Sửa thành randomEmail().
-• is not a function: gọi () trên thứ không phải hàm, thường do đặt trùng tên biến hoặc gõ sai tên.
 
 PRACTICE: Viết hàm checkResponseTime(ms, limit = 1000) trả về "PASS" nếu ms <= limit, ngược lại trả về "FAIL". Gọi hàm với 3 bộ giá trị khác nhau, trong đó có một lần truyền limit riêng là 500, và in kết quả.
 Q: Từ khóa nào đưa kết quả của hàm ra ngoài cho code khác dùng?
@@ -549,14 +549,6 @@ Q: Trong const f = (x) => x * 2; giá trị f(5) là bao nhiêu?
 ## LESSON programming-basics-06 | Mảng và object: tổ chức dữ liệu test
 
 ### Mảng (array): danh sách có thứ tự
-~~~js
-const browsers = ["chromium", "firefox", "webkit"];
-console.log(browsers[0]);
-console.log(browsers.length);
-browsers.push("edge");
-console.log(browsers);
-console.log(browsers.includes("firefox"));
-~~~
 Giải thích từng dòng:
 • dòng 1: mảng đặt trong [], các phần tử cách nhau bởi dấu phẩy.
 • dòng 2: lấy phần tử theo vị trí (index). Vị trí đầu tiên là 0, không phải 1.
@@ -565,14 +557,30 @@ Giải thích từng dòng:
 • dòng 5: in cả mảng: [ 'chromium', 'firefox', 'webkit', 'edge' ].
 • dòng 6: includes kiểm tra mảng có chứa giá trị không: true.
 Giống một hàng ghế đánh số từ 0.
+~~~js
+const browsers = ["chromium", "firefox", "webkit"];
+console.log(browsers[0]);
+console.log(browsers.length);
+browsers.push("edge");
+console.log(browsers);
+console.log(browsers.includes("firefox"));
+~~~
 
 ### Object: phiếu thông tin có nhãn
+Giải thích từng dòng:
+• dòng 1–6: object nằm trong {}, mỗi dòng là cặp key: value (nhãn: giá trị). Giá trị có thể là object khác (address).
+• dòng 8: lấy giá trị bằng dấu chấm: Lam Thoi.
+• dòng 9: cách khác dùng ngoặc vuông, tiện khi tên key nằm trong biến.
+• dòng 10: đi sâu nhiều tầng: Vân Thoi 1.
+• dòng 11: thêm key mới.
+• dòng 12: liệt kê các key: [ 'id', 'name', 'email', 'address', 'role' ].
+Dữ liệu API trả về (JSON) có hình dạng y hệt object này.
 ~~~js
 const user = {
   id: 1,
-  name: "Leanne Graham",
-  email: "Sincere@april.biz",
-  address: { city: "Gwenborough" },
+  name: "Lam Thoi",
+  email: "lab-1@example.com",
+  address: { city: "Vân Thoi 1" },
 };
 
 console.log(user.name);
@@ -581,16 +589,14 @@ console.log(user.address.city);
 user.role = "tester";
 console.log(Object.keys(user));
 ~~~
-Giải thích từng dòng:
-• dòng 1–6: object nằm trong {}, mỗi dòng là cặp key: value (nhãn: giá trị). Giá trị có thể là object khác (address).
-• dòng 8: lấy giá trị bằng dấu chấm: Leanne Graham.
-• dòng 9: cách khác dùng ngoặc vuông, tiện khi tên key nằm trong biến.
-• dòng 10: đi sâu nhiều tầng: Gwenborough.
-• dòng 11: thêm key mới.
-• dòng 12: liệt kê các key: [ 'id', 'name', 'email', 'address', 'role' ].
-Dữ liệu API trả về (JSON) có hình dạng y hệt object này.
 
 ### Mảng chứa object: bảng dữ liệu test
+Giải thích từng dòng:
+• dòng 1–5: mỗi phần tử là một object mô tả một test case: đầu vào và kết quả mong đợi. Đây là ý tưởng "data-driven testing".
+• dòng 7: duyệt từng test case.
+• dòng 8: truy cập key của mỗi object bằng dấu chấm.
+Kết quả mong đợi: 3 dòng, mỗi dòng mô tả một test case.
+Thêm test case mới chỉ cần thêm một dòng dữ liệu, không cần viết thêm code.
 ~~~js
 const testUsers = [
   { username: "admin", password: "Admin@123", expected: "success" },
@@ -602,14 +608,17 @@ for (const u of testUsers) {
   console.log(`Login "${u.username}" / "${u.password}" -> mong đợi: ${u.expected}`);
 }
 ~~~
-Giải thích từng dòng:
-• dòng 1–5: mỗi phần tử là một object mô tả một test case: đầu vào và kết quả mong đợi. Đây là ý tưởng "data-driven testing".
-• dòng 7: duyệt từng test case.
-• dòng 8: truy cập key của mỗi object bằng dấu chấm.
-Kết quả mong đợi: 3 dòng, mỗi dòng mô tả một test case.
-Thêm test case mới chỉ cần thêm một dòng dữ liệu, không cần viết thêm code.
 
 ### filter, map, find: ba "phép thuật" với mảng
+Giải thích từng dòng:
+• filter: giữ lại các phần tử thỏa điều kiện, trả về MẢNG mới. Ở đây chỉ còn Search, failed.length là 1.
+• map: biến mỗi phần tử thành thứ khác. Ở đây lấy tên: [ 'Login', 'Search', 'Checkout' ].
+• find: trả về phần tử ĐẦU TIÊN thỏa điều kiện (không phải mảng). Search chạy 3400 ms nên slow.name là Search.
+• (r) => ... là arrow function nhận từng phần tử r.
+Kết quả mong đợi:
+1
+[ 'Login', 'Search', 'Checkout' ]
+Search
 ~~~js
 const results = [
   { name: "Login", status: "passed", ms: 1200 },
@@ -625,17 +634,15 @@ console.log(failed.length);
 console.log(names);
 console.log(slow.name);
 ~~~
-Giải thích từng dòng:
-• filter: giữ lại các phần tử thỏa điều kiện, trả về MẢNG mới. Ở đây chỉ còn Search, failed.length là 1.
-• map: biến mỗi phần tử thành thứ khác. Ở đây lấy tên: [ 'Login', 'Search', 'Checkout' ].
-• find: trả về phần tử ĐẦU TIÊN thỏa điều kiện (không phải mảng). Search chạy 3400 ms nên slow.name là Search.
-• (r) => ... là arrow function nhận từng phần tử r.
-Kết quả mong đợi:
-1
-[ 'Login', 'Search', 'Checkout' ]
-Search
 
 ### JSON: chuyển object thành chữ và ngược lại
+Giải thích từng dòng:
+• dòng 3: JSON.stringify biến object thành chuỗi JSON để gửi qua mạng hoặc lưu file.
+• dòng 4–5: in {"id":101,"items":["book","pen"],"paid":false} và kiểu string.
+• dòng 7: JSON.parse làm ngược lại: chuỗi JSON thành object.
+• dòng 8: in true.
+• dòng 9: tham số null, 2 giúp in JSON thụt lề 2 khoảng trắng, dễ đọc khi debug.
+JSON chi tiết hơn được học ở phòng 203.
 ~~~js
 const order = { id: 101, items: ["book", "pen"], paid: false };
 
@@ -647,26 +654,19 @@ const back = JSON.parse('{"id":102,"paid":true}');
 console.log(back.paid);
 console.log(JSON.stringify(order, null, 2));
 ~~~
-Giải thích từng dòng:
-• dòng 3: JSON.stringify biến object thành chuỗi JSON để gửi qua mạng hoặc lưu file.
-• dòng 4–5: in {"id":101,"items":["book","pen"],"paid":false} và kiểu string.
-• dòng 7: JSON.parse làm ngược lại: chuỗi JSON thành object.
-• dòng 8: in true.
-• dòng 9: tham số null, 2 giúp in JSON thụt lề 2 khoảng trắng, dễ đọc khi debug.
-JSON chi tiết hơn được học ở phòng 203.
 
 ### Lỗi thường gặp
+• Đây là lỗi phổ biến nhất trong JavaScript. Nghĩa là: bạn đòi .name của một thứ không tồn tại (undefined).
+• Ở đây mảng chỉ có vị trí 0, users[1] là undefined.
+• Trong test API: thường do response không có dữ liệu như bạn nghĩ (sai đường dẫn, API trả lỗi).
+• Cách điều tra: console.log từng tầng (console.log(users), console.log(users[1])) để biết tầng nào bị undefined.
+• Cách viết an toàn: users[1]?.name trả undefined thay vì làm chương trình dừng (dấu ?. gọi là optional chaining).
 ~~~text
 const users = [{ name: "An" }];
 console.log(users[1].name);
 
 TypeError: Cannot read properties of undefined (reading 'name')
 ~~~
-• Đây là lỗi phổ biến nhất trong JavaScript. Nghĩa là: bạn đòi .name của một thứ không tồn tại (undefined).
-• Ở đây mảng chỉ có vị trí 0, users[1] là undefined.
-• Trong test API: thường do response không có dữ liệu như bạn nghĩ (sai đường dẫn, API trả lỗi).
-• Cách điều tra: console.log từng tầng (console.log(users), console.log(users[1])) để biết tầng nào bị undefined.
-• Cách viết an toàn: users[1]?.name trả undefined thay vì làm chương trình dừng (dấu ?. gọi là optional chaining).
 
 PRACTICE: Tạo mảng 5 object kết quả test (name, status, ms). Dùng filter đếm số test passed, map lấy danh sách tên test failed, find tìm test đầu tiên chạy quá 2000 ms. In tóm tắt: "Passed: x/5, Failed: [..], Test chậm: ..".
 Q: Trong mảng ["a", "b", "c"], phần tử "a" nằm ở vị trí (index) nào?
@@ -690,15 +690,22 @@ Bạn gọi một ly cà phê. Nhân viên đưa bạn chiếc thẻ rung (buzze
 • Gọi API, mở trang web, đọc file đều mất thời gian, giống pha cà phê.
 • JavaScript không đứng chờ, nó đưa bạn "thẻ rung" gọi là Promise (lời hứa sẽ có kết quả).
 • await nghĩa là: "tôi đứng đợi thẻ rung rồi mới làm bước tiếp theo".
+Giải thích: setTimeout hẹn 2000 ms (2 giây) sau mới chạy. Node không chờ mà chạy tiếp dòng 3.
+Kết quả mong đợi theo thứ tự: 1, 2, rồi 2 giây sau mới tới 3. Chuẩn bị API fixture do bài1 khóa API cung cấp: lưu lab_api_fixture.py và chạy tại localhost:3130. Dữ liệu/users/posts là tên và nội dung tự đặt;không có request tới dịch vụ công khai.
 ~~~js
 console.log("1. Gọi cà phê");
 setTimeout(() => console.log("3. Cà phê xong!"), 2000);
 console.log("2. Về bàn làm việc khác");
 ~~~
-Giải thích: setTimeout hẹn 2000 ms (2 giây) sau mới chạy. Node không chờ mà chạy tiếp dòng 3.
-Kết quả mong đợi theo thứ tự: 1, 2, rồi 2 giây sau mới tới 3.
 
 ### async và await: đợi đúng lúc
+Giải thích từng dòng:
+• dòng 1–3: hàm wait trả về một Promise, sau ms mili giây thì "rung" (resolve). Bạn chưa cần hiểu sâu dòng 2, chỉ cần biết wait(1500) là "đợi 1,5 giây".
+• dòng 5: async đánh dấu hàm có chứa thao tác cần chờ. Chỉ trong hàm async mới dùng được await.
+• dòng 7: await dừng hàm main tại đây cho tới khi Promise xong.
+• dòng 11: gọi hàm main để chạy.
+Kết quả mong đợi: dòng 1 in ngay, 1,5 giây sau mới in dòng 2.
+Trong Playwright bạn sẽ viết await page.click(...), await page.goto(...) liên tục: mỗi thao tác trình duyệt đều cần chờ.
 ~~~js
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -712,19 +719,21 @@ async function main() {
 
 main();
 ~~~
-Giải thích từng dòng:
-• dòng 1–3: hàm wait trả về một Promise, sau ms mili giây thì "rung" (resolve). Bạn chưa cần hiểu sâu dòng 2, chỉ cần biết wait(1500) là "đợi 1,5 giây".
-• dòng 5: async đánh dấu hàm có chứa thao tác cần chờ. Chỉ trong hàm async mới dùng được await.
-• dòng 7: await dừng hàm main tại đây cho tới khi Promise xong.
-• dòng 11: gọi hàm main để chạy.
-Kết quả mong đợi: dòng 1 in ngay, 1,5 giây sau mới in dòng 2.
-Trong Playwright bạn sẽ viết await page.click(...), await page.goto(...) liên tục: mỗi thao tác trình duyệt đều cần chờ.
 
-### Gọi API thật với fetch
+### Gọi API lab bằng fetch
 Node.js 18 trở lên có sẵn fetch, không cần cài gì. Tạo file get-user.js:
+Giải thích từng dòng:
+• dòng 2: fetch gửi yêu cầu GET tới API fixture cục bộ tự viết, await chờ phản hồi về.
+• dòng 3: response.status là mã trạng thái HTTP, 200 nghĩa là thành công.
+• dòng 5: response.json() đọc phần thân phản hồi và đổi JSON thành object. Việc này cũng cần await.
+• dòng 6–7: in các trường dữ liệu.
+Chạy: node get-user.js. Kết quả mong đợi:
+Status: 200
+Tên: Lam Thoi
+Email: lab-1@example.com
 ~~~js
 async function main() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users/1");
+  const response = await fetch("http://localhost:3130/users/1");
   console.log("Status:", response.status);
 
   const user = await response.json();
@@ -734,21 +743,22 @@ async function main() {
 
 main();
 ~~~
-Giải thích từng dòng:
-• dòng 2: fetch gửi yêu cầu GET tới API demo công khai, await chờ phản hồi về.
-• dòng 3: response.status là mã trạng thái HTTP, 200 nghĩa là thành công.
-• dòng 5: response.json() đọc phần thân phản hồi và đổi JSON thành object. Việc này cũng cần await.
-• dòng 6–7: in các trường dữ liệu.
-Chạy: node get-user.js. Kết quả mong đợi:
-Status: 200
-Tên: Leanne Graham
-Email: Sincere@april.biz
 
 ### try/catch: bắt lỗi để chương trình không sập
+Giải thích từng dòng:
+• try: "thử làm" khối lệnh bên trong.
+• dòng 3: gọi user 999, không tồn tại.
+• dòng 4: res.ok là true khi status từ 200 đến 299.
+• dòng 5: throw new Error tự "ném" ra lỗi với thông điệp rõ ràng.
+• catch (error): nơi đón lỗi, error.message là thông điệp lỗi.
+• finally: luôn chạy dù thành công hay lỗi, hợp để dọn dẹp.
+Kết quả mong đợi:
+Đã bắt được lỗi: API trả về lỗi 404
+Kết thúc kiểm tra
 ~~~js
 async function main() {
   try {
-    const res = await fetch("https://jsonplaceholder.typicode.com/users/999");
+    const res = await fetch("http://localhost:3130/users/999");
     if (!res.ok) {
       throw new Error(`API trả về lỗi ${res.status}`);
     }
@@ -763,20 +773,14 @@ async function main() {
 
 main();
 ~~~
-Giải thích từng dòng:
-• try: "thử làm" khối lệnh bên trong.
-• dòng 3: gọi user 999, không tồn tại.
-• dòng 4: res.ok là true khi status từ 200 đến 299.
-• dòng 5: throw new Error tự "ném" ra lỗi với thông điệp rõ ràng.
-• catch (error): nơi đón lỗi, error.message là thông điệp lỗi.
-• finally: luôn chạy dù thành công hay lỗi, hợp để dọn dẹp.
-Kết quả mong đợi:
-Đã bắt được lỗi: API trả về lỗi 404
-Kết thúc kiểm tra
 
 ### Lỗi thường gặp
+• Promise { <pending> }: quên await, bạn in ra "thẻ rung" chứ chưa phải cà phê. Thêm await và đặt trong hàm async.
+• await is only valid in async functions: dùng await trong hàm thường. Thêm chữ async trước function.
+• fetch failed: không có mạng, gõ sai tên miền, hoặc mạng công ty chặn. Mở URL bằng trình duyệt để kiểm tra.
+• fetch is not defined: Node.js quá cũ (dưới 18). Chạy node -v và cài bản LTS mới.
 ~~~text
-console.log(fetch("https://jsonplaceholder.typicode.com/users/1"));
+console.log(fetch("http://localhost:3130/users/1"));
 Promise { <pending> }
 
 function load() { const r = await fetch(url); }
@@ -784,12 +788,8 @@ SyntaxError: await is only valid in async functions and the top level bodies of 
 
 TypeError: fetch failed
 ~~~
-• Promise { <pending> }: quên await, bạn in ra "thẻ rung" chứ chưa phải cà phê. Thêm await và đặt trong hàm async.
-• await is only valid in async functions: dùng await trong hàm thường. Thêm chữ async trước function.
-• fetch failed: không có mạng, gõ sai tên miền, hoặc mạng công ty chặn. Mở URL bằng trình duyệt để kiểm tra.
-• fetch is not defined: Node.js quá cũ (dưới 18). Chạy node -v và cài bản LTS mới.
 
-PRACTICE: Viết file posts.js gọi https://jsonplaceholder.typicode.com/posts?userId=1, in status, số lượng bài viết (dùng .length) và tiêu đề bài đầu tiên. Bọc trong try/catch, thử đổi tên miền sai để thấy catch hoạt động.
+PRACTICE: Viết file posts.js gọi http://localhost:3130/posts?userId=1, in status, số lượng bài viết (dùng .length) và tiêu đề bài đầu tiên. Bọc trong try/catch, thử đổi tên miền sai để thấy catch hoạt động.
 Q: Trong ví dụ gọi cà phê, Promise giống thứ gì?
 - Ly cà phê
 + Chiếc thẻ rung hứa sẽ báo khi có kết quả
@@ -808,6 +808,11 @@ Q: Khối nào luôn chạy dù có lỗi hay không?
 ### Assertion là gì?
 Assertion (khẳng định) là câu: "Tôi mong đợi X, thực tế phải đúng là X, nếu không thì báo FAIL."
 Giống người kiểm hàng: đối chiếu phiếu đặt hàng (expected) với hàng thực nhận (actual).
+Giải thích từng dòng:
+• dòng 1: hàm nhận giá trị thực tế, giá trị mong đợi và nhãn mô tả.
+• dòng 2–3: nếu khác nhau thì ném lỗi kèm thông điệp dễ hiểu.
+• dòng 7–8: đúng, không có gì xảy ra, in dòng tiếp.
+• dòng 9: sai, chương trình dừng với Error: Độ dài chuỗi: mong đợi 5 nhưng nhận 3.
 ~~~js
 function assertEqual(actual, expected, label) {
   if (actual !== expected) {
@@ -819,13 +824,15 @@ assertEqual(2 + 2, 4, "Phép cộng");
 console.log("Assertion 1 qua");
 assertEqual("abc".length, 5, "Độ dài chuỗi");
 ~~~
-Giải thích từng dòng:
-• dòng 1: hàm nhận giá trị thực tế, giá trị mong đợi và nhãn mô tả.
-• dòng 2–3: nếu khác nhau thì ném lỗi kèm thông điệp dễ hiểu.
-• dòng 7–8: đúng, không có gì xảy ra, in dòng tiếp.
-• dòng 9: sai, chương trình dừng với Error: Độ dài chuỗi: mong đợi 5 nhưng nhận 3.
 
 ### Hàm test(): chạy từng ca kiểm thử
+Giải thích từng dòng:
+• dòng 1: object đếm số test pass và fail.
+• dòng 3: test nhận tên ca kiểm thử và một hàm fn chứa nội dung test.
+• dòng 5: chạy nội dung test, await để hỗ trợ test có gọi API.
+• dòng 6–7: không có lỗi nghĩa là PASS.
+• dòng 8–10: có assertion ném lỗi thì ghi FAIL kèm lý do, nhưng KHÔNG làm dừng cả bộ test.
+Đây chính là điều Playwright, Jest, Mocha làm cho bạn, chỉ là đầy đủ hơn.
 ~~~js
 const summary = { passed: 0, failed: 0 };
 
@@ -840,18 +847,16 @@ async function test(name, fn) {
   }
 }
 ~~~
-Giải thích từng dòng:
-• dòng 1: object đếm số test pass và fail.
-• dòng 3: test nhận tên ca kiểm thử và một hàm fn chứa nội dung test.
-• dòng 5: chạy nội dung test, await để hỗ trợ test có gọi API.
-• dòng 6–7: không có lỗi nghĩa là PASS.
-• dòng 8–10: có assertion ném lỗi thì ghi FAIL kèm lý do, nhưng KHÔNG làm dừng cả bộ test.
-Đây chính là điều Playwright, Jest, Mocha làm cho bạn, chỉ là đầy đủ hơn.
 
 ### Viết test API thật
 Thêm vào cùng file mini-test.js, ngay dưới hàm test và assertEqual:
+Giải thích:
+• Mỗi await test(...) là một ca kiểm thử độc lập, có tên rõ ràng.
+• Test 2: hai lần await, một cho fetch, một cho .json().
+• \n trong chuỗi là xuống dòng.
+• process.exitCode = 1 báo cho hệ thống "có test fail". CI/CD dựa vào mã này để biết build đỏ hay xanh.
 ~~~js
-const BASE = "https://jsonplaceholder.typicode.com";
+const BASE = "http://localhost:3130";
 
 async function main() {
   await test("GET /users/1 trả về 200", async () => {
@@ -875,17 +880,8 @@ async function main() {
 
 main();
 ~~~
-Giải thích:
-• Mỗi await test(...) là một ca kiểm thử độc lập, có tên rõ ràng.
-• Test 2: hai lần await, một cho fetch, một cho .json().
-• \n trong chuỗi là xuống dòng.
-• process.exitCode = 1 báo cho hệ thống "có test fail". CI/CD dựa vào mã này để biết build đỏ hay xanh.
 
 ### Chạy và đọc kết quả
-~~~bash
-node mini-test.js
-echo $LASTEXITCODE
-~~~
 Giải thích từng dòng:
 • dòng 1: chạy bộ test.
 • dòng 2: trong PowerShell, $LASTEXITCODE là mã thoát của chương trình vừa chạy: 0 là thành công, khác 0 là có lỗi.
@@ -896,19 +892,13 @@ Kết quả mong đợi:
 Tổng kết: 3 passed, 0 failed
 0
 Thử sửa "Bret" thành "Bob" để thấy một dòng FAIL và mã thoát 1. Luôn tự làm test fail một lần để chắc test có khả năng bắt lỗi.
+~~~bash
+node mini-test.js
+echo $LASTEXITCODE
+~~~
 
 ### Từ mini test đến Playwright
 Cùng ý tưởng, viết bằng Playwright Test (học ở phòng 301):
-~~~ts
-import { test, expect } from '@playwright/test';
-
-test('User 1 có username Bret', async ({ request }) => {
-  const res = await request.get('https://jsonplaceholder.typicode.com/users/1');
-  expect(res.status()).toBe(200);
-  const user = await res.json();
-  expect(user.username).toBe('Bret');
-});
-~~~
 Giải thích từng dòng:
 • dòng 1: nạp hàm test và expect có sẵn của Playwright, không cần tự viết nữa.
 • dòng 3: test nhận tên và hàm async. { request } là công cụ gọi API Playwright cung cấp sẵn.
@@ -916,8 +906,24 @@ Giải thích từng dòng:
 • dòng 5: expect(...).toBe(200) chính là assertEqual của bạn.
 • dòng 6–7: đọc JSON và khẳng định username.
 Bạn đã hiểu "phần ruột" của framework test. Học Playwright sẽ nhẹ nhàng hơn nhiều.
+~~~ts
+import { test, expect } from '@playwright/test';
+
+test('User 1 có username Bret', async ({ request }) => {
+  const res = await request.get('http://localhost:3130/users/1');
+  expect(res.status()).toBe(200);
+  const user = await res.json();
+  expect(user.username).toBe('Bret');
+});
+~~~
 
 ### Lỗi thường gặp
+Giải thích:
+• Không có await trước test(...) nên dòng tổng kết chạy ngay, khi fetch còn chưa về. Báo cáo sai.
+• Cách sửa: luôn viết await test(...) bên trong hàm async main.
+Các lỗi khác:
+• Test luôn PASS dù dữ liệu sai: kiểm tra lại assertion có thực sự được gọi không (thử cố ý làm fail).
+• ReferenceError: assertEqual is not defined: hàm nằm ở file khác hoặc khai báo sai tên.
 ~~~js
 // SAI: quên await khi gọi test
 test("User 999 trả về 404", async () => {
@@ -927,12 +933,6 @@ test("User 999 trả về 404", async () => {
 console.log(`Tổng kết: ${summary.passed} passed, ${summary.failed} failed`);
 // In "0 passed, 0 failed" TRƯỚC khi test chạy xong!
 ~~~
-Giải thích:
-• Không có await trước test(...) nên dòng tổng kết chạy ngay, khi fetch còn chưa về. Báo cáo sai.
-• Cách sửa: luôn viết await test(...) bên trong hàm async main.
-Các lỗi khác:
-• Test luôn PASS dù dữ liệu sai: kiểm tra lại assertion có thực sự được gọi không (thử cố ý làm fail).
-• ReferenceError: assertEqual is not defined: hàm nằm ở file khác hoặc khai báo sai tên.
 
 PRACTICE: Mở rộng mini-test.js thêm 2 test: (1) GET /posts/1 có userId bằng 1; (2) GET /posts?userId=1 trả về đúng 10 bài viết. Chạy, xác nhận 5 passed, rồi cố ý làm một test fail và kiểm tra $LASTEXITCODE bằng 1.
 Q: Assertion trong kiểm thử có vai trò gì?
@@ -947,3 +947,379 @@ Q: Trong Playwright, câu lệnh nào tương đương assertEqual(status, 200)?
 - console.log(status === 200)
 + expect(res.status()).toBe(200)
 - test(status, 200)
+
+## LESSON programming-basics-09 | Module, lỗi có kiểu và ranh giới dữ liệu
+
+### Tách nạp dữ liệu khỏi quyết định
+Bộ nhập đơn của cửa hàng giả định Lân Mây nhận JSON không có kiểu ở runtime. Để hàm tính tiền nhỏ, đặt việc kiểm payload ở cửa vào; việc import module không được tự đọc file hoặc gọi mạng.
+~~~js
+// order.mjs
+export function total(lines) {
+  return lines.reduce((sum, x) => sum + x.qty * x.price, 0);
+}
+~~~
+
+### Kiểm miền thay vì ép kiểu tùy tiện
+Số lượng bằng chuỗi là lỗi hợp đồng ở lab này, kể cả chuỗi nhìn giống số. Number.isInteger loại số lẻ, NaN và chuỗi; kiểm dương sau khi đã xác nhận là số nguyên.
+~~~js
+export function parseQty(value) {
+  if (!Number.isInteger(value) || value < 1)
+    return {ok:false, field:'qty', reason:'positive_integer'};
+  return {ok:true, value};
+}
+~~~
+
+### Lỗi có cấu trúc và nơi chịu trách nhiệm
+CLI biết tên file nên bổ sung tên file vào báo cáo; hàm parseQty chỉ biết trường nên không đoán đường dẫn. Không dùng cùng một catch để biến sai dữ liệu thành danh sách đơn rỗng.
+~~~js
+import {parseQty} from './qty.mjs';
+const r = parseQty('2');
+if (!r.ok) console.error(`${r.field}: ${r.reason}`);
+~~~
+
+### Bẫy module và trạng thái dùng chung
+Biến mảng ở cấp module sống qua nhiều lần gọi trong cùng tiến trình. Nếu một test đẩy dữ liệu vào mảng này, test sau có thể phụ thuộc thứ tự; truyền dữ liệu hoặc tạo factory thay vì giấu trạng thái.
+
+### Chứng minh hợp đồng vào và ra
+Viết bảng cho 1, 0, -1, 1.5, "1", null và undefined. Với mỗi dòng, nêu trước kết quả ok và reason; đổi chính sách nhận chuỗi phải là thay đổi có chủ đích kèm test mới.
+
+PRACTICE: Tạo qty.mjs và test-qty.mjs bằng Node ESM; kiểm bảy đầu vào, assert cả ok lẫn reason. Bàn giao lệnh node test-qty.mjs, output khi thành công và output khi cố tình phá một điều kiện.
+Q: import trong Node ESM cần cấu hình nào phù hợp?
++ type: module hoặc đuôi .mjs
+- Đổi mọi biến thành global
+- Bật chế độ mạng
+Q: Ranh giới kiểm payload có nhiệm vụ gì?
++ Đổi dữ liệu chưa tin thành cấu trúc đã kiểm
+- Bỏ mọi trường không hiểu mà không báo
+- Bắt mọi lỗi thành thành công
+
+## LESSON programming-basics-10 | Map, Set và biến đổi dữ liệu bất biến
+
+### Tìm dòng theo mã bằng Map
+Danh sách giao nhận ở trạm giả định Nếp Lam dùng id duy nhất. Lặp find cho từng mã yêu cầu tốn nhiều lượt duyệt; Map tạo chỉ mục một lần, nhưng phải quyết định xử lý mã trùng khi dựng chỉ mục.
+~~~js
+const rows = [{id:'A1',qty:2},{id:'B2',qty:4}];
+const byId = new Map(rows.map(x => [x.id, x]));
+console.log(byId.get('B2'));
+~~~
+
+### Set chỉ so giá trị primitive hoặc danh tính object
+Hai object có cùng id vẫn là hai phần tử trong Set nếu khác tham chiếu. Muốn bỏ trùng theo id, trích id hoặc dùng Map với chính sách giữ bản ghi đầu/cuối được ghi rõ.
+~~~js
+const ids = ['R3','R3','R4'];
+console.log([...new Set(ids)]); // R3, R4
+console.log(new Set([{id:1},{id:1}]).size); // 2
+~~~
+
+### Sửa một dòng bằng dữ liệu mới
+Spread mảng chỉ copy danh sách tham chiếu. Dòng được sửa phải copy riêng; nếu dòng có object lồng, copy tiếp nhánh lồng đó trước khi thay giá trị.
+~~~js
+const updated = rows.map(x =>
+  x.id === 'A1' ? {...x, qty:x.qty + 1} : x);
+console.assert(rows[0].qty === 2);
+console.assert(updated[0].qty === 3);
+~~~
+
+### Bẫy duplicate bị ghi đè im lặng
+new Map từ các cặp trùng khóa giữ giá trị sau cùng. Trong kiểm dữ liệu nhập, điều đó có thể che mất dòng sai; kiểm has trước set và ghi vị trí cả hai dòng để người sửa đối chiếu.
+
+### Đánh giá lợi ích của bất biến
+Test đồng thời giá trị trả về và bản gốc. Không cần clone sâu mọi cấu trúc theo thói quen; chỉ copy đường sửa, rồi đo khi lượng dữ liệu tăng thay vì đoán hiệu năng.
+
+PRACTICE: Nhập sáu dòng có hai id trùng, tạo báo cáo trùng và danh sách cập nhật bất biến. Viết ba test: trùng khóa, id không có, object lồng; giải thích vì sao Set<object> không giải quyết trùng theo id.
+Q: Cách nào bỏ trùng mã nhưng giữ thứ tự xuất hiện đầu?
++ [...new Set(ids)]
+- ids.sort() luôn đủ
+- ids.map(String) luôn đủ
+Q: Để tăng số lượng một dòng mà giữ bản gốc nên dùng gì?
++ map và tạo object mới cho dòng sửa
+- Sửa trực tiếp item.qty trong map
+- Xóa mảng nguồn
+
+## LESSON programming-basics-11 | Promise, hủy tác vụ và kiểm soát đồng thời
+
+### Hợp tác hủy request theo hạn chót
+Trình kiểm tồn kho giả định gọi localhost:3100. Timer phát tín hiệu hủy sau hạn, còn fetch tiếp nhận signal; clearTimeout trong finally tránh giữ timer sau khi tác vụ kết thúc.
+~~~js
+const ctrl = new AbortController();
+const timer = setTimeout(() => ctrl.abort(), 800);
+try {
+ const r = await fetch('http://localhost:3100/stock', {signal:ctrl.signal});
+ if (!r.ok) throw new Error(`HTTP ${r.status}`);
+ console.log(await r.json());
+} finally { clearTimeout(timer); }
+~~~
+
+### Thu đủ kết quả khi một mục hỏng
+Promise.allSettled trả trạng thái từng việc, phù hợp báo cáo kiểm nhiều file độc lập. Nó cũng không giới hạn đồng thời; tạo một nghìn Promise vẫn có thể gây một nghìn yêu cầu.
+~~~js
+const results = await Promise.allSettled([
+ Promise.resolve({id:'L1'}), Promise.reject(new Error('invalid qty'))
+]);
+for (const [i,r] of results.entries())
+ console.log(i, r.status, r.status === 'fulfilled' ? r.value : r.reason.message);
+~~~
+
+### Giữ giới hạn bằng worker có hàng đợi
+Mỗi worker lấy một chỉ số đồng bộ trước await nên không xử lý trùng chỉ số trong một event loop. Kết quả ghi theo vị trí input dù hoàn thành khác thứ tự; lab giữ cả lỗi của từng mục.
+~~~js
+const input = [1,2,3,4], out = Array(input.length);
+let cursor = 0;
+async function work() {
+ while (cursor < input.length) {
+  const i = cursor++;
+  try { out[i] = {ok:true,value:await check(input[i])}; }
+  catch (e) { out[i] = {ok:false,error:e.message}; }
+ }
+}
+await Promise.all([work(),work()]);
+~~~
+
+### Đừng nhầm timeout với hoàn tác
+Request bị hủy ở client có thể đã được server xử lý. Với thao tác ghi, cần mã chống lặp và truy vấn lại trạng thái; không tự retry mù chỉ vì không nhận được response.
+
+### Đo mức đồng thời thực tế
+Tăng bộ đếm active trước await, giảm ở finally, lưu peak. Gây một reject và một tác vụ chậm rồi assert peak không quá hai, mọi vị trí kết quả đều có trạng thái.
+
+PRACTICE: Viết hàm check giả trả sau 20–80 ms, trong đó một mục reject. Chạy hai worker với mười mục; bàn giao peak, thứ tự input/output và test chứng minh Promise.all không tự hủy tác vụ còn lại.
+Q: Promise.all có tự hủy các công việc còn lại khi một việc reject không?
++ Không, cần cơ chế hủy riêng
+- Có, luôn dừng mọi request
+- Có, chỉ khi có ba Promise
+Q: AbortController có hiệu lực với tác vụ nào?
++ Tác vụ thực sự đọc và xử lý signal
+- Mọi vòng lặp CPU đang chạy
+- Mọi Promise trong tiến trình
+Q: Hàng đợi có hai worker giúp gì?
++ Giới hạn tối đa hai tác vụ đang chạy trong thiết kế đó
+- Đảm bảo request nào cũng thành công
+- Đảm bảo thứ tự hoàn thành
+
+## LESSON programming-basics-12 | Fake clock, test double và kiểm thử độc lập
+
+### Tiêm đồng hồ vào phép tính hạn
+Phiếu hẹn của xưởng giả định Mầm Thoi hết hiệu lực khi now >= expiresAt. Truyền đồng hồ giúp test đúng mốc mà không phụ thuộc tốc độ máy hay việc chờ một giây thật.
+~~~js
+function isExpired(expiresAt, now = () => Date.now()) {
+ return now() >= expiresAt;
+}
+console.assert(!isExpired(100, () => 99));
+console.assert(isExpired(100, () => 100));
+~~~
+
+### Test double giữ phần phụ thuộc nhỏ
+Stub kho dữ liệu trả bản ghi đã biết hoặc ném lỗi đã biết. Hệ thống thật vẫn cần kiểm tích hợp riêng; test này chỉ chứng minh nhánh quyết định khi kho trả kết quả cụ thể.
+~~~js
+async function canShip(id, repo) {
+ const row = await repo.get(id);
+ return row !== null && row.qty > 0;
+}
+const repo = {get: async id => id === 'P7' ? {qty:2} : null};
+console.assert(await canShip('P7', repo));
+console.assert(!(await canShip('P8', repo)));
+~~~
+
+### Tách tính toán để tái lập dữ liệu
+Chuẩn hóa mỗi dòng thành bản ghi mới, không lấy thời gian ngẫu nhiên bên trong map. Một seed hoặc id cố định làm ca thất bại tái hiện được; random chỉ có ích khi ghi lại cách tái tạo.
+~~~js
+const normalize = x => ({id:x.id.trim(), qty:x.qty});
+const source = {id:' Q2 ',qty:3};
+const got = normalize(source);
+console.assert(got.id === 'Q2');
+console.assert(source.id === ' Q2 ');
+~~~
+
+### Lỗi hay gặp khi mock quá sâu
+Assert thứ tự mọi hàm nội bộ làm test vỡ sau refactor dù hành vi không đổi. Ưu tiên kết quả và tương tác thật sự thuộc hợp đồng, như gửi đúng một thông báo khi chuyển trạng thái.
+
+### Kiểm độ nhạy bằng thay đổi có chủ đích
+Tạm đổi >= thành > ở hàm hết hạn. Test tại đúng expiresAt phải đỏ; nếu vẫn xanh, bổ sung assertion ranh giới trước khi tin bộ test bảo vệ hành vi.
+
+PRACTICE: Xây ba nhóm test: hạn99/100/101, repo có/không có hàng/lỗi, normalize không sửa nguồn. Ghi lại một mutation làm test thất bại và phục hồi code; không dùng sleep để kiểm hàm hết hạn.
+Q: Fake clock hữu ích nhất cho trường hợp nào?
++ Kiểm timeout tại ranh giới mà không ngủ thật
+- Kiểm độ trễ mạng sản xuất
+- Bỏ mọi assertion thời gian
+Q: Stub nên mô phỏng điều gì?
++ Hợp đồng và các nhánh lỗi cần kiểm
+- Mọi dòng nội bộ của dependency
+- Một thành công cố định cho tất cả ca
+Q: Hàm thuần có lợi điểm nào trong test?
++ Cùng input cho cùng output, không phụ thuộc I/O ẩn
+- Không bao giờ có bug
+- Không cần kiểm biên
+
+## LESSON programming-basics-13 | Dự án: bộ kiểm hợp đồng JSON cục bộ
+
+### Phạm vi bộ kiểm hợp đồng file
+Dự án nhận đường dẫn file chứa mảng đơn nội bộ, kiểm id và qty, rồi xuất báo cáo không chứa payload gốc. Tách đọc UTF-8, JSON.parse và kiểm nghiệp vụ thành ba tầng để chỉ rõ nguồn lỗi.
+~~~js
+import {readFile} from 'node:fs/promises';
+export async function load(path) {
+ const text = await readFile(path,'utf8');
+ return JSON.parse(text);
+}
+~~~
+
+### Báo lỗi có vị trí để sửa đúng dòng
+Trường thiếu, null và sai kiểu có thể tạo thông điệp khác nhau. Lab coi id là chuỗi không rỗng, qty là số nguyên dương; đường dẫn theo chỉ số JSON giúp người nhập tìm được mục sai.
+~~~js
+export function validate(rows) {
+ if (!Array.isArray(rows)) return [{path:'$',code:'array_required'}];
+ return rows.flatMap((x,i) => {
+  if (!x || typeof x !== 'object' || Array.isArray(x))
+   return [{path:`$[${i}]`,code:'object_required'}];
+  const e=[];
+  if (typeof x.id !== 'string' || !x.id.trim()) e.push({path:`$[${i}].id`,code:'id_required'});
+  if (!Number.isInteger(x.qty) || x.qty < 1) e.push({path:`$[${i}].qty`,code:'qty_invalid'});
+  return e;
+ });
+}
+~~~
+
+### Hợp đồng CLI và mã thoát
+Báo JSON ra stdout để máy đọc, lỗi thao tác ra stderr. Không dùng process.exit ngay sau log; gán exitCode cho phép dòng ra được flush và tài nguyên được dọn theo thiết kế.
+~~~js
+try {
+ const errors = validate(await load(process.argv[2]));
+ console.log(JSON.stringify({ok:errors.length === 0,errors}));
+ process.exitCode = errors.length ? 1 : 0;
+} catch (e) {
+ console.error(`Cannot validate input: ${e.message}`);
+ process.exitCode = 2;
+}
+~~~
+
+### Ma trận nghiệm thu và giới hạn
+Bốn nhóm bắt buộc là hợp lệ, JSON sai cú pháp, dữ liệu sai schema, file không truy cập được. Công cụ lab chưa stream file lớn và chưa phát hiện mọi mã trùng; mô tả giới hạn thay vì gọi nó sẵn sàng sản xuất.
+
+### Bằng chứng người khác chạy lại được
+Nộp mã, fixture tự tạo, lệnh chạy với Node ESM, output và exit code. Review một lỗi từ báo cáo về chính fixture rồi sửa; chạy lại cả fixture tốt lẫn xấu để chứng minh không che lỗi.
+
+PRACTICE: Tạo dự án contract-lab với load.mjs, validate.mjs, cli.mjs và ít nhất tám fixture. Có bảng kỳ vọng, test tự động cho hàm thuần và test CLI; README nêu cách chạy localhost nếu mở rộng kiểm API. Nộp một báo cáo thất bại đã sửa và hạn chế bộ kiểm.
+Q: Bộ kiểm file gặp JSON sai cú pháp nên báo gì?
++ Tên file và lỗi parse, trạng thái thất bại
+- Payload gốc đầy đủ dù chứa riêng tư
+- Một kết quả hợp lệ rỗng
+Q: Thiếu trường qty khác qty:null ở đâu?
++ Thiếu là không có thuộc tính, null là giá trị tường minh
+- Hai trường hợp luôn giống nhau
+- Null tự bằng số 0 trong mọi kiểm tra
+Q: Mã thoát khác 0 của công cụ kiểm dùng để làm gì?
++ Cho shell và CI nhận ra kiểm tra thất bại
+- Xóa file lỗi tự động
+- Ẩn lỗi khỏi báo cáo
+
+## LESSON programming-basics-14 | Ôn tập & Thi cuối khoá
+
+### Nền tảng và cách dùng công cụ
+1. So sánh nghiêm ngặt không tự chuyển chuỗi thành số; phân biệt giá trị nhập từ form và số đã parse.
+2. Giá trị trả về tạo hợp đồng kiểm được; log chỉ là bằng chứng phụ.
+3. Chỉ số cuối là n-1; i <= n truy cập thêm một phần tử undefined.
+4. Dữ liệu ngoài chương trình chưa đáng tin; thiếu object cha phải thành lỗi rõ vị trí.
+
+### Dữ liệu và điều kiện biên
+5. Reject đi theo luồng lỗi của async; bắt tại ranh giới có trách nhiệm xử lý.
+6. Assertion phải thất bại khi kết quả khác kỳ vọng, nếu không bộ test không phát hiện hồi quy.
+7. ES module có cơ chế nạp riêng; tệp .mjs hoặc package type:module giúp Node hiểu import/export.
+8. Hàm ranh giới kiểm kiểu, miền và trường bắt buộc trước khi nghiệp vụ sử dụng.
+
+### Tính đúng và cách điều tra
+9. Set giữ thứ tự chèn cho các giá trị; đây là bỏ trùng primitive, không phải so nội dung object.
+10. Copy mảng nông chưa copy object bên trong; tạo object mới tại chính đường cần đổi.
+11. Promise.all dừng chờ kết quả thành công chung khi reject nhưng không tự ngắt các tác vụ đã bắt đầu.
+12. Signal là thông báo hợp tác; fetch hỗ trợ nhưng một hàm tùy ý phải tự kiểm signal.
+
+### Rủi ro và lựa chọn phương án
+13. Giới hạn worker giảm tải đồng thời; lỗi và thứ tự kết quả vẫn cần chính sách riêng.
+14. Đồng hồ được tiêm cho phép thử trước, đúng và sau hạn một cách xác định.
+15. Stub nhỏ có chủ đích giúp kiểm nhánh; vẫn cần kiểm hợp đồng tích hợp để phát hiện lệch thực tế.
+16. Tách tính toán thuần khỏi đọc file giúp kiểm nhanh và tái lập nhưng vẫn cần dữ liệu biên.
+
+### Dự án, bằng chứng và bàn giao
+17. Phân biệt lỗi đọc, parse và schema giúp người học sửa đúng tầng; không in dữ liệu nhạy cảm.
+18. Hợp đồng có thể cho null hoặc optional riêng; dùng hasOwn để nhận biết thiếu khi cần.
+19. CLI phải có trạng thái máy đọc được; thông báo dễ đọc không thay thế exit code.
+20. Ma trận lỗi bao phủ các ranh giới I/O, parse và nghiệp vụ; ghi rõ output và exit code kỳ vọng.
+
+PRACTICE: Làm 20 câu trong 45 phút, không xem phần chữa trước khi trả lời. Mỗi câu 1 điểm; đạt 14/20 là ngưỡng luyện nội bộ. Với 3 câu sai, viết tình huống phản ví dụ và kiểm lại bằng thao tác lab; điểm khóa không tự xác nhận năng lực nghề hoặc chứng chỉ.
+Q: Giá trị nào làm điều kiện === 0 đúng?
++ Số 0
+- Chuỗi "0"
+- Mảng rỗng
+Q: Tại sao hàm kiểm dữ liệu nên trả kết quả thay vì chỉ console.log?
++ Để bên gọi có thể assert và quyết định tiếp
+- Để biến mọi lỗi thành chuỗi rỗng
+- Để bỏ qua kiểu dữ liệu
+Q: Vòng lặp xử lý mảng dài n nên dừng ở đâu?
++ i < n
+- i <= n
+- i === n ngay từ đầu
+Q: Đọc thuộc tính sâu của object chưa biết nguồn nên làm gì trước?
++ Kiểm sự tồn tại và kiểu các lớp
+- Ép JSON thành chuỗi rồi tìm bằng includes
+- Tin mọi response đều giống mẫu
+Q: await một Promise bị reject mà không catch dẫn đến gì?
++ Hàm async trả Promise reject
+- Lệnh sau chắc chắn chạy như thường
+- Promise tự thành null
+Q: Bộ test mini xác nhận phép cộng bằng cách nào?
++ So actual với expected và báo sai có ngữ cảnh
+- Chỉ in actual cho người nhìn
+- Luôn bắt lỗi rồi trả true
+Q: import trong Node ESM cần cấu hình nào phù hợp?
++ type: module hoặc đuôi .mjs
+- Đổi mọi biến thành global
+- Bật chế độ mạng
+Q: Ranh giới kiểm payload có nhiệm vụ gì?
++ Đổi dữ liệu chưa tin thành cấu trúc đã kiểm
+- Bỏ mọi trường không hiểu mà không báo
+- Bắt mọi lỗi thành thành công
+Q: Cách nào bỏ trùng mã nhưng giữ thứ tự xuất hiện đầu?
++ [...new Set(ids)]
+- ids.sort() luôn đủ
+- ids.map(String) luôn đủ
+Q: Để tăng số lượng một dòng mà giữ bản gốc nên dùng gì?
++ map và tạo object mới cho dòng sửa
+- Sửa trực tiếp item.qty trong map
+- Xóa mảng nguồn
+Q: Promise.all có tự hủy các công việc còn lại khi một việc reject không?
++ Không, cần cơ chế hủy riêng
+- Có, luôn dừng mọi request
+- Có, chỉ khi có ba Promise
+Q: AbortController có hiệu lực với tác vụ nào?
++ Tác vụ thực sự đọc và xử lý signal
+- Mọi vòng lặp CPU đang chạy
+- Mọi Promise trong tiến trình
+Q: Hàng đợi có hai worker giúp gì?
++ Giới hạn tối đa hai tác vụ đang chạy trong thiết kế đó
+- Đảm bảo request nào cũng thành công
+- Đảm bảo thứ tự hoàn thành
+Q: Fake clock hữu ích nhất cho trường hợp nào?
++ Kiểm timeout tại ranh giới mà không ngủ thật
+- Kiểm độ trễ mạng sản xuất
+- Bỏ mọi assertion thời gian
+Q: Stub nên mô phỏng điều gì?
++ Hợp đồng và các nhánh lỗi cần kiểm
+- Mọi dòng nội bộ của dependency
+- Một thành công cố định cho tất cả ca
+Q: Hàm thuần có lợi điểm nào trong test?
++ Cùng input cho cùng output, không phụ thuộc I/O ẩn
+- Không bao giờ có bug
+- Không cần kiểm biên
+Q: Bộ kiểm file gặp JSON sai cú pháp nên báo gì?
++ Tên file và lỗi parse, trạng thái thất bại
+- Payload gốc đầy đủ dù chứa riêng tư
+- Một kết quả hợp lệ rỗng
+Q: Thiếu trường qty khác qty:null ở đâu?
++ Thiếu là không có thuộc tính, null là giá trị tường minh
+- Hai trường hợp luôn giống nhau
+- Null tự bằng số 0 trong mọi kiểm tra
+Q: Mã thoát khác 0 của công cụ kiểm dùng để làm gì?
++ Cho shell và CI nhận ra kiểm tra thất bại
+- Xóa file lỗi tự động
+- Ẩn lỗi khỏi báo cáo
+Q: Trước khi bàn giao dự án cần kiểm nhánh nào?
++ File hợp lệ, sai JSON, sai kiểu và file không đọc được
+- Chỉ ví dụ thành công
+- Chỉ tên file thật dài

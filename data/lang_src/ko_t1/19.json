@@ -1,0 +1,595 @@
+{
+ "no": 19,
+ "title": "Ôn tập tổng hợp 1 – lịch và sinh hoạt của một ngày chung",
+ "sub": "시간·장소·횟수 / 안·못 / câu hỏi có mục tiêu",
+ "goals": [
+  "Gộp được người, nơi, giờ và thời lượng trong một lịch ngắn.",
+  "Giải thích được một việc không muốn làm và một việc chưa thể làm.",
+  "Hỏi đúng dữ kiện còn thiếu thay vì hỏi lại toàn bộ lịch."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Điểm xuất phát",
+   "html": "<p>Bạn nối thông tin đã học từ tự giới thiệu đến sinh hoạt: ai tham gia, gặp ở đâu, lúc nào, làm bao lâu và có trở ngại gì. Mục tiêu là tạo lịch mà một người khác dùng được.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Âm cần nghe trong ngữ liệu",
+   "items": [
+    {
+     "rr": "yeollak",
+     "vi": "ㄴ đứng trước ㄹ đọc thành chuỗi ㄹ; giữ chữ 연락.",
+     "sym": "연락"
+    },
+    {
+     "rr": "geotgi",
+     "vi": "Âm ㄱ sau âm cuối đọc căng trong lời nói, không thêm một âm tiết vào giữa.",
+     "sym": "걷기"
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm cần dùng",
+   "items": [
+    {
+     "w": "모임",
+     "rr": "moim",
+     "vi": "buổi gặp nhóm",
+     "ex": "토요일에 모임이 있어요.",
+     "exVi": "Thứ bảy có buổi gặp nhóm.",
+     "pos": "phr"
+    },
+    {
+     "w": "참가자",
+     "rr": "chamgaja",
+     "vi": "người tham gia",
+     "ex": "참가자는 네 명이에요.",
+     "exVi": "Có bốn người tham gia.",
+     "pos": "phr"
+    },
+    {
+     "w": "출발",
+     "rr": "chulbal",
+     "vi": "việc khởi hành",
+     "ex": "출발 시간은 아홉 시예요.",
+     "exVi": "Giờ khởi hành là chín giờ.",
+     "pos": "phr"
+    },
+    {
+     "w": "도착",
+     "rr": "dochak",
+     "vi": "việc đến nơi",
+     "ex": "도착 후에 쉬어요.",
+     "exVi": "Sau khi đến nơi, chúng tôi nghỉ.",
+     "pos": "phr"
+    },
+    {
+     "w": "준비",
+     "rr": "junbi",
+     "vi": "việc chuẩn bị",
+     "ex": "저녁에 준비를 해요.",
+     "exVi": "Tôi chuẩn bị vào buổi tối.",
+     "pos": "phr"
+    },
+    {
+     "w": "물병",
+     "rr": "mulbyeong",
+     "vi": "bình nước",
+     "ex": "물병을 가지고 와요.",
+     "exVi": "Hãy mang bình nước đến.",
+     "pos": "phr"
+    },
+    {
+     "w": "도시락",
+     "rr": "dosirak",
+     "vi": "cơm hộp",
+     "ex": "저는 도시락을 만들어요.",
+     "exVi": "Tôi làm cơm hộp.",
+     "pos": "phr"
+    },
+    {
+     "w": "간식",
+     "rr": "gansik",
+     "vi": "đồ ăn nhẹ",
+     "ex": "간식은 조금만 사요.",
+     "exVi": "Tôi chỉ mua một ít đồ ăn nhẹ.",
+     "pos": "phr"
+    },
+    {
+     "w": "걷기",
+     "rr": "geotgi",
+     "vi": "việc đi bộ",
+     "ex": "걷기는 삼십 분이에요.",
+     "exVi": "Phần đi bộ kéo dài ba mươi phút.",
+     "pos": "phr"
+    },
+    {
+     "w": "쉬는 시간",
+     "rr": "swineun sigan",
+     "vi": "giờ nghỉ",
+     "ex": "쉬는 시간에 물을 마셔요.",
+     "exVi": "Tôi uống nước vào giờ nghỉ.",
+     "pos": "phr"
+    },
+    {
+     "w": "확인",
+     "rr": "hwagin",
+     "vi": "việc xác nhận",
+     "ex": "시간 확인을 먼저 해요.",
+     "exVi": "Chúng tôi xác nhận giờ trước.",
+     "pos": "phr"
+    },
+    {
+     "w": "연락",
+     "rr": "yeollak",
+     "vi": "việc liên lạc",
+     "ex": "출발 전에 연락해요.",
+     "exVi": "Tôi liên lạc trước khi khởi hành.",
+     "pos": "phr"
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "시간·장소·횟수 / 안·못 / câu hỏi có mục tiêu",
+   "html": "<p>Ôn theo thông tin cần chuyển: 사람+은/는 giới thiệu, nơi xảy ra hành động dùng 에서, điểm đến và giờ dùng 에. 안 nhấn không thực hiện; 못 nêu chưa thể thực hiện vì điều kiện hay năng lực. Câu hỏi 몇 명 lấy số người, 몇 시 lấy giờ, 얼마나 lấy độ dài theo ngữ cảnh, 몇 번 lấy số lần. Một lịch đủ dùng cần ghép các đơn vị nhưng không trộn: 아홉 시 là lúc bắt đầu, 삼십 분은 độ dài, 한 달에 한 번 là tần suất. Khi bạn nghe nhầm, sửa đúng thành phần sai rồi xác nhận lại cả câu hẹn. Bài này không mở ngữ pháp mới; từ 출발 và 도착 là danh từ giúp đặt nhãn rõ cho lịch.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Ý cần giữ"
+    ],
+    [
+     "몇 명 / 몇 시 / 얼마나",
+     "Hỏi số người / giờ / độ dài"
+    ],
+    [
+     "입구에서 만나요; 공원에 가요",
+     "Nơi gặp khác điểm đến"
+    ],
+    [
+     "안 먹어요 / 못 가요",
+     "Không ăn / không thể đi"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "참가자는 네 명이에요.",
+     "vi": "Có bốn người tham gia."
+    },
+    {
+     "t": "아홉 시에 종이방 입구에서 만나요.",
+     "vi": "Chúng ta gặp lúc chín giờ tại lối vào Phòng Giấy."
+    },
+    {
+     "t": "저는 간식을 안 먹어요.",
+     "vi": "Tôi không ăn đồ ăn nhẹ."
+    },
+    {
+     "t": "다리가 아파서 오래 못 걸어요.",
+     "vi": "Chân đau nên tôi không thể đi bộ lâu."
+    }
+   ],
+   "tips": [
+    "Gộp chín giờ và ba mươi phút thành giờ chín rưỡi: bài nói hai loại đơn vị.",
+    "Nhắc công viên như nơi gặp dù đã được sửa: giữ nơi chốt cuối là lối vào.",
+    "Dùng 안 thay 못 khi muốn nói đau chân không thể đi: nêu đúng ý giới hạn."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe để giải quyết việc cụ thể",
+   "lang": "ko-KR",
+   "note": "Chốt một buổi đi bộ giả định, có một người cần quãng đi ngắn và cả nhóm phải xác nhận nơi gặp.",
+   "lines": [
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "토요일 모임에 몇 명이 와요?",
+     "vi": "Buổi gặp thứ bảy có mấy người đến?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "네 명이 와요. 아홉 시에 만나요.",
+     "vi": "Bốn người. Chúng ta gặp lúc chín giờ."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "공원 안에서 만나요?",
+     "vi": "Gặp trong công viên à?"
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "아니요. 종이방 입구에서 먼저 만나요.",
+     "vi": "Không. Trước tiên gặp ở lối vào Phòng Giấy."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "얼마나 걸어요? 저는 오래 못 걸어요.",
+     "vi": "Đi bộ bao lâu? Tôi không thể đi lâu."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "삼십 분만 걸어요. 그 후에 쉬어요.",
+     "vi": "Chỉ đi ba mươi phút. Sau đó nghỉ."
+    },
+    {
+     "s": "나린",
+     "g": "f",
+     "t": "저는 간식은 안 먹어요. 물병만 가지고 가요.",
+     "vi": "Tôi không ăn đồ ăn nhẹ. Tôi chỉ mang bình nước."
+    },
+    {
+     "s": "가온",
+     "g": "m",
+     "t": "좋아요. 출발 전에 다시 연락해요.",
+     "vi": "Được. Trước khi khởi hành chúng ta liên lạc lại."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Có mấy người tham gia?",
+     "o": [
+      "Chín người",
+      "Ba mươi người",
+      "Bốn người"
+     ],
+     "a": 2,
+     "e": "네 명 là số người; 아홉 시 là giờ."
+    },
+    {
+     "q": "Địa điểm gặp đã được sửa thành đâu?",
+     "o": [
+      "Nhà Gaon",
+      "Lối vào Phòng Giấy",
+      "Trong công viên"
+     ],
+     "a": 1,
+     "e": "종이방 입구에서 먼저 만나요 sửa suy đoán công viên."
+    },
+    {
+     "q": "Vì sao cần hỏi độ dài quãng đi?",
+     "o": [
+      "Một người không thể đi lâu",
+      "Mọi người không muốn uống nước",
+      "Không có ai tham gia"
+     ],
+     "a": 0,
+     "e": "저는 오래 못 걸어요 nêu giới hạn thực tế."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Lịch có thể dùng được",
+   "title": "Lịch có thể dùng được",
+   "text": "이번 모임은 토요일에 있어요. 참가자는 나린 씨, 가온 씨와 친구 두 명이에요. 네 사람은 아침 아홉 시에 종이방 입구에서 만나요. 공원 안에서 만나지 않아요. 먼저 이름과 준비물을 확인해요. 나린 씨는 작은 물병과 도시락을 가지고 와요. 가온 씨는 간식을 조금 사요. 한 친구는 다리가 아파서 오래 못 걸어요. 그래서 걷기 시간은 삼십 분이에요. 열 시에는 공원 옆 작은 방에서 쉬어요. 비가 오면 밖에 안 나가요. 작은 방에서 그림을 보고 이야기해요. 이 모임은 매일 하지 않아요. 한 달에 한 번 해요. 참가자들은 금요일 저녁에 다시 연락해요. 시간과 장소가 같은지 확인해요.",
+   "vi": "Buổi gặp diễn ra thứ bảy. Narin, Gaon và hai người bạn, tổng cộng bốn người, gặp lúc chín giờ sáng ở lối vào Phòng Giấy chứ không gặp bên trong công viên. Họ kiểm tên và đồ chuẩn bị trước. Narin mang bình nước nhỏ và cơm hộp; Gaon mua ít đồ ăn nhẹ. Một người đau chân nên không thể đi lâu, vì vậy phần đi bộ kéo dài ba mươi phút. Mười giờ họ nghỉ trong phòng nhỏ cạnh công viên. Nếu mưa, họ không ra ngoài mà xem tranh và nói chuyện trong phòng. Buổi gặp được tổ chức một lần mỗi tháng. Tối thứ sáu họ liên lạc lại để xác nhận giờ và nơi vẫn như cũ.",
+   "gloss": [
+    {
+     "w": "모임",
+     "rr": "moim",
+     "vi": "buổi gặp nhóm"
+    },
+    {
+     "w": "참가자",
+     "rr": "chamgaja",
+     "vi": "người tham gia"
+    },
+    {
+     "w": "준비",
+     "rr": "junbi",
+     "vi": "việc chuẩn bị"
+    },
+    {
+     "w": "물병",
+     "rr": "mulbyeong",
+     "vi": "bình nước"
+    },
+    {
+     "w": "도시락",
+     "rr": "dosirak",
+     "vi": "cơm hộp"
+    },
+    {
+     "w": "간식",
+     "rr": "gansik",
+     "vi": "đồ ăn nhẹ"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Tần suất của buổi gặp là gì?",
+     "o": [
+      "Ba lần mỗi tuần",
+      "Một lần mỗi tháng",
+      "Mỗi ngày"
+     ],
+     "a": 1,
+     "e": "한 달에 한 번 khác giờ chín giờ của một buổi cụ thể."
+    },
+    {
+     "q": "Nếu mưa nhóm làm gì?",
+     "o": [
+      "Xem tranh và nói trong phòng",
+      "Đi bộ lâu hơn",
+      "Không liên lạc nữa"
+     ],
+     "a": 0,
+     "e": "비가 오면...작은 방에서 chỉ phương án thay thế."
+    },
+    {
+     "q": "Ai mua đồ ăn nhẹ?",
+     "o": [
+      "Narin",
+      "Cả bốn mỗi người một hộp",
+      "Gaon"
+     ],
+     "a": 2,
+     "e": "가온 씨는 간식을 조금 사요 xác định người."
+    },
+    {
+     "q": "Tối thứ sáu liên lạc để làm gì?",
+     "o": [
+      "Hủy tất cả chuẩn bị",
+      "Xác nhận giờ và nơi",
+      "Đổi sang gặp hằng ngày"
+     ],
+     "a": 1,
+     "e": "Câu cuối nhấn 시간과 장소가 같은지 확인."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói và nhận phản hồi",
+   "tasks": [
+    {
+     "p": "Hỏi và chốt ba thông tin còn thiếu: số người, nơi gặp và độ dài đi bộ.",
+     "model": "가: 몇 명이 와요? 나: 네 명이에요. 가: 어디에서 만나요? 나: 종이방 입구에서 만나요. 가: 얼마나 걸어요? 나: 삼십 분만 걸어요.",
+     "vi": "A hỏi riêng số người, nơi và thời lượng. B đáp bốn người, tại lối vào Phòng Giấy và ba mươi phút."
+    },
+    {
+     "p": "Nói giới hạn của mình và đề nghị giờ nghỉ.",
+     "model": "저는 다리가 아파서 오래 못 걸어요. 삼십 분 후에 조금 쉬어요. 괜찮아요?",
+     "vi": "Chân tôi đau nên không đi lâu được. Sau ba mươi phút nghỉ một chút nhé, có được không?"
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết cho người nhận hiểu được",
+   "task": "Viết đúng sáu câu mời bạn vào một lịch giả định: ngày, số người, giờ và nơi gặp, độ dài hoạt động, đồ mang theo và cách xác nhận.",
+   "min": 80,
+   "model": "토요일에 모임이 있어요. 참가자는 네 명이에요. 아홉 시에 종이방 입구에서 만나요. 삼십 분 동안 걸어요. 물병을 가지고 오세요. 금요일에 시간을 다시 확인해 주세요.",
+   "modelVi": "Thứ bảy có buổi gặp với bốn người. Chúng ta gặp lúc chín giờ ở lối vào Phòng Giấy, đi bộ ba mươi phút. Xin mang bình nước và xác nhận lại giờ vào thứ sáu.",
+   "tips": [
+    "Sắp ý theo yêu cầu Viết đúng sáu câu mời bạn vào một lịch giả định: ngày, số người, giờ và nơi gặp, độ dài hoạt động, đồ mang theo và cách xác nhận.; chỉ đưa dữ kiện cần để người nhận hiểu tình huống.",
+    "Dùng 시간·장소·횟수 / 안·못 / câu hỏi có mục tiêu theo ý nghĩa đã giải thích, không thay mọi đuôi chỉ vì chúng trông giống nhau."
+   ],
+   "checklist": [
+    "Sản phẩm đáp đủ mục tiêu: Gộp được người, nơi, giờ và thời lượng trong một lịch ngắn.",
+    "Câu có 시간·장소·횟수 / 안·못 / câu hỏi có mục tiêu giữ đúng vai và thời điểm của người nói.",
+    "Người đọc sản phẩm có thể trả lời câu “Tần suất của buổi gặp là gì?” khi dữ kiện tương ứng được đưa vào; không phải suy từ một chữ khó nhìn."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Trong câu “토요일에 모임이 있어요.”, cụm “모임” có nghĩa gì?",
+   "o": [
+    "việc đến nơi",
+    "cơm hộp",
+    "buổi gặp nhóm"
+   ],
+   "a": 2,
+   "e": "Thứ bảy có buổi gặp nhóm. Đây là cách dùng buổi gặp nhóm trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “참가자는 네 명이에요.”, cụm “참가자” có nghĩa gì?",
+   "o": [
+    "đồ ăn nhẹ",
+    "người tham gia",
+    "việc chuẩn bị"
+   ],
+   "a": 1,
+   "e": "Có bốn người tham gia. Đây là cách dùng người tham gia trong tình huống đang nói."
+  },
+  {
+   "t": "mc",
+   "q": "Trong câu “출발 시간은 아홉 시예요.”, cụm “출발” có nghĩa gì?",
+   "o": [
+    "việc khởi hành",
+    "bình nước",
+    "việc đi bộ"
+   ],
+   "a": 0,
+   "e": "Giờ khởi hành là chín giờ. Đây là cách dùng việc khởi hành trong tình huống đang nói."
+  },
+  {
+   "t": "fill",
+   "q": "참가자는 네 ___. (người, câu lịch sự)",
+   "a": "명이에요",
+   "e": "명 là đơn vị đếm người, kết hợp 이에요 sau batchim."
+  },
+  {
+   "t": "fill",
+   "q": "다리가 아파서 오래 ___ 걸어요. (không thể)",
+   "a": "못",
+   "e": "Giới hạn do chân đau phù hợp 못."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Tôi không ăn đồ ăn nhẹ.",
+   "w": [
+    "간식을",
+    "안",
+    "먹어요",
+    "저는"
+   ],
+   "a": "저는 간식을 안 먹어요.",
+   "e": "Câu đúng là 저는 간식을 안 먹어요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt tôi không ăn đồ ăn nhẹ."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Chân đau nên tôi không thể đi bộ lâu.",
+   "w": [
+    "아파서",
+    "오래",
+    "못",
+    "걸어요",
+    "다리가"
+   ],
+   "a": "다리가 아파서 오래 못 걸어요.",
+   "e": "Câu đúng là 다리가 아파서 오래 못 걸어요. Hãy giữ các trợ từ với từ đứng trước để diễn đạt chân đau nên tôi không thể đi bộ lâu."
+  },
+  {
+   "t": "match",
+   "q": "Nối các cụm liên quan cơm hộp và việc xác nhận với nghĩa phù hợp trong tình huống.",
+   "pairs": [
+    [
+     "도시락",
+     "cơm hộp"
+    ],
+    [
+     "간식",
+     "đồ ăn nhẹ"
+    ],
+    [
+     "걷기",
+     "việc đi bộ"
+    ],
+    [
+     "쉬는 시간",
+     "giờ nghỉ"
+    ],
+    [
+     "확인",
+     "việc xác nhận"
+    ]
+   ],
+   "e": "Cụm 도시락 diễn đạt cơm hộp, khác 확인 là việc xác nhận. Hãy dùng câu ví dụ để kiểm chức năng trước khi ghép."
+  },
+  {
+   "t": "listen",
+   "say": "토요일 모임에 몇 명이 와요? 네 명이 와요. 아홉 시에 만나요. 공원 안에서 만나요? 아니요. 종이방 입구에서 먼저 만나요. 얼마나 걸어요? 저는 오래 못 걸어요. 삼십 분만 걸어요. 그 후에 쉬어요. 저는 간식은 안 먹어요. 물병만 가지고 가요. 좋아요. 출발 전에 다시 연락해요.",
+   "lang": "ko-KR",
+   "q": "Có mấy người tham gia?",
+   "o": [
+    "Chín người",
+    "Ba mươi người",
+    "Bốn người"
+   ],
+   "a": 2,
+   "e": "Hãy nghe căn cứ cho câu “Có mấy người tham gia?”: 네 명 là số người; 아홉 시 là giờ."
+  },
+  {
+   "t": "listen",
+   "say": "토요일 모임에 몇 명이 와요? 네 명이 와요. 아홉 시에 만나요. 공원 안에서 만나요? 아니요. 종이방 입구에서 먼저 만나요. 얼마나 걸어요? 저는 오래 못 걸어요. 삼십 분만 걸어요. 그 후에 쉬어요. 저는 간식은 안 먹어요. 물병만 가지고 가요. 좋아요. 출발 전에 다시 연락해요.",
+   "lang": "ko-KR",
+   "q": "Địa điểm gặp đã được sửa thành đâu?",
+   "o": [
+    "Nhà Gaon",
+    "Lối vào Phòng Giấy",
+    "Trong công viên"
+   ],
+   "a": 1,
+   "e": "Hãy nghe căn cứ cho câu “Địa điểm gặp đã được sửa thành đâu?”: 종이방 입구에서 먼저 만나요 sửa suy đoán công viên."
+  },
+  {
+   "t": "dict",
+   "say": "이번 모임은 토요일에 있어요.",
+   "a": "이번 모임은 토요일에 있어요.",
+   "lang": "ko-KR",
+   "e": "Câu bắt đầu bằng “이번 모임은” và kết thúc bằng “있어요.”. Giữ các khối chữ trong từng từ, viết cách giữa các từ như khi đọc lại cả câu; không đổi cách viết theo một âm nối nghe được."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào giữ cả giờ và độ dài đúng?",
+   "o": [
+    "아홉 시에 만나서 삼십 분 걸어요.",
+    "삼십 분에 만나서 아홉 번 걸어요.",
+    "네 명에 만나서 한 달 걸어요."
+   ],
+   "a": 0,
+   "e": "아홉 시 chỉ mốc, 삼십 분 chỉ độ dài trong lịch."
+  },
+  {
+   "t": "mc",
+   "q": "Bạn đã biết ngày nhưng chưa biết nơi, hỏi gì?",
+   "o": [
+    "무슨 요일이에요?",
+    "몇 월이에요?",
+    "어디에서 만나요?"
+   ],
+   "a": 2,
+   "e": "Chọn câu hỏi đúng phần thiếu thay vì lặp ngày."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ 모임 / 준비 / 연락, tranh hoặc sơ đồ cho tình huống Chốt một buổi đi bộ giả định, có một người cần quãng đi ngắn và cả nhóm phải xác nhận nơi gặp.; giáo viên nghe trước bản TTS để kiểm các số và âm khó.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Giáo viên nêu câu hỏi “Có mấy người tham gia?”. Học viên dự đoán hai hướng trả lời rồi ghi điều cần nghe để phân biệt chúng; chưa mở lời thoại."
+   },
+   {
+    "t": "20 phút",
+    "do": "Làm việc với thẻ “모임” và “도착”. Cho học viên ghép hai câu ví dụ tương ứng với tranh hoặc tình huống, sau đó tự giải thích vì sao không đổi chỗ hai cụm."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đối chiếu “참가자는 네 명이에요.” với “아홉 시에 종이방 입구에서 만나요.”. Khoanh thành phần thuộc 시간·장소·횟수 / 안·못 / câu hỏi có mục tiêu và tạo một biến thể đổi nghĩa có chủ ý để cả lớp sửa."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nghe tình huống Chốt một buổi đi bộ giả định, có một người cần quãng đi ngắn và cả nhóm phải xác nhận nơi gặp. Lượt đầu lấy mục tiêu hai người, lượt sau ghi dữ kiện giải câu “Có mấy người tham gia?”; yêu cầu chỉ đúng lượt cung cấp căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nhập vai theo nhiệm vụ “Hỏi và chốt ba thông tin còn thiếu: số người, nơi gặp và độ dài đi bộ.”. Người nghe nhắc lại thông tin quyết định; người nói chỉ xác nhận nếu dữ kiện đã được truyền đúng."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai bắt đầu bằng “물병” và “연락”. Học viên viết lại một câu đã dùng từ tiết trước rồi đổi bối cảnh để kiểm có còn phù hợp hay không."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc “Lịch có thể dùng được” để giải câu “Tần suất của buổi gặp là gì?”. So câu chứng cứ với một phương án nhiễu và nêu dữ kiện nào làm phương án đó sai."
+   },
+   {
+    "t": "20 phút",
+    "do": "Giao lượt nói thứ hai: Nói giới hạn của mình và đề nghị giờ nghỉ. Bạn nghe chỉ phản hồi về mục tiêu nội dung và cấu trúc đang luyện, không sửa mọi lỗi giữa lúc người kia nói."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết theo đề: Viết đúng sáu câu mời bạn vào một lịch giả định: ngày, số người, giờ và nơi gặp, độ dài hoạt động, đồ mang theo và cách xác nhận. Đổi bản cho bạn đọc và đối chiếu yêu cầu “Sản phẩm đáp đủ mục tiêu: Gộp được người, nơi, giờ và thời lượng trong một lịch ngắn.”; người viết tự sửa một ý rồi giải thích căn cứ."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chốt bằng câu “Câu nào giữ cả giờ và độ dài đúng?”. Mỗi học viên nêu vì sao lựa chọn sai dễ gây nhầm, rồi tự chọn một câu từ sản phẩm để luyện lại ở nhà."
+   }
+  ],
+  "games": [
+   "Thẻ điều kiện: đổi 모임 thành 준비 trong câu mẫu nếu có nghĩa, sau đó giải thích điều kiện nào buộc phải sửa thêm ở vị ngữ.",
+   "Người kiểm căn cứ: hai bạn giải “Tần suất của buổi gặp là gì?”, chỉ câu hỗ trợ và bác một phương án nhiễu bằng đúng dữ kiện của bài."
+  ],
+  "errors": [
+   "Gộp chín giờ và ba mươi phút thành giờ chín rưỡi: bài nói hai loại đơn vị.",
+   "Nhắc công viên như nơi gặp dù đã được sửa: giữ nơi chốt cuối là lối vào.",
+   "Dùng 안 thay 못 khi muốn nói đau chân không thể đi: nêu đúng ý giới hạn.",
+   "Hỏi lại ngày khi thiếu nơi: lựa câu hỏi theo dữ kiện.",
+   "Bỏ phương án mưa khi mời người khác: thêm điều kiện có trong lịch."
+  ],
+  "homework": "Lập một tình huống mới có 모임 và 연락. Viết sản phẩm cùng loại với đề lớp nhưng đổi thông tin, gửi bạn nghe/đọc rồi tự sửa lỗi liên quan 시간·장소·횟수 / 안·못 / câu hỏi có mục tiêu."
+ }
+}

@@ -1,0 +1,240 @@
+{
+ "no": 62,
+ "lv": "l0",
+ "title": "Hỏi vị trí thẻ và xác nhận câu trả lời",
+ "sub": "Wh-question / yes-no question · nghe ngữ điệu theo ngữ cảnh",
+ "situation": "Hai bạn cất thẻ xanh tự làm trước khi kết thúc buổi học. Họ dùng câu hỏi mở để lấy vị trí rồi câu hỏi có/không để xác nhận. Ngữ điệu phụ thuộc thái độ/ngữ cảnh; câu hỏi không luôn lên giọng chỉ vì có dấu hỏi.",
+ "lang": "en-GB",
+ "lines": [
+  {
+   "s": "Lam Thoi",
+   "g": "m",
+   "t": "Where is the green card?",
+   "vi": "Thẻ xanh lá ở đâu?"
+  },
+  {
+   "s": "Nếp Mây",
+   "g": "f",
+   "t": "It is on the desk.",
+   "vi": "Nó ở trên bàn."
+  },
+  {
+   "s": "Lam Thoi",
+   "g": "m",
+   "t": "Is it under the desk?",
+   "vi": "Nó ở dưới bàn à?"
+  },
+  {
+   "s": "Nếp Mây",
+   "g": "f",
+   "t": "No, it is on the desk.",
+   "vi": "Không, nó ở trên bàn."
+  },
+  {
+   "s": "Lam Thoi",
+   "g": "m",
+   "t": "On the desk, next to the box?",
+   "vi": "Trên bàn, cạnh cái hộp phải không?"
+  },
+  {
+   "s": "Nếp Mây",
+   "g": "f",
+   "t": "Yes, next to the box.",
+   "vi": "Đúng, cạnh cái hộp."
+  },
+  {
+   "s": "Lam Thoi",
+   "g": "m",
+   "t": "Please ask me the first question.",
+   "vi": "Bạn hỏi mình câu đầu giúp nhé."
+  },
+  {
+   "s": "Nếp Mây",
+   "g": "f",
+   "t": "Where is the green card?",
+   "vi": "Thẻ xanh lá ở đâu?"
+  },
+  {
+   "s": "Lam Thoi",
+   "g": "m",
+   "t": "Good. Now ask to check the place.",
+   "vi": "Tốt. Bây giờ hỏi để kiểm vị trí."
+  },
+  {
+   "s": "Nếp Mây",
+   "g": "f",
+   "t": "The green card is on the desk.",
+   "vi": "Thẻ xanh lá ở trên bàn."
+  },
+  {
+   "s": "Lam Thoi",
+   "g": "m",
+   "t": "Is the card next to the box?",
+   "vi": "Thẻ có ở cạnh hộp không?"
+  },
+  {
+   "s": "Nếp Mây",
+   "g": "f",
+   "t": "Yes. Now we can put it away.",
+   "vi": "Có. Bây giờ chúng mình có thể cất nó."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "Where is the green card?",
+   "vi": "Thẻ xanh lá ở đâu?",
+   "note": "Where hỏi thông tin vị trí, thường có ngữ điệu xuống ở câu hỏi trung tính theo mẫu. Tùy ngữ cảnh có biến thể, không coi xuống giọng là luật tuyệt đối."
+  },
+  {
+   "t": "Is it under the desk?",
+   "vi": "Nó ở dưới bàn à?",
+   "note": "Đây là câu hỏi có/không; mẫu xác nhận có thể lên giọng. Dù ngữ điệu thế nào, under khác on nên phải kiểm cả từ chỉ vị trí."
+  },
+  {
+   "t": "on the desk",
+   "vi": "trên bàn",
+   "note": "On biểu thị trên bề mặt trong tình huống này, đối lập under là dưới. Không đoán nghĩa chỉ theo nhịp lên/xuống cuối câu."
+  },
+  {
+   "t": "next to the box",
+   "vi": "cạnh cái hộp",
+   "note": "Cụm bổ sung vị trí tương đối, không thay on the desk. Có thể cùng lúc ở trên bàn và ở cạnh hộp."
+  },
+  {
+   "t": "ask to check the place",
+   "vi": "hỏi để kiểm vị trí",
+   "note": "Một câu hỏi lấy thông tin mới khác câu hỏi xác nhận điều vừa nghe. Nói mục đích trước rồi chọn cấu trúc và ngữ điệu theo tình huống."
+  },
+  {
+   "t": "put it away",
+   "vi": "cất nó đi",
+   "note": "Put away chỉ hành động cất về chỗ theo ngữ cảnh, không có nghĩa chỉ đẩy vật ra xa; it thay cho một chiếc thẻ."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Thẻ màu gì?",
+   "o": [
+    "Xanh dương",
+    "Đỏ",
+    "Xanh lá"
+   ],
+   "a": 2,
+   "e": "Cả câu mở và câu xác nhận dùng green card, không lấy màu blue của tình huống bút khác."
+  },
+  {
+   "q": "Thẻ ở trên hay dưới bàn?",
+   "o": [
+    "Trên bàn",
+    "Dưới bàn",
+    "Không nói vị trí"
+   ],
+   "a": 0,
+   "e": "It is on the desk được nhắc và sửa lại giả định under, nên thẻ ở trên."
+  },
+  {
+   "q": "Thẻ nằm cạnh vật gì?",
+   "o": [
+    "Chiếc mũ",
+    "Cái hộp",
+    "Một con tàu"
+   ],
+   "a": 1,
+   "e": "Next to the box bổ sung rằng thẻ cạnh hộp; nó vẫn có thể ở trên bàn."
+  },
+  {
+   "q": "Câu hỏi nào lấy thông tin vị trí chưa biết?",
+   "o": [
+    "Is the card next to the box?",
+    "Put it away.",
+    "Where is the green card?"
+   ],
+   "a": 2,
+   "e": "Where yêu cầu người kia cung cấp nơi chốn; Is... kiểm một vị trí đã nêu, còn Put... là mệnh lệnh."
+  },
+  {
+   "q": "Có phải mọi câu có dấu hỏi đều bắt buộc lên giọng không?",
+   "o": [
+    "Không, phụ thuộc loại câu và ngữ cảnh",
+    "Có luôn",
+    "Không được có ngữ điệu"
+   ],
+   "a": 0,
+   "e": "Bài đối chiếu Wh và yes/no theo mẫu trung tính nhưng nhấn mạnh ngữ điệu còn phụ thuộc mục đích/thái độ."
+  },
+  {
+   "q": "It trong put it away chỉ gì?",
+   "o": [
+    "Hai người học",
+    "Một chiếc thẻ",
+    "Mọi cái hộp"
+   ],
+   "a": 1,
+   "e": "It thay green card số ít. Nếu đổi thành nhiều thẻ, cần đổi đại từ theo nghĩa mới."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "No, it is on the desk.",
+   "lang": "en-GB",
+   "q": "Nghe và chọn nghĩa của cả câu.",
+   "o": [
+    "Không, nó ở trên bàn.",
+    "Trên bàn, cạnh cái hộp phải không?",
+    "Đúng, cạnh cái hộp."
+   ],
+   "a": 0,
+   "e": "Câu “No, it is on the desk.” diễn đạt: Không, nó ở trên bàn. Đối chiếu từ khóa, không chọn chỉ vì một âm quen."
+  },
+  {
+   "t": "listen",
+   "say": "Where is the green card?",
+   "lang": "en-GB",
+   "q": "Lượt vừa nghe nói điều gì?",
+   "o": [
+    "Bạn hỏi mình câu đầu giúp nhé.",
+    "Thẻ xanh lá ở đâu?",
+    "Tốt. Bây giờ hỏi để kiểm vị trí."
+   ],
+   "a": 1,
+   "e": "Người nói dùng “Where is the green card?”: Thẻ xanh lá ở đâu? Giữ cả mục đích hỏi hoặc xác nhận khi chọn nghĩa."
+  },
+  {
+   "t": "dict",
+   "say": "The green card is on the desk.",
+   "lang": "en-GB",
+   "a": "The green card is on the desk.",
+   "e": "Chép đúng câu “The green card is on the desk.”. Thẻ xanh lá ở trên bàn. Đọc lại theo cụm sau khi chép để kiểm âm mục tiêu, không thêm từ ngoài câu."
+  },
+  {
+   "t": "fill",
+   "q": "Điền giới từ trên bề mặt bàn: The card is ___ the desk.",
+   "a": "on",
+   "e": "On là trên bề mặt bàn trong tình huống. Under nghĩa dưới và đã bị sửa trong hội thoại, không cùng nghĩa với on."
+  },
+  {
+   "t": "order",
+   "q": "Ghép câu hỏi vị trí thẻ.",
+   "w": [
+    "the green card",
+    "is",
+    "Where"
+   ],
+   "a": "Where is the green card",
+   "e": "Where đứng đầu câu hỏi nơi chốn, is trước chủ ngữ the green card trong mẫu này; không giữ trật tự câu kể rồi thêm dấu hỏi."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Cất thẻ ở vị trí khác trong lớp giả; người nghe dùng Where để hỏi mới rồi Is... để xác nhận, kiểm cả giới từ.",
+   "model": "Where is the card? It is in the box. Is it in the box? Yes.",
+   "vi": "Thẻ ở đâu? Ở trong hộp. Có ở trong hộp không? Có."
+  },
+  {
+   "p": "Giáo viên đọc cùng một câu hỏi trong hai ngữ cảnh hỏi mới/xin xác nhận do nghe không rõ. Mô tả bằng tiếng Việt điều bạn nghe, không áp luật mọi câu hỏi lên giọng.",
+   "model": "Where is the card? Please say it again. Is it on the desk?",
+   "vi": "Thẻ ở đâu? Xin nói lại. Nó ở trên bàn phải không?"
+  }
+ ]
+}

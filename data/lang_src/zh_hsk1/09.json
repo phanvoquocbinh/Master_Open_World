@@ -1,159 +1,1089 @@
 {
-  "no": 9,
-  "title": "今天天气怎么样？– Thời tiết: 怎么样, 太…了, 很, 有点儿",
-  "sub": "Jīntiān tiānqì zěnmeyàng? 今天天气怎么样？",
-  "goals": [
-    "Hỏi và tả thời tiết: 今天天气怎么样？– 很热 / 下雨了 / 十二度",
-    "Dùng 怎么样 để hỏi tình trạng và để đề nghị (…，怎么样？)",
-    "Diễn tả mức độ đúng sắc thái: 很, 真, 太…了, 有点儿, 不太",
-    "Nói về mùa, nhiệt độ, quần áo; dự đoán với 会 (明天会下雨吗？)",
-    "Đọc chuẩn r (热), l (冷), ü (雨), üe (雪) và phân biệt 下雨 / 下午"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng (生词 shēngcí)", "items": [
-      {"w": "天气", "py": "tiānqì", "hv": "thiên khí", "pos": "n", "vi": "thời tiết", "ex": "今天天气很好。", "exPy": "Jīntiān tiānqì hěn hǎo.", "exVi": "Hôm nay thời tiết rất đẹp."},
-      {"w": "怎么样", "py": "zěnmeyàng", "hv": "chẩm ma dạng", "pos": "pron", "vi": "thế nào; …được không? (đề nghị)", "ex": "河内的天气怎么样？", "exPy": "Hénèi de tiānqì zěnmeyàng?", "exVi": "Thời tiết Hà Nội thế nào?"},
-      {"w": "太", "py": "tài", "hv": "thái", "pos": "adv", "vi": "quá (太…了)", "ex": "太热了！", "exPy": "Tài rè le!", "exVi": "Nóng quá!"},
-      {"w": "冷", "py": "lěng", "hv": "lãnh", "pos": "adj", "vi": "lạnh", "ex": "北京的冬天很冷。", "exPy": "Běijīng de dōngtiān hěn lěng.", "exVi": "Mùa đông Bắc Kinh rất lạnh."},
-      {"w": "热", "py": "rè", "hv": "nhiệt", "pos": "adj", "vi": "nóng", "ex": "今天三十八度，太热了！", "exPy": "Jīntiān sānshíbā dù, tài rè le!", "exVi": "Hôm nay 38 độ, nóng quá!"},
-      {"w": "下雨", "py": "xià yǔ", "hv": "hạ vũ", "pos": "v", "vi": "mưa (trời mưa)", "ex": "明天会下雨吗？", "exPy": "Míngtiān huì xià yǔ ma?", "exVi": "Ngày mai có mưa không?"},
-      {"w": "下雪", "py": "xià xuě", "hv": "hạ tuyết", "pos": "v", "vi": "tuyết rơi", "ex": "河内不下雪。", "exPy": "Hénèi bú xià xuě.", "exVi": "Hà Nội không có tuyết."},
-      {"w": "晴天", "py": "qíngtiān", "hv": "tình thiên", "pos": "n", "vi": "trời nắng, trời quang", "ex": "今天是晴天。", "exPy": "Jīntiān shì qíngtiān.", "exVi": "Hôm nay trời nắng."},
-      {"w": "阴天", "py": "yīntiān", "hv": "âm thiên", "pos": "n", "vi": "trời âm u", "ex": "昨天是阴天。", "exPy": "Zuótiān shì yīntiān.", "exVi": "Hôm qua trời âm u."},
-      {"w": "度", "py": "dù", "hv": "độ", "pos": "mw", "vi": "độ (nhiệt độ)", "ex": "今天三十度。", "exPy": "Jīntiān sānshí dù.", "exVi": "Hôm nay 30 độ."},
-      {"w": "有点儿", "py": "yǒudiǎnr", "hv": "hữu điểm nhi", "pos": "adv", "vi": "hơi, có chút (thường ý không vừa lòng)", "ex": "今天有点儿冷。", "exPy": "Jīntiān yǒudiǎnr lěng.", "exVi": "Hôm nay hơi lạnh."},
-      {"w": "真", "py": "zhēn", "hv": "chân", "pos": "adv", "vi": "thật, thật là", "ex": "你的衣服真漂亮！", "exPy": "Nǐ de yīfu zhēn piàoliang!", "exVi": "Quần áo của bạn đẹp thật!"},
-      {"w": "衣服", "py": "yīfu", "hv": "y phục", "pos": "n", "vi": "quần áo", "ex": "这件衣服很漂亮。", "exPy": "Zhè jiàn yīfu hěn piàoliang.", "exVi": "Bộ quần áo này rất đẹp."},
-      {"w": "穿", "py": "chuān", "hv": "xuyên", "pos": "v", "vi": "mặc, đi (giày)", "ex": "冬天要多穿衣服。", "exPy": "Dōngtiān yào duō chuān yīfu.", "exVi": "Mùa đông phải mặc nhiều quần áo."},
-      {"w": "漂亮", "py": "piàoliang", "hv": "phiêu lượng", "pos": "adj", "vi": "đẹp, xinh", "ex": "小兰很漂亮。", "exPy": "Xiǎo Lán hěn piàoliang.", "exVi": "Tiểu Lan rất xinh."},
-      {"w": "多", "py": "duō", "hv": "đa", "pos": "adj", "vi": "nhiều; (多 + V) làm nhiều hơn", "ex": "河内人很多。", "exPy": "Hénèi rén hěn duō.", "exVi": "Hà Nội rất đông người."},
-      {"w": "少", "py": "shǎo", "hv": "thiểu", "pos": "adj", "vi": "ít", "ex": "今天商店里人很少。", "exPy": "Jīntiān shāngdiàn li rén hěn shǎo.", "exVi": "Hôm nay trong cửa hàng rất ít người."},
-      {"w": "夏天", "py": "xiàtiān", "hv": "hạ thiên", "pos": "n", "vi": "mùa hè", "ex": "河内的夏天很热。", "exPy": "Hénèi de xiàtiān hěn rè.", "exVi": "Mùa hè Hà Nội rất nóng."},
-      {"w": "冬天", "py": "dōngtiān", "hv": "đông thiên", "pos": "n", "vi": "mùa đông", "ex": "你喜欢冬天吗？", "exPy": "Nǐ xǐhuan dōngtiān ma?", "exVi": "Bạn thích mùa đông không?"}
-    ]},
-    {"k": "sounds", "h": "Phát âm: r – l, eng, ü / üe, t – d, p bật hơi, 下雨 ≠ 下午", "items": [
-      {"sym": "r (热) – l (乐)", "ex": ["热", "很热"], "vi": "热 <b>rè</b>: uốn đầu lưỡi lên, rung dây thanh – gần “rơ” uốn lưỡi. Người Việt hay đọc thành “dơ” / “zơ”. 热 rè (nóng) ≠ 乐 lè (vui).", "pairs": [["热", "乐"]]},
-      {"sym": "l + eng (冷)", "ex": ["冷", "很冷"], "vi": "冷 <b>lěng</b>: l không qua mũi + eng (≈ “âng”, miệng hé) → gần “lẩng”. 冷 lěng ≠ 能 néng.", "pairs": [["冷", "能"]]},
-      {"sym": "ü (雨) – üe (雪)", "ex": ["雨", "雪", "下雨", "下雪"], "vi": "雨 <b>yǔ</b>, 雪 <b>xuě</b>: chu tròn môi. Cặp “chết người”: 下雨 xià yǔ (mưa) ≠ 下午 xiàwǔ (buổi chiều); 雪 xuě (tuyết) ≠ 写 xiě (viết).", "pairs": [["下雨", "下午"], ["雪", "写"]]},
-      {"sym": "t – d (太 / 带)", "ex": ["太", "太好了"], "vi": "太 <b>tài</b> bật hơi mạnh (≈ “th” tiếng Việt); d không bật hơi (≈ “t” tiếng Việt). 太 tài ≠ 带 dài.", "pairs": [["太", "带"]]},
-      {"sym": "p bật hơi (漂亮)", "ex": ["漂亮", "苹果"], "vi": "漂 <b>piào</b>: hai môi mím rồi bật hơi mạnh – KHÔNG phải “ph” (môi răng) của tiếng Việt. 亮 liang đọc nhẹ."},
-      {"sym": "3 + 3 (有点儿, 很冷)", "ex": ["有点儿", "很冷", "很少"], "vi": "有点儿 yǒudiǎnr → <b>yóudiǎnr</b>; 很冷 → hén lěng; 很少 → hén shǎo."}
-    ]},
-    {"k": "grammar", "h": "Ngữ pháp 1: 怎么样 – hỏi tình trạng & đề nghị", "html": "<p><b>怎么样</b> (zěnmeyàng) đứng cuối câu, có hai cách dùng:</p><ol><li><b>Hỏi tình trạng, nhận xét</b>: Danh từ + 怎么样？ – 天气怎么样？(Thời tiết thế nào?) 这个菜怎么样？(Món này thế nào?)</li><li><b>Đề nghị, hỏi ý kiến</b>: [lời đề nghị]，怎么样？ – 我们明天去看电影，怎么样？(Mai mình đi xem phim, được không?)</li></ol><p>Đã có 怎么样 thì KHÔNG thêm 吗. Trả lời bằng tính từ: 很好 / 不错 (búcuò – khá tốt) / 太热了…</p>", "table": [["Câu hỏi", "Trả lời"], ["今天天气怎么样？", "今天天气很好。"], ["北京的冬天怎么样？", "很冷，常常下雪。"], ["我们星期天去看电影，怎么样？", "好啊！/ 对不起，我很忙。"]], "ex": [
-      {"t": "河内的天气怎么样？— 夏天很热，冬天有点儿冷。", "py": "Hénèi de tiānqì zěnmeyàng? — Xiàtiān hěn rè, dōngtiān yǒudiǎnr lěng.", "vi": "Thời tiết Hà Nội thế nào? — Mùa hè rất nóng, mùa đông hơi lạnh."},
-      {"t": "这个菜怎么样？— 很好吃！", "py": "Zhège cài zěnmeyàng? — Hěn hǎochī!", "vi": "Món này thế nào? — Ngon lắm!"},
-      {"t": "我们喝咖啡，怎么样？— 好！", "py": "Wǒmen hē kāfēi, zěnmeyàng? — Hǎo!", "vi": "Mình đi uống cà phê, được không? — Được!"}
-    ], "tips": ["❌ <i>天气怎么样吗？</i> – thừa 吗.", "怎么样 (thế nào – tính chất) khác 怎么 (bằng cách nào – bài 11).", "Hỏi thăm sức khoẻ tự nhiên: 你身体怎么样？ (身体 shēntǐ – sức khoẻ, HSK 2)."]},
-    {"k": "grammar", "h": "Ngữ pháp 2: Thang mức độ – 太…了, 真, 很, 有点儿, 不太", "html": "<p>Tính từ tiếng Trung hầu như luôn cần trạng từ mức độ phía trước (bài 1: 很). Chọn đúng trạng từ để nói đúng sắc thái:</p><p><b>太…了</b> dùng cả khi khen (太好了！Tuyệt quá!) lẫn chê (太贵了！Đắt quá!). <b>有点儿 + tính từ</b> thường mang ý <b>không hài lòng</b>: 有点儿冷 (hơi lạnh, hơi khó chịu); nói ❌ 有点儿漂亮 nghe rất lạ.</p>", "table": [["Mức độ", "Cấu trúc", "Ví dụ", "Nghĩa"], ["quá (cảm thán)", "太 + tính từ + 了", "太热了！", "Nóng quá!"], ["thật là", "真 + tính từ", "真漂亮！", "Đẹp thật!"], ["(trung tính)", "很 + tính từ", "很冷。", "Lạnh."], ["hơi (không vừa ý)", "有点儿 + tính từ", "有点儿冷。", "Hơi lạnh."], ["không… lắm", "不太 + tính từ", "不太热。", "Không nóng lắm."], ["không", "不 + tính từ", "不冷。", "Không lạnh."]], "ex": [
-      {"t": "今天太热了！", "py": "Jīntiān tài rè le!", "vi": "Hôm nay nóng quá!"},
-      {"t": "你的衣服真漂亮！", "py": "Nǐ de yīfu zhēn piàoliang!", "vi": "Quần áo của bạn đẹp thật!"},
-      {"t": "今天有点儿冷。", "py": "Jīntiān yǒudiǎnr lěng.", "vi": "Hôm nay hơi lạnh."},
-      {"t": "河内的冬天不太冷。", "py": "Hénèi de dōngtiān bú tài lěng.", "vi": "Mùa đông Hà Nội không lạnh lắm."}
-    ], "tips": ["❌ <i>今天太热！</i> (thiếu 了) → ✅ 今天太热了！", "有点儿 + tính từ (hơi…) ≠ tính từ + 一点儿 (…hơn một chút – so sánh, HSK 2): ❌ <i>一点儿冷</i> → ✅ 有点儿冷。", "Ôn bài 1: ❌ <i>今天是冷</i> → ✅ 今天很冷 (không dùng 是 trước tính từ)."]},
-    {"k": "grammar", "h": "Ngữ pháp 3: 下雨, 下雪 là động từ; 会 = sẽ (dự đoán); nhiệt độ", "html": "<p>Mưa, tuyết là <b>động từ</b>: 下雨 (rơi mưa), 下雪 (rơi tuyết) – không cần chủ ngữ “trời” như tiếng Việt: 今天下雨 (Hôm nay trời mưa). Phủ định 不下雨; báo “mưa rồi!”: 下雨了！</p><p><b>会 + V</b> = sẽ (dự đoán khả năng): 明天会下雨吗？— 不会。</p><p>Nhiệt độ: số + 度 (三十度); dưới 0: 零下 + số + 度 (零下五度). Bốn mùa đọc theo Hán Việt y hệt: 春天 chūntiān (xuân), 夏天 (hạ), 秋天 qiūtiān (thu), 冬天 (đông).</p>", "table": [["Tiếng Việt", "Tiếng Trung"], ["Trời mưa rồi!", "下雨了！"], ["Hôm nay không mưa.", "今天不下雨。"], ["Ngày mai có mưa không?", "明天会下雨吗？"], ["Hôm nay trời nắng.", "今天是晴天。"], ["Bắc Kinh âm 10 độ.", "北京零下十度。"]], "ex": [
-      {"t": "明天会下雨吗？— 不会，明天是晴天。", "py": "Míngtiān huì xià yǔ ma? — Bú huì, míngtiān shì qíngtiān.", "vi": "Mai có mưa không? — Không đâu, mai trời nắng."},
-      {"t": "北京冬天常常下雪。", "py": "Běijīng dōngtiān chángcháng xià xuě.", "vi": "Mùa đông Bắc Kinh thường có tuyết. (常常 – thường, bài 12)"},
-      {"t": "冬天要多穿衣服。", "py": "Dōngtiān yào duō chuān yīfu.", "vi": "Mùa đông phải mặc nhiều quần áo. (要 = cần, phải)"},
-      {"t": "今天三十五度，太热了！", "py": "Jīntiān sānshíwǔ dù, tài rè le!", "vi": "Hôm nay 35 độ, nóng quá!"}
-    ], "tips": ["❌ <i>天下雨 / 天气下雨</i> (dịch “trời mưa”) → ✅ 下雨 / 今天下雨。", "❌ <i>今天很下雨</i> – 下雨 là động từ, không đi với 很. Mưa to: 下大雨.", "会 (sẽ) khác 会 (biết – bài 6): 明天会下雨 vs 我会说汉语."]},
-    {"k": "text", "h": "Văn hoá: thời tiết Trung Quốc & lời dặn “多穿衣服”", "html": "<p>Bắc Kinh: mùa đông rất lạnh và khô (có thể 零下十几度), có tuyết; mùa hè nóng ~35°C. Quảng Châu, Nam Ninh gần Việt Nam: nóng ẩm giống Hà Nội.</p><p>Người Trung Quốc hay dặn nhau: <b>多穿衣服！</b> (Mặc thêm áo vào!). Cấu trúc <b>多 / 少 + động từ</b> = làm nhiều hơn / ít hơn: 多喝水 (uống nhiều nước vào), 少吃 (ăn ít thôi).</p><p>Từ hay gặp trong bản tin thời tiết: 晴 qíng (nắng), 阴 yīn (âm u), 多云 duōyún (nhiều mây), 雨 yǔ (mưa), 雪 xuě (tuyết), 风 fēng (gió), 度 dù (độ C).</p>"},
-    {"k": "dialog", "h": "Nghe: Mùa đông Hà Nội – mùa đông Bắc Kinh", "lang": "zh-CN", "note": "Một sáng mùa đông ở Hà Nội, trời mưa lạnh. Anna nói chuyện với thầy Vương (người Bắc Kinh) ở trường. Nghe lần 1 không nhìn chữ: hôm nay bao nhiêu độ?", "lines": [
-      {"s": "王老师", "g": "m", "t": "安娜，早上好！今天天气怎么样？", "py": "Ānnà, zǎoshang hǎo! Jīntiān tiānqì zěnmeyàng?", "vi": "Anna, chào buổi sáng! Hôm nay thời tiết thế nào?"},
-      {"s": "安娜", "g": "f", "t": "有点儿冷，下雨了。今天十二度。", "py": "Yǒudiǎnr lěng, xià yǔ le. Jīntiān shí'èr dù.", "vi": "Hơi lạnh ạ, trời mưa rồi. Hôm nay 12 độ."},
-      {"s": "王老师", "g": "m", "t": "十二度？不冷！北京的冬天太冷了，有时候零下十度。", "py": "Shí'èr dù? Bù lěng! Běijīng de dōngtiān tài lěng le, yǒushíhou língxià shí dù.", "vi": "12 độ á? Không lạnh! Mùa đông Bắc Kinh lạnh lắm, có khi âm 10 độ."},
-      {"s": "安娜", "g": "f", "t": "零下十度？北京下雪吗？", "py": "Língxià shí dù? Běijīng xià xuě ma?", "vi": "Âm 10 độ ạ? Bắc Kinh có tuyết không thầy?"},
-      {"s": "王老师", "g": "m", "t": "下雪。北京的雪真漂亮！", "py": "Xià xuě. Běijīng de xuě zhēn piàoliang!", "vi": "Có tuyết. Tuyết Bắc Kinh đẹp lắm!"},
-      {"s": "安娜", "g": "f", "t": "河内冬天不下雪，可是有点儿冷。", "py": "Hénèi dōngtiān bú xià xuě, kěshì yǒudiǎnr lěng.", "vi": "Mùa đông Hà Nội không có tuyết, nhưng hơi lạnh."},
-      {"s": "王老师", "g": "m", "t": "你的衣服太少了！多穿衣服吧！", "py": "Nǐ de yīfu tài shǎo le! Duō chuān yīfu ba!", "vi": "Em mặc ít quá! Mặc thêm áo vào nhé!"},
-      {"s": "安娜", "g": "f", "t": "好。老师，您喜欢河内的夏天吗？", "py": "Hǎo. Lǎoshī, nín xǐhuan Hénèi de xiàtiān ma?", "vi": "Vâng ạ. Thầy có thích mùa hè Hà Nội không?"},
-      {"s": "王老师", "g": "m", "t": "不太喜欢。河内的夏天太热了，三十八度！", "py": "Bú tài xǐhuan. Hénèi de xiàtiān tài rè le, sānshíbā dù!", "vi": "Không thích lắm. Mùa hè Hà Nội nóng quá, 38 độ!"},
-      {"s": "安娜", "g": "f", "t": "我很喜欢夏天，夏天的衣服很漂亮！", "py": "Wǒ hěn xǐhuan xiàtiān, xiàtiān de yīfu hěn piàoliang!", "vi": "Em rất thích mùa hè, quần áo mùa hè đẹp lắm!"},
-      {"s": "王老师", "g": "m", "t": "明天天气怎么样？会下雨吗？", "py": "Míngtiān tiānqì zěnmeyàng? Huì xià yǔ ma?", "vi": "Ngày mai thời tiết thế nào? Có mưa không?"},
-      {"s": "安娜", "g": "f", "t": "不会。明天是晴天，不冷也不热。", "py": "Bú huì. Míngtiān shì qíngtiān, bù lěng yě bú rè.", "vi": "Không ạ. Mai trời nắng, không lạnh cũng không nóng."},
-      {"s": "王老师", "g": "m", "t": "太好了！明天我们在外面上课，怎么样？", "py": "Tài hǎo le! Míngtiān wǒmen zài wàimiàn shàng kè, zěnmeyàng?", "vi": "Tuyệt quá! Mai mình học ngoài trời, được không?"},
-      {"s": "安娜", "g": "f", "t": "好啊！", "py": "Hǎo a!", "vi": "Hay quá ạ!"}
-    ], "qs": [
-      {"q": "Hôm nay Hà Nội bao nhiêu độ?", "o": ["2 độ", "12 độ", "20 độ"], "a": 1, "e": "今天十二度 – shí'èr dù = 12 độ."},
-      {"q": "Mùa đông Bắc Kinh có tuyết không?", "o": ["Có", "Không", "Không nhắc đến"], "a": 0, "e": "北京下雪吗？— 下雪。"},
-      {"q": "Thầy Vương thấy mùa hè Hà Nội thế nào?", "o": ["Không thích lắm vì nóng quá", "Rất thích", "Hơi lạnh"], "a": 0, "e": "不太喜欢。河内的夏天太热了。"},
-      {"q": "Ngày mai thời tiết thế nào?", "o": ["Mưa, lạnh", "Nắng, không lạnh không nóng", "Có tuyết"], "a": 1, "e": "明天是晴天，不冷也不热。"},
-      {"q": "Thầy đề nghị: 明天我们在外面上课，___？(gõ chữ Hán hoặc pinyin)", "a": "怎么样", "alt": ["zenmeyang"], "e": "Lời đề nghị + 怎么样？ = …, được không?"}
-    ]},
-    {"k": "read", "h": "Đọc: Thời tiết Hà Nội", "title": "河内的天气", "text": "河内的夏天很热，有时候三十九度，常常下雨。\n\n河内的冬天有点儿冷，可是不下雪。冬天，大家都穿很多衣服。\n\n胡志明市没有冬天，天气都很热。你喜欢哪儿的天气？", "py": "Hénèi de xiàtiān hěn rè, yǒushíhou sānshíjiǔ dù, chángcháng xià yǔ.\n\nHénèi de dōngtiān yǒudiǎnr lěng, kěshì bú xià xuě. Dōngtiān, dàjiā dōu chuān hěn duō yīfu.\n\nHúzhìmíng Shì méiyǒu dōngtiān, tiānqì dōu hěn rè. Nǐ xǐhuan nǎr de tiānqì?", "vi": "Mùa hè Hà Nội rất nóng, có lúc 39 độ, thường xuyên mưa.\n\nMùa đông Hà Nội hơi lạnh, nhưng không có tuyết. Mùa đông, mọi người đều mặc rất nhiều quần áo.\n\nThành phố Hồ Chí Minh không có mùa đông, thời tiết lúc nào cũng nóng. Bạn thích thời tiết ở đâu?", "gloss": [
-      {"w": "有时候", "py": "yǒushíhou", "vi": "có lúc, đôi khi (bài 12)"},
-      {"w": "常常", "py": "chángcháng", "vi": "thường, thường xuyên"},
-      {"w": "可是", "py": "kěshì", "vi": "nhưng"},
-      {"w": "大家", "py": "dàjiā", "vi": "mọi người"},
-      {"w": "胡志明市", "py": "Húzhìmíng Shì", "vi": "TP. Hồ Chí Minh"}
-    ], "qs": [
-      {"q": "Mùa hè Hà Nội có lúc nóng bao nhiêu độ?", "o": ["29 độ", "39 độ", "93 độ"], "a": 1, "e": "有时候三十九度。"},
-      {"q": "Câu nào ĐÚNG về mùa đông Hà Nội?", "o": ["Rất lạnh, có tuyết", "Hơi lạnh, không có tuyết", "Không có mùa đông"], "a": 1, "e": "河内的冬天有点儿冷，可是不下雪。"},
-      {"q": "Thành phố nào không có mùa đông?", "o": ["Hà Nội", "TP. Hồ Chí Minh", "Bắc Kinh"], "a": 1, "e": "胡志明市没有冬天。"},
-      {"q": "Mùa đông mọi người ở Hà Nội làm gì?", "o": ["Mặc nhiều quần áo", "Uống nhiều nước", "Đi ngắm tuyết"], "a": 0, "e": "冬天，大家都穿很多衣服。"}
-    ]},
-    {"k": "chars", "h": "Chữ Hán của bài (bấm để tập viết)", "items": [
-      {"c": "气", "py": "qì", "hv": "khí", "parts": "tượng hình hơi, khí bốc lên thành tầng", "strokes": 4, "vi": "khí, hơi; thời tiết (天气)", "words": "天气, 客气"},
-      {"c": "冷", "py": "lěng", "hv": "lãnh", "parts": "冫(băng – hai chấm nước đá) + 令 (lệnh – gợi âm)", "strokes": 7, "vi": "lạnh – có băng là lạnh", "words": "很冷, 有点儿冷"},
-      {"c": "热", "py": "rè", "hv": "nhiệt", "parts": "执 (chấp) + 灬 (hoả – bốn chấm lửa)", "strokes": 10, "vi": "nóng – có lửa bên dưới", "words": "太热了"},
-      {"c": "雨", "py": "yǔ", "hv": "vũ", "parts": "tượng hình bầu trời có mây và giọt mưa rơi", "strokes": 8, "vi": "mưa", "words": "下雨"},
-      {"c": "雪", "py": "xuě", "hv": "tuyết", "parts": "雨 (mưa) + ⺕ (bàn tay – quét được)", "strokes": 11, "vi": "tuyết – thứ “mưa” có thể lấy tay quét", "words": "下雪"},
-      {"c": "太", "py": "tài", "hv": "thái", "parts": "大 (to) + 丶 (thêm một chấm – to hơn nữa)", "strokes": 4, "vi": "quá, rất", "words": "太好了, 不太"},
-      {"c": "衣", "py": "yī", "hv": "y", "parts": "tượng hình chiếc áo có cổ và hai vạt", "strokes": 6, "vi": "áo, quần áo", "words": "衣服"}
-    ]},
-    {"k": "speak", "h": "Nói: Thời tiết hôm nay", "tasks": [
-      {"p": "Tả thời tiết hôm nay ở nơi bạn sống (trời thế nào, bao nhiêu độ).", "model": "今天河内天气不太好，有点儿冷，下雨了。今天十五度。", "py": "Jīntiān Hénèi tiānqì bú tài hǎo, yǒudiǎnr lěng, xià yǔ le. Jīntiān shíwǔ dù.", "vi": "Hôm nay thời tiết Hà Nội không đẹp lắm, hơi lạnh, trời mưa. Hôm nay 15 độ.", "tips": "有点儿 đọc yóudiǎnr; 下雨 xià yǔ – đừng đọc thành 下午."},
-      {"p": "So sánh mùa hè và mùa đông ở quê bạn; bạn thích mùa nào? Vì sao?", "model": "我的家乡夏天太热了，冬天不太冷。我喜欢冬天，冬天的衣服很漂亮。", "py": "Wǒ de jiāxiāng xiàtiān tài rè le, dōngtiān bú tài lěng. Wǒ xǐhuan dōngtiān, dōngtiān de yīfu hěn piàoliang.", "vi": "Quê tôi mùa hè nóng quá, mùa đông không lạnh lắm. Tôi thích mùa đông, quần áo mùa đông rất đẹp.", "tips": "家乡 jiāxiāng = quê hương."},
-      {"p": "Trời đẹp – rủ bạn đi đâu đó bằng câu …，怎么样？", "model": "今天天气真好！我们去喝咖啡，怎么样？— 好啊！", "py": "Jīntiān tiānqì zhēn hǎo! Wǒmen qù hē kāfēi, zěnmeyàng? — Hǎo a!", "vi": "Hôm nay trời đẹp thật! Mình đi uống cà phê, được không? — Hay đấy!"}
-    ]},
-    {"k": "write", "h": "Viết: Bản tin thời tiết 3 ngày", "task": "Viết bản tin thời tiết hôm qua – hôm nay – ngày mai cho thành phố bạn sống (trời, nhiệt độ, mức độ nóng/lạnh) và một lời khuyên hoặc lời rủ đi chơi.", "min": 50, "model": "昨天是阴天，有点儿冷，十六度。今天下雨了，十四度，太冷了！明天会下雨吗？不会，明天是晴天，不冷也不热，二十度。大家多穿衣服！明天天气很好，我们去看电影，怎么样？", "modelVi": "Hôm qua trời âm u, hơi lạnh, 16 độ. Hôm nay mưa, 14 độ, lạnh quá! Mai có mưa không? Không, mai trời nắng, không lạnh cũng không nóng, 20 độ. Mọi người mặc thêm áo nhé! Mai thời tiết đẹp, mình đi xem phim, được không?", "tips": ["Mỗi ngày một câu mở đầu bằng 昨天 / 今天 / 明天.", "Dùng ít nhất 3 mức độ khác nhau: 太…了, 有点儿, 不太…", "Dự đoán ngày mai dùng 会."], "checklist": ["Có 怎么样 (hỏi hoặc đề nghị)", "Có 太…了 với 了", "Có 有点儿 + tính từ", "下雨 / 下雪 không đi với 很", "Nhiệt độ: số + 度"]}
-  ],
-  "exercises": [
-    {"t": "listen", "say": "今天太热了！", "lang": "zh-CN", "q": "Thời tiết hôm nay thế nào?", "o": ["Nóng quá", "Lạnh quá", "Hơi lạnh"], "a": 0, "e": "太热了 = nóng quá."},
-    {"t": "listen", "say": "明天会下雨。", "lang": "zh-CN", "q": "Ngày mai thế nào?", "o": ["Sẽ mưa", "Sẽ có tuyết", "Trời nắng"], "a": 0, "e": "会下雨 = sẽ mưa."},
-    {"t": "listen", "say": "北京冬天零下十度。", "lang": "zh-CN", "q": "Mùa đông Bắc Kinh bao nhiêu độ?", "o": ["10 độ", "Âm 10 độ", "Âm 4 độ"], "a": 1, "e": "零下十度 = âm 10 độ."},
-    {"t": "listen", "say": "下午", "lang": "zh-CN", "q": "Bạn vừa nghe từ nào?", "o": ["下午 xiàwǔ – buổi chiều", "下雨 xià yǔ – trời mưa", "下雪 xià xuě – tuyết rơi"], "a": 0, "e": "下午 xiàwǔ: wu môi tròn, KHÔNG có âm ü như 雨 yǔ."},
-    {"t": "mc", "q": "Câu nào ĐÚNG? (Hôm nay hơi lạnh.)", "o": ["今天一点儿冷。", "今天有点儿冷。", "今天是有点儿冷。"], "a": 1, "e": "Hơi + tính từ = 有点儿 + tính từ; không thêm 是."},
-    {"t": "mc", "q": "Câu nào SAI?", "o": ["今天下雨。", "今天很下雨。", "今天不下雨。"], "a": 1, "e": "下雨 là động từ, không đi với 很."},
-    {"t": "mc", "q": "Rủ bạn: “Mình đi uống cà phê, được không?”", "o": ["我们喝咖啡，怎么样？", "我们喝咖啡怎么样吗？", "我们怎么样喝咖啡？"], "a": 0, "e": "Lời đề nghị + 怎么样？, không thêm 吗."},
-    {"t": "mc", "q": "太好了！nghĩa là:", "o": ["Tuyệt quá!", "Không tốt lắm", "Hơi tốt"], "a": 0, "e": "太…了 = quá…, cảm thán."},
-    {"t": "fill", "q": "今天天气___？(Thời tiết hôm nay thế nào?)", "a": "怎么样", "alt": ["zenmeyang"], "e": "Danh từ + 怎么样？"},
-    {"t": "fill", "q": "河内的冬天不___冷。(Mùa đông Hà Nội không lạnh lắm.)", "a": "太", "alt": ["tai"], "e": "不太 + tính từ = không… lắm."},
-    {"t": "fill", "q": "冬天要多___衣服。(Mùa đông phải mặc nhiều quần áo.)", "a": "穿", "alt": ["chuan"], "e": "穿衣服 = mặc quần áo."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Mùa hè Hà Nội nóng quá!”", "w": ["太", "了", "河内的夏天", "热"], "a": "河内的夏天太热了", "e": "Chủ ngữ + 太 + tính từ + 了."},
-    {"t": "order", "q": "Sắp xếp thành câu: “Ngày mai có mưa không?”", "w": ["下雨", "明天", "吗", "会"], "a": "明天会下雨吗", "e": "Thời gian + 会 + 下雨 + 吗."},
-    {"t": "dict", "say": "天气", "lang": "zh-CN", "a": "天气", "py": "tiānqì", "e": "天气 = thời tiết."},
-    {"t": "dict", "say": "今天有点儿冷。", "lang": "zh-CN", "a": "今天有点儿冷", "py": "jīntiān yǒudiǎnr lěng", "e": "有点儿 + tính từ = hơi…"},
-    {"t": "match", "q": "Nối từ thời tiết với nghĩa:", "pairs": [["热", "nóng"], ["冷", "lạnh"], ["下雨", "trời mưa"], ["下雪", "tuyết rơi"], ["晴天", "trời nắng"], ["阴天", "trời âm u"]]}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "Thẻ biểu tượng thời tiết (☀️ 🌧️ ❄️ ☁️) và nhiệt kế giấy; bản đồ Việt Nam – Trung Quốc; quần áo thật hoặc tranh (áo khoác, áo phông); thẻ chữ 气 冷 热 雨 雪 太 衣.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: ôn bài 8 – 你住在哪儿？你家前面有什么？"},
-      {"t": "20'", "do": "Từ vựng thời tiết – mùa – nhiệt độ bằng thẻ biểu tượng; đọc nhiệt độ (三十度, 零下五度); mục văn hoá bản tin thời tiết."},
-      {"t": "15'", "do": "Phát âm: 热/乐, 冷/能, 下雨/下午 (cặp rất dễ nhầm), 太/带, p bật hơi trong 漂亮."},
-      {"t": "20'", "do": "Ngữ pháp 1: 怎么样 – hỏi tình trạng & đề nghị. GV chỉ ảnh, học viên hỏi – đáp; rồi tập rủ nhau bằng …，怎么样？"},
-      {"t": "15'", "do": "Ngữ pháp 3: 下雨/下雪 là động từ, 会 dự đoán; sửa ❌ 今天很下雨, ❌ 天气下雨."},
-      {"t": "10'", "do": "Bài tập 1–8 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: ‘phát thanh viên’ – 2–3 học viên đứng trước bản đồ đọc thời tiết 3 thành phố."},
-      {"t": "20'", "do": "Ngữ pháp 2: thang mức độ 太…了 / 真 / 很 / 有点儿 / 不太 – xếp thẻ theo mức độ; sửa ❌ 一点儿冷, ❌ 太热 (thiếu 了)."},
-      {"t": "15'", "do": "Nghe hội thoại: lần 1 – hôm nay bao nhiêu độ? lần 2 – mai thế nào? lần 3 đóng vai."},
-      {"t": "15'", "do": "Đọc ‘河内的天气’; so sánh Hà Nội – TP. Hồ Chí Minh – Bắc Kinh."},
-      {"t": "15'", "do": "Chữ Hán 7 chữ (冫 băng, 灬 hoả, 雨 vũ) + nhiệm vụ nói 1–3."},
-      {"t": "15'", "do": "Viết bản tin thời tiết; bài tập 9–16; giao bài về nhà."}
+ "no": 9,
+ "title": "今天天气怎么样？– Thời tiết: 怎么样, 太…了, 很, 有点儿",
+ "sub": "Jīntiān tiānqì zěnmeyàng? 今天天气怎么样？",
+ "goals": [
+  "Hỏi và tả thời tiết: 今天天气怎么样？– 很热 / 下雨了 / 十二度",
+  "Dùng 怎么样 để hỏi tình trạng và để đề nghị (…，怎么样？)",
+  "Diễn tả mức độ đúng sắc thái: 很, 真, 太…了, 有点儿, 不太",
+  "Nói về mùa, nhiệt độ, quần áo; dự đoán với 会 (明天会下雨吗？)",
+  "Đọc chuẩn r (热), l (冷), ü (雨), üe (雪) và phân biệt 下雨 / 下午"
+ ],
+ "parts": [
+  {
+   "k": "words",
+   "h": "Từ vựng (生词 shēngcí)",
+   "items": [
+    {
+     "w": "天气",
+     "py": "tiānqì",
+     "hv": "thiên khí",
+     "pos": "n",
+     "vi": "thời tiết",
+     "ex": "今天天气很好。",
+     "exPy": "Jīntiān tiānqì hěn hǎo.",
+     "exVi": "Hôm nay thời tiết rất đẹp."
+    },
+    {
+     "w": "怎么样",
+     "py": "zěnmeyàng",
+     "hv": "chẩm ma dạng",
+     "pos": "pron",
+     "vi": "thế nào; …được không? (đề nghị)",
+     "ex": "叶纱城的天气怎么样？",
+     "exPy": "Yèshā Chéng de tiānqì zěnmeyàng?",
+     "exVi": "Thời tiết Diệp Sa thế nào?"
+    },
+    {
+     "w": "太",
+     "py": "tài",
+     "hv": "thái",
+     "pos": "adv",
+     "vi": "quá (太…了)",
+     "ex": "太热了！",
+     "exPy": "Tài rè le!",
+     "exVi": "Nóng quá!"
+    },
+    {
+     "w": "冷",
+     "py": "lěng",
+     "hv": "lãnh",
+     "pos": "adj",
+     "vi": "lạnh",
+     "ex": "云线城的冬天很冷。",
+     "exPy": "Yúnxiàn Chéng de dōngtiān hěn lěng.",
+     "exVi": "Mùa đông Vân Tuyến rất lạnh."
+    },
+    {
+     "w": "热",
+     "py": "rè",
+     "hv": "nhiệt",
+     "pos": "adj",
+     "vi": "nóng",
+     "ex": "今天三十八度，太热了！",
+     "exPy": "Jīntiān sānshíbā dù, tài rè le!",
+     "exVi": "Hôm nay 38 độ, nóng quá!"
+    },
+    {
+     "w": "下雨",
+     "py": "xià yǔ",
+     "hv": "hạ vũ",
+     "pos": "v",
+     "vi": "mưa (trời mưa)",
+     "ex": "明天会下雨吗？",
+     "exPy": "Míngtiān huì xià yǔ ma?",
+     "exVi": "Ngày mai có mưa không?"
+    },
+    {
+     "w": "下雪",
+     "py": "xià xuě",
+     "hv": "hạ tuyết",
+     "pos": "v",
+     "vi": "tuyết rơi",
+     "ex": "叶纱城不下雪。",
+     "exPy": "Yèshā Chéng bú xià xuě.",
+     "exVi": "Diệp Sa không có tuyết."
+    },
+    {
+     "w": "晴天",
+     "py": "qíngtiān",
+     "hv": "tình thiên",
+     "pos": "n",
+     "vi": "trời nắng, trời quang",
+     "ex": "今天是晴天。",
+     "exPy": "Jīntiān shì qíngtiān.",
+     "exVi": "Hôm nay trời nắng."
+    },
+    {
+     "w": "阴天",
+     "py": "yīntiān",
+     "hv": "âm thiên",
+     "pos": "n",
+     "vi": "trời âm u",
+     "ex": "昨天是阴天。",
+     "exPy": "Zuótiān shì yīntiān.",
+     "exVi": "Hôm qua trời âm u."
+    },
+    {
+     "w": "度",
+     "py": "dù",
+     "hv": "độ",
+     "pos": "mw",
+     "vi": "độ (nhiệt độ)",
+     "ex": "今天三十度。",
+     "exPy": "Jīntiān sānshí dù.",
+     "exVi": "Hôm nay 30 độ."
+    },
+    {
+     "w": "有点儿",
+     "py": "yǒudiǎnr",
+     "hv": "hữu điểm nhi",
+     "pos": "adv",
+     "vi": "hơi, có chút (thường ý không vừa lòng)",
+     "ex": "今天有点儿冷。",
+     "exPy": "Jīntiān yǒudiǎnr lěng.",
+     "exVi": "Hôm nay hơi lạnh."
+    },
+    {
+     "w": "真",
+     "py": "zhēn",
+     "hv": "chân",
+     "pos": "adv",
+     "vi": "thật, thật là",
+     "ex": "你的衣服真漂亮！",
+     "exPy": "Nǐ de yīfu zhēn piàoliang!",
+     "exVi": "Quần áo của bạn đẹp thật!"
+    },
+    {
+     "w": "衣服",
+     "py": "yīfu",
+     "hv": "y phục",
+     "pos": "n",
+     "vi": "quần áo",
+     "ex": "这件衣服很漂亮。",
+     "exPy": "Zhè jiàn yīfu hěn piàoliang.",
+     "exVi": "Bộ quần áo này rất đẹp."
+    },
+    {
+     "w": "穿",
+     "py": "chuān",
+     "hv": "xuyên",
+     "pos": "v",
+     "vi": "mặc, đi (giày)",
+     "ex": "冬天要多穿衣服。",
+     "exPy": "Dōngtiān yào duō chuān yīfu.",
+     "exVi": "Mùa đông phải mặc nhiều quần áo."
+    },
+    {
+     "w": "漂亮",
+     "py": "piàoliang",
+     "hv": "phiêu lượng",
+     "pos": "adj",
+     "vi": "đẹp, xinh",
+     "ex": "小兰很漂亮。",
+     "exPy": "Xiǎo Lán hěn piàoliang.",
+     "exVi": "Tiểu Lan rất xinh."
+    },
+    {
+     "w": "多",
+     "py": "duō",
+     "hv": "đa",
+     "pos": "adj",
+     "vi": "nhiều; (多 + V) làm nhiều hơn",
+     "ex": "叶纱城人很多。",
+     "exPy": "Yèshā Chéng rén hěn duō.",
+     "exVi": "Diệp Sa rất đông người."
+    },
+    {
+     "w": "少",
+     "py": "shǎo",
+     "hv": "thiểu",
+     "pos": "adj",
+     "vi": "ít",
+     "ex": "今天商店里人很少。",
+     "exPy": "Jīntiān shāngdiàn li rén hěn shǎo.",
+     "exVi": "Hôm nay trong cửa hàng rất ít người."
+    },
+    {
+     "w": "夏天",
+     "py": "xiàtiān",
+     "hv": "hạ thiên",
+     "pos": "n",
+     "vi": "mùa hè",
+     "ex": "叶纱城的夏天很热。",
+     "exPy": "Yèshā Chéng de xiàtiān hěn rè.",
+     "exVi": "Mùa hè Diệp Sa rất nóng."
+    },
+    {
+     "w": "冬天",
+     "py": "dōngtiān",
+     "hv": "đông thiên",
+     "pos": "n",
+     "vi": "mùa đông",
+     "ex": "你喜欢冬天吗？",
+     "exPy": "Nǐ xǐhuan dōngtiān ma?",
+     "exVi": "Bạn thích mùa đông không?"
+    }
+   ]
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm: r – l, eng, ü / üe, t – d, p bật hơi, 下雨 ≠ 下午",
+   "items": [
+    {
+     "sym": "r (热) – l (乐)",
+     "ex": [
+      "热",
+      "很热"
+     ],
+     "vi": "热 <b>rè</b>: uốn đầu lưỡi lên, rung dây thanh – gần “rơ” uốn lưỡi. Người Việt hay đọc thành “dơ” / “zơ”. 热 rè (nóng) ≠ 乐 lè (vui).",
+     "pairs": [
+      [
+       "热",
+       "乐"
+      ]
+     ]
+    },
+    {
+     "sym": "l + eng (冷)",
+     "ex": [
+      "冷",
+      "很冷"
+     ],
+     "vi": "冷 <b>lěng</b>: l không qua mũi + eng (≈ “âng”, miệng hé) → gần “lẩng”. 冷 lěng ≠ 能 néng.",
+     "pairs": [
+      [
+       "冷",
+       "能"
+      ]
+     ]
+    },
+    {
+     "sym": "ü (雨) – üe (雪)",
+     "ex": [
+      "雨",
+      "雪",
+      "下雨",
+      "下雪"
+     ],
+     "vi": "雨 <b>yǔ</b>, 雪 <b>xuě</b>: chu tròn môi. Cặp “chết người”: 下雨 xià yǔ (mưa) ≠ 下午 xiàwǔ (buổi chiều); 雪 xuě (tuyết) ≠ 写 xiě (viết).",
+     "pairs": [
+      [
+       "下雨",
+       "下午"
+      ],
+      [
+       "雪",
+       "写"
+      ]
+     ]
+    },
+    {
+     "sym": "t – d (太 / 带)",
+     "ex": [
+      "太",
+      "太好了"
+     ],
+     "vi": "太 <b>tài</b> bật hơi mạnh (≈ “th” tiếng Việt); d không bật hơi (≈ “t” tiếng Việt). 太 tài ≠ 带 dài.",
+     "pairs": [
+      [
+       "太",
+       "带"
+      ]
+     ]
+    },
+    {
+     "sym": "p bật hơi (漂亮)",
+     "ex": [
+      "漂亮",
+      "苹果"
+     ],
+     "vi": "漂 <b>piào</b>: hai môi mím rồi bật hơi mạnh – KHÔNG phải “ph” (môi răng) của tiếng Việt. 亮 liang đọc nhẹ."
+    },
+    {
+     "sym": "3 + 3 (有点儿, 很冷)",
+     "ex": [
+      "有点儿",
+      "很冷",
+      "很少"
+     ],
+     "vi": "有点儿 yǒudiǎnr → <b>yóudiǎnr</b>; 很冷 → hén lěng; 很少 → hén shǎo."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 1: 怎么样 – hỏi tình trạng & đề nghị",
+   "html": "<p><b>怎么样</b> (zěnmeyàng) đứng cuối câu, có hai cách dùng:</p><ol><li><b>Hỏi tình trạng, nhận xét</b>: Danh từ + 怎么样？ – 天气怎么样？(Thời tiết thế nào?) 这个菜怎么样？(Món này thế nào?)</li><li><b>Đề nghị, hỏi ý kiến</b>: [lời đề nghị]，怎么样？ – 我们明天去看电影，怎么样？(Mai mình đi xem phim, được không?)</li></ol><p>Đã có 怎么样 thì KHÔNG thêm 吗. Trả lời bằng tính từ: 很好 / 不错 (búcuò – khá tốt) / 太热了…</p>",
+   "table": [
+    [
+     "Câu hỏi",
+     "Trả lời"
     ],
-    "games": [
-      "Phát thanh viên thời tiết: mỗi nhóm nhận thẻ thời tiết bí mật của một thành phố, ‘lên sóng’ 30 giây bằng tiếng Trung; cả lớp đoán đó là thành phố nào.",
-      "Mặc gì đây?: GV hô thời tiết (零下五度，下雪了！ / 三十八度，太热了！), học viên chọn nhanh tranh quần áo phù hợp và nói 多穿衣服！ hoặc 少穿衣服！"
+    [
+     "今天天气怎么样？",
+     "今天天气很好。"
     ],
-    "errors": [
-      "Thêm 是 trước tính từ: ❌ 今天是冷 → ✅ 今天很冷.",
-      "Dùng 很 với 下雨: ❌ 今天很下雨 → ✅ 今天下雨 / 今天下大雨.",
-      "Nhầm 有点儿 với 一点儿: ❌ 今天一点儿冷 → ✅ 今天有点儿冷.",
-      "Quên 了 sau 太: ❌ 太热！ → ✅ 太热了！",
-      "Thêm 吗 sau 怎么样: ❌ 天气怎么样吗？",
-      "Đọc 下雨 xià yǔ thành 下午 xiàwǔ; 热 rè thành “dơ”; 冷 lěng thành néng."
+    [
+     "云线城的冬天怎么样？",
+     "很冷，常常下雪。"
     ],
-    "homework": "Bài tập trong game ≥ 80%; viết mỗi chữ Hán 1 dòng; trong 1 tuần, mỗi sáng xem dự báo thời tiết và nói 2 câu tiếng Trung (今天…度，…); viết bản tin thời tiết 3 ngày."
+    [
+     "我们星期天去看电影，怎么样？",
+     "好啊！/ 对不起，我很忙。"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "叶纱城的天气怎么样？— 夏天很热，冬天有点儿冷。",
+     "py": "Yèshā Chéng de tiānqì zěnmeyàng? — Xiàtiān hěn rè, dōngtiān yǒudiǎnr lěng.",
+     "vi": "Thời tiết Diệp Sa thế nào? — Mùa hè rất nóng, mùa đông hơi lạnh."
+    },
+    {
+     "t": "这个菜怎么样？— 很好吃！",
+     "py": "Zhège cài zěnmeyàng? — Hěn hǎochī!",
+     "vi": "Món này thế nào? — Ngon lắm!"
+    },
+    {
+     "t": "我们喝咖啡，怎么样？— 好！",
+     "py": "Wǒmen hē kāfēi, zěnmeyàng? — Hǎo!",
+     "vi": "Mình đi uống cà phê, được không? — Được!"
+    }
+   ],
+   "tips": [
+    "❌ <i>天气怎么样吗？</i> – thừa 吗.",
+    "怎么样 (thế nào – tính chất) khác 怎么 (bằng cách nào – bài 11).",
+    "Hỏi thăm sức khoẻ tự nhiên: 你身体怎么样？ (身体 shēntǐ – sức khoẻ, HSK 2)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 2: Thang mức độ – 太…了, 真, 很, 有点儿, 不太",
+   "html": "<p>Tính từ tiếng Trung hầu như luôn cần trạng từ mức độ phía trước (bài 1: 很). Chọn đúng trạng từ để nói đúng sắc thái:</p><p><b>太…了</b> dùng cả khi khen (太好了！Tuyệt quá!) lẫn chê (太贵了！Đắt quá!). <b>有点儿 + tính từ</b> thường mang ý <b>không hài lòng</b>: 有点儿冷 (hơi lạnh, hơi khó chịu); nói ❌ 有点儿漂亮 nghe rất lạ.</p>",
+   "table": [
+    [
+     "Mức độ",
+     "Cấu trúc",
+     "Ví dụ",
+     "Nghĩa"
+    ],
+    [
+     "quá (cảm thán)",
+     "太 + tính từ + 了",
+     "太热了！",
+     "Nóng quá!"
+    ],
+    [
+     "thật là",
+     "真 + tính từ",
+     "真漂亮！",
+     "Đẹp thật!"
+    ],
+    [
+     "(trung tính)",
+     "很 + tính từ",
+     "很冷。",
+     "Lạnh."
+    ],
+    [
+     "hơi (không vừa ý)",
+     "有点儿 + tính từ",
+     "有点儿冷。",
+     "Hơi lạnh."
+    ],
+    [
+     "không… lắm",
+     "不太 + tính từ",
+     "不太热。",
+     "Không nóng lắm."
+    ],
+    [
+     "không",
+     "不 + tính từ",
+     "不冷。",
+     "Không lạnh."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "今天太热了！",
+     "py": "Jīntiān tài rè le!",
+     "vi": "Hôm nay nóng quá!"
+    },
+    {
+     "t": "你的衣服真漂亮！",
+     "py": "Nǐ de yīfu zhēn piàoliang!",
+     "vi": "Quần áo của bạn đẹp thật!"
+    },
+    {
+     "t": "今天有点儿冷。",
+     "py": "Jīntiān yǒudiǎnr lěng.",
+     "vi": "Hôm nay hơi lạnh."
+    },
+    {
+     "t": "叶纱城的冬天不太冷。",
+     "py": "Yèshā Chéng de dōngtiān bú tài lěng.",
+     "vi": "Mùa đông Diệp Sa không lạnh lắm."
+    }
+   ],
+   "tips": [
+    "❌ <i>今天太热！</i> (thiếu 了) → ✅ 今天太热了！",
+    "有点儿 + tính từ (hơi…) ≠ tính từ + 一点儿 (…hơn một chút – so sánh, HSK 2): ❌ <i>一点儿冷</i> → ✅ 有点儿冷。",
+    "Ôn bài 1: ❌ <i>今天是冷</i> → ✅ 今天很冷 (không dùng 是 trước tính từ)."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Ngữ pháp 3: 下雨, 下雪 là động từ; 会 = sẽ (dự đoán); nhiệt độ",
+   "html": "<p>Mưa, tuyết là <b>động từ</b>: 下雨 (rơi mưa), 下雪 (rơi tuyết) – không cần chủ ngữ “trời” như tiếng Việt: 今天下雨 (Hôm nay trời mưa). Phủ định 不下雨; báo “mưa rồi!”: 下雨了！</p><p><b>会 + V</b> = sẽ (dự đoán khả năng): 明天会下雨吗？— 不会。</p><p>Nhiệt độ: số + 度 (三十度); dưới 0: 零下 + số + 度 (零下五度). Bốn mùa đọc theo Hán Việt y hệt: 春天 chūntiān (xuân), 夏天 (hạ), 秋天 qiūtiān (thu), 冬天 (đông).</p>",
+   "table": [
+    [
+     "Tiếng Việt",
+     "Tiếng Trung"
+    ],
+    [
+     "Trời mưa rồi!",
+     "下雨了！"
+    ],
+    [
+     "Hôm nay không mưa.",
+     "今天不下雨。"
+    ],
+    [
+     "Ngày mai có mưa không?",
+     "明天会下雨吗？"
+    ],
+    [
+     "Hôm nay trời nắng.",
+     "今天是晴天。"
+    ],
+    [
+     "Vân Tuyến âm 10 độ.",
+     "云线城零下十度。"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "明天会下雨吗？— 不会，明天是晴天。",
+     "py": "Míngtiān huì xià yǔ ma? — Bú huì, míngtiān shì qíngtiān.",
+     "vi": "Mai có mưa không? — Không đâu, mai trời nắng."
+    },
+    {
+     "t": "云线城冬天常常下雪。",
+     "py": "Yúnxiàn Chéng dōngtiān chángcháng xià xuě.",
+     "vi": "Mùa đông Vân Tuyến thường có tuyết. (常常 – thường, bài 12)"
+    },
+    {
+     "t": "冬天要多穿衣服。",
+     "py": "Dōngtiān yào duō chuān yīfu.",
+     "vi": "Mùa đông phải mặc nhiều quần áo. (要 = cần, phải)"
+    },
+    {
+     "t": "今天三十五度，太热了！",
+     "py": "Jīntiān sānshíwǔ dù, tài rè le!",
+     "vi": "Hôm nay 35 độ, nóng quá!"
+    }
+   ],
+   "tips": [
+    "❌ <i>天下雨 / 天气下雨</i> (dịch “trời mưa”) → ✅ 下雨 / 今天下雨。",
+    "❌ <i>今天很下雨</i> – 下雨 là động từ, không đi với 很. Mưa to: 下大雨.",
+    "会 (sẽ) khác 会 (biết – bài 6): 明天会下雨 vs 我会说汉语."
+   ]
+  },
+  {
+   "k": "text",
+   "h": "Văn hoá: thời tiết Trung Quốc & lời dặn “多穿衣服”",
+   "html": "<p>Dùng bảng dự báo tự đặt để luyện: Diệp Sa hôm nay 12°C và mưa; Vân Tuyến trong câu chuyện là −5°C. Đây là dữ liệu giả cho lời hỏi đáp, không mô tả khí hậu thật của nơi nào.</p><p>多／少 + động từ có thể khuyên làm nhiều hơn hoặc ít hơn: 多穿衣服 là mặc thêm áo, 多喝水 là uống thêm nước, 少吃 là ăn ít hơn. Từ thời tiết cần nhận ra gồm 晴 qíng, 阴 yīn, 多云 duōyún, 雨 yǔ, 雪 xuě, 风 fēng và 度 dù.</p>"
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Mùa đông Diệp Sa – mùa đông Vân Tuyến",
+   "lang": "zh-CN",
+   "note": "Tình huống mùa đông tự đặt: Anna và thầy Vương ở Diệp Sa trò chuyện về hai bảng thời tiết giả. Nghe nhiệt độ hôm nay rồi phân biệt với nhiệt độ của Vân Tuyến được nhắc trong câu chuyện.",
+   "lines": [
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "安娜，早上好！今天天气怎么样？",
+     "py": "Ānnà, zǎoshang hǎo! Jīntiān tiānqì zěnmeyàng?",
+     "vi": "Anna, chào buổi sáng! Hôm nay thời tiết thế nào?"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "有点儿冷，下雨了。今天十二度。",
+     "py": "Yǒudiǎnr lěng, xià yǔ le. Jīntiān shí'èr dù.",
+     "vi": "Hơi lạnh ạ, trời mưa rồi. Hôm nay 12 độ."
+    },
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "十二度？不冷！云线城的冬天太冷了，有时候零下十度。",
+     "py": "Shí'èr dù? Bù lěng! Yúnxiàn Chéng de dōngtiān tài lěng le, yǒushíhou língxià shí dù.",
+     "vi": "12 độ á? Không lạnh! Mùa đông Vân Tuyến lạnh lắm, có khi âm 10 độ."
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "零下十度？云线城下雪吗？",
+     "py": "Língxià shí dù? Yúnxiàn Chéng xià xuě ma?",
+     "vi": "Âm 10 độ ạ? Vân Tuyến có tuyết không thầy?"
+    },
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "下雪。云线城的雪真漂亮！",
+     "py": "Xià xuě. Yúnxiàn Chéng de xuě zhēn piàoliang!",
+     "vi": "Có tuyết. Tuyết Vân Tuyến đẹp lắm!"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "叶纱城冬天不下雪，可是有点儿冷。",
+     "py": "Yèshā Chéng dōngtiān bú xià xuě, kěshì yǒudiǎnr lěng.",
+     "vi": "Mùa đông Diệp Sa không có tuyết, nhưng hơi lạnh."
+    },
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "你的衣服太少了！多穿衣服吧！",
+     "py": "Nǐ de yīfu tài shǎo le! Duō chuān yīfu ba!",
+     "vi": "Em mặc ít quá! Mặc thêm áo vào nhé!"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "好。老师，您喜欢叶纱城的夏天吗？",
+     "py": "Hǎo. Lǎoshī, nín xǐhuan Yèshā Chéng de xiàtiān ma?",
+     "vi": "Vâng ạ. Thầy có thích mùa hè Diệp Sa không?"
+    },
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "不太喜欢。叶纱城的夏天太热了，三十八度！",
+     "py": "Bú tài xǐhuan. Yèshā Chéng de xiàtiān tài rè le, sānshíbā dù!",
+     "vi": "Không thích lắm. Mùa hè Diệp Sa nóng quá, 38 độ!"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "我很喜欢夏天，夏天的衣服很漂亮！",
+     "py": "Wǒ hěn xǐhuan xiàtiān, xiàtiān de yīfu hěn piàoliang!",
+     "vi": "Em rất thích mùa hè, quần áo mùa hè đẹp lắm!"
+    },
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "明天天气怎么样？会下雨吗？",
+     "py": "Míngtiān tiānqì zěnmeyàng? Huì xià yǔ ma?",
+     "vi": "Ngày mai thời tiết thế nào? Có mưa không?"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "不会。明天是晴天，不冷也不热。",
+     "py": "Bú huì. Míngtiān shì qíngtiān, bù lěng yě bú rè.",
+     "vi": "Không ạ. Mai trời nắng, không lạnh cũng không nóng."
+    },
+    {
+     "s": "王老师",
+     "g": "m",
+     "t": "太好了！明天我们在外面上课，怎么样？",
+     "py": "Tài hǎo le! Míngtiān wǒmen zài wàimiàn shàng kè, zěnmeyàng?",
+     "vi": "Tuyệt quá! Mai mình học ngoài trời, được không?"
+    },
+    {
+     "s": "安娜",
+     "g": "f",
+     "t": "好啊！",
+     "py": "Hǎo a!",
+     "vi": "Hay quá ạ!"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Hôm nay Diệp Sa bao nhiêu độ?",
+     "o": [
+      "12 độ",
+      "20 độ",
+      "2 độ"
+     ],
+     "a": 0,
+     "e": "今天十二度 – shí'èr dù = 12 độ."
+    },
+    {
+     "q": "Mùa đông Vân Tuyến có tuyết không?",
+     "o": [
+      "Không nhắc đến",
+      "Có",
+      "Không"
+     ],
+     "a": 1,
+     "e": "云线城下雪吗？— 下雪。"
+    },
+    {
+     "q": "Thầy Vương thấy mùa hè Diệp Sa thế nào?",
+     "o": [
+      "Không thích lắm vì nóng quá",
+      "Rất thích",
+      "Hơi lạnh"
+     ],
+     "a": 0,
+     "e": "不太喜欢。叶纱城的夏天太热了。"
+    },
+    {
+     "q": "Ngày mai thời tiết thế nào?",
+     "o": [
+      "Mưa, lạnh",
+      "Nắng, không lạnh không nóng",
+      "Có tuyết"
+     ],
+     "a": 1,
+     "e": "明天是晴天，不冷也不热。"
+    },
+    {
+     "q": "Thầy đề nghị: 明天我们在外面上课，___？(gõ chữ Hán hoặc pinyin)",
+     "a": "怎么样",
+     "alt": [
+      "zenmeyang"
+     ],
+     "e": "Lời đề nghị + 怎么样？ = …, được không?"
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc: Thời tiết Diệp Sa",
+   "title": "叶纱城的天气",
+   "text": "叶纱城的夏天很热，有时候三十九度，常常下雨。\n\n叶纱城的冬天有点儿冷，可是不下雪。冬天，大家都穿很多衣服。\n\n绣田城没有冬天，天气都很热。你喜欢哪儿的天气？",
+   "py": "Yèshā Chéng de xiàtiān hěn rè, yǒushíhou sānshíjiǔ dù, chángcháng xià yǔ.\n\nYèshā Chéng de dōngtiān yǒudiǎnr lěng, kěshì bú xià xuě. Dōngtiān, dàjiā dōu chuān hěn duō yīfu.\n\nXiùtián Chéng méiyǒu dōngtiān, tiānqì dōu hěn rè. Nǐ xǐhuan nǎr de tiānqì?",
+   "vi": "Mùa hè Diệp Sa rất nóng, có lúc 39 độ, thường xuyên mưa.\n\nMùa đông Diệp Sa hơi lạnh, nhưng không có tuyết. Mùa đông, mọi người đều mặc rất nhiều quần áo.\n\nThành phố Tú Điền không có mùa đông, thời tiết lúc nào cũng nóng. Bạn thích thời tiết ở đâu?",
+   "gloss": [
+    {
+     "w": "有时候",
+     "py": "yǒushíhou",
+     "vi": "có lúc, đôi khi (bài 12)"
+    },
+    {
+     "w": "常常",
+     "py": "chángcháng",
+     "vi": "thường, thường xuyên"
+    },
+    {
+     "w": "可是",
+     "py": "kěshì",
+     "vi": "nhưng"
+    },
+    {
+     "w": "大家",
+     "py": "dàjiā",
+     "vi": "mọi người"
+    },
+    {
+     "w": "绣田城",
+     "py": "Xiùtián Chéng",
+     "vi": "Tú Điền"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Mùa hè Diệp Sa có lúc nóng bao nhiêu độ?",
+     "o": [
+      "93 độ",
+      "29 độ",
+      "39 độ"
+     ],
+     "a": 2,
+     "e": "有时候三十九度。"
+    },
+    {
+     "q": "Câu nào ĐÚNG về mùa đông Diệp Sa?",
+     "o": [
+      "Hơi lạnh, không có tuyết",
+      "Không có mùa đông",
+      "Rất lạnh, có tuyết"
+     ],
+     "a": 0,
+     "e": "叶纱城的冬天有点儿冷，可是不下雪。"
+    },
+    {
+     "q": "Thành phố nào không có mùa đông?",
+     "o": [
+      "Vân Tuyến",
+      "Diệp Sa",
+      "Tú Điền"
+     ],
+     "a": 2,
+     "e": "绣田城没有冬天。"
+    },
+    {
+     "q": "Mùa đông mọi người ở Diệp Sa làm gì?",
+     "o": [
+      "Mặc nhiều quần áo",
+      "Uống nhiều nước",
+      "Đi ngắm tuyết"
+     ],
+     "a": 0,
+     "e": "冬天，大家都穿很多衣服。"
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Chữ Hán của bài (bấm để tập viết)",
+   "items": [
+    {
+     "c": "气",
+     "py": "qì",
+     "hv": "khí",
+     "parts": "tượng hình hơi, khí bốc lên thành tầng",
+     "strokes": 4,
+     "vi": "khí, hơi; thời tiết (天气)",
+     "words": "天气, 客气"
+    },
+    {
+     "c": "冷",
+     "py": "lěng",
+     "hv": "lãnh",
+     "parts": "冫(băng – hai chấm nước đá) + 令 (lệnh – gợi âm)",
+     "strokes": 7,
+     "vi": "lạnh – có băng là lạnh",
+     "words": "很冷, 有点儿冷"
+    },
+    {
+     "c": "热",
+     "py": "rè",
+     "hv": "nhiệt",
+     "parts": "执 (chấp) + 灬 (hoả – bốn chấm lửa)",
+     "strokes": 10,
+     "vi": "nóng – có lửa bên dưới",
+     "words": "太热了"
+    },
+    {
+     "c": "雨",
+     "py": "yǔ",
+     "hv": "vũ",
+     "parts": "tượng hình bầu trời có mây và giọt mưa rơi",
+     "strokes": 8,
+     "vi": "mưa",
+     "words": "下雨"
+    },
+    {
+     "c": "雪",
+     "py": "xuě",
+     "hv": "tuyết",
+     "parts": "雨 (mưa) + ⺕ (bàn tay – quét được)",
+     "strokes": 11,
+     "vi": "tuyết – thứ “mưa” có thể lấy tay quét",
+     "words": "下雪"
+    },
+    {
+     "c": "太",
+     "py": "tài",
+     "hv": "thái",
+     "parts": "大 (to) + 丶 (thêm một chấm – to hơn nữa)",
+     "strokes": 4,
+     "vi": "quá, rất",
+     "words": "太好了, 不太"
+    },
+    {
+     "c": "衣",
+     "py": "yī",
+     "hv": "y",
+     "parts": "tượng hình chiếc áo có cổ và hai vạt",
+     "strokes": 6,
+     "vi": "áo, quần áo",
+     "words": "衣服"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: Thời tiết hôm nay",
+   "tasks": [
+    {
+     "p": "Tả thời tiết hôm nay ở nơi bạn sống (trời thế nào, bao nhiêu độ).",
+     "model": "今天叶纱城天气不太好，有点儿冷，下雨了。今天十五度。",
+     "py": "Jīntiān Yèshā Chéng tiānqì bú tài hǎo, yǒudiǎnr lěng, xià yǔ le. Jīntiān shíwǔ dù.",
+     "vi": "Hôm nay thời tiết Diệp Sa không đẹp lắm, hơi lạnh, trời mưa. Hôm nay 15 độ.",
+     "tips": "有点儿 đọc yóudiǎnr; 下雨 xià yǔ – đừng đọc thành 下午."
+    },
+    {
+     "p": "So sánh mùa hè và mùa đông ở quê bạn; bạn thích mùa nào? Vì sao?",
+     "model": "我的家乡夏天太热了，冬天不太冷。我喜欢冬天，冬天的衣服很漂亮。",
+     "py": "Wǒ de jiāxiāng xiàtiān tài rè le, dōngtiān bú tài lěng. Wǒ xǐhuan dōngtiān, dōngtiān de yīfu hěn piàoliang.",
+     "vi": "Quê tôi mùa hè nóng quá, mùa đông không lạnh lắm. Tôi thích mùa đông, quần áo mùa đông rất đẹp.",
+     "tips": "家乡 jiāxiāng = quê hương."
+    },
+    {
+     "p": "Trời đẹp – rủ bạn đi đâu đó bằng câu …，怎么样？",
+     "model": "今天天气真好！我们去喝咖啡，怎么样？— 好啊！",
+     "py": "Jīntiān tiānqì zhēn hǎo! Wǒmen qù hē kāfēi, zěnmeyàng? — Hǎo a!",
+     "vi": "Hôm nay trời đẹp thật! Mình đi uống cà phê, được không? — Hay đấy!"
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: Bản tin thời tiết 3 ngày",
+   "task": "Viết bản tin thời tiết hôm qua – hôm nay – ngày mai cho thành phố bạn sống (trời, nhiệt độ, mức độ nóng/lạnh) và một lời khuyên hoặc lời rủ đi chơi.",
+   "min": 50,
+   "model": "昨天是阴天，有点儿冷，十六度。今天下雨了，十四度，太冷了！明天会下雨吗？不会，明天是晴天，不冷也不热，二十度。大家多穿衣服！明天天气很好，我们去看电影，怎么样？",
+   "modelVi": "Hôm qua trời âm u, hơi lạnh, 16 độ. Hôm nay mưa, 14 độ, lạnh quá! Mai có mưa không? Không, mai trời nắng, không lạnh cũng không nóng, 20 độ. Mọi người mặc thêm áo nhé! Mai thời tiết đẹp, mình đi xem phim, được không?",
+   "tips": [
+    "Mỗi ngày một câu mở đầu bằng 昨天 / 今天 / 明天.",
+    "Dùng ít nhất 3 mức độ khác nhau: 太…了, 有点儿, 不太…",
+    "Dự đoán ngày mai dùng 会."
+   ],
+   "checklist": [
+    "Có 怎么样 (hỏi hoặc đề nghị)",
+    "Có 太…了 với 了",
+    "Có 有点儿 + tính từ",
+    "下雨 / 下雪 không đi với 很",
+    "Nhiệt độ: số + 度"
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "今天太热了！",
+   "lang": "zh-CN",
+   "q": "Thời tiết hôm nay thế nào?",
+   "o": [
+    "Lạnh quá",
+    "Hơi lạnh",
+    "Nóng quá"
+   ],
+   "a": 2,
+   "e": "太热了 = nóng quá."
+  },
+  {
+   "t": "listen",
+   "say": "明天会下雨。",
+   "lang": "zh-CN",
+   "q": "Ngày mai thế nào?",
+   "o": [
+    "Trời nắng",
+    "Sẽ mưa",
+    "Sẽ có tuyết"
+   ],
+   "a": 1,
+   "e": "会下雨 = sẽ mưa."
+  },
+  {
+   "t": "listen",
+   "say": "云线城冬天零下十度。",
+   "lang": "zh-CN",
+   "q": "Mùa đông Vân Tuyến bao nhiêu độ?",
+   "o": [
+    "Âm 10 độ",
+    "Âm 4 độ",
+    "10 độ"
+   ],
+   "a": 0,
+   "e": "零下十度 = âm 10 độ."
+  },
+  {
+   "t": "listen",
+   "say": "下午",
+   "lang": "zh-CN",
+   "q": "Bạn vừa nghe từ nào?",
+   "o": [
+    "下雪 xià xuě – tuyết rơi",
+    "下午 xiàwǔ – buổi chiều",
+    "下雨 xià yǔ – trời mưa"
+   ],
+   "a": 1,
+   "e": "下午 xiàwǔ: wu môi tròn, KHÔNG có âm ü như 雨 yǔ."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào ĐÚNG? (Hôm nay hơi lạnh.)",
+   "o": [
+    "今天是有点儿冷。",
+    "今天一点儿冷。",
+    "今天有点儿冷。"
+   ],
+   "a": 2,
+   "e": "Hơi + tính từ = 有点儿 + tính từ; không thêm 是."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào SAI?",
+   "o": [
+    "今天很下雨。",
+    "今天不下雨。",
+    "今天下雨。"
+   ],
+   "a": 0,
+   "e": "下雨 là động từ, không đi với 很."
+  },
+  {
+   "t": "mc",
+   "q": "Rủ bạn: “Mình đi uống cà phê, được không?”",
+   "o": [
+    "我们喝咖啡怎么样吗？",
+    "我们怎么样喝咖啡？",
+    "我们喝咖啡，怎么样？"
+   ],
+   "a": 2,
+   "e": "Lời đề nghị + 怎么样？, không thêm 吗."
+  },
+  {
+   "t": "mc",
+   "q": "太好了！nghĩa là:",
+   "o": [
+    "Không tốt lắm",
+    "Hơi tốt",
+    "Tuyệt quá!"
+   ],
+   "a": 2,
+   "e": "太…了 = quá…, cảm thán."
+  },
+  {
+   "t": "fill",
+   "q": "今天天气___？(Thời tiết hôm nay thế nào?)",
+   "a": "怎么样",
+   "alt": [
+    "zenmeyang"
+   ],
+   "e": "Danh từ + 怎么样？"
+  },
+  {
+   "t": "fill",
+   "q": "叶纱城的冬天不___冷。(Mùa đông Diệp Sa không lạnh lắm.)",
+   "a": "太",
+   "alt": [
+    "tai"
+   ],
+   "e": "不太 + tính từ = không… lắm."
+  },
+  {
+   "t": "fill",
+   "q": "冬天要多___衣服。(Mùa đông phải mặc nhiều quần áo.)",
+   "a": "穿",
+   "alt": [
+    "chuan"
+   ],
+   "e": "穿衣服 = mặc quần áo."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Mùa hè Diệp Sa nóng quá!”",
+   "w": [
+    "太",
+    "了",
+    "叶纱城的夏天",
+    "热"
+   ],
+   "a": "叶纱城的夏天太热了",
+   "e": "Chủ ngữ + 太 + tính từ + 了."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: “Ngày mai có mưa không?”",
+   "w": [
+    "下雨",
+    "明天",
+    "吗",
+    "会"
+   ],
+   "a": "明天会下雨吗",
+   "e": "Thời gian + 会 + 下雨 + 吗."
+  },
+  {
+   "t": "dict",
+   "say": "天气",
+   "lang": "zh-CN",
+   "a": "天气",
+   "py": "tiānqì",
+   "e": "天气 = thời tiết."
+  },
+  {
+   "t": "dict",
+   "say": "今天有点儿冷。",
+   "lang": "zh-CN",
+   "a": "今天有点儿冷",
+   "py": "jīntiān yǒudiǎnr lěng",
+   "e": "有点儿 + tính từ = hơi…"
+  },
+  {
+   "t": "match",
+   "q": "Nối từ thời tiết với nghĩa:",
+   "pairs": [
+    [
+     "热",
+     "nóng"
+    ],
+    [
+     "冷",
+     "lạnh"
+    ],
+    [
+     "下雨",
+     "trời mưa"
+    ],
+    [
+     "下雪",
+     "tuyết rơi"
+    ],
+    [
+     "晴天",
+     "trời nắng"
+    ],
+    [
+     "阴天",
+     "trời âm u"
+    ]
+   ]
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Thẻ biểu tượng thời tiết (☀️ 🌧️ ❄️ ☁️) và nhiệt kế giấy; bản đồ Việt Nam – Trung Quốc; quần áo thật hoặc tranh (áo khoác, áo phông); thẻ chữ 气 冷 热 雨 雪 太 衣.",
+  "steps": [
+   {
+    "t": "Buổi 1 · 10'",
+    "do": "Khởi động: ôn bài 8 – 你住在哪儿？你家前面有什么？"
+   },
+   {
+    "t": "20'",
+    "do": "Từ vựng thời tiết – mùa – nhiệt độ bằng thẻ biểu tượng; đọc nhiệt độ (三十度, 零下五度); mục văn hoá bản tin thời tiết."
+   },
+   {
+    "t": "15'",
+    "do": "Phát âm: 热/乐, 冷/能, 下雨/下午 (cặp rất dễ nhầm), 太/带, p bật hơi trong 漂亮."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 1: 怎么样 – hỏi tình trạng & đề nghị. GV chỉ ảnh, học viên hỏi – đáp; rồi tập rủ nhau bằng …，怎么样？"
+   },
+   {
+    "t": "15'",
+    "do": "Ngữ pháp 3: 下雨/下雪 là động từ, 会 dự đoán; sửa ❌ 今天很下雨, ❌ 天气下雨."
+   },
+   {
+    "t": "10'",
+    "do": "Bài tập 1–8 trong game."
+   },
+   {
+    "t": "Buổi 2 · 10'",
+    "do": "Ôn: ‘phát thanh viên’ – 2–3 học viên đứng trước bản đồ đọc thời tiết 3 thành phố."
+   },
+   {
+    "t": "20'",
+    "do": "Ngữ pháp 2: thang mức độ 太…了 / 真 / 很 / 有点儿 / 不太 – xếp thẻ theo mức độ; sửa ❌ 一点儿冷, ❌ 太热 (thiếu 了)."
+   },
+   {
+    "t": "15'",
+    "do": "Nghe hội thoại: lần 1 – hôm nay bao nhiêu độ? lần 2 – mai thế nào? lần 3 đóng vai."
+   },
+   {
+    "t": "15'",
+    "do": "Đọc ‘叶纱城的天气’; so sánh Diệp Sa – Tú Điền – Vân Tuyến."
+   },
+   {
+    "t": "15'",
+    "do": "Chữ Hán 7 chữ (冫 băng, 灬 hoả, 雨 vũ) + nhiệm vụ nói 1–3."
+   },
+   {
+    "t": "15'",
+    "do": "Viết bản tin thời tiết; bài tập 9–16; giao bài về nhà."
+   }
+  ],
+  "games": [
+   "Phát thanh viên thời tiết: mỗi nhóm nhận thẻ thời tiết bí mật của một thành phố, ‘lên sóng’ 30 giây bằng tiếng Trung; cả lớp đoán đó là thành phố nào.",
+   "Mặc gì đây?: GV hô thời tiết (零下五度，下雪了！ / 三十八度，太热了！), học viên chọn nhanh tranh quần áo phù hợp và nói 多穿衣服！ hoặc 少穿衣服！"
+  ],
+  "errors": [
+   "Thêm 是 trước tính từ: ❌ 今天是冷 → ✅ 今天很冷.",
+   "Dùng 很 với 下雨: ❌ 今天很下雨 → ✅ 今天下雨 / 今天下大雨.",
+   "Nhầm 有点儿 với 一点儿: ❌ 今天一点儿冷 → ✅ 今天有点儿冷.",
+   "Quên 了 sau 太: ❌ 太热！ → ✅ 太热了！",
+   "Thêm 吗 sau 怎么样: ❌ 天气怎么样吗？",
+   "Đọc 下雨 xià yǔ thành 下午 xiàwǔ; 热 rè thành “dơ”; 冷 lěng thành néng."
+  ],
+  "homework": "Bài tập trong game ≥ 80%; viết mỗi chữ Hán 1 dòng; trong 1 tuần, mỗi sáng xem dự báo thời tiết và nói 2 câu tiếng Trung (今天…度，…); viết bản tin thời tiết 3 ngày."
+ }
 }

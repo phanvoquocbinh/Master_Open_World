@@ -1,66 +1,409 @@
 {
-  "no": 29,
-  "lv": "hsk4",
-  "title": "Báo lỗi phần mềm với lập trình viên",
-  "sub": "提交缺陷 · Tíjiāo quēxiàn",
-  "situation": "Tester Thu Hà (范秋河) phát hiện lỗi trong ứng dụng đặt đồ ăn: dùng mã giảm giá xong mà đổi số lượng món thì tổng tiền không cập nhật. Hà sang bàn lập trình viên Hiểu Tuyết (林晓雪). Hiểu Tuyết nói câu kinh điển ‘trên máy mình chạy bình thường mà’. Hà đưa bước tái hiện, phiên bản, ảnh – video – log, thống nhất mức độ nghiêm trọng/ưu tiên, rồi kiểm tra lại (verify) và đóng lỗi. Đây là bộ từ vựng QA bằng tiếng Trung dùng được ngay ở công ty. Nghe lần 1: Vì sao Hiểu Tuyết không thấy lỗi? Nguyên nhân kỹ thuật là gì?",
-  "lang": "zh-CN",
-  "lines": [
-    {"s": "范秋河", "g": "f", "t": "晓雪，忙吗？我在测试环境发现了一个问题，想跟你确认一下。", "py": "Xiǎoxuě, máng ma? Wǒ zài cèshì huánjìng fāxiànle yí ge wèntí, xiǎng gēn nǐ quèrèn yíxià.", "vi": "Hiểu Tuyết, bận không? Mình phát hiện một vấn đề trên môi trường test, muốn xác nhận với bạn chút."},
-    {"s": "林晓雪", "g": "f", "t": "你说吧，什么问题？", "py": "Nǐ shuō ba, shénme wèntí?", "vi": "Bạn nói đi, vấn đề gì?"},
-    {"s": "范秋河", "g": "f", "t": "用户用了优惠券以后，如果再修改菜的数量，订单总价不会更新，还是原来的价格。", "py": "Yònghù yòngle yōuhuìquàn yǐhòu, rúguǒ zài xiūgǎi cài de shùliàng, dìngdān zǒngjià bú huì gēngxīn, háishi yuánlái de jiàgé.", "vi": "Sau khi người dùng áp mã giảm giá, nếu sửa số lượng món thì tổng tiền đơn hàng không cập nhật, vẫn là giá cũ."},
-    {"s": "林晓雪", "g": "f", "t": "不会吧？我昨天自己试过，在我电脑上没问题啊。", "py": "Bú huì ba? Wǒ zuótiān zìjǐ shìguo, zài wǒ diànnǎo shang méi wèntí a.", "vi": "Không thể nào? Hôm qua mình tự thử rồi, trên máy mình có sao đâu."},
-    {"s": "范秋河", "g": "f", "t": "你可能没按这个顺序操作。我把复现步骤写在缺陷单里了：第一步，加两份河粉；第二步，用满十万减两万的优惠券；第三步，再把数量改成三份。", "py": "Nǐ kěnéng méi àn zhège shùnxù cāozuò. Wǒ bǎ fùxiàn bùzhòu xiě zài quēxiàn dān li le: dì-yī bù, jiā liǎng fèn héfěn; dì-èr bù, yòng mǎn shí wàn jiǎn liǎng wàn de yōuhuìquàn; dì-sān bù, zài bǎ shùliàng gǎichéng sān fèn.", "vi": "Có thể bạn không thao tác theo thứ tự này. Mình đã ghi các bước tái hiện trong phiếu lỗi: bước 1, thêm hai suất phở; bước 2, dùng mã ‘đơn từ 100 nghìn giảm 20 nghìn’; bước 3, đổi số lượng thành ba suất."},
-    {"s": "林晓雪", "g": "f", "t": "哦，是先用券，再改数量。我一般是反过来测的。", "py": "Ò, shì xiān yòng quàn, zài gǎi shùliàng. Wǒ yìbān shì fǎn guòlai cè de.", "vi": "À, là dùng mã trước rồi mới đổi số lượng. Mình thường test theo thứ tự ngược lại."},
-    {"s": "范秋河", "g": "f", "t": "对。我试了三次，每次都能复现。两种手机系统上都有这个问题。", "py": "Duì. Wǒ shìle sān cì, měi cì dōu néng fùxiàn. Liǎng zhǒng shǒujī xìtǒng shang dōu yǒu zhège wèntí.", "vi": "Đúng. Mình thử ba lần, lần nào cũng tái hiện được. Trên cả hai hệ điều hành điện thoại đều bị."},
-    {"s": "林晓雪", "g": "f", "t": "你用的是哪个版本？", "py": "Nǐ yòng de shì nǎge bǎnběn?", "vi": "Bạn dùng phiên bản nào?"},
-    {"s": "范秋河", "g": "f", "t": "是今天早上部署的那个版本。截图和录屏我都附上了，日志也导出来了。", "py": "Shì jīntiān zǎoshang bùshǔ de nàge bǎnběn. Jiétú hé lùpíng wǒ dōu fùshàng le, rìzhì yě dǎo chūlai le.", "vi": "Bản triển khai sáng nay. Ảnh chụp màn hình và video quay màn hình mình đều đính kèm rồi, log cũng đã xuất ra."},
-    {"s": "林晓雪", "g": "f", "t": "你写得真详细。我看看……找到了，修改数量以后，系统读的是缓存里的旧价格。", "py": "Nǐ xiě de zhēn xiángxì. Wǒ kànkan... zhǎodào le, xiūgǎi shùliàng yǐhòu, xìtǒng dú de shì huǎncún li de jiù jiàgé.", "vi": "Bạn viết chi tiết thật. Để mình xem… tìm ra rồi, sau khi sửa số lượng, hệ thống đọc giá cũ trong bộ nhớ đệm (cache)."},
-    {"s": "范秋河", "g": "f", "t": "这个问题会让公司少收钱，我把严重程度定成了“严重”，优先级是“高”。你觉得合理吗？", "py": "Zhège wèntí huì ràng gōngsī shǎo shōu qián, wǒ bǎ yánzhòng chéngdù dìngchéngle ‘yánzhòng’, yōuxiānjí shì ‘gāo’. Nǐ juéde hélǐ ma?", "vi": "Lỗi này khiến công ty thu thiếu tiền, mình đặt mức độ nghiêm trọng là ‘Nghiêm trọng’, ưu tiên ‘Cao’. Bạn thấy hợp lý không?"},
-    {"s": "林晓雪", "g": "f", "t": "合理，涉及钱的都不能马虎。我现在就改，大概需要一个小时。", "py": "Hélǐ, shèjí qián de dōu bù néng mǎhu. Wǒ xiànzài jiù gǎi, dàgài xūyào yí ge xiǎoshí.", "vi": "Hợp lý, cái gì liên quan đến tiền đều không được qua loa. Mình sửa ngay, khoảng một tiếng."},
-    {"s": "范秋河", "g": "f", "t": "好的。改完以后部署到测试环境，在缺陷单里把状态改成“已修复”，我收到通知就验证。", "py": "Hǎo de. Gǎiwán yǐhòu bùshǔ dào cèshì huánjìng, zài quēxiàn dān li bǎ zhuàngtài gǎichéng ‘yǐ xiūfù’, wǒ shōudào tōngzhī jiù yànzhèng.", "vi": "Được. Sửa xong thì triển khai lên môi trường test, đổi trạng thái phiếu lỗi thành ‘Đã sửa’, mình nhận thông báo là kiểm tra lại ngay."},
-    {"s": "林晓雪", "g": "f", "t": "行。对了，我顺便问一下，删除优惠券的时候价格对吗？", "py": "Xíng. Duìle, wǒ shùnbiàn wèn yíxià, shānchú yōuhuìquàn de shíhou jiàgé duì ma?", "vi": "Ok. À, tiện hỏi luôn, lúc xoá mã giảm giá thì giá có đúng không?"},
-    {"s": "范秋河", "g": "f", "t": "这个我还没测，好问题！我现在就补一个测试用例。", "py": "Zhège wǒ hái méi cè, hǎo wèntí! Wǒ xiànzài jiù bǔ yí ge cèshì yònglì.", "vi": "Cái này mình chưa test, câu hỏi hay! Mình bổ sung ngay một test case."},
-    {"s": "林晓雪", "g": "f", "t": "小河，已经修好了，你验证一下吧。", "py": "Xiǎo Hé, yǐjīng xiūhǎo le, nǐ yànzhèng yíxià ba.", "vi": "Tiểu Hà, sửa xong rồi, bạn kiểm tra lại nhé."},
-    {"s": "范秋河", "g": "f", "t": "我按原来的步骤测了，价格正确了。删除优惠券的情况也没问题。不过我发现总价旁边的小数点显示有点儿奇怪，这个我另外提一个低优先级的问题。", "py": "Wǒ àn yuánlái de bùzhòu cèle, jiàgé zhèngquè le. Shānchú yōuhuìquàn de qíngkuàng yě méi wèntí. Búguò wǒ fāxiàn zǒngjià pángbiān de xiǎoshùdiǎn xiǎnshì yǒudiǎnr qíguài, zhège wǒ lìngwài tí yí ge dī yōuxiānjí de wèntí.", "vi": "Mình test theo các bước cũ, giá đã đúng. Trường hợp xoá mã cũng ổn. Nhưng mình thấy dấu thập phân cạnh tổng tiền hiển thị hơi lạ, cái này mình báo thành một lỗi riêng, ưu tiên thấp."},
-    {"s": "林晓雪", "g": "f", "t": "好，那原来那个就可以关闭了吧？", "py": "Hǎo, nà yuánlái nàge jiù kěyǐ guānbì le ba?", "vi": "Được, vậy lỗi ban đầu đóng được rồi chứ?"},
-    {"s": "范秋河", "g": "f", "t": "对，我现在关闭。谢谢你修得这么快！", "py": "Duì, wǒ xiànzài guānbì. Xièxie nǐ xiū de zhème kuài!", "vi": "Ừ, mình đóng luôn. Cảm ơn bạn sửa nhanh thế!"},
-    {"s": "林晓雪", "g": "f", "t": "也谢谢你写得这么清楚，省了我不少时间。", "py": "Yě xièxie nǐ xiě de zhème qīngchu, shěngle wǒ bù shǎo shíjiān.", "vi": "Cũng cảm ơn bạn viết rõ ràng thế, đỡ cho mình bao nhiêu thời gian."}
-  ],
-  "phrases": [
-    {"t": "我发现了一个问题，想跟你确认一下。", "py": "Wǒ fāxiànle yí ge wèntí, xiǎng gēn nǐ quèrèn yíxià.", "vi": "Tôi phát hiện một vấn đề, muốn xác nhận với bạn.", "note": "Cách mở lời báo lỗi mềm mỏng, mang tính hợp tác. Dùng 问题 thay vì ‘bug của bạn’. Tránh: 你的代码又有bug了 – nghe như đổ lỗi cá nhân. Văn bản chính thức gọi lỗi là 缺陷 (defect)."},
-    {"t": "在我电脑上没问题啊。", "py": "Zài wǒ diànnǎo shang méi wèntí a.", "vi": "Trên máy tôi có sao đâu.", "note": "Câu ‘kinh điển’ của lập trình viên. Đáp chuyên nghiệp: 你可能没按这个顺序操作 / 我们看一下环境和版本是不是一样. Đừng cãi tay đôi – đưa bằng chứng (bước, phiên bản, log)."},
-    {"t": "我把复现步骤写在缺陷单里了。", "py": "Wǒ bǎ fùxiàn bùzhòu xiě zài quēxiàn dān li le.", "vi": "Tôi đã ghi các bước tái hiện vào phiếu lỗi.", "note": "复现 = tái hiện (reproduce); 复现步骤 = steps to reproduce; 缺陷单 = phiếu lỗi (bug ticket). Câu 把 + V + 在 + nơi chốn. Lỗi: 我写复现步骤在缺陷单里 – SAI, phải dùng 把 khi có bổ ngữ nơi chốn 在……."},
-    {"t": "我试了三次，每次都能复现。", "py": "Wǒ shìle sān cì, měi cì dōu néng fùxiàn.", "vi": "Tôi thử ba lần, lần nào cũng tái hiện được.", "note": "Nêu TẦN SUẤT lỗi – thông tin bắt buộc trong bug report. Các mức: 必现 (luôn xảy ra), 偶现 (thỉnh thoảng), 很难复现 (khó tái hiện). 每……都…… = mỗi… đều…"},
-    {"t": "你用的是哪个版本？", "py": "Nǐ yòng de shì nǎge bǎnběn?", "vi": "Bạn dùng phiên bản nào?", "note": "Câu hỏi đầu tiên dev thường hỏi. Tester nên chủ động ghi: 版本号 (số phiên bản), 测试环境 (môi trường), 浏览器/手机型号 (trình duyệt/máy). 部署 bùshǔ = triển khai (deploy)."},
-    {"t": "截图和录屏我都附上了，日志也导出来了。", "py": "Jiétú hé lùpíng wǒ dōu fùshàng le, rìzhì yě dǎo chūlai le.", "vi": "Ảnh chụp và video màn hình tôi đã đính kèm, log cũng đã xuất ra.", "note": "Tân ngữ đưa lên đầu câu làm chủ đề (截图和录屏) – rất tự nhiên trong khẩu ngữ. 附上 = đính kèm; 导出 = xuất ra (export); 日志 = log."},
-    {"t": "严重程度是“严重”，优先级是“高”。", "py": "Yánzhòng chéngdù shì ‘yánzhòng’, yōuxiānjí shì ‘gāo’.", "vi": "Mức độ nghiêm trọng là ‘Nghiêm trọng’, mức ưu tiên là ‘Cao’.", "note": "Phân biệt 严重程度 (severity – ảnh hưởng kỹ thuật/kinh doanh) với 优先级 (priority – cần sửa gấp đến đâu). Các mức thường gặp: 致命 / 严重 / 一般 / 轻微; 高 / 中 / 低."},
-    {"t": "涉及钱的都不能马虎。", "py": "Shèjí qián de dōu bù néng mǎhu.", "vi": "Cái gì liên quan đến tiền đều không được qua loa.", "note": "涉及 = liên quan đến (trang trọng hơn 跟……有关). 马虎 mǎhu = cẩu thả, qua loa. Nguyên tắc QA: thanh toán, giá, tiền luôn ưu tiên cao."},
-    {"t": "我收到通知就验证。", "py": "Wǒ shōudào tōngzhī jiù yànzhèng.", "vi": "Tôi nhận được thông báo là kiểm tra lại ngay.", "note": "V1 + 就 + V2 = hễ… là… ngay. 验证 = kiểm chứng lại sau khi sửa (verify). Trạng thái phiếu lỗi: 新建 → 已修复 → 已验证 → 已关闭; nếu chưa sửa được: 重新打开 (reopen)."},
-    {"t": "这个我另外提一个问题。", "py": "Zhège wǒ lìngwài tí yí ge wèntí.", "vi": "Cái này tôi báo thành một lỗi riêng.", "note": "Nguyên tắc: mỗi phiếu chỉ một lỗi, lỗi mới phát hiện khi verify thì tạo phiếu khác. 提 + 问题/缺陷 = nêu, báo (lỗi). 另外 = riêng ra, ngoài ra."},
-    {"t": "那原来那个就可以关闭了吧？", "py": "Nà yuánlái nàge jiù kěyǐ guānbì le ba?", "vi": "Vậy cái ban đầu có thể đóng được rồi chứ?", "note": "吧 cuối câu = hỏi để xác nhận điều mình đoán. 关闭 = đóng (close) phiếu lỗi. Chỉ đóng khi đã verify đúng theo các bước gốc."}
-  ],
-  "qs": [
-    {"q": "Lỗi Hà phát hiện là gì?", "o": ["Không áp dụng được mã giảm giá", "Áp mã giảm giá rồi đổi số lượng thì tổng tiền không cập nhật", "Ứng dụng bị treo khi thanh toán"], "a": 1, "e": "用了优惠券以后，如果再修改菜的数量，订单总价不会更新."},
-    {"q": "Vì sao Hiểu Tuyết không thấy lỗi khi tự thử?", "o": ["Cô ấy dùng phiên bản cũ", "Cô ấy test theo thứ tự ngược lại (đổi số lượng trước, dùng mã sau)", "Cô ấy chưa từng thử"], "a": 1, "e": "我一般是反过来测的 – thứ tự thao tác khác nên không gặp lỗi. Bài học: bước tái hiện phải ghi đúng thứ tự."},
-    {"q": "Hà đã đính kèm những gì?", "o": ["Chỉ ảnh chụp màn hình", "Ảnh chụp, video quay màn hình và log", "Không đính kèm gì"], "a": 1, "e": "截图和录屏我都附上了，日志也导出来了."},
-    {"q": "Nguyên nhân kỹ thuật của lỗi?", "o": ["Hệ thống đọc giá cũ trong bộ nhớ đệm (cache)", "Mã giảm giá đã hết hạn", "Mạng bị chậm"], "a": 0, "e": "系统读的是缓存里的旧价格 – 缓存 huǎncún = cache."},
-    {"q": "Hà đặt mức độ nghiêm trọng và ưu tiên thế nào, vì sao?", "o": ["Nghiêm trọng – ưu tiên cao, vì công ty bị thu thiếu tiền", "Nhẹ – ưu tiên thấp, vì ít người gặp", "Nghiêm trọng – ưu tiên thấp, vì sắp nghỉ lễ"], "a": 0, "e": "这个问题会让公司少收钱……严重……高."},
-    {"q": "Câu hỏi 删除优惠券的时候价格对吗？ của Hiểu Tuyết có tác dụng gì?", "o": ["Để bắt lỗi Hà", "Gợi ý thêm một trường hợp kiểm thử mà Hà chưa test", "Để đổi chủ đề"], "a": 1, "e": "Hà đáp 这个我还没测，好问题！我现在就补一个测试用例 – dev và tester hợp tác tốt. Câu hỏi suy luận."},
-    {"q": "Khi verify, Hà phát hiện lỗi hiển thị dấu thập phân. Hà xử lý thế nào?", "o": ["Bỏ qua", "Báo thành một lỗi riêng, ưu tiên thấp", "Mở lại lỗi cũ"], "a": 1, "e": "这个我另外提一个低优先级的问题 – mỗi phiếu một lỗi; lỗi gốc đã sửa đúng nên được đóng."},
-    {"q": "Cuối cuộc trao đổi, quan hệ giữa hai người thế nào?", "o": ["Căng thẳng, đổ lỗi cho nhau", "Tôn trọng, cảm ơn lẫn nhau", "Lạnh nhạt"], "a": 1, "e": "谢谢你修得这么快！– 也谢谢你写得这么清楚. Bug report tốt giúp quan hệ dev – QA tốt. Câu hỏi thái độ."}
-  ],
-  "exercises": [
-    {"t": "fill", "q": "我试了三次，每次都能___。(lần nào cũng tái hiện được)", "py": "Wǒ shìle sān cì, měi cì dōu néng fùxiàn.", "a": "复现", "alt": ["fuxian", "重现", "chongxian"], "e": "复现 (hoặc 重现) = tái hiện lỗi. Đi kèm 每次都能 để nói lỗi ‘luôn xảy ra’ (必现)."},
-    {"t": "order", "q": "Sắp xếp thành câu: ‘Tôi đã ghi các bước tái hiện vào phiếu lỗi.’", "w": ["写在", "我把", "缺陷单里了", "复现步骤"], "a": "我把复现步骤写在缺陷单里了", "e": "把 + tân ngữ (复现步骤) + 写在 + nơi chốn + 了."},
-    {"t": "listen", "say": "在我电脑上没问题啊。", "lang": "zh-CN", "q": "Lập trình viên đang ngụ ý gì?", "o": ["Thừa nhận có lỗi", "Nghi ngờ lỗi, vì trên máy họ chạy bình thường", "Máy tính của họ bị hỏng"], "a": 1, "e": "Câu quen thuộc ‘works on my machine’ – cần đưa bước tái hiện, phiên bản, môi trường để thuyết phục."},
-    {"t": "dict", "say": "涉及钱的都不能马虎。", "lang": "zh-CN", "a": "涉及钱的都不能马虎。", "py": "Shèjí qián de dōu bù néng mǎhu.", "e": "涉及 shèjí (sh-, j-); 马虎 mǎhu (虎 thanh nhẹ)."},
-    {"t": "match", "q": "Nối thuật ngữ QA với nghĩa", "pairs": [["缺陷", "lỗi (defect)"], ["复现步骤", "các bước tái hiện"], ["优先级", "mức ưu tiên"], ["回归测试", "kiểm thử hồi quy"], ["测试用例", "ca kiểm thử (test case)"], ["日志", "log, nhật ký hệ thống"]], "e": "Bộ thuật ngữ nền của tester làm việc với đối tác Trung Quốc."},
-    {"t": "mc", "q": "Câu nào lịch sự và chuyên nghiệp nhất khi báo lỗi cho lập trình viên?", "o": ["你的代码又错了。", "我发现了一个问题，想跟你确认一下。", "这个问题你必须马上改！"], "a": 1, "e": "Mở lời mềm, hướng vào vấn đề chứ không vào con người. Mức khẩn cấp thể hiện qua 优先级, không qua giọng ra lệnh."}
-  ],
-  "practice": [
-    {"p": "Báo lỗi: nhập sai mật khẩu 5 lần mà tài khoản không bị khoá (yêu cầu: khoá 15 phút). Nêu bước, phiên bản, tần suất, mức độ.", "model": "我发现了一个登录的问题，想跟你确认一下。需求文件里写的是，密码连续输错五次，账号要锁定十五分钟。可是我连续输错了五次，还能继续登录。复现步骤我写在缺陷单里了，版本是今天上午部署的，我试了三次，每次都能复现。这个涉及安全，我把严重程度定成了“严重”，优先级是“高”。", "py": "Wǒ fāxiànle yí ge dēnglù de wèntí, xiǎng gēn nǐ quèrèn yíxià. Xūqiú wénjiàn li xiě de shì, mìmǎ liánxù shūcuò wǔ cì, zhànghào yào suǒdìng shíwǔ fēnzhōng. Kěshì wǒ liánxù shūcuòle wǔ cì, hái néng jìxù dēnglù. Fùxiàn bùzhòu wǒ xiě zài quēxiàn dān li le, bǎnběn shì jīntiān shàngwǔ bùshǔ de, wǒ shìle sān cì, měi cì dōu néng fùxiàn. Zhège shèjí ānquán, wǒ bǎ yánzhòng chéngdù dìngchéngle ‘yánzhòng’, yōuxiānjí shì ‘gāo’.", "vi": "Mình phát hiện một vấn đề đăng nhập, muốn xác nhận với bạn. Tài liệu yêu cầu ghi: nhập sai mật khẩu 5 lần liên tiếp thì khoá tài khoản 15 phút. Nhưng mình nhập sai 5 lần liên tiếp vẫn đăng nhập tiếp được. Các bước tái hiện mình ghi trong phiếu lỗi, phiên bản triển khai sáng nay, thử 3 lần lần nào cũng tái hiện. Lỗi này liên quan bảo mật nên mình đặt mức ‘Nghiêm trọng’, ưu tiên ‘Cao’."},
-    {"p": "Lập trình viên nói: 这不是bug，需求就是这样的。Bạn phản hồi lịch sự: đưa tài liệu, đề nghị hỏi người phụ trách sản phẩm.", "model": "我理解你的意思。不过需求文件第三页写的是“修改数量后，总价要实时更新”，我截图给你看一下。如果我们俩理解不一样，要不我们一起问一下产品经理，以他的答复为准，好吗？", "py": "Wǒ lǐjiě nǐ de yìsi. Búguò xūqiú wénjiàn dì-sān yè xiě de shì ‘xiūgǎi shùliàng hòu, zǒngjià yào shíshí gēngxīn’, wǒ jiétú gěi nǐ kàn yíxià. Rúguǒ wǒmen liǎ lǐjiě bù yíyàng, yàobù wǒmen yìqǐ wèn yíxià chǎnpǐn jīnglǐ, yǐ tā de dáfù wéi zhǔn, hǎo ma?", "vi": "Mình hiểu ý bạn. Nhưng trang 3 tài liệu yêu cầu ghi ‘sau khi sửa số lượng, tổng tiền phải cập nhật tức thì’, mình chụp cho bạn xem. Nếu hai đứa hiểu khác nhau, hay là mình cùng hỏi quản lý sản phẩm, lấy câu trả lời của anh ấy làm chuẩn, được không?"},
-    {"p": "Verify xong: báo cho dev là lỗi đã sửa đúng, bạn sẽ đóng phiếu, và có một lỗi nhỏ khác bạn sẽ báo riêng.", "model": "我按原来的步骤验证了，问题已经解决了，我现在把缺陷单关闭。另外，我发现按钮的文字在小屏幕手机上显示不全，这个我另外提一个低优先级的问题。谢谢你！", "py": "Wǒ àn yuánlái de bùzhòu yànzhèng le, wèntí yǐjīng jiějué le, wǒ xiànzài bǎ quēxiàn dān guānbì. Lìngwài, wǒ fāxiàn ànniǔ de wénzì zài xiǎo píngmù shǒujī shang xiǎnshì bù quán, zhège wǒ lìngwài tí yí ge dī yōuxiānjí de wèntí. Xièxie nǐ!", "vi": "Mình đã verify theo các bước cũ, lỗi đã được giải quyết, mình đóng phiếu luôn. Ngoài ra, mình thấy chữ trên nút hiển thị không đủ trên điện thoại màn hình nhỏ, cái này mình báo riêng với ưu tiên thấp. Cảm ơn bạn!"}
-  ]
+ "no": 29,
+ "lv": "hsk4",
+ "title": "Báo lỗi phần mềm với lập trình viên",
+ "sub": "提交缺陷 · Tíjiāo quēxiàn",
+ "situation": "Tester Thu Hà (范秋河) phát hiện lỗi trong ứng dụng đặt đồ ăn: dùng mã giảm giá xong mà đổi số lượng món thì tổng tiền không cập nhật. Hà sang bàn lập trình viên Hiểu Tuyết (林晓雪). Hiểu Tuyết nói câu kinh điển ‘trên máy mình chạy bình thường mà’. Hà đưa bước tái hiện, phiên bản, ảnh – video – log, thống nhất mức độ nghiêm trọng/ưu tiên, rồi kiểm tra lại (verify) và đóng lỗi. Đây là bộ từ vựng QA bằng tiếng Trung dùng được ngay ở công ty. Nghe lần 1: Vì sao Hiểu Tuyết không thấy lỗi? Nguyên nhân kỹ thuật là gì?",
+ "lang": "zh-CN",
+ "lines": [
+  {
+   "s": "范秋河",
+   "g": "f",
+   "t": "晓雪，忙吗？我在测试环境发现了一个问题，想跟你确认一下。",
+   "py": "Xiǎoxuě, máng ma? Wǒ zài cèshì huánjìng fāxiànle yí ge wèntí, xiǎng gēn nǐ quèrèn yíxià.",
+   "vi": "Hiểu Tuyết, bận không? Mình phát hiện một vấn đề trên môi trường test, muốn xác nhận với bạn chút."
+  },
+  {
+   "s": "林晓雪",
+   "g": "f",
+   "t": "你说吧，什么问题？",
+   "py": "Nǐ shuō ba, shénme wèntí?",
+   "vi": "Bạn nói đi, vấn đề gì?"
+  },
+  {
+   "s": "范秋河",
+   "g": "f",
+   "t": "用户用了优惠券以后，如果再修改菜的数量，订单总价不会更新，还是原来的价格。",
+   "py": "Yònghù yòngle yōuhuìquàn yǐhòu, rúguǒ zài xiūgǎi cài de shùliàng, dìngdān zǒngjià bú huì gēngxīn, háishi yuánlái de jiàgé.",
+   "vi": "Sau khi người dùng áp mã giảm giá, nếu sửa số lượng món thì tổng tiền đơn hàng không cập nhật, vẫn là giá cũ."
+  },
+  {
+   "s": "林晓雪",
+   "g": "f",
+   "t": "不会吧？我昨天自己试过，在我电脑上没问题啊。",
+   "py": "Bú huì ba? Wǒ zuótiān zìjǐ shìguo, zài wǒ diànnǎo shang méi wèntí a.",
+   "vi": "Không thể nào? Hôm qua mình tự thử rồi, trên máy mình có sao đâu."
+  },
+  {
+   "s": "范秋河",
+   "g": "f",
+   "t": "你可能没按这个顺序操作。我把复现步骤写在缺陷单里了：第一步，加两份河粉；第二步，用满十万减两万的优惠券；第三步，再把数量改成三份。",
+   "py": "Nǐ kěnéng méi àn zhège shùnxù cāozuò. Wǒ bǎ fùxiàn búzhòu xiě zài quēxiàn dān li le: dì-yī bù, jiā liǎng fèn héfěn; dì-èr bù, yòng mǎn shí wàn jiǎn liǎng wàn de yōuhuìquàn; dì-sān bù, zài bǎ shùliàng gǎichéng sān fèn.",
+   "vi": "Có thể bạn không thao tác theo thứ tự này. Mình đã ghi các bước tái hiện trong phiếu lỗi: bước 1, thêm hai suất phở; bước 2, dùng mã ‘đơn từ 100 nghìn giảm 20 nghìn’; bước 3, đổi số lượng thành ba suất."
+  },
+  {
+   "s": "林晓雪",
+   "g": "f",
+   "t": "哦，是先用券，再改数量。我一般是反过来测的。",
+   "py": "Ò, shì xiān yòng quàn, zài gǎi shùliàng. Wǒ yìbān shì fǎn guòlai cè de.",
+   "vi": "À, là dùng mã trước rồi mới đổi số lượng. Mình thường test theo thứ tự ngược lại."
+  },
+  {
+   "s": "范秋河",
+   "g": "f",
+   "t": "对。我试了三次，每次都能复现。两种手机系统上都有这个问题。",
+   "py": "Duì. Wǒ shìle sān cì, měi cì dōu néng fùxiàn. Liǎng zhǒng shǒujī xìtǒng shang dōu yǒu zhège wèntí.",
+   "vi": "Đúng. Mình thử ba lần, lần nào cũng tái hiện được. Trên cả hai hệ điều hành điện thoại đều bị."
+  },
+  {
+   "s": "林晓雪",
+   "g": "f",
+   "t": "你用的是哪个版本？",
+   "py": "Nǐ yòng de shì nǎge bǎnběn?",
+   "vi": "Bạn dùng phiên bản nào?"
+  },
+  {
+   "s": "范秋河",
+   "g": "f",
+   "t": "是今天早上部署的那个版本。截图和录屏我都附上了，日志也导出来了。",
+   "py": "Shì jīntiān zǎoshang bùshǔ de nàge bǎnběn. Jiétú hé lùpíng wǒ dōu fùshàng le, rìzhì yě dǎo chūlai le.",
+   "vi": "Bản triển khai sáng nay. Ảnh chụp màn hình và video quay màn hình mình đều đính kèm rồi, log cũng đã xuất ra."
+  },
+  {
+   "s": "林晓雪",
+   "g": "f",
+   "t": "你写得真详细。我看看……找到了，修改数量以后，系统读的是缓存里的旧价格。",
+   "py": "Nǐ xiě de zhēn xiángxì. Wǒ kànkan... zhǎodào le, xiūgǎi shùliàng yǐhòu, xìtǒng dú de shì huǎncún li de jiù jiàgé.",
+   "vi": "Bạn viết chi tiết thật. Để mình xem… tìm ra rồi, sau khi sửa số lượng, hệ thống đọc giá cũ trong bộ nhớ đệm (cache)."
+  },
+  {
+   "s": "范秋河",
+   "g": "f",
+   "t": "这个问题会让公司少收钱，我把严重程度定成了“严重”，优先级是“高”。你觉得合理吗？",
+   "py": "Zhège wèntí huì ràng gōngsī shǎo shōu qián, wǒ bǎ yánzhòng chéngdù dìngchéngle ‘yánzhòng’, yōuxiānjí shì ‘gāo’. Nǐ juéde hélǐ ma?",
+   "vi": "Lỗi này khiến công ty thu thiếu tiền, mình đặt mức độ nghiêm trọng là ‘Nghiêm trọng’, ưu tiên ‘Cao’. Bạn thấy hợp lý không?"
+  },
+  {
+   "s": "林晓雪",
+   "g": "f",
+   "t": "合理，涉及钱的都不能马虎。我现在就改，大概需要一个小时。",
+   "py": "Hélǐ, shèjí qián de dōu bù néng mǎhu. Wǒ xiànzài jiù gǎi, dàgài xūyào yí ge xiǎoshí.",
+   "vi": "Hợp lý, cái gì liên quan đến tiền đều không được qua loa. Mình sửa ngay, khoảng một tiếng."
+  },
+  {
+   "s": "范秋河",
+   "g": "f",
+   "t": "好的。改完以后部署到测试环境，在缺陷单里把状态改成“已修复”，我收到通知就验证。",
+   "py": "Hǎo de. Gǎiwán yǐhòu bùshǔ dào cèshì huánjìng, zài quēxiàn dān li bǎ zhuàngtài gǎichéng ‘yǐ xiūfù’, wǒ shōudào tōngzhī jiù yànzhèng.",
+   "vi": "Được. Sửa xong thì triển khai lên môi trường test, đổi trạng thái phiếu lỗi thành ‘Đã sửa’, mình nhận thông báo là kiểm tra lại ngay."
+  },
+  {
+   "s": "林晓雪",
+   "g": "f",
+   "t": "行。对了，我顺便问一下，删除优惠券的时候价格对吗？",
+   "py": "Xíng. Duìle, wǒ shùnbiàn wèn yíxià, shānchú yōuhuìquàn de shíhou jiàgé duì ma?",
+   "vi": "Ok. À, tiện hỏi luôn, lúc xoá mã giảm giá thì giá có đúng không?"
+  },
+  {
+   "s": "范秋河",
+   "g": "f",
+   "t": "这个我还没测，好问题！我现在就补一个测试用例。",
+   "py": "Zhège wǒ hái méi cè, hǎo wèntí! Wǒ xiànzài jiù bǔ yí ge cèshì yònglì.",
+   "vi": "Cái này mình chưa test, câu hỏi hay! Mình bổ sung ngay một test case."
+  },
+  {
+   "s": "林晓雪",
+   "g": "f",
+   "t": "小河，已经修好了，你验证一下吧。",
+   "py": "Xiǎo Hé, yǐjīng xiūhǎo le, nǐ yànzhèng yíxià ba.",
+   "vi": "Tiểu Hà, sửa xong rồi, bạn kiểm tra lại nhé."
+  },
+  {
+   "s": "范秋河",
+   "g": "f",
+   "t": "我按原来的步骤测了，价格正确了。删除优惠券的情况也没问题。不过我发现总价旁边的小数点显示有点儿奇怪，这个我另外提一个低优先级的问题。",
+   "py": "Wǒ àn yuánlái de búzhòu cèle, jiàgé zhèngquè le. Shānchú yōuhuìquàn de qíngkuàng yě méi wèntí. Búguò wǒ fāxiàn zǒngjià pángbiān de xiǎoshùdiǎn xiǎnshì yǒudiǎnr qíguài, zhège wǒ lìngwài tí yí ge dī yōuxiānjí de wèntí.",
+   "vi": "Mình test theo các bước cũ, giá đã đúng. Trường hợp xoá mã cũng ổn. Nhưng mình thấy dấu thập phân cạnh tổng tiền hiển thị hơi lạ, cái này mình báo thành một lỗi riêng, ưu tiên thấp."
+  },
+  {
+   "s": "林晓雪",
+   "g": "f",
+   "t": "好，那原来那个就可以关闭了吧？",
+   "py": "Hǎo, nà yuánlái nàge jiù kěyǐ guānbì le ba?",
+   "vi": "Được, vậy lỗi ban đầu đóng được rồi chứ?"
+  },
+  {
+   "s": "范秋河",
+   "g": "f",
+   "t": "对，我现在关闭。谢谢你修得这么快！",
+   "py": "Duì, wǒ xiànzài guānbì. Xièxie nǐ xiū de zhème kuài!",
+   "vi": "Ừ, mình đóng luôn. Cảm ơn bạn sửa nhanh thế!"
+  },
+  {
+   "s": "林晓雪",
+   "g": "f",
+   "t": "也谢谢你写得这么清楚，省了我不少时间。",
+   "py": "Yě xièxie nǐ xiě de zhème qīngchu, shěngle wǒ bù shǎo shíjiān.",
+   "vi": "Cũng cảm ơn bạn viết rõ ràng thế, đỡ cho mình bao nhiêu thời gian."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "我发现了一个问题，想跟你确认一下。",
+   "py": "Wǒ fāxiànle yí ge wèntí, xiǎng gēn nǐ quèrèn yíxià.",
+   "vi": "Tôi phát hiện một vấn đề, muốn xác nhận với bạn.",
+   "note": "Cách mở lời báo lỗi mềm mỏng, mang tính hợp tác. Dùng 问题 thay vì ‘bug của bạn’. Tránh: 你的代码又有 bug 了 – nghe như đổ lỗi cá nhân. Văn bản chính thức gọi lỗi là 缺陷 (defect)."
+  },
+  {
+   "t": "在我电脑上没问题啊。",
+   "py": "Zài wǒ diànnǎo shang méi wèntí a.",
+   "vi": "Trên máy tôi có sao đâu.",
+   "note": "Câu ‘kinh điển’ của lập trình viên. Đáp chuyên nghiệp: 你可能没按这个顺序操作 / 我们看一下环境和版本是不是一样. Đừng cãi tay đôi – đưa bằng chứng (bước, phiên bản, log)."
+  },
+  {
+   "t": "我把复现步骤写在缺陷单里了。",
+   "py": "Wǒ bǎ fùxiàn búzhòu xiě zài quēxiàn dān li le.",
+   "vi": "Tôi đã ghi các bước tái hiện vào phiếu lỗi.",
+   "note": "复现 = tái hiện (reproduce); 复现步骤 = steps to reproduce; 缺陷单 = phiếu lỗi (bug ticket). Câu 把 + V + 在 + nơi chốn. Lỗi: 我写复现步骤在缺陷单里 – SAI, phải dùng 把 khi có bổ ngữ nơi chốn 在……."
+  },
+  {
+   "t": "我试了三次，每次都能复现。",
+   "py": "Wǒ shìle sān cì, měi cì dōu néng fùxiàn.",
+   "vi": "Tôi thử ba lần, lần nào cũng tái hiện được.",
+   "note": "Nêu TẦN SUẤT lỗi – thông tin bắt buộc trong bug report. Các mức: 必现 (luôn xảy ra), 偶现 (thỉnh thoảng), 很难复现 (khó tái hiện). 每……都…… = mỗi… đều…"
+  },
+  {
+   "t": "你用的是哪个版本？",
+   "py": "Nǐ yòng de shì nǎge bǎnběn?",
+   "vi": "Bạn dùng phiên bản nào?",
+   "note": "Câu hỏi đầu tiên dev thường hỏi. Tester nên chủ động ghi: 版本号 (số phiên bản), 测试环境 (môi trường), 浏览器/手机型号 (trình duyệt/máy). 部署 bùshǔ = triển khai (deploy)."
+  },
+  {
+   "t": "截图和录屏我都附上了，日志也导出来了。",
+   "py": "Jiétú hé lùpíng wǒ dōu fùshàng le, rìzhì yě dǎo chūlai le.",
+   "vi": "Ảnh chụp và video màn hình tôi đã đính kèm, log cũng đã xuất ra.",
+   "note": "Tân ngữ đưa lên đầu câu làm chủ đề (截图和录屏) – rất tự nhiên trong khẩu ngữ. 附上 = đính kèm; 导出 = xuất ra (export); 日志 = log."
+  },
+  {
+   "t": "严重程度是“严重”，优先级是“高”。",
+   "py": "Yánzhòng chéngdù shì ‘yánzhòng’, yōuxiānjí shì ‘gāo’.",
+   "vi": "Mức độ nghiêm trọng là ‘Nghiêm trọng’, mức ưu tiên là ‘Cao’.",
+   "note": "Phân biệt 严重程度 (severity – ảnh hưởng kỹ thuật/kinh doanh) với 优先级 (priority – cần sửa gấp đến đâu). Các mức thường gặp: 致命 / 严重 / 一般 / 轻微; 高 / 中 / 低."
+  },
+  {
+   "t": "涉及钱的都不能马虎。",
+   "py": "Shèjí qián de dōu bù néng mǎhu.",
+   "vi": "Cái gì liên quan đến tiền đều không được qua loa.",
+   "note": "涉及 = liên quan đến (trang trọng hơn 跟……有关). 马虎 mǎhu = cẩu thả, qua loa. Nguyên tắc QA: thanh toán, giá, tiền luôn ưu tiên cao."
+  },
+  {
+   "t": "我收到通知就验证。",
+   "py": "Wǒ shōudào tōngzhī jiù yànzhèng.",
+   "vi": "Tôi nhận được thông báo là kiểm tra lại ngay.",
+   "note": "V1 + 就 + V2 = hễ… là… ngay. 验证 = kiểm chứng lại sau khi sửa (verify). Trạng thái phiếu lỗi: 新建 → 已修复 → 已验证 → 已关闭; nếu chưa sửa được: 重新打开 (reopen)."
+  },
+  {
+   "t": "这个我另外提一个问题。",
+   "py": "Zhège wǒ lìngwài tí yí ge wèntí.",
+   "vi": "Cái này tôi báo thành một lỗi riêng.",
+   "note": "Nguyên tắc: mỗi phiếu chỉ một lỗi, lỗi mới phát hiện khi verify thì tạo phiếu khác. 提 + 问题/缺陷 = nêu, báo (lỗi). 另外 = riêng ra, ngoài ra."
+  },
+  {
+   "t": "那原来那个就可以关闭了吧？",
+   "py": "Nà yuánlái nàge jiù kěyǐ guānbì le ba?",
+   "vi": "Vậy cái ban đầu có thể đóng được rồi chứ?",
+   "note": "吧 cuối câu = hỏi để xác nhận điều mình đoán. 关闭 = đóng (close) phiếu lỗi. Chỉ đóng khi đã verify đúng theo các bước gốc."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Lỗi Hà phát hiện là gì?",
+   "o": [
+    "Áp mã giảm giá rồi đổi số lượng thì tổng tiền không cập nhật",
+    "Ứng dụng bị treo khi thanh toán",
+    "Không áp dụng được mã giảm giá"
+   ],
+   "a": 0,
+   "e": "用了优惠券以后，如果再修改菜的数量，订单总价不会更新."
+  },
+  {
+   "q": "Vì sao Hiểu Tuyết không thấy lỗi khi tự thử?",
+   "o": [
+    "Cô ấy dùng phiên bản cũ",
+    "Cô ấy test theo thứ tự ngược lại (đổi số lượng trước, dùng mã sau)",
+    "Cô ấy chưa từng thử"
+   ],
+   "a": 1,
+   "e": "我一般是反过来测的 – thứ tự thao tác khác nên không gặp lỗi. Bài học: bước tái hiện phải ghi đúng thứ tự."
+  },
+  {
+   "q": "Hà đã đính kèm những gì?",
+   "o": [
+    "Không đính kèm gì",
+    "Chỉ ảnh chụp màn hình",
+    "Ảnh chụp, video quay màn hình và log"
+   ],
+   "a": 2,
+   "e": "截图和录屏我都附上了，日志也导出来了."
+  },
+  {
+   "q": "Nguyên nhân kỹ thuật của lỗi?",
+   "o": [
+    "Mạng bị chậm",
+    "Hệ thống đọc giá cũ trong bộ nhớ đệm (cache)",
+    "Mã giảm giá đã hết hạn"
+   ],
+   "a": 1,
+   "e": "系统读的是缓存里的旧价格 – 缓存 huǎncún = cache."
+  },
+  {
+   "q": "Hà đặt mức độ nghiêm trọng và ưu tiên thế nào, vì sao?",
+   "o": [
+    "Nghiêm trọng – ưu tiên thấp, vì sắp nghỉ lễ",
+    "Nghiêm trọng – ưu tiên cao, vì công ty bị thu thiếu tiền",
+    "Nhẹ – ưu tiên thấp, vì ít người gặp"
+   ],
+   "a": 1,
+   "e": "这个问题会让公司少收钱……严重……高."
+  },
+  {
+   "q": "Câu hỏi 删除优惠券的时候价格对吗？ của Hiểu Tuyết có tác dụng gì?",
+   "o": [
+    "Để bắt lỗi Hà",
+    "Gợi ý thêm một trường hợp kiểm thử mà Hà chưa test",
+    "Để đổi chủ đề"
+   ],
+   "a": 1,
+   "e": "Hà đáp 这个我还没测，好问题！我现在就补一个测试用例 – dev và tester hợp tác tốt. Câu hỏi suy luận."
+  },
+  {
+   "q": "Khi verify, Hà phát hiện lỗi hiển thị dấu thập phân. Hà xử lý thế nào?",
+   "o": [
+    "Bỏ qua",
+    "Báo thành một lỗi riêng, ưu tiên thấp",
+    "Mở lại lỗi cũ"
+   ],
+   "a": 1,
+   "e": "这个我另外提一个低优先级的问题 – mỗi phiếu một lỗi; lỗi gốc đã sửa đúng nên được đóng."
+  },
+  {
+   "q": "Cuối cuộc trao đổi, quan hệ giữa hai người thế nào?",
+   "o": [
+    "Tôn trọng, cảm ơn lẫn nhau",
+    "Lạnh nhạt",
+    "Căng thẳng, đổ lỗi cho nhau"
+   ],
+   "a": 0,
+   "e": "谢谢你修得这么快！– 也谢谢你写得这么清楚. Bug report tốt giúp quan hệ dev – QA tốt. Câu hỏi thái độ."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "我试了三次，每次都能___。(lần nào cũng tái hiện được)",
+   "py": "Wǒ shìle sān cì, měi cì dōu néng fùxiàn.",
+   "a": "复现",
+   "alt": [
+    "fuxian",
+    "重现",
+    "chongxian"
+   ],
+   "e": "复现 (hoặc 重现) = tái hiện lỗi. Đi kèm 每次都能 để nói lỗi ‘luôn xảy ra’ (必现)."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu: ‘Tôi đã ghi các bước tái hiện vào phiếu lỗi.’",
+   "w": [
+    "写在",
+    "我把",
+    "缺陷单里了",
+    "复现步骤"
+   ],
+   "a": "我把复现步骤写在缺陷单里了",
+   "e": "把 + tân ngữ (复现步骤) + 写在 + nơi chốn + 了."
+  },
+  {
+   "t": "listen",
+   "say": "在我电脑上没问题啊。",
+   "lang": "zh-CN",
+   "q": "Lập trình viên đang ngụ ý gì?",
+   "o": [
+    "Máy tính của họ bị hỏng",
+    "Thừa nhận có lỗi",
+    "Nghi ngờ lỗi, vì trên máy họ chạy bình thường"
+   ],
+   "a": 2,
+   "e": "Câu quen thuộc ‘works on my machine’ – cần đưa bước tái hiện, phiên bản, môi trường để thuyết phục."
+  },
+  {
+   "t": "dict",
+   "say": "涉及钱的都不能马虎。",
+   "lang": "zh-CN",
+   "a": "涉及钱的都不能马虎。",
+   "py": "Shèjí qián de dōu bù néng mǎhu.",
+   "e": "涉及 shèjí (sh-, j-); 马虎 mǎhu (虎 thanh nhẹ)."
+  },
+  {
+   "t": "match",
+   "q": "Nối thuật ngữ QA với nghĩa",
+   "pairs": [
+    [
+     "缺陷",
+     "lỗi (defect)"
+    ],
+    [
+     "复现步骤",
+     "các bước tái hiện"
+    ],
+    [
+     "优先级",
+     "mức ưu tiên"
+    ],
+    [
+     "回归测试",
+     "kiểm thử hồi quy"
+    ],
+    [
+     "测试用例",
+     "ca kiểm thử (test case)"
+    ],
+    [
+     "日志",
+     "log, nhật ký hệ thống"
+    ]
+   ],
+   "e": "Bộ thuật ngữ nền của tester làm việc với đối tác Trung Quốc."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào lịch sự và chuyên nghiệp nhất khi báo lỗi cho lập trình viên?",
+   "o": [
+    "你的代码又错了。",
+    "我发现了一个问题，想跟你确认一下。",
+    "这个问题你必须马上改！"
+   ],
+   "a": 1,
+   "e": "Mở lời mềm, hướng vào vấn đề chứ không vào con người. Mức khẩn cấp thể hiện qua 优先级, không qua giọng ra lệnh."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Báo lỗi: nhập sai mật khẩu 5 lần mà tài khoản không bị khoá (yêu cầu: khoá 15 phút). Nêu bước, phiên bản, tần suất, mức độ.",
+   "model": "我发现了一个登录的问题，想跟你确认一下。需求文件里写的是，密码连续输错五次，账号要锁定十五分钟。可是我连续输错了五次，还能继续登录。复现步骤我写在缺陷单里了，版本是今天上午部署的，我试了三次，每次都能复现。这个涉及安全，我把严重程度定成了“严重”，优先级是“高”。",
+   "py": "Wǒ fāxiànle yí ge dēnglù de wèntí, xiǎng gēn nǐ quèrèn yíxià. Xūqiú wénjiàn li xiě de shì, mìmǎ liánxù shūcuò wǔ cì, zhànghào yào suǒdìng shíwǔ fēnzhōng. Kěshì wǒ liánxù shūcuòle wǔ cì, hái néng jìxù dēnglù. Fùxiàn búzhòu wǒ xiě zài quēxiàn dān li le, bǎnběn shì jīntiān shàngwǔ bùshǔ de, wǒ shìle sān cì, měi cì dōu néng fùxiàn. Zhège shèjí ānquán, wǒ bǎ yánzhòng chéngdù dìngchéngle ‘yánzhòng’, yōuxiānjí shì ‘gāo’.",
+   "vi": "Mình phát hiện một vấn đề đăng nhập, muốn xác nhận với bạn. Tài liệu yêu cầu ghi: nhập sai mật khẩu 5 lần liên tiếp thì khoá tài khoản 15 phút. Nhưng mình nhập sai 5 lần liên tiếp vẫn đăng nhập tiếp được. Các bước tái hiện mình ghi trong phiếu lỗi, phiên bản triển khai sáng nay, thử 3 lần lần nào cũng tái hiện. Lỗi này liên quan bảo mật nên mình đặt mức ‘Nghiêm trọng’, ưu tiên ‘Cao’."
+  },
+  {
+   "p": "Lập trình viên nói: 这不是 bug，需求就是这样的。Bạn phản hồi lịch sự: đưa tài liệu, đề nghị hỏi người phụ trách sản phẩm.",
+   "model": "我理解你的意思。不过需求文件第三页写的是“修改数量后，总价要实时更新”，我截图给你看一下。如果我们俩理解不一样，要不我们一起问一下产品经理，以他的答复为准，好吗？",
+   "py": "Wǒ lǐjiě nǐ de yìsi. Búguò xūqiú wénjiàn dì-sān yè xiě de shì ‘xiūgǎi shùliàng hòu, zǒngjià yào shíshí gēngxīn’, wǒ jiétú gěi nǐ kàn yíxià. Rúguǒ wǒmen liǎ lǐjiě bù yíyàng, yàobù wǒmen yìqǐ wèn yíxià chǎnpǐn jīnglǐ, yǐ tā de dáfù wéi zhǔn, hǎo ma?",
+   "vi": "Mình hiểu ý bạn. Nhưng trang 3 tài liệu yêu cầu ghi ‘sau khi sửa số lượng, tổng tiền phải cập nhật tức thì’, mình chụp cho bạn xem. Nếu hai đứa hiểu khác nhau, hay là mình cùng hỏi quản lý sản phẩm, lấy câu trả lời của anh ấy làm chuẩn, được không?"
+  },
+  {
+   "p": "Verify xong: báo cho dev là lỗi đã sửa đúng, bạn sẽ đóng phiếu, và có một lỗi nhỏ khác bạn sẽ báo riêng.",
+   "model": "我按原来的步骤验证了，问题已经解决了，我现在把缺陷单关闭。另外，我发现按钮的文字在小屏幕手机上显示不全，这个我另外提一个低优先级的问题。谢谢你！",
+   "py": "Wǒ àn yuánlái de búzhòu yànzhèng le, wèntí yǐjīng jiějué le, wǒ xiànzài bǎ quēxiàn dān guānbì. Lìngwài, wǒ fāxiàn ànniǔ de wénzì zài xiǎo píngmù shǒujī shang xiǎnshì bù quán, zhège wǒ lìngwài tí yí ge dī yōuxiānjí de wèntí. Xièxie nǐ!",
+   "vi": "Mình đã verify theo các bước cũ, lỗi đã được giải quyết, mình đóng phiếu luôn. Ngoài ra, mình thấy chữ trên nút hiển thị không đủ trên điện thoại màn hình nhỏ, cái này mình báo riêng với ưu tiên thấp. Cảm ơn bạn!"
+  }
+ ]
 }

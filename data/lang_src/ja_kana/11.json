@@ -1,0 +1,607 @@
+{
+ "no": 11,
+ "title": "Ôn tập tổng hợp 1 – Thông báo phòng học đổi giờ",
+ "sub": "きょうの へやは にかいです。",
+ "goals": [
+  "Đọc một thông báo kana có giờ mới và địa điểm mới.",
+  "Giữ rõ trường âm, nhịp っ và âm ghép khi truyền lại thông báo.",
+  "Phân biệt thông tin cũ bị hủy với thông tin đang có hiệu lực.",
+  "Viết một lời xác nhận ngắn có đủ giờ và nơi gặp."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Bài ôn này trộn chữ cơ bản, dấu đục, chữ nhỏ và katakana trong một việc thật: lớp học đổi phòng và đổi giờ. Trước hết hãy tìm các cặp thông tin cũ/mới; sau đó mới đọc thành tiếng. Không suy ra giờ gặp chỉ từ một con số nghe được. Câu phủ định ではありません có thể đứng ngay sau địa điểm cũ, vì vậy cần nghe hết câu. Những mẫu câu xuất hiện như công cụ đọc thông báo, không yêu cầu người mới phân tích mọi biến đổi ngữ pháp.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>Trong きょうしつ, きょ là một mora, う kéo dài phần o: kyo-o-shi-tsu. Trong じゅっぷん, っ giữ một nhịp trước p; không đọc thành じゅつぷん. So びょういん với びよういん để nhận ra chữ ょ nhỏ. Khi báo giờ くじ, đừng tự thêm âm kéo dài thành くうじ.</p>",
+   "items": [
+    {
+     "sym": "きょうしつ・びょういん",
+     "ex": [
+      "きょうしつ",
+      "びょういん"
+     ],
+     "vi": "Nhận chữ ghép nhỏ và nhịp nguyên âm dài như hai việc riêng."
+    },
+    {
+     "sym": "じゅっぷん・くじ",
+     "ex": [
+      "じゅっぷん",
+      "くじ"
+     ],
+     "vi": "Chỉ từ chỉ mười phút có nhịp ngắt; giờ chín không có nhịp kéo dài thêm."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "きょうしつ",
+     "kana": "きょうしつ",
+     "romaji": "kyooshitsu",
+     "vi": "phòng học",
+     "ex": "きょうしつは にかいです。",
+     "exVi": "Phòng học ở tầng hai."
+    },
+    {
+     "w": "じかん",
+     "kana": "じかん",
+     "romaji": "jikan",
+     "vi": "thời gian/giờ",
+     "ex": "じかんを かくにんします。",
+     "exVi": "Tôi xác nhận giờ."
+    },
+    {
+     "w": "へや",
+     "kana": "へや",
+     "romaji": "heya",
+     "vi": "phòng",
+     "ex": "この へやは あかるいです。",
+     "exVi": "Phòng này sáng."
+    },
+    {
+     "w": "にかい",
+     "kana": "にかい",
+     "romaji": "nikai",
+     "vi": "tầng hai",
+     "ex": "にかいに あがります。",
+     "exVi": "Tôi lên tầng hai."
+    },
+    {
+     "w": "いっかい",
+     "kana": "いっかい",
+     "romaji": "ikkai",
+     "vi": "tầng một",
+     "ex": "いっかいに つくえが あります。",
+     "exVi": "Ở tầng một có bàn."
+    },
+    {
+     "w": "くじ",
+     "kana": "くじ",
+     "romaji": "kuji",
+     "vi": "chín giờ",
+     "ex": "くじに はじまります。",
+     "exVi": "Bắt đầu lúc chín giờ."
+    },
+    {
+     "w": "じゅっぷん",
+     "kana": "じゅっぷん",
+     "romaji": "juppun",
+     "vi": "mười phút",
+     "ex": "じゅっぷん まちます。",
+     "exVi": "Tôi chờ mười phút."
+    },
+    {
+     "w": "まえ",
+     "kana": "まえ",
+     "romaji": "mae",
+     "vi": "phía trước",
+     "ex": "へやの まえで あいます。",
+     "exVi": "Chúng tôi gặp trước phòng."
+    },
+    {
+     "w": "あたらしい",
+     "kana": "あたらしい",
+     "romaji": "atarashii",
+     "vi": "mới",
+     "ex": "あたらしい かみを よみます。",
+     "exVi": "Tôi đọc tờ giấy mới."
+    },
+    {
+     "w": "ふるい",
+     "kana": "ふるい",
+     "romaji": "furui",
+     "vi": "cũ",
+     "ex": "ふるい メモは つかいません。",
+     "exVi": "Tôi không dùng ghi chú cũ."
+    },
+    {
+     "w": "かみ",
+     "kana": "かみ",
+     "romaji": "kami",
+     "vi": "giấy",
+     "ex": "かみに じかんを かきます。",
+     "exVi": "Tôi ghi giờ lên giấy."
+    },
+    {
+     "w": "メモ",
+     "kana": "めも",
+     "romaji": "memo",
+     "vi": "ghi chú",
+     "ex": "メモを みせてください。",
+     "exVi": "Xin cho tôi xem ghi chú."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Đọc ではありません như một khối báo thông tin không đúng. へやはにかいです là vị trí của phòng; へやのまえであいます đặt hoạt động gặp ở phía trước phòng. くじじゅっぷんに thêm に sau cả cụm giờ. Khi xác nhận, nhắc lại giờ mới rồi hỏi ですね để người gửi có cơ hội sửa.</p>",
+   "table": [
+    [
+     "Việc cần làm",
+     "Mẫu nhận diện"
+    ],
+    [
+     "Loại thông tin cũ",
+     "いっかいではありません"
+    ],
+    [
+     "Nêu địa điểm mới",
+     "にかいです"
+    ],
+    [
+     "Hẹn giờ và hành động",
+     "くじじゅっぷんに あいます"
+    ],
+    [
+     "Chỉ chỗ gặp",
+     "へやの まえで"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "きょうの へやは にかいです。",
+     "vi": "Phòng hôm nay ở tầng hai."
+    },
+    {
+     "t": "いっかいでは ありません。",
+     "vi": "Không phải tầng một."
+    },
+    {
+     "t": "くじじゅっぷんに あいます。",
+     "vi": "Chúng ta gặp lúc chín giờ mười."
+    },
+    {
+     "t": "あたらしい メモを よんでください。",
+     "vi": "Xin đọc ghi chú mới."
+    }
+   ],
+   "tips": [
+    "<p>Không dịch mọi で thành “ở”: trong ではありません, nó thuộc mẫu phủ định danh từ.</p>",
+    "<p>Tầng một và một lần có thể cùng cách viết kana いっかい; dựa vào bối cảnh tòa nhà của bài.</p>",
+    "<p>Trong thông báo có sửa đổi, đánh dấu giờ mới thay vì chép cả hai giờ rồi bỏ người đọc tự đoán.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Hai bạn đối chiếu ghi chú cũ với giờ và tầng mới; nghe hết phần phủ định trước khi chọn nơi gặp.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "この メモの へやは いっかいですね。",
+     "vi": "Phòng trong ghi chú này ở tầng một nhỉ."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "それは ふるい メモです。きょうは にかいです。",
+     "vi": "Đó là ghi chú cũ. Hôm nay ở tầng hai."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "じかんも ちがいますか。",
+     "vi": "Giờ cũng khác à?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。くじでは ありません。くじじゅっぷんです。",
+     "vi": "Vâng. Không phải chín giờ. Là chín giờ mười."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "にかいの きょうしつの まえですね。",
+     "vi": "Trước phòng học tầng hai nhỉ."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。そこで あいましょう。",
+     "vi": "Vâng. Chúng ta gặp ở đó nhé."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "あたらしい メモを かきます。",
+     "vi": "Tôi viết ghi chú mới."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "ありがとう。かみの じかんも なおしてください。",
+     "vi": "Cảm ơn. Xin sửa cả giờ trên giấy."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Ghi chú tầng một là bản nào?",
+     "o": [
+      "Bản chưa được viết",
+      "Bản cũ",
+      "Bản mới nhất"
+     ],
+     "a": 1,
+     "e": "Người đáp xác định それはふるいメモです trước khi báo tầng mới."
+    },
+    {
+     "q": "Giờ gặp hiện có hiệu lực là gì?",
+     "o": [
+      "Chín giờ mười",
+      "Chín giờ",
+      "Mười giờ chín"
+     ],
+     "a": 0,
+     "e": "くじ bị phủ định; くじじゅっぷん là giờ được thay vào."
+    },
+    {
+     "q": "Hai người gặp ở đâu?",
+     "o": [
+      "Trong phòng tầng một",
+      "Trước cửa hàng",
+      "Trước phòng học tầng hai"
+     ],
+     "a": 2,
+     "e": "Lượt xác nhận dùng にかいのきょうしつのまえ và được đồng ý."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "あたらしい かみを よみます。きょうの きょうしつは にかいです。\n\nふるい メモには「いっかい、くじ」と あります。でも、いまは ちがいます。\n\nくじじゅっぷんに、へやの まえで あいます。\n\nわたしは かみに あたらしい じかんを かきます。ともだちにも みせます。",
+   "vi": "Tôi đọc tờ giấy mới. Phòng học hôm nay ở tầng hai.\n\nGhi chú cũ có ghi tầng một, chín giờ. Nhưng bây giờ khác.\n\nChúng tôi gặp trước phòng lúc chín giờ mười.\n\nTôi ghi giờ mới lên giấy. Tôi cũng cho bạn xem.",
+   "gloss": [
+    {
+     "w": "きょうしつ",
+     "kana": "きょうしつ",
+     "romaji": "kyooshitsu",
+     "vi": "phòng học"
+    },
+    {
+     "w": "じかん",
+     "kana": "じかん",
+     "romaji": "jikan",
+     "vi": "thời gian/giờ"
+    },
+    {
+     "w": "へや",
+     "kana": "へや",
+     "romaji": "heya",
+     "vi": "phòng"
+    },
+    {
+     "w": "にかい",
+     "kana": "にかい",
+     "romaji": "nikai",
+     "vi": "tầng hai"
+    },
+    {
+     "w": "いっかい",
+     "kana": "いっかい",
+     "romaji": "ikkai",
+     "vi": "tầng một"
+    },
+    {
+     "w": "くじ",
+     "kana": "くじ",
+     "romaji": "kuji",
+     "vi": "chín giờ"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Tờ giấy nào được đọc trước?",
+     "o": [
+      "Tờ chưa có chữ",
+      "Tờ mới",
+      "Chỉ ghi chú cũ"
+     ],
+     "a": 1,
+     "e": "Câu mở đầu nêu あたらしいかみをよみます."
+    },
+    {
+     "q": "Vì sao không đến tầng một lúc chín giờ?",
+     "o": [
+      "Đó là thông tin cũ",
+      "Phòng tầng một chưa từng có",
+      "Lớp bắt đầu mười một giờ"
+     ],
+     "a": 0,
+     "e": "Đoạn thứ hai đối chiếu ghi chú cũ với thông tin hiện tại."
+    },
+    {
+     "q": "Người kể làm gì cho bạn?",
+     "o": [
+      "Bảo bạn giữ giờ cũ",
+      "Giấu tờ giấy mới",
+      "Cho xem giờ đã ghi lại"
+     ],
+     "a": 2,
+     "e": "ともだちにもみせます nói rõ việc chia sẻ thông tin."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Bạn nhận thông báo mới: tầng ba, mười giờ. Nói lại cả hai thông tin và hỏi xác nhận.",
+     "model": "あたらしい へやは さんかいですね。じかんは じゅうじですね。",
+     "vi": "Phòng mới ở tầng ba nhỉ. Giờ là mười giờ nhỉ.",
+     "tips": "Đừng dùng lại tầng hai và chín giờ mười của bài nghe; thẻ mới đã đổi cả hai dữ kiện."
+    },
+    {
+     "p": "Bạn thấy bạn mình cầm ghi chú cũ. Nói đó là bản cũ, mời đọc bản mới.",
+     "model": "それは ふるい メモです。こちらの あたらしい メモを よんでください。",
+     "vi": "Đó là ghi chú cũ. Xin đọc ghi chú mới ở đây.",
+     "tips": "Nêu vật cần đổi trước lời yêu cầu để người nghe biết bạn đang sửa thông tin nào."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết lời xác nhận ba câu theo thẻ mới: phòng tầng ba; gặp trước phòng lúc mười giờ; đã sửa ghi chú.",
+   "model": "へやは さんかいですね。じゅうじに へやの まえで あいます。メモを なおしました。",
+   "modelVi": "Phòng ở tầng ba nhỉ. Tôi sẽ gặp trước phòng lúc mười giờ. Tôi đã sửa ghi chú.",
+   "min": 25,
+   "tips": [
+    "Có thể chép mẫu なおしました để báo đã sửa; không cần tự biến đổi động từ khác.",
+    "Ghi ba dữ kiện theo thứ tự nơi, giờ, trạng thái cập nhật."
+   ],
+   "checklist": [
+    "Nêu さんかい thay vì にかい.",
+    "Giờ mới viết じゅうじ.",
+    "Có vị trí へやのまえ.",
+    "Có câu báo ghi chú đã được sửa."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “きょうしつ” nghĩa là gì?",
+   "o": [
+    "mới",
+    "phòng học",
+    "tầng một"
+   ],
+   "a": 1,
+   "e": "きょうしつは にかいです。 → Phòng học ở tầng hai. Từ cần nhận diện là “きょうしつ”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “じかん” nghĩa là gì?",
+   "o": [
+    "thời gian/giờ",
+    "chín giờ",
+    "cũ"
+   ],
+   "a": 0,
+   "e": "じかんを かくにんします。 → Tôi xác nhận giờ. Từ cần nhận diện là “じかん”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “へや” nghĩa là gì?",
+   "o": [
+    "mười phút",
+    "giấy",
+    "phòng"
+   ],
+   "a": 2,
+   "e": "この へやは あかるいです。 → Phòng này sáng. Từ cần nhận diện là “へや”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “にかい” nghĩa là gì?",
+   "o": [
+    "ghi chú",
+    "tầng hai",
+    "phía trước"
+   ],
+   "a": 1,
+   "e": "にかいに あがります。 → Tôi lên tầng hai. Từ cần nhận diện là “にかい”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Viết chữ nhỏ còn thiếu trong phòng học: き___うしつ",
+   "a": "ょ",
+   "e": "きょうしつ có âm ghép きょ rồi nhịp う kéo dài; không dùng よ lớn."
+  },
+  {
+   "t": "fill",
+   "q": "Viết nhịp ngắt trong mười phút: じゅ___ぷん",
+   "a": "っ",
+   "e": "Trước p của ぷん giữ một mora bằng っ nhỏ."
+  },
+  {
+   "t": "fill",
+   "q": "Điền trợ từ chỉ giờ: くじじゅっぷん___ あいます。",
+   "a": "に",
+   "e": "に đặt sau toàn bộ cụm giờ gặp, không chen giữa giờ và phút."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu khẳng định giờ gặp.",
+   "w": [
+    "あいます。",
+    "に",
+    "くじじゅっぷん"
+   ],
+   "a": "くじじゅっぷんにあいます。",
+   "e": "Ghép giờ đầy đủ, trợ từ に rồi động từ gặp; giữ nguyên っ nhỏ."
+  },
+  {
+   "q": "Theo lời nghe mới, hôm nay ở tầng nào?",
+   "o": [
+    "Tầng một",
+    "Tầng ba",
+    "Tầng hai"
+   ],
+   "a": 1,
+   "e": "Câu khẳng định chọn さんかい; にかい nằm trong phần phủ định.",
+   "t": "listen",
+   "say": "きょうは さんかいです。にかいでは ありません。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "Lời hẹn mới yêu cầu gặp ở đâu?",
+   "o": [
+    "Trong phòng",
+    "Trước phòng",
+    "Ngoài tòa nhà"
+   ],
+   "a": 0,
+   "e": "なか chỉ bên trong, khác まえ của hội thoại chính.",
+   "t": "listen",
+   "say": "じゅうじに、へやの なかで あいます。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "くじに メモを みます。",
+   "a": "くじに メモを みます。",
+   "lang": "ja-JP",
+   "e": "Nghe giờ chín và hành động xem ghi chú; không thêm mười phút vì câu này không có じゅっぷん."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "いっかい",
+     "tầng một"
+    ],
+    [
+     "くじ",
+     "chín giờ"
+    ],
+    [
+     "じゅっぷん",
+     "mười phút"
+    ],
+    [
+     "まえ",
+     "phía trước"
+    ],
+    [
+     "あたらしい",
+     "mới"
+    ]
+   ],
+   "e": "いっかい/にかい là hai tầng, くじ là giờ, じゅっぷん là khoảng phút và まえ là quan hệ vị trí; ghép theo loại thông tin giúp tránh tráo giờ với nơi."
+  },
+  {
+   "q": "Tờ giấy nào được đọc trước?",
+   "o": [
+    "Tờ chưa có chữ",
+    "Tờ mới",
+    "Chỉ ghi chú cũ"
+   ],
+   "a": 1,
+   "e": "Câu mở đầu nêu あたらしいかみをよみます.",
+   "t": "mc"
+  },
+  {
+   "q": "Vì sao không đến tầng một lúc chín giờ?",
+   "o": [
+    "Lớp bắt đầu mười một giờ",
+    "Đó là thông tin cũ",
+    "Phòng tầng một chưa từng có"
+   ],
+   "a": 1,
+   "e": "Đoạn thứ hai đối chiếu ghi chú cũ với thông tin hiện tại.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "In hai phiếu thông báo có màu khác nhau: bản cũ ghi tầng một lúc chín giờ, bản mới ghi tầng hai lúc chín giờ mười; thêm thẻ tầng ba lúc mười giờ cho phần chuyển giao.",
+  "steps": [
+   {
+    "t": "10'",
+    "do": "Đặt hai phiếu cũ và mới cạnh nhau; học viên khoanh hai trường đã thay đổi mà chưa đọc thành tiếng."
+   },
+   {
+    "t": "20'",
+    "do": "Luyện きょうしつ bằng nhịp kyo-o-shi-tsu rồi so với một chuỗi dùng よ lớn; học viên chỉ chữ gây khác biệt."
+   },
+   {
+    "t": "25'",
+    "do": "Đọc các từ tầng, giờ, phút; xếp いっかい/にかい vào cột nơi và くじ/じゅっぷん vào cột thời gian."
+   },
+   {
+    "t": "20'",
+    "do": "Nghe lần đầu để chọn bản có hiệu lực, lần hai ghi chính xác địa điểm và giờ được xác nhận."
+   },
+   {
+    "t": "15'",
+    "do": "Đọc thông báo, gạch chân câu chứa thông tin cũ và nối nó với câu sửa ngay sau."
+   },
+   {
+    "t": "15'",
+    "do": "Thực hiện bài điền chữ nhỏ và trợ từ; giải thích vì sao に đứng sau cả cụm giờ."
+   },
+   {
+    "t": "20'",
+    "do": "Đóng vai người cầm ghi chú cũ và người có bản mới; mỗi cặp đổi cả tầng lẫn giờ trên thẻ."
+   },
+   {
+    "t": "20'",
+    "do": "Viết lời xác nhận theo thẻ tầng ba, mười giờ; bạn học kiểm xem có lẫn dữ kiện bản gốc không."
+   },
+   {
+    "t": "20'",
+    "do": "Chơi truyền thông báo qua ba người; người cuối đối chiếu hai trường nơi và giờ với phiếu đầu."
+   },
+   {
+    "t": "15'",
+    "do": "Làm chính tả ngắn, tự đánh dấu っ/ょ và nộp bản xác nhận đã sửa đủ dữ kiện."
+   }
+  ],
+  "games": [
+   "Phân phát ba giờ khác nhau; người nhận phải tìm bạn có đúng giờ và tầng bằng câu hỏi xác nhận.",
+   "Giáo viên đọc một câu khẳng định kèm một câu phủ định; nhóm giơ phiếu thông tin còn hiệu lực."
+  ],
+  "errors": [
+   "Đọc きょう thành ki-yo-u: chỉ lại ょ nhỏ và gõ hai nhịp kyo-o.",
+   "Viết じゅつぷん vì nghe một chỗ ngắt: đối chiếu つ lớn với っ giữ nhịp.",
+   "Chọn giờ cũ vì nghe thấy trước: yêu cầu nghe tiếp ではありません rồi mới ghi đáp án.",
+   "Dùng dữ kiện tầng hai cho đề mới tầng ba: đối chiếu lại thẻ nhiệm vụ trước khi luyện nói."
+  ],
+  "homework": "Tạo hai thông báo giả với một lần đổi tầng và một lần đổi giờ; ghi bản mới rõ ràng và tự đọc để kiểm chữ nhỏ, trường âm, nhịp ngắt."
+ }
+}

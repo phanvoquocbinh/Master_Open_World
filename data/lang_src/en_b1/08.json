@@ -1,168 +1,623 @@
 {
-  "no": 8,
-  "title": "Sức khoẻ & lối sống – Suy đoán với must / might / could / can't",
-  "sub": "He must be exhausted. She can't have seen the email.",
-  "goals": [
-    "Suy đoán về hiện tại với must / might / may / could / can't + V (be, be V-ing)",
-    "Suy đoán về quá khứ với must / might / could / can't + have + V3",
-    "Chọn đúng mức độ chắc chắn và tránh nhầm mustn't (cấm) với can't (chắc chắn không)",
-    "Mô tả triệu chứng, nói chuyện với bác sĩ, khuyên về lối sống bằng 22 từ/cụm chủ đề sức khoẻ",
-    "Viết email 120–150 từ trả lời bạn bè: đoán nguyên nhân và đưa lời khuyên"
-  ],
-  "parts": [
-    {"k": "words", "h": "Từ vựng: sức khoẻ, triệu chứng & lối sống", "items": [
-      {"w": "symptom", "ipa": "/ˈsɪmptəm/", "pos": "n", "vi": "triệu chứng", "ex": "What are your symptoms?", "exVi": "Anh có những triệu chứng gì?"},
-      {"w": "headache", "ipa": "/ˈhedeɪk/", "pos": "n", "vi": "đau đầu (have a headache)", "ex": "I've had a headache since this morning.", "exVi": "Tôi bị đau đầu từ sáng."},
-      {"w": "sore throat", "ipa": "/ˌsɔː ˈθrəʊt/", "pos": "n", "vi": "đau họng (have a sore throat)", "ex": "I have a sore throat, so I can't sing tonight.", "exVi": "Tôi bị đau họng nên tối nay không hát được."},
-      {"w": "have a temperature", "ipa": "/ˌhæv ə ˈtemprətʃə(r)/", "pos": "phr", "vi": "bị sốt (Anh-Anh; cũng nói have a fever)", "ex": "My son has a temperature of 39 degrees.", "exVi": "Con trai tôi sốt 39 độ."},
-      {"w": "cough", "ipa": "/kɒf/", "pos": "n", "vi": "ho; (động từ) ho", "ex": "He's had a bad cough for a week.", "exVi": "Anh ấy bị ho nặng một tuần nay."},
-      {"w": "feel dizzy", "ipa": "/ˌfiːl ˈdɪzi/", "pos": "phr", "vi": "thấy chóng mặt", "ex": "I feel dizzy when I stand up quickly.", "exVi": "Tôi thấy chóng mặt khi đứng dậy nhanh."},
-      {"w": "catch a cold", "ipa": "/ˌkætʃ ə ˈkəʊld/", "pos": "phr", "vi": "bị cảm lạnh (catch – caught – caught)", "ex": "I think I've caught a cold.", "exVi": "Hình như tôi bị cảm rồi."},
-      {"w": "food poisoning", "ipa": "/ˈfuːd ˌpɔɪzənɪŋ/", "pos": "n", "vi": "ngộ độc thực phẩm", "ex": "She got food poisoning from some bad seafood.", "exVi": "Cô ấy bị ngộ độc vì ăn hải sản hỏng."},
-      {"w": "be allergic to", "ipa": "/bi əˈlɜːdʒɪk tə/", "pos": "phr", "vi": "bị dị ứng với", "ex": "I'm allergic to peanuts.", "exVi": "Tôi bị dị ứng với lạc."},
-      {"w": "get over", "ipa": "/ˌɡet ˈəʊvə(r)/", "pos": "phr", "vi": "khỏi (bệnh), vượt qua", "ex": "It took me two weeks to get over the flu.", "exVi": "Tôi mất hai tuần mới khỏi cúm."},
-      {"w": "recover from", "ipa": "/rɪˈkʌvə(r) frəm/", "pos": "phr", "vi": "hồi phục sau (bệnh, phẫu thuật)", "ex": "He is recovering from an operation.", "exVi": "Anh ấy đang hồi phục sau ca phẫu thuật."},
-      {"w": "prescription", "ipa": "/prɪˈskrɪpʃn/", "pos": "n", "vi": "đơn thuốc", "ex": "The doctor gave me a prescription for antibiotics.", "exVi": "Bác sĩ kê cho tôi đơn thuốc kháng sinh."},
-      {"w": "painkiller", "ipa": "/ˈpeɪnkɪlə(r)/", "pos": "n", "vi": "thuốc giảm đau", "ex": "Take a painkiller and rest.", "exVi": "Uống một viên giảm đau rồi nghỉ ngơi."},
-      {"w": "check-up", "ipa": "/ˈtʃek ʌp/", "pos": "n", "vi": "buổi khám sức khoẻ định kỳ (have a check-up)", "ex": "You should have a check-up once a year.", "exVi": "Bạn nên khám sức khoẻ mỗi năm một lần."},
-      {"w": "stressed", "ipa": "/strest/", "pos": "adj", "vi": "căng thẳng (stress: sự căng thẳng)", "ex": "I always feel stressed before exams.", "exVi": "Tôi luôn căng thẳng trước kỳ thi."},
-      {"w": "lack of sleep", "ipa": "/ˌlæk əv ˈsliːp/", "pos": "n", "vi": "sự thiếu ngủ", "ex": "Lack of sleep can cause headaches.", "exVi": "Thiếu ngủ có thể gây đau đầu."},
-      {"w": "get enough sleep", "ipa": "/ˌɡet ɪˌnʌf ˈsliːp/", "pos": "phr", "vi": "ngủ đủ giấc", "ex": "Teenagers need to get enough sleep.", "exVi": "Thanh thiếu niên cần ngủ đủ giấc."},
-      {"w": "stay hydrated", "ipa": "/ˌsteɪ haɪˈdreɪtɪd/", "pos": "phr", "vi": "uống đủ nước", "ex": "Stay hydrated when you exercise in hot weather.", "exVi": "Hãy uống đủ nước khi tập thể dục trời nóng."},
-      {"w": "work out", "ipa": "/ˌwɜːk ˈaʊt/", "pos": "phr", "vi": "tập thể dục, tập gym", "ex": "I work out three times a week.", "exVi": "Tôi tập thể dục ba lần một tuần."},
-      {"w": "balanced diet", "ipa": "/ˌbælənst ˈdaɪət/", "pos": "n", "vi": "chế độ ăn cân bằng (diet = chế độ ăn, không chỉ là ‘ăn kiêng’)", "ex": "A balanced diet includes plenty of vegetables.", "exVi": "Chế độ ăn cân bằng có nhiều rau."},
-      {"w": "junk food", "ipa": "/ˈdʒʌŋk fuːd/", "pos": "n", "vi": "đồ ăn vặt / đồ ăn nhanh không lành mạnh", "ex": "Try to eat less junk food.", "exVi": "Cố gắng ăn ít đồ ăn vặt hơn."},
-      {"w": "put on weight", "ipa": "/ˌpʊt ɒn ˈweɪt/", "pos": "phr", "vi": "tăng cân (≠ lose weight: giảm cân)", "ex": "I've put on weight since I started working from home.", "exVi": "Tôi tăng cân từ khi làm việc ở nhà."}
-    ]},
-    {"k": "grammar", "h": "Suy đoán về hiện tại: must / might / could / can't + V", "html": "<p>Khi không biết chắc mà đoán dựa trên bằng chứng, tiếng Việt dùng “<b>chắc là, hẳn là, có lẽ, không thể nào</b>”. Tiếng Anh dùng <b>động từ khuyết thiếu</b> – mỗi từ ứng với một mức độ chắc chắn:</p>", "table": [["Mức độ chắc chắn", "Động từ", "Tiếng Việt", "Ví dụ"], ["≈ 95% có", "must + V", "chắc chắn là, hẳn là", "He's coughing a lot. He must be ill."], ["≈ 50%", "might / may / could + V", "có lẽ, có thể", "She isn't answering. She might be in a meeting."], ["≈ 95% không", "can't / couldn't + V", "không thể nào", "That can't be Nam – he's in Da Nang this week."], ["Đang diễn ra", "must / might / can't + be + V-ing", "chắc là đang…", "The lights are on. They must be working late."]], "ex": [
-      {"t": "You've been working for twelve hours. You must be exhausted.", "vi": "Bạn làm việc mười hai tiếng rồi. Chắc bạn kiệt sức lắm."},
-      {"t": "Lan isn't at her desk. She might be at lunch, or she could be at the clinic.", "vi": "Lan không ở bàn. Có lẽ cô ấy đi ăn trưa, hoặc có thể đang ở phòng khám."},
-      {"t": "This can't be your bag. Yours is black.", "vi": "Đây không thể là túi của bạn. Túi bạn màu đen mà."},
-      {"t": "Tom isn't picking up. He may be driving.", "vi": "Tom không nghe máy. Có thể anh ấy đang lái xe."}
-    ], "tips": [
-      "<b>Lỗi rất hay gặp:</b> dùng mustn't làm phủ định của must (suy đoán). mustn't = <b>cấm</b>: <i>You mustn't smoke here.</i> Muốn nói “chắc chắn không” → <b>can't</b>: ❌ <i>He mustn't be at home</i> → ✅ <i>He can't be at home.</i>",
-      "Sau must/might/could/can't là V nguyên mẫu, không có to, không thêm -s: ❌ <i>She musts be</i>, ❌ <i>He might to be</i>.",
-      "Khi chắc chắn 100% (có bằng chứng rõ ràng) thì không cần đoán: <i>He is ill – he told me.</i>",
-      "Câu hỏi suy đoán thường dùng <i>Could it be…? / Do you think he might…?</i> – ít dùng <i>Must he…?</i>"
-    ]},
-    {"k": "grammar", "h": "Suy đoán về quá khứ: must / might / could / can't + have + V3", "html": "<p>Để đoán về việc <b>đã xảy ra</b>, giữ nguyên động từ khuyết thiếu và thêm <b>have + V3</b> (have không đổi thành has dù chủ ngữ là he/she).</p>", "table": [["Động từ", "Nghĩa", "Ví dụ"], ["must have + V3", "chắc chắn đã", "The ground is wet. It must have rained last night."], ["might / may / could have + V3", "có lẽ đã", "He might have missed the bus."], ["can't / couldn't have + V3", "chắc chắn đã không", "She can't have seen the email – she hasn't replied."], ["must have been + V-ing", "chắc chắn đã đang (kéo dài)", "Your eyes are red. You must have been crying."]], "ex": [
-      {"t": "Hung has a terrible stomach ache. He must have eaten something bad.", "vi": "Hùng đau bụng dữ dội. Chắc cậu ấy đã ăn phải thứ gì đó hỏng."},
-      {"t": "I can't find my keys. I might have left them at the office.", "vi": "Tôi không tìm thấy chìa khoá. Có lẽ tôi để quên ở văn phòng."},
-      {"t": "He can't have been at the party. He was in hospital that night.", "vi": "Anh ấy không thể có mặt ở bữa tiệc. Tối đó anh ấy nằm viện."},
-      {"t": "She looks very relaxed. She must have had a good holiday.", "vi": "Cô ấy trông rất thư thái. Hẳn là cô ấy đã có kỳ nghỉ vui."}
-    ], "tips": [
-      "❌ <i>He must forgot</i>, ❌ <i>He must has forgotten</i>, ❌ <i>She can't saw it</i> → ✅ <i>He must <b>have forgotten</b>. She can't <b>have seen</b> it.</i>",
-      "<b>Phát âm:</b> have đọc yếu /əv/ và nối với động từ khuyết thiếu: must've /ˈmʌstəv/, might've /ˈmaɪtəv/, could've /ˈkʊdəv/, can't have /ˈkɑːnt əv/. Khi viết KHÔNG được viết ‘must of’ – đó là lỗi chính tả do nghe giống.",
-      "Đừng nhầm <b>could have done</b> (có lẽ đã) với nghĩa ‘lẽ ra đã có thể’ – nghĩa thứ hai sẽ học ở B2 (câu điều kiện loại 3)."
-    ]},
-    {"k": "dialog", "h": "Nghe: Hùng đâu rồi?", "lang": "en-GB", "note": "Sáng thứ Hai ở văn phòng, Hoa và Tuấn không thấy Hùng đâu và bắt đầu đoán. Nghe lần 1 (che lời thoại): cuối cùng Hùng bị làm sao? Nghe lần 2: ghi lại các câu đoán đúng và sai của Hoa và Tuấn, và vì sao họ đoán như vậy.", "lines": [
-      {"s": "Hoa", "g": "f", "t": "Have you seen Hung this morning? He isn't at his desk.", "vi": "Anh có thấy Hùng sáng nay không? Cậu ấy không ngồi ở bàn."},
-      {"s": "Tuan", "g": "m", "t": "No. He must be ill. He looked terrible yesterday afternoon, and he was coughing a lot.", "vi": "Không. Chắc là cậu ấy ốm. Chiều qua trông cậu ấy tệ lắm, lại ho nhiều nữa."},
-      {"s": "Hoa", "g": "f", "t": "He might have caught a cold. It's been raining all week.", "vi": "Có lẽ cậu ấy bị cảm. Mưa suốt cả tuần mà."},
-      {"s": "Tuan", "g": "m", "t": "Maybe. Or it could be the flu. Half the office has had it this month.", "vi": "Có thể. Hoặc có thể là cúm. Tháng này nửa văn phòng bị rồi."},
-      {"s": "Hoa", "g": "f", "t": "Hmm, but he never misses work. And he can't be at home in bed. Look, his jacket is on his chair!", "vi": "Hừm, nhưng cậu ấy chẳng bao giờ nghỉ làm. Và cậu ấy không thể đang nằm ở nhà được. Nhìn kìa, áo khoác của cậu ấy trên ghế!"},
-      {"s": "Tuan", "g": "m", "t": "You're right. Then he must have come in early. He might be in the meeting room.", "vi": "Em nói đúng. Vậy chắc cậu ấy đến sớm. Có lẽ đang ở phòng họp."},
-      {"s": "Hoa", "g": "f", "t": "He can't be in the meeting room. It's closed for cleaning today.", "vi": "Không thể ở phòng họp được. Hôm nay phòng họp đóng cửa để dọn dẹp."},
-      {"s": "Tuan", "g": "m", "t": "Then he must have gone to the clinic downstairs.", "vi": "Vậy hẳn là cậu ấy xuống phòng khám dưới tầng."},
-      {"s": "Hung", "g": "m", "t": "Morning, everyone. Sorry, I've just been to the doctor's.", "vi": "Chào mọi người. Xin lỗi, tôi vừa đi khám bác sĩ về."},
-      {"s": "Hoa", "g": "f", "t": "We were worried about you! What's wrong?", "vi": "Bọn mình lo cho cậu đấy! Cậu bị sao vậy?"},
-      {"s": "Hung", "g": "m", "t": "I had a terrible stomach ache all night. The doctor said it was food poisoning. It must have been the seafood I ate on Sunday.", "vi": "Tôi đau bụng khủng khiếp cả đêm. Bác sĩ nói là ngộ độc thực phẩm. Chắc là do hải sản tôi ăn hôm Chủ nhật."},
-      {"s": "Tuan", "g": "m", "t": "Oh no. You should go home and rest.", "vi": "Ôi không. Cậu nên về nhà nghỉ đi."},
-      {"s": "Hung", "g": "m", "t": "I will. I just came to get my laptop. The doctor gave me a prescription and told me to drink plenty of water.", "vi": "Tôi sẽ về. Tôi chỉ ghé lấy laptop. Bác sĩ kê đơn thuốc và dặn tôi uống thật nhiều nước."},
-      {"s": "Hoa", "g": "f", "t": "Take care, and get well soon!", "vi": "Giữ gìn sức khoẻ nhé, mau khoẻ lại!"}
-    ], "qs": [
-      {"q": "Why did Tuan think Hung was ill?", "o": ["He looked terrible and was coughing yesterday.", "Hung had called in sick.", "Hung was in the meeting room."], "a": 0, "e": "“He looked terrible yesterday afternoon, and he was coughing a lot.”"},
-      {"q": "Why did Hoa say “He can't be at home in bed”?", "o": ["His jacket was on his chair.", "He had sent her a message.", "The office was closed."], "a": 0, "e": "Bằng chứng: “Look, his jacket is on his chair!” → can't = chắc chắn không."},
-      {"q": "Why can't Hung be in the meeting room?", "o": ["It's closed for cleaning.", "It's too small.", "There's no meeting today."], "a": 0, "e": "“It's closed for cleaning today.”"},
-      {"q": "What was wrong with Hung? He had food ______.", "a": "poisoning", "e": "“The doctor said it was food poisoning.”"},
-      {"q": "“It must have been the seafood I ate on Sunday.” Hùng muốn nói:", "o": ["Gần như chắc chắn nguyên nhân là hải sản", "Chắc chắn không phải do hải sản", "Hùng bắt buộc phải ăn hải sản"], "a": 0, "e": "must have + V3 = suy đoán gần như chắc chắn về quá khứ."}
-    ]},
-    {"k": "read", "h": "Đọc: Hỏi bác sĩ – Vì sao tôi luôn mệt?", "title": "Ask Dr Mai: Why Am I Always Tired?", "text": "Dear Dr Mai,\nI'm 28 and I work in a busy marketing office. For the last two months, I've felt tired all the time, even after a full weekend of rest. I often get headaches in the afternoon, and I can't concentrate in meetings. I don't think I'm ill, because I haven't had a temperature or a cough. What could be wrong with me?\nTired Tuyet\n\nDear Tuyet,\nI'm sorry to hear that you're feeling this way. Without examining you, I can't be sure, but there are several possible causes.\n\nFirst, you might not be getting enough sleep. Many office workers check their phones in bed until midnight. The light from screens can keep your brain awake, so even if you spend eight hours in bed, you may only sleep for five or six.\n\nSecond, it could be your diet. If you skip breakfast and eat junk food at your desk, your energy will go up and down all day. Afternoon headaches can also be a sign that you aren't drinking enough water, so try to stay hydrated.\n\nThird, you must be under a lot of stress. Marketing is a demanding job, and stress can make people feel exhausted even when they haven't done much physical work.\n\nFinally, it would be a good idea to have a check-up. Tiredness is sometimes caused by a lack of iron or other health problems which only a blood test can find.\n\nMy advice: go to bed earlier, eat a balanced diet, work out three times a week, and see a doctor if nothing changes in a month.\nBest wishes,\nDr Mai", "vi": "Thưa bác sĩ Mai,\nTôi 28 tuổi, làm ở một văn phòng marketing bận rộn. Hai tháng nay tôi lúc nào cũng mệt, kể cả sau khi nghỉ trọn một cuối tuần. Tôi thường đau đầu vào buổi chiều và không tập trung được trong các cuộc họp. Tôi không nghĩ mình ốm, vì tôi không bị sốt hay ho. Tôi có thể bị làm sao?\nTuyết mệt mỏi\n\nTuyết thân mến,\nTôi rất tiếc khi biết bạn đang cảm thấy như vậy. Chưa khám thì tôi không chắc được, nhưng có vài nguyên nhân có thể.\n\nThứ nhất, có lẽ bạn ngủ không đủ. Nhiều người làm văn phòng xem điện thoại trên giường đến nửa đêm. Ánh sáng từ màn hình có thể giữ não tỉnh táo, nên dù nằm trên giường tám tiếng, bạn có thể chỉ ngủ được năm sáu tiếng.\n\nThứ hai, có thể do chế độ ăn. Nếu bạn bỏ bữa sáng và ăn đồ ăn vặt tại bàn làm việc, năng lượng của bạn sẽ lên xuống thất thường cả ngày. Đau đầu buổi chiều cũng có thể là dấu hiệu bạn uống không đủ nước, vì vậy hãy uống đủ nước.\n\nThứ ba, chắc hẳn bạn đang chịu nhiều áp lực. Marketing là công việc đòi hỏi cao, và căng thẳng có thể khiến người ta kiệt sức ngay cả khi không làm nhiều việc chân tay.\n\nCuối cùng, đi khám sức khoẻ sẽ là ý hay. Mệt mỏi đôi khi do thiếu sắt hoặc các vấn đề sức khoẻ khác mà chỉ xét nghiệm máu mới phát hiện được.\n\nLời khuyên của tôi: đi ngủ sớm hơn, ăn uống cân bằng, tập thể dục ba lần một tuần, và đi khám bác sĩ nếu sau một tháng không có gì thay đổi.\nThân mến,\nBác sĩ Mai", "gloss": [
-      {"w": "concentrate", "vi": "tập trung"},
-      {"w": "examine", "vi": "khám (bệnh), kiểm tra"},
-      {"w": "cause", "vi": "nguyên nhân; gây ra"},
-      {"w": "keep … awake", "vi": "giữ … tỉnh táo, khiến không ngủ được"},
-      {"w": "skip breakfast", "vi": "bỏ bữa sáng"},
-      {"w": "a sign", "vi": "dấu hiệu"},
-      {"w": "demanding", "vi": "đòi hỏi cao, vất vả"},
-      {"w": "physical work", "vi": "việc chân tay, lao động thể chất"},
-      {"w": "iron", "vi": "chất sắt"},
-      {"w": "blood test", "vi": "xét nghiệm máu"}
-    ], "qs": [
-      {"q": "How long has Tuyet felt tired?", "o": ["For two weeks", "For two months", "Since she was 28"], "a": 1, "e": "“For the last two months, I've felt tired all the time.”"},
-      {"q": "Why does Tuyet think she isn't ill?", "o": ["She hasn't had a temperature or a cough.", "She sleeps eight hours.", "She works out every day."], "a": 0, "e": "“I don't think I'm ill, because I haven't had a temperature or a cough.”"},
-      {"q": "According to Dr Mai, why might Tuyet sleep only five or six hours?", "o": ["She works at night.", "The light from her phone keeps her brain awake.", "She drinks too much coffee."], "a": 1, "e": "“The light from screens can keep your brain awake…”"},
-      {"q": "Afternoon headaches can be a sign that she isn't drinking enough ______.", "a": "water", "e": "“…a sign that you aren't drinking enough water.”"},
-      {"q": "“You must be under a lot of stress.” Bác sĩ Mai:", "o": ["ra lệnh cho Tuyết phải chịu áp lực", "suy đoán gần như chắc chắn rằng Tuyết đang bị căng thẳng", "nói rằng Tuyết không thể bị căng thẳng"], "a": 1, "e": "must + be = suy đoán gần như chắc chắn ở hiện tại (dựa trên bằng chứng: công việc marketing bận rộn)."},
-      {"q": "What does Dr Mai advise if nothing changes in a month? See a ______.", "a": "doctor", "e": "“…see a doctor if nothing changes in a month.”"}
-    ]},
-    {"k": "speak", "h": "Nói: Đoán nguyên nhân & đi khám bệnh", "tasks": [
-      {"p": "Đoán nguyên nhân cho 3 tình huống, mỗi tình huống ít nhất 2 câu đoán (hiện tại hoặc quá khứ): (1) Bạn thân không trả lời tin nhắn 2 ngày. (2) Đồng nghiệp đến công ty với đôi mắt đỏ và rất mệt. (3) Hàng xóm có rất nhiều hộp quà trước cửa.", "model": "My best friend hasn't replied for two days. She might have lost her phone, or she could be travelling somewhere without Wi-Fi. She can't be angry with me – we had a great time last weekend. My colleague's eyes are red and he looks exhausted. He must have stayed up late, or his baby might have been crying all night. As for my neighbour, there are lots of gift boxes outside her door. It must be her birthday, or she might have ordered too much online!", "vi": "Bạn thân tôi hai ngày rồi không trả lời. Có lẽ cô ấy làm mất điện thoại, hoặc có thể đang đi du lịch ở đâu đó không có Wi-Fi. Cô ấy không thể giận tôi được – cuối tuần trước chúng tôi đi chơi rất vui. Mắt đồng nghiệp tôi đỏ và trông anh ấy kiệt sức. Chắc anh ấy thức khuya, hoặc có lẽ em bé nhà anh khóc cả đêm. Còn hàng xóm tôi, có rất nhiều hộp quà trước cửa. Chắc là sinh nhật cô ấy, hoặc có lẽ cô ấy đặt hàng online quá nhiều!", "tips": "Đọc nối must've /ˈmʌstəv/, might've /ˈmaɪtəv/; nhấn mạnh can't /kɑːnt/ để người nghe không nhầm với can."},
-      {"p": "Đóng vai bệnh nhân – bác sĩ: mô tả triệu chứng (từ khi nào, đau ở đâu, đã uống thuốc gì), bác sĩ đoán và khuyên.", "model": "Patient: Good morning, doctor. I've had a sore throat and a bad cough since Tuesday, and last night I had a temperature. I took a painkiller, but it didn't help much. — Doctor: Let me have a look. Hmm, your throat is very red. You must have caught an infection. It could be the flu, because there's a lot of it around at the moment. I'll give you a prescription. Drink plenty of water, get enough sleep, and come back if you don't feel better in three days.", "vi": "Bệnh nhân: Chào bác sĩ. Tôi bị đau họng và ho nặng từ thứ Ba, tối qua còn bị sốt. Tôi đã uống thuốc giảm đau nhưng không đỡ mấy. — Bác sĩ: Để tôi xem. Hừm, họng anh đỏ lắm. Chắc anh bị nhiễm trùng rồi. Có thể là cúm, vì dạo này nhiều người bị. Tôi sẽ kê đơn thuốc. Uống nhiều nước, ngủ đủ giấc và quay lại nếu sau ba ngày không đỡ.", "tips": "Bệnh nhân dùng hiện tại hoàn thành cho triệu chứng kéo dài (I've had… since…)."},
-      {"p": "Nói về lối sống của bạn: bạn làm gì để khoẻ mạnh, thói quen nào chưa tốt, bạn muốn thay đổi gì? (60 giây)", "model": "I try to stay healthy, but it isn't always easy. I work out at the gym twice a week, and I always stay hydrated. However, I eat too much junk food when I'm stressed, and I don't get enough sleep because I watch videos until late. I've put on three kilos this year, so I'd like to change my habits. If I went to bed before eleven, I'd probably feel much more energetic.", "vi": "Tôi cố gắng giữ sức khoẻ nhưng không phải lúc nào cũng dễ. Tôi tập gym hai lần một tuần và luôn uống đủ nước. Tuy nhiên, tôi ăn quá nhiều đồ ăn vặt khi căng thẳng và ngủ không đủ vì xem video đến khuya. Năm nay tôi tăng ba cân nên muốn thay đổi thói quen. Nếu đi ngủ trước mười một giờ, có lẽ tôi sẽ thấy tràn đầy năng lượng hơn.", "tips": "Ôn lại câu điều kiện loại 2 (Bài 6) trong câu cuối."}
-    ]},
-    {"k": "write", "h": "Viết: Email trả lời bạn – đoán nguyên nhân & khuyên", "task": "Bạn Nam viết thư kể: mới đổi việc, đi làm từ 7 giờ sáng đến 9 giờ tối, hay đau đầu, chỉ uống cà phê, cuối tuần trước đi ăn tiệc đường phố về bị đau bụng. Viết email 120–150 từ trả lời: hỏi thăm, đoán nguyên nhân (ít nhất 4 câu suy đoán hiện tại/quá khứ) và đưa lời khuyên.", "min": 120, "model": "Hi Nam,\n\nThanks for your email. I'm sorry to hear you've been feeling so unwell.\n\nFrom what you've told me, I don't think it's anything serious, but you must be very stressed with your new job. Starting at seven and finishing at nine every evening can't be good for anyone! The headaches might be caused by looking at your computer screen for too long, and you could be dehydrated if you only drink coffee all day.\n\nYou also said you had stomach problems last weekend. You might have eaten something bad at the street party.\n\nIf I were you, I'd take regular breaks, drink more water and try to get at least seven hours' sleep. And if you don't feel better in a week, please go and see a doctor.\n\nGet well soon, and let me know how you are!\n\nBest,\nHanh", "modelVi": "Chào Nam,\n\nCảm ơn email của cậu. Mình rất tiếc khi biết cậu thấy không khoẻ như vậy.\n\nTheo những gì cậu kể, mình không nghĩ là chuyện gì nghiêm trọng, nhưng chắc hẳn cậu đang rất căng thẳng với công việc mới. Bắt đầu lúc bảy giờ và kết thúc lúc chín giờ tối mỗi ngày thì không thể tốt cho ai được! Đau đầu có thể do nhìn màn hình máy tính quá lâu, và cậu có thể bị thiếu nước nếu cả ngày chỉ uống cà phê.\n\nCậu cũng nói cuối tuần trước bị đau bụng. Có lẽ cậu đã ăn phải món gì không tốt ở bữa tiệc đường phố.\n\nNếu là cậu, mình sẽ nghỉ giải lao đều đặn, uống nhiều nước hơn và cố ngủ ít nhất bảy tiếng. Và nếu sau một tuần không đỡ thì đi khám bác sĩ nhé.\n\nMau khoẻ nhé, và cho mình biết tình hình!\n\nThân,\nHạnh", "tips": [
-      "Email thân mật: Hi / Thanks for your email / I'm sorry to hear… / Get well soon / Best.",
-      "Mỗi triệu chứng của bạn → 1 câu đoán nguyên nhân bằng must / might / could / can't.",
-      "Lời khuyên: If I were you, I'd… / You should… / Why don't you…?",
-      "Không chẩn đoán như bác sĩ – dùng might/could cho những gì bạn không chắc, và khuyên đi khám nếu không đỡ."
-    ], "checklist": [
-      "Có lời chào, hỏi thăm, lời kết thân thiện",
-      "Có ít nhất 2 câu suy đoán hiện tại (must/might/could/can't + V)",
-      "Có ít nhất 1 câu suy đoán quá khứ (… have + V3)",
-      "Không dùng mustn't với nghĩa ‘chắc chắn không’",
-      "Có ít nhất 2 lời khuyên",
-      "Có ít nhất 5 từ vựng sức khoẻ; 120–150 từ"
-    ]}
-  ],
-  "exercises": [
-    {"t": "mc", "q": "She's been working for twelve hours without a break. She ___ be exhausted.", "o": ["must", "can't", "mustn't"], "a": 0, "e": "Bằng chứng rõ (làm 12 tiếng không nghỉ) → gần như chắc chắn → must."},
-    {"t": "mc", "q": "That ___ be Minh at the door. He's in Da Nang this week.", "o": ["must", "might", "can't"], "a": 2, "e": "Minh đang ở Đà Nẵng → chắc chắn không phải → can't."},
-    {"t": "mc", "q": "I'm not sure where Lan is. She ___ be at the gym.", "o": ["must", "might", "can't"], "a": 1, "e": "“I'm not sure” → chỉ khoảng 50% → might."},
-    {"t": "mc", "q": "The streets are wet this morning. It ___ rained last night.", "o": ["must have", "can't have", "mustn't have"], "a": 0, "e": "Bằng chứng (đường ướt) → suy đoán chắc chắn về quá khứ → must have + V3."},
-    {"t": "fill", "q": "He can't ___ seen my email – he hasn't replied yet.", "a": "have", "e": "Suy đoán quá khứ: can't + have + V3."},
-    {"t": "mc", "q": "Câu nào SAI?", "o": ["He must have forgot his keys.", "He must have forgotten his keys.", "He might have left his keys at home."], "a": 0, "e": "Sau have phải là V3: forget – forgot – forgotten."},
-    {"t": "mc", "q": "Trái nghĩa của must khi SUY ĐOÁN (chắc chắn có → chắc chắn không) là:", "o": ["mustn't", "can't", "don't have to"], "a": 1, "e": "can't = chắc chắn không. mustn't = cấm; don't have to = không cần."},
-    {"t": "mc", "q": "Tom isn't answering his phone. He ___ driving.", "o": ["might be", "might", "must to be"], "a": 0, "e": "Suy đoán việc đang diễn ra: might + be + V-ing."},
-    {"t": "fill", "q": "I have a sore ___ – it hurts when I swallow.", "a": "throat", "e": "sore throat = đau họng (đau khi nuốt)."},
-    {"t": "mc", "q": "I think I've ___ a cold. I've been sneezing all morning.", "o": ["caught", "taken", "got over"], "a": 0, "e": "Collocation: catch a cold (caught). get over = khỏi bệnh."},
-    {"t": "match", "q": "Nối từ với nghĩa:", "pairs": [["headache", "đau đầu"], ["sore throat", "đau họng"], ["feel dizzy", "chóng mặt"], ["food poisoning", "ngộ độc thực phẩm"], ["prescription", "đơn thuốc"], ["painkiller", "thuốc giảm đau"]], "e": "Từ vựng triệu chứng và thuốc men."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["tired.", "very", "She", "been", "must", "have"], "a": "She must have been very tired.", "e": "must + have + been + tính từ (suy đoán quá khứ)."},
-    {"t": "order", "q": "Sắp xếp thành câu đúng:", "w": ["allergic", "might", "seafood.", "You", "to", "be"], "a": "You might be allergic to seafood.", "e": "might + be + allergic to + danh từ."},
-    {"t": "listen", "say": "Hoa didn't come to class today. She can't be ill, because I saw her at the market this morning.", "lang": "en-GB", "q": "What does the speaker believe?", "o": ["Hoa is definitely ill.", "Hoa is definitely not ill.", "Hoa might be ill."], "a": 1, "e": "can't be ill = chắc chắn không ốm (bằng chứng: thấy cô ấy ở chợ)."},
-    {"t": "listen", "say": "The lights in Tom's flat are off and his car isn't there. He must have gone away for the weekend.", "lang": "en-GB", "q": "What does the speaker think?", "o": ["Tom is asleep.", "Tom has almost certainly gone away.", "Tom has sold his car."], "a": 1, "e": "must have gone away = gần như chắc chắn đã đi vắng."},
-    {"t": "listen", "say": "I've had a temperature and a terrible cough since Monday, and I feel dizzy when I stand up.", "lang": "en-GB", "q": "Which symptom is NOT mentioned?", "o": ["A temperature", "A cough", "A sore throat"], "a": 2, "e": "Người nói nhắc temperature, cough, dizzy – không nhắc sore throat."},
-    {"t": "dict", "say": "You should drink more water and get enough sleep.", "lang": "en-GB", "a": "You should drink more water and get enough sleep.", "e": "Chú ý enough đọc /ɪˈnʌf/."}
-  ],
-  "teacher": {
-    "time": "2 buổi × 90 phút",
-    "prep": "8 ảnh ‘bí ẩn’ (cận cảnh đồ vật, người với biểu cảm lạ, căn phòng bừa bộn) để đoán; thẻ triệu chứng cho trò ‘phòng khám’; thang mức độ chắc chắn 0–100% vẽ trên bảng phụ; thẻ tình huống ‘Chuyện gì đã xảy ra?’.",
-    "steps": [
-      {"t": "Buổi 1 · 10'", "do": "Khởi động: chiếu ảnh cận cảnh một vật quen (vỏ hộp sữa, bánh xe đạp…), học viên đoán: It might be… It could be… It can't be… Mở ảnh đầy đủ."},
-      {"t": "15'", "do": "Từ vựng sức khoẻ: GV diễn tả triệu chứng bằng điệu bộ (ho, chóng mặt, đau họng), học viên nói từ. Chia 2 nhóm từ: triệu chứng/bệnh và lối sống. Lưu ý have a temperature (Anh-Anh) = have a fever."},
-      {"t": "25'", "do": "Ngữ pháp 1: thang mức độ chắc chắn – dán must / might / could / may / can't vào đúng vị trí trên thang 0–100%. Nhấn mạnh can't (không phải mustn't). Drill bằng ảnh bí ẩn và tình huống trong lớp (Who's missing today? Where might he be?)."},
-      {"t": "20'", "do": "Nghe ‘Hùng đâu rồi?’: lần 1 – Hùng bị sao? Lần 2 – học viên điền bảng ‘Câu đoán – Bằng chứng – Đúng/Sai’. Lần 3 – đọc phân vai."},
-      {"t": "15'", "do": "Ngữ pháp 2: suy đoán quá khứ (must/might/can't + have + V3). Luyện phát âm must've, might've, can't have. Thẻ tình huống: ‘The window is broken and there's a football on the floor.’ → học viên đoán chuyện đã xảy ra."},
-      {"t": "5'", "do": "Tổng kết; giao bài tập 1–9 trong game."},
-      {"t": "Buổi 2 · 10'", "do": "Ôn: trò ‘Thám tử’ – GV kể vụ ‘bí ẩn’ ngắn (chiếc bánh sinh nhật biến mất), học viên đoán thủ phạm bằng must/might/can't have."},
-      {"t": "20'", "do": "Đọc ‘Ask Dr Mai’: đọc thư của Tuyết, liệt kê triệu chứng; đọc thư trả lời, ghép mỗi triệu chứng với nguyên nhân bác sĩ đoán. Trả lời 6 câu hỏi."},
-      {"t": "25'", "do": "Nói: trò ‘Phòng khám’ – học viên A rút thẻ triệu chứng đóng vai bệnh nhân, B là bác sĩ phải đoán nguyên nhân và khuyên; đổi vai. Sau đó cặp đôi nói về lối sống (task 3)."},
-      {"t": "20'", "do": "Viết email trả lời Nam 120–150 từ; đổi bài chấm theo checklist (đếm câu suy đoán, kiểm tra mustn't)."},
-      {"t": "15'", "do": "Bài tập 10–17 trong game; chữa lỗi chung; giao bài về nhà."}
+ "no": 8,
+ "title": "Sức khỏe và lịch hẹn – must, might, could, can’t với bằng chứng",
+ "sub": "Suy đoán hiện tại: must/might/could/can’t + V · tách khả năng với xác nhận",
+ "goals": [
+  "Diễn đạt được kết luận mạnh, khả năng và điều không phù hợp chứng cứ bằng modal.",
+  "Phân biệt suy đoán về tin nhắn với thông tin được nhân viên xác nhận.",
+  "Mô tả được vấn đề và hỏi ai giải thích câu hỏi chuyên môn mà không tự chẩn đoán."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bắt đầu từ tình huống",
+   "html": "<p>Bạn cần mô tả triệu chứng cho người chuyên môn, đồng thời kiểm một tin nhắn lịch hẹn chưa rõ. Bài dùng suy đoán cho ý nghĩa thông tin và cách liên hệ, không dùng modal để chẩn đoán bệnh hoặc chọn điều trị.</p>"
+  },
+  {
+   "k": "text",
+   "h": "Nhịp và sắc thái khi nói",
+   "html": "<p>Must suy đoán cần nghe rõ nhưng không tự mang mức chắc tuyệt đối ngoài đời. Might và could có âm cuối; không đọc thành một từ rồi mất khả năng phân biệt. Clinician nhấn âm giữa /ˈnɪʃ/, pharmacist nhấn âm đầu. Khi đặt câu hỏi, nhấn date/time để nhân viên biết phần cần xác minh.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm của tình huống",
+   "items": [
+    {
+     "w": "symptom",
+     "ipa": "/ˈsɪmptəm/",
+     "pos": "n",
+     "vi": "triệu chứng",
+     "ex": "Describe the symptoms in your own words.",
+     "exVi": "Hãy mô tả triệu chứng bằng lời của bạn."
+    },
+    {
+     "w": "duration",
+     "ipa": "/djʊˈreɪʃn/",
+     "pos": "n",
+     "vi": "khoảng kéo dài",
+     "ex": "The form asks about duration.",
+     "exVi": "Phiếu hỏi vấn đề kéo dài bao lâu."
+    },
+    {
+     "w": "appointment",
+     "ipa": "/əˈpɔɪntmənt/",
+     "pos": "n",
+     "vi": "lịch hẹn",
+     "ex": "My appointment is on Friday.",
+     "exVi": "Lịch hẹn của tôi vào thứ sáu."
+    },
+    {
+     "w": "confirmation",
+     "ipa": "/ˌkɒnfəˈmeɪʃn/",
+     "pos": "n",
+     "vi": "thông tin xác nhận",
+     "ex": "I have not received confirmation.",
+     "exVi": "Tôi chưa nhận xác nhận."
+    },
+    {
+     "w": "record",
+     "ipa": "/ˈrekɔːd/",
+     "pos": "n",
+     "vi": "bản ghi",
+     "ex": "The record contains an initial.",
+     "exVi": "Bản ghi có một chữ viết tắt tên."
+    },
+    {
+     "w": "initial",
+     "ipa": "/ɪˈnɪʃl/",
+     "pos": "n",
+     "vi": "chữ cái đầu tên",
+     "ex": "An initial does not identify everyone uniquely.",
+     "exVi": "Một chữ đầu không xác định duy nhất mọi người."
+    },
+    {
+     "w": "available",
+     "ipa": "/əˈveɪləbl/",
+     "pos": "adj",
+     "vi": "còn có thể sắp xếp",
+     "ex": "Is a later appointment available?",
+     "exVi": "Còn lịch muộn hơn không?"
+    },
+    {
+     "w": "uncertain",
+     "ipa": "/ʌnˈsɜːtn/",
+     "pos": "adj",
+     "vi": "chưa chắc chắn",
+     "ex": "The meaning remains uncertain.",
+     "exVi": "Ý nghĩa còn chưa chắc."
+    },
+    {
+     "w": "assumption",
+     "ipa": "/əˈsʌmpʃn/",
+     "pos": "n",
+     "vi": "điều giả định",
+     "ex": "We should check that assumption.",
+     "exVi": "Chúng ta nên kiểm giả định đó."
+    },
+    {
+     "w": "verify",
+     "ipa": "/ˈverɪfaɪ/",
+     "pos": "v",
+     "vi": "xác minh",
+     "ex": "Can reception verify the time?",
+     "exVi": "Tiếp nhận xác minh giờ được không?"
+    },
+    {
+     "w": "clinician",
+     "ipa": "/klɪˈnɪʃn/",
+     "pos": "n",
+     "vi": "nhân viên lâm sàng có chuyên môn",
+     "ex": "A clinician will discuss the symptoms.",
+     "exVi": "Nhân viên chuyên môn sẽ trao đổi về triệu chứng."
+    },
+    {
+     "w": "pharmacist",
+     "ipa": "/ˈfɑːməsɪst/",
+     "pos": "n",
+     "vi": "dược sĩ",
+     "ex": "Could a pharmacist explain this instruction?",
+     "exVi": "Dược sĩ giải thích hướng dẫn này được không?"
+    },
+    {
+     "w": "allergy",
+     "ipa": "/ˈælədʒi/",
+     "pos": "n",
+     "vi": "dị ứng",
+     "ex": "I want to report an allergy.",
+     "exVi": "Tôi muốn báo thông tin dị ứng."
+    },
+    {
+     "w": "list",
+     "ipa": "/lɪst/",
+     "pos": "n",
+     "vi": "danh sách",
+     "ex": "I will bring the information on my list.",
+     "exVi": "Tôi sẽ mang thông tin trong danh sách."
+    },
+    {
+     "w": "explanation",
+     "ipa": "/ˌekspləˈneɪʃn/",
+     "pos": "n",
+     "vi": "lời giải thích",
+     "ex": "Please ask for an explanation.",
+     "exVi": "Xin hãy yêu cầu giải thích."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Suy đoán hiện tại: must/might/could/can’t + V · tách khả năng với xác nhận",
+   "html": "<p>Must + V trong suy đoán nói kết luận người nói thấy rất có cơ sở: this must be the old message if it refers to last week’s date. Might/could + V nói một khả năng: it might concern another booking. Can’t + V nói điều không phù hợp dữ kiện trong lập luận: it can’t confirm Friday if it gives only last Monday’s date. Sức kết luận phụ thuộc chứng cứ; một initial trùng không đủ xác định tin thuộc đúng người. Phân biệt must suy đoán với must nghĩa bắt buộc: you must check in là quy trình, không suy bệnh. Sau modal dùng nguyên mẫu không to: might be, can’t refer. Câu hỏi chuyên môn như nguyên nhân triệu chứng hoặc cách dùng thuốc cần người có chuyên môn xem xét; không gán must have flu từ ít dấu hiệu trong bài ngôn ngữ. Khi chưa rõ, biến giả định thành câu hỏi kiểm: Could you verify which appointment this message concerns? Suy đoán là bước trước xác nhận, không tự thay thông tin nhận từ nguồn có thẩm quyền về lịch.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Cách hiểu"
     ],
-    "games": [
-      "Ảnh bí ẩn: chiếu dần từng phần của một bức ảnh, mỗi lần học viên đoán bằng might/could/must/can't; đội đoán đúng sớm nhất được điểm.",
-      "Thám tử lớp học: GV dàn dựng ‘hiện trường’ (cốc cà phê đổ, túi xách mở, tờ giấy nhàu), các nhóm viết 5 câu suy đoán quá khứ về chuyện đã xảy ra, nhóm có lời giải hợp lý nhất thắng.",
-      "Phòng khám vui: bệnh nhân rút thẻ triệu chứng hài hước (I can't stop laughing, I see everything in pink), bác sĩ phải đoán nguyên nhân và kê ‘đơn thuốc’ bằng tiếng Anh."
+    [
+     "This must be the earlier message.",
+     "Suy đoán mạnh khi mốc và nguồn khớp."
     ],
-    "errors": [
-      "Dùng mustn't cho suy đoán phủ định: ‘*He mustn't be at home’. Sửa: He can't be at home.",
-      "Sai dạng quá khứ: ‘*He must forgot’, ‘*She might has gone’. Sửa: must have forgotten, might have gone.",
-      "Viết ‘must of’, ‘could of’ do nghe /əv/. Sửa: must have, could have.",
-      "Thêm to sau modal: ‘*It might to rain’. Sửa: It might rain.",
-      "Nói ‘*I have fever’ (thiếu a) hoặc ‘*I'm headache’. Sửa: I have a temperature / a fever; I have a headache.",
-      "Hiểu diet chỉ là ‘ăn kiêng’ – thực ra diet = chế độ ăn nói chung (a healthy / balanced diet; ăn kiêng = be on a diet). Muốn nói ‘tôi béo lên’ tự nhiên nhất là I've put on weight."
+    [
+     "It might concern another booking.",
+     "Một khả năng, chưa được xác nhận."
     ],
-    "homework": "Làm 17 bài tập trong game (≥ 80%); chụp 3 bức ảnh ‘bí ẩn’ ở nhà và viết 2 câu suy đoán cho mỗi ảnh để buổi sau đố lớp; hoàn chỉnh email trả lời Nam; ghi âm phần Nói 1; ôn thẻ từ vựng mỗi ngày."
+    [
+     "It can’t confirm Friday; it names Monday.",
+     "Bác cách hiểu dựa dữ kiện ngày khác."
+    ],
+    [
+     "Could you verify the date?",
+     "Hỏi kiểm thay vì kết thúc ở suy đoán."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "This could be a reminder for the earlier appointment.",
+     "vi": "Đây có thể là nhắc lịch cũ."
+    },
+    {
+     "t": "It can’t confirm Friday if it only gives Monday’s date.",
+     "vi": "Nó không thể xác nhận thứ sáu nếu chỉ ghi ngày thứ hai."
+    },
+    {
+     "t": "The matching initial might be a coincidence.",
+     "vi": "Chữ đầu giống nhau có thể chỉ trùng hợp."
+    },
+    {
+     "t": "This must be the old version; the receptionist has confirmed a new one.",
+     "vi": "Đây hẳn là bản cũ; nhân viên đã xác nhận bản mới."
+    },
+    {
+     "t": "Could you verify which appointment the message concerns?",
+     "vi": "Anh chị xác minh tin nhắn thuộc lịch hẹn nào được không?"
+    }
+   ],
+   "tips": [
+    "Dùng initial trùng như xác nhận duy nhất: hỏi thêm dữ kiện.",
+    "Sau modal thêm to hoặc -s: giữ nguyên mẫu.",
+    "Lẫn must bắt buộc với suy đoán: xét chức năng câu."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: suy đoán về tin nhắn, hỏi xác minh lịch",
+   "note": "Hai người luyện đọc tin nhắn của phòng khám giả Orali; mọi tên và dữ kiện đều đặt cho ngôn ngữ, không có chẩn đoán.",
+   "lang": "en-GB",
+   "lines": [
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "I have a reminder with my initial, but it says Monday. My new appointment should be on Friday. Could it be an old message?",
+     "vi": "Tôi có nhắc lịch ghi chữ đầu tên mình nhưng nói thứ hai. Lịch mới đáng lẽ thứ sáu. Có thể tin cũ không?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "It might be, but an initial is not enough to identify the booking. Does it include a date or a reference you can check with reception?",
+     "vi": "Có thể, nhưng chữ đầu chưa đủ nhận lịch. Có ngày hoặc mã để hỏi tiếp nhận không?"
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "It includes last week’s date. It can’t be confirmation of this Friday just because the initial matches.",
+     "vi": "Nó có ngày tuần trước. Không thể chỉ vì chữ đầu giống mà xác nhận thứ sáu này."
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "That seems right. Ask reception to verify the new date instead of guessing. You can read the message exactly as it appears.",
+     "vi": "Có vẻ đúng. Hãy nhờ tiếp nhận xác minh ngày mới thay vì đoán. Bạn đọc nguyên tin cho họ."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "I also need to describe the symptoms and how long they have lasted. I’m making a list so I don’t forget what I want to ask.",
+     "vi": "Tôi còn cần mô tả triệu chứng và kéo dài bao lâu. Tôi ghi danh sách để không quên câu muốn hỏi."
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "That list can help the conversation. If you have a question about medicine or an allergy, tell the clinician or pharmacist directly rather than ask me to decide what it means.",
+     "vi": "Danh sách giúp trao đổi. Nếu hỏi thuốc hoặc dị ứng, hãy báo nhân viên chuyên môn hoặc dược sĩ trực tiếp, không nhờ tôi quyết ý nghĩa."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "Reception has now replied. The Friday appointment is confirmed, and they say the earlier reminder was for the old booking.",
+     "vi": "Tiếp nhận vừa trả lời. Lịch thứ sáu được xác nhận, nhắc trước là lịch cũ."
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Then we can report that as confirmed information. Before the reply, we had a plausible explanation, not a completed check.",
+     "vi": "Vậy giờ nêu đó là thông tin đã xác nhận. Trước trả lời mình chỉ có giải thích hợp lý, chưa kiểm xong."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Tại sao chữ đầu chưa đủ?",
+     "o": [
+      "Không tin nào có ngày",
+      "Có thể trùng nhiều lịch/người",
+      "Mọi chữ đầu đều sai"
+     ],
+     "a": 1,
+     "e": "Một dấu trùng chưa xác định duy nhất booking, nên cần thêm dữ kiện."
+    },
+    {
+     "q": "Tin cũ có mốc gì?",
+     "o": [
+      "Ngày tuần trước",
+      "Ngày thứ sáu mới",
+      "Không có ngày nào"
+     ],
+     "a": 0,
+     "e": "Người nói đọc last week’s date và phân nó với Friday hiện tại."
+    },
+    {
+     "q": "Điều gì làm lịch thứ sáu chuyển thành xác nhận?",
+     "o": [
+      "Chữ đầu giống nhau tự nó",
+      "Bạn đoán bệnh",
+      "Phản hồi của tiếp nhận"
+     ],
+     "a": 2,
+     "e": "Lượt gần cuối có reply trực tiếp từ reception xác nhận new appointment."
+    },
+    {
+     "q": "Bạn của người gọi có quyết định cách dùng thuốc không?",
+     "o": [
+      "Có, chẩn đoán từ danh sách",
+      "Không, nhờ hỏi người chuyên môn trực tiếp",
+      "Có, đổi liều"
+     ],
+     "a": 1,
+     "e": "Vai bạn hỗ trợ ngôn ngữ, không thay người chuyên môn giải thích thông tin sức khỏe."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Khả năng hợp lý khác với việc đã xác minh",
+   "title": "Khả năng hợp lý khác với việc đã xác minh",
+   "text": "At the fictional Orali clinic, Nera changes an appointment from Monday to Friday. She later finds a reminder that contains her initial but gives last week’s date. At first, she wonders whether the change has failed. Tavin says that the message might refer to the earlier booking, but the matching initial alone does not settle the question.\n\nThey separate what is written from what they infer. The reminder names the old date. It cannot confirm this Friday’s appointment simply because one letter matches. The explanation that it is an old reminder is plausible, but they still need reception to verify the new booking. Nera reads the message carefully and asks which appointment it concerns.\n\nBefore the visit, she also prepares a description of her symptoms and their duration. She writes questions that she wants a clinician to discuss. If she needs an explanation about medicine or an allergy, she will ask the clinician or pharmacist directly and show the information she has. This classroom conversation does not assign a diagnosis or suggest a medicine.\n\nReception eventually confirms the Friday appointment and explains that the reminder belonged to the earlier booking. The group can now report confirmed information. Their earlier reasoning helped them ask a useful question, but it did not replace the check. Modal verbs express how a speaker understands the evidence; they do not create evidence that the speaker has not obtained. A careful account states when a possibility became verified.",
+   "vi": "Tại phòng khám Orali hư cấu, Nera đổi hẹn thứ hai sang thứ sáu. Sau đó cô thấy tin nhắc có chữ đầu tên nhưng ghi ngày tuần trước. Ban đầu cô tự hỏi việc đổi có thất bại không. Tavin nói tin có thể thuộc lịch cũ, nhưng chỉ chữ đầu trùng chưa giải quyết được. Họ tách điều được viết với điều suy ra. Tin ghi ngày cũ, không thể xác nhận thứ sáu này chỉ vì một chữ khớp. Giải thích đây là tin cũ có lý, nhưng vẫn cần tiếp nhận xác minh lịch mới. Nera đọc kỹ tin và hỏi nó thuộc hẹn nào. Trước buổi khám, cô chuẩn bị mô tả triệu chứng và thời gian kéo dài, ghi câu hỏi muốn nhân viên chuyên môn trao đổi. Nếu cần giải thích thuốc hoặc dị ứng, cô hỏi trực tiếp nhân viên hoặc dược sĩ và cho xem thông tin mình có. Hội thoại lớp không chẩn đoán hay đề xuất thuốc. Cuối cùng tiếp nhận xác nhận thứ sáu, giải thích tin thuộc hẹn trước. Giờ nhóm có thể thuật thông tin đã kiểm. Lập luận lúc đầu giúp đặt câu hỏi hữu ích, chưa thay việc kiểm. Modal diễn tả cách người nói hiểu chứng cứ, không tạo chứng cứ chưa có. Bản thuật cẩn thận nêu lúc khả năng trở thành xác minh.",
+   "gloss": [
+    {
+     "w": "matching initial",
+     "vi": "chữ cái đầu tên trùng nhau"
+    },
+    {
+     "w": "settle the question",
+     "vi": "giải quyết được điều đang hỏi"
+    },
+    {
+     "w": "obtained",
+     "vi": "đã nhận được"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Nera lo điều gì đầu tiên?",
+     "o": [
+      "Việc đổi lịch có thể chưa thành công",
+      "Cô đã biết chắc bệnh",
+      "Bạn đã xác nhận thuốc"
+     ],
+     "a": 0,
+     "e": "Tin Monday khác Friday khiến cô tự hỏi change failed, chưa kết luận."
+    },
+    {
+     "q": "Giải thích tin cũ có trạng thái nào trước reply?",
+     "o": [
+      "Đã chắc tuyệt đối",
+      "Chắc chắn sai",
+      "Hợp lý nhưng chưa xác minh"
+     ],
+     "a": 2,
+     "e": "Plausible explanation cần reception verify, đúng phạm vi suy đoán."
+    },
+    {
+     "q": "Danh sách trước khám gồm gì?",
+     "o": [
+      "Chẩn đoán bạn đoán",
+      "Triệu chứng, thời gian và câu muốn hỏi",
+      "Liều do lớp tự chọn"
+     ],
+     "a": 1,
+     "e": "Danh sách hỗ trợ trao đổi với người chuyên môn, không thay họ quyết."
+    },
+    {
+     "q": "Modal có tạo chứng cứ không?",
+     "o": [
+      "Không",
+      "Có, must biến suy đoán thành fact",
+      "Có, nếu câu dài"
+     ],
+     "a": 0,
+     "e": "Kết bài tách diễn đạt mức hiểu với việc thu được chứng cứ."
+    },
+    {
+     "q": "Khi nào có thể báo hẹn thứ sáu đã xác nhận?",
+     "o": [
+      "Ngay khi thấy initial",
+      "Trước mọi cuộc hỏi",
+      "Sau phản hồi tiếp nhận"
+     ],
+     "a": 2,
+     "e": "Nguồn reply trực tiếp thực hiện check còn thiếu."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: nêu khả năng rồi hỏi kiểm",
+   "tasks": [
+    {
+     "p": "Đọc tin Monday/ngày tuần trước khi bạn chờ Friday. Nêu một might và một can’t, rồi hỏi reception xác minh.",
+     "model": "The reminder might concern my earlier booking. It can’t confirm this Friday because it gives last week’s Monday date. Could you verify which appointment it refers to and confirm the current day and time?",
+     "vi": "Tin có thể thuộc lịch cũ. Nó không thể xác nhận thứ sáu này vì ghi ngày thứ hai tuần trước. Anh chị xác minh tin thuộc lịch nào và chốt ngày/giờ hiện tại giúp tôi được không?"
+    },
+    {
+     "p": "Bạn muốn nhờ người không chuyên đoán nguyên nhân triệu chứng. Viết lại thành mô tả và yêu cầu người chuyên môn giải thích; giữ hai vai hội thoại.",
+     "model": "Patient: I want to describe when the symptoms started and ask what the information means. Could I discuss my list with the clinician? Receptionist: I can help arrange that conversation, but I cannot decide a diagnosis or medicine for you. Patient: Thank you. Please tell me how to confirm the appointment.",
+     "vi": "Người bệnh: Tôi muốn mô tả lúc bắt đầu và hỏi thông tin có nghĩa gì. Tôi trao đổi danh sách với nhân viên chuyên môn được không? Tiếp nhận: Tôi giúp sắp trao đổi, không quyết chẩn đoán hoặc thuốc. Người bệnh: Cảm ơn, xin chỉ cách xác nhận lịch."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: tin nhắn hỏi xác minh, không tự kết luận",
+   "task": "Viết 120–150 từ cho tiếp nhận giả: bạn đổi Monday sang Friday, nhận tin ngày tuần trước có initial giống. Phân điều biết với khả năng, hỏi xác minh lịch mới; nêu danh sách triệu chứng/câu hỏi sẽ trao đổi trực tiếp với người chuyên môn. Không chẩn đoán hoặc chọn thuốc.",
+   "min": 120,
+   "model": "I am writing to verify my current appointment. I changed the original Monday booking to Friday, but I have found a reminder containing my initial and last week’s date. It might concern the earlier appointment. It cannot confirm this Friday simply because the initial matches, so I do not want to assume that the change has failed or succeeded without checking. Could you tell me which booking the reminder refers to and confirm the current day and time? I am also preparing a list of symptoms and how long they have lasted, together with questions for the clinician. If I need an explanation about medicine or an allergy, I will ask the clinician or pharmacist directly and show the information I have. Thank you for helping me separate the old reminder from the confirmed appointment.",
+   "modelVi": "Tôi muốn xác minh hẹn hiện tại. Tôi đổi Monday sang Friday nhưng thấy tin có chữ đầu tên và ngày tuần trước. Nó có thể thuộc hẹn trước; chữ đầu trùng chưa xác nhận Friday nên tôi không muốn tự cho đổi thất bại hay thành công khi chưa kiểm. Xin cho biết tin thuộc hẹn nào và xác nhận ngày/giờ mới. Tôi còn chuẩn bị triệu chứng, thời gian và câu hỏi cho nhân viên chuyên môn. Nếu hỏi thuốc hoặc dị ứng, tôi hỏi họ hoặc dược sĩ trực tiếp và đưa thông tin mình có. Cảm ơn đã giúp phân tin cũ với hẹn đã chốt.",
+   "tips": [
+    "Dùng might cho giải thích, can’t cho cách hiểu mâu thuẫn ngày, rồi hỏi kiểm thật.",
+    "Không dùng must để gán bệnh từ mô tả triệu chứng trong thư này."
+   ],
+   "checklist": [
+    "Có 120–150 từ và hai lịch/mốc không bị nhập.",
+    "Mức modal khớp chứng cứ trước khi reception reply.",
+    "Có yêu cầu xác minh và giới hạn câu hỏi chuyên môn rõ."
+   ]
   }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "Verify khác assume thế nào?",
+   "o": [
+    "Verify là đoán bệnh",
+    "Kiểm xác minh khác tự giả định",
+    "Cả hai đều đã được xác nhận"
+   ],
+   "a": 1,
+   "e": "Người nói cần thêm reply để chuyển khả năng sang thông tin đã kiểm."
+  },
+  {
+   "t": "mc",
+   "q": "Duration trong mô tả triệu chứng hỏi gì?",
+   "o": [
+    "Kéo dài bao lâu",
+    "Tên thuốc nên chọn",
+    "Chắc chắn bệnh gì"
+   ],
+   "a": 0,
+   "e": "Duration là thời gian mô tả cần trao đổi, không tự là chẩn đoán."
+  },
+  {
+   "t": "mc",
+   "q": "Matching initials có tự xác định duy nhất không?",
+   "o": [
+    "Luôn có",
+    "Chỉ nếu cùng một chữ",
+    "Không"
+   ],
+   "a": 2,
+   "e": "Một chữ trùng có thể gặp nhiều trường hợp nên không đủ tự chốt booking."
+  },
+  {
+   "t": "fill",
+   "q": "The message ___ refer to the old booking. (một khả năng)",
+   "a": "might",
+   "e": "Might + nguyên mẫu nêu khả năng chưa được kiểm xác nhận."
+  },
+  {
+   "t": "fill",
+   "q": "It can’t ___ Friday if it gives only Monday’s date.",
+   "a": "confirm",
+   "e": "Sau can’t dùng nguyên mẫu confirm, không confirms hoặc to confirm."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Anh chị xác minh lịch hẹn hiện tại được không?",
+   "w": [
+    "you",
+    "verify",
+    "the",
+    "current",
+    "appointment",
+    "Could"
+   ],
+   "a": "Could you verify the current appointment?",
+   "e": "Câu “Could you verify the current appointment?” diễn đạt anh chị xác minh lịch hẹn hiện tại được không? Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Giải thích hợp lý chưa phải việc kiểm đã xong.",
+   "w": [
+    "plausible",
+    "explanation",
+    "is",
+    "not",
+    "a",
+    "completed",
+    "check",
+    "A"
+   ],
+   "a": "A plausible explanation is not a completed check.",
+   "e": "Câu “A plausible explanation is not a completed check.” diễn đạt giải thích hợp lý chưa phải việc kiểm đã xong. Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "match",
+   "q": "Nối clinician, pharmacist, allergy, list và explanation theo việc chuẩn bị cuộc trao đổi.",
+   "pairs": [
+    [
+     "available",
+     "còn có thể sắp xếp"
+    ],
+    [
+     "uncertain",
+     "chưa chắc chắn"
+    ],
+    [
+     "assumption",
+     "điều giả định"
+    ],
+    [
+     "verify",
+     "xác minh"
+    ],
+    [
+     "clinician",
+     "nhân viên lâm sàng có chuyên môn"
+    ]
+   ],
+   "e": "Clinician và pharmacist là người chuyên môn cần hỏi đúng vai; allergy là thông tin cần báo. List tổ chức nội dung, explanation là lời làm rõ được yêu cầu, không phải lớp tự đưa điều trị."
+  },
+  {
+   "t": "listen",
+   "say": "I have a reminder with my initial, but it says Monday. My new appointment should be on Friday. Could it be an old message? It might be, but an initial is not enough to identify the booking. Does it include a date or a reference you can check with reception? It includes last week’s date. It can’t be confirmation of this Friday just because the initial matches. That seems right. Ask reception to verify the new date instead of guessing. You can read the message exactly as it appears. I also need to describe the symptoms and how long they have lasted. I’m making a list so I don’t forget what I want to ask. That list can help the conversation. If you have a question about medicine or an allergy, tell the clinician or pharmacist directly rather than ask me to decide what it means. Reception has now replied. The Friday appointment is confirmed, and they say the earlier reminder was for the old booking. Then we can report that as confirmed information. Before the reply, we had a plausible explanation, not a completed check.",
+   "lang": "en-GB",
+   "q": "Tại sao chữ đầu chưa đủ?",
+   "o": [
+    "Không tin nào có ngày",
+    "Có thể trùng nhiều lịch/người",
+    "Mọi chữ đầu đều sai"
+   ],
+   "a": 1,
+   "e": "Một dấu trùng chưa xác định duy nhất booking, nên cần thêm dữ kiện."
+  },
+  {
+   "t": "listen",
+   "say": "I have a reminder with my initial, but it says Monday. My new appointment should be on Friday. Could it be an old message? It might be, but an initial is not enough to identify the booking. Does it include a date or a reference you can check with reception? It includes last week’s date. It can’t be confirmation of this Friday just because the initial matches. That seems right. Ask reception to verify the new date instead of guessing. You can read the message exactly as it appears. I also need to describe the symptoms and how long they have lasted. I’m making a list so I don’t forget what I want to ask. That list can help the conversation. If you have a question about medicine or an allergy, tell the clinician or pharmacist directly rather than ask me to decide what it means. Reception has now replied. The Friday appointment is confirmed, and they say the earlier reminder was for the old booking. Then we can report that as confirmed information. Before the reply, we had a plausible explanation, not a completed check.",
+   "lang": "en-GB",
+   "q": "Tin cũ có mốc gì?",
+   "o": [
+    "Ngày tuần trước",
+    "Ngày thứ sáu mới",
+    "Không có ngày nào"
+   ],
+   "a": 0,
+   "e": "Người nói đọc last week’s date và phân nó với Friday hiện tại."
+  },
+  {
+   "t": "dict",
+   "say": "The reminder might concern an earlier appointment.",
+   "a": "The reminder might concern an earlier appointment.",
+   "lang": "en-GB",
+   "e": "Might concern giữ khả năng, earlier appointment phân tin cũ với new booking; không viết thành confirms the new date."
+  },
+  {
+   "t": "mc",
+   "q": "Must trong This must be the old version sau khi đã có xác nhận mới dùng chức năng gì?",
+   "o": [
+    "Ra lệnh phiên bản tự chữa bệnh",
+    "Cho liều thuốc",
+    "Suy đoán có cơ sở từ thông tin vừa nhận"
+   ],
+   "a": 2,
+   "e": "Must có nghĩa suy luận khác nghĩa bắt buộc; vẫn gắn vào bằng chứng phiên bản."
+  },
+  {
+   "t": "mc",
+   "q": "Câu nào không biến khả năng thành xác nhận?",
+   "o": [
+    "The initial proves all health information.",
+    "It could be an old reminder; I will ask reception.",
+    "It might be old, so every detail is now verified."
+   ],
+   "a": 1,
+   "e": "Câu đầu giữ modal và bước check còn cần, hai câu khác vượt căn cứ."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Hai tin nhắn hẹn giả có cùng chữ đầu nhưng khác ngày, phản hồi reception để mở sau, thẻ mô tả triệu chứng và câu hỏi trực tiếp cho người chuyên môn.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Cho hai tin khác ngày và hỏi điều biết/điều suy trước khi gọi tên modal."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dạy appointment, confirmation, initial và verify qua thẻ; tách symptom/duration khỏi kết luận bệnh."
+   },
+   {
+    "t": "20 phút",
+    "do": "So must/might/could/can’t + V trong suy tin, phân must nghĩa quy trình để không lẫn chức năng."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nghe hội thoại, giữ reply cuối chưa mở tới lượt thích hợp để cảm nhận trạng thái trước/sau check."
+   },
+   {
+    "t": "15 phút",
+    "do": "Đóng vai hỏi reception xác minh lịch, không cho người đóng bạn hoặc tiếp nhận chọn bệnh/thuốc."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai luyện clinician/pharmacist và âm cuối might/could, nhấn date/time trong câu hỏi làm rõ."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đọc bài, đánh trực tiếp written/inferred/confirmed và giải thích lúc thông tin đổi trạng thái."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nói hai khả năng khác cho một tin không rõ, rồi chọn câu hỏi nguồn có thể xác minh thay đoán tiếp."
+   },
+   {
+    "t": "15 phút",
+    "do": "Viết 120–150 từ, kiểm mốc và modal; loại suy đoán y tế hoặc hướng dẫn thuốc tự bịa."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chữa to sau modal, làm dict earlierappointment rồi giao một tin lịch giả với bằng chứng chưa đủ."
+   }
+  ],
+  "games": [
+   "Mở nguồn sau: đội chỉ được đổi might thành confirmed khi nhận đúng thẻ reply, không vì lặp câu nhiều lần.",
+   "Một chữ chưa đủ: nhiều thẻ có cùng initial, đội hỏi thêm ngày hoặc mục liên quan để tìm đúng lịch."
+  ],
+  "errors": [
+   "Dùng initial trùng như xác nhận duy nhất: hỏi thêm dữ kiện.",
+   "Sau modal thêm to hoặc -s: giữ nguyên mẫu.",
+   "Lẫn must bắt buộc với suy đoán: xét chức năng câu.",
+   "Suy chẩn đoán chắc từ vài triệu chứng: giữ mô tả và hỏi người chuyên môn.",
+   "Gọi giải thích hợp lý là verified trước reply: nêu trạng thái đúng thời điểm."
+  ],
+  "homework": "Viết một cuộc trao đổi giả về tin lịch cũ/mới với ba modal và bước xác minh. Thêm mô tả triệu chứng chỉ để chuẩn bị hỏi, không nêu bệnh, liều hoặc lời chọn thuốc."
+ }
 }

@@ -1,0 +1,691 @@
+{
+ "no": 15,
+ "title": "Chọn quần áo – Hỏi màu, cỡ và xin thử",
+ "sub": "哪一件？ · 大一点的 · 可以试吗？",
+ "goals": [
+  "Gọi tên một số loại quần áo và dùng lượng từ phù hợp.",
+  "Chọn một món trong nhiều món bằng 哪 + lượng từ.",
+  "Mô tả cỡ chưa phù hợp và xin thử món khác.",
+  "Đọc một lời nhắn để chọn đúng màu và cỡ."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Mô tả để chọn đúng món",
+   "html": "<p>Trong quầy áo giả của bài, khách cần chỉ rõ áo hay quần, màu và cỡ. 件 dùng cho áo/quần áo như một món; 条 dùng cho quần dài trong các mẫu đang học. 鞋子 thường đếm theo đôi bằng 双, không lấy một lượng từ áp cho tất cả. Có thể hỏi xin thử trước khi quyết định mua.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "衣服 và 裤子 có âm nhẹ",
+   "html": "<p>Những âm nhẹ làm lời nói tự nhiên nhưng không được nuốt mất cả âm tiết. Tách từ mới ra để học, rồi ghép vào lời yêu cầu.</p>",
+   "items": [
+    {
+     "sym": "yīfu / kùzi",
+     "ex": [
+      "衣服",
+      "裤子",
+      "这件衣服"
+     ],
+     "vi": "服 fu trong 衣服, 子 zi trong 裤子 thường nhẹ. Không đọc yīfú và kùzǐ với lực bằng nhau trong lời nói thông thường."
+    },
+    {
+     "sym": "shì / shí",
+     "ex": [
+      "试衣服",
+      "十件衣服"
+     ],
+     "vi": "试 shì thanh bốn là thử, 十 shí thanh hai là mười. Giữ âm sh lùi đầu lưỡi trong cả hai."
+    },
+    {
+     "sym": "héshì",
+     "ex": [
+      "合适",
+      "不合适",
+      "很合适"
+     ],
+     "vi": "合 hé có h, 适 shì có sh. Không mượn âm Hán Việt “hợp thích” để suy cách đọc tiếng Trung."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm từ dùng trong tình huống",
+   "items": [
+    {
+     "w": "衣服",
+     "py": "yīfu",
+     "hv": "y phục",
+     "vi": "quần áo",
+     "ex": "这件衣服很漂亮。",
+     "exPy": "Zhè jiàn yīfu hěn piàoliang.",
+     "exVi": "Món quần áo này đẹp."
+    },
+    {
+     "w": "衬衫",
+     "py": "chènshān",
+     "hv": "sấn sam",
+     "vi": "áo sơ mi",
+     "ex": "我想买一件衬衫。",
+     "exPy": "Wǒ xiǎng mǎi yí jiàn chènshān.",
+     "exVi": "Tôi muốn mua một chiếc áo sơ mi."
+    },
+    {
+     "w": "裤子",
+     "py": "kùzi",
+     "hv": "",
+     "vi": "quần dài",
+     "ex": "这条裤子太长了。",
+     "exPy": "Zhè tiáo kùzi tài cháng le.",
+     "exVi": "Chiếc quần này dài quá."
+    },
+    {
+     "w": "鞋子",
+     "py": "xiézi",
+     "hv": "",
+     "vi": "giày",
+     "ex": "我的鞋子是黑色的。",
+     "exPy": "Wǒ de xiézi shì hēisè de.",
+     "exVi": "Giày của tôi màu đen."
+    },
+    {
+     "w": "穿",
+     "py": "chuān",
+     "hv": "xuyên",
+     "vi": "mặc, đi",
+     "ex": "我今天穿白衬衫。",
+     "exPy": "Wǒ jīntiān chuān bái chènshān.",
+     "exVi": "Hôm nay tôi mặc áo sơ mi trắng."
+    },
+    {
+     "w": "试",
+     "py": "shì",
+     "hv": "thí",
+     "vi": "thử",
+     "ex": "我可以试一下吗？",
+     "exPy": "Wǒ kěyǐ shì yíxià ma?",
+     "exVi": "Tôi có thể thử một chút không?"
+    },
+    {
+     "w": "大号",
+     "py": "dàhào",
+     "hv": "đại hiệu",
+     "vi": "cỡ lớn",
+     "ex": "有大号的吗？",
+     "exPy": "Yǒu dàhào de ma?",
+     "exVi": "Có cỡ lớn không?"
+    },
+    {
+     "w": "小号",
+     "py": "xiǎohào",
+     "hv": "tiểu hiệu",
+     "vi": "cỡ nhỏ",
+     "ex": "这件是小号的。",
+     "exPy": "Zhè jiàn shì xiǎohào de.",
+     "exVi": "Chiếc này là cỡ nhỏ."
+    },
+    {
+     "w": "合适",
+     "py": "héshì",
+     "hv": "hợp thích",
+     "vi": "vừa, phù hợp",
+     "ex": "这件很合适。",
+     "exPy": "Zhè jiàn hěn héshì.",
+     "exVi": "Chiếc này rất vừa."
+    },
+    {
+     "w": "件",
+     "py": "jiàn",
+     "hv": "kiện",
+     "vi": "chiếc, món quần áo",
+     "ex": "我有两件衬衫。",
+     "exPy": "Wǒ yǒu liǎng jiàn chènshān.",
+     "exVi": "Tôi có hai chiếc áo sơ mi."
+    },
+    {
+     "w": "条",
+     "py": "tiáo",
+     "hv": "điều",
+     "vi": "chiếc quần; lượng từ dài",
+     "ex": "这条裤子是蓝色的。",
+     "exPy": "Zhè tiáo kùzi shì lánsè de.",
+     "exVi": "Chiếc quần này màu xanh lam."
+    },
+    {
+     "w": "颜色",
+     "py": "yánsè",
+     "hv": "nhan sắc",
+     "vi": "màu sắc",
+     "ex": "你喜欢什么颜色？",
+     "exPy": "Nǐ xǐhuan shénme yánsè?",
+     "exVi": "Bạn thích màu gì?"
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Chọn một món bằng 哪 + lượng từ",
+   "html": "<p>哪一件 hỏi chiếc nào khi nói về áo; 哪一条 hỏi chiếc nào khi nói về quần. Danh từ có thể được lược nếu hai người đã biết đang chọn vật gì.</p>",
+   "ex": [
+    {
+     "t": "你要哪一件衬衫？",
+     "py": "Nǐ yào nǎ yí jiàn chènshān?",
+     "vi": "Bạn muốn chiếc áo sơ mi nào?"
+    },
+    {
+     "t": "你喜欢哪一条裤子？",
+     "py": "Nǐ xǐhuan nǎ yì tiáo kùzi?",
+     "vi": "Bạn thích chiếc quần nào?"
+    },
+    {
+     "t": "我要蓝色的那件。",
+     "py": "Wǒ yào lánsè de nà jiàn.",
+     "vi": "Tôi muốn chiếc màu xanh lam kia."
+    }
+   ],
+   "tips": [
+    "Chọn 件 hay 条 theo vật đang nói; 哪 không thay thế lượng từ."
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Tính từ + 一点: đổi mức độ một chút",
+   "html": "<p>大一点 là lớn hơn một chút, 小一点 là nhỏ hơn một chút. Dùng 的 khi lược danh từ: 大一点的指 món có cỡ lớn hơn. Đừng hiểu 一点 trong cụm này là một giờ.</p>",
+   "ex": [
+    {
+     "t": "这件太小了，有大一点的吗？",
+     "py": "Zhè jiàn tài xiǎo le, yǒu dà yìdiǎn de ma?",
+     "vi": "Chiếc này nhỏ quá, có chiếc lớn hơn một chút không?"
+    },
+    {
+     "t": "那条太长了，我要短一点的。",
+     "py": "Nà tiáo tài cháng le, wǒ yào duǎn yìdiǎn de.",
+     "vi": "Chiếc quần kia dài quá, tôi muốn chiếc ngắn hơn một chút."
+    },
+    {
+     "t": "这件颜色太深了，有浅一点的吗？",
+     "py": "Zhè jiàn yánsè tài shēn le, yǒu qiǎn yìdiǎn de ma?",
+     "vi": "Màu chiếc này đậm quá, có chiếc nhạt hơn một chút không?"
+    }
+   ],
+   "tips": [
+    "Có thể mô tả vấn đề rồi xin món khác; không phải chỉ nói 不好 mà thiếu thông tin cần đổi."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: Đổi sang chiếc áo vừa hơn",
+   "lang": "zh-CN",
+   "note": "Khách thích màu xanh lam nhưng chiếc đầu hơi nhỏ. Nghe màu, cỡ đầu và quyết định cuối cùng.",
+   "lines": [
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "你好，我想看衬衫。",
+     "py": "Nǐ hǎo, wǒ xiǎng kàn chènshān.",
+     "vi": "Chào bạn, tôi muốn xem áo sơ mi."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "你喜欢什么颜色？",
+     "py": "Nǐ xǐhuan shénme yánsè?",
+     "vi": "Bạn thích màu gì?"
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "蓝色的。那件可以试吗？",
+     "py": "Lánsè de. Nà jiàn kěyǐ shì ma?",
+     "vi": "Màu xanh lam. Tôi thử chiếc kia được không?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "可以。这件是小号的。",
+     "py": "Kěyǐ. Zhè jiàn shì xiǎohào de.",
+     "vi": "Được. Chiếc này là cỡ nhỏ."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "有一点小。有没有大一点的？",
+     "py": "Yǒu yìdiǎn xiǎo. Yǒu méiyǒu dà yìdiǎn de?",
+     "vi": "Hơi nhỏ. Có chiếc lớn hơn một chút không?"
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "有，这件也是蓝色的，是大号。",
+     "py": "Yǒu, zhè jiàn yě shì lánsè de, shì dàhào.",
+     "vi": "Có, chiếc này cũng màu xanh lam, là cỡ lớn."
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "我再试一下。现在很合适。",
+     "py": "Wǒ zài shì yíxià. Xiànzài hěn héshì.",
+     "vi": "Tôi thử thêm một lần. Giờ thì rất vừa."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "你要这一件吗？",
+     "py": "Nǐ yào zhè yí jiàn ma?",
+     "vi": "Bạn lấy chiếc này phải không?"
+    },
+    {
+     "s": "安禾",
+     "g": "f",
+     "t": "对，只要一件，不要裤子。",
+     "py": "Duì, zhǐ yào yí jiàn, bú yào kùzi.",
+     "vi": "Đúng, chỉ lấy một chiếc, không lấy quần."
+    },
+    {
+     "s": "子宁",
+     "g": "m",
+     "t": "好的，我给你拿新的。",
+     "py": "Hǎo de, wǒ gěi nǐ ná xīn de.",
+     "vi": "Được, tôi lấy chiếc mới cho bạn."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Khách muốn xem loại quần áo nào?",
+     "o": [
+      "Quần dài",
+      "Áo sơ mi",
+      "Giày"
+     ],
+     "a": 1,
+     "e": "Khách mở đầu bằng 想看衬衫."
+    },
+    {
+     "q": "Vấn đề của chiếc đầu tiên là gì?",
+     "o": [
+      "Hơi nhỏ",
+      "Quá dài",
+      "Sai màu"
+     ],
+     "a": 0,
+     "e": "Lời 有一点小 nói cỡ hơi nhỏ, không nói màu sai."
+    },
+    {
+     "q": "Chiếc được chọn cuối có màu và cỡ nào?",
+     "o": [
+      "Đen, cỡ lớn",
+      "Xanh lam, cỡ lớn",
+      "Trắng, cỡ nhỏ"
+     ],
+     "a": 1,
+     "e": "Chiếc thứ hai vẫn 蓝色 và là 大号."
+    },
+    {
+     "q": "Khách có lấy quần không?",
+     "o": [
+      "Có một chiếc",
+      "Không",
+      "Có hai chiếc"
+     ],
+     "a": 1,
+     "e": "Khách nói 不要裤子 nên chỉ lấy áo."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc hiểu: Nhờ chọn đúng chiếc",
+   "text": "我想买一件蓝色衬衫。小号的有一点小，大号的很合适。姐姐说白色也好看，可是我还是喜欢蓝色。今天我只买衬衫，不买裤子，也不买鞋子。",
+   "py": "Wǒ xiǎng mǎi yí jiàn lánsè chènshān. Xiǎohào de yǒu yìdiǎn xiǎo, dàhào de hěn héshì. Jiějie shuō báisè yě hǎokàn, kěshì wǒ háishi xǐhuan lánsè. Jīntiān wǒ zhǐ mǎi chènshān, bù mǎi kùzi, yě bù mǎi xiézi.",
+   "vi": "Tôi muốn mua một chiếc áo sơ mi xanh lam. Cỡ nhỏ hơi chật, cỡ lớn rất vừa. Chị nói màu trắng cũng đẹp nhưng tôi vẫn thích xanh lam. Hôm nay tôi chỉ mua áo sơ mi, không mua quần và cũng không mua giày.",
+   "gloss": [
+    {
+     "w": "衬衫",
+     "py": "chènshān",
+     "vi": "áo sơ mi"
+    },
+    {
+     "w": "裤子",
+     "py": "kùzi",
+     "vi": "quần dài"
+    },
+    {
+     "w": "鞋子",
+     "py": "xiézi",
+     "vi": "giày"
+    },
+    {
+     "w": "大号",
+     "py": "dàhào",
+     "vi": "cỡ lớn"
+    },
+    {
+     "w": "小号",
+     "py": "xiǎohào",
+     "vi": "cỡ nhỏ"
+    },
+    {
+     "w": "合适",
+     "py": "héshì",
+     "vi": "vừa, phù hợp"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Cỡ nào phù hợp với người viết?",
+     "o": [
+      "Cỡ lớn",
+      "Cỡ nhỏ",
+      "Không cỡ nào"
+     ],
+     "a": 0,
+     "e": "Bài nói 大号的很合适."
+    },
+    {
+     "q": "Ai gợi ý màu trắng?",
+     "o": [
+      "Người giao hàng",
+      "Chị",
+      "Giáo viên"
+     ],
+     "a": 1,
+     "e": "姐姐说白色也好看 là lời của chị."
+    },
+    {
+     "q": "Người viết quyết định mua gì?",
+     "o": [
+      "Hai áo sơ mi trắng",
+      "Một áo sơ mi xanh lam",
+      "Quần trắng và giày đen"
+     ],
+     "a": 1,
+     "e": "Người viết giữ lựa chọn xanh lam và chỉ mua áo."
+    }
+   ]
+  },
+  {
+   "k": "chars",
+   "h": "Nhận diện chữ trong bài",
+   "items": [
+    {
+     "c": "衣",
+     "py": "yī",
+     "hv": "y",
+     "parts": "Chấm đầu, ngang rồi phần dưới",
+     "strokes": 6,
+     "vi": "áo, quần áo",
+     "words": "衣服，雨衣"
+    },
+    {
+     "c": "色",
+     "py": "sè",
+     "hv": "sắc",
+     "parts": "Phần trên trước, 巴 bên dưới",
+     "strokes": 6,
+     "vi": "màu",
+     "words": "颜色，蓝色"
+    },
+    {
+     "c": "件",
+     "py": "jiàn",
+     "hv": "kiện",
+     "parts": "亻 bên trái, 牛 bên phải",
+     "strokes": 6,
+     "vi": "lượng từ chiếc",
+     "words": "一件，两件"
+    },
+    {
+     "c": "穿",
+     "py": "chuān",
+     "hv": "xuyên",
+     "parts": "穴 ở trên, 牙 ở dưới",
+     "strokes": 9,
+     "vi": "mặc",
+     "words": "穿衣，穿鞋"
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói có nhiệm vụ",
+   "tasks": [
+    {
+     "p": "Bạn thử áo nhỏ và cần chiếc lớn hơn nhưng giữ màu xanh lam.",
+     "model": "这件蓝色衬衫有一点小。有没有大一点的？我还要蓝色。",
+     "py": "Zhè jiàn lánsè chènshān yǒu yìdiǎn xiǎo. Yǒu méiyǒu dà yìdiǎn de? Wǒ hái yào lánsè.",
+     "vi": "Chiếc áo sơ mi xanh này hơi nhỏ. Có chiếc lớn hơn một chút không? Tôi vẫn muốn màu xanh lam.",
+     "tips": "Nêu cả yêu cầu giữ màu để tránh người bán chỉ đổi cỡ."
+    },
+    {
+     "p": "Bạn chỉ muốn xem quần, hỏi chiếc xanh có được thử không.",
+     "model": "我想看裤子，不看衬衫。那条蓝色的可以试一下吗？",
+     "py": "Wǒ xiǎng kàn kùzi, bú kàn chènshān. Nà tiáo lánsè de kěyǐ shì yíxià ma?",
+     "vi": "Tôi muốn xem quần, không xem áo sơ mi. Chiếc xanh lam kia thử được không?",
+     "tips": "Dùng 条 cho quần và đọc 子 nhẹ."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết để hoàn thành tình huống",
+   "task": "Viết 40–65 chữ Hán nhắn người bán: loại áo, màu, vấn đề với chiếc đầu, cỡ muốn đổi và món không cần mua.",
+   "min": 40,
+   "model": "我想要一件蓝色衬衫。刚才试的小号有一点小，请给我大一点的。我还要蓝色，不要白色。今天不买裤子，谢谢。",
+   "modelVi": "Tôi muốn một áo sơ mi xanh lam. Cỡ nhỏ vừa thử hơi chật, hãy cho tôi chiếc lớn hơn một chút. Tôi vẫn muốn xanh lam, không muốn trắng. Hôm nay tôi không mua quần, cảm ơn.",
+   "tips": [
+    "Nêu loại món trước, sau đó nêu đặc điểm cần đổi.",
+    "Câu cuối chỉ là giới hạn mua, không phải chê chất lượng món khác."
+   ],
+   "checklist": [
+    "Đúng 件 cho áo",
+    "Màu giữ nhất quán",
+    "Có vấn đề và cỡ mới",
+    "Nêu rõ món không mua"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "listen",
+   "say": "这件太小了，请拿大一点的。",
+   "lang": "zh-CN",
+   "q": "Khách muốn đổi thế nào?",
+   "o": [
+    "Ngắn hơn một chút",
+    "Lớn hơn một chút",
+    "Nhỏ hơn một chút"
+   ],
+   "a": 1,
+   "e": "Khách nói 太小 nên yêu cầu 大一点."
+  },
+  {
+   "t": "listen",
+   "say": "只要一件蓝色衬衫，不要裤子。",
+   "lang": "zh-CN",
+   "q": "Khách mua gì?",
+   "o": [
+    "Hai áo sơ mi",
+    "Một áo sơ mi xanh lam",
+    "Một quần xanh lam"
+   ],
+   "a": 1,
+   "e": "只要一件限定 một áo; 不要裤子 loại quần."
+  },
+  {
+   "t": "mc",
+   "q": "Lượng từ nào dùng cho chiếc quần trong bài?",
+   "o": [
+    "本",
+    "张",
+    "条"
+   ],
+   "a": 2,
+   "e": "条 dùng với 裤子; 本 cho sách, 张 cho giấy."
+  },
+  {
+   "t": "mc",
+   "q": "Hỏi chiếc áo nào, chọn câu nào?",
+   "o": [
+    "你哪儿一件要？",
+    "你要哪一件？",
+    "你要哪里件？"
+   ],
+   "a": 1,
+   "e": "哪一件 hỏi lựa chọn chiếc áo trong những món đã biết."
+  },
+  {
+   "t": "mc",
+   "q": "合适 trong tình huống thử áo nghĩa là gì?",
+   "o": [
+    "Đắt tiền",
+    "Màu đỏ",
+    "Vừa, phù hợp"
+   ],
+   "a": 2,
+   "e": "合适 đánh giá độ phù hợp, không trực tiếp nói giá hoặc màu."
+  },
+  {
+   "t": "mc",
+   "q": "Một chiếc áo lớn hơn một chút nói thế nào?",
+   "o": [
+    "一点大的点",
+    "大点钟的",
+    "大一点的"
+   ],
+   "a": 2,
+   "e": "Tính từ 大 đi trước 一点, 的 thay cho danh từ đã rõ."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “thử”: 可以___一下吗？",
+   "a": "试",
+   "py": "shì",
+   "e": "试 là động từ thử đồ; 一下 làm yêu cầu nhẹ hơn."
+  },
+  {
+   "t": "fill",
+   "q": "Điền lượng từ áo: 两___衬衫。",
+   "a": "件",
+   "py": "jiàn",
+   "e": "件 phù hợp với từng chiếc áo sơ mi."
+  },
+  {
+   "t": "fill",
+   "q": "Điền “cỡ nhỏ”: 这件是___的。",
+   "a": "小号",
+   "py": "xiǎohào",
+   "e": "小号 nói cỡ nhỏ; 号 ở đây không phải số điện thoại."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "想买",
+    "一件",
+    "蓝色的",
+    "衬衫",
+    "我"
+   ],
+   "a": "我想买一件蓝色的衬衫。",
+   "e": "Số và lượng từ đứng trước cụm màu sắc, rồi danh từ áo."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp các mảnh thành câu tự nhiên.",
+   "w": [
+    "裤子",
+    "太长了",
+    "那条"
+   ],
+   "a": "那条裤子太长了。",
+   "e": "那条裤子 là chủ thể, 太长了 đánh giá độ dài quá mức."
+  },
+  {
+   "t": "match",
+   "q": "Nối món quần áo và cách chọn với nghĩa.",
+   "pairs": [
+    [
+     "衬衫",
+     "áo sơ mi"
+    ],
+    [
+     "裤子",
+     "quần dài"
+    ],
+    [
+     "穿",
+     "mặc, đi"
+    ],
+    [
+     "试",
+     "thử"
+    ]
+   ],
+   "e": "穿 là mặc hoặc đi trên người; 试 là thử trước khi quyết định, không đồng nghĩa mua."
+  },
+  {
+   "t": "dict",
+   "say": "这件很合适。",
+   "lang": "zh-CN",
+   "a": "这件很合适。",
+   "py": "Zhè jiàn hěn héshì.",
+   "e": "Giữ lượng từ 件 và đọc đủ hai âm trong 合适."
+  }
+ ],
+ "teacher": {
+  "time": "180 phút, chia thành hai buổi 90 phút",
+  "prep": "Tranh áo sơ mi, quần, giày và thẻ màu/cỡ; hai bộ áo giấy cùng màu nhưng khác cỡ. Không dùng nhãn hàng thật.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Đặt ba tranh vật và hỏi vật nào có thể dùng cùng lượng từ; giới thiệu 件, 条, 双 theo từng loại."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dạy quần áo và cỡ bằng thẻ, luyện âm nhẹ của 衣服/裤子/鞋子, rồi đọc cả yêu cầu xin thử."
+   },
+   {
+    "t": "20 phút",
+    "do": "Luyện 哪一件 và 哪一条 qua bảng lựa chọn; học viên phải chỉ đúng món trước khi đáp màu."
+   },
+   {
+    "t": "25 phút",
+    "do": "Mô phỏng món quá nhỏ hoặc dài; dùng 大一点/短一点 để yêu cầu thay đổi một đặc điểm, giữ các đặc điểm còn lại."
+   },
+   {
+    "t": "15 phút",
+    "do": "Nghe cuộc thử áo và lập bảng chiếc đầu/chiếc sau, gồm màu, cỡ và đánh giá phù hợp."
+   },
+   {
+    "t": "10 phút",
+    "do": "Khởi động buổi hai bằng người bán cố ý đưa sai màu; khách phải nói rõ giữ màu và chỉ đổi cỡ."
+   },
+   {
+    "t": "20 phút",
+    "do": "Đọc lời nhờ chọn áo, phân biệt gợi ý của chị với quyết định của người viết; không lấy đề xuất làm đáp án cuối."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đóng vai quầy áo theo thẻ nhu cầu kín; chỉ kết thúc khi người bán nhắc đúng loại, màu, cỡ và số lượng."
+   },
+   {
+    "t": "20 phút",
+    "do": "Viết tin nhắn 40–65 chữ; bạn đọc tô màu yêu cầu mới và điều cần giữ, sửa câu mơ hồ như 大的那个."
+   },
+   {
+    "t": "15 phút",
+    "do": "Làm bài tự chấm và chốt một câu hỏi xin thử; giáo viên nghe âm shì, lượng từ và danh từ đã lược bằng 的."
+   }
+  ],
+  "games": [
+   "Giao đúng đơn: khách có thẻ màu/cỡ bí mật, người bán chỉ được hỏi để chọn trong sáu tranh; giao sai một đặc điểm phải hỏi lại."
+  ],
+  "errors": [
+   "Dùng 张 cho áo vì dịch “một cái”: ghép lại món và lượng từ 件 trên thẻ.",
+   "Đọc 子 trong 裤子 quá nặng: nghe và bắt chước kùzi với âm sau nhẹ.",
+   "Xin 大一点 nhưng quên màu cần giữ: thêm 我还要蓝色 để đơn hàng không mơ hồ.",
+   "Dùng 哪儿 hỏi chiếc nào: thay bằng 哪一件 vì đang hỏi lựa chọn vật, không hỏi nơi.",
+   "Đọc 试 thành shí: đối chiếu hành động thử với số 十 rồi nói trong hai câu khác nhau."
+  ],
+  "homework": "Vẽ ba món quần áo không nhãn hiệu, ghi lượng từ và màu. Viết hai lần xin đổi cỡ nhưng giữ màu, sau đó ghi âm một cuộc hỏi xin thử ngắn."
+ }
+}

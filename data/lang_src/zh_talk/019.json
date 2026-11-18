@@ -1,60 +1,328 @@
 {
-  "no": 19,
-  "lv": "hsk3",
-  "title": "Thanh toán quét mã điện thoại",
-  "sub": "扫码付款 · Sǎo mǎ fùkuǎn",
-  "situation": "Nguyễn Minh mới sang, đi cửa hàng tiện lợi cùng bạn Lưu Dương (刘洋). Ví điện tử trên điện thoại của Minh (Alipay – 支付宝) chưa liên kết thẻ ngân hàng nên chưa trả được; mạng lại chập chờn. Lưu Dương trả giúp và hướng dẫn cách liên kết thẻ, chuyển tiền qua WeChat (微信). Nghe lần 1: cuối cùng họ trả tiền bằng cách nào?",
-  "lang": "zh-CN",
-  "lines": [
-    {"s": "收银员", "g": "f", "t": "一共三十七块五。微信还是支付宝？", "py": "Yígòng sānshíqī kuài wǔ. Wēixìn háishi Zhīfùbǎo?", "vi": "Tổng cộng 37 tệ rưỡi. WeChat hay Alipay ạ?"},
-    {"s": "阮明", "g": "m", "t": "我可以给现金吗？", "py": "Wǒ kěyǐ gěi xiànjīn ma?", "vi": "Tôi trả tiền mặt được không?"},
-    {"s": "收银员", "g": "f", "t": "可以，不过我们这儿零钱不多，最好扫码。", "py": "Kěyǐ, búguò wǒmen zhèr língqián bù duō, zuìhǎo sǎo mǎ.", "vi": "Được, nhưng chỗ chúng tôi không có nhiều tiền lẻ, tốt nhất là quét mã."},
-    {"s": "刘洋", "g": "m", "t": "阮明，你手机上不是有支付宝吗？", "py": "Ruǎn Míng, nǐ shǒujī shang bú shì yǒu Zhīfùbǎo ma?", "vi": "Minh, chẳng phải điện thoại cậu có Alipay sao?"},
-    {"s": "阮明", "g": "m", "t": "有是有，但是我还没绑银行卡，不知道怎么用。", "py": "Yǒu shì yǒu, dànshì wǒ hái méi bǎng yínhángkǎ, bù zhīdào zěnme yòng.", "vi": "Có thì có, nhưng mình chưa liên kết thẻ ngân hàng, không biết dùng thế nào."},
-    {"s": "刘洋", "g": "m", "t": "今天先用我的吧，回去我教你。", "py": "Jīntiān xiān yòng wǒ de ba, huíqu wǒ jiāo nǐ.", "vi": "Hôm nay dùng của mình trước đi, về mình chỉ cho."},
-    {"s": "收银员", "g": "f", "t": "请出示付款码，我来扫。", "py": "Qǐng chūshì fùkuǎnmǎ, wǒ lái sǎo.", "vi": "Vui lòng đưa mã thanh toán, để tôi quét."},
-    {"s": "刘洋", "g": "m", "t": "咦，怎么付不了？网络好像有问题。", "py": "Yí, zěnme fù bu liǎo? Wǎngluò hǎoxiàng yǒu wèntí.", "vi": "Ơ, sao không trả được nhỉ? Hình như mạng có vấn đề."},
-    {"s": "收银员", "g": "f", "t": "那您扫一下墙上的二维码吧，输入三十七块五。", "py": "Nà nín sǎo yíxià qiáng shang de èrwéimǎ ba, shūrù sānshíqī kuài wǔ.", "vi": "Vậy anh quét mã QR trên tường nhé, nhập 37 tệ rưỡi."},
-    {"s": "刘洋", "g": "m", "t": "好，付好了，你看一下。", "py": "Hǎo, fù hǎo le, nǐ kàn yíxià.", "vi": "Được, trả xong rồi, chị xem giúp."},
-    {"s": "收银员", "g": "f", "t": "收到了，谢谢！要小票吗？", "py": "Shōudào le, xièxie! Yào xiǎopiào ma?", "vi": "Nhận được rồi, cảm ơn! Có lấy hoá đơn không ạ?"},
-    {"s": "阮明", "g": "m", "t": "不用了。刘洋，谢谢你！我现在给你现金吧。", "py": "Bú yòng le. Liú Yáng, xièxie nǐ! Wǒ xiànzài gěi nǐ xiànjīn ba.", "vi": "Không cần ạ. Dương ơi, cảm ơn cậu! Mình đưa cậu tiền mặt luôn nhé."},
-    {"s": "刘洋", "g": "m", "t": "不着急。等你绑好银行卡，在微信上转给我就行。", "py": "Bù zháojí. Děng nǐ bǎng hǎo yínhángkǎ, zài Wēixìn shang zhuǎn gěi wǒ jiù xíng.", "vi": "Không vội. Đợi cậu liên kết xong thẻ thì chuyển cho mình qua WeChat là được."},
-    {"s": "阮明", "g": "m", "t": "绑卡难不难？", "py": "Bǎng kǎ nán bu nán?", "vi": "Liên kết thẻ có khó không?"},
-    {"s": "刘洋", "g": "m", "t": "不难。打开“我的”，点“银行卡”，输入卡号，再输入短信验证码就好了。", "py": "Bù nán. Dǎkāi “Wǒ de”, diǎn “Yínhángkǎ”, shūrù kǎhào, zài shūrù duǎnxìn yànzhèngmǎ jiù hǎo le.", "vi": "Không khó. Mở mục ‘Của tôi’, bấm ‘Thẻ ngân hàng’, nhập số thẻ, rồi nhập mã xác thực gửi qua tin nhắn là xong."},
-    {"s": "阮明", "g": "m", "t": "原来这么简单！在中国，大家真的都不用现金吗？", "py": "Yuánlái zhème jiǎndān! Zài Zhōngguó, dàjiā zhēn de dōu bú yòng xiànjīn ma?", "vi": "Hoá ra đơn giản thế! Ở Trung Quốc mọi người thật sự đều không dùng tiền mặt à?"},
-    {"s": "刘洋", "g": "m", "t": "差不多吧，买菜、坐车、交水电费都可以用手机。不过身上最好还是带一点儿现金。", "py": "Chàbuduō ba, mǎi cài, zuò chē, jiāo shuǐdiànfèi dōu kěyǐ yòng shǒujī. Búguò shēnshang zuìhǎo háishi dài yìdiǎnr xiànjīn.", "vi": "Gần như vậy, mua rau, đi xe, đóng tiền điện nước đều dùng điện thoại được. Nhưng tốt nhất vẫn nên mang theo ít tiền mặt."}
-  ],
-  "phrases": [
-    {"t": "微信还是支付宝？", "vi": "WeChat hay Alipay?", "note": "Wēixìn háishi Zhīfùbǎo? – Câu thu ngân hỏi phương thức thanh toán (hai ví điện tử phổ biến nhất ở TQ). Đáp ngắn: 微信 / 支付宝 / 现金."},
-    {"t": "扫码 / 我扫你还是你扫我？", "vi": "Quét mã / Tôi quét anh hay anh quét tôi?", "note": "Sǎo mǎ / Wǒ sǎo nǐ háishi nǐ sǎo wǒ? – Hai cách: khách quét 二维码 (èrwéimǎ – mã QR) của cửa hàng rồi tự nhập tiền; hoặc cửa hàng quét 付款码 (fùkuǎnmǎ – mã thanh toán) trên điện thoại khách."},
-    {"t": "请出示付款码。", "vi": "Vui lòng đưa mã thanh toán.", "note": "Qǐng chūshì fùkuǎnmǎ. – Câu thu ngân hay nói. 出示 = xuất trình (văn trang trọng)."},
-    {"t": "怎么付不了？", "vi": "Sao không trả được?", "note": "Zěnme fù bu liǎo? – V + 不了 (bu liǎo) = không thể làm được (bổ ngữ khả năng). 了 đọc liǎo, không đọc le. Tương tự: 吃不了 (ăn không hết), 去不了 (không đi được)."},
-    {"t": "有是有，但是……", "vi": "Có thì có, nhưng…", "note": "Yǒu shì yǒu, dànshì… – Mẫu ‘A 是 A，但是…’ = thừa nhận rồi chuyển ý: 贵是贵，但是质量很好 (đắt thì đắt nhưng chất lượng tốt)."},
-    {"t": "绑银行卡", "vi": "Liên kết thẻ ngân hàng", "note": "Bǎng yínhángkǎ. – 绑 = buộc, liên kết. Người nước ngoài thường cần thẻ ngân hàng TQ hoặc thẻ quốc tế được hỗ trợ; quy định thay đổi theo thời gian, nên hỏi bạn bè/ngân hàng."},
-    {"t": "转给我 / 转账", "vi": "Chuyển cho tôi / chuyển khoản", "note": "Zhuǎn gěi wǒ / zhuǎnzhàng. – 我在微信上转给你 = tôi chuyển cho bạn qua WeChat. Chia tiền đều: AA制."},
-    {"t": "验证码", "vi": "Mã xác thực (OTP)", "note": "Yànzhèngmǎ. – Cảnh báo an toàn: KHÔNG BAO GIỜ đọc/gửi 验证码 cho người khác, kể cả người xưng là ngân hàng – đây là chiêu lừa đảo phổ biến."},
-    {"t": "原来这么简单！", "vi": "Hoá ra đơn giản thế!", "note": "Yuánlái zhème jiǎndān! – 原来 = hoá ra (vừa phát hiện điều trước đây không biết)."},
-    {"t": "不着急。", "vi": "Không vội đâu.", "note": "Bù zháojí. – Trấn an người khác. 别着急 = đừng vội/đừng lo."},
-    {"t": "零钱", "vi": "Tiền lẻ", "note": "Língqián. – 有零钱吗？= có tiền lẻ không? 零钱 trong ví điện tử còn chỉ số dư tài khoản."}
-  ],
-  "qs": [
-    {"q": "Tổng tiền là bao nhiêu? (gõ số hoặc chữ Hán)", "a": "三十七块五", "alt": ["37.5", "37,5", "三十七块五毛", "sanshiqi kuai wu"], "e": "一共三十七块五 = 37,5 tệ."},
-    {"q": "Vì sao thu ngân khuyên quét mã?", "o": ["Cửa hàng không nhận tiền mặt", "Cửa hàng ít tiền lẻ", "Quét mã được giảm giá"], "a": 1, "e": "我们这儿零钱不多，最好扫码."},
-    {"q": "Vì sao Minh chưa dùng được Alipay?", "o": ["Điện thoại hết pin", "Chưa liên kết thẻ ngân hàng", "Không có mạng"], "a": 1, "e": "我还没绑银行卡，不知道怎么用."},
-    {"q": "Lần quét mã đầu tiên gặp chuyện gì?", "o": ["Mạng có vấn đề, không trả được", "Tài khoản hết tiền", "Thu ngân quét sai số tiền"], "a": 0, "e": "怎么付不了？网络好像有问题."},
-    {"q": "Cuối cùng trả tiền bằng cách nào?", "o": ["Trả tiền mặt", "Quẹt thẻ ngân hàng", "Lưu Dương quét mã QR trên tường và tự nhập số tiền"], "a": 2, "e": "那您扫一下墙上的二维码吧，输入三十七块五."},
-    {"q": "Lưu Dương muốn Minh trả lại tiền thế nào?", "o": ["Đưa tiền mặt ngay", "Chuyển qua WeChat sau khi liên kết thẻ", "Không cần trả"], "a": 1, "e": "等你绑好银行卡，在微信上转给我就行."},
-    {"q": "Lời khuyên cuối cùng của Lưu Dương là gì?", "o": ["Vẫn nên mang theo một ít tiền mặt", "Không cần mang tiền mặt", "Nên dùng thẻ tín dụng"], "a": 0, "e": "身上最好还是带一点儿现金."}
-  ],
-  "exercises": [
-    {"t": "fill", "q": "网络有问题，付不___。(Mạng có vấn đề, không trả được.)", "py": "Wǎngluò yǒu wèntí, fù bu liǎo.", "a": "了", "alt": ["liao"], "e": "V + 不了 (bu liǎo) = không thể làm được."},
-    {"t": "order", "q": "Sắp xếp thành câu ‘Bạn chuyển cho tôi qua WeChat’", "w": ["转给我", "在微信上", "你"], "a": "你在微信上转给我", "e": "Nǐ zài Wēixìn shang zhuǎn gěi wǒ – trạng ngữ nơi chốn (在微信上) đứng trước động từ."},
-    {"t": "listen", "say": "我扫你，还是你扫我？", "lang": "zh-CN", "q": "Người nói hỏi gì?", "o": ["Trả tiền mặt hay quét mã", "Ai quét mã của ai", "Có cần hoá đơn không"], "a": 1, "e": "我扫你还是你扫我 = tôi quét mã của bạn hay bạn quét mã của tôi."},
-    {"t": "dict", "say": "请出示付款码。", "lang": "zh-CN", "a": "请出示付款码。", "py": "Qǐng chūshì fùkuǎnmǎ.", "e": "出示 chūshì = xuất trình; 付款码 = mã thanh toán."},
-    {"t": "mc", "q": "Một người lạ nhắn tin xin 验证码 (yànzhèngmǎ) của bạn và nói là ngân hàng. Bạn nên:", "o": ["Gửi ngay cho họ", "Gửi nếu họ đọc đúng tên bạn", "Không gửi – mã xác thực tuyệt đối không đưa ai"], "a": 2, "e": "验证码 là mã bảo mật một lần; ngân hàng không bao giờ hỏi mã này. Đưa mã = mất tiền."}
-  ],
-  "practice": [
-    {"p": "Ở quán ăn nhỏ: hỏi có nhận tiền mặt không; chủ quán khuyên quét mã, bạn hỏi mã QR ở đâu.", "model": "老板，可以用现金吗？……好，那我扫码吧。二维码在哪儿？", "py": "Lǎobǎn, kěyǐ yòng xiànjīn ma? … Hǎo, nà wǒ sǎo mǎ ba. Èrwéimǎ zài nǎr?", "vi": "Anh chủ ơi, trả tiền mặt được không? … Được, vậy tôi quét mã. Mã QR ở đâu ạ?"},
-    {"p": "Đi ăn với bạn, bạn trả trước. Hãy nói sẽ chuyển lại qua WeChat và hỏi mỗi người bao nhiêu (chia đều).", "model": "今天你先付吧，一会儿我在微信上转给你。我们AA吧，一个人多少钱？", "py": "Jīntiān nǐ xiān fù ba, yíhuìr wǒ zài Wēixìn shang zhuǎn gěi nǐ. Wǒmen AA ba, yí ge rén duōshao qián?", "vi": "Hôm nay cậu trả trước đi, lát nữa mình chuyển lại qua WeChat. Mình chia đều nhé, mỗi người bao nhiêu?"}
-  ]
+ "no": 19,
+ "lv": "hsk3",
+ "title": "Thanh toán quét mã điện thoại",
+ "sub": "扫码付款 · Sǎo mǎ fùkuǎn",
+ "situation": "Nguyễn Minh mới sang, đi cửa hàng tiện lợi cùng bạn Lưu Dương (刘洋). Ví điện tử trên điện thoại của Minh (ví Ti Đại – 丝袋钱包) chưa liên kết thẻ ngân hàng nên chưa trả được; mạng lại chập chờn. Lưu Dương trả giúp và hướng dẫn cách liên kết thẻ, chuyển tiền qua Ti Ngữ (丝语). Nghe lần 1: cuối cùng họ trả tiền bằng cách nào?",
+ "lang": "zh-CN",
+ "lines": [
+  {
+   "s": "收银员",
+   "g": "f",
+   "t": "一共三十七块五。丝语还是丝袋钱包？",
+   "py": "Yígòng sānshíqī kuài wǔ. Sīyǔ háishi Sīdài Qiánbāo?",
+   "vi": "Tổng cộng 37 tệ rưỡi. Ti Ngữ hay ví Ti Đại ạ?"
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "我可以给现金吗？",
+   "py": "Wǒ kěyǐ gěi xiànjīn ma?",
+   "vi": "Tôi trả tiền mặt được không?"
+  },
+  {
+   "s": "收银员",
+   "g": "f",
+   "t": "可以，不过我们这儿零钱不多，最好扫码。",
+   "py": "Kěyǐ, búguò wǒmen zhèr língqián bù duō, zuìhǎo sǎo mǎ.",
+   "vi": "Được, nhưng chỗ chúng tôi không có nhiều tiền lẻ, tốt nhất là quét mã."
+  },
+  {
+   "s": "刘洋",
+   "g": "m",
+   "t": "阮明，你手机上不是有丝袋钱包吗？",
+   "py": "Ruǎn Míng, nǐ shǒujī shang bú shì yǒu Sīdài Qiánbāo ma?",
+   "vi": "Minh, chẳng phải điện thoại cậu có ví Ti Đại sao?"
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "有是有，但是我还没绑银行卡，不知道怎么用。",
+   "py": "Yǒu shì yǒu, dànshì wǒ hái méi bǎng yínhángkǎ, bù zhīdào zěnme yòng.",
+   "vi": "Có thì có, nhưng mình chưa liên kết thẻ ngân hàng, không biết dùng thế nào."
+  },
+  {
+   "s": "刘洋",
+   "g": "m",
+   "t": "今天先用我的吧，回去我教你。",
+   "py": "Jīntiān xiān yòng wǒ de ba, huíqu wǒ jiāo nǐ.",
+   "vi": "Hôm nay dùng của mình trước đi, về mình chỉ cho."
+  },
+  {
+   "s": "收银员",
+   "g": "f",
+   "t": "请出示付款码，我来扫。",
+   "py": "Qǐng chūshì fùkuǎnmǎ, wǒ lái sǎo.",
+   "vi": "Vui lòng đưa mã thanh toán, để tôi quét."
+  },
+  {
+   "s": "刘洋",
+   "g": "m",
+   "t": "咦，怎么付不了？网络好像有问题。",
+   "py": "Yí, zěnme fù bu liǎo? Wǎngluò hǎoxiàng yǒu wèntí.",
+   "vi": "Ơ, sao không trả được nhỉ? Hình như mạng có vấn đề."
+  },
+  {
+   "s": "收银员",
+   "g": "f",
+   "t": "那您扫一下墙上的二维码吧，输入三十七块五。",
+   "py": "Nà nín sǎo yíxià qiáng shang de èrwéimǎ ba, shūrù sānshíqī kuài wǔ.",
+   "vi": "Vậy anh quét mã QR trên tường nhé, nhập 37 tệ rưỡi."
+  },
+  {
+   "s": "刘洋",
+   "g": "m",
+   "t": "好，付好了，你看一下。",
+   "py": "Hǎo, fù hǎo le, nǐ kàn yíxià.",
+   "vi": "Được, trả xong rồi, chị xem giúp."
+  },
+  {
+   "s": "收银员",
+   "g": "f",
+   "t": "收到了，谢谢！要小票吗？",
+   "py": "Shōudào le, xièxie! Yào xiǎopiào ma?",
+   "vi": "Nhận được rồi, cảm ơn! Có lấy hoá đơn không ạ?"
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "不用了。刘洋，谢谢你！我现在给你现金吧。",
+   "py": "Bú yòng le. Liú Yáng, xièxie nǐ! Wǒ xiànzài gěi nǐ xiànjīn ba.",
+   "vi": "Không cần ạ. Dương ơi, cảm ơn cậu! Mình đưa cậu tiền mặt luôn nhé."
+  },
+  {
+   "s": "刘洋",
+   "g": "m",
+   "t": "不着急。等你绑好银行卡，在丝语上转给我就行。",
+   "py": "Bù zháojí. Děng nǐ bǎng hǎo yínhángkǎ, zài Sīyǔ shang zhuǎn gěi wǒ jiù xíng.",
+   "vi": "Không vội. Đợi cậu liên kết xong thẻ thì chuyển cho mình qua Ti Ngữ là được."
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "绑卡难不难？",
+   "py": "Bǎng kǎ nán bu nán?",
+   "vi": "Liên kết thẻ có khó không?"
+  },
+  {
+   "s": "刘洋",
+   "g": "m",
+   "t": "不难。打开“我的”，点“银行卡”，输入卡号，再输入短信验证码就好了。",
+   "py": "Bù nán. Dǎkāi “Wǒ de”, diǎn “Yínhángkǎ”, shūrù kǎhào, zài shūrù duǎnxìn yànzhèngmǎ jiù hǎo le.",
+   "vi": "Không khó. Mở mục ‘Của tôi’, bấm ‘Thẻ ngân hàng’, nhập số thẻ, rồi nhập mã xác thực gửi qua tin nhắn là xong."
+  },
+  {
+   "s": "阮明",
+   "g": "m",
+   "t": "原来这么简单！在中国，大家真的都不用现金吗？",
+   "py": "Yuánlái zhème jiǎndān! Zài Zhōngguó, dàjiā zhēn de dōu bú yòng xiànjīn ma?",
+   "vi": "Hoá ra đơn giản thế! Ở Trung Quốc mọi người thật sự đều không dùng tiền mặt à?"
+  },
+  {
+   "s": "刘洋",
+   "g": "m",
+   "t": "差不多吧，买菜、坐车、交水电费都可以用手机。不过身上最好还是带一点儿现金。",
+   "py": "Chàbuduō ba, mǎi cài, zuò chē, jiāo shuǐdiànfèi dōu kěyǐ yòng shǒujī. Búguò shēnshang zuìhǎo háishi dài yìdiǎnr xiànjīn.",
+   "vi": "Gần như vậy, mua rau, đi xe, đóng tiền điện nước đều dùng điện thoại được. Nhưng tốt nhất vẫn nên mang theo ít tiền mặt."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "丝语还是丝袋钱包？",
+   "vi": "Ti Ngữ hay ví Ti Đại?",
+   "note": "Sīyǔ háishi Sīdài Qiánbāo? – Câu thu ngân hỏi phương thức thanh toán (hai ví điện tử phổ biến nhất ở TQ). Đáp ngắn: 丝语 / 丝袋钱包 / 现金."
+  },
+  {
+   "t": "扫码 / 我扫你还是你扫我？",
+   "vi": "Quét mã / Tôi quét anh hay anh quét tôi?",
+   "note": "Sǎo mǎ / Wǒ sǎo nǐ háishi nǐ sǎo wǒ? – Hai cách: khách quét 二维码 (èrwéimǎ – mã QR) của cửa hàng rồi tự nhập tiền; hoặc cửa hàng quét 付款码 (fùkuǎnmǎ – mã thanh toán) trên điện thoại khách."
+  },
+  {
+   "t": "请出示付款码。",
+   "vi": "Vui lòng đưa mã thanh toán.",
+   "note": "Qǐng chūshì fùkuǎnmǎ. – Câu thu ngân hay nói. 出示 = xuất trình (văn trang trọng)."
+  },
+  {
+   "t": "怎么付不了？",
+   "vi": "Sao không trả được?",
+   "note": "Zěnme fù bu liǎo? – V + 不了 (bu liǎo) = không thể làm được (bổ ngữ khả năng). 了 đọc liǎo, không đọc le. Tương tự: 吃不了 (ăn không hết), 去不了 (không đi được)."
+  },
+  {
+   "t": "有是有，但是……",
+   "vi": "Có thì có, nhưng…",
+   "note": "Yǒu shì yǒu, dànshì… – Mẫu ‘A 是 A，但是…’ = thừa nhận rồi chuyển ý: 贵是贵，但是质量很好 (đắt thì đắt nhưng chất lượng tốt)."
+  },
+  {
+   "t": "绑银行卡",
+   "vi": "Liên kết thẻ ngân hàng",
+   "note": "Bǎng yínhángkǎ. – 绑 = buộc, liên kết. Người nước ngoài thường cần thẻ ngân hàng TQ hoặc thẻ quốc tế được hỗ trợ; quy định thay đổi theo thời gian, nên hỏi bạn bè/ngân hàng."
+  },
+  {
+   "t": "转给我 / 转账",
+   "vi": "Chuyển cho tôi / chuyển khoản",
+   "note": "Zhuǎn gěi wǒ / zhuǎnzhàng. – 我在丝语上转给你 = tôi chuyển cho bạn qua Ti Ngữ. Chia tiền đều: AA 制."
+  },
+  {
+   "t": "验证码",
+   "vi": "Mã xác thực (OTP)",
+   "note": "Yànzhèngmǎ. – Cảnh báo an toàn: KHÔNG BAO GIỜ đọc/gửi 验证码 cho người khác, kể cả người xưng là ngân hàng – đây là chiêu lừa đảo phổ biến."
+  },
+  {
+   "t": "原来这么简单！",
+   "vi": "Hoá ra đơn giản thế!",
+   "note": "Yuánlái zhème jiǎndān! – 原来 = hoá ra (vừa phát hiện điều trước đây không biết)."
+  },
+  {
+   "t": "不着急。",
+   "vi": "Không vội đâu.",
+   "note": "Bù zháojí. – Trấn an người khác. 别着急 = đừng vội/đừng lo."
+  },
+  {
+   "t": "零钱",
+   "vi": "Tiền lẻ",
+   "note": "Língqián. – 有零钱吗？= có tiền lẻ không? 零钱 trong ví điện tử còn chỉ số dư tài khoản."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Tổng tiền là bao nhiêu? (gõ số hoặc chữ Hán)",
+   "a": "三十七块五",
+   "alt": [
+    "37.5",
+    "37,5",
+    "三十七块五毛",
+    "sanshiqi kuai wu"
+   ],
+   "e": "一共三十七块五 = 37,5 tệ."
+  },
+  {
+   "q": "Vì sao thu ngân khuyên quét mã?",
+   "o": [
+    "Quét mã được giảm giá",
+    "Cửa hàng không nhận tiền mặt",
+    "Cửa hàng ít tiền lẻ"
+   ],
+   "a": 2,
+   "e": "我们这儿零钱不多，最好扫码."
+  },
+  {
+   "q": "Vì sao Minh chưa dùng được ví Ti Đại?",
+   "o": [
+    "Không có mạng",
+    "Điện thoại hết pin",
+    "Chưa liên kết thẻ ngân hàng"
+   ],
+   "a": 2,
+   "e": "我还没绑银行卡，不知道怎么用."
+  },
+  {
+   "q": "Lần quét mã đầu tiên gặp chuyện gì?",
+   "o": [
+    "Tài khoản hết tiền",
+    "Thu ngân quét sai số tiền",
+    "Mạng có vấn đề, không trả được"
+   ],
+   "a": 2,
+   "e": "怎么付不了？网络好像有问题."
+  },
+  {
+   "q": "Cuối cùng trả tiền bằng cách nào?",
+   "o": [
+    "Quẹt thẻ ngân hàng",
+    "Lưu Dương quét mã QR trên tường và tự nhập số tiền",
+    "Trả tiền mặt"
+   ],
+   "a": 1,
+   "e": "那您扫一下墙上的二维码吧，输入三十七块五."
+  },
+  {
+   "q": "Lưu Dương muốn Minh trả lại tiền thế nào?",
+   "o": [
+    "Không cần trả",
+    "Đưa tiền mặt ngay",
+    "Chuyển qua Ti Ngữ sau khi liên kết thẻ"
+   ],
+   "a": 2,
+   "e": "等你绑好银行卡，在丝语上转给我就行."
+  },
+  {
+   "q": "Lời khuyên cuối cùng của Lưu Dương là gì?",
+   "o": [
+    "Nên dùng thẻ tín dụng",
+    "Vẫn nên mang theo một ít tiền mặt",
+    "Không cần mang tiền mặt"
+   ],
+   "a": 1,
+   "e": "身上最好还是带一点儿现金."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "网络有问题，付不___。(Mạng có vấn đề, không trả được.)",
+   "py": "Wǎngluò yǒu wèntí, fù bu liǎo.",
+   "a": "了",
+   "alt": [
+    "liao"
+   ],
+   "e": "V + 不了 (bu liǎo) = không thể làm được."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp thành câu ‘Bạn chuyển cho tôi qua Ti Ngữ’",
+   "w": [
+    "转给我",
+    "在丝语上",
+    "你"
+   ],
+   "a": "你在丝语上转给我",
+   "e": "Nǐ zài Sīyǔ shang zhuǎn gěi wǒ – trạng ngữ nơi chốn (在丝语上) đứng trước động từ."
+  },
+  {
+   "t": "listen",
+   "say": "我扫你，还是你扫我？",
+   "lang": "zh-CN",
+   "q": "Người nói hỏi gì?",
+   "o": [
+    "Trả tiền mặt hay quét mã",
+    "Ai quét mã của ai",
+    "Có cần hoá đơn không"
+   ],
+   "a": 1,
+   "e": "我扫你还是你扫我 = tôi quét mã của bạn hay bạn quét mã của tôi."
+  },
+  {
+   "t": "dict",
+   "say": "请出示付款码。",
+   "lang": "zh-CN",
+   "a": "请出示付款码。",
+   "py": "Qǐng chūshì fùkuǎnmǎ.",
+   "e": "出示 chūshì = xuất trình; 付款码 = mã thanh toán."
+  },
+  {
+   "t": "mc",
+   "q": "Một người lạ nhắn tin xin 验证码 (yànzhèngmǎ) của bạn và nói là ngân hàng. Bạn nên:",
+   "o": [
+    "Gửi ngay cho họ",
+    "Gửi nếu họ đọc đúng tên bạn",
+    "Không gửi – mã xác thực tuyệt đối không đưa ai"
+   ],
+   "a": 2,
+   "e": "验证码 là mã bảo mật một lần; ngân hàng không bao giờ hỏi mã này. Đưa mã = mất tiền."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Ở quán ăn nhỏ: hỏi có nhận tiền mặt không; chủ quán khuyên quét mã, bạn hỏi mã QR ở đâu.",
+   "model": "老板，可以用现金吗？……好，那我扫码吧。二维码在哪儿？",
+   "py": "Lǎobǎn, kěyǐ yòng xiànjīn ma? … Hǎo, nà wǒ sǎo mǎ ba. Èrwéimǎ zài nǎr?",
+   "vi": "Anh chủ ơi, trả tiền mặt được không? … Được, vậy tôi quét mã. Mã QR ở đâu ạ?"
+  },
+  {
+   "p": "Đi ăn với bạn, bạn trả trước. Hãy nói sẽ chuyển lại qua Ti Ngữ và hỏi mỗi người bao nhiêu (chia đều).",
+   "model": "今天你先付吧，一会儿我在丝语上转给你。我们AA吧，一个人多少钱？",
+   "py": "Jīntiān nǐ xiān fù ba, yíhuìr wǒ zài Sīyǔ shang zhuǎn gěi nǐ. Wǒmen AA ba, yí ge rén duōshao qián?",
+   "vi": "Hôm nay cậu trả trước đi, lát nữa mình chuyển lại qua Ti Ngữ. Mình chia đều nhé, mỗi người bao nhiêu?"
+  }
+ ]
 }

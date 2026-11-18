@@ -1,12 +1,13 @@
 {
- "title": "Kiểm tra cuối cấp Hangul – tự soạn",
- "time": 45,
+ "title": "Kiểm tra cuối cấp Hangul mở rộng – tự soạn",
+ "time": 55,
  "pass": 70,
- "intro": "34 câu tự chấm bao phủ 8 bài, kèm nói/viết tự chấm riêng. Điểm này chỉ dùng cho lớp nội bộ, không là điểm TOPIK.",
+ "intro": "40 câu tự chấm bao phủ 12 bài. Bốn câu nghe và bốn câu quy tắc mới kiểm cả batchim kép, khoảng cách và hai bài ôn tổng hợp. Phần nói/viết dùng rubric riêng, không quy đổi thành điểm TOPIK.",
  "sections": [
   {
-   "h": "Nghe nhận diện từ và câu",
-   "intro": "Nghe hai lần; ghi Hangul khi yêu cầu chính tả.",
+   "h": "Nghe chữ, từ và dữ kiện",
+   "skill": "L",
+   "intro": "Nghe tối đa hai lượt; giữ dữ kiện được xác nhận trong cả câu, chưa chọn chỉ vì một âm quen.",
    "items": [
     {
      "t": "listen",
@@ -22,13 +23,6 @@
      "e": "Câu nghe: 우와 으는 달라요. → U và eu khác nhau."
     },
     {
-     "t": "dict",
-     "lang": "ko-KR",
-     "say": "어머니",
-     "a": "어머니",
-     "e": "Viết đúng Hangul: 어머니 = mẹ. Không dùng RR làm đáp án."
-    },
-    {
      "t": "listen",
      "lang": "ko-KR",
      "say": "다리는 두 글자예요.",
@@ -40,13 +34,6 @@
      ],
      "a": 2,
      "e": "Câu nghe: 다리는 두 글자예요. → 다리 có hai khối chữ."
-    },
-    {
-     "t": "dict",
-     "lang": "ko-KR",
-     "say": "자리",
-     "a": "자리",
-     "e": "Viết đúng Hangul: 자리 = chỗ ngồi. Không dùng RR làm đáp án."
     },
     {
      "t": "listen",
@@ -62,13 +49,6 @@
      "e": "Câu nghe: 왜와 외는 달라요. → 왜 và 외 khác nhau về chữ viết."
     },
     {
-     "t": "dict",
-     "lang": "ko-KR",
-     "say": "의자",
-     "a": "의자",
-     "e": "Viết đúng Hangul: 의자 = ghế. Không dùng RR làm đáp án."
-    },
-    {
      "t": "listen",
      "lang": "ko-KR",
      "say": "카드를 천천히 읽어요.",
@@ -80,13 +60,6 @@
      ],
      "a": 0,
      "e": "Câu nghe: 카드를 천천히 읽어요. → Đọc 카드 chậm rãi."
-    },
-    {
-     "t": "dict",
-     "lang": "ko-KR",
-     "say": "치마",
-     "a": "치마",
-     "e": "Viết đúng Hangul: 치마 = váy. Không dùng RR làm đáp án."
     },
     {
      "t": "listen",
@@ -102,13 +75,6 @@
      "e": "Câu nghe: 빵을 다시 읽어요. → Đọc lại 빵."
     },
     {
-     "t": "dict",
-     "lang": "ko-KR",
-     "say": "씨",
-     "a": "씨",
-     "e": "Viết đúng Hangul: 씨 = hạt/cách gọi sau tên tùy ngữ cảnh. Không dùng RR làm đáp án."
-    },
-    {
      "t": "listen",
      "lang": "ko-KR",
      "say": "방의 끝소리를 들어요.",
@@ -120,13 +86,6 @@
      ],
      "a": 1,
      "e": "Câu nghe: 방의 끝소리를 들어요. → Nghe âm cuối của 방."
-    },
-    {
-     "t": "dict",
-     "lang": "ko-KR",
-     "say": "앞",
-     "a": "앞",
-     "e": "Viết đúng Hangul: 앞 = phía trước. Không dùng RR làm đáp án."
     },
     {
      "t": "listen",
@@ -142,13 +101,6 @@
      "e": "Câu nghe: 같이 읽어요. → Cùng đọc."
     },
     {
-     "t": "dict",
-     "lang": "ko-KR",
-     "say": "듣는",
-     "a": "듣는",
-     "e": "Viết đúng Hangul: 듣는 = đang nghe/dạng định ngữ của nghe. Không dùng RR làm đáp án."
-    },
-    {
      "t": "listen",
      "lang": "ko-KR",
      "say": "다시 읽어 주세요.",
@@ -162,16 +114,62 @@
      "e": "Câu nghe: 다시 읽어 주세요. → Xin đọc lại."
     },
     {
-     "t": "dict",
+     "t": "listen",
+     "say": "글자에는 읽어요라고 써요. 들리는 소리만 보고 일거요로 바꾸지 않아요.",
      "lang": "ko-KR",
-     "say": "천천히",
-     "a": "천천히",
-     "e": "Viết đúng Hangul: 천천히 = chậm rãi. Không dùng RR làm đáp án."
+     "q": "Người nói chọn cách viết nào?",
+     "o": [
+      "읽어요",
+      "일거요",
+      "읽으어요"
+     ],
+     "a": 0,
+     "e": "Câu nghe yêu cầu giữ chữ gốc 읽어요, dù âm nối có thể gợi cách viết khác."
+    },
+    {
+     "t": "listen",
+     "say": "한국어는 한 단어예요. 글자마다 띄지 않아요.",
+     "lang": "ko-KR",
+     "q": "Với 한국어, người nói nhắc điều gì?",
+     "o": [
+      "Phải viết ba từ riêng",
+      "Chỉ dùng chữ Latinh",
+      "Không cách giữa mọi khối"
+     ],
+     "a": 2,
+     "e": "한 단어예요 và 띄지 않아요 nêu ranh giới từ."
+    },
+    {
+     "t": "listen",
+     "say": "가위하고 가방 카드를 골라요. 위는 한 글자예요.",
+     "lang": "ko-KR",
+     "q": "Trong 가위, 위 chiếm mấy khối?",
+     "o": [
+      "Ba",
+      "Một",
+      "Hai"
+     ],
+     "a": 1,
+     "e": "위는 한 글자예요 xác nhận cấu trúc nguyên âm ghép."
+    },
+    {
+     "t": "listen",
+     "say": "오전 열 시에 입구에서 만나요. 날짜는 다시 확인해 주세요.",
+     "lang": "ko-KR",
+     "q": "Giờ và nơi gặp là gì?",
+     "o": [
+      "Mười giờ sáng, tại lối vào",
+      "Mười giờ tối, ở nhà",
+      "Một giờ sáng, ở thư viện"
+     ],
+     "a": 0,
+     "e": "오전 열 시 và 입구에서 phải được giữ thành cùng một dữ kiện hẹn."
     }
    ]
   },
   {
-   "h": "Đọc chữ, nghĩa và quy tắc",
+   "h": "Quy tắc âm–chữ và đọc hiểu cấu trúc",
+   "skill": "R",
    "items": [
     {
      "t": "mc",
@@ -351,54 +349,176 @@
     },
     {
      "t": "mc",
-     "q": "Chữ nào ghép ㅇ với ㅒ?",
+     "q": "Cặp nào giữ cùng chính tả thân từ khi đổi cách đọc?",
      "o": [
-      "얘",
-      "애",
-      "야"
+      "읽다 / 읽어요",
+      "읽다 / 일거요 như hai chính tả thay thế",
+      "읽다 / 읽으어요"
      ],
      "a": 0,
-     "e": "ㅇ+ㅒ=얘; ㅒ là yae, khác chính tả ㅐ và ㅑ."
+     "e": "Âm theo sau thay cách đọc; thân chuẩn vẫn có ㄺ."
     },
     {
      "t": "mc",
-     "q": "Chữ 예 chứa nguyên âm nào?",
+     "q": "Câu nào đúng ranh giới từ và trợ từ?",
      "o": [
-      "ㅔ",
-      "ㅕ",
-      "ㅖ"
+      "저 는 책 을 읽 어요.",
+      "저는책을읽어요.",
+      "저는 책을 읽어요."
      ],
      "a": 2,
-     "e": "예=ㅇ+ㅖ. RR ye; phân biệt chữ 에=ㅇ+ㅔ dù có thể nghe gần ở một số ngữ cảnh."
+     "e": "Trợ từ và đuôi gắn với từ của chúng; giữa tân ngữ và động từ có khoảng cách."
+    },
+    {
+     "t": "mc",
+     "q": "Phát biểu nào phân biệt đúng phụ âm căng với âm tiết?",
+     "o": [
+      "Mọi chữ kép đều là hai từ",
+      "ㄲ không tự làm tăng số âm tiết",
+      "ㄲ luôn phải đọc hai âm ga"
+     ],
+     "a": 1,
+     "e": "Một phụ âm căng vẫn được đặt ở vị trí đầu của một khối."
+    },
+    {
+     "t": "mc",
+     "q": "Khi chưa rõ chữ trong thông báo, việc nào phù hợp?",
+     "o": [
+      "Hỏi lại, kiểm chữ rồi mới truyền dữ kiện",
+      "Đoán và báo ngay giờ đầu nhìn thấy",
+      "Bỏ mọi batchim để dễ đọc"
+     ],
+     "a": 0,
+     "e": "Nghe, đọc và xác nhận phối hợp để giữ đúng thông tin."
     }
    ]
   },
   {
-   "h": "Viết – tự chấm bổ trợ",
+   "h": "Đọc thông báo mới",
+   "skill": "R",
+   "read": {
+    "title": "Tờ giấy nhỏ",
+    "text": "안내 종이에 그림과 글자가 있어요. 첫 줄에는 나린이라는 이름이 있어요. 다음 줄에는 오전 열 시라고 써 있어요. 장소는 작은 방 앞이에요. 가온 씨는 글씨가 작아서 시간을 다시 물어요. 나린 씨는 같은 말을 천천히 읽어요. 가온 씨는 공책에 이름과 시간을 써요. 한 글자의 받침이 빠져서 고쳐요. 장소는 옮기지 않아요. 마지막에는 친구에게 보여 주고 맞는지 확인해요.",
+    "vi": "Tờ hướng dẫn có hình và chữ. Dòng đầu tên Narin, dòng sau ghi mười giờ sáng, nơi là trước phòng nhỏ. Gaon thấy chữ nhỏ nên hỏi lại giờ. Narin đọc cùng nội dung chậm. Gaon viết tên và giờ vào vở, sửa một batchim bị thiếu. Không đổi địa điểm. Cuối cùng đưa bạn xem để xác nhận."
+   },
+   "items": [
+    {
+     "t": "mc",
+     "q": "Dòng đầu ghi gì?",
+     "o": [
+      "Tên Narin",
+      "Giá sách",
+      "Chỉ hình thỏ"
+     ],
+     "a": 0,
+     "e": "첫 줄에는 나린이라는 이름."
+    },
+    {
+     "t": "mc",
+     "q": "Giờ được viết là gì?",
+     "o": [
+      "Mười giờ tối",
+      "Một giờ trưa",
+      "Mười giờ sáng"
+     ],
+     "a": 2,
+     "e": "오전 열 시."
+    },
+    {
+     "t": "mc",
+     "q": "Nơi hẹn trong bài đọc là đâu?",
+     "o": [
+      "Trong nhà người đọc",
+      "Trước phòng nhỏ",
+      "Trước lối vào công ty"
+     ],
+     "a": 1,
+     "e": "작은 방 앞."
+    },
+    {
+     "t": "mc",
+     "q": "Vì sao Gaon hỏi lại giờ?",
+     "o": [
+      "Chữ nhỏ",
+      "Đã quên mọi số",
+      "Không có thông báo"
+     ],
+     "a": 0,
+     "e": "글씨가 작아서...다시 물어요."
+    },
+    {
+     "t": "mc",
+     "q": "Narin hỗ trợ cách nào?",
+     "o": [
+      "Tự đổi lịch",
+      "Xóa tên khỏi giấy",
+      "Đọc cùng nội dung chậm"
+     ],
+     "a": 2,
+     "e": "같은 말을 천천히 읽어요."
+    },
+    {
+     "t": "mc",
+     "q": "Gaon ghi gì vào vở?",
+     "o": [
+      "Danh sách mọi học viên",
+      "Tên và giờ",
+      "Giá đồ ăn"
+     ],
+     "a": 1,
+     "e": "이름과 시간을 써요."
+    },
+    {
+     "t": "mc",
+     "q": "Lỗi cần sửa là gì?",
+     "o": [
+      "Thiếu một batchim",
+      "Thiếu toàn bộ câu",
+      "Thừa mọi nguyên âm"
+     ],
+     "a": 0,
+     "e": "받침이 빠져서 고쳐요."
+    },
+    {
+     "t": "mc",
+     "q": "Địa điểm có bị đổi không?",
+     "o": [
+      "Có, một nơi hoàn toàn khác",
+      "Chưa có nơi nào",
+      "Không"
+     ],
+     "a": 2,
+     "e": "장소는 옮기지 않아요."
+    }
+   ]
+  },
+  {
+   "h": "Viết có tự sửa – bổ trợ",
    "write": {
-    "task": "Viết bốn câu xin đọc lại/giới thiệu tên và chép sáu từ có batchim. Khoanh phụ âm đầu, nguyên âm, batchim.",
-    "model": "저는 다온이에요. 이름을 써 주세요. 다시 읽어 주세요. 천천히 말해 주세요.",
+    "task": "Viết bốn câu ghi giờ và nơi của thông báo, nhờ kiểm ngày và nói sẽ hỏi lại khi chưa rõ. Khoanh hai batchim và đánh ranh giới từ.",
     "min": 20,
+    "model": "오전 열 시에 만나요. 작은 방 앞에서 만나요. 날짜를 확인해 주세요. 모르면 다시 물어요.",
+    "modelVi": "Gặp lúc mười giờ sáng, trước phòng nhỏ. Xin kiểm ngày. Chưa rõ thì hỏi lại.",
     "rubric": [
-     "Đúng chính tả và bố trí khối.",
-     "Không tách trợ từ khỏi từ.",
-     "Nhận diện đúng ba thành phần âm tiết."
+     "Đủ bốn câu theo đúng dữ kiện.",
+     "Giữ batchim và trợ từ trên chữ.",
+     "Có thể chỉ một chỗ tự sửa có lý do."
     ]
    }
   },
   {
-   "h": "Nói – tự chấm bổ trợ",
+   "h": "Hỏi lại và xác nhận – bổ trợ",
    "speak": {
     "tasks": [
      {
-      "p": "Đọc 가/카/까, 달/탈/딸 rồi ba từ 옷이/국물/같이. Giải thích một quy tắc bằng tiếng Việt.",
-      "model": "가, 카, 까. 달, 탈, 딸. 옷이, 국물, 같이."
+      "p": "Theo hai vai, đọc thông báo rồi hỏi lại giờ và một chữ khó; người đọc trả lời, người nghe nhắc lại dữ kiện để xác nhận.",
+      "model": "가온:시간을 다시 읽어 주세요.\n나린:오전 열 시예요.\n가온:이 글자의 받침이 맞아요?\n나린:네. 원래 글자를 확인해 주세요.\n가온:그럼 열 시에 작은 방 앞에서 만나요.\n나린:네,맞아요."
      }
     ],
     "rubric": [
-     "Không thêm nguyên âm sau batchim.",
-     "Phân biệt thường/bật hơi/căng theo khả năng và dùng mẫu để sửa.",
-     "Giữ chính tả khi giải thích biến âm."
+     "Có yêu cầu đọc lại thật, chưa chỉ đọc một đoạn.",
+     "Người nghe xác nhận được giờ, nơi.",
+     "Phát âm âm cuối không thêm nguyên âm; chính tả vẫn được giữ."
     ]
    }
   }

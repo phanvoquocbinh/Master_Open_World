@@ -1,0 +1,633 @@
+{
+ "no": 19,
+ "title": "Ôn tập tổng hợp 1 – Mở buổi học thử ở phòng mới",
+ "sub": "西の 部屋より 東の 部屋の ほうが 広いです。",
+ "goals": [
+  "Đối chiếu hai phòng bằng so sánh, điều kiện và lý do.",
+  "Báo vật được chuẩn bị sẵn, việc cần làm trước và thời hạn.",
+  "Truyền nguồn thông tin, nhận sai sót và nhờ người khác giúp đúng mức.",
+  "Viết bản bàn giao tích hợp có sự việc đã kiểm, phần chưa biết và bước tiếp theo."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Tình huống và mục tiêu sử dụng",
+   "html": "<p>Nhóm học thử phải chọn phòng, chuẩn bị tài liệu, chốt danh sách và giải quyết một nhãn sai. Bài này trộn các trọng tâm N4 trong một chuỗi có phụ thuộc: chọn nơi trước khi báo người tham gia, xác nhận số người trước khi in, kiểm nhãn trước khi dán. Hãy phân biệt điều kiện giả định, sự việc đã xảy ra và công việc còn dự kiến. Không ghép nhiều mẫu chỉ để có đủ ngữ pháp; chọn mẫu theo quan hệ thật giữa các ý.</p>"
+  },
+  {
+   "k": "sounds",
+   "h": "Phát âm và nhịp",
+   "html": "<p>体験 đọc たいけん có ta-i và ん cuối; 会場 đọc かいじょう có ka-i và jo-o. Dùng nhịp để không lẫn tên hoạt động với địa điểm. 手伝ってもらいました có っ trước t, còn 教えてくれました không có chỗ ngắt ấy. Trong lời bàn giao dài, nghỉ sau cụm hạn 木曜日の正午までに thay vì giữa まで và に.</p>",
+   "items": [
+    {
+     "sym": "体験・会場",
+     "ex": [
+      "たいけん",
+      "かいじょう"
+     ],
+     "vi": "Mỗi từ có phần hai nguyên âm hoặc trường âm cần được giữ khi đọc lịch."
+    },
+    {
+     "sym": "手伝ってもらう・教えてくれる",
+     "ex": [
+      "てつだってもらう",
+      "おしえてくれる"
+     ],
+     "vi": "Theo dõi người giúp và người nhận lợi ích qua đuôi câu, không chỉ nghe động từ đầu."
+    }
+   ]
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm dùng trong tình huống",
+   "items": [
+    {
+     "w": "体験会",
+     "kana": "たいけんかい",
+     "romaji": "taikenkai",
+     "vi": "buổi trải nghiệm/học thử",
+     "ex": "体験会に 初めて 参加します。",
+     "exVi": "Tôi tham gia buổi trải nghiệm lần đầu."
+    },
+    {
+     "w": "会場",
+     "kana": "かいじょう",
+     "romaji": "kaijoo",
+     "vi": "nơi tổ chức",
+     "ex": "会場は 二階です。",
+     "exVi": "Nơi tổ chức ở tầng hai."
+    },
+    {
+     "w": "候補",
+     "kana": "こうほ",
+     "romaji": "kooho",
+     "vi": "phương án ứng viên",
+     "ex": "部屋の 候補は 二つです。",
+     "exVi": "Có hai phòng ứng viên."
+    },
+    {
+     "w": "人数",
+     "kana": "にんずう",
+     "romaji": "ninzuu",
+     "vi": "số người",
+     "ex": "人数を 夕方に 確認します。",
+     "exVi": "Tôi kiểm số người chiều tối."
+    },
+    {
+     "w": "費用",
+     "kana": "ひよう",
+     "romaji": "hiyoo",
+     "vi": "chi phí",
+     "ex": "費用を 二人で 比べます。",
+     "exVi": "Hai người cùng so chi phí."
+    },
+    {
+     "w": "広さ",
+     "kana": "ひろさ",
+     "romaji": "hirosa",
+     "vi": "độ rộng",
+     "ex": "写真だけでは 広さが わかりません。",
+     "exVi": "Chỉ ảnh thì chưa biết độ rộng."
+    },
+    {
+     "w": "下見",
+     "kana": "したみ",
+     "romaji": "shitami",
+     "vi": "việc xem trước nơi chốn",
+     "ex": "会の 前に 下見を します。",
+     "exVi": "Tôi đi xem nơi trước buổi gặp."
+    },
+    {
+     "w": "手配",
+     "kana": "てはい",
+     "romaji": "tehai",
+     "vi": "thu xếp/đặt chuẩn bị",
+     "ex": "机の 手配を お願いします。",
+     "exVi": "Nhờ bạn thu xếp bàn."
+    },
+    {
+     "w": "手伝い",
+     "kana": "てつだい",
+     "romaji": "tetsudai",
+     "vi": "việc/người hỗ trợ",
+     "ex": "手伝いが 二人 必要です。",
+     "exVi": "Cần hai người hỗ trợ."
+    },
+    {
+     "w": "訂正版",
+     "kana": "ていせいばん",
+     "romaji": "teiseiban",
+     "vi": "bản đã sửa",
+     "ex": "訂正版を 入口に 貼ります。",
+     "exVi": "Tôi dán bản sửa ở cửa."
+    },
+    {
+     "w": "元の場所",
+     "kana": "もとのばしょ",
+     "romaji": "moto no basho",
+     "vi": "chỗ ban đầu",
+     "ex": "道具を 元の場所に 戻します。",
+     "exVi": "Tôi trả dụng cụ về chỗ ban đầu."
+    },
+    {
+     "w": "予備分",
+     "kana": "よびぶん",
+     "romaji": "yobibun",
+     "vi": "phần dự phòng",
+     "ex": "予備分を 二人分 用意します。",
+     "exVi": "Tôi chuẩn bị phần dự phòng cho hai người."
+    },
+    {
+     "w": "受取",
+     "kana": "うけとり",
+     "romaji": "uketori",
+     "vi": "việc nhận",
+     "ex": "資料の 受取を 確認します。",
+     "exVi": "Tôi xác nhận nhận tài liệu."
+    },
+    {
+     "w": "未対応",
+     "kana": "みたいおう",
+     "romaji": "mitaioo",
+     "vi": "chưa xử lý",
+     "ex": "この 項目は 未対応です。",
+     "exVi": "Mục này chưa xử lý."
+    },
+    {
+     "w": "引き継ぐ",
+     "kana": "ひきつぐ",
+     "romaji": "hikitsugu",
+     "vi": "bàn giao/tiếp nhận",
+     "ex": "残りの 仕事を 引き継ぎます。",
+     "exVi": "Tôi tiếp nhận phần việc còn lại."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Quy tắc và đối chiếu",
+   "html": "<p>Ôn so sánh AよりBのほうが… để chọn phòng, điều kiện 雨だったら… để nêu phương án, ～ので để giải thích. Vてもらう đặt mình hoặc bên nhận làm chủ thể nhận hỗ trợ; Vてくれる làm nổi người giúp mang lợi ích cho mình. Nêu việc chuẩn bị bằng てある/ておく và hạn bằng までに. Khi báo nhầm nhãn, dùng てしまった rồi nêu sửa thế nào, không để lời tiếc nuối thay cho xử lý.</p>",
+   "table": [
+    [
+     "Mục đích trong kế hoạch",
+     "Cấu trúc ôn"
+    ],
+    [
+     "So hai phòng",
+     "AよりBのほうが広い"
+    ],
+    [
+     "Phương án trời mưa",
+     "雨だったら屋内で行う"
+    ],
+    [
+     "Nhờ bạn kiểm",
+     "友だちに確認してもらう"
+    ],
+    [
+     "Đã xếp sẵn",
+     "机が並べてある"
+    ],
+    [
+     "Hạn trước in",
+     "正午までに提出する"
+    ]
+   ],
+   "ex": [
+    {
+     "t": "西の 部屋より 東の 部屋の ほうが 広いです。",
+     "vi": "Phòng phía đông rộng hơn phòng phía tây."
+    },
+    {
+     "t": "雨だったら、全部 屋内で 行います。",
+     "vi": "Nếu mưa, chúng tôi tổ chức toàn bộ trong nhà."
+    },
+    {
+     "t": "友だちに 予定表を 確認してもらいました。",
+     "vi": "Tôi đã nhờ bạn kiểm bảng lịch."
+    },
+    {
+     "t": "机は 八人分 並べてあります。",
+     "vi": "Bàn đã xếp sẵn cho tám người."
+    },
+    {
+     "t": "古い 名札を 貼ってしまったので、訂正版に 替えます。",
+     "vi": "Vì lỡ dán thẻ cũ nên tôi thay bằng bản sửa."
+    }
+   ],
+   "tips": [
+    "<p>Không nói người giúp nhận lợi ích ngược chiều khi dùng てもらう/てくれる; vẽ mũi tên người hỗ trợ tới người nhận.</p>",
+    "<p>Điều kiện mưa chưa khẳng định mưa đã xảy ra.</p>",
+    "<p>Không chỉ ghi nhãn sửa xong nếu bản cũ vẫn dán tại cửa; nêu cả xử lý bản cũ.</p>"
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe cuộc trao đổi mới",
+   "note": "Nhóm chốt phòng nhưng tài liệu và giờ hướng dẫn còn bước kiểm; nghe để không đánh dấu toàn bộ đã hoàn tất.",
+   "lang": "ja-JP",
+   "lines": [
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "体験会の 会場は もう 決まりましたか。",
+     "vi": "Nơi tổ chức buổi học thử đã chốt chưa?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい。西より 東の 部屋の ほうが 広いので、東に しました。",
+     "vi": "Rồi. Vì phòng đông rộng hơn phòng tây nên chọn phía đông."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "机と 案内は どうですか。",
+     "vi": "Bàn và hướng dẫn thế nào?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "机は 並べてあります。でも、案内に 古い 時間を 書いてしまいました。",
+     "vi": "Bàn xếp sẵn rồi. Nhưng tôi lỡ viết giờ cũ lên hướng dẫn."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "まだ 貼っていませんか。",
+     "vi": "Chưa dán chứ?"
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "はい、まだです。友だちに 訂正版を 確認してもらってから 貼ります。",
+     "vi": "Vâng, chưa. Tôi nhờ bạn kiểm bản sửa rồi mới dán."
+    },
+    {
+     "s": "なお",
+     "g": "m",
+     "t": "資料は 木曜日の 正午までに 出してください。写真は 任意です。",
+     "vi": "Xin nộp tài liệu chậm nhất trưa thứ năm. Ảnh là tùy chọn."
+    },
+    {
+     "s": "ゆい",
+     "g": "f",
+     "t": "わかりました。人数を 今日 確認して、二人分 多く 印刷しておきます。",
+     "vi": "Tôi hiểu rồi. Hôm nay tôi kiểm số người rồi in thêm dự phòng hai phần."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Vì sao chọn phòng đông?",
+     "o": [
+      "Chắc chắn miễn phí",
+      "Không cần đặt trước",
+      "Rộng hơn phòng tây"
+     ],
+     "a": 2,
+     "e": "東の部屋のほうが広いので chỉ nêu độ rộng, không chứng minh giá hay đặt chỗ."
+    },
+    {
+     "q": "Giờ sai đã được dán chưa?",
+     "o": [
+      "Không có lỗi giờ",
+      "Chưa",
+      "Rồi, mọi người đã xem"
+     ],
+     "a": 1,
+     "e": "まだです xác nhận lỗi chưa qua bước dán; cần kiểm bản sửa trước."
+    },
+    {
+     "q": "Ảnh là bắt buộc hay tùy chọn?",
+     "o": [
+      "Tùy chọn",
+      "Bắt buộc với mọi người",
+      "Bị cấm mang"
+     ],
+     "a": 0,
+     "e": "写真は任意です giữ mức yêu cầu riêng với tài liệu cần nộp."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Đọc và đối chiếu thông tin",
+   "text": "来週の 体験会のために、二つの 部屋を 下見しました。西の 部屋は 安いですが、少し 狭くて、入口に 階段が あります。東の 部屋は 西より 費用が 高いですが、机が 大きく、入口から 入りやすいです。参加者に 大きい 紙を 使ってもらいたいので、東を 選びました。係の 人は、雨でも 屋内なら 予定どおり 行えると 言っていました。\n\n担当を 分けたあと、友だちが 机の 手配を してくれました。わたしは 受付の 名簿を 作りました。今は 八人の 予定ですが、人数は 今日の 夕方に 最後の 確認を します。資料は 二人分の 予備を 足して 印刷しておきます。木曜日の 正午までに 印刷の 担当へ 渡さなければ なりません。\n\n案内の 下書きには、古い 開始時間を 書いてしまいました。まだ 貼っていないので、先に 訂正しました。友だちに 時間と 部屋の 名前を 見てもらってから 使います。帰る ときは 共用の 道具を 元の場所に 戻します。写真は 提出しなくても いいですが、準備の 記録が あれば 次の 人の 助けになると 思います。",
+   "vi": "Để chuẩn bị buổi học thử tuần sau, chúng tôi xem trước hai phòng. Phòng tây rẻ nhưng hơi hẹp, cửa có cầu thang. Phòng đông chi phí cao hơn nhưng bàn lớn và dễ đi vào từ cửa. Vì muốn người tham gia dùng giấy lớn nên chúng tôi chọn phòng đông. Người phụ trách nói dù mưa vẫn tổ chức theo lịch nếu ở trong nhà.\n\nSau khi chia việc, bạn thu xếp bàn giúp tôi. Tôi làm danh sách quầy. Hiện dự kiến tám người nhưng chiều nay mới kiểm lần cuối. Tài liệu in cộng dự phòng hai người. Phải đưa cho người in chậm nhất trưa thứ năm.\n\nTôi lỡ viết giờ bắt đầu cũ vào nháp hướng dẫn. Vì chưa dán nên sửa trước. Tôi nhờ bạn xem giờ và tên phòng rồi mới dùng. Khi về phải trả đồ chung về chỗ cũ. Không cần nộp ảnh, nhưng tôi nghĩ nếu có bản ghi chuẩn bị thì hữu ích cho người tiếp theo.",
+   "gloss": [
+    {
+     "w": "体験会",
+     "kana": "たいけんかい",
+     "romaji": "taikenkai",
+     "vi": "buổi trải nghiệm/học thử"
+    },
+    {
+     "w": "人数",
+     "kana": "にんずう",
+     "romaji": "ninzuu",
+     "vi": "số người"
+    },
+    {
+     "w": "費用",
+     "kana": "ひよう",
+     "romaji": "hiyoo",
+     "vi": "chi phí"
+    },
+    {
+     "w": "下見",
+     "kana": "したみ",
+     "romaji": "shitami",
+     "vi": "việc xem trước nơi chốn"
+    },
+    {
+     "w": "手配",
+     "kana": "てはい",
+     "romaji": "tehai",
+     "vi": "thu xếp/đặt chuẩn bị"
+    },
+    {
+     "w": "元の場所",
+     "kana": "もとのばしょ",
+     "romaji": "moto no basho",
+     "vi": "chỗ ban đầu"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Việc chọn phòng dựa thêm vào nhu cầu nào?",
+     "o": [
+      "Chỉ cần phòng rẻ nhất",
+      "Cần cầu thang dài",
+      "Dùng giấy lớn và ra vào thuận tiện"
+     ],
+     "a": 2,
+     "e": "Văn bản đối chiếu giá với bàn lớn, cửa dễ vào và mục đích dùng giấy lớn."
+    },
+    {
+     "q": "Nếu xác nhận cuối vẫn tám người thì in bao nhiêu phần?",
+     "o": [
+      "Sáu phần",
+      "Mười phần",
+      "Tám phần"
+     ],
+     "a": 1,
+     "e": "Tám dự kiến cộng hai phần dự phòng; số cuối vẫn cần xác nhận."
+    },
+    {
+     "q": "Tại sao nhãn giờ sai chưa ảnh hưởng người đọc cửa?",
+     "o": [
+      "Chưa được dán",
+      "Ai cũng biết tự sửa",
+      "Buổi gặp đã hủy"
+     ],
+     "a": 0,
+     "e": "まだ貼っていないので cho thấy lỗi ở bản nháp, được sửa trước công bố."
+    },
+    {
+     "q": "Nộp ảnh có bắt buộc không?",
+     "o": [
+      "Có, phải có hai ảnh",
+      "Không được ghi ảnh",
+      "Không, nhưng người kể thấy hữu ích"
+     ],
+     "a": 2,
+     "e": "写真は提出しなくてもいい và sau đó là nhận định cá nhân về lợi ích."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói theo dữ kiện mới",
+   "tasks": [
+    {
+     "p": "Thẻ mới: phòng tây rộng hơn đông, chọn tây; bàn chưa xếp, sẽ nhờ bạn giúp; hạn tài liệu trưa thứ tư. Báo kế hoạch.",
+     "model": "東より 西の 部屋の ほうが 広いので、西に します。机は まだ 並べていません。友だちに 手伝ってもらいます。資料は 水曜日の 正午までに 出します。",
+     "vi": "Vì phòng tây rộng hơn đông nên chọn tây. Bàn chưa xếp. Tôi nhờ bạn giúp. Tôi nộp tài liệu chậm nhất trưa thứ tư.",
+     "tips": "Thẻ mới đảo phòng và lùi hạn sớm một ngày; kiểm cả hai trước khi nói."
+    },
+    {
+     "p": "Bạn nhận bàn đã xếp nhưng hướng dẫn chưa kiểm giờ. Báo một mục hoàn tất và một mục chờ kiểm.",
+     "model": "机は 並べてあります。案内の 時間は まだ 確認していません。確認してから 貼ります。",
+     "vi": "Bàn đã xếp sẵn. Giờ trên hướng dẫn chưa kiểm. Tôi kiểm rồi mới dán.",
+     "tips": "Đừng nói mọi chuẩn bị hoàn tất chỉ vì một mục có てある."
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết và tự kiểm",
+   "task": "Viết bàn giao theo thẻ mới: chọn phòng tây vì rộng hơn; bàn đã xếp cho sáu người; số người chưa chốt; in thêm hai phần sau khi kiểm; hướng dẫn chưa dán vì giờ còn chờ kiểm; nộp chậm nhất trưa thứ tư.",
+   "model": "東より 西の 部屋の ほうが 広いので、西を 選びました。机は 六人分 並べてありますが、人数は まだ 最終確認していません。確認してから、二人分の 予備を 足して 印刷します。案内は 時間を 確認してから 貼ります。資料は 水曜日の 正午までに 提出します。",
+   "modelVi": "Vì phòng tây rộng hơn đông nên tôi chọn tây. Bàn đã xếp cho sáu người nhưng số người chưa kiểm cuối. Sau khi kiểm tôi in cộng hai phần dự phòng. Hướng dẫn sẽ dán sau khi kiểm giờ. Tôi nộp tài liệu chậm nhất trưa thứ tư.",
+   "min": 110,
+   "tips": [
+    "Sáu chỗ đã xếp không tự thành số người chắc chắn cuối cùng.",
+    "Nêu rõ hướng dẫn còn phải kiểm trước bước dán."
+   ],
+   "checklist": [
+    "Chọn tây với so sánh đúng chiều.",
+    "Bàn xong nhưng số người chưa chốt.",
+    "Dự phòng hai phần sau xác nhận.",
+    "Giờ hướng dẫn chờ kiểm, hạn thứ tư."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "q": "Trong tình huống, “体験会” nghĩa là gì?",
+   "o": [
+    "chi phí",
+    "việc/người hỗ trợ",
+    "buổi trải nghiệm/học thử"
+   ],
+   "a": 2,
+   "e": "体験会に 初めて 参加します。 → Tôi tham gia buổi trải nghiệm lần đầu. Từ cần nhận diện là “体験会”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “会場” nghĩa là gì?",
+   "o": [
+    "bản đã sửa",
+    "nơi tổ chức",
+    "độ rộng"
+   ],
+   "a": 1,
+   "e": "会場は 二階です。 → Nơi tổ chức ở tầng hai. Từ cần nhận diện là “会場”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “候補” nghĩa là gì?",
+   "o": [
+    "phương án ứng viên",
+    "việc xem trước nơi chốn",
+    "chỗ ban đầu"
+   ],
+   "a": 0,
+   "e": "部屋の 候補は 二つです。 → Có hai phòng ứng viên. Từ cần nhận diện là “候補”.",
+   "t": "mc"
+  },
+  {
+   "q": "Trong tình huống, “人数” nghĩa là gì?",
+   "o": [
+    "thu xếp/đặt chuẩn bị",
+    "phần dự phòng",
+    "số người"
+   ],
+   "a": 2,
+   "e": "人数を 夕方に 確認します。 → Tôi kiểm số người chiều tối. Từ cần nhận diện là “人数”.",
+   "t": "mc"
+  },
+  {
+   "t": "fill",
+   "q": "Điền so sánh: 東より 西の ___ 広いです。",
+   "a": "ほうが",
+   "e": "AよりBのほうが… đặt B là bên có mức cao hơn ở tính chất nêu sau."
+  },
+  {
+   "t": "fill",
+   "q": "Điền trợ từ người giúp: 友だち___ 手伝ってもらいました。",
+   "a": "に",
+   "e": "Vてもらう dùng に cho người đã giúp trong mẫu này; chủ thể nhận lợi ích được hiểu là mình."
+  },
+  {
+   "t": "fill",
+   "q": "Điền hạn: 水曜日の 正午まで___ 提出します。",
+   "a": "に",
+   "e": "Nộp cần hoàn thành trước hoặc đúng mốc nên dùng までに."
+  },
+  {
+   "t": "order",
+   "q": "Sắp câu bàn đã xếp sẵn.",
+   "w": [
+    "並べてあります。",
+    "六人分",
+    "机は"
+   ],
+   "a": "机は六人分並べてあります。",
+   "e": "Tha động từ 並べる + てある nêu kết quả chuẩn bị cho sáu người."
+  },
+  {
+   "q": "Bước tiếp theo trước dán là gì?",
+   "o": [
+    "Báo mọi người đã đọc",
+    "In ảnh bắt buộc",
+    "Nhờ bạn kiểm"
+   ],
+   "a": 2,
+   "e": "案内 chưa dán; việc kiểm của bạn là bước tiếp cần làm trước công bố.",
+   "t": "listen",
+   "say": "案内は 書き直しましたが、まだ 貼っていません。友だちに 確認してもらいます。",
+   "lang": "ja-JP"
+  },
+  {
+   "q": "Cần bao nhiêu bộ?",
+   "o": [
+    "Bốn bộ",
+    "Tám bộ",
+    "Sáu bộ"
+   ],
+   "a": 1,
+   "e": "Sáu người cộng hai phần dự phòng tạo tám bộ.",
+   "t": "listen",
+   "say": "参加者は 六人、予備は 二人分です。資料は 何部ですか。",
+   "lang": "ja-JP"
+  },
+  {
+   "t": "dict",
+   "say": "資料は 正午までに 渡してください。",
+   "a": "資料は 正午までに 渡してください。",
+   "lang": "ja-JP",
+   "e": "正午までに là hạn hoàn tất giao tài liệu; てください là lời yêu cầu lịch sự."
+  },
+  {
+   "t": "match",
+   "q": "Nối từ với nghĩa phù hợp trong bài.",
+   "pairs": [
+    [
+     "費用",
+     "chi phí"
+    ],
+    [
+     "広さ",
+     "độ rộng"
+    ],
+    [
+     "下見",
+     "việc xem trước nơi chốn"
+    ],
+    [
+     "手配",
+     "thu xếp/đặt chuẩn bị"
+    ],
+    [
+     "手伝い",
+     "việc/người hỗ trợ"
+    ]
+   ],
+   "e": "候補 là phương án chưa chốt, 会場 là nơi được dùng, 人数 là số người, 費用 là chi phí và 広さ là độ rộng; mỗi trường hỗ trợ một quyết định riêng."
+  },
+  {
+   "q": "Việc chọn phòng dựa thêm vào nhu cầu nào?",
+   "o": [
+    "Chỉ cần phòng rẻ nhất",
+    "Cần cầu thang dài",
+    "Dùng giấy lớn và ra vào thuận tiện"
+   ],
+   "a": 2,
+   "e": "Văn bản đối chiếu giá với bàn lớn, cửa dễ vào và mục đích dùng giấy lớn.",
+   "t": "mc"
+  },
+  {
+   "q": "Nếu xác nhận cuối vẫn tám người thì in bao nhiêu phần?",
+   "o": [
+    "Tám phần",
+    "Sáu phần",
+    "Mười phần"
+   ],
+   "a": 2,
+   "e": "Tám dự kiến cộng hai phần dự phòng; số cuối vẫn cần xác nhận.",
+   "t": "mc"
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Chuẩn bị hai phiếu phòng có giá và kích thước khác nhau, nhãn giờ sai chưa dán và bảng sáu/tám người có trạng thái chưa chốt.",
+  "steps": [
+   {
+    "t": "30'",
+    "do": "Đọc phiếu hai phòng, hỏi kinh nghiệm xem trước và so sánh theo nhu cầu giấy lớn thay vì chỉ chọn rẻ."
+   },
+   {
+    "t": "30'",
+    "do": "Ôn cho-nhận hỗ trợ, điều kiện trời mưa, kết quả đã chuẩn bị và hạn nộp qua chuỗi công việc."
+   },
+   {
+    "t": "30'",
+    "do": "Nghe cuộc bàn giao, đánh dấu mục hoàn tất, mục chưa xử lý và lời mời hỗ trợ của từng người."
+   },
+   {
+    "t": "30'",
+    "do": "Đọc kế hoạch, tính số bộ nếu tám người và tìm vì sao lỗi nháp chưa thành thông báo sai công khai."
+   },
+   {
+    "t": "30'",
+    "do": "Nói thẻ chọn phòng tây, viết bàn giao sáu chỗ còn chờ số người; bạn kiểm chiều so sánh và trạng thái."
+   },
+   {
+    "t": "30'",
+    "do": "Đóng vai ca trước-ca sau, làm nghe-chính tả và kiểm đủ nguồn, hạn, người phụ trách trong bản bàn giao cuối."
+   }
+  ],
+  "games": [
+   "Mỗi nhóm chọn phòng từ tiêu chí bí mật rồi giải thích bằng so sánh và lý do; nhóm khác hỏi điều kiện mưa.",
+   "Bảng bàn giao có bốn mục nhưng hai mục chưa kiểm; người nhận chỉ ký nhận sau khi hỏi rõ phần còn thiếu."
+  ],
+  "errors": [
+   "Đảo chiều so sánh làm chọn sai phòng: đặt ảnh A bên より và ảnh B bên ほうが.",
+   "Tính số phần in từ ghế mà bỏ xác nhận người: giữ hai cột độc lập.",
+   "Nêu てもらう đảo người giúp: chỉ mũi tên hỗ trợ trước khi viết に.",
+   "Gọi bản nháp chưa dán là đã gây ảnh hưởng mọi người: phân biệt sự việc đã kiểm với nguy cơ."
+  ],
+  "homework": "Lập kế hoạch giả mở một buổi học thử có hai phòng lựa chọn, ba việc đã xong, hai việc chờ kiểm và một hạn bàn giao; viết ít nhất sáu mẫu N4 vào đúng quan hệ thực tế."
+ }
+}

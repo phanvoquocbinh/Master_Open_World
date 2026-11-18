@@ -1,0 +1,194 @@
+{
+ "no": 31,
+ "lv": "t1",
+ "title": "Chốt đi bộ: giờ bắt đầu, thời lượng và đồ mang",
+ "sub": "토요일에 몇 시에 만나요?",
+ "situation": "Hai bạn lên lịch đi bộ theo bản thời tiết giả định. Một người nhầm hai lần mỗi tuần với hai giờ mỗi lần; cả hai tách đơn vị rồi chốt áo và ô.",
+ "lang": "ko-KR",
+ "lines": [
+  {
+   "s": "보람",
+   "g": "f",
+   "t": "토요일에 몇 시에 만나요?",
+   "vi": "Thứ bảy gặp lúc mấy giờ?"
+  },
+  {
+   "s": "서윤",
+   "g": "m",
+   "t": "아침 아홉 시에 작은 방 앞에서 만나요.",
+   "vi": "Gặp chín giờ sáng trước phòng nhỏ."
+  },
+  {
+   "s": "보람",
+   "g": "f",
+   "t": "두 시간 동안 걸어요?",
+   "vi": "Đi bộ trong hai giờ à?"
+  },
+  {
+   "s": "서윤",
+   "g": "m",
+   "t": "아니요. 삼십 분만 걸어요. 일주일에 두 번 가요.",
+   "vi": "Không. Chỉ ba mươi phút. Mỗi tuần đi hai lần."
+  },
+  {
+   "s": "보람",
+   "g": "f",
+   "t": "아침에는 날씨가 어때요?",
+   "vi": "Sáng thời tiết thế nào?"
+  },
+  {
+   "s": "서윤",
+   "g": "m",
+   "t": "조금 추워요. 얇은 겉옷을 입으세요.",
+   "vi": "Hơi lạnh. Hãy mặc áo khoác mỏng."
+  },
+  {
+   "s": "보람",
+   "g": "f",
+   "t": "우산도 가지고 가요?",
+   "vi": "Có mang ô không?"
+  },
+  {
+   "s": "서윤",
+   "g": "m",
+   "t": "네. 오후에는 비가 와요.",
+   "vi": "Có. Chiều có mưa."
+  },
+  {
+   "s": "보람",
+   "g": "f",
+   "t": "그럼 아홉 시, 삼십 분, 겉옷하고 우산이에요.",
+   "vi": "Vậy chín giờ, ba mươi phút, áo khoác và ô."
+  },
+  {
+   "s": "서윤",
+   "g": "m",
+   "t": "맞아요. 출발 전에 다시 확인해요.",
+   "vi": "Đúng. Trước khi đi cùng kiểm lại."
+  }
+ ],
+ "phrases": [
+  {
+   "t": "몇 시에 만나요",
+   "vi": "gặp lúc mấy giờ",
+   "note": "Câu hỏi lấy giờ bắt đầu, không hỏi độ dài buổi đi."
+  },
+  {
+   "t": "삼십 분만",
+   "vi": "chỉ ba mươi phút",
+   "note": "만 giữ giới hạn thời lượng được chốt sau khi nghe nhầm."
+  },
+  {
+   "t": "일주일에 두 번",
+   "vi": "hai lần mỗi tuần",
+   "note": "번 đếm lượt, khác 시간 hoặc 분 đo độ dài."
+  },
+  {
+   "t": "얇은 겉옷",
+   "vi": "áo khoác mỏng",
+   "note": "Giữ từ 얇은 để không đổi thành áo quá dày theo ý người nghe."
+  },
+  {
+   "t": "오후에는 비가 와요",
+   "vi": "chiều có mưa",
+   "note": "Mốc chiều khác thời tiết sáng, là căn cứ mang ô."
+  },
+  {
+   "t": "다시 확인해요",
+   "vi": "kiểm lại",
+   "note": "Lượt xác nhận nhắc cả giờ, thời lượng và đồ chuẩn bị."
+  }
+ ],
+ "qs": [
+  {
+   "q": "Nơi và giờ gặp là gì?",
+   "o": [
+    "Chín giờ tối trong công viên",
+    "Hai giờ chiều ở nhà",
+    "Chín giờ sáng trước phòng nhỏ"
+   ],
+   "a": 2,
+   "e": "아침아홉시와작은방앞 cùng một dữ kiện hẹn."
+  },
+  {
+   "q": "Mỗi buổi đi bao lâu?",
+   "o": [
+    "Hai tuần",
+    "Ba mươi phút",
+    "Hai giờ"
+   ],
+   "a": 1,
+   "e": "삼십분만 sửa nhầm두시간."
+  },
+  {
+   "q": "Hai lần chỉ thông tin gì?",
+   "o": [
+    "Tần suất trong tuần",
+    "Độ dài mỗi lượt",
+    "Số áo"
+   ],
+   "a": 0,
+   "e": "일주일에두번 phân biệt tần suất."
+  },
+  {
+   "q": "Vì sao mang ô?",
+   "o": [
+    "Sáng có tuyết",
+    "Dùng làm ghế",
+    "Chiều mưa"
+   ],
+   "a": 2,
+   "e": "오후비 là căn cứ đã nêu."
+  },
+  {
+   "q": "Loại áo được khuyên là gì?",
+   "o": [
+    "Không áo trong mọi giờ",
+    "Áo khoác mỏng",
+    "Áo rất dày"
+   ],
+   "a": 1,
+   "e": "얇은겉옷 được chỉ."
+  }
+ ],
+ "exercises": [
+  {
+   "t": "fill",
+   "q": "일주일에 두 ___ 가요. (lần)",
+   "a": "번",
+   "e": "두 번 đếm hai lượt mỗi tuần; không thay bằng 두 시간."
+  },
+  {
+   "t": "listen",
+   "say": "토요일에 몇 시에 만나요? 아침 아홉 시에 작은 방 앞에서 만나요. 두 시간 동안 걸어요? 아니요. 삼십 분만 걸어요. 일주일에 두 번 가요. 아침에는 날씨가 어때요? 조금 추워요. 얇은 겉옷을 입으세요. 우산도 가지고 가요? 네. 오후에는 비가 와요. 그럼 아홉 시, 삼십 분, 겉옷하고 우산이에요. 맞아요. 출발 전에 다시 확인해요.",
+   "lang": "ko-KR",
+   "q": "Mỗi buổi đi bao lâu?",
+   "o": [
+    "Hai tuần",
+    "Ba mươi phút",
+    "Hai giờ"
+   ],
+   "a": 1,
+   "e": "Căn cứ của câu nghe: 삼십분만 sửa nhầm두시간."
+  },
+  {
+   "t": "dict",
+   "say": "토요일 아홉 시에 만나요.",
+   "a": "토요일 아홉 시에 만나요.",
+   "lang": "ko-KR",
+   "e": "Giữ 토요일, 아홉 시에 và dấu cách giữa mốc ngày, giờ, động từ."
+  }
+ ],
+ "practice": [
+  {
+   "p": "Bạn nhầm thời lượng thành hai giờ, sửa bằng hai thông tin có đơn vị.",
+   "model": "두 시간은 아니에요. 한 번에 삼십 분 걸어요. 일주일에 두 번 가요.",
+   "vi": "Không phải hai giờ. Mỗi lượt đi ba mươi phút, mỗi tuần hai lượt."
+  },
+  {
+   "p": "Hỏi thời tiết rồi nhắc lại đồ cần mang và giờ gặp.",
+   "model": "날씨가 어때요? 아침에는 추워요. 그럼 얇은 겉옷하고 우산을 가지고 갈게요. 아홉 시에 만나요.",
+   "vi": "Thời tiết thế nào? Sáng lạnh. Vậy tôi mang áo khoác mỏng, ô và gặp lúc chín giờ."
+  }
+ ]
+}

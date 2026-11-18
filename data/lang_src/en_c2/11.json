@@ -1,0 +1,641 @@
+{
+ "no": 11,
+ "title": "Phạm vi chính xác – not all, almost, at most và all but",
+ "sub": "Phủ định lượng từ · cận trên/cận dưới · all but · only và điều kiện đủ",
+ "goals": [
+  "Phân biệt giới hạn trên, giới hạn dưới và số chính xác trong mô tả dữ liệu.",
+  "Giải thích phạm vi not all, not necessarily và only mà không suy thêm điều nguồn chưa nói.",
+  "Viết bản nhận xét danh mục có đơn vị, tiêu chí và trạng thái kiểm rõ."
+ ],
+ "parts": [
+  {
+   "k": "text",
+   "h": "Bắt đầu từ tình huống",
+   "html": "<p>Một danh mục thư hư cấu có hai mươi mục, nhưng “có ngày ghi” khác “ngày đã được kiểm”. Bài học dùng ngôn ngữ định lượng để giữ đúng điều con số cho biết, không tạo cảm giác chính xác bằng cách chọn từ mạnh.</p>"
+  },
+  {
+   "k": "text",
+   "h": "Nhịp và sắc thái khi nói",
+   "html": "<p>Đọc rõ at most/at least và vị trí only: Only twelve entries were verified khác twelve entries were only dated. Provenance nhấn âm đầu, exhaustive nhấn âm thứ hai. Trong bản nói số, ngắt giữa số mục có ngày và số ngày đã xác minh để không nhập hai trạng thái.</p>"
+  },
+  {
+   "k": "words",
+   "h": "Từ và cụm của tình huống",
+   "items": [
+    {
+     "w": "quantifier",
+     "ipa": "/ˈkwɒntɪfaɪə(r)/",
+     "pos": "n",
+     "vi": "từ chỉ lượng",
+     "ex": "The quantifier changes the scope.",
+     "exVi": "Từ chỉ lượng đổi phạm vi."
+    },
+    {
+     "w": "scope",
+     "ipa": "/skəʊp/",
+     "pos": "n",
+     "vi": "phạm vi tác động của ý",
+     "ex": "Check the scope of the negative.",
+     "exVi": "Hãy kiểm phủ định tác động phần nào."
+    },
+    {
+     "w": "upper bound",
+     "ipa": "/ˌʌpə ˈbaʊnd/",
+     "pos": "n phr",
+     "vi": "giới hạn trên",
+     "ex": "Eighteen is an upper bound.",
+     "exVi": "Mười tám là giới hạn trên."
+    },
+    {
+     "w": "lower bound",
+     "ipa": "/ˌləʊə ˈbaʊnd/",
+     "pos": "n phr",
+     "vi": "giới hạn dưới",
+     "ex": "The phrase gives a lower bound.",
+     "exVi": "Cụm đó cho giới hạn dưới."
+    },
+    {
+     "w": "exception",
+     "ipa": "/ɪkˈsepʃn/",
+     "pos": "n",
+     "vi": "trường hợp ngoại lệ",
+     "ex": "Name the exceptions if they are known.",
+     "exVi": "Hãy nêu ngoại lệ nếu biết."
+    },
+    {
+     "w": "completeness",
+     "ipa": "/kəmˈpliːtnəs/",
+     "pos": "n",
+     "vi": "tính đầy đủ",
+     "ex": "A date does not prove completeness.",
+     "exVi": "Có ngày chưa chứng minh đầy đủ."
+    },
+    {
+     "w": "verification",
+     "ipa": "/ˌverɪfɪˈkeɪʃn/",
+     "pos": "n",
+     "vi": "việc xác minh",
+     "ex": "Verification is a separate stage.",
+     "exVi": "Xác minh là giai đoạn riêng."
+    },
+    {
+     "w": "provenance",
+     "ipa": "/ˈprɒvənəns/",
+     "pos": "n",
+     "vi": "nguồn gốc và lịch sử lưu chuyển",
+     "ex": "The record lacks provenance.",
+     "exVi": "Mục ghi thiếu nguồn gốc lưu chuyển."
+    },
+    {
+     "w": "entry",
+     "ipa": "/ˈentri/",
+     "pos": "n",
+     "vi": "mục trong danh mục",
+     "ex": "Each entry has several fields.",
+     "exVi": "Mỗi mục có vài trường thông tin."
+    },
+    {
+     "w": "field",
+     "ipa": "/fiːld/",
+     "pos": "n",
+     "vi": "trường thông tin",
+     "ex": "One field remains blank.",
+     "exVi": "Một trường còn trống."
+    },
+    {
+     "w": "exhaustive",
+     "ipa": "/ɪɡˈzɔːstɪv/",
+     "pos": "adj",
+     "vi": "bao quát hết",
+     "ex": "The list is not exhaustive.",
+     "exVi": "Danh sách chưa bao quát hết."
+    },
+    {
+     "w": "provisional",
+     "ipa": "/prəˈvɪʒənl/",
+     "pos": "adj",
+     "vi": "tạm thời chờ kiểm",
+     "ex": "The date is provisional.",
+     "exVi": "Ngày ghi còn tạm chờ kiểm."
+    },
+    {
+     "w": "qualifier",
+     "ipa": "/ˈkwɒlɪfaɪə(r)/",
+     "pos": "n",
+     "vi": "thành phần giới hạn nghĩa",
+     "ex": "Do not remove the qualifier.",
+     "exVi": "Đừng bỏ phần giới hạn nghĩa."
+    },
+    {
+     "w": "entail",
+     "ipa": "/ɪnˈteɪl/",
+     "pos": "v",
+     "vi": "kéo theo về mặt logic",
+     "ex": "A blank does not entail that no date exists.",
+     "exVi": "Ô trống không kéo theo không có ngày."
+    },
+    {
+     "w": "presupposition",
+     "ipa": "/ˌpriːsʌpəˈzɪʃn/",
+     "pos": "n",
+     "vi": "điều ngầm giả định trước",
+     "ex": "The question contains a presupposition.",
+     "exVi": "Câu hỏi chứa điều ngầm giả định."
+    },
+    {
+     "w": "absence",
+     "ipa": "/ˈæbsəns/",
+     "pos": "n",
+     "vi": "sự vắng mặt",
+     "ex": "Absence from this list needs interpretation.",
+     "exVi": "Việc vắng khỏi danh sách này cần được diễn giải."
+    },
+    {
+     "w": "coverage",
+     "ipa": "/ˈkʌvərɪdʒ/",
+     "pos": "n",
+     "vi": "mức bao phủ",
+     "ex": "The audit has limited coverage.",
+     "exVi": "Đợt rà có mức bao phủ giới hạn."
+    },
+    {
+     "w": "subset",
+     "ipa": "/ˈsʌbset/",
+     "pos": "n",
+     "vi": "tập con",
+     "ex": "The verified records form a subset.",
+     "exVi": "Mục đã kiểm tạo một tập con."
+    }
+   ]
+  },
+  {
+   "k": "grammar",
+   "h": "Phủ định lượng từ · cận trên/cận dưới · all but · only và điều kiện đủ",
+   "html": "<p>At most eighteen đặt cận trên 18, không tự khẳng định đúng 18; at least eighteen và no fewer than eighteen đặt cận dưới 18, cụm sau thường nhấn số không nhỏ. All but two of twenty entries có nghĩa chính xác 18 trong nhóm đã nêu. Almost all thường chỉ phần rất lớn với ngoại lệ theo bối cảnh, không cho một ngưỡng phần trăm cố định. Not all entries are complete phủ định tính toàn bộ; nó không tự cung cấp số hoàn chỉnh và không đồng nghĩa none are complete. Not necessarily verified phủ nhận việc có bảo đảm, không khẳng định chắc chắn chưa kiểm. Only twelve were verified gắn only với số được xác nhận; twelve were only dated gắn nó với loại thao tác. A date is necessary for this particular complete record không bằng a date is sufficient: điều kiện cần chưa đủ. Missing from the catalogue không entail missing from the archive; đơn vị đang xét là mục ghi, không toàn bộ đồ vật ngoài danh mục. Viết lại bằng số và tiêu chí khi lượng từ mơ hồ ảnh hưởng quyết định, giữ độ chính xác từ định nghĩa thay vì chỉ thêm thuật ngữ.</p>",
+   "table": [
+    [
+     "Cấu trúc",
+     "Cách hiểu"
+    ],
+    [
+     "At most eighteen entries have dates.",
+     "Không hơn 18, chưa nói chính xác bao nhiêu."
+    ],
+    [
+     "No fewer than eighteen entries have dates.",
+     "Ít nhất 18, có thể nhiều hơn."
+    ],
+    [
+     "All but two of the twenty entries have dates.",
+     "Đúng 18 trong 20 có ngày."
+    ],
+    [
+     "A dated entry is not necessarily verified.",
+     "Có ngày chưa bảo đảm đã xác minh."
+    ]
+   ],
+   "ex": [
+    {
+     "t": "All but two of the twenty entries contain a date.",
+     "vi": "Mười tám trong hai mươi mục có ngày."
+    },
+    {
+     "t": "At most twelve dates have been verified so far.",
+     "vi": "Đến nay không quá mười hai ngày được xác minh."
+    },
+    {
+     "t": "Not all dated entries are complete.",
+     "vi": "Không phải mọi mục có ngày đều đầy đủ."
+    },
+    {
+     "t": "Only twelve entries were checked against the originals.",
+     "vi": "Chỉ mười hai mục được đối chiếu bản gốc."
+    },
+    {
+     "t": "Absence from this catalogue does not entail absence from the collection.",
+     "vi": "Vắng trong danh mục này không kéo theo vắng trong bộ sưu tập."
+    }
+   ],
+   "tips": [
+    "Dùng almost all như một ngưỡng phần trăm cố định: xét bối cảnh hoặc ghi số.",
+    "Hiểu at most là đúng bằng: giữ nghĩa không hơn.",
+    "Coi not necessarily là chắc chắn không: phân biệt phủ bảo đảm với phủ mọi trường hợp."
+   ]
+  },
+  {
+   "k": "dialog",
+   "h": "Nghe: mười tám có ngày, mười hai đã kiểm",
+   "note": "Nhóm danh mục thư tại kho giả Averali đọc một báo cáo hai mươi mục; thư và dữ liệu đều tự tạo.",
+   "lang": "en-GB",
+   "lines": [
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "The summary says almost all records are verified because eighteen of the twenty contain dates. Are those the same categories?",
+     "vi": "Tóm tắt nói gần như mọi mục đã kiểm vì mười tám trên hai mươi có ngày. Hai loại đó giống nhau à?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "No. Eighteen entries contain a date, but only twelve of those dates have been checked against the originals. A filled field is not the same as verification.",
+     "vi": "Không. Mười tám mục có ngày, nhưng chỉ mười hai ngày ấy đối chiếu bản gốc. Điền trường không đồng nghĩa xác minh."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "Then “all but two have dates” is exact for this sample, while “at least twelve are verified” would be too loose if we know the verified total is twelve.",
+     "vi": "Vậy “tất cả trừ hai có ngày” chính xác cho mẫu, còn “ít nhất mười hai đã kiểm” quá lỏng nếu biết tổng đã kiểm đúng mười hai."
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Exactly. A lower bound may be true but less informative than the exact count. We should choose the level of precision the evidence actually supports.",
+     "vi": "Đúng. Cận dưới có thể đúng nhưng ít thông tin hơn số chính xác. Chọn độ chính xác chứng cứ hỗ trợ."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "What about “not all entries are complete”? Could readers infer that the other eighteen are complete?",
+     "vi": "Còn “không phải mọi mục đầy đủ”? Người đọc có thể suy mười tám mục còn lại đầy đủ không?"
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Not from that sentence alone. Completeness includes provenance and other fields, and we have not counted it yet. We should not let the date count answer a different question.",
+     "vi": "Không từ riêng câu đó. Đầy đủ còn nguồn gốc và trường khác, mình chưa đếm. Không để số ngày trả lời câu hỏi khác."
+    },
+    {
+     "s": "Nera",
+     "g": "f",
+     "t": "I’ll state the two counts separately and mark unchecked dates as provisional. The catalogue also needs a note about which part of the collection was sampled.",
+     "vi": "Tôi sẽ ghi riêng hai số, đánh dấu ngày chưa kiểm là tạm. Danh mục còn cần ghi lấy mẫu phần nào."
+    },
+    {
+     "s": "Tavin",
+     "g": "m",
+     "t": "Good. That will make the limits explicit without suggesting that blank entries prove the original letters have no dates.",
+     "vi": "Tốt. Giới hạn rõ mà không ngụ ý ô trống chứng minh thư gốc không có ngày."
+    }
+   ],
+   "qs": [
+    {
+     "q": "Hai con số mô tả trạng thái nào?",
+     "o": [
+      "Mười hai thư tồn tại trong toàn kho",
+      "Mười tám có ngày, mười hai ngày đã đối chiếu",
+      "Mười tám đã hoàn chỉnh mọi trường"
+     ],
+     "a": 1,
+     "e": "Người nói tách filled field khỏi verification, không nhập thành complete records."
+    },
+    {
+     "q": "Khi biết đúng mười hai, at least twelve có sai logic không?",
+     "o": [
+      "Không nhất thiết sai nhưng ít thông tin hơn",
+      "Chắc chắn sai vì cận dưới",
+      "Tự có nghĩa hai mươi"
+     ],
+     "a": 0,
+     "e": "Cận dưới có thể đúng nhưng không truyền độ chính xác đã biết."
+    },
+    {
+     "q": "Not all complete tự cho số hoàn chỉnh không?",
+     "o": [
+      "Có, đúng mười tám",
+      "Có, không có mục nào",
+      "Không"
+     ],
+     "a": 2,
+     "e": "Câu phủ tính toàn bộ, không tự đếm completeness gồm nhiều trường."
+    }
+   ]
+  },
+  {
+   "k": "read",
+   "h": "Khoảng trống trong danh mục nói điều gì?",
+   "title": "Khoảng trống trong danh mục nói điều gì?",
+   "text": "A catalogue is often read as a map of a collection, and maps can encourage a misleading confidence. A filled field seems to promise knowledge; a blank seems to mark an absence. Neither appearance is sufficient on its own. The field may contain a provisional reading, while the blank may indicate that nobody has examined the relevant page. The catalogue records a state of description as well as a set of objects.\n\nIn the invented Averali letter archive, a pilot catalogue contained twenty entries. Eighteen included a date. Of those eighteen dates, twelve had been checked against the original letters; the remaining six had been copied from an earlier working list. A report announced that almost all records were verified. The sentence moved from the presence of one field to the verification of an entire record. Its fluency concealed a change in category.\n\nThe correction was not simply to replace “almost all” with a smaller-sounding phrase. The team needed to define what it was counting. “All but two entries contain a date” gave an exact number within the twenty-entry sample. “Twelve dates have been checked against the originals” described a different status. Neither statement established that twelve complete records existed, because completeness also required information about provenance and other fields. The audit had not yet counted that larger category.\n\nBounds would have been useful under different conditions. If the team knew that eighteen dated entries existed but had not finished examining two others, “at least eighteen” would preserve the possibility of more. If a search guaranteed that no more than twelve had been verified, “at most twelve” would state a ceiling without pretending to know the exact total. In the actual pilot, however, the counts were known. A true but weaker bound would discard information that readers needed.\n\nThe same care applied to negatives. “Not all entries are complete” denied a universal statement, but did not by itself provide a count of complete entries. “A dated entry is not necessarily verified” rejected a guarantee, not every possibility of verification. Readers could easily hear these as stronger claims, especially in a short summary. Precision required the writer to anticipate that risk and supply the relevant distinction rather than rely on a mathematically defensible phrase alone.\n\nThere was a wider limit too. The twenty entries came from one box selected for the pilot. Missing from this catalogue did not mean missing from the archive. Even a complete description of that box would not become an exhaustive description of the collection. The team therefore added a coverage note and marked the six unchecked dates as provisional. This did not make the catalogue less useful; it made its usefulness easier to judge.\n\nA good description of uncertainty is consequently more than a collection of cautious words. It identifies the unit, the criterion, the stage of checking and the group to which a number applies. Exact counts are appropriate when exact counts are available. Bounds and qualifiers are appropriate when they preserve a genuine limit. The goal is not to sound more certain or less certain, but to prevent the sentence from claiming knowledge that the underlying record does not contain.",
+   "vi": "Danh mục thường được đọc như bản đồ bộ sưu tập, dễ tạo tự tin sai: ô có chữ có vẻ là hiểu biết, ô trống có vẻ là không tồn tại. Nhưng chữ có thể tạm đọc, trống có thể do chưa xem trang. Danh mục ghi cả trạng thái mô tả lẫn đồ vật. Kho thư Averali hư cấu thử hai mươi mục: mười tám có ngày, trong đó mười hai đối chiếu gốc, sáu chép danh sách làm việc cũ. Báo cáo nói gần như mọi hồ sơ đã xác minh, trượt từ một trường sang toàn hồ sơ. Không chỉ thay almost all bằng từ nghe nhỏ hơn: phải xác định đếm gì. Tất cả trừ hai có ngày là số chính xác trong mẫu; mười hai ngày đã đối chiếu là trạng thái khác. Không câu nào chứng minh mười hai hồ sơ đầy đủ, vì còn nguồn gốc và trường khác chưa đếm. Cận có ích nếu điều kiện khác: biết mười tám có ngày, hai chưa xem thì at least eighteen giữ khả năng thêm; chỉ biết không quá mười hai đã kiểm thì at most twelve nêu trần. Nhưng trong đợt thật biết số chính xác, cận đúng mà yếu hơn sẽ bỏ thông tin cần. Phủ định cũng cần cẩn thận: not all phủ mệnh đề toàn bộ, không tự cho số đầy đủ; not necessarily verified bác bảo đảm chứ không bác mọi khả năng đã kiểm. Người đọc dễ nghe mạnh hơn nên cần giải thích phân biệt, không chỉ dựa câu đúng logic. Còn giới hạn rộng: hai mươi mục từ một hộp chọn thử; vắng danh mục chưa có nghĩa vắng kho. Mô tả hết hộp cũng chưa hết bộ sưu tập. Nhóm thêm mức bao phủ và đánh sáu ngày chưa kiểm là tạm. Danh mục không kém hữu ích, mà dễ đánh giá ích lợi hơn. Mô tả bất định tốt xác định đơn vị, tiêu chí, giai đoạn kiểm và nhóm số áp dụng. Dùng số chính xác khi có, cận và giới hạn khi giữ một giới hạn thật. Mục tiêu không phải nghe chắc hơn hay dè hơn, mà tránh câu nhận biết điều hồ sơ chưa chứa.",
+   "gloss": [
+    {
+     "w": "a ceiling",
+     "vi": "giới hạn trên"
+    },
+    {
+     "w": "discard information",
+     "vi": "bỏ mất thông tin"
+    },
+    {
+     "w": "state of description",
+     "vi": "trạng thái đã mô tả đến đâu"
+    }
+   ],
+   "qs": [
+    {
+     "q": "Báo cáo đầu đổi loại từ gì sang gì?",
+     "o": [
+      "Có một trường ngày sang xác minh cả hồ sơ",
+      "Sáu thư sang sáu hộp",
+      "Bản gốc sang bản thu"
+     ],
+     "a": 0,
+     "e": "Mười tám dated entries không tự là almost all records verified."
+    },
+    {
+     "q": "Mười hai đã đối chiếu có đủ nói mười hai hồ sơ đầy đủ không?",
+     "o": [
+      "Có, ngày là mọi trường",
+      "Có, cả kho chỉ mười hai",
+      "Không, còn tiêu chí khác chưa đếm"
+     ],
+     "a": 2,
+     "e": "Completeness bao gồm provenance và trường khác."
+    },
+    {
+     "q": "Khi biết số chính xác, cận yếu hơn có vấn đề gì?",
+     "o": [
+      "Luôn mạnh hơn số",
+      "Có thể bỏ thông tin hữu ích dù vẫn đúng",
+      "Luôn sai logic"
+     ],
+     "a": 1,
+     "e": "Bài phân biệt truth của bound với mức informative cho người đọc."
+    },
+    {
+     "q": "Not necessarily verified bác điều gì?",
+     "o": [
+      "Việc có bảo đảm đã kiểm",
+      "Mọi trường hợp được kiểm",
+      "Việc chữ có thể ghi ngày"
+     ],
+     "a": 0,
+     "e": "Not necessarily phủ tính tất yếu, không phủ toàn bộ khả năng."
+    },
+    {
+     "q": "Coverage note cần vì sao?",
+     "o": [
+      "Danh mục đã bao quát toàn kho",
+      "Không có thư gốc",
+      "Mẫu chỉ từ một hộp trong kho"
+     ],
+     "a": 2,
+     "e": "Tập con được mô tả không tự đại diện toàn bộ collection."
+    }
+   ]
+  },
+  {
+   "k": "speak",
+   "h": "Nói: giải thích độ chính xác không gây hiểu sai",
+   "tasks": [
+    {
+     "p": "Báo hai mươi mục, mười tám có ngày, mười hai ngày đã kiểm; giải thích vì sao không gọi mười tám hồ sơ đã xác minh.",
+     "model": "The pilot contains twenty entries, and all but two include a date. However, the date field and the verification status are different categories. Only twelve of the eighteen dates have been checked against the original letters; six came from an earlier working list. I would therefore avoid saying that almost all records are verified. That wording also suggests a judgement about the whole record, whereas our check concerns dates. We have not counted completeness across provenance and the other fields. The report should give the two counts separately and explain which box was included in the pilot.",
+     "vi": "Mẫu hai mươi mục, mười tám có ngày. Nhưng trường ngày khác trạng thái xác minh: chỉ mười hai ngày đối chiếu gốc, sáu từ danh sách cũ. Không nên nói gần như mọi hồ sơ đã kiểm vì còn gợi đánh giá toàn hồ sơ. Chưa đếm đầy đủ nguồn gốc và trường khác; cần hai số riêng và hộp lấy mẫu."
+    },
+    {
+     "p": "Một đồng nghiệp muốn dùng at least twelve vì nghe thận trọng. Phản hồi khi tổng chính xác đã biết, rồi nêu khi nào cận hữu ích.",
+     "model": "A lower bound is not automatically more responsible than an exact count. If we know that exactly twelve dates were checked, “at least twelve” is true but less informative, and readers may reasonably wonder whether the total is still being investigated. I would use the exact count here. A bound would be useful if the remaining records had not been examined and the total could increase. The principle is to preserve the uncertainty we actually have, rather than introduce uncertainty into a number we already know. Could we make that distinction explicit in the summary?",
+     "vi": "Cận dưới không tự có trách nhiệm hơn số chính xác. Biết đúng mười hai thì ít nhất mười hai vẫn đúng nhưng ít thông tin và gây tưởng còn điều tra tổng. Nên dùng số đúng. Cận hữu ích khi còn mục chưa xem và tổng có thể tăng. Hãy giữ bất định thật, không thêm vào số đã biết; mình nói rõ phân biệt nhé?"
+    }
+   ]
+  },
+  {
+   "k": "write",
+   "h": "Viết: nhận xét danh mục với phạm vi rõ",
+   "task": "Viết 260–300 từ cho nhóm Averali giả: sửa câu almost all records are verified theo 20 mục/18 ngày/12 ngày đối chiếu/6 ngày từ danh sách cũ. Phân biệt completeness, phạm vi một hộp và cận số. Đề nghị cách ghi trạng thái mà không suy ô trống là thư không có ngày.",
+   "min": 260,
+   "model": "The pilot report should distinguish the presence of a date from verification of that date and completeness of the whole entry. Of the twenty entries, eighteen contain dates. Twelve of those dates have been checked against the original letters, while six were copied from an earlier working list. These figures do not justify saying that almost all records are verified. That statement changes both the criterion and the unit of the judgement. A complete record would also need information about provenance and other fields, which this audit has not counted. I recommend stating the exact counts and marking the six unchecked dates as provisional. “All but two entries contain a date” is precise for this sample. “At least twelve dates were verified” would be a true but weaker statement if we know the exact total is twelve. A lower bound is useful when the remaining cases have not been examined and the number may rise; it should not discard information that is already available. The negative statements need equal care. “Not all entries are complete” does not tell readers how many are complete, and “not necessarily verified” denies a guarantee rather than every possibility of verification. We should explain the relevant categories instead of relying on readers to recover the intended scope. Finally, the report must identify the box selected for the pilot. Absence from this catalogue is not evidence of absence from the archive, and a blank date field may mean that the relevant page has not yet been checked. These qualifications will make the catalogue more usable by showing what the numbers describe and what remains to be established.",
+   "modelVi": "Báo cáo cần tách có ngày, ngày được xác minh và đầy đủ cả mục. Hai mươi mục có mười tám ngày; mười hai đối chiếu gốc, sáu chép danh sách cũ. Chưa đủ nói gần như mọi hồ sơ đã kiểm vì đổi tiêu chí và đơn vị. Đầy đủ còn nguồn gốc và trường chưa đếm. Nên nêu số đúng, đánh sáu ngày là tạm. All but two chính xác trong mẫu; at least twelve đúng nhưng yếu nếu biết đúng mười hai. Cận hữu ích khi chưa xem hết và tổng có thể tăng, không nên bỏ thông tin có sẵn. Not all không cho số đầy đủ; not necessarily bác bảo đảm chứ không mọi khả năng. Cần giải thích loại thay vì để người đọc tự khôi phục phạm vi. Cuối cùng nêu hộp chọn thử: vắng danh mục chưa chứng minh vắng kho, ô ngày trống có thể vì chưa xem trang. Những giới hạn giúp dùng danh mục đúng bằng cách cho thấy số mô tả gì và điều còn cần xác lập.",
+   "tips": [
+    "Đừng dùng verified records khi phép kiểm mới đối chiếu date fields.",
+    "Một câu đúng logic vẫn có thể thiếu thông tin hoặc gợi sai trong bối cảnh; cân cả hai."
+   ],
+   "checklist": [
+    "Có 260–300 từ và giữ đúng quan hệ 20/18/12/6.",
+    "Đơn vị, tiêu chí, trạng thái và mẫu một hộp rõ.",
+    "Không tự cho số complete hoặc suy thư gốc không có ngày từ ô trống."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "t": "mc",
+   "q": "At most eighteen cho giới hạn nào?",
+   "o": [
+    "Chính xác mười tám luôn",
+    "Không hơn mười tám",
+    "Ít nhất mười tám"
+   ],
+   "a": 1,
+   "e": "At most đặt trần; muốn số chính xác cần dữ kiện khác."
+  },
+  {
+   "t": "mc",
+   "q": "All but two of twenty tương ứng bao nhiêu?",
+   "o": [
+    "Mười tám",
+    "Hai",
+    "Ít nhất hai mươi"
+   ],
+   "a": 0,
+   "e": "All but two loại đúng hai khỏi nhóm hai mươi."
+  },
+  {
+   "t": "mc",
+   "q": "Not necessarily complete có nghĩa gì?",
+   "o": [
+    "Chắc chắn mọi trường hợp thiếu",
+    "Không có mục nào tồn tại",
+    "Chưa được bảo đảm đầy đủ"
+   ],
+   "a": 2,
+   "e": "Phủ tính tất yếu khác phủ toàn bộ trường hợp đạt."
+  },
+  {
+   "t": "fill",
+   "q": "No fewer ___ eighteen entries have dates.",
+   "a": "than",
+   "e": "No fewer than đặt cận dưới, thường nhấn số không nhỏ."
+  },
+  {
+   "t": "fill",
+   "q": "All ___ two of the twenty entries have dates.",
+   "a": "but",
+   "e": "All but two nghĩa tất cả trừ hai trong nhóm đã xác định."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Một trường đã điền không giống việc xác minh.",
+   "w": [
+    "filled",
+    "field",
+    "is",
+    "not",
+    "the",
+    "same",
+    "as",
+    "verification",
+    "A"
+   ],
+   "a": "A filled field is not the same as verification.",
+   "e": "Câu “A filled field is not the same as verification.” diễn đạt một trường đã điền không giống việc xác minh. Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "order",
+   "q": "Sắp xếp để nói: Mẫu chỉ bao phủ một hộp trong kho.",
+   "w": [
+    "sample",
+    "covers",
+    "only",
+    "one",
+    "box",
+    "in",
+    "the",
+    "archive",
+    "The"
+   ],
+   "a": "The sample covers only one box in the archive.",
+   "e": "Câu “The sample covers only one box in the archive.” diễn đạt mẫu chỉ bao phủ một hộp trong kho. Giữ các thành phần có quan hệ nghĩa cạnh nhau khi ghép câu."
+  },
+  {
+   "t": "match",
+   "q": "Nối qualifier, entail, presupposition, absence và coverage theo việc rà danh mục.",
+   "pairs": [
+    [
+     "verification",
+     "việc xác minh"
+    ],
+    [
+     "provenance",
+     "nguồn gốc và lịch sử lưu chuyển"
+    ],
+    [
+     "entry",
+     "mục trong danh mục"
+    ],
+    [
+     "field",
+     "trường thông tin"
+    ],
+    [
+     "exhaustive",
+     "bao quát hết"
+    ]
+   ],
+   "e": "Qualifier giới hạn nghĩa, entail nói kéo theo logic; presupposition là điều ngầm đặt trước. Absence cần xác định vắng ở đâu, coverage chỉ phần kho đã được xét."
+  },
+  {
+   "t": "listen",
+   "say": "The summary says almost all records are verified because eighteen of the twenty contain dates. Are those the same categories? No. Eighteen entries contain a date, but only twelve of those dates have been checked against the originals. A filled field is not the same as verification. Then “all but two have dates” is exact for this sample, while “at least twelve are verified” would be too loose if we know the verified total is twelve. Exactly. A lower bound may be true but less informative than the exact count. We should choose the level of precision the evidence actually supports. What about “not all entries are complete”? Could readers infer that the other eighteen are complete? Not from that sentence alone. Completeness includes provenance and other fields, and we have not counted it yet. We should not let the date count answer a different question. I’ll state the two counts separately and mark unchecked dates as provisional. The catalogue also needs a note about which part of the collection was sampled. Good. That will make the limits explicit without suggesting that blank entries prove the original letters have no dates.",
+   "lang": "en-GB",
+   "q": "Hai con số mô tả trạng thái nào?",
+   "o": [
+    "Mười hai thư tồn tại trong toàn kho",
+    "Mười tám có ngày, mười hai ngày đã đối chiếu",
+    "Mười tám đã hoàn chỉnh mọi trường"
+   ],
+   "a": 1,
+   "e": "Người nói tách filled field khỏi verification, không nhập thành complete records."
+  },
+  {
+   "t": "listen",
+   "say": "The summary says almost all records are verified because eighteen of the twenty contain dates. Are those the same categories? No. Eighteen entries contain a date, but only twelve of those dates have been checked against the originals. A filled field is not the same as verification. Then “all but two have dates” is exact for this sample, while “at least twelve are verified” would be too loose if we know the verified total is twelve. Exactly. A lower bound may be true but less informative than the exact count. We should choose the level of precision the evidence actually supports. What about “not all entries are complete”? Could readers infer that the other eighteen are complete? Not from that sentence alone. Completeness includes provenance and other fields, and we have not counted it yet. We should not let the date count answer a different question. I’ll state the two counts separately and mark unchecked dates as provisional. The catalogue also needs a note about which part of the collection was sampled. Good. That will make the limits explicit without suggesting that blank entries prove the original letters have no dates.",
+   "lang": "en-GB",
+   "q": "Khi biết đúng mười hai, at least twelve có sai logic không?",
+   "o": [
+    "Không nhất thiết sai nhưng ít thông tin hơn",
+    "Chắc chắn sai vì cận dưới",
+    "Tự có nghĩa hai mươi"
+   ],
+   "a": 0,
+   "e": "Cận dưới có thể đúng nhưng không truyền độ chính xác đã biết."
+  },
+  {
+   "t": "dict",
+   "say": "The audit counted dates rather than complete records.",
+   "a": "The audit counted dates rather than complete records.",
+   "lang": "en-GB",
+   "e": "Dates và complete records là hai đơn vị/tiêu chí khác; rather than giữ phân biệt trọng tâm báo cáo."
+  },
+  {
+   "t": "mc",
+   "q": "Khi biết chính xác mười hai, at least twelve là gì?",
+   "o": [
+    "Luôn sai",
+    "Có nghĩa chính xác hai mươi",
+    "Có thể đúng nhưng ít thông tin hơn"
+   ],
+   "a": 2,
+   "e": "Cận dưới chưa bằng con số chính xác về độ thông tin, dù không mâu thuẫn tổng đã biết."
+  },
+  {
+   "t": "mc",
+   "q": "Missing from the catalogue tự kéo theo gì?",
+   "o": [
+    "Chắc chắn thư không ngày",
+    "Chỉ vắng trong danh mục đang xét",
+    "Không có trong toàn kho"
+   ],
+   "a": 1,
+   "e": "Không thể mở rộng phạm vi từ catalogue sang collection khi chưa kiểm mức bao phủ."
+  }
+ ],
+ "teacher": {
+  "time": "2 buổi × 90 phút",
+  "prep": "Hai mươi thẻ mục giả, mười tám thẻ có ngày trong đó mười hai dấu đã đối chiếu và sáu dấu tạm, nhãn một hộp và trường provenance còn thiếu.",
+  "steps": [
+   {
+    "t": "10 phút",
+    "do": "Cho báo cáo almost all verified rồi mở hai trạng thái ngày/đã kiểm để nhận ra đổi tiêu chí."
+   },
+   {
+    "t": "20 phút",
+    "do": "Dùng thẻ lập tập con 20/18/12/6, gắn scope, completeness và coverage vào đúng đơn vị."
+   },
+   {
+    "t": "20 phút",
+    "do": "So exact count với at least/at most/no fewer than/all but; mỗi câu phải nêu tập đang bao phủ."
+   },
+   {
+    "t": "25 phút",
+    "do": "Nghe rà danh mục, ghi hai số đúng và nhận vì sao cận dưới có thể đúng mà kém thông tin."
+   },
+   {
+    "t": "15 phút",
+    "do": "Đóng vai biên tập muốn ngắn, bạn phải giữ phân biệt ngày và hồ sơ trong một câu gọn đủ hiểu."
+   },
+   {
+    "t": "15 phút",
+    "do": "Buổi hai luyện at least/at most và vị trí only, người nghe tô đúng tập dựa âm không nhìn chữ."
+   },
+   {
+    "t": "25 phút",
+    "do": "Đọc bài, tìm phản ví dụ cho suy ô trống thành không có ngày và phạm vi hộp thành toàn kho."
+   },
+   {
+    "t": "20 phút",
+    "do": "Nói giải thích not all/not necessarily cho người không học logic, dùng thẻ thay vì thuật ngữ suông."
+   },
+   {
+    "t": "15 phút",
+    "do": "Viết 260–300 từ, so từng lượng từ với số và tiêu chí; bỏ khẳng định complete chưa được đếm."
+   },
+   {
+    "t": "15 phút",
+    "do": "Chữa nhập unit, làm dict counted dates rồi giao tập con khác với một tổng chưa biết để chọn cận thích hợp."
+   }
+  ],
+  "games": [
+   "Cận hay đúng số: đội nhận thông tin khác nhau về phần chưa kiểm, chọn exact hoặc bound và giải thích phần thông tin được giữ.",
+   "Chuyển ô phạm vi: thẻ catalogue, box, archive không được thay nhau trong kết luận trừ khi có thẻ coverage chứng minh."
+  ],
+  "errors": [
+   "Dùng almost all như một ngưỡng phần trăm cố định: xét bối cảnh hoặc ghi số.",
+   "Hiểu at most là đúng bằng: giữ nghĩa không hơn.",
+   "Coi not necessarily là chắc chắn không: phân biệt phủ bảo đảm với phủ mọi trường hợp.",
+   "Đổi dates verified thành records complete: giữ tiêu chí.",
+   "Suy ô trống là đồ vật không có thuộc tính: kiểm trạng thái mô tả và mức bao phủ."
+  ],
+  "homework": "Tạo mẫu hai mươi mục giả với ba trạng thái có trường, đã kiểm và đầy đủ. Viết 260–300 từ, chọn số chính xác hoặc cận theo thông tin bạn thật có và giải thích một phủ định có phạm vi."
+ }
+}
