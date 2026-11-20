@@ -1182,7 +1182,10 @@ function updatePlayer(dt){
   let mx=fx*iz+rx*ix, mz=fz*iz+rz*ix; const len=Math.hypot(mx,mz), run=K.ShiftLeft||K.ShiftRight, sp=(run?3.4:1.35)*HOOK.speedMul();   // đúng tốc độ bot: đi 1,35 m/s · chạy 3,4 m/s
   if(len>0){ mx/=len; mz/=len; P.dancing=false; }
   const k=1-Math.exp(-dt*10); P.vx=lerp(P.vx,mx*sp,k); P.vz=lerp(P.vz,mz*sp,k);
-  P.px=P.x; P.pz=P.z; P.x+=P.vx*dt; P.z+=P.vz*dt; resolve(P);
+  P.px=P.x; P.pz=P.z; P.x+=P.vx*dt; P.z+=P.vz*dt; HOOK.bumped=null; resolve(P);
+  // S-CAM: góc tường hẹp – đẩy qua lại giữa 2 vật cản → giải thêm tối đa 2 lượt cho hội tụ; vẫn bị chặn gần hết thì ĐỨNG YÊN (không giật, không nhảy)
+  for(let i=0;i<2;i++){ const x0=P.x, z0=P.z; resolve(P); if(Math.abs(P.x-x0)+Math.abs(P.z-z0)<1e-4) break; }
+  if(len>0 && !HOOK.bumped){ const want=Math.hypot(P.vx,P.vz)*dt, got=Math.hypot(P.x-P.px,P.z-P.pz); if(want>1e-3 && got<want*.3){ P.x=P.px; P.z=P.pz; } }
   // vận tốc THẬT sau va chạm → hướng mặt + animation khớp với chuyển động (không chạy tại chỗ, không đi ngang)
   const ax=(P.x-P.px)/Math.max(dt,1e-4), az=(P.z-P.pz)/Math.max(dt,1e-4), aspd=Math.hypot(ax,az);
   if(aspd>.5) P.face=Math.atan2(ax,az); else if(len>0) P.face=Math.atan2(mx,mz);
@@ -1220,6 +1223,35 @@ function firstPerson(dt){ const sc=HOOK.scope;
   if(me.root.visible){ me.root.visible=false; _bodyHid=true; }
   cam.tx=P.x; cam.ty=P.y+1.45; cam.tz=P.z; cam.occ=undefined;
   if(!QP.staticShadow) placeSun(P.x,P.z); return true; }
+/* S-CAM (20/11/2026): VẬT CHẮN GIỮA CAMERA VÀ NHÂN VẬT → LÀM MỜ (không kéo camera vào nữa → hết nhảy/giật, nhân vật luôn giữa khung).
+   Mọi vật liệu thường của cảnh được chèn vài dòng shader: điểm ảnh nằm trong "ống" từ camera tới ngực nhân vật (và cao hơn chân ≥ 0,28 m)
+   bị bỏ bớt theo mẫu chấm cố định → nhìn xuyên được như vật mờ. Làm theo từng điểm ảnh nên chạy cả với khối đã gộp (batchStatic), không cần dò tia.
+   Bỏ qua: nhân vật có xương, đồ gắn trên người chơi, vật liệu shader tự viết không có project_vertex. Tắt: localStorage 'qcworld-camfade'='0'. */
+const OCCU={occVW:{value:camera.matrixWorld}, occB:{value:new THREE.Vector3()}, occK:{value:0}, occFeet:{value:0}};
+const OCC_ON=(()=>{ try{ return localStorage.getItem('qcworld-camfade')!=='0'; }catch(e){ return true; } })();
+const OCC_FRAG=`
+  if(occK>0.001){ vec3 oA=cameraPosition, oS=occB-oA; float oL2=max(dot(oS,oS),1e-4), oT=dot(vOccW-oA,oS)/oL2, oLen=sqrt(oL2);
+    if(oT>0.02 && oT<1.0-0.2/oLen && vOccW.y>occFeet+0.28){ float oD=length(vOccW-(oA+oS*oT)), oR=0.45+0.8*oT;
+      float oF=(1.0-smoothstep(oR*0.6,oR,oD))*occK, oN=fract(52.9829189*fract(dot(gl_FragCoord.xy,vec2(0.06711056,0.00583715))));
+      if(oN<oF*0.72) discard; } }
+`;
+const _occSkip=new WeakSet(); let _occT=0;
+function occPatchMat(m){ if(!m || m.userData.occ!==undefined || _occSkip.has(m)) return; m.userData.occ=0;
+  if(m.isRawShaderMaterial || m.isPointsMaterial || m.isSpriteMaterial || m.isLineBasicMaterial || m.isMeshDepthMaterial || m.isMeshDistanceMaterial) return;
+  const prev=m.onBeforeCompile, k0=m.customProgramCacheKey();
+  m.onBeforeCompile=function(sh, r){ if(prev) prev.call(this, sh, r);
+    if(!sh.vertexShader.includes('#include <project_vertex>') || !/void\s+main\s*\(\s*\)\s*\{/.test(sh.fragmentShader)) return;
+    sh.uniforms.occVW=OCCU.occVW; sh.uniforms.occB=OCCU.occB; sh.uniforms.occK=OCCU.occK; sh.uniforms.occFeet=OCCU.occFeet;
+    sh.vertexShader='uniform mat4 occVW;\nvarying vec3 vOccW;\n'+sh.vertexShader.replace('#include <project_vertex>', '#include <project_vertex>\n\tvOccW=(occVW*mvPosition).xyz;');
+    sh.fragmentShader='uniform vec3 occB;\nuniform float occK;\nuniform float occFeet;\nvarying vec3 vOccW;\n'+sh.fragmentShader.replace(/void\s+main\s*\(\s*\)\s*\{/, s=>s+OCC_FRAG); };
+  m.customProgramCacheKey=()=>k0+'|occ1'; m.userData.occ=1; m.needsUpdate=true; }
+function occPatchAll(){ if(!OCC_ON) return;
+  me.g.traverse(o=>{ if(o.material) for(const m of [].concat(o.material)) _occSkip.add(m); });
+  scene.traverse(o=>{ if(!o.isMesh || !o.material) return; const ms=[].concat(o.material);
+    if(o.isSkinnedMesh){ for(const m of ms) _occSkip.add(m); return; } for(const m of ms) occPatchMat(m); }); }
+function updateOcc(dt, on){ _occT+=dt; if(_occT>2){ _occT=0; occPatchAll(); }   // vật mới dựng thêm (vào toà nhà, sự kiện…) cũng được làm mờ
+  OCCU.occB.value.set(P.x, P.y+1.1, P.z); OCCU.occFeet.value=P.y;
+  OCCU.occK.value=lerp(OCCU.occK.value, on&&OCC_ON?1:0, 1-Math.exp(-dt*8)); }
 function updateCamera(dt){
   /* S-GFX A23: trò chơi công viên tự đặt camera góc nhìn thứ nhất theo khung toa tàu (lộn vòng thật) */
   if(cam.fpv && !HOOK.scope && HOOK.fpvCam && HOOK.fpvCam(dt, camera)){ if(!QP.staticShadow) placeSun(P.x,P.z); return; }
@@ -1227,14 +1259,12 @@ function updateCamera(dt){
   if(_bodyHid){ me.root.visible=true; _bodyHid=false; _pf=null; } if(_fovNow!==55){ _fovNow=55; camera.fov=55; camera.updateProjectionMatrix(); }
   if(HOOK.camOverride){ const o=HOOK.camOverride, kk=1-Math.exp(-dt*(o.k||5)); camera.position.lerp(o.pos, kk); _look.lerp(o.look, kk); camera.lookAt(_look);
     o.near = camera.position.distanceTo(o.pos)<.03; return; }
-  const k=1-Math.exp(-dt*9); cam.tx=lerp(cam.tx,P.x,k); cam.ty=lerp(cam.ty,P.y+1.45,k); cam.tz=lerp(cam.tz,P.z,k);
+  // S-CAM: tâm nhìn bám ĐÚNG nhân vật theo phương ngang (nhân vật luôn giữa khung); chỉ làm mượt độ cao (bậc thang, nhảy)
+  cam.tx=P.x; cam.tz=P.z; cam.ty=lerp(cam.ty, P.y+1.45, 1-Math.exp(-dt*10));
   let dist=HOOK.camDist ? Math.max(cam.dist, HOOK.camDist) : cam.dist;
-  // camera không xuyên qua nhà: dò dọc tia từ nhân vật ra camera, gặp vật cản lớn thì kéo camera lại gần
-  { const sx=Math.sin(cam.yaw)*Math.cos(cam.pitch), sz=Math.cos(cam.yaw)*Math.cos(cam.pitch), sy=Math.sin(cam.pitch);
-    for(let t=1.2; t<dist; t+=.6){ const x=cam.tx+sx*t, z=cam.tz+sz*t, y=cam.ty+sy*t; if(y>7) break;
-      if(circles.some(c=>c.r>1.4 && (x-c.x)**2+(z-c.z)**2<(c.r+.2)**2)){ dist=Math.max(1.6, t-.4); break; } } }
+  // S-CAM: KHÔNG kéo camera vào khi có vật chắn nữa (gây nhảy/chóng mặt) – vật chắn được làm mờ (OCC ở trên); chỉ đổi khoảng cách mượt khi zoom
   if(cam.occ===undefined || HOOK.camDist) cam.occ=dist;
-  cam.occ = dist<cam.occ ? lerp(cam.occ, dist, 1-Math.exp(-dt*16)) : lerp(cam.occ, dist, 1-Math.exp(-dt*2.2)); dist=cam.occ;
+  cam.occ=lerp(cam.occ, dist, 1-Math.exp(-dt*8)); dist=cam.occ;
   const cp=Math.cos(cam.pitch), want=_want.set(cam.tx+Math.sin(cam.yaw)*cp*dist, cam.ty+Math.sin(cam.pitch)*dist, cam.tz+Math.cos(cam.yaw)*cp*dist);
   want.y=Math.max(want.y, groundH(want.x,want.z)+.35, WATER_Y+.4);
   if(HOOK.camBox){ const b=HOOK.camBox; want.x=clamp(want.x,b.x0,b.x1); want.z=clamp(want.z,b.z0,b.z1); want.y=Math.min(want.y,b.y1); }
@@ -1548,7 +1578,7 @@ function tick(now){ requestAnimationFrame(tick);
       else if(cap30 && aW<7 && now>probeAt) cap30=false; } } }   // máy rảnh hẳn → thử mở khoá lại
 function frame(dt){
   T+=dt;
-  updatePlayer(dt); updateCamera(dt); updateFrustum(); updateWorld(dt); for(const f of HOOK.onFrame) f(dt, T); updateParts(dt); updateInteract(); updateLabels(); perf(dt); cullActors();
+  updatePlayer(dt); updateCamera(dt); updateOcc(dt, !HOOK.camOverride && !cam.fpv && !HOOK.scope); updateFrustum(); updateWorld(dt); for(const f of HOOK.onFrame) f(dt, T); updateParts(dt); updateInteract(); updateLabels(); perf(dt); cullActors();
   if(QP.staticShadow && !W.inside){ if(shadowDirty){ shadowDirty=false; prepStaticShadow(); renderer.shadowMap.needsUpdate=true; } updateBlobs(); }
   else if(++shadowTick>=QP.shadowEvery){ shadowTick=0; renderer.shadowMap.needsUpdate=true; }
   // SỬA GIẬT NGƯỜI CHƠI (15/11/2026): three r160 chỉ cập nhật xương nhân vật "1 lần mỗi khung" theo info.render.frame, nhưng bộ đếm này tăng
@@ -1582,6 +1612,7 @@ try{ let nz=0; scene.traverse(m=>{ if(!m.isMesh || m.isSkinnedMesh || m===water 
   console.info(`[QC World] chống nhấp nháy: ${nz} vật liệu tấm dán`); }catch(e){ console.warn('zfix', e); }
 try{ const nf=markFar(scene); console.info(`[QC World] ${nf} vật nhỏ được bỏ vẽ khi ở xa`); }catch(e){ console.warn('markFar', e); }
 await yieldUI('Đang chuẩn bị đồ hoạ…');
+try{ occPatchAll(); }catch(e){ console.warn('camfade', e); }   // S-CAM: chèn shader làm mờ vật chắn TRƯỚC khi biên dịch (khỏi biên dịch 2 lần)
 try{ await renderer.compileAsync(scene, camera); }catch(e){ console.warn('compileAsync', e); }
 tick();
 $('loading').style.opacity='0'; setTimeout(()=>{ $('loading').hidden=true; if(!store.get('qcworld-helped',0)) $('helpWrap').hidden=false; canvas.focus(); }, 650);
