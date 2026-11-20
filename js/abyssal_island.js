@@ -212,7 +212,7 @@ export async function make(W, ctx){
   { const cg=new THREE.CylinderGeometry(.32,.32,1,10), im=new THREE.InstancedMesh(cg,M.parap,COLS.length), m=new THREE.Matrix4(); COLS.forEach(([x,y,z,hh],i)=>{ m.makeScale(1,hh,1).setPosition(x,y,z); im.setMatrixAt(i,m); }); im.castShadow=im.receiveShadow=true; im.userData.dynamic=true; grp.add(im); }
 
   /* ============================== 9. ĐƯỜNG: vành đai +2 nối 3 cổng · đường đỉnh vách · lan can mép vực ============================== */
-  const BAYB=buildBay({openPromEnds:TOWERS_OK, venueGaps:DINING_OK, THREE, W, grp, dyn, M, LUX:W.LUX, B:BAY, FB, RB, UP, box, cyl, rail, fence, addPlat, addSeg, plats, circles, makeLabel, hAt, hOut, A, BZ, CZ, tunLat}); ROADS.push(...BAYB.roads); RAMPS.push(...BAYB.ramps);
+  const BAYB=buildBay({openPromEnds:TOWERS_OK, venueGaps:DINING_OK, railVis, THREE, W, grp, dyn, M, LUX:W.LUX, B:BAY, FB, RB, UP, box, cyl, rail, fence, addPlat, addSeg, plats, circles, makeLabel, hAt, hOut, A, BZ, CZ, tunLat}); ROADS.push(...BAYB.roads); RAMPS.push(...BAYB.ramps);
   const AMN=buildAmenities({buildSouthBridge:true, THREE, W, grp, dyn, M, MT:BAYB.MT, B:BAY, BAYB, box, cyl, fence, rail, addPlat, addSeg, plats, circles, makeLabel, INTER, P, toast, PLACES, teleport, RAMPS, LIFTK, HOOK, FB});
   for(const m of [M.asphalt]){ m.polygonOffset=true; m.polygonOffsetFactor=-2; m.polygonOffsetUnits=-4; } M.roadStone=M.granite.clone(); M.roadStone.polygonOffset=true; M.roadStone.polygonOffsetFactor=-2; M.roadStone.polygonOffsetUnits=-4;
   const strip=(pts,w,mat,dy=.03)=>{ const q=QB(false), N=pts.length, closed=N>2 && Math.hypot(pts[0][0]-pts[N-1][0],pts[0][1]-pts[N-1][1])<.01, sn=(i)=>{ const a=pts[i], b=pts[i+1], L=Math.hypot(b[0]-a[0],b[1]-a[1]); return [(b[1]-a[1])/L,-(b[0]-a[0])/L]; }, H=(x,z)=>(hAt(clamp(x,-ZB+.1,ZB-.1),clamp(z,-ZB+.1,ZB-.1))??GY)+dy, E=[];
@@ -271,7 +271,7 @@ export async function make(W, ctx){
         cafe:{x:cafeP[0], z:cafeP[1], yaw:Math.atan2(-cafeP[0],-12-cafeP[1]), w:26, d:9, yBase:2.5, yTop:16, note:'tựa tường kè, mặt nhìn ra vịnh; cửa trên ở vỉa hè +16, cửa dưới ở bãi cát'},
         restaurant:{x:restP[0], z:restP[1], yaw:Math.atan2(-restP[0],-12-restP[1]), w:26, d:9, yBase:2.5, yTop:16},
         stage:{x:-100, z:-212, yaw:0}, marina:{x:-GX, z:126, nx:1, nz:0, deckY:2.0, stem:8},
-        beach:{parking:{x:66, z:132, y:3.5}, stairs:BAYB.stairs}, watersports:{x:-215, z:40, rx:18, rz:70}, parasail:{x:-170, z:-262, rx:38, rz:26} },
+        beach:{parking:{x:66, z:132, y:3.5}, stairs:BAYB.stairs}, changing:(AMN.changing && AMN.changing.length) ? Object.assign({list:AMN.changing, note:'nhà tắm & thay đồ (phiên A dựng hình): doors[] cửa Nam/Nữ, cabins[] {side, x, z, y, yaw, door, w, d}, showers[]; logic thay đồ / đồ bơi do phiên B gắn'}, AMN.changing[0]) : null, watersports:{x:-215, z:40, rx:18, rz:70}, parasail:{x:-170, z:-262, rx:38, rz:26} },
       towersReady:!!(W.ABY && W.ABY.towersReady), gapsOpen:TOWERS_OK && DINING_OK, oldShellRemoved:TOWERS_OK});   /* gapsOpen: phiên D không cần tự mở khe lúc chạy */ }
   for(const f of ['./abyssal_hotel.js','./abyssal_towers.js','./abyssal_dining_venues.js','./abyssal_sea.js','./abyssal_stage.js']){ try{ const m=await import(f); if(m && m.make) await m.make(W, ctx); }
     catch(e){ if(!/Failed to fetch|Cannot find module|error loading dynamically imported/i.test(String(e))) console.warn('[abyssal] module phụ', f, e); } }   /* abyssal_yacht.js là thư viện – abyssal_sea.js tự nạp */

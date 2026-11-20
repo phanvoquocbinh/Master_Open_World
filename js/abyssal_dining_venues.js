@@ -134,7 +134,7 @@ export async function make(W, ctx={}){
       /* 20/11 (phiên A, theo báo lỗi Bình qua phiên chính): lan can va chạm còn thiếu – lưng chiếu nghỉ tầng + mép sau sàn lồi (lx −13…CX0), mép ngoài chiếu nghỉ tầng, gầm vế B ở tầng trệt */
       for(const y of [Y3,Y2,Y1]){ const msg=y===Y3?'🪵 Lan can chiếu nghỉ – đi vòng ra bậc tam cấp':'🪵 Lan can chiếu nghỉ – bên dưới cao '+Math.round(y-Y3+.5)+' m';
         const pl=[[SX0,SZ0-.05],[-13.0,SZ0-.05],[-13.0,CF-.05],[CX0,CF-.05]]; for(let q=0;q<pl.length-1;q++) seg(V.W2(...pl[q]),V.W2(...pl[q+1]),y-.4,y+1.6,msg);
-        seg(V.W2(SX0-.05,SZ0-.05),V.W2(SX0-.05,ZL),y-.4,y+1.6,msg); band(V,MT.glassR,[[SX0,ZL],[SX0,SZ0-.05],[-13.0,SZ0-.05]],y+.02,y+1.0); band(V,MT.gold,[[SX0,ZL],[SX0,SZ0-.05],[-13.0,SZ0-.05]],y+1.0,y+1.07,()=>false,{top:.06}); }
+        seg(V.W2(SX0-.05,SZ0-.05),V.W2(SX0-.05,ZL),y-.4,y+1.6,msg); band(V,MT.glassR,[[SX0,ZL],[SX0,SZ0-.05],[-13.0,SZ0-.05],[-13.0,CF-.05],[CX0,CF-.05]],y+.02,y+1.0); band(V,MT.gold,[[SX0,ZL],[SX0,SZ0-.05],[-13.0,SZ0-.05]],y+1.0,y+1.07,()=>false,{top:.06}); }
       seg(V.W2(SX0,ZL+.05),V.W2(mid,ZL+.05),Y3-.4,Y3+1.6,'🪵 Gầm cầu thang ngoài – lên bằng vế bên trong'); }
     /* lan can mái + sân thượng (kính) – chừa lối sang chiếu nghỉ cầu thang ngoài (lx < −8, lz 2–3,25) */ band(V,MT.glassR,[[CX0+.2,V.lzW(CX0)+.6],[CX0+.2,2.0]],YR,YR+1.0); band(V,MT.glassR,[[CX0,CF+.13],[CX1,CF+.13]],YR,YR+1.0); band(V,MT.gold,[[SX1,CF+.13],[CX1,CF+.13]],YR+1.0,YR+1.07,()=>false,{top:.06});
     seg(V.W2(CX0+.2,V.lzW(CX0)+.6),V.W2(CX0+.2,2.0),YR-.4,YR+1.6,'🚧 Lan can sân thượng'); seg(V.W2(CX1+.05,V.lzW(CX1)+.45),V.W2(CX1+.05,CF+.13),YR-.4,YR+1.6,'🚧 Lan can sân thượng'); band(V,MT.glassR,[[CX1,V.lzW(CX1)+.45],[CX1,CF+.13]],YR,YR+1.0);   /* 20/11: mép mái cuối khối lõi (lx CX1) */

@@ -126,14 +126,43 @@ export function buildAmenities(K){
     makeLabel('🅿️ Bãi đỗ xe biển','12 ô · vạch vàng · cục chặn bánh · cầu thang gỗ xuống bãi cát ngay bên cạnh',{h:.5, x:bays[6][0], y:BY(bays[6][0],bays[6][1])+4, z:bays[6][1], fade:90});
     { /* vạch qua đường cho người đi bộ ở φ 72,6° (đường ngang vỉa hè, không có tường chắn) */ const z=K.FB(); for(let k=0;k<6;k++){ const r0=.9655+k*.0082, r1=r0+.0039, a=el(72,r0), b=el(73.2,r0), c2=el(73.2,r1), d=el(72,r1), yy=(x,zz)=>BY(x,zz)+.046; z.f([a[0],yy(a[0],a[1]),a[1]],[b[0],yy(b[0],b[1]),b[1]],[c2[0],yy(c2[0],c2[1]),c2[1]],[d[0],yy(d[0],d[1]),d[1]],[0,1,0]); } z.mesh(new THREE.MeshStandardMaterial({color:0xf3f3ee, roughness:.6, polygonOffset:true, polygonOffsetFactor:-5, polygonOffsetUnits:-10}),'abyssal-zebra'); }
     out.parking={bays, f0:F0, f1:F0+NB*1.1}; }
-  /* nhà tắm gỗ teak mái lá cọ (2 tầng thông gió) – φ 51° và 129° */ for(const fb of [51,129]){ const c=el(fb,.872), y=BY(c[0],c[1]), n=B.el(fb*D,1), ry=Math.atan2(c[0]-n[0],c[1]-n[1]), w=9, d=5.2, h=5.6, ux=Math.cos(ry), uz=-Math.sin(ry), fx=Math.sin(ry), fz=Math.cos(ry);
-    const base=y+.25; box(w+.4,.5,d+.4,MAT.teak,c[0],y,c[1],ry); box(w,h*.55,d,MAT.teak,c[0],base+h*.275,c[1],ry); box(w,.12,d+.6,MAT.walnut,c[0],base+h*.55+.06,c[1],ry);
-    for(const e of [-1,1]) for(const g of [-1,1]) box(.22,h*.4,.22,MAT.walnut,c[0]+ux*e*(w/2-.15)+fx*g*(d/2-.15),base+h*.55+h*.2,c[1]+uz*e*(w/2-.15)+fz*g*(d/2-.15),ry);
-    const roof=new THREE.Mesh(new THREE.ConeGeometry(Math.hypot(w,d)/2+1.2,2.6,4),MAT.thatch); roof.position.set(c[0],base+h+.9,c[1]); roof.rotation.y=ry+Math.PI/4; roof.scale.set(1,1,d/w+.25); roof.castShadow=true; grp.add(roof);
-    const P4=[[-1,-1],[1,-1],[1,1],[-1,1]].map(([a,b2])=>[c[0]+ux*a*w/2+fx*b2*d/2, c[1]+uz*a*w/2+fz*b2*d/2]); rail([P4[0],P4[1],P4[2],P4[3],P4[0]],base,'🚿 Nhà tắm gỗ – vào bằng cửa phía biển (bấm E)',{y0:base-1.5,y1:base+5});
-    addPlat(c[0],c[1],ry,w/2,d/2,base);
-    INTER.push({x:c[0]+fx*(d/2+1.3), z:c[1]+fz*(d/2+1.3), r:2.6, prio:.6, when:()=>Math.abs(P.y-y)<2, label:'🚿 Tắm tráng nước ngọt / Thay đồ bơi (E)', action:()=>{ toast('🚿 Mát quá! Đã tắm tráng nước ngọt và thay đồ bơi – sẵn sàng tắm biển.',3200); if(W.life && W.life.S && W.life.S.buffs) W.life.S.buffs.energy=Math.max(Date.now(),W.life.S.buffs.energy||0)+180000; }});
-    makeLabel('🚿 Nhà tắm & thay đồ','Vòi sen nước ngọt · bồn rửa chân · tủ đồ',{h:.45, x:c[0], y:base+h+3, z:c[1], fade:70}); }
+  /* 20/11 NHÀ TẮM & THAY ĐỒ (dựng lại theo báo lỗi Bình): sàn teak, 2 cửa Nam / Nữ ở mặt nhìn ra biển, vách ngăn giữa, mỗi bên 2 cabin thay đồ có cửa,
+     dãy tủ đồ, ghế băng; trước nhà: 4 vòi sen inox + sàn gỗ thoát nước + máng rửa chân; mái lá cọ có khe thông gió. Logic thay đồ / đồ bơi: phiên B (W.ABY.plots.changing). */
+  const CHG=[]; for(const fb of [51,129]){ const c=el(fb,.866), gN=[-c[0]/(146*146), -(c[1]+15)/(130*130)], ry=Math.atan2(gN[0],gN[1]), ux=Math.cos(ry), uz=-Math.sin(ry), fx=Math.sin(ry), fz=Math.cos(ry), HW=5.5, HD=3.2, WH=3.0, PH=3.8;
+    const Lc=(lx,lz)=>[c[0]+ux*lx+fx*lz, c[1]+uz*lx+fz*lz], yb=Math.max(...[[-HW,-HD],[HW,-HD],[-HW,HD],[HW,HD]].map(([a,b2])=>BY(...Lc(a,b2)))), base=yb+.22;
+    const bx=(w,h,d,mat,lx,y,lz,ry2=0)=>box(w,h,d,mat,...(()=>{ const p=Lc(lx,lz); return [p[0],y,p[1]]; })(),ry+ry2), sg=(a,b2,y0,y1,msg)=>{ const p=Lc(...a), q2=Lc(...b2); addSeg(p[0],p[1],q2[0],q2[1],.1,y0,y1,msg); };
+    bx(2*HW+.4,.45,2*HD+.4,MAT.teak,0,base-.225,0); addPlat(c[0],c[1],ry,HW+.15,HD+.15,base);
+    /* vách: sau, 2 hồi, trước có 2 cửa (Nam lx −2,6 · Nữ lx +2,6), vách giữa */ const wallT=.14, DOOR=1.3, DX=[-2.6,2.6];
+    bx(2*HW,WH,wallT,MAT.teak,0,base+WH/2,-HD+wallT/2); for(const e of [-1,1]) bx(wallT,WH,2*HD,MAT.teak,e*(HW-wallT/2),base+WH/2,0);
+    { const xs=[-HW,DX[0]-DOOR/2,DX[0]+DOOR/2,DX[1]-DOOR/2,DX[1]+DOOR/2,HW]; for(let k=0;k<xs.length;k+=2){ const a=xs[k], b2=xs[k+1]; bx(b2-a,WH,wallT,MAT.teak,(a+b2)/2,base+WH/2,HD-wallT/2); } for(const dx of DX) bx(DOOR,.6,wallT,MAT.teak,dx,base+WH-.3,HD-wallT/2); }
+    bx(wallT,WH,2*HD-.2,MAT.walnut,0,base+WH/2,-.1);
+    const MSGW='🚿 Vách nhà tắm – vào bằng cửa Nam / Nữ phía biển'; sg([-HW,-HD],[HW,-HD],base-.5,base+WH,MSGW); sg([-HW,-HD],[-HW,HD],base-.5,base+WH,MSGW); sg([HW,-HD],[HW,HD],base-.5,base+WH,MSGW); sg([0,-HD],[0,HD-.1],base-.5,base+WH,'🚿 Vách ngăn khu Nam / Nữ');
+    { const xs=[-HW,DX[0]-DOOR/2,DX[0]+DOOR/2,DX[1]-DOOR/2,DX[1]+DOOR/2,HW]; for(let k=0;k<xs.length;k+=2) sg([xs[k],HD],[xs[k+1],HD],base-.5,base+WH,MSGW); }
+    /* cabin thay đồ: mỗi bên 2 cabin 1,7 × 1,8 m sát vách sau, cửa trượt ra lối giữa (để khép hờ) */ const cabins=[], CW=1.7, CD=1.8;
+    for(const side of [-1,1]) for(let k=0;k<2;k++){ const x0=side*(.25+k*(CW+.12)), x1=x0+side*CW, cx=(x0+x1)/2, z0=-HD, z1=-HD+CD;
+      for(const xx of [x0,x1]) if(Math.abs(xx)>.2){ bx(.08,2.3,CD,MAT.walnut,xx,base+1.15,(z0+z1)/2); sg([xx,z0],[xx,z1],base-.4,base+2.3,'🚪 Vách cabin thay đồ'); }
+      const dw=1.0, dg=[cx-dw/2,cx+dw/2].sort((a,b2)=>a-b2), fr=[Math.min(x0,x1),Math.max(x0,x1)]; bx(dg[0]-fr[0],2.3,.08,MAT.walnut,(fr[0]+dg[0])/2,base+1.15,z1); bx(fr[1]-dg[1],2.3,.08,MAT.walnut,(dg[1]+fr[1])/2,base+1.15,z1);
+      sg([fr[0],z1],[dg[0],z1],base-.4,base+2.3,'🚪 Vách cabin thay đồ'); sg([dg[1],z1],[fr[1],z1],base-.4,base+2.3,'🚪 Vách cabin thay đồ');
+      bx(dw*.96,2.1,.05,MAT.teak,cx+dw*.35,base+1.05,z1+.12,0);   /* cánh cửa trượt khép một nửa */ bx(.8,.08,.35,MAT.teak,cx,base+.45,z0+.22); bx(.06,.6,.06,MAT.bronze,cx,base+1.9,z0+.08);
+      const dc=Lc(cx,z1+.6), cc=Lc(cx,(z0+z1)/2); cabins.push({side:side<0?'nam':'nu', x:cc[0], z:cc[1], y:base, yaw:ry+Math.PI, door:[dc[0],dc[1]], w:CW, d:CD}); }
+    /* tủ đồ (dãy 6 ngăn mỗi bên, sát vách hồi) + ghế băng giữa */ for(const side of [-1,1]){ for(let k=0;k<6;k++){ const lz=-HD+CD+.45+k*.62; if(lz>HD-.5) break; bx(.5,1.9,.58,k%2?MAT.walnut:MAT.teak,side*(HW-.4),base+.95,lz); }
+      sg([side*(HW-.68),-HD+CD+.1],[side*(HW-.68),HD-.4],base-.4,base+1.9,'🗄️ Tủ đồ'); bx(1.8,.42,.42,MAT.teak,side*2.6,base+.21,-.2); const bc=Lc(side*2.6,-.2); circles.push({x:bc[0], z:bc[1], r:.55, y0:base-.4, y1:base+.6}); }
+    /* mái lá cọ + cột thông gió (khe hở 0,8 m dưới mái) */ for(const e of [-1,1]) for(const g of [-1,1]) bx(.2,PH-WH,.2,MAT.walnut,e*(HW-.12),base+WH+(PH-WH)/2,g*(HD-.12));
+    { const roof=new THREE.Mesh(new THREE.ConeGeometry(Math.hypot(HW,HD)+1.1,2.4,4),MAT.thatch); const p=Lc(0,0); roof.position.set(p[0],base+PH+1.15,p[1]); roof.rotation.y=ry+Math.PI/4; roof.scale.set(1,1,HD/HW+.3); roof.castShadow=true; grp.add(roof); bx(2*HW+.3,.1,2*HD+.3,MAT.walnut,0,base+WH+.05,0); }
+    /* khu tắm tráng ngoài trời: sàn gỗ thoát nước + 4 vòi sen inox + máng rửa chân */ const SZ0=HD+.2, SZ1=HD+2.4, sb=base;   /* sàn gỗ ngoài cùng cao độ nhà (nhà trên bệ cọc), xuống cát bằng bậc giữa */
+    bx(2*HW,.2,SZ1-SZ0,MAT.teak,0,sb-.1,(SZ0+SZ1)/2); addPlat(...Lc(0,(SZ0+SZ1)/2),ry,HW,(SZ1-SZ0)/2+.05,sb);
+    const showers=[]; for(const lx of [-4.4,-1.4,1.4,4.4]){ const p=Lc(lx,SZ0+.9); bx(.08,2.4,.08,MAT.bronze,lx,sb+1.2,SZ0+.9); bx(.5,.05,.05,MAT.bronze,lx,sb+2.35,SZ0+.65); bx(.22,.04,.22,MAT.bronze,lx,sb+2.32,SZ0+.45); circles.push({x:p[0], z:p[1], r:.12, y0:sb-.4, y1:sb+2.4}); showers.push({x:Lc(lx,SZ0+.45)[0], z:Lc(lx,SZ0+.45)[1], y:sb}); }
+    bx(2.2,.35,.5,MAT.trav,-3.4,sb+.17,SZ1-.35); { const p=Lc(-3.4,SZ1-.35); circles.push({x:p[0], z:p[1], r:.45, y0:sb-.4, y1:sb+.5}); }
+    { /* bậc gỗ giữa xuống cát + lan can mép sàn (sàn cao hơn cát) */ const yf=BY(...Lc(0,SZ1+1.5)), n=Math.max(1,Math.ceil((sb-yf)/.18)), rs=(sb-yf)/n; for(let k=1;k<=n;k++){ const z0=SZ1+(k-1)*.3, y2=sb-k*rs; bx(3,.12,.34,MAT.teak,0,y2-.06,z0+.15); addPlat(...Lc(0,z0+.15),ry,1.5,.19,y2); }
+      const MR='🪵 Lan can sàn tắm tráng – xuống cát bằng bậc giữa', yR0=sb-1.2, yR1=sb+1.6; sg([-HW,HD],[-HW,SZ1],yR0,yR1,MR); sg([HW,HD],[HW,SZ1],yR0,yR1,MR); sg([-HW,SZ1],[-1.55,SZ1],yR0,yR1,MR); sg([1.55,SZ1],[HW,SZ1],yR0,yR1,MR);
+      for(const [a,b2] of [[[-HW,HD],[-HW,SZ1]],[[HW,HD],[HW,SZ1]],[[-HW,SZ1],[-1.55,SZ1]],[[1.55,SZ1],[HW,SZ1]]]){ const L=Math.hypot(b2[0]-a[0],b2[1]-a[1]), mx=(a[0]+b2[0])/2, mz=(a[1]+b2[1])/2, r2=Math.atan2(b2[0]-a[0],b2[1]-a[1]); bx(.06,.95,L,MAT.walnut,mx,sb+.5,mz,r2); bx(.1,.06,L,MAT.bronze,mx,sb+1.0,mz,r2); }
+      for(const e of [-1,1]) sg([e*1.55,SZ1],[e*1.55,SZ1+n*.3],yf-1,sb+1.6,'🪵 Tay vịn bậc xuống cát'); }
+    INTER.push({x:Lc(0,SZ0+1.2)[0], z:Lc(0,SZ0+1.2)[1], r:3.2, prio:.6, when:()=>Math.abs(P.y-sb)<1.6, label:'🚿 Tắm tráng nước ngọt (E)', action:()=>{ toast('🚿 Mát quá! Đã tắm tráng nước ngọt – sẵn sàng tắm biển.',3000); if(W.life && W.life.S && W.life.S.buffs) W.life.S.buffs.energy=Math.max(Date.now(),W.life.S.buffs.energy||0)+180000; }});
+    for(const [dx,who] of [[DX[0],'Nam'],[DX[1],'Nữ']]){ const p=Lc(dx,HD+.4); makeLabel(who==='Nam'?'🚹 Thay đồ Nam':'🚺 Thay đồ Nữ',null,{h:.3, x:p[0], y:base+3.0, z:p[1], fade:30}); }
+    makeLabel('🚿 Nhà tắm & thay đồ','4 cabin có cửa · vòi sen nước ngọt · tủ đồ · máng rửa chân',{h:.45, x:c[0], y:base+PH+3.2, z:c[1], fade:70});
+    const doors=DX.map((dx,k)=>{ const p=Lc(dx,HD+.3); return {who:k?'nu':'nam', x:p[0], z:p[1]}; });
+    CHG.push({x:c[0], z:c[1], y:base, yaw:ry, doorX:doors[0].x, doorZ:doors[0].z, doors, cabins, showers, size:[2*HW,2*HD], phi:fb}); }
+  out.changing=CHG;
   { /* 4 quầy bar cây dừa + string lights + 24 ghế tắm nắng + 12 dù lá cọ */ const BARS=[-3,12,168,183], trunkG=(()=>{ const pts=[]; for(let i=0;i<=8;i++){ const t=i/8; pts.push(new THREE.Vector3(Math.sin(t*1.3)*1.1*t, t*7.2, 0)); } return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),24,.24,8,false); })();
     const trunks=[], leaves=[], counters=[], tops=[], stools=[], lights=[], frame=[], cush=[], backs=[], poles=[], canopy=[], fringe=[];
     BARS.forEach((fb,bi)=>{ const c=el(fb,.835), y=BY(c[0],c[1]), n=el(fb,.6), face=Math.atan2(n[0]-c[0],n[1]-c[1]);   /* mặt quầy nhìn ra biển */
