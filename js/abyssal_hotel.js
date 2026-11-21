@@ -21,6 +21,7 @@ import * as AK from './archKit.js';
 import { makeLiftBank } from './liftkit.js';
 import { makeLux } from './lux_textures.js';
 import { makePoser } from './pose.js';
+import { furnitureLib } from './furniture_lib.js';   /* 21/11: nội thất thật dùng chung W.FURN (đổi màu/vật liệu riêng cho Royal Lotus) */
 
 export async function make(W, ctx={}){
   const {THREE, scene, plats, circles, INTER, PLACES, HOOK, P, cam, toast, makeLabel, teleport} = W;
@@ -121,6 +122,11 @@ export async function make(W, ctx={}){
   function inst(geo, mat, list, parent, o={}){ if(!list.length) return null; const im=new THREE.InstancedMesh(geo, mat, list.length); list.forEach((m,i)=>im.setMatrixAt(i,m)); im.instanceMatrix.needsUpdate=true; im.castShadow=!!o.cast; im.receiveShadow=true; im.userData.dynamic=true; if(mat.userData.trans) im.renderOrder=6; if(o.name) im.name=o.name; parent.add(im); return im; }
   const at=(r,td,y,ry=0,sx=1,sy=1,sz=1)=>{ const [x,z]=XZ(r,td); return M4(x,y,z,yawOut(td)+ry,sx,sy,sz); };
 
+  /* ============================== NỘI THẤT THƯ VIỆN CHUNG W.FURN (21/11) – Royal Lotus: nhung lục bảo / đỏ rượu vang, gỗ óc chó / mun, đá cẩm thạch, đồng vàng ============================== */
+  let FURN=null; try{ FURN=furnitureLib(W); }catch(e){ console.warn('[abyssal_hotel] furniture_lib', e); }
+  const HAS_F=!!(FURN && FURN.place);
+  const TH={ deluxe:{bed:{material:'linen:#ecdfc6', head:'velvet:#1e4637', frame:'velvet:#1e4637', accent:'velvet:#c9a24a', w:1.85, d:2.15}, sofa:{material:'leather:#7a4a2c'}, arm:{material:'velvet:#1e4637'}, wood:'walnut', table:{top:'marble', frame:'brass'}, ott:{material:'velvet:#c9a24a'}},
+    imperial:{bed:{material:'linen:#f2e4c4', head:'velvet:#591622', frame:'velvet:#591622', accent:'velvet:#c9a24a', w:2.0, d:2.2}, sofa:{material:'velvet:#591622'}, arm:{material:'leather:#3b2a20'}, wood:'ebony', table:{top:'marble', frame:'gold'}, ott:{material:'velvet:#591622'}} };
   /* ============================== VA CHẠM: vật thể tự tạo (không đẩy thẳng vào mảng) – bật/tắt theo tầng ============================== */
   const mkS=(ax,az,bx,bz,r,y0,y1,msg)=>({ax,az,bx,bz,r,y0,y1,msg, x0:Math.min(ax,bx)-r, x1:Math.max(ax,bx)+r, z0:Math.min(az,bz)-r, z1:Math.max(az,bz)+r});
   const mkR=(x,z,rot,hw,hd,h)=>({t:'r',x,z,c:Math.cos(rot),s:Math.sin(rot),hw,hd,h});
@@ -360,8 +366,13 @@ export async function make(W, ctx={}){
     { const sofaG=(L)=>{ const g=[ni(rbox(L,.42,.9,.08,2)).translate(0,.25,0), ni(rbox(L,.62,.22,.08,2)).translate(0,.66,-.36)]; for(const s of [-1,1]) g.push(ni(rbox(.2,.55,.9,.06,2)).translate(s*(L/2-.1),.45,0)); return W.mergeGeometries(g,false); };
       const sof=sofaG(2.6), arm=sofaG(1.0), tbl=lathe([[0,0],[.3,0],[.12,.08],[.1,.36],[.62,.4],[.62,.46],[0,.46]],24);
       for(const t of [-36,-12]){ const r=24.6, [x,z]=XZ(r,t), yo=yawOut(t);
-        SL.put(M.rug, new THREE.PlaneGeometry(4.4,3.4), M4(x,Y0+.012,z,yo,1,1,1,-Math.PI/2)); SL.put(M.marble, tbl, M4(x,Y0+.01,z)); SL.put(M.gold, new THREE.TorusGeometry(.62,.025,6,32), M4(x,Y0+.46,z,0,1,1,1,Math.PI/2));
-        for(const [dr,dt,ry,g] of [[1.55,0,Math.PI,sof],[-1.55,0,0,sof],[0,3.3,-Math.PI/2,arm],[0,-3.3,Math.PI/2,arm]]){ const p=XZ(r+dr,t+dt); SL.put(M.emer, g, M4(p[0],Y0,p[1],yo+ry)); STATIC.circ.push({x:p[0],z:p[1],r:g===sof?.9:.55,y0:Y0-.3,y1:Y0+1}); } STATIC.circ.push({x,z,r:.65,y0:Y0-.3,y1:Y0+.5}); }
+        SL.put(M.rug, new THREE.PlaneGeometry(4.4,3.4), M4(x,Y0+.012,z,yo,1,1,1,-Math.PI/2));
+        if(HAS_F){ /* 21/11: sofa nhung lục bảo + ghế bành hiện đại + bàn đá tròn thật (W.FURN – có chỗ ngồi E) */ const FP=(k,rr,tt,o)=>{ const q=XZ(rr,tt); try{ FURN.place(k,{x:q[0], y:Y0, z:q[1], ...o}); }catch(e){} };
+          FP('sofa',r+1.55,t,{yaw:yo+Math.PI, w:2.5, material:'velvet:#1e4637', frame:'gold'}); FP('sofa',r-1.55,t,{yaw:yo, w:2.5, material:'velvet:#1e4637', frame:'gold'});
+          FP('armchairModern',r,t+3.3,{yaw:yo+Math.PI/2, material:'velvet:#c9a24a'}); FP('armchairModern',r,t-3.3,{yaw:yo-Math.PI/2, material:'velvet:#c9a24a'}); FP('coffeeTableRound',r,t,{yaw:yo, top:'marble', frame:'gold'}); FP('floorLamp',r+1.9,t+2.9,{yaw:yo}); }
+        else { SL.put(M.marble, tbl, M4(x,Y0+.01,z)); SL.put(M.gold, new THREE.TorusGeometry(.62,.025,6,32), M4(x,Y0+.46,z,0,1,1,1,Math.PI/2));
+          for(const [dr,dt,ry,g] of [[1.55,0,Math.PI,sof],[-1.55,0,0,sof],[0,3.3,Math.PI/2,arm],[0,-3.3,-Math.PI/2,arm]]){ const p=XZ(r+dr,t+dt); SL.put(M.emer, g, M4(p[0],Y0,p[1],yo+ry)); STATIC.circ.push({x:p[0],z:p[1],r:g===sof?.9:.55,y0:Y0-.3,y1:Y0+1}); } STATIC.circ.push({x,z,r:.65,y0:Y0-.3,y1:Y0+.5}); } }
+      if(HAS_F) for(const t of [-50,-24,34,50,130,154,206,230]){ const q=XZ(28.7,t); try{ FURN.place('plantTall',{x:q[0], y:Y0, z:q[1], yaw:t*.1, pot:'ceramic:#c9a24a', scale:1.25}); }catch(e){} }
       /* Grand Piano đen bóng viền vàng */ const [px,pz]=XZ(24.2,22), py=yawOut(22)+Math.PI*.85; PIANO.x=px; PIANO.z=pz; const pm=M4(px,Y0,pz,py);
       const ps=new THREE.Shape(); ps.moveTo(-.78,0); ps.lineTo(.78,0); ps.lineTo(.78,.9); ps.bezierCurveTo(.78,1.6,.2,1.55,.05,1.95); ps.bezierCurveTo(-.15,2.35,-.78,2.1,-.78,1.6); ps.lineTo(-.78,0);
       const pb=new THREE.ExtrudeGeometry(ps,{depth:.36, bevelEnabled:true, bevelThickness:.03, bevelSize:.03, bevelSegments:3}); pb.rotateX(-Math.PI/2); pb.translate(0,.62,0); SL.put(M.lacq, pb, pm);
@@ -418,15 +429,16 @@ export async function make(W, ctx={}){
       B.put(M.rug, new THREE.PlaneGeometry(3.6,2.8), at(26.6,tc-3.4,.02,0,1,1,1).multiply(M4(0,0,0,0,1,1,1,-Math.PI/2)));
       /* giường King (Deluxe) / giường tròn (Imperial) bọc lụa vàng, đầu giường nhung */
       const bt=t1-1.35/23.6/D, bm=at(23.6,bt,0,Math.PI/2);
-      if(!imp){ B.put(wood, rbox(2.1,.42,2.25,.06,2), bm.clone().multiply(M4(0,.21,0))); B.put(M.cream, rbox(1.98,.26,2.12,.1,3), bm.clone().multiply(M4(0,.55,0))); B.put(M.silk, rbox(2.04,.07,1.0,.03,2), bm.clone().multiply(M4(0,.71,.52)));
+      if(!HAS_F){ if(!imp){ B.put(wood, rbox(2.1,.42,2.25,.06,2), bm.clone().multiply(M4(0,.21,0))); B.put(M.cream, rbox(1.98,.26,2.12,.1,3), bm.clone().multiply(M4(0,.55,0))); B.put(M.silk, rbox(2.04,.07,1.0,.03,2), bm.clone().multiply(M4(0,.71,.52)));
         B.put(vel, rbox(2.4,1.45,.18,.07,3), bm.clone().multiply(M4(0,.95,-1.12))); for(const s of [-1,1]) B.put(M.cream, rbox(.62,.17,.4,.08,2), bm.clone().multiply(M4(s*.46,.76,-.78))); }
       else { B.put(wood, new THREE.CylinderGeometry(1.42,1.42,.42,40), bm.clone().multiply(M4(0,.21,0))); B.put(M.cream, lathe([[0,0],[1.34,0],[1.36,.12],[1.3,.26],[0,.27]],40), bm.clone().multiply(M4(0,.42,0)));
         B.put(M.silk, new THREE.CylinderGeometry(1.0,1.0,.04,32,1,false,-1.2,2.4), bm.clone().multiply(M4(0,.7,.25))); B.put(M.gold, new THREE.TorusGeometry(1.42,.04,6,48), bm.clone().multiply(M4(0,.42,0,0,1,1,1,Math.PI/2)));
         B.put(vel, new THREE.CylinderGeometry(1.6,1.6,1.5,24,1,true,Math.PI-.9,1.8), bm.clone().multiply(M4(0,.95,.3))); for(const s of [-1,1]) B.put(M.cream, rbox(.62,.17,.4,.08,2), bm.clone().multiply(M4(s*.42,.78,-.95))); }
       for(const s of [-1,1]){ const nm=bm.clone().multiply(M4(s*1.45,0,-.9)); B.put(wood, rbox(.5,.55,.45,.04,2), nm.clone().multiply(M4(0,.275,0))); B.put(M.gold, GEO.lamp, nm.clone().multiply(M4(0,.55,0))); B.put(M.glowSoft, GEO.shade, nm.clone().multiply(M4(0,.88,0))); }
       /* TV cong 100" + kệ */ const tm=at(23.6,t0+.16/23.6/D,0,-Math.PI/2); B.put(M.lacq, GEO.tvc, tm.clone().multiply(M4(0,1.55,.04))); B.put(M.screen, GEO.tvc, tm.clone().multiply(M4(0,1.55,.075,0,.97,.94,1))); B.put(wood, rbox(2.2,.48,.45,.04,2), tm.clone().multiply(M4(0,.24,.3)));
-      /* sofa da Ý + bàn đá + ghế bành + Jacuzzi mạ vàng sát kính + tủ rượu + lavabo */
-      B.put(M.leather, GEO.sofa, at(26.9,tc-2.5,0,Math.PI/2)); B.put(M.marble, GEO.ctab, at(26.9,tc-6.1,0)); B.put(M.leather, GEO.arm, at(28.4,tc-7.4,0,Math.PI));
+      /* sofa da Ý + bàn đá + ghế bành */
+      B.put(M.leather, GEO.sofa, at(26.9,tc-2.5,0,Math.PI/2)); B.put(M.marble, GEO.ctab, at(26.9,tc-6.1,0)); B.put(M.leather, GEO.arm, at(28.4,tc-7.4,0,Math.PI)); }   /* có W.FURN: các món này đặt theo phòng ở gần (furnPlan) */
+      /* Jacuzzi mạ vàng sát kính + tủ rượu + lavabo (thư viện chưa có – giữ bản dựng riêng) */
       const jm=at(27.85,t1-3.3,0); B.put(M.gold, GEO.tub, jm); B.put(M.water, new THREE.CircleGeometry(.86,28), jm.clone().multiply(M4(0,.5,0,0,1,1,1,-Math.PI/2))); B.put(M.gold, new THREE.TorusGeometry(1.0,.05,6,40), jm.clone().multiply(M4(0,.62,0,0,1,1,1,Math.PI/2)));
       const wm=at(20.72,tc+1,0); B.put(wood, rbox(1.1,1.9,.46,.04,2), wm.clone().multiply(M4(0,.95,0))); B.put(M.rail, new THREE.PlaneGeometry(.9,1.6), wm.clone().multiply(M4(0,1.0,.24))); for(let r=0;r<4;r++) for(let c=0;c<4;c++) B.put(M.glowSoft, new THREE.CylinderGeometry(.035,.035,.3,6), wm.clone().multiply(M4(-.33+c*.22,.42+r*.38,.05,0,1,1,1,Math.PI/2)));
       const lv=at(20.55,t1-2.3,0); B.put(M.marble, rbox(1.3,.12,.55,.03,2), lv.clone().multiply(M4(0,.86,0))); B.put(wood, rbox(1.2,.8,.5,.04,2), lv.clone().multiply(M4(0,.4,0))); B.put(M.cream, GEO.basin, lv.clone().multiply(M4(0,.92,.02))); B.put(M.gold, tube([[0,.92,-.2],[0,1.12,-.2],[0,1.14,-.08],[0,1.06,-.02]],.018,5), lv); B.put(M.chrome, new THREE.PlaneGeometry(1.1,1.0), lv.clone().multiply(M4(0,1.75,-.22)));
@@ -445,22 +457,22 @@ export async function make(W, ctx={}){
   function buildPent(k, g){ const B=Bins(), y=Yf(k);
     B.put(M.floorWood, sector(R_COR+.08,R_GL-.06,-59.8,59.8,y+.012,true,2.5,2)); B.put(M.rug, sector(17.8,19.9,-59.5,59.5,y+.014,true,2.5,1.2));
     if(k===22){ B.put(M.rug, new THREE.PlaneGeometry(5,4), at(25.4,-14,y+.02,0).multiply(M4(0,0,0,0,1,1,1,-Math.PI/2)));
-      B.put(M.bord, GEO.sofaL, at(27.3,-14,y,Math.PI)); B.put(M.bord, GEO.sofaL, at(25.4,-21.5,y,-Math.PI/2)); B.put(M.marble, GEO.ctab, at(25.4,-14,y,0).multiply(M4(0,0,0,0,1.4,1,1.4)));
+      if(!HAS_F){ B.put(M.bord, GEO.sofaL, at(27.3,-14,y,Math.PI)); B.put(M.bord, GEO.sofaL, at(25.4,-21.5,y,-Math.PI/2)); B.put(M.marble, GEO.ctab, at(25.4,-14,y,0).multiply(M4(0,0,0,0,1.4,1,1.4)));
       const dm=at(24.6,14,y,Math.PI/2); B.put(M.mahog, rbox(3.6,.08,1.3,.04,2), dm.clone().multiply(M4(0,.76,0))); for(const lx of [-1.4,1.4]) B.put(M.gold, lathe([[.1,0],[.16,.05],[.06,.2],[.05,.72],[0,.72]],12), dm.clone().multiply(M4(lx,0,0)));
       for(let i=0;i<8;i++){ const lx=i<4?-1.35+i*.9:-1.35+(i-4)*.9, lz=i<4?-.9:.9; B.put(M.bord, GEO.chair, dm.clone().multiply(M4(lx,0,lz,i<4?0:Math.PI))); }
-      B.put(M.glowSoft, new THREE.TorusGeometry(.9,.05,6,32), dm.clone().multiply(M4(0,3.6,0,0,1,1,1,Math.PI/2)));
+      B.put(M.glowSoft, new THREE.TorusGeometry(.9,.05,6,32), dm.clone().multiply(M4(0,3.6,0,0,1,1,1,Math.PI/2))); }
       const bar=[]; for(let t=40;t<=54.01;t+=2) bar.push(XZ(21.6,t)); for(let t=54;t>=39.99;t-=2) bar.push(XZ(21.0,t)); B.put(M.mahog, extrude(slabShape(bar), y+1.08, .95)); B.put(M.gold, band(21.62,40,54,y+1.0,y+1.08,true,2));
-      for(let t=42;t<=52;t+=2.5) B.put(M.gold, GEO.stool, at(22.4,t,y)); B.put(M.lacq, GEO.tvc, at(28.6,-34,y,-Math.PI*.35).multiply(M4(0,1.7,0,0,1.15,1.15,1)));
+      if(!HAS_F) for(let t=42;t<=52;t+=2.5) B.put(M.gold, GEO.stool, at(22.4,t,y)); B.put(M.lacq, GEO.tvc, at(28.6,-34,y,-Math.PI*.35).multiply(M4(0,1.7,0,0,1.15,1.15,1)));
       /* cầu thang cong lên tầng 23: bậc gỗ óc chó nẹp LED vàng + cốn vàng + lan can kính + tay vịn */
       const SM=[], LM=[]; for(let i=0;i<ST_N;i++){ const tA=ST_T0+(ST_T1-ST_T0)*i/ST_N, tB=ST_T0+(ST_T1-ST_T0)*(i+1)/ST_N, ys=y+(i+1)*FH/ST_N; B.put(M.walnut, sector(ST_R0,ST_R1,tA-.05,tB+.05,ys,true,1,1)); B.put(M.walnut, band(ST_R1,tA,tB,ys-.2,ys,true,1)); B.put(M.walnut, band(ST_R0,tA,tB,ys-.2,ys,false,1)); B.put(M.walnut, sector(ST_R0,ST_R1,tA-.05,tB+.05,ys-.2,false,1,1));
         const a=XZ(ST_R0,tA), b=XZ(ST_R1,tA); B.put(M.glow, quad([a[0],ys-.2,a[1]],[b[0],ys-.2,b[1]],[b[0],ys-.17,b[1]],[a[0],ys-.17,a[1]])); }
       for(const r of [ST_R0-.05,ST_R1+.05]){ const yf=t=>y+FH*(t-ST_T0)/(ST_T1-ST_T0); B.put(M.rail, band(r,ST_T0,ST_T1,yf,t=>yf(t)+1.0,r>22,1)); const hp=[]; for(let t=ST_T0;t<=ST_T1+1e-6;t+=2){ const [x,z]=XZ(r,t); hp.push([x,yf(t)+1.05,z]); } B.put(M.gold, tube(hp,.03,6)); const sp=[]; for(let t=ST_T0;t<=ST_T1+1e-6;t+=2){ const [x,z]=XZ(r,t); sp.push([x,yf(t)-.3,z]); } B.put(M.gold, tube(sp,.07,6)); } }
     else { /* tầng 23: phòng ngủ chủ – giường tròn lụa vàng, Jacuzzi mạ vàng sát kính, TV cong, tủ quần áo, bàn trang điểm */
-      const bm=at(24.8,18,y,Math.PI/2); B.put(M.mahog, new THREE.CylinderGeometry(1.7,1.7,.45,48), bm.clone().multiply(M4(0,.225,0))); B.put(M.cream, lathe([[0,0],[1.62,0],[1.64,.14],[1.56,.3],[0,.31]],48), bm.clone().multiply(M4(0,.45,0)));
-      B.put(M.silk, new THREE.CylinderGeometry(1.25,1.25,.04,32,1,false,-1.2,2.4), bm.clone().multiply(M4(0,.77,.3))); B.put(M.gold, new THREE.TorusGeometry(1.7,.05,6,56), bm.clone().multiply(M4(0,.45,0,0,1,1,1,Math.PI/2))); B.put(M.bord, new THREE.CylinderGeometry(1.95,1.95,1.7,24,1,true,Math.PI-.95,1.9), bm.clone().multiply(M4(0,1.05,.3)));
+      if(!HAS_F){ const bm=at(24.8,18,y,Math.PI/2); B.put(M.mahog, new THREE.CylinderGeometry(1.7,1.7,.45,48), bm.clone().multiply(M4(0,.225,0))); B.put(M.cream, lathe([[0,0],[1.62,0],[1.64,.14],[1.56,.3],[0,.31]],48), bm.clone().multiply(M4(0,.45,0)));
+      B.put(M.silk, new THREE.CylinderGeometry(1.25,1.25,.04,32,1,false,-1.2,2.4), bm.clone().multiply(M4(0,.77,.3))); B.put(M.gold, new THREE.TorusGeometry(1.7,.05,6,56), bm.clone().multiply(M4(0,.45,0,0,1,1,1,Math.PI/2))); B.put(M.bord, new THREE.CylinderGeometry(1.95,1.95,1.7,24,1,true,Math.PI-.95,1.9), bm.clone().multiply(M4(0,1.05,.3))); }
       const jm=at(27.4,44,y,0); B.put(M.gold, GEO.tub, jm.clone().multiply(M4(0,0,0,0,1.35,1,1.35))); B.put(M.water, new THREE.CircleGeometry(1.16,28), jm.clone().multiply(M4(0,.5,0,0,1,1,1,-Math.PI/2)));
-      B.put(M.lacq, GEO.tvc, at(23.6,4.2,y,-Math.PI/2).multiply(M4(0,1.6,.04,0,1.15,1.15,1))); B.put(M.screen, GEO.tvc, at(23.6,4.2,y,-Math.PI/2).multiply(M4(0,1.6,.08,0,1.1,1.08,1)));
-      for(let t=-26;t<=-14;t+=3) B.put(M.mahog, rbox(1.2,2.4,.6,.04,2), at(20.5,t,y).multiply(M4(0,1.2,0))); B.put(M.leather, GEO.arm, at(28.2,-6,y,Math.PI)); B.put(M.leather, GEO.arm, at(28.2,2,y,Math.PI));
+      if(!HAS_F){ B.put(M.lacq, GEO.tvc, at(23.6,4.2,y,-Math.PI/2).multiply(M4(0,1.6,.04,0,1.15,1.15,1))); B.put(M.screen, GEO.tvc, at(23.6,4.2,y,-Math.PI/2).multiply(M4(0,1.6,.08,0,1.1,1.08,1)));
+      for(let t=-26;t<=-14;t+=3) B.put(M.mahog, rbox(1.2,2.4,.6,.04,2), at(20.5,t,y).multiply(M4(0,1.2,0))); B.put(M.leather, GEO.arm, at(28.2,-6,y,Math.PI)); B.put(M.leather, GEO.arm, at(28.2,2,y,Math.PI)); }
       const ring=[]; for(let t=-50;t<=-31.5;t+=2) ring.push([...XZ(21.5,t)]); for(const r of [21.5,23.5]){ const hp=[]; for(let t=-49.5;t<=-32+1e-6;t+=2){ const [x,z]=XZ(r,t); hp.push([x,y+1.05,z]); } B.put(M.rail, band(r,-49.5,-32,y+.02,y+1.0,r>22,2)); B.put(M.gold, tube(hp,.03,6)); }
       { const a=XZ(21.5,-49.5), b=XZ(23.5,-49.5); B.put(M.rail, quad([a[0],y+.02,a[1]],[b[0],y+.02,b[1]],[b[0],y+1,b[1]],[a[0],y+1,a[1]])); } }
     flushTo(B,g); }
@@ -475,14 +487,14 @@ export async function make(W, ctx={}){
     if(k===2){ /* BUFFET (Đông) */ for(const [a,b] of [[-46,-16],[16,46]]){ const pts=[]; for(let t=a;t<=b+1e-6;t+=2) pts.push(XZ(22.6,t)); for(let t=b;t>=a-1e-6;t-=2) pts.push(XZ(21.6,t)); B.put(M.marble, extrude(slabShape(pts), y+.92, .85)); B.put(M.gold, band(22.62,a,b,y+.84,y+.92,true,2));
         const sg=[]; for(let t=a;t<=b+1e-6;t+=2){ const [x,z]=XZ(22.1,t); sg.push([x,y+1.42,z]); } B.put(M.gold, tube(sg,.025,5)); B.put(M.rail, band(22.1,a,b,y+1.0,y+1.4,true,2)); for(let t=a+2;t<b;t+=3){ B.put(M.glowSoft, rbox(.6,.08,.42,.03,1), at(22.1,t,y+.98)); B.put(M.chrome, new THREE.SphereGeometry(.28,12,6,0,TAU,0,Math.PI/2), at(22.1,t,y+1.02,0,1,.6,1)); }
         arcSegs(C, 22.1, a, b, y-.3, y+1.2, '🍽️ Quầy buffet', [], 3, .55); }
-      for(const t of [-52,-36,-22,22,36,52]) for(const r of [26.6]){ const m=at(r,t,y); B.put(M.cream, new THREE.CylinderGeometry(.75,.75,.05,28), m.clone().multiply(M4(0,.76,0))); B.put(M.gold, lathe([[.3,0],[.36,.04],[.08,.12],[.06,.74],[0,.74]],14), m); B.put(M.glowSoft, new THREE.SphereGeometry(.07,8,6), m.clone().multiply(M4(0,.86,0)));
+      if(!HAS_F) for(const t of [-52,-36,-22,22,36,52]) for(const r of [26.6]){ const m=at(r,t,y); B.put(M.cream, new THREE.CylinderGeometry(.75,.75,.05,28), m.clone().multiply(M4(0,.76,0))); B.put(M.gold, lathe([[.3,0],[.36,.04],[.08,.12],[.06,.74],[0,.74]],14), m); B.put(M.glowSoft, new THREE.SphereGeometry(.07,8,6), m.clone().multiply(M4(0,.86,0)));
         for(let i=0;i<4;i++){ const a2=i*Math.PI/2+.4; B.put(M.bord, GEO.chair, m.clone().multiply(M4(Math.cos(a2)*1.05,0,Math.sin(a2)*1.05,-a2-Math.PI/2))); } cAt(r,t,1.25,1.1); }
       amenItem(2,{w:'E', r:21, t:-30, label:'🍽️ Ăn buffet hải sản & bò Wagyu – 250 💰 (E)', cost:250, msg:'🍽️ Ngon tuyệt! Tôm hùm, bò Wagyu, sushi… Năng lượng đầy ắp.'});
       /* HẦM RƯỢU (Tây) */ const BR2=[]; for(const [a,b] of [[124,154],[206,236]]) for(let t=a;t<=b;t+=3.2) for(const r of [20.6,21.5]) for(let h=0;h<2;h++) BR2.push([r,t,h]);
       for(const [r,t,h] of BR2) B.put(M.walnut, GEO.barrel, at(r,t,y+.05+h*.92,0,1,1,1).multiply(M4(0,.46,0,0,1,1,1,Math.PI/2)));
       for(const [a,b] of [[124,154],[206,236]]) arcSegs(C, 21.05, a, b, y-.3, y+1.9, '🍷 Giá thùng rượu sồi', [], 3, .6);
       for(const t of [140,160,200,220]){ const m=at(25,t,y,Math.PI/2); B.put(M.mahog, rbox(3.2,2.4,.4,.03,2), m.clone().multiply(M4(0,1.2,0))); for(let r2=0;r2<5;r2++) for(let c2=0;c2<12;c2++) B.put(r2%2?M.glowSoft:M.bord, new THREE.CylinderGeometry(.04,.04,.28,6), m.clone().multiply(M4(-1.4+c2*.255,.35+r2*.45,.12,0,1,1,1,Math.PI/2))); const p=XZ(25,t); radSegs(C,t,23.4,26.6,y-.3,y+2.4,'🍷 Kệ rượu vang'); void p; }
-      { const pts=[]; for(let t=172;t<=188.01;t+=2) pts.push(XZ(25.6,t)); for(let t=188;t>=171.99;t-=2) pts.push(XZ(24.9,t)); B.put(M.mahog, extrude(slabShape(pts), y+1.08, .95)); B.put(M.gold, band(24.88,172,188,y+1.0,y+1.08,false,2)); for(let t=174;t<=186;t+=4) B.put(M.gold, GEO.stool, at(24.1,t,y)); arcSegs(C, 25.25, 172, 188, y-.3, y+1.2, '🍷 Quầy nếm rượu', [], 2, .45); }
+      { const pts=[]; for(let t=172;t<=188.01;t+=2) pts.push(XZ(25.6,t)); for(let t=188;t>=171.99;t-=2) pts.push(XZ(24.9,t)); B.put(M.mahog, extrude(slabShape(pts), y+1.08, .95)); B.put(M.gold, band(24.88,172,188,y+1.0,y+1.08,false,2)); if(!HAS_F) for(let t=174;t<=186;t+=4) B.put(M.gold, GEO.stool, at(24.1,t,y)); arcSegs(C, 25.25, 172, 188, y-.3, y+1.2, '🍷 Quầy nếm rượu', [], 2, .45); }
       amenItem(2,{w:'W', r:23.6, t:180, label:'🍷 Nếm rượu vang 3 loại – 180 💰 (E)', cost:180, msg:'🍷 Vang đỏ thơm mùi gỗ sồi… sommelier gật gù.'}); }
     if(k===3){ /* SPA (Đông): giường massage, bể sục, phòng xông hơi */ for(const t of [-46,-32,32,46]){ const m=at(24.6,t,y,0); B.put(M.walnut, rbox(.85,.62,2.0,.05,2), m.clone().multiply(M4(0,.31,0))); B.put(M.cream, rbox(.8,.14,1.95,.07,2), m.clone().multiply(M4(0,.69,0))); B.put(M.emer, rbox(.4,.12,.5,.05,2), m.clone().multiply(M4(0,.82,-.7))); cAt(24.6,t,1.0,1); }
       { const m=at(25,-14,y); B.put(M.marble, lathe([[0,0],[1.75,0],[1.8,.08],[1.8,.62],[1.66,.66],[1.58,.12],[0,.12]],32), m); B.put(M.water, new THREE.CircleGeometry(1.6,32), m.clone().multiply(M4(0,.55,0,0,1,1,1,-Math.PI/2))); B.put(M.gold, new THREE.TorusGeometry(1.75,.05,6,48), m.clone().multiply(M4(0,.66,0,0,1,1,1,Math.PI/2))); cAt(25,-14,1.85,1); }
@@ -499,21 +511,81 @@ export async function make(W, ctx={}){
         const p=XZ(24.6,t); C.push(...rectSegs(p[0],p[1],yawOut(t)+Math.PI/2,1.5,.78,y-.3,y+1.0,'🎱 Bàn bida mạ vàng')); }
       BIL.y=y; { const m=at(24.6,-18,y,Math.PI/2); BIL.m=m; }
       amenItem(4,{w:'E', r:22.4, t:-18, label:'🎱 Đánh một cơ Bida 3 băng (E)', cost:0, act:()=>BIL.shot()});
-      /* LOUNGE XÌ-GÀ & THƯ VIỆN (Tây): sofa da Chesterfield + giá sách */ for(const t of [140,165,195,220]){ B.put(M.leather, GEO.sofa, at(26.6,t,y,Math.PI)); B.put(M.marble, GEO.ctab, at(25,t,y)); B.put(M.leather, GEO.arm, at(23.4,t,y,0)); cAt(26.6,t,1.25,1); cAt(25,t,.6,.5); cAt(23.4,t,.6,1); }
-      for(const t of [128,232]){ const m=at(24.5,t,y,Math.PI/2); B.put(M.walnut, rbox(4,2.6,.4,.03,2), m.clone().multiply(M4(0,1.3,0))); for(let r2=0;r2<5;r2++) for(let c2=0;c2<14;c2++) B.put([M.bord,M.emer,M.leather][(r2*3+c2)%3], rbox(.12,.36+((c2*5)%3)*.04,.28,.01,1), m.clone().multiply(M4(-1.75+c2*.26,.32+r2*.5,.05))); radSegs(C,t,22.4,26.6,y-.3,y+2.6,'📚 Giá sách'); }
+      /* LOUNGE XÌ-GÀ & THƯ VIỆN (Tây): sofa da Chesterfield + giá sách */ if(!HAS_F) for(const t of [140,165,195,220]){ B.put(M.leather, GEO.sofa, at(26.6,t,y,Math.PI)); B.put(M.marble, GEO.ctab, at(25,t,y)); B.put(M.leather, GEO.arm, at(23.4,t,y,0)); cAt(26.6,t,1.25,1); cAt(25,t,.6,.5); cAt(23.4,t,.6,1); }
+      if(!HAS_F) for(const t of [128,232]){ const m=at(24.5,t,y,Math.PI/2); B.put(M.walnut, rbox(4,2.6,.4,.03,2), m.clone().multiply(M4(0,1.3,0))); for(let r2=0;r2<5;r2++) for(let c2=0;c2<14;c2++) B.put([M.bord,M.emer,M.leather][(r2*3+c2)%3], rbox(.12,.36+((c2*5)%3)*.04,.28,.01,1), m.clone().multiply(M4(-1.75+c2*.26,.32+r2*.5,.05))); radSegs(C,t,22.4,26.6,y-.3,y+2.6,'📚 Giá sách'); }
       amenItem(4,{w:'W', r:24.4, t:180, label:'📚 Đọc sách · thưởng trà Ô long (E)', cost:0, msg:'📚 Một góc yên tĩnh nhìn ra vịnh – thư thái.'}); }
     if(k===5){ /* POOL BAR (Đông, sát cửa ra hồ) + PHÒNG THAY ĐỒ (Tây) */ const pts=[]; for(let t=-50;t<=-28.01;t+=2) pts.push(XZ(24.6,t)); for(let t=-28;t>=-50.01;t-=2) pts.push(XZ(23.8,t)); B.put(M.teak, extrude(slabShape(pts), y+1.08, .95)); B.put(M.gold, band(23.78,-50,-28,y+1.0,y+1.08,false,2));
-      for(let t=-48;t<=-30;t+=4.5) B.put(M.gold, GEO.stool, at(22.9,t,y)); for(let t=-49;t<=-29;t+=1.2) B.put(t%2.4<1.2?M.glowSoft:M.emer, new THREE.CylinderGeometry(.04,.04,.3,6), at(25.2,t,y+1.25)); arcSegs(C, 24.2, -50, -28, y-.3, y+1.2, '🍹 Quầy bar hồ bơi', [], 2, .45);
+      if(!HAS_F) for(let t=-48;t<=-30;t+=4.5) B.put(M.gold, GEO.stool, at(22.9,t,y)); for(let t=-49;t<=-29;t+=1.2) B.put(t%2.4<1.2?M.glowSoft:M.emer, new THREE.CylinderGeometry(.04,.04,.3,6), at(25.2,t,y+1.25)); arcSegs(C, 24.2, -50, -28, y-.3, y+1.2, '🍹 Quầy bar hồ bơi', [], 2, .45);
       amenItem(5,{w:'E', r:22.4, t:-39, label:'🍹 Gọi nước dừa tươi – 40 💰 (E)', cost:40, msg:'🥥 Nước dừa mát lạnh – ra hồ bơi phía Bắc thôi!'});
       for(let t=206;t<=236;t+=1.4) B.put(M.walnut, rbox(.5,2.0,.5,.02,1), at(20.6,t,y).multiply(M4(0,1.0,0))); arcSegs(C, 20.6, 205, 237, y-.3, y+2, '🔐 Tủ đồ', [], 3, .3);
-      for(const t of [215,228]){ B.put(M.teak, rbox(2.2,.08,.45,.03,1), at(23,t,y,Math.PI/2).multiply(M4(0,.45,0))); cAt(23,t,.6,.6); }
+      if(!HAS_F) for(const t of [215,228]){ B.put(M.teak, rbox(2.2,.08,.45,.03,1), at(23,t,y,Math.PI/2).multiply(M4(0,.45,0))); cAt(23,t,.6,.6); }
       amenItem(5,{w:'W', r:22.6, t:220, label:'🩱 Thay đồ bơi + lấy khăn (E)', cost:0, msg:'🩱 Đã thay đồ bơi – ra cửa cuối hành lang phía Bắc tới hồ bơi vô cực.'}); }
-    if(k===24){ /* SKY LOUNGE & BAR (2 cánh) */ for(const [a,b] of [[-30,-8],[188,210]]){ const pts=[]; for(let t=a;t<=b+1e-6;t+=2) pts.push(XZ(22.2,t)); for(let t=b;t>=a-1e-6;t-=2) pts.push(XZ(21.4,t)); B.put(M.mahog, extrude(slabShape(pts), y+1.08, .95)); B.put(M.gold, band(22.22,a,b,y+1.0,y+1.08,true,2)); for(let t=a+2;t<b;t+=4) B.put(M.gold, GEO.stool, at(23,t,y)); arcSegs(C, 21.8, a, b, y-.3, y+1.2, '🍸 Quầy bar Sky Lounge', [], 2, .45); }
-      for(const t of [-48,26,44,138,158,226]){ B.put(M.bord, GEO.sofa, at(27.6,t,y,Math.PI)); B.put(M.marble, GEO.ctab, at(26.1,t,y)); cAt(27.6,t,1.25,1); cAt(26.1,t,.6,.5); }
+    if(k===24){ /* SKY LOUNGE & BAR (2 cánh) */ for(const [a,b] of [[-30,-8],[188,210]]){ const pts=[]; for(let t=a;t<=b+1e-6;t+=2) pts.push(XZ(22.2,t)); for(let t=b;t>=a-1e-6;t-=2) pts.push(XZ(21.4,t)); B.put(M.mahog, extrude(slabShape(pts), y+1.08, .95)); B.put(M.gold, band(22.22,a,b,y+1.0,y+1.08,true,2)); if(!HAS_F) for(let t=a+2;t<b;t+=4) B.put(M.gold, GEO.stool, at(23,t,y)); arcSegs(C, 21.8, a, b, y-.3, y+1.2, '🍸 Quầy bar Sky Lounge', [], 2, .45); }
+      if(!HAS_F) for(const t of [-48,26,44,138,158,226]){ B.put(M.bord, GEO.sofa, at(27.6,t,y,Math.PI)); B.put(M.marble, GEO.ctab, at(26.1,t,y)); cAt(27.6,t,1.25,1); cAt(26.1,t,.6,.5); }
       amenItem(24,{w:'E', r:23.6, t:-19, label:'🍸 Gọi cocktail hoàng hôn – 120 💰 (E)', cost:120, msg:'🍸 Cocktail "Royal Lotus" – ngắm vịnh từ độ cao 110 m.'}); amenItem(24,{w:'W', r:23.6, t:199, label:'🍸 Gọi rượu vang sủi – 120 💰 (E)', cost:120, msg:'🥂 Chúc mừng! Ánh đèn vịnh lấp lánh bên dưới.'}); }
     flushTo(B,g); g.position.y=0; return C; }
   const BIL={y:0, m:null, balls:null, t:0, shot(){ if(!BIL.balls) return; const a=Math.random()*TAU, sp=2.4+Math.random()*1.4; BIL.balls[0].vx=Math.cos(a)*sp; BIL.balls[0].vz=Math.sin(a)*sp; BIL.t=7; toast('🎱 Cốc! Bi trắng lao đi trên bàn mạ vàng…',2200); }};
   function rectSegs(cx,cz,ry,hw,hd,y0,y1,msg){ const c=Math.cos(ry), s=Math.sin(ry), Pt=(lx,lz)=>[cx+lx*c+lz*s, cz-lx*s+lz*c], K=[Pt(-hw,-hd),Pt(hw,-hd),Pt(hw,hd),Pt(-hw,hd)], o=[]; for(let i=0;i<4;i++){ const a=K[i], b=K[(i+1)%4]; o.push(mkS(a[0],a[1],b[0],b[1],.08,y0,y1,msg)); } return o; }
+
+  /* ============================== 13b. ĐẶT NỘI THẤT W.FURN THEO TẦNG ĐANG ĐỨNG (21/11) ==============================
+     • Tầng phòng: chỉ bày phòng gần người chơi (±1 phòng cùng cánh) + phòng đã thuê – cửa phòng khác đóng nên không thấy bên trong; giữ lượt vẽ ≤ ngân sách.
+     • Penthouse 22–23, tầng tiện ích 2–5, Sky Lounge 24: bày đủ.  Sảnh tầng 1 đặt cố định ở mục 10.
+     • Va chạm của từng món (W.FURN tự tính) đưa vào danh sách riêng của tầng → bật/tắt cùng cơ chế cửa sổ tầng; chỗ ngồi / nằm (W.addSeat) gỡ khi rời tầng.
+     • Đổi tầng / đổi phòng: chờ ổn định 0,4 s và không đang đi thang máy mới dựng lại (đi ngang nhiều tầng không dựng thừa). */
+  const locW=(bx,bz,yaw,lx,lz)=>{ const c=Math.cos(yaw), sn=Math.sin(yaw); return [bx+lx*c+lz*sn, bz-lx*sn+lz*c]; };
+  function furnPlan(f, nearRooms){ const L=[], y=Yf(f), P_=(kind,x,z,o={})=>L.push([kind,{x, z, y, ...o}]), PR_=(kind,r,t,o={})=>{ const [x,z]=XZ(r,t); P_(kind,x,z,o); };
+    if(isRoomFloor(f)){ for(const w of WINGS){ if(isPent(w,f)) continue; const T=TH[typeOf(w,f)];
+        for(let j=0;j<6;j++){ if(!nearRooms.has(w.key+j)) continue; const {t0,t1,tc}=room(w,j), B=T.bed;
+          const bt=t1-(B.d/2+.16)/23.6/D, [bx,bz]=XZ(23.6,bt), by=yawOut(bt)+Math.PI/2;
+          P_('bed',bx,bz,{yaw:by, w:B.w, d:B.d, material:B.material, head:B.head, frame:B.frame, accent:B.accent, label:'🛏️ Nằm giường lụa vàng (E · C)'});
+          for(const sg of [-1,1]){ const [nx,nz]=locW(bx,bz,by,sg*(B.w/2+.36),-B.d/2+.26); P_('nightstand',nx,nz,{yaw:by, material:T.wood, front:T.wood, metal:'brass'}); P_('tableLamp',nx,nz,{y:y+.7, yaw:by}); }
+          { const [ox,oz]=locW(bx,bz,by,0,B.d/2+.42); P_('ottoman',ox,oz,{yaw:by, w:1.3, ...T.ott}); }
+          if(j<5){ const [px,pz]=XZ(23.6,t1-.09/23.6/D); P_('picture',px,pz,{y:y+2.05, yaw:yawOut(t1)+Math.PI/2, scale:2.2}); }
+          { const [tx,tz]=XZ(23.6,t0+.09/23.6/D); P_('tvWall',tx,tz,{y:y+1.6, yaw:yawOut(t0)-Math.PI/2, w:2.2, h:1.25}); const [sx,sz]=XZ(23.6,t0+.3/23.6/D); P_('tvStand',sx,sz,{yaw:yawOut(t0)-Math.PI/2, w:2.0, material:T.wood, front:T.wood, top:T.wood, metal:'brass'}); }
+          /* góc tiếp khách chừa LỐI THẲNG tới cửa ban công (θ tc−5…tc−1,4): sofa giữa lối và Jacuzzi nhìn về TV, ghế bành bên kia lối */
+          PR_('sofa',27.0,tc+2.4,{yaw:yawOut(tc+2.4)+Math.PI/2, ...T.sofa, frame:'brass'}); PR_('sideTableTall',28.75,tc+2.4,{yaw:0});
+          PR_('armchair',28.5,tc-7.1,{yaw:yawOut(tc-7.1)-Math.PI/2, ...T.arm}); PR_('floorLamp',28.9,tc-8.9,{yaw:0, frame:'brass'}); PR_('plantTall',28.9,tc+.2,{yaw:j, pot:'ceramic:#c9a24a', scale:1.15}); } } }
+    if(f===22){ const V='velvet:#591622';
+      PR_('sofaLong',27.3,-14,{yaw:yawOut(-14)+Math.PI, material:V, frame:'gold'}); PR_('sofaLong',25.2,-21.8,{yaw:yawOut(-21.8)-Math.PI/2, material:V, frame:'gold'});
+      PR_('coffeeTableRound',25.3,-14,{yaw:0, top:'marble', frame:'gold'}); PR_('armchairModern',23.0,-9.6,{yaw:yawOut(-9.6), material:'velvet:#c9a24a'}); PR_('armchairModern',23.0,-17.4,{yaw:yawOut(-17.4), material:'velvet:#c9a24a'});
+      PR_('floorLamp',28.7,-22.5,{frame:'gold'}); PR_('plantTall',28.8,-4.5,{pot:'ceramic:#c9a24a', scale:1.3}); PR_('plantTall',28.8,-29,{pot:'ceramic:#c9a24a', scale:1.3});
+      { const [dx,dz]=XZ(24.6,14), dy=yawOut(14); P_('diningTable',dx,dz,{yaw:dy, w:3.0, top:'walnut', frame:'gold'}); P_('chandelier',dx,dz,{y:Yf(23)-.44, frame:'gold'});
+        for(const lx of [-1.05,-.35,.35,1.05]) for(const sg of [-1,1]){ const [cx,cz]=locW(dx,dz,dy,lx,sg*.98); P_('diningChair',cx,cz,{yaw:dy+(sg>0?Math.PI:0), material:V, frame:'ebony'}); } }
+      for(let t=42;t<=52.01;t+=2.5) PR_('barStool',22.4,t,{yaw:yawOut(t)+Math.PI, material:'leather:#3b2a20'}); PR_('console',20.6,24,{yaw:yawOut(24), material:'ebony', front:'ebony', metal:'gold'}); }
+    if(f===23){ const B=TH.imperial.bed, bt=18, [bx,bz]=XZ(24.8,bt), by=yawOut(bt)+Math.PI/2;
+      P_('bed',bx,bz,{yaw:by, w:2.1, d:2.25, material:B.material, head:B.head, frame:B.frame, accent:B.accent, label:'🛏️ Nằm giường Royal Penthouse (E · C)'});
+      for(const sg of [-1,1]){ const [nx,nz]=locW(bx,bz,by,sg*1.42,-.85); P_('nightstand',nx,nz,{yaw:by, material:'ebony', front:'ebony', metal:'gold'}); P_('tableLamp',nx,nz,{y:Yf(23)+.7, yaw:by}); }
+      { const [ox,oz]=locW(bx,bz,by,0,1.55); P_('ottoman',ox,oz,{yaw:by, w:1.5, material:'velvet:#c9a24a'}); }
+      for(const t of [-26,-22.6,-19.2]) PR_('wardrobe',20.5,t,{yaw:yawOut(t), material:'ebony', front:'walnut', metal:'gold', h:2.4});
+      PR_('dresser',20.85,32,{yaw:yawOut(32), material:'walnut', front:'walnut', metal:'gold'}); { const [mx,mz]=XZ(20.17,32); P_('mirror',mx,mz,{y:Yf(23)+1.75, yaw:yawOut(32), scale:1.6}); }
+      PR_('armchair',28.2,-6,{yaw:yawOut(-6)+Math.PI, material:'leather:#3b2a20'}); PR_('armchair',28.2,2,{yaw:yawOut(2)+Math.PI, material:'leather:#3b2a20'}); PR_('sideTableTall',28.4,-2,{yaw:0});
+      { const tt=4.2, ty=yawOut(tt)-Math.PI/2; PR_('tvStand',23.4,tt,{yaw:ty, w:2.2, material:'ebony', front:'ebony', top:'ebony', metal:'gold'}); PR_('tv',23.4,tt,{y:Yf(23)+.5, yaw:ty, scale:1.6}); }
+      PR_('plantTall',28.8,10,{pot:'ceramic:#c9a24a', scale:1.3}); PR_('plantTall',28.8,30,{pot:'ceramic:#c9a24a', scale:1.3}); PR_('floorLamp',28.6,24,{frame:'gold'}); }
+    if(f===2){ for(const t of [-52,-36,-22,22,36,52]){ const [cx,cz]=XZ(26.6,t); P_('roundTable',cx,cz,{w:1.45, d:1.45, top:'marble', frame:'gold'});
+        for(let i=0;i<4;i++){ const a=i*Math.PI/2+.4, px=cx+Math.cos(a)*1.08, pz=cz+Math.sin(a)*1.08; P_('diningChair',px,pz,{yaw:Math.atan2(cx-px,cz-pz), material:'velvet:#591622', frame:'gold'}); } }
+      for(let t=174;t<=186.01;t+=4) PR_('barStool',24.1,t,{yaw:yawOut(t), material:'leather:#3b2a20'});
+      for(const t of [-9.5,9.5,128,232]) PR_('plantTall',28.8,t,{pot:'ceramic:#c9a24a', scale:1.3}); }
+    if(f===3){ for(const t of [-58,-24,24,58]) PR_('plantTall',28.8,t,{pot:'stone', scale:1.3}); for(const t of [-40,40]) PR_('ottoman',27.6,t,{yaw:yawOut(t), material:'velvet:#1e4637'}); }
+    if(f===4){ for(const t of [140,165,195,220]){ PR_('sofa',26.6,t,{yaw:yawOut(t)+Math.PI, material:'leather:#5a3420', frame:'brass'}); PR_('coffeeTable',25,t,{yaw:yawOut(t)+Math.PI, top:'walnut', frame:'brass'}); PR_('loungeChair',23.3,t,{yaw:yawOut(t), material:'leather:#3b2a20'}); PR_('floorLamp',27.6,t+5.5,{frame:'brass'}); }
+      for(const [t,sg] of [[128,-1],[232,1]]) for(const r of [22.9,23.95,25.0,26.05]) PR_('bookshelf',r,t,{yaw:yawOut(t)+sg*Math.PI/2, material:'walnut', h:2.3});
+      for(const t of [-58,-30,30,58]) PR_('plantTall',28.8,t,{pot:'ceramic:#c9a24a', scale:1.3}); }
+    if(f===5){ for(let t=-48;t<=-29.9;t+=4.5) PR_('barStool',22.9,t,{yaw:yawOut(t), material:'leather:#7a4a2c'}); for(const t of [215,228]) PR_('bench',23,t,{yaw:yawOut(t)+Math.PI/2, w:2.0, material:'teak'}); for(const t of [-58,-20,140,190]) PR_('plantTall',28.8,t,{pot:'terracotta', scale:1.3}); }
+    if(f===24){ for(const t of [-48,26,44,138,158,226]){ PR_('sofa',27.6,t,{yaw:yawOut(t)+Math.PI, material:'velvet:#591622', frame:'gold'}); PR_('coffeeTableGlass',26.1,t,{yaw:yawOut(t), frame:'gold'}); }
+      for(const [a,b] of [[-30,-8],[188,210]]) for(let t=a+2;t<b;t+=4) PR_('barStool',23,t,{yaw:yawOut(t)+Math.PI, material:'leather:#3b2a20'}); for(const t of [-58,10,170,236]) PR_('plantTall',28.8,t,{pot:'ceramic:#c9a24a', scale:1.3}); }
+    return L; }
+  const FL={key:'', want:'', t:0, h:[], C:null};
+  function furnApply(key, f, nearRooms){ if(FL.C){ turnOff(SEGS,FL.C.segs); turnOff(circles,FL.C.circ); if(W.boxes) turnOff(W.boxes,FL.C.boxes); }
+    for(const h of FL.h){ try{ h && h.remove && h.remove(); }catch(e){} } FL.h=[]; FL.C=null; FL.key=key; if(!HAS_F || f<2) return;
+    const C={segs:[], circ:[], boxes:[]}, col={boxes:C.boxes, circles:C.circ, addSeg:(ax,az,bx,bz,r,y0,y1,msg)=>{ const sg=mkS(ax,az,bx,bz,r||.15,y0,y1,msg); C.segs.push(sg); return sg; }};
+    for(const [kind,o] of furnPlan(f, nearRooms)){ try{ const h=FURN.place(kind,{...o, colliders:col}); if(h) FL.h.push(h); }catch(e){ console.warn('[abyssal_hotel] FURN', kind, e); } }
+    turnOn(SEGS,C.segs); turnOn(circles,C.circ); if(W.boxes) turnOn(W.boxes,C.boxes); FL.C=C; }
+  /* phòng gần: cùng cánh, |θ người chơi − tâm phòng| ≤ 22° (tối đa 2–3 phòng) + phòng đã thuê */
+  function nearRoomsOf(f){ const S=new Set(); if(!isRoomFloor(f)) return S; const th=Math.atan2(P.z-CZ,P.x-CX)/D;
+    for(const w of WINGS){ if(isPent(w,f)) continue; for(let j=0;j<6;j++){ const {tc}=room(w,j); let d=Math.abs(((th-tc)%360+540)%360-180); if(d<=22) S.add(w.key+j); } }
+    if(RENT && RENT.k===f && RENT.type!=='pent') S.add(RENT.w+RENT.j); return S; }
+  function furnTick(dt, f){ if(!HAS_F) return; const near=nearRoomsOf(f), key=f>=2 ? f+':'+[...near].sort().join(',') : '';
+    if(key!==FL.want){ FL.want=key; FL.t=0; } else FL.t+=dt;
+    if(FL.want!==FL.key && (FL.t>.4 || FL.want==='') && !HOOK.vehicle) furnApply(FL.want, f, near); }
 
   /* ============================== 14. DỮ LIỆU VA CHẠM TỪNG TẦNG (dựng lần đầu khi cần, chỉ tầng hiện tại ±1 nằm trong plats/SEGS/circles) ============================== */
   const FD={}, DOOR={}, posOf=m=>new THREE.Vector3().setFromMatrixPosition(m);
@@ -522,11 +594,11 @@ export async function make(W, ctx={}){
   let RENT=null;
   const rentedHere=(k,wk,j)=>!!RENT && RENT.k===k && RENT.w===wk && (RENT.type==='pent' || RENT.j===j);
   function roomColl(w,j,k,type){ const y=Yf(k), o=[], {t0,t1,tc}=room(w,j), y0=y-.3, imp=type==='imperial';
-    const bt=t1-1.35/23.6/D, bm=at(23.6,bt,y,Math.PI/2), bp=posOf(bm); o.push(...rectSegs(bp.x,bp.z,yawOut(bt)+Math.PI/2,imp?1.45:1.08,imp?1.45:1.15,y0,y+1.1,'🛏️ Giường'));
+    if(!HAS_F){ const bt=t1-1.35/23.6/D, bm=at(23.6,bt,y,Math.PI/2), bp=posOf(bm); o.push(...rectSegs(bp.x,bp.z,yawOut(bt)+Math.PI/2,imp?1.45:1.08,imp?1.45:1.15,y0,y+1.1,'🛏️ Giường'));
     for(const s of [-1,1]){ const p=posOf(bm.clone().multiply(M4(s*1.45,0,-.9))); o.push({x:p.x,z:p.z,r:.3,y0,y1:y+1.3}); }
     { const p=posOf(at(23.6,t0+.16/23.6/D,y,-Math.PI/2).multiply(M4(0,0,.3))); o.push({x:p.x,z:p.z,r:.5,y0,y1:y+.6}); }
-    { const p=posOf(at(26.9,tc-2.5,y)); o.push(...rectSegs(p.x,p.z,yawOut(tc-2.5)+Math.PI/2,1.2,.45,y0,y+1,'🛋️ Sofa')); }
-    for(const [r,t,rr] of [[26.9,tc-6.1,.5],[28.4,tc-7.4,.55],[27.85,t1-3.3,1.06],[20.72,tc+1,.6],[20.55,t1-2.3,.62]]){ const p=XZ(r,t); o.push({x:p[0],z:p[1],r:rr,y0,y1:y+1.6}); }
+    { const p=posOf(at(26.9,tc-2.5,y)); o.push(...rectSegs(p.x,p.z,yawOut(tc-2.5)+Math.PI/2,1.2,.45,y0,y+1,'🛋️ Sofa')); } }   /* có W.FURN: giường/sofa/tab/kệ TV tự va chạm (danh sách riêng của tầng hiện tại) */
+    for(const [r,t,rr] of (HAS_F?[]:[[26.9,tc-6.1,.5],[28.4,tc-7.4,.55]]).concat([[27.85,t1-3.3,1.06],[20.72,tc+1,.6],[20.55,t1-2.3,.62]])){ const p=XZ(r,t); o.push({x:p[0],z:p[1],r:rr,y0,y1:y+1.6}); }
     for(const dt of [3.6,6.6]){ const m=at(30.62,tc+dt,y); o.push(...rectSegs(posOf(m).x,posOf(m).z,yawOut(tc+dt),.34,.94,y0,y+.6,'🌴 Ghế tắm nắng')); }
     { const p=XZ(30.7,t0+2.2); o.push({x:p[0],z:p[1],r:.5,y0,y1:y+1.8}); const q=XZ(30.35,t1-1.2); o.push({x:q[0],z:q[1],r:.2,y0,y1:y+.8}); }
     return o; }
@@ -552,10 +624,10 @@ export async function make(W, ctx={}){
       if(isPent(w,k)){ arcSegs(S, R_COR, w.a0, w.a1, y0, y1, '🚪 Royal Penthouse – cửa chính cạnh sảnh thang', [[8,12.6]]); const a=XZ(R_COR,8), b=XZ(R_COR,12.6), ds=mkS(a[0],a[1],b[0],b[1],.1,y0,y1,'🔒 Royal Penthouse đã khoá – bấm E để thuê'); ds._y=[y0,y1]; S.push(ds); ((DOOR[k]=DOOR[k]||{}).P=ds); } }
     if(k===22){ for(let i=0;i<ST_N;i++){ const tA=ST_T0+(ST_T1-ST_T0)*i/ST_N, tB=ST_T0+(ST_T1-ST_T0)*(i+1)/ST_N; Pl.push(rectAt((ST_R0+ST_R1)/2,(tA+tB)/2,(tB-tA)*D*22.5/2+.04,(ST_R1-ST_R0)/2,y+(i+1)*FH/ST_N)); }
       for(const r of [ST_R0-.12,ST_R1+.12]) arcSegs(S, r, ST_T0, ST_T1, y0, Yf(23)-.05, '🪜 Lan can cầu thang penthouse', [], 2); radSegs(S, ST_T1, ST_R0-.1, ST_R1+.1, y0, y+2.2, '🪜 Gầm cầu thang');
-      for(const [r,t,rr] of [[27.3,-14,1.7],[25.4,-21.5,1.7],[25.4,-14,.8],[24.6,14,2.0],[24.2,30,1.4]]){ const p=XZ(r,t); C.push({x:p[0],z:p[1],r:rr,y0,y1:y+1.1}); } arcSegs(S, 21.3, 40, 54, y0, y+1.2, '🍸 Quầy bar penthouse', [], 2); }
+      if(!HAS_F) for(const [r,t,rr] of [[27.3,-14,1.7],[25.4,-21.5,1.7],[25.4,-14,.8],[24.6,14,2.0]]){ const p=XZ(r,t); C.push({x:p[0],z:p[1],r:rr,y0,y1:y+1.1}); } arcSegs(S, 21.3, 40, 54, y0, y+1.2, '🍸 Quầy bar penthouse', [], 2); }
     if(k===23){ for(const r of [21.5,23.5]) arcSegs(S, r, -49.5, -32, y0, y1, '🪜 Lan can giếng thang', [], 2);
       for(const r of [ST_R0-.12,ST_R1+.12]) arcSegs(S, r, ST_T0, ST_T1, Yf(22)-.3, y-.05, '🪜 Lan can cầu thang penthouse', [], 2);   /* (20/11) đứng nửa trên cầu thang đã tính là tầng 23 */ radSegs(S, -49.5, 21.4, 23.6, y0, y1, '🪜 Lan can giếng thang');
-      for(const [r,t,rr] of [[24.8,18,1.8],[27.4,44,1.4],[28.2,-6,.6],[28.2,2,.6]]){ const p=XZ(r,t); C.push({x:p[0],z:p[1],r:rr,y0,y1:y+1.1}); } arcSegs(S, 20.5, -27, -13, y0, y1, '🚪 Tủ quần áo', [], 2); }
+      for(const [r,t,rr] of (HAS_F?[[27.4,44,1.4]]:[[24.8,18,1.8],[27.4,44,1.4],[28.2,-6,.6],[28.2,2,.6]])){ const p=XZ(r,t); C.push({x:p[0],z:p[1],r:rr,y0,y1:y+1.1}); } if(!HAS_F) arcSegs(S, 20.5, -27, -13, y0, y1, '🚪 Tủ quần áo', [], 2); }
     for(const pl of POOLS) if(pl.k===k){ const sv=pl.inner<0?-1:1, rect=(u0,u1,v0,v1,h)=>Pl.push(mkR(CX+(u0+u1)/2,CZ+(v0+v1)/2,0,(u1-u0)/2+.04,(v1-v0)/2+.04,h)), vi=pl.inner, vo=pl.inner<0?pl.v0:pl.v1, ve=sv*(pl.rOut+1.2);
       rect(-13,13,Math.min(vi,sv*14.6),Math.max(vi,sv*14.6),y);   /* (20/11) ±13: phủ kín tới đầu 2 cánh (trước ±9,6 hở dải θ ±60…65°) */ rect(-pl.rOut*.52,pl.u0,Math.min(vi,ve),Math.max(vi,ve),y); rect(pl.u1,pl.rOut*.52,Math.min(vi,ve),Math.max(vi,ve),y); rect(pl.u0,pl.u1,Math.min(vo,ve),Math.max(vo,ve),y);
       rect(pl.u0+.02,pl.u1-.02,pl.v0+.02,pl.v1-.02,y-1.25); for(let i=0;i<2;i++){ const za=vi+sv*i*.9, zb=za+sv*.9; rect(-1.5,1.5,Math.min(za,zb),Math.max(za,zb),y-.45-.4*i); }
@@ -657,11 +729,12 @@ export async function make(W, ctx={}){
   function makeBalls(){ if(!BIL.m) return; const R=.031, cols=[0xe9e2d0,0xf2c230,0xc8231c]; BIL.balls=cols.map((c,i)=>{ const m=new THREE.Mesh(new THREE.SphereGeometry(R,14,10), new THREE.MeshStandardMaterial({color:c, roughness:.15})); m.userData.dynamic=true; const g=IG.get('amen4'); (g||root).add(m); m.userData.lx=-.5+i*.35; m.userData.lz=(i-1)*.18; return {m, x:-.5+i*.35, z:(i-1)*.18, vx:0, vz:0}; }); placeBalls(); }
   function placeBalls(){ for(const b of BIL.balls){ const p=new THREE.Vector3(b.x,.86,b.z).applyMatrix4(BIL.m); b.m.position.copy(p); } }
   HOOK.onFrame.push((dt)=>{ dt=Math.min(dt||1/60,.1); tt+=dt; const dx=P.x-CX, dz=P.z-CZ, dH=D2(dx,dz), far=dH>520;
-    mid.visible=dH<460; lobby.visible=dH<62 && P.y<Y0+31; if(far){ if(WIN.length || WINS.length) setWindow([],0); curF=-1; return; }
+    mid.visible=dH<460; lobby.visible=dH<62 && P.y<Y0+31; if(far){ if(WIN.length || WINS.length) setWindow([],0); curF=-1; if(FL.key) furnApply('',0,null); return; }
     /* tầng hiện tại + cửa sổ va chạm ±1 tầng */
     let f=0; if(dH<39 && P.y>Y0-1.6 && P.y<TOPY+60) f=clamp(Math.round((P.y-Y0)/FH)+1,1,25);   /* 17/11 (phiên A, Bình báo rơi từ mái): nhảy / đứng trên vật trang trí / trực thăng cao hơn mái > 8 m không còn tắt hết sàn → không rơi xuyên xuống tầng trệt */
     if(FORCE>0){ FORCE-=dt; } else { const ks=f?[f-1,f,f+1].filter(k=>k>=2 && k<=25):[]; if(ks.join()!==WIN.join() || (WINS[0]||0)!==(f>=2?f:0)) setWindow(ks,f); }
     if(f!==curF){ curF=f; refreshFloor(); }
+    furnTick(dt, f);
     /* camera: trong phòng/hành lang các cánh → không vượt trần, lùi gần nhân vật */
     const th=((Math.atan2(dz,dx)/D)%360+360)%360, inWing=(th>=300||th<=60||(th>=120&&th<=240)), inside=f>=1 && f<=24 && ((inWing && dH>17.4 && dH<(f===1?29.6:34)) || (f>=2 && dH<=17.6));
     if(inside && !(f===1 && dH<17.6)){ HOOK.camBox={x0:-1e6, x1:1e6, z0:-1e6, z1:1e6, y1:Yf(f)+(f===1?FH-.7:FH-.75), _hot:true}; if(camSaved==null){ camSaved=cam.dist; cam.dist=Math.min(cam.dist,3.6); } }
@@ -686,6 +759,7 @@ export async function make(W, ctx={}){
 
   const out={ floor:()=>curF, Yf, rent:(type='deluxe')=>doRent(pickRoom(type)), goRoom, goPool, goFloor, get RENT(){ return RENT; },
     info:()=>({center:[CX,CZ], y0:Y0, top:TOPY, floors:24, heightAbovePlaza:+(TOPY-GY).toFixed(1), topY:+(TOPY+3.7).toFixed(1), core:CORE, bridge:'A', dropoff:DROP, gateBy:A_GATE?'A':'C', joint:JOINT, lifts:LIFTS.length, win:WIN.slice(), wins:WINS.slice(), staticSegs:STATIC.segs.length, staticPlats:STATIC.plats.length}),
+    __furnHandles:()=>FL.h, furn:()=>({key:FL.key, items:FL.h.length, segs:FL.C?FL.C.segs.length:0, circ:FL.C?FL.C.circ.length:0, boxes:FL.C?FL.C.boxes.length:0, stats:HAS_F && FURN.stats ? FURN.stats() : null}),
     drawInfo:()=>{ let n=0, tri=0; root.traverse(o=>{ if((o.isMesh||o.isInstancedMesh) && o.visible){ let vis=true; for(let p=o;p;p=p.parent) if(!p.visible){ vis=false; break; } if(vis){ n++; const g=o.geometry; tri+=(g.index?g.index.count:g.attributes.position.count)/3*(o.isInstancedMesh?o.count:1); } } }); return {draws:n, tris:Math.round(tri)}; } };
   W.abyHotel=out; return out;
 }
