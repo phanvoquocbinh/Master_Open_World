@@ -12,6 +12,7 @@
 //  TV, tủ lạnh, tủ rượu, tủ quần áo, bồn sục, bồn tắm. Ánh sáng ấm = vật liệu tự phát sáng (không thêm đèn thật → không chớp, không tốn FPS).
 //  Hiệu năng: vỏ (sàn, vách ngoài, kính) gộp theo vật liệu luôn hiện; nội thất gộp theo vật liệu + InstancedMesh, chỉ hiện khi cách căn < 70 m.
 import { roundedBox } from './archKit.js';
+import { cc0Kit } from './cc0kit.js';
 
 const TAU=Math.PI*2;
 export const DUPLEX_SPAN=(T)=>{ const ZN=14, rw=(T.sMid-6-ZN)/5; return ZN+rw; };   /* gian sảnh phụ + 1 gian phòng ≈ 25,9 m (đo ở r 128) */
@@ -38,6 +39,10 @@ export function buildPenthouses(C){ const {W,THREE,K,MT,TW,root,seg,addPlat,circ
     for(let i=0;i<9;i++){ const x=40+Math.random()*(w-80), y=60+Math.random()*(h-120), s2=8+Math.random()*16; g.fillStyle='rgba(255,190,90,.9)'; g.beginPath(); g.ellipse(x,y,s2*1.6,s2*.7,0,0,TAU); g.fill(); g.beginPath(); g.moveTo(x-s2*1.5,y); g.lineTo(x-s2*2.4,y-s2*.7); g.lineTo(x-s2*2.4,y+s2*.7); g.fill(); }
     g.fillStyle='rgba(255,255,255,.85)'; g.font='700 26px Segoe UI, sans-serif'; g.fillText('ĐẠI DƯƠNG SÂU · TẬP 3',20,h-22); },{rep:false}), toneMapped:false});
   M.mon=new THREE.MeshBasicMaterial({color:0x6fb8ff});
+  /* tranh trừu tượng tông ấm cho khung ảnh CC0 (ảnh gốc của khung là ô đen trống) */
+  const ART=K.cvTex(512,340,(g,w,h)=>{ g.fillStyle='#efe6d6'; g.fillRect(0,0,w,h); const C=['#c8a27a','#8c5a3c','#d9c3a5','#3f5f5a','#b98b5e','#e3d2b8']; let r=5; const rn=()=>{ r=r*16807%2147483647; return r/2147483647; };
+    for(let i=0;i<7;i++){ g.fillStyle=C[i%C.length]; g.globalAlpha=.75; g.beginPath(); g.ellipse(60+rn()*(w-120),50+rn()*(h-100),40+rn()*110,30+rn()*80,rn()*3,0,TAU); g.fill(); }
+    g.globalAlpha=1; g.strokeStyle='#2c2a28'; g.lineWidth=3; g.beginPath(); g.moveTo(40,h*.7); for(let x=40;x<w-40;x+=12) g.lineTo(x,h*.7+Math.sin(x*.03)*28); g.stroke(); },{rep:false});
   M.ao=new THREE.MeshBasicMaterial({map:K.cvTex(128,128,(g,w)=>{ const gr=g.createRadialGradient(w/2,w/2,4,w/2,w/2,w/2); gr.addColorStop(0,'rgba(0,0,0,1)'); gr.addColorStop(.55,'rgba(0,0,0,.65)'); gr.addColorStop(1,'rgba(0,0,0,0)'); g.fillStyle=gr; g.fillRect(0,0,w,w); },{rep:false}),
     color:0x000000, transparent:true, opacity:.34, depthWrite:false, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-6});
   M.flow=new THREE.MeshStandardMaterial({color:0xbfe8ff, transparent:true, opacity:.45, roughness:.05, depthWrite:false});
@@ -51,8 +56,12 @@ export function buildPenthouses(C){ const {W,THREE,K,MT,TW,root,seg,addPlat,circ
     const tanA=a=>{ const A=T.aAt(sOf(a)); return [-Math.sin(A)*T.sg*dir, Math.cos(A)*T.sg*dir]; }, radA=a=>{ const A=T.aAt(sOf(a)); return [Math.cos(A), Math.sin(A)]; };
     const yawAt=(a,fa,fv)=>{ const t=tanA(a), d=radA(a); return Math.atan2(t[0]*fa+d[0]*fv, t[1]*fa+d[1]*fv); };
     const off=(a,v,fa,fv,u,w)=>[a+(-fv)*u+fa*w, v+fa*u+fv*w];   /* u: ngang (bên phải khi nhìn theo hướng mặt), w: tiến theo hướng mặt */
-    const SH=K.Batch(T.cx,T.cz), IN=K.Batch(T.cx,T.cz), E=K.Emit(), G=new THREE.Group(); G.name='aby-ph-'+T.k; G.visible=false; root.add(G);
+    const SH=K.Batch(T.cx,T.cz), G=new THREE.Group(); let IN=K.Batch(T.cx,T.cz), E=K.Emit(); const IN0=IN; G.name='aby-ph-'+T.k; G.visible=false; root.add(G);
     const DY=new THREE.Group(); DY.userData.dynamic=true; G.add(DY);
+    /* model CC0 thật (js/cc0kit.js): đồ dựng bằng code của món được thay nằm trong lô dự phòng FBK[k]; model nạp xong (khi lại gần < 70 m) thì ẩn lô đó.
+       Thiếu thư mục assets/models/cc0 → giữ nguyên đồ dựng bằng code. Va chạm / chỗ ngồi vẫn là hộp proxy cũ. */
+    const FBK={}, asFB=(k,fn)=>{ const f=FBK[k]||(FBK[k]={B:K.Batch(T.cx,T.cz), E:K.Emit(), g:new THREE.Group(), n:0}); const sI=IN, sE=E; IN=f.B; E=f.E; try{ fn(); } finally{ IN=sI; E=sE; } };
+    const CC=[], cc=(id,k,list,o={})=>{ CC.push({id, k, o, items:list.map(([a,v,y,fa=0,fv=-1,s=1])=>{ const p=P2(a,v); return {x:p[0], y, z:p[1], ry:yawAt(a,fa,fv), s}; })}); if(k && FBK[k]) FBK[k].n++; };
     const ringA=(B,mat,a0,a1,v0,v1,y0,y1,f)=>T.ring(B,mat,sOf(a0),sOf(a1),R(v0),R(v1),y0,y1,f);
     const platA=(a0,a1,v0,v1,y)=>{ if(a1-a0<.05 || v1-v0<.05) return; const s0=sOf(a0), s1=sOf(a1); T.floorPlats(R(v0),R(v1),y,Math.min(s0,s1),Math.max(s0,s1),false); };
     const segP=(p,q,y0,y1,msg)=>seg(p[0],p[1],q[0],q[1],y0,y1,msg);
@@ -61,7 +70,7 @@ export function buildPenthouses(C){ const {W,THREE,K,MT,TW,root,seg,addPlat,circ
     const rb=(mat,a,v,y,w,h,d,fa=0,fv=-1,r=.05,B=IN)=>put(B,mat,RB(w,h,d,r),a,v,y,fa,fv);   /* y = tâm hộp */
     const eb=(sh,mat,a,v,y,sx,sy,sz,fa=0,fv=-1,col)=>{ const p=P2(a,v); E[sh](mat,p[0],y,p[1],yawAt(a,fa,fv),sx,sy,sz,col); };
     /* va chạm khối chữ nhật theo hướng mặt (rộng w ngang, sâu d dọc hướng mặt) */
-    const aoGeo=new THREE.PlaneGeometry(1,1).rotateX(-Math.PI/2), ao=(a,v,y,w,d,fa=0,fv=-1)=>put(IN,M.ao,aoGeo,a,v,y+.022,fa,fv,w*1.18+.25,1,d*1.18+.25);
+    const aoGeo=new THREE.PlaneGeometry(1,1).rotateX(-Math.PI/2), ao=(a,v,y,w,d,fa=0,fv=-1)=>put(IN0,M.ao,aoGeo,a,v,y+.022,fa,fv,w*1.18+.25,1,d*1.18+.25);
     const blk=(a,v,w,d,fa,fv,y,h,msg)=>{ const c=[[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]].map(([u,ww])=>P2(...off(a,v,fa,fv,u,ww))); for(let i=0;i<4;i++) segP(c[i],c[(i+1)%4],y-.4,y+h,msg); ao(a,v,y,w,d,fa,fv); };
     const circ=(a,v,r,y,h=1.4)=>{ const p=P2(a,v); circles.push({x:p[0], z:p[1], r, y0:y-.4, y1:y+h}); ao(a,v,y,2*r,2*r); };
     const bench=(a,v,fa,fv,len,seatY,floorY,label,lie,onSit)=>{ if(!W.addBench) return; const p=P2(a,v); W.addBench({x:p[0], z:p[1], rot:yawAt(a,fa,fv), len, y:seatY, floor:floorY, label, lie:!!lie, solo:!!lie||!!onSit, onSit}); };
@@ -139,19 +148,23 @@ export function buildPenthouses(C){ const {W,THREE,K,MT,TW,root,seg,addPlat,circ
         for(const e of [-1,1]) rb(M.cream,...o(e*(len/2-.3),-.18),y+.74,.42,.36,.12,fa,fv,.06); for(const [u,w] of [[-len/2-.12,-.4],[len/2+.12,-.4],[-len/2-.12,.38],[len/2+.12,.38]]){ const q=P2(...o(u,w)); E.cyl(MT.walnut,q[0],y+.04,q[1],0,.06,.08,.06,null); } blk(...o(0,-.02),len+.44,.96,fa,fv,y,.9,'🛋️ Sofa'); bench(...o(0,.14),fa,fv,len-.2,y+.47,y,'🛋️ Ngồi sofa (E · C)'); };
       sofa(5.6,4.0,3.2,-1,0,M.navy); sofa(4.15,6.25,1.9,0,-1,M.navy);
       const chair=(a,v,fa,fv)=>{ const o=(u,w)=>off(a,v,fa,fv,u,w); rb(M.cream,...o(0,0),y+.26,.82,.34,.8,fa,fv,.08); rb(M.cream,...o(0,.04),y+.46,.6,.12,.62,fa,fv,.06); rb(M.cream,...o(0,-.33),y+.7,.8,.5,.16,fa,fv,.07); for(const e of [-1,1]) rb(M.cream,...o(e*.36,0),y+.5,.12,.32,.78,fa,fv,.05); circ(a,v,.45,y,.9); bench(...o(0,.08),fa,fv,.6,y+.47,y,'🛋️ Ngồi armchair (E · C)'); };
-      chair(2.4,1.7,0,1); chair(3.7,1.7,0,1);
-      rb(MT.marble,3.4,4.0,y+.42,.75,.05,1.3,1,0,.02); rb(MT.walnut,3.4,4.0,y+.2,.5,.38,1.0,1,0,.03); blk(3.4,4.0,1.3,.8,1,0,y,.5,'☕ Bàn trà');
+      asFB('arm',()=>{ chair(2.4,1.7,0,1); chair(3.7,1.7,0,1); }); cc('mid_century_lounge_chair','arm',[[2.4,1.7,y,0,1],[3.7,1.7,y,0,1]]);
+      asFB('ctab',()=>{ rb(MT.marble,3.4,4.0,y+.42,.75,.05,1.3,1,0,.02); rb(MT.walnut,3.4,4.0,y+.2,.5,.38,1.0,1,0,.03); }); cc('coffee_table_round_01','ctab',[[3.4,4.0,y,1,0]],{fit:{h:.44}}); cc('potted_plant_04',null,[[3.4,4.0,y+.44,1,0]]);
+      cc('ceramic_vase_01',null,[[.95,3.05,y+1.19,1,0,.9]],{lite:true}); cc('ceramic_vase_02',null,[[.95,4.95,y+1.19,1,0,.8]],{lite:true}); cc('potted_plant_02',null,[[7.0,7.7,y,0,-1,1.15]]); circ(7.0,7.7,.4,y,1.0); blk(3.4,4.0,1.3,.8,1,0,y,.5,'☕ Bàn trà');
       /* đèn chùm thả thông tầng */ { const c=P2(4.5,4.0), yC=y+5.0; IN.cyl(MT.gold,c[0],(yC+CU)/2+.6,c[1],0,.03,CU-yC-1.2,.03);
         for(const [rr,yy] of [[1.15,yC+.6],[.8,yC],[.45,yC-.55]]){ IN.geo(MT.gold,new THREE.TorusGeometry(rr,.03,6,40),c[0],yy,c[1],0,1,1,1,Math.PI/2); for(let q=0;q<Math.round(rr*22);q++){ const a=q/Math.round(rr*22)*TAU; E.cone(M.led,c[0]+Math.cos(a)*rr,yy-.16,c[1]+Math.sin(a)*rr,0,.07,.24,.07,null); } } }
       /* cây cọ lá xẻ trong chậu đá (lá = nan cong xoay tỏa, không dùng khối cầu) */ }
-    const palm=(a,v,y,s=1)=>{ const p=P2(a,v); IN.geo(MT.trav,lathe([[0,0],[.24,0],[.3,.1],[.3,.52],[.26,.56],[0,.56]],18),p[0],y,p[1],0,s,s,s); IN.cyl(MT.walnut,p[0],y+.56+.5*s,p[1],0,.05*s,1.0*s,.05*s);
-      for(let i=0;i<8;i++){ const yaw=i/8*TAU+a; IN.geo(MT.green,new THREE.ConeGeometry(.16,1.3,4,1),p[0]+Math.sin(yaw)*.45*s,y+1.25*s,p[1]+Math.cos(yaw)*.45*s,yaw,s,s,.25*s,1.05); } circ(a,v,.34,y,1.2); };
-    palm(.9,.7,yL); palm(8.5,7.6,yL,.9);
+    const palm=(a,v,y,s=1,real=false)=>{ const p=P2(a,v); IN.geo(MT.trav,lathe([[0,0],[.24,0],[.3,.1],[.3,.52],[.26,.56],[0,.56]],18),p[0],y,p[1],0,s,s,s);
+      const leaf=()=>{ IN.cyl(MT.walnut,p[0],y+.56+.5*s,p[1],0,.05*s,1.0*s,.05*s); for(let i=0;i<8;i++){ const yaw=i/8*TAU+a; IN.geo(MT.green,new THREE.ConeGeometry(.16,1.3,4,1),p[0]+Math.sin(yaw)*.45*s,y+1.25*s,p[1]+Math.cos(yaw)*.45*s,yaw,s,s,.25*s,1.05); } };
+      if(real){ asFB('palm',leaf); cc('pachira_aquatica_01','palm',[[a,v,y+.5*s,Math.sin(a*7),Math.cos(a*7),s*.85]],{pick:['bark_b','leaves_b']}); } else leaf(); circ(a,v,.34,y,1.2); };
+    palm(.9,.7,yL,1,true); palm(8.5,7.6,yL,.9,true);
     /* ============ BÀN ĂN 8 GHẾ ============ */
     { const y=yL, ta=12.2, tv=3.6; rb(MT.marble,ta,tv,y+.76,1.1,.06,3.0,1,0,.02); for(const e of [-1,1]) rb(MT.walnut,ta+e*1.1,tv,y+.37,.16,.72,.9,1,0,.03); blk(ta,tv,1.15,3.05,1,0,y,.8,'🍽️ Bàn ăn');
       const dchair=(a,v,fa,fv)=>{ const o=(u,w)=>off(a,v,fa,fv,u,w); rb(M.linen,...o(0,0),y+.47,.46,.08,.46,fa,fv,.04); rb(M.linen,...o(0,-.21),y+.78,.44,.56,.06,fa,fv,.03); for(const [u,w] of [[-.19,-.19],[.19,-.19],[-.19,.19],[.19,.19]]){ const q=P2(...o(u,w)); E.cyl(MT.walnut,q[0],y+.22,q[1],0,.035,.44,.035,null); }
         bench(...o(0,.05),fa,fv,.5,y+.5,y,'🍽️ Ngồi bàn ăn (E · C)'); };
-      for(const da of [-1,0,1]){ dchair(ta+da*1.0,tv-.95,0,1); dchair(ta+da*1.0,tv+.95,0,-1); } dchair(ta-1.85,tv,1,0); dchair(ta+1.85,tv,-1,0);
+      asFB('dch',()=>{ for(const da of [-1,0,1]){ dchair(ta+da*1.0,tv-.95,0,1); dchair(ta+da*1.0,tv+.95,0,-1); } dchair(ta-1.85,tv,1,0); dchair(ta+1.85,tv,-1,0); });
+      { const L=[]; for(const da of [-1,0,1]){ L.push([ta+da*1.0,tv-.95,y,0,1],[ta+da*1.0,tv+.95,y,0,-1]); } L.push([ta-1.85,tv,y,1,0],[ta+1.85,tv,y,-1,0]); cc('dining_chair_02','dch',L); }
+      cc('ceramic_vase_02',null,[[ta+.55,tv,y+.79,1,0,.75]],{lite:true}); cc('potted_plant_04',null,[[ta-.55,tv,y+.79,1,0]]);
       { const c=P2(ta,tv); IN.box(MT.bronze,c[0],y+2.7,c[1],yawAt(ta,1,0),.08,.06,2.2); for(const e of [-.8,0,.8]){ const q=P2(ta+e,tv); E.cone(M.led,q[0],y+2.45,q[1],0,.32,.3,.32,null); IN.cyl(MT.bronze,q[0],(y+2.6+CL)/2,q[1],0,.012,CL-y-2.6,.012); } } }
     /* ============ BẾP ============ */
     { const y=yL, aw=SD-.45;
@@ -168,10 +181,12 @@ export function buildPenthouses(C){ const {W,THREE,K,MT,TW,root,seg,addPlat,circ
       rb(MT.walnut,19.3,7.9,y+1.1,1.25,2.2,.62,0,-1,.03); blk(19.3,7.9,1.3,.66,0,-1,y,2.2,'🍳 Tủ cao');
       /* đảo bếp waterfall marble + 3 ghế bar */ rb(MT.marble,20.3,3.6,y+.92,2.9,.06,1.05,1,0,.01); for(const e of [-1,1]) rb(MT.marble,20.3,3.6+e*1.42,y+.45,.06,.9,1.05,1,0,.01); rb(MT.walnut,20.45,3.6,y+.45,2.7,.86,.7,1,0,.02);
       blk(20.3,3.6,2.95,1.1,1,0,y,1.0,'🍳 Đảo bếp');
-      for(const v of [2.7,3.6,4.5]){ const p=P2(19.25,v); IN.cyl(MT.bronze,p[0],y+.38,p[1],0,.04,.74,.04); IN.cyl(MT.bronze,p[0],y+.06,p[1],0,.36,.03,.36); rb(MT.bordeaux,19.25,v,y+.77,.4,.08,.4,1,0,.04); circ(19.25,v,.2,y,.8); bench(19.25,v,1,0,.45,y+.8,y,'🍸 Ngồi ghế bar (E · C)'); } }
+      for(const v of [2.7,3.6,4.5]){ const p=P2(19.25,v); asFB('bar',()=>{ IN.cyl(MT.bronze,p[0],y+.38,p[1],0,.04,.74,.04); IN.cyl(MT.bronze,p[0],y+.06,p[1],0,.36,.03,.36); rb(MT.bordeaux,19.25,v,y+.77,.4,.08,.4,1,0,.04); }); circ(19.25,v,.2,y,.8); bench(19.25,v,1,0,.45,y+.8,y,'🍸 Ngồi ghế bar (E · C)'); }
+      cc('metal_stool_01','bar',[[19.25,2.7,y,1,0],[19.25,3.6,y,1,0],[19.25,4.5,y,1,0]],{fit:{h:.8}}); cc('wooden_bowl_01',null,[[20.3,3.2,y+.95,1,0]],{lite:true});
+      cc('modern_ceiling_lamp_01',null,[[20.3,2.9,CL-.95,1,0],[20.3,3.6,CL-.95,1,0],[20.3,4.3,CL-.95,1,0]],{glow:{re:/globe|glass/i, color:0xffd9a0, k:1.6}}); }
     /* ============ SẢNH (tủ giày, gương, ghế băng) ============ */
     { const y=yL; rb(MT.walnut,24.0,8.05,y+.45,2.6,.9,.36,0,-1,.03); eb('box',M.led,24.0,7.86,y+.12,2.5,.015,.02,0,-1,null); rb(M.mirror,23.4,8.22,y+1.55,.6,1.3,.02,0,-1,.01); rb(MT.gold,23.4,8.23,y+1.55,.66,1.36,.015,0,-1,.005);
-      rb(M.cream,24.0,7.62,y+.48,1.0,.08,.36,0,-1,.04); blk(24.0,8.05,2.65,.4,0,-1,y,1,'👞 Tủ giày'); bench(24.0,7.62,0,-1,.9,y+.52,y,'👞 Ngồi tủ giày thay giày (E · C)'); }
+      rb(M.cream,24.0,7.62,y+.48,1.0,.08,.36,0,-1,.04); blk(24.0,8.05,2.65,.4,0,-1,y,1,'👞 Tủ giày'); cc('hanging_picture_frame_02',null,[[24.75,8.265,y+1.3,0,-1]],{art:ART, artKey:'ph-art1'}); bench(24.0,7.62,0,-1,.9,y+.52,y,'👞 Ngồi tủ giày thay giày (E · C)'); }
     /* ============ WC KHÁCH (a 13,6–16,6) · KHO (0,4–5,6) · PHÒNG GIẶT (16,6–25,5) ============ */
     const toilet=(a,v,y,fa,fv)=>{ const p=P2(a,v); IN.geo(M.cream,lathe([[0,0],[.16,0],[.2,.25],[.22,.4],[.2,.42],[0,.42]],18),p[0],y,p[1],0,1,1,1.3); rb(M.cream,...off(a,v,fa,fv,0,-.28),y+.62,.4,.4,.16,fa,fv,.05); circ(a,v,.3,y,.6); };
     { const y=yL; toilet(15.1,12.4,y,0,-1); rb(MT.marbleD,13.95,10.2,y+.82,.5,.06,1.1,1,0,.01); { const p=P2(13.95,10.2); IN.geo(M.cream,lathe([[0,0],[.18,0],[.2,.12],[.22,.14],[0,.14]],18),p[0],y+.85,p[1],0,1,1,1); }
@@ -198,8 +213,9 @@ export function buildPenthouses(C){ const {W,THREE,K,MT,TW,root,seg,addPlat,circ
       blk(.62,10.9,4.15,.45,1,0,y,3,'📚 Kệ sách');
       rb(MT.walnut,2.6,10.9,y+.74,.8,.05,2.4,1,0,.02); for(const e of [-1,1]) rb(MT.walnut,2.6,10.9+e*1.1,y+.36,.75,.72,.05,1,0,.01); blk(2.6,10.9,2.45,.85,1,0,y,.8,'💻 Bàn làm việc đôi');
       for(const e of [-.55,.55]){ rb(M.black,2.35,10.9+e,y+1.08,.05,.4,.62,1,0,.01); eb('box',M.mon,2.38,10.9+e,y+1.08,.58,.35,.01,1,0,null);
-        const cv=10.9+e; rb(M.black,3.45,cv,y+.48,.5,.08,.5,-1,0,.05); rb(M.black,3.7,cv,y+.85,.5,.62,.06,-1,0,.04); { const p=P2(3.45,cv); IN.cyl(MT.bronze,p[0],y+.24,p[1],0,.04,.44,.04); IN.cyl(MT.bronze,p[0],y+.03,p[1],0,.5,.03,.5); }
+        const cv=10.9+e; asFB('office',()=>{ rb(M.black,3.45,cv,y+.48,.5,.08,.5,-1,0,.05); rb(M.black,3.7,cv,y+.85,.5,.62,.06,-1,0,.04); { const p=P2(3.45,cv); IN.cyl(MT.bronze,p[0],y+.24,p[1],0,.04,.44,.04); IN.cyl(MT.bronze,p[0],y+.03,p[1],0,.5,.03,.5); } }); cc('modern_arm_chair_01','office',[[3.62,cv,y,-1,0]]);
         circ(3.45,cv,.28,y,.9); bench(3.45,cv,-1,0,.45,y+.5,y,'💻 Ngồi làm việc (E · C)'); }
+      cc('potted_plant_04',null,[[2.6,11.9,y+.765,1,0]]);
       { const p=P2(2.4,9.9); IN.cyl(MT.bronze,p[0],y+.95,p[1],0,.02,.4,.02); IN.geo(M.led,new THREE.ConeGeometry(.12,.14,16,1,true),p[0],y+1.18,p[1],0,1,1,1); } }
     /* ============ PHÒNG NGỦ MASTER (a 10,6–18,2) ============ */
     { const y=yU, ba=13.6, bv=7.0, fa=0, fv=-1, o=(u,w)=>off(ba,bv,fa,fv,u,w);
@@ -210,7 +226,7 @@ export function buildPenthouses(C){ const {W,THREE,K,MT,TW,root,seg,addPlat,circ
       for(const e of [-1,1]){ rb(MT.walnut,...o(e*1.45,-.85),y+.27,.5,.54,.42,fa,fv,.04); const q=P2(...o(e*1.45,-.85)); IN.geo(MT.gold,lathe([[0,0],[.06,0],[.04,.3],[0,.3]],12),q[0],y+.54,q[1],0,1,1,1); IN.geo(M.led,new THREE.CylinderGeometry(.11,.16,.22,16,1,true),q[0],y+.94,q[1],0,1,1,1); }
       rb(M.cream,...o(0,1.45),y+.24,1.5,.42,.42,fa,fv,.08); blk(...o(0,-.05),2.2,2.5,fa,fv,y,.7,'🛏️ Giường King'); blk(...o(0,1.45),1.55,.45,fa,fv,y,.5,'🛋️ Ghế cuối giường');
       bench(...o(0,.25),fa,fv,.8,y+.62,y,'🛏️ Nằm giường King – ngủ tới sáng (E · C)',true,()=>{ if((W.night||0)>.3 && W.setTime){ try{ W.setTime(0); }catch(e){} toast('😴 Một giấc ngon lành… trời đã sáng, nắng vịnh rọi qua kính',3200); } else toast('🛏️ Nằm thư giãn trên giường King – nệm êm, chăn mát',2400); }); bench(...o(0,1.45),fa,fv,1.2,y+.47,y,'🛋️ Ngồi ghế cuối giường (E · C)');
-      palm(17.6,VGU+.5,y,.8); }
+      palm(17.6,VGU+.5,y,.8,true); }
     /* ============ PHÒNG THAY ĐỒ (a 13–19, v 8,3–13): tủ kính cánh lùa khung đen LED + đảo phụ kiện ============ */
     { const y=yU, CL2=[0x2c3e50,0x8e1b22,0xd9c9a6,0x3f5f3a,0x1d1d20,0xb8915a];
       const ward=(a,v,len,fa,fv)=>{ const o=(u,w)=>off(a,v,fa,fv,u,w); rb(M.black,...o(0,-.24),y+1.25,len,2.5,.14,fa,fv,.02); for(const e of [-1,1]) rb(M.black,...o(e*(len/2-.02),0),y+1.25,.05,2.5,.62,fa,fv,.01); rb(M.black,...o(0,0),y+2.48,len,.05,.62,fa,fv,.01); rb(M.black,...o(0,0),y+.06,len,.12,.62,fa,fv,.01); eb('box',M.led,...o(0,.25),y+2.4,len-.1,.02,.03,fa,fv,null);
@@ -254,13 +270,15 @@ export function buildPenthouses(C){ const {W,THREE,K,MT,TW,root,seg,addPlat,circ
 
     /* ============ GOM HÌNH ============ */
     SH.build(root,{name:'aby-ph-shell-'+T.k, cast:true, dynamic:false}); IN.build(G,{name:'aby-ph-in-'+T.k}); E.build(G,{name:'aby-ph-inst-'+T.k});
+    for(const k in FBK){ const f=FBK[k]; f.g.name='aby-ph-fb-'+k+'-'+T.k; f.B.build(f.g,{name:'aby-ph-fb-'+k}); f.E.build(f.g,{name:'aby-ph-fbi-'+k}); G.add(f.g); }
     const cA=P2(SD/2,4), lp=P2(SD/2,8.3);
     lbl(`🏠 ${D.name}`, T.acad?'Tầng 10–11 · căn hộ mẫu 2 tầng thông tầng · cửa chính ở hành lang tầng 10':'Tầng 13–14 · căn hộ mẫu 2 tầng thông tầng · cửa chính ở hành lang tầng 13', {h:.42, x:cA[0], y:yL+4.6, z:cA[1], fade:30});
     { const ent=P2(SD+1.2,(DOOR_V[0]+DOOR_V[1])/2), inn=P2(SD-2.5,(DOOR_V[0]+DOOR_V[1])/2); PLACES.push({icon:'🏠', name:`Abyssal · ${D.name}`, sub:T.acad?'Tầng 10–11 Học viện · phòng khách thông tầng 8,7 m, bếp đảo, ban công bồn sục gỗ':'Tầng 13–14 Residences · phòng khách thông tầng 8,7 m, bếp đảo, ban công bồn sục gỗ',
       go:()=>{ teleport(ent[0],ent[1],inn[0],inn[1]); P.y=yL; P.vy=0; P.ground=true; }}); }
     /* ============ MỖI KHUNG HÌNH ============ */
-    let tt=0; const center=P2(SD/2,5);
+    let tt=0, ccGo=false; const center=P2(SD/2,5);
     const update=(dt)=>{ tt+=dt; const d=Math.hypot(P.x-center[0],P.z-center[1]), vis=d<70 && Math.abs(P.y-(yL+4))<40; if(G.visible!==vis) G.visible=vis; if(!vis) return;
+      if(!ccGo){ ccGo=true; try{ const kit=cc0Kit(W); for(const r of CC) kit.place(r.id,r.items,{...r.o,parent:G}).then(g=>{ if(g && r.k && FBK[r.k] && --FBK[r.k].n<=0) FBK[r.k].g.visible=false; }).catch(()=>{}); }catch(e){} }
       for(const dr of doors){ if(dr.open && Math.hypot(P.x-dr.c[0],P.z-dr.c[1])>12) dr.open=false; const want=dr.open?1:0; dr.k+=(want-dr.k)*Math.min(1,dt*5); dr.pv.rotation.y=dr.base+dr.k*1.45; dr.s.y0=dr.k>.35?1e6:dr.y0; }
       for(const m of ANIM.slide){ m.k+=((m.open?1:0)-m.k)*Math.min(1,dt*4); m.mesh.position.set(m.p0[0]+m.dir[0]*m.k*m.dist, m.y, m.p0[1]+m.dir[1]*m.k*m.dist); }
       for(const f of ANIM.flows) f.mesh.visible=f.on; if(ANIM.fridge){ const F2=ANIM.fridge; F2.k+=((F2.open?1:0)-F2.k)*Math.min(1,dt*4); F2.pv.rotation.y=F2.base+F2.sg*F2.k*1.6; }
