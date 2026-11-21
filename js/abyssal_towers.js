@@ -646,7 +646,7 @@ export async function make(W, ctx={}){
       gates:T.gates.map(G=>({name:G.name, x:G.c[0], z:G.c[1], y:G.y})), entries:{promenade:CONN.filter(c=>c.T===T).map(c=>({x:c.c[0], z:c.c[1], y:16})), hydroBridgeY:[T.Y0, T.yF(11)]},
       floors:T.floors.map(F=>({f:F.f, y:F.y, name:`Tầng ${F.f+1} · ${F.name}`, rooms:F.rooms.map(r=>{ const sc=(r.s0+r.s1)/2; return {name:r.name, kind:r.kind, c:T.Ps(sc,(F.rG+F.rC)/2), door:T.Ps(sc,F.rC+.9), balcony:T.Ps(sc,(F.rO+F.rG)/2)}; })})) })),
     shophouses:SHOPS.map(o=>({tower:o.T.k, name:o.name, kind:o.kind, cat:o.cat, y:o.y, door:o.door, inside:o.inside, counter:o.counter, browse:[T2(o,-2.5,4),T2(o,2.5,4),T2(o,0,6)]})),
-    penthouses:PH.map(p=>({k:p.T.k, name:p.def.name, floors:[p.def.fL+1,p.def.fL+2], yL:p.yL, yU:p.yU, rooms:p.rooms, pt:p.pt, SD:p.SD, VB:p.VB, VOL:p.VOL, DOOR_V:p.DOOR_V})),
+    penthouses:PH.map(p=>({k:p.T.k, name:p.def.name, floors:[p.def.fL+1,p.def.fL+2], yL:p.yL, yU:p.yU, rooms:p.rooms, pt:p.pt, SD:p.SD, VB:p.VB, VOL:p.VOL, VGU:p.VGU, DOOR_V:p.DOOR_V})),
     hasCard, giveCard, retireOldShell, openGaps, gapReport:gapRep, root };
   function T2(o,u,v){ return o.T.L(o.fr,u,v); }
   W.abyTowers=API; W.ABY.towers=API; W.ABY.towersReady=true; try{ W.markShadow && W.markShadow(); }catch(e){}
