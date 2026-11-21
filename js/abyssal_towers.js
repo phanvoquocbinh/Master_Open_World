@@ -17,6 +17,7 @@
 import { makeLiftBank, allLifts } from './liftkit.js';
 import { makePoser } from './pose.js';
 import { buildBilliardTable } from './archKit.js';
+import { buildPenthouses, duplexDef } from './abyssal_penthouse.js';
 
 const TAU=Math.PI*2, clamp=(v,a,b)=>v<a?a:v>b?b:v, lerp=(a,b,t)=>a+(b-a)*t;
 const rng=(seed=1)=>{ let s=(seed>>>0)||1; return ()=>{ s=s+0x6D2B79F5|0; let t=Math.imul(s^s>>>15,1|s); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; };
@@ -215,7 +216,8 @@ export async function make(W, ctx={}){
   for(const T of TW){ const sL0=ZN+4*SHW, sL1=T.Ls-sL0; T.sL0=sL0; T.sL1=sL1;
     T.shopS=[ZN, ZN+SHW, ZN+2*SHW, ZN+3*SHW, sL1, sL1+SHW, sL1+2*SHW, sL1+3*SHW];
     const rw=(T.sMid-6-ZN)/5; T.bays=[{kind:'near', s0:0, s1:ZN}]; for(let j=0;j<5;j++) T.bays.push({kind:'room', s0:ZN+j*rw, s1:ZN+(j+1)*rw, j});
-    T.bays.push({kind:'lift', s0:T.sMid-6, s1:T.sMid+6}); for(let j=0;j<5;j++) T.bays.push({kind:'room', s0:T.sMid+6+j*rw, s1:T.sMid+6+(j+1)*rw, j:5+j}); T.bays.push({kind:'far', s0:T.Ls-ZN, s1:T.Ls}); }
+    T.bays.push({kind:'lift', s0:T.sMid-6, s1:T.sMid+6}); for(let j=0;j<5;j++) T.bays.push({kind:'room', s0:T.sMid+6+j*rw, s1:T.sMid+6+(j+1)*rw, j:5+j}); T.bays.push({kind:'far', s0:T.Ls-ZN, s1:T.Ls});
+    T.dup=duplexDef(T); T.isDupF=f=>f===T.dup.fL || f===T.dup.fL+1; T.inDup=(f,s0,s1)=>T.isDupF(f) && s0>=T.dup.sA-.01 && s1<=T.dup.sB+.01; T.dupRng=f=>T.isDupF(f)?(T.dup.sA<=.01?[[T.dup.sB,T.Ls]]:[[0,T.dup.sA]]):[[0,T.Ls]]; }
   // phòng theo tầng: Học viện (lớp học / bida / pantry / họp / server / lounge) – Residences (căn hộ)
   const ACAD_PLAN={ 0:['class','class','class','class','pantry','class','class','class','class','meeting'], 1:['class','class','server','class','pantry','class','class','class','class','meeting'], 2:['billiard','billiard','lounge','class','pantry','meeting','class','server','class','lounge'] };
   let courseI=0;
@@ -223,7 +225,7 @@ export async function make(W, ctx={}){
     const FL={f, k, y, yc, rO, rOs, rG, rC, rW, name:'', rooms:[]}; T.floors.push(FL);
     FL.name=T.acad?['Tầng học thuật · Lớp công cụ kiểm thử','Tầng TestOps · Hiệu năng & Tự động hoá','Sky Billiards Lounge & Phòng họp'][Math.min(2,k)]+(f===10?' · Sảnh vỉa hè +16':'')+(f===11?' · Cầu kính Hydro-Pulse':'')
       :(f===T.top?'Duplex Penthouse':`Sky-Condo ${k+1}`)+(f===10?' · Sảnh vỉa hè +16':'')+(f===11?' · Cầu kính Hydro-Pulse':'');
-    let ri=0; for(const b of T.bays){ if(b.kind!=='room') continue; const kind=T.acad?(ACAD_PLAN[Math.min(2,k)]||ACAD_PLAN[0])[ri]:'apt'; ri++;
+    let ri=0; for(const b of T.bays){ if(b.kind!=='room') continue; const kind=T.acad?(ACAD_PLAN[Math.min(2,k)]||ACAD_PLAN[0])[ri]:'apt'; ri++; if(T.inDup(f,b.s0,b.s1)) continue;   /* gian thuộc căn duplex */
       const nm=kind==='class'?COURSES[(courseI++)%COURSES.length]:kind==='apt'?`Căn ${f+1}.${String(b.j+1).padStart(2,'0')}${f===T.top?' · Penthouse':''}`:{pantry:'Pantry & Cà phê',meeting:'Phòng họp kính',server:'Server Room · Device Lab',billiard:'Phòng Bida',lounge:'Lounge Sách & Mentoring'}[kind];
       FL.rooms.push({kind, name:nm, s0:b.s0, s1:b.s1}); } }
 
@@ -295,14 +297,15 @@ export async function make(W, ctx={}){
       /* sàn (chừa giếng thang) + phào vàng mép sàn + mép sàn ngoài cùng */
       const slab=(r0,r1)=>{ T.ring(EXT,MT.trav,0,hs0,r0,r1,y-.32,y); T.ring(EXT,MT.trav,hs1,T.Ls,r0,r1,y-.32,y); if(r0<RH0) T.ring(EXT,MT.trav,hs0,hs1,r0,Math.min(r1,RH0),y-.32,y); if(r1>RH1) T.ring(EXT,MT.trav,hs0,hs1,Math.max(r0,RH1),r1,y-.32,y); };
       if(f===11){ /* tầng 12: chừa mặt cầu kính Hydro-Pulse cắm vào đầu hồi gần (r 129–133, 2,6 m đầu) */ T.ring(EXT,MT.trav,0,2.6,rO,128.9,y-.32,y); T.ring(EXT,MT.trav,0,2.6,133.1,rW+.3,y-.32,y); T.ring(EXT,MT.trav,2.6,hs0,rO,rW+.3,y-.32,y); T.ring(EXT,MT.trav,hs1,T.Ls,rO,rW+.3,y-.32,y); T.ring(EXT,MT.trav,hs0,hs1,rO,RH0,y-.32,y); T.ring(EXT,MT.trav,hs0,hs1,RH1,rW+.3,y-.32,y); }
+      else if(f===T.dup.fL+1){ for(const [a,b] of T.dupRng(f)){ const pp=(x0,x1,q0,q1)=>{ if(x1-x0>.01 && q1-q0>.01) T.ring(EXT,MT.trav,x0,x1,q0,q1,y-.32,y); }; pp(a,Math.min(b,hs0),rO,rW+.3); pp(Math.max(a,hs1),b,rO,rW+.3); const m0=Math.max(a,hs0), m1=Math.min(b,hs1); if(m1>m0){ pp(m0,m1,rO,RH0); pp(m0,m1,RH1,rW+.3); } } }
       else slab(rO,rW+.3);
       T.ring(EXT,MT.gold,0,T.Ls,rO-.14,rO+.06,y-.44,y+.05,{});
       /* lan can kính ban công + tay vịn vàng */ T.surf(EXT,MT.glassR,0,T.Ls,rO+.12,y,y+1.0); T.ring(EXT,MT.gold,0,T.Ls,rO+.08,rO+.16,y+1.0,y+1.07,{});
       T.arcSeg(rO+.12,0,T.Ls,y-.4,y+1.5,'🌿 Lan can ban công vườn treo');
-      /* tường sau (trong: thạch cao ấm, ngoài: Travertine) */ T.ring(EXT,MT.plaster,0,T.Ls,rW-.02,rW,y,yc,{t:false,b:false,o:false,e:false}); T.ring(EXT,MT.trav,0,T.Ls,rW,rW+.3,y,yc+.32,{i:false});
-      T.arcSeg(rW-.2,0,T.Ls,y-.4,y+3.5,'🧱 Tường sau – sát vách núi');
+      /* tường sau (trong: thạch cao ấm, ngoài: Travertine) – chừa đoạn căn duplex (căn xây lùi sâu hơn) */ for(const [a,b] of T.dupRng(f)){ T.ring(EXT,MT.plaster,a,b,rW-.02,rW,y,yc,{t:false,b:false,o:false,e:false}); T.ring(EXT,MT.trav,a,b,rW,rW+.3,y,yc+.32,{i:false});
+      T.arcSeg(rW-.2,a,b,y-.4,y+3.5,'🧱 Tường sau – sát vách núi'); }
       /* từng gian: vách kính + cửa trượt + đố đồng + rèm + đèn trần + vách gỗ + vách hành lang */
-      for(const b of T.bays){ const isRoom=b.kind==='room', far10=b.kind==='far' && f===10, gl=b.kind==='lift'?liftG:far10?rO+.35:rG, sc=(b.s0+b.s1)/2, dW=2.6*RREF/gl/2, door=b.kind!=='lift';
+      for(const b of T.bays){ if(T.inDup(f,b.s0,b.s1)) continue; const isRoom=b.kind==='room', far10=b.kind==='far' && f===10, gl=b.kind==='lift'?liftG:far10?rO+.35:rG, sc=(b.s0+b.s1)/2, dW=2.6*RREF/gl/2, door=b.kind!=='lift';
         const sA=b.s0+.12, sB=b.s1-.12; if(door && !far10){ T.surf(EXT,MT.glassS,sA,sc-dW,gl,y,yc); T.surf(EXT,MT.glassS,sc+dW,sB,gl,y,yc); T.surf(EXT,MT.glassS,sc-dW,sc+dW,gl,y+2.7,yc);
           T.arcSeg(gl,sA,sc-dW,y-.4,y+3.5,'🪟 Vách kính – ra ban công bằng cửa kính trượt'); T.arcSeg(gl,sc+dW,sB,y-.4,y+3.5,'🪟 Vách kính – ra ban công bằng cửa kính trượt');
           for(const s of [sc-dW,sc+dW]){ const c=T.Ps(s,gl); EXT.box(MT.bronze,c[0],y+1.35,c[1],-T.aAt(s),.14,2.7,.1); } { const c=T.Ps(sc,gl); EXT.box(MT.bronze,c[0],y+2.72,c[1],-T.aAt(sc),.14,.1,2.7); } }
@@ -315,11 +318,11 @@ export async function make(W, ctx={}){
         if(isRoom){ T.ring(EXT,MT.wood,sA,sc-dW,rC-.06,rC+.06,y,yc,{}); T.ring(EXT,MT.wood,sc+dW,sB,rC-.06,rC+.06,y,yc,{}); T.ring(EXT,MT.wood,sc-dW,sc+dW,rC-.06,rC+.06,y+2.7,yc,{});
           T.arcSeg(rC,sA,sc-dW,y-.4,y+3.5,'🚪 Vách phòng – vào bằng cửa từ hành lang'); T.arcSeg(rC,sc+dW,sB,y-.4,y+3.5,'🚪 Vách phòng – vào bằng cửa từ hành lang'); } }
       /* vách ngăn gỗ giữa các gian (từ kính tới hành lang; gian sảnh thang / sảnh phụ mở ra hành lang) */
-      for(let bi=1; bi<T.bays.length; bi++){ const L2=T.bays[bi-1], R2=T.bays[bi], s=R2.s0, glOf=b=>b.kind==='lift'?liftG:(b.kind==='far'&&f===10)?rO+.35:rG, g0=Math.min(glOf(L2),glOf(R2)), r1=(L2.kind==='room'||R2.kind==='room')?rC:rC;
+      for(let bi=1; bi<T.bays.length; bi++){ const L2=T.bays[bi-1], R2=T.bays[bi], s=R2.s0, glOf=b=>b.kind==='lift'?liftG:(b.kind==='far'&&f===10)?rO+.35:rG, g0=Math.min(glOf(L2),glOf(R2)), r1=(L2.kind==='room'||R2.kind==='room')?rC:rC; if(T.isDupF(f) && s>=T.dup.sA-.01 && s<=T.dup.sB+.01) continue;
         T.ring(EXT,MT.wood,s-.1,s+.1,g0,r1,y,yc,{}); T.radSeg(s,g0,r1,y-.4,y+3.5,'🧱 Vách ngăn phòng');
       }
       /* đầu hồi tầng: gần (tầng 12 có cửa cầu kính Hydro r 129–133), xa (tầng 11 có cổng vòm ra vỉa hè +16) */
-      for(const [s,e] of [[0,1],[T.Ls,-1]]){ const a=s, b=s+e*.4, nearDoor=s===0 && f===11, farDoor=s===T.Ls && f===10, gStart=farDoor?rO+.1:rG;
+      for(const [s,e] of [[0,1],[T.Ls,-1]]){ if(T.isDupF(f) && Math.abs(s-T.dup.gable)<.01) continue; const a=s, b=s+e*.4, nearDoor=s===0 && f===11, farDoor=s===T.Ls && f===10, gStart=farDoor?rO+.1:rG;
         if(nearDoor){ T.ring(EXT,MT.trav,a,b,rG,129.0,y,yc); T.ring(EXT,MT.trav,a,b,133.0,rW+.3,y,yc); T.ring(EXT,MT.trav,a,b,129.0,133.0,y+3.3,yc); T.radSeg(s+e*.2,rG,129.0,y-.4,y+3.5,'🧱 Đầu hồi toà nhà'); T.radSeg(s+e*.2,133.0,rW,y-.4,y+3.5,'🧱 Đầu hồi toà nhà'); }
         else if(farDoor){ T.ring(EXT,MT.trav,a,b,133.3,rW+.3,y,yc); T.ring(EXT,MT.trav,a,b,rO+.1,133.3,y+3.9,yc); T.radSeg(s+e*.2,133.3,rW,y-.4,y+3.5,'🧱 Đầu hồi toà nhà'); }
         else { T.ring(EXT,MT.trav,a,b,gStart,rW+.3,y,yc); T.radSeg(s+e*.2,gStart,rW,y-.4,y+3.5,'🧱 Đầu hồi toà nhà'); }
@@ -336,14 +339,14 @@ export async function make(W, ctx={}){
   }
   /* vách kính ngăn ban công riêng (Residences, sảnh thang) */
   for(const T of TW) for(const FL of T.floors){ const {f,y,rO}=FL, liftG=FL.liftG, rG=FL.rG;
-    for(let bi=1; bi<T.bays.length; bi++){ const L2=T.bays[bi-1], R2=T.bays[bi], s=R2.s0, glOf=b=>b.kind==='lift'?liftG:(b.kind==='far'&&f===10)?rO+.35:rG, g0=Math.min(glOf(L2),glOf(R2));
+    for(let bi=1; bi<T.bays.length; bi++){ const L2=T.bays[bi-1], R2=T.bays[bi], s=R2.s0, glOf=b=>b.kind==='lift'?liftG:(b.kind==='far'&&f===10)?rO+.35:rG, g0=Math.min(glOf(L2),glOf(R2)); if(T.isDupF(f) && s>T.dup.sA+.01 && s<T.dup.sB-.01) continue;
       const glassDiv=(!T.acad && (L2.kind==='room' || R2.kind==='room')) || L2.kind==='lift' || R2.kind==='lift' || (f===10 && (L2.kind==='far'||R2.kind==='far'));
       if(!glassDiv || g0<=rO+.4) continue; EXT.cx=T.cx; EXT.cz=T.cz; T.ring(EXT,MT.glassR,s-.03,s+.03,rO+.15,g0,y,y+2.2,{}); T.ring(EXT,MT.gold,s-.05,s+.05,rO+.15,g0,y+2.2,y+2.27,{}); T.radSeg(s,rO+.12,g0,y-.4,y+2.6,'🌿 Vách kính ngăn ban công riêng'); } }
 
   /* ============================== 3. SÀN ĐỨNG ĐƯỢC + CẦU NỐI VỈA HÈ ============================== */
   const CONN=[];
   for(const T of TW){ T.floorPlats(T.R0,T.RB,T.Y0+.02);
-    for(const FL of T.floors) T.floorPlats(FL.rO,FL.rW,FL.y);
+    for(const FL of T.floors) for(const [a,b] of T.dupRng(FL.f)) T.floorPlats(FL.rO,FL.rW,FL.y,a,b);
     /* tầng 11: sàn nối từ đầu hồi xa sang đầu vỉa hè kè +16 (đúng mép tường chắn cuối kè của phiên A) */
     const fl10=T.floors.find(q=>q.f===10); if(fl10){ const A=ABY.A||146, BZ=ABY.Bz||130, CZ=(ABY.center&&ABY.center.z)??-15, D=Math.PI/180, fb=T.k==='do'?-9.03:-170.97;
       const phi=(x,z)=>Math.atan2((z-CZ)/BZ,x/A)/D, aWall=r=>{ let lo=T.aF, hi=T.aF+T.sg*.06; for(let k=0;k<40;k++){ const m=(lo+hi)/2, p=T.P2(m,r), dd=((phi(p[0],p[1])-fb+540)%360)-180; if((T.k==='do'?dd<0:dd>0)) lo=m; else hi=m; } return lo; };
@@ -411,7 +414,7 @@ export async function make(W, ctx={}){
           for(const du of [1.4,2.4]) box(MT.fabric,du,bv,.24,.68,.32,1.85,0,-1,0xd8c49a); plant(hw-.5,bv,.9); }
         if(pent){ box(MT.dark,-hw/2+.5,1.2,.5,1.5,1,.6,1,0,0x101010); } break; } } }
   for(const T of TW){ const E=K.Emit(); for(const FL of T.floors) for(const rm of FL.rooms) furnish(E,T,FL,rm);
-    /* sảnh phụ + sảnh thang các tầng: sofa, cây, quầy */ for(const FL of T.floors) for(const b of T.bays){ if(b.kind==='room') continue; const fr=T.frame((b.s0+b.s1)/2,b.kind==='lift'?FL.liftG:FL.rG), y=FL.y;
+    /* sảnh phụ + sảnh thang các tầng: sofa, cây, quầy */ for(const FL of T.floors) for(const b of T.bays){ if(b.kind==='room' || T.inDup(FL.f,b.s0,b.s1)) continue; const fr=T.frame((b.s0+b.s1)/2,b.kind==='lift'?FL.liftG:FL.rG), y=FL.y;
       const put=(m,u,v,h,sx,sy,sz,col)=>{ const c=T.L(fr,u,v); E.box(m,c[0],y+h,c[1],T.yaw(fr,0,-1),sx,sy,sz,col); };
       if(b.kind==='lift'){ put(MT.wood,-5,1.2,.45,1.4,.9,.6,0x8a5a34); put(MT.wood,5,1.2,.45,1.4,.9,.6); const p=T.L(fr,-4.6,2.6); E.ico(MT.green,p[0],y+.9,p[1],0,.9,1.1,.9); }
       else { put(MT.emerald,0,(FL.rW-FL.rG)/2,.42,2.6,.84,.9); put(MT.marbleD,0,(FL.rW-FL.rG)/2-1.2,.4,1.1,.08,.6); const p=T.L(fr,-3,1); E.ico(MT.green,p[0],y+1,p[1],0,1,1.2,1); } }
@@ -420,6 +423,8 @@ export async function make(W, ctx={}){
   /* ============================== 6. GOM VỎ NGOÀI ============================== */
   EXT.cx=null; EXT.cz=null; const extMeshes=EXT.build(root,{name:'aby-tw-ext', cast:true, dynamic:false}); EI.build(root,{name:'aby-tw-ext-inst'});
   for(const m of extMeshes) if(m.material===MT.trav || m.material===MT.plaster) m.castShadow=true;
+  /* ============================== 6b. DUPLEX PENTHOUSE (js/abyssal_penthouse.js) ============================== */
+  let PH=[]; try{ PH=buildPenthouses({W,THREE,K,MT,TW,root,seg,addPlat,circles,INTER,P,toast,S,save,lbl,PLACES,teleport,LOW}); }catch(e){ console.warn('[abyssal_towers] duplex penthouse', e); }
 
   /* ============================== 7. SHOPHOUSE: dữ liệu + nội thất gần + E mua đồ ============================== */
   const SHOPS=[]; for(const T of TW) for(const sh of T.shops){ const fr=T.frame(sh.sc,T.RS), cat=SHOP_CAT[sh.cat], nm=SHOP_NAMES[T.i*8+sh.j];
@@ -571,7 +576,7 @@ export async function make(W, ctx={}){
   HOOK.onFrame.push(dt=>{ dt=Math.min(dt||.016,.1); tt+=dt; const near=Math.abs(P.x)<300 && Math.abs(P.z)<300;
     if(BAG && BAG.visible && (W.T||tt)>bagUntil) BAG.visible=false;
     if(!near){ if(upd!==-1){ upd=-1; for(const T of TW){ T.far.visible=false; for(const k in T.near) if(T.near[k].g) T.near[k].g.visible=false; } if(HOOK.camBox && HOOK.camBox._tw) HOOK.camBox=null; } return; }
-    upd=1; tower(P.x,P.z); let inBox=null;
+    upd=1; tower(P.x,P.z); let inBox=null; for(const ph of PH){ try{ ph.update(dt); }catch(e){} }
     for(const T of TW){ const d=T._d; T.far.visible=d<75; T.near.gates.g.visible=d<45;
       /* đại sảnh */ const dl=Math.hypot(P.x-T.Ps(T.sMid,126)[0],P.z-T.Ps(T.sMid,126)[1]); if(dl<70){ buildLobby(T); T.near.lobby.g.visible=true; } else T.near.lobby.g.visible=false;
       const lob=T.near.lobby; if(lob.people && lob.g.visible){ for(const n of lob.people){
@@ -589,6 +594,7 @@ export async function make(W, ctx={}){
           if(want && !G.open){ G.open=true; if(!inner && (tt-(G.beep||-9))>4){ G.beep=tt; toast(`💳 Bíp! ${G.name} mở – mời vào.`, 1600); if(W.sfx) try{ W.sfx('lift-ding',G.c[0],G.y+1,G.c[1]); }catch(e){} } }
           if(!want && G.open && !G.lanes.some(([a,b])=>Math.hypot(P.x-(a[0]+b[0])/2,P.z-(a[1]+b[1])/2)<1.2)) G.open=false;
           for(const s of G.segs) s.y0=G.open?1e6:G.y-.4; G.k=lerp(G.k,G.open?1:0,1-Math.exp(-dt*7)); for(const pv of G.flaps){ const base=pv.userData.base??(pv.userData.base=pv.rotation.y); pv.rotation.y=base+pv.userData.sgn*G.k*1.45; } } }
+    for(const ph of PH) if(ph.inside(P.x,P.z,P.y)) inBox={x0:-1e6, x1:1e6, z0:-1e6, z1:1e6, y1:ph.ceilAt(P.y)-.3, _tw:true};
     if(inBox){ HOOK.camBox=inBox; if(cam.dist>4.6) cam.dist=4.6; } else if(HOOK.camBox && HOOK.camBox._tw) HOOK.camBox=null; });
 
   /* ============================== 11. GỠ VỎ CÁNH CŨ (phiên A gọi khi W.ABY.towersReady) ============================== */
@@ -640,6 +646,7 @@ export async function make(W, ctx={}){
       gates:T.gates.map(G=>({name:G.name, x:G.c[0], z:G.c[1], y:G.y})), entries:{promenade:CONN.filter(c=>c.T===T).map(c=>({x:c.c[0], z:c.c[1], y:16})), hydroBridgeY:[T.Y0, T.yF(11)]},
       floors:T.floors.map(F=>({f:F.f, y:F.y, name:`Tầng ${F.f+1} · ${F.name}`, rooms:F.rooms.map(r=>{ const sc=(r.s0+r.s1)/2; return {name:r.name, kind:r.kind, c:T.Ps(sc,(F.rG+F.rC)/2), door:T.Ps(sc,F.rC+.9), balcony:T.Ps(sc,(F.rO+F.rG)/2)}; })})) })),
     shophouses:SHOPS.map(o=>({tower:o.T.k, name:o.name, kind:o.kind, cat:o.cat, y:o.y, door:o.door, inside:o.inside, counter:o.counter, browse:[T2(o,-2.5,4),T2(o,2.5,4),T2(o,0,6)]})),
+    penthouses:PH.map(p=>({k:p.T.k, name:p.def.name, floors:[p.def.fL+1,p.def.fL+2], yL:p.yL, yU:p.yU, rooms:p.rooms, pt:p.pt, SD:p.SD, VB:p.VB, VOL:p.VOL, DOOR_V:p.DOOR_V})),
     hasCard, giveCard, retireOldShell, openGaps, gapReport:gapRep, root };
   function T2(o,u,v){ return o.T.L(o.fr,u,v); }
   W.abyTowers=API; W.ABY.towers=API; W.ABY.towersReady=true; try{ W.markShadow && W.markShadow(); }catch(e){}
