@@ -1,0 +1,2482 @@
+{
+  "version": 1,
+  "topics": [
+    {
+      "id": "principles",
+      "name": "Nguyên tắc kiểm thử",
+      "icon": "🧭",
+      "color": "#2f81f7"
+    },
+    {
+      "id": "design",
+      "name": "Kỹ thuật thiết kế test case",
+      "icon": "📐",
+      "color": "#3fb950"
+    },
+    {
+      "id": "types",
+      "name": "Loại & mức kiểm thử",
+      "icon": "🧩",
+      "color": "#d29922"
+    },
+    {
+      "id": "bug",
+      "name": "Quy trình & báo cáo bug",
+      "icon": "🐞",
+      "color": "#f85149"
+    },
+    {
+      "id": "api",
+      "name": "Kiểm thử API",
+      "icon": "🔌",
+      "color": "#39c5cf"
+    },
+    {
+      "id": "perf",
+      "name": "Hiệu năng",
+      "icon": "⚡",
+      "color": "#f0883e"
+    },
+    {
+      "id": "auto",
+      "name": "Tự động hoá",
+      "icon": "🤖",
+      "color": "#a371f7"
+    },
+    {
+      "id": "security",
+      "name": "Bảo mật",
+      "icon": "🛡️",
+      "color": "#ff7b72"
+    },
+    {
+      "id": "sql",
+      "name": "SQL & dữ liệu",
+      "icon": "🗄️",
+      "color": "#56d364"
+    },
+    {
+      "id": "agile",
+      "name": "Agile · DevOps · CI/CD",
+      "icon": "🔄",
+      "color": "#79c0ff"
+    },
+    {
+      "id": "ai",
+      "name": "AI trong QA",
+      "icon": "🧠",
+      "color": "#d2a8ff"
+    },
+    {
+      "id": "interview",
+      "name": "Câu hỏi phỏng vấn",
+      "icon": "🎤",
+      "color": "#ffa657"
+    },
+    {
+      "id": "mindset",
+      "name": "Tư duy & kỹ năng mềm QA",
+      "icon": "💡",
+      "color": "#e3b341"
+    }
+  ],
+  "items": [
+    {
+      "id": "principles-01",
+      "topic": "principles",
+      "title": "Không thể test hết mọi thứ",
+      "lines": [
+        "Số tổ hợp đầu vào gần như vô hạn.",
+        "Chọn test theo rủi ro và giá trị, không theo cảm tính.",
+        "Test đầy đủ là bất khả thi, test đủ tốt là mục tiêu."
+      ],
+      "tip": "Mẹo: hỏi 'nếu hỏng chỗ này, ai mất gì?' để xếp ưu tiên."
+    },
+    {
+      "id": "principles-02",
+      "topic": "principles",
+      "title": "Test chỉ chứng minh có lỗi",
+      "lines": [
+        "Test pass không chứng minh phần mềm không còn lỗi.",
+        "Nó chỉ giảm xác suất lỗi còn sót lại.",
+        "Báo cáo kết quả kèm phạm vi đã và chưa kiểm tra."
+      ],
+      "tip": "Mẹo: ghi rõ 'chưa test' trong báo cáo release."
+    },
+    {
+      "id": "principles-03",
+      "topic": "principles",
+      "title": "Test sớm tiết kiệm chi phí",
+      "lines": [
+        "Lỗi ở yêu cầu rẻ nhất, lỗi ở production đắt nhất.",
+        "Review yêu cầu, thiết kế ngay từ đầu dự án.",
+        "Chi phí sửa lỗi tăng nhiều lần qua mỗi giai đoạn."
+      ],
+      "tip": "Mẹo: QA dự họp refinement, đặt câu hỏi 'nếu... thì sao?'"
+    },
+    {
+      "id": "principles-04",
+      "topic": "principles",
+      "title": "Lỗi có xu hướng co cụm",
+      "lines": [
+        "Một số module chứa phần lớn lỗi (nguyên lý Pareto).",
+        "Module phức tạp, hay sửa đổi thường nhiều lỗi hơn.",
+        "Dồn thêm test vào các điểm nóng này."
+      ],
+      "tip": "Mẹo: thống kê bug theo module sau mỗi sprint."
+    },
+    {
+      "id": "principles-05",
+      "topic": "principles",
+      "title": "Nghịch lý thuốc trừ sâu",
+      "lines": [
+        "Chạy mãi một bộ test, nó sẽ không bắt thêm lỗi mới.",
+        "Test case cần được xem xét và cập nhật định kỳ.",
+        "Thêm dữ liệu, kịch bản mới để phát hiện lỗi khác."
+      ],
+      "tip": "Mẹo: mỗi sprint bổ sung vài case từ bug thực tế."
+    },
+    {
+      "id": "principles-06",
+      "topic": "principles",
+      "title": "Test phụ thuộc ngữ cảnh",
+      "lines": [
+        "Game, ngân hàng, y tế cần cách test khác nhau.",
+        "Mức rủi ro và quy định quyết định độ sâu kiểm thử.",
+        "Không có một quy trình đúng cho mọi dự án."
+      ],
+      "tip": "Mẹo: bắt đầu bằng: rủi ro lớn nhất của sản phẩm là gì?"
+    },
+    {
+      "id": "principles-07",
+      "topic": "principles",
+      "title": "Ảo tưởng 'không có lỗi'",
+      "lines": [
+        "Phần mềm không lỗi nhưng sai nhu cầu vẫn là thất bại.",
+        "Kiểm chứng (verification): làm đúng spec không?",
+        "Xác nhận (validation): spec có đúng nhu cầu người dùng không?"
+      ],
+      "tip": "Mẹo: demo sớm cho người dùng thật."
+    },
+    {
+      "id": "principles-08",
+      "topic": "principles",
+      "title": "Kiểm chứng và xác nhận",
+      "lines": [
+        "Verification: 'Chúng ta xây đúng sản phẩm chưa?'",
+        "Validation: 'Chúng ta xây đúng sản phẩm cần xây chưa?'",
+        "Review tài liệu thuộc verification, UAT thuộc validation."
+      ],
+      "tip": "Mẹo: UAT bắt lỗi nhu cầu, không chỉ lỗi code."
+    },
+    {
+      "id": "principles-09",
+      "topic": "principles",
+      "title": "Oracle: lấy gì làm đáp án đúng",
+      "lines": [
+        "Test oracle là nguồn để biết kết quả mong đợi.",
+        "Nguồn: spec, hành vi bản cũ, sản phẩm tương tự, lẽ thường.",
+        "Không có oracle thì 'pass' chỉ là cảm giác."
+      ],
+      "tip": "Mẹo: ghi kết quả mong đợi cụ thể, không viết 'chạy đúng'."
+    },
+    {
+      "id": "principles-10",
+      "topic": "principles",
+      "title": "Độc lập trong kiểm thử",
+      "lines": [
+        "Người viết code dễ bỏ sót lỗi của chính mình.",
+        "Góc nhìn độc lập giúp phát hiện giả định sai.",
+        "Độc lập không có nghĩa là đối đầu với dev."
+      ],
+      "tip": "Mẹo: pair testing giữa dev và QA tăng chất lượng nhanh."
+    },
+    {
+      "id": "principles-11",
+      "topic": "principles",
+      "title": "Rủi ro = khả năng × tác động",
+      "lines": [
+        "Rủi ro = xác suất xảy ra × mức thiệt hại.",
+        "Thanh toán lỗi: xác suất thấp nhưng tác động rất cao.",
+        "Ưu tiên test theo điểm rủi ro giảm dần."
+      ],
+      "tip": "Mẹo: lập bảng rủi ro 3×3 cho từng tính năng."
+    },
+    {
+      "id": "principles-12",
+      "topic": "principles",
+      "title": "Điều kiện dừng test",
+      "lines": [
+        "Không dừng chỉ vì hết giờ mà chưa đánh giá rủi ro.",
+        "Tiêu chí: độ phủ yêu cầu, bug nặng còn mở, tỉ lệ pass.",
+        "Thoả thuận exit criteria trước khi bắt đầu test."
+      ],
+      "tip": "Mẹo: ví dụ 0 bug Critical mở, pass ≥ 95% case ưu tiên cao."
+    },
+    {
+      "id": "principles-13",
+      "topic": "principles",
+      "title": "Nguyên nhân gốc, không chỉ triệu chứng",
+      "lines": [
+        "Sửa triệu chứng khiến lỗi quay lại ở dạng khác.",
+        "Hỏi 'tại sao' liên tiếp (5 Whys) để tìm gốc rễ.",
+        "Gốc có thể là yêu cầu mơ hồ, không phải code."
+      ],
+      "tip": "Mẹo: ghi nguyên nhân gốc vào bug khi đóng."
+    },
+    {
+      "id": "principles-14",
+      "topic": "principles",
+      "title": "Kiểm (checking) khác thử nghiệm",
+      "lines": [
+        "Kiểm: so sản phẩm với kỳ vọng đã biết, máy làm tốt.",
+        "Thử nghiệm: khám phá, nghi ngờ, tìm kỳ vọng chưa ai viết.",
+        "Automation chủ yếu là kiểm, không thay được việc khám phá."
+      ],
+      "tip": "Mẹo: dành thời gian cho cả hai, đừng chỉ chạy script.",
+      "src": "qc-brain/thinking-models.md"
+    },
+    {
+      "id": "principles-15",
+      "topic": "principles",
+      "title": "Độ phủ phải trả lời theo nhiều trục",
+      "lines": [
+        "Luật, rủi ro, luồng, dữ liệu, nền tảng, trạng thái, thời gian.",
+        "Phủ một trục chưa chắc phủ trục khác.",
+        "Câu 'test đủ chưa?' chỉ có nghĩa khi nói rõ trục nào."
+      ],
+      "tip": "Mẹo: kẻ bảng trục × tính năng, tô ô chưa có case.",
+      "src": "qc-brain/thinking-models.md"
+    },
+    {
+      "id": "principles-16",
+      "topic": "principles",
+      "title": "Bug thường sống ở đâu",
+      "lines": [
+        "Chỗ mới và chỗ vừa đổi, chỗ phức tạp, chỗ giao nhau.",
+        "Chỗ từng có bug (hay có 'anh em' ở gần).",
+        "Chỗ ít ai nghĩ tới, hoặc nơi ai đó nói 'chắc không sao'."
+      ],
+      "tip": "Mẹo: 'chắc không sao' là tín hiệu nên test kỹ hơn.",
+      "src": "qc-brain/thinking-models.md"
+    },
+    {
+      "id": "principles-17",
+      "topic": "principles",
+      "title": "Đừng tự đoán kết quả mong đợi",
+      "lines": [
+        "Tự đoán expected rồi đánh Fail sinh ra bug giả.",
+        "Dev mất thời gian, QA mất uy tín.",
+        "Chỗ spec không nói: ghi thành câu hỏi cho BA."
+      ],
+      "tip": "Mẹo: chỉ báo bug khi có căn cứ rõ ràng để đối chiếu.",
+      "src": "qc-brain/anti-patterns.md"
+    },
+    {
+      "id": "design-01",
+      "topic": "design",
+      "title": "Phân vùng tương đương (EP)",
+      "lines": [
+        "Chia đầu vào thành nhóm mà hệ thống xử lý giống nhau.",
+        "Mỗi nhóm chỉ cần test một đại diện.",
+        "Ví dụ tuổi 18–60 hợp lệ; <18 và >60 không hợp lệ."
+      ],
+      "tip": "Mẹo: nhớ cả nhóm không hợp lệ và rỗng/null."
+    },
+    {
+      "id": "design-02",
+      "topic": "design",
+      "title": "Phân tích giá trị biên (BVA)",
+      "lines": [
+        "Lỗi hay nằm ở ranh giới của vùng.",
+        "Trường nhận 1–99: test 0, 1, 2, 98, 99, 100.",
+        "Kết hợp với phân vùng tương đương."
+      ],
+      "tip": "Mẹo: biên 2 giá trị: min-1, min, max, max+1."
+    },
+    {
+      "id": "design-03",
+      "topic": "design",
+      "title": "Bảng quyết định",
+      "lines": [
+        "Dùng khi kết quả phụ thuộc tổ hợp điều kiện.",
+        "Liệt kê các điều kiện, quy tắc và hành động tương ứng.",
+        "Giúp phát hiện tổ hợp bị thiếu trong yêu cầu."
+      ],
+      "tip": "Mẹo: ví dụ giảm giá theo hạng thành viên × giá trị đơn."
+    },
+    {
+      "id": "design-04",
+      "topic": "design",
+      "title": "Chuyển đổi trạng thái",
+      "lines": [
+        "Mô hình hoá đối tượng bằng trạng thái và sự kiện.",
+        "Ví dụ đơn hàng: mới → đã thanh toán → đã giao → huỷ.",
+        "Test cả chuyển đổi hợp lệ lẫn không hợp lệ."
+      ],
+      "tip": "Mẹo: vẽ sơ đồ trạng thái rồi phủ mọi mũi tên."
+    },
+    {
+      "id": "design-05",
+      "topic": "design",
+      "title": "Đoán lỗi (error guessing)",
+      "lines": [
+        "Dựa trên kinh nghiệm để đoán chỗ dễ lỗi.",
+        "Ví dụ: chia cho 0, chuỗi rỗng, ký tự đặc biệt, file lớn.",
+        "Bổ sung cho kỹ thuật chính thức, không thay thế."
+      ],
+      "tip": "Mẹo: lập danh sách lỗi hay gặp riêng cho từng dự án."
+    },
+    {
+      "id": "design-06",
+      "topic": "design",
+      "title": "Kiểm thử cặp (pairwise)",
+      "lines": [
+        "Phủ mọi cặp giá trị thay vì mọi tổ hợp.",
+        "Phần lớn lỗi do tương tác của 1–2 tham số gây ra.",
+        "Giảm hàng trăm tổ hợp xuống còn vài chục."
+      ],
+      "tip": "Mẹo: dùng cho cấu hình trình duyệt × hệ điều hành × ngôn ngữ."
+    },
+    {
+      "id": "design-07",
+      "topic": "design",
+      "title": "Kiểm thử theo use case",
+      "lines": [
+        "Mỗi use case gồm luồng chính và luồng thay thế.",
+        "Test luồng chính trước, rồi các nhánh lỗi, ngoại lệ.",
+        "Gần với hành vi thực của người dùng."
+      ],
+      "tip": "Mẹo: mỗi bước luồng chính hỏi: nếu bước này thất bại?"
+    },
+    {
+      "id": "design-08",
+      "topic": "design",
+      "title": "Review yêu cầu: câu hỏi cho BA",
+      "lines": [
+        "Tìm chỗ mâu thuẫn, mơ hồ, thiếu trong yêu cầu.",
+        "Từ nhạy cảm: 'nhanh', 'thân thiện', 'một số', 'v.v.'.",
+        "Biến câu mơ hồ thành tiêu chí đo được."
+      ],
+      "tip": "Mẹo: 'nhanh' hãy đổi thành 'p95 < 2 giây'."
+    },
+    {
+      "id": "design-09",
+      "topic": "design",
+      "title": "Test case tốt trông thế nào",
+      "lines": [
+        "Mục tiêu rõ, một ý chính cho mỗi test case.",
+        "Tiền điều kiện, bước, dữ liệu, kết quả mong đợi cụ thể.",
+        "Độc lập, lặp lại được, ai chạy cũng ra cùng kết quả."
+      ],
+      "tip": "Mẹo: tên case nêu hành vi: 'Đăng nhập sai mật khẩu 5 lần'."
+    },
+    {
+      "id": "design-10",
+      "topic": "design",
+      "title": "Độ phủ ≠ chất lượng",
+      "lines": [
+        "100% độ phủ code không bảo đảm đúng nghiệp vụ.",
+        "Độ phủ chỉ cho biết dòng nào chưa từng được chạy.",
+        "Dùng để tìm vùng chưa test, không phải đích cuối."
+      ],
+      "tip": "Mẹo: xem vùng đỏ của báo cáo coverage, hỏi vì sao chưa test."
+    },
+    {
+      "id": "design-11",
+      "topic": "design",
+      "title": "Dữ liệu test: chọn thế nào",
+      "lines": [
+        "Gồm dữ liệu hợp lệ, biên, không hợp lệ, rỗng, rất dài.",
+        "Có chữ có dấu, emoji, ký tự đặc biệt.",
+        "Tách dữ liệu khỏi kịch bản để dễ mở rộng."
+      ],
+      "tip": "Mẹo: thử tên 'Nguyễn Văn Á' và chuỗi 256 ký tự."
+    },
+    {
+      "id": "design-12",
+      "topic": "design",
+      "title": "Test case âm (negative test)",
+      "lines": [
+        "Kiểm tra hệ thống phản ứng đúng với đầu vào sai.",
+        "Thông báo lỗi rõ, không lộ thông tin nội bộ, không treo.",
+        "Cần cân bằng với test dương, không bỏ qua."
+      ],
+      "tip": "Mẹo: mỗi trường nhập tối thiểu 3 ca âm."
+    },
+    {
+      "id": "design-13",
+      "topic": "design",
+      "title": "Kiểm thử khám phá có cấu trúc",
+      "lines": [
+        "Khám phá có cấu trúc: hiến chương, thời lượng, ghi chú.",
+        "Học hệ thống, thiết kế và chạy test cùng lúc.",
+        "Tốt để tìm lỗi mà test case viết sẵn bỏ sót."
+      ],
+      "tip": "Mẹo: phiên 60–90 phút, một mục tiêu rõ ràng."
+    },
+    {
+      "id": "design-14",
+      "topic": "design",
+      "title": "Biên thời gian và ngày tháng",
+      "lines": [
+        "Ngưỡng 'trong 60 ngày': gồm ngày cuối không?",
+        "Ngày lịch hay cuộn 24 giờ? Múi giờ nào?",
+        "Thử 23:59, 00:00, cuối tháng, năm nhuận."
+      ],
+      "tip": "Mẹo: ghi rõ cách tính ngưỡng vào câu hỏi BA.",
+      "src": "qc-brain/test-design-techniques.md"
+    },
+    {
+      "id": "design-15",
+      "topic": "design",
+      "title": "Khi hai quy tắc cùng khớp",
+      "lines": [
+        "Quy tắc nào thắng? Có trường hợp hoà không?",
+        "Hoà thì xử lý ra sao: ưu tiên, cộng dồn hay báo lỗi?",
+        "Đây là chỗ spec hay bỏ trống và dễ ra lỗi."
+      ],
+      "tip": "Mẹo: ví dụ hai mã giảm giá áp cùng lúc.",
+      "src": "qc-brain/heuristics.md"
+    },
+    {
+      "id": "design-16",
+      "topic": "design",
+      "title": "Bẫy khi dùng pairwise",
+      "lines": [
+        "Chỉ dùng cho tham số độc lập, không có quan hệ logic.",
+        "Quan hệ logic thì dùng bảng quyết định.",
+        "Thiếu ràng buộc sẽ sinh tổ hợp không tồn tại."
+      ],
+      "tip": "Mẹo: thêm tay vài tổ hợp rủi ro cao ngoài bộ cặp.",
+      "src": "qc-brain/test-design-techniques.md"
+    },
+    {
+      "id": "types-01",
+      "topic": "types",
+      "title": "Bốn mức kiểm thử",
+      "lines": [
+        "Đơn vị (unit): hàm/lớp đơn lẻ, do dev viết.",
+        "Tích hợp: các module hoặc dịch vụ phối hợp với nhau.",
+        "Hệ thống: toàn bộ sản phẩm theo yêu cầu.",
+        "Chấp nhận (UAT): người dùng/khách hàng xác nhận."
+      ],
+      "tip": "Mẹo: mức càng thấp càng nhanh và rẻ."
+    },
+    {
+      "id": "types-02",
+      "topic": "types",
+      "title": "Kim tự tháp kiểm thử",
+      "lines": [
+        "Đáy: nhiều unit test, nhanh và ổn định.",
+        "Giữa: số vừa test tích hợp/API.",
+        "Đỉnh: ít test UI end-to-end vì chậm và dễ vỡ."
+      ],
+      "tip": "Mẹo: tháp ngược (nhiều UI test) là cảnh báo nợ kỹ thuật."
+    },
+    {
+      "id": "types-03",
+      "topic": "types",
+      "title": "Chức năng và phi chức năng",
+      "lines": [
+        "Chức năng: hệ thống làm gì (đăng nhập, thanh toán).",
+        "Phi chức năng: hiệu năng, bảo mật, khả dụng, tương thích.",
+        "Phi chức năng thường bị quên, nhưng gây hỏng trải nghiệm."
+      ],
+      "tip": "Mẹo: yêu cầu phi chức năng phải đo được bằng số."
+    },
+    {
+      "id": "types-04",
+      "topic": "types",
+      "title": "Smoke và sanity",
+      "lines": [
+        "Smoke: kiểm nhanh chức năng cốt lõi sau mỗi bản build.",
+        "Sanity: kiểm hẹp, sâu vào chỗ vừa sửa.",
+        "Smoke fail thì dừng, trả build lại cho dev."
+      ],
+      "tip": "Mẹo: smoke nên chạy dưới 10 phút, tự động hoá được."
+    },
+    {
+      "id": "types-05",
+      "topic": "types",
+      "title": "Regression test",
+      "lines": [
+        "Xác nhận thay đổi mới không làm hỏng chức năng cũ.",
+        "Chọn theo rủi ro và vùng bị ảnh hưởng.",
+        "Phù hợp để tự động hoá vì lặp lại nhiều lần."
+      ],
+      "tip": "Mẹo: mỗi bug nặng đã sửa nên có một case regression."
+    },
+    {
+      "id": "types-06",
+      "topic": "types",
+      "title": "Confirmation test (retest)",
+      "lines": [
+        "Chạy lại đúng kịch bản đã lỗi để xác nhận đã sửa.",
+        "Khác regression: retest kiểm bug, regression kiểm phụ cận.",
+        "Làm cả hai trước khi đóng bug."
+      ],
+      "tip": "Mẹo: ghi build đã retest vào bug."
+    },
+    {
+      "id": "types-07",
+      "topic": "types",
+      "title": "Hộp đen, hộp trắng, hộp xám",
+      "lines": [
+        "Hộp đen: test theo yêu cầu, không cần biết code.",
+        "Hộp trắng: dựa cấu trúc code, nhánh, điều kiện.",
+        "Hộp xám: biết một phần nội bộ như DB hoặc API."
+      ],
+      "tip": "Mẹo: test UI rồi đối chiếu DB là cách hộp xám hiệu quả."
+    },
+    {
+      "id": "types-08",
+      "topic": "types",
+      "title": "Kiểm thử khả dụng (usability)",
+      "lines": [
+        "Đo mức dễ học, dễ dùng, ít lỗi thao tác.",
+        "Quan sát người dùng thật làm tác vụ cụ thể.",
+        "Chỉ số: tỉ lệ hoàn thành, thời gian, số lần nhầm."
+      ],
+      "tip": "Mẹo: chỉ 5 người dùng đã lộ phần lớn vấn đề chính."
+    },
+    {
+      "id": "types-09",
+      "topic": "types",
+      "title": "Kiểm thử tương thích",
+      "lines": [
+        "Trình duyệt, hệ điều hành, thiết bị, độ phân giải khác nhau.",
+        "Chọn ma trận theo số liệu người dùng thực.",
+        "Đừng test mọi thứ, chỉ cấu hình phổ biến và rủi ro."
+      ],
+      "tip": "Mẹo: dùng pairwise để rút gọn ma trận."
+    },
+    {
+      "id": "types-10",
+      "topic": "types",
+      "title": "Kiểm thử cài đặt, nâng cấp",
+      "lines": [
+        "Cài mới, nâng cấp từ phiên bản cũ, gỡ cài đặt.",
+        "Dữ liệu cũ phải còn đúng sau khi nâng cấp.",
+        "Thử cả khi mất mạng, hết dung lượng giữa chừng."
+      ],
+      "tip": "Mẹo: giữ vài bản dữ liệu cũ làm mẫu nâng cấp."
+    },
+    {
+      "id": "types-11",
+      "topic": "types",
+      "title": "Kiểm thử khả năng phục hồi",
+      "lines": [
+        "Hệ thống xử lý sự cố ra sao: mất mạng, DB chết, timeout.",
+        "Kiểm tra thông báo, thử lại, mất dữ liệu hay không.",
+        "Mở rộng thành chaos testing khi đã trưởng thành."
+      ],
+      "tip": "Mẹo: ngắt mạng lúc thanh toán, xem có bị trừ tiền hai lần?"
+    },
+    {
+      "id": "types-12",
+      "topic": "types",
+      "title": "Kiểm thử đa ngôn ngữ (i18n/l10n)",
+      "lines": [
+        "Chữ có dấu, hướng chữ, định dạng ngày/giờ/tiền tệ.",
+        "Chuỗi dài hơn có thể vỡ giao diện.",
+        "Mã hoá UTF-8 xuyên suốt từ form tới DB."
+      ],
+      "tip": "Mẹo: thử cả múi giờ khác và ngày 29/02."
+    },
+    {
+      "id": "types-13",
+      "topic": "types",
+      "title": "Alpha, beta và UAT",
+      "lines": [
+        "Alpha: nội bộ, môi trường gần thật.",
+        "Beta: nhóm người dùng thật, môi trường thật.",
+        "UAT: khách hàng xác nhận đáp ứng nghiệp vụ trước khi nhận."
+      ],
+      "tip": "Mẹo: thoả thuận tiêu chí chấp nhận trước UAT."
+    },
+    {
+      "id": "types-14",
+      "topic": "types",
+      "title": "Test khả năng truy cập (a11y)",
+      "lines": [
+        "Điều hướng bằng bàn phím, nhãn cho trình đọc màn hình.",
+        "Độ tương phản màu đủ, văn bản thay thế cho ảnh.",
+        "Quan trọng với quy định và người dùng khuyết tật."
+      ],
+      "tip": "Mẹo: thử dùng web chỉ bằng phím Tab và Enter."
+    },
+    {
+      "id": "types-15",
+      "topic": "types",
+      "title": "Hành trình người dùng bắt buộc có",
+      "lines": [
+        "Người dùng mới hoàn toàn, dữ liệu trống.",
+        "Dùng liên tục nhiều tính năng, người dùng cũ quay lại.",
+        "Bỏ dở giữa chừng, bấm lặp, gửi lặp."
+      ],
+      "tip": "Mẹo: mỗi tính năng nên có vài case kiểu hành trình.",
+      "src": "qc-brain/heuristics.md"
+    },
+    {
+      "id": "types-16",
+      "topic": "types",
+      "title": "Gián đoạn và phục hồi",
+      "lines": [
+        "Mất mạng, cuộc gọi đến, ứng dụng về nền, thoát giữa chừng.",
+        "Mở lại: dữ liệu còn đúng, không gửi trùng.",
+        "Quay lại sau khi phiên hết hạn thì sao?"
+      ],
+      "tip": "Mẹo: thử Back nhiều lần thay vì khởi động lại ứng dụng.",
+      "src": "qc-brain/heuristics.md"
+    },
+    {
+      "id": "types-17",
+      "topic": "types",
+      "title": "Kiểm thử thiết bị di động",
+      "lines": [
+        "Xoay màn hình, bàn phím che ô nhập, quyền bị từ chối.",
+        "Mạng yếu, chuyển Wi-Fi sang dữ liệu di động.",
+        "Pin yếu, bộ nhớ đầy, nhiều kích thước màn hình."
+      ],
+      "tip": "Mẹo: thử từ chối quyền ngay lần hỏi đầu tiên.",
+      "src": "courses/mobile-manual.txt"
+    },
+    {
+      "id": "bug-01",
+      "topic": "bug",
+      "title": "Vòng đời của một bug",
+      "lines": [
+        "Mới → đã gán → đang sửa → đã sửa → đã xác nhận → đóng.",
+        "Có thể mở lại nếu retest vẫn lỗi.",
+        "Trạng thái từ chối/trùng/không tái hiện cần lý do rõ."
+      ],
+      "tip": "Mẹo: không tự đóng bug nếu chưa retest."
+    },
+    {
+      "id": "bug-02",
+      "topic": "bug",
+      "title": "Severity và Priority",
+      "lines": [
+        "Severity: mức ảnh hưởng kỹ thuật của lỗi.",
+        "Priority: thứ tự cần sửa theo kinh doanh.",
+        "Lỗi chính tả logo trang chủ: severity thấp, priority cao."
+      ],
+      "tip": "Mẹo: QA đề xuất severity, PO/PM quyết định priority."
+    },
+    {
+      "id": "bug-03",
+      "topic": "bug",
+      "title": "Bug report chuẩn gồm gì",
+      "lines": [
+        "Tiêu đề ngắn, bước tái hiện, kết quả thực tế, mong đợi.",
+        "Môi trường, phiên bản build, dữ liệu dùng.",
+        "Ảnh, video, log, tần suất xảy ra."
+      ],
+      "tip": "Mẹo: dev đọc xong tái hiện được mà không phải hỏi lại."
+    },
+    {
+      "id": "bug-04",
+      "topic": "bug",
+      "title": "Viết tiêu đề bug hiệu quả",
+      "lines": [
+        "Nêu hiện tượng, vị trí và điều kiện.",
+        "Tốt: 'Giỏ hàng: tổng tiền sai khi áp mã giảm 2 lần'.",
+        "Tránh: 'Lỗi giỏ hàng', 'Không chạy'."
+      ],
+      "tip": "Mẹo: tiêu đề phải tìm lại được bằng từ khoá."
+    },
+    {
+      "id": "bug-05",
+      "topic": "bug",
+      "title": "Bug không tái hiện được",
+      "lines": [
+        "Thu thập thêm: log, thời gian, tài khoản, thiết bị.",
+        "Thử lại nhiều lần, khác dữ liệu, khác môi trường.",
+        "Ghi tần suất, ví dụ 3/10 lần, để dev có manh mối."
+      ],
+      "tip": "Mẹo: quay video màn hình ngay khi lỗi xuất hiện."
+    },
+    {
+      "id": "bug-06",
+      "topic": "bug",
+      "title": "Phân loại lỗi theo mức độ",
+      "lines": [
+        "Critical: sập hệ thống, mất dữ liệu, lỗi bảo mật nặng.",
+        "Major: chức năng chính hỏng, không có cách lách.",
+        "Minor: lỗi nhỏ, có cách lách. Trivial: thẩm mỹ."
+      ],
+      "tip": "Mẹo: thống nhất định nghĩa mức độ bằng văn bản."
+    },
+    {
+      "id": "bug-07",
+      "topic": "bug",
+      "title": "Một bug, một báo cáo",
+      "lines": [
+        "Không gộp nhiều lỗi vào một ticket.",
+        "Gộp làm khó theo dõi, sửa và đóng từng phần.",
+        "Nhiều triệu chứng cùng nguyên nhân thì liên kết lại."
+      ],
+      "tip": "Mẹo: dùng liên kết 'liên quan' giữa các ticket."
+    },
+    {
+      "id": "bug-08",
+      "topic": "bug",
+      "title": "Phân tích bug để cải tiến",
+      "lines": [
+        "Thống kê theo module, nguyên nhân, giai đoạn phát hiện.",
+        "Tỉ lệ lỗi lọt ra production cho thấy chất lượng test.",
+        "Dùng số liệu để đổi quy trình, không để đổ lỗi."
+      ],
+      "tip": "Mẹo: làm retro dựa trên 5 bug nặng nhất."
+    },
+    {
+      "id": "bug-09",
+      "topic": "bug",
+      "title": "Defect leakage (lỗi lọt)",
+      "lines": [
+        "Lỗi phát hiện ở production / tổng lỗi.",
+        "Phản ánh hiệu quả của các lớp kiểm thử trước đó.",
+        "Mỗi lỗi lọt cần hỏi: vì sao test không bắt được?"
+      ],
+      "tip": "Mẹo: thêm test case cho mỗi lỗi lọt đã gặp."
+    },
+    {
+      "id": "bug-10",
+      "topic": "bug",
+      "title": "Triage bug theo nhóm",
+      "lines": [
+        "Họp ngắn xem bug mới, đánh giá mức độ, giao người.",
+        "Có mặt QA, dev, PO để quyết định nhanh.",
+        "Mục tiêu: không ai bị bỏ quên, không tranh cãi kéo dài."
+      ],
+      "tip": "Mẹo: giới hạn mỗi bug dưới 2 phút thảo luận."
+    },
+    {
+      "id": "bug-11",
+      "topic": "bug",
+      "title": "Bug do yêu cầu hay do code?",
+      "lines": [
+        "Phân biệt: hệ thống làm sai spec, hay spec sai/thiếu.",
+        "Lỗi yêu cầu cần BA/PO quyết định, không chỉ dev sửa.",
+        "Ghi rõ nguồn gốc để cải tiến đúng khâu."
+      ],
+      "tip": "Mẹo: gắn nhãn nguồn: yêu cầu / thiết kế / code / môi trường."
+    },
+    {
+      "id": "bug-12",
+      "topic": "bug",
+      "title": "Cách giao tiếp khi báo bug",
+      "lines": [
+        "Nói về sản phẩm, không nói về người.",
+        "Dùng dữ kiện và bằng chứng, tránh 'bạn làm sai'.",
+        "Cảm ơn khi bug được sửa nhanh, tạo văn hoá tích cực."
+      ],
+      "tip": "Mẹo: 'Mình thấy X khi làm Y' thay vì 'Code bạn lỗi'."
+    },
+    {
+      "id": "bug-13",
+      "topic": "bug",
+      "title": "Bug trên production",
+      "lines": [
+        "Đánh giá ảnh hưởng: số người dùng, tiền, dữ liệu.",
+        "Có cách lách tạm thời không? Có cần hotfix không?",
+        "Sau khi sửa: viết postmortem không đổ lỗi."
+      ],
+      "tip": "Mẹo: ghi mốc thời gian để xác định phạm vi ảnh hưởng."
+    },
+    {
+      "id": "bug-14",
+      "topic": "bug",
+      "title": "Error, defect và failure",
+      "lines": [
+        "Error: người hiểu sai (ví dụ hiểu sai hạn huỷ).",
+        "Defect: điều kiện sai nằm trong sản phẩm công việc.",
+        "Failure: kết quả chạy sai so với mong đợi khi thực thi."
+      ],
+      "tip": "Mẹo: bug report mô tả failure, tìm defect khi phân tích.",
+      "src": "courses/bug-life.txt"
+    },
+    {
+      "id": "bug-15",
+      "topic": "bug",
+      "title": "Một quan sát có cấu trúc",
+      "lines": [
+        "Ghi build, vai trò, dữ liệu, trạng thái trước khi thao tác.",
+        "Ghi điều thấy ở UI và sau khi làm mới, kèm thời điểm.",
+        "Không ghi token hay dữ liệu cá nhân thật."
+      ],
+      "tip": "Mẹo: ghi mốc thời gian để dev đối chiếu log.",
+      "src": "courses/bug-life.txt"
+    },
+    {
+      "id": "bug-16",
+      "topic": "bug",
+      "title": "Actual ngắn, bằng chứng để riêng",
+      "lines": [
+        "Phần kết quả thực tế chỉ 1–3 ý sai.",
+        "Log dài chuyển xuống mục bằng chứng.",
+        "Dev nhìn là thấy ngay chỗ sai."
+      ],
+      "tip": "Mẹo: bug kể lể làm người đọc bỏ sót điều quan trọng.",
+      "src": "qc-brain/anti-patterns.md"
+    },
+    {
+      "id": "bug-17",
+      "topic": "bug",
+      "title": "Độ tin cậy của kết luận bug",
+      "lines": [
+        "Chắc chắn: tái hiện ≥ 2 lần, có bằng chứng UI và API/DB.",
+        "Khá chắc: thấy một lần, bằng chứng rõ, chưa lặp lại.",
+        "Nghi ngờ: dấu hiệu gián tiếp, cần thêm dữ liệu."
+      ],
+      "tip": "Mẹo: ghi mức tin cậy vào bug, đừng nói chắc khi chưa chắc.",
+      "src": "qc-brain/thinking-models.md"
+    },
+    {
+      "id": "api-01",
+      "topic": "api",
+      "title": "Các phương thức HTTP chính",
+      "lines": [
+        "GET lấy dữ liệu, POST tạo mới, PUT thay thế toàn bộ.",
+        "PATCH sửa một phần, DELETE xoá.",
+        "GET, PUT, DELETE nên idempotent, POST thì không."
+      ],
+      "tip": "Mẹo: gọi PUT hai lần phải cho cùng kết quả."
+    },
+    {
+      "id": "api-02",
+      "topic": "api",
+      "title": "Nhóm mã trạng thái HTTP",
+      "lines": [
+        "2xx thành công, 3xx chuyển hướng.",
+        "4xx lỗi phía client, 5xx lỗi phía server.",
+        "200 OK, 201 Created, 204 No Content là mã hay gặp."
+      ],
+      "tip": "Mẹo: tạo mới thành công nên trả 201, không phải 200."
+    },
+    {
+      "id": "api-03",
+      "topic": "api",
+      "title": "401 và 403 khác nhau",
+      "lines": [
+        "401 Unauthorized: chưa xác thực hoặc token sai/hết hạn.",
+        "403 Forbidden: đã xác thực nhưng không đủ quyền.",
+        "404 cho tài nguyên không tồn tại."
+      ],
+      "tip": "Mẹo: user thường gọi API admin phải ra 403, không phải 200."
+    },
+    {
+      "id": "api-04",
+      "topic": "api",
+      "title": "400, 404, 409, 422",
+      "lines": [
+        "400: yêu cầu sai cú pháp hoặc thiếu tham số.",
+        "404: không tìm thấy. 409: xung đột trạng thái (trùng).",
+        "422: đúng cú pháp nhưng sai nghiệp vụ/validate."
+      ],
+      "tip": "Mẹo: tạo trùng email nên ra 409 và thông báo rõ."
+    },
+    {
+      "id": "api-05",
+      "topic": "api",
+      "title": "Idempotent là gì",
+      "lines": [
+        "Gọi nhiều lần cho cùng kết quả như gọi một lần.",
+        "Quan trọng khi client thử lại do timeout.",
+        "POST thanh toán cần khoá idempotency để tránh trừ tiền 2 lần."
+      ],
+      "tip": "Mẹo: gửi cùng một yêu cầu thanh toán hai lần và kiểm tra."
+    },
+    {
+      "id": "api-06",
+      "topic": "api",
+      "title": "Kiểm tra gì trong một response",
+      "lines": [
+        "Mã trạng thái, thân JSON, header, thời gian phản hồi.",
+        "Kiểu dữ liệu, trường bắt buộc, giá trị null.",
+        "Cấu trúc lỗi thống nhất, không lộ stack trace."
+      ],
+      "tip": "Mẹo: kiểm cả schema, không chỉ vài trường."
+    },
+    {
+      "id": "api-07",
+      "topic": "api",
+      "title": "Kiểm thử đầu vào API",
+      "lines": [
+        "Thiếu trường, sai kiểu, quá dài, giá trị biên.",
+        "Gửi chuỗi rỗng, null, số âm, ký tự đặc biệt.",
+        "Trường thừa, ID của người dùng khác."
+      ],
+      "tip": "Mẹo: đổi ID trong URL để thử IDOR."
+    },
+    {
+      "id": "api-08",
+      "topic": "api",
+      "title": "Phân trang và lọc",
+      "lines": [
+        "Kiểm tra page, size, tổng bản ghi, trang cuối, trang rỗng.",
+        "Sắp xếp ổn định, không trùng/sót bản ghi giữa các trang.",
+        "Giới hạn size tối đa để tránh quá tải."
+      ],
+      "tip": "Mẹo: thử size=0, size=-1, size=1000000."
+    },
+    {
+      "id": "api-09",
+      "topic": "api",
+      "title": "Xác thực bằng token",
+      "lines": [
+        "Thiếu token, token hết hạn, token bị sửa đổi.",
+        "Token của người dùng A không truy cập được dữ liệu B.",
+        "Đăng xuất xong, token phải vô hiệu theo thiết kế."
+      ],
+      "tip": "Mẹo: sửa 1 ký tự của token, kỳ vọng 401."
+    },
+    {
+      "id": "api-10",
+      "topic": "api",
+      "title": "Giới hạn tần suất (rate limit)",
+      "lines": [
+        "Vượt ngưỡng gọi phải nhận 429 Too Many Requests.",
+        "Header cho biết thời gian được thử lại.",
+        "Ngăn lạm dụng và tấn công dò mật khẩu."
+      ],
+      "tip": "Mẹo: thử 100 request liên tiếp trong vài giây."
+    },
+    {
+      "id": "api-11",
+      "topic": "api",
+      "title": "Kiểm thử hợp đồng API",
+      "lines": [
+        "Hợp đồng mô tả request và response mong đợi giữa hai bên.",
+        "Phát hiện sớm khi một bên đổi API làm hỏng bên kia.",
+        "Phù hợp kiến trúc nhiều dịch vụ."
+      ],
+      "tip": "Mẹo: thay đổi phá vỡ hợp đồng phải đổi phiên bản API."
+    },
+    {
+      "id": "api-12",
+      "topic": "api",
+      "title": "Tương thích ngược & phiên bản",
+      "lines": [
+        "Thêm trường mới không được làm hỏng client cũ.",
+        "Xoá/đổi tên trường là thay đổi phá vỡ.",
+        "Dùng phiên bản trong đường dẫn hoặc header."
+      ],
+      "tip": "Mẹo: chạy bộ test bản cũ trên bản mới."
+    },
+    {
+      "id": "api-13",
+      "topic": "api",
+      "title": "Mock và stub cho dịch vụ ngoài",
+      "lines": [
+        "Giả lập dịch vụ phụ thuộc để test ổn định và nhanh.",
+        "Mô phỏng được lỗi khó gây ra: timeout, 500, dữ liệu sai.",
+        "Nhưng vẫn cần vài test với dịch vụ thật."
+      ],
+      "tip": "Mẹo: mock cả trường hợp dịch vụ ngoài trả chậm 30 giây."
+    },
+    {
+      "id": "api-14",
+      "topic": "api",
+      "title": "Test thứ tự và phụ thuộc",
+      "lines": [
+        "Tạo → đọc → sửa → xoá cần chạy đúng thứ tự.",
+        "Mỗi test tự chuẩn bị và dọn dữ liệu của mình.",
+        "Tránh test phụ thuộc kết quả test khác."
+      ],
+      "tip": "Mẹo: gắn timestamp vào email để dữ liệu luôn duy nhất."
+    },
+    {
+      "id": "api-15",
+      "topic": "api",
+      "title": "API như người phục vụ nhà hàng",
+      "lines": [
+        "Client là khách, server là bếp, API là người phục vụ.",
+        "Gọi đúng thì có ra đúng món không?",
+        "Gọi sai thì có báo lỗi rõ ràng không?"
+      ],
+      "tip": "Mẹo: tester API kiểm cả đường đúng lẫn đường lỗi.",
+      "src": "courses/api.txt"
+    },
+    {
+      "id": "api-16",
+      "topic": "api",
+      "title": "Cấu trúc một request HTTP",
+      "lines": [
+        "Dòng đầu: phương thức, đường dẫn, phiên bản.",
+        "Header: Host, Accept, Content-Type, xác thực.",
+        "Dòng trống, rồi body (nếu có)."
+      ],
+      "tip": "Mẹo: Accept là điều client muốn, Content-Type là điều gửi.",
+      "src": "courses/api.txt"
+    },
+    {
+      "id": "api-17",
+      "topic": "api",
+      "title": "Các phần của một URL",
+      "lines": [
+        "Giao thức, tên máy chủ, cổng, đường dẫn.",
+        "Query string: ?page=2&size=10 sau dấu hỏi.",
+        "Đường dẫn chỉ tài nguyên, query dùng để lọc hoặc phân trang."
+      ],
+      "tip": "Mẹo: thử query thiếu, thừa, trùng khoá và giá trị rất dài.",
+      "src": "courses/api.txt"
+    },
+    {
+      "id": "perf-01",
+      "topic": "perf",
+      "title": "Các loại kiểm thử hiệu năng",
+      "lines": [
+        "Load: tải dự kiến thông thường.",
+        "Stress: vượt giới hạn để xem điểm gãy.",
+        "Spike: tăng đột biến. Soak: chạy dài nhiều giờ."
+      ],
+      "tip": "Mẹo: soak test giúp tìm rò rỉ bộ nhớ."
+    },
+    {
+      "id": "perf-02",
+      "topic": "perf",
+      "title": "Vì sao dùng p95, không chỉ trung bình",
+      "lines": [
+        "Trung bình che mất các yêu cầu chậm.",
+        "p95 = 95% yêu cầu nhanh hơn giá trị này.",
+        "Người dùng nhớ lần chậm nhất, không nhớ trung bình."
+      ],
+      "tip": "Mẹo: đặt mục tiêu như p95 < 800 ms."
+    },
+    {
+      "id": "perf-03",
+      "topic": "perf",
+      "title": "Throughput và latency",
+      "lines": [
+        "Latency: thời gian một yêu cầu cần để hoàn thành.",
+        "Throughput: số yêu cầu xử lý được mỗi giây.",
+        "Tăng tải thường làm latency tăng, throughput chững lại."
+      ],
+      "tip": "Mẹo: vẽ đồ thị tải so với latency để tìm điểm gãy."
+    },
+    {
+      "id": "perf-04",
+      "topic": "perf",
+      "title": "Think time và người dùng ảo",
+      "lines": [
+        "Người thật dừng đọc giữa các thao tác.",
+        "Thiếu think time làm tải ảo vượt thực tế.",
+        "Mô phỏng theo hành vi thật: duyệt nhiều, mua ít."
+      ],
+      "tip": "Mẹo: lấy tỉ lệ luồng từ log truy cập thực tế."
+    },
+    {
+      "id": "perf-05",
+      "topic": "perf",
+      "title": "Điểm nghẽn thường gặp",
+      "lines": [
+        "CPU, bộ nhớ, đĩa, mạng, kết nối DB, khoá.",
+        "Truy vấn chậm thiếu chỉ mục là thủ phạm số một.",
+        "Đo từng tầng để biết nghẽn ở đâu."
+      ],
+      "tip": "Mẹo: kiểm tra N+1 query khi danh sách load chậm."
+    },
+    {
+      "id": "perf-06",
+      "topic": "perf",
+      "title": "Mục tiêu hiệu năng phải đo được",
+      "lines": [
+        "Câu 'hệ thống phải nhanh' không kiểm thử được.",
+        "Viết: 500 người dùng đồng thời, p95 < 2 s, lỗi < 1%.",
+        "Gắn với SLA/SLO của sản phẩm."
+      ],
+      "tip": "Mẹo: lấy mục tiêu từ nhu cầu kinh doanh, không đoán."
+    },
+    {
+      "id": "perf-07",
+      "topic": "perf",
+      "title": "Môi trường test hiệu năng",
+      "lines": [
+        "Môi trường càng giống production, kết quả càng tin cậy.",
+        "Dữ liệu đủ lớn mới lộ vấn đề truy vấn.",
+        "Máy tạo tải không nên cùng máy với hệ thống đích."
+      ],
+      "tip": "Mẹo: ghi rõ cấu hình máy trong báo cáo."
+    },
+    {
+      "id": "perf-08",
+      "topic": "perf",
+      "title": "Tỉ lệ lỗi dưới tải",
+      "lines": [
+        "Theo dõi lỗi 5xx, timeout, kết nối bị từ chối.",
+        "Hệ thống nhanh nhưng trả lỗi cũng là thất bại.",
+        "Xem lỗi xuất hiện từ mức tải nào."
+      ],
+      "tip": "Mẹo: tách thời gian của request thành công khỏi request lỗi."
+    },
+    {
+      "id": "perf-09",
+      "topic": "perf",
+      "title": "Rò rỉ bộ nhớ",
+      "lines": [
+        "Bộ nhớ tăng dần theo thời gian, không giảm.",
+        "Gây chậm dần rồi sập sau nhiều giờ/ngày.",
+        "Phát hiện bằng soak test và theo dõi bộ nhớ."
+      ],
+      "tip": "Mẹo: chạy tải ổn định 8–24 giờ, vẽ biểu đồ bộ nhớ."
+    },
+    {
+      "id": "perf-10",
+      "topic": "perf",
+      "title": "Cache và hiệu năng",
+      "lines": [
+        "Cache giúp nhanh nhưng có thể trả dữ liệu cũ.",
+        "Test cả lần đầu (cache nguội) và các lần sau (cache nóng).",
+        "Kiểm tra khi cache hết hạn đồng loạt."
+      ],
+      "tip": "Mẹo: đo riêng lần gọi đầu tiên sau khi khởi động."
+    },
+    {
+      "id": "perf-11",
+      "topic": "perf",
+      "title": "Hiệu năng phía giao diện",
+      "lines": [
+        "Thời gian tải trang, kích thước ảnh, số request.",
+        "Chỉ số cảm nhận: thời gian hiển thị nội dung chính.",
+        "Mạng chậm và máy yếu là ngữ cảnh người dùng thật."
+      ],
+      "tip": "Mẹo: giả lập mạng chậm khi kiểm thử trang."
+    },
+    {
+      "id": "perf-12",
+      "topic": "perf",
+      "title": "Ramp-up: tăng tải từ từ",
+      "lines": [
+        "Tăng người dùng dần để thấy điểm bắt đầu suy giảm.",
+        "Tăng đột ngột che mất điểm giới hạn thật.",
+        "Giữ ổn định mỗi bậc đủ lâu để lấy số liệu."
+      ],
+      "tip": "Mẹo: tăng 10% mỗi 5 phút rồi ghi lại các chỉ số."
+    },
+    {
+      "id": "perf-13",
+      "topic": "perf",
+      "title": "Định luật Little (cơ bản)",
+      "lines": [
+        "Số yêu cầu đồng thời = throughput × thời gian xử lý.",
+        "Ví dụ 100 req/s, mỗi req 0,5 s thì ~50 yêu cầu đồng thời.",
+        "Giúp ước lượng quy mô tải cần mô phỏng."
+      ],
+      "tip": "Mẹo: dùng để tính số luồng ảo cần thiết."
+    },
+    {
+      "id": "perf-14",
+      "topic": "perf",
+      "title": "Ba con số hay gặp khi đo hiệu năng",
+      "lines": [
+        "Thời gian phản hồi, số yêu cầu mỗi giây, tỉ lệ lỗi.",
+        "Đọc cùng nhau, không đọc riêng từng số.",
+        "Nhanh mà nhiều lỗi vẫn là hệ thống kém."
+      ],
+      "tip": "Mẹo: luôn ghi cả ba số trong báo cáo.",
+      "src": "courses/jmeter.txt"
+    },
+    {
+      "id": "perf-15",
+      "topic": "perf",
+      "title": "Quy tắc vàng khi tạo tải",
+      "lines": [
+        "Chỉ tạo tải lên hệ thống của bạn hoặc được cho phép.",
+        "Tạo tải vào hệ thống người khác có thể gây hại và vi phạm.",
+        "Dựng máy chủ mục tiêu riêng để luyện tập."
+      ],
+      "tip": "Mẹo: xin phép bằng văn bản trước khi test môi trường chung.",
+      "src": "courses/jmeter.txt"
+    },
+    {
+      "id": "perf-16",
+      "topic": "perf",
+      "title": "Stages: tăng giảm tải như thật",
+      "lines": [
+        "Tải thật lên xuống, không bật tắt đột ngột.",
+        "Chia bậc: tăng dần, giữ ổn định, giảm dần.",
+        "Xem hệ thống có phục hồi khi tải giảm không."
+      ],
+      "tip": "Mẹo: thêm bậc giảm để kiểm tra khả năng hồi phục.",
+      "src": "courses/k6.txt"
+    },
+    {
+      "id": "auto-01",
+      "topic": "auto",
+      "title": "Khi nào nên tự động hoá",
+      "lines": [
+        "Test lặp lại nhiều, ổn định, giá trị cao: regression, smoke.",
+        "Không nên: test chạy một lần, giao diện đang đổi liên tục.",
+        "Tính ROI: chi phí viết + bảo trì so với số lần chạy lại."
+      ],
+      "tip": "Mẹo: tự động hoá luồng cốt lõi trước, đừng cố làm 100%."
+    },
+    {
+      "id": "auto-02",
+      "topic": "auto",
+      "title": "Nguyên nhân test flaky",
+      "lines": [
+        "Chờ cố định (sleep) thay vì chờ điều kiện.",
+        "Dữ liệu dùng chung, thứ tự chạy phụ thuộc nhau.",
+        "Môi trường không ổn định, giờ giấc, bất đồng bộ."
+      ],
+      "tip": "Mẹo: cách ly flaky test, sửa gốc, đừng retry mù quáng."
+    },
+    {
+      "id": "auto-03",
+      "topic": "auto",
+      "title": "Chờ thông minh, không sleep",
+      "lines": [
+        "Chờ phần tử xuất hiện/ bấm được với thời gian tối đa.",
+        "Sleep cố định vừa chậm vừa vẫn có lúc thiếu.",
+        "Chờ theo trạng thái ứng dụng, không theo giây."
+      ],
+      "tip": "Mẹo: chờ đến khi nút bật, không chờ cứng 5 giây."
+    },
+    {
+      "id": "auto-04",
+      "topic": "auto",
+      "title": "Mẫu Page Object",
+      "lines": [
+        "Gom bộ chọn và thao tác của mỗi trang vào một lớp.",
+        "Đổi giao diện chỉ sửa một chỗ.",
+        "Test đọc như nghiệp vụ, không lẫn chi tiết kỹ thuật."
+      ],
+      "tip": "Mẹo: lớp trang không chứa assertion, để test quyết định."
+    },
+    {
+      "id": "auto-05",
+      "topic": "auto",
+      "title": "Chọn locator bền vững",
+      "lines": [
+        "Ưu tiên thuộc tính test riêng hoặc nhãn/vai trò.",
+        "Tránh XPath dài theo vị trí và class do CSS sinh ra.",
+        "Locator ổn định giảm chi phí bảo trì."
+      ],
+      "tip": "Mẹo: nhờ dev thêm data-testid cho phần tử quan trọng."
+    },
+    {
+      "id": "auto-06",
+      "topic": "auto",
+      "title": "Test độc lập, tự dọn dẹp",
+      "lines": [
+        "Mỗi test tự chuẩn bị dữ liệu và dọn lại sau khi chạy.",
+        "Chạy song song được khi không phụ thuộc nhau.",
+        "Không dựa vào kết quả của test trước."
+      ],
+      "tip": "Mẹo: tạo dữ liệu qua API thay vì qua giao diện cho nhanh."
+    },
+    {
+      "id": "auto-07",
+      "topic": "auto",
+      "title": "Assertion có ý nghĩa",
+      "lines": [
+        "Kiểm đúng điều quan trọng, không chỉ 'không lỗi'.",
+        "Một test không có assertion thì không kiểm gì cả.",
+        "Thông báo lỗi nêu giá trị thực và mong đợi."
+      ],
+      "tip": "Mẹo: đọc log fail là hiểu vì sao, không cần chạy lại."
+    },
+    {
+      "id": "auto-08",
+      "topic": "auto",
+      "title": "Quản lý dữ liệu test tự động",
+      "lines": [
+        "Dữ liệu duy nhất mỗi lần chạy để tránh xung đột.",
+        "Dùng seed/fixture cố định cho dữ liệu tham chiếu.",
+        "Không dùng dữ liệu thật của khách hàng."
+      ],
+      "tip": "Mẹo: tạo email dạng test+timestamp mỗi lần chạy."
+    },
+    {
+      "id": "auto-09",
+      "topic": "auto",
+      "title": "Tự động hoá API trước UI",
+      "lines": [
+        "API test nhanh, ổn định, phủ logic nghiệp vụ.",
+        "UI test chỉ giữ cho luồng người dùng quan trọng.",
+        "Dùng API để dựng tiền điều kiện cho UI test."
+      ],
+      "tip": "Mẹo: đăng nhập bằng API rồi nạp phiên vào trình duyệt."
+    },
+    {
+      "id": "auto-10",
+      "topic": "auto",
+      "title": "Báo cáo và phân tích test lỗi",
+      "lines": [
+        "Mỗi lần fail kèm ảnh chụp, log, video.",
+        "Phân loại: bug thật, test hỏng, môi trường, flaky.",
+        "Theo dõi tỉ lệ pass và thời gian chạy theo thời gian."
+      ],
+      "tip": "Mẹo: gắn nhãn nguyên nhân fail để thấy xu hướng."
+    },
+    {
+      "id": "auto-11",
+      "topic": "auto",
+      "title": "Chạy song song và độ ổn định",
+      "lines": [
+        "Song song rút ngắn thời gian nhưng lộ xung đột dữ liệu.",
+        "Chia nhóm test theo thời lượng cho cân bằng.",
+        "Tài nguyên môi trường phải chịu được tải test."
+      ],
+      "tip": "Mẹo: bắt đầu 2–4 luồng, tăng dần khi đã ổn định."
+    },
+    {
+      "id": "auto-12",
+      "topic": "auto",
+      "title": "Bảo trì test là chi phí chính",
+      "lines": [
+        "Viết test chỉ là phần nhỏ chi phí, bảo trì là phần lớn.",
+        "Test nát vì thiết kế kém sẽ bị bỏ đi.",
+        "Xoá test trùng lặp, không còn giá trị."
+      ],
+      "tip": "Mẹo: dành thời gian mỗi sprint để dọn bộ test."
+    },
+    {
+      "id": "auto-13",
+      "topic": "auto",
+      "title": "Kiểm thử trực quan tự động",
+      "lines": [
+        "So sánh ảnh chụp với ảnh chuẩn để bắt lỗi giao diện.",
+        "Dễ báo nhầm do font, hoạt ảnh, dữ liệu động.",
+        "Che các vùng động và đặt ngưỡng sai lệch hợp lý."
+      ],
+      "tip": "Mẹo: chỉ chụp các màn hình then chốt."
+    },
+    {
+      "id": "auto-14",
+      "topic": "auto",
+      "title": "Chế độ có và không có giao diện",
+      "lines": [
+        "Không giao diện: nhanh hơn, hợp với CI.",
+        "Có giao diện: để quan sát và gỡ lỗi từng bước.",
+        "Cùng một test cần chạy ổn ở cả hai chế độ."
+      ],
+      "tip": "Mẹo: gỡ lỗi từng bước trước khi kết luận test hỏng.",
+      "src": "courses/playwright.txt"
+    },
+    {
+      "id": "auto-15",
+      "topic": "auto",
+      "title": "Dùng DevTools để hiểu phần tử",
+      "lines": [
+        "Xem thuộc tính, vị trí, trạng thái trước khi viết locator.",
+        "Kiểm tra phần tử có nằm trong iframe, có bị che không.",
+        "Locator tốt xuất phát từ hiểu cấu trúc trang."
+      ],
+      "tip": "Mẹo: thử locator trong DevTools trước khi đưa vào code.",
+      "src": "courses/selenium.txt"
+    },
+    {
+      "id": "auto-16",
+      "topic": "auto",
+      "title": "Đừng ép thời gian chờ để chạy nhanh",
+      "lines": [
+        "Giảm timeout, đọc màn hình khi chưa tải xong sinh kết quả sai.",
+        "Chờ theo sự kiện và mốc nghiệp vụ, không con số cứng.",
+        "Rút gọn phần chờ khi kết quả đã có."
+      ],
+      "tip": "Mẹo: 'tối đa T' mà xong sớm là Pass, ghi rõ thời gian thực.",
+      "src": "qc-brain/anti-patterns.md"
+    },
+    {
+      "id": "security-01",
+      "topic": "security",
+      "title": "Bộ ba CIA",
+      "lines": [
+        "Confidentiality: bảo mật, chỉ người được phép xem.",
+        "Integrity: toàn vẹn, dữ liệu không bị sửa trái phép.",
+        "Availability: sẵn sàng, dịch vụ dùng được khi cần."
+      ],
+      "tip": "Mẹo: mỗi lỗ hổng hãy hỏi nó phá vỡ chữ nào trong CIA."
+    },
+    {
+      "id": "security-02",
+      "topic": "security",
+      "title": "SQL injection",
+      "lines": [
+        "Dữ liệu người dùng bị chèn vào câu truy vấn như lệnh.",
+        "Ví dụ nhập ' OR '1'='1 vào ô đăng nhập.",
+        "Phòng: truy vấn tham số hoá, kiểm tra đầu vào, quyền tối thiểu."
+      ],
+      "tip": "Mẹo: thử dấu nháy đơn ' ở mọi ô nhập, xem có lỗi DB không."
+    },
+    {
+      "id": "security-03",
+      "topic": "security",
+      "title": "XSS: chèn mã vào trang",
+      "lines": [
+        "Kẻ tấn công chèn script chạy trên trình duyệt nạn nhân.",
+        "Dạng: lưu trữ, phản xạ, dựa trên DOM.",
+        "Phòng: mã hoá đầu ra theo ngữ cảnh, chính sách nội dung CSP."
+      ],
+      "tip": "Mẹo: nhập <b>x</b> vào ô bình luận, xem có hiện chữ đậm?"
+    },
+    {
+      "id": "security-04",
+      "topic": "security",
+      "title": "CSRF",
+      "lines": [
+        "Lừa trình duyệt đã đăng nhập gửi yêu cầu ngoài ý muốn.",
+        "Ví dụ link ẩn tự chuyển tiền khi bạn mở trang lạ.",
+        "Phòng: token chống CSRF, cookie SameSite, xác nhận thao tác."
+      ],
+      "tip": "Mẹo: gửi POST từ trang khác, kỳ vọng bị từ chối."
+    },
+    {
+      "id": "security-05",
+      "topic": "security",
+      "title": "IDOR, kiểm soát truy cập hỏng",
+      "lines": [
+        "Đổi ID trong URL để xem dữ liệu người khác.",
+        "Ví dụ /orders/1001 đổi thành /orders/1002.",
+        "Phòng: kiểm tra quyền sở hữu ở server với mọi yêu cầu."
+      ],
+      "tip": "Mẹo: test bằng hai tài khoản, A truy cập tài nguyên của B."
+    },
+    {
+      "id": "security-06",
+      "topic": "security",
+      "title": "Xác thực và quản lý phiên",
+      "lines": [
+        "Mật khẩu mạnh, khoá sau nhiều lần sai, xác thực đa yếu tố.",
+        "ID phiên mới sau đăng nhập, hết hạn khi đăng xuất.",
+        "Cookie nên có cờ HttpOnly và Secure."
+      ],
+      "tip": "Mẹo: đăng xuất rồi bấm Back, xem còn thấy dữ liệu không?"
+    },
+    {
+      "id": "security-07",
+      "topic": "security",
+      "title": "JWT: những điều cần kiểm",
+      "lines": [
+        "Token không mã hoá, chỉ ký, đừng để dữ liệu nhạy cảm trong đó.",
+        "Kiểm tra chữ ký, hạn dùng, người nhận, thuật toán.",
+        "Thu hồi token khi đổi mật khẩu hoặc đăng xuất."
+      ],
+      "tip": "Mẹo: thử sửa payload (đổi role) và gửi lại token."
+    },
+    {
+      "id": "security-08",
+      "topic": "security",
+      "title": "OAuth: nhớ điều gì",
+      "lines": [
+        "Uỷ quyền truy cập mà không chia sẻ mật khẩu.",
+        "Kiểm tra redirect URI chính xác, tham số state, phạm vi quyền.",
+        "Token truy cập ngắn hạn, refresh token bảo vệ kỹ."
+      ],
+      "tip": "Mẹo: thử redirect URI lạ, kỳ vọng bị từ chối."
+    },
+    {
+      "id": "security-09",
+      "topic": "security",
+      "title": "Lộ dữ liệu nhạy cảm",
+      "lines": [
+        "Mật khẩu phải băm với muối, không lưu rõ.",
+        "Không ghi dữ liệu nhạy cảm vào log và thông báo lỗi.",
+        "Truyền tải qua HTTPS, mã hoá dữ liệu khi lưu."
+      ],
+      "tip": "Mẹo: xem response và log có lộ số thẻ, token không."
+    },
+    {
+      "id": "security-10",
+      "topic": "security",
+      "title": "Danh sách rủi ro bảo mật web phổ biến",
+      "lines": [
+        "Cộng đồng công bố danh sách 10 rủi ro web hàng đầu.",
+        "Gồm: kiểm soát truy cập hỏng, injection, cấu hình sai...",
+        "Dùng làm checklist khởi đầu cho kiểm thử bảo mật."
+      ],
+      "tip": "Mẹo: ánh xạ mỗi mục thành vài test case cụ thể."
+    },
+    {
+      "id": "security-11",
+      "topic": "security",
+      "title": "Cấu hình sai là lỗ hổng phổ biến",
+      "lines": [
+        "Mật khẩu mặc định, trang quản trị mở, thư mục liệt kê file.",
+        "Thông tin phiên bản trong header, chế độ debug bật.",
+        "Kiểm tra cả môi trường và thành phần phụ thuộc cũ."
+      ],
+      "tip": "Mẹo: hỏi 'có đường dẫn /admin hay /debug công khai không?'"
+    },
+    {
+      "id": "security-12",
+      "topic": "security",
+      "title": "Tải tệp lên an toàn",
+      "lines": [
+        "Kiểm tra loại thật của tệp, không chỉ phần đuôi.",
+        "Giới hạn dung lượng, đổi tên tệp, lưu ngoài thư mục chạy mã.",
+        "Quét mã độc trước khi cho người khác tải về."
+      ],
+      "tip": "Mẹo: thử đổi đuôi .exe thành .jpg rồi tải lên."
+    },
+    {
+      "id": "security-13",
+      "topic": "security",
+      "title": "Bảo mật là việc cả đội",
+      "lines": [
+        "Shift-left: mô hình mối đe doạ ngay khi thiết kế.",
+        "Quét phụ thuộc, quét mã tĩnh trong CI.",
+        "QA bổ sung góc nhìn kẻ tấn công vào test case."
+      ],
+      "tip": "Mẹo: hỏi 'kẻ xấu sẽ lạm dụng tính năng này thế nào?'"
+    },
+    {
+      "id": "security-14",
+      "topic": "security",
+      "title": "Luật chơi khi test bảo mật",
+      "lines": [
+        "Chỉ kiểm trên hệ thống mình sở hữu hoặc được cho phép.",
+        "Dùng môi trường luyện tập dựng trên máy cá nhân.",
+        "Ghi phạm vi và thời gian được phép trước khi bắt đầu."
+      ],
+      "tip": "Mẹo: có văn bản cho phép, như thợ khoá được thuê.",
+      "src": "courses/security-basics.txt"
+    },
+    {
+      "id": "security-15",
+      "topic": "security",
+      "title": "Từ user story ra abuse case",
+      "lines": [
+        "Mỗi story hỏi thêm: kẻ xấu sẽ lạm dụng thế nào?",
+        "Ví dụ đặt lại mật khẩu: dò email, thử lại hàng loạt.",
+        "Viết hậu điều kiện: điều gì không được xảy ra."
+      ],
+      "tip": "Mẹo: viết abuse case cạnh mỗi story rủi ro cao.",
+      "src": "courses/security-basics.txt"
+    },
+    {
+      "id": "security-16",
+      "topic": "security",
+      "title": "Query là cấu trúc, input là giá trị",
+      "lines": [
+        "Dữ liệu người dùng truyền như tham số, không nối chuỗi.",
+        "Tên bảng, cột không bind như giá trị, dùng danh sách cho phép.",
+        "Phân quyền vẫn là điều kiện kiểm riêng."
+      ],
+      "tip": "Mẹo: truy vấn tham số hoá chặn phần lớn SQL injection.",
+      "src": "courses/secure-coding.txt"
+    },
+    {
+      "id": "sql-01",
+      "topic": "sql",
+      "title": "INNER JOIN và LEFT JOIN",
+      "lines": [
+        "INNER JOIN: chỉ giữ hàng khớp ở cả hai bảng.",
+        "LEFT JOIN: giữ mọi hàng bảng trái, không khớp thì NULL.",
+        "LEFT JOIN + WHERE phải IS NULL tìm bản ghi mồ côi."
+      ],
+      "tip": "Mẹo: SELECT … FROM a LEFT JOIN b … WHERE b.id IS NULL"
+    },
+    {
+      "id": "sql-02",
+      "topic": "sql",
+      "title": "RIGHT và FULL JOIN",
+      "lines": [
+        "RIGHT JOIN: giữ mọi hàng bảng phải.",
+        "FULL JOIN: giữ mọi hàng cả hai bên, thiếu thì NULL.",
+        "Thường viết lại RIGHT JOIN thành LEFT JOIN cho dễ đọc."
+      ],
+      "tip": "Mẹo: FULL JOIN hữu ích khi đối chiếu hai nguồn dữ liệu."
+    },
+    {
+      "id": "sql-03",
+      "topic": "sql",
+      "title": "GROUP BY và HAVING",
+      "lines": [
+        "GROUP BY gom hàng theo nhóm để tính COUNT, SUM, AVG.",
+        "WHERE lọc trước khi gom, HAVING lọc sau khi gom.",
+        "Ví dụ: HAVING COUNT(*) > 1 tìm bản ghi trùng."
+      ],
+      "tip": "Mẹo: SELECT email … GROUP BY email HAVING COUNT(*)>1"
+    },
+    {
+      "id": "sql-04",
+      "topic": "sql",
+      "title": "NULL: cái bẫy kinh điển",
+      "lines": [
+        "NULL nghĩa là không biết, khác 0 và chuỗi rỗng.",
+        "NULL = NULL không đúng, dùng IS NULL.",
+        "Phép so sánh với NULL cho kết quả không xác định."
+      ],
+      "tip": "Mẹo: COUNT(cột) bỏ qua NULL, COUNT(*) thì không."
+    },
+    {
+      "id": "sql-05",
+      "topic": "sql",
+      "title": "Kiểm tra dữ liệu sau thao tác UI",
+      "lines": [
+        "Sau khi tạo/sửa/xoá trên giao diện, đối chiếu với DB.",
+        "Kiểm tra đúng bảng, đúng cột, đúng kiểu, không trùng.",
+        "Chú ý các bảng liên quan và trạng thái xoá mềm."
+      ],
+      "tip": "Mẹo: xoá mềm là cờ is_deleted, bản ghi vẫn còn trong bảng."
+    },
+    {
+      "id": "sql-06",
+      "topic": "sql",
+      "title": "Khoá chính và khoá ngoại",
+      "lines": [
+        "Khoá chính định danh duy nhất mỗi hàng.",
+        "Khoá ngoại bảo đảm tham chiếu tới bản ghi có tồn tại.",
+        "Test: xoá bản ghi cha khi còn con có bị chặn hay xoá chuỗi?"
+      ],
+      "tip": "Mẹo: thử chèn bản ghi con với cha_id không tồn tại."
+    },
+    {
+      "id": "sql-07",
+      "topic": "sql",
+      "title": "Giao dịch và ACID",
+      "lines": [
+        "Atomicity: hoặc làm hết hoặc không làm gì.",
+        "Consistency, Isolation, Durability hoàn chỉnh bộ ACID.",
+        "Test chuyển khoản: lỗi giữa chừng không được mất tiền."
+      ],
+      "tip": "Mẹo: ngắt giữa hai bước ghi, kiểm tra số dư."
+    },
+    {
+      "id": "sql-08",
+      "topic": "sql",
+      "title": "Chỉ mục và hiệu năng truy vấn",
+      "lines": [
+        "Chỉ mục giúp tìm nhanh nhưng làm ghi chậm hơn.",
+        "Cột hay lọc, nối nên có chỉ mục.",
+        "Dùng kế hoạch thực thi để xem có quét toàn bảng không."
+      ],
+      "tip": "Mẹo: truy vấn chậm thì xem kế hoạch thực thi trước."
+    },
+    {
+      "id": "sql-09",
+      "topic": "sql",
+      "title": "Tìm bản ghi trùng và mồ côi",
+      "lines": [
+        "Trùng: GROUP BY cột HAVING COUNT(*) > 1.",
+        "Mồ côi: LEFT JOIN bảng cha, lọc cha IS NULL.",
+        "Dùng để kiểm tra toàn vẹn dữ liệu sau di chuyển."
+      ],
+      "tip": "Mẹo: chạy các kiểm tra này như smoke cho dữ liệu."
+    },
+    {
+      "id": "sql-10",
+      "topic": "sql",
+      "title": "Kiểm thử di chuyển dữ liệu",
+      "lines": [
+        "So sánh số lượng bản ghi nguồn và đích.",
+        "Đối chiếu tổng tiền, mẫu ngẫu nhiên, giá trị biên, NULL.",
+        "Kiểm tra chuyển mã hoá, định dạng ngày, làm tròn số."
+      ],
+      "tip": "Mẹo: kiểm tổng SUM(amount) hai bên, không chỉ COUNT."
+    },
+    {
+      "id": "sql-11",
+      "topic": "sql",
+      "title": "Subquery và EXISTS",
+      "lines": [
+        "Truy vấn con trả dữ liệu cho truy vấn ngoài.",
+        "EXISTS dừng ngay khi tìm thấy một dòng khớp.",
+        "IN với tập chứa NULL có thể cho kết quả bất ngờ."
+      ],
+      "tip": "Mẹo: NOT IN gặp NULL trả rỗng, dùng NOT EXISTS thay thế."
+    },
+    {
+      "id": "sql-12",
+      "topic": "sql",
+      "title": "DELETE, TRUNCATE, DROP",
+      "lines": [
+        "DELETE: xoá hàng, có WHERE, có thể rollback.",
+        "TRUNCATE: xoá toàn bộ hàng, nhanh, ít ghi log.",
+        "DROP: xoá cả bảng. Cẩn thận trên môi trường dùng chung."
+      ],
+      "tip": "Mẹo: chạy SELECT cùng WHERE trước khi DELETE."
+    },
+    {
+      "id": "sql-13",
+      "topic": "sql",
+      "title": "Dữ liệu ở quy mô lớn",
+      "lines": [
+        "Bảng ít dòng che giấu truy vấn kém.",
+        "Tạo dữ liệu đủ lớn để thử phân trang, báo cáo, tìm kiếm.",
+        "Ẩn danh dữ liệu cá nhân khi sao chép từ môi trường thật."
+      ],
+      "tip": "Mẹo: không dùng dữ liệu khách hàng thật nếu chưa ẩn danh."
+    },
+    {
+      "id": "sql-14",
+      "topic": "sql",
+      "title": "Grain: một dòng nghĩa là gì",
+      "lines": [
+        "Chốt mỗi dòng bảng đại diện cho cái gì trước khi JOIN.",
+        "Một đơn có nhiều lần thử thanh toán: JOIN trực tiếp nhân dòng.",
+        "Nhân dòng làm tổng tiền bị đếm nhiều lần."
+      ],
+      "tip": "Mẹo: so COUNT trước và sau JOIN để phát hiện nhân dòng.",
+      "src": "courses/database-testing.txt"
+    },
+    {
+      "id": "sql-15",
+      "topic": "sql",
+      "title": "Đối soát khi nạp dữ liệu",
+      "lines": [
+        "Đầu vào = chấp nhận + từ chối + loại có giải thích.",
+        "Giữ mã lô, dòng nguồn để truy vết dòng lỗi.",
+        "Dòng sai miền vào khu cách ly, không vào bảng đích."
+      ],
+      "tip": "Mẹo: tổng hai bên khớp mới coi là đối soát đạt.",
+      "src": "courses/database-testing.txt"
+    },
+    {
+      "id": "sql-16",
+      "topic": "sql",
+      "title": "Dữ liệu qua nhiều hệ thống",
+      "lines": [
+        "Một đối tượng ở hệ A có thể thành nhiều bản ghi ở hệ B.",
+        "Phân bổ giá, giảm giá, thuế theo tỉ lệ nào khi tách?",
+        "Huỷ hoặc trả một phần sau đồng bộ: hệ nhận cập nhật đúng không?"
+      ],
+      "tip": "Mẹo: đối soát tổng tiền, số lượng, tồn theo ngày.",
+      "src": "qc-brain/heuristics.md"
+    },
+    {
+      "id": "agile-01",
+      "topic": "agile",
+      "title": "Vai trò của QA trong Agile",
+      "lines": [
+        "QA là một phần của đội, không phải cổng cuối cùng.",
+        "Tham gia refinement, định nghĩa tiêu chí chấp nhận.",
+        "Test song song cùng phát triển trong sprint."
+      ],
+      "tip": "Mẹo: whole team quality: cả đội chịu trách nhiệm chất lượng."
+    },
+    {
+      "id": "agile-02",
+      "topic": "agile",
+      "title": "Tiêu chí chấp nhận (AC)",
+      "lines": [
+        "Điều kiện để user story được coi là hoàn thành.",
+        "Cụ thể, đo được, kiểm thử được.",
+        "Dạng Given–When–Then làm rõ kịch bản."
+      ],
+      "tip": "Mẹo: AC mơ hồ thì hỏi lại ở buổi refinement."
+    },
+    {
+      "id": "agile-03",
+      "topic": "agile",
+      "title": "Definition of Done",
+      "lines": [
+        "Danh sách chung đội cam kết để một việc được xem là xong.",
+        "Ví dụ: code review, test pass, tài liệu, không bug nặng.",
+        "Khác AC: AC theo từng story, DoD áp dụng cho mọi story."
+      ],
+      "tip": "Mẹo: đưa tiêu chí kiểm thử vào DoD."
+    },
+    {
+      "id": "agile-04",
+      "topic": "agile",
+      "title": "BDD: Given–When–Then",
+      "lines": [
+        "Mô tả hành vi bằng ngôn ngữ nghiệp vụ dễ hiểu.",
+        "Given bối cảnh, When hành động, Then kết quả.",
+        "Gắn kết BA, dev, QA bằng ví dụ cụ thể."
+      ],
+      "tip": "Mẹo: ba amigos: BA, dev, QA cùng viết ví dụ."
+    },
+    {
+      "id": "agile-05",
+      "topic": "agile",
+      "title": "TDD: đỏ – xanh – tái cấu trúc",
+      "lines": [
+        "Viết test fail trước, rồi code cho pass, rồi dọn code.",
+        "Bảo đảm code luôn có test và thiết kế dễ kiểm thử.",
+        "Do dev thực hiện ở mức unit."
+      ],
+      "tip": "Mẹo: TDD là kỹ thuật thiết kế, không chỉ là kỹ thuật test."
+    },
+    {
+      "id": "agile-06",
+      "topic": "agile",
+      "title": "Pipeline CI/CD",
+      "lines": [
+        "CI: tích hợp code thường xuyên, tự build và test.",
+        "CD: tự động chuyển giao hoặc triển khai tới môi trường.",
+        "Mỗi commit đi qua build, unit, tích hợp, triển khai thử."
+      ],
+      "tip": "Mẹo: pipeline nên phản hồi cho dev trong dưới 10 phút."
+    },
+    {
+      "id": "agile-07",
+      "topic": "agile",
+      "title": "Cổng chất lượng (quality gate)",
+      "lines": [
+        "Điều kiện bắt buộc để build đi tiếp trong pipeline.",
+        "Ví dụ: unit pass, độ phủ tối thiểu, không lỗ hổng nặng.",
+        "Tự động hoá để quyết định khách quan."
+      ],
+      "tip": "Mẹo: đừng đặt ngưỡng phi thực tế, đội sẽ lách."
+    },
+    {
+      "id": "agile-08",
+      "topic": "agile",
+      "title": "Shift-left và shift-right",
+      "lines": [
+        "Shift-left: test sớm, review yêu cầu, unit, phân tích tĩnh.",
+        "Shift-right: theo dõi production, canary, thử nghiệm A/B.",
+        "Kết hợp cả hai để phủ vòng đời sản phẩm."
+      ],
+      "tip": "Mẹo: giám sát production cũng là một dạng kiểm thử."
+    },
+    {
+      "id": "agile-09",
+      "topic": "agile",
+      "title": "Chiến lược phát hành an toàn",
+      "lines": [
+        "Canary: phát hành cho nhóm nhỏ trước.",
+        "Blue-green: hai môi trường, chuyển đổi nhanh, rollback dễ.",
+        "Feature flag: bật/tắt tính năng không cần triển khai lại."
+      ],
+      "tip": "Mẹo: luôn có kế hoạch rollback đã được thử."
+    },
+    {
+      "id": "agile-10",
+      "topic": "agile",
+      "title": "Go/No-go: quyết định phát hành",
+      "lines": [
+        "Dựa trên rủi ro: bug mở, độ phủ, phần chưa test.",
+        "QA cung cấp thông tin, PO/quản lý đưa ra quyết định.",
+        "Ghi nhận rủi ro đã chấp nhận."
+      ],
+      "tip": "Mẹo: trình bày rủi ro bằng số người dùng bị ảnh hưởng."
+    },
+    {
+      "id": "agile-11",
+      "topic": "agile",
+      "title": "Retrospective hữu ích",
+      "lines": [
+        "Cả đội nhìn lại: cái tốt, cái cần cải tiến, hành động.",
+        "Chọn 1–2 hành động cụ thể có người chịu trách nhiệm.",
+        "Đừng đổ lỗi, tập trung vào quy trình."
+      ],
+      "tip": "Mẹo: kiểm lại hành động sprint trước ở đầu buổi họp."
+    },
+    {
+      "id": "agile-12",
+      "topic": "agile",
+      "title": "Môi trường kiểm thử",
+      "lines": [
+        "Dev, test/QA, staging, production là các tầng thường gặp.",
+        "Staging nên gần giống production nhất.",
+        "Cấu hình và dữ liệu khác nhau là nguồn lỗi 'chạy ở máy tôi'."
+      ],
+      "tip": "Mẹo: quản lý cấu hình môi trường bằng mã, có version."
+    },
+    {
+      "id": "agile-13",
+      "topic": "agile",
+      "title": "Chỉ số chất lượng DevOps",
+      "lines": [
+        "Tần suất triển khai, thời gian đưa thay đổi lên production.",
+        "Tỉ lệ thay đổi gây lỗi, thời gian khôi phục.",
+        "Dùng để cải tiến, không để xếp hạng cá nhân."
+      ],
+      "tip": "Mẹo: chỉ số tốt phản ánh quy trình, không ép hành vi sai."
+    },
+    {
+      "id": "agile-14",
+      "topic": "agile",
+      "title": "Tester ở đâu trong pipeline",
+      "lines": [
+        "Pipeline: build → test nhanh → test sâu → giao.",
+        "Một bước đỏ là dừng, lỗi sớm sửa rẻ hơn.",
+        "Tester thiết kế khâu kiểm tra chất lượng trên dây chuyền."
+      ],
+      "tip": "Mẹo: đặt smoke ở đầu, test chậm ở sau.",
+      "src": "courses/cicd.txt"
+    },
+    {
+      "id": "agile-15",
+      "topic": "agile",
+      "title": "Delivery và deployment khác nhau",
+      "lines": [
+        "Continuous Delivery: luôn sẵn sàng phát hành sau các cổng kiểm.",
+        "Quyết định phát hành có thể vẫn là thủ công.",
+        "Continuous Deployment: tự động phát hành khi qua cổng."
+      ],
+      "tip": "Mẹo: ghi rõ đội ở mức nào để tránh hiểu nhầm.",
+      "src": "courses/cicd.txt"
+    },
+    {
+      "id": "agile-16",
+      "topic": "agile",
+      "title": "Báo cáo go/no-go cho quản lý",
+      "lines": [
+        "Kết luận: Go, Go có điều kiện hoặc No-go, một câu lý do.",
+        "Đã biết ổn, đã biết hỏng, chưa biết (Blocked, chưa test).",
+        "Điều kiện cụ thể: 'Go nếu sửa bug X'."
+      ],
+      "tip": "Mẹo: 'chưa biết' là phần quan trọng nhất, đừng giấu.",
+      "src": "qc-brain/process-communication.md"
+    },
+    {
+      "id": "ai-01",
+      "topic": "ai",
+      "title": "AI hỗ trợ QA ở đâu",
+      "lines": [
+        "Gợi ý test case từ yêu cầu, dữ liệu test, tóm tắt log.",
+        "Soạn nháp bug report và tài liệu kiểm thử.",
+        "Con người vẫn là người duyệt và chịu trách nhiệm."
+      ],
+      "tip": "Mẹo: coi AI như đồng nghiệp tập sự: nhanh nhưng cần kiểm tra."
+    },
+    {
+      "id": "ai-02",
+      "topic": "ai",
+      "title": "Viết prompt tốt cho QA",
+      "lines": [
+        "Nêu vai trò, bối cảnh, định dạng đầu ra, ràng buộc.",
+        "Đưa ví dụ mẫu và tiêu chí chấp nhận.",
+        "Yêu cầu nêu giả định và câu hỏi còn thiếu."
+      ],
+      "tip": "Mẹo: 'Liệt kê ca biên, ca âm; hỏi lại nếu spec thiếu'."
+    },
+    {
+      "id": "ai-03",
+      "topic": "ai",
+      "title": "AI có thể bịa (hallucination)",
+      "lines": [
+        "Mô hình có thể đưa thông tin sai nhưng nghe rất tự tin.",
+        "Luôn đối chiếu với yêu cầu và hệ thống thực.",
+        "Không tin tuyệt đối trích dẫn, số liệu, tên hàm."
+      ],
+      "tip": "Mẹo: yêu cầu AI chỉ rõ nguồn của từng khẳng định."
+    },
+    {
+      "id": "ai-04",
+      "topic": "ai",
+      "title": "Bảo mật dữ liệu khi dùng AI",
+      "lines": [
+        "Không dán dữ liệu khách hàng, mật khẩu, mã nguồn mật.",
+        "Ẩn danh và rút gọn thông tin trước khi gửi.",
+        "Tuân theo chính sách công ty về dùng công cụ AI."
+      ],
+      "tip": "Mẹo: thay dữ liệu thật bằng dữ liệu giả cùng cấu trúc."
+    },
+    {
+      "id": "ai-05",
+      "topic": "ai",
+      "title": "Sinh test case bằng AI: quy trình",
+      "lines": [
+        "Cung cấp yêu cầu rõ, nêu kỹ thuật cần dùng (biên, phân vùng).",
+        "Rà soát: loại trùng, sửa sai, bổ sung ca rủi ro.",
+        "Đưa vào kho test sau khi con người xác nhận."
+      ],
+      "tip": "Mẹo: kiểm tra độ phủ yêu cầu của bộ AI đề xuất."
+    },
+    {
+      "id": "ai-06",
+      "topic": "ai",
+      "title": "Kiểm thử hệ thống dùng AI",
+      "lines": [
+        "Đầu ra không cố định, khó so sánh chính xác.",
+        "Dùng tiêu chí đánh giá, bộ câu hỏi mẫu, chấm điểm.",
+        "Kiểm thử cả an toàn, thiên lệch, rò rỉ dữ liệu."
+      ],
+      "tip": "Mẹo: lập bộ câu hỏi vàng, chạy lại khi đổi mô hình."
+    },
+    {
+      "id": "ai-07",
+      "topic": "ai",
+      "title": "Chatbot: các điểm cần test",
+      "lines": [
+        "Hiểu ý đồ, xử lý câu mơ hồ, nhiều lượt hội thoại.",
+        "Câu ngoài phạm vi, tiếng lóng, lỗi chính tả, không dấu.",
+        "Chuyển giao cho người thật khi không trả lời được."
+      ],
+      "tip": "Mẹo: hỏi cùng một ý theo 5 cách diễn đạt khác nhau."
+    },
+    {
+      "id": "ai-08",
+      "topic": "ai",
+      "title": "Prompt injection",
+      "lines": [
+        "Người dùng chèn lệnh để mô hình bỏ qua chỉ dẫn gốc.",
+        "Có thể làm lộ dữ liệu hoặc hành động ngoài ý muốn.",
+        "Test: lệnh 'bỏ qua hướng dẫn', lệnh ẩn trong tài liệu."
+      ],
+      "tip": "Mẹo: cho AI đọc tài liệu chứa lệnh ẩn để thử."
+    },
+    {
+      "id": "ai-09",
+      "topic": "ai",
+      "title": "Thiên lệch và công bằng",
+      "lines": [
+        "Mô hình có thể đối xử khác nhau theo giới tính, vùng miền.",
+        "Test cùng yêu cầu, chỉ thay thuộc tính nhạy cảm.",
+        "So sánh kết quả để phát hiện chênh lệch."
+      ],
+      "tip": "Mẹo: đổi tên đại diện các nhóm khác nhau, so phản hồi."
+    },
+    {
+      "id": "ai-10",
+      "topic": "ai",
+      "title": "Dữ liệu test do AI tạo",
+      "lines": [
+        "Sinh dữ liệu giả đa dạng: tên, địa chỉ, ca biên.",
+        "Kiểm định tính hợp lệ, không chứa dữ liệu thật.",
+        "Cố định hạt giống khi cần tái lập."
+      ],
+      "tip": "Mẹo: yêu cầu cả dữ liệu hợp lệ và không hợp lệ kèm lý do."
+    },
+    {
+      "id": "ai-11",
+      "topic": "ai",
+      "title": "AI phân tích log và lỗi",
+      "lines": [
+        "Tóm tắt log dài, gom nhóm lỗi tương tự, gợi ý nguyên nhân.",
+        "Đưa đủ ngữ cảnh: phiên bản, bước tái hiện, đoạn log liên quan.",
+        "Xác minh giả thuyết bằng tái hiện thực tế."
+      ],
+      "tip": "Mẹo: dán đoạn log đã lọc, không dán cả file."
+    },
+    {
+      "id": "ai-12",
+      "topic": "ai",
+      "title": "Giới hạn: AI không thay thế QA",
+      "lines": [
+        "Thiếu hiểu biết ngữ cảnh kinh doanh và trách nhiệm.",
+        "Khó đánh giá trải nghiệm, cảm xúc, rủi ro thực tế.",
+        "QA giỏi dùng AI để làm nhanh hơn, không để làm thay."
+      ],
+      "tip": "Mẹo: đo thời gian tiết kiệm được, ghi lại bài học."
+    },
+    {
+      "id": "ai-13",
+      "topic": "ai",
+      "title": "Đo hiệu quả khi dùng AI",
+      "lines": [
+        "So sánh thời gian, số lỗi phát hiện, chất lượng trước và sau.",
+        "Theo dõi tỉ lệ đề xuất AI được chấp nhận.",
+        "Phát hiện việc nào AI hiệu quả, việc nào không."
+      ],
+      "tip": "Mẹo: thử trên 1 tính năng nhỏ trước khi áp dụng rộng."
+    },
+    {
+      "id": "ai-14",
+      "topic": "ai",
+      "title": "AI như thực tập sinh siêu nhanh",
+      "lines": [
+        "Viết nhanh, trôi chảy, nhưng chưa từng thấy hệ thống của bạn.",
+        "Không biết vẫn có thể trả lời rất tự tin.",
+        "Giao việc rõ, đủ ngữ cảnh, luôn kiểm tra lại."
+      ],
+      "tip": "Mẹo: coi mọi kết quả AI là bản nháp cần duyệt.",
+      "src": "courses/ai-for-qa.txt"
+    },
+    {
+      "id": "ai-15",
+      "topic": "ai",
+      "title": "AI đoán từ kế tiếp, không tra sự thật",
+      "lines": [
+        "Mô hình tạo câu trả lời hợp lý nhất, không tra hệ thống bạn.",
+        "Vì vậy dễ bịa tên hàm, số liệu, trích dẫn.",
+        "Cần đối chiếu với tài liệu và môi trường thật."
+      ],
+      "tip": "Mẹo: hỏi AI 'nguồn nào?' rồi tự kiểm tra nguồn đó.",
+      "src": "courses/ai-for-qa.txt"
+    },
+    {
+      "id": "ai-16",
+      "topic": "ai",
+      "title": "Bẫy nhận thức của người test và AI",
+      "lines": [
+        "Chấm theo thứ hiện ra đầu tiên, như tin tự động của hệ thống.",
+        "Neo vào kết luận sớm, bỏ qua bằng chứng ngược.",
+        "Hỏi 'còn cách giải thích nào khác?' trước khi kết luận."
+      ],
+      "tip": "Mẹo: chờ phản hồi thật rồi mới chấm kết quả.",
+      "src": "qc-brain/thinking-models.md"
+    },
+    {
+      "id": "interview-01",
+      "topic": "interview",
+      "title": "Hỏi: Test và QA khác nhau thế nào?",
+      "lines": [
+        "QA là quy trình phòng ngừa lỗi, hướng tới chất lượng.",
+        "QC/Testing là hoạt động phát hiện lỗi ở sản phẩm.",
+        "QA bao trùm, testing là một phần của đảm bảo chất lượng."
+      ],
+      "tip": "Mẹo: nêu ví dụ: QA review quy trình, tester chạy test."
+    },
+    {
+      "id": "interview-02",
+      "topic": "interview",
+      "title": "Hỏi: Severity và priority là gì?",
+      "lines": [
+        "Severity: mức ảnh hưởng kỹ thuật của lỗi.",
+        "Priority: mức độ khẩn cấp cần sửa theo kinh doanh.",
+        "Ví dụ lỗi logo sai: severity thấp, priority cao."
+      ],
+      "tip": "Mẹo: luôn đưa ví dụ cặp thấp-cao và cao-thấp."
+    },
+    {
+      "id": "interview-03",
+      "topic": "interview",
+      "title": "Hỏi: Smoke khác sanity ra sao?",
+      "lines": [
+        "Smoke: kiểm rộng, nông chức năng chính của build mới.",
+        "Sanity: kiểm hẹp, sâu sau khi sửa một chỗ cụ thể.",
+        "Smoke quyết định build có đáng test tiếp không."
+      ],
+      "tip": "Mẹo: smoke trước, sanity sau, regression tiếp theo."
+    },
+    {
+      "id": "interview-04",
+      "topic": "interview",
+      "title": "Hỏi: Test ô nhập số từ 1 đến 99?",
+      "lines": [
+        "Phân vùng: <1, 1–99, >99, không phải số, rỗng.",
+        "Biên: 0, 1, 2, 98, 99, 100.",
+        "Thêm số thập phân, khoảng trắng, ký tự đặc biệt, chuỗi dài."
+      ],
+      "tip": "Mẹo: nói rõ kỹ thuật dùng: EP và BVA."
+    },
+    {
+      "id": "interview-05",
+      "topic": "interview",
+      "title": "Hỏi: Dev nói 'không phải lỗi' thì sao?",
+      "lines": [
+        "Kiểm lại bước tái hiện và đối chiếu với yêu cầu.",
+        "Dùng dữ kiện: spec, bằng chứng, người dùng bị ảnh hưởng.",
+        "Nếu spec mơ hồ, đưa lên BA/PO quyết định."
+      ],
+      "tip": "Mẹo: tránh tranh cãi cá nhân, đưa về tiêu chí chung."
+    },
+    {
+      "id": "interview-06",
+      "topic": "interview",
+      "title": "Hỏi: Test gì khi thời gian rất ít?",
+      "lines": [
+        "Đánh giá rủi ro, ưu tiên luồng cốt lõi và vùng thay đổi.",
+        "Chạy smoke, test vùng bị ảnh hưởng, ca đã từng lỗi.",
+        "Báo rõ phần chưa test và rủi ro còn lại."
+      ],
+      "tip": "Mẹo: minh bạch phạm vi là câu trả lời mạnh nhất."
+    },
+    {
+      "id": "interview-07",
+      "topic": "interview",
+      "title": "Hỏi: Bug lọt production, xử lý ra sao?",
+      "lines": [
+        "Đánh giá ảnh hưởng, báo ngay cho các bên liên quan.",
+        "Hỗ trợ tái hiện, xác nhận bản sửa, thêm test regression.",
+        "Phân tích nguyên nhân gốc, cải tiến quy trình, không đổ lỗi."
+      ],
+      "tip": "Mẹo: nhấn mạnh phần học hỏi sau sự cố."
+    },
+    {
+      "id": "interview-08",
+      "topic": "interview",
+      "title": "Hỏi: Khi nào không nên tự động hoá?",
+      "lines": [
+        "Giao diện đang đổi liên tục, test chạy một lần.",
+        "Việc cần cảm nhận, khám phá, thẩm mỹ.",
+        "Chi phí bảo trì lớn hơn lợi ích lặp lại."
+      ],
+      "tip": "Mẹo: nói về ROI, đừng nói 'cái gì cũng nên tự động'."
+    },
+    {
+      "id": "interview-09",
+      "topic": "interview",
+      "title": "Hỏi: HTTP 401 và 403 khác nhau?",
+      "lines": [
+        "401: chưa xác thực hoặc thông tin xác thực không hợp lệ.",
+        "403: đã xác thực nhưng không có quyền truy cập.",
+        "Ví dụ token hết hạn là 401, user thường vào admin là 403."
+      ],
+      "tip": "Mẹo: thêm 404 cho tài nguyên không tồn tại."
+    },
+    {
+      "id": "interview-10",
+      "topic": "interview",
+      "title": "Hỏi: Test flaky là gì, xử lý sao?",
+      "lines": [
+        "Test lúc pass lúc fail dù code không đổi.",
+        "Nguyên nhân: sleep, dữ liệu dùng chung, bất đồng bộ, môi trường.",
+        "Cách ly, tìm gốc, sửa; không retry để che giấu."
+      ],
+      "tip": "Mẹo: chạy lại test 20 lần để đo tỉ lệ flaky."
+    },
+    {
+      "id": "interview-11",
+      "topic": "interview",
+      "title": "Hỏi: INNER JOIN khác LEFT JOIN?",
+      "lines": [
+        "INNER: chỉ hàng khớp cả hai bảng.",
+        "LEFT: giữ mọi hàng bảng trái, thiếu thì NULL.",
+        "LEFT JOIN … IS NULL tìm bản ghi không có liên kết."
+      ],
+      "tip": "Mẹo: vẽ hai vòng tròn nhanh khi trả lời."
+    },
+    {
+      "id": "interview-12",
+      "topic": "interview",
+      "title": "Hỏi: Test case tốt gồm những gì?",
+      "lines": [
+        "Mã/tên rõ, tiền điều kiện, bước, dữ liệu, kết quả mong đợi.",
+        "Một mục tiêu mỗi case, độc lập, lặp lại được.",
+        "Truy vết được tới yêu cầu."
+      ],
+      "tip": "Mẹo: nhắc tới truy vết yêu cầu để ghi điểm."
+    },
+    {
+      "id": "interview-13",
+      "topic": "interview",
+      "title": "Hỏi: Bạn kiểm tra API thế nào?",
+      "lines": [
+        "Mã trạng thái, thân response, header, schema, thời gian.",
+        "Đầu vào hợp lệ, biên, không hợp lệ; xác thực và phân quyền.",
+        "Idempotency, phân trang, giới hạn tần suất, lỗi phụ thuộc."
+      ],
+      "tip": "Mẹo: trình bày theo chiều: đúng, sai, quyền, tải."
+    },
+    {
+      "id": "interview-14",
+      "topic": "interview",
+      "title": "Hỏi: Đo hiệu năng bằng chỉ số nào?",
+      "lines": [
+        "Latency (p50, p95, p99), throughput, tỉ lệ lỗi.",
+        "Mức dùng CPU, bộ nhớ, kết nối DB.",
+        "Đặt mục tiêu theo SLA, so sánh trước và sau thay đổi."
+      ],
+      "tip": "Mẹo: giải thích vì sao p95 tốt hơn trung bình."
+    },
+    {
+      "id": "interview-15",
+      "topic": "interview",
+      "title": "Hỏi: Session test khám phá gồm gì?",
+      "lines": [
+        "Hiến chương nêu điều muốn học và rủi ro cần xem.",
+        "Ghi chú: đã phủ, đã học, câu hỏi, khoảng trống, bước tiếp.",
+        "Không thấy bug vẫn có giá trị nếu ghi lại điều đã học."
+      ],
+      "tip": "Mẹo: nhắc 'ghi lại' để thể hiện kỷ luật.",
+      "src": "courses/exploratory.txt"
+    },
+    {
+      "id": "interview-16",
+      "topic": "interview",
+      "title": "Hỏi: Bạn tranh luận về bug thế nào?",
+      "lines": [
+        "Đưa dữ kiện: bước tái hiện, bằng chứng, nguồn expected.",
+        "Hỏi người kia cần gì để tin đây là lỗi.",
+        "Spec mơ hồ thì chuyển cho BA/PO chốt."
+      ],
+      "tip": "Mẹo: tranh luận về sản phẩm, không về con người.",
+      "src": "qc-brain/process-communication.md"
+    },
+    {
+      "id": "interview-17",
+      "topic": "interview",
+      "title": "Hỏi: Metric nào có ích, nào phù phiếm?",
+      "lines": [
+        "Có ích: bug lọt production, độ phủ rủi ro, thời gian phản hồi.",
+        "Phù phiếm: số test case viết ra, số bug mỗi người.",
+        "Metric dễ làm đẹp sẽ đẩy hành vi sai."
+      ],
+      "tip": "Mẹo: gắn metric với quyết định mà nó phục vụ.",
+      "src": "qc-brain/process-communication.md"
+    },
+    {
+      "id": "mindset-01",
+      "topic": "mindset",
+      "title": "Tò mò và hoài nghi lành mạnh",
+      "lines": [
+        "Luôn hỏi 'nếu... thì sao?' và 'còn gì nữa?'.",
+        "Không tin lời khẳng định nếu chưa có bằng chứng.",
+        "Hoài nghi sản phẩm, không hoài nghi con người."
+      ],
+      "tip": "Mẹo: mỗi tính năng, tìm 3 giả định chưa ai kiểm."
+    },
+    {
+      "id": "mindset-02",
+      "topic": "mindset",
+      "title": "Nói chuyện bằng dữ kiện",
+      "lines": [
+        "Nêu bước, kết quả, bằng chứng, ảnh hưởng.",
+        "Tránh phán xét cảm tính như 'tệ', 'ẩu'.",
+        "Dữ kiện giúp đối thoại với dev bớt căng thẳng."
+      ],
+      "tip": "Mẹo: gắn video 30 giây thay cho mô tả dài."
+    },
+    {
+      "id": "mindset-03",
+      "topic": "mindset",
+      "title": "Đặt câu hỏi tốt",
+      "lines": [
+        "Hỏi cụ thể, kèm ngữ cảnh và điều đã thử.",
+        "Câu hỏi mở để hiểu, câu hỏi đóng để chốt.",
+        "Hỏi sớm rẻ hơn nhiều so với sửa muộn."
+      ],
+      "tip": "Mẹo: đưa 2 phương án và hỏi chọn phương án nào."
+    },
+    {
+      "id": "mindset-04",
+      "topic": "mindset",
+      "title": "Tư duy người dùng",
+      "lines": [
+        "Hiểu ai dùng, dùng để làm gì, trong hoàn cảnh nào.",
+        "Thử như người mới, người vội, người dùng sai.",
+        "Chất lượng là giá trị mà người dùng cảm nhận."
+      ],
+      "tip": "Mẹo: xem thử cách khách hàng thật dùng sản phẩm."
+    },
+    {
+      "id": "mindset-05",
+      "topic": "mindset",
+      "title": "Ưu tiên khi quá nhiều việc",
+      "lines": [
+        "Xếp theo rủi ro và giá trị: ảnh hưởng × khả năng xảy ra.",
+        "Làm rõ phạm vi, thoả thuận mức độ kỹ với đội.",
+        "Nói 'chưa' kèm lựa chọn thay thế."
+      ],
+      "tip": "Mẹo: hỏi PO: nếu chỉ làm 3 việc, đó là việc nào?"
+    },
+    {
+      "id": "mindset-06",
+      "topic": "mindset",
+      "title": "Phản hồi mang tính xây dựng",
+      "lines": [
+        "Cụ thể, kịp thời, tập trung vào hành vi và kết quả.",
+        "Nêu điều tốt trước khi nêu điều cần cải thiện.",
+        "Chấp nhận phản hồi cũng là một kỹ năng."
+      ],
+      "tip": "Mẹo: dùng mô hình: tình huống – hành vi – tác động."
+    },
+    {
+      "id": "mindset-07",
+      "topic": "mindset",
+      "title": "Ghi chép khi khám phá",
+      "lines": [
+        "Ghi lại điều đã làm, thấy, nghi ngờ, câu hỏi.",
+        "Ghi chú giúp tái hiện lỗi và chia sẻ cho đội.",
+        "Không cần dài, cần đủ để người khác hiểu."
+      ],
+      "tip": "Mẹo: chia ghi chú: Bug / Câu hỏi / Ý tưởng / Rủi ro."
+    },
+    {
+      "id": "mindset-08",
+      "topic": "mindset",
+      "title": "Học liên tục",
+      "lines": [
+        "Công nghệ thay đổi, QA phải học: API, CI/CD, bảo mật, AI.",
+        "Chọn học theo vấn đề đang gặp, thực hành ngay.",
+        "Chia sẻ lại cho đội để củng cố kiến thức."
+      ],
+      "tip": "Mẹo: mỗi tuần một kỹ thuật nhỏ, áp dụng vào dự án."
+    },
+    {
+      "id": "mindset-09",
+      "topic": "mindset",
+      "title": "Tránh thiên kiến xác nhận",
+      "lines": [
+        "Chỉ tìm bằng chứng khớp với niềm tin của mình.",
+        "Chủ động tìm cách chứng minh giả thuyết sai.",
+        "Nhờ người khác nhìn lại cùng một vấn đề."
+      ],
+      "tip": "Mẹo: ghi giả thuyết rồi thiết kế test có thể bác bỏ nó."
+    },
+    {
+      "id": "mindset-10",
+      "topic": "mindset",
+      "title": "Chịu trách nhiệm chất lượng cùng đội",
+      "lines": [
+        "QA không phải 'người gác cổng', chất lượng là việc cả đội.",
+        "Giúp dev test sớm, chia sẻ checklist, pair test.",
+        "Công nhận công sức của đồng nghiệp."
+      ],
+      "tip": "Mẹo: mời dev xem phiên khám phá của bạn."
+    },
+    {
+      "id": "mindset-11",
+      "topic": "mindset",
+      "title": "Quản lý rủi ro bằng giao tiếp",
+      "lines": [
+        "Báo rủi ro sớm kèm tác động và phương án.",
+        "Dùng ngôn ngữ kinh doanh với quản lý, kỹ thuật với dev.",
+        "Ghi lại quyết định để tránh hiểu nhầm về sau."
+      ],
+      "tip": "Mẹo: gửi tóm tắt sau họp: ai làm gì, khi nào."
+    },
+    {
+      "id": "mindset-12",
+      "topic": "mindset",
+      "title": "Giữ bình tĩnh khi áp lực phát hành",
+      "lines": [
+        "Giữ bình tĩnh, tập trung vào dữ kiện và rủi ro.",
+        "Đừng im lặng nếu thấy rủi ro lớn.",
+        "Quyết định rõ ràng, ghi nhận người chấp nhận rủi ro."
+      ],
+      "tip": "Mẹo: chuẩn bị checklist release để giảm quyết định cảm tính."
+    },
+    {
+      "id": "mindset-13",
+      "topic": "mindset",
+      "title": "Tư duy hệ thống",
+      "lines": [
+        "Lỗi hiếm khi do một nguyên nhân đơn lẻ.",
+        "Nhìn quan hệ giữa người, quy trình, công cụ, sản phẩm.",
+        "Cải tiến hệ thống tốt hơn là trách cá nhân."
+      ],
+      "tip": "Mẹo: vẽ sơ đồ luồng dữ liệu khi điều tra lỗi phức tạp."
+    },
+    {
+      "id": "mindset-14",
+      "topic": "mindset",
+      "title": "Báo cáo không làm đẹp số",
+      "lines": [
+        "Chưa test và Blocked không được gộp vào Pass.",
+        "Nhãn rõ: Pass, Fail, Blocked, Chưa test.",
+        "Người đọc phải biết đúng phạm vi đã kiểm."
+      ],
+      "tip": "Mẹo: số đẹp che rủi ro sẽ mất lòng tin lâu dài.",
+      "src": "qc-brain/anti-patterns.md"
+    },
+    {
+      "id": "mindset-15",
+      "topic": "mindset",
+      "title": "Mỗi giờ test phải mua được thông tin",
+      "lines": [
+        "Hỏi: test này giúp quyết định điều gì?",
+        "Case không có nguồn, không có rủi ro là lãng phí.",
+        "Ưu tiên case làm thay đổi hiểu biết hoặc quyết định."
+      ],
+      "tip": "Mẹo: bỏ case nếu không ai đổi quyết định vì nó.",
+      "src": "qc-brain/thinking-models.md"
+    },
+    {
+      "id": "mindset-16",
+      "topic": "mindset",
+      "title": "QA là người kể chuyện về rủi ro",
+      "lines": [
+        "Kể rõ: đã biết ổn, đã biết hỏng, chưa biết.",
+        "Gắn rủi ro với ảnh hưởng: tiền, người dùng, uy tín.",
+        "Để người quyết định chọn, không giấu, không thổi phồng."
+      ],
+      "tip": "Mẹo: mỗi rủi ro nêu một câu hậu quả bằng lời kinh doanh.",
+      "src": "qc-brain/thinking-models.md"
+    },
+    {
+      "id": "mindset-17",
+      "topic": "mindset",
+      "title": "Ước lượng test bằng khoảng",
+      "lines": [
+        "Ước lượng từ cấu phần công việc, không lấy số tròn.",
+        "Cho khoảng (từ–đến) để thể hiện bất định.",
+        "Thêm người không chia nhỏ công việc theo tỉ lệ tuyến tính."
+      ],
+      "tip": "Mẹo: ghi giả định đi kèm mỗi con số ước lượng.",
+      "src": "courses/test-management.txt"
+    }
+  ]
+}
