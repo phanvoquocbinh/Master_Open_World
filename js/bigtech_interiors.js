@@ -8,6 +8,7 @@
 //  • Luồng việc làm dùng lại W.work (phỏng vấn · quẹt thẻ · máy tính làm ticket · họp Daily · ăn trưa) với danh sách `towers` do river_cbd.js cấp
 import * as AK from './archKit.js';
 import { makeLift, makeLiftBank } from './liftkit.js';
+import { furnitureLib } from './furniture_lib.js';   // 21/11 phiên A: ghế + màn hình dùng thư viện nội thất chung W.FURN
 
 export function makeInteriors(W, env){
   const {THREE, scene, circles, boxes, plats, INTER, HOOK, P, toast, makeLabel, addSeg, GLOW, mergeGeometries} = W;
@@ -29,7 +30,7 @@ export function makeInteriors(W, env){
   function canteen(t, x, z, y=Y, label='🍱 Ăn trưa / cà phê (E)'){ INTER.push({x, z, r:2, prio:.5, when:atY(y), label, action:()=>{ work().lunch && work().lunch(); toast('🍱 Ngon! Nạp năng lượng cho buổi chiều debug 💪', 2600); }}); }
   const LIFTS=[];   // thang máy thật (liftkit.js): ô cabin bước vào, bảng nút chọn tầng – thay cho kiểu dịch chuyển tức thời trước đây
   // ghế văn phòng (InstancedMesh dùng chung) · ghế ngồi được qua W.addSeat
-  const CH=[]; const chair=(x,z,y,rot,sit=false,label='🪑 Ngồi ghế làm việc (E · C)')=>{ CH.push([x,y,z,rot]); if(sit && W.addSeat) W.addSeat({x, z, rot, y:y+.5, floor:y, label}); };
+  const CH=[]; const chair=(x,z,y,rot,sit=false,label='🪑 Ngồi ghế làm việc (E · C)')=>{ CH.push([x,y,z,rot,sit?label:'']); if(sit && W.addSeat) W.addSeat({x, z, rot, y:y+.5, floor:y, label}); };
   const MON=[]; const monitor=(x,z,y,rot,curved=false)=>MON.push([x,y,z,rot,curved?1:0]);
 
   /* ============================== 🍎 1. THE INFINITE LOOP QA RING ============================== */
@@ -179,12 +180,14 @@ export function makeInteriors(W, env){
     K.build(g); NOTE.push('twin'); }
 
   /* ---------- ghế + màn hình dùng chung (InstancedMesh: 2–3 lượt vẽ cho mọi toà) ---------- */
-  const chairG=mergeGeometries([RB(.5,.08,.5,.03,1).translate(0,.47,0), RB(.5,.55,.07,.03,1).translate(0,.78,-.22), CY(.03,.03,.42,6).translate(0,.24,0), CY(.26,.26,.04,5).translate(0,.03,0)].map(q=>q.index?q.toNonIndexed():q));
-  const chIM=new THREE.InstancedMesh(chairG, fabric, CH.length); CH.forEach(([x,y,z,r],i)=>{ chIM.setMatrixAt(i, new THREE.Matrix4().compose(V3(x,y,z), new THREE.Quaternion().setFromAxisAngle(V3(0,1,0),r), V3(1,1,1))); }); chIM.castShadow=!LOW; chIM.userData.dynamic=true; scene.add(chIM);
-  const monG=mergeGeometries([RB(.62,.38,.04,.015,1).translate(0,.32,0), CY(.02,.02,.14,6).translate(0,.07,0)].map(q=>q.index?q.toNonIndexed():q)); const monS=new THREE.PlaneGeometry(.58,.34).translate(0,.32,.022);
-  const mIM=new THREE.InstancedMesh(monG, std(0x1b1d22,{roughness:.35, metalness:.5}), MON.length), sIM=new THREE.InstancedMesh(monS, screenM, MON.length);
-  MON.forEach(([x,y,z,r],i)=>{ const m=new THREE.Matrix4().compose(V3(x,y,z), new THREE.Quaternion().setFromAxisAngle(V3(0,1,0),r), V3(1,1,1)); mIM.setMatrixAt(i,m); sIM.setMatrixAt(i,m); }); for(const m of [mIM,sIM]){ m.userData.dynamic=true; m.castShadow=false; scene.add(m); }
-  const SHARED=[chIM, mIM, sIM];
+  /* (khối ghế cũ chairG đã bỏ – xem backup) */
+  /* 21/11 (phiên A): thay khối ghế/màn hình bằng W.FURN – ghế văn phòng 5 chân sao, màn hình viền mỏng; mỗi trụ sở 1 màu vải riêng, sếp ngồi ghế da lưng cao.
+     Thư viện tự gộp InstancedMesh theo ô 32 m, tự LOD/ẩn theo khoảng cách. Chỗ ngồi vẫn do chair() đăng ký (sit:false ở đây). Bản cũ: _backup/bigtech_interiors.backup_20261121_furn.js */
+  const F=furnitureLib(W), HQC={ring:'fabric:#3d4654', dragon:'velvet:#7a2f2b', forest:'fabric:#56684a', tri:'fabric:#2f3b55', twin:'leather:#2a2523'};
+  const hqOf=(x,z)=>{ let best=null, bd=1e9; for(const k in GROUPS){ const c=GROUPS[k].c, d=Math.hypot(x-c.x,z-c.z); if(d<bd){ bd=d; best=k; } } return best; };
+  for(const [x,y,z,r,lb] of CH){ const boss=/Giám đốc|Chủ tịch/.test(lb||''); F.place(boss?'officeChairExec':'officeChair', {x, y, z, yaw:r, sit:false, material:boss?'leather':(HQC[hqOf(x,z)]||'fabric').split(':')[0], color:boss?undefined:(HQC[hqOf(x,z)]||'').split(':')[1], cast:!LOW}); }
+  for(const [x,y,z,r] of MON) F.place('monitor', {x, y, z, yaw:r, sit:false});
+  const SHARED=[];
 
   /* ---------- khung hình: ẩn nội thất ở xa · giới hạn camera trong Cổng Trời · suối chảy · HUD ca làm ---------- */
   let near=-1, tick=0;

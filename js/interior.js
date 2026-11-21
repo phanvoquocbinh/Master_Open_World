@@ -7,6 +7,7 @@
 import { makePoser } from './pose.js';
 import { batchStatic } from './perf.js';
 import { makeFloorLift } from './floorlift.js';
+import { furnitureLib } from './furniture_lib.js';   // 21/11 phiên A: ghế/bàn/sofa/cây/thảm dùng thư viện nội thất chung W.FURN
 
 export function makeInterior(W){
   const {THREE, renderPass, scene, camera, me, P, HOOK, circles, boxes, plats, INTER, mesh, box, MAT, colorMat, makeActor, makeLabel, removeLabel,
@@ -16,6 +17,7 @@ export function makeInterior(W){
   const dl=new THREE.DirectionalLight(0xfff2e0, .85); dl.castShadow=true; dl.shadow.mapSize.set(W.QUAL==='low'?1024:2048, W.QUAL==='low'?1024:2048);
   Object.assign(dl.shadow.camera,{left:-22,right:22,top:22,bottom:-22,near:1,far:60}); dl.shadow.bias=-.0005; dl.shadow.normalBias=.02; IS.add(dl, dl.target);
   const root=new THREE.Group(); IS.add(root);
+  const FURN=furnitureLib(W), FP=(kind,o)=>FURN.place(kind,{parent:root, y:FY, sit:false, collide:false, scope:'interior', ...o}), hexOf=m=>'#'+m.color.getHexString();
   const RW=18, RD=12, CH=3.4, FY=.1;
   const st={b:null, idx:0, floors:[], actors:[], saved:null, talks:[], tour:false, guide:null, gate:null, myDesk:null};
   const R=Math.random, pick=a=>a[Math.floor(R()*a.length)], hs=s=>[...String(s)].reduce((h,ch)=>(h*31+ch.codePointAt(0))>>>0, 7);
@@ -153,20 +155,18 @@ export function makeInterior(W){
     else if(kind==='garden'){ M(box(4,2.6,.15), colorMat(0x2f7a35,{roughness:1}), x,FY+1.3,z+1.4); for(let i=0;i<14;i++) M(new THREE.IcosahedronGeometry(.18+R()*.12,0), colorMat(pick([0x3f8f3a,0x4caf50,0x2e7d32]),{roughness:1}), x-1.8+R()*3.6,FY+.3+R()*2.3,z+1.3); solid(x-2,x+2,z+1.3,z+1.5); }
     else if(kind==='hammock'){ for(const sx of [-1,1]) M(box(.12,1.8,.12), woodM, x+sx*1.5,FY+.9,z); const h=new THREE.Mesh(new THREE.CylinderGeometry(.4,.4,2.6,12,1,true,Math.PI*1.1,Math.PI*.8), colorMat(0xff8fc2,{roughness:.9})); h.material.side=THREE.DoubleSide; h.rotation.z=Math.PI/2; h.position.set(x,FY+.95,z); root.add(h); seat(x,z,0,FY+.8,{r:1.4, label:'🛌 Nằm võng nghỉ trưa (E · C)'}); circles.push({x:x-1.5,z,r:.2},{x:x+1.5,z,r:.2}); }
     const sg=posterTex({pingpong:'🏓 Góc bóng bàn',beanbag:'🥜 Góc thư giãn',arcade:'🕹️ Góc game',garden:'🌿 Vườn trong nhà',hammock:'😴 Góc ngủ trưa'}[kind]||'🎈 Góc vui', 'Làm hết sức · chơi hết mình', 0x2f6fd0); plate(sg,1.6,.8, x,FY+2.5,RD-.12,Math.PI); }
-  function plant(x,z,s=1){ M(new THREE.CylinderGeometry(.28*s,.22*s,.5*s,12), colorMat(0xe9e5dc), x,FY+.25*s,z); const lf=colorMat(0x3f8f3a,{roughness:.8});
-    for(let i=0;i<6;i++){ const l=M(new THREE.SphereGeometry(.28*s,8,6), lf, x+(R()-.5)*.35*s, FY+.65*s+R()*.5*s, z+(R()-.5)*.35*s); l.scale.y=1.4; } circles.push({x,z,r:.35*s}); }
+  function plant(x,z,s=1){ if(s>=1.15) FP('plantTall',{x, z, yaw:R()*6.28, scale:s}); else FP('plant',{x, z, yaw:R()*6.28, scale:s*1.25}); circles.push({x,z,r:.35*s}); }   // 21/11: cây thật W.FURN (bản khối cầu cũ: backup _20261121_furn)
   const seat=(x,z,rot,y,o={})=>W.addSeat && W.addSeat({x, z, rot, y, floor:FY, scope:'interior', label:'🪑 Ngồi (E · C)', ...o});
-  function chair(x,z,rotY, mat=darkM, sit=true){ const g=new THREE.Group(); g.position.set(x,0,z); g.rotation.y=rotY; root.add(g);
-    M(box(.5,.08,.5), mat, 0,FY+.47,0, g); M(box(.5,.55,.06), mat, 0,FY+.78,-.24, g); M(new THREE.CylinderGeometry(.03,.03,.42,6), steel, 0,FY+.23,0, g); M(new THREE.CylinderGeometry(.26,.26,.03,12), steel, 0,FY+.02,0, g);
+  function chair(x,z,rotY, mat=darkM, sit=true){ FP('officeChair',{x, z, yaw:rotY, material:'fabric', color:hexOf(mat)});   // 21/11: ghế văn phòng thật W.FURN
     if(sit) return seat(x+Math.sin(rotY)*.04, z+Math.cos(rotY)*.04, rotY, FY+.51, {label:'🪑 Ngồi ghế (E · C)'}); }
-  function desk(x,z,f,key='code', dual=false){ M(box(1.5,.05,.75), deskTop(), x,FY+.74,z); for(const sx of [-.7,.7]) M(box(.04,.72,.7), steel, x+sx,FY+.37,z);
+  function desk(x,z,f,key='code', dual=false){ FP('desk',{x, z, yaw:f>0?Math.PI:0, w:1.5, d:.75, h:.765, top:curTheme.top==='wood'?'oak':curTheme.top==='dark'?'black':'white', frame:curTheme.top==='white'?'alu':'black', main:'matte'});   // 21/11: bàn W.FURN, người ngồi phía -f
     for(const ox of dual?[-.34,.34]:[0]){ M(box(.62,.38,.03), darkM, x+ox,FY+1.05,z+f*.22); const s=new THREE.Mesh(new THREE.PlaneGeometry(.58,.34), scrMat(dual&&ox>0?'mail':key)); s.position.set(x+ox,FY+1.05,z+f*.205); s.rotation.y=f>0?Math.PI:0; root.add(s); M(box(.06,.18,.06), darkM, x+ox,FY+.84,z+f*.24); }
     M(box(.42,.02,.14), darkM, x,FY+.77,z-f*.08); if(R()<.3) M(new THREE.CylinderGeometry(.04,.035,.1,10), colorMat(pick([0xffffff,0xd94848,0x2f6fd0])), x+.55,FY+.82,z-f*.15); chair(x, z-f*.75, f>0?0:Math.PI, darkM, false); }
   function sofa(x,z,rotY,col,w=2.4,seats=true){ const g=new THREE.Group(); g.position.set(x,0,z); g.rotation.y=rotY; root.add(g); const m=colorMat(col,{roughness:.9});
-    M(box(w,.42,.9), m, 0,FY+.21,0, g); M(box(w,.55,.22), m, 0,FY+.6,-.36, g); for(const s of [-1,1]) M(box(.2,.6,.9), m, s*(w/2-.1),FY+.3,0, g);
+    g.removeFromParent(); FP(w>2.5?'sofaLong':'sofa',{x, z, yaw:rotY, w, codeOnly:true, color:'#'+new THREE.Color(col).getHexString()});   // 21/11: sofa W.FURN (bản code, kéo dài theo w)
     const c=Math.cos(rotY), s=Math.sin(rotY); boxes.push({x0:x-Math.abs(c)*w/2-Math.abs(s)*.5, x1:x+Math.abs(c)*w/2+Math.abs(s)*.5, z0:z-Math.abs(s)*w/2-Math.abs(c)*.5, z1:z+Math.abs(s)*w/2+Math.abs(c)*.5});
     if(seats) for(let k=-(w/2-.55);k<=w/2-.55+.01;k+=.8) seat(x+c*k+s*.08, z-s*k+c*.08, rotY, FY+.44, {r:2.2, label:'🛋️ Ngồi sofa (E · C)'}); }
-  function rug(x,z,w,d,col){ const r=M(box(w,.02,d), colorMat(col,{roughness:1}), x,FY+.01,z); r.castShadow=false; }
+  function rug(x,z,w,d,col){ FP('rug',{x, z, w, d, color:'#'+new THREE.Color(col).getHexString()}); }   // 21/11: thảm bouclé W.FURN
 
   /* ============================== NGƯỜI TRONG TOÀ ============================== */
   const SOL=MODELS.soldier, MIC=MODELS.michelle, XB=MODELS.xbot, RB=MODELS.robot, samba=clipOf(MIC,'SambaDance');
@@ -488,6 +488,7 @@ export function makeInterior(W){
     // giải phóng ở đây làm người chơi + bot các tầng sau biến mất (chỉ còn bóng).
     const shared=new Set(); for(const o of st.actors) o.a.g.traverse(c=>{ if(c.geometry) shared.add(c.geometry); });
     st.actors=[]; st.talks=[]; st.guide=null; st.idle=null; st.gate=null; st.myDesk=null; st.ring=null; st.rec=null;
+    FURN.clearParent(root);   // đồ W.FURN dùng chung geometry/model – không dispose ở đây
     root.traverse(o=>{ if(o.isMesh && o.geometry && !o.isSkinnedMesh && !shared.has(o.geometry)) o.geometry.dispose(); }); root.clear();
     circles.length=0; boxes.length=0; plats.length=0; INTER.length=0;
   }
