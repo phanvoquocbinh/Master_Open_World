@@ -334,14 +334,15 @@ export async function make(W, ctx={}){
     const drops=[]; for(const [r,dy,n] of [[3.2,0,40],[2.4,2,30],[1.5,3.8,20]]) for(let i=0;i<n;i++){ const a=i/n*TAU, L=.5+((i*7)%5)*.18; drops.push(M4(fx+Math.cos(a)*r,yC+dy-L/2,fz+Math.sin(a)*r,0,1,L/.3,1)); }
     inst(new THREE.OctahedronGeometry(.11,0), M.glowSoft, drops, lobby, {name:'aby-hotel-chandelier'});
     /* THANG CUỐN ĐÔI mạ vàng (tầng 1 ↔ tầng 2) – 2 bên Đông/Tây, chạy thật */
-    const EL=17.5-8.84, ER=Yf(2)-Y0, ang=Math.atan2(ER,EL), LL=Math.hypot(EL,ER), stepG=rbox(.4,.08,1.08,.02,1);
-    for(const s of [-1,1]){ const u0=s*8.84, u1=s*17.5, cu=(u0+u1)/2, rz=s*ang;
+    const EL=16.3-8.84, ER=Yf(2)-Y0,   /* (20/11) dốc kết thúc ở u 16,3 + chiếu nghỉ phẳng 16,3–17,5 (sàn hành lang r ≥ 17,2 không còn đè lên bậc cuối → hết bậc hụt 0,7 m) */ ang=Math.atan2(ER,EL), LL=Math.hypot(EL,ER), stepG=rbox(.4,.08,1.08,.02,1);
+    for(const s of [-1,1]){ const u0=s*8.84, u1=s*16.3, uE=s*17.5, cu=(u0+u1)/2, rz=s*ang;
+      SL.put(M.marble, new THREE.BoxGeometry(1.3,.06,2.6), M4(CX+(u1+uE)/2,Yf(2)-.03,CZ+4.0)); STATIC.plats.push(mkR(CX+(u1+uE)/2,CZ+4.0,0,.66,1.32,Yf(2)));
       SL.put(M.bronze, new THREE.BoxGeometry(LL,.7,2.62), M4(CX+cu,Y0+ER/2-.48,CZ+4.0,0,1,1,1,0,rz));
-      for(const v of [2.7,4.0,5.3]){ SL.put(M.rail, quad([CX+u0,Y0+.06,CZ+v],[CX+u1,Yf(2)+.06,CZ+v],[CX+u1,Yf(2)+1.0,CZ+v],[CX+u0,Y0+1.0,CZ+v])); SL.put(M.gold, tube([[CX+u0-s*.6,Y0+.9,CZ+v],[CX+u0,Y0+1.02,CZ+v],[CX+u1,Yf(2)+1.02,CZ+v],[CX+u1+s*.6,Yf(2)+.9,CZ+v]],.045,6));
+      for(const v of [2.7,4.0,5.3]){ SL.put(M.rail, quad([CX+u0,Y0+.06,CZ+v],[CX+u1,Yf(2)+.06,CZ+v],[CX+u1,Yf(2)+1.0,CZ+v],[CX+u0,Y0+1.0,CZ+v])); if(v!==4.0) SL.put(M.rail, quad([CX+u1,Yf(2)+.06,CZ+v],[CX+uE,Yf(2)+.06,CZ+v],[CX+uE,Yf(2)+1.0,CZ+v],[CX+u1,Yf(2)+1.0,CZ+v])); SL.put(M.gold, tube([[CX+u0-s*.6,Y0+.9,CZ+v],[CX+u0,Y0+1.02,CZ+v],[CX+u1,Yf(2)+1.02,CZ+v],[CX+u1+s*.6,Yf(2)+.9,CZ+v]],.045,6)); if(v!==4.0) SL.put(M.gold, tube([[CX+u1+s*.6,Yf(2)+1.02,CZ+v],[CX+uE,Yf(2)+1.02,CZ+v]],.035,6));
         SL.put(M.gold, new THREE.BoxGeometry(LL,.32,.1), M4(CX+cu,Y0+ER/2-.12,CZ+v,0,1,1,1,0,rz)); }
       for(const [u,y] of [[u0,Y0],[u1,Yf(2)]]) SL.put(M.gold, new THREE.BoxGeometry(.7,.03,2.6), M4(CX+u-s*.3*(u===u0?1:-1),y+.015,CZ+4.0));
       for(const [vz,dir] of [[3.33,1],[4.67,-1]]){ const im=new THREE.InstancedMesh(stepG, M.gold, 22); im.userData.dynamic=true; im.frustumCulled=false; lobby.add(im); ESC.push({im, s, vz, dir, u0, u1, n:22, ph:0}); }
-      STATIC.segs.push(mkS(CX+u0,CZ+2.7,CX+u1,CZ+2.7,.1,Y0-.3,Yf(2)+2.2,'⇧ Thành thang cuốn'), mkS(CX+u0,CZ+5.3,CX+u1,CZ+5.3,.1,Y0-.3,Yf(2)+2.2,'⇧ Thành thang cuốn'), mkS(CX+u0+s*.4,CZ+4.0,CX+u1,CZ+4.0,.05,Y0-.3,Yf(2)+2.2,'⇧ Giữa 2 thang cuốn: bên trong đi LÊN, bên ngoài đi XUỐNG'),
+      STATIC.segs.push(mkS(CX+u0,CZ+2.7,CX+uE,CZ+2.7,.1,Y0-.3,Yf(2)+2.2,'⇧ Thành thang cuốn'), mkS(CX+u0,CZ+5.3,CX+uE,CZ+5.3,.1,Y0-.3,Yf(2)+2.2,'⇧ Thành thang cuốn'), mkS(CX+u0+s*.4,CZ+4.0,CX+u1,CZ+4.0,.05,Y0-.3,Yf(2)+2.2,'⇧ Giữa 2 thang cuốn: bên trong đi LÊN, bên ngoài đi XUỐNG'),
         mkS(CX+s*17.62,CZ+2.7,CX+s*17.62,CZ+5.3,.1,Y0-.3,Y0+2.3,'⇧ Gầm thang cuốn'));
       const n=22, du=EL/n; for(let i=0;i<n;i++) STATIC.plats.push(mkR(CX+s*(8.84+(i+.5)*du),CZ+4.0,0,du/2+.02,1.32,Y0+ER*(i+1)/n));
       makeLabel('⇧ Thang cuốn đôi','Lên tầng 2 · Buffet / Hầm rượu',{h:.3, x:CX+s*9.6, y:Y0+2.6, z:CZ+4, fade:22}); }
@@ -531,8 +532,12 @@ export async function make(W, ctx={}){
     return o; }
   function floorData(k){ if(FD[k]) return FD[k]; const y=Yf(k), y0=y-.3, y1=y+2.2, Pl=[], S=[], C=[];
     for(const w of WINGS) for(let j=0;j<6;j++){ if(w.key==='E' && k===23 && j<2) continue; Pl.push(rectAt(25.47,w.a0+10+20*j,5.9,8.3,y)); }
-    if(k===23) Pl.push(rectAt(18.875,-40,7.44,2.575,y), rectAt(28.675,-40,11.65,5.125,y), rectAt(22.5,-54.5,2.36,1.1,y), rectAt(22.5,-26,2.56,1.1,y));
-    if(k<=24) Pl.push(mkR(CX,CZ,0,17.75,2.05,y)); else Pl.push({t:'c', x:CX, z:CZ, r:R_IN+.15, h:y}, {t:'c', x:HELI.x, z:HELI.z, r:5.6, h:HELI.y});
+    if(k===23) Pl.push(rectAt(18.875,-40,7.44,2.575,y), rectAt(28.675,-40,11.65,5.125,y), rectAt(23.475,-54.5,2.45,2.03,y), rectAt(23.475,-26,2.65,2.03,y));   /* (20/11) 2 tấm đầu giếng thang phủ tới r 25,5 – trước hở dải r 23,5–24,2 */
+    if(k<=24){ Pl.push(mkR(CX,CZ,0,17.75,2.05,y));
+      /* (20/11) lan can va chạm 2 mép cầu trời (nhìn xuống giếng sảnh): mép Nam liền, mép Bắc hở đúng cụm 3 thang (vách giếng thang chặn phần còn lại); 4 góc nối kín vào đầu lan can hành lang */
+      const msgB='🔭 Lan can kính cầu trời – bên dưới là giếng sảnh', zS=CZ+2.03, zN=CZ-2.03; S.push(mkS(CX-17.75,zS,CX+17.75,zS,.1,y0,y1,msgB), mkS(CX-17.75,zN,CX-4.75,zN,.1,y0,y1,msgB), mkS(CX+4.75,zN,CX+17.75,zN,.1,y0,y1,msgB));
+      for(const [t,zz] of [[7,zS],[-7,zN],[173,zS],[187,zN]]){ const p=XZ(R_IN+.05,t), xe=CX+Math.sign(p[0]-CX)*17.75; S.push(mkS(xe,zz,p[0],p[1],.1,y0,y1,msgB)); } }
+    else Pl.push({t:'c', x:CX, z:CZ, r:R_IN+.15, h:y}, {t:'c', x:HELI.x, z:HELI.z, r:5.6, h:HELI.y});
     for(const w of WINGS){ const pe=poolEnds(k);
       arcSegs(S, t=>rb(t,k)-.14, w.a0, w.a1, y0, y1, `🌇 Lan can ban công tầng ${k} – cao ${Math.round(y)} m`);
       for(const te of [w.a0,w.a1]){ if(k<=24){ radSegs(S, te, R_IN-.05, R_GL, y0, y1, pe.includes(te)?'🚪 Cửa ra hồ bơi ở cuối hành lang':'🧱 Đầu hồi toà nhà', pe.includes(te)?[[17.7,20.0]]:[]); radSegs(S, te, R_GL, rb(te,k)-.14, y0, y1, '🌇 Lan can đầu ban công'); }
@@ -548,10 +553,11 @@ export async function make(W, ctx={}){
     if(k===22){ for(let i=0;i<ST_N;i++){ const tA=ST_T0+(ST_T1-ST_T0)*i/ST_N, tB=ST_T0+(ST_T1-ST_T0)*(i+1)/ST_N; Pl.push(rectAt((ST_R0+ST_R1)/2,(tA+tB)/2,(tB-tA)*D*22.5/2+.04,(ST_R1-ST_R0)/2,y+(i+1)*FH/ST_N)); }
       for(const r of [ST_R0-.12,ST_R1+.12]) arcSegs(S, r, ST_T0, ST_T1, y0, Yf(23)-.05, '🪜 Lan can cầu thang penthouse', [], 2); radSegs(S, ST_T1, ST_R0-.1, ST_R1+.1, y0, y+2.2, '🪜 Gầm cầu thang');
       for(const [r,t,rr] of [[27.3,-14,1.7],[25.4,-21.5,1.7],[25.4,-14,.8],[24.6,14,2.0],[24.2,30,1.4]]){ const p=XZ(r,t); C.push({x:p[0],z:p[1],r:rr,y0,y1:y+1.1}); } arcSegs(S, 21.3, 40, 54, y0, y+1.2, '🍸 Quầy bar penthouse', [], 2); }
-    if(k===23){ for(const r of [21.5,23.5]) arcSegs(S, r, -49.5, -32, y0, y1, '🪜 Lan can giếng thang', [], 2); radSegs(S, -49.5, 21.4, 23.6, y0, y1, '🪜 Lan can giếng thang');
+    if(k===23){ for(const r of [21.5,23.5]) arcSegs(S, r, -49.5, -32, y0, y1, '🪜 Lan can giếng thang', [], 2);
+      for(const r of [ST_R0-.12,ST_R1+.12]) arcSegs(S, r, ST_T0, ST_T1, Yf(22)-.3, y-.05, '🪜 Lan can cầu thang penthouse', [], 2);   /* (20/11) đứng nửa trên cầu thang đã tính là tầng 23 */ radSegs(S, -49.5, 21.4, 23.6, y0, y1, '🪜 Lan can giếng thang');
       for(const [r,t,rr] of [[24.8,18,1.8],[27.4,44,1.4],[28.2,-6,.6],[28.2,2,.6]]){ const p=XZ(r,t); C.push({x:p[0],z:p[1],r:rr,y0,y1:y+1.1}); } arcSegs(S, 20.5, -27, -13, y0, y1, '🚪 Tủ quần áo', [], 2); }
     for(const pl of POOLS) if(pl.k===k){ const sv=pl.inner<0?-1:1, rect=(u0,u1,v0,v1,h)=>Pl.push(mkR(CX+(u0+u1)/2,CZ+(v0+v1)/2,0,(u1-u0)/2+.04,(v1-v0)/2+.04,h)), vi=pl.inner, vo=pl.inner<0?pl.v0:pl.v1, ve=sv*(pl.rOut+1.2);
-      rect(-9.6,9.6,Math.min(vi,sv*14.6),Math.max(vi,sv*14.6),y); rect(-pl.rOut*.52,pl.u0,Math.min(vi,ve),Math.max(vi,ve),y); rect(pl.u1,pl.rOut*.52,Math.min(vi,ve),Math.max(vi,ve),y); rect(pl.u0,pl.u1,Math.min(vo,ve),Math.max(vo,ve),y);
+      rect(-13,13,Math.min(vi,sv*14.6),Math.max(vi,sv*14.6),y);   /* (20/11) ±13: phủ kín tới đầu 2 cánh (trước ±9,6 hở dải θ ±60…65°) */ rect(-pl.rOut*.52,pl.u0,Math.min(vi,ve),Math.max(vi,ve),y); rect(pl.u1,pl.rOut*.52,Math.min(vi,ve),Math.max(vi,ve),y); rect(pl.u0,pl.u1,Math.min(vo,ve),Math.max(vo,ve),y);
       rect(pl.u0+.02,pl.u1-.02,pl.v0+.02,pl.v1-.02,y-1.25); for(let i=0;i<2;i++){ const za=vi+sv*i*.9, zb=za+sv*.9; rect(-1.5,1.5,Math.min(za,zb),Math.max(za,zb),y-.45-.4*i); }
       { /* thành hồ: chặn người đang ở dưới lòng hồ (không chặn người trên sàn) – hở đúng chỗ bậc lên ở đầu trong */ const yb0=y-1.25-.1, yb1=y-.6, X0=CX+pl.u0, X1=CX+pl.u1, Za=CZ+pl.v0, Zb=CZ+pl.v1, zin=CZ+pl.inner, msg='🏊 Thành hồ – lên bằng bậc ở đầu hồ';
         S.push(mkS(X0,Za,X0,Zb,.08,yb0,yb1,msg), mkS(X1,Za,X1,Zb,.08,yb0,yb1,msg)); const zout=pl.inner<0?Za:Zb; S.push(mkS(X0,zout,X1,zout,.08,yb0,yb1,msg)); S.push(mkS(X0,zin,CX-1.55,zin,.08,yb0,yb1,msg), mkS(CX+1.55,zin,X1,zin,.08,yb0,yb1,msg));
@@ -667,7 +673,7 @@ export async function make(W, ctx={}){
       if(FT.jets){ for(let i=0;i<18;i++){ const J=JETS[i], h=sh ? .6+2.4*Math.max(0,Math.sin(tt*2.4+i*.7)) : .9+1.4*Math.abs(Math.sin(tt*1.3+(i%3)*2.1))*(.6+.4*beat); _m4.compose(_v.set(J.x,Y0+.44,J.z), _q.identity(), _s.set(1,h,1)); FT.jets.setMatrixAt(i,_m4); } FT.jets.instanceMatrix.needsUpdate=true; }
       if(FT.c){ _m4.compose(_v.set(FT.x,Y0+4.05,FT.z), _q.identity(), _s.set(1.4,1.2+1.6*beat,1.4)); FT.c.setMatrixAt(0,_m4); FT.c.instanceMatrix.needsUpdate=true; }
       for(const E of ESC){ E.ph=(E.ph+dt*.5*E.dir/(Math.abs(E.u1-E.u0)/E.n)+E.n)%E.n; for(let i=0;i<E.n;i++){ const t=((i+E.ph)%E.n)/E.n, u=E.u0+(E.u1-E.u0)*t, y=Y0+(Yf(2)-Y0)*t; _m4.compose(_v.set(CX+u,y+.02,CZ+E.vz), _q.identity(), _s.set(1,1,1)); E.im.setMatrixAt(i,_m4); } E.im.instanceMatrix.needsUpdate=true; }
-      /* đứng trên thang cuốn → được chở đi (trong: lên, ngoài: xuống) */ if(!HOOK.vehicle && P.y>Y0-.05 && P.y<Yf(2)+.05){ const u=P.x-CX, v=P.z-CZ, au=Math.abs(u); if(au>8.84 && au<17.5 && v>2.7 && v<5.3){ const s=Math.sign(u), up=v<4; P.x+=s*(up?.6:-.6)*dt; } } }
+      /* đứng trên thang cuốn → được chở đi (trong: lên, ngoài: xuống) */ if(!HOOK.vehicle && P.y>Y0-.05 && P.y<Yf(2)+.05){ const u=P.x-CX, v=P.z-CZ, au=Math.abs(u); if(au>8.84 && au<16.3 && v>2.7 && v<5.3){ const s=Math.sign(u), up=v<4; P.x+=s*(up?.6:-.6)*dt; } } }
     /* bida tầng 4 */ if(BIL.t>0 && BIL.balls){ BIL.t-=dt; const hx=1.31-.031, hz=.61-.031, h=Math.min(dt,1/30); for(const b of BIL.balls){ b.x+=b.vx*h; b.z+=b.vz*h; if(Math.abs(b.x)>hx){ b.x=Math.sign(b.x)*hx; b.vx*=-.88; } if(Math.abs(b.z)>hz){ b.z=Math.sign(b.z)*hz; b.vz*=-.88; } const sp=Math.hypot(b.vx,b.vz); if(sp>0){ const k=Math.max(0,sp-.55*h)/sp; b.vx*=k; b.vz*=k; } }
       for(let i=0;i<3;i++) for(let j=i+1;j<3;j++){ const A=BIL.balls[i], B=BIL.balls[j], ex=B.x-A.x, ez=B.z-A.z, dd=Math.hypot(ex,ez); if(dd>0 && dd<.062){ const nx=ex/dd, nz=ez/dd, rv=(A.vx-B.vx)*nx+(A.vz-B.vz)*nz; if(rv>0){ A.vx-=rv*nx; A.vz-=rv*nz; B.vx+=rv*nx; B.vz+=rv*nz; } } } placeBalls(); }
     /* nhân viên */ if(dH<85) buildNPC(); if(NPC.length){ const low=dH<70 && P.y<Y0+31; for(const o of NPC){ if(o!==BUTLER){ o.a.g.visible=low; if(o.hat) o.hat.visible=low; } } }
