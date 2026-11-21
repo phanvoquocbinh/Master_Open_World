@@ -7,6 +7,9 @@
 //  🛕 LINH SƠN VÂN TỰ: cổng Tam Quan đá, bảo tháp bát giác 9 tầng 54 m, cầu xích sắt ~80 m qua hẻm vực, chánh điện treo vách nửa trong hang, tượng Phật 32 m trong mây
 import * as AK from './archKit.js';
 import { makeLift, makeLiftBank } from './liftkit.js';
+import { compactGroup } from './perf.js';
+import { createGFX, Kit as GKit, cbox, planeM, cylM } from './gfxkit.js';
+import { furnitureLib } from './furniture_lib.js';   // 21/11 phiên A: ghế/sofa/bàn trà showroom dùng W.FURN
 
 export async function build(K){
   const {W, ctx, root, MAT, FAC, put, xf, rb, cyl, beam, inst, canvas, std, ss, R, hAt, Y1, Y2, Y3, Y4, YW, LAKE, PA, PB, abu, STAIR, ST, NIGHTL, deck, shoreD} = K;
@@ -372,6 +375,210 @@ export async function build(K){
         const cab=new THREE.Mesh(rb(2.6,1.4,5.5,.5,2), std({color:0x1d2b38, roughness:.15, metalness:.3})); cab.position.set(0,1.6,-.8); yacht.add(cab); yacht.position.set(x+s*4.6, -.2, -144); yacht.rotation.y=(s>0?.06:-.05); yacht.userData.dynamic=true; yacht.userData.bob=R()*6; root.add(yacht); (out.yachts=out.yachts||[]).push(yacht); } }
     // lối xuống bến: dốc nhỏ qua kè (tách lan can kè ở 3 bến)
     label('⛵ Bến du thuyền Dev City', 'Thềm 1 · bờ sông Bắc', 742, 9, -150, 300, .65); place('⛵','Dev City – Bến du thuyền','Bờ sông Bắc · du thuyền', 742, -163, 742, -140); }
+
+  /* ============================== 🚗 QC AUTO SHOWROOM DEV CITY (T1 +2, x 320–412, sát Đại lộ Bến Sông) ============================== */
+  // S19g 20/11 – theo chuẩn .claude/skills/qc-world-3d-design. BẢNG KIỂM (mẫu tự mô tả: "showroom ô tô chính hãng 2 tầng ven đại lộ"):
+  //  NGOÀI: mặt dựng kính khung đồng đen (đố đứng 3,2 m, đố ngang chân/lửng/đỉnh) · tường hông + hậu ốp nhôm composite xám than (ron 1,2 m) · bệ đá granite
+  //         · mái đua 3,6 m: tấm nhôm champagne, trần gỗ, đèn âm trần ấm, dải LED đỏ thương hiệu, cột tròn · hộp đèn chữ "QC AUTO" trên mái · máy lạnh mái
+  //         · cửa trượt kính tự động 2 cánh (khung, kính, tay nắm 2 mặt – tự mở khi lại gần ≤ 4,5 m, E để vào) · bậc đá + thảm đỏ · băng rôn tường Tây
+  //         · trụ totem 2 mặt đầu Tây · 4 bồn cây đá + bụi cây · cọc chắn xe (người lọt, xe không lọt) · 2 bàn xoay xe chủ lực · bãi trưng bày 2 bên
+  //           (bóng AO dưới xe, giá bảng giá đứng – 1 texture 512² cho mọi mẫu) · Khu giao xe (vạch vàng + chữ sơn sàn)
+  //  TRONG (nhìn qua kính, chi tiết chỉ dựng hiện khi ≤ 75 m): sàn đá bóng 1,2 m · trần thạch cao + đèn hắt ấm + đèn thả thanh · tường hậu ốp gỗ óc chó + logo đèn
+  //         · tầng lửng lan can kính tay vịn inox + thang máy kính · 3 xe trên bục LED + 2 xe tầng lửng · quầy lễ tân (thân ốp, mặt đá, LED, màn hình) + ghế xoay
+  //         · góc chờ: sofa (khung gỗ, 3 đệm ngồi tách múi, 3 đệm lưng, 2 tay vịn, chân inox) + bàn trà + thảm + cây chậu
+  //  DÙNG ĐƯỢC: cửa trượt · E ở cửa → sảnh QC Auto (js/showroom.js: tư vấn viên, ngồi sofa, xem & mua) · E ở từng xe ngoài bãi → chọn màu & mua
+  //             · xe mua giao bằng W.traffic.spawnVehicle → rẽ vào Khu giao xe → V.park → bấm V lái
+  //  VA CHẠM (nạp ngay): toà (hộp), cột mái hiên, trụ totem, bồn cây, cọc chắn, xe trưng bày (2 vòng/xe), bàn xoay, giá bảng giá; bậc cửa = addPlat
+  { const dist='showroom', SY=Y1+.08, V=ctx.V, SR=()=>W.showroom, CX=370, FZ=-197.6, BZ=-211.2, X0=344, X1=396, H=10, YT=Y1+H, FY=Y1+.3;
+    const LOT={x0:320, x1:412, z0:-212.5, z1:-185};
+    const GF=W.GFX||(W.GFX=createGFX({quality:W.QUAL||'low', msaa:!W.CINE})), GM=GF.M, KX=GKit(), KI=GKit();
+    const pbrOf=(set,o={})=>new THREE.MeshStandardMaterial({map:set.map, normalMap:set.normalMap, roughnessMap:set.orm, aoMap:set.orm, roughness:1, metalness:0, ...o});
+    const acp=pbrOf(GF.T.tile(0x3b4048, 1.2, 2.4, .32), {metalness:.35}), floorIn=pbrOf(GF.T.tile(0xcac5bc, 1.2, 2.4, .16)), plaster=pbrOf(GF.T.plaster(0xddd7cc));
+    const alu=new THREE.MeshStandardMaterial({color:0xc6c0b6, roughness:.3, metalness:.75}), bronze=GM.mullionDark, glass=GM.glassClear, chrome=GM.chrome, granite=GM.granite, wood=GM.woodLight, walnut=GM.woodDark, warm=GM.lampWarm;
+    const redLed=std({color:0xff4d61, emissive:0xff4d61, emissiveIntensity:1.4, roughness:.4}), dark=std({color:0x1d2127, roughness:.5, metalness:.3}),
+      yel=std({color:0xe0b021, roughness:.6, polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-6}), fabSofa=pbrOf(GF.T.fabric(0x59616c)),
+      fabRug=pbrOf(GF.T.fabric(0x8a7a66), {polygonOffset:true, polygonOffsetFactor:-2}), carpet=pbrOf(GF.T.fabric(0x7e1d27), {polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-6});
+    for(const m of [redLed, yel, fabRug, carpet]){ m.userData.noCast=true; m.userData.noMerge=true; }
+    // ---- texture chữ (≤ 512², mỗi cái dùng chung cho mọi chỗ cùng nội dung) ----
+    const ctex=(w,h,draw)=>{ const c=document.createElement('canvas'); c.width=w; c.height=h; draw(c.getContext('2d'),w,h); const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=4; return t; };
+    const litM=(t,k=.8)=>{ const m=new THREE.MeshStandardMaterial({map:t, emissive:0xffffff, emissiveMap:t, emissiveIntensity:k, roughness:.45}); m.userData.noCast=true; m.userData.noMerge=true; return m; };
+    const brand=(g,w)=>{ const gr=g.createLinearGradient(0,0,w,0); gr.addColorStop(0,'#ff5a6e'); gr.addColorStop(1,'#ffb547'); return gr; };
+    const logoM=litM(ctex(512,128,(g,w,h)=>{ g.fillStyle='#0d1117'; g.fillRect(0,0,w,h); g.fillStyle=brand(g,w); g.fillRect(0,h-12,w,12); g.fillStyle='#f3efe6'; g.font='900 80px "Segoe UI",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('QC AUTO', w/2, h/2-6, w*.9); }));
+    const totemM=litM(ctex(256,512,(g,w,h)=>{ g.fillStyle='#0d1117'; g.fillRect(0,0,w,h); g.fillStyle=brand(g,w); g.fillRect(0,h*.62,w,10); g.fillStyle='#f3efe6'; g.textAlign='center'; g.textBaseline='middle';
+      g.font='900 120px "Segoe UI",sans-serif'; g.fillText('QC',w/2,h*.26); g.font='800 64px "Segoe UI",sans-serif'; g.fillText('AUTO',w/2,h*.48); g.font='600 26px "Segoe UI",sans-serif'; g.fillStyle='#c9cfd8'; g.fillText('SHOWROOM Ô TÔ',w/2,h*.74,w*.9); g.fillText('XE MÁY · GIAO XE',w/2,h*.82,w*.9); }));
+    const doorM=litM(ctex(512,96,(g,w,h)=>{ g.fillStyle='#10161e'; g.fillRect(0,0,w,h); g.fillStyle='#46d39a'; g.fillRect(0,0,8,h); g.fillStyle='#f3efe6'; g.font='700 40px "Segoe UI",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('LỐI VÀO SHOWROOM', w/2+4, h/2, w*.9); }), .6);
+    const bannerM=litM(ctex(512,96,(g,w,h)=>{ g.fillStyle='#b8243a'; g.fillRect(0,0,w,h); g.strokeStyle='#f3efe6'; g.lineWidth=4; g.strokeRect(6,6,w-12,h-12); g.fillStyle='#f3efe6'; g.font='800 36px "Segoe UI",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('TRẢ GÓP 0% · GIAO XE TẬN BÃI', w/2, h/2, w*.92); }), .5);
+    const floorTxtM=new THREE.MeshStandardMaterial({map:ctex(512,128,(g,w,h)=>{ g.clearRect(0,0,w,h); g.fillStyle='#e0b021'; g.font='900 72px "Segoe UI",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('KHU GIAO XE', w/2, h/2, w*.94); }),
+      transparent:true, roughness:.7, depthWrite:false, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-6}); floorTxtM.userData.noCast=true;
+    const MODELS=['mini','sedan','suv','pickup','sport','limo','lux','roadster'], infoOf=m=>{ const I=SR() && SR().INFO && SR().INFO[m]; return I || {name:(V && V.CARS && V.CARS[m] && V.CARS[m].name)||m, price:null}; };
+    const atlasM=litM(ctex(512,512,(g,w)=>{ MODELS.forEach((m,i)=>{ const I=infoOf(m), x=(i%2)*256, y=Math.floor(i/2)*128; g.fillStyle='#10151d'; g.fillRect(x,y,256,128); g.fillStyle=brand(g,w); g.fillRect(x,y,256,8);
+      g.textAlign='left'; g.textBaseline='alphabetic'; g.fillStyle='#f3efe6'; g.font='800 26px "Segoe UI",sans-serif'; g.fillText(I.name, x+14, y+46, 228); g.fillStyle='#ffd23f'; g.font='800 32px "Segoe UI",sans-serif'; g.fillText(I.price!=null ? fmt(I.price)+' 💰' : '—', x+14, y+88, 228);
+      g.fillStyle='#8fd9b6'; g.font='600 17px "Segoe UI",sans-serif'; g.fillText('Bấm E: chọn màu & mua', x+14, y+116, 228); }); }), .55);
+    const cellGeo=i=>{ const g=new THREE.PlaneGeometry(.58,.29), uv=g.attributes.uv, c=i%2, r=Math.floor(i/2); for(let k=0;k<uv.count;k++) uv.setXY(k, (c+uv.getX(k))/2, (3-r+uv.getY(k))/4); return g; };
+    // bóng AO giả dưới đồ: mặt phẳng UV 0..1 (GF.aoDecal dùng UV theo mét → texture lặp mỗi mét thành ô vuông tối – thấy khi chạy thử 21/11)
+    const aoD=(K,x,y,z,w,d,ry=0,pad=.4)=>K.add(new THREE.PlaneGeometry(w+2*pad, d+2*pad), GM.aoDecal, x, y+.02, z, ry, -Math.PI/2);
+    const loc=(K,X,Y,Z,ry)=>{ const c=Math.cos(ry), s=Math.sin(ry); return (geo,mat,lx=0,ly=0,lz=0,rx=0,rz=0,ry2=0)=>K.add(geo, mat, X+lx*c+lz*s, Y+ly, Z-lx*s+lz*c, ry+ry2, rx, rz); };
+
+    // ---- nền lát + bó vỉa đá + sàn đứng ----
+    put(MAT.paving, capGeo([[LOT.x0,LOT.z0],[LOT.x1,LOT.z0],[LOT.x1,LOT.z1],[LOT.x0,LOT.z1]], SY), dist);
+    for(const [x0,x1,z0,z1] of [[LOT.x0,LOT.x1,LOT.z1-.3,LOT.z1],[LOT.x0,LOT.x0+.3,LOT.z0,LOT.z1],[LOT.x1-.3,LOT.x1,LOT.z0,LOT.z1]]) KX.add(cbox(x1-x0, .3, z1-z0, .03), granite, (x0+x1)/2, SY-.13, (z0+z1)/2);
+    addPlat((LOT.x0+LOT.x1)/2, (LOT.z0+LOT.z1)/2, 0, (LOT.x1-LOT.x0)/2, (LOT.z1-LOT.z0)/2, SY);
+    occ(LOT.x0-2, LOT.x1+2, LOT.z0-1, LOT.z1);
+
+    // ---- vỏ toà ----
+    KX.add(cbox(X1-X0+.6, .32, FZ-BZ+.6, .03), granite, CX, Y1+.16, (FZ+BZ)/2);                                   // bệ đá
+    KX.add(cbox(X1-X0, H, .5, .03), acp, CX, Y1+H/2, BZ);                                                         // tường hậu
+    for(const x of [X0, X1]) KX.add(cbox(.5, H, FZ-BZ, .03), acp, x, Y1+H/2, (FZ+BZ)/2);                          // tường hông
+    const DW=1.65, GY0=FY, GY1=YT-.45;
+    for(const [a,b] of [[X0+.25, CX-DW],[CX+DW, X1-.25]]){ KX.add(planeM(b-a, GY1-GY0), glass, (a+b)/2, (GY0+GY1)/2, FZ); KX.add(cbox(b-a, .14, .24, .02), bronze, (a+b)/2, GY0+.07, FZ); }
+    KX.add(planeM(2*DW, GY1-(FY+2.97)), glass, CX, (FY+2.97+GY1)/2, FZ);                                             // kính trên cửa
+    for(let x=X0+.25; x<=X1-.24; x+=3.2){ if(Math.abs(x-CX)<DW+.1) continue; KX.add(cbox(.12, GY1-GY0, .22, .02), bronze, x, (GY0+GY1)/2, FZ); }
+    for(const y of [Y1+5, GY1-.07]) KX.add(cbox(X1-X0-.5, .14, .24, .02), bronze, CX, y, FZ);
+    KX.add(cbox(.12, 1.7, 7.6, .02), dark, X0-.3, Y1+6.6, (FZ+BZ)/2); KX.add(new THREE.PlaneGeometry(7.2, 1.35), bannerM, X0-.37, Y1+6.6, (FZ+BZ)/2, -Math.PI/2);   // băng rôn tường Tây
+    // ---- mái + mái hiên đua 3,6 m ----
+    const RZ0=-194, RZ1=BZ-.4, RC=(RZ0+RZ1)/2, RW=X1-X0+4;
+    KX.add(cbox(RW, .9, RZ0-RZ1, .05), alu, CX, YT+.45, RC);
+    for(const [w,d,x,z] of [[RW,.14,CX,RZ0+.07],[RW,.14,CX,RZ1-.07],[.14,RZ0-RZ1,CX-RW/2+.07,RC],[.14,RZ0-RZ1,CX+RW/2-.07,RC]]) KX.add(cbox(w,.4,d,.02), alu, x, YT+1.1, z);   // gờ mái
+    KX.add(planeM(RW-.3, RZ0-FZ-.15), wood, CX, YT-.01, (FZ+RZ0)/2, 0, Math.PI/2);                                  // trần gỗ mái hiên
+    for(let x=CX-24; x<=CX+24.01; x+=4) for(const z of [-195.1,-196.6]) KX.add(cylM(.09,.09,.03,24), warm, x, YT-.03, z);   // đèn âm trần
+    KX.add(cbox(RW, .12, .08, .01), redLed, CX, YT+.2, RZ0-.03);                                                   // LED thương hiệu
+    for(const x of [346, 358, 382, 394]){ KX.add(cylM(.2,.2,H,24), alu, x, Y1+H/2, -194.9); KX.add(cylM(.32,.32,.08,24), bronze, x, SY+.04, -194.9); circles.push({x, z:-194.9, r:.34, y0:Y1-1, y1:YT}); }
+    KX.add(cbox(10, 2.7, .5, .05), bronze, CX, YT+2.25, RZ0-.7); KX.add(new THREE.PlaneGeometry(9.6, 2.4), logoM, CX, YT+2.25, RZ0-.44);   // hộp đèn chữ trên mái
+    for(const [dx,dz] of [[-15,-206],[0,-208],[14,-205]]){ KX.add(cbox(3, 1.3, 2, .05), GM.shutter, CX+dx, YT+.9+.65, dz); KX.add(cylM(.6,.6,.05,24), dark, CX+dx, YT+.9+1.32, dz); }
+    // ---- cửa: khung, bậc đá, thảm, biển "lối vào" ----
+    for(const s of [-1,1]) KX.add(cbox(.16, 2.9, .26, .02), bronze, CX+s*DW, FY+1.45, FZ);
+    KX.add(cbox(2*DW+.16, .22, .26, .02), bronze, CX, FY+2.86, FZ);
+    KX.add(cbox(3.7, .8, .1, .02), dark, CX, FY+3.4, FZ+.08); KX.add(new THREE.PlaneGeometry(3.5, .656), doorM, CX, FY+3.4, FZ+.14);
+    KX.add(cbox(2*DW+1.2, .14, .7, .02), granite, CX, SY+.07, FZ+.5); addPlat(CX, FZ+.5, 0, DW+.6, .35, SY+.14);
+    KX.add(planeM(3, 4.2), carpet, CX, SY+.03, FZ+2.95, 0, -Math.PI/2);   // 21/11 test: 1,2 cm thua lớp lát (zfix kéo lát lên) → 3 cm
+    // cánh cửa trượt (động): khung đồng đen + kính + tay nắm inox 2 mặt
+    const LW=DW-.06, leaves=[-1,1].map(s=>{ const g=new THREE.Group(), k=GKit();
+      k.add(cbox(LW, .08, .07, .01), bronze, 0, .04, 0); k.add(cbox(LW, .08, .07, .01), bronze, 0, 2.62, 0); for(const e of [-1,1]) k.add(cbox(.08, 2.66, .07, .01), bronze, e*(LW/2-.04), 1.33, 0);
+      k.add(planeM(LW-.12, 2.5), glass, 0, 1.33, 0); for(const e of [-1,1]) k.add(cylM(.018,.018,1.2,24), chrome, -s*(LW/2-.16), 1.15, e*.07);
+      k.build(g, {cast:false}); g.name='showroomDoor'; g.userData.dynamic=true; g.position.set(CX+s*LW/2, FY, FZ-.1); root.add(g); return {g, s}; });
+    const DOOR={o:0, hold:0, pend:null};
+    // ---- trụ totem 2 mặt (đầu Tây) ----
+    { const px=321.8, pz=-187.2; KX.add(cbox(1.2,.5,1.9,.04), granite, px, SY+.25, pz); KX.add(cbox(.8, 8.6, 1.5, .05), acp, px, SY+.5+4.3, pz); KX.add(cbox(.9,.2,1.6,.03), alu, px, SY+9.2, pz);
+      for(const s of [-1,1]) KX.add(new THREE.PlaneGeometry(1.3, 2.6), totemM, px+s*.41, SY+6.2, pz, s*Math.PI/2);
+      block(px-.6, px+.6, pz-.95, pz+.95, Y1-1, Y1+10, 'Trụ biển hiệu QC Auto'); }
+    // ---- bồn cây đá + cọc chắn xe dọc vỉa hè (chừa lối xe: bãi Tây x < 330 · Khu giao xe x > 398) ----
+    const PZ=LOT.z1-.8; let seed=7;
+    for(const [a,b] of [[331,337],[362,366.6],[373.4,378],[391,397]]){ const x=(a+b)/2; KX.add(cbox(b-a,.6,.9,.04), granite, x, SY+.3, PZ); KX.add(planeM(b-a-.16,.74), GM.moss, x, SY+.565, PZ, 0, -Math.PI/2);
+      for(let u=a+.7; u<b-.4; u+=1.3) GF.addTree(KX, 'bush', u, SY+.55, PZ+(R()-.5)*.2, .8+R()*.25, R()*TAU, seed++);
+      boxes.push({x0:a, x1:b, z0:PZ-.45, z1:PZ+.45, y0:Y1-1, y1:Y1+1.5, msg:'Bồn cây'}); }
+    { const bol=inst(cylM(.11,.13,.85,24), bronze), add=x=>{ bol.add(x, SY+.42, LOT.z1-.6); circles.push({x, z:LOT.z1-.6, r:.15, y0:Y1-1, y1:Y1+1.2}); };
+      for(const [a,b] of [[338.2,361],[379.2,389.8]]){ const n=Math.ceil((b-a)/2.2); for(let i=0;i<=n;i++) add(a+(b-a)*i/n); } for(const x of [368.2,370,371.8]) add(x); bol.build(); }
+    block(X0-.3, X1+.3, BZ-.4, FZ+.15, Y1-3, YT+3, '🚗 QC Auto Showroom – vào bằng cửa chính (E)');
+
+    // ---- xe trưng bày: gộp theo vật liệu (sơn mỗi xe là vật liệu riêng → gom theo thuộc tính) + bóng AO dưới gầm ----
+    const MC=new Map(), canon=m=>{ const k=[m.type, m.color?m.color.getHex():'', m.metalness, m.roughness, m.opacity, m.transparent, m.clearcoat, m.map?m.map.uuid:'', m.emissive?m.emissive.getHex():'', m.side].join('|'); let r=MC.get(k); if(!r) MC.set(k, r=m); return r; };
+    const carInto=(K,model,color,x,y,z,h)=>{ if(!V || !V.buildCar) return; const g=V.buildCar(color, model); g.position.set(x,y,z); g.rotation.y=h; g.updateMatrixWorld(true);
+      g.traverse(o=>{ if(o.isMesh && o.geometry && o.material && !Array.isArray(o.material)) K.add(o.geometry.clone().applyMatrix4(o.matrixWorld), canon(o.material)); }); aoD(K, x, y, z, 1.9, 4.6, h, .45); };
+    const stand=(model,x,z,h)=>{ const i=MODELS.indexOf(model); if(i<0) return; const P2=loc(KX, x, SY, z, h);
+      P2(cbox(.44,.04,.32,.01), bronze, 0, .02, 0); P2(cylM(.03,.03,1.02,24), chrome, 0, .53, 0); P2(cbox(.66,.37,.05,.01), bronze, 0, 1.18, 0, -.22); P2(cellGeo(i), atlasM, 0, 1.18+.006, .03, -.22);
+      circles.push({x, z, r:.26, y0:Y1-1, y1:Y1+1.6}); };
+    const TURN=[];
+    const showCar=(model,color,x,z,h,turn)=>{ const I=infoOf(model), f=[Math.sin(h),Math.cos(h)], rt=[-Math.cos(h),Math.sin(h)];
+      if(turn){ KX.add(cylM(3.3,3.4,.2,48), alu, x, SY+.1, z); KX.add(cylM(3.15,3.15,.04,48), GM.stoneDark, x, SY+.22, z); const ring=new THREE.TorusGeometry(3.33,.045,6,64); ring.rotateX(Math.PI/2); KX.add(ring, redLed, x, SY+.2, z);
+        circles.push({x, z, r:3.3, y0:Y1-1, y1:Y1+2.4});
+        if(V && V.buildCar){ const tt=new THREE.Group(); tt.position.set(x, SY+.24, z); tt.rotation.y=h; tt.add(V.buildCar(color, model)); try{ compactGroup(W, tt); }catch(e){} tt.userData.dynamic=true; root.add(tt); TURN.push(tt); }
+        stand(model, x+(x<CX?-4.7:4.7), z+.4, 0); }
+      else { carInto(KX, model, color, x, SY, z, h); for(const k of [-1.25, 1.25]) circles.push({x:x+f[0]*k, z:z+f[1]*k, r:1.05, y0:Y1-1, y1:Y1+2.2}); stand(model, x+rt[0]*2.2+f[0]*1.1, z+rt[1]*2.2+f[1]*1.1, h); }
+      INTER.push({x, z, r:turn?4.6:3.4, prio:.4, label:`🚗 ${I.name}${I.price?` · ${fmt(I.price)} 💰`:''} – xem màu & mua (E)`, action:()=>{ const s=SR(); if(s && s.buy) s.buy(model, color); else toast('Showroom đang chuẩn bị, thử lại sau nhé.'); }}); };
+    showCar('sport', 0xb3122e, 355, -190.6, .5, true); showCar('roadster', 0xf2b705, 385, -190.6, -.5, true);              // sân trước: 2 bàn xoay
+    [['suv',0x111111],['pickup',0x9aa3ad],['sedan',0x2a6fdb],['mini',0x46d39a],['lux',0x8e9aa6],['limo',0x111111]].forEach(([m,c],i)=>showCar(m, c, i%2 ? 336.4 : 326.4, -190.6-Math.floor(i/2)*7, i%2 ? -.42 : .42));   // bãi Tây
+    showCar('pickup', 0xf2b705, 405.5, -202.2, -.35); showCar('mini', 0xb3122e, 405.5, -208.8, -.35);                       // bãi Đông (sau Khu giao xe)
+
+    // ---- Khu giao xe (góc Đông) ----
+    const BAY={x:405, z:-193.6, h:Math.PI}, BIKE={x:410.4, z:-192.4, h:0}, LANE={x:411, z:-178.6};   // làn hướng Tây của đại lộ 4 làn: tim −176, lệch 2,6 m (v2traffic e.off)
+    for(const s of [-1,1]) KX.add(planeM(.14, 5.8), yel, BAY.x+s*1.5, SY+.025, BAY.z, 0, -Math.PI/2); KX.add(planeM(3.14, .14), yel, BAY.x, SY+.025, BAY.z-2.9, 0, -Math.PI/2);
+    for(const s of [-1,1]) KX.add(planeM(.1, 2.4), yel, BIKE.x+s*.6, SY+.025, BIKE.z, 0, -Math.PI/2);
+    KX.add(new THREE.PlaneGeometry(4.4, 1.1), floorTxtM, BAY.x, SY+.028, -189.3, 0, -Math.PI/2);
+
+    // ---- TRONG TOÀ (thấy qua kính) – nhóm riêng, chỉ hiện khi ≤ 75 m ----
+    { const MZ0=-204.6, MZ1=BZ+.25, MY=Y1+5, IW=X1-X0-.5;
+      KI.add(planeM(IW, FZ-BZ-.5), floorIn, CX, FY+.035, (FZ+BZ)/2, 0, -Math.PI/2);   // trên mặt bệ đá (FY+.02) 1,5 cm
+      KI.add(planeM(IW, FZ-BZ-.5), plaster, CX, YT-.02, (FZ+BZ)/2, 0, Math.PI/2);
+      for(const s of [-1,1]) KI.add(planeM(FZ-BZ-.5, H-.4), plaster, s<0 ? X0+.26 : X1-.26, Y1+H/2, (FZ+BZ)/2, -s*Math.PI/2);
+      KI.add(planeM(IW-.1, 4.6), walnut, CX, FY+2.3, BZ+.27); for(let x=X0+1; x<X1-.5; x+=1.2) KI.add(cbox(.06, 4.6, .06, .01), bronze, x, FY+2.3, BZ+.31);
+      KI.add(cbox(10.4, 2.8, .2, .03), bronze, CX, Y1+7.7, BZ+.36); KI.add(new THREE.PlaneGeometry(10, 2.5), logoM, CX, Y1+7.7, BZ+.47);
+      // tầng lửng: sàn đá, mép nhôm, lan can kính + tay vịn inox
+      KI.add(cbox(IW-.1, .32, MZ0-MZ1, .03), plaster, CX, MY-.16, (MZ0+MZ1)/2); KI.add(planeM(IW-.1, MZ0-MZ1), floorIn, CX, MY+.005, (MZ0+MZ1)/2, 0, -Math.PI/2);
+      KI.add(cbox(IW-.1, .1, .08, .01), alu, CX, MY-.27, MZ0); KI.add(planeM(IW-.3, 1.0), glass, CX, MY+.55, MZ0+.05);
+      KI.add(cylM(.03,.03,IW-.3,24), chrome, CX, MY+1.08, MZ0+.05, 0, 0, Math.PI/2); for(let x=X0+1.5; x<X1-1; x+=2.4) KI.add(cbox(.05, 1.05, .05, .01), chrome, x, MY+.53, MZ0+.05);
+      { const lx=X1-2.4, lz=-206; KI.add(cylM(1,1,H-.5,32,true), glass, lx, Y1+H/2, lz); for(const y of [FY+.05, MY, YT-.3]) KI.add(cylM(1.03,1.03,.1,32), chrome, lx, y, lz); }   // thang máy kính
+      // đèn: hắt trần ấm 2 dải + đèn thả thanh trên xe + đèn âm dưới sàn lửng
+      for(const z of [FZ-.7, MZ0+.6]) KI.add(cbox(IW-1, .06, .3, .01), warm, CX, YT-.12, z);
+      for(const x of [357, 370, 383]){ KI.add(cbox(6, .07, .12, .01), warm, x, YT-1.6, -202.3); for(const e of [-2.6, 2.6]) KI.add(cylM(.006,.006,1.55,6), dark, x+e, YT-.8, -202.3); }
+      for(let x=X0+3; x<X1-2; x+=4) KI.add(cylM(.09,.09,.03,24), warm, x, MY-.34, -207.8);
+      // xe + bục LED
+      for(const [m,c,x,h] of [['suv',0x1f7a4d,357,.6],['lux',0x111111,CX,0],['sedan',0xb3122e,383,-.6]]){ KI.add(cylM(2.8,2.9,.16,48), alu, x, FY+.08, -202.3); const rg=new THREE.TorusGeometry(2.86,.035,6,64); rg.rotateX(Math.PI/2); KI.add(rg, redLed, x, FY+.15, -202.3); carInto(KI, m, c, x, FY+.16, -202.3, h); }
+      for(const [m,c,x,h] of [['roadster',0xb3122e,358,.5],['sport',0x2a6fdb,382,-.5]]) carInto(KI, m, c, x, MY, -208, h);
+      // quầy lễ tân (góc Đông, quay về cửa) + ghế xoay + màn hình
+      { const P2=loc(KI, 390.6, FY, -201.4, -Math.PI/2);
+        P2(cbox(4.2, 1.05, .8, .04), acp, 0, .525, 0); P2(cbox(4.4, .06, 1.0, .02), granite, 0, 1.08, .05); P2(cbox(4.2, .04, .03, .01), redLed, 0, .18, .41);
+        P2(cbox(.62, .38, .04, .01), dark, .8, 1.36, -.2); P2(cylM(.02,.02,.2,16), chrome, .8, 1.15, -.2); P2(new THREE.PlaneGeometry(.56,.32), GM.screen, .8, 1.36, -.223, 0, 0, Math.PI);   // màn hình quay về phía lễ tân
+        furnitureLib(W).place('officeChairExec', {x:390.6+.95, y:FY, z:-201.4, yaw:-Math.PI/2, material:'leather', color:'#2a2523', sit:false}); }   // 21/11: ghế xoay da lưng cao W.FURN (bản khối cũ: backup _20261121_furn)
+      // góc chờ: sofa có cấu trúc + bàn trà + thảm + cây chậu
+      { const P2=loc(KI, 349.4, FY, -201.6, Math.PI/2);
+        P2(planeM(3.2, 2.6), fabRug, 0, .045, .7, -Math.PI/2);
+        { const F=furnitureLib(W); F.place('sofa', {x:349.4, y:FY, z:-201.6, yaw:Math.PI/2, w:2.4, material:'boucle', color:'#59616c', frame:'chrome', accent:'velvet:#b3122e', sit:false});   // 21/11: sofa + bàn trà W.FURN
+          F.place('coffeeTable', {x:349.4+1.25, y:FY, z:-201.6, yaw:Math.PI/2, material:'walnut', sit:false}); }
+        aoD(KI, 349.4, FY+.03, -201.6, 2.4, .9, Math.PI/2, .25); }
+      { const prof=[[0,0],[.19,0],[.21,.03],[.27,.42],[.3,.45],[.28,.47]].map(([r,y])=>new THREE.Vector2(r,y)), pot=new THREE.LatheGeometry(prof, 24);
+        for(const [x,z] of [[346.2,-199],[393.6,-199.2],[346.2,-209.6]]){ KI.add(pot, dark, x, FY, z); GF.addTree(KI, 'fig', x, FY+.44, z, 1.2, R()*TAU, seed++); } } }
+
+    // ---- dựng: ngoài (luôn hiện) · trong (gần mới hiện) ----
+    const exG=new THREE.Group(); exG.name='showroomExterior'; root.add(exG); KX.build(exG);
+    const inG=new THREE.Group(); inG.name='showroomInterior'; root.add(inG); KI.build(inG, {cast:false}); inG.visible=false; inG.userData.dynamic=true;   // dynamic: batchStatic không gộp ra khỏi nhóm → bật/tắt theo khoảng cách vẫn đúng
+    label('🚗 QC Auto Showroom', 'Dev City · ô tô · xe máy · mua xe giao tận bãi', CX, YT+5.2, FZ+1, 320, .7);
+    label('🔑 Khu giao xe', 'Xe mua ở showroom được giao tới đây · bấm V để lái', BAY.x+2.4, Y1+3.2, BAY.z-1, 60, .45);
+    place('🚗','Dev City – QC Auto Showroom','Showroom ô tô & xe máy · bãi trưng bày · mua xe giao tận nơi', CX, -188.6, CX, -205);
+    INTER.push({x:CX, z:FZ+1.4, r:2.6, label:'🚗 Vào QC Auto Showroom – xem & mua xe (E)', action:()=>{ const s=SR(); if(!s || !s.enter){ toast('Showroom đang chuẩn bị, thử lại sau nhé.'); return; } DOOR.hold=1.5; if(DOOR.o>.85) s.enter(); else DOOR.pend=s; }});
+
+    // ---- nối với sảnh showroom (js/showroom.js): cửa ra + giao xe sau khi mua ----
+    const DLV={pending:null, inside:false, s:null, g:null, st:'', t:0, A:null};
+    const garageV=()=>(W.life && W.life.V) || V;
+    const unhide=()=>{ if(DLV.hid){ DLV.hid.visible=true; DLV.hid=null; } };
+    const parkNow=type=>{ unhide(); const L=garageV(), b=type==='bike' ? BIKE : BAY; if(!L || !L.park) return false; const o=L.park(type, {x:b.x, z:b.z, y:SY, h:b.h}); if(o) o.visible=true; return true; };
+    const cancel=()=>{ unhide(); if(DLV.s && DLV.s.active) DLV.s.remove(); if(DLV.g && DLV.g.parent) DLV.g.parent.remove(DLV.g); DLV.s=null; DLV.g=null; DLV.st=''; };
+    function startDelivery(){ const info=DLV.pending, loud=DLV.inside; DLV.pending=null; cancel();
+      if(info.type==='bike'){ parkNow('bike'); if(loud) toast('🛵 Xe tay ga đỗ sẵn ở Khu giao xe (góc Đông showroom) – bấm V để lên xe.', 4500); return; }
+      const tr=W.traffic, RN=W.roadNet; let s=null;
+      // xuất phát từ nút ĐÔNG của chính cạnh đại lộ trước showroom → luôn chạy về hướng Tây, đúng làn sát showroom (route từ 1 điểm cùng cạnh sẽ chọn nút Tây → chạy ngược, không dừng)
+      try{ const n=RN && RN.nearest ? RN.nearest(LANE.x, LANE.z, 30) : null, e=n && n.e, from=e ? (e.a.x>e.b.x ? e.a : e.b) : null;
+        if(tr && tr.spawnVehicle && from && Math.abs(from.x-LANE.x)>25) s=tr.spawnVehicle('civil', {x:LANE.x, z:LANE.z}, {from, stop:3, color:info.color, top:.75}); }catch(e){ console.warn('[devcity showroom] giao xe', e); }
+      if(!s){ parkNow('car'); toast('🔑 Xe mới đã đỗ ở Khu giao xe trước showroom – bấm V để lái!', 4500); return; }
+      // thân xe giao = đúng mẫu + màu vừa mua (xe 'civil' của giao thông mặc định là sedan) – đèn khẩn cấp vẫn của xe gốc
+      if(V && V.buildCar){ for(const c of s.g.children) if(!(s.lamps||[]).includes(c)) c.visible=false; s.g.add(V.buildCar(info.color, info.model)); }
+      DLV.s=s; DLV.g=s.g; DLV.st='drive'; DLV.t=0;
+      { const gc=garageV() && garageV().garage && garageV().garage.car; if(gc){ gc.visible=false; DLV.hid=gc; } }   // xe cũ (đã đổi sang mẫu mới) đang đỗ chỗ khác: ẩn tới khi xe giao tới → không thấy 2 chiếc
+      if(loud) toast('🚚 Xe của bạn đang được giao tới theo Đại lộ Bến Sông – đứng chờ ở Khu giao xe (góc Đông) nhé!', 5000); }
+    const hook=()=>{ const s=SR(); if(!s || !s.setExit || !s.onBuy) return; hook.done=true;
+      s.setExit(()=>({x:CX, z:FZ+2.6, face:0}));   // ra cửa: đứng trên thảm đỏ, quay mặt ra đại lộ (cửa trượt tự mở vì đứng gần)
+      s.onBuy(info=>{ DLV.pending=info; DLV.inside=!!s.on; const I=infoOf(info.model||'');
+        return info.type==='car' ? `🎉 Chúc mừng! ${I.name||'Xe mới'} đang được giao tới Khu giao xe (góc Đông showroom)${s.on?' – ra ngoài xem xe chạy tới nhé':''}. Tới nơi bấm V để lái.` : '🎉 Đã mua xe tay ga – xe đỗ sẵn ở Khu giao xe trước showroom.'; }); };
+    hook();   // W.showroom dựng trong life.js trước khi nạp module V2 – phòng hờ: thử lại ở khung hình sau
+    const yawTo=(h0,h1,t)=>{ let d=h1-h0; d=Math.atan2(Math.sin(d), Math.cos(d)); return h0+d*t; };
+    let lastN=-1;
+    HOOK.onFrame.push((dt)=>{ dt=Math.min(dt,.1); if(!hook.done) hook();
+      const nk=W.night||0; if(Math.abs(nk-lastN)>.02){ lastN=nk; try{ GF.setTime(1-nk*.95, nk); }catch(e){} }   // đèn ấm / màn hình bộ GFX sáng theo đêm
+      const dP=Math.hypot(P.x-CX, P.z+204); inG.visible=!W.inside && (inG.visible ? dP<85 : dP<75);
+      for(const t of TURN) t.rotation.y+=dt*.3;
+      // cửa trượt: tự mở khi người chơi đứng gần cửa (ngoài trời), đóng lại khi đi xa · E ở cửa: mở hẳn rồi mới vào sảnh
+      if(DOOR.hold>0) DOOR.hold-=dt; const want=(DOOR.hold>0 || (!W.inside && Math.hypot(P.x-CX, P.z-(FZ+1.2))<4.5)) ? 1 : 0;
+      if(DOOR.o!==want){ DOOR.o=clamp(DOOR.o+Math.sign(want-DOOR.o)*dt*1.8, 0, 1); const k=DOOR.o*DOOR.o*(3-2*DOOR.o); for(const L of leaves) L.g.position.x=CX+L.s*(LW/2+LW*.96*k); }
+      if(DOOR.pend && DOOR.o>.85){ const s=DOOR.pend; DOOR.pend=null; s.enter(); }
+      if(DLV.pending && !(SR() && SR().on) && !W.inside) startDelivery();
+      if(!DLV.st) return; DLV.t+=dt; const s=DLV.s, g=DLV.g, L=garageV();
+      if(L && L.riding && L.riding() && L.riding().type==='car'){ cancel(); return; }   // người chơi đã tự gọi xe (V) → bỏ màn giao
+      if(DLV.st==='drive'){ if(!s.active){ cancel(); parkNow('car'); return; }
+        if(s.arrived || DLV.t>120){ if(!s.arrived){ cancel(); parkNow('car'); return; } DLV.A={x:g.position.x, z:g.position.z, h:s.h}; s.remove(); W.scene.add(g); DLV.st='turn'; DLV.t=0; } return; }
+      // rẽ phải vào Khu giao xe theo cung Bézier, nháy đèn khẩn cấp
+      const u=clamp(DLV.t/5.5,0,1), k=u*u*(3-2*u), A=DLV.A, C={x:BAY.x+1.5, z:A.z}, a=(1-k)*(1-k), b=2*k*(1-k), c=k*k, x=A.x*a+C.x*b+BAY.x*c, z=A.z*a+C.z*b+BAY.z*c;
+      g.position.set(x, z<LOT.z1 ? SY : Y1, z); g.rotation.set(0, yawTo(A.h, BAY.h, k), 0); const bl=Math.floor(DLV.t*2.5)%2; for(const l of (s.lamps||[])) l.visible=!!bl;
+      if(u>=1){ W.scene.remove(g); DLV.g=null; DLV.s=null; DLV.st=''; parkNow('car'); toast('🔑 Xe mới đã giao tới Khu giao xe! Lại gần bấm V để lái.', 5000); } });
+    out.showroom={DLV, BAY, LOT, DOOR, startDelivery, TURN, exG, inG}; }
 
   /* ============================== CÂY XANH (rải trên nền cỏ thoải, tránh đường / công trình / mặt nước) ============================== */
   { const trunk=inst(cyl(.18,.3,3.2,7), MAT.bark), crown1=inst(new THREE.IcosahedronGeometry(1.9,1), MAT.leaf), crown2=inst(new THREE.IcosahedronGeometry(1.5,1), MAT.leaf2), pine=inst(new THREE.ConeGeometry(1.8,6.5,8), MAT.leaf2);

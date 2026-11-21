@@ -71,6 +71,32 @@ html,body{margin:0;height:100%;overflow:hidden;background:#0d1320;font-family:"S
 .zrow .ic{font-size:22px;width:30px;text-align:center}
 .zrow b{display:block}
 .zrow small{color:var(--mut)}
+/* bản đồ: địa điểm gom theo đảo / vùng – danh mục kiểu game: dải màu đảo + nhãn số cố định, không thẻ lồng thẻ (S19g 20/11, chuẩn threejs-game-ui-designer) */
+.mapBody .zlist{gap:6px;padding-right:2px}
+.zgrp{--zac:#94a3b8;position:relative;border-left:3px solid var(--zac);border-radius:0 8px 8px 0;background:linear-gradient(90deg,rgba(255,255,255,.055),rgba(255,255,255,.012) 75%)}
+.zgh{display:grid;grid-template-columns:28px minmax(0,1fr) auto 14px;align-items:center;gap:8px;min-height:44px;padding:4px 10px 4px 7px;cursor:pointer;user-select:none;outline:none;border-radius:0 8px 8px 0}
+.zgh .zi{font-size:20px;line-height:1;text-align:center}
+.zgh .zt{min-width:0;display:flex;align-items:center;gap:6px}
+.zgh b{font-size:14px;line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.zgh .zhere{display:none;flex:none;font:700 11px/1.5 "Segoe UI",sans-serif;color:#1b2233;background:#ffd23f;padding:0 6px;border-radius:3px}
+.zgrp.here .zhere{display:inline-block}
+.zgh .zcnt{min-width:3.4ch;text-align:center;font:700 12px/1 "Segoe UI",sans-serif;font-variant-numeric:tabular-nums;padding:5px 7px;color:#eef7ff;background:rgba(0,0,0,.38);border:1px solid var(--zac);clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
+.zgh .zchev{font-size:11px;text-align:center;color:var(--mut);transition:transform .15s,color .15s}
+.zgrp.open>.zgh .zchev{transform:rotate(90deg);color:var(--zac)}
+.zgh:hover{background:rgba(255,255,255,.06)} .zgh:active{background:rgba(255,255,255,.11)} .zgh:focus-visible{box-shadow:inset 0 0 0 2px var(--zac)}
+.zgb{display:none;gap:2px;padding:0 6px 8px 4px}
+.zgrp.open>.zgb{display:grid}
+.zgb .zrow{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:44px;padding:4px 4px 4px 6px;border:0;border-radius:6px;background:transparent;cursor:pointer}
+.zgb .zrow:hover,.zgb .zrow.hl{background:rgba(255,255,255,.075)}
+.zgb .zrow .ic{font-size:18px;width:28px}
+.zgb .zrow div{min-width:0}
+.zgb .zrow b{font-size:13px;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.zgb .zrow small{display:block;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.zgo{width:42px;height:36px;display:grid;place-items:center;padding:0;border:1px solid var(--zac,#94a3b8);border-radius:6px;background:rgba(0,0,0,.28);color:#fff;font-size:16px;cursor:pointer;transition:background .12s,color .12s}
+.zgo:hover{background:var(--zac,#94a3b8);color:#0b1a24} .zgo:active{transform:translateY(1px)} .zgo:focus-visible{outline:2px solid #ffd23f;outline-offset:1px}
+.zempty{padding:14px 10px;color:var(--mut);font-size:13px}
+@media (pointer:coarse), (max-width:860px){ .zgo{width:46px;height:44px} }
+@media (max-width:860px){ .mapModal>.row{flex-wrap:wrap;row-gap:4px} .mapModal>.row h2{font-size:18px;white-space:nowrap} .mapModal .mapWhere{order:5;flex-basis:100%;font-size:12.5px} }
 /* music */
 #music{position:fixed;right:16px;top:16px;width:330px;padding:14px;z-index:6}
 .mhead{display:flex;gap:10px;align-items:center}
@@ -1332,6 +1358,25 @@ const PLACES=[
    Bản đồ thật nhìn từ trên xuống: địa hình (biển, cát, cỏ, núi, sông), cầu/sàn gỗ, nhà cửa, đường xe, tên các khu,
    biểu tượng địa điểm (bấm để bay tới), xe buýt đang chạy, mũi tên vàng = BẠN ĐANG Ở ĐÂY. Bắc ở phía trên. */
 const MAPV={cx:0, cz:0, s:1, drag:null, raf:0, base:null, B:null, PX:3, places:null, hl:null};
+HOOK.onFrame.push(()=>{ if(!W.inside){ MAPV.outX=P.x; MAPV.outZ=P.z; } });   // vị trí ngoài trời gần nhất (trong sảnh riêng P là toạ độ cảnh trong nhà) → chọn nhóm "đảo đang đứng"
+/* S19g 20/11: nhóm địa điểm theo đảo / vùng cho cột danh sách bên phải bản đồ */
+const MAPG_ICON={abyssal:'🏝️', cbd:'🏙️', skyport:'✈️', devcity:'🌆', brain:'🧠', swiss:'🏔️', palm:'🌴', wonder:'🎡'};
+// màu nhận diện từng đảo (dải trái nhóm + vòng sáng điểm trên bản đồ khi rê vào nhóm) – theo chất liệu đảo, không dải tím/xanh một màu
+const MAPG_COL={abyssal:'#2dd4bf', cbd:'#60a5fa', skyport:'#7dd3fc', devcity:'#f59e0b', brain:'#c084fc', swiss:'#e2e8f0', palm:'#4ade80', wonder:'#f472b6',
+  dt:'#60a5fa', ward:'#fbbf24', arena:'#f472b6', bp:'#a3e635', islet:'#2dd4bf', main:'#4ade80', _:'#94a3b8'};
+function mapGroupAt(x,z){
+  if(x==null || z==null) return {key:'_', name:'📍 Khác', rank:999};
+  const inB=L=>x>L.x0&&x<L.x1&&z>L.z0&&z<L.z1;
+  if(W.V2 && W.V2ZONES){ const keys=Object.keys(W.V2ZONES);
+    for(const k of keys){ const Z=W.V2ZONES[k]; if(x>=Z.x0&&x<=Z.x1&&z>=Z.z0&&z<=Z.z1) return {key:k, name:(MAPG_ICON[k]||'📍')+' '+String(Z.name).split(' – ')[0].replace(/\s*\(.*?\)/g,'').trim(), rank:keys.indexOf(k)}; }
+    const L=EXTL.find(L=>L.name && inB(L)); if(L) return {key:'x:'+L.name, name:'📍 '+L.name, rank:100};
+    return {key:'_', name:'🌊 Ngoài khơi · khác', rank:999}; }
+  const R=CITY, inR=r=>r && inB(r);
+  if(inR(R.downtown)) return {key:'dt', name:'🏙️ Downtown · QC City', rank:1}; if(inR(R.ward)) return {key:'ward', name:'🏘️ Phường Khởi Nghiệp', rank:2}; if(inR(R.arena)) return {key:'arena', name:'🎡 Khu Giải trí QC Fun Park', rank:3};
+  { const L=EXTL.find(L=>L.name && inB(L) && L.h && L.h(x,z)!=null); if(L) return {key:'x:'+L.name, name:'📍 '+L.name, rank:10}; }
+  if(EXTL.some(L=>!L.name && inB(L) && L.h && L.h(x,z)!=null)) return {key:'bp', name:'🏞️ Cao nguyên Bình Phan', rank:9};
+  if(onIslet(x,z,0)) return {key:'islet', name:'🏝️ Đảo nghỉ dưỡng', rank:20};
+  return {key:'main', name:'🌴 Đảo Master Dashboard', rank:0}; }
 function mapBounds(){ let x0=-100,x1=100,z0=-100,z1=100; const add=r=>{ x0=Math.min(x0,r.x0-28); x1=Math.max(x1,r.x1+28); z0=Math.min(z0,r.z0-28); z1=Math.max(z1,r.z1+28); };
   for(const k of ['downtown','ward','arena']) if(CITY[k]) add(CITY[k]); for(const L of EXTL) add(L);
   add({x0:ISLET.x-ISLET.r, x1:ISLET.x+ISLET.r, z0:ISLET.z-ISLET.r, z1:ISLET.z+ISLET.r}); return {x0,x1,z0,z1}; }
@@ -1394,6 +1439,7 @@ function mapDraw(){ const cvs=$('mapCv'); if(!cvs || $('mapWrap').hidden || !MAP
   const fs=Math.max(14,Math.min(24,MAPV.s*9));
   for(const it of MAPV.places){ it.sx=null; if(it.x==null) continue; const [x,y]=mapW2S(it.x,it.z,cw,ch); if(x<-20||y<-20||x>cw+20||y>ch+20) continue; const hl=MAPV.hl===it;
     g.fillStyle=hl?'#ffd23f':'rgba(255,255,255,.92)'; g.beginPath(); g.arc(x,y,fs*.68,0,Math.PI*2); g.fill(); g.strokeStyle='rgba(0,0,0,.35)'; g.lineWidth=1; g.stroke();
+    if(MAPV.hlg && MAPV.hlg.has(it)){ g.strokeStyle=MAPV.hlc||'#ffd23f'; g.lineWidth=3; g.beginPath(); g.arc(x,y,fs*.68+3.5,0,Math.PI*2); g.stroke(); }   // nhóm đảo đang rê chuột
     g.font=`${fs}px "Segoe UI Emoji"`; g.fillStyle='#000'; g.fillText(it.p.icon||'📍',x,y+1); it.sx=x; it.sy=y; it.sr=fs*.7; }
   // BẠN ĐANG Ở ĐÂY (mũi tên chỉ hướng nhân vật đang nhìn)
   const [px,py]=mapW2S(P.x,P.z,cw,ch), tt=performance.now()/1000, pr=10+6*(.5+.5*Math.sin(tt*4));
@@ -1407,18 +1453,41 @@ function openMap(){
   clearKeys(); if(!MAPV.base){ try{ mapBuild(); }catch(e){ console.warn('bản đồ', e); } }
   MAPV.places=mapPlaces();
   const l=$('zList'); l.innerHTML='';
-  for(const it of MAPV.places){ const p=it.p, r=document.createElement('div'); r.className='zrow'; r.innerHTML='<span class="ic"></span><div style="flex:1;min-width:0"><b></b><small></small></div>';
-    r.querySelector('.ic').textContent=p.icon; r.querySelector('b').textContent=p.name; r.querySelector('small').textContent=p.sub;
-    r.onmouseenter=()=>{ MAPV.hl=it; }; r.onmouseleave=()=>{ if(MAPV.hl===it) MAPV.hl=null; };
-    r.onclick=()=>{ if(it.x!=null) mapFocus(it.x,it.z,Math.max(MAPV.s,2.2)); MAPV.hl=it; };
-    const b=document.createElement('button'); b.className='btn'; b.textContent='✨ Bay tới'; b.onclick=(e)=>{ e.stopPropagation(); closeMap(); p.go(); }; r.appendChild(b); l.appendChild(r); }
+  /* S19g 20/11: gom theo đảo / vùng – mỗi đảo 1 nhóm có số địa điểm; bấm tiêu đề để mở / thu gọn (mở thì bản đồ khung vào đảo đó); mặc định mở nhóm nơi đang đứng */
+  const here=mapGroupAt(W.inside ? MAPV.outX : P.x, W.inside ? MAPV.outZ : P.z).key, groups=new Map();
+  MAPV.places.forEach((it,i)=>{ const G=mapGroupAt(it.x, it.z); let g=groups.get(G.key); if(!g) groups.set(G.key, g={...G, first:i, list:[]}); g.list.push(it); });
+  const fitTo=list=>{ const pts=list.filter(it=>it.x!=null); if(!pts.length) return; let x0=1e9, x1=-1e9, z0=1e9, z1=-1e9; for(const it of pts){ x0=Math.min(x0,it.x); x1=Math.max(x1,it.x); z0=Math.min(z0,it.z); z1=Math.max(z1,it.z); }
+    const cvs=$('mapCv'), cw=cvs.clientWidth||900, ch=cvs.clientHeight||600; mapFocus((x0+x1)/2, (z0+z1)/2, clamp(Math.min(cw/(x1-x0+160), ch/(z1-z0+160)), .6, 3.2)); };
+  const sorted=[...groups.values()].sort((a,b)=>a.rank-b.rank || a.first-b.first);
+  if(!sorted.length){ const e=document.createElement('div'); e.className='zempty'; e.textContent='Chưa có địa điểm nào để bay tới.'; l.appendChild(e); }
+  sorted.forEach((g,gi)=>{ const col=MAPG_COL[g.key]||MAPG_COL._, ic=(g.name.match(/^\S+/)||['📍'])[0], title=g.name.slice(ic.length).trim()||g.name;
+    const box=document.createElement('section'); box.className='zgrp'+(g.key===here ? ' open here' : ''); box.style.setProperty('--zac', col);
+    const h=document.createElement('div'); h.className='zgh'; h.tabIndex=0; h.setAttribute('role','button'); h.setAttribute('aria-controls','zgb'+gi); h.title=title+' – bấm để mở / thu gọn';
+    h.innerHTML='<span class="zi" aria-hidden="true"></span><span class="zt"><b></b><span class="zhere">Bạn ở đây</span></span><span class="zcnt"></span><span class="zchev" aria-hidden="true">▶</span>';
+    h.querySelector('.zi').textContent=ic; h.querySelector('b').textContent=title; h.querySelector('.zcnt').textContent=g.list.length; h.querySelector('.zcnt').setAttribute('aria-label', g.list.length+' địa điểm');
+    const body=document.createElement('div'); body.className='zgb'; body.id='zgb'+gi; body.setAttribute('role','list');
+    const sync=()=>h.setAttribute('aria-expanded', box.classList.contains('open') ? 'true' : 'false'); sync();
+    const toggle=()=>{ if(box.classList.toggle('open')) fitTo(g.list); sync(); };
+    h.onclick=toggle; h.onkeydown=e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); } };
+    const hset=new Set(g.list); h.onmouseenter=()=>{ MAPV.hlg=hset; MAPV.hlc=col; }; h.onmouseleave=()=>{ if(MAPV.hlg===hset) MAPV.hlg=null; };   // rê vào nhóm → các điểm của đảo sáng vòng màu đảo trên bản đồ
+    for(const it of g.list){ const p=it.p, r=document.createElement('div'); r.className='zrow'; r.setAttribute('role','listitem'); r.title=(p.name||'')+(p.sub ? '\n'+p.sub : '');
+      r.innerHTML='<span class="ic" aria-hidden="true"></span><div><b></b><small></small></div>';
+      // trong nhóm đảo đã ghi tên đảo → bỏ tiền tố trùng "Dev City – …" cho gọn (tên đủ vẫn ở tooltip)
+      const pm=(p.name||'').match(/^(.{2,40}?) – (.+)$/), short=pm && title.toLowerCase().startsWith(pm[1].toLowerCase().split(' ').slice(0,2).join(' ')) ? pm[2] : p.name;
+      r.querySelector('.ic').textContent=p.icon||'📍'; r.querySelector('b').textContent=short; r.querySelector('small').textContent=p.sub||'';
+      r.onmouseenter=()=>{ MAPV.hl=it; r.classList.add('hl'); }; r.onmouseleave=()=>{ if(MAPV.hl===it) MAPV.hl=null; r.classList.remove('hl'); };
+      r.onclick=()=>{ if(it.x!=null) mapFocus(it.x,it.z,Math.max(MAPV.s,2.2)); MAPV.hl=it; };
+      const b=document.createElement('button'); b.className='zgo'; b.type='button'; b.textContent='✈'; b.title='Bay tới'; b.setAttribute('aria-label','Bay tới '+(p.name||''));
+      b.onclick=(e)=>{ e.stopPropagation(); closeMap(); p.go(); }; r.appendChild(b); body.appendChild(r); }
+    box.append(h, body); l.appendChild(box); });
+  requestAnimationFrame(()=>{ const hb=l.querySelector('.zgrp.here'); if(hb) l.scrollTop=Math.max(0, hb.offsetTop-l.offsetTop-4); });   // chỉ cuộn cột danh sách (scrollIntoView cuộn cả khung bản đồ → mất tiêu đề trên điện thoại)
   $('mapWhere').textContent='Bạn đang ở: '+mapRegion();
   $('mapWrap').hidden=false;
   const cvs=$('mapCv'), B=MAPV.B; if(!B) return;
   requestAnimationFrame(()=>{ const cw=cvs.clientWidth||900, ch=cvs.clientHeight||600, fit=Math.min(cw/(B.x1-B.x0), ch/(B.z1-B.z0));
     mapFocus((B.x0+B.x1)/2, (B.z0+B.z1)/2, fit*.98); if(!MAPV.raf) mapDraw(); });
 }
-function closeMap(){ $('mapWrap').hidden=true; $('mapTip').hidden=true; canvas.focus(); }
+function closeMap(){ $('mapWrap').hidden=true; $('mapTip').hidden=true; MAPV.hlg=null; MAPV.hl=null; canvas.focus(); }
 { const cvs=$('mapCv'), tip=$('mapTip');
   const hit=(e)=>{ const r=cvs.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top; let best=null, bd=1e9; for(const it of (MAPV.places||[])){ if(it.sx==null) continue; const d=Math.hypot(it.sx-x,it.sy-y); if(d<it.sr+3 && d<bd){ bd=d; best=it; } } return {best,x,y}; };
   cvs.addEventListener('wheel', e=>{ e.preventDefault(); const r=cvs.getBoundingClientRect(), mx=e.clientX-r.left-r.width/2, my=e.clientY-r.top-r.height/2, k=e.deltaY<0?1.18:1/1.18, ns=clamp(MAPV.s*k,.6,9);
@@ -1543,8 +1612,12 @@ const FARCAM=new THREE.Vector3(), _fs=new THREE.Sphere();
 function markFar(root){ const K=QUAL==='low'?1:1.6, bb=new THREE.Box3(), sz=new THREE.Vector3(); let n=0; root.updateMatrixWorld(true);
   root.traverse(o=>{ if(!o.isMesh || o.isSkinnedMesh || o.isInstancedMesh || !o.frustumCulled || o.userData.farR2!==undefined || o.userData.noFar) return;
     const g=o.geometry; if(!g.boundingBox) g.computeBoundingBox(); bb.copy(g.boundingBox).applyMatrix4(o.matrixWorld); bb.getSize(sz);
-    const d=[sz.x,sz.y,sz.z].sort((a,b)=>a-b); let s=d[1]; if(sz.y<.15) s=Math.min(s,.6);   // tấm phẳng nằm trên mặt đất: ở xa chỉ còn một vệt mỏng
-    const far=Math.max(110, 320*s)*K; o.userData.farR2 = far>=600 ? 0 : far*far; if(far<600) n++; });
+    const d=[sz.x,sz.y,sz.z].sort((a,b)=>a-b);
+    /* S19g 21/11 – SỬA "BIỂN TRẮNG": ngưỡng đo từ TÂM vật, nên tấm phẳng rộng (mặt biển 4000 m, mặt đất / sàn / lưới đường gộp cả vùng) bị bỏ vẽ khi camera cách TÂM ~190 m
+       dù đang đứng ngay trên nó → lộ màu nền trời. (1) cạnh dài nhất > 200 m: không bao giờ bỏ vẽ. (2) vật còn lại: cộng nửa đường chéo ngang vào ngưỡng → đo tới MÉP, tấm 60–200 m hết biến mất sớm. */
+    if(d[2]>200){ o.userData.farR2=0; return; }
+    let s=d[1]; if(sz.y<.15) s=Math.min(s,.6);   // tấm phẳng nằm trên mặt đất: ở xa chỉ còn một vệt mỏng
+    const far=Math.max(110, 320*s)*K+Math.hypot(sz.x,sz.z)/2; o.userData.farR2 = far>=600 ? 0 : far*far; if(far<600) n++; });
   return n; }
 // bóng mờ dưới chân (chế độ bóng tĩnh)
 const BLOBSRC=[];   // {o: Object3D, s: đường kính} – xe, thú cưng… (life.js thêm vào)

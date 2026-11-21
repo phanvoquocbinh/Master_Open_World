@@ -204,6 +204,8 @@ export function makeVehicles(W, S, save){
   // đổi mẫu xe (mua ở showroom): dựng lại xe trong garage
   V.rebuild=(type)=>{ const o=garage[type]; if(!o) return; if(ride && ride.obj===o) return; const p=o.position.clone(), h=o.rotation.y; scene.remove(o); delete garage[type]; const n=ensure(type); n.position.copy(p); n.rotation.y=h; };
   V.recolor=(type, color)=>{ const o=garage[type]; if(!o) return; o.traverse(m=>{ if(m.isMesh && m.material.isMeshPhysicalMaterial && m.material.clearcoat===1 && m.material.metalness===.55) m.material.color.set(color); }); };
+  // S19g 20/11: đỗ xe đã sở hữu vào 1 ô (bãi giao xe showroom Dev City – V2) · at={x, z, y?, h?} · không đụng xe đang lái
+  V.park=(type, at)=>{ if(!at || (ride && ride.type===type)) return null; const o=ensure(type); o.position.set(at.x, at.y ?? (type==='boat' ? WATER_Y : groundAt(at.x,at.z)), at.z); o.rotation.set(0, at.h ?? o.rotation.y, 0); return o; };
 
   return V;
 }

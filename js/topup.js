@@ -77,7 +77,7 @@ export function makeTopup(W, ctx, G){
     <div class="tuRow"><b data-k="sp" class="sp">dấu cách</b><b data-k="send" class="snd">➤</b></div></div>`;
   const kbTxt=kb.querySelector('.tuTxt');
   const baseKey=ch=>{ if(ch===' ') return 'sp'; if(ch==='đ'||ch==='Đ') return 'd'; return ch.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase(); };
-  async function typeText(s){ for(const ch of s){ if(!SC.alive) return; const key=kb.querySelector(`[data-k="${baseKey(ch)}"]`); if(key) await tap(key, .7); else await ms(42); kbTxt.textContent+=ch; } }
+  async function typeText(s){ for(const ch of s){ if(!SC.alive) return; const key=kb.querySelector(`[data-k="${baseKey(ch)}"]`); if(key) await tap(key, .54); else await ms(32);   /* 21/11 Bình: gõ nhanh thêm 30% */ kbTxt.textContent+=ch; } }
   function sendMine(){ const text=kbTxt.textContent.trim(); kbTxt.textContent=''; if(!text) return; ph.addMsg(BP_NUM, {me:true, text, ts:Date.now(), st:'sent'}); ph.render(); }
   async function bpTyping(sec){ const chat=qs('.phChat'); let b=null; if(chat){ b=document.createElement('div'); b.className='bub them tuTyping'; b.textContent='Anh trai Bình Phan đang nhập…'; chat.appendChild(b); chat.scrollTop=chat.scrollHeight; } await wait(sec); if(b) b.remove(); }
   function bpReply(text){ ph.addMsg(BP_NUM, {me:false, text, ts:Date.now(), name:BP_NAME}); ph.render(); }
