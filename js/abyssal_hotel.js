@@ -721,7 +721,19 @@ export async function make(W, ctx={}){
     {icon:'🏊', name:'Royal Lotus · Sky Pool tầng 20', sub:'Hồ bơi vô cực đáy kính vươn ra vịnh', go:goPool}, {icon:'🛏️', name:'Royal Lotus · Về phòng đã thuê', sub:'Cần thuê phòng trước ở lễ tân', go:goRoom});
 
   /* ============================== 19. MỖI KHUNG HÌNH ============================== */
-  let curF=-1, camSaved=null, tt=0, lastN=-1; const D2=(a,b)=>Math.hypot(a,b);
+  let curF=-1, camSaved=null, tt=0, lastN=-1; const D2=(a,b)=>Math.hypot(a,b), CAM={want:0, last:NaN};
+  /* ô (cell) chứa nhân vật: phòng nghỉ (giữa 2 vách ngăn, ngoài vách hành lang), hành lang (trong vách hành lang, giữa 2 đầu hồi), sảnh tầng mở / penthouse */
+  const angIn=(th,a0,a1)=>{ let d=((th-a0)%360+360)%360; return d<=a1-a0; };
+  function camCell(f){ const dx=P.x-CX, dz=P.z-CZ, r=Math.hypot(dx,dz), th=Math.atan2(dz,dx)/D; if(f<2 || f>24 || r<R_IN) return null;
+    const w=WINGS.find(q=>angIn(th,q.a0,q.a1)); if(!w) return null; const pent=isPent(w,f), roomF=isRoomFloor(f) && !pent;
+    if((roomF || pent) && r<R_COR) return {a0:w.a0, a1:w.a1, r0:0, r1:R_COR-.14};
+    if(roomF){ const rel=((th-w.a0)%360+360)%360, j=Math.max(0,Math.min(5,Math.floor(rel/20))); return {a0:w.a0+20*j, a1:w.a0+20*j+20, r0:R_COR+.14, r1:1e9}; }
+    return {a0:w.a0, a1:w.a1, r0:pent?R_COR+.14:0, r1:1e9}; }
+  function inCell(c,x,z){ const dx=x-CX, dz=z-CZ, r=Math.hypot(dx,dz); if(r<c.r0 || r>c.r1) return false; const th=Math.atan2(dz,dx)/D, d0=((th-c.a0)%360+360)%360, d1=((c.a1-th)%360+360)%360;
+    if(d0>c.a1-c.a0) return false; return r*Math.sin(Math.min(d0,90)*D)>.28 && r*Math.sin(Math.min(d1,90)*D)>.28; }
+  function camLimit(f){ const c=camCell(f); if(!c) return 1e9; const sx=Math.sin(cam.yaw), sz=Math.cos(cam.yaw), cp=Math.max(.3,Math.cos(cam.pitch||0)), maxH=(CAM.want||6)*cp+.4; let h=maxH;
+    for(let s=.2; s<=maxH; s+=.2){ if(!inCell(c, P.x+sx*s, P.z+sz*s)){ h=s; break; } }
+    return h>=maxH ? 1e9 : Math.max(.35,(h-.3)/cp); }
   function refreshFloor(force){ const f=curF; for(const [key,g] of IG) g.visible=false;
     if(f>=2){ if([2,3,4,5,24].includes(f)){ const g=getGroup('amen'+f, gg=>{ gg.userData.coll=buildAmen(f,gg); }); g.visible=true; amenInter(); if(f===4 && !BIL.balls) makeBalls(); }
       if(isRoomFloor(f)){ const ws=WINGS.filter(w=>!isPent(w,f)), type=typeOf(ws[0],f), g=getGroup((ws.length>1?'EW':'W')+type, gg=>buildRooms(ws,type,gg)); g.position.y=Yf(f); g.visible=true; setDoors(g, RENT && RENT.k===f && RENT.type!=='pent' ? RENT : null); if(ws.length<2) getGroup('pent'+f, gg=>buildPent(f,gg)).visible=true; } }
@@ -729,7 +741,7 @@ export async function make(W, ctx={}){
   function makeBalls(){ if(!BIL.m) return; const R=.031, cols=[0xe9e2d0,0xf2c230,0xc8231c]; BIL.balls=cols.map((c,i)=>{ const m=new THREE.Mesh(new THREE.SphereGeometry(R,14,10), new THREE.MeshStandardMaterial({color:c, roughness:.15})); m.userData.dynamic=true; const g=IG.get('amen4'); (g||root).add(m); m.userData.lx=-.5+i*.35; m.userData.lz=(i-1)*.18; return {m, x:-.5+i*.35, z:(i-1)*.18, vx:0, vz:0}; }); placeBalls(); }
   function placeBalls(){ for(const b of BIL.balls){ const p=new THREE.Vector3(b.x,.86,b.z).applyMatrix4(BIL.m); b.m.position.copy(p); } }
   HOOK.onFrame.push((dt)=>{ dt=Math.min(dt||1/60,.1); tt+=dt; const dx=P.x-CX, dz=P.z-CZ, dH=D2(dx,dz), far=dH>520;
-    mid.visible=dH<460; lobby.visible=dH<62 && P.y<Y0+31; if(far){ if(WIN.length || WINS.length) setWindow([],0); curF=-1; if(FL.key) furnApply('',0,null); return; }
+    mid.visible=dH<460; lobby.visible=dH<62 && P.y<Y0+31; if(far){ if(WIN.length || WINS.length) setWindow([],0); curF=-1; if(FL.key) furnApply('',0,null); if(HOOK.camBox && HOOK.camBox._hot) HOOK.camBox=null; if(camSaved!=null){ cam.dist=Math.max(CAM.want||camSaved,1.6); camSaved=null; } return; }
     /* tầng hiện tại + cửa sổ va chạm ±1 tầng */
     let f=0; if(dH<39 && P.y>Y0-1.6 && P.y<TOPY+60) f=clamp(Math.round((P.y-Y0)/FH)+1,1,25);   /* 17/11 (phiên A, Bình báo rơi từ mái): nhảy / đứng trên vật trang trí / trực thăng cao hơn mái > 8 m không còn tắt hết sàn → không rơi xuyên xuống tầng trệt */
     if(FORCE>0){ FORCE-=dt; } else { const ks=f?[f-1,f,f+1].filter(k=>k>=2 && k<=25):[]; if(ks.join()!==WIN.join() || (WINS[0]||0)!==(f>=2?f:0)) setWindow(ks,f); }
@@ -737,8 +749,15 @@ export async function make(W, ctx={}){
     furnTick(dt, f);
     /* camera: trong phòng/hành lang các cánh → không vượt trần, lùi gần nhân vật */
     const th=((Math.atan2(dz,dx)/D)%360+360)%360, inWing=(th>=300||th<=60||(th>=120&&th<=240)), inside=f>=1 && f<=24 && ((inWing && dH>17.4 && dH<(f===1?29.6:34)) || (f>=2 && dH<=17.6));
-    if(inside && !(f===1 && dH<17.6)){ HOOK.camBox={x0:-1e6, x1:1e6, z0:-1e6, z1:1e6, y1:Yf(f)+(f===1?FH-.7:FH-.75), _hot:true}; if(camSaved==null){ camSaved=cam.dist; cam.dist=Math.min(cam.dist,3.6); } }
-    else { if(HOOK.camBox && HOOK.camBox._hot) HOOK.camBox=null; if(camSaved!=null){ cam.dist=Math.max(cam.dist,camSaved); camSaved=null; } }
+    if(inside && !(f===1 && dH<17.6)){ HOOK.camBox={x0:-1e6, x1:1e6, z0:-1e6, z1:1e6, y1:Yf(f)+(f===1?FH-.7:FH-.75), _hot:true};
+      /* (21/11) kẹp camera theo khung phòng / hành lang: dò dọc hướng camera tới vách ngăn, vách hành lang, đầu hồi → khoảng cách camera không vượt qua vách
+         (camera của game tự làm mượt khoảng cách – kéo vào nhanh, nhả ra chậm, không giật). Nhớ mức zoom người chơi chọn (CAMW), ra khỏi toà trả lại. */
+      if(camSaved==null){ camSaved=cam.dist; CAM.want=cam.dist; CAM.last=NaN; }
+      if(!(Math.abs(cam.dist-CAM.last)<1e-4)) CAM.want=cam.dist;   /* người chơi lăn chuột đổi zoom */
+      const lim=camLimit(f); cam.dist=lim<CAM.want ? lim : CAM.want; CAM.last=cam.dist;
+      /* game làm mượt khoảng cách đều 2 chiều (~1 s) → lúc quay camera vào vách sẽ lọt qua vách trong lúc chờ: kéo VÀO nhanh (~0,1 s, liên tục), nhả RA vẫn chậm như game */
+      if(cam.occ!=null && cam.occ>cam.dist) cam.occ=cam.dist+(cam.occ-cam.dist)*Math.exp(-dt*24); }
+    else { if(HOOK.camBox && HOOK.camBox._hot) HOOK.camBox=null; if(camSaved!=null){ cam.dist=Math.max(CAM.want||camSaved,1.6); camSaved=null; } }
     /* đêm: vách phòng + đèn trần ấm hơn */ const n=W.night||0; if(Math.abs(n-lastN)>.01){ lastN=n; M.roomGlow.emissiveIntensity=.5+.95*n; M.glow.emissiveIntensity=.9+.9*n; M.glowSoft.emissiveIntensity=.6+.9*n; }
     if(M.water.normalMap) M.water.normalMap.offset.set(tt*.02,tt*.015);
     if(GATE.mesh) M.portal.opacity=.35+.2*Math.sin(tt*2.2);
@@ -759,7 +778,7 @@ export async function make(W, ctx={}){
 
   const out={ floor:()=>curF, Yf, rent:(type='deluxe')=>doRent(pickRoom(type)), goRoom, goPool, goFloor, get RENT(){ return RENT; },
     info:()=>({center:[CX,CZ], y0:Y0, top:TOPY, floors:24, heightAbovePlaza:+(TOPY-GY).toFixed(1), topY:+(TOPY+3.7).toFixed(1), core:CORE, bridge:'A', dropoff:DROP, gateBy:A_GATE?'A':'C', joint:JOINT, lifts:LIFTS.length, win:WIN.slice(), wins:WINS.slice(), staticSegs:STATIC.segs.length, staticPlats:STATIC.plats.length}),
-    __furnHandles:()=>FL.h, furn:()=>({key:FL.key, items:FL.h.length, segs:FL.C?FL.C.segs.length:0, circ:FL.C?FL.C.circ.length:0, boxes:FL.C?FL.C.boxes.length:0, stats:HAS_F && FURN.stats ? FURN.stats() : null}),
+    __furnHandles:()=>FL.h, camLimit:(f)=>camLimit(f==null?curF:f), camCell:(f)=>camCell(f==null?curF:f), furn:()=>({key:FL.key, items:FL.h.length, segs:FL.C?FL.C.segs.length:0, circ:FL.C?FL.C.circ.length:0, boxes:FL.C?FL.C.boxes.length:0, stats:HAS_F && FURN.stats ? FURN.stats() : null}),
     drawInfo:()=>{ let n=0, tri=0; root.traverse(o=>{ if((o.isMesh||o.isInstancedMesh) && o.visible){ let vis=true; for(let p=o;p;p=p.parent) if(!p.visible){ vis=false; break; } if(vis){ n++; const g=o.geometry; tri+=(g.index?g.index.count:g.attributes.position.count)/3*(o.isInstancedMesh?o.count:1); } } }); return {draws:n, tris:Math.round(tri)}; } };
   W.abyHotel=out; return out;
 }
