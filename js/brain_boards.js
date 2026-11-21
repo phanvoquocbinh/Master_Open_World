@@ -2,7 +2,7 @@
 //  • Tầng 1 (y 110): bảng treo tường theo mặt kính nghiêng + cột bảng 2 mặt đứng giữa sảnh. Mỗi mặt cứ 30 giây đổi sang một mẩu
 //    kiến thức khác (mờ dần → vẽ lại → hiện dần), thanh tiến trình chạy dưới bảng, bấm E ở gần để xem mẩu tiếp theo.
 //    Nội dung lấy từ data/brain_boards.json (không viết chữ trong code), xen kẽ theo chủ đề.
-//  • Tầng 5 (y 142): bảng "Vinh danh QA/QC Member" khung gỗ óc chó + chỉ vàng, 2 đèn rọi tranh, bấm E xem bảng lớn.
+//  • Tầng 6 (sân thượng, y 150): bia "Vinh danh QA/QC Member" khung gỗ óc chó + chỉ vàng, 2 đèn rọi tranh, bấm E xem bảng lớn.
 //  • Chữ sắc nét: canvas 2048 px (bảng vinh danh 2560 px), mipmap + anisotropy tối đa. Vật liệu MeshBasic, tự giảm độ sáng
 //    khi trời tối để bloom ban đêm (ngưỡng thấp) không làm chữ loá. Bảng ở xa dùng bản 1024 px; 4 mặt gần nhất (≤ 10 m) lên 2048 px.
 //  • Hiệu năng: chỉ tạo texture khi bạn ở tầng 1 / gần tháp, rời đi thì giải phóng GPU.
@@ -114,19 +114,26 @@ export async function make(W, ctx = {}, L){
       g.fillStyle = '#f8edd2'; fitFont(g, n, 600, 124, SERIF, 1500); g.fillText(n, w / 2 + 40, y); });
     g.fillStyle = '#cdb27a'; g.font = `italic 500 50px ${SERIF}`; g.fillText('Ghi nhận sự tận tâm vì chất lượng sản phẩm', w / 2, h - 130); }
   let honor = null;
-  { const y5 = FY[4], usedA = (L.f5Used || []), bar = L.f5Bar, bil = L.f5Billiard || [];
-    let best = null, bs = -1; for(let i = 0; i < 24; i++){ const a = A0 + .25 + i * TAU / 24; if(busy(a, 4)) continue; const sep = Math.min(...usedA.map(u => dAng(u, a)), bar != null ? dAng(bar, a) + .2 : 9, ...bil.map(u => dAng(u, a)), 9); if(sep > bs){ bs = sep; best = a; } }
-    const a = best ?? A0 + 1.3, s = wallSpot(a, y5, y5 + 1.15, y5 + 4.05, .36), ry = yawOut(a) + Math.PI, BW = 4.6, BH = 2.875;
+  // 21/11 (Bình chốt): bảng vinh danh lên TẦNG 6 (sân thượng) – bia đứng trang trọng giữa 2 Đình Vọng Cảnh, quay vào sảnh thang máy, không chắn lối
+  { const y6 = FY[5], HA = L.f6Honor || {a:A0 + TAU / 3, r:21.5}, a = HA.a, r = HA.r, p = at(a, r), ry = yawOut(a) + Math.PI, BW = 4.6, BH = 2.875, yc = y6 + 2.75;
     const cv = document.createElement('canvas'); cv.width = 2560; cv.height = 1600;
-    const mat = new THREE.MeshBasicMaterial({color:0xffffff}), m = new THREE.Mesh(new THREE.PlaneGeometry(BW, BH), mat); m.position.set(s.x, s.yc, s.z); m.rotation.set(s.tilt, ry, 0, 'YXZ'); m.name = 'honorBoard'; m.userData.dynamic = true; m.userData.noFar = true; m.visible = false; grp.add(m);
-    const R = rig(s.x, s.yc, s.z, ry, s.tilt), fw = .2, fd = .14, ox = BW / 2 + fw / 2, oy = BH / 2 + fw / 2;
+    const mat = new THREE.MeshBasicMaterial({color:0xffffff}), m = new THREE.Mesh(new THREE.PlaneGeometry(BW, BH), mat); m.position.set(p.x, yc, p.z); m.rotation.set(0, ry, 0, 'YXZ'); m.name = 'honorBoard'; m.userData.dynamic = true; m.userData.noFar = true; m.visible = false; grp.add(m);
+    const R = rig(p.x, yc, p.z, ry), fw = .2, fd = .16, ox = BW / 2 + fw / 2, oy = BH / 2 + fw / 2, H0 = y6 - yc;
     R(AK.roundedBox(BW + fw * 2, fw, fd, .03, 3), MT.walnut, 0, oy, -.02); R(AK.roundedBox(BW + fw * 2, fw, fd, .03, 3), MT.walnut, 0, -oy, -.02);
     R(AK.roundedBox(fw, BH, fd, .03, 3), MT.walnut, -ox, 0, -.02); R(AK.roundedBox(fw, BH, fd, .03, 3), MT.walnut, ox, 0, -.02);
     for(const sy of [1, -1]) R(new THREE.BoxGeometry(BW + .08, .035, .03), MT.gold, 0, sy * (BH / 2 + .018), .012); for(const sx of [1, -1]) R(new THREE.BoxGeometry(.035, BH + .08, .03), MT.gold, sx * (BW / 2 + .018), 0, .012);
-    R(new THREE.BoxGeometry(BW + .4, BH + .4, .04), MT.obsid, 0, 0, -.1);
-    for(const sx of [-1.3, 1.3]){ R(new THREE.CylinderGeometry(.03, .03, .42, 16), MT.brass, sx, oy + .08, .14, Math.PI / 2.6, 0, 0); R(new THREE.CylinderGeometry(.065, .065, 1.15, 24), MT.brass, sx, oy + .22, .34, 0, 0, Math.PI / 2); R(new THREE.CylinderGeometry(.04, .04, 1.08, 16), MT.lamp, sx, oy + .18, .37, 0, 0, Math.PI / 2); }
-    const ip = at(a, s.r - 2.2);
-    INTER.push({x:ip.x, z:ip.z, r:3, prio:.9, when:() => Math.abs(P.y - y5) < 2, label:'🏆 Bảng Vinh danh QA/QC Member – xem bảng lớn (E)', action:() => { if(!ui || !ui.modal){ toast('🏆 Vinh danh: ' + NAMES.join(' · '), 6000); return; } const md = ui.modal('🏆 Vinh danh QA/QC Member');
+    R(AK.roundedBox(BW + .5, BH + .5, .08, .02, 2), MT.walnut, 0, 0, -.13);   // mặt sau bia
+    // 2 trụ gỗ óc chó (đỉnh cầu vàng) + bệ đá + xà đỉnh có ngôi sao vàng
+    for(const sx of [-1, 1]){ R(AK.roundedBox(.34, 4.75, .34, .05, 3), MT.walnut, sx * (BW / 2 + .5), H0 + 2.695, -.05); R(AK.roundedBox(.5, .14, .5, .03, 2), MT.gold, sx * (BW / 2 + .5), H0 + 5.1, -.05); R(new THREE.SphereGeometry(.13, 24, 16), MT.gold, sx * (BW / 2 + .5), H0 + 5.3, -.05); }
+    R(AK.roundedBox(BW + 1.7, .32, 1.1, .06, 3), MT.obsid, 0, H0 + .16, -.05); R(AK.roundedBox(BW + 1.4, .06, .9, .02, 2), MT.gold, 0, H0 + .35, -.05);
+    R(AK.roundedBox(BW + 1.2, .26, .3, .05, 3), MT.walnut, 0, oy + .3, -.05);
+    { const st = new THREE.Shape(); for(let i = 0; i < 10; i++){ const r2 = i % 2 ? .13 : .3, t = i / 10 * TAU + Math.PI / 2; if(i) st.lineTo(Math.cos(t) * r2, Math.sin(t) * r2); else st.moveTo(Math.cos(t) * r2, Math.sin(t) * r2); } st.closePath();
+      R(new THREE.ExtrudeGeometry(st, {depth:.06, bevelEnabled:true, bevelSize:.015, bevelThickness:.015, bevelSegments:2}), MT.gold, 0, oy + .78, -.08); }
+    // 2 đèn rọi tranh bằng đồng trên xà đỉnh
+    for(const sx of [-1.3, 1.3]){ R(new THREE.CylinderGeometry(.03, .03, .5, 16), MT.brass, sx, oy + .32, .2, Math.PI / 2.4, 0, 0); R(new THREE.CylinderGeometry(.065, .065, 1.15, 24), MT.brass, sx, oy + .42, .44, 0, 0, Math.PI / 2); R(new THREE.CylinderGeometry(.04, .04, 1.08, 16), MT.lamp, sx, oy + .38, .47, 0, 0, Math.PI / 2); }
+    const tx = Math.cos(ry), tz = -Math.sin(ry), hw = BW / 2 + .75; if(W.addSeg) W.addSeg(p.x - tx * hw, p.z - tz * hw, p.x + tx * hw, p.z + tz * hw, .5, y6 - .5, y6 + 5.4, '🏆 Bia Vinh danh QA/QC Member');
+    const ip = at(a, r - 2.6);
+    INTER.push({x:ip.x, z:ip.z, r:3, prio:.9, when:() => Math.abs(P.y - y6) < 2, label:'🏆 Bảng Vinh danh QA/QC Member – xem bảng lớn (E)', action:() => { if(!ui || !ui.modal){ toast('🏆 Vinh danh: ' + NAMES.join(' · '), 6000); return; } const md = ui.modal('🏆 Vinh danh QA/QC Member');
       md.body.innerHTML = `<div style="text-align:center;padding:8px 4px 2px"><div style="font:600 15px ${SERIF};color:#c9a14a;letter-spacing:6px">★ ★ ★</div><ol style="list-style:none;padding:0;margin:14px 0">${NAMES.map((n, i) => `<li style="font:600 22px ${SERIF};margin:10px 0"><span style="display:inline-block;width:30px;height:30px;line-height:30px;border-radius:50%;background:#c9a14a;color:#2a0f16;font-size:16px;margin-right:12px">${i + 1}</span>${n}</li>`).join('')}</ol><div class="muted" style="font-style:italic">Ghi nhận sự tận tâm vì chất lượng sản phẩm</div></div>`; }});
     honor = {m, mat, cv, tex:null}; }
   const honorOn = on => { if(!honor) return; if(on && !honor.tex){ drawHonor(honor.cv); honor.tex = mkTex(honor.cv); honor.mat.map = honor.tex; honor.mat.needsUpdate = true; honor.m.visible = true; } else if(!on && honor.tex){ honor.m.visible = false; honor.tex.dispose(); honor.tex = null; honor.mat.map = null; } };

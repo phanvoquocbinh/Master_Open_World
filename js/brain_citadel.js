@@ -350,12 +350,12 @@ export function make(W, ctx){
     const warm=new THREE.MeshStandardMaterial({color:0xffe0a0, emissive:0xffc060, emissiveIntensity:1.4}); for(let hx=0;hx<2;hx++) for(let i=1;i<=NST;i++){ const a=A0+hx*Math.PI+i*DA, y=YT+i*STEP, p=at(a,(R0+R1)/2); kt.add(new THREE.BoxGeometry(R1-R0-.3,.03,.05), warm, p.x, y-.16, p.z, 0, yawOut(a), 0); } }
   for(let f=1;f<6;f++){ ringC(RA+.2, FY[f]-.2, FY[f]+1.15, a=>dAng(a,A0)<.3 || dAng(a,A0+Math.PI)<.3); kt.add(new THREE.CylinderGeometry(RA+.15,RA+.15,1.05,64,1,true), M.glassB, C.x, FY[f]+.52, C.z); }
   const ELEV=[A0+Math.PI/2, A0-Math.PI/2].map(a=>({a, p:at(a,RA+3.2)}));
-  const FLOORN=['1 · Bảo tàng Lịch sử & Thảm hoạ','2 · Đấu trường Test Design','3 · Chỉ huy Hiệu năng & Bảo mật','4 · Đại sảnh Danh vọng & Phòng Bí ẩn','5 · Nhà hàng xoay · Bida Hoàng gia','6 · Sân thượng · QA Brain Core'];
+  const FLOORN=['1 · Bảo tàng Lịch sử & Thảm hoạ','2 · Đấu trường Test Design','3 · Chỉ huy Hiệu năng & Bảo mật','4 · Đại sảnh Danh vọng · Nhà hàng xoay · Sky Bar','5 · Khu giải trí · Bida Hoàng gia','6 · Sân thượng · QA Brain Core · Vinh danh'];
   { const fl=FY.map((y,i)=>({y, name:'Tầng '+FLOORN[i], short:String(i+1)})); LIFTPOS.forEach((L,k)=>makeLift(W,{x:L.x, z:L.z, yaw:L.yaw, floors:fl, name:`Thang ${k<2?'Đông':'Tây'} ${k%2?'B':'A'}`, start:k%2?5:0, color:0xe0b040})); }
   const panelTex=(title, lines, bg='#13202f')=>{ const c=document.createElement('canvas'); c.width=1024; c.height=640; const g=c.getContext('2d'); g.fillStyle=bg; g.fillRect(0,0,1024,640); g.strokeStyle='#e0b040'; g.lineWidth=10; g.strokeRect(10,10,1004,620); g.fillStyle='#ffd77a'; g.font='900 64px "Segoe UI",sans-serif'; g.fillText(title,48,110); g.fillStyle='#fff'; g.font='500 38px "Segoe UI",sans-serif'; lines.forEach((l,i)=>g.fillText(l,48,200+i*62)); const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=8; return t; };
   const panel=(a,y,title,lines,bg)=>{ const p=at(a,Rof(y+1)-.8), t=panelTex(title,lines,bg), m=new THREE.Mesh(new THREE.PlaneGeometry(5.6,3.5), new THREE.MeshStandardMaterial({map:t, emissive:0xffffff, emissiveMap:t, emissiveIntensity:.45})); m.position.set(p.x,y+2.6,p.z); m.rotation.y=yawOut(a)+Math.PI; grp.add(m); };
   const busy=(a,f)=>dAng(a,A0)<.45 || dAng(a,A0+Math.PI)<.45 || ELEV.some(e=>dAng(a,e.a)<.35) || (f===0 && DOORS.some(b=>dAng(a,b)<.32));
-  const LAY={f1Wall:[], f1Cases:[A0+.9,A0+2.2,A0+3.9], f5Used:[], f5Bar:null, f5Billiard:[]};   /* 21/11: góc đã dùng – cho bảng kiến thức tầng 1 + bảng vinh danh tầng 5 (brain_boards.js) né */
+  const LAY={f1Wall:[], f1Cases:[A0+.9,A0+2.2,A0+3.9], f4Tables:[], f4Bar:null, f5Billiard:[], f6Honor:{a:ENT+Math.PI*1.25, r:23}};   /* f6Honor: bia vinh danh sân thượng – đúng trước KHE giữa 2 cánh Đài Sen (ENT+5π/4, lối ra sảnh thang máy), lùi ra r 23 để không chắn lối, xa 3 Đình Vọng Cảnh + Brain Core. 21/11: góc đã dùng – cho bảng kiến thức tầng 1 + bảng vinh danh tầng 5 (brain_boards.js) né */
   { const y=FY[0]; for(const [a,kind] of [[A0+.9,'rocket'],[A0+2.2,'sat'],[A0+3.9,'bug']]){ const p=at(a,18); kt.add(AK.roundedBox(2.4,1.1,2.4,.1,2), M.white, p.x, y+.55, p.z); kt.add(new THREE.BoxGeometry(2.2,2.4,2.2), M.glassB, p.x, y+2.3, p.z); circles.push({x:p.x,z:p.z,r:1.6,y0:y-.5,y1:y+3.6});
       if(kind==='rocket'){ kt.add(new THREE.CylinderGeometry(.25,.25,1.6,16), M.white, p.x, y+2, p.z); kt.add(new THREE.ConeGeometry(.25,.5,16), M.red, p.x, y+3.05, p.z); for(let i=0;i<4;i++) kt.add(new THREE.BoxGeometry(.04,.4,.3), M.red, p.x+Math.cos(i*Math.PI/2)*.27, y+1.4, p.z+Math.sin(i*Math.PI/2)*.27, 0, i*Math.PI/2, 0); }
       if(kind==='sat'){ kt.add(AK.roundedBox(.6,.6,.6,.05,1), M.gold, p.x, y+2.2, p.z); for(const s of [-1,1]) kt.add(new THREE.BoxGeometry(1.1,.03,.5), sm(0x1f3f8a,.3,.6), p.x+s*.85, y+2.2, p.z); }
@@ -370,12 +370,15 @@ export function make(W, ctx){
   { const y=FY[3]; for(const [d,t,l] of [[.9,'Glenford Myers',['"The Art of Software Testing" (1979)']],[1.7,'Lisa Crispin & Janet Gregory',['"Agile Testing" (2009)']],[2.5,'Kent Beck',['Phổ biến TDD – viết test trước']],[3.6,'Đội QC Bình Phan',['Tận tâm · Chính trực · Học hỏi']],[4.4,'Bạn – người QA tiếp theo',['Mỗi bug tìm ra là một người dùng được bảo vệ']]]) panel(A0+d, y, t, l, '#3b1d12');
     const a=A0+Math.PI+1.2, p=at(a,RF[3]-.9), door=new THREE.Mesh(new THREE.PlaneGeometry(3,3.6), new THREE.MeshStandardMaterial({color:0x2a1450, emissive:0x8a4cff, emissiveIntensity:.9})); door.position.set(p.x,y+1.8,p.z); door.rotation.y=yawOut(a)+Math.PI; grp.add(door);
     const dp=at(a,RF[3]-2.6); INTER.push({x:dp.x, z:dp.z, r:2, prio:.9, when:()=>Math.abs(P.y-y)<1.5, label:'🔮 Cổng Không gian Bí ẩn (E)', action:()=>toast('🔮 Cổng Không gian Bí ẩn đang được chuẩn bị – Bình sẽ mở một điều đặc biệt ở đây.', 4200)}); }
-  let spinRing=null; { const y=FY[4]; spinRing=new THREE.Mesh(new THREE.RingGeometry(RF[4]-5,RF[4]-.6,96,1), floorMats[1]); spinRing.rotation.x=-Math.PI/2; spinRing.position.set(C.x,y+.02,C.z); grp.add(spinRing);
-    const tables=[]; for(let i=0;i<12;i++){ const a=A0+.6+i*TAU/12; if(!busy(a,4)) tables.push(a); }
-    tables.slice(0,7).forEach(a=>{ LAY.f5Used.push(a); const p=at(a,RF[4]-2.8); kt.add(new THREE.CylinderGeometry(.6,.6,.05,18), M.white, p.x, y+.76, p.z); kt.add(new THREE.CylinderGeometry(.06,.08,.74,8), M.gold, p.x, y+.38, p.z); circles.push({x:p.x,z:p.z,r:.62,y0:y-.5,y1:y+1.2});
-      const s=at(a,RF[4]-4.1); if(W.addBench) W.addBench({x:s.x, z:s.z, rot:yawOut(a), len:1.3, y:y+.48, floor:y, label:'🍽️ Ngồi nhà hàng xoay (E · C)'}); });
-    const ba=A0+Math.PI+.2, bar=at(ba,15); LAY.f5Bar=ba; kt.add(AK.roundedBox(5,1.1,1,.15,2), M.dark, bar.x, y+.55, bar.z, 0, yawOut(ba)+Math.PI/2, 0); kt.add(AK.roundedBox(5.2,.06,1.15,.04,1), M.gold, bar.x, y+1.12, bar.z, 0, yawOut(ba)+Math.PI/2, 0); circles.push({x:bar.x,z:bar.z,r:1.6,y0:y-.5,y1:y+1.5});
-    const bi=at(ba,13.2); INTER.push({x:bi.x, z:bi.z, r:2, prio:.7, when:()=>Math.abs(P.y-y)<1.5, label:'🍸 Sky Bar Liên Hoa – gọi đồ uống (E)', action:()=>menu('🍸 Sky Bar Liên Hoa',[['🍸 Mocktail Liên Hoa',60,'Hương sen'],['🥂 Nước nho sủi',50,'Không cồn'],['🍰 Bánh sen vàng',45,'Ngọt thanh']])});
+  /* 21/11 (Bình chốt): tầng 5 CHỈ là khu trò chơi (giữ 4 bàn bida) → nhà hàng xoay + Sky Bar dời xuống tầng 4, giữ nguyên chức năng ngồi ăn / gọi đồ uống */
+  let spinRing=null; { const y=FY[3], R4=RF[3], PANA=[.9,1.7,2.5,3.6,4.4].map(d=>A0+d), MYS=A0+Math.PI+1.2;
+    spinRing=new THREE.Mesh(new THREE.RingGeometry(R4-5,R4-.6,96,1), floorMats[1]); spinRing.rotation.x=-Math.PI/2; spinRing.position.set(C.x,y+.02,C.z); grp.add(spinRing);
+    const tables=[]; for(let i=0;i<16;i++){ const a=A0+.6+i*TAU/16; if(!busy(a,3) && !PANA.some(q=>dAng(q,a)<.22) && dAng(MYS,a)>.3) tables.push(a); }
+    tables.slice(0,7).forEach(a=>{ LAY.f4Tables.push(a); const p=at(a,R4-2.8); kt.add(new THREE.CylinderGeometry(.6,.6,.05,18), M.white, p.x, y+.76, p.z); kt.add(new THREE.CylinderGeometry(.06,.08,.74,8), M.gold, p.x, y+.38, p.z); circles.push({x:p.x,z:p.z,r:.62,y0:y-.5,y1:y+1.2});
+      const s=at(a,R4-4.1); if(W.addBench) W.addBench({x:s.x, z:s.z, rot:yawOut(a), len:1.3, y:y+.48, floor:y, label:'🍽️ Ngồi nhà hàng xoay (E · C)'}); });
+    const ba=A0+Math.PI+.2, bar=at(ba,15); LAY.f4Bar=ba; kt.add(AK.roundedBox(5,1.1,1,.15,2), M.dark, bar.x, y+.55, bar.z, 0, yawOut(ba)+Math.PI/2, 0); kt.add(AK.roundedBox(5.2,.06,1.15,.04,1), M.gold, bar.x, y+1.12, bar.z, 0, yawOut(ba)+Math.PI/2, 0); circles.push({x:bar.x,z:bar.z,r:1.6,y0:y-.5,y1:y+1.5});
+    const bi=at(ba,13.2); INTER.push({x:bi.x, z:bi.z, r:2, prio:.7, when:()=>Math.abs(P.y-y)<1.5, label:'🍸 Sky Bar Liên Hoa – gọi đồ uống (E)', action:()=>menu('🍸 Sky Bar Liên Hoa',[['🍸 Mocktail Liên Hoa',60,'Hương sen'],['🥂 Nước nho sủi',50,'Không cồn'],['🍰 Bánh sen vàng',45,'Ngọt thanh']])}); }
+  { const y=FY[4];
     for(let k=0;k<4;k++){ const a=A0+Math.PI*.5+.55+k*.42, p=at(a,15.5); LAY.f5Billiard.push(a); AK.buildBilliardTable(W, p.x, y, p.z, yawOut(a), 0x7a0d1c, 'world', {parent:grp}); } }
   { const y=FY[5], a=A0, p=at(a,22.5);
     /* QA Brain Core: bục đồng đỏ + pha lê ảo (thay khối hộp đen thô cũ) */
@@ -492,9 +495,11 @@ export function make(W, ctx){
     if(nEdge) console.info('[Brain] vách chặn mép nền:', nEdge); }
   /* 21/11: bảng kiến thức xoay vòng tầng 1 (data/brain_boards.json) + bảng Vinh danh QA/QC Member tầng 5 – file riêng js/brain_boards.js */
   const boards={}; import('./brain_boards.js').then(m=>m && m.make && m.make(W, ctx, {C, FY, RF, RA, A0, ENT, Rof, at, yawOut, dAng, busy, grp, doors:DOORS, ...LAY})).then(r=>{ if(r) Object.assign(boards, r); }).catch(e=>console.warn('[Brain] brain_boards:', e));
-  /* Tầng GIẢI TRÍ dành cho js/brain_games.js (phiên khác làm): Tầng 4 (y 134) – sàn vành khuyên quanh giếng trời, gần như trống.
-     Né: cầu thang xoắn ở góc A0 và A0+π (±0,45 rad), thang máy ở ENT và ENT+π (r 13,2), 5 bảng danh nhân trên tường (A0+0,9…4,4), Cổng Bí ẩn ở A0+π+1,2 (sát tường). */
-  const gameFloor={floor:4, name:FLOORN[3], y:FY[3], cx:C.x, cz:C.z, rIn:RA+1.5, rOut:RF[3]-1.6, A0, ENT, keepOut:[{a:A0, da:.45, what:'cầu thang'},{a:A0+Math.PI, da:.45, what:'cầu thang'},{a:ENT, da:.35, what:'thang máy', r:[11.5,15]},{a:ENT+Math.PI, da:.35, what:'thang máy', r:[11.5,15]},{a:A0+Math.PI+1.2, da:.25, what:'Cổng Bí ẩn', r:[RF[3]-4,RF[3]]}]};
+  /* 21/11 (Bình chốt): TẦNG 5 (y 142) là khu GIẢI TRÍ cho js/brain_games.js – cả sàn vành khuyên r 11,5 → RF[4]−1,2.
+     keepOut CHỈ còn cầu thang, thang máy (+ cửa cabin); tầng 5 không có cửa ra ngoài. 4 bàn bida có sẵn ghi ở existing.billiards (trò Bida dùng lại). */
+  const gameFloor={floor:5, name:FLOORN[4], y:FY[4], cx:C.x, cz:C.z, rIn:RA+1.5, rOut:RF[4]-1.2, A0, ENT,
+    keepOut:[{a:A0, da:.45, what:'cầu thang'},{a:A0+Math.PI, da:.45, what:'cầu thang'},{a:ENT, da:.4, what:'thang máy + cửa cabin', r:[11.5,15.5]},{a:ENT+Math.PI, da:.4, what:'thang máy + cửa cabin', r:[11.5,15.5]}],
+    existing:{billiards:LAY.f5Billiard.map(a=>({a, r:15.5, x:at(a,15.5).x, z:at(a,15.5).z, yaw:yawOut(a), len:2.84, wid:1.42}))}};
   const API={C, FY, ROAD, cafes, GB, hAt, ride, G6, boards, gameFloor};
   import('./bots_brain.js').then(m=>{ if(m && m.make) m.make(W, API); }).catch(()=>{});
   /* 21/11: khu trò chơi tầng 4 (js/brain_games.js – phiên B): make(W, ctx, gameFloor); thiếu file thì bỏ qua */
