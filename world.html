@@ -115,12 +115,12 @@ html,body{margin:0;height:100%;overflow:hidden;background:#0d1320;font-family:"S
 #mList{margin:0;padding-left:20px;font-size:13px;color:var(--mut);max-height:110px;overflow:auto}
 #mList li{margin:2px 0}
 #labels{position:fixed;inset:0;pointer-events:none;z-index:3;overflow:hidden}
-.lb{position:absolute;left:0;top:0;transform-origin:50% 100%;white-space:nowrap;padding:3px 10px;border-radius:12px;background:rgba(16,22,34,.8);color:#fff;font:600 14px "Segoe UI","Segoe UI Emoji",sans-serif;text-align:center;line-height:1.3;box-shadow:0 2px 8px rgba(0,0,0,.28);will-change:transform}
+.lb{position:absolute;left:0;top:0;transform-origin:50% 100%;white-space:nowrap;padding:3px 10px;border-radius:12px;background:rgba(16,22,34,.8);color:#fff;font:600 14px "Segoe UI","Segoe UI Emoji",sans-serif;text-align:center;line-height:1.3;box-shadow:0 2px 8px rgba(0,0,0,.28);will-change:transform;text-shadow:0 1px 2px rgba(0,0,0,.65);-webkit-font-smoothing:antialiased}
 .lb small{display:block;font-weight:500;font-size:11.5px;color:#c9d2e3}
 .lb i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
 .lb.big{font-size:16px;padding:5px 14px;border-radius:14px}
 .lb.small{font-size:13px;padding:2px 9px}
-.lb.bub{background:rgba(255,255,255,.96);color:#1b2233;font-weight:600;max-width:280px;white-space:normal;border-radius:14px}
+.lb.bub{background:rgba(232,237,244,.9);color:#1b2233;text-shadow:none;box-shadow:0 2px 8px rgba(0,0,0,.35),0 0 0 1px rgba(20,28,44,.25);font-weight:600;max-width:280px;white-space:normal;border-radius:14px}
 #toast{position:fixed;left:50%;top:84px;transform:translateX(-50%);padding:12px 18px;z-index:40;font-weight:600;max-width:min(640px,90vw);text-align:center;transition:opacity .3s}
 @media (max-width:900px){#music{width:calc(100vw - 32px);top:auto;bottom:16px}#hint,#fps{display:none}#top{max-width:calc(100vw - 32px)}}
 </style>
@@ -627,16 +627,24 @@ function makeLabel(title, sub, opt={}){
   const L={el, follow:opt.follow||null, y:opt.y||0, x:opt.x||0, z:opt.z||0, fade:opt.fade??70, group:opt.group||'world', alpha:1, shown:false, lt:''}; labels.push(L); return L;
 }
 const _v=new THREE.Vector3(), _p=new THREE.Vector3();
+let TEXTFIX=null;   // S-TEXT: js/textfix.js (nạp sau khi dựng xong thế giới)
 function updateLabels(){
   const grp=HOOK.labelGroup||'world', W2=innerWidth/2, H2=innerHeight/2; camera.updateMatrixWorld();
-  for(const L of labels){
+  const TF=TEXTFIX, ldt=Math.min(.1, (performance.now()-(updateLabels._t||0))/1000); updateLabels._t=performance.now(); if(TF) TF.tick(); let li=0;
+  for(const L of labels){ li++;
     let show = L.group===grp || L.group==='all';
     if(show){ if(L.follow){ L.follow.getWorldPosition(_v); _v.y+=L.y; } else _v.set(L.x, L.y, L.z);
-      const d=camera.position.distanceTo(_v), op=clamp((L.fade-d)/12, 0, 1)*L.alpha;
+      // S-TEXT (21/11): giới hạn khoảng cách hiện – tên người/vật đi theo ≤ 30 m, địa danh ≤ 55 m (trước đây tới 70 m, lộ xuyên nhà)
+      const d=camera.position.distanceTo(_v), fd=Math.min(L.fade, L.follow?30:55);
+      let op=clamp((fd-d)/10, 0, 1)*L.alpha;
+      // bị tường/nhà/cột che → mờ dần rồi ẩn (nhãn sát người chơi thì luôn hiện)
+      if(op>.02 && TF && !L.el.classList.contains('bub') &&(_v.x-P.x)**2+(_v.z-P.z)**2>36) op*=TF.visibility(L, _v, camera.position, ldt, li);
       _p.copy(_v).project(camera);
       if(op<=.02 || _p.z>1 || _p.z<-1 || Math.abs(_p.x)>1.15 || Math.abs(_p.y)>1.15) show=false;
-      else { const s=clamp(14/Math.max(d,1), .62, 1.12), x=(_p.x*W2+W2).toFixed(1), y=(-_p.y*H2+H2).toFixed(1);
-        const t=`translate3d(${x}px,${y}px,0) translate(-50%,-100%) scale(${s.toFixed(3)})`;
+      else { // S-TEXT: chữ sắc nét – cỡ chữ đổi theo 3 nấc bằng CSS zoom (trình duyệt vẽ lại chữ đúng cỡ, không kéo giãn ảnh chữ), toạ độ tròn pixel
+        const z=d<9?1:d<20?.88:.76; if(L.zm!==z){ L.el.style.zoom=z; L.zm=z; }
+        const x=Math.round((_p.x*W2+W2)/z), y=Math.round((-_p.y*H2+H2)/z);
+        const t=`translate3d(${x}px,${y}px,0) translate(-50%,-100%)`;
         if(t!==L.lt){ L.el.style.transform=t; L.lt=t; } L.el.style.opacity=op.toFixed(2); L.el.style.zIndex=String(100000-Math.round(d*10)); } }
     if(show!==L.shown){ L.el.style.display=show?'':'none'; L.shown=show; }
   }
@@ -1677,6 +1685,7 @@ const W={THREE, scene, overlay, camera, renderer, canvas, $, clamp, lerp, lerpAn
   get T(){ return T; }, get night(){ return nightK; }, get timeIdx(){ return timeIdx; }};
 try{ await yieldUI('Đang dựng thành phố…'); const life=await import('./js/life.js'); await life.initLife(W); }
 catch(e){ console.error(e); toast('⚠️ Lỗi tải hệ thống cuộc sống: '+e.message, 8000); }
+try{ (await import('./js/admin.js')).makeAdmin(W); }catch(e){ console.warn('admin', e); }   // S19g 21/11: 🛡️ bảng admin (F8) – chỉ máy người tạo thế giới, xem js/admin.js
 // S-QA (15/11): CHỐNG NHẤP NHÁY (z-fighting) toàn thế giới – mọi "tấm dán" (biển hiệu, mặt tiền cửa sổ, kính, vạch sân, logo) được ưu tiên chiều sâu
 // so với mặt tường/nền nằm trùng hoặc sát phía sau. Chỉ đổi trạng thái vẽ (không biên dịch lại shader, không tốn hiệu năng).
 try{ let nz=0; scene.traverse(m=>{ if(!m.isMesh || m.isSkinnedMesh || m===water || m===terrain || (m.userData&&m.userData.shadowProxy)) return; const pc=m.geometry&&m.geometry.attributes.position?m.geometry.attributes.position.count:1e9;
@@ -1685,6 +1694,7 @@ try{ let nz=0; scene.traverse(m=>{ if(!m.isMesh || m.isSkinnedMesh || m===water 
   console.info(`[QC World] chống nhấp nháy: ${nz} vật liệu tấm dán`); }catch(e){ console.warn('zfix', e); }
 try{ const nf=markFar(scene); console.info(`[QC World] ${nf} vật nhỏ được bỏ vẽ khi ở xa`); }catch(e){ console.warn('markFar', e); }
 await yieldUI('Đang chuẩn bị đồ hoạ…');
+try{ const tf=await import('./js/textfix.js'); TEXTFIX=W.textfix=tf.initTextFix(W); }catch(e){ console.warn('textfix', e); }   // S-TEXT: chữ sắc nét, không loá, nhãn không xuyên tường
 try{ occPatchAll(); }catch(e){ console.warn('camfade', e); }   // S-CAM: chèn shader làm mờ vật chắn TRƯỚC khi biên dịch (khỏi biên dịch 2 lần)
 try{ await renderer.compileAsync(scene, camera); }catch(e){ console.warn('compileAsync', e); }
 tick();

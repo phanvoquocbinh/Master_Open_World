@@ -151,7 +151,8 @@ export function makeVehicles(W, S, save){
     if(t==='boat'){ const pk=V.boatPark; if(pk){ o.position.set(pk.x, WATER_Y, pk.z); o.rotation.y=pk.h; } }
   };
   // té xe: nhân vật ngã ngửa ra đường ~1,5 s rồi tự đứng dậy (không đưa đi chỗ khác)
-  function crash(what){ const face=P.face; V.dismount(); let t=0; const gy=()=>groundAt(P.x,P.z);
+  function crash(what){ if(W.ADMIN && W.ADMIN.god){ if(ride) ride.v*=-.25; return; }   // 🛡️ bảng admin: bất tử – không té xe
+    const face=P.face; V.dismount(); let t=0; const gy=()=>groundAt(P.x,P.z);
     toast(`💥 Bạn đâm vào ${what} và té xe! Đứng dậy sau giây lát…`, 2600);
     HOOK.vehicle={drive(dt){ t+=dt; const down=Math.min(1,t/.3), up=t>1.4?Math.min(1,(t-1.4)/.45):0, k=down*(1-up);
       me.g.position.set(P.x, gy()+.12*k, P.z); me.g.rotation.set(-Math.PI/2*.92*k, face, .25*k, 'YXZ'); me.play('idle');

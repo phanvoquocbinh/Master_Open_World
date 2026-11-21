@@ -1,7 +1,7 @@
 // QC World V2 – PHA 9: BOT SỐNG ĐỘNG VÙNG ĐỈNH QA/QC BRAIN CITADEL (phiên qc-park, 16/11/2026 – theo bible Phần 7, cùng mẫu js/bots_cbd_sky.js)
 //  • Phố săn mây: chủ quán / barista, khách săn mây đứng bên lan can chụp biển, đầu bếp hải sản
 //  • Cầu Kính Cổng Trời: người đi bộ ngắm cảnh đi lại, nhiếp ảnh gia giơ máy ảnh
-//  • Tháp Liên Hoa: nhân viên bảo tàng tầng 1, MC đấu trường tầng 2, kỹ sư trực phòng chỉ huy tầng 3, bartender Sky Bar + 2 cơ thủ Bida tầng 5
+//  • Tháp Liên Hoa: nhân viên bảo tàng tầng 1, MC đấu trường tầng 2, kỹ sư trực phòng chỉ huy tầng 3, bartender Sky Bar tầng 4 + 2 cơ thủ Bida tầng 5
 //  • Nhân viên vận hành xích đu tử thần + phi công khinh khí cầu · phi công trực thăng ở sân bay Đỉnh Mây (kèm trực thăng đậu trên bãi)
 //  • Hiệu năng: chỉ hiện + chạy hoạt hình khi cách camera < 85 m (máy yếu 60 m); cả vùng ngủ khi bạn ở xa > 150 m
 //  Gọi từ brain_citadel.js: make(W, {C, FY, ROAD, cafes, GB, hAt, ride})
@@ -67,7 +67,7 @@ export function make(W, B){
   for(const [f,a,r,nm,col,ps,lines] of FL){ if(FY[f]==null) continue; const [x,z]=at(a,r), o=person(f===1?sF(5401+f):sM(5401+f), {shirt:col, pants:0x1b1d22, shoe:0x111111, long:true}, nm, '#c7d2e0'); o.x=x; o.z=z; o.y=FY[f]; o.hd=yawOut(a)+Math.PI;
     if(ps==='mic') attach(o, new THREE.Mesh(new THREE.CylinderGeometry(.025,.02,.18,8), std(0x222222)));
     o.upd=(dt,T)=>{ put(o); if(ps==='phone'){ if(o.a.g.visible) o.po.apply('phone',T); } else pose(o,ps,T); if(R()<dt*.006) say(o, pick(lines), 3); }; }
-  if(FY[4]!=null){ const y=FY[4], ba=A0+Math.PI+.2, [bx,bz]=at(ba,16.6), bt=person(sM(5501), {shirt:0x1b1d22, pants:0x1b1d22, shoe:0x111111, long:true}, '🍸 Bartender Sky Bar', '#ffd166'); bt.x=bx; bt.z=bz; bt.y=y; bt.hd=yawOut(ba)+Math.PI;
+  if(FY[4]!=null){ const y=FY[4], ba=A0+Math.PI+.2, [bx,bz]=at(ba,16.6), bt=person(sM(5501), {shirt:0x1b1d22, pants:0x1b1d22, shoe:0x111111, long:true}, '🍸 Bartender Sky Bar', '#ffd166'); bt.x=bx; bt.z=bz; bt.y=FY[3]; bt.hd=yawOut(ba)+Math.PI;   /* 21/11: Sky Bar dời xuống tầng 4 (tầng 5 chỉ còn khu trò chơi) */
     bt.upd=(dt,T)=>{ put(bt); pose(bt,'bar',T); if(R()<dt*.006) say(bt, pick(['Mocktail Liên Hoa, lắc nhẹ là xong 🍸','Ngồi ngắm 360° thành phố đi bạn!']), 2.8); };
     for(let k=0;k<2;k++){ const a=A0+Math.PI*.5+.55+k*.42, [tx,tz]=at(a,15.5), yo=yawOut(a), o=person(sM(5511+k), {shirt:k?0x7a1020:0xf4f2ec, pants:0x1b1d22, shoe:0x111111, long:true}, '🎱 Cơ thủ Bida Hoàng gia', '#c7d2e0');
       const s=k?-1:1; o.x=tx+Math.cos(yo)*s*1.95; o.z=tz-Math.sin(yo)*s*1.95; o.y=y; o.hd=yo+(s>0?-Math.PI/2:Math.PI/2);

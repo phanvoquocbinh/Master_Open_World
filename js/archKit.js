@@ -180,7 +180,7 @@ export function buildBilliardTable(W, x, y, z, rotY=0, feltColor=0x0d7a4f, scope
   for(const sx of [-1,1]){ add(roundedBox(L-.2,.06,.1,.03,2), felt, 0,H+.04,sx*(Wd/2-.11)); } for(const sx of [-1,1]) add(roundedBox(.1,.06,Wd-.2,.03,2), felt, sx*(L/2-.11),H+.04,0);   // băng
   for(const [lx,lz] of [[-1,-1],[0,-1],[1,-1],[-1,1],[0,1],[1,1]]){ const leg=new THREE.LatheGeometry([[.07,0],[.09,.06],[.06,.2],[.08,.36],[.05,.5],[.065,.66]].map(([r,h])=>new THREE.Vector2(r,h)),14); add(leg, brass, lx*(L/2-.2), 0, lz*(Wd/2-.18)); }
   // bi Carom: trắng, vàng, đỏ + 2 cây cơ
-  const R=.031, balls=[0xf5f2e8,0xf2c230,0xc8231c].map((c,i)=>{ const m=add(new THREE.SphereGeometry(R,16,12), new THREE.MeshStandardMaterial({color:c, roughness:.15, metalness:.05}), -.5+i*.35, H+.03+R, (i-1)*.18); return {m, vx:0, vz:0}; });
+  const R=.031, balls=[0xf5f2e8,0xf2c230,0xc8231c].map((c,i)=>{ const m=add(new THREE.SphereGeometry(R,16,12), new THREE.MeshStandardMaterial({color:c, roughness:.15, metalness:.05}), -.5+i*.35, H+.03+R, (i-1)*.18); m.userData.dynamic=true; return {m, vx:0, vz:0}; });   /* 21/11 (phiên B): bi là vật động – batchStatic không gộp, không thì bi lăn nhưng hình vẫn đứng yên */
   for(const s of [-1,1]){ const cue=add(new THREE.CylinderGeometry(.006,.016,1.45,10), mat('cue',()=>new THREE.MeshStandardMaterial({color:0xd8b27a, roughness:.4})), .15*s, H+.06, s*.42); cue.rotation.z=Math.PI/2; cue.rotation.y=.08*s; }
   // đèn chụp 3 chao treo ở y + 1,85
   const lampM=mat('lampG',()=>new THREE.MeshStandardMaterial({color:0x1f5a3a, roughness:.4, metalness:.4, side:THREE.DoubleSide})), bulbM=mat('bulbB',()=>new THREE.MeshStandardMaterial({color:0xfff2d0, emissive:0xffe2a0, emissiveIntensity:1.6}));

@@ -30,7 +30,9 @@ export async function make(W, ctx={}, floor={}){
   const GF=(floor && floor.y!=null) ? floor : ((W.brainV2 && W.brainV2.gameFloor) || {}); const F={cx:880, cz:180, y:142, rc:16, ...GF};
   if(F.A0==null){ const bar=(INTER||[]).find(i=>/Sky Bar Liên Hoa/.test(String(i.label||''))); F.A0=bar ? Math.atan2(bar.z-F.cz, bar.x-F.cx)-Math.PI-.2 : 0; }
   const dAng=(a,b)=>{ let d=(a-b)%TAU; if(d>Math.PI) d-=TAU; if(d<-Math.PI) d+=TAU; return Math.abs(d); };
-  const RIN=F.rIn ?? 11.5, ROUT=F.rOut ?? 21, KO=F.keepOut || (()=>{ const A0=F.A0, ENT=F.ENT ?? A0-Math.PI/2; return [{a:A0,da:.45},{a:A0+Math.PI,da:.45},{a:ENT,da:.35,r:[11.5,15]},{a:ENT+Math.PI,da:.35,r:[11.5,15]},{a:A0+Math.PI+.2,da:.3,r:[13,17]},{a:A0+Math.PI/2+1.18,da:.8,r:[13.3,17.7]}]; })();
+  const RIN=F.rIn ?? 11.5, ROUT=F.rOut ?? 21, KO=F.keepOut ? [...F.keepOut] : (()=>{ const A0=F.A0, ENT=F.ENT ?? A0-Math.PI/2; return [{a:A0,da:.45},{a:A0+Math.PI,da:.45},{a:ENT,da:.35,r:[11.5,15]},{a:ENT+Math.PI,da:.35,r:[11.5,15]},{a:A0+Math.PI+.2,da:.3,r:[13,17]},{a:A0+Math.PI/2+1.18,da:.8,r:[13.3,17.7]}]; })();
+  /* bàn bida có sẵn (gameFloor.existing.billiards): chừa thêm 1,2 m quanh bàn cho người đứng đánh cơ – khung xoay theo hướng bàn */
+  for(const t of ((F.existing||{}).billiards||[])) if(typeof t.x==='number') KO.push({ox:t.x, oz:t.z, yaw:t.yaw||0, hl:(t.len||2.84)/2+1.2, hw:(t.wid||1.42)/2+1.2, what:'bàn bida'});
   /* lưới vật cản sẵn có ở cao độ tầng (ô 2 m, mỗi vật ghi vào mọi ô chạm hộp bao đã nới 0,7 m) */
   const CELL=2, GRID=new Map(), yT=F.y+.5, MG=.7;
   const addOb=(o,x0,x1,z0,z1)=>{ for(let i=Math.floor((x0-MG)/CELL);i<=Math.floor((x1+MG)/CELL);i++) for(let j=Math.floor((z0-MG)/CELL);j<=Math.floor((z1+MG)/CELL);j++){ const k=i+','+j; let l=GRID.get(k); if(!l) GRID.set(k,l=[]); l.push(o); } };
@@ -40,7 +42,7 @@ export async function make(W, ctx={}, floor={}){
   for(const b of (W.boxes||[])){ if(!b) continue; if(b.y0!==undefined && (yT<b.y0-.3 || yT>b.y1)) continue; if(!nearT((b.x0+b.x1)/2,(b.z0+b.z1)/2,Math.hypot(b.x1-b.x0,b.z1-b.z0)/2)) continue; addOb({t:'b',x0:b.x0,x1:b.x1,z0:b.z0,z1:b.z1},b.x0,b.x1,b.z0,b.z1); }
   const segD=(px,pz,o)=>{ const ex=o.bx-o.ax, ez=o.bz-o.az, L2=ex*ex+ez*ez||1e-9; let t=((px-o.ax)*ex+(pz-o.az)*ez)/L2; t=t<0?0:t>1?1:t; return Math.hypot(px-o.ax-ex*t, pz-o.az-ez*t); };
   function pointFree(x,z,m){ const r=Math.hypot(x-F.cx,z-F.cz); if(r<RIN+1.3 || r>ROUT-.2) return false; const a=Math.atan2(z-F.cz,x-F.cx);
-    for(const k of KO){ if(k.x0!=null){ if(x>k.x0-m && x<k.x1+m && z>k.z0-m && z<k.z1+m) return false; continue; } if(k.x!=null){ if(Math.hypot(x-k.x,z-k.z)<(k.r||1)+m) return false; continue; }
+    for(const k of KO){ if(k.ox!=null){ const dx=x-k.ox, dz=z-k.oz, c=Math.cos(k.yaw), sn=Math.sin(k.yaw), u=dx*c-dz*sn, v=dx*sn+dz*c; if(Math.abs(u)<k.hl+m && Math.abs(v)<k.hw+m) return false; continue; } if(k.x0!=null){ if(x>k.x0-m && x<k.x1+m && z>k.z0-m && z<k.z1+m) return false; continue; } if(k.x!=null){ if(Math.hypot(x-k.x,z-k.z)<(k.r||1)+m) return false; continue; }
       if(dAng(a,k.a)<(k.da??.3)+m/Math.max(r,1) && (!k.r || (r>k.r[0]-m && r<k.r[1]+m))) return false; }
     const l=GRID.get(Math.floor(x/CELL)+','+Math.floor(z/CELL)); if(l) for(const o of l){ if(o.t==='c'){ if(Math.hypot(x-o.x,z-o.z)<o.r+m) return false; } else if(o.t==='s'){ if(segD(x,z,o)<o.r+m) return false; } else if(x>o.x0-m && x<o.x1+m && z>o.z0-m && z<o.z1+m) return false; }
     return true; }
@@ -226,9 +228,12 @@ export async function make(W, ctx={}, floor={}){
     const hitM=(m)=>{ const dx=pk.x-m.x, dz=pk.z-m.z, d=Math.hypot(dx,dz); if(d>=PR+MR || d<1e-6) return; const nx=dx/d, nz=dz/d; pk.x=m.x+nx*(PR+MR); pk.z=m.z+nz*(PR+MR); const rvx=pk.vx-m.vx, rvz=pk.vz-m.vz, vn=rvx*nx+rvz*nz; if(vn<0){ pk.vx-=1.9*vn*nx; pk.vz-=1.9*vn*nz; clack(Math.hypot(pk.vx,pk.vz)/3); if(!ST.demo && m===A) shake=Math.max(shake,.12); } };
     function moveM(m, tx, tz, vmax, dt, side){ const dx=tx-m.x, dz=tz-m.z, d=Math.hypot(dx,dz), sp=Math.min(vmax, d*12); const vx=d>1e-4?dx/d*sp:0, vz=d>1e-4?dz/d*sp:0; m.vx=lerp(m.vx,vx,1-Math.exp(-dt*20)); m.vz=lerp(m.vz,vz,1-Math.exp(-dt*20)); m.x+=m.vx*dt; m.z+=m.vz*dt; clampM(m,side); }
     const clampM=(m,side)=>{ const x0=side>0?MR+.02:-L/2+MR, x1=side>0?L/2-MR:-MR-.02; m.x=clamp(m.x,x0,x1); m.z=clamp(m.z,-WD/2+MR,WD/2-MR); };
-    function bot(m, side, dt, v){ const own=side*L/2; if(side*pk.x>0 || (side*pk.vx>.2 && side*pk.x>-.35)){ const tgx=-side*L/2, dx=tgx-pk.x, dz=-pk.z*.3, dl=Math.hypot(dx,dz)||1; const ax=pk.x-dx/dl*.09, az=pk.z-dz/dl*.09; const behind=side*(m.x-pk.x)>0;
-        if(behind) moveM(m, pk.x+dx/dl*.05, pk.z+dz/dl*.05, v, dt, side); else moveM(m, own-side*.2, clamp(pk.z*.7,-.3,.3), v, dt, side); if(!behind && side*(ax-own)<0) moveM(m,ax,az,v,dt,side); }
-      else moveM(m, own-side*.18, clamp(pk.z*.5,-.25,.25), v*.7, dt, side); }
+    function bot(m, side, dt, v){ const own=side*L/2;   /* side: nửa sân của chày (+1 người chơi, −1 bot); own = vạch gôn nhà */
+      if(side*pk.x>0){ const tx=-own, dx=tx-pk.x, dz=-pk.z, dl=Math.hypot(dx,dz)||1, ux=dx/dl, uz=dz/dl, gap=PR+MR+.03, bx=pk.x-ux*gap, bz=pk.z-uz*gap, behind=side*(m.x-pk.x)>0;
+        if(behind && Math.hypot(m.x-bx,m.z-bz)<.07) moveM(m, pk.x+ux*.2, pk.z+uz*.2, v, dt, side);   /* đã ở sau đĩa → đánh thẳng về gôn đối thủ */
+        else if(!behind) moveM(m, bx, pk.z+(m.z>pk.z?1:-1)*(gap+.06), v, dt, side);   /* đang ở trước đĩa → vòng qua hông, không tự đẩy đĩa về gôn nhà */
+        else moveM(m, bx, bz, v, dt, side); }
+      else moveM(m, own-side*.18, clamp(pk.z*.6,-.28,.28), v*.85, dt, side); }
     function serve(side){ pk.x=side*.3; pk.z=rr(-.2,.2); pk.vx=pk.vz=0; ST.phase='play'; }
     function goal(team){ ST.score[team]++; ST.phase='goal'; ST.t=1.2; if(!ST.demo){ team===0?(cheer(),shake=.45):(boo(),shake=.2); hudPunch(); } else thud(.5); if(ST.score[team]>=7){ ST.phase='over'; ST.t=ST.demo?3:99; if(!ST.demo && team===0) reward(25,'🏒 Thắng khúc côn cầu! +25 💰'); } }
     function step(dt, inp, mx, my){ const n=Math.max(1,Math.ceil(dt/.004)), h=dt/n;
@@ -317,11 +322,11 @@ export async function make(W, ctx={}, floor={}){
     const ret=add(g, new THREE.TorusGeometry(.011,.0025,6,20), std(0x46d39a,.4,0,{emissive:0x46d39a, emissiveIntensity:1.2}), 0,CY,.02,0,0,0,false); ret.visible=false;
     const ST={aim:[0,0], fly:null, n:0, scores:[], phase:'aim', t:0};
     const scoreAt=(x,y)=>{ const r=Math.hypot(x,y); if(r<.00635) return [50,'BULL 50']; if(r<.0159) return [25,'25']; if(r>.170) return [0,'trượt']; const a=(Math.atan2(x,y)+TAU+Math.PI/20)%TAU, base=ORDER[Math.floor(a/(TAU/20))%20]; if(r>.099 && r<.107) return [base*3,'×3 '+base]; if(r>.162) return [base*2,'×2 '+base]; return [base, String(base)]; };
-    function throwDart(){ if(ST.phase==='done'){ reset(); return; } if(ST.fly || ST.n>=9) return; const t=performance.now()/1000, sw=[Math.sin(t*1.7)*.011+Math.sin(t*3.1)*.005, Math.cos(t*1.3)*.011+Math.sin(t*2.3)*.004], sp=[rr(-.006,.006), rr(-.006,.006)];
+    function throwDart(){ if(ST.phase==='done'){ reset(); return; } if(ST.fly || ST.n>=9) return; const t=performance.now()/1000, sw=[Math.sin(t*1.7)*.024+Math.sin(t*3.1)*.011, Math.cos(t*1.3)*.024+Math.sin(t*2.3)*.009], sp=[rr(-.013,.013), rr(-.013,.013)];
       const tgt=[ST.aim[0]+sw[0]+sp[0], ST.aim[1]+sw[1]+sp[1]]; ST.fly={t:0, T:.34, from:new V3(.16,1.5,THROW-.15), to:new V3(tgt[0],CY+tgt[1],.004), m:darts[ST.n]}; ST.fly.m.visible=true; snd(500,.12,'sine',.05,260); }
     function reset(){ ST.n=0; ST.scores=[]; ST.phase='aim'; for(const d of darts){ d.visible=false; } }
     function update(dt, inp, mx, my){ ST.aim[0]=clamp(ST.aim[0]+inp.ix*.22*dt+mx*.00045,-.3,.3); ST.aim[1]=clamp(ST.aim[1]+inp.iz*.22*dt-my*.00045,-.3,.3);
-      const t=performance.now()/1000, sw=[Math.sin(t*1.7)*.011+Math.sin(t*3.1)*.005, Math.cos(t*1.3)*.011+Math.sin(t*2.3)*.004]; ret.visible=!ST.fly && ST.phase==='aim'; ret.position.set(ST.aim[0]+sw[0],CY+ST.aim[1]+sw[1],.012);
+      const t=performance.now()/1000, sw=[Math.sin(t*1.7)*.024+Math.sin(t*3.1)*.011, Math.cos(t*1.3)*.024+Math.sin(t*2.3)*.009]; ret.visible=!ST.fly && ST.phase==='aim'; ret.position.set(ST.aim[0]+sw[0],CY+ST.aim[1]+sw[1],.012);
       const f=ST.fly; if(f){ f.t+=dt; const u=Math.min(1,f.t/f.T); const p=new V3().lerpVectors(f.from,f.to,u); p.y+=Math.sin(u*Math.PI)*.12; f.m.position.copy(p); f.m.rotation.set(-.12*(1-u)+.05,0,0);
         if(u>=1){ const [pts,lab]=scoreAt(f.to.x,f.to.y-CY); ST.scores.push([pts,lab]); ST.n++; ST.fly=null; thud(.6); if(pts>=50){ cheer(); shake=.2; hudPunch(); } else if(pts>=40) { snd(880,.15,'triangle',.08); hudPunch(); }
           if(ST.n>=9){ ST.phase='done'; const tot=ST.scores.reduce((s,v)=>s+v[0],0), best=S.brainGames.darts||0; if(tot>best){ S.brainGames.darts=tot; save(); toast(`🎯 Kỷ lục mới: ${tot} điểm!`,3000); } if(tot>=180) reward(20,'🎯 Phi tiêu ≥ 180 điểm! +20 💰'); } } } }
@@ -353,7 +358,7 @@ export async function make(W, ctx={}, floor={}){
     const BALLS=[...Array(5)].map(()=>{ const m=add(g,new THREE.SphereGeometry(BRAD,18,12),ballMat,0,-9,0); return {m, x:0,y:-9,z:0,vx:0,vy:0,vz:0, live:false, sc:false}; });
     const hold=add(g,new THREE.SphereGeometry(BRAD,18,12),ballMat,0,1.25,.95); hold.visible=false;
     const ST={score:0, t:45, phase:'ready', aim:0, pw:0, pdir:1, charging:false, cool:0, swish:0};
-    function shoot(){ const pw=ST.pw, b=BALLS.find(q=>!q.live); if(!b || ST.cool>0 || ST.phase!=='play') return; ST.cool=.38; const p0=[0,1.3,.85], a=ST.aim, d=Math.hypot(HX-p0[0],HZ-p0[2])/Math.cos(a), h=HY-p0[1], al=55*Math.PI/180, v0=Math.sqrt(GR*d*d/(2*Math.cos(al)**2*(d*Math.tan(al)-h)));
+    function shoot(){ const pw=ST.pw, b=BALLS.find(q=>!q.live); if(!b || ST.cool>0 || ST.phase!=='play') return; ST.cool=.38; const p0=[0,1.3,.85], a=ST.aim, d=Math.hypot(HX-p0[0],HZ-p0[2])/Math.cos(a), h=HY-p0[1], al=62*Math.PI/180, v0=Math.sqrt(GR*d*d/(2*Math.cos(al)**2*(d*Math.tan(al)-h)));
       const v=v0*(.86+pw*.28), dir=[Math.sin(a),-Math.cos(a)]; Object.assign(b,{x:p0[0],y:p0[1],z:p0[2], vx:dir[0]*v*Math.cos(al), vz:dir[1]*v*Math.cos(al), vy:v*Math.sin(al), live:true, sc:false, t:0}); b.m.visible=true; snd(260,.1,'sine',.07,180); }
     function rimHit(b){ /* điểm gần nhất trên vòng vành */ const dx=b.x-HX, dz=b.z-HZ, dh=Math.hypot(dx,dz)||1e-6, cx=HX+dx/dh*RIM, cz=HZ+dz/dh*RIM, ex=b.x-cx, ey=b.y-HY, ez=b.z-cz, d=Math.hypot(ex,ey,ez), m=BRAD+.011;
       if(d<m && d>1e-6){ const nx=ex/d, ny=ey/d, nz=ez/d; b.x=cx+nx*m; b.y=HY+ny*m; b.z=cz+nz*m; const vn=b.vx*nx+b.vy*ny+b.vz*nz; if(vn<0){ b.vx-=1.55*vn*nx; b.vy-=1.55*vn*ny; b.vz-=1.55*vn*nz; clack(.8); } } }
@@ -396,14 +401,14 @@ export async function make(W, ctx={}, floor={}){
     const ST={phase:'aim', x:0, ang:0, pw:0, pdir:1, charging:false, b:{x:0,z:Z0+.3,vx:0,vz:0, gutter:false}, frame:1, roll:1, frames:[], t:0, msg:''};
     function resetPins(all){ for(const p of PINS){ if(all || !p.down){ Object.assign(p,{x:p.hx,z:p.hz,vx:0,vz:0,tilt:0,down:false,live:true}); p.m.visible=true; } else { p.live=false; p.m.visible=false; } p.m.position.set(p.x,LANE_Y,p.z); p.m.rotation.set(0,0,0); } }
     function newGame(){ ST.frame=1; ST.roll=1; ST.frames=[]; ST.phase='aim'; resetPins(true); }
-    function release(){ if(ST.phase!=='aim') return; const v=2.2+ST.pw*3.6; ST.b={x:ST.x, z:Z0+.25, vx:Math.sin(ST.ang)*v, vz:-Math.cos(ST.ang)*v, gutter:false, spin:(ST.pw-.5)*.25}; ST.phase='roll'; ST.t=0; thud(.8); }
+    function release(){ if(ST.phase!=='aim') return; const v=2.2+ST.pw*3.6, an=ST.ang+rr(-.014,.014); ST.b={x:ST.x+rr(-.01,.01), z:Z0+.25, vx:Math.sin(an)*v, vz:-Math.cos(an)*v, gutter:false, spin:(ST.pw-.5)*.25}; ST.phase='roll'; ST.t=0; thud(.8); }
     function knock(p, vx, vz){ if(!p.down){ p.down=true; p.ta=Math.atan2(vx,vz); clack(1); } }
     function stepPhys(dt){ const n=Math.max(1,Math.ceil(dt/.004)), h=dt/n, b=ST.b;
       for(let i=0;i<n;i++){ if(ST.phase==='roll'){ b.x+=b.vx*h; b.z+=b.vz*h; b.vx+=b.spin*h*(b.z<0?1.2:.3); const f=1-.05*h; b.vx*=f; b.vz*=f;
           if(!b.gutter && Math.abs(b.x)>LW/2-BR*.4){ b.gutter=true; b.x=Math.sign(b.x)*(LW/2+.05); b.vx=0; thud(.5); }
-          if(!b.gutter) for(const p of PINS){ if(!p.live) continue; const dx=p.x-b.x, dz=p.z-b.z, d=Math.hypot(dx,dz); if(d<BR+PR && d>1e-6){ const nx=dx/d, nz=dz/d, vn=b.vx*nx+b.vz*nz; if(vn>0){ p.vx+=nx*vn*1.75+b.vx*.25; p.vz+=nz*vn*1.75+b.vz*.25; b.vx-=nx*vn*.35; b.vz-=nz*vn*.35; knock(p,p.vx,p.vz); } } } }
+          if(!b.gutter) for(const p of PINS){ if(!p.live) continue; const dx=p.x-b.x, dz=p.z-b.z, d=Math.hypot(dx,dz); if(d<BR+PR && d>1e-6){ const nx=dx/d, nz=dz/d, vn=b.vx*nx+b.vz*nz; if(vn>0){ p.vx+=nx*vn*1.45+b.vx*.15; p.vz+=nz*vn*1.45+b.vz*.15; b.vx-=nx*vn*.5; b.vz-=nz*vn*.5; knock(p,p.vx,p.vz); } } } }
         for(const p of PINS){ if(!p.live || (Math.abs(p.vx)+Math.abs(p.vz))<1e-4) continue; p.x+=p.vx*h; p.z+=p.vz*h; const f=1-(p.down?2.2:4)*h; p.vx*=f; p.vz*=f; if(Math.abs(p.x)>LW/2+.05 || p.z<ZP-.6){ p.vx*=.3; p.vz*=.3; knock(p,p.vx,p.vz); } }
-        for(let a=0;a<PINS.length;a++){ const A=PINS[a]; if(!A.live) continue; for(let c=a+1;c<PINS.length;c++){ const B=PINS[c]; if(!B.live) continue; const dx=B.x-A.x, dz=B.z-A.z, d=Math.hypot(dx,dz), md=A.down||B.down?PR*2.6:PR*2; if(d<md && d>1e-6){ const nx=dx/d, nz=dz/d, rv=(A.vx-B.vx)*nx+(A.vz-B.vz)*nz; if(rv>0){ A.vx-=rv*nx*.9; A.vz-=rv*nz*.9; B.vx+=rv*nx*.9; B.vz+=rv*nz*.9; if(rv>.25){ knock(A,A.vx,A.vz); knock(B,B.vx,B.vz); } } const o=(md-d)/2; A.x-=nx*o; A.z-=nz*o; B.x+=nx*o; B.z+=nz*o; } } } }
+        for(let a=0;a<PINS.length;a++){ const A=PINS[a]; if(!A.live) continue; for(let c=a+1;c<PINS.length;c++){ const B=PINS[c]; if(!B.live) continue; const dx=B.x-A.x, dz=B.z-A.z, d=Math.hypot(dx,dz), md=A.down||B.down?PR*2.6:PR*2; if(d<md && d>1e-6){ const nx=dx/d, nz=dz/d, rv=(A.vx-B.vx)*nx+(A.vz-B.vz)*nz; if(rv>0){ A.vx-=rv*nx*.8; A.vz-=rv*nz*.8; B.vx+=rv*nx*.8; B.vz+=rv*nz*.8; if(rv>.34){ knock(A,A.vx,A.vz); knock(B,B.vx,B.vz); } } const o=(md-d)/2; A.x-=nx*o; A.z-=nz*o; B.x+=nx*o; B.z+=nz*o; } } } }
       for(const p of PINS){ if(!p.live) continue; if(p.down) p.tilt=Math.min(Math.PI/2,p.tilt+dt*9); p.m.position.set(p.x,LANE_Y+Math.sin(p.tilt)*.03,p.z); p.m.rotation.set(Math.cos(p.ta)*p.tilt,0,-Math.sin(p.ta)*p.tilt,'YXZ'); }
       ballM.position.set(ST.phase==='aim'?ST.x:b.x, b.gutter?LANE_Y+.01:LANE_Y+BR, ST.phase==='aim'?Z0+.3:b.z); if(ST.phase==='roll'){ ballM.rotation.x-=b.vz*dt/BR; } }
     function step(dt){ if(ST.charging){ ST.pw+=ST.pdir*dt/1.2; if(ST.pw>1){ ST.pw=1; ST.pdir=-1; } if(ST.pw<0){ ST.pw=0; ST.pdir=1; } }
@@ -427,16 +432,16 @@ export async function make(W, ctx={}, floor={}){
   function buildMiniGolf(zone, lx, lz, ry){
     const g=new THREE.Group(); g.position.set(lx,0,lz); g.rotation.y=ry; zone.g.add(g);
     const LW=.95, LL=5.4, BR=.0215, CUP=.054, Y0=.07, GV=9.8, TEE=2.35, CUPZ=-2.2;
-    const HOLES=[ {x:-1.07, par:2, name:'Đồi nhỏ', h:(x,z)=>.075*Math.exp(-(z*z)/.14)+.02*Math.exp(-((z+1.4)**2)/.3)*Math.sin(x*4), blocks:[]},
-      {x:0, par:3, name:'Zig-zag', h:(x,z)=>.018*Math.sin(z*1.3)*x*2, blocks:[[-.22,1.05,.52,.1],[.22,.05,.52,.1],[-.22,-.95,.52,.1]]},
+    const HOLES=[ {x:-1.07, par:2, name:'Đồi nhỏ', h:(x,z)=>.075*Math.exp(-(z*z)/.14)+.012*Math.exp(-((z+1.4)**2)/.3)*(1+Math.sin(x*4)), blocks:[]},
+      {x:0, par:3, name:'Zig-zag', h:(x,z)=>.02+.018*Math.sin(z*1.3)*x*2, blocks:[[-.22,1.05,.52,.1],[.22,.05,.52,.1],[-.22,-.95,.52,.1]]},
       {x:1.07, par:3, name:'Cối xay gió', h:(x,z)=>{ const d=Math.hypot(x,z-CUPZ); return .055*Math.exp(-d*d/.2); }, blocks:[], mill:{z:.15, len:.43, w:1.9}} ];
     const turf=canvasTex(128,512,(c,w,h)=>{ c.fillStyle='#2f8f43'; c.fillRect(0,0,w,h); for(let i=0;i<7000;i++){ c.fillStyle=`rgba(${20+Math.random()*30|0},${90+Math.random()*60|0},${30+Math.random()*30|0},.5)`; c.fillRect(Math.random()*w,Math.random()*h,1,2); } }); turf.wrapS=turf.wrapT=THREE.RepeatWrapping; turf.repeat.set(1,2);
     const turfM=std(0xffffff,.95,0,{map:turf});
     add(g, rb(3.5,Y0,LL+.5,.02,1), M.wood, 0,Y0/2,0);   /* bục gỗ */
-    for(const H of HOLES){ const pg=new THREE.PlaneGeometry(LW,LL,8,60); pg.rotateX(-Math.PI/2); const pa=pg.attributes.position; for(let i=0;i<pa.count;i++){ const x=pa.getX(i), z=pa.getZ(i); pa.setY(i, Y0+H.h(x,z)); } pg.computeVertexNormals(); add(g, pg, turfM, H.x,0,0,0,0,0,false);
+    for(const H of HOLES){ const pg=new THREE.PlaneGeometry(LW,LL,8,60); pg.rotateX(-Math.PI/2); const pa=pg.attributes.position; for(let i=0;i<pa.count;i++){ const x=pa.getX(i), z=pa.getZ(i); pa.setY(i, Y0+.006+H.h(x,z)); } pg.computeVertexNormals(); add(g, pg, turfM, H.x,0,0,0,0,0,false);
       for(const s2 of [-1,1]) add(g, rb(.06,.09,LL+.06,.015,1), M.woodL, H.x+s2*(LW/2+.03), Y0+.045, 0); for(const e of [-1,1]) add(g, rb(LW+.12,.09,.06,.015,1), M.woodL, H.x, Y0+.045, e*(LL/2+.03));
-      add(g, new THREE.PlaneGeometry(.3,.22), std(0x1d5a2a,.9), H.x, Y0+H.h(0,TEE)+.003, TEE, -Math.PI/2,0,0,false);
-      add(g, new THREE.CircleGeometry(CUP,24), std(0x050505,.9), H.x, Y0+H.h(0,CUPZ)+.002, CUPZ, -Math.PI/2,0,0,false); add(g, new THREE.CylinderGeometry(.005,.005,.62,6), M.steel, H.x, Y0+H.h(0,CUPZ)+.31, CUPZ);
+      add(g, new THREE.PlaneGeometry(.3,.22), std(0x1d5a2a,.9), H.x, Y0+H.h(0,TEE)+.009, TEE, -Math.PI/2,0,0,false);
+      add(g, new THREE.CircleGeometry(CUP,24), std(0x050505,.9), H.x, Y0+H.h(0,CUPZ)+.008, CUPZ, -Math.PI/2,0,0,false); add(g, new THREE.CylinderGeometry(.005,.005,.62,6), M.steel, H.x, Y0+H.h(0,CUPZ)+.31, CUPZ);
       const fT=canvasTex(64,48,(c,w,h)=>{ c.fillStyle=['#e63946','#ffd23f','#4fc3ff'][HOLES.indexOf(H)]; c.fillRect(0,0,w,h); c.fillStyle='#111'; c.font='900 34px Segoe UI'; c.textAlign='center'; c.fillText(String(HOLES.indexOf(H)+1),w/2,37); });
       add(g, new THREE.PlaneGeometry(.16,.12), std(0xffffff,.6,0,{map:fT, side:THREE.DoubleSide}), H.x+.083, Y0+H.h(0,CUPZ)+.55, CUPZ, 0,0,0,false);
       for(const [bx,bz,bw,bd] of H.blocks) add(g, rb(bw,.1,bd,.02,1), M.red, H.x+bx, Y0+H.h(bx,bz)+.05, bz);
@@ -466,7 +471,7 @@ export async function make(W, ctx={}, floor={}){
       if(ST.phase==='aim' && ST.charging){ ST.pw+=ST.pdir*dt/1.3; if(ST.pw>1){ ST.pw=1; ST.pdir=-1; } if(ST.pw<0){ ST.pw=0; ST.pdir=1; } }
       if(ST.phase==='roll'){ phys(dt); ST.t+=dt; const b=ST.b, sp=Math.hypot(b.vx,b.vz); if(ST.phase==='roll' && ((sp<.02 && ST.t>.4) || ST.t>15)){ b.vx=b.vz=0; if(ST.strokes>=7){ ST.phase='sunk'; ST.t=0; ST.msg='Nhặt bóng (tối đa 7 gậy)'; ST.strokes=7; } else { ST.phase='aim'; ST.aim=Math.atan2(CUPZ-b.z,-b.x); } } }
       else if(ST.phase==='sunk'){ ST.t+=dt; if(ST.t>1.6){ ST.card.push(ST.strokes); if(ST.hole<2){ ST.hole++; putBall(); } else { ST.phase='done'; const tot=ST.card.reduce((s2,v)=>s2+v,0), best=S.brainGames.golf; if(!best || tot<best){ S.brainGames.golf=tot; save(); toast(`⛳ Kỷ lục mới: ${tot} gậy cho 3 lỗ!`,3000); } if(tot<=8) reward(20,'⛳ Golf mini ≤ par! +20 💰'); } } }
-      const b=ST.b, X=H.x+b.x, Y=Y0+H.h(b.x,b.z)+BR; ball.position.set(X, ST.phase==='sunk'?Y-Math.min(.05,ST.t*.12):Y, b.z);
+      const b=ST.b, X=H.x+b.x, Y=Y0+.006+H.h(b.x,b.z)+BR; ball.position.set(X, ST.phase==='sunk'?Y-Math.min(.05,ST.t*.12):Y, b.z);
       aimL.visible=ST.phase==='aim'; if(aimL.visible){ const pa=aimL.geometry.attributes.position, L=.25+ST.pw*.9; pa.setXYZ(0,X,Y,b.z); pa.setXYZ(1,X+Math.cos(ST.aim)*L,Y,b.z+Math.sin(ST.aim)*L); pa.needsUpdate=true; } }
     const press=d=>{ if(d){ if(ST.phase==='done'){ ST.hole=0; ST.card=[]; putBall(); return; } if(ST.phase==='aim'){ ST.charging=true; ST.pw=0; ST.pdir=1; } } else if(ST.charging){ ST.charging=false; stroke(); } };
     return reg({ title:'Golf mini', r:1.6, stand:()=>{ const H=H0(), b=ST.b, p=wp(g,H.x+b.x-Math.cos(ST.aim)*.45,0,b.z-Math.sin(ST.aim)*.45), q=wp(g,H.x+b.x,0,b.z); return {x:p.x, z:p.z, yaw:Math.atan2(q.x-p.x,q.z-p.z)}; },

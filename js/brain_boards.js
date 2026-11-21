@@ -80,7 +80,7 @@ export async function make(W, ctx = {}, L){
   const DR = (L.doors && L.doors.length ? L.doors : [ENT, ENT + Math.PI / 2, ENT + Math.PI, ENT - Math.PI / 2]).map(a => ((a % TAU) + TAU) % TAU).sort((a, b) => a - b);
   const MID = DR.map((a, i) => { const b = i + 1 < DR.length ? DR[i + 1] : DR[0] + TAU; return (a + b) / 2; });
   const LIFT = [ENT, ENT + Math.PI];
-  let nWall = 0; for(const a of MID){ if(nWall >= 6 || used1.some(u => dAng(u, a) < .35)) continue; nWall++;
+  let nWall = 0; for(const m0 of MID){ const a = m0 + .13; if(nWall >= 6 || used1.some(u => dAng(u, a) < .2)) continue; nWall++;   /* cạnh bảng lịch sử (−0,15) cùng khoảng tường */
     const s = wallSpot(a, y1, y1 + 1.25, y1 + 3.85), F = face(s.x, s.yc, s.z, yawOut(a) + Math.PI, s.tilt, 4.4, 2.475); F.wall = true;
     const R = rig(s.x, s.yc, s.z, yawOut(a) + Math.PI, s.tilt); for(const [sx, sy] of [[0, 1.3], [0, -1.3]]) R(new THREE.BoxGeometry(4.6, .07, .06), MT.brass, sx, sy, -.03); for(const sx of [-2.27, 2.27]) R(new THREE.BoxGeometry(.07, 2.67, .06), MT.brass, sx, 0, -.03); R(new THREE.BoxGeometry(4.5, 2.6, .03), MT.obsid, 0, 0, -.05); }
   const tot = []; for(const a of MID){ if(tot.length >= 6 || LIFT.some(l => dAng(l, a) < .3) || dAng(a, A0) < .3 || dAng(a, A0 + Math.PI) < .3 || cases1.some(c => dAng(c, a) < .2)) continue; tot.push(a); }
