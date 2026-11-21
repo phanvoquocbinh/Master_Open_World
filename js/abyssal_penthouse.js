@@ -49,8 +49,8 @@ export function buildPenthouses(C){ const {W,THREE,K,MT,TW,root,seg,addPlat,circ
     g.fillStyle='rgba(40,24,14,.5)'; for(let x=0;x<w;x+=128) g.fillRect(x,0,1.5,h); })}),1.4);
   M.lacq=std(0xede8df,{roughness:.32}); M.soil=std(0x3b2a1e,{roughness:1});
   M.fabric=new THREE.MeshStandardMaterial({roughness:.92, map:K.cvTex(128,128,(g,w,h)=>{ g.fillStyle='#ffffff'; g.fillRect(0,0,w,h); for(let y=0;y<h;y+=2){ g.fillStyle=`rgba(0,0,0,${y%4?0.05:0.1})`; g.fillRect(0,y,w,1); } for(let x=0;x<w;x+=2){ g.fillStyle='rgba(0,0,0,.04)'; g.fillRect(x,0,1,h); } })});
-  M.navyF=uvs(new THREE.MeshStandardMaterial({color:0x34495e, roughness:.96, map:M.fabric.map}),3.5); M.navyF2=uvs(new THREE.MeshStandardMaterial({color:0x2c3e50, roughness:.96, map:M.fabric.map}),3.5);
-  M.knit=uvs(new THREE.MeshStandardMaterial({color:0xe9dfcc, roughness:.98, map:M.fabric.map}),6); M.rust=uvs(new THREE.MeshStandardMaterial({color:0xa65a32, roughness:.95, map:M.fabric.map}),5);
+  M.navyF=uvs(new THREE.MeshStandardMaterial({color:0x34495e, roughness:.96, map:(M.fabric && M.fabric.map)||null}),3.5); M.navyF2=uvs(new THREE.MeshStandardMaterial({color:0x2c3e50, roughness:.96, map:(M.fabric && M.fabric.map)||null}),3.5);
+  M.knit=uvs(new THREE.MeshStandardMaterial({color:0xe9dfcc, roughness:.98, map:(M.fabric && M.fabric.map)||null}),6); M.rust=uvs(new THREE.MeshStandardMaterial({color:0xa65a32, roughness:.95, map:(M.fabric && M.fabric.map)||null}),5);
   /* tranh trừu tượng tông ấm cho khung ảnh CC0 (ảnh gốc của khung là ô đen trống) */
   const ART=K.cvTex(512,340,(g,w,h)=>{ g.fillStyle='#efe6d6'; g.fillRect(0,0,w,h); const C=['#c8a27a','#8c5a3c','#d9c3a5','#3f5f5a','#b98b5e','#e3d2b8']; let r=5; const rn=()=>{ r=r*16807%2147483647; return r/2147483647; };
     for(let i=0;i<7;i++){ g.fillStyle=C[i%C.length]; g.globalAlpha=.75; g.beginPath(); g.ellipse(60+rn()*(w-120),50+rn()*(h-100),40+rn()*110,30+rn()*80,rn()*3,0,TAU); g.fill(); }
