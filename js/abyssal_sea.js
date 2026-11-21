@@ -147,7 +147,8 @@ export async function make(W, ctx={}){
   const SPINE=COMPACT?[-30,44]:[-34,52], STEM=[-2,2], RP=[-26,-22], RL=[-34,-22,18,22];   /* cầu tàu chính đúng chỗ cầu lên tàu (a = 0) · cầu thuê đồ chơi nước chữ L */
   if(COMPACT){ /* bến gọn sát vách: 1 dải cầu gỗ rộng = stem; mép ngoài hở đúng chỗ tàu cập (a −7…37) và chỗ xuống mô tô nước / kayak (a −28…−22) */
     deckRect(SPINE[0],SPINE[1],-.6,PB);
-    rail(SPINE[0],PB,-28,PB); rail(-22,PB,-7,PB); rail(37,PB,SPINE[1],PB); rail(SPINE[0],-.6,SPINE[0],PB,'⚓ Đầu bến'); rail(SPINE[1],-.6,SPINE[1],PB,'⚓ Đầu bến'); }
+    rail(SPINE[0],PB,SPINE[1],PB,'⚓ Lan can cầu tàu – lên tàu / thuê mô tô nước bằng phím E'); rail(SPINE[0],-.6,SPINE[0],PB,'⚓ Đầu bến'); rail(SPINE[1],-.6,SPINE[1],PB,'⚓ Đầu bến');   /* 20/11 (phiên A): đóng kín mép ngoài – lên tàu / mô tô nước đều qua phím E, không cần khe hở xuống nước */
+    rail(SPINE[0],-.6,-3.6,-.6,'⚓ Lưng cầu gỗ – lên bờ ở lối giữa'); rail(3.6,-.6,SPINE[1],-.6,'⚓ Lưng cầu gỗ – lên bờ ở lối giữa'); }   /* lưng cầu sát vách eo: chỉ chừa lối lên bờ 7 m */
   else { deckRect(SPINE[0],SPINE[1],-.6,7,DY,{piles:!PRE}); deckRect(STEM[0],STEM[1],6.9,PB-3.9); deckRect(-6,40,PB-4,PB);
     deckRect(RP[0],RP[1],6.9,RL[2]+.1); deckRect(RL[0],RL[1],RL[2],RL[3]);
     rail(SPINE[0],7,RL[0],7); rail(RP[1],7,STEM[0],7); rail(STEM[1],7,SPINE[1],7); rail(SPINE[1],-.6,SPINE[1],7); rail(SPINE[0],-.6,SPINE[0],7);
@@ -366,6 +367,14 @@ export async function make(W, ctx={}){
     soundList(){ const L=[]; let a=null, ad=1e9, b=null, bd=1e9; for(let k=0;k<NY;k++){ const y=YS[k]; if(y.v<.3) continue; const d=Math.hypot(y.x-P.x,y.z-P.z); if(d<ad){ b=a; bd=ad; a=k; ad=d; } else if(d<bd){ b=k; bd=d; } }
       for(const k of [a,b]) if(k!=null && Math.hypot(YS[k].x-P.x,YS[k].z-P.z)<160) L.push({kind:'boat', id:'aby-yacht'+k, x:YS[k].x, y:WY+1, z:YS[k].z, v:YS[k].v*.7});
       if(CR.on==='jet') L.push({kind:'boat', id:'aby-me-jet', x:CR.x, y:WY+.5, z:CR.z, v:Math.abs(CR.v)}); if(CR.on==='kayak') L.push({kind:'kayak', id:'aby-me-kayak', x:CR.x, y:WY+.5, z:CR.z}); return L; } };
+  /* 20/11: sóng biển – mặt nước nhấp nhô, vệt sóng sau tàu, sóng vỗ bờ có bọt (js/abyssal_waves.js chèn vào vật liệu nước chung) */
+  try{ const wv=await import('./abyssal_waves.js'); const bx=[1e9,1e9,-1e9,-1e9], ext=(x,z)=>{ bx[0]=Math.min(bx[0],x); bx[1]=Math.min(bx[1],z); bx[2]=Math.max(bx[2],x); bx[3]=Math.max(bx[3],z); };
+    if(W.ABY && W.ABY.el){ for(let f=0;f<360;f+=4){ const q=W.ABY.el(f*Math.PI/180,1.04); ext(q[0],q[1]); } } else { ext(-160,-160); ext(160,140); }
+    const sm=(ABY.strait||{}).mouth; if(sm){ ext(sm.x0-25,sm.z+25); ext(sm.x1+25,sm.z+25); } ext(MAR.sx-20,MAR.sz-20); ext(MAR.sx+70,MAR.sz+20);
+    const WV=wv.make(W,{WY, bay:bx.map(v=>Math.round(v)), karst:[KB.x0-30,KB.z0-30,KB.x1+30,KB.z1+30], karstLand:(x,z)=>hitIsland(x,z,0)});
+    if(WV){ for(let k=0;k<NY;k++) WV.addSource(()=>{ const y=YS[k]; return y && y.v>.3 ? {x:y.x, z:y.z} : null; }, 9.5, 42);
+      WV.addSource(()=>CR.on && CR.on!=='fly' ? {x:CR.x, z:CR.z, hd:CR.yaw} : null, CR.on==='kayak'?1:1.3, CR.on==='kayak'?4.5:3.2);
+      api.waves=WV; } }catch(e){ console.warn('[abyssal_sea] sóng', e); }
   W.abySea=api; return api; }
 // ===== GHI CHÚ BÀN GIAO CHO PHIÊN A (abyssal_island.js) =====
 // 1) Dòng import an toàn (sau khi dựng xong vịnh + công bố W.ABY):

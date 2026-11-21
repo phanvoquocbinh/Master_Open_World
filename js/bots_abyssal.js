@@ -21,19 +21,26 @@ export async function make(W, A){
   const el=(fdeg,rho)=>ABY.el ? ABY.el(fdeg*D2R,rho) : [146*rho*Math.cos(fdeg*D2R), -15+130*rho*Math.sin(fdeg*D2R)];
   const NPC=[], sM=s=>W.people.pickSeed(L=>!L.female,s), sF=s=>W.people.pickSeed(L=>L.female,s), nm=s=>(W.people.nameOf ? W.people.nameOf(s) : 'Khách');
   const std=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c, roughness:.5}, o));
-  const LOG={};
+  const LOG={}; let BL=null, DR=null;
 
   /* ---------- kiểm chỗ đứng / đường đi bằng va chạm thật ---------- */
-  const gY=(x,z,y)=>W.groundAtY(x,z,y+.3);
-  const blocked=(x,z,y,r)=>{ const p={x,z,y}; try{ W.resolve(p,r,false); }catch(e){ return true; } return Math.hypot(p.x-x,p.z-z)>.03; };
+  // 20/11 (Bình: bot rơi khỏi sàn / lơ lửng / lún ở sảnh tầng trên nhà hàng cạnh thang máy): mặt đứng của bot KHÔNG tính sàn cabin thang máy
+  // (sàn cabin chạy lên xuống → bot bị nhấc theo hoặc rơi xuống giếng), không đứng dưới sàn khác (lún dưới sàn nhà hàng), không bước hụt tầng.
+  let LIFTS=[]; try{ const lk=await import('./liftkit.js'); LIFTS=lk.allLifts ? lk.allLifts() : []; }catch(e){}
+  const gY=(x,z,y)=>{ const sv=[]; for(const L of LIFTS) if(L.plat && Math.abs(L.cx-x)<4 && Math.abs(L.cz-z)<4){ sv.push([L.plat,L.plat.h]); L.plat.h=-1e9; }
+    const g=W.groundAtY(x,z,y+.3); for(const [p,h] of sv) p.h=h; return g; };
+  const nearLift=(x,z)=>LIFTS.some(L=>Math.hypot(x-L.cx,z-L.cz)<1.75);
+  const inPl=(p,x,z)=>p.t==='c' ? (x-p.x)**2+(z-p.z)**2<p.r*p.r : p.t==='ring' ? (()=>{ const d2=(x-p.x)**2+(z-p.z)**2; return d2>p.r0*p.r0 && d2<p.r1*p.r1; })() : (()=>{ const dx=x-p.x, dz=z-p.z; return Math.abs(dx*p.c-dz*p.s)<p.hw && Math.abs(dx*p.s+dz*p.c)<p.hd; })();
+  const headroom=(x,z,y)=>{ for(const p of (W.plats||[])){ if(p.h>y+.95 && p.h<y+1.9 && inPl(p,x,z)) return false; } return true; };   /* không có sàn nào ngay trên đầu */
+  const blocked=(x,z,y,r,o)=>{ const p={x,z,y}; if(o && o.col) p.self=o.col; try{ W.resolve(p,r,false); }catch(e){ return true; } return Math.hypot(p.x-x,p.z-z)>.03; };
   const dry=(x,z,y)=>y>WY+.25;
-  const okPt=(x,z,y,r=.42)=>Math.abs(gY(x,z,y)-y)<.3 && dry(x,z,y) && !blocked(x,z,y,r);
+  const okPt=(x,z,y,r=.42)=>Math.abs(gY(x,z,y)-y)<.3 && dry(x,z,y) && !blocked(x,z,y,r) && !nearLift(x,z) && headroom(x,z,y);
   const LIFT=[], INT=()=>(W.INTER||[]).filter(i=>i && typeof i.x==='number');
   const clearOf=(x,z,y)=>LIFT.every(([lx,lz,ly])=>Math.hypot(x-lx,z-lz)>=4.5 || Math.abs(y-ly)>3) && INT().every(i=>Math.hypot(x-i.x,z-i.z)>=1.5);
   function findSpot(x,z,y,r=.42,free=true){ y=gY(x,z,y); const ok=(X,Z)=>{ const Y=gY(X,Z,y); return Math.abs(Y-y)<.6 && okPt(X,Z,Y,r) && (!free || clearOf(X,Z,Y)); }; if(ok(x,z)) return [x,z,gY(x,z,y)];
     for(const d of [.4,.8,1.2,1.7,2.3,3,3.8]) for(let k=0;k<12;k++){ const a=k/12*TAU, X=x+Math.cos(a)*d, Z=z+Math.sin(a)*d; if(ok(X,Z)) return [X,Z,gY(X,Z,y)]; } return null; }
-  function okSeg(a,b,y){ const L=Math.hypot(b[0]-a[0],b[1]-a[1]), n=Math.max(1,Math.ceil(L/.35)); let py=y;
-    for(let i=1;i<=n;i++){ const x=a[0]+(b[0]-a[0])*i/n, z=a[1]+(b[1]-a[1])*i/n, g=gY(x,z,py); if(Math.abs(g-py)>.42 || !dry(x,z,g) || blocked(x,z,g,.3)) return false; py=g; } return true; }
+  function okSeg(a,b,y,o){ const L=Math.hypot(b[0]-a[0],b[1]-a[1]), n=Math.max(1,Math.ceil(L/.35)); let py=y;
+    for(let i=1;i<=n;i++){ const x=a[0]+(b[0]-a[0])*i/n, z=a[1]+(b[1]-a[1])*i/n, g=gY(x,z,py); if(Math.abs(g-py)>.42 || !dry(x,z,g) || blocked(x,z,g,.3,o) || nearLift(x,z)) return false; py=g; } return true; }
   function runs(pts, y, closed){ const n=pts.length, Y=pts.map(p=>gY(p[0],p[1],y)), okP=pts.map((p,i)=>Math.abs(Y[i]-y)<1.5 && okPt(p[0],p[1],Y[i],.4)),
       okS=pts.map((p,i)=>(i<n-1 || closed) && okP[i] && okP[(i+1)%n] && okSeg(p,pts[(i+1)%n],Y[i]));
     if(closed && okS.every(Boolean)) return [{pts, loop:true}]; const out=[]; let cur=null;
@@ -46,7 +53,8 @@ export async function make(W, A){
     a.g.position.set(0,-200,0); a.g.visible=false; a.play('idle',0); a.mixer.update(0); const po=makePoser(THREE,a), anchor=new THREE.Object3D(); anchor.position.y=k.h+.75; a.g.add(anchor);
     const o={nm:name, a, po, h:k.h, hips:po.hipsHeight(), anchor, x:0, y:0, z:0, hd:0, bubble:null, bubbleT:0, col:{x:1e9, z:1e9, r:.3, owner:true}, upd:null, lines:null, ph:R()*9, hidden:false, pose:null}; circles.push(o.col); NPC.push(o); return o; }
   const say=(o,t,sec=3)=>{ if(o.bubble) removeLabel(o.bubble); o.bubble=makeLabel(t, null, {fs:38, h:.26, follow:o.anchor, bg:'rgba(255,255,255,.92)', color:'#1b2233', fade:30}); o.bubbleT=sec; };
-  const put=(o,col=true)=>{ if(o.lie){ const f=[Math.sin(o.hd),Math.cos(o.hd)], L=o.h*.53; o.a.g.position.set(o.x+f[0]*L, o.y+.1, o.z+f[1]*L); o.a.g.rotation.set(-Math.PI/2+.08, o.hd, 0, 'YXZ'); o.col.x=1e9; return; }
+  const put=(o,col=true)=>{ if(o.lie && o.lie.cx!==undefined && BL){ BL.placeLie(o.a, o.hips, o.lie); o.col.x=1e9; return; }
+    if(o.lie){ const f=[Math.sin(o.hd),Math.cos(o.hd)], L=o.h*.53; o.a.g.position.set(o.x+f[0]*L, o.y+.1, o.z+f[1]*L); o.a.g.rotation.set(-Math.PI/2+.08, o.hd, 0, 'YXZ'); o.col.x=1e9; return; }
     o.a.g.position.set(o.x,o.y+(o.lift||0),o.z); o.a.g.rotation.set(0,o.hd,0); if(col && o.a.g.visible && !o.hidden){ o.col.x=o.x; o.col.z=o.z; o.col.y0=o.y-.4; o.col.y1=o.y+2; } else o.col.x=1e9; };
   const stand=(o,x,z,hd,y)=>{ o.x=x; o.z=z; o.hd=hd; o.y=y; o.upd=o.upd||(()=>put(o)); return o; };
   const face=(x,z,tx,tz)=>Math.atan2(tx-x,tz-z);
@@ -64,11 +72,14 @@ export async function make(W, A){
 
   /* ---------- đi theo hành trình: mỗi điểm [x,z,y?] – đoạn đi thẳng được thì đi bộ (y bám mặt đi), không được thì ẩn rồi hiện ở điểm tới ---------- */
   function go(o, pts, sp, done){ o.rt={pts:pts.filter(Boolean), i:0, sp:sp||1.25, done, fade:0}; o.lie=false; }
-  function stepGo(o, dt){ const r=o.rt; if(!r) return false; if(r.fade>0){ r.fade-=dt; if(r.fade<=0){ const p=r.pts[r.i]; o.x=p[0]; o.z=p[1]; o.y=p[2]??gY(p[0],p[1],o.y); o.hidden=false; r.i++; } return true; }
+  function stepGo(o, dt){ const r=o.rt; if(!r) return false; if(r.fade>0){ r.fade-=dt; if(r.fade<=0){ const p=r.pts[r.i], y0=p[2]??o.y; o.x=p[0]; o.z=p[1]; o.y=gY(p[0],p[1],y0);   /* hiện ra trên mặt đứng thật, không lấy nguyên y ghi tay */
+        if(Math.abs(o.y-y0)>.7 || !headroom(o.x,o.z,o.y)){ const sp=findSpot(p[0],p[1],y0,.4,false); if(sp){ o.x=sp[0]; o.z=sp[1]; o.y=sp[2]; } } o.hidden=false; r.i++; } return true; }
     if(r.i>=r.pts.length){ o.rt=null; o.a.play('idle'); if(r.done) r.done(); return true; }
-    const p=r.pts[r.i]; if(r.chk!==r.i){ r.chk=r.i; r.ok=p[3]==='jump' ? false : okSeg([o.x,o.z],[p[0],p[1]],o.y); if(!r.ok){ o.hidden=true; r.fade=1.2+Math.hypot(p[0]-o.x,p[1]-o.z)/6; return true; } }
+    const p=r.pts[r.i]; if(r.chk!==r.i){ r.chk=r.i; r.ok=p[3]==='jump' ? false : okSeg([o.x,o.z],[p[0],p[1]],o.y,o); if(!r.ok){ o.hidden=true; r.fade=1.2+Math.hypot(p[0]-o.x,p[1]-o.z)/6; return true; } }
     const dx=p[0]-o.x, dz=p[1]-o.z, d=Math.hypot(dx,dz); if(d<.12){ r.i++; return true; }
-    const k=Math.min(d,r.sp*dt); o.x+=dx/d*k; o.z+=dz/d*k; o.y=gY(o.x,o.z,o.y); o.hd=lerpAngle(o.hd, Math.atan2(dx,dz), 1-Math.exp(-dt*8)); o.a.play(r.sp>2.2?'run':'walk'); put(o); return true; }
+    const k=Math.min(d,r.sp*dt), nx=o.x+dx/d*k, nz=o.z+dz/d*k, ny=gY(nx,nz,o.y);
+    if(Math.abs(ny-o.y)>.45 || nearLift(nx,nz) || !dry(nx,nz,ny)){ o.hidden=true; r.fade=1+d/6; return true; }   /* bước tới hụt sàn / giếng thang → không rơi: ẩn rồi hiện ở điểm tới */
+    o.x=nx; o.z=nz; o.y=ny; o.hd=lerpAngle(o.hd, Math.atan2(dx,dz), 1-Math.exp(-dt*8)); o.a.play(r.sp>2.2?'run':'walk'); put(o); return true; }
   const wait=(o,sec,then)=>{ o.wt=sec; o.wthen=then; };
   // điểm trên cung tròn quanh tâm toà (giữ đi trong hành lang / hàng hiên, không cắt ngang phòng)
   const arcPts=(c,a,b,n)=>{ const ra=Math.hypot(a[0]-c.x,a[1]-c.z), rb=Math.hypot(b[0]-c.x,b[1]-c.z), fa=Math.atan2(a[1]-c.z,a[0]-c.x); let fb=Math.atan2(b[1]-c.z,b[0]-c.x); while(fb-fa>Math.PI) fb-=TAU; while(fa-fb>Math.PI) fb+=TAU;
@@ -76,11 +87,14 @@ export async function make(W, A){
 
   /* ============================== DỊCH VỤ BÀN (dining.js) + ĐĂNG KÝ CÁC QUÁN ============================== */
   try{ const m=await import('./dining.js'); const DN=await m.make(W, W.__abyPay||{});
-    const DV=W.abyDining||(W.ABY&&W.ABY.dining), DVL=DV ? (DV.list || [DV.cafe, DV.restaurant].filter(Boolean)) : []; for(const v of DVL){ const c=v.center||{}, ws=v.waiterSpawn; DN.register({id:'aby-'+v.k, name:v.name, kind:/rest|nha|palais/i.test(v.k+v.name)?'restaurant':'cafe', area:{x:c.x, z:c.z, r:42}, waiterFrom:ws?{x:ws[0], z:ws[1], y:v.barY}:null}); }
+    const DV=W.abyDining||(W.ABY&&W.ABY.dining), DVL=DV ? (DV.list || [DV.cafe, DV.restaurant].filter(Boolean)) : []; for(const v of DVL){ const c=v.center||{}, ws=v.waiterSpawn; DN.register({id:'aby-'+v.k, name:v.name, kind:/rest|nha|palais/i.test(v.k+v.name)?'restaurant':'cafe', tableH:.785, area:{x:c.x, z:c.z, r:42}, waiterFrom:ws?{x:ws[0], z:ws[1], y:v.barY}:null}); }
     if(W.abyHotel && typeof W.abyHotel.Yf==='function'){ const y=W.abyHotel.Yf(24), seats=[]; for(const t of [-48,26,44,138,158,226]) for(const e of [-.55,.55]){ const a=t*D2R, r=27.25, tx=-Math.sin(a), tz=Math.cos(a); seats.push({x:Math.cos(a)*r+tx*e, z:-12+Math.sin(a)*r+tz*e, y:y+.47, floor:y, yaw:Math.atan2(-Math.cos(a),-Math.sin(a)), label:'🍸 Ngồi sofa Sky Lounge – gọi đồ uống (E · C)'}); }
       DN.register({id:'aby-skylounge', name:'Sky Lounge · tầng 24', kind:'lounge', seats, tableH:.45}); }
     [-3,20,160,183].forEach((f,i)=>{ const c=el(f,.835); DN.register({id:'aby-coconut'+i, name:'Quầy dừa bãi biển', kind:'coconut', area:{x:c[0], z:c[1], r:14, y0:-1, y1:4}, waiterFrom:{x:c[0], z:c[1]}}); });
-    LOG.dining=DN.venues.size; }catch(e){ console.warn('[Bot Abyssal] dining', e); }
+    LOG.dining=DN.venues.size; DR=DN.drinks||null; }catch(e){ console.warn('[Bot Abyssal] dining', e); }
+  // đồ uống cầm tay cho bot (dining.js): cầm ly, thỉnh thoảng nâng lên uống, tự cụng ly với người gần đó (bot hoặc người chơi)
+  const giveBot=(o,id,life)=>{ if(!DR) return null; o.drink=DR.give({a:o.a, bones:o.po.bones, nm:o.nm, ext:true, say:(t,sec)=>say(o,t,sec), lie:()=>!!o.lie, get hidden(){ return o.hidden; }}, id, {life:life||120, firstSip:1+R()*4}); return o.drink; };
+  const dropBot=o=>{ if(o.drink && DR){ DR.drop(o.drink,true); } o.drink=null; };
 
   /* ============================== 🖥️ KHÁCH XEM 9 MÀN HÌNH (pavilion trên đảo khách sạn) ============================== */
   { const MON=(W.screens && W.screens.monitors) || []; const VIEW=['Số liệu hôm nay ổn đấy 📊','Test pass hết rồi, ngon! ✅','Biểu đồ này cập nhật trực tiếp à?','Để xem bug nào còn mở… 🐞','Dashboard nhìn rõ ghê!'];
@@ -130,18 +144,20 @@ export async function make(W, A){
           else if(st==='stroll'){ const nx=pick(mine.filter(s=>s!==cur)); const path=arcPts(T.center,cur.door,nx.door).map(p=>[p[0],p[1],nx.y]); cur=nx; st='walk'; go(o,path,1.2,()=>{ o.wt=rr(2,6); if(R()<.4) bag.visible=false; }); } };
       o.upd=(dt,T2)=>{ if(stepGo(o,dt)) return; o.wt-=dt; o.a.play('idle'); put(o); if(o.a.g.visible && st==='pay') o.po.apply('present',T2); if(o.wt<=0) plan(); }; } }
 
-  /* ============================== 4. 🏖️ KHÁCH BÃI BIỂN (nằm ghế tắm nắng thật 45 s rồi rời đi) ============================== */
+  /* ============================== 4. 🏖️ KHÁCH BÃI BIỂN (nằm duỗi trên ghế tắm nắng thật 50–90 s, nhiều người cầm ly nước dừa / cocktail, rồi rời đi) ============================== */
   const STAIRS=((ABY.plots||{}).beach||{}).stairs||[];
-  const loungers=()=>(W.seats||[]).filter(s=>s.lie && /🏖️|tắm nắng/.test(String(s.label||(s.group&&s.group.label)||'')) && Math.hypot(s.x,s.z+12)<170 && s.floor<4);
+  /* bơi · tắm · chơi bóng · nhà thay đồ: js/abyssal_beachlife.js (nạp ở dưới, dùng chung các hàm của file này) */
+  try{ const m=await import('./abyssal_beachlife.js'); BL=await m.make(W, {R, rr, pick, el, person, put, stand, go, stepGo, wait, findSpot, gY, okPt, blocked, dry, sM, sF, nm, say, NPC, WY, LOW, STAIRS, giveBot, dropBot, casual, beachwear, face, arms, aim}); LOG.beach=BL && BL.log; }catch(e){ console.warn('[Bot Abyssal] beachlife', e); }
   { const stairOf=(x,z)=>{ let b=null, bd=1e9; for(const s of STAIRS){ if(!s.top || !s.bottom) continue; const d=Math.hypot(s.bottom[0]-x,s.bottom[1]-z); if(d<bd){ bd=d; b=s; } } return b; };
-    for(let i=0;i<6;i++){ const s=i%2?sF(8300+i):sM(8300+i), o=person(s,beachwear(),`🏖️ ${nm(s)} · khách bãi biển`); o.lines=['Nắng đẹp quá! ☀️','Nước vịnh trong ghê 🌊','Lát ra quầy dừa nhé 🥥'];
+    for(let i=0;i<6;i++){ const s=i%2?sF(8300+i):sM(8300+i), o=person(s,beachwear(),`🏖️ ${nm(s)} · khách bãi biển`); o.lines=['Nắng đẹp quá! ☀️','Nước vịnh trong ghê 🌊','Lát ra quầy dừa nhé 🥥','Nằm hóng gió biển sướng thật 🌴'];
       const f0=rr(-10,190), start=findSpot(...el(f0,.81),1.5,.4)||[...el(f0,.81),1.2]; stand(o,start[0],start[1],R()*TAU,start[2]); let st='stroll', seat=null; o.wt=rr(1,10);
-      const plan=()=>{ if(st==='stroll'){ const L=loungers().filter(q=>!q.taken); if(L.length && R()<.7){ seat=pick(L); seat.taken='bot'; const f=[Math.sin(seat.rot),Math.cos(seat.rot)], r=[Math.cos(seat.rot),-Math.sin(seat.rot)], side=findSpot(seat.x+r[0]*.9,seat.z+r[1]*.9,seat.floor,.32,false);
-              st='toSeat'; go(o,[side],1.1,()=>{ st='lie'; o.x=seat.x; o.z=seat.z; o.y=seat.y; o.hd=seat.rot; o.lie=true; o.wt=45; }); }
+      const plan=()=>{ if(st==='stroll'){ const Lg=BL ? BL.freeLounger(o.x,o.z) : null; const side=Lg ? BL.sideSpot(Lg) : null;
+            if(Lg && side && R()<.75){ seat=Lg; BL.take(Lg,o); st='toSeat'; go(o,[side],1.1,()=>{ if(seat.taken!==o){ st='stroll'; seat=null; o.wt=2; return; } st='lie'; o.lie=seat; o.lieV=R()<.5?1:0; o.x=seat.cx; o.z=seat.cz; o.y=seat.floor; o.hd=seat.yaw; o.wt=rr(50,90); if(R()<.65) giveBot(o, pick(['coconut','coconut','smoothie','cocktail','champagne']), o.wt+5); }); }
             else { const f=rr(-10,190), p=findSpot(...el(f,rr(.79,.86)),1.5,.4); go(o,[p],1.05,()=>{ o.wt=rr(4,12); }); } }
-          else if(st==='lie'){ o.lie=false; if(seat){ seat.taken=null; seat=null; } const S2=stairOf(o.x,o.z); st='leave'; go(o,[S2?[...S2.bottom,2.5]:null, S2?[...S2.top,16]:null],1.15,()=>{ o.hidden=true; st='away'; o.wt=rr(15,40); }); }
+          else if(st==='lie'){ o.lie=null; dropBot(o); const side=seat ? BL.sideSpot(seat) : null; if(side){ o.x=side[0]; o.z=side[1]; o.y=side[2]; } if(seat){ BL.release(seat); seat=null; } const S2=stairOf(o.x,o.z); st='leave'; go(o,[S2?[...S2.bottom,2.5]:null, S2?[...S2.top,16]:null],1.15,()=>{ o.hidden=true; st='away'; o.wt=rr(15,40); }); }
+          else if(st==='toSeat'){ st='stroll'; if(seat){ BL.release(seat); seat=null; } o.wt=1; }
           else if(st==='away'){ const S2=pick(STAIRS.filter(q=>q.top&&q.bottom)); if(S2){ o.x=S2.top[0]; o.z=S2.top[1]; o.y=gY(o.x,o.z,16); o.hidden=false; st='stroll'; go(o,[[...S2.bottom,2.5], findSpot(...el(rr(-10,190),.82),1.5,.4)],1.1,()=>{ o.wt=rr(3,8); }); } else { o.hidden=false; st='stroll'; o.wt=5; } } };
-      o.upd=(dt,T2)=>{ if(stepGo(o,dt)) return; o.wt-=dt; if(!o.lie) o.a.play('idle'); put(o); if(o.wt<=0) plan(); }; } }
+      o.upd=(dt,T2)=>{ if(stepGo(o,dt)) return; o.wt-=dt; o.a.play('idle'); put(o); if(o.wt<=0) plan(); }; } }
 
   /* ============================== 3. 🚗 XE GIA ĐÌNH (spawnVehicle + roadNet → ô đỗ bãi biển → quầy dừa → về) ============================== */
   const FAM={pool:[], cars:[], next:8, bays:[], bars:[-3,20,160,183].map(f=>el(f,.835))};
@@ -161,10 +177,10 @@ export async function make(W, A){
       if(u>=1){ if(C.st==='turn'){ C.st='park'; C.t=0; const off=[Math.cos(C.bay.yaw),-Math.sin(C.bay.yaw)]; C.fam.forEach((o,i)=>{ const side=i%2?1:-1; o.x=B.x+off[0]*1.6*side; o.z=B.z+off[1]*1.6*side; o.y=gY(o.x,o.z,B.y+.5); o.hidden=false; o.hd=C.bay.yaw+Math.PI; });
             const st=(()=>{ let b=null, bd=1e9; for(const q of STAIRS){ if(!q.top) continue; const d=Math.hypot(q.top[0]-B.x,q.top[1]-B.z); if(d<bd){ bd=d; b=q; } } return b; })(), bar=FAM.bars.slice().sort((a,b)=>Math.hypot(a[0]-B.x,a[1]-B.z)-Math.hypot(b[0]-B.x,b[1]-B.z))[0];
             C.stair=st; C.bar=bar; say(C.fam[0],'Tới rồi! Cả nhà xuống biển nào 🏖️',3);
-            C.fam.forEach((o,i)=>{ const a=i/C.fam.length*TAU+.5, spot=findSpot(bar[0]+Math.cos(a)*3.6, bar[1]+Math.sin(a)*3.6, 1.5, .35, false); o.spot=spot; o.delay=i*.9; go(o,[st?[...st.top,16]:null, st?[...st.bottom,2.5]:null, spot],1.1+i*.04,()=>{ o.hd=face(o.x,o.z,bar[0],bar[1]); o.drinking=true; }); o.famUpd=(dt2)=>{ if(!o.rt){ put(o); if(o.a.g.visible && o.drinking) arms(o,'drink',0); } }; });
+            C.fam.forEach((o,i)=>{ const a=i/C.fam.length*TAU+.5, spot=findSpot(bar[0]+Math.cos(a)*3.6, bar[1]+Math.sin(a)*3.6, 1.5, .35, false); o.spot=spot; o.delay=i*.9; go(o,[st?[...st.top,16]:null, st?[...st.bottom,2.5]:null, spot],1.1+i*.04,()=>{ o.hd=face(o.x,o.z,bar[0],bar[1]); o.drinking=true; giveBot(o, i>=2 ? pick(['coconut','smoothie','icecream']) : pick(['coconut','coconut','beer','smoothie']), (C.stay||80)+30); }); o.famUpd=(dt2)=>{ if(!o.rt){ put(o); if(o.a.g.visible && o.drinking && !o.drink) arms(o,'drink',0); } }; });
             C.stay=rr(60,90); }
         else { /* đã lùi ra làn → chạy đi theo đường vành đai rồi biến mất */ C.st='leave'; C.t=0; const RN=W.roadNet, n=RN && RN.nearest ? RN.nearest(g.position.x,g.position.z,30) : null; C.e=n?n.e:null; C.es=n?n.s:0; C.v=0; const p1=C.e?ePt(C.e,C.es+2):null; C.dir=p1 ? (Math.cos(Math.atan2(p1[0]-g.position.x,p1[2]-g.position.z)-g.rotation.y)>0?1:-1) : 1; } } return; }
-    if(C.st==='park'){ const back=C.fam.every(o=>o.hidden); if(C.t>C.stay && !C.called){ C.called=true; say(C.fam[0],'Về thôi cả nhà! 🚗',3); C.fam.forEach((o,i)=>{ o.drinking=false; o.delay=i*.9; go(o,[C.stair?[...C.stair.bottom,2.5]:null, C.stair?[...C.stair.top,16]:null, [B.x,B.z,gY(B.x,B.z,B.y+.5)]],1.15,()=>{ o.hidden=true; o.famUpd=null; }); }); }
+    if(C.st==='park'){ const back=C.fam.every(o=>o.hidden); if(C.t>C.stay && !C.called){ C.called=true; say(C.fam[0],'Về thôi cả nhà! 🚗',3); C.fam.forEach((o,i)=>{ o.drinking=false; dropBot(o); o.delay=i*.9; go(o,[C.stair?[...C.stair.bottom,2.5]:null, C.stair?[...C.stair.top,16]:null, [B.x,B.z,gY(B.x,B.z,B.y+.5)]],1.15,()=>{ o.hidden=true; o.famUpd=null; }); }); }
       if(C.called && back){ C.st='out'; C.t=0; } return; }
     if(C.st==='leave'){ C.v=Math.min(9,C.v+3*dt); C.es+=C.dir*C.v*dt; if(!C.e || C.t>18){ scene.remove(g); if(C.dyn && W.DYN){ const j=W.DYN.indexOf(C.dyn); if(j>=0) W.DYN.splice(j,1); } C.bay.used=false; FAM.cars.splice(FAM.cars.indexOf(C),1); return; }
       const p=ePt(C.e,C.es), q=ePt(C.e,C.es+C.dir*2), rx=-(q[2]-p[2]), rz=q[0]-p[0], rl=Math.hypot(rx,rz)||1; g.position.set(p[0]-rx/rl*1.8, p[1], p[2]-rz/rl*1.8);   /* làn bên phải chiều chạy */ g.rotation.set(0,Math.atan2(q[0]-p[0],q[2]-p[2]),0); if(s.lamps) for(const l of s.lamps) l.visible=false; } }
@@ -179,6 +195,18 @@ export async function make(W, A){
         else if(st==='aboard'){ const p=spot(); const e=Q.at(-26,Q.PB-3); o.x=e[0]; o.z=e[1]; o.y=gY(e[0],e[1],Q.DY); o.hidden=false; st='queue'; go(o,[p],1.15,()=>{ o.hd=face(o.x,o.z,gw[0],gw[1]); o.wt=rr(3,8); }); }
         else o.wt=1; }; } LOG.yachtQ=N; }
 
+  /* ============================== 🍽️ THỰC KHÁCH NGỒI BÀN CAFE / NHÀ HÀNG (W.dining.meal – ăn bằng dao nĩa / thìa, cầm ly lên uống, ~1 phút rồi ngồi chơi, sau đó rời quán) ============================== */
+  { const MEAL=W.dining && W.dining.meal, DVL2=(W.abyDining && W.abyDining.list) || [], TBL=[];
+    for(const v of DVL2) for(const T of (v.tables||[])) for(const st of (T.seats||[])) if(typeof st.x==='number' && typeof st.face==='number') TBL.push({v, T, st, life:(W.seats||[]).find(q=>Math.hypot(q.x-st.x,q.z-st.z)<.2 && Math.abs((q.floor ?? q.y)-(st.floor ?? st.y-.47))<.6)||null, used:null});
+    const DISH={cafe:['cappu','espresso','matcha','croissant','tiramisu','macaron','cold','tea'], restaurant:['steak','lobster','salmon','wine','champagne','flan']};
+    LOG.diners=0; if(MEAL && TBL.length){ for(let i=0;i<(LOW?2:4);i++){ const sd=any(), o=person(sd, casual(), `🍽️ ${nm(sd)} · thực khách`); o.lines=['Món này ngon tuyệt! 😋','Ngồi đây ngắm vịnh thích thật','Lần sau dẫn cả nhà tới nhé 🍷']; o.hidden=true; o.noSnap=true; o.wt=2+i*6; let cur=null; LOG.diners++;
+        const camD=(x,z)=>Math.hypot(x-W.camera.position.x, z-W.camera.position.z);
+        const sitDown=()=>{ const free=TBL.filter(t=>!t.used && !(t.life && t.life.taken) && Math.hypot(t.st.x-P.x,t.st.z-P.z)>2 && camD(t.st.x,t.st.z)>14); if(!free.length){ o.wt=8; return; } cur=pick(free); cur.used=o; if(cur.life) cur.life.taken='bot';
+            const st=cur.st, fl=st.floor ?? st.y-.47; o.x=st.x; o.z=st.z; o.hd=st.face; o.y=st.y+.04-o.hips; o.seated=true; o.hidden=false; o.col.x=1e9;
+            const kind=/rest|nha|palais/i.test(cur.v.k+cur.v.name)?'restaurant':'cafe'; o.meal=MEAL.start({a:o.a, bones:o.po.bones, nm:o.nm}, {x:st.x, z:st.z, yaw:st.face, floor:fl, tableY:fl+.785}, pick(DISH[kind]), {dur:rr(55,75)}); if(o.meal) o.meal.ext=true; o.wt=rr(80,110); };
+        const leave=()=>{ if(camD(o.x,o.z)<14 || Math.hypot(o.x-P.x,o.z-P.z)<6){ o.wt=6; return; } if(o.meal){ MEAL.stop(o.meal,{}); o.meal=null; } if(cur){ if(cur.life && cur.life.taken==='bot') cur.life.taken=null; cur.used=null; cur=null; } o.seated=false; o.hidden=true; o.wt=rr(20,45); };
+        o.upd=(dt,T2)=>{ o.wt-=dt; if(o.hidden){ if(o.wt<=0) sitDown(); return; } o.a.play('idle'); o.a.g.position.set(o.x,o.y,o.z); o.a.g.rotation.set(0,o.hd,0); if(o.a.g.visible) o.po.apply('sit',T2); if(o.wt<=0) leave(); }; } } }
+
   /* ============================== 🛣️ VÀNH ĐAI +2 + 💂 BẢO VỆ 3 CỔNG (giữ) ============================== */
   { const GY=2, C=171, sq=[]; for(const [a,b] of [[[C,-C],[C,C]],[[C,C],[-C,C]],[[-C,C],[-C,-C]],[[-C,-C],[C,-C]]]){ const L=Math.hypot(b[0]-a[0],b[1]-a[1]), n=Math.ceil(L/6); for(let i=0;i<n;i++) sq.push([a[0]+(b[0]-a[0])*i/n, a[1]+(b[1]-a[1])*i/n]); }
     const rs=runs(sq, GY, true); for(let i=0;i<3 && rs.length;i++){ const s=any(), jog=i===0, o=person(s, jog?{shirt:0xff6b3d, pants:0x22262e, shoe:0xf4f4f4}:casual(), jog?`🏃 ${nm(s)} · chạy bộ vành đai`:`🚶 ${nm(s)} · đi bộ vành đai`); o.y=GY;
@@ -191,13 +219,19 @@ export async function make(W, A){
       o.upd=(dt,T)=>{ put(o); if(o.a.g.visible) arms(o,'behind',T); }; } }
 
   /* ============================== KHUNG HÌNH: máy trạng thái mọi bot + chỉ hiện bot gần camera ============================== */
-  const FAR=LOW?55:80, MAXV=LOW?10:18; let tick=0; const vis=new Set();
+  const FAR=LOW?55:80, MAXV=LOW?10:18; let tick=0, snapT=0; const vis=new Set();
   HOOK.onFrame.push((dt,T)=>{ dt=Math.min(dt||1/60,.1); tick-=dt; const c=W.camera.position, near=!W.inside && Math.hypot(P.x,P.z+12)<300;
     /* xe gia đình: mỗi 25–40 s khi người chơi ở gần bãi đỗ biển */ FAM.next-=dt; if(FAM.next<=0){ FAM.next=rr(25,40); const pk=el(64,1.035); if(near && Math.hypot(P.x-pk[0],P.z-pk[1])<260) try{ famTrip(); }catch(e){ console.warn('[Bot Abyssal] xe gia đình', e); FAM.next=120; } }
     for(const C of FAM.cars.slice()) try{ famStep(C,dt); }catch(e){ console.warn('[Bot Abyssal] xe', e); FAM.cars.splice(FAM.cars.indexOf(C),1); }
     if(tick<=0){ tick=.4; vis.clear(); if(near){ const L=[]; for(const o of NPC){ if(o.hidden) continue; const d=Math.hypot(o.x-c.x,o.y+1-c.y,o.z-c.z); if(d<FAR) L.push([d,o]); } L.sort((a,b)=>a[0]-b[0]); for(let i=0;i<Math.min(MAXV,L.length);i++) vis.add(L[i][1]); }
       for(const o of NPC){ const v=vis.has(o); if(o.a.g.visible!==v){ o.a.g.visible=v; if(!v){ o.col.x=1e9; if(o.bubble){ removeLabel(o.bubble); o.bubble=null; } } } } }
+    snapT-=dt; const doSnap=snapT<=0; if(doSnap) snapT=.5;
     for(const o of NPC){ if(o.hidden && o.a.g.visible){ o.a.g.visible=false; o.col.x=1e9; } if(o.bubble){ o.bubbleT-=dt; if(o.bubbleT<=0){ removeLabel(o.bubble); o.bubble=null; } } if(o.a.g.visible) o.a.mixer.update(dt); if(o.upd) o.upd(dt,T);
+      if(o.a.g.visible){ if(o.lie && o.lie.cx!==undefined && BL) BL.poseLie(o); else if(o.water && BL) BL.poseWater(o,T); }
+      if(o.drink){ if(DR && DR.list.includes(o.drink)) DR.pose(o.drink,dt); else o.drink=null; }
+      if(o.meal){ const ML=W.dining && W.dining.meal; if(ML && ML.list.includes(o.meal)) ML.pose(o.meal,dt); else o.meal=null; }
+      /* chốt an toàn: bot đứng yên mà sàn dưới chân lệch (sàn cabin thang đi mất, rơi khỏi mép…) → về mặt đứng thật gần nhất, không lơ lửng / lún */
+      if(doSnap && !o.rt && !o.lie && !o.water && !o.hidden && !o.noSnap && o.a.g.visible){ const g=gY(o.x,o.z,o.y); if(Math.abs(g-o.y)>.12){ if(Math.abs(g-o.y)<.5 && !nearLift(o.x,o.z)) o.y=g; else { const sp=findSpot(o.x,o.z,o.y,.4,false); if(sp){ o.x=sp[0]; o.z=sp[1]; o.y=sp[2]; } else o.hidden=true; } put(o); LOG.snap=(LOG.snap||0)+1; } }
       if(o.a.g.visible && o.lines && !o.bubble && Math.hypot(o.x-P.x,o.z-P.z)<5 && Math.abs(o.y-P.y)<3 && R()<dt*.25) say(o, pick(o.lines), 3); } });
-  const out={npc:NPC.length, ...LOG}; Object.defineProperty(out,'list',{value:NPC, enumerable:false}); Object.defineProperty(out,'fam',{value:FAM, enumerable:false}); out.famTrip=famTrip; console.info('[Bot Abyssal]', JSON.stringify(out)); return out;
+  const out={npc:NPC.length, ...LOG}; Object.defineProperty(out,'list',{value:NPC, enumerable:false}); Object.defineProperty(out,'fam',{value:FAM, enumerable:false}); out.famTrip=famTrip; out.gY=gY; out.okPt=okPt; out.nearLift=nearLift; Object.defineProperty(out,'BL',{value:BL, enumerable:false}); console.info('[Bot Abyssal]', JSON.stringify(out)); return out;
 }

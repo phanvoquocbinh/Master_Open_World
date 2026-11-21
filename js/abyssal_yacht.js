@@ -322,7 +322,17 @@ export function makeYachtKit(W){
       place(); P.x=v.x; P.y=v.y; P.z=v.z; R.wx=P.x; R.wz=P.z; P.vx=P.vz=P.vy=0; P.ground=true; P.face=yaw+R.face; me.g.position.copy(v); me.g.rotation.set(0,P.face,0);
       R.speed=lerp(R.speed||0,aspd,1-Math.exp(-dt*12)); if(R.speed>2.2) me.play('run'); else if(R.speed>.25) me.play('walk'); else me.play('idle');
       const cl=deck.ceilAt(R.lx,R.lz,R.ly); if(cl!==null){ HOOK.camBox={x0:-1e6,x1:1e6,z0:-1e6,z1:1e6,y1:o.position.y+cl, _ys:true}; if(cam.dist>5) cam.dist=5; } else if(HOOK.camBox && HOOK.camBox._ys) HOOK.camBox=null; };
-    function standUp(){ const s=R.sit; if(!s) return; s.taken=false; R.sit=null; try{ opts.onStand && opts.onStand(s); }catch(e){} const f=[Math.sin(s.face),Math.cos(s.face)]; for(const k of [.75,.5,1.0,-.75]){ const x=s.x+f[0]*k, z=s.z+f[1]*k, h=deck.floorAt(x,z,s.floor+.1); if(h!==null && Math.abs(h-s.floor)<.3){ R.lx=x; R.lz=z; break; } } R.ly=s.floor; me.g.rotation.set(0,P.face,0); }
+    // 20/11 (Bình: uống nước xong đứng dậy trên tàu đang chạy thì kẹt): chọn chỗ đứng có sàn thật VÀ không bị va chạm đẩy (trước chỉ xét sàn → hay đặt vào trong bàn/ghế,
+    // va chạm đẩy qua lại giữa bàn và ghế nên không đi ra được); dò thêm 2 bên + phía sau + vòng rộng dần; dọn trạng thái ngồi, tốc độ, cabin camera.
+    const freeAt=(x,z,y)=>{ const h=deck.floorAt(x,z,y+.1); if(h===null || Math.abs(h-y)>.3) return false; const p={x,z}; deck.collide(p,y); if(Math.hypot(p.x-x,p.z-z)>.03) return false;
+      for(const a of [0,1.571,3.142,4.712]){ const q={x:x+Math.cos(a)*.45, z:z+Math.sin(a)*.45}; const hq=deck.floorAt(q.x,q.z,y+.1); if(hq===null || Math.abs(hq-y)>.3) continue; deck.collide(q,y); if(Math.hypot(q.x-x-Math.cos(a)*.45,q.z-z-Math.sin(a)*.45)<.03) return true; } return false; };
+    function standUp(){ const s=R.sit; if(!s) return; s.taken=false; R.sit=null; try{ opts.onStand && opts.onStand(s); }catch(e){}
+      const f=[Math.sin(s.face),Math.cos(s.face)], r=[f[1],-f[0]], y=s.floor; let ok=false;
+      for(const [a,b] of [[.75,0],[0,.75],[0,-.75],[-.7,0],[1.0,0],[.6,.6],[.6,-.6],[-.6,.6],[-.6,-.6]]){ const x=s.x+f[0]*a+r[0]*b, z=s.z+f[1]*a+r[1]*b; if(freeAt(x,z,y)){ R.lx=x; R.lz=z; ok=true; break; } }
+      if(!ok) for(let d=.9; d<3.2 && !ok; d+=.35) for(let k=0;k<16;k++){ const an=k/16*Math.PI*2, x=s.x+Math.cos(an)*d, z=s.z+Math.sin(an)*d; if(freeAt(x,z,y)){ R.lx=x; R.lz=z; ok=true; break; } }
+      if(!ok){ const p={x:s.x+f[0]*.75, z:s.z+f[1]*.75}; deck.collide(p,y); R.lx=p.x; R.lz=p.z; }
+      R.ly=deck.floorAt(R.lx,R.lz,y+.1) ?? y; R.vx=R.vz=0; R.speed=0; R.face=s.face; me.g.rotation.set(0,P.face,0); me.play('idle');
+      if(HOOK.vehicle && HOOK.vehicle.yachtRider) HOOK.vehicleInter=R.inter; }
     R.sitOn=s=>{ if(s.taken) return toast('Chỗ này có người rồi – chọn chỗ khác nhé!',2200); s.taken=true; R.sit=s; toast(s.lie?'Đang nằm thư giãn – bấm E hoặc phím di chuyển để dậy':s.soak?'♨️ Ngâm mình trong bồn sục – bấm E hoặc phím di chuyển để ra':'Đang ngồi – bấm E hoặc phím di chuyển để đứng dậy',2600);  try{ opts.onSit && opts.onSit(s); }catch(e){} };
     R.inter=()=>{ if(R.sit) return {label:'🧍 Đứng dậy (E · phím di chuyển)', action:standUp};
       let best=null, bd=1.35; for(const s of SEATS){ if(s.taken || Math.abs(s.floor-R.ly)>.6) continue; const d=Math.hypot(s.x-R.lx,s.z-R.lz); if(d<bd){ bd=d; best={label:s.label, action:()=>R.sitOn(s)}; } }
