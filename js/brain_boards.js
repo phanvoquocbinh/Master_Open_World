@@ -2,7 +2,7 @@
 //  • Tầng 1 (y 110): bảng treo tường theo mặt kính nghiêng + cột bảng 2 mặt đứng giữa sảnh. Mỗi mặt cứ 30 giây đổi sang một mẩu
 //    kiến thức khác (mờ dần → vẽ lại → hiện dần), thanh tiến trình chạy dưới bảng, bấm E ở gần để xem mẩu tiếp theo.
 //    Nội dung lấy từ data/brain_boards.json (không viết chữ trong code), xen kẽ theo chủ đề.
-//  • Tầng 6 (sân thượng, y 150): bia "Vinh danh QA/QC Member" khung gỗ óc chó + chỉ vàng, 2 đèn rọi tranh, bấm E xem bảng lớn.
+//  • Tầng 6 (sân thượng, y 150): bia "Vinh danh QA/QC Member" 6,0 × 3,75 m (canvas 3200 px), khung gỗ óc chó + chỉ vàng, 2 đèn rọi tranh, tên căn trái + "To be updated", bấm E xem bảng lớn.
 //  • Chữ sắc nét: canvas 2048 px (bảng vinh danh 2560 px), mipmap + anisotropy tối đa. Vật liệu MeshBasic, tự giảm độ sáng
 //    khi trời tối để bloom ban đêm (ngưỡng thấp) không làm chữ loá. Bảng ở xa dùng bản 1024 px; 4 mặt gần nhất (≤ 10 m) lên 2048 px.
 //  • Hiệu năng: chỉ tạo texture khi bạn ở tầng 1 / gần tháp, rời đi thì giải phóng GPU.
@@ -80,10 +80,11 @@ export async function make(W, ctx = {}, L){
   const DR = (L.doors && L.doors.length ? L.doors : [ENT, ENT + Math.PI / 2, ENT + Math.PI, ENT - Math.PI / 2]).map(a => ((a % TAU) + TAU) % TAU).sort((a, b) => a - b);
   const MID = DR.map((a, i) => { const b = i + 1 < DR.length ? DR[i + 1] : DR[0] + TAU; return (a + b) / 2; });
   const LIFT = [ENT, ENT + Math.PI];
-  let nWall = 0; for(const m0 of MID){ const a = m0 + .13; if(nWall >= 6 || used1.some(u => dAng(u, a) < .2)) continue; nWall++;   /* cạnh bảng lịch sử (−0,15) cùng khoảng tường */
+  const KBA = L.f1KB || MID.map(m0 => m0 + .13).filter(a => !used1.some(u => dAng(u, a) < .2)).slice(0, 6);   /* cạnh bảng lịch sử (−0,15) cùng khoảng tường; góc do brain_citadel.js tính */
+  for(const a of KBA){
     const s = wallSpot(a, y1, y1 + 1.25, y1 + 3.85), F = face(s.x, s.yc, s.z, yawOut(a) + Math.PI, s.tilt, 4.4, 2.475); F.wall = true;
     const R = rig(s.x, s.yc, s.z, yawOut(a) + Math.PI, s.tilt); for(const [sx, sy] of [[0, 1.3], [0, -1.3]]) R(new THREE.BoxGeometry(4.6, .07, .06), MT.brass, sx, sy, -.03); for(const sx of [-2.27, 2.27]) R(new THREE.BoxGeometry(.07, 2.67, .06), MT.brass, sx, 0, -.03); R(new THREE.BoxGeometry(4.5, 2.6, .03), MT.obsid, 0, 0, -.05); }
-  const tot = []; for(const a of MID){ if(tot.length >= 6 || LIFT.some(l => dAng(l, a) < .3) || dAng(a, A0) < .3 || dAng(a, A0 + Math.PI) < .3 || cases1.some(c => dAng(c, a) < .2)) continue; tot.push(a); }
+  const tot = (L.f1Tot || []).slice(); if(!L.f1Tot) for(const a of MID){ if(tot.length >= 6 || LIFT.some(l => dAng(l, a) < .3) || dAng(a, A0) < .3 || dAng(a, A0 + Math.PI) < .3 || cases1.some(c => dAng(c, a) < .2)) continue; tot.push(a); }
   for(const a of tot){ const p = at(a, 15.2), ty = yawOut(a) + Math.PI / 2, yc = y1 + 1.95, R = rig(p.x, y1, p.z, ty);   // mặt bảng quay theo phương tiếp tuyến (người đi vòng sảnh đọc thẳng)
     for(const sx of [-1.38, 1.38]){ R(new THREE.CylinderGeometry(.055, .065, 3.05, 20), MT.brass, sx, 1.525, 0); R(AK.roundedBox(.5, .06, .36, .02, 2), MT.brass, sx, .03, 0); }
     R(AK.roundedBox(2.86, .09, .12, .03, 2), MT.brass, 0, 3.0, 0); R(AK.roundedBox(2.7, 1.56, .05, .02, 2), MT.obsid, 0, 1.95, 0);
@@ -96,45 +97,69 @@ export async function make(W, ctx = {}, L){
   /* ---------- tầng 5: BẢNG VINH DANH QA/QC MEMBER ---------- */
   const NAMES = ['Nguyễn Thị Diễm Phương', 'Trần Thị Mỹ Duyên', 'Phan Thị Thùy Dương', 'Nguyễn Thị Kim Trang'];
   function drawHonor(cv){ const g = cv.getContext('2d'), w = cv.width, h = cv.height; g.setTransform(1, 0, 0, 1, 0, 0);
-    const bg = g.createRadialGradient(w / 2, h * .45, 80, w / 2, h / 2, w * .62); bg.addColorStop(0, '#2a0f16'); bg.addColorStop(.6, '#1a0a10'); bg.addColorStop(1, '#0d0508'); g.fillStyle = bg; g.fillRect(0, 0, w, h);
-    g.globalAlpha = .05; g.fillStyle = '#e8c98a'; for(let x = 0; x < w; x += 40) for(let y = (x / 40) % 2 ? 20 : 0; y < h; y += 40){ g.beginPath(); g.arc(x, y, 3, 0, TAU); g.fill(); } g.globalAlpha = 1;
-    const gold = g.createLinearGradient(0, 0, 0, h); gold.addColorStop(0, '#f6e2a4'); gold.addColorStop(.5, '#d4a94e'); gold.addColorStop(1, '#f1d48c');
-    g.strokeStyle = gold; g.lineWidth = 10; g.strokeRect(56, 56, w - 112, h - 112); g.lineWidth = 3; g.strokeRect(84, 84, w - 168, h - 168);
-    for(const [cx, cy] of [[84, 84], [w - 84, 84], [84, h - 84], [w - 84, h - 84]]){ g.save(); g.translate(cx, cy); g.rotate(Math.PI / 4); g.fillStyle = '#e8c574'; g.fillRect(-16, -16, 32, 32); g.restore(); }
+    // nền nhung đỏ rượu + hoạ tiết gấm + quầng tối viền
+    const bg = g.createRadialGradient(w / 2, h * .42, 120, w / 2, h / 2, w * .66); bg.addColorStop(0, '#34121b'); bg.addColorStop(.55, '#1f0a11'); bg.addColorStop(1, '#0c0407'); g.fillStyle = bg; g.fillRect(0, 0, w, h);
+    g.save(); g.globalAlpha = .07; g.strokeStyle = '#e8c98a'; g.lineWidth = 2; for(let y = 0; y < h + 60; y += 60) for(let x = (y / 60) % 2 ? 30 : 0; x < w + 60; x += 60){ g.beginPath(); g.moveTo(x, y - 14); g.lineTo(x + 14, y); g.lineTo(x, y + 14); g.lineTo(x - 14, y); g.closePath(); g.stroke(); } g.restore();
+    const gold = g.createLinearGradient(0, 0, 0, h); gold.addColorStop(0, '#fbe9b0'); gold.addColorStop(.35, '#d9ae52'); gold.addColorStop(.65, '#f3d68f'); gold.addColorStop(1, '#c79a3e');
+    const goldH = g.createLinearGradient(0, 0, w, 0); goldH.addColorStop(0, '#c79a3e'); goldH.addColorStop(.5, '#fbe9b0'); goldH.addColorStop(1, '#c79a3e');
+    // viền kép + hoa văn góc
+    g.strokeStyle = gold; g.lineWidth = 14; g.strokeRect(60, 60, w - 120, h - 120); g.lineWidth = 4; g.strokeRect(96, 96, w - 192, h - 192); g.lineWidth = 2; g.strokeRect(112, 112, w - 224, h - 224);
+    const corner = (cx, cy, sx, sy) => { g.save(); g.translate(cx, cy); g.scale(sx, sy); g.strokeStyle = '#e8c574'; g.fillStyle = '#e8c574'; g.lineWidth = 5;
+      g.beginPath(); g.moveTo(0, 150); g.quadraticCurveTo(0, 0, 150, 0); g.stroke(); g.beginPath(); g.moveTo(26, 120); g.quadraticCurveTo(26, 26, 120, 26); g.stroke();
+      for(const [x, y, r] of [[0, 0, 16], [150, 0, 9], [0, 150, 9], [62, 62, 11]]){ g.beginPath(); g.arc(x, y, r, 0, TAU); g.fill(); }
+      for(let i = 0; i < 4; i++){ const t = .18 + i * .2, x = 150 * (1 - t) * (1 - t) * 0 + 2 * (1 - t) * t * 0 + t * t * 150, y = (1 - t) * (1 - t) * 150; g.save(); g.translate(x * .55 + 12, y * .55 + 12); g.rotate(-Math.PI / 4); g.beginPath(); g.ellipse(0, 0, 18, 7, 0, 0, TAU); g.fill(); g.restore(); }
+      g.restore(); };
+    corner(96, 96, 1, 1); corner(w - 96, 96, -1, 1); corner(96, h - 96, 1, -1); corner(w - 96, h - 96, -1, -1);
     g.textAlign = 'center'; g.textBaseline = 'alphabetic';
-    // nguyệt quế 2 bên tiêu đề
-    const laurel = (cx, cy, dir) => { g.strokeStyle = '#d9b25e'; g.lineWidth = 6; g.beginPath(); g.arc(cx, cy + 120, 150, Math.PI * (dir > 0 ? 1.15 : -.15), Math.PI * (dir > 0 ? 1.62 : -.62), dir < 0); g.stroke();
-      g.fillStyle = '#d9b25e'; for(let i = 0; i < 7; i++){ const t = Math.PI * (dir > 0 ? 1.2 + i * .06 : -.2 - i * .06), x = cx + Math.cos(t) * 150, y = cy + 120 + Math.sin(t) * 150; g.save(); g.translate(x, y); g.rotate(t + (dir > 0 ? -.9 : .9)); g.beginPath(); g.ellipse(0, 0, 30, 11, 0, 0, TAU); g.fill(); g.restore(); } };
-    laurel(w / 2 - 860, 230, 1); laurel(w / 2 + 860, 230, -1);
-    g.fillStyle = '#e8c574'; g.font = `600 64px ${SERIF}`; g.letterSpacing = '18px'; g.fillText('★  ★  ★', w / 2, 210); g.letterSpacing = '4px';
-    g.fillStyle = gold; fitFont(g, 'Vinh danh QA/QC Member', 700, 168, SERIF, w - 560); g.fillText('Vinh danh QA/QC Member', w / 2, 400); g.letterSpacing = '0px';
-    g.strokeStyle = '#d4a94e'; g.lineWidth = 4; g.beginPath(); g.moveTo(w / 2 - 640, 470); g.lineTo(w / 2 - 70, 470); g.moveTo(w / 2 + 70, 470); g.lineTo(w / 2 + 640, 470); g.stroke();
-    g.save(); g.translate(w / 2, 470); g.rotate(Math.PI / 4); g.fillStyle = '#e8c574'; g.fillRect(-20, -20, 40, 40); g.restore();
-    NAMES.forEach((n, i) => { const y = 650 + i * 205; g.fillStyle = '#d4a94e'; g.beginPath(); g.arc(w / 2 - 820, y - 40, 44, 0, TAU); g.fill(); g.fillStyle = '#2a0f16'; g.font = `700 52px ${SERIF}`; g.fillText(String(i + 1), w / 2 - 820, y - 22);
-      g.fillStyle = '#f8edd2'; fitFont(g, n, 600, 124, SERIF, 1500); g.fillText(n, w / 2 + 40, y); });
-    g.fillStyle = '#cdb27a'; g.font = `italic 500 50px ${SERIF}`; g.fillText('Ghi nhận sự tận tâm vì chất lượng sản phẩm', w / 2, h - 130); }
+    // nguyệt quế 2 bên tiêu đề (nhiều lá, có gân)
+    const laurel = (cx, cy, dir) => { g.strokeStyle = '#d9b25e'; g.lineWidth = 7; const a0 = dir > 0 ? Math.PI * 1.1 : -Math.PI * .1, a1 = dir > 0 ? Math.PI * 1.7 : -Math.PI * .7, R0 = 190;
+      g.beginPath(); g.arc(cx, cy + 150, R0, a0, a1, dir < 0); g.stroke();
+      for(let i = 0; i < 11; i++){ const t = a0 + (a1 - a0) * (i + .5) / 11, x = cx + Math.cos(t) * R0, y = cy + 150 + Math.sin(t) * R0;
+        for(const side of [-1, 1]){ g.save(); g.translate(x, y); g.rotate(t + side * (dir > 0 ? 1 : -1) * .85 + (dir > 0 ? -Math.PI / 2 : Math.PI / 2)); const lg = g.createLinearGradient(0, -12, 0, 12); lg.addColorStop(0, '#f3d68f'); lg.addColorStop(1, '#b8892f'); g.fillStyle = lg;
+          g.beginPath(); g.ellipse(0, -30, 13, 32, 0, 0, TAU); g.fill(); g.strokeStyle = 'rgba(90,60,20,.55)'; g.lineWidth = 2; g.beginPath(); g.moveTo(0, -4); g.lineTo(0, -56); g.stroke(); g.restore(); } } };
+    laurel(w / 2 - 1130, 250, 1); laurel(w / 2 + 1130, 250, -1);
+    g.fillStyle = '#e8c574'; g.font = `600 70px ${SERIF}`; g.letterSpacing = '22px'; g.fillText('★ ★ ★', w / 2, 236); g.letterSpacing = '6px';
+    g.save(); g.shadowColor = 'rgba(0,0,0,.65)'; g.shadowBlur = 10; g.shadowOffsetY = 5; g.fillStyle = gold; fitFont(g, 'Vinh danh QA/QC Member', 700, 205, SERIF, w - 820); g.fillText('Vinh danh QA/QC Member', w / 2, 462); g.restore(); g.letterSpacing = '0px';
+    g.strokeStyle = goldH; g.lineWidth = 5; g.beginPath(); g.moveTo(w / 2 - 860, 548); g.lineTo(w / 2 - 80, 548); g.moveTo(w / 2 + 80, 548); g.lineTo(w / 2 + 860, 548); g.stroke();
+    g.save(); g.translate(w / 2, 548); g.rotate(Math.PI / 4); g.fillStyle = '#e8c574'; g.fillRect(-24, -24, 48, 48); g.fillStyle = '#34121b'; g.fillRect(-10, -10, 20, 20); g.restore();
+    // danh sách: huy chương số + tên CĂN TRÁI cùng một mép; dòng cuối "To be updated" cho người tiếp theo
+    const ROWS = [...NAMES, null], X0 = w / 2 - 760, XT = X0 + 120, Y0 = 760, DY = 214;
+    ROWS.forEach((n, i) => { const y = Y0 + i * DY, cy = y - 46;
+      if(i){ g.strokeStyle = 'rgba(217,174,82,.28)'; g.lineWidth = 2; g.beginPath(); g.moveTo(X0 - 60, y - DY + 52); g.lineTo(w / 2 + 900, y - DY + 52); g.stroke(); }
+      if(n){ const mg = g.createRadialGradient(X0 - 12, cy - 14, 6, X0, cy, 58); mg.addColorStop(0, '#fff1c4'); mg.addColorStop(.6, '#d9ae52'); mg.addColorStop(1, '#9b7226'); g.fillStyle = mg; g.beginPath(); g.arc(X0, cy, 54, 0, TAU); g.fill();
+        g.strokeStyle = '#7a5a1c'; g.lineWidth = 3; g.beginPath(); g.arc(X0, cy, 44, 0, TAU); g.stroke(); g.fillStyle = '#3a1410'; g.font = `700 62px ${SERIF}`; g.textAlign = 'center'; g.fillText(String(i + 1), X0, cy + 22);
+        g.save(); g.shadowColor = 'rgba(0,0,0,.7)'; g.shadowBlur = 8; g.shadowOffsetY = 4; g.textAlign = 'left'; g.fillStyle = '#fbf0d6'; fitFont(g, n, 600, 150, SERIF, w / 2 + 900 - XT); g.fillText(n, XT, y); g.restore(); }
+      else { g.setLineDash([12, 10]); g.strokeStyle = '#c9a14a'; g.lineWidth = 4; g.beginPath(); g.arc(X0, cy, 50, 0, TAU); g.stroke(); g.setLineDash([]); g.fillStyle = '#c9a14a'; g.font = `600 58px ${SERIF}`; g.textAlign = 'center'; g.fillText(String(i + 1), X0, cy + 20);
+        g.textAlign = 'left'; g.fillStyle = '#cdb27a'; g.font = `italic 500 128px ${SERIF}`; g.fillText('To be updated', XT, y); } });
+    g.textAlign = 'center'; g.fillStyle = '#cdb27a'; g.font = `italic 500 60px ${SERIF}`; g.fillText('Ghi nhận sự tận tâm vì chất lượng sản phẩm', w / 2, h - 150); }
   let honor = null;
-  // 21/11 (Bình chốt): bảng vinh danh lên TẦNG 6 (sân thượng) – bia đứng trang trọng giữa 2 Đình Vọng Cảnh, quay vào sảnh thang máy, không chắn lối
-  { const y6 = FY[5], HA = L.f6Honor || {a:A0 + TAU / 3, r:21.5}, a = HA.a, r = HA.r, p = at(a, r), ry = yawOut(a) + Math.PI, BW = 4.6, BH = 2.875, yc = y6 + 2.75;
-    const cv = document.createElement('canvas'); cv.width = 2560; cv.height = 1600;
+  // Tầng 6 (sân thượng): bia Vinh danh – 23/11 Bình: to hơn 30% (6,0 × 3,75 m), canvas 3200 px, tên căn trái + dòng "To be updated"
+  { const y6 = FY[5], HA = L.f6Honor || {a:A0 + TAU / 3, r:23}, a = HA.a, r = HA.r, p = at(a, r), ry = yawOut(a) + Math.PI, BW = 6.0, BH = 3.75, yc = y6 + 3.25;
+    const cv = document.createElement('canvas'); cv.width = 3200; cv.height = 2000;
     const mat = new THREE.MeshBasicMaterial({color:0xffffff}), m = new THREE.Mesh(new THREE.PlaneGeometry(BW, BH), mat); m.position.set(p.x, yc, p.z); m.rotation.set(0, ry, 0, 'YXZ'); m.name = 'honorBoard'; m.userData.dynamic = true; m.userData.noFar = true; m.visible = false; grp.add(m);
-    const R = rig(p.x, yc, p.z, ry), fw = .2, fd = .16, ox = BW / 2 + fw / 2, oy = BH / 2 + fw / 2, H0 = y6 - yc;
-    R(AK.roundedBox(BW + fw * 2, fw, fd, .03, 3), MT.walnut, 0, oy, -.02); R(AK.roundedBox(BW + fw * 2, fw, fd, .03, 3), MT.walnut, 0, -oy, -.02);
-    R(AK.roundedBox(fw, BH, fd, .03, 3), MT.walnut, -ox, 0, -.02); R(AK.roundedBox(fw, BH, fd, .03, 3), MT.walnut, ox, 0, -.02);
-    for(const sy of [1, -1]) R(new THREE.BoxGeometry(BW + .08, .035, .03), MT.gold, 0, sy * (BH / 2 + .018), .012); for(const sx of [1, -1]) R(new THREE.BoxGeometry(.035, BH + .08, .03), MT.gold, sx * (BW / 2 + .018), 0, .012);
-    R(AK.roundedBox(BW + .5, BH + .5, .08, .02, 2), MT.walnut, 0, 0, -.13);   // mặt sau bia
-    // 2 trụ gỗ óc chó (đỉnh cầu vàng) + bệ đá + xà đỉnh có ngôi sao vàng
-    for(const sx of [-1, 1]){ R(AK.roundedBox(.34, 4.75, .34, .05, 3), MT.walnut, sx * (BW / 2 + .5), H0 + 2.695, -.05); R(AK.roundedBox(.5, .14, .5, .03, 2), MT.gold, sx * (BW / 2 + .5), H0 + 5.1, -.05); R(new THREE.SphereGeometry(.13, 24, 16), MT.gold, sx * (BW / 2 + .5), H0 + 5.3, -.05); }
-    R(AK.roundedBox(BW + 1.7, .32, 1.1, .06, 3), MT.obsid, 0, H0 + .16, -.05); R(AK.roundedBox(BW + 1.4, .06, .9, .02, 2), MT.gold, 0, H0 + .35, -.05);
-    R(AK.roundedBox(BW + 1.2, .26, .3, .05, 3), MT.walnut, 0, oy + .3, -.05);
-    { const st = new THREE.Shape(); for(let i = 0; i < 10; i++){ const r2 = i % 2 ? .13 : .3, t = i / 10 * TAU + Math.PI / 2; if(i) st.lineTo(Math.cos(t) * r2, Math.sin(t) * r2); else st.moveTo(Math.cos(t) * r2, Math.sin(t) * r2); } st.closePath();
-      R(new THREE.ExtrudeGeometry(st, {depth:.06, bevelEnabled:true, bevelSize:.015, bevelThickness:.015, bevelSegments:2}), MT.gold, 0, oy + .78, -.08); }
-    // 2 đèn rọi tranh bằng đồng trên xà đỉnh
-    for(const sx of [-1.3, 1.3]){ R(new THREE.CylinderGeometry(.03, .03, .5, 16), MT.brass, sx, oy + .32, .2, Math.PI / 2.4, 0, 0); R(new THREE.CylinderGeometry(.065, .065, 1.15, 24), MT.brass, sx, oy + .42, .44, 0, 0, Math.PI / 2); R(new THREE.CylinderGeometry(.04, .04, 1.08, 16), MT.lamp, sx, oy + .38, .47, 0, 0, Math.PI / 2); }
-    const tx = Math.cos(ry), tz = -Math.sin(ry), hw = BW / 2 + .75; if(W.addSeg) W.addSeg(p.x - tx * hw, p.z - tz * hw, p.x + tx * hw, p.z + tz * hw, .5, y6 - .5, y6 + 5.4, '🏆 Bia Vinh danh QA/QC Member');
-    const ip = at(a, r - 2.6);
-    INTER.push({x:ip.x, z:ip.z, r:3, prio:.9, when:() => Math.abs(P.y - y6) < 2, label:'🏆 Bảng Vinh danh QA/QC Member – xem bảng lớn (E)', action:() => { if(!ui || !ui.modal){ toast('🏆 Vinh danh: ' + NAMES.join(' · '), 6000); return; } const md = ui.modal('🏆 Vinh danh QA/QC Member');
-      md.body.innerHTML = `<div style="text-align:center;padding:8px 4px 2px"><div style="font:600 15px ${SERIF};color:#c9a14a;letter-spacing:6px">★ ★ ★</div><ol style="list-style:none;padding:0;margin:14px 0">${NAMES.map((n, i) => `<li style="font:600 22px ${SERIF};margin:10px 0"><span style="display:inline-block;width:30px;height:30px;line-height:30px;border-radius:50%;background:#c9a14a;color:#2a0f16;font-size:16px;margin-right:12px">${i + 1}</span>${n}</li>`).join('')}</ol><div class="muted" style="font-style:italic">Ghi nhận sự tận tâm vì chất lượng sản phẩm</div></div>`; }});
+    const R = rig(p.x, yc, p.z, ry), fw = .26, fd = .18, ox = BW / 2 + fw / 2, oy = BH / 2 + fw / 2, H0 = y6 - yc, PX = BW / 2 + .62;
+    // khung gỗ óc chó 2 lớp + chỉ vàng trong/ngoài
+    R(AK.roundedBox(BW + fw * 2, fw, fd, .04, 3), MT.walnut, 0, oy, -.02); R(AK.roundedBox(BW + fw * 2, fw, fd, .04, 3), MT.walnut, 0, -oy, -.02);
+    R(AK.roundedBox(fw, BH, fd, .04, 3), MT.walnut, -ox, 0, -.02); R(AK.roundedBox(fw, BH, fd, .04, 3), MT.walnut, ox, 0, -.02);
+    for(const sy of [1, -1]){ R(new THREE.BoxGeometry(BW + .1, .04, .035), MT.gold, 0, sy * (BH / 2 + .02), .014); R(new THREE.BoxGeometry(BW + fw * 2 + .04, .03, .03), MT.gold, 0, sy * (BH / 2 + fw + .005), .05); }
+    for(const sx of [1, -1]){ R(new THREE.BoxGeometry(.04, BH + .1, .035), MT.gold, sx * (BW / 2 + .02), 0, .014); R(new THREE.BoxGeometry(.03, BH + fw * 2 + .04, .03), MT.gold, sx * (BW / 2 + fw + .005), 0, .05); }
+    for(const [sx, sy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) R(new THREE.SphereGeometry(.07, 20, 14), MT.gold, sx * ox, sy * oy, .08);   // núm vàng 4 góc khung
+    R(AK.roundedBox(BW + .6, BH + .6, .1, .03, 2), MT.walnut, 0, 0, -.15);   // mặt sau bia
+    // 2 trụ gỗ (rãnh dọc + đế + mũ vàng + cầu vàng) · bệ đá 2 bậc · xà đỉnh có ngôi sao vàng
+    for(const sx of [-1, 1]){ const X = sx * PX; R(AK.roundedBox(.42, 5.7, .42, .06, 3), MT.walnut, X, H0 + .62 + 2.85, -.05);
+      for(const gx of [-.12, .12]) R(new THREE.BoxGeometry(.035, 5.2, .02), MT.gold, X + gx, H0 + .62 + 2.85, .17);
+      R(AK.roundedBox(.62, .2, .62, .04, 2), MT.gold, X, H0 + .72, -.05); R(AK.roundedBox(.6, .16, .6, .04, 2), MT.gold, X, H0 + 6.4, -.05); R(new THREE.SphereGeometry(.17, 28, 18), MT.gold, X, H0 + 6.66, -.05); }
+    R(AK.roundedBox(BW + 2.3, .34, 1.4, .07, 3), MT.obsid, 0, H0 + .17, -.05); R(AK.roundedBox(BW + 1.9, .28, 1.1, .06, 3), MT.obsid, 0, H0 + .48, -.05); R(AK.roundedBox(BW + 1.7, .05, .95, .02, 2), MT.gold, 0, H0 + .64, -.05);
+    R(AK.roundedBox(BW + 1.6, .32, .36, .06, 3), MT.walnut, 0, oy + .36, -.05); R(new THREE.BoxGeometry(BW + 1.5, .04, .04), MT.gold, 0, oy + .53, .14);
+    { const st = new THREE.Shape(); for(let i = 0; i < 10; i++){ const r2 = i % 2 ? .17 : .4, t = i / 10 * TAU + Math.PI / 2; if(i) st.lineTo(Math.cos(t) * r2, Math.sin(t) * r2); else st.moveTo(Math.cos(t) * r2, Math.sin(t) * r2); } st.closePath();
+      R(new THREE.ExtrudeGeometry(st, {depth:.07, bevelEnabled:true, bevelSize:.02, bevelThickness:.02, bevelSegments:3}), MT.gold, 0, oy + 1.0, -.09); }
+    // 2 đèn rọi tranh bằng đồng
+    for(const sx of [-1.75, 1.75]){ R(new THREE.CylinderGeometry(.035, .035, .6, 16), MT.brass, sx, oy + .4, .24, Math.PI / 2.4, 0, 0); R(new THREE.CylinderGeometry(.075, .075, 1.5, 24), MT.brass, sx, oy + .52, .52, 0, 0, Math.PI / 2); R(new THREE.CylinderGeometry(.045, .045, 1.42, 16), MT.lamp, sx, oy + .47, .55, 0, 0, Math.PI / 2); }
+    const tx = Math.cos(ry), tz = -Math.sin(ry), hw = PX + .35; if(W.addSeg) W.addSeg(p.x - tx * hw, p.z - tz * hw, p.x + tx * hw, p.z + tz * hw, .75, y6 - .5, y6 + 6.8, '🏆 Bia Vinh danh QA/QC Member');
+    const ip = at(a, r - 3.2);
+    INTER.push({x:ip.x, z:ip.z, r:3.2, prio:.9, when:() => Math.abs(P.y - y6) < 2, label:'🏆 Bảng Vinh danh QA/QC Member – xem bảng lớn (E)', action:() => { if(!ui || !ui.modal){ toast('🏆 Vinh danh: ' + NAMES.join(' · '), 6000); return; } const md = ui.modal('🏆 Vinh danh QA/QC Member');
+      const li = (i, n) => `<li style="display:flex;align-items:center;gap:14px;font:${n ? '600' : 'italic 500'} 22px ${SERIF};margin:10px 0;${n ? '' : 'color:#b59a5f'}"><span style="flex:0 0 30px;height:30px;line-height:30px;text-align:center;border-radius:50%;${n ? 'background:#c9a14a;color:#2a0f16' : 'border:2px dashed #c9a14a;color:#c9a14a'};font-size:16px;font-style:normal">${i + 1}</span>${n || 'To be updated'}</li>`;
+      md.body.innerHTML = `<div style="padding:8px 4px 2px"><div style="text-align:center;font:600 15px ${SERIF};color:#c9a14a;letter-spacing:6px">★ ★ ★</div><ol style="list-style:none;padding:0;margin:14px auto;width:max-content;max-width:100%">${NAMES.map((n, i) => li(i, n)).join('')}${li(NAMES.length, null)}</ol><div class="muted" style="text-align:center;font-style:italic">Ghi nhận sự tận tâm vì chất lượng sản phẩm</div></div>`; }});
     honor = {m, mat, cv, tex:null}; }
   const honorOn = on => { if(!honor) return; if(on && !honor.tex){ drawHonor(honor.cv); honor.tex = mkTex(honor.cv); honor.mat.map = honor.tex; honor.mat.needsUpdate = true; honor.m.visible = true; } else if(!on && honor.tex){ honor.m.visible = false; honor.tex.dispose(); honor.tex = null; honor.mat.map = null; } };
 
@@ -157,5 +182,5 @@ export async function make(W, ctx = {}, L){
       else { F.t += dt; if(F.t >= HOLD) advance(F); }
       if(F.bar) F.bar.scale.x = Math.max(.001, F.w * clamp(F.t / HOLD, 0, 1)); } });
   await Promise.race([loaded, new Promise(r => setTimeout(r, 50))]);
-  return {faces:FACES.length, wall:FACES.filter(F => F.wall).length, totems:tot.length, honor:!!honor, data:() => DATA && DATA.n, next:() => { for(const F of FACES) if(F.phase === 0 && F.tLo) advance(F); }};
+  return {totA:tot, kbA:KBA, faces:FACES.length, wall:FACES.filter(F => F.wall).length, totems:tot.length, honor:!!honor, data:() => DATA && DATA.n, next:() => { for(const F of FACES) if(F.phase === 0 && F.tLo) advance(F); }};
 }
