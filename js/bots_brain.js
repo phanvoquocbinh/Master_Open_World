@@ -1,11 +1,12 @@
 // QC World V2 – PHA 9: BOT SỐNG ĐỘNG VÙNG ĐỈNH QA/QC BRAIN CITADEL (phiên qc-park, 16/11/2026 – theo bible Phần 7, cùng mẫu js/bots_cbd_sky.js)
 //  • Phố săn mây: chủ quán / barista, khách săn mây đứng bên lan can chụp biển, đầu bếp hải sản
 //  • Cầu Kính Cổng Trời: người đi bộ ngắm cảnh đi lại, nhiếp ảnh gia giơ máy ảnh
-//  • Tháp Liên Hoa: nhân viên bảo tàng tầng 1, MC đấu trường tầng 2, kỹ sư trực phòng chỉ huy tầng 3, bartender Sky Bar tầng 4 + 2 cơ thủ Bida tầng 5 · khách tham quan 2–3 người/tầng (1·2·3·4·6) đọc bảng ~30 s rồi đi tiếp / ra về
+//  • Tháp Liên Hoa: nhân viên bảo tàng tầng 1, MC đấu trường tầng 2, kỹ sư trực phòng chỉ huy tầng 3, bartender Sky Bar tầng 4 + 2 cơ thủ Bida tầng 5 · khách tham quan: vào tầng 1 → đọc bảng → cầu thang xoắn lên 2·3·4·5 (xem chơi)·6 → thang máy thật xuống → ra (~2–3 khách/tầng)
 //  • Nhân viên vận hành xích đu tử thần + phi công khinh khí cầu · phi công trực thăng ở sân bay Đỉnh Mây (kèm trực thăng đậu trên bãi)
 //  • Hiệu năng: chỉ hiện + chạy hoạt hình khi cách camera < 85 m (máy yếu 60 m); cả vùng ngủ khi bạn ở xa > 150 m
 //  Gọi từ brain_citadel.js: make(W, {C, FY, ROAD, cafes, GB, hAt, ride})
 import { makePoser } from './pose.js';
+import { allLifts } from './liftkit.js';
 
 export function make(W, B){
   const {THREE, scene, circles, HOOK, P, makeActor, makeLabel, removeLabel, lerpAngle, mergeGeometries} = W;
@@ -92,43 +93,74 @@ export function make(W, B){
       hel.position.set(hx,y,hz); hel.userData.dynamic=true; hel.visible=false; scene.add(hel); circles.push({x:hx, z:hz, r:2.6, y0:y-.5, y1:y+4});
       o.upd=(dt,T)=>{ put(o); if(((T*.25+o.ph)%8)<3 && o.a.g.visible) o.po.apply('phone',T); rotor.rotation.y+=dt*.6; hel.visible=(P.x-hx)**2+(P.z-hz)**2<250**2; if(R()<dt*.004) say(o, pick(['🚁 Bay ngắm đảo 10 phút, ai đi không?','Trực thăng đã tiếp nhiên liệu xong!']), 2.8); }; } }
 
-  /* ============================== 5. KHÁCH THAM QUAN THÁP LIÊN HOA – tầng 1·2·3·4·6 (23/11, phiên qc-lang-center) ==============================
-     Mỗi tầng luôn có 2–3 khách: vào từ cửa (tầng 1) / thang máy (tầng trên) → đi trên VÒNG ĐI BỘ riêng của tầng (bán kính tránh tủ trưng bày, kiosk,
-     bàn ăn, quầy bar, cánh Đài Sen…) → rẽ thẳng vào điểm đứng trước bảng → đọc ~30 giây (tay lên cằm, gật gù) → sang 1–2 bảng khác → đi dạo một đoạn →
-     ra cửa / vào thang máy. Khách ra thì khách khác vào. Dữ liệu điểm đứng: B.view (brain_citadel.js). Tầng 5 là khu trò chơi (phiên B lo bot). */
-  if(Array.isArray(B.view)){ const OUTF=[0x2f6fd0,0xff8a5a,0x46d39a,0xffd23f,0xc94f7c,0x7a9cc6,0xe9e4d8,0x1b1d22,0x6b3e26,0x8e5bb5,0x2a9d8f,0xb5543c];
+  /* ============================== 5. KHÁCH THAM QUAN – HÀNH TRÌNH QUA 6 TẦNG (23/11, Bình) ==============================
+     Vào từ cửa tầng 1 → đọc các bảng tầng 1 → ĐI CẦU THANG XOẮN (bám từng bậc 0,25 m, 32 bậc/tầng) lên tầng 2 → đọc → 3 → 4 →
+     tầng 5 (khu trò chơi: ra chiếu nghỉ đứng xem một lúc) → tầng 6 → xem bia vinh danh / Brain Core / Đình Vọng Cảnh →
+     đi THANG MÁY THẬT (liftkit: đứng chờ, gọi, cửa mở, vào cabin, cabin chạy, cửa mở, ra) xuống tầng 1 → ra cửa. Khách ra thì khách khác vào.
+     Vào lệch giờ + lúc mở game rải sẵn khách ở các tầng → tầng nào cũng ~2–3 khách. Vòng đi bộ / điểm đứng: B.view (brain_citadel.js). */
+  if(Array.isArray(B.view) && FY.length>=6){ const VIEW=B.view, STEP=.25, SPT=32, DA=Math.PI*2/SPT, RM=6.2, RL=10.85, YT=FY[0];
+    const OUTF=[0x2f6fd0,0xff8a5a,0x46d39a,0xffd23f,0xc94f7c,0x7a9cc6,0xe9e4d8,0x1b1d22,0x6b3e26,0x8e5bb5,0x2a9d8f,0xb5543c];
     const LINESV=['Hay quá, phải ghi lại mới được 📝','À, ra là vậy… 🤔','Mục này đáng đọc kỹ!','Áp dụng ngay vào dự án thôi 💡','Chụp lại để tối ôn 📚','Đúng cái mình đang cần!'];
-    const LINES={0:['Bảo tàng thảm hoạ phần mềm – rùng mình thật 😅','Một con bug mà thiệt hại cả triệu đô!'], 1:['Thử kiosk đố vui Test Design xem nào 🧠'], 2:['Màn hình giám sát đẹp ghê 📈'], 3:['Danh nhân ngành kiểm thử đây rồi 🏛️','Lát xuống nhà hàng xoay ăn tối nhé 🍽️'], 5:['Bảng vinh danh đẹp quá 🏆','Ngắm 360° từ sân thượng tuyệt thật!']};
-    const angOf=(x,z)=>Math.atan2(z-C.z, x-C.x), dA=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
-    // đường đi: điểm hiện tại → ra vòng (cùng góc) → đi cung ngắn trên vòng → vào điểm đích (cùng góc)
-    const route=(V, x, z, tx, tz)=>{ const a0=angOf(x,z), a1=angOf(tx,tz), d=dA(a0,a1), n=Math.max(1,Math.ceil(Math.abs(d)*V.ring/2.2)), P2=[];
-      const [rx0,rz0]=at(a0,V.ring); if(Math.hypot(rx0-x,rz0-z)>.3) P2.push([rx0,rz0]);
-      for(let i=1;i<=n;i++){ const [px,pz]=at(a0+d*i/n, V.ring); P2.push([px,pz]); } P2.push([tx,tz]); return P2; };
-    const FLO=[];
-    B.view.forEach((V,f)=>{ if(!V || !V.spots || !V.spots.length || !V.entry || !V.entry.length) return;
-      const F={V, f, active:0, target:2+(R()<.5?1:0), cool:1+R()*3, pool:[], used:new Set()};
-      for(let i=0;i<(LOW?3:4);i++){ const seed=6101+f*10+i, fem=(i+f)%2===1;
-        const o=person(fem?sF(seed):sM(seed), {shirt:OUTF[(f*4+i)%OUTF.length], pants:[0x2a3a5a,0x1b1d22,0x3a3a3a,0x6b5a3a][i%4], shoe:0x1b1d21, style:i%3===2?'cap':undefined}, '🚶 Khách tham quan tháp', '#9fd36a');
-        Object.assign(o,{floorOnly:true, gone:true, y:V.y, x:C.x, z:C.z, path:[], st:'gone', tm:0, spot:null, left:0, style:i%3});
-        o.upd=(dt,T)=>step(o,F,dt,T); F.pool.push(o); }
-      FLO.push(F); });
-    const freeSpot=(F,not)=>{ const L=F.V.spots.filter(s=>!F.used.has(s) && s!==not); return L.length ? L[Math.floor(R()*L.length)] : null; };
-    function spawn(o,F){ const e=F.V.entry[Math.floor(R()*F.V.entry.length)], [ex,ez]=at(e.a,e.r), s=freeSpot(F); if(!s) return false;
-      Object.assign(o,{gone:false, x:ex, z:ez, y:F.V.y, hd:yawOut(e.a)+Math.PI, exit:e, spot:s, left:1+(R()<.6?1:0), st:'walk', next:'read', tm:0}); F.used.add(s); o.path=route(F.V, ex, ez, s.x, s.z); F.active++; return true; }
-    function leave(o,F){ if(o.spot){ F.used.delete(o.spot); o.spot=null; } const e=o.exit||F.V.entry[0], [ex,ez]=at(e.a,e.r), wa=angOf(o.x,o.z)+(R()<.5?-1:1)*(.6+R()*1.1), [wx,wz]=at(wa,F.V.ring);
-      o.path=route(F.V, o.x, o.z, wx, wz).concat(route(F.V, wx, wz, ex, ez)); o.st='walk'; o.next='out'; }
-    function step(o,F,dt,T){ if(o.gone){ o.col.x=1e9; return; }
-      if(o.st==='walk'){ if(!o.path.length){ if(o.next==='out'){ o.gone=true; o.a.g.visible=false; o.col.x=1e9; F.active--; F.cool=3+R()*6; if(o.bubble){ removeLabel(o.bubble); o.bubble=null; } return; }
-          o.st='read'; o.tm=25+R()*10; o.a.play('idle'); put(o); return; }
-        const [tx,tz]=o.path[0], dx=tx-o.x, dz=tz-o.z, d=Math.hypot(dx,dz); if(d<.2){ o.path.shift(); return step(o,F,0,T); }
+    const LINES={0:['Bảo tàng thảm hoạ phần mềm – rùng mình thật 😅','Một con bug mà thiệt hại cả triệu đô!'], 1:['Thử kiosk đố vui Test Design xem nào 🧠'], 2:['Màn hình giám sát đẹp ghê 📈'], 3:['Danh nhân ngành kiểm thử đây rồi 🏛️','Lát ghé nhà hàng xoay nhé 🍽️'], 4:['Bàn bi lắc vui ghê ⚽','Xem người ta đánh bida chút 🎱'], 5:['Bảng vinh danh đẹp quá 🏆','Ngắm 360° từ sân thượng tuyệt thật!']};
+    const angOf=(x,z)=>Math.atan2(z-C.z, x-C.x), dA=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a)), ringOf=f=>VIEW[f] ? VIEW[f].ring : 12.2;
+    const route=(f, x, z, tx, tz)=>{ const Rr=ringOf(f), a0=angOf(x,z), a1=angOf(tx,tz), d=dA(a0,a1), n=Math.max(1,Math.ceil(Math.abs(d)*Rr/2.2)), out=[];
+      const [rx0,rz0]=at(a0,Rr); if(Math.hypot(rx0-x,rz0-z)>.3) out.push([rx0,rz0]); for(let i=1;i<=n;i++) out.push(at(a0+d*i/n, Rr)); out.push([tx,tz]); return out; };
+    const LIFTS=(()=>{ try{ return allLifts().filter(l=>Math.hypot(l.cx-C.x,l.cz-C.z)<20 && l.floors && l.floors.length>=6); }catch(e){ return []; } })();
+    const lyaw=L=>L.g ? L.g.rotation.y : yawOut(angOf(L.cx,L.cz)), liftFront=L=>{ const y=lyaw(L); return [L.cx+Math.sin(y)*2.45, L.cz+Math.cos(y)*2.45]; };   /* cửa cabin quay theo yaw của thang */
+    const POOL=[], USED=[0,1,2,3,4,5].map(()=>new Set()), N=LOW?10:15;
+    const cnt=f=>POOL.reduce((n,o)=>n+(!o.gone && o.f===f && o.st!=='liftride' ? 1 : 0),0);
+    for(let i=0;i<N;i++){ const seed=6101+i, fem=i%2===1;
+      const o=person(fem?sF(seed):sM(seed), {shirt:OUTF[i%OUTF.length], pants:[0x2a3a5a,0x1b1d22,0x3a3a3a,0x6b5a3a][i%4], shoe:0x1b1d21, style:i%3===2?'cap':undefined}, '🚶 Khách tham quan tháp', '#9fd36a');
+      Object.assign(o,{floorOnly:true, gone:true, f:0, y:YT, x:C.x, z:C.z, path:[], st:'gone', tm:0, spot:null, hx:i%2, style:i%3, then:null, s:null, lift:null}); o.upd=(dt,T)=>step(o,dt,T); POOL.push(o); }
+    const goto=(o, pts, then)=>{ o.path=pts; o.then=then; o.st='walk'; };
+    const free=(f,not)=>{ const V=VIEW[f]; if(!V) return null; const L=V.spots.filter(s=>!USED[f].has(s) && s!==not); return L.length ? L[Math.floor(R()*L.length)] : null; };
+    const release=o=>{ if(o.spot){ USED[o.sf].delete(o.spot); o.spot=null; } };
+    // tới 1 tầng: lên kế hoạch đọc (tầng 5: đứng xem trò chơi ở chiếu nghỉ)
+    function onFloor(o, f){ o.f=f; o.y=FY[f];
+      if(f===4){ const sa=A0+o.hx*Math.PI, w=at(sa+(R()<.5?-1:1)*.14, 11.7); goto(o, [at(sa,RL), w], ()=>{ o.st='watch'; o.tm=8+R()*7; o.whd=yawOut(angOf(w[0],w[1])); }); return; }
+      o.reads=1+(R()<.55?1:0)+(cnt(f)<2?1:0); nextRead(o); }
+    function nextRead(o){ const f=o.f; release(o);
+      if(o.reads>0){ const s=free(f,o.last); if(s){ o.reads--; o.spot=s; o.sf=f; USED[f].add(s); o.last=s; goto(o, route(f, o.x, o.z, s.x, s.z), ()=>{ o.st='read'; o.tm=25+R()*10; }); return; } }
+      if(f===5) goLift(o); else goUp(o); }
+    // lên tầng bằng cầu thang xoắn: ra vòng → tới góc cầu thang → vào lòng thang (r 6,2) → leo từng bậc tới tầng trên → ra chiếu nghỉ
+    function goUp(o){ const f=o.f, sa=A0+o.hx*Math.PI; release(o);
+      goto(o, route(f, o.x, o.z, ...at(sa,10.5)).concat([at(sa,RM), {stair:true, s0:f*SPT, s1:(f+1)*SPT}, at(sa,RL)]), ()=>onFloor(o, f+1)); }
+    // tầng 6 → thang máy thật xuống tầng 1
+    function goLift(o){ release(o); const L=LIFTS.filter(l=>!l.botBy).sort((p,q)=>Math.hypot(p.cx-o.x,p.cz-o.z)-Math.hypot(q.cx-o.x,q.cz-o.z))[0];
+      if(!L){ o.reads=1; return nextRead(o); } L.botBy=o; o.lift=L; const fr=liftFront(L); goto(o, route(5, o.x, o.z, fr[0], fr[1]), ()=>{ o.st='liftwait'; o.tm=0; o.hd=lyaw(L)+Math.PI; }); }
+    function exitOut(o){ const E=VIEW[0].entry, e=E[Math.floor(R()*E.length)], d=at(e.a, e.r); goto(o, route(0, o.x, o.z, d[0], d[1]), ()=>{ o.gone=true; o.st='gone'; o.a.g.visible=false; o.col.x=1e9; if(o.bubble){ removeLabel(o.bubble); o.bubble=null; } }); }
+    function spawn(o, f){ o.gone=false; o.lift=null; o.s=null; o.last=null; o.hd=0;
+      if(f===0){ const E=VIEW[0].entry, e=E[Math.floor(R()*E.length)], [x,z]=at(e.a,e.r); o.x=x; o.z=z; o.f=0; o.y=FY[0]; o.hd=yawOut(e.a)+Math.PI; onFloor(o,0); }
+      else { const sa=A0+o.hx*Math.PI, [x,z]=at(sa,RL); o.x=x; o.z=z; onFloor(o,f); } }
+    function step(o, dt, T){ if(o.gone){ o.col.x=1e9; return; }
+      if(o.st==='walk'){ const wp=o.path[0];
+        if(!wp){ const t=o.then; o.then=null; o.st='idle'; o.a.play('idle'); put(o); if(t) t(); return; }
+        if(wp.stair){ if(o.s==null) o.s=wp.s0; o.s=Math.min(wp.s1, o.s+dt*.72); const a=A0+o.hx*Math.PI+o.s*DA, [x,z]=at(a,RM), ty=YT+Math.round(o.s)*STEP;   /* chân đặt đúng mặt bậc đang đứng */
+          o.x=x; o.z=z; o.y+=(ty-o.y)*(1-Math.exp(-dt*16)); o.hd=lerpAngle(o.hd, Math.atan2(-Math.sin(a),Math.cos(a)), 1-Math.exp(-dt*8)); o.a.play('walk'); const ac=o.a.acts.walk; if(ac) ac.timeScale=.75; put(o);
+          if(o.s>=wp.s1){ o.y=YT+wp.s1*STEP; o.s=null; o.path.shift(); } return; }
+        const [tx,tz]=wp, dx=tx-o.x, dz=tz-o.z, d=Math.hypot(dx,dz); if(d<.2){ o.path.shift(); return; }
         const k=Math.min(d,1.05*dt); o.x+=dx/d*k; o.z+=dz/d*k; o.hd=lerpAngle(o.hd, Math.atan2(dx,dz), 1-Math.exp(-dt*7)); o.a.play('walk'); const ac=o.a.acts.walk; if(ac) ac.timeScale=.8; put(o); return; }
-      if(o.st==='read'){ o.tm-=dt; o.hd=lerpAngle(o.hd, o.spot ? o.spot.hd : o.hd, 1-Math.exp(-dt*5)); o.a.play('idle'); put(o);
-        const ph=(T*.12+o.ph)%10; pose(o, o.style===1 && ph<4 ? 'behind' : ph>8.6 ? 'point' : 'think', T+o.ph);
-        if(R()<dt*.012) say(o, R()<.5 ? pick(LINESV) : pick(LINES[F.f]||LINESV), 2.8);
-        if(o.tm<=0){ o.left--; const old=o.spot; if(o.left>0){ const s=freeSpot(F,old); if(s){ F.used.delete(old); F.used.add(s); o.spot=s; o.path=route(F.V, o.x, o.z, s.x, s.z); o.st='walk'; o.next='read'; return; } } leave(o,F); } } }
-    let tickV=0; HOOK.onFrame.push(dt=>{ dt=Math.min(dt||1/60,.1); if((tickV-=dt)>0) return; tickV=.5;   /* giữ đủ 2–3 khách mỗi tầng */
-      for(const F of FLO){ F.cool-=.5; if(R()<.01) F.target=2+(R()<.5?1:0); if(F.active<F.target && F.cool<=0){ const o=F.pool.find(q=>q.gone); if(o && spawn(o,F)) F.cool=4+R()*6; } } });
-    W.brainVisitors={floors:FLO.map(F=>({f:F.f, y:F.V.y, spots:F.V.spots.length, get active(){ return F.active; }})), list:FLO.flatMap(F=>F.pool)}; }
+      if(o.st==='read' || o.st==='watch'){ o.tm-=dt; const hd=o.st==='read' && o.spot ? o.spot.hd : o.whd; if(hd!=null) o.hd=lerpAngle(o.hd, hd, 1-Math.exp(-dt*5)); o.a.play('idle'); put(o);
+        const ph=(T*.12+o.ph)%10; pose(o, o.st==='watch' ? (o.style===1 ? 'behind' : 'think') : (o.style===1 && ph<4 ? 'behind' : ph>8.6 ? 'point' : 'think'), T+o.ph);
+        if(R()<dt*.012) say(o, R()<.5 && o.st==='read' ? pick(LINESV) : pick(LINES[o.f]||LINESV), 2.8);
+        if(o.tm<=0){ if(o.st==='watch'){ const sa=A0+o.hx*Math.PI; o.st='walk'; goto(o, [at(sa,10.5), at(sa,RM), {stair:true, s0:4*SPT, s1:5*SPT}, at(sa,RL)], ()=>onFloor(o,5)); } else nextRead(o); } return; }
+      const L=o.lift;
+      if(o.st==='liftwait'){ o.tm+=dt; o.a.play('idle'); put(o); if(((T*.2+o.ph)%8)<2.5) pose(o,'behind',T);
+        if(!L || o.tm>40){ /* thang không chạy (bạn ở quá xa) → coi như đã xuống, vẫn đi ra cửa */ if(L) L.botBy=null; o.lift=null; const fr=L?liftFront(L):at(ENT,15.6); o.x=fr[0]; o.z=fr[1]; o.f=0; o.y=FY[0]; return exitOut(o); }
+        if(L.ph==='idle' && L.at!==5 && L.queue==null) L.go(5,false);
+        if(L.ph==='idle' && L.at===5){ L.wantOpen=true; if(L.open>.92){ o.st='walk'; goto(o, [[L.cx, L.cz]], ()=>{ o.st='liftin'; o.tm=0; }); } } return; }
+      if(o.st==='liftin'){ L.wantOpen=true; o.tm+=dt; o.hd=lerpAngle(o.hd, lyaw(L), 1-Math.exp(-dt*6)); o.a.play('idle'); put(o); if(o.tm>1.2){ L.go(0,false); o.st='liftride'; } return; }
+      if(o.st==='liftride'){ o.x=L.cx; o.z=L.cz; o.y=L.y; o.a.play('idle'); put(o); if(((T*.2+o.ph)%9)<3) pose(o,'behind',T);
+        if(L.ph==='idle' && L.at===0){ L.wantOpen=true; if(L.open>.92){ o.f=0; o.y=FY[0]; const fr=liftFront(L); o.st='walk'; goto(o, [fr], ()=>{ L.botBy=null; o.lift=null; exitOut(o); }); } }
+        else if(L.ph==='idle' && L.at!==0 && L.queue==null) L.go(0,false); return; }
+      o.a.play('idle'); put(o); }
+    // lúc mở game: rải sẵn khách ở các tầng (lệch giờ) · sau đó cứ 18–30 s 1 khách mới vào từ tầng 1 khi còn thiếu
+    { let k=0; for(const f of [0,1,2,3,5]) for(let j=0;j<2 && k<POOL.length;j++){ const o=POOL[k++]; spawn(o,f); if(o.st==='walk' && o.path.length>1) o.path.splice(0, Math.floor(R()*Math.min(3,o.path.length-1))); } }
+    let tickV=0, cool=6; const TARGET=LOW?9:13;
+    HOOK.onFrame.push(dt=>{ dt=Math.min(dt||1/60,.1); if((tickV-=dt)>0) return; tickV=.5; cool-=.5;
+      const act=POOL.filter(o=>!o.gone).length; if(cool<=0 && act<TARGET && cnt(0)<3){ const o=POOL.find(q=>q.gone); if(o){ spawn(o,0); cool=18+R()*12; } } });
+    W.brainVisitors={get floors(){ return [0,1,2,3,4,5].map(f=>({f, y:FY[f], n:cnt(f)})); }, list:POOL, lifts:LIFTS.length}; }
+
 
   /* ============================== KHUNG HÌNH: ẩn/hiện theo khoảng cách ============================== */
   const FAR=(LOW?60:85)**2, Z={x0:620, x1:1150, z0:-100, z1:450}; let tick=0, awake=false;
