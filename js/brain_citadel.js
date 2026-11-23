@@ -381,7 +381,7 @@ export function make(W, ctx){
     const ba=A0+Math.PI+.2, bar=at(ba,15); LAY.f4Bar=ba; kt.add(AK.roundedBox(5,1.1,1,.15,2), M.dark, bar.x, y+.55, bar.z, 0, yawOut(ba)+Math.PI/2, 0); kt.add(AK.roundedBox(5.2,.06,1.15,.04,1), M.gold, bar.x, y+1.12, bar.z, 0, yawOut(ba)+Math.PI/2, 0); circles.push({x:bar.x,z:bar.z,r:1.6,y0:y-.5,y1:y+1.5});
     const bi=at(ba,13.2); INTER.push({x:bi.x, z:bi.z, r:2, prio:.7, when:()=>Math.abs(P.y-y)<1.5, label:'🍸 Sky Bar Liên Hoa – gọi đồ uống (E)', action:()=>menu('🍸 Sky Bar Liên Hoa',[['🍸 Mocktail Liên Hoa',60,'Hương sen'],['🥂 Nước nho sủi',50,'Không cồn'],['🍰 Bánh sen vàng',45,'Ngọt thanh']])}); }
   { const y=FY[4];
-    for(let k=0;k<4;k++){ const a=A0+Math.PI*.5+.55+k*.42, p=at(a,15.5); LAY.f5Billiard.push(a); AK.buildBilliardTable(W, p.x, y, p.z, yawOut(a), 0x7a0d1c, 'world', {parent:grp}); } }
+    for(let k=0;k<2;k++){ const a=A0+Math.PI*.5+.55+k*.42, p=at(a,15.5); LAY.f5Billiard.push(a); AK.buildBilliardTable(W, p.x, y, p.z, yawOut(a), 0x7a0d1c, 'world', {parent:grp}); } }
   { const y=FY[5], a=A0, p=at(a,22.5);
     /* QA Brain Core: bục đồng đỏ + pha lê ảo (thay khối hộp đen thô cũ) */
     kt.add(new THREE.CylinderGeometry(.85,1.1,1.0,8), MX.bronze, p.x, y+.5, p.z); kt.add(new THREE.TorusGeometry(.9,.06,6,32), MX.champ, p.x, y+1.0, p.z, Math.PI/2,0,0); kt.add(new THREE.OctahedronGeometry(.5,0), MX.neon, p.x, y+1.7, p.z); circles.push({x:p.x,z:p.z,r:1.15,y0:y-.5,y1:y+2.4});

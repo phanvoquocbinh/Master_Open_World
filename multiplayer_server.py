@@ -146,6 +146,8 @@ async def handle(reader, writer):
                 if txt: broadcast({'t': 'chat', 'id': pid, 'name': p['name'], 'text': txt})
             elif t == 'emote':
                 broadcast({'t': 'emote', 'id': pid, 'k': clean(m.get('k'), 12)}, skip=pid)
+            elif t == 'game':                                     # 23/11: tháp Brain – chơi cùng bạn (brain_games.js)
+                broadcast({k: v for k, v in m.items() if k in ('t','g','k','tid','gid','name','kind','seat','ok','why','n','s','seats','host','ix','iz','mx','my','b','ev')}, skip=pid)
             elif t == 'phone':                                   # S19g: đăng ký số điện thoại của người chơi
                 num = clean(m.get('num'), 16); temp = False
                 if not PHONE_RE.match(num): continue

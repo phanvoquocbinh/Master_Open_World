@@ -74,7 +74,7 @@ export function make(W, B){
     o.upd=(dt,T)=>{ put(o); if(ps==='phone'){ if(o.a.g.visible) o.po.apply('phone',T); } else pose(o,ps,T); if(R()<dt*.006) say(o, pick(lines), 3); }; }
   if(FY[4]!=null){ const y=FY[4], ba=A0+Math.PI+.2, [bx,bz]=at(ba,16.6), bt=person(sM(5501), {shirt:0x1b1d22, pants:0x1b1d22, shoe:0x111111, long:true}, '🍸 Bartender Sky Bar', '#ffd166'); bt.x=bx; bt.z=bz; bt.y=FY[3]; bt.hd=yawOut(ba)+Math.PI;   /* 21/11: Sky Bar dời xuống tầng 4 (tầng 5 chỉ còn khu trò chơi) */
     bt.upd=(dt,T)=>{ put(bt); pose(bt,'bar',T); if(R()<dt*.006) say(bt, pick(['Mocktail Liên Hoa, lắc nhẹ là xong 🍸','Ngồi ngắm 360° thành phố đi bạn!']), 2.8); };
-    for(let k=0;k<2;k++){ const a=A0+Math.PI*.5+.55+k*.42, [tx,tz]=at(a,15.5), yo=yawOut(a), o=person(sM(5511+k), {shirt:k?0x7a1020:0xf4f2ec, pants:0x1b1d22, shoe:0x111111, long:true}, '🎱 Cơ thủ Bida Hoàng gia', '#c7d2e0');
+    for(let k=0;k<0;k++){ /* 23/11: bot tầng 5 do brain_games.js lo */ const a=A0+Math.PI*.5+.55+k*.42, [tx,tz]=at(a,15.5), yo=yawOut(a), o=person(sM(5511+k), {shirt:k?0x7a1020:0xf4f2ec, pants:0x1b1d22, shoe:0x111111, long:true}, '🎱 Cơ thủ Bida Hoàng gia', '#c7d2e0');
       const s=k?-1:1; o.x=tx+Math.cos(yo)*s*1.95; o.z=tz-Math.sin(yo)*s*1.95; o.y=y; o.hd=yo+(s>0?-Math.PI/2:Math.PI/2);
       attach(o, new THREE.Mesh(new THREE.CylinderGeometry(.006,.014,1.45,8).rotateX(Math.PI/2).translate(0,0,.5), std(0xd8b27a)));
       o.upd=(dt,T)=>{ put(o); pose(o,'cue',T+o.ph); if(R()<dt*.005) say(o, pick(['Ba băng… vào! 🎱','Thoa lơ cái đã.','Cú này tính bằng hình học!']), 2.4); }; } }
